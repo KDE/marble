@@ -1,9 +1,6 @@
 
 2010-08-19  Bernhard Beschow    <bbeschow@cs.tu-berlin.de>
 
-* The method measureTool() has been moved from MarbleMap to MarbleModel.
-  You can continue accessing the measure tool from MarbleMap using MarbleMap::model()->measureTool().
-
 * The method ViewParams *viewParams() has been removed from MarbleMap in favor of ViewportParams *viewport().
   Setting and getting the MapQuality can now be done using MarbleMap::setMapQuality() and MarbleMap::mapQuality().
   Access to the current AbstractProjection is still possible using MarbleMap::viewport()->currentProjection().
@@ -67,3 +64,36 @@
 
 * Remove MarbleModel::paintTile( StackedTile*, const GeoSceneTexture * ).
   This method was internal. If you really need it, call {MarbleMap, MarbleWidget}::setShowTileId( true ), which will activate drawing the tile id onto each tile.
+
+* Remove MarbleModel::paintGlobe().
+  Use MarbleMap::paint() or MarbleWidget::update()/repaint().
+
+* Remove MarbleModel::placemarkLayout().
+  The class PlacemarkLayout isn't exported, so there shouldn't be any conflicts.
+
+* Remove the following methods from MarbleModel (use the same methods from MarbleMap or MarbleWidget):
+  - renderPlugins()
+  - floatItems()
+  - dataPlugins()
+  - whichItemAt( const QPoint& )
+  - addLayer( LayerInterface * )
+  - removeLayer( LayerInterface * )
+  - measureTool()
+  - tileZoomLevel()
+  - reloadMap()
+  - backgroundVisible()
+  - setBackgroundVisible( bool )
+  - whichFeatureAt( const QPoint& )
+  - downloadRegion( QString const &, QVector<TileCoordsPyramid> const & )
+
+* Remove the following slots from MarbleModel (use the same slots from MarbleMap or MarbleWidget):
+  - clearVolatileTileCache()
+  - setVolatileTileCacheLimit( quint64 )
+
+* Remove the slot MarbleModel::update().
+  Use {MarbleMap, MarbleWidget}::updateSun() instead.
+
+* Remove the following signals from MarbleModel (use the same signals from MarbleMap or MarbleWidget):
+  - tileLevelChanged( int )
+  - pluginSettingsChanged()
+  - renderPluginInitialized( RenderPlugin * )

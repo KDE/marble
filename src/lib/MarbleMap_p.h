@@ -13,8 +13,15 @@
 #ifndef MARBLE_MARBLEMAP_P_H
 #define MARBLE_MARBLEMAP_P_H
 
+#include "AtmosphereLayer.h"
+#include "FogLayer.h"
+#include "GeometryLayer.h"
+#include "LayerManager.h"
+#include "MeasureTool.h"
+#include "PlacemarkLayout.h"
+#include "TextureLayer.h"
+#include "VectorComposer.h"
 #include "ViewParams.h"
-
 
 class QPainter;
 class QRect;
@@ -32,7 +39,7 @@ class MarbleMapPrivate
     friend class MarbleWidget;
 
  public:
-    explicit MarbleMapPrivate( MarbleMap *parent );
+    explicit MarbleMapPrivate( MarbleMap *parent, MarbleModel *model );
 
     inline static qreal zoom( qreal radius ) { return (200.0 * log( radius ) ); }
     inline static qreal radius( qreal zoom ) { return pow( M_E, ( zoom / 200.0 ) ); }
@@ -49,11 +56,20 @@ class MarbleMapPrivate
     MarbleMap       *m_parent;
 
     // The model we are showing.
-    MarbleModel     *m_model;
+    MarbleModel     *const m_model;
     bool             m_modelIsOwned;
 
     ViewParams       m_viewParams;
-    bool             m_justModified; // FIXME: Rename to isDirty
+    bool             m_backgroundVisible;
+
+    LayerManager     m_layerManager;
+    GeometryLayer           *m_geometryLayer;
+    AtmosphereLayer          m_atmosphereLayer;
+    FogLayer                 m_fogLayer;
+    TextureLayer     m_textureLayer;
+    PlacemarkLayout  m_placemarkLayout;
+    VectorComposer   m_veccomposer;
+    MeasureTool      m_measureTool;
 
     // zoom related
     int              m_logzoom;

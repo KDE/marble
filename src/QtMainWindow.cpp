@@ -1131,7 +1131,7 @@ void MainWindow::updateSettings()
     m_controlView->marbleWidget()->setProxy( m_configDialog->proxyUrl(), m_configDialog->proxyPort(), m_configDialog->user(), m_configDialog->password() );
     */
 
-    m_controlView->marbleWidget()->updateChangedMap();
+    m_controlView->marbleWidget()->update();
 }
 
 void MainWindow::showDownloadRegionDialog()
@@ -1185,7 +1185,7 @@ void MainWindow::downloadRegion()
     QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
     mDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
     QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
-    m_controlView->marbleWidget()->model()->downloadRegion( sourceDir, pyramid );
+    m_controlView->marbleWidget()->downloadRegion( sourceDir, pyramid );
 }
 
 void MainWindow::printMapScreenShot()

@@ -113,7 +113,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     }
 
     m_lmbMenu->clear();
-    m_featurelist = m_model->whichFeatureAt( curpos );
+    m_featurelist = m_widget->whichFeatureAt( curpos );
 
     int  actionidx = 1;
 
@@ -128,7 +128,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
         actionidx++;
     }
     
-    m_itemList = m_model->whichItemAt( curpos );
+    m_itemList = m_widget->whichItemAt( curpos );
     QList<AbstractDataPluginItem *>::const_iterator itW = m_itemList.constBegin();
     QList<AbstractDataPluginItem *>::const_iterator const itWEnd = m_itemList.constEnd();
     for (; itW != itWEnd; ++itW )

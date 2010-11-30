@@ -341,7 +341,7 @@ void MarbleWidgetDefaultInputHandler::init( MarbleWidget *w )
 
     // The interface to the measure tool consists of a RMB popup menu
     // and some signals.
-    MeasureTool *measureTool = MarbleWidgetInputHandler::d->m_model->measureTool();
+    MeasureTool *measureTool = MarbleWidgetInputHandler::d->m_widget->measureTool();
 
     // Connect the inputHandler and the measure tool to the popup menu
     if ( !d->m_popupmenu ) {
@@ -667,7 +667,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         
         // Find out if there are data items and if one has defined an action
         QList<AbstractDataPluginItem *> dataItems
-            = MarbleWidgetInputHandler::d->m_widget->model()->whichItemAt( mousePosition );
+            = MarbleWidgetInputHandler::d->m_widget->whichItemAt( mousePosition );
         bool dataAction = false;
         QPointer<AbstractDataPluginItem> toolTipItem;
         QList<AbstractDataPluginItem *>::iterator it = dataItems.begin();
@@ -698,7 +698,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             d->m_toolTipPosition = mousePosition;
         }
 
-        if ( ( MarbleWidgetInputHandler::d->m_widget->model()->whichFeatureAt( mousePosition ).size() == 0 )
+        if ( ( MarbleWidgetInputHandler::d->m_widget->whichFeatureAt( mousePosition ).size() == 0 )
              && ( !dataAction ) )
         {
             if ( !d->m_leftPressed )
@@ -831,7 +831,7 @@ void MarbleWidgetDefaultInputHandler::addMeasurePoint()
     qreal  lon;
 
     MarbleWidgetInputHandler::d->m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
-    MeasureTool *measureTool = MarbleWidgetInputHandler::d->m_model->measureTool();
+    MeasureTool *measureTool = MarbleWidgetInputHandler::d->m_widget->measureTool();
     measureTool->addMeasurePoint( lon, lat );
 }
 

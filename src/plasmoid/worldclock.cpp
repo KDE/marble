@@ -92,7 +92,7 @@ void WorldClock::init()
     else
         m_map->setProjection(Equirectangular);
 
-    foreach( RenderPlugin* item, m_map->model()->renderPlugins() )
+    foreach( RenderPlugin* item, m_map->renderPlugins() )
         item->setVisible( false );
 
     //Set up the Sun to draw night/day shadow

@@ -30,7 +30,6 @@
 
 #include <QtCore/QList>
 #include <QtCore/QObject>
-#include <QtCore/QModelIndex>
 #include <QtCore/QString>
 #include <QtCore/QVector>
 #include <QtGui/QRegion>
@@ -39,6 +38,7 @@
 
 class QItemSelectionModel;
 class QAbstractItemModel;
+class QDateTime;
 class QPoint;
 class QRect;
 class QTextDocument;
@@ -50,11 +50,13 @@ class AbstractDataPlugin;
 class AbstractDataPluginItem;
 class GeoPainter;
 class MeasureTool;
+class MapThemeManager;
 class TileCoordsPyramid;
 class FileViewModel;
 class PositionTracking;
 class HttpDownloadManager;
 class MarbleModelPrivate;
+class MarbleDataFacade;
 class PlacemarkLayout;
 class MarbleClock;
 class SunLocator;
@@ -116,33 +118,12 @@ class MARBLE_EXPORT MarbleModel : public QObject
     virtual ~MarbleModel();
 
     /**
-     * @brief   Paint the model into the view
-     * @param painter  the QPainter used to paint the view
-     * @param width    the width of the widget
-     * @param height   the height of the widget
-     * @param viewParams  the view parameters controlling the paint process
-     * @param redrawBackground  a boolean controlling if the background should be redrawn in addition to the globe itself
-     * @param dirtyRect  the rectangle of the widget that needs redrawing.
-     *
-     * The model has the responsibility to actually paint into the
-     * MarbleWidget.  This function is called by MarbleWidget when it
-     * receives a paintEvent and should repaint whole or part of the
-     * widget's contents based on the parameters.
-     *
-     * NOTE: This function will probably move to MarbleWidget in KDE
-     * 4.1, making the MarbleModel/MarbleWidget pair truly follow the
-     * Model/View paradigm.
-     */
-    void  paintGlobe(GeoPainter *painter,
-                     ViewParams *viewParams,
-                     bool redrawBackground, const QRect& dirtyRect);
-
-    /**
      * @brief Return the list of Placemarks as a QAbstractItemModel *
      * @return a list of all Placemarks in the MarbleModel.
      */
     QAbstractItemModel*  treeModel() const;
     QAbstractItemModel*  placemarkModel() const;
+    QAbstractItemModel*  popSortModel() const;
     QItemSelectionModel* placemarkSelectionModel() const;
 
     /**
@@ -179,8 +160,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * Example:
      *    maptheme = "earth/bluemarble/bluemarble.dgml"
      */
-    void setMapTheme( GeoSceneDocument* mapTheme,
-                      Projection currentProjection );
+    void setMapTheme( GeoSceneDocument* mapTheme );
 
     /**
      * @brief  get the home point
@@ -202,6 +182,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @param  zoom       the default zoom level for the new home point.
      */
     void setHome( const GeoDataCoordinates& homePoint, int zoom = 1050 );
+
+    MapThemeManager* mapThemeManager() const;
 
     /**
      * @brief Return the downloadmanager to load missing tiles
@@ -233,10 +215,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void addGeoDataString( const QString& data, const QString& key = "data" );
     void removeGeoData( const QString& key );
 
-    QVector<QModelIndex> whichFeatureAt( const QPoint& ) const;
-
-    PlacemarkLayout    *placemarkLayout()   const;
-
     FileViewModel      *fileViewModel()   const;
     PositionTracking   *positionTracking() const;
 
@@ -245,8 +223,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     MarbleClock*          clock()       const;
     SunLocator*           sunLocator()     const;
-
-    void setShowTileId( bool show );
 
     /**
      * @brief  Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
@@ -260,55 +236,15 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     quint64 volatileTileCacheLimit() const;
 
+    MarbleDataFacade* dataFacade() const;
+  
     PluginManager* pluginManager() const;
-
-    /**
-     * @brief Returns a list of all RenderPlugins in the model, this includes float items
-     * @return the list of RenderPlugins
-     */
-    QList<RenderPlugin *> renderPlugins() const;
-    /**
-     * @brief Returns a list of all FloatItems in the model
-     * @return the list of the floatItems
-     */
-    QList<AbstractFloatItem *> floatItems()    const;
-    /**
-     * @brief Returns a list of all DataPlugins on the layer
-     * @return the list of DataPlugins
-     */
-    QList<AbstractDataPlugin *> dataPlugins()  const;
-
-    /**
-     * @brief Returns all widgets of dataPlugins on the position curpos
-     */
-    QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
-
-    /**
-     * @brief Add a layer to be included in rendering.
-     */
-    void addLayer( LayerInterface *layer );
-
-    /**
-     * @brief Remove a layer from being included in rendering.
-     */
-    void removeLayer( LayerInterface *layer );
-
-    MeasureTool *measureTool();
 
     /**
      * @brief Returns the planet object for the current map.
      * @return the planet object for the current map
      */
     Planet* planet() const;
-
-    /**
-     * @brief Return the current tile zoom level. For example for OpenStreetMap
-     *        possible values are 1..18, for BlueMarble 0..6.
-     */
-    int tileZoomLevel() const;
-
-    void reloadMap() const;
-    void downloadRegion( QString const & mapThemeId, QVector<TileCoordsPyramid> const & ) const;
 
     RoutingManager* routingManager();
 
@@ -333,19 +269,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     void setLegend( QTextDocument * document );
 
-    bool backgroundVisible() const;
-
-    void setBackgroundVisible( bool visible );
-
  public Q_SLOTS:
-    void clearVolatileTileCache();
-
-    /**
-     * @brief Set the limit of the volatile (in RAM) tile cache.
-     * @param kilobytes The limit in kilobytes.
-     */
-    void setVolatileTileCacheLimit( quint64 kiloBytes );
-
     void clearPersistentTileCache();
 
     /**
@@ -353,11 +277,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @param  bytes The limit in kilobytes, 0 means no limit.
      */
     void setPersistentTileCacheLimit( quint64 kiloBytes );
-
-    /**
-     * @brief Update the model
-     */
-    void update();
 
  Q_SIGNALS:
 
@@ -367,7 +286,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @see  zoomView()
      */
     void creatingTilesStart( TileCreator*, const QString& name, const QString& description );
-    void tileLevelChanged( int newTileLevel );
 
     /**
      * @brief Signal that the map theme has changed, and to which theme.
@@ -381,32 +299,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void modelChanged();
 
-    /**
-     * This signal is emit when the settings of a plugin changed.
-     */
-    void pluginSettingsChanged();
-
-    /**
-     * This signal is emitted when the repaint of the view was requested.
-     * If available with the @p dirtyRegion which is the region the view will change in.
-     * If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
-     */
-    void repaintNeeded( QRegion dirtyRegion = QRegion() );
-
-    /**
-     * @brief Signal that a render item has been initialized
-     */
-    void renderPluginInitialized( RenderPlugin *renderPlugin );
-
  private:
     Q_DISABLE_COPY( MarbleModel )
     Q_PRIVATE_SLOT( d, void notifyModelChanged() )
 
     void addDownloadPolicies( GeoSceneDocument *mapTheme );
-    friend class DownloadRegionDialog;
-    friend class MarbleMap;
-    TextureLayer * textureLayer();
-
     MarbleModelPrivate  * const d;
 };
 

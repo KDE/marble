@@ -76,8 +76,8 @@ public:
     QPushButton * m_applyButton;
     TextureLayer const * m_textureLayer;
     int m_visibleTileLevel;
-    MarbleModel *const m_model;
-    MarbleWidget const*const m_widget;
+    MarbleModel const*const m_model;
+    MarbleWidget *const m_widget;
     SelectionMethod m_selectionMethod;
     GeoDataLatLonBox m_visibleRegion;
     RoutingModel *m_routingModel;
@@ -97,7 +97,7 @@ DownloadRegionDialog::Private::Private( MarbleWidget * const widget,
       m_tileSizeInfo( 0 ),
       m_okButton( 0 ),
       m_applyButton( 0 ),
-      m_textureLayer( widget->model()->textureLayer() ),
+      m_textureLayer( widget->textureLayer() ),
       m_visibleTileLevel( m_textureLayer->tileZoomLevel() ),
       m_model( widget->model() ),
       m_widget( widget ),
@@ -452,7 +452,7 @@ void DownloadRegionDialog::setVisibleLatLonAltBox( GeoDataLatLonAltBox const & r
 void DownloadRegionDialog::updateTextureLayer()
 {
     mDebug() << "DownloadRegionDialog::updateTextureLayer";
-    d->m_textureLayer = d->m_model->textureLayer();
+    d->m_textureLayer = d->m_widget->textureLayer();
     updateTilesCount();
 }
 

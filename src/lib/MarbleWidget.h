@@ -38,6 +38,7 @@ class QSettings;
 namespace Marble
 {
 
+class AbstractDataPluginItem;
 class AbstractFloatItem;
 class FileViewModel;
 class GeoDataLatLonAltBox;
@@ -48,9 +49,12 @@ class MarbleMap;
 class MarbleModel;
 class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
+class MeasureTool;
 class RenderPlugin;
 class RoutingLayer;
 class SunLocator;
+class TextureLayer;
+class TileCoordsPyramid;
 class TileCreator;
 class GeoDataPlacemark;
 class ViewportParams;
@@ -219,6 +223,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     int zoom() const;
 
+    int tileZoomLevel() const;
+
     /**
      * @brief Return the current distance.
      */
@@ -322,6 +328,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @deprecated Please use removeGeoData instead
      */
     MARBLE_DEPRECATED( void removePlacemarkKey( const QString& key ) );
+
+    QVector<QModelIndex> whichFeatureAt( const QPoint& ) const;
+
+    /**
+     * @brief Returns all widgets of dataPlugins on the position curpos
+     */
+    QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
 
     /**
      * @brief  Return the quaternion that specifies the rotation of the globe.
@@ -922,11 +935,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void creatingTilesStart( TileCreator *creator, const QString& name, const QString& description );
 
     /**
-     * @brief Invalidate the map and update the widget.
-     */
-    void updateChangedMap();
-
-    /**
      * Schedule repaint
      */
     void scheduleRepaint( const QRegion& dirtyRegion );
@@ -969,6 +977,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void reloadMap();
 
+    void downloadRegion( QString const & sourceDir, QVector<TileCoordsPyramid> const & );
+
  Q_SIGNALS:
     /**
      * @brief Signal that the zoom has changed, and to what.
@@ -977,6 +987,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void zoomChanged( int zoom );
     void distanceChanged( const QString& distanceString );
+
+    void tileLevelChanged( int level );
 
     /**
      * @brief Signal that the theme has changed
@@ -1061,6 +1073,13 @@ private Q_SLOTS:
  private:
     Q_DISABLE_COPY( MarbleWidget )
     MarbleWidgetPrivate  * const d;
+
+    friend class DownloadRegionDialog;
+    TextureLayer *textureLayer();
+    const TextureLayer *textureLayer() const;
+
+    friend class MarbleWidgetDefaultInputHandler;
+    MeasureTool *measureTool();
 };
 
 }

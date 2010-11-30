@@ -996,7 +996,7 @@ void MarblePart::createPluginMenus()
 void MarblePart::updateTileZoomLevel()
 {
     const int tileZoomLevel =
-        m_controlView->marbleWidget()->model()->tileZoomLevel();
+        m_controlView->marbleWidget()->tileZoomLevel();
     if ( tileZoomLevel == -1 )
         m_tileZoomLevel = NOT_AVAILABLE;
     else {
@@ -1043,7 +1043,7 @@ void MarblePart::setupStatusBar()
              this,                          SLOT( showPosition( QString ) ) );
     connect( m_controlView->marbleWidget(), SIGNAL( distanceChanged( QString ) ),
              this,                          SLOT( updateStatusBar() ) );
-    connect( m_controlView->marbleWidget()->model(), SIGNAL( tileLevelChanged( int )),
+    connect( m_controlView->marbleWidget(), SIGNAL( tileLevelChanged( int )),
              SLOT( showZoomLevel( int )));
     connect( m_controlView->marbleWidget()->model(), SIGNAL( themeChanged( QString )),
              this, SLOT( mapThemeChanged( QString )), Qt::QueuedConnection );
@@ -1151,9 +1151,9 @@ void MarblePart::disconnectDownloadRegionDialog()
 
 void MarblePart::showDownloadRegionDialog()
 {
-    MarbleModel * const model = m_controlView->marbleWidget()->model();
+    MarbleWidget * const marbleWidget = m_controlView->marbleWidget();
     if ( !m_downloadRegionDialog ) {
-        m_downloadRegionDialog = new DownloadRegionDialog( m_controlView->marbleWidget(), widget() );
+        m_downloadRegionDialog = new DownloadRegionDialog( marbleWidget, widget() );
         // it might be tempting to move the connects to DownloadRegionDialog's "accepted" and
         // "applied" signals, be aware that the "hidden" signal might be come before the "accepted"
         // signal, leading to a too early disconnect.
@@ -1166,11 +1166,10 @@ void MarblePart::showDownloadRegionDialog()
     // FIXME: get allowed range from current map theme
     m_downloadRegionDialog->setAllowedTileLevelRange( 0, 18 );
     m_downloadRegionDialog->setSelectionMethod( DownloadRegionDialog::VisibleRegionMethod );
-    ViewportParams const * const viewport =
-        m_controlView->marbleWidget()->viewport();
+    ViewportParams const * const viewport = marbleWidget->viewport();
     m_downloadRegionDialog->setSpecifiedLatLonAltBox( viewport->viewLatLonAltBox() );
     m_downloadRegionDialog->setVisibleLatLonAltBox( viewport->viewLatLonAltBox() );
-    m_downloadRegionDialog->setVisibleTileLevel( model->tileZoomLevel() );
+    m_downloadRegionDialog->setVisibleTileLevel( marbleWidget->tileZoomLevel() );
 
     m_downloadRegionDialog->show();
     m_downloadRegionDialog->raise();
@@ -1184,7 +1183,7 @@ void MarblePart::downloadRegion()
     QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
     kDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
     QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
-    m_controlView->marbleWidget()->model()->downloadRegion( sourceDir, pyramid );
+    m_controlView->marbleWidget()->downloadRegion( sourceDir, pyramid );
 }
 
 void MarblePart::showStatusBarContextMenu( const QPoint& pos )
@@ -1413,7 +1412,7 @@ void MarblePart::updateSettings()
     
     QNetworkProxy::setApplicationProxy(proxy);
     
-    m_controlView->marbleWidget()->updateChangedMap();
+    m_controlView->marbleWidget()->update();
 
     // Show message box
     if (    m_initialGraphicsSystem != graphicsSystem 

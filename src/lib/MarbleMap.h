@@ -24,6 +24,7 @@
 
 #include <QtCore/QSize>
 #include <QtCore/QString>
+#include <QtCore/QModelIndex>
 #include <QtCore/QObject>
 #include <QtGui/QFont>
 #include <QtGui/QPixmap>
@@ -54,8 +55,14 @@ class ViewportParams;
 class SunLocator;
 class FileViewModel;
 class GeoPainter;
+class LayerInterface;
 class RenderPlugin;
+class AbstractDataPlugin;
+class AbstractDataPluginItem;
 class AbstractFloatItem;
+class MeasureTool;
+class TextureLayer;
+class TileCoordsPyramid;
 
 /**
  * @short A class that can paint a view of the earth.
@@ -150,6 +157,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief Return the current zoom level.
      */
     int zoom() const;
+
+    int tileZoomLevel() const;
 
     /**
      * @brief Return the current distance. Convenience function calling distance(radius())
@@ -246,6 +255,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @deprecated This method has been renamed removeGeoData
      */
     MARBLE_DEPRECATED( void removePlacemarkKey( const QString& key ) );
+
+    QVector<QModelIndex> whichFeatureAt( const QPoint& ) const;
 
     /**
      * @brief  Return the quaternion that specifies the rotation of the globe.
@@ -378,6 +389,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     bool showFrameRate() const;
 
+    bool showBackground() const;
+
     /**
      * @brief  Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
      * @return the limit of persistent tile cache in kilobytes.
@@ -396,9 +409,39 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     SunLocator* sunLocator();
 
+    /**
+     * @brief Returns a list of all RenderPlugins in the model, this includes float items
+     * @return the list of RenderPlugins
+     */
     QList<RenderPlugin *> renderPlugins() const;
     QList<AbstractFloatItem *> floatItems() const;
+
+    /**
+     * @brief Returns a list of all FloatItems in the model
+     * @return the list of the floatItems
+     */
     AbstractFloatItem * floatItem( const QString &nameId ) const;
+
+    /**
+     * @brief Returns a list of all DataPlugins on the layer
+     * @return the list of DataPlugins
+     */
+    QList<AbstractDataPlugin *> dataPlugins()  const;
+
+    /**
+     * @brief Returns all widgets of dataPlugins on the position curpos
+     */
+    QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
+
+    /**
+     * @brief Add a layer to be included in rendering.
+     */
+    void addLayer( LayerInterface *layer );
+
+    /**
+     * @brief Remove a layer from being included in rendering.
+     */
+    void removeLayer( LayerInterface *layer );
 
     /**
       * @brief Move camera to the given position. This can change
@@ -435,11 +478,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void updateSun();
     void centerSun();
-
-    /**
-     * @brief Mark the map as needing an update.
-     */
-    void setNeedsUpdate();
 
     /**
      * @brief Paint the map using a give painter.
@@ -676,6 +714,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void setShowFrameRate( bool visible );
 
+    void setShowBackground( bool visible );
+
      /**
      * @brief used to notify about the position of the mouse click
       */
@@ -739,7 +779,9 @@ class MARBLE_EXPORT MarbleMap : public QObject
      *        kinds of data which is used in the map.
      */
     void reload() const;
-    
+
+    void downloadRegion( QString const & sourceDir, QVector<TileCoordsPyramid> const & );
+
  Q_SIGNALS:
     /**
      * @brief Signal that the zoom has changed, and to what.
@@ -748,6 +790,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void zoomChanged( int zoom );
     void distanceChanged( const QString& distanceString );
+
+    void tileLevelChanged( int level );
 
     /**
      * @brief Signal that the theme has changed
@@ -768,13 +812,23 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * If available with the @p dirtyRegion which is the region the view will change in.
      * If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
      */
-    void repaintNeeded( const QRegion& dirtyRegion );
+    void repaintNeeded( const QRegion& dirtyRegion = QRegion() );
 
     /**
      * This signal is emitted when the visible region of the map changes. This typically happens
      * when the user moves the map around or zooms.
      */
     void visibleLatLonAltBoxChanged( const GeoDataLatLonAltBox& visibleLatLonAltBox );
+
+    /**
+     * @brief This signal is emit when the settings of a plugin changed.
+     */
+    void pluginSettingsChanged();
+
+    /**
+     * @brief Signal that a render item has been initialized
+     */
+    void renderPluginInitialized( RenderPlugin *renderPlugin );
 
  protected:
 
@@ -788,6 +842,10 @@ class MARBLE_EXPORT MarbleMap : public QObject
  private:
     Q_DISABLE_COPY( MarbleMap )
     MarbleMapPrivate * const d;
+
+    TextureLayer *textureLayer();
+
+    MeasureTool *measureTool();
 };
 
 }

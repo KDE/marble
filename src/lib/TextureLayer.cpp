@@ -12,7 +12,6 @@
 //
 
 #include "TextureLayer.h"
-#include "TextureLayer.moc"
 
 #include <QtCore/QTimer>
 
@@ -43,26 +42,40 @@ class TextureLayer::Private
 public:
     Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator, TextureLayer *parent );
 
+    void mapChanged();
+
     GeoSceneTexture *textureLayer() const;
     static GeoSceneGroup *textureLayerProperties( GeoSceneDocument *mapTheme );
 
 public:
+    TextureLayer  *const m_parent;
     TextureColorizer     m_texcolorizer;
     StackedTileLoader    m_tileLoader;
     MergedLayerDecorator m_layerDecorator;
     VectorComposer       m_veccomposer;
     AbstractScanlineTextureMapper *m_texmapper;
     GeoSceneDocument              *m_mapTheme;
+    bool m_justModified;
 };
 
 TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator, TextureLayer *parent )
-    : m_texcolorizer()
+    : m_parent( parent )
+    , m_texcolorizer()
     , m_tileLoader( mapThemeManager, downloadManager, parent )
     , m_layerDecorator( &m_tileLoader, sunLocator )
     , m_veccomposer( parent )
     , m_texmapper( 0 )
     , m_mapTheme( 0 )
+    , m_justModified( true )
+
 {
+}
+
+void TextureLayer::Private::mapChanged()
+{
+    m_justModified = true;
+
+    emit m_parent->repaintNeeded( QRegion() );
 }
 
 GeoSceneTexture* TextureLayer::Private::textureLayer() const
@@ -100,9 +113,9 @@ TextureLayer::TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManage
     : QObject()
     , d( new Private( mapThemeManager, downloadManager, sunLocator, this ) )
 {
-    connect( &d->m_layerDecorator, SIGNAL( repaintMap() ), SIGNAL( modelChanged() ) );
-    connect( &d->m_veccomposer, SIGNAL( datasetLoaded() ), SIGNAL( modelChanged() ) );
-    connect( &d->m_tileLoader, SIGNAL( tileUpdateAvailable() ), SIGNAL( modelChanged() ) );
+    connect( &d->m_layerDecorator, SIGNAL( repaintMap() ), SLOT( mapChanged() ) );
+    connect( &d->m_veccomposer, SIGNAL( datasetLoaded() ), SLOT( mapChanged() ) );
+    connect( &d->m_tileLoader, SIGNAL( tileUpdateAvailable() ), SLOT( mapChanged() ) );
 }
 
 TextureLayer::~TextureLayer()
@@ -112,11 +125,12 @@ TextureLayer::~TextureLayer()
 
 void TextureLayer::paintGlobe( GeoPainter *painter,
                                ViewParams *viewParams,
-                               bool redrawBackground,
                                const QRect& dirtyRect )
 {
     if ( !d->m_mapTheme )
         return;
+
+    const bool redrawBackground = d->m_justModified || viewParams->canvasImage()->isNull();
 
     if ( redrawBackground ) {
         if ( d->m_mapTheme->map()->hasTextureLayers() ) {
@@ -165,6 +179,8 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
     }
 
 //    qDebug( "Painted in %ims", t.elapsed() );
+
+    d->m_justModified = false;
 }
 
 void TextureLayer::setShowTileId( bool show )
@@ -197,7 +213,14 @@ void TextureLayer::setupTextureMapper( Projection projection )
     }
     Q_ASSERT( d->m_texmapper );
     connect( d->m_texmapper, SIGNAL( tileLevelChanged( int )), SIGNAL( tileLevelChanged( int )));
-    connect( d->m_texmapper, SIGNAL( mapChanged() ), SIGNAL( modelChanged() ) );
+    connect( d->m_texmapper, SIGNAL( mapChanged() ), SLOT( mapChanged() ) );
+
+    d->m_justModified = true;
+}
+
+void TextureLayer::setNeedsUpdate()
+{
+    d->m_justModified = true;
 }
 
 void TextureLayer::setVolatileCacheLimit( quint64 kilobytes )
@@ -306,3 +329,5 @@ void TextureLayer::paintTile( StackedTile* tile, const GeoSceneTexture *textureL
 }
 
 }
+
+#include "TextureLayer.moc"

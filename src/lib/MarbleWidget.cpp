@@ -190,7 +190,7 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( m_model,  SIGNAL( themeChanged( QString ) ),
 		       m_widget, SIGNAL( themeChanged( QString ) ) );
     m_widget->connect( m_model, SIGNAL( modelChanged() ),
-                       m_widget, SLOT( updateChangedMap() ) );
+                       m_widget, SLOT( update() ) );
 
     // Repaint scheduling
     m_widget->connect( m_map,    SIGNAL( repaintNeeded( QRegion ) ),
@@ -208,6 +208,13 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SIGNAL( distanceChanged( QString ) ) );
     m_widget->connect( m_map,    SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
                        m_widget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )));
+    m_widget->connect( m_map,    SIGNAL( tileLevelChanged( int ) ),
+                       m_widget, SIGNAL( tileLevelChanged( int ) ) );
+
+    m_widget->connect( m_map,    SIGNAL( pluginSettingsChanged() ),
+                       m_widget, SIGNAL( pluginSettingsChanged() ) );
+    m_widget->connect( m_map,    SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
+                       m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
 
     // Set background: black.
     m_widget->setPalette( QPalette ( Qt::black ) );
@@ -240,15 +247,9 @@ void MarbleWidgetPrivate::construct()
     m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler );
     m_widget->setMouseTracking( m_widget );
 
-    m_widget->connect( m_model, SIGNAL( pluginSettingsChanged() ),
-                       m_widget, SIGNAL( pluginSettingsChanged() ) );
-                       
-    m_widget->connect( m_model, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
-                       m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
-
     m_routingLayer = new RoutingLayer( m_widget, m_widget );
     m_routingLayer->setRouteRequest( m_model->routingManager()->routeRequest() );
-    m_model->addLayer( m_routingLayer );
+    m_map->addLayer( m_routingLayer );
 
     m_widget->connect( m_routingLayer, SIGNAL( routeDirty() ),
                        m_model->routingManager(), SLOT( updateRoute() ) );
@@ -365,6 +366,11 @@ int MarbleWidget::zoom() const
     return d->m_map->zoom();
 }
 
+int MarbleWidget::tileZoomLevel() const
+{
+    return d->m_map->tileZoomLevel();
+}
+
 int  MarbleWidget::minimumZoom() const
 {
     return d->m_map->minimumZoom();
@@ -388,6 +394,31 @@ void MarbleWidget::addPlacemarkData( const QString &data, const QString &key )
 void MarbleWidget::removePlacemarkKey( const QString &key )
 {
     removeGeoData( key );
+}
+
+QVector<QModelIndex> MarbleWidget::whichFeatureAt( const QPoint &curpos ) const
+{
+    return d->m_map->whichFeatureAt( curpos );
+}
+
+QList<AbstractDataPluginItem*> MarbleWidget::whichItemAt( const QPoint &curpos ) const
+{
+    return d->m_map->whichItemAt( curpos );
+}
+
+TextureLayer *MarbleWidget::textureLayer()
+{
+    return d->m_map->textureLayer();
+}
+
+const Marble::TextureLayer* MarbleWidget::textureLayer() const
+{
+    return d->m_map->textureLayer();
+}
+
+MeasureTool *MarbleWidget::measureTool()
+{
+    return d->m_map->measureTool();
 }
 
 QPixmap MarbleWidget::mapScreenShot()
@@ -775,7 +806,7 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
     d->m_map->d->paintGround( painter, dirtyRect );
     d->m_map->customPaint( &painter );
     customPaint( &painter );
-    d->m_model->measureTool()->render( &painter, viewport() );
+    d->m_map->measureTool()->render( &painter, viewport() );
 
     if ( !isEnabled() )
     {
@@ -1047,13 +1078,6 @@ void MarbleWidget::creatingTilesStart( TileCreator *creator,
     dlg.exec();
 }
 
-void MarbleWidget::updateChangedMap()
-{
-    d->m_map->setNeedsUpdate();
-
-    update();
-}
-
 void MarbleWidget::scheduleRepaint( const QRegion& dirtyRegion )
 {
     Q_UNUSED( dirtyRegion );
@@ -1226,7 +1250,7 @@ void MarbleWidget::setInputEnabled( bool enabled )
 
 QList<RenderPlugin *> MarbleWidget::renderPlugins() const
 {
-    return d->m_model->renderPlugins();
+    return d->m_map->renderPlugins();
 }
 
 void MarbleWidget::readPluginSettings( QSettings& settings )
@@ -1265,7 +1289,7 @@ void MarbleWidget::writePluginSettings( QSettings& settings ) const
 
 QList<AbstractFloatItem *> MarbleWidget::floatItems() const
 {
-    return d->m_model->floatItems();
+    return d->m_map->floatItems();
 }
 
 AbstractFloatItem * MarbleWidget::floatItem( const QString &nameId ) const
@@ -1297,7 +1321,12 @@ void MarbleWidget::flyTo( const GeoDataLookAt &newLookAt, FlyToMode mode )
 
 void MarbleWidget::reloadMap()
 {
-    d->m_model->reloadMap();
+    d->m_map->reload();
+}
+
+void MarbleWidget::downloadRegion( QString const & sourceDir, QVector<TileCoordsPyramid> const & pyramid )
+{
+    d->m_map->downloadRegion( sourceDir, pyramid );
 }
 
 void MarbleWidget::updateAnimation( const GeoDataLookAt &lookAt )

@@ -187,6 +187,8 @@ int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
 void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
                                         ViewParams *viewParams )
 {
+    if ( m_placemarkModel->rowCount() <= 0 )
+        return;
 
     // const int imgwidth  = viewParams->canvasImage()->width();
     const int imgheight = viewParams->canvasImage()->height();

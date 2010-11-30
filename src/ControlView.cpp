@@ -196,11 +196,11 @@ void ControlView::printMapScreenShot( QPointer<QPrintDialog> printDialog)
             QTextDocument document;
             QString text = "<html><head><title>Marble Printout</title></head><body>";
             QPalette const originalPalette = m_marbleWidget->palette();
-            bool const wasBackgroundVisible = m_marbleWidget->model()->backgroundVisible();
+            bool const wasBackgroundVisible = m_marbleWidget->map()->showBackground();
             bool const hideBackground = !mapCoversViewport && !printOptions->printBackground();
             if ( hideBackground ) {
                 // Temporarily remove the black background and layers painting on it
-                m_marbleWidget->model()->setBackgroundVisible( false );
+                m_marbleWidget->map()->setShowBackground( false );
                 m_marbleWidget->setPalette( QPalette ( Qt::white ) );
                 m_marbleWidget->repaint();
             }
@@ -230,7 +230,7 @@ void ControlView::printMapScreenShot( QPointer<QPrintDialog> printDialog)
             document.print( printDialog->printer() );
 
             if ( hideBackground ) {
-                m_marbleWidget->model()->setBackgroundVisible( wasBackgroundVisible );
+                m_marbleWidget->map()->setShowBackground( wasBackgroundVisible );
                 m_marbleWidget->setPalette( originalPalette );
                 m_marbleWidget->repaint();
             }
@@ -469,7 +469,7 @@ void ControlView::launchExternalMapEditor()
         QString url = "http://www.openstreetmap.org/edit?lat=%1&lon=%2&zoom=%3";
         qreal lat = m_marbleWidget->centerLatitude();
         qreal lon = m_marbleWidget->centerLongitude();
-        int zoom = m_marbleWidget->model()->tileZoomLevel();
+        int zoom = m_marbleWidget->tileZoomLevel();
         url = url.arg( lat, 0, 'f', 8 ).arg( lon, 0, 'f', 8 ).arg( zoom );
         QDesktopServices::openUrl( url );
     }

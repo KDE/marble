@@ -19,6 +19,8 @@
 #include <QtCore/QSize>
 #include <QtGui/QRegion>
 
+class QImage;
+class QRegion;
 class QRect;
 
 namespace Marble
@@ -43,7 +45,6 @@ class TextureLayer : public QObject
 
     void paintGlobe( GeoPainter *painter,
                      ViewParams *viewParams,
-                     bool redrawBackground,
                      const QRect& dirtyRect );
 
     void setShowTileId( bool show );
@@ -53,6 +54,8 @@ class TextureLayer : public QObject
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
     void  setupTextureMapper( Projection projection );
+
+    void setNeedsUpdate();
 
     void setMapTheme( GeoSceneDocument* mapTheme );
 
@@ -81,12 +84,15 @@ class TextureLayer : public QObject
 
  Q_SIGNALS:
     void tileLevelChanged( int );
-    void modelChanged();
+    void repaintNeeded( const QRegion & );
 
  private:
     friend class StackedTileLoader;
     void paintTile( StackedTile *tile, const GeoSceneTexture *textureLayer );
 
+    Q_PRIVATE_SLOT( d, void mapChanged() );
+
+ private:
     class Private;
     Private *const d;
 };
