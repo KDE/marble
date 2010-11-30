@@ -29,12 +29,12 @@
 #include <QtCore/QSet>
 
 #include "GeoDataLatLonAltBox.h"
-#include "GeoSceneTexture.h"
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "LatLonBoxWidget.h"
+#include "TextureLayer.h"
 #include "TileId.h"
 #include "TileLevelRangeWidget.h"
 #include "TileLoaderHelper.h"
@@ -74,10 +74,10 @@ public:
     QLabel * m_tileSizeInfo;
     QPushButton * m_okButton;
     QPushButton * m_applyButton;
+    TextureLayer const * m_textureLayer;
     int m_visibleTileLevel;
-    MarbleModel const*const m_model;
+    MarbleModel *const m_model;
     MarbleWidget const*const m_widget;
-    GeoSceneTexture const * m_textureLayer;
     SelectionMethod m_selectionMethod;
     GeoDataLatLonBox m_visibleRegion;
     RoutingModel *m_routingModel;
@@ -97,10 +97,10 @@ DownloadRegionDialog::Private::Private( MarbleWidget * const widget,
       m_tileSizeInfo( 0 ),
       m_okButton( 0 ),
       m_applyButton( 0 ),
-      m_visibleTileLevel( widget->model()->tileZoomLevel() ),
+      m_textureLayer( widget->model()->textureLayer() ),
+      m_visibleTileLevel( m_textureLayer->tileZoomLevel() ),
       m_model( widget->model() ),
       m_widget( widget ),
-      m_textureLayer( widget->model()->textureLayer() ),
       m_selectionMethod( VisibleRegionMethod ),
       m_visibleRegion(),
       m_routingModel( widget->model()->routingManager()->routingModel() )
@@ -221,7 +221,7 @@ int DownloadRegionDialog::Private::rad2PixelY( qreal const lat ) const
     qreal const globalHeight = m_textureLayer->tileSize().height()
         * TileLoaderHelper::levelToRow( m_textureLayer->levelZeroRows(), m_visibleTileLevel );
     qreal const normGlobalHeight = globalHeight / M_PI;
-    switch ( m_textureLayer->projection() ) {
+    switch ( m_textureLayer->tileProjection() ) {
     case GeoSceneTexture::Equirectangular:
         return static_cast<int>( globalHeight * 0.5 - lat * normGlobalHeight );
     case GeoSceneTexture::Mercator:

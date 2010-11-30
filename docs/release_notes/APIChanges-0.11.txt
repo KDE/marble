@@ -61,3 +61,9 @@
 
 * Remove MarbleModel::textureMapper().
   AbstractScanlineTextureMapper isn't exported, so there shouldn't have been any usages outside libmarblewidget.
+
+* Remove MarbleModel::setupTextureMapper( Projection ).
+  Use {MarbleMap, MarbleWidget}::setProjection( Projection ) instead.
+
+* Remove MarbleModel::paintTile( StackedTile*, const GeoSceneTexture * ).
+  This method was internal. If you really need it, call {MarbleMap, MarbleWidget}::setShowTileId( true ), which will activate drawing the tile id onto each tile.

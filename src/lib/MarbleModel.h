@@ -58,6 +58,7 @@ class MarbleModelPrivate;
 class PlacemarkLayout;
 class MarbleClock;
 class SunLocator;
+class TextureLayer;
 class TileCreator;
 class ViewParams;
 class StackedTile;
@@ -201,12 +202,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @param  zoom       the default zoom level for the new home point.
      */
     void setHome( const GeoDataCoordinates& homePoint, int zoom = 1050 );
-
-    /**
-     * @brief  Set the Projection used for the map
-     * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
-     */
-    void  setupTextureMapper( Projection projection );
 
     /**
      * @brief Return the downloadmanager to load missing tiles
@@ -359,8 +354,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void setPersistentTileCacheLimit( quint64 kiloBytes );
 
-    void paintTile( StackedTile* tile, const GeoSceneTexture *textureLayer );
-
     /**
      * @brief Update the model
      */
@@ -411,7 +404,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     void addDownloadPolicies( GeoSceneDocument *mapTheme );
     friend class DownloadRegionDialog;
-    GeoSceneTexture * textureLayer() const;
+    friend class MarbleMap;
+    TextureLayer * textureLayer();
 
     MarbleModelPrivate  * const d;
 };

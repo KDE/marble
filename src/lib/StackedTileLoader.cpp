@@ -34,8 +34,8 @@
 #include "MapThemeManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "MarbleModel.h"
 #include "StackedTile.h"
+#include "TextureLayer.h"
 #include "TextureTile.h"
 #include "TileLoader.h"
 #include "TileLoaderHelper.h"
@@ -92,16 +92,14 @@ bool StackedTileLoaderPrivate::isTextureLayerEnabled( QString const & name ) con
 }
 
 StackedTileLoader::StackedTileLoader( MapThemeManager const * const mapThemeManager,
-                                      GeoSceneGroup * const textureLayerSettings,
                                       HttpDownloadManager * const downloadManager,
-                                      MarbleModel * const model )
+                                      TextureLayer * const parent )
     : d( new StackedTileLoaderPrivate ),
-      m_parent( model )
+      m_parent( parent )
 {
     d->m_mapThemeManager = mapThemeManager;
     connect( d->m_mapThemeManager, SIGNAL( themesChanged() ),
              this, SLOT( updateTextureLayers() ) );
-    setTextureLayerSettings( textureLayerSettings );
     d->m_tileLoader = new TileLoader( downloadManager );
     updateTextureLayers();
     connect( d->m_tileLoader, SIGNAL( tileCompleted( TileId, TileId )),

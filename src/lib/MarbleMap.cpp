@@ -52,6 +52,7 @@
 #include "RenderPlugin.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
+#include "TextureLayer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
@@ -636,7 +637,7 @@ void MarbleMap::setProjection( Projection projection )
 
     d->m_viewParams.setProjection( projection );
 
-    d->m_model->setupTextureMapper( projection );
+    d->m_model->textureLayer()->setupTextureMapper( projection );
 
     // Update texture map during the repaint that follows:
     setNeedsUpdate();

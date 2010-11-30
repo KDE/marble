@@ -58,8 +58,6 @@ class MarbleMapPrivate
     // zoom related
     int              m_logzoom;
 
-    TextureColorizer  *m_sealegend;
-
     // Parameters for the maps appearance.
 
     bool             m_showFrameRate;
