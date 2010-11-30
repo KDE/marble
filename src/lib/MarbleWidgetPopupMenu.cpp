@@ -264,11 +264,15 @@ void MarbleWidgetPopupMenu::addAction( Qt::MouseButton button, QAction* action )
 void MarbleWidgetPopupMenu::directionsFromHere()
 {
     RouteRequest* request = m_widget->model()->routingManager()->routeRequest();
-    if ( request && request->size() > 0 )
+    if ( request )
     {
         GeoDataCoordinates coordinates;
         if ( mouseCoordinates( &coordinates, m_setHomePointAction ) ) {
-            request->setPosition( 0, coordinates );
+            if ( request->size() > 0 ) {
+                request->setPosition( 0, coordinates );
+            } else {
+                request->append( coordinates );
+            }
             m_widget->model()->routingManager()->updateRoute();
         }
     }
@@ -277,11 +281,15 @@ void MarbleWidgetPopupMenu::directionsFromHere()
 void MarbleWidgetPopupMenu::directionsToHere()
 {
     RouteRequest* request = m_widget->model()->routingManager()->routeRequest();
-    if ( request && request->size() > 1 )
+    if ( request )
     {
         GeoDataCoordinates coordinates;
         if ( mouseCoordinates( &coordinates, m_setHomePointAction ) ) {
-            request->setPosition( request->size()-1, coordinates );
+            if ( request->size() > 1 ) {
+                request->setPosition( request->size()-1, coordinates );
+            } else {
+                request->append( coordinates );
+            }
             m_widget->model()->routingManager()->updateRoute();
         }
     }

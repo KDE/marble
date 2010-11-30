@@ -188,7 +188,7 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     d->m_ui.routeComboBox->setModel( d->m_routingManager->alternativeRoutesModel() );
 
     d->m_routingLayer = d->m_widget->routingLayer();
-    d->m_routingLayer->synchronizeAlternativeRoutesWith( d->m_routingManager->alternativeRoutesModel(), d->m_ui.routeComboBox );
+    d->m_routingLayer->synchronizeAlternativeRoutesWith( d->m_ui.routeComboBox );
 
     d->m_ui.routingProfileComboBox->setModel( d->m_routingManager->profilesModel() );
 
@@ -196,8 +196,6 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( selectFirstProfile() ) );
     connect( d->m_routingManager->profilesModel(), SIGNAL( modelReset() ),
              this, SLOT( selectFirstProfile() ) );
-    connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
-             d->m_widget, SLOT( repaint() ) );
     connect( d->m_routingLayer, SIGNAL( placemarkSelected( QModelIndex ) ),
              this, SLOT( activatePlacemark( QModelIndex ) ) );
     connect( d->m_routingLayer, SIGNAL( pointSelected( GeoDataCoordinates ) ),
@@ -223,7 +221,6 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     d->m_routingProxyModel->setSourceModel( d->m_routingManager->routingModel() );
     d->m_ui.directionsListView->setModel( d->m_routingProxyModel );
 
-    d->m_routingLayer->setModel( d->m_routingManager->routingModel() );
     QItemSelectionModel *selectionModel = d->m_ui.directionsListView->selectionModel();
     d->m_routingLayer->synchronizeWith( d->m_routingProxyModel, selectionModel );
     connect( d->m_ui.directionsListView, SIGNAL( activated ( QModelIndex ) ),
@@ -421,8 +418,6 @@ void RoutingWidget::updateRouteState( RoutingManager::State state, RouteRequest 
         d->m_ui.routeComboBox->setVisible( false );
         d->m_ui.routeComboBox->clear();
     }
-
-    d->m_routingLayer->setRouteDirty( state == RoutingManager::Downloading );
 
     if ( state == RoutingManager::Downloading ) {
         d->m_progressTimer.start();

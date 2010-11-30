@@ -91,7 +91,7 @@ public:
 
 
 AlternativeRoutesModelPrivate::AlternativeRoutesModelPrivate( MarbleModel* marbleModel ) :
-        m_marbleModel( marbleModel ), m_currentIndex( 0 )
+        m_marbleModel( marbleModel ), m_currentIndex( -1 )
 {
     // nothing to do
 }
@@ -332,6 +332,7 @@ GeoDataDocument* AlternativeRoutesModel::route( int index )
 void AlternativeRoutesModel::newRequest( RouteRequest * )
 {
     d->m_responseTime.start();
+    d->m_currentIndex = -1;
     clear();
 }
 
@@ -355,6 +356,8 @@ void AlternativeRoutesModel::addRestrainedRoutes()
     }
 
     d->m_restrainedRoutes.clear();
+    Q_ASSERT( !d->m_routes.isEmpty() );
+    setCurrentRoute( 0 );
 }
 
 void AlternativeRoutesModel::addRoute( GeoDataDocument* document, WritePolicy policy )
@@ -435,7 +438,7 @@ GeoDataLineString* AlternativeRoutesModel::waypoints( const GeoDataDocument* doc
 
 void AlternativeRoutesModel::setCurrentRoute( int index )
 {
-    if ( index >= 0 && index < rowCount() ) {
+    if ( index >= 0 && index < rowCount() && d->m_currentIndex != index ) {
         d->m_currentIndex = index;
         emit currentRouteChanged( currentRoute() );
     }

@@ -171,7 +171,8 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
         m_targetPixmap( ":/data/bitmaps/routing_pick.png" ), m_dragStopOverRightIndex( -1 ),
         m_pointSelection( false ), m_routingModel( 0 ), m_placemarkModel( 0 ), m_selectionModel( 0 ),
         m_routeDirty( false ), m_pixmapSize( 22, 22 ), m_routeRequest( 0 ), m_activeMenuIndex( -1 ),
-        m_alternativeRoutesView( 0 ), m_alternativeRoutesModel( 0 )
+        m_alternativeRoutesView( 0 ),
+        m_alternativeRoutesModel( widget->model()->routingManager()->alternativeRoutesModel() )
 {
     m_contextMenu = new MarbleWidgetPopupMenu( m_marbleWidget, m_marbleWidget->model() );
     m_removeViaPointAction = new QAction( QObject::tr( "&Remove this destination" ), q );
@@ -311,7 +312,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
         RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
 
-        if ( type == RoutingModel::Instruction ) {
+        if ( type == RoutingModel::Instruction && m_proxyModel && m_selectionModel ) {
 
             painter->setBrush( QBrush( alphaAdjusted( oxygenAluminumGray4, 200 ) ) );
             QModelIndex proxyIndex = m_proxyModel->mapFromSource( index );
@@ -420,8 +421,8 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
     }
 
     foreach( const ModelRegion &region, m_instructionRegions ) {
-        if ( region.region.contains( e->pos() ) ) {
-            if ( e->button() == Qt::LeftButton ) {
+        if ( region.region.contains( e->pos() ) && m_selectionModel ) {
+            if ( e->button() == Qt::LeftButton && m_proxyModel ) {
                 QModelIndex index = m_proxyModel->mapFromSource( region.index );
                 QItemSelectionModel::SelectionFlag command = QItemSelectionModel::ClearAndSelect;
                 if ( m_selectionModel->isSelected( index ) ) {
@@ -640,6 +641,8 @@ RoutingLayer::RoutingLayer( MarbleWidget *widget, QWidget *parent ) :
         QObject( parent ), d( new RoutingLayerPrivate( this, widget ) )
 {
     widget->installEventFilter( this );
+    connect( widget->model()->routingManager(), SIGNAL( stateChanged( RoutingManager::State, RouteRequest* ) ),
+             this, SLOT( updateRouteState( RoutingManager::State, RouteRequest* ) ) );
 }
 
 RoutingLayer::~RoutingLayer()
@@ -731,9 +734,8 @@ void RoutingLayer::synchronizeWith( QAbstractProxyModel *model, QItemSelectionMo
     d->m_proxyModel = model;
 }
 
-void RoutingLayer::synchronizeAlternativeRoutesWith( AlternativeRoutesModel* model, QComboBox *view )
+void RoutingLayer::synchronizeAlternativeRoutesWith( QComboBox *view )
 {
-    d->m_alternativeRoutesModel = model;
     d->m_alternativeRoutesView = view;
 
     connect( d->m_alternativeRoutesModel, SIGNAL( rowsInserted( QModelIndex, int, int) ),
@@ -795,6 +797,12 @@ void RoutingLayer::exportRoute()
             d->m_marbleWidget->model()->routingManager()->saveRoute( fileName );
         }
     }
+}
+
+void RoutingLayer::updateRouteState( RoutingManager::State state, RouteRequest *route )
+{
+    d->m_routeRequest = route;
+    setRouteDirty( state == RoutingManager::Downloading );
 }
 
 } // namespace Marble

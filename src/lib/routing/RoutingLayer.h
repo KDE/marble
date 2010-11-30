@@ -13,6 +13,7 @@
 
 #include "GeoDataCoordinates.h"
 #include "LayerInterface.h"
+#include "RoutingManager.h"
 
 #include <QtCore/QModelIndex>
 #include <QtGui/QItemSelection>
@@ -69,7 +70,7 @@ public:
       * @todo: Should use a QAbstractItemView instead, but working on this instead of the
       * QComboBox does not work (changing the selection is not reflected by the combo box)
       */
-    void synchronizeAlternativeRoutesWith( AlternativeRoutesModel* model, QComboBox *view );
+    void synchronizeAlternativeRoutesWith( QComboBox *view );
 
     /**
       * Set the routing model to use. Implicitly removes the placemark model.
@@ -133,6 +134,11 @@ private Q_SLOTS:
 
     /** Export route to a file */
     void exportRoute();
+
+    /**
+      * Paint a dashed route when downloading a new route, a solid one otherwise.
+      */
+    void updateRouteState( RoutingManager::State state, RouteRequest *route );
 
 private:
     RoutingLayerPrivate *const d;

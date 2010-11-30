@@ -50,6 +50,7 @@
 #include "BookmarkManager.h"
 #include "routing/RoutingLayer.h"
 #include "routing/RoutingManager.h"
+#include "routing/AlternativeRoutesModel.h"
 
 namespace Marble
 {
@@ -249,10 +250,14 @@ void MarbleWidgetPrivate::construct()
 
     m_routingLayer = new RoutingLayer( m_widget, m_widget );
     m_routingLayer->setRouteRequest( m_model->routingManager()->routeRequest() );
+    m_routingLayer->setModel( m_model->routingManager()->routingModel() );
     m_map->addLayer( m_routingLayer );
 
     m_widget->connect( m_routingLayer, SIGNAL( routeDirty() ),
                        m_model->routingManager(), SLOT( updateRoute() ) );
+    m_widget->connect( m_model->routingManager()->alternativeRoutesModel(),
+                       SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
+                       m_widget, SLOT( repaint() ) );
 }
 
 void MarbleWidgetPrivate::moveByStep( int stepsRight, int stepsDown, FlyToMode mode )
