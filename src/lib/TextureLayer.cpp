@@ -14,6 +14,8 @@
 #include "TextureLayer.h"
 #include "TextureLayer.moc"
 
+#include <QtCore/QTimer>
+
 #include "SphericalScanlineTextureMapper.h"
 #include "EquirectScanlineTextureMapper.h"
 #include "MercatorScanlineTextureMapper.h"
@@ -198,6 +200,35 @@ void TextureLayer::setupTextureMapper( Projection projection )
     connect( d->m_texmapper, SIGNAL( mapChanged() ), SIGNAL( modelChanged() ) );
 }
 
+void TextureLayer::setVolatileCacheLimit( quint64 kilobytes )
+{
+    d->m_tileLoader.setVolatileCacheLimit( kilobytes );
+}
+
+void TextureLayer::update()
+{
+    mDebug() << "TextureLayer::update()";
+    QTimer::singleShot( 0, &d->m_tileLoader, SLOT( update() ) );
+}
+
+void TextureLayer::reload()
+{
+    QList<TileId> displayed = d->m_tileLoader.tilesOnDisplay();
+    QList<TileId>::const_iterator pos = displayed.constBegin();
+    QList<TileId>::const_iterator const end = displayed.constEnd();
+    for (; pos != end; ++pos ) {
+        // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
+        // but since "reload" or "refresh" seems to be a common action of a browser and it
+        // allows for more connections (in our model), use "DownloadBrowse"
+        d->m_tileLoader.reloadTile( *pos, DownloadBrowse );
+    }
+}
+
+void TextureLayer::downloadTile( const TileId &tileId )
+{
+    d->m_tileLoader.downloadTile( tileId );
+}
+
 void TextureLayer::setMapTheme(GeoSceneDocument* mapTheme)
 {
     d->m_mapTheme = mapTheme;
@@ -258,9 +289,9 @@ int TextureLayer::levelZeroRows() const
     return d->textureLayer()->levelZeroRows();
 }
 
-StackedTileLoader* TextureLayer::tileLoader()
+qint64 TextureLayer::volatileCacheLimit() const
 {
-    return &d->m_tileLoader;
+    return d->m_tileLoader.volatileCacheLimit();
 }
 
 void TextureLayer::paintTile( StackedTile* tile, const GeoSceneTexture *textureLayer )

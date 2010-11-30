@@ -642,8 +642,7 @@ void MarbleModelPrivate::notifyModelChanged()
 
 void MarbleModel::update()
 {
-    mDebug() << "MarbleModel::update()";
-    QTimer::singleShot( 0, d->m_textureLayer->tileLoader(), SLOT( update() ) );
+    d->m_textureLayer->update();
 }
 
 qreal MarbleModel::planetRadius()   const
@@ -680,18 +679,18 @@ quint64 MarbleModel::persistentTileCacheLimit() const
 
 void MarbleModel::clearVolatileTileCache()
 {
-    d->m_textureLayer->tileLoader()->update();
+    d->m_textureLayer->update();
     mDebug() << "Cleared Volatile Cache!";
 }
 
 quint64 MarbleModel::volatileTileCacheLimit() const
 {
-    return d->m_textureLayer->tileLoader()->volatileCacheLimit();
+    return d->m_textureLayer->volatileCacheLimit();
 }
 
 void MarbleModel::setVolatileTileCacheLimit( quint64 kiloBytes )
 {
-    d->m_textureLayer->tileLoader()->setVolatileCacheLimit( kiloBytes );
+    d->m_textureLayer->setVolatileCacheLimit( kiloBytes );
 }
 
 void MarbleModel::clearPersistentTileCache()
@@ -806,22 +805,14 @@ int MarbleModel::tileZoomLevel() const
 
 void MarbleModel::reloadMap() const
 {
-    Q_ASSERT( d->m_textureLayer->tileLoader() );
-    QList<TileId> displayed = d->m_textureLayer->tileLoader()->tilesOnDisplay();
-    QList<TileId>::const_iterator pos = displayed.constBegin();
-    QList<TileId>::const_iterator const end = displayed.constEnd();
-    for (; pos != end; ++pos ) {
-        // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
-        // but since "reload" or "refresh" seems to be a common action of a browser and it
-        // allows for more connections (in our model), use "DownloadBrowse"
-        d->m_textureLayer->tileLoader()->reloadTile( *pos, DownloadBrowse );
-    }
+    Q_ASSERT( d->m_textureLayer );
+    d->m_textureLayer->reload();
 }
 
 void MarbleModel::downloadRegion( QString const & mapThemeId,
                                   QVector<TileCoordsPyramid> const & pyramid ) const
 {
-    Q_ASSERT( d->m_textureLayer->tileLoader() );
+    Q_ASSERT( d->m_textureLayer );
     Q_ASSERT( !pyramid.isEmpty() );
     QTime t;
     t.start();
@@ -856,7 +847,7 @@ void MarbleModel::downloadRegion( QString const & mapThemeId,
          }
          QSetIterator<TileId> i( tileIdSet );
          while( i.hasNext() ) {
-              d->m_textureLayer->tileLoader()->downloadTile( i.next() );
+              d->m_textureLayer->downloadTile( i.next() );
          }
          tilesCount += tileIdSet.count();
      }

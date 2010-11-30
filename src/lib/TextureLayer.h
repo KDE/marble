@@ -56,6 +56,14 @@ class TextureLayer : public QObject
 
     void setMapTheme( GeoSceneDocument* mapTheme );
 
+    void setVolatileCacheLimit( quint64 kilobytes );
+
+    void update();
+
+    void reload();
+
+    void downloadTile( const TileId &tileId );
+
     /**
      * @brief Return the current tile zoom level. For example for OpenStreetMap
      *        possible values are 1..18, for BlueMarble 0..6.
@@ -69,7 +77,7 @@ class TextureLayer : public QObject
     int levelZeroColumns() const;
     int levelZeroRows() const;
 
-    StackedTileLoader *tileLoader();
+    qint64 volatileCacheLimit() const;
 
  Q_SIGNALS:
     void tileLevelChanged( int );
