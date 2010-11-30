@@ -426,9 +426,6 @@ void RoutingWidget::updateRouteState( RoutingManager::State state, RouteRequest 
 
     if ( state == RoutingManager::Downloading ) {
         d->m_progressTimer.start();
-    } else {
-        d->m_progressTimer.stop();
-        d->m_ui.searchButton->setIcon( QIcon() );
     }
 }
 
@@ -544,6 +541,9 @@ void RoutingWidget::updateAlternativeRoutes()
     if ( d->m_ui.routeComboBox->currentIndex() < 0 && d->m_ui.routeComboBox->count() > 0 ) {
         d->m_ui.routeComboBox->setCurrentIndex( 0 );
     }
+
+    d->m_progressTimer.stop();
+    d->m_ui.searchButton->setIcon( QIcon() );
 }
 
 void RoutingWidget::setOpenFileButtonVisible( bool visible )
