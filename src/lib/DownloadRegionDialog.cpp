@@ -33,6 +33,7 @@
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
 #include "MarbleModel.h"
+#include "MarbleWidget.h"
 #include "LatLonBoxWidget.h"
 #include "TileId.h"
 #include "TileLevelRangeWidget.h"
@@ -53,7 +54,7 @@ int averageTileSize = 13; //The average size of a tile in kilobytes
 class DownloadRegionDialog::Private
 {
 public:
-    Private( MarbleModel *const model, QDialog * const dialog );
+    Private( MarbleWidget *const widget, QDialog * const dialog );
     QWidget * createSelectionMethodBox();
     QLayout * createTilesCounter();
     QWidget * createOkCancelButtonBox();
@@ -75,13 +76,14 @@ public:
     QPushButton * m_applyButton;
     int m_visibleTileLevel;
     MarbleModel const*const m_model;
+    MarbleWidget const*const m_widget;
     GeoSceneTexture const * m_textureLayer;
     SelectionMethod m_selectionMethod;
     GeoDataLatLonBox m_visibleRegion;
     RoutingModel *m_routingModel;
 };
 
-DownloadRegionDialog::Private::Private( MarbleModel * const model,
+DownloadRegionDialog::Private::Private( MarbleWidget * const widget,
                                         QDialog * const dialog )
     : m_dialog( dialog ),
       m_visibleRegionMethodButton( 0 ),
@@ -95,12 +97,13 @@ DownloadRegionDialog::Private::Private( MarbleModel * const model,
       m_tileSizeInfo( 0 ),
       m_okButton( 0 ),
       m_applyButton( 0 ),
-      m_visibleTileLevel( model->tileZoomLevel() ),
-      m_model( model ),
-      m_textureLayer( model->textureLayer() ),
+      m_visibleTileLevel( widget->model()->tileZoomLevel() ),
+      m_model( widget->model() ),
+      m_widget( widget ),
+      m_textureLayer( widget->model()->textureLayer() ),
       m_selectionMethod( VisibleRegionMethod ),
       m_visibleRegion(),
-      m_routingModel( model->routingManager()->routingModel() )
+      m_routingModel( widget->model()->routingManager()->routingModel() )
 {
     m_latLonBoxWidget->setEnabled( false );
     m_latLonBoxWidget->setLatLonBox( m_visibleRegion );
@@ -250,10 +253,10 @@ bool DownloadRegionDialog::Private::hasRoute() const
     return false;
 }
 
-DownloadRegionDialog::DownloadRegionDialog( MarbleModel *const model, QWidget * const parent,
+DownloadRegionDialog::DownloadRegionDialog( MarbleWidget *const widget, QWidget * const parent,
                                             Qt::WindowFlags const f )
     : QDialog( parent, f ),
-      d( new Private( model, this ))
+      d( new Private( widget, this ))
 {
     setWindowTitle( tr( "Download Region" ));
     QVBoxLayout * const layout = new QVBoxLayout;

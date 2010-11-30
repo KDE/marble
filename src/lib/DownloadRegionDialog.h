@@ -29,7 +29,7 @@ class QShowEvent;
 namespace Marble
 {
 class GeoDataLatLonAltBox;
-class MarbleModel;
+class MarbleWidget;
 class ViewportParams;
 class MARBLE_EXPORT DownloadRegionDialog: public QDialog
 {
@@ -38,7 +38,7 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
  public:
     enum SelectionMethod { VisibleRegionMethod, SpecifiedRegionMethod, RouteDownloadMethod };
 
-    explicit DownloadRegionDialog( MarbleModel *const model, QWidget * const parent = 0,
+    explicit DownloadRegionDialog( MarbleWidget *const widget, QWidget * const parent = 0,
                                    Qt::WindowFlags const f = 0 );
     ~DownloadRegionDialog();
     void setAllowedTileLevelRange( int const minimumTileLevel,

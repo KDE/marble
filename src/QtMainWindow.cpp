@@ -1136,9 +1136,8 @@ void MainWindow::updateSettings()
 
 void MainWindow::showDownloadRegionDialog()
 {
-    MarbleModel *const model = m_controlView->marbleWidget()->model();
     if ( !m_downloadRegionDialog ) {
-        m_downloadRegionDialog = new DownloadRegionDialog( model, m_controlView );
+        m_downloadRegionDialog = new DownloadRegionDialog( m_controlView->marbleWidget(), m_controlView );
         // it might be tempting to move the connects to DownloadRegionDialog's "accepted" and
         // "applied" signals, be aware that the "hidden" signal might be come before the "accepted"
         // signal, leading to a too early disconnect.
