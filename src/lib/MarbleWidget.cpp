@@ -75,7 +75,7 @@ class MarbleWidgetPrivate
           m_stillQuality( HighQuality ),
           m_animationQuality( LowQuality ),
           m_animationsEnabled( false ),
-          m_zoomStep( 40 ),
+          m_zoomStep( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 80 : 40 ),
           m_inputhandler( 0 ),
           m_physics( new MarblePhysics( parent ) ),
           m_repaintTimer(),
