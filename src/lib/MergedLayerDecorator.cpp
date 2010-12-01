@@ -17,8 +17,6 @@
 
 #include "MergedLayerDecorator.h"
 
-#include <QtGui/QPainter>
-
 #include "SunLocator.h"
 #include "StackedTileLoader.h"
 #include "global.h"
@@ -32,6 +30,11 @@
 #include "StackedTile.h"
 #include "TileLoaderHelper.h"
 #include "Planet.h"
+#include "TileCreator.h"
+#include "TileCreatorDialog.h"
+
+#include <QtGui/QPainter>
+#include <QtCore/QPointer>
 
 using namespace Marble;
 
@@ -57,6 +60,26 @@ void MergedLayerDecorator::initCityLights()
     m_cityLightsTheme = MapThemeManager::loadMapTheme( "earth/citylights/citylights.dgml" );
     if (m_cityLightsTheme) {
         QString cityLightsId = m_cityLightsTheme->head()->theme();
+        GeoSceneLayer* layer = m_cityLightsTheme->map()->layer( cityLightsId );
+        GeoSceneTexture *texture =
+            static_cast<GeoSceneTexture*>( layer->groundDataset() );
+
+        QString sourceDir = texture->sourceDir();
+        QString installMap = texture->installMap();
+        if ( !m_tileLoader->baseTilesAvailable( layer ) ) {
+            TileCreator *tileCreator = new TileCreator(
+                                     sourceDir,
+                                     installMap,
+                                     "false" );
+
+            QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
+            tileCreatorDlg->setSummary( m_cityLightsTheme->head()->name(),
+                                        m_cityLightsTheme->head()->description() );
+            tileCreatorDlg->exec();
+            qDebug("Tile creation completed");
+            delete tileCreatorDlg;
+        }
+
         m_cityLightsTextureLayer = static_cast<GeoSceneTexture*>(
             m_cityLightsTheme->map()->layer( cityLightsId )->datasets().first() );
     }
