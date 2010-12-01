@@ -70,6 +70,7 @@ using namespace Marble;
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent )
         : m_parent( parent ),
+          m_width( 100 ), m_height( 100 ),
           m_persistentTileCacheLimit( 0 ), // No limit
           m_volatileTileCacheLimit( 1024*1024*30 ), // 30 MB
           m_viewAngle( 110.0 )
