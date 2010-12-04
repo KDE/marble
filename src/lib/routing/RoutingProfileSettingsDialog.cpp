@@ -32,6 +32,7 @@ RoutingProfileSettingsDialog::RoutingProfileSettingsDialog( PluginManager *plugi
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
       setMinimumHeight( 480 );
+      m_ui->services->setMinimumWidth( 280 );
       m_ui->gridLayout->removeWidget( m_ui->buttonBox );
       m_ui->buttonBox->setOrientation( Qt::Vertical );
       m_ui->gridLayout->addWidget( m_ui->buttonBox, 1, 1 );
