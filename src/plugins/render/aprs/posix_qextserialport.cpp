@@ -11,6 +11,7 @@
 #include "qextserialport.h"
 #include <QtCore/QMutexLocker>
 #include <QtCore/QDebug>
+#include "aprsconfig.h"
 #ifdef HAVE_SYS_FILIO_H
 #include <sys/filio.h>
 #endif /* HAVE_SYS_FILIO_H */
