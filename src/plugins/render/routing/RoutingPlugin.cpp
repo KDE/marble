@@ -152,7 +152,11 @@ void RoutingPluginPrivate::updateButtonVisibility()
     m_widget.progressBar->setVisible( near );
     m_widget.instructionIconLabel->setVisible( show );
     m_widget.instructionLabel->setVisible( show );
-    m_widget.followingInstructionIconLabel->setVisible( show );
+
+    // m_widget.followingInstructionIconLabel->setVisible( show );
+    // Disabling the next instruction turn icon for now, it seems to confuse first time users.
+    m_widget.followingInstructionIconLabel->setVisible( false );
+
     m_widget.destinationDistanceLabel->setVisible( show );
 
     m_widget.gpsButton->setVisible( !show );
