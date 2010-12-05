@@ -206,7 +206,10 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
     }
 
     // Paint the GeoDataPlacemark layer
-    bool showPlaces, showCities, showTerrain, showOtherPlaces;
+    bool showPlaces = false;
+    bool showCities = false;
+    bool showTerrain = false;
+    bool showOtherPlaces = false;
 
     m_viewParams.propertyValue( "places", showPlaces );
     m_viewParams.propertyValue( "cities", showCities );
