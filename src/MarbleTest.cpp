@@ -51,11 +51,11 @@ void MarbleTest::timeDemo()
 */
 
         for ( int k = 0; k < 10; ++k ) {
-            m_marbleWidget->moveRight();
+            m_marbleWidget->moveRight( Instant );
             QCoreApplication::flush();
         }
         for ( int k = 0; k < 10; ++k ) {
-            m_marbleWidget->moveLeft();
+            m_marbleWidget->moveLeft( Instant );
             QCoreApplication::flush();
         }
 
@@ -65,11 +65,11 @@ void MarbleTest::timeDemo()
 
     for ( int j = 0; j < 10; ++j ) {
         for ( int k = 0; k < 10; ++k ) {
-            m_marbleWidget->moveRight();
+            m_marbleWidget->moveRight( Instant );
             QCoreApplication::flush();
         }
         for ( int k = 0; k < 10; ++k ) {
-            m_marbleWidget->moveLeft();
+            m_marbleWidget->moveLeft( Instant );
             QCoreApplication::flush();
         }
     }
