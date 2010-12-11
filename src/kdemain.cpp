@@ -95,6 +95,12 @@ int main ( int argc, char *argv[] )
     aboutData.addAuthor( ki18n( "Dennis Nienhüser" ),
                          ki18n( "Routing" ),
                          "earthwings@gentoo.org" );
+    aboutData.addAuthor( ki18n( "Thibaut Gridel" ),
+                         ki18n( "Geodata" ),
+                         "tgridel@free.fr" );
+    aboutData.addAuthor( ki18n( "Bernhard Beschow" ),
+                         ki18n( "WMS Support" ),
+                         "bbeschow@cs.tu-berlin.de" );
     aboutData.addAuthor( ki18n( "Magnus Valle" ),
                          ki18n( "Historical Maps" ),
                          "" );

@@ -113,6 +113,10 @@ void MarbleAboutDialog::loadPageContents( int idx )
            "<i>APRS Plugin</i></p>")+
         tr("<p>Dennis Nienh&uuml;ser <a href=\"mailto:earthwings@gentoo.org\">earthwings@gentoo.org</a><br />"
            "<i>Routing</i></p>")+
+        tr("<p>Thibaut Gridel <a href=\"mailto:tgridel@free.fr\">tgridel@free.fr</a><br />"
+           "<i>Geodata</i></p>")+
+        tr("<p>Bernhard Beschow <a href=\"mailto:bbeschow@cs.tu-berlin.de\">bbeschow@cs.tu-berlin.de</a><br />"
+           "<i>WMS Support</i></p>")+
         tr("<b>Join us</b>")+
         tr("<p>You can reach the developers of the Marble Project at <a href=\"mailto:marble-devel@kde.org\">marble-devel@kde.org</a></p>")+
         tr("<b>Google Summer of Code</b>")+
