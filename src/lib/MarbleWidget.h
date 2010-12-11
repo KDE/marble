@@ -1058,18 +1058,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
       */
     void changeEvent( QEvent * event );
 
-private Q_SLOTS:
-    /**
-      * @brief Switch to still mode when an animation is finished
-      */
-    void startStillMode();
-
-    /**
-      * @brief Updates zoom and position during animations
-      * @see flyTo
-      */
-    void updateAnimation( const GeoDataLookAt &lookAt );
-
  private:
     Q_DISABLE_COPY( MarbleWidget )
     MarbleWidgetPrivate  * const d;

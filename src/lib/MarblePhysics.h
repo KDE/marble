@@ -19,7 +19,7 @@ namespace Marble
 {
 
 class MarblePhysicsPrivate;
-class ViewportParams;
+class MarbleWidget;
 
 class MarblePhysics : public QObject
 {
@@ -28,47 +28,33 @@ class MarblePhysics : public QObject
  public:
     /**
       * @brief Constructor
-      * parent Pointer to the parent object
+      * @param widget the MarbleWidget that is being animated
       */
-    explicit MarblePhysics( QObject * parent = 0);
-    
+    explicit MarblePhysics( MarbleWidget *widget );
+
     /**
       * @brief Destructor
       */
     ~MarblePhysics();
 
     /**
-      * @brief Calculate an interpolation between source and target according
-      * to the given mode
-      * @param source Camera position indicating the start point of the interpolation
-      * @param target Camera position indicating the target point of the interpolation
-      * @param mode Interpolation (animation) mode. Instant means no interpolation.
-      * @see positionReached
+      * @brief Initiate an animation to the target according to the given mode.
+      * @param target camera position indicating the target of the animation
+      * @param mode animation mode; @code Instant @endcode means no animation
       */
-    void flyTo( const GeoDataLookAt &source, const GeoDataLookAt &target,
-                ViewportParams *viewport, FlyToMode mode = Instant );
-
- Q_SIGNALS:
-    /**
-      * Emitted for each interpolation point between source and target after
-      * flyTo was called.
-      * @param position Interpolated or final camera position
-      * @see flyTo
-      */
-    void positionReached( const GeoDataLookAt position );
-
-    /**
-      * The target was reached.
-      * @see flyTo
-      */
-    void finished();
+    void flyTo( const GeoDataLookAt &target, FlyToMode mode = Instant );
 
 private Q_SLOTS:
     void updateProgress(qreal progress);
-    
+
+    /**
+      * @brief Switch to still mode when an animation is finished
+      */
+    void startStillMode();
+
  private:
     Q_DISABLE_COPY( MarblePhysics )
-    
+
     MarblePhysicsPrivate* d;
 };
 

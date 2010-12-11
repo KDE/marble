@@ -236,12 +236,6 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( m_model->sunLocator(), SIGNAL( updateStars() ),
                        m_widget, SLOT( update() ) );
 
-    m_widget->connect( m_physics, SIGNAL( positionReached( GeoDataLookAt ) ),
-                       m_widget, SLOT( updateAnimation( GeoDataLookAt ) ) );
-
-    m_widget->connect( m_physics, SIGNAL( finished() ),
-                       m_widget, SLOT( startStillMode() ) );
-
     m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
                        m_widget, SLOT( centerSun() ) );
 
@@ -1131,6 +1125,9 @@ ViewContext MarbleWidget::viewContext() const
 
 void MarbleWidget::setViewContext( ViewContext viewContext )
 {
+    if ( d->m_viewContext == viewContext )
+        return;
+
     d->m_viewContext = viewContext;
 
     if ( viewContext == Still )
@@ -1319,8 +1316,7 @@ void MarbleWidget::flyTo( const GeoDataLookAt &newLookAt, FlyToMode mode )
         d->repaint();
     }
     else {
-        setViewContext( Marble::Animation );
-        d->m_physics->flyTo( lookAt(), newLookAt, viewport(), mode );
+        d->m_physics->flyTo( newLookAt, mode );
     }
 }
 
@@ -1332,19 +1328,6 @@ void MarbleWidget::reloadMap()
 void MarbleWidget::downloadRegion( QString const & sourceDir, QVector<TileCoordsPyramid> const & pyramid )
 {
     d->m_map->downloadRegion( sourceDir, pyramid );
-}
-
-void MarbleWidget::updateAnimation( const GeoDataLookAt &lookAt )
-{
-    setViewContext( Marble::Animation );
-    d->m_map->flyTo( lookAt );
-    d->repaint();
-}
-
-void MarbleWidget::startStillMode()
-{
-    setViewContext( Marble::Still );
-    d->repaint();
 }
 
 GeoDataLookAt MarbleWidget::lookAt() const

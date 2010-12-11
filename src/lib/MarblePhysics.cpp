@@ -11,6 +11,7 @@
 #include "MarblePhysics.h"
 
 #include "Quaternion.h"
+#include "MarbleWidget.h"
 #include "MarbleDebug.h"
 #include "GeoDataLineString.h"
 #include "ViewportParams.h"
@@ -23,17 +24,22 @@ namespace Marble
 
 class MarblePhysicsPrivate {
 public:
+    MarbleWidget *const m_widget;
+
     GeoDataLookAt m_source;
-    
+
     GeoDataLookAt m_target;
-    
+
     FlyToMode m_mode;
-    
+
     QTimeLine m_timeline;
 
     qreal m_planetRadius;
-    
-    MarblePhysicsPrivate() : m_mode(Instant), m_planetRadius(EARTH_RADIUS)
+
+    MarblePhysicsPrivate( MarbleWidget *widget )
+        : m_widget( widget ),
+          m_mode( Instant ),
+          m_planetRadius( EARTH_RADIUS )
     {
         m_timeline.setDuration(2000);
         m_timeline.setCurveShape( QTimeLine::EaseInOutCurve );
@@ -42,17 +48,17 @@ public:
     void suggestedPos(qreal t, qreal &lon, qreal &lat) const
     {
         Q_ASSERT( 0 <= t && t <= 1.0 );
-        
+
         Quaternion  itpos;    
         GeoDataCoordinates sourcePosition(m_source.longitude(), m_source.latitude());
         GeoDataCoordinates targetPosition(m_target.longitude(), m_target.latitude());
-        
+
         // Spherical interpolation for current position between source position
         // and target position. We can't use Nlerp here, as the "t-velocity" needs to be constant.
         itpos.slerp( sourcePosition.quaternion(), targetPosition.quaternion(), t );
         itpos.getSpherical( lon, lat );
     }
-    
+
     qreal totalDistance() const
     {
         GeoDataLineString measure;
@@ -61,16 +67,16 @@ public:
         measure << sourcePosition << targetPosition;
         return measure.length(m_planetRadius);
     }
-    
+
     qreal suggestedRange(qreal t) const
     {
         Q_ASSERT( m_mode == Linear || m_mode == Jump);
         Q_ASSERT( 0 <= t && t <= 1.0 );
-        
+
         if (m_mode == Linear) {
             qreal in = m_source.range();
             qreal out = m_target.range();
-            
+
             return in + t * (out-in);
         }
         else if (m_mode == Jump) {
@@ -82,15 +88,15 @@ public:
             qreal d = t > 0.5 ? m_source.range() - g : m_target.range() - g; // Base difference
             qreal c = d * 2 * qAbs(t - 0.5); // Correction factor
             qreal h = qMin(1000*3000.0, totalDistance() / 2.0); // Jump height
-        
+
             // Parameters for the parabolic function that has the maximum at
             // the point H ( 0.5 * m_jumpDuration, g + h )
             qreal a = - h / ( (qreal)( 0.25 * jumpDuration * jumpDuration ) );
             qreal b = 2.0 * h / (qreal)( 0.5 * jumpDuration );
-        
+
             qreal x = jumpDuration * t;
             qreal y = ( a * x + b ) * x + k - c;       // Parabolic function
-        
+
             return y;
         }
         else {
@@ -99,15 +105,16 @@ public:
         }
     }
 };
-        
 
-MarblePhysics::MarblePhysics( QObject * parent )
-    : QObject( parent ), d(new MarblePhysicsPrivate)
+
+MarblePhysics::MarblePhysics( MarbleWidget *widget )
+    : QObject( widget ),
+      d( new MarblePhysicsPrivate( widget ) )
 {
     connect( &d->m_timeline, SIGNAL( valueChanged( qreal ) ),
              this, SLOT( updateProgress( qreal ) ) );
     connect( &d->m_timeline, SIGNAL( finished() ),
-             this, SIGNAL( finished() ) );
+             this, SLOT( startStillMode() ) );
 }
 
 MarblePhysics::~MarblePhysics()
@@ -115,12 +122,12 @@ MarblePhysics::~MarblePhysics()
     delete d;
 }
 
-void MarblePhysics::flyTo( const GeoDataLookAt &source, const GeoDataLookAt &target,
-                           ViewportParams *viewport, FlyToMode mode )
+void MarblePhysics::flyTo( const GeoDataLookAt &target, FlyToMode mode )
 {
     d->m_timeline.stop();
-    d->m_source = source;
+    d->m_source = d->m_widget->lookAt();
     d->m_target = target;
+    const ViewportParams *viewport = d->m_widget->viewport();
 
     FlyToMode effectiveMode = mode;
     qreal x(0), y(0);
@@ -133,7 +140,7 @@ void MarblePhysics::flyTo( const GeoDataLookAt &source, const GeoDataLookAt &tar
 
     if (effectiveMode == Automatic)
     {
-        bool zoom = qAbs(source.range()-target.range()) > 10;
+        bool zoom = qAbs(d->m_source.range()-target.range()) > 10;
 
         if ( (invisible || zoom) ) {
             effectiveMode = Jump;
@@ -147,8 +154,7 @@ void MarblePhysics::flyTo( const GeoDataLookAt &source, const GeoDataLookAt &tar
     switch(effectiveMode)
     {
     case Instant:
-        emit positionReached(target);
-        emit finished();
+        d->m_widget->flyTo( target, Instant );
         return;
         break;
     case Linear:
@@ -166,7 +172,7 @@ void MarblePhysics::flyTo( const GeoDataLookAt &source, const GeoDataLookAt &tar
         Q_ASSERT(false);
         break;
     }
-            
+
     d->m_timeline.start();
 }
 
@@ -177,22 +183,29 @@ void MarblePhysics::updateProgress(qreal progress)
 
     if (progress >= 1.0)
     {
-        emit positionReached(d->m_target);
+        d->m_widget->flyTo( d->m_target, Instant );
+        d->m_widget->setViewContext( Marble::Still );
         return;
     }
-    
+
     Q_ASSERT(progress >= 0.0 && progress < 1.0);
     qreal lon(0.0), lat(0.0);
     d->suggestedPos(progress, lon, lat);
     qreal range = d->suggestedRange(progress);
-    
+
     GeoDataLookAt intermediate;
     intermediate.setLongitude(lon, GeoDataCoordinates::Radian);
     intermediate.setLatitude(lat, GeoDataCoordinates::Radian);
     intermediate.setAltitude(0.0);
     intermediate.setRange(range);
-    
-    emit positionReached(intermediate);
+
+    d->m_widget->setViewContext( Marble::Animation );
+    d->m_widget->flyTo( intermediate, Instant );
+}
+
+void MarblePhysics::startStillMode()
+{
+    d->m_widget->setViewContext( Marble::Still );
 }
 
 }
