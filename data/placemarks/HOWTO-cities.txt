@@ -4,9 +4,16 @@ As a translator please just edit cities.txt! If you edit the KML file directly y
 All other steps are optional and can be done by one of our programmers:
 
 1. Compile marble/tools/asc2kml by executing "qmake-qt4 && make"
+
 2. Then execute the resulting binary:
 
 tackat@tackat-laptop:~/marble/tools/asc2kml$ ./asc2kml -o ~/marble/data/placemarks/cityplacemarks.kml ~/marble/data/placemarks/cities.txt  ~/marble/data/placemarks/statecodes.txt ~/marble/data/placemarks/timeZones.txt
+
+If you're interested only in the n cities with the highest population, you can generate a modified cities.txt like this (here n=1000):
+
+tackat@tackat-laptop:~$ sort -t"$(echo -e "\t")" -n -k 15 cities.txt | tail -n 1000 > cities_largest_1000.txt
+
+Then use cities_largest_1000.txt instead of cities.txt in the asc2kml call above.
 
 3. Create the placemark-directory in your home directory if it doesn't exist already.
 
