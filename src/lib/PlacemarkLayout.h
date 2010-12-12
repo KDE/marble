@@ -65,10 +65,6 @@ class PlacemarkLayout : public QObject
      *
      * @param painter The painter that is used for painting.
      * @param viewParams Parameters that influence the painting.
-     * @param placemarkModel The PlacemarkModel or a proxy model on top of it.
-     * @param selectionModel The selection model for the PlacemarkModel.
-     * @param planetAxis The position of the planet axis.
-     * @param firstTime Whether the map is painted the first time.
      */
     void paintPlaceFolder( QPainter *painter, ViewParams *viewParams );
 
@@ -87,8 +83,6 @@ class PlacemarkLayout : public QObject
      * Returns a list of model indexes that are at position @p pos.
      */
     QVector<QModelIndex> whichPlacemarkAt( const QPoint &pos );
-
-    PlacemarkPainter* placemarkPainter() const;
 
  public Q_SLOTS:
 

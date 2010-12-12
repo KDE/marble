@@ -339,9 +339,6 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme )
     d->notifyModelChanged();
 
 
-    // FIXME: Still needs to get fixed for the DGML2 refactoring
-//    d->m_placemarkLayout->placemarkPainter()->setDefaultLabelColor( d->m_maptheme->labelColor() );
-
     mDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
     emit themeChanged( mapTheme->head()->mapThemeId() );
 

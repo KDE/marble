@@ -147,11 +147,6 @@ QVector<QModelIndex> PlacemarkLayout::whichPlacemarkAt( const QPoint& curpos )
     return ret;
 }
 
-PlacemarkPainter* PlacemarkLayout::placemarkPainter() const
-{ 
-    return m_placemarkPainter; 
-}
-
 int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
                                      const QItemSelectionModel* selectionModel ) const
 {
