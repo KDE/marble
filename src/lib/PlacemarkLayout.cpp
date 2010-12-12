@@ -147,14 +147,13 @@ QVector<QModelIndex> PlacemarkLayout::whichPlacemarkAt( const QPoint& curpos )
     return ret;
 }
 
-int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
-                                     const QItemSelectionModel* selectionModel ) const
+int PlacemarkLayout::maxLabelHeight() const
 {
     mDebug() << "Detecting maxLabelHeight ...";
 
     int maxLabelHeight = 0;
 
-    const QModelIndexList selectedIndexes = selectionModel->selection().indexes();
+    const QModelIndexList selectedIndexes = m_selectionModel->selection().indexes();
 
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
@@ -166,8 +165,8 @@ int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
             maxLabelHeight = textHeight; 
     }
 
-    for ( int i = 0; i < model->rowCount(); ++i ) {
-        QModelIndex index = model->index( i, 0 );
+    for ( int i = 0; i < m_placemarkModel->rowCount(); ++i ) {
+        QModelIndex index = m_placemarkModel->index( i, 0 );
         GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
         GeoDataStyle* style = placemark->style();
         QFont labelFont = style->labelStyle().font();
@@ -193,7 +192,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         m_styleResetRequested = false;
         styleReset();
 
-        m_maxLabelHeight = maxLabelHeight( m_placemarkModel, m_selectionModel );
+        m_maxLabelHeight = maxLabelHeight();
     }
     const int   secnumber         = imgheight / m_maxLabelHeight + 1;
 

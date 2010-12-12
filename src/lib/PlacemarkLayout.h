@@ -76,8 +76,7 @@ class PlacemarkLayout : public QObject
      * just traverse all existing styles. 
      */
 
-    int maxLabelHeight( const QAbstractItemModel* model,
-                        const QItemSelectionModel* selectionModel ) const;
+    int maxLabelHeight() const;
 
     /**
      * Returns a list of model indexes that are at position @p pos.
