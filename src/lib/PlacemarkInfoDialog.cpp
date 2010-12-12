@@ -23,6 +23,7 @@
 
 #include "DeferredFlag.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataExtendedData.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
 
@@ -59,6 +60,9 @@ void PlacemarkInfoDialog::showMessage( const QString& text )
 
 void PlacemarkInfoDialog::showContent()
 {
+    GeoDataPlacemark *placemark
+            = static_cast<GeoDataPlacemark*>(qVariantValue<GeoDataObject*>( m_index.model()->data(m_index, MarblePlacemarkModel::ObjectPointerRole ) ) );
+
     elevation_lbl->setVisible( true );
     elevation_val_lbl->setVisible( true );
     population_lbl->setText( tr("Population:") );
@@ -67,7 +71,7 @@ void PlacemarkInfoDialog::showContent()
     name_val_lbl->setText( "<H1><b>" + m_index.data().toString() + "</b></H1>" );
     altername_val_lbl->setText( "" );
     QString  rolestring;
-    const QString role = m_index.data( MarblePlacemarkModel::GeoTypeRole ).toString();
+    const QString role = placemark->role();
      if(role=="PPLC")
         rolestring = tr("National Capital");
     else if(role=="PPL")
@@ -84,7 +88,7 @@ void PlacemarkInfoDialog::showContent()
         rolestring = tr("Location");
     else if(role=="H")
     {    
-        if ( m_index.data( MarblePlacemarkModel::PopularityRole ).toInt() > 0 )
+        if ( placemark->popularity() > 0 )
             rolestring = tr("Mountain");
         else
             rolestring = tr("Elevation extreme");
@@ -113,10 +117,10 @@ void PlacemarkInfoDialog::showContent()
     role_val_lbl->setText( rolestring );
 
     m_flagcreator = new DeferredFlag( this );
-    requestFlag( m_index.data( MarblePlacemarkModel::CountryCodeRole ).toString() );
+    requestFlag( placemark->countryCode() );
 
 
-    const QString description = m_index.data( MarblePlacemarkModel::DescriptionRole ).toString();
+    const QString description = placemark->description();
 
     description_val_browser->setEnabled( false );
     if ( !description.isEmpty() )
@@ -124,16 +128,16 @@ void PlacemarkInfoDialog::showContent()
         description_val_browser->setEnabled( true );
         description_val_browser->setHtml( description );
     }
-    coordinates_val_lbl->setText( m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>().toString() );
-    country_val_lbl->setText( m_index.data( MarblePlacemarkModel::CountryCodeRole ).toString() );
-    QString gmt = QString( "%1" ).arg( m_index.data( MarblePlacemarkModel::GmtRole ).toInt()/( double ) 100, 0, 'f', 1 );
-    QString dst = QString( "%1" ).arg( ( m_index.data( MarblePlacemarkModel::GmtRole ).toInt() + m_index.data( MarblePlacemarkModel::DstRole ).toInt() )/( double ) 100, 0, 'f', 1 );
+    coordinates_val_lbl->setText( placemark->coordinate().toString() );
+    country_val_lbl->setText( placemark->countryCode() );
+    QString gmt = QString( "%1" ).arg( placemark->extendedData().value("gmt").value().toInt()/( double ) 100, 0, 'f', 1 );
+    QString dst = QString( "%1" ).arg( ( placemark->extendedData().value("gmt").value().toInt() + placemark->extendedData().value("dst").value().toInt() )/( double ) 100, 0, 'f', 1 );
     gmtdst_val_lbl->setText( gmt + " / " + dst );
-    state_val_lbl->setText( m_index.data( MarblePlacemarkModel::StateRole ).toString() );
+    state_val_lbl->setText( placemark->state() );
 
-    const qint64 population = m_index.data( MarblePlacemarkModel::PopulationRole ).toLongLong();
-    const qreal area = m_index.data( MarblePlacemarkModel::AreaRole ).toDouble();
-    const qreal altitude = m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>().altitude();
+    const qint64 population = placemark->population();
+    const qreal area = placemark->area();
+    const qreal altitude = placemark->coordinate().altitude();
 
     area_lbl->setText( tr("Area:") );
     if ( area < 10000000 )
@@ -203,7 +207,7 @@ void PlacemarkInfoDialog::showContent()
         state_lbl->setVisible( false );
         state_val_lbl->setVisible( false );
     }
-    if ( (role == "a" || role == "c" || role == "m") && m_index.data( MarblePlacemarkModel::PopularityRole ).toInt() > 0) {
+    if ( (role == "a" || role == "c" || role == "m") && placemark->popularity() > 0) {
         diameter_lbl->setVisible( true );
         diameter_val_lbl->setVisible( true );
         gmtdst_lbl->setVisible( false );
