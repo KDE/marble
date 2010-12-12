@@ -196,6 +196,10 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
 
         m_maxLabelHeight = maxLabelHeight();
     }
+
+    if ( m_maxLabelHeight == 0 ) {
+        return;
+    }
     const int   secnumber         = imgheight / m_maxLabelHeight + 1;
 
     //Quaternion  inversePlanetAxis = viewParams->m_planetAxis.inverse();
