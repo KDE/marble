@@ -38,7 +38,8 @@ const QString VisiblePlacemark::name() const
 
 const QPixmap& VisiblePlacemark::symbolPixmap() const
 {
-    GeoDataStyle* style = qvariant_cast<GeoDataStyle*>( m_modelIndex.data( MarblePlacemarkModel::StyleRole ) );
+    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(m_modelIndex.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+    GeoDataStyle* style = placemark->style();
     if ( style ) {
         m_symbolPixmap = style->iconStyle().icon(); 
     } else {

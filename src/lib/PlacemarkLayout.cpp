@@ -163,7 +163,8 @@ int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
 
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
-        GeoDataStyle* style = qvariant_cast<GeoDataStyle*>( index.data( MarblePlacemarkModel::StyleRole ) );
+        GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+        GeoDataStyle* style = placemark->style();
         QFont labelFont = style->labelStyle().font();
         int textHeight = QFontMetrics( labelFont ).height();
         if ( textHeight > maxLabelHeight )
@@ -172,8 +173,8 @@ int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
 
     for ( int i = 0; i < model->rowCount(); ++i ) {
         QModelIndex index = model->index( i, 0 );
-
-        GeoDataStyle* style = qvariant_cast<GeoDataStyle*>( index.data( MarblePlacemarkModel::StyleRole ) );
+        GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+        GeoDataStyle* style = placemark->style();
         QFont labelFont = style->labelStyle().font();
         int textHeight = QFontMetrics( labelFont ).height();
         if ( textHeight > maxLabelHeight ) 
@@ -238,14 +239,13 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
 
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
-
-        GeoDataGeometry *geometry
-                = qvariant_cast<GeoDataGeometry*>( index.data( MarblePlacemarkModel::GeometryRole ) );
+        GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+        GeoDataGeometry *geometry = placemark->geometry();
         if( !dynamic_cast<GeoDataPoint*>(geometry) ) {
             continue;
         }
 
-        GeoDataCoordinates geopoint = qvariant_cast<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
+        GeoDataCoordinates geopoint = placemark->coordinate();
 
         if ( !latLonAltBox.contains( geopoint ) ||
              ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
@@ -261,7 +261,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         // Find the corresponding visible placemark
         VisiblePlacemark *mark = m_visiblePlacemarks.value( index );
 
-        GeoDataStyle* style = qvariant_cast<GeoDataStyle*>( index.data( MarblePlacemarkModel::StyleRole ) );
+        GeoDataStyle* style = placemark->style();
 
         // Specify font properties
         if ( mark ) {
@@ -271,7 +271,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
             QFont labelFont = style->labelStyle().font();
             labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size; 
 
-            textWidth = ( QFontMetrics( labelFont ).width( index.data( Qt::DisplayRole ).toString() )
+            textWidth = ( QFontMetrics( labelFont ).width( placemark->name() )
                   + (int)( 2 * s_labelOutlineWidth ) );
         }
 
@@ -334,14 +334,15 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
             continue;
         }
 
-        GeoDataGeometry *geometry
-                = qvariant_cast<GeoDataGeometry*>( index.data( MarblePlacemarkModel::GeometryRole ) );
+        GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+        GeoDataGeometry *geometry = placemark->geometry();
         if( !dynamic_cast<GeoDataPoint*>(geometry) ) {
             continue;
         }
 
-        int popularityIndex = index.data( MarblePlacemarkModel::PopularityIndexRole ).toInt();
+        int popularityIndex = placemark->popularityIndex();
 
+        
         if ( popularityIndex < 1 ) {
             break;
         }
@@ -351,7 +352,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
             break;
         }
 
-        GeoDataCoordinates geopoint = qvariant_cast<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
+        GeoDataCoordinates geopoint = placemark->coordinate();
 
         if ( !latLonAltBox.contains( geopoint ) ||
              ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
@@ -360,7 +361,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
                 continue;
             }
 
-        const int visualCategory  = index.data( MarblePlacemarkModel::VisualCategoryRole ).toInt();
+        const int visualCategory  = placemark->visualCategory();
 
         // Skip city marks if we're not showing cities.
         if ( !showCities
@@ -411,7 +412,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
 
         // Find the corresponding visible placemark
         VisiblePlacemark *mark = m_visiblePlacemarks.value( index );
-        GeoDataStyle* style = qvariant_cast<GeoDataStyle*>( index.data( MarblePlacemarkModel::StyleRole ) );
+        GeoDataStyle* style = placemark->style();
 
         // Specify font properties
         if ( mark ) {
@@ -419,7 +420,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         }
         else {
             QFont labelFont = style->labelStyle().font();
-            textWidth = ( QFontMetrics( labelFont ).width( index.data( Qt::DisplayRole ).toString() ) );
+            textWidth = ( QFontMetrics( labelFont ).width( placemark->name() ) );
         }
 
         // Choose Section
