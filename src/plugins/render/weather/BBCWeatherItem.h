@@ -21,6 +21,8 @@ namespace Marble
 
 class BBCWeatherItem : public WeatherItem
 {
+    Q_OBJECT
+
  public:
     BBCWeatherItem( QObject *parent = 0 );
     ~BBCWeatherItem();
