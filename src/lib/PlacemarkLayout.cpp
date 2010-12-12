@@ -168,11 +168,13 @@ int PlacemarkLayout::maxLabelHeight() const
     for ( int i = 0; i < m_placemarkModel->rowCount(); ++i ) {
         QModelIndex index = m_placemarkModel->index( i, 0 );
         GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
-        GeoDataStyle* style = placemark->style();
-        QFont labelFont = style->labelStyle().font();
-        int textHeight = QFontMetrics( labelFont ).height();
-        if ( textHeight > maxLabelHeight ) 
-            maxLabelHeight = textHeight; 
+        if ( placemark ) {
+            GeoDataStyle* style = placemark->style();
+            QFont labelFont = style->labelStyle().font();
+            int textHeight = QFontMetrics( labelFont ).height();
+            if ( textHeight > maxLabelHeight )
+                maxLabelHeight = textHeight;
+        }
     }
 
     //mDebug() <<"Detected maxLabelHeight: " << maxLabelHeight;
