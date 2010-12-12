@@ -63,11 +63,15 @@ void FileViewWidget::setMarbleWidget( MarbleWidget *widget )
              widget->fileViewModel(),       SLOT( saveFile() ) );
     connect( d->m_fileViewUi.m_closeButton, SIGNAL( clicked() ) ,
              widget->fileViewModel(),    SLOT( closeFile() ) );
+
     d->m_treeSortProxy = new QSortFilterProxyModel( this );
     d->m_treeSortProxy->setSourceModel( widget->model()->treeModel() );
     d->m_treeSortProxy->setDynamicSortFilter( true );
     d->m_fileViewUi.m_treeView->setModel( d->m_treeSortProxy );
     d->m_fileViewUi.m_treeView->setSortingEnabled( true );
+    d->m_fileViewUi.m_treeView->sortByColumn( 0, Qt::AscendingOrder );
+    d->m_fileViewUi.m_treeView->resizeColumnToContents( 0 );
+    d->m_fileViewUi.m_treeView->resizeColumnToContents( 1 );
     connect( d->m_fileViewUi.m_treeView, SIGNAL( activated( QModelIndex ) ),
              this, SLOT( mapCenterOnTreeViewModel( QModelIndex ) ) );
 }
