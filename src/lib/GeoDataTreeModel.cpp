@@ -28,6 +28,7 @@
 #include "FileManager.h"
 #include "KmlFileViewItem.h"
 #include "MarbleDebug.h"
+#include "MarblePlacemarkModel.h"
 
 using namespace Marble;
 
@@ -223,6 +224,8 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
         GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
         if ( feature )
             return QVariant(feature->style()->iconStyle().icon());
+    } else if ( role == MarblePlacemarkModel::ObjectPointerRole ) {
+        return qVariantFromValue( object );
     }
 
     return QVariant();
