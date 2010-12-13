@@ -67,6 +67,7 @@
 #include "ViewportParams.h"
 
 using namespace Marble;
+/* TRANSLATOR Marble::MarbleMap */
 
 #ifdef Q_CC_MSVC
 # ifndef KDEWIN_MATH_H

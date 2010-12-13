@@ -29,6 +29,7 @@
 #include <QtGui/QPushButton>
 
 using namespace Marble;
+/* TRANSLATOR Marble::WeatherPlugin */
 
 const quint32 numberOfStationsPerFetch = 20;
 

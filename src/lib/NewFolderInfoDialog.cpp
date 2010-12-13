@@ -15,6 +15,7 @@
 #include <QtGui/QLineEdit>
 
 using namespace Marble;
+/* TRANSLATOR Marble::NewFolderInfoDialog */
 
 NewFolderInfoDialog::NewFolderInfoDialog(MarbleWidget *parent)
     : QDialog(parent), m_widget(parent)

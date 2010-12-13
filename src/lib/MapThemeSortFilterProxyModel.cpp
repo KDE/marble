@@ -13,6 +13,7 @@
 #include <QtCore/QString>
 
 using namespace Marble;
+/* TRANSLATOR Marble::MapThemeSortFilterProxyModel */
 
 MapThemeSortFilterProxyModel::MapThemeSortFilterProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)

@@ -20,6 +20,7 @@
 #include "MarbleDebug.h"
 
 using namespace Marble;
+/* TRANSLATOR Marble::TimeControlWidget */
 
 TimeControlWidget::TimeControlWidget( MarbleClock* clock, QWidget* parent )
     : QDialog( parent ),

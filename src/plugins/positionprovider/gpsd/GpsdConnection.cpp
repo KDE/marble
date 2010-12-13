@@ -15,6 +15,7 @@
 #include <errno.h>
 
 using namespace Marble;
+/* TRANSLATOR Marble::GpsdConnection */
 
 GpsdConnection::GpsdConnection( QObject* parent )
     : QObject( parent ),

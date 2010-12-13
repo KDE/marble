@@ -26,6 +26,7 @@
 #include "TinyWebBrowser.h"
 
 using namespace Marble;
+/* TRANSLATOR Marble::WikipediaItem */
 
 // The Wikipedia icon is not a square
 const QRect wikiIconRect( 0, 0, 32, 27 );

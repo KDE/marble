@@ -23,6 +23,7 @@
 #include <QtGui/QLabel>
 
 using namespace Marble;
+/* TRANSLATOR Marble::WikipediaPlugin */
 
 const quint32 maximumNumberOfItems = 99;
 

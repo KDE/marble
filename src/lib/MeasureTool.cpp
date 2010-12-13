@@ -34,6 +34,7 @@
 #include "global.h"
 
 using namespace Marble;
+/* TRANSLATOR Marble::MeasureTool */
 
 MeasureTool::MeasureTool( MarbleModel *model, QObject* parent )
     : QObject( parent ),

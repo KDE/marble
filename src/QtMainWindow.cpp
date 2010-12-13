@@ -81,6 +81,7 @@ namespace
 }
 
 using namespace Marble;
+/* TRANSLATOR Marble::MainWindow */
 
 MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
         QMainWindow(parent),

@@ -26,6 +26,8 @@
 #include "routing/RoutingManager.h"
 
 using namespace Marble;
+/* TRANSLATOR Marble::CurrentLocationWidget */
+
 // Ui
 #include "ui_CurrentLocationWidget.h"
 

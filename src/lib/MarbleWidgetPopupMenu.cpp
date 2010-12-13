@@ -36,6 +36,7 @@
 #include <QtGui/QMessageBox>
 
 using namespace Marble;
+/* TRANSLATOR Marble::MarbleWidgetPopupMenu */
 
 MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget, 
                                          MarbleModel *model)

@@ -28,6 +28,7 @@
 #include "MarblePlacemarkModel.h"
 
 using namespace Marble;
+/* TRANSLATOR Marble::PlacemarkInfoDialog */
 
 PlacemarkInfoDialog::PlacemarkInfoDialog(const QPersistentModelIndex &index, QWidget *parent)
     : QDialog(parent), m_index(index)

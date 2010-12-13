@@ -15,6 +15,8 @@
 namespace Marble
 {
 
+/** @todo FIXME after freeze: Rename to AddBookmarkFolderDialog*/
+
 class MARBLE_EXPORT NewFolderInfoDialog : public QDialog, private Ui::NameDialog
 {
 

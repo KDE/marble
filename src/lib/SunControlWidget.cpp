@@ -22,6 +22,7 @@
 #include "MarbleDebug.h"
 
 using namespace Marble;
+/* TRANSLATOR Marble::SunControlWidget */
 
 SunControlWidget::SunControlWidget( SunLocator* sunLocator, QWidget* parent )
     : QDialog( parent ),

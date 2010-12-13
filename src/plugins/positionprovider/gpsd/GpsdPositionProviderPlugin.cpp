@@ -15,6 +15,8 @@
 #include <math.h>
 
 using namespace Marble;
+/* TRANSLATOR Marble::GpsdPositionProviderPlugin */
+
 using namespace std;
 
 QString GpsdPositionProviderPlugin::name() const

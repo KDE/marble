@@ -26,6 +26,7 @@
 #include "MarbleGraphicsGridLayout.h"
 
 using namespace Marble;
+/* TRANSLATOR Marble::NavigationFloatItem */
 
 const int defaultMinZoom = 900;
 const int defaultMaxZoom = 2400;

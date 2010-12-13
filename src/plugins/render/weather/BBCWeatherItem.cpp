@@ -22,6 +22,7 @@
 #include <QtCore/QUrl>
 
 using namespace Marble;
+/* TRANSLATOR Marble::BBCWeatherItem */
 
 BBCWeatherItem::BBCWeatherItem( QObject *parent )
     : WeatherItem( parent ),

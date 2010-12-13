@@ -27,6 +27,7 @@
 #include <QtGui/QStandardItem>
 
 using namespace Marble;
+/* TRANSLATOR Marble::PluginItemDelegate */
 
 const QSize iconSize( 16, 16 );
 

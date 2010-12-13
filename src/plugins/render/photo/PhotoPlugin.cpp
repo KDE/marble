@@ -17,6 +17,7 @@
 #include "MarbleDebug.h"
 
 using namespace Marble;
+/* TRANSLATOR Marble::PhotoPlugin */
 
 PhotoPlugin::PhotoPlugin()
     : m_isInitialized( false )

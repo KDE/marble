@@ -43,7 +43,7 @@
 #include "AbstractProjection.h"
 #include "Planet.h"
 
-using namespace Marble;
+namespace Marble {
 
 const int TOOLTIP_START_INTERVAL = 1000;
 
@@ -842,5 +842,6 @@ void MarbleWidgetDefaultInputHandler::setNumberOfMeasurePoints( int newNumber )
     d->m_removeLastMeasurePointAction->setEnabled(enableMeasureActions);
 }
 
+}
 
 #include "MarbleWidgetInputHandler.moc"

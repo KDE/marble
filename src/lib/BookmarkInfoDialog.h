@@ -16,6 +16,8 @@
 #include "marble_export.h"
 #include "MarbleRunnerManager.h"
 
+/** @todo FIXME after freeze: Rename to AddBookmarkDialog*/
+
 namespace Marble
 {
 

@@ -34,6 +34,7 @@
 #include "AprsFile.h"
 
 using namespace Marble;
+/* TRANSLATOR Marble::AprsPlugin */
 
 AprsPlugin::AprsPlugin()
     : m_mutex( new QMutex ),
