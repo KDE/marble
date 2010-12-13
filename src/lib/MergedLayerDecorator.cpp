@@ -314,7 +314,7 @@ void MergedLayerDecorator::paintTileId( const QString& themeId )
     painter.drawRect( strokeWidth / 2, strokeWidth / 2, 
                       m_tile->width()  - strokeWidth,
                       m_tile->height() - strokeWidth );
-    QFont testFont( "Sans", 30, QFont::Bold );
+    QFont testFont( "Sans", 12 );
     QFontMetrics testFm( testFont );
     painter.setFont( testFont );
 
