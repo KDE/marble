@@ -30,25 +30,9 @@ MarbleTest::MarbleTest( MarbleWidget* marbleWidget )
 
 void MarbleTest::timeDemo()
 {
-    m_marbleWidget->zoomView( 1500 );
-    m_marbleWidget->setMapThemeId( "earth/srtm/srtm.dgml" );
-    m_marbleWidget->setMapQuality( Marble::NormalQuality );
-//    m_marbleWidget->resize( 800, 600 );
-    m_marbleWidget->centerOn( 9.4, 54.8 );
-
     QMessageBox::information(m_marbleWidget, QString( "Marble Speed Test" ), QString( "Press Ok to start test" ) );
 
     QTime t;
-    //m_marbleWidget->setMapTheme( "plain/plain.dgml" );
-    //m_marbleWidget->setMapTheme( "bluemarble/bluemarble.dgml" );
-
-/*
-    m_marbleWidget->setShowGrid( false );
-    m_marbleWidget->setShowPlaces( false );
-    m_marbleWidget->setShowBorders( false );
-    m_marbleWidget->setShowRivers( false );
-    m_marbleWidget->setShowLakes( false );
-*/
 
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveRight( Instant );
