@@ -40,4 +40,4 @@ void MarbleDeclarativePlugin::initializeEngine( QDeclarativeEngine *engine, cons
 
 #include "MarbleDeclarativePlugin.moc"
 
-Q_EXPORT_PLUGIN2( MarbleDeclarativePlugin, Marble::Declarative::MarbleDeclarativePlugin );
+Q_EXPORT_PLUGIN2( MarbleDeclarativePlugin, Marble::Declarative::MarbleDeclarativePlugin )

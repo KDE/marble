@@ -90,7 +90,7 @@ class TextureLayer : public QObject
     friend class StackedTileLoader;
     void paintTile( StackedTile *tile, const GeoSceneTexture *textureLayer );
 
-    Q_PRIVATE_SLOT( d, void mapChanged() );
+    Q_PRIVATE_SLOT( d, void mapChanged() )
 
  private:
     class Private;
