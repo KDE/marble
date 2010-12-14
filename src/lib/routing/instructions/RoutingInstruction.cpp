@@ -247,9 +247,9 @@ QString RoutingInstruction::nextRoadInstruction() const
     if ( predecessor() && predecessor()->roundaboutExitNumber() ) {
         int exit = predecessor()->roundaboutExitNumber();
         if ( roadName().isEmpty() ) {
-            return QObject::tr( "Take the %1. Exit in the roundabout." ).arg( exit );
+            return QObject::tr( "Take the %1. exit in the roundabout." ).arg( exit ); // One sentence
         } else {
-            QString text = QObject::tr( "Take the %1. Exit in the roundabout into %2." );
+            QString text = QObject::tr( "Take the %1. exit in the roundabout into %2." );  // One sentence
             return text.arg( exit ).arg( roadName() );
         }
     }
