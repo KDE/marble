@@ -514,7 +514,12 @@ void MainWindow::lookAtBookmark( QAction *action)
 
 void MainWindow::removeAllBookmarks()
 {
-    m_controlView->marbleWidget()->removeAllBookmarks();
+    QString const title = tr( "Marble" );
+    QString const text = tr( "Are you sure you want to delete all bookmarks?" );
+    QMessageBox::StandardButtons const buttons = QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel;
+    if ( QMessageBox::question( m_controlView->marbleWidget(), title, text, buttons, QMessageBox::Cancel ) == QMessageBox::Yes ) {
+        m_controlView->marbleWidget()->removeAllBookmarks();
+    }
 }
 
 void MainWindow::openNewBookmarkFolderDialog()
