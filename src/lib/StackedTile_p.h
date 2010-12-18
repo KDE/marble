@@ -41,7 +41,6 @@ class StackedTilePrivate : AbstractTilePrivate
 
     int       m_depth;
     bool      m_isGrayscale;
-    bool      m_forMergedLayerDecorator;
 
     explicit StackedTilePrivate( const TileId& id );
     virtual ~StackedTilePrivate();

@@ -69,9 +69,6 @@ class StackedTile : public AbstractTile
     int numBytes() const;
     bool isExpired() const;
 
-    bool forMergedLayerDecorator() const;
-    void setForMergedLayerDecorator();
-
 /*!
     \brief Returns the stack of TextureTiles
     \return A non-zero pointer to the container of TextureTile objects.

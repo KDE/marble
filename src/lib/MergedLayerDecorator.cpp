@@ -32,13 +32,15 @@
 #include "Planet.h"
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
+#include "TileLoader.h"
 
 #include <QtGui/QPainter>
 #include <QtCore/QPointer>
+#include "TextureTile.h"
 
 using namespace Marble;
 
-MergedLayerDecorator::MergedLayerDecorator( StackedTileLoader * const tileLoader,
+MergedLayerDecorator::MergedLayerDecorator( TileLoader * const tileLoader,
                                             SunLocator* sunLocator )
     : m_tileLoader( tileLoader ),
       m_tile( 0 ),
@@ -66,7 +68,7 @@ void MergedLayerDecorator::initCityLights()
 
         QString sourceDir = texture->sourceDir();
         QString installMap = texture->installMap();
-        if ( !m_tileLoader->baseTilesAvailable( layer ) ) {
+        if ( !StackedTileLoader::baseTilesAvailable( layer ) ) {
             TileCreator *tileCreator = new TileCreator(
                                      sourceDir,
                                      installMap,
@@ -120,12 +122,11 @@ bool MergedLayerDecorator::showTileId() const
     return m_showTileId;
 }
 
-StackedTile * MergedLayerDecorator::loadDataset( GeoSceneTexture *textureLayer )
+QImage MergedLayerDecorator::loadDataset()
 {
-    const TileId decorationTileId( textureLayer->sourceDir(), m_id.zoomLevel(), m_id.x(), m_id.y());
-    StackedTile * const tile = m_tileLoader->loadTile( decorationTileId, DownloadBrowse, true );
-    tile->setUsed( true );
-    return tile;
+    const TileId decorationTileId( m_cityLightsTextureLayer->sourceDir(), m_id.zoomLevel(), m_id.x(), m_id.y());
+    QImage image = *m_tileLoader->loadTile( decorationTileId, decorationTileId, DownloadBrowse )->image();
+    return image;
 }
 
 void MergedLayerDecorator::paintSunShading()
@@ -153,9 +154,7 @@ void MergedLayerDecorator::paintSunShading()
     //Don't use city lights on non-earth planets!
     if ( m_sunLocator->getCitylights() && m_sunLocator->planet()->id() == "earth" ) {
 
-        StackedTile * tile = loadDataset( m_cityLightsTextureLayer );
-
-        QImage * nighttile = tile->resultTile();
+        const QImage nighttile = loadDataset();
 
         for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
             qreal lat = lat_scale * ( m_id.y() * tileHeight + cur_y ) - 0.5*M_PI;
@@ -163,7 +162,7 @@ void MergedLayerDecorator::paintSunShading()
             qreal c = cos(lat)*cos( -DEG2RAD * m_sunLocator->getLat() );
 
             QRgb* scanline  = (QRgb*)m_tile->scanLine( cur_y );
-            QRgb* nscanline = (QRgb*)nighttile->scanLine( cur_y );
+            const QRgb* nscanline = (QRgb*)nighttile.scanLine( cur_y );
 
             qreal shade = 0;
             qreal lastShade = -10.0;

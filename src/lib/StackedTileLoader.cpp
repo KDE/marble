@@ -167,8 +167,7 @@ void StackedTileLoader::flush()
     d->m_tilesOnDisplay.clear();
 }
 
-StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId, DownloadUsage const usage,
-                                          bool const forMergedLayerDecorator )
+StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId, DownloadUsage const usage )
 {
     // check if the tile is in the hash
     StackedTile * stackedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
@@ -218,8 +217,6 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId, Download
     Q_ASSERT( !tiles.isEmpty() );
 
     stackedTile = new StackedTile( stackedTileId, tiles );
-    if ( forMergedLayerDecorator )
-        stackedTile->setForMergedLayerDecorator();
     d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
     stackedTile->initResultTile();
     mergeDecorations( stackedTile );
@@ -491,8 +488,7 @@ void StackedTileLoader::updateTextureLayers()
 void StackedTileLoader::mergeDecorations( StackedTile * const tile ) const
 {
     Q_ASSERT( !tile->resultTile()->isNull() );
-    if ( !tile->forMergedLayerDecorator() )
-        d->m_parent->paintTile( tile );
+    d->m_parent->paintTile( tile );
 }
 
 // This method should not alter m_tileCache, as the given tile is managed

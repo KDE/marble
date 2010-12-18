@@ -63,8 +63,7 @@ StackedTilePrivate::StackedTilePrivate( const TileId& id ) :
       m_resultTile(),
       m_byteCount(0),
       m_depth(0),
-      m_isGrayscale( false ),
-      m_forMergedLayerDecorator( false )
+      m_isGrayscale( false )
 {
 }
 
@@ -252,16 +251,6 @@ bool StackedTile::isExpired() const
     for (; pos != end; ++pos )
         result |= (*pos)->isExpired();
     return result;
-}
-
-bool StackedTile::forMergedLayerDecorator() const
-{
-    return d->m_forMergedLayerDecorator;
-}
-
-void StackedTile::setForMergedLayerDecorator()
-{
-    d->m_forMergedLayerDecorator = true;
 }
 
 void StackedTile::initJumpTables()

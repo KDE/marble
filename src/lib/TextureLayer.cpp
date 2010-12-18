@@ -65,7 +65,7 @@ TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadMa
     , m_texcolorizer()
     , m_loader( downloadManager )
     , m_tileLoader( mapThemeManager, &m_loader, parent )
-    , m_layerDecorator( &m_tileLoader, sunLocator )
+    , m_layerDecorator( &m_loader, sunLocator )
     , m_veccomposer( parent )
     , m_texmapper( 0 )
     , m_mapTheme( 0 )

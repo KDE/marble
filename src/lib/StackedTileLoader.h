@@ -80,8 +80,7 @@ class StackedTileLoader : public QObject
          * @param stackedTileId The Id of the requested tile, containing the x and y coordinate
          *                      and the zoom level.
          */
-        StackedTile* loadTile( TileId const &stackedTileId, DownloadUsage const,
-                               bool const forMergedLayerDecorator = false );
+        StackedTile* loadTile( TileId const &stackedTileId, DownloadUsage const );
         StackedTile* reloadTile( TileId const & stackedTileId, DownloadUsage const );
         void downloadTile( TileId const & stackedTileId );
 

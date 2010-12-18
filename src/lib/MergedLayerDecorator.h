@@ -31,14 +31,14 @@ class GeoSceneDocument;
 class GeoSceneTexture;
 class SunLocator;
 class StackedTile;
-class StackedTileLoader;
+class TileLoader;
 
 class MergedLayerDecorator : public QObject
 {
     Q_OBJECT
 	
  public:
-    MergedLayerDecorator( StackedTileLoader * const tileLoader, SunLocator* sunLocator );
+    MergedLayerDecorator( TileLoader * const tileLoader, SunLocator* sunLocator );
     virtual ~MergedLayerDecorator();
 
     // The Parameter themeId is only used for displaying the TileId,
@@ -56,7 +56,7 @@ class MergedLayerDecorator : public QObject
     void repaintMap();
 	
  private:
-    StackedTile * loadDataset( GeoSceneTexture *textureLayer );
+    QImage loadDataset();
     int maxDivisor( int maximum, int fullLength );
 
     void initCityLights();
@@ -66,7 +66,7 @@ class MergedLayerDecorator : public QObject
 	
  protected:
     Q_DISABLE_COPY( MergedLayerDecorator )
-    StackedTileLoader * const m_tileLoader;
+    TileLoader * const m_tileLoader;
     QImage* m_tile;
     TileId m_id;
     SunLocator* m_sunLocator;

@@ -203,7 +203,7 @@ void SunLocator::shadePixel(QRgb& pixcol, qreal brightness) const
     }
 }
 
-void SunLocator::shadePixelComposite(QRgb& pixcol, QRgb& dpixcol,
+void SunLocator::shadePixelComposite(QRgb& pixcol, const QRgb& dpixcol,
                                      qreal brightness) const
 {
     // daylight - no change
