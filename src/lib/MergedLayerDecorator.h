@@ -36,7 +36,7 @@ class TileLoader;
 class MergedLayerDecorator : public QObject
 {
     Q_OBJECT
-	
+
  public:
     MergedLayerDecorator( TileLoader * const tileLoader, SunLocator* sunLocator );
     virtual ~MergedLayerDecorator();
@@ -45,16 +45,16 @@ class MergedLayerDecorator : public QObject
     // which is a debugging feature, therefore at this point QString remains.
     void paint( const QString& themeId, GeoSceneDocument *mapTheme = 0 );
     void paintTileId(const QString& themeId);
-    
+
     void setShowTileId(bool show);
     bool showTileId() const;
-	
+
     void setTile(QImage* tile);
     void setInfo( TileId const &id );
-	
+
  Q_SIGNALS:
     void repaintMap();
-	
+
  private:
     QImage loadDataset();
     int maxDivisor( int maximum, int fullLength );
@@ -62,8 +62,7 @@ class MergedLayerDecorator : public QObject
     void initCityLights();
 
     void paintSunShading();
-    void paintClouds();
-	
+
  protected:
     Q_DISABLE_COPY( MergedLayerDecorator )
     TileLoader * const m_tileLoader;
