@@ -317,7 +317,7 @@ qint64 TextureLayer::volatileCacheLimit() const
     return d->m_tileLoader.volatileCacheLimit();
 }
 
-void TextureLayer::paintTile( StackedTile* tile, const GeoSceneTexture *textureLayer )
+void TextureLayer::paintTile( StackedTile* tile )
 {
 //    mDebug() << "MarbleModel::paintTile: " << "x: " << x << "y:" << y << "level: " << level
 //             << "requestTileUpdate" << requestTileUpdate;
@@ -325,7 +325,7 @@ void TextureLayer::paintTile( StackedTile* tile, const GeoSceneTexture *textureL
     d->m_layerDecorator.setInfo( tile->id() );
     d->m_layerDecorator.setTile( tile->resultTile() );
 
-    d->m_layerDecorator.paint( "maps/" + textureLayer->sourceDir(), d->m_mapTheme );
+    d->m_layerDecorator.paint( "maps/" + d->textureLayer()->sourceDir(), d->m_mapTheme );
 }
 
 }

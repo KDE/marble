@@ -411,13 +411,6 @@ inline GeoSceneLayer const * StackedTileLoader::findSceneLayer( TileId const & s
     return result;
 }
 
-inline GeoSceneTexture const * StackedTileLoader::findTextureLayer( TileId const & id ) const
-{
-    GeoSceneTexture const * const textureLayer = d->m_textureLayers.value( id.mapThemeIdHash(), 0 );
-    Q_ASSERT( textureLayer );
-    return textureLayer;
-}
-
 // 
 QVector<GeoSceneTexture const *>
 StackedTileLoader::findRelevantTextureLayers( TileId const & stackedTileId ) const
@@ -500,7 +493,7 @@ void StackedTileLoader::mergeDecorations( StackedTile * const tile ) const
 {
     Q_ASSERT( !tile->resultTile()->isNull() );
     if ( !tile->forMergedLayerDecorator() )
-        m_parent->paintTile( tile, findTextureLayer( tile->id() ) );
+        m_parent->paintTile( tile );
 }
 
 // This method should not alter m_tileCache, as the given tile is managed
