@@ -21,6 +21,7 @@
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneFilter.h"
+#include "GeoSceneGroup.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
 #include "GeoScenePalette.h"
@@ -44,9 +45,11 @@ public:
     Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator, TextureLayer *parent );
 
     void mapChanged();
+    void updateTextureLayers();
 
+    const GeoSceneLayer *sceneLayer() const;
     GeoSceneTexture *textureLayer() const;
-    static GeoSceneGroup *textureLayerProperties( GeoSceneDocument *mapTheme );
+    GeoSceneGroup *textureLayerSettings() const;
 
 public:
     TextureLayer  *const m_parent;
@@ -63,8 +66,8 @@ public:
 TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator, TextureLayer *parent )
     : m_parent( parent )
     , m_texcolorizer()
-    , m_loader( downloadManager )
-    , m_tileLoader( mapThemeManager, &m_loader, parent )
+    , m_loader( downloadManager, mapThemeManager )
+    , m_tileLoader( &m_loader, parent )
     , m_layerDecorator( &m_loader, sunLocator )
     , m_veccomposer( parent )
     , m_texmapper( 0 )
@@ -78,6 +81,45 @@ void TextureLayer::Private::mapChanged()
     m_justModified = true;
 
     emit m_parent->repaintNeeded( QRegion() );
+}
+
+void TextureLayer::Private::updateTextureLayers()
+{
+    QVector<GeoSceneTexture const *> result;
+
+    foreach ( const GeoSceneAbstractDataset *pos, sceneLayer()->datasets() ) {
+        GeoSceneTexture const * const candidate = dynamic_cast<GeoSceneTexture const *>( pos );
+        if ( !candidate )
+            continue;
+        bool enabled = true;
+        if ( textureLayerSettings() ) {
+            const bool propertyExists = textureLayerSettings()->propertyValue( candidate->name(), enabled );
+            enabled |= !propertyExists; // if property doesn't exist, enable texture nevertheless
+        }
+        if ( enabled )
+            result.append( candidate );
+    }
+
+    m_tileLoader.setTextureLayers( result );
+}
+
+const GeoSceneLayer *TextureLayer::Private::sceneLayer() const
+{
+    if ( !m_mapTheme )
+        return 0;
+
+    GeoSceneHead const * head = m_mapTheme->head();
+    if ( !head )
+        return 0;
+
+    GeoSceneMap const * map = m_mapTheme->map();
+    if ( !map )
+        return 0;
+
+    const QString mapThemeId = head->target() + '/' + head->theme();
+    mDebug() << "StackedTileLoader::updateTextureLayers" << mapThemeId;
+
+    return map->layer( head->theme() );
 }
 
 GeoSceneTexture* TextureLayer::Private::textureLayer() const
@@ -97,17 +139,17 @@ GeoSceneTexture* TextureLayer::Private::textureLayer() const
     return static_cast<GeoSceneTexture*>( layer->groundDataset() );
 }
 
-GeoSceneGroup * TextureLayer::Private::textureLayerProperties( GeoSceneDocument *mapTheme )
+GeoSceneGroup* TextureLayer::Private::textureLayerSettings() const
 {
-    if ( !mapTheme )
+    if ( !m_mapTheme )
         return 0;
 
-    GeoSceneSettings * const settings = mapTheme->settings();
-    if ( !settings )
+    if ( !m_mapTheme->settings() )
         return 0;
 
-    return settings->group( "Texture Layers" );
+    return m_mapTheme->settings()->group( "Texture Layers" );
 }
+
 
 
 
@@ -256,10 +298,19 @@ void TextureLayer::downloadTile( const TileId &tileId )
 
 void TextureLayer::setMapTheme(GeoSceneDocument* mapTheme)
 {
-    d->m_mapTheme = mapTheme;
+    if ( d->textureLayerSettings() ) {
+        disconnect( d->textureLayerSettings(), SIGNAL( valueChanged( QString, bool ) ),
+                    this,                      SLOT( updateTextureLayers() ) );
+    }
 
-    d->m_tileLoader.setTextureLayerSettings( d->textureLayerProperties( mapTheme ) );
+    d->m_mapTheme = mapTheme;
     d->m_tileLoader.flush();
+
+    if ( d->textureLayerSettings() ) {
+        connect( d->textureLayerSettings(), SIGNAL( valueChanged( QString, bool )),
+                 this,                      SLOT( updateTextureLayers() ) );
+    }
+    d->updateTextureLayers();
 
     if( !d->m_mapTheme->map()->filters().isEmpty() ) {
         GeoSceneFilter *filter= d->m_mapTheme->map()->filters().first();

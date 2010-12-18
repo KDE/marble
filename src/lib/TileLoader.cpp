@@ -19,8 +19,12 @@
 #include <QtCore/QFileInfo>
 #include <QtGui/QImage>
 
+#include "GeoSceneDocument.h"
+#include "GeoSceneHead.h"
+#include "GeoSceneMap.h"
 #include "GeoSceneTexture.h"
 #include "HttpDownloadManager.h"
+#include "MapThemeManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "TextureTile.h"
@@ -29,12 +33,16 @@
 namespace Marble
 {
 
-TileLoader::TileLoader( HttpDownloadManager * const downloadManager )
+TileLoader::TileLoader( HttpDownloadManager * const downloadManager, MapThemeManager const * mapThemeManager )
+    : m_mapThemeManager( mapThemeManager )
 {
     connect( this, SIGNAL( downloadTile( QUrl, QString, QString, DownloadUsage )),
              downloadManager, SLOT( addJob( QUrl, QString, QString, DownloadUsage )));
     connect( downloadManager, SIGNAL( downloadComplete( QByteArray, QString )),
              SLOT( updateTile( QByteArray, QString )));
+    connect( m_mapThemeManager, SIGNAL( themesChanged() ),
+             this, SLOT( updateTextureLayers() ) );
+    updateTextureLayers();
 }
 
 // If the tile is locally available:
@@ -156,6 +164,56 @@ void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
     tile->setImage( image );
     tile->setLastModified( QDateTime::currentDateTime() );
     emit tileCompleted( tile->stackedTileId(), id );
+}
+
+void TileLoader::updateTextureLayers()
+{
+    m_textureLayers.clear();
+
+    QHash<uint, GeoSceneLayer const *> sceneLayers;
+
+    QList<GeoSceneDocument const *> const & mapThemes = m_mapThemeManager->mapThemes();
+    QList<GeoSceneDocument const *>::const_iterator pos = mapThemes.constBegin();
+    QList<GeoSceneDocument const *>::const_iterator const end = mapThemes.constEnd();
+    for (; pos != end; ++pos ) {
+        GeoSceneHead const * head = (*pos)->head();
+        Q_ASSERT( head );
+        const QString mapThemeId = head->target() + '/' + head->theme();
+        mDebug() << "TileLoader::updateTextureLayers" << mapThemeId;
+
+        GeoSceneMap const * map = (*pos)->map();
+        Q_ASSERT( map );
+        GeoSceneLayer const * sceneLayer = map->layer( head->theme() );
+        if ( !sceneLayer ) {
+            mDebug() << "ignoring, has no GeoSceneLayer for" << head->theme();
+            continue;
+        }
+
+        uint const mapThemeIdHash = qHash( mapThemeId );
+        if ( sceneLayers.contains( mapThemeIdHash ) ) {
+            mDebug() << "TileLoader::updateTextureLayers:"
+                     << mapThemeIdHash << mapThemeId
+                     << "already exists";
+            continue;
+        }
+
+        sceneLayers.insert( mapThemeIdHash, sceneLayer );
+
+        // find all texture layers
+        QVector<GeoSceneAbstractDataset *> layers = sceneLayer->datasets();
+        QVector<GeoSceneAbstractDataset *>::const_iterator pos = layers.constBegin();
+        QVector<GeoSceneAbstractDataset *>::const_iterator const end = layers.constEnd();
+        for (; pos != end; ++pos ) {
+            GeoSceneTexture const * const textureLayer = dynamic_cast<GeoSceneTexture *>( *pos );
+            if ( !textureLayer ) {
+                mDebug() << "ignoring dataset, is not a texture layer";
+                continue;
+            }
+            m_textureLayers.insert( qHash( textureLayer->sourceDir() ), textureLayer );
+            mDebug() << "TileLoader::updateTextureLayers" << "added texture layer:"
+                     << qHash( textureLayer->sourceDir() ) << textureLayer->sourceDir();
+        }
+    }
 }
 
 inline GeoSceneTexture const * TileLoader::findTextureLayer( TileId const & id ) const

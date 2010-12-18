@@ -91,6 +91,7 @@ class TextureLayer : public QObject
     void paintTile( StackedTile *tile );
 
     Q_PRIVATE_SLOT( d, void mapChanged() )
+    Q_PRIVATE_SLOT( d, void updateTextureLayers() )
 
  private:
     class Private;

@@ -32,6 +32,7 @@ namespace Marble
 {
 class HttpDownloadManager; // remove?
 class GeoSceneTexture;
+class MapThemeManager;
 class TextureTile;
 
 class TileLoader: public QObject
@@ -39,7 +40,7 @@ class TileLoader: public QObject
     Q_OBJECT
 
  public:
-    TileLoader( HttpDownloadManager * const );
+    TileLoader( HttpDownloadManager * const, MapThemeManager const * mapThemeManager );
 
     QSharedPointer<TextureTile> loadTile( TileId const & stackedTileId, TileId const & tileId,
                                           DownloadUsage const );
@@ -48,10 +49,10 @@ class TileLoader: public QObject
     void reloadTile( QSharedPointer<TextureTile> const & tile, DownloadUsage const );
     void downloadTile( TileId const & tileId );
 
-    void setTextureLayers( QHash<uint, GeoSceneTexture const *> const & );
-
  public Q_SLOTS:
     void updateTile( QByteArray const & imageData, QString const & tileId );
+
+    void updateTextureLayers();
 
  Q_SIGNALS:
     void downloadTile( QUrl const & sourceUrl, QString const & destinationFileName,
@@ -67,6 +68,8 @@ class TileLoader: public QObject
     void triggerDownload( TileId const &, DownloadUsage const );
     QImage * scaledLowerLevelTile( TileId const & );
 
+    MapThemeManager const * const m_mapThemeManager;
+
     // TODO: comment about uint hash key
     QHash<uint, GeoSceneTexture const *> m_textureLayers;
 
@@ -74,11 +77,6 @@ class TileLoader: public QObject
     // because the tile was not there at all or is expired.
     QHash<TileId, QSharedPointer<TextureTile> > m_waitingForUpdate;
 };
-
-inline void TileLoader::setTextureLayers( QHash<uint, GeoSceneTexture const *> const & layers )
-{
-    m_textureLayers = layers;
-}
 
 }
 

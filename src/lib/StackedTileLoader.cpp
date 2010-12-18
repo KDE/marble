@@ -29,6 +29,7 @@
 #include "GeoSceneHead.h"
 #include "GeoSceneLayer.h"
 #include "GeoSceneMap.h"
+#include "GeoSceneSettings.h"
 #include "GeoSceneTexture.h"
 #include "HttpDownloadManager.h"
 #include "MapThemeManager.h"
@@ -62,46 +63,23 @@ public:
     StackedTileLoaderPrivate( TileLoader *tileLoader, TextureLayer *textureLayer )
         : m_parent( textureLayer ),
           m_datasetProvider( 0 ),
-          m_mapThemeManager( 0 ),
-          m_tileLoader( tileLoader ),
-          m_textureLayerSettings( 0 )
+          m_tileLoader( tileLoader )
     {
         m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
     }
 
-    bool isTextureLayerEnabled( QString const & name ) const;
-
     TextureLayer *const m_parent;
     DatasetProvider *m_datasetProvider;
-    MapThemeManager const *m_mapThemeManager;
-    // TODO: comment about uint hash key
-    QHash<uint, GeoSceneLayer const *> m_sceneLayers;
-    QHash<uint, GeoSceneTexture const *> m_textureLayers;
-    TileLoader *const m_tileLoader;
+    TileLoader *m_tileLoader;
+    QVector<GeoSceneTexture const *> m_textureLayers;
     QHash <TileId, StackedTile*>  m_tilesOnDisplay;
     QCache <TileId, StackedTile>  m_tileCache;
-    // we cannot use a const GeoSceneGroup because of QObject connects/disconnects
-    GeoSceneGroup * m_textureLayerSettings;
 };
 
-bool StackedTileLoaderPrivate::isTextureLayerEnabled( QString const & name ) const
-{
-    if ( !m_textureLayerSettings )
-        return true;
-    bool enabled;
-    m_textureLayerSettings->propertyValue( name, enabled );
-    return enabled;
-}
-
-StackedTileLoader::StackedTileLoader( MapThemeManager const * const mapThemeManager,
-                                      TileLoader * const tileLoader,
+StackedTileLoader::StackedTileLoader( TileLoader * const tileLoader,
                                       TextureLayer * const parent )
     : d( new StackedTileLoaderPrivate( tileLoader, parent ) )
 {
-    d->m_mapThemeManager = mapThemeManager;
-    connect( d->m_mapThemeManager, SIGNAL( themesChanged() ),
-             this, SLOT( updateTextureLayers() ) );
-    updateTextureLayers();
     connect( d->m_tileLoader, SIGNAL( tileCompleted( TileId, TileId )),
              SLOT( updateTile( TileId, TileId )));
 }
@@ -113,17 +91,14 @@ StackedTileLoader::~StackedTileLoader()
     delete d;
 }
 
-void StackedTileLoader::setTextureLayerSettings( GeoSceneGroup * const textureLayerSettings )
+void StackedTileLoader::setTextureLayers( QVector<GeoSceneTexture const *> & textureLayers )
 {
-    if ( d->m_textureLayerSettings ) {
-        disconnect( d->m_textureLayerSettings, SIGNAL( valueChanged( QString, bool ) ),
-                    this,                      SLOT( reset() ) );
-    }
-    d->m_textureLayerSettings = textureLayerSettings;
-    if ( d->m_textureLayerSettings ) {
-        connect( d->m_textureLayerSettings, SIGNAL( valueChanged( QString, bool )),
-                 this,                      SLOT( reset() ) );
-    }
+    mDebug() << "StackedTileLoader::setTextureLayers";
+
+    d->m_textureLayers = textureLayers;
+
+    d->m_tilesOnDisplay.clear();
+    d->m_tileCache.clear();
 }
 
 void StackedTileLoader::resetTilehash()
@@ -206,7 +181,7 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId, Download
         TileId const tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
         mDebug() << "StackedTileLoader::loadTile: tile" << textureLayer->sourceDir()
-                 << tileId.toString();
+                 << tileId.toString() << textureLayer->tileSize();
         QSharedPointer<TextureTile> const tile = d->m_tileLoader->loadTile( stackedTileId, tileId,
                                                                             usage );
         if ( tile ) {
@@ -360,12 +335,6 @@ bool StackedTileLoader::baseTilesAvailable( GeoSceneLayer * layer )
     return noerr;
 }
 
-void StackedTileLoader::reset()
-{
-    mDebug() << "StackedTileLoader::reset";
-    d->m_tilesOnDisplay.clear();
-    d->m_tileCache.clear();
-}
 
 void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 {
@@ -399,23 +368,13 @@ void StackedTileLoader::update()
     emit tileUpdateAvailable();
 }
 
-inline GeoSceneLayer const * StackedTileLoader::findSceneLayer( TileId const & stackedTileId ) const
-{
-    GeoSceneLayer const * const result = d->m_sceneLayers.value( stackedTileId.mapThemeIdHash(),
-                                                                 0 );
-    Q_ASSERT( result );
-    return result;
-}
-
 // 
 QVector<GeoSceneTexture const *>
 StackedTileLoader::findRelevantTextureLayers( TileId const & stackedTileId ) const
 {
-    GeoSceneLayer const * const sceneLayer = findSceneLayer( stackedTileId );
-    QVector<GeoSceneAbstractDataset*> textureLayers = sceneLayer->datasets();
     QVector<GeoSceneTexture const *> result;
-    QVector<GeoSceneAbstractDataset*>::const_iterator pos = textureLayers.constBegin();
-    QVector<GeoSceneAbstractDataset*>::const_iterator const end = textureLayers.constEnd();
+    QVector<GeoSceneTexture const *>::const_iterator pos = d->m_textureLayers.constBegin();
+    QVector<GeoSceneTexture const *>::const_iterator const end = d->m_textureLayers.constEnd();
     for (; pos != end; ++pos ) {
         GeoSceneTexture const * const candidate = dynamic_cast<GeoSceneTexture const *>( *pos );
         // check if layer is enabled. A layer is considered to be enabled if one of the
@@ -425,64 +384,11 @@ StackedTileLoader::findRelevantTextureLayers( TileId const & stackedTileId ) con
         // 3) the layer is configured and enabled in the settings
         // also check, if layer provides tiles for the current level
         if ( candidate
-             && ( pos == textureLayers.constBegin()
-                  || d->isTextureLayerEnabled( candidate->name() ))
              && ( !candidate->hasMaximumTileLevel()
                   || stackedTileId.zoomLevel() <= candidate->maximumTileLevel() ))
             result.append( candidate );
     }
     return result;
-}
-
-void StackedTileLoader::updateTextureLayers()
-{
-    d->m_sceneLayers.clear();
-    d->m_textureLayers.clear();
-
-    QList<GeoSceneDocument const *> const & mapThemes = d->m_mapThemeManager->mapThemes();
-    QList<GeoSceneDocument const *>::const_iterator pos = mapThemes.constBegin();
-    QList<GeoSceneDocument const *>::const_iterator const end = mapThemes.constEnd();
-    for (; pos != end; ++pos ) {
-        GeoSceneHead const * head = (*pos)->head();
-        Q_ASSERT( head );
-        const QString mapThemeId = head->target() + '/' + head->theme();
-        mDebug() << "StackedTileLoader::updateTextureLayers" << mapThemeId;
-
-        GeoSceneMap const * map = (*pos)->map();
-        Q_ASSERT( map );
-        GeoSceneLayer const * sceneLayer = map->layer( head->theme() );
-        if ( !sceneLayer ) {
-            mDebug() << "ignoring, has no GeoSceneLayer for" << head->theme();
-            continue;
-        }
-
-        uint const mapThemeIdHash = qHash( mapThemeId );
-        if ( d->m_sceneLayers.contains( mapThemeIdHash ) ) {
-            mDebug() << "StackedTileLoader::updateTextureLayers:"
-                     << mapThemeIdHash << mapThemeId
-                     << "already exists";
-            continue;
-        }
-
-        d->m_sceneLayers.insert( mapThemeIdHash, sceneLayer );
-
-        // find all texture layers
-        QVector<GeoSceneAbstractDataset *> layers = sceneLayer->datasets();
-        QVector<GeoSceneAbstractDataset *>::const_iterator pos = layers.constBegin();
-        QVector<GeoSceneAbstractDataset *>::const_iterator const end = layers.constEnd();
-        for (; pos != end; ++pos ) {
-            GeoSceneTexture const * const textureLayer = dynamic_cast<GeoSceneTexture *>( *pos );
-            if ( !textureLayer ) {
-                mDebug() << "ignoring dataset, is not a texture layer";
-                continue;
-            }
-            d->m_textureLayers.insert( qHash( textureLayer->sourceDir() ), textureLayer );
-            mDebug() << "StackedTileLoader::updateTextureLayers" << "added texture layer:"
-                     << qHash( textureLayer->sourceDir() ) << textureLayer->sourceDir();
-        }
-    }
-
-    d->m_tileLoader->setTextureLayers( d->m_textureLayers );
 }
 
 void StackedTileLoader::mergeDecorations( StackedTile * const tile ) const

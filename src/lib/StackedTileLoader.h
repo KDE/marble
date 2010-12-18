@@ -25,6 +25,7 @@
 #define MARBLE_STACKEDTILELOADER_H
 
 #include <QtCore/QObject>
+#include <QtCore/QVector>
 
 #include "TileId.h"
 #include "global.h"
@@ -36,7 +37,7 @@ namespace Marble
 
 class StackedTile;
 class MapThemeManager;
-class GeoSceneGroup;
+class GeoSceneDocument;
 class GeoSceneLayer;
 class GeoSceneTexture;
 class TextureLayer;
@@ -68,11 +69,10 @@ class StackedTileLoader : public QObject
          * @param downloadManager The download manager that shall be used to fetch
          *                        the tiles from a remote resource.
          */
-        StackedTileLoader( MapThemeManager const * const mapThemeManager,
-                           TileLoader * const tileLoader, TextureLayer * const parent );
+        StackedTileLoader( TileLoader * const tileLoader, TextureLayer * const parent );
         virtual ~StackedTileLoader();
 
-        void setTextureLayerSettings( GeoSceneGroup * const textureLayerSettings );
+        void setTextureLayers( QVector<GeoSceneTexture const *> & );
 
         /**
          * Loads a tile and returns it.
@@ -129,8 +129,6 @@ class StackedTileLoader : public QObject
         static bool baseTilesAvailable( GeoSceneLayer * layer );
 
     public Q_SLOTS:
-        void reset();
-
         /**
          * @brief Set the limit of the volatile (in RAM) cache.
          * @param bytes The limit in kilobytes.
@@ -154,12 +152,8 @@ class StackedTileLoader : public QObject
          */
         void tileUpdateAvailable();
 
-    private Q_SLOTS:
-        void updateTextureLayers();
-
     private:
         Q_DISABLE_COPY( StackedTileLoader )
-        GeoSceneLayer const * findSceneLayer( TileId const & ) const;
         QVector<GeoSceneTexture const *>
             findRelevantTextureLayers( TileId const & stackedTileId ) const;
         void mergeDecorations( StackedTile * const ) const;
