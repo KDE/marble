@@ -167,7 +167,6 @@ class StackedTileLoader : public QObject
         void reloadCachedTile( StackedTile * const cachedTile, DownloadUsage const );
 
         StackedTileLoaderPrivate* const d;
-        TextureLayer* m_parent;
 };
 
 }

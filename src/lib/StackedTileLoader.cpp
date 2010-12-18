@@ -59,8 +59,9 @@ namespace Marble
 class StackedTileLoaderPrivate
 {
 public:
-    StackedTileLoaderPrivate( TileLoader *tileLoader )
-        : m_datasetProvider( 0 ),
+    StackedTileLoaderPrivate( TileLoader *tileLoader, TextureLayer *textureLayer )
+        : m_parent( textureLayer ),
+          m_datasetProvider( 0 ),
           m_mapThemeManager( 0 ),
           m_tileLoader( tileLoader ),
           m_textureLayerSettings( 0 )
@@ -70,6 +71,7 @@ public:
 
     bool isTextureLayerEnabled( QString const & name ) const;
 
+    TextureLayer *const m_parent;
     DatasetProvider *m_datasetProvider;
     MapThemeManager const *m_mapThemeManager;
     // TODO: comment about uint hash key
@@ -94,8 +96,7 @@ bool StackedTileLoaderPrivate::isTextureLayerEnabled( QString const & name ) con
 StackedTileLoader::StackedTileLoader( MapThemeManager const * const mapThemeManager,
                                       TileLoader * const tileLoader,
                                       TextureLayer * const parent )
-    : d( new StackedTileLoaderPrivate( tileLoader ) ),
-      m_parent( parent )
+    : d( new StackedTileLoaderPrivate( tileLoader, parent ) )
 {
     d->m_mapThemeManager = mapThemeManager;
     connect( d->m_mapThemeManager, SIGNAL( themesChanged() ),
@@ -491,7 +492,7 @@ void StackedTileLoader::mergeDecorations( StackedTile * const tile ) const
 {
     Q_ASSERT( !tile->resultTile()->isNull() );
     if ( !tile->forMergedLayerDecorator() )
-        m_parent->paintTile( tile );
+        d->m_parent->paintTile( tile );
 }
 
 // This method should not alter m_tileCache, as the given tile is managed
