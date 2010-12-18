@@ -35,12 +35,12 @@ namespace Marble
 {
 
 class StackedTile;
-class HttpDownloadManager;
 class MapThemeManager;
 class GeoSceneGroup;
 class GeoSceneLayer;
 class GeoSceneTexture;
 class TextureLayer;
+class TileLoader;
 
 class StackedTileLoaderPrivate;
 
@@ -69,7 +69,7 @@ class StackedTileLoader : public QObject
          *                        the tiles from a remote resource.
          */
         StackedTileLoader( MapThemeManager const * const mapThemeManager,
-                           HttpDownloadManager * const downloadManager, TextureLayer * const parent );
+                           TileLoader * const tileLoader, TextureLayer * const parent );
         virtual ~StackedTileLoader();
 
         void setTextureLayerSettings( GeoSceneGroup * const textureLayerSettings );

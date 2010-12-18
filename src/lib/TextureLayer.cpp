@@ -31,6 +31,7 @@
 #include "StackedTile.h"
 #include "StackedTileLoader.h"
 #include "TextureColorizer.h"
+#include "TileLoader.h"
 #include "VectorComposer.h"
 #include "ViewParams.h"
 
@@ -50,6 +51,7 @@ public:
 public:
     TextureLayer  *const m_parent;
     TextureColorizer     m_texcolorizer;
+    TileLoader           m_loader;
     StackedTileLoader    m_tileLoader;
     MergedLayerDecorator m_layerDecorator;
     VectorComposer       m_veccomposer;
@@ -61,13 +63,13 @@ public:
 TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator, TextureLayer *parent )
     : m_parent( parent )
     , m_texcolorizer()
-    , m_tileLoader( mapThemeManager, downloadManager, parent )
+    , m_loader( downloadManager )
+    , m_tileLoader( mapThemeManager, &m_loader, parent )
     , m_layerDecorator( &m_tileLoader, sunLocator )
     , m_veccomposer( parent )
     , m_texmapper( 0 )
     , m_mapTheme( 0 )
     , m_justModified( true )
-
 {
 }
 

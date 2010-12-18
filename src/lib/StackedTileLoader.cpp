@@ -59,10 +59,10 @@ namespace Marble
 class StackedTileLoaderPrivate
 {
 public:
-    StackedTileLoaderPrivate()
+    StackedTileLoaderPrivate( TileLoader *tileLoader )
         : m_datasetProvider( 0 ),
           m_mapThemeManager( 0 ),
-          m_tileLoader( 0 ),
+          m_tileLoader( tileLoader ),
           m_textureLayerSettings( 0 )
     {
         m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
@@ -75,7 +75,7 @@ public:
     // TODO: comment about uint hash key
     QHash<uint, GeoSceneLayer const *> m_sceneLayers;
     QHash<uint, GeoSceneTexture const *> m_textureLayers;
-    TileLoader *m_tileLoader;
+    TileLoader *const m_tileLoader;
     QHash <TileId, StackedTile*>  m_tilesOnDisplay;
     QCache <TileId, StackedTile>  m_tileCache;
     // we cannot use a const GeoSceneGroup because of QObject connects/disconnects
@@ -92,15 +92,14 @@ bool StackedTileLoaderPrivate::isTextureLayerEnabled( QString const & name ) con
 }
 
 StackedTileLoader::StackedTileLoader( MapThemeManager const * const mapThemeManager,
-                                      HttpDownloadManager * const downloadManager,
+                                      TileLoader * const tileLoader,
                                       TextureLayer * const parent )
-    : d( new StackedTileLoaderPrivate ),
+    : d( new StackedTileLoaderPrivate( tileLoader ) ),
       m_parent( parent )
 {
     d->m_mapThemeManager = mapThemeManager;
     connect( d->m_mapThemeManager, SIGNAL( themesChanged() ),
              this, SLOT( updateTextureLayers() ) );
-    d->m_tileLoader = new TileLoader( downloadManager );
     updateTextureLayers();
     connect( d->m_tileLoader, SIGNAL( tileCompleted( TileId, TileId )),
              SLOT( updateTile( TileId, TileId )));
@@ -110,7 +109,6 @@ StackedTileLoader::~StackedTileLoader()
 {
     flush();
     d->m_tileCache.clear();
-    delete d->m_tileLoader;
     delete d;
 }
 
