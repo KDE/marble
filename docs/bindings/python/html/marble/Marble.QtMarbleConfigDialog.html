@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
 <p>
 Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdialog.html">QDialog</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
 
-Namespace: Marble.QtMarbleConfigDialog<br />
+Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
 
@@ -60,15 +60,19 @@ Namespace: Marble.QtMarbleConfigDialog<br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#settingsChanged">settingsChanged</a> ()</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#QtMarbleConfigDialog">__init__</a> (self, <a href="../marble/Marble.MarbleWidget.html">Marble.MarbleWidget</a> marbleWidget, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#UTC">UTC</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.html#AngleUnit">Marble.AngleUnit</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#angleUnit">angleUnit</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#animateTargetVoyage">animateTargetVoyage</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.html#MapQuality">Marble.MapQuality</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#animationQuality">animationQuality</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearPersistentCacheClicked">clearPersistentCacheClicked</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearVolatileCacheClicked">clearVolatileCacheClicked</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#chosenTimezone">chosenTimezone</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#customTimezone">customTimezone</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.html#DistanceUnit">Marble.DistanceUnit</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#distanceUnit">distanceUnit</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dragLocation">dragLocation</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#externalMapEditor">externalMapEditor</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.html#GraphicsSystem">Marble.GraphicsSystem</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#graphicsSystem">graphicsSystem</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#initializeCustomTimezone">initializeCustomTimezone</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#labelLocalization">labelLocalization</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#lastSessionTime">lastSessionTime</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapFont">mapFont</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#onStartup">onStartup</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#persistentTileCacheLimit">persistentTileCacheLimit</a> (self)</td></tr>
@@ -79,12 +83,53 @@ Namespace: Marble.QtMarbleConfigDialog<br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#proxyUrl">proxyUrl</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#proxyUser">proxyUser</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#readSettings">readSettings</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#settingsChanged">settingsChanged</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.html#MapQuality">Marble.MapQuality</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#stillQuality">stillQuality</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#systemTime">systemTime</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#systemTimezone">systemTimezone</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#volatileTileCacheLimit">volatileTileCacheLimit</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#writeSettings">writeSettings</a> (self)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="QtMarbleConfigDialog"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="clearPersistentCacheClicked"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearPersistentCacheClicked</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>The user clicked on the button to clear persistent tile cache.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("clearPersistentCacheClicked()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="clearVolatileCacheClicked"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearVolatileCacheClicked</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>The user clicked on the button to clear volatile tile cache.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("clearVolatileCacheClicked()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="settingsChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> settingsChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>This signal is emitted when when the loaded settings were changed.
+Either by the user or by loading them initially from disk.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("settingsChanged()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="QtMarbleConfigDialog"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -112,7 +157,20 @@ Namespace: Marble.QtMarbleConfigDialog<br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="angleUnit"></a>
+<div class="memdoc"></div></div><a class="anchor" name="UTC"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool UTC</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Read the value of 'Time/UTC' key from settings
+</p></div></div><a class="anchor" name="angleUnit"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -148,11 +206,11 @@ Namespace: Marble.QtMarbleConfigDialog<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="clearPersistentCacheClicked"></a>
+<div class="memdoc"></div></div><a class="anchor" name="chosenTimezone"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> clearPersistentCacheClicked</td>
+<td class="memname">int chosenTimezone</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -160,12 +218,12 @@ Namespace: Marble.QtMarbleConfigDialog<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>The user clicked on the button to clear persistent tile cache.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("clearPersistentCacheClicked()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="clearVolatileCacheClicked"></a>
+<div class="memdoc"><p>Read the value of 'Time/chosenTimezone' key from settings
+</p></div></div><a class="anchor" name="customTimezone"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> clearVolatileCacheClicked</td>
+<td class="memname">bool customTimezone</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -173,8 +231,8 @@ Namespace: Marble.QtMarbleConfigDialog<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>The user clicked on the button to clear volatile tile cache.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("clearVolatileCacheClicked()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="distanceUnit"></a>
+<div class="memdoc"><p>Read the value of 'Time/customTimezone' key from settings
+</p></div></div><a class="anchor" name="distanceUnit"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -198,11 +256,35 @@ Namespace: Marble.QtMarbleConfigDialog<br />
 </tr>
 </table>
 </div>
+<div class="memdoc"></div></div><a class="anchor" name="externalMapEditor"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> externalMapEditor</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
 <div class="memdoc"></div></div><a class="anchor" name="graphicsSystem"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
 <td class="memname"><a href="../marble/Marble.html#GraphicsSystem">Marble.GraphicsSystem</a> graphicsSystem</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="initializeCustomTimezone"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> initializeCustomTimezone</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -222,7 +304,20 @@ Namespace: Marble.QtMarbleConfigDialog<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="mapFont"></a>
+<div class="memdoc"></div></div><a class="anchor" name="lastSessionTime"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool lastSessionTime</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Read the value of 'Time/lastSessionTime' key from settings
+</p></div></div><a class="anchor" name="mapFont"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -343,21 +438,7 @@ Namespace: Marble.QtMarbleConfigDialog<br />
 </table>
 </div>
 <div class="memdoc"><p>Read settings and update interface.
-</p></div></div><a class="anchor" name="settingsChanged"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> settingsChanged</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>This signal is emitted when when the loaded settings were changed.
-Either by the user or by loading them initially from disk.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("settingsChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="stillQuality"></a>
+</p></div></div><a class="anchor" name="stillQuality"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -369,7 +450,33 @@ Either by the user or by loading them initially from disk.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="volatileTileCacheLimit"></a>
+<div class="memdoc"></div></div><a class="anchor" name="systemTime"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool systemTime</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Read the value of 'Time/systemTime' key from settings
+</p></div></div><a class="anchor" name="systemTimezone"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool systemTimezone</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Read the value of 'Time/systemTimezone' key from settings
+</p></div></div><a class="anchor" name="volatileTileCacheLimit"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -412,7 +519,21 @@ Either by the user or by loading them initially from disk.
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>
 
 </div>

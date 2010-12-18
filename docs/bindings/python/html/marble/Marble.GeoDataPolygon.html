@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,16 +48,17 @@
 <h1>GeoDataPolygon Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: Marble.GeoDataGeometry &#x2192; Marble.GeoDataObject &#x2192; Marble.GeoNode<br />
-Subclasses: <a href="../marble/Marble.GeoDataInnerBoundary.html">Marble.GeoDataInnerBoundary</a>, <a href="../marble/Marble.GeoDataOuterBoundary.html">Marble.GeoDataOuterBoundary</a><br />
-Namespace: Marble.GeoDataPolygon<br />
+Inherits: <a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> &#x2192; <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> &#x2192; <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a><br />
+
+Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
 
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataPolygon">__init__</a> (self, <a href="../marble/Marble.TessellationFlags.html">Marble.TessellationFlags</a> f=Marble.NoTessellation)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataPolygon">__init__</a> (self, <a href="../marble/Marble.html">Marble.TessellationFlags</a> f=Marble.NoTessellation)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataPolygon">__init__</a> (self, <a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> other)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#appendInnerBoundary">appendInnerBoundary</a> (self, <a href="../marble/Marble.GeoDataLinearRing.html">Marble.GeoDataLinearRing</a> boundary)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#contains">contains</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinates)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QVector<Marble::GeoDataLinearRing>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#innerBoundaries">innerBoundaries</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isClosed">isClosed</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#latLonAltBox">latLonAltBox</a> (self)</td></tr>
@@ -66,9 +67,9 @@ Namespace: Marble.GeoDataPolygon<br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pack">pack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setOuterBoundary">setOuterBoundary</a> (self, <a href="../marble/Marble.GeoDataLinearRing.html">Marble.GeoDataLinearRing</a> boundary)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setTessellate">setTessellate</a> (self, bool tessellate)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setTessellationFlags">setTessellationFlags</a> (self, <a href="../marble/Marble.TessellationFlags.html">Marble.TessellationFlags</a> f)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setTessellationFlags">setTessellationFlags</a> (self, <a href="../marble/Marble.html">Marble.TessellationFlags</a> f)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#tessellate">tessellate</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.TessellationFlags.html">Marble.TessellationFlags</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#tessellationFlags">tessellationFlags</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.html">Marble.TessellationFlags</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#tessellationFlags">tessellationFlags</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#unpack">unpack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="GeoDataPolygon"></a>
@@ -82,7 +83,7 @@ Namespace: Marble.GeoDataPolygon<br />
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.TessellationFlags.html">Marble.TessellationFlags</a>&nbsp;</td>
+<td class="paramtype"><a href="../marble/Marble.html">Marble.TessellationFlags</a>&nbsp;</td>
 <td class="paramname"><em>f=Marble.NoTessellation</em></td>
 </tr>
 <tr>
@@ -128,6 +129,28 @@ Namespace: Marble.GeoDataPolygon<br />
 <td></td>
 <td class="paramtype"><a href="../marble/Marble.GeoDataLinearRing.html">Marble.GeoDataLinearRing</a>&nbsp;</td>
 <td class="paramname"><em>boundary</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="contains"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool contains</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>coordinates</em></td>
 </tr>
 <tr>
 <td></td>
@@ -274,7 +297,7 @@ Namespace: Marble.GeoDataPolygon<br />
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.TessellationFlags.html">Marble.TessellationFlags</a>&nbsp;</td>
+<td class="paramtype"><a href="../marble/Marble.html">Marble.TessellationFlags</a>&nbsp;</td>
 <td class="paramname"><em>f</em></td>
 </tr>
 <tr>
@@ -301,7 +324,7 @@ Namespace: Marble.GeoDataPolygon<br />
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.TessellationFlags.html">Marble.TessellationFlags</a> tessellationFlags</td>
+<td class="memname"><a href="../marble/Marble.html">Marble.TessellationFlags</a> tessellationFlags</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -349,7 +372,21 @@ Namespace: Marble.GeoDataPolygon<br />
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>
 
 </div>

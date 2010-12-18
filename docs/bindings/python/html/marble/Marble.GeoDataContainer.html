@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,9 +48,9 @@
 <h1>GeoDataContainer Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: Marble.GeoDataFeature &#x2192; Marble.GeoDataObject &#x2192; Marble.GeoNode<br />
-Subclasses: <a href="../marble/Marble.GeoDataFolder.html">Marble.GeoDataFolder</a>, <a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a><br />
-Namespace: Marble.GeoDataContainer<br />
+Inherits: <a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> &#x2192; <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> &#x2192; <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a><br />
+
+Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
 <p>A base class that can hold GeoDataFeatures
@@ -74,17 +74,16 @@ other Features.
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataContainer">__init__</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataContainer">__init__</a> (self, <a href="../marble/Marble.GeoDataContainer.html">Marble.GeoDataContainer</a> other)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataContainer">__init__</a> (self, <a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> other)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#append">append</a> (self, <a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> other)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#at">at</a> (self, int pos)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#child">child</a> (self, int a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#childPosition">childPosition</a> (self, <a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> child)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clear">clear</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QVector<Marble::GeoDataFeature>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#features">features</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#first">first</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QVector<Marble::GeoDataFolder>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#folders">folders</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#last">last</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nodeType">nodeType</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pack">pack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QVector<Marble::GeoDataPlacemark>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#placemarks">placemarks</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#remove">remove</a> (self, int index)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#size">size</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#unpack">unpack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
 </table>
@@ -112,28 +111,6 @@ other Features.
 <td class="memname"></td>
 <td></td>
 <td class="paramtype"><a href="../marble/Marble.GeoDataContainer.html">Marble.GeoDataContainer</a>&nbsp;</td>
-<td class="paramname"><em>other</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="GeoDataContainer"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">__init__</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a>&nbsp;</td>
 <td class="paramname"><em>other</em></td>
 </tr>
 <tr>
@@ -190,6 +167,52 @@ other Features.
 </tr></table>
 </div>
 <div class="memdoc"><p>return the reference of the element at a specific position
+</p></div></div><a class="anchor" name="child"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> child</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>returns the requested child item
+</p></div></div><a class="anchor" name="childPosition"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int childPosition</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a>&nbsp;</td>
+<td class="paramname"><em>child</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>returns the position of an item in the list
 </p></div></div><a class="anchor" name="clear"></a>
 <div class="memitem">
 <div class="memproto">
@@ -202,25 +225,7 @@ other Features.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="features"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QVector<Marble::GeoDataFeature> features</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>A convenience function that returns all features in this container.
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> A QVector of GeoDataFeature
-</dd></dl> </p>
-<p>
-<dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataFeature
-</dd></dl>
-</p></div></div><a class="anchor" name="first"></a>
+<div class="memdoc"></div></div><a class="anchor" name="first"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -233,24 +238,6 @@ other Features.
 </table>
 </div>
 <div class="memdoc"><p>return the reference of the last element for convenience
-</p></div></div><a class="anchor" name="folders"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QVector<Marble::GeoDataFolder> folders</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>A convenience function that returns all folders in this container.
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> A QVector of GeoDataFolder
-</dd></dl> </p>
-<p>
-<dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataFolder
-</dd></dl>
 </p></div></div><a class="anchor" name="last"></a>
 <div class="memitem">
 <div class="memproto">
@@ -305,25 +292,29 @@ other Features.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="placemarks"></a>
+</p></div></div><a class="anchor" name="remove"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">QVector<Marble::GeoDataPlacemark> placemarks</td>
+<td class="memname"> remove</td>
 <td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index</em></td>
 </tr>
-</table>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
 </div>
-<div class="memdoc"><p>A convenience function that returns all placemarks in this container.
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> A QVector of GeoDataPlacemark
-</dd></dl> </p>
-<p>
-<dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataPlacemark
-</dd></dl>
-</p></div></div><a class="anchor" name="size"></a>
+<div class="memdoc"></div></div><a class="anchor" name="size"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -383,7 +374,21 @@ other Features.
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>
 
 </div>

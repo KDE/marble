@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -50,14 +50,21 @@
 <p>
 
 
-Namespace: Marble.MarbleGlobal<br />
+Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
-<p>This enum is used to describe the type of download
+<p>Describes possible flight mode (interpolation between source
+and target camera positions)
 </p>
-<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Profile">Profile</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Default, SmallScreen, HighResolution&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#MarbleGlobal">__init__</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.MarbleGlobal.html">Marble.MarbleGlobal</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#getInstance">getInstance</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.MarbleGlobal.html">Marble.MarbleGlobal.Profiles</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#profiles">profiles</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setProfiles">setProfiles</a> (self, <a href="../marble/Marble.MarbleGlobal.html">Marble.MarbleGlobal.Profiles</a> profiles)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.MarbleGlobal.html">Marble.MarbleGlobal.Profiles</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#detectProfiles">detectProfiles</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.MarbleGlobal.html">Marble.MarbleGlobal</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#getInstance">getInstance</a> ()</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="MarbleGlobal"></a>
 <div class="memitem">
@@ -71,11 +78,11 @@ Namespace: Marble.MarbleGlobal<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="getInstance"></a>
+<div class="memdoc"></div></div><a class="anchor" name="profiles"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.MarbleGlobal.html">Marble.MarbleGlobal</a> getInstance</td>
+<td class="memname"><a href="../marble/Marble.MarbleGlobal.html">Marble.MarbleGlobal.Profiles</a> profiles</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -83,7 +90,65 @@ Namespace: Marble.MarbleGlobal<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div>
+<div class="memdoc"></div></div><a class="anchor" name="setProfiles"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setProfiles</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.MarbleGlobal.html">Marble.MarbleGlobal.Profiles</a>&nbsp;</td>
+<td class="paramname"><em>profiles</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="detectProfiles"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.MarbleGlobal.html">Marble.MarbleGlobal.Profiles</a> detectProfiles</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Automatically detects the profile.
+</p></div></div><a class="anchor" name="getInstance"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.MarbleGlobal.html">Marble.MarbleGlobal</a> getInstance</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="Profile"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">Profile</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Default</em>&nbsp;=&nbsp;0x0</td><td><tr><td valign="top"><em>SmallScreen</em>&nbsp;=&nbsp;0x1</td><td><tr><td valign="top"><em>HighResolution</em>&nbsp;=&nbsp;0x2</td><td></table>
+</dl>
+</div></div><p>
 </div>
 </div>
 </div>
@@ -101,7 +166,21 @@ Namespace: Marble.MarbleGlobal<br />
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>
 
 </div>

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,9 +48,9 @@
 <h1>FrameGraphicsItem Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: Marble.ScreenGraphicsItem &#x2192; Marble.MarbleGraphicsItem<br />
-Subclasses: <a href="../marble/Marble.LabelGraphicsItem.html">Marble.LabelGraphicsItem</a><br />
-Namespace: Marble.FrameGraphicsItem<br />
+Inherits: <a href="../marble/Marble.ScreenGraphicsItem.html">Marble.ScreenGraphicsItem</a> &#x2192; <a href="../marble/Marble.MarbleGraphicsItem.html">Marble.MarbleGraphicsItem</a><br />
+
+Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
 
@@ -58,7 +58,6 @@ Namespace: Marble.FrameGraphicsItem<br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#FrameType">FrameType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoFrame, RectFrame, RoundedRectFrame&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#FrameGraphicsItem">__init__</a> (self, <a href="../marble/Marble.MarbleGraphicsItem.html">Marble.MarbleGraphicsItem</a> parent=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#FrameGraphicsItem">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpointf.html">QPointF</a> position, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsizef.html">QSizeF</a> size, <a href="../marble/Marble.MarbleGraphicsItem.html">Marble.MarbleGraphicsItem</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbrush.html">QBrush</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#background">background</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpainterpath.html">QPainterPath</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#backgroundShape">backgroundShape</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbrush.html">QBrush</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#borderBrush">borderBrush</a> (self)</td></tr>
@@ -100,40 +99,6 @@ Namespace: Marble.FrameGraphicsItem<br />
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
 </tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.MarbleGraphicsItem.html">Marble.MarbleGraphicsItem</a>&nbsp;</td>
-<td class="paramname"><em>parent=0</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="FrameGraphicsItem"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">__init__</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpointf.html">QPointF</a>&nbsp;</td>
-<td class="paramname"><em>position</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsizef.html">QSizeF</a>&nbsp;</td>
-<td class="paramname"><em>size</em>, </td>
-</tr>
-<tr>
 <td class="memname"></td>
 <td></td>
 <td class="paramtype"><a href="../marble/Marble.MarbleGraphicsItem.html">Marble.MarbleGraphicsItem</a>&nbsp;</td>
@@ -590,9 +555,8 @@ The padding is the empty space inside the border.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets the size of the item. The given size is the size required for contents.
-This function does not guarantee a correct content size if you set margin or padding
-afterwards.
+<div class="memdoc"><p>Sets the size of the content of the item.
+<b>size</b> is the size required for contents.
 </p></div></div><a class="anchor" name="setFrame"></a>
 <div class="memitem">
 <div class="memproto">
@@ -763,7 +727,7 @@ afterwards.
 </table>
 </div>
 <div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NoFrame</em>&nbsp;</td><td><tr><td valign="top"><em>RectFrame</em>&nbsp;</td><td><tr><td valign="top"><em>RoundedRectFrame</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>
@@ -783,7 +747,21 @@ afterwards.
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>
 
 </div>

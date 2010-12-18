@@ -40,7 +40,6 @@ public:
     QString                 distanceString () const;
     int                     minimumZoom () const;
     int                     maximumZoom () const;
-    void                    setNeedsUpdate ();
     qreal                   centerLongitude () const;
     qreal                   centerLatitude () const;
     QAbstractItemModel*     placemarkModel () const;
@@ -156,8 +155,22 @@ public:
 signals:
     void                    themeChanged (const QString& theme);
     void                    mouseMoveGeoPosition (const QString&);
-    void                    repaintNeeded (const QRegion& dirtyRegion);
     void                    visibleLatLonAltBoxChanged (const Marble::GeoDataLatLonAltBox& visibleLatLonAltBox);
+public:
+    int                     tileZoomLevel () const;
+    QVector<QModelIndex>    whichFeatureAt (const QPoint&) const;
+    bool                    showBackground () const;
+    QList<Marble::AbstractDataPlugin*>  dataPlugins () const;
+    QList<Marble::AbstractDataPluginItem*>  whichItemAt (const QPoint& curpos) const;
+    void                    addLayer (Marble::LayerInterface* layer);
+    void                    removeLayer (Marble::LayerInterface* layer);
+    void                    setShowBackground (bool visible);
+    void                    downloadRegion (const QString& sourceDir, const QVector<Marble::TileCoordsPyramid>&);
+signals:
+    void                    tileLevelChanged (int level);
+    void                    repaintNeeded (const QRegion& dirtyRegion = QRegion());
+    void                    pluginSettingsChanged ();
+    void                    renderPluginInitialized (Marble::RenderPlugin* renderPlugin);
 };
 // MarbleMap
 

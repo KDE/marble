@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
 <p>
 Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
 
-Namespace: Marble.MarbleModel<br />
+Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
 <p>The data model (not based on QAbstractModel) for a MarbleWidget.
@@ -86,55 +86,118 @@ square or round.
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#creatingTilesStart">creatingTilesStart</a> (<a href="../marble/Marble.TileCreator.html">Marble.TileCreator</a> a0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> description)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#downloadTile">downloadTile</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qurl.html">QUrl</a> sourceUrl, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> destinationFileName, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> id)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#modelChanged">modelChanged</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pluginSettingsChanged">pluginSettingsChanged</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPluginInitialized">renderPluginInitialized</a> (<a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a> renderPlugin)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#repaintNeeded">repaintNeeded</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregion.html">QRegion</a> dirtyRegion=QRegion())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#themeChanged">themeChanged</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mapTheme)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#timeout">timeout</a> ()</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#MarbleModel">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addGeoDataFile">addGeoDataFile</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filename)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addGeoDataString">addGeoDataString</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> data, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> key="data")</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addPlacemarkData">addPlacemarkData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> data, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> key="data")</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addPlacemarkFile">addPlacemarkFile</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filename)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearPersistentTileCache">clearPersistentTileCache</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearVolatileTileCache">clearVolatileTileCache</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#creatingTilesStart">creatingTilesStart</a> (self, <a href="../marble/Marble.TileCreator.html">Marble.TileCreator</a> a0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> description)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[Marble::AbstractDataPlugi]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dataPlugins">dataPlugins</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#downloadTile">downloadTile</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qurl.html">QUrl</a> sourceUrl, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> destinationFileName, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> id)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[Marble::AbstractFloatIte]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#floatItems">floatItems</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatetime.html">QDateTime</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clockDateTime">clockDateTime</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clockSpeed">clockSpeed</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clockTimezone">clockTimezone</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.MarbleDataFacade.html">Marble.MarbleDataFacade</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dataFacade">dataFacade</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#home">home</a> (self, float lon, float lat, int zoom)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qtextdocument.html">QTextDocument</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#legend">legend</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapThemeId">mapThemeId</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#modelChanged">modelChanged</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.MapThemeManager.html">Marble.MapThemeManager</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapThemeManager">mapThemeManager</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#openGpxFile">openGpxFile</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filename)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paintGlobe">paintGlobe</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, int width, int height, <a href="../marble/Marble.ViewParams.html">Marble.ViewParams</a> viewParams, bool redrawBackground, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qrect.html">QRect</a> dirtyRect)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#persistentTileCacheLimit">persistentTileCacheLimit</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#placemarkModel">placemarkModel</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qitemselectionmodel.html">QItemSelectionModel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#placemarkSelectionModel">placemarkSelectionModel</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.Planet.html">Marble.Planet</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#planet">planet</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#planetName">planetName</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#planetRadius">planetRadius</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pluginSettingsChanged">pluginSettingsChanged</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#reloadMap">reloadMap</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#popSortModel">popSortModel</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.PositionTracking.html">Marble.PositionTracking</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#positionTracking">positionTracking</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeGeoData">removeGeoData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> key)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removePlacemarkKey">removePlacemarkKey</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> key)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPluginInitialized">renderPluginInitialized</a> (self, <a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a> renderPlugin)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[Marble::RenderPlugi]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPlugins">renderPlugins</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#repaintNeeded">repaintNeeded</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregion.html">QRegion</a> dirtyRegion=QRegion())</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowGps">setShowGps</a> (self, bool visible)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setVolatileTileCacheLimit">setVolatileTileCacheLimit</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/quint64.html">quint64</a> kiloBytes)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setupTextureMapper">setupTextureMapper</a> (self, <a href="../marble/Marble.html#Projection">Marble.Projection</a> projection)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setupVectorComposer">setupVectorComposer</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showGps">showGps</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#startPolling">startPolling</a> (self, int time=1000)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#stopPolling">stopPolling</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setClockDateTime">setClockDateTime</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatetime.html">QDateTime</a> datetime)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setClockSpeed">setClockSpeed</a> (self, int speed)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setClockTimezone">setClockTimezone</a> (self, int timeInSec)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setHome">setHome</a> (self, float lon, float lat, int zoom=1050)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setHome">setHome</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> homePoint, int zoom=1050)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setLegend">setLegend</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qtextdocument.html">QTextDocument</a> document)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMapTheme">setMapTheme</a> (self, GeoSceneDocument mapTheme)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPersistentTileCacheLimit">setPersistentTileCacheLimit</a> (self, long kiloBytes)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.SunLocator.html">Marble.SunLocator</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#sunLocator">sunLocator</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#themeChanged">themeChanged</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mapTheme)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#tileZoomLevel">tileZoomLevel</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#timeout">timeout</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#update">update</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/quint64.html">quint64</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#volatileTileCacheLimit">volatileTileCacheLimit</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QVector<QModelIndex>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#whichFeatureAt">whichFeatureAt</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a> a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[Marble::AbstractDataPluginIte]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#whichItemAt">whichItemAt</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a> curpos)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#treeModel">treeModel</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#volatileTileCacheLimit">volatileTileCacheLimit</a> (self)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="MarbleModel"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="creatingTilesStart"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> creatingTilesStart</td>
+<td>(</td>
+<td class="paramtype"><a href="../marble/Marble.TileCreator.html">Marble.TileCreator</a>&nbsp;</td>
+<td class="paramname"><em>a0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>description</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Signal that the MarbleModel has started to create a new set of tiles.
+@param
+<dl class="see" compact><dt><b>See also:</b></dt><dd> zoomView()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("creatingTilesStart(Marble::TileCreator*, const QString&, const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="modelChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> modelChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Signal that the MarbleModel has changed in general
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("modelChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="themeChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> themeChanged</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>mapTheme</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Signal that the map theme has changed, and to which theme.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mapTheme</em>&nbsp;</td><td> the identifier of the new map theme.
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> mapTheme
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setMapTheme
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("themeChanged(QString)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="MarbleModel"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -147,6 +210,63 @@ square or round.
 <td></td>
 <td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
 <td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Construct a new MarbleModel.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent widget
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addGeoDataFile"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addGeoDataFile</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>filename</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="addGeoDataString"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addGeoDataString</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>data</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>key="data"</em></td>
 </tr>
 <tr>
 <td></td>
@@ -184,7 +304,9 @@ square or round.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="addPlacemarkFile"></a>
+<div class="memdoc"><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Please use addGeoDataString instead
+</dd></dl>
+</p></div></div><a class="anchor" name="addPlacemarkFile"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -206,7 +328,9 @@ square or round.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="clearPersistentTileCache"></a>
+<div class="memdoc"><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Please use addGeoDataFile instead
+</dd></dl>
+</p></div></div><a class="anchor" name="clearPersistentTileCache"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -218,11 +342,11 @@ square or round.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="clearVolatileTileCache"></a>
+<div class="memdoc"></div></div><a class="anchor" name="clockDateTime"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> clearVolatileTileCache</td>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatetime.html">QDateTime</a> clockDateTime</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -230,31 +354,67 @@ square or round.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="creatingTilesStart"></a>
+<div class="memdoc"></div></div><a class="anchor" name="clockSpeed"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> creatingTilesStart</td>
+<td class="memname">int clockSpeed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="clockTimezone"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int clockTimezone</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="dataFacade"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.MarbleDataFacade.html">Marble.MarbleDataFacade</a> dataFacade</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="home"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> home</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.TileCreator.html">Marble.TileCreator</a>&nbsp;</td>
-<td class="paramname"><em>a0</em>, </td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>name</em>, </td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>description</em></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>zoom</em></td>
 </tr>
 <tr>
 <td></td>
@@ -264,15 +424,22 @@ square or round.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Signal that the MarbleModel has started to create a new set of tiles.
-@param
-<dl class="see" compact><dt><b>See also:</b></dt><dd> zoomView()
-</dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("creatingTilesStart(Marble::TileCreator*, const const QString&, const const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="dataPlugins"></a>
+<div class="memdoc"><p>get the home point
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> lon the longitude of the home point.
+
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> lat the latitude of the home point.
+
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> zoom the default zoom level of the home point.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="legend"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">[Marble::AbstractDataPlugi] dataPlugins</td>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qtextdocument.html">QTextDocument</a> legend</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -280,59 +447,7 @@ square or round.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns a list of all DataPlugins on the layer
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> the list of DataPlugins
-</dd></dl>
-</p></div></div><a class="anchor" name="downloadTile"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> downloadTile</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qurl.html">QUrl</a>&nbsp;</td>
-<td class="paramname"><em>sourceUrl</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>destinationFileName</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>id</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("downloadTile(const const QUrl&, const const QString&, const const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="floatItems"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">[Marble::AbstractFloatIte] floatItems</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Returns a list of all FloatItems in the model
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> the list of the floatItems
-</dd></dl>
-</p></div></div><a class="anchor" name="mapThemeId"></a>
+<div class="memdoc"></div></div><a class="anchor" name="mapThemeId"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -353,11 +468,11 @@ that specifies the theme:
 <p>
 Example:
 maptheme = "earth/bluemarble/bluemarble.dgml"
-</p></div></div><a class="anchor" name="modelChanged"></a>
+</p></div></div><a class="anchor" name="mapThemeManager"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> modelChanged</td>
+<td class="memname"><a href="../marble/Marble.MapThemeManager.html">Marble.MapThemeManager</a> mapThemeManager</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -365,8 +480,7 @@ maptheme = "earth/bluemarble/bluemarble.dgml"
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Signal that the MarbleModel has changed in general
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("modelChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="openGpxFile"></a>
+<div class="memdoc"></div></div><a class="anchor" name="openGpxFile"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -388,83 +502,23 @@ maptheme = "earth/bluemarble/bluemarble.dgml"
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="paintGlobe"></a>
+<div class="memdoc"><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Please use addGeoDataFile instead
+</dd></dl>
+</p></div></div><a class="anchor" name="persistentTileCacheLimit"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> paintGlobe</td>
+<td class="memname">long persistentTileCacheLimit</td>
 <td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a>&nbsp;</td>
-<td class="paramname"><em>painter</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>width</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>height</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.ViewParams.html">Marble.ViewParams</a>&nbsp;</td>
-<td class="paramname"><em>viewParams</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">bool&nbsp;</td>
-<td class="paramname"><em>redrawBackground</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qrect.html">QRect</a>&nbsp;</td>
-<td class="paramname"><em>dirtyRect</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
 <td width="100%"> </td>
-</tr></table>
+</tr>
+</table>
 </div>
-<div class="memdoc"><p>Paint the model into the view
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>painter</em>&nbsp;</td><td> the QPainter used to paint the view
-
-<tr><td></td><td valign="top"><em>width</em>&nbsp;</td><td> the width of the widget
-
-<tr><td></td><td valign="top"><em>height</em>&nbsp;</td><td> the height of the widget
-
-<tr><td></td><td valign="top"><em>viewParams</em>&nbsp;</td><td> the view parameters controlling the paint process
-
-<tr><td></td><td valign="top"><em>redrawBackground</em>&nbsp;</td><td> a boolean controlling if the background should be redrawn in addition to the globe itself
-
-<tr><td></td><td valign="top"><em>dirtyRect</em>&nbsp;</td><td> the rectangle of the widget that needs redrawing.
-</td></tr>
-</table></dl>
-<p> The model has the responsibility to actually paint into the
-MarbleWidget. This function is called by MarbleWidget when it
-receives a paintEvent and should repaint whole or part of the
-widget's contents based on the parameters.
-</p>
-<p>
-NOTE: This function will probably move to MarbleWidget in KDE
-4.1, making the MarbleModel/MarbleWidget pair truly follow the
-Model/View paradigm.
+<div class="memdoc"><p>Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the limit of persistent tile cache in kilobytes.
+</dd></dl>
 </p></div></div><a class="anchor" name="placemarkModel"></a>
 <div class="memitem">
 <div class="memproto">
@@ -477,10 +531,7 @@ Model/View paradigm.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Return the list of Placemarks as a QAbstractItemModel *
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> a list of all Placemarks in the MarbleModel.
-</dd></dl>
-</p></div></div><a class="anchor" name="placemarkSelectionModel"></a>
+<div class="memdoc"></div></div><a class="anchor" name="placemarkSelectionModel"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -531,11 +582,11 @@ Model/View paradigm.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="pluginSettingsChanged"></a>
+<div class="memdoc"></div></div><a class="anchor" name="popSortModel"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> pluginSettingsChanged</td>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a> popSortModel</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -543,18 +594,39 @@ Model/View paradigm.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>This signal is emit when the settings of a plugin changed.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("pluginSettingsChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="reloadMap"></a>
+<div class="memdoc"></div></div><a class="anchor" name="positionTracking"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> reloadMap</td>
+<td class="memname"><a href="../marble/Marble.PositionTracking.html">Marble.PositionTracking</a> positionTracking</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
 <td width="100%"> </td>
 </tr>
 </table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="removeGeoData"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> removeGeoData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>key</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
 </div>
 <div class="memdoc"></div></div><a class="anchor" name="removePlacemarkKey"></a>
 <div class="memitem">
@@ -578,57 +650,21 @@ Model/View paradigm.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="renderPluginInitialized"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> renderPluginInitialized</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a>&nbsp;</td>
-<td class="paramname"><em>renderPlugin</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Signal that a render item has been initialized
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("renderPluginInitialized(Marble::RenderPlugin*)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="renderPlugins"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">[Marble::RenderPlugi] renderPlugins</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Returns a list of all RenderPlugins in the model, this includes float items
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> the list of RenderPlugins
+<div class="memdoc"><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Please use removeGeoData instead
 </dd></dl>
-</p></div></div><a class="anchor" name="repaintNeeded"></a>
+</p></div></div><a class="anchor" name="setClockDateTime"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> repaintNeeded</td>
+<td class="memname"> setClockDateTime</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregion.html">QRegion</a>&nbsp;</td>
-<td class="paramname"><em>dirtyRegion=QRegion()</em></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatetime.html">QDateTime</a>&nbsp;</td>
+<td class="paramname"><em>datetime</em></td>
 </tr>
 <tr>
 <td></td>
@@ -638,22 +674,19 @@ Model/View paradigm.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>This signal is emitted when the repaint of the view was requested.
-If available with the <b>dirtyRegion</b> which is the region the view will change in.
-If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("repaintNeeded(QRegion)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="setShowGps"></a>
+<div class="memdoc"></div></div><a class="anchor" name="setClockSpeed"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> setShowGps</td>
+<td class="memname"> setClockSpeed</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">bool&nbsp;</td>
-<td class="paramname"><em>visible</em></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>speed</em></td>
 </tr>
 <tr>
 <td></td>
@@ -663,25 +696,189 @@ If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Set whether the Gps Data is visible.
+<div class="memdoc"></div></div><a class="anchor" name="setClockTimezone"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setClockTimezone</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>timeInSec</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="setHome"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setHome</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>zoom=1050</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the home point
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>visible</em>&nbsp;</td><td> visibility of the Gps Data.
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> homePoint the new home point.
+
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> zoom the default zoom level for the new home point.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="setVolatileTileCacheLimit"></a>
+</p></div></div><a class="anchor" name="setHome"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> setVolatileTileCacheLimit</td>
+<td class="memname"> setHome</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/quint64.html">quint64</a>&nbsp;</td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>homePoint</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>zoom=1050</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the home point
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> homePoint the new home point.
+
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> zoom the default zoom level for the new home point.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setLegend"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setLegend</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qtextdocument.html">QTextDocument</a>&nbsp;</td>
+<td class="paramname"><em>document</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="setMapTheme"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setMapTheme</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">GeoSceneDocument&nbsp;</td>
+<td class="paramname"><em>mapTheme</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set a new map theme to use.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>selectedMap</em>&nbsp;</td><td> the identifier of the selected map theme
+
+<tr><td></td><td valign="top"><em>currentProjection</em>&nbsp;</td><td> the current projection
+</td></tr>
+</table></dl>
+<p> This function sets the map theme, i.e. combination of tile set
+and color scheme to use. If the map theme is not previously
+used, some basic tiles are created and a progress dialog is
+shown.
+</p>
+<p>
+NOTE: The currentProjection parameters will
+disappear soon.
+</p>
+<p>
+The ID of the new maptheme. To ensure that a unique
+identifier is being used the theme does NOT get represented by its
+name but the by relative location of the file that specifies the theme:
+</p>
+<p>
+Example:
+maptheme = "earth/bluemarble/bluemarble.dgml"
+</p></div></div><a class="anchor" name="setPersistentTileCacheLimit"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setPersistentTileCacheLimit</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
 <td class="paramname"><em>kiloBytes</em></td>
 </tr>
 <tr>
@@ -692,113 +889,13 @@ If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Set the limit of the volatile (in RAM) tile cache.
+<div class="memdoc"><p>Set the limit of the persistent (on hard disc) tile cache.
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>kilobytes</em>&nbsp;</td><td> The limit in kilobytes.
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> bytes The limit in kilobytes, 0 means no limit.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="setupTextureMapper"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setupTextureMapper</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.html#Projection">Marble.Projection</a>&nbsp;</td>
-<td class="paramname"><em>projection</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Set the Projection used for the map
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> projection projection type (e.g. Spherical, Equirectangular, Mercator)
-</td></tr>
-</table></dl>
-<p>
-</p></div></div><a class="anchor" name="setupVectorComposer"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setupVectorComposer</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Setup the Vector Composer
-</p></div></div><a class="anchor" name="showGps"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool showGps</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Return whether the Gps Data is visible.
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> The Gps Data visibility.
-</dd></dl>
-</p></div></div><a class="anchor" name="startPolling"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> startPolling</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>time=1000</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Start the model's timer polling
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>time</em>&nbsp;</td><td> the amount of milliseconds between each poll
-</td></tr>
-</table></dl>
-<p> This is default behaviour so does not need to be started unless
-it was previously stopped
-</p></div></div><a class="anchor" name="stopPolling"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> stopPolling</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>stop the model from polling
 </p></div></div><a class="anchor" name="sunLocator"></a>
 <div class="memitem">
 <div class="memproto">
@@ -811,85 +908,26 @@ it was previously stopped
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="themeChanged"></a>
+<div class="memdoc"></div></div><a class="anchor" name="treeModel"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> themeChanged</td>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a> treeModel</td>
 <td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>mapTheme</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
 <td width="100%"> </td>
-</tr></table>
+</tr>
+</table>
 </div>
-<div class="memdoc"><p>Signal that the map theme has changed, and to which theme.
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>mapTheme</em>&nbsp;</td><td> the identifier of the new map theme.
-</td></tr> </table></dl>
-<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> mapTheme
-</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setMapTheme
+<div class="memdoc"><p>Return the list of Placemarks as a QAbstractItemModel *
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a list of all Placemarks in the MarbleModel.
 </dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("themeChanged(QString)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="tileZoomLevel"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">int tileZoomLevel</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Return the current tile zoom level. For example for OpenStreetMap
-possible values are 1..18, for BlueMarble 0..6.
-</p></div></div><a class="anchor" name="timeout"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> timeout</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Signal that a timer has gone off.
-</p>
-<p>
-This is currently used only for GPS things right now, but will
-likely be used for more things in the future.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("timeout()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="update"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> update</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Update the model
 </p></div></div><a class="anchor" name="volatileTileCacheLimit"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/quint64.html">quint64</a> volatileTileCacheLimit</td>
+<td class="memname">long volatileTileCacheLimit</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -900,51 +938,6 @@ likely be used for more things in the future.
 <div class="memdoc"><p>Returns the limit of the volatile (in RAM) tile cache.
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> the cache limit in kilobytes
 </dd></dl>
-</p></div></div><a class="anchor" name="whichFeatureAt"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QVector<QModelIndex> whichFeatureAt</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a>&nbsp;</td>
-<td class="paramname"><em>a0</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="whichItemAt"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">[Marble::AbstractDataPluginIte] whichItemAt</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a>&nbsp;</td>
-<td class="paramname"><em>curpos</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Returns all widgets of dataPlugins on the position curpos
 </p></div></div>
 </div>
 </div>
@@ -963,7 +956,21 @@ likely be used for more things in the future.
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>
 
 </div>

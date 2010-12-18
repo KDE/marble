@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,21 +48,27 @@
 <h1>GeoDataLookAt Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: Marble.GeoDataAbstractView &#x2192; Marble.GeoDataObject &#x2192; Marble.GeoNode<br />
+Inherits: <a href="../marble/Marble.GeoDataAbstractView.html">Marble.GeoDataAbstractView</a> &#x2192; <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> &#x2192; <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a><br />
 
-Namespace: Marble.GeoDataLookAt<br />
+Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
 
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataLookAt">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataLookAt">__init__</a> (self, <a href="../marble/Marble.GeoDataLookAt.html">Marble.GeoDataLookAt</a> other)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#altitude">altitude</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#coordinate">coordinate</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#coordinates">coordinates</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#detach">detach</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#latitude">latitude</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> unit=Marble.GeoDataCoordinates.Radian)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#longitude">longitude</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> unit=Marble.GeoDataCoordinates.Radian)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nodeType">nodeType</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#range">range</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAltitude">setAltitude</a> (self, float altitude)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCoordinates">setCoordinates</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinates)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setLatitude">setLatitude</a> (self, float latitude, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> unit=Marble.GeoDataCoordinates.Radian)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setLongitude">setLongitude</a> (self, float longitude, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> unit=Marble.GeoDataCoordinates.Radian)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRange">setRange</a> (self, float range)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="GeoDataLookAt"></a>
 <div class="memitem">
@@ -75,6 +81,28 @@ Namespace: Marble.GeoDataLookAt<br />
 <td width="100%"> </td>
 </tr>
 </table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="GeoDataLookAt"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataLookAt.html">Marble.GeoDataLookAt</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
 </div>
 <div class="memdoc"></div></div><a class="anchor" name="altitude"></a>
 <div class="memitem">
@@ -91,11 +119,11 @@ Namespace: Marble.GeoDataLookAt<br />
 <div class="memdoc"><p>retrieves the altitude of the GeoDataLookAt object
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> latitude
 </dd></dl>
-</p></div></div><a class="anchor" name="coordinate"></a>
+</p></div></div><a class="anchor" name="coordinates"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinate</td>
+<td class="memname"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinates</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -103,10 +131,23 @@ Namespace: Marble.GeoDataLookAt<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>retrieves the pointer to GeoDataCoordinates object of the GeoDataLookAt object
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> GeoDataCoordinates*
+<div class="memdoc"><p>retrieve the lat/lon/alt triple as a GeoDataCoordinates object
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> GeoDataCoordinates
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> longitude latitude altitude
 </dd></dl>
-</p></div></div><a class="anchor" name="latitude"></a>
+</p></div></div><a class="anchor" name="detach"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> detach</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="latitude"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -168,6 +209,33 @@ use the unit parameter to switch between Radian and DMS
 </td></tr> </table></dl>
 <p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> latitude
 </dd></dl>
+</p></div></div><a class="anchor" name="nodeType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> nodeType</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="range"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">float range</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Retrieve the distance (in meters) between the camera and the object looked at
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setRange
+</dd></dl>
 </p></div></div><a class="anchor" name="setAltitude"></a>
 <div class="memitem">
 <div class="memproto">
@@ -197,6 +265,35 @@ use the unit parameter to switch between Radian and DMS
 </td></tr>
 </table></dl>
 <p>
+</p></div></div><a class="anchor" name="setCoordinates"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>coordinates</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>set the GeoDataCoordinates object
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>GeoDataCoordinates</em>&nbsp;</td><td>
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataCoordinates
+</dd></dl>
 </p></div></div><a class="anchor" name="setLatitude"></a>
 <div class="memitem">
 <div class="memproto">
@@ -273,6 +370,31 @@ use the unit parameter to switch between Radian and DMS
 </td></tr>
 </table></dl>
 <p>
+</p></div></div><a class="anchor" name="setRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>range</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Change the distance (in meters) between the camera and the object looked at
+<dl class="see" compact><dt><b>See also:</b></dt><dd> range
+</dd></dl>
 </p></div></div>
 </div>
 </div>
@@ -291,7 +413,21 @@ use the unit parameter to switch between Radian and DMS
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>
 
 </div>

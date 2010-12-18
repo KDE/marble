@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,11 +48,12 @@
 <h1>AbstractDataPlugin Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: Marble.RenderPlugin &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+Inherits: <a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
 
-Namespace: Marble.AbstractDataPlugin<br />
+Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
-
+<dl class="abstract" compact><dt><b>Abstract class:</b></dt>
+<dd>This class can be used as a base class for new classes, but can not be instantiated directly.</dd></dl>
 <p>@short: An abstract class for plugins that show data that has a geo coordinate
 </p>
 <p>
@@ -70,7 +71,6 @@ and setVisible (often false) in the constructor of a subclass.
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#AbstractDataPlugin">__init__</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#backendTypes">backendTypes</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changedNumberOfItems">changedNumberOfItems</a> (self, long number)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#initialize">initialize</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isInitialized">isInitialized</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.AbstractDataPluginModel.html">Marble.AbstractDataPluginModel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#model">model</a> (self)</td></tr>
@@ -79,12 +79,30 @@ and setVisible (often false) in the constructor of a subclass.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#render">render</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> renderPos="NONE", <a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a> layer=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPolicy">renderPolicy</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPosition">renderPosition</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.RenderPlugin.html#RenderType">Marble.RenderPlugin.RenderType</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderType">renderType</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setModel">setModel</a> (self, <a href="../marble/Marble.AbstractDataPluginModel.html">Marble.AbstractDataPluginModel</a> model)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setNameId">setNameId</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setNumberOfItems">setNumberOfItems</a> (self, long number)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[Marble::AbstractDataPluginIte]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#whichItemAt">whichItemAt</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a> curpos)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../marble/Marble.AbstractDataPluginItem.html">Marble.AbstractDataPluginItem</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#whichItemAt">whichItemAt</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a> curpos)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="AbstractDataPlugin"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="changedNumberOfItems"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> changedNumberOfItems</td>
+<td>(</td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>number</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("changedNumberOfItems(quint32)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="AbstractDataPlugin"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -109,29 +127,7 @@ and setVisible (often false) in the constructor of a subclass.
 </table>
 </div>
 <div class="memdoc"><p>Returns the name(s) of the backend that the plugin can render
-</p></div></div><a class="anchor" name="changedNumberOfItems"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> changedNumberOfItems</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">long&nbsp;</td>
-<td class="paramname"><em>number</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("changedNumberOfItems(quint32)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="initialize"></a>
+</p></div></div><a class="anchor" name="initialize"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -267,6 +263,23 @@ and setVisible (often false) in the constructor of a subclass.
 </table>
 </div>
 <div class="memdoc"><p>Preferred level in the layer stack for the rendering
+</p></div></div><a class="anchor" name="renderType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.RenderPlugin.html#RenderType">Marble.RenderPlugin.RenderType</a> renderType</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Function for returning the type of plugin this is for.
+This affects where in the menu tree the action() is placed.
+</p>
+<p>
+@return: The type of render plugin this is.
 </p></div></div><a class="anchor" name="setModel"></a>
 <div class="memitem">
 <div class="memproto">
@@ -340,7 +353,7 @@ and setVisible (often false) in the constructor of a subclass.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">[Marble::AbstractDataPluginIte] whichItemAt</td>
+<td class="memname">[<a href="../marble/Marble.AbstractDataPluginItem.html">Marble.AbstractDataPluginItem</a>] whichItemAt</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
@@ -382,7 +395,21 @@ been painted the last time.
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>
 
 </div>

@@ -49,6 +49,6 @@ protected:
     virtual void            hideEvent (QHideEvent* event);
     virtual void            showEvent (QShowEvent* event);
 public:
-    explicit                DownloadRegionDialog (Marble::MarbleModel*model, QWidget* parent = 0, const Qt::WindowFlags f = 0);
+    explicit                DownloadRegionDialog (Marble::MarbleWidget* widget, QWidget* parent = 0, const Qt::WindowFlags f = 0);
 };
 };

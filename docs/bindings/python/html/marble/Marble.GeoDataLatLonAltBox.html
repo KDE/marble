@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,9 +48,9 @@
 <h1>GeoDataLatLonAltBox Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: Marble.GeoDataLatLonBox &#x2192; Marble.GeoDataObject &#x2192; Marble.GeoNode<br />
+Inherits: <a href="../marble/Marble.GeoDataLatLonBox.html">Marble.GeoDataLatLonBox</a> &#x2192; <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> &#x2192; <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a><br />
 
-Namespace: Marble.GeoDataLatLonAltBox<br />
+Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
 <p>A class that defines a 3D bounding box for geographic data.
@@ -77,7 +77,6 @@ the western one.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#contains">contains</a> (self, <a href="../marble/Marble.GeoDataPoint.html">Marble.GeoDataPoint</a> a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#contains">contains</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#contains">contains</a> (self, <a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a> a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fromLineString">fromLineString</a> (self, <a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a> lineString)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#intersects">intersects</a> (self, <a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a> a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isNull">isNull</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#maxAltitude">maxAltitude</a> (self)</td></tr>
@@ -89,6 +88,8 @@ the western one.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMinAltitude">setMinAltitude</a> (self, float minAltitude)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toString">toString</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> unit=Marble.GeoDataCoordinates.Radian)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#unpack">unpack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fromLineString">fromLineString</a> (<a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a> lineString)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="GeoDataLatLonAltBox"></a>
 <div class="memitem">
@@ -168,7 +169,12 @@ the western one.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="altitudeMode"></a>
+<div class="memdoc"><p>A LatLonAltBox with the data from a GeoDataCoordinate
+This way of creating a GeoDataLatLonAltBox sets the north and south
+values of this box to the Latitude value in the GeoDataCoordinate,
+resulting in a Box that has a 0 Area. This is useful for building
+LatLonAltBoxes from GeoDataCoordinates.
+</p></div></div><a class="anchor" name="altitudeMode"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -265,32 +271,7 @@ for measuring the altitude.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="fromLineString"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a> fromLineString</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a>&nbsp;</td>
-<td class="paramname"><em>lineString</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Create the smallest bounding box from a line string.
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> the smallest bounding box that contains the linestring.
-</dd></dl>
-</p></div></div><a class="anchor" name="intersects"></a>
+<div class="memdoc"></div></div><a class="anchor" name="intersects"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -503,7 +484,27 @@ for measuring the altitude.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div>
+<div class="memdoc"></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="fromLineString"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a> fromLineString</td>
+<td>(</td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a>&nbsp;</td>
+<td class="paramname"><em>lineString</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Create the smallest bounding box from a line string.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the smallest bounding box that contains the linestring.
+</dd></dl>
+</p></div></div>
 </div>
 </div>
 </div>
@@ -521,7 +522,21 @@ for measuring the altitude.
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>
 
 </div>

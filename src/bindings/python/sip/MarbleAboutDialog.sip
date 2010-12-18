@@ -28,6 +28,7 @@ public:
     explicit                MarbleAboutDialog (QWidget* parent /TransferThis/ = 0);
 
     ~MarbleAboutDialog ();
+    void                    setApplicationTitle (const QString& title);
 };
 // MarbleAboutDialog
 

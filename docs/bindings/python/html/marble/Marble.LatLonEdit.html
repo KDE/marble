@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
 <p>
 Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
 
-Namespace: Marble.LatLonEdit<br />
+Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
 
@@ -59,13 +59,45 @@ Namespace: Marble.LatLonEdit<br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#valueChanged">valueChanged</a> (float value)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#LatLonEdit">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0, <a href="../marble/Marble.html#Dimension">Marble.Dimension</a> dimension=Marble.Longitude)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dimensionChanged">dimensionChanged</a> (self, <a href="../marble/Marble.html#Dimension">Marble.Dimension</a> dimension)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDimension">setDimension</a> (self, <a href="../marble/Marble.html#Dimension">Marble.Dimension</a> dimension)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setValue">setValue</a> (self, float newvalue)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#value">value</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#valueChanged">valueChanged</a> (self, float value)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="LatLonEdit"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="dimensionChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> dimensionChanged</td>
+<td>(</td>
+<td class="paramtype"><a href="../marble/Marble.html#Dimension">Marble.Dimension</a>&nbsp;</td>
+<td class="paramname"><em>dimension</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("dimensionChanged(Marble::Dimension)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="valueChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> valueChanged</td>
+<td>(</td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>value</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("valueChanged(qreal)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="LatLonEdit"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -93,29 +125,7 @@ Namespace: Marble.LatLonEdit<br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="dimensionChanged"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> dimensionChanged</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.html#Dimension">Marble.Dimension</a>&nbsp;</td>
-<td class="paramname"><em>dimension</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("dimensionChanged(Marble::Dimension)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="setDimension"></a>
+<div class="memdoc"></div></div><a class="anchor" name="setDimension"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -171,29 +181,7 @@ Namespace: Marble.LatLonEdit<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="valueChanged"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> valueChanged</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>value</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("valueChanged(qreal)"), target_slot)</code></dd></dl></div></div>
+<div class="memdoc"></div></div>
 </div>
 </div>
 </div>
@@ -211,7 +199,21 @@ Namespace: Marble.LatLonEdit<br />
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>
 
 </div>

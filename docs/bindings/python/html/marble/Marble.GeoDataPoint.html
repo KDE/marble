@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,9 +48,9 @@
 <h1>GeoDataPoint Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: Marble.GeoDataCoordinates,Marble.GeoDataGeometry &#x2192; Marble.GeoDataObject &#x2192; Marble.GeoNode<br />
+Inherits: <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>,<a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> &#x2192; <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> &#x2192; <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a><br />
 
-Namespace: Marble.GeoDataPoint<br />
+Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
 <p>A Geometry object representing a 3d point
@@ -73,7 +73,7 @@ amount of points e.g. for line strings, linear rings and polygons.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataPoint">__init__</a> (self, <a href="../marble/Marble.GeoDataPoint.html">Marble.GeoDataPoint</a> other)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataPoint">__init__</a> (self, <a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> other)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataPoint">__init__</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataPoint">__init__</a> (self, float _lon, float _lat, float alt=0, <a href="../marble/Marble.GeoDataPoint.Unit.html">Marble.GeoDataPoint.Unit</a> _unit=Marble.GeoDataPoint.Radian, int _detail=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataPoint">__init__</a> (self, float _lon, float _lat, float alt=0, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> _unit=Marble.GeoDataPoint.Radian, int _detail=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataPoint">__init__</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> other)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#detach">detach</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nodeType">nodeType</a> (self)</td></tr>
@@ -165,7 +165,7 @@ amount of points e.g. for line strings, linear rings and polygons.
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataPoint.Unit.html">Marble.GeoDataPoint.Unit</a>&nbsp;</td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a>&nbsp;</td>
 <td class="paramname"><em>_unit=Marble.GeoDataPoint.Radian</em>, </td>
 </tr>
 <tr>
@@ -182,7 +182,21 @@ amount of points e.g. for line strings, linear rings and polygons.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="GeoDataPoint"></a>
+<div class="memdoc"><p>create a geopoint from longitude and latitude
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_lon</em>&nbsp;</td><td> longitude
+
+<tr><td></td><td valign="top"><em>_lat</em>&nbsp;</td><td> latitude
+
+<tr><td></td><td valign="top"><em>alt</em>&nbsp;</td><td> altitude (default: 0)
+
+<tr><td></td><td valign="top"><em>_unit</em>&nbsp;</td><td> units that lon and lat get measured in
+(default for Radian: north pole at pi/2, southpole at -pi/2)
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="GeoDataPoint"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -290,7 +304,21 @@ amount of points e.g. for line strings, linear rings and polygons.
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>
 
 </div>

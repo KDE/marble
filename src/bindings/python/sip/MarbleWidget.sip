@@ -129,7 +129,6 @@ public:
     void                    clearVolatileTileCache ();
     void                    setVolatileTileCacheLimit (quint64 kiloBytes);
     void                    creatingTilesStart (Marble::TileCreator* creator, const QString& name, const QString& description);
-    void                    updateChangedMap ();
     void                    setMapQuality (Marble::MapQuality, Marble::ViewContext = Marble::Still);
     void                    setViewContext (Marble::ViewContext viewContext);
     void                    setAnimationsEnabled (bool enabled);
@@ -195,6 +194,13 @@ signals:
     void                    themeChanged (const QString& theme);
     void                    mouseMoveGeoPosition (const QString&);
     void                    visibleLatLonAltBoxChanged (const Marble::GeoDataLatLonAltBox& visibleLatLonAltBox);
+public:
+    int                     tileZoomLevel () const;
+    QVector<QModelIndex>    whichFeatureAt (const QPoint&) const;
+    QList<Marble::AbstractDataPluginItem*>  whichItemAt (const QPoint& curpos) const;
+    void                    downloadRegion (const QString& sourceDir, const QVector<Marble::TileCoordsPyramid>&);
+signals:
+    void                    tileLevelChanged (int level);
 };
 // MarbleWidget
 

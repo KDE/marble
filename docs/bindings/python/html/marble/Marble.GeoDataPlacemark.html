@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,9 +48,9 @@
 <h1>GeoDataPlacemark Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: Marble.GeoDataFeature &#x2192; Marble.GeoDataObject &#x2192; Marble.GeoNode<br />
+Inherits: <a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> &#x2192; <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> &#x2192; <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a><br />
 
-Namespace: Marble.GeoDataPlacemark<br />
+Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
 <p>a class representing a point of interest on the map
@@ -74,13 +74,12 @@ not provided in a KML file.
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataPlacemark">__init__</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataPlacemark">__init__</a> (self, <a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a> placemark)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataPlacemark">__init__</a> (self, <a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> feature)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataPlacemark">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#area">area</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#coordinate">coordinate</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#countryCode">countryCode</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#geometry">geometry</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isPlacemark">isPlacemark</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataLookAt.html">Marble.GeoDataLookAt</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#lookAt">lookAt</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nodeType">nodeType</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qxmlstreamwriter.html">QXmlStreamWriter</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator <<">operator <<</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qxmlstreamwriter.html">QXmlStreamWriter</a> stream)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator ==">operator ==</a> (self, <a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a> other)</td></tr>
@@ -88,15 +87,14 @@ not provided in a KML file.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qxmlstreamwriter.html">QXmlStreamWriter</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pack">pack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qxmlstreamwriter.html">QXmlStreamWriter</a> stream)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#population">population</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setArea">setArea</a> (self, float area)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCoordinate">setCoordinate</a> (self, float longitude, float latitude, float altitude=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCoordinate">setCoordinate</a> (self, float longitude, float latitude, float altitude=0, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> _unit=Marble.GeoDataPoint.Radian)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCoordinate">setCoordinate</a> (self, <a href="../marble/Marble.GeoDataPoint.html">Marble.GeoDataPoint</a> point)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCountryCode">setCountryCode</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> code)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setGeometry">setGeometry</a> (self, <a href="../marble/Marble.GeoDataPoint.html">Marble.GeoDataPoint</a> entry)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setGeometry">setGeometry</a> (self, <a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a> entry)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setGeometry">setGeometry</a> (self, <a href="../marble/Marble.GeoDataLinearRing.html">Marble.GeoDataLinearRing</a> entry)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setGeometry">setGeometry</a> (self, <a href="../marble/Marble.GeoDataMultiGeometry.html">Marble.GeoDataMultiGeometry</a> entry)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setGeometry">setGeometry</a> (self, <a href="../marble/Marble.GeoDataPolygon.html">Marble.GeoDataPolygon</a> entry)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setGeometry">setGeometry</a> (self, <a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> entry)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setLookAt">setLookAt</a> (self, <a href="../marble/Marble.GeoDataLookAt.html">Marble.GeoDataLookAt</a> lookAt)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPopulation">setPopulation</a> (self, long population)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setState">setState</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> state)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#state">state</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#unpack">unpack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="GeoDataPlacemark"></a>
@@ -111,7 +109,8 @@ not provided in a KML file.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="GeoDataPlacemark"></a>
+<div class="memdoc"><p>Create a new placemark.
+</p></div></div><a class="anchor" name="GeoDataPlacemark"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -133,29 +132,8 @@ not provided in a KML file.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="GeoDataPlacemark"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">__init__</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a>&nbsp;</td>
-<td class="paramname"><em>feature</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="GeoDataPlacemark"></a>
+<div class="memdoc"><p>Create a new placemark from existing placemark <b>placemark</b>
+</p></div></div><a class="anchor" name="GeoDataPlacemark"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -177,7 +155,8 @@ not provided in a KML file.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="area"></a>
+<div class="memdoc"><p>Create a new placemark with the given <b>name.</b>
+</p></div></div><a class="anchor" name="area"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -238,11 +217,11 @@ and <b>latitude.</b>
 along with the icon at the coordinate associated with this Placemark.
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> a pointer to the current Geometry object
 </dd></dl>
-</p></div></div><a class="anchor" name="isPlacemark"></a>
+</p></div></div><a class="anchor" name="lookAt"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">bool isPlacemark</td>
+<td class="memname"><a href="../marble/Marble.GeoDataLookAt.html">Marble.GeoDataLookAt</a> lookAt</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -250,7 +229,11 @@ along with the icon at the coordinate associated with this Placemark.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="nodeType"></a>
+<div class="memdoc"><p>Returns GeoDataLookAt object if lookAt is setup earlier
+otherwise It will convert GeoDataCoordinates of Placemark
+to GeoDataLookAt with range equals to altitude of
+GeoDataCoordinate
+</p></div></div><a class="anchor" name="nodeType"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -434,7 +417,13 @@ method.
 <td class="memname"></td>
 <td></td>
 <td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>altitude=0</em></td>
+<td class="paramname"><em>altitude=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a>&nbsp;</td>
+<td class="paramname"><em>_unit=Marble.GeoDataPoint.Radian</em></td>
 </tr>
 <tr>
 <td></td>
@@ -502,7 +491,7 @@ method.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataPoint.html">Marble.GeoDataPoint</a>&nbsp;</td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>&nbsp;</td>
 <td class="paramname"><em>entry</em></td>
 </tr>
 <tr>
@@ -518,19 +507,19 @@ overview for description of the geometry concept. The geometry can be set
 to any <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataGeometry like <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataPoint,@see GeoDataLineString,
 </dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataLinearRing and <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataMultiGeometry
 </dd></dl>
-</p></div></div><a class="anchor" name="setGeometry"></a>
+</p></div></div><a class="anchor" name="setLookAt"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> setGeometry</td>
+<td class="memname"> setLookAt</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a>&nbsp;</td>
-<td class="paramname"><em>entry</em></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataLookAt.html">Marble.GeoDataLookAt</a>&nbsp;</td>
+<td class="paramname"><em>lookAt</em></td>
 </tr>
 <tr>
 <td></td>
@@ -540,92 +529,7 @@ to any <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataGeometry lik
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets the current Geometry of this Placemark. <dl class="see" compact><dt><b>See also:</b></dt><dd> geometry() and the class
-overview for description of the geometry concept. The geometry can be set
-to any <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataGeometry like <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataPoint,@see GeoDataLineString,
-</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataLinearRing and <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataMultiGeometry
-</dd></dl>
-</p></div></div><a class="anchor" name="setGeometry"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setGeometry</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataLinearRing.html">Marble.GeoDataLinearRing</a>&nbsp;</td>
-<td class="paramname"><em>entry</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Sets the current Geometry of this Placemark. <dl class="see" compact><dt><b>See also:</b></dt><dd> geometry() and the class
-overview for description of the geometry concept. The geometry can be set
-to any <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataGeometry like <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataPoint,@see GeoDataLineString,
-</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataLinearRing and <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataMultiGeometry
-</dd></dl>
-</p></div></div><a class="anchor" name="setGeometry"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setGeometry</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataMultiGeometry.html">Marble.GeoDataMultiGeometry</a>&nbsp;</td>
-<td class="paramname"><em>entry</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Sets the current Geometry of this Placemark. <dl class="see" compact><dt><b>See also:</b></dt><dd> geometry() and the class
-overview for description of the geometry concept. The geometry can be set
-to any <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataGeometry like <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataPoint,@see GeoDataLineString,
-</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataLinearRing and <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataMultiGeometry
-</dd></dl>
-</p></div></div><a class="anchor" name="setGeometry"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setGeometry</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataPolygon.html">Marble.GeoDataPolygon</a>&nbsp;</td>
-<td class="paramname"><em>entry</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Sets the current Geometry of this Placemark. <dl class="see" compact><dt><b>See also:</b></dt><dd> geometry() and the class
-overview for description of the geometry concept. The geometry can be set
-to any <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataGeometry like <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataPoint,@see GeoDataLineString,
-</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataLinearRing and <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataMultiGeometry
-</dd></dl>
+<div class="memdoc"><p>Set lookAt <b>GeoDataLookAt</b>
 </p></div></div><a class="anchor" name="setPopulation"></a>
 <div class="memitem">
 <div class="memproto">
@@ -655,6 +559,42 @@ to any <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataGeometry lik
 </td></tr>
 </table></dl>
 <p>
+</p></div></div><a class="anchor" name="setState"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setState</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>state</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the state <b>state</b> of the placemark.
+</p></div></div><a class="anchor" name="state"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> state</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the state of the placemark.
 </p></div></div><a class="anchor" name="unpack"></a>
 <div class="memitem">
 <div class="memproto">
@@ -703,7 +643,21 @@ from <dl class="see" compact><dt><b>See also:</b></dt><dd> pack()
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>
 
 </div>

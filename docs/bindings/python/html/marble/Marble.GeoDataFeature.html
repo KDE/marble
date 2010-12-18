@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,9 +48,9 @@
 <h1>GeoDataFeature Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: Marble.GeoDataObject &#x2192; Marble.GeoNode<br />
-Subclasses: <a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a>, <a href="../marble/Marble.GeoDataContainer.html">Marble.GeoDataContainer</a><br />
-Namespace: Marble.GeoDataFeature<br />
+Inherits: <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> &#x2192; <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a><br />
+
+Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
 <p>A base class for all geodata features
@@ -71,20 +71,13 @@ but is always used as part of a derived class.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataFeature">__init__</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataFeature">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataFeature">__init__</a> (self, <a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> other)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataFeature">__init__</a> (self, <a href="../marble/Marble.GeoDataContainer.html">Marble.GeoDataContainer</a> other)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataFeature">__init__</a> (self, <a href="../marble/Marble.GeoDataFolder.html">Marble.GeoDataFolder</a> other)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataFeature">__init__</a> (self, <a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a> other)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataFeature">__init__</a> (self, <a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataAbstractView.html">Marble.GeoDataAbstractView</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abstractView">abstractView</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#address">address</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#defaultFont">defaultFont</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#description">description</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#descriptionIsCDATA">descriptionIsCDATA</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#detach">detach</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/global.html#EnumFeatureId">EnumFeatureId</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#featureId">featureId</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isFolder">isFolder</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isPlacemark">isPlacemark</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isVisible">isVisible</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataLookAt.html">Marble.GeoDataLookAt</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#lookAt">lookAt</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#name">name</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nodeType">nodeType</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator ==">operator ==</a> (self, <a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> a0)</td></tr>
@@ -93,19 +86,16 @@ but is always used as part of a derived class.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#popularity">popularity</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#popularityIndex">popularityIndex</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataRegion.html">Marble.GeoDataRegion</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#region">region</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resetDefaultStyles">resetDefaultStyles</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qchar.html">QChar</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#role">role</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAbstractView">setAbstractView</a> (self, <a href="../marble/Marble.GeoDataAbstractView.html">Marble.GeoDataAbstractView</a> abstractView)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAddress">setAddress</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> value)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDefaultFont">setDefaultFont</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a> font)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDescription">setDescription</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> value)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDescriptionCDATA">setDescriptionCDATA</a> (self, bool cdata)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setLookAt">setLookAt</a> (self, <a href="../marble/Marble.GeoDataLookAt.html">Marble.GeoDataLookAt</a> lookAt)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setName">setName</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> value)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPhoneNumber">setPhoneNumber</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> value)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPopularity">setPopularity</a> (self, long popularity)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPopularityIndex">setPopularityIndex</a> (self, int index)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRegion">setRegion</a> (self, <a href="../marble/Marble.GeoDataRegion.html">Marble.GeoDataRegion</a> region)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRole">setRole</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qchar.html">QChar</a> role)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRole">setRole</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> role)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setStyle">setStyle</a> (self, <a href="../marble/Marble.GeoDataStyle.html">Marble.GeoDataStyle</a> style)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setStyleMap">setStyleMap</a> (self, <a href="../marble/Marble.GeoDataStyleMap.html">Marble.GeoDataStyleMap</a> map)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setStyleUrl">setStyleUrl</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> value)</td></tr>
@@ -118,6 +108,10 @@ but is always used as part of a derived class.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsize.html">QSize</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#symbolSize">symbolSize</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#unpack">unpack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataFeature.html#GeoDataVisualCategory">Marble.GeoDataFeature.GeoDataVisualCategory</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#visualCategory">visualCategory</a> (self)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#defaultFont">defaultFont</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resetDefaultStyles">resetDefaultStyles</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDefaultFont">setDefaultFont</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a> font)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="GeoDataFeature"></a>
 <div class="memitem">
@@ -175,99 +169,11 @@ but is always used as part of a derived class.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="GeoDataFeature"></a>
+<div class="memdoc"></div></div><a class="anchor" name="abstractView"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">__init__</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataContainer.html">Marble.GeoDataContainer</a>&nbsp;</td>
-<td class="paramname"><em>other</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="GeoDataFeature"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">__init__</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataFolder.html">Marble.GeoDataFolder</a>&nbsp;</td>
-<td class="paramname"><em>other</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="GeoDataFeature"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">__init__</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a>&nbsp;</td>
-<td class="paramname"><em>other</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="GeoDataFeature"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">__init__</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a>&nbsp;</td>
-<td class="paramname"><em>other</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="address"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> address</td>
+<td class="memname"><a href="../marble/Marble.GeoDataAbstractView.html">Marble.GeoDataAbstractView</a> abstractView</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -275,11 +181,11 @@ but is always used as part of a derived class.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="defaultFont"></a>
+<div class="memdoc"></div></div><a class="anchor" name="address"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a> defaultFont</td>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> address</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -341,30 +247,6 @@ parser namespace.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="isFolder"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool isFolder</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="isPlacemark"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool isPlacemark</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
 <div class="memdoc"></div></div><a class="anchor" name="isVisible"></a>
 <div class="memitem">
 <div class="memproto">
@@ -377,20 +259,7 @@ parser namespace.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="lookAt"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.GeoDataLookAt.html">Marble.GeoDataLookAt</a> lookAt</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Returns pointer to the GeoDataLooAt of the feature.
-</p></div></div><a class="anchor" name="name"></a>
+<div class="memdoc"></div></div><a class="anchor" name="name"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -523,36 +392,29 @@ level the placemark will be shown.
 </table>
 </div>
 <div class="memdoc"><p>Return the region assigned to the placemark.
-</p></div></div><a class="anchor" name="resetDefaultStyles"></a>
+</p></div></div><a class="anchor" name="setAbstractView"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> resetDefaultStyles</td>
+<td class="memname"> setAbstractView</td>
 <td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataAbstractView.html">Marble.GeoDataAbstractView</a>&nbsp;</td>
+<td class="paramname"><em>abstractView</em></td>
 </tr>
-</table>
-</div>
-<div class="memdoc"><p>Return the label font of the placemark.
-</p></div></div><a class="anchor" name="role"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qchar.html">QChar</a> role</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
 <td width="100%"> </td>
-</tr>
-</table>
+</tr></table>
 </div>
-<div class="memdoc"><p>Return the role of the placemark.
-</p>
-<p>
-FIXME: describe roles here!
-</p></div></div><a class="anchor" name="setAddress"></a>
+<div class="memdoc"></div></div><a class="anchor" name="setAddress"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -565,28 +427,6 @@ FIXME: describe roles here!
 <td></td>
 <td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
 <td class="paramname"><em>value</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="setDefaultFont"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setDefaultFont</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a>&nbsp;</td>
-<td class="paramname"><em>font</em></td>
 </tr>
 <tr>
 <td></td>
@@ -640,36 +480,7 @@ FIXME: describe roles here!
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="setLookAt"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setLookAt</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataLookAt.html">Marble.GeoDataLookAt</a>&nbsp;</td>
-<td class="paramname"><em>lookAt</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Sets the lookAt of the placemark.
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> LookAt the new LookAt of the feature.
-</td></tr>
-</table></dl>
-<p>
-</p></div></div><a class="anchor" name="setName"></a>
+<div class="memdoc"></div></div><a class="anchor" name="setName"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -818,7 +629,7 @@ FIXME: describe roles here!
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qchar.html">QChar</a>&nbsp;</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
 <td class="paramname"><em>role</em></td>
 </tr>
 <tr>
@@ -1078,7 +889,49 @@ same visual category
 </table>
 </div>
 <div class="memdoc"><p>Return the symbol index of the placemark.
-</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="GeoDataVisualCategory"></a>
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="defaultFont"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a> defaultFont</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="resetDefaultStyles"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> resetDefaultStyles</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the label font of the placemark.
+</p></div></div><a class="anchor" name="setDefaultFont"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDefaultFont</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a>&nbsp;</td>
+<td class="paramname"><em>font</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="GeoDataVisualCategory"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -1086,8 +939,9 @@ same visual category
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>A categorization of a placemark as defined by ...FIXME.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>None</em>&nbsp;</td><td><tr><td valign="top"><em>Default</em>&nbsp;</td><td><tr><td valign="top"><em>Unknown</em>&nbsp;</td><td><tr><td valign="top"><em>SmallCity</em>&nbsp;</td><td><tr><td valign="top"><em>SmallCountyCapital</em>&nbsp;</td><td><tr><td valign="top"><em>SmallStateCapital</em>&nbsp;</td><td><tr><td valign="top"><em>SmallNationCapital</em>&nbsp;</td><td><tr><td valign="top"><em>MediumCity</em>&nbsp;</td><td><tr><td valign="top"><em>MediumCountyCapital</em>&nbsp;</td><td><tr><td valign="top"><em>MediumStateCapital</em>&nbsp;</td><td><tr><td valign="top"><em>MediumNationCapital</em>&nbsp;</td><td><tr><td valign="top"><em>BigCity</em>&nbsp;</td><td><tr><td valign="top"><em>BigCountyCapital</em>&nbsp;</td><td><tr><td valign="top"><em>BigStateCapital</em>&nbsp;</td><td><tr><td valign="top"><em>BigNationCapital</em>&nbsp;</td><td><tr><td valign="top"><em>LargeCity</em>&nbsp;</td><td><tr><td valign="top"><em>LargeCountyCapital</em>&nbsp;</td><td><tr><td valign="top"><em>LargeStateCapital</em>&nbsp;</td><td><tr><td valign="top"><em>LargeNationCapital</em>&nbsp;</td><td><tr><td valign="top"><em>Nation</em>&nbsp;</td><td><tr><td valign="top"><em>Mountain</em>&nbsp;</td><td><tr><td valign="top"><em>Volcano</em>&nbsp;</td><td><tr><td valign="top"><em>Mons</em>&nbsp;</td><td><tr><td valign="top"><em>Valley</em>&nbsp;</td><td><tr><td valign="top"><em>Continent</em>&nbsp;</td><td><tr><td valign="top"><em>Ocean</em>&nbsp;</td><td><tr><td valign="top"><em>OtherTerrain</em>&nbsp;</td><td><tr><td valign="top"><em>Crater</em>&nbsp;</td><td><tr><td valign="top"><em>Mare</em>&nbsp;</td><td><tr><td valign="top"><em>GeographicPole</em>&nbsp;</td><td><tr><td valign="top"><em>MagneticPole</em>&nbsp;</td><td><tr><td valign="top"><em>ShipWreck</em>&nbsp;</td><td><tr><td valign="top"><em>AirPort</em>&nbsp;</td><td><tr><td valign="top"><em>Observatory</em>&nbsp;</td><td><tr><td valign="top"><em>Wikipedia</em>&nbsp;</td><td><tr><td valign="top"><em>OsmSite</em>&nbsp;</td><td><tr><td valign="top"><em>Coordinate</em>&nbsp;</td><td><tr><td valign="top"><em>MannedLandingSite</em>&nbsp;</td><td><tr><td valign="top"><em>RoboticRover</em>&nbsp;</td><td><tr><td valign="top"><em>UnmannedSoftLandingSite</em>&nbsp;</td><td><tr><td valign="top"><em>UnmannedHardLandingSite</em>&nbsp;</td><td><tr><td valign="top"><em>LastIndex</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>
@@ -1107,7 +961,21 @@ same visual category
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>
 
 </div>

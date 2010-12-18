@@ -41,7 +41,6 @@ public:
     void                    setPlanetAxis (const Marble::Quaternion& newAxis);
     void                    centerCoordinates (qreal& centerLon /out/, qreal& centerLat /out/);
     QImage*                 canvasImage () const;
-    void                    setCanvasImage (QImage *);
     QImage*                 coastImage () const;
 
 // FIXME const here causes trouble
@@ -67,7 +66,7 @@ public:
     int                     height () const;
     bool                    showClouds () const;
     void                    setShowClouds (const bool);
-    void                    setCoastImage (QImage*);
+    void                    setSize (int width, int height);
 };
 // ViewParams
 

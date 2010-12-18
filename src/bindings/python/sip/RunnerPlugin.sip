@@ -60,5 +60,7 @@ protected:
     void                    setNameId (const QString& nameId);
     void                    setDescription (const QString& description);
     void                    setIcon (const QIcon& icon);
+public:
+    virtual bool            canWork (Marble::RunnerPlugin::Capability capability) const;
 };
 };

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,9 +48,9 @@
 <h1>GeoDataObject Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: Marble.GeoNode,<a href="../marble/Serializable.html">Serializable</a><br />
-Subclasses: <a href="../marble/Marble.GeoDataLod.html">Marble.GeoDataLod</a>, <a href="../marble/Marble.GeoDataRegion.html">Marble.GeoDataRegion</a>, <a href="../marble/Marble.GeoDataStyleSelector.html">Marble.GeoDataStyleSelector</a>, <a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>, <a href="../marble/Marble.GeoDataHotSpot.html">Marble.GeoDataHotSpot</a>, <a href="../marble/Marble.GeoDataLatLonBox.html">Marble.GeoDataLatLonBox</a>, <a href="../marble/Marble.GeoDataAbstractView.html">Marble.GeoDataAbstractView</a>, <a href="../marble/Marble.GeoDataColorStyle.html">Marble.GeoDataColorStyle</a>, <a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a><br />
-Namespace: Marble.GeoDataObject<br />
+Inherits: <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a>,<a href="../marble/Serializable.html">Serializable</a><br />
+
+Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
 <p>A base class for all geodata objects
@@ -79,14 +79,12 @@ Marble.
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataObject">__init__</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataObject">__init__</a> (self, <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#child">child</a> (self, int a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#childCount">childCount</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#childPosition">childPosition</a> (self, <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#id">id</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nodeType">nodeType</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pack">pack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#row">row</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parent">parent</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setId">setId</a> (self, int value)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setParent">setParent</a> (self, <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> parent)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setTargetId">setTargetId</a> (self, int value)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#targetId">targetId</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#unpack">unpack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> steam)</td></tr>
@@ -125,66 +123,7 @@ Marble.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="child"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> child</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>a0</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>returns the requested child item
-</p></div></div><a class="anchor" name="childCount"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">int childCount</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>returns the number of items in the list
-</p></div></div><a class="anchor" name="childPosition"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">int childPosition</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a>&nbsp;</td>
-<td class="paramname"><em>a0</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>returns the position of an item in the list
-</p></div></div><a class="anchor" name="id"></a>
+<div class="memdoc"></div></div><a class="anchor" name="id"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -231,11 +170,11 @@ Marble.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="row"></a>
+<div class="memdoc"></div></div><a class="anchor" name="parent"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">int row</td>
+<td class="memname"><a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> parent</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -243,8 +182,7 @@ Marble.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>returns this items position in the parents list
-</p></div></div><a class="anchor" name="setId"></a>
+<div class="memdoc"></div></div><a class="anchor" name="setId"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -273,7 +211,29 @@ Marble.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="setTargetId"></a>
+</p></div></div><a class="anchor" name="setParent"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setParent</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="setTargetId"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -355,7 +315,21 @@ Marble.
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>
 
 </div>
