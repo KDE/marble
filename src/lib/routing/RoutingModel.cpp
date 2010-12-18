@@ -84,6 +84,7 @@ public:
     QMap<RoutingInstruction::TurnType,QPixmap> m_turnTypePixmaps;
     PositionTracking* m_positionTracking;
     RouteRequest* m_request;
+    QVector<int> m_instructionLookupTable;
 
     void importPlacemark( const GeoDataPlacemark *placemark );
 
@@ -274,6 +275,33 @@ bool RoutingModel::setCurrentRoute( GeoDataDocument* document )
     }
 
     d->m_deviation = RoutingModelPrivate::Unknown;
+
+    // Generate lookup table
+    d->m_instructionLookupTable.clear();
+    GeoDataLineString wayPoints, instructions;
+    foreach( const RouteElement &element, d->m_route ) {
+        if ( element.type == WayPoint ) {
+            wayPoints << element.position;
+        } else if ( element.type == Instruction ) {
+          instructions << element.position;
+        }
+    }
+
+    int const end = wayPoints.size();
+    int j=0;
+    for ( int i=0; i<end; ++i ) {
+      if ( j >= instructions.size() ) {
+        // Towards the end of the route
+        break;
+      }
+
+      if ( wayPoints.at(i) == instructions.at(j) ) {
+        //mDebug() << "Instruction " << j << " => Waypoint " << i;
+        d->m_instructionLookupTable.push_back( i );
+        ++j;
+      }
+    }
+
     reset();
     return true;
 }
@@ -401,6 +429,9 @@ int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteReques
 
 void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed )
 {
+    /** @todo FIXME Refactor this method. Shorter, less caching.
+              Switch to a more intelligent underlying data structure */
+
     if( rowCount() != 0 ) {
 
         QList<RouteElement> instructions;
@@ -445,16 +476,22 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
         //if there is no route but source and destination are specified
         if( wayPoints.size() != 0 ) {
             if( !( wayPoints[waypointIndex] == wayPoints[wayPoints.size()-1] ) ) {
-                int currentWaypointOffset = 0;
-                for( int i = 0; i<instructions.size(); ++i ) {
-                    int instructionSize = instructions[i].instructionPointSet.size();
-                    for ( int j = 0; j<instructionSize; ++j ) {
-                       if( wayPoints[waypointIndex] ==  instructions[i].instructionPointSet.at(j) ) {
-                           d->m_nextInstructionIndex = i + 1;
-                           currentWaypointOffset = j;
-                       }
-                    }
+//                int currentWaypointOffset = 0;
+                for ( int k = 0; k<d->m_instructionLookupTable.size(); ++k ) {
+                  if ( d->m_instructionLookupTable.at( k ) > waypointIndex ) {
+                    d->m_nextInstructionIndex = k;
+                    break;
+                  }
                 }
+//                for( int i = 0; i<instructions.size(); ++i ) {
+//                    int instructionSize = instructions[i].instructionPointSet.size();
+//                    for ( int j = 0; j<instructionSize; ++j ) {
+//                       if( wayPoints[waypointIndex] ==  instructions[i].instructionPointSet.at(j) ) {
+//                           d->m_nextInstructionIndex = i + 1;
+//                           currentWaypointOffset = j;
+//                       }
+//                    }
+//                }
 
                 qreal radius = EARTH_RADIUS;
 
@@ -472,12 +509,13 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
                 }
                 else {
                     GeoDataCoordinates destinationCoord =  instructions[d->m_nextInstructionIndex-1].instructionPointSet.last();
-                    if( !(instructions[d->m_nextInstructionIndex-1].instructionPointSet.at( currentWaypointOffset ) == destinationCoord ) ) {
-                        distanceRemaining = distanceSphere( location, destinationCoord ) * radius;
-                    }
-                    else {
-                        distanceRemaining = 0.0;
-                    }
+                    distanceRemaining = distanceSphere( location, destinationCoord ) * radius;
+//                    if( !(instructions[d->m_nextInstructionIndex-1].instructionPointSet.at( currentWaypointOffset ) == destinationCoord ) ) {
+//                        distanceRemaining = distanceSphere( location, destinationCoord ) * radius;
+//                    }
+//                    else {
+//                        distanceRemaining = 0.0;
+//                    }
                 }
 
                 d->m_currentInstructionLength = instructions[d->m_nextInstructionIndex-1].instructionDistance;
