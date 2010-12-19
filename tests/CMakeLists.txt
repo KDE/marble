@@ -116,3 +116,4 @@ marble_add_test( KMLTest )
 
 # marble_add_test( TestOsmAnnotation )
 marble_add_test( TestGeoDataGeometry )
+marble_add_test( unittest_geodatacoordinates )
