@@ -21,6 +21,7 @@
 #include <QtCore/QSharedPointer>
 #include <QtCore/QString>
 
+#include "TextureTile.h"
 #include "TileId.h"
 #include "global.h"
 
@@ -33,7 +34,6 @@ namespace Marble
 class HttpDownloadManager; // remove?
 class GeoSceneTexture;
 class MapThemeManager;
-class TextureTile;
 
 class TileLoader: public QObject
 {
