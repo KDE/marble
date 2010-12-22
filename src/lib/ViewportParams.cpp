@@ -61,7 +61,7 @@ public:
 };
 
 ViewportParamsPrivate::ViewportParamsPrivate()
-    : m_projection( Spherical ),                    // Default projection
+    : m_projection( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? Mercator : Spherical ), // Default projection
       m_currentProjection( &s_sphericalProjection ),
       m_planetAxis(),
       m_planetAxisMatrix(),
