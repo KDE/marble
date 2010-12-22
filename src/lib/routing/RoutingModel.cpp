@@ -469,6 +469,7 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
         }
 
         d->m_instructionSize = instructions.size();
+        d->m_nextInstructionIndex = 1;
 
         qint32 totalTimeRemaining = 0;
         qreal totalDistanceRemaining = 0.0;
