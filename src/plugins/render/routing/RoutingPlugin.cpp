@@ -416,8 +416,6 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
                  this, SLOT( updateZoomButtons() ) );
         connect( d->m_marbleWidget, SIGNAL( zoomChanged( int ) ),
                  this, SLOT( updateZoomButtons( int ) ) );
-
-        d->updateZoomButtons();
     }
     return AbstractFloatItem::eventFilter( object, e );
 }
