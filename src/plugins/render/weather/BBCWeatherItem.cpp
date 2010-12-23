@@ -91,3 +91,5 @@ QString BBCWeatherItem::creditHtml() const
 {
     return tr( "Supported by <a href=\"http://backstage.bbc.co.uk\" target=\"_BLANK\">backstage.bbc.co.uk</a>.<br>Weather data from UK MET Office" );
 }
+
+#include "BBCWeatherItem.moc"
