@@ -906,8 +906,10 @@ void MainWindow::readSettings()
          QString mapThemeId = settings.value("mapTheme", m_controlView->defaultMapThemeId() ).toString();
          qDebug() << "ReadSettings: mapThemeId: " << mapThemeId;
          m_controlView->marbleWidget()->setMapThemeId( mapThemeId );
+         bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+         int const defaultProjection = smallScreen ? Mercator : Spherical;
          m_controlView->marbleWidget()->setProjection(
-            (Projection)(settings.value("projection", 0 ).toInt())
+            (Projection)(settings.value("projection", defaultProjection ).toInt())
          );
 
          // Last location on quit
