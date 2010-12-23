@@ -378,7 +378,7 @@ void TextureLayer::paintTile( StackedTile* tile )
     d->m_layerDecorator.setInfo( tile->id() );
     d->m_layerDecorator.setTile( tile->resultTile() );
 
-    d->m_layerDecorator.paint( "maps/" + d->textureLayer()->sourceDir(), d->m_mapTheme );
+    d->m_layerDecorator.paint( "maps/" + d->textureLayer()->sourceDir() );
 }
 
 }
