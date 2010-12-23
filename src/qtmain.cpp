@@ -21,6 +21,7 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "MarbleTest.h"
+#include "MarbleLocale.h"
 
 #ifdef STATIC_BUILD
  #include <QtCore/QtPlugin>
@@ -119,6 +120,10 @@ int main(int argc, char *argv[])
         }
     }
     MarbleGlobal::getInstance()->setProfiles( profiles );
+
+    QLocale::MeasurementSystem const measurement = QLocale::system().measurementSystem();
+    Marble::MeasureSystem const marbleMeasurement = measurement == QLocale::ImperialSystem ? Marble::Imperial : Marble::Metric;
+    MarbleGlobal::getInstance()->locale()->setMeasureSystem( marbleMeasurement );
 
     MainWindow *window = new MainWindow( marbleDataPath );
     window->setAttribute( Qt::WA_DeleteOnClose, true );
