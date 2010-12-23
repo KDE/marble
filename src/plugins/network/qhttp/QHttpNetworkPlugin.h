@@ -60,6 +60,7 @@ inline QByteArray & QHttpHttpJob::data()
 class QHttpNetworkPlugin: public NetworkPlugin
 {
     Q_OBJECT
+    Q_INTERFACES( Marble::NetworkPluginInterface )
 
  public:
     virtual QString name() const;
