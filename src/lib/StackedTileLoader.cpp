@@ -35,6 +35,7 @@
 #include "MapThemeManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
+#include "MergedLayerDecorator.h"
 #include "StackedTile.h"
 #include "TextureLayer.h"
 #include "TextureTile.h"
@@ -60,16 +61,16 @@ namespace Marble
 class StackedTileLoaderPrivate
 {
 public:
-    StackedTileLoaderPrivate( TileLoader *tileLoader, TextureLayer *textureLayer )
-        : m_parent( textureLayer ),
-          m_datasetProvider( 0 ),
+    StackedTileLoaderPrivate( TileLoader *tileLoader, SunLocator *sunLocator )
+        : m_datasetProvider( 0 ),
+          m_layerDecorator( tileLoader, sunLocator ),
           m_tileLoader( tileLoader )
     {
         m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
     }
 
-    TextureLayer *const m_parent;
     DatasetProvider *m_datasetProvider;
+    MergedLayerDecorator m_layerDecorator;
     TileLoader *m_tileLoader;
     QVector<GeoSceneTexture const *> m_textureLayers;
     QHash <TileId, StackedTile*>  m_tilesOnDisplay;
@@ -77,11 +78,12 @@ public:
 };
 
 StackedTileLoader::StackedTileLoader( TileLoader * const tileLoader,
-                                      TextureLayer * const parent )
-    : d( new StackedTileLoaderPrivate( tileLoader, parent ) )
+                                      SunLocator * const sunLocator )
+    : d( new StackedTileLoaderPrivate( tileLoader, sunLocator ) )
 {
     connect( d->m_tileLoader, SIGNAL( tileCompleted( TileId, TileId )),
              SLOT( updateTile( TileId, TileId )));
+    connect( &d->m_layerDecorator, SIGNAL( repaintMap() ), SIGNAL( tileUpdateAvailable() ) );
 }
 
 StackedTileLoader::~StackedTileLoader()
@@ -99,6 +101,11 @@ void StackedTileLoader::setTextureLayers( QVector<GeoSceneTexture const *> & tex
 
     d->m_tilesOnDisplay.clear();
     d->m_tileCache.clear();
+}
+
+void StackedTileLoader::setShowTileId( bool show )
+{
+    d->m_layerDecorator.setShowTileId( show );
 }
 
 void StackedTileLoader::resetTilehash()
@@ -394,7 +401,14 @@ StackedTileLoader::findRelevantTextureLayers( TileId const & stackedTileId ) con
 void StackedTileLoader::mergeDecorations( StackedTile * const tile ) const
 {
     Q_ASSERT( !tile->resultTile()->isNull() );
-    d->m_parent->paintTile( tile );
+    Q_ASSERT( !d->m_textureLayers.isEmpty() );
+//    mDebug() << "MarbleModel::paintTile: " << "x: " << x << "y:" << y << "level: " << level
+//             << "requestTileUpdate" << requestTileUpdate;
+
+    d->m_layerDecorator.setInfo( tile->id() );
+    d->m_layerDecorator.setTile( tile->resultTile() );
+
+    d->m_layerDecorator.paint( "maps/" + d->m_textureLayers.at( 0 )->sourceDir() );
 }
 
 // This method should not alter m_tileCache, as the given tile is managed

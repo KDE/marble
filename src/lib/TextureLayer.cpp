@@ -28,7 +28,6 @@
 #include "GeoSceneSettings.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "MergedLayerDecorator.h"
 #include "StackedTile.h"
 #include "StackedTileLoader.h"
 #include "TextureColorizer.h"
@@ -56,7 +55,6 @@ public:
     TextureColorizer     m_texcolorizer;
     TileLoader           m_loader;
     StackedTileLoader    m_tileLoader;
-    MergedLayerDecorator m_layerDecorator;
     VectorComposer       m_veccomposer;
     AbstractScanlineTextureMapper *m_texmapper;
     GeoSceneDocument              *m_mapTheme;
@@ -67,8 +65,7 @@ TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadMa
     : m_parent( parent )
     , m_texcolorizer()
     , m_loader( downloadManager, mapThemeManager )
-    , m_tileLoader( &m_loader, parent )
-    , m_layerDecorator( &m_loader, sunLocator )
+    , m_tileLoader( &m_loader, sunLocator )
     , m_veccomposer( parent )
     , m_texmapper( 0 )
     , m_mapTheme( 0 )
@@ -157,7 +154,6 @@ TextureLayer::TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManage
     : QObject()
     , d( new Private( mapThemeManager, downloadManager, sunLocator, this ) )
 {
-    connect( &d->m_layerDecorator, SIGNAL( repaintMap() ), SLOT( mapChanged() ) );
     connect( &d->m_veccomposer, SIGNAL( datasetLoaded() ), SLOT( mapChanged() ) );
     connect( &d->m_tileLoader, SIGNAL( tileUpdateAvailable() ), SLOT( mapChanged() ) );
 }
@@ -229,7 +225,7 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
 
 void TextureLayer::setShowTileId( bool show )
 {
-    d->m_layerDecorator.setShowTileId( show );
+    d->m_tileLoader.setShowTileId( show );
 }
 
 void TextureLayer::setupTextureMapper( Projection projection )
@@ -368,17 +364,6 @@ int TextureLayer::levelZeroRows() const
 qint64 TextureLayer::volatileCacheLimit() const
 {
     return d->m_tileLoader.volatileCacheLimit();
-}
-
-void TextureLayer::paintTile( StackedTile* tile )
-{
-//    mDebug() << "MarbleModel::paintTile: " << "x: " << x << "y:" << y << "level: " << level
-//             << "requestTileUpdate" << requestTileUpdate;
-
-    d->m_layerDecorator.setInfo( tile->id() );
-    d->m_layerDecorator.setTile( tile->resultTile() );
-
-    d->m_layerDecorator.paint( "maps/" + d->textureLayer()->sourceDir() );
 }
 
 }
