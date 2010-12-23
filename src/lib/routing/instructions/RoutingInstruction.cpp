@@ -316,19 +316,28 @@ QString RoutingInstruction::nextRoadInstruction() const
 
 QString RoutingInstruction::nextDistanceInstruction() const
 {
-    QString distanceUnit = "m";
+    QLocale::MeasurementSystem const measurement = QLocale::system().measurementSystem();
     int precision = 0;
     qreal length = distance();
-    if ( length >= 1000 ) {
-        length /= 1000;
-        distanceUnit = "km";
+    QString distanceUnit = "m";
+
+    if ( measurement == QLocale::ImperialSystem ) {
         precision = 1;
-    } else if ( length >= 200 ) {
-        length = 50 * qRound( length / 50 );
-    } else if ( length >= 100 ) {
-        length = 25 * qRound( length / 25 );
+        distanceUnit = "mi";
+        length /= 1000.0;
+        length /= 1.609344;
     } else {
-        length = 10 * qRound( length / 10 );
+        if ( length >= 1000 ) {
+            length /= 1000;
+            distanceUnit = "km";
+            precision = 1;
+        } else if ( length >= 200 ) {
+            length = 50 * qRound( length / 50 );
+        } else if ( length >= 100 ) {
+            length = 25 * qRound( length / 25 );
+        } else {
+            length = 10 * qRound( length / 10 );
+        }
     }
 
     if ( length == 0 ) {

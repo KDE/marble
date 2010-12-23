@@ -19,6 +19,7 @@
 #include "MarbleGraphicsGridLayout.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
+#include "MarbleLocale.h"
 #include "PluginManager.h"
 #include "PositionTracking.h"
 #include "PositionProviderPlugin.h"
@@ -105,18 +106,26 @@ QString RoutingPluginPrivate::richText( const QString &source, int size ) const
 
 QString RoutingPluginPrivate::fuzzyDistance( qreal length ) const
 {
-    QString distanceUnit = "m";
     int precision = 0;
-    if ( length >= 1000 ) {
-        length /= 1000;
-        distanceUnit = "km";
+    QString distanceUnit = "m";
+
+    if ( MarbleGlobal::getInstance()->locale()->distanceUnit() == Marble::MilesFeet ) {
         precision = 1;
-    } else if ( length >= 200 ) {
-        length = 50 * qRound( length / 50 );
-    } else if ( length >= 100 ) {
-        length = 25 * qRound( length / 25 );
+        distanceUnit = "mi";
+        length *= METER2KM;
+        length *= KM2MI;
     } else {
-        length = 10 * qRound( length / 10 );
+        if ( length >= 1000 ) {
+            length /= 1000;
+            distanceUnit = "km";
+            precision = 1;
+        } else if ( length >= 200 ) {
+            length = 50 * qRound( length / 50 );
+        } else if ( length >= 100 ) {
+            length = 25 * qRound( length / 25 );
+        } else {
+            length = 10 * qRound( length / 10 );
+        }
     }
 
     return QString( "%1 %2" ).arg( length, 0, 'f', precision ).arg( distanceUnit );
