@@ -253,7 +253,6 @@ void TextureLayer::setupTextureMapper( Projection projection )
     }
     Q_ASSERT( d->m_texmapper );
     connect( d->m_texmapper, SIGNAL( tileLevelChanged( int )), SIGNAL( tileLevelChanged( int )));
-    connect( d->m_texmapper, SIGNAL( mapChanged() ), SLOT( mapChanged() ) );
 
     d->m_justModified = true;
 }

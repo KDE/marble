@@ -41,7 +41,6 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture * 
       m_tile( 0 ),
       m_previousRadius( 0 ),
       m_tileLevel( 0 ),
-      m_maxTileLevel( 0 ),
       m_globalWidth( 0 ),
       m_globalHeight( 0 ),
       m_normGlobalWidth( 0.0 ),
@@ -49,11 +48,6 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture * 
       m_mapThemeIdHash( qHash( textureLayer->sourceDir() ) )
 {
     Q_ASSERT( textureLayer );  // just for documentation
-
-    connect( m_tileLoader, SIGNAL( tileUpdateAvailable() ),
-             this,         SLOT( notifyMapChanged() ) );
-
-    detectMaxTileLevel();
 }
 
 
@@ -81,8 +75,8 @@ void AbstractScanlineTextureMapper::selectTileLevel( ViewParams * const viewPara
 
 //    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
 
-    if ( tileLevel > m_maxTileLevel )
-        tileLevel = m_maxTileLevel;
+    if ( tileLevel > m_tileLoader->maximumTileLevel() )
+        tileLevel = m_tileLoader->maximumTileLevel();
 
     if ( tileLevel != m_tileLevel ) {
         m_tileLoader->flush();
@@ -562,19 +556,6 @@ void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
     m_tilePosY = tileRow * m_tileSize.height();
     m_toTileCoordinatesLat = (qreal)(m_globalHeight / 2 - m_tilePosY);
     posY = lat - m_tilePosY;
-}
-
-void AbstractScanlineTextureMapper::notifyMapChanged()
-{
-    detectMaxTileLevel();
-    //mDebug() << "AbstractScanlineTextureMapper: emitting mapChanged";
-    emit mapChanged();
-}
-
-void AbstractScanlineTextureMapper::detectMaxTileLevel()
-{
-    m_maxTileLevel = StackedTileLoader::maximumTileLevel( m_textureLayer );
-//    mDebug() << "MaxTileLevel: " << m_maxTileLevel;
 }
 
 void AbstractScanlineTextureMapper::initGlobalWidth()

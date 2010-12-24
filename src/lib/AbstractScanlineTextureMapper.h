@@ -47,12 +47,8 @@ public:
     int tileZoomLevel() const;
 
  Q_SIGNALS:
-    void mapChanged();
     void tileLevelChanged( int newTileLevel );
 
- private Q_SLOTS:
-    void notifyMapChanged();
-    
  protected:
     void pixelValueF( const qreal lon, const qreal lat,
                       QRgb* const scanLine );
@@ -73,7 +69,6 @@ public:
     void nextTile( qreal& posx, qreal& posy );
 
     void selectTileLevel( ViewParams * const viewParams );
-    void detectMaxTileLevel();
     void tileLevelInit( const int tileLevel );
 
     int globalWidth() const;
@@ -132,7 +127,6 @@ public:
     int         m_previousRadius;
 
     int         m_tileLevel;
-    int         m_maxTileLevel;
     int         m_globalWidth;
     int         m_globalHeight;
     qreal       m_normGlobalWidth;
