@@ -210,8 +210,7 @@ QWidget * DownloadRegionDialog::Private::createOkCancelButtonBox()
 int DownloadRegionDialog::Private::rad2PixelX( qreal const lon ) const
 {
     qreal const globalWidth = m_textureLayer->tileSize().width()
-        * TileLoaderHelper::levelToColumn( m_textureLayer->levelZeroColumns(),
-                                           m_visibleTileLevel );
+        * m_textureLayer->tileColumnCount( m_visibleTileLevel );
     return static_cast<int>( globalWidth * 0.5 + lon * ( globalWidth / ( 2.0 * M_PI ) ) );
 }
 
@@ -219,7 +218,7 @@ int DownloadRegionDialog::Private::rad2PixelX( qreal const lon ) const
 int DownloadRegionDialog::Private::rad2PixelY( qreal const lat ) const
 {
     qreal const globalHeight = m_textureLayer->tileSize().height()
-        * TileLoaderHelper::levelToRow( m_textureLayer->levelZeroRows(), m_visibleTileLevel );
+        * m_textureLayer->tileRowCount( m_visibleTileLevel );
     qreal const normGlobalHeight = globalHeight / M_PI;
     switch ( m_textureLayer->tileProjection() ) {
     case GeoSceneTexture::Equirectangular:

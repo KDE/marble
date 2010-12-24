@@ -114,6 +114,38 @@ void StackedTileLoader::setShowTileId( bool show )
     d->m_layerDecorator.setShowTileId( show );
 }
 
+int StackedTileLoader::tileColumnCount( int level ) const
+{
+    Q_ASSERT( !d->m_textureLayers.isEmpty() );
+
+    const int levelZeroColumns = d->m_textureLayers.at( 0 )->levelZeroColumns();
+
+    return TileLoaderHelper::levelToColumn( levelZeroColumns, level );
+}
+
+int StackedTileLoader::tileRowCount( int level ) const
+{
+    Q_ASSERT( !d->m_textureLayers.isEmpty() );
+
+    const int levelZeroRows = d->m_textureLayers.at( 0 )->levelZeroRows();
+
+    return TileLoaderHelper::levelToRow( levelZeroRows, level );
+}
+
+GeoSceneTexture::Projection StackedTileLoader::tileProjection() const
+{
+    Q_ASSERT( !d->m_textureLayers.isEmpty() );
+
+    return d->m_textureLayers.at( 0 )->projection();
+}
+
+QSize StackedTileLoader::tileSize() const
+{
+    Q_ASSERT( !d->m_textureLayers.isEmpty() );
+
+    return d->m_textureLayers.at( 0 )->tileSize();
+}
+
 void StackedTileLoader::resetTilehash()
 {
     QHash<TileId, StackedTile*>::const_iterator it = d->m_tilesOnDisplay.constBegin();

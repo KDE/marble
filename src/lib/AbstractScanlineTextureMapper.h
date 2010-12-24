@@ -88,7 +88,7 @@ public:
     bool isOutOfTileRangeF( const qreal itLon, const qreal itLat,
                             const qreal itStepLon, const qreal itStepLat,
                             const int n ) const;
-                           
+
     // maximum values for global texture coordinates
     // ( with origin in upper left corner, measured in pixel) 
     int     m_maxGlobalX;
@@ -120,7 +120,7 @@ public:
     void initGlobalWidth();
     void initGlobalHeight();
 
-    GeoSceneTexture const * const m_textureLayer;
+    GeoSceneTexture::Projection const m_textureProjection;
     /// size of the tiles of of the current texture layer
     QSize const m_tileSize;
     StackedTile *m_tile;
@@ -161,7 +161,7 @@ inline qreal AbstractScanlineTextureMapper::rad2PixelX( const qreal lon ) const
 
 inline qreal AbstractScanlineTextureMapper::rad2PixelY( const qreal lat ) const
 {
-    switch ( m_textureLayer->projection() ) {
+    switch ( m_textureProjection ) {
     case GeoSceneTexture::Equirectangular:
         return -lat * m_normGlobalHeight;
     case GeoSceneTexture::Mercator:

@@ -36,8 +36,8 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture * 
       m_tileLoader( tileLoader ),
       m_tilePosX( 0 ),
       m_tilePosY( 0 ),
-      m_textureLayer( textureLayer ),
-      m_tileSize( textureLayer->tileSize() ),  // cache tile size
+      m_textureProjection( tileLoader->tileProjection() ),
+      m_tileSize( tileLoader->tileSize() ),  // cache tile size
       m_tile( 0 ),
       m_previousRadius( 0 ),
       m_tileLevel( 0 ),
@@ -561,13 +561,13 @@ void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
 void AbstractScanlineTextureMapper::initGlobalWidth()
 {
     m_globalWidth = m_tileSize.width()
-        * TileLoaderHelper::levelToColumn( m_textureLayer->levelZeroColumns(), m_tileLevel );
+        * m_tileLoader->tileColumnCount( m_tileLevel );
 }
 
 void AbstractScanlineTextureMapper::initGlobalHeight()
 {
     m_globalHeight = m_tileSize.height()
-        * TileLoaderHelper::levelToRow( m_textureLayer->levelZeroRows(), m_tileLevel );
+        * m_tileLoader->tileRowCount( m_tileLevel );
 }
 
 #include "AbstractScanlineTextureMapper.moc"

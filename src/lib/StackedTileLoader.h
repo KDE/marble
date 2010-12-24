@@ -25,8 +25,10 @@
 #define MARBLE_STACKEDTILELOADER_H
 
 #include <QtCore/QObject>
+#include <QtCore/QSize>
 #include <QtCore/QVector>
 
+#include "GeoSceneTexture.h"
 #include "TileId.h"
 #include "global.h"
 
@@ -39,7 +41,6 @@ class StackedTile;
 class MapThemeManager;
 class GeoSceneDocument;
 class GeoSceneLayer;
-class GeoSceneTexture;
 class SunLocator;
 class TileLoader;
 
@@ -75,6 +76,14 @@ class StackedTileLoader : public QObject
         void setTextureLayers( QVector<GeoSceneTexture const *> & );
 
         void setShowTileId( bool show );
+
+        int tileColumnCount( int level ) const;
+
+        int tileRowCount( int level ) const;
+
+        GeoSceneTexture::Projection tileProjection() const;
+
+        QSize tileSize() const;
 
         /**
          * Loads a tile and returns it.
@@ -120,7 +129,7 @@ class StackedTileLoader : public QObject
 
         /**
          * Returns the highest level in which some tiles are theoretically
-         * available for the given @p texture layer.
+         * available for the current texture layers.
          */
         int maximumTileLevel() const;
 
