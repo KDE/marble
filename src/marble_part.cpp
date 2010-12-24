@@ -1561,7 +1561,7 @@ void MarblePart::removeAllBookmarks()
 {
     QString const title = i18nc( "Application name", "Marble" );
     QString const text = i18n( "Are you sure you want to delete all bookmarks?" );
-    if ( KMessageBox::questionYesNoCancel( widget(), text, title ) == KMessageBox::Yes ) {
+    if ( KMessageBox::questionYesNo( widget(), text, title ) == KMessageBox::Yes ) {
         m_controlView->marbleWidget()->removeAllBookmarks();
     }
 }

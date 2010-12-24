@@ -516,8 +516,8 @@ void MainWindow::removeAllBookmarks()
 {
     QString const title = tr( "Marble" );
     QString const text = tr( "Are you sure you want to delete all bookmarks?" );
-    QMessageBox::StandardButtons const buttons = QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel;
-    if ( QMessageBox::question( m_controlView->marbleWidget(), title, text, buttons, QMessageBox::Cancel ) == QMessageBox::Yes ) {
+    QMessageBox::StandardButtons const buttons = QMessageBox::Yes | QMessageBox::No;
+    if ( QMessageBox::question( m_controlView->marbleWidget(), title, text, buttons, QMessageBox::No ) == QMessageBox::Yes ) {
         m_controlView->marbleWidget()->removeAllBookmarks();
     }
 }
