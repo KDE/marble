@@ -35,7 +35,7 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( StackedTileLoader 
       m_tileLoader( tileLoader ),
       m_tilePosX( 0 ),
       m_tilePosY( 0 ),
-      m_textureProjection( tileLoader->tileProjection() ),
+      m_textureProjection( tileLoader->tileProjection() ),  // cache texture projection
       m_tileSize( tileLoader->tileSize() ),  // cache tile size
       m_tile( 0 ),
       m_previousRadius( 0 ),
@@ -45,7 +45,6 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( StackedTileLoader 
       m_normGlobalWidth( 0.0 ),
       m_normGlobalHeight( 0.0 )
 {
-    Q_ASSERT( textureLayer );  // just for documentation
 }
 
 

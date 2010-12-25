@@ -114,14 +114,15 @@ public:
     int          m_tilePosX;
     int          m_tilePosY;
 
+    GeoSceneTexture::Projection const m_textureProjection;
+    /// size of the tiles of of the current texture layer
+    QSize const m_tileSize;
+
  private:
     Q_DISABLE_COPY( AbstractScanlineTextureMapper )
     void initGlobalWidth();
     void initGlobalHeight();
 
-    GeoSceneTexture::Projection const m_textureProjection;
-    /// size of the tiles of of the current texture layer
-    QSize const m_tileSize;
     StackedTile *m_tile;
     int         m_previousRadius;
 
