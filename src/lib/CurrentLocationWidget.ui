@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>137</width>
-    <height>190</height>
+    <height>237</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,6 +37,26 @@
        <string>Disabled</string>
       </property>
      </item>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="showTrackCheckBox">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Show Track</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="clearTrackPushButton">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Clear Track</string>
+     </property>
     </widget>
    </item>
    <item>

@@ -52,6 +52,7 @@ class CurrentLocationWidgetPrivate
     void updateRecenterComboBox( int centerMode );
     void updateAutoZoomCheckBox( bool autoZoom );
     void updateActivePositionProvider( PositionProviderPlugin* );
+    void clearTrack();
 };
 
 CurrentLocationWidget::CurrentLocationWidget( QWidget *parent, Qt::WindowFlags f )
@@ -91,6 +92,8 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
         QString html = "<p>No Position Tracking Plugin installed.</p>";
         d->m_currentLocationUi.locationLabel->setText( html );
         d->m_currentLocationUi.locationLabel->setEnabled ( true );
+        d->m_currentLocationUi.showTrackCheckBox->setEnabled( false );
+        d->m_currentLocationUi.clearTrackPushButton->setEnabled( false );
     }
 
     //disconnect CurrentLocation Signals
@@ -132,6 +135,15 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
              this, SLOT( updateRecenterComboBox( int ) ) );
     connect( d->m_adjustNavigation, SIGNAL( autoZoomToggled( bool ) ),
              this, SLOT( updateAutoZoomCheckBox( bool ) ) );
+    connect (d->m_currentLocationUi.showTrackCheckBox, SIGNAL( clicked(bool) ),
+             d->m_widget->model()->positionTracking(), SLOT( setTrackVisible(bool) ));
+    connect (d->m_currentLocationUi.showTrackCheckBox, SIGNAL( clicked(bool) ),
+             d->m_widget, SLOT(repaint()));
+    if ( d->m_widget->model()->positionTracking()->trackVisible() ) {
+        d->m_currentLocationUi.showTrackCheckBox->setCheckState(Qt::Checked);
+    }
+    connect (d->m_currentLocationUi.clearTrackPushButton, SIGNAL( clicked(bool)),
+             this, SLOT(clearTrack()));
 }
 
 void CurrentLocationWidgetPrivate::adjustPositionTrackingStatus( PositionProviderStatus status )
@@ -222,6 +234,8 @@ void CurrentLocationWidget::receiveGpsCoordinates( const GeoDataCoordinates &pos
     html = html.arg( position.lonToString() ).arg( position.latToString() );
     html = html.arg( distanceString ).arg( speedString + ' ' + unitString );
     d->m_currentLocationUi.locationLabel->setText( html );
+    d->m_currentLocationUi.showTrackCheckBox->setEnabled( true );
+    d->m_currentLocationUi.clearTrackPushButton->setEnabled( true );
 }
 
 void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provider )
@@ -275,6 +289,13 @@ void CurrentLocationWidgetPrivate::updateRecenterComboBox( int centerMode )
 void CurrentLocationWidgetPrivate::centerOnCurrentLocation()
 {
     m_widget->centerOn(m_currentPosition, true);
+}
+
+void CurrentLocationWidgetPrivate::clearTrack()
+{
+    m_widget->model()->positionTracking()->clearTrack();
+    m_widget->repaint();
+    m_currentLocationUi.clearTrackPushButton->setEnabled( false );
 }
 
 }

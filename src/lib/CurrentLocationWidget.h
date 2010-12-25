@@ -72,6 +72,8 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
      Q_PRIVATE_SLOT( d, void updateAutoZoomCheckBox( bool autoZoom ) )
 
      Q_PRIVATE_SLOT( d, void updateActivePositionProvider( PositionProviderPlugin* ) )
+
+     Q_PRIVATE_SLOT( d, void clearTrack() )
 };
 
 }
