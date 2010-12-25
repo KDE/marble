@@ -102,14 +102,15 @@ QDialog *MapScaleFloatItem::aboutDialog() const
         // Initializing about dialog
         m_aboutDialog = new PluginAboutDialog();
         m_aboutDialog->setName( "Scale Bar Plugin" );
-        m_aboutDialog->setVersion( "0.1" );
+        m_aboutDialog->setVersion( "0.2" );
         // FIXME: Can we store this string for all of Marble
-        m_aboutDialog->setAboutText( tr( "<br />(c) 2009 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
+        m_aboutDialog->setAboutText( tr( "<br />(c) 2009, 2010 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
         QList<Author> authors;
         Author rahn;
         rahn.name = "Torsten Rahn";
         rahn.task = tr( "Original Developer" );
         rahn.email = "tackat@kde.org";
+        authors.append( rahn );
         Author nhan;
         nhan.name = "Khanh-Nhan Nguyen";
         nhan.task = tr( "Developer" );
@@ -117,7 +118,6 @@ QDialog *MapScaleFloatItem::aboutDialog() const
         authors.append( nhan );
         m_aboutDialog->setAuthors( authors );
         //TODO: add data text
-        m_aboutDialog->setDataText( tr( "None" ) );
 //        m_aboutDialog->setPixmap( m_icon.pixmap( 62, 53 ) );
     }
     return m_aboutDialog;
