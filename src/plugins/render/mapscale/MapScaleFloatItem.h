@@ -14,9 +14,17 @@
 #include <QtCore/QObject>
 
 #include "AbstractFloatItem.h"
+#include "PluginAboutDialog.h"
+
+namespace Ui
+{
+    class MapScaleConfigWidget;
+}
 
 namespace Marble
 {
+
+class PluginAboutDialog;
 
 /**
  * @short The class that creates a map scale.
@@ -45,6 +53,8 @@ class MapScaleFloatItem : public AbstractFloatItem
 
     QIcon icon () const;
 
+    QDialog *aboutDialog() const;
+
 
     void initialize ();
 
@@ -55,9 +65,20 @@ class MapScaleFloatItem : public AbstractFloatItem
     void paintContent( GeoPainter *painter, ViewportParams *viewport,
                        const QString& renderPos, GeoSceneLayer * layer = 0 );
 
+
+    QDialog *configDialog() const;
+
+ private Q_SLOTS:
+    void readSettings() const;
+    void writeSettings();
+
  private:
     int   invScale() const            { return m_invScale; }
     void  setInvScale( int invScale ) { m_invScale = invScale; }
+
+    mutable PluginAboutDialog *m_aboutDialog;
+    mutable QDialog *m_configDialog;
+    mutable Ui::MapScaleConfigWidget *ui_configWidget;
 
     int      m_radius;
     int      m_invScale;
@@ -78,6 +99,8 @@ class MapScaleFloatItem : public AbstractFloatItem
     QString  m_unit;
 
     bool     m_scaleInitDone;
+
+    bool     m_showRatioScale;
 
     void calcScaleBar();
 };

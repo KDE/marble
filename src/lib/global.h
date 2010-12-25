@@ -200,6 +200,10 @@ const qreal KM2MI = 1.0 / MI2KM;
 const qreal M2FT = 3.2808;
 const qreal FT2M = 1.0 / M2FT;
 
+// Conversion meter vs millimeter
+const qreal M2MM = 1000;
+const qreal MM2M = 1.0 / M2MM;
+
 // Conversion degree vs. radians
 const qreal DEG2RAD = M_PI / 180.0;
 const qreal RAD2DEG = 180.0 / M_PI;

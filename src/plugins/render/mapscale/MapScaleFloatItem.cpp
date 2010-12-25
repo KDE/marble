@@ -12,7 +12,10 @@
 
 #include <QtCore/QRect>
 #include <QtGui/QPixmap>
+#include <QtGui/QApplication>
+#include <QtGui/QPushButton>
 
+#include "ui_MapScaleConfigWidget.h"
 #include "MarbleDebug.h"
 #include "global.h"
 #include "Projections/AbstractProjection.h"
@@ -26,6 +29,8 @@ namespace Marble
 
 MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
     : AbstractFloatItem( point, size ),
+      m_aboutDialog(0),
+      m_configDialog(0),
       m_radius(0),
       m_invScale(0.0),
       m_target(QString()),
@@ -39,7 +44,8 @@ MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
       m_pixelInterval(0),
       m_valueInterval(0),
       m_unit(tr("km")),
-      m_scaleInitDone( false )
+      m_scaleInitDone( false ),
+      m_showRatioScale( false )
 {
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
@@ -90,6 +96,34 @@ bool MapScaleFloatItem::isInitialized () const
     return true;
 }
 
+QDialog *MapScaleFloatItem::aboutDialog() const
+{
+    if ( !m_aboutDialog ) {
+        // Initializing about dialog
+        m_aboutDialog = new PluginAboutDialog();
+        m_aboutDialog->setName( "Scale Bar Plugin" );
+        m_aboutDialog->setVersion( "0.1" );
+        // FIXME: Can we store this string for all of Marble
+        m_aboutDialog->setAboutText( tr( "<br />(c) 2009 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
+        QList<Author> authors;
+        Author rahn;
+        rahn.name = "Torsten Rahn";
+        rahn.task = tr( "Original Developer" );
+        rahn.email = "tackat@kde.org";
+        Author nhan;
+        nhan.name = "Khanh-Nhan Nguyen";
+        nhan.task = tr( "Developer" );
+        nhan.email = "khanh.nhan@wpi.edu";
+        authors.append( nhan );
+        m_aboutDialog->setAuthors( authors );
+        //TODO: add data text
+        m_aboutDialog->setDataText( tr( "None" ) );
+//        m_aboutDialog->setPixmap( m_icon.pixmap( 62, 53 ) );
+    }
+    return m_aboutDialog;
+}
+
+
 void MapScaleFloatItem::changeViewport( ViewportParams *viewport )
 {
     int viewportWidth = viewport->width();
@@ -102,8 +136,13 @@ void MapScaleFloatItem::changeViewport( ViewportParams *viewport )
             && m_scaleInitDone ) )
     {
         int fontHeight     = QFontMetrics( font() ).ascent();
-        setContentSize( QSizeF( viewport->width() / 2,
-                                fontHeight + 3 + m_scaleBarHeight ) );
+        if (m_showRatioScale) {
+            setContentSize( QSizeF( viewport->width() / 2,
+                                    fontHeight + 3 + m_scaleBarHeight + fontHeight + 7 ) );
+        } else {
+            setContentSize( QSizeF( viewport->width() / 2,
+                                    fontHeight + 3 + m_scaleBarHeight ) );
+        }
 
         m_leftBarMargin  = QFontMetrics( font() ).boundingRect( "0" ).width() / 2;
         m_rightBarMargin = QFontMetrics( font() ).boundingRect( "0000" ).width() / 2;
@@ -122,6 +161,7 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
                                       const QString& renderPos,
                                       GeoSceneLayer * layer )
 {
+
     Q_UNUSED( layer )
     Q_UNUSED( renderPos )
 
@@ -142,6 +182,23 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
         // the pixel based radius propertyy.
         pixel2Length *= M_PI / 2 * cos( centerLatitude );
     }
+
+    //calculate scale ratio
+    qreal displayMMPerPixel = 1.0 * painter->device()->widthMM() / painter->device()->width();
+    qreal ratio = pixel2Length / (displayMMPerPixel * MM2M);
+
+    //round ratio to 3 most significant digits, assume that ratio >= 1, otherwise it may display "1 : 0"
+    //i made this assumption because as the primary use case we dont need to zoom in that much
+    qreal power = 1;
+    int iRatio = (int)(ratio + 0.5); //round ratio to the nearest integer
+    while (iRatio >= 1000) {
+        iRatio /= 10;
+        power *= 10;
+    }
+    iRatio *= power;
+    QString ratioStr;
+    ratioStr.setNum(iRatio);
+    ratioStr = "1 : " + ratioStr;
 
     m_scaleBarDistance = (qreal)(m_scaleBarWidth) * pixel2Length;
 
@@ -218,6 +275,9 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
         }
     }
 
+    int leftRatioIndent = m_leftBarMargin + (m_scaleBarWidth - QFontMetrics( font() ).width(ratioStr) ) / 2;
+    painter->drawText( leftRatioIndent, fontHeight + 3 + m_scaleBarHeight + fontHeight + 5, ratioStr );
+
     painter->restore();
 }
 
@@ -263,6 +323,51 @@ void MapScaleFloatItem::calcScaleBar()
     m_pixelInterval = (int)( m_scaleBarWidth * (qreal)( bestMagValue )
                              / (qreal)( magValue ) / m_bestDivisor );
     m_valueInterval = (int)( bestMagValue * magnitude / m_bestDivisor );
+}
+
+QDialog *MapScaleFloatItem::configDialog() const
+{
+    if ( !m_configDialog ) {
+        // Initializing configuration dialog
+        m_configDialog = new QDialog();
+        ui_configWidget = new Ui::MapScaleConfigWidget;
+        ui_configWidget->setupUi( m_configDialog );
+    
+        readSettings();
+
+        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ),
+                                            SLOT( writeSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ),
+                                            SLOT( readSettings() ) );
+        QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
+        connect( applyButton, SIGNAL( clicked()) ,
+                this,        SLOT( writeSettings() ) );
+    }
+    return m_configDialog;
+}
+
+void MapScaleFloatItem::readSettings() const
+{    
+    if ( !m_configDialog )
+        return;
+    
+    if ( m_showRatioScale ) {
+        ui_configWidget->m_showRatioScaleCheckBox->setCheckState( Qt::Checked );
+    }
+    else {
+        ui_configWidget->m_showRatioScaleCheckBox->setCheckState( Qt::Unchecked );
+    }
+}
+
+void MapScaleFloatItem::writeSettings()
+{
+    if ( ui_configWidget->m_showRatioScaleCheckBox->checkState() == Qt::Checked ) {
+        m_showRatioScale = true;
+    } else {
+        m_showRatioScale = false;
+    }
+
+    emit settingsChanged( nameId() );
 }
 
 }
