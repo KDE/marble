@@ -48,8 +48,23 @@ public:
 
     void setMagnitude( double magnitude );
 
+    void setDateTime( const QDateTime &dateTime );
+
+    QDateTime dateTime() const;
+
+    /** Earthquake's depth in km */
+    double depth() const;
+
+    void setDepth( double depth );
+
 private:
+    void updateTooltip();
+
     double m_magnitude;
+
+    double m_depth;
+
+    QDateTime m_dateTime;
 
     static QFont s_font;
 

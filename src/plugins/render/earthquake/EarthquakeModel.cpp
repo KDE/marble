@@ -73,6 +73,9 @@ void EarthquakeModel::parseFile( const QByteArray& file )
             double longitude = iterator.value().property( "lng" ).toNumber();
             double latitude = iterator.value().property( "lat" ).toNumber();
             double magnitude = iterator.value().property( "magnitude" ).toNumber();
+            QString data = iterator.value().property( "datetime" ).toString();
+            QDateTime date = QDateTime::fromString( data, "yyyy-MM-dd hh:mm:ss" );
+            double depth = iterator.value().property( "depth" ).toNumber();
 
             if( !itemExists( eqid ) ) {
                 // If it does not exists, create it
@@ -82,6 +85,9 @@ void EarthquakeModel::parseFile( const QByteArray& file )
                 item->setCoordinate( coordinates );
                 item->setTarget( "earth" );
                 item->setMagnitude( magnitude );
+                item->setDateTime( date );
+                item->setDepth( depth );
+
                 addItemToList( item );
             }
         }
