@@ -120,6 +120,7 @@ class MainWindow : public QMainWindow
     void showMapViewDialog();
     void showLegendTab( bool enabled );
     void showRoutingDialog();
+    void showTrackingDialog();
 
  private:
     void setupZoomButtons();
@@ -194,9 +195,11 @@ class MainWindow : public QMainWindow
     QAction *m_showMapViewDialogAction;
     QAction *m_toggleLegendTabAction;
     QAction *m_toggleRoutingTabAction;
+    QAction *m_showTrackingDialogAction;
 
     QDialog *m_mapViewDialog;
     QDialog *m_routingDialog;
+    QDialog *m_trackingDialog;
 
     RoutingWidget *m_routingWidget;
 };

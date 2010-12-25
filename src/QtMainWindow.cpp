@@ -41,6 +41,7 @@
 #include <QtNetwork/QNetworkProxy>
 
 #include "BookmarkInfoDialog.h"
+#include "CurrentLocationWidget.h"
 //#include "EditBookmarkDialog.h"
 #include "MapViewWidget.h"
 #include "MarbleDirs.h"
@@ -92,6 +93,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
         m_osmEditAction( 0 ),
         m_mapViewDialog( 0 ),
         m_routingDialog( 0 ),
+        m_trackingDialog( 0 ),
         m_routingWidget( 0 )
 {
     setUpdatesEnabled( false );
@@ -298,6 +300,9 @@ void MainWindow::createMenus()
         m_toggleRoutingTabAction = menuBar()->addAction( tr( "Routing" ) );
         connect( m_toggleRoutingTabAction, SIGNAL( triggered( bool ) ),
                  this, SLOT( showRoutingDialog() ) );
+        m_showTrackingDialogAction = menuBar()->addAction( tr( "Tracking" ) );
+        connect( m_showTrackingDialogAction, SIGNAL( triggered()),
+                 this, SLOT( showTrackingDialog()) );
 
         m_controlView->marbleControl()->setNavigationTabShown( false );
         m_controlView->marbleControl()->setLegendTabShown( false );
@@ -1268,6 +1273,28 @@ void MainWindow::showRoutingDialog()
     m_routingDialog->activateWindow();
 }
 
+void MainWindow::showTrackingDialog()
+{
+    if( !m_trackingDialog ) {
+        m_trackingDialog = new QDialog( this );
+        m_trackingDialog->setWindowTitle( tr( "Tracking - Marble" ) );
+        CurrentLocationWidget *trackingWidget = new CurrentLocationWidget( m_trackingDialog );
+        trackingWidget->setMarbleWidget( m_controlView->marbleWidget() );
+
+        QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Vertical, m_trackingDialog );
+        connect(buttonBox, SIGNAL( accepted() ), m_trackingDialog, SLOT( accept() ) );
+
+        QHBoxLayout* layout = new QHBoxLayout;
+        layout->addWidget( trackingWidget );
+        layout->addWidget( buttonBox );
+        m_trackingDialog->setLayout( layout );
+        m_trackingDialog->resize( 640, 420 );
+    }
+
+    m_trackingDialog->show();
+    m_trackingDialog->raise();
+    m_trackingDialog->activateWindow();
+}
 
 void MainWindow::updateMapEditButtonVisibility( const QString &mapTheme )
 {

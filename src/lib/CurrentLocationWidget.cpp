@@ -67,11 +67,15 @@ CurrentLocationWidget::CurrentLocationWidget( QWidget *parent, Qt::WindowFlags f
 
     d->m_locale = MarbleGlobal::getInstance()->locale();
 
-    connect( d->m_currentLocationUi.recenterComboBox, SIGNAL ( highlighted( int ) ),
+    connect( d->m_currentLocationUi.recenterComboBox, SIGNAL ( currentIndexChanged( int ) ),
             this, SLOT( setRecenterMode( int ) ) );
 
     connect( d->m_currentLocationUi.autoZoomCheckBox, SIGNAL( clicked( bool ) ),
              this, SLOT( setAutoZoom( bool ) ) );
+
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    d->m_currentLocationUi.positionTrackingComboBox->setVisible( !smallScreen );
+    d->m_currentLocationUi.locationLabel->setVisible( !smallScreen );
 }
 
 CurrentLocationWidget::~CurrentLocationWidget()
@@ -128,6 +132,7 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
     connect( d->m_widget->model()->positionTracking(),
              SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
              this, SLOT( updateActivePositionProvider( PositionProviderPlugin* ) ) );
+    d->updateActivePositionProvider( d->m_widget->model()->positionTracking()->positionProviderPlugin() );
     connect( d->m_currentLocationUi.positionTrackingComboBox, SIGNAL( currentIndexChanged( QString ) ),
              this, SLOT( changePositionProvider( QString ) ) );
     connect( d->m_currentLocationUi.locationLabel, SIGNAL( linkActivated( QString ) ),
@@ -196,6 +201,10 @@ void CurrentLocationWidgetPrivate::updateActivePositionProvider( PositionProvide
         }
     }
     m_currentLocationUi.positionTrackingComboBox->blockSignals( false );
+    m_currentLocationUi.recenterLabel->setEnabled( plugin );
+    m_currentLocationUi.recenterComboBox->setEnabled( plugin );
+    m_currentLocationUi.autoZoomCheckBox->setEnabled( plugin );
+
 }
 
 void CurrentLocationWidget::receiveGpsCoordinates( const GeoDataCoordinates &position, qreal speed )
@@ -249,9 +258,6 @@ void CurrentLocationWidget::receiveGpsCoordinates( const GeoDataCoordinates &pos
 void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provider )
 {
     bool hasProvider = ( provider != QObject::tr("Disabled") );
-    m_currentLocationUi.recenterLabel->setEnabled( hasProvider );
-    m_currentLocationUi.recenterComboBox->setEnabled( hasProvider );
-    m_currentLocationUi.autoZoomCheckBox->setEnabled( hasProvider );
 
     if ( hasProvider ) {
         foreach( PositionProviderPlugin* plugin, m_positionProviderPlugins ) {
@@ -302,7 +308,7 @@ void CurrentLocationWidgetPrivate::centerOnCurrentLocation()
 void CurrentLocationWidgetPrivate::saveTrack()
 {
     QString fileName = QFileDialog::getSaveFileName(m_widget, QObject::tr("Save Track"), // krazy:exclude=qclasses
-                            QDir::homePath().append('/' + QDateTime::currentDateTime().toString("yyyyMMdd_hhmmss") + ".kml"),
+                                                    QDir::homePath().append('/' + QDateTime::currentDateTime().toString("yyyy-MM-dd_hhmmss") + ".kml"),
                             QObject::tr("KML File (*.kml)"));
 
     m_widget->model()->positionTracking()->saveTrack( fileName );
