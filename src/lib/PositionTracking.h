@@ -84,6 +84,11 @@ public Q_SLOTS:
     void setTrackVisible ( bool visible );
 
     /**
+      * Saves the track document to file
+      */
+    bool saveTrack( QString& fileName );
+
+    /**
       * Removes all track segments which were recorded
       */
     void clearTrack();

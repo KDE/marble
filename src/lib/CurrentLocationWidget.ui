@@ -50,6 +50,16 @@
     </widget>
    </item>
    <item>
+    <widget class="QPushButton" name="saveTrackPushButton">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Save Track</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QPushButton" name="clearTrackPushButton">
      <property name="enabled">
       <bool>false</bool>

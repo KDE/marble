@@ -31,6 +31,9 @@ using namespace Marble;
 // Ui
 #include "ui_CurrentLocationWidget.h"
 
+#include <QtCore/QDateTime>
+#include <QtGui/QFileDialog>
+
 namespace Marble
 {
 
@@ -52,6 +55,7 @@ class CurrentLocationWidgetPrivate
     void updateRecenterComboBox( int centerMode );
     void updateAutoZoomCheckBox( bool autoZoom );
     void updateActivePositionProvider( PositionProviderPlugin* );
+    void saveTrack();
     void clearTrack();
 };
 
@@ -93,6 +97,7 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
         d->m_currentLocationUi.locationLabel->setText( html );
         d->m_currentLocationUi.locationLabel->setEnabled ( true );
         d->m_currentLocationUi.showTrackCheckBox->setEnabled( false );
+        d->m_currentLocationUi.saveTrackPushButton->setEnabled( false );
         d->m_currentLocationUi.clearTrackPushButton->setEnabled( false );
     }
 
@@ -142,6 +147,8 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
     if ( d->m_widget->model()->positionTracking()->trackVisible() ) {
         d->m_currentLocationUi.showTrackCheckBox->setCheckState(Qt::Checked);
     }
+    connect ( d->m_currentLocationUi.saveTrackPushButton, SIGNAL( clicked(bool)),
+              this, SLOT(saveTrack()));
     connect (d->m_currentLocationUi.clearTrackPushButton, SIGNAL( clicked(bool)),
              this, SLOT(clearTrack()));
 }
@@ -235,6 +242,7 @@ void CurrentLocationWidget::receiveGpsCoordinates( const GeoDataCoordinates &pos
     html = html.arg( distanceString ).arg( speedString + ' ' + unitString );
     d->m_currentLocationUi.locationLabel->setText( html );
     d->m_currentLocationUi.showTrackCheckBox->setEnabled( true );
+    d->m_currentLocationUi.saveTrackPushButton->setEnabled( true );
     d->m_currentLocationUi.clearTrackPushButton->setEnabled( true );
 }
 
@@ -291,10 +299,20 @@ void CurrentLocationWidgetPrivate::centerOnCurrentLocation()
     m_widget->centerOn(m_currentPosition, true);
 }
 
+void CurrentLocationWidgetPrivate::saveTrack()
+{
+    QString fileName = QFileDialog::getSaveFileName(m_widget, QObject::tr("Save Track"), // krazy:exclude=qclasses
+                            QDir::homePath().append('/' + QDateTime::currentDateTime().toString("yyyyMMdd_hhmmss") + ".kml"),
+                            QObject::tr("KML File (*.kml)"));
+
+    m_widget->model()->positionTracking()->saveTrack( fileName );
+}
+
 void CurrentLocationWidgetPrivate::clearTrack()
 {
     m_widget->model()->positionTracking()->clearTrack();
     m_widget->repaint();
+    m_currentLocationUi.saveTrackPushButton->setEnabled( false );
     m_currentLocationUi.clearTrackPushButton->setEnabled( false );
 }
 

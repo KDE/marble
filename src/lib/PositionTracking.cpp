@@ -16,13 +16,18 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+#include "GeoWriter.h"
+#include "KmlElementDictionary.h"
 #include "AbstractProjection.h"
 #include "FileManager.h"
 #include "MarbleMath.h"
 #include "MarbleDebug.h"
+#include "MarbleDirs.h"
 #include "PositionProviderPlugin.h"
 
 #include "PositionTracking_p.h"
+
+#include <QtCore/QFile>
 
 using namespace Marble;
 
@@ -171,6 +176,26 @@ bool PositionTracking::trackVisible() const
 void PositionTracking::setTrackVisible( bool visible )
 {
     d->m_document->setVisible( visible );
+}
+
+bool PositionTracking::saveTrack(QString& fileName)
+{
+
+    if ( !fileName.isEmpty() )
+    {
+        if ( !fileName.endsWith(".kml", Qt::CaseInsensitive) )
+        {
+            fileName.append( ".kml" );
+        }
+
+        GeoWriter writer;
+        //FIXME: a better way to do this?
+        writer.setDocumentType( kml::kmlTag_nameSpace22 );
+        QFile file( fileName );
+        file.open( QIODevice::ReadWrite );
+        return writer.write(&file, *d->m_document);
+    }
+    return false;
 }
 
 void PositionTracking::clearTrack()
