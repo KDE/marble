@@ -79,6 +79,9 @@ ControlView::ControlView( QWidget *parent )
     // TODO: Creating a second MapThemeManager may not be the best solution here.
     // MarbleModel also holds one with a QFileSystemWatcher.
     m_mapThemeManager = new MapThemeManager;
+    
+    connect( m_control, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
+    connect( m_control, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
 }
 
 ControlView::~ControlView()

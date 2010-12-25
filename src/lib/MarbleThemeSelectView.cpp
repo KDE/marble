@@ -12,8 +12,10 @@
 
 #include "MarbleThemeSelectView.h"
 
+#include "MapWizard.h"
 #include "MarbleDebug.h"
 #include <QtGui/QResizeEvent>
+#include <QtGui/QMenu>
 
 using namespace Marble;
 
@@ -34,8 +36,9 @@ MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
 
     connect( this, SIGNAL( pressed( QModelIndex ) ),
                    SLOT( selectedMapTheme( QModelIndex ) ) );
+    connect(this, SIGNAL( customContextMenuRequested( QPoint)  ),
+                  SLOT( showContextMenu(QPoint)) );
 }
-
 
 void MarbleThemeSelectView::resizeEvent(QResizeEvent* event)
 {
@@ -46,7 +49,6 @@ void MarbleThemeSelectView::resizeEvent(QResizeEvent* event)
     setGridSize(size);
 }
 
-
 void MarbleThemeSelectView::selectedMapTheme( QModelIndex index )
 {
     const QAbstractItemModel  *model = index.model();
@@ -55,8 +57,25 @@ void MarbleThemeSelectView::selectedMapTheme( QModelIndex index )
                                                  QModelIndex() );
     QString      currentmaptheme = (model->data( colindex )).toString();
     mDebug() << currentmaptheme;
-    emit selectMapTheme( currentmaptheme ); 
+    emit selectMapTheme( currentmaptheme );
 }
 
+void MarbleThemeSelectView::mapWizard()
+{
+    emit showMapWizard();
+}
+
+void MarbleThemeSelectView::uploadDialog()
+{
+    emit showUploadDialog();
+}
+
+void MarbleThemeSelectView::showContextMenu(const QPoint& pos)
+{
+    QMenu menu;
+    menu.addAction( "&Create a New Map...", this, SLOT( mapWizard() ) );
+    menu.addAction( "&Upload Map...", this, SLOT( uploadDialog() ) );
+    menu.exec( mapToGlobal( pos ) );
+}
 
 #include "MarbleThemeSelectView.moc"

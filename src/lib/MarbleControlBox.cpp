@@ -100,6 +100,9 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     //default
     setCurrentLocationTabShown( true );
     setFileViewTabShown( false );
+    
+    connect( d->m_mapViewWidget, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
+    connect( d->m_mapViewWidget, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
 }
 
 MarbleControlBox::~MarbleControlBox()

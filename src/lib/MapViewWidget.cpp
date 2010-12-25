@@ -110,6 +110,9 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
     d->m_mapViewUi.celestialBodyComboBox->setModel( d->m_celestialList );
     connect( d->m_mapViewUi.celestialBodyComboBox, SIGNAL( activated( const QString& ) ),
              this,                                 SLOT( selectCurrentMapTheme( const QString& ) ) );
+    
+    connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
+    connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
 }
 
 MapViewWidget::~MapViewWidget()

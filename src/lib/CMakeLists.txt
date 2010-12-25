@@ -217,6 +217,8 @@ set(marblewidget_SRCS
     PrintOptionsWidget.cpp
     ExternalEditorDialog.cpp
     GoToDialog.cpp
+
+    MapWizard.cpp
 )
 
 set (marblewidget_UI
@@ -248,6 +250,7 @@ set (marblewidget_UI
     GoToDialog.ui
     routing/RoutingSettingsWidget.ui
     routing/RoutingProfileSettingsDialog.ui
+    MapWizard.ui
 )
 
 # FIXME: cleaner approach of src/lib/MarbleControlBox.* vs. marble.qrc
@@ -401,6 +404,7 @@ else (APPLE AND QTONLY)
     AbstractWorkerThread.h
 
     LatLonEdit.h
+    MapWizard.h
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )
 endif (APPLE AND QTONLY)

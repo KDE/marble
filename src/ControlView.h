@@ -104,6 +104,11 @@ class ControlView : public QWidget
       * Start the configured external map editor (or update it if it is already running)
       */
     void launchExternalMapEditor();
+    
+ signals:
+     void showMapWizard();
+     void showUploadDialog();
+    
  private:
     /**
       * Try to reach an external application server at localhost:8111. If none is running,

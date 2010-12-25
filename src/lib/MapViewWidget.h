@@ -61,6 +61,8 @@ class MARBLE_EXPORT MapViewWidget : public QWidget
  Q_SIGNALS:
     void selectMapTheme( const QString& );
     void projectionSelected( Projection );
+    void showMapWizard();
+    void showUploadDialog();
 
  private:
     Q_DISABLE_COPY( MapViewWidget )

@@ -44,6 +44,7 @@ class RoutingProfilesWidget;
 class SunControlWidget;
 class TimeControlWidget;
 class GeoDataFolder;
+class MapWizard;
 
 class MarblePart: public KParts::ReadOnlyPart
 {
@@ -69,7 +70,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  showDateTime();
     void  mapThemeChanged( const QString& newMapTheme );
     void  createPluginMenus();
-    void createFolderList();
+    void  createFolderList();
 
   private Q_SLOTS:
     void  exportMapScreenShot();
@@ -130,11 +131,13 @@ class MarblePart: public KParts::ReadOnlyPart
 
     void  setupStatusBar();
     void  showNewStuffDialog();
+    void  showUploadNewStuffDialog();
     void  connectDownloadRegionDialog();
     void  disconnectDownloadRegionDialog();
     void  showDownloadRegionDialog();
     void  downloadRegion();
     void  showStatusBarContextMenu( const QPoint& pos );
+    void  showMapWizard();
 
     void  editSettings();
 
@@ -196,6 +199,7 @@ class MarblePart: public KParts::ReadOnlyPart
     SunControlWidget  *m_sunControlDialog;
     TimeControlWidget *m_timeControlDialog;
     DownloadRegionDialog *m_downloadRegionDialog;
+    MapWizard *m_mapWizard;
 
     // Actions for the GUI.
     KAction      *m_exportMapAction;
@@ -215,6 +219,7 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_controlSunAction;
     KAction      *m_controlTimeAction;
     KAction      *m_lockFloatItemsAct;
+    KAction      *m_mapWizardAct;
 
     //Bookmark Menu
     KAction *m_addBookmarkAction;

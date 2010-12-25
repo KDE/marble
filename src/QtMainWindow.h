@@ -12,7 +12,7 @@
 
 #ifndef MARBLE_MAINWINDOW_H
 #define MARBLE_MAINWINDOW_H
- 
+
 
 #include <QtGui/QMainWindow>
 #include <QtCore/QDateTime>
@@ -33,22 +33,27 @@ class TimeControlWidget;
 class QtMarbleConfigDialog;
 class DownloadRegionDialog;
 class RoutingWidget;
+class MapWizard;
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
- public:
+public:
     explicit MainWindow(const QString& marbleDataPath = QString(),
                         QWidget *parent=0);
 
-    ControlView* marbleControl(){ return m_controlView; }
-    MarbleWidget* marbleWidget(){ return m_controlView->marbleWidget(); }
+    ControlView* marbleControl() {
+        return m_controlView;
+    }
+    MarbleWidget* marbleWidget() {
+        return m_controlView->marbleWidget();
+    }
 
- protected:
+protected:
     void  closeEvent(QCloseEvent *event);
 
- private:
+private:
     void  createActions();
     void  createMenus();
     void  createStatusBar();
@@ -57,7 +62,7 @@ class MainWindow : public QMainWindow
     void  readSettings();
     void  writeSettings();
 
- private Q_SLOTS:
+private Q_SLOTS:
     void  showPosition( const QString& position);
     void  showDistance( const QString& position);
     void  showDateTime();
@@ -65,7 +70,7 @@ class MainWindow : public QMainWindow
     void  initObject();
     void  editSettings();
     void  updateSettings();
-    
+
     // File Menu
     void  openFile();
     void  openMapSite();
@@ -73,7 +78,8 @@ class MainWindow : public QMainWindow
     void  showDownloadRegionDialog();
     void  printMapScreenShot();
     void  workOffline( bool );
-    
+    void  showMapWizard();
+
     // Edit Menu
     void  copyMap();
     void  copyCoordinates();
@@ -90,13 +96,13 @@ class MainWindow : public QMainWindow
     void  controlTime();
     void  showSun( bool );
     void  reload();
-    
+
     // Settings Menu
     void  showFullScreen( bool );
     void  showSideBar( bool );
     void  showStatusBar( bool );
     void  setupStatusBar();
-    
+
     // Help Menu
     void  enterWhatsThis();
     void  aboutMarble();
@@ -122,7 +128,7 @@ class MainWindow : public QMainWindow
     void showRoutingDialog();
     void showTrackingDialog();
 
- private:
+private:
     void setupZoomButtons();
 
     ControlView *m_controlView;
@@ -130,18 +136,19 @@ class MainWindow : public QMainWindow
     TimeControlWidget* m_timeControlDialog;
     QtMarbleConfigDialog *m_configDialog;
     DownloadRegionDialog* m_downloadRegionDialog;
+    MapWizard* m_mapWizard;
 
     /// Store plugin toolbar pointers so that they can be removed/updated later
     QList<QToolBar*> m_pluginToolbars;
     /// Store plugin menus so that they can be removed/updated later
     QList<QMenu*> m_pluginMenus;
-    
+
     QMenu *m_fileMenu;
     QMenu *m_helpMenu;
     QMenu *m_settingsMenu;
     QMenu *m_infoBoxesMenu;
     QMenu *m_onlineServicesMenu;
-	QMenu *m_bookmarkMenu;
+    QMenu *m_bookmarkMenu;
     // File Menu
     QAction *m_openAct;
     QAction *m_exportMapAct;
@@ -151,6 +158,7 @@ class MainWindow : public QMainWindow
     QAction *m_printAct;
     QAction *m_workOfflineAct;
     QAction *m_quitAct;
+    QAction *m_mapWizardAct;
 
     // Edit Menu
     QAction *m_copyMapAct;
@@ -182,11 +190,11 @@ class MainWindow : public QMainWindow
     QString     m_distance;
     QString     m_clock;
     QLabel      *m_positionLabel;
-    QLabel      *m_distanceLabel;    
+    QLabel      *m_distanceLabel;
     QLabel      *m_clockLabel;
     void updateStatusBar();
 
-	//Bookmark Menu
+    //Bookmark Menu
     QAction *m_addBookmarkAct;
     QAction *m_removeAllBookmarksAct;
     QAction *m_addBookmarkFolderAct;
@@ -205,5 +213,5 @@ class MainWindow : public QMainWindow
 };
 
 } // namespace Marble
- 
+
 #endif

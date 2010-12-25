@@ -47,6 +47,7 @@
 #include <ktogglefullscreenaction.h>
 #include <knewstuff3/knewstuffaction.h>
 #include <knewstuff3/downloaddialog.h>
+#include <knewstuff3/uploaddialog.h>
 #include <KStandardDirs>
 #include <kdeprintdialog.h>
 
@@ -68,6 +69,7 @@
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
 #include "MarblePluginSettingsWidget.h"
+#include "MapWizard.h"
 #include "NewFolderInfoDialog.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
@@ -122,7 +124,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     // only set marble data path when a path was given
     if ( arguments.count() != 0 && !arguments.first().isEmpty() )
         MarbleDirs::setMarbleDataPath( arguments.first() );
-
+    
     // Setting measure system to provide nice standards for all unit questions.
     // This has to happen before any initialization so plugins (for example) can
     // use it during initialization.
@@ -144,6 +146,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     setupActions();
 
     setXMLFile( "marble_part.rc" );
+    
+    m_mapWizard = new MapWizard();
 
     m_statusBarExtension = new KParts::StatusBarExtension( this );
     m_statusBarExtension->statusBar()->setUpdatesEnabled( false );
@@ -156,7 +160,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     setupStatusBar();
     readSettings();
     m_statusBarExtension->statusBar()->setUpdatesEnabled( true );
-
+    
     // Show startup location
     switch ( MarbleSettings::onStartup() ) {
     case LastLocationVisited: {
@@ -171,6 +175,9 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
         m_controlView->marbleWidget()->goHome( Instant );
         break;
     }
+
+    connect( m_controlView, SIGNAL( showUploadDialog() ), this, SLOT( showUploadNewStuffDialog() ) );
+    connect( m_controlView, SIGNAL( showMapWizard() ), this, SLOT( showMapWizard() ) );
 }
 
 MarblePart::~MarblePart()
@@ -416,6 +423,9 @@ void MarblePart::readSettings()
     // View
     m_initialGraphicsSystem = (GraphicsSystem) MarbleSettings::graphicsSystem();
     m_previousGraphicsSystem = m_initialGraphicsSystem;
+    
+    // Map Wizard
+    m_mapWizard->setWmsServers( MarbleSettings::wmsServices() );
 
     // Plugins
     QHash<QString, int> pluginEnabled;
@@ -608,6 +618,8 @@ void MarblePart::writeSettings()
     // Time
     MarbleSettings::setDateTime( m_controlView->marbleWidget()->model()->clockDateTime() );
     MarbleSettings::setSpeedSlider( m_controlView->marbleWidget()->model()->clockSpeed() );
+    
+    MarbleSettings::setWmsServices( m_mapWizard->wmsServers() );
 
     // Plugins
     QList<int>   pluginEnabled;
@@ -1131,6 +1143,19 @@ void MarblePart::showNewStuffDialog()
     delete dialog;
 }
 
+void MarblePart::showUploadNewStuffDialog()
+{
+    QString  newStuffConfig = KStandardDirs::locate ( "data", "marble/marble.knsrc" );
+    kDebug() << "KNS config file:" << newStuffConfig;
+
+    QPointer<KNS3::UploadDialog> dialog( new KNS3::UploadDialog( newStuffConfig ) );
+    kDebug() << "Creating the archive";
+    dialog->setUploadFile( KUrl( m_mapWizard->createArchive( m_controlView->marbleWidget()->mapThemeId() ) ) );
+    dialog->exec();
+    m_mapWizard->deleteArchive( m_controlView->marbleWidget()->mapThemeId() );
+    delete dialog;
+}
+
 // connect to expensive slots, only needed when the non modal dialog is show
 void MarblePart::connectDownloadRegionDialog()
 {
@@ -1199,6 +1224,12 @@ void MarblePart::showStatusBarContextMenu( const QPoint& pos )
     statusBarContextMenu.addAction( m_showDownloadProgressAction );
 
     statusBarContextMenu.exec( statusBar->mapToGlobal( pos ));
+}
+
+void MarblePart::showMapWizard()
+{
+    m_mapWizard->fillServerCombobox();
+    m_mapWizard->show();
 }
 
 void MarblePart::editSettings()

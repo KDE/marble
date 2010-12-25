@@ -131,6 +131,10 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
      * @param show  boolean that controls if the Routing tab is shown.
      */
     void setRoutingTabShown( bool show );
+    
+Q_SIGNALS:
+    void showMapWizard();
+    void showUploadDialog();
 
  private:
     void setWidgetTabShown( QWidget * widget, int insertIndex,

@@ -66,6 +66,7 @@
 #include "PositionTracking.h"
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
+#include "MapWizard.h"
 
 // For zoom buttons on Maemo
 #ifdef Q_WS_MAEMO_5
@@ -126,12 +127,14 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
 
     connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString ) ),
              this, SLOT( updateMapEditButtonVisibility( QString ) ) );
+    connect( m_controlView, SIGNAL( showMapWizard() ), this, SLOT( showMapWizard() ) );
 
     setUpdatesEnabled( true );
 
     m_position = NOT_AVAILABLE;
     m_distance = marbleWidget()->distanceString();
     m_clock = QLocale().toString( m_controlView->marbleWidget()->model()->clockDateTime().addSecs( m_controlView->marbleWidget()->model()->clockTimezone() ), QLocale::ShortFormat );
+    m_mapWizard = new MapWizard();
     QTimer::singleShot( 0, this, SLOT( initObject() ) );
 }
 
@@ -277,7 +280,11 @@ void MainWindow::createActions()
      m_addBookmarkFolderAct = new QAction( QIcon(":/icons/bookmark-add-folder.png"), tr("&New Bookmark Folder"),this);
      m_addBookmarkFolderAct->setStatusTip(tr("New Bookmark Folder"));
      connect( m_addBookmarkFolderAct, SIGNAL( triggered() ), this, SLOT( openNewBookmarkFolderDialog() ) );
-
+     
+     // Map Wizard action
+     m_mapWizardAct = new QAction( tr("&Create a New Map..."), this );
+     m_mapWizardAct->setStatusTip( tr( "A wizard guides you through the creation of your own map theme." ) );
+     connect( m_mapWizardAct, SIGNAL( triggered() ), SLOT( showMapWizard() ) );
 }
 
 void MainWindow::createMenus()
@@ -321,6 +328,7 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_openAct);
     m_fileMenu->addAction(m_downloadAct);
     m_fileMenu->addAction( m_downloadRegionAction );
+    m_fileMenu->addAction( m_mapWizardAct );
     m_fileMenu->addAction(m_exportMapAct);
     m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_printAct);
@@ -988,6 +996,10 @@ void MainWindow::readSettings()
     }
     settings.endGroup();
 
+    settings.beginGroup( "WmsService" );
+        m_mapWizard->setWmsServers( settings.value( "services" ).toStringList() );
+    settings.endGroup();
+
     settings.beginGroup( "Plugins");
     QString positionProvider = settings.value( "activePositionTrackingPlugin", QString() ).toString();
     if ( !positionProvider.isEmpty() ) {
@@ -1004,7 +1016,7 @@ void MainWindow::readSettings()
         }
     }
     settings.endGroup();
-
+    
      // The config dialog has to read settings.
      m_configDialog->readSettings();
 
@@ -1101,7 +1113,12 @@ void MainWindow::writeSettings()
          positionProvider = tracking->positionProviderPlugin()->nameId();
      }
      settings.setValue( "activePositionTrackingPlugin", positionProvider );
-
+     settings.endGroup();
+     
+     settings.beginGroup( "WmsService" );
+        settings.setValue( "services", m_mapWizard->wmsServers() );
+     settings.endGroup();
+     
      // The config dialog has to write settings.
      m_configDialog->writeSettings();
 
@@ -1324,6 +1341,12 @@ void MainWindow::setupZoomButtons()
         }
     }
 #endif // Q_WS_MAEMO_5
+}
+
+void MainWindow::showMapWizard()
+{
+    m_mapWizard->fillServerCombobox();
+    m_mapWizard->show();
 }
 
 #include "QtMainWindow.moc"

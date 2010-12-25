@@ -125,6 +125,9 @@
        <height>140</height>
       </size>
      </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
      <property name="whatsThis">
       <string>Here you can choose the preferred map view from different topics.</string>
      </property>
