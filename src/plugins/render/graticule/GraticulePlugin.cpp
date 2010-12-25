@@ -12,20 +12,27 @@
 
 #include <QtGui/QBrush>
 #include "MarbleDebug.h"
+#include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "GeoDataLineString.h"
 #include "Planet.h"
 #include "MarbleDataFacade.h"
+#include "PluginAboutDialog.h"
 
 #include "ViewportParams.h"
-
 #include "GeoDataLatLonAltBox.h"
+
+// Qt
+#include <QtGui/QPushButton>
+#include <QtGui/QLabel>
+
 
 namespace Marble
 {
 
 GraticulePlugin::GraticulePlugin()
-    : m_isInitialized( false )
+    : m_isInitialized( false ),
+      m_aboutDialog( 0 )
 {
 }
 
@@ -83,6 +90,27 @@ void GraticulePlugin::initialize ()
 bool GraticulePlugin::isInitialized () const
 {
     return m_isInitialized;
+}
+
+QDialog *GraticulePlugin::aboutDialog() const
+{
+    if ( !m_aboutDialog ) {
+        // Initializing about dialog
+        m_aboutDialog = new PluginAboutDialog();
+        m_aboutDialog->setName( "Coordinates Grid Plugin" );
+        m_aboutDialog->setVersion( "0.1" );
+        // FIXME: Can we store this string for all of Marble
+        m_aboutDialog->setAboutText( tr( "<br />(c) 2009 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
+        QList<Author> authors;
+        Author tackat;
+        tackat.name = "Torsten Rahn";
+        tackat.task = tr( "Developer" );
+        tackat.email = "tackat@kde.org";
+        authors.append( tackat );
+        m_aboutDialog->setAuthors( authors );
+        m_aboutDialog->setPixmap( m_icon.pixmap( 62, 53 ) );
+    }
+    return m_aboutDialog;
 }
 
 bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,

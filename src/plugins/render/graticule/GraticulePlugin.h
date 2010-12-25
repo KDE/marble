@@ -19,8 +19,14 @@
 #include <QtCore/QObject>
 #include <QtCore/QVector>
 #include <QtGui/QPen>
+#include <QtCore/QHash>
+#include <QtGui/QIcon>
 
+
+#include "AbstractDataPlugin.h"
 #include "RenderPlugin.h"
+#include "RenderPluginInterface.h"
+
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
@@ -36,6 +42,8 @@ class GeoDataLatLonAltBox;
  * This choice was made due to the fact that all common coordinate grids focus fully 
  * on the degree system. 
  */
+
+class PluginAboutDialog;
 
 class GraticulePlugin : public RenderPlugin
 {
@@ -61,6 +69,8 @@ class GraticulePlugin : public RenderPlugin
     QString description() const;
 
     QIcon icon () const;
+
+    QDialog *aboutDialog() const;
 
 
     void initialize ();
@@ -154,6 +164,9 @@ class GraticulePlugin : public RenderPlugin
     QPen m_shadowPen;
 
     bool m_isInitialized;
+    mutable QIcon m_icon;
+    mutable PluginAboutDialog *m_aboutDialog;
+
 };
 
 }
