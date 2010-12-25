@@ -1,6 +1,7 @@
 # add_subdirectory( test )
 add_subdirectory( crosshairs )
 add_subdirectory( compass )
+add_subdirectory( earthquake )
 add_subdirectory( graticule )
 # add_subdirectory( satellites )
 add_subdirectory( overviewmap )
