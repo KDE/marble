@@ -22,8 +22,7 @@
 
 using namespace Marble;
 
-AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture * const textureLayer,
-                                                              StackedTileLoader * const tileLoader,
+AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( StackedTileLoader * const tileLoader,
                                                               QObject * const parent )
     : QObject( parent ),
       m_maxGlobalX( 0 ),
@@ -44,8 +43,7 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture * 
       m_globalWidth( 0 ),
       m_globalHeight( 0 ),
       m_normGlobalWidth( 0.0 ),
-      m_normGlobalHeight( 0.0 ),
-      m_mapThemeIdHash( qHash( textureLayer->sourceDir() ) )
+      m_normGlobalHeight( 0.0 )
 {
     Q_ASSERT( textureLayer );  // just for documentation
 }
@@ -499,8 +497,7 @@ void AbstractScanlineTextureMapper::nextTile( int &posX, int &posY )
     int tileCol = lon / m_tileSize.width();
     int tileRow = lat / m_tileSize.height();
 
-    m_tile = m_tileLoader->loadTile( TileId( m_mapThemeIdHash, m_tileLevel, tileCol, tileRow ),
-                                     DownloadBrowse );
+    m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel, tileCol, tileRow ), DownloadBrowse );
     m_tile->setUsed( true );
 
     // Update position variables:
@@ -540,8 +537,7 @@ void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
     int tileCol = lon / m_tileSize.width();
     int tileRow = lat / m_tileSize.height();
 
-    m_tile = m_tileLoader->loadTile( TileId( m_mapThemeIdHash, m_tileLevel, tileCol, tileRow ),
-                                     DownloadBrowse );
+    m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel, tileCol, tileRow ), DownloadBrowse );
     m_tile->setUsed( true );
 
     // Update position variables:

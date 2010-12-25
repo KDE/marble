@@ -37,7 +37,6 @@
 #include "MarbleDirs.h"
 #include "MergedLayerDecorator.h"
 #include "StackedTile.h"
-#include "TextureLayer.h"
 #include "TextureTile.h"
 #include "TileLoader.h"
 #include "TileLoaderHelper.h"

@@ -27,10 +27,9 @@
 
 using namespace Marble;
 
-SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( GeoSceneTexture *textureLayer,
-                                                                StackedTileLoader *tileLoader,
+SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( StackedTileLoader *tileLoader,
                                                                 QObject *parent )
-    : AbstractScanlineTextureMapper( textureLayer, tileLoader, parent )
+    : AbstractScanlineTextureMapper( tileLoader, parent )
 {
     m_interlaced = false;
 }

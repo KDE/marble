@@ -35,8 +35,7 @@ class AbstractScanlineTextureMapper : public QObject
     Q_OBJECT
 
 public:
-    AbstractScanlineTextureMapper( GeoSceneTexture * const textureLayer,
-                                   StackedTileLoader * const tileLoader,
+    AbstractScanlineTextureMapper( StackedTileLoader * const tileLoader,
                                    QObject * const parent = 0 );
     ~AbstractScanlineTextureMapper();
 
@@ -131,7 +130,6 @@ public:
     int         m_globalHeight;
     qreal       m_normGlobalWidth;
     qreal       m_normGlobalHeight;
-    uint        m_mapThemeIdHash;
 };
 
 inline bool AbstractScanlineTextureMapper::interlaced() const

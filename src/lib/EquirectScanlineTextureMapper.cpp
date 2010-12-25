@@ -28,10 +28,9 @@
 
 using namespace Marble;
 
-EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( GeoSceneTexture *textureLayer,
-                                                              StackedTileLoader *tileLoader,
+EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( StackedTileLoader *tileLoader,
                                                               QObject *parent )
-    : AbstractScanlineTextureMapper( textureLayer, tileLoader, parent ),
+    : AbstractScanlineTextureMapper( tileLoader, parent ),
       m_oldCenterLon( 0.0 ),
       m_oldYPaintedTop( 0 )
 {
