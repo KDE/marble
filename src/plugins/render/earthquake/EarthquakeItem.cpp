@@ -81,7 +81,7 @@ void EarthquakeItem::paint( GeoPainter *painter, ViewportParams *viewport,
     qreal height = magnitude() * 10;
 
     // Draws the circle with circles' center as rectangle's top-left corner.
-    QRect arcRect( width / -2, height / -2, width, height );
+    QRect arcRect( 0, 0, width, height );
     QColor color = oxygenBrickRed4;
     if ( magnitude() < 5.0 ) {
         color = oxygenSunYellow6;
@@ -102,7 +102,7 @@ void EarthquakeItem::paint( GeoPainter *painter, ViewportParams *viewport,
         QPainter pixmapPainter( &m_seismograph );
         renderer.render( &pixmapPainter, QRectF( 0.0, 0.0, width, height ) );
     }
-    painter->drawPixmap( -width / 2, -height / 2, m_seismograph );
+    painter->drawPixmap( 0, 0, m_seismograph );
 
     // Draws magnitude of the earthquake
     QFontMetrics metrics( s_font );
@@ -111,7 +111,7 @@ void EarthquakeItem::paint( GeoPainter *painter, ViewportParams *viewport,
     painter->setBrush( QBrush() );
     painter->setPen( QPen() );
     painter->setFont( s_font );
-    painter->drawText( QPoint( magnitudeRect.width() / -2, magnitudeRect.height() / 2 ), magnitudeText );
+    painter->drawText( QPoint( (arcRect.width() - magnitudeRect.width()) / 2, (arcRect.height() - magnitudeRect.height()) / 2 + metrics.ascent() ), magnitudeText );
 
     // Restore the old painter state.
     painter->restore();
