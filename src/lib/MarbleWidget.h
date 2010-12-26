@@ -639,12 +639,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     /**
      * @brief  Center the view on a point
-     * @param  index  an index for a QModel, indicating a city
-     */
-    void centerOn( const QModelIndex& index, bool animated = false );
-
-    /**
-     * @brief  Center the view on a point
      * This method centers the Marble map on the point described by the latitude
      * and longitude in the GeoDataCoordinate parameter @c point. It also zooms
      * the map to be at the elevation described by the altitude. If this is

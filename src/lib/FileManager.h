@@ -34,7 +34,6 @@ class FileLoader;
  */
 class FileManager : public QObject
 {
-    friend class MarblePlacemarkModel;
     Q_OBJECT
 
  public:

@@ -39,7 +39,6 @@ namespace Marble
 
 class MarbleModel;
 class MarbleGeoDataModel;
-class MarblePlacemarkModel;
 class GeoDataTreeModel;
 class FileViewModel;
 class MarbleDataFacadePrivate;

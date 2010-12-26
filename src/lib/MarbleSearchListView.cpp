@@ -20,8 +20,6 @@ MarbleSearchListView::MarbleSearchListView(QWidget* parent)
     : QListView( parent ),
       d( 0 )
 {
-    connect( this, SIGNAL( activated( const QModelIndex& ) ),
-             this, SIGNAL( centerOn ( const QModelIndex& ) ) );
 }
 
 

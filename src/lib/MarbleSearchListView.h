@@ -17,7 +17,6 @@
 
 #include "marble_export.h"
 
-class QModelIndex;
 class QString;
 
 namespace Marble
@@ -29,9 +28,6 @@ class MARBLE_EXPORT MarbleSearchListView : public QListView
 
  public:
     explicit MarbleSearchListView(QWidget*);
-
- Q_SIGNALS:
-    void centerOn(const QModelIndex&);
 
  public Q_SLOTS:
     void  selectItem(const QString&);

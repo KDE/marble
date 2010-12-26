@@ -56,7 +56,7 @@ NavigationWidget::NavigationWidget( QWidget *parent, Qt::WindowFlags f )
 
     d->m_navigationUi.setupUi( this );
 
-    d->m_sortproxy = new QSortFilterProxyModel( d->m_navigationUi.locationListView );
+    d->m_sortproxy = new QSortFilterProxyModel( this );
     d->m_navigationUi.locationListView->setModel( d->m_sortproxy );
 
     connect( d->m_navigationUi.goHomeButton,     SIGNAL( clicked() ),
@@ -80,7 +80,7 @@ NavigationWidget::NavigationWidget( QWidget *parent, Qt::WindowFlags f )
     connect( d->m_navigationUi.moveDownButton,   SIGNAL( clicked() ),
              this,                               SIGNAL( moveDown() ) );
 
-    connect( d->m_navigationUi.locationListView, SIGNAL( centerOn( const QModelIndex& ) ),
+    connect( d->m_navigationUi.locationListView, SIGNAL( activated( const QModelIndex& ) ),
              this,                               SLOT( mapCenterOnSignal( const QModelIndex& ) ) );
 
     connect( d->m_navigationUi.searchLineEdit,   SIGNAL( textChanged( const QString& ) ),
@@ -125,9 +125,6 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
     connect( this, SIGNAL( moveRight() ), d->m_widget, SLOT( moveRight() ) );
     connect( this, SIGNAL( moveUp() ),    d->m_widget, SLOT( moveUp() ) );
     connect( this, SIGNAL( moveDown() ),  d->m_widget, SLOT( moveDown() ) );
-
-    connect( this,        SIGNAL( centerOn( const QModelIndex&, bool ) ),
-             d->m_widget, SLOT( centerOn( const QModelIndex&, bool ) ) );
 
     connect( d->m_widget, SIGNAL( zoomChanged( int ) ),
              this,        SLOT( changeZoom( int ) ) );
@@ -194,6 +191,7 @@ void NavigationWidget::setLocations(QAbstractItemModel* locations)
     d->m_sortproxy->setSortLocaleAware( true );
     d->m_sortproxy->setDynamicSortFilter( true );
     d->m_sortproxy->sort( 0 );
+    d->m_widget->placemarkSelectionModel()->clear();
     mDebug() << "NavigationWidget (sort): Time elapsed:"<< t.elapsed() << " ms";
 }
 
@@ -224,7 +222,17 @@ void NavigationWidget::updateButtons( int value )
 
 void NavigationWidget::mapCenterOnSignal( const QModelIndex &index )
 {
-    emit centerOn( d->m_sortproxy->mapToSource( index ), true );
+    if( !index.isValid() ) {
+        return;
+    }
+    GeoDataObject *object
+            = qVariantValue<GeoDataObject*>( index.model()->data(index, MarblePlacemarkModel::ObjectPointerRole ) );
+    if ( dynamic_cast<GeoDataPlacemark*>(object) )
+    {
+        GeoDataCoordinates coord = ( dynamic_cast<GeoDataPlacemark*>( object ) )->coordinate();
+        d->m_widget->centerOn( coord, true );
+        d->m_widget->placemarkSelectionModel()->select( d->m_sortproxy->mapToSource( index ), QItemSelectionModel::ClearAndSelect );
+    }
 }
 
 void NavigationWidget::adjustForAnimation()

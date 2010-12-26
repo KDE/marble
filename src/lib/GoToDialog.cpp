@@ -15,7 +15,6 @@
 #include "GeoDataFolder.h"
 #include "PositionTracking.h"
 #include "BookmarkManager.h"
-#include "MarblePlacemarkModel.h"
 #include "routing/RoutingManager.h"
 #include "routing/RouteRequest.h"
 

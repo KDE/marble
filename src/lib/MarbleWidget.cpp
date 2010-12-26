@@ -39,7 +39,6 @@
 #include "MarbleMap_p.h" // FIXME: remove this
 #include "MarbleModel.h"
 #include "MarblePhysics.h"
-#include "MarblePlacemarkModel.h"
 #include "MarbleWidgetInputHandler.h"
 #include "MeasureTool.h"
 #include "MergedLayerDecorator.h"
@@ -594,26 +593,6 @@ void MarbleWidget::centerOn( const qreal lon, const qreal lat, bool animated )
 {
     GeoDataCoordinates target( lon, lat, 0.0, GeoDataCoordinates::Degree );
     centerOn( target, animated );
-}
-
-void MarbleWidget::centerOn( const QModelIndex& index, bool animated )
-{
-    QItemSelectionModel *selectionModel = d->m_model->placemarkSelectionModel();
-    Q_ASSERT( selectionModel );
-
-    selectionModel->clear();
-
-    if ( index.isValid() ) {
-        const GeoDataCoordinates targetPosition =
-            index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
-
-        GeoDataLookAt target = lookAt();
-        target.setLongitude( targetPosition.longitude() );
-        target.setLatitude( targetPosition.latitude() );
-        flyTo( target, animated ? Automatic : Instant );
-
-        selectionModel->select( index, QItemSelectionModel::SelectCurrent );
-    }
 }
 
 void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )

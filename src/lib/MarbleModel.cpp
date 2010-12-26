@@ -52,7 +52,6 @@
 #include "HttpDownloadManager.h"
 #include "MarbleDataFacade.h"
 #include "MarbleDirs.h"
-#include "MarblePlacemarkModel.h"
 #include "FileManager.h"
 #include "GeoDataTreeModel.h"
 #include "PlacemarkManager.h"

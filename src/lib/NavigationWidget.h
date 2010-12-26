@@ -29,7 +29,6 @@ namespace Marble
 class NavigationWidgetPrivate;
 
 class MarbleWidget;
-class MarblePlacemarkModel;
 
 class MARBLE_EXPORT NavigationWidget : public QWidget
 {
@@ -92,17 +91,6 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
      */
     void moveDown();
 
-    /**
-     * @brief Signal emitted when a user selects a placemark in the search widget.
-     * @param index  the index for the chosen placemark.
-     *
-     * This signal is emitted when the user has selected a placemark
-     * in the search, e.g. by double clicking it or by pressing
-     * return.  If it is connected to the centerOn( QModelIndex&) slot
-     * in a MarbleWidget, the widget will center the view on this
-     * placemark.
-     */
-    void centerOn( const QModelIndex&, bool );
 
  public Q_SLOTS:
     /**

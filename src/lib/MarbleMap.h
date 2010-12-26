@@ -37,7 +37,6 @@
 
 // Qt
 class QAbstractItemModel;
-class QModelIndex;
 class QItemSelectionModel;
 
 namespace Marble
@@ -529,12 +528,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      *              +180(W) - -180(E)
      */
     void centerOn( const qreal lon, const qreal lat );
-
-    /**
-     * @brief  Center the view on a point
-     * @param  index  an index for a QModel, indicating a city
-     */
-    void centerOn( const QModelIndex& index );
 
     /**
      * @brief  Set the latitude for the center point

@@ -50,7 +50,6 @@
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
-#include "MarblePlacemarkModel.h"
 #include "MeasureTool.h"
 #include "MergedLayerDecorator.h"
 #include "PlacemarkLayout.h"
@@ -751,28 +750,6 @@ void MarbleMap::centerOn( const qreal lon, const qreal lat )
 
     emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
-
-void MarbleMap::centerOn( const QModelIndex& index )
-{
-    QItemSelectionModel *selectionModel = d->m_model->placemarkSelectionModel();
-    Q_ASSERT( selectionModel );
-
-    selectionModel->clear();
-
-    if ( index.isValid() ) {
-        const GeoDataCoordinates point =
-            index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
-  
-        qreal  lon;
-        qreal  lat;
-        point.geoCoordinates( lon, lat );
-
-        centerOn( lon * RAD2DEG, lat * RAD2DEG );
-
-        selectionModel->select( index, QItemSelectionModel::SelectCurrent );
-    }
-}
-
 
 void MarbleMap::setCenterLatitude( qreal lat )
 {
