@@ -98,7 +98,7 @@ GeoDataGeometryPrivate* GeoDataGeometry::p() const
     return static_cast<GeoDataGeometryPrivate*>(d);
 }
 
-QString GeoDataGeometry::nodeType() const
+const char* GeoDataGeometry::nodeType() const
 {
     return d->nodeType();
 }

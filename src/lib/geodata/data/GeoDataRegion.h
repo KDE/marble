@@ -80,7 +80,7 @@ class GEODATA_EXPORT GeoDataRegion : public GeoDataObject
 /*!
     \brief Provides type information for downcasting a GeoNode
 */
-    virtual QString nodeType() const;
+    virtual const char* nodeType() const;
 
 
     

@@ -32,7 +32,7 @@ class GeoDataObjectPrivate
     {
     }
 
-    QString nodeType() const
+    const char* nodeType() const
     {
         return GeoDataTypes::GeoDataObjectType;
     }
@@ -65,7 +65,7 @@ GeoDataObject::~GeoDataObject()
     delete d;
 }
 
-QString GeoDataObject::nodeType() const
+const char* GeoDataObject::nodeType() const
 {
     return d->nodeType();
 }

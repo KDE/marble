@@ -105,7 +105,7 @@ namespace Marble
         void setCoordinates( const GeoDataCoordinates& coordinates );
 
         /// Provides type information for downcasting a GeoNode
-        virtual QString nodeType() const;
+        virtual const char* nodeType() const;
 
         void detach();
     private:

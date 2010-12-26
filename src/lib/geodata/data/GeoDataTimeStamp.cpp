@@ -45,7 +45,7 @@ GeoDataTimeStamp& GeoDataTimeStamp::operator=( const GeoDataTimeStamp& other )
     return *this;
 }
 
-QString GeoDataTimeStamp::nodeType() const
+const char* GeoDataTimeStamp::nodeType() const
 {
     return d->nodeType();
 }

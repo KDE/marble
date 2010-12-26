@@ -50,7 +50,7 @@ GeoDataContainerPrivate* GeoDataContainer::p() const
     return static_cast<GeoDataContainerPrivate*>(d);
 }
 
-QString GeoDataContainer::nodeType() const
+const char* GeoDataContainer::nodeType() const
 {
     return p()->nodeType();
 }

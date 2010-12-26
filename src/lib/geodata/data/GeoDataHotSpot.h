@@ -37,7 +37,7 @@ class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
     GeoDataHotSpot& operator=( const GeoDataHotSpot& other );
 
     /// Provides type information for downcasting a GeoData
-    virtual QString nodeType() const;
+    virtual const char* nodeType() const;
 
     /**
     * @brief this function returns the hotspot and the units the hotspot is measured in

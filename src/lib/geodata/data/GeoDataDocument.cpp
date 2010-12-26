@@ -53,7 +53,7 @@ GeoDataDocumentPrivate* GeoDataDocument::p() const
     return static_cast<GeoDataDocumentPrivate*>(d);
 }
 
-QString GeoDataDocument::nodeType() const
+const char* GeoDataDocument::nodeType() const
 {
     return p()->nodeType();
 }

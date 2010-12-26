@@ -21,7 +21,7 @@ namespace Marble
 class GeoDataTimeStampPrivate
 {
   public:
-    QString nodeType() const
+    const char* nodeType() const
     {
         return GeoDataTypes::GeoDataTimeStampType;
     }

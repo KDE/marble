@@ -53,7 +53,7 @@ GeoDataRegion::~GeoDataRegion()
 }
 
 
-QString GeoDataRegion::nodeType() const
+const char* GeoDataRegion::nodeType() const
 {
     return d->nodeType();
 }

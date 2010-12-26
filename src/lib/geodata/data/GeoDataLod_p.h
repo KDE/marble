@@ -29,7 +29,7 @@ class GeoDataLodPrivate
     {
     }
 
-    QString nodeType() const
+    const char* nodeType() const
     {
         return GeoDataTypes::GeoDataLodType;
     }

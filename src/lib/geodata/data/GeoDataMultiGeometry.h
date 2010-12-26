@@ -39,7 +39,7 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
     virtual ~GeoDataMultiGeometry();
 
     /// Provides type information for downcasting a GeoData
-    virtual QString nodeType() const;
+    virtual const char* nodeType() const;
 
     virtual GeoDataLatLonAltBox latLonAltBox() const;
 

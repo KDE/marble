@@ -64,7 +64,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
 /*!
     \brief Provides type information for downcasting a GeoNode
 */
-    virtual QString nodeType() const;
+    virtual const char* nodeType() const;
 
 
 /*!

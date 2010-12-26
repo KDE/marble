@@ -33,7 +33,7 @@ class GeoDataLatLonBoxPrivate
     {
     }
 
-    QString nodeType() const
+    const char* nodeType() const
     {
         return GeoDataTypes::GeoDataLatLonBoxType;
     }
@@ -78,7 +78,7 @@ GeoDataLatLonBox::~GeoDataLatLonBox()
     delete d;
 }
 
-QString GeoDataLatLonBox::nodeType() const
+const char* GeoDataLatLonBox::nodeType() const
 {
     return d->nodeType();
 }

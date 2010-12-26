@@ -46,7 +46,7 @@ void TestGeoData::nodeTypeTest()
 {
     /// basic testing of nodeType
     GeoDataFolder *folder = new GeoDataFolder;
-    QString folderType(GeoDataTypes::GeoDataFolderType );
+    const char* folderType = GeoDataTypes::GeoDataFolderType;
     QCOMPARE( folder->nodeType(), folderType );
 
     /// testing the nodeType of an object appended to a container

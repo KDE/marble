@@ -90,7 +90,7 @@ GeoDataFeature& GeoDataFeature::operator=( const GeoDataFeature& other )
     return *this;
 }
 
-QString GeoDataFeature::nodeType() const
+const char* GeoDataFeature::nodeType() const
 {
     return p()->nodeType();
 }

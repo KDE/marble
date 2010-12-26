@@ -39,7 +39,7 @@ GeoDataTimeSpan::~GeoDataTimeSpan()
     delete d;
 }
 
-QString GeoDataTimeSpan::nodeType() const
+const char* GeoDataTimeSpan::nodeType() const
 {
     return d->nodeType();
 }

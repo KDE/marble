@@ -37,7 +37,7 @@ class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
         return copy;
     }
 
-    virtual QString nodeType() const
+    virtual const char* nodeType() const
     {
         return GeoDataTypes::GeoDataMultiGeometryType;
     }

@@ -40,7 +40,7 @@ class GEODATA_EXPORT GeoDataData : public GeoDataObject
     GeoDataData& operator=( const GeoDataData& other );
 
     /// Provides type information for downcasting a GeoData
-    virtual QString nodeType() const;
+    virtual const char* nodeType() const;
     
     /**
     * @brief return the value of data

@@ -39,7 +39,7 @@ GeoDataExtendedData& GeoDataExtendedData::operator=( const GeoDataExtendedData& 
     return *this;
 }
 
-QString GeoDataExtendedData::nodeType() const
+const char* GeoDataExtendedData::nodeType() const
 {
     return d->nodeType();
 }

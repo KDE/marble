@@ -37,7 +37,7 @@ class GeoDataLinearRingPrivate : public GeoDataLineStringPrivate
         return copy;
     }
 
-    virtual QString nodeType() const
+    virtual const char* nodeType() const
     {
         return GeoDataTypes::GeoDataLinearRingType;
     }

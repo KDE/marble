@@ -62,7 +62,7 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     virtual ~GeoDataGeometry();
 
     /// Provides type information for downcasting a GeoData
-    virtual QString nodeType() const;
+    virtual const char* nodeType() const;
     virtual EnumGeometryId geometryId() const;
 
     bool extrude() const;

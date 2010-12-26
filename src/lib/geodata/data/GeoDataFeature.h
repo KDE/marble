@@ -77,7 +77,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     bool operator==( const GeoDataFeature& ) const { return false; };
 
     /// Provides type information for downcasting a GeoData
-    virtual QString nodeType() const;
+    virtual const char* nodeType() const;
 
     EnumFeatureId featureId() const;
     /**

@@ -38,7 +38,7 @@ class GEODATA_EXPORT GeoDataTimeSpan : public GeoDataTimePrimitive
     GeoDataTimeSpan& operator=( const GeoDataTimeSpan& other );
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const;
+    virtual const char* nodeType() const;
 
     /**
     * @brief return the beginning instant of a timespan

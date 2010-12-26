@@ -66,7 +66,7 @@ class GeoDataRegionPrivate
     }
 
 
-    QString nodeType() const
+    const char* nodeType() const
     {
         return GeoDataTypes::GeoDataRegionType;
     }

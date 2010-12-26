@@ -111,7 +111,7 @@ class GeoDataFeaturePrivate
     {
     }
 
-    virtual QString nodeType() const
+    virtual const char* nodeType() const
     {
         return GeoDataTypes::GeoDataFeatureType;
     }

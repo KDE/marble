@@ -56,7 +56,7 @@ GeoDataPlacemarkPrivate* GeoDataPlacemark::p() const
     return static_cast<GeoDataPlacemarkPrivate*>(d);
 }
 
-QString GeoDataPlacemark::nodeType() const
+const char* GeoDataPlacemark::nodeType() const
 {
     return p()->nodeType();
 }

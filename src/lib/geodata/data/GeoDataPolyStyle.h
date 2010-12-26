@@ -51,7 +51,7 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
     GeoDataPolyStyle& operator=( const GeoDataPolyStyle& other );
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const;
+    virtual const char* nodeType() const;
 
     /**
      * @brief Set whether to fill the polygon

@@ -24,7 +24,7 @@ class GeoDataColorStylePrivate
     {
     }
 
-    QString nodeType() const
+    const char* nodeType() const
     {
         return GeoDataTypes::GeoDataColorStyleType;
     }
@@ -58,7 +58,7 @@ GeoDataColorStyle& GeoDataColorStyle::operator=( const GeoDataColorStyle& other 
     return *this;
 }
 
-QString GeoDataColorStyle::nodeType() const
+const char* GeoDataColorStyle::nodeType() const
 {
     return d->nodeType();
 }

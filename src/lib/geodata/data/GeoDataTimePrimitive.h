@@ -35,7 +35,7 @@ class GEODATA_EXPORT GeoDataTimePrimitive : public GeoDataObject
 {
   public:
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const;
+    virtual const char* nodeType() const;
 
     GeoDataTimePrimitive& operator=( const GeoDataTimePrimitive& other );
 

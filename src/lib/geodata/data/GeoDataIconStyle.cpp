@@ -34,7 +34,7 @@ class GeoDataIconStylePrivate
     {
     }
 
-    QString nodeType() const
+    const char* nodeType() const
     {
         return GeoDataTypes::GeoDataIconStyleType;
     }
@@ -74,7 +74,7 @@ GeoDataIconStyle& GeoDataIconStyle::operator=( const GeoDataIconStyle& other )
     return *this;
 }
 
-QString GeoDataIconStyle::nodeType() const
+const char* GeoDataIconStyle::nodeType() const
 {
     return d->nodeType();
 }

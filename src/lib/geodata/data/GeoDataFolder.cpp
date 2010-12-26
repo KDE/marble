@@ -43,7 +43,7 @@ class GeoDataFolderPrivate : public GeoDataContainerPrivate
         return copy;
     }
 
-    virtual QString nodeType() const
+    virtual const char* nodeType() const
     {
         return GeoDataTypes::GeoDataFolderType;
     }
@@ -69,7 +69,7 @@ GeoDataFolderPrivate* GeoDataFolder::p() const
     return static_cast<GeoDataFolderPrivate*>(d);
 }
 
-QString GeoDataFolder::nodeType() const
+const char* GeoDataFolder::nodeType() const
 {
     return p()->nodeType();
 }

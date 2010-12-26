@@ -22,7 +22,7 @@ namespace Marble
 class GeoDataDataPrivate
 {
   public:
-    QString nodeType() const
+    const char* nodeType() const
     {
         return GeoDataTypes::GeoDataDataType;
     }

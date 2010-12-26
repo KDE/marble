@@ -55,7 +55,7 @@ class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer
     ~GeoDataFolder();
 
     /// Provides type information for downcasting a GeoData
-    virtual QString nodeType() const;
+    virtual const char* nodeType() const;
 
  private:
     GeoDataFolderPrivate *p() const;

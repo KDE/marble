@@ -51,7 +51,7 @@ GeoDataLineStringPrivate* GeoDataLineString::p() const
     return static_cast<GeoDataLineStringPrivate*>(d);
 }
 
-QString GeoDataLineString::nodeType() const
+const char* GeoDataLineString::nodeType() const
 {
     return p()->nodeType();
 }

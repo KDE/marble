@@ -63,7 +63,7 @@ GeoDataPoint::~GeoDataPoint()
 {
 }
 
-QString GeoDataPoint::nodeType() const
+const char* GeoDataPoint::nodeType() const
 {
     return GeoDataTypes::GeoDataPointType;
 }

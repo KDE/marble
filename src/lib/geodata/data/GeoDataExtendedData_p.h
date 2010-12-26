@@ -25,7 +25,7 @@ class GeoDataExtendedDataPrivate
 {
   public:
 
-    QString nodeType() const
+    const char* nodeType() const
     {
         return GeoDataTypes::GeoDataExtendedDataType;
     }

@@ -33,7 +33,7 @@ GeoDataLod::~GeoDataLod()
 }
 
 
-QString GeoDataLod::nodeType() const
+const char* GeoDataLod::nodeType() const
 {
     return d->nodeType();
 }

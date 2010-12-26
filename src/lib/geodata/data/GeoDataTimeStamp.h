@@ -37,7 +37,7 @@ class GEODATA_EXPORT GeoDataTimeStamp : public GeoDataTimePrimitive
     GeoDataTimeStamp& operator=( const GeoDataTimeStamp& other );
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const;
+    virtual const char* nodeType() const;
 
     /**
     * @brief return the when time of timestamp

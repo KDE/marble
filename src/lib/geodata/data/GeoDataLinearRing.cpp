@@ -32,7 +32,7 @@ GeoDataLinearRing::~GeoDataLinearRing()
 {
 }
 
-QString GeoDataLinearRing::nodeType() const
+const char* GeoDataLinearRing::nodeType() const
 {
     return p()->nodeType();
 }

@@ -20,7 +20,7 @@ namespace Marble
 class GeoDataStyleSelectorPrivate
 {
   public:
-    QString nodeType() const
+    const char* nodeType() const
     {
         return GeoDataTypes::GeoDataStyleSelectorType;
     }
@@ -52,7 +52,7 @@ GeoDataStyleSelector& GeoDataStyleSelector::operator=( const GeoDataStyleSelecto
     return *this;
 }
 
-QString GeoDataStyleSelector::nodeType() const
+const char* GeoDataStyleSelector::nodeType() const
 {
     return d->nodeType();
 }

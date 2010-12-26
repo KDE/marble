@@ -52,7 +52,7 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
     GeoDataLineStyle& operator=( const GeoDataLineStyle& other );
 
     /// Provides type information for downcasting a GeoData
-    virtual QString nodeType() const;
+    virtual const char* nodeType() const;
 
     /**
      * @brief Set the width of the line

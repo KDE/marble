@@ -45,7 +45,7 @@ GeoDataTimePrimitive& GeoDataTimePrimitive::operator=( const GeoDataTimePrimitiv
     return *this;
 }
 
-QString GeoDataTimePrimitive::nodeType() const
+const char* GeoDataTimePrimitive::nodeType() const
 {
     return d->nodeType();
 }

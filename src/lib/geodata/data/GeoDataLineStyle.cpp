@@ -23,7 +23,7 @@ class GeoDataLineStylePrivate
     {
     }
 
-    QString nodeType() const
+    const char* nodeType() const
     {
         return GeoDataTypes::GeoDataLineStyleType;
     }
@@ -60,7 +60,7 @@ GeoDataLineStyle& GeoDataLineStyle::operator=( const GeoDataLineStyle& other )
     return *this;
 }
 
-QString GeoDataLineStyle::nodeType() const
+const char* GeoDataLineStyle::nodeType() const
 {
     return d->nodeType();
 }

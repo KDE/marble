@@ -41,7 +41,7 @@ class GeoDataLabelStylePrivate
     {
     }
 
-    QString nodeType() const
+    const char* nodeType() const
     {
         return GeoDataTypes::GeoDataLabelStyleType;
     }
@@ -83,7 +83,7 @@ GeoDataLabelStyle& GeoDataLabelStyle::operator=( const GeoDataLabelStyle& other 
     return *this;
 }
 
-QString GeoDataLabelStyle::nodeType() const
+const char* GeoDataLabelStyle::nodeType() const
 {
     return d->nodeType();
 }

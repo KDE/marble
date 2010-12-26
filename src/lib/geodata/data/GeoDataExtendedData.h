@@ -37,7 +37,7 @@ class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
     virtual ~GeoDataExtendedData();
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const;
+    virtual const char* nodeType() const;
 
     /**
      * @brief assignment operator

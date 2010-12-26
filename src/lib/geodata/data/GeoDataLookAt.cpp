@@ -48,7 +48,7 @@ void GeoDataLookAt::setCoordinates( const GeoDataCoordinates& coordinates )
     d->m_coordinates = coordinates;
 }
 
-QString GeoDataLookAt::nodeType() const
+const char* GeoDataLookAt::nodeType() const
 {
     return GeoDataTypes::GeoDataLookAtType;
 }

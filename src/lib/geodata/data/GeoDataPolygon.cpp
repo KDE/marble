@@ -41,7 +41,7 @@ GeoDataPolygonPrivate* GeoDataPolygon::p() const
     return static_cast<GeoDataPolygonPrivate*>(d);
 }
 
-QString GeoDataPolygon::nodeType() const
+const char* GeoDataPolygon::nodeType() const
 {
     return p()->nodeType();
 }

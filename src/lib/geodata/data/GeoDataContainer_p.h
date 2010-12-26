@@ -37,7 +37,7 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
         return copy;
     }
 
-    virtual QString nodeType() const
+    virtual const char* nodeType() const
     {
         return GeoDataTypes::GeoDataContainerType;
     }
