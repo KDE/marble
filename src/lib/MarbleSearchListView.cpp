@@ -11,8 +11,6 @@
 
 #include "MarbleSearchListView.h"
 
-#include "MarblePlacemarkModel.h"
-
 #include "MarbleDebug.h"
 #include <QtGui/QStandardItemModel>
 
@@ -40,14 +38,10 @@ void MarbleSearchListView::selectItem(const QString& text)
 
     if ( model() )
     {
-        MarblePlacemarkModel *placemarkModel = (MarblePlacemarkModel *)model();
-        if ( placemarkModel )
-        {
-            QModelIndex firstIndex = placemarkModel->index( 0, 0 );
-            resultlist = placemarkModel->approxMatch( firstIndex,
-                                    Qt::DisplayRole, text, 1,
-                                    Qt::MatchStartsWith );
-        }
+        QModelIndex firstIndex = model()->index( 0, 0 );
+        resultlist = model()->match( firstIndex,
+                                     Qt::DisplayRole, text, 1,
+                                     Qt::MatchStartsWith );
     }
 
     if ( resultlist.size() > 0 ) {

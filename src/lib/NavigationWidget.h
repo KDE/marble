@@ -21,6 +21,7 @@
 #include <QtGui/QWidget>
 
 class QModelIndex;
+class QAbstractItemModel;
 
 namespace Marble
 {
@@ -113,7 +114,7 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
      * them.
      * @see centerOn
      */
-    void setLocations( MarblePlacemarkModel* locations );
+    void setLocations( QAbstractItemModel* locations );
 
     void selectTheme( const QString & );
 

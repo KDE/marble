@@ -103,7 +103,7 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_runnerManager = new MarbleRunnerManager( widget->model()->pluginManager(), this );
     connect( d->m_runnerManager, SIGNAL( searchResultChanged(  MarblePlacemarkModel* ) ),
-             this,               SLOT( setLocations( MarblePlacemarkModel* ) ) );
+             this,               SLOT( setLocations( QAbstractItemModel* ) ) );
 
     d->m_widget = widget;
     d->m_runnerManager->setModel( widget->model() );
@@ -186,7 +186,7 @@ void NavigationWidget::search()
         d->m_navigationUi.locationListView->activate();
 }
 
-void NavigationWidget::setLocations(MarblePlacemarkModel* locations)
+void NavigationWidget::setLocations(QAbstractItemModel* locations)
 {
     QTime t;
     t.start();
