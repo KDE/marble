@@ -18,13 +18,14 @@
 #include <QtCore/QString>
 #include <QtCore/QMutex>
 
+class QAbstractItemModel;
+
 namespace Marble
 {
 
 class GeoDataDocument;
 class GeoDataPlacemark;
 class MarbleModel;
-class MarblePlacemarkModel;
 class PluginManager;
 class RouteRequest;
 
@@ -78,7 +79,7 @@ signals:
       * Placemarks were added to or removed from the model
       * @todo FIXME: this sounds like a duplication of QAbstractItemModel signals
       */
-    void searchResultChanged( MarblePlacemarkModel *model );
+    void searchResultChanged( QAbstractItemModel *model );
 
     /**
       * The search request for the given search term has finished, i.e. all

@@ -18,6 +18,7 @@
 #include <QtGui/QWidget>
 
 class QNetworkReply;
+class QAbstractItemModel;
 
 namespace Marble
 {
@@ -127,7 +128,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     /** Runner progress */
-    void setPlacemarkModel( MarblePlacemarkModel * );
+    void setPlacemarkModel( QAbstractItemModel * );
 
     /** Handle click on the goto target button */
     void requestActivity();

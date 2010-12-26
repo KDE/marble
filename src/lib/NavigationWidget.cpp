@@ -102,7 +102,7 @@ NavigationWidget::~NavigationWidget()
 void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_runnerManager = new MarbleRunnerManager( widget->model()->pluginManager(), this );
-    connect( d->m_runnerManager, SIGNAL( searchResultChanged(  MarblePlacemarkModel* ) ),
+    connect( d->m_runnerManager, SIGNAL( searchResultChanged(  QAbstractItemModel* ) ),
              this,               SLOT( setLocations( QAbstractItemModel* ) ) );
 
     d->m_widget = widget;

@@ -243,8 +243,8 @@ RoutingInputWidget::RoutingInputWidget( MarbleWidget* widget, int index, QWidget
              this, SLOT( reloadBookmarks() ) );
     connect( d->m_marbleModel->positionTracking(), SIGNAL( statusChanged( PositionProviderStatus ) ),
              this, SLOT( updateCurrentLocationButton( PositionProviderStatus ) ) );
-    connect( d->m_runnerManager, SIGNAL( searchResultChanged( MarblePlacemarkModel * ) ),
-             this, SLOT( setPlacemarkModel( MarblePlacemarkModel * ) ) );
+    connect( d->m_runnerManager, SIGNAL( searchResultChanged( QAbstractItemModel * ) ),
+             this, SLOT( setPlacemarkModel( QAbstractItemModel * ) ) );
     connect( d->m_runnerManager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark )),
              this, SLOT(retrieveReverseGeocodingResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
     connect( d->m_lineEdit, SIGNAL( returnPressed() ),
@@ -279,9 +279,9 @@ void RoutingInputWidget::reverseGeocoding()
     d->m_runnerManager->reverseGeocoding( targetPosition() );
 }
 
-void RoutingInputWidget::setPlacemarkModel( MarblePlacemarkModel *model )
+void RoutingInputWidget::setPlacemarkModel( QAbstractItemModel *model )
 {
-    d->m_placemarkModel = model;
+    d->m_placemarkModel = static_cast<MarblePlacemarkModel*>(model);
 }
 
 void RoutingInputWidget::setTargetPosition( const GeoDataCoordinates &position )
