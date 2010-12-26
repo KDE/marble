@@ -82,7 +82,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_backgroundVisible( true ),
           m_layerManager( model->dataFacade(), model->pluginManager(), parent ),
           m_textureLayer( model->mapThemeManager(), model->downloadManager(), model->sunLocator() ),
-          m_placemarkLayout( model->popSortModel(), model->placemarkSelectionModel(), parent ),
+          m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), parent ),
           m_measureTool( model ),
           m_viewAngle( 110.0 )
 {
@@ -104,7 +104,7 @@ void MarbleMapPrivate::construct()
 
     QObject::connect( m_model->placemarkSelectionModel(), SIGNAL( selectionChanged( QItemSelection, QItemSelection) ),
                       &m_placemarkLayout,                 SLOT( requestStyleReset() ) );
-    QObject::connect( m_model->popSortModel(),            SIGNAL( layoutChanged() ),
+    QObject::connect( m_model->placemarkModel(),          SIGNAL( layoutChanged() ),
                       &m_placemarkLayout,                 SLOT( requestStyleReset() ) );
 
     // FIXME: more on the spot update names and API

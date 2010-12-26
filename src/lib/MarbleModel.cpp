@@ -56,7 +56,6 @@
 #include "FileManager.h"
 #include "GeoDataTreeModel.h"
 #include "PlacemarkManager.h"
-#include "PlacemarkPainter.h"
 #include "Planet.h"
 #include "PluginManager.h"
 #include "StoragePolicy.h"
@@ -92,8 +91,7 @@ class MarbleModelPrivate
                                                       m_pluginManager ) ),
           m_fileManager( 0 ),
           m_placemarkmanager( 0 ),
-          m_popSortModel( parent ),
-          m_placemarkselectionmodel( &m_popSortModel ),
+          m_placemarkselectionmodel( 0 ),
           m_positionTracking( 0 ),
           m_bookmarkManager( 0 ),
           m_routingManager( 0 ),
@@ -134,7 +132,6 @@ class MarbleModelPrivate
     // Places on the map
     FileManager             *m_fileManager;
     PlacemarkManager        *m_placemarkmanager;
-    QSortFilterProxyModel    m_popSortModel;
 
     // Selection handling
     QItemSelectionModel      m_placemarkselectionmodel;
@@ -179,11 +176,6 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_placemarkmanager->setDataFacade(d->m_dataFacade);
     d->m_placemarkmanager->setFileManager(d->m_fileManager);
 
-    d->m_popSortModel.setSourceModel( d->m_dataFacade->placemarkModel() );
-//    d->m_popSortModel->setSortLocaleAware( true );
-    d->m_popSortModel.setDynamicSortFilter( true );
-    d->m_popSortModel.setSortRole( MarblePlacemarkModel::PopularityIndexRole );
-    d->m_popSortModel.sort( 0, Qt::DescendingOrder );
 
     /*
      * Create FileViewModel
@@ -382,11 +374,6 @@ QAbstractItemModel *MarbleModel::treeModel() const
 QAbstractItemModel *MarbleModel::placemarkModel() const
 {
     return d->m_dataFacade->placemarkModel();
-}
-
-QAbstractItemModel *MarbleModel::popSortModel() const
-{
-    return &d->m_popSortModel;
 }
 
 QItemSelectionModel *MarbleModel::placemarkSelectionModel() const

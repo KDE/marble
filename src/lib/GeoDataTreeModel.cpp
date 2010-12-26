@@ -226,6 +226,11 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
             return QVariant(feature->style()->iconStyle().icon());
     } else if ( role == MarblePlacemarkModel::ObjectPointerRole ) {
         return qVariantFromValue( object );
+    } else if ( role == MarblePlacemarkModel::PopularityIndexRole ) {
+        GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( object );
+        if ( placemark ) {
+            return QVariant( placemark->popularityIndex() );
+        }
     }
 
     return QVariant();

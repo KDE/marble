@@ -19,6 +19,7 @@
 #include <QtGui/QFont>
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QPainter>
+#include <QtGui/QSortFilterProxyModel>
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneMap.h"
@@ -38,17 +39,26 @@
 
 using namespace Marble;
 
-PlacemarkLayout::PlacemarkLayout( const QAbstractItemModel  *placemarkModel,
-                                  const QItemSelectionModel *selectionModel,
+PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
+                                  QItemSelectionModel *selectionModel,
                                   QObject* parent )
     : QObject( parent ),
-      m_placemarkModel( placemarkModel ),
+      m_placemarkModel( new QSortFilterProxyModel ),
       m_selectionModel( selectionModel ),
       m_placemarkPainter( 0 ),
       m_maxLabelHeight( 0 ),
       m_styleResetRequested( true )
 {
-//  Old weightfilter array. Still here 
+    m_placemarkModel->setSourceModel( placemarkModel );
+    m_placemarkModel->setDynamicSortFilter( true );
+    m_placemarkModel->setSortRole( MarblePlacemarkModel::PopularityIndexRole );
+    m_placemarkModel->sort( 0, Qt::DescendingOrder );
+
+    connect( m_selectionModel,  SIGNAL( selectionChanged( QItemSelection,
+                                                           QItemSelection) ),
+             this,               SLOT( requestStyleReset() ) );
+
+//  Old weightfilter array. Still here
 // to be able to compare performance
 /*
     m_weightfilter

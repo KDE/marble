@@ -25,6 +25,7 @@
 #include "GeoDataPlacemark.h"   // In geodata/data/
 
 class QAbstractItemModel;
+class QSortFilterProxyModel;
 class QItemSelectionModel;
 class QPainter;
 class QPoint;
@@ -51,8 +52,8 @@ class PlacemarkLayout : public QObject
     /**
      * Creates a new place mark layout.
      */
-    PlacemarkLayout( const QAbstractItemModel  *placemarkModel,
-                     const QItemSelectionModel *selectionModel,
+    PlacemarkLayout( QAbstractItemModel  *placemarkModel,
+                     QItemSelectionModel *selectionModel,
                      QObject *parent = 0 );
 
     /**
@@ -99,8 +100,8 @@ class PlacemarkLayout : public QObject
 
  private:
     Q_DISABLE_COPY( PlacemarkLayout )
-    const QAbstractItemModel  *const m_placemarkModel;
-    const QItemSelectionModel *const m_selectionModel;
+    QSortFilterProxyModel  *const m_placemarkModel;
+    QItemSelectionModel *const m_selectionModel;
 
     PlacemarkPainter *m_placemarkPainter;
 

@@ -123,7 +123,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     QAbstractItemModel*  treeModel() const;
     QAbstractItemModel*  placemarkModel() const;
-    QAbstractItemModel*  popSortModel() const;
     QItemSelectionModel* placemarkSelectionModel() const;
 
     /**
