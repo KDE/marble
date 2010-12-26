@@ -110,7 +110,7 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
 
     // Make us aware of all the Placemarks in the MarbleModel so that
     // we can search them.
-    setLocations( static_cast<MarblePlacemarkModel*>( d->m_widget->placemarkModel() ) );
+    setLocations( d->m_widget->placemarkModel() );
 
 //    FIXME: Why does this fail: "selection model works on a different model than the view..." ?
 //    d->m_navigationUi.locationListView->setSelectionModel( d->m_widget->placemarkSelectionModel() );
@@ -162,7 +162,7 @@ void NavigationWidget::searchLineChanged( const QString &search )
     d->m_searchTerm = search;
     // if search line is empty, restore original geonames
     if ( d->m_searchTerm.isEmpty() )
-        setLocations( static_cast<MarblePlacemarkModel*>( d->m_widget->placemarkModel() ) );
+        setLocations( d->m_widget->placemarkModel() );
     if ( d->m_searchTriggered )
         return;
     d->m_searchTriggered = true;

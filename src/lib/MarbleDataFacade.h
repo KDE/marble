@@ -32,6 +32,7 @@
 
 #include "global.h"
 
+class QAbstractItemModel;
 
 namespace Marble
 {
@@ -81,7 +82,7 @@ class MARBLE_EXPORT MarbleDataFacade
 
     PositionTracking* positionTracking() const;
 
-    MarblePlacemarkModel* placemarkModel();
+    QAbstractItemModel* placemarkModel();
 
     FileViewModel* fileViewModel() const;
 

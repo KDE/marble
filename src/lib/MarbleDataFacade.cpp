@@ -104,7 +104,7 @@ PositionTracking* MarbleDataFacade::positionTracking() const
     return d->m_model->positionTracking();
 }
 
-MarblePlacemarkModel* MarbleDataFacade::placemarkModel()
+QAbstractItemModel* MarbleDataFacade::placemarkModel()
 {
     return d->m_placemarkmodel;
 }

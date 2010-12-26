@@ -65,13 +65,13 @@ PlacemarkManager::~PlacemarkManager()
 
 MarblePlacemarkModel* PlacemarkManager::model() const
 {
-    return d->m_datafacade->placemarkModel();
+    return static_cast<MarblePlacemarkModel*>(d->m_datafacade->placemarkModel());
 }
 
 void PlacemarkManager::setDataFacade( MarbleDataFacade *facade )
 {
     d->m_datafacade = facade;
-    d->m_datafacade->placemarkModel()->setPlacemarkContainer(&d->m_placemarkContainer);
+    model()->setPlacemarkContainer(&d->m_placemarkContainer);
 }
 
 void PlacemarkManager::setFileManager( FileManager *fileManager )
@@ -102,7 +102,7 @@ void PlacemarkManager::addGeoDataDocument( int index )
             d->m_sizeForDocument[index] = result.size();
             mDebug() << "PlacemarkManager::addGeoDataDocument:"
                     << document.fileName() << " size " << result.size();
-            d->m_datafacade->placemarkModel()->addPlacemarks( start, result.size() );
+            model()->addPlacemarks( start, result.size() );
         }
 
     }
@@ -125,7 +125,7 @@ void PlacemarkManager::removeGeoDataDocument( int index )
             d->m_sizeForDocument.remove(index);
         mDebug() << "PlacemarkManager::removeGeoDataDocument:"
                 << document.fileName() << " size " << size;
-        d->m_datafacade->placemarkModel()->removePlacemarks(
+        model()->removePlacemarks(
                 document.fileName(), start, size );
     }
 }
