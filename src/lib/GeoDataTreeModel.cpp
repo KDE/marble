@@ -69,18 +69,19 @@ bool GeoDataTreeModel::hasChildren( const QModelIndex &parent ) const
         return false;
     }
 
-    GeoDataContainer *container = dynamic_cast<GeoDataContainer*>( parentItem );
-    if ( container ) {
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataFolderType
+         || parentItem->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+        GeoDataContainer *container = static_cast<GeoDataContainer*>( parentItem );
         return container->size();
     }
 
-    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( parentItem );
-    if ( placemark ) {
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( parentItem );
         return placemark->geometry();
     }
 
-    GeoDataMultiGeometry *geometry = dynamic_cast<GeoDataMultiGeometry*>( parentItem );
-    if ( geometry ) {
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
+        GeoDataMultiGeometry *geometry = static_cast<GeoDataMultiGeometry*>( parentItem );
         return geometry->size();
     }
 
@@ -108,26 +109,22 @@ int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
         return 0;
     }
 
-    GeoDataContainer *container = dynamic_cast<GeoDataContainer*>( parentItem );
-    if ( container ) {
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataFolderType
+         || parentItem->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+        GeoDataContainer *container = static_cast<GeoDataContainer*>( parentItem );
 //        mDebug() << "rowCount " << type << "(" << parentItem << ") =" << container->size();
         return container->size();
 //    } else {
 //        mDebug() << "rowCount bad container " << container;
     }
 
-    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( parentItem );
-    if ( placemark ) {
-        if ( placemark->geometry() ) {
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
 //            mDebug() << "rowCount " << type << "(" << parentItem << ") = 1";
             return 1;
-        }
-//        mDebug() << "rowCount " << type << "(" << parentItem << ") = 0";
-        return 0;
     }
 
-    GeoDataMultiGeometry *geometry = dynamic_cast<GeoDataMultiGeometry*>( parentItem );
-    if ( geometry ) {
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
+        GeoDataMultiGeometry *geometry = static_cast<GeoDataMultiGeometry*>( parentItem );
 //        mDebug() << "rowCount " << parent << " " << type << " " << geometry->size();
         return geometry->size();
 //    } else {
@@ -170,9 +167,8 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
     GeoDataObject *object = static_cast<GeoDataObject*>( index.internalPointer() );
     if ( role == Qt::DisplayRole ) {
 
-        GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( object );
-        
-        if ( placemark ) {
+        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );
                 if ( index.column() == 0 ){
                     return QVariant( placemark->name() );
                 }
@@ -186,8 +182,9 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
                     return QVariant( placemark->popularityIndex() );
                 }
         }
-        GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
-        if ( feature ) {
+        if ( object->nodeType() == GeoDataTypes::GeoDataFolderType
+             || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+            GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
             if ( index.column() == 0 ){
                 return QVariant( feature->name() );
             }
@@ -209,8 +206,10 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
     }
     else if ( role == Qt::CheckStateRole
               && index.column() == 0 ) {
-        GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
-        if ( feature ) {
+        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
+             || object->nodeType() == GeoDataTypes::GeoDataFolderType
+             || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+        GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
             if ( feature->isVisible() ) {
                 return QVariant( Qt::Checked );
             }
@@ -221,15 +220,28 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
     }
     else if ( role == Qt::DecorationRole
               && index.column() == 0 ) {
-        GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
-        if ( feature )
+        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
+             || object->nodeType() == GeoDataTypes::GeoDataFolderType
+             || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+            GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
             return QVariant(feature->style()->iconStyle().icon());
+        }
     } else if ( role == MarblePlacemarkModel::ObjectPointerRole ) {
         return qVariantFromValue( object );
     } else if ( role == MarblePlacemarkModel::PopularityIndexRole ) {
-        GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( object );
-        if ( placemark ) {
+        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );
             return QVariant( placemark->popularityIndex() );
+        }
+    } else if ( role == MarblePlacemarkModel::PopularityRole ) {
+        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );
+            return QVariant( placemark->popularity() );
+        }
+    } else if ( role == MarblePlacemarkModel::CoordinateRole ) {
+        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );
+            return qVariantFromValue( placemark->coordinate() );
         }
     }
 
@@ -258,27 +270,26 @@ QModelIndex GeoDataTreeModel::index( int row, int column, const QModelIndex &par
 
     GeoDataObject *childItem = 0;
 
-    GeoDataContainer *container = dynamic_cast<GeoDataContainer*>( parentItem );
-    if ( container ) {
+
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataFolderType
+         || parentItem->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+        GeoDataContainer *container = static_cast<GeoDataContainer*>( parentItem );
         childItem = container->child( row );
-    }
-
-    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( parentItem );
-    if ( placemark ) {
-        childItem = placemark->geometry();
-    }
-
-    GeoDataMultiGeometry *geometry = dynamic_cast<GeoDataMultiGeometry*>( parentItem );
-    if ( geometry ) {
-        childItem = geometry->child( row );
-    }
-
-
-    if ( childItem ) {
-//        mDebug() << "index " << type << "[" << row << "](" << parentItem << ") ="
-//                << childItem->nodeType() << "(" << childItem << ")";
         return createIndex( row, column, childItem );
     }
+
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( parentItem );
+        childItem = placemark->geometry();
+        return createIndex( row, column, childItem );
+    }
+
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
+        GeoDataMultiGeometry *geometry = static_cast<GeoDataMultiGeometry*>( parentItem );
+        childItem = geometry->child( row );
+        return createIndex( row, column, childItem );
+    }
+
     return QModelIndex();
 }
 
@@ -304,8 +315,9 @@ QModelIndex GeoDataTreeModel::parent( const QModelIndex &index ) const
         GeoDataObject *greatParentObject = parentObject->parent();
 
         // greatParent can be a container
-        GeoDataContainer *greatparentContainer = dynamic_cast<GeoDataContainer*>( greatParentObject );
-        if ( greatparentContainer ) {
+        if ( greatParentObject->nodeType() == GeoDataTypes::GeoDataFolderType
+             || greatParentObject->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+            GeoDataContainer *greatparentContainer = static_cast<GeoDataContainer*>( greatParentObject );
             GeoDataFeature *parentFeature = static_cast<GeoDataFeature*>( parentObject );
 //            mDebug() << "parent " << childObject->nodeType() << "(" << childObject << ") = "
 //                    << parentObject->nodeType() << "[" << greatparentContainer->childPosition( parentFeature ) << "](" << parentObject << ")";
@@ -313,16 +325,16 @@ QModelIndex GeoDataTreeModel::parent( const QModelIndex &index ) const
         }
 
         // greatParent can be a placemark
-        GeoDataPlacemark *greatparentPlacemark = dynamic_cast<GeoDataPlacemark*>( greatParentObject );
-        if ( greatparentPlacemark ) {
+        if ( greatParentObject->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+//            GeoDataPlacemark *greatparentPlacemark = static_cast<GeoDataPlacemark*>( greatParentObject );
 //                mDebug() << "parent " << childObject->nodeType() << "(" << childObject << ") = "
 //                        << parentObject->nodeType() << "[0](" << parentObject << ")";
             return createIndex( 0, 0, parentObject );
         }
 
         // greatParent can be a multigeometry
-        GeoDataMultiGeometry *greatparentMultiGeo = dynamic_cast<GeoDataMultiGeometry*>( greatParentObject );
-        if ( greatparentMultiGeo ) {
+        if ( greatParentObject->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
+            GeoDataMultiGeometry *greatparentMultiGeo = static_cast<GeoDataMultiGeometry*>( greatParentObject );
             GeoDataGeometry *parentGeometry = static_cast<GeoDataGeometry*>( parentObject );
 //                mDebug() << "parent " << childObject->nodeType() << "(" << childObject << ") = "
 //                        << parentObject->nodeType() << "[" << greatParentItem->childPosition( parentGeometry ) << "](" << parentObject << ")";
@@ -347,8 +359,10 @@ bool GeoDataTreeModel::setData ( const QModelIndex & index, const QVariant & val
 
     GeoDataObject *object = static_cast<GeoDataObject*>( index.internalPointer() );
     if ( role == Qt::CheckStateRole ) {
-        GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
-        if ( feature ) {
+        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
+             || object->nodeType() == GeoDataTypes::GeoDataFolderType
+             || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+            GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
             feature->setVisible( value.toBool() );
             mDebug() << "setData " << feature->name() << " " << value.toBool();
             emit dataChanged( index, index );
@@ -365,8 +379,9 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
         return Qt::NoItemFlags;
 
     GeoDataObject *object = static_cast<GeoDataObject*>( index.internalPointer() );
-    GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
-    if ( feature ) {
+    if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
+         || object->nodeType() == GeoDataTypes::GeoDataFolderType
+         || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable;
     }
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
