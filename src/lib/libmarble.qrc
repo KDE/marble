@@ -1,5 +1,6 @@
 <RCC>
   <qresource>
+    <file>../../data/svg/worldmap.svg</file>
     <file>../../data/bitmaps/routing_remove.png</file>
     <file>../../data/bitmaps/routing_pick.png</file>
     <file>../../data/bitmaps/routing_step.png</file>
