@@ -33,17 +33,19 @@ class MARBLE_EXPORT MarbleThemeSelectView : public QListView
     Q_OBJECT
 
  public:
-    explicit MarbleThemeSelectView(QWidget *parent = 0);
+    explicit MarbleThemeSelectView( QWidget *parent = 0 );
+    ~MarbleThemeSelectView();
     // void setModel( QAbstractItemModel * model );
     
  protected:
-    void resizeEvent(QResizeEvent* event);
+    void resizeEvent( QResizeEvent *event );
 
  private Q_SLOTS:
     void selectedMapTheme( QModelIndex index );
     void uploadDialog();
     void mapWizard();
-    void showContextMenu(const QPoint& pos);
+    void showContextMenu( const QPoint& pos );
+    void deleteMap();
 
  Q_SIGNALS:
     void selectMapTheme( const QString& );
@@ -54,7 +56,7 @@ class MARBLE_EXPORT MarbleThemeSelectView : public QListView
  private:
     Q_DISABLE_COPY( MarbleThemeSelectView )
     class Private;
-    Private  * const d;
+    Private  *const d;
 };
 
 }
