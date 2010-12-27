@@ -163,7 +163,7 @@ void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
 
     tile->setImage( image );
     tile->setLastModified( QDateTime::currentDateTime() );
-    emit tileCompleted( tile->stackedTileId(), id );
+    emit tileCompleted( tile->stackedTileId() );
 }
 
 void TileLoader::updateTextureLayers()
