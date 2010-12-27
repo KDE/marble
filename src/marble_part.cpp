@@ -679,7 +679,7 @@ void MarblePart::setupActions()
 
     m_printPreviewAction = KStandardAction::printPreview( m_controlView, SLOT( printPreview() ),
                                                actionCollection() );
-                                               
+
     // Action: Export Map
     m_exportMapAction = new KAction( this );
     actionCollection()->addAction( "exportMap", m_exportMapAction );
@@ -740,6 +740,15 @@ void MarblePart::setupActions()
                                              actionCollection(), "new_stuff" );
     m_newStuffAction->setStatusTip( i18nc( "Status tip", "Download new maps"));
     m_newStuffAction->setShortcut( Qt::CTRL + Qt::Key_N );
+
+    // Action: Create a New Map
+    m_mapWizardAct = new KAction( i18nc( "Action for creating new maps",
+                                         "&Create a New Map..." ),
+                                  this );
+    actionCollection()->addAction( "createMap", m_mapWizardAct );
+    m_mapWizardAct->setStatusTip( i18nc( "Status tip",
+                                         "A wizard guides you through the creation of your own map theme." ) );
+    connect( m_mapWizardAct, SIGNAL( triggered() ), SLOT( showMapWizard() ) );
 
     KStandardAction::showStatusbar( this, SLOT( showStatusBar( bool ) ),
 				    actionCollection() );
