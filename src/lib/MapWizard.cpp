@@ -490,8 +490,10 @@ void MapWizard::createLevelZero( QNetworkReply* reply )
     {
         QPixmap levelZero;
         levelZero.loadFromData( d->levelZero );
-        d->uiWidget.labelStaticUrlTest->setPixmap( levelZero );
-        d->uiWidget.labelStaticUrlTest->resize( levelZero.width(), levelZero.height() );
+	if ( !d->levelZero.isNull() ) {
+	    levelZero = levelZero.scaled( d->uiWidget.labelStaticUrlTest->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation );
+	    d->uiWidget.labelStaticUrlTest->setPixmap( levelZero );
+	}
     }
     
     suggestPreviewImage();
