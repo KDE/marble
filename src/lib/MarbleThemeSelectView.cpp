@@ -11,51 +11,129 @@
 //
 
 #include "MarbleThemeSelectView.h"
+#include "MarbleDirs.h"
 
 #include "MapWizard.h"
 #include "MarbleDebug.h"
 #include <QtGui/QResizeEvent>
 #include <QtGui/QMenu>
+#include <QtGui/QMessageBox>
+#include <QtCore/QFileInfo>
+#include <QtCore/QFile>
+#include <QtCore/QDir>
 
 using namespace Marble;
 
+class MarbleThemeSelectView::Private
+{
+public:
+    explicit Private( MarbleThemeSelectView * const parent );
+    void deleteDirectory( const QString& path );
+    void deleteDataDirectories( const QString& path );
+    void deletePreview( const QString& path );
+    QString currentThemeName();
+    QString currentThemePath();
+private:
+    MarbleThemeSelectView *m_parent;
+};
+
+MarbleThemeSelectView::Private::Private( MarbleThemeSelectView * const parent ) 
+    : m_parent( parent )
+{
+
+}
+
+void MarbleThemeSelectView::Private::deleteDirectory( const QString& path )
+{
+    QDir directory( path );
+    foreach( QString filename, directory.entryList( QDir::Files | QDir::NoDotAndDotDot ) )
+        QFile( path + filename ).remove();
+    QDir().rmdir( path );
+}
+
+void MarbleThemeSelectView::Private::deleteDataDirectories( const QString& path )
+{
+    QDir directoryv( path );
+    foreach( QString filename, directoryv.entryList( QDir::AllEntries | QDir::NoDotAndDotDot ) )
+    {
+        QString filepath = path + "/" + filename;
+        QFile file( filepath );
+        if( QFileInfo( filepath ).isDir() && filename.contains( QRegExp( "^[0-9]+$" ) ) )
+        {
+            deleteDataDirectories( filepath );
+            QDir().rmdir( filepath );
+        }
+        else if( filename.contains( QRegExp( "^[0-9]\\..+" ) ) )
+            file.remove();
+    }
+}
+
+void MarbleThemeSelectView::Private::deletePreview( const QString& path )
+{
+    QDir directoryv( path, "preview.*" );
+    foreach( QString filename, directoryv.entryList() )
+        QFile( path + "/" + filename ).remove();
+}
+
+QString MarbleThemeSelectView::Private::currentThemeName()
+{
+    QModelIndex index = m_parent->currentIndex();
+    const QAbstractItemModel *model = index.model();
+
+    QModelIndex columnIndex = model->index( index.row(), 0, QModelIndex() );
+    return ( model->data( columnIndex )).toString();
+}
+
+QString MarbleThemeSelectView::Private::currentThemePath()
+{
+    QModelIndex index = m_parent-> currentIndex();
+    const QAbstractItemModel  *model = index.model();
+
+    QModelIndex columnIndex = model->index( index.row(), 1, QModelIndex() );
+    return ( model->data( columnIndex )).toString();
+}
+
 MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
     : QListView( parent ),
-      d( 0 )                    // No private data yet.
+      d( new Private( this ) )
 {
     setViewMode( QListView::IconMode );
     setFlow( QListView::LeftToRight );
     setWrapping( true ); 
     setMovement( QListView::Static );
     setResizeMode( QListView::Fixed );
-    setUniformItemSizes ( true );
-    setHorizontalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
+    setUniformItemSizes( true );
+    setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     setEditTriggers( QAbstractItemView::NoEditTriggers );
     setIconSize( QSize( 136,136 ) );
-	setSelectionMode( QAbstractItemView::SingleSelection );
+    setSelectionMode( QAbstractItemView::SingleSelection );
 
     connect( this, SIGNAL( pressed( QModelIndex ) ),
                    SLOT( selectedMapTheme( QModelIndex ) ) );
-    connect(this, SIGNAL( customContextMenuRequested( QPoint)  ),
-                  SLOT( showContextMenu(QPoint)) );
+    connect( this, SIGNAL( customContextMenuRequested( QPoint ) ),
+                   SLOT( showContextMenu( QPoint ) ) );
 }
 
-void MarbleThemeSelectView::resizeEvent(QResizeEvent* event)
+MarbleThemeSelectView::~MarbleThemeSelectView()
+{
+    delete d;
+}
+
+void MarbleThemeSelectView::resizeEvent( QResizeEvent *event )
 {
     QListView::resizeEvent(event);
 
-    QSize  size = gridSize();
-    size.setWidth(event->size().width());
+    QSize size = gridSize();
+    size.setWidth( event->size().width() );
     setGridSize(size);
 }
 
 void MarbleThemeSelectView::selectedMapTheme( QModelIndex index )
 {
-    const QAbstractItemModel  *model = index.model();
+    const QAbstractItemModel *model = index.model();
 
-    QModelIndex  colindex        = model->index( index.row(), 1, 
-                                                 QModelIndex() );
-    QString      currentmaptheme = (model->data( colindex )).toString();
+    QModelIndex  columnIndex = model->index( index.row(), 1, QModelIndex() );
+    QString currentmaptheme = ( model->data( columnIndex )).toString();
     mDebug() << currentmaptheme;
     emit selectMapTheme( currentmaptheme );
 }
@@ -70,12 +148,31 @@ void MarbleThemeSelectView::uploadDialog()
     emit showUploadDialog();
 }
 
-void MarbleThemeSelectView::showContextMenu(const QPoint& pos)
+void MarbleThemeSelectView::showContextMenu( const QPoint& pos )
 {
     QMenu menu;
     menu.addAction( "&Create a New Map...", this, SLOT( mapWizard() ) );
+    if( QFileInfo( MarbleDirs::localPath() + "/maps/" + d->currentThemePath() ).exists() )
+        menu.addAction( tr( "&Delete Map Theme" ), this, SLOT( deleteMap() ) );
     menu.addAction( "&Upload Map...", this, SLOT( uploadDialog() ) );
     menu.exec( mapToGlobal( pos ) );
+}
+
+void MarbleThemeSelectView::deleteMap()
+{
+    if(QMessageBox::warning( this, 
+                             tr( "" ), 
+                             tr( "Are you sure that you want to delete \"%1\"?" ).arg( d->currentThemeName() ),
+                             QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes )
+    {
+        QDir mapthemedir( QFileInfo( MarbleDirs::localPath() + "/maps/" + d->currentThemePath()).path());
+        d->deleteDirectory( mapthemedir.path() + "/legend/" );
+        d->deleteDataDirectories( mapthemedir.path() + "/" );
+	d->deletePreview( mapthemedir.path() + "/" );
+        QFile( MarbleDirs::localPath() + "/maps/" + d->currentThemePath()).remove();
+        QFile( mapthemedir.path() + "/legend.html" ).remove();
+        QDir().rmdir( mapthemedir.path() );
+    }
 }
 
 #include "MarbleThemeSelectView.moc"
