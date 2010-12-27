@@ -50,16 +50,15 @@ public slots:
     void queryServerCapabilities();
     bool parseServerCapabilities( QNetworkReply* reply );
     void createWmsLegend( QNetworkReply* reply );
-    
+
     // Open file dialogs
     void querySourceImage();
     void queryPreviewImage();
     void queryLegendImage();
     void queryStaticUrlLegendImage();
-       
+
     // Other
     void autoFillDetails();
-    void fillServerCombobox();
     void downloadLevelZero();
     void createLevelZero( QNetworkReply* reply = 0 );
     void suggestPreviewImage();

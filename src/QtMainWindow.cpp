@@ -1345,7 +1345,6 @@ void MainWindow::setupZoomButtons()
 
 void MainWindow::showMapWizard()
 {
-    m_mapWizard->fillServerCombobox();
     m_mapWizard->show();
 }
 

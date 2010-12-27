@@ -1228,7 +1228,6 @@ void MarblePart::showStatusBarContextMenu( const QPoint& pos )
 
 void MarblePart::showMapWizard()
 {
-    m_mapWizard->fillServerCombobox();
     m_mapWizard->show();
 }
 

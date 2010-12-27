@@ -195,17 +195,14 @@ void MapWizard::createWmsLegend( QNetworkReply* reply )
 void MapWizard::setWmsServers( const QStringList& uris )
 {
     d->wmsServerList = uris;
+
+    d->uiWidget.comboBoxWmsServer->clear();
+    d->uiWidget.comboBoxWmsServer->addItems( d->wmsServerList );
 }
 
 QStringList MapWizard::wmsServers() const
 {
     return d->wmsServerList;
-}
-
-void MapWizard::fillServerCombobox()
-{
-    d->uiWidget.comboBoxWmsServer->clear();
-    d->uiWidget.comboBoxWmsServer->addItems( d->wmsServerList );
 }
 
 void MapWizard::autoFillDetails()
