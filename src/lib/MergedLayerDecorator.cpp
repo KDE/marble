@@ -374,5 +374,3 @@ int MergedLayerDecorator::maxDivisor( int maximum, int fullLength )
     }
     return best;
 }
-
-#include "MergedLayerDecorator.moc"
