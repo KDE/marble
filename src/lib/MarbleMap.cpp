@@ -833,9 +833,13 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     d->m_viewParams.setMapThemeId( mapThemeId );
     GeoSceneDocument *mapTheme = d->m_viewParams.mapTheme();
 
-
-    // Set all the colors for the vector layers
+    // NOTE due to frequent regressions: 
+    // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
+    // at this point. Some themes do NOT have either vector or texture data!
+    
+    // Check whether there is a vector layer available:
     if ( mapTheme->map()->hasVectorLayers() ) {
+	// Set all the colors for the vector layers
         d->m_veccomposer.setOceanColor( mapTheme->map()->backgroundColor() );
 
         // Just as with textures, this is a workaround for DGML2 to
@@ -869,9 +873,14 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
             }
         }
     }
+    
+    // NOTE due to frequent regressions: 
+    // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
+    // at this point.
 
-    d->m_textureLayer.setMapTheme( mapTheme );
+    // Check whether there is a texture layer available:
     if ( mapTheme && mapTheme->map()->hasTextureLayers() ) {
+	d->m_textureLayer.setMapTheme( mapTheme );
         // If the tiles aren't already there, put up a progress dialog
         // while creating them.
 
@@ -911,6 +920,10 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
         d->m_textureLayer.setupTextureMapper( d->m_viewParams.projection() );
     }
 
+    // NOTE due to frequent regressions: 
+    // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
+    // at this point!
+    
     d->m_placemarkLayout.requestStyleReset();
 
     if ( mapTheme ) {
