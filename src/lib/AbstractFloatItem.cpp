@@ -124,7 +124,40 @@ bool AbstractFloatItem::eventFilter( QObject *object, QEvent *e )
         return false;
     }
 
-    return ScreenGraphicsItem::eventFilter( object, e );
+    if( e->type() == QEvent::ContextMenu )
+    {
+        QWidget *widget = dynamic_cast<QWidget *>( object );
+        QContextMenuEvent *menuEvent = dynamic_cast<QContextMenuEvent *> ( e );
+        if( widget != NULL && menuEvent != NULL && contains( menuEvent->pos() ) )
+        {
+            contextMenuEvent( widget, menuEvent );
+            return true;
+        }
+        return false;
+    }
+    else if( e->type() == QEvent::ToolTip )
+    {
+        QHelpEvent *helpEvent = dynamic_cast<QHelpEvent *>( e );
+        if( helpEvent != NULL && contains( helpEvent->pos() ) )
+        {
+            toolTipEvent( helpEvent );
+            return true;
+        }
+        return false;
+    }
+    else
+        return ScreenGraphicsItem::eventFilter( object, e );
+}
+
+void AbstractFloatItem::contextMenuEvent ( QWidget *w, QContextMenuEvent *e )
+{
+    Q_UNUSED( w );
+    Q_UNUSED( e );
+}
+
+void AbstractFloatItem::toolTipEvent ( QHelpEvent *e )
+{
+    Q_UNUSED( e );
 }
 
 bool AbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport,

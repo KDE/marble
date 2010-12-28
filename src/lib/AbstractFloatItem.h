@@ -18,6 +18,9 @@
 
 #include <QtGui/QPen>
 #include <QtGui/QFont>
+#include <QtGui/QContextMenuEvent>
+#include <QtGui/QHelpEvent>
+#include <QtGui/QWidget>
 
 #include "RenderPlugin.h"
 #include "FrameGraphicsItem.h"
@@ -70,6 +73,8 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
 
  protected:
     virtual bool eventFilter( QObject *object, QEvent *e );
+    virtual void contextMenuEvent ( QWidget *w, QContextMenuEvent *e );
+    virtual void toolTipEvent( QHelpEvent *e );
 
  private:
     Q_DISABLE_COPY( AbstractFloatItem )

@@ -68,9 +68,14 @@ class MapScaleFloatItem : public AbstractFloatItem
 
     QDialog *configDialog() const;
 
+ protected:
+    virtual void contextMenuEvent( QWidget *w, QContextMenuEvent *e );
+    virtual void toolTipEvent( QHelpEvent *e );
+
  private Q_SLOTS:
     void readSettings() const;
     void writeSettings();
+    void toggleRatioScaleVisibility();
 
  private:
     int   invScale() const            { return m_invScale; }
@@ -97,6 +102,7 @@ class MapScaleFloatItem : public AbstractFloatItem
     int      m_valueInterval;
 
     QString  m_unit;
+    QString m_ratioString;
 
     bool     m_scaleInitDone;
 

@@ -14,6 +14,8 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QApplication>
 #include <QtGui/QPushButton>
+#include <QtGui/QMenu>
+#include <QtGui/QToolTip>
 
 #include "ui_MapScaleConfigWidget.h"
 #include "MarbleDebug.h"
@@ -196,9 +198,8 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
         power *= 10;
     }
     iRatio *= power;
-    QString ratioStr;
-    ratioStr.setNum(iRatio);
-    ratioStr = "1 : " + ratioStr;
+    m_ratioString.setNum(iRatio);
+    m_ratioString = m_ratioString = "1 : " + m_ratioString;
 
     m_scaleBarDistance = (qreal)(m_scaleBarWidth) * pixel2Length;
 
@@ -275,8 +276,8 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
         }
     }
 
-    int leftRatioIndent = m_leftBarMargin + (m_scaleBarWidth - QFontMetrics( font() ).width(ratioStr) ) / 2;
-    painter->drawText( leftRatioIndent, fontHeight + 3 + m_scaleBarHeight + fontHeight + 5, ratioStr );
+    int leftRatioIndent = m_leftBarMargin + (m_scaleBarWidth - QFontMetrics( font() ).width(m_ratioString) ) / 2;
+    painter->drawText( leftRatioIndent, fontHeight + 3 + m_scaleBarHeight + fontHeight + 5, m_ratioString );
 
     painter->restore();
 }
@@ -346,6 +347,22 @@ QDialog *MapScaleFloatItem::configDialog() const
     return m_configDialog;
 }
 
+void MapScaleFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
+{
+    QMenu menu;
+    QAction *toggleaction = menu.addAction( "&Ratio Scale", 
+                                            this, 
+                                            SLOT( toggleRatioScaleVisibility() ) );
+    toggleaction->setCheckable( true );
+    toggleaction->setChecked( m_showRatioScale );
+    menu.exec( w->mapToGlobal( e->pos() ) );
+}
+
+void MapScaleFloatItem::toolTipEvent( QHelpEvent *e )
+{
+    QToolTip::showText( e->globalPos(), m_ratioString );
+}
+
 void MapScaleFloatItem::readSettings() const
 {    
     if ( !m_configDialog )
@@ -367,6 +384,13 @@ void MapScaleFloatItem::writeSettings()
         m_showRatioScale = false;
     }
 
+    emit settingsChanged( nameId() );
+}
+
+void MapScaleFloatItem::toggleRatioScaleVisibility()
+{
+    m_showRatioScale = !m_showRatioScale;
+    readSettings();
     emit settingsChanged( nameId() );
 }
 
