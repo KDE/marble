@@ -124,7 +124,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     // only set marble data path when a path was given
     if ( arguments.count() != 0 && !arguments.first().isEmpty() )
         MarbleDirs::setMarbleDataPath( arguments.first() );
-    
+
     // Setting measure system to provide nice standards for all unit questions.
     // This has to happen before any initialization so plugins (for example) can
     // use it during initialization.
@@ -136,7 +136,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     else {
         marbleLocale->setMeasureSystem( Imperial );
     }
-    
+
     m_controlView = new ControlView( parentWidget );
 
     setComponentData( MarblePartFactory::componentData() );
@@ -146,8 +146,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     setupActions();
 
     setXMLFile( "marble_part.rc" );
-    
-    m_mapWizard = new MapWizard();
+
+    m_mapWizard = new MapWizard( m_controlView );
 
     m_statusBarExtension = new KParts::StatusBarExtension( this );
     m_statusBarExtension->statusBar()->setUpdatesEnabled( false );
@@ -160,7 +160,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     setupStatusBar();
     readSettings();
     m_statusBarExtension->statusBar()->setUpdatesEnabled( true );
-    
+
     // Show startup location
     switch ( MarbleSettings::onStartup() ) {
     case LastLocationVisited: {

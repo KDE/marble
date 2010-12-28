@@ -22,7 +22,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/graphicsview
  ${QT_INCLUDE_DIR}
 )
-INCLUDE(${QT_USE_FILE})
+# INCLUDE(${QT_USE_FILE})
 INCLUDE(geodata/CMakeLists.txt)
 INCLUDE(graphicsview/CMakeLists.txt)
 
