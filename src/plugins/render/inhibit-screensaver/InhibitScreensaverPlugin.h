@@ -61,6 +61,8 @@ public:
 private Q_SLOTS:
      void updateScreenSaverState( PositionProviderPlugin *activePlugin );
 
+     void inhibitScreenSaver();
+
 private:
      InhibitScreensaverPluginPrivate* const d;
 };

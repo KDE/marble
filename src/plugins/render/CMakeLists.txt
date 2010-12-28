@@ -24,12 +24,9 @@ add_subdirectory( navigation )
 
 add_subdirectory( routing )
 
-find_package(Qtsysteminfo)
-if(QtSystemInfo_FOUND)
-  # FIXME: The inhibit-screensaver plugin stresses the term render plugin a bit far.
-  # It should be moved to a new plugin type later.
-  add_subdirectory( inhibit-screensaver )
-endif(QtSystemInfo_FOUND)
+# FIXME: The inhibit-screensaver plugin stresses the term render plugin a bit far.
+# It should be moved to a new plugin type later.
+add_subdirectory( inhibit-screensaver )
 
 if (NOT WIN32)
   add_subdirectory( aprs )

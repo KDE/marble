@@ -12,34 +12,50 @@
 
 #include "MarbleDataFacade.h"
 #include "PositionTracking.h"
+#include "MarbleDebug.h"
 
-#include <QtSystemInfo/QSystemScreenSaver>
+#include <QtCore/QTimer>
+#include <QtDBus/QDBusConnection>
+#include <QtDBus/QDBusInterface>
 
 namespace Marble {
 
 class InhibitScreensaverPluginPrivate
 {
 public:
-    bool m_initialized;
+    QDBusInterface *m_interface;
 
-    QtMobility::QSystemScreenSaver* m_screensaver;
+    QTimer m_timer;
 
     InhibitScreensaverPluginPrivate();
+
+    ~InhibitScreensaverPluginPrivate();
 };
 
 InhibitScreensaverPluginPrivate::InhibitScreensaverPluginPrivate() :
-        m_initialized( false ),
-        m_screensaver( 0 )
+        m_interface( 0 )
 {
-    // nothing to do
+    m_timer.setInterval( 10 * 1000 ); // timeout of 10 seconds
 }
 
+InhibitScreensaverPluginPrivate::~InhibitScreensaverPluginPrivate()
+{
+    delete m_interface;
+}
 
 InhibitScreensaverPlugin::InhibitScreensaverPlugin() :
         d ( new InhibitScreensaverPluginPrivate() )
 {
+    connect( &d->m_timer, SIGNAL( timeout() ), this, SLOT( inhibitScreenSaver() ) );
+
+#ifdef Q_WS_MAEMO_5
     setEnabled( true );
     setVisible( true );
+#else
+    qDebug() << "The inhibit screensaver plugin is only useful on Maemo.";
+    setEnabled( false );
+    setVisible( false );
+#endif
 }
 
 InhibitScreensaverPlugin::~InhibitScreensaverPlugin()
@@ -86,16 +102,19 @@ QIcon InhibitScreensaverPlugin::icon() const
 void InhibitScreensaverPlugin::initialize()
 {
     Q_ASSERT( dataFacade() && dataFacade()->positionTracking() );
+
+    d->m_interface= new QDBusInterface( "com.nokia.mce", "/com/nokia/mce/request",
+       "com.nokia.mce.request", QDBusConnection::systemBus() );
+
     PositionTracking *tracking = dataFacade()->positionTracking();
     connect( tracking, SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
              this, SLOT( updateScreenSaverState( PositionProviderPlugin* ) ) );
     updateScreenSaverState( tracking->positionProviderPlugin() );
-    d->m_initialized = true;
 }
 
 bool InhibitScreensaverPlugin::isInitialized() const
 {
-    return d->m_initialized;
+    return d->m_interface;
 }
 
 void InhibitScreensaverPlugin::updateScreenSaverState( PositionProviderPlugin *activePlugin )
@@ -105,16 +124,16 @@ void InhibitScreensaverPlugin::updateScreenSaverState( PositionProviderPlugin *a
     }
 
     if ( activePlugin ) {
-        // Inhibit screensaver
-        if ( !d->m_screensaver ) {
-            d->m_screensaver = new QtMobility::QSystemScreenSaver( this );
-            d->m_screensaver->setScreenSaverInhibit();
-        }
-    } else if ( d->m_screensaver ) {
-        // Do not inhibit the screensaver. The API here is cumbersome:
-        // You can only revert a previous inhibition by deleting the screensaver object. Wtf?
-        delete d->m_screensaver;
-        d->m_screensaver = 0;
+        d->m_timer.start(); // Inhibit screensaver
+    } else {
+      d->m_timer.stop();
+    }
+}
+
+void InhibitScreensaverPlugin::inhibitScreenSaver()
+{
+    if ( d->m_interface && d->m_interface->isValid() ) {
+        d->m_interface->call( "req_display_blanking_pause" );
     }
 }
 
