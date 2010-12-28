@@ -6,6 +6,7 @@
     <text>&amp;File</text>
     <Action name="file_open"/>
     <Action name="new_stuff"/>
+    <Action name="createMap"/>
     <Action name="file_download_region"/>
     <Action name="exportMap"/>
     <Separator/>
