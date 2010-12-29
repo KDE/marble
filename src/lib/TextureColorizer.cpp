@@ -49,8 +49,11 @@ typedef union
 } GpFifo;
 
 
-TextureColorizer::TextureColorizer()
+TextureColorizer::TextureColorizer( QObject *parent )
+    : QObject( parent )
+    , m_veccomposer( this )
 {
+    connect( &m_veccomposer, SIGNAL( datasetLoaded() ), SIGNAL( datasetLoaded() ) );
 }
 
 // This function takes two images, both in viewParams:
@@ -72,6 +75,9 @@ TextureColorizer::TextureColorizer()
 
 void TextureColorizer::colorize(ViewParams *viewParams)
 {
+    // update coastimg
+    m_veccomposer.drawTextureMap( viewParams );
+
     QImage        *origimg  = viewParams->canvasImage();
     const QImage  *coastimg = viewParams->coastImage();
     const qint64   radius   = viewParams->radius();
@@ -376,3 +382,5 @@ void TextureColorizer::setSeaFileLandFile(const QString& seafile,
 }
 
 }
+
+#include "TextureColorizer.moc"
