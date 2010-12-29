@@ -30,8 +30,6 @@ class GeoPainter;
 class GeoSceneDocument;
 class HttpDownloadManager;
 class MapThemeManager;
-class StackedTile;
-class StackedTileLoader;
 class SunLocator;
 class ViewParams;
 
@@ -87,9 +85,6 @@ class TextureLayer : public QObject
     void repaintNeeded( const QRegion & );
 
  private:
-    friend class StackedTileLoader;
-    void paintTile( StackedTile *tile );
-
     Q_PRIVATE_SLOT( d, void mapChanged() )
     Q_PRIVATE_SLOT( d, void updateTextureLayers() )
 
