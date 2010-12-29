@@ -23,7 +23,6 @@
 
 #include "StackedTileLoader.h"
 
-#include "DatasetProvider.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneGroup.h"
 #include "GeoSceneHead.h"
@@ -61,8 +60,7 @@ class StackedTileLoaderPrivate
 {
 public:
     StackedTileLoaderPrivate( TileLoader *tileLoader, SunLocator *sunLocator )
-        : m_datasetProvider( 0 ),
-          m_layerDecorator( tileLoader, sunLocator ),
+        : m_layerDecorator( tileLoader, sunLocator ),
           m_tileLoader( tileLoader ),
           m_maxTileLevel( 0 )
     {
@@ -71,7 +69,6 @@ public:
 
     void detectMaxTileLevel();
 
-    DatasetProvider *m_datasetProvider;
     MergedLayerDecorator m_layerDecorator;
     TileLoader *m_tileLoader;
     int         m_maxTileLevel;
