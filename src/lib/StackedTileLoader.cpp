@@ -414,6 +414,7 @@ void StackedTileLoader::updateTile( TileId const & stackedTileId, TileId const &
         if ( cachedTile ) {
             cachedTile->initResultTile();
             mergeDecorations( cachedTile );
+            emit tileUpdateAvailable();
         }
     }
 }
