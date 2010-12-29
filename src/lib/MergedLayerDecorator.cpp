@@ -92,12 +92,12 @@ MergedLayerDecorator::~MergedLayerDecorator()
     delete m_cityLightsTheme;
 }
 
-void MergedLayerDecorator::paint( const QString& themeId, GeoSceneDocument *mapTheme )
+void MergedLayerDecorator::paint( const QString& themeId )
 {
 //     QTime time;
 //     time.start();
     
-    if ( m_sunLocator->getShow() && mapTheme ) {
+    if ( m_sunLocator->getShow() ) {
 
         // Initialize citylights layer if it hasn't happened already
         if ( !m_cityLightsTheme ) {
