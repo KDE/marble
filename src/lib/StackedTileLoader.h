@@ -147,10 +147,6 @@ class StackedTileLoader : public QObject
         void setVolatileCacheLimit( quint64 kiloBytes );
 
         /**
-         */
-        void updateTile( TileId const & stackedTileId, TileId const & tileId );
-
-        /**
          * Effectively triggers a reload of all tiles that are currently in use
          * and clears the tile cache in physical memory.
          */
@@ -162,6 +158,11 @@ class StackedTileLoader : public QObject
          * downloaded and is available now.
          */
         void tileUpdateAvailable();
+
+    private Q_SLOTS:
+        /**
+         */
+        void updateTile( TileId const & stackedTileId );
 
     private:
         Q_DISABLE_COPY( StackedTileLoader )

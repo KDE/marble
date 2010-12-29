@@ -84,8 +84,8 @@ StackedTileLoader::StackedTileLoader( TileLoader * const tileLoader,
                                       SunLocator * const sunLocator )
     : d( new StackedTileLoaderPrivate( tileLoader, sunLocator ) )
 {
-    connect( d->m_tileLoader, SIGNAL( tileCompleted( TileId, TileId )),
-             SLOT( updateTile( TileId, TileId )));
+    connect( d->m_tileLoader, SIGNAL( tileCompleted( TileId )),
+             SLOT( updateTile( TileId )));
 }
 
 StackedTileLoader::~StackedTileLoader()
@@ -396,10 +396,8 @@ void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
     d->m_tileCache.setMaxCost( kiloBytes * 1024 );
 }
 
-void StackedTileLoader::updateTile( TileId const & stackedTileId, TileId const & tileId )
+void StackedTileLoader::updateTile( TileId const & stackedTileId )
 {
-    Q_UNUSED(tileId);
-
     d->detectMaxTileLevel();
 
     StackedTile * const displayedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
