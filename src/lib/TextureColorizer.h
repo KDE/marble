@@ -16,6 +16,8 @@
 #ifndef MARBLE_TEXTURECOLORIZER_H
 #define MARBLE_TEXTURECOLORIZER_H
 
+#include "VectorComposer.h"
+
 #include <QtCore/QString>
 
 namespace Marble
@@ -23,17 +25,24 @@ namespace Marble
 
 class ViewParams;
 
-class TextureColorizer
+class TextureColorizer : public QObject
 {
+    Q_OBJECT
+
  public:
-    TextureColorizer();
+    TextureColorizer( QObject *parent = 0 );
     virtual ~TextureColorizer(){}
 
     void colorize(ViewParams *viewParams);
 
     void setSeaFileLandFile( const QString& seafile,
                              const QString& landfile );
+
+ Q_SIGNALS:
+    void datasetLoaded();
+
  private:
+    VectorComposer m_veccomposer;
     QString m_seafile;
     QString m_landfile;
     uint texturepalette[16][512];
