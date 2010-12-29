@@ -18,6 +18,7 @@
 #include "SphericalScanlineTextureMapper.h"
 #include "EquirectScanlineTextureMapper.h"
 #include "MercatorScanlineTextureMapper.h"
+#include "TileScalingTextureMapper.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneFilter.h"
@@ -225,7 +226,11 @@ void TextureLayer::setupTextureMapper( Projection projection )
             d->m_texmapper = new EquirectScanlineTextureMapper( &d->m_tileLoader, this );
             break;
         case Mercator:
-            d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader, this );
+            if ( d->m_tileLoader.tileProjection() == GeoSceneTexture::Mercator ) {
+                d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader, this );
+            } else {
+                d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader, this );
+            }
             break;
         default:
             d->m_texmapper = 0;
