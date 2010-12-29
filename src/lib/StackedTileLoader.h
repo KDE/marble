@@ -122,7 +122,7 @@ class StackedTileLoader : public QObject
          * Returns the highest level in which some tiles are theoretically
          * available for the given @p texture layer.
          */
-        static int maximumTileLevel( GeoSceneTexture const * const textureLayer );
+        int maximumTileLevel() const;
 
         /**
          * Returns whether the mandatory most basic tile level is fully available for

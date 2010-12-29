@@ -64,14 +64,18 @@ public:
     StackedTileLoaderPrivate( TileLoader *tileLoader, SunLocator *sunLocator )
         : m_datasetProvider( 0 ),
           m_layerDecorator( tileLoader, sunLocator ),
-          m_tileLoader( tileLoader )
+          m_tileLoader( tileLoader ),
+          m_maxTileLevel( 0 )
     {
         m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
     }
 
+    void detectMaxTileLevel();
+
     DatasetProvider *m_datasetProvider;
     MergedLayerDecorator m_layerDecorator;
     TileLoader *m_tileLoader;
+    int         m_maxTileLevel;
     QVector<GeoSceneTexture const *> m_textureLayers;
     QHash <TileId, StackedTile*>  m_tilesOnDisplay;
     QCache <TileId, StackedTile>  m_tileCache;
@@ -101,6 +105,8 @@ void StackedTileLoader::setTextureLayers( QVector<GeoSceneTexture const *> & tex
 
     d->m_tilesOnDisplay.clear();
     d->m_tileCache.clear();
+
+    d->detectMaxTileLevel();
 }
 
 void StackedTileLoader::setShowTileId( bool show )
@@ -286,15 +292,26 @@ QList<TileId> StackedTileLoader::tilesOnDisplay() const
     return result;
 }
 
-int StackedTileLoader::maximumTileLevel( GeoSceneTexture const * const texture )
+int StackedTileLoader::maximumTileLevel() const
 {
-    if ( !texture )
-        return -1;
+    return d->m_maxTileLevel;
+}
+
+void StackedTileLoaderPrivate::detectMaxTileLevel()
+{
+    if ( m_textureLayers.isEmpty() ) {
+        m_maxTileLevel = -1;
+        return;
+    }
+
+    GeoSceneTexture const * const texture = m_textureLayers.at( 0 );
 
     // if maximum tile level is configured in the DGML files,
     // then use it, otherwise use old detection code.
-    if ( texture->maximumTileLevel() >= 0 )
-        return texture->maximumTileLevel();
+    if ( texture->maximumTileLevel() >= 0 ) {
+        m_maxTileLevel = texture->maximumTileLevel();
+        return;
+    }
 
     int maximumTileLevel = -1;
     QString tilepath = MarbleDirs::path( texture->themeStr() );
@@ -302,19 +319,19 @@ int StackedTileLoader::maximumTileLevel( GeoSceneTexture const * const texture )
     QStringList leveldirs = QDir( tilepath ).entryList( QDir::AllDirs | QDir::NoSymLinks
                                                         | QDir::NoDotAndDotDot );
 
-    bool ok = true;
-
     QStringList::const_iterator it = leveldirs.constBegin();
     QStringList::const_iterator const end = leveldirs.constEnd();
     for (; it != end; ++it ) {
-        int value = (*it).toInt( &ok, 10 );
+        bool ok = true;
+        const int value = (*it).toInt( &ok, 10 );
+
         if ( ok && value > maximumTileLevel )
             maximumTileLevel = value;
     }
 
     //    mDebug() << "Detected maximum tile level that contains data: "
     //             << maxtilelevel;
-    return maximumTileLevel + 1;
+    m_maxTileLevel = maximumTileLevel + 1;
 }
 
 bool StackedTileLoader::baseTilesAvailable( GeoSceneLayer * layer )
@@ -352,6 +369,9 @@ void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 void StackedTileLoader::updateTile( TileId const & stackedTileId, TileId const & tileId )
 {
     Q_UNUSED(tileId);
+
+    d->detectMaxTileLevel();
+
     StackedTile * const displayedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
     if ( displayedTile ) {
         displayedTile->initResultTile();
