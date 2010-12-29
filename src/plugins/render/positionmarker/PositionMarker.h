@@ -17,6 +17,7 @@
 
 #include "RenderPlugin.h"
 #include "GeoDataCoordinates.h"
+#include "PluginAboutDialog.h"
 
 namespace Marble
 {
@@ -46,6 +47,8 @@ class PositionMarker  : public RenderPlugin
 
     QIcon icon () const;
 
+    QDialog *aboutDialog() const;
+
     void initialize ();
 
     bool isInitialized () const;
@@ -65,6 +68,8 @@ class PositionMarker  : public RenderPlugin
     Q_DISABLE_COPY( PositionMarker )
 
     bool           m_isInitialized;
+
+    mutable PluginAboutDialog *m_aboutDialog;
 
     ViewportParams     *m_viewport;
     GeoDataCoordinates  m_currentPosition;
