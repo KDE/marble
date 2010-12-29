@@ -8,6 +8,7 @@
 // Copyright 2007   Andrew Manson   <g.real.ate@gmail.com>
 // Copyright 2009   Eckhart Wörner  <ewoerner@kde.org>
 // Copyright 2010   Thibaut Gridel  <tgridel@free.fr>
+// Copyright 2010   Daniel Marth    <danielmarth@gmx.at>
 //
 
 #include "PositionMarker.h"
@@ -28,6 +29,7 @@ namespace Marble
 PositionMarker::PositionMarker ()
     : RenderPlugin(),
       m_isInitialized( false ),
+      m_aboutDialog( 0 ),
       m_viewport( 0 )
 {
 }
@@ -76,6 +78,37 @@ QIcon PositionMarker::icon() const
     return QIcon();
 }
 
+QDialog *PositionMarker::aboutDialog() const
+{
+    if ( !m_aboutDialog ) {
+        // Initializing about dialog
+        m_aboutDialog = new PluginAboutDialog();
+        m_aboutDialog->setName( "Position Marker Plugin" );
+        m_aboutDialog->setVersion( "0.1" );
+        // FIXME: Can we store this string for all of Marble
+        m_aboutDialog->setAboutText( tr( "<br />(c) 2009, 2010 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
+        QList<Author> authors;
+        Author amanson, ewoerner, tgridel, dmarth;
+        amanson.name = "Andrew Manson";
+        amanson.task = tr( "Developer" );
+        amanson.email = "g.real.ate@gmail.com";
+        ewoerner.name = "Eckhart Woerner";
+        ewoerner.task = tr( "Developer" );
+        ewoerner.email = "ewoerner@kde.org";
+        tgridel.name = "Thibaut Gridel";
+        tgridel.task = tr( "Developer" );
+        tgridel.email = "tgridel@free.fr";
+        dmarth.name = "Daniel Marth";
+        dmarth.task = tr( "Developer" );
+        dmarth.email = "danielmarth@gmx.at";
+        authors.append( amanson );
+        authors.append( ewoerner );
+        authors.append( tgridel );
+        authors.append( dmarth );
+        m_aboutDialog->setAuthors( authors );
+    }
+    return m_aboutDialog;
+}
 
 void PositionMarker::initialize()
 {
