@@ -33,7 +33,6 @@
 #include "StackedTileLoader.h"
 #include "TextureColorizer.h"
 #include "TileLoader.h"
-#include "VectorComposer.h"
 #include "ViewParams.h"
 
 namespace Marble
@@ -55,7 +54,6 @@ public:
     TextureColorizer     m_texcolorizer;
     TileLoader           m_loader;
     StackedTileLoader    m_tileLoader;
-    VectorComposer       m_veccomposer;
     AbstractScanlineTextureMapper *m_texmapper;
     GeoSceneDocument              *m_mapTheme;
     bool m_justModified;
@@ -66,7 +64,6 @@ TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadMa
     , m_texcolorizer()
     , m_loader( downloadManager, mapThemeManager )
     , m_tileLoader( &m_loader, sunLocator )
-    , m_veccomposer( parent )
     , m_texmapper( 0 )
     , m_mapTheme( 0 )
     , m_justModified( true )
@@ -137,7 +134,7 @@ TextureLayer::TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManage
     : QObject()
     , d( new Private( mapThemeManager, downloadManager, sunLocator, this ) )
 {
-    connect( &d->m_veccomposer, SIGNAL( datasetLoaded() ), SLOT( mapChanged() ) );
+    connect( &d->m_texcolorizer, SIGNAL( datasetLoaded() ), SLOT( mapChanged() ) );
     connect( &d->m_tileLoader, SIGNAL( tileUpdateAvailable() ), SLOT( mapChanged() ) );
 }
 
@@ -170,13 +167,9 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
                 && layer->role() == "dem"
                 && !d->m_mapTheme->map()->filters().isEmpty() ) {
 
-                GeoSceneFilter *filter= d->m_mapTheme->map()->filters().first();
-                viewParams->coastImage()->fill( Qt::transparent );
-                // Create VectorMap
-                d->m_veccomposer.drawTextureMap( viewParams );
-
                 // Colorize using settings from when the map was loaded
                 // there's no need to check the palette because it's set with the map theme
+                GeoSceneFilter *filter= d->m_mapTheme->map()->filters().first();
                 if( filter->type() == "colorize" ) {
                     d->m_texcolorizer.colorize( viewParams );
                 }

@@ -150,8 +150,10 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
 {
     loadCoastlines();
 
-    QPaintDevice  *origimg = viewParams->coastImage();
+    QImage        *origimg = viewParams->coastImage();
     Quaternion     rotAxis = viewParams->planetAxis();
+
+    origimg->fill( Qt::transparent );
 
     //	m_vectorMap->clearNodeCount();
 
