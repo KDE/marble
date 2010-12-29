@@ -47,7 +47,6 @@ public:
     void updateTextureLayers();
 
     const GeoSceneLayer *sceneLayer() const;
-    GeoSceneTexture *textureLayer() const;
     GeoSceneGroup *textureLayerSettings() const;
 
 public:
@@ -117,23 +116,6 @@ const GeoSceneLayer *TextureLayer::Private::sceneLayer() const
     mDebug() << "StackedTileLoader::updateTextureLayers" << mapThemeId;
 
     return map->layer( head->theme() );
-}
-
-GeoSceneTexture* TextureLayer::Private::textureLayer() const
-{
-    if ( !m_mapTheme )
-        return 0;
-    if ( !m_mapTheme->map()->hasTextureLayers() )
-        return 0;
-
-    // As long as we don't have an Layer Management Class we just lookup
-    // the name of the layer that has the same name as the theme Id
-    const QString themeId = m_mapTheme->head()->theme();
-    GeoSceneLayer * const layer = static_cast<GeoSceneLayer*>( m_mapTheme->map()->layer( themeId ));
-    if ( !layer )
-        return 0;
-
-    return static_cast<GeoSceneTexture*>( layer->groundDataset() );
 }
 
 GeoSceneGroup* TextureLayer::Private::textureLayerSettings() const
@@ -237,16 +219,13 @@ void TextureLayer::setupTextureMapper( Projection projection )
 
     switch( projection ) {
         case Spherical:
-            d->m_texmapper = new SphericalScanlineTextureMapper( d->textureLayer(), &d->m_tileLoader,
-                                                                 this );
+            d->m_texmapper = new SphericalScanlineTextureMapper( &d->m_tileLoader, this );
             break;
         case Equirectangular:
-            d->m_texmapper = new EquirectScanlineTextureMapper( d->textureLayer(), &d->m_tileLoader,
-                                                                this );
+            d->m_texmapper = new EquirectScanlineTextureMapper( &d->m_tileLoader, this );
             break;
         case Mercator:
-            d->m_texmapper = new MercatorScanlineTextureMapper( d->textureLayer(), &d->m_tileLoader,
-                                                                this );
+            d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader, this );
             break;
         default:
             d->m_texmapper = 0;
@@ -342,12 +321,12 @@ int TextureLayer::tileZoomLevel() const
 
 QSize TextureLayer::tileSize() const
 {
-    return d->textureLayer()->tileSize();
+    return d->m_tileLoader.tileSize();
 }
 
 GeoSceneTexture::Projection TextureLayer::tileProjection() const
 {
-    return d->textureLayer()->projection();
+    return d->m_tileLoader.tileProjection();
 }
 
 int TextureLayer::tileColumnCount( int level ) const

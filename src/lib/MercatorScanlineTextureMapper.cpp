@@ -30,10 +30,9 @@
 
 using namespace Marble;
 
-MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( GeoSceneTexture *textureLayer,
-                                                              StackedTileLoader *tileLoader,
+MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( StackedTileLoader *tileLoader,
                                                               QObject *parent )
-    : AbstractScanlineTextureMapper( textureLayer, tileLoader, parent ),
+    : AbstractScanlineTextureMapper( tileLoader, parent ),
       m_oldCenterLon( 0.0 ),
       m_oldYPaintedTop( 0 )
 {
