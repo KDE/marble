@@ -141,7 +141,8 @@ bool PositionMarker::render( GeoPainter *painter,
                            GeoSceneLayer * layer )
 {
     Q_UNUSED( layer )
-    if (renderPosition().contains(renderPos))
+    bool const gpsActive = dataFacade()->positionTracking()->positionProviderPlugin() != 0;
+    if ( gpsActive && renderPosition().contains(renderPos) )
     {
         if ( m_viewport != viewport ) {
             m_viewport = viewport;
