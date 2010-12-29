@@ -86,7 +86,6 @@ StackedTileLoader::StackedTileLoader( TileLoader * const tileLoader,
 {
     connect( d->m_tileLoader, SIGNAL( tileCompleted( TileId, TileId )),
              SLOT( updateTile( TileId, TileId )));
-    connect( &d->m_layerDecorator, SIGNAL( repaintMap() ), SIGNAL( tileUpdateAvailable() ) );
 }
 
 StackedTileLoader::~StackedTileLoader()

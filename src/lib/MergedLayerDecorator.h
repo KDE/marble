@@ -17,7 +17,6 @@
 #define MARBLE_MERGEDLAYERDECORATOR_H
 
 #include <QtGui/QImage>
-#include <QtCore/QObject>
 
 #include "TileId.h"
 #include "global.h"
@@ -33,10 +32,8 @@ class SunLocator;
 class StackedTile;
 class TileLoader;
 
-class MergedLayerDecorator : public QObject
+class MergedLayerDecorator
 {
-    Q_OBJECT
-
  public:
     MergedLayerDecorator( TileLoader * const tileLoader, SunLocator* sunLocator );
     virtual ~MergedLayerDecorator();
@@ -50,9 +47,6 @@ class MergedLayerDecorator : public QObject
 
     void setTile(QImage* tile);
     void setInfo( TileId const &id );
-
- Q_SIGNALS:
-    void repaintMap();
 
  private:
     QImage loadDataset();
