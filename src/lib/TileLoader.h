@@ -60,7 +60,7 @@ class TileLoader: public QObject
 
     // when this signal is emitted, the TileLoader gives up ownership of
     // the corrsponding tile. Might be better to explicitly transfer...
-    void tileCompleted( TileId const & composedTileId, TileId const & baseTileId );
+    void tileCompleted( TileId const & stackedTileId );
 
  private:
     GeoSceneTexture const * findTextureLayer( TileId const & ) const;
