@@ -350,14 +350,14 @@ GeoSceneTexture::Projection TextureLayer::tileProjection() const
     return d->textureLayer()->projection();
 }
 
-int TextureLayer::levelZeroColumns() const
+int TextureLayer::tileColumnCount( int level ) const
 {
-    return d->textureLayer()->levelZeroColumns();
+    return d->m_tileLoader.tileColumnCount( level );
 }
 
-int TextureLayer::levelZeroRows() const
+int TextureLayer::tileRowCount( int level ) const
 {
-    return d->textureLayer()->levelZeroRows();
+    return d->m_tileLoader.tileRowCount( level );
 }
 
 qint64 TextureLayer::volatileCacheLimit() const

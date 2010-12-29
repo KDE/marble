@@ -75,8 +75,8 @@ class TextureLayer : public QObject
 
     GeoSceneTexture::Projection tileProjection() const;
 
-    int levelZeroColumns() const;
-    int levelZeroRows() const;
+    int tileColumnCount( int level ) const;
+    int tileRowCount( int level ) const;
 
     qint64 volatileCacheLimit() const;
 
