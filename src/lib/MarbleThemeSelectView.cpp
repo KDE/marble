@@ -12,6 +12,7 @@
 
 #include "MarbleThemeSelectView.h"
 
+#include "global.h"
 #include "MarbleDebug.h"
 #include <QtGui/QResizeEvent>
 
@@ -21,7 +22,14 @@ MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
     : QListView( parent ),
       d( 0 )                    // No private data yet.
 {
-    setViewMode( QListView::IconMode );
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if ( smallScreen ) {
+        setViewMode( QListView::ListMode );
+        setIconSize( QSize( 64, 64 ) );
+    } else {
+        setViewMode( QListView::IconMode );
+        setIconSize( QSize( 136, 136 ) );
+    }
     setFlow( QListView::LeftToRight );
     setWrapping( true ); 
     setMovement( QListView::Static );
@@ -29,8 +37,7 @@ MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
     setUniformItemSizes ( true );
     setHorizontalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
     setEditTriggers( QAbstractItemView::NoEditTriggers );
-    setIconSize( QSize( 136,136 ) );
-	setSelectionMode( QAbstractItemView::SingleSelection );
+    setSelectionMode( QAbstractItemView::SingleSelection );
 
     connect( this, SIGNAL( pressed( QModelIndex ) ),
                    SLOT( selectedMapTheme( QModelIndex ) ) );
