@@ -11,16 +11,18 @@
 //
 
 #include "MarbleThemeSelectView.h"
-#include "MarbleDirs.h"
 
+#include "global.h"
+#include "MarbleDirs.h"
 #include "MapWizard.h"
 #include "MarbleDebug.h"
-#include <QtGui/QResizeEvent>
-#include <QtGui/QMenu>
-#include <QtGui/QMessageBox>
+
 #include <QtCore/QFileInfo>
 #include <QtCore/QFile>
 #include <QtCore/QDir>
+#include <QtGui/QResizeEvent>
+#include <QtGui/QMenu>
+#include <QtGui/QMessageBox>
 
 using namespace Marble;
 
@@ -97,7 +99,14 @@ MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
     : QListView( parent ),
       d( new Private( this ) )
 {
-    setViewMode( QListView::IconMode );
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if ( smallScreen ) {
+        setViewMode( QListView::ListMode );
+        setIconSize( QSize( 64, 64 ) );
+    } else {
+        setViewMode( QListView::IconMode );
+        setIconSize( QSize( 136, 136 ) );
+    }
     setFlow( QListView::LeftToRight );
     setWrapping( true ); 
     setMovement( QListView::Static );
@@ -105,7 +114,6 @@ MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
     setUniformItemSizes( true );
     setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     setEditTriggers( QAbstractItemView::NoEditTriggers );
-    setIconSize( QSize( 136,136 ) );
     setSelectionMode( QAbstractItemView::SingleSelection );
 
     connect( this, SIGNAL( pressed( QModelIndex ) ),
