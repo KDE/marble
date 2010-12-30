@@ -16,7 +16,11 @@
 #include "MarbleDebug.h"
 #include <QtCore/QRect>
 #include <QtGui/QColor>
-
+#include <QtGui/QFileDialog>
+#include <QtGui/QMessageBox>
+#include <QtGui/QPushButton>
+ 
+#include "ui_PositionMarkerConfigWidget.h"
 #include "AbstractProjection.h"
 #include "MarbleDataFacade.h"
 #include "GeoPainter.h"
@@ -29,7 +33,10 @@ namespace Marble
 PositionMarker::PositionMarker ()
     : RenderPlugin(),
       m_isInitialized( false ),
+      m_useCustomCursor( false ),
+      ui_configWidget( 0 ),
       m_aboutDialog( 0 ),
+      m_configDialog( 0 ),
       m_viewport( 0 )
 {
 }
@@ -108,6 +115,27 @@ QDialog *PositionMarker::aboutDialog() const
         m_aboutDialog->setAuthors( authors );
     }
     return m_aboutDialog;
+}
+
+QDialog *PositionMarker::configDialog() const
+{
+    if ( !m_configDialog ) {
+        // Initializing configuration dialog
+        m_configDialog = new QDialog();
+        ui_configWidget = new Ui::PositionMarkerConfigWidget;
+        ui_configWidget->setupUi( m_configDialog );
+        readSettings();
+        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ),
+                 SLOT( writeSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ),
+                 SLOT( readSettings() ) );
+        QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
+        connect( applyButton, SIGNAL( clicked() ),
+                 SLOT( writeSettings() ) );
+        connect( ui_configWidget->m_fileChooserButton, SIGNAL( clicked() ),
+                 SLOT( chooseCustomCursor() ) );
+    }
+    return m_configDialog;
 }
 
 void PositionMarker::initialize()
@@ -202,14 +230,44 @@ bool PositionMarker::render( GeoPainter *painter,
             painter->drawEllipse( m_currentPosition, width, width );
         }
 
-        painter->setPen( Qt::black );
-        painter->setBrush( Qt::white );
-        painter->drawPolygon( m_arrow );
+        if( m_useCustomCursor)
+        {
+            QRectF rect = m_arrow.boundingRect().toAlignedRect();
+            if( rect.isValid() )
+                painter->drawPixmap( rect.topLeft(), m_customCursor );
+        }
+        else
+        {
+            painter->setPen( Qt::black );
+            painter->setBrush( Qt::white );
+            painter->drawPolygon( m_arrow );
+        }
 
         painter->restore();
         m_previousArrow = m_arrow;
     }
     return true;
+}
+
+void PositionMarker::readSettings() const
+{
+    if(m_useCustomCursor)
+        ui_configWidget->m_customCursor->click();
+    else
+        ui_configWidget->m_originalCursor->click();
+}
+
+void PositionMarker::writeSettings()
+{
+    if( ui_configWidget->m_customCursor->isChecked() && 
+        ui_configWidget->m_fileChooserButton->icon().isNull() )
+    {
+        QMessageBox::warning( NULL, tr( "Error" ), tr( "No cursor selected, the default cursor will be used." ), QMessageBox::Ok );
+        m_useCustomCursor = false;
+        readSettings();
+        return;
+    }
+    m_useCustomCursor = ui_configWidget->m_customCursor->isChecked();
 }
 
 void PositionMarker::setPosition( const GeoDataCoordinates &position )
@@ -219,6 +277,30 @@ void PositionMarker::setPosition( const GeoDataCoordinates &position )
     if ( m_viewport->viewLatLonAltBox().contains( m_currentPosition ) )
     {
         emit repaintNeeded( m_dirtyRegion );
+    }
+}
+
+void PositionMarker::chooseCustomCursor()
+{
+    QString filename = QFileDialog::getOpenFileName( NULL, tr( "Choose Custom Cursor" ) );
+    if( !filename.isEmpty() )
+        loadCustomCursor( filename );
+}
+
+int PositionMarker::loadCustomCursor( const QString& filename )
+{
+    m_customCursor = QPixmap( filename ).scaled( 22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation );
+    if( !m_customCursor.isNull() )
+    {
+        ui_configWidget->m_customCursor->click();
+        ui_configWidget->m_fileChooserButton->setIcon( QIcon( m_customCursor ) );
+        return 0;
+    }
+    else
+    {
+        QMessageBox::warning( NULL, tr( "Error" ), tr( "Unable to load custom cursor. Make sure this is a valid image file." ), QMessageBox::Ok );
+        ui_configWidget->m_fileChooserButton->setIcon( QIcon() );
+        return 1;
     }
 }
 

@@ -19,6 +19,11 @@
 #include "GeoDataCoordinates.h"
 #include "PluginAboutDialog.h"
 
+namespace Ui
+{
+    class PositionMarkerConfigWidget;
+}
+
 namespace Marble
 {
 
@@ -49,6 +54,8 @@ class PositionMarker  : public RenderPlugin
 
     QDialog *aboutDialog() const;
 
+    QDialog *configDialog() const;
+
     void initialize ();
 
     bool isInitialized () const;
@@ -62,14 +69,20 @@ class PositionMarker  : public RenderPlugin
     virtual qreal zValue() const;
 
  public slots:
+    void readSettings() const;
+    void writeSettings();
     void setPosition( const GeoDataCoordinates &position );
+    void chooseCustomCursor();
 
  private:
     Q_DISABLE_COPY( PositionMarker )
 
     bool           m_isInitialized;
-
+    bool           m_useCustomCursor;
+ 
+    mutable Ui::PositionMarkerConfigWidget *ui_configWidget;
     mutable PluginAboutDialog *m_aboutDialog;
+    mutable QDialog *m_configDialog;
 
     ViewportParams     *m_viewport;
     GeoDataCoordinates  m_currentPosition;
@@ -78,6 +91,9 @@ class PositionMarker  : public RenderPlugin
     QPolygonF           m_arrow;
     QPolygonF           m_previousArrow;
     QRegion             m_dirtyRegion;
+    QPixmap             m_customCursor;
+
+    int loadCustomCursor( const QString& filename );
 };
 
 }
