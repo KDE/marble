@@ -178,6 +178,9 @@ Q_SIGNALS:
     void routeCalculated( int );
     void deviatedFromRoute( bool deviated );
 
+    /** A different route was loaded */
+    void currentRouteChanged();
+
 private:
     RoutingModelPrivate *const d;
 };

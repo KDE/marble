@@ -63,6 +63,8 @@ public:
 
     void updateZoomButtons();
 
+    void updateGuidanceModeButton();
+
     void updateInstructionLabel( int fontSize, qreal remainingDistance );
 
     void forceRepaint();
@@ -140,6 +142,12 @@ void RoutingPluginPrivate::updateZoomButtons( int zoomValue )
     m_widget.zoomOutButton->setEnabled( zoomValue > minZoom );
 
     forceRepaint();
+}
+
+void RoutingPluginPrivate::updateGuidanceModeButton()
+{
+    bool const hasRoute = m_routingModel->rowCount() > 0;
+    m_widget.routingButton->setEnabled( hasRoute );
 }
 
 void RoutingPluginPrivate::forceRepaint()
@@ -370,6 +378,7 @@ void RoutingPlugin::initialize()
     d->m_widget.setupUi( widget );
     PositionProviderPlugin* activePlugin = dataFacade()->positionTracking()->positionProviderPlugin();
     d->m_widget.gpsButton->setChecked( activePlugin != 0 );
+    d->m_widget.routingButton->setEnabled( false );
     connect( d->m_widget.instructionLabel, SIGNAL( linkActivated( QString ) ),
              this, SLOT( reverseRoute() ) );
 
@@ -425,6 +434,9 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
                  this, SLOT( updateZoomButtons() ) );
         connect( d->m_marbleWidget, SIGNAL( zoomChanged( int ) ),
                  this, SLOT( updateZoomButtons( int ) ) );
+        connect( d->m_routingModel, SIGNAL( currentRouteChanged() ),
+                this, SLOT( updateGuidanceModeButton() ) );
+        d->updateGuidanceModeButton();
     }
     return AbstractFloatItem::eventFilter( object, e );
 }
