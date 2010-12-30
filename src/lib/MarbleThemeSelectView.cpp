@@ -106,12 +106,12 @@ MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
     } else {
         setViewMode( QListView::IconMode );
         setIconSize( QSize( 136, 136 ) );
+        setFlow( QListView::LeftToRight );
+        setWrapping( true );
+        setResizeMode( QListView::Fixed );
+        setUniformItemSizes( true );
     }
-    setFlow( QListView::LeftToRight );
-    setWrapping( true ); 
     setMovement( QListView::Static );
-    setResizeMode( QListView::Fixed );
-    setUniformItemSizes( true );
     setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     setEditTriggers( QAbstractItemView::NoEditTriggers );
     setSelectionMode( QAbstractItemView::SingleSelection );
