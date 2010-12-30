@@ -303,6 +303,7 @@ bool RoutingModel::setCurrentRoute( GeoDataDocument* document )
     }
 
     reset();
+    emit currentRouteChanged();
     return true;
 }
 
