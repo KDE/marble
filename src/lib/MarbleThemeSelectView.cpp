@@ -116,7 +116,7 @@ MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
     setEditTriggers( QAbstractItemView::NoEditTriggers );
     setSelectionMode( QAbstractItemView::SingleSelection );
 
-    connect( this, SIGNAL( pressed( QModelIndex ) ),
+    connect( this, SIGNAL( activated( QModelIndex ) ),
                    SLOT( selectedMapTheme( QModelIndex ) ) );
     connect( this, SIGNAL( customContextMenuRequested( QPoint ) ),
                    SLOT( showContextMenu( QPoint ) ) );
