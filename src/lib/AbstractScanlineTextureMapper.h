@@ -67,8 +67,7 @@ public:
     // method for precise interpolation
     void nextTile( qreal& posx, qreal& posy );
 
-    void selectTileLevel( ViewParams * const viewParams );
-    void tileLevelInit( const int tileLevel );
+    void setRadius( int radius );
 
     int globalWidth() const;
     int globalHeight() const;
@@ -120,9 +119,6 @@ public:
 
  private:
     Q_DISABLE_COPY( AbstractScanlineTextureMapper )
-    void initGlobalWidth();
-    void initGlobalHeight();
-
     StackedTile *m_tile;
     int         m_previousRadius;
 
