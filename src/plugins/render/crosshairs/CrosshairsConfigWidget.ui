@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CrosshairsConfigWidget</class>
+ <widget class="QDialog" name="CrosshairsConfigWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>318</width>
+    <height>119</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Configure Crosshairs Plugin</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Theme</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QListWidget" name="m_themeList">
+     <property name="iconSize">
+      <size>
+       <width>21</width>
+       <height>21</height>
+      </size>
+     </property>
+     <property name="flow">
+      <enum>QListView::LeftToRight</enum>
+     </property>
+     <property name="resizeMode">
+      <enum>QListView::Adjust</enum>
+     </property>
+     <property name="viewMode">
+      <enum>QListView::IconMode</enum>
+     </property>
+     <item>
+      <property name="text">
+       <string>Default</string>
+      </property>
+      <property name="icon">
+       <iconset resource="crosshairs.qrc">
+        <normaloff>:/crosshairs-pointed.svg</normaloff>:/crosshairs-pointed.svg</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Gun 1</string>
+      </property>
+      <property name="icon">
+       <iconset resource="crosshairs.qrc">
+        <normaloff>:/crosshairs-gun1.svg</normaloff>:/crosshairs-gun1.svg</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Gun 2</string>
+      </property>
+      <property name="icon">
+       <iconset resource="crosshairs.qrc">
+        <normaloff>:/crosshairs-gun2.svg</normaloff>:/crosshairs-gun2.svg</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Circled</string>
+      </property>
+      <property name="icon">
+       <iconset resource="crosshairs.qrc">
+        <normaloff>:/crosshairs-circled.svg</normaloff>:/crosshairs-circled.svg</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>German</string>
+      </property>
+      <property name="icon">
+       <iconset resource="crosshairs.qrc">
+        <normaloff>:/crosshairs-german.svg</normaloff>:/crosshairs-german.svg</iconset>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="m_buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="crosshairs.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>CrosshairsConfigWidget</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>CrosshairsConfigWidget</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
