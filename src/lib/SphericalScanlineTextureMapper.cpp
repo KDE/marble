@@ -60,7 +60,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     // Reset backend
     m_tileLoader->resetTilehash();
-    selectTileLevel( viewParams );
+    setRadius( viewParams->radius() );
 
     // Evaluate the degree of interpolation
     const int n = interpolationStep( viewParams );
