@@ -8,10 +8,6 @@
 // Copyright 2008 Torsten Rahn <tackat@kde.org>
 //
 
-//
-// This class is a test plugin.
-//
-
 #ifndef COMPASS_FLOAT_ITEM_H
 #define COMPASS_FLOAT_ITEM_H
 
@@ -20,6 +16,10 @@
 #include "AbstractFloatItem.h"
 
 class QSvgRenderer;
+
+namespace Ui {
+    class CompassConfigWidget;
+}
 
 namespace Marble
 {
@@ -51,7 +51,6 @@ class CompassFloatItem  : public AbstractFloatItem
 
     QIcon icon () const;
 
-
     void initialize ();
 
     bool isInitialized () const;
@@ -63,16 +62,32 @@ class CompassFloatItem  : public AbstractFloatItem
     void paintContent( GeoPainter *painter, ViewportParams *viewport,
                        const QString& renderPos, GeoSceneLayer * layer = 0 );
 
+    QDialog *configDialog() const;
+
+    QHash<QString,QVariant> settings() const;
+
+    void setSettings( QHash<QString,QVariant> settings );
+
+private Q_SLOTS:
+   void readSettings() const;
+
+   void writeSettings();
+
  private:
     Q_DISABLE_COPY( CompassFloatItem )
 
     bool           m_isInitialized;
 
-    QSvgRenderer  *m_svgobj;
-    QPixmap        m_compass;
+    mutable QSvgRenderer  *m_svgobj;
+    mutable QPixmap        m_compass;
 
     /// allowed values: -1, 0, 1; default here: 0. FIXME: Declare enum
     int            m_polarity;
+
+    QHash<QString,QVariant> m_settings;
+    /** @todo: Refactor plugin interface to have configDialog() non-const */
+    mutable QDialog * m_configDialog;
+    mutable Ui::CompassConfigWidget * m_uiConfigWidget;
 };
 
 }

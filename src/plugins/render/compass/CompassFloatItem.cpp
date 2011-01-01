@@ -6,19 +6,22 @@
 // the source code.
 //
 // Copyright 2008 Torsten Rahn <tackat@kde.org>
+// Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
 //
 
 #include "CompassFloatItem.h"
+#include "ui_CompassConfigWidget.h"
 
 #include "MarbleDebug.h"
-#include <QtCore/QRect>
-#include <QtGui/QColor>
-#include <QtGui/QPixmap>
-#include <QtSvg/QSvgRenderer>
-
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
+
+#include <QtCore/QRect>
+#include <QtGui/QColor>
+#include <QtGui/QPixmap>
+#include <QtGui/QPushButton>
+#include <QtSvg/QSvgRenderer>
 
 namespace Marble
 {
@@ -28,7 +31,9 @@ CompassFloatItem::CompassFloatItem ( const QPointF &point, const QSizeF &size )
       m_isInitialized( false ),
       m_svgobj( 0 ),
       m_compass(),
-      m_polarity( 0 )
+      m_polarity( 0 ),
+      m_configDialog( 0 ),
+      m_uiConfigWidget( 0 )
 {
 }
 
@@ -67,11 +72,9 @@ QIcon CompassFloatItem::icon() const
     return QIcon();
 }
 
-
 void CompassFloatItem::initialize()
 {
-    m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/compass.svg" ),
-                                 this );
+    readSettings();
     m_isInitialized = true;
 }
 
@@ -149,7 +152,7 @@ void CompassFloatItem::paintContent( GeoPainter *painter,
     QSize compassSize( compassLength, compassLength ); 
 
     // Rerender compass pixmap if the size has changed
-    if ( m_compass.size() != compassSize ) {
+    if ( m_compass.isNull() || m_compass.size() != compassSize ) {
         m_compass = QPixmap( compassSize );
         m_compass.fill( Qt::transparent );
         QPainter mapPainter( &m_compass );
@@ -160,6 +163,73 @@ void CompassFloatItem::paintContent( GeoPainter *painter,
     painter->drawPixmap( QPoint( static_cast<int>( compassRect.width() - compassLength ) / 2, fontheight + 5 ), m_compass );
 
     painter->restore();
+}
+
+QDialog *CompassFloatItem::configDialog() const
+{
+    if ( !m_configDialog ) {
+        m_configDialog = new QDialog();
+        m_uiConfigWidget = new Ui::CompassConfigWidget;
+        m_uiConfigWidget->setupUi( m_configDialog );
+        readSettings();
+        connect( m_uiConfigWidget->m_buttonBox, SIGNAL( accepted() ),
+                SLOT( writeSettings() ) );
+        connect( m_uiConfigWidget->m_buttonBox, SIGNAL( rejected() ),
+                SLOT( readSettings() ) );
+        QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button( QDialogButtonBox::Apply );
+        connect( applyButton, SIGNAL( clicked() ),
+                 this,        SLOT( writeSettings() ) );
+    }
+
+    return m_configDialog;
+}
+
+QHash<QString,QVariant> CompassFloatItem::settings() const
+{
+    return m_settings;
+}
+
+void CompassFloatItem::setSettings( QHash<QString,QVariant> settings )
+{
+    m_settings = settings;
+    readSettings();
+}
+
+void CompassFloatItem::readSettings() const
+{
+    int index = m_settings.value( "theme", 0 ).toInt();
+    if ( m_uiConfigWidget && index >= 0 && index < m_uiConfigWidget->m_themeList->count() ) {
+        m_uiConfigWidget->m_themeList->setCurrentRow( index );
+    }
+
+    QString theme = ":/compass.svg";
+    switch( index ) {
+    case 1:
+        theme = ":/compass-arrows.svg";
+        break;
+    case 2:
+        theme = ":/compass-atom.svg";
+        break;
+    case 3:
+        theme = ":/compass-magnet.svg";
+        break;
+    }
+
+    delete m_svgobj;
+    /** @todo FIXME we really need to change the configDialog() const API */
+    CompassFloatItem * me = const_cast<CompassFloatItem*>( this );
+    m_svgobj = new QSvgRenderer( theme, me );
+    m_compass = QPixmap();
+}
+
+void CompassFloatItem::writeSettings()
+{
+    if ( m_uiConfigWidget ) {
+        m_settings["theme"] = m_uiConfigWidget->m_themeList->currentRow();
+    }
+    readSettings();
+    update();
+    emit settingsChanged( nameId() );
 }
 
 }

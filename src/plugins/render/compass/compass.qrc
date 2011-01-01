@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/">
+    <file>compass.svg</file>
+    <file>compass-arrows.svg</file>
+    <file>compass-atom.svg</file>
+    <file>compass-magnet.svg</file>
+  </qresource>
+</RCC>

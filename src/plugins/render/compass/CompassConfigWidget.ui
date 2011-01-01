@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CompassConfigWidget</class>
+ <widget class="QDialog" name="CompassConfigWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>365</width>
+    <height>185</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Configure Compass Plugin</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Theme</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QListWidget" name="m_themeList">
+     <property name="iconSize">
+      <size>
+       <width>64</width>
+       <height>64</height>
+      </size>
+     </property>
+     <property name="flow">
+      <enum>QListView::LeftToRight</enum>
+     </property>
+     <property name="resizeMode">
+      <enum>QListView::Adjust</enum>
+     </property>
+     <property name="viewMode">
+      <enum>QListView::IconMode</enum>
+     </property>
+     <item>
+      <property name="text">
+       <string>Default</string>
+      </property>
+      <property name="icon">
+       <iconset resource="compass.qrc">
+        <normaloff>:/compass.svg</normaloff>:/compass.svg</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Arrows</string>
+      </property>
+      <property name="icon">
+       <iconset resource="compass.qrc">
+        <normaloff>:/compass-arrows.svg</normaloff>:/compass-arrows.svg</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Atom</string>
+      </property>
+      <property name="icon">
+       <iconset resource="compass.qrc">
+        <normaloff>:/compass-atom.svg</normaloff>:/compass-atom.svg</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Magnet</string>
+      </property>
+      <property name="icon">
+       <iconset resource="compass.qrc">
+        <normaloff>:/compass-magnet.svg</normaloff>:/compass-magnet.svg</iconset>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="m_buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="compass.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>CompassConfigWidget</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>CompassConfigWidget</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
