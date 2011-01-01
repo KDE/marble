@@ -22,7 +22,6 @@ install (FILES ${BITMAP_FILES}
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bitmaps)
 
 install (FILES 
-svg/compass.svg
 svg/marble-logo.svg
 svg/marble-logo.png
 svg/marble-logo-32dpi.png
