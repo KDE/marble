@@ -91,7 +91,7 @@ ControlView::~ControlView()
 
 QString ControlView::applicationVersion()
 {
-    return "0.90 (1.0 Release Candidate 1)";
+    return "PRE 1.2 SVN";
 }
 
 void ControlView::zoomIn()
