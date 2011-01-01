@@ -6,18 +6,42 @@
 // the source code.
 //
 // Copyright 2008 Torsten Rahn <tackat@kde.org>
+// Copyright 2010 Cezar Mocan <mocancezar@gmail.com>
 //
 
 #include "CrosshairsPlugin.h"
+#include "ui_CrosshairsConfigWidget.h"
 
 #include "AbstractProjection.h"
-#include "MarbleDebug.h"
 #include "GeoPainter.h"
-
+#include "MarbleDebug.h"
+#include "MarbleDirs.h"
 #include "ViewportParams.h"
+
+#include <QtCore/QRect>
+#include <QtGui/QColor>
+#include <QtGui/QPixmap>
+#include <QtGui/QPushButton>
+#include <QtSvg/QSvgRenderer>
+
 
 namespace Marble
 {
+
+CrosshairsPlugin::CrosshairsPlugin ( )
+    : m_isInitialized( false ),
+      m_svgobj( 0 ),
+      m_configDialog( 0 ),
+      m_uiConfigWidget( 0 )
+{
+    // nothing to do
+}
+
+CrosshairsPlugin::~CrosshairsPlugin ()
+{
+    delete m_svgobj;
+}
+
 
 QStringList CrosshairsPlugin::backendTypes() const
 {
@@ -61,11 +85,83 @@ QIcon CrosshairsPlugin::icon () const
 
 void CrosshairsPlugin::initialize ()
 {
+    readSettings();
+    m_isInitialized = true;
 }
 
 bool CrosshairsPlugin::isInitialized () const
 {
-    return true;
+    return m_isInitialized;
+}
+
+QDialog *CrosshairsPlugin::configDialog() const
+{
+    if ( !m_configDialog ) {
+        m_configDialog = new QDialog();
+        m_uiConfigWidget = new Ui::CrosshairsConfigWidget;
+        m_uiConfigWidget->setupUi( m_configDialog );
+        readSettings();
+        connect( m_uiConfigWidget->m_buttonBox, SIGNAL( accepted() ),
+                SLOT( writeSettings() ) );
+        connect( m_uiConfigWidget->m_buttonBox, SIGNAL( rejected() ),
+                SLOT( readSettings() ) );
+        QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button( QDialogButtonBox::Apply );
+        connect( applyButton, SIGNAL( clicked() ),
+                 this,        SLOT( writeSettings() ) );
+    }
+
+    return m_configDialog;
+}
+
+QHash<QString,QVariant> CrosshairsPlugin::settings() const
+{
+    return m_settings;
+}
+
+void CrosshairsPlugin::setSettings( QHash<QString,QVariant> settings )
+{
+    m_settings = settings;
+    readSettings();
+}
+
+
+void CrosshairsPlugin::readSettings() const
+{
+    int index = m_settings.value( "theme", 0 ).toInt();
+    if ( m_uiConfigWidget && index >= 0 && index < m_uiConfigWidget->m_themeList->count() ) {
+        m_uiConfigWidget->m_themeList->setCurrentRow( index );
+    }
+
+    QString theme = ":/crosshairs-pointed.svg";
+    switch( index ) {
+    case 1:
+        theme = ":/crosshairs-gun1.svg";
+        break;
+    case 2:
+        theme = ":/crosshairs-gun2.svg";
+        break;
+    case 3:
+        theme = ":/crosshairs-circled.svg";
+        break;
+    case 4:
+        theme = ":/crosshairs-german.svg";
+        break;
+    }
+
+    delete m_svgobj;
+    /** @todo FIXME we really need to change the configDialog() const API */
+    CrosshairsPlugin * me = const_cast<CrosshairsPlugin*>( this );
+    m_svgobj = new QSvgRenderer( theme, me );
+    m_crosshairs = QPixmap();
+}
+
+void CrosshairsPlugin::writeSettings()
+{
+    if ( m_uiConfigWidget ) {
+        m_settings["theme"] = m_uiConfigWidget->m_themeList->currentRow();
+    }
+    readSettings();
+    emit settingsChanged( nameId() );
 }
 
 bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
@@ -75,33 +171,25 @@ bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( layer )
 
     if ( renderPos == "ALWAYS_ON_TOP" ) {
-        const int  boxwidth = 6;
-        const int  boxheight = 2;
-        const int  boxoffset = 4;
+        const int width = 21;
+        const int height = 21;
+
+        if ( m_crosshairs.isNull() ) {
+            painter->setRenderHint( QPainter::Antialiasing, true );
+            m_crosshairs = QPixmap( QSize( width, height ) );
+            m_crosshairs.fill( Qt::transparent );
+            QPainter mapPainter( &m_crosshairs );
+            mapPainter.setViewport( m_crosshairs.rect() );
+            m_svgobj->render( &mapPainter );
+            mapPainter.setViewport( QRect( QPoint( 0, 0 ), viewport->size() ) );
+        }
 
         qreal centerx = 0.0;
         qreal centery = 0.0;
         viewport->currentProjection()->screenCoordinates(viewport->focusPoint(), viewport, centerx, centery);
-
-        painter->save();
-
-        painter->setRenderHint( QPainter::Antialiasing, false );
-        painter->setPen( QColor( Qt::black ) );
-        painter->setBrush( QColor( Qt::white ) );
-        painter->drawRect( centerx - boxoffset - boxwidth, centery - 1, boxwidth, boxheight );
-        painter->drawRect( centerx + boxoffset, centery - 1, boxwidth, boxheight );
-
-        painter->drawRect( centerx - 1, centery - boxoffset - boxwidth, boxheight, boxwidth );
-        painter->drawRect( centerx - 1, centery + boxoffset, boxheight, boxwidth );
-
-    /*
-        painter->drawLine( centerx - halfsize, centery,
-                            centerx + halfsize, centery );
-        painter->drawLine( centerx, centery - halfsize,
-                            centerx, centery + halfsize );
-    */
-        painter->restore();
+        painter->drawPixmap( QPoint ( centerx - width / 2, centery - height / 2 ), m_crosshairs );
     }
+
     return true;
 }
 
