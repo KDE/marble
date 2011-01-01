@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010 Utku Aydın <utkuaydin34@gmail.com>
+// Copyright 2011 Utku Aydın <utkuaydin34@gmail.com>
 //
 
 #include "MapWizard.h"
@@ -14,11 +14,18 @@
 #include "global.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
+#include "GeoSceneHead.h"
+#include "GeoSceneIcon.h"
+#include "GeoSceneZoom.h"
+#include "GeoSceneMap.h"
+#include "GeoSceneLayer.h"
+#include "GeoSceneTexture.h"
 
 #include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QProcess>
 #include <QtCore/QSettings>
+#include <QtCore/QSharedPointer>
 #include <QtCore/QTimer>
 #include <QtCore/QTemporaryFile>
 #include <QtGui/QPixmap>
@@ -38,6 +45,10 @@ class MapWizardPrivate
 {
 public:
     Ui::MapWizard uiWidget;
+    
+    GeoSceneDocument document;
+    QString mapTheme;
+    
     QNetworkAccessManager xmlAccessManager;
     QNetworkAccessManager legendAccessManager;
     QNetworkAccessManager levelZeroAccessManager;
@@ -52,10 +63,6 @@ public:
     };
 
     mapType mapProviderType;
-    QString mapTitle;
-    QString mapTheme;
-    QString mapDescription;
-    QString mapPreview;
     QByteArray levelZero;
 
     QString wmsProtocol;
@@ -72,7 +79,6 @@ public:
     QString staticUrlQuery;
 
     QString sourceImage;
-    QString previewExtension;
     QString sourceExtension;
 
     QString dgmlOutput;
@@ -86,7 +92,7 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
     while( i.hasNext() ) {
         d->uiWidget.comboBoxStaticUrlFormat->addItem( QString( i.next() ) );
     }
-
+    
     connect( &( d->xmlAccessManager ), SIGNAL( finished( QNetworkReply* ) ), this, SLOT( parseServerCapabilities( QNetworkReply* ) ) );
     connect( &( d->legendAccessManager ), SIGNAL( finished( QNetworkReply* ) ), this, SLOT( createWmsLegend( QNetworkReply* ) ) );
     connect( &( d->levelZeroAccessManager ), SIGNAL( finished( QNetworkReply* ) ), this, SLOT( createLevelZero( QNetworkReply* ) ) );
@@ -101,7 +107,7 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
 
     connect( d->uiWidget.comboBoxWmsServer, SIGNAL( currentIndexChanged( QString ) ), d->uiWidget.lineEditWmsUrl, SLOT( setText( QString ) ) );
     connect( d->uiWidget.comboBoxWmsMap, SIGNAL( currentIndexChanged( QString ) ), this, SLOT( autoFillDetails() ) );
-
+    
     connect( d->uiWidget.lineEditTitle, SIGNAL( textChanged( QString ) ), d->uiWidget.labelSumMName, SLOT( setText( QString ) ) );
     connect( d->uiWidget.lineEditTheme, SIGNAL( textChanged( QString ) ), d->uiWidget.labelSumMTheme, SLOT( setText( QString ) ) );
 }
@@ -212,7 +218,7 @@ void MapWizard::autoFillDetails()
     d->uiWidget.lineEditTheme->setText( d->uiWidget.comboBoxWmsMap->itemData( selected ).toString() );
 }
 
-void MapWizard::createDgml()
+void MapWizard::createDgml( const GeoSceneDocument* document )
 {
     QXmlStreamWriter stream( &( d->dgmlOutput ) ) ;
     stream.setAutoFormatting( true );
@@ -223,23 +229,23 @@ void MapWizard::createDgml()
     stream.writeStartElement( "document" );
 
     stream.writeStartElement( "head" );
-    stream.writeTextElement( "name", d->mapTitle );
+    stream.writeTextElement( "name", document->head()->name() );
     stream.writeTextElement( "target", "earth" );
-    stream.writeTextElement( "theme", d->mapTheme );
-    stream.writeTextElement( "visible", "true" );
+    stream.writeTextElement( "theme", document->head()->theme() );
+    stream.writeTextElement( "visible", document->head()->visible() ? "true" : "false" );
 
     stream.writeStartElement( "icon" );
-    stream.writeAttribute( "pixmap", QString( "preview.%1" ).arg( d->previewExtension ) );
+    stream.writeAttribute( "pixmap", document->head()->icon()->pixmap() );
     stream.writeEndElement();
 
     stream.writeStartElement( "description" );
-    stream.writeCDATA( d->mapDescription );
+    stream.writeCDATA( document->head()->description() );
     stream.writeEndElement();
 
     stream.writeStartElement( "zoom" );
-    stream.writeTextElement( "discrete", "false" );
-    stream.writeTextElement( "minimum", "900" );
-    stream.writeTextElement( "maximum", "3500" );
+    stream.writeTextElement( "discrete", document->head()->zoom()->discrete() ? "true" : "false" );
+    stream.writeTextElement( "minimum", QString::number( document->head()->zoom()->minimum() ) );
+    stream.writeTextElement( "maximum", QString::number( document->head()->zoom()->maximum() ) );
     stream.writeEndElement(); // zoom
     stream.writeEndElement(); // head
 
@@ -250,7 +256,7 @@ void MapWizard::createDgml()
     stream.writeEndElement(); // target
 
     stream.writeStartElement( "layer" );
-    stream.writeAttribute( "name", d->mapTheme );
+    stream.writeAttribute( "name", document->head()->theme() );
     stream.writeAttribute( "backend", "texture" );
     stream.writeStartElement( "texture" );
     stream.writeAttribute( "name", "map" );
@@ -269,7 +275,7 @@ void MapWizard::createDgml()
         stream.writeAttribute( "format", d->uiWidget.comboBoxStaticUrlFormat->currentText() );
     }
 
-    stream.writeCharacters( QString( "earth/%1" ).arg( d->mapTheme ) );
+    stream.writeCharacters( QString( "earth/%1" ).arg( document->head()->theme() ) );
     stream.writeEndElement(); // sourcedir
 
     if( d->mapProviderType == MapWizardPrivate::WmsMap )
@@ -328,7 +334,7 @@ void MapWizard::createDgml()
     }
 
     else if( d->mapProviderType == MapWizardPrivate::StaticImageMap ) {
-        stream.writeTextElement( "installmap", QString( "%1.%2" ).arg( d->mapTheme ).arg( d->sourceExtension ) );
+        stream.writeTextElement( "installmap", QString( "%1.%2" ).arg( document->head()->theme() ).arg( d->sourceExtension ) );
     }
 
     stream.writeEndElement(); // texture
@@ -376,9 +382,11 @@ bool MapWizard::createFiles()
         }
 
         // Preview image
-        d->previewExtension = d->mapPreview.right( d->mapPreview.length() - d->mapPreview.lastIndexOf( '.' ) - 1 ) ;
-        QFile previewImage( d->mapPreview );
-        previewImage.copy( QString( "%1/%2/preview.%3" ).arg( maps.absolutePath() ).arg( d->mapTheme ).arg( d->previewExtension ) );
+        QString pixmapPath = d->uiWidget.lineEditPreview->text();
+        QString extension = pixmapPath.right( pixmapPath.length() - pixmapPath.lastIndexOf( '.' ) - 1 );
+        
+        QFile previewImage( pixmapPath );
+        previewImage.copy( QString( "%1/%2/preview.%3" ).arg( maps.absolutePath() ).arg( d->mapTheme ).arg( extension ) );
 
         // DGML
         QFile file( QString( "%1/%2/%2.dgml" ).arg( maps.absolutePath() ).arg( d->mapTheme ) );
@@ -710,15 +718,73 @@ void MapWizard::suggestPreviewImage()
     }
 }
 
+GeoSceneDocument* MapWizard::createDocument()
+{
+    GeoSceneDocument *document = new GeoSceneDocument;
+       
+    GeoSceneHead *head = document->head();
+    head->setName( d->uiWidget.lineEditTitle->text() );
+    head->setTheme( d->uiWidget.lineEditTheme->text() );
+    head->setDescription( d->uiWidget.textEditDesc->document()->toHtml() );
+    head->setVisible( true );
+        
+    GeoSceneIcon *icon = head->icon();
+    QString pixmapPath = d->uiWidget.lineEditPreview->text();
+    QString pixmapExtension = pixmapPath.right( pixmapPath.length() - pixmapPath.lastIndexOf( '.' ) - 1 );
+    icon->setPixmap( QString( "preview.%1" ).arg( pixmapExtension ) );
+    
+    GeoSceneZoom *zoom = head->zoom();
+    zoom->setMinimum( 900 );
+    zoom->setMaximum( 3500 );
+    zoom->setDiscrete( false );
+    
+    GeoSceneTexture *texture = new GeoSceneTexture( "map" );
+    texture->setExpire( 31536000 );
+    texture->setStorageLayout( GeoSceneTexture::Marble );
+    texture->setProjection( GeoSceneTexture::Equirectangular );
+    texture->setSourceDir( "earth/" + document->head()->theme() ); 
+    QUrl downloadUrl;
+    if( d->mapProviderType == MapWizardPrivate::WmsMap )
+    {
+        texture->setFileFormat( d->wmsFormat );
+        QString layer = d->uiWidget.comboBoxWmsMap->itemData( d->uiWidget.comboBoxWmsMap->currentIndex() ).toString();
+        downloadUrl = QUrl( d->uiWidget.lineEditWmsUrl->text() );
+        downloadUrl.addQueryItem( "layers", layer );
+        texture->addDownloadUrl( downloadUrl );
+    }
+    
+    else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
+    {
+        texture->setFileFormat( d->uiWidget.comboBoxStaticUrlFormat->currentText() );
+        downloadUrl = QUrl( d->uiWidget.lineEditStaticUrlServer->text() );
+        texture->addDownloadPolicy( DownloadBrowse, 20 );
+        texture->addDownloadPolicy( DownloadBulk, 2 );
+        texture->addDownloadUrl( downloadUrl );
+    }
+    
+    else if( d->mapProviderType == MapWizardPrivate::StaticImageMap )
+    {
+        QString image = d->uiWidget.lineEditSource->text();
+        QString extension = image.right( image.length() - image.lastIndexOf( '.' ) - 1 );
+        texture->setFileFormat( extension );
+        texture->setInstallMap( document->head()->theme() + d->sourceExtension );
+    }
+    
+    GeoSceneLayer *layer = new GeoSceneLayer( d->uiWidget.lineEditTheme->text() );
+    layer->setBackend( "texture" );
+    layer->addDataset( texture );
+    
+    GeoSceneMap *map = document->map();
+    map->addLayer( layer );    
+    return document;
+}
+
 void MapWizard::accept()
 {
-    d->mapTitle = d->uiWidget.lineEditTitle->text();
-    d->mapTheme = d->uiWidget.lineEditTheme->text();
-    d->mapDescription = d->uiWidget.textEditDesc->document()->toHtml();
+    QSharedPointer<GeoSceneDocument> document( createDocument() );
+    d->mapTheme = document->head()->theme();
     d->sourceImage = d->uiWidget.lineEditSource->text();
-    d->mapPreview = d->uiWidget.lineEditPreview->text();
     d->sourceExtension = d->sourceImage.right( d->sourceImage.length() - d->sourceImage.lastIndexOf( '.' ) - 1 );
-    d->previewExtension = d->mapPreview.right( d->mapPreview.length() - d->mapPreview.lastIndexOf( '.' ) - 1 );
 
     QString wmsUrl = d->uiWidget.lineEditWmsUrl->text();
 
@@ -754,7 +820,9 @@ void MapWizard::accept()
         return;
     }
 
-    if( !d->mapTitle.isEmpty() && !d->mapDescription.isEmpty() && !d->mapDescription.isEmpty() && !d->mapPreview.isEmpty() )
+    if( !document->head()->name().isEmpty() && 
+        !document->head()->description().isEmpty() && 
+        !d->uiWidget.lineEditPreview->text().isEmpty() )
     {
         if( d->mapProviderType == MapWizardPrivate::StaticImageMap && !QFile( d->sourceImage ).exists() )
         {
@@ -762,13 +830,13 @@ void MapWizard::accept()
             return;
         }
 
-        if( !QFile( d->mapPreview ).exists() )
+        if( !QFile( d->uiWidget.lineEditPreview->text() ).exists() )
         {
             QMessageBox::critical( this, tr( "File not found" ), tr( "Preview image is not found." ) );
             return;
         }
-
-        createDgml();
+        
+        createDgml( document.data() );
 
         if( createFiles() )
         {

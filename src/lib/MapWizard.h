@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010 Utku Aydın <utkuaydin34@gmail.com>
+// Copyright 2011 Utku Aydın <utkuaydin34@gmail.com>
 //
 
 #ifndef MARBLE_MAPWIZARD_H
@@ -16,6 +16,7 @@
 #include <QtNetwork/QNetworkReply>
 
 #include "marble_export.h"
+#include "GeoSceneDocument.h"
 
 /**
  * @file
@@ -64,7 +65,8 @@ public slots:
     void suggestPreviewImage();
 
 private:
-    void createDgml();
+    GeoSceneDocument* createDocument();
+    void createDgml( const GeoSceneDocument* document );
     bool createFiles();
     void createLegendHtml();
     void createLegend();
