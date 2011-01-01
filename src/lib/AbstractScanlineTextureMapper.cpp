@@ -58,14 +58,14 @@ void AbstractScanlineTextureMapper::setRadius( int radius )
     // As our tile resolution doubles with each level we calculate
     // the tile level from tilesize and the globe radius via log(2)
 
-    qreal  linearLevel = ( 2.0 * (qreal)( radius )
+    qreal  linearLevel = ( 4.0 * (qreal)( radius )
                                / (qreal)( m_tileSize.width() ) );
     int     tileLevel   = 0;
 
     if ( linearLevel < 1.0 )
         linearLevel = 1.0; // Dirty fix for invalid entry linearLevel
 
-    qreal tileLevelF = log( linearLevel ) / log( 2.0 ) + 1.0;
+    qreal tileLevelF = log( linearLevel ) / log( 2.0 );
     tileLevel = (int)( tileLevelF );
 
 //    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
@@ -73,27 +73,29 @@ void AbstractScanlineTextureMapper::setRadius( int radius )
     if ( tileLevel > m_tileLoader->maximumTileLevel() )
         tileLevel = m_tileLoader->maximumTileLevel();
 
-    if ( tileLevel != m_tileLevel ) {
+    const bool changedTileLevel = tileLevel != m_tileLevel;
+
+    //    mDebug() << "Texture Level was set to: " << tileLevel;
+    m_tileLevel = tileLevel;
+
+    m_globalWidth = m_tileSize.width() * m_tileLoader->tileColumnCount( m_tileLevel );
+    m_normGlobalWidth = (qreal)( m_globalWidth / ( 2 * M_PI ) );
+
+    m_globalHeight = m_tileSize.height() * m_tileLoader->tileRowCount( m_tileLevel );
+    m_normGlobalHeight = (qreal)( m_globalHeight /  M_PI );
+
+    m_maxGlobalX = m_globalWidth  - 1;
+    m_maxGlobalY = m_globalHeight - 1;
+
+    // These variables move the origin of global texture coordinates from 
+    // the center to the upper left corner and subtract the tile position 
+    // in that coordinate system. In total this equals a coordinate 
+    // transformation to tile coordinates.
+    m_toTileCoordinatesLon = (qreal)(m_globalWidth / 2 - m_tilePosX);
+    m_toTileCoordinatesLat = (qreal)(m_globalHeight / 2 - m_tilePosY);
+
+    if ( changedTileLevel ) {
         m_tileLoader->flush();
-
-        //    mDebug() << "Texture Level was set to: " << tileLevel;
-        m_tileLevel = tileLevel;
-
-        m_globalWidth = m_tileSize.width() * m_tileLoader->tileColumnCount( m_tileLevel );
-        m_normGlobalWidth = (qreal)( m_globalWidth / ( 2 * M_PI ) );
-
-        m_globalHeight = m_tileSize.height() * m_tileLoader->tileRowCount( m_tileLevel );
-        m_normGlobalHeight = (qreal)( m_globalHeight /  M_PI );
-
-        m_maxGlobalX = m_globalWidth  - 1;
-        m_maxGlobalY = m_globalHeight - 1;
-
-        // These variables move the origin of global texture coordinates from 
-        // the center to the upper left corner and subtract the tile position 
-        // in that coordinate system. In total this equals a coordinate 
-        // transformation to tile coordinates.
-        m_toTileCoordinatesLon = (qreal)(m_globalWidth / 2 - m_tilePosX);
-        m_toTileCoordinatesLat = (qreal)(m_globalHeight / 2 - m_tilePosY);
 
         emit tileLevelChanged( m_tileLevel );
     }
