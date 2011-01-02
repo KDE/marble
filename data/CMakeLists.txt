@@ -127,6 +127,10 @@ maps/earth/openstreetmap/0/0/0.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap/0/0)
 
 install (FILES
+maps/earth/hillshading/0/0/0.png
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/hillshading/0/0)
+
+install (FILES
 maps/earth/temp-july/temp-july.jpg
 maps/earth/temp-july/temp-july-preview.png
 maps/earth/temp-july/temp-july.dgml

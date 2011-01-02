@@ -32,6 +32,13 @@
                     <downloadPolicy usage="Browse" maximumConnections="20" />
                     <downloadPolicy usage="Bulk" maximumConnections="2" />
                 </texture>
+                <texture name="hillshading" expire="31536000" >
+                    <sourcedir format="PNG"> earth/hillshading </sourcedir>
+                    <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="17" mode="OpenStreetMap" />
+                    <projection name="Mercator" />
+                    <downloadUrl protocol="http" host="toolserver.org" path="/~cmarqu/hill/" />
+                    <blending name="AlphaBlending" />
+                </texture>
             </layer>
             <layer name="standardplaces" backend="geodata">
                <geodata name="cityplacemarks">
@@ -92,8 +99,26 @@
                     <available>false</available>
                 </property>
             </group>
+            <group name="Texture Layers">
+                <property name="hillshading">
+                    <value>false</value>
+                    <available>true</available>
+                </property>
+            </group>
         </settings>
         <legend>
+            <section>
+                <heading>Guides</heading>
+            </section>
+
+            <section name="coordinate-grid" checkable="true" connect="coordinate-grid"  spacing="12">
+                <heading>Coordinate Grid</heading>
+            </section>
+
+            <section name="hillshading" checkable="true" connect="hillshading" spacing="12">
+                <heading>Hillshading</heading>
+            </section>
+
             <section name="traffic" checkable="false" spacing="12">
                 <heading>Transportation</heading>
 
@@ -276,10 +301,6 @@
                     <icon pixmap="maps/earth/openstreetmap/legend/summitpeak.png"/>
                     <text>Summit, peak</text>
                 </item>
-            </section>
-
-            <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
-                <heading>Coordinate Grid</heading>
             </section>
         </legend>
     </document>
