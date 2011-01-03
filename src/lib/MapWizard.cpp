@@ -72,6 +72,7 @@ public:
 
     mapType mapProviderType;
     QByteArray levelZero;
+    QImage previewImage;
 
     QString wmsProtocol;
     QString wmsHost;
@@ -97,7 +98,16 @@ void MapWizardPrivate::pageEntered( int id )
     if ( id == 1 ) {
         m_serverCapabilitiesValid = false;
     } else if ( id == 2 ) {
-        levelZero = QImage();
+        levelZero.clear();
+    } else if ( id == 5 ) {
+        if ( mapProviderType == MapWizardPrivate::StaticImageMap ) {
+            previewImage = QImage( uiWidget.lineEditSource->text() ).scaled( 136, 136, Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
+        } else {
+            previewImage = QImage::fromData( levelZero ).scaled( 136, 136, Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
+        }
+        uiWidget.labelPreview->setPixmap( QPixmap::fromImage( previewImage ) );
+    } else if ( id == 6 ) {
+        uiWidget.labelThumbnail->setPixmap( QPixmap::fromImage( previewImage ) );
     }
 }
 
@@ -121,7 +131,6 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
     connect( d->uiWidget.pushButtonLegend, SIGNAL( clicked( bool ) ), this, SLOT( queryLegendImage() ) );
     connect( d->uiWidget.pushButtonStaticUrlLegend, SIGNAL( clicked( bool ) ), this, SLOT( queryStaticUrlLegendImage() ) );
     connect( d->uiWidget.pushButtonStaticUrlTest, SIGNAL( clicked( bool ) ), this, SLOT( downloadLevelZero() ) );
-    connect( d->uiWidget.pushButtonSuggest, SIGNAL( clicked( bool ) ), this, SLOT( downloadLevelZero() ) );
 
     connect( d->uiWidget.comboBoxWmsServer, SIGNAL( currentIndexChanged( QString ) ), d->uiWidget.lineEditWmsUrl, SLOT( setText( QString ) ) );
     connect( d->uiWidget.comboBoxWmsMap, SIGNAL( currentIndexChanged( QString ) ), this, SLOT( autoFillDetails() ) );
@@ -149,6 +158,8 @@ void MapWizard::queryServerCapabilities()
 
 void MapWizard::parseServerCapabilities( QNetworkReply* reply )
 {
+    button( MapWizard::NextButton )->setEnabled( true );
+
     QString result( reply->readAll() );
     QDomDocument xml;
     if( !xml.setContent( result ) )
@@ -413,11 +424,10 @@ bool MapWizard::createFiles( const GeoSceneHead* head )
         }
 
         // Preview image
-        QString pixmapPath = d->uiWidget.lineEditPreview->text();
-        QImage previewImage = QImage( pixmapPath ).scaled( 136, 136, Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
-        previewImage.save( QString( "%1/%2/%3" ).arg( maps.absolutePath() )
-                                                .arg( head->theme() )
-                                                .arg( head->icon()->pixmap() ) );
+        QString pixmapPath = QString( "%1/%2/%3" ).arg( maps.absolutePath() )
+                                                  .arg( head->theme() )
+                                                  .arg( head->icon()->pixmap() );
+        d->previewImage.save( pixmapPath );
 
         // DGML
         QFile file( QString( "%1/%2/%2.dgml" ).arg( maps.absolutePath() )
@@ -510,37 +520,39 @@ void MapWizard::downloadLevelZero()
         QNetworkRequest request( downloadUrl );
         d->levelZeroAccessManager.get( request );
     }
-    
-    else if( d->mapProviderType == MapWizardPrivate::StaticImageMap ){
-        suggestPreviewImage();
-    }
 }
 
 void MapWizard::createLevelZero( QNetworkReply* reply )
 {
+    button( MapWizard::NextButton )->setEnabled( true );
+
     d->levelZero = reply->readAll();
+    QImage testImage = QImage::fromData( d->levelZero );
 
     if ( d->mapProviderType == MapWizardPrivate::WmsMap )
     {
         if ( d->levelZero.isNull() ) {
             QMessageBox::information( this,
                                       tr( "Base Tile" ),
-                                      tr( "The base tile could not be downloaded. The server replied:\n\n%1" ).arg( QString( result ) ) );
-        } else if ( currentId() == 2 ) {
+                                      tr( "The base tile could not be downloaded." ) );
+        }
+        else if ( testImage.isNull() ) {
+            QMessageBox::information( this,
+                                      tr( "Base Tile" ),
+                                      tr( "The base tile could not be downloaded successfully. The server replied:\n\n%1" ).arg( QString( d->levelZero ) ) );
+        }
+        else {
             next();
         }
     }
 
     if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
     {
-        QImage testImage = QImage::fromData( d->levelZero );
         if ( !testImage.isNull() ) {
             QImage levelZero = testImage.scaled( d->uiWidget.labelStaticUrlTest->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation );
             d->uiWidget.labelStaticUrlTest->setPixmap( QPixmap::fromImage( levelZero ) );
         }
     }
-
-    suggestPreviewImage();
 }
 
 void MapWizard::createLegend()
@@ -573,10 +585,10 @@ void MapWizard::querySourceImage()
 void MapWizard::queryPreviewImage()
 {
     QString fileName = QFileDialog::getOpenFileName();
-    d->uiWidget.lineEditPreview->setText( fileName );
+    d->previewImage = QImage( fileName );
 
-    QPixmap preview( fileName );
-    d->uiWidget.labelThumbnail->setPixmap( QPixmap( fileName ) );
+    QPixmap preview = QPixmap::fromImage( d->previewImage );
+    d->uiWidget.labelThumbnail->setPixmap( preview );
     d->uiWidget.labelThumbnail->resize( preview.width(), preview.height() );
 }
 
@@ -665,11 +677,18 @@ bool MapWizard::validateCurrentPage()
 {
     if ( currentId() == 1 && !d->m_serverCapabilitiesValid ) {
         queryServerCapabilities();
+        button( MapWizard::NextButton )->setEnabled( false );
         return false;
     }
 
     if ( currentId() == 2 && d->levelZero.isNull() ) {
         downloadLevelZero();
+        button( MapWizard::NextButton )->setEnabled( false );
+        return false;
+    }
+
+    if ( currentId() == 5 && d->previewImage.isNull() ) {
+        QMessageBox::information( this, tr( "Preview Image" ), tr( "Please specify a preview image." ) );
         return false;
     }
 
@@ -711,57 +730,6 @@ int MapWizard::nextId() const
     }
     
     return currentId() + 1;
-}
-
-void MapWizard::suggestPreviewImage()
-{
-    if( currentId() == 4 )
-    {
-        QPointer<QDialog> dialog = new QDialog;
-        QPixmap pixmap;
-        if( d->mapProviderType == MapWizardPrivate::StaticImageMap ) {
-            pixmap = QPixmap( d->uiWidget.lineEditSource->text() );
-        } else if ( d->mapProviderType == MapWizardPrivate::WmsMap || d->mapProviderType == MapWizardPrivate::StaticUrlMap ){
-            pixmap.loadFromData( d->levelZero );
-        }
-
-        QLabel *previewImage = new QLabel();
-        previewImage->setPixmap( pixmap.scaled( 136, 136, Qt::KeepAspectRatio, Qt::SmoothTransformation ) );
-
-        QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok | QDialogButtonBox::Cancel );
-        connect( buttonBox, SIGNAL( accepted() ), dialog, SLOT( accept() ) );
-        connect( buttonBox, SIGNAL( rejected() ), dialog, SLOT( reject() ) );
-
-        QGridLayout *grid = new QGridLayout();
-        grid->addWidget( previewImage );
-        grid->addWidget( buttonBox );
-
-        dialog->setLayout( grid );
-        if( dialog->exec() )
-        {
-
-            QTemporaryFile tempFile;
-            tempFile.open();
-
-            if( d->mapProviderType == MapWizardPrivate::StaticImageMap )
-            {
-                QImage tempPreview = pixmap.toImage();
-                tempPreview.save( tempFile.fileName() + ".png" );
-                d->uiWidget.lineEditPreview->setText( tempFile.fileName() + ".png" );
-            }
-
-            else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap ||
-                     d->mapProviderType == MapWizardPrivate::WmsMap )
-            {
-                QImage tempPreview = QImage::fromData( d->levelZero );
-                tempPreview.save( tempFile.fileName() + ".png" );
-                d->uiWidget.lineEditPreview->setText( tempFile.fileName() + ".png" );
-            }
-
-            d->uiWidget.labelThumbnail->setPixmap( pixmap.scaled( 136, 136, Qt::KeepAspectRatio, Qt::SmoothTransformation ) );
-        }
-        delete dialog;
-    }
 }
 
 GeoSceneDocument* MapWizard::createDocument()
@@ -880,8 +848,7 @@ void MapWizard::accept()
     }
 
     if( !document->head()->name().isEmpty() && 
-        !document->head()->description().isEmpty() && 
-        !d->uiWidget.lineEditPreview->text().isEmpty() )
+        !document->head()->description().isEmpty() )
     {
         if( d->mapProviderType == MapWizardPrivate::StaticImageMap && !QFile( d->sourceImage ).exists() )
         {
@@ -889,12 +856,6 @@ void MapWizard::accept()
             return;
         }
 
-        if( !QFile( d->uiWidget.lineEditPreview->text() ).exists() )
-        {
-            QMessageBox::critical( this, tr( "File not found" ), tr( "Preview image is not found." ) );
-            return;
-        }
-        
         createDgml( document.data() );
 
         if( createFiles( document->head() ) )
@@ -911,7 +872,7 @@ void MapWizard::accept()
             d->uiWidget.lineEditTitle->clear();
             d->uiWidget.lineEditTheme->clear();
             d->uiWidget.textEditDesc->clear();
-            d->uiWidget.lineEditPreview->clear();
+            d->uiWidget.labelPreview->clear();
             d->uiWidget.lineEditSource->clear();
             d->dgmlOutput = QString();
             QTimer::singleShot( 0, this, SLOT( restart() ) );
