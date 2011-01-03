@@ -23,6 +23,7 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "StackedTileLoader.h"
+#include "TextureColorizer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
@@ -39,7 +40,7 @@ MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( StackedTileLoader 
 }
 
 
-void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
+void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer )
 {
     QImage       *canvasImage = viewParams->canvasImage();
     const int imageHeight = canvasImage->height();
@@ -196,6 +197,10 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     m_oldYPaintedTop = yPaintedTop;
 
     m_tileLoader->cleanupTilehash();
+
+    if ( texColorizer ) {
+        texColorizer->colorize( viewParams );
+    }
 }
 
 

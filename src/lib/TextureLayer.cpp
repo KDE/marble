@@ -154,11 +154,7 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
 
     if ( d->m_justModified ) {
         // Create the height map image a.k.a viewParams->d->m_canvasImage.
-        d->m_texmapper->mapTexture( viewParams );
-
-        if ( d->m_texcolorizer ) {
-            d->m_texcolorizer->colorize( viewParams );
-        }
+        d->m_texmapper->mapTexture( viewParams, d->m_texcolorizer );
 
         d->m_justModified = false;
     }

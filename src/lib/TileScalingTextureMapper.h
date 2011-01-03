@@ -24,7 +24,7 @@ class TileScalingTextureMapper : public AbstractScanlineTextureMapper
  public:
     TileScalingTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
 
-    void mapTexture( ViewParams *viewParams );
+    void mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer );
 
   private:
     int m_oldYPaintedTop;
