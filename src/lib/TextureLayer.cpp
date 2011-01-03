@@ -51,20 +51,20 @@ public:
 
 public:
     TextureLayer  *const m_parent;
-    TextureColorizer     m_texcolorizer;
     TileLoader           m_loader;
     StackedTileLoader    m_tileLoader;
     AbstractScanlineTextureMapper *m_texmapper;
+    TextureColorizer              *m_texcolorizer;
     GeoSceneDocument              *m_mapTheme;
     bool m_justModified;
 };
 
 TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator, TextureLayer *parent )
     : m_parent( parent )
-    , m_texcolorizer()
     , m_loader( downloadManager, mapThemeManager )
     , m_tileLoader( &m_loader, sunLocator )
     , m_texmapper( 0 )
+    , m_texcolorizer( 0 )
     , m_mapTheme( 0 )
     , m_justModified( true )
 {
@@ -134,7 +134,6 @@ TextureLayer::TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManage
     : QObject()
     , d( new Private( mapThemeManager, downloadManager, sunLocator, this ) )
 {
-    connect( &d->m_texcolorizer, SIGNAL( datasetLoaded() ), SLOT( mapChanged() ) );
     connect( &d->m_tileLoader, SIGNAL( tileUpdateAvailable() ), SLOT( mapChanged() ) );
 }
 
@@ -154,26 +153,12 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
 
     if ( redrawBackground ) {
         if ( d->m_mapTheme->map()->hasTextureLayers() ) {
-            // FIXME: Remove this once the LMC is there:
-            QString themeID = d->m_mapTheme->head()->theme();
-
-            GeoSceneLayer *layer =
-                static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
-
             // Create the height map image a.k.a viewParams->d->m_canvasImage.
             d->m_texmapper->mapTexture( viewParams );
 
-            if ( !viewParams->showElevationModel()
-                && layer->role() == "dem"
-                && !d->m_mapTheme->map()->filters().isEmpty() ) {
-
-                // Colorize using settings from when the map was loaded
-                // there's no need to check the palette because it's set with the map theme
-                GeoSceneFilter *filter= d->m_mapTheme->map()->filters().first();
-                if( filter->type() == "colorize" ) {
-                    d->m_texcolorizer.colorize( viewParams );
-                }
-            } //else { mDebug() << "No filters to act on..."; }
+            if ( d->m_texcolorizer ) {
+                d->m_texcolorizer->colorize( viewParams );
+            }
         }
     }
 
@@ -284,6 +269,8 @@ void TextureLayer::setMapTheme(GeoSceneDocument* mapTheme)
     }
     d->updateTextureLayers();
 
+    delete d->m_texcolorizer;
+    d->m_texcolorizer = 0;
     if( !d->m_mapTheme->map()->filters().isEmpty() ) {
         GeoSceneFilter *filter= d->m_mapTheme->map()->filters().first();
 
@@ -304,7 +291,8 @@ void TextureLayer::setMapTheme(GeoSceneDocument* mapTheme)
             if(landfile.isEmpty())
                 landfile = MarbleDirs::path( "landcolors.leg" );
 
-            d->m_texcolorizer.setSeaFileLandFile( seafile, landfile );
+            d->m_texcolorizer = new TextureColorizer( seafile, landfile, this );
+            connect( d->m_texcolorizer, SIGNAL( datasetLoaded() ), SLOT( mapChanged() ) );
         }
     }
 }
