@@ -14,6 +14,7 @@
 #include "global.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
+#include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneIcon.h"
 #include "GeoSceneZoom.h"
@@ -24,7 +25,6 @@
 #include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QProcess>
-#include <QtCore/QSettings>
 #include <QtCore/QSharedPointer>
 #include <QtCore/QTimer>
 #include <QtCore/QTemporaryFile>
@@ -35,8 +35,10 @@
 #include <QtGui/QImageReader>
 #include <QtGui/QDialogButtonBox>
 #include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkRequest>
 #include <QtXml/QDomElement>
+#include <QtXml/QXmlStreamWriter>
 
 namespace Marble
 {
@@ -45,10 +47,9 @@ class MapWizardPrivate
 {
 public:
     Ui::MapWizard uiWidget;
-    
-    GeoSceneDocument document;
+
     QString mapTheme;
-    
+
     QNetworkAccessManager xmlAccessManager;
     QNetworkAccessManager legendAccessManager;
     QNetworkAccessManager levelZeroAccessManager;
@@ -349,47 +350,56 @@ void MapWizard::createDgml( const GeoSceneDocument* document )
     stream.writeEndDocument();
 }
 
-bool MapWizard::createFiles()
+bool MapWizard::createFiles( const GeoSceneHead* head )
 {
     // Create directories
     QDir maps( MarbleDirs::localPath() + "/maps/earth/" );
-    if( !maps.exists( d->mapTheme ) )
+    if( !maps.exists( head->theme() ) )
     {
-        maps.mkdir( d->mapTheme );
+        maps.mkdir( head->theme() );
 
         if( d->mapProviderType == MapWizardPrivate::StaticImageMap )
         {
             // Source image
             QFile sourceImage( d->sourceImage );
             d->sourceExtension = d->sourceImage.right( d->sourceImage.length() - d->sourceImage.lastIndexOf( '.' ) - 1 );
-            sourceImage.copy( QString( "%1/%2/%2.%3" ).arg( maps.absolutePath() ).arg( d->mapTheme ).arg( d->sourceExtension ) );
+            sourceImage.copy( QString( "%1/%2/%2.%3" ).arg( maps.absolutePath() )
+                                                      .arg( head->theme() )
+                                                      .arg( d->sourceExtension ) );
         }
 
         else if( d->mapProviderType == MapWizardPrivate::WmsMap )
         {
-            maps.mkdir( QString( "%1/0/" ).arg( d->mapTheme ) );
-            maps.mkdir( QString( "%1/0/0" ).arg( d->mapTheme ) );
+            maps.mkdir( QString( "%1/0/" ).arg( head->theme() ) );
+            maps.mkdir( QString( "%1/0/0" ).arg( head->theme() ) );
             QImage baseTile = QImage::fromData( d->levelZero, d->wmsFormat.toAscii().data() );
-            baseTile.save( QString( "%1/%2/0/0/0.%3" ).arg( maps.absolutePath() ).arg( d->mapTheme ).arg( d->wmsFormat ) );
+            baseTile.save( QString( "%1/%2/0/0/0.%3" ).arg( maps.absolutePath() )
+                                                      .arg( head->theme() )
+                                                      .arg( d->wmsFormat ) );
         }
 
         else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
         {
-            maps.mkdir( QString( "%1/0/" ).arg( d->mapTheme ) );
-            maps.mkdir( QString( "%1/0/0" ).arg( d->mapTheme ) );
+            maps.mkdir( QString( "%1/0/" ).arg( head->theme() ) );
+            maps.mkdir( QString( "%1/0/0" ).arg( head->theme() ) );
             QImage baseTile( 256, 256, QImage::Format_RGB32 );
-            baseTile.save( QString( "%1/%2/0/0/0.%3" ).arg( maps.absolutePath() ).arg( d->mapTheme ).arg( d->uiWidget.comboBoxStaticUrlFormat->currentText() ) );
+            baseTile.save( QString( "%1/%2/0/0/0.%3" ).arg( maps.absolutePath() )
+                                                      .arg( head->theme() )
+                                                      .arg( d->uiWidget.comboBoxStaticUrlFormat->currentText() ) );
         }
 
         // Preview image
         QString pixmapPath = d->uiWidget.lineEditPreview->text();
         QString extension = pixmapPath.right( pixmapPath.length() - pixmapPath.lastIndexOf( '.' ) - 1 );
-        
+
         QFile previewImage( pixmapPath );
-        previewImage.copy( QString( "%1/%2/preview.%3" ).arg( maps.absolutePath() ).arg( d->mapTheme ).arg( extension ) );
+        previewImage.copy( QString( "%1/%2/preview.%3" ).arg( maps.absolutePath() )
+                                                        .arg( head->theme() )
+                                                        .arg( extension ) );
 
         // DGML
-        QFile file( QString( "%1/%2/%2.dgml" ).arg( maps.absolutePath() ).arg( d->mapTheme ) );
+        QFile file( QString( "%1/%2/%2.dgml" ).arg( maps.absolutePath() )
+                                              .arg( head->theme() ) );
         file.open( QIODevice::ReadWrite );
         file.write( d->dgmlOutput.toAscii().data() );
         file.close();
@@ -838,7 +848,7 @@ void MapWizard::accept()
         
         createDgml( document.data() );
 
-        if( createFiles() )
+        if( createFiles( document->head() ) )
         {
             if( d->mapProviderType == MapWizardPrivate::WmsMap )
             {

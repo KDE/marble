@@ -12,11 +12,8 @@
 #define MARBLE_MAPWIZARD_H
 
 #include <QtGui/QWizard>
-#include <QtXml/QXmlStreamWriter>
-#include <QtNetwork/QNetworkReply>
 
 #include "marble_export.h"
-#include "GeoSceneDocument.h"
 
 /**
  * @file
@@ -24,7 +21,12 @@
  * @author Utku Aydın <utkuaydin34@gmail.com>
  */
 
+class QNetworkReply;
+
 namespace Marble {
+
+class GeoSceneDocument;
+class GeoSceneHead;
 
 class MapWizardPrivate;
 
@@ -67,7 +69,7 @@ public slots:
 private:
     GeoSceneDocument* createDocument();
     void createDgml( const GeoSceneDocument* document );
-    bool createFiles();
+    bool createFiles( const GeoSceneHead* head );
     void createLegendHtml();
     void createLegend();
     void downloadLegend( const QString url );
