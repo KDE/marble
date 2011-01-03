@@ -33,20 +33,34 @@
 namespace Marble
 {
 
-typedef struct
+class EmbossFifo
 {
+public:
+    EmbossFifo()
+        : x1( 0 )
+        , x2( 0 )
+        , x3( 0 )
+        , x4( 0 )
+    {}
+
+    inline uchar head() const { return x1; }
+
+    inline EmbossFifo &operator<<( uchar value )
+    {
+        x1 = x2;
+        x2 = x3;
+        x3 = x4;
+        x4 = value;
+
+        return *this;
+    }
+
+private:
     uchar  x1;
     uchar  x2;
     uchar  x3;
     uchar  x4;
-} GpUint;
-
-
-typedef union
-{
-    uint    buffer;
-    GpUint  gpuint;
-} GpFifo;
+};
 
 
 TextureColorizer::TextureColorizer( QObject *parent )
@@ -95,8 +109,6 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     // const uint glaciercolor = qRgb(200,200,200);
 
     int     bump = 8;
-    GpFifo  emboss;
-    emboss.buffer = 0;
 
     bool showRelief;
     viewParams->mapTheme()->settings()->propertyValue( "relief", showRelief );
@@ -139,8 +151,8 @@ void TextureColorizer::colorize(ViewParams *viewParams)
             uchar *readDataStart     = origimg->scanLine( y );
             const uchar *readDataEnd = readDataStart + imgwidth*4;
 
-            emboss.buffer = 0;
-        
+            EmbossFifo  emboss;
+
             for ( uchar* readData = readDataStart; 
                   readData < readDataEnd;
                   readData += 4, ++writeData, ++coastData )
@@ -150,9 +162,8 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 uchar&  grey = *readData; // qBlue(*data);
 
                 if ( showRelief ) {
-                    emboss.gpuint.x4 = grey;
-                    emboss.buffer = emboss.buffer >> 8;
-                    bump = ( emboss.gpuint.x1 + 8 - grey );
+                    emboss << grey;
+                    bump = ( emboss.head() + 8 - grey );
                     if ( bump  < 0 )  bump = 0;
                     if ( bump  > 15 ) bump = 15;
                 }
@@ -211,6 +222,8 @@ void TextureColorizer::colorize(ViewParams *viewParams)
         int yTop    = ( imgry-radius < 0 ) ? 0 : imgry-radius;
         const int yBottom = ( yTop == 0 ) ? imgheight : imgry + radius;
 
+        EmbossFifo  emboss;
+
         for ( int y = yTop; y < yBottom; ++y ) {
             const int  dy = imgry - y;
             int  rx = (int)sqrt( (qreal)( radius * radius - dy * dy ) );
@@ -238,9 +251,8 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 uchar& grey = *readData; // qBlue(*data);
 
                 if ( showRelief ) {
-                    emboss.buffer = emboss.buffer >> 8;
-                    emboss.gpuint.x4 = grey;    
-                    bump = ( emboss.gpuint.x1 + 16 - grey ) >> 1;
+                    emboss << grey;
+                    bump = ( emboss.head() + 16 - grey ) >> 1;
                     if ( bump > 15 ) bump = 15;
                     if ( bump < 0 )  bump = 0;
                 }
