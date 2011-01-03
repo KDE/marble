@@ -56,7 +56,6 @@ public:
     AbstractScanlineTextureMapper *m_texmapper;
     TextureColorizer              *m_texcolorizer;
     GeoSceneDocument              *m_mapTheme;
-    bool m_justModified;
 };
 
 TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator, TextureLayer *parent )
@@ -66,13 +65,14 @@ TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadMa
     , m_texmapper( 0 )
     , m_texcolorizer( 0 )
     , m_mapTheme( 0 )
-    , m_justModified( true )
 {
 }
 
 void TextureLayer::Private::mapChanged()
 {
-    m_justModified = true;
+    if ( m_texmapper ) {
+        m_texmapper->setRepaintNeeded();
+    }
 
     emit m_parent->repaintNeeded( QRegion() );
 }
@@ -152,29 +152,10 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
     if ( !d->m_mapTheme->map()->hasTextureLayers() )
         return;
 
-    if ( d->m_justModified ) {
-        // Create the height map image a.k.a viewParams->d->m_canvasImage.
-        d->m_texmapper->mapTexture( viewParams, d->m_texcolorizer );
+    if ( !d->m_texmapper )
+        return;
 
-        d->m_justModified = false;
-    }
-
-    // Paint the map on the Widget
-//    QTime t;
-//    t.start();
-    if ( viewParams->projection() == Spherical ) {
-        const int radius = (int)(1.05 * (qreal)(viewParams->radius()));
-
-        QRect rect( viewParams->width() / 2 - radius, viewParams->height() / 2 - radius,
-                    2 * radius, 2 * radius);
-        rect = rect.intersect( dirtyRect );
-        painter->drawImage( rect, *viewParams->canvasImage(), rect );
-    }
-    else {
-        painter->drawImage( dirtyRect, *viewParams->canvasImage(), dirtyRect );
-    }
-
-//    qDebug( "Painted in %ims", t.elapsed() );
+    d->m_texmapper->mapTexture( painter, viewParams, dirtyRect, d->m_texcolorizer );
 }
 
 void TextureLayer::setShowTileId( bool show )
@@ -208,13 +189,13 @@ void TextureLayer::setupTextureMapper( Projection projection )
     }
     Q_ASSERT( d->m_texmapper );
     connect( d->m_texmapper, SIGNAL( tileLevelChanged( int )), SIGNAL( tileLevelChanged( int )));
-
-    d->m_justModified = true;
 }
 
 void TextureLayer::setNeedsUpdate()
 {
-    d->m_justModified = true;
+    if ( d->m_texmapper ) {
+        d->m_texmapper->setRepaintNeeded();
+    }
 }
 
 void TextureLayer::setVolatileCacheLimit( quint64 kilobytes )

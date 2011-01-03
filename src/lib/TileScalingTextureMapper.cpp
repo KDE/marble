@@ -21,6 +21,7 @@
 #include <QtGui/QPainter>
 
 // Marble
+#include "GeoPainter.h"
 #include "StackedTileLoader.h"
 #include "ViewParams.h"
 #include "TextureColorizer.h"
@@ -33,10 +34,29 @@ using namespace Marble;
 TileScalingTextureMapper::TileScalingTextureMapper( StackedTileLoader *tileLoader,
                                                     QObject *parent )
     : AbstractScanlineTextureMapper( tileLoader, parent ),
+      m_repaintNeeded( true ),
       m_oldYPaintedTop( 0 )
 {
 }
 
+void TileScalingTextureMapper::mapTexture( GeoPainter *painter,
+                                           ViewParams *viewParams,
+                                           const QRect &dirtyRect,
+                                           TextureColorizer *texColorizer )
+{
+    if ( m_repaintNeeded ) {
+        mapTexture( viewParams, texColorizer );
+
+        m_repaintNeeded = false;
+    }
+
+    painter->drawImage( dirtyRect, *viewParams->canvasImage(), dirtyRect );
+}
+
+void TileScalingTextureMapper::setRepaintNeeded()
+{
+    m_repaintNeeded = true;
+}
 
 void TileScalingTextureMapper::mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer )
 {

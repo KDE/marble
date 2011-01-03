@@ -19,6 +19,7 @@
 #include <QtGui/QImage>
 
 // Marble
+#include "GeoPainter.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "StackedTileLoader.h"
@@ -32,11 +33,30 @@ using namespace Marble;
 EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( StackedTileLoader *tileLoader,
                                                               QObject *parent )
     : AbstractScanlineTextureMapper( tileLoader, parent ),
+      m_repaintNeeded( true ),
       m_oldCenterLon( 0.0 ),
       m_oldYPaintedTop( 0 )
 {
 }
 
+void EquirectScanlineTextureMapper::mapTexture( GeoPainter *painter,
+                                                ViewParams *viewParams,
+                                                const QRect &dirtyRect,
+                                                TextureColorizer *texColorizer )
+{
+    if ( m_repaintNeeded ) {
+        mapTexture( viewParams, texColorizer );
+
+        m_repaintNeeded = false;
+    }
+
+    painter->drawImage( dirtyRect, *viewParams->canvasImage(), dirtyRect );
+}
+
+void EquirectScanlineTextureMapper::setRepaintNeeded()
+{
+    m_repaintNeeded = true;
+}
 
 void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer )
 {
