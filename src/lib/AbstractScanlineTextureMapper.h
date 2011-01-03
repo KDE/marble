@@ -55,6 +55,7 @@ public:
 
  Q_SIGNALS:
     void tileLevelChanged( int newTileLevel );
+    void tileUpdatesAvailable();
 
  protected:
     void pixelValueF( const qreal lon, const qreal lat,
