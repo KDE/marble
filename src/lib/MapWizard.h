@@ -40,18 +40,19 @@ public:
 
     QStringList wmsServers() const;
     void setWmsServers( const QStringList& uris );
-    
+
     QString createArchive( QString mapId );
     void deleteArchive( QString mapId );
 
     // QWizard's functions
-    int nextId() const;
-    void accept();
-    
+    virtual void accept();
+    virtual bool validateCurrentPage();
+    virtual int nextId() const;
+
 public slots:
     // WMS protocol
     void queryServerCapabilities();
-    bool parseServerCapabilities( QNetworkReply* reply );
+    void parseServerCapabilities( QNetworkReply* reply );
     void createWmsLegend( QNetworkReply* reply );
 
     // Open file dialogs
@@ -67,6 +68,8 @@ public slots:
     void suggestPreviewImage();
 
 private:
+    Q_PRIVATE_SLOT( d, void pageEntered( int ) )
+
     GeoSceneDocument* createDocument();
     void createDgml( const GeoSceneDocument* document );
     bool createFiles( const GeoSceneHead* head );

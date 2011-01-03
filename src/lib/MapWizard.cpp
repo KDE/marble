@@ -46,6 +46,12 @@ namespace Marble
 class MapWizardPrivate
 {
 public:
+    MapWizardPrivate()
+        : m_serverCapabilitiesValid( false )
+    {}
+
+    void pageEntered( int id );
+
     Ui::MapWizard uiWidget;
 
     QString mapTheme;
@@ -54,6 +60,7 @@ public:
     QNetworkAccessManager legendAccessManager;
     QNetworkAccessManager levelZeroAccessManager;
     QStringList wmsServerList;
+    bool m_serverCapabilitiesValid;
 
     enum mapType
     {
@@ -85,6 +92,15 @@ public:
     QString dgmlOutput;
 };
 
+void MapWizardPrivate::pageEntered( int id )
+{
+    if ( id == 1 ) {
+        m_serverCapabilitiesValid = false;
+    } else if ( id == 2 ) {
+        levelZero = QImage();
+    }
+}
+
 MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPrivate )
 {
     d->uiWidget.setupUi( this );
@@ -93,7 +109,9 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
     while( i.hasNext() ) {
         d->uiWidget.comboBoxStaticUrlFormat->addItem( QString( i.next() ) );
     }
-    
+
+    connect( this, SIGNAL( currentIdChanged( int ) ), this, SLOT( pageEntered( int ) ) );
+
     connect( &( d->xmlAccessManager ), SIGNAL( finished( QNetworkReply* ) ), this, SLOT( parseServerCapabilities( QNetworkReply* ) ) );
     connect( &( d->legendAccessManager ), SIGNAL( finished( QNetworkReply* ) ), this, SLOT( createWmsLegend( QNetworkReply* ) ) );
     connect( &( d->levelZeroAccessManager ), SIGNAL( finished( QNetworkReply* ) ), this, SLOT( createLevelZero( QNetworkReply* ) ) );
@@ -102,7 +120,6 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
     connect( d->uiWidget.pushButtonPreview, SIGNAL( clicked( bool ) ), this, SLOT( queryPreviewImage() ) );
     connect( d->uiWidget.pushButtonLegend, SIGNAL( clicked( bool ) ), this, SLOT( queryLegendImage() ) );
     connect( d->uiWidget.pushButtonStaticUrlLegend, SIGNAL( clicked( bool ) ), this, SLOT( queryStaticUrlLegendImage() ) );
-    connect( d->uiWidget.pushButtonWmsInspect, SIGNAL( clicked( bool ) ), this, SLOT( queryServerCapabilities() ) );
     connect( d->uiWidget.pushButtonStaticUrlTest, SIGNAL( clicked( bool ) ), this, SLOT( downloadLevelZero() ) );
     connect( d->uiWidget.pushButtonSuggest, SIGNAL( clicked( bool ) ), this, SLOT( downloadLevelZero() ) );
 
@@ -130,20 +147,20 @@ void MapWizard::queryServerCapabilities()
     d->xmlAccessManager.get( request );
 }
 
-bool MapWizard::parseServerCapabilities( QNetworkReply* reply )
+void MapWizard::parseServerCapabilities( QNetworkReply* reply )
 {
     QString result( reply->readAll() );
     QDomDocument xml;
     if( !xml.setContent( result ) )
     {
         QMessageBox::critical( this, tr( "Error while parsing" ), tr( "Wizard can't parse server's response" ) );
-        return false;
+        return;
     }
 
     if( xml.documentElement().firstChildElement().tagName().isNull() )
     {
         QMessageBox::critical( this, tr( "Error while parsing" ), tr( "Server is not a Web Map Server." ) );
-        return false;
+        return;
     }
 
     QDomElement firstLayer = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Layer" );
@@ -178,9 +195,11 @@ bool MapWizard::parseServerCapabilities( QNetworkReply* reply )
 
     if( !d->uiWidget.comboBoxWmsMap->currentText().isEmpty() && !d->wmsServerList.contains( d->uiWidget.lineEditWmsUrl->text() ) ) {
         d->wmsServerList.append( d->uiWidget.lineEditWmsUrl->text() );
+        setWmsServers( d->wmsServerList );
     }
 
-    return true;
+    d->m_serverCapabilitiesValid = true;
+    next();
 }
 
 void MapWizard::createWmsLegend( QNetworkReply* reply )
@@ -205,6 +224,7 @@ void MapWizard::setWmsServers( const QStringList& uris )
 
     d->uiWidget.comboBoxWmsServer->clear();
     d->uiWidget.comboBoxWmsServer->addItems( d->wmsServerList );
+    d->uiWidget.comboBoxWmsServer->addItem( tr( "Custom" ), "http://" );
 }
 
 QStringList MapWizard::wmsServers() const
@@ -458,6 +478,7 @@ void MapWizard::downloadLevelZero()
         
         QUrl downloadUrl( d->uiWidget.lineEditWmsUrl->text() );
         downloadUrl.addQueryItem( "request", "GetMap" );
+        downloadUrl.addQueryItem( "version", "1.1.1" );
         downloadUrl.addQueryItem( "layers", d->uiWidget.comboBoxWmsMap->itemData( selected ).toString() );
         downloadUrl.addQueryItem( "srs", "EPSG:4326" );
         downloadUrl.addQueryItem( "width", "400" );
@@ -498,6 +519,17 @@ void MapWizard::downloadLevelZero()
 void MapWizard::createLevelZero( QNetworkReply* reply )
 {
     d->levelZero = reply->readAll();
+
+    if ( d->mapProviderType == MapWizardPrivate::WmsMap )
+    {
+        if ( d->levelZero.isNull() ) {
+            QMessageBox::information( this,
+                                      tr( "Base Tile" ),
+                                      tr( "The base tile could not be downloaded. The server replied:\n\n%1" ).arg( QString( result ) ) );
+        } else if ( currentId() == 2 ) {
+            next();
+        }
+    }
 
     if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
     {
@@ -629,6 +661,21 @@ void MapWizard::deleteArchive( QString mapId )
     QFile::remove( QString( "%1/%2.tar.gz" ).arg( QDir::tempPath() ).arg( theme ) );
 }
 
+bool MapWizard::validateCurrentPage()
+{
+    if ( currentId() == 1 && !d->m_serverCapabilitiesValid ) {
+        queryServerCapabilities();
+        return false;
+    }
+
+    if ( currentId() == 2 && d->levelZero.isNull() ) {
+        downloadLevelZero();
+        return false;
+    }
+
+    return QWizard::validateCurrentPage();
+}
+
 int MapWizard::nextId() const
 {
     switch( currentId() )
@@ -639,22 +686,22 @@ int MapWizard::nextId() const
             return 1;
         } else if( d->uiWidget.radioButtonBitmap->isChecked() ) {
             d->mapProviderType = MapWizardPrivate::StaticImageMap;
-            return 2;
+            return 3;
         } else if( d->uiWidget.radioButtonStaticUrl->isChecked() ) {
             d->mapProviderType = MapWizardPrivate::StaticUrlMap;
-            return 3;
+            return 4;
         }
         break;
 
-    case 1:
-        return 4;
+    case 2: // WMS
+        return 5;
         break;
 
-    case 2:
-        return 4;
+    case 3: // Static Image
+        return 5;
         break;
 
-    case 5:
+    case 6: // Finish
         return -1;
         break;
 
