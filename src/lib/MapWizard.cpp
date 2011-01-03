@@ -372,30 +372,32 @@ bool MapWizard::createFiles( const GeoSceneHead* head )
         {
             maps.mkdir( QString( "%1/0/" ).arg( head->theme() ) );
             maps.mkdir( QString( "%1/0/0" ).arg( head->theme() ) );
-            QImage baseTile = QImage::fromData( d->levelZero, d->wmsFormat.toAscii().data() );
-            baseTile.save( QString( "%1/%2/0/0/0.%3" ).arg( maps.absolutePath() )
-                                                      .arg( head->theme() )
-                                                      .arg( d->wmsFormat ) );
+            const QString path = QString( "%1/%2/0/0/0.%3" ).arg( maps.absolutePath() )
+                                                            .arg( head->theme() )
+                                                            .arg( d->wmsFormat );
+            QFile baseTile( path );
+            baseTile.open( QFile::WriteOnly );
+            baseTile.write( d->levelZero );
         }
 
         else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
         {
             maps.mkdir( QString( "%1/0/" ).arg( head->theme() ) );
             maps.mkdir( QString( "%1/0/0" ).arg( head->theme() ) );
-            QImage baseTile( 256, 256, QImage::Format_RGB32 );
-            baseTile.save( QString( "%1/%2/0/0/0.%3" ).arg( maps.absolutePath() )
-                                                      .arg( head->theme() )
-                                                      .arg( d->uiWidget.comboBoxStaticUrlFormat->currentText() ) );
+            const QString path = QString( "%1/%2/0/0/0.%3" ).arg( maps.absolutePath() )
+                                                            .arg( head->theme() )
+                                                            .arg( d->uiWidget.comboBoxStaticUrlFormat->currentText() );
+            QFile baseTile( path );
+            baseTile.open( QFile::WriteOnly );
+            baseTile.write( d->levelZero );
         }
 
         // Preview image
         QString pixmapPath = d->uiWidget.lineEditPreview->text();
-        QString extension = pixmapPath.right( pixmapPath.length() - pixmapPath.lastIndexOf( '.' ) - 1 );
-
-        QFile previewImage( pixmapPath );
-        previewImage.copy( QString( "%1/%2/preview.%3" ).arg( maps.absolutePath() )
-                                                        .arg( head->theme() )
-                                                        .arg( extension ) );
+        QImage previewImage = QImage( pixmapPath ).scaled( 136, 136, Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
+        previewImage.save( QString( "%1/%2/%3" ).arg( maps.absolutePath() )
+                                                .arg( head->theme() )
+                                                .arg( head->icon()->pixmap() ) );
 
         // DGML
         QFile file( QString( "%1/%2/%2.dgml" ).arg( maps.absolutePath() )
@@ -495,22 +497,17 @@ void MapWizard::downloadLevelZero()
 
 void MapWizard::createLevelZero( QNetworkReply* reply )
 {
-    if( d->mapProviderType == MapWizardPrivate::WmsMap || d->mapProviderType == MapWizardPrivate::StaticUrlMap )
-    {
-        QByteArray result = reply->readAll();
-        d->levelZero = result;
-    }
-    
+    d->levelZero = reply->readAll();
+
     if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
     {
-        QPixmap levelZero;
-        levelZero.loadFromData( d->levelZero );
-	if ( !d->levelZero.isNull() ) {
-	    levelZero = levelZero.scaled( d->uiWidget.labelStaticUrlTest->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation );
-	    d->uiWidget.labelStaticUrlTest->setPixmap( levelZero );
-	}
+        QImage testImage = QImage::fromData( d->levelZero );
+        if ( !testImage.isNull() ) {
+            QImage levelZero = testImage.scaled( d->uiWidget.labelStaticUrlTest->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation );
+            d->uiWidget.labelStaticUrlTest->setPixmap( QPixmap::fromImage( levelZero ) );
+        }
     }
-    
+
     suggestPreviewImage();
 }
 
@@ -670,7 +667,7 @@ int MapWizard::nextId() const
 }
 
 void MapWizard::suggestPreviewImage()
-{   
+{
     if( currentId() == 4 )
     {
         QPointer<QDialog> dialog = new QDialog;
@@ -680,48 +677,40 @@ void MapWizard::suggestPreviewImage()
         } else if ( d->mapProviderType == MapWizardPrivate::WmsMap || d->mapProviderType == MapWizardPrivate::StaticUrlMap ){
             pixmap.loadFromData( d->levelZero );
         }
-        
+
         QLabel *previewImage = new QLabel();
         previewImage->setPixmap( pixmap.scaled( 136, 136, Qt::KeepAspectRatio, Qt::SmoothTransformation ) );
-        
+
         QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok | QDialogButtonBox::Cancel );
         connect( buttonBox, SIGNAL( accepted() ), dialog, SLOT( accept() ) );
         connect( buttonBox, SIGNAL( rejected() ), dialog, SLOT( reject() ) );
-        
+
         QGridLayout *grid = new QGridLayout();
         grid->addWidget( previewImage );
         grid->addWidget( buttonBox );
-        
+
         dialog->setLayout( grid );
         if( dialog->exec() )
         {
-            
+
             QTemporaryFile tempFile;
             tempFile.open();
-            
+
             if( d->mapProviderType == MapWizardPrivate::StaticImageMap )
             {
                 QImage tempPreview = pixmap.toImage();
                 tempPreview.save( tempFile.fileName() + ".png" );
                 d->uiWidget.lineEditPreview->setText( tempFile.fileName() + ".png" );
             }
-            
-            else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
+
+            else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap ||
+                     d->mapProviderType == MapWizardPrivate::WmsMap )
             {
-                QImage tempPreview;
-                tempPreview = QImage::fromData( d->levelZero );
-                tempPreview.save( tempFile.fileName() + "."  + d->uiWidget.comboBoxStaticUrlFormat->currentText() );
-                d->uiWidget.lineEditPreview->setText( tempFile.fileName() + "." + d->uiWidget.comboBoxStaticUrlFormat->currentText() );
+                QImage tempPreview = QImage::fromData( d->levelZero );
+                tempPreview.save( tempFile.fileName() + ".png" );
+                d->uiWidget.lineEditPreview->setText( tempFile.fileName() + ".png" );
             }
-            
-            else if ( d->mapProviderType == MapWizardPrivate::WmsMap )
-            {
-                QImage tempPreview;
-                tempPreview = QImage::fromData( d->levelZero );
-                tempPreview.save( tempFile.fileName() + "." + d->wmsFormat );
-                d->uiWidget.lineEditPreview->setText( tempFile.fileName() + "." + d->wmsFormat );
-            }
-            
+
             d->uiWidget.labelThumbnail->setPixmap( pixmap.scaled( 136, 136, Qt::KeepAspectRatio, Qt::SmoothTransformation ) );
         }
         delete dialog;
@@ -739,9 +728,7 @@ GeoSceneDocument* MapWizard::createDocument()
     head->setVisible( true );
         
     GeoSceneIcon *icon = head->icon();
-    QString pixmapPath = d->uiWidget.lineEditPreview->text();
-    QString pixmapExtension = pixmapPath.right( pixmapPath.length() - pixmapPath.lastIndexOf( '.' ) - 1 );
-    icon->setPixmap( QString( "preview.%1" ).arg( pixmapExtension ) );
+    icon->setPixmap( QString( "preview.png" ) );
     
     GeoSceneZoom *zoom = head->zoom();
     zoom->setMinimum( 900 );
@@ -828,6 +815,21 @@ void MapWizard::accept()
     {
         QMessageBox::information( this, tr( "Problem with map information" ), tr( "Please choose a map." ) );
         return;
+    }
+
+    if ( d->mapProviderType != MapWizardPrivate::StaticImageMap )
+    {
+        if( d->levelZero.isNull() )
+        {
+            QMessageBox::information( this, tr( "Cannot create map" ), tr( "The base tile is missing." ) );
+            return;
+        }
+
+        if( QImage::fromData( d->levelZero ).isNull() )
+        {
+            QMessageBox::information( this, tr( "Cannot create map" ), tr( "The base tile is invalid." ) );
+            return;
+        }
     }
 
     if( !document->head()->name().isEmpty() && 
