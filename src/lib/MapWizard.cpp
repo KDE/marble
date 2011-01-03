@@ -97,7 +97,7 @@ void MapWizardPrivate::pageEntered( int id )
 {
     if ( id == 1 ) {
         m_serverCapabilitiesValid = false;
-    } else if ( id == 2 ) {
+    } else if ( id == 2 || id == 4 ) {
         levelZero.clear();
     } else if ( id == 5 ) {
         if ( mapProviderType == MapWizardPrivate::StaticImageMap ) {
@@ -130,7 +130,6 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
     connect( d->uiWidget.pushButtonPreview, SIGNAL( clicked( bool ) ), this, SLOT( queryPreviewImage() ) );
     connect( d->uiWidget.pushButtonLegend, SIGNAL( clicked( bool ) ), this, SLOT( queryLegendImage() ) );
     connect( d->uiWidget.pushButtonStaticUrlLegend, SIGNAL( clicked( bool ) ), this, SLOT( queryStaticUrlLegendImage() ) );
-    connect( d->uiWidget.pushButtonStaticUrlTest, SIGNAL( clicked( bool ) ), this, SLOT( downloadLevelZero() ) );
 
     connect( d->uiWidget.comboBoxWmsServer, SIGNAL( currentIndexChanged( QString ) ), d->uiWidget.lineEditWmsUrl, SLOT( setText( QString ) ) );
     connect( d->uiWidget.comboBoxWmsMap, SIGNAL( currentIndexChanged( QString ) ), this, SLOT( autoFillDetails() ) );
@@ -529,29 +528,19 @@ void MapWizard::createLevelZero( QNetworkReply* reply )
     d->levelZero = reply->readAll();
     QImage testImage = QImage::fromData( d->levelZero );
 
-    if ( d->mapProviderType == MapWizardPrivate::WmsMap )
-    {
-        if ( d->levelZero.isNull() ) {
-            QMessageBox::information( this,
-                                      tr( "Base Tile" ),
-                                      tr( "The base tile could not be downloaded." ) );
-        }
-        else if ( testImage.isNull() ) {
-            QMessageBox::information( this,
-                                      tr( "Base Tile" ),
-                                      tr( "The base tile could not be downloaded successfully. The server replied:\n\n%1" ).arg( QString( d->levelZero ) ) );
-        }
-        else {
-            next();
-        }
+    if ( d->levelZero.isNull() ) {
+        QMessageBox::information( this,
+                                    tr( "Base Tile" ),
+                                    tr( "The base tile could not be downloaded." ) );
     }
-
-    if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
-    {
-        if ( !testImage.isNull() ) {
-            QImage levelZero = testImage.scaled( d->uiWidget.labelStaticUrlTest->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation );
-            d->uiWidget.labelStaticUrlTest->setPixmap( QPixmap::fromImage( levelZero ) );
-        }
+    else if ( testImage.isNull() ) {
+        QMessageBox::information( this,
+                                    tr( "Base Tile" ),
+                                    tr( "The base tile could not be downloaded successfully. The server replied:\n\n%1" ).arg( QString( d->levelZero ) ) );
+        d->levelZero.clear();
+    }
+    else {
+        next();
     }
 }
 
@@ -681,7 +670,7 @@ bool MapWizard::validateCurrentPage()
         return false;
     }
 
-    if ( currentId() == 2 && d->levelZero.isNull() ) {
+    if ( ( currentId() == 2 || currentId() == 4 ) && d->levelZero.isNull() ) {
         downloadLevelZero();
         button( MapWizard::NextButton )->setEnabled( false );
         return false;
