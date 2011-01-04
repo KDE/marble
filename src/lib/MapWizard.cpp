@@ -676,6 +676,35 @@ bool MapWizard::validateCurrentPage()
         return false;
     }
 
+    if ( currentId() == 3 ) {
+        d->sourceImage = d->uiWidget.lineEditSource->text();
+        if ( d->sourceImage.isEmpty() ) {
+            QMessageBox::information( this,
+                                      tr( "Source Image" ),
+                                      tr( "Please specify a source image." ) );
+            d->uiWidget.lineEditSource->setFocus();
+            return false;
+        }
+
+        if ( !QFileInfo( d->sourceImage ).exists() ) {
+            QMessageBox::information( this,
+                                      tr( "Source Image" ),
+                                      tr( "The source image you specified does not exist. Please specify a different one." ) );
+            d->uiWidget.lineEditSource->setFocus();
+            d->uiWidget.lineEditSource->selectAll();
+            return false;
+        }
+
+        if ( QImage( d->sourceImage ).isNull() ) {
+            QMessageBox::information( this,
+                                      tr( "Source Image" ),
+                                      tr( "The source image you specified does not seem to be an image. Please specify a different image file." ) );
+            d->uiWidget.lineEditSource->setFocus();
+            d->uiWidget.lineEditSource->selectAll();
+            return false;
+        }
+    }
+
     if ( currentId() == 5 ) {
         if ( d->uiWidget.lineEditTitle->text().isEmpty() ) {
             QMessageBox::information( this, tr( "Map Title" ), tr( "Please specify a map title." ) );
