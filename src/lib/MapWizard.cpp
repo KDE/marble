@@ -676,9 +676,35 @@ bool MapWizard::validateCurrentPage()
         return false;
     }
 
-    if ( currentId() == 5 && d->previewImage.isNull() ) {
-        QMessageBox::information( this, tr( "Preview Image" ), tr( "Please specify a preview image." ) );
-        return false;
+    if ( currentId() == 5 ) {
+        if ( d->uiWidget.lineEditTitle->text().isEmpty() ) {
+            QMessageBox::information( this, tr( "Map Title" ), tr( "Please specify a map title." ) );
+            d->uiWidget.lineEditTitle->setFocus();
+            return false;
+        }
+
+        d->mapTheme = d->uiWidget.lineEditTheme->text();
+        if ( d->mapTheme.isEmpty() ) {
+            QMessageBox::information( this, tr( "Map Name" ), tr( "Please specify a map name." ) );
+            d->uiWidget.lineEditTheme->setFocus();
+            return false;
+        }
+
+        const QDir destinationDir( QString( "%1/maps/earth/%2" ).arg( MarbleDirs::localPath() ).arg( d->mapTheme ) );
+        if ( destinationDir.exists() ) {
+            QMessageBox::information( this,
+                                    tr( "Map Name" ),
+                                    tr( "Please specify another map name, since there is already a map named \"%1\"." ).arg( d->mapTheme ) );
+            d->uiWidget.lineEditTheme->setFocus();
+            d->uiWidget.lineEditTheme->selectAll();
+            return false;
+        }
+
+        if ( d->previewImage.isNull() ) {
+            QMessageBox::information( this, tr( "Preview Image" ), tr( "Please specify a preview image." ) );
+            d->uiWidget.pushButtonPreview->setFocus();
+            return false;
+        }
     }
 
     return QWizard::validateCurrentPage();
