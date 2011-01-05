@@ -5,14 +5,14 @@
     <name>New York City</name>
     <description>New York City</description>
     <Point>
-      <coordinates>-74.006393,40.714172</coordinates>
+      <coordinates>-74.0063930000,40.7141720000</coordinates>
     </Point>
   </Placemark>
   <Placemark>
     <name>New York City 2</name>
     <description>New York City</description>
     <Point>
-      <coordinates>-74.006,40.714,0</coordinates>
+      <coordinates>-74.0060000000,40.7140000000</coordinates>
     </Point>
     </Placemark>
 </Document>

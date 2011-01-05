@@ -89,7 +89,6 @@ void TestGeoDataWriter::countFeatures_data()
 
     //Add feature parsers ( referenced by file name ) and their count of features
 
-//    This parser won't work because of the flaw that prevents single placemark files from loading
     QTest::newRow("New York") << parsers.value("NewYork.kml") << 1;
     QTest::newRow("New York Document") << parsers.value("NewYorkDocument.kml") << 2;
     QTest::newRow("CDATATest") << parsers.value("CDATATest.kml") << 1;
@@ -179,7 +178,7 @@ void TestGeoDataWriter::saveAndCompare()
 {
     //save the file and compare it to the original
     QFETCH( QSharedPointer<GeoDataParser>, parser );
-    QFETCH( QString, origional );
+    QFETCH( QString, original );
 
     //attempt to save a file using the GeoWriter
     QTemporaryFile tempFile;
@@ -194,7 +193,7 @@ void TestGeoDataWriter::saveAndCompare()
     QVERIFY( writer.write( &tempFile,
                            *dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) );
 
-    QFile file( dataDir.filePath( origional ) );
+    QFile file( dataDir.filePath( original ) );
     QVERIFY( file.open( QIODevice::ReadOnly ) );
     QVERIFY( tempFile.reset() );
     QTextStream oldFile( &file );

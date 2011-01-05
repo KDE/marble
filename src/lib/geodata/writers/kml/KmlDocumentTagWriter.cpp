@@ -34,6 +34,15 @@ bool KmlDocumentTagWriter::write( const GeoDataObject &node, GeoWriter& writer )
 {
     const GeoDataDocument &document = static_cast<const GeoDataDocument&>(node);
 
+    // when a document has only one feature and no styling
+    // the document tag is excused
+    if( (document.styles().count() == 0)
+        && (document.styleMaps().count() == 0)
+        && (document.featureList().count() == 1) ) {
+        writeElement( *document.featureList()[0], writer );
+        return true;
+    }
+
     writer.writeStartElement( kml::kmlTag_Document );
 
     foreach( const GeoDataStyle &style, document.styles() ) {
