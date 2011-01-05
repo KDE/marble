@@ -15,7 +15,13 @@
 #include "RenderPlugin.h"
 #include "RenderPluginInterface.h"
 
+#include <QtCore/QHash>
 #include <QtGui/QIcon>
+
+namespace Ui
+{
+    class EarthquakeConfigWidget;
+}
 
 namespace Marble
 {
@@ -43,8 +49,31 @@ public:
 
     QIcon icon() const;
 
+    QDialog *configDialog() const;
+
+    /**
+     * @return: The settings of the item.
+     */
+    virtual QHash<QString,QVariant> settings() const;
+
+    /**
+     * Set the settings of the item.
+     */
+    virtual void setSettings( QHash<QString,QVariant> settings );
+
+public slots:
+    void readSettings() const;
+    void writeSettings();
+    void updateSettings();
+
 private:
     bool m_isInitialized;
+    mutable Ui::EarthquakeConfigWidget *ui_configWidget;
+    mutable QDialog *m_configDialog;
+    QHash<QString,QVariant> m_settings;
+
+private slots:
+    void validateDateRange();
 };
 
 }
