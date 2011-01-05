@@ -12,6 +12,7 @@
 #define EARTHQUAKEMODEL_H
 
 #include "AbstractDataPluginModel.h"
+#include <QtCore/QDateTime>
 
 namespace Marble
 {
@@ -30,6 +31,11 @@ public:
 
     ~EarthquakeModel();
 
+    void setNumResults( int numResults );
+    void setMinMagnitude( double minMagnitude );
+    void setStartDate( const QDateTime& startDate );
+    void setEndDate( const QDateTime& endDate );
+
 protected:
     /**
      * Generates the download url for the description file from the web service depending on
@@ -42,6 +48,12 @@ protected:
      * prepares the data for usage.
      **/
     void parseFile( const QByteArray& file );
+
+private:
+    int m_numResults;
+    double m_minMagnitude;
+    QDateTime m_startDate;
+    QDateTime m_endDate;
 };
 
 }

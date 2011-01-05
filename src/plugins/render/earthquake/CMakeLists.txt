@@ -12,6 +12,9 @@ set( my_SRCS
   EarthquakeModel.cpp
   EarthquakeItem.cpp
  )
+set( earthquake_UI EarthquakeConfigWidget.ui )
+
+qt4_wrap_ui(my_SRCS ${earthquake_UI})
 qt4_add_resources(my_SRCS earthquake.qrc)
 qt4_automoc( ${my_SRCS} )
 
