@@ -315,9 +315,9 @@ void PositionMarker::readSettings() const
     }
 
     ui_configWidget->m_sizeLabel->setText( tr( "Cursor Size: %1" ).arg( cursorSize ) );
-    QPalette palette;
-    palette.setColor( QPalette::Background, QColor( m_settings.value( "acColor" ).value<QColor>()) );
-    ui_configWidget->m_acColorPreview->setPalette( palette );
+    QPalette palette = ui_configWidget->m_acColorChooserButton->palette();
+    palette.setColor( QPalette::Button, QColor( m_settings.value( "acColor" ).value<QColor>()) );
+    ui_configWidget->m_acColorChooserButton->setPalette( palette );
 }
 
 void PositionMarker::writeSettings()
@@ -369,7 +369,7 @@ void PositionMarker::loadCustomCursor( const QString& filename, bool useCursor )
     }
     else
     {
-        QMessageBox::warning( NULL, tr( "Error" ), tr( "Unable to load custom cursor, default cursor will be used. "
+        QMessageBox::warning( NULL, tr( "Position Marker Plugin" ), tr( "Unable to load custom cursor, default cursor will be used. "
                                                        "Make sure this is a valid image file." ), QMessageBox::Ok );
         ui_configWidget->m_fileChooserButton->setIcon( QIcon( m_defaultCursor ) );
         m_customCursor = m_defaultCursor;
@@ -384,16 +384,15 @@ void PositionMarker::loadDefaultCursor()
 
 void PositionMarker::chooseAccuracyCircleColor()
 {
-    QColorDialog dialog( m_acColor );
-    dialog.setOptions( QColorDialog::ShowAlphaChannel );
-    dialog.exec();
-    QColor c = dialog.selectedColor();
+    QColor c = QColorDialog::getColor( m_acColor, 0, 
+					"Please choose the color for the accuracy circle", 
+					QColorDialog::ShowAlphaChannel );
     if( c.isValid() )
     {
         m_acColor = c;
-        QPalette palette;
-        palette.setColor( QPalette::Background, m_acColor );
-        ui_configWidget->m_acColorPreview->setPalette( palette );
+        QPalette palette = ui_configWidget->m_acColorChooserButton->palette();
+        palette.setColor( QPalette::Button, m_acColor );
+        ui_configWidget->m_acColorChooserButton->setPalette( palette );
     }
 }
 
