@@ -15,14 +15,15 @@
 
 #include "MarbleDebug.h"
 #include <QtCore/QRect>
-#include <QtGui/QColor>
 #include <QtGui/QFileDialog>
 #include <QtGui/QMessageBox>
 #include <QtGui/QPushButton>
- 
+#include <QtGui/QColorDialog>
+
 #include "ui_PositionMarkerConfigWidget.h"
 #include "AbstractProjection.h"
 #include "MarbleDataFacade.h"
+#include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "PositionTracking.h"
 #include "ViewportParams.h"
@@ -30,19 +31,30 @@
 namespace Marble
 {
 
+const int PositionMarker::sm_defaultSizeStep = 2;
+const float PositionMarker::sm_resizeSteps[] = { 0.25, 0.5, 1.0, 2.0, 4.0 };
+const int PositionMarker::sm_numResizeSteps = sizeof( sm_resizeSteps ) / sizeof( sm_resizeSteps[0] );
+
 PositionMarker::PositionMarker ()
     : RenderPlugin(),
       m_isInitialized( false ),
       m_useCustomCursor( false ),
+      m_defaultCursorPath( MarbleDirs::path( "svg/track_turtle.svg" ) ),
+      m_viewport( 0 ),
       ui_configWidget( 0 ),
       m_aboutDialog( 0 ),
       m_configDialog( 0 ),
-      m_viewport( 0 )
+      m_settings()
 {
+    connect( this, SIGNAL( settingsChanged( QString ) ),
+             this, SLOT( updateSettings() ) );
 }
 
 PositionMarker::~PositionMarker ()
 {
+    delete m_aboutDialog;
+    delete ui_configWidget;
+    delete m_configDialog;
 }
 
 QStringList PositionMarker::renderPosition() const
@@ -124,6 +136,7 @@ QDialog *PositionMarker::configDialog() const
         m_configDialog = new QDialog();
         ui_configWidget = new Ui::PositionMarkerConfigWidget;
         ui_configWidget->setupUi( m_configDialog );
+        ui_configWidget->m_resizeSlider->setMaximum( sm_numResizeSteps - 1 );
         readSettings();
         connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ),
                  SLOT( writeSettings() ) );
@@ -134,6 +147,10 @@ QDialog *PositionMarker::configDialog() const
                  SLOT( writeSettings() ) );
         connect( ui_configWidget->m_fileChooserButton, SIGNAL( clicked() ),
                  SLOT( chooseCustomCursor() ) );
+        connect( ui_configWidget->m_resizeSlider, SIGNAL( valueChanged( int ) ),
+                 SLOT( resizeCursor( int ) ) );
+        connect( ui_configWidget->m_acColorChooserButton, SIGNAL( clicked() ),
+                 SLOT( chooseAccuracyCircleColor() ) );
     }
     return m_configDialog;
 }
@@ -145,6 +162,7 @@ void PositionMarker::initialize()
                 this, SLOT( setPosition( GeoDataCoordinates ) ) );
         m_isInitialized = true;
     }
+    loadDefaultCursor();
 }
 
 bool PositionMarker::isInitialized() const
@@ -185,9 +203,9 @@ void PositionMarker::update()
 
             m_arrow.clear();
             m_arrow << position
-                    << position + relativeLeft
-                    << position + relativeTip
-                    << position + relativeRight;
+                    << position + ( relativeLeft * m_cursorSize )
+                    << position + ( relativeTip * m_cursorSize )
+                    << position + ( relativeRight * m_cursorSize );
 
             m_dirtyRegion = QRegion();
             m_dirtyRegion += ( m_arrow.boundingRect().toRect() );
@@ -214,25 +232,21 @@ bool PositionMarker::render( GeoPainter *painter,
 
         GeoDataAccuracy accuracy = dataFacade()->positionTracking()->accuracy();
         if ( accuracy.horizontal > 0 && accuracy.horizontal < 1000 ) {
-            // Paint a red circle indicating the position accuracy
+            // Paint a circle indicating the position accuracy
             painter->setPen( Qt::transparent );
-            QColor transparentRed = oxygenBrickRed4;
             int width = qRound( accuracy.horizontal * viewport->radius() / EARTH_RADIUS );
             if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
-                transparentRed.setAlpha( 80 );
                 int arrowSize = qMax<int>( m_arrow.boundingRect().width(), m_arrow.boundingRect().height() );
                 width = qMax<int>( width, arrowSize + 10 );
-            } else {
-                transparentRed.setAlpha( 40 );
             }
 
-            painter->setBrush( transparentRed );
+            painter->setBrush( m_acColor );
             painter->drawEllipse( m_currentPosition, width, width );
         }
 
         if( m_useCustomCursor)
         {
-            QRectF rect = m_arrow.boundingRect().toAlignedRect();
+            QRect rect = m_arrow.boundingRect().toRect();
             if( rect.isValid() )
                 painter->drawPixmap( rect.topLeft(), m_customCursor );
         }
@@ -249,25 +263,80 @@ bool PositionMarker::render( GeoPainter *painter,
     return true;
 }
 
+QHash<QString,QVariant> PositionMarker::settings() const
+{
+    return m_settings;
+}
+
+void PositionMarker::setSettings( QHash<QString,QVariant> settings )
+{
+    if ( !settings.contains( "useCustomCursor" ) ) {
+        settings.insert( "useCustomCursor", false );
+    }
+    if ( !settings.contains( "cursorPath" ) ) {
+        settings.insert( "cursorPath", m_defaultCursorPath );
+    }
+    if ( !settings.contains( "cursorSize" ) ) {
+        settings.insert( "cursorSize", 1.0 );
+    }
+    if( !settings.contains( "acColor" ) ) {
+        settings.insert( "acColor", oxygenBrickRed4 );
+    }
+
+    m_settings = settings;
+    readSettings();
+    emit settingsChanged( nameId() );
+}
+
 void PositionMarker::readSettings() const
 {
-    if(m_useCustomCursor)
+    if ( !m_configDialog )
+        return;
+
+    if( m_settings.value( "useCustomCursor" ).toBool() )
         ui_configWidget->m_customCursor->click();
     else
         ui_configWidget->m_originalCursor->click();
+
+    bool found = false;
+    float cursorSize = m_settings.value( "cursorSize" ).toFloat();
+    for( int i = 0; i < sm_numResizeSteps && !found; i++ )
+    {
+        if( sm_resizeSteps[i] == cursorSize )
+        {
+            ui_configWidget->m_resizeSlider->setValue( i );
+            found = true;
+        }
+    }
+    if( !found )
+    {
+        ui_configWidget->m_resizeSlider->setValue( sm_defaultSizeStep );
+        cursorSize = sm_resizeSteps[sm_defaultSizeStep];
+    }
+
+    ui_configWidget->m_sizeLabel->setText( tr( "Cursor Size: %1" ).arg( cursorSize ) );
+    QPalette palette;
+    palette.setColor( QPalette::Background, QColor( m_settings.value( "acColor" ).value<QColor>()) );
+    ui_configWidget->m_acColorPreview->setPalette( palette );
 }
 
 void PositionMarker::writeSettings()
 {
-    if( ui_configWidget->m_customCursor->isChecked() && 
-        ui_configWidget->m_fileChooserButton->icon().isNull() )
-    {
-        QMessageBox::warning( NULL, tr( "Error" ), tr( "No cursor selected, the default cursor will be used." ), QMessageBox::Ok );
-        m_useCustomCursor = false;
-        readSettings();
-        return;
-    }
-    m_useCustomCursor = ui_configWidget->m_customCursor->isChecked();
+    m_settings.insert( "useCustomCursor", ui_configWidget->m_customCursor->isChecked() );
+    m_settings.insert( "cursorPath", m_cursorPath );
+    m_settings.insert( "cursorSize", sm_resizeSteps[ui_configWidget->m_resizeSlider->value()] );
+    m_settings.insert( "acColor", m_acColor );
+
+    emit settingsChanged( nameId() );
+}
+
+void PositionMarker::updateSettings()
+{
+    m_useCustomCursor = m_settings.value( "useCustomCursor" ).toBool();
+    m_cursorPath = m_settings.value( "cursorPath" ).toString();
+    m_cursorSize =  m_settings.value( "cursorSize" ).toFloat();
+    loadCustomCursor( m_cursorPath, m_useCustomCursor );
+    m_acColor = m_settings.value( "acColor" ).value<QColor>();
 }
 
 void PositionMarker::setPosition( const GeoDataCoordinates &position )
@@ -284,24 +353,62 @@ void PositionMarker::chooseCustomCursor()
 {
     QString filename = QFileDialog::getOpenFileName( NULL, tr( "Choose Custom Cursor" ) );
     if( !filename.isEmpty() )
-        loadCustomCursor( filename );
+        loadCustomCursor( filename, true );
 }
 
-int PositionMarker::loadCustomCursor( const QString& filename )
+void PositionMarker::loadCustomCursor( const QString& filename, bool useCursor )
 {
-    m_customCursor = QPixmap( filename ).scaled( 22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation );
+    m_customCursor = QPixmap( filename ).scaled( 22 * m_cursorSize, 22 * m_cursorSize, Qt::KeepAspectRatio, Qt::SmoothTransformation );
     if( !m_customCursor.isNull() )
     {
-        ui_configWidget->m_customCursor->click();
+        if( useCursor )
+            ui_configWidget->m_customCursor->click();
+        ui_configWidget->m_fileChooserButton->setIconSize( QSize( m_customCursor.width(), m_customCursor.height() ) );
         ui_configWidget->m_fileChooserButton->setIcon( QIcon( m_customCursor ) );
-        return 0;
+        m_cursorPath = filename;
     }
     else
     {
-        QMessageBox::warning( NULL, tr( "Error" ), tr( "Unable to load custom cursor. Make sure this is a valid image file." ), QMessageBox::Ok );
-        ui_configWidget->m_fileChooserButton->setIcon( QIcon() );
-        return 1;
+        QMessageBox::warning( NULL, tr( "Error" ), tr( "Unable to load custom cursor, default cursor will be used. "
+                                                       "Make sure this is a valid image file." ), QMessageBox::Ok );
+        ui_configWidget->m_fileChooserButton->setIcon( QIcon( m_defaultCursor ) );
+        m_customCursor = m_defaultCursor;
+        m_cursorPath = m_defaultCursorPath;
     }
+}
+
+void PositionMarker::loadDefaultCursor()
+{
+    m_defaultCursor = QPixmap( m_defaultCursorPath ).scaled( 22 * m_cursorSize, 22 * m_cursorSize, Qt::KeepAspectRatio, Qt::SmoothTransformation );
+}
+
+void PositionMarker::chooseAccuracyCircleColor()
+{
+    QColorDialog dialog( m_acColor );
+    dialog.setOptions( QColorDialog::ShowAlphaChannel );
+    dialog.exec();
+    QColor c = dialog.selectedColor();
+    if( c.isValid() )
+    {
+        m_acColor = c;
+        QPalette palette;
+        palette.setColor( QPalette::Background, m_acColor );
+        ui_configWidget->m_acColorPreview->setPalette( palette );
+    }
+}
+
+void PositionMarker::resizeCursor( int step )
+{
+    m_cursorSize = sm_resizeSteps[step];
+    float newSize = 22 * m_cursorSize;
+    m_customCursor = QPixmap( m_cursorPath ).scaled( newSize, newSize, Qt::KeepAspectRatio, Qt::SmoothTransformation );
+    ui_configWidget->m_sizeLabel->setText( tr( "Cursor Size: %1" ).arg( m_cursorSize ) );
+    if( !m_customCursor.isNull() )
+    {
+        ui_configWidget->m_fileChooserButton->setIconSize( QSize( m_customCursor.width(), m_customCursor.height() ) );
+        ui_configWidget->m_fileChooserButton->setIcon( QIcon( m_customCursor ) );
+    }
+    loadDefaultCursor();
 }
 
 qreal PositionMarker::zValue() const

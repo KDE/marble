@@ -14,6 +14,8 @@
 #define POSITION_MARKER_H
 
 #include <QtCore/QObject>
+#include <QtCore/QHash>
+#include <QtGui/QColor>
 
 #include "RenderPlugin.h"
 #include "GeoDataCoordinates.h"
@@ -68,32 +70,57 @@ class PositionMarker  : public RenderPlugin
     // Overriding LayerInterface to paint on top of the route
     virtual qreal zValue() const;
 
+    /**
+     * @return: The settings of the item.
+     */
+    virtual QHash<QString,QVariant> settings() const;
+
+    /**
+     * Set the settings of the item.
+     */
+    virtual void setSettings( QHash<QString,QVariant> settings );
+
+
  public slots:
     void readSettings() const;
     void writeSettings();
+    void updateSettings();
     void setPosition( const GeoDataCoordinates &position );
     void chooseCustomCursor();
+    void chooseAccuracyCircleColor();
+    void resizeCursor( int step );
 
  private:
     Q_DISABLE_COPY( PositionMarker )
 
     bool           m_isInitialized;
     bool           m_useCustomCursor;
- 
-    mutable Ui::PositionMarkerConfigWidget *ui_configWidget;
-    mutable PluginAboutDialog *m_aboutDialog;
-    mutable QDialog *m_configDialog;
-
+    
+    QString m_defaultCursorPath;
     ViewportParams     *m_viewport;
     GeoDataCoordinates  m_currentPosition;
     GeoDataCoordinates  m_previousPosition;
+    
+    mutable Ui::PositionMarkerConfigWidget *ui_configWidget;
+    mutable PluginAboutDialog *m_aboutDialog;
+    mutable QDialog *m_configDialog;
+    mutable QString m_cursorPath;
 
     QPolygonF           m_arrow;
     QPolygonF           m_previousArrow;
     QRegion             m_dirtyRegion;
     QPixmap             m_customCursor;
+    QPixmap             m_defaultCursor;
+    QHash<QString,QVariant> m_settings;
+    float               m_cursorSize;
+    QColor              m_acColor;
 
-    int loadCustomCursor( const QString& filename );
+    static const int sm_defaultSizeStep;
+    static const int sm_numResizeSteps;
+    static const float sm_resizeSteps[];
+
+    void loadCustomCursor( const QString& filename, bool useCursor );
+    void loadDefaultCursor();
 };
 
 }
