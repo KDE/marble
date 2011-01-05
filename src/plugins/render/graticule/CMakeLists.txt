@@ -7,6 +7,9 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( marblegraticule_SRCS GraticulePlugin.cpp )
+set( graticule_SRCS GraticulePlugin.cpp )
+set( graticule_UI GraticuleConfigWidget.ui )
+qt4_wrap_ui( graticule_SRCS ${graticule_UI} )
 
-marble_add_plugin( GraticulePlugin ${marblegraticule_SRCS} )
+
+marble_add_plugin( GraticulePlugin ${graticule_SRCS} )
