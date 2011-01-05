@@ -21,6 +21,7 @@
 #include <QtGui/QPen>
 #include <QtCore/QHash>
 #include <QtGui/QIcon>
+#include <QColorDialog>
 
 
 #include "AbstractDataPlugin.h"
@@ -30,6 +31,12 @@
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
+
+
+namespace Ui 
+{
+    class GraticuleConfigWidget;
+}
 
 namespace Marble
 {
@@ -70,15 +77,36 @@ class GraticulePlugin : public RenderPlugin
 
     QIcon icon () const;
 
-    QDialog *aboutDialog() const;
+    QDialog *configDialog() const;
 
+    QDialog *aboutDialog() const;
 
     void initialize ();
 
     bool isInitialized () const;
 
-
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
+
+//    QHash<QString,QVariant> settings() const;
+
+//    void setSettings( QHash<QString,QVariant> settings );
+
+    virtual QHash<QString,QVariant> settings() const;
+
+    virtual void setSettings( QHash<QString,QVariant> settings );
+
+
+
+ public Q_SLOTS:
+    void readSettings() const;
+    void writeSettings();
+    
+    void gridGetColor();
+    void tropicsGetColor();
+    void equatorGetColor();
+    
+    void updateSettings();
+
 
  private:
      /**
@@ -87,8 +115,9 @@ class GraticulePlugin : public RenderPlugin
      * @param viewport the viewport
      */
     void renderGrid( GeoPainter *painter, ViewportParams *viewport,
-                     const QPen& majorCirclePen,
-                     const QPen& minorCirclePen );
+                     const QPen& equatorCirclePen,    
+                     const QPen& tropicsCirclePen,
+                     const QPen& gridCirclePen );
 
      /**
      * @brief Renders a latitude line within the defined view bounding box.
@@ -159,13 +188,22 @@ class GraticulePlugin : public RenderPlugin
     QMap<qreal,qreal> m_boldLineMap;
     QMap<qreal,qreal> m_normalLineMap;
 
-    QPen m_majorCirclePen;
-    QPen m_minorCirclePen;
+    QPen m_equatorCirclePen;
+    QPen m_tropicsCirclePen;
+    QPen m_gridCirclePen;
     QPen m_shadowPen;
+    
+    QColor m_gridColor, m_tropicsColor, m_equatorColor;
 
     bool m_isInitialized;
+
+    QHash<QString,QVariant> m_settings;
+
     mutable QIcon m_icon;
     mutable PluginAboutDialog *m_aboutDialog;
+        
+    mutable Ui::GraticuleConfigWidget *ui_configWidget;
+    mutable QDialog *m_configDialog;
 
 };
 
