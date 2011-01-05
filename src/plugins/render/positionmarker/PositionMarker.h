@@ -114,6 +114,7 @@ class PositionMarker  : public RenderPlugin
     QHash<QString,QVariant> m_settings;
     float               m_cursorSize;
     QColor              m_acColor;
+    qreal               m_heading;
 
     static const int sm_defaultSizeStep;
     static const int sm_numResizeSteps;

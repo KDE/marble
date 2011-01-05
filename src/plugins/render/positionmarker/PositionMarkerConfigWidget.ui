@@ -90,6 +90,13 @@
        </layout>
       </item>
       <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Position marker images indicating the direction should point north (top).</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <property name="bottomMargin">
          <number>0</number>

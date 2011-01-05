@@ -37,6 +37,7 @@ svg/coordinate.svg
 svg/wikipedia.svg
 svg/wikipedia_shadow.svg
 svg/sunshine.png
+svg/track_turtle.svg
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/svg)
 
 FILE (GLOB SVG_FILES flags/*.svg)

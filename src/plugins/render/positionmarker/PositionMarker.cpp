@@ -19,6 +19,9 @@
 #include <QtGui/QMessageBox>
 #include <QtGui/QPushButton>
 #include <QtGui/QColorDialog>
+#include <QtGui/QTransform>
+
+#include <cmath>
 
 #include "ui_PositionMarkerConfigWidget.h"
 #include "AbstractProjection.h"
@@ -195,6 +198,7 @@ void PositionMarker::update()
             // magnitude should be >0
             qreal magnitude = sqrt( ( unitVector.x() * unitVector.x() )
                                     + ( unitVector.y() * unitVector.y() ) );
+            m_heading = atan( unitVector.y() / unitVector.x() ) + M_PI / 2.0;
             unitVector = unitVector / magnitude;
             QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x() );
             QPointF relativeLeft = - ( unitVector * 9   ) + ( unitVector2 * 9 );
@@ -248,7 +252,16 @@ bool PositionMarker::render( GeoPainter *painter,
         {
             QRect rect = m_arrow.boundingRect().toRect();
             if( rect.isValid() )
-                painter->drawPixmap( rect.topLeft(), m_customCursor );
+            {
+                QTransform transform;
+                transform.translate( -m_customCursor.width() / 2, -m_customCursor.height() / 2 );
+                transform.rotateRadians( m_heading );
+                transform.translate( m_customCursor.width() / 2, m_customCursor.height() / 2 );
+                if( painter->mapQuality() == HighQuality || painter->mapQuality() == PrintQuality )
+                    painter->drawPixmap( rect.topLeft(), m_customCursor.transformed( transform, Qt::SmoothTransformation ) );
+                else
+                    painter->drawPixmap( rect.topLeft(), m_customCursor.transformed( transform ) );
+            }
         }
         else
         {
