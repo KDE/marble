@@ -17,6 +17,7 @@
 
 #include <QtCore/QHash>
 #include <QtGui/QIcon>
+#include <QtGui/QAbstractButton>
 
 namespace Ui
 {
@@ -74,6 +75,7 @@ private:
 
 private slots:
     void validateDateRange();
+    void evaluateClickedButton( QAbstractButton *button );
 };
 
 }

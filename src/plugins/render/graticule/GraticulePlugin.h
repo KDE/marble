@@ -18,10 +18,11 @@
 #include <QtCore/QMap>
 #include <QtCore/QObject>
 #include <QtCore/QVector>
-#include <QtGui/QPen>
 #include <QtCore/QHash>
+#include <QtGui/QPen>
 #include <QtGui/QIcon>
-#include <QColorDialog>
+#include <QtGui/QColorDialog>
+#include <QtGui/QAbstractButton>
 
 
 #include "AbstractDataPlugin.h"
@@ -205,6 +206,8 @@ class GraticulePlugin : public RenderPlugin
     mutable Ui::GraticuleConfigWidget *ui_configWidget;
     mutable QDialog *m_configDialog;
 
+ private slots:
+    void evaluateClickedButton( QAbstractButton *button );
 };
 
 }
