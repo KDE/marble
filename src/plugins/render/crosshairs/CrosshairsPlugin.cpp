@@ -30,6 +30,7 @@ namespace Marble
 
 CrosshairsPlugin::CrosshairsPlugin ( )
     : m_isInitialized( false ),
+      m_aboutDialog( 0 ),
       m_svgobj( 0 ),
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )
@@ -81,6 +82,33 @@ QString CrosshairsPlugin::description() const
 QIcon CrosshairsPlugin::icon () const
 {
     return QIcon( ":/icons/crosshairs.png" );
+}
+
+QDialog* CrosshairsPlugin::aboutDialog() const
+{
+    if ( !m_aboutDialog ) {
+        // Initializing about dialog
+        m_aboutDialog = new PluginAboutDialog();
+        m_aboutDialog->setName( "Compass Plugin" );
+        m_aboutDialog->setVersion( "0.1" );
+        // FIXME: Can we store this string for all of Marble
+        m_aboutDialog->setAboutText( tr( "<br />(c) 2009, 2010 The Marble Project <br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
+        QList<Author> authors;
+        Author tackat, cezar;
+        
+        cezar.name = QString::fromUtf8( "Cezar Mocan" );
+        cezar.task = tr( "Developer" );
+        cezar.email = "cezarmocan@gmail.com";
+        authors.append( cezar );
+        
+        tackat.name = "Torsten Rahn";
+        tackat.task = tr( "Developer" );
+        tackat.email = "tackat@kde.org";
+        authors.append( tackat );
+        
+        m_aboutDialog->setAuthors( authors );
+    }
+    return m_aboutDialog;
 }
 
 void CrosshairsPlugin::initialize ()

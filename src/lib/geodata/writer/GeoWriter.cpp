@@ -39,7 +39,7 @@ bool GeoWriter::write(QIODevice* device, const GeoNode *feature)
     if( writer ) {
         //FIXME is this too much of a hack?
         //geodataobject is never used in this context
-        GeoNode* node;
+        GeoNode* node = new GeoNode;
         writer->write( node, *this );
     } else {
         qDebug() << "There is no GeoWriter registered for: " << name;
