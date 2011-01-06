@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>410</width>
+    <width>413</width>
     <height>297</height>
    </rect>
   </property>
@@ -150,13 +150,16 @@
    <item>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
-      <string>Colors</string>
+      <string>C&amp;olors</string>
      </property>
      <layout class="QFormLayout" name="formLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="m_accuracyLabel">
         <property name="text">
-         <string>Accuracy:</string>
+         <string>&amp;Accuracy:</string>
+        </property>
+        <property name="buddy">
+         <cstring>m_acColorChooserButton</cstring>
         </property>
        </widget>
       </item>
@@ -171,8 +174,11 @@
         <property name="minimumSize">
          <size>
           <width>30</width>
-          <height>30</height>
+          <height>25</height>
          </size>
+        </property>
+        <property name="toolTip">
+         <string>Color of the position marker's accuray indicator.</string>
         </property>
         <property name="text">
          <string/>
