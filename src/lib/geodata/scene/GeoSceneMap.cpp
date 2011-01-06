@@ -47,7 +47,7 @@ class GeoSceneMapPrivate
     
     const char* nodeType() const
     {
-        GeoSceneTypes::GeoSceneMapType;
+        return GeoSceneTypes::GeoSceneMapType;
     }
 
     /// The vector holding all the sections in the legend.
