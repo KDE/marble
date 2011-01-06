@@ -303,8 +303,9 @@ void PositionMarker::setSettings( QHash<QString,QVariant> settings )
 
 void PositionMarker::readSettings() const
 {
-    if ( !m_configDialog )
+    if ( !m_configDialog ) {
         return;
+    }
 
     if( m_settings.value( "useCustomCursor" ).toBool() )
         ui_configWidget->m_customCursor->click();
@@ -335,6 +336,10 @@ void PositionMarker::readSettings() const
 
 void PositionMarker::writeSettings()
 {
+    if ( !m_configDialog ) {
+        return;
+    }
+
     m_settings.insert( "useCustomCursor", ui_configWidget->m_customCursor->isChecked() );
     m_settings.insert( "cursorPath", m_cursorPath );
     m_settings.insert( "cursorSize", sm_resizeSteps[ui_configWidget->m_resizeSlider->value()] );
@@ -374,17 +379,21 @@ void PositionMarker::loadCustomCursor( const QString& filename, bool useCursor )
     m_customCursor = QPixmap( filename ).scaled( 22 * m_cursorSize, 22 * m_cursorSize, Qt::KeepAspectRatio, Qt::SmoothTransformation );
     if( !m_customCursor.isNull() )
     {
-        if( useCursor )
-            ui_configWidget->m_customCursor->click();
-        ui_configWidget->m_fileChooserButton->setIconSize( QSize( m_customCursor.width(), m_customCursor.height() ) );
-        ui_configWidget->m_fileChooserButton->setIcon( QIcon( m_customCursor ) );
+        if( m_configDialog )
+        {
+            if( useCursor )
+                ui_configWidget->m_customCursor->click();
+            ui_configWidget->m_fileChooserButton->setIconSize( QSize( m_customCursor.width(), m_customCursor.height() ) );
+            ui_configWidget->m_fileChooserButton->setIcon( QIcon( m_customCursor ) );
+        }
         m_cursorPath = filename;
     }
     else
     {
         QMessageBox::warning( NULL, tr( "Position Marker Plugin" ), tr( "Unable to load custom cursor, default cursor will be used. "
                                                        "Make sure this is a valid image file." ), QMessageBox::Ok );
-        ui_configWidget->m_fileChooserButton->setIcon( QIcon( m_defaultCursor ) );
+        if ( m_configDialog )
+            ui_configWidget->m_fileChooserButton->setIcon( QIcon( m_defaultCursor ) );
         m_customCursor = m_defaultCursor;
         m_cursorPath = m_defaultCursorPath;
     }
@@ -398,8 +407,8 @@ void PositionMarker::loadDefaultCursor()
 void PositionMarker::chooseAccuracyCircleColor()
 {
     QColor c = QColorDialog::getColor( m_acColor, 0, 
-					"Please choose the color for the accuracy circle", 
-					QColorDialog::ShowAlphaChannel );
+                                       tr( "Please choose the color for the accuracy circle" ), 
+                                       QColorDialog::ShowAlphaChannel );
     if( c.isValid() )
     {
         m_acColor = c;
