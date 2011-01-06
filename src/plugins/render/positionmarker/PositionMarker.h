@@ -16,6 +16,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QHash>
 #include <QtGui/QColor>
+#include <QtGui/QAbstractButton>
 
 #include "RenderPlugin.h"
 #include "GeoDataCoordinates.h"
@@ -122,6 +123,9 @@ class PositionMarker  : public RenderPlugin
 
     void loadCustomCursor( const QString& filename, bool useCursor );
     void loadDefaultCursor();
+
+ private slots:
+    void evaluateClickedButton( QAbstractButton *button );
 };
 
 }

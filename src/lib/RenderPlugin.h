@@ -124,6 +124,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
  public Q_SLOTS:
     void    setEnabled( bool enabled );
     void    setVisible( bool visible );
+    void    restoreDefaultSettings();
 
  Q_SIGNALS:
     /**

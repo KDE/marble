@@ -189,6 +189,11 @@ bool RenderPlugin::eventFilter( QObject *, QEvent * )
     return false;
 }
 
+void RenderPlugin::restoreDefaultSettings()
+{
+    setSettings( QHash<QString,QVariant>() );
+}
+
 } // namespace Marble
 
 #include "RenderPlugin.moc"

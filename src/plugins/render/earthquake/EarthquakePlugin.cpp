@@ -78,6 +78,8 @@ QDialog *EarthquakePlugin::configDialog() const
                  SLOT( writeSettings() ) );
         connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ),
                  SLOT( readSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL( clicked ( QAbstractButton * ) ),
+                 SLOT( evaluateClickedButton( QAbstractButton * ) ) );
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
         connect( applyButton, SIGNAL( clicked() ),
                  SLOT( writeSettings() ) );
@@ -157,6 +159,12 @@ void EarthquakePlugin::validateDateRange()
         ui_configWidget->m_startDate->setDateTime( ui_configWidget->m_endDate->dateTime() );
     }
     ui_configWidget->m_startDate->setMaximumDateTime( ui_configWidget->m_endDate->dateTime() );
+}
+
+void EarthquakePlugin::evaluateClickedButton( QAbstractButton *button )
+{
+    if( button == ui_configWidget->m_buttonBox->button( QDialogButtonBox::RestoreDefaults ) )
+        restoreDefaultSettings();
 }
 
 }

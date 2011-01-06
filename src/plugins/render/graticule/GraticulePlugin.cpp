@@ -111,7 +111,7 @@ QDialog *GraticulePlugin::configDialog () const
         m_configDialog = new QDialog();
         ui_configWidget = new Ui::GraticuleConfigWidget;
         ui_configWidget->setupUi( m_configDialog );
-                        
+
         readSettings();
 
         connect( ui_configWidget->gridPushButton, SIGNAL( clicked() ), this,
@@ -120,12 +120,14 @@ QDialog *GraticulePlugin::configDialog () const
                 SLOT( tropicsGetColor() ) );
         connect( ui_configWidget->equatorPushButton, SIGNAL( clicked() ), this,
                 SLOT( equatorGetColor() ) );
-                
-             
+
+
         connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ), this, 
                 SLOT( writeSettings() ) );
         connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ), this, 
                 SLOT( readSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL( clicked ( QAbstractButton * ) ),
+                 SLOT( evaluateClickedButton( QAbstractButton * ) ) );
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
         connect( applyButton, SIGNAL( clicked() ),
                  this,        SLOT( writeSettings() ) );
@@ -665,6 +667,12 @@ void GraticulePlugin::initLineMaps( GeoDataCoordinates::Notation notation)
     m_boldLineMap[999999999]   = m_boldLineMap.value(262144000);     //  last
 
     m_currentNotation = notation;
+}
+
+void GraticulePlugin::evaluateClickedButton( QAbstractButton *button )
+{
+    if( button == ui_configWidget->m_buttonBox->button( QDialogButtonBox::RestoreDefaults ) )
+        restoreDefaultSettings();
 }
 
 }
