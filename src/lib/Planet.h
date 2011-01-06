@@ -12,6 +12,7 @@
 #define MARBLE_PLANET_H
 
 #include "marble_export.h"
+#include <QStringList>
 
 namespace Marble
 {
@@ -93,7 +94,11 @@ public:
     Planet& operator=( const Planet& rhs );
 
     static QString name( const QString& id );
+	
+	static QStringList planetList();
+	
 
+		
 private:
     PlanetPrivate * const d;
 };
