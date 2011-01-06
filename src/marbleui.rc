@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<gui name="marble" version="7">
+<gui name="marble" version="8">
 
 <MenuBar>
   <Menu name="file" noMerge="1"><text>&amp;File</text>
@@ -40,8 +40,8 @@
   <Separator/>
 <!--
   <Action name="sun_shadow"/>
--->
   <Action name="sun_zenith"/>
+-->
 </ToolBar>
 
 </gui>
