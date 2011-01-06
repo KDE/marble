@@ -21,6 +21,7 @@
 
 #include "GeoDocument.h"
 #include <cstdio>
+#include "GeoSceneTypes.h"
 
 namespace Marble
 {
@@ -68,6 +69,11 @@ GeoNode::~GeoNode()
 #if DUMP_GEONODE_LEAKS > 0
     --GeoDocument::s_leakProtector;
 #endif
+}
+
+const char* GeoNode::nodeType() const
+{
+    return "GeoNode";
 }
 
 }

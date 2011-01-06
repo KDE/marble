@@ -13,7 +13,6 @@
 #include "GeoDataFolder.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
-#include "GeoDataObject.h"
 #include "MarbleDebug.h"
 
 #include "GeoDataTypes.h"
@@ -27,21 +26,21 @@ static GeoTagWriterRegistrar s_writerDocument( GeoTagWriter::QualifiedName(GeoDa
                                                                             kml::kmlTag_nameSpace22),
                                                new KmlFolderTagWriter() );
 
-bool KmlFolderTagWriter::write( const GeoDataObject &node, GeoWriter& writer ) const
+bool KmlFolderTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
-    const GeoDataFolder &folder = static_cast<const GeoDataFolder&>(node);
+    const GeoDataFolder *folder = static_cast<const GeoDataFolder*>(node);
 
     writer.writeStartElement( kml::kmlTag_Folder );
 
     //Writing folder name
-    writer.writeOptionalElement( "name", folder.name() );
+    writer.writeOptionalElement( "name", folder->name() );
 
     //Write all containing features
-    QVector<GeoDataFeature*>::ConstIterator it =  folder.constBegin();
-    QVector<GeoDataFeature*>::ConstIterator const end = folder.constEnd();
+    QVector<GeoDataFeature*>::ConstIterator it =  folder->constBegin();
+    QVector<GeoDataFeature*>::ConstIterator const end = folder->constEnd();
 
     for ( ; it != end; ++it ) {
-        writeElement( *(*it), writer );
+        writeElement( *it, writer );
     }
 
     //close folder tag

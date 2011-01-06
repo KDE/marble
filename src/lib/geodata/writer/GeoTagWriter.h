@@ -19,6 +19,7 @@ namespace Marble
 {
 
 class GeoDataObject;
+class GeoNode;
 class GeoWriter;
 
 /**
@@ -30,7 +31,7 @@ class GeoWriter;
 class GeoTagWriter
 {
 public:
-    virtual bool write( const GeoDataObject &node, GeoWriter& writer ) const = 0;
+    virtual bool write( const GeoNode *node, GeoWriter& writer ) const = 0;
 
     /**
      * @brief Object Name and Namespace Pair
@@ -50,7 +51,7 @@ protected:
     GeoTagWriter();
     virtual ~GeoTagWriter();
 
-    bool writeElement( const GeoDataObject& object, GeoWriter& writer ) const;
+    bool writeElement( const GeoNode* object, GeoWriter& writer ) const;
 
 private:
     // Only our registrar is allowed to register tag writers.

@@ -46,6 +46,7 @@ class GEODATA_EXPORT GeoSceneMap : public GeoNode
  public:
     GeoSceneMap();
     ~GeoSceneMap();
+    virtual const char* nodeType() const;
 
     QColor backgroundColor() const;
     void setBackgroundColor( const QColor& );

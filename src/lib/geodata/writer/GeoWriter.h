@@ -37,18 +37,7 @@ public:
      * To define the type of XML document that is to be written you need to set
      * the current Document Type for this GeoWriter. See @see setDocumentType()
      */
-    bool write( QIODevice* device,
-                const QList<GeoDataFeature>& features);
-
-
-    /**
-     * @brief Overloaded convenience method to write a single feature or tree
-     * This convenience method allows you to call the GeoWriter using just a
-     * single @see GeoDataFeature. This accounts for the case where a KML
-     * document is contained in one single root element.
-     * See @see write(QIODevice*, const QList<GeoDataFeature>&) for more details
-     */
-    bool write( QIODevice* device, const GeoDataFeature& feature );
+    bool write( QIODevice* device, const GeoNode *feature);
 
     /**
      * @brief Set the current document type.
@@ -73,7 +62,7 @@ public:
 
 private:
     friend class GeoTagWriter;
-    bool writeElement( const GeoDataObject& object );
+    bool writeElement( const GeoNode* object );
 
 private:
     QString m_documentType;

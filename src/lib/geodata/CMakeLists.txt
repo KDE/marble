@@ -11,6 +11,7 @@ FILE( GLOB geodata_scene_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/scene
 # handlers and writers sources 
 FILE( GLOB geodata_handlers_dgml_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/handlers/dgml/*.cpp )
 FILE( GLOB geodata_handlers_kml_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/handlers/kml/*.cpp )
+FILE( GLOB geodata_writers_dgml_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/writers/dgml/*.cpp )
 FILE( GLOB geodata_writers_kml_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/writers/kml/*.cpp )
 
 # writer and the parser sources 
@@ -48,6 +49,7 @@ SET( geodata_SRCS
         ${geodata_handlers_dgml_SRCS}
         ${geodata_handlers_osmnamefinder_SRCS}
         ${geodata_writers_kml_SRCS}
+        ${geodata_writers_dgml_SRCS}
    )
 
 #add_subdirectory(geodata/data/tests)

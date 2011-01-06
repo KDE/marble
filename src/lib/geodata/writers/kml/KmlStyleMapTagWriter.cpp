@@ -23,14 +23,14 @@ static GeoTagWriterRegistrar s_writerStyleMap(
                                  kml::kmlTag_nameSpace22 ),
     new KmlStyleMapTagWriter );
 
-bool KmlStyleMapTagWriter::write( const GeoDataObject &node, GeoWriter& writer ) const
+bool KmlStyleMapTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
-    const GeoDataStyleMap &map = static_cast<const GeoDataStyleMap&>( node );
+    const GeoDataStyleMap *map = static_cast<const GeoDataStyleMap*>( node );
 
     writer.writeStartElement( kml::kmlTag_StyleMap );
-    writer.writeAttribute( "id", map.styleId() );
+    writer.writeAttribute( "id", map->styleId() );
 
-    QMapIterator<QString, QString> iter( map );
+    QMapIterator<QString, QString> iter( *map );
     while ( iter.hasNext() ) {
         iter.next();
         writer.writeStartElement( kml::kmlTag_Pair );

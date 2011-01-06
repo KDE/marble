@@ -13,6 +13,7 @@
 
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
+#include "GeoDataColorStyle.h"
 #include "GeoWriter.h"
 
 #include <QtCore/QDir>
@@ -51,7 +52,7 @@ void TestGeoDataWriter::initTestCase()
     dataDir.cd( "data" );
     //check there are files in the data dir
     QVERIFY( dataDir.count() > 0 );
-
+    
     QString filename;
 
     //test the loading of each file in the data dir
@@ -129,8 +130,7 @@ void TestGeoDataWriter::saveFile()
     // Open file in right mode
     QVERIFY( tempFile.open() );
 
-    QVERIFY( writer.write( &tempFile,
-                           *dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) );
+    QVERIFY( writer.write( &tempFile, &(*dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) ) );
 
 }
 
@@ -156,8 +156,7 @@ void TestGeoDataWriter::saveAndLoad()
     // Open file in right mode
     QVERIFY( tempFile.open() );
 
-    QVERIFY( writer.write( &tempFile,
-                           *dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) );
+    QVERIFY( writer.write( &tempFile, &( *dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) ) );
 
     GeoDataParser resultParser( GeoData_KML );
 
@@ -190,8 +189,7 @@ void TestGeoDataWriter::saveAndCompare()
     // Open file in right mode
     QVERIFY( tempFile.open() );
 
-    QVERIFY( writer.write( &tempFile,
-                           *dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) );
+    QVERIFY( writer.write( &tempFile, &( *dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) ) );
 
     QFile file( dataDir.filePath( original ) );
     QVERIFY( file.open( QIODevice::ReadOnly ) );

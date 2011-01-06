@@ -72,6 +72,8 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     bool hasMaximumTileLevel() const;
     int maximumTileLevel() const;
     void setMaximumTileLevel( const int );
+    
+    QVector<QUrl> downloadUrls() const;
 
     const QSize tileSize() const;
 

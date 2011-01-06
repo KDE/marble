@@ -23,17 +23,17 @@ static GeoTagWriterRegistrar s_writerStyle(
                                  kml::kmlTag_nameSpace22 ),
     new KmlStyleTagWriter );
 
-bool KmlStyleTagWriter::write( const GeoDataObject &node, GeoWriter& writer ) const
+bool KmlStyleTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
-    const GeoDataStyle &style = static_cast<const GeoDataStyle&>( node );
+    const GeoDataStyle *style = static_cast<const GeoDataStyle*>( node );
 
     writer.writeStartElement( kml::kmlTag_Style );
-    writer.writeAttribute( "id", style.styleId() );
+    writer.writeAttribute( "id", style->styleId() );
 
-    writeElement( style.iconStyle(), writer );
-    writeElement( style.labelStyle(), writer );
-    writeElement( style.lineStyle(), writer );
-    writeElement( style.polyStyle(), writer );
+    writeElement( &style->iconStyle(), writer );
+    writeElement( &style->labelStyle(), writer );
+    writeElement( &style->lineStyle(), writer );
+    writeElement( &style->polyStyle(), writer );
 
     writer.writeEndElement();
 

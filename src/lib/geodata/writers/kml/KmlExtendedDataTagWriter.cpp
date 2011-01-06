@@ -26,18 +26,18 @@ static GeoTagWriterRegistrar s_writerExtendedData( GeoTagWriter::QualifiedName( 
                                                new KmlExtendedDataTagWriter() );
 
 
-bool KmlExtendedDataTagWriter::write( const GeoDataObject &node,
+bool KmlExtendedDataTagWriter::write( const GeoNode *node,
                                GeoWriter& writer ) const
 {
-    const GeoDataExtendedData &extended = static_cast<const GeoDataExtendedData&>( node );
+    const GeoDataExtendedData *extended = static_cast<const GeoDataExtendedData*>( node );
 
     writer.writeStartElement( kml::kmlTag_ExtendedData );
     
-    QHash< QString, GeoDataData >::const_iterator begin = extended.constBegin();
-    QHash< QString, GeoDataData >::const_iterator end = extended.constEnd();
+    QHash< QString, GeoDataData >::const_iterator begin = extended->constBegin();
+    QHash< QString, GeoDataData >::const_iterator end = extended->constEnd();
 
     for( QHash< QString, GeoDataData >::const_iterator i = begin; i != end; ++i ){
-        writeElement( i.value(), writer );
+        writeElement( &i.value(), writer );
     }
     
     writer.writeEndElement();

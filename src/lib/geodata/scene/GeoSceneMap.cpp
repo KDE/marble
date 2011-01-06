@@ -21,6 +21,7 @@
 
 #include "GeoSceneMap.h"
 
+#include "GeoSceneTypes.h"
 #include "GeoSceneLayer.h"
 #include "GeoSceneFilter.h"
 #include "DgmlAuxillaryDictionary.h"
@@ -42,6 +43,11 @@ class GeoSceneMapPrivate
     {
         qDeleteAll( m_layers );
         qDeleteAll( m_filters );
+    }
+    
+    const char* nodeType() const
+    {
+        GeoSceneTypes::GeoSceneMapType;
     }
 
     /// The vector holding all the sections in the legend.
@@ -65,6 +71,11 @@ GeoSceneMap::GeoSceneMap()
 GeoSceneMap::~GeoSceneMap()
 {
     delete d;
+}
+
+const char* GeoSceneMap::nodeType() const
+{
+    return d->nodeType();
 }
 
 void GeoSceneMap::addLayer( GeoSceneLayer* layer )

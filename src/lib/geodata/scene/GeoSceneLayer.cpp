@@ -23,6 +23,7 @@
 
 #include <limits>
 #include "GeoSceneFilter.h"
+#include "GeoSceneTypes.h"
 
 namespace Marble
 {
@@ -61,18 +62,36 @@ void GeoSceneAbstractDataset::setExpire( int expire )
     m_expire = expire;
 }
 
+class GeoSceneLayerPrivate
+{
+  public:
+    GeoSceneLayerPrivate(){}
+    ~GeoSceneLayerPrivate(){}
+    
+    const char* nodeType() const
+    {
+        return "GeoSceneLayer";
+    }
+};
+
 GeoSceneLayer::GeoSceneLayer( const QString& name )
     : m_filter( 0 ),
       m_name( name ),
       m_backend(),
       m_role(),
-      m_tiled( true )
+      m_tiled( true ),
+      d( new GeoSceneLayerPrivate )
 {
 }
 
 GeoSceneLayer::~GeoSceneLayer()
 {
    qDeleteAll( m_datasets );
+}
+
+const char* GeoSceneLayer::nodeType() const
+{
+    return d->nodeType();
 }
 
 void GeoSceneLayer::addDataset( GeoSceneAbstractDataset* dataset )

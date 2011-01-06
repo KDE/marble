@@ -59,9 +59,10 @@ public:
  */
 class GEODATA_EXPORT GeoNode
 {
-protected:
+public:
     GeoNode();
     virtual ~GeoNode();
+    virtual const char* nodeType() const;
 };
 
 }

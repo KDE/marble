@@ -104,6 +104,7 @@ endif (QTONLY)
 marble_add_test( GeoPolygonTest )
 marble_add_test( TestGeoDataParser )
 marble_add_test( TestGeoDataWriter )
+marble_add_test( TestGeoSceneWriter )
 
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
@@ -114,7 +115,7 @@ marble_add_test( TestGeoData ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata/pars
 add_definitions( -DCITIES_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}/../data/placemarks/cityplacemarks.kml\\\"" )
 marble_add_test( KMLTest )
 
-# marble_add_test( TestOsmAnnotation )
+#marble_add_test( TestOsmAnnotation )
 marble_add_test( TestGeoDataGeometry )
 marble_add_test( unittest_geodatacoordinates )
 marble_add_test( unittest_geodatalatlonaltbox )

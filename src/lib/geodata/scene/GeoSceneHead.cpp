@@ -23,6 +23,7 @@
 #include "GeoSceneHead.h"
 
 // Marble
+#include "GeoSceneTypes.h"
 #include "GeoSceneIcon.h"
 #include "GeoSceneZoom.h"
 
@@ -48,6 +49,11 @@ class GeoSceneHeadPrivate
         delete m_icon;
         delete m_zoom;
     }
+    
+    const char* nodeType() const
+    {
+        return GeoSceneTypes::GeoSceneHeadType;
+    }
 
     GeoSceneZoom* m_zoom;
     GeoSceneIcon* m_icon;
@@ -69,6 +75,11 @@ GeoSceneHead::GeoSceneHead()
 GeoSceneHead::~GeoSceneHead()
 {
     delete d;
+}
+
+const char* GeoSceneHead::nodeType() const
+{
+    return d->nodeType();
 }
 
 QString GeoSceneHead::name() const

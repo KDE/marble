@@ -21,7 +21,7 @@ namespace Marble
 class KmlLookAtTagWriter : public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoDataObject &node, GeoWriter& writer ) const;
+    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
 };
 
 }

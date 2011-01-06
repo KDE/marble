@@ -43,7 +43,8 @@ class GEODATA_EXPORT GeoSceneHead : public GeoNode
  public:
     GeoSceneHead();
     ~GeoSceneHead();
-
+    
+    virtual const char* nodeType() const;
 
     QString name() const;
     void setName( const QString& name );

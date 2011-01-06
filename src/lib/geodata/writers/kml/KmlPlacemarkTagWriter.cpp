@@ -28,35 +28,35 @@ static GeoTagWriterRegistrar s_writerPlacemark( GeoTagWriter::QualifiedName(GeoD
                                                new KmlPlacemarkTagWriter() );
 
 
-bool KmlPlacemarkTagWriter::write( const GeoDataObject &node,
+bool KmlPlacemarkTagWriter::write( const GeoNode *node,
                                    GeoWriter& writer ) const
 {
-    const GeoDataPlacemark &placemark = static_cast<const GeoDataPlacemark&>(node);
+    const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>(node);
     writer.writeStartElement( kml::kmlTag_Placemark );
 
-    writer.writeOptionalElement( "name", placemark.name() );
-    writer.writeOptionalElement( kml::kmlTag_styleUrl, placemark.styleUrl() );
+    writer.writeOptionalElement( "name", placemark->name() );
+    writer.writeOptionalElement( kml::kmlTag_styleUrl, placemark->styleUrl() );
 
-    if( !placemark.description().isEmpty() ) {
+    if( !placemark->description().isEmpty() ) {
         writer.writeStartElement( "description" );
-        if( placemark.descriptionIsCDATA() ) {
-            writer.writeCDATA( placemark.description() );
+        if( placemark->descriptionIsCDATA() ) {
+            writer.writeCDATA( placemark->description() );
         } else {
-            writer.writeCharacters( placemark.description() );
+            writer.writeCharacters( placemark->description() );
         }
         writer.writeEndElement();
     }
 
-    if( !placemark.extendedData().isEmpty() ){
-		writeElement( placemark.extendedData(), writer );
+    if( !placemark->extendedData().isEmpty() ){
+		writeElement( &placemark->extendedData(), writer );
     }
 
-    if( placemark.geometry() ) {
-        writeElement( *placemark.geometry(), writer );
+    if( placemark->geometry() ) {
+        writeElement( placemark->geometry(), writer );
     }
 
-    if( placemark.lookAt() ){
-        writeElement( *placemark.lookAt(), writer );
+    if( placemark->lookAt() ){
+        writeElement( placemark->lookAt(), writer );
     }
 
     writer.writeEndElement();

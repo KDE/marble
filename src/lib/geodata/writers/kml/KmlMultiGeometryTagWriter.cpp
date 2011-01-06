@@ -23,15 +23,15 @@ static GeoTagWriterRegistrar s_writerMultiGeometry(
                                  kml::kmlTag_nameSpace22 ),
     new KmlMultiGeometryTagWriter );
 
-bool KmlMultiGeometryTagWriter::write( const GeoDataObject &node, GeoWriter& writer ) const
+bool KmlMultiGeometryTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
-    const GeoDataMultiGeometry &geometry = static_cast<const GeoDataMultiGeometry&>( node );
+    const GeoDataMultiGeometry *geometry = static_cast<const GeoDataMultiGeometry*>( node );
 
     writer.writeStartElement( kml::kmlTag_MultiGeometry );
 
-    for ( int i = 0; i < geometry.size(); ++i )
+    for ( int i = 0; i < geometry->size(); ++i )
     {
-        writeElement( geometry.at( i ), writer );
+        writeElement( &geometry->at( i ), writer );
     }
 
     writer.writeEndElement();

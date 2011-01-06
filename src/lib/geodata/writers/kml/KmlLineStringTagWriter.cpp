@@ -23,18 +23,18 @@ static GeoTagWriterRegistrar s_writerLookAt(
                                  kml::kmlTag_nameSpace22 ),
     new KmlLineStringTagWriter );
 
-bool KmlLineStringTagWriter::write( const GeoDataObject &node, GeoWriter& writer ) const
+bool KmlLineStringTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
-    const GeoDataLineString &lineString = static_cast<const GeoDataLineString&>( node );
+    const GeoDataLineString *lineString = static_cast<const GeoDataLineString*>( node );
 
-    if ( lineString.size() > 1 )
+    if ( lineString->size() > 1 )
     {
         writer.writeStartElement( kml::kmlTag_LineString );
         writer.writeStartElement( "coordinates" );
 
-        for ( int i = 0; i < lineString.size(); ++i )
+        for ( int i = 0; i < lineString->size(); ++i )
         {
-            GeoDataCoordinates coordinates = lineString.at( i );
+            GeoDataCoordinates coordinates = lineString->at( i );
             if ( i > 0 )
             {
                 writer.writeCharacters( " " );

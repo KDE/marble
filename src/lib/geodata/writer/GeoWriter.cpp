@@ -12,6 +12,7 @@
 
 #include "GeoTagWriter.h"
 #include "KmlElementDictionary.h"
+#include "DgmlElementDictionary.h"
 
 #include "MarbleDebug.h"
 
@@ -24,7 +25,7 @@ GeoWriter::GeoWriter()
     m_documentType = kml::kmlTag_nameSpace22;
 }
 
-bool GeoWriter::write(QIODevice* device, const QList<GeoDataFeature> &features)
+bool GeoWriter::write(QIODevice* device, const GeoNode *feature)
 {
     setDevice( device );
     setAutoFormatting( true );
@@ -32,25 +33,21 @@ bool GeoWriter::write(QIODevice* device, const QList<GeoDataFeature> &features)
 
     //FIXME: write the starting tags. Possibly register a tag handler to do this
     // with a null string as the object name?
+    
     GeoTagWriter::QualifiedName name( "", m_documentType );
     const GeoTagWriter* writer = GeoTagWriter::recognizes(name);
     if( writer ) {
         //FIXME is this too much of a hack?
         //geodataobject is never used in this context
-        writer->write( GeoDataObject(), *this );
+        GeoNode* node;
+        writer->write( node, *this );
     } else {
-        mDebug() << "There is no GeoWriter registered for: " << name;
+        qDebug() << "There is no GeoWriter registered for: " << name;
         return false;
     }
-
-    QListIterator<GeoDataFeature> it(features);
-
-    while ( it.hasNext() ) {
-        GeoDataFeature f = it.next();
-
-        if( ! writeElement( f ) ) {
-            return false;
-        }
+    
+    if( ! writeElement( feature ) ) {
+        return false;
     }
 
     //close the document
@@ -58,33 +55,26 @@ bool GeoWriter::write(QIODevice* device, const QList<GeoDataFeature> &features)
     return true;
 }
 
-bool GeoWriter::write( QIODevice *device, const GeoDataFeature &feature)
+bool GeoWriter::writeElement(const GeoNode *object)
 {
-    QList<GeoDataFeature> list;
-    list.append(feature);
-    return write(device, list);
-}
+    // Add checks to see that everything is ok here
 
-bool GeoWriter::writeElement(const GeoDataObject &object)
-{
-    //Add checks to see that everything is ok here
-    //
-
-    GeoTagWriter::QualifiedName name( object.nodeType(), m_documentType );
+    GeoTagWriter::QualifiedName name( object->nodeType(), m_documentType );
     const GeoTagWriter* writer = GeoTagWriter::recognizes( name );
 
     if( writer ) {
         if( ! writer->write( object, *this ) ) {
-            mDebug() << "An error has been reported by the GeoWriter for: "
+            qDebug() << "An error has been reported by the GeoWriter for: "
                     << name;
             return false;
         }
     } else {
-        mDebug() << "There is no GeoWriter registered for: " << name;
-        return false;
+        qDebug() << "There is no GeoWriter registered for: " << name;
+        return true;
     }
     return true;
 }
+
 
 void GeoWriter::setDocumentType( const QString &documentType )
 {

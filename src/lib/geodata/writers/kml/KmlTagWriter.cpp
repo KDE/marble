@@ -22,7 +22,7 @@ static GeoTagWriterRegistrar s_writerKml( GeoTagWriter::QualifiedName( "",
                                                new KmlTagWriter() );
 
 
-bool KmlTagWriter::write( const GeoDataObject &node, GeoWriter& writer ) const
+bool KmlTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     Q_UNUSED(node);
     writer.writeStartElement( "kml" );

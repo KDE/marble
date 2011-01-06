@@ -26,7 +26,7 @@ GeoTagWriter::~GeoTagWriter()
 {
 }
 
-bool GeoTagWriter::writeElement( const GeoDataObject &object,
+bool GeoTagWriter::writeElement( const GeoNode *object,
                                  GeoWriter &writer) const
 {
     return writer.writeElement( object );

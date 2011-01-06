@@ -33,6 +33,7 @@ namespace Marble
 {
 
 class GeoSceneFilter;
+class GeoSceneLayerPrivate;
 
 /**
  * @short Contents used inside a layer.
@@ -70,6 +71,8 @@ class GEODATA_EXPORT GeoSceneLayer : public GeoNode
  public:
     explicit GeoSceneLayer( const QString& name );
     ~GeoSceneLayer();
+    
+    virtual const char* nodeType() const;
 
     /**
      * @brief  Add a section to the legend
@@ -119,6 +122,8 @@ class GEODATA_EXPORT GeoSceneLayer : public GeoNode
     QString          m_role;
 
     bool             m_tiled;
+    
+    GeoSceneLayerPrivate * const d;
 };
 
 }

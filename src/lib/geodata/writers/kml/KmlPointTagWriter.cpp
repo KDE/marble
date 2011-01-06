@@ -23,10 +23,10 @@ static GeoTagWriterRegistrar s_writerPoint( GeoTagWriter::QualifiedName(GeoDataT
                                                new KmlPointTagWriter() );
 
 
-bool KmlPointTagWriter::write( const GeoDataObject &node,
+bool KmlPointTagWriter::write( const GeoNode *node,
                                GeoWriter& writer ) const
 {
-    const GeoDataPoint &point = static_cast<const GeoDataPoint&>(node);
+    const GeoDataPoint *point = static_cast<const GeoDataPoint*>(node);
 
     writer.writeStartElement( kml::kmlTag_Point );
 
@@ -37,13 +37,13 @@ bool KmlPointTagWriter::write( const GeoDataObject &node,
     //FIXME: this should be using the GeoDataCoordinates::toString but currently
     // it is not including the altitude and is adding an extra space after commas
 
-    coordinateString += QString::number( point.longitude( GeoDataCoordinates::Degree ), 'f', 10 );
+    coordinateString += QString::number( point->longitude( GeoDataCoordinates::Degree ), 'f', 10 );
     coordinateString += ',' ;
-    coordinateString += QString::number( point.latitude( GeoDataCoordinates::Degree ) , 'f', 10 );
+    coordinateString += QString::number( point->latitude( GeoDataCoordinates::Degree ) , 'f', 10 );
 
-    if( point.altitude() ) {
+    if( point->altitude() ) {
         coordinateString += ',';
-        coordinateString += QString::number( point.altitude() , 'f' , 10);
+        coordinateString += QString::number( point->altitude() , 'f' , 10);
     }
 
     writer.writeCharacters( coordinateString );

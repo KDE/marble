@@ -193,7 +193,7 @@ bool PositionTracking::saveTrack(QString& fileName)
         writer.setDocumentType( kml::kmlTag_nameSpace22 );
         QFile file( fileName );
         file.open( QIODevice::ReadWrite );
-        return writer.write(&file, *d->m_document);
+        return writer.write(&file, d->m_document );
     }
     return false;
 }

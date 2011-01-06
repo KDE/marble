@@ -116,6 +116,11 @@ void GeoSceneTexture::setMaximumTileLevel( const int maximumTileLevel )
     m_maximumTileLevel = maximumTileLevel;
 }
 
+QVector<QUrl> GeoSceneTexture::downloadUrls() const
+{
+    return m_downloadUrls;
+}
+
 const QSize GeoSceneTexture::tileSize() const
 {
     if ( !m_tileSize.isValid() ) {

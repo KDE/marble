@@ -147,7 +147,7 @@ void RoutingManagerPrivate::saveRoute(const QString &filename)
         container.append( new GeoDataDocument( *route ) );
     }
 
-    if ( !writer.write( &file, container ) ) {
+    if ( !writer.write( &file, &container ) ) {
         mDebug() << "Can not write route state to " << file.fileName();
     }
     file.close();
