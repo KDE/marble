@@ -17,7 +17,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Colors</string>
+      <string>C&amp;olors</string>
      </property>
      <layout class="QFormLayout" name="formLayout">
       <item row="0" column="0">
@@ -437,18 +437,22 @@
           </disabled>
          </palette>
         </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
         <property name="text">
-         <string>Grid</string>
+         <string>&amp;Grid:</string>
+        </property>
+        <property name="buddy">
+         <cstring>gridPushButton</cstring>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QPushButton" name="gridPushButton">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="palette">
          <palette>
           <active>
@@ -485,6 +489,9 @@
            </colorrole>
           </disabled>
          </palette>
+        </property>
+        <property name="toolTip">
+         <string>Color of the coordinate grid.</string>
         </property>
         <property name="text">
          <string/>
@@ -908,18 +915,25 @@
           </disabled>
          </palette>
         </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
         <property name="text">
-         <string>Tropics</string>
+         <string>&amp;Tropics:</string>
+        </property>
+        <property name="buddy">
+         <cstring>tropicsPushButton</cstring>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QPushButton" name="tropicsPushButton">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Color of the tropical circles.</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -1342,18 +1356,25 @@
           </disabled>
          </palette>
         </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
         <property name="text">
-         <string>Equator</string>
+         <string>&amp;Equator:</string>
+        </property>
+        <property name="buddy">
+         <cstring>equatorPushButton</cstring>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QPushButton" name="equatorPushButton">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Color of the equator.</string>
+        </property>
         <property name="text">
          <string/>
         </property>
