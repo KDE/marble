@@ -347,7 +347,27 @@ QString Planet::name( const QString& id )
 
     return id;
 }
+	
+QStringList Planet::planetList()  
+{
 
+	QStringList planets;
+
+	planets << "mercury"
+	<< "venus"
+	<< "earth"
+	<< "mars"
+	<< "jupiter"
+	<< "saturn"
+	<< "uranus"
+	<< "neptune"
+	<< "pluto"
+	<< "sun"
+	<< "moon";
+	
+	return planets;
+}
+	
 Planet& Planet::operator=(const Planet& rhs)
 {
     // PlanetPrivate does not have pointer members, so we can just
