@@ -152,6 +152,7 @@ void RoutingPluginPrivate::updateGuidanceModeButton()
 {
     bool const hasRoute = m_routingModel->rowCount() > 0;
     m_widget.routingButton->setEnabled( hasRoute );
+    m_widgetItem->update();
 }
 
 void RoutingPluginPrivate::forceRepaint()
@@ -303,6 +304,8 @@ void RoutingPluginPrivate::updateInstructionLabel( int fontSize, qreal remaining
             m_widget.instructionLabel->setText( richText( "%1", fontSize ).arg( content ) );
         }
     }
+
+    m_widgetItem->update();
 }
 
 void RoutingPluginPrivate::updateGpsButton( PositionProviderPlugin *activePlugin )
