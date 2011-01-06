@@ -11,6 +11,11 @@
 // Self
 #include "AbstractFloatItem.h"
 
+// Qt
+#include <QtGui/QMenu>
+#include <QtGui/QAction>
+#include <QtGui/QDialog>
+
 // Marble
 #include "MarbleDebug.h"
 
@@ -91,11 +96,15 @@ QStringList AbstractFloatItem::renderPosition() const
 
 void AbstractFloatItem::setVisible( bool visible )
 {
+    // Reimplemented since AbstractFloatItem does multiple inheritance 
+    // and the (set)Visible() methods are available in both base classes!
     RenderPlugin::setVisible( visible );
 }
 
 bool AbstractFloatItem::visible() const
 {
+    // Reimplemented since AbstractFloatItem does multiple inheritance 
+    // and the (set)Visible() methods are available in both base classes!
     return RenderPlugin::visible();
 }
 
@@ -151,8 +160,24 @@ bool AbstractFloatItem::eventFilter( QObject *object, QEvent *e )
 
 void AbstractFloatItem::contextMenuEvent ( QWidget *w, QContextMenuEvent *e )
 {
-    Q_UNUSED( w );
-    Q_UNUSED( e );
+    QMenu menu;
+    QAction *lockaction = menu.addAction( tr( "&Lock" ) );
+    lockaction->setCheckable( true );
+    lockaction->setChecked( positionLocked() );
+    connect( lockaction, SIGNAL( triggered( bool ) ),
+             this, SLOT( setPositionLocked( bool ) ) );
+    QAction *hideaction = menu.addAction( tr( "&Hide" ) );
+    connect( hideaction, SIGNAL( triggered() ),
+             this, SLOT( hide() ) );
+    QDialog *dialog = configDialog();
+    if( dialog != NULL )
+    {
+        menu.addSeparator();
+        QAction *configaction = menu.addAction( tr( "&Configure..." ) );
+        connect( configaction, SIGNAL( triggered() ),
+                 dialog, SLOT( exec() ) );
+    }
+    menu.exec( w->mapToGlobal( e->pos() ) );
 }
 
 void AbstractFloatItem::toolTipEvent ( QHelpEvent *e )
@@ -190,6 +215,16 @@ bool AbstractFloatItem::renderOnMap( GeoPainter     *painter,
     Q_UNUSED( layer );
 
     return true;
+}
+
+void AbstractFloatItem::show()
+{
+    setVisible( true );
+}
+
+void AbstractFloatItem::hide()
+{
+    setVisible( false );
 }
 
 }
