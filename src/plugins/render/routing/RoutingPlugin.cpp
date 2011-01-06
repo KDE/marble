@@ -36,7 +36,6 @@
 #include <QtGui/QActionGroup>
 #include <QtGui/QPixmap>
 #include <QtGui/QPlastiqueStyle>
-#include <QtCore/QDebug>
 
 namespace Marble
 {
@@ -138,10 +137,15 @@ void RoutingPluginPrivate::updateZoomButtons( int zoomValue )
     int const minZoom = m_marbleWidget ? m_marbleWidget->minimumZoom() : 900;
     int const maxZoom = m_marbleWidget ? m_marbleWidget->maximumZoom() : 2400;
 
-    m_widget.zoomInButton->setEnabled( zoomValue < maxZoom );
-    m_widget.zoomOutButton->setEnabled( zoomValue > minZoom );
+    bool const zoomInEnabled = zoomValue < maxZoom;
+    bool const zoomOutEnabled = zoomValue > minZoom;
 
-    forceRepaint();
+    if ( ( zoomInEnabled != m_widget.zoomInButton->isEnabled() ) ||
+         ( zoomOutEnabled != m_widget.zoomOutButton->isEnabled() ) ) {
+        m_widget.zoomInButton->setEnabled( zoomInEnabled );
+        m_widget.zoomOutButton->setEnabled( zoomOutEnabled );
+        forceRepaint();
+    }
 }
 
 void RoutingPluginPrivate::updateGuidanceModeButton()
@@ -152,6 +156,7 @@ void RoutingPluginPrivate::updateGuidanceModeButton()
 
 void RoutingPluginPrivate::forceRepaint()
 {
+    m_widgetItem->update();
     if ( m_marbleWidget ) {
         // Trigger a repaint of the float item. Otherwise button state updates are delayed
         m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground, false );
@@ -384,6 +389,7 @@ void RoutingPlugin::initialize()
 
     d->m_widgetItem = new WidgetGraphicsItem( this );
     d->m_widgetItem->setWidget( widget );
+    d->m_widgetItem->setCacheMode( MarbleGraphicsItem::DeviceCoordinateCache );
 
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
@@ -408,7 +414,7 @@ bool RoutingPlugin::isInitialized() const
 
 bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
 {
-    if ( !enabled() || !visible() ) {
+    if ( d->m_marbleWidget || !enabled() || !visible() ) {
         return AbstractFloatItem::eventFilter( object, e );
     }
 
