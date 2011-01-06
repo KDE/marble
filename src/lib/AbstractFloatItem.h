@@ -64,9 +64,12 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
 
     bool visible() const;
 
-    void setPositionLocked( bool lock );
-
     bool positionLocked();
+
+ public slots:
+    void setPositionLocked( bool lock );
+    void show();
+    void hide();
 
  protected:
     virtual bool eventFilter( QObject *object, QEvent *e );

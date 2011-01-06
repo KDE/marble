@@ -11,6 +11,12 @@
 // Self
 #include "AbstractFloatItem.h"
 
+// Qt
+#include <QtGui/QMenu>
+#include <QtGui/QAction>
+#include <QtGui/QDialog>
+#include <QtGui/QContextMenuEvent>
+
 // Marble
 #include "MarbleDebug.h"
 
@@ -91,11 +97,15 @@ QStringList AbstractFloatItem::renderPosition() const
 
 void AbstractFloatItem::setVisible( bool visible )
 {
+    // Reimplemented since AbstractFloatItem does multiple inheritance 
+    // and the (set)Visible() methods are available in both base classes!
     RenderPlugin::setVisible( visible );
 }
 
 bool AbstractFloatItem::visible() const
 {
+    // Reimplemented since AbstractFloatItem does multiple inheritance 
+    // and the (set)Visible() methods are available in both base classes!
     return RenderPlugin::visible();
 }
 
@@ -121,6 +131,35 @@ bool AbstractFloatItem::positionLocked()
 bool AbstractFloatItem::eventFilter( QObject *object, QEvent *e )
 {
     if ( !enabled() || !visible() ) {
+        return false;
+    }
+
+    if( e->type() == QEvent::ContextMenu )
+    {
+        QWidget *widget = dynamic_cast<QWidget *>( object );
+        QContextMenuEvent *menuEvent = dynamic_cast<QContextMenuEvent *> ( e );
+        if( widget != NULL && menuEvent != NULL && contains( menuEvent->pos() ) )
+        {
+	    QMenu menu;
+	    QAction *lockaction = menu.addAction( tr( "&Lock" ) );
+	    lockaction->setCheckable( true );
+	    lockaction->setChecked( positionLocked() );
+	    connect( lockaction, SIGNAL( triggered( bool ) ),
+		    this, SLOT( setPositionLocked( bool ) ) );
+	    QAction *hideaction = menu.addAction( tr( "&Hide" ) );
+	    connect( hideaction, SIGNAL( triggered() ),
+		    this, SLOT( hide() ) );
+	    QDialog *dialog = configDialog();
+	    if( dialog != NULL )
+	    {
+		menu.addSeparator();
+		QAction *configaction = menu.addAction( tr( "&Configure..." ) );
+		connect( configaction, SIGNAL( triggered() ),
+			dialog, SLOT( exec() ) );
+	    }
+	    menu.exec( widget->mapToGlobal( menuEvent->pos() ) );
+            return true;
+        }
         return false;
     }
 
@@ -157,6 +196,16 @@ bool AbstractFloatItem::renderOnMap( GeoPainter     *painter,
     Q_UNUSED( layer );
 
     return true;
+}
+
+void AbstractFloatItem::show()
+{
+    setVisible( true );
+}
+
+void AbstractFloatItem::hide()
+{
+    setVisible( false );
 }
 
 }
