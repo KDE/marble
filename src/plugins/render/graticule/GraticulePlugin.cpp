@@ -185,7 +185,6 @@ void GraticulePlugin::readSettings() const
     QPalette equatorPalette;
     equatorPalette.setColor( QPalette::Button, QColor( equatorColor ) );
     ui_configWidget->equatorPushButton->setPalette( equatorPalette );
-
 }
 
 void GraticulePlugin::gridGetColor()
@@ -197,7 +196,6 @@ void GraticulePlugin::gridGetColor()
         QPalette palette = ui_configWidget->gridPushButton->palette();
         palette.setColor( QPalette::Button, QColor( m_gridColor ) );
         ui_configWidget->gridPushButton->setPalette( palette );
-
     }
 }
 
@@ -240,8 +238,6 @@ void GraticulePlugin::writeSettings()
 void GraticulePlugin::updateSettings() 
 {
     m_gridColor = m_settings.value( "gridColor" ).value<QColor>();
-    
-    qDebug() << m_gridColor;
     
     m_tropicsColor = m_settings.value( "tropicsColor" ).value<QColor>();
     m_equatorColor = m_settings.value( "equatorColor" ).value<QColor>();    
