@@ -32,8 +32,17 @@ bool KmlLineStringTagWriter::write( const GeoDataObject &node, GeoWriter& writer
         writer.writeStartElement( kml::kmlTag_LineString );
         writer.writeStartElement( "coordinates" );
 
-        for ( int i = 0; i < lineString.size(); ++i )
-        {
+        // Write altitude for *all* elements, if *any* element
+        // has altitude information (!= 0.0)
+        bool hasAltitude = false;
+        for ( int i = 0; i < lineString.size(); ++i ) {
+            if ( lineString.at( i ).altitude() ) {
+                hasAltitude = true;
+                break;
+            }
+        }
+
+        for ( int i = 0; i < lineString.size(); ++i ) {
             GeoDataCoordinates coordinates = lineString.at( i );
             if ( i > 0 )
             {
@@ -45,6 +54,12 @@ bool KmlLineStringTagWriter::write( const GeoDataObject &node, GeoWriter& writer
             writer.writeCharacters( "," );
             qreal lat = coordinates.latitude( GeoDataCoordinates::Degree );
             writer.writeCharacters( QString::number( lat, 'f', 10 ) );
+
+            if ( hasAltitude ) {
+                qreal alt = coordinates.altitude();
+                writer.writeCharacters( "," );
+                writer.writeCharacters( QString::number( alt, 'f', 2 ) );
+            }
         }
 
         writer.writeEndElement();
