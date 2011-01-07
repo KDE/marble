@@ -70,7 +70,7 @@ class GeoSceneLayerPrivate
     
     const char* nodeType() const
     {
-        return "GeoSceneLayer";
+        return GeoSceneTypes::GeoSceneLayerType;
     }
 };
 
