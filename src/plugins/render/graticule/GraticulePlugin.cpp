@@ -194,8 +194,10 @@ void GraticulePlugin::gridGetColor()
 
     if ( c.isValid() ) {
         m_gridColor = c;
-        QPalette gridPalette = ui_configWidget->gridPushButton->palette();
-        gridPalette.setColor( QPalette::Button, QColor( m_gridColor ) );
+        QPalette palette = ui_configWidget->gridPushButton->palette();
+        palette.setColor( QPalette::Button, QColor( m_gridColor ) );
+        ui_configWidget->gridPushButton->setPalette( palette );
+
     }
 }
 
@@ -205,8 +207,9 @@ void GraticulePlugin::tropicsGetColor()
 
     if ( c.isValid() ) {
         m_tropicsColor = c;
-        QPalette tropicsPalette = ui_configWidget->tropicsPushButton->palette();
-        tropicsPalette.setColor( QPalette::Button, QColor( m_tropicsColor ) );
+        QPalette palette = ui_configWidget->tropicsPushButton->palette();
+        palette.setColor( QPalette::Button, QColor( m_tropicsColor ) );
+        ui_configWidget->tropicsPushButton->setPalette( palette );
     }
 }
 
@@ -216,8 +219,9 @@ void GraticulePlugin::equatorGetColor()
 
     if ( c.isValid() ) {
         m_equatorColor = c;
-        QPalette equatorPalette = ui_configWidget->equatorPushButton->palette();
-        equatorPalette.setColor( QPalette::Button, QColor( m_equatorColor ) );
+        QPalette palette = ui_configWidget->equatorPushButton->palette();
+        palette.setColor( QPalette::Button, QColor( m_equatorColor ) );
+        ui_configWidget->equatorPushButton->setPalette( palette );
     }
 }
 
@@ -671,7 +675,7 @@ void GraticulePlugin::initLineMaps( GeoDataCoordinates::Notation notation)
 
 void GraticulePlugin::evaluateClickedButton( QAbstractButton *button )
 {
-    if( button == ui_configWidget->m_buttonBox->button( QDialogButtonBox::RestoreDefaults ) )
+    if( button == ui_configWidget->m_buttonBox->button( QDialogButtonBox::Reset ) )
         restoreDefaultSettings();
 }
 
