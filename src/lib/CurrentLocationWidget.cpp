@@ -307,11 +307,15 @@ void CurrentLocationWidgetPrivate::centerOnCurrentLocation()
 
 void CurrentLocationWidgetPrivate::saveTrack()
 {
+    static QString s_dirName = QDir::homePath();
     QString fileName = QFileDialog::getSaveFileName(m_widget, QObject::tr("Save Track"), // krazy:exclude=qclasses
-                                                    QDir::homePath().append('/' + QDateTime::currentDateTime().toString("yyyy-MM-dd_hhmmss") + ".kml"),
+                                                    s_dirName.append('/' + QDateTime::currentDateTime().toString("yyyy-MM-dd_hhmmss") + ".kml"),
                             QObject::tr("KML File (*.kml)"));
-
-    m_widget->model()->positionTracking()->saveTrack( fileName );
+    if ( !fileName.isEmpty() ) {
+        QFileInfo file( fileName );
+        s_dirName = file.absolutePath();
+        m_widget->model()->positionTracking()->saveTrack( fileName );
+    }
 }
 
 void CurrentLocationWidgetPrivate::clearTrack()
