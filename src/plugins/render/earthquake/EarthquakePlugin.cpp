@@ -163,7 +163,7 @@ void EarthquakePlugin::validateDateRange()
 
 void EarthquakePlugin::evaluateClickedButton( QAbstractButton *button )
 {
-    if( button == ui_configWidget->m_buttonBox->button( QDialogButtonBox::RestoreDefaults ) )
+    if( button == ui_configWidget->m_buttonBox->button( QDialogButtonBox::Reset ) )
         restoreDefaultSettings();
 }
 
