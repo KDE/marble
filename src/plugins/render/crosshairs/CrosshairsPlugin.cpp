@@ -89,7 +89,7 @@ QDialog* CrosshairsPlugin::aboutDialog() const
     if ( !m_aboutDialog ) {
         // Initializing about dialog
         m_aboutDialog = new PluginAboutDialog();
-        m_aboutDialog->setName( "Compass Plugin" );
+        m_aboutDialog->setName( "Crosshairs Plugin" );
         m_aboutDialog->setVersion( "0.1" );
         // FIXME: Can we store this string for all of Marble
         m_aboutDialog->setAboutText( tr( "<br />(c) 2009, 2010 The Marble Project <br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );

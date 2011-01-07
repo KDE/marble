@@ -21,6 +21,7 @@
 #include "../lib/HttpDownloadManager.h"
 #include "../lib/CacheStoragePolicy.h"
 #include "GeoDataLatLonAltBox.h"
+#include "PluginAboutDialog.h"
 
 #include "ui_AprsConfigWidget.h"
 
@@ -53,6 +54,7 @@ namespace Marble
         QString nameId() const;
         QString description() const;
         QIcon icon () const;
+        QDialog *aboutDialog() const;
 
         void initialize ();
         bool isInitialized () const;
@@ -86,6 +88,7 @@ namespace Marble
         QString                        m_filter;
         QAction                       *m_action;
 
+        mutable PluginAboutDialog     *m_aboutDialog;
         mutable QDialog               *m_configDialog;
         mutable Ui::AprsConfigWidget  *ui_configWidget;
         QHash<QString,QVariant>        m_settings;
