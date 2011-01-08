@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010 Utku Aydin <utkuaydin34@gmail.com>
+// Copyright 2011 Utku Aydın <utkuaydin34@gmail.com>
 //
 
 #ifndef EARTHQUAKEPLUGIN_H
@@ -14,6 +14,8 @@
 #include "AbstractDataPlugin.h"
 #include "RenderPlugin.h"
 #include "RenderPluginInterface.h"
+
+#include "PluginAboutDialog.h"
 
 #include <QtCore/QHash>
 #include <QtGui/QIcon>
@@ -50,6 +52,8 @@ public:
 
     QIcon icon() const;
 
+    QDialog *aboutDialog() const;
+
     QDialog *configDialog() const;
 
     /**
@@ -69,6 +73,7 @@ public slots:
 
 private:
     bool m_isInitialized;
+    mutable PluginAboutDialog *m_aboutDialog;
     mutable Ui::EarthquakeConfigWidget *ui_configWidget;
     mutable QDialog *m_configDialog;
     QHash<QString,QVariant> m_settings;
