@@ -50,6 +50,8 @@ class GEODATA_EXPORT GeoSceneDocument : public QObject,
  public:
     GeoSceneDocument();
     ~GeoSceneDocument();
+    
+    virtual const char* nodeType() const;
 
     virtual bool isGeoSceneDocument() const { return true; }
 

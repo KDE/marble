@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010 Utku Aydın <utkuaydin34@gmail.com>
+// Copyright 2011 Utku Aydın <utkuaydin34@gmail.com>
 //
 
 #ifndef DGMLHEADTAGWRITER_H

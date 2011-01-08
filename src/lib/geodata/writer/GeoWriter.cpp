@@ -42,14 +42,14 @@ bool GeoWriter::write(QIODevice* device, const GeoNode *feature)
         GeoNode* node = new GeoNode;
         writer->write( node, *this );
     } else {
-        qDebug() << "There is no GeoWriter registered for: " << name;
+        mDebug() << "There is no GeoWriter registered for: " << name;
         return false;
     }
     
     if( ! writeElement( feature ) ) {
         return false;
     }
-
+    
     //close the document
     writeEndElement();
     return true;
@@ -64,12 +64,12 @@ bool GeoWriter::writeElement(const GeoNode *object)
 
     if( writer ) {
         if( ! writer->write( object, *this ) ) {
-            qDebug() << "An error has been reported by the GeoWriter for: "
+            mDebug() << "An error has been reported by the GeoWriter for: "
                     << name;
             return false;
         }
     } else {
-        qDebug() << "There is no GeoWriter registered for: " << name;
+        mDebug() << "There is no GeoWriter registered for: " << name;
         return true;
     }
     return true;

@@ -37,12 +37,9 @@ bool DgmlMapTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     writer.writeStartElement( "target" );
     writer.writeEndElement();
     
-    QVector<GeoSceneLayer*>::ConstIterator iterator =  map->layers().constBegin();
-    QVector<GeoSceneLayer*>::ConstIterator const end = map->layers().constEnd();
-    
-    for( ; iterator != end; ++iterator )
+    for( int i = 0; i < map->layers().count(); ++i )
     {
-        writeElement( &(**iterator), writer );
+        writeElement( map->layers().at( i ), writer );
     }
     
     writer.writeEndElement();

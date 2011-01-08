@@ -15,7 +15,6 @@
 #include "GeoSceneTexture.h"
 #include "DownloadPolicy.h"
 #include "DgmlElementDictionary.h"
-#include <TileId.h>
 
 namespace Marble
 {
@@ -29,6 +28,8 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
 {
     const GeoSceneTexture *texture = static_cast<const GeoSceneTexture*>( node );
     writer.writeStartElement( dgml::dgmlTag_Texture );
+    writer.writeAttribute( "name", texture->name() );
+    writer.writeAttribute( "expire", QString::number( texture->expire() ) );
     
     writer.writeStartElement( dgml::dgmlTag_SourceDir );
     writer.writeAttribute( "format", texture->fileFormat() );
@@ -38,12 +39,14 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     writer.writeOptionalElement( "installmap", texture->installMap() );
     writer.writeEndElement();
     
+    writer.writeStartElement( dgml::dgmlTag_StorageLayout );
     if( texture->hasMaximumTileLevel() )
     {
-        writer.writeStartElement( dgml::dgmlTag_StorageLayout );
-        writer.writeAttribute( "maximumTileLevel", texture->fileFormat() );
-        writer.writeEndElement();
+        writer.writeAttribute( "maximumTileLevel", QString::number( texture->maximumTileLevel() ) );
+        writer.writeAttribute( "levelZeroColumns", QString::number( texture->levelZeroColumns() ) );
+        writer.writeAttribute( "levelZeroRows", QString::number( texture->levelZeroRows() ) );
     }
+    writer.writeEndElement();
     
     if ( texture->downloadUrls().size() > 0 )
     {
@@ -69,12 +72,14 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
         
         if( policy->key().usage() == DownloadBrowse )
         {
-            writer.writeAttribute( "Browse", QString::number( policy->maximumConnections() ) );
+            writer.writeAttribute( "usage", "Browse" );
+            writer.writeAttribute( "maximumConnections", QString::number( policy->maximumConnections() ) );
         }
         
         else if( policy->key().usage()  == DownloadBulk )
         {
-            writer.writeAttribute( "Bulk", QString::number( policy->maximumConnections() ) );
+            writer.writeAttribute( "usage", "Bulk" );
+            writer.writeAttribute( "maximumConnections", QString::number( policy->maximumConnections() ) );
         }
         
         writer.writeEndElement();    

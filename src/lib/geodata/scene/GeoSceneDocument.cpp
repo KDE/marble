@@ -28,6 +28,7 @@
 #include "GeoSceneMap.h"
 #include "GeoSceneLegend.h"
 #include "GeoSceneSettings.h"
+#include "GeoSceneTypes.h"
 
 namespace Marble
 {
@@ -50,7 +51,12 @@ class GeoSceneDocumentPrivate
         delete m_settings;
         delete m_legend;
     }
-
+    
+    const char* nodeType() const
+    {
+        return GeoSceneTypes::GeoSceneDocumentType;
+    }
+    
     GeoSceneHead*     m_head;
     GeoSceneMap*      m_map;
     GeoSceneSettings* m_settings;
@@ -70,6 +76,11 @@ GeoSceneDocument::GeoSceneDocument()
 GeoSceneDocument::~GeoSceneDocument()
 {
     delete d;
+}
+
+const char* GeoSceneDocument::nodeType() const
+{
+    return d->nodeType();
 }
 
 const GeoSceneHead* GeoSceneDocument::head() const

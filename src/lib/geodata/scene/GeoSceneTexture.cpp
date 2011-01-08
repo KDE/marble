@@ -55,6 +55,11 @@ GeoSceneTexture::~GeoSceneTexture()
     delete m_serverLayout;
 }
 
+const char* GeoSceneTexture::nodeType() const
+{
+    return "GeoSceneTexture";
+}
+
 QString GeoSceneTexture::sourceDir() const
 {
     return m_sourceDir;

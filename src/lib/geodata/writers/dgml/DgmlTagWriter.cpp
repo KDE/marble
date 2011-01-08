@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
+// Copyright 2011 Utku Aydın <utkuaydin34@gmail.com>
 //
 
 #include "DgmlTagWriter.h"
@@ -18,7 +18,6 @@ namespace Marble
 {
 
 static GeoTagWriterRegistrar s_writerDgml( GeoTagWriter::QualifiedName( "", dgml::dgmlTag_nameSpace20 ), new DgmlTagWriter() );
-
 
 bool DgmlTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {

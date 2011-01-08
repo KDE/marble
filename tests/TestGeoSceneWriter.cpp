@@ -16,6 +16,10 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneZoom.h"
+#include "GeoSceneIcon.h"
+#include "GeoSceneMap.h"
+#include "GeoSceneLayer.h"
+#include "GeoSceneTexture.h"
 #include "GeoWriter.h"
 
 using namespace Marble;
@@ -37,17 +41,39 @@ void TestGeoSceneWriter::writeHeadTag()
     head->setTheme( "testmap" );
     head->setTarget( "earth" );
     
+    GeoSceneIcon* icon = document->head()->icon();
+    icon->setPixmap( "preview.jpg" );
+    
     GeoSceneZoom* zoom = document->head()->zoom();
     zoom->setMaximum( 1000 );
     zoom->setMaximum( 500 );
     zoom->setDiscrete( true );
     
-    QTemporaryFile file;
-    file.open();
+    GeoSceneTexture* texture = new GeoSceneTexture( "map" );
+    texture->setSourceDir( "earth/testmap" );
+    texture->setFileFormat( "png" );
+    texture->setProjection( GeoSceneTexture::Equirectangular );
+    texture->addDownloadUrl( QUrl( "http://download.kde.org/marble/map/{x}/{y}/{zoomLevel}" ) );
+    texture->addDownloadUrl( QUrl( "http://download.google.com/marble/map/{x}/{y}/{zoomLevel}" ) );
+    texture->addDownloadPolicy( DownloadBrowse, 20 );
+    texture->addDownloadPolicy( DownloadBulk, 20 );
+    texture->setMaximumTileLevel( 15 );
+    texture->setLevelZeroColumns( 2 );
+    texture->setLevelZeroRows( 2 );
+    
+    GeoSceneLayer* layer = new GeoSceneLayer( "testmap" );
+    layer->setBackend( "texture" );
+    layer->addDataset( texture );
+    
+    GeoSceneMap* map = document->map();
+    map->addLayer( layer );
+    
+    QTemporaryFile tempFile;
+    tempFile.open();
     
     GeoWriter writer;
     writer.setDocumentType( "http://edu.kde.org/marble/dgml/2.0" );
-    QVERIFY( writer.write( &file, head ) );
+    QVERIFY( writer.write( &tempFile, document ) );
 }
 
 QTEST_MAIN( TestGeoSceneWriter )

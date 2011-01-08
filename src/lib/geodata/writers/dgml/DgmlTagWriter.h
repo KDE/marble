@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
+// Copyright 2011 Utku Aydın <utkuaydin34@gmail.com>
 //
 
 #ifndef MARBLE_DGMLTAGWRITER_H

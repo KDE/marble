@@ -14,7 +14,6 @@
 #include "GeoWriter.h"
 #include "GeoSceneLayer.h"
 #include "DgmlElementDictionary.h"
-#include <GeoSceneTexture.h>
 
 namespace Marble
 {
@@ -28,14 +27,14 @@ bool DgmlLayerTagWriter::write(const GeoNode *node, GeoWriter& writer) const
 {
     const GeoSceneLayer *layer = static_cast<const GeoSceneLayer*>( node );
     writer.writeStartElement( dgml::dgmlTag_Layer );
+    writer.writeAttribute( "name", layer->name() );
+    writer.writeAttribute( "backend", layer->backend() );
     
-    GeoSceneAbstractDataset** iterator = layer->datasets().begin();
-    while( iterator != layer->datasets().end() )
+    for( int i = 0; i < layer->datasets().count(); ++i )
     {
-        GeoSceneAbstractDataset* dataset = *iterator;
-        writeElement( dataset, writer );
-        ++iterator;
+        writeElement( layer->datasets().at( i ), writer );
     }
+    
     writer.writeEndElement();
     return true;
 }
