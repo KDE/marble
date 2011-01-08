@@ -19,10 +19,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerData( GeoTagWriter::QualifiedName( GeoSceneTypes::GeoSceneTextureType,
-                                                                            dgml::dgmlTag_nameSpace20 ),
+static GeoTagWriterRegistrar s_writerTexture( GeoTagWriter::QualifiedName( GeoSceneTypes::GeoSceneTextureType, dgml::dgmlTag_nameSpace20 ),
                                                new DgmlTextureTagWriter() );
-
 
 bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
 {
@@ -53,9 +51,9 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
         for( int i = 0; i < texture->downloadUrls().size(); ++i )
         {
             QString protocol = texture->downloadUrls().at(i).toString().left( texture->downloadUrls().at(i).toString().indexOf( ':' ) );
-            QString host =  QString( texture->downloadUrls().at(i).encodedHost() );
-            QString path =  QString( texture->downloadUrls().at(i).encodedPath() );
-            QString query = QString( texture->downloadUrls().at(i).encodedQuery() );
+            QString host =  QString( texture->downloadUrls().at(i).host() );
+            QString path =  QString( texture->downloadUrls().at(i).path() );
+            QString query = QUrl::fromEncoded( texture->downloadUrls().at(i).encodedQuery() ).toString();
 
             writer.writeStartElement( dgml::dgmlTag_DownloadUrl );
             writer.writeAttribute( "protocol", protocol );

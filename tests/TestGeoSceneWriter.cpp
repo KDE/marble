@@ -20,7 +20,11 @@
 #include "GeoSceneMap.h"
 #include "GeoSceneLayer.h"
 #include "GeoSceneTexture.h"
+#include "GeoSceneSettings.h"
+#include "GeoSceneProperty.h"
+
 #include "GeoWriter.h"
+#include "GeoSceneParser.h"
 
 using namespace Marble;
 
@@ -68,12 +72,52 @@ void TestGeoSceneWriter::writeHeadTag()
     GeoSceneMap* map = document->map();
     map->addLayer( layer );
     
+    GeoSceneSettings *settings = document->settings();
+   
+    GeoSceneProperty *coorGrid = new GeoSceneProperty( "coordinate-grid" );
+    coorGrid->setValue( true );
+    coorGrid->setAvailable( true );
+    settings->addProperty( coorGrid );
+    
+    GeoSceneProperty *overviewmap = new GeoSceneProperty( "overviewmap" );
+    overviewmap->setValue( true );
+    overviewmap->setAvailable( true );
+    settings->addProperty( overviewmap );
+    
+    GeoSceneProperty *compass = new GeoSceneProperty( "compass" );
+    compass->setValue( true );
+    compass->setAvailable( true );
+    settings->addProperty( compass );
+    
+    GeoSceneProperty *scalebar = new GeoSceneProperty( "scalebar" );
+    scalebar->setValue( true );
+    scalebar->setAvailable( true );
+    settings->addProperty( scalebar );
+    
     QTemporaryFile tempFile;
     tempFile.open();
     
     GeoWriter writer;
     writer.setDocumentType( "http://edu.kde.org/marble/dgml/2.0" );
     QVERIFY( writer.write( &tempFile, document ) );
+    
+    //Parser and verify
+    GeoSceneParser* parser = new GeoSceneParser( GeoScene_DGML );
+    tempFile.reset();
+    QVERIFY( parser->read( &tempFile ) );
+
+    GeoSceneDocument *document2 = static_cast<GeoSceneDocument*>( parser->activeDocument() );
+    QTemporaryFile tempFile2;
+    tempFile2.open();
+    GeoWriter writer2;
+    writer2.setDocumentType( "http://edu.kde.org/marble/dgml/2.0" );
+    QVERIFY( writer2.write( &tempFile2, document2 ) );
+
+    tempFile.reset();
+    QTextStream file( &tempFile );
+    tempFile2.reset();
+    QTextStream file2( &tempFile2 );
+    QCOMPARE( file.readAll().simplified(), file2.readAll().simplified() );
 }
 
 QTEST_MAIN( TestGeoSceneWriter )

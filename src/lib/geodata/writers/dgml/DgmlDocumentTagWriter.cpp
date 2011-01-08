@@ -14,6 +14,7 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
+#include "GeoSceneSettings.h"
 #include "DgmlElementDictionary.h"
 
 namespace Marble
@@ -33,6 +34,9 @@ bool DgmlDocumentTagWriter::write( const GeoNode *node, GeoWriter& writer ) cons
     
     const GeoSceneMap *map = static_cast<const GeoSceneMap*>( document->map() );
     writeElement( map, writer );
+    
+    const GeoSceneSettings *settings = static_cast<const GeoSceneSettings*>( document->settings() );
+    writeElement( settings, writer );
     
     writer.writeEndDocument();
     return true;

@@ -25,6 +25,7 @@
 
 #include "GeoSceneProperty.h"
 #include "GeoSceneGroup.h"
+#include "GeoSceneTypes.h"
 
 namespace Marble
 {
@@ -41,6 +42,11 @@ class GeoSceneSettingsPrivate
     /// The hash table holding all the properties in the settings.
     QVector<GeoSceneProperty*> m_properties;
     QVector<GeoSceneGroup*> m_groups;
+    
+    const char* nodeType() const
+    {
+        return GeoSceneTypes::GeoSceneSettingsType;
+    }
 };
 
 
@@ -52,6 +58,11 @@ GeoSceneSettings::GeoSceneSettings()
 GeoSceneSettings::~GeoSceneSettings()
 {
     delete d;
+}
+
+const char* GeoSceneSettings::nodeType() const
+{
+    return d->nodeType();
 }
 
 bool GeoSceneSettings::propertyAvailable( const QString& name, bool& available ) const

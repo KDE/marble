@@ -20,10 +20,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerData( GeoTagWriter::QualifiedName( GeoSceneTypes::GeoSceneHeadType,
-                                                                            dgml::dgmlTag_nameSpace20 ),
+static GeoTagWriterRegistrar s_writerHead( GeoTagWriter::QualifiedName( GeoSceneTypes::GeoSceneHeadType, dgml::dgmlTag_nameSpace20 ),
                                                new DgmlHeadTagWriter() );
-
 
 bool DgmlHeadTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {

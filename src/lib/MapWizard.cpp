@@ -21,6 +21,8 @@
 #include "GeoSceneMap.h"
 #include "GeoSceneLayer.h"
 #include "GeoSceneTexture.h"
+#include "GeoSceneSettings.h"
+#include "GeoSceneProperty.h"
 
 #include <QtCore/QDir>
 #include <QtCore/QFile>
@@ -831,7 +833,30 @@ GeoSceneDocument* MapWizard::createDocument()
     layer->addDataset( texture );
     
     GeoSceneMap *map = document->map();
-    map->addLayer( layer );    
+    map->addLayer( layer );  
+    
+    GeoSceneSettings *settings = document->settings();
+   
+    GeoSceneProperty *coorGrid = new GeoSceneProperty( "coordinate-grid" );
+    coorGrid->setValue( true );
+    coorGrid->setAvailable( true );
+    settings->addProperty( coorGrid );
+    
+    GeoSceneProperty *overviewmap = new GeoSceneProperty( "overviewmap" );
+    overviewmap->setValue( true );
+    overviewmap->setAvailable( true );
+    settings->addProperty( overviewmap );
+    
+    GeoSceneProperty *compass = new GeoSceneProperty( "compass" );
+    compass->setValue( true );
+    compass->setAvailable( true );
+    settings->addProperty( compass );
+    
+    GeoSceneProperty *scalebar = new GeoSceneProperty( "scalebar" );
+    scalebar->setValue( true );
+    scalebar->setAvailable( true );
+    settings->addProperty( scalebar );
+    
     return document;
 }
 

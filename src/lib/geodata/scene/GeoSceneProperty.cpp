@@ -22,6 +22,7 @@
 #include "GeoSceneProperty.h"
 
 #include "MarbleDebug.h"
+#include "GeoSceneTypes.h"
 
 namespace Marble
 {
@@ -32,6 +33,11 @@ GeoSceneProperty::GeoSceneProperty( const QString& name )
       m_defaultValue( false ),
       m_value( false )
 {
+}
+ 
+const char* GeoSceneProperty::nodeType() const
+{
+    return GeoSceneTypes::GeoScenePropertyType;
 }
 
 QString GeoSceneProperty::name() const
