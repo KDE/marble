@@ -775,93 +775,64 @@ void MapWizard::accept()
     Q_ASSERT( d->format == d->format.toLower() );
     Q_ASSERT( !d->mapTheme.isEmpty() );
 
-    QSharedPointer<GeoSceneDocument> document( createDocument() );
-    d->sourceImage = d->uiWidget.lineEditSource->text();
-
-    if( d->uiWidget.radioButtonWms->isChecked() )
+    if ( d->mapProviderType == MapWizardPrivate::StaticImageMap )
     {
+        d->sourceImage = d->uiWidget.lineEditSource->text();
+        Q_ASSERT( !d->sourceImage.isEmpty() );
+        Q_ASSERT( QFile( d->sourceImage ).exists() );
+    }
+    else if ( d->mapProviderType == MapWizardPrivate::WmsMap )
+    {
+        Q_ASSERT( !d->uiWidget.comboBoxWmsMap->currentText().isEmpty() );
+
         QUrl wmsUrl( d->uiWidget.lineEditWmsUrl->text() );
         d->protocol = wmsUrl.toString().left( wmsUrl.toString().indexOf( ':' ) );
         d->host =  QString( wmsUrl.encodedHost() );
         d->path =  QString( wmsUrl.encodedPath() );
         d->query = QString( "layers=%1&%2" ).arg( d->uiWidget.comboBoxWmsMap->itemData( d->uiWidget.comboBoxWmsMap->currentIndex() ).toString() )
                       .arg( QString( wmsUrl.encodedQuery() ) );
-    }
 
-    else if( d->uiWidget.radioButtonStaticUrl->isChecked() )
+        Q_ASSERT( !d->levelZero.isNull() );
+        Q_ASSERT( !QImage::fromData( d->levelZero ).isNull() );
+    }
+    else if ( d->mapProviderType == MapWizardPrivate::StaticImageMap )
     {
         QUrl staticImageUrl( d->uiWidget.comboBoxStaticUrlServer->currentText() );
         d->protocol = staticImageUrl.toString().left( staticImageUrl.toString().indexOf( ':' ) );
         d->host =  QString( staticImageUrl.encodedHost() );
         d->path =  QUrl::fromPercentEncoding( staticImageUrl.encodedPath() );
+
+        Q_ASSERT( !d->levelZero.isNull() );
+        Q_ASSERT( !QImage::fromData( d->levelZero ).isNull() );
     }
 
-    if( d->mapProviderType == MapWizardPrivate::StaticImageMap && d->uiWidget.lineEditSource->text().isEmpty() )
+    QSharedPointer<GeoSceneDocument> document( createDocument() );
+    Q_ASSERT( !document->head()->description().isEmpty() );
+    Q_ASSERT( !document->head()->name().isEmpty() );
+
+    if( createFiles( document.data() ) )
     {
-        QMessageBox::information( this, tr( "Problem with map information" ), tr( "Please specify a source image." ) );
-        return;
-    }
-
-    if( d->mapProviderType == MapWizardPrivate::WmsMap && d->uiWidget.comboBoxWmsMap->currentText().isEmpty() )
-    {
-        QMessageBox::information( this, tr( "Problem with map information" ), tr( "Please choose a map." ) );
-        return;
-    }
-
-    if ( d->mapProviderType != MapWizardPrivate::StaticImageMap )
-    {
-        if( d->levelZero.isNull() )
+        if( d->mapProviderType == MapWizardPrivate::WmsMap )
         {
-            QMessageBox::information( this, tr( "Cannot create map" ), tr( "The base tile is missing." ) );
-            return;
+            if( d->wmsLegends.isEmpty() && d->wmsLegends.at( d->uiWidget.comboBoxWmsMap->currentIndex() ).isEmpty() )
+                downloadLegend( d->wmsLegends.at( d->uiWidget.comboBoxWmsMap->currentIndex() ) );
+        } else if( d->mapProviderType == MapWizardPrivate::StaticImageMap || d->mapProviderType == MapWizardPrivate::StaticUrlMap ) {
+            createLegend();
         }
 
-        if( QImage::fromData( d->levelZero ).isNull() )
-        {
-            QMessageBox::information( this, tr( "Cannot create map" ), tr( "The base tile is invalid." ) );
-            return;
-        }
-    }
-
-    if( !document->head()->name().isEmpty() && 
-        !document->head()->description().isEmpty() )
-    {
-        if( d->mapProviderType == MapWizardPrivate::StaticImageMap && !QFile( d->sourceImage ).exists() )
-        {
-            QMessageBox::critical( this, tr( "File not found" ), tr( "Source image is not found." ) );
-            return;
-        }
-
-        if( createFiles( document.data() ) )
-        {
-            if( d->mapProviderType == MapWizardPrivate::WmsMap )
-            {
-                if( d->wmsLegends.isEmpty() && d->wmsLegends.at( d->uiWidget.comboBoxWmsMap->currentIndex() ).isEmpty() )
-                    downloadLegend( d->wmsLegends.at( d->uiWidget.comboBoxWmsMap->currentIndex() ) );
-            } else if( d->mapProviderType == MapWizardPrivate::StaticImageMap || d->mapProviderType == MapWizardPrivate::StaticUrlMap ) {
-                createLegend();
-            }
-
-            QDialog::accept();
-            d->uiWidget.lineEditTitle->clear();
-            d->uiWidget.lineEditTheme->clear();
-            d->uiWidget.textEditDesc->clear();
-            d->uiWidget.labelPreview->clear();
-            d->uiWidget.lineEditSource->clear();
-            d->dgmlOutput = QString();
-            QTimer::singleShot( 0, this, SLOT( restart() ) );
-        }
-
-        else
-        {
-            QMessageBox::critical( this, tr( "Problem while creating files" ), tr( "Check if a theme with the same name exists." ) );
-            return;
-        }
+        QDialog::accept();
+        d->uiWidget.lineEditTitle->clear();
+        d->uiWidget.lineEditTheme->clear();
+        d->uiWidget.textEditDesc->clear();
+        d->uiWidget.labelPreview->clear();
+        d->uiWidget.lineEditSource->clear();
+        d->dgmlOutput = QString();
+        QTimer::singleShot( 0, this, SLOT( restart() ) );
     }
 
     else
     {
-        QMessageBox::information( this, tr( "Empty fields" ), tr( "Sorry, some required information is missing. Please fill in all fields." ) );
+        QMessageBox::critical( this, tr( "Problem while creating files" ), tr( "Check if a theme with the same name exists." ) );
         return;
     }
 }
