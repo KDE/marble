@@ -40,6 +40,8 @@ class GeoSceneItem : public GeoNode
  public:
     explicit GeoSceneItem( const QString& name );
     ~GeoSceneItem();
+    
+    virtual const char* nodeType() const;
 
     QString name() const;
 

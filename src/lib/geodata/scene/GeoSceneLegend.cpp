@@ -21,6 +21,7 @@
 
 #include "GeoSceneLegend.h"
 
+#include "GeoSceneTypes.h"
 #include "GeoSceneSection.h"
 
 namespace Marble
@@ -38,6 +39,11 @@ class GeoSceneLegendPrivate
     /// (We want to preserve the order and don't care 
     /// much about speed here), so we don't use a hash
     QVector<GeoSceneSection*> m_sections;
+    
+    const char* nodeType() const
+    {
+        return GeoSceneTypes::GeoSceneLegendType;
+    }
 };
 
 
@@ -49,6 +55,11 @@ GeoSceneLegend::GeoSceneLegend()
 GeoSceneLegend::~GeoSceneLegend()
 {
     delete d;
+}
+
+const char* GeoSceneLegend::nodeType() const
+{
+    return d->nodeType();
 }
 
 void GeoSceneLegend::addSection( GeoSceneSection* section )

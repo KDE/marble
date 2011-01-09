@@ -41,6 +41,8 @@ class GeoSceneSection : public GeoNode
  public:
     explicit GeoSceneSection( const QString& name );
     ~GeoSceneSection();
+    
+    virtual const char* nodeType() const;
 
     /**
      * @brief  Add an item to the legend section

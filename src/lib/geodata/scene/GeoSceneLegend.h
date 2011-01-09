@@ -43,6 +43,8 @@ class GEODATA_EXPORT GeoSceneLegend : public GeoNode
  public:
     GeoSceneLegend();
     ~GeoSceneLegend();
+    
+    virtual const char* nodeType() const;
 
     /**
      * @brief  Add a section to the legend

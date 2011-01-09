@@ -22,6 +22,9 @@
 #include "GeoSceneTexture.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneProperty.h"
+#include "GeoSceneLegend.h"
+#include "GeoSceneSection.h"
+#include "GeoSceneItem.h"
 
 #include "GeoWriter.h"
 #include "GeoSceneParser.h"
@@ -93,6 +96,23 @@ void TestGeoSceneWriter::writeHeadTag()
     scalebar->setValue( true );
     scalebar->setAvailable( true );
     settings->addProperty( scalebar );
+    
+    GeoSceneLegend* legend = document->legend();
+    GeoSceneSection* section = new GeoSceneSection( "areas" );
+    section->setHeading( "Areas" );
+    legend->addSection( section );
+    
+    GeoSceneItem* sportsPitch = new GeoSceneItem( "sports_pitch" );
+    sportsPitch->setText( "Sports pitch" );
+    GeoSceneIcon* sportsPitchIcon = sportsPitch->icon();
+    sportsPitchIcon->setPixmap( "maps/earth/testmap/legend/sports_pitch.png" );
+    section->addItem( sportsPitch );
+    
+    GeoSceneItem* sportsCentre = new GeoSceneItem( "sports_centre" );
+    sportsCentre->setText( "Sports centre" );
+    GeoSceneIcon* sportsCentreIcon = sportsCentre->icon();
+    sportsCentreIcon->setColor( "#00FF00" );
+    section->addItem( sportsCentre );
     
     QTemporaryFile tempFile;
     tempFile.open();

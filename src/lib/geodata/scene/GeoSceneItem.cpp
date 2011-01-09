@@ -22,6 +22,7 @@
 #include "GeoSceneItem.h"
 
 #include "GeoSceneIcon.h"
+#include "GeoSceneTypes.h"
 
 namespace Marble
 {
@@ -39,6 +40,11 @@ GeoSceneItem::GeoSceneItem( const QString& name )
 GeoSceneItem::~GeoSceneItem()
 {
     delete m_icon;
+}
+
+const char* GeoSceneItem::nodeType() const
+{
+    return GeoSceneTypes::GeoSceneItemType;
 }
 
 const GeoSceneIcon* GeoSceneItem::icon() const

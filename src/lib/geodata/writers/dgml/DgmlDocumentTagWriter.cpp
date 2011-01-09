@@ -15,6 +15,7 @@
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
 #include "GeoSceneSettings.h"
+#include "GeoSceneLegend.h"
 #include "DgmlElementDictionary.h"
 
 namespace Marble
@@ -29,14 +30,17 @@ bool DgmlDocumentTagWriter::write( const GeoNode *node, GeoWriter& writer ) cons
     
     writer.writeStartElement( dgml::dgmlTag_Document );
     
-    const GeoSceneHead *head = static_cast<const GeoSceneHead*>( document->head() );
+    const GeoSceneHead *head = document->head();
     writeElement( head, writer );
     
-    const GeoSceneMap *map = static_cast<const GeoSceneMap*>( document->map() );
+    const GeoSceneMap *map = document->map() ;
     writeElement( map, writer );
     
-    const GeoSceneSettings *settings = static_cast<const GeoSceneSettings*>( document->settings() );
+    const GeoSceneSettings *settings = document->settings();
     writeElement( settings, writer );
+    
+    const GeoSceneLegend *legend = document->legend();
+    writeElement( legend, writer );
     
     writer.writeEndDocument();
     return true;

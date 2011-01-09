@@ -23,6 +23,7 @@
 
 #include "MarbleDebug.h"
 
+#include "GeoSceneTypes.h"
 #include "GeoSceneItem.h"
 
 namespace Marble
@@ -40,6 +41,11 @@ GeoSceneSection::GeoSceneSection( const QString& name )
 GeoSceneSection::~GeoSceneSection()
 {
     qDeleteAll( m_items );
+}
+
+const char* GeoSceneSection::nodeType() const
+{
+    return GeoSceneTypes::GeoSceneSectionType;
 }
 
 void GeoSceneSection::addItem( GeoSceneItem* item )
