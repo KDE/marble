@@ -80,6 +80,11 @@ void GeoSceneTexture::setInstallMap( const QString& installMap )
     m_installMap = installMap;
 }
 
+GeoSceneTexture::StorageLayout GeoSceneTexture::storageLayout() const
+{
+    return m_storageLayoutMode;
+}
+
 void GeoSceneTexture::setStorageLayout( const StorageLayout layout )
 {
     m_storageLayoutMode = layout;

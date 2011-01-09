@@ -34,8 +34,9 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     if( texture->expire() ) {
         writer.writeAttribute( "expire", QString::number( texture->expire() ) );
     }
-    writer.writeOptionalElement( "installmap", texture->installMap() );
+    writer.writeCharacters( texture->sourceDir() );
     writer.writeEndElement();
+    writer.writeOptionalElement( dgml::dgmlTag_InstallMap, texture->installMap() );
     
     writer.writeStartElement( dgml::dgmlTag_StorageLayout );
     if( texture->hasMaximumTileLevel() )
@@ -43,6 +44,21 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
         writer.writeAttribute( "maximumTileLevel", QString::number( texture->maximumTileLevel() ) );
         writer.writeAttribute( "levelZeroColumns", QString::number( texture->levelZeroColumns() ) );
         writer.writeAttribute( "levelZeroRows", QString::number( texture->levelZeroRows() ) );
+        switch( texture->storageLayout() )
+        {
+            case GeoSceneTexture::Custom:
+                writer.writeAttribute( "mode", "Custom" );
+                break;
+            case GeoSceneTexture::OpenStreetMap:
+                writer.writeAttribute( "mode", "OpenStreetMap" );
+                break;
+            case GeoSceneTexture::WebMapService:
+                writer.writeAttribute( "mode", "WebMapService" );
+                break;
+            case GeoSceneTexture::Marble:
+                writer.writeAttribute( "mode", "Marble" );
+                break;
+        }
     }
     writer.writeEndElement();
     

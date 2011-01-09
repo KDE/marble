@@ -47,7 +47,7 @@ class TileId;
 class GeoSceneTexture : public GeoSceneAbstractDataset
 {
  public:
-    enum StorageLayout { Marble, OpenStreetMap };
+    enum StorageLayout { Marble, OpenStreetMap, WebMapService, Custom };
     enum Projection { Equirectangular, Mercator };
 
     explicit GeoSceneTexture( const QString& name );
@@ -60,6 +60,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     QString installMap() const;
     void setInstallMap( const QString& installMap );
 
+    StorageLayout storageLayout() const;
     void setStorageLayout( const StorageLayout );
 
     void setServerLayout( const ServerLayout * );

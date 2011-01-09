@@ -73,8 +73,7 @@ private:
     Q_PRIVATE_SLOT( d, void pageEntered( int ) )
 
     GeoSceneDocument* createDocument();
-    void createDgml( const GeoSceneDocument* document );
-    bool createFiles( const GeoSceneHead* head );
+    bool createFiles( const GeoSceneDocument* head );
     void createLegendHtml();
     void createLegend();
     void downloadLegend( const QString url );

@@ -30,6 +30,10 @@ bool DgmlHeadTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     writer.writeElement( "name", head->name() );
     writer.writeElement( "target", head->target() );
     writer.writeElement( "theme", head->theme() );
+    writer.writeElement( "visible", head->visible() ? "true" : "false" );
+    writer.writeStartElement( "description" );
+    writer.writeCDATA( head->description() );
+    writer.writeEndElement();
     
     const GeoSceneIcon &icon = static_cast<const GeoSceneIcon&>( *head->icon() );
     writer.writeStartElement( dgml::dgmlTag_Icon );
