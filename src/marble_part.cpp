@@ -425,7 +425,8 @@ void MarblePart::readSettings()
     m_previousGraphicsSystem = m_initialGraphicsSystem;
     
     // Map Wizard
-    m_mapWizard->setWmsServers( MarbleSettings::wmsServices() );
+    m_mapWizard->setWmsServers( MarbleSettings::wmsServers() );
+    m_mapWizard->setStaticUrlServers( MarbleSettings::staticUrlServers() );
 
     // Plugins
     QHash<QString, int> pluginEnabled;
@@ -619,7 +620,8 @@ void MarblePart::writeSettings()
     MarbleSettings::setDateTime( m_controlView->marbleWidget()->model()->clockDateTime() );
     MarbleSettings::setSpeedSlider( m_controlView->marbleWidget()->model()->clockSpeed() );
     
-    MarbleSettings::setWmsServices( m_mapWizard->wmsServers() );
+    MarbleSettings::setWmsServers( m_mapWizard->wmsServers() );
+    MarbleSettings::setStaticUrlServers( m_mapWizard->staticUrlServers() );
 
     // Plugins
     QList<int>   pluginEnabled;

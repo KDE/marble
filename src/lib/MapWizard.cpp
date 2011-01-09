@@ -62,6 +62,7 @@ public:
     QNetworkAccessManager legendAccessManager;
     QNetworkAccessManager levelZeroAccessManager;
     QStringList wmsServerList;
+    QStringList staticUrlServerList;
     bool m_serverCapabilitiesValid;
 
     enum mapType
@@ -242,6 +243,18 @@ void MapWizard::setWmsServers( const QStringList& uris )
 QStringList MapWizard::wmsServers() const
 {
     return d->wmsServerList;
+}
+
+QStringList MapWizard::staticUrlServers() const
+{
+    return d->staticUrlServerList;
+}
+
+void MapWizard::setStaticUrlServers( const QStringList& uris )
+{
+    d->staticUrlServerList = uris;
+    d->uiWidget.comboBoxStaticUrlServer->addItems( d->staticUrlServerList );
+    d->uiWidget.comboBoxStaticUrlServer->addItem( "http://" );
 }
 
 void MapWizard::autoFillDetails()
@@ -504,7 +517,7 @@ void MapWizard::downloadLevelZero()
     
     else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
     {
-        QString server = d->uiWidget.lineEditStaticUrlServer->text();
+        QString server = d->uiWidget.comboBoxStaticUrlServer->currentText();
         QString format = d->uiWidget.comboBoxStaticUrlFormat->currentText();
         QUrl downloadUrl;
 
@@ -534,16 +547,22 @@ void MapWizard::createLevelZero( QNetworkReply* reply )
         QMessageBox::information( this,
                                     tr( "Base Tile" ),
                                     tr( "The base tile could not be downloaded." ) );
+        return;
     }
-    else if ( testImage.isNull() ) {
+
+    if ( testImage.isNull() ) {
         QMessageBox::information( this,
                                     tr( "Base Tile" ),
                                     tr( "The base tile could not be downloaded successfully. The server replied:\n\n%1" ).arg( QString( d->levelZero ) ) );
         d->levelZero.clear();
+        return;
     }
-    else {
-        next();
+
+    if ( d->mapProviderType == MapWizardPrivate::StaticUrlMap ) {
+        d->staticUrlServerList.append( d->uiWidget.comboBoxStaticUrlServer->currentText() );
     }
+
+    next();
 }
 
 void MapWizard::createLegend()
@@ -814,7 +833,7 @@ GeoSceneDocument* MapWizard::createDocument()
     else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
     {
         texture->setFileFormat( d->uiWidget.comboBoxStaticUrlFormat->currentText() );
-        downloadUrl = QUrl( d->uiWidget.lineEditStaticUrlServer->text() );
+        downloadUrl = QUrl( d->uiWidget.comboBoxStaticUrlServer->currentText() );
         texture->addDownloadPolicy( DownloadBrowse, 20 );
         texture->addDownloadPolicy( DownloadBulk, 2 );
         texture->addDownloadUrl( downloadUrl );
@@ -881,7 +900,7 @@ void MapWizard::accept()
 
     else if( d->uiWidget.radioButtonStaticUrl->isChecked() )
     {
-        QUrl staticImageUrl( d->uiWidget.lineEditStaticUrlServer->text() );
+        QUrl staticImageUrl( d->uiWidget.comboBoxStaticUrlServer->currentText() );
         d->staticUrlProtocol = staticImageUrl.toString().left( staticImageUrl.toString().indexOf( ':' ) );
         d->staticUrlHost =  QString( staticImageUrl.encodedHost() );
         d->staticUrlPath =  QUrl::fromPercentEncoding( staticImageUrl.encodedPath() );

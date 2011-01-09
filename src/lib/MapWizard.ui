@@ -374,24 +374,14 @@ p, li { white-space: pre-wrap; }
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEditStaticUrlServer">
-        <property name="toolTip">
-         <string>Url of the server that provides map tiles. An example would be: http://tile.openstreetmap.org/{zoomLevel}/{y}/{x}.png</string>
-        </property>
-        <property name="text">
-         <string>http://</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
+      <item row="2" column="0">
        <widget class="QLabel" name="labelStaticUrlFormat">
         <property name="text">
          <string>Image Format:</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item row="2" column="1">
        <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
          <widget class="QComboBox" name="comboBoxStaticUrlFormat">
@@ -414,6 +404,19 @@ p, li { white-space: pre-wrap; }
          </spacer>
         </item>
        </layout>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="comboBoxStaticUrlServer">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

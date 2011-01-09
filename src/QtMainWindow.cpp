@@ -996,8 +996,9 @@ void MainWindow::readSettings()
     }
     settings.endGroup();
 
-    settings.beginGroup( "WmsService" );
-        m_mapWizard->setWmsServers( settings.value( "services" ).toStringList() );
+    settings.beginGroup( "MapWizard" );
+        m_mapWizard->setWmsServers( settings.value( "wmsServers" ).toStringList() );
+        m_mapWizard->setStaticUrlServers( settings.value( "staticUrlServers" ).toStringList() );
     settings.endGroup();
 
     settings.beginGroup( "Plugins");
@@ -1115,8 +1116,9 @@ void MainWindow::writeSettings()
      settings.setValue( "activePositionTrackingPlugin", positionProvider );
      settings.endGroup();
      
-     settings.beginGroup( "WmsService" );
-        settings.setValue( "services", m_mapWizard->wmsServers() );
+     settings.beginGroup( "MapWizard" );
+        settings.setValue( "wmsServers", m_mapWizard->wmsServers() );
+        settings.setValue( "staticUrlServers", m_mapWizard->staticUrlServers() );
      settings.endGroup();
      
      // The config dialog has to write settings.

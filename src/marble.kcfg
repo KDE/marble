@@ -258,9 +258,12 @@
    <default>true</default>
   </entry>
  </group>
- <group name="WmsService">
-  <entry key="wmsServices" type="StringList" >
-    <default>false</default>
+ <group name="MapWizard">
+  <entry key="wmsServers" type="StringList" >
+    <default></default>
+  </entry>
+  <entry key="staticUrlServers" type="StringList" >
+    <default></default>
   </entry>
  </group>
 </kcfg>
