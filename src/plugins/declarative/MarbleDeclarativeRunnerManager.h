@@ -58,7 +58,7 @@ public Q_SLOTS:
 
 private Q_SLOTS:
     /** Search progress update */
-    void searchModelChanged( MarblePlacemarkModel *model );
+    void searchModelChanged( QAbstractItemModel *model );
 
 private:
     /** Wrapped Marble runner manager */

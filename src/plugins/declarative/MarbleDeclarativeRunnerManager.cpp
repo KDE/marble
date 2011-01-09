@@ -33,8 +33,8 @@ void MarbleRunnerManager::search( const QString &term )
         m_runnerManager = new Marble::MarbleRunnerManager( pluginManager, this );
         connect( m_runnerManager, SIGNAL( searchFinished( QString ) ),
                  this, SIGNAL( searchFinished() ) );
-        connect( m_runnerManager, SIGNAL( searchResultChanged( MarblePlacemarkModel* ) ),
-                 this, SLOT( searchModelChanged( MarblePlacemarkModel* ) ) );
+        connect( m_runnerManager, SIGNAL( searchResultChanged( QAbstractItemModel* ) ),
+                 this, SLOT( searchModelChanged( QAbstractItemModel* ) ) );
     }
 
     m_runnerManager->findPlacemarks( term );
@@ -55,9 +55,9 @@ QList<QObject*> MarbleRunnerManager::searchResult() const
     return result;
 }
 
-void MarbleRunnerManager::searchModelChanged( MarblePlacemarkModel *model )
+void MarbleRunnerManager::searchModelChanged( QAbstractItemModel *model )
 {
-    m_searchResult = model;
+    m_searchResult = static_cast<MarblePlacemarkModel*>( model );
 }
 
 }
