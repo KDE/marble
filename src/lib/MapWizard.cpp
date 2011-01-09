@@ -198,7 +198,7 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
     QDomElement format = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Request" )
                          .firstChildElement( "GetMap" ).firstChildElement( "Format" );
 
-    d->format = format.text().right( format.text().length() - format.text().indexOf( '/' ) - 1 );
+    d->format = format.text().right( format.text().length() - format.text().indexOf( '/' ) - 1 ).toLower();
 
     if( d->format == "jpeg" ) {
         d->format = "jpg";
@@ -274,7 +274,7 @@ bool MapWizard::createFiles( const GeoSceneDocument* document )
         {
             // Source image
             QFile sourceImage( d->sourceImage );
-            d->format = d->sourceImage.right( d->sourceImage.length() - d->sourceImage.lastIndexOf( '.' ) - 1 );
+            d->format = d->sourceImage.right( d->sourceImage.length() - d->sourceImage.lastIndexOf( '.' ) - 1 ).toLower();
             sourceImage.copy( QString( "%1/%2/%2.%3" ).arg( maps.absolutePath() )
                                                       .arg( document->head()->theme() )
                                                       .arg( d->format ) );
@@ -720,9 +720,9 @@ GeoSceneDocument* MapWizard::createDocument()
     else if( d->mapProviderType == MapWizardPrivate::StaticImageMap )
     {
         QString image = d->uiWidget.lineEditSource->text();
-        QString extension = image.right( image.length() - image.lastIndexOf( '.' ) - 1 );
-        texture->setFileFormat( extension );
-        texture->setInstallMap( document->head()->theme() + "." + extension );
+        d->format = image.right( image.length() - image.lastIndexOf( '.' ) - 1 ).toLower();
+        texture->setFileFormat( d->format.toUpper() );
+        texture->setInstallMap( document->head()->theme() + "." + d->format );
         int imageWidth = QImage( image ).width();
         int tileSize = 675;
         
@@ -770,12 +770,13 @@ GeoSceneDocument* MapWizard::createDocument()
 
 void MapWizard::accept()
 {
-    QSharedPointer<GeoSceneDocument> document( createDocument() );
-    d->mapTheme = document->head()->theme();
-    d->sourceImage = d->uiWidget.lineEditSource->text();
-    d->format = d->sourceImage.right( d->sourceImage.length() - d->sourceImage.lastIndexOf( '.' ) - 1 );
+    Q_ASSERT( d->mapProviderType != MapWizardPrivate::NoMap );
 
-    QString wmsUrl = d->uiWidget.lineEditWmsUrl->text();
+    Q_ASSERT( d->format == d->format.toLower() );
+    Q_ASSERT( !d->mapTheme.isEmpty() );
+
+    QSharedPointer<GeoSceneDocument> document( createDocument() );
+    d->sourceImage = d->uiWidget.lineEditSource->text();
 
     if( d->uiWidget.radioButtonWms->isChecked() )
     {
@@ -794,8 +795,6 @@ void MapWizard::accept()
         d->host =  QString( staticImageUrl.encodedHost() );
         d->path =  QUrl::fromPercentEncoding( staticImageUrl.encodedPath() );
     }
-
-    Q_ASSERT( d->mapProviderType != MapWizardPrivate::NoMap );
 
     if( d->mapProviderType == MapWizardPrivate::StaticImageMap && d->uiWidget.lineEditSource->text().isEmpty() )
     {
