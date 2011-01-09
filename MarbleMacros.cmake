@@ -87,10 +87,9 @@ endmacro( marble_add_designer_plugin _target_name )
 
 macro( marble_add_declarative_plugin _target_name )
 set( _src ${ARGN} )
-if( QTONLY )
-    qt4_automoc( ${_src} )
-    add_library( ${_target_name} MODULE ${_src} )
-    target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
+qt4_automoc( ${_src} )
+add_library( ${_target_name} MODULE ${_src} )
+target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
                                            ${QT_QTDBUS_LIBRARY}
                                            ${QT_QTGUI_LIBRARY}
                                            ${QT_QTXML_LIBRARY}
@@ -99,23 +98,7 @@ if( QTONLY )
                                            ${QT_QTMAIN_LIBRARY}
                                            ${${_target_name}_LIBS}
                                            marblewidget )
-    install( TARGETS ${_target_name} DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH}/org/kde/edu/marble )
-else( QTONLY )
-    kde4_add_plugin( ${_target_name} ${_src} )
-    target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
-                                           ${QT_QTDBUS_LIBRARY}
-                                           ${QT_QTGUI_LIBRARY}
-                                           ${QT_QTXML_LIBRARY}
-                                           ${QT_QTSVG_LIBRARY}
-                                           ${QT_QTNETWORK_LIBRARY}
-                                           ${KDE4_KDECORE_LIBRARY}
-                                           ${KDE4_KDEUI_LIBRARY}
-                                           ${KDE4_KIO_LIBRARY}
-                                           ${QT_QTMAIN_LIBRARY}
-                                           ${${_target_name}_LIBS}
-                                           marblewidget )
-    install( TARGETS ${_target_name} DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH}/org/kde/edu/marble )
-endif( QTONLY )
+install( TARGETS ${_target_name} DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH}/org/kde/edu/marble )
 
 set_target_properties( ${_target_name} PROPERTIES
                        INSTALL_RPATH_USE_LINK_PATH TRUE
