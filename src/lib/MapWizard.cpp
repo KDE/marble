@@ -80,21 +80,16 @@ public:
     QByteArray levelZero;
     QImage previewImage;
 
-    QString wmsProtocol;
-    QString wmsHost;
-    QString wmsPath;
-    QString wmsQuery;
-    QString wmsFormat;
+    QString protocol;
+    QString host;
+    QString path;
+    QString query;
+    QString format;
+
     QString wmsProjection;
     QStringList wmsLegends;
 
-    QString staticUrlProtocol;
-    QString staticUrlHost;
-    QString staticUrlPath;
-    QString staticUrlQuery;
-
     QString sourceImage;
-    QString sourceExtension;
 
     QString dgmlOutput;
 };
@@ -203,10 +198,10 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
     QDomElement format = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Request" )
                          .firstChildElement( "GetMap" ).firstChildElement( "Format" );
 
-    d->wmsFormat = format.text().right( format.text().length() - format.text().indexOf( '/' ) - 1 );
+    d->format = format.text().right( format.text().length() - format.text().indexOf( '/' ) - 1 );
 
-    if( d->wmsFormat == "jpeg" ) {
-        d->wmsFormat = "jpg";
+    if( d->format == "jpeg" ) {
+        d->format = "jpg";
     }
 
     if( !d->uiWidget.comboBoxWmsMap->currentText().isEmpty() && !d->wmsServerList.contains( d->uiWidget.lineEditWmsUrl->text() ) ) {
@@ -279,10 +274,10 @@ bool MapWizard::createFiles( const GeoSceneDocument* document )
         {
             // Source image
             QFile sourceImage( d->sourceImage );
-            d->sourceExtension = d->sourceImage.right( d->sourceImage.length() - d->sourceImage.lastIndexOf( '.' ) - 1 );
+            d->format = d->sourceImage.right( d->sourceImage.length() - d->sourceImage.lastIndexOf( '.' ) - 1 );
             sourceImage.copy( QString( "%1/%2/%2.%3" ).arg( maps.absolutePath() )
                                                       .arg( document->head()->theme() )
-                                                      .arg( d->sourceExtension ) );
+                                                      .arg( d->format ) );
         }
 
         else if( d->mapProviderType == MapWizardPrivate::WmsMap )
@@ -291,7 +286,7 @@ bool MapWizard::createFiles( const GeoSceneDocument* document )
             maps.mkdir( QString( "%1/0/0" ).arg( document->head()->theme() ) );
             const QString path = QString( "%1/%2/0/0/0.%3" ).arg( maps.absolutePath() )
                                                             .arg( document->head()->theme() )
-                                                            .arg( d->wmsFormat );
+                                                            .arg( d->format );
             QFile baseTile( path );
             baseTile.open( QFile::WriteOnly );
             baseTile.write( d->levelZero );
@@ -698,7 +693,7 @@ GeoSceneDocument* MapWizard::createDocument()
     QUrl downloadUrl;
     if( d->mapProviderType == MapWizardPrivate::WmsMap )
     {
-        texture->setFileFormat( d->wmsFormat );
+        texture->setFileFormat( d->format );
         QString layer = d->uiWidget.comboBoxWmsMap->itemData( d->uiWidget.comboBoxWmsMap->currentIndex() ).toString();
         downloadUrl = QUrl( d->uiWidget.lineEditWmsUrl->text() );
         downloadUrl.addQueryItem( "layers", layer );
@@ -778,26 +773,26 @@ void MapWizard::accept()
     QSharedPointer<GeoSceneDocument> document( createDocument() );
     d->mapTheme = document->head()->theme();
     d->sourceImage = d->uiWidget.lineEditSource->text();
-    d->sourceExtension = d->sourceImage.right( d->sourceImage.length() - d->sourceImage.lastIndexOf( '.' ) - 1 );
+    d->format = d->sourceImage.right( d->sourceImage.length() - d->sourceImage.lastIndexOf( '.' ) - 1 );
 
     QString wmsUrl = d->uiWidget.lineEditWmsUrl->text();
 
     if( d->uiWidget.radioButtonWms->isChecked() )
     {
         QUrl wmsUrl( d->uiWidget.lineEditWmsUrl->text() );
-        d->wmsProtocol = wmsUrl.toString().left( wmsUrl.toString().indexOf( ':' ) );
-        d->wmsHost =  QString( wmsUrl.encodedHost() );
-        d->wmsPath =  QString( wmsUrl.encodedPath() );
-        d->wmsQuery = QString( "layers=%1&%2" ).arg( d->uiWidget.comboBoxWmsMap->itemData( d->uiWidget.comboBoxWmsMap->currentIndex() ).toString() )
+        d->protocol = wmsUrl.toString().left( wmsUrl.toString().indexOf( ':' ) );
+        d->host =  QString( wmsUrl.encodedHost() );
+        d->path =  QString( wmsUrl.encodedPath() );
+        d->query = QString( "layers=%1&%2" ).arg( d->uiWidget.comboBoxWmsMap->itemData( d->uiWidget.comboBoxWmsMap->currentIndex() ).toString() )
                       .arg( QString( wmsUrl.encodedQuery() ) );
     }
 
     else if( d->uiWidget.radioButtonStaticUrl->isChecked() )
     {
         QUrl staticImageUrl( d->uiWidget.comboBoxStaticUrlServer->currentText() );
-        d->staticUrlProtocol = staticImageUrl.toString().left( staticImageUrl.toString().indexOf( ':' ) );
-        d->staticUrlHost =  QString( staticImageUrl.encodedHost() );
-        d->staticUrlPath =  QUrl::fromPercentEncoding( staticImageUrl.encodedPath() );
+        d->protocol = staticImageUrl.toString().left( staticImageUrl.toString().indexOf( ':' ) );
+        d->host =  QString( staticImageUrl.encodedHost() );
+        d->path =  QUrl::fromPercentEncoding( staticImageUrl.encodedPath() );
     }
 
     Q_ASSERT( d->mapProviderType != MapWizardPrivate::NoMap );
