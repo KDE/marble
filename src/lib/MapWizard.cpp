@@ -688,26 +688,25 @@ GeoSceneDocument* MapWizard::createDocument()
     GeoSceneTexture *texture = new GeoSceneTexture( "map" );
     texture->setExpire( 31536000 );
     texture->setStorageLayout( GeoSceneTexture::Marble );
-    texture->setProjection( GeoSceneTexture::Equirectangular );
     texture->setSourceDir( "earth/" + document->head()->theme() ); 
-    QUrl downloadUrl;
     if( d->mapProviderType == MapWizardPrivate::WmsMap )
     {
         texture->setFileFormat( d->format );
         QString layer = d->uiWidget.comboBoxWmsMap->itemData( d->uiWidget.comboBoxWmsMap->currentIndex() ).toString();
-        downloadUrl = QUrl( d->uiWidget.lineEditWmsUrl->text() );
+        QUrl downloadUrl = QUrl( d->uiWidget.lineEditWmsUrl->text() );
         downloadUrl.addQueryItem( "layers", layer );
         texture->addDownloadUrl( downloadUrl );
         texture->setMaximumTileLevel( 20 );
         texture->setLevelZeroRows( 1 );
         texture->setLevelZeroColumns( 1 );
         texture->setStorageLayout( GeoSceneTexture::WebMapService );
+        texture->setProjection( GeoSceneTexture::Equirectangular );
     }
     
     else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
     {
         texture->setFileFormat( d->uiWidget.comboBoxStaticUrlFormat->currentText() );
-        downloadUrl = QUrl( d->uiWidget.comboBoxStaticUrlServer->currentText() );
+        QUrl downloadUrl = QUrl( d->uiWidget.comboBoxStaticUrlServer->currentText() );
         texture->addDownloadPolicy( DownloadBrowse, 20 );
         texture->addDownloadPolicy( DownloadBulk, 2 );
         texture->addDownloadUrl( downloadUrl );
@@ -715,6 +714,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setLevelZeroRows( 1 );
         texture->setLevelZeroColumns( 1 );
         texture->setStorageLayout( GeoSceneTexture::Custom );
+        texture->setProjection( GeoSceneTexture::Mercator );
     }
     
     else if( d->mapProviderType == MapWizardPrivate::StaticImageMap )
@@ -723,6 +723,7 @@ GeoSceneDocument* MapWizard::createDocument()
         d->format = image.right( image.length() - image.lastIndexOf( '.' ) - 1 ).toLower();
         texture->setFileFormat( d->format.toUpper() );
         texture->setInstallMap( document->head()->theme() + "." + d->format );
+        texture->setProjection( GeoSceneTexture::Equirectangular );
         int imageWidth = QImage( image ).width();
         int tileSize = 675;
         
