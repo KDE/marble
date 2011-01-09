@@ -201,8 +201,9 @@ bool PositionTracking::saveTrack(QString& fileName)
 
         QFile file( fileName );
         file.open( QIODevice::ReadWrite );
-        return writer.write(&file, *document );
+        bool const result = writer.write( &file, *document );
         delete document;
+        return result;
     }
     return false;
 }
