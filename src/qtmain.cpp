@@ -15,6 +15,7 @@
 #include <QtCore/QLocale>
 #include <QtCore/QSettings>
 #include <QtCore/QTranslator>
+#include <QtCore/QProcessEnvironment>
 
 #include "QtMainWindow.h"
 
@@ -49,7 +50,22 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     // Widget translation
 
+#ifdef Q_WS_MAEMO_5
+    // Work around http://bugreports.qt.nokia.com/browse/QTBUG-1313
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    QString lang( "C" );
+    QStringList const locales = QStringList() << "LC_ALL" << "LC_MESSAGES" << "LANG" << "LANGUAGE";
+    foreach( const QString &locale, locales ) {
+        if ( env.contains( locale ) && !env.value( locale ).isEmpty() ) {
+            lang = env.value( locale, "C" );
+            break;
+        }
+    }
+
+    lang = lang.section( '_', 0, 0 );
+#else
     QString      lang = QLocale::system().name().section('_', 0, 0);
+#endif
     QTranslator  translator;
     translator.load( "marble-" + lang, MarbleDirs::path(QString("lang") ) );
     app.installTranslator(&translator);
