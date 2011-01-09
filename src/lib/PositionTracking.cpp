@@ -192,12 +192,19 @@ bool PositionTracking::saveTrack(QString& fileName)
         //FIXME: a better way to do this?
         writer.setDocumentType( kml::kmlTag_nameSpace22 );
 
-        GeoDataDocument *document = new GeoDataDocument( *d->m_document );
+        GeoDataDocument *document = new GeoDataDocument;
         QFileInfo fileInfo( fileName );
         QString name = fileInfo.baseName();
         document->setName( name );
-        document->remove( 0 );
-        document->last().setName( "Track" );
+        foreach( GeoDataStyle style, d->m_document->styles() ) {
+            document->addStyle( style );
+        }
+        foreach( GeoDataStyleMap map, d->m_document->styleMaps() ) {
+            document->addStyleMap( map );
+        }
+        GeoDataFeature *track = new GeoDataFeature(d->m_document->last());
+        track->setName( "Track " + name );
+        document->append( track );
 
         QFile file( fileName );
         file.open( QIODevice::ReadWrite );
