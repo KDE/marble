@@ -62,4 +62,4 @@ QString GeoSceneGeodata::type()
 
 }
 
-#include "GeoSceneGeodata.moc"
+// #include "GeoSceneGeodata.moc"
