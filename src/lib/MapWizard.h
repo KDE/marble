@@ -62,7 +62,6 @@ public slots:
     void querySourceImage();
     void queryPreviewImage();
     void queryLegendImage();
-    void queryStaticUrlLegendImage();
 
     // Other
     void autoFillDetails();
@@ -74,7 +73,8 @@ private:
 
     GeoSceneDocument* createDocument();
     bool createFiles( const GeoSceneDocument* head );
-    void createLegendHtml();
+    void createLegendHtml( QString image = "./legend/legend.png" );
+    void createLegendFile();
     void createLegend();
     void downloadLegend( const QString url );
 

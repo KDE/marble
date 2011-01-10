@@ -23,6 +23,12 @@
 #include "GeoSceneTexture.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneProperty.h"
+#include "GeoSceneGeodata.h"
+#include "GeoSceneLegend.h"
+#include "GeoSceneSection.h"
+#include "GeoSceneItem.h"
+#include "GeoSceneIcon.h"
+#include "GeoSceneVector.h"
 #include "GeoWriter.h"
 #include "DgmlElementDictionary.h"
 
@@ -92,6 +98,7 @@ public:
     QString sourceImage;
 
     QString dgmlOutput;
+    QString legendHtml;
 };
 
 void MapWizardPrivate::pageEntered( int id )
@@ -107,7 +114,7 @@ void MapWizardPrivate::pageEntered( int id )
             previewImage = QImage::fromData( levelZero ).scaled( 136, 136, Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
         }
         uiWidget.labelPreview->setPixmap( QPixmap::fromImage( previewImage ) );
-    } else if ( id == 6 ) {
+    } else if ( id == 7 ) {
         uiWidget.labelThumbnail->setPixmap( QPixmap::fromImage( previewImage ) );
     }
 }
@@ -120,7 +127,7 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
     while( i.hasNext() ) {
         d->uiWidget.comboBoxStaticUrlFormat->addItem( QString( i.next() ) );
     }
-
+    
     connect( this, SIGNAL( currentIdChanged( int ) ), this, SLOT( pageEntered( int ) ) );
 
     connect( &( d->xmlAccessManager ), SIGNAL( finished( QNetworkReply* ) ), this, SLOT( parseServerCapabilities( QNetworkReply* ) ) );
@@ -129,8 +136,7 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
 
     connect( d->uiWidget.pushButtonSource, SIGNAL( clicked( bool ) ), this, SLOT( querySourceImage() ) );
     connect( d->uiWidget.pushButtonPreview, SIGNAL( clicked( bool ) ), this, SLOT( queryPreviewImage() ) );
-    connect( d->uiWidget.pushButtonLegend, SIGNAL( clicked( bool ) ), this, SLOT( queryLegendImage() ) );
-    connect( d->uiWidget.pushButtonStaticUrlLegend, SIGNAL( clicked( bool ) ), this, SLOT( queryStaticUrlLegendImage() ) );
+    connect( d->uiWidget.pushButtonLegend_2, SIGNAL( clicked( bool ) ), this, SLOT( queryLegendImage() ) );
 
     connect( d->uiWidget.comboBoxWmsServer, SIGNAL( currentIndexChanged( QString ) ), d->uiWidget.lineEditWmsUrl, SLOT( setText( QString ) ) );
     connect( d->uiWidget.comboBoxWmsMap, SIGNAL( currentIndexChanged( QString ) ), this, SLOT( autoFillDetails() ) );
@@ -227,6 +233,7 @@ void MapWizard::createWmsLegend( QNetworkReply* reply )
     image.close();
 
     createLegendHtml();
+    createLegendFile();
 }
 
 void MapWizard::setWmsServers( const QStringList& uris )
@@ -326,10 +333,8 @@ bool MapWizard::createFiles( const GeoSceneDocument* document )
         return false;
 }
 
-void MapWizard::createLegendHtml()
+void MapWizard::createLegendHtml( QString image )
 {
-    QDir map( QString( "%1/maps/earth/%2" ).arg( MarbleDirs::localPath() ).arg( d->mapTheme ) );
-
     QString htmlOutput;
     QXmlStreamWriter stream( &htmlOutput );
     stream.writeStartDocument();
@@ -345,14 +350,21 @@ void MapWizard::createLegendHtml()
 
     stream.writeStartElement( "body" );
     stream.writeStartElement( "img" );
-    stream.writeAttribute( "src", "./legend/legend.png" );
+    stream.writeAttribute( "src", image );
+    stream.writeEndElement();
+    stream.writeComment( " ##customLegendEntries:all## " );
     stream.writeEndElement();
     stream.writeEndElement();
-    stream.writeEndElement();
+    d->legendHtml = htmlOutput;
+}
 
+void MapWizard::createLegendFile()
+{
+    QDir map( QString( "%1/maps/earth/%2" ).arg( MarbleDirs::localPath() ).arg( d->mapTheme ) );
+    
     QFile html( QString( "%1/legend.html" ).arg( map.absolutePath() ) );
     html.open( QIODevice::ReadWrite );
-    html.write( htmlOutput.toAscii().data() );
+    html.write( d->legendHtml.toAscii().data() );
     html.close();
 }
 
@@ -442,18 +454,11 @@ void MapWizard::createLegend()
     }
 
     QFile image;
-
-    if( d->mapProviderType == MapWizardPrivate::StaticImageMap ) {
-        image.setFileName( d->uiWidget.lineEditLegend->text() );
-    }
-
-    if( d->mapProviderType == MapWizardPrivate::StaticUrlMap ) {
-        image.setFileName( d->uiWidget.lineEditStaticUrlLegend->text() );
-    }
-
+    image.setFileName( d->uiWidget.lineEditLegend_2->text() );
     image.copy( QString( "%1/legend/legend.png" ).arg( map.absolutePath() ) );
 
     createLegendHtml();
+    createLegendFile();
 }
 
 void MapWizard::querySourceImage()
@@ -474,13 +479,9 @@ void MapWizard::queryPreviewImage()
 void MapWizard::queryLegendImage()
 {
     QString fileName = QFileDialog::getOpenFileName();
-    d->uiWidget.lineEditLegend->setText( fileName );
-}
-
-void MapWizard::queryStaticUrlLegendImage()
-{
-    QString fileName = QFileDialog::getOpenFileName();
-    d->uiWidget.lineEditStaticUrlLegend->setText( fileName );
+    d->uiWidget.lineEditLegend_2->setText( fileName );
+    createLegendHtml( d->uiWidget.lineEditLegend_2->text() );
+    d->uiWidget.textBrowserLegend->setHtml( d->legendHtml );
 }
 
 QString MapWizard::createArchive( QString mapId )
@@ -595,7 +596,7 @@ bool MapWizard::validateCurrentPage()
         }
     }
 
-    if ( currentId() == 5 ) {
+    if ( currentId() == 6 ) {
         if ( d->uiWidget.lineEditTitle->text().isEmpty() ) {
             QMessageBox::information( this, tr( "Map Title" ), tr( "Please specify a map title." ) );
             d->uiWidget.lineEditTitle->setFocus();
@@ -654,7 +655,7 @@ int MapWizard::nextId() const
         return 5;
         break;
 
-    case 6: // Finish
+    case 7: // Finish
         return -1;
         break;
 
@@ -741,15 +742,198 @@ GeoSceneDocument* MapWizard::createDocument()
     layer->setBackend( "texture" );
     layer->addDataset( texture );
     
+    GeoSceneLayer* secondLayer = new GeoSceneLayer( "standardplaces" );    
+    secondLayer->setBackend( "geodata" );
+  
+    GeoSceneGeodata* cityplacemarks = new GeoSceneGeodata( "cityplacemarks" );
+    cityplacemarks->setSourceFile( "cityplacemarks.kml" );
+    cityplacemarks->setSourceFileFormat( "KML" );
+    secondLayer->addDataset( cityplacemarks );
+    
+    GeoSceneGeodata* baseplacemarks = new GeoSceneGeodata( "baseplacemarks" );
+    baseplacemarks->setSourceFile( "baseplacemarks.kml" );
+    baseplacemarks->setSourceFileFormat( "KML" );
+    secondLayer->addDataset( baseplacemarks );
+    
+    GeoSceneGeodata* elevplacemarks = new GeoSceneGeodata( "elevplacemarks" );
+    elevplacemarks->setSourceFile( "elevplacemarks.kml" );
+    elevplacemarks->setSourceFileFormat( "KML" );
+    secondLayer->addDataset( elevplacemarks );
+    
+    GeoSceneGeodata* observatoryplacemarks = new GeoSceneGeodata( "observatoryplacemarks" );
+    observatoryplacemarks->setSourceFile( "observatoryplacemarks.kml" );
+    observatoryplacemarks->setSourceFileFormat( "KML" );
+    secondLayer->addDataset( observatoryplacemarks );
+    
+    GeoSceneGeodata* otherplacemarks = new GeoSceneGeodata( "otherplacemarks" );
+    otherplacemarks->setSourceFile( "otherplacemarks.kml" );
+    otherplacemarks->setSourceFileFormat( "KML" );
+    secondLayer->addDataset( otherplacemarks );
+    
+    GeoSceneGeodata* boundaryplacemarks = new GeoSceneGeodata( "boundaryplacemarks" );
+    boundaryplacemarks->setSourceFile( "boundaryplacemarks.kml" );
+    boundaryplacemarks->setSourceFileFormat( "KML" );
+    secondLayer->addDataset( boundaryplacemarks );
+    
     GeoSceneMap *map = document->map();
-    map->addLayer( layer );  
+    map->addLayer( layer );
+    map->addLayer( secondLayer );
     
     GeoSceneSettings *settings = document->settings();
-   
-    GeoSceneProperty *coorGrid = new GeoSceneProperty( "coordinate-grid" );
-    coorGrid->setValue( true );
-    coorGrid->setAvailable( true );
-    settings->addProperty( coorGrid );
+    GeoSceneLegend *legend = document->legend();
+    
+    if( d->uiWidget.checkBoxCoord->checkState() == Qt::Checked )
+    {
+        GeoSceneProperty *coorGrid = new GeoSceneProperty( "coordinate-grid" );
+        coorGrid->setValue( true );
+        coorGrid->setAvailable( true );
+        settings->addProperty( coorGrid );
+        
+        GeoSceneSection *coorSection = new GeoSceneSection( "coordinate-grid" );
+        coorSection->setHeading( "Coordinate Grid" );
+        coorSection->setCheckable( true );
+        coorSection->setConnectTo( "coordinate-grid" );
+        coorSection->setSpacing( 12 );
+        legend->addSection( coorSection );
+    }
+    
+    if( d->uiWidget.checkBoxInterest->checkState() == Qt::Checked )
+    {
+        GeoSceneProperty *poiProperty = new GeoSceneProperty( "otherplaces" );
+        poiProperty->setValue( true );
+        poiProperty->setAvailable( true );
+        settings->addProperty( poiProperty );
+        
+        GeoSceneSection *poiSection = new GeoSceneSection( "otherplaces" );
+        poiSection->setHeading( "Places of Interest" );
+        poiSection->setCheckable( true );
+        poiSection->setConnectTo( "otherplaces" );
+        poiSection->setSpacing( 12 );
+        
+        GeoSceneItem *geoPole = new GeoSceneItem( "geographic-pole" );
+        GeoSceneIcon *geoPoleIcon = geoPole->icon();
+        geoPole->setText( "Geographic Pole" );
+        geoPoleIcon->setPixmap( "bitmaps/pole_1.png" );    
+        poiSection->addItem( geoPole );
+        
+        GeoSceneItem *magPole = new GeoSceneItem( "magnetic-pole" );
+        GeoSceneIcon *magPoleIcon = magPole->icon();
+        magPole->setText( "Magnetic Pole" );
+        magPoleIcon->setPixmap( "bitmaps/pole_2.png" );    
+        poiSection->addItem( magPole );
+        
+        GeoSceneItem *airport = new GeoSceneItem( "airport" );
+        GeoSceneIcon *airportIcon = airport->icon();
+        airport->setText( "Airport" );
+        airportIcon->setPixmap( "bitmaps/airport.png" );    
+        poiSection->addItem( airport );
+        
+        GeoSceneItem *shipwreck = new GeoSceneItem( "shipwreck" );
+        GeoSceneIcon *shipwreckIcon = shipwreck->icon();
+        shipwreck->setText( "Shipwreck" );
+        shipwreckIcon->setPixmap( "bitmaps/shipwreck.png" );    
+        poiSection->addItem( shipwreck );
+        
+        GeoSceneItem *observatory = new GeoSceneItem( "observatory" );
+        GeoSceneIcon *observatoryIcon = observatory->icon();
+        observatory->setText( "Observatory" );
+        observatoryIcon->setPixmap( "bitmaps/observatory.png" );    
+        poiSection->addItem( observatory );
+        
+        legend->addSection( poiSection );
+    }
+    
+    if( d->uiWidget.checkBoxTer->checkState() == Qt::Checked )
+    {
+        GeoSceneProperty *terrainProperty = new GeoSceneProperty( "terrain" );
+        terrainProperty->setValue( true );
+        terrainProperty->setAvailable( true );
+        settings->addProperty( terrainProperty );     
+        
+        GeoSceneSection *terrainSection = new GeoSceneSection( "terrain" );
+        terrainSection->setHeading( "Terrain" );
+        terrainSection->setCheckable( true );
+        terrainSection->setConnectTo( "terrain" );
+        terrainSection->setSpacing( 12 );    
+        
+        GeoSceneItem *mountain = new GeoSceneItem( "mountain" );
+        GeoSceneIcon *mountainIcon = mountain->icon();
+        mountain->setText( "Mountain" );
+        mountainIcon->setPixmap( "bitmaps/mountain_1.png" );    
+        terrainSection->addItem( mountain );
+        
+        GeoSceneItem *volcano = new GeoSceneItem( "volcano" );
+        GeoSceneIcon *volcanoIcon = volcano->icon();
+        volcano->setText( "Volcano" );
+        volcanoIcon->setPixmap( "bitmaps/volcano_1.png" );    
+        terrainSection->addItem( volcano );   
+        
+        legend->addSection( terrainSection );
+        
+    }
+    
+    if( d->uiWidget.checkBoxPop->checkState() == Qt::Checked )
+    {
+        GeoSceneProperty *placesProperty = new GeoSceneProperty( "places" );
+        placesProperty->setValue( true );
+        placesProperty->setAvailable( true );
+        settings->addProperty( placesProperty );
+        
+        GeoSceneProperty *citiesProperty = new GeoSceneProperty( "cities" );
+        citiesProperty->setValue( true );
+        citiesProperty->setAvailable( true );
+        settings->addProperty( citiesProperty );
+    }
+    
+    if( d->uiWidget.checkBoxBorder->checkState() == Qt::Checked )
+    {
+        GeoSceneSection *bordersSection = new GeoSceneSection( "borders" );
+        bordersSection->setHeading( "Boundaries" );
+        bordersSection->setCheckable( true );
+        bordersSection->setConnectTo( "borders" );
+        bordersSection->setSpacing( 12 );
+        
+        GeoSceneItem *internationalBoundary = new GeoSceneItem( "international-boundary" );
+        GeoSceneIcon *internationalBoundaryIcon = internationalBoundary->icon();
+        internationalBoundary->setText( "International" );
+        internationalBoundaryIcon->setPixmap( "bitmaps/border_1.png" );    
+        bordersSection->addItem( internationalBoundary ); 
+        
+        GeoSceneItem *stateBoundary = new GeoSceneItem( "state" );
+        GeoSceneIcon *stateBoundaryIcon = stateBoundary->icon();
+        stateBoundary->setText( "State" );
+        stateBoundaryIcon->setPixmap( "bitmaps/border_2.png" );
+        bordersSection->addItem( stateBoundary );
+        
+        GeoSceneProperty *bordersProperty = new GeoSceneProperty( "borders" );
+        bordersProperty->setValue( false );
+        bordersProperty->setAvailable( true );
+        settings->addProperty( bordersProperty );
+        
+        GeoSceneProperty *intBoundariesProperty = new GeoSceneProperty( "international-boundaries" );
+        intBoundariesProperty->setValue( false );
+        intBoundariesProperty->setAvailable( true );
+        settings->addProperty( intBoundariesProperty );
+        
+        GeoSceneProperty *stateBounderiesProperty = new GeoSceneProperty( "state-boundaries" );
+        stateBounderiesProperty->setValue( false );
+        stateBounderiesProperty->setAvailable( true );
+        settings->addProperty( stateBounderiesProperty );
+        
+        legend->addSection( bordersSection );
+        
+        GeoSceneLayer* mwdbii = new GeoSceneLayer( "mwdbii" );
+        mwdbii->setBackend( "vector" );
+        mwdbii->setRole( "polyline" ); 
+        
+        GeoSceneVector* vector = new GeoSceneVector( "pdiffborder" );
+        vector->setFeature( "border" );
+        vector->setFileFormat( "PNT" );
+        vector->setSourceFile( "earth/mwdbii/PDIFFBORDER.PNT" );
+        vector->pen().setColor( "#ffe300" );
+        mwdbii->addDataset( vector );
+        map->addLayer( mwdbii );
+    }
     
     GeoSceneProperty *overviewmap = new GeoSceneProperty( "overviewmap" );
     overviewmap->setValue( true );

@@ -21,6 +21,7 @@ namespace GeoSceneTypes
  */
 extern const char* GeoSceneDocumentType;
 extern const char* GeoSceneFilterType;
+extern const char* GeoSceneGeodataType;
 extern const char* GeoSceneGroupType;
 extern const char* GeoSceneHeadType;
 extern const char* GeoSceneIconType;

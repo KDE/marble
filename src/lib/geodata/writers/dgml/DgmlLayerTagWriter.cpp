@@ -27,6 +27,10 @@ bool DgmlLayerTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     writer.writeStartElement( dgml::dgmlTag_Layer );
     writer.writeAttribute( "name", layer->name() );
     writer.writeAttribute( "backend", layer->backend() );
+    if( !layer->role().isEmpty() )
+    {
+        writer.writeAttribute( "role", layer->role() );
+    }
     
     for( int i = 0; i < layer->datasets().count(); ++i )
     {

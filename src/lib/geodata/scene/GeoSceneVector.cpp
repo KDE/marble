@@ -20,6 +20,7 @@
 */
 
 #include "GeoSceneVector.h"
+#include "GeoSceneTypes.h"
 
 namespace Marble
 {
@@ -31,6 +32,11 @@ GeoSceneVector::GeoSceneVector( const QString& name )
       m_pen(),
       m_brush()
 {
+}
+
+const char* GeoSceneVector::nodeType() const
+{
+    return GeoSceneTypes::GeoSceneVectorType;
 }
 
 QString GeoSceneVector::sourceFile() const

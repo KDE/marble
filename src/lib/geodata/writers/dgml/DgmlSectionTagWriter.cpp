@@ -30,6 +30,7 @@ bool DgmlSectionTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     writer.writeStartElement( dgml::dgmlTag_Section );
     writer.writeAttribute( "name", section->name() );
     writer.writeAttribute( "checkable", section->checkable() ? "true" : "false" );
+    writer.writeAttribute( "connect", section->connectTo() );
     writer.writeAttribute( "spacing", QString::number( section->spacing() ) );
     writer.writeElement( dgml::dgmlTag_Heading, section->heading() );
     

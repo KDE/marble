@@ -20,11 +20,13 @@
 #include "GeoSceneMap.h"
 #include "GeoSceneLayer.h"
 #include "GeoSceneTexture.h"
+#include "GeoSceneGeodata.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneProperty.h"
 #include "GeoSceneLegend.h"
 #include "GeoSceneSection.h"
 #include "GeoSceneItem.h"
+#include "GeoSceneVector.h"
 
 #include "GeoWriter.h"
 #include "GeoSceneParser.h"
@@ -68,12 +70,33 @@ void TestGeoSceneWriter::writeHeadTag()
     texture->setLevelZeroColumns( 2 );
     texture->setLevelZeroRows( 2 );
     
+    GeoSceneGeodata* geodata = new GeoSceneGeodata( "cityplacemarks" );
+    geodata->setSourceFile( "baseplacemarks.kml" );
+    geodata->setSourceFileFormat( "KML" );
+    
     GeoSceneLayer* layer = new GeoSceneLayer( "testmap" );
     layer->setBackend( "texture" );
     layer->addDataset( texture );
     
+    GeoSceneLayer* secondLayer = new GeoSceneLayer( "standardplaces" );
+    secondLayer->setBackend( "geodata" );
+    secondLayer->addDataset( geodata );
+    
+    GeoSceneLayer* thirdLayer = new GeoSceneLayer( "mwdbii" );
+    thirdLayer->setBackend( "vector" );
+    thirdLayer->setRole( "polyline" );
+    
+    GeoSceneVector* vector = new GeoSceneVector( "pdiffborder" );
+    vector->setFeature( "border" );
+    vector->setFileFormat( "PNT" );
+    vector->setSourceFile( "earth/mwdbii/PDIFFBORDER.PNT" );
+    vector->pen().setColor( "#ffe300" );
+    thirdLayer->addDataset( vector );
+    
     GeoSceneMap* map = document->map();
     map->addLayer( layer );
+    map->addLayer( secondLayer );
+    map->addLayer( thirdLayer );
     
     GeoSceneSettings *settings = document->settings();
    
@@ -113,7 +136,7 @@ void TestGeoSceneWriter::writeHeadTag()
     GeoSceneIcon* sportsCentreIcon = sportsCentre->icon();
     sportsCentreIcon->setColor( "#00FF00" );
     section->addItem( sportsCentre );
-    
+        
     QTemporaryFile tempFile;
     tempFile.open();
     

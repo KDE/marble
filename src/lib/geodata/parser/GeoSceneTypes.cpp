@@ -17,6 +17,7 @@ namespace GeoSceneTypes
 {
 const char* GeoSceneDocumentType = "GeoSceneDocument";
 const char* GeoSceneFilterType = "GeoSceneFilter";
+const char* GeoSceneGeodataType = "GeoSceneGeodata";
 const char* GeoSceneGroupType = "GeoSceneGroup";
 const char* GeoSceneHeadType = "GeoSceneHead";
 const char* GeoSceneIconType = "GeoSceneIcon";
