@@ -73,17 +73,13 @@
                     <sourcefile format="KML">elevplacemarks.kml</sourcefile>
                     <pick>placemark</pick>
                 </geodata>
-                <geodata name="observatoryplacemarks">
-                    <sourcefile format="KML">observatoryplacemarks.kml</sourcefile>
-                    <pick>placemark</pick>
-                </geodata>
                 <geodata name="otherplacemarks">
                     <sourcefile
                     format="KML">otherplacemarks.kml</sourcefile>
                     <pick>placemark</pick>
                 </geodata>
                 <geodata name="boundaryplacemarks">
-                    <sourcefile format="KML">boundaryplacemarks</sourcefile>
+                    <sourcefile format="KML">boundaryplacemarks.kml</sourcefile>
                     <pick>placemark</pick>
                 </geodata>
             </layer>
