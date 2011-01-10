@@ -125,13 +125,6 @@ void FileManager::removeFile( const QString& key )
     mDebug() << "could not identify " << key;
 }
 
-void FileManager::addFile ( KmlFileViewItem * item )
-{
-    mDebug() << "FileManager::addFile";
-    d->m_fileItemList.append( item );
-    emit fileAdded( d->m_fileItemList.indexOf( item ) );
-}
-
 void FileManager::saveFile( int index )
 {
     if ( index < d->m_fileItemList.size() ) {
@@ -169,7 +162,8 @@ KmlFileViewItem * FileManager::at( int index )
 void FileManager::addGeoDataDocument( GeoDataDocument* document )
 {
     KmlFileViewItem* item = new KmlFileViewItem( document );
-    addFile( item );
+    d->m_fileItemList.append( item );
+    emit fileAdded( d->m_fileItemList.indexOf( item ) );
 
     // now get the document that will be preserved throughout the life time
     GeoDataDocument* doc = item->document();

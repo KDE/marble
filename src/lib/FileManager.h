@@ -77,7 +77,6 @@ class FileManager : public QObject
     */
     void addData( const QString &name, const QString &data );
 
-    void addFile( KmlFileViewItem *item );
     void saveFile( int index );
     void closeFile( int index );
 
