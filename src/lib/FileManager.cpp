@@ -86,17 +86,10 @@ QStringList FileManager::containers() const
     return retList + d->m_pathList;
 }
 
-QString FileManager::toRegularName( QString name )
-{
-    QFileInfo fileinfo( name );
-    return fileinfo.completeBaseName();
-}
-
 void FileManager::addFile( const QString& filepath )
 {
-    QString regularName = toRegularName( filepath );
-    if ( !containers().contains( regularName ) ) {
-        mDebug() << "adding container:" << regularName;
+    if ( !containers().contains( filepath ) ) {
+        mDebug() << "adding container:" << filepath;
         FileLoader* loader = new FileLoader( this, filepath );
         appendLoader( loader );
         d->m_pathList.append( filepath );
@@ -124,11 +117,12 @@ void FileManager::appendLoader( FileLoader *loader )
 void FileManager::removeFile( const QString& key )
 {
     for ( int i = 0; i < d->m_fileItemList.size(); ++i ) {
-        if ( toRegularName( key ) == toRegularName( d->m_fileItemList.at(i)->name() ) ) {
+        if ( key == d->m_fileItemList.at(i)->name() ) {
             closeFile( i );
-            break;
+            return;
         }
     }
+    mDebug() << "could not identify " << key;
 }
 
 void FileManager::addFile ( KmlFileViewItem * item )

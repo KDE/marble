@@ -99,11 +99,6 @@ class FileManager : public QObject
 
     void appendLoader( FileLoader *loader );
 
-    /**
-     * internal helper function which returns the regular name of a kml or cache file
-     */
-    static QString toRegularName( QString name );
-
     Q_DISABLE_COPY( FileManager )
 
     FileManagerPrivate *const d;
