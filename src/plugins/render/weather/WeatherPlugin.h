@@ -60,7 +60,7 @@ class WeatherPlugin : public AbstractDataPlugin
     void setSettings( QHash<QString,QVariant> settings );
 
  private Q_SLOTS:
-    void readSettings() const;
+    void readSettings();
     void writeSettings();
     void updateItemSettings();
     
@@ -70,10 +70,10 @@ class WeatherPlugin : public AbstractDataPlugin
  private:
     bool m_isInitialized;
 
-    mutable QIcon m_icon;
-    mutable PluginAboutDialog *m_aboutDialog;
-    mutable QDialog * m_configDialog;
-    mutable Ui::WeatherConfigWidget * ui_configWidget;
+    QIcon m_icon;
+    PluginAboutDialog *m_aboutDialog;
+    QDialog * m_configDialog;
+    Ui::WeatherConfigWidget * ui_configWidget;
 
     QHash<QString,QVariant> m_settings;
 };

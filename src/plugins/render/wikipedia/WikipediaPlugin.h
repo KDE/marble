@@ -65,7 +65,7 @@ class WikipediaPlugin : public AbstractDataPlugin
     virtual void setSettings( QHash<QString,QVariant> settings );
 
  private Q_SLOTS:
-    void readSettings() const;
+    void readSettings();
     void writeSettings();
 
     void updateSettings();
@@ -74,10 +74,10 @@ class WikipediaPlugin : public AbstractDataPlugin
  private:
     bool m_isInitialized;
 
-    mutable QIcon m_icon;
-    mutable PluginAboutDialog *m_aboutDialog;
-    mutable Ui::WikipediaConfigWidget *ui_configWidget;
-    mutable QDialog *m_configDialog;
+    QIcon m_icon;
+    PluginAboutDialog *m_aboutDialog;
+    Ui::WikipediaConfigWidget *ui_configWidget;
+    QDialog *m_configDialog;
     QHash<QString,QVariant> m_settings;
 };
 

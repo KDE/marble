@@ -67,15 +67,15 @@ public:
     virtual void setSettings( QHash<QString,QVariant> settings );
 
 public slots:
-    void readSettings() const;
+    void readSettings();
     void writeSettings();
     void updateSettings();
 
 private:
     bool m_isInitialized;
-    mutable PluginAboutDialog *m_aboutDialog;
-    mutable Ui::EarthquakeConfigWidget *ui_configWidget;
-    mutable QDialog *m_configDialog;
+    PluginAboutDialog *m_aboutDialog;
+    Ui::EarthquakeConfigWidget *ui_configWidget;
+    QDialog *m_configDialog;
     QHash<QString,QVariant> m_settings;
 
 private slots:

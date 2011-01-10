@@ -165,7 +165,7 @@ void GraticulePlugin::setSettings( QHash<QString,QVariant> settings )
 }
 
 
-void GraticulePlugin::readSettings() const
+void GraticulePlugin::readSettings()
 {
     if ( !m_configDialog )
         return;

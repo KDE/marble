@@ -363,7 +363,7 @@ void MapScaleFloatItem::toolTipEvent( QHelpEvent *e )
     QToolTip::showText( e->globalPos(), m_ratioString );
 }
 
-void MapScaleFloatItem::readSettings() const
+void MapScaleFloatItem::readSettings()
 {    
     if ( !m_configDialog )
         return;

@@ -158,7 +158,7 @@ void WikipediaPlugin::setSettings( QHash<QString,QVariant> settings )
     emit settingsChanged( nameId() );
 }
 
-void WikipediaPlugin::readSettings() const
+void WikipediaPlugin::readSettings()
 {    
     if ( !m_configDialog )
         return;

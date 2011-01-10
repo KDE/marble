@@ -71,7 +71,7 @@ namespace Marble
 
 
         private Q_SLOTS: 
-        void readSettings() const;
+        void readSettings();
         void writeSettings();
         void updateVisibility( QString nameId, bool visible );
         virtual RenderType renderType() const;
@@ -88,9 +88,9 @@ namespace Marble
         QString                        m_filter;
         QAction                       *m_action;
 
-        mutable PluginAboutDialog     *m_aboutDialog;
-        mutable QDialog               *m_configDialog;
-        mutable Ui::AprsConfigWidget  *ui_configWidget;
+        PluginAboutDialog     *m_aboutDialog;
+        QDialog               *m_configDialog;
+        Ui::AprsConfigWidget  *ui_configWidget;
         QHash<QString,QVariant>        m_settings;
 
     };

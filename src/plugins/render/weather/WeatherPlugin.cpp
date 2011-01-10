@@ -203,7 +203,7 @@ void WeatherPlugin::setSettings( QHash<QString,QVariant> settings )
     emit settingsChanged( nameId() );
 }
 
-void WeatherPlugin::readSettings() const
+void WeatherPlugin::readSettings()
 {
     if ( !m_configDialog ) {
         return;

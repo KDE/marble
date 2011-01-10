@@ -83,7 +83,7 @@ class PositionMarker  : public RenderPlugin
 
 
  public slots:
-    void readSettings() const;
+    void readSettings();
     void writeSettings();
     void updateSettings();
     void setPosition( const GeoDataCoordinates &position );
@@ -102,10 +102,10 @@ class PositionMarker  : public RenderPlugin
     GeoDataCoordinates  m_currentPosition;
     GeoDataCoordinates  m_previousPosition;
     
-    mutable Ui::PositionMarkerConfigWidget *ui_configWidget;
-    mutable PluginAboutDialog *m_aboutDialog;
-    mutable QDialog *m_configDialog;
-    mutable QString m_cursorPath;
+    Ui::PositionMarkerConfigWidget *ui_configWidget;
+    PluginAboutDialog *m_aboutDialog;
+    QDialog *m_configDialog;
+    QString m_cursorPath;
 
     QPolygonF           m_arrow;
     QPolygonF           m_previousArrow;

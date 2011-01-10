@@ -265,7 +265,7 @@ QDialog *AprsPlugin::configDialog()
     return m_configDialog;
 }
 
-void AprsPlugin::readSettings() const
+void AprsPlugin::readSettings()
 {
     if ( !m_configDialog ) {
         return;

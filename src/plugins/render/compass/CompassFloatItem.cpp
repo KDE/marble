@@ -222,7 +222,7 @@ void CompassFloatItem::setSettings( QHash<QString,QVariant> settings )
     readSettings();
 }
 
-void CompassFloatItem::readSettings() const
+void CompassFloatItem::readSettings()
 {
     int index = m_settings.value( "theme", 0 ).toInt();
     if ( m_uiConfigWidget && index >= 0 && index < m_uiConfigWidget->m_themeList->count() ) {
@@ -243,7 +243,6 @@ void CompassFloatItem::readSettings() const
     }
 
     delete m_svgobj;
-    /** @todo FIXME we really need to change the configDialog() const API */
     CompassFloatItem * me = const_cast<CompassFloatItem*>( this );
     m_svgobj = new QSvgRenderer( theme, me );
     m_compass = QPixmap();

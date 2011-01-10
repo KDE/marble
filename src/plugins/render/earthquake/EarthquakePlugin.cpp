@@ -143,7 +143,7 @@ void EarthquakePlugin::setSettings( QHash<QString,QVariant> settings )
     emit settingsChanged( nameId() );
 }
 
-void EarthquakePlugin::readSettings() const
+void EarthquakePlugin::readSettings()
 {
     if ( !m_configDialog )
         return;

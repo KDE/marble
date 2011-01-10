@@ -84,7 +84,7 @@ class OverviewMap : public AbstractFloatItem
     virtual void setSettings( QHash<QString,QVariant> settings );
 
  public slots:
-    void readSettings() const;
+    void readSettings();
     void writeSettings();
     void updateSettings();
 
@@ -92,29 +92,29 @@ class OverviewMap : public AbstractFloatItem
     bool eventFilter( QObject *object, QEvent *e );
 
  private:
-    void changeBackground( const QString& target ) const;
+    void changeBackground( const QString& target );
     QSvgWidget *currentWidget() const;
-    void setCurrentWidget( QSvgWidget *widget ) const;
-    void loadPlanetMaps() const;
-    void loadMapSuggestions() const;
+    void setCurrentWidget( QSvgWidget *widget );
+    void loadPlanetMaps();
+    void loadMapSuggestions();
 
     QString m_target;
-    mutable QSvgRenderer  *m_svgobj;
-    mutable QHash<QString, QSvgWidget *> m_svgWidgets;
-    mutable QHash<QString, QVariant> m_svgPaths;
-    mutable QStringList    m_planetID;
+    QSvgRenderer  *m_svgobj;
+    QHash<QString, QSvgWidget *> m_svgWidgets;
+    QHash<QString, QVariant> m_svgPaths;
+    QStringList    m_planetID;
     QPixmap        m_worldmap;
     QHash<QString,QVariant> m_settings;
     QColor m_posColor;
     QSizeF m_defaultSize;
 
-    mutable Ui::OverviewMapConfigWidget *ui_configWidget;
-    mutable QDialog *m_configDialog;
+    Ui::OverviewMapConfigWidget *ui_configWidget;
+    QDialog *m_configDialog;
 
     GeoDataLatLonAltBox m_latLonAltBox;
     qreal m_centerLat;
     qreal m_centerLon;
-    mutable bool m_mapChanged;
+    bool m_mapChanged;
 
  private slots:
     void chooseCustomMap();

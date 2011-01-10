@@ -303,7 +303,7 @@ void PositionMarker::setSettings( QHash<QString,QVariant> settings )
     emit settingsChanged( nameId() );
 }
 
-void PositionMarker::readSettings() const
+void PositionMarker::readSettings()
 {
     if ( !m_configDialog ) {
         return;

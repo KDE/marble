@@ -80,7 +80,7 @@ class CrosshairsPlugin : public RenderPlugin
     void setSettings( QHash<QString,QVariant> settings );
 
 private Q_SLOTS:
-   void readSettings() const;
+   void readSettings();
 
    void writeSettings();
 
@@ -89,15 +89,14 @@ private Q_SLOTS:
 
     bool m_isInitialized;
 
-    mutable PluginAboutDialog *m_aboutDialog;
+    PluginAboutDialog *m_aboutDialog;
 
-    mutable QSvgRenderer *m_svgobj;
-    mutable QPixmap m_crosshairs;
+    QSvgRenderer *m_svgobj;
+    QPixmap m_crosshairs;
 
     QHash<QString,QVariant> m_settings;
-    /** @todo: Refactor plugin interface to have configDialog() non-const */
-    mutable QDialog * m_configDialog;
-    mutable Ui::CrosshairsConfigWidget * m_uiConfigWidget;
+    QDialog * m_configDialog;
+    Ui::CrosshairsConfigWidget * m_uiConfigWidget;
 };
 
 }

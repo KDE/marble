@@ -72,7 +72,7 @@ class CompassFloatItem  : public AbstractFloatItem
     void setSettings( QHash<QString,QVariant> settings );
 
 private Q_SLOTS:
-   void readSettings() const;
+   void readSettings();
 
    void writeSettings();
 
@@ -81,17 +81,16 @@ private Q_SLOTS:
 
     bool           m_isInitialized;
 
-    mutable PluginAboutDialog *m_aboutDialog;
-    mutable QSvgRenderer  *m_svgobj;
-    mutable QPixmap        m_compass;
+    PluginAboutDialog *m_aboutDialog;
+    QSvgRenderer  *m_svgobj;
+    QPixmap        m_compass;
 
     /// allowed values: -1, 0, 1; default here: 0. FIXME: Declare enum
     int            m_polarity;
 
     QHash<QString,QVariant> m_settings;
-    /** @todo: Refactor plugin interface to have configDialog() non-const */
-    mutable QDialog * m_configDialog;
-    mutable Ui::CompassConfigWidget * m_uiConfigWidget;
+    QDialog * m_configDialog;
+    Ui::CompassConfigWidget * m_uiConfigWidget;
 };
 
 }

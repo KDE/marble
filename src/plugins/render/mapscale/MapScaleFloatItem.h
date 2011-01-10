@@ -73,7 +73,7 @@ class MapScaleFloatItem : public AbstractFloatItem
     virtual void toolTipEvent( QHelpEvent *e );
 
  private Q_SLOTS:
-    void readSettings() const;
+    void readSettings();
     void writeSettings();
     void toggleRatioScaleVisibility();
 
@@ -81,9 +81,9 @@ class MapScaleFloatItem : public AbstractFloatItem
     int   invScale() const            { return m_invScale; }
     void  setInvScale( int invScale ) { m_invScale = invScale; }
 
-    mutable PluginAboutDialog *m_aboutDialog;
-    mutable QDialog *m_configDialog;
-    mutable Ui::MapScaleConfigWidget *ui_configWidget;
+    PluginAboutDialog *m_aboutDialog;
+    QDialog *m_configDialog;
+    Ui::MapScaleConfigWidget *ui_configWidget;
 
     int      m_radius;
     int      m_invScale;

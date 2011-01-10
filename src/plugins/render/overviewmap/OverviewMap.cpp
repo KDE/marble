@@ -313,7 +313,7 @@ void OverviewMap::setSettings( QHash<QString,QVariant> settings )
     emit settingsChanged( nameId() );
 }
 
-void OverviewMap::readSettings() const
+void OverviewMap::readSettings()
 {
     if ( !m_configDialog ) {
         return;
@@ -399,7 +399,7 @@ bool OverviewMap::eventFilter( QObject *object, QEvent *e )
     return AbstractFloatItem::eventFilter(object,e);
 }
 
-void OverviewMap::changeBackground( const QString& target ) const
+void OverviewMap::changeBackground( const QString& target )
 {
     delete m_svgobj;
     m_svgobj = new QSvgRenderer( m_svgPaths[target].toString() );
@@ -410,7 +410,7 @@ QSvgWidget *OverviewMap::currentWidget() const
     return m_svgWidgets[m_planetID[ui_configWidget->m_planetComboBox->currentIndex()]];
 }
 
-void OverviewMap::setCurrentWidget( QSvgWidget *widget ) const
+void OverviewMap::setCurrentWidget( QSvgWidget *widget )
 {
     m_svgWidgets[m_planetID[ui_configWidget->m_planetComboBox->currentIndex()]] = widget;
     m_mapChanged = true;
@@ -419,14 +419,14 @@ void OverviewMap::setCurrentWidget( QSvgWidget *widget ) const
     }
 }
 
-void OverviewMap::loadPlanetMaps() const
+void OverviewMap::loadPlanetMaps()
 {
     foreach( const QString& planet, m_planetID ) {
         m_svgWidgets[planet] = new QSvgWidget( m_svgPaths[planet].toString() );
     }
 }
 
-void OverviewMap::loadMapSuggestions() const
+void OverviewMap::loadMapSuggestions()
 {
     QStringList paths = QDir( MarbleDirs::pluginPath( "" ) ).entryList( QStringList( "*.svg" ), QDir::Files | QDir::NoDotAndDotDot );
     for( int i = 0; i < paths.size(); ++i ) {

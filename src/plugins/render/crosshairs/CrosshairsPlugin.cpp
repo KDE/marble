@@ -153,7 +153,7 @@ void CrosshairsPlugin::setSettings( QHash<QString,QVariant> settings )
 }
 
 
-void CrosshairsPlugin::readSettings() const
+void CrosshairsPlugin::readSettings()
 {
     int index = m_settings.value( "theme", 0 ).toInt();
     if ( m_uiConfigWidget && index >= 0 && index < m_uiConfigWidget->m_themeList->count() ) {
@@ -177,7 +177,6 @@ void CrosshairsPlugin::readSettings() const
     }
 
     delete m_svgobj;
-    /** @todo FIXME we really need to change the configDialog() const API */
     CrosshairsPlugin * me = const_cast<CrosshairsPlugin*>( this );
     m_svgobj = new QSvgRenderer( theme, me );
     m_crosshairs = QPixmap();

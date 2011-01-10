@@ -99,7 +99,7 @@ class GraticulePlugin : public RenderPlugin
 
 
  public Q_SLOTS:
-    void readSettings() const;
+    void readSettings();
     void writeSettings();
     
     void gridGetColor();
@@ -200,11 +200,11 @@ class GraticulePlugin : public RenderPlugin
 
     QHash<QString,QVariant> m_settings;
 
-    mutable QIcon m_icon;
-    mutable PluginAboutDialog *m_aboutDialog;
+    QIcon m_icon;
+    PluginAboutDialog *m_aboutDialog;
         
-    mutable Ui::GraticuleConfigWidget *ui_configWidget;
-    mutable QDialog *m_configDialog;
+    Ui::GraticuleConfigWidget *ui_configWidget;
+    QDialog *m_configDialog;
 
  private slots:
     void evaluateClickedButton( QAbstractButton *button );
