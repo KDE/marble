@@ -65,7 +65,7 @@ class CrosshairsPlugin : public RenderPlugin
 
     QIcon icon () const;
 
-    QDialog *aboutDialog() const;
+    QDialog *aboutDialog();
 
     void initialize ();
 
@@ -73,7 +73,7 @@ class CrosshairsPlugin : public RenderPlugin
 
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 
-    QDialog *configDialog() const;
+    QDialog *configDialog();
 
     QHash<QString,QVariant> settings() const;
 

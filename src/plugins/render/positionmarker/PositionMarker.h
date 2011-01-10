@@ -55,9 +55,9 @@ class PositionMarker  : public RenderPlugin
 
     QIcon icon () const;
 
-    QDialog *aboutDialog() const;
+    QDialog *aboutDialog();
 
-    QDialog *configDialog() const;
+    QDialog *configDialog();
 
     void initialize ();
 

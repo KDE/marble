@@ -100,7 +100,7 @@ QIcon PositionMarker::icon() const
     return QIcon();
 }
 
-QDialog *PositionMarker::aboutDialog() const
+QDialog *PositionMarker::aboutDialog()
 {
     if ( !m_aboutDialog ) {
         // Initializing about dialog
@@ -132,7 +132,7 @@ QDialog *PositionMarker::aboutDialog() const
     return m_aboutDialog;
 }
 
-QDialog *PositionMarker::configDialog() const
+QDialog *PositionMarker::configDialog()
 {
     if ( !m_configDialog ) {
         // Initializing configuration dialog

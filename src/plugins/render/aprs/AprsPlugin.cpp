@@ -136,7 +136,7 @@ QIcon AprsPlugin::icon () const
     return QIcon();
 }
 
-QDialog* AprsPlugin::aboutDialog() const
+QDialog* AprsPlugin::aboutDialog()
 {
     if ( !m_aboutDialog )
     {
@@ -245,7 +245,7 @@ void AprsPlugin::initialize ()
     restartGatherers();
 }
 
-QDialog *AprsPlugin::configDialog() const
+QDialog *AprsPlugin::configDialog()
 {
     if ( !m_configDialog ) {
         // Initializing configuration dialog

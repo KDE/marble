@@ -54,13 +54,13 @@ namespace Marble
         QString nameId() const;
         QString description() const;
         QIcon icon () const;
-        QDialog *aboutDialog() const;
+        QDialog *aboutDialog();
 
         void initialize ();
         bool isInitialized () const;
         bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 
-        QDialog *configDialog() const;
+        QDialog *configDialog();
         QAction       *action() const;
 
         QHash<QString,QVariant> settings() const;

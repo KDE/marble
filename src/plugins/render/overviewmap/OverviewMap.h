@@ -62,7 +62,7 @@ class OverviewMap : public AbstractFloatItem
 
     QIcon icon () const;
 
-    QDialog *configDialog() const;
+    QDialog *configDialog();
 
     void initialize ();
 

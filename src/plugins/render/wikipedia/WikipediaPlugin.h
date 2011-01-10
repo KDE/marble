@@ -50,9 +50,9 @@ class WikipediaPlugin : public AbstractDataPlugin
     
     QIcon icon() const;
 
-    QDialog *aboutDialog() const;
+    QDialog *aboutDialog();
 
-    QDialog *configDialog() const;
+    QDialog *configDialog();
 
     /**
      * @return: The settings of the item.

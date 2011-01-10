@@ -78,9 +78,9 @@ class GraticulePlugin : public RenderPlugin
 
     QIcon icon () const;
 
-    QDialog *configDialog() const;
+    QDialog *configDialog();
 
-    QDialog *aboutDialog() const;
+    QDialog *aboutDialog();
 
     void initialize ();
 

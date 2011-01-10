@@ -84,7 +84,7 @@ QIcon CrosshairsPlugin::icon () const
     return QIcon( ":/icons/crosshairs.png" );
 }
 
-QDialog* CrosshairsPlugin::aboutDialog() const
+QDialog* CrosshairsPlugin::aboutDialog()
 {
     if ( !m_aboutDialog ) {
         // Initializing about dialog
@@ -122,7 +122,7 @@ bool CrosshairsPlugin::isInitialized () const
     return m_isInitialized;
 }
 
-QDialog *CrosshairsPlugin::configDialog() const
+QDialog *CrosshairsPlugin::configDialog()
 {
     if ( !m_configDialog ) {
         m_configDialog = new QDialog();

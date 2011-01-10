@@ -1,0 +1,14 @@
+
+2011-01-10  Dennis Nienhüser <earthwings@gentoo.org>
+
+* Change the methods
+   virtual QDialog *RenderPlugin::aboutDialog() const;
+   virtual QDialog *RenderPlugin::configDialog() const;
+   QStandardItem   *RenderPlugin::item() const;
+  to
+   virtual QDialog *RenderPlugin::aboutDialog();
+   virtual QDialog *RenderPlugin::configDialog();
+   QStandardItem   *RenderPlugin::item();
+  to be able to implement lazy loading of dialogs without cheating. Lazy
+  creation of these dialogs is recommended to avoid wasting resources
+  for dialogs that are likely not used.

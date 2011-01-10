@@ -105,7 +105,7 @@ bool GraticulePlugin::isInitialized () const
     return m_isInitialized;
 }
 
-QDialog *GraticulePlugin::configDialog () const
+QDialog *GraticulePlugin::configDialog()
 {
     if ( !m_configDialog ) {
         m_configDialog = new QDialog();
@@ -247,7 +247,7 @@ void GraticulePlugin::updateSettings()
     m_gridCirclePen = QPen( m_gridColor );    
 }
 
-QDialog *GraticulePlugin::aboutDialog() const
+QDialog *GraticulePlugin::aboutDialog()
 {
     if ( !m_aboutDialog ) {
         // Initializing about dialog

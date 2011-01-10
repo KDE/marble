@@ -93,7 +93,7 @@ QIcon WikipediaPlugin::icon() const
     return m_icon;
 }
 
-QDialog *WikipediaPlugin::aboutDialog() const
+QDialog *WikipediaPlugin::aboutDialog()
 {
     if ( !m_aboutDialog ) {
         // Initializing about dialog
@@ -115,7 +115,7 @@ QDialog *WikipediaPlugin::aboutDialog() const
     return m_aboutDialog;
 }
 
-QDialog *WikipediaPlugin::configDialog() const
+QDialog *WikipediaPlugin::configDialog()
 {
     if ( !m_configDialog ) {
         // Initializing configuration dialog

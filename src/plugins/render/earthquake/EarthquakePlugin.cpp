@@ -66,7 +66,7 @@ QIcon EarthquakePlugin::icon() const
     return QIcon();
 }
 
-QDialog* EarthquakePlugin::aboutDialog() const
+QDialog* EarthquakePlugin::aboutDialog()
 {
     if ( !m_aboutDialog )
     {
@@ -94,7 +94,7 @@ QDialog* EarthquakePlugin::aboutDialog() const
     return m_aboutDialog;
 }
 
-QDialog *EarthquakePlugin::configDialog() const
+QDialog *EarthquakePlugin::configDialog()
 {
     if ( !m_configDialog ) {
         // Initializing configuration dialog

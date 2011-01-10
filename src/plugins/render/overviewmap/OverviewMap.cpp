@@ -88,7 +88,7 @@ QIcon OverviewMap::icon () const
     return QIcon();
 }
 
-QDialog *OverviewMap::configDialog() const
+QDialog *OverviewMap::configDialog()
 {
     if ( !m_configDialog ) {
         // Initializing configuration dialog

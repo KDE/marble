@@ -80,3 +80,4 @@ private:
 }
 
 #endif // MARBLE_ROUTINGPLUGIN_H
+

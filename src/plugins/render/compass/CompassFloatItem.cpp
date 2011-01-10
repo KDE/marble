@@ -73,7 +73,7 @@ QIcon CompassFloatItem::icon() const
     return QIcon();
 }
 
-QDialog* CompassFloatItem::aboutDialog() const
+QDialog* CompassFloatItem::aboutDialog()
 {
     if ( !m_aboutDialog ) {
         // Initializing about dialog
@@ -192,7 +192,7 @@ void CompassFloatItem::paintContent( GeoPainter *painter,
     painter->restore();
 }
 
-QDialog *CompassFloatItem::configDialog() const
+QDialog *CompassFloatItem::configDialog()
 {
     if ( !m_configDialog ) {
         m_configDialog = new QDialog();

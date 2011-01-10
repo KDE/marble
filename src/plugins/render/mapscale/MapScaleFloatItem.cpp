@@ -98,7 +98,7 @@ bool MapScaleFloatItem::isInitialized () const
     return true;
 }
 
-QDialog *MapScaleFloatItem::aboutDialog() const
+QDialog *MapScaleFloatItem::aboutDialog()
 {
     if ( !m_aboutDialog ) {
         // Initializing about dialog
@@ -326,7 +326,7 @@ void MapScaleFloatItem::calcScaleBar()
     m_valueInterval = (int)( bestMagValue * magnitude / m_bestDivisor );
 }
 
-QDialog *MapScaleFloatItem::configDialog() const
+QDialog *MapScaleFloatItem::configDialog()
 {
     if ( !m_configDialog ) {
         // Initializing configuration dialog

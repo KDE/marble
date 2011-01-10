@@ -69,6 +69,6 @@ class RenderPluginInterface: public PluginInterface, public LayerInterface
 
 }
 
-Q_DECLARE_INTERFACE( Marble::RenderPluginInterface, "org.kde.Marble.RenderPluginInterface/1.07" )
+Q_DECLARE_INTERFACE( Marble::RenderPluginInterface, "org.kde.Marble.RenderPluginInterface/1.08" )
 
 #endif

@@ -19,8 +19,11 @@
 namespace Marble {
  
 class OpenDesktopPlugin : public AbstractDataPlugin {
+
     Q_OBJECT
+
     Q_INTERFACES(Marble::RenderPluginInterface)
+
     MARBLE_PLUGIN(OpenDesktopPlugin)
  
  public:

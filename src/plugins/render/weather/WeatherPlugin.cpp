@@ -95,7 +95,7 @@ QIcon WeatherPlugin::icon() const
     return m_icon;
 }
 
-QDialog *WeatherPlugin::aboutDialog() const
+QDialog *WeatherPlugin::aboutDialog()
 {
     if ( !m_aboutDialog ) {
         m_aboutDialog = new PluginAboutDialog();
@@ -117,7 +117,7 @@ QDialog *WeatherPlugin::aboutDialog() const
     return m_aboutDialog;
 }
 
-QDialog *WeatherPlugin::configDialog() const
+QDialog *WeatherPlugin::configDialog()
 {
     if ( !m_configDialog ) {
         // Initializing configuration dialog

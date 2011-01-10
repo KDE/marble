@@ -96,7 +96,7 @@ QList<QActionGroup*>* RenderPlugin::toolbarActionGroups() const
     return 0;
 }
 
-QStandardItem* RenderPlugin::item() const
+QStandardItem* RenderPlugin::item()
 {
     d->m_item->setIcon( icon() );
     d->m_item->setText( name() );
@@ -159,12 +159,12 @@ bool RenderPlugin::visible() const
     return d->m_visible;
 }
 
-QDialog *RenderPlugin::aboutDialog() const
+QDialog *RenderPlugin::aboutDialog()
 {
     return 0;
 }
 
-QDialog *RenderPlugin::configDialog() const
+QDialog *RenderPlugin::configDialog()
 {
     return 0;
 }

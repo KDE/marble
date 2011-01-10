@@ -36,9 +36,11 @@ class WidgetGraphicsItem;
 class NavigationFloatItem: public AbstractFloatItem
 {
     Q_OBJECT
+
     Q_INTERFACES( Marble::RenderPluginInterface )
 
 MARBLE_PLUGIN( NavigationFloatItem )
+
  public:
     explicit NavigationFloatItem( const QPointF &point = QPointF( -10, -10 ) );
     ~NavigationFloatItem();

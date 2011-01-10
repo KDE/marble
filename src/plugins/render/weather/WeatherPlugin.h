@@ -51,9 +51,9 @@ class WeatherPlugin : public AbstractDataPlugin
     
     QIcon icon() const;
 
-    QDialog *aboutDialog() const;
+    QDialog *aboutDialog();
 
-    QDialog *configDialog() const;
+    QDialog *configDialog();
 
     QHash<QString,QVariant> settings() const;
 

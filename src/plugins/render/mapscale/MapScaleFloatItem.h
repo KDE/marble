@@ -53,7 +53,7 @@ class MapScaleFloatItem : public AbstractFloatItem
 
     QIcon icon () const;
 
-    QDialog *aboutDialog() const;
+    QDialog *aboutDialog();
 
 
     void initialize ();
@@ -66,7 +66,7 @@ class MapScaleFloatItem : public AbstractFloatItem
                        const QString& renderPos, GeoSceneLayer * layer = 0 );
 
 
-    QDialog *configDialog() const;
+    QDialog *configDialog();
 
  protected:
     virtual void contextMenuEvent( QWidget *w, QContextMenuEvent *e );
