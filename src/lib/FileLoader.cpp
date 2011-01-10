@@ -69,9 +69,6 @@ void FileLoader::run()
         if ( path == "." ) path.clear();
         QString name = fileinfo.completeBaseName();
         QString suffix = fileinfo.suffix();
-	if( suffix.isEmpty() ) {
-            suffix = "kml";
-	}
 
         if ( fileinfo.isAbsolute() ) {
             // We got an _absolute_ path now: e.g. "/patrick.kml"
