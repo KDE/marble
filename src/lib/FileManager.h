@@ -19,7 +19,6 @@
 namespace Marble
 {
 
-class KmlFileViewItem;
 class FileManagerPrivate;
 class GeoDataDocument;
 class MarbleDataFacade;
@@ -81,7 +80,7 @@ class FileManager : public QObject
     void closeFile( int index );
 
     int size() const;
-    KmlFileViewItem *at( int index );
+    GeoDataDocument *at( int index );
 
 
  Q_SIGNALS:

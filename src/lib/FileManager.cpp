@@ -16,7 +16,6 @@
 
 #include "FileLoader.h"
 #include "FileViewModel.h"
-#include "KmlFileViewItem.h"
 #include "MarbleDebug.h"
 #include "MarbleDataFacade.h"
 #include "GeoDataTreeModel.h"
@@ -39,7 +38,7 @@ public:
     MarbleDataFacade* m_datafacade;
     QList<FileLoader*> m_loaderList;
     QStringList m_pathList;
-    QList < KmlFileViewItem* > m_fileItemList;
+    QList < GeoDataDocument* > m_fileItemList;
 };
 }
 
@@ -58,8 +57,8 @@ FileManager::~FileManager()
         }
     }
 
-    foreach ( KmlFileViewItem *file, d->m_fileItemList ) {
-        delete file;
+    foreach ( GeoDataDocument *document, d->m_fileItemList ) {
+        closeFile( d->m_fileItemList.indexOf( document ) );
     }
 
     delete d;
@@ -117,7 +116,7 @@ void FileManager::appendLoader( FileLoader *loader )
 void FileManager::removeFile( const QString& key )
 {
     for ( int i = 0; i < d->m_fileItemList.size(); ++i ) {
-        if ( key == d->m_fileItemList.at(i)->name() ) {
+        if ( key == d->m_fileItemList.at(i)->fileName() ) {
             closeFile( i );
             return;
         }
@@ -127,20 +126,13 @@ void FileManager::removeFile( const QString& key )
 
 void FileManager::saveFile( int index )
 {
-    if ( index < d->m_fileItemList.size() ) {
-        d->m_fileItemList.at( index )->saveFile();
-    }
 }
 
 void FileManager::closeFile( int index )
 {
-    mDebug() << "FileManager::closeFile";
+    mDebug() << "FileManager::closeFile " << d->m_fileItemList.at( index )->fileName();
     if ( index < d->m_fileItemList.size() ) {
         emit fileRemoved( index );
-        KmlFileViewItem *file = d->m_fileItemList.at( index );
-        if ( file ) {
-            delete file->document();
-        }
         delete d->m_fileItemList.at( index );
         d->m_fileItemList.removeAt( index );
     }
@@ -151,7 +143,7 @@ int FileManager::size() const
     return d->m_fileItemList.size();
 }
 
-KmlFileViewItem * FileManager::at( int index )
+GeoDataDocument * FileManager::at( int index )
 {
     if ( index < d->m_fileItemList.size() ) {
         return d->m_fileItemList.at( index );
@@ -161,15 +153,13 @@ KmlFileViewItem * FileManager::at( int index )
 
 void FileManager::addGeoDataDocument( GeoDataDocument* document )
 {
-    KmlFileViewItem* item = new KmlFileViewItem( document );
-    d->m_fileItemList.append( item );
-    emit fileAdded( d->m_fileItemList.indexOf( item ) );
+    d->m_fileItemList.append( document );
+    emit fileAdded( d->m_fileItemList.indexOf( document ) );
 
-    // now get the document that will be preserved throughout the life time
-    GeoDataDocument* doc = item->document();
-    if ( doc->name().isEmpty() && !doc->fileName().isEmpty() )
+    if ( document->name().isEmpty() && !document->fileName().isEmpty() )
     {
-        doc->setName( doc->fileName() );
+        QFileInfo file( document->fileName() );
+        document->setName( file.baseName() );
     }
 }
 

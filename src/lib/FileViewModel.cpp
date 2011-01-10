@@ -11,11 +11,10 @@
 
 // Own
 #include "FileViewModel.h"
+#include "GeoDataDocument.h"
+#include "FileManager.h"
 
 #include <QtGui/QItemSelectionModel>
-
-#include "KmlFileViewItem.h"
-#include "FileManager.h"
 
 using namespace Marble;
 
@@ -46,13 +45,13 @@ QVariant FileViewModel::data( const QModelIndex & index, int role ) const
 
     if ( row < m_manager->size() ) {
         if ( index.column() == 0 ) {
-            const KmlFileViewItem& item = *m_manager->at( row );
+            const GeoDataDocument *document = m_manager->at( row );
 
             if ( role == Qt::CheckStateRole ) {
-                return item.isShown () ? Qt::Checked : Qt::Unchecked;
+                return document->isVisible() ? Qt::Checked : Qt::Unchecked;
             }
             if ( role == Qt::DisplayRole ) {
-                return item.name();
+                return document->name();
             }
         }
     }
@@ -81,12 +80,12 @@ bool FileViewModel::setData( const QModelIndex& index, const QVariant& value, in
         if ( index.column() == 0 ) {
             if ( role == Qt::CheckStateRole ) {
 
-                KmlFileViewItem& item = *m_manager->at( row );
+                GeoDataDocument *document = m_manager->at( row );
                 bool newValue = value.toBool ();
 
-                if ( item.isShown() != newValue ) {
+                if ( document->isVisible() != newValue ) {
 
-                    item.setShown( newValue );
+                    document->setVisible( newValue );
                     emit dataChanged( index, index );
                     emit modelChanged();
                     return true;

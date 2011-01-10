@@ -150,7 +150,6 @@ set(marblewidget_SRCS
     FileLoader.cpp
     FileManager.cpp
     FileViewModel.cpp
-    KmlFileViewItem.cpp
     PositionTracking.cpp
     DataMigration.cpp
 

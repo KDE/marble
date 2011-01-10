@@ -20,7 +20,6 @@
 
 #include "MarbleDebug.h"
 #include "FileManager.h"
-#include "KmlFileViewItem.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleDataFacade.h"
@@ -87,21 +86,20 @@ void PlacemarkManager::setFileManager( FileManager *fileManager )
 
 void PlacemarkManager::addGeoDataDocument( int index )
 {
-    KmlFileViewItem *file = d->m_fileManager->at(index);
-    if (file)
+    GeoDataDocument *document = d->m_fileManager->at(index);
+    if (document)
     {
-        const GeoDataDocument &document = *file->document();
-        QVector<GeoDataPlacemark*> result = recurseContainer(file->document());
+        QVector<GeoDataPlacemark*> result = recurseContainer(document);
         if (!result.isEmpty())
         {
             createFilterProperties( result );
-            setupStyle( file->document(), result );
+            setupStyle( document, result );
             int start = d->m_placemarkContainer.size();
             d->m_placemarkContainer << result;
             d->m_sizeForDocument.resize(index+1);
             d->m_sizeForDocument[index] = result.size();
             mDebug() << "PlacemarkManager::addGeoDataDocument:"
-                    << document.fileName() << " size " << result.size();
+                    << document->fileName() << " size " << result.size();
             model()->addPlacemarks( start, result.size() );
         }
 
@@ -110,10 +108,9 @@ void PlacemarkManager::addGeoDataDocument( int index )
 
 void PlacemarkManager::removeGeoDataDocument( int index )
 {
-    KmlFileViewItem *file = d->m_fileManager->at(index);
-    if (file)
+    GeoDataDocument *document = d->m_fileManager->at(index);
+    if (document)
     {
-        const GeoDataDocument &document = *file->document();
         int start = 0;
         for ( int i = 0; i < index; ++i )
         {
@@ -124,9 +121,9 @@ void PlacemarkManager::removeGeoDataDocument( int index )
         if (d->m_sizeForDocument.size() > index)
             d->m_sizeForDocument.remove(index);
         mDebug() << "PlacemarkManager::removeGeoDataDocument:"
-                << document.fileName() << " size " << size;
+                << document->fileName() << " size " << size;
         model()->removePlacemarks(
-                document.fileName(), start, size );
+                document->fileName(), start, size );
     }
 }
 

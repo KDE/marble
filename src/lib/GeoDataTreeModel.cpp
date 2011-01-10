@@ -26,7 +26,6 @@
 #include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
 #include "FileManager.h"
-#include "KmlFileViewItem.h"
 #include "MarbleDebug.h"
 #include "MarblePlacemarkModel.h"
 
@@ -401,12 +400,11 @@ void GeoDataTreeModel::setFileManager( FileManager *fileManager )
 
 void GeoDataTreeModel::addDocument( int index )
 {
-    KmlFileViewItem *file =
-            static_cast<KmlFileViewItem*>(d->m_fileManager->at(index));
-    if (file)
+    GeoDataDocument *document = d->m_fileManager->at(index);
+    if (document)
     {
         beginResetModel();
-        d->m_rootDocument->append( file->document() ) ;
+        d->m_rootDocument->append( document ) ;
         endResetModel();
     }
 }
