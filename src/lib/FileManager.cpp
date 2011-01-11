@@ -80,7 +80,7 @@ QStringList FileManager::containers() const
 {
     QStringList retList;
     for ( int line = 0; line < d->m_fileItemList.count(); ++line ) {
-        retList << d->m_fileItemList.at( line )->name();
+        retList << d->m_fileItemList.at( line )->fileName();
     }
     return retList + d->m_pathList;
 }
