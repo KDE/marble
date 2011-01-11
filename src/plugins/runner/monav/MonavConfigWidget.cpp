@@ -636,7 +636,7 @@ void MonavConfigWidget::removeMap( int index )
 {
     QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel;
     QString text = tr( "Are you sure you want to delete this map from the system?" );
-    if ( QMessageBox::question( this, "Remove Map", text, buttons, QMessageBox::No ) == QMessageBox::Yes ) {
+    if ( QMessageBox::question( this, tr( "Remove Map" ), text, buttons, QMessageBox::No ) == QMessageBox::Yes ) {
         d->m_mapsModel->deleteMapFiles( index );
         d->m_plugin->reloadMaps();
         d->updateInstalledMapsViewButtons();
