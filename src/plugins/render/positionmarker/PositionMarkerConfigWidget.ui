@@ -178,7 +178,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>Color of the position marker's accuray indicator.</string>
+         <string>Color of the position marker's accuracy indicator.</string>
         </property>
         <property name="text">
          <string/>
