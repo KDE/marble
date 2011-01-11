@@ -169,7 +169,7 @@ void MarbleThemeSelectView::showContextMenu( const QPoint& pos )
 void MarbleThemeSelectView::deleteMap()
 {
     if(QMessageBox::warning( this, 
-                             tr( "" ), 
+                             tr( "Marble" ), 
                              tr( "Are you sure that you want to delete \"%1\"?" ).arg( d->currentThemeName() ),
                              QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes )
     {
