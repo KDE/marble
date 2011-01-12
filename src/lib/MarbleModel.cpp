@@ -151,7 +151,9 @@ MarbleModel::MarbleModel( QObject *parent )
     t.start();
 
     d->m_dataFacade = new MarbleDataFacade( this );
-    connect(d->m_dataFacade->treeModel(), SIGNAL( dataChanged(QModelIndex,QModelIndex) ),
+    connect(d->m_dataFacade->treeModel(), SIGNAL( layoutChanged() ),
+            this, SIGNAL( modelChanged() ) );
+    connect(d->m_dataFacade->treeModel(), SIGNAL( modelReset() ),
             this, SIGNAL( modelChanged() ) );
 
     // A new instance of FileStorageWatcher.
@@ -175,12 +177,6 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_placemarkmanager->setDataFacade(d->m_dataFacade);
     d->m_placemarkmanager->setFileManager(d->m_fileManager);
 
-
-    /*
-     * Create FileViewModel
-     */
-    connect( d->m_dataFacade->fileViewModel(), SIGNAL( modelChanged() ),
-             this,            SIGNAL( modelChanged() ) );
 
     d->m_positionTracking = new PositionTracking( d->m_fileManager, this );
 
@@ -325,13 +321,9 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme )
         loadList.pop_front();
         d->m_fileManager->addFile( container );
     }
-    d->notifyModelChanged();
-
 
     mDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
     emit themeChanged( mapTheme->head()->mapThemeId() );
-
-    d->notifyModelChanged();
 }
 
 void MarbleModel::home( qreal &lon, qreal &lat, int& zoom )
@@ -589,22 +581,16 @@ void MarbleModel::setLegend( QTextDocument * legend )
 void MarbleModel::addGeoDataFile( const QString& filename )
 {
     d->m_fileManager->addFile( filename );
-
-    d->notifyModelChanged();
 }
 
 void MarbleModel::addGeoDataString( const QString& data, const QString& key )
 {
     d->m_fileManager->addData( key, data );
-
-    d->notifyModelChanged();
 }
 
 void MarbleModel::removeGeoData( const QString& fileName )
 {
     d->m_fileManager->removeFile( fileName );
-
-    d->notifyModelChanged();
 }
 
 }

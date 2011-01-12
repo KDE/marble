@@ -87,7 +87,6 @@ bool FileViewModel::setData( const QModelIndex& index, const QVariant& value, in
 
                     document->setVisible( newValue );
                     emit dataChanged( index, index );
-                    emit modelChanged();
                     return true;
                 }
             }
@@ -132,14 +131,12 @@ void FileViewModel::append( int order )
 {
     beginInsertRows(QModelIndex(), order, order);
     endInsertRows();
-    emit modelChanged();
 }
 
 void FileViewModel::remove( int index )
 {
     beginRemoveRows(QModelIndex(), index, index);
     endRemoveRows();
-    emit modelChanged();
 }
 
 #include "FileViewModel.moc"

@@ -40,9 +40,6 @@ class MARBLE_EXPORT FileViewModel : public QAbstractListModel
     void setFileManager( FileManager * fileManager );
     QItemSelectionModel * selectionModel();
 
-  Q_SIGNALS:
-    void modelChanged();
-
   public slots:
     void saveFile();
     void closeFile();

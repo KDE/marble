@@ -57,10 +57,6 @@ FileManager::~FileManager()
         }
     }
 
-    foreach ( GeoDataDocument *document, d->m_fileItemList ) {
-        closeFile( d->m_fileItemList.indexOf( document ) );
-    }
-
     delete d;
 }
 
