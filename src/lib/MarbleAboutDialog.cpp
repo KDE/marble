@@ -119,6 +119,14 @@ void MarbleAboutDialog::loadPageContents( int idx )
            "<i>WMS Support</i></p>")+
         tr("<b>Join us</b>")+
         tr("<p>You can reach the developers of the Marble Project at <a href=\"mailto:marble-devel@kde.org\">marble-devel@kde.org</a></p>")+
+        tr("<b>Google Code-in</b>")+
+        tr("<p> The Marble Team would like to thank its members who participated "
+           "in the Google Code-in for their successful work on Marble:</p>")+
+        tr( "<p><b>2011</b></p>" ) +
+        tr( "<p>Utku Ayd&#x131;n <a href=\"mailto:utkuaydin34@gmail.com\">utkuaydin34@gmail.com</a><br />" ) +
+        tr( "Daniel Marth <a href=\"mailto:danielmarth@gmx.at\">danielmarth@gmx.at</a><br />" ) +
+        tr( "Cezar Mocan <a href=\"mailto:mocancezar@gmail.com\">mocancezar@gmail.com</a><br />" ) +
+        tr( "Furkan &Uuml;z&uuml;mc&uuml; <a href=\"mailto:furkanuzumcu@gmail.com\">furkanuzumcu@gmail.com</a></p>" ) +
         tr("<b>Google Summer of Code</b>")+
         tr("<p> The Marble Team would like to thank its members who participated "
            "in the Google Summer of Code for their successful work on Marble:</p>")+
