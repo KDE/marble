@@ -35,7 +35,7 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
     Q_OBJECT
 
  public:
-    NavigationWidget( QWidget *parent = 0, Qt::WindowFlags f = 0 );
+    explicit NavigationWidget( QWidget *parent = 0, Qt::WindowFlags f = 0 );
     ~NavigationWidget();
 
     /**

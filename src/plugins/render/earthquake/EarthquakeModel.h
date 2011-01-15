@@ -27,8 +27,7 @@ class EarthquakeModel : public AbstractDataPluginModel
     Q_OBJECT
 
 public:
-    EarthquakeModel( PluginManager *pluginManager, QObject *parent = 0 );
-
+    explicit EarthquakeModel( PluginManager *pluginManager, QObject *parent = 0 );
     ~EarthquakeModel();
 
     void setNumResults( int numResults );

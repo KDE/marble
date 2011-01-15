@@ -29,7 +29,7 @@ class MARBLE_EXPORT LegendWidget : public QWidget
     Q_OBJECT
 
  public:
-    LegendWidget( QWidget *parent = 0, Qt::WindowFlags f = 0 );
+    explicit LegendWidget( QWidget *parent = 0, Qt::WindowFlags f = 0 );
     ~LegendWidget();
 
     /**

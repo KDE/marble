@@ -31,7 +31,7 @@ class MARBLE_EXPORT FileViewWidget : public QWidget
     Q_OBJECT
 
  public:
-    FileViewWidget( QWidget *parent = 0, Qt::WindowFlags f = 0 );
+    explicit FileViewWidget( QWidget *parent = 0, Qt::WindowFlags f = 0 );
     ~FileViewWidget();
 
     /**

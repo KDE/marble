@@ -33,7 +33,7 @@ class MARBLE_EXPORT SunControlWidget : public QDialog
     Q_OBJECT
 	
  public:
-    SunControlWidget( SunLocator* sunLocator, QWidget* parent = 0 );
+    explicit SunControlWidget( SunLocator* sunLocator, QWidget* parent = 0 );
     virtual ~SunControlWidget();
     void setSunShading( bool );
 

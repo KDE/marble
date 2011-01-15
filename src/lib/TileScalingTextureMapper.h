@@ -22,7 +22,7 @@ class TileScalingTextureMapper : public AbstractScanlineTextureMapper
     Q_OBJECT
 
  public:
-    TileScalingTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
+    explicit TileScalingTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
 
     void mapTexture( ViewParams *viewParams );
 

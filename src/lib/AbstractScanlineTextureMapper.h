@@ -35,8 +35,8 @@ class AbstractScanlineTextureMapper : public QObject
     Q_OBJECT
 
 public:
-    AbstractScanlineTextureMapper( StackedTileLoader * const tileLoader,
-                                   QObject * const parent = 0 );
+    explicit AbstractScanlineTextureMapper( StackedTileLoader * const tileLoader,
+                                            QObject * const parent = 0 );
     ~AbstractScanlineTextureMapper();
 
     virtual void mapTexture( ViewParams *viewParams ) = 0;

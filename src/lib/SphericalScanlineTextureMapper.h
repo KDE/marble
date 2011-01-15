@@ -35,7 +35,7 @@ class StackedTileLoader;
 class SphericalScanlineTextureMapper : public AbstractScanlineTextureMapper
 {
  public:
-    SphericalScanlineTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
+    explicit SphericalScanlineTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
 
     void mapTexture( ViewParams *viewParams );
 

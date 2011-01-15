@@ -33,7 +33,7 @@ class MARBLE_EXPORT TimeControlWidget : public QDialog
     Q_OBJECT
 	
  public:
-    TimeControlWidget( MarbleClock* clock, QWidget* parent = 0 );
+    explicit TimeControlWidget( MarbleClock* clock, QWidget* parent = 0 );
     virtual ~TimeControlWidget();
 
  private Q_SLOTS:
