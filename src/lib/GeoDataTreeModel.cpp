@@ -68,15 +68,15 @@ bool GeoDataTreeModel::hasChildren( const QModelIndex &parent ) const
         return false;
     }
 
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( parentItem );
+        return dynamic_cast<GeoDataMultiGeometry*>( placemark->geometry() );
+    }
+
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataFolderType
          || parentItem->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
         GeoDataContainer *container = static_cast<GeoDataContainer*>( parentItem );
         return container->size();
-    }
-
-    if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( parentItem );
-        return placemark->geometry();
     }
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
@@ -118,8 +118,11 @@ int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
     }
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( parentItem );
+        if ( dynamic_cast<GeoDataMultiGeometry*>( placemark->geometry() ) ) {
 //            mDebug() << "rowCount " << type << "(" << parentItem << ") = 1";
             return 1;
+        }
     }
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
@@ -280,7 +283,9 @@ QModelIndex GeoDataTreeModel::index( int row, int column, const QModelIndex &par
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( parentItem );
         childItem = placemark->geometry();
-        return createIndex( row, column, childItem );
+        if ( dynamic_cast<GeoDataMultiGeometry*>( childItem ) ) {
+            return createIndex( row, column, childItem );
+        }
     }
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
