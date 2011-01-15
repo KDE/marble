@@ -79,7 +79,8 @@ qreal GeometricMeanBlending::blendChannel( qreal const bottomColorIntensity,
 qreal LinearLightBlending::blendChannel( qreal const bottomColorIntensity,
                                          qreal const topColorIntensity ) const
 {
-    return qMin( 1.0, qMax( 0.0, ( bottomColorIntensity + 2.0 * topColorIntensity ) - 1.0 ));
+    return qMin( qreal( 1.0 ),
+                 qMax( qreal( 0.0 ), ( bottomColorIntensity + 2.0 * topColorIntensity ) - 1.0 ));
 }
 
 qreal OverlayBlending::blendChannel( qreal const bottomColorIntensity,
@@ -118,7 +119,8 @@ qreal ColorBurnBlending::blendChannel( qreal const bottomColorIntensity,
     Q_UNUSED(bottomColorIntensity);
     Q_UNUSED(topColorIntensity);
     // FIXME: check if this formula makes sense
-    return qMin( 1.0, qMax( 0.0, 1.0 - ( 1.0 - bottomColorIntensity ) / topColorIntensity ));
+    return qMin( qreal( 1.0 ),
+                 qMax( qreal( 0.0 ), 1.0 - ( 1.0 - bottomColorIntensity ) / topColorIntensity ));
 }
 
 qreal DarkBlending::blendChannel( qreal const bottomColorIntensity,
@@ -198,7 +200,8 @@ qreal AdditiveBlending::blendChannel( qreal const bottomColorIntensity,
 qreal ColorDodgeBlending::blendChannel( qreal const bottomColorIntensity,
                                         qreal const topColorIntensity ) const
 {
-    return qMin( 1.0, qMax( 0.0, bottomColorIntensity / ( 1.0 - topColorIntensity )));
+    return qMin( qreal( 1.0 ),
+                 qMax( qreal( 0.0 ), bottomColorIntensity / ( 1.0 - topColorIntensity )));
 }
 
 qreal GammaLightBlending::blendChannel( qreal const bottomColorIntensity,
@@ -251,8 +254,10 @@ qreal VividLightBlending::blendChannel( qreal const bottomColorIntensity,
                                         qreal const topColorIntensity ) const
 {
     return topColorIntensity < 0.5
-        ? qMin( 1.0, qMax( 0.0, 1.0 - ( 1.0 - bottomColorIntensity ) / ( 2.0 * topColorIntensity )))
-        : qMin( 1.0, qMax( 0.0, bottomColorIntensity / ( 2.0 * ( 1.0 - topColorIntensity ))));
+        ? qMin( qreal( 1.0 ),
+                qMax( qreal( 0.0 ), 1.0 - ( 1.0 - bottomColorIntensity ) / ( 2.0 * topColorIntensity )))
+        : qMin( qreal( 1.0 ),
+                qMax( qreal( 0.0 ), bottomColorIntensity / ( 2.0 * ( 1.0 - topColorIntensity ))));
 }
 
 
@@ -279,7 +284,8 @@ qreal BleachBlending::blendChannel( qreal const bottomColorIntensity,
 qreal DifferenceBlending::blendChannel( qreal const bottomColorIntensity,
                                         qreal const topColorIntensity ) const
 {
-    return qMax( qMin( 1.0, bottomColorIntensity - topColorIntensity + 0.5 ), 0.0 );
+    return qMax( qMin( qreal( 1.0 ), bottomColorIntensity - topColorIntensity + 0.5 ),
+                 qreal( 0.0 ));
 }
 
 qreal EquivalenceBlending::blendChannel( qreal const bottomColorIntensity,
