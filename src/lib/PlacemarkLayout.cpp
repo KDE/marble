@@ -131,6 +131,7 @@ void PlacemarkLayout::styleReset()
     m_paintOrder.clear();
     qDeleteAll( m_visiblePlacemarks );
     m_visiblePlacemarks.clear();
+    m_maxLabelHeight = maxLabelHeight();
 }
 
 QVector<QModelIndex> PlacemarkLayout::whichPlacemarkAt( const QPoint& curpos )
@@ -203,8 +204,6 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
     if ( m_styleResetRequested ) {
         m_styleResetRequested = false;
         styleReset();
-
-        m_maxLabelHeight = maxLabelHeight();
     }
 
     if ( m_maxLabelHeight == 0 ) {

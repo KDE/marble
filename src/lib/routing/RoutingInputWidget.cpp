@@ -281,7 +281,7 @@ void RoutingInputWidget::reverseGeocoding()
 
 void RoutingInputWidget::setPlacemarkModel( QAbstractItemModel *model )
 {
-    d->m_placemarkModel = static_cast<MarblePlacemarkModel*>(model);
+    d->m_placemarkModel = dynamic_cast<MarblePlacemarkModel*>(model);
 }
 
 void RoutingInputWidget::setTargetPosition( const GeoDataCoordinates &position )
