@@ -13,6 +13,7 @@
 
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
+#include <QtCore/QTime>
 
 #include "FileLoader.h"
 #include "FileViewModel.h"
@@ -31,7 +32,8 @@ class FileManagerPrivate
 {
 public:
     FileManagerPrivate( )
-        : m_datafacade( 0 )
+        : m_datafacade( 0 ),
+        m_t ( 0 )
     {
     }
 
@@ -39,6 +41,7 @@ public:
     QList<FileLoader*> m_loaderList;
     QStringList m_pathList;
     QList < GeoDataDocument* > m_fileItemList;
+    QTime *m_t;
 };
 }
 
@@ -86,6 +89,11 @@ void FileManager::addFile( const QString& filepath )
     if ( !containers().contains( filepath ) ) {
         mDebug() << "adding container:" << filepath;
         d->m_datafacade->connectTree( false );
+        if (d->m_t == 0) {
+            mDebug() << "Starting placemark loading timer";
+            d->m_t = new QTime();
+            d->m_t->start();
+        }
         FileLoader* loader = new FileLoader( this, filepath );
         appendLoader( loader );
         d->m_pathList.append( filepath );
@@ -175,6 +183,9 @@ void FileManager::cleanupLoader( FileLoader* loader )
         t.start();
         d->m_datafacade->connectTree( true );
         mDebug() << "Done " << t.elapsed() << " ms";
+        qDebug() << "Finished loading all placemarks " << d->m_t->elapsed();
+        delete d->m_t;
+        d->m_t = 0;
     }
 }
 
