@@ -13,7 +13,6 @@
 #include "MarblePlacemarkModel.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
-#include "PlacemarkManager.h"
 #include "Planet.h"
 #include "GeoDataPlacemark.h"
 #include "PluginManager.h"

@@ -40,6 +40,12 @@ class FileLoader : public QThread
         void savePlacemarks(QDataStream &out, const GeoDataContainer *container);
         void loadPntFile( const QString &fileName );
 
+        void setupStyle( GeoDataDocument *doc, GeoDataContainer *container );
+        void createFilterProperties( GeoDataContainer *container );
+        int cityPopIdx( qint64 population ) const;
+        int spacePopIdx( qint64 population ) const;
+        int areaPopIdx( qreal area ) const;
+
         QString m_filepath;
         QString m_contents;
         GeoDataDocument *m_document;

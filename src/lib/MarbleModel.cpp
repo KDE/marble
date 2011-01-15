@@ -54,7 +54,6 @@
 #include "MarbleDirs.h"
 #include "FileManager.h"
 #include "GeoDataTreeModel.h"
-#include "PlacemarkManager.h"
 #include "Planet.h"
 #include "PluginManager.h"
 #include "StoragePolicy.h"
@@ -89,7 +88,6 @@ class MarbleModelPrivate
                                                                    MarbleDirs::localPath() ),
                                                       m_pluginManager ) ),
           m_fileManager( 0 ),
-          m_placemarkmanager( 0 ),
           m_placemarkselectionmodel( 0 ),
           m_positionTracking( 0 ),
           m_bookmarkManager( 0 ),
@@ -130,7 +128,6 @@ class MarbleModelPrivate
 
     // Places on the map
     FileManager             *m_fileManager;
-    PlacemarkManager        *m_placemarkmanager;
 
     // Selection handling
     QItemSelectionModel      m_placemarkselectionmodel;
@@ -173,10 +170,6 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_fileManager = new FileManager();
     d->m_fileManager->setDataFacade(d->m_dataFacade);
 
-    d->m_placemarkmanager = new PlacemarkManager();
-    d->m_placemarkmanager->setDataFacade(d->m_dataFacade);
-    d->m_placemarkmanager->setFileManager(d->m_fileManager);
-
 
     d->m_positionTracking = new PositionTracking( d->m_fileManager, this );
 
@@ -195,7 +188,6 @@ MarbleModel::~MarbleModel()
     delete d->m_positionTracking;
     delete d->m_bookmarkManager;
 
-    delete d->m_placemarkmanager;
     delete d->m_fileManager;
     delete d->m_mapTheme;
     delete d->m_dataFacade;
