@@ -548,7 +548,14 @@ void FileLoader::createFilterProperties( GeoDataContainer *container )
             else if ( placemark->role() == "O" ) placemark->setVisualCategory( GeoDataPlacemark::Ocean );
             else if ( placemark->role() == "S" ) placemark->setVisualCategory( GeoDataPlacemark::Nation );
             else
-                if ( placemark->role()=="PPL" ) placemark->setVisualCategory(
+                if (  placemark->role()=="PPL"
+                   || placemark->role()=="PPLF"
+                   || placemark->role()=="PPLG"
+                   || placemark->role()=="PPLL"
+                   || placemark->role()=="PPLQ"
+                   || placemark->role()=="PPLR"
+                   || placemark->role()=="PPLS"
+                   || placemark->role()=="PPLW" ) placemark->setVisualCategory(
                         ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallCity )
                                                                        + ( placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
             else if ( placemark->role() == "PPLA" ) placemark->setVisualCategory(
