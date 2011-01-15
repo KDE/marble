@@ -62,15 +62,9 @@ PlacemarkManager::~PlacemarkManager()
     delete d;
 }
 
-MarblePlacemarkModel* PlacemarkManager::model() const
-{
-    return static_cast<MarblePlacemarkModel*>(d->m_datafacade->placemarkModel());
-}
-
 void PlacemarkManager::setDataFacade( MarbleDataFacade *facade )
 {
     d->m_datafacade = facade;
-    model()->setPlacemarkContainer(&d->m_placemarkContainer);
 }
 
 void PlacemarkManager::setFileManager( FileManager *fileManager )
@@ -94,37 +88,13 @@ void PlacemarkManager::addGeoDataDocument( int index )
         {
             createFilterProperties( result );
             setupStyle( document, result );
-            int start = d->m_placemarkContainer.size();
-            d->m_placemarkContainer << result;
-            d->m_sizeForDocument.resize(index+1);
-            d->m_sizeForDocument[index] = result.size();
-            mDebug() << "PlacemarkManager::addGeoDataDocument:"
-                    << document->fileName() << " size " << result.size();
-            model()->addPlacemarks( start, result.size() );
         }
 
     }
 }
 
-void PlacemarkManager::removeGeoDataDocument( int index )
+void PlacemarkManager::removeGeoDataDocument( int /*index*/ )
 {
-    GeoDataDocument *document = d->m_fileManager->at(index);
-    if (document)
-    {
-        int start = 0;
-        for ( int i = 0; i < index; ++i )
-        {
-            start += d->m_sizeForDocument[i];
-        }
-        int size = d->m_sizeForDocument[index];
-        d->m_placemarkContainer.remove(start, size);
-        if (d->m_sizeForDocument.size() > index)
-            d->m_sizeForDocument.remove(index);
-        mDebug() << "PlacemarkManager::removeGeoDataDocument:"
-                << document->fileName() << " size " << size;
-        model()->removePlacemarks(
-                document->fileName(), start, size );
-    }
 }
 
 QVector<GeoDataPlacemark*> PlacemarkManager::recurseContainer(GeoDataContainer *container)

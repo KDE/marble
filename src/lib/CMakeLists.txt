@@ -79,6 +79,7 @@ set(marblewidget_SRCS
     MarbleWidgetPopupMenu.cpp
     MarblePlacemarkModel.cpp
     GeoDataTreeModel.cpp
+    kdescendantsproxymodel.cpp
     MarbleDataFacade.cpp
     MarbleDebug.cpp
     TextureTile.cpp

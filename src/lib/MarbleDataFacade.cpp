@@ -16,12 +16,12 @@
 #include <QtCore/QFile>
 #include <QtCore/QString>
 #include <QtCore/QAbstractItemModel>
+#include <QtGui/QSortFilterProxyModel>
 
 #include "global.h"
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
-#include "MarblePlacemarkModel.h"
 #include "Planet.h"
 
 #include "FileViewModel.h"
@@ -30,9 +30,11 @@
 #include "GeoDataParser.h"
 #include "PositionTracking.h"
 
+#include "GeoDataTypes.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 
+#include "kdescendantsproxymodel.h"
 #include "routing/RoutingManager.h"
 
 namespace Marble
@@ -44,22 +46,30 @@ class MarbleDataFacadePrivate
     MarbleDataFacadePrivate( MarbleModel *model )
         : m_model( model ),
         m_fileviewmodel( new FileViewModel() ),
-        m_placemarkmodel( new MarblePlacemarkModel ),
-        m_treemodel( new GeoDataTreeModel)
+        m_treemodel( new GeoDataTreeModel),
+        m_descendantproxy( new KDescendantsProxyModel ),
+        m_sortproxy( new QSortFilterProxyModel )
     {
+        m_descendantproxy->setSourceModel( m_treemodel );
+
+        m_sortproxy->setFilterRegExp( QRegExp( GeoDataTypes::GeoDataPlacemarkType ) );
+        m_sortproxy->setFilterKeyColumn( 1 );
+        m_sortproxy->setSourceModel( m_descendantproxy );
     }
 
     ~MarbleDataFacadePrivate()
     {
         delete m_fileviewmodel;
-        delete m_placemarkmodel;
         delete m_treemodel;
+        delete m_descendantproxy;
+        delete m_sortproxy;
     }
 
     MarbleModel  *m_model;
     FileViewModel *m_fileviewmodel;
-    MarblePlacemarkModel *m_placemarkmodel;
     GeoDataTreeModel *m_treemodel;
+    KDescendantsProxyModel *m_descendantproxy;
+    QSortFilterProxyModel  *m_sortproxy;
 };
 
 
@@ -106,7 +116,7 @@ PositionTracking* MarbleDataFacade::positionTracking() const
 
 QAbstractItemModel* MarbleDataFacade::placemarkModel()
 {
-    return d->m_placemarkmodel;
+    return d->m_sortproxy;
 }
 
 FileViewModel* MarbleDataFacade::fileViewModel() const
