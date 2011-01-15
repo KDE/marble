@@ -113,6 +113,7 @@ PositionTracking::PositionTracking( FileManager *fileManager,
     d->m_document->addStyle(style);
 
     placemark->setStyleUrl(QString("#").append(styleMap.styleId()));
+    placemark->setStyle( &d->m_document->style(style.styleId()));
     d->m_document->append(placemark);
 
     d->m_fileManager->addGeoDataDocument(d->m_document);

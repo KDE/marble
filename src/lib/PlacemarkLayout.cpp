@@ -371,6 +371,12 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
                 continue;
             }
 
+        if ( !placemark->isVisible() )
+        {
+            delete m_visiblePlacemarks.take( index );
+            continue;
+        }
+
         const int visualCategory  = placemark->visualCategory();
 
         // Skip city marks if we're not showing cities.
