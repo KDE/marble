@@ -29,17 +29,20 @@ namespace Marble
 GeoDataPlacemark::GeoDataPlacemark()
     : GeoDataFeature( new GeoDataPlacemarkPrivate )
 {
+    p()->m_coordinate.setParent( this );
 }
 
 GeoDataPlacemark::GeoDataPlacemark( const GeoDataPlacemark& other )
 : GeoDataFeature( other )
 {
+    p()->m_coordinate.setParent( this );
 }
 
 GeoDataPlacemark::GeoDataPlacemark( const QString& name )
     : GeoDataFeature( new GeoDataPlacemarkPrivate )
 {
     d->m_name = name;
+    p()->m_coordinate.setParent( this );
 }
 
 GeoDataPlacemark::~GeoDataPlacemark()
