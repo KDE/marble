@@ -48,11 +48,10 @@ class MarbleDataFacadePrivate
         m_fileviewmodel( new FileViewModel() ),
         m_treemodel( new GeoDataTreeModel),
         m_descendantproxy( new KDescendantsProxyModel ),
-        m_sortproxy( new QSortFilterProxyModel )
+        m_sortproxy( new QSortFilterProxyModel ),
+        m_dummytree( new GeoDataTreeModel )
     {
-        m_descendantproxy->setSourceModel( m_treemodel );
-
-        m_sortproxy->setFilterRegExp( QRegExp( GeoDataTypes::GeoDataPlacemarkType ) );
+        m_sortproxy->setFilterFixedString( GeoDataTypes::GeoDataPlacemarkType );
         m_sortproxy->setFilterKeyColumn( 1 );
         m_sortproxy->setSourceModel( m_descendantproxy );
     }
@@ -63,6 +62,7 @@ class MarbleDataFacadePrivate
         delete m_treemodel;
         delete m_descendantproxy;
         delete m_sortproxy;
+        delete m_dummytree;
     }
 
     MarbleModel  *m_model;
@@ -70,6 +70,7 @@ class MarbleDataFacadePrivate
     GeoDataTreeModel *m_treemodel;
     KDescendantsProxyModel *m_descendantproxy;
     QSortFilterProxyModel  *m_sortproxy;
+    GeoDataTreeModel *m_dummytree;
 };
 
 
@@ -137,6 +138,15 @@ RoutingManager* MarbleDataFacade::routingManager()
 GeoDataTreeModel* MarbleDataFacade::treeModel() const
 {
     return d->m_treemodel;
+}
+
+void MarbleDataFacade::connectTree(bool connect) const
+{
+    if ( connect ) {
+        d->m_descendantproxy->setSourceModel( d->m_treemodel );
+    } else {
+        d->m_descendantproxy->setSourceModel( d->m_dummytree );
+    }
 }
 
 }

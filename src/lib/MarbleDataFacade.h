@@ -91,6 +91,8 @@ class MARBLE_EXPORT MarbleDataFacade
 
     GeoDataTreeModel* treeModel() const;
 
+    void connectTree(bool connect) const;
+
 private:
     MarbleDataFacadePrivate  * const d;
 };

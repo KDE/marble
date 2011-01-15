@@ -85,6 +85,7 @@ void FileManager::addFile( const QString& filepath )
 {
     if ( !containers().contains( filepath ) ) {
         mDebug() << "adding container:" << filepath;
+        d->m_datafacade->connectTree( false );
         FileLoader* loader = new FileLoader( this, filepath );
         appendLoader( loader );
         d->m_pathList.append( filepath );
@@ -93,6 +94,7 @@ void FileManager::addFile( const QString& filepath )
 
 void FileManager::addData( const QString &name, const QString &data )
 {
+    d->m_datafacade->connectTree( false );
     FileLoader* loader = new FileLoader( this, data, name );
     appendLoader( loader );
 }
@@ -165,6 +167,14 @@ void FileManager::cleanupLoader( FileLoader* loader )
     if ( loader->isFinished() ) {
         d->m_pathList.removeAll( loader->path() );
         delete loader;
+    }
+    if (d->m_loaderList.isEmpty() )
+    {
+        mDebug() << "Empty loader list, connecting";
+        QTime t;
+        t.start();
+        d->m_datafacade->connectTree( true );
+        mDebug() << "Done " << t.elapsed() << " ms";
     }
 }
 
