@@ -111,4 +111,4 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     return true;
 }
 
-};
+}

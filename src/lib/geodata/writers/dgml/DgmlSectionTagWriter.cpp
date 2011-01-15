@@ -44,4 +44,4 @@ bool DgmlSectionTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     return true;
 }
 
-};
+}

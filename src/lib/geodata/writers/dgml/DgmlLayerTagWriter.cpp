@@ -41,4 +41,4 @@ bool DgmlLayerTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     return true;
 }
 
-};
+}
