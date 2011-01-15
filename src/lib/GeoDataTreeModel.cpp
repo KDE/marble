@@ -208,15 +208,20 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
     }
     else if ( role == Qt::CheckStateRole
               && index.column() == 0 ) {
-        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
-             || object->nodeType() == GeoDataTypes::GeoDataFolderType
-             || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-        GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
-            if ( feature->isVisible() ) {
-                return QVariant( Qt::Checked );
-            }
-            else {
-                return QVariant( Qt::Unchecked );
+        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+            GeoDataPlacemark *feature = static_cast<GeoDataPlacemark*>( object );
+            const char* type = feature->geometry()->nodeType();
+            if ( type == GeoDataTypes::GeoDataLineStringType
+                 || type == GeoDataTypes::GeoDataPolygonType
+                 || type == GeoDataTypes::GeoDataLinearRingType
+                 || type == GeoDataTypes::GeoDataMultiGeometryType
+                 ) {
+                if ( feature->isVisible() ) {
+                    return QVariant( Qt::Checked );
+                }
+                else {
+                    return QVariant( Qt::Unchecked );
+                }
             }
         }
     }
