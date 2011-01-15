@@ -46,13 +46,12 @@ void LocalDatabaseRunner::search( const QString &searchTerm )
     QVector<GeoDataPlacemark*> vector;
 
     if (model()) {
-        MarblePlacemarkModel * placemarkModel =
-            qobject_cast<MarblePlacemarkModel*>( model()->placemarkModel() );
+        QAbstractItemModel * placemarkModel = model()->placemarkModel();
 
         if (placemarkModel) {
             QModelIndexList resultList;
             QModelIndex firstIndex = placemarkModel->index( 0, 0 );
-            resultList = placemarkModel->approxMatch( firstIndex,
+            resultList = placemarkModel->match( firstIndex,
                                     Qt::DisplayRole, searchTerm, -1,
                                     Qt::MatchStartsWith );
 
@@ -62,23 +61,10 @@ void LocalDatabaseRunner::search( const QString &searchTerm )
                     mDebug() << "invalid index!!!";
                     continue;
                 }
-                QString name = index.data( Qt::DisplayRole ).toString();
-                GeoDataPlacemark *placemark = new GeoDataPlacemark;
-                placemark->setName( name );
-                GeoDataCoordinates coordinates =
-                    qvariant_cast<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
-                placemark->setCoordinate( coordinates.longitude(),
-                                            coordinates.latitude() );
-
-                int visualCategory = qvariant_cast<int>(
-                    index.data( MarblePlacemarkModel::VisualCategoryRole ) );
-                placemark->setVisualCategory( static_cast<GeoDataFeature::GeoDataVisualCategory>(visualCategory) );
-
-                // FIXME: We don't always want to have it this prominent
-                placemark->setPopularity( 1000000000 );
-                placemark->setPopularityIndex( 18 );
-
-                vector.append( placemark );
+                GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>( index.data( MarblePlacemarkModel::ObjectPointerRole )));
+                if ( placemark ) {
+                    vector.append( new GeoDataPlacemark( *placemark ));
+                }
             }
         }
     }
