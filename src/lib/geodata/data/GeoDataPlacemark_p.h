@@ -22,7 +22,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
 {
   public:
     GeoDataPlacemarkPrivate()
-      : m_geometry( 0 ),
+      : m_geometry( new GeoDataPoint ),
         m_area( -1.0 ),
         m_population( -1 ),
         m_lookAt( 0 )
@@ -67,7 +67,6 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         delete m_geometry;
         m_geometry = geometry;
 
-        m_coordinate = other.m_coordinate;
         m_countrycode = other.m_countrycode;
         m_area = other.m_area;
         m_population = other.m_population;
@@ -97,7 +96,6 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
 
     // Data for a Placemark in addition to those in GeoDataFeature.
     GeoDataGeometry    *m_geometry;     // any GeoDataGeometry entry like locations
-    GeoDataPoint        m_coordinate;   // The geographic position
     QString             m_countrycode;  // Country code.
     qreal               m_area;         // Area in square kilometer
     qint64              m_population;   // population in number of inhabitants

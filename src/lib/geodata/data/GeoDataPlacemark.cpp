@@ -29,20 +29,20 @@ namespace Marble
 GeoDataPlacemark::GeoDataPlacemark()
     : GeoDataFeature( new GeoDataPlacemarkPrivate )
 {
-    p()->m_coordinate.setParent( this );
+    p()->m_geometry->setParent( this );
 }
 
 GeoDataPlacemark::GeoDataPlacemark( const GeoDataPlacemark& other )
 : GeoDataFeature( other )
 {
-    p()->m_coordinate.setParent( this );
+    p()->m_geometry->setParent( this );
 }
 
 GeoDataPlacemark::GeoDataPlacemark( const QString& name )
     : GeoDataFeature( new GeoDataPlacemarkPrivate )
 {
     d->m_name = name;
-    p()->m_coordinate.setParent( this );
+    p()->m_geometry->setParent( this );
 }
 
 GeoDataPlacemark::~GeoDataPlacemark()
@@ -66,10 +66,7 @@ const char* GeoDataPlacemark::nodeType() const
 
 GeoDataGeometry* GeoDataPlacemark::geometry() const
 {
-    if( p()->m_geometry )
-        return p()->m_geometry;
-    else
-        return &( p()->m_coordinate );
+    return p()->m_geometry;
 }
 
 GeoDataLookAt *GeoDataPlacemark::lookAt() const
@@ -85,9 +82,13 @@ void GeoDataPlacemark::setLookAt( GeoDataLookAt *lookAt)
 GeoDataCoordinates GeoDataPlacemark::coordinate() const
 {    
     if( p()->m_geometry ) {
-        return p()->m_geometry->latLonAltBox().center();
+        if ( p()->m_geometry->geometryId() != GeoDataPointId ) {
+            return p()->m_geometry->latLonAltBox().center();
+        } else {
+            return GeoDataCoordinates( *static_cast<GeoDataPoint*>( p()->m_geometry ) );
+        }
     } else {
-        return static_cast<GeoDataCoordinates>( p()->m_coordinate );
+        return GeoDataCoordinates();
     }
 }
 
@@ -102,23 +103,19 @@ void GeoDataPlacemark::coordinate( qreal& lon, qreal& lat, qreal& alt ) const
         coord.geoCoordinates( lon, lat );
         alt = coord.altitude();
     } else {
-        p()->m_coordinate.geoCoordinates( lon, lat );
-        alt = p()->m_coordinate.altitude();
+        static_cast<GeoDataPoint*>(p()->m_geometry)->geoCoordinates( lon, lat );
+        alt = static_cast<GeoDataPoint*>(p()->m_geometry)->altitude();
     }
 }
 
 void GeoDataPlacemark::setCoordinate( qreal lon, qreal lat, qreal alt, GeoDataPoint::Unit _unit)
 {
-    detach();
-    p()->m_coordinate = GeoDataPoint( lon, lat, alt, _unit );
-    p()->m_coordinate.setParent( this );
+    setGeometry( new GeoDataPoint(lon, lat, alt, _unit ) );
 }
 
 void GeoDataPlacemark::setCoordinate( const GeoDataPoint &point )
 {
-    detach();
-    p()->m_coordinate = GeoDataPoint( point );
-    p()->m_coordinate.setParent( this );
+    setGeometry ( new GeoDataPoint( point ) );
 }
 
 void GeoDataPlacemark::setGeometry( GeoDataGeometry *entry )
@@ -189,7 +186,6 @@ void GeoDataPlacemark::pack( QDataStream& stream ) const
     {
         stream << InvalidGeometryId;
     }
-    p()->m_coordinate.pack( stream );
 }
 
 QXmlStreamWriter& GeoDataPlacemark::pack( QXmlStreamWriter& stream ) const
@@ -263,7 +259,6 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
             break;
         default: break;
     };
-    p()->m_coordinate.unpack( stream );
 }
 
 }
