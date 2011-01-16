@@ -8,8 +8,9 @@
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#include "signals.h"
 #include "MonavPlugin.h"
+
+#include "signals.h"
 #include "MonavRunner.h"
 #include "MonavConfigWidget.h"
 #include "MonavMap.h"

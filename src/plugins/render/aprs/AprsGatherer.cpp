@@ -8,9 +8,10 @@
 // Copyright 2010 Wes Hardaker <hardaker@users.sourceforge.net>
 //
 
+#include "AprsGatherer.h"
+
 #include <QtGui/QPixmap>
 
-#include "AprsGatherer.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 
