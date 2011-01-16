@@ -97,9 +97,7 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
             mDebug() << "Could not parse file" << absoluteFilePath;
         }
 
-        if ( d->m_bookmarkDocument ) {
-            delete d->m_bookmarkDocument;
-        }
+        delete d->m_bookmarkDocument;
         d->m_bookmarkDocument = dynamic_cast<GeoDataDocument*>( parser.releaseDocument() );
         Q_ASSERT( d->m_bookmarkDocument );
 
