@@ -812,31 +812,31 @@ GeoSceneDocument* MapWizard::createDocument()
         
         GeoSceneItem *geoPole = new GeoSceneItem( "geographic-pole" );
         GeoSceneIcon *geoPoleIcon = geoPole->icon();
-        geoPole->setText( "Geographic Pole" );
+        geoPole->setText( tr("Geographic Pole") );
         geoPoleIcon->setPixmap( "bitmaps/pole_1.png" );    
         poiSection->addItem( geoPole );
         
         GeoSceneItem *magPole = new GeoSceneItem( "magnetic-pole" );
         GeoSceneIcon *magPoleIcon = magPole->icon();
-        magPole->setText( "Magnetic Pole" );
+        magPole->setText( tr("Magnetic Pole") );
         magPoleIcon->setPixmap( "bitmaps/pole_2.png" );    
         poiSection->addItem( magPole );
         
         GeoSceneItem *airport = new GeoSceneItem( "airport" );
         GeoSceneIcon *airportIcon = airport->icon();
-        airport->setText( "Airport" );
+        airport->setText( tr("Airport") );
         airportIcon->setPixmap( "bitmaps/airport.png" );    
         poiSection->addItem( airport );
         
         GeoSceneItem *shipwreck = new GeoSceneItem( "shipwreck" );
         GeoSceneIcon *shipwreckIcon = shipwreck->icon();
-        shipwreck->setText( "Shipwreck" );
+        shipwreck->setText( tr("Shipwreck") );
         shipwreckIcon->setPixmap( "bitmaps/shipwreck.png" );    
         poiSection->addItem( shipwreck );
         
         GeoSceneItem *observatory = new GeoSceneItem( "observatory" );
         GeoSceneIcon *observatoryIcon = observatory->icon();
-        observatory->setText( "Observatory" );
+        observatory->setText( tr("Observatory") );
         observatoryIcon->setPixmap( "bitmaps/observatory.png" );    
         poiSection->addItem( observatory );
         
@@ -858,13 +858,13 @@ GeoSceneDocument* MapWizard::createDocument()
         
         GeoSceneItem *mountain = new GeoSceneItem( "mountain" );
         GeoSceneIcon *mountainIcon = mountain->icon();
-        mountain->setText( "Mountain" );
+        mountain->setText( tr("Mountain") );
         mountainIcon->setPixmap( "bitmaps/mountain_1.png" );    
         terrainSection->addItem( mountain );
         
         GeoSceneItem *volcano = new GeoSceneItem( "volcano" );
         GeoSceneIcon *volcanoIcon = volcano->icon();
-        volcano->setText( "Volcano" );
+        volcano->setText( tr("Volcano") );
         volcanoIcon->setPixmap( "bitmaps/volcano_1.png" );    
         terrainSection->addItem( volcano );   
         
@@ -895,13 +895,13 @@ GeoSceneDocument* MapWizard::createDocument()
         
         GeoSceneItem *internationalBoundary = new GeoSceneItem( "international-boundary" );
         GeoSceneIcon *internationalBoundaryIcon = internationalBoundary->icon();
-        internationalBoundary->setText( "International" );
+        internationalBoundary->setText( tr("International") );
         internationalBoundaryIcon->setPixmap( "bitmaps/border_1.png" );    
         bordersSection->addItem( internationalBoundary ); 
         
         GeoSceneItem *stateBoundary = new GeoSceneItem( "state" );
         GeoSceneIcon *stateBoundaryIcon = stateBoundary->icon();
-        stateBoundary->setText( "State" );
+        stateBoundary->setText( tr("State") );
         stateBoundaryIcon->setPixmap( "bitmaps/border_2.png" );
         bordersSection->addItem( stateBoundary );
         
