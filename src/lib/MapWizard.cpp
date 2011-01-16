@@ -368,7 +368,7 @@ void MapWizard::createLegendFile()
     html.close();
 }
 
-void MapWizard::downloadLegend( const QString url )
+void MapWizard::downloadLegend( const QString& url )
 {
     QUrl downloadUrl( url );
     QNetworkRequest request( downloadUrl );

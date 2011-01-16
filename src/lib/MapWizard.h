@@ -76,7 +76,7 @@ private:
     void createLegendHtml( QString image = "./legend/legend.png" );
     void createLegendFile();
     void createLegend();
-    void downloadLegend( const QString url );
+    void downloadLegend( const QString& url );
 
     Q_DISABLE_COPY( MapWizard )
     MapWizardPrivate * const d;
