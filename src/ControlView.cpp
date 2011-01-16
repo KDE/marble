@@ -28,7 +28,6 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QtCore/QProcess>
 #include <QtCore/QTimer>
-#include <QtCore/QUrl>
 #include <QtGui/QMessageBox>
 
 #include "GeoSceneDocument.h"

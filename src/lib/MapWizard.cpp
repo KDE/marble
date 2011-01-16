@@ -27,7 +27,6 @@
 #include "GeoSceneLegend.h"
 #include "GeoSceneSection.h"
 #include "GeoSceneItem.h"
-#include "GeoSceneIcon.h"
 #include "GeoSceneVector.h"
 #include "GeoWriter.h"
 #include "DgmlElementDictionary.h"
@@ -42,7 +41,6 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QMessageBox>
 #include <QtGui/QFileDialog>
-#include <QtGui/QMessageBox>
 #include <QtGui/QImageReader>
 #include <QtGui/QDialogButtonBox>
 #include <QtNetwork/QNetworkAccessManager>

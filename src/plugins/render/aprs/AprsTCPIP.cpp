@@ -9,8 +9,8 @@
 //
 
 #include "AprsTCPIP.h"
+
 #include <QtNetwork/QTcpSocket>
-#include "MarbleDebug.h"
 
 #include "MarbleDebug.h"
 

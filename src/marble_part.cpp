@@ -80,7 +80,6 @@
 #include "TileCoordsPyramid.h"
 #include "ViewportParams.h"
 #include "MarbleClock.h"
-#include "routing/RoutingManager.h"
 #include "PositionTracking.h"
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
