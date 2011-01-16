@@ -14,8 +14,8 @@
 #include "PluginInterface.h"
 #include "MarbleAbstractRunner.h"
 
-#include <QWidget>
-#include <QSettings>
+#include <QtCore/QSettings>
+#include <QtGui/QWidget>
 
 #include "routing/RoutingProfilesModel.h"
 

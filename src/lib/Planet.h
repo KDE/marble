@@ -12,7 +12,8 @@
 #define MARBLE_PLANET_H
 
 #include "marble_export.h"
-#include <QStringList>
+
+#include <QtCore/QStringList>
 
 namespace Marble
 {
