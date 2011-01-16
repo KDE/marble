@@ -766,10 +766,8 @@ void QextSerialPort::close()
         QIODevice::close();	// Flag the device as closed
         // QIODevice::close() doesn't actually close the port, so do that here
         ::close(fd);
-        if(readNotifier) {
-            delete readNotifier;
-            readNotifier = 0;
-        }
+        delete readNotifier;
+        readNotifier = 0;
     }
 }
 

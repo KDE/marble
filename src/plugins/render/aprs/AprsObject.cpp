@@ -43,8 +43,7 @@ AprsObject::AprsObject( const qreal &lon, const qreal &lat,
 
 AprsObject::~AprsObject()
 {
-    if ( m_pixmap )
-        delete m_pixmap;
+    delete m_pixmap;
 }
 
 GeoAprsCoordinates

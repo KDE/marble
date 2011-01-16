@@ -65,10 +65,8 @@ AprsPlugin::~AprsPlugin()
 {
     stopGatherers();
 
-    if ( m_configDialog )
-        delete m_configDialog;
-    if ( ui_configWidget )
-        delete ui_configWidget;
+    delete m_configDialog;
+    delete ui_configWidget;
 
     QMap<QString, AprsObject *>::Iterator obj;
     QMap<QString, AprsObject *>::Iterator end = m_objects.end();
