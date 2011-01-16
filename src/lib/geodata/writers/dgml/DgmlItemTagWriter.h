@@ -8,8 +8,8 @@
 // Copyright 2011 Utku Aydın <utkuaydin34@gmail.com>
 //
 
-#ifndef DGMLSECTIONTAGWRITER_H
-#define DGMLSECTIONTAGWRITER_H
+#ifndef MARBLE_DGMLITEMTAGWRITER_H
+#define MARBLE_DGMLITEMTAGWRITER_H
 
 #include "GeoTagWriter.h"
 
@@ -24,4 +24,4 @@ public:
 
 }
 
-#endif // DGMLSECTIONTAGWRITER_H
+#endif

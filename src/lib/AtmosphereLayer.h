@@ -11,6 +11,9 @@
 // Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
+#ifndef MARBLE_ATMOSPHERELAYER_H
+#define MARBLE_ATMOSPHERELAYER_H
+
 #include "LayerInterface.h"
 
 namespace Marble
@@ -26,3 +29,5 @@ public:
 };
 
 }
+
+#endif

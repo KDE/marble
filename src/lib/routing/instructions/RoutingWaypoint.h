@@ -8,8 +8,8 @@
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef MARBLE_ROUTINWAYGPOINT_H
-#define MARBLE_ROUTINWAYGPOINT_H
+#ifndef MARBLE_ROUTINGWAYPOINT_H
+#define MARBLE_ROUTINGWAYPOINT_H
 
 #include "RoutingPoint.h"
 #include "marble_export.h"
@@ -75,4 +75,4 @@ typedef QVector<RoutingWaypoint> RoutingWaypoints;
 
 } // namespace Marble
 
-#endif // MARBLE_ROUTINWAYGPOINT_H
+#endif
