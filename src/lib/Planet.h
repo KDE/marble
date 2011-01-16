@@ -95,11 +95,8 @@ public:
     Planet& operator=( const Planet& rhs );
 
     static QString name( const QString& id );
-	
-	static QStringList planetList();
-	
+    static QStringList planetList();
 
-		
 private:
     PlanetPrivate * const d;
 };

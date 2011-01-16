@@ -19,7 +19,7 @@ namespace Marble
 class DgmlItemTagWriter : public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;    
+    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
 };
 
 }
