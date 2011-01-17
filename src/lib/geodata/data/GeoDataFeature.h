@@ -139,6 +139,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         UnmannedSoftLandingSite, // u
         UnmannedHardLandingSite, // i
 
+        Folder,
+        Bookmark,
+
         // Important: Make sure that this is always the last 
         // item and just use it to specify the array size
         LastIndex

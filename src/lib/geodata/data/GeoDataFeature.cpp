@@ -287,6 +287,14 @@ void GeoDataFeature::initializeDefaultStyles()
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/unmanned_hard_landing.png" ) ), 
               QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
 
+    s_defaultStyle[Folder]
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/folder.png" ) ),
+              QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
+
+    s_defaultStyle[Bookmark]
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/bookmark.png" ) ),
+              QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
+
     s_defaultStyleInitialized = true;
     s_defaultFont = QFont("Sans Serif");
 
