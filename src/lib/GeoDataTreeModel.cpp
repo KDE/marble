@@ -233,6 +233,14 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
             GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
             return QVariant(feature->style()->iconStyle().icon());
         }
+    } else if ( role == Qt::ToolTipRole
+              && index.column() == 0 ) {
+        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
+             || object->nodeType() == GeoDataTypes::GeoDataFolderType
+             || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+            GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
+            return QVariant( feature->description() );
+        }
     } else if ( role == MarblePlacemarkModel::ObjectPointerRole ) {
         return qVariantFromValue( object );
     } else if ( role == MarblePlacemarkModel::PopularityIndexRole ) {
