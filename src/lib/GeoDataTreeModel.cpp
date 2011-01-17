@@ -385,6 +385,16 @@ bool GeoDataTreeModel::setData ( const QModelIndex & index, const QVariant & val
             emit dataChanged( index, index );
             return true;
         }
+    } else if ( role == Qt::EditRole ) {
+        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
+             || object->nodeType() == GeoDataTypes::GeoDataFolderType
+             || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+            GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
+            feature->setName( value.toString() );
+            mDebug() << "setData " << feature->name() << " " << value.toString();
+            emit dataChanged( index, index );
+            return true;
+        }
     }
 
     return false;
@@ -399,7 +409,7 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
     if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
          || object->nodeType() == GeoDataTypes::GeoDataFolderType
          || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable;
+        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;
     }
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
