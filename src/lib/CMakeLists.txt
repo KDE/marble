@@ -210,6 +210,7 @@ set(marblewidget_SRCS
 
     BookmarkManager.cpp
     BookmarkInfoDialog.cpp
+    BookmarkManagerDialog.cpp
     NewFolderInfoDialog.cpp
 
     PrintOptionsWidget.cpp
@@ -242,6 +243,7 @@ set (marblewidget_UI
     routing/RoutingWidget.ui
     DataMigrationWidget.ui
     BookmarkInfoDialog.ui
+    BookmarkManagerDialog.ui
     NameDialog.ui
     PrintOptions.ui
     ExternalEditor.ui
