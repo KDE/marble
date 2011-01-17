@@ -422,7 +422,6 @@ QModelIndex KDescendantsProxyModel::mapFromSource(const QModelIndex &sourceIndex
   if (d->m_mapping.isEmpty())
     return QModelIndex();
 
-
   {
     // TODO: Consider a parent Mapping to speed this up.
 
@@ -706,6 +705,20 @@ void KDescendantsProxyModelPrivate::sourceRowsAboutToBeRemoved(const QModelIndex
   q->beginRemoveRows(QModelIndex(), proxyStart, proxyEnd);
 }
 
+static QModelIndex getFirstDeepest(QAbstractItemModel *model, const QModelIndex &parent, int *count) {
+  static const int column = 0;
+  Q_ASSERT(model->hasChildren(parent));
+  Q_ASSERT(model->rowCount(parent) > 0);
+  for (int row = 0; row < model->rowCount(parent); ++row) {
+    (*count)++;
+    const QModelIndex child = model->index(row, column, parent);
+    Q_ASSERT(child.isValid());
+    if (model->hasChildren(child))
+      return getFirstDeepest(model, child, count);
+  }
+  return model->index(model->rowCount(parent) - 1, column, parent);
+}
+
 void KDescendantsProxyModelPrivate::sourceRowsRemoved(const QModelIndex &parent, int start, int end)
 {
   Q_Q(KDescendantsProxyModel);
@@ -736,13 +749,104 @@ void KDescendantsProxyModelPrivate::sourceRowsRemoved(const QModelIndex &parent,
 
   updateInternalIndexes(proxyStart, -1 * difference);
 
-  if (rowCount == start && rowCount != 0)
-  {
-    static const int column = 0;
-    const QModelIndex newIndex = q->sourceModel()->index(rowCount - 1, column, parent);
-    m_mapping.insert(newIndex, proxyStart - 1);
+  if (rowCount != start || rowCount == 0) {
+    q->endRemoveRows();
+    return;
   }
 
+  static const int column = 0;
+  const QModelIndex newEnd = q->sourceModel()->index(rowCount - 1, column, parent);
+  Q_ASSERT(newEnd.isValid());
+
+  if (m_mapping.isEmpty()) {
+    m_mapping.insert(newEnd, newEnd.row());
+    q->endRemoveRows();
+    return;
+  }
+  if (q->sourceModel()->hasChildren(newEnd)) {
+    int count = 0;
+    const QModelIndex firstDeepest = getFirstDeepest(q->sourceModel(), newEnd, &count);
+    Q_ASSERT(firstDeepest.isValid());
+    const int firstDeepestProxy = m_mapping.leftToRight(firstDeepest);
+
+    m_mapping.insert(newEnd, firstDeepestProxy - count);
+    q->endRemoveRows();
+    return;
+  }
+  Mapping::right_iterator lowerBound = m_mapping.rightLowerBound(proxyStart);
+  if (lowerBound == m_mapping.rightEnd()) {
+    int proxyRow = (lowerBound - 1).key();
+
+    for (int row = newEnd.row(); row >= 0; --row ) {
+      const QModelIndex newEndSibling = q->sourceModel()->index(row, column, parent);
+      if (!q->sourceModel()->hasChildren(newEndSibling)) {
+        ++proxyRow;
+      } else {
+        break;
+      }
+    }
+    m_mapping.insert(newEnd, proxyRow);
+    q->endRemoveRows();
+    return;
+  } else if (lowerBound == m_mapping.rightBegin()) {
+    int proxyRow = rowCount - 1;
+    QModelIndex trackedParent = parent;
+    while (trackedParent.isValid()) {
+      proxyRow += (trackedParent.row() + 1);
+      trackedParent = trackedParent.parent();
+    }
+    m_mapping.insert(newEnd, proxyRow);
+    q->endRemoveRows();
+    return;
+  }
+  const Mapping::right_iterator boundAbove = lowerBound - 1;
+
+  QVector<QModelIndex> targetParents;
+  targetParents.push_back(parent);
+  {
+    QModelIndex target = parent;
+    int count = 0;
+    while (target.isValid()) {
+      if (target == boundAbove.value()) {
+        m_mapping.insert(newEnd, count + boundAbove.key() + newEnd.row() + 1);
+        q->endRemoveRows();
+        return;
+      }
+      count += (target.row() + 1);
+      target = target.parent();
+      if (target.isValid())
+        targetParents.push_back(target);
+    }
+  }
+
+  QModelIndex boundParent = boundAbove.value().parent();
+  QModelIndex prevParent = boundParent;
+  Q_ASSERT(boundParent.isValid());
+  while (boundParent.isValid()) {
+    prevParent = boundParent;
+    boundParent = boundParent.parent();
+
+    if (targetParents.contains(prevParent))
+      break;
+
+    if (!m_mapping.leftContains(prevParent))
+      break;
+
+    if (m_mapping.leftToRight(prevParent) > boundAbove.key())
+      break;
+  }
+
+  QModelIndex trackedParent = parent;
+
+  int proxyRow = boundAbove.key();
+
+  Q_ASSERT(prevParent.isValid());
+  proxyRow -= prevParent.row();
+  while (trackedParent != boundParent) {
+    proxyRow += (trackedParent.row() + 1);
+    trackedParent = trackedParent.parent();
+  }
+  m_mapping.insert(newEnd, proxyRow + newEnd.row());
   q->endRemoveRows();
 }
 
@@ -846,6 +950,12 @@ void KDescendantsProxyModelPrivate::sourceDataChanged(const QModelIndex &topLeft
 
   const int topRow = topLeft.row();
   const int bottomRow = bottomRight.row();
+
+  if (m_mapping.isEmpty() && q->sourceModel()->hasChildren())
+  {
+    Q_ASSERT(q->sourceModel()->rowCount() > 0);
+    synchronousMappingRefresh();
+  }
 
   for(int i = topRow; i <= bottomRow; ++i)
   {
