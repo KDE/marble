@@ -76,7 +76,8 @@ Q_SIGNALS:
     void bookmarksChanged();
 
  private:
-   
+   friend class BookmarkManagerDialog;
+
    /**
     * @brief updates bookmark file and return true if updated successfully
     */ 

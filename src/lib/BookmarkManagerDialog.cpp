@@ -11,6 +11,7 @@
 
 #include "BookmarkManagerDialog.h"
 #include "BookmarkManager.h"
+#include "BookmarkManager_p.h"
 #include "FileManager.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataExtendedData.h"
@@ -88,6 +89,8 @@ public:
     void renameFolder();
 
     void editBookmark();
+
+    void discardChanges();
 };
 
 BranchFilterModel::BranchFilterModel( QObject *parent ) :
@@ -165,6 +168,11 @@ void BookmarkManagerDialogPrivate::editBookmark()
     }
 }
 
+void BookmarkManagerDialogPrivate::discardChanges()
+{
+    m_manager->loadFile( "bookmarks/bookmarks.kml" );
+}
+
 void BookmarkManagerDialogPrivate::initializeFoldersView( GeoDataTreeModel* treeModel )
 {
     // Set up the folders view chain
@@ -216,24 +224,25 @@ BookmarkManagerDialog::BookmarkManagerDialog( MarbleModel* model, QWidget *paren
 {
     setupUi( this );
 
-    // @todo: Consider using a GeoDataDocument* directly (from BookmarkManager)
-    // instead of using the kml file
-    QString bookmarksFile = MarbleDirs::path( "bookmarks/bookmarks.kml" );
+    GeoDataTreeModel* treeModel = new GeoDataTreeModel( this );
+    treeModel->setRootDocument( model->bookmarkManager()->d->bookmarkDocument() );
 
-    // File manager opens the kml file, the data facade provides the tree model
-    FileManager *fileManager = new FileManager( this );
-    MarbleDataFacade* facade = new MarbleDataFacade( model );
-    fileManager->setDataFacade( facade );
-    fileManager->addFile( bookmarksFile );
-
-    d->initializeFoldersView( facade->treeModel() );
-    d->initializeBookmarksView( facade->treeModel() );
+    d->initializeFoldersView( treeModel );
+    d->initializeBookmarksView( treeModel );
     d->updateButtonState();
+
+    connect( this, SIGNAL( accepted() ), SLOT( saveBookmarks() ) );
+    connect( this, SIGNAL( rejected() ), SLOT( discardChanges() ) );
 }
 
 BookmarkManagerDialog::~BookmarkManagerDialog()
 {
     delete d;
+}
+
+void BookmarkManagerDialog::saveBookmarks()
+{
+    d->m_manager->updateBookmarkFile();
 }
 
 }

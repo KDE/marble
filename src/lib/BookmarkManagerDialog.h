@@ -33,6 +33,9 @@ class MARBLE_EXPORT BookmarkManagerDialog : public QDialog, private Ui::UiBookma
     /** Destructor */
     ~BookmarkManagerDialog();
 
+private Q_SLOTS:
+    void saveBookmarks();
+
 private:
     Q_PRIVATE_SLOT( d, void updateButtonState() );
 
@@ -41,6 +44,8 @@ private:
     Q_PRIVATE_SLOT( d, void editBookmark() );
 
     Q_PRIVATE_SLOT( d, void filterBookmarksByFolder( const QModelIndex &index ) );
+
+    Q_PRIVATE_SLOT( d, void discardChanges() );
 
     Q_DISABLE_COPY( BookmarkManagerDialog )
     BookmarkManagerDialogPrivate* const d;
