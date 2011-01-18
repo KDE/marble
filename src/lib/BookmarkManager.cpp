@@ -101,6 +101,13 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
         d->m_bookmarkDocument = dynamic_cast<GeoDataDocument*>( parser.releaseDocument() );
         Q_ASSERT( d->m_bookmarkDocument );
 
+        foreach( GeoDataFolder* folder, d->m_bookmarkDocument->folderList() )
+        {
+            foreach( GeoDataPlacemark* placemark, folder->placemarkList() ) {
+                placemark->setVisualCategory( GeoDataFeature::Bookmark );
+            }
+        }
+
         file.close();
         emit bookmarksChanged();
         return true;
