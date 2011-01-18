@@ -33,12 +33,28 @@ using namespace Marble;
 
 class GeoDataTreeModel::Private {
  public:
-    Private() : m_rootDocument( new GeoDataDocument ) {}
-    ~Private() { delete m_rootDocument; }
+    Private();
+    ~Private();
 
     GeoDataDocument* m_rootDocument;
     FileManager     *m_fileManager;
+    bool             m_ownsRootDocument;
 };
+
+GeoDataTreeModel::Private::Private() :
+    m_rootDocument( new GeoDataDocument ),
+    m_fileManager( 0 ),
+    m_ownsRootDocument( true )
+{
+    // nothing to do
+}
+
+GeoDataTreeModel::Private::~Private()
+{
+    if ( m_ownsRootDocument ) {
+        delete m_rootDocument;
+    }
+}
 
 GeoDataTreeModel::GeoDataTreeModel( QObject *parent )
     : QAbstractItemModel( parent ),
@@ -448,6 +464,18 @@ void GeoDataTreeModel::update()
 {
 //    mDebug() << "updating GeoDataTreeModel";
     reset();
+}
+
+void GeoDataTreeModel::setRootDocument( GeoDataDocument* document )
+{
+    beginResetModel();
+    if ( d->m_ownsRootDocument ) {
+        delete d->m_rootDocument;
+        d->m_ownsRootDocument = false;
+    }
+
+    d->m_rootDocument = document;
+    endResetModel();
 }
 
 #include "GeoDataTreeModel.moc"
