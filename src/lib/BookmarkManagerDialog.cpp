@@ -14,19 +14,25 @@
 #include "BookmarkManager_p.h"
 #include "FileManager.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataDocument.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
 #include "GeoDataTreeModel.h"
 #include "GeoDataTypes.h"
+#include "GeoWriter.h"
 #include "kdescendantsproxymodel.h"
 #include "MarbleDirs.h"
+#include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "MarbleDataFacade.h"
 
 #include <QtCore/QPointer>
+#include <QtCore/QFile>
 #include <QtGui/QSortFilterProxyModel>
+#include <QtGui/QFileDialog>
+#include <QtGui/QMessageBox>
 
 namespace Marble {
 
@@ -233,6 +239,7 @@ BookmarkManagerDialog::BookmarkManagerDialog( MarbleModel* model, QWidget *paren
 
     connect( this, SIGNAL( accepted() ), SLOT( saveBookmarks() ) );
     connect( this, SIGNAL( rejected() ), SLOT( discardChanges() ) );
+    connect( exportButton, SIGNAL( clicked() ), this, SLOT( exportBookmarks() ) );
 }
 
 BookmarkManagerDialog::~BookmarkManagerDialog()
@@ -243,6 +250,24 @@ BookmarkManagerDialog::~BookmarkManagerDialog()
 void BookmarkManagerDialog::saveBookmarks()
 {
     d->m_manager->updateBookmarkFile();
+}
+
+void BookmarkManagerDialog::exportBookmarks()
+{
+    QString fileName = QFileDialog::getSaveFileName( this, tr( "Export Bookmarks" ), // krazy:exclude=qclasses
+                       QDir::homePath(), tr( "KML files (*.kml)" ) );
+
+    if ( !fileName.isEmpty() ) {
+        QFile file( fileName );
+        GeoWriter writer;
+        writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+
+        if ( !file.open( QIODevice::ReadWrite ) || !writer.write( &file, d->m_manager->d->bookmarkDocument() ) ) {
+            mDebug() << "Could not write the bookmarks file" << fileName;
+            QString const text = tr( "Unable to save bookmarks. Please check that the file is writable." );
+            QMessageBox::warning( this, tr( "Bookmark Export - Marble" ), text );
+        }
+    }
 }
 
 }

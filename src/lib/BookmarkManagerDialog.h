@@ -36,6 +36,8 @@ class MARBLE_EXPORT BookmarkManagerDialog : public QDialog, private Ui::UiBookma
 private Q_SLOTS:
     void saveBookmarks();
 
+    void exportBookmarks();
+
 private:
     Q_PRIVATE_SLOT( d, void updateButtonState() );
 
