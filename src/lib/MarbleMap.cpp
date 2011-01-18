@@ -856,6 +856,10 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     d->m_viewParams.setMapThemeId( mapThemeId );
     GeoSceneDocument *mapTheme = d->m_viewParams.mapTheme();
 
+    if ( !mapTheme ) {
+        return;
+    }
+
     // NOTE due to frequent regressions: 
     // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
     // at this point. Some themes do NOT have either vector or texture data!
@@ -902,7 +906,7 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     // at this point.
 
     // Check whether there is a texture layer available:
-    if ( mapTheme && mapTheme->map()->hasTextureLayers() ) {
+    if ( mapTheme->map()->hasTextureLayers() ) {
 	d->m_textureLayer.setMapTheme( mapTheme );
         // If the tiles aren't already there, put up a progress dialog
         // while creating them.
@@ -949,11 +953,9 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     
     d->m_placemarkLayout.requestStyleReset();
 
-    if ( mapTheme ) {
-        d->m_model->setMapTheme( mapTheme );
+    d->m_model->setMapTheme( mapTheme );
 
-        centerSun();
-    }
+    centerSun();
 
     d->m_layerManager.syncViewParamsAndPlugins( mapTheme );
 }
