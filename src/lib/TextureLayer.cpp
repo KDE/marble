@@ -149,39 +149,36 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
     if ( !d->m_mapTheme )
         return;
 
-    const bool redrawBackground = d->m_justModified || viewParams->canvasImage()->isNull();
+    if ( !d->m_mapTheme->map()->hasTextureLayers() )
+        return;
 
-    if ( redrawBackground ) {
-        if ( d->m_mapTheme->map()->hasTextureLayers() ) {
-            // Create the height map image a.k.a viewParams->d->m_canvasImage.
-            d->m_texmapper->mapTexture( viewParams );
+    if ( d->m_justModified ) {
+        // Create the height map image a.k.a viewParams->d->m_canvasImage.
+        d->m_texmapper->mapTexture( viewParams );
 
-            if ( d->m_texcolorizer ) {
-                d->m_texcolorizer->colorize( viewParams );
-            }
+        if ( d->m_texcolorizer ) {
+            d->m_texcolorizer->colorize( viewParams );
         }
+
+        d->m_justModified = false;
     }
 
     // Paint the map on the Widget
 //    QTime t;
 //    t.start();
-    int radius = (int)(1.05 * (qreal)(viewParams->radius()));
+    if ( viewParams->projection() == Spherical ) {
+        const int radius = (int)(1.05 * (qreal)(viewParams->radius()));
 
-    if ( d->m_mapTheme->map()->hasTextureLayers() ) {
-        if ( viewParams->projection() == Spherical ) {
-            QRect rect( viewParams->width() / 2 - radius, viewParams->height() / 2 - radius,
-                        2 * radius, 2 * radius);
-            rect = rect.intersect( dirtyRect );
-            painter->drawImage( rect, *viewParams->canvasImage(), rect );
-        }
-        else {
-            painter->drawImage( dirtyRect, *viewParams->canvasImage(), dirtyRect );
-        }
+        QRect rect( viewParams->width() / 2 - radius, viewParams->height() / 2 - radius,
+                    2 * radius, 2 * radius);
+        rect = rect.intersect( dirtyRect );
+        painter->drawImage( rect, *viewParams->canvasImage(), rect );
+    }
+    else {
+        painter->drawImage( dirtyRect, *viewParams->canvasImage(), dirtyRect );
     }
 
 //    qDebug( "Painted in %ims", t.elapsed() );
-
-    d->m_justModified = false;
 }
 
 void TextureLayer::setShowTileId( bool show )
