@@ -63,11 +63,89 @@ private:
 };
 
 
-TextureColorizer::TextureColorizer( QObject *parent )
+TextureColorizer::TextureColorizer( const QString &seafile,
+                                    const QString &landfile,
+                                    QObject *parent )
     : QObject( parent )
     , m_veccomposer( this )
 {
     connect( &m_veccomposer, SIGNAL( datasetLoaded() ), SIGNAL( datasetLoaded() ) );
+
+    QTime t;
+    t.start();
+
+    QImage   gradientImage ( 256, 1, QImage::Format_RGB32 );
+    QPainter  gradientPainter;
+    gradientPainter.begin( &gradientImage );
+    gradientPainter.setPen( Qt::NoPen );
+
+
+    int shadingStart = 120;
+    QImage    shadingImage ( 16, 1, QImage::Format_RGB32 );
+    QPainter  shadingPainter;
+    shadingPainter.begin( &shadingImage );
+    shadingPainter.setPen( Qt::NoPen );
+
+    int offset = 0;
+
+    QStringList  filelist;
+    filelist << seafile << landfile;
+
+    foreach ( const QString &filename, filelist ) {
+
+        QLinearGradient  gradient( 0, 0, 256, 0 );
+
+        QFile  file( filename );
+        file.open( QIODevice::ReadOnly );
+        QTextStream  stream( &file );  // read the data from the file
+
+        QString      evalstrg;
+
+        while ( !stream.atEnd() ) {
+            stream >> evalstrg;
+            if ( !evalstrg.isEmpty() && evalstrg.contains( '=' ) ) {
+                QString  colorValue = evalstrg.left( evalstrg.indexOf( '=' ) );
+                QString  colorPosition = evalstrg.mid( evalstrg.indexOf( '=' ) + 1 );
+                gradient.setColorAt( colorPosition.toDouble(),
+                                     QColor( colorValue ) );
+            }
+        }
+        gradientPainter.setBrush( gradient );
+        gradientPainter.drawRect( 0, 0, 256, 1 );
+
+        QLinearGradient  shadeGradient( - shadingStart, 0, 256 - shadingStart, 0 );
+
+        shadeGradient.setColorAt(0.00, QColor(Qt::white));
+        shadeGradient.setColorAt(0.15, QColor(Qt::white));
+        shadeGradient.setColorAt(0.75, QColor(Qt::black));
+        shadeGradient.setColorAt(1.00, QColor(Qt::black));
+
+        const QRgb * gradientScanLine  = (QRgb*)( gradientImage.scanLine( 0 ) );
+        const QRgb * shadingScanLine   = (QRgb*)( shadingImage.scanLine( 0 ) );
+
+        for ( int i = 0; i < 256; ++i ) {
+
+            QRgb shadeColor = *(gradientScanLine + i );
+            shadeGradient.setColorAt(0.496, shadeColor);
+            shadeGradient.setColorAt(0.504, shadeColor);
+            shadingPainter.setBrush( shadeGradient );
+            shadingPainter.drawRect( 0, 0, 16, 1 );
+
+            // populate texturepalette[][]
+            for ( int j = 0; j < 16; ++j ) {
+                texturepalette[j][offset + i] = *(shadingScanLine + j );
+            }
+        }
+
+        offset += 256;
+    }
+    shadingPainter.end();  // Need to explicitly tell painter lifetime to avoid crash
+    gradientPainter.end(); // on some systems. 
+
+    m_seafile = seafile;
+    m_landfile = landfile;
+
+    qDebug("TextureColorizer::setSeaFileLandFile: Time elapsed: %d ms", t.elapsed());
 }
 
 // This function takes two images, both in viewParams:
@@ -292,7 +370,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 
                             QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
                             QRgb glaciercolor = (QRgb)(texturepalette[bump][grey]);
-    
+
                             *writeData = qRgb( 
                                 (int) ( c * ( alpha * qRed( glaciercolor )
                                 + ( 255 - alpha ) * qRed( landcolor ) ) ),
@@ -307,90 +385,6 @@ void TextureColorizer::colorize(ViewParams *viewParams)
             }
         }
     }
-}
-
-void TextureColorizer::setSeaFileLandFile(const QString& seafile,
-                                          const QString& landfile)
-{
-    if( m_seafile == seafile && m_landfile == landfile ) {
-        return;
-    }
-
-    QTime t;
-    t.start();
-
-    QImage   gradientImage ( 256, 1, QImage::Format_RGB32 );
-    QPainter  gradientPainter;
-    gradientPainter.begin( &gradientImage );
-    gradientPainter.setPen( Qt::NoPen );
-
-
-    int shadingStart = 120;
-    QImage    shadingImage ( 16, 1, QImage::Format_RGB32 );
-    QPainter  shadingPainter;
-    shadingPainter.begin( &shadingImage );
-    shadingPainter.setPen( Qt::NoPen );
-
-    int offset = 0;
-
-    QStringList  filelist;
-    filelist << seafile << landfile;
-
-    foreach ( const QString &filename, filelist ) {
-
-        QLinearGradient  gradient( 0, 0, 256, 0 );
-
-        QFile  file( filename );
-        file.open( QIODevice::ReadOnly );
-        QTextStream  stream( &file );  // read the data from the file
-
-        QString      evalstrg;
-
-        while ( !stream.atEnd() ) {
-            stream >> evalstrg;
-            if ( !evalstrg.isEmpty() && evalstrg.contains( '=' ) ) {
-                QString  colorValue = evalstrg.left( evalstrg.indexOf( '=' ) );
-                QString  colorPosition = evalstrg.mid( evalstrg.indexOf( '=' ) + 1 );
-                gradient.setColorAt( colorPosition.toDouble(),
-                                     QColor( colorValue ) );
-            }
-        }
-        gradientPainter.setBrush( gradient );
-        gradientPainter.drawRect( 0, 0, 256, 1 );
-
-        QLinearGradient  shadeGradient( - shadingStart, 0, 256 - shadingStart, 0 );
-
-        shadeGradient.setColorAt(0.00, QColor(Qt::white));
-        shadeGradient.setColorAt(0.15, QColor(Qt::white));
-        shadeGradient.setColorAt(0.75, QColor(Qt::black));
-        shadeGradient.setColorAt(1.00, QColor(Qt::black));
-
-        const QRgb * gradientScanLine  = (QRgb*)( gradientImage.scanLine( 0 ) );
-        const QRgb * shadingScanLine   = (QRgb*)( shadingImage.scanLine( 0 ) );
-
-        for ( int i = 0; i < 256; ++i ) {
-
-            QRgb shadeColor = *(gradientScanLine + i );
-            shadeGradient.setColorAt(0.496, shadeColor);
-            shadeGradient.setColorAt(0.504, shadeColor);
-            shadingPainter.setBrush( shadeGradient );
-            shadingPainter.drawRect( 0, 0, 16, 1 );
-
-            // populate texturepalette[][]
-            for ( int j = 0; j < 16; ++j ) {
-                texturepalette[j][offset + i] = *(shadingScanLine + j );
-            }
-        }
-
-        offset += 256;
-    }
-    shadingPainter.end();  // Need to explicitly tell painter lifetime to avoid crash
-    gradientPainter.end(); // on some systems. 
-
-    m_seafile = seafile;
-    m_landfile = landfile;
-
-    qDebug("TextureColorizer::setSeaFileLandFile: Time elapsed: %d ms", t.elapsed());
 }
 
 }

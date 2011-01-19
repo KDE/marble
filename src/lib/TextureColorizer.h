@@ -30,13 +30,13 @@ class TextureColorizer : public QObject
     Q_OBJECT
 
  public:
-    TextureColorizer( QObject *parent = 0 );
+    TextureColorizer( const QString &seafile,
+                      const QString &landfile,
+                      QObject *parent = 0 );
+
     virtual ~TextureColorizer(){}
 
     void colorize(ViewParams *viewParams);
-
-    void setSeaFileLandFile( const QString& seafile,
-                             const QString& landfile );
 
  Q_SIGNALS:
     void datasetLoaded();
