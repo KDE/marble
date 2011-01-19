@@ -39,6 +39,10 @@ MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( StackedTileLoader 
       m_oldCenterLon( 0.0 ),
       m_oldYPaintedTop( 0 )
 {
+    connect( m_tileLoader, SIGNAL( tileUpdateAvailable( const TileId & ) ),
+             this, SIGNAL( tileUpdatesAvailable() ) );
+    connect( m_tileLoader, SIGNAL( tileUpdatesAvailable() ),
+             this, SIGNAL( tileUpdatesAvailable() ) );
 }
 
 void MercatorScanlineTextureMapper::mapTexture( GeoPainter *painter,

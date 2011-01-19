@@ -13,6 +13,11 @@
 
 
 #include "AbstractScanlineTextureMapper.h"
+#include "TileId.h"
+
+#include <QtCore/QCache>
+
+class QPixmap;
 
 namespace Marble
 {
@@ -22,7 +27,9 @@ class TileScalingTextureMapper : public AbstractScanlineTextureMapper
     Q_OBJECT
 
  public:
-    TileScalingTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
+    TileScalingTextureMapper( StackedTileLoader *tileLoader,
+                              QCache<TileId, QPixmap> *cache,
+                              QObject *parent = 0 );
 
     virtual void mapTexture( GeoPainter *painter,
                              ViewParams *viewParams,
@@ -31,12 +38,19 @@ class TileScalingTextureMapper : public AbstractScanlineTextureMapper
 
     virtual void setRepaintNeeded();
 
+ private Q_SLOTS:
+    void updateTile( const TileId &id );
+    void updateTiles();
+
  private:
-    void mapTexture( ViewParams *viewParams,
+    void mapTexture( GeoPainter *painter,
+                     ViewParams *viewParams,
                      TextureColorizer *texColorizer );
 
  private:
+    QCache<TileId, QPixmap> *const m_cache;
     bool   m_repaintNeeded;
+    int    m_oldRadius;
 };
 
 }

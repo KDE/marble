@@ -13,6 +13,7 @@
 
 #include "TextureLayer.h"
 
+#include <QtCore/QCache>
 #include <QtCore/QTimer>
 
 #include "SphericalScanlineTextureMapper.h"
@@ -53,6 +54,7 @@ public:
     TextureLayer  *const m_parent;
     TileLoader           m_loader;
     StackedTileLoader    m_tileLoader;
+    QCache<TileId, QPixmap> m_pixmapCache;
     AbstractScanlineTextureMapper *m_texmapper;
     TextureColorizer              *m_texcolorizer;
     GeoSceneDocument              *m_mapTheme;
@@ -62,6 +64,7 @@ TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadMa
     : m_parent( parent )
     , m_loader( downloadManager, mapThemeManager )
     , m_tileLoader( &m_loader, sunLocator )
+    , m_pixmapCache( 100 )
     , m_texmapper( 0 )
     , m_texcolorizer( 0 )
     , m_mapTheme( 0 )
@@ -95,6 +98,7 @@ void TextureLayer::Private::updateTextureLayers()
     }
 
     m_tileLoader.setTextureLayers( result );
+    m_pixmapCache.clear();
 }
 
 const GeoSceneLayer *TextureLayer::Private::sceneLayer() const
@@ -134,7 +138,6 @@ TextureLayer::TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManage
     : QObject()
     , d( new Private( mapThemeManager, downloadManager, sunLocator, this ) )
 {
-    connect( &d->m_tileLoader, SIGNAL( tileUpdateAvailable() ), SLOT( mapChanged() ) );
 }
 
 TextureLayer::~TextureLayer()
@@ -179,7 +182,7 @@ void TextureLayer::setupTextureMapper( Projection projection )
             break;
         case Mercator:
             if ( d->m_tileLoader.tileProjection() == GeoSceneTexture::Mercator ) {
-                d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader, this );
+                d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader, &d->m_pixmapCache, this );
             } else {
                 d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader, this );
             }
@@ -189,6 +192,7 @@ void TextureLayer::setupTextureMapper( Projection projection )
     }
     Q_ASSERT( d->m_texmapper );
     connect( d->m_texmapper, SIGNAL( tileLevelChanged( int )), SIGNAL( tileLevelChanged( int )));
+    connect( d->m_texmapper, SIGNAL( tileUpdatesAvailable() ), SLOT( mapChanged() ) );
 }
 
 void TextureLayer::setNeedsUpdate()
@@ -235,7 +239,6 @@ void TextureLayer::setMapTheme(GeoSceneDocument* mapTheme)
     }
 
     d->m_mapTheme = mapTheme;
-    d->m_tileLoader.flush();
 
     if ( d->textureLayerSettings() ) {
         connect( d->textureLayerSettings(), SIGNAL( valueChanged( QString, bool )),
