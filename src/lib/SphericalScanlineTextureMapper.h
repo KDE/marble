@@ -37,10 +37,21 @@ class SphericalScanlineTextureMapper : public AbstractScanlineTextureMapper
  public:
     explicit SphericalScanlineTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
 
-    void mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer );
+    virtual void mapTexture( GeoPainter *painter,
+                             ViewParams *viewParams,
+                             const QRect &dirtyRect,
+                             TextureColorizer *texColorizer );
 
- protected:
+    virtual void setRepaintNeeded();
+
+ private:
+    void mapTexture( ViewParams *viewParams,
+                     TextureColorizer *texColorizer );
+
     inline bool needsFilter( const QRgb& rgb, int& oldR, int& oldB, int &oldG  );
+
+ private:
+    bool m_repaintNeeded;
 };
 
 }

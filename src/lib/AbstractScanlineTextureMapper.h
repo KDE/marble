@@ -22,10 +22,12 @@
 #include "MarbleMath.h"
 #include "MathHelper.h"
 
+class QRect;
 
 namespace Marble
 {
 
+class GeoPainter;
 class StackedTile;
 class StackedTileLoader;
 class TextureColorizer;
@@ -40,7 +42,12 @@ public:
                                             QObject * const parent = 0 );
     ~AbstractScanlineTextureMapper();
 
-    virtual void mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer ) = 0;
+    virtual void mapTexture( GeoPainter *painter,
+                             ViewParams *viewParams,
+                             const QRect &dirtyRect,
+                             TextureColorizer *texColorizer ) = 0;
+
+    virtual void setRepaintNeeded() = 0;
 
     bool interlaced() const;
     void setInterlaced( const bool enabled );

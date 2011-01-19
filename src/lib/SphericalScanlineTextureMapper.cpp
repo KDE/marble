@@ -16,6 +16,7 @@
 #include <QtGui/QImage>
 
 #include "global.h"
+#include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "Quaternion.h"
@@ -31,8 +32,33 @@ using namespace Marble;
 SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( StackedTileLoader *tileLoader,
                                                                 QObject *parent )
     : AbstractScanlineTextureMapper( tileLoader, parent )
+    , m_repaintNeeded( true )
 {
     m_interlaced = false;
+}
+
+void SphericalScanlineTextureMapper::mapTexture( GeoPainter *painter,
+                                                 ViewParams *viewParams,
+                                                 const QRect &dirtyRect,
+                                                 TextureColorizer *texColorizer )
+{
+    if ( m_repaintNeeded ) {
+        mapTexture( viewParams, texColorizer );
+
+        m_repaintNeeded = false;
+    }
+
+    const int radius = (int)(1.05 * (qreal)(viewParams->radius()));
+
+    QRect rect( viewParams->width() / 2 - radius, viewParams->height() / 2 - radius,
+                2 * radius, 2 * radius);
+    rect = rect.intersect( dirtyRect );
+    painter->drawImage( rect, *viewParams->canvasImage(), rect );
+}
+
+void SphericalScanlineTextureMapper::setRepaintNeeded()
+{
+    m_repaintNeeded = true;
 }
 
 void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer )

@@ -20,6 +20,7 @@
 #include <QtGui/QImage>
 
 // Marble
+#include "GeoPainter.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "StackedTileLoader.h"
@@ -34,11 +35,30 @@ using namespace Marble;
 MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( StackedTileLoader *tileLoader,
                                                               QObject *parent )
     : AbstractScanlineTextureMapper( tileLoader, parent ),
+      m_repaintNeeded( true ),
       m_oldCenterLon( 0.0 ),
       m_oldYPaintedTop( 0 )
 {
 }
 
+void MercatorScanlineTextureMapper::mapTexture( GeoPainter *painter,
+                                                ViewParams *viewParams,
+                                                const QRect &dirtyRect,
+                                                TextureColorizer *texColorizer )
+{
+    if ( m_repaintNeeded ) {
+        mapTexture( viewParams, texColorizer );
+
+        m_repaintNeeded = false;
+    }
+
+    painter->drawImage( dirtyRect, *viewParams->canvasImage(), dirtyRect );
+}
+
+void MercatorScanlineTextureMapper::setRepaintNeeded()
+{
+    m_repaintNeeded = true;
+}
 
 void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer )
 {
