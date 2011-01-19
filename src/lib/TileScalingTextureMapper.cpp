@@ -23,6 +23,7 @@
 // Marble
 #include "StackedTileLoader.h"
 #include "ViewParams.h"
+#include "TextureColorizer.h"
 #include "TileLoaderHelper.h"
 #include "StackedTile.h"
 #include "MathHelper.h"
@@ -37,7 +38,7 @@ TileScalingTextureMapper::TileScalingTextureMapper( StackedTileLoader *tileLoade
 }
 
 
-void TileScalingTextureMapper::mapTexture( ViewParams *viewParams )
+void TileScalingTextureMapper::mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer )
 {
     if ( viewParams->radius() <= 0 )
         return;
@@ -128,6 +129,10 @@ void TileScalingTextureMapper::mapTexture( ViewParams *viewParams )
     m_oldYPaintedTop = yPaintedTop;
 
     m_tileLoader->cleanupTilehash();
+
+    if ( texColorizer ) {
+        texColorizer->colorize( viewParams );
+    }
 }
 
 

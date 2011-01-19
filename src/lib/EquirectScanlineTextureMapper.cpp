@@ -22,6 +22,7 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "StackedTileLoader.h"
+#include "TextureColorizer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
@@ -37,7 +38,7 @@ EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( StackedTileLoader 
 }
 
 
-void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
+void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer )
 {
     QImage  *canvasImage = viewParams->canvasImage();
     const int imageHeight = canvasImage->height();
@@ -191,6 +192,10 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     m_oldYPaintedTop = yPaintedTop;
 
     m_tileLoader->cleanupTilehash();
+
+    if ( texColorizer ) {
+        texColorizer->colorize( viewParams );
+    }
 }
 
 
