@@ -28,6 +28,7 @@ namespace Marble
 
 class StackedTile;
 class StackedTileLoader;
+class TextureColorizer;
 class ViewParams;
 
 class AbstractScanlineTextureMapper : public QObject
@@ -39,7 +40,7 @@ public:
                                             QObject * const parent = 0 );
     ~AbstractScanlineTextureMapper();
 
-    virtual void mapTexture( ViewParams *viewParams ) = 0;
+    virtual void mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer ) = 0;
 
     bool interlaced() const;
     void setInterlaced( const bool enabled );

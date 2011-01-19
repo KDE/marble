@@ -25,7 +25,7 @@ class MercatorScanlineTextureMapper : public AbstractScanlineTextureMapper
  public:
     explicit MercatorScanlineTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
 
-    void mapTexture( ViewParams *viewParams );
+    void mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer );
 
  private:
     float  m_oldCenterLon;

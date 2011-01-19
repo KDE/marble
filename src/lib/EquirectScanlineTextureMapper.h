@@ -25,7 +25,7 @@ class EquirectScanlineTextureMapper : public AbstractScanlineTextureMapper
  public:
     explicit EquirectScanlineTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
 
-    void mapTexture( ViewParams *viewParams );
+    void mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer );
 
  private:
     float  m_oldCenterLon;

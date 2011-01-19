@@ -20,6 +20,7 @@
 #include "MarbleDirs.h"
 #include "Quaternion.h"
 #include "StackedTileLoader.h"
+#include "TextureColorizer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "MathHelper.h"
@@ -34,7 +35,7 @@ SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( StackedTileLoade
     m_interlaced = false;
 }
 
-void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
+void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer )
 {
     QImage       *canvasImage = viewParams->canvasImage();
     const int imageHeight = canvasImage->height();
@@ -223,6 +224,10 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     }
 
     m_tileLoader->cleanupTilehash();
+
+    if ( texColorizer ) {
+        texColorizer->colorize( viewParams );
+    }
 }
 
 
