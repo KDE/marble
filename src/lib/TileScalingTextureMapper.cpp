@@ -32,10 +32,17 @@
 using namespace Marble;
 
 TileScalingTextureMapper::TileScalingTextureMapper( StackedTileLoader *tileLoader,
+                                                    QCache<TileId, QPixmap> *cache,
                                                     QObject *parent )
     : AbstractScanlineTextureMapper( tileLoader, parent ),
-      m_repaintNeeded( true )
+      m_cache( cache ),
+      m_repaintNeeded( true ),
+      m_oldRadius( 0 )
 {
+    connect( m_tileLoader, SIGNAL( tileUpdateAvailable( const TileId & ) ),
+             this, SLOT( updateTile( const TileId & ) ) );
+    connect( m_tileLoader, SIGNAL( tileUpdatesAvailable() ),
+             this, SLOT( updateTiles() ) );
 }
 
 void TileScalingTextureMapper::mapTexture( GeoPainter *painter,
@@ -43,13 +50,17 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter,
                                            const QRect &dirtyRect,
                                            TextureColorizer *texColorizer )
 {
-    if ( m_repaintNeeded ) {
-        mapTexture( viewParams, texColorizer );
+    if ( texColorizer || m_oldRadius != viewParams->radius() ) {
+        if ( m_repaintNeeded ) {
+            mapTexture( painter, viewParams, texColorizer );
 
-        m_repaintNeeded = false;
+            m_repaintNeeded = false;
+        }
+
+        painter->drawImage( dirtyRect, *viewParams->canvasImage(), dirtyRect );
+    } else {
+        mapTexture( painter, viewParams, texColorizer );
     }
-
-    painter->drawImage( dirtyRect, *viewParams->canvasImage(), dirtyRect );
 }
 
 void TileScalingTextureMapper::setRepaintNeeded()
@@ -57,7 +68,7 @@ void TileScalingTextureMapper::setRepaintNeeded()
     m_repaintNeeded = true;
 }
 
-void TileScalingTextureMapper::mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer )
+void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *viewParams, TextureColorizer *texColorizer )
 {
     if ( viewParams->radius() <= 0 )
         return;
@@ -98,33 +109,82 @@ void TileScalingTextureMapper::mapTexture( ViewParams *viewParams, TextureColori
                                qreal( 0.0 ));
     const int maxTileY = qMin( numTilesY * ( yNormalizedCenter + imageHeight/( 8.0 * radius ) ), numTilesY - 1.0 );
 
-    QPainter painter( canvasImage );
-    painter.setRenderHint( QPainter::SmoothPixmapTransform, highQuality );
+    if ( texColorizer || m_oldRadius != radius ) {
+        m_cache->clear();
 
-    for ( int tileY = minTileY; tileY <= maxTileY; ++tileY ) {
-        for ( int tileX = minTileX; tileX <= maxTileX; ++tileX ) {
-            const qreal xLeft   = ( 4.0 * radius ) * ( ( tileX     ) / (qreal)numTilesX - xNormalizedCenter ) + ( imageWidth / 2.0 );
-            const qreal xRight  = ( 4.0 * radius ) * ( ( tileX + 1 ) / (qreal)numTilesX - xNormalizedCenter ) + ( imageWidth / 2.0 );
-            const qreal yTop    = ( 4.0 * radius ) * ( ( tileY     ) / (qreal)numTilesY - yNormalizedCenter ) + ( imageHeight / 2.0 );
-            const qreal yBottom = ( 4.0 * radius ) * ( ( tileY + 1 ) / (qreal)numTilesY - yNormalizedCenter ) + ( imageHeight / 2.0 );
+        QPainter painter( canvasImage );
+        painter.setRenderHint( QPainter::SmoothPixmapTransform, highQuality );
 
-            const QRectF rect = QRectF( QPointF( xLeft, yTop ), QPointF( xRight, yBottom ) );
-            const TileId id = TileId( 0, tileZoomLevel(), ( ( tileX % numTilesX ) + numTilesX ) % numTilesX, tileY );
-            StackedTile *const tile = m_tileLoader->loadTile( id, DownloadBrowse );
-            tile->setUsed( true );
+        for ( int tileY = minTileY; tileY <= maxTileY; ++tileY ) {
+            for ( int tileX = minTileX; tileX <= maxTileX; ++tileX ) {
+                const qreal xLeft   = ( 4.0 * radius ) * ( ( tileX     ) / (qreal)numTilesX - xNormalizedCenter ) + ( imageWidth / 2.0 );
+                const qreal xRight  = ( 4.0 * radius ) * ( ( tileX + 1 ) / (qreal)numTilesX - xNormalizedCenter ) + ( imageWidth / 2.0 );
+                const qreal yTop    = ( 4.0 * radius ) * ( ( tileY     ) / (qreal)numTilesY - yNormalizedCenter ) + ( imageHeight / 2.0 );
+                const qreal yBottom = ( 4.0 * radius ) * ( ( tileY + 1 ) / (qreal)numTilesY - yNormalizedCenter ) + ( imageHeight / 2.0 );
 
-            painter.drawImage( rect, *tile->resultTile() );
+                const QRectF rect = QRectF( QPointF( xLeft, yTop ), QPointF( xRight, yBottom ) );
+                const TileId stackedId = TileId( 0, tileZoomLevel(), ( ( tileX % numTilesX ) + numTilesX ) % numTilesX, tileY );
+                StackedTile *const tile = m_tileLoader->loadTile( stackedId, DownloadBrowse );
+                tile->setUsed( true );
+
+                painter.drawImage( rect, *tile->resultTile() );
+            }
+        }
+
+        if ( texColorizer ) {
+            texColorizer->colorize( viewParams );
+        }
+    } else {
+        QPainter painter( geoPainter->device() );
+        painter.setRenderHint( QPainter::SmoothPixmapTransform, highQuality );
+
+        for ( int tileY = minTileY; tileY <= maxTileY; ++tileY ) {
+            for ( int tileX = minTileX; tileX <= maxTileX; ++tileX ) {
+                const qreal xLeft   = ( 4.0 * radius ) * ( ( tileX     ) / (qreal)numTilesX - xNormalizedCenter ) + ( imageWidth / 2.0 );
+                const qreal xRight  = ( 4.0 * radius ) * ( ( tileX + 1 ) / (qreal)numTilesX - xNormalizedCenter ) + ( imageWidth / 2.0 );
+                const qreal yTop    = ( 4.0 * radius ) * ( ( tileY     ) / (qreal)numTilesY - yNormalizedCenter ) + ( imageHeight / 2.0 );
+                const qreal yBottom = ( 4.0 * radius ) * ( ( tileY + 1 ) / (qreal)numTilesY - yNormalizedCenter ) + ( imageHeight / 2.0 );
+
+                const QRectF rect = QRectF( QPointF( xLeft, yTop ), QPointF( xRight, yBottom ) );
+                const TileId stackedId = TileId( 0, tileZoomLevel(), ( ( tileX % numTilesX ) + numTilesX ) % numTilesX, tileY );
+                StackedTile *const tile = m_tileLoader->loadTile( stackedId, DownloadBrowse );
+                tile->setUsed( true );
+
+                const QSize size = QSize( qCeil( rect.right() - rect.left() ), qCeil( rect.bottom() - rect.top() ) );
+                const int cacheHash = 2 * ( size.width() % 2 ) + ( size.height() % 2 );
+                const TileId cacheId = TileId( cacheHash, stackedId.zoomLevel(), stackedId.x(), stackedId.y() );
+                QPixmap *im = (*m_cache)[cacheId];
+                if ( im == 0 ) {
+                    im = new QPixmap( QPixmap::fromImage( tile->resultTile()->scaled( size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation ) ) );
+                    m_cache->insert( cacheId, im );
+                }
+
+                painter.drawPixmap( rect.topLeft(), *im );
+            }
         }
     }
 
-    painter.end();
-
     m_tileLoader->cleanupTilehash();
 
-    if ( texColorizer ) {
-        texColorizer->colorize( viewParams );
-    }
+    m_oldRadius = radius;
 }
 
+void TileScalingTextureMapper::updateTile( const TileId &stackedId )
+{
+    for ( int i = 0; i < 4; ++i ) {
+        const TileId id = TileId( i, stackedId.zoomLevel(), stackedId.x(), stackedId.y() );
+
+        m_cache->remove( id );
+    }
+
+    emit tileUpdatesAvailable();
+}
+
+void TileScalingTextureMapper::updateTiles()
+{
+    m_cache->clear();
+
+    emit tileUpdatesAvailable();
+}
 
 #include "TileScalingTextureMapper.moc"

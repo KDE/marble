@@ -35,6 +35,11 @@ SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( StackedTileLoade
     , m_repaintNeeded( true )
 {
     m_interlaced = false;
+
+    connect( m_tileLoader, SIGNAL( tileUpdateAvailable( const TileId & ) ),
+             this, SIGNAL( tileUpdatesAvailable() ) );
+    connect( m_tileLoader, SIGNAL( tileUpdatesAvailable() ),
+             this, SIGNAL( tileUpdatesAvailable() ) );
 }
 
 void SphericalScanlineTextureMapper::mapTexture( GeoPainter *painter,
