@@ -105,14 +105,6 @@ public:
     qreal  m_prevLat;
     qreal  m_prevLon;
 
-    // Coordinate transformations:
-
-    // Converts global texture coordinates 
-    // ( with origin in center, measured in pixel) 
-    // to tile coordinates ( measured in pixel )
-    qreal  m_toTileCoordinatesLon;
-    qreal  m_toTileCoordinatesLat;
-
     bool m_interlaced;
 
     StackedTileLoader *m_tileLoader;
@@ -130,6 +122,14 @@ public:
     Q_DISABLE_COPY( AbstractScanlineTextureMapper )
     StackedTile *m_tile;
     int         m_previousRadius;
+
+    // Coordinate transformations:
+
+    // Converts global texture coordinates 
+    // ( with origin in center, measured in pixel) 
+    // to tile coordinates ( measured in pixel )
+    qreal  m_toTileCoordinatesLon;
+    qreal  m_toTileCoordinatesLat;
 
     int         m_tileLevel;
     int         m_globalWidth;

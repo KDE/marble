@@ -29,8 +29,6 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( StackedTileLoader 
       m_maxGlobalY( 0 ),
       m_prevLat( 0.0 ),
       m_prevLon( 0.0 ),
-      m_toTileCoordinatesLon( 0.0 ),
-      m_toTileCoordinatesLat( 0.0 ),
       m_interlaced( false ),
       m_tileLoader( tileLoader ),
       m_tilePosX( 0 ),
@@ -39,6 +37,8 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( StackedTileLoader 
       m_tileSize( tileLoader->tileSize() ),  // cache tile size
       m_tile( 0 ),
       m_previousRadius( 0 ),
+      m_toTileCoordinatesLon( 0.0 ),
+      m_toTileCoordinatesLat( 0.0 ),
       m_tileLevel( 0 ),
       m_globalWidth( 0 ),
       m_globalHeight( 0 ),
@@ -91,8 +91,8 @@ void AbstractScanlineTextureMapper::setRadius( int radius )
     // the center to the upper left corner and subtract the tile position 
     // in that coordinate system. In total this equals a coordinate 
     // transformation to tile coordinates.
-    m_toTileCoordinatesLon = (qreal)(m_globalWidth / 2 - m_tilePosX);
-    m_toTileCoordinatesLat = (qreal)(m_globalHeight / 2 - m_tilePosY);
+    m_toTileCoordinatesLon = (qreal)(0.5 * m_globalWidth - m_tilePosX);
+    m_toTileCoordinatesLat = (qreal)(0.5 * m_globalHeight - m_tilePosY);
 
     if ( changedTileLevel ) {
         m_tileLoader->flush();
@@ -501,11 +501,11 @@ void AbstractScanlineTextureMapper::nextTile( int &posX, int &posY )
     // ( origin upper left, measured in pixels )
 
     m_tilePosX = tileCol * m_tileSize.width();
-    m_toTileCoordinatesLon = (qreal)(m_globalWidth / 2 - m_tilePosX);
+    m_toTileCoordinatesLon = (qreal)(0.5 * m_globalWidth - m_tilePosX);
     posX = lon - m_tilePosX;
 
     m_tilePosY = tileRow * m_tileSize.height();
-    m_toTileCoordinatesLat = (qreal)(m_globalHeight / 2 - m_tilePosY);
+    m_toTileCoordinatesLat = (qreal)(0.5 * m_globalHeight - m_tilePosY);
     posY = lat - m_tilePosY;
 }
 
@@ -541,11 +541,11 @@ void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
     // ( origin upper left, measured in pixels )
 
     m_tilePosX = tileCol * m_tileSize.width();
-    m_toTileCoordinatesLon = (qreal)(m_globalWidth / 2 - m_tilePosX);
+    m_toTileCoordinatesLon = (qreal)(0.5 * m_globalWidth - m_tilePosX);
     posX = lon - m_tilePosX;
 
     m_tilePosY = tileRow * m_tileSize.height();
-    m_toTileCoordinatesLat = (qreal)(m_globalHeight / 2 - m_tilePosY);
+    m_toTileCoordinatesLat = (qreal)(0.5 * m_globalHeight - m_tilePosY);
     posY = lat - m_tilePosY;
 }
 

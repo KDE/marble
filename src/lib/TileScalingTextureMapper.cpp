@@ -83,8 +83,6 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *v
 
     m_tilePosX = 65535;
     m_tilePosY = 65535;
-    m_toTileCoordinatesLon = (qreal)(globalWidth() / 2 - m_tilePosX);
-    m_toTileCoordinatesLat = (qreal)(globalHeight() / 2 - m_tilePosY);
 
     // Reset backend
     m_tileLoader->resetTilehash();

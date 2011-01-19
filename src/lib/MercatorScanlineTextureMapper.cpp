@@ -85,8 +85,6 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams, TextureC
 
     m_tilePosX = 65535;
     m_tilePosY = 65535;
-    m_toTileCoordinatesLon = (qreal)(globalWidth() / 2 - m_tilePosX);
-    m_toTileCoordinatesLat = (qreal)(globalHeight() / 2 - m_tilePosY);
 
     // Calculate how many degrees are being represented per pixel.
     const float rad2Pixel = (float)( 2 * radius ) / M_PI;
