@@ -57,7 +57,7 @@ void TileScalingTextureMapper::mapTexture( ViewParams *viewParams )
 
     // Reset backend
     m_tileLoader->resetTilehash();
-    selectTileLevel( viewParams );
+    setRadius( viewParams->radius() );
 
     // Calculate translation of center point
     qreal centerLon, centerLat;

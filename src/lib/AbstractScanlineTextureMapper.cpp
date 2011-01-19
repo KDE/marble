@@ -53,10 +53,8 @@ AbstractScanlineTextureMapper::~AbstractScanlineTextureMapper()
 }
 
 
-void AbstractScanlineTextureMapper::selectTileLevel( ViewParams * const viewParams )
+void AbstractScanlineTextureMapper::setRadius( int radius )
 {
-    const int radius = viewParams->radius();
-
     // As our tile resolution doubles with each level we calculate
     // the tile level from tilesize and the globe radius via log(2)
 
@@ -77,32 +75,28 @@ void AbstractScanlineTextureMapper::selectTileLevel( ViewParams * const viewPara
 
     if ( tileLevel != m_tileLevel ) {
         m_tileLoader->flush();
-        tileLevelInit( tileLevel );
+
+        //    mDebug() << "Texture Level was set to: " << tileLevel;
+        m_tileLevel = tileLevel;
+
+        m_globalWidth = m_tileSize.width() * m_tileLoader->tileColumnCount( m_tileLevel );
+        m_normGlobalWidth = (qreal)( m_globalWidth / ( 2 * M_PI ) );
+
+        m_globalHeight = m_tileSize.height() * m_tileLoader->tileRowCount( m_tileLevel );
+        m_normGlobalHeight = (qreal)( m_globalHeight /  M_PI );
+
+        m_maxGlobalX = m_globalWidth  - 1;
+        m_maxGlobalY = m_globalHeight - 1;
+
+        // These variables move the origin of global texture coordinates from 
+        // the center to the upper left corner and subtract the tile position 
+        // in that coordinate system. In total this equals a coordinate 
+        // transformation to tile coordinates.
+        m_toTileCoordinatesLon = (qreal)(m_globalWidth / 2 - m_tilePosX);
+        m_toTileCoordinatesLat = (qreal)(m_globalHeight / 2 - m_tilePosY);
+
+        emit tileLevelChanged( m_tileLevel );
     }
-}
-
-
-void AbstractScanlineTextureMapper::tileLevelInit( const int tileLevel )
-{
-    //    mDebug() << "Texture Level was set to: " << tileLevel;
-    m_tileLevel = tileLevel;
-
-    initGlobalWidth();
-    m_normGlobalWidth = (qreal)( m_globalWidth / ( 2 * M_PI ) );
-    initGlobalHeight();
-    m_normGlobalHeight = (qreal)( m_globalHeight /  M_PI );
-
-    m_maxGlobalX = m_globalWidth  - 1;
-    m_maxGlobalY = m_globalHeight - 1;
-
-    // These variables move the origin of global texture coordinates from 
-    // the center to the upper left corner and subtract the tile position 
-    // in that coordinate system. In total this equals a coordinate 
-    // transformation to tile coordinates.
-    m_toTileCoordinatesLon = (qreal)(m_globalWidth / 2 - m_tilePosX);
-    m_toTileCoordinatesLat = (qreal)(m_globalHeight / 2 - m_tilePosY);
-
-    emit tileLevelChanged( m_tileLevel );
 }
 
 
@@ -551,18 +545,6 @@ void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
     m_tilePosY = tileRow * m_tileSize.height();
     m_toTileCoordinatesLat = (qreal)(m_globalHeight / 2 - m_tilePosY);
     posY = lat - m_tilePosY;
-}
-
-void AbstractScanlineTextureMapper::initGlobalWidth()
-{
-    m_globalWidth = m_tileSize.width()
-        * m_tileLoader->tileColumnCount( m_tileLevel );
-}
-
-void AbstractScanlineTextureMapper::initGlobalHeight()
-{
-    m_globalHeight = m_tileSize.height()
-        * m_tileLoader->tileRowCount( m_tileLevel );
 }
 
 #include "AbstractScanlineTextureMapper.moc"
