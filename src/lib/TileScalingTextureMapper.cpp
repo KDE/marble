@@ -34,8 +34,7 @@ using namespace Marble;
 TileScalingTextureMapper::TileScalingTextureMapper( StackedTileLoader *tileLoader,
                                                     QObject *parent )
     : AbstractScanlineTextureMapper( tileLoader, parent ),
-      m_repaintNeeded( true ),
-      m_oldYPaintedTop( 0 )
+      m_repaintNeeded( true )
 {
 }
 
@@ -118,35 +117,6 @@ void TileScalingTextureMapper::mapTexture( ViewParams *viewParams, TextureColori
     }
 
     painter.end();
-
-    int yTop;
-    int yPaintedTop;
-    int yPaintedBottom;
-
-    // Calculate y-range the represented by the center point, yTop and
-    // what actually can be painted
-    yPaintedTop = yTop = (     - yNormalizedCenter ) * ( 4 * radius ) + imageHeight / 2;
-    yPaintedBottom    = ( 1.0 - yNormalizedCenter ) * ( 4 * radius ) + imageHeight / 2;
-
-    if (yPaintedTop < 0)                yPaintedTop = 0;
-    if (yPaintedTop > imageHeight)    yPaintedTop = imageHeight;
-    if (yPaintedBottom < 0)             yPaintedBottom = 0;
-    if (yPaintedBottom > imageHeight) yPaintedBottom = imageHeight;
-
-    // Remove unused lines
-    const int clearStart = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? yPaintedBottom : 0;
-    const int clearStop  = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? imageHeight  : yTop;
-
-    QRgb * const clearBegin = (QRgb*)( canvasImage->scanLine( clearStart ) );
-    QRgb * const clearEnd = (QRgb*)( canvasImage->scanLine( clearStop ) );
-
-    QRgb * it = clearBegin;
-
-    for ( ; it < clearEnd; ++it ) {
-        *(it) = 0;
-    }
-
-    m_oldYPaintedTop = yPaintedTop;
 
     m_tileLoader->cleanupTilehash();
 

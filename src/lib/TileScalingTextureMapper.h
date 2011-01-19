@@ -37,7 +37,6 @@ class TileScalingTextureMapper : public AbstractScanlineTextureMapper
 
  private:
     bool   m_repaintNeeded;
-    int m_oldYPaintedTop;
 };
 
 }
