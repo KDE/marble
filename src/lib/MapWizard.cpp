@@ -168,7 +168,7 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
     QDomDocument xml;
     if( !xml.setContent( result ) )
     {
-        QMessageBox::critical( this, tr( "Error while parsing" ), tr( "Wizard can't parse server's response" ) );
+        QMessageBox::critical( this, tr( "Error while parsing" ), tr( "Wizard cannot parse server's response" ) );
         return;
     }
 
