@@ -38,7 +38,7 @@
         <item row="1" column="0">
          <widget class="QRadioButton" name="m_customCursor">
           <property name="text">
-           <string>&amp;Custom :</string>
+           <string>&amp;Custom:</string>
           </property>
           <attribute name="buttonGroup">
            <string>m_buttonGroup</string>
