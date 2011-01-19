@@ -306,7 +306,7 @@
              </mediaobject>
          </screenshot>         
          <para>
-             The left side lets you to configure which routing backends are queried for routes. Up to five backends are supported by &marble;, two online routers and three offline routers. Online routing requires an Internet connection to query a route. Offline routing works without an Internet connection, but requires you to download and install offline routing maps in advance. The supported routing backends are
+             The left side lets you configure which routing backends are queried for routes. Up to five backends are supported by &marble;, two online routers and three offline routers. Online routing requires an Internet connection to query a route. Offline routing works without an Internet connection, but requires you to download and install offline routing maps in advance. The supported routing backends are
          </para>
          <itemizedlist>
              <listitem>
