@@ -1263,10 +1263,6 @@ MeasureTool *MarbleMap::measureTool()
 
 void MarbleMap::flyTo( const GeoDataLookAt &lookAt )
 {
-    int zoom = zoomFromDistance( lookAt.range() * METER2KM );
-    if ( zoom < minimumZoom() || zoom > maximumZoom() )
-        return; // avoid moving when zooming is impossible
-
     setDistance( lookAt.range() * METER2KM );
     GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
     centerOn( lookAt.longitude( deg ), lookAt.latitude( deg ) );
