@@ -103,9 +103,10 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *v
     const int maxTileX = numTilesX * ( xNormalizedCenter + imageWidth/( 8.0 * radius ) );
 
     const qreal yNormalizedCenter = 0.5 - 0.5 * asinh( tan( centerLat ) ) / M_PI;
-    const int minTileY = qMax( numTilesY * ( yNormalizedCenter - imageHeight/( 8.0 * radius ) ),
-                               qreal( 0.0 ));
-    const int maxTileY = qMin( numTilesY * ( yNormalizedCenter + imageHeight/( 8.0 * radius ) ), numTilesY - 1.0 );
+    const int minTileY = qMax( qreal( numTilesY * ( yNormalizedCenter - imageHeight/( 8.0 * radius ) ) ),
+                               qreal( 0.0 ) );
+    const int maxTileY = qMin( qreal( numTilesY * ( yNormalizedCenter + imageHeight/( 8.0 * radius ) ) ),
+                               qreal( numTilesY - 1.0 ) );
 
     if ( texColorizer || m_oldRadius != radius ) {
         m_cache->clear();
