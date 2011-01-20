@@ -59,7 +59,7 @@ void AbstractScanlineTextureMapper::setRadius( int radius )
     // the tile level from tilesize and the globe radius via log(2)
 
     qreal  linearLevel = ( 4.0 * (qreal)( radius )
-                               / (qreal)( m_tileSize.width() ) );
+                               / (qreal)( m_tileSize.width() * m_tileLoader->tileColumnCount( 0 ) ) );
     int     tileLevel   = 0;
 
     if ( linearLevel < 1.0 )
