@@ -166,6 +166,7 @@ class WeatherItemPrivate
         if ( isWindDirectionShown() ) {
             QString windDirectionString = m_currentWeather.windDirectionString();
             QSizeF windDirectionImageSize;
+            QSvgRenderer s_windIcons( MarbleDirs::path( "weather/wind-arrows.svgz" ) );
             QSizeF windDirectionSizeF = s_windIcons.boundsOnElement( windDirectionString ).size();
             double windDirectionRatio = windDirectionSizeF.width() / windDirectionSizeF.height();
             if ( windDirectionRatio >= imageSizeRatio ) {
@@ -268,7 +269,6 @@ class WeatherItemPrivate
     QHash<QString,QVariant> m_settings;
     
     static QFont s_font;
-    static QSvgRenderer s_windIcons;
 
     // Labels and Layout
     // We are not the owner of these items.
@@ -285,8 +285,6 @@ class WeatherItemPrivate
 #else
     QFont WeatherItemPrivate::s_font = QFont( "Sans Serif", 8 );
 #endif
-
-QSvgRenderer WeatherItemPrivate::s_windIcons( MarbleDirs::path( "weather/wind-arrows.svgz" ) );
 
 WeatherItem::WeatherItem( QObject *parent )
     : AbstractDataPluginItem( parent ),
