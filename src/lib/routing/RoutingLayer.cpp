@@ -243,9 +243,11 @@ void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
         GeoDataDocument* route = m_alternativeRoutesModel->route( i );
         if ( route ) {
             GeoDataLineString* points = AlternativeRoutesModel::waypoints( route );
-            painter->drawPolyline( *points );
-            QRegion region = painter->regionFromPolyline( *points, 8 );
-            m_alternativeRouteRegions.push_back( RequestRegion( i, region ) );
+            if ( points ) {
+                painter->drawPolyline( *points );
+                QRegion region = painter->regionFromPolyline( *points, 8 );
+                m_alternativeRouteRegions.push_back( RequestRegion( i, region ) );
+            }
         }
     }
 }
