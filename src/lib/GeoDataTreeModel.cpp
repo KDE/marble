@@ -471,10 +471,10 @@ void GeoDataTreeModel::setRootDocument( GeoDataDocument* document )
     beginResetModel();
     if ( d->m_ownsRootDocument ) {
         delete d->m_rootDocument;
-        d->m_ownsRootDocument = false;
     }
 
-    d->m_rootDocument = document;
+    d->m_ownsRootDocument = ( document == 0 );
+    d->m_rootDocument = document ? document : new GeoDataDocument;
     endResetModel();
 }
 

@@ -38,6 +38,8 @@ private Q_SLOTS:
 
     void exportBookmarks();
 
+    void importBookmarks();
+
 private:
     Q_PRIVATE_SLOT( d, void updateButtonState() );
 
