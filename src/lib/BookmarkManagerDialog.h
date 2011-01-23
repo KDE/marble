@@ -41,15 +41,15 @@ private Q_SLOTS:
     void importBookmarks();
 
 private:
-    Q_PRIVATE_SLOT( d, void updateButtonState() );
+    Q_PRIVATE_SLOT( d, void updateButtonState() )
 
-    Q_PRIVATE_SLOT( d, void renameFolder() );
+    Q_PRIVATE_SLOT( d, void renameFolder() )
 
-    Q_PRIVATE_SLOT( d, void editBookmark() );
+    Q_PRIVATE_SLOT( d, void editBookmark() )
 
-    Q_PRIVATE_SLOT( d, void filterBookmarksByFolder( const QModelIndex &index ) );
+    Q_PRIVATE_SLOT( d, void filterBookmarksByFolder( const QModelIndex &index ) )
 
-    Q_PRIVATE_SLOT( d, void discardChanges() );
+    Q_PRIVATE_SLOT( d, void discardChanges() )
 
     Q_DISABLE_COPY( BookmarkManagerDialog )
     BookmarkManagerDialogPrivate* const d;
