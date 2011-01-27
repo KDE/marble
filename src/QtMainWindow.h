@@ -18,7 +18,6 @@
 #include <QtCore/QDateTime>
 #include "ControlView.h"
 
-
 class QAction;
 class QLabel;
 class QMenu;
@@ -34,6 +33,7 @@ class QtMarbleConfigDialog;
 class DownloadRegionDialog;
 class RoutingWidget;
 class MapWizard;
+class StackableWindow;
 
 class MainWindow : public QMainWindow
 {
@@ -207,9 +207,9 @@ private:
     QAction *m_toggleRoutingTabAction;
     QAction *m_showTrackingDialogAction;
 
-    QDialog *m_mapViewDialog;
-    QDialog *m_routingDialog;
-    QDialog *m_trackingDialog;
+    StackableWindow *m_mapViewWindow;
+    StackableWindow *m_routingWindow;
+    StackableWindow *m_trackingWindow;
 
     RoutingWidget *m_routingWidget;
 };

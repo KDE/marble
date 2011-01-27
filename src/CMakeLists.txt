@@ -85,8 +85,8 @@ set(marble_HDRS
 )
 
 if (QTONLY)
-  set(marble_SRCS ${marble_SRCS} qtmain.cpp QtMainWindow.cpp)
-  set(marble_HDRS ${marble_HDRS} QtMainWindow.h)
+  set(marble_SRCS ${marble_SRCS} qtmain.cpp QtMainWindow.cpp StackableWindow.cpp)
+  set(marble_HDRS ${marble_HDRS} QtMainWindow.h StackableWindow.h)
 else (QTONLY)
   set(marble_SRCS ${marble_SRCS} kdemain.cpp KdeMainWindow.cpp marble_part.cpp)
   set(marble_HDRS ${marble_HDRS} KdeMainWindow.h)

@@ -53,7 +53,14 @@ public:
     void setWorkOffline( bool offline );
 
     /** Show or hide the "open file..." button. Default is false (not visible) */
-    void setOpenFileButtonVisible( bool visible );
+    void setShowDirectionsButtonVisible( bool visible );
+
+public Q_SLOTS:
+    /** Ask the user for a kml file to open */
+    void openRoute();
+
+    /** Ask the user for a kml file to save the current route to */
+    void saveRoute();
 
 private Q_SLOTS:
     /** Retrieve route directions */
@@ -113,8 +120,8 @@ private Q_SLOTS:
     /** Select the first routing profile if none is selected yet */
     void selectFirstProfile();
 
-    /** Ask the user for a kml file to open */
-    void openRouteFile();
+    /** Show the directions ListView */
+    void showDirections();
 
     /** Update the route request with the given profile */
     void setRoutingProfile( int index );

@@ -228,8 +228,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
 
     connect( d->m_ui.searchButton, SIGNAL( clicked( ) ),
              this, SLOT( retrieveRoute () ) );
-    connect( d->m_ui.openButton, SIGNAL( clicked( bool ) ),
-             this, SLOT( openRouteFile() ) );
+    connect( d->m_ui.showInstructionsButton, SIGNAL( clicked( bool ) ),
+             this, SLOT( showDirections() ) );
     connect( d->m_ui.optionsLabel, SIGNAL( linkActivated( QString ) ),
              this, SLOT( configureProfile() ) );
     connect( d->m_ui.routeComboBox, SIGNAL( currentIndexChanged( int ) ),
@@ -244,7 +244,16 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
         addInputWidget();
     }
     //d->m_ui.descriptionLabel->setVisible( false );
-    setOpenFileButtonVisible( false );
+    setShowDirectionsButtonVisible( false );
+
+    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        d->m_ui.directionsListView->setVisible( false );
+#ifdef Q_WS_MAEMO_5
+        d->m_ui.directionsListView->setAttribute( Qt::WA_Maemo5StackedWindow );
+        d->m_ui.directionsListView->setWindowFlags( Qt::Window );
+        d->m_ui.directionsListView->setWindowTitle( tr( "Directions - Marble" ) );
+#endif // Q_WS_MAEMO_5
+    }
 }
 
 RoutingWidget::~RoutingWidget()
@@ -328,6 +337,10 @@ void RoutingWidget::handleSearchResult( RoutingInputWidget *widget )
     if ( placemarks.size() > 1 ) {
         d->m_widget->centerOn( GeoDataLatLonBox::fromLineString( placemarks ) );
         //d->m_ui.descriptionLabel->setVisible( false );
+    }
+
+    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        d->m_ui.directionsListView->setVisible( true );
     }
 }
 
@@ -464,7 +477,12 @@ void RoutingWidget::configureProfile()
 {
     int index = d->m_ui.routingProfileComboBox->currentIndex();
     if ( index != -1 ) {
-        RoutingProfileSettingsDialog dialog( d->m_widget->model()->pluginManager(), d->m_routingManager->profilesModel(), d->m_widget );
+        RoutingProfileSettingsDialog dialog( d->m_widget->model()->pluginManager(), d->m_routingManager->profilesModel(), this );
+#ifdef Q_WS_MAEMO_5
+        dialog.setAttribute( Qt::WA_Maemo5StackedWindow );
+        dialog.setWindowFlags( Qt::Window );
+        dialog.setWindowTitle( tr( "Routing Profile - Marble" ) );
+#endif // Q_WS_MAEMO_5
         dialog.editProfile( d->m_ui.routingProfileComboBox->currentIndex() );
         d->m_routeRequest->setRoutingProfile( d->m_routingManager->profilesModel()->profiles().at( index ) );
     }
@@ -541,12 +559,12 @@ void RoutingWidget::updateAlternativeRoutes()
     d->m_ui.searchButton->setIcon( QIcon() );
 }
 
-void RoutingWidget::setOpenFileButtonVisible( bool visible )
+void RoutingWidget::setShowDirectionsButtonVisible( bool visible )
 {
-    d->m_ui.openButton->setVisible( visible );
+    d->m_ui.showInstructionsButton->setVisible( visible );
 }
 
-void RoutingWidget::openRouteFile()
+void RoutingWidget::openRoute()
 {
     QString const file = QFileDialog::getOpenFileName( this, tr( "Open Route" ),
                             QString(), tr("KML Files (*.kml)") );
@@ -568,6 +586,23 @@ void RoutingWidget::setRoutingProfile( int index )
 {
     if ( index >= 0 && index < d->m_routingManager->profilesModel()->rowCount() ) {
         d->m_routeRequest->setRoutingProfile( d->m_routingManager->profilesModel()->profiles().at( index ) );
+    }
+}
+
+void RoutingWidget::showDirections()
+{
+    d->m_ui.directionsListView->setVisible( true );
+}
+
+void RoutingWidget::saveRoute()
+{
+    QString const fileName = QFileDialog::getSaveFileName( this,
+                       tr( "Save Route" ), // krazy:exclude=qclasses
+                       QDir::homePath(),
+                       tr( "KML files (*.kml)" ) );
+
+    if ( !fileName.isEmpty() ) {
+        d->m_routingManager->saveRoute( fileName );
     }
 }
 
