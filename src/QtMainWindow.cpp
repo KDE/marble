@@ -279,16 +279,9 @@ void MainWindow::createActions()
      m_addBookmarkAct->setStatusTip(tr("Add Bookmark"));
      connect( m_addBookmarkAct, SIGNAL( triggered() ), this, SLOT( openEditBookmarkDialog() ) );
 
-     m_removeAllBookmarksAct = new QAction( QIcon(":/icons/bookmark-remove.png"), tr("&Remove all Bookmarks"),this);
-     m_removeAllBookmarksAct->setStatusTip(tr("Remove all Bookmarks"));
-     connect( m_removeAllBookmarksAct, SIGNAL( triggered() ), this, SLOT( removeAllBookmarks() ) );
-
      m_manageBookmarksAct = new QAction( QIcon( ":/icons/bookmarks-organize.png" ), tr( "&Manage Bookmarks" ), this);
      m_manageBookmarksAct->setStatusTip( tr( "Manage Bookmarks" ) );
      connect( m_manageBookmarksAct, SIGNAL( triggered() ), this, SLOT( manageBookmarks() ) );
-     m_addBookmarkFolderAct = new QAction( QIcon(":/icons/bookmark-add-folder.png"), tr("&New Bookmark Folder"),this);
-     m_addBookmarkFolderAct->setStatusTip(tr("New Bookmark Folder"));
-     connect( m_addBookmarkFolderAct, SIGNAL( triggered() ), this, SLOT( openNewBookmarkFolderDialog() ) );
      
      // Map Wizard action
      m_mapWizardAct = new QAction( tr("&Create a New Map..."), this );
@@ -487,8 +480,6 @@ void MainWindow::createBookmarkMenu()
 {
     m_bookmarkMenu->clear();
     m_bookmarkMenu->addAction( m_addBookmarkAct );
-    m_bookmarkMenu->addAction( m_addBookmarkFolderAct );
-    m_bookmarkMenu->addAction( m_removeAllBookmarksAct );
     m_bookmarkMenu->addAction( m_manageBookmarksAct );
 
     m_bookmarkMenu->addSeparator();
@@ -537,16 +528,6 @@ void MainWindow::lookAtBookmark( QAction *action)
 
 }
 
-void MainWindow::removeAllBookmarks()
-{
-    QString const title = tr( "Marble" );
-    QString const text = tr( "Are you sure you want to delete all bookmarks?" );
-    QMessageBox::StandardButtons const buttons = QMessageBox::Yes | QMessageBox::No;
-    if ( QMessageBox::question( m_controlView->marbleWidget(), title, text, buttons, QMessageBox::No ) == QMessageBox::Yes ) {
-        m_controlView->marbleWidget()->removeAllBookmarks();
-    }
-}
-
 void MainWindow::manageBookmarks()
 {
     MarbleModel * const model = m_controlView->marbleWidget()->model();
@@ -556,14 +537,6 @@ void MainWindow::manageBookmarks()
     dialog->setAttribute( Qt::WA_Maemo5StackedWindow );
     dialog->setWindowFlags( Qt::Window );
 #endif // Q_WS_MAEMO_5
-    dialog->exec();
-    delete dialog;
-}
-
-void MainWindow::openNewBookmarkFolderDialog()
-{
-    QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( this );
-    dialog->setMarbleWidget( m_controlView->marbleWidget() );
     dialog->exec();
     delete dialog;
 }

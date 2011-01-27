@@ -56,6 +56,7 @@
 #include "AbstractDataPlugin.h"
 #include "EditBookmarkDialog.h"
 #include "BookmarkManager.h"
+#include "BookmarkManagerDialog.h"
 #include "DownloadRegionDialog.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataFolder.h"
@@ -860,21 +861,13 @@ void MarblePart::setupActions()
     connect( m_addBookmarkAction, SIGNAL( triggered( ) ),
              this,                SLOT( openEditBookmarkDialog() ) );
 
-    
-    m_removeAllBookmarksAction = new KAction( this );
-    actionCollection()->addAction( "remove_all_bookmark", m_removeAllBookmarksAction );
-    m_removeAllBookmarksAction->setIcon( KIcon( ":/icons/bookmark-remove.png" ) );
-    m_removeAllBookmarksAction->setText( i18nc( "Remove All Bookmarks", "&Remove All Bookmarks" ) );
-    connect( m_removeAllBookmarksAction, SIGNAL( triggered( ) ),
-             this,                SLOT( removeAllBookmarks() ) );
+    m_manageBookmarksAction = new KAction( this );
+    actionCollection()->addAction( "manage_bookmarks", m_manageBookmarksAction );
+    m_manageBookmarksAction->setText( i18nc( "Manage Bookmarks", "&Manage Bookmarks" ) );
+    m_manageBookmarksAction->setIcon( KIcon( ":/icons/bookmarks-organize.png" ) );
+    connect( m_manageBookmarksAction, SIGNAL( triggered( ) ),
+             this,                SLOT( openManageBookmarksDialog() ) );
 
-    
-    m_addBookmarkFolderAction = new KAction( this );
-    actionCollection()->addAction( "new_bookmark_folder", m_addBookmarkFolderAction );
-    m_addBookmarkFolderAction->setIcon( KIcon( ":/icons/bookmark-add-folder.png" ) );
-    m_addBookmarkFolderAction->setText( i18nc( "New Bookmark Folder", "&New Bookmark Folder" ) );
-    connect( m_addBookmarkFolderAction, SIGNAL( triggered( ) ),
-             this,                SLOT( openNewBookmarkFolderDialog() ) );
 
     createFolderList();
     connect( m_controlView->marbleWidget()->model()->bookmarkManager(),
@@ -1600,19 +1593,10 @@ void MarblePart::openEditBookmarkDialog()
     delete dialog;
 }
 
-void MarblePart::removeAllBookmarks()
+void MarblePart::openManageBookmarksDialog()
 {
-    QString const title = i18nc( "Application name", "Marble" );
-    QString const text = i18n( "Are you sure you want to delete all bookmarks?" );
-    if ( KMessageBox::questionYesNo( widget(), text, title ) == KMessageBox::Yes ) {
-        m_controlView->marbleWidget()->removeAllBookmarks();
-    }
-}
-
-void MarblePart::openNewBookmarkFolderDialog()
-{
-    QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( m_controlView->marbleWidget() );
-    dialog->setMarbleWidget( m_controlView->marbleWidget() );
+    MarbleModel * const model = m_controlView->marbleWidget()->model();
+    QPointer<BookmarkManagerDialog> dialog = new BookmarkManagerDialog( model, m_controlView->marbleWidget() );
     dialog->exec();
     delete dialog;
 }

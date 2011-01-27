@@ -171,10 +171,9 @@ class MarblePart: public KParts::ReadOnlyPart
 
     //Bookmark Menu
     void  openEditBookmarkDialog();
+    void  openManageBookmarksDialog();
     void  createBookmarksListMenu( QMenu *, const GeoDataFolder& );
     void  lookAtBookmark( QAction * );
-    void  removeAllBookmarks();
-    void  openNewBookmarkFolderDialog();
 //    void  createBookmarkMenu();
 
 
@@ -223,8 +222,7 @@ class MarblePart: public KParts::ReadOnlyPart
 
     //Bookmark Menu
     KAction *m_addBookmarkAction;
-    KAction *m_removeAllBookmarksAction;
-    KAction *m_addBookmarkFolderAction;
+    KAction *m_manageBookmarksAction;
     // Actions for the status bar
     KAction      *m_showPositionAction;
     KAction      *m_showDateTimeAction;
