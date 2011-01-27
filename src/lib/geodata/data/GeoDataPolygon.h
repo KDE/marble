@@ -99,10 +99,6 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry
     virtual ~GeoDataPolygon();
 
 
-    /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const;
-
-
 /*!
     \brief Returns whether a Polygon is a closed polygon.
 

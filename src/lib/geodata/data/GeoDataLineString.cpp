@@ -51,11 +51,6 @@ GeoDataLineStringPrivate* GeoDataLineString::p() const
     return static_cast<GeoDataLineStringPrivate*>(d);
 }
 
-const char* GeoDataLineString::nodeType() const
-{
-    return p()->nodeType();
-}
-
 void GeoDataLineStringPrivate::interpolateDateLine( const GeoDataCoordinates & previousCoords,
                                                     const GeoDataCoordinates & currentCoords,
                                                     GeoDataCoordinates & previousAtDateLine,

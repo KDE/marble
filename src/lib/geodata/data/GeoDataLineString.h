@@ -98,10 +98,6 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 */
     virtual ~GeoDataLineString();
 
-    /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const;
-
-
 /*!
     \brief Returns whether a LineString is a closed polygon.
 

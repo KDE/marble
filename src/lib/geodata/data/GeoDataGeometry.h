@@ -52,10 +52,6 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
  public:
     GeoDataGeometry();
     GeoDataGeometry( const GeoDataGeometry& other );
-    GeoDataGeometry( const GeoDataPolygon& other );
-    GeoDataGeometry( const GeoDataPoint& other );
-    GeoDataGeometry( const GeoDataLineString& other );
-    GeoDataGeometry( const GeoDataMultiGeometry& other );
     virtual bool operator==( const GeoDataGeometry& other ) const { Q_UNUSED(other); return false; };
     GeoDataGeometry& operator=( const GeoDataGeometry& other );
     

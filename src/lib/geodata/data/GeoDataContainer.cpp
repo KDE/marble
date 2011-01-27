@@ -50,11 +50,6 @@ GeoDataContainerPrivate* GeoDataContainer::p() const
     return static_cast<GeoDataContainerPrivate*>(d);
 }
 
-const char* GeoDataContainer::nodeType() const
-{
-    return p()->nodeType();
-}
-
 QVector<GeoDataFolder*> GeoDataContainer::folderList() const
 {
     QVector<GeoDataFolder*> results;

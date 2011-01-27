@@ -70,9 +70,4 @@ GeoDataFolderPrivate* GeoDataFolder::p() const
     return static_cast<GeoDataFolderPrivate*>(d);
 }
 
-const char* GeoDataFolder::nodeType() const
-{
-    return p()->nodeType();
-}
-
 }

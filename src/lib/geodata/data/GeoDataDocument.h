@@ -59,7 +59,6 @@ public:
     ~GeoDataDocument();
 
     /// Provides type information for downcasting a GeoData
-    virtual const char* nodeType() const;
     virtual bool isGeoDataDocument() const { return true; }
 
     /**

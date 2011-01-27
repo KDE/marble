@@ -38,34 +38,6 @@ GeoDataGeometry::GeoDataGeometry( const GeoDataGeometry& other )
     d->ref.ref();
 }
 
-GeoDataGeometry::GeoDataGeometry( const GeoDataPoint& other )
-    : GeoDataObject(),
-      d( other.GeoDataGeometry::d )
-{
-    d->ref.ref();
-}
-
-GeoDataGeometry::GeoDataGeometry( const GeoDataPolygon& other )
-    : GeoDataObject(),
-      d( other.GeoDataGeometry::d )
-{
-    d->ref.ref();
-}
-
-GeoDataGeometry::GeoDataGeometry( const GeoDataLineString& other )
-    : GeoDataObject(),
-      d( other.GeoDataGeometry::d )
-{
-    d->ref.ref();
-}
-
-GeoDataGeometry::GeoDataGeometry( const GeoDataMultiGeometry& other )
-    : GeoDataObject(),
-      d( other.GeoDataGeometry::d )
-{
-    d->ref.ref();
-}
-
 GeoDataGeometry::GeoDataGeometry( GeoDataGeometryPrivate* priv )
     : GeoDataObject(),
       d( priv )

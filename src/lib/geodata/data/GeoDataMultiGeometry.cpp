@@ -42,12 +42,6 @@ GeoDataMultiGeometryPrivate* GeoDataMultiGeometry::p() const
     return static_cast<GeoDataMultiGeometryPrivate*>(d);
 }
 
-const char* GeoDataMultiGeometry::nodeType() const
-{
-    return p()->nodeType();
-}
-
-
 GeoDataLatLonAltBox GeoDataMultiGeometry::latLonAltBox() const
 {
     QVector<GeoDataGeometry*>::const_iterator it = p()->m_vector.constBegin();

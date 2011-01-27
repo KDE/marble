@@ -59,11 +59,6 @@ GeoDataPlacemarkPrivate* GeoDataPlacemark::p() const
     return static_cast<GeoDataPlacemarkPrivate*>(d);
 }
 
-const char* GeoDataPlacemark::nodeType() const
-{
-    return p()->nodeType();
-}
-
 GeoDataGeometry* GeoDataPlacemark::geometry() const
 {
     return p()->m_geometry;
