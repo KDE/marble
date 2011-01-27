@@ -15,6 +15,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QHash>
+#include <QtCore/QVector>
 #include <QtGui/QColor>
 #include <QtGui/QAbstractButton>
 
@@ -88,7 +89,7 @@ class PositionMarker  : public RenderPlugin
     void updateSettings();
     void setPosition( const GeoDataCoordinates &position );
     void chooseCustomCursor();
-    void chooseAccuracyCircleColor();
+    void chooseColor();
     void resizeCursor( int step );
 
  private:
@@ -115,7 +116,12 @@ class PositionMarker  : public RenderPlugin
     QHash<QString,QVariant> m_settings;
     float               m_cursorSize;
     QColor              m_acColor;
+    QColor              m_trailColor;
     qreal               m_heading;
+    QVector<GeoDataCoordinates> m_trail;
+    static const int    sm_numTrailPoints = 5;
+    int                 m_visibleTrailPoints;
+    bool                m_showTrail;
 
     static const int sm_defaultSizeStep;
     static const int sm_numResizeSteps;

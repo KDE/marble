@@ -47,8 +47,15 @@ PositionMarker::PositionMarker ()
       ui_configWidget( 0 ),
       m_aboutDialog( 0 ),
       m_configDialog( 0 ),
-      m_settings()
+      m_settings(),
+      m_visibleTrailPoints( 0 )
 {
+    // Create list of rects for trail with increasing size.
+    // Last element is not drawn, it only stores the next position.
+    GeoDataCoordinates coordinates;
+    for( int i = 0; i < sm_numTrailPoints + 1; ++i ) {
+        m_trail.push_back( coordinates );
+    }
     connect( this, SIGNAL( settingsChanged( QString ) ),
              this, SLOT( updateSettings() ) );
 }
@@ -155,7 +162,9 @@ QDialog *PositionMarker::configDialog()
         connect( ui_configWidget->m_resizeSlider, SIGNAL( valueChanged( int ) ),
                  SLOT( resizeCursor( int ) ) );
         connect( ui_configWidget->m_acColorChooserButton, SIGNAL( clicked() ),
-                 SLOT( chooseAccuracyCircleColor() ) );
+                 SLOT( chooseColor() ) );
+        connect( ui_configWidget->m_trailColorChooserButton, SIGNAL( clicked() ),
+                 SLOT( chooseColor() ) );
     }
     return m_configDialog;
 }
@@ -216,6 +225,21 @@ void PositionMarker::update()
             m_dirtyRegion = QRegion();
             m_dirtyRegion += ( m_arrow.boundingRect().toRect() );
             m_dirtyRegion += ( m_previousArrow.boundingRect().toRect() );
+
+            // Check if position has changed.
+            if( !( m_currentPosition == m_trail[sm_numTrailPoints] ) ) {
+                // Move trail forward and add new point.
+                for( int i = 0;  i < sm_numTrailPoints; ++i ) {
+                    m_trail[i] = m_trail[i + 1];
+                }
+                m_trail[sm_numTrailPoints] = m_currentPosition;
+                if( m_visibleTrailPoints == 0 ) {
+                    m_trail[sm_numTrailPoints - 1] = m_trail[sm_numTrailPoints];
+                }
+                if( m_visibleTrailPoints < sm_numTrailPoints ) {
+                    ++m_visibleTrailPoints;
+                }
+            }
         }
     }
 }
@@ -248,6 +272,30 @@ bool PositionMarker::render( GeoPainter *painter,
 
             painter->setBrush( m_acColor );
             painter->drawEllipse( m_currentPosition, width, width );
+        }
+
+        // Draw trail if requested.
+        if( m_showTrail ) {
+            painter->save();
+            // Use selected color to draw trail.
+            painter->setBrush( m_trailColor );
+            painter->setPen( m_trailColor );
+            QRectF trailRect;
+            QPointF trailPoint;
+            float opacity = 1.0;
+            for( int i = sm_numTrailPoints - 1; i >= 0 && i >= sm_numTrailPoints - m_visibleTrailPoints; --i ) {
+                // Get screen coordinates from coordinates on the map.
+                m_viewport->currentProjection()->screenCoordinates( m_trail[i], m_viewport, trailPoint );
+                int size = ( i + 1 ) * 5;
+                trailRect.setX( trailPoint.x() - size / 2.0 );
+                trailRect.setY( trailPoint.y() - size / 2.0 );
+                trailRect.setWidth( size );
+                trailRect.setHeight( size );
+                painter->setOpacity( opacity );
+                painter->drawEllipse( trailRect );
+                opacity -= 0.15;
+            }
+            painter->restore();
         }
 
         if( m_useCustomCursor)
@@ -297,6 +345,12 @@ void PositionMarker::setSettings( QHash<QString,QVariant> settings )
     if( !settings.contains( "acColor" ) ) {
         settings.insert( "acColor", oxygenBrickRed4 );
     }
+    if( !settings.contains( "trailColor" ) ) {
+        settings.insert( "trailColor", QColor( 0, 0, 255 ) );
+    }
+    if( !settings.contains( "showTrail" ) ) {
+        settings.insert( "showTrail", true );
+    }
 
     m_settings = settings;
     readSettings();
@@ -334,6 +388,10 @@ void PositionMarker::readSettings()
     QPalette palette = ui_configWidget->m_acColorChooserButton->palette();
     palette.setColor( QPalette::Button, QColor( m_settings.value( "acColor" ).value<QColor>()) );
     ui_configWidget->m_acColorChooserButton->setPalette( palette );
+    palette = ui_configWidget->m_trailColorChooserButton->palette();
+    palette.setColor( QPalette::Button, QColor( m_settings.value( "trailColor" ).value<QColor>()) );
+    ui_configWidget->m_trailColorChooserButton->setPalette( palette );
+    ui_configWidget->m_trailCheckBox->setChecked( m_settings.value( "showTrail" ).toBool() );
 }
 
 void PositionMarker::writeSettings()
@@ -346,6 +404,8 @@ void PositionMarker::writeSettings()
     m_settings.insert( "cursorPath", m_cursorPath );
     m_settings.insert( "cursorSize", sm_resizeSteps[ui_configWidget->m_resizeSlider->value()] );
     m_settings.insert( "acColor", m_acColor );
+    m_settings.insert( "trailColor", m_trailColor );
+    m_settings.insert( "showTrail", ui_configWidget->m_trailCheckBox->isChecked() );
 
     emit settingsChanged( nameId() );
 }
@@ -357,6 +417,8 @@ void PositionMarker::updateSettings()
     m_cursorSize =  m_settings.value( "cursorSize" ).toFloat();
     loadCustomCursor( m_cursorPath, m_useCustomCursor );
     m_acColor = m_settings.value( "acColor" ).value<QColor>();
+    m_trailColor = m_settings.value( "trailColor" ).value<QColor>();
+    m_showTrail = m_settings.value( "showTrail" ).toBool();
 }
 
 void PositionMarker::setPosition( const GeoDataCoordinates &position )
@@ -406,17 +468,33 @@ void PositionMarker::loadDefaultCursor()
     m_defaultCursor = QPixmap( m_defaultCursorPath ).scaled( 22 * m_cursorSize, 22 * m_cursorSize, Qt::KeepAspectRatio, Qt::SmoothTransformation );
 }
 
-void PositionMarker::chooseAccuracyCircleColor()
+void PositionMarker::chooseColor()
 {
-    QColor c = QColorDialog::getColor( m_acColor, 0, 
-                                       tr( "Please choose the color for the accuracy circle" ), 
-                                       QColorDialog::ShowAlphaChannel );
-    if( c.isValid() )
+    QColor initialColor;
+    if( sender() == ui_configWidget->m_acColorChooserButton ) {
+        initialColor = m_acColor;
+    }
+    else if( sender() == ui_configWidget->m_trailColorChooserButton ) {
+        initialColor = m_trailColor;
+    }
+    QColor color = QColorDialog::getColor( initialColor, NULL, 
+                                           tr( "Please choose a color" ), 
+                                           QColorDialog::ShowAlphaChannel );
+    if( color.isValid() )
     {
-        m_acColor = c;
-        QPalette palette = ui_configWidget->m_acColorChooserButton->palette();
-        palette.setColor( QPalette::Button, m_acColor );
-        ui_configWidget->m_acColorChooserButton->setPalette( palette );
+        QPalette palette;
+        if( sender() == ui_configWidget->m_acColorChooserButton ) {
+            m_acColor = color;
+            palette = ui_configWidget->m_acColorChooserButton->palette();
+            palette.setColor( QPalette::Button, m_acColor );
+            ui_configWidget->m_acColorChooserButton->setPalette( palette );
+        }
+        else if( sender() == ui_configWidget->m_trailColorChooserButton ) {
+            m_trailColor = color;
+            palette = ui_configWidget->m_trailColorChooserButton->palette();
+            palette.setColor( QPalette::Button, m_trailColor );
+            ui_configWidget->m_trailColorChooserButton->setPalette( palette );
+        }
     }
 }
 
