@@ -42,8 +42,8 @@ class NavigationWidgetPrivate
     MarbleWidget           *m_widget;
     QSortFilterProxyModel  *m_sortproxy;
     QString                 m_searchTerm;
-    bool                    m_searchTriggered;
     MarbleRunnerManager    *m_runnerManager;
+    QTimer                  m_deferSearch;
 };
 
 NavigationWidget::NavigationWidget( QWidget *parent, Qt::WindowFlags f )
@@ -51,13 +51,15 @@ NavigationWidget::NavigationWidget( QWidget *parent, Qt::WindowFlags f )
       d( new NavigationWidgetPrivate() )
 {
     d->m_searchTerm.clear();
-    d->m_searchTriggered = false;
     d->m_widget = 0;
 
     d->m_navigationUi.setupUi( this );
 
     d->m_sortproxy = new QSortFilterProxyModel( this );
     d->m_navigationUi.locationListView->setModel( d->m_sortproxy );
+    d->m_deferSearch.setSingleShot( true );
+    connect ( &d->m_deferSearch, SIGNAL( timeout() ),
+              this, SLOT( search()) );
 
     connect( d->m_navigationUi.goHomeButton,     SIGNAL( clicked() ),
              this,                               SIGNAL( goHome() ) );
@@ -160,10 +162,7 @@ void NavigationWidget::searchLineChanged( const QString &search )
     // if search line is empty, restore original geonames
     if ( d->m_searchTerm.isEmpty() )
         setLocations( d->m_widget->placemarkModel() );
-    if ( d->m_searchTriggered )
-        return;
-    d->m_searchTriggered = true;
-    QTimer::singleShot( 0, this, SLOT( search() ) );
+    d->m_deferSearch.start( 500 );
 }
 
 void NavigationWidget::searchReturnPressed()
@@ -176,7 +175,7 @@ void NavigationWidget::searchReturnPressed()
 
 void NavigationWidget::search()
 {
-    d->m_searchTriggered = false;
+    d->m_deferSearch.stop();
     int  currentSelected = d->m_navigationUi.locationListView->currentIndex().row();
     d->m_navigationUi.locationListView->selectItem( d->m_searchTerm );
     if ( currentSelected != d->m_navigationUi.locationListView->currentIndex().row() )
