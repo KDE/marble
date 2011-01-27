@@ -11,7 +11,7 @@
 #include "ImageLoadThread.h"
 
 #include <QtGui/QColor>
-#include "MarbleDebug.h"
+#include "global.h"
 
 #include "TileId.h"
 
@@ -34,7 +34,7 @@ QImage ImageLoadThread::take( const TileId &tileId )
 {
     Q_UNUSED( tileId )
 
-    QImage tile( 675, 675, QImage::Format_RGB32 );
+    QImage tile( c_defaultTileSize, c_defaultTileSize, QImage::Format_RGB32 );
     tile.fill( QColor( 0,0,255,255 ).rgb() );
     return tile;
 } 

@@ -78,6 +78,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     QVector<QUrl> downloadUrls() const;
 
     const QSize tileSize() const;
+    void setTileSize( const QSize &tileSize );
 
     Projection projection() const;
     void setProjection( const Projection );

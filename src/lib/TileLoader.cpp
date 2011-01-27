@@ -77,6 +77,8 @@ QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & stackedTileId,
     // tile was not locally available => trigger download and look for tiles in other levels
     // for scaling
     QImage * replacementTile = scaledLowerLevelTile( tileId );
+    Q_ASSERT( replacementTile && !replacementTile->isNull() );
+
     QSharedPointer<TextureTile> const tile( new TextureTile( tileId, replacementTile ));
     tile->setStackedTileId( stackedTileId );
 
@@ -226,7 +228,9 @@ inline GeoSceneTexture const * TileLoader::findTextureLayer( TileId const & id )
 QString TileLoader::tileFileName( TileId const & tileId ) const
 {
     GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
-    return MarbleDirs::path( textureLayer->relativeTileFileName( tileId ));
+    QString const fileName = textureLayer->relativeTileFileName( tileId );
+    QFileInfo const dirInfo( fileName );
+    return dirInfo.isAbsolute() ? fileName : MarbleDirs::path( fileName );
 }
 
 void TileLoader::triggerDownload( TileId const & id, DownloadUsage const usage )
@@ -242,13 +246,23 @@ QImage * TileLoader::scaledLowerLevelTile( TileId const & id )
 {
     mDebug() << "TileLoader::scaledLowerLevelTile" << id.toString();
 
-    for ( int level = id.zoomLevel() - 1; level >= 0; --level ) {
+    for ( int level = qMax<int>( 0, id.zoomLevel() - 1 ); level >= 0; --level ) {
         int const deltaLevel = id.zoomLevel() - level;
         TileId const replacementTileId( id.mapThemeIdHash(), level,
                                         id.x() >> deltaLevel, id.y() >> deltaLevel );
         QString const fileName = tileFileName( replacementTileId );
         mDebug() << "TileLoader::scaledLowerLevelTile" << "trying" << fileName;
-        QImage const toScale( fileName );
+        QImage toScale( fileName );
+
+        if ( level == 0 && toScale.isNull() ) {
+            mDebug() << "No level zero tile installed in map theme dir. Falling back to a transparent image for now.";
+            GeoSceneTexture const * const textureLayer = findTextureLayer( replacementTileId );
+            QSize tileSize = textureLayer->tileSize();
+            Q_ASSERT( !tileSize.isEmpty() ); // assured by textureLayer
+            toScale = QImage( tileSize, QImage::Format_ARGB32_Premultiplied );
+            toScale.fill( qRgba( 0, 0, 0, 0 ) );
+        }
+
         if ( !toScale.isNull() ) {
             // which rect to scale?
             QSize const size = toScale.size();
@@ -266,7 +280,7 @@ QImage * TileLoader::scaledLowerLevelTile( TileId const & id )
     }
 
     Q_ASSERT_X( false, "scaled image", "level zero image missing" ); // not reached
-    return new QImage();
+    return 0;
 }
 
 }

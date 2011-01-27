@@ -260,6 +260,9 @@ const qreal EARTH_RADIUS = 6378000.0;
 // Maximum level of base tiles
 const int maxBaseTileLevel = 4;
 
+// Default size (width and height) of tiles
+const unsigned int c_defaultTileSize = 675;
+
 class MarbleGlobalPrivate;
 class MarbleLocale;
 

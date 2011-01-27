@@ -724,7 +724,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setInstallMap( document->head()->theme() + "." + d->format );
         texture->setProjection( GeoSceneTexture::Equirectangular );
         int imageWidth = QImage( image ).width();
-        int tileSize = 675;
+        int tileSize = c_defaultTileSize;
         
         float approxMaxTileLevel = log( imageWidth / ( 2.0 * tileSize ) ) / log( 2.0 );
         int  maxTileLevel = 0;

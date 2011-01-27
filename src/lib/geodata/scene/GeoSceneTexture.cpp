@@ -133,18 +133,39 @@ QVector<QUrl> GeoSceneTexture::downloadUrls() const
 
 const QSize GeoSceneTexture::tileSize() const
 {
-    if ( !m_tileSize.isValid() ) {
+    if ( m_tileSize.isEmpty() ) {
         const TileId id( sourceDir(), 0, 0, 0 );
-        const QString path = MarbleDirs::path( relativeTileFileName( id ));
+        QString const fileName = relativeTileFileName( id );
+        QFileInfo const dirInfo( fileName );
+        QString const path = dirInfo.isAbsolute() ? fileName : MarbleDirs::path( fileName );
 
         QImage testTile( path );
-        Q_ASSERT( !testTile.isNull() );
 
-        m_tileSize = testTile.size();
-        Q_ASSERT( !tileSize().isEmpty() );
+        if ( testTile.isNull() ) {
+            mDebug() << "Tile size is missing in dgml and no base tile found in " << themeStr();
+            mDebug() << "Using default tile size " << c_defaultTileSize;
+            m_tileSize = QSize( c_defaultTileSize, c_defaultTileSize );
+        } else {
+            m_tileSize = testTile.size();
+        }
+
+        if ( m_tileSize.isEmpty() ) {
+            mDebug() << "Tile width or height cannot be 0. Falling back to default tile size.";
+            m_tileSize = QSize( c_defaultTileSize, c_defaultTileSize );
+        }
     }
 
+    Q_ASSERT( !m_tileSize.isEmpty() );
     return m_tileSize;
+}
+
+void GeoSceneTexture::setTileSize( const QSize &tileSize )
+{
+    if ( tileSize.isEmpty() ) {
+        mDebug() << "Ignoring invalid tile size " << tileSize;
+    } else {
+        m_tileSize = tileSize;
+    }
 }
 
 GeoSceneTexture::Projection GeoSceneTexture::projection() const
@@ -214,7 +235,8 @@ QString GeoSceneTexture::relativeTileFileName( const TileId &id ) const
 
 QString GeoSceneTexture::themeStr() const
 {
-    return "maps/" + sourceDir();
+    QFileInfo const dirInfo( sourceDir() );
+    return dirInfo.isAbsolute() ? sourceDir() : "maps/" + sourceDir();
 }
 
 QList<DownloadPolicy *> GeoSceneTexture::downloadPolicies() const
