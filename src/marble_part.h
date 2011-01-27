@@ -170,7 +170,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void readPluginSettings();
 
     //Bookmark Menu
-    void  openBookmarkInfoDialog();
+    void  openEditBookmarkDialog();
     void  createBookmarksListMenu( QMenu *, const GeoDataFolder& );
     void  lookAtBookmark( QAction * );
     void  removeAllBookmarks();

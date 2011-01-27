@@ -40,7 +40,7 @@
 
 #include <QtNetwork/QNetworkProxy>
 
-#include "BookmarkInfoDialog.h"
+#include "EditBookmarkDialog.h"
 #include "BookmarkManagerDialog.h"
 #include "CurrentLocationWidget.h"
 //#include "EditBookmarkDialog.h"
@@ -59,7 +59,7 @@
 #include "MarbleClock.h"
 #include "SunLocator.h"
 #include "BookmarkManager.h"
-#include "NewFolderInfoDialog.h"
+#include "NewBookmarkFolderDialog.h"
 #include "GeoDataPlacemark.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
@@ -98,6 +98,9 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
         m_trackingDialog( 0 ),
         m_routingWidget( 0 )
 {
+#ifdef Q_WS_MAEMO_5
+    setAttribute( Qt::WA_Maemo5StackedWindow );
+#endif // Q_WS_MAEMO_5
     setUpdatesEnabled( false );
 
     QString selectedPath = marbleDataPath.isEmpty() ? readMarbleDataPath() : marbleDataPath;
@@ -273,7 +276,7 @@ void MainWindow::createActions()
      m_addBookmarkAct = new QAction( QIcon(":/icons/bookmark-new.png"), tr("&Add Bookmark"),this);
      m_addBookmarkAct->setShortcut(tr("Ctrl+B"));
      m_addBookmarkAct->setStatusTip(tr("Add Bookmark"));
-     connect( m_addBookmarkAct, SIGNAL( triggered() ), this, SLOT( openBookmarkInfoDialog() ) );
+     connect( m_addBookmarkAct, SIGNAL( triggered() ), this, SLOT( openEditBookmarkDialog() ) );
 
      m_removeAllBookmarksAct = new QAction( QIcon(":/icons/bookmark-remove.png"), tr("&Remove all Bookmarks"),this);
      m_removeAllBookmarksAct->setStatusTip(tr("Remove all Bookmarks"));
@@ -324,6 +327,8 @@ void MainWindow::createMenus()
 
         setupZoomButtons();
 
+        m_manageBookmarksAct->setText( tr( "Bookmarks" ) );
+        menuBar()->addAction( m_manageBookmarksAct );
         menuBar()->addAction( m_aboutMarbleAct );
         m_controlView->setSideBarShown( false );
         return;
@@ -545,24 +550,33 @@ void MainWindow::manageBookmarks()
 {
     MarbleModel * const model = m_controlView->marbleWidget()->model();
     QPointer<BookmarkManagerDialog> dialog = new BookmarkManagerDialog( model, this );
+#ifdef Q_WS_MAEMO_5
+    dialog->setButtonBoxVisible( false );
+    dialog->setAttribute( Qt::WA_Maemo5StackedWindow );
+    dialog->setWindowFlags( Qt::Window );
+#endif // Q_WS_MAEMO_5
     dialog->exec();
     delete dialog;
 }
 
 void MainWindow::openNewBookmarkFolderDialog()
 {
-    QPointer<NewFolderInfoDialog> dialog = new NewFolderInfoDialog( m_controlView->marbleWidget());
+    QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( this );
+    dialog->setMarbleWidget( m_controlView->marbleWidget() );
     dialog->exec();
     delete dialog;
 }
 
-void MainWindow::openBookmarkInfoDialog()
+void MainWindow::openEditBookmarkDialog()
 {
-
-    QPointer<BookmarkInfoDialog> dialog = new BookmarkInfoDialog( m_controlView->marbleWidget());
+    MarbleWidget *widget = m_controlView->marbleWidget();
+    QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( widget->model()->bookmarkManager(), widget );
+    dialog->setLookAt( widget->lookAt() );
+    dialog->setMarbleWidget( widget );
     dialog->exec();
     delete dialog;
 }
+
 void MainWindow::createPluginMenus()
 {
     // Remove and delete toolbars if they exist

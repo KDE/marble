@@ -116,7 +116,7 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
     return false;
 }
 
-void BookmarkManager::addBookmark( const GeoDataPlacemark &bookmark, const QString &folderName )
+void BookmarkManager::addBookmark( const GeoDataPlacemark &placemark, const QString &folderName )
 {
     QVector<GeoDataFolder*> bookmarkFolders = folders();
     QVector<GeoDataFolder*>::const_iterator i = bookmarkFolders.constBegin();
@@ -124,8 +124,10 @@ void BookmarkManager::addBookmark( const GeoDataPlacemark &bookmark, const QStri
 
     for ( ; i != end; ++i ) {
         //Folder found where bookmark should be inserted
-        if ( !folderName.compare( ( *i )->name() ) ) {
-            ( *i )->append( new GeoDataPlacemark( bookmark ) );
+        if ( folderName == ( *i )->name() ) {
+            GeoDataPlacemark *bookmark = new GeoDataPlacemark( placemark );
+            bookmark->setVisualCategory( GeoDataDocument::Bookmark );
+            ( *i )->append( bookmark );
             break;
         }
     }

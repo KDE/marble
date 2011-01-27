@@ -71,7 +71,7 @@
        <item row="2" column="0">
         <widget class="QPushButton" name="newFolderButton">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="text">
           <string>New</string>
@@ -86,9 +86,9 @@
         </widget>
        </item>
        <item row="2" column="2">
-        <widget class="QPushButton" name="removeFolderPushButton">
+        <widget class="QPushButton" name="removeFolderButton">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="text">
           <string>Delete</string>
@@ -145,7 +145,7 @@
        <item row="2" column="2">
         <widget class="QPushButton" name="removeBookmarkButton">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="text">
           <string>Delete</string>

@@ -109,7 +109,7 @@ private Q_SLOTS:
     void  handbook();
 
     //Bookmark Menu
-    void  openBookmarkInfoDialog();
+    void  openEditBookmarkDialog();
     void  createBookmarksListMenu(QMenu *m_bookmarksListMenu, const GeoDataFolder &folder);
     void  lookAtBookmark( QAction * action );
     void  removeAllBookmarks();

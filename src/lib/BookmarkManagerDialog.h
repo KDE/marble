@@ -19,6 +19,7 @@
 namespace Marble
 {
 
+class GeoDataDocument;
 class MarbleModel;
 class BookmarkManagerDialogPrivate;
 
@@ -33,6 +34,8 @@ class MARBLE_EXPORT BookmarkManagerDialog : public QDialog, private Ui::UiBookma
     /** Destructor */
     ~BookmarkManagerDialog();
 
+    void setButtonBoxVisible( bool visible );
+
 private Q_SLOTS:
     void saveBookmarks();
 
@@ -41,11 +44,19 @@ private Q_SLOTS:
     void importBookmarks();
 
 private:
+    GeoDataDocument* bookmarkDocument();
+
     Q_PRIVATE_SLOT( d, void updateButtonState() )
+
+    Q_PRIVATE_SLOT( d, void addNewFolder() )
 
     Q_PRIVATE_SLOT( d, void renameFolder() )
 
+    Q_PRIVATE_SLOT( d, void deleteFolder() )
+
     Q_PRIVATE_SLOT( d, void editBookmark() )
+
+    Q_PRIVATE_SLOT( d, void deleteBookmark() )
 
     Q_PRIVATE_SLOT( d, void filterBookmarksByFolder( const QModelIndex &index ) )
 

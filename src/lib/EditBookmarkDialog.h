@@ -11,7 +11,7 @@
 #ifndef MARBLE_BOOKMARKINFODIALOG_H
 #define MARBLE_BOOKMARKINFODIALOG_H
 
-#include "ui_BookmarkInfoDialog.h"
+#include "ui_EditBookmarkDialog.h"
 #include "MarbleWidget.h"
 #include "marble_export.h"
 #include "MarbleRunnerManager.h"
@@ -21,21 +21,36 @@
 namespace Marble
 {
 
-class BookmarkInfoDialogPrivate;
+class EditBookmarkDialogPrivate;
+class BookmarkManager;
 
-class MARBLE_EXPORT BookmarkInfoDialog : public QDialog, private Ui::BookmarkInfoDialog
+class MARBLE_EXPORT EditBookmarkDialog : public QDialog, private Ui::UiEditBookmarkDialog
 {
     Q_OBJECT
 
  public:
-    /** Constructor that uses the widget's center as the bookmark location */
-    explicit BookmarkInfoDialog( MarbleWidget *marbleWidget );
-
-    /** Constructor that uses the given coordinates as the bookmark location */
-    BookmarkInfoDialog( const GeoDataCoordinates &coordinates, MarbleWidget *marbleWidget );
+    explicit EditBookmarkDialog( BookmarkManager *manager, QWidget *parent = 0 );
 
     /** Destructor */
-    ~BookmarkInfoDialog();
+    ~EditBookmarkDialog();
+
+    void setMarbleWidget( MarbleWidget* widget );
+
+    GeoDataPlacemark bookmark() const;
+
+    QString name() const;
+
+    QString folderName() const;
+
+    QString description() const;
+
+    void setName( const QString &name );
+
+    void setLookAt( const GeoDataLookAt &lookAt );
+
+    void setDescription( const QString &text );
+
+    void setFolderName( const QString &name );
 
  private Q_SLOTS:
     void addBookmark();
@@ -47,9 +62,9 @@ class MARBLE_EXPORT BookmarkInfoDialog : public QDialog, private Ui::BookmarkInf
     QString append( const QString &bookmark, const QString &text);
 
  private:
-    Q_DISABLE_COPY( BookmarkInfoDialog )
-    BookmarkInfoDialogPrivate* const d;
-    friend class BookmarkInfoDialogPrivate;
+    Q_DISABLE_COPY( EditBookmarkDialog )
+    EditBookmarkDialogPrivate* const d;
+    friend class EditBookmarkDialogPrivate;
 };
 
 }

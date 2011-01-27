@@ -209,9 +209,9 @@ set(marblewidget_SRCS
     RunnerTask.cpp
 
     BookmarkManager.cpp
-    BookmarkInfoDialog.cpp
+    EditBookmarkDialog.cpp
     BookmarkManagerDialog.cpp
-    NewFolderInfoDialog.cpp
+    NewBookmarkFolderDialog.cpp
 
     PrintOptionsWidget.cpp
     ExternalEditorDialog.cpp
@@ -242,9 +242,9 @@ set (marblewidget_UI
     LatLonEdit.ui
     routing/RoutingWidget.ui
     DataMigrationWidget.ui
-    BookmarkInfoDialog.ui
+    EditBookmarkDialog.ui
     BookmarkManagerDialog.ui
-    NameDialog.ui
+    NewBookmarkFolderDialog.ui
     PrintOptions.ui
     ExternalEditor.ui
     GoToDialog.ui

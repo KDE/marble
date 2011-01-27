@@ -12,6 +12,7 @@
 #include "BookmarkManagerDialog.h"
 #include "BookmarkManager.h"
 #include "BookmarkManager_p.h"
+#include "EditBookmarkDialog.h"
 #include "FileManager.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataDocument.h"
@@ -28,12 +29,15 @@
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "MarbleDataFacade.h"
+#include "NewBookmarkFolderDialog.h"
+#include "MarblePlacemarkModel.h"
 
 #include <QtCore/QPointer>
 #include <QtCore/QFile>
 #include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QFileDialog>
 #include <QtGui/QMessageBox>
+#include <QtGui/QItemSelectionModel>
 
 namespace Marble {
 
@@ -95,11 +99,23 @@ public:
 
     void updateButtonState();
 
+    void addNewFolder();
+
     void renameFolder();
+
+    void deleteFolder();
 
     void editBookmark();
 
+    void deleteBookmark();
+
     void discardChanges();
+
+    QModelIndex bookmarkTreeIndex( const QModelIndex &bookmark ) const;
+
+    QModelIndex folderTreeIndex( const QModelIndex &index ) const;
+
+    void selectFolder( const QString &name = QString() );
 
     GeoDataDocument* openDocument( const QString &file ) const;
 
@@ -146,29 +162,79 @@ BookmarkManagerDialogPrivate::BookmarkManagerDialogPrivate( BookmarkManagerDialo
 
 void BookmarkManagerDialogPrivate::filterBookmarksByFolder( const QModelIndex &index )
 {
-    Q_ASSERT( index.isValid() );
-    QModelIndex const flatModelIndex = m_folderFilterModel->mapToSource( index );
-    Q_ASSERT( flatModelIndex.isValid() );
-    QModelIndex const treeModelIndex = m_folderFlatModel->mapToSource( flatModelIndex );
-    Q_ASSERT( treeModelIndex.isValid() );
-    m_branchFilterModel->setBranchIndex( m_bookmarkFlatModel, treeModelIndex );
+    m_branchFilterModel->setBranchIndex( m_bookmarkFlatModel, folderTreeIndex( index ) );
 }
 
 void BookmarkManagerDialogPrivate::updateButtonState()
 {
     bool const hasFolderSelection = !m_parent->foldersListView->selectionModel()->selectedIndexes().isEmpty();
     m_parent->renameFolderButton->setEnabled( hasFolderSelection );
+    m_parent->removeFolderButton->setEnabled( hasFolderSelection );
 
     bool const hasBookmarkSelection = !m_parent->bookmarksListView->selectionModel()->selectedIndexes().isEmpty();
     m_parent->editBookmarkButton->setEnabled( hasBookmarkSelection );
+    m_parent->removeBookmarkButton->setEnabled( hasBookmarkSelection );
+}
+
+void BookmarkManagerDialogPrivate::addNewFolder()
+{
+    QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( m_parent );
+    if ( dialog->exec() == QDialog::Accepted && !dialog->folderName().isEmpty() ) {
+        GeoDataFolder* folder = new GeoDataFolder;
+        folder->setName( dialog->folderName() );
+        GeoDataDocument* current = m_parent->bookmarkDocument();
+        current->append( folder );
+        m_treeModel->update();
+        selectFolder( folder->name() );
+    }
+    delete dialog;
 }
 
 void BookmarkManagerDialogPrivate::renameFolder()
 {
     QModelIndexList selection = m_parent->foldersListView->selectionModel()->selectedIndexes();
     if ( selection.size() == 1 ) {
-        m_parent->foldersListView->openPersistentEditor( selection.first() );
-        m_parent->foldersListView->setFocus();
+        QModelIndex index = selection.first();
+        Q_ASSERT( index.isValid() );
+        GeoDataObject* object = qvariant_cast<GeoDataObject*>( index.data( MarblePlacemarkModel::ObjectPointerRole ) );
+        Q_ASSERT( object );
+        GeoDataFolder* folder = dynamic_cast<GeoDataFolder*>( object );
+        Q_ASSERT( folder );
+
+        QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( m_parent );
+        dialog->setFolderName( folder->name() );
+        if ( dialog->exec() == QDialog::Accepted ) {
+            folder->setName( dialog->folderName() );
+            m_treeModel->update();
+        }
+        delete dialog;
+    }
+}
+
+void BookmarkManagerDialogPrivate::deleteFolder()
+{
+    QModelIndexList selection = m_parent->foldersListView->selectionModel()->selectedIndexes();
+    if ( selection.size() == 1 ) {
+        QString const folderName = selection.first().data().toString();
+        GeoDataDocument* bookmarkDocument = m_parent->bookmarkDocument();
+        QModelIndex treeIndex = folderTreeIndex( selection.first() );
+        GeoDataFolder* folder = dynamic_cast<GeoDataFolder*>( bookmarkDocument->child( treeIndex.row() ) );
+        if ( folder ) {
+            Q_ASSERT( folder->name() == folderName );
+            if ( folder->size() > 0 ) {
+                QString const text = m_parent->tr( "The folder %1 is not empty. Removing it will delete all bookmarks it contains. Are you sure you want to delete the folder?" ).arg( folderName );
+                if ( QMessageBox::question( m_parent, "Remove Folder - Marble", text, QMessageBox::Yes, QMessageBox::No ) != QMessageBox::Yes) {
+                    return;
+                }
+            }
+
+            m_treeModel->setRootDocument( 0 );
+            bookmarkDocument->remove( treeIndex.row() );
+            delete folder;
+            m_treeModel->setRootDocument( bookmarkDocument );
+            selectFolder();
+            return;
+        }
     }
 }
 
@@ -176,14 +242,119 @@ void BookmarkManagerDialogPrivate::editBookmark()
 {
     QModelIndexList selection = m_parent->bookmarksListView->selectionModel()->selectedIndexes();
     if ( selection.size() == 1 ) {
-        m_parent->bookmarksListView->openPersistentEditor( selection.first() );
-        m_parent->bookmarksListView->setFocus();
+        QModelIndex index = selection.first();
+        Q_ASSERT( index.isValid() );
+        GeoDataObject* object = qvariant_cast<GeoDataObject*>( index.data( MarblePlacemarkModel::ObjectPointerRole ) );
+        Q_ASSERT( object );
+        GeoDataPlacemark* bookmark = dynamic_cast<GeoDataPlacemark*>( object );
+        Q_ASSERT( bookmark );
+        QModelIndex treeIndex = bookmarkTreeIndex( index );
+        Q_ASSERT( treeIndex.isValid() );
+        QModelIndex folderIndex = treeIndex.parent();
+        Q_ASSERT( folderIndex.isValid() );
+        GeoDataObject* folderObject = qvariant_cast<GeoDataObject*>( folderIndex.data( MarblePlacemarkModel::ObjectPointerRole ) );
+        Q_ASSERT( folderObject );
+        GeoDataFolder* folder = dynamic_cast<GeoDataFolder*>( folderObject );
+        Q_ASSERT( folder );
+
+        QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( m_manager, m_parent );
+        dialog->setName( bookmark->name() );
+        dialog->setLookAt( *bookmark->lookAt() );
+        dialog->setDescription( bookmark->description() );
+        dialog->setFolderName( folder->name() );
+        if ( dialog->exec() == QDialog::Accepted ) {
+            m_treeModel->setRootDocument( 0 );
+            GeoDataDocument* bookmarkDocument = m_parent->bookmarkDocument();
+            if ( dialog->folderName() != folder->name() ) {
+                // Folder was changed
+                foreach( GeoDataFolder* existingFolder, bookmarkDocument->folderList() ) {
+                    if ( existingFolder->name() == dialog->folderName() ) {
+                        folder->remove( treeIndex.row() );
+                        existingFolder->append( bookmark );
+                        break;
+                    }
+                }
+            }
+            bookmark->setName( dialog->name() );
+            bookmark->setDescription( dialog->description() );
+            m_treeModel->setRootDocument( bookmarkDocument );
+            selectFolder( dialog->folderName() );
+        }
+        delete dialog;
+    }
+}
+
+void BookmarkManagerDialogPrivate::deleteBookmark()
+{
+    QModelIndexList selection = m_parent->bookmarksListView->selectionModel()->selectedIndexes();
+    if ( selection.size() == 1 ) {
+        QModelIndex index = selection.first();
+        QModelIndex treeModelIndex = bookmarkTreeIndex( index );
+
+        QModelIndex const folderModelIndex = treeModelIndex.parent();
+        Q_ASSERT( folderModelIndex.isValid() );
+
+        GeoDataDocument* bookmarkDocument = m_parent->bookmarkDocument();
+        GeoDataFolder* folder = dynamic_cast<GeoDataFolder*>( bookmarkDocument->child( folderModelIndex.row() ) );
+        if ( folder ) {
+            Q_ASSERT( folder->name() == folderModelIndex.data().toString() );
+            GeoDataPlacemark* bookmark = dynamic_cast<GeoDataPlacemark*>( folder->child( treeModelIndex.row() ) );
+            if ( bookmark ) {
+                Q_ASSERT( bookmark->name() == treeModelIndex.data().toString() );
+                m_treeModel->setRootDocument( 0 );
+                folder->remove( treeModelIndex.row() );
+                delete bookmark;
+                m_treeModel->setRootDocument( bookmarkDocument );
+                selectFolder( folder->name() );
+            }
+        }
     }
 }
 
 void BookmarkManagerDialogPrivate::discardChanges()
 {
     m_manager->loadFile( "bookmarks/bookmarks.kml" );
+}
+
+void BookmarkManagerDialogPrivate::selectFolder( const QString &name )
+{
+    if ( name.isEmpty() ) {
+        if ( m_parent->foldersListView->model()->rowCount() > 0 ) {
+            QModelIndex index = m_parent->foldersListView->model()->index( 0, 0 );
+            m_parent->foldersListView->setCurrentIndex( index );
+        }
+        return;
+    }
+
+    for ( int i=0; i<m_parent->foldersListView->model()->rowCount(); ++i ) {
+        QModelIndex index = m_parent->foldersListView->model()->index( i, 0 );
+        if ( index.data().toString() == name ) {
+            m_parent->foldersListView->setCurrentIndex( index );
+            break;
+        }
+    }
+}
+
+QModelIndex BookmarkManagerDialogPrivate::bookmarkTreeIndex( const QModelIndex &index ) const
+{
+    Q_ASSERT( index.isValid() );
+    QModelIndex const filterModelIndex = m_bookmarkFilterModel->mapToSource( index );
+    Q_ASSERT( filterModelIndex.isValid() );
+    QModelIndex const flatModelIndex = m_branchFilterModel->mapToSource( filterModelIndex );
+    Q_ASSERT( flatModelIndex.isValid() );
+    QModelIndex const treeModelIndex = m_bookmarkFlatModel->mapToSource( flatModelIndex );
+    Q_ASSERT( treeModelIndex.isValid() );
+    return treeModelIndex;
+}
+
+QModelIndex BookmarkManagerDialogPrivate::folderTreeIndex( const QModelIndex &index ) const
+{
+    Q_ASSERT( index.isValid() );
+    QModelIndex const flatModelIndex = m_folderFilterModel->mapToSource( index );
+    Q_ASSERT( flatModelIndex.isValid() );
+    QModelIndex const treeModelIndex = m_folderFlatModel->mapToSource( flatModelIndex );
+    Q_ASSERT( treeModelIndex.isValid() );
+    return treeModelIndex;
 }
 
 void BookmarkManagerDialogPrivate::initializeFoldersView( GeoDataTreeModel* treeModel )
@@ -199,13 +370,18 @@ void BookmarkManagerDialogPrivate::initializeFoldersView( GeoDataTreeModel* tree
 
     m_parent->foldersListView->setModel( m_folderFilterModel );
 
-    m_parent->connect( m_parent->foldersListView, SIGNAL( activated( QModelIndex ) ),
+    m_parent->connect( m_parent->foldersListView->selectionModel(),
+            SIGNAL( currentChanged( QModelIndex, QModelIndex ) ),
             m_parent, SLOT( filterBookmarksByFolder( QModelIndex ) ) );
     m_parent->connect( m_parent->foldersListView->selectionModel(),
                       SIGNAL( selectionChanged( QItemSelection, QItemSelection ) ),
                       m_parent, SLOT( updateButtonState() ) );
     m_parent->connect( m_parent->renameFolderButton, SIGNAL( clicked( bool ) ),
                        m_parent, SLOT( renameFolder() ) );
+    m_parent->connect( m_parent->newFolderButton, SIGNAL( clicked( bool ) ),
+                       m_parent, SLOT( addNewFolder() ) );
+    m_parent->connect( m_parent->removeFolderButton, SIGNAL( clicked( bool ) ),
+                       m_parent, SLOT( deleteFolder() ) );
 }
 
 void BookmarkManagerDialogPrivate::initializeBookmarksView( GeoDataTreeModel* treeModel )
@@ -229,6 +405,8 @@ void BookmarkManagerDialogPrivate::initializeBookmarksView( GeoDataTreeModel* tr
                       m_parent, SLOT( updateButtonState() ) );
     m_parent->connect( m_parent->editBookmarkButton, SIGNAL( clicked( bool ) ),
                        m_parent, SLOT( editBookmark() ) );
+    m_parent->connect( m_parent->removeBookmarkButton, SIGNAL( clicked( bool ) ),
+                       m_parent, SLOT( deleteBookmark() ) );
 }
 
 void BookmarkManagerDialogPrivate::insertBookmark( GeoDataDocument *document, const QString &folderName, GeoDataPlacemark *placemark ) const
@@ -255,7 +433,7 @@ BookmarkManagerDialog::BookmarkManagerDialog( MarbleModel* model, QWidget *paren
     setupUi( this );
 
     d->m_treeModel = new GeoDataTreeModel( this );
-    d->m_treeModel->setRootDocument( model->bookmarkManager()->d->bookmarkDocument() );
+    d->m_treeModel->setRootDocument( bookmarkDocument() );
 
     d->initializeFoldersView( d->m_treeModel );
     d->initializeBookmarksView( d->m_treeModel );
@@ -265,6 +443,8 @@ BookmarkManagerDialog::BookmarkManagerDialog( MarbleModel* model, QWidget *paren
     connect( this, SIGNAL( rejected() ), SLOT( discardChanges() ) );
     connect( exportButton, SIGNAL( clicked() ), this, SLOT( exportBookmarks() ) );
     connect( importButton, SIGNAL( clicked() ), this, SLOT( importBookmarks() ) );
+
+    d->selectFolder();
 }
 
 BookmarkManagerDialog::~BookmarkManagerDialog()
@@ -287,7 +467,7 @@ void BookmarkManagerDialog::exportBookmarks()
         GeoWriter writer;
         writer.setDocumentType( "http://earth.google.com/kml/2.2" );
 
-        if ( !file.open( QIODevice::ReadWrite ) || !writer.write( &file, d->m_manager->d->bookmarkDocument() ) ) {
+        if ( !file.open( QIODevice::ReadWrite ) || !writer.write( &file, bookmarkDocument() ) ) {
             mDebug() << "Could not write the bookmarks file" << fileName;
             QString const text = tr( "Unable to save bookmarks. Please check that the file is writable." );
             QMessageBox::warning( this, tr( "Bookmark Export - Marble" ), text );
@@ -338,7 +518,7 @@ void BookmarkManagerDialog::importBookmarks()
         return;
     }
 
-    GeoDataDocument* current = d->m_manager->d->bookmarkDocument();
+    GeoDataDocument* current = bookmarkDocument();
     d->m_treeModel->setRootDocument( 0 );
 
     bool replaceAll = false;
@@ -416,6 +596,21 @@ void BookmarkManagerDialog::importBookmarks()
     }
 
     d->m_treeModel->setRootDocument( current );
+    d->selectFolder();
+}
+
+GeoDataDocument* BookmarkManagerDialog::bookmarkDocument()
+{
+    return d->m_manager->d->bookmarkDocument();
+}
+
+void BookmarkManagerDialog::setButtonBoxVisible( bool visible )
+{
+    buttonBox->setVisible( visible );
+    if ( !visible ) {
+        disconnect( this, SIGNAL( rejected() ), this, SLOT( discardChanges() ) );
+        connect( this, SIGNAL( rejected() ), SLOT( saveBookmarks() ) );
+    }
 }
 
 }

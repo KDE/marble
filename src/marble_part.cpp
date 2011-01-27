@@ -54,7 +54,7 @@
 // Marble library classes
 #include "AbstractFloatItem.h"
 #include "AbstractDataPlugin.h"
-#include "BookmarkInfoDialog.h"
+#include "EditBookmarkDialog.h"
 #include "BookmarkManager.h"
 #include "DownloadRegionDialog.h"
 #include "GeoDataCoordinates.h"
@@ -70,7 +70,7 @@
 #include "MarbleModel.h"
 #include "MarblePluginSettingsWidget.h"
 #include "MapWizard.h"
-#include "NewFolderInfoDialog.h"
+#include "NewBookmarkFolderDialog.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
 #include "routing/RoutingProfilesWidget.h"
@@ -858,7 +858,7 @@ void MarblePart::setupActions()
     m_addBookmarkAction->setIcon( KIcon( ":/icons/bookmark-new.png" ) );
     m_addBookmarkAction->setShortcut( Qt::CTRL + Qt::Key_B );
     connect( m_addBookmarkAction, SIGNAL( triggered( ) ),
-             this,                SLOT( openBookmarkInfoDialog() ) );
+             this,                SLOT( openEditBookmarkDialog() ) );
 
     
     m_removeAllBookmarksAction = new KAction( this );
@@ -1590,11 +1590,14 @@ void MarblePart::downloadJobRemoved()
     m_downloadProgressBar->setUpdatesEnabled( true );
 }
 
-void MarblePart::openBookmarkInfoDialog()
+void MarblePart::openEditBookmarkDialog()
 {
-    QPointer<BookmarkInfoDialog> m_bookmarkInfoDialog = new BookmarkInfoDialog( m_controlView->marbleWidget() );
-    m_bookmarkInfoDialog->exec();
-    delete m_bookmarkInfoDialog;
+    MarbleWidget *widget = m_controlView->marbleWidget();
+    QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( widget->model()->bookmarkManager(), widget );
+    dialog->setLookAt( widget->lookAt() );
+    dialog->setMarbleWidget( widget );
+    dialog->exec();
+    delete dialog;
 }
 
 void MarblePart::removeAllBookmarks()
@@ -1608,7 +1611,8 @@ void MarblePart::removeAllBookmarks()
 
 void MarblePart::openNewBookmarkFolderDialog()
 {
-    QPointer<NewFolderInfoDialog> dialog = new NewFolderInfoDialog( m_controlView->marbleWidget());
+    QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( m_controlView->marbleWidget() );
+    dialog->setMarbleWidget( m_controlView->marbleWidget() );
     dialog->exec();
     delete dialog;
 }

@@ -24,7 +24,7 @@
 #include "routing/RoutingManager.h"
 #include "routing/RouteRequest.h"
 #include "MarbleRunnerManager.h"
-#include "BookmarkInfoDialog.h"
+#include "EditBookmarkDialog.h"
 #include "GoToDialog.h"
 
 // Qt
@@ -340,7 +340,11 @@ void MarbleWidgetPopupMenu::addBookmark()
 {
     GeoDataCoordinates coordinates;
     if ( mouseCoordinates( &coordinates, m_setHomePointAction ) ) {
-        QPointer<BookmarkInfoDialog> dialog = new BookmarkInfoDialog( coordinates, m_widget );
+        QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( m_widget->model()->bookmarkManager(), m_widget );
+        GeoDataLookAt lookat = m_widget->lookAt();
+        lookat.setCoordinates( coordinates );
+        dialog->setLookAt( lookat );
+        dialog->setMarbleWidget( m_widget );
         dialog->exec();
         delete dialog;
     }
