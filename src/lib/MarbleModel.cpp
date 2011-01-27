@@ -148,6 +148,8 @@ MarbleModel::MarbleModel( QObject *parent )
     t.start();
 
     d->m_dataFacade = new MarbleDataFacade( this );
+    connect(d->m_dataFacade->treeModel(), SIGNAL( dataChanged(QModelIndex,QModelIndex) ),
+            this, SIGNAL( modelChanged() ) );
     connect(d->m_dataFacade->treeModel(), SIGNAL( layoutChanged() ),
             this, SIGNAL( modelChanged() ) );
     connect(d->m_dataFacade->treeModel(), SIGNAL( modelReset() ),
