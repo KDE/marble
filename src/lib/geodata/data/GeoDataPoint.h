@@ -22,11 +22,11 @@
 #include "geodata_export.h"
 #include "GeoDataGeometry.h"
 #include "GeoDataCoordinates.h"
-#include "GeoDataPoint_p.h"
 
 namespace Marble
 {
 
+class GeoDataPointPrivate;
 
 /** 
  * @short A Geometry object representing a 3d point
