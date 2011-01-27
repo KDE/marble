@@ -44,13 +44,14 @@ GeoDataPoint::GeoDataPoint( const GeoDataPoint& other )
 }
 
 GeoDataPoint::GeoDataPoint( const GeoDataCoordinates& other )
-  : GeoDataCoordinates( other )
+  : GeoDataCoordinates( other ),
+  GeoDataGeometry ( new GeoDataPointPrivate )
 {
 }
 
 GeoDataPoint::GeoDataPoint( const GeoDataGeometry& other )
   : GeoDataGeometry( other )
-    
+
 {
 }
 
@@ -61,6 +62,11 @@ GeoDataPoint::GeoDataPoint()
 
 GeoDataPoint::~GeoDataPoint()
 {
+}
+
+GeoDataPointPrivate* GeoDataPoint::p() const
+{
+    return static_cast<GeoDataPointPrivate*>(GeoDataGeometry::d);
 }
 
 const char* GeoDataPoint::nodeType() const

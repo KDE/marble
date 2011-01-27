@@ -77,7 +77,7 @@ void GeoDataPlacemark::setLookAt( GeoDataLookAt *lookAt)
 GeoDataCoordinates GeoDataPlacemark::coordinate() const
 {    
     if( p()->m_geometry ) {
-        if ( p()->m_geometry->geometryId() != GeoDataPointId ) {
+        if ( p()->m_geometry->nodeType() != GeoDataTypes::GeoDataPointType ) {
             return p()->m_geometry->latLonAltBox().center();
         } else {
             return GeoDataCoordinates( *static_cast<GeoDataPoint*>( p()->m_geometry ) );

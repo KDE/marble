@@ -72,12 +72,12 @@ GeoDataGeometryPrivate* GeoDataGeometry::p() const
 
 const char* GeoDataGeometry::nodeType() const
 {
-    return d->nodeType();
+    return p()->nodeType();
 }
 
 EnumGeometryId GeoDataGeometry::geometryId() const
 {
-    return d->geometryId();
+    return p()->geometryId();
 }
 
 GeoDataGeometry& GeoDataGeometry::operator=( const GeoDataGeometry& other )

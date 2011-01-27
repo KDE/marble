@@ -22,6 +22,7 @@
 #include "geodata_export.h"
 #include "GeoDataGeometry.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataPoint_p.h"
 
 namespace Marble
 {
@@ -81,6 +82,10 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
     virtual void unpack( QDataStream& stream );
     
     virtual void detach();
+
+ private:
+    GeoDataPointPrivate* p() const;
+
 };
 
 }
