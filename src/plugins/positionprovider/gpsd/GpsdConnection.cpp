@@ -13,6 +13,7 @@
 #include "MarbleDebug.h"
 
 #include <errno.h>
+#include <clocale>
 
 using namespace Marble;
 /* TRANSLATOR Marble::GpsdConnection */
@@ -21,7 +22,14 @@ GpsdConnection::GpsdConnection( QObject* parent )
     : QObject( parent ),
       m_timer( 0 )
 {
+    m_oldLocale = setlocale( LC_NUMERIC, NULL );
+    setlocale( LC_NUMERIC, "C" );
     connect( &m_timer, SIGNAL( timeout() ), this, SLOT( update() ) );
+}
+
+GpsdConnection::~GpsdConnection()
+{
+    setlocale( LC_NUMERIC, m_oldLocale );
 }
 
 void GpsdConnection::initialize()

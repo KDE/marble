@@ -28,6 +28,8 @@ class GpsdConnection : public QObject
  public:
     GpsdConnection( QObject* parent = 0 );
 
+    ~GpsdConnection();
+
     void initialize();
 
     QString error() const;    
@@ -44,6 +46,7 @@ private:
     QTimer m_timer;
     PositionProviderStatus m_status;
     QString m_error;
+    const char* m_oldLocale;
     
  private slots:
     void update();
