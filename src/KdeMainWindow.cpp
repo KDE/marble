@@ -36,7 +36,7 @@ namespace Marble
 MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
     : KXmlGuiWindow( parent )
 {
-    m_part = new MarblePart( this, this, QStringList() << marbleDataPath );
+    m_part = new MarblePart( this, this, QVariantList() << marbleDataPath );
 
     setCentralWidget( m_part->widget() );
 

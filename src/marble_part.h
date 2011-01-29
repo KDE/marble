@@ -51,7 +51,7 @@ class MarblePart: public KParts::ReadOnlyPart
   Q_OBJECT
 
   public:
-    MarblePart( QWidget *parentWidget, QObject *parent, const QStringList& );
+    MarblePart( QWidget *parentWidget, QObject *parent, const QVariantList& );
     virtual ~MarblePart();
 
     ControlView *controlView() const;

@@ -29,6 +29,7 @@
 #include <QtNetwork/QNetworkProxy>
 
 // KDE
+#include <kaboutdata.h>
 #include <kaction.h>
 #include <kactioncollection.h>
 #include <kapplication.h>
@@ -37,9 +38,10 @@
 #include <kdeversion.h>
 #include <kfiledialog.h>
 #include <kicon.h>
+#include <klocale.h>
 #include <kmenu.h>
 #include <kmessagebox.h>
-#include <kparts/genericfactory.h>
+#include <kpluginfactory.h>
 #include <kparts/statusbarextension.h>
 #include <kstandardaction.h>
 #include <kstatusbar.h>
@@ -106,10 +108,10 @@ namespace
     const char* DATETIME_STRING =  "Time: %1";
 }
 
-typedef KParts::GenericFactory< MarblePart > MarblePartFactory;
-K_EXPORT_COMPONENT_FACTORY( libmarble_part, MarblePartFactory )
+K_PLUGIN_FACTORY(MarblePartFactory, registerPlugin<MarblePart>();)
+K_EXPORT_PLUGIN(MarblePartFactory("marble"))
 
-MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringList &arguments )
+MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantList &arguments )
   : KParts::ReadOnlyPart( parent ),
     m_sunControlDialog( 0 ),
     m_timeControlDialog( 0 ),
@@ -122,8 +124,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     m_distanceLabel( 0 )
 {
     // only set marble data path when a path was given
-    if ( arguments.count() != 0 && !arguments.first().isEmpty() )
-        MarbleDirs::setMarbleDataPath( arguments.first() );
+    if ( arguments.count() != 0 && !arguments.first().toString().isEmpty() )
+        MarbleDirs::setMarbleDataPath( arguments.first().toString() );
 
     // Setting measure system to provide nice standards for all unit questions.
     // This has to happen before any initialization so plugins (for example) can
@@ -138,8 +140,6 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     }
 
     m_controlView = new ControlView( parentWidget );
-
-    setComponentData( MarblePartFactory::componentData() );
 
     setWidget( m_controlView );
 
