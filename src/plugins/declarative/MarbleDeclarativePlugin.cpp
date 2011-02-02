@@ -10,6 +10,7 @@
 
 #include "MarbleDeclarativePlugin.h"
 
+#include "Coordinate.h"
 #include "MarbleDeclarativeWidget.h"
 #include "MarbleDeclarativeRunnerManager.h"
 #include "DeclarativeMapThemeManager.h"
@@ -25,6 +26,9 @@ namespace Declarative
 void MarbleDeclarativePlugin::registerTypes( const char * )
 {
     const char* uri = "org.kde.edu.marble";
+
+    qmlRegisterType<Marble::Declarative::Coordinate>( uri, 0, 11, "Coordinate" );
+
     qmlRegisterType<Marble::Declarative::MarbleWidget>( uri, 0, 11, "MarbleWidget" );
     qmlRegisterType<Marble::Declarative::MarbleRunnerManager>( uri, 0, 11, "MarbleRunnerManager" );
     qmlRegisterType<Marble::Declarative::MapThemeManager>( uri, 0, 11, "MapThemeManager" );

@@ -10,12 +10,14 @@ INCLUDE_DIRECTORIES(
 INCLUDE( ${QT_USE_FILE} )
 
 set( marbleplugin_SRCS
+Coordinate.cpp
 DeclarativeMapThemeManager.cpp
 MapTheme.cpp
 MarbleDeclarativePlugin.cpp
 MarbleDeclarativeRunnerManager.cpp
 MarbleDeclarativeWidget.cpp
-Placemark.cpp )
+Placemark.cpp
+)
 
 marble_add_declarative_plugin( MarbleDeclarativePlugin ${marbleplugin_SRCS})
 qt4_automoc(${marbleplugin_SRCS})

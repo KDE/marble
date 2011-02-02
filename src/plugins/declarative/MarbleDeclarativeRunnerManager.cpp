@@ -49,7 +49,7 @@ QList<QObject*> MarbleRunnerManager::searchResult() const
         GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( data );
         qreal lon = pos.longitude( GeoDataCoordinates::Degree );
         qreal lat = pos.latitude( GeoDataCoordinates::Degree );
-        result << new Placemark( name, lon, lat );
+        result << new Placemark( name, new Coordinate( lon, lat ) );
     }
 
     return result;

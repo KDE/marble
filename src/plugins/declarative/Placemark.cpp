@@ -15,10 +15,10 @@ namespace Marble
 namespace Declarative
 {
 
-Placemark::Placemark( const QString &name, qreal lon, qreal lat, QObject *parent ) :
-    QObject( parent ), m_name( name ), m_longitude( lon ), m_latitude( lat )
+Placemark::Placemark( const QString &name, Coordinate *coordinate, QObject *parent ) :
+    QObject( parent ), m_name( name )
 {
-    // nothing to do
+    m_coordinate.setCoordinates( coordinate->coordinates() );
 }
 
 QString Placemark::name() const
@@ -29,26 +29,18 @@ QString Placemark::name() const
 void Placemark::setName( const QString &name )
 {
     m_name = name;
+    emit nameChanged();
 }
 
-qreal Placemark::longitude() const
+Coordinate *Placemark::coordinate()
 {
-    return m_longitude;
+    return &m_coordinate;
 }
 
-void Placemark::setLongitude( qreal lon )
+void Placemark::setCoordinate( Coordinate *coordinate )
 {
-    m_longitude = lon;
-}
-
-qreal Placemark::latitude() const
-{
-    return m_latitude;
-}
-
-void Placemark::setLatitude( qreal lat )
-{
-    m_latitude = lat;
+    m_coordinate.setCoordinates( coordinate->coordinates() );
+    emit coordinateChanged();
 }
 
 }
