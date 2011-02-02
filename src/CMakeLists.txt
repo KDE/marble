@@ -100,7 +100,7 @@ if (NOT QTONLY)
 
   install(TARGETS marble_part DESTINATION ${PLUGIN_INSTALL_DIR})
   install(FILES marble_part.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-  install(FILES marble_part.rc DESTINATION ${DATA_INSTALL_DIR}/marble_part)
+  install(FILES marble_part.rc DESTINATION ${DATA_INSTALL_DIR}/marble)
 endif (NOT QTONLY)
 
 if(MSVC)
