@@ -83,10 +83,9 @@ Rectangle {
         itemdetails.visible = false
         var result = search.searchResult()
         for( var i=0; i<result.length; ++i ) {
-          var x = map.screenX( result[i].coordinate.longitude, result[i].coordinate.latitude ) - 10
-          var y = map.screenY( result[i].coordinate.longitude, result[i].coordinate.latitude ) - 30
-          if ( x > 0 && y > 0 ) {
-            Search.updateResult( i, result[i].name, x, y )
+          var pixel = map.pixel( result[i].coordinate.longitude, result[i].coordinate.latitude )
+          if ( pixel.x > 10 && pixel.y > 30 ) {
+            Search.updateResult( i, result[i].name, pixel.x-10, pixel.y-30 )
           } else {
             Search.invalidate( i )
           }
@@ -101,10 +100,9 @@ Rectangle {
         var result = search.searchResult()
         Search.prepareResults(result.length)
         for( var i=0; i<result.length; ++i ) {
-          var x = map.screenX( result[i].coordinate.longitude, result[i].coordinate.latitude ) - 10
-          var y = map.screenY( result[i].coordinate.longitude, result[i].coordinate.latitude ) - 30
-          if ( x > 0 && y > 0 ) {
-            Search.createResult( i, result[i].name, x, y, mapcontainer )
+          var pixel = map.pixel( result[i].coordinate.longitude, result[i].coordinate.latitude )
+          if ( pixel.x > 10 && pixel.y > 30 ) {
+            Search.createResult( i, result[i].name, pixel.x-10, pixel.y-30, mapcontainer )
           }
         }
     }

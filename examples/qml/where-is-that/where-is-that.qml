@@ -222,8 +222,9 @@ Rectangle {
   {
     var lon = questionModel.get(questionView.currentIndex).lon
     var lat = questionModel.get(questionView.currentIndex).lat
-    solution.x = map.screenX( lon, lat )
-    solution.y = map.screenY( lon, lat ) - solution.height
+    var pixel = map.pixel( lon, lat )
+    solution.x = pixel.x
+    solution.y = pixel.y  - solution.height
   }
 
   function solve()

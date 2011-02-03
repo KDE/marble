@@ -114,28 +114,16 @@ void MarbleWidget::zoomOut()
     m_marbleWidget->zoomOut();
 }
 
-qreal MarbleWidget::screenX( qreal lon, qreal lat ) const
-{
-    GeoDataCoordinates position( lon, lat, 0, GeoDataCoordinates::Degree );
-    qreal result( 0.0 );
-    qreal y( 0.0 );
-    ViewportParams *viewport = m_marbleWidget->viewport();
-    bool hidden = false;
-    if ( !viewport->currentProjection()->screenCoordinates( position, viewport, result, y, hidden ) || hidden ) {
-        result = 0.0;
-    }
-    return result;
-}
-
-qreal MarbleWidget::screenY( qreal lon, qreal lat ) const
+QPoint MarbleWidget::pixel( qreal lon, qreal lat ) const
 {
     GeoDataCoordinates position( lon, lat, 0, GeoDataCoordinates::Degree );
     qreal x( 0.0 );
-    qreal result( 0.0 );
+    qreal y( 0.0 );
     ViewportParams *viewport = m_marbleWidget->viewport();
     bool hidden = false;
-    if ( !viewport->currentProjection()->screenCoordinates( position, viewport, x, result, hidden ) || hidden ) {
-        result = 0.0;
+    QPoint result;
+    if ( viewport->currentProjection()->screenCoordinates( position, viewport, x, y, hidden ) && !hidden ) {
+        result = QPoint( x, y );
     }
     return result;
 }

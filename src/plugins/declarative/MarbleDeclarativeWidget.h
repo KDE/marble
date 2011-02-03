@@ -12,6 +12,7 @@
 #define DECLARATIVE_MARBLE_WIDGET_H
 
 #include <QtGui/QGraphicsProxyWidget>
+#include <QtCore/QPoint>
 
 namespace Marble
 {
@@ -92,16 +93,10 @@ public Q_SLOTS:
     void zoomOut();
 
     /**
-      * Screen position of the given position, x coordinate
-      * @todo FIXME: Introduce GeoDataCoordinates and use QPoint
+      * Returns the screen position of the given coordinate,
+      * an invalid point if the coordinate is not visible
       */
-    qreal screenX( qreal lon, qreal lat ) const;
-
-    /**
-      * Screen position of the given position, y coordinate
-      * @todo FIXME: Introduce GeoDataCoordinates and use QPoint
-      */
-    qreal screenY( qreal lon, qreal lat ) const;
+    QPoint pixel( qreal longitude, qreal latitude ) const;
 
     /**
       * Returns the coordinate at the given screen position
