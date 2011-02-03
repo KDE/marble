@@ -230,9 +230,8 @@ Rectangle {
   {
     var flon = questionModel.get(questionView.currentIndex).lon
     var flat = questionModel.get(questionView.currentIndex).lat
-    var tlon = map.lon( pointer.x, pointer.y )
-    var tlat = map.lat( pointer.x, pointer.y )
-    var dist = map.distance( flon, flat, tlon, tlat ) / 1000
+    var coordinate = map.coordinate( pointer.x, pointer.y )
+    var dist = coordinate.distance( flon, flat ) / 1000
     messages.text = "Target distance: " + dist.toFixed(1) + " km"
   }
 

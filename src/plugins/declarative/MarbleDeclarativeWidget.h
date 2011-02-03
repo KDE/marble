@@ -21,6 +21,8 @@ class MarbleWidget;
 namespace Declarative
 {
 
+class Coordinate;
+
 /**
   * Wraps a Marble::MarbleWidget, providing access to important properties and methods
   *
@@ -102,22 +104,9 @@ public Q_SLOTS:
     qreal screenY( qreal lon, qreal lat ) const;
 
     /**
-      * Longitude of the given screen position
-      * @todo FIXME: Introduce GeoDataCoordinates and use QPoint
+      * Returns the coordinate at the given screen position
       */
-    qreal lon( int x, int y ) const;
-
-    /**
-      * Latitude of the given screen position
-      * @todo FIXME: Introduce GeoDataCoordinates and use QPoint
-      */
-    qreal lat( int x, int y ) const;
-
-    /**
-      * Distance between two coordinates
-      * @todo FIXME: Introduce GeoDataCoordinates
-      */
-    qreal distance( qreal flon, qreal flat, qreal tlon, qreal tlat );
+    Marble::Declarative::Coordinate *coordinate( int x, int y );
 
 private:
     /** Wrapped MarbleWidget */

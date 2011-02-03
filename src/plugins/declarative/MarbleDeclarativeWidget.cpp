@@ -11,6 +11,7 @@
 #include "MarbleDeclarativeWidget.h"
 
 #include "MapTheme.h"
+#include "Coordinate.h"
 
 #include "GeoDataCoordinates.h"
 #include "MarbleWidget.h"
@@ -139,27 +140,11 @@ qreal MarbleWidget::screenY( qreal lon, qreal lat ) const
     return result;
 }
 
-qreal MarbleWidget::lon( int x, int y ) const
+Coordinate *MarbleWidget::coordinate( int x, int y )
 {
-    qreal result( 0.0 );
-    qreal lat( 0.0 );
-    m_marbleWidget->geoCoordinates( x, y, result, lat );
-    return result;
-}
-
-qreal MarbleWidget::lat( int x, int y ) const
-{
-    qreal lon( 0.0 );
-    qreal result( 0.0 );
-    m_marbleWidget->geoCoordinates( x, y, lon, result );
-    return result;
-}
-
-qreal MarbleWidget::distance( qreal flon, qreal flat, qreal tlon, qreal tlat )
-{
-    GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
-    return EARTH_RADIUS * distanceSphere( GeoDataCoordinates( flon, flat, 0, deg ),
-                                          GeoDataCoordinates( tlon, tlat, 0, deg ) );
+    qreal lat( 0.0 ), lon( 0.0 );
+    m_marbleWidget->geoCoordinates( x, y, lon, lat );
+    return new Coordinate( lon, lat, 0.0, this );
 }
 
 }

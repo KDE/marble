@@ -62,6 +62,9 @@ public:
     /** Change all coordinates at once */
     void setCoordinates( const GeoDataCoordinates &coordinates );
 
+    /** Distance (in meter) to the given coordinate */
+    Q_INVOKABLE qreal distance( qreal longitude, qreal latitude ) const;
+
 Q_SIGNALS:
     void longitudeChanged();
     void latitudeChanged();

@@ -10,6 +10,8 @@
 
 #include "Coordinate.h"
 
+#include "MarbleMath.h"
+
 namespace Marble
 {
 namespace Declarative
@@ -64,6 +66,13 @@ GeoDataCoordinates Coordinate::coordinates() const
 void Coordinate::setCoordinates( const GeoDataCoordinates &coordinates )
 {
     m_coordinate = coordinates;
+}
+
+qreal Coordinate::distance( qreal longitude, qreal latitude ) const
+{
+    GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
+    GeoDataCoordinates other( longitude, latitude, 0, deg );
+    return EARTH_RADIUS * distanceSphere( coordinates(), other );
 }
 
 }
