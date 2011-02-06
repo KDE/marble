@@ -293,7 +293,9 @@ include_directories(
 )
 ####################################################
 # Descend into subdirectories
-add_subdirectory(doc)
+IF( NOT QTONLY )
+  add_subdirectory(doc)
+ENDIF()
 add_subdirectory(src)
 add_subdirectory(data)
 
