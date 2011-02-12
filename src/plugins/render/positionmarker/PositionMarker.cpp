@@ -48,7 +48,8 @@ PositionMarker::PositionMarker ()
       m_aboutDialog( 0 ),
       m_configDialog( 0 ),
       m_settings(),
-      m_visibleTrailPoints( 0 )
+      m_visibleTrailPoints( 0 ),
+      m_showTrail ( false )
 {
     // Create list of rects for trail with increasing size.
     // Last element is not drawn, it only stores the next position.
@@ -343,13 +344,16 @@ void PositionMarker::setSettings( QHash<QString,QVariant> settings )
         settings.insert( "cursorSize", 1.0 );
     }
     if( !settings.contains( "acColor" ) ) {
-        settings.insert( "acColor", oxygenBrickRed4 );
+        QColor defaultColor = oxygenBrickRed4;
+        bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+        defaultColor.setAlpha( smallScreen ? 80 : 40 );
+        settings.insert( "acColor", defaultColor );
     }
     if( !settings.contains( "trailColor" ) ) {
         settings.insert( "trailColor", QColor( 0, 0, 255 ) );
     }
     if( !settings.contains( "showTrail" ) ) {
-        settings.insert( "showTrail", true );
+        settings.insert( "showTrail", false );
     }
 
     m_settings = settings;
