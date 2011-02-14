@@ -12,7 +12,9 @@
 #include "RoutingPlugin.h"
 
 #include "ui_RoutingPlugin.h"
+#include "ui_RoutingConfigDialog.h"
 
+#include "AudioOutput.h"
 #include "GeoDataCoordinates.h"
 #include "GeoPainter.h"
 #include "MarbleDataFacade.h"
@@ -36,6 +38,7 @@
 #include <QtGui/QActionGroup>
 #include <QtGui/QPixmap>
 #include <QtGui/QPlastiqueStyle>
+#include <QtGui/QDialog>
 
 namespace Marble
 {
@@ -55,6 +58,10 @@ public:
     Ui::RoutingPlugin m_widget;
     bool m_nearNextInstruction;
     bool m_guidanceModeEnabled;
+    AudioOutput* m_audio;
+    QHash<QString,QVariant> m_settings;
+    QDialog *m_configDialog;
+    Ui::RoutingConfigDialog m_configUi;
 
     RoutingPluginPrivate( RoutingPlugin* parent );
 
@@ -84,6 +91,8 @@ public:
 
     QString fuzzyDistance( qreal distanceMeter ) const;
 
+    void readSettings();
+
 private:
     RoutingPlugin* m_parent;
 };
@@ -94,6 +103,8 @@ RoutingPluginPrivate::RoutingPluginPrivate( RoutingPlugin *parent ) :
     m_routingModel( 0 ),
     m_nearNextInstruction( false ),
     m_guidanceModeEnabled( false ),
+    m_audio( new AudioOutput( parent ) ),
+    m_configDialog( 0 ),
     m_parent( parent )
 {
     // nothing to do
@@ -257,6 +268,7 @@ void RoutingPluginPrivate::updateDestinationInformation( qint32 remainingTime, q
 
     if ( m_routingModel->rowCount() != 0 ) {
         qreal distanceLeft = m_routingModel->nextInstructionDistance();
+        m_audio->update( m_routingModel->nextTurnIndex(), distanceLeft, m_routingModel->nextTurnType() );
 
         m_nearNextInstruction = distanceLeft < thresholdDistance;
         int fontSize = 1;
@@ -334,6 +346,37 @@ void RoutingPluginPrivate::reverseRoute()
         m_marbleWidget->model()->routingManager()->reverseRoute();
     }
 }
+
+void RoutingPluginPrivate::readSettings()
+{
+    bool const muted = m_settings["muted"].toBool();
+    m_audio->setMuted( muted );
+    bool const sound = m_settings["sound"].toBool();
+    m_audio->setSoundEnabled( sound );
+    QString const speaker = m_settings["speaker"].toString();
+    m_audio->setSpeaker( speaker );
+
+    if ( m_configDialog ) {
+        QStringList const speakers = m_audio->speakers();
+        int const index = speakers.indexOf( QRegExp( speaker ) );
+        m_configUi.speakerComboBox->clear();
+        m_configUi.speakerComboBox->addItems( speakers );
+        m_configUi.speakerComboBox->setCurrentIndex( index );
+        m_configUi.voiceNavigationCheckBox->setChecked( !muted );
+        m_configUi.soundRadioButton->setChecked( sound );
+    }
+}
+
+void RoutingPlugin::writeSettings()
+{
+    Q_ASSERT( d->m_configDialog );
+    d->m_settings["speaker"] = d->m_configUi.speakerComboBox->currentText();
+    d->m_settings["muted"] = !d->m_configUi.voiceNavigationCheckBox->isChecked();
+    d->m_settings["sound"] = d->m_configUi.soundRadioButton->isChecked();
+    d->readSettings();
+    emit settingsChanged( nameId() );
+}
+
 
 RoutingPlugin::RoutingPlugin( const QPointF &position ) :
     AbstractFloatItem( position ),
@@ -448,6 +491,31 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
         d->updateGuidanceModeButton();
     }
     return AbstractFloatItem::eventFilter( object, e );
+}
+
+QHash<QString,QVariant> RoutingPlugin::settings() const
+{
+    return d->m_settings;
+}
+
+void RoutingPlugin::setSettings( QHash<QString,QVariant> settings )
+{
+    d->m_settings = settings;
+    d->readSettings();
+}
+
+QDialog *RoutingPlugin::configDialog()
+{
+    if ( !d->m_configDialog ) {
+        d->m_configDialog = new QDialog;
+        d->m_configUi.setupUi( d->m_configDialog );
+        d->readSettings();
+
+        connect( d->m_configDialog, SIGNAL( accepted() ), this, SLOT( writeSettings() ) );
+        connect( d->m_configDialog, SIGNAL( rejected() ), this, SLOT( readSettings() ) );
+    }
+
+    return d->m_configDialog;
 }
 
 }

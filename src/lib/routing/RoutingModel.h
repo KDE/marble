@@ -14,6 +14,7 @@
 #include "marble_export.h"
 #include "GeoDataLineString.h"
 #include "MarblePlacemarkModel.h"
+#include "routing/instructions/RoutingInstruction.h"
 
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QTime>
@@ -155,6 +156,16 @@ public:
       * Returns an icon indicating the turn type for the next driving instruction
       */
     QPixmap nextInstructionPixmap() const;
+
+    /**
+      * Returns the turn type of the next driving instruction
+      */
+    RoutingInstruction::TurnType nextTurnType() const;
+
+    /**
+      * Returns the index of the next turn point
+      */
+    int nextTurnIndex() const;
 
     /**
       * Returns an icon indicating the turn type for the next but one driving instruction

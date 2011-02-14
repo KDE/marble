@@ -50,6 +50,16 @@ public:
 
     bool eventFilter( QObject *object, QEvent *event );
 
+    virtual QHash<QString,QVariant> settings() const;
+
+    virtual void setSettings( QHash<QString,QVariant> settings );
+
+    QDialog *configDialog();
+
+private Q_SLOTS:
+    /** Write settings */
+    void writeSettings();
+
 private:    
     /** Disable zoom buttons if needed */
     Q_PRIVATE_SLOT( d, void updateZoomButtons() )
@@ -73,6 +83,9 @@ private:
     Q_PRIVATE_SLOT( d, void togglePositionTracking( bool enabled ) )
 
     Q_PRIVATE_SLOT( d, void updateGuidanceModeButton() );
+
+    /** Read settings */
+    Q_PRIVATE_SLOT( d, void readSettings() )
 
     RoutingPluginPrivate* const d;
 };
