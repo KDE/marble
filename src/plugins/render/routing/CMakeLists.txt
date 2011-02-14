@@ -12,3 +12,4 @@ set( routing_UI RoutingPlugin.ui RoutingConfigDialog.ui )
 qt4_wrap_ui( routing_SRCS ${routing_UI} )
 
 marble_add_plugin( RoutingPlugin ${routing_SRCS} )
+target_link_libraries(RoutingPlugin ${QT_PHONON_LIBRARY})
