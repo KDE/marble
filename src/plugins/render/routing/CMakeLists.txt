@@ -7,8 +7,8 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( routing_SRCS RoutingPlugin.cpp )		 
-set( routing_UI RoutingPlugin.ui )
+set( routing_SRCS RoutingPlugin.cpp AudioOutput.cpp )
+set( routing_UI RoutingPlugin.ui RoutingConfigDialog.ui )
 qt4_wrap_ui( routing_SRCS ${routing_UI} )
 
 marble_add_plugin( RoutingPlugin ${routing_SRCS} )

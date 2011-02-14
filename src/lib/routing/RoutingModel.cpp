@@ -24,7 +24,6 @@
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "global.h"
-#include "routing/instructions/RoutingInstruction.h"
 #include "GeoDataExtendedData.h"
 
 #include <QtCore/QBuffer>
@@ -77,6 +76,7 @@ public:
     qreal m_nextInstructionDistance;
     qreal m_currentInstructionLength;
     QPixmap m_nextInstructionPixmap;
+    RoutingInstruction::TurnType m_nextTurnType;
     QPixmap m_followingInstructionPixmap;
     GeoDataCoordinates m_location;
     QString m_nextDescription;
@@ -500,6 +500,7 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
                 if( d->m_nextInstructionIndex != instructions.size() ) {
                     d->m_location = instructions[d->m_nextInstructionIndex].position;
                     d->m_nextDescription = instructions[d->m_nextInstructionIndex].description;
+                    d->m_nextTurnType = instructions[d->m_nextInstructionIndex].turnType;
                     d->m_nextInstructionPixmap = d->m_turnTypePixmaps[instructions[d->m_nextInstructionIndex].turnType];
                     if ( d->m_nextInstructionIndex+1 < instructions.size() ) {
                         d->m_followingInstructionPixmap = d->m_turnTypePixmaps[instructions[d->m_nextInstructionIndex+1].turnType];
@@ -600,9 +601,19 @@ QPixmap RoutingModel::nextInstructionPixmap() const
     return d->m_nextInstructionPixmap;
 }
 
+RoutingInstruction::TurnType RoutingModel::nextTurnType() const
+{
+    return d->m_nextTurnType;
+}
+
 QPixmap RoutingModel::followingInstructionPixmap() const
 {
     return d->m_followingInstructionPixmap;
+}
+
+int RoutingModel::nextTurnIndex() const
+{
+    return d->m_nextInstructionIndex;
 }
 
 } // namespace Marble

@@ -244,3 +244,5 @@ if(NOT APPLE AND NOT WIN32)
     install (FILES icons/hi22-app-marble.png DESTINATION ${ICON_INSTALL_DIR}/hicolor/22x22/apps/ RENAME marble.png)
     install (FILES icons/hi16-app-marble.png DESTINATION ${ICON_INSTALL_DIR}/hicolor/16x16/apps/ RENAME marble.png)
 endif(NOT APPLE AND NOT WIN32 )
+
+install (DIRECTORY audio DESTINATION ${MARBLE_DATA_INSTALL_PATH})
