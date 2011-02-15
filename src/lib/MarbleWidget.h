@@ -174,6 +174,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     virtual ~MarbleWidget();
 
+    /// @name Access to helper objects
+    //@{
+
     /**
      * @brief Return the map that this view shows.
      */
@@ -196,6 +199,91 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Set the input handler
      */
     void setInputHandler( MarbleWidgetInputHandler *handler );
+
+    SunLocator* sunLocator();
+
+    /**
+     * @brief Returns a list of all RenderPlugins on the widget, this includes float items
+     * @return the list of RenderPlugins
+     */
+    QList<RenderPlugin *> renderPlugins() const;
+
+    /**
+     * @brief Returns a list of all FloatItems on the widget
+     * @return the list of the floatItems
+     */
+    QList<AbstractFloatItem *> floatItems() const;
+
+    /**
+     * @brief Returns the FloatItem with the given id
+     * @return The pointer to the requested floatItem,
+     *
+     * If no item is found the null pointer is returned.
+     */
+    AbstractFloatItem * floatItem( const QString &nameId ) const;
+
+    /**
+     * Reads the plugin settings from the passed QSettings.
+     * You shouldn't use this in a KDE application as these use KConfig. Here you could
+     * use MarblePart which is handling this automatically.
+     * @param settings The QSettings object to be used.
+     */
+    void readPluginSettings( QSettings& settings );
+
+    /**
+     * Writes the plugin settings in the passed QSettings.
+     * You shouldn't use this in a KDE application as these use KConfig. Here you could
+     * use MarblePart which is handling this automatically.
+     * @param settings The QSettings object to be used.
+     */
+    void writePluginSettings( QSettings& settings ) const;
+
+    /**
+     * @brief Retrieve the view context (i.e. still or animated map)
+     */
+    ViewContext viewContext() const;
+
+    /**
+     * @brief Return a QAbstractItemModel containing files.
+     */
+    FileViewModel * fileViewModel() const;
+
+    /**
+     * @brief Get the GeoSceneDocument object of the current map theme
+     */
+    GeoSceneDocument * mapTheme() const;
+
+    /**
+     * @brief Returns all widgets of dataPlugins on the position curpos
+     */
+    QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
+
+    RoutingLayer* routingLayer();
+
+    /**
+     * @brief  Get the Projection used for the map
+     * @return @c Spherical         a Globe
+     * @return @c Equirectangular   a flat map
+     * @return @c Mercator          another flat map
+     */
+    Projection projection() const;
+//    int projection() const;
+
+    //@}
+
+    /// @name Visible map area
+    //@{
+
+    /**
+     * @brief Get the ID of the current map theme
+     * To ensure that a unique identifier is being used the theme does NOT
+     * get represented by its name but the by relative location of the file
+     * that specifies the theme:
+     *
+     * Example:
+     *    mapThemeId = "earth/bluemarble/bluemarble.dgml"
+     */
+    QString mapThemeId() const;
 
     /**
      * @brief Return the active region in which it's possible to drag the view using the mouse.
@@ -251,6 +339,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     int maximumZoom() const;
 
+    //@}
+
+    /// @name Position management
+    //@{
+
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the widget.
      * @param lon    the lon coordinate of the requested pixel position
@@ -287,10 +380,29 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return The latitude of the center point in degree.
      */
     qreal centerLatitude() const;
+
+    /**
+     * @brief  Return how much the map will move if one of the move slots are called.
+     * @return The move step.
+     */
+    qreal moveStep();
+
+    /**
+     * @brief  Return the quaternion that specifies the rotation of the globe.
+     * @return The quaternion that describes the rotation of the globe.
+     */
+    Quaternion planetAxis() const;
+
     /**
     * @brief Return the lookAt
     */
     GeoDataLookAt lookAt() const;
+
+    //@}
+
+    /// @name Placemark management
+    //@{
+
     /**
      * @brief Returns the model for all the placemarks on the globe.
      */
@@ -300,12 +412,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Returns the selection model for all the placemarks on the globe.
      */
     QItemSelectionModel *placemarkSelectionModel() const;
-
-    /**
-     * @brief  Return how much the map will move if one of the move slots are called.
-     * @return The move step.
-     */
-    qreal moveStep();
 
     /**
      * @brief  Add a GeoDataPlacemark file to the model. Supported file types are .pnt, .gpx and .kml
@@ -330,22 +436,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     MARBLE_DEPRECATED( void removePlacemarkKey( const QString& key ) );
 
     QVector<QModelIndex> whichFeatureAt( const QPoint& ) const;
+    //@}
 
-    /**
-     * @brief Returns all widgets of dataPlugins on the position curpos
-     */
-    QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
-
-    /**
-     * @brief  Return the quaternion that specifies the rotation of the globe.
-     * @return The quaternion that describes the rotation of the globe.
-     */
-    Quaternion planetAxis() const;
-
-    /**
-     * @brief  Return a QPixmap with the current contents of the widget.
-     */
-    QPixmap mapScreenShot();
+    /// @name Float items and map appearance
+    //@{
 
     /**
      * @brief  Return whether the overview map is visible.
@@ -462,6 +556,27 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool showFrameRate() const;
 
     /**
+     * @brief Retrieve the map quality depending on the view context
+     */
+    MapQuality mapQuality( ViewContext = Still );
+
+    /**
+     * @brief Retrieve whether travels to a point should get animated
+     */
+    bool animationsEnabled() const;
+
+    AngleUnit defaultAngleUnit() const;
+    void setDefaultAngleUnit( AngleUnit angleUnit );
+
+    QFont defaultFont() const;
+    void setDefaultFont( const QFont& font );
+
+    //@}
+
+    /// @name Tile management
+    //@{
+
+    /**
      * @brief  Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
      * @return the limit of persistent tile cache
      */
@@ -473,93 +588,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     quint64 volatileTileCacheLimit() const;
 
-    SunLocator* sunLocator();
+    //@}
 
-    /**
-     * @brief Returns a list of all RenderPlugins on the widget, this includes float items
-     * @return the list of RenderPlugins
-     */
-    QList<RenderPlugin *> renderPlugins() const;
-    /**
-     * @brief Returns a list of all FloatItems on the widget
-     * @return the list of the floatItems
-     */
-    QList<AbstractFloatItem *> floatItems() const;
-    /**
-     * @brief Returns the FloatItem with the given id
-     * @return The pointer to the requested floatItem,
-     *
-     * If no item is found the null pointer is returned.
-     */
-    AbstractFloatItem * floatItem( const QString &nameId ) const;
+    /// @name Bookmark management
+    //@{
 
-    /**
-     * Reads the plugin settings from the passed QSettings.
-     * You shouldn't use this in a KDE application as these use KConfig. Here you could
-     * use MarblePart which is handling this automatically.
-     * @param settings The QSettings object to be used.
-     */
-    void readPluginSettings( QSettings& settings );
-
-    /**
-     * Writes the plugin settings in the passed QSettings.
-     * You shouldn't use this in a KDE application as these use KConfig. Here you could
-     * use MarblePart which is handling this automatically.
-     * @param settings The QSettings object to be used.
-     */
-    void writePluginSettings( QSettings& settings ) const;
-
-    /**
-     * @brief  Get the Projection used for the map
-     * @return @c Spherical         a Globe
-     * @return @c Equirectangular   a flat map
-     * @return @c Mercator          another flat map
-     */
-    Projection projection() const;
-//    int projection() const;
-
-    /**
-     * @brief Get the ID of the current map theme
-     * To ensure that a unique identifier is being used the theme does NOT 
-     * get represented by its name but the by relative location of the file 
-     * that specifies the theme:
-     *
-     * Example: 
-     *    mapThemeId = "earth/bluemarble/bluemarble.dgml"
-     */
-    QString mapThemeId() const;
-
-    /**
-     * @brief Get the GeoSceneDocument object of the current map theme
-     */
-    GeoSceneDocument * mapTheme() const;
-
-    /**
-     * @brief Return a QAbstractItemModel containing files.
-     */
-    FileViewModel * fileViewModel() const;
-
-    /**
-     * @brief Retrieve the map quality depending on the view context 
-     */
-    MapQuality mapQuality( ViewContext = Still );
-
-    /**
-     * @brief Retrieve the view context (i.e. still or animated map) 
-     */
-    ViewContext viewContext() const;
-
-    /**
-     * @brief Retrieve whether travels to a point should get animated 
-     */
-    bool animationsEnabled() const;
-
-    AngleUnit defaultAngleUnit() const;
-    void setDefaultAngleUnit( AngleUnit angleUnit );
-
-    QFont defaultFont() const;
-    void setDefaultFont( const QFont& font );
-    
     void addBookmark( const GeoDataPlacemark &bookmark, const QString &folderName ) const;
 
     /**
@@ -575,15 +608,23 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     void addNewBookmarkFolder( const QString& name ) const;
 
-    RoutingLayer* routingLayer();
+    //@}
+
+    /// @name Miscellaneous
+    //@{
+
+    /**
+     * @brief  Return a QPixmap with the current contents of the widget.
+     */
+    QPixmap mapScreenShot();
+
+    //@}
 
  public Q_SLOTS:
 
-    void updateSun();
-    void centerSun();
-    void setInputEnabled( bool );
-//    void repaintMap();
-    
+    /// @name Position management slots
+    //@{
+
     /**
      * @brief  Zoom the view to a certain zoomlevel
      * @param  zoom  the new zoom level.
@@ -600,7 +641,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void zoomViewBy( int zoomStep, FlyToMode mode = Instant );
 
-    /**
+        /**
      * @brief  Zoom in by the amount zoomStep.
      */
     void zoomIn( FlyToMode mode = Automatic );
@@ -622,7 +663,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void rotateBy( const qreal deltaLon, const qreal deltaLat, FlyToMode mode = Instant );
 
-    /**
+        /**
      * @brief  Rotate the view by the angle specified by a Quaternion.
      * @param  incRot a quaternion specifying the rotation
      */
@@ -673,19 +714,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setCenterLongitude( qreal lon, FlyToMode mode = Instant );
 
     /**
-     * @brief  Set the Projection used for the map
-     * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
-     */
-    void setProjection( int        projection );
-    void setProjection( Projection projection );
-
-    /**
      * @brief  Get the home point
      * @param  lon  the longitude of the home point.
      * @param  lat  the latitude of the home point.
      * @param  zoom the default zoom level of the home point.
      */
     void home( qreal &lon, qreal &lat, int& zoom );
+
     /**
      * @brief  Set the home point
      * @param  lon  the longitude of the new home point.
@@ -693,6 +728,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  zoom the default zoom level for the new home point.
      */
     void setHome( qreal lon, qreal lat, int zoom = 1050 );
+
     /**
      * @brief  Set the home point
      * @param  homePoint  the new home point.
@@ -704,14 +740,17 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Move left by the moveStep.
      */
     void moveLeft( FlyToMode mode = Automatic );
+
     /**
      * @brief  Move right by the moveStep.
      */
     void moveRight( FlyToMode mode = Automatic );
+
     /**
      * @brief  Move up by the moveStep.
      */
     void moveUp( FlyToMode mode = Automatic );
+
     /**
      * @brief  Move down by the moveStep.
      */
@@ -721,6 +760,34 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Center the view on the default start point with the default zoom.
      */
     void goHome( FlyToMode mode = Automatic );
+
+    /**
+      * @brief Change the camera position to the given position.
+      * @param lookAt New camera position. Changing the camera position means
+      * that both the current center position as well as the zoom value may change
+      * @param mode Interpolation type for intermediate camera positions. Automatic
+      * (default) chooses a suitable interpolation among Instant, Lenar and Jump.
+      * Instant will directly set the new zoom and position values, while
+      * Linear results in a linear interpolation of intermediate center coordinates
+      * along the sphere and a linear interpolation of changes in the camera distance
+      * to the ground. Finally, Jump will behave the same as Linear with regard to
+      * the center position interpolation, but use a parabolic height increase
+      * towards the middle point of the intermediate positions. This appears
+      * like a jump of the camera.
+      */
+    void flyTo( const GeoDataLookAt &lookAt, FlyToMode mode = Automatic );
+
+    //@}
+
+    /// @name Float items and map appearance slots
+    //@{
+
+    /**
+     * @brief  Set the Projection used for the map
+     * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
+     */
+    void setProjection( int        projection );
+    void setProjection( Projection projection );
 
     /**
      * @brief Set a new map theme
@@ -864,10 +931,25 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void setShowTileId( bool visible );
 
-     /**
-     * @brief Used to notify about the position of the mouse click
-      */
-    void notifyMouseClick( int x, int y );
+    /**
+     * @brief Set the map quality depending on the view context
+     */
+    void setMapQuality( MapQuality, ViewContext = Still );
+
+    /**
+     * @brief Set the view context (i.e. still or animated map)
+     */
+    void setViewContext( ViewContext viewContext );
+
+    /**
+     * @brief Set whether travels to a point should get animated
+     */
+    void setAnimationsEnabled( bool enabled );
+
+    //@}
+
+    /// @name Geo data management slots
+    //@{
 
     /**
      * @brief Opens a gpx file for viewing on the Marble Widget
@@ -884,7 +966,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief  Add GeoData data as string to the model.
      * @param  data  the string containing the Placemarks.
-     * @param key  the string needed to identify the data
+     * @param  key  the string needed to identify the data
      */
     void addGeoDataString( const QString& data, const QString& key = "data" );
 
@@ -893,6 +975,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param key  either the filename or the string used to identify the data in addGeoDataFile and addGeoDataString
      */
     void removeGeoData( const QString& key );
+
+    //@}
+
+    /// @name Tile management slots
+    //@{
 
     void clearPersistentTileCache();
     /**
@@ -929,49 +1016,41 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void creatingTilesStart( TileCreator *creator, const QString& name, const QString& description );
 
     /**
-     * Schedule repaint
-     */
-    void scheduleRepaint( const QRegion& dirtyRegion );
-
-    /**
-     * @brief Set the map quality depending on the view context 
-     */
-    void setMapQuality( MapQuality, ViewContext = Still );
-
-    /**
-     * @brief Set the view context (i.e. still or animated map) 
-     */
-    void setViewContext( ViewContext viewContext );
-
-    /**
-     * @brief Set whether travels to a point should get animated 
-     */
-    void setAnimationsEnabled( bool enabled );
-
-    void setSelection( const QRect& region );
-    
-    /**
-      * @brief Change the camera position to the given position.
-      * @param lookAt New camera position. Changing the camera position means
-      * that both the current center position as well as the zoom value may change
-      * @param mode Interpolation type for intermediate camera positions. Automatic
-      * (default) chooses a suitable interpolation among Instant, Lenar and Jump.
-      * Instant will directly set the new zoom and position values, while
-      * Linear results in a linear interpolation of intermediate center coordinates
-      * along the sphere and a linear interpolation of changes in the camera distance
-      * to the ground. Finally, Jump will behave the same as Linear with regard to
-      * the center position interpolation, but use a parabolic height increase 
-      * towards the middle point of the intermediate positions. This appears
-      * like a jump of the camera.
-      */
-    void flyTo( const GeoDataLookAt &lookAt, FlyToMode mode = Automatic );
-
-    /**
      * @brief Re-download all visible tiles.
      */
     void reloadMap();
 
     void downloadRegion( QString const & sourceDir, QVector<TileCoordsPyramid> const & );
+
+    //@}
+
+    /// @name Display update slots
+    //@{
+
+    void updateSun();
+    void centerSun();
+//    void repaintMap();
+
+    /**
+     * Schedule repaint
+     */
+    void scheduleRepaint( const QRegion& dirtyRegion );
+
+    //@}
+
+    /// @name Miscellaneous slots
+    //@{
+
+    /**
+     * @brief Used to notify about the position of the mouse click
+      */
+    void notifyMouseClick( int x, int y );
+
+    void setSelection( const QRect& region );
+
+    void setInputEnabled( bool );
+
+    //@}
 
  Q_SIGNALS:
     /**
