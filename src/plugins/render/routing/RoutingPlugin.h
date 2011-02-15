@@ -54,7 +54,7 @@ public:
 
     virtual void setSettings( QHash<QString,QVariant> settings );
 
-    QDialog *configDialog();
+    QDialog *configDialog() const;
 
 private Q_SLOTS:
     /** Write settings */

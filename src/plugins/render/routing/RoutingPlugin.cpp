@@ -259,6 +259,11 @@ void RoutingPluginPrivate::toggleGuidanceMode( bool enabled )
     }
 
     m_marbleWidget->model()->routingManager()->setGuidanceModeEnabled( enabled );
+
+    if ( enabled ) {
+        m_audio->announceStart();
+    }
+
     forceRepaint();
 }
 
@@ -312,6 +317,7 @@ void RoutingPluginPrivate::updateInstructionLabel( int fontSize, qreal remaining
                 m_widget.instructionLabel->setText( indicatorText.arg( instructionDistance * METER2KM, 0, 'f', 1 ).arg( " km " ) );
             }
         } else {
+            m_audio->announceDestination();
             QString content = "Arrived at destination. <a href=\"#reverse\">Calculate the way back.</a>";
             m_widget.instructionLabel->setText( richText( "%1", fontSize ).arg( content ) );
         }
@@ -504,7 +510,7 @@ void RoutingPlugin::setSettings( QHash<QString,QVariant> settings )
     d->readSettings();
 }
 
-QDialog *RoutingPlugin::configDialog()
+QDialog *RoutingPlugin::configDialog() const
 {
     if ( !d->m_configDialog ) {
         d->m_configDialog = new QDialog;
