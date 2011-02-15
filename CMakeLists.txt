@@ -34,15 +34,15 @@ INCLUDE (CTest)
 ENABLE_TESTING()
 
 
-if( QTONLY )
+if( QTONLY AND NOT WIN32 )
     option( BUILD_MARBLE_TESTS "build marble tests if building QTONLY " ON )
     if( BUILD_MARBLE_TESTS )
         INCLUDE(CTest)
     endif( BUILD_MARBLE_TESTS )
-else( QTONLY )
+else()
     # for KDE builds this gets set in the kdeedu CMakeLists.txt
     set( BUILD_MARBLE_TESTS OFF )
-endif( QTONLY )
+endif()
 
 if( BUILD_MARBLE_TESTS )
 #  SET (TEST_DATA_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/tests/test_data")
