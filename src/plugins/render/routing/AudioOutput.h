@@ -43,6 +43,10 @@ public:
       */
     void update( int index, qreal distance, RoutingInstruction::TurnType turnType );
 
+    void announceStart();
+
+    void announceDestination();
+
     /** Toggle muting (neither sound nor voice output) */
     void setMuted( bool muted );
 

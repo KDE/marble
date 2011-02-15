@@ -47,7 +47,7 @@ public:
 
     void audioOutputFinished();
 
-    void setupAudio( qreal distance, RoutingInstruction::TurnType turnType );
+    void setupAudio();
 
     QString distanceAudioFile( qreal distance );
 
@@ -56,6 +56,10 @@ public:
     QString audioFile( const QString &name );
 
     void reset();
+
+    void enqueue( qreal distance, RoutingInstruction::TurnType turnType );
+
+    void enqueue( const QString &file );
 };
 
 AudioOutputPrivate::AudioOutputPrivate( AudioOutput* parent ) :
@@ -114,13 +118,21 @@ QString AudioOutputPrivate::audioFile( const QString &name )
     }
 }
 
-
-void AudioOutputPrivate::setupAudio( qreal distance, RoutingInstruction::TurnType turnType )
+void AudioOutputPrivate::setupAudio()
 {
     if ( !m_output ) {
         m_output = new Phonon::MediaObject( q );
         Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput( Phonon::VideoCategory, q );
         Phonon::createPath( m_output, audioOutput );
+
+        q->connect( m_output, SIGNAL( finished() ), q, SLOT( audioOutputFinished() ) );
+    }
+}
+
+void AudioOutputPrivate::enqueue( qreal distance, RoutingInstruction::TurnType turnType )
+{
+    if ( !m_output ) {
+        return;
     }
 
     QString distanceAudio = distanceAudioFile( distance );
@@ -136,8 +148,13 @@ void AudioOutputPrivate::setupAudio( qreal distance, RoutingInstruction::TurnTyp
         m_output->enqueue( distanceAudio );
         m_output->enqueue( audioFile( "Meters" ) );
     }
+}
 
-    q->connect( m_output, SIGNAL( finished() ), q, SLOT( audioOutputFinished() ) );
+void AudioOutputPrivate::enqueue( const QString &file )
+{
+    if ( m_output ) {
+        m_output->enqueue( audioFile( file ) );
+    }
 }
 
 void AudioOutputPrivate::reset()
@@ -174,7 +191,8 @@ void AudioOutput::update( int index, qreal distance, RoutingInstruction::TurnTyp
 
     if ( ( d->m_lastDistance == 0 || d->m_lastDistance > 850 ) && distance <= 850 ) {
         if ( !d->m_output || d->m_output->currentSource().fileName().isEmpty() ) {
-            d->setupAudio( distance, turnType );
+            d->setupAudio();
+            d->enqueue( distance, turnType );
             if ( d->m_output ) {
                 d->m_output->play();
             }
@@ -237,6 +255,32 @@ void AudioOutput::setSoundEnabled( bool enabled )
         d->m_turnTypeMap[RoutingInstruction::RoundaboutFirstExit] = "RbExit1";
         d->m_turnTypeMap[RoutingInstruction::RoundaboutSecondExit] = "RbExit2";
         d->m_turnTypeMap[RoutingInstruction::RoundaboutThirdExit] = "RbExit3";
+    }
+}
+
+void AudioOutput::announceStart()
+{
+    if ( d->m_muted || d->m_soundEnabled ) {
+        return;
+    }
+
+    d->setupAudio();
+    d->enqueue( "Depart" );
+    if ( d->m_output ) {
+        d->m_output->play();
+    }
+}
+
+void AudioOutput::announceDestination()
+{
+    if ( d->m_muted ) {
+        return;
+    }
+
+    d->setupAudio();
+    d->enqueue( d->m_soundEnabled ? "KDE-Sys-App-Positive" : "Arrive" );
+    if ( d->m_output ) {
+        d->m_output->play();
     }
 }
 
