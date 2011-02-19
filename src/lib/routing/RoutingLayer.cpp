@@ -321,7 +321,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
             if ( m_selectionModel->selection().contains( proxyIndex ) ) {
                 painter->setPen( QColor( Qt::black ) );
                 painter->setBrush( QBrush( oxygenSunYellow6 ) );
-                painter->drawAnnotation( pos, index.data().toString(), QSize( 120, 60 ), 10, 30, 15, 15 );
+                painter->drawAnnotation( pos, index.data().toString(), QSize( 120, 0 ), 10, 30, 5, 5 );
 
                 GeoDataLineString currentRoutePoints = qVariantValue<GeoDataLineString>( index.data( RoutingModel::InstructionWayPointRole ) );
 
@@ -346,7 +346,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         } else if ( !m_routeDirty && type == RoutingModel::Error ) {
             painter->setPen( QColor( Qt::white ) );
             painter->setBrush( QBrush( alphaAdjusted( oxygenBrickRed4, 200 ) ) );
-            painter->drawAnnotation( pos, index.data().toString(), QSize( 180, 80 ), 10, 30, 15, 15 );
+            painter->drawAnnotation( pos, index.data().toString(), QSize( 180, 0 ), 10, 30, 5, 5 );
         }
 
         if( !m_routingModel->deviatedFromRoute() ) {

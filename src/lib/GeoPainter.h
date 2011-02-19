@@ -156,6 +156,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     \param position The geodesic position
     \param text The text contained by the bubble
     \param bubbleSize The size of the bubble that holds the annotation text.
+                      A height of 0 can be used to have the height calculated
+                      automatically to fit the needed text height.
     \param bubbleOffsetX The x-axis offset between the annotated position and
                          the "root" of the speech bubble's "arrow".
     \param bubbleOffsetY The y-axis offset between the annotated position and

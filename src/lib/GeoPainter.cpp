@@ -219,6 +219,12 @@ void GeoPainter::drawAnnotation( const GeoDataCoordinates & position,
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
+    if ( bubbleSize.height() <= 0 ) {
+        QRectF rect = QRectF( QPointF( 0.0, 0.0 ), bubbleSize - QSizeF( 2 * xRnd, 0.0 ) );
+        qreal idealTextHeight = boundingRect( rect, Qt::TextWordWrap, text ).height();
+        bubbleSize.setHeight( 2 * yRnd + idealTextHeight );
+    }
+
     bool visible = projection->screenCoordinates( position, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
 
     if ( visible ) {
