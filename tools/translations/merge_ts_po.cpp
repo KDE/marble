@@ -46,17 +46,24 @@ int main( int argc, char** argv )
     poStream.setCodec( "UTF-8" );
     poStream.setAutoDetectUnicode( true );
     QString source;
+    bool ignore = false;
     while( !poStream.atEnd() ) {
         QString line = poStream.readLine();
-        if ( line.startsWith( "msgid " ) ) {
+        if ( line.startsWith( "#, fuzzy" ) ) {
+            ignore = true;
+        } else if ( line.startsWith( "msgid " ) ) {
             source = line.mid( 7, line.size() - 8 );
         } else if ( !source.isEmpty() && line.startsWith( "msgstr " ) ) {
-            QString translation = line.mid( 8, line.size() - 9 );
-            translation.replace( "&", "&amp;" );
-            translation.replace( "<", "&lt;" );
-            translation.replace( ">", "&gt;" );
-            if ( !translation.isEmpty() ) {
-                translations[source] = translation;
+            if ( ignore ) {
+                ignore = false;
+            } else {
+                QString translation = line.mid( 8, line.size() - 9 );
+                translation.replace( "&", "&amp;" );
+                translation.replace( "<", "&lt;" );
+                translation.replace( ">", "&gt;" );
+                if ( !translation.isEmpty() ) {
+                    translations[source] = translation;
+                }
             }
         }
     }
