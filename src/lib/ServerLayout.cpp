@@ -52,6 +52,11 @@ QUrl MarbleServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id
     return url;
 }
 
+QString MarbleServerLayout::name() const
+{
+    return "Marble";
+}
+
 
 OsmServerLayout::OsmServerLayout( GeoSceneTexture *textureLayer )
     : ServerLayout( textureLayer )
@@ -72,6 +77,11 @@ QUrl OsmServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) 
     return url;
 }
 
+QString OsmServerLayout::name() const
+{
+    return "OpenStreetMap";
+}
+
 
 CustomServerLayout::CustomServerLayout( GeoSceneTexture *texture )
     : ServerLayout( texture )
@@ -88,6 +98,12 @@ QUrl CustomServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id
 
     return QUrl( urlStr );
 }
+
+QString CustomServerLayout::name() const
+{
+    return "Custom";
+}
+
 
 WmsServerLayout::WmsServerLayout( GeoSceneTexture *texture )
     : ServerLayout( texture )
@@ -127,6 +143,11 @@ QUrl WmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileI
                                                       .arg( QString::number( latTop( tileId ), 'f', 12 ) ) );
 
     return url;
+}
+
+QString WmsServerLayout::name() const
+{
+    return "WebMapService";
 }
 
 qreal WmsServerLayout::latBottom( const Marble::TileId &tileId ) const

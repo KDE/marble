@@ -96,6 +96,11 @@ void GeoSceneTexture::setServerLayout( const ServerLayout *layout )
     m_serverLayout = layout;
 }
 
+const ServerLayout* GeoSceneTexture::serverLayout() const
+{
+    return m_serverLayout;
+}
+
 int GeoSceneTexture::levelZeroColumns() const
 {
    return m_levelZeroColumns;

@@ -14,6 +14,7 @@
 #include "global.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
+#include "ServerLayout.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneIcon.h"
@@ -686,7 +687,6 @@ GeoSceneDocument* MapWizard::createDocument()
     
     GeoSceneTexture *texture = new GeoSceneTexture( "map" );
     texture->setExpire( 31536000 );
-    texture->setStorageLayout( GeoSceneTexture::Marble );
     texture->setSourceDir( "earth/" + document->head()->theme() ); 
     if( d->mapProviderType == MapWizardPrivate::WmsMap )
     {
@@ -698,7 +698,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setMaximumTileLevel( 20 );
         texture->setLevelZeroRows( 1 );
         texture->setLevelZeroColumns( 1 );
-        texture->setStorageLayout( GeoSceneTexture::WebMapService );
+        texture->setServerLayout( new WmsServerLayout( texture ) );
         texture->setProjection( GeoSceneTexture::Equirectangular );
     }
     
@@ -712,7 +712,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setMaximumTileLevel( 20 );
         texture->setLevelZeroRows( 1 );
         texture->setLevelZeroColumns( 1 );
-        texture->setStorageLayout( GeoSceneTexture::Custom );
+        texture->setServerLayout( new CustomServerLayout( texture ) );
         texture->setProjection( GeoSceneTexture::Mercator );
     }
     
@@ -722,6 +722,7 @@ GeoSceneDocument* MapWizard::createDocument()
         d->format = image.right( image.length() - image.lastIndexOf( '.' ) - 1 ).toLower();
         texture->setFileFormat( d->format.toUpper() );
         texture->setInstallMap( document->head()->theme() + "." + d->format );
+        texture->setServerLayout( new MarbleServerLayout( texture ) );
         texture->setProjection( GeoSceneTexture::Equirectangular );
         int imageWidth = QImage( image ).width();
         int tileSize = c_defaultTileSize;

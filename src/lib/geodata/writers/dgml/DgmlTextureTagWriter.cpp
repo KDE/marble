@@ -15,6 +15,7 @@
 #include "GeoSceneTexture.h"
 #include "DownloadPolicy.h"
 #include "DgmlElementDictionary.h"
+#include "ServerLayout.h"
 
 namespace Marble
 {
@@ -44,21 +45,7 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
         writer.writeAttribute( "maximumTileLevel", QString::number( texture->maximumTileLevel() ) );
         writer.writeAttribute( "levelZeroColumns", QString::number( texture->levelZeroColumns() ) );
         writer.writeAttribute( "levelZeroRows", QString::number( texture->levelZeroRows() ) );
-        switch( texture->storageLayout() )
-        {
-            case GeoSceneTexture::Custom:
-                writer.writeAttribute( "mode", "Custom" );
-                break;
-            case GeoSceneTexture::OpenStreetMap:
-                writer.writeAttribute( "mode", "OpenStreetMap" );
-                break;
-            case GeoSceneTexture::WebMapService:
-                writer.writeAttribute( "mode", "WebMapService" );
-                break;
-            case GeoSceneTexture::Marble:
-                writer.writeAttribute( "mode", "Marble" );
-                break;
-        }
+        writer.writeAttribute( "mode", texture->serverLayout()->name() );
     }
     writer.writeEndElement();
     

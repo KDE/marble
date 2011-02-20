@@ -34,6 +34,12 @@ public:
      */
     virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const = 0;
 
+    /**
+     * Returns the name of the server layout to be used as the value in the
+     * mode attribute in the DGML file.
+     */
+    virtual QString name() const = 0;
+
 protected:
     qint64 numTilesX( const Marble::TileId &tileId ) const;
     qint64 numTilesY( const Marble::TileId &tileId ) const;
@@ -51,6 +57,8 @@ public:
      * Completes the path of the @p prototypeUrl and returns it.
      */
     virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const;
+
+    virtual QString name() const;
 };
 
 class OsmServerLayout : public ServerLayout
@@ -63,6 +71,8 @@ public:
      * the result.
      */
     virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const;
+
+    virtual QString name() const;
 };
 
 class CustomServerLayout : public ServerLayout
@@ -77,6 +87,8 @@ public:
      * Escape sequences are: {zoomLevel}, {x}, and {y}.
      */
     virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const;
+
+    virtual QString name() const;
 };
 
 class WmsServerLayout : public ServerLayout
@@ -93,6 +105,8 @@ public:
      * styles, format, srs, layers.
      */
     virtual QUrl downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const;
+
+    virtual QString name() const;
 
 private:
     qreal latBottom( const Marble::TileId &tileId ) const;
