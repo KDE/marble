@@ -106,6 +106,9 @@ void MapWizardPrivate::pageEntered( int id )
         m_serverCapabilitiesValid = false;
     } else if ( id == 2 || id == 4 ) {
         levelZero.clear();
+        uiWidget.comboBoxStaticUrlServer->clear();
+        uiWidget.comboBoxStaticUrlServer->addItems( staticUrlServerList );
+        uiWidget.comboBoxStaticUrlServer->addItem( "http://" );
     } else if ( id == 5 ) {
         if ( mapProviderType == MapWizardPrivate::StaticImageMap ) {
             previewImage = QImage( uiWidget.lineEditSource->text() ).scaled( 136, 136, Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
@@ -257,8 +260,6 @@ QStringList MapWizard::staticUrlServers() const
 void MapWizard::setStaticUrlServers( const QStringList& uris )
 {
     d->staticUrlServerList = uris;
-    d->uiWidget.comboBoxStaticUrlServer->addItems( d->staticUrlServerList );
-    d->uiWidget.comboBoxStaticUrlServer->addItem( "http://" );
 }
 
 void MapWizard::autoFillDetails()
@@ -439,7 +440,9 @@ void MapWizard::createLevelZero( QNetworkReply* reply )
     }
 
     if ( d->mapProviderType == MapWizardPrivate::StaticUrlMap ) {
-        d->staticUrlServerList.append( d->uiWidget.comboBoxStaticUrlServer->currentText() );
+        const QString url = d->uiWidget.comboBoxStaticUrlServer->currentText();
+        d->staticUrlServerList.removeAll( url );
+        d->staticUrlServerList.prepend( url );
     }
 
     next();
