@@ -32,7 +32,7 @@
 #include "GeoWriter.h"
 #include "DgmlElementDictionary.h"
 
-#include <stdlib.h>
+#include <QtCore/QBuffer>
 #include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QProcess>
@@ -124,11 +124,6 @@ void MapWizardPrivate::pageEntered( int id )
 MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPrivate )
 {
     d->uiWidget.setupUi( this );
-    QListIterator<QByteArray> i( QImageReader::supportedImageFormats() );
-
-    while( i.hasNext() ) {
-        d->uiWidget.comboBoxStaticUrlFormat->addItem( QString( i.next() ) );
-    }
     
     connect( this, SIGNAL( currentIdChanged( int ) ), this, SLOT( pageEntered( int ) ) );
 
@@ -305,7 +300,7 @@ bool MapWizard::createFiles( const GeoSceneDocument* document )
             maps.mkdir( QString( "%1/0/0" ).arg( document->head()->theme() ) );
             const QString path = QString( "%1/%2/0/0/0.%3" ).arg( maps.absolutePath() )
                                                             .arg( document->head()->theme() )
-                                                            .arg( d->uiWidget.comboBoxStaticUrlFormat->currentText() );
+                                                            .arg( d->format );
             QFile baseTile( path );
             baseTile.open( QFile::WriteOnly );
             baseTile.write( d->levelZero );
@@ -399,18 +394,12 @@ void MapWizard::downloadLevelZero()
     else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
     {
         QString server = d->uiWidget.comboBoxStaticUrlServer->currentText();
-        QString format = d->uiWidget.comboBoxStaticUrlFormat->currentText();
         QUrl downloadUrl;
 
-        if( server.indexOf( "{x}" ) != -1 && server.indexOf( "{y}" ) != -1 )
-        {
-            server.replace( server.indexOf( "{x}" ), 3,  QString::number( 0 ) );
-            server.replace( server.indexOf( "{y}" ), 3,  QString::number( 0 ) );
-            server.replace( server.indexOf( "{zoomLevel}" ), 11,  QString::number( 0 ) );
-            downloadUrl.setUrl( server );
-        } else {
-            downloadUrl.setUrl( QString( "%1/0/0/0.%2" ).arg( server ).arg( format ) );
-        }
+        server.replace( server.indexOf( "{x}" ), 3,  QString::number( 0 ) );
+        server.replace( server.indexOf( "{y}" ), 3,  QString::number( 0 ) );
+        server.replace( server.indexOf( "{zoomLevel}" ), 11,  QString::number( 0 ) );
+        downloadUrl.setUrl( server );
 
         QNetworkRequest request( downloadUrl );
         d->levelZeroAccessManager.get( request );
@@ -438,6 +427,9 @@ void MapWizard::createLevelZero( QNetworkReply* reply )
         d->levelZero.clear();
         return;
     }
+
+    QBuffer testBuffer( &d->levelZero );
+    d->format = QImageReader( &testBuffer ).format();
 
     if ( d->mapProviderType == MapWizardPrivate::StaticUrlMap ) {
         const QString url = d->uiWidget.comboBoxStaticUrlServer->currentText();
@@ -707,7 +699,7 @@ GeoSceneDocument* MapWizard::createDocument()
     
     else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
     {
-        texture->setFileFormat( d->uiWidget.comboBoxStaticUrlFormat->currentText() );
+        texture->setFileFormat( d->format );
         QUrl downloadUrl = QUrl( d->uiWidget.comboBoxStaticUrlServer->currentText() );
         texture->addDownloadPolicy( DownloadBrowse, 20 );
         texture->addDownloadPolicy( DownloadBulk, 2 );
