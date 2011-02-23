@@ -357,7 +357,7 @@ QDialog *MapScaleFloatItem::configDialog()
 void MapScaleFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
 {
     QMenu menu;
-    QAction *toggleaction = menu.addAction( "&Ratio Scale", 
+    QAction *toggleaction = menu.addAction( tr("&Ratio Scale"), 
                                             this, 
                                             SLOT( toggleRatioScaleVisibility() ) );
     toggleaction->setCheckable( true );
