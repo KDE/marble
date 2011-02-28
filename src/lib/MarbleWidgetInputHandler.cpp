@@ -50,19 +50,19 @@ const int TOOLTIP_START_INTERVAL = 1000;
 class MarbleWidgetInputHandler::Protected
 {
 public:
-    Protected();
+    Protected( MarbleWidget *widget );
 
-    MarbleWidget *m_widget;
-    MarbleModel *m_model;
+    MarbleWidget *const m_widget;
+    MarbleModel *const m_model;
     bool m_positionSignalConnected;
     QTimer *m_mouseWheelTimer;
     Qt::MouseButtons m_disabledMouseButtons;
     qreal m_wheelZoomTargetDistance;
 };
 
-MarbleWidgetInputHandler::Protected::Protected()
-    : m_widget( 0 ),
-      m_model( 0 ),
+MarbleWidgetInputHandler::Protected::Protected( MarbleWidget *widget )
+    : m_widget( widget ),
+      m_model( widget->model() ),
       m_positionSignalConnected( false ),
       m_mouseWheelTimer( 0 ),
       m_disabledMouseButtons( Qt::NoButton ),
@@ -71,12 +71,20 @@ MarbleWidgetInputHandler::Protected::Protected()
 }
 
 
-MarbleWidgetInputHandler::MarbleWidgetInputHandler()
-    : d( new Protected )
+MarbleWidgetInputHandler::MarbleWidgetInputHandler( MarbleWidget *widget )
+    : d( new Protected( widget ) )
 {
     d->m_mouseWheelTimer = new QTimer( this );
     connect( d->m_mouseWheelTimer, SIGNAL( timeout() ),
 	     this, SLOT( restoreViewContext() ) );
+    
+    connect( d->m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
+             this,        SLOT( installPluginEventFilter( RenderPlugin * ) ) );
+
+    foreach( RenderPlugin *renderPlugin, d->m_widget->renderPlugins() ) {
+        if( renderPlugin->isInitialized() )
+            d->m_widget->installEventFilter( renderPlugin );
+    }
 }
 
 MarbleWidgetInputHandler::~MarbleWidgetInputHandler()
@@ -93,20 +101,6 @@ void MarbleWidgetInputHandler::setPositionSignalConnected( bool connected )
 bool MarbleWidgetInputHandler::isPositionSignalConnected() const
 {
     return d->m_positionSignalConnected;
-}
-
-void MarbleWidgetInputHandler::init( MarbleWidget *w )
-{
-    d->m_widget = w;
-    d->m_model = w->model();
-    
-    connect( d->m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
-             this,        SLOT( installPluginEventFilter( RenderPlugin * ) ) );
-
-    foreach( RenderPlugin *renderPlugin, d->m_widget->renderPlugins() ) {
-        if( renderPlugin->isInitialized() )
-            d->m_widget->installEventFilter( renderPlugin );
-    }
 }
 
 void MarbleWidgetInputHandler::setMouseButtonPopupEnabled( Qt::MouseButton mouseButton, bool enabled )
@@ -291,8 +285,8 @@ void MarbleWidgetDefaultInputHandler::Private::MoveTo( MarbleWidget* marbleWidge
     marbleWidget->flyTo( lookAt );
 }
 
-MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler()
-    : MarbleWidgetInputHandler(), d( new Private )
+MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler( MarbleWidget *widget )
+    : MarbleWidgetInputHandler( widget ), d( new Private )
 {
     d->m_selectionRubber = new QRubberBand( QRubberBand::Rectangle,
                                             MarbleWidgetInputHandler::d->m_widget );
@@ -303,41 +297,6 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler()
     connect( &d->m_toolTipTimer, SIGNAL( timeout() ), this, SLOT( openItemToolTip() ) );
     d->m_lmbTimer.setSingleShot(true);
     connect( &d->m_lmbTimer, SIGNAL(timeout()), this, SLOT(lmbTimeout()));
-}
-
-MarbleWidgetDefaultInputHandler::~MarbleWidgetDefaultInputHandler()
-{
-    // FIXME: move to Private
-    delete d->m_selectionRubber;
-    delete d;
-}
-
-void MarbleWidgetDefaultInputHandler::lmbTimeout()
-{
-    if (!d->m_selectionRubber->isVisible()) {
-        emit lmbRequest( d->m_leftPressedX, d->m_leftPressedY );
-    }
-}
-
-void MarbleWidgetInputHandler::restoreViewContext()
-{
-    // Needs to stop the timer since it repeats otherwise.
-    d->m_mouseWheelTimer->stop();
-
-    // Redraw the map with the quality set for Still (if necessary).
-    d->m_widget->setViewContext( Still );
-    d->m_widget->viewport()->resetFocusPoint();
-    d->m_wheelZoomTargetDistance = 0.0;
-}
-
-void MarbleWidgetInputHandler::installPluginEventFilter( RenderPlugin *renderPlugin )
-{
-    d->m_widget->installEventFilter( renderPlugin );
-}
-
-void MarbleWidgetDefaultInputHandler::init( MarbleWidget *w )
-{
-    MarbleWidgetInputHandler::init( w );
 
     // The interface to the measure tool consists of a RMB popup menu
     // and some signals.
@@ -373,6 +332,36 @@ void MarbleWidgetDefaultInputHandler::init( MarbleWidget *w )
              this, SLOT( setNumberOfMeasurePoints( int ) ) );
     connect( this, SIGNAL( lmbRequest( int, int ) ),
              this, SLOT( showLmbMenu( int, int ) ) );
+}
+
+MarbleWidgetDefaultInputHandler::~MarbleWidgetDefaultInputHandler()
+{
+    // FIXME: move to Private
+    delete d->m_selectionRubber;
+    delete d;
+}
+
+void MarbleWidgetDefaultInputHandler::lmbTimeout()
+{
+    if (!d->m_selectionRubber->isVisible()) {
+        emit lmbRequest( d->m_leftPressedX, d->m_leftPressedY );
+    }
+}
+
+void MarbleWidgetInputHandler::restoreViewContext()
+{
+    // Needs to stop the timer since it repeats otherwise.
+    d->m_mouseWheelTimer->stop();
+
+    // Redraw the map with the quality set for Still (if necessary).
+    d->m_widget->setViewContext( Still );
+    d->m_widget->viewport()->resetFocusPoint();
+    d->m_wheelZoomTargetDistance = 0.0;
+}
+
+void MarbleWidgetInputHandler::installPluginEventFilter( RenderPlugin *renderPlugin )
+{
+    d->m_widget->installEventFilter( renderPlugin );
 }
 
 void MarbleWidgetDefaultInputHandler::showLmbMenu( int x, int y )

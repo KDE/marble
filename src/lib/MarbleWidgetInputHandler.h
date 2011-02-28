@@ -40,13 +40,11 @@ class MARBLE_EXPORT MarbleWidgetInputHandler  : public QObject
     Q_OBJECT
 
  public:
-    MarbleWidgetInputHandler();
+    MarbleWidgetInputHandler( MarbleWidget* );
     virtual ~MarbleWidgetInputHandler();
 
     void setPositionSignalConnected( bool connected );
     bool isPositionSignalConnected() const;
-
-    virtual void init( MarbleWidget* );
 
     /**
      * @brief  Set whether a popup menu appears on a click (not drag) with the left mouse button
@@ -88,12 +86,10 @@ class MARBLE_EXPORT MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputH
     Q_OBJECT
 
  public:
-    MarbleWidgetDefaultInputHandler();
+    MarbleWidgetDefaultInputHandler( MarbleWidget* );
     ~MarbleWidgetDefaultInputHandler();
 
     static bool keyEvent( MarbleWidget * widget, QEvent* e );
-    
-    virtual void init( MarbleWidget* );
 
  protected:
     bool eventFilter( QObject *, QEvent * );

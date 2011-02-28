@@ -238,7 +238,7 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
                        m_widget, SLOT( centerSun() ) );
 
-    m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler );
+    m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler( m_widget ) );
     m_widget->setMouseTracking( m_widget );
 
     m_routingLayer = new RoutingLayer( m_widget, m_widget );
@@ -302,7 +302,6 @@ void MarbleWidget::setInputHandler( MarbleWidgetInputHandler *handler )
     d->m_inputhandler = handler;
 
     if ( d->m_inputhandler ) {
-        d->m_inputhandler->init( this );
         installEventFilter( d->m_inputhandler );
 
         connect( d->m_inputhandler, SIGNAL( mouseClickScreenPosition( int, int ) ),
@@ -1214,7 +1213,7 @@ void MarbleWidget::setInputEnabled( bool enabled )
     if ( enabled )
     {
         if ( !d->m_inputhandler ) {
-            setInputHandler( new MarbleWidgetDefaultInputHandler );
+            setInputHandler( new MarbleWidgetDefaultInputHandler( this ) );
         }
         else {
             installEventFilter( d->m_inputhandler );
