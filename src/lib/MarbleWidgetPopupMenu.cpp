@@ -18,6 +18,7 @@
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataStyle.h"
 #include "PlacemarkInfoDialog.h"
 #include "MarbleDebug.h"
 #include "Planet.h"
@@ -118,13 +119,13 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 
     int  actionidx = 1;
 
-    QVector<QModelIndex>::const_iterator it = m_featurelist.constBegin();
-    QVector<QModelIndex>::const_iterator const itEnd = m_featurelist.constEnd();
+    QVector<const GeoDataPlacemark*>::const_iterator it = m_featurelist.constBegin();
+    QVector<const GeoDataPlacemark*>::const_iterator const itEnd = m_featurelist.constEnd();
     for (; it != itEnd; ++it )
     {
-        QAction *action = new QAction( (*it).data().toString(), m_lmbMenu );
+        QAction *action = new QAction( (*it)->name(), m_lmbMenu );
         action->setData( actionidx );
-        action->setIcon( (*it).data( Qt::DecorationRole ).value<QPixmap>() );
+        action->setIcon( (*it)->style()->iconStyle().icon() );
         m_lmbMenu->addAction( action );
         actionidx++;
     }
@@ -183,7 +184,7 @@ void MarbleWidgetPopupMenu::showFeatureInfo( QAction* action )
     int actionidx = action->data().toInt();
 
     if ( actionidx > 0 ) {
-        QModelIndex index = m_featurelist.at( actionidx -1 );
+        const GeoDataPlacemark *index = m_featurelist.at( actionidx -1 );
 
         QPointer<PlacemarkInfoDialog> dialog = new PlacemarkInfoDialog( index, m_widget );
         dialog->setWindowModality( Qt::WindowModal );

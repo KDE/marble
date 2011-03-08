@@ -134,13 +134,13 @@ void PlacemarkLayout::styleReset()
     m_maxLabelHeight = maxLabelHeight();
 }
 
-QVector<QModelIndex> PlacemarkLayout::whichPlacemarkAt( const QPoint& curpos )
+QVector<const GeoDataPlacemark*> PlacemarkLayout::whichPlacemarkAt( const QPoint& curpos )
 {
     if ( m_styleResetRequested ) {
         styleReset();
     }
 
-    QVector<QModelIndex> ret;
+    QVector<const GeoDataPlacemark*> ret;
 
     QVector<VisiblePlacemark*>::ConstIterator  it;
     QVector<VisiblePlacemark*>::ConstIterator  itEnd = m_paintOrder.constEnd();
@@ -151,7 +151,7 @@ QVector<QModelIndex> PlacemarkLayout::whichPlacemarkAt( const QPoint& curpos )
 
         if ( mark->labelRect().contains( curpos )
              || QRect( mark->symbolPosition(), mark->symbolPixmap().size() ).contains( curpos ) ) {
-            ret.append( mark->modelIndex() );
+            ret.append( mark->placemark() );
         }
     }
 
@@ -259,7 +259,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         if ( !latLonAltBox.contains( geopoint ) ||
              ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
             {
-                delete m_visiblePlacemarks.take( index );
+                delete m_visiblePlacemarks.take( placemark );
                 continue;
             }
 
@@ -268,7 +268,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         int textWidth = 0;
 
         // Find the corresponding visible placemark
-        VisiblePlacemark *mark = m_visiblePlacemarks.value( index );
+        VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
 
         GeoDataStyle* style = placemark->style();
 
@@ -303,10 +303,9 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         if ( !mark ) {
             // If there is no visible placemark yet for this index,
             // create a new one...
-            mark = new VisiblePlacemark;
-            mark->setModelIndex( QModelIndex( index ) );
+            mark = new VisiblePlacemark( placemark );
 
-            m_visiblePlacemarks.insert( index, mark );
+            m_visiblePlacemarks.insert( placemark, mark );
         }
 
         // Finally save the label position on the map.
@@ -366,13 +365,13 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         if ( !latLonAltBox.contains( geopoint ) ||
              ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
             {
-                delete m_visiblePlacemarks.take( index );
+                delete m_visiblePlacemarks.take( placemark );
                 continue;
             }
 
         if ( !placemark->isVisible() )
         {
-            delete m_visiblePlacemarks.take( index );
+            delete m_visiblePlacemarks.take( placemark );
             continue;
         }
 
@@ -426,7 +425,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         int textWidth = 0;
 
         // Find the corresponding visible placemark
-        VisiblePlacemark *mark = m_visiblePlacemarks.value( index );
+        VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
         GeoDataStyle* style = placemark->style();
 
         // Specify font properties
@@ -458,10 +457,8 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         if ( !mark ) {
             // If there is no visible placemark yet for this index,
             // create a new one...
-            mark = new VisiblePlacemark;
-
-            mark->setModelIndex( index );
-            m_visiblePlacemarks.insert( index, mark );
+            mark = new VisiblePlacemark( placemark );
+            m_visiblePlacemarks.insert( placemark, mark );
         }
 
         // Finally save the label position on the map.

@@ -393,7 +393,7 @@ void MarbleWidget::removePlacemarkKey( const QString &key )
     removeGeoData( key );
 }
 
-QVector<QModelIndex> MarbleWidget::whichFeatureAt( const QPoint &curpos ) const
+QVector<const GeoDataPlacemark*> MarbleWidget::whichFeatureAt( const QPoint &curpos ) const
 {
     return d->m_map->whichFeatureAt( curpos );
 }

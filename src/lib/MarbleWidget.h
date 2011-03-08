@@ -31,7 +31,6 @@
 #include "GeoDataFolder.h"
 // Qt
 class QAbstractItemModel;
-class QModelIndex;
 class QItemSelectionModel;
 class QSettings;
 
@@ -435,8 +434,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     MARBLE_DEPRECATED( void removePlacemarkKey( const QString& key ) );
 
-    QVector<QModelIndex> whichFeatureAt( const QPoint& ) const;
-    //@}
+    QVector<const GeoDataPlacemark*> whichFeatureAt( const QPoint& ) const;
 
     /// @name Float items and map appearance
     //@{

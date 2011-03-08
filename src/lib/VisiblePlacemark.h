@@ -16,8 +16,9 @@
 #ifndef MARBLE_VISIBLEPLACEMARK_H
 #define MARBLE_VISIBLEPLACEMARK_H
 
+#include "GeoDataPlacemark.h"
+
 #include <QtGui/QPixmap>
-#include <QtCore/QModelIndex>
 #include <QtCore/QPoint>
 #include <QtCore/QRect>
 #include <QtCore/QString>
@@ -34,17 +35,13 @@ namespace Marble
 class VisiblePlacemark
 {
  public:
+    VisiblePlacemark( const GeoDataPlacemark *placemark );
+
     /**
      * Returns the index of the place mark model which
      * is associated with this visible place mark.
      */
-    const QModelIndex& modelIndex() const;
-
-    /**
-     * Sets the @p index of the place mark model which
-     * is associated with this visible place mark.
-     */
-    void setModelIndex( const QModelIndex &index );
+    const GeoDataPlacemark* placemark() const;
 
     /**
      * Returns the name of the place mark.
@@ -87,7 +84,7 @@ class VisiblePlacemark
     void setLabelRect( const QRect& area );
 
  private:
-    QModelIndex m_modelIndex;
+    const GeoDataPlacemark *m_placemark;
 
     // View stuff
     QPoint      m_symbolPosition; // position of the placemark's symbol

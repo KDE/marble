@@ -30,12 +30,12 @@
 using namespace Marble;
 /* TRANSLATOR Marble::PlacemarkInfoDialog */
 
-PlacemarkInfoDialog::PlacemarkInfoDialog(const QPersistentModelIndex &index, QWidget *parent)
-    : QDialog(parent), m_index(index)
+PlacemarkInfoDialog::PlacemarkInfoDialog(const GeoDataPlacemark *placemark, QWidget *parent)
+    : QDialog(parent), m_placemark(placemark)
 {
     setupUi(this);
 
-    setWindowTitle( tr("Marble Info Center - %1").arg( m_index.data().toString() ) );
+    setWindowTitle( tr("Marble Info Center - %1").arg( m_placemark->name() ) );
     resize( 780, 580 );
 
     m_pBackButton->hide();
@@ -61,18 +61,15 @@ void PlacemarkInfoDialog::showMessage( const QString& text )
 
 void PlacemarkInfoDialog::showContent()
 {
-    GeoDataPlacemark *placemark
-            = static_cast<GeoDataPlacemark*>(qVariantValue<GeoDataObject*>( m_index.model()->data(m_index, MarblePlacemarkModel::ObjectPointerRole ) ) );
-
     elevation_lbl->setVisible( true );
     elevation_val_lbl->setVisible( true );
     population_lbl->setText( tr("Population:") );
 
 
-    name_val_lbl->setText( "<H1><b>" + m_index.data().toString() + "</b></H1>" );
+    name_val_lbl->setText( "<H1><b>" + m_placemark->name() + "</b></H1>" );
     altername_val_lbl->setText( "" );
     QString  rolestring;
-    const QString role = placemark->role();
+    const QString role = m_placemark->role();
      if(role=="PPLC")
         rolestring = tr("National Capital");
     else if(role=="PPL")
@@ -89,7 +86,7 @@ void PlacemarkInfoDialog::showContent()
         rolestring = tr("Location");
     else if(role=="H")
     {    
-        if ( placemark->popularity() > 0 )
+        if ( m_placemark->popularity() > 0 )
             rolestring = tr("Mountain");
         else
             rolestring = tr("Elevation extreme");
@@ -118,10 +115,10 @@ void PlacemarkInfoDialog::showContent()
     role_val_lbl->setText( rolestring );
 
     m_flagcreator = new DeferredFlag( this );
-    requestFlag( placemark->countryCode() );
+    requestFlag( m_placemark->countryCode() );
 
 
-    const QString description = placemark->description();
+    const QString description = m_placemark->description();
 
     description_val_browser->setEnabled( false );
     if ( !description.isEmpty() )
@@ -129,16 +126,16 @@ void PlacemarkInfoDialog::showContent()
         description_val_browser->setEnabled( true );
         description_val_browser->setHtml( description );
     }
-    coordinates_val_lbl->setText( placemark->coordinate().toString() );
-    country_val_lbl->setText( placemark->countryCode() );
-    QString gmt = QString( "%1" ).arg( placemark->extendedData().value("gmt").value().toInt()/( double ) 100, 0, 'f', 1 );
-    QString dst = QString( "%1" ).arg( ( placemark->extendedData().value("gmt").value().toInt() + placemark->extendedData().value("dst").value().toInt() )/( double ) 100, 0, 'f', 1 );
+    coordinates_val_lbl->setText( m_placemark->coordinate().toString() );
+    country_val_lbl->setText( m_placemark->countryCode() );
+    QString gmt = QString( "%1" ).arg( m_placemark->extendedData().value("gmt").value().toInt()/( double ) 100, 0, 'f', 1 );
+    QString dst = QString( "%1" ).arg( ( m_placemark->extendedData().value("gmt").value().toInt() + m_placemark->extendedData().value("dst").value().toInt() )/( double ) 100, 0, 'f', 1 );
     gmtdst_val_lbl->setText( gmt + " / " + dst );
-    state_val_lbl->setText( placemark->state() );
+    state_val_lbl->setText( m_placemark->state() );
 
-    const qint64 population = placemark->population();
-    const qreal area = placemark->area();
-    const qreal altitude = placemark->coordinate().altitude();
+    const qint64 population = m_placemark->population();
+    const qreal area = m_placemark->area();
+    const qreal altitude = m_placemark->coordinate().altitude();
 
     area_lbl->setText( tr("Area:") );
     if ( area < 10000000 )
@@ -208,7 +205,7 @@ void PlacemarkInfoDialog::showContent()
         state_lbl->setVisible( false );
         state_val_lbl->setVisible( false );
     }
-    if ( (role == "a" || role == "c" || role == "m") && placemark->popularity() > 0) {
+    if ( (role == "a" || role == "c" || role == "m") && m_placemark->popularity() > 0) {
         diameter_lbl->setVisible( true );
         diameter_val_lbl->setVisible( true );
         gmtdst_lbl->setVisible( false );
@@ -253,7 +250,7 @@ void PlacemarkInfoDialog::showContent()
         area_lbl->setVisible( false );
     }
 
-    emit source( QString("wiki/%1").arg( m_index.data().toString() ) );
+    emit source( QString("wiki/%1").arg( m_placemark->name() ) );
 }
 
 

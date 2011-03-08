@@ -82,7 +82,7 @@ private Q_SLOTS:
     MarbleModel    *m_model;
     MarbleWidget   *m_widget;
 
-    QVector<QModelIndex>  m_featurelist;
+    QVector<const GeoDataPlacemark*>  m_featurelist;
     QList<AbstractDataPluginItem *> m_itemList;
 
     QMenu    *m_lmbMenu;

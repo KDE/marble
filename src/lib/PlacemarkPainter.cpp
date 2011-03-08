@@ -60,23 +60,15 @@ void PlacemarkPainter::drawPlacemarks( QPainter* painter,
 	mark = *visit;
 
 	if ( mark->labelPixmap().isNull() ) {
-	    bool isSelected = selection.contains( mark->modelIndex() );
-	    drawLabelPixmap( mark, isSelected );
-	}
-
-	painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
-	painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
-    }
-
-    visit = visiblePlacemarks.constEnd();
-
-    while ( visit != itEnd ) {
-	--visit;
-	mark = *visit;
-
-	if ( mark->labelPixmap().isNull() ) {
-	    bool isSelected = selection.contains( mark->modelIndex() );
-	    drawLabelPixmap( mark, isSelected );
+            bool isSelected = false;
+            foreach ( QModelIndex index, selection.indexes() ) {
+                GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+                if (mark->placemark() == placemark ) {
+                    isSelected = true;
+                    break;
+                }
+            }
+            drawLabelPixmap( mark, isSelected );
 	}
 
 	painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
@@ -151,9 +143,8 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSe
 
     QPainter labelPainter;
     QPixmap labelPixmap;
-    QModelIndex index = mark->modelIndex();
 
-    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+    const GeoDataPlacemark *placemark = mark->placemark();
     GeoDataStyle* style = placemark->style();
 
     QString labelName = mark->name();

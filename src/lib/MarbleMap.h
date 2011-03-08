@@ -24,7 +24,6 @@
 
 #include <QtCore/QSize>
 #include <QtCore/QString>
-#include <QtCore/QModelIndex>
 #include <QtCore/QObject>
 #include <QtGui/QFont>
 #include <QtGui/QPixmap>
@@ -49,6 +48,7 @@ class MarbleMapPrivate;
 
 // Marble
 class GeoDataLatLonAltBox;
+class GeoDataPlacemark;
 class MarbleModel;
 class ViewportParams;
 class SunLocator;
@@ -255,7 +255,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     MARBLE_DEPRECATED( void removePlacemarkKey( const QString& key ) );
 
-    QVector<QModelIndex> whichFeatureAt( const QPoint& ) const;
+    QVector<const GeoDataPlacemark*> whichFeatureAt( const QPoint& ) const;
 
     /**
      * @brief  Return the quaternion that specifies the rotation of the globe.

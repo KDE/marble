@@ -82,7 +82,7 @@ class PlacemarkLayout : public QObject
     /**
      * Returns a list of model indexes that are at position @p pos.
      */
-    QVector<QModelIndex> whichPlacemarkAt( const QPoint &pos );
+    QVector<const GeoDataPlacemark*> whichPlacemarkAt( const QPoint &pos );
 
  public Q_SLOTS:
 
@@ -106,10 +106,8 @@ class PlacemarkLayout : public QObject
     PlacemarkPainter *m_placemarkPainter;
 
     QVector<VisiblePlacemark*> m_paintOrder;
-    QVector<VisiblePlacemark*> m_placemarkPool;
-    QHash<QModelIndex, VisiblePlacemark*> m_visiblePlacemarks;
+    QHash<GeoDataPlacemark*, VisiblePlacemark*> m_visiblePlacemarks;
 
-    QModelIndexList m_indexList;
 
     QVector< int > m_weightfilter;
 

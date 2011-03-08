@@ -18,28 +18,27 @@
 
 using namespace Marble;
 
-const QModelIndex& VisiblePlacemark::modelIndex() const
+VisiblePlacemark::VisiblePlacemark( const GeoDataPlacemark *placemark )
+    : m_placemark( placemark )
 {
-    return m_modelIndex;
 }
 
-void VisiblePlacemark::setModelIndex( const QModelIndex &modelIndex )
+const GeoDataPlacemark* VisiblePlacemark::placemark() const
 {
-    m_modelIndex = modelIndex;
+    return m_placemark;
 }
 
 const QString VisiblePlacemark::name() const
 {
     if ( m_name.isEmpty() )
-        m_name = m_modelIndex.data( Qt::DisplayRole ).toString();
+        m_name = m_placemark->name();
 
     return m_name;
 }
 
 const QPixmap& VisiblePlacemark::symbolPixmap() const
-{
-    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(m_modelIndex.data( MarblePlacemarkModel::ObjectPointerRole ) ));
-    GeoDataStyle* style = placemark->style();
+{    
+    GeoDataStyle* style = m_placemark->style();
     if ( style ) {
         m_symbolPixmap = style->iconStyle().icon(); 
     } else {
