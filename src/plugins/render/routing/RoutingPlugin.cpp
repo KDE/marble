@@ -107,7 +107,9 @@ RoutingPluginPrivate::RoutingPluginPrivate( RoutingPlugin *parent ) :
     m_configDialog( 0 ),
     m_parent( parent )
 {
-    // nothing to do
+    m_settings["muted"] = false;
+    m_settings["sound"] = true;
+    m_settings["speaker"] = QString();
 }
 
 QString RoutingPluginPrivate::richText( const QString &source, int size ) const
@@ -370,6 +372,7 @@ void RoutingPluginPrivate::readSettings()
         m_configUi.speakerComboBox->setCurrentIndex( index );
         m_configUi.voiceNavigationCheckBox->setChecked( !muted );
         m_configUi.soundRadioButton->setChecked( sound );
+        m_configUi.speakerRadioButton->setChecked( !sound );
     }
 }
 
@@ -507,6 +510,12 @@ QHash<QString,QVariant> RoutingPlugin::settings() const
 void RoutingPlugin::setSettings( QHash<QString,QVariant> settings )
 {
     d->m_settings = settings;
+    if (!d->m_settings.contains("muted")) {
+        d->m_settings["muted"] = false;
+    }
+    if (!d->m_settings.contains("sound")) {
+        d->m_settings["sound"] = true;
+    }
     d->readSettings();
 }
 
