@@ -1,5 +1,7 @@
 PROJECT(RoutingPlugin)
 
+FIND_PACKAGE(Phonon)
+
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/routing
  ${CMAKE_BINARY_DIR}/src/plugins/render/routing
@@ -7,9 +9,13 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( routing_SRCS RoutingPlugin.cpp AudioOutput.cpp )
+IF( PHONON_FOUND )
+  set( routing_SRCS RoutingPlugin.cpp AudioOutput.cpp )
+ELSE()
+  set( routing_SRCS RoutingPlugin.cpp NullAudioOutput.cpp )
+ENDIF()
 set( routing_UI RoutingPlugin.ui RoutingConfigDialog.ui )
 qt4_wrap_ui( routing_SRCS ${routing_UI} )
 
 marble_add_plugin( RoutingPlugin ${routing_SRCS} )
-target_link_libraries(RoutingPlugin ${QT_PHONON_LIBRARY})
+target_link_libraries(RoutingPlugin ${PHONON_LIBS})
