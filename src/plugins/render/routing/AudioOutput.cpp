@@ -64,7 +64,7 @@ public:
 
 AudioOutputPrivate::AudioOutputPrivate( AudioOutput* parent ) :
     q( parent ), m_output( 0 ), m_lastIndex( -1 ),
-    m_lastDistance( 0.0 ), m_muted( false ), m_soundEnabled( false )
+    m_lastDistance( 0.0 ), m_muted( false ), m_soundEnabled( true )
 {
     // nothing to do
 }
