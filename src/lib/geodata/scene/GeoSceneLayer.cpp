@@ -87,6 +87,7 @@ GeoSceneLayer::GeoSceneLayer( const QString& name )
 GeoSceneLayer::~GeoSceneLayer()
 {
    qDeleteAll( m_datasets );
+   delete d;
 }
 
 const char* GeoSceneLayer::nodeType() const
