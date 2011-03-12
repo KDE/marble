@@ -590,7 +590,7 @@ bool MapWizard::validateCurrentPage()
         }
     }
 
-    if ( currentId() == 6 ) {
+    if ( currentId() == 5 ) {
         if ( d->uiWidget.lineEditTitle->text().isEmpty() ) {
             QMessageBox::information( this, tr( "Map Title" ), tr( "Please specify a map title." ) );
             d->uiWidget.lineEditTitle->setFocus();
