@@ -171,7 +171,7 @@ p, li { white-space: pre-wrap; }
     </item>
    </layout>
   </widget>
-  <widget class="QWizardPage" name="wizardPage">
+  <widget class="QWizardPage" name="wizardPageWmsAvailableMaps">
    <layout class="QHBoxLayout" name="horizontalLayout_7">
     <item>
      <widget class="QLabel" name="labelWmsMaps">
@@ -321,7 +321,7 @@ p, li { white-space: pre-wrap; }
     </item>
    </layout>
   </widget>
-  <widget class="QWizardPage" name="wizardPage_2">
+  <widget class="QWizardPage" name="wizardPageLegend">
    <layout class="QGridLayout" name="gridLayout_3">
     <item row="0" column="0">
      <widget class="QLabel" name="labelLegend_2">
@@ -388,7 +388,7 @@ p, li { white-space: pre-wrap; }
     </item>
    </layout>
   </widget>
-  <widget class="QWizardPage" name="wizardPageInfo">
+  <widget class="QWizardPage" name="wizardPageMetadata">
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0" colspan="2">
      <widget class="QLabel" name="label_6">
