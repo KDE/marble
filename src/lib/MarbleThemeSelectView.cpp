@@ -20,9 +20,12 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QFile>
 #include <QtCore/QDir>
+#include <QtCore/QDateTime>
+#include <QtCore/QModelIndex>
 #include <QtGui/QResizeEvent>
 #include <QtGui/QMenu>
 #include <QtGui/QMessageBox>
+#include <QtGui/QStandardItemModel>
 
 using namespace Marble;
 
@@ -97,6 +100,7 @@ QString MarbleThemeSelectView::Private::currentThemePath()
 
 MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
     : QListView( parent ),
+      m_settings( "kde.org", "Marble Desktop Globe" ),
       d( new Private( this ) )
 {
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -115,6 +119,7 @@ MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
     setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     setEditTriggers( QAbstractItemView::NoEditTriggers );
     setSelectionMode( QAbstractItemView::SingleSelection );
+    loadFavorites();
 
     connect( this, SIGNAL( activated( QModelIndex ) ),
                    SLOT( selectedMapTheme( QModelIndex ) ) );
@@ -162,7 +167,13 @@ void MarbleThemeSelectView::showContextMenu( const QPoint& pos )
     menu.addAction( "&Create a New Map...", this, SLOT( mapWizard() ) );
     if( QFileInfo( MarbleDirs::localPath() + "/maps/" + d->currentThemePath() ).exists() )
         menu.addAction( tr( "&Delete Map Theme" ), this, SLOT( deleteMap() ) );
-    menu.addAction( "&Upload Map...", this, SLOT( uploadDialog() ) );
+    menu.addAction( tr( "&Upload Map..." ), this, SLOT( uploadDialog() ) );
+    QAction *favAction = menu.addAction( tr( "&Favorite" ), this, SLOT( toggleFavorite() ) );
+    favAction->setCheckable( true );
+    if( currentIsFavorite() )
+        favAction->setChecked( true );
+    else
+        favAction->setChecked( false );
     menu.exec( mapToGlobal( pos ) );
 }
 
@@ -181,6 +192,50 @@ void MarbleThemeSelectView::deleteMap()
         QFile( mapthemedir.path() + "/legend.html" ).remove();
         QDir().rmdir( mapthemedir.path() );
     }
+}
+
+void MarbleThemeSelectView::toggleFavorite()
+{
+    QModelIndex index = currentIndex();
+    QAbstractItemModel *model = this->model();
+    QModelIndex columnIndex = model->index( index.row(), 0 );
+
+    if( currentIsFavorite() )
+    {
+        m_settings.beginGroup( "Favorites" );
+        m_settings.remove( model->data( columnIndex ).toString() );
+    }
+    else
+    {
+        m_settings.beginGroup( "Favorites" );
+        m_settings.setValue( model->data( columnIndex ).toString(), QDateTime::currentDateTime() );
+    }
+    m_settings.endGroup();
+    model->sort( 0 );
+}
+
+void MarbleThemeSelectView::loadFavorites()
+{
+    m_settings.beginGroup( "Favorites" );
+    if( !m_settings.contains( "initialized" ) ) {
+        m_settings.setValue( "initialized", true );
+        QDateTime currentDateTime = QDateTime::currentDateTime();
+        m_settings.setValue( "Atlas", currentDateTime );
+        m_settings.setValue( "OpenStreetMap", currentDateTime );
+        m_settings.setValue( "Satellite View", currentDateTime );
+    }
+    m_settings.endGroup();
+}
+
+bool MarbleThemeSelectView::currentIsFavorite()
+{
+    QModelIndex index = currentIndex();
+    const QAbstractItemModel  *model = index.model();
+    QModelIndex nameIndex = model->index( index.row(), 0, QModelIndex() );
+    m_settings.beginGroup( "Favorites" );
+    bool favorite = m_settings.contains( model->data( nameIndex ).toString() );
+    m_settings.endGroup();
+    return favorite;
 }
 
 #include "MarbleThemeSelectView.moc"

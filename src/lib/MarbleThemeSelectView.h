@@ -18,6 +18,7 @@
 
 
 #include <QtCore/QModelIndex>
+#include <QtCore/QSettings>
 #include <QtGui/QListView>
 
 #include "marble_export.h"
@@ -46,6 +47,7 @@ class MARBLE_EXPORT MarbleThemeSelectView : public QListView
     void mapWizard();
     void showContextMenu( const QPoint& pos );
     void deleteMap();
+    void toggleFavorite();
 
  Q_SIGNALS:
     void selectMapTheme( const QString& );
@@ -55,6 +57,9 @@ class MARBLE_EXPORT MarbleThemeSelectView : public QListView
 
  private:
     Q_DISABLE_COPY( MarbleThemeSelectView )
+    void loadFavorites();
+    bool currentIsFavorite();
+    QSettings m_settings;
     class Private;
     Private  *const d;
 };

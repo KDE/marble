@@ -12,6 +12,8 @@
 #ifndef MARBLE_MAPTHEMESORTFILTERPROXYMODEL_H
 #define MARBLE_MAPTHEMESORTFILTERPROXYMODEL_H
 
+#include <QtCore/QDateTime>
+#include <QtCore/QSettings>
 #include <QtGui/QSortFilterProxyModel>
 
 class QModelIndex;
@@ -28,6 +30,10 @@ class MapThemeSortFilterProxyModel : public QSortFilterProxyModel
     protected:
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
     bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const;
+    private:
+    static QSettings sm_settings;
+    static bool isFavorite( const QModelIndex& index );
+    static QDateTime favoriteDateTime( const QModelIndex& index );
 
 };
 

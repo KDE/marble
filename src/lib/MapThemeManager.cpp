@@ -18,10 +18,10 @@
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QFileSystemWatcher>
-#include <QtGui/QStandardItemModel>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QTimer>
+#include <QtGui/QStandardItemModel>
 
 // Local dir
 #include "GeoSceneDocument.h"
