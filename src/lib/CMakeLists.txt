@@ -391,6 +391,7 @@ else (APPLE AND QTONLY)
     PluginInterface.h
     RenderPlugin.h
     RenderPluginInterface.h
+    MarbleRunnerManager.h
     MarbleAbstractRunner.h
     RunnerPlugin.h
     LayerInterface.h
