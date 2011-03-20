@@ -62,6 +62,7 @@ class WorldClock : public Plasma::Applet
     private slots:
         //connected to geometryChanged()
         void resizeMap(bool changeAspect = false);
+        void slotRepaint();
     private:
         void connectToEngine();
 

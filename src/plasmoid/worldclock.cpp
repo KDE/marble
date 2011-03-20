@@ -86,6 +86,8 @@ void WorldClock::init()
     m_map->setShowPlaces     ( false );
     m_map->setShowCities     ( false );
     m_map->setShowOtherPlaces( false );
+    // set the date time of the marble model otherwise the sun will not show up correctly
+    m_map->model()->setClockDateTime(QDateTime::currentDateTimeUtc());
 
     if(cg.readEntry("projection", static_cast<int>(Equirectangular)) == Mercator)
         m_map->setProjection(Mercator);
@@ -138,6 +140,8 @@ void WorldClock::init()
 
     Plasma::DataEngine *m_timeEngine = dataEngine("time");
     m_timeEngine->connectSource( "Local", this, 6000, Plasma::AlignToMinute);
+
+    connect(m_map, SIGNAL(repaintNeeded(const QRegion&)), this, SLOT(slotRepaint()));
 }
 
 WorldClock::~WorldClock()
@@ -189,6 +193,11 @@ void WorldClock::resizeMap(bool changeAspect)
     }
 }
 
+void WorldClock::slotRepaint()
+{
+  update();
+}
+
 void WorldClock::dataUpdated(const QString &source,
                              const Plasma::DataEngine::Data &data)
 {
@@ -228,7 +237,9 @@ void WorldClock::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 QString WorldClock::getZone()
 {
     qreal lat, lon;
-    bool ok = m_map->viewport()->currentProjection()->geoCoordinates(
+    // get the hover zone only if the hove point exists
+    bool ok = !m_hover.isNull() && 
+              m_map->viewport()->currentProjection()->geoCoordinates(
                 m_hover.x(), m_hover.y(), m_map->viewport(), lon, lat );
 
     if( !ok ) {
