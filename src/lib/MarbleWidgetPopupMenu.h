@@ -76,6 +76,7 @@ private Q_SLOTS:
       */
     bool mouseCoordinates( GeoDataCoordinates* coordinates, QAction* dataContainer );
     void createActions();
+    QMenu* createInfoBoxMenu();
 
  private:
     Q_DISABLE_COPY( MarbleWidgetPopupMenu )
