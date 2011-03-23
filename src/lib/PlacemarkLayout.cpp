@@ -195,6 +195,25 @@ int PlacemarkLayout::maxLabelHeight() const
 void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
                                         ViewParams *viewParams )
 {
+    // earth
+    bool showPlaces, showCities, showTerrain, showOtherPlaces;
+
+    viewParams->propertyValue( "places", showPlaces );
+    viewParams->propertyValue( "cities", showCities );
+    viewParams->propertyValue( "terrain", showTerrain );
+    viewParams->propertyValue( "otherplaces", showOtherPlaces );
+    
+    // other planets
+    bool showLandingSites, showCraters, showMaria;
+
+    viewParams->propertyValue( "landingsites", showLandingSites );
+    viewParams->propertyValue( "craters", showCraters );
+    viewParams->propertyValue( "maria", showMaria );
+
+    if ( !showPlaces && !showCities && !showTerrain && !showOtherPlaces &&
+         !showLandingSites && !showCraters && !showMaria )
+        return;
+
     if ( m_placemarkModel->rowCount() <= 0 )
         return;
 
@@ -222,21 +241,6 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
     int labelnum = 0;
     qreal x = 0;
     qreal y = 0;
-
-    // earth
-    bool showPlaces, showCities, showTerrain, showOtherPlaces;
-
-    viewParams->propertyValue( "places", showPlaces );
-    viewParams->propertyValue( "cities", showCities );
-    viewParams->propertyValue( "terrain", showTerrain );
-    viewParams->propertyValue( "otherplaces", showOtherPlaces );
-    
-    // other planets
-    bool showLandingSites, showCraters, showMaria;
-
-    viewParams->propertyValue( "landingsites", showLandingSites );
-    viewParams->propertyValue( "craters", showCraters );
-    viewParams->propertyValue( "maria", showMaria );
 
     GeoDataLatLonAltBox latLonAltBox = viewParams->viewport()->viewLatLonAltBox();
 
