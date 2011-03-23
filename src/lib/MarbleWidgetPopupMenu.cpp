@@ -14,6 +14,7 @@
 
 // Marble
 #include "AbstractDataPluginItem.h"
+#include "AbstractFloatItem.h"
 #include "MarbleAboutDialog.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
@@ -69,9 +70,10 @@ void MarbleWidgetPopupMenu::createActions()
     QAction* addBookmark = new QAction( QIcon(":/icons/bookmark-new.png"),
                                         tr( "Add &Bookmark" ), this );
 
-    QAction *reloadAction  = new QAction( tr( "Rel&oad Map" ), this);
     m_aboutDialogAction = new QAction( tr( "&About" ), this );
     QAction *goToAction = new QAction( tr( "&Go to..."), this );
+
+    QMenu* infoBoxMenu = createInfoBoxMenu();
 
     m_rmbExtensionPoint = m_rmbMenu->addSeparator();
     m_rmbMenu->addAction( fromHere );
@@ -80,8 +82,7 @@ void MarbleWidgetPopupMenu::createActions()
     m_rmbMenu->addAction( m_setHomePointAction );
     m_rmbMenu->addAction( addBookmark );
     m_rmbMenu->addSeparator();
-    m_rmbMenu->addAction( reloadAction );
-    m_rmbMenu->addSeparator();
+    m_rmbMenu->addMenu( infoBoxMenu );
     m_rmbMenu->addAction( m_aboutDialogAction );
 
     m_smallScreenMenu->addAction( fromHere );
@@ -91,6 +92,7 @@ void MarbleWidgetPopupMenu::createActions()
     m_smallScreenMenu->addAction( addBookmark );
     m_smallScreenMenu->addSeparator();
     m_smallScreenMenu->addAction( goToAction );
+    m_smallScreenMenu->addMenu( infoBoxMenu );
     m_smallScreenMenu->addSeparator();
 
     connect( fromHere, SIGNAL( triggered( ) ), SLOT( directionsFromHere() ) );
@@ -99,10 +101,22 @@ void MarbleWidgetPopupMenu::createActions()
     connect( addBookmark, SIGNAL( triggered( ) ), SLOT( addBookmark() ) );
     connect( m_aboutDialogAction, SIGNAL( triggered() ), SLOT( slotAboutDialog() ) );
     connect( m_copyCoordinateAction,SIGNAL( triggered() ), SLOT( slotCopyCoordinates() ) );
-    connect( reloadAction, SIGNAL(triggered()), m_widget, SLOT(reloadMap()));
     connect( goToAction, SIGNAL(triggered()), this, SLOT( openGoToDialog() ) );
 }
 
+QMenu* MarbleWidgetPopupMenu::createInfoBoxMenu()
+{
+    QMenu* menu = new QMenu( tr( "&Info Boxes" ) );
+    QList<AbstractFloatItem *> floatItemList = m_widget->floatItems();
+
+    QList<AbstractFloatItem *>::const_iterator iter = floatItemList.constBegin();
+    QList<AbstractFloatItem *>::const_iterator const end = floatItemList.constEnd();
+    for (; iter != end; ++iter )
+    {
+        menu->addAction( (*iter)->action() );
+    }
+    return menu;
+}
 
 void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 {
