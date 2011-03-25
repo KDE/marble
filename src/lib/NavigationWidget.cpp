@@ -112,7 +112,7 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
 
     // Make us aware of all the Placemarks in the MarbleModel so that
     // we can search them.
-    setLocations( d->m_widget->placemarkModel() );
+    setLocations( d->m_widget->model()->placemarkModel() );
 
 //    FIXME: Why does this fail: "selection model works on a different model than the view..." ?
 //    d->m_navigationUi.locationListView->setSelectionModel( d->m_widget->placemarkSelectionModel() );
@@ -161,7 +161,7 @@ void NavigationWidget::searchLineChanged( const QString &search )
     d->m_searchTerm = search;
     // if search line is empty, restore original geonames
     if ( d->m_searchTerm.isEmpty() )
-        setLocations( d->m_widget->placemarkModel() );
+        setLocations( d->m_widget->model()->placemarkModel() );
     d->m_deferSearch.start( 500 );
 }
 
@@ -190,7 +190,7 @@ void NavigationWidget::setLocations(QAbstractItemModel* locations)
     d->m_sortproxy->setSortLocaleAware( true );
     d->m_sortproxy->setDynamicSortFilter( true );
     d->m_sortproxy->sort( 0 );
-    d->m_widget->placemarkSelectionModel()->clear();
+    d->m_widget->model()->placemarkSelectionModel()->clear();
     mDebug() << "NavigationWidget (sort): Time elapsed:"<< t.elapsed() << " ms";
 }
 
@@ -230,7 +230,7 @@ void NavigationWidget::mapCenterOnSignal( const QModelIndex &index )
     {
         GeoDataCoordinates coord = ( dynamic_cast<GeoDataPlacemark*>( object ) )->coordinate();
         d->m_widget->centerOn( coord, true );
-        d->m_widget->placemarkSelectionModel()->select( d->m_sortproxy->mapToSource( index ), QItemSelectionModel::ClearAndSelect );
+        d->m_widget->model()->placemarkSelectionModel()->select( d->m_sortproxy->mapToSource( index ), QItemSelectionModel::ClearAndSelect );
     }
 }
 

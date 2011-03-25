@@ -363,16 +363,6 @@ void MarbleMap::setRadius( int radius )
 }
 
 
-QAbstractItemModel *MarbleMap::placemarkModel() const
-{
-    return d->m_model->placemarkModel();
-}
-
-QItemSelectionModel *MarbleMap::placemarkSelectionModel() const
-{
-    return d->m_model->placemarkSelectionModel();
-}
-
 int MarbleMap::zoom() const
 {
     return d->m_logzoom;
@@ -1047,11 +1037,6 @@ void MarbleMap::notifyMouseClick( int x, int y )
     if ( valid ) {
         emit mouseClickGeoPosition( lon, lat, GeoDataCoordinates::Radian );
     }
-}
-
-FileViewModel* MarbleMap::fileViewModel() const
-{
-    return d->m_model->fileViewModel();
 }
 
 void MarbleMap::clearVolatileTileCache()

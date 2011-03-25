@@ -39,7 +39,6 @@ namespace Marble
 
 class AbstractDataPluginItem;
 class AbstractFloatItem;
-class FileViewModel;
 class GeoDataLatLonAltBox;
 class GeoDataLatLonBox;
 class GeoPainter;
@@ -242,11 +241,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     ViewContext viewContext() const;
 
     /**
-     * @brief Return a QAbstractItemModel containing files.
-     */
-    FileViewModel * fileViewModel() const;
-
-    /**
      * @brief Get the GeoSceneDocument object of the current map theme
      */
     GeoSceneDocument * mapTheme() const;
@@ -401,17 +395,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /// @name Placemark management
     //@{
 
-    /**
-     * @brief Returns the model for all the placemarks on the globe.
-     */
-    QAbstractItemModel *placemarkModel() const;
-
-    /**
-     * @brief Returns the selection model for all the placemarks on the globe.
-     */
-    QItemSelectionModel *placemarkSelectionModel() const;
-
     QVector<const GeoDataPlacemark*> whichFeatureAt( const QPoint& ) const;
+
+    //@}
 
     /// @name Float items and map appearance
     //@{

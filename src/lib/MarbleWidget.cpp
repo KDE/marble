@@ -339,16 +339,6 @@ void MarbleWidget::setRadius( int radius )
 }
 
 
-QAbstractItemModel *MarbleWidget::placemarkModel() const
-{
-    return d->m_map->placemarkModel();
-}
-
-QItemSelectionModel *MarbleWidget::placemarkSelectionModel() const
-{
-    return d->m_map->placemarkSelectionModel();
-}
-
 qreal MarbleWidget::moveStep()
 {
     if ( radius() < sqrt( (qreal)(width() * width() + height() * height()) ) )
@@ -996,11 +986,6 @@ void MarbleWidget::notifyMouseClick( int x, int y)
     if ( valid ) {
         emit mouseClickGeoPosition( lon, lat, GeoDataCoordinates::Radian );
     }
-}
-
-FileViewModel* MarbleWidget::fileViewModel() const
-{
-    return d->m_model->fileViewModel();
 }
 
 void MarbleWidget::clearVolatileTileCache()

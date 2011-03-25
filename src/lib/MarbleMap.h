@@ -52,7 +52,6 @@ class GeoDataPlacemark;
 class MarbleModel;
 class ViewportParams;
 class SunLocator;
-class FileViewModel;
 class GeoPainter;
 class LayerInterface;
 class RenderPlugin;
@@ -222,16 +221,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @return The latitude of the center point in degree.
      */
     qreal centerLatitude() const;
-
-    /**
-     * @brief returns the model for all the placemarks on the globe.
-     */
-    QAbstractItemModel *placemarkModel() const;
-
-    /**
-     * @brief returns the selection model for all the placemarks on the globe.
-     */
-    QItemSelectionModel *placemarkSelectionModel() const;
 
     QVector<const GeoDataPlacemark*> whichFeatureAt( const QPoint& ) const;
 
@@ -691,11 +680,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief used to notify about the position of the mouse click
       */
     void notifyMouseClick( int x, int y );
-
-    /**
-     * @brief Return a QAbstractItemModel containing files.
-     */
-    FileViewModel* fileViewModel() const;
 
     void clearVolatileTileCache();
     /**

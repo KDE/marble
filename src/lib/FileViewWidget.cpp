@@ -52,17 +52,17 @@ void FileViewWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_widget = widget;
     //set up everything for the FileModel
-    d->m_fileViewUi.m_fileView->setModel( widget->fileViewModel() );
+    d->m_fileViewUi.m_fileView->setModel( widget->model()->fileViewModel() );
     delete d->m_fileViewUi.m_fileView->selectionModel();
-    d->m_fileViewUi.m_fileView->setSelectionModel( widget->fileViewModel()->selectionModel() );
+    d->m_fileViewUi.m_fileView->setSelectionModel( widget->model()->fileViewModel()->selectionModel() );
     connect( d->m_fileViewUi.m_fileView->selectionModel(),
              SIGNAL( selectionChanged( QItemSelection, QItemSelection ) ),
              this,
              SLOT( enableFileViewActions() ) );
     connect( d->m_fileViewUi.m_saveButton,  SIGNAL( clicked() ) ,
-             widget->fileViewModel(),       SLOT( saveFile() ) );
+             widget->model()->fileViewModel(),       SLOT( saveFile() ) );
     connect( d->m_fileViewUi.m_closeButton, SIGNAL( clicked() ) ,
-             widget->fileViewModel(),    SLOT( closeFile() ) );
+             widget->model()->fileViewModel(),    SLOT( closeFile() ) );
 
     d->m_treeSortProxy = new QSortFilterProxyModel( this );
     d->m_treeSortProxy->setSourceModel( widget->model()->treeModel() );
