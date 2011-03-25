@@ -318,6 +318,7 @@ if (APPLE AND QTONLY)
 else (APPLE AND QTONLY)
   install( FILES
     ${graphicsview_HDRS}
+    BookmarkManager.h
     DownloadRegionDialog.h
     LatLonBoxWidget.h
     MarbleWidget.h

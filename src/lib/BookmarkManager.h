@@ -13,11 +13,13 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
-#include "BookmarkManager_p.h"
+#include <QtCore/QVector>
+#include "global.h"
 
 namespace Marble
 {
 
+    class BookmarkManagerPrivate;
     class GeoDataPlacemark;
     class GeoDataFolder;
 /**
@@ -26,7 +28,7 @@ namespace Marble
  * book mark operations
  */
 
-class BookmarkManager : public QObject
+class MARBLE_EXPORT BookmarkManager : public QObject
 {
     Q_OBJECT
 

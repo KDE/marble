@@ -30,7 +30,6 @@
 
 #include "AbstractProjection.h"
 #include "DataMigration.h"
-#include "FileViewModel.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
@@ -46,7 +45,6 @@
 #include "SunLocator.h"
 #include "TileCreatorDialog.h"
 #include "ViewportParams.h"
-#include "BookmarkManager.h"
 #include "routing/RoutingLayer.h"
 #include "routing/RoutingManager.h"
 #include "routing/AlternativeRoutesModel.h"
@@ -1261,36 +1259,6 @@ void MarbleWidget::downloadRegion( QString const & sourceDir, QVector<TileCoords
 GeoDataLookAt MarbleWidget::lookAt() const
 {
     return d->m_map->lookAt();
-}
-
-void MarbleWidget::addBookmark( const GeoDataPlacemark &bookmark, const QString &folderName ) const
-{
-    d->m_model->bookmarkManager()->addBookmark( bookmark, folderName );
-}
-
-QString MarbleWidget::bookmarkFile() const
-{
-    return d->m_model->bookmarkManager()->bookmarkFile();
-}
-
-bool MarbleWidget::loadBookmarkFile( const QString &relativeFileName )
-{
-    return d->m_model->bookmarkManager()->loadFile( relativeFileName );
-}
-
-QVector<GeoDataFolder*> MarbleWidget::bookmarkFolders()
-{
-    return d->m_model->bookmarkManager()->folders();
-}
-
-void MarbleWidget::removeAllBookmarks()
-{
-    d->m_model->bookmarkManager()->removeAllBookmarks();
-}
-
-void MarbleWidget::addNewBookmarkFolder( const QString &name ) const
-{
-    d->m_model->bookmarkManager()->addNewBookmarkFolder( name );
 }
 
 RoutingLayer* MarbleWidget::routingLayer()

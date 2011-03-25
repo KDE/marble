@@ -548,26 +548,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     //@}
 
-    /// @name Bookmark management
-    //@{
-
-    void addBookmark( const GeoDataPlacemark &bookmark, const QString &folderName ) const;
-
-    /**
-    * @brief Returns path of file where bookmarks are saved 
-    */
-    QString bookmarkFile() const;
-
-    bool loadBookmarkFile( const QString& relativeFileName);
-
-    QVector<GeoDataFolder*> bookmarkFolders();
-    
-    void removeAllBookmarks();
-
-    void addNewBookmarkFolder( const QString& name ) const;
-
-    //@}
-
     /// @name Miscellaneous
     //@{
 

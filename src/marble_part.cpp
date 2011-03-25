@@ -153,7 +153,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     m_statusBarExtension->statusBar()->setUpdatesEnabled( false );
 
     // Load bookmark file. If it does not exist, a default one will be used.
-    m_controlView->marbleWidget()->loadBookmarkFile( "bookmarks/bookmarks.kml" );
+    m_controlView->marbleWidget()->model()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
 
     initializeCustomTimezone();
 
@@ -879,7 +879,7 @@ void MarblePart::createFolderList()
 
     QList<QAction*> actionList;
 
-   QVector<GeoDataFolder*> folders = m_controlView->marbleWidget()->bookmarkFolders();
+   QVector<GeoDataFolder*> folders = m_controlView->marbleWidget()->model()->bookmarkManager()->folders();
    QVector<GeoDataFolder*>::const_iterator i = folders.constBegin();
    QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
 

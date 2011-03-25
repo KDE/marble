@@ -9,6 +9,7 @@
 //
 
 #include "BookmarkManager.h"
+#include "BookmarkManager_p.h"
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"

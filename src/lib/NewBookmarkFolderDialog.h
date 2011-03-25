@@ -17,7 +17,7 @@
 namespace Marble
 {
 
-class MarbleWidget;
+class BookmarkManager;
 
 class MARBLE_EXPORT NewBookmarkFolderDialog : public QDialog, private Ui::UiNewBookmarkFolderDialog
 {
@@ -29,7 +29,7 @@ class MARBLE_EXPORT NewBookmarkFolderDialog : public QDialog, private Ui::UiNewB
 
     ~NewBookmarkFolderDialog();
 
-    void setMarbleWidget( MarbleWidget* widget );
+    void setBookmarkManager( BookmarkManager* manager );
 
     void setFolderName( const QString &name );
 
@@ -41,7 +41,7 @@ class MARBLE_EXPORT NewBookmarkFolderDialog : public QDialog, private Ui::UiNewB
  private:
     Q_DISABLE_COPY( NewBookmarkFolderDialog )
 
-    MarbleWidget *m_widget;
+    BookmarkManager *m_manager;
 };
 
 }

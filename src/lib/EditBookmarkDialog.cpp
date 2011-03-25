@@ -179,7 +179,7 @@ void EditBookmarkDialog::openNewFolderDialog()
 {
     QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( this );
     if ( d->m_widget ) {
-        dialog->setMarbleWidget( d->m_widget );
+        dialog->setBookmarkManager( d->m_widget->model()->bookmarkManager() );
     }
     if ( dialog->exec() == QDialog::Accepted ) {
         d->initComboBox();
@@ -191,7 +191,7 @@ void EditBookmarkDialog::openNewFolderDialog()
 void EditBookmarkDialog::addBookmark()
 {
     if ( d->m_widget ) {
-        d->m_widget->addBookmark( bookmark(), folderName() );
+        d->m_widget->model()->bookmarkManager()->addBookmark( bookmark(), folderName() );
     }
 }
 

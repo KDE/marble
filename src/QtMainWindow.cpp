@@ -124,7 +124,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
              m_controlView->marbleWidget()->model(), SLOT( clearPersistentTileCache() ) );
 
     // Load bookmark file. If it does not exist, a default one will be used.
-    m_controlView->marbleWidget()->loadBookmarkFile( "bookmarks/bookmarks.kml" );
+    m_controlView->marbleWidget()->model()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
 
     createActions();
     createMenus();
@@ -491,7 +491,7 @@ void MainWindow::createBookmarkMenu()
 
 void MainWindow::createFolderList()
 {
-    QVector<GeoDataFolder*> folders = m_controlView->marbleWidget()->bookmarkFolders();
+    QVector<GeoDataFolder*> folders = m_controlView->marbleWidget()->model()->bookmarkManager()->folders();
 
     QVector<GeoDataFolder*>::const_iterator i = folders.constBegin();
     QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
