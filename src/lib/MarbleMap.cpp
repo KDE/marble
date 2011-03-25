@@ -1054,16 +1054,6 @@ FileViewModel* MarbleMap::fileViewModel() const
     return d->m_model->fileViewModel();
 }
 
-void MarbleMap::clearPersistentTileCache()
-{
-    d->m_model->clearPersistentTileCache();
-}
-
-void MarbleMap::setPersistentTileCacheLimit( quint64 kiloBytes )
-{
-    d->m_model->setPersistentTileCacheLimit( kiloBytes );
-}
-
 void MarbleMap::clearVolatileTileCache()
 {
     d->m_textureLayer.update();

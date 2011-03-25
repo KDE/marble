@@ -1003,16 +1003,6 @@ FileViewModel* MarbleWidget::fileViewModel() const
     return d->m_model->fileViewModel();
 }
 
-void MarbleWidget::clearPersistentTileCache()
-{
-    d->m_map->clearPersistentTileCache();
-}
-
-void MarbleWidget::setPersistentTileCacheLimit( quint64 kiloBytes )
-{
-    d->m_map->setPersistentTileCacheLimit( kiloBytes );
-}
-
 void MarbleWidget::clearVolatileTileCache()
 {
     mDebug() << "About to clear VolatileTileCache";

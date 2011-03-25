@@ -27,3 +27,10 @@
    MARBLE_DEPRECATED( void addPlacemarkData( const QString& data, const QString& key = "data" ) );
    MARBLE_DEPRECATED( void removePlacemarkKey( const QString& key ) );
     -> use addGeoDataFile, addGeoDataString, removeGeoData of MarbleModel
+
+
+2011-03-25  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+
+* Remove the following methods from MarbleMap and MarbleWidget, use the respective methods of MarbleModel:
+    void clearPersistentTileCache();
+    void setPersistentTileCacheLimit( quint64 kiloBytes );

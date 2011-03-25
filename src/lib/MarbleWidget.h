@@ -145,7 +145,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(bool showRivers   READ showRivers      WRITE setShowRivers)
     Q_PROPERTY(bool showLakes    READ showLakes       WRITE setShowLakes)
 
-    Q_PROPERTY(quint64 persistentTileCacheLimit  READ persistentTileCacheLimit  WRITE setPersistentTileCacheLimit)
     Q_PROPERTY(quint64 volatileTileCacheLimit    READ volatileTileCacheLimit    WRITE setVolatileTileCacheLimit)
 
  public:
@@ -926,13 +925,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     /// @name Tile management slots
     //@{
-
-    void clearPersistentTileCache();
-    /**
-     * @brief  Set the limit of the persistent (on hard disc) tile cache.
-     * @param  kilobytes The limit in kilobytes, 0 means no limit.
-     */
-    void setPersistentTileCacheLimit( quint64 kiloBytes );
 
     void clearVolatileTileCache();
     /**

@@ -697,13 +697,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     FileViewModel* fileViewModel() const;
 
-    void clearPersistentTileCache();
-    /**
-     * @brief  Set the limit of the persistent (on hard disc) tile cache.
-     * @param  bytes The limit in kilobytes, 0 means no limit.
-     */
-    void setPersistentTileCacheLimit( quint64 kiloBytes );
-
     void clearVolatileTileCache();
     /**
      * @brief  Set the limit of the volatile (in RAM) tile cache.

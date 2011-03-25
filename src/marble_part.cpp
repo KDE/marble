@@ -1281,8 +1281,8 @@ void MarblePart::editSettings()
 			     "preferences-web-browser-cache" );
     connect( w_cacheSettings,               SIGNAL( clearVolatileCache() ),
 	     m_controlView->marbleWidget(), SLOT( clearVolatileTileCache() ) );
-    connect( w_cacheSettings,               SIGNAL( clearPersistentCache() ),
-	     m_controlView->marbleWidget(), SLOT( clearPersistentTileCache() ) );
+    connect( w_cacheSettings,                        SIGNAL( clearPersistentCache() ),
+	     m_controlView->marbleWidget()->model(), SLOT( clearPersistentTileCache() ) );
 
     // time page
     Ui_MarbleTimeSettingsWidget ui_timeSettings;
@@ -1408,7 +1408,7 @@ void MarblePart::updateSettings()
     m_controlView->marbleWidget()->setAnimationsEnabled( MarbleSettings::animateTargetVoyage() );
 
     // Cache
-    m_controlView->marbleWidget()->
+    m_controlView->marbleWidget()->model()->
         setPersistentTileCacheLimit( MarbleSettings::persistentTileCacheLimit() * 1024 );
     m_controlView->marbleWidget()->
         setVolatileTileCacheLimit( MarbleSettings::volatileTileCacheLimit() * 1024 );

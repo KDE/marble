@@ -121,7 +121,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
     connect( m_configDialog, SIGNAL( clearVolatileCacheClicked() ),
              m_controlView->marbleWidget(), SLOT( clearVolatileTileCache() ) );
     connect( m_configDialog, SIGNAL( clearPersistentCacheClicked() ),
-             m_controlView->marbleWidget(), SLOT( clearPersistentTileCache() ) );
+             m_controlView->marbleWidget()->model(), SLOT( clearPersistentTileCache() ) );
 
     // Load bookmark file. If it does not exist, a default one will be used.
     m_controlView->marbleWidget()->loadBookmarkFile( "bookmarks/bookmarks.kml" );
@@ -1158,7 +1158,7 @@ void MainWindow::updateSettings()
     m_controlView->setExternalMapEditor( m_configDialog->externalMapEditor() );
 
     // Cache
-    m_controlView->marbleWidget()->setPersistentTileCacheLimit( m_configDialog->persistentTileCacheLimit() * 1024 );
+    m_controlView->marbleWidget()->model()->setPersistentTileCacheLimit( m_configDialog->persistentTileCacheLimit() * 1024 );
     m_controlView->marbleWidget()->setVolatileTileCacheLimit( m_configDialog->volatileTileCacheLimit() * 1024 );
 
     /*
