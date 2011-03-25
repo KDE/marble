@@ -412,28 +412,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     QItemSelectionModel *placemarkSelectionModel() const;
 
-    /**
-     * @brief  Add a GeoDataPlacemark file to the model. Supported file types are .pnt, .gpx and .kml
-     * @param  filename  the filename of the file containing the Placemarks.
-     * @deprecated Please use addGeoDataFile instead
-     */
-    MARBLE_DEPRECATED( void addPlacemarkFile( const QString &filename ) );
-
-    /**
-     * @brief  Add GeoDataPlacemark data as string to the model.
-     * @param  data  the string containing the Placemarks.
-     * @param key  the string needed to identify the data
-     * @deprecated Please use addGeoDataString instead
-     */
-    MARBLE_DEPRECATED( void addPlacemarkData( const QString& data, const QString& key = "data" ) );
-
-    /**
-     * @brief  remove data or files from the model.
-     * @param key  either the filename or the string used to identify the data in addPlacemarkFile and addPlacemarkData
-     * @deprecated Please use removeGeoData instead
-     */
-    MARBLE_DEPRECATED( void removePlacemarkKey( const QString& key ) );
-
     QVector<const GeoDataPlacemark*> whichFeatureAt( const QPoint& ) const;
 
     /// @name Float items and map appearance
@@ -943,36 +921,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Set whether travels to a point should get animated
      */
     void setAnimationsEnabled( bool enabled );
-
-    //@}
-
-    /// @name Geo data management slots
-    //@{
-
-    /**
-     * @brief Opens a gpx file for viewing on the Marble Widget
-     * @deprecated Please use addGeoDataFile instead
-     */
-    void openGpxFile( const QString &filename );
-
-    /**
-     * @brief  Add a GeoData file to the model. Supported file types are .pnt, .gpx and .kml
-     * @param  filename  the filename of the file containing the data to be loaded.
-     */
-    void addGeoDataFile( const QString &filename );
-
-    /**
-     * @brief  Add GeoData data as string to the model.
-     * @param  data  the string containing the Placemarks.
-     * @param  key  the string needed to identify the data
-     */
-    void addGeoDataString( const QString& data, const QString& key = "data" );
-
-    /**
-     * @brief  remove data or files from the model.
-     * @param key  either the filename or the string used to identify the data in addGeoDataFile and addGeoDataString
-     */
-    void removeGeoData( const QString& key );
 
     //@}
 

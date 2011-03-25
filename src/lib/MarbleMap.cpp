@@ -460,21 +460,6 @@ int  MarbleMap::maximumZoom() const
     return 2100;
 }
 
-void MarbleMap::addPlacemarkFile( const QString &filename )
-{
-    addGeoDataFile( filename );
-}
-
-void MarbleMap::addPlacemarkData( const QString &data, const QString &key )
-{
-    addGeoDataString( data, key );
-}
-
-void MarbleMap::removePlacemarkKey( const QString &key )
-{
-    removeGeoData( key );
-}
-
 QVector<const GeoDataPlacemark*> MarbleMap::whichFeatureAt( const QPoint& curpos ) const
 {
     return d->m_placemarkLayout.whichPlacemarkAt( curpos );
@@ -1064,11 +1049,6 @@ void MarbleMap::notifyMouseClick( int x, int y )
     }
 }
 
-void MarbleMap::openGpxFile( const QString &filename )
-{
-    addGeoDataFile( filename );
-}
-
 FileViewModel* MarbleMap::fileViewModel() const
 {
     return d->m_model->fileViewModel();
@@ -1254,21 +1234,6 @@ qreal MarbleMap::distanceFromZoom( qreal zoom ) const
 qreal MarbleMap::zoomFromDistance( qreal distance ) const
 {
     return d->zoom( radiusFromDistance( distance ) );
-}
-
-void MarbleMap::addGeoDataFile( const QString &filename )
-{
-    d->m_model->addGeoDataFile( filename );
-}
-
-void MarbleMap::addGeoDataString( const QString& data, const QString& key )
-{
-    d->m_model->addGeoDataString( data, key );
-}
-
-void MarbleMap::removeGeoData( const QString& key )
-{
-    d->m_model->removeGeoData( key );
 }
 
 // this method will only temporarily "pollute" the MarbleModel class

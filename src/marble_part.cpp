@@ -214,7 +214,7 @@ bool MarblePart::openFile()
                                             widget(), i18n("Open File")
                                            );
     foreach( const QString &fileName, fileNames ) {
-        m_controlView->marbleWidget()->addGeoDataFile( fileName );
+        m_controlView->marbleWidget()->model()->addGeoDataFile( fileName );
     }
 
     return true;

@@ -26,6 +26,7 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "MarbleWidget.h"
+#include "MarbleModel.h"
 #include "MarbleDataFacade.h"
 
 
@@ -232,7 +233,7 @@ void FileViewFloatItem::addFile()
                                             tr("All Supported Files (*.gpx *.kml *.pnt);;GPS Data (*.gpx);;Google Earth KML (*.kml);PNT Data (*.pnt)"));
 
     if ( ! fileName.isEmpty() ) {
-        m_marbleWidget->addGeoDataFile( fileName );
+        m_marbleWidget->model()->addGeoDataFile( fileName );
     }
 }
 

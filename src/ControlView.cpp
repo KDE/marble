@@ -549,6 +549,11 @@ bool ControlView::setSideBarState( const QByteArray &state )
     return m_splitter ? m_splitter->restoreState( state ) : false;
 }
 
+void ControlView::addGeoDataFile( QString filename )
+{
+    m_marbleWidget->model()->addGeoDataFile( filename );
+}
+
 }
 
 #include "ControlView.moc"

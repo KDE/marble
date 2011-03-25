@@ -378,21 +378,6 @@ int  MarbleWidget::maximumZoom() const
     return d->m_map->maximumZoom();
 }
 
-void MarbleWidget::addPlacemarkFile( const QString &filename )
-{
-    addGeoDataFile( filename );
-}
-
-void MarbleWidget::addPlacemarkData( const QString &data, const QString &key )
-{
-    addGeoDataString( data, key );
-}
-
-void MarbleWidget::removePlacemarkKey( const QString &key )
-{
-    removeGeoData( key );
-}
-
 QVector<const GeoDataPlacemark*> MarbleWidget::whichFeatureAt( const QPoint &curpos ) const
 {
     return d->m_map->whichFeatureAt( curpos );
@@ -1013,11 +998,6 @@ void MarbleWidget::notifyMouseClick( int x, int y)
     }
 }
 
-void MarbleWidget::openGpxFile( const QString &filename )
-{
-    addGeoDataFile( filename );
-}
-
 FileViewModel* MarbleWidget::fileViewModel() const
 {
     return d->m_model->fileViewModel();
@@ -1346,22 +1326,6 @@ void MarbleWidget::addNewBookmarkFolder( const QString &name ) const
 RoutingLayer* MarbleWidget::routingLayer()
 {
     return d->m_routingLayer;
-}
-
-void MarbleWidget::addGeoDataFile( const QString &filename )
-{
-    d->m_map->addGeoDataFile( filename );
-    //d->m_model->addGeoDataFile( filename );
-}
-
-void MarbleWidget::addGeoDataString( const QString &data, const QString &key )
-{
-    d->m_map->addGeoDataString( data, key );
-}
-
-void MarbleWidget::removeGeoData( const QString &key )
-{
-    d->m_map->removeGeoData( key );
 }
 
 }

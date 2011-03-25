@@ -12,3 +12,18 @@
   to be able to implement lazy loading of dialogs without cheating. Lazy
   creation of these dialogs is recommended to avoid wasting resources
   for dialogs that are likely not used.
+
+
+2011-03-25  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+
+* Remove the following methods from MarbleMap and MarbleWidget:
+   void addGeoDataFile( const QString &filename );
+   void addGeoDataString( const QString& data, const QString& key = "data" );
+   void removeGeoData( const QString& key );
+    -> use the respective methods of MarbleModel
+   void openGpxFile( const QString &filename );
+    -> use MarbleModel::addGeoDataFile(...);
+   MARBLE_DEPRECATED( void addPlacemarkFile( const QString &filename ) );
+   MARBLE_DEPRECATED( void addPlacemarkData( const QString& data, const QString& key = "data" ) );
+   MARBLE_DEPRECATED( void removePlacemarkKey( const QString& key ) );
+    -> use addGeoDataFile, addGeoDataString, removeGeoData of MarbleModel

@@ -78,7 +78,7 @@ void MarbleTest::gpsDemo()
             "GPS Data (*.gpx);;KML (*.kml)");
     
     if ( ! fileName.isNull() ) {
-        m_marbleWidget->addGeoDataFile( fileName );
+        m_marbleWidget->model()->addGeoDataFile( fileName );
     }
    
     QTime t;
