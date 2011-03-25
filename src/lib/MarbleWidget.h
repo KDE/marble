@@ -1101,24 +1101,17 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Reimplementation of the leaveEvent() function in QWidget.
      */
-    void leaveEvent( QEvent *event );
+    virtual void leaveEvent( QEvent *event );
 
     /**
      * @brief Reimplementation of the paintEvent() function in QWidget.
      */
-    void paintEvent( QPaintEvent *event );
-
-    /**
-     * @brief Enables custom drawing onto the MarbleWidget straight after
-     * @brief the globe and before all other layers has been rendered.
-     * @param painter 
-     */
-    virtual void customPaint( GeoPainter *painter );
+    virtual void paintEvent( QPaintEvent *event );
 
     /**
      * @brief Reimplementation of the resizeEvent() function in QWidget.
      */
-    void resizeEvent( QResizeEvent* );
+    virtual void resizeEvent( QResizeEvent* );
 
     void connectNotify( const char * signal );
     void disconnectNotify( const char * signal );
@@ -1127,7 +1120,14 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
       * @brief Reimplementation of the changeEvent() function in QWidget to
       * react to changes of the enabled state
       */
-    void changeEvent( QEvent * event );
+    virtual void changeEvent( QEvent * event );
+
+    /**
+     * @brief Enables custom drawing onto the MarbleWidget straight after
+     * @brief the globe and before all other layers has been rendered.
+     * @param painter 
+     */
+    virtual void customPaint( GeoPainter *painter );
 
  private:
     Q_DISABLE_COPY( MarbleWidget )
