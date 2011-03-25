@@ -98,7 +98,7 @@ void WorldClock::init()
         item->setVisible( false );
 
     //Set up the Sun to draw night/day shadow
-    m_sun = m_map->sunLocator();
+    m_sun = m_map->model()->sunLocator();
     m_sun->setShow(true);
     m_sun->setCitylights(true);
     if(cg.readEntry("centersun", false ))

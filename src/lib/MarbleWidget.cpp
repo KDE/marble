@@ -1157,11 +1157,6 @@ void MarbleWidget::centerSun()
     }
 }
 
-SunLocator* MarbleWidget::sunLocator()
-{
-    return d->m_model->sunLocator();
-}
-
 void MarbleWidget::setInputEnabled( bool enabled )
 {
     //if input is set as enabled

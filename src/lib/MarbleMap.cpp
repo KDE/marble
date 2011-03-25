@@ -1129,11 +1129,6 @@ void MarbleMap::centerSun()
     }
 }
 
-SunLocator* MarbleMap::sunLocator()
-{
-    return d->m_model->sunLocator();
-}
-
 QList<RenderPlugin *> MarbleMap::renderPlugins() const
 {
     return d->m_layerManager.renderPlugins();

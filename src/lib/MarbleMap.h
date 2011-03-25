@@ -51,7 +51,6 @@ class GeoDataLatLonAltBox;
 class GeoDataPlacemark;
 class MarbleModel;
 class ViewportParams;
-class SunLocator;
 class GeoPainter;
 class LayerInterface;
 class RenderPlugin;
@@ -368,12 +367,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @return the limit of volatile tile cache in kilobytes.
      */
     quint64 volatileTileCacheLimit() const;
-
-    /**
-     * @brief  Return the sun locator object.
-     * @return the sun locator object
-     */
-    SunLocator* sunLocator();
 
     /**
      * @brief Returns a list of all RenderPlugins in the model, this includes float items

@@ -554,6 +554,11 @@ void ControlView::addGeoDataFile( QString filename )
     m_marbleWidget->model()->addGeoDataFile( filename );
 }
 
+SunLocator* ControlView::sunLocator()
+{
+    return m_marbleWidget->model()->sunLocator();
+}
+
 }
 
 #include "ControlView.moc"

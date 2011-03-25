@@ -756,7 +756,7 @@ void MainWindow::controlTime()
 
 void MainWindow::showSun( bool active )
 {
-    m_controlView->marbleWidget()->sunLocator()->setShow( active );
+    m_controlView->sunLocator()->setShow( active );
 }
 
 void MainWindow::reload()

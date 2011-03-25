@@ -50,7 +50,6 @@ class MarbleWidgetPrivate;
 class MeasureTool;
 class RenderPlugin;
 class RoutingLayer;
-class SunLocator;
 class TextureLayer;
 class TileCoordsPyramid;
 class TileCreator;
@@ -196,8 +195,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Set the input handler
      */
     void setInputHandler( MarbleWidgetInputHandler *handler );
-
-    SunLocator* sunLocator();
 
     /**
      * @brief Returns a list of all RenderPlugins on the widget, this includes float items

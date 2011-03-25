@@ -343,13 +343,13 @@ void MarblePart::controlTime()
 
 void MarblePart::showSun( bool active )
 {
-    m_controlView->marbleWidget()->sunLocator()->setShow( active ); 
+    m_controlView->sunLocator()->setShow( active ); 
     m_sunControlDialog->setSunShading( active );
 }
 
 void MarblePart::showSunInZenith( bool active )
 {
-    m_controlView->marbleWidget()->sunLocator()->setCentered( active );
+    m_controlView->sunLocator()->setCentered( active );
 }
 
 void MarblePart::workOffline( bool offline )

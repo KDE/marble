@@ -42,3 +42,9 @@
     FileViewModel * fileViewModel() const;
     QAbstractItemModel *placemarkModel() const;
     QItemSelectionModel *placemarkSelectionModel() const;
+
+
+2011-03-25  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+
+* Remove the following method from MarbleMap and MarbleWidget, use the respective method of MarbleModel:
+    SunLocator* sunLocator();

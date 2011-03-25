@@ -33,6 +33,7 @@ namespace Marble
 {
 
 class MapThemeManager;
+class SunLocator;
 
 class ControlView : public QWidget
 {
@@ -68,7 +69,7 @@ class ControlView : public QWidget
 
     QPixmap mapScreenShot() { return m_marbleWidget->mapScreenShot(); }
     
-    SunLocator* sunLocator() { return m_marbleWidget->sunLocator(); }
+    SunLocator* sunLocator();
     
     /**
       * Returns a default map theme: earth/srtm/srtm.dgml if installed,

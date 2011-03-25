@@ -20,6 +20,7 @@
 #include "SunLocator.h"
 #include "ViewportParams.h"
 #include "MarbleWidget.h"
+#include "MarbleModel.h"
 
 namespace Marble
 {
@@ -227,9 +228,9 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     if( renderPos == "ALWAYS_ON_TOP" )
     {
         m_marbleWidget = dynamic_cast<MarbleWidget*>( painter->device() );
-        if( m_marbleWidget && m_marbleWidget->sunLocator()->getCentered() == true )
+        if( m_marbleWidget && m_marbleWidget->model()->sunLocator()->getCentered() == true )
         {
-            GeoDataCoordinates point( m_marbleWidget->sunLocator()->getLon(), m_marbleWidget->sunLocator()->getLat(), 0, GeoDataCoordinates::Degree );
+            GeoDataCoordinates point( m_marbleWidget->model()->sunLocator()->getLon(), m_marbleWidget->model()->sunLocator()->getLat(), 0, GeoDataCoordinates::Degree );
             QImage image( MarbleDirs::path( "svg/sunshine.png" ) );
             painter->drawImage( point, image.scaled( QSize( 30, 30 ) ) );
         }
