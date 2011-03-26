@@ -491,11 +491,6 @@ bool MarbleWidget::showFrameRate() const
     return d->m_map->showFrameRate();
 }
 
-quint64 MarbleWidget::persistentTileCacheLimit() const
-{
-    return d->m_map->persistentTileCacheLimit();
-}
-
 quint64 MarbleWidget::volatileTileCacheLimit() const
 {
     return d->m_map->volatileTileCacheLimit();

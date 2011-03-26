@@ -34,6 +34,7 @@
 * Remove the following methods from MarbleMap and MarbleWidget, use the respective methods of MarbleModel:
     void clearPersistentTileCache();
     void setPersistentTileCacheLimit( quint64 kiloBytes );
+    quint64 persistentTileCacheLimit() const;
 
 
 2011-03-25  Bernhard Beschow <bbeschow@cs.tu-berlin.de>

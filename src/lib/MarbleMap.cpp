@@ -640,11 +640,6 @@ bool MarbleMap::showBackground() const
     return d->m_backgroundVisible;
 }
 
-quint64 MarbleMap::persistentTileCacheLimit() const
-{
-    return d->m_model->persistentTileCacheLimit();
-}
-
 quint64 MarbleMap::volatileTileCacheLimit() const
 {
     return d->m_textureLayer.volatileCacheLimit();

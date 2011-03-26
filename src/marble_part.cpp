@@ -613,7 +613,7 @@ void MarblePart::writeSettings()
     // Caches
     MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->
                                                volatileTileCacheLimit() / 1024 );
-    MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->
+    MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->model()->
                                                  persistentTileCacheLimit() / 1024 );
     
     // Time

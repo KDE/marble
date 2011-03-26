@@ -357,12 +357,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     bool showBackground() const;
 
     /**
-     * @brief  Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
-     * @return the limit of persistent tile cache in kilobytes.
-     */
-    quint64 persistentTileCacheLimit() const;
-
-    /**
      * @brief  Returns the limit in kilobytes of the volatile (in RAM) tile cache.
      * @return the limit of volatile tile cache in kilobytes.
      */

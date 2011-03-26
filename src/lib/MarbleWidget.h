@@ -535,12 +535,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     //@{
 
     /**
-     * @brief  Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
-     * @return the limit of persistent tile cache
-     */
-    quint64 persistentTileCacheLimit() const;
-
-    /**
      * @brief  Returns the limit in kilobytes of the volatile (in RAM) tile cache.
      * @return the limit of volatile tile cache
      */
