@@ -27,6 +27,12 @@ RoutingProfileSettingsDialog::RoutingProfileSettingsDialog( PluginManager *plugi
     : QDialog( parent ), m_pluginManager( pluginManager ), 
     m_profilesModel ( profilesModel ), m_dialog( 0 ), m_dialogLayout( 0 )
 {
+#ifdef Q_WS_MAEMO_5
+    setAttribute( Qt::WA_Maemo5StackedWindow );
+    setWindowFlags( Qt::Window );
+    setWindowTitle( tr( "Routing Profile - Marble" ) );
+#endif // Q_WS_MAEMO_5
+
     m_ui = new Ui_RoutingProfileSettingsDialog();
     m_ui->setupUi( this );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -109,7 +115,16 @@ void RoutingProfileSettingsDialog::editProfile( int profileIndex )
     m_ui->settingsStack->setCurrentWidget( m_ui->selectServicePage );
     m_ui->settingsStack->setEnabled( false );
 
-    if ( exec() != QDialog::Accepted) return;
+    bool applyOnRejection = false;
+#ifdef Q_WS_MAEMO_5
+    // Needed because the stacked window on Maemo closes the dialog when
+    // using the back button, which is the only way to leave that window.
+    applyOnRejection = true;
+#endif // Q_WS_MAEMO_5
+
+    if ( exec() != QDialog::Accepted && !applyOnRejection ) {
+        return;
+    }
 
     m_profilesModel->setProfileName( profileIndex, m_ui->name->text() );
 

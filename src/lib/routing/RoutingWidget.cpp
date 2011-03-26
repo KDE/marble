@@ -478,11 +478,6 @@ void RoutingWidget::configureProfile()
     int index = d->m_ui.routingProfileComboBox->currentIndex();
     if ( index != -1 ) {
         RoutingProfileSettingsDialog dialog( d->m_widget->model()->pluginManager(), d->m_routingManager->profilesModel(), this );
-#ifdef Q_WS_MAEMO_5
-        dialog.setAttribute( Qt::WA_Maemo5StackedWindow );
-        dialog.setWindowFlags( Qt::Window );
-        dialog.setWindowTitle( tr( "Routing Profile - Marble" ) );
-#endif // Q_WS_MAEMO_5
         dialog.editProfile( d->m_ui.routingProfileComboBox->currentIndex() );
         d->m_routeRequest->setRoutingProfile( d->m_routingManager->profilesModel()->profiles().at( index ) );
     }
