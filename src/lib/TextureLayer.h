@@ -41,30 +41,6 @@ class TextureLayer : public QObject
     TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator );
     ~TextureLayer();
 
-    void paintGlobe( GeoPainter *painter,
-                     ViewParams *viewParams,
-                     const QRect& dirtyRect );
-
-    void setShowTileId( bool show );
-
-    /**
-     * @brief  Set the Projection used for the map
-     * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
-     */
-    void  setupTextureMapper( Projection projection );
-
-    void setNeedsUpdate();
-
-    void setMapTheme( GeoSceneDocument* mapTheme );
-
-    void setVolatileCacheLimit( quint64 kilobytes );
-
-    void update();
-
-    void reload();
-
-    void downloadTile( const TileId &tileId );
-
     /**
      * @brief Return the current tile zoom level. For example for OpenStreetMap
      *        possible values are 1..18, for BlueMarble 0..6.
@@ -79,6 +55,31 @@ class TextureLayer : public QObject
     int tileRowCount( int level ) const;
 
     qint64 volatileCacheLimit() const;
+
+ public Q_SLOTS:
+    void paintGlobe( GeoPainter *painter,
+                     ViewParams *viewParams,
+                     const QRect& dirtyRect );
+
+    void setShowTileId( bool show );
+
+    /**
+     * @brief  Set the Projection used for the map
+     * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
+     */
+    void setupTextureMapper( Projection projection );
+
+    void setNeedsUpdate();
+
+    void setMapTheme( GeoSceneDocument* mapTheme );
+
+    void setVolatileCacheLimit( quint64 kilobytes );
+
+    void update();
+
+    void reload();
+
+    void downloadTile( const TileId &tileId );
 
  Q_SIGNALS:
     void tileLevelChanged( int );

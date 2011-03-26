@@ -233,8 +233,8 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( m_model->sunLocator(), SIGNAL( updateStars() ),
                        m_widget, SLOT( update() ) );
 
-    m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
-                       m_widget, SLOT( centerSun() ) );
+    m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
+                       m_widget, SLOT( centerOn( qreal, qreal ) ) );
 
     m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler( m_widget ) );
     m_widget->setMouseTracking( m_widget );
@@ -813,7 +813,15 @@ void MarbleWidget::setMapThemeId( const QString& mapThemeId )
     setAttribute( Qt::WA_NoSystemBackground,
                   false );
 
-    centerSun();
+    SunLocator  *sunLocator = d->m_model->sunLocator();
+
+    if ( sunLocator && sunLocator->getCentered() ) {
+        qreal  lon = sunLocator->getLon();
+        qreal  lat = sunLocator->getLat();
+        centerOn( lon, lat );
+
+        setInputEnabled( false );
+    }
 
     repaint();
 }
@@ -1130,24 +1138,6 @@ void MarbleWidget::setDistance( qreal distance )
 QString MarbleWidget::distanceString() const
 {
     return map()->distanceString();
-}
-
-void MarbleWidget::updateSun()
-{
-    d->m_map->updateSun();
-}
-
-void MarbleWidget::centerSun()
-{
-    SunLocator  *sunLocator = d->m_model->sunLocator();
-
-    if ( sunLocator && sunLocator->getCentered() ) {
-        qreal  lon = sunLocator->getLon();
-        qreal  lat = sunLocator->getLat();
-        centerOn( lon, lat );
-
-        setInputEnabled( false );
-    }
 }
 
 void MarbleWidget::setInputEnabled( bool enabled )

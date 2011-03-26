@@ -68,7 +68,7 @@ class MARBLE_EXPORT SunLocator : public QObject
  Q_SIGNALS:
     void updateStars();
     void updateSun();
-    void centerSun();
+    void centerSun( qreal lon, qreal lat );
     void enableWidgetInput( bool );
 
  private:

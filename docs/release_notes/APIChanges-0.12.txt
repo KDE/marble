@@ -62,3 +62,12 @@
     void addNewBookmarkFolder( const QString& name ) const;
   Instead, use the respective methods of BookmarkManager, accessible through MarbleModel.
   Hint: The methods bookmarkFolders() and loadBookmarkFile() are named folders() and loadFile() in BookmarkManager.
+
+
+2011-03-25  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+
+* Remove from MarbleMap and MarbleWidget:
+    void updateSun();
+    void centerSun();
+  Use centerOn() with the appropriate (lat, lon) values instead of centerSun().
+  Call model()->sunLocator()->update() instead of updateSun().

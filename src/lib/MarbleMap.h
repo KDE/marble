@@ -429,9 +429,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
  public Q_SLOTS:
 
-    void updateSun();
-    void centerSun();
-
     /**
      * @brief Paint the map using a give painter.
      * @param painter  The painter to use.

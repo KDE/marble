@@ -922,10 +922,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /// @name Display update slots
     //@{
 
-    void updateSun();
-    void centerSun();
-//    void repaintMap();
-
     /**
      * Schedule repaint
      */

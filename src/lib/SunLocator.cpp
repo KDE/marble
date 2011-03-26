@@ -238,7 +238,7 @@ void SunLocator::update()
         if ( d->m_show )
             emit updateSun();
         if ( d->m_centered )
-            emit centerSun();
+            emit centerSun( getLon(), getLat() );
         return;
     }
 
@@ -269,7 +269,7 @@ void SunLocator::setCentered(bool centered)
     d->m_centered = centered;
     if ( d->m_centered ) {
         updatePosition();
-        emit centerSun();
+        emit centerSun( getLon(), getLat() );
     } else
         emit enableWidgetInput( true );
 }

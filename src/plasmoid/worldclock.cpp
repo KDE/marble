@@ -105,7 +105,6 @@ void WorldClock::init()
          m_sun->setCentered(true);
 
     m_sun->update();
-    m_map->updateSun();
 
     m_customTz = cg.readEntry("customtz", false );
     m_locationkey = KSystemTimeZones::local().name();
@@ -208,7 +207,6 @@ void WorldClock::dataUpdated(const QString &source,
                                                m_localtime );
     //kDebug() << "Adjusted Time = " << m_time;
     m_sun->update();
-    m_map->updateSun();
     update();
 }
 

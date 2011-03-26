@@ -124,9 +124,9 @@ void MarbleMapPrivate::construct()
 
 
     m_parent->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
-                       m_parent,              SLOT( updateSun() ) );
-    m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
-                       m_parent,              SLOT( centerSun() ) );
+                       &m_textureLayer,       SLOT( update() ) );
+    m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
+                       m_parent,              SLOT( centerOn( qreal, qreal ) ) );
 
     m_parent->connect( &m_textureLayer, SIGNAL( tileLevelChanged( int ) ),
                        m_parent, SIGNAL( tileLevelChanged( int ) ) );
@@ -889,7 +889,15 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 
     d->m_model->setMapTheme( mapTheme );
 
-    centerSun();
+    SunLocator  *sunLocator = d->m_model->sunLocator();
+
+    if ( sunLocator && sunLocator->getCentered() ) {
+        qreal  lon = sunLocator->getLon();
+        qreal  lat = sunLocator->getLat();
+        centerOn( lon, lat );
+
+        mDebug() << "Centering on Sun at " << lat << lon;
+    }
 
     d->m_layerManager.syncViewParamsAndPlugins( mapTheme );
 }
@@ -1098,30 +1106,6 @@ void MarbleMap::setDefaultFont( const QFont& font )
 {
     GeoDataFeature::setDefaultFont( font );
     d->m_placemarkLayout.requestStyleReset();
-}
-
-void MarbleMap::updateSun()
-{
-    // Update the sun shading.
-    //SunLocator  *sunLocator = d->m_model->sunLocator();
-
-    mDebug() << "MarbleMap: Updating the sun shading map...";
-    d->m_textureLayer.update();
-    d->m_textureLayer.setNeedsUpdate();
-    //mDebug() << "Finished updating the sun shading map";
-}
-
-void MarbleMap::centerSun()
-{
-    SunLocator  *sunLocator = d->m_model->sunLocator();
-
-    if ( sunLocator && sunLocator->getCentered() ) {
-        qreal  lon = sunLocator->getLon();
-        qreal  lat = sunLocator->getLat();
-        centerOn( lon, lat );
-
-        mDebug() << "Centering on Sun at " << lat << lon;
-    }
 }
 
 QList<RenderPlugin *> MarbleMap::renderPlugins() const
