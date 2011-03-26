@@ -52,8 +52,20 @@ public:
       */
     void setWorkOffline( bool offline );
 
-    /** Show or hide the "open file..." button. Default is false (not visible) */
+    /**
+      * Kept for binary compatibility. Please don't use, will go away in libmarble 0.12.
+      */
     void setOpenFileButtonVisible( bool visible );
+
+    /** Show or hide the "open file..." button. Default is false (not visible) */
+    void setShowDirectionsButtonVisible( bool visible );
+
+public Q_SLOTS:
+    /** Ask the user for a kml file to open */
+    void openRoute();
+
+    /** Ask the user for a kml file to save the current route to */
+    void saveRoute();
 
 private Q_SLOTS:
     /** Retrieve route directions */
@@ -113,8 +125,11 @@ private Q_SLOTS:
     /** Select the first routing profile if none is selected yet */
     void selectFirstProfile();
 
-    /** Ask the user for a kml file to open */
+    /** Ask the user for a kml file to open. Kept for binary comptability only, please use openRoute() instead. */
     void openRouteFile();
+
+    /** Show the directions ListView */
+    void showDirections();
 
     /** Update the route request with the given profile */
     void setRoutingProfile( int index );

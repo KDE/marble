@@ -78,9 +78,6 @@ public:
       */
     void retrieveRoute( RouteRequest *route );
 
-    /** Reverse the previously requested route, i.e. swap start and destination (and via points, if any) */
-    void reverseRoute();
-
     /**
       * Toggle offline mode. In offline mode, new routes cannot be downloaded
       */
@@ -123,6 +120,9 @@ public:
     void loadRoute( const QString &filename );
 
 public Q_SLOTS:
+    /** Reverse the previously requested route, i.e. swap start and destination (and via points, if any) */
+    void reverseRoute();
+
     /** Update the route */
     void updateRoute();
 

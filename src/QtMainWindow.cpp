@@ -67,6 +67,7 @@
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
 #include "MapWizard.h"
+#include "StackableWindow.h"
 
 // For zoom buttons on Maemo
 #ifdef Q_WS_MAEMO_5
@@ -92,9 +93,9 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
         m_downloadRegionDialog( 0 ),
         m_downloadRegionAction( 0 ),
         m_osmEditAction( 0 ),
-        m_mapViewDialog( 0 ),
-        m_routingDialog( 0 ),
-        m_trackingDialog( 0 ),
+        m_mapViewWindow( 0 ),
+        m_routingWindow( 0 ),
+        m_trackingWindow( 0 ),
         m_routingWidget( 0 )
 {
     setUpdatesEnabled( false );
@@ -1230,25 +1231,19 @@ void MainWindow::printMapScreenShot()
 
 void MainWindow::showMapViewDialog()
 {
-    if( !m_mapViewDialog ) {
-        m_mapViewDialog = new QDialog( this );
-        m_mapViewDialog->setWindowTitle( tr( "Map View - Marble" ) );
-        MapViewWidget *mapViewWidget = new MapViewWidget( m_mapViewDialog );
+    if( !m_mapViewWindow ) {
+        m_mapViewWindow = new StackableWindow( this );
+        m_mapViewWindow->setWindowTitle( tr( "Map View - Marble" ) );
+
+        MapViewWidget *mapViewWidget = new MapViewWidget( m_mapViewWindow );
         mapViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
 
-        QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Vertical, m_mapViewDialog );
-        connect(buttonBox, SIGNAL( accepted() ), m_mapViewDialog, SLOT( accept() ) );
-
-        QHBoxLayout* layout = new QHBoxLayout;
-        layout->addWidget( mapViewWidget );
-        layout->addWidget( buttonBox );
-        m_mapViewDialog->setLayout( layout );
-        m_mapViewDialog->resize( 640, 420 );
+        m_mapViewWindow->setCentralWidget( mapViewWidget );
     }
 
-    m_mapViewDialog->show();
-    m_mapViewDialog->raise();
-    m_mapViewDialog->activateWindow();
+    m_mapViewWindow->show();
+    m_mapViewWindow->raise();
+    m_mapViewWindow->activateWindow();
 }
 
 void MainWindow::showLegendTab( bool enabled )
@@ -1264,53 +1259,53 @@ void MainWindow::showLegendTab( bool enabled )
 
 void MainWindow::showRoutingDialog()
 {
-    if( !m_routingDialog ) {
-        m_routingDialog = new QDialog( this );
-        m_routingDialog->setWindowTitle( tr( "Routing - Marble" ) );
-        m_routingWidget = new RoutingWidget( m_controlView->marbleWidget(), m_routingDialog );
-        m_routingWidget->setWorkOffline( m_workOfflineAct->isChecked() );
-        m_routingWidget->setOpenFileButtonVisible( true );
+    if( !m_routingWindow ) {
+        m_routingWindow = new StackableWindow( this );
+        m_routingWindow->setWindowTitle( tr( "Routing - Marble" ) );
 
-        QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Vertical, m_routingDialog );
-        connect(buttonBox, SIGNAL( accepted() ), m_routingDialog, SLOT( accept() ) );
+        m_routingWidget = new RoutingWidget( m_controlView->marbleWidget(), m_routingWindow );
+        m_routingWidget->setWorkOffline( m_workOfflineAct->isChecked() );
+        m_routingWidget->setShowDirectionsButtonVisible( true );
 
         QScrollArea* scrollArea = new QScrollArea;
-        m_routingWidget->setMinimumWidth( 560 );
+        m_routingWidget->setMinimumWidth( 760 );
         scrollArea->setWidget( m_routingWidget );
 
-        QHBoxLayout* layout = new QHBoxLayout;
-        layout->addWidget( scrollArea );
-        layout->addWidget( buttonBox );
-        m_routingDialog->setLayout( layout );
-        m_routingDialog->resize( 640, 420 );
+        QAction *openAction = new QAction( tr( "Open Route..." ), this );
+        connect( openAction, SIGNAL( triggered() ), m_routingWidget, SLOT( openRoute() ) );
+        m_routingWindow->menuBar()->addAction( openAction );
+
+        QAction* saveAction = new QAction( tr( "Save Route..." ), this );
+        connect( saveAction, SIGNAL( triggered() ), m_routingWidget, SLOT( saveRoute() ) );
+        m_routingWindow->menuBar()->addAction( saveAction );
+
+        QAction* reverseAction = new QAction( tr( "Reverse Route" ), this );
+        RoutingManager * const manager = m_controlView->marbleWidget()->model()->routingManager();
+        connect( reverseAction, SIGNAL( triggered() ), manager, SLOT( reverseRoute() ) );
+        m_routingWindow->menuBar()->addAction( reverseAction );
+
+        m_routingWindow->setCentralWidget( scrollArea );
     }
 
-    m_routingDialog->show();
-    m_routingDialog->raise();
-    m_routingDialog->activateWindow();
+    m_routingWindow->show();
+    m_routingWindow->raise();
+    m_routingWindow->activateWindow();
 }
 
 void MainWindow::showTrackingDialog()
 {
-    if( !m_trackingDialog ) {
-        m_trackingDialog = new QDialog( this );
-        m_trackingDialog->setWindowTitle( tr( "Tracking - Marble" ) );
-        CurrentLocationWidget *trackingWidget = new CurrentLocationWidget( m_trackingDialog );
+    if( !m_trackingWindow ) {
+        m_trackingWindow = new StackableWindow( this );
+        m_trackingWindow->setWindowTitle( tr( "Tracking - Marble" ) );
+        CurrentLocationWidget *trackingWidget = new CurrentLocationWidget( m_trackingWindow );
         trackingWidget->setMarbleWidget( m_controlView->marbleWidget() );
 
-        QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Vertical, m_trackingDialog );
-        connect(buttonBox, SIGNAL( accepted() ), m_trackingDialog, SLOT( accept() ) );
-
-        QHBoxLayout* layout = new QHBoxLayout;
-        layout->addWidget( trackingWidget );
-        layout->addWidget( buttonBox );
-        m_trackingDialog->setLayout( layout );
-        m_trackingDialog->resize( 640, 420 );
+        m_trackingWindow->setCentralWidget( trackingWidget );
     }
 
-    m_trackingDialog->show();
-    m_trackingDialog->raise();
-    m_trackingDialog->activateWindow();
+    m_trackingWindow->show();
+    m_trackingWindow->raise();
+    m_trackingWindow->activateWindow();
 }
 
 void MainWindow::updateMapEditButtonVisibility( const QString &mapTheme )

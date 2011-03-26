@@ -98,9 +98,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="openButton">
+      <widget class="QPushButton" name="showInstructionsButton">
        <property name="text">
-        <string>Open...</string>
+        <string>Show Directions</string>
        </property>
        <property name="checkable">
         <bool>false</bool>
