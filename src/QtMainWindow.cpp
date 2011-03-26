@@ -98,6 +98,10 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
         m_trackingWindow( 0 ),
         m_routingWidget( 0 )
 {
+#ifdef Q_WS_MAEMO_5
+    setAttribute( Qt::WA_Maemo5StackedWindow );
+#endif // Q_WS_MAEMO_5
+
     setUpdatesEnabled( false );
 
     QString selectedPath = marbleDataPath.isEmpty() ? readMarbleDataPath() : marbleDataPath;
