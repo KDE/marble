@@ -491,6 +491,11 @@ bool MarbleWidget::showFrameRate() const
     return d->m_map->showFrameRate();
 }
 
+bool MarbleWidget::showBackground() const
+{
+    return d->m_map->showBackground();
+}
+
 quint64 MarbleWidget::volatileTileCacheLimit() const
 {
     return d->m_map->volatileTileCacheLimit();
@@ -965,6 +970,13 @@ void MarbleWidget::setShowFrameRate( bool visible )
     repaint();
 }
 
+void MarbleWidget::setShowBackground( bool visible )
+{
+    d->m_map->setShowBackground( visible );
+
+    repaint();
+}
+
 void MarbleWidget::setShowGps( bool visible )
 {
     d->m_map->setShowGps( visible );
@@ -1244,6 +1256,26 @@ void MarbleWidget::downloadRegion( QString const & sourceDir, QVector<TileCoords
 GeoDataLookAt MarbleWidget::lookAt() const
 {
     return d->m_map->lookAt();
+}
+
+qreal MarbleWidget::radiusFromDistance( qreal distance ) const
+{
+    return d->m_map->radiusFromDistance( distance );
+}
+
+qreal MarbleWidget::distanceFromRadius( qreal radius ) const
+{
+    return d->m_map->distanceFromRadius( radius );
+}
+
+qreal MarbleWidget::zoomFromDistance( qreal distance ) const
+{
+    return d->m_map->zoomFromDistance( distance );
+}
+
+qreal MarbleWidget::distanceFromZoom( qreal zoom ) const
+{
+    return d->m_map->distanceFromZoom( zoom );
 }
 
 RoutingLayer* MarbleWidget::routingLayer()

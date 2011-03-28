@@ -30,7 +30,6 @@ namespace Marble
 
 class MarbleModel;
 class MarbleWidget;
-class MarbleMap;
 class MarbleWidgetPopupMenu;
 class AbstractDataPluginItem;
 class RenderPlugin;

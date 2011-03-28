@@ -11,7 +11,6 @@
 #include "GoToDialog.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
-#include "MarbleMap.h"
 #include "GeoDataFolder.h"
 #include "PositionTracking.h"
 #include "BookmarkManager.h"
@@ -177,7 +176,7 @@ QVariant TargetModel::homeData ( int role ) const
         GeoDataLookAt result;
         result.setLongitude( lon, GeoDataCoordinates::Degree );
         result.setLatitude( lat, GeoDataCoordinates::Degree );
-        result.setRange( m_marbleWidget->map()->distanceFromZoom( zoom ) * KM2METER );
+        result.setRange( m_marbleWidget->distanceFromZoom( zoom ) * KM2METER );
         return qVariantFromValue( result );
     }
     }

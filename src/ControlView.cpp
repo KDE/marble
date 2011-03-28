@@ -205,11 +205,11 @@ void ControlView::printMapScreenShot( QPointer<QPrintDialog> printDialog)
             QTextDocument document;
             QString text = "<html><head><title>Marble Printout</title></head><body>";
             QPalette const originalPalette = m_marbleWidget->palette();
-            bool const wasBackgroundVisible = m_marbleWidget->map()->showBackground();
+            bool const wasBackgroundVisible = m_marbleWidget->showBackground();
             bool const hideBackground = !mapCoversViewport && !printOptions->printBackground();
             if ( hideBackground ) {
                 // Temporarily remove the black background and layers painting on it
-                m_marbleWidget->map()->setShowBackground( false );
+                m_marbleWidget->setShowBackground( false );
                 m_marbleWidget->setPalette( QPalette ( Qt::white ) );
                 m_marbleWidget->repaint();
             }
@@ -239,7 +239,7 @@ void ControlView::printMapScreenShot( QPointer<QPrintDialog> printDialog)
             document.print( printDialog->printer() );
 
             if ( hideBackground ) {
-                m_marbleWidget->map()->setShowBackground( wasBackgroundVisible );
+                m_marbleWidget->setShowBackground( wasBackgroundVisible );
                 m_marbleWidget->setPalette( originalPalette );
                 m_marbleWidget->repaint();
             }

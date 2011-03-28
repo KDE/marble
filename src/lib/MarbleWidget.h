@@ -387,6 +387,26 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     */
     GeoDataLookAt lookAt() const;
 
+    /**
+      * @brief Return the globe radius (pixel) for the given distance (km)
+      */
+    qreal radiusFromDistance( qreal distance ) const;
+
+    /**
+      * @brief Return the distance (km) at the given globe radius (pixel)
+      */
+    qreal distanceFromRadius( qreal radius ) const;
+
+    /**
+      * Returns the zoom value (no unit) corresponding to the given camera distance (km)
+      */
+    qreal zoomFromDistance( qreal distance ) const;
+
+    /**
+      * Returns the distance (km) corresponding to the given zoom value
+      */
+    qreal distanceFromZoom( qreal zoom ) const;
+
     //@}
 
     /// @name Placemark management
@@ -512,6 +532,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return the frame rates visibility
      */
     bool showFrameRate() const;
+
+    bool showBackground() const;
 
     /**
      * @brief Retrieve the map quality depending on the view context
@@ -854,6 +876,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param visible  visibility of the frame rate
      */
     void setShowFrameRate( bool visible );
+
+    void setShowBackground( bool visible );
 
     /**
      * @brief Set whether the is tile is visible
