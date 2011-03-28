@@ -651,29 +651,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setCenterLongitude( qreal lon, FlyToMode mode = Instant );
 
     /**
-     * @brief  Get the home point
-     * @param  lon  the longitude of the home point.
-     * @param  lat  the latitude of the home point.
-     * @param  zoom the default zoom level of the home point.
-     */
-    void home( qreal &lon, qreal &lat, int& zoom );
-
-    /**
-     * @brief  Set the home point
-     * @param  lon  the longitude of the new home point.
-     * @param  lat  the latitude of the new home point.
-     * @param  zoom the default zoom level for the new home point.
-     */
-    void setHome( qreal lon, qreal lat, int zoom = 1050 );
-
-    /**
-     * @brief  Set the home point
-     * @param  homePoint  the new home point.
-     * @param  zoom       the default zoom level for the new home point.
-     */
-    void setHome( const GeoDataCoordinates& homePoint, int zoom = 1050 );
-
-    /**
      * @brief  Move left by the moveStep.
      */
     void moveLeft( FlyToMode mode = Automatic );

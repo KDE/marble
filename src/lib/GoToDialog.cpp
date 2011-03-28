@@ -172,7 +172,7 @@ QVariant TargetModel::homeData ( int role ) const
     case GeoDataLookAtRole: {
         qreal lon( 0.0 ), lat( 0.0 );
         int zoom( 0 );
-        m_marbleWidget->home( lon, lat, zoom );
+        m_marbleWidget->model()->home( lon, lat, zoom );
         GeoDataLookAt result;
         result.setLongitude( lon, GeoDataCoordinates::Degree );
         result.setLatitude( lat, GeoDataCoordinates::Degree );

@@ -211,7 +211,7 @@ void MarbleWidgetPopupMenu::slotSetHomePoint()
 {
     GeoDataCoordinates coordinates;
     if ( mouseCoordinates( &coordinates, m_setHomePointAction ) ) {
-        m_widget->setHome( coordinates, m_widget->zoom() );
+        m_widget->model()->setHome( coordinates, m_widget->zoom() );
     }
 }
 

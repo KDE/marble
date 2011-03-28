@@ -606,22 +606,6 @@ void MarbleWidget::setProjection( int projection )
     setProjection( (Projection)( projection ) );
 }
 
-void MarbleWidget::home( qreal &lon, qreal &lat, int& zoom )
-{
-    d->m_model->home( lon, lat, zoom );
-}
-
-void MarbleWidget::setHome( qreal lon, qreal lat, int zoom )
-{
-    d->m_model->setHome( lon, lat, zoom );
-}
-
-void MarbleWidget::setHome( const GeoDataCoordinates& homePoint, int zoom )
-{
-    d->m_model->setHome( homePoint, zoom );
-}
-
-
 void MarbleWidget::moveLeft( FlyToMode mode )
 {
     d->moveByStep( -1, 0, mode );

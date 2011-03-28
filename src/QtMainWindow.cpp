@@ -121,10 +121,10 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
     connect( m_configDialog, SIGNAL( clearVolatileCacheClicked() ),
              m_controlView->marbleWidget(), SLOT( clearVolatileTileCache() ) );
     connect( m_configDialog, SIGNAL( clearPersistentCacheClicked() ),
-             m_controlView->marbleWidget()->model(), SLOT( clearPersistentTileCache() ) );
+             m_controlView->marbleModel(), SLOT( clearPersistentTileCache() ) );
 
     // Load bookmark file. If it does not exist, a default one will be used.
-    m_controlView->marbleWidget()->model()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
+    m_controlView->marbleModel()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
 
     createActions();
     createMenus();
@@ -138,7 +138,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
 
     m_position = NOT_AVAILABLE;
     m_distance = marbleWidget()->distanceString();
-    m_clock = QLocale().toString( m_controlView->marbleWidget()->model()->clockDateTime().addSecs( m_controlView->marbleWidget()->model()->clockTimezone() ), QLocale::ShortFormat );
+    m_clock = QLocale().toString( m_controlView->marbleModel()->clockDateTime().addSecs( m_controlView->marbleModel()->clockTimezone() ), QLocale::ShortFormat );
     m_mapWizard = new MapWizard();
     QTimer::singleShot( 0, this, SLOT( initObject() ) );
 }
@@ -491,7 +491,7 @@ void MainWindow::createBookmarkMenu()
 
 void MainWindow::createFolderList()
 {
-    QVector<GeoDataFolder*> folders = m_controlView->marbleWidget()->model()->bookmarkManager()->folders();
+    QVector<GeoDataFolder*> folders = m_controlView->marbleModel()->bookmarkManager()->folders();
 
     QVector<GeoDataFolder*>::const_iterator i = folders.constBegin();
     QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
@@ -530,7 +530,7 @@ void MainWindow::lookAtBookmark( QAction *action)
 
 void MainWindow::manageBookmarks()
 {
-    MarbleModel * const model = m_controlView->marbleWidget()->model();
+    MarbleModel * const model = m_controlView->marbleModel();
     QPointer<BookmarkManagerDialog> dialog = new BookmarkManagerDialog( model, this );
 #ifdef Q_WS_MAEMO_5
     dialog->setButtonBoxVisible( false );
@@ -745,7 +745,7 @@ void MainWindow::controlTime()
 {
     if ( !m_timeControlDialog )
     {
-        m_timeControlDialog = new TimeControlWidget( m_controlView->marbleWidget()->model()->clock() );
+        m_timeControlDialog = new TimeControlWidget( m_controlView->marbleModel()->clock() );
     }
     /* m_timeControlDialog is a modeless dialog so that user may adjust time and interact with main application simultaneously.*/
     m_timeControlDialog->show();
@@ -803,7 +803,7 @@ void MainWindow::showDistance( const QString& distance )
 
 void MainWindow::showDateTime()
 {
-    m_clock = QLocale().toString( m_controlView->marbleWidget()->model()->clockDateTime().addSecs( m_controlView->marbleWidget()->model()->clockTimezone() ), QLocale::ShortFormat );
+    m_clock = QLocale().toString( m_controlView->marbleModel()->clockDateTime().addSecs( m_controlView->marbleModel()->clockTimezone() ), QLocale::ShortFormat );
     updateStatusBar();
 }
 
@@ -829,7 +829,7 @@ void MainWindow::openFile()
                             tr("All Supported Files (*.gpx *.kml *.pnt);;GPS Data (*.gpx);;Google Earth KML (*.kml);; Micro World Database II (*.pnt)"));
 
     foreach( const QString &fileName, fileNames ) {
-        m_controlView->marbleWidget()->model()->addGeoDataFile( fileName );
+        m_controlView->marbleModel()->addGeoDataFile( fileName );
     }
 }
 
@@ -867,7 +867,7 @@ void MainWindow::setupStatusBar()
               this, SLOT( showPosition( QString ) ) );
     connect( marbleWidget(), SIGNAL( distanceChanged( QString ) ),
               this, SLOT( showDistance( QString ) ) );
-    connect( m_controlView->marbleWidget()->model()->clock(), SIGNAL( timeChanged() ),
+    connect( m_controlView->marbleModel()->clock(), SIGNAL( timeChanged() ),
               this, SLOT( showDateTime() ) );
 
     updateStatusBar();
@@ -936,7 +936,7 @@ void MainWindow::readSettings()
          }
 
          // Set home position
-         m_controlView->marbleWidget()->setHome(
+         m_controlView->marbleModel()->setHome(
             settings.value("homeLongitude", 9.4).toDouble(),
             settings.value("homeLatitude", 54.8).toDouble(),
             settings.value("homeZoom", 1050 ).toInt()
@@ -959,13 +959,13 @@ void MainWindow::readSettings()
      settings.beginGroup( "Time" );
         if( settings.value( "systemTime", "true" ).toBool() == true  )
         {
-            m_controlView->marbleWidget()->model()->setClockDateTime( QDateTime::currentDateTime().toUTC() );
-            m_controlView->marbleWidget()->model()->setClockSpeed( 1 );
+            m_controlView->marbleModel()->setClockDateTime( QDateTime::currentDateTime().toUTC() );
+            m_controlView->marbleModel()->setClockSpeed( 1 );
         }
         else if( settings.value( "lastSessionTime", "true" ).toBool() == true )
         {
-            m_controlView->marbleWidget()->model()->setClockDateTime( settings.value( "dateTime" ).toDateTime() );
-            m_controlView->marbleWidget()->model()->setClockSpeed( settings.value( "speedSlider", 1 ).toInt() );
+            m_controlView->marbleModel()->setClockDateTime( settings.value( "dateTime" ).toDateTime() );
+            m_controlView->marbleModel()->setClockSpeed( settings.value( "speedSlider", 1 ).toInt() );
         }
      settings.endGroup();
 
@@ -992,9 +992,9 @@ void MainWindow::readSettings()
             profiles << profile;
             settings.endGroup();
         }
-        m_controlView->marbleWidget()->model()->routingManager()->profilesModel()->setProfiles( profiles );
+        m_controlView->marbleModel()->routingManager()->profilesModel()->setProfiles( profiles );
     } else {
-        m_controlView->marbleWidget()->model()->routingManager()->profilesModel()->loadDefaultProfiles();
+        m_controlView->marbleModel()->routingManager()->profilesModel()->loadDefaultProfiles();
     }
     settings.endGroup();
 
@@ -1006,8 +1006,8 @@ void MainWindow::readSettings()
     settings.beginGroup( "Plugins");
     QString positionProvider = settings.value( "activePositionTrackingPlugin", QString() ).toString();
     if ( !positionProvider.isEmpty() ) {
-        PositionTracking* tracking = m_controlView->marbleWidget()->model()->positionTracking();
-        PluginManager* pluginManager = m_controlView->marbleWidget()->model()->pluginManager();
+        PositionTracking* tracking = m_controlView->marbleModel()->positionTracking();
+        PluginManager* pluginManager = m_controlView->marbleModel()->pluginManager();
         QList<PositionProviderPlugin*> plugins = pluginManager->createPositionProviderPlugins();
         foreach( PositionProviderPlugin* plugin, plugins ) {
             if ( plugin->nameId() == positionProvider ) {
@@ -1024,7 +1024,7 @@ void MainWindow::readSettings()
      m_configDialog->readSettings();
 
      // Load previous route settings
-     m_controlView->marbleWidget()->model()->routingManager()->readSettings();
+     m_controlView->marbleModel()->routingManager()->readSettings();
 }
 
 void MainWindow::writeSettings()
@@ -1049,7 +1049,7 @@ void MainWindow::writeSettings()
          qreal homeLon = 0;
          qreal homeLat = 0;
          int homeZoom = 0;
-         m_controlView->marbleWidget()->home( homeLon, homeLat, homeZoom );
+         m_controlView->marbleModel()->home( homeLon, homeLat, homeZoom );
          QString  mapTheme = m_controlView->marbleWidget()->mapThemeId();
          int      projection = (int)( m_controlView->marbleWidget()->projection() );
 
@@ -1079,8 +1079,8 @@ void MainWindow::writeSettings()
      settings.endGroup();
 
       settings.beginGroup( "Time" );
-         settings.setValue( "dateTime", m_controlView->marbleWidget()->model()->clockDateTime() );
-         settings.setValue( "speedSlider", m_controlView->marbleWidget()->model()->clockSpeed() );
+         settings.setValue( "dateTime", m_controlView->marbleModel()->clockDateTime() );
+         settings.setValue( "speedSlider", m_controlView->marbleModel()->clockSpeed() );
      settings.endGroup();
 
      settings.beginGroup( "Routing Profile" );
@@ -1111,7 +1111,7 @@ void MainWindow::writeSettings()
 
      settings.beginGroup( "Plugins");
      QString positionProvider;
-     PositionTracking* tracking = m_controlView->marbleWidget()->model()->positionTracking();
+     PositionTracking* tracking = m_controlView->marbleModel()->positionTracking();
      if ( tracking && tracking->positionProviderPlugin() ) {
          positionProvider = tracking->positionProviderPlugin()->nameId();
      }
@@ -1127,7 +1127,7 @@ void MainWindow::writeSettings()
      m_configDialog->writeSettings();
 
      // Store current route settings
-     m_controlView->marbleWidget()->model()->routingManager()->writeSettings();
+     m_controlView->marbleModel()->routingManager()->writeSettings();
 }
 
 void MainWindow::editSettings()
@@ -1158,7 +1158,7 @@ void MainWindow::updateSettings()
     m_controlView->setExternalMapEditor( m_configDialog->externalMapEditor() );
 
     // Cache
-    m_controlView->marbleWidget()->model()->setPersistentTileCacheLimit( m_configDialog->persistentTileCacheLimit() * 1024 );
+    m_controlView->marbleModel()->setPersistentTileCacheLimit( m_configDialog->persistentTileCacheLimit() * 1024 );
     m_controlView->marbleWidget()->setVolatileTileCacheLimit( m_configDialog->volatileTileCacheLimit() * 1024 );
 
     /*
@@ -1283,7 +1283,7 @@ void MainWindow::showRoutingDialog()
         m_routingWindow->menuBar()->addAction( saveAction );
 
         QAction* reverseAction = new QAction( tr( "Reverse Route" ), this );
-        RoutingManager * const manager = m_controlView->marbleWidget()->model()->routingManager();
+        RoutingManager * const manager = m_controlView->marbleModel()->routingManager();
         connect( reverseAction, SIGNAL( triggered() ), manager, SLOT( reverseRoute() ) );
         m_routingWindow->menuBar()->addAction( reverseAction );
 

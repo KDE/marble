@@ -33,6 +33,7 @@ namespace Marble
 {
 
 class MapThemeManager;
+class MarbleModel;
 class SunLocator;
 
 class ControlView : public QWidget
@@ -51,6 +52,7 @@ class ControlView : public QWidget
 
     MarbleWidget      *marbleWidget()  const { return m_marbleWidget; }
     MarbleControlBox  *marbleControl() const { return m_control;      }
+    MarbleModel       *marbleModel()         { return m_marbleWidget->model(); }
 
     void zoomIn();
     void zoomOut();

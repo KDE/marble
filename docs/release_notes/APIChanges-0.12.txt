@@ -85,3 +85,12 @@
 * Remove from MarbleWidget:
     MarbleMap *map();
   Use the respective methods of MarbleWidget directly.
+
+
+2011-03-28  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+
+* Remove the following methods from MarbleWidget:
+    void home( qreal &lon, qreal &lat, int& zoom );
+    void setHome( qreal lon, qreal lat, int zoom = 1050 );
+    void setHome( const GeoDataCoordinates& homePoint, int zoom = 1050 );
+  Use the respective methods of MarbleModel.
