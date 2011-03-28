@@ -43,7 +43,6 @@ class GeoDataLatLonAltBox;
 class GeoDataLatLonBox;
 class GeoPainter;
 class GeoSceneDocument;
-class MarbleMap;
 class MarbleModel;
 class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
@@ -161,11 +160,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     /// @name Access to helper objects
     //@{
-
-    /**
-     * @brief Return the map that this view shows.
-     */
-    MarbleMap *map() const;
 
     /**
      * @brief Return the model that this view shows.

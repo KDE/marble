@@ -263,11 +263,6 @@ void MarbleWidgetPrivate::repaint()
 // ----------------------------------------------------------------
 
 
-MarbleMap *MarbleWidget::map() const
-{
-    return d->m_map;
-}
-
 MarbleModel *MarbleWidget::model() const
 {
     return d->m_model;
@@ -729,7 +724,7 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
     {
         // If the globe covers fully the screen then we can use the faster
         // RGB32 as there are no translucent areas involved.
-        QImage::Format imageFormat = ( map()->mapCoversViewport() )
+        QImage::Format imageFormat = ( d->m_map->mapCoversViewport() )
                                      ? QImage::Format_RGB32
                                      : QImage::Format_ARGB32_Premultiplied;
         // Paint to an intermediate image
@@ -739,8 +734,8 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
     }
 
     // Create a painter that will do the painting.
-    GeoPainter painter( paintDevice, map()->viewport(),
-                        map()->mapQuality(), doClip );
+    GeoPainter painter( paintDevice, d->m_map->viewport(),
+                        d->m_map->mapQuality(), doClip );
     QRect  dirtyRect = evt->rect();
 
     // Draws the map like MarbleMap::paint does, but adds our customPaint in between
@@ -758,8 +753,8 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
             *pixel = qRgb( gray, gray, gray );
         }
 
-        GeoPainter widgetPainter( this, map()->viewport(),
-                            map()->mapQuality(), doClip );
+        GeoPainter widgetPainter( this, d->m_map->viewport(),
+                            d->m_map->mapQuality(), doClip );
         widgetPainter.drawImage( rect(), image );
     }
 
@@ -1044,11 +1039,11 @@ void MarbleWidget::setMapQuality( MapQuality quality, ViewContext changedViewCon
     }
 
     if ( viewContext() == Still ) {
-        map()->setMapQuality( d->m_stillQuality ); 
+        d->m_map->setMapQuality( d->m_stillQuality ); 
     }
     else if ( viewContext() == Animation )
     {
-        map()->setMapQuality( d->m_animationQuality ); 
+        d->m_map->setMapQuality( d->m_animationQuality ); 
     }
 
     if ( mapQuality( viewContext() ) != oldQuality )
@@ -1068,9 +1063,9 @@ void MarbleWidget::setViewContext( ViewContext viewContext )
     d->m_viewContext = viewContext;
 
     if ( viewContext == Still )
-        map()->setMapQuality( d->m_stillQuality ); 
+        d->m_map->setMapQuality( d->m_stillQuality ); 
     if ( viewContext == Animation )
-        map()->setMapQuality( d->m_animationQuality ); 
+        d->m_map->setMapQuality( d->m_animationQuality ); 
 
     if ( mapQuality( viewContext ) != mapQuality( Animation ) )
         d->repaint();
@@ -1088,22 +1083,22 @@ void MarbleWidget::setAnimationsEnabled( bool enabled )
 
 AngleUnit MarbleWidget::defaultAngleUnit() const
 {
-    return map()->defaultAngleUnit();
+    return d->m_map->defaultAngleUnit();
 }
 
 void MarbleWidget::setDefaultAngleUnit( AngleUnit angleUnit )
 {
-    map()->setDefaultAngleUnit( angleUnit );
+    d->m_map->setDefaultAngleUnit( angleUnit );
 }
 
 QFont MarbleWidget::defaultFont() const
 {
-    return map()->defaultFont();
+    return d->m_map->defaultFont();
 }
 
 void MarbleWidget::setDefaultFont( const QFont& font )
 {
-    map()->setDefaultFont( font );
+    d->m_map->setDefaultFont( font );
 }
 
 void MarbleWidget::setSelection( const QRect& region )
@@ -1130,17 +1125,17 @@ void MarbleWidget::setSelection( const QRect& region )
 
 qreal MarbleWidget::distance() const
 {
-    return map()->distance();
+    return d->m_map->distance();
 }
 
 void MarbleWidget::setDistance( qreal distance )
 {
-    map()->setDistance( distance );
+    d->m_map->setDistance( distance );
 }
 
 QString MarbleWidget::distanceString() const
 {
-    return map()->distanceString();
+    return d->m_map->distanceString();
 }
 
 void MarbleWidget::setInputEnabled( bool enabled )
