@@ -137,15 +137,6 @@ MarbleWidget::MarbleWidget(QWidget *parent)
     d->construct();
 }
 
-
-MarbleWidget::MarbleWidget(MarbleMap *map, QWidget *parent)
-    : QWidget( parent ),
-      d( new MarbleWidgetPrivate( map, this ) )
-{
-//    setAttribute( Qt::WA_PaintOnScreen, true );
-    d->construct();
-}
-
 MarbleWidget::~MarbleWidget()
 {
     // Remove and delete an existing InputHandler

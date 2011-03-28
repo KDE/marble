@@ -71,3 +71,10 @@
     void centerSun();
   Use centerOn() with the appropriate (lat, lon) values instead of centerSun().
   Call model()->sunLocator()->update() instead of updateSun().
+
+
+2011-03-28  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+
+* Remove MarbleWidget::MarbleWidget( MarbleMap *, ... ).
+  This constructor does not work on a conceptual level (MarbleMap being tightly associated with e.g. MarbleWidget's size).
+  Thus, there shouldn't be any code using it.

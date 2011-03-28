@@ -157,17 +157,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     explicit MarbleWidget( QWidget *parent = 0 );
 
-    /**
-     * @brief Construct a new MarbleWidget.
-     * @param model  the data model for the widget.
-     * @param parent the parent widget
-     *
-     * This constructor should be used when you plan to use more than
-     * one MarbleWidget for the same MarbleModel (not yet supported,
-     * but will be soon).
-     */
-    explicit MarbleWidget( MarbleMap *map, QWidget *parent = 0 );
-
     virtual ~MarbleWidget();
 
     /// @name Access to helper objects
