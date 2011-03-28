@@ -57,10 +57,6 @@ class TileCreatorPrivate
 };
 
 
-// FIXME: This shouldn't be defined here, but centrally somewhere
-const uint  tileSize = 675;
-
-
 TileCreator::TileCreator(const QString& sourceDir, const QString& installMap,
                          const QString& dem, const QString& targetDir) 
     : QThread(0),
@@ -127,7 +123,7 @@ void TileCreator::run()
     }
 
     // Calculating Maximum Tile Level
-    float approxMaxTileLevel = std::log( imageWidth / ( 2.0 * tileSize ) ) / std::log( 2.0 );
+    float approxMaxTileLevel = std::log( imageWidth / ( 2.0 * c_defaultTileSize ) ) / std::log( 2.0 );
 
     int  maxTileLevel = 0;
     if ( approxMaxTileLevel == int( approxMaxTileLevel ) )
@@ -147,17 +143,17 @@ void TileCreator::run()
     // If the image size of the image source does not match the expected 
     // geometry we need to smooth-scale the image in advance to match
     // the required size 
-    bool needsScaling = ( imageWidth != 2 * maxRows * (int)(tileSize)
-                          ||  imageHeight != maxRows * (int)(tileSize) );
+    bool needsScaling = ( imageWidth != 2 * maxRows * (int)( c_defaultTileSize )
+                          ||  imageHeight != maxRows * (int)( c_defaultTileSize ) );
 
     if ( needsScaling ) 
         mDebug() << "Image Size doesn't match 2*n*TILEWIDTH x n*TILEHEIGHT geometry. Scaling ...";  
 
-    int  stdImageWidth  = 2 * maxRows * tileSize;
+    int  stdImageWidth  = 2 * maxRows * c_defaultTileSize;
     if ( stdImageWidth == 0 )
-        stdImageWidth = 2 * tileSize;
+        stdImageWidth = 2 * c_defaultTileSize;
 
-    int  stdImageHeight  = maxRows * tileSize;
+    int  stdImageHeight  = maxRows * c_defaultTileSize;
     if ( stdImageWidth != imageWidth ) {
         mDebug() << 
         QString( "TileCreator::createTiles() The size of the final image will measure  %1 x %2 pixels").arg(stdImageWidth).arg(stdImageHeight);
@@ -213,7 +209,7 @@ void TileCreator::run()
         if ( needsScaling ) {
             // Pick the current row and smooth scale it 
             // to make it match the expected size
-            QSize destSize( stdImageWidth, tileSize );
+            QSize destSize( stdImageWidth, c_defaultTileSize );
             row = row.scaled( destSize,
                               Qt::IgnoreAspectRatio,
                               Qt::SmoothTransformation );
@@ -229,7 +225,7 @@ void TileCreator::run()
             if ( d->m_cancelled ) 
                 return;
 
-            QImage  tile = row.copy( m * stdImageWidth / mmax, 0, tileSize, tileSize );
+            QImage  tile = row.copy( m * stdImageWidth / mmax, 0, c_defaultTileSize, c_defaultTileSize );
 
             tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
                                        .arg( maxTileLevel )
@@ -313,29 +309,29 @@ void TileCreator::run()
                     tile.setColorTable( grayScalePalette );
                     uchar* destLine;
 
-                    for ( uint y = 0; y < tileSize / 2; ++y ) {
+                    for ( uint y = 0; y < c_defaultTileSize / 2; ++y ) {
                         destLine = tile.scanLine( y );
                         const uchar* srcLine = img_topleft.scanLine( 2 * y );
-                        for ( uint x = 0; x < tileSize / 2; ++x )
+                        for ( uint x = 0; x < c_defaultTileSize / 2; ++x )
                             destLine[x] = srcLine[ 2*x ];
                     }
-                    for ( uint y = 0; y < tileSize / 2; ++y ) {
+                    for ( uint y = 0; y < c_defaultTileSize / 2; ++y ) {
                         destLine = tile.scanLine( y );
                         const uchar* srcLine = img_topright.scanLine( 2 * y );
-                        for ( uint x = tileSize / 2; x < tileSize; ++x )
-                            destLine[x] = srcLine[ 2 * ( x - tileSize / 2 ) ];		
+                        for ( uint x = c_defaultTileSize / 2; x < c_defaultTileSize; ++x )
+                            destLine[x] = srcLine[ 2 * ( x - c_defaultTileSize / 2 ) ];
                     }
-                    for ( uint y = tileSize / 2; y < tileSize; ++y ) {
+                    for ( uint y = c_defaultTileSize / 2; y < c_defaultTileSize; ++y ) {
                         destLine = tile.scanLine( y );
-                        const uchar* srcLine = img_bottomleft.scanLine( 2 * ( y - tileSize / 2 ) );
-                        for ( uint x = 0; x < tileSize / 2; ++x )
+                        const uchar* srcLine = img_bottomleft.scanLine( 2 * ( y - c_defaultTileSize / 2 ) );
+                        for ( uint x = 0; x < c_defaultTileSize / 2; ++x )
                             destLine[ x ] = srcLine[ 2 * x ];	
                     }
-                    for ( uint y = tileSize / 2; y < tileSize; ++y ) {
+                    for ( uint y = c_defaultTileSize / 2; y < c_defaultTileSize; ++y ) {
                         destLine = tile.scanLine( y );
-                        const uchar* srcLine = img_bottomright.scanLine( 2 * ( y - tileSize/2 ) );
-                        for ( uint x = tileSize / 2; x < tileSize; ++x )
-                            destLine[x] = srcLine[ 2 * ( x - tileSize / 2 ) ];
+                        const uchar* srcLine = img_bottomright.scanLine( 2 * ( y - c_defaultTileSize/2 ) );
+                        for ( uint x = c_defaultTileSize / 2; x < c_defaultTileSize; ++x )
+                            destLine[x] = srcLine[ 2 * ( x - c_defaultTileSize / 2 ) ];
                     }
                 }
                 else {
@@ -343,29 +339,29 @@ void TileCreator::run()
 
                     QRgb* destLine;
 
-                    for ( uint y = 0; y < tileSize / 2; ++y ) {
+                    for ( uint y = 0; y < c_defaultTileSize / 2; ++y ) {
                         destLine = (QRgb*) tile.scanLine( y );
                         const QRgb* srcLine = (QRgb*) img_topleft.scanLine( 2 * y );
-                        for ( uint x = 0; x < tileSize / 2; ++x )
+                        for ( uint x = 0; x < c_defaultTileSize / 2; ++x )
                             destLine[x] = srcLine[ 2 * x ];
                     }
-                    for ( uint y = 0; y < tileSize / 2; ++y ) {
+                    for ( uint y = 0; y < c_defaultTileSize / 2; ++y ) {
                         destLine = (QRgb*) tile.scanLine( y );
                         const QRgb* srcLine = (QRgb*) img_topright.scanLine( 2 * y );
-                        for ( uint x = tileSize / 2; x < tileSize; ++x )
-                            destLine[x] = srcLine[ 2 * ( x - tileSize / 2 ) ];		
+                        for ( uint x = c_defaultTileSize / 2; x < c_defaultTileSize; ++x )
+                            destLine[x] = srcLine[ 2 * ( x - c_defaultTileSize / 2 ) ];
                     }
-                    for ( uint y = tileSize / 2; y < tileSize; ++y ) {
+                    for ( uint y = c_defaultTileSize / 2; y < c_defaultTileSize; ++y ) {
                         destLine = (QRgb*) tile.scanLine( y );
-                        const QRgb* srcLine = (QRgb*) img_bottomleft.scanLine( 2 * ( y-tileSize/2 ) );
-                        for ( uint x = 0; x < tileSize / 2; ++x )
+                        const QRgb* srcLine = (QRgb*) img_bottomleft.scanLine( 2 * ( y-c_defaultTileSize/2 ) );
+                        for ( uint x = 0; x < c_defaultTileSize / 2; ++x )
                             destLine[x] = srcLine[ 2 * x ];	
                     }
-                    for ( uint y = tileSize / 2; y < tileSize; ++y ) {
+                    for ( uint y = c_defaultTileSize / 2; y < c_defaultTileSize; ++y ) {
                         destLine = (QRgb*) tile.scanLine( y );
-                        const QRgb* srcLine = (QRgb*) img_bottomright.scanLine( 2 * ( y-tileSize / 2 ) );
-                        for ( uint x = tileSize / 2; x < tileSize; ++x )
-                            destLine[x] = srcLine[ 2*( x-tileSize / 2 ) ];		
+                        const QRgb* srcLine = (QRgb*) img_bottomright.scanLine( 2 * ( y-c_defaultTileSize / 2 ) );
+                        for ( uint x = c_defaultTileSize / 2; x < c_defaultTileSize; ++x )
+                            destLine[x] = srcLine[ 2*( x-c_defaultTileSize / 2 ) ];
                     }
                 }
 

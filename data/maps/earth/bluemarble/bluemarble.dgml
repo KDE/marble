@@ -40,6 +40,7 @@
                 </texture>
                 <texture name="clouds_data" expire="10800"><!-- type="texture"-->
                     <sourcedir format="JPG"> earth/clouds </sourcedir>
+                    <tileSize width="675" height="675" />
                     <installmap> clouds.jpg </installmap>
                     <storageLayout maximumTileLevel="1"/>
                     <blending name="CloudsBlending" />

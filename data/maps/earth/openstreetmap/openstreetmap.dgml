@@ -24,6 +24,7 @@
                      or 604800 seconds -->
                 <texture name="mapnik_data" expire="604800" >
                     <sourcedir format="PNG"> earth/openstreetmap </sourcedir>
+                    <tileSize width="256" height="256" />
                     <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="18" mode="OpenStreetMap" />
                     <projection name="Mercator" />
                     <downloadUrl protocol="http" host="a.tile.openstreetmap.org" path="/" />

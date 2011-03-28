@@ -74,6 +74,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     void setMaximumTileLevel( const int );
 
     const QSize tileSize() const;
+    void setTileSize( const QSize &tileSize );
 
     Projection projection() const;
     void setProjection( const Projection );
