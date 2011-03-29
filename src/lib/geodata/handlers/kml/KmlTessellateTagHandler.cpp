@@ -43,7 +43,9 @@ GeoNode* KmltessellateTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
+#ifdef DEBUG_TAGS
     bool validParents = false;
+#endif
 
     QString content = parser.readElementText().trimmed();
 
@@ -56,7 +58,9 @@ GeoNode* KmltessellateTagHandler::parse( GeoParser& parser ) const
             lineString->setTessellate( false );
         }
 
+#ifdef DEBUG_TAGS
         validParents = true;
+#endif
 
     } else if( parentItem.is<GeoDataLinearRing>() ) {
         GeoDataLinearRing* linearRing = parentItem.nodeAs<GeoDataLinearRing>();
@@ -67,7 +71,9 @@ GeoNode* KmltessellateTagHandler::parse( GeoParser& parser ) const
             linearRing->setTessellate( false );
         }
 
+#ifdef DEBUG_TAGS
         validParents = true;
+#endif
 
     } else if( parentItem.is<GeoDataPolygon>() ) {
         GeoDataPolygon* polygon = parentItem.nodeAs<GeoDataPolygon>();
@@ -78,7 +84,9 @@ GeoNode* KmltessellateTagHandler::parse( GeoParser& parser ) const
             polygon->setTessellate( false );
         }
 
+#ifdef DEBUG_TAGS
         validParents = true;
+#endif
 
     }
 

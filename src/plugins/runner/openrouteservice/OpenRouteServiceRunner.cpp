@@ -243,10 +243,10 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
             QRegExp regexp = QRegExp( "^P(?:(\\d+)D)?T(?:(\\d+)H)?(?:(\\d+)M)?(\\d+)S" );
             if ( regexp.indexIn( time.item( 0 ).toElement().text() ) == 0 ) {
                 QStringList matches = regexp.capturedTexts();
-                unsigned int days( 0 ), hours( 0 ), minutes( 0 ), seconds( 0 );
+                unsigned int hours( 0 ), minutes( 0 ), seconds( 0 );
                 switch ( matches.size() ) {
                 case 5:
-                    days    = regexp.cap( matches.size() - 4 ).toInt();
+                    // days    = regexp.cap( matches.size() - 4 ).toInt();
                     // Intentionally no break
                 case 4:
                     hours   = regexp.cap( matches.size() - 3 ).toInt();

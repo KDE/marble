@@ -55,8 +55,7 @@ AprsTCPIP::openSocket()
     {
         // read the initial server statement
         char buf[4096];
-        qint64 lineLength;
-        lineLength = socket->readLine( buf, sizeof( buf ) );
+        socket->readLine( buf, sizeof( buf ) );
         mDebug() << "Aprs TCPIP server: " << buf;
     }
 

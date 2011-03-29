@@ -265,7 +265,6 @@ QImage * TileLoader::scaledLowerLevelTile( TileId const & id )
 
         if ( !toScale.isNull() ) {
             // which rect to scale?
-            QSize const size = toScale.size();
             int const restTileX = id.x() % ( 1 << deltaLevel );
             int const restTileY = id.y() % ( 1 << deltaLevel );
             int const partWidth = toScale.width() >> deltaLevel;

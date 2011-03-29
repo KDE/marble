@@ -151,7 +151,6 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     loadCoastlines();
 
     QImage        *origimg = viewParams->coastImage();
-    Quaternion     rotAxis = viewParams->planetAxis();
 
     origimg->fill( Qt::transparent );
 
@@ -231,8 +230,6 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
 {
     loadCoastlines();
 
-    Quaternion  rotAxis = viewParams->planetAxis();
-
     bool antialiased = false;
 
     if (   viewParams->mapQuality() == HighQuality
@@ -308,8 +305,6 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
                                      ViewParams *viewParams )
 {
     // m_vectorMap->clearNodeCount();
-
-    Quaternion  rotAxis = viewParams->planetAxis();
 
     bool antialiased = false;
 

@@ -235,7 +235,6 @@ void ClipPainterPrivate::labelPosition( const QPolygonF & polygon, QVector<QPoin
     int labelPosition = 0;
 
     bool currentAllowsLabel = false;
-    bool previousAllowsLabel = false;
 
     if ( labelPositionFlags.testFlag( LineCenter ) ) {
         // The Label at the center of the polyline:
@@ -266,7 +265,6 @@ void ClipPainterPrivate::labelPosition( const QPolygonF & polygon, QVector<QPoin
                 }
                 break;
             }
-            previousAllowsLabel = currentAllowsLabel;
         }
     }
 
@@ -287,7 +285,6 @@ void ClipPainterPrivate::labelPosition( const QPolygonF & polygon, QVector<QPoin
                 }
                 break;
             }
-            previousAllowsLabel = currentAllowsLabel;
         }
     }
 }

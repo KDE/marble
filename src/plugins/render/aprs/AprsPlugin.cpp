@@ -426,7 +426,6 @@ bool AprsPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
 
     QMutexLocker locker( m_mutex );
     QMap<QString, AprsObject *>::ConstIterator obj;
-    QMap<QString, AprsObject *>::ConstIterator end = m_objects.constEnd();
     for( obj = m_objects.constBegin(); obj != m_objects.constEnd(); ++obj ) {
         ( *obj )->render( painter, viewport, renderPos, layer, fadetime, hidetime );
     }

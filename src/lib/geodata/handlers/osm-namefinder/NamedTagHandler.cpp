@@ -77,10 +77,10 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     named->setName( name );
 
     // attribute rank
-    int rank = 0;
-    const QString rankStr = parser.attribute( attr_rank ).trimmed();
-    if ( !rankStr.isEmpty() )
-        rank = rankStr.toInt();
+    // int rank = 0;
+    // const QString rankStr = parser.attribute( attr_rank ).trimmed();
+    // if ( !rankStr.isEmpty() )
+    //     rank = rankStr.toInt();
     // FIXME: where is the rank in GeoDataPlacemark?
     // named->setRank( rank );
 

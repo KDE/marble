@@ -175,8 +175,6 @@ QRectF FrameGraphicsItem::contentRect( const QPointF& position ) const
     qreal marginTop = ( d->m_marginTop == 0.0 ) ? d->m_margin : d->m_marginTop;
     qreal marginLeft = ( d->m_marginLeft == 0.0 ) ? d->m_margin : d->m_marginLeft;
 
-    QSizeF size = this->size();
-
     QRectF contentRect = QRectF( position.x() + marginLeft + d->m_padding,
                                  position.y() + marginTop + d->m_padding,
                                  d->m_contentSize.width(),
