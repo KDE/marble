@@ -44,8 +44,8 @@ public:
     QStringList staticUrlServers() const;
     void setStaticUrlServers( const QStringList& uris );
 
-    QString createArchive( QString mapId );
-    void deleteArchive( QString mapId );
+    static QString createArchive( QWidget *parent, QString mapId );
+    static void deleteArchive( QString mapId );
 
     // QWizard's functions
     virtual void accept();

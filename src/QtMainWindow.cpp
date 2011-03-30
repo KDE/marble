@@ -139,7 +139,6 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
     m_position = NOT_AVAILABLE;
     m_distance = marbleWidget()->distanceString();
     m_clock = QLocale().toString( m_controlView->marbleModel()->clockDateTime().addSecs( m_controlView->marbleModel()->clockTimezone() ), QLocale::ShortFormat );
-    m_mapWizard = new MapWizard();
     QTimer::singleShot( 0, this, SLOT( initObject() ) );
 }
 
@@ -998,11 +997,6 @@ void MainWindow::readSettings()
     }
     settings.endGroup();
 
-    settings.beginGroup( "MapWizard" );
-        m_mapWizard->setWmsServers( settings.value( "wmsServers" ).toStringList() );
-        m_mapWizard->setStaticUrlServers( settings.value( "staticUrlServers" ).toStringList() );
-    settings.endGroup();
-
     settings.beginGroup( "Plugins");
     QString positionProvider = settings.value( "activePositionTrackingPlugin", QString() ).toString();
     if ( !positionProvider.isEmpty() ) {
@@ -1117,12 +1111,7 @@ void MainWindow::writeSettings()
      }
      settings.setValue( "activePositionTrackingPlugin", positionProvider );
      settings.endGroup();
-     
-     settings.beginGroup( "MapWizard" );
-        settings.setValue( "wmsServers", m_mapWizard->wmsServers() );
-        settings.setValue( "staticUrlServers", m_mapWizard->staticUrlServers() );
-     settings.endGroup();
-     
+
      // The config dialog has to write settings.
      m_configDialog->writeSettings();
 
@@ -1343,7 +1332,20 @@ void MainWindow::setupZoomButtons()
 
 void MainWindow::showMapWizard()
 {
-    m_mapWizard->show();
+    QPointer<MapWizard> mapWizard = new MapWizard();
+    QSettings settings("kde.org", "Marble Desktop Globe");
+
+    settings.beginGroup( "MapWizard" );
+        mapWizard->setWmsServers( settings.value( "wmsServers" ).toStringList() );
+        mapWizard->setStaticUrlServers( settings.value( "staticUrlServers" ).toStringList() );
+    settings.endGroup();
+
+    mapWizard->exec();
+
+    settings.beginGroup( "MapWizard" );
+        settings.setValue( "wmsServers", mapWizard->wmsServers() );
+        settings.setValue( "staticUrlServers", mapWizard->staticUrlServers() );
+    settings.endGroup();
 }
 
 #include "QtMainWindow.moc"

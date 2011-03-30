@@ -478,7 +478,7 @@ void MapWizard::queryLegendImage()
     d->uiWidget.textBrowserLegend->setHtml( d->legendHtml );
 }
 
-QString MapWizard::createArchive( QString mapId )
+QString MapWizard::createArchive( QWidget *parent, QString mapId )
 {
     QStringList splitMapId( mapId.split("/") );
     QString body = splitMapId[0];
@@ -527,10 +527,10 @@ QString MapWizard::createArchive( QString mapId )
     switch( archiver.execute( "tar", tarArgs ) )
     {
     case -2:
-        QMessageBox::critical( this, tr( "Archiving failed" ), tr( "Archiving process cannot be started." ) );
+        QMessageBox::critical( parent, tr( "Archiving failed" ), tr( "Archiving process cannot be started." ) );
         break;
     case -1:
-        QMessageBox::critical( this, tr( "Archiving failed" ), tr( "Archiving process crashed." ) );
+        QMessageBox::critical( parent, tr( "Archiving failed" ), tr( "Archiving process crashed." ) );
         break;
     case 0:
         mDebug() << "Archived the theme sucessfully.";

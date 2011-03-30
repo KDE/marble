@@ -32,7 +32,6 @@ class TimeControlWidget;
 class QtMarbleConfigDialog;
 class DownloadRegionDialog;
 class RoutingWidget;
-class MapWizard;
 class StackableWindow;
 
 class MainWindow : public QMainWindow
@@ -135,7 +134,6 @@ private:
     TimeControlWidget* m_timeControlDialog;
     QtMarbleConfigDialog *m_configDialog;
     DownloadRegionDialog* m_downloadRegionDialog;
-    MapWizard* m_mapWizard;
 
     /// Store plugin toolbar pointers so that they can be removed/updated later
     QList<QToolBar*> m_pluginToolbars;

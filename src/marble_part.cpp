@@ -147,8 +147,6 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
 
     setXMLFile( "marble_part.rc" );
 
-    m_mapWizard = new MapWizard( m_controlView );
-
     m_statusBarExtension = new KParts::StatusBarExtension( this );
     m_statusBarExtension->statusBar()->setUpdatesEnabled( false );
 
@@ -423,10 +421,6 @@ void MarblePart::readSettings()
     // View
     m_initialGraphicsSystem = (GraphicsSystem) MarbleSettings::graphicsSystem();
     m_previousGraphicsSystem = m_initialGraphicsSystem;
-    
-    // Map Wizard
-    m_mapWizard->setWmsServers( MarbleSettings::wmsServers() );
-    m_mapWizard->setStaticUrlServers( MarbleSettings::staticUrlServers() );
 
     // Plugins
     QHash<QString, int> pluginEnabled;
@@ -619,9 +613,6 @@ void MarblePart::writeSettings()
     // Time
     MarbleSettings::setDateTime( m_controlView->marbleModel()->clockDateTime() );
     MarbleSettings::setSpeedSlider( m_controlView->marbleModel()->clockSpeed() );
-    
-    MarbleSettings::setWmsServers( m_mapWizard->wmsServers() );
-    MarbleSettings::setStaticUrlServers( m_mapWizard->staticUrlServers() );
 
     // Plugins
     QList<int>   pluginEnabled;
@@ -1153,9 +1144,9 @@ void MarblePart::showUploadNewStuffDialog()
 
     QPointer<KNS3::UploadDialog> dialog( new KNS3::UploadDialog( newStuffConfig ) );
     kDebug() << "Creating the archive";
-    dialog->setUploadFile( KUrl( m_mapWizard->createArchive( m_controlView->marbleWidget()->mapThemeId() ) ) );
+    dialog->setUploadFile( KUrl( MapWizard::createArchive( m_controlView, m_controlView->marbleWidget()->mapThemeId() ) ) );
     dialog->exec();
-    m_mapWizard->deleteArchive( m_controlView->marbleWidget()->mapThemeId() );
+    MapWizard::deleteArchive( m_controlView->marbleWidget()->mapThemeId() );
     delete dialog;
 }
 
@@ -1231,7 +1222,13 @@ void MarblePart::showStatusBarContextMenu( const QPoint& pos )
 
 void MarblePart::showMapWizard()
 {
-    m_mapWizard->show();
+    // Map Wizard
+    QPointer<MapWizard> mapWizard = new MapWizard( m_controlView );
+    mapWizard->setWmsServers( MarbleSettings::wmsServers() );
+    mapWizard->setStaticUrlServers( MarbleSettings::staticUrlServers() );
+    mapWizard->exec();
+    MarbleSettings::setWmsServers( mapWizard->wmsServers() );
+    MarbleSettings::setStaticUrlServers( mapWizard->staticUrlServers() );
 }
 
 void MarblePart::editSettings()

@@ -44,7 +44,6 @@ class RoutingProfilesWidget;
 class SunControlWidget;
 class TimeControlWidget;
 class GeoDataFolder;
-class MapWizard;
 
 class MarblePart: public KParts::ReadOnlyPart
 {
@@ -198,7 +197,6 @@ class MarblePart: public KParts::ReadOnlyPart
     SunControlWidget  *m_sunControlDialog;
     TimeControlWidget *m_timeControlDialog;
     DownloadRegionDialog *m_downloadRegionDialog;
-    MapWizard *m_mapWizard;
 
     // Actions for the GUI.
     KAction      *m_exportMapAction;
