@@ -18,7 +18,7 @@
 // Marble
 #include "AbstractDataPluginItem.h"
 #include "GeoDataLatLonAltBox.h"
-#include "MarbleDataFacade.h"
+#include "MarbleModel.h"
 #include "MarbleDebug.h"
 
 // Qt
@@ -66,11 +66,11 @@ QUrl PhotoPluginModel::generateUrl( const QString& service,
 }
 
 void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                           MarbleDataFacade *facade,
+                                           const MarbleModel *model,
                                            qint32 number )
 {
     // Flickr only supports images for earth
-    if( facade->target() != "earth" ) {
+    if( model->planetId() != "earth" ) {
         return;
     }
     

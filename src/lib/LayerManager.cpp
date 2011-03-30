@@ -24,7 +24,7 @@
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneSettings.h"
-#include "MarbleDataFacade.h"
+#include "MarbleModel.h"
 #include "PluginManager.h"
 #include "RenderPlugin.h"
 #include "ViewParams.h"
@@ -46,13 +46,12 @@ bool zValueLessThan( const LayerInterface * const one, const LayerInterface * co
 class LayerManagerPrivate
 {
  public:
-    LayerManagerPrivate( MarbleDataFacade* dataFacade,
-                         PluginManager* pluginManager );
+    LayerManagerPrivate( MarbleModel* model );
     ~LayerManagerPrivate();
 
     GeoSceneDocument *m_mapTheme;
 
-    MarbleDataFacade *m_dataFacade;
+    const MarbleModel *m_marbleModel;
     PluginManager *m_pluginManager;
     QList<RenderPlugin *> m_renderPlugins;
     QList<AbstractFloatItem *> m_floatItems;
@@ -60,27 +59,25 @@ class LayerManagerPrivate
     QList<LayerInterface *> m_internalLayers;
 };
 
-LayerManagerPrivate::LayerManagerPrivate( MarbleDataFacade* dataFacade,
-                                          PluginManager* pluginManager )
+LayerManagerPrivate::LayerManagerPrivate( MarbleModel* model )
     : m_mapTheme( 0 ),
-      m_dataFacade( dataFacade ),
-      m_pluginManager( pluginManager ),
-      m_renderPlugins( pluginManager->createRenderPlugins() )
+      m_marbleModel( model ),
+      m_pluginManager( model->pluginManager() ),
+      m_renderPlugins( m_pluginManager->createRenderPlugins() )
 {
 }
 
 LayerManagerPrivate::~LayerManagerPrivate()
 {
     foreach( RenderPlugin * renderPlugin, m_renderPlugins )
-        renderPlugin->setDataFacade( 0 );
+        renderPlugin->setMarbleModel( 0 );
     qDeleteAll( m_renderPlugins );
 }
 
 
-LayerManager::LayerManager( MarbleDataFacade* dataFacade,
-                            PluginManager* pluginManager, QObject *parent )
+LayerManager::LayerManager( MarbleModel* model, QObject *parent )
     : QObject( parent ),
-      d( new LayerManagerPrivate( dataFacade, pluginManager) )
+      d( new LayerManagerPrivate( model ) )
 {
 
     // get float items and data plugins
@@ -103,7 +100,7 @@ LayerManager::LayerManager( MarbleDataFacade* dataFacade,
 
     // Just for initial testing
     foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
-        renderPlugin->setDataFacade( d->m_dataFacade );
+        renderPlugin->setMarbleModel( d->m_marbleModel );
     }
 }
 

@@ -1,3 +1,4 @@
+
 //
 // This file is part of the Marble Virtual Globe.
 //
@@ -26,8 +27,6 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "MarbleWidget.h"
-#include "MarbleModel.h"
-#include "MarbleDataFacade.h"
 
 
 using namespace Marble;
@@ -117,7 +116,7 @@ void FileViewFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
     Q_UNUSED( renderPos );
 
     if( !m_fileView->model() ) {
-        m_fileView->setModel(dataFacade()->fileViewModel());
+        m_fileView->setModel(marbleModel()->fileViewModel());
     }
     painter->end();
     // Paint widget without a background

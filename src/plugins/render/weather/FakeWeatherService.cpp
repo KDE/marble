@@ -30,12 +30,12 @@ FakeWeatherService::~FakeWeatherService()
 }
     
 void FakeWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
-                         MarbleDataFacade *facade,
+                         const MarbleModel *model,
                          qint32 number )
 {
     Q_UNUSED( box );
     Q_UNUSED( number );
-    Q_UNUSED( facade );
+    Q_UNUSED( model );
     
     FakeWeatherItem *item = new FakeWeatherItem( this );
     item->setStationName( "Fake" );

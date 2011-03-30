@@ -17,7 +17,7 @@
 namespace Marble
 {
 
-class MarbleDataFacade;
+class MarbleModel;
 
 // The maximum number of items we want to show on the screen.
 const quint32 numberOfItemsOnScreen = 20;
@@ -40,7 +40,9 @@ protected:
      * Generates the download url for the description file from the web service depending on
      * the @p box surrounding the view and the @p number of files to show.
      **/
-    void getAdditionalItems( const GeoDataLatLonAltBox& box, MarbleDataFacade *facade, qint32 number = 10 );
+    virtual void getAdditionalItems( const GeoDataLatLonAltBox& box,
+                                     const MarbleModel *model,
+                                     qint32 number = 10 );
 
     /**
      * Parses the @p file which getAdditionalItems downloads and

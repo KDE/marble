@@ -34,8 +34,7 @@ class ViewParams;
 class RenderPlugin;
 class AbstractFloatItem;
 class AbstractDataPlugin;
-class MarbleDataFacade;
-class PluginManager;
+class MarbleModel;
 class LayerInterface;
 
 /**
@@ -48,9 +47,7 @@ class MARBLE_EXPORT LayerManager : public QObject
     Q_OBJECT
 
  public:
-    explicit LayerManager( MarbleDataFacade* dataFacade,
-                           PluginManager* pluginManager,
-                           QObject *parent = 0);
+    explicit LayerManager( MarbleModel *model, QObject *parent = 0);
     ~LayerManager();
 
     void renderLayers( GeoPainter *painter, ViewParams *viewParams, const QStringList& renderPositions );

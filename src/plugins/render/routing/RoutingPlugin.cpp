@@ -17,7 +17,6 @@
 #include "AudioOutput.h"
 #include "GeoDataCoordinates.h"
 #include "GeoPainter.h"
-#include "MarbleDataFacade.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
@@ -345,7 +344,7 @@ void RoutingPluginPrivate::togglePositionTracking( bool enabled )
         }
         qDeleteAll( plugins );
     }
-    m_parent->dataFacade()->positionTracking()->setPositionProviderPlugin( plugin );
+    m_parent->marbleModel()->positionTracking()->setPositionProviderPlugin( plugin );
 }
 
 void RoutingPluginPrivate::reverseRoute()
@@ -436,7 +435,7 @@ void RoutingPlugin::initialize()
 {
     QWidget *widget = new QWidget;
     d->m_widget.setupUi( widget );
-    PositionProviderPlugin* activePlugin = dataFacade()->positionTracking()->positionProviderPlugin();
+    PositionProviderPlugin* activePlugin = marbleModel()->positionTracking()->positionProviderPlugin();
     d->m_widget.gpsButton->setChecked( activePlugin != 0 );
     d->m_widget.routingButton->setEnabled( false );
     connect( d->m_widget.instructionLabel, SIGNAL( linkActivated( QString ) ),

@@ -17,7 +17,7 @@
 // Marble
 #include "GeoDataLatLonAltBox.h"
 #include "global.h"
-#include "MarbleDataFacade.h"
+#include "MarbleModel.h"
 #include "MarbleDirs.h"
 #include "WikipediaItem.h"
 #include "MarbleLocale.h"
@@ -54,11 +54,11 @@ void WikipediaModel::setShowThumbnail( bool show )
 }
 
 void WikipediaModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                         MarbleDataFacade *facade,
+                                         const MarbleModel *model,
                                          qint32 number )
 {
     // Geonames only supports wikipedia articles for earth
-    if ( facade->target() != "earth" ) {
+    if ( model->planetId() != "earth" ) {
         return;
     }
         

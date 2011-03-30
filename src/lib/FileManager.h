@@ -22,7 +22,6 @@ namespace Marble
 class MarbleModel;
 class FileManagerPrivate;
 class GeoDataDocument;
-class MarbleDataFacade;
 class FileLoader;
 
 /**
@@ -30,7 +29,7 @@ class FileLoader;
  * different files into Geodata model.
  *
  * The loaded data are accessible via
- * various models in the DataFacade.
+ * various models in MarbleModel.
  */
 class FileManager : public QObject
 {

@@ -46,16 +46,14 @@ BBCWeatherService::~BBCWeatherService()
 }
     
 void BBCWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                            MarbleDataFacade *facade,
+                                            const MarbleModel *model,
                                             qint32 number )
 {
-    Q_UNUSED( facade );
-
     if ( !m_parsingStarted ) {
         setupList();
     }
 
-    m_itemGetter->setSchedule( box, facade, number );
+    m_itemGetter->setSchedule( box, model, number );
 }
 
 void BBCWeatherService::fetchStationList()

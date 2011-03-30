@@ -24,7 +24,7 @@
 #include "MarbleWidget.h"
 #include "GeoPainter.h"
 #include "GeoDataCoordinates.h"
-#include "MarbleDataFacade.h"
+#include "MarbleModel.h"
 #include "GeoDataLatLonAltBox.h"
 #include "ViewportParams.h"
 #include "AprsGatherer.h"

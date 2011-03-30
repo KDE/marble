@@ -56,7 +56,6 @@ class FileViewModel;
 class PositionTracking;
 class HttpDownloadManager;
 class MarbleModelPrivate;
-class MarbleDataFacade;
 class PlacemarkLayout;
 class MarbleClock;
 class SunLocator;
@@ -219,6 +218,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     qreal                 planetRadius()   const;
     QString               planetName()     const;
+    QString               planetId()       const;
 
     MarbleClock*          clock()       const;
     SunLocator*           sunLocator()     const;
@@ -235,8 +235,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     quint64 volatileTileCacheLimit() const;
 
-    MarbleDataFacade* dataFacade() const;
-  
     PluginManager* pluginManager() const;
 
     /**

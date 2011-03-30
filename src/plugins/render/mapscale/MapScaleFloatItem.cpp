@@ -22,7 +22,7 @@
 #include "global.h"
 #include "Projections/AbstractProjection.h"
 #include "MarbleLocale.h"
-#include "MarbleDataFacade.h"
+#include "MarbleModel.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 
@@ -130,7 +130,7 @@ void MapScaleFloatItem::changeViewport( ViewportParams *viewport )
 {
     int viewportWidth = viewport->width();
 
-    QString target = dataFacade()->target();
+    QString target = marbleModel()->planetId();
 
     if ( !(    m_radius == viewport->radius() 
             && viewportWidth == m_viewportWidth
@@ -173,7 +173,7 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
 
     int fontHeight     = QFontMetrics( font() ).ascent();
 
-    qreal pixel2Length = dataFacade()->planetRadius() /
+    qreal pixel2Length = marbleModel()->planetRadius() /
                          (qreal)(viewport->radius());
 
     if ( viewport->currentProjection()->surfaceType() == AbstractProjection::Cylindrical )

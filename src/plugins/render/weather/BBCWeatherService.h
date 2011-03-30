@@ -32,7 +32,7 @@ class BBCWeatherService : public AbstractWeatherService
     
  public Q_SLOTS:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             MarbleDataFacade *facade,
+                             const MarbleModel *model,
                              qint32 number = 10 );
  
  private Q_SLOTS:

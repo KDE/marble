@@ -32,10 +32,10 @@ BBCItemGetter::~BBCItemGetter()
 }
 
 void BBCItemGetter::setSchedule( const GeoDataLatLonAltBox& box,
-                                 MarbleDataFacade *facade,
+                                 const MarbleModel *model,
                                  qint32 number )
 {
-    Q_UNUSED( facade )
+    Q_UNUSED( model )
     m_scheduleMutex.lock();
     m_scheduledBox = box;
     m_scheduledNumber = number;

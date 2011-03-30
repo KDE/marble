@@ -22,7 +22,7 @@ namespace Marble
 
 class AbstractWeatherService;
 class GeoDataLatLonAltBox;
-class MarbleDataFacade;
+class MarbleModel;
     
 class WeatherModel : public AbstractDataPluginModel
 {
@@ -49,12 +49,12 @@ class WeatherModel : public AbstractDataPluginModel
     
  Q_SIGNALS:
     void additionalItemsRequested( const GeoDataLatLonAltBox &,
-                                   MarbleDataFacade *,
+                                   const MarbleModel *,
                                    qint32 number );
     
  protected:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                   MarbleDataFacade *facade,
+                             const MarbleModel *marbleModel,
                                    qint32 number = 10 );
     void parseFile( const QByteArray& file );
  

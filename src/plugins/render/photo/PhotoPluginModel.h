@@ -16,7 +16,7 @@
 namespace Marble
 {
 
-class MarbleDataFacade;
+class MarbleModel;
 
 const quint32 numberOfImagesPerFetch = 15;
   
@@ -37,7 +37,7 @@ class PhotoPluginModel : public AbstractDataPluginModel
      * the @p box surrounding the view and the @p number of files to show.
      **/
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             MarbleDataFacade *facade,
+                             const MarbleModel *model,
                              qint32 number = 10 );
        
     /**

@@ -25,7 +25,7 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
 #include "HttpDownloadManager.h"
-#include "MarbleDataFacade.h"
+#include "MarbleModel.h"
 #include "MarbleDirs.h"
 #include "ViewportParams.h"
 
@@ -59,7 +59,7 @@ class AbstractDataPluginModelPrivate
           m_downloadedBox(),
           m_lastNumber( 0 ),
           m_downloadedNumber( 0 ),
-          m_lastDataFacade( 0 ),
+          m_lastMarbleModel( 0 ),
           m_downloadTimer( new QTimer( m_parent ) ),
           m_descriptionFileNumber( 0 ),
           m_itemSettings(),
@@ -90,7 +90,7 @@ class AbstractDataPluginModelPrivate
     GeoDataLatLonAltBox m_downloadedBox;
     qint32 m_lastNumber;
     qint32 m_downloadedNumber;
-    MarbleDataFacade *m_lastDataFacade;
+    const MarbleModel *m_lastMarbleModel;
     QString m_downloadedTarget;
     QList<AbstractDataPluginItem*> m_itemSet;
     QHash<QString, AbstractDataPluginItem*> m_downloadingItems;
@@ -128,11 +128,11 @@ AbstractDataPluginModel::~AbstractDataPluginModel()
 }
 
 QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *viewport,
-                                                               MarbleDataFacade *facade,
+                                                               const MarbleModel *model,
                                                                qint32 number )
 {
     GeoDataLatLonAltBox currentBox = viewport->viewLatLonAltBox();
-    QString target = facade->target();
+    QString target = model->planetId();
     QList<AbstractDataPluginItem*> list;
     
     d->m_displayedItems.removeAll( 0 );
@@ -206,14 +206,14 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
         // FIXME: We have to do something if the item that is not on the viewport.
     }
     
-    d->m_lastDataFacade = facade;
+    d->m_lastMarbleModel = model;
     
     if( (!(currentBox == d->m_lastBox)
           || number != d->m_lastNumber ) )
     {
         d->m_lastBox = currentBox;
         d->m_lastNumber = number;
-        d->m_lastDataFacade = facade;
+        d->m_lastMarbleModel = model;
     }
     else {
     }
@@ -375,7 +375,7 @@ void AbstractDataPluginModel::setItemSettings( QHash<QString,QVariant> itemSetti
 
 void AbstractDataPluginModel::handleChangedViewport()
 {
-    if( !d->m_lastDataFacade ) {
+    if( !d->m_lastMarbleModel ) {
         return;
     }
     
@@ -384,7 +384,7 @@ void AbstractDataPluginModel::handleChangedViewport()
         // We don't need to download if nothing changed
         && ( !( d->m_downloadedBox == d->m_lastBox )
              || d->m_downloadedNumber != d->m_lastNumber
-             || d->m_downloadedTarget != d->m_lastDataFacade->target() )
+             || d->m_downloadedTarget != d->m_lastMarbleModel->planetId() )
         // We try to filter little changes of the bounding box
         && ( fabs( d->m_downloadedBox.east() - d->m_lastBox.east() ) * boxComparisonFactor
                                 > d->m_lastBox.width()
@@ -402,10 +402,10 @@ void AbstractDataPluginModel::handleChangedViewport()
         // Save the download parameter
         d->m_downloadedBox = d->m_lastBox;
         d->m_downloadedNumber = d->m_lastNumber;
-        d->m_downloadedTarget = d->m_lastDataFacade->target();
+        d->m_downloadedTarget = d->m_lastMarbleModel->planetId();
         
         // Get items
-        getAdditionalItems( d->m_lastBox, d->m_lastDataFacade, d->m_lastNumber );
+        getAdditionalItems( d->m_lastBox, d->m_lastMarbleModel, d->m_lastNumber );
     }
     else {
         // Don't wait to long to start the next download as we decided not to download anything.

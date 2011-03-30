@@ -28,7 +28,7 @@ class AbstractWeatherService : public QObject
     
  public Q_SLOTS:
     virtual void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                     MarbleDataFacade *facade,
+                                     const MarbleModel *model,
                                      qint32 number = 10 ) = 0;
     
  Q_SIGNALS:

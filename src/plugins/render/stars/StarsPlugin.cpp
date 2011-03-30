@@ -15,7 +15,7 @@
 #include <QtCore/QDateTime>
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "MarbleDataFacade.h"
+#include "MarbleModel.h"
 #include "GeoPainter.h"
 #include "SunLocator.h"
 #include "ViewportParams.h"
@@ -132,7 +132,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     if( renderPos=="STARS" )
     {
-        QString target = dataFacade()->target();
+        QString target = marbleModel()->planetId();
 
         // So far this starry sky plugin only supports displaying stars on earth.
         if ( target != "earth" ) {
@@ -149,7 +149,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         painter->setPen( starPen );
         painter->setBrush( starBrush );
 
-        QDateTime currentDateTime = dataFacade()->dateTime();
+        QDateTime currentDateTime = marbleModel()->clockDateTime();
 
         qreal gmst = siderealTime( currentDateTime );
         qreal skyRotationAngle = gmst / 12.0 * M_PI;

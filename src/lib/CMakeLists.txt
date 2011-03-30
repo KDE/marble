@@ -80,7 +80,6 @@ set(marblewidget_SRCS
     MarblePlacemarkModel.cpp
     GeoDataTreeModel.cpp
     kdescendantsproxymodel.cpp
-    MarbleDataFacade.cpp
     MarbleDebug.cpp
     TextureTile.cpp
     TileCoordsPyramid.cpp
@@ -331,7 +330,6 @@ else (APPLE AND QTONLY)
     FileViewWidget.h
     CurrentLocationWidget.h
     MarbleNavigator.h
-    MarbleDataFacade.h
     AbstractFloatItem.h
     MapThemeManager.h
     MarbleAboutDialog.h

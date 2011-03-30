@@ -25,7 +25,7 @@
 
 #include "ui_PositionMarkerConfigWidget.h"
 #include "AbstractProjection.h"
-#include "MarbleDataFacade.h"
+#include "MarbleModel.h"
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "PositionTracking.h"
@@ -172,8 +172,8 @@ QDialog *PositionMarker::configDialog()
 
 void PositionMarker::initialize()
 {
-    if ( dataFacade() ) {
-        connect( dataFacade()->positionTracking(), SIGNAL( gpsLocation( GeoDataCoordinates,qreal ) ),
+    if ( marbleModel() ) {
+        connect( marbleModel()->positionTracking(), SIGNAL( gpsLocation( GeoDataCoordinates,qreal ) ),
                 this, SLOT( setPosition( GeoDataCoordinates ) ) );
         m_isInitialized = true;
     }
@@ -251,7 +251,7 @@ bool PositionMarker::render( GeoPainter *painter,
                            GeoSceneLayer * layer )
 {
     Q_UNUSED( layer )
-    bool const gpsActive = dataFacade()->positionTracking()->positionProviderPlugin() != 0;
+    bool const gpsActive = marbleModel()->positionTracking()->positionProviderPlugin() != 0;
     if ( gpsActive && renderPosition().contains(renderPos) )
     {
         if ( m_viewport != viewport ) {
@@ -261,7 +261,7 @@ bool PositionMarker::render( GeoPainter *painter,
         painter->save();
         painter->autoMapQuality();
 
-        GeoDataAccuracy accuracy = dataFacade()->positionTracking()->accuracy();
+        GeoDataAccuracy accuracy = marbleModel()->positionTracking()->accuracy();
         if ( accuracy.horizontal > 0 && accuracy.horizontal < 1000 ) {
             // Paint a circle indicating the position accuracy
             painter->setPen( Qt::transparent );

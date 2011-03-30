@@ -18,7 +18,7 @@
 namespace Marble
 {
 
-class MarbleDataFacade;
+class MarbleModel;
 
 const quint32 numberOfArticlesPerFetch = 7;
   
@@ -38,7 +38,7 @@ class WikipediaModel : public AbstractDataPluginModel
      * the @p box surrounding the view and the @p number of files to show.
      **/
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             MarbleDataFacade *facade,
+                             const MarbleModel *model,
                              qint32 number = 10 );
        
     /**

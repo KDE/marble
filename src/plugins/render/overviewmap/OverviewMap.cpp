@@ -23,7 +23,7 @@
 #include "AbstractProjection.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
-#include "MarbleDataFacade.h"
+#include "MarbleModel.h"
 #include "ui_OverviewMapConfigWidget.h"
 
 #include "GeoPainter.h"
@@ -140,7 +140,7 @@ void OverviewMap::changeViewport( ViewportParams *viewport )
     GeoDataLatLonAltBox latLonAltBox = viewport->currentProjection()->latLonAltBox( QRect( QPoint( 0, 0 ), viewport->size() ), viewport );
     qreal centerLon, centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
-    QString target = dataFacade()->target();
+    QString target = marbleModel()->planetId();
 
     if ( !( m_latLonAltBox == latLonAltBox
             && m_centerLon == centerLon
@@ -166,7 +166,7 @@ void OverviewMap::paintContent( GeoPainter *painter, ViewportParams *viewport,
 
     QRectF mapRect( contentRect() );
 
-    QString target = dataFacade()->target();
+    QString target = marbleModel()->planetId();
 
     if ( target != m_target ) {
         changeBackground( target );

@@ -12,7 +12,7 @@
 #include "OpenDesktopModel.h"
 #include "OpenDesktopItem.h"
 #include "global.h"
-#include "MarbleDataFacade.h"
+#include "MarbleModel.h"
 #include "GeoDataCoordinates.h"
 #include <QtCore/QString>
 #include <QtCore/QUrl>
@@ -34,11 +34,11 @@ OpenDesktopModel::~OpenDesktopModel()
     // Nothing to do...
 }
  
-void OpenDesktopModel::getAdditionalItems( const GeoDataLatLonAltBox& box, MarbleDataFacade *facade, qint32 number )
+void OpenDesktopModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const MarbleModel *model, qint32 number )
 {
     Q_UNUSED( number )
   
-    if( facade->target() != "earth" )
+    if( model->planetId() != "earth" )
         return;
     
     GeoDataCoordinates coords = box.center();

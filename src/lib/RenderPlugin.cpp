@@ -13,7 +13,7 @@
 #include "RenderPlugin.h"
 
 // Marble
-#include "MarbleDataFacade.h"
+#include "MarbleModel.h"
 #include "MarbleDebug.h"
 
 // Qt
@@ -28,7 +28,7 @@ class RenderPluginPrivate
 {
   public:
     RenderPluginPrivate()
-        : m_dataFacade(0),
+        : m_marbleModel(0),
           m_action(0),
           m_item(0),
           m_enabled(true),
@@ -40,7 +40,8 @@ class RenderPluginPrivate
     {
     }
 
-    MarbleDataFacade   *m_dataFacade;
+    // const: RenderPlugins should only read the model, not modify it
+    const MarbleModel  *m_marbleModel;
     QAction            *m_action;
     QStandardItem      *m_item;
 
@@ -66,14 +67,14 @@ RenderPlugin::~RenderPlugin()
 
 }
 
-MarbleDataFacade* RenderPlugin::dataFacade() const
+const MarbleModel* RenderPlugin::marbleModel() const
 {
-    return d->m_dataFacade;
+    return d->m_marbleModel;
 }
 
-void RenderPlugin::setDataFacade( MarbleDataFacade* dataFacade )
+void RenderPlugin::setMarbleModel( const MarbleModel* marbleModel )
 {
-    d->m_dataFacade = dataFacade;
+    d->m_marbleModel = marbleModel;
 }
 
 QAction* RenderPlugin::action() const

@@ -53,7 +53,6 @@
 #include "FileViewModel.h"
 #include "PositionTracking.h"
 #include "HttpDownloadManager.h"
-#include "MarbleDataFacade.h"
 #include "MarbleDirs.h"
 #include "FileManager.h"
 #include "GeoDataTreeModel.h"
@@ -78,7 +77,6 @@ class MarbleModelPrivate
  public:
     MarbleModelPrivate( MarbleModel *parent )
         : m_parent( parent ),
-          m_dataFacade( 0 ),
           m_clock( new MarbleClock() ),
           m_planet( new Planet( "earth" ) ),
           m_sunLocator( new SunLocator( m_clock, m_planet ) ),
@@ -115,7 +113,6 @@ class MarbleModelPrivate
     void notifyModelChanged();
 
     MarbleModel             *m_parent;
-    MarbleDataFacade        *m_dataFacade;
 
     // Misc stuff.
     MarbleClock       *const m_clock;
@@ -164,7 +161,6 @@ MarbleModel::MarbleModel( QObject *parent )
     QTime t;
     t.start();
 
-    d->m_dataFacade = new MarbleDataFacade( this );
     connect(&d->m_treemodel, SIGNAL( dataChanged(QModelIndex,QModelIndex) ),
             this, SIGNAL( modelChanged() ) );
     connect(&d->m_treemodel, SIGNAL( layoutChanged() ),
@@ -210,7 +206,6 @@ MarbleModel::~MarbleModel()
 
     delete d->m_fileManager;
     delete d->m_mapTheme;
-    delete d->m_dataFacade;
     delete d->m_sunLocator;
     delete d->m_planet;
     delete d->m_clock;
@@ -427,6 +422,11 @@ QString MarbleModel::planetName()   const
     return d->m_planet->name();
 }
 
+QString MarbleModel::planetId() const
+{
+    return d->m_planet->id();
+}
+
 MarbleClock* MarbleModel::clock() const
 {
 //    mDebug() << "In dateTime, model:" << this;
@@ -502,11 +502,6 @@ void MarbleModel::setPersistentTileCacheLimit(quint64 kiloBytes)
         d->m_storageWatcher->quit();
     }
     // TODO: trigger update
-}
-
-MarbleDataFacade* MarbleModel::dataFacade() const
-{
-  return d->m_dataFacade;
 }
 
 PluginManager* MarbleModel::pluginManager() const

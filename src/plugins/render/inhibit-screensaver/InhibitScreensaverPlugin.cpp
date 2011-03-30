@@ -10,7 +10,6 @@
 
 #include "InhibitScreensaverPlugin.h"
 
-#include "MarbleDataFacade.h"
 #include "PositionTracking.h"
 #include "MarbleDebug.h"
 
@@ -101,12 +100,12 @@ QIcon InhibitScreensaverPlugin::icon() const
 
 void InhibitScreensaverPlugin::initialize()
 {
-    Q_ASSERT( dataFacade() && dataFacade()->positionTracking() );
+    Q_ASSERT( marbleModel() && marbleModel()->positionTracking() );
 
     d->m_interface= new QDBusInterface( "com.nokia.mce", "/com/nokia/mce/request",
        "com.nokia.mce.request", QDBusConnection::systemBus() );
 
-    PositionTracking *tracking = dataFacade()->positionTracking();
+    PositionTracking *tracking = marbleModel()->positionTracking();
     connect( tracking, SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
              this, SLOT( updateScreenSaverState( PositionProviderPlugin* ) ) );
     updateScreenSaverState( tracking->positionProviderPlugin() );

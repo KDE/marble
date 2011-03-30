@@ -94,3 +94,20 @@
     void setHome( qreal lon, qreal lat, int zoom = 1050 );
     void setHome( const GeoDataCoordinates& homePoint, int zoom = 1050 );
   Use the respective methods of MarbleModel.
+
+
+2011-03-30  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+
+* Remove MarbleDataFacade. Use the following methods of MarbleModel instead:
+    MarbleDataFacade      MarbleModel
+    ========================================
+    planetRadius()        planetRadius()
+    target()              planetId()
+    planet()              planet()
+    dateTime()            clockDateTime()
+    pluginManager()       pluginManager()
+    positionTracking()    positionTracking()
+    routingManager()      routingManager()
+    placemarkModel()      placemarkModel()
+    fileViewModel()       fileViewModel()
+    treeModel()           treeModel()

@@ -27,7 +27,7 @@ namespace Marble
 class AbstractDataPluginModelPrivate;
 class AbstractDataPluginItem;
 class GeoDataLatLonAltBox;
-class MarbleDataFacade;
+class MarbleModel;
 class PluginManager;
 class ViewportParams;
 
@@ -59,7 +59,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * @return The list of item with most important item first.
      */
     QList<AbstractDataPluginItem*> items( ViewportParams *viewport,
-                                          MarbleDataFacade *facade,
+                                          const MarbleModel *model,
                                           qint32 number = 10 );
     
     /**
@@ -82,7 +82,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * This method has to be implemented in a subclass.
      **/
     virtual void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                     MarbleDataFacade *facade,
+                                     const MarbleModel *model,
                                      qint32 number = 10 ) = 0;
        
     /**

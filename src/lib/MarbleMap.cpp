@@ -45,7 +45,6 @@
 #include "GeoSceneMap.h"
 #include "GeoSceneVector.h"
 #include "GeoSceneZoom.h"
-#include "MarbleDataFacade.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
@@ -79,7 +78,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
         : m_parent( parent ),
           m_model( model ),
           m_backgroundVisible( true ),
-          m_layerManager( model->dataFacade(), model->pluginManager(), parent ),
+          m_layerManager( model, parent ),
           m_textureLayer( model->mapThemeManager(), model->downloadManager(), model->sunLocator() ),
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), parent ),
           m_measureTool( model ),

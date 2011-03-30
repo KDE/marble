@@ -26,7 +26,7 @@ class FakeWeatherService : public AbstractWeatherService
     
  public Q_SLOTS:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             MarbleDataFacade *facade,
+                             const MarbleModel *model,
                              qint32 number = 10 );
 };
 

@@ -66,10 +66,10 @@ void WeatherModel::addItemToList( AbstractDataPluginItem *item )
 }
 
 void WeatherModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
-                               MarbleDataFacade *facade,
+                               const MarbleModel *model,
                                qint32 number )
 {
-    emit additionalItemsRequested( box, facade, number );
+    emit additionalItemsRequested( box, model, number );
 }
 
 void WeatherModel::parseFile( const QByteArray& file )
@@ -89,10 +89,10 @@ void WeatherModel::addService( AbstractWeatherService *service )
                                            const QString&,
                                            AbstractDataPluginItem * ) ) );
     connect( this, SIGNAL( additionalItemsRequested( const GeoDataLatLonAltBox &,
-                                                     MarbleDataFacade *,
+                                                     const MarbleModel *,
                                                      qint32) ),
              service, SLOT( getAdditionalItems( const GeoDataLatLonAltBox&,
-                                                MarbleDataFacade *,
+                                                const MarbleModel *,
                                                 qint32 ) ) );
 }
 

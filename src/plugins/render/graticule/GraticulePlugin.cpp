@@ -16,7 +16,7 @@
 #include "GeoPainter.h"
 #include "GeoDataLineString.h"
 #include "Planet.h"
-#include "MarbleDataFacade.h"
+#include "MarbleModel.h"
 #include "PluginAboutDialog.h"
 
 #include "ViewportParams.h"
@@ -373,7 +373,7 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
     painter->setPen( tropicsPen );
 
     // Determine the planet's axial tilt
-    qreal axialTilt = RAD2DEG * dataFacade()->planet()->epsilon();
+    qreal axialTilt = RAD2DEG * marbleModel()->planet()->epsilon();
 
     if ( axialTilt > 0 ) {
         // Render the tropics

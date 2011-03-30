@@ -28,7 +28,6 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
-#include "MarbleDataFacade.h"
 #include "NewBookmarkFolderDialog.h"
 #include "MarblePlacemarkModel.h"
 

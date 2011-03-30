@@ -24,7 +24,7 @@ namespace Marble
 {
 
 class BBCStation;
-class MarbleDataFacade;
+class MarbleModel;
 
 class BBCItemGetter : public AbstractWorkerThread
 {
@@ -35,7 +35,7 @@ class BBCItemGetter : public AbstractWorkerThread
     ~BBCItemGetter();
 
     void setSchedule( const GeoDataLatLonAltBox& box,
-                      MarbleDataFacade *facade,
+                      const MarbleModel *model,
                       qint32 number );
 
     void setStationList( const QList<BBCStation>& items );

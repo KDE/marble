@@ -12,7 +12,7 @@
 #include "EarthquakeItem.h"
 
 #include "global.h"
-#include "MarbleDataFacade.h"
+#include "MarbleModel.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
 #include "MarbleDebug.h"
@@ -61,11 +61,11 @@ void EarthquakeModel::setEndDate( const QDateTime& endDate )
     m_endDate = endDate;
 }
 
-void EarthquakeModel::getAdditionalItems( const GeoDataLatLonAltBox& box, MarbleDataFacade *facade, qint32 number )
+void EarthquakeModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const MarbleModel *model, qint32 number )
 {
     Q_UNUSED( number );
 
-    if( facade->target() != "earth" ) {
+    if( model->planetId() != "earth" ) {
         return;
     }
 

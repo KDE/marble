@@ -16,7 +16,7 @@
 #include "AbstractDataPluginItem.h"
 #include "GeoPainter.h"
 #include "GeoSceneLayer.h"
-#include "MarbleDataFacade.h"
+#include "MarbleModel.h"
 #include "ViewportParams.h"
 #include "MarbleDebug.h"
 
@@ -89,7 +89,7 @@ bool AbstractDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     }
 
     QList<AbstractDataPluginItem*> items = d->m_model->items( viewport,
-                                                              dataFacade(),
+                                                              marbleModel(),
                                                               numberOfItems() );
     painter->save();
     
@@ -121,7 +121,7 @@ void AbstractDataPlugin::setModel( AbstractDataPluginModel* model )
 
 PluginManager* AbstractDataPlugin::pluginManager() const
 {
-    return dataFacade()->pluginManager();
+    return marbleModel()->pluginManager();
 }
 
 QString AbstractDataPlugin::nameId() const

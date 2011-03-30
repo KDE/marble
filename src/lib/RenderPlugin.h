@@ -29,7 +29,7 @@ namespace Marble
 {
 
 class RenderPluginPrivate;
-class MarbleDataFacade;
+class MarbleModel;
 
 /**
  * @short The abstract class that creates a renderable Item.
@@ -60,8 +60,8 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     RenderPlugin();
     virtual ~RenderPlugin();
 
-    MarbleDataFacade* dataFacade() const;
-    void  setDataFacade( MarbleDataFacade* );
+    const MarbleModel* marbleModel() const;
+    void  setMarbleModel( const MarbleModel* );
 
     QAction       *action() const;
     /**
