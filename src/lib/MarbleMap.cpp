@@ -85,7 +85,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_measureTool( model ),
           m_viewAngle( 110.0 )
 {
-    GeoDataObject *object = static_cast<GeoDataObject*>( model->dataFacade()->treeModel()->index(0, 0, QModelIndex()).internalPointer());
+    GeoDataObject *object = static_cast<GeoDataObject*>( model->treeModel()->index(0, 0, QModelIndex()).internalPointer());
     GeoDataDocument *document = dynamic_cast<GeoDataDocument*>( object->parent() );
     m_geometryLayer = new GeometryLayer( document );
     m_layerManager.addLayer( m_geometryLayer );

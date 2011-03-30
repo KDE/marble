@@ -19,6 +19,7 @@
 namespace Marble
 {
 
+class MarbleModel;
 class FileManagerPrivate;
 class GeoDataDocument;
 class MarbleDataFacade;
@@ -41,19 +42,12 @@ class FileManager : public QObject
      *
      * @param parent The parent object.
      */
-    explicit FileManager( QObject *parent = 0 );
+    FileManager( MarbleModel *model,  QObject *parent = 0 );
 
     /**
      * Destroys the file manager.
      */
     ~FileManager();
-
-    /**
-     * Sets the DataFacade from which the models can be accessed.
-     */
-    void setDataFacade ( MarbleDataFacade *facade );
-
-    MarbleDataFacade *dataFacade ();
 
     /**
      * return a list containing all containers that have been queued for loading or that are

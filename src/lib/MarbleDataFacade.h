@@ -89,9 +89,7 @@ class MARBLE_EXPORT MarbleDataFacade
 
     RoutingManager* routingManager();
 
-    GeoDataTreeModel* treeModel() const;
-
-    void connectTree(bool connect) const;
+    QAbstractItemModel* treeModel() const;
 
 private:
     MarbleDataFacadePrivate  * const d;

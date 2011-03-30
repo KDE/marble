@@ -16,6 +16,7 @@
 
 // Marble
 #include "GeoDataPlacemark.h"
+#include "GeoDataTreeModel.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "FileViewModel.h"

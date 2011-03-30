@@ -24,6 +24,8 @@
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QSortFilterProxyModel>
 
+#include "kdescendantsproxymodel.h"
+
 #include "MapThemeManager.h"
 #include "global.h"
 #include "MarbleDebug.h"
@@ -41,6 +43,7 @@
 
 #include "GeoDataDocument.h"
 #include "GeoDataStyle.h"
+#include "GeoDataTypes.h"
 
 #include "DgmlAuxillaryDictionary.h"
 #include "MarbleClock.h"
@@ -88,12 +91,20 @@ class MarbleModelPrivate
                                                                    MarbleDirs::localPath() ),
                                                       m_pluginManager ) ),
           m_fileManager( 0 ),
+          m_fileviewmodel(),
+          m_treemodel(),
+          m_descendantproxy(),
+          m_sortproxy(),
+          m_dummytree(),
           m_placemarkselectionmodel( 0 ),
           m_positionTracking( 0 ),
           m_bookmarkManager( 0 ),
           m_routingManager( 0 ),
           m_legend( 0 )
     {
+        m_sortproxy.setFilterFixedString( GeoDataTypes::GeoDataPlacemarkType );
+        m_sortproxy.setFilterKeyColumn( 1 );
+        m_sortproxy.setSourceModel( &m_descendantproxy );
     }
 
     ~MarbleModelPrivate()
@@ -129,6 +140,12 @@ class MarbleModelPrivate
     // Places on the map
     FileManager             *m_fileManager;
 
+    FileViewModel            m_fileviewmodel;
+    GeoDataTreeModel         m_treemodel;
+    KDescendantsProxyModel   m_descendantproxy;
+    QSortFilterProxyModel    m_sortproxy;
+    GeoDataTreeModel         m_dummytree;
+
     // Selection handling
     QItemSelectionModel      m_placemarkselectionmodel;
 
@@ -148,11 +165,11 @@ MarbleModel::MarbleModel( QObject *parent )
     t.start();
 
     d->m_dataFacade = new MarbleDataFacade( this );
-    connect(d->m_dataFacade->treeModel(), SIGNAL( dataChanged(QModelIndex,QModelIndex) ),
+    connect(&d->m_treemodel, SIGNAL( dataChanged(QModelIndex,QModelIndex) ),
             this, SIGNAL( modelChanged() ) );
-    connect(d->m_dataFacade->treeModel(), SIGNAL( layoutChanged() ),
+    connect(&d->m_treemodel, SIGNAL( layoutChanged() ),
             this, SIGNAL( modelChanged() ) );
-    connect(d->m_dataFacade->treeModel(), SIGNAL( modelReset() ),
+    connect(&d->m_treemodel, SIGNAL( modelReset() ),
             this, SIGNAL( modelChanged() ) );
 
     // A new instance of FileStorageWatcher.
@@ -169,8 +186,9 @@ MarbleModel::MarbleModel( QObject *parent )
     connect( storagePolicy, SIGNAL( sizeChanged( qint64 ) ),
              d->m_storageWatcher, SLOT( addToCurrentSize( qint64 ) ) );
 
-    d->m_fileManager = new FileManager();
-    d->m_fileManager->setDataFacade(d->m_dataFacade);
+    d->m_fileManager = new FileManager( this );
+    d->m_fileviewmodel.setFileManager( d->m_fileManager );
+    d->m_treemodel.setFileManager( d->m_fileManager );
 
 
     d->m_positionTracking = new PositionTracking( d->m_fileManager, this );
@@ -351,12 +369,12 @@ HttpDownloadManager* MarbleModel::downloadManager() const
 
 QAbstractItemModel *MarbleModel::treeModel() const
 {
-    return d->m_dataFacade->treeModel();
+    return &d->m_treemodel;
 }
 
 QAbstractItemModel *MarbleModel::placemarkModel() const
 {
-    return d->m_dataFacade->placemarkModel();
+    return &d->m_sortproxy;
 }
 
 QItemSelectionModel *MarbleModel::placemarkSelectionModel() const
@@ -371,7 +389,7 @@ PositionTracking *MarbleModel::positionTracking() const
 
 FileViewModel *MarbleModel::fileViewModel() const
 {
-    return d->m_dataFacade->fileViewModel();
+    return &d->m_fileviewmodel;
 }
 
 void MarbleModel::openGpxFile( const QString& filename )
@@ -499,6 +517,15 @@ PluginManager* MarbleModel::pluginManager() const
 Planet* MarbleModel::planet() const
 {
     return d->m_planet;
+}
+
+void MarbleModel::connectTree( bool connect ) const
+{
+    if ( connect ) {
+        d->m_descendantproxy.setSourceModel( &d->m_treemodel );
+    } else {
+        d->m_descendantproxy.setSourceModel( &d->m_dummytree );
+    }
 }
 
 void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )

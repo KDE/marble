@@ -34,7 +34,6 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 
-#include "kdescendantsproxymodel.h"
 #include "routing/RoutingManager.h"
 
 namespace Marble
@@ -44,33 +43,11 @@ class MarbleDataFacadePrivate
 {
  public:
     MarbleDataFacadePrivate( MarbleModel *model )
-        : m_model( model ),
-        m_fileviewmodel( new FileViewModel() ),
-        m_treemodel( new GeoDataTreeModel),
-        m_descendantproxy( new KDescendantsProxyModel ),
-        m_sortproxy( new QSortFilterProxyModel ),
-        m_dummytree( new GeoDataTreeModel )
+        : m_model( model )
     {
-        m_sortproxy->setFilterFixedString( GeoDataTypes::GeoDataPlacemarkType );
-        m_sortproxy->setFilterKeyColumn( 1 );
-        m_sortproxy->setSourceModel( m_descendantproxy );
     }
 
-    ~MarbleDataFacadePrivate()
-    {
-        delete m_fileviewmodel;
-        delete m_treemodel;
-        delete m_descendantproxy;
-        delete m_sortproxy;
-        delete m_dummytree;
-    }
-
-    MarbleModel  *m_model;
-    FileViewModel *m_fileviewmodel;
-    GeoDataTreeModel *m_treemodel;
-    KDescendantsProxyModel *m_descendantproxy;
-    QSortFilterProxyModel  *m_sortproxy;
-    GeoDataTreeModel *m_dummytree;
+    MarbleModel  *const m_model;
 };
 
 
@@ -117,12 +94,12 @@ PositionTracking* MarbleDataFacade::positionTracking() const
 
 QAbstractItemModel* MarbleDataFacade::placemarkModel()
 {
-    return d->m_sortproxy;
+    return d->m_model->placemarkModel();
 }
 
 FileViewModel* MarbleDataFacade::fileViewModel() const
 {
-    return d->m_fileviewmodel;
+    return d->m_model->fileViewModel();
 }
 
 PluginManager* MarbleDataFacade::pluginManager()
@@ -135,18 +112,9 @@ RoutingManager* MarbleDataFacade::routingManager()
     return d->m_model->routingManager();
 }
 
-GeoDataTreeModel* MarbleDataFacade::treeModel() const
+QAbstractItemModel* MarbleDataFacade::treeModel() const
 {
-    return d->m_treemodel;
-}
-
-void MarbleDataFacade::connectTree(bool connect) const
-{
-    if ( connect ) {
-        d->m_descendantproxy->setSourceModel( d->m_treemodel );
-    } else {
-        d->m_descendantproxy->setSourceModel( d->m_dummytree );
-    }
+    return d->m_model->treeModel();
 }
 
 }

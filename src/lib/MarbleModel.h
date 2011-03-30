@@ -302,6 +302,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
     Q_DISABLE_COPY( MarbleModel )
     Q_PRIVATE_SLOT( d, void notifyModelChanged() )
 
+    // the following method is a bit of a hack...
+    // make it private and document the class using it:
+    friend class FileManager;
+    void connectTree( bool connect ) const;
+
     void addDownloadPolicies( GeoSceneDocument *mapTheme );
     MarbleModelPrivate  * const d;
 };

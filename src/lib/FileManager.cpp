@@ -18,7 +18,7 @@
 #include "FileLoader.h"
 #include "FileViewModel.h"
 #include "MarbleDebug.h"
-#include "MarbleDataFacade.h"
+#include "MarbleModel.h"
 #include "GeoDataTreeModel.h"
 
 #include "GeoDataDocument.h"
@@ -31,13 +31,13 @@ namespace Marble
 class FileManagerPrivate
 {
 public:
-    FileManagerPrivate( )
-        : m_datafacade( 0 ),
+    FileManagerPrivate( MarbleModel* model )
+        : m_model( model ),
         m_t ( 0 )
     {
     }
 
-    MarbleDataFacade* m_datafacade;
+    MarbleModel* const m_model;
     QList<FileLoader*> m_loaderList;
     QStringList m_pathList;
     QList < GeoDataDocument* > m_fileItemList;
@@ -45,9 +45,9 @@ public:
 };
 }
 
-FileManager::FileManager( QObject *parent )
+FileManager::FileManager( MarbleModel *model, QObject *parent )
     : QObject( parent )
-    , d( new FileManagerPrivate() )
+    , d( new FileManagerPrivate( model ) )
 {
 }
 
@@ -63,18 +63,6 @@ FileManager::~FileManager()
     delete d;
 }
 
-void FileManager::setDataFacade( MarbleDataFacade *facade )
-{
-    d->m_datafacade = facade;
-    d->m_datafacade->fileViewModel()->setFileManager( this );
-    d->m_datafacade->treeModel()->setFileManager( this );
-}
-
-MarbleDataFacade *FileManager::dataFacade()
-{
-    return d->m_datafacade;
-}
-
 QStringList FileManager::containers() const
 {
     QStringList retList;
@@ -88,8 +76,8 @@ void FileManager::addFile( const QString& filepath )
 {
     if ( !containers().contains( filepath ) ) {
         mDebug() << "adding container:" << filepath;
-        if ( d->m_datafacade ) {
-            d->m_datafacade->connectTree( false );
+        if ( d->m_model ) {
+            d->m_model->connectTree( false );
         }
         if (d->m_t == 0) {
             mDebug() << "Starting placemark loading timer";
@@ -104,8 +92,8 @@ void FileManager::addFile( const QString& filepath )
 
 void FileManager::addData( const QString &name, const QString &data )
 {
-    if ( d->m_datafacade ) {
-        d->m_datafacade->connectTree( false );
+    if ( d->m_model ) {
+        d->m_model->connectTree( false );
     }
     FileLoader* loader = new FileLoader( this, data, name );
     appendLoader( loader );
@@ -185,8 +173,8 @@ void FileManager::cleanupLoader( FileLoader* loader )
         mDebug() << "Empty loader list, connecting";
         QTime t;
         t.start();
-        if ( d->m_datafacade ) {
-            d->m_datafacade->connectTree( true );
+        if ( d->m_model ) {
+            d->m_model->connectTree( true );
         }
         mDebug() << "Done " << t.elapsed() << " ms";
         qDebug() << "Finished loading all placemarks " << d->m_t->elapsed();

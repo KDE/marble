@@ -22,8 +22,6 @@
 #include <QtCore/QRect>
 #include <QtCore/QVector>
 
-#include "GeoDataPlacemark.h"   // In geodata/data/
-
 class QAbstractItemModel;
 class QSortFilterProxyModel;
 class QItemSelectionModel;
@@ -34,6 +32,8 @@ class QPoint;
 namespace Marble
 {
 
+class GeoDataPlacemark;
+class GeoDataStyle;
 class PlacemarkPainter;
 class VisiblePlacemark;
 class ViewParams;
