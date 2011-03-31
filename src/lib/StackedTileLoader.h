@@ -167,8 +167,6 @@ class StackedTileLoader : public QObject
 
     private:
         Q_DISABLE_COPY( StackedTileLoader )
-        QVector<GeoSceneTexture const *>
-            findRelevantTextureLayers( TileId const & stackedTileId ) const;
         void mergeDecorations( StackedTile * const ) const;
         void reloadCachedTile( StackedTile * const cachedTile, DownloadUsage const );
 
