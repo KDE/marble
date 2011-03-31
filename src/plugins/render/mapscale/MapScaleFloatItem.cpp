@@ -359,7 +359,7 @@ QDialog *MapScaleFloatItem::configDialog() const
 bool MapScaleFloatItem::eventFilter( QObject *object, QEvent *e )
 {
     if ( !enabled() || !visible() ) {
-        return true;
+        return false;
     }
 
     if( e->type() == QEvent::ContextMenu )
