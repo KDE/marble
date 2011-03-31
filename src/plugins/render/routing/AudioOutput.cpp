@@ -143,7 +143,9 @@ void AudioOutputPrivate::enqueue( qreal distance, RoutingInstruction::TurnType t
     }
 
     m_output->enqueue( turnTypeAudio );
-    if ( !distanceAudio.isEmpty() ) {
+    // if ( !distanceAudio.isEmpty() ) {
+    // @todo FIXME: Gapless playing
+    if ( false ) {
         m_output->enqueue( audioFile( "After" ) );
         m_output->enqueue( distanceAudio );
         m_output->enqueue( audioFile( "Meters" ) );
