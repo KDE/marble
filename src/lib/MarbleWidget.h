@@ -43,6 +43,7 @@ class GeoDataLatLonAltBox;
 class GeoDataLatLonBox;
 class GeoPainter;
 class GeoSceneDocument;
+class LayerInterface;
 class MarbleModel;
 class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
@@ -229,6 +230,16 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Returns all widgets of dataPlugins on the position curpos
      */
     QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
+
+    /**
+     * @brief Add a layer to be included in rendering.
+     */
+    void addLayer( LayerInterface *layer );
+
+    /**
+     * @brief Remove a layer from being included in rendering.
+     */
+    void removeLayer( LayerInterface *layer );
 
     RoutingLayer* routingLayer();
 

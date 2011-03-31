@@ -362,6 +362,16 @@ QList<AbstractDataPluginItem*> MarbleWidget::whichItemAt( const QPoint &curpos )
     return d->m_map->whichItemAt( curpos );
 }
 
+void MarbleWidget::addLayer( LayerInterface *layer )
+{
+    d->m_map->addLayer( layer );
+}
+
+void MarbleWidget::removeLayer( LayerInterface *layer )
+{
+    d->m_map->removeLayer( layer );
+}
+
 TextureLayer *MarbleWidget::textureLayer()
 {
     return d->m_map->textureLayer();
