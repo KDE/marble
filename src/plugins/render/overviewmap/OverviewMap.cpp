@@ -90,6 +90,10 @@ QIcon OverviewMap::icon () const
 
 QDialog *OverviewMap::configDialog() const
 {
+    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        return false;
+    }
+
     if ( !m_configDialog ) {
         // Initializing configuration dialog
         m_configDialog = new QDialog();
