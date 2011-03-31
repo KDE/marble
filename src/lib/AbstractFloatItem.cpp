@@ -218,20 +218,20 @@ QMenu* AbstractFloatItem::contextMenu()
     if ( !d->m_contextMenu )
     {
         d->m_contextMenu = new QMenu;
-    }
 
-    QAction *lockAction = d->m_contextMenu->addAction( tr( "&Lock" ) );
-    lockAction->setCheckable( true );
-    lockAction->setChecked( positionLocked() );
-    connect( lockAction, SIGNAL( triggered( bool ) ), this, SLOT( setPositionLocked( bool ) ) );
-    QAction *hideAction = d->m_contextMenu->addAction( tr( "&Hide" ) );
-    connect( hideAction, SIGNAL( triggered() ), this, SLOT( hide() ) );
-    QDialog *dialog = configDialog();
-    if( dialog )
-    {
-        d->m_contextMenu->addSeparator();
-        QAction *configAction = d->m_contextMenu->addAction( tr( "&Configure..." ) );
-        connect( configAction, SIGNAL( triggered() ), dialog, SLOT( exec() ) );
+        QAction *lockAction = d->m_contextMenu->addAction( tr( "&Lock" ) );
+        lockAction->setCheckable( true );
+        lockAction->setChecked( positionLocked() );
+        connect( lockAction, SIGNAL( triggered( bool ) ), this, SLOT( setPositionLocked( bool ) ) );
+        QAction *hideAction = d->m_contextMenu->addAction( tr( "&Hide" ) );
+        connect( hideAction, SIGNAL( triggered() ), this, SLOT( hide() ) );
+        QDialog *dialog = configDialog();
+        if( dialog )
+        {
+            d->m_contextMenu->addSeparator();
+            QAction *configAction = d->m_contextMenu->addAction( tr( "&Configure..." ) );
+            connect( configAction, SIGNAL( triggered() ), dialog, SLOT( exec() ) );
+        }
     }
 
     Q_ASSERT( d->m_contextMenu );
