@@ -48,7 +48,8 @@ MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
       m_valueInterval(0),
       m_unit(tr("km")),
       m_scaleInitDone( false ),
-      m_showRatioScale( false )
+      m_showRatioScale( false ),
+      m_contextMenu( 0 )
 {
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
@@ -367,13 +368,24 @@ bool MapScaleFloatItem::eventFilter( QObject *object, QEvent *e )
         QContextMenuEvent *menuEvent = dynamic_cast<QContextMenuEvent *> ( e );
         if( widget != NULL && menuEvent != NULL && contains( menuEvent->pos() ) )
         {
-            QMenu menu;
-            QAction *toggleaction = menu.addAction( "&Ratio Scale", 
-                                                    this, 
-                                                    SLOT( toggleRatioScaleVisibility() ) );
-            toggleaction->setCheckable( true );
-            toggleaction->setChecked( m_showRatioScale );
-            menu.exec( widget->mapToGlobal( menuEvent->pos() ) );
+            if ( !m_contextMenu ) {
+                m_contextMenu = contextMenu();
+
+                foreach( QAction *action, m_contextMenu->actions() ) {
+                    if ( action->text() == tr( "&Configure..." ) ) {
+                        m_contextMenu->removeAction( action );
+                        break;
+                    }
+                }
+
+                QAction *toggleAction = m_contextMenu->addAction( tr("&Ratio Scale"), this,
+                                                        SLOT( toggleRatioScaleVisibility() ) );
+                toggleAction->setCheckable( true );
+                toggleAction->setChecked( m_showRatioScale );
+            }
+
+            Q_ASSERT( m_contextMenu );
+            m_contextMenu->exec( widget->mapToGlobal( menuEvent->pos() ) );
         }
         return true;
     }

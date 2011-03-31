@@ -107,6 +107,8 @@ class MapScaleFloatItem : public AbstractFloatItem
 
     bool     m_showRatioScale;
 
+    QMenu*   m_contextMenu;
+
     void calcScaleBar();
 };
 
