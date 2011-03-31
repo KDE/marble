@@ -47,7 +47,8 @@ MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
       m_valueInterval(0),
       m_unit(tr("km")),
       m_scaleInitDone( false ),
-      m_showRatioScale( false )
+      m_showRatioScale( false ),
+      m_contextMenu( 0 )
 {
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
@@ -356,13 +357,24 @@ QDialog *MapScaleFloatItem::configDialog()
 
 void MapScaleFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
 {
-    QMenu menu;
-    QAction *toggleaction = menu.addAction( tr("&Ratio Scale"), 
-                                            this, 
-                                            SLOT( toggleRatioScaleVisibility() ) );
-    toggleaction->setCheckable( true );
-    toggleaction->setChecked( m_showRatioScale );
-    menu.exec( w->mapToGlobal( e->pos() ) );
+    if ( !m_contextMenu ) {
+        m_contextMenu = contextMenu();
+
+        foreach( QAction *action, m_contextMenu->actions() ) {
+            if ( action->text() == tr( "&Configure..." ) ) {
+                m_contextMenu->removeAction( action );
+                break;
+            }
+        }
+
+        QAction *toggleAction = m_contextMenu->addAction( tr("&Ratio Scale"), this,
+                                                SLOT( toggleRatioScaleVisibility() ) );
+        toggleAction->setCheckable( true );
+        toggleAction->setChecked( m_showRatioScale );
+    }
+
+    Q_ASSERT( m_contextMenu );
+    m_contextMenu->exec( w->mapToGlobal( e->pos() ) );
 }
 
 void MapScaleFloatItem::toolTipEvent( QHelpEvent *e )

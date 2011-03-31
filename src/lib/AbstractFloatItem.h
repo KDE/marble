@@ -27,11 +27,12 @@
 #include "marble_export.h"
 
 
+class QMenu;
+
 namespace Marble
 {
 
 class AbstractFloatItemPrivate;
-
 
 /**
  * @short The abstract class that creates an "empty" float item.
@@ -78,6 +79,7 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
     virtual bool eventFilter( QObject *object, QEvent *e );
     virtual void contextMenuEvent ( QWidget *w, QContextMenuEvent *e );
     virtual void toolTipEvent( QHelpEvent *e );
+    QMenu* contextMenu();
 
  private:
     Q_DISABLE_COPY( AbstractFloatItem )

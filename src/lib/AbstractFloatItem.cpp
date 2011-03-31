@@ -25,17 +25,20 @@ namespace Marble
 class AbstractFloatItemPrivate
 {
   public:
-    AbstractFloatItemPrivate()
+    AbstractFloatItemPrivate() : m_contextMenu( 0 )
     {
     }
 
     ~AbstractFloatItemPrivate()
     {
+        delete m_contextMenu;
     }
 
 
     static QPen         s_pen;
     static QFont        s_font;
+
+    QMenu* m_contextMenu;
 };
 
 QPen         AbstractFloatItemPrivate::s_pen = QPen( Qt::black );
@@ -160,24 +163,7 @@ bool AbstractFloatItem::eventFilter( QObject *object, QEvent *e )
 
 void AbstractFloatItem::contextMenuEvent ( QWidget *w, QContextMenuEvent *e )
 {
-    QMenu menu;
-    QAction *lockaction = menu.addAction( tr( "&Lock" ) );
-    lockaction->setCheckable( true );
-    lockaction->setChecked( positionLocked() );
-    connect( lockaction, SIGNAL( triggered( bool ) ),
-             this, SLOT( setPositionLocked( bool ) ) );
-    QAction *hideaction = menu.addAction( tr( "&Hide" ) );
-    connect( hideaction, SIGNAL( triggered() ),
-             this, SLOT( hide() ) );
-    QDialog *dialog = configDialog();
-    if( dialog != NULL )
-    {
-        menu.addSeparator();
-        QAction *configaction = menu.addAction( tr( "&Configure..." ) );
-        connect( configaction, SIGNAL( triggered() ),
-                 dialog, SLOT( exec() ) );
-    }
-    menu.exec( w->mapToGlobal( e->pos() ) );
+    contextMenu()->exec( w->mapToGlobal( e->pos() ) );
 }
 
 void AbstractFloatItem::toolTipEvent ( QHelpEvent *e )
@@ -225,6 +211,31 @@ void AbstractFloatItem::show()
 void AbstractFloatItem::hide()
 {
     setVisible( false );
+}
+
+QMenu* AbstractFloatItem::contextMenu()
+{
+    if ( !d->m_contextMenu )
+    {
+        d->m_contextMenu = new QMenu;
+    }
+
+    QAction *lockAction = d->m_contextMenu->addAction( tr( "&Lock" ) );
+    lockAction->setCheckable( true );
+    lockAction->setChecked( positionLocked() );
+    connect( lockAction, SIGNAL( triggered( bool ) ), this, SLOT( setPositionLocked( bool ) ) );
+    QAction *hideAction = d->m_contextMenu->addAction( tr( "&Hide" ) );
+    connect( hideAction, SIGNAL( triggered() ), this, SLOT( hide() ) );
+    QDialog *dialog = configDialog();
+    if( dialog )
+    {
+        d->m_contextMenu->addSeparator();
+        QAction *configAction = d->m_contextMenu->addAction( tr( "&Configure..." ) );
+        connect( configAction, SIGNAL( triggered() ), dialog, SLOT( exec() ) );
+    }
+
+    Q_ASSERT( d->m_contextMenu );
+    return d->m_contextMenu;
 }
 
 }
