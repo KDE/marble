@@ -92,7 +92,6 @@ class StackedTileLoader : public QObject
          *                      and the zoom level.
          */
         StackedTile* loadTile( TileId const &stackedTileId );
-        StackedTile* reloadTile( TileId const & stackedTileId, DownloadUsage const );
         void downloadTile( TileId const & stackedTileId );
 
         /**
@@ -121,11 +120,9 @@ class StackedTileLoader : public QObject
         quint64 volatileCacheLimit() const;
 
         /**
-         * @brief Returns a list of TileIds of the tiles which are currently
-         *        displayed. This is used for example for the map reload
-         *        functionality.
+         * @brief Reloads the tiles that are currently displayed.
          */
-        QList<TileId> tilesOnDisplay() const;
+        void reloadVisibleTiles();
 
         /**
          * Returns the highest level in which some tiles are theoretically
@@ -168,7 +165,6 @@ class StackedTileLoader : public QObject
     private:
         Q_DISABLE_COPY( StackedTileLoader )
         void mergeDecorations( StackedTile * const ) const;
-        void reloadCachedTile( StackedTile * const cachedTile, DownloadUsage const );
 
         StackedTileLoaderPrivate* const d;
 };
