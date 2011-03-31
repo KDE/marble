@@ -492,7 +492,7 @@ void AbstractScanlineTextureMapper::nextTile( int &posX, int &posY )
     int tileCol = lon / m_tileSize.width();
     int tileRow = lat / m_tileSize.height();
 
-    m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel, tileCol, tileRow ), DownloadBrowse );
+    m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel, tileCol, tileRow ) );
     m_tile->setUsed( true );
 
     // Update position variables:
@@ -532,7 +532,7 @@ void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
     int tileCol = lon / m_tileSize.width();
     int tileRow = lat / m_tileSize.height();
 
-    m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel, tileCol, tileRow ), DownloadBrowse );
+    m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel, tileCol, tileRow ) );
     m_tile->setUsed( true );
 
     // Update position variables:

@@ -123,7 +123,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *v
 
                 const QRectF rect = QRectF( QPointF( xLeft, yTop ), QPointF( xRight, yBottom ) );
                 const TileId stackedId = TileId( 0, tileZoomLevel(), ( ( tileX % numTilesX ) + numTilesX ) % numTilesX, tileY );
-                StackedTile *const tile = m_tileLoader->loadTile( stackedId, DownloadBrowse );
+                StackedTile *const tile = m_tileLoader->loadTile( stackedId );
                 tile->setUsed( true );
 
                 painter.drawImage( rect, *tile->resultTile() );
@@ -146,7 +146,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *v
 
                 const QRectF rect = QRectF( QPointF( xLeft, yTop ), QPointF( xRight, yBottom ) );
                 const TileId stackedId = TileId( 0, tileZoomLevel(), ( ( tileX % numTilesX ) + numTilesX ) % numTilesX, tileY );
-                StackedTile *const tile = m_tileLoader->loadTile( stackedId, DownloadBrowse );
+                StackedTile *const tile = m_tileLoader->loadTile( stackedId );
                 tile->setUsed( true );
 
                 const QSize size = QSize( qCeil( rect.right() - rect.left() ), qCeil( rect.bottom() - rect.top() ) );

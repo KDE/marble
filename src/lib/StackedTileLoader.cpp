@@ -182,7 +182,7 @@ void StackedTileLoader::flush()
     d->m_tilesOnDisplay.clear();
 }
 
-StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId, DownloadUsage const usage )
+StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 {
     // check if the tile is in the hash
     StackedTile * stackedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
@@ -223,7 +223,7 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId, Download
         mDebug() << "StackedTileLoader::loadTile: tile" << textureLayer->sourceDir()
                  << tileId.toString() << textureLayer->tileSize();
         QSharedPointer<TextureTile> const tile = d->m_tileLoader->loadTile( stackedTileId, tileId,
-                                                                            usage );
+                                                                            DownloadBrowse );
         if ( tile ) {
             tile->setBlending( textureLayer->blending() );
             tiles.append( tile );
