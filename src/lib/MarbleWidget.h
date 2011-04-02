@@ -1016,6 +1016,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param painter 
      */
     virtual void customPaint( GeoPainter *painter );
+    friend class CustomPaintLayer;
 
  private:
     Q_DISABLE_COPY( MarbleWidget )

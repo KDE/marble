@@ -629,17 +629,7 @@ bool MarbleMap::geoCoordinates( int x, int y,
 void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
 {
     d->paintGround( painter, dirtyRect );
-    customPaint( &painter );
     d->m_measureTool.render( &painter, viewport() );
-}
-
-void MarbleMap::customPaint( GeoPainter *painter )
-{
-    Q_UNUSED( painter );
-
-    if ( !d->m_viewParams.mapTheme() ) {
-        return;
-    }
 }
 
 QString MarbleMap::mapThemeId() const

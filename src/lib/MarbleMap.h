@@ -628,15 +628,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void renderPluginInitialized( RenderPlugin *renderPlugin );
 
- protected:
-
-    /**
-     * @brief Enables custom drawing onto the MarbleMap straight after
-     * @brief the globe and before all other layers have been rendered.
-     * @param painter 
-     */
-    virtual void customPaint( GeoPainter *painter );
-
  private:
     Q_DISABLE_COPY( MarbleMap )
     MarbleMapPrivate * const d;
