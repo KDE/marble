@@ -47,7 +47,6 @@
 #include "GeoSceneZoom.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "MarbleLocale.h"
 #include "MarbleModel.h"
 #include "MeasureTool.h"
 #include "MergedLayerDecorator.h"
@@ -80,8 +79,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_layerManager( model, parent ),
           m_textureLayer( model->mapThemeManager(), model->downloadManager(), model->sunLocator() ),
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), parent ),
-          m_measureTool( model ),
-          m_viewAngle( 110.0 )
+          m_measureTool( model )
 {
     GeoDataObject *object = static_cast<GeoDataObject*>( model->treeModel()->index(0, 0, QModelIndex()).internalPointer());
     GeoDataDocument *document = dynamic_cast<GeoDataDocument*>( object->parent() );
@@ -114,8 +112,6 @@ void MarbleMapPrivate::construct()
                        m_parent,        SIGNAL( repaintNeeded( QRegion ) ) );
     QObject::connect ( &m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        m_parent,        SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
-
-    m_logzoom  = 0;
 
     // FloatItems
     m_showFrameRate = false;
@@ -355,64 +351,14 @@ void MarbleMap::setRadius( int radius )
     d->m_viewParams.setRadius( radius );
 
     d->m_textureLayer.setNeedsUpdate();
-
-    d->m_logzoom = qRound( d->zoom( radius ) );
-    emit zoomChanged( d->m_logzoom );
-    emit distanceChanged( distanceString() );
-    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 
-
-int MarbleMap::zoom() const
-{
-    return d->m_logzoom;
-}
 
 int MarbleMap::tileZoomLevel() const
 {
     return d->m_textureLayer.tileZoomLevel();
 }
 
-
-qreal MarbleMap::distance() const
-{
-    return distanceFromRadius(radius());
-}
-
-qreal MarbleMap::distanceFromRadius( qreal radius ) const
-{
-    // Due to Marble's orthographic projection ("we have no focus")
-    // it's actually not possible to calculate a "real" distance.
-    // Additionally the viewing angle of the earth doesn't adjust to
-    // the window's size.
-    //
-    // So the only possible workaround is to come up with a distance
-    // definition which gives a reasonable approximation of
-    // reality. Therefore we assume that the average window width
-    // (about 800 pixels) equals the viewing angle of a human being.
-
-    return ( model()->planet()->radius() * 0.4
-            / radius / tan( 0.5 * d->m_viewAngle * DEG2RAD ) );
-}
-
-qreal MarbleMap::radiusFromDistance( qreal distance ) const
-{      
-    return  model()->planet()->radius() /
-            ( distance * tan( 0.5 * d->m_viewAngle * DEG2RAD ) / 0.4 );
-}
-
-void MarbleMap::setDistance( qreal newDistance )
-{
-    qreal minDistance = 0.001;
-
-    if ( newDistance <= minDistance ) {
-        mDebug() << "Invalid distance: 0 m";
-        newDistance = minDistance;
-    }    
-
-    int newRadius = radiusFromDistance( newDistance );
-    setRadius( newRadius );
-}
 
 qreal MarbleMap::centerLatitude() const
 {
@@ -643,34 +589,6 @@ bool MarbleMap::showBackground() const
 quint64 MarbleMap::volatileTileCacheLimit() const
 {
     return d->m_textureLayer.volatileCacheLimit();
-}
-
-void MarbleMap::zoomView( int newZoom )
-{
-    // Check for under and overflow.
-    if ( newZoom < minimumZoom() )
-        newZoom = minimumZoom();
-    else if ( newZoom > maximumZoom() )
-        newZoom = maximumZoom();
-
-    // Prevent infinite loops.
-    if ( newZoom  == d->m_logzoom )
-        return;
-
-    d->m_viewParams.setRadius( d->radius( newZoom ) );
-
-    d->m_textureLayer.setNeedsUpdate();
-
-    d->m_logzoom = newZoom;
-    emit zoomChanged( d->m_logzoom );
-    emit distanceChanged( distanceString() );
-    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
-}
-
-
-void MarbleMap::zoomViewBy( int zoomStep )
-{
-    zoomView( zoom() + zoomStep );
 }
 
 
@@ -1054,24 +972,6 @@ void MarbleMap::setVolatileTileCacheLimit( quint64 kilobytes )
     d->m_textureLayer.setVolatileCacheLimit( kilobytes );
 }
 
-QString MarbleMap::distanceString() const
-{
-    qreal dist = distance();
-    QString distanceUnitString;
-
-    const DistanceUnit distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
-
-    if ( distanceUnit == Meter ) {
-        distanceUnitString = tr("km");
-    }
-    else {
-        dist *= KM2MI;
-        distanceUnitString = tr("mi");
-    }
-
-    return QString( "%L1 %2" ).arg( dist, 8, 'f', 1, QChar(' ') ).arg( distanceUnitString );
-}
-
 
 bool MarbleMap::mapCoversViewport()
 {
@@ -1152,37 +1052,6 @@ void MarbleMap::removeLayer( LayerInterface *layer )
 MeasureTool *MarbleMap::measureTool()
 {
     return &d->m_measureTool;
-}
-
-void MarbleMap::flyTo( const GeoDataLookAt &lookAt )
-{
-    setDistance( lookAt.range() * METER2KM );
-    GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
-    centerOn( lookAt.longitude( deg ), lookAt.latitude( deg ) );
-}
-
-GeoDataLookAt MarbleMap::lookAt() const
-{
-    GeoDataLookAt result;
-    qreal lon( 0.0 ), lat( 0.0 );
-
-    d->m_viewParams.centerCoordinates( lon, lat );
-    result.setLongitude( lon );
-    result.setLatitude( lat );
-    result.setAltitude( 0.0 );
-    result.setRange( distance() * KM2METER );
-
-    return result;
-}
-
-qreal MarbleMap::distanceFromZoom( qreal zoom ) const
-{
-    return distanceFromRadius( d->radius( zoom ) );
-}
-
-qreal MarbleMap::zoomFromDistance( qreal distance ) const
-{
-    return d->zoom( radiusFromDistance( distance ) );
 }
 
 // this method will only temporarily "pollute" the MarbleModel class
