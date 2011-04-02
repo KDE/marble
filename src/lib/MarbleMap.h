@@ -215,11 +215,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     Quaternion planetAxis() const;
 
     /**
-     * @brief  Return a QPixmap with the current contents of the map.
-     */
-    QPixmap mapScreenShot();
-
-    /**
      * @brief  Return the property value by name.
      * @return The property value (usually: visibility).
      */

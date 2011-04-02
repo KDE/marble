@@ -452,21 +452,6 @@ QVector<const GeoDataPlacemark*> MarbleMap::whichFeatureAt( const QPoint& curpos
     return d->m_placemarkLayout.whichPlacemarkAt( curpos );
 }
 
-QPixmap MarbleMap::mapScreenShot()
-{
-    QPixmap screenshotPixmap( size() );
-    screenshotPixmap.fill( Qt::transparent );
-
-    GeoPainter painter( &screenshotPixmap, viewport(),
-                        PrintQuality );
-    painter.begin( &screenshotPixmap );
-    QRect dirtyRect( QPoint(), size() );
-    paint( painter, dirtyRect );
-    painter.end();
-
-    return screenshotPixmap;
-}
-
 void MarbleMap::reload() const
 {
     d->m_textureLayer.reload();
