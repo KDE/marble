@@ -890,18 +890,6 @@ void MarbleMap::setShowGps( bool visible )
     d->m_viewParams.setShowGps( visible );
 }
 
-void MarbleMap::notifyMouseClick( int x, int y )
-{
-    qreal  lon   = 0;
-    qreal  lat   = 0;
-
-    const bool valid = geoCoordinates( x, y, lon, lat, GeoDataCoordinates::Radian );
-
-    if ( valid ) {
-        emit mouseClickGeoPosition( lon, lat, GeoDataCoordinates::Radian );
-    }
-}
-
 void MarbleMap::clearVolatileTileCache()
 {
     d->m_textureLayer.update();

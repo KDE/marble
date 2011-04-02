@@ -570,11 +570,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void setShowBackground( bool visible );
 
-     /**
-     * @brief used to notify about the position of the mouse click
-      */
-    void notifyMouseClick( int x, int y );
-
     void clearVolatileTileCache();
     /**
      * @brief  Set the limit of the volatile (in RAM) tile cache.
@@ -609,10 +604,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void themeChanged( const QString& theme );
 
     void projectionChanged( Projection );
-
-    void mouseMoveGeoPosition( const QString& );
-
-    void mouseClickGeoPosition( qreal lon, qreal lat, GeoDataCoordinates::Unit );
 
     /**
      * This signal is emitted when the repaint of the view was requested.
