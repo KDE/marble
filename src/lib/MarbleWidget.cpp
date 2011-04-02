@@ -34,12 +34,14 @@
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
+#include "MarbleLocale.h"
 #include "MarbleMap.h"
 #include "MarbleMap_p.h" // FIXME: remove this
 #include "MarbleModel.h"
 #include "MarblePhysics.h"
 #include "MarbleWidgetInputHandler.h"
 #include "MeasureTool.h"
+#include "Planet.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
 #include "TileCreatorDialog.h"
@@ -71,11 +73,13 @@ class MarbleWidgetPrivate
           m_stillQuality( HighQuality ),
           m_animationQuality( LowQuality ),
           m_animationsEnabled( false ),
+          m_logzoom( 0 ),
           m_zoomStep( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 60 : 40 ),
           m_inputhandler( 0 ),
           m_physics( new MarblePhysics( parent ) ),
           m_repaintTimer(),
-          m_routingLayer( 0 )
+          m_routingLayer( 0 ),
+          m_viewAngle( 110.0 )
     {
     }
 
@@ -85,6 +89,9 @@ class MarbleWidgetPrivate
     }
 
     void  construct();
+
+    inline static qreal zoom( qreal radius ) { return (200.0 * log( radius ) ); }
+    inline static qreal radius( qreal zoom ) { return pow( M_E, ( zoom / 200.0 ) ); }
 
     /**
       * @brief Rotate the globe in the given direction in discrete steps
@@ -114,6 +121,8 @@ class MarbleWidgetPrivate
 
     bool m_animationsEnabled;
 
+    // zoom related
+    int              m_logzoom;
     int              m_zoomStep;
 
     MarbleWidgetInputHandler  *m_inputhandler;
@@ -124,6 +133,8 @@ class MarbleWidgetPrivate
     QTimer           m_repaintTimer;
 
     RoutingLayer     *m_routingLayer;
+
+    const qreal      m_viewAngle;
 };
 
 
@@ -190,12 +201,6 @@ void MarbleWidgetPrivate::construct()
 
     // When some fundamental things change in the map, we got to show
     // this in the view, i.e. here.
-    m_widget->connect( m_map,    SIGNAL( zoomChanged( int ) ),
-                       m_widget, SIGNAL( zoomChanged( int ) ) );
-    m_widget->connect( m_map,    SIGNAL( distanceChanged( QString ) ),
-                       m_widget, SIGNAL( distanceChanged( QString ) ) );
-    m_widget->connect( m_map,    SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
-                       m_widget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )));
     m_widget->connect( m_map,    SIGNAL( tileLevelChanged( int ) ),
                        m_widget, SIGNAL( tileLevelChanged( int ) ) );
 
@@ -318,6 +323,12 @@ void MarbleWidget::setRadius( int radius )
     }
         
     d->m_map->setRadius( radius );
+    d->m_logzoom = qRound( d->zoom( radius ) );
+
+    emit zoomChanged( d->m_logzoom );
+    emit distanceChanged( distanceString() );
+    emit visibleLatLonAltBoxChanged( d->m_map->viewport()->viewLatLonAltBox() );
+
     d->repaint();
 }
 
@@ -333,7 +344,7 @@ qreal MarbleWidget::moveStep()
 
 int MarbleWidget::zoom() const
 {
-    return d->m_map->zoom();
+    return d->m_logzoom;
 }
 
 int MarbleWidget::tileZoomLevel() const
@@ -501,12 +512,28 @@ void MarbleWidget::zoomView( int newZoom, FlyToMode mode )
 {
     // It won't fly anyway. So we should do everything to keep the zoom value.
     if ( !d->m_animationsEnabled || mode == Instant ) {
-        d->m_map->zoomView( newZoom );
+        // Check for under and overflow.
+        if ( newZoom < minimumZoom() )
+            newZoom = minimumZoom();
+        else if ( newZoom > maximumZoom() )
+            newZoom = maximumZoom();
+
+        // Prevent infinite loops.
+        if ( newZoom  == d->m_logzoom )
+            return;
+
+        d->m_map->setRadius( d->radius( newZoom ) );
+        d->m_logzoom = newZoom;
+
+        emit zoomChanged( d->m_logzoom );
+        emit distanceChanged( distanceString() );
+        emit visibleLatLonAltBoxChanged( d->m_map->viewport()->viewLatLonAltBox() );
+
         d->repaint();
     }
     else {
         GeoDataLookAt target = lookAt();
-        target.setRange( KM2METER * d->m_map->distanceFromZoom( newZoom ) );
+        target.setRange( KM2METER * distanceFromZoom( newZoom ) );
 
         flyTo( target, mode );
     }
@@ -776,7 +803,7 @@ void MarbleWidget::goHome( FlyToMode mode )
     GeoDataLookAt target;
     target.setLongitude( homeLon, GeoDataCoordinates::Degree );
     target.setLatitude( homeLat, GeoDataCoordinates::Degree );
-    target.setRange( 1000 * d->m_map->distanceFromZoom( homeZoom ) );
+    target.setRange( 1000 * distanceFromZoom( homeZoom ) );
 
     flyTo( target, mode );
 }
@@ -1118,17 +1145,38 @@ void MarbleWidget::setSelection( const QRect& region )
 
 qreal MarbleWidget::distance() const
 {
-    return d->m_map->distance();
+    return distanceFromRadius(radius());
 }
 
-void MarbleWidget::setDistance( qreal distance )
+void MarbleWidget::setDistance( qreal newDistance )
 {
-    d->m_map->setDistance( distance );
+    qreal minDistance = 0.001;
+
+    if ( newDistance <= minDistance ) {
+        mDebug() << "Invalid distance: 0 m";
+        newDistance = minDistance;
+    }    
+
+    int newRadius = radiusFromDistance( newDistance );
+    setRadius( newRadius );
 }
 
 QString MarbleWidget::distanceString() const
 {
-    return d->m_map->distanceString();
+    qreal dist = distance();
+    QString distanceUnitString;
+
+    const DistanceUnit distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
+
+    if ( distanceUnit == Meter ) {
+        distanceUnitString = tr("km");
+    }
+    else {
+        dist *= KM2MI;
+        distanceUnitString = tr("mi");
+    }
+
+    return QString( "%L1 %2" ).arg( dist, 8, 'f', 1, QChar(' ') ).arg( distanceUnitString );
 }
 
 void MarbleWidget::setInputEnabled( bool enabled )
@@ -1214,7 +1262,17 @@ void MarbleWidget::changeEvent( QEvent * event )
 void MarbleWidget::flyTo( const GeoDataLookAt &newLookAt, FlyToMode mode )
 {
     if ( !d->m_animationsEnabled || mode == Instant ) {
-        d->m_map->flyTo( newLookAt );
+        const qreal radius = radiusFromDistance( newLookAt.range() * METER2KM );
+        d->m_map->setRadius( radius );
+        d->m_logzoom = qRound( d->zoom( radius ) );
+
+        GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
+        d->m_map->centerOn( newLookAt.longitude( deg ), newLookAt.latitude( deg ) );
+    
+        emit zoomChanged( d->m_logzoom );
+        emit distanceChanged( distanceString() );
+        emit visibleLatLonAltBoxChanged( d->m_map->viewport()->viewLatLonAltBox() );
+
         d->repaint();
     }
     else {
@@ -1234,27 +1292,48 @@ void MarbleWidget::downloadRegion( QString const & sourceDir, QVector<TileCoords
 
 GeoDataLookAt MarbleWidget::lookAt() const
 {
-    return d->m_map->lookAt();
+    GeoDataLookAt result;
+    qreal lon( 0.0 ), lat( 0.0 );
+
+    d->m_map->viewport()->centerCoordinates( lon, lat );
+    result.setLongitude( lon );
+    result.setLatitude( lat );
+    result.setAltitude( 0.0 );
+    result.setRange( distance() * KM2METER );
+
+    return result;
 }
 
 qreal MarbleWidget::radiusFromDistance( qreal distance ) const
 {
-    return d->m_map->radiusFromDistance( distance );
+    return  model()->planet()->radius() /
+            ( distance * tan( 0.5 * d->m_viewAngle * DEG2RAD ) / 0.4 );
 }
 
 qreal MarbleWidget::distanceFromRadius( qreal radius ) const
 {
-    return d->m_map->distanceFromRadius( radius );
+    // Due to Marble's orthographic projection ("we have no focus")
+    // it's actually not possible to calculate a "real" distance.
+    // Additionally the viewing angle of the earth doesn't adjust to
+    // the window's size.
+    //
+    // So the only possible workaround is to come up with a distance
+    // definition which gives a reasonable approximation of
+    // reality. Therefore we assume that the average window width
+    // (about 800 pixels) equals the viewing angle of a human being.
+
+    return ( model()->planet()->radius() * 0.4
+            / radius / tan( 0.5 * d->m_viewAngle * DEG2RAD ) );
 }
 
 qreal MarbleWidget::zoomFromDistance( qreal distance ) const
 {
-    return d->m_map->zoomFromDistance( distance );
+    return d->zoom( radiusFromDistance( distance ) );
 }
 
 qreal MarbleWidget::distanceFromZoom( qreal zoom ) const
 {
-    return d->m_map->distanceFromZoom( zoom );
+    return distanceFromRadius( d->radius( zoom ) );
 }
 
 RoutingLayer* MarbleWidget::routingLayer()

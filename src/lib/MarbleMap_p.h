@@ -41,9 +41,6 @@ class MarbleMapPrivate
  public:
     explicit MarbleMapPrivate( MarbleMap *parent, MarbleModel *model );
 
-    inline static qreal zoom( qreal radius ) { return (200.0 * log( radius ) ); }
-    inline static qreal radius( qreal zoom ) { return pow( M_E, ( zoom / 200.0 ) ); }
-
     void construct();
 
     void paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect );
@@ -71,14 +68,9 @@ class MarbleMapPrivate
     VectorComposer   m_veccomposer;
     MeasureTool      m_measureTool;
 
-    // zoom related
-    int              m_logzoom;
-
     // Parameters for the maps appearance.
 
     bool             m_showFrameRate;
-
-    const qreal      m_viewAngle;
 
 };
 
