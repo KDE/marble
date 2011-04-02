@@ -322,12 +322,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     bool showGps() const;
 
-    /**
-     * @brief  Return whether the frame rate gets displayed.
-     * @return the frame rates visibility
-     */
-    bool showFrameRate() const;
-
     bool showBackground() const;
 
     /**
@@ -579,12 +573,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void setShowGps( bool visible );
 
-    /**
-     * @brief Set whether the frame rate gets shown
-     * @param visible  visibility of the frame rate
-     */
-    void setShowFrameRate( bool visible );
-
     void setShowBackground( bool visible );
 
      /**
@@ -630,8 +618,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void mouseMoveGeoPosition( const QString& );
 
     void mouseClickGeoPosition( qreal lon, qreal lat, GeoDataCoordinates::Unit );
-
-    void framesPerSecond( qreal fps );
 
     /**
      * This signal is emitted when the repaint of the view was requested.

@@ -48,7 +48,6 @@ class MarbleMapPrivate
     void setBoundingBox();
 
     void paintGround( GeoPainter &painter, QRect &dirtyRect);
-    void paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps);
 
     MarbleMap       *m_parent;
 
@@ -67,11 +66,6 @@ class MarbleMapPrivate
     PlacemarkLayout  m_placemarkLayout;
     VectorComposer   m_veccomposer;
     MeasureTool      m_measureTool;
-
-    // Parameters for the maps appearance.
-
-    bool             m_showFrameRate;
-
 };
 
 }

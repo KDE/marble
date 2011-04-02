@@ -114,10 +114,6 @@ void MarbleMapPrivate::construct()
     QObject::connect ( &m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        m_parent,        SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
 
-    // FloatItems
-    m_showFrameRate = false;
-
-
     m_parent->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
                        &m_textureLayer,       SLOT( update() ) );
     m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
@@ -218,27 +214,6 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
     renderPositions << "ATMOSPHERE"
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
     m_layerManager.renderLayers( &painter, &m_viewParams, renderPositions );
-}
-
-void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps )
-{
-    Q_UNUSED( dirtyRect );
-
-    if ( m_showFrameRate ) {
-        QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
-
-        QPoint fpsLabelPos( 10, 20 );
-
-        painter.setFont( QFont( "Sans Serif", 10 ) );
-
-        painter.setPen( Qt::black );
-        painter.setBrush( Qt::black );
-        painter.drawText( fpsLabelPos, fpsString );
-
-        painter.setPen( Qt::white );
-        painter.setBrush( Qt::white );
-        painter.drawText( fpsLabelPos.x() - 1, fpsLabelPos.y() - 1, fpsString );
-    }
 }
 
 // ----------------------------------------------------------------
@@ -575,11 +550,6 @@ bool MarbleMap::showGps() const
     return d->m_viewParams.showGps();
 }
 
-bool MarbleMap::showFrameRate() const
-{
-    return d->m_showFrameRate;
-}
-
 bool MarbleMap::showBackground() const
 {
     return d->m_backgroundVisible;
@@ -673,16 +643,9 @@ bool MarbleMap::geoCoordinates( int x, int y,
 // Used to be paintEvent()
 void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
 {
-    QTime t;
-    t.start();
-    
     d->paintGround( painter, dirtyRect );
     customPaint( &painter );
     d->m_measureTool.render( &painter, viewport() );
-
-    qreal fps = 1000.0 / (qreal)( t.elapsed() );
-    d->paintFps( painter, dirtyRect, fps );
-    emit framesPerSecond( fps );
 }
 
 void MarbleMap::customPaint( GeoPainter *painter )
@@ -930,11 +893,6 @@ void MarbleMap::setShowLakes( bool visible )
     setPropertyValue( "lakes", visible );
     // Update texture map during the repaint that follows:
     d->m_textureLayer.setNeedsUpdate();
-}
-
-void MarbleMap::setShowFrameRate( bool visible )
-{
-    d->m_showFrameRate = visible;
 }
 
 void MarbleMap::setShowBackground( bool visible )
