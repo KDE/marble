@@ -75,13 +75,13 @@ public:
     int m_nextInstructionIndex;
     qreal m_nextInstructionDistance;
     qreal m_currentInstructionLength;
-    QPixmap m_nextInstructionPixmap;
+    QString m_nextInstructionPixmap;
     RoutingInstruction::TurnType m_nextTurnType;
-    QPixmap m_followingInstructionPixmap;
+    QString m_followingInstructionPixmap;
     GeoDataCoordinates m_location;
     QString m_nextDescription;
     RouteDeviation m_deviation;
-    QMap<RoutingInstruction::TurnType,QPixmap> m_turnTypePixmaps;
+    QMap<RoutingInstruction::TurnType,QString> m_turnTypePixmaps;
     PositionTracking* m_positionTracking;
     RouteRequest* m_request;
     QVector<int> m_instructionLookupTable;
@@ -106,19 +106,19 @@ RoutingModelPrivate::RoutingModelPrivate( RouteRequest* request )
       m_positionTracking( 0 ),
       m_request( request )
 {
-    m_turnTypePixmaps[RoutingInstruction::Unknown] = QPixmap( MarbleDirs::path( "bitmaps/routing_step.png" ) );
-    m_turnTypePixmaps[RoutingInstruction::Straight] = QPixmap( ":/data/bitmaps/turn-continue.png");
-    m_turnTypePixmaps[RoutingInstruction::SlightRight] = QPixmap( ":/data/bitmaps/turn-slight-right.png");
-    m_turnTypePixmaps[RoutingInstruction::Right] = QPixmap( ":/data/bitmaps/turn-right.png");
-    m_turnTypePixmaps[RoutingInstruction::SharpRight] = QPixmap( ":/data/bitmaps/turn-sharp-right.png");
-    m_turnTypePixmaps[RoutingInstruction::TurnAround] = QPixmap( ":/data/bitmaps/turn-around.png");
-    m_turnTypePixmaps[RoutingInstruction::SharpLeft] = QPixmap( ":/data/bitmaps/turn-sharp-left.png");
-    m_turnTypePixmaps[RoutingInstruction::Left] = QPixmap( ":/data/bitmaps/turn-left.png");
-    m_turnTypePixmaps[RoutingInstruction::SlightLeft] = QPixmap( ":/data/bitmaps/turn-slight-left.png");
-    m_turnTypePixmaps[RoutingInstruction::RoundaboutFirstExit] = QPixmap( ":/data/bitmaps/turn-roundabout-first.png");
-    m_turnTypePixmaps[RoutingInstruction::RoundaboutSecondExit] = QPixmap( ":/data/bitmaps/turn-roundabout-second.png");
-    m_turnTypePixmaps[RoutingInstruction::RoundaboutThirdExit] = QPixmap( ":/data/bitmaps/turn-roundabout-third.png");
-    m_turnTypePixmaps[RoutingInstruction::RoundaboutExit] = QPixmap( ":/data/bitmaps/turn-roundabout-far.png");
+    m_turnTypePixmaps[RoutingInstruction::Unknown] = MarbleDirs::path( "bitmaps/routing_step.png" );
+    m_turnTypePixmaps[RoutingInstruction::Straight] = ":/data/bitmaps/turn-continue.png";
+    m_turnTypePixmaps[RoutingInstruction::SlightRight] = ":/data/bitmaps/turn-slight-right.png";
+    m_turnTypePixmaps[RoutingInstruction::Right] = ":/data/bitmaps/turn-right.png";
+    m_turnTypePixmaps[RoutingInstruction::SharpRight] = ":/data/bitmaps/turn-sharp-right.png";
+    m_turnTypePixmaps[RoutingInstruction::TurnAround] = ":/data/bitmaps/turn-around.png";
+    m_turnTypePixmaps[RoutingInstruction::SharpLeft] = ":/data/bitmaps/turn-sharp-left.png";
+    m_turnTypePixmaps[RoutingInstruction::Left] = ":/data/bitmaps/turn-left.png";
+    m_turnTypePixmaps[RoutingInstruction::SlightLeft] = ":/data/bitmaps/turn-slight-left.png";
+    m_turnTypePixmaps[RoutingInstruction::RoundaboutFirstExit] = ":/data/bitmaps/turn-roundabout-first.png";
+    m_turnTypePixmaps[RoutingInstruction::RoundaboutSecondExit] = ":/data/bitmaps/turn-roundabout-second.png";
+    m_turnTypePixmaps[RoutingInstruction::RoundaboutThirdExit] = ":/data/bitmaps/turn-roundabout-third.png";
+    m_turnTypePixmaps[RoutingInstruction::RoundaboutExit] = ":/data/bitmaps/turn-roundabout-far.png";
 }
 
 bool RoutingModelPrivate::deviatedFromRoute( const GeoDataCoordinates &position, const QVector<GeoDataCoordinates> &waypoints ) const
@@ -234,9 +234,9 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
             if ( element.type == Instruction ) {
                 bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
                 if ( smallScreen ) {
-                    return d->m_turnTypePixmaps[element.turnType];
+                    return QPixmap( d->m_turnTypePixmaps[element.turnType] );
                 } else {
-                    return d->m_turnTypePixmaps[element.turnType].scaled( 32, 32 );
+                    return QPixmap( d->m_turnTypePixmaps[element.turnType] ).scaled( 32, 32 );
                 }
             }
 
@@ -505,7 +505,7 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
                     if ( d->m_nextInstructionIndex+1 < instructions.size() ) {
                         d->m_followingInstructionPixmap = d->m_turnTypePixmaps[instructions[d->m_nextInstructionIndex+1].turnType];
                     } else if ( d->m_request->size() > 0 ) {
-                        d->m_followingInstructionPixmap = d->m_request->pixmap( d->m_request->size()-1 );
+                        d->m_followingInstructionPixmap = QString();
                     }
                     //distance between current position and next instruction point
                     distanceRemaining = distanceSphere( location, d->m_location ) * radius;
@@ -596,9 +596,14 @@ qreal RoutingModel::currentInstructionLength() const
     return d->m_currentInstructionLength;
 }
 
-QPixmap RoutingModel::nextInstructionPixmap() const
+QString RoutingModel::nextInstructionPixmapFile() const
 {
     return d->m_nextInstructionPixmap;
+}
+
+QPixmap RoutingModel::nextInstructionPixmap() const
+{
+    return QPixmap( d->m_nextInstructionPixmap );
 }
 
 RoutingInstruction::TurnType RoutingModel::nextTurnType() const
@@ -608,7 +613,7 @@ RoutingInstruction::TurnType RoutingModel::nextTurnType() const
 
 QPixmap RoutingModel::followingInstructionPixmap() const
 {
-    return d->m_followingInstructionPixmap;
+    return QPixmap( d->m_followingInstructionPixmap );
 }
 
 int RoutingModel::nextTurnIndex() const

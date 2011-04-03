@@ -283,8 +283,8 @@ void RoutingPluginPrivate::updateDestinationInformation( qint32 remainingTime, q
             fontSize = m_nearNextInstruction ? 1 : -1;
         }
 
-        QString pixmapHtml = "<img src=\":/icons/flag.png\" /><br />";
-        m_widget.destinationDistanceLabel->setText( pixmapHtml + richText( fuzzyDistance( remainingDistance ), -1 ) );
+        QString pixmapHtml = "<img src=\":/flag.png\" /><br />";
+        m_widget.destinationDistanceLabel->setText( pixmapHtml + richText( fuzzyDistance( remainingDistance ), 1 ) );
 
         m_widget.instructionIconLabel->setEnabled( m_nearNextInstruction );
         m_widget.progressBar->setMaximum( thresholdDistance );
@@ -292,10 +292,10 @@ void RoutingPluginPrivate::updateDestinationInformation( qint32 remainingTime, q
 
         updateButtonVisibility();
 
-        QPixmap pixmap = m_routingModel->nextInstructionPixmap();
-        if ( !pixmap.isNull() ) {
-            m_widget.instructionIconLabel->setPixmap( pixmap.scaled( 64, 64, Qt::IgnoreAspectRatio, Qt::SmoothTransformation ) );
-        }
+        QString pixmap = m_routingModel->nextInstructionPixmapFile();
+        pixmapHtml = QString( "<p align=\"center\"><img src=\"%1\" /><br />%2</p>" ).arg( pixmap );
+        m_widget.instructionIconLabel->setText( pixmapHtml.arg( richText( fuzzyDistance( distanceLeft ), 1 ) ) );
+
         m_widget.followingInstructionIconLabel->setPixmap( m_routingModel->followingInstructionPixmap() );
 
         updateInstructionLabel( fontSize, remainingDistance );
@@ -395,6 +395,7 @@ RoutingPlugin::RoutingPlugin( const QPointF &position ) :
     //plugin is visible by default on small screen devices
     setVisible( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen );
     setPadding( 0 );
+    setBackground( QBrush( QColor( "white" ) ) );
 }
 
 RoutingPlugin::~RoutingPlugin()
