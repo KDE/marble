@@ -128,6 +128,8 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleWidget* widget, int 
         m_bookmarkAction( 0 ), m_mapInput( 0 ), m_currentLocationAction( 0 ),
         m_centerAction( 0 )
 {
+    m_runnerManager->setModel( m_marbleModel );
+
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     int const iconSize = smallScreen ? 32 : 16;
 
