@@ -20,6 +20,7 @@
 #include <kactioncollection.h>
 #include <kparts/part.h>
 #include <kparts/componentfactory.h>
+#include <kxmlguifactory.h>
 
 // GeoData
 #include <GeoSceneDocument.h>
@@ -61,6 +62,7 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
 
 MainWindow::~MainWindow()
 {
+    factory()->removeClient( m_part );
     delete m_part;
 }
 
