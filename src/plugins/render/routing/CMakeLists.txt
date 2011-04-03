@@ -16,6 +16,7 @@ ELSE()
 ENDIF()
 set( routing_UI RoutingPlugin.ui RoutingConfigDialog.ui )
 qt4_wrap_ui( routing_SRCS ${routing_UI} )
+qt4_add_resources(routing_SRCS routing.qrc)
 
 marble_add_plugin( RoutingPlugin ${routing_SRCS} )
 target_link_libraries(RoutingPlugin ${PHONON_LIBS})

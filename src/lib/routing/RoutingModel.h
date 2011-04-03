@@ -158,6 +158,11 @@ public:
     QPixmap nextInstructionPixmap() const;
 
     /**
+      * Returns an icon file path indicating the turn type for the next driving instruction
+      */
+    QString nextInstructionPixmapFile() const;
+
+    /**
       * Returns the turn type of the next driving instruction
       */
     RoutingInstruction::TurnType nextTurnType() const;
