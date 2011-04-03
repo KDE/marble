@@ -361,6 +361,9 @@ void RoutingInputWidget::finishSearch()
 {
     d->m_progressTimer.stop();
     d->setProgressAnimationEnabled( false );
+    bool const hasResults = d->m_placemarkModel->rowCount() > 0;
+    QString const icon = hasResults ? ":/icons/16x16/task-accepted.png" : ":/icons/16x16/task-attention.png";
+    d->m_menuButton->setIcon( QIcon( icon ) );
     emit searchFinished( this );
 }
 

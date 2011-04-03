@@ -44,6 +44,8 @@
     <file>icons/flag.png</file>
     <file>icons/gps.png</file>
     <file>icons/crosshairs.png</file>
+    <file>icons/16x16/task-accepted.png</file>
+    <file>icons/16x16/task-attention.png</file>
     <file>icons/16x16/edit-clear-locationbar-ltr.png</file>
     <file>icons/16x16/edit-clear-locationbar-rtl.png</file>
     <file>icons/22x22/edit-clear-locationbar-ltr.png</file>
