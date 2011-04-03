@@ -164,7 +164,6 @@ void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
 
     d->m_lastSearchTerm = searchTerm;
 
-    qDeleteAll( d->m_searchTasks );
     d->m_searchTasks.clear();
 
     d->m_modelMutex.lock();
@@ -224,7 +223,6 @@ void MarbleRunnerManager::retrieveRoute( RouteRequest *request )
 {
     RoutingProfile profile = request->routingProfile();
 
-    qDeleteAll( d->m_routingTasks );
     d->m_routingTasks.clear();
     d->m_routingResult.clear();
 
