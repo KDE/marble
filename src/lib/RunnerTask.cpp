@@ -30,11 +30,10 @@ void RunnerTask::run()
         watchdog.stop(); // completed within timeout
     } else {
         mDebug() << "Timeout reached while waiting for result. Killing the runner.";
-        /** @todo: Report back to MarbleRunnerManager to announce finish without
-          * results, if needed
-          */
         runner()->deleteLater();
     }
+
+    emit finished( this );
 }
 
 MarbleAbstractRunner* RunnerTask::runner()
@@ -82,3 +81,5 @@ void RoutingTask::runTask( QEventLoop *localEventLoop )
 }
 
 }
+
+#include "RunnerTask.moc"
