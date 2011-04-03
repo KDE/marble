@@ -28,6 +28,7 @@ class GeoDataPlacemark;
 class MarbleModel;
 class PluginManager;
 class RouteRequest;
+class RunnerTask;
 
 class MarbleRunnerManagerPrivate;
 class MARBLE_EXPORT MarbleRunnerManager : public QObject
@@ -114,6 +115,10 @@ private slots:
     void addRoutingResult( GeoDataDocument* route );
 
 private:
+    Q_PRIVATE_SLOT( d, void cleanupSearchTask( RunnerTask* task ) );
+
+    friend class MarbleRunnerManagerPrivate;
+
     MarbleRunnerManagerPrivate* const d;
 };
 

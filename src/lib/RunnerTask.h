@@ -27,14 +27,19 @@ class MarbleAbstractRunner;
   * search, reverse geocoding or routing -- in the run() function and waits for the
   * result in a local event loop.
   */
-class RunnerTask : public QRunnable
+class RunnerTask : public QObject, public QRunnable
 {
+    Q_OBJECT
+
 public:
     /** Constructor. The runner instance given will be used to execute the actual task */
     explicit RunnerTask( MarbleAbstractRunner* runner );
 
     /** Overriding QRunnable to execute the runner task in a local event loop */
     virtual void run();
+
+Q_SIGNALS:
+    void finished( RunnerTask* task );
 
 protected:
     /** Derived classes should execute their task and quit the provided event loop when done */

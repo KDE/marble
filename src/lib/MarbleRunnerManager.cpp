@@ -25,6 +25,7 @@
 #include <QtCore/QString>
 #include <QtCore/QVector>
 #include <QtCore/QThreadPool>
+#include <QtCore/QTimer>
 
 namespace Marble
 {
@@ -34,11 +35,11 @@ class MarbleModel;
 class MarbleRunnerManagerPrivate
 {
 public:
+    MarbleRunnerManager* q;
     QString m_lastSearchTerm;
     QMutex m_modelMutex;
     MarbleModel * m_marbleModel;
     MarblePlacemarkModel *m_model;
-    int m_searchTasks;
     QVector<GeoDataPlacemark*> m_placemarkContainer;
     QVector<GeoDataDocument*> m_routingResult;
     QList<GeoDataCoordinates> m_reverseGeocodingResults;
@@ -46,16 +47,21 @@ public:
     bool m_workOffline;
     PluginManager* m_pluginManager;
 
-    MarbleRunnerManagerPrivate( PluginManager* pluginManager );
+    MarbleRunnerManagerPrivate( MarbleRunnerManager* parent, PluginManager* pluginManager );
 
     ~MarbleRunnerManagerPrivate();
 
     QList<RunnerPlugin*> plugins( RunnerPlugin::Capability capability );
+
+    QList<RunnerTask*> m_searchTasks;
+
+    void cleanupSearchTask( RunnerTask* task );
 };
-MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( PluginManager* pluginManager ) :
+
+MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( MarbleRunnerManager* parent, PluginManager* pluginManager ) :
+        q( parent ),
         m_marbleModel( 0 ),
         m_model( new MarblePlacemarkModel ),
-        m_searchTasks( 0 ),
         m_routeRequest( 0 ),
         m_workOffline( false ),
         m_pluginManager( pluginManager )
@@ -99,8 +105,17 @@ QList<RunnerPlugin*> MarbleRunnerManagerPrivate::plugins( RunnerPlugin::Capabili
     return result;
 }
 
+void MarbleRunnerManagerPrivate::cleanupSearchTask( RunnerTask* task )
+{
+    m_searchTasks.removeAll( task );
+
+    if ( m_searchTasks.isEmpty() ) {
+        emit q->searchFinished( m_lastSearchTerm );
+    }
+}
+
 MarbleRunnerManager::MarbleRunnerManager( PluginManager* pluginManager, QObject *parent )
-    : QObject( parent ), d( new MarbleRunnerManagerPrivate( pluginManager ) )
+    : QObject( parent ), d( new MarbleRunnerManagerPrivate( this, pluginManager ) )
 {
     // nothing to do
 }
@@ -137,8 +152,10 @@ void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
 
     d->m_lastSearchTerm = searchTerm;
 
+    qDeleteAll( d->m_searchTasks );
+    d->m_searchTasks.clear();
+
     d->m_modelMutex.lock();
-    d->m_searchTasks = 0;
     d->m_model->removePlacemarks( "MarbleRunnerManager", 0, d->m_placemarkContainer.size() );
     qDeleteAll( d->m_placemarkContainer );
     d->m_placemarkContainer.clear();
@@ -151,7 +168,10 @@ void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
         connect( runner, SIGNAL( searchFinished( QVector<GeoDataPlacemark*> ) ),
                  this, SLOT( addSearchResult( QVector<GeoDataPlacemark*> ) ) );
         runner->setModel( d->m_marbleModel );
-        QThreadPool::globalInstance()->start( new SearchTask( runner, searchTerm ) );
+        SearchTask* task = new SearchTask( runner, searchTerm );
+        connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupSearchTask( RunnerTask* ) ) );
+        d->m_searchTasks << task;
+        QThreadPool::globalInstance()->start( task );
     }
 }
 
@@ -162,16 +182,11 @@ void MarbleRunnerManager::addSearchResult( QVector<GeoDataPlacemark*> result )
         return;
 
     d->m_modelMutex.lock();
-    --d->m_searchTasks;
     int start = d->m_placemarkContainer.size();
     d->m_placemarkContainer << result;
     d->m_model->addPlacemarks( start, result.size() );
     d->m_modelMutex.unlock();
     emit searchResultChanged( d->m_model );
-
-    if ( d->m_searchTasks <= 0 ) {
-        emit searchFinished( d->m_lastSearchTerm );
-    }
 }
 
 void MarbleRunnerManager::setModel( MarbleModel * model )
