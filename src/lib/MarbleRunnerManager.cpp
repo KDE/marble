@@ -54,8 +54,11 @@ public:
     QList<RunnerPlugin*> plugins( RunnerPlugin::Capability capability );
 
     QList<RunnerTask*> m_searchTasks;
+    QList<RunnerTask*> m_routingTasks;
 
     void cleanupSearchTask( RunnerTask* task );
+
+    void cleanupRoutingTask( RunnerTask* task );
 };
 
 MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( MarbleRunnerManager* parent, PluginManager* pluginManager ) :
@@ -111,6 +114,15 @@ void MarbleRunnerManagerPrivate::cleanupSearchTask( RunnerTask* task )
 
     if ( m_searchTasks.isEmpty() ) {
         emit q->searchFinished( m_lastSearchTerm );
+    }
+}
+
+void MarbleRunnerManagerPrivate::cleanupRoutingTask( RunnerTask* task )
+{
+    m_routingTasks.removeAll( task );
+
+    if ( m_routingTasks.isEmpty() && m_routingResult.isEmpty() ) {
+        emit q->routeRetrieved( 0 );
     }
 }
 
@@ -212,29 +224,39 @@ void MarbleRunnerManager::retrieveRoute( RouteRequest *request )
 {
     RoutingProfile profile = request->routingProfile();
 
+    qDeleteAll( d->m_routingTasks );
+    d->m_routingTasks.clear();
     d->m_routingResult.clear();
+
     d->m_routeRequest = request;
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Routing );
+    bool started = false;
     foreach( RunnerPlugin* plugin, plugins ) {
         if ( !profile.pluginSettings().contains( plugin->nameId() ) ) {
             continue;
         }
 
+        started = true;
         MarbleAbstractRunner* runner = plugin->newRunner();
         connect( runner, SIGNAL( routeCalculated( GeoDataDocument* ) ),
                  this, SLOT( addRoutingResult( GeoDataDocument* ) ) );
         runner->setModel( d->m_marbleModel );
-        QThreadPool::globalInstance()->start( new RoutingTask( runner, request ) );
+        RoutingTask* task = new RoutingTask( runner, request );
+        d->m_routingTasks << task;
+        connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupRoutingTask( RunnerTask* ) ) );
+        QThreadPool::globalInstance()->start( task );
     }
 
-    if ( plugins.isEmpty() ) {
+    if ( !started ) {
         mDebug() << "No routing plugins found, cannot retrieve a route";
+        d->cleanupRoutingTask( 0 );
     }
 }
 
 void MarbleRunnerManager::addRoutingResult( GeoDataDocument* route )
 {
     if ( route ) {
+        d->m_routingResult.push_back( route );
         emit routeRetrieved( route );
     }
 }

@@ -204,6 +204,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( pointSelectionCanceled() ) );
     connect( d->m_routingManager, SIGNAL( stateChanged( RoutingManager::State, RouteRequest* ) ),
              this, SLOT( updateRouteState( RoutingManager::State, RouteRequest* ) ) );
+    connect( d->m_routingManager, SIGNAL( routeRetrieved( GeoDataDocument* ) ),
+             this, SLOT( indicateRoutingFailure( GeoDataDocument* ) ) );
     connect( d->m_routeRequest, SIGNAL( positionAdded( int ) ),
              this, SLOT( insertInputWidget( int ) ) );
     connect( d->m_routeRequest, SIGNAL( positionRemoved( int ) ),
@@ -244,6 +246,7 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
         addInputWidget();
     }
     //d->m_ui.descriptionLabel->setVisible( false );
+    d->m_ui.resultLabel->setVisible( false );
     setShowDirectionsButtonVisible( false );
 
     if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
@@ -322,8 +325,15 @@ void RoutingWidget::handleSearchResult( RoutingInputWidget *widget )
     MarblePlacemarkModel *model = widget->searchResultModel();
 
     if ( model->rowCount() ) {
+        QString const results = tr( "%n placemarks", "", model->rowCount() );
+        d->m_ui.resultLabel->setText( results );
+        d->m_ui.resultLabel->setVisible( true );
         // Make sure we have a selection
         activatePlacemark( model->index( 0, 0 ) );
+    } else {
+        QString const results = tr( "No placemark" );
+        d->m_ui.resultLabel->setText( "<font color=\"red\">" + results + "</font>" );
+        d->m_ui.resultLabel->setVisible( true );
     }
 
     GeoDataLineString placemarks;
@@ -499,6 +509,7 @@ void RoutingWidget::updateProgress()
         d->m_currentFrame = ( d->m_currentFrame + 1 ) % d->m_progressAnimation.size();
         QIcon frame = d->m_progressAnimation[d->m_currentFrame];
         d->m_ui.searchButton->setIcon( frame );
+        d->m_ui.resultLabel->setVisible( false );
     }
 }
 
@@ -552,6 +563,10 @@ void RoutingWidget::updateAlternativeRoutes()
 
     d->m_progressTimer.stop();
     d->m_ui.searchButton->setIcon( QIcon() );
+
+    QString const results = tr( "%n routes", "", d->m_ui.routeComboBox->count() );
+    d->m_ui.resultLabel->setText( results );
+    d->m_ui.resultLabel->setVisible( true );
 }
 
 void RoutingWidget::setShowDirectionsButtonVisible( bool visible )
@@ -598,6 +613,17 @@ void RoutingWidget::saveRoute()
 
     if ( !fileName.isEmpty() ) {
         d->m_routingManager->saveRoute( fileName );
+    }
+}
+
+void RoutingWidget::indicateRoutingFailure( GeoDataDocument* route )
+{
+    if ( !route ) {
+        d->m_progressTimer.stop();
+        d->m_ui.searchButton->setIcon( QIcon() );
+        QString const results = tr( "No route" );
+        d->m_ui.resultLabel->setText( "<font color=\"red\">" + results + "</font>" );
+        d->m_ui.resultLabel->setVisible( true );
     }
 }
 
