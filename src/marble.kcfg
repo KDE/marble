@@ -266,4 +266,9 @@
     <default></default>
   </entry>
  </group>
+ <group name="Routing">
+  <entry key="showGuidanceModeStartupWarning" type="Bool" >
+   <default>true</default>
+  </entry>
+ </group>
 </kcfg>
