@@ -522,6 +522,8 @@ void MarblePart::readSettings()
     readPluginSettings();
     // Load previous route settings
     m_controlView->marbleWidget()->model()->routingManager()->readSettings();
+    bool const startupWarning = MarbleSettings::showGuidanceModeStartupWarning();
+    m_controlView->marbleWidget()->model()->routingManager()->setShowGuidanceModeStartupWarning( startupWarning );
 
     disconnect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
                 this,                          SLOT( writePluginSettings() ) );
@@ -649,10 +651,12 @@ void MarblePart::writeSettings()
 
     writeStatusBarSettings();
 
-    MarbleSettings::self()->writeConfig();
-
     // Store current route settings
     m_controlView->marbleWidget()->model()->routingManager()->writeSettings();
+    bool const startupWarning = m_controlView->marbleWidget()->model()->routingManager()->showGuidanceModeStartupWarning();
+    MarbleSettings::setShowGuidanceModeStartupWarning( startupWarning );
+
+    MarbleSettings::self()->writeConfig();
 }
 
 void MarblePart::writeStatusBarSettings()

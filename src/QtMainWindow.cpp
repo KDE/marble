@@ -1026,7 +1026,11 @@ void MainWindow::readSettings()
      m_configDialog->readSettings();
 
      // Load previous route settings
+     settings.beginGroup( "Routing" );
      m_controlView->marbleWidget()->model()->routingManager()->readSettings();
+     bool const startupWarning = settings.value( "showGuidanceModeStartupWarning", QVariant( true ) ).toBool();
+     m_controlView->marbleWidget()->model()->routingManager()->setShowGuidanceModeStartupWarning( startupWarning );
+     settings.endGroup();
 }
 
 void MainWindow::writeSettings()
@@ -1128,7 +1132,11 @@ void MainWindow::writeSettings()
      m_configDialog->writeSettings();
 
      // Store current route settings
+     settings.beginGroup( "Routing" );
      m_controlView->marbleWidget()->model()->routingManager()->writeSettings();
+     bool const startupWarning = m_controlView->marbleWidget()->model()->routingManager()->showGuidanceModeStartupWarning();
+     settings.setValue( "showGuidanceModeStartupWarning", startupWarning );
+     settings.endGroup();
 }
 
 void MainWindow::editSettings()

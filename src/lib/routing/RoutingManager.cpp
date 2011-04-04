@@ -29,7 +29,8 @@
 #include "PositionProviderPlugin.h"
 
 #include <QtCore/QFile>
-#include <QtGui/QErrorMessage>
+#include <QtGui/QMessageBox>
+#include <QtGui/QCheckBox>
 #include <QMutexLocker>
 
 namespace Marble
@@ -64,6 +65,8 @@ public:
 
     bool m_shutdownPositionTracking;
 
+    bool m_guidanceModeWarning;
+
     RoutingManagerPrivate( MarbleModel *marbleModel, RoutingManager* manager, QObject *parent );
 
     GeoDataFolder* routeRequest() const;
@@ -86,7 +89,8 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager
         m_runnerManager( new MarbleRunnerManager( model->pluginManager(), q ) ),
         m_haveRoute( false ), m_adjustNavigation( 0 ),
         m_guidanceModeEnabled( false ),
-        m_shutdownPositionTracking( false )
+        m_shutdownPositionTracking( false ),
+        m_guidanceModeWarning( true )
 {
     // nothing to do
 }
@@ -331,17 +335,21 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
     if ( enabled ) {
         d->saveRoute( d->stateFile( "guidance.kml" ) );
 
-        QString text = "<p>" + tr( "The Marble development team wishes you a pleasant and safe journey." ) + "</p>";
-        text += "<p>" + tr( "Caution: Driving instructions may be incomplete or inaccurate." );
-        text += " " + tr( "Road construction, weather and other unforeseen variables can result in this suggested route not to be the most expedient or safest route to your destination." );
-        text += " " + tr( "Please use common sense while navigating." ) + "</p>";
-        QErrorMessage* message = new QErrorMessage;
-        message->setWindowTitle( "Guidance Mode - Marble" );
-
-        bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-        message->resize( 380, smallScreen ? 400 : 240 );
-        connect( message, SIGNAL( finished( int ) ), message, SLOT( deleteLater() ) );
-        message->showMessage( text, "routing_plugin_startup_warning" );
+        if ( d->m_guidanceModeWarning ) {
+            QString text = "<p>" + tr( "The Marble development team wishes you a pleasant and safe journey." ) + "</p>";
+            text += "<p>" + tr( "Caution: Driving instructions may be incomplete or inaccurate." );
+            text += " " + tr( "Road construction, weather and other unforeseen variables can result in this suggested route not to be the most expedient or safest route to your destination." );
+            text += " " + tr( "Please use common sense while navigating." ) + "</p>";
+            QMessageBox messageBox( QMessageBox::Information, tr( "Guidance Mode - Marble" ), text, QMessageBox::Ok );
+            QCheckBox showAgain( tr( "Show this message again" ) );
+            showAgain.setChecked( true );
+            showAgain.blockSignals( true ); // otherwise it'd close the dialog
+            messageBox.addButton( &showAgain, QMessageBox::ActionRole );
+            bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+            messageBox.resize( 380, smallScreen ? 400 : 240 );
+            messageBox.exec();
+            d->m_guidanceModeWarning = showAgain.isChecked();
+        }
     } else {
         d->loadRoute( d->stateFile( "guidance.kml" ) );
     }
@@ -389,6 +397,16 @@ void RoutingManager::reverseRoute()
 {
     d->m_routeRequest->reverse();
     updateRoute();
+}
+
+void RoutingManager::setShowGuidanceModeStartupWarning( bool show )
+{
+    d->m_guidanceModeWarning = show;
+}
+
+bool RoutingManager::showGuidanceModeStartupWarning() const
+{
+    return d->m_guidanceModeWarning;
 }
 
 } // namespace Marble

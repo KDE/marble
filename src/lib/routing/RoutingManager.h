@@ -119,6 +119,18 @@ public:
       */
     void loadRoute( const QString &filename );
 
+    /**
+      * Set whether a warning message should be shown to the user before
+      * starting guidance mode.
+      */
+    void setShowGuidanceModeStartupWarning( bool show );
+
+    /**
+      * Returns true (default) if a warning is shown to the user when starting guidance
+      * mode.
+      */
+    bool showGuidanceModeStartupWarning() const;
+
 public Q_SLOTS:
     /** Reverse the previously requested route, i.e. swap start and destination (and via points, if any) */
     void reverseRoute();
