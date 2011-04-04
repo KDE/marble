@@ -30,7 +30,7 @@ ProgressFloatItem::ProgressFloatItem ( const QPointF &point, const QSizeF &size 
     : AbstractFloatItem( point, size ),
       m_isInitialized( false ), m_marbleWidget( 0 ),
       m_totalJobs( 0 ), m_completedJobs ( 0 ),
-      m_active( false )
+      m_active( false ), m_fontSize( 0 )
 {
     // This timer is responsible to activate the automatic display with a small delay
     m_progressShowTimer.setInterval( 250 );
@@ -155,13 +155,27 @@ void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
     painter->setPen( Qt::NoPen );
     painter->drawPie( rect, startAngle, spanAngle );
 
+    // Calculate font size
+    QFont myFont = font();
+    if ( m_fontSize == 0 ) {
+        QString text = "100%";
+        int fontSize = myFont.pointSize();
+        while( QFontMetrics( myFont ).boundingRect( text ).width() < rect.width() - 4 ) {
+            ++fontSize;
+            myFont.setPointSize( fontSize );
+        }
+        m_fontSize = fontSize - 1;
+    }
+
     // Paint progress label
+    myFont.setPointSize( m_fontSize );
     QString done = QString::number( completed ) + "%";
-    int fontWidth = QFontMetrics( font() ).boundingRect( done ).width();
+    int fontWidth = QFontMetrics( myFont ).boundingRect( done ).width();
     QPointF baseline( padding() + 0.5 * ( rect.width() - fontWidth ), 0.75 * rect.height() );
     QPainterPath path;
-    path.addText( baseline, font(), done );
+    path.addText( baseline, myFont, done );
 
+    painter->setFont( myFont );
     painter->setBrush( QBrush() );
     painter->setPen( QPen() );
     painter->drawPath( path );

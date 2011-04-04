@@ -95,6 +95,8 @@ private Q_SLOTS:
     bool m_active;
 
     QIcon m_icon;
+
+    int m_fontSize;
 };
 
 }
