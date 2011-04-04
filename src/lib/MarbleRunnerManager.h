@@ -116,6 +116,8 @@ private slots:
 private:
     Q_PRIVATE_SLOT( d, void cleanupSearchTask( RunnerTask* task ) );
 
+    Q_PRIVATE_SLOT( d, void cleanupRoutingTask( RunnerTask* task ) );
+
     friend class MarbleRunnerManagerPrivate;
 
     MarbleRunnerManagerPrivate* const d;

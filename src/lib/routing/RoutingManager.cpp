@@ -274,10 +274,12 @@ void RoutingManager::setWorkOffline( bool offline )
 
 void RoutingManager::retrieveRoute( GeoDataDocument* route )
 {
-    d->m_alternativeRoutesModel->addRoute( route );
+    if ( route ) {
+        d->m_alternativeRoutesModel->addRoute( route );
+    }
 
     if ( !d->m_haveRoute ) {
-        d->m_haveRoute = true;
+        d->m_haveRoute = route != 0;
         emit stateChanged( Retrieved, d->m_routeRequest );
     }
 

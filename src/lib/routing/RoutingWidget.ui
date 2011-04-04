@@ -98,6 +98,13 @@
       </spacer>
      </item>
      <item>
+      <widget class="QLabel" name="resultLabel">
+       <property name="text">
+        <string>No results.</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="showInstructionsButton">
        <property name="text">
         <string>Show Directions</string>
