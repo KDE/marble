@@ -75,6 +75,7 @@ class MarbleWidgetPrivate
           m_animationsEnabled( false ),
           m_logzoom( 0 ),
           m_zoomStep( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 60 : 40 ),
+          m_zooming( false ),
           m_inputhandler( 0 ),
           m_physics( new MarblePhysics( parent ) ),
           m_repaintTimer(),
@@ -124,6 +125,7 @@ class MarbleWidgetPrivate
     // zoom related
     int              m_logzoom;
     int              m_zoomStep;
+    bool             m_zooming;
 
     MarbleWidgetInputHandler  *m_inputhandler;
 
@@ -322,6 +324,11 @@ void MarbleWidget::setRadius( int radius )
         return;
     }
         
+    if ( d->m_zooming )
+        return;
+
+    d->m_zooming = true;
+
     d->m_map->setRadius( radius );
     d->m_logzoom = qRound( d->zoom( radius ) );
 
@@ -330,6 +337,8 @@ void MarbleWidget::setRadius( int radius )
     emit visibleLatLonAltBoxChanged( d->m_map->viewport()->viewLatLonAltBox() );
 
     d->repaint();
+
+    d->m_zooming = false;
 }
 
 
@@ -522,6 +531,11 @@ void MarbleWidget::zoomView( int newZoom, FlyToMode mode )
         if ( newZoom  == d->m_logzoom )
             return;
 
+        if ( d->m_zooming )
+            return;
+
+        d->m_zooming = true;
+
         d->m_map->setRadius( d->radius( newZoom ) );
         d->m_logzoom = newZoom;
 
@@ -530,6 +544,8 @@ void MarbleWidget::zoomView( int newZoom, FlyToMode mode )
         emit visibleLatLonAltBoxChanged( d->m_map->viewport()->viewLatLonAltBox() );
 
         d->repaint();
+
+        d->m_zooming = false;
     }
     else {
         GeoDataLookAt target = lookAt();
@@ -1262,6 +1278,11 @@ void MarbleWidget::changeEvent( QEvent * event )
 void MarbleWidget::flyTo( const GeoDataLookAt &newLookAt, FlyToMode mode )
 {
     if ( !d->m_animationsEnabled || mode == Instant ) {
+        if ( d->m_zooming )
+            return;
+
+        d->m_zooming = true;
+
         const qreal radius = radiusFromDistance( newLookAt.range() * METER2KM );
         d->m_map->setRadius( radius );
         d->m_logzoom = qRound( d->zoom( radius ) );
@@ -1274,6 +1295,8 @@ void MarbleWidget::flyTo( const GeoDataLookAt &newLookAt, FlyToMode mode )
         emit visibleLatLonAltBoxChanged( d->m_map->viewport()->viewLatLonAltBox() );
 
         d->repaint();
+
+        d->m_zooming = false;
     }
     else {
         d->m_physics->flyTo( newLookAt, mode );
