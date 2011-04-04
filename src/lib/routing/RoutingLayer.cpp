@@ -309,6 +309,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         }
     }
 
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
         QModelIndex index = m_routingModel->index( i, 0 );
         GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
@@ -321,7 +322,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
             if ( m_selectionModel->selection().contains( proxyIndex ) ) {
                 painter->setPen( QColor( Qt::black ) );
                 painter->setBrush( QBrush( oxygenSunYellow6 ) );
-                painter->drawAnnotation( pos, index.data().toString(), QSize( 120, 0 ), 10, 30, 5, 5 );
+                painter->drawAnnotation( pos, index.data().toString(), QSize( smallScreen ? 240 : 120, 0 ), 10, 30, 5, 5 );
 
                 GeoDataLineString currentRoutePoints = qVariantValue<GeoDataLineString>( index.data( RoutingModel::InstructionWayPointRole ) );
 
