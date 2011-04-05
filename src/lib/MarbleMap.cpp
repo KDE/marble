@@ -156,66 +156,6 @@ void  MarbleMapPrivate::paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect
     painter.restore();
 }
 
-void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
-{
-    if ( !m_viewParams.mapTheme() ) {
-        mDebug() << "No theme yet!";
-        paintMarbleSplash( painter, dirtyRect );
-        return;
-    }
-
-    QStringList renderPositions;
-
-    if ( m_backgroundVisible ) {
-        renderPositions << "STARS" << "BEHIND_TARGET";
-        m_layerManager.renderLayers( &painter, &m_viewParams, renderPositions );
-    }
-
-    if ( m_viewParams.showAtmosphere() ) {
-        m_atmosphereLayer.render( &painter, m_viewParams.viewport() );
-    }
-
-    m_textureLayer.paintGlobe( &painter, &m_viewParams, dirtyRect );
-
-    renderPositions.clear();
-    renderPositions << "SURFACE";
-
-    // Paint the vector layer.
-    if ( m_model->mapTheme()->map()->hasVectorLayers() ) {
-
-        if ( !m_model->mapTheme()->map()->hasTextureLayers() ) {
-            m_veccomposer.paintBaseVectorMap( &painter, &m_viewParams );
-        }
-
-        m_layerManager.renderLayers( &painter, &m_viewParams, renderPositions );
-
-        // Add further Vectors
-        m_veccomposer.paintVectorMap( &painter, &m_viewParams );
-    }
-    else {
-        m_layerManager.renderLayers( &painter, &m_viewParams, renderPositions );
-    }
-
-    // Paint the GeoDataPlacemark layer
-    m_placemarkLayout.paintPlaceFolder( &painter, &m_viewParams );
-
-    renderPositions.clear();
-    renderPositions << "HOVERS_ABOVE_SURFACE";
-    m_layerManager.renderLayers( &painter, &m_viewParams, renderPositions );
-
-    // FIXME: This is really slow. That's why we defer this to
-    //        PrintQuality. Either cache on a pixmap - or maybe
-    //        better: Add to GlobeScanlineTextureMapper.
-
-    if ( m_viewParams.mapQuality() == PrintQuality )
-        m_fogLayer.render( &painter, m_viewParams.viewport() );
-
-    renderPositions.clear();
-    renderPositions << "ATMOSPHERE"
-                    << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
-    m_layerManager.renderLayers( &painter, &m_viewParams, renderPositions );
-}
-
 // ----------------------------------------------------------------
 
 
@@ -628,7 +568,63 @@ bool MarbleMap::geoCoordinates( int x, int y,
 // Used to be paintEvent()
 void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
 {
-    d->paintGround( painter, dirtyRect );
+    if ( !d->m_viewParams.mapTheme() ) {
+        mDebug() << "No theme yet!";
+        d->paintMarbleSplash( painter, dirtyRect );
+        return;
+    }
+
+    QStringList renderPositions;
+
+    if ( d->m_backgroundVisible ) {
+        renderPositions << "STARS" << "BEHIND_TARGET";
+        d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
+    }
+
+    if ( d->m_viewParams.showAtmosphere() ) {
+        d->m_atmosphereLayer.render( &painter, d->m_viewParams.viewport() );
+    }
+
+    d->m_textureLayer.paintGlobe( &painter, &d->m_viewParams, dirtyRect );
+
+    renderPositions.clear();
+    renderPositions << "SURFACE";
+
+    // Paint the vector layer.
+    if ( d->m_model->mapTheme()->map()->hasVectorLayers() ) {
+
+        if ( !d->m_model->mapTheme()->map()->hasTextureLayers() ) {
+            d->m_veccomposer.paintBaseVectorMap( &painter, &d->m_viewParams );
+        }
+
+        d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
+
+        // Add further Vectors
+        d->m_veccomposer.paintVectorMap( &painter, &d->m_viewParams );
+    }
+    else {
+        d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
+    }
+
+    // Paint the GeoDataPlacemark layer
+    d->m_placemarkLayout.paintPlaceFolder( &painter, &d->m_viewParams );
+
+    renderPositions.clear();
+    renderPositions << "HOVERS_ABOVE_SURFACE";
+    d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
+
+    // FIXME: This is really slow. That's why we defer this to
+    //        PrintQuality. Either cache on a pixmap - or maybe
+    //        better: Add to GlobeScanlineTextureMapper.
+
+    if ( d->m_viewParams.mapQuality() == PrintQuality )
+        d->m_fogLayer.render( &painter, d->m_viewParams.viewport() );
+
+    renderPositions.clear();
+    renderPositions << "ATMOSPHERE"
+                    << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
+    d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
+
     d->m_measureTool.render( &painter, viewport() );
 }
 

@@ -36,7 +36,6 @@
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
 #include "MarbleMap.h"
-#include "MarbleMap_p.h" // FIXME: remove this
 #include "MarbleModel.h"
 #include "MarblePhysics.h"
 #include "MarbleWidgetInputHandler.h"
@@ -849,7 +848,7 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
     QRect  dirtyRect = evt->rect();
 
     // Draws the map like MarbleMap::paint does, but adds our customPaint in between
-    d->m_map->d->paintGround( painter, dirtyRect );
+    d->m_map->paint( painter, dirtyRect );
     customPaint( &painter );
     d->m_map->measureTool()->render( &painter, viewport() );
 
