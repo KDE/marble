@@ -12,6 +12,7 @@
 
 #include "PositionTracking.h"
 #include "MarbleDebug.h"
+#include "MarbleModel.h"
 
 #include <QtCore/QTimer>
 #include <QtDBus/QDBusConnection>
