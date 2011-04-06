@@ -325,13 +325,13 @@ void RoutingWidget::handleSearchResult( RoutingInputWidget *widget )
     MarblePlacemarkModel *model = widget->searchResultModel();
 
     if ( model->rowCount() ) {
-        QString const results = tr( "%n placemarks", "", model->rowCount() );
+        QString const results = tr( "%n placemarks found", "", model->rowCount() );
         d->m_ui.resultLabel->setText( results );
         d->m_ui.resultLabel->setVisible( true );
         // Make sure we have a selection
         activatePlacemark( model->index( 0, 0 ) );
     } else {
-        QString const results = tr( "No placemark" );
+        QString const results = tr( "No placemark found" );
         d->m_ui.resultLabel->setText( "<font color=\"red\">" + results + "</font>" );
         d->m_ui.resultLabel->setVisible( true );
     }
@@ -564,7 +564,7 @@ void RoutingWidget::updateAlternativeRoutes()
     d->m_progressTimer.stop();
     d->m_ui.searchButton->setIcon( QIcon() );
 
-    QString const results = tr( "%n routes", "", d->m_ui.routeComboBox->count() );
+    QString const results = tr( "%n routes found", "", d->m_ui.routeComboBox->count() );
     d->m_ui.resultLabel->setText( results );
     d->m_ui.resultLabel->setVisible( true );
 }
@@ -621,7 +621,7 @@ void RoutingWidget::indicateRoutingFailure( GeoDataDocument* route )
     if ( !route ) {
         d->m_progressTimer.stop();
         d->m_ui.searchButton->setIcon( QIcon() );
-        QString const results = tr( "No route" );
+        QString const results = tr( "No route found" );
         d->m_ui.resultLabel->setText( "<font color=\"red\">" + results + "</font>" );
         d->m_ui.resultLabel->setVisible( true );
     }
