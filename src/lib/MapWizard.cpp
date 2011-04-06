@@ -571,10 +571,25 @@ QString MapWizard::createArchive( QString mapId )
         themeDir.cd( QString( "%1/maps/%2/%3" ).arg( MarbleDirs::systemPath() ).arg( body ).arg( theme ) );
     }
     
-    tarArgs.append( QString( "%1/%2/%3.dgml" ).arg( body ).arg( theme ).arg( theme ) );
-    tarArgs.append( QString( "%1/%2/legend.html" ).arg( body ).arg( theme ) );
-    tarArgs.append( QString( "%1/%2/legend" ).arg( body ).arg( theme ) );
-    tarArgs.append( QString( "%1/%2/0" ).arg( body ).arg( theme ) );
+    if( QFile::exists( QString( "%1/%2.dgml" ).arg( themeDir.absolutePath() ).arg( theme ) ) )
+    {
+        tarArgs.append( QString( "%1/%2/%2.dgml" ).arg( body ).arg( theme ) );
+    }
+    
+    if( QFile::exists( QString( "%1/legend.html" ).arg( themeDir.absolutePath() ) ) )
+    {
+        tarArgs.append( QString( "%1/%2/legend.html" ).arg( body ).arg( theme ) );
+    }
+    
+    if( QFile::exists( QString( "%1/legend" ).arg( themeDir.absolutePath() ) ) )
+    {
+        tarArgs.append( QString( "%1/%2/legend" ).arg( body ).arg( theme ) );
+    }
+    
+    if( QFile::exists( QString( "%1/0/000000" ).arg( themeDir.absolutePath() ) ) )
+    {
+        tarArgs.append( QString( "%1/%2/0/000000" ).arg( body ).arg( theme ) );
+    }
     
     QStringList previewFilters;
     previewFilters << "preview.*";
