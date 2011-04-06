@@ -40,7 +40,6 @@
 #include "MarblePhysics.h"
 #include "MarbleWidgetInputHandler.h"
 #include "MeasureTool.h"
-#include "MergedLayerDecorator.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
 #include "TileCreatorDialog.h"
