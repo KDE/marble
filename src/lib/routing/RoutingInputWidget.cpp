@@ -414,7 +414,7 @@ void RoutingInputWidget::clear()
 
 void RoutingInputWidget::retrieveReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark )
 {
-    QString description = placemark.address().isEmpty() ? coordinates.toString() : placemark.address();
+    QString description = placemark.address().isEmpty() ? coordinates.toString().trimmed() : placemark.address();
     d->m_route->setName( d->m_index, description );
     d->m_lineEdit->setText( description );
     d->m_lineEdit->setCursorPosition( 0 );
