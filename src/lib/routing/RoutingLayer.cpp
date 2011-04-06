@@ -136,6 +136,10 @@ public:
     /** Paint waypoint polygon */
     inline void renderRoute( GeoPainter *painter );
 
+    /** Paint turn instruction for selected items */
+    inline void renderAnnotations( GeoPainter *painter );
+
+    /** Paint alternative routes in gray */
     inline void renderAlternativeRoutes( GeoPainter *painter );
 
     /** Paint icons for trip points etc */
@@ -309,7 +313,6 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         }
     }
 
-    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
         QModelIndex index = m_routingModel->index( i, 0 );
         GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
@@ -320,10 +323,6 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
             painter->setBrush( QBrush( alphaAdjusted( oxygenAluminumGray4, 200 ) ) );
             QModelIndex proxyIndex = m_proxyModel->mapFromSource( index );
             if ( m_selectionModel->selection().contains( proxyIndex ) ) {
-                painter->setPen( QColor( Qt::black ) );
-                painter->setBrush( QBrush( oxygenSunYellow6 ) );
-                painter->drawAnnotation( pos, index.data().toString(), QSize( smallScreen ? 240 : 120, 0 ), 10, 30, 5, 5 );
-
                 GeoDataLineString currentRoutePoints = qVariantValue<GeoDataLineString>( index.data( RoutingModel::InstructionWayPointRole ) );
 
                 QPen brightBluePen( alphaAdjusted( oxygenSeaBlue2, 200 ) );
@@ -333,7 +332,6 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
                     brightBluePen.setStyle( Qt::DotLine );
                 }
                 painter->setPen( brightBluePen );
-
                 painter->drawPolyline( currentRoutePoints );
 
                 painter->setPen( bluePen );
@@ -361,6 +359,30 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
             } else {
                 painter->setBrush( QBrush( oxygenSunYellow6 ) );
                 painter->drawEllipse( location, 12, 12 );
+            }
+        }
+    }
+}
+
+void RoutingLayerPrivate::renderAnnotations( GeoPainter *painter )
+{
+    if ( !m_selectionModel || m_selectionModel->selection().isEmpty() ) {
+        // nothing to do
+        return;
+    }
+
+    for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
+        QModelIndex index = m_routingModel->index( i, 0 );
+        RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
+
+        if ( type == RoutingModel::Instruction && m_proxyModel && m_selectionModel ) {
+            QModelIndex proxyIndex = m_proxyModel->mapFromSource( index );
+            if ( m_selectionModel->selection().contains( proxyIndex ) ) {
+                bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+                GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
+                painter->setPen( QColor( Qt::black ) );
+                painter->setBrush( QBrush( oxygenSunYellow6 ) );
+                painter->drawAnnotation( pos, index.data().toString(), QSize( smallScreen ? 240 : 120, 0 ), 10, 30, 5, 5 );
             }
         }
     }
@@ -686,6 +708,10 @@ bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     if ( d->m_routeRequest) {
         d->renderRequest( painter );
+    }
+
+    if ( d->m_routingModel) {
+        d->renderAnnotations( painter );
     }
 
     painter->restore();
