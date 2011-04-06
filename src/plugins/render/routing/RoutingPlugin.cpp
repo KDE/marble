@@ -71,7 +71,7 @@ public:
 
     void updateGuidanceModeButton();
 
-    void updateInstructionLabel( int fontSize, qreal remainingDistance );
+    void updateInstructionLabel( qreal remainingDistance );
 
     void forceRepaint();
 
@@ -87,7 +87,7 @@ public:
 
     void togglePositionTracking( bool enabled );
 
-    QString richText( const QString &source, int fontSize ) const;
+    QString richText( const QString &source ) const;
 
     QString fuzzyDistance( qreal distanceMeter ) const;
 
@@ -112,10 +112,9 @@ RoutingPluginPrivate::RoutingPluginPrivate( RoutingPlugin *parent ) :
     m_settings["speaker"] = QString();
 }
 
-QString RoutingPluginPrivate::richText( const QString &source, int size ) const
+QString RoutingPluginPrivate::richText( const QString &source ) const
 {
-    QString const fontSize = size > 0 ? "+" + fontSize : QString::number( size );
-    return QString( "<font size=\"%1\" color=\"black\">%2</font>" ).arg( fontSize ).arg( source );
+    return QString( "<font size=\"+1\" color=\"black\">%1</font>" ).arg( source );
 }
 
 QString RoutingPluginPrivate::fuzzyDistance( qreal length ) const
@@ -241,10 +240,8 @@ void RoutingPluginPrivate::toggleGuidanceMode( bool enabled )
     }
 
     if ( enabled ) {
-        bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-        int fontSize = smallScreen ? -1 : 1;
-        QString const text = QObject::tr( "Determining current location, please wait..." );
-        m_widget.instructionLabel->setText( richText( "%1", fontSize ).arg( text ) );
+        QString const text = QObject::tr( "Starting guidance mode, please wait..." );
+        m_widget.instructionLabel->setText( richText( "%1" ).arg( text ) );
     }
 
     if ( enabled ) {
@@ -278,13 +275,9 @@ void RoutingPluginPrivate::updateDestinationInformation( qint32 remainingTime, q
         m_audio->update( m_routingModel->nextTurnIndex(), distanceLeft, m_routingModel->nextTurnType() );
 
         m_nearNextInstruction = distanceLeft < thresholdDistance;
-        int fontSize = 1;
-        if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
-            fontSize = m_nearNextInstruction ? 1 : -1;
-        }
 
         QString pixmapHtml = "<img src=\":/flag.png\" /><br />";
-        m_widget.destinationDistanceLabel->setText( pixmapHtml + richText( fuzzyDistance( remainingDistance ), 1 ) );
+        m_widget.destinationDistanceLabel->setText( pixmapHtml + richText( fuzzyDistance( remainingDistance ) ) );
 
         m_widget.instructionIconLabel->setEnabled( m_nearNextInstruction );
         m_widget.progressBar->setMaximum( thresholdDistance );
@@ -294,23 +287,23 @@ void RoutingPluginPrivate::updateDestinationInformation( qint32 remainingTime, q
 
         QString pixmap = m_routingModel->nextInstructionPixmapFile();
         pixmapHtml = QString( "<p align=\"center\"><img src=\"%1\" /><br />%2</p>" ).arg( pixmap );
-        m_widget.instructionIconLabel->setText( pixmapHtml.arg( richText( fuzzyDistance( distanceLeft ), 1 ) ) );
+        m_widget.instructionIconLabel->setText( pixmapHtml.arg( richText( fuzzyDistance( distanceLeft ) ) ) );
 
         m_widget.followingInstructionIconLabel->setPixmap( m_routingModel->followingInstructionPixmap() );
 
-        updateInstructionLabel( fontSize, remainingDistance );
+        updateInstructionLabel( remainingDistance );
     }
 }
 
-void RoutingPluginPrivate::updateInstructionLabel( int fontSize, qreal remainingDistance )
+void RoutingPluginPrivate::updateInstructionLabel( qreal remainingDistance )
 {
     if( m_routingModel->remainingTime() < thresholdTime && !m_routingModel->instructionText().isEmpty() ) {
-        m_widget.instructionLabel->setText( richText( "%1", fontSize ).arg( m_routingModel->instructionText() ) );
+        m_widget.instructionLabel->setText( richText( "%1" ).arg( m_routingModel->instructionText() ) );
     } else {
         qreal instructionDistance = m_routingModel->nextInstructionDistance();
         QString indicatorText = m_routingModel->instructionText().isEmpty() ?
-                                richText( "Destination reached in %1 %2", fontSize ) :
-                                richText( "Next turn in %1 %2", fontSize );
+                                richText( "Destination reached in %1 %2" ) :
+                                richText( "Next turn in %1 %2" );
 
         if( remainingDistance ) {
             if( instructionDistance < 1000 ) {
@@ -321,7 +314,7 @@ void RoutingPluginPrivate::updateInstructionLabel( int fontSize, qreal remaining
         } else {
             m_audio->announceDestination();
             QString content = "Arrived at destination. <a href=\"#reverse\">Calculate the way back.</a>";
-            m_widget.instructionLabel->setText( richText( "%1", fontSize ).arg( content ) );
+            m_widget.instructionLabel->setText( richText( "%1" ).arg( content ) );
         }
     }
 
