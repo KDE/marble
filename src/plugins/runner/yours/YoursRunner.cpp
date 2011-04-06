@@ -96,7 +96,11 @@ void YoursRunner::retrieveData( QNetworkReply *reply )
             QString name = "%1 %2 (Yours)";
             QString unit = "m";
             qreal length = distance( result );
-            if (length >= 1000) {
+            if ( length == 0.0 ) {
+                delete result;
+                emit routeCalculated( 0 );
+                return;
+            } else if ( length >= 1000 ) {
                 length /= 1000.0;
                 unit = "km";
             }
