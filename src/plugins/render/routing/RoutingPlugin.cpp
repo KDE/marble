@@ -62,6 +62,7 @@ public:
     QHash<QString,QVariant> m_settings;
     QDialog *m_configDialog;
     Ui::RoutingConfigDialog m_configUi;
+    bool m_routeCompleted;
 
     RoutingPluginPrivate( RoutingPlugin* parent );
 
@@ -105,7 +106,9 @@ RoutingPluginPrivate::RoutingPluginPrivate( RoutingPlugin *parent ) :
     m_guidanceModeEnabled( false ),
     m_audio( new AudioOutput( parent ) ),
     m_configDialog( 0 ),
+    m_routeCompleted( false ),
     m_parent( parent )
+
 {
     m_settings["muted"] = false;
     m_settings["sound"] = true;
@@ -260,6 +263,7 @@ void RoutingPluginPrivate::toggleGuidanceMode( bool enabled )
     m_marbleWidget->model()->routingManager()->setGuidanceModeEnabled( enabled );
 
     if ( enabled ) {
+        m_routeCompleted = false;
         m_audio->announceStart();
     }
 
@@ -305,16 +309,20 @@ void RoutingPluginPrivate::updateInstructionLabel( qreal remainingDistance )
                                 richText( "Destination reached in %1 %2" ) :
                                 richText( "Next turn in %1 %2" );
 
-        if( remainingDistance ) {
+        if( remainingDistance > 50 ) {
+            m_routeCompleted = false;
             if( instructionDistance < 1000 ) {
                 m_widget.instructionLabel->setText( indicatorText.arg( int( instructionDistance ) ).arg( "meters" ) );
             } else {
                 m_widget.instructionLabel->setText( indicatorText.arg( instructionDistance * METER2KM, 0, 'f', 1 ).arg( " km " ) );
             }
         } else {
-            m_audio->announceDestination();
-            QString content = "Arrived at destination. <a href=\"#reverse\">Calculate the way back.</a>";
-            m_widget.instructionLabel->setText( richText( "%1" ).arg( content ) );
+            if ( !m_routeCompleted ) {
+                m_audio->announceDestination();
+                QString content = "Arrived at destination. <a href=\"#reverse\">Calculate the way back.</a>";
+                m_widget.instructionLabel->setText( richText( "%1" ).arg( content ) );
+            }
+            m_routeCompleted = true;
         }
     }
 
