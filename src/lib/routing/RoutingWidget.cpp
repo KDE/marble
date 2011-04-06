@@ -347,10 +347,10 @@ void RoutingWidget::handleSearchResult( RoutingInputWidget *widget )
     if ( placemarks.size() > 1 ) {
         d->m_widget->centerOn( GeoDataLatLonBox::fromLineString( placemarks ) );
         //d->m_ui.descriptionLabel->setVisible( false );
-    }
 
-    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
-        d->m_ui.directionsListView->setVisible( true );
+        if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+            d->m_ui.directionsListView->setVisible( true );
+        }
     }
 }
 
