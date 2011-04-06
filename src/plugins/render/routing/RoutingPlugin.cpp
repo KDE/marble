@@ -393,7 +393,8 @@ RoutingPlugin::RoutingPlugin( const QPointF &position ) :
     setEnabled( true );
     //plugin is visible by default on small screen devices
     setVisible( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen );
-    setPadding( 0 );
+    setPadding( 0.5 );
+    setBorderWidth( 1 );
     setBackground( QBrush( QColor( "white" ) ) );
 }
 
