@@ -45,10 +45,11 @@ class FrameGraphicsItemPrivate
 
     void updateSize()
     {
-        qreal marginTop = ( m_marginTop == 0.0 ) ? m_margin : m_marginTop;
-        qreal marginBottom = ( m_marginBottom == 0.0 ) ? m_margin : m_marginBottom;
-        qreal marginLeft = ( m_marginLeft == 0.0 ) ? m_margin : m_marginLeft;
-        qreal marginRight = ( m_marginRight == 0.0 ) ? m_margin : m_marginRight;
+        qreal const border2 = 0.5 * m_borderWidth;
+        qreal marginTop = qMax( border2, ( m_marginTop == 0.0 ) ? m_margin : m_marginTop );
+        qreal marginBottom = qMax( border2, ( m_marginBottom == 0.0 ) ? m_margin : m_marginBottom );
+        qreal marginLeft = qMax( border2, ( m_marginLeft == 0.0 ) ? m_margin : m_marginLeft );
+        qreal marginRight = qMax( border2, ( m_marginRight == 0.0 ) ? m_margin : m_marginRight );
 
         QSizeF totalSize = m_contentSize;
         totalSize += QSizeF( marginLeft + marginRight, marginTop + marginBottom );

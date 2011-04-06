@@ -21,6 +21,7 @@
 
 using namespace Marble;
 
+// @todo: unused variables, delete in master.
 const int RECT_FRAME_MIN_PADDING = 1;
 const int ROUNDED_RECT_FRAME_MIN_PADDING = 2;
 
@@ -125,16 +126,10 @@ qreal FrameGraphicsItem::padding() const
 
 void FrameGraphicsItem::setPadding( qreal width )
 {
-    if ( d->m_frame == RectFrame && width < RECT_FRAME_MIN_PADDING ) {
-        d->m_padding = RECT_FRAME_MIN_PADDING;
-    }
-    else if ( d->m_frame == RoundedRectFrame && width < ROUNDED_RECT_FRAME_MIN_PADDING ) {
-        d->m_padding = ROUNDED_RECT_FRAME_MIN_PADDING;
-    }
-    else {
+    if ( width >= 0 ) {
         d->m_padding = width;
+        d->updateSize();
     }
-    d->updateSize();
 }
 
 QBrush FrameGraphicsItem::borderBrush() const
