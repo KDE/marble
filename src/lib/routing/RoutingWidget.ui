@@ -107,7 +107,7 @@
      <item>
       <widget class="QPushButton" name="showInstructionsButton">
        <property name="text">
-        <string>Show Directions</string>
+        <string>Show Details</string>
        </property>
        <property name="checkable">
         <bool>false</bool>
