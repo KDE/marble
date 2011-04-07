@@ -367,7 +367,7 @@ void RoutingPluginPrivate::readSettings()
 
     if ( m_configDialog ) {
         QStringList const speakers = m_audio->speakers();
-        int const index = speakers.indexOf( QRegExp( speaker ) );
+        int const index = speakers.indexOf( speaker );
         m_configUi.speakerComboBox->clear();
         m_configUi.speakerComboBox->addItems( speakers );
         m_configUi.speakerComboBox->setCurrentIndex( index );
