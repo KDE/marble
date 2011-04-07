@@ -63,11 +63,11 @@ int main ( int argc, char *argv[] )
                           ki18n( "Marble Virtual Globe" ),
                           ControlView::applicationVersion().toLatin1(),
                           ki18n( "A World Atlas." ),
-                          KAboutData::License_LGPL, ki18n( "(c) 2007, 2008, 2009, 2010" ),
+                          KAboutData::License_LGPL, ki18n( "(c) 2007-2011" ),
                           KLocalizedString(),
                           "http://edu.kde.org/marble" );
 
-    // Active Development Team of Marble 0.10
+    // Active Development Team of Marble
     aboutData.addAuthor( ki18n( "Torsten Rahn" ),
                          ki18n( "Core Developer and Original Author" ),
                          "rahn@kde.org" );

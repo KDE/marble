@@ -87,7 +87,7 @@ void MarbleAboutDialog::loadPageContents( int idx )
     {
         d->authorsLoaded = true;
         browser = d->uiWidget.m_pMarbleAuthorsBrowser;
-        browser->setHtml( tr("<b>Active Development Team of Marble 0.11</b>")+
+        browser->setHtml( tr("<b>Active Development Team of Marble</b>")+
         tr("<p>Torsten Rahn <a href=\"mailto:rahn@kde.org\">rahn@kde.org</a><br />"
            "<i>Core Developer and Original Author</i></p>")+
         tr("<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</a><br />"
@@ -275,7 +275,7 @@ void MarbleAboutDialog::setApplicationTitle( const QString &title )
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         text = titleHtml + "<br />" + applicationVersion + "<br />";
     }
-    browser->setHtml( text + tr("<br />(c) 2007, 2008, 2009, 2010 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>") );
+    browser->setHtml( text + tr("<br />(c) 2007-2011 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>") );
     QTextFrameFormat  format = browser->document()->rootFrame()->frameFormat();
     format.setMargin(12);
     browser->document()->rootFrame()->setFrameFormat( format );
