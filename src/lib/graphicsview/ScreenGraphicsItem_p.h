@@ -29,7 +29,6 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         : MarbleGraphicsItemPrivate( screenGraphicsItem, parent ),
           m_position(),
           m_parentSize(),
-          m_positionLocked( false ),
           m_floatItemMoving( false ),
           m_flags( 0 )
     {
@@ -126,7 +125,6 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
     // The size of the parent, or if no parent exists the size of the viewport.
     QSizeF              m_parentSize;
 
-    bool                m_positionLocked;
     QPoint              m_floatItemMoveStartPos;
     bool                m_floatItemMoving;
 
