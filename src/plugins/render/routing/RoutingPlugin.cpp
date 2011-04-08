@@ -39,6 +39,7 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QPlastiqueStyle>
 #include <QtGui/QDialog>
+#include <QtGui/QPushButton>
 
 namespace Marble
 {
@@ -531,6 +532,8 @@ QDialog *RoutingPlugin::configDialog() const
 
         connect( d->m_configDialog, SIGNAL( accepted() ), this, SLOT( writeSettings() ) );
         connect( d->m_configDialog, SIGNAL( rejected() ), this, SLOT( readSettings() ) );
+        connect( d->m_configUi.buttonBox->button( QDialogButtonBox::Reset ), SIGNAL( clicked () ),
+                 SLOT( restoreDefaultSettings() ) );
     }
 
     return d->m_configDialog;
