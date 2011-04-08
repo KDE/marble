@@ -50,6 +50,7 @@ class MARBLE_EXPORT ViewParams
 
     // Getters and setters
     ViewportParams  *viewport();
+    const ViewportParams  *viewport() const;
 
 /** 
  *  The actual parameters for the look get loaded 

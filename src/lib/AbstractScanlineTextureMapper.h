@@ -68,7 +68,7 @@ public:
     void pixelValueApprox( const qreal lon, const qreal lat,
                            QRgb *scanLine, const int n );
 
-    static int interpolationStep( ViewParams * const viewParams );
+    static int interpolationStep( const ViewParams * const viewParams );
 
     // method for fast integer calculation
     void nextTile( int& posx, int& posy );

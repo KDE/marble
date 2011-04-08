@@ -441,7 +441,7 @@ bool AbstractScanlineTextureMapper::isOutOfTileRange( const int itLon, const int
 }
 
 
-int AbstractScanlineTextureMapper::interpolationStep( ViewParams * const viewParams )
+int AbstractScanlineTextureMapper::interpolationStep( const ViewParams * const viewParams )
 {
     if ( viewParams->mapQuality() == PrintQuality ) {
         return 1;    // Don't interpolate for print quality.

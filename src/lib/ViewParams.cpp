@@ -130,6 +130,11 @@ ViewportParams *ViewParams::viewport()
     return &d->m_viewport;
 }
 
+const ViewportParams *ViewParams::viewport() const
+{
+    return &d->m_viewport;
+}
+
 Projection ViewParams::projection() const
 {
     return d->m_viewport.projection();
