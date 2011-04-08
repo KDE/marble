@@ -189,5 +189,21 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>speakerComboBox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>speakerRadioButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>238</x>
+     <y>68</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>94</x>
+     <y>68</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
 </ui>
