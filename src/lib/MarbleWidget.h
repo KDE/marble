@@ -996,11 +996,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     virtual void paintEvent( QPaintEvent *event );
 
-    /**
-     * @brief Reimplementation of the resizeEvent() function in QWidget.
-     */
-    virtual void resizeEvent( QResizeEvent* );
-
     void connectNotify( const char * signal );
     void disconnectNotify( const char * signal );
 

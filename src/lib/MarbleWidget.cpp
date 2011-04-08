@@ -18,6 +18,7 @@
 #include <QtCore/QSettings>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
+#include <QtGui/QVBoxLayout>
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QPaintEvent>
 #include <QtGui/QRegion>
@@ -38,8 +39,8 @@
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MarblePhysics.h"
+#include "MarbleView.h"
 #include "MarbleWidgetInputHandler.h"
-#include "MeasureTool.h"
 #include "Planet.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
@@ -164,6 +165,13 @@ MarbleWidget::MarbleWidget(QWidget *parent)
       d( new MarbleWidgetPrivate( new MarbleMap(), this ) )
 {
 //    setAttribute( Qt::WA_PaintOnScreen, true );
+
+    QVBoxLayout *vlayout = new QVBoxLayout( this );
+    vlayout->setMargin( 0 );
+
+    QWidget *w = new MarbleView( d->m_map, this );
+    vlayout->addWidget( w );
+
     d->construct();
 }
 
@@ -734,14 +742,6 @@ void MarbleWidget::leaveEvent( QEvent* )
     emit mouseMoveGeoPosition( tr( NOT_AVAILABLE ) );
 }
 
-void MarbleWidget::resizeEvent( QResizeEvent* )
-{
-    setUpdatesEnabled( false );
-    d->m_map->setSize( width(), height() );
-    d->repaint();
-    setUpdatesEnabled( true );
-}
-
 void MarbleWidget::connectNotify( const char * signal )
 {
     if ( QByteArray( signal ) == 
@@ -795,53 +795,8 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
 {
     // Stop repaint timer if it is already running
     d->m_repaintTimer.stop();
-    QTime t;
-    t.start();
 
-    // FIXME: Better way to get the GeoPainter
-    bool  doClip = true;
-    if ( projection() == Spherical )
-        doClip = ( radius() > width() / 2
-                   || radius() > height() / 2 );
-
-    QPaintDevice *paintDevice = this;
-    QImage image;
-    if (!isEnabled())
-    {
-        // If the globe covers fully the screen then we can use the faster
-        // RGB32 as there are no translucent areas involved.
-        QImage::Format imageFormat = ( d->m_map->mapCoversViewport() )
-                                     ? QImage::Format_RGB32
-                                     : QImage::Format_ARGB32_Premultiplied;
-        // Paint to an intermediate image
-        image = QImage( rect().size(), imageFormat );
-        image.fill( Qt::transparent );
-        paintDevice = &image;
-    }
-
-    // Create a painter that will do the painting.
-    GeoPainter painter( paintDevice, d->m_map->viewport(),
-                        d->m_map->mapQuality(), doClip );
-    QRect  dirtyRect = evt->rect();
-
-    // Draws the map like MarbleMap::paint does, but adds our customPaint in between
-    d->m_map->paint( painter, dirtyRect );
-    customPaint( &painter );
-    d->m_map->measureTool()->render( &painter, viewport() );
-
-    if ( !isEnabled() )
-    {
-        // Draw a grayscale version of the intermediate image
-        QRgb* pixel = reinterpret_cast<QRgb*>( image.scanLine( 0 ));
-        for (int i=0; i<image.width()*image.height(); ++i, ++pixel) {
-            int gray = qGray( *pixel );
-            *pixel = qRgb( gray, gray, gray );
-        }
-
-        GeoPainter widgetPainter( this, d->m_map->viewport(),
-                            d->m_map->mapQuality(), doClip );
-        widgetPainter.drawImage( rect(), image );
-    }
+    QWidget::paintEvent( evt );
 }
 
 void MarbleWidget::customPaint( GeoPainter *painter )

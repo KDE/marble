@@ -96,6 +96,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
  public:
 
     friend class MarbleWidget;
+    friend class MarbleView;
 
     /**
      * @brief Construct a new MarbleMap.
