@@ -105,8 +105,8 @@ QDialog *OverviewMap::configDialog()
                  SLOT( writeSettings() ) );
         connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ),
                  SLOT( readSettings() ) );
-        connect( ui_configWidget->m_buttonBox, SIGNAL( clicked ( QAbstractButton * ) ),
-                 SLOT( evaluateClickedButton( QAbstractButton * ) ) );
+        connect( ui_configWidget->m_buttonBox->button( QDialogButtonBox::Reset ), SIGNAL( clicked () ),
+                 SLOT( restoreDefaultSettings() ) );
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
         connect( applyButton, SIGNAL( clicked() ),
                  SLOT( writeSettings() ) );
@@ -498,12 +498,6 @@ void OverviewMap::useMapSuggestion( int index )
     QSvgWidget *widget = new QSvgWidget( path );
     setCurrentWidget( widget );
     showCurrentPlanetPreview();
-}
-
-void OverviewMap::evaluateClickedButton( QAbstractButton *button )
-{
-    if( button == ui_configWidget->m_buttonBox->button( QDialogButtonBox::Reset ) )
-        restoreDefaultSettings();
 }
 
 }

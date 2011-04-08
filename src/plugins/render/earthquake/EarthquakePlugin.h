@@ -80,7 +80,6 @@ private:
 
 private slots:
     void validateDateRange();
-    void evaluateClickedButton( QAbstractButton *button );
 };
 
 }

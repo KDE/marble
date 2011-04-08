@@ -122,7 +122,6 @@ class OverviewMap : public AbstractFloatItem
     void showCurrentPlanetPreview() const;
     void choosePositionIndicatorColor();
     void useMapSuggestion( int index );
-    void evaluateClickedButton( QAbstractButton *button );
 };
 
 }

@@ -129,9 +129,6 @@ class PositionMarker  : public RenderPlugin
 
     void loadCustomCursor( const QString& filename, bool useCursor );
     void loadDefaultCursor();
-
- private slots:
-    void evaluateClickedButton( QAbstractButton *button );
 };
 
 }

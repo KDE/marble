@@ -205,9 +205,6 @@ class GraticulePlugin : public RenderPlugin
         
     Ui::GraticuleConfigWidget *ui_configWidget;
     QDialog *m_configDialog;
-
- private slots:
-    void evaluateClickedButton( QAbstractButton *button );
 };
 
 }
