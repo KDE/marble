@@ -139,7 +139,7 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
                 }
             }
 
-            if ( e->type() == QEvent::MouseMove && event->buttons() & Qt::LeftButton )
+            if ( e->type() == QEvent::MouseMove && event->buttons() & Qt::LeftButton && p()->isMovable() )
             {
                 p()->m_floatItemMoving = true;
                 const QPoint &point = event->pos();
