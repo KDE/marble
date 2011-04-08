@@ -91,8 +91,6 @@ class MarbleWidgetPrivate
 
     void  construct();
 
-    void paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps);
-
     inline static qreal zoom( qreal radius ) { return (200.0 * log( radius ) ); }
     inline static qreal radius( qreal zoom ) { return pow( M_E, ( zoom / 200.0 ) ); }
 
@@ -268,27 +266,6 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SLOT( repaint() ) );
 
     m_map->addLayer( new CustomPaintLayer( m_widget ) );
-}
-
-void MarbleWidgetPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps )
-{
-    Q_UNUSED( dirtyRect );
-
-    if ( m_showFrameRate ) {
-        QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
-
-        QPoint fpsLabelPos( 10, 20 );
-
-        painter.setFont( QFont( "Sans Serif", 10 ) );
-
-        painter.setPen( Qt::black );
-        painter.setBrush( Qt::black );
-        painter.drawText( fpsLabelPos, fpsString );
-
-        painter.setPen( Qt::white );
-        painter.setBrush( Qt::white );
-        painter.drawText( fpsLabelPos.x() - 1, fpsLabelPos.y() - 1, fpsString );
-    }
 }
 
 void MarbleWidgetPrivate::moveByStep( int stepsRight, int stepsDown, FlyToMode mode )
@@ -864,13 +841,6 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
         GeoPainter widgetPainter( this, d->m_map->viewport(),
                             d->m_map->mapQuality(), doClip );
         widgetPainter.drawImage( rect(), image );
-    }
-
-    if ( d->m_showFrameRate )
-    {
-        qreal fps = 1000.0 / (qreal)( t.elapsed() + 1 );
-        d->paintFps( painter, dirtyRect, fps );
-        emit framesPerSecond( fps );
     }
 }
 

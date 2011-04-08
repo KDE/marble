@@ -120,6 +120,7 @@ set(marblewidget_SRCS
     PlacemarkInfoDialog.cpp
     AtmosphereLayer.cpp
     FogLayer.cpp
+    FpsLayer.cpp
     TextureLayer.cpp
     GeometryLayer.cpp
     Planet.cpp
