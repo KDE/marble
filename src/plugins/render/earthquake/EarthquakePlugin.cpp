@@ -31,13 +31,10 @@ EarthquakePlugin::EarthquakePlugin()
 
 void EarthquakePlugin::initialize()
 {
-    EarthquakeModel *m = new EarthquakeModel( pluginManager(), this );
-    m->setNumResults( ui_configWidget->m_numResults->value() );
-    m->setMinMagnitude( ui_configWidget->m_minMagnitude->value() );
-    m->setEndDate( ui_configWidget->m_endDate->dateTime() );
-    m->setStartDate( ui_configWidget->m_startDate->dateTime() );
-    setModel( m );
+    EarthquakeModel *model = new EarthquakeModel( pluginManager(), this );
+    setModel( model );
     setNumberOfItems( numberOfItemsOnScreen );
+    readSettings();
     m_isInitialized = true;
 }
 
@@ -99,20 +96,20 @@ QDialog *EarthquakePlugin::configDialog()
     if ( !m_configDialog ) {
         // Initializing configuration dialog
         m_configDialog = new QDialog();
-        ui_configWidget = new Ui::EarthquakeConfigWidget;
-        ui_configWidget->setupUi( m_configDialog );
-        ui_configWidget->m_numResults->setRange( 1, numberOfItemsOnScreen );
+        m_ui = new Ui::EarthquakeConfigWidget;
+        m_ui->setupUi( m_configDialog );
+        m_ui->m_numResults->setRange( 1, numberOfItemsOnScreen );
         readSettings();
-        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ),
+        connect( m_ui->m_buttonBox, SIGNAL( accepted() ),
                  SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ),
+        connect( m_ui->m_buttonBox, SIGNAL( rejected() ),
                  SLOT( readSettings() ) );
-        connect( ui_configWidget->m_buttonBox->button( QDialogButtonBox::Reset ), SIGNAL( clicked () ),
+        connect( m_ui->m_buttonBox->button( QDialogButtonBox::Reset ), SIGNAL( clicked () ),
                  SLOT( restoreDefaultSettings() ) );
-        QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
+        QPushButton *applyButton = m_ui->m_buttonBox->button( QDialogButtonBox::Apply );
         connect( applyButton, SIGNAL( clicked() ),
                  SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_endDate, SIGNAL( dateTimeChanged ( const QDateTime& ) ),
+        connect( m_ui->m_endDate, SIGNAL( dateTimeChanged ( const QDateTime& ) ),
                  SLOT( validateDateRange() ) );
     }
     return m_configDialog;
@@ -145,49 +142,49 @@ void EarthquakePlugin::setSettings( QHash<QString,QVariant> settings )
 
 void EarthquakePlugin::readSettings()
 {
-    if ( !m_configDialog )
+    if ( !m_configDialog ) {
         return;
+    }
 
-    ui_configWidget->m_numResults->setValue( m_settings.value( "numResults" ).toInt() );
-    ui_configWidget->m_minMagnitude->setValue( m_settings.value( "minMagnitude" ).toDouble() );
-    ui_configWidget->m_startDate->setDateTime( m_settings.value( "startDate" ).toDateTime() );
-    ui_configWidget->m_endDate->setDateTime( m_settings.value( "endDate" ).toDateTime() );
-    ui_configWidget->m_startDate->setMaximumDateTime( ui_configWidget->m_endDate->dateTime() );
+    m_ui->m_numResults->setValue( m_settings.value( "numResults" ).toInt() );
+    m_ui->m_minMagnitude->setValue( m_settings.value( "minMagnitude" ).toDouble() );
+    m_ui->m_startDate->setDateTime( m_settings.value( "startDate" ).toDateTime() );
+    m_ui->m_endDate->setDateTime( m_settings.value( "endDate" ).toDateTime() );
+    m_ui->m_startDate->setMaximumDateTime( m_ui->m_endDate->dateTime() );
 }
 
 void EarthquakePlugin::writeSettings()
 {
-    m_settings.insert( "numResults", ui_configWidget->m_numResults->value() );
-    m_settings.insert( "minMagnitude", ui_configWidget->m_minMagnitude->value() );
-    m_settings.insert( "startDate", ui_configWidget->m_startDate->dateTime() );
-    m_settings.insert( "endDate", ui_configWidget->m_endDate->dateTime() );
+    Q_ASSERT( m_configDialog );
+    m_settings.insert( "numResults", m_ui->m_numResults->value() );
+    m_settings.insert( "minMagnitude", m_ui->m_minMagnitude->value() );
+    m_settings.insert( "startDate", m_ui->m_startDate->dateTime() );
+    m_settings.insert( "endDate", m_ui->m_endDate->dateTime() );
 
     emit settingsChanged( nameId() );
 }
 
 void EarthquakePlugin::updateSettings()
 {
-    EarthquakeModel *m = dynamic_cast<EarthquakeModel *>( model() );
-
-    if( m != NULL )
-    {
-        m = new EarthquakeModel( pluginManager(), this );
-        m->setNumResults( ui_configWidget->m_numResults->value() );
-        m->setMinMagnitude( ui_configWidget->m_minMagnitude->value() );
-        m->setEndDate( ui_configWidget->m_endDate->dateTime() );
-        m->setStartDate( ui_configWidget->m_startDate->dateTime() );
-        setModel( m );
+    EarthquakeModel *earthquakeModel = dynamic_cast<EarthquakeModel *>( model() );
+    if( earthquakeModel ) {
+        earthquakeModel = new EarthquakeModel( pluginManager(), this );
+        Q_ASSERT( m_configDialog );
+        earthquakeModel->setNumResults( m_ui->m_numResults->value() );
+        earthquakeModel->setMinMagnitude( m_ui->m_minMagnitude->value() );
+        earthquakeModel->setEndDate( m_ui->m_endDate->dateTime() );
+        earthquakeModel->setStartDate( m_ui->m_startDate->dateTime() );
+        setModel( earthquakeModel );
     }
 }
 
 void EarthquakePlugin::validateDateRange()
 {
-    if( ui_configWidget->m_startDate->dateTime() > 
-        ui_configWidget->m_endDate->dateTime() )
-    {
-        ui_configWidget->m_startDate->setDateTime( ui_configWidget->m_endDate->dateTime() );
+    Q_ASSERT( m_configDialog );
+    if( m_ui->m_startDate->dateTime() > m_ui->m_endDate->dateTime() ) {
+        m_ui->m_startDate->setDateTime( m_ui->m_endDate->dateTime() );
     }
-    ui_configWidget->m_startDate->setMaximumDateTime( ui_configWidget->m_endDate->dateTime() );
+    m_ui->m_startDate->setMaximumDateTime( m_ui->m_endDate->dateTime() );
 }
 
 }

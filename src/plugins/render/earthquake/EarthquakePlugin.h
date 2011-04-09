@@ -74,7 +74,7 @@ public slots:
 private:
     bool m_isInitialized;
     PluginAboutDialog *m_aboutDialog;
-    Ui::EarthquakeConfigWidget *ui_configWidget;
+    Ui::EarthquakeConfigWidget *m_ui;
     QDialog *m_configDialog;
     QHash<QString,QVariant> m_settings;
 
