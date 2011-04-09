@@ -19,8 +19,10 @@ namespace Marble
 
 class MarbleModel;
 
+namespace {
 // The maximum number of items we want to show on the screen.
 const quint32 numberOfItemsOnScreen = 20;
+}
 
 class EarthquakeModel : public AbstractDataPluginModel
 {
