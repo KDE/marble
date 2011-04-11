@@ -20,6 +20,8 @@
     <text>&amp;Edit</text>
     <Action name="edit_copy"/>
     <Action name="edit_copy_coordinates"/>
+    <Separator/>
+    <Action name="external_editor"/>
   </Menu>
   <Menu name="view" noMerge="1">
     <text>&amp;View</text>

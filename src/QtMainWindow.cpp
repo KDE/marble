@@ -915,7 +915,6 @@ void MainWindow::readSettings()
          showClouds(settings.value("showClouds", true ).toBool());
          workOffline(settings.value("workOffline", false ).toBool());
          showAtmosphere(settings.value("showAtmosphere", true ).toBool());
-         m_controlView->setExternalMapEditor( settings.value( "externalMapEditor", "" ).toString() );
      settings.endGroup();
 
      setUpdatesEnabled(false);
@@ -1031,6 +1030,10 @@ void MainWindow::readSettings()
      bool const startupWarning = settings.value( "showGuidanceModeStartupWarning", QVariant( true ) ).toBool();
      m_controlView->marbleWidget()->model()->routingManager()->setShowGuidanceModeStartupWarning( startupWarning );
      settings.endGroup();
+
+     settings.beginGroup( "Navigation" );
+     m_controlView->setExternalMapEditor( settings.value( "externalMapEditor", "" ).toString() );
+     settings.endGroup();
 }
 
 void MainWindow::writeSettings()
@@ -1047,7 +1050,6 @@ void MainWindow::writeSettings()
          settings.setValue( "showClouds", m_showCloudsAct->isChecked() );
          settings.setValue( "workOffline", m_workOfflineAct->isChecked() );
          settings.setValue( "showAtmosphere", m_showAtmosphereAct->isChecked() );
-         settings.setValue( "externalMapEditor", m_controlView->externalMapEditor() );
      settings.endGroup();
 
      settings.beginGroup( "MarbleWidget" );
@@ -1137,6 +1139,10 @@ void MainWindow::writeSettings()
      bool const startupWarning = m_controlView->marbleWidget()->model()->routingManager()->showGuidanceModeStartupWarning();
      settings.setValue( "showGuidanceModeStartupWarning", startupWarning );
      settings.endGroup();
+
+     settings.beginGroup( "Navigation");
+     settings.setValue( "externalMapEditor", m_controlView->externalMapEditor() );
+     settings.endGroup();
 }
 
 void MainWindow::editSettings()
@@ -1164,7 +1170,9 @@ void MainWindow::updateSettings()
     updateStatusBar();
 
     m_controlView->marbleWidget()->setAnimationsEnabled( m_configDialog->animateTargetVoyage() );
-    m_controlView->setExternalMapEditor( m_configDialog->externalMapEditor() );
+    if ( !m_configDialog->externalMapEditor().isEmpty() ) {
+        m_controlView->setExternalMapEditor( m_configDialog->externalMapEditor() );
+    }
 
     // Cache
     m_controlView->marbleWidget()->setPersistentTileCacheLimit( m_configDialog->persistentTileCacheLimit() * 1024 );

@@ -127,10 +127,15 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QComboBox" name="kcfg_externalEditor">
+      <widget class="QComboBox" name="kcfg_externalMapEditor">
        <property name="toolTip">
         <string>&lt;p&gt;The application that is launched to edit maps. Potlatch (default) requires a web browser with flash support to be installed. When selecting josm or merkaartor, make sure that the respective application is installed.&lt;/p&gt;</string>
        </property>
+       <item>
+        <property name="text">
+         <string>Always ask</string>
+        </property>
+       </item>
        <item>
         <property name="text">
          <string>Potlatch (Web browser)</string>
