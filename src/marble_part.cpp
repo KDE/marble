@@ -116,6 +116,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     m_sunControlDialog( 0 ),
     m_timeControlDialog( 0 ),
     m_downloadRegionDialog( 0 ),
+    m_externalMapEditorAction( 0 ),
     m_pluginModel( 0 ),
     m_configDialog( 0 ),
     m_position( NOT_AVAILABLE ),
@@ -138,6 +139,11 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     else {
         marbleLocale->setMeasureSystem( Imperial );
     }
+
+    m_externalEditorMapping[0] = "";
+    m_externalEditorMapping[1] = "potlatch";
+    m_externalEditorMapping[2] = "josm";
+    m_externalEditorMapping[3] = "merkaartor";
 
     m_controlView = new ControlView( parentWidget );
 
@@ -524,6 +530,8 @@ void MarblePart::readSettings()
                 this,                          SLOT( writePluginSettings() ) );
     connect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
              this,                          SLOT( writePluginSettings() ) );
+
+    m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
 }
 
 void MarblePart::readStatusBarSettings()
@@ -648,6 +656,9 @@ void MarblePart::writeSettings()
     m_controlView->marbleModel()->routingManager()->writeSettings();
     bool const startupWarning = m_controlView->marbleModel()->routingManager()->showGuidanceModeStartupWarning();
     MarbleSettings::setShowGuidanceModeStartupWarning( startupWarning );
+
+    QList<QString> const editors = m_externalEditorMapping.values();
+    MarbleSettings::setExternalMapEditor( editors.indexOf( m_controlView->externalMapEditor() ) );
 
     MarbleSettings::self()->writeConfig();
 }
@@ -867,6 +878,15 @@ void MarblePart::setupActions()
     createFolderList();
     connect( m_controlView->marbleModel()->bookmarkManager(),
              SIGNAL( bookmarksChanged() ), this, SLOT( createFolderList() ) );
+
+    m_externalMapEditorAction = new KAction( this );
+    actionCollection()->addAction( "external_editor", m_externalMapEditorAction );
+    m_externalMapEditorAction->setText( i18nc( "Edit the map in an external application", "&Edit Map" ) );
+    m_externalMapEditorAction->setShortcut( Qt::CTRL + Qt::Key_E );
+    connect( m_externalMapEditorAction, SIGNAL( triggered( ) ),
+             m_controlView, SLOT( launchExternalMapEditor() ) );
+    connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString ) ),
+             this, SLOT( updateMapEditButtonVisibility( QString ) ) );
 }
 
 void MarblePart::createFolderList()
@@ -1474,6 +1494,8 @@ void MarblePart::updateSettings()
     {
         m_controlView->marbleModel()->setClockTimezone( m_timezone.value( MarbleSettings::chosenTimezone() ) );
     }
+
+    m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
 }
 
 void MarblePart::showPluginAboutDialog( const QString& nameId )
@@ -1658,6 +1680,12 @@ void MarblePart::printMapScreenShot()
     m_controlView->printMapScreenShot( printDialog );
     delete printDialog;
 #endif
+}
+
+void MarblePart::updateMapEditButtonVisibility( const QString &mapTheme )
+{
+    Q_ASSERT( m_externalMapEditorAction );
+    m_externalMapEditorAction->setVisible( mapTheme == "earth/openstreetmap/openstreetmap.dgml" );
 }
 
 }

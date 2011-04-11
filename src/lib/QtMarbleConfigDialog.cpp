@@ -285,8 +285,15 @@ void QtMarbleConfigDialog::readSettings()
     d->ui_navigationSettings.kcfg_animateTargetVoyage->setCheckState( Qt::Checked );
     else
     d->ui_navigationSettings.kcfg_animateTargetVoyage->setCheckState( Qt::Unchecked );
-    int editorIndex = externalMapEditor() == "merkaartor" ? 2 : externalMapEditor() == "josm" ? 1 : 0;
-    d->ui_navigationSettings.kcfg_externalEditor->setCurrentIndex( editorIndex );
+    int editorIndex = 0;
+    if ( externalMapEditor() == "potlatch") {
+        editorIndex = 1;
+    } else if ( externalMapEditor() == "josm") {
+        editorIndex = 2;
+    } else if ( externalMapEditor() == "merkaartor") {
+        editorIndex = 3;
+    }
+    d->ui_navigationSettings.kcfg_externalMapEditor->setCurrentIndex( editorIndex );
 
     // Cache
     d->w_cacheSettings->kcfg_volatileTileCacheLimit->setValue( volatileTileCacheLimit() );
@@ -372,7 +379,7 @@ void QtMarbleConfigDialog::readSettings()
 
     // Read the settings of the plugins
     d->m_marbleWidget->readPluginSettings( *d->m_settings );
-    
+
     // The settings loaded in the config dialog have been changed.
     emit settingsChanged();
 }
@@ -414,11 +421,13 @@ void QtMarbleConfigDialog::writeSettings()
         d->m_settings->setValue( "animateTargetVoyage", true );
     else
         d->m_settings->setValue( "animateTargetVoyage", false );
-    if( d->ui_navigationSettings.kcfg_externalEditor->currentIndex() == 0 ) {
+    if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 0 ) {
         d->m_settings->setValue( "externalMapEditor", "" );
-    } else if( d->ui_navigationSettings.kcfg_externalEditor->currentIndex() == 1 ) {
+    } else if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 1 ) {
+        d->m_settings->setValue( "externalMapEditor", "potlatch" );
+    } else if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 2 ) {
         d->m_settings->setValue( "externalMapEditor", "josm" );
-    } else if( d->ui_navigationSettings.kcfg_externalEditor->currentIndex() == 2 ) {
+    } else if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 3 ) {
         d->m_settings->setValue( "externalMapEditor", "merkaartor" );
     } else {
         Q_ASSERT( false && "Unexpected index of the external editor setting" );
