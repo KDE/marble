@@ -175,6 +175,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  lookAtBookmark( QAction * );
 //    void  createBookmarkMenu();
 
+    void  updateMapEditButtonVisibility( const QString &mapTheme );
 
   private:
     void  setupActions();
@@ -217,6 +218,7 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_controlTimeAction;
     KAction      *m_lockFloatItemsAct;
     KAction      *m_mapWizardAct;
+    KAction      *m_externalMapEditorAction;
 
     //Bookmark Menu
     KAction *m_addBookmarkAction;
@@ -256,6 +258,7 @@ class MarblePart: public KParts::ReadOnlyPart
     GraphicsSystem m_previousGraphicsSystem;
 
     QHash< int, int > m_timezone;
+    QMap<int, QString> m_externalEditorMapping;
 };
 
 }

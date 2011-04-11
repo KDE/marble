@@ -51,7 +51,7 @@
         <string>Make my selection the default map editor</string>
        </property>
        <property name="checked">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
       </widget>
      </item>
