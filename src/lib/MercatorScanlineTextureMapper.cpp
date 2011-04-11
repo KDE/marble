@@ -91,7 +91,6 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams, TextureC
 
     // Reset backend
     m_tileLoader->resetTilehash();
-    setRadius( viewParams->radius() );
 
     // Evaluate the degree of interpolation
     const int n = interpolationStep( viewParams );

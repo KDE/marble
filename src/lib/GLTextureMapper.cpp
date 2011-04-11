@@ -128,11 +128,8 @@ void GLTextureMapper::mapTexture( GeoPainter *painter,
     m_tilePosY = 65535;
 
     viewParams->viewport()->activateRelief( d->m_srtmLoader );
-    setRadius( viewParams->radius() );
 
     painter->endNativePainting();
-
-    setViewport( viewParams->viewport() );
 
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
@@ -217,6 +214,8 @@ void GLTextureMapper::setRepaintNeeded()
 
 void GLTextureMapper::setViewport( const ViewportParams *viewport )
 {
+    AbstractScanlineTextureMapper::setViewport( viewport );
+
     // mark all tiles as unused
     m_tileLoader->resetTilehash();
 
@@ -227,8 +226,8 @@ void GLTextureMapper::setViewport( const ViewportParams *viewport )
 
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
-
     glOrtho( -0.5*width, 0.5*width, -0.5*height, 0.5*height, -256000000/M_PI*80, 256/M_PI*32 );
+
     glMatrixMode( GL_MODELVIEW );
 
     const GeoDataLatLonAltBox bbox = viewport->viewLatLonAltBox();

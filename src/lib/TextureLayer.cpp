@@ -160,6 +160,7 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
     if ( !d->m_texmapper )
         return;
 
+    d->m_texmapper->setViewport( viewParams->viewport() );
     d->m_texmapper->mapTexture( painter, viewParams, dirtyRect, d->m_texcolorizer );
 }
 

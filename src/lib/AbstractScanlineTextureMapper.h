@@ -32,6 +32,7 @@ class StackedTile;
 class StackedTileLoader;
 class TextureColorizer;
 class ViewParams;
+class ViewportParams;
 
 class AbstractScanlineTextureMapper : public QObject
 {
@@ -41,6 +42,8 @@ public:
     explicit AbstractScanlineTextureMapper( StackedTileLoader * const tileLoader,
                                             QObject * const parent = 0 );
     ~AbstractScanlineTextureMapper();
+
+    virtual void setViewport( const ViewportParams *viewport );
 
     virtual void mapTexture( GeoPainter *painter,
                              ViewParams *viewParams,
@@ -75,8 +78,6 @@ public:
 
     // method for precise interpolation
     void nextTile( qreal& posx, qreal& posy );
-
-    void setRadius( int radius );
 
     int globalWidth() const;
     int globalHeight() const;

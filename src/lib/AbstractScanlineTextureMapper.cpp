@@ -53,12 +53,12 @@ AbstractScanlineTextureMapper::~AbstractScanlineTextureMapper()
 }
 
 
-void AbstractScanlineTextureMapper::setRadius( int radius )
+void AbstractScanlineTextureMapper::setViewport( const ViewportParams *viewport )
 {
     // As our tile resolution doubles with each level we calculate
     // the tile level from tilesize and the globe radius via log(2)
 
-    qreal  linearLevel = ( 4.0 * (qreal)( radius )
+    qreal  linearLevel = ( 4.0 * (qreal)( viewport->radius() )
                                / (qreal)( m_tileSize.width() * m_tileLoader->tileColumnCount( 0 ) ) );
     int     tileLevel   = 0;
 

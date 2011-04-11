@@ -39,6 +39,8 @@ class GLTextureMapper : public AbstractScanlineTextureMapper
                      QObject *parent = 0 );
     virtual ~GLTextureMapper();
 
+    virtual void setViewport( const ViewportParams *viewport );
+
     virtual void mapTexture( GeoPainter *painter,
                              ViewParams *viewParams,
                              const QRect &dirtyRect,
@@ -47,7 +49,6 @@ class GLTextureMapper : public AbstractScanlineTextureMapper
     virtual void setRepaintNeeded();
 
  private Q_SLOTS:
-    void setViewport( const ViewportParams *viewport );
     void updateTile( const TileId &id );
 
  private:
