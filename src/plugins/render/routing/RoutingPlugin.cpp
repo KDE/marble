@@ -40,6 +40,7 @@
 #include <QtGui/QPlastiqueStyle>
 #include <QtGui/QDialog>
 #include <QtGui/QPushButton>
+#include <QtGui/QSpacerItem>
 
 namespace Marble
 {
@@ -190,6 +191,7 @@ void RoutingPluginPrivate::updateButtonVisibility()
     bool const near = show && m_nearNextInstruction;
     m_widget.progressBar->setVisible( near );
     m_widget.instructionIconLabel->setVisible( show );
+    m_widget.spacer->changeSize( show ? 10 : 0, 20 );
     m_widget.instructionLabel->setVisible( show );
 
     // m_widget.followingInstructionIconLabel->setVisible( show );
