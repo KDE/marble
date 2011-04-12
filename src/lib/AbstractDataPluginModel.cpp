@@ -461,7 +461,7 @@ void AbstractDataPluginModel::removeItem( QObject *item )
     QHash<QString, AbstractDataPluginItem *>::iterator i;
     for( i = d->m_downloadingItems.begin(); i != d->m_downloadingItems.end(); ++i ) {
         if( (*i) == (AbstractDataPluginItem *) item ) {
-            d->m_downloadingItems.erase( i );
+            i = d->m_downloadingItems.erase( i );
         }
     }
 }
