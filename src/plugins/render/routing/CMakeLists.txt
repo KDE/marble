@@ -6,6 +6,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/routing
  ${CMAKE_BINARY_DIR}/src/plugins/render/routing
  ${QT_INCLUDE_DIR}
+ ${PHONON_INCLUDES}
 )
 INCLUDE(${QT_USE_FILE})
 
