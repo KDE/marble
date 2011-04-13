@@ -147,6 +147,22 @@ Marble::Declarative::Tracking* MarbleWidget::tracking()
     return m_tracking;
 }
 
+Coordinate* MarbleWidget::center()
+{
+    return &m_center;
+}
+
+void MarbleWidget::setCenter( Coordinate* center )
+{
+    if ( center ) {
+        m_center.setLongitude( center->longitude() );
+        m_center.setLatitude( center->latitude() );
+        m_center.setAltitude( center->altitude() );
+        m_marbleWidget->centerOn( center->longitude(), center->latitude() );
+        emit centerChanged();
+    }
+}
+
 }
 }
 

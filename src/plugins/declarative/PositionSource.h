@@ -31,7 +31,7 @@ class PositionSource : public QObject
     Q_PROPERTY( bool active READ active WRITE setActive NOTIFY activeChanged )
     Q_PROPERTY( QString source READ source WRITE setSource NOTIFY sourceChanged )
     Q_PROPERTY( bool hasPosition READ hasPosition NOTIFY hasPositionChanged )
-    Q_PROPERTY( Coordinate* position READ position NOTIFY positionChanged )
+    Q_PROPERTY( Marble::Declarative::Coordinate* position READ position NOTIFY positionChanged )
 
 public:
     explicit PositionSource( QObject* parent = 0);
@@ -46,7 +46,7 @@ public:
 
     bool hasPosition() const;
 
-    Coordinate* position();
+    Marble::Declarative::Coordinate* position();
 
     void setMarbleWidget( MarbleWidget* widget );
 
@@ -71,7 +71,7 @@ private:
 
     bool m_hasPosition;
 
-    Coordinate m_position;
+    Marble::Declarative::Coordinate m_position;
 
     MarbleWidget* m_marbleWidget;
 };

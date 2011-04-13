@@ -12,6 +12,7 @@
 #define DECLARATIVE_MARBLE_WIDGET_H
 
 #include "Tracking.h"
+#include "Coordinate.h"
 
 #include <QtGui/QGraphicsProxyWidget>
 #include <QtCore/QPoint>
@@ -24,8 +25,6 @@ class MarbleWidget;
 namespace Declarative
 {
 
-class Coordinate;
-
 /**
   * Wraps a Marble::MarbleWidget, providing access to important properties and methods
   *
@@ -36,6 +35,8 @@ class Coordinate;
 class MarbleWidget : public QGraphicsProxyWidget
 {
     Q_OBJECT
+
+    Q_PROPERTY( Marble::Declarative::Coordinate* center READ center WRITE setCenter NOTIFY centerChanged )
 
     Q_PROPERTY( QString mapThemeId READ mapThemeId WRITE setMapThemeId )
     Q_PROPERTY( QString projection READ projection WRITE setProjection )
@@ -53,7 +54,13 @@ Q_SIGNALS:
 
     void trackingChanged();
 
+    void centerChanged();
+
 public Q_SLOTS:
+    Marble::Declarative::Coordinate* center();
+
+    void setCenter( Marble::Declarative::Coordinate* center );
+
     /** Returns a list of active (!) float items */
     QStringList activeFloatItems() const;
 
@@ -117,6 +124,8 @@ private:
     bool m_inputEnabled;
 
     Marble::Declarative::Tracking* m_tracking;
+
+    Marble::Declarative::Coordinate m_center;
 };
 
 } // namespace Declarative
