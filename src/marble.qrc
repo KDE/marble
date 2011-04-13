@@ -43,6 +43,10 @@
     <file>icons/instruction-near.png</file>
     <file>icons/instruction-next.png</file>
     <file>icons/gps.png</file>
+    <file>icons/compass.png</file>
+    <file>icons/worldmap.png</file>
+    <file>icons/scalebar.png</file>
+    <file>icons/navigation.png</file>
     <file>icons/crosshairs.png</file>
     <file>icons/16x16/task-accepted.png</file>
     <file>icons/16x16/task-attention.png</file>

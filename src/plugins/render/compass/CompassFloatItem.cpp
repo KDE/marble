@@ -70,7 +70,7 @@ QString CompassFloatItem::description() const
 
 QIcon CompassFloatItem::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/compass.png");
 }
 
 QDialog* CompassFloatItem::aboutDialog()
