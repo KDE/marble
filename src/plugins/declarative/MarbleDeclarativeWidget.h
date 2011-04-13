@@ -11,6 +11,8 @@
 #ifndef DECLARATIVE_MARBLE_WIDGET_H
 #define DECLARATIVE_MARBLE_WIDGET_H
 
+#include "Tracking.h"
+
 #include <QtGui/QGraphicsProxyWidget>
 #include <QtCore/QPoint>
 
@@ -39,6 +41,7 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( QString projection READ projection WRITE setProjection )
     Q_PROPERTY( bool inputEnabled READ inputEnabled WRITE setInputEnabled )
     Q_PROPERTY( QStringList activeFloatItems READ activeFloatItems WRITE setActiveFloatItems )
+    Q_PROPERTY( Marble::Declarative::Tracking* tracking READ tracking NOTIFY trackingChanged )
 
 public:
     /** Constructor */
@@ -47,6 +50,8 @@ public:
 Q_SIGNALS:
     /** Forwarded from MarbleWidget. Zoom value and/or center position have changed */
     void visibleLatLonAltBoxChanged();
+
+    void trackingChanged();
 
 public Q_SLOTS:
     /** Returns a list of active (!) float items */
@@ -103,11 +108,15 @@ public Q_SLOTS:
       */
     Marble::Declarative::Coordinate *coordinate( int x, int y );
 
+    Marble::Declarative::Tracking* tracking();
+
 private:
     /** Wrapped MarbleWidget */
     Marble::MarbleWidget* m_marbleWidget;
 
     bool m_inputEnabled;
+
+    Marble::Declarative::Tracking* m_tracking;
 };
 
 } // namespace Declarative

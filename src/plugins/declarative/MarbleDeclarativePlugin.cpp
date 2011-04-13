@@ -11,9 +11,11 @@
 #include "MarbleDeclarativePlugin.h"
 
 #include "Coordinate.h"
+#include "DeclarativeMapThemeManager.h"
 #include "MarbleDeclarativeWidget.h"
 #include "MarbleDeclarativeRunnerManager.h"
-#include "DeclarativeMapThemeManager.h"
+#include "PositionSource.h"
+#include "Tracking.h"
 
 #include <QtDeclarative/qdeclarative.h>
 #include <QtDeclarative/QDeclarativeEngine>
@@ -28,6 +30,8 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
     const char* uri = "org.kde.edu.marble";
 
     qmlRegisterType<Marble::Declarative::Coordinate>( uri, 0, 11, "Coordinate" );
+    qmlRegisterType<Marble::Declarative::PositionSource>( uri, 0, 11, "PositionSource" );
+    qmlRegisterType<Marble::Declarative::Tracking>( uri, 0, 11, "Tracking" );
 
     qmlRegisterType<Marble::Declarative::MarbleWidget>( uri, 0, 11, "MarbleWidget" );
     qmlRegisterType<Marble::Declarative::MarbleRunnerManager>( uri, 0, 11, "MarbleRunnerManager" );
