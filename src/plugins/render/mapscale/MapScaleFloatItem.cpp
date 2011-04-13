@@ -87,7 +87,7 @@ QString MapScaleFloatItem::description() const
 
 QIcon MapScaleFloatItem::icon () const
 {
-    return QIcon();
+    return QIcon(":/icons/scalebar.png");
 }
 
 

@@ -88,7 +88,7 @@ QString NavigationFloatItem::description() const
 
 QIcon NavigationFloatItem::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/navigation.png");
 }
 
 void NavigationFloatItem::initialize()

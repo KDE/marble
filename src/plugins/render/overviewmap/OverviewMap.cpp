@@ -82,7 +82,7 @@ QString OverviewMap::description() const
 
 QIcon OverviewMap::icon () const
 {
-    return QIcon();
+    return QIcon(":/icons/worldmap.png");
 }
 
 QDialog *OverviewMap::configDialog() const
