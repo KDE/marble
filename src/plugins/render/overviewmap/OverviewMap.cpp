@@ -346,13 +346,14 @@ void OverviewMap::writeSettings()
 
 void OverviewMap::updateSettings()
 {
-    if ( !m_configDialog ) {
-        return;
-    }
-
     m_svgPaths = m_settings.value( "paths" ).toHash();
     m_posColor = m_settings.value( "posColor" ).value<QColor>();
     loadPlanetMaps();
+
+    if ( !m_configDialog ) {
+        return;
+    }
+    
     setCurrentWidget( m_svgWidgets[m_planetID[2]] );
     showCurrentPlanetPreview();
     setContentSize( QSizeF( ui_configWidget->m_widthBox->value(), ui_configWidget->m_heightBox->value() ) );
