@@ -30,13 +30,20 @@ Rectangle {
         active: true
 
         // A small grow/shrink animation of the ghost to indicate position updates
-        onPositionChanged: { growAnimation.running = true }
+        onPositionChanged: {
+            growAnimation.running = true
+            if ( map.autoCenter ) {
+                map.center = gpsd.position
+            }
+        }
     }
 
     // The map widget
     MarbleWidget {
         id: map
         anchors.fill: parent
+
+        property bool autoCenter: false
 
         mapThemeId: "earth/openstreetmap/openstreetmap.dgml"
         activeFloatItems: [ "compass", "scalebar", "progress" ]
@@ -60,30 +67,23 @@ Rectangle {
             positionMarker: marker
         }
 
-        // A control to toggle track visibility
-        Rectangle {
-            id: toggleTrack
-            width: 100; height: 20
-            radius: 5
-            color: map.tracking.showTrack ? "red" : "gray"
-            x: 30; y: 30
+        Row {
+            x: 10; y: 10
+            spacing: 10
 
-            Text {
-                anchors.horizontalCenter: toggleTrack.horizontalCenter
-                anchors.verticalCenter: toggleTrack.verticalCenter
-                anchors.margins: 10
-                color: "white"
-                text: map.tracking.showTrack ? "Track visible" : "Track hidden"
+            Toggle {
+                id: toggleTrack
+                text: "Show Track"
+                onToggled: map.tracking.showTrack = !map.tracking.showTrack
             }
 
-            MouseArea {
-                id: mouseArea
-                anchors.fill: parent
-                onClicked: {
-                    map.tracking.showTrack = !map.tracking.showTrack
-                }
+            Toggle {
+                id: toggleCenter
+                text: "Auto Center"
+                onToggled: map.autoCenter = !map.autoCenter
             }
         }
+
     }
 
     // A small ghost indicates the current position
