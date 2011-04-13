@@ -86,6 +86,8 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
     while( i.hasNext() ) {
         d->uiWidget.comboBoxStaticUrlFormat->addItem( QString( i.next() ) );
     }
+    if ( d->uiWidget.comboBoxStaticUrlFormat->findText("png") != -1 )
+        d->uiWidget.comboBoxStaticUrlFormat->setCurrentIndex( d->uiWidget.comboBoxStaticUrlFormat->findText("png") );
 
     connect( &( d->xmlAccessManager ), SIGNAL( finished( QNetworkReply* ) ), this, SLOT( parseServerCapabilities( QNetworkReply* ) ) );
     connect( &( d->legendAccessManager ), SIGNAL( finished( QNetworkReply* ) ), this, SLOT( createWmsLegend( QNetworkReply* ) ) );
