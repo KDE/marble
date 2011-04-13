@@ -66,6 +66,7 @@ ViewportParamsPrivate::ViewportParamsPrivate()
       m_planetAxis(),
       m_planetAxisMatrix(),
       m_radius( 2000 ),
+      m_angularResolution( 0.25 * M_PI / fabs( (qreal)( m_radius ) ) ),
       m_size( 100, 100 ),
       m_dirtyBox( true ),
       m_viewLatLonAltBox(),
