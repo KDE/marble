@@ -101,7 +101,7 @@ class OverviewMap : public AbstractFloatItem
     QString m_target;
     mutable QSvgRenderer  *m_svgobj;
     mutable QHash<QString, QSvgWidget *> m_svgWidgets;
-    mutable QHash<QString, QVariant> m_svgPaths;
+    mutable QHash<QString, QString> m_svgPaths;
     mutable QStringList    m_planetID;
     QPixmap        m_worldmap;
     QHash<QString,QVariant> m_settings;
