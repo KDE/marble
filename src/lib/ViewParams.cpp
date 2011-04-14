@@ -60,8 +60,8 @@ public:
     GeoSceneSettings m_globalSettings;
 
     // Cached data that will make painting faster.
-    QImage  *m_canvasImage;     // Base image with space and atmosphere
-    QImage  *m_coastImage;      // A slightly higher level image.
+    QSharedPointer<QImage>  m_canvasImage;     // Base image with space and atmosphere
+    QSharedPointer<QImage>  m_coastImage;      // A slightly higher level image.
 
     void initGlobalSettings();
     void propagateGlobalToLocalSettings();
@@ -85,8 +85,6 @@ ViewParamsPrivate::ViewParamsPrivate()
 
 ViewParamsPrivate::~ViewParamsPrivate()
 {
-    delete m_canvasImage;
-    delete m_coastImage;
 }
 
 void ViewParamsPrivate::initGlobalSettings()
@@ -156,7 +154,7 @@ void ViewParams::setProjection(Projection newProjection)
 
     // Repaint the background if necessary
     if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
-        canvasImage()->fill(0); // Using Qt::transparent is wrong here (equals "18")!
+        d->m_canvasImage->fill(0); // Using Qt::transparent is wrong here (equals "18")!
     }
 }
 
@@ -238,7 +236,7 @@ void ViewParams::setRadius(int newRadius)
 
     // Repaint the background if necessary
     if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
-        canvasImage()->fill(0); // Using Qt::transparent is wrong here (equals "18")!
+        d->m_canvasImage->fill(0); // Using Qt::transparent is wrong here (equals "18")!
     }
 
 }
@@ -285,8 +283,7 @@ void ViewParams::setSize( int width, int height )
                                  : QImage::Format_ARGB32_Premultiplied;
 
     // Recreate the canvas image with the new size.
-    delete d->m_canvasImage;
-    d->m_canvasImage = new QImage( width, height, imageFormat );
+    d->m_canvasImage = QSharedPointer<QImage>( new QImage( width, height, imageFormat ) );
 
     // Repaint the background if necessary
     if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
@@ -294,18 +291,27 @@ void ViewParams::setSize( int width, int height )
     }
 
     // Recreate the coastline detection offscreen image
-    delete d->m_coastImage;
-    d->m_coastImage = new QImage( width, height, QImage::Format_RGB32 );
+    d->m_coastImage = QSharedPointer<QImage>( new QImage( width, height, QImage::Format_RGB32 ) );
 }
 
-QImage * ViewParams::canvasImage() const
+QSharedPointer<QImage> ViewParams::canvasImagePtr() const
 {
     return d->m_canvasImage;
 }
 
-QImage * ViewParams::coastImage() const
+QImage * ViewParams::canvasImage() const
+{
+    return d->m_canvasImage.data();
+}
+
+QSharedPointer<QImage> ViewParams::coastImagePtr() const
 {
     return d->m_coastImage;
+}
+
+QImage * ViewParams::coastImage() const
+{
+    return d->m_coastImage.data();
 }
 
 bool ViewParams::showGps() const

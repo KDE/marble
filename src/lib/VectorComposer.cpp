@@ -150,7 +150,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
 {
     loadCoastlines();
 
-    QImage        *origimg = viewParams->coastImage();
+    QSharedPointer<QImage> origimg = viewParams->coastImagePtr();
     Quaternion     rotAxis = viewParams->planetAxis();
 
     origimg->fill( Qt::transparent );
@@ -173,7 +173,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     m_vectorMap->createFromPntMap( s_coastLines, viewParams->viewport() );
     m_vectorMap->setPen( m_textureLandPen );
     m_vectorMap->setBrush( m_textureLandBrush );
-    m_vectorMap->drawMap( origimg, antialiased, viewParams->viewport(),
+    m_vectorMap->drawMap( origimg.data(), antialiased, viewParams->viewport(),
                           viewParams->mapQuality() );
 
     // Islands
@@ -183,7 +183,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     m_vectorMap->createFromPntMap( s_islands, viewParams->viewport() );
     m_vectorMap->setPen( m_textureLandPen );
     m_vectorMap->setBrush( m_textureLandBrush );
-    m_vectorMap->drawMap( origimg, antialiased, viewParams->viewport(),
+    m_vectorMap->drawMap( origimg.data(), antialiased, viewParams->viewport(),
                           viewParams->mapQuality() );
 
     bool showWaterbodies, showLakes;
@@ -198,13 +198,13 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
          m_vectorMap->createFromPntMap( s_lakes, viewParams->viewport() );
          m_vectorMap->setPen( Qt::NoPen );
          m_vectorMap->setBrush( m_textureLakeBrush );
-         m_vectorMap->drawMap( origimg, antialiased, viewParams->viewport(),
+         m_vectorMap->drawMap( origimg.data(), antialiased, viewParams->viewport(),
                                viewParams->mapQuality() );
 
          m_vectorMap->createFromPntMap( s_lakeislands, viewParams->viewport() );
          m_vectorMap->setPen( Qt::NoPen );
          m_vectorMap->setBrush( m_textureLandBrush );
-         m_vectorMap->drawMap( origimg, antialiased, viewParams->viewport(),
+         m_vectorMap->drawMap( origimg.data(), antialiased, viewParams->viewport(),
                                viewParams->mapQuality() );
     }
 
@@ -219,7 +219,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
          m_vectorMap->setPen( Qt::NoPen );
          m_vectorMap->setBrush( m_textureGlacierBrush );
 
-         m_vectorMap->drawMap( origimg, antialiased, viewParams->viewport(),
+         m_vectorMap->drawMap( origimg.data(), antialiased, viewParams->viewport(),
                                viewParams->mapQuality() );
     }
 
