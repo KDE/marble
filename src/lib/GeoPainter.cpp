@@ -46,7 +46,7 @@ GeoPainterPrivate::~GeoPainterPrivate()
 void GeoPainterPrivate::createPolygonsFromLineString( const GeoDataLineString & lineString,
                                                       QVector<QPolygonF *> &polygons )
 {
-    AbstractProjection *projection = m_viewport->currentProjection();
+    const AbstractProjection *projection = m_viewport->currentProjection();
 
     projection->screenCoordinates( lineString, m_viewport, polygons );
 }
@@ -54,7 +54,7 @@ void GeoPainterPrivate::createPolygonsFromLineString( const GeoDataLineString & 
 void GeoPainterPrivate::createPolygonsFromLinearRing( const GeoDataLinearRing & linearRing,
                                                       QVector<QPolygonF *> &polygons )
 {
-    AbstractProjection *projection = m_viewport->currentProjection();
+    const AbstractProjection *projection = m_viewport->currentProjection();
 
     projection->screenCoordinates( linearRing, m_viewport, polygons );
 }
@@ -217,7 +217,7 @@ void GeoPainter::drawAnnotation( const GeoDataCoordinates & position,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
+    const AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( bubbleSize.height() <= 0 ) {
         QRectF rect = QRectF( QPointF( 0.0, 0.0 ), bubbleSize - QSizeF( 2 * xRnd, 0.0 ) );
@@ -245,7 +245,7 @@ void GeoPainter::drawPoint (  const GeoDataCoordinates & position )
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
+    const AbstractProjection *projection = d->m_viewport->currentProjection();
 
     bool visible = projection->screenCoordinates( position, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
 
@@ -284,7 +284,7 @@ void GeoPainter::drawPoints (  const GeoDataCoordinates * positions,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
+    const AbstractProjection *projection = d->m_viewport->currentProjection();
 
     const GeoDataCoordinates * itPoint = positions;
     while( itPoint < positions + pointCount ) {
@@ -313,7 +313,7 @@ void GeoPainter::drawText ( const GeoDataCoordinates & position,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
+    const AbstractProjection *projection = d->m_viewport->currentProjection();
 
     QSizeF textSize( fontMetrics().width( text ), fontMetrics().height() );  
 
@@ -335,7 +335,7 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPosition,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
+    const AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( !isGeoProjected ) {
         bool visible = projection->screenCoordinates( centerPosition, d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
@@ -409,7 +409,7 @@ QRegion GeoPainter::regionFromEllipse ( const GeoDataCoordinates & centerPositio
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
+    const AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( !isGeoProjected ) {
         QRegion regions;
@@ -489,7 +489,7 @@ void GeoPainter::drawImage ( const GeoDataCoordinates & centerPosition,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
+    const AbstractProjection *projection = d->m_viewport->currentProjection();
 
 //    if ( !isGeoProjected ) {
         bool visible = projection->screenCoordinates( centerPosition, d->m_viewport, d->m_x, y, pointRepeatNum, image.size(), globeHidesPoint );
@@ -510,7 +510,7 @@ void GeoPainter::drawPixmap ( const GeoDataCoordinates & centerPosition,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
+    const AbstractProjection *projection = d->m_viewport->currentProjection();
 
 //    if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
@@ -788,7 +788,7 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
+    const AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( !isGeoProjected ) {
         bool visible = projection->screenCoordinates( centerCoordinates, 
@@ -816,7 +816,7 @@ QRegion GeoPainter::regionFromRect ( const GeoDataCoordinates & centerCoordinate
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
+    const AbstractProjection *projection = d->m_viewport->currentProjection();
 
 
     if ( !isGeoProjected ) {
@@ -852,7 +852,7 @@ void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPosition,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
+    const AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the circle geometry into account

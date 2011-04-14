@@ -122,7 +122,7 @@ class MarbleGraphicsItemPrivate
         return list;
     }
 
-    virtual void setProjection( AbstractProjection *projection,
+    virtual void setProjection( const AbstractProjection *projection,
                                 ViewportParams *viewport,
                                 GeoPainter *painter )
     {

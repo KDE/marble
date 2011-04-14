@@ -105,7 +105,7 @@ void AbstractProjection::setRepeatX( bool repeatX )
 
 bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
                                             const ViewportParams *viewport,
-                                            qreal &x, qreal &y )
+                                            qreal &x, qreal &y ) const
 {
     bool globeHidesPoint;
 
@@ -114,7 +114,7 @@ bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
 bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
                                             const ViewportParams *viewport,
-                                            QPointF &screenpoint )
+                                            QPointF &screenpoint ) const
 {
     bool visible;
     qreal x(0), y(0);
@@ -125,7 +125,7 @@ bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
 bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &coordinates,
                                     const ViewportParams *viewport,
-                                    qreal *x, qreal &y, int &pointRepeatNum, bool &globeHidesPoint )
+                                    qreal *x, qreal &y, int &pointRepeatNum, bool &globeHidesPoint ) const
 {
     return screenCoordinates( coordinates, viewport, x, y, pointRepeatNum, 
            QSizeF( 0.0, 0.0 ), globeHidesPoint );
@@ -133,7 +133,7 @@ bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &coordinate
 
 bool AbstractProjection::screenCoordinates( const GeoDataLineString &lineString,
                                                   const ViewportParams *viewport,
-                                                  QVector<QPolygonF *> &polygons )
+                                                  QVector<QPolygonF *> &polygons ) const
 {
     // Compare bounding box size of the line string with the angularResolution
     // Immediately return if the latLonAltBox is smaller.
@@ -167,7 +167,7 @@ bool AbstractProjection::screenCoordinates( const GeoDataLineString &lineString,
 
 bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineString,
                                               const ViewportParams *viewport,
-                                              QVector<QPolygonF *> &polygons )
+                                              QVector<QPolygonF *> &polygons ) const
 {
     const TessellationFlags f = lineString.tessellationFlags();
 
@@ -478,7 +478,7 @@ void AbstractProjectionPrivate::manageHorizonCrossing( bool globeHidesPoint,
 void AbstractProjection::horizonToPolygon( const ViewportParams *viewport,
                                            const GeoDataCoordinates & disappearCoords,
                                            const GeoDataCoordinates & reappearCoords,
-                                           QPolygonF * polygon )
+                                           QPolygonF * polygon ) const
 {
     qreal x, y;
 
@@ -513,7 +513,7 @@ void AbstractProjection::horizonToPolygon( const ViewportParams *viewport,
 }
 
 GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
-                                                      const ViewportParams *viewport )
+                                                      const ViewportParams *viewport ) const
 {
     // For the case where the whole viewport gets covered there is a 
     // pretty dirty and generic detection algorithm:
@@ -643,7 +643,7 @@ void AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &aCoord
                                                 qreal bx, qreal by,
                                                 QPolygonF * polygon,
                                                 const ViewportParams *viewport,
-                                                TessellationFlags f )
+                                                TessellationFlags f ) const
 {
     // We take the manhattan length as a distance approximation
     // that can be too big by a factor of sqrt(2)
@@ -935,7 +935,7 @@ bool AbstractProjectionPrivate::globeHidesPoint( const GeoDataCoordinates &coord
 /* DEPRECATED */
 bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
                                             const ViewportParams *viewport,
-                                            int &x, int &y, bool &globeHidesPoint )
+                                            int &x, int &y, bool &globeHidesPoint ) const
 {
     qreal rx = 0.0;
     qreal ry = 0.0;    
@@ -950,7 +950,7 @@ bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 /* DEPRECATED */
 bool AbstractProjection::screenCoordinates( qreal lon, qreal lat,
                                     const ViewportParams *viewport,
-                                    int &x, int &y )
+                                    int &x, int &y ) const
 {
     GeoDataCoordinates geopoint( lon, lat );
 

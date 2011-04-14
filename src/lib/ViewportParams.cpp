@@ -35,7 +35,7 @@ public:
     // These two go together.  m_currentProjection points to one of
     // the static Projection classes at the bottom.
     Projection           m_projection;
-    AbstractProjection  *m_currentProjection;
+    const AbstractProjection *m_currentProjection;
 
     // Parameters that determine the painting
     Quaternion           m_planetAxis;   // Position, coded in a quaternion
@@ -51,9 +51,9 @@ public:
     bool                 m_dirtyRegion;
     QRegion              m_activeRegion;
 
-    static SphericalProjection  s_sphericalProjection;
-    static EquirectProjection   s_equirectProjection;
-    static MercatorProjection   s_mercatorProjection;
+    static const SphericalProjection  s_sphericalProjection;
+    static const EquirectProjection   s_equirectProjection;
+    static const MercatorProjection   s_mercatorProjection;
 
     GeoDataCoordinates   m_focusPoint;
     bool                 m_hasFocusPoint;
@@ -77,10 +77,9 @@ ViewportParamsPrivate::ViewportParamsPrivate()
 } 
 
 
-// FIXME: avoid usage of static objects
-SphericalProjection  ViewportParamsPrivate::s_sphericalProjection;
-EquirectProjection   ViewportParamsPrivate::s_equirectProjection;
-MercatorProjection   ViewportParamsPrivate::s_mercatorProjection;
+const SphericalProjection  ViewportParamsPrivate::s_sphericalProjection;
+const EquirectProjection   ViewportParamsPrivate::s_equirectProjection;
+const MercatorProjection   ViewportParamsPrivate::s_mercatorProjection;
 
 
 ViewportParams::ViewportParams()
@@ -105,7 +104,7 @@ Projection ViewportParams::projection() const
     return d->m_projection;
 }
 
-AbstractProjection *ViewportParams::currentProjection() const
+const AbstractProjection *ViewportParams::currentProjection() const
 {
     return d->m_currentProjection;
 }

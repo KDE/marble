@@ -64,7 +64,7 @@ class MARBLE_EXPORT ViewParams
     // Convenience methods:
 
     Projection projection() const;
-    AbstractProjection *currentProjection() const;
+    const AbstractProjection *currentProjection() const;
     void setProjection(Projection newProjection);
 
     MapQuality mapQuality() const;

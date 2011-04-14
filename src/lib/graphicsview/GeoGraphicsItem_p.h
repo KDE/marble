@@ -40,7 +40,7 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         return m_positions;
     }
 
-    void setProjection( AbstractProjection *projection,
+    void setProjection( const AbstractProjection *projection,
                         ViewportParams *viewport,
                         GeoPainter *painter )
     {

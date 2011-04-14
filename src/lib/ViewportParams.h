@@ -46,7 +46,7 @@ class MARBLE_EXPORT ViewportParams
 
     // Getters and setters
     Projection projection() const;
-    AbstractProjection *currentProjection() const;
+    const AbstractProjection *currentProjection() const;
     void setProjection(Projection newProjection);
 
     int polarity() const;

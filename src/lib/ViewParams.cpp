@@ -145,7 +145,7 @@ void ViewParams::setMapQuality( MapQuality mapQuality )
     d->m_mapQuality = mapQuality; 
 }
 
-AbstractProjection *ViewParams::currentProjection() const
+const AbstractProjection *ViewParams::currentProjection() const
 {
     return d->m_viewport.currentProjection();
 }

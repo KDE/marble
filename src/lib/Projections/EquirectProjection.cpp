@@ -50,7 +50,7 @@ qreal EquirectProjection::minValidLat() const
 
 bool EquirectProjection::screenCoordinates( const qreal lon, const qreal lat,
                                             const ViewportParams *viewport,
-                                            qreal& x, qreal& y )
+                                            qreal& x, qreal& y ) const
 {
     // Convenience variables
     int  radius = viewport->radius();
@@ -78,7 +78,7 @@ bool EquirectProjection::screenCoordinates( const qreal lon, const qreal lat,
 
 bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
                                             const ViewportParams *viewport,
-                                            qreal &x, qreal &y, bool &globeHidesPoint )
+                                            qreal &x, qreal &y, bool &globeHidesPoint ) const
 {
     globeHidesPoint = false;
 
@@ -114,7 +114,7 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
                                             qreal *x, qreal &y,
                                             int &pointRepeatNum,
                                             const QSizeF& size,
-                                            bool &globeHidesPoint )
+                                            bool &globeHidesPoint ) const
 {
     // On flat projections the observer's view onto the point won't be 
     // obscured by the target planet itself.
@@ -193,7 +193,7 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 bool EquirectProjection::geoCoordinates( const int x, const int y,
                                          const ViewportParams *viewport,
                                          qreal& lon, qreal& lat,
-                                         GeoDataCoordinates::Unit unit )
+                                         GeoDataCoordinates::Unit unit ) const
 {
     int   radius          = viewport->radius();
     int   halfImageWidth  = viewport->width() / 2;
@@ -232,7 +232,7 @@ bool EquirectProjection::geoCoordinates( const int x, const int y,
 }
 
 GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
-                                                      const ViewportParams *viewport )
+                                                      const ViewportParams *viewport ) const
 {
     // Convenience variables
     int  radius = viewport->radius();

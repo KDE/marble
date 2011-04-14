@@ -93,7 +93,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         return absolutePositions;
     }
 
-    void setProjection( AbstractProjection *projection,
+    void setProjection( const AbstractProjection *projection,
                         ViewportParams *viewport,
                         GeoPainter *painter )
     {

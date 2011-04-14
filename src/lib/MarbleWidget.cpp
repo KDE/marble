@@ -1101,7 +1101,7 @@ void MarbleWidget::setSelection( const QRect& region )
     mDebug() << "Selection region: (" << tl.x() << ", " <<  tl.y() << ") (" 
              << br.x() << ", " << br.y() << ")" << endl;
 
-    AbstractProjection *proj = viewport()->currentProjection();
+    const AbstractProjection *proj = viewport()->currentProjection();
     GeoDataLatLonAltBox box  = proj->latLonAltBox( region, viewport() );
 
     // NOTE: coordinates as lon1, lat1, lon2, lat2 (or West, North, East, South)

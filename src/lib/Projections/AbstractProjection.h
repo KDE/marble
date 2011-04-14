@@ -115,7 +115,7 @@ class MARBLE_EXPORT AbstractProjection
      */
     virtual bool screenCoordinates( const qreal lon, const qreal lat,
                                     const ViewportParams *viewport,
-                                    qreal& x, qreal& y ) = 0;
+                                    qreal& x, qreal& y ) const = 0;
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
@@ -134,16 +134,16 @@ class MARBLE_EXPORT AbstractProjection
     virtual bool screenCoordinates( const GeoDataCoordinates &geopoint, 
                                     const ViewportParams *viewport,
                                     qreal &x, qreal &y, 
-                                    bool &globeHidesPoint ) = 0;
+                                    bool &globeHidesPoint ) const = 0;
 
     // Will just call the virtual version with a dummy globeHidesPoint.
     bool screenCoordinates( const GeoDataCoordinates &geopoint, 
                             const ViewportParams *viewport,
-                            qreal &x, qreal &y );
+                            qreal &x, qreal &y ) const;
 
     bool screenCoordinates( const GeoDataCoordinates &geopoint,
                             const ViewportParams *viewport,
-                            QPointF &screenpoint );
+                            QPointF &screenpoint ) const;
 
     /**
      * @brief Get the coordinates of screen points for geographical coordinates in the map.
@@ -164,18 +164,18 @@ class MARBLE_EXPORT AbstractProjection
     bool screenCoordinates( const GeoDataCoordinates &coordinates,
                                     const ViewportParams *viewport,
                                     qreal *x, qreal &y, int &pointRepeatNum,
-                                    bool &globeHidesPoint );
+                                    bool &globeHidesPoint ) const;
 
     virtual bool screenCoordinates( const GeoDataCoordinates &coordinates,
                                     const ViewportParams *viewport,
                                     qreal *x, qreal &y, int &pointRepeatNum,
                                     const QSizeF& size,
-                                    bool &globeHidesPoint ) = 0;
+                                    bool &globeHidesPoint ) const = 0;
 
 
     bool screenCoordinates( const GeoDataLineString &lineString,
                             const ViewportParams *viewport,
-                            QVector<QPolygonF*> &polygons );
+                            QVector<QPolygonF*> &polygons ) const;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -191,11 +191,11 @@ class MARBLE_EXPORT AbstractProjection
     virtual bool geoCoordinates( const int x, const int y,
                                  const ViewportParams *viewport,
                                  qreal& lon, qreal& lat,
-                                 GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) = 0;
+                                 GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const = 0;
 
 
     virtual GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
-                                                      const ViewportParams *viewport );
+                                              const ViewportParams *viewport ) const;
 
     bool exceedsLatitudeRange( const GeoDataCoordinates& coords ) const;
 
@@ -216,22 +216,22 @@ class MARBLE_EXPORT AbstractProjection
      */
     bool screenCoordinates( qreal lon, qreal lat,
                                     const ViewportParams *viewport,
-                                    int& x, int& y );
+                                    int& x, int& y ) const;
 
     /* DEPRECATED */
     bool screenCoordinates( const GeoDataCoordinates &geopoint, 
                                     const ViewportParams *viewport,
-                                    int &x, int &y, bool &globeHidesPoint );
+                                    int &x, int &y, bool &globeHidesPoint ) const;
 
  protected:
     bool lineStringToPolygon( const GeoDataLineString &lineString,
                                     const ViewportParams *viewport,
-                                    QVector<QPolygonF*> &polygons );
+                                    QVector<QPolygonF*> &polygons ) const;
 
     virtual void horizonToPolygon( const ViewportParams *viewport,
                            const GeoDataCoordinates & disappearCoords,
                            const GeoDataCoordinates & reappearCoords,
-                           QPolygonF* );
+                           QPolygonF* ) const;
 
     // This method tessellates a line segment in a way that the line segment
     // follows great circles. The count parameter specifies the
@@ -245,7 +245,7 @@ class MARBLE_EXPORT AbstractProjection
                                     qreal bx, qreal by,
                                     QPolygonF * polygon,
                                     const ViewportParams *viewport,
-                                    TessellationFlags f = 0 );
+                                    TessellationFlags f = 0 ) const;
 
  private:
     Q_DISABLE_COPY( AbstractProjection )

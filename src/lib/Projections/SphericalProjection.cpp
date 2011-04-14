@@ -64,7 +64,7 @@ qreal SphericalProjection::minValidLat() const
 
 bool SphericalProjection::screenCoordinates( const qreal lon, const qreal lat,
                                              const ViewportParams *viewport,
-                                             qreal& x, qreal& y )
+                                             qreal& x, qreal& y ) const
 {
     Quaternion  p( lon, lat );
     p.rotateAroundAxis( viewport->planetAxis().inverse() );
@@ -79,7 +79,7 @@ bool SphericalProjection::screenCoordinates( const qreal lon, const qreal lat,
 
 bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinates, 
                                              const ViewportParams *viewport,
-                                             qreal &x, qreal &y, bool &globeHidesPoint )
+                                             qreal &x, qreal &y, bool &globeHidesPoint ) const
 {
     qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = coordinates.quaternion();
@@ -129,7 +129,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
                                              qreal *x, qreal &y,
                                              int &pointRepeatNum,
                                              const QSizeF& size,
-                                             bool &globeHidesPoint )
+                                             bool &globeHidesPoint ) const
 {
     qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = coordinates.quaternion();
@@ -184,7 +184,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
 bool SphericalProjection::geoCoordinates( const int x, const int y,
                                           const ViewportParams *viewport,
                                           qreal& lon, qreal& lat,
-                                          GeoDataCoordinates::Unit unit )
+                                          GeoDataCoordinates::Unit unit ) const
 {
     const qreal  inverseRadius = 1.0 / (qreal)(viewport->radius());
 
@@ -210,7 +210,7 @@ bool SphericalProjection::geoCoordinates( const int x, const int y,
 }
 
 GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
-                                                       const ViewportParams *viewport )
+                                                       const ViewportParams *viewport ) const
 {
     // For the case where the whole viewport gets covered there is a 
     // pretty dirty and generic detection algorithm:

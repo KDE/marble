@@ -54,7 +54,7 @@ qreal MercatorProjection::minValidLat() const
 
 bool MercatorProjection::screenCoordinates( const qreal lon, const qreal _lat,
                                             const ViewportParams *viewport,
-                                            qreal& x, qreal& y )
+                                            qreal& x, qreal& y ) const
 {
     bool retval = true;
     qreal lat = _lat;
@@ -92,7 +92,7 @@ bool MercatorProjection::screenCoordinates( const qreal lon, const qreal _lat,
 
 bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
                                             const ViewportParams *viewport,
-                                            qreal &x, qreal &y, bool &globeHidesPoint )
+                                            qreal &x, qreal &y, bool &globeHidesPoint ) const
 {
     globeHidesPoint = false;
     qreal  lon;
@@ -143,7 +143,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
                                             const ViewportParams *viewport,
                                             qreal *x, qreal &y, int &pointRepeatNum,
                                             const QSizeF& size,
-                                            bool &globeHidesPoint )
+                                            bool &globeHidesPoint ) const
 {
     // On flat projections the observer's view onto the point won't be 
     // obscured by the target planet itself.
@@ -239,7 +239,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
 bool MercatorProjection::geoCoordinates( const int x, const int y,
                                          const ViewportParams *viewport,
                                          qreal& lon, qreal& lat,
-                                         GeoDataCoordinates::Unit unit )
+                                         GeoDataCoordinates::Unit unit ) const
 {
     int           radius             = viewport->radius();
     int           halfImageWidth     = viewport->width() / 2;
@@ -282,7 +282,7 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
 
 
 GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
-                                                      const ViewportParams *viewport )
+                                                      const ViewportParams *viewport ) const
 {
     // For the case where the whole viewport gets covered there is a 
     // pretty dirty and generic detection algorithm:
@@ -365,7 +365,7 @@ QPainterPath MercatorProjection::mapShape( const ViewportParams *viewport ) cons
     qreal  yTop;
     qreal  yBottom;
     qreal  xDummy;
-    AbstractProjection *proj = viewport->currentProjection();
+    const AbstractProjection *proj = viewport->currentProjection();
 
     // Get the top and bottom y coordinates of the projected map.
     proj->screenCoordinates( 0.0, proj->maxLat(), viewport,
