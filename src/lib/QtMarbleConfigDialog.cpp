@@ -556,12 +556,12 @@ QFont QtMarbleConfigDialog::mapFont() const
 
 Marble::GraphicsSystem QtMarbleConfigDialog::graphicsSystem() const
 {
-    QString graphicsSystemString = d->m_settings->value( "View/graphicsSystem", "native" ).toString();
+    QString graphicsSystemString = d->m_settings->value( "View/graphicsSystem", "raster" ).toString();
 
     if ( graphicsSystemString == "raster" ) return Marble::RasterGraphics;
     if ( graphicsSystemString == "opengl" ) return Marble::OpenGLGraphics;
 
-    // default case:  graphicsSystemString == "native"
+    // default case:  graphicsSystemString == "raster"
     return Marble::NativeGraphics;
 }
 

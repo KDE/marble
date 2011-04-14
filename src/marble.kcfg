@@ -126,7 +126,7 @@
     <choice name="RasterGraphics"/>
     <choice name="OpenGLGraphics"/>
    </choices>
-   <default>Marble::NativeGraphics</default>
+   <default>Marble::RasterGraphics</default>
   </entry>
   <entry key="labelLocalization" type="Enum" >
    <label>The localization of the labels.</label>

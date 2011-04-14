@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     // QApplication. Therefore we need to parse the current setting 
     // in this unusual place :-/
     QSettings * graphicsSettings = new QSettings("kde.org", "Marble Desktop Globe");
-    QString graphicsString = graphicsSettings->value("View/graphicsSystem", "native").toString();
+    QString graphicsString = graphicsSettings->value("View/graphicsSystem", "raster").toString();
     delete graphicsSettings;
     QApplication::setGraphicsSystem( graphicsString );
 

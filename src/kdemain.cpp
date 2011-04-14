@@ -44,7 +44,7 @@ QString readGraphicsSystem( int argc, char *argv[], const KAboutData& aboutData 
     KComponentData componentData( aboutData, KComponentData::SkipMainComponentRegistration );
 
     KConfigGroup viewGroup( componentData.config(), "View" );
-    QString graphicsSystem = viewGroup.readEntry( "graphicsSystem", "NativeGraphics" );
+    QString graphicsSystem = viewGroup.readEntry( "graphicsSystem", "RasterGraphics" );
 
     QString graphicsString( "native" );
     if ( graphicsSystem == QString( "RasterGraphics" ) ) {
