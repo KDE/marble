@@ -15,6 +15,7 @@
 #include <cmath>
 
 #include <QtCore/QFile>
+#include <QtCore/QSharedPointer>
 #include <QtCore/QString>
 #include <QtCore/QTime>
 #include <QtGui/QColor>
@@ -170,8 +171,8 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     // update coastimg
     m_veccomposer.drawTextureMap( viewParams );
 
-    QImage        *origimg  = viewParams->canvasImage();
-    const QImage  *coastimg = viewParams->coastImage();
+    QSharedPointer<QImage>        origimg = viewParams->canvasImagePtr();
+    QSharedPointer<const QImage>  coastimg = viewParams->coastImagePtr();
     const qint64   radius   = viewParams->radius();
 
     const int  imgheight = origimg->height();

@@ -188,7 +188,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         return;
 
     // const int imgwidth  = viewParams->canvasImage()->width();
-    const int imgheight = viewParams->canvasImage()->height();
+    const int imgheight = viewParams->canvasImagePtr()->height();
 
     if ( m_styleResetRequested ) {
         m_styleResetRequested = false;
