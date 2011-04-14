@@ -53,7 +53,6 @@ OverviewMap::OverviewMap( const QPointF &point, const QSizeF &size )
 
 OverviewMap::~OverviewMap()
 {
-    qDeleteAll( m_svgWidgets.values() );
 }
 
 QStringList OverviewMap::backendTypes() const
@@ -453,7 +452,7 @@ void OverviewMap::loadMapSuggestions() const
     ui_configWidget->m_tableWidget->setRowCount( paths.size() );
     for( int i = 0; i < paths.size(); ++i ) {
         ui_configWidget->m_tableWidget->setCellWidget( i, 0, new QSvgWidget( paths[i], m_configDialog ) );
-        ui_configWidget->m_tableWidget->setItem( i, 1, new QTableWidgetItem( paths[i], m_configDialog ) );
+        ui_configWidget->m_tableWidget->setItem( i, 1, new QTableWidgetItem( paths[i] ) );
     }
 }
 
@@ -483,14 +482,9 @@ void OverviewMap::synchronizeSpinboxes()
 
 void OverviewMap::showCurrentPlanetPreview() const
 {
-    static int lastIndex = -1;
-    if( lastIndex != -1 ) {
-        m_svgWidgets.values()[lastIndex]->setParent( NULL );
-    }
     delete ui_configWidget->m_fileChooserButton->layout();
     ui_configWidget->m_fileChooserButton->setLayout( new QHBoxLayout() );
     ui_configWidget->m_fileChooserButton->layout()->addWidget( currentWidget() );
-    lastIndex = m_svgWidgets.values().indexOf( currentWidget() );
 }
 
 void OverviewMap::choosePositionIndicatorColor()
