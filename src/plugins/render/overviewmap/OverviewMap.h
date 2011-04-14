@@ -20,11 +20,10 @@
 #include <QtGui/QColor>
 #include <QtGui/QAbstractButton>
 #include <QtSvg/QSvgWidget>
+#include <QtSvg/QSvgRenderer>
 
 #include "GeoDataLatLonAltBox.h"
 #include "AbstractFloatItem.h"
-
-class QSvgRenderer;
 
 namespace Ui
 {
@@ -99,7 +98,7 @@ class OverviewMap : public AbstractFloatItem
     void loadMapSuggestions();
 
     QString m_target;
-    QSvgRenderer  *m_svgobj;
+    QSvgRenderer   m_svgobj;
     QHash<QString, QSvgWidget *> m_svgWidgets;
     QHash<QString, QString> m_svgPaths;
     QStringList    m_planetID;
