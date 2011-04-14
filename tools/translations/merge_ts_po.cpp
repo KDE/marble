@@ -58,8 +58,11 @@ int main( int argc, char** argv )
                 ignore = false;
             } else {
                 QString translation = line.mid( 8, line.size() - 9 );
+                source.replace( "&", "&amp;" );
                 translation.replace( "&", "&amp;" );
+                source.replace( "<", "&lt;" );
                 translation.replace( "<", "&lt;" );
+                source.replace( ">", "&gt;" );
                 translation.replace( ">", "&gt;" );
                 if ( !translation.isEmpty() ) {
                     translations[source] = translation;
