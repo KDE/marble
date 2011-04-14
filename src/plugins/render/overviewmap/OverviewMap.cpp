@@ -38,7 +38,6 @@ namespace Marble
 OverviewMap::OverviewMap( const QPointF &point, const QSizeF &size )
     : AbstractFloatItem( point, size ),
       m_target( QString() ),
-      m_svgobj( 0 ),
       m_planetID( Planet::planetList() ),
       m_defaultSize( size ),
       m_configDialog( 0 ),
@@ -54,7 +53,6 @@ OverviewMap::OverviewMap( const QPointF &point, const QSizeF &size )
 
 OverviewMap::~OverviewMap()
 {
-    delete m_svgobj;
     qDeleteAll( m_svgWidgets.values() );
 }
 
@@ -176,7 +174,7 @@ void OverviewMap::paintContent( GeoPainter *painter, ViewportParams *viewport,
         changeBackground( target );
     }
 
-    if ( m_svgobj ) {
+    if ( m_svgobj.isValid() ) {
         // Rerender worldmap pixmap if the size or map has changed
         if ( m_worldmap.size() != mapRect.size().toSize() 
             || target != m_target || m_mapChanged ) {
@@ -186,7 +184,7 @@ void OverviewMap::paintContent( GeoPainter *painter, ViewportParams *viewport,
             QPainter mapPainter;
             mapPainter.begin( &m_worldmap );
             mapPainter.setViewport( m_worldmap.rect() );
-            m_svgobj->render( &mapPainter );
+            m_svgobj.render( &mapPainter );
             mapPainter.end(); 
         }
 
@@ -417,8 +415,7 @@ bool OverviewMap::eventFilter( QObject *object, QEvent *e )
 
 void OverviewMap::changeBackground( const QString& target ) const
 {
-    delete m_svgobj;
-    m_svgobj = new QSvgRenderer( m_svgPaths[target] );
+    m_svgobj.load( m_svgPaths[target] );
 }
 
 QSvgWidget *OverviewMap::currentWidget() const
@@ -438,7 +435,11 @@ void OverviewMap::setCurrentWidget( QSvgWidget *widget ) const
 void OverviewMap::loadPlanetMaps() const
 {
     foreach( const QString& planet, m_planetID ) {
-        m_svgWidgets[planet] = new QSvgWidget( m_svgPaths[planet] );
+        if ( m_svgWidgets.contains( planet) ) {
+            m_svgWidgets[planet]->load( m_svgPaths[planet] );
+        } else {
+            m_svgWidgets[planet] = new QSvgWidget( m_svgPaths[planet], m_configDialog );
+        }
     }
 }
 
@@ -451,8 +452,8 @@ void OverviewMap::loadMapSuggestions() const
     paths << MarbleDirs::path( "svg/worldmap.svg" ) << MarbleDirs::path( "svg/lunarmap.svg" );
     ui_configWidget->m_tableWidget->setRowCount( paths.size() );
     for( int i = 0; i < paths.size(); ++i ) {
-        ui_configWidget->m_tableWidget->setCellWidget( i, 0, new QSvgWidget( paths[i] ) );
-        ui_configWidget->m_tableWidget->setItem( i, 1, new QTableWidgetItem( paths[i] ) );
+        ui_configWidget->m_tableWidget->setCellWidget( i, 0, new QSvgWidget( paths[i], m_configDialog ) );
+        ui_configWidget->m_tableWidget->setItem( i, 1, new QTableWidgetItem( paths[i], m_configDialog ) );
     }
 }
 
