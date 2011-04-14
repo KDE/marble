@@ -228,10 +228,20 @@ install (FILES
   ${STAR_FILES}
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/stars)
 
-FILE (GLOB PLACEMARK_FILES placemarks/*.cache)
 install (FILES
-  ${PLACEMARK_FILES}
+placemarks/elevplacemarks.cache
+placemarks/otherplacemarks.cache
+placemarks/baseplacemarks.cache
+placemarks/moonlandingsites.cache
+placemarks/boundaryplacemarks.cache
+placemarks/moonterrain.cache
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/placemarks)
+
+if(MOBILE)
+    install (FILES placemarks/cityplacemarks_large_population.cache DESTINATION ${MARBLE_DATA_INSTALL_PATH}/placemarks RENAME placemarks/cityplacemarks.cache)
+else(MOBILE)
+    install (FILES placemarks/cityplacemarks.cache DESTINATION ${MARBLE_DATA_INSTALL_PATH}/placemarks)
+endif(MOBILE)
 
 if(NOT APPLE AND NOT WIN32)
   if(QTONLY)
