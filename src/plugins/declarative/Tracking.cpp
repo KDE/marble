@@ -129,6 +129,11 @@ void Tracking::updatePositionMarker()
                 item->setPos( x - item->width() / 2.0, y - item->height() / 2.0 );
             }
         }
+    } else if ( m_positionMarker && ( !m_positionSource || ( m_positionSource && !m_positionSource->hasPosition() ) ) ) {
+        QDeclarativeItem* item = qobject_cast<QDeclarativeItem*>( m_positionMarker );
+        if ( item ) {
+            item->setVisible( false );
+        }
     }
 }
 

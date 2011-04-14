@@ -45,6 +45,11 @@ void PositionSource::setActive( bool active )
             tracking->setPositionProviderPlugin( 0 );
         }
 
+        if ( m_hasPosition ) {
+            m_hasPosition = false;
+            emit hasPositionChanged();
+        }
+
         m_active = active;
         emit activeChanged();
     }
@@ -59,6 +64,11 @@ void PositionSource::setSource( const QString &source )
 {
     if ( source != m_source ) {
         m_source = source;
+        if ( m_hasPosition ) {
+            m_hasPosition = false;
+            emit hasPositionChanged();
+        }
+
         if ( active() ) {
             start();
         }
