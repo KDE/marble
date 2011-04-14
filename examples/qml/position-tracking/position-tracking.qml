@@ -26,8 +26,8 @@ Rectangle {
         // e.g. Gpsd
         //source: "Gpsd"
 
-        // This starts gps tracking
-        active: true
+        // This starts/stops gps tracking
+        active: false
 
         // A small grow/shrink animation of the ghost to indicate position updates
         onPositionChanged: {
@@ -70,6 +70,13 @@ Rectangle {
         Row {
             x: 10; y: 10
             spacing: 10
+
+            Toggle {
+                id: toggleGps
+                width: 140
+                text: gpsd.active ? "(" + Math.round( 100000 * gpsd.position.longitude ) / 100000 + ", " + Math.round( 100000 * gpsd.position.latitude ) / 100000 + ")" : "GPS off"
+                onToggled: gpsd.active = !gpsd.active
+            }
 
             Toggle {
                 id: toggleTrack
