@@ -292,20 +292,22 @@ void OverviewMap::setSettings( QHash<QString,QVariant> settings )
     if( !settings.contains( "height" ) ) {
         settings.insert( "height", m_defaultSize.toSize().height() );
     }
-
-    // FIXME add SVGs for other planets
-    QHash<QString, QVariant> paths;
-    foreach( const QString& planet, Planet::planetList() ) {
-        paths[planet] = MarbleDirs::path( "svg/worldmap.svg" );
+    QString const worldmap = MarbleDirs::path( "svg/worldmap.svg" );
+    QStringList const planets = Planet::planetList();
+    if ( !settings.contains( "path_" + m_planetID[2] ) ) {
+        settings.insert( "path_" + m_planetID[2], worldmap );
     }
-    paths[m_planetID[2]] = MarbleDirs::path( "svg/worldmap.svg" );
-    paths[m_planetID[10]] = MarbleDirs::path( "svg/lunarmap.svg" );
-
-    if( !settings.contains( "paths" ) ) {
-        settings.insert( "paths", paths );
+    if ( !settings.contains( "path_" + m_planetID[10] ) ) {
+        settings.insert( "path_" + m_planetID[10], MarbleDirs::path( "svg/lunarmap.svg" ) );
     }
+    foreach( const QString& planet, planets ) {
+        if ( !settings.contains( "path_" + planet ) ) {
+            settings.insert( "path_" + planet, worldmap );
+        }
+    }
+
     if( !settings.contains( "posColor" ) ) {
-        settings.insert( "posColor", QColor( Qt::white ) );
+        settings.insert( "posColor", QColor( Qt::white ).name() );
     }
 
     m_settings = settings;
@@ -322,7 +324,7 @@ void OverviewMap::readSettings()
     ui_configWidget->m_widthBox->setValue( m_settings.value( "width" ).toInt() );
     ui_configWidget->m_heightBox->setValue( m_settings.value( "height" ).toInt() );
     QPalette palette = ui_configWidget->m_colorChooserButton->palette();
-    palette.setColor( QPalette::Button, m_settings.value( "posColor" ).value<QColor>() );
+    palette.setColor( QPalette::Button, QColor( m_settings.value( "posColor" ).toString() ) );
     ui_configWidget->m_colorChooserButton->setPalette( palette );
 }
 
@@ -334,16 +336,25 @@ void OverviewMap::writeSettings()
 
     m_settings.insert( "width", contentRect().width() );
     m_settings.insert( "height", contentRect().height() );
-    m_settings.insert( "paths", m_svgPaths );
-    m_settings.insert( "posColor", m_posColor );
+
+    QStringList const planets = Planet::planetList();
+    foreach( const QString &planet, planets ) {
+        m_settings.insert( "path_" + planet, m_svgPaths[planet] );
+    }
+
+    m_settings.insert( "posColor", m_posColor.name() );
 
     emit settingsChanged( nameId() );
 }
 
 void OverviewMap::updateSettings()
 {
-    m_svgPaths = m_settings.value( "paths" ).toHash();
-    m_posColor = m_settings.value( "posColor" ).value<QColor>();
+    QStringList const planets = Planet::planetList();
+    foreach( const QString &planet, planets ) {
+        m_svgPaths.insert( planet, m_settings.value( "path_" + planet, QString() ).toString() );
+    }
+
+    m_posColor = QColor( m_settings.value( "posColor" ).toString() );
     loadPlanetMaps();
 
     if ( !m_configDialog ) {
@@ -403,7 +414,7 @@ bool OverviewMap::eventFilter( QObject *object, QEvent *e )
 void OverviewMap::changeBackground( const QString& target )
 {
     delete m_svgobj;
-    m_svgobj = new QSvgRenderer( m_svgPaths[target].toString() );
+    m_svgobj = new QSvgRenderer( m_svgPaths[target] );
 }
 
 QSvgWidget *OverviewMap::currentWidget() const
@@ -423,7 +434,7 @@ void OverviewMap::setCurrentWidget( QSvgWidget *widget )
 void OverviewMap::loadPlanetMaps()
 {
     foreach( const QString& planet, m_planetID ) {
-        m_svgWidgets[planet] = new QSvgWidget( m_svgPaths[planet].toString() );
+        m_svgWidgets[planet] = new QSvgWidget( m_svgPaths[planet] );
     }
 }
 
