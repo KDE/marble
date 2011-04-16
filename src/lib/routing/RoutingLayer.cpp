@@ -108,6 +108,8 @@ public:
 
     AlternativeRoutesModel* m_alternativeRoutesModel;
 
+    bool m_viewportChanged;
+
     /** Constructor */
     explicit RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget );
 
@@ -176,7 +178,8 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
         m_pointSelection( false ), m_routingModel( 0 ), m_placemarkModel( 0 ), m_selectionModel( 0 ),
         m_routeDirty( false ), m_pixmapSize( 22, 22 ), m_routeRequest( 0 ), m_activeMenuIndex( -1 ),
         m_alternativeRoutesView( 0 ),
-        m_alternativeRoutesModel( widget->model()->routingManager()->alternativeRoutesModel() )
+        m_alternativeRoutesModel( widget->model()->routingManager()->alternativeRoutesModel() ),
+        m_viewportChanged( true )
 {
     m_contextMenu = new MarbleWidgetPopupMenu( m_marbleWidget, m_marbleWidget->model() );
     m_removeViaPointAction = new QAction( QObject::tr( "&Remove this destination" ), q );
@@ -237,7 +240,9 @@ void RoutingLayerPrivate::renderPlacemarks( GeoPainter *painter )
 
 void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
 {
-    m_alternativeRouteRegions.clear();
+    if ( m_viewportChanged ) {
+        m_alternativeRouteRegions.clear();
+    }
 
     QPen grayPen( alphaAdjusted( oxygenAluminumGray4, 200 ) );
     grayPen.setWidth( 5 );
@@ -245,12 +250,14 @@ void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
 
     for ( int i=0; i<m_alternativeRoutesModel->rowCount(); ++i ) {
         GeoDataDocument* route = m_alternativeRoutesModel->route( i );
-        if ( route ) {
+        if ( route && route != m_alternativeRoutesModel->currentRoute() ) {
             GeoDataLineString* points = AlternativeRoutesModel::waypoints( route );
             if ( points ) {
                 painter->drawPolyline( *points );
-                QRegion region = painter->regionFromPolyline( *points, 8 );
-                m_alternativeRouteRegions.push_back( RequestRegion( i, region ) );
+                if ( m_viewportChanged ) {
+                    QRegion region = painter->regionFromPolyline( *points, 8 );
+                    m_alternativeRouteRegions.push_back( RequestRegion( i, region ) );
+                }
             }
         }
     }
@@ -279,7 +286,9 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
     painter->setPen( bluePen );
 
     painter->drawPolyline( waypoints );
-    m_routeRegion = painter->regionFromPolyline( waypoints, 8 );
+    if ( m_viewportChanged ) {
+        m_routeRegion = painter->regionFromPolyline( waypoints, 8 );
+    }
 
     bluePen.setWidth( 2 );
     painter->setPen( bluePen );
@@ -668,6 +677,10 @@ RoutingLayer::RoutingLayer( MarbleWidget *widget, QWidget *parent ) :
     widget->installEventFilter( this );
     connect( widget->model()->routingManager(), SIGNAL( stateChanged( RoutingManager::State, RouteRequest* ) ),
              this, SLOT( updateRouteState( RoutingManager::State, RouteRequest* ) ) );
+    connect( widget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
+            this, SLOT( setViewportChanged() ) );
+    connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
+            this, SLOT( setViewportChanged() ) );
 }
 
 RoutingLayer::~RoutingLayer()
@@ -715,6 +728,7 @@ bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
     }
 
     painter->restore();
+    d->m_viewportChanged = false;
     return true;
 }
 
@@ -749,12 +763,14 @@ void RoutingLayer::setModel ( RoutingModel *model )
 {
     d->m_placemarkModel = 0;
     d->m_routingModel = model;
+    setViewportChanged();
 }
 
 void RoutingLayer::setModel ( MarblePlacemarkModel *model )
 {
     d->m_routingModel = 0;
     d->m_placemarkModel = model;
+    setViewportChanged();
 }
 
 void RoutingLayer::synchronizeWith( QAbstractProxyModel *model, QItemSelectionModel *selection )
@@ -768,7 +784,7 @@ void RoutingLayer::synchronizeAlternativeRoutesWith( QComboBox *view )
     d->m_alternativeRoutesView = view;
 
     connect( d->m_alternativeRoutesModel, SIGNAL( rowsInserted( QModelIndex, int, int) ),
-             this, SLOT( showAlternativeRoads() ) );
+             this, SLOT( showAlternativeRoutes() ) );
 }
 
 void RoutingLayer::setPointSelectionEnabled( bool enabled )
@@ -803,8 +819,9 @@ void RoutingLayer::removeViaPoint()
     }
 }
 
-void RoutingLayer::showAlternativeRoads()
+void RoutingLayer::showAlternativeRoutes()
 {
+    setViewportChanged();
     d->m_marbleWidget->repaint();
 }
 
@@ -832,6 +849,12 @@ void RoutingLayer::updateRouteState( RoutingManager::State state, RouteRequest *
 {
     d->m_routeRequest = route;
     setRouteDirty( state == RoutingManager::Downloading );
+    setViewportChanged();
+}
+
+void RoutingLayer::setViewportChanged()
+{
+    d->m_viewportChanged = true;
 }
 
 } // namespace Marble

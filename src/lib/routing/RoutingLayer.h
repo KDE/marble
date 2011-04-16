@@ -130,7 +130,7 @@ protected:
 private Q_SLOTS:
     void removeViaPoint();
 
-    void showAlternativeRoads();
+    void showAlternativeRoutes();
 
     /** Export route to a file */
     void exportRoute();
@@ -139,6 +139,11 @@ private Q_SLOTS:
       * Paint a dashed route when downloading a new route, a solid one otherwise.
       */
     void updateRouteState( RoutingManager::State state, RouteRequest *route );
+
+    /**
+      * The viewport has changed, recalculate positions accordingly
+      */
+    void setViewportChanged();
 
 private:
     RoutingLayerPrivate *const d;
