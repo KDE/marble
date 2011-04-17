@@ -89,11 +89,6 @@ NavigationWidget::NavigationWidget( QWidget *parent, Qt::WindowFlags f )
              this,                               SLOT( searchLineChanged( const QString& ) ) );
     connect( d->m_navigationUi.searchLineEdit,   SIGNAL( returnPressed() ),
              this,                               SLOT( searchReturnPressed() ) );
-
-    connect( d->m_navigationUi.zoomSlider,       SIGNAL( sliderPressed() ),
-             this,                               SLOT( adjustForAnimation() ) );
-    connect( d->m_navigationUi.zoomSlider,       SIGNAL( sliderReleased() ),
-             this,                               SLOT( adjustForStill() ) );
 }
 
 NavigationWidget::~NavigationWidget()
@@ -232,24 +227,6 @@ void NavigationWidget::mapCenterOnSignal( const QModelIndex &index )
         d->m_widget->centerOn( coord, true );
         d->m_widget->model()->placemarkSelectionModel()->select( d->m_sortproxy->mapToSource( index ), QItemSelectionModel::ClearAndSelect );
     }
-}
-
-void NavigationWidget::adjustForAnimation()
-{
-    // TODO: use signals here as well
-    if ( !d->m_widget )
-        return;
-
-    d->m_widget->setViewContext( Animation );
-}
-
-void NavigationWidget::adjustForStill()
-{
-    // TODO: use signals here as well
-    if ( !d->m_widget )
-        return;
-
-    d->m_widget->setViewContext( Still );
 }
 
 void NavigationWidget::resizeEvent ( QResizeEvent * )
