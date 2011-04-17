@@ -695,6 +695,34 @@ void MainWindow::showFullScreen( bool isChecked )
     m_fullScreenAct->setChecked( isChecked ); // Sync state with the GUI
 }
 
+#ifdef Q_WS_MAEMO_5
+void MainWindow::setOrientation( Orientation orientation )
+{
+    switch ( orientation ) {
+    case OrientationAutorotate:
+       setAttribute( Qt::WA_Maemo5AutoOrientation );
+       break;
+    case OrientationLandscape:
+       setAttribute( Qt::WA_Maemo5LandscapeOrientation );
+       break;
+    case OrientationPortrait:
+       setAttribute( Qt::WA_Maemo5PortraitOrientation );
+       break;
+    }
+}
+
+MainWindow::Orientation MainWindow::orientation() const
+{
+    if ( testAttribute( Qt::WA_Maemo5LandscapeOrientation ) )
+        return OrientationLandscape;
+
+    if ( testAttribute( Qt::WA_Maemo5PortraitOrientation ) )
+        return OrientationPortrait;
+
+    return OrientationAutorotate;
+}
+#endif // Q_WS_MAEMO_5
+
 void MainWindow::showSideBar( bool isChecked )
 {
     m_controlView->setSideBarShown( isChecked );
@@ -1024,6 +1052,10 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          resize(settings.value("size", QSize(640, 480)).toSize());
          move(settings.value("pos", QPoint(200, 200)).toPoint());
          showFullScreen(settings.value("fullScreen", false ).toBool());
+#ifdef Q_WS_MAEMO_5
+         const Orientation orientation = (Orientation)settings.value( "orientation", (int)OrientationLandscape ).toInt();
+         setOrientation( orientation );
+#endif // Q_WS_MAEMO_5
          QByteArray sideBarState = settings.value( "sideBarState", QByteArray() ).toByteArray();
          m_controlView->setSideBarState( sideBarState );
          if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
@@ -1232,6 +1264,9 @@ void MainWindow::writeSettings()
          settings.setValue( "size", size() );
          settings.setValue( "pos", pos() );
          settings.setValue( "fullScreen", m_fullScreenAct->isChecked() );
+#ifdef Q_WS_MAEMO_5
+         settings.setValue( "orientation", (int)orientation() );
+#endif // Q_WS_MAEMO_5
          settings.setValue( "sideBar", m_sideBarAct->isChecked() );
          settings.setValue( "sideBarState", m_controlView->sideBarState() );
          settings.setValue( "statusBar", m_statusBarAct->isChecked() );

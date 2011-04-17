@@ -40,6 +40,14 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+#ifdef Q_WS_MAEMO_5
+    enum Orientation {
+        OrientationAutorotate,
+        OrientationLandscape,
+        OrientationPortrait
+    };
+#endif
+
 public:
     explicit MainWindow(const QString& marbleDataPath = QString(),
                         const QVariantMap& cmdLineSettings = QVariantMap(),
@@ -51,6 +59,10 @@ public:
     MarbleWidget* marbleWidget() {
         return m_controlView->marbleWidget();
     }
+
+#ifdef Q_WS_MAEMO_5
+    Orientation orientation() const;
+#endif
 
 protected:
     void  closeEvent(QCloseEvent *event);
@@ -104,6 +116,9 @@ private Q_SLOTS:
 
     // Settings Menu
     void  showFullScreen( bool );
+#ifdef Q_WS_MAEMO_5
+    void  setOrientation( Orientation orientation );
+#endif
     void  showSideBar( bool );
     void  showStatusBar( bool );
     void  setupStatusBar();
