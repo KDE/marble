@@ -32,9 +32,11 @@ class QPoint;
 namespace Marble
 {
 
+class GeoDataCoordinates;
 class GeoDataPlacemark;
 class GeoDataStyle;
 class PlacemarkPainter;
+class TileId;
 class VisiblePlacemark;
 class ViewParams;
 
@@ -79,6 +81,8 @@ class PlacemarkLayout : public QObject
 
     int maxLabelHeight() const;
 
+    TileId placemarkToTileId( const GeoDataCoordinates& coords, int popularity ) const;
+
     /**
      * Returns a list of model indexes that are at position @p pos.
      */
@@ -87,6 +91,7 @@ class PlacemarkLayout : public QObject
  public Q_SLOTS:
 
     void requestStyleReset();
+    void setCacheData();
 
  private:
     void styleReset();
@@ -108,6 +113,8 @@ class PlacemarkLayout : public QObject
     QVector<VisiblePlacemark*> m_paintOrder;
     QHash<GeoDataPlacemark*, VisiblePlacemark*> m_visiblePlacemarks;
 
+    /// map providing the list of placemark belonging in TileId as key
+    QMap<TileId, QList<GeoDataPlacemark*> > m_placemarkCache;
 
     QVector< int > m_weightfilter;
 

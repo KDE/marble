@@ -20,6 +20,7 @@ namespace Marble
 class TileId
 {
     friend bool operator==( TileId const& lhs, TileId const& rhs );
+    friend bool operator<( TileId const& lhs, TileId const& rhs );
     friend uint qHash( TileId const& );
 
  public:
@@ -79,6 +80,25 @@ inline bool operator==( TileId const& lhs, TileId const& rhs )
         && lhs.m_tileX == rhs.m_tileX
         && lhs.m_tileY == rhs.m_tileY
         && lhs.m_mapThemeIdHash == rhs.m_mapThemeIdHash;
+}
+
+inline bool operator<( TileId const& lhs, TileId const& rhs )
+{
+    if (lhs.m_zoomLevel < rhs.m_zoomLevel)
+        return true;
+    else if (lhs.m_zoomLevel == rhs.m_zoomLevel
+             && lhs.m_tileX < rhs.m_tileX)
+        return true;
+    else if (lhs.m_zoomLevel == rhs.m_zoomLevel
+             && lhs.m_tileX == rhs.m_tileX
+             && lhs.m_tileY < rhs.m_tileY)
+        return true;
+    else if (lhs.m_zoomLevel == rhs.m_zoomLevel
+             && lhs.m_tileX == rhs.m_tileX
+             && lhs.m_tileY == rhs.m_tileY
+             && lhs.m_mapThemeIdHash < rhs.m_mapThemeIdHash)
+        return true;
+    return false;
 }
 
 inline uint qHash( TileId const& tid )
