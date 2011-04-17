@@ -22,7 +22,6 @@
 #include "RoutingModel.h"
 #include "RoutingProfilesModel.h"
 #include "RoutingProfileSettingsDialog.h"
-#include "RoutingProxyModel.h"
 #include "GeoDataDocument.h"
 #include "AlternativeRoutesModel.h"
 
@@ -55,7 +54,7 @@ public:
 
     RoutingInputWidget *m_inputRequest;
 
-    QSortFilterProxyModel *m_routingProxyModel;
+    QAbstractItemModel *m_routingModel;
 
     RouteRequest *m_routeRequest;
 
@@ -96,7 +95,7 @@ private:
 
 RoutingWidgetPrivate::RoutingWidgetPrivate() :
         m_widget( 0 ), m_routingManager( 0 ), m_routingLayer( 0 ),
-        m_activeInput( 0 ), m_inputRequest( 0 ), m_routingProxyModel( 0 ),
+        m_activeInput( 0 ), m_inputRequest( 0 ), m_routingModel( 0 ),
         m_routeRequest( 0 ), m_zoomRouteAfterDownload( false ),
         m_workOffline( false ), m_currentFrame( 0 ),
         m_iconSize( 16 )
@@ -147,7 +146,7 @@ void RoutingWidgetPrivate::setActiveInput( RoutingInputWidget *widget )
     m_activeInput = widget;
     m_ui.directionsListView->setModel( model );
     m_routingLayer->setModel( model );
-    m_routingLayer->synchronizeWith( m_routingProxyModel, m_ui.directionsListView->selectionModel() );
+    m_routingLayer->synchronizeWith( m_ui.directionsListView->selectionModel() );
 }
 
 void RoutingWidgetPrivate::createProgressAnimation()
@@ -219,12 +218,11 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL( rowsInserted( QModelIndex, int, int ) ),
              this, SLOT( updateAlternativeRoutes() ) );
 
-    d->m_routingProxyModel = new RoutingProxyModel( this );
-    d->m_routingProxyModel->setSourceModel( d->m_routingManager->routingModel() );
-    d->m_ui.directionsListView->setModel( d->m_routingProxyModel );
+    d->m_routingModel = d->m_routingManager->routingModel();
+    d->m_ui.directionsListView->setModel( d->m_routingModel );
 
     QItemSelectionModel *selectionModel = d->m_ui.directionsListView->selectionModel();
-    d->m_routingLayer->synchronizeWith( d->m_routingProxyModel, selectionModel );
+    d->m_routingLayer->synchronizeWith( selectionModel );
     connect( d->m_ui.directionsListView, SIGNAL( activated ( QModelIndex ) ),
              this, SLOT( activateItem ( QModelIndex ) ) );
 
@@ -292,9 +290,8 @@ void RoutingWidget::retrieveRoute()
         d->m_zoomRouteAfterDownload = true;
         d->m_routingLayer->setModel( d->m_routingManager->routingModel() );
         d->m_routingManager->retrieveRoute( d->m_routeRequest );
-        d->m_ui.directionsListView->setModel( d->m_routingProxyModel );
-        d->m_routingLayer->synchronizeWith( d->m_routingProxyModel,
-                                            d->m_ui.directionsListView->selectionModel() );
+        d->m_ui.directionsListView->setModel( d->m_routingModel );
+        d->m_routingLayer->synchronizeWith( d->m_ui.directionsListView->selectionModel() );
     }
 }
 

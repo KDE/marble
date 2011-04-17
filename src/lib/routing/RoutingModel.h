@@ -14,6 +14,7 @@
 #include "marble_export.h"
 #include "GeoDataLineString.h"
 #include "MarblePlacemarkModel.h"
+#include "Route.h"
 #include "routing/instructions/RoutingInstruction.h"
 
 #include <QtCore/QAbstractListModel>
@@ -52,15 +53,7 @@ public:
     };
 
     enum RoutingItemDataRole {
-        CoordinateRole = MarblePlacemarkModel::CoordinateRole, // synchronized with MarblePlacemarkModel
-        TypeRole = CoordinateRole + 24 ,// avoid conflict with MarblePlacemarkModel
-        InstructionWayPointRole = TypeRole + 1
-    };
-
-    enum RoutingItemType {
-        WayPoint,
-        Instruction,
-        Error
+        CoordinateRole = MarblePlacemarkModel::CoordinateRole // synchronized with MarblePlacemarkModel
     };
 
     /** Constructor */
@@ -177,6 +170,8 @@ public:
       */
     QPixmap followingInstructionPixmap() const;
 
+    const Route & route() const;
+
 public Q_SLOTS:
     /**
       * Old data in the model is discarded, the parsed content of the provided document
@@ -202,7 +197,5 @@ private:
 };
 
 } // namespace Marble
-
-Q_DECLARE_METATYPE( Marble::RoutingModel::RoutingItemType )
 
 #endif

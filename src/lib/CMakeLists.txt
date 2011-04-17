@@ -180,10 +180,12 @@ set(marblewidget_SRCS
     MapThemeSortFilterProxyModel.cpp
 
     routing/AlternativeRoutesModel.cpp
+    routing/Maneuver.cpp
+    routing/Route.cpp
     routing/RouteAnnotator.cpp
     routing/RouteRequest.cpp
+    routing/RouteSegment.cpp
     routing/RoutingModel.cpp
-    routing/RoutingProxyModel.cpp
     routing/RoutingProfile.cpp
     routing/RoutingManager.cpp
     routing/RoutingLayer.cpp

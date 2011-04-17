@@ -238,18 +238,7 @@ int DownloadRegionDialog::Private::rad2PixelY( qreal const lat ) const
 
 bool DownloadRegionDialog::Private::hasRoute() const
 {
-    GeoDataLineString waypoints;
-
-    for( int i = 0; i < m_routingModel->rowCount(); ++i ) {
-        QModelIndex index = m_routingModel->index( i, 0 );
-        GeoDataCoordinates position = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
-        RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
-
-        if ( type == RoutingModel::WayPoint ) {
-            return true;
-        }
-    }
-    return false;
+    return !m_routingModel->route().path().isEmpty();
 }
 
 DownloadRegionDialog::DownloadRegionDialog( MarbleWidget *const widget, QWidget * const parent,
@@ -566,16 +555,7 @@ QVector<TileCoordsPyramid> DownloadRegionDialog::routeRegion() const
     if( d->m_routingModel->rowCount() == 0 ) {
          return QVector<TileCoordsPyramid>();
     }
-    GeoDataLineString waypoints;
-    for( int i = 0; i < d->m_routingModel->rowCount(); ++i ) {
-        QModelIndex index = d->m_routingModel->index( i, 0 );
-        GeoDataCoordinates position = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
-        RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
-
-        if ( type == RoutingModel::WayPoint ) {
-            waypoints << position;
-        }
-    }
+    GeoDataLineString waypoints = d->m_routingModel->route().path();
     int const topLevel = d->m_tileLevelRangeWidget->topLevel();
     int const bottomLevel = d->m_tileLevelRangeWidget->bottomLevel();
     TileCoordsPyramid coordsPyramid( topLevel, bottomLevel );

@@ -23,9 +23,10 @@
 #include "MarbleModel.h"
 #include "AlternativeRoutesModel.h"
 #include "RoutingManager.h"
+#include "Maneuver.h"
 
 #include <QtCore/QMap>
-#include <QtGui/QAbstractProxyModel>
+#include <QtCore/QAbstractItemModel>
 #include <QtGui/QIcon>
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QKeyEvent>
@@ -67,8 +68,6 @@ public:
     QList<ModelRegion> m_placemarks;
 
     QRegion m_routeRegion;
-
-    QAbstractProxyModel *m_proxyModel;
 
     int m_movingIndex;
 
@@ -173,7 +172,7 @@ public:
 };
 
 RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget ) :
-        q( parent ), m_proxyModel( 0 ), m_movingIndex( -1 ), m_marbleWidget( widget ),
+        q( parent ), m_movingIndex( -1 ), m_marbleWidget( widget ),
         m_targetPixmap( ":/data/bitmaps/routing_pick.png" ), m_dragStopOverRightIndex( -1 ),
         m_pointSelection( false ), m_routingModel( 0 ), m_placemarkModel( 0 ), m_selectionModel( 0 ),
         m_routeDirty( false ), m_pixmapSize( 22, 22 ), m_routeRequest( 0 ), m_activeMenuIndex( -1 ),
@@ -266,17 +265,7 @@ void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
 void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 {
     m_instructionRegions.clear();
-    GeoDataLineString waypoints;
-
-    for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
-        QModelIndex index = m_routingModel->index( i, 0 );
-        GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
-        RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
-
-        if ( type == RoutingModel::WayPoint ) {
-            waypoints << pos;
-        }
-    }
+    GeoDataLineString waypoints = m_routingModel->route().path();
 
     QPen bluePen( alphaAdjusted( oxygenSkyBlue4, 200 ) );
     bluePen.setWidth( 5 );
@@ -325,36 +314,37 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
     for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
         QModelIndex index = m_routingModel->index( i, 0 );
         GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
-        RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
 
-        if ( type == RoutingModel::Instruction && m_proxyModel && m_selectionModel ) {
+        if ( m_routingModel && m_selectionModel ) {
 
             painter->setBrush( QBrush( alphaAdjusted( oxygenAluminumGray4, 200 ) ) );
-            QModelIndex proxyIndex = m_proxyModel->mapFromSource( index );
-            if ( m_selectionModel->selection().contains( proxyIndex ) ) {
-                GeoDataLineString currentRoutePoints = qVariantValue<GeoDataLineString>( index.data( RoutingModel::InstructionWayPointRole ) );
-
-                QPen brightBluePen( alphaAdjusted( oxygenSeaBlue2, 200 ) );
-
-                brightBluePen.setWidth( 6 );
-                if ( m_routeDirty ) {
-                    brightBluePen.setStyle( Qt::DotLine );
+            if ( m_selectionModel->selection().contains( index ) ) {
+                RouteSegment segment = m_routingModel->route().firstRouteSegment();
+                while (segment.isValid() && !(segment.maneuver().position() == pos)) {
+                    segment = segment.nextRouteSegment();
                 }
-                painter->setPen( brightBluePen );
-                painter->drawPolyline( currentRoutePoints );
 
-                painter->setPen( bluePen );
-                painter->setBrush( QBrush( alphaAdjusted( oxygenHotOrange4, 200 ) ) );
+                if ( segment.isValid() ) {
+                    GeoDataLineString currentRoutePoints = segment.path();
+
+                    QPen brightBluePen( alphaAdjusted( oxygenSeaBlue2, 200 ) );
+
+                    brightBluePen.setWidth( 6 );
+                    if ( m_routeDirty ) {
+                        brightBluePen.setStyle( Qt::DotLine );
+                    }
+                    painter->setPen( brightBluePen );
+                    painter->drawPolyline( currentRoutePoints );
+
+                    painter->setPen( bluePen );
+                    painter->setBrush( QBrush( alphaAdjusted( oxygenHotOrange4, 200 ) ) );
+                }
             }
 
             QRegion region = painter->regionFromEllipse( pos, 12, 12 );
             m_instructionRegions.push_front( ModelRegion( index, region ) );
             painter->drawEllipse( pos, 8, 8 );
 
-        } else if ( !m_routeDirty && type == RoutingModel::Error ) {
-            painter->setPen( QColor( Qt::white ) );
-            painter->setBrush( QBrush( alphaAdjusted( oxygenBrickRed4, 200 ) ) );
-            painter->drawAnnotation( pos, index.data().toString(), QSize( 180, 0 ), 10, 30, 5, 5 );
         }
 
         if( !m_routingModel->deviatedFromRoute() ) {
@@ -382,11 +372,9 @@ void RoutingLayerPrivate::renderAnnotations( GeoPainter *painter )
 
     for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
         QModelIndex index = m_routingModel->index( i, 0 );
-        RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
 
-        if ( type == RoutingModel::Instruction && m_proxyModel && m_selectionModel ) {
-            QModelIndex proxyIndex = m_proxyModel->mapFromSource( index );
-            if ( m_selectionModel->selection().contains( proxyIndex ) ) {
+        if ( m_routingModel && m_selectionModel ) {
+            if ( m_selectionModel->selection().contains( index ) ) {
                 bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
                 GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
                 painter->setPen( QColor( Qt::black ) );
@@ -456,13 +444,12 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
 
     foreach( const ModelRegion &region, m_instructionRegions ) {
         if ( region.region.contains( e->pos() ) && m_selectionModel ) {
-            if ( e->button() == Qt::LeftButton && m_proxyModel ) {
-                QModelIndex index = m_proxyModel->mapFromSource( region.index );
+            if ( e->button() == Qt::LeftButton && m_routingModel ) {
                 QItemSelectionModel::SelectionFlag command = QItemSelectionModel::ClearAndSelect;
-                if ( m_selectionModel->isSelected( index ) ) {
+                if ( m_selectionModel->isSelected( region.index ) ) {
                     command = QItemSelectionModel::Clear;
                 }
-                m_selectionModel->select( index, command );
+                m_selectionModel->select( region.index, command );
                 m_dropStopOver = e->pos();
                 storeDragPosition( e->pos() );
                 // annotation and old annotation are dirty, large region
@@ -773,10 +760,9 @@ void RoutingLayer::setModel ( MarblePlacemarkModel *model )
     setViewportChanged();
 }
 
-void RoutingLayer::synchronizeWith( QAbstractProxyModel *model, QItemSelectionModel *selection )
+void RoutingLayer::synchronizeWith( QItemSelectionModel *selection )
 {
     d->m_selectionModel = selection;
-    d->m_proxyModel = model;
 }
 
 void RoutingLayer::synchronizeAlternativeRoutesWith( QComboBox *view )

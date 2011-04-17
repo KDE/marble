@@ -382,55 +382,43 @@ void ControlView::printDrivingInstructions( QTextDocument &document, QString &te
         return;
     }
 
-    GeoDataLineString total;
-    for ( int i=0; i<routingModel->rowCount(); ++i ) {
-        QModelIndex index = routingModel->index(i, 0);
-        RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>(index.data(RoutingModel::TypeRole));
-        if ( type == RoutingModel::WayPoint ) {
-            GeoDataCoordinates coordinates = qVariantValue<GeoDataCoordinates>(index.data(RoutingModel::CoordinateRole));
-            total.append(coordinates);
-        }
-    }
+    GeoDataLineString total = routingModel->route().path();
 
     text += "<table cellpadding=\"4\">";
     text += "<tr><th>No.</th><th>Distance</th><th>Instruction</th></tr>";
-    for ( int i=0, j=0; i<routingModel->rowCount(); ++i ) {
+    for ( int i=0; i<routingModel->rowCount(); ++i ) {
         QModelIndex index = routingModel->index(i, 0);
-        RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
-        if ( type == RoutingModel::Instruction ) {
-            ++j;
-            GeoDataCoordinates coordinates = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
-            GeoDataLineString accumulator;
-            for (int k=0; k<total.size(); ++k) {
-                accumulator << total.at(k);
+        GeoDataCoordinates coordinates = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
+        GeoDataLineString accumulator;
+        for (int k=0; k<total.size(); ++k) {
+            accumulator << total.at(k);
 
-                if (total.at(k) == coordinates)
-                    break;
-            }
-
-            if ( i%2 == 0 ) {
-                text += "<tr bgcolor=\"lightGray\"><td align=\"right\" valign=\"middle\">";
-            }
-            else {
-                text += "<tr><td align=\"right\" valign=\"middle\">";
-            }
-            text += QString::number( j );
-            text += "</td><td align=\"right\" valign=\"middle\">";
-
-            text += QString::number( accumulator.length( EARTH_RADIUS ) * METER2KM, 'f', 1 );
-            /** @todo: support localization */
-            text += " km</td><td valign=\"middle\">";
-
-            QPixmap instructionIcon = qVariantValue<QPixmap>( index.data( Qt::DecorationRole ) );
-            if ( !instructionIcon.isNull() ) {
-                QString uri = QString("marble://turnIcon%1.png").arg(i);
-                document.addResource( QTextDocument::ImageResource, QUrl( uri ), QVariant( instructionIcon ) );
-                text += QString("<img src=\"%1\">").arg(uri);
-            }
-
-            text += routingModel->data( index ).toString();
-            text += "</td></tr>";
+            if (total.at(k) == coordinates)
+                break;
         }
+
+        if ( i%2 == 0 ) {
+            text += "<tr bgcolor=\"lightGray\"><td align=\"right\" valign=\"middle\">";
+        }
+        else {
+            text += "<tr><td align=\"right\" valign=\"middle\">";
+        }
+        text += QString::number( i+1 );
+        text += "</td><td align=\"right\" valign=\"middle\">";
+
+        text += QString::number( accumulator.length( EARTH_RADIUS ) * METER2KM, 'f', 1 );
+        /** @todo: support localization */
+        text += " km</td><td valign=\"middle\">";
+
+        QPixmap instructionIcon = qVariantValue<QPixmap>( index.data( Qt::DecorationRole ) );
+        if ( !instructionIcon.isNull() ) {
+            QString uri = QString("marble://turnIcon%1.png").arg(i);
+            document.addResource( QTextDocument::ImageResource, QUrl( uri ), QVariant( instructionIcon ) );
+            text += QString("<img src=\"%1\">").arg(uri);
+        }
+
+        text += routingModel->data( index ).toString();
+        text += "</td></tr>";
     }
     text += "</table>";
 #endif

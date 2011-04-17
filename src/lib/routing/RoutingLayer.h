@@ -62,7 +62,7 @@ public:
       * its selection model with us. Needed because this class uses an unfiltered
       * model which has different indices than a filtered one.
       */
-    void synchronizeWith( QAbstractProxyModel *model, QItemSelectionModel *selection );
+    void synchronizeWith( QItemSelectionModel *selection );
 
     /**
       * Stores the alternative routes model and a view working on this model to synchronize

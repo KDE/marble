@@ -37,20 +37,6 @@
 namespace Marble
 {
 
-struct RouteElement {
-    GeoDataCoordinates position;
-    RoutingModel::RoutingItemType type;
-    QString description;
-    GeoDataLineString instructionPointSet;
-    qreal instructionDistance;
-    RoutingInstruction::TurnType turnType;
-
-    RouteElement() : turnType( RoutingInstruction::Unknown ) {}
-};
-
-/** @todo: Eventually switch to GeoDataDocument as the underlying storage */
-typedef QVector<RouteElement> RouteElements;
-
 class RoutingModelPrivate
 {
 public:
@@ -63,30 +49,16 @@ public:
 
     RoutingModelPrivate( RouteRequest* request );
 
-    RouteElements m_route;
+    Route m_route;
+    RouteSegment m_segment;
 
-    RoutingModel::Duration m_totalDuration;
-
-    qreal m_totalDistance;
-    qint32 m_totalTimeRemaining;
-    qreal m_timeRemaining;
-    qreal m_totalDistanceRemaining;
-    int m_instructionSize;
-    int m_nextInstructionIndex;
-    qreal m_nextInstructionDistance;
-    qreal m_currentInstructionLength;
-    QString m_nextInstructionPixmap;
-    RoutingInstruction::TurnType m_nextTurnType;
-    QString m_followingInstructionPixmap;
-    GeoDataCoordinates m_location;
-    QString m_nextDescription;
     RouteDeviation m_deviation;
     QMap<RoutingInstruction::TurnType,QString> m_turnTypePixmaps;
     PositionTracking* m_positionTracking;
     RouteRequest* m_request;
-    QVector<int> m_instructionLookupTable;
+    GeoDataCoordinates m_position;
 
-    void importPlacemark( const GeoDataPlacemark *placemark );
+    void importPlacemark( RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark );
 
     bool deviatedFromRoute( const GeoDataCoordinates &position, const QVector<GeoDataCoordinates> &waypoints ) const;
 
@@ -94,15 +66,7 @@ public:
 };
 
 RoutingModelPrivate::RoutingModelPrivate( RouteRequest* request )
-    : m_totalDistance( 0.0 ),
-      m_totalTimeRemaining( 0 ),
-      m_timeRemaining( 0.0 ),
-      m_totalDistanceRemaining( 0.0 ),
-      m_instructionSize( 0 ),
-      m_nextInstructionIndex( 0 ),
-      m_nextInstructionDistance( 0.0 ),
-      m_currentInstructionLength( 0.0 ),
-      m_deviation( Unknown ),
+    : m_deviation( Unknown ),
       m_positionTracking( 0 ),
       m_request( request )
 {
@@ -151,40 +115,41 @@ void RoutingModelPrivate::updateViaPoints( const GeoDataCoordinates &position )
     }
 }
 
-void RoutingModelPrivate::importPlacemark( const GeoDataPlacemark *placemark )
+void RoutingModelPrivate::importPlacemark( RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark )
 {
     GeoDataGeometry* geometry = placemark->geometry();
     GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
     QStringList blacklist = QStringList() << "" << "Route" << "Tessellated";
+    RouteSegment segment;
+    bool isOutline = true;
     if ( !blacklist.contains( placemark->name() ) ) {
         if( lineString ) {
-            RouteElement element;
-            element.type = RoutingModel::Instruction;
-            element.description = placemark->name();
-            element.position = lineString->at( 0 );
-            for( int i = 0; i<lineString->size(); ++i ) {
-                element.instructionPointSet << lineString->at( i );
-            }
+            Maneuver maneuver;
+            maneuver.setInstructionText( placemark->name() );
+            maneuver.setPosition( lineString->at( 0 ) );
+
             if ( placemark->extendedData().contains( "turnType" ) ) {
                 QVariant turnType = placemark->extendedData().value( "turnType" ).value();
                 // The enum value is converted to/from an int in the QVariant
                 // because only a limited set of data types can be serialized with QVariant's
                 // toString() method (which is used to serialize <ExtendedData>/<Data> values)
-                element.turnType = RoutingInstruction::TurnType( qVariantValue<int>( turnType ) );
+                maneuver.setDirection( RoutingInstruction::TurnType( qVariantValue<int>( turnType ) ) );
             }
-            element.instructionDistance = element.instructionPointSet.length( EARTH_RADIUS );
-            m_route.push_back( element );
-        }
-    }
-    else if ( lineString ) {
-        for ( int i=0; i<lineString->size(); ++i ) {
-            RouteElement element;
-            element.type = RoutingModel::WayPoint;
-            element.position = lineString->at( i );
-            m_route.push_back( element );
+
+            segment.setManeuver( maneuver );
+            isOutline = false;
         }
     }
 
+    if ( lineString ) {
+        segment.setPath( *lineString );
+
+        if ( isOutline ) {
+            outline = segment;
+        } else {
+            segments.push_back( segment );
+        }
+    }
 }
 
 RoutingModel::RoutingModel( RouteRequest* request, MarbleModel *model, QObject *parent ) :
@@ -205,7 +170,7 @@ RoutingModel::~RoutingModel()
 
 int RoutingModel::rowCount ( const QModelIndex &parent ) const
 {
-    return parent.isValid() ? 0 : d->m_route.size();
+    return parent.isValid() ? 0 : d->m_route.turnPoints().size();
 }
 
 QVariant RoutingModel::headerData ( int section, Qt::Orientation orientation, int role ) const
@@ -223,33 +188,30 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
         return QVariant();
     }
 
-    if ( index.row() < d->m_route.size() && index.column() == 0 ) {
-        RouteElement element = d->m_route.at( index.row() );
+    if ( index.row() < d->m_route.turnPoints().size() && index.column() == 0 ) {
+        RouteSegment segment = d->m_route.firstRouteSegment();
+        for ( int i=0; i<index.row(); ++i ) {
+            segment = segment.nextRouteSegment();
+        }
         switch ( role ) {
         case Qt::DisplayRole:
         case Qt::ToolTipRole:
-            return element.description;
+            return segment.maneuver().instructionText();
             break;
         case Qt::DecorationRole:
-            if ( element.type == Instruction ) {
+            {
                 bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
                 if ( smallScreen ) {
-                    return QPixmap( d->m_turnTypePixmaps[element.turnType] );
+                    return QPixmap( d->m_turnTypePixmaps[segment.maneuver().direction()] );
                 } else {
-                    return QPixmap( d->m_turnTypePixmaps[element.turnType] ).scaled( 32, 32 );
+                    return QPixmap( d->m_turnTypePixmaps[segment.maneuver().direction()] ).scaled( 32, 32 );
                 }
-            }
 
-            return QVariant();
+                return QVariant();
+            }
             break;
         case CoordinateRole:
-            return QVariant::fromValue( d->m_route.at( index.row() ).position );
-            break;
-        case TypeRole:
-            return QVariant::fromValue( d->m_route.at( index.row() ).type );
-            break;
-        case InstructionWayPointRole:
-            return QVariant::fromValue( d->m_route.at( index.row() ).instructionPointSet );
+            return QVariant::fromValue( segment.maneuver().position() );
             break;
         default:
             return QVariant();
@@ -261,46 +223,35 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
 
 bool RoutingModel::setCurrentRoute( GeoDataDocument* document )
 {
-    d->m_route.clear();
+    d->m_route = Route();
+    d->m_segment = RouteSegment();
+    QVector<RouteSegment> segments;
+    RouteSegment outline;
 
     QVector<GeoDataFolder*> folders = document->folderList();
     foreach( const GeoDataFolder *folder, folders ) {
         foreach( const GeoDataPlacemark *placemark, folder->placemarkList() ) {
-            d->importPlacemark( placemark );
+            d->importPlacemark( outline, segments, placemark );
         }
     }
 
     foreach( const GeoDataPlacemark *placemark, document->placemarkList() ) {
-        d->importPlacemark( placemark );
+        d->importPlacemark( outline, segments, placemark );
+    }
+
+    if ( segments.isEmpty() ) {
+        segments << outline;
+    }
+
+    if ( segments.size() > 0 ) {
+        for ( int i=segments.size()-2; i>=0; --i ) {
+            segments[i].setNextRouteSegment( segments[i+1] );
+        }
+        d->m_segment = segments[0];
+        d->m_route.setFirstRouteSegment( d->m_segment );
     }
 
     d->m_deviation = RoutingModelPrivate::Unknown;
-
-    // Generate lookup table
-    d->m_instructionLookupTable.clear();
-    GeoDataLineString wayPoints, instructions;
-    foreach( const RouteElement &element, d->m_route ) {
-        if ( element.type == WayPoint ) {
-            wayPoints << element.position;
-        } else if ( element.type == Instruction ) {
-          instructions << element.position;
-        }
-    }
-
-    int const end = wayPoints.size();
-    int j=0;
-    for ( int i=0; i<end; ++i ) {
-      if ( j >= instructions.size() ) {
-        // Towards the end of the route
-        break;
-      }
-
-      if ( wayPoints.at(i) == instructions.at(j) ) {
-        //mDebug() << "Instruction " << j << " => Waypoint " << i;
-        d->m_instructionLookupTable.push_back( i );
-        ++j;
-      }
-    }
 
     reset();
     emit currentRouteChanged();
@@ -309,20 +260,16 @@ bool RoutingModel::setCurrentRoute( GeoDataDocument* document )
 
 RoutingModel::Duration RoutingModel::duration() const
 {
-    return d->m_totalDuration;
+    Duration duration;
+    QTime time;
+    time.addSecs( d->m_route.travelTime() );
+    duration.time = time;
+    return duration;
 }
 
 qreal RoutingModel::totalDistance() const
 {
-    GeoDataLineString wayPoints;
-    foreach( const RouteElement &element, d->m_route ) {
-        if ( element.type == WayPoint ) {
-            wayPoints << element.position;
-        }
-    }
-    d->m_totalDistance = wayPoints.length( EARTH_RADIUS );
-
-    return d->m_totalDistance;
+    return d->m_route.distance();
 }
 
 void RoutingModel::exportGpx( QIODevice *device ) const
@@ -335,24 +282,21 @@ void RoutingModel::exportGpx( QIODevice *device ) const
     content += "<metadata>\n  <link href=\"http://edu.kde.org/marble\">\n    ";
     content += "<text>Marble Virtual Globe</text>\n  </link>\n</metadata>\n";
 
-    QList<RouteElement> waypoints;
     content += "  <rte>\n    <name>Route</name>\n";
-    foreach( const RouteElement &element, d->m_route ) {
-        if ( element.type == Instruction ) {
-            qreal lon = element.position.longitude( GeoDataCoordinates::Degree );
-            qreal lat = element.position.latitude( GeoDataCoordinates::Degree );
-            content += QString( "    <rtept lat=\"%1\" lon=\"%2\"><name>%3</name></rtept>\n" ).arg( lat, 0, 'f', 7 ).arg( lon, 0, 'f', 7 ).arg( element.description );
-        } else if ( element.type == WayPoint ) {
-            waypoints << element;
-        }
+    RouteSegment segment = d->m_route.firstRouteSegment();
+    while ( segment.isValid() ) {
+        qreal lon = segment.maneuver().position().longitude( GeoDataCoordinates::Degree );
+        qreal lat = segment.maneuver().position().latitude( GeoDataCoordinates::Degree );
+        QString const text = segment.maneuver().instructionText();
+        content += QString( "    <rtept lat=\"%1\" lon=\"%2\"><name>%3</name></rtept>\n" ).arg( lat, 0, 'f', 7 ).arg( lon, 0, 'f', 7 ).arg( text );
     }
     content += "  </rte>\n";
 
     content += "<trk>\n  <name>Route</name>\n    <trkseg>\n";
-    foreach( const RouteElement &element, waypoints ) {
-        Q_ASSERT( element.type == WayPoint );
-        qreal lon = element.position.longitude( GeoDataCoordinates::Degree );
-        qreal lat = element.position.latitude( GeoDataCoordinates::Degree );
+    GeoDataLineString points = d->m_route.path();
+    for ( int i=0; i<points.size(); ++i ) {
+        qreal lon = points[i].longitude( GeoDataCoordinates::Degree );
+        qreal lat = points[i].latitude( GeoDataCoordinates::Degree );
         content += QString( "      <trkpt lat=\"%1\" lon=\"%2\"></trkpt>\n" ).arg( lat, 0, 'f', 7 ).arg( lon, 0, 'f', 7 );
     }
     content += "    </trkseg>\n  </trk>\n";
@@ -363,7 +307,7 @@ void RoutingModel::exportGpx( QIODevice *device ) const
 
 void RoutingModel::clear()
 {
-    d->m_route.clear();
+    d->m_route = Route();
     reset();
 }
 
@@ -377,13 +321,8 @@ int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteReques
     }
 
     // Generate an ordered list of all waypoints
-    QVector<GeoDataCoordinates> waypoints;
+    GeoDataLineString points = d->m_route.path();
     QMap<int,int> mapping;
-    foreach( const RouteElement& element, d->m_route ) {
-        if ( element.type == WayPoint ) {
-            waypoints << element.position;
-        }
-    }
 
     // Force first mapping point to match the route start
     mapping[0] = 0;
@@ -392,8 +331,8 @@ int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteReques
     // Need two for loops to avoid getting stuck in local minima
     for ( int j=1; j<route->size()-1; ++j ) {
         qreal minDistance = -1.0;
-        for ( int i=mapping[j-1]; i<waypoints.size(); ++i ) {
-            qreal distance = distanceSphere( waypoints[i], route->at(j) );
+        for ( int i=mapping[j-1]; i<points.size(); ++i ) {
+            qreal distance = distanceSphere( points[i], route->at(j) );
             if (minDistance < 0.0 || distance < minDistance ) {
                 mapping[j] = i;
                 minDistance = distance;
@@ -404,8 +343,8 @@ int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteReques
     // Determine waypoint with minimum distance to the provided position
     qreal minWaypointDistance = -1.0;
     int waypoint=0;
-    for ( int i=0; i<waypoints.size(); ++i ) {
-        qreal waypointDistance = distanceSphere( waypoints[i], position );
+    for ( int i=0; i<points.size(); ++i ) {
+        qreal waypointDistance = distanceSphere( points[i], position );
         if ( minWaypointDistance < 0.0 || waypointDistance < minWaypointDistance ) {
             minWaypointDistance = waypointDistance;
             waypoint = i;
@@ -413,7 +352,7 @@ int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteReques
     }
 
     // Force last mapping point to match the route destination
-    mapping[route->size()-1] = waypoints.size()-1;
+    mapping[route->size()-1] = points.size()-1;
 
     // Determine neighbor based on the mapping
     QMap<int, int>::const_iterator iter = mapping.constBegin();
@@ -428,157 +367,50 @@ int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteReques
     return route->size()-1;
 }
 
-void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed )
+void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal /*speed*/ )
 {
-    /** @todo FIXME Refactor this method. Shorter, less caching.
-              Switch to a more intelligent underlying data structure */
+    d->m_position = location;
+    qreal distance(0.0);
+    d->m_segment = d->m_route.closestSegmentTo( d->m_position, distance );
 
-    if( rowCount() != 0 ) {
+    d->updateViaPoints( d->m_position );
 
-        QList<RouteElement> instructions;
-        QVector<GeoDataCoordinates> wayPoints;
-        QVector<GeoDataCoordinates> instructionPoints;
+    /** @todo: use correct values */
+    emit nextInstruction( 0.0, d->m_segment.distance() );
 
-        foreach( const RouteElement &element, d->m_route ) {
-            if ( element.type == Instruction ) {
-                instructions << element;
-                instructionPoints << element.position;
-            }
+    qreal deviation = 0.0;
+    if ( d->m_positionTracking && d->m_positionTracking->accuracy().vertical > 0.0 ) {
+        deviation = qMax<qreal>( d->m_positionTracking->accuracy().vertical, d->m_positionTracking->accuracy().horizontal );
+    }
+    qreal const threshold = deviation + 100.0;
 
-            if( element.type == WayPoint ) {
-                wayPoints << element.position;
-            }
-        }
-
-        qreal minimumWaypointDistance = 0.0;
-        int waypointIndex = 0;
-        //closest waypoint to the current geolocation
-        for( int i = 0; i< wayPoints.size(); ++i ) {
-            qreal waypointDistance = distanceSphere( location, wayPoints[i] );
-            if( i == 0 ) {
-                minimumWaypointDistance = waypointDistance;
-                waypointIndex = i;
-            }
-            else if( waypointDistance < minimumWaypointDistance ) {
-                minimumWaypointDistance = waypointDistance;
-                waypointIndex = i;
-            }
-        }
-
-        if ( instructions.isEmpty() ) {
-            return;
-        }
-
-        d->m_instructionSize = instructions.size();
-        d->m_nextInstructionIndex = 1;
-
-        qint32 totalTimeRemaining = 0;
-        qreal totalDistanceRemaining = 0.0;
-        qreal distanceRemaining = 0.0;
-        //if there is no route but source and destination are specified
-        if( wayPoints.size() != 0 ) {
-            if( !( wayPoints[waypointIndex] == wayPoints[wayPoints.size()-1] ) ) {
-//                int currentWaypointOffset = 0;
-                for ( int k = 0; k<d->m_instructionLookupTable.size(); ++k ) {
-                  if ( d->m_instructionLookupTable.at( k ) > waypointIndex ) {
-                    d->m_nextInstructionIndex = k;
-                    break;
-                  }
-                }
-//                for( int i = 0; i<instructions.size(); ++i ) {
-//                    int instructionSize = instructions[i].instructionPointSet.size();
-//                    for ( int j = 0; j<instructionSize; ++j ) {
-//                       if( wayPoints[waypointIndex] ==  instructions[i].instructionPointSet.at(j) ) {
-//                           d->m_nextInstructionIndex = i + 1;
-//                           currentWaypointOffset = j;
-//                       }
-//                    }
-//                }
-
-                qreal radius = EARTH_RADIUS;
-
-                if( d->m_nextInstructionIndex != instructions.size() ) {
-                    d->m_location = instructions[d->m_nextInstructionIndex].position;
-                    d->m_nextDescription = instructions[d->m_nextInstructionIndex].description;
-                    d->m_nextTurnType = instructions[d->m_nextInstructionIndex].turnType;
-                    d->m_nextInstructionPixmap = d->m_turnTypePixmaps[instructions[d->m_nextInstructionIndex].turnType];
-                    if ( d->m_nextInstructionIndex+1 < instructions.size() ) {
-                        d->m_followingInstructionPixmap = d->m_turnTypePixmaps[instructions[d->m_nextInstructionIndex+1].turnType];
-                    } else if ( d->m_request->size() > 0 ) {
-                        d->m_followingInstructionPixmap = QString();
-                    }
-                    //distance between current position and next instruction point
-                    distanceRemaining = distanceSphere( location, d->m_location ) * radius;
-                }
-                else {
-                    GeoDataCoordinates destinationCoord =  instructions[d->m_nextInstructionIndex-1].instructionPointSet.last();
-                    distanceRemaining = distanceSphere( location, destinationCoord ) * radius;
-//                    if( !(instructions[d->m_nextInstructionIndex-1].instructionPointSet.at( currentWaypointOffset ) == destinationCoord ) ) {
-//                        distanceRemaining = distanceSphere( location, destinationCoord ) * radius;
-//                    }
-//                    else {
-//                        distanceRemaining = 0.0;
-//                    }
-                }
-
-                d->m_currentInstructionLength = instructions[d->m_nextInstructionIndex-1].instructionDistance;
-
-                GeoDataLineString remainingInstructionPoints;
-                for( int i = waypointIndex; i < wayPoints.size(); ++i ) {
-                    remainingInstructionPoints << wayPoints[i];
-                }
-
-                totalDistanceRemaining = remainingInstructionPoints.length( radius );
-                if( speed != 0 ) {
-                    d->m_timeRemaining = ( distanceRemaining / speed ) * SEC2MIN;
-                    totalTimeRemaining = qint32( totalDistanceRemaining / speed );
-                }
-            }
-            else {
-                totalTimeRemaining = 0.0;
-                totalDistanceRemaining = 0.0;
-            }
-        }
-        d->m_nextInstructionDistance = distanceRemaining;
-        d->m_totalTimeRemaining = totalTimeRemaining;
-        d->m_totalDistanceRemaining = totalDistanceRemaining;
-
-        emit nextInstruction( d->m_totalTimeRemaining, d->m_totalDistanceRemaining );
-
-        bool const deviated = d->deviatedFromRoute( location, wayPoints );
-        RoutingModelPrivate::RouteDeviation const deviation = deviated ? RoutingModelPrivate::OffRoute : RoutingModelPrivate::OnRoute;
-        if ( d->m_deviation != deviation ) {
-            d->m_deviation = deviation;
-            emit deviatedFromRoute( deviated );
-        }
-
-        d->updateViaPoints( location );
+    RoutingModelPrivate::RouteDeviation const deviated = distance < threshold ? RoutingModelPrivate::OnRoute : RoutingModelPrivate::OffRoute;
+    if ( d->m_deviation != deviated ) {
+        d->m_deviation = deviated;
+        emit deviatedFromRoute( deviated == RoutingModelPrivate::OffRoute);
     }
 }
 
 qreal RoutingModel::remainingTime() const
 {
-   return d->m_timeRemaining;
+    /** @todo: more precise, accumulate? */
+   return d->m_segment.travelTime();
 }
 
 qint32 RoutingModel::totalTimeRemaining() const
 {
-    return d->m_totalTimeRemaining;
+    /** @todo: more precise, accumulate? */
+    return d->m_segment.travelTime();
 }
 
 GeoDataCoordinates RoutingModel::instructionPoint() const
 {
-    return d->m_location;
+    return d->m_segment.nextRouteSegment().maneuver().position();
 }
 
 QString RoutingModel::instructionText() const
 {
-    if( d->m_nextInstructionIndex < d->m_instructionSize ) {
-        return d->m_nextDescription;
-    }
-    else {
-        return QString::null;
-    }
+    return d->m_segment.nextRouteSegment().maneuver().instructionText();
 }
 
 bool RoutingModel::deviatedFromRoute() const
@@ -588,37 +420,45 @@ bool RoutingModel::deviatedFromRoute() const
 
 qreal RoutingModel::nextInstructionDistance() const
 {
-    return d->m_nextInstructionDistance;
+    /** @todo: implement correctly */
+    return EARTH_RADIUS * distanceSphere( d->m_position, d->m_segment.maneuver().position() );
 }
 
 qreal RoutingModel::currentInstructionLength() const
 {
-    return d->m_currentInstructionLength;
+    /** @todo: remove, unused */
+    return d->m_segment.distance();
 }
 
 QString RoutingModel::nextInstructionPixmapFile() const
 {
-    return d->m_nextInstructionPixmap;
+    return d->m_turnTypePixmaps[d->m_segment.nextRouteSegment().maneuver().direction()];
 }
 
 QPixmap RoutingModel::nextInstructionPixmap() const
 {
-    return QPixmap( d->m_nextInstructionPixmap );
+    return QPixmap( nextInstructionPixmapFile() );
 }
 
 RoutingInstruction::TurnType RoutingModel::nextTurnType() const
 {
-    return d->m_nextTurnType;
+    return d->m_segment.nextRouteSegment().nextRouteSegment().maneuver().direction();
 }
 
 QPixmap RoutingModel::followingInstructionPixmap() const
 {
-    return QPixmap( d->m_followingInstructionPixmap );
+    return QPixmap( d->m_turnTypePixmaps[d->m_segment.nextRouteSegment().nextRouteSegment().maneuver().direction()] );
 }
 
 int RoutingModel::nextTurnIndex() const
 {
-    return d->m_nextInstructionIndex;
+    /** @todo: implement correctly */
+    return 42;
+}
+
+const Route & RoutingModel::route() const
+{
+    return d->m_route;
 }
 
 } // namespace Marble
