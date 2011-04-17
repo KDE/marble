@@ -49,12 +49,6 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
       */
     void setWorkOffline(bool offline);
 
-    /**
-     * @brief Return the minimum zoom level set in the widget.
-     * @return the minimum zoom level set in the widget.
-     */
-    int minimumZoom() const;
-
  Q_SIGNALS:
     /**
      * @brief Signal emitted when the Home button has been pressed.

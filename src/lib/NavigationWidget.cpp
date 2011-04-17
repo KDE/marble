@@ -144,7 +144,6 @@ void NavigationWidget::changeZoom( int zoom )
     d->m_navigationUi.zoomSlider->blockSignals( true );
 
     d->m_navigationUi.zoomSlider->setValue( zoom );
-    d->m_navigationUi.zoomSlider->setMinimum( minimumZoom() );
     // As we have disabled all zoomSlider Signals, we have to update our buttons seperately.
     updateButtons( zoom );
 
@@ -196,6 +195,7 @@ void NavigationWidget::selectTheme( const QString &theme )
     if( !d->m_widget )
         return;
 
+    d->m_navigationUi.zoomSlider->setMinimum( d->m_widget->minimumZoom() );
     d->m_navigationUi.zoomSlider->setMaximum( d->m_widget->maximumZoom() );
     updateButtons( d->m_navigationUi.zoomSlider->value() );
 }
@@ -253,11 +253,6 @@ void NavigationWidget::resizeEvent ( QResizeEvent * )
 void NavigationWidget::setWorkOffline(bool offline)
 {
     d->m_runnerManager->setWorkOffline( offline );
-}
-
-int NavigationWidget::minimumZoom() const
-{
-    return d->m_widget->minimumZoom();
 }
 
 }
