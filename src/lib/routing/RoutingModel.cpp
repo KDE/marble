@@ -189,10 +189,7 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
     }
 
     if ( index.row() < d->m_route.turnPoints().size() && index.column() == 0 ) {
-        RouteSegment segment = d->m_route.firstRouteSegment();
-        for ( int i=0; i<index.row(); ++i ) {
-            segment = segment.nextRouteSegment();
-        }
+        const RouteSegment &segment = d->m_route.at( index.row() );
         switch ( role ) {
         case Qt::DisplayRole:
         case Qt::ToolTipRole:
@@ -244,11 +241,9 @@ bool RoutingModel::setCurrentRoute( GeoDataDocument* document )
     }
 
     if ( segments.size() > 0 ) {
-        for ( int i=segments.size()-2; i>=0; --i ) {
-            segments[i].setNextRouteSegment( segments[i+1] );
+        foreach( const RouteSegment &segment, segments ) {
+            d->m_route.addRouteSegment( segment );
         }
-        d->m_segment = segments[0];
-        d->m_route.setFirstRouteSegment( d->m_segment );
     }
 
     d->m_deviation = RoutingModelPrivate::Unknown;
@@ -283,8 +278,8 @@ void RoutingModel::exportGpx( QIODevice *device ) const
     content += "<text>Marble Virtual Globe</text>\n  </link>\n</metadata>\n";
 
     content += "  <rte>\n    <name>Route</name>\n";
-    RouteSegment segment = d->m_route.firstRouteSegment();
-    while ( segment.isValid() ) {
+    for ( int i=0; i<d->m_route.size(); ++i ) {
+        const RouteSegment &segment = d->m_route.at( i );
         qreal lon = segment.maneuver().position().longitude( GeoDataCoordinates::Degree );
         qreal lat = segment.maneuver().position().latitude( GeoDataCoordinates::Degree );
         QString const text = segment.maneuver().instructionText();

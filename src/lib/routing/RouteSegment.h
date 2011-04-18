@@ -25,12 +25,6 @@ class RouteSegment
 public:
     RouteSegment();
 
-    RouteSegment( const RouteSegment &other );
-
-    RouteSegment& operator=(const RouteSegment &other );
-
-    ~RouteSegment();
-
     bool isValid() const;
 
     qreal distance() const;
@@ -49,9 +43,9 @@ public:
 
     GeoDataLatLonBox bounds() const;
 
-    RouteSegment nextRouteSegment() const;
+    const RouteSegment & nextRouteSegment() const;
 
-    void setNextRouteSegment( const RouteSegment &segment );
+    void setNextRouteSegment( const RouteSegment* segment );
 
     qreal distanceTo( const GeoDataCoordinates &point ) const;
 
@@ -70,7 +64,7 @@ private:
 
     GeoDataLatLonBox m_bounds;
 
-    RouteSegment *m_nextRouteSegment;
+    const RouteSegment *m_nextRouteSegment;
 };
 
 

@@ -20,16 +20,9 @@ Route::Route() :
     // nothing to do
 }
 
-void Route::setFirstRouteSegment( const RouteSegment &routeSegment )
+void Route::addRouteSegment( const RouteSegment &segment )
 {
-    m_firstSegment = routeSegment;
-
-    m_bounds = GeoDataLatLonBox();
-    m_distance = 0.0;
-    m_travelTime = 0;
-
-    RouteSegment segment = m_firstSegment;
-    while ( segment.isValid() ) {
+    if ( segment.isValid() ) {
         m_bounds = m_bounds.united( segment.bounds() );
         m_distance += segment.distance();
         m_path << segment.path();
@@ -37,8 +30,11 @@ void Route::setFirstRouteSegment( const RouteSegment &routeSegment )
         if ( segment.maneuver().hasWaypoint() ) {
             m_waypoints << segment.maneuver().waypoint();
         }
+        m_segments.push_back( segment );
 
-        segment = segment.nextRouteSegment();
+        for ( int i=1; i<m_segments.size(); ++i ) {
+            m_segments[i-1].setNextRouteSegment(&m_segments[i]);
+        }
     }
 }
 
@@ -52,9 +48,14 @@ qreal Route::distance() const
     return m_distance;
 }
 
-RouteSegment Route::firstRouteSegment() const
+int Route::size() const
 {
-    return m_firstSegment;
+    return m_segments.size();
+}
+
+const RouteSegment & Route::at( int index ) const
+{
+    return m_segments[index];
 }
 
 GeoDataLineString Route::path() const
@@ -80,32 +81,33 @@ GeoDataLineString Route::waypoints() const
 qreal Route::distanceTo( const GeoDataCoordinates &point ) const
 {
     qreal minDistance = -1.0;
-    RouteSegment closestSegment;
-    distanceTo( point, m_firstSegment, closestSegment, minDistance );
+    foreach( const RouteSegment &segment, m_segments ) {
+        qreal const distance = segment.distanceTo( point );
+        if ( minDistance < 0.0 || distance < minDistance ) {
+            minDistance = distance;
+        }
+    }
     return minDistance;
 }
 
-void Route::distanceTo( const GeoDataCoordinates &point, const RouteSegment &segment, RouteSegment &closestSegment, qreal &minDistance ) const
-{
-    if ( !segment.isValid() ) {
-        return;
-    }
-
-    qreal const distance = segment.distanceTo( point );
-    if ( minDistance < 0.0 || distance < minDistance ) {
-        closestSegment = segment;
-        minDistance = distance;
-    }
-
-    return distanceTo( point, segment.nextRouteSegment(), closestSegment, minDistance );
-}
-
-RouteSegment Route::closestSegmentTo( const GeoDataCoordinates &point, qreal &distance ) const
+const RouteSegment &  Route::closestSegmentTo( const GeoDataCoordinates &point, qreal &distance ) const
 {
     distance = -1.0;
-    RouteSegment closestSegment = m_firstSegment;
-    distanceTo( point, m_firstSegment, closestSegment, distance );
-    return closestSegment;
+    int closestSegment = -1;
+    for ( int i=0; i<m_segments.size(); ++i ) {
+        qreal const dist = m_segments[i].distanceTo( point );
+        if ( distance < 0.0 || dist < distance ) {
+            distance = dist;
+            closestSegment = i;
+        }
+    }
+
+    if ( closestSegment >= 0 ) {
+        return m_segments[closestSegment];
+    }
+
+    static RouteSegment invalid;
+    return invalid;
 }
 
 }

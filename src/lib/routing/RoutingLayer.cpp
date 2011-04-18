@@ -319,25 +319,23 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
             painter->setBrush( QBrush( alphaAdjusted( oxygenAluminumGray4, 200 ) ) );
             if ( m_selectionModel->selection().contains( index ) ) {
-                RouteSegment segment = m_routingModel->route().firstRouteSegment();
-                while (segment.isValid() && !(segment.maneuver().position() == pos)) {
-                    segment = segment.nextRouteSegment();
-                }
+                for ( int j=0; j<m_routingModel->route().size(); ++j ) {
+                    const RouteSegment & segment = m_routingModel->route().at( j );
+                    if ( segment.maneuver().position() == pos ) {
+                        GeoDataLineString currentRoutePoints = segment.path();
 
-                if ( segment.isValid() ) {
-                    GeoDataLineString currentRoutePoints = segment.path();
+                        QPen brightBluePen( alphaAdjusted( oxygenSeaBlue2, 200 ) );
 
-                    QPen brightBluePen( alphaAdjusted( oxygenSeaBlue2, 200 ) );
+                        brightBluePen.setWidth( 6 );
+                        if ( m_routeDirty ) {
+                            brightBluePen.setStyle( Qt::DotLine );
+                        }
+                        painter->setPen( brightBluePen );
+                        painter->drawPolyline( currentRoutePoints );
 
-                    brightBluePen.setWidth( 6 );
-                    if ( m_routeDirty ) {
-                        brightBluePen.setStyle( Qt::DotLine );
+                        painter->setPen( bluePen );
+                        painter->setBrush( QBrush( alphaAdjusted( oxygenHotOrange4, 200 ) ) );
                     }
-                    painter->setPen( brightBluePen );
-                    painter->drawPolyline( currentRoutePoints );
-
-                    painter->setPen( bluePen );
-                    painter->setBrush( QBrush( alphaAdjusted( oxygenHotOrange4, 200 ) ) );
                 }
             }
 

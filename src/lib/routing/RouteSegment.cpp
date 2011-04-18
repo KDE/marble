@@ -24,36 +24,6 @@ RouteSegment::RouteSegment() :
     // nothing to do
 }
 
-RouteSegment::RouteSegment( const RouteSegment &other ) :
-    m_valid( other.m_valid ),
-    m_distance( other.m_distance ),
-    m_maneuver( other.m_maneuver ),
-    m_path( other.m_path ),
-    m_travelTime( other.m_travelTime ),
-    m_bounds( other.m_bounds ),
-    m_nextRouteSegment( other.m_nextRouteSegment ? new RouteSegment( *other.m_nextRouteSegment ) : 0 )
-{
-    // nothing to do
-}
-
-RouteSegment& RouteSegment::operator=(const RouteSegment &other )
-{
-    m_valid = other.m_valid;
-    m_distance = other.m_distance;
-    m_maneuver = other.m_maneuver;
-    m_path = other.m_path;
-    m_travelTime = other.m_travelTime;
-    m_bounds = other.m_bounds;
-    m_nextRouteSegment = other.m_nextRouteSegment ? new RouteSegment( *other.m_nextRouteSegment ) : 0;
-
-    return *this;
-}
-
-RouteSegment::~RouteSegment()
-{
-    delete m_nextRouteSegment;
-}
-
 qreal RouteSegment::distance() const
 {
     return m_distance;
@@ -99,20 +69,22 @@ GeoDataLatLonBox RouteSegment::bounds() const
     return m_bounds;
 }
 
-RouteSegment RouteSegment::nextRouteSegment() const
+const RouteSegment & RouteSegment::nextRouteSegment() const
 {
-    return m_nextRouteSegment ? *m_nextRouteSegment : RouteSegment();
-}
-
-void RouteSegment::setNextRouteSegment( const RouteSegment &segment )
-{
-    if ( !m_nextRouteSegment ) {
-        m_nextRouteSegment = new RouteSegment( segment );
-    } else {
-        *m_nextRouteSegment = segment;
+    if ( m_nextRouteSegment ) {
+        return *m_nextRouteSegment;
     }
 
-    m_valid = true;
+    static RouteSegment invalid;
+    return invalid;
+}
+
+void RouteSegment::setNextRouteSegment( const RouteSegment* segment )
+{
+    m_nextRouteSegment = segment;
+    if ( segment ) {
+        m_valid = true;
+    }
 }
 
 bool RouteSegment::isValid() const

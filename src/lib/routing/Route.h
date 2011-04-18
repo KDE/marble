@@ -22,13 +22,15 @@ class MARBLE_EXPORT Route
 public:
     Route();
 
-    void setFirstRouteSegment( const RouteSegment &routeSegment );
+    void addRouteSegment( const RouteSegment &segment );
 
     GeoDataLatLonBox bounds() const;
 
     qreal distance() const;
 
-    RouteSegment firstRouteSegment() const;
+    const RouteSegment & at( int index ) const;
+
+    int size() const;
 
     GeoDataLineString path() const;
 
@@ -40,16 +42,14 @@ public:
 
     qreal distanceTo( const GeoDataCoordinates &point ) const;
 
-    RouteSegment closestSegmentTo( const GeoDataCoordinates &point, qreal &distance ) const;
+    const RouteSegment & closestSegmentTo( const GeoDataCoordinates &point, qreal &distance ) const;
 
 private:
-    void distanceTo( const GeoDataCoordinates &point, const RouteSegment &segment, RouteSegment &closestSegment, qreal &minDistance ) const;
-
     GeoDataLatLonBox m_bounds;
 
     qreal m_distance;
 
-    RouteSegment m_firstSegment;
+    QVector<RouteSegment> m_segments;
 
     GeoDataLineString m_path;
 
