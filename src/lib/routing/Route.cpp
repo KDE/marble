@@ -15,7 +15,8 @@ namespace Marble
 
 Route::Route() :
     m_distance( 0.0 ),
-    m_travelTime( 0 )
+    m_travelTime( 0 ),
+    m_closestSegmentIndex( -1 )
 {
     // nothing to do
 }
@@ -90,20 +91,31 @@ qreal Route::distanceTo( const GeoDataCoordinates &point ) const
     return minDistance;
 }
 
-const RouteSegment &  Route::closestSegmentTo( const GeoDataCoordinates &point, qreal &distance ) const
+const RouteSegment & Route::closestSegmentTo( const GeoDataCoordinates &point, qreal &distance ) const
 {
-    distance = -1.0;
-    int closestSegment = -1;
-    for ( int i=0; i<m_segments.size(); ++i ) {
-        qreal const dist = m_segments[i].distanceTo( point );
-        if ( distance < 0.0 || dist < distance ) {
-            distance = dist;
-            closestSegment = i;
+    if ( !m_segments.isEmpty() ) {
+        if ( m_closestSegmentIndex < 0 || m_closestSegmentIndex >= m_segments.size() ) {
+            m_closestSegmentIndex = 0;
         }
-    }
 
-    if ( closestSegment >= 0 ) {
-        return m_segments[closestSegment];
+        distance = m_segments[m_closestSegmentIndex].distanceTo( point );
+        QList<int> candidates;
+
+        for ( int i=0; i<m_segments.size(); ++i ) {
+            if ( i != m_closestSegmentIndex && m_segments[i].minimalDistanceTo( point ) <= distance ) {
+                candidates << i;
+            }
+        }
+
+        foreach( int i, candidates ) {
+            qreal const dist = m_segments[i].distanceTo( point );
+            if ( distance < 0.0 || dist < distance ) {
+                distance = dist;
+                m_closestSegmentIndex = i;
+            }
+        }
+
+        return m_segments[m_closestSegmentIndex];
     }
 
     static RouteSegment invalid;

@@ -58,6 +58,8 @@ private:
     GeoDataLineString m_waypoints;
 
     int m_travelTime;
+
+    mutable int m_closestSegmentIndex;
 };
 
 }

@@ -138,4 +138,24 @@ qreal RouteSegment::distanceTo( const GeoDataCoordinates &point ) const
     return minDistance;
 }
 
+qreal RouteSegment::minimalDistanceTo( const GeoDataCoordinates &point ) const
+{
+    if ( bounds().contains( point) ) {
+        return 0.0;
+    }
+
+    qreal north(0.0), east(0.0), south(0.0), west(0.0);
+    bounds().boundaries( north, south, east, west );
+    GeoDataCoordinates const northWest( west, north );
+    GeoDataCoordinates const northEast( east, north );
+    GeoDataCoordinates const southhWest( west, south );
+    GeoDataCoordinates const southEast( east, south );
+
+    qreal distNorth = distancePointToLine( point, northWest, northEast );
+    qreal distEast = distancePointToLine( point, northEast, southEast );
+    qreal distSouth = distancePointToLine( point, southhWest, southEast );
+    qreal distWest = distancePointToLine( point, northWest, southhWest );
+    return qMin( qMin( distNorth, distEast ), qMin( distWest, distSouth ) );
+}
+
 }

@@ -49,6 +49,8 @@ public:
 
     qreal distanceTo( const GeoDataCoordinates &point ) const;
 
+    qreal minimalDistanceTo( const GeoDataCoordinates &point ) const;
+
 private:
     qreal distancePointToLine(const GeoDataCoordinates &p, const GeoDataCoordinates &a, const GeoDataCoordinates &b) const;
 
