@@ -200,13 +200,8 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
     stackedTile = d->m_tileCache.take( stackedTileId );
     if ( stackedTile ) {
         // the tile was in the cache, but is it up to date?
-        if ( !stackedTile->isExpired() ) {
-            d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
-            return stackedTile;
-        } else {
-            delete stackedTile;
-            stackedTile = 0;
-        }
+        d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
+        return stackedTile;
     }
 
     // tile (valid) has not been found in hash or cache, so load it from disk
