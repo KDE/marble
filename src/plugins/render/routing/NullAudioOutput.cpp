@@ -39,7 +39,7 @@ AudioOutput::~AudioOutput()
     delete d;
 }
 
-void AudioOutput::update( int, qreal, RoutingInstruction::TurnType )
+void AudioOutput::update( const Route &, qreal )
 {
     // nothing to do
 }

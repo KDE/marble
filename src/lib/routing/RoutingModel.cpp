@@ -50,10 +50,8 @@ public:
     RoutingModelPrivate( RouteRequest* request );
 
     Route m_route;
-    RouteSegment m_segment;
 
     RouteDeviation m_deviation;
-    QMap<RoutingInstruction::TurnType,QString> m_turnTypePixmaps;
     PositionTracking* m_positionTracking;
     RouteRequest* m_request;
     GeoDataCoordinates m_position;
@@ -70,19 +68,7 @@ RoutingModelPrivate::RoutingModelPrivate( RouteRequest* request )
       m_positionTracking( 0 ),
       m_request( request )
 {
-    m_turnTypePixmaps[RoutingInstruction::Unknown] = MarbleDirs::path( "bitmaps/routing_step.png" );
-    m_turnTypePixmaps[RoutingInstruction::Straight] = ":/data/bitmaps/turn-continue.png";
-    m_turnTypePixmaps[RoutingInstruction::SlightRight] = ":/data/bitmaps/turn-slight-right.png";
-    m_turnTypePixmaps[RoutingInstruction::Right] = ":/data/bitmaps/turn-right.png";
-    m_turnTypePixmaps[RoutingInstruction::SharpRight] = ":/data/bitmaps/turn-sharp-right.png";
-    m_turnTypePixmaps[RoutingInstruction::TurnAround] = ":/data/bitmaps/turn-around.png";
-    m_turnTypePixmaps[RoutingInstruction::SharpLeft] = ":/data/bitmaps/turn-sharp-left.png";
-    m_turnTypePixmaps[RoutingInstruction::Left] = ":/data/bitmaps/turn-left.png";
-    m_turnTypePixmaps[RoutingInstruction::SlightLeft] = ":/data/bitmaps/turn-slight-left.png";
-    m_turnTypePixmaps[RoutingInstruction::RoundaboutFirstExit] = ":/data/bitmaps/turn-roundabout-first.png";
-    m_turnTypePixmaps[RoutingInstruction::RoundaboutSecondExit] = ":/data/bitmaps/turn-roundabout-second.png";
-    m_turnTypePixmaps[RoutingInstruction::RoundaboutThirdExit] = ":/data/bitmaps/turn-roundabout-third.png";
-    m_turnTypePixmaps[RoutingInstruction::RoundaboutExit] = ":/data/bitmaps/turn-roundabout-far.png";
+    // nothing to do
 }
 
 bool RoutingModelPrivate::deviatedFromRoute( const GeoDataCoordinates &position, const QVector<GeoDataCoordinates> &waypoints ) const
@@ -199,9 +185,9 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
             {
                 bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
                 if ( smallScreen ) {
-                    return QPixmap( d->m_turnTypePixmaps[segment.maneuver().direction()] );
+                    return QPixmap( segment.maneuver().directionPixmap() );
                 } else {
-                    return QPixmap( d->m_turnTypePixmaps[segment.maneuver().direction()] ).scaled( 32, 32 );
+                    return QPixmap( segment.maneuver().directionPixmap() ).scaled( 32, 32 );
                 }
 
                 return QVariant();
@@ -221,7 +207,6 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
 bool RoutingModel::setCurrentRoute( GeoDataDocument* document )
 {
     d->m_route = Route();
-    d->m_segment = RouteSegment();
     QVector<RouteSegment> segments;
     RouteSegment outline;
 
@@ -251,20 +236,6 @@ bool RoutingModel::setCurrentRoute( GeoDataDocument* document )
     reset();
     emit currentRouteChanged();
     return true;
-}
-
-RoutingModel::Duration RoutingModel::duration() const
-{
-    Duration duration;
-    QTime time;
-    time.addSecs( d->m_route.travelTime() );
-    duration.time = time;
-    return duration;
-}
-
-qreal RoutingModel::totalDistance() const
-{
-    return d->m_route.distance();
 }
 
 void RoutingModel::exportGpx( QIODevice *device ) const
@@ -365,13 +336,12 @@ int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteReques
 void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal /*speed*/ )
 {
     d->m_position = location;
-    qreal distance(0.0);
-    d->m_segment = d->m_route.closestSegmentTo( d->m_position, distance );
+    d->m_route.setPosition( location );
 
     d->updateViaPoints( d->m_position );
-
-    /** @todo: use correct values */
-    emit nextInstruction( 0.0, d->m_segment.distance() );
+    /** @todo: use correct values. Move elsewhere? */
+    qreal distance = EARTH_RADIUS * distanceSphere( location, d->m_route.positionOnRoute() );
+    emit nextInstruction( 0.0, 42000.0 );
 
     qreal deviation = 0.0;
     if ( d->m_positionTracking && d->m_positionTracking->accuracy().vertical > 0.0 ) {
@@ -386,69 +356,9 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal /*spee
     }
 }
 
-qreal RoutingModel::remainingTime() const
-{
-    /** @todo: more precise, accumulate? */
-   return d->m_segment.travelTime();
-}
-
-qint32 RoutingModel::totalTimeRemaining() const
-{
-    /** @todo: more precise, accumulate? */
-    return d->m_segment.travelTime();
-}
-
-GeoDataCoordinates RoutingModel::instructionPoint() const
-{
-    return d->m_segment.nextRouteSegment().maneuver().position();
-}
-
-QString RoutingModel::instructionText() const
-{
-    return d->m_segment.nextRouteSegment().maneuver().instructionText();
-}
-
 bool RoutingModel::deviatedFromRoute() const
 {
     return d->m_deviation != RoutingModelPrivate::OnRoute;
-}
-
-qreal RoutingModel::nextInstructionDistance() const
-{
-    /** @todo: implement correctly */
-    return EARTH_RADIUS * distanceSphere( d->m_position, d->m_segment.maneuver().position() );
-}
-
-qreal RoutingModel::currentInstructionLength() const
-{
-    /** @todo: remove, unused */
-    return d->m_segment.distance();
-}
-
-QString RoutingModel::nextInstructionPixmapFile() const
-{
-    return d->m_turnTypePixmaps[d->m_segment.nextRouteSegment().maneuver().direction()];
-}
-
-QPixmap RoutingModel::nextInstructionPixmap() const
-{
-    return QPixmap( nextInstructionPixmapFile() );
-}
-
-RoutingInstruction::TurnType RoutingModel::nextTurnType() const
-{
-    return d->m_segment.nextRouteSegment().nextRouteSegment().maneuver().direction();
-}
-
-QPixmap RoutingModel::followingInstructionPixmap() const
-{
-    return QPixmap( d->m_turnTypePixmaps[d->m_segment.nextRouteSegment().nextRouteSegment().maneuver().direction()] );
-}
-
-int RoutingModel::nextTurnIndex() const
-{
-    /** @todo: implement correctly */
-    return 42;
 }
 
 const Route & RoutingModel::route() const

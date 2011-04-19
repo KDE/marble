@@ -20,6 +20,7 @@
 #include "MarbleGraphicsGridLayout.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
+#include "MarbleMath.h"
 #include "MarbleLocale.h"
 #include "PluginManager.h"
 #include "PositionTracking.h"
@@ -94,6 +95,10 @@ public:
     QString fuzzyDistance( qreal distanceMeter ) const;
 
     void readSettings();
+
+    qreal nextInstructionDistance() const;
+
+    qreal remainingDistance() const;
 
 private:
     RoutingPlugin* m_parent;
@@ -272,18 +277,17 @@ void RoutingPluginPrivate::toggleGuidanceMode( bool enabled )
     forceRepaint();
 }
 
-void RoutingPluginPrivate::updateDestinationInformation( qint32 remainingTime, qreal remainingDistance )
+void RoutingPluginPrivate::updateDestinationInformation( qint32, qreal )
 {
-    Q_UNUSED( remainingTime );
-
     if ( m_routingModel->rowCount() != 0 ) {
-        qreal distanceLeft = m_routingModel->nextInstructionDistance();
-        m_audio->update( m_routingModel->nextTurnIndex(), distanceLeft, m_routingModel->nextTurnType() );
+        qreal remaining = remainingDistance();
+        qreal distanceLeft = nextInstructionDistance();
+        m_audio->update( m_routingModel->route(), distanceLeft );
 
         m_nearNextInstruction = distanceLeft < thresholdDistance;
 
         QString pixmapHtml = "<img src=\":/flag.png\" /><br />";
-        m_widget.destinationDistanceLabel->setText( pixmapHtml + richText( fuzzyDistance( remainingDistance ) ) );
+        m_widget.destinationDistanceLabel->setText( pixmapHtml + richText( fuzzyDistance( remaining ) ) );
 
         m_widget.instructionIconLabel->setEnabled( m_nearNextInstruction );
         m_widget.progressBar->setMaximum( thresholdDistance );
@@ -291,41 +295,28 @@ void RoutingPluginPrivate::updateDestinationInformation( qint32 remainingTime, q
 
         updateButtonVisibility();
 
-        QString pixmap = m_routingModel->nextInstructionPixmapFile();
+        QString pixmap = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().directionPixmap();
         pixmapHtml = QString( "<p align=\"center\"><img src=\"%1\" /><br />%2</p>" ).arg( pixmap );
         m_widget.instructionIconLabel->setText( pixmapHtml.arg( richText( fuzzyDistance( distanceLeft ) ) ) );
 
-        m_widget.followingInstructionIconLabel->setPixmap( m_routingModel->followingInstructionPixmap() );
-
-        updateInstructionLabel( remainingDistance );
+        updateInstructionLabel( remaining );
     }
 }
 
 void RoutingPluginPrivate::updateInstructionLabel( qreal remainingDistance )
 {
-    if( m_routingModel->remainingTime() < thresholdTime && !m_routingModel->instructionText().isEmpty() ) {
-        m_widget.instructionLabel->setText( richText( "%1" ).arg( m_routingModel->instructionText() ) );
-    } else {
-        qreal instructionDistance = m_routingModel->nextInstructionDistance();
-        QString indicatorText = m_routingModel->instructionText().isEmpty() ?
-                                richText( "Destination reached in %1 %2" ) :
-                                richText( "Next turn in %1 %2" );
+    QString const instructionText = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().instructionText();
+    m_widget.instructionLabel->setText( richText( "%1" ).arg( instructionText ) );
 
-        if( remainingDistance > 50 ) {
-            m_routeCompleted = false;
-            if( instructionDistance < 1000 ) {
-                m_widget.instructionLabel->setText( indicatorText.arg( int( instructionDistance ) ).arg( "meters" ) );
-            } else {
-                m_widget.instructionLabel->setText( indicatorText.arg( instructionDistance * METER2KM, 0, 'f', 1 ).arg( " km " ) );
-            }
-        } else {
-            if ( !m_routeCompleted ) {
-                m_audio->announceDestination();
-                QString content = "Arrived at destination. <a href=\"#reverse\">Calculate the way back.</a>";
-                m_widget.instructionLabel->setText( richText( "%1" ).arg( content ) );
-            }
-            m_routeCompleted = true;
+    if( remainingDistance > 50 ) {
+        m_routeCompleted = false;
+    } else {
+        if ( !m_routeCompleted ) {
+            m_audio->announceDestination();
+            QString content = "Arrived at destination. <a href=\"#reverse\">Calculate the way back.</a>";
+            m_widget.instructionLabel->setText( richText( "%1" ).arg( content ) );
         }
+        m_routeCompleted = true;
     }
 
     m_widgetItem->update();
@@ -377,6 +368,37 @@ void RoutingPluginPrivate::readSettings()
         m_configUi.soundRadioButton->setChecked( sound );
         m_configUi.speakerRadioButton->setChecked( !sound );
     }
+}
+
+qreal RoutingPluginPrivate::nextInstructionDistance() const
+{
+    GeoDataCoordinates position = m_routingModel->route().position();
+    GeoDataCoordinates onRoute = m_routingModel->route().positionOnRoute();
+    qreal distance = EARTH_RADIUS * distanceSphere( position, onRoute );
+    const RouteSegment &segment = m_routingModel->route().currentSegment();
+    for (int i=0; i<segment.path().size(); ++i) {
+        if (segment.path()[i] == onRoute) {
+            return distance + segment.path().length( EARTH_RADIUS, i );
+        }
+    }
+
+    return distance;
+}
+
+qreal RoutingPluginPrivate::remainingDistance() const
+{
+    GeoDataCoordinates position = m_routingModel->route().position();
+    bool foundSegment = false;
+    qreal distance = nextInstructionDistance();
+    for ( int i=0; i<m_routingModel->route().size(); ++i ) {
+        if ( foundSegment ) {
+            distance += m_routingModel->route().at( i ).distance();
+        } else {
+            foundSegment =  m_routingModel->route().at( i ).maneuver().position() == position;
+        }
+    }
+
+    return distance;
 }
 
 void RoutingPlugin::writeSettings()

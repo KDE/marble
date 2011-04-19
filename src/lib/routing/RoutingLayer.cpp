@@ -279,8 +279,14 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         m_routeRegion = painter->regionFromPolyline( waypoints, 8 );
     }
 
+
     bluePen.setWidth( 2 );
     painter->setPen( bluePen );
+
+    // Map matched position
+    //painter->setBrush( QBrush( oxygenBrickRed4) );
+    //painter->drawEllipse( m_routingModel->route().positionOnRoute(), 8, 8 );
+
     painter->setBrush( QBrush( alphaAdjusted( oxygenAluminumGray4, 200 ) ) );
 
     if ( !m_dropStopOver.isNull() ) {
@@ -346,16 +352,11 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         }
 
         if( !m_routingModel->deviatedFromRoute() ) {
-            qreal timeRemaining = m_routingModel->remainingTime();
-            qreal thresholdMinimum = 3.0;
-            GeoDataCoordinates location = m_routingModel->instructionPoint();
-            QString nextInstruction = m_routingModel->instructionText();
-            if( timeRemaining < thresholdMinimum && !nextInstruction.isEmpty() ) {
+            GeoDataCoordinates location = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().position();
+            QString nextInstruction = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().instructionText();
+            if( !nextInstruction.isEmpty() ) {
                 painter->setBrush( QBrush( oxygenBrownOrange4 ) );
                 painter->drawEllipse( location, 20, 20 );
-            } else {
-                painter->setBrush( QBrush( oxygenSunYellow6 ) );
-                painter->drawEllipse( location, 12, 12 );
             }
         }
     }

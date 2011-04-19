@@ -40,11 +40,17 @@ public:
 
     GeoDataLineString waypoints() const;
 
-    qreal distanceTo( const GeoDataCoordinates &point ) const;
+    void setPosition( const GeoDataCoordinates &position );
 
-    const RouteSegment & closestSegmentTo( const GeoDataCoordinates &point, qreal &distance ) const;
+    GeoDataCoordinates position() const;
+
+    const RouteSegment & currentSegment() const;
+
+    GeoDataCoordinates positionOnRoute() const;
 
 private:
+    void updatePosition() const;
+
     GeoDataLatLonBox m_bounds;
 
     qreal m_distance;
@@ -59,7 +65,13 @@ private:
 
     int m_travelTime;
 
+    mutable bool m_positionDirty;
+
     mutable int m_closestSegmentIndex;
+
+    mutable GeoDataCoordinates m_positionOnRoute;
+
+    GeoDataCoordinates m_position;
 };
 
 }

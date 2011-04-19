@@ -33,8 +33,6 @@ public:
 
     Phonon::MediaObject *m_output;
 
-    int m_lastIndex;
-
     qreal m_lastDistance;
 
     RoutingInstruction::TurnType m_lastTurnType;
@@ -42,6 +40,8 @@ public:
     bool m_muted;
 
     bool m_soundEnabled;
+
+    GeoDataCoordinates m_lastTurnPoint;
 
     AudioOutputPrivate( AudioOutput* parent );
 
@@ -63,8 +63,8 @@ public:
 };
 
 AudioOutputPrivate::AudioOutputPrivate( AudioOutput* parent ) :
-    q( parent ), m_output( 0 ), m_lastIndex( -1 ),
-    m_lastDistance( 0.0 ), m_muted( false ), m_soundEnabled( true )
+    q( parent ), m_output( 0 ), m_lastDistance( 0.0 ),
+    m_muted( false ), m_soundEnabled( true )
 {
     // nothing to do
 }
@@ -179,13 +179,15 @@ AudioOutput::~AudioOutput()
     delete d;
 }
 
-void AudioOutput::update( int index, qreal distance, RoutingInstruction::TurnType turnType )
+void AudioOutput::update( const Route &route, qreal distance )
 {
     if ( d->m_muted ) {
         return;
     }
 
-    if ( index != d->m_lastIndex || turnType != d->m_lastTurnType ) {
+    RoutingInstruction::TurnType turnType = route.currentSegment().maneuver().direction();
+    if ( !( d->m_lastTurnPoint == route.currentSegment().maneuver().position() ) || turnType != d->m_lastTurnType ) {
+        d->m_lastTurnPoint = route.currentSegment().maneuver().position();
         d->reset();
     }
 
@@ -199,7 +201,6 @@ void AudioOutput::update( int index, qreal distance, RoutingInstruction::TurnTyp
         }
     }
 
-    d->m_lastIndex = index;
     d->m_lastTurnType = turnType;
     d->m_lastDistance = distance;
 }

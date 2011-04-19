@@ -12,6 +12,7 @@
 #define MARBLE_AUDIOOUTPUT_H
 
 #include "routing/instructions/RoutingInstruction.h"
+#include "routing/Route.h"
 
 namespace Marble
 {
@@ -41,7 +42,7 @@ public:
       * @param distance The distance in meters to the next turn point
       * @param turnType The turn type to execute at the next turn point
       */
-    void update( int index, qreal distance, RoutingInstruction::TurnType turnType );
+    void update( const Route &route, qreal distance );
 
     void announceStart();
 

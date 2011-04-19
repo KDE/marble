@@ -119,22 +119,26 @@ qreal RouteSegment::distancePointToLine(const GeoDataCoordinates &p, const GeoDa
     }
 }
 
-qreal RouteSegment::distanceTo( const GeoDataCoordinates &point ) const
+qreal RouteSegment::distanceTo( const GeoDataCoordinates &point, GeoDataCoordinates &closest ) const
 {
     Q_ASSERT( !m_path.isEmpty() );
 
     if ( m_path.size() == 1 ) {
+        closest = m_path.first();
         return EARTH_RADIUS * distanceSphere( m_path.first(), point );
     }
 
     qreal minDistance = -1.0;
+    int minIndex = 0;
     for ( int i=1; i<m_path.size(); ++i ) {
         qreal const distance = distancePointToLine( point, m_path[i-1], m_path[i] );
         if ( minDistance < 0.0 || distance < minDistance ) {
             minDistance = distance;
+            minIndex = i;
         }
     }
 
+    closest = m_path[minIndex];
     return minDistance;
 }
 

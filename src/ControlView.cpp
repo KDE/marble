@@ -345,7 +345,7 @@ void ControlView::printRouteSummary( QTextDocument &document, QString &text)
         }
 
         QString label = "<p>%1 %2</p>";
-        qreal distance = routingModel->totalDistance();
+        qreal distance = routingModel->route().distance();
         QString unit = distance > 1000 ? "km" : "m";
         int precision = distance > 1000 ? 1 : 0;
         if ( distance > 1000 ) {

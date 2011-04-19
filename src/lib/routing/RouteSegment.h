@@ -20,7 +20,7 @@
 namespace Marble
 {
 
-class RouteSegment
+class MARBLE_EXPORT RouteSegment
 {
 public:
     RouteSegment();
@@ -47,7 +47,7 @@ public:
 
     void setNextRouteSegment( const RouteSegment* segment );
 
-    qreal distanceTo( const GeoDataCoordinates &point ) const;
+    qreal distanceTo( const GeoDataCoordinates &point, GeoDataCoordinates &closest ) const;
 
     qreal minimalDistanceTo( const GeoDataCoordinates &point ) const;
 

@@ -16,6 +16,7 @@ namespace Marble
 Route::Route() :
     m_distance( 0.0 ),
     m_travelTime( 0 ),
+    m_positionDirty( true ),
     m_closestSegmentIndex( -1 )
 {
     // nothing to do
@@ -79,47 +80,68 @@ GeoDataLineString Route::waypoints() const
     return m_waypoints;
 }
 
-qreal Route::distanceTo( const GeoDataCoordinates &point ) const
+void Route::setPosition( const GeoDataCoordinates &position )
 {
-    qreal minDistance = -1.0;
-    foreach( const RouteSegment &segment, m_segments ) {
-        qreal const distance = segment.distanceTo( point );
-        if ( minDistance < 0.0 || distance < minDistance ) {
-            minDistance = distance;
-        }
-    }
-    return minDistance;
+    m_position = position;
+    m_positionDirty = true;
 }
 
-const RouteSegment & Route::closestSegmentTo( const GeoDataCoordinates &point, qreal &distance ) const
+GeoDataCoordinates Route::position() const
+{
+    return m_position;
+}
+
+void Route::updatePosition() const
 {
     if ( !m_segments.isEmpty() ) {
         if ( m_closestSegmentIndex < 0 || m_closestSegmentIndex >= m_segments.size() ) {
             m_closestSegmentIndex = 0;
         }
 
-        distance = m_segments[m_closestSegmentIndex].distanceTo( point );
+        qreal distance = m_segments[m_closestSegmentIndex].distanceTo( m_position, m_positionOnRoute );
         QList<int> candidates;
 
         for ( int i=0; i<m_segments.size(); ++i ) {
-            if ( i != m_closestSegmentIndex && m_segments[i].minimalDistanceTo( point ) <= distance ) {
+            if ( i != m_closestSegmentIndex && m_segments[i].minimalDistanceTo( m_position ) <= distance ) {
                 candidates << i;
             }
         }
 
+        GeoDataCoordinates closest;
         foreach( int i, candidates ) {
-            qreal const dist = m_segments[i].distanceTo( point );
+            qreal const dist = m_segments[i].distanceTo( m_position, closest );
             if ( distance < 0.0 || dist < distance ) {
                 distance = dist;
                 m_closestSegmentIndex = i;
+                m_positionOnRoute = closest;
             }
         }
-
-        return m_segments[m_closestSegmentIndex];
     }
 
-    static RouteSegment invalid;
-    return invalid;
+    m_positionDirty = false;
+}
+
+const RouteSegment & Route::currentSegment() const
+{
+    if ( m_positionDirty ) {
+        updatePosition();
+    }
+
+    if ( m_closestSegmentIndex < 0 || m_closestSegmentIndex >= m_segments.size() ) {
+        static RouteSegment invalid;
+        return invalid;
+    }
+
+    return m_segments[m_closestSegmentIndex];
+}
+
+GeoDataCoordinates Route::positionOnRoute() const
+{
+    if ( m_positionDirty ) {
+        updatePosition();
+    }
+
+    return m_positionOnRoute;
 }
 
 }

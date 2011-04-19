@@ -40,18 +40,6 @@ class MARBLE_EXPORT RoutingModel : public QAbstractListModel
     Q_PROPERTY( bool deviatedFromRoute READ deviatedFromRoute NOTIFY deviatedFromRoute )
 
 public:
-    struct Duration
-    {
-        unsigned int days;
-        QTime time;
-
-        explicit Duration( unsigned int days_ = 0, const QTime &time_ = QTime() )
-            :days(days_), time(time_)
-        {
-            // nothing to do
-        }
-    };
-
     enum RoutingItemDataRole {
         CoordinateRole = MarblePlacemarkModel::CoordinateRole // synchronized with MarblePlacemarkModel
     };
@@ -79,17 +67,6 @@ public:
     // the internal representation using a QVector<RouteElement> may go away
 
     /**
-      * Returns the total (estimated) time it takes to travel from
--     * source to destination
-      */
-    Duration duration() const;
-
-    /**
-      * Returns the total route distance ( meters )
-      */
-    qreal totalDistance() const;
-
-    /**
       * Export waypoints and instructions in gpx format
       */
     void exportGpx( QIODevice *device ) const;
@@ -111,64 +88,9 @@ public:
     int rightNeighbor( const GeoDataCoordinates &position, RouteRequest const *const route ) const;
 
     /**
-     * returns the time remaining( minutes ) to reach the next instruction point
-     */
-    qreal remainingTime() const;
-
-    /**
-     * returns the position of next instruction point
-     */
-    GeoDataCoordinates instructionPoint() const;
-
-    /**
-     * returns the next valid instruction
-     */
-    QString instructionText() const;
-
-    /**
-     * returns the total time remaining to reach the destination ( seconds )
-     */
-    qint32 totalTimeRemaining() const;
-
-    /**
      * returns whether the gps location is on route
      */
     bool deviatedFromRoute() const;
-
-    /**
-     * returns distance( in meters ) to the next instruction from the current location on the route
-     */
-    qreal nextInstructionDistance() const;
-
-    /**
-     * returns length( in meters ) of the current instruction
-     */
-    qreal currentInstructionLength() const;
-
-    /**
-      * Returns an icon indicating the turn type for the next driving instruction
-      */
-    QPixmap nextInstructionPixmap() const;
-
-    /**
-      * Returns an icon file path indicating the turn type for the next driving instruction
-      */
-    QString nextInstructionPixmapFile() const;
-
-    /**
-      * Returns the turn type of the next driving instruction
-      */
-    RoutingInstruction::TurnType nextTurnType() const;
-
-    /**
-      * Returns the index of the next turn point
-      */
-    int nextTurnIndex() const;
-
-    /**
-      * Returns an icon indicating the turn type for the next but one driving instruction
-      */
-    QPixmap followingInstructionPixmap() const;
 
     const Route & route() const;
 
