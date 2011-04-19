@@ -17,11 +17,10 @@
 namespace Marble
 {
 
-class Maneuver
+class MARBLE_EXPORT Maneuver
 {
 
 public:
-
     Maneuver();
 
     RoutingInstruction::TurnType direction() const;
@@ -42,6 +41,8 @@ public:
 
     void setInstructionText( const QString &text );
 
+    QString directionPixmap() const;
+
 private:
     RoutingInstruction::TurnType m_direction;
 
@@ -52,6 +53,8 @@ private:
     bool m_hasWaypoint;
 
     QString m_instructionText;
+
+    static QMap<RoutingInstruction::TurnType,QString> m_turnTypePixmaps;
 };
 
 }
