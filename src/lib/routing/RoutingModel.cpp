@@ -193,7 +193,7 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
                 return QVariant();
             }
             break;
-        case CoordinateRole:
+        case MarblePlacemarkModel::CoordinateRole:
             return QVariant::fromValue( segment.maneuver().position() );
             break;
         default:

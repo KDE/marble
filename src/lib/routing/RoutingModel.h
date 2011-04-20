@@ -40,10 +40,6 @@ class MARBLE_EXPORT RoutingModel : public QAbstractListModel
     Q_PROPERTY( bool deviatedFromRoute READ deviatedFromRoute NOTIFY deviatedFromRoute )
 
 public:
-    enum RoutingItemDataRole {
-        CoordinateRole = MarblePlacemarkModel::CoordinateRole // synchronized with MarblePlacemarkModel
-    };
-
     /** Constructor */
     explicit RoutingModel( RouteRequest* request, MarbleModel *model, QObject *parent = 0 );
 
@@ -108,7 +104,6 @@ Q_SIGNALS:
     * emits a signal regarding information about total time( seconds ) and distance( metres ) remaining to reach destination
     */
     void nextInstruction( qint32 totalTimeRemaining, qreal totalDistanceRemaining );
-    void routeCalculated( int );
     void deviatedFromRoute( bool deviated );
 
     /** A different route was loaded */

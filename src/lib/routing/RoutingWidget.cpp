@@ -297,11 +297,7 @@ void RoutingWidget::retrieveRoute()
 
 void RoutingWidget::activateItem ( const QModelIndex &index )
 {
-    // Underlying model can be both a placemark model and a routing model
-    // We rely on the same role index for coordinates
-    Q_ASSERT( int( RoutingModel::CoordinateRole ) == int( MarblePlacemarkModel::CoordinateRole ) );
-
-    QVariant data = index.data( RoutingModel::CoordinateRole );
+    QVariant data = index.data( MarblePlacemarkModel::CoordinateRole );
 
     if ( !data.isNull() ) {
         GeoDataCoordinates position = qvariant_cast<GeoDataCoordinates>( data );
@@ -526,7 +522,7 @@ void RoutingWidget::updateAlternativeRoutes()
         GeoDataLineString bbox;
         for ( int i = 0; i < d->m_routingManager->routingModel()->rowCount(); ++i ) {
             QModelIndex index = d->m_routingManager->routingModel()->index( i, 0 );
-            QVariant pos = index.data( RoutingModel::CoordinateRole );
+            QVariant pos = index.data( MarblePlacemarkModel::CoordinateRole );
             if ( !pos.isNull() ) {
                 bbox << qVariantValue<GeoDataCoordinates>( pos );
             }

@@ -319,7 +319,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
     for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
         QModelIndex index = m_routingModel->index( i, 0 );
-        GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
+        GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
 
         if ( m_routingModel && m_selectionModel ) {
 
@@ -375,7 +375,7 @@ void RoutingLayerPrivate::renderAnnotations( GeoPainter *painter )
         if ( m_routingModel && m_selectionModel ) {
             if ( m_selectionModel->selection().contains( index ) ) {
                 bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-                GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
+                GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
                 painter->setPen( QColor( Qt::black ) );
                 painter->setBrush( QBrush( oxygenSunYellow6 ) );
                 painter->drawAnnotation( pos, index.data().toString(), QSize( smallScreen ? 240 : 120, 0 ), 10, 30, 5, 5 );
