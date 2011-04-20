@@ -145,7 +145,7 @@ RoutingModel::RoutingModel( RouteRequest* request, MarbleModel *model, QObject *
     {
         d->m_positionTracking = model->positionTracking();
         QObject::connect( d->m_positionTracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-                 this, SLOT( currentInstruction( GeoDataCoordinates, qreal ) ) );
+                 this, SLOT( updatePosition( GeoDataCoordinates, qreal ) ) );
     }
 }
 
@@ -333,15 +333,14 @@ int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteReques
     return route->size()-1;
 }
 
-void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal /*speed*/ )
+void RoutingModel::updatePosition( GeoDataCoordinates location, qreal /*speed*/ )
 {
     d->m_position = location;
     d->m_route.setPosition( location );
 
     d->updateViaPoints( d->m_position );
-    /** @todo: use correct values. Move elsewhere? */
     qreal distance = EARTH_RADIUS * distanceSphere( location, d->m_route.positionOnRoute() );
-    emit nextInstruction( 0.0, 42000.0 );
+    emit positionChanged();
 
     qreal deviation = 0.0;
     if ( d->m_positionTracking && d->m_positionTracking->accuracy().vertical > 0.0 ) {

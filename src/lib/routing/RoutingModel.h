@@ -59,9 +59,6 @@ public:
 
     // Model data filling
 
-    // importGeoDataDocument() will probably become setModel(GeoDataDocument*) in the future and
-    // the internal representation using a QVector<RouteElement> may go away
-
     /**
       * Export waypoints and instructions in gpx format
       */
@@ -97,13 +94,13 @@ public Q_SLOTS:
       */
     bool setCurrentRoute( GeoDataDocument* document );
 
-    void currentInstruction( GeoDataCoordinates, qreal );
+    void updatePosition( GeoDataCoordinates, qreal );
 
 Q_SIGNALS:
    /**
     * emits a signal regarding information about total time( seconds ) and distance( metres ) remaining to reach destination
     */
-    void nextInstruction( qint32 totalTimeRemaining, qreal totalDistanceRemaining );
+    void positionChanged();
     void deviatedFromRoute( bool deviated );
 
     /** A different route was loaded */

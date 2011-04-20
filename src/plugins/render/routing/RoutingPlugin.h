@@ -74,7 +74,7 @@ private:
     Q_PRIVATE_SLOT( d, void toggleGuidanceMode( bool enabled ) )
 
     /** sets time and distance remaining to reach the destination */
-    Q_PRIVATE_SLOT( d, void updateDestinationInformation( qint32, qreal ) )
+    Q_PRIVATE_SLOT( d, void updateDestinationInformation() )
 
     /** Update the checked state of the position tracking button */
     Q_PRIVATE_SLOT( d, void updateGpsButton( PositionProviderPlugin *activePlugin ) )

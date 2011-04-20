@@ -84,7 +84,7 @@ public:
 
     void toggleGuidanceMode( bool enabled );
 
-    void updateDestinationInformation( qint32, qreal );
+    void updateDestinationInformation();
 
     void updateGpsButton( PositionProviderPlugin *activePlugin );
 
@@ -242,11 +242,11 @@ void RoutingPluginPrivate::toggleGuidanceMode( bool enabled )
     updateButtonVisibility();
 
     if( enabled ) {
-        QObject::connect( m_routingModel, SIGNAL( nextInstruction( qint32, qreal ) ),
-                 m_parent, SLOT( updateDestinationInformation( qint32, qreal ) ) );
+        QObject::connect( m_routingModel, SIGNAL( positionChanged() ),
+                 m_parent, SLOT( updateDestinationInformation() ) );
     } else {
-        QObject::disconnect( m_routingModel, SIGNAL( nextInstruction( qint32, qreal ) ),
-                    m_parent, SLOT( updateDestinationInformation( qint32, qreal ) ) );
+        QObject::disconnect( m_routingModel, SIGNAL( positionChanged() ),
+                    m_parent, SLOT( updateDestinationInformation() ) );
     }
 
     if ( enabled ) {
@@ -277,7 +277,7 @@ void RoutingPluginPrivate::toggleGuidanceMode( bool enabled )
     forceRepaint();
 }
 
-void RoutingPluginPrivate::updateDestinationInformation( qint32, qreal )
+void RoutingPluginPrivate::updateDestinationInformation()
 {
     if ( m_routingModel->rowCount() != 0 ) {
         qreal remaining = remainingDistance();
