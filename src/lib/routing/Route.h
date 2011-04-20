@@ -46,6 +46,8 @@ public:
 
     const RouteSegment & currentSegment() const;
 
+    GeoDataCoordinates currentWaypoint() const;
+
     GeoDataCoordinates positionOnRoute() const;
 
 private:
@@ -70,6 +72,8 @@ private:
     mutable int m_closestSegmentIndex;
 
     mutable GeoDataCoordinates m_positionOnRoute;
+
+    mutable GeoDataCoordinates m_currentWaypoint;
 
     GeoDataCoordinates m_position;
 };

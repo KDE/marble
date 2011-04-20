@@ -98,7 +98,7 @@ void Route::updatePosition() const
             m_closestSegmentIndex = 0;
         }
 
-        qreal distance = m_segments[m_closestSegmentIndex].distanceTo( m_position, m_positionOnRoute );
+        qreal distance = m_segments[m_closestSegmentIndex].distanceTo( m_position, m_currentWaypoint, m_positionOnRoute );
         QList<int> candidates;
 
         for ( int i=0; i<m_segments.size(); ++i ) {
@@ -107,13 +107,14 @@ void Route::updatePosition() const
             }
         }
 
-        GeoDataCoordinates closest;
+        GeoDataCoordinates closest, interpolated;
         foreach( int i, candidates ) {
-            qreal const dist = m_segments[i].distanceTo( m_position, closest );
+            qreal const dist = m_segments[i].distanceTo( m_position, closest, interpolated );
             if ( distance < 0.0 || dist < distance ) {
                 distance = dist;
                 m_closestSegmentIndex = i;
-                m_positionOnRoute = closest;
+                m_positionOnRoute = interpolated;
+                m_currentWaypoint = closest;
             }
         }
     }
@@ -142,6 +143,15 @@ GeoDataCoordinates Route::positionOnRoute() const
     }
 
     return m_positionOnRoute;
+}
+
+GeoDataCoordinates Route::currentWaypoint() const
+{
+    if ( m_positionDirty ) {
+        updatePosition();
+    }
+
+    return m_currentWaypoint;
 }
 
 }

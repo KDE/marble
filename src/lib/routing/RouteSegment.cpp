@@ -119,7 +119,34 @@ qreal RouteSegment::distancePointToLine(const GeoDataCoordinates &p, const GeoDa
     }
 }
 
-qreal RouteSegment::distanceTo( const GeoDataCoordinates &point, GeoDataCoordinates &closest ) const
+GeoDataCoordinates RouteSegment::projected(const GeoDataCoordinates &p, const GeoDataCoordinates &a, const GeoDataCoordinates &b) const
+{
+    qreal const y0 = p.latitude();
+    qreal const x0 = p.longitude();
+    qreal const y1 = a.latitude();
+    qreal const x1 = a.longitude();
+    qreal const y2 = b.latitude();
+    qreal const x2 = b.longitude();
+    qreal const y01 = x0 - x1;
+    qreal const x01 = y0 - y1;
+    qreal const y21 = x2 - x1;
+    qreal const x21 = y2 - y1;
+    qreal const len =(x1-x2)*(x1-x2)+(y1-y2)*(y1-y2);
+    qreal const t = (x01*x21 + y01*y21) / len;
+    if ( t<0.0 ) {
+        return b;
+    } else if ( t > 1.0 ) {
+        return a;
+    } else {
+        // a + t (b - a);
+        qreal const lon = x1 + t * ( x2 - x1 );
+        qreal const lat = y1 + t * ( y2 - y1 );
+        return GeoDataCoordinates( lon, lat );
+    }
+
+}
+
+qreal RouteSegment::distanceTo( const GeoDataCoordinates &point, GeoDataCoordinates &closest, GeoDataCoordinates &interpolated ) const
 {
     Q_ASSERT( !m_path.isEmpty() );
 
@@ -139,6 +166,11 @@ qreal RouteSegment::distanceTo( const GeoDataCoordinates &point, GeoDataCoordina
     }
 
     closest = m_path[minIndex];
+    if ( minIndex == 0 ) {
+        interpolated = closest;
+    } else {
+        interpolated = projected( point, m_path[minIndex-1], m_path[minIndex] );
+    }
     return minDistance;
 }
 

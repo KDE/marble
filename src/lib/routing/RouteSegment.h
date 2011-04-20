@@ -47,12 +47,14 @@ public:
 
     void setNextRouteSegment( const RouteSegment* segment );
 
-    qreal distanceTo( const GeoDataCoordinates &point, GeoDataCoordinates &closest ) const;
+    qreal distanceTo( const GeoDataCoordinates &point, GeoDataCoordinates &closest, GeoDataCoordinates &interpolated ) const;
 
     qreal minimalDistanceTo( const GeoDataCoordinates &point ) const;
 
 private:
     qreal distancePointToLine(const GeoDataCoordinates &p, const GeoDataCoordinates &a, const GeoDataCoordinates &b) const;
+
+    GeoDataCoordinates projected(const GeoDataCoordinates &p, const GeoDataCoordinates &a, const GeoDataCoordinates &b) const;
 
     bool m_valid;
 

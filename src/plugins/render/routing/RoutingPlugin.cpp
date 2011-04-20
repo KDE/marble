@@ -373,8 +373,9 @@ void RoutingPluginPrivate::readSettings()
 qreal RoutingPluginPrivate::nextInstructionDistance() const
 {
     GeoDataCoordinates position = m_routingModel->route().position();
-    GeoDataCoordinates onRoute = m_routingModel->route().positionOnRoute();
-    qreal distance = EARTH_RADIUS * distanceSphere( position, onRoute );
+    GeoDataCoordinates interpolated = m_routingModel->route().positionOnRoute();
+    GeoDataCoordinates onRoute = m_routingModel->route().currentWaypoint();
+    qreal distance = EARTH_RADIUS * ( distanceSphere( position, interpolated ) + distanceSphere( interpolated, onRoute ) );
     const RouteSegment &segment = m_routingModel->route().currentSegment();
     for (int i=0; i<segment.path().size(); ++i) {
         if (segment.path()[i] == onRoute) {
@@ -387,7 +388,7 @@ qreal RoutingPluginPrivate::nextInstructionDistance() const
 
 qreal RoutingPluginPrivate::remainingDistance() const
 {
-    GeoDataCoordinates position = m_routingModel->route().position();
+    GeoDataCoordinates position = m_routingModel->route().currentSegment().maneuver().position();
     bool foundSegment = false;
     qreal distance = nextInstructionDistance();
     for ( int i=0; i<m_routingModel->route().size(); ++i ) {
