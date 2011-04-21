@@ -539,31 +539,22 @@ GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const
 
 qreal GeoDataLineString::length( qreal planetRadius, int offset ) const
 {
-
     if( offset < 0 || offset >= size() ) {
         return 0;
     }
 
-    GeoDataCoordinates previousCoords;
     qreal length = 0.0;
-
-    GeoDataLineString::ConstIterator itBegin = constBegin() + offset;
-    GeoDataLineString::ConstIterator itEnd = constEnd();
-
-    GeoDataLineString::ConstIterator it = itBegin;
-
-    for(; it != itEnd; ++it )
+    QVector<GeoDataCoordinates> const & vector = p()->m_vector;
+    int const start = qMax(offset+1, 1);
+    int const end = p()->m_vector.size();
+    for( int i=start; i<end; ++i )
     {
-        if( it != itBegin )
-        {
-            length += distanceSphere( previousCoords, *it );
-        }
-        previousCoords = *it;
+        length += distanceSphere( vector[i-1], vector[i] );
     }
 
     return planetRadius * length;
-
 }
+
 QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator pos )
 {
     GeoDataGeometry::detach();
