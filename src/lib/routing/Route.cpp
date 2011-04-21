@@ -60,7 +60,7 @@ const RouteSegment & Route::at( int index ) const
     return m_segments[index];
 }
 
-GeoDataLineString Route::path() const
+const GeoDataLineString & Route::path() const
 {
     return m_path;
 }
@@ -70,12 +70,12 @@ int Route::travelTime() const
     return m_travelTime;
 }
 
-GeoDataLineString Route::turnPoints() const
+const GeoDataLineString & Route::turnPoints() const
 {
     return m_turnPoints;
 }
 
-GeoDataLineString Route::waypoints() const
+const GeoDataLineString & Route::waypoints() const
 {
     return m_waypoints;
 }

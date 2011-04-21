@@ -29,11 +29,11 @@ public:
 
     qreal distance() const;
 
-    Maneuver maneuver() const;
+    const Maneuver & maneuver() const;
 
     void setManeuver( const Maneuver &maneuver );
 
-    GeoDataLineString path() const;
+    const GeoDataLineString & path() const;
 
     void setPath( const GeoDataLineString &path );
 

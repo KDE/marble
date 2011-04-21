@@ -32,13 +32,13 @@ public:
 
     int size() const;
 
-    GeoDataLineString path() const;
+    const GeoDataLineString & path() const;
 
     int travelTime() const;
 
-    GeoDataLineString turnPoints() const;
+    const GeoDataLineString & turnPoints() const;
 
-    GeoDataLineString waypoints() const;
+    const GeoDataLineString & waypoints() const;
 
     void setPosition( const GeoDataCoordinates &position );
 

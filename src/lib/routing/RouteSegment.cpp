@@ -29,7 +29,7 @@ qreal RouteSegment::distance() const
     return m_distance;
 }
 
-Maneuver RouteSegment::maneuver() const
+const Maneuver & RouteSegment::maneuver() const
 {
     return m_maneuver;
 }
@@ -40,7 +40,7 @@ void RouteSegment::setManeuver( const Maneuver &maneuver )
     m_valid = true;
 }
 
-GeoDataLineString RouteSegment::path() const
+const GeoDataLineString & RouteSegment::path() const
 {
     return m_path;
 }
