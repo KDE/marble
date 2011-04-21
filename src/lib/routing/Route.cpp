@@ -33,6 +33,7 @@ void Route::addRouteSegment( const RouteSegment &segment )
             m_waypoints << segment.maneuver().waypoint();
         }
         m_segments.push_back( segment );
+        m_positionDirty = true;
 
         for ( int i=1; i<m_segments.size(); ++i ) {
             m_segments[i-1].setNextRouteSegment(&m_segments[i]);
