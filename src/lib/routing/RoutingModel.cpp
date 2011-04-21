@@ -351,7 +351,7 @@ void RoutingModel::updatePosition( GeoDataCoordinates location, qreal /*speed*/ 
     RoutingModelPrivate::RouteDeviation const deviated = distance < threshold ? RoutingModelPrivate::OnRoute : RoutingModelPrivate::OffRoute;
     if ( d->m_deviation != deviated ) {
         d->m_deviation = deviated;
-        emit deviatedFromRoute( deviated == RoutingModelPrivate::OffRoute);
+        emit deviatedFromRoute( deviated == RoutingModelPrivate::OffRoute );
     }
 }
 

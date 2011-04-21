@@ -22,6 +22,7 @@
 #include "MarbleWidget.h"
 #include "MarbleMath.h"
 #include "MarbleLocale.h"
+#include "MarbleDirs.h"
 #include "PluginManager.h"
 #include "PositionTracking.h"
 #include "PositionProviderPlugin.h"
@@ -73,8 +74,6 @@ public:
     void updateZoomButtons();
 
     void updateGuidanceModeButton();
-
-    void updateInstructionLabel( qreal remainingDistance );
 
     void forceRepaint();
 
@@ -279,7 +278,7 @@ void RoutingPluginPrivate::toggleGuidanceMode( bool enabled )
 
 void RoutingPluginPrivate::updateDestinationInformation()
 {
-    if ( m_routingModel->rowCount() != 0 ) {
+    if ( m_routingModel->route().currentSegment().isValid() ) {
         qreal remaining = remainingDistance();
         qreal distanceLeft = nextInstructionDistance();
         m_audio->update( m_routingModel->route(), distanceLeft );
@@ -295,31 +294,43 @@ void RoutingPluginPrivate::updateDestinationInformation()
 
         updateButtonVisibility();
 
-        QString pixmap = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().directionPixmap();
-        pixmapHtml = QString( "<p align=\"center\"><img src=\"%1\" /><br />%2</p>" ).arg( pixmap );
-        m_widget.instructionIconLabel->setText( pixmapHtml.arg( richText( fuzzyDistance( distanceLeft ) ) ) );
+        QString pixmap = MarbleDirs::path( "bitmaps/routing_step.png" );
+        pixmapHtml = QString( "<img src=\"%1\" />" ).arg( pixmap );
 
-        updateInstructionLabel( remaining );
-    }
-}
+        GeoDataCoordinates const onRoute = m_routingModel->route().positionOnRoute();
+        GeoDataCoordinates const ego = m_routingModel->route().position();
+        qreal const distanceToRoute = EARTH_RADIUS * distanceSphere( ego, onRoute );
 
-void RoutingPluginPrivate::updateInstructionLabel( qreal remainingDistance )
-{
-    QString const instructionText = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().instructionText();
-    m_widget.instructionLabel->setText( richText( "%1" ).arg( instructionText ) );
+        if ( !m_routingModel->route().currentSegment().isValid() ) {
+            m_widget.instructionLabel->setText( richText( QObject::tr( "Calculate a route to get directions." ) ) );
+            m_widget.instructionIconLabel->setText( pixmapHtml );
+        } else if ( distanceToRoute > 300.0 ) {
+            m_widget.instructionLabel->setText( richText( QObject::tr( "Route left." ) ) );
+            m_widget.instructionIconLabel->setText( pixmapHtml );
+        } else if ( !m_routingModel->route().currentSegment().nextRouteSegment().isValid() ) {
+            m_widget.instructionLabel->setText( richText( QObject::tr( "Destination ahead." ) ) );
+            m_widget.instructionIconLabel->setText( pixmapHtml );
+        } else {
+            pixmap = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().directionPixmap();
+            QString const instructionText = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().instructionText();
+            m_widget.instructionLabel->setText( richText( "%1" ).arg( instructionText ) );
+            pixmapHtml = QString( "<p align=\"center\"><img src=\"%1\" /><br />%2</p>" ).arg( pixmap );
+            m_widget.instructionIconLabel->setText( pixmapHtml.arg( richText( fuzzyDistance( distanceLeft ) ) ) );
 
-    if( remainingDistance > 50 ) {
-        m_routeCompleted = false;
-    } else {
-        if ( !m_routeCompleted ) {
-            m_audio->announceDestination();
-            QString content = "Arrived at destination. <a href=\"#reverse\">Calculate the way back.</a>";
-            m_widget.instructionLabel->setText( richText( "%1" ).arg( content ) );
+            if( remaining > 50 ) {
+                m_routeCompleted = false;
+            } else {
+                if ( !m_routeCompleted ) {
+                    m_audio->announceDestination();
+                    QString content = "Arrived at destination. <a href=\"#reverse\">Calculate the way back.</a>";
+                    m_widget.instructionLabel->setText( richText( "%1" ).arg( content ) );
+                }
+                m_routeCompleted = true;
+            }
         }
-        m_routeCompleted = true;
-    }
 
-    m_widgetItem->update();
+        m_widgetItem->update();
+    }
 }
 
 void RoutingPluginPrivate::updateGpsButton( PositionProviderPlugin *activePlugin )
