@@ -96,11 +96,6 @@ public:
                             const qreal itStepLon, const qreal itStepLat,
                             const int n ) const;
 
-    // maximum values for global texture coordinates
-    // ( with origin in upper left corner, measured in pixel) 
-    int     m_maxGlobalX;
-    int     m_maxGlobalY; // could be private also
-
     // Previous coordinates
     qreal  m_prevLat;
     qreal  m_prevLon;
@@ -121,7 +116,6 @@ public:
  private:
     Q_DISABLE_COPY( AbstractScanlineTextureMapper )
     StackedTile *m_tile;
-    int         m_previousRadius;
 
     // Coordinate transformations:
 

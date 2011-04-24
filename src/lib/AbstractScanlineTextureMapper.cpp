@@ -25,8 +25,6 @@ using namespace Marble;
 AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( StackedTileLoader * const tileLoader,
                                                               QObject * const parent )
     : QObject( parent ),
-      m_maxGlobalX( 0 ),
-      m_maxGlobalY( 0 ),
       m_prevLat( 0.0 ),
       m_prevLon( 0.0 ),
       m_interlaced( false ),
@@ -36,7 +34,6 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( StackedTileLoader 
       m_textureProjection( tileLoader->tileProjection() ),  // cache texture projection
       m_tileSize( tileLoader->tileSize() ),  // cache tile size
       m_tile( 0 ),
-      m_previousRadius( 0 ),
       m_toTileCoordinatesLon( 0.0 ),
       m_toTileCoordinatesLat( 0.0 ),
       m_tileLevel( 0 ),
@@ -83,9 +80,6 @@ void AbstractScanlineTextureMapper::setRadius( int radius )
 
     m_globalHeight = m_tileSize.height() * m_tileLoader->tileRowCount( m_tileLevel );
     m_normGlobalHeight = (qreal)( m_globalHeight /  M_PI );
-
-    m_maxGlobalX = m_globalWidth  - 1;
-    m_maxGlobalY = m_globalHeight - 1;
 
     // These variables move the origin of global texture coordinates from 
     // the center to the upper left corner and subtract the tile position 
@@ -475,16 +469,16 @@ void AbstractScanlineTextureMapper::nextTile( int &posX, int &posY )
     // ( with origin in upper left corner, measured in pixel) 
 
     int lon = posX + m_tilePosX;
-    if ( lon > m_maxGlobalX )
-        lon -= m_maxGlobalX;
+    if ( lon >= m_globalWidth )
+        lon -= m_globalWidth;
     else if ( lon < 0 )
-        lon += m_maxGlobalX;
+        lon += m_globalWidth;
 
     int lat = posY + m_tilePosY;
-    if ( lat > m_maxGlobalY )
-        lat -= m_maxGlobalY;
+    if ( lat >= m_globalHeight )
+        lat -= m_globalHeight;
     else if ( lat < 0 )
-        lat += m_maxGlobalY;
+        lat += m_globalHeight;
 
     // tileCol counts the tile columns left from the current tile.
     // tileRow counts the tile rows on the top from the current tile.
@@ -515,16 +509,16 @@ void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
     // ( with origin in upper left corner, measured in pixel) 
 
     int lon = (int)(posX + m_tilePosX);
-    if ( lon > m_maxGlobalX )
-        lon -= m_maxGlobalX;
+    if ( lon >= m_globalWidth )
+        lon -= m_globalWidth;
     else if ( lon < 0 )
-        lon += m_maxGlobalX;
+        lon += m_globalWidth;
 
     int lat = (int)(posY + m_tilePosY);
-    if ( lat > m_maxGlobalY )
-        lat -= m_maxGlobalY;
+    if ( lat >= m_globalHeight )
+        lat -= m_globalHeight;
     else if ( lat < 0 )
-        lat += m_maxGlobalY;
+        lat += m_globalHeight;
 
     // tileCol counts the tile columns left from the current tile.
     // tileRow counts the tile rows on the top from the current tile.
