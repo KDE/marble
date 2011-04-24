@@ -188,7 +188,7 @@ qreal GeoDataLatLonBox::rotation( GeoDataCoordinates::Unit unit ) const
     return d->m_rotation;
 }
 
-void GeoDataLatLonBox::boundaries( qreal &north, qreal &south, qreal &east, qreal &west, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonBox::boundaries( qreal &north, qreal &south, qreal &east, qreal &west, GeoDataCoordinates::Unit unit ) const
 {
     switch( unit ){
     default:
