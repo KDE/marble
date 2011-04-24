@@ -70,16 +70,25 @@ public:
 
     static int interpolationStep( ViewParams * const viewParams );
 
+    void setRadius( int radius );
+
+    int globalWidth() const;
+    int globalHeight() const;
+
+    bool m_interlaced;
+
+    StackedTileLoader *m_tileLoader;
+
+    GeoSceneTexture::Projection const m_textureProjection;
+    /// size of the tiles of of the current texture layer
+    QSize const m_tileSize;
+
+ private:
     // method for fast integer calculation
     void nextTile( int& posx, int& posy );
 
     // method for precise interpolation
     void nextTile( qreal& posx, qreal& posy );
-
-    void setRadius( int radius );
-
-    int globalWidth() const;
-    int globalHeight() const;
 
     // Converts Radian to global texture coordinates 
     // ( with origin in center, measured in pixel) 
@@ -96,28 +105,23 @@ public:
                             const qreal itStepLon, const qreal itStepLat,
                             const int n ) const;
 
-    // Previous coordinates
-    qreal  m_prevLat;
-    qreal  m_prevLon;
+ private:
+    Q_DISABLE_COPY( AbstractScanlineTextureMapper )
 
-    bool m_interlaced;
+    int         m_tileLevel;
+    int         m_globalWidth;
+    int         m_globalHeight;
+    qreal       m_normGlobalWidth;
+    qreal       m_normGlobalHeight;
 
-    StackedTileLoader *m_tileLoader;
+    StackedTile *m_tile;
+
+    // Coordinate transformations:
 
     // Position of the tile in global Texture Coordinates
     // ( with origin in upper left corner, measured in pixel) 
     int          m_tilePosX;
     int          m_tilePosY;
-
-    GeoSceneTexture::Projection const m_textureProjection;
-    /// size of the tiles of of the current texture layer
-    QSize const m_tileSize;
-
- private:
-    Q_DISABLE_COPY( AbstractScanlineTextureMapper )
-    StackedTile *m_tile;
-
-    // Coordinate transformations:
 
     // Converts global texture coordinates 
     // ( with origin in center, measured in pixel) 
@@ -125,11 +129,9 @@ public:
     qreal  m_toTileCoordinatesLon;
     qreal  m_toTileCoordinatesLat;
 
-    int         m_tileLevel;
-    int         m_globalWidth;
-    int         m_globalHeight;
-    qreal       m_normGlobalWidth;
-    qreal       m_normGlobalHeight;
+    // Previous coordinates
+    qreal  m_prevLat;
+    qreal  m_prevLon;
 };
 
 inline bool AbstractScanlineTextureMapper::interlaced() const

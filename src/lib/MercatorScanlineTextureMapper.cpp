@@ -83,9 +83,6 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams, TextureC
     qreal  lon = 0.0;
     qreal  lat = 0.0;
 
-    m_tilePosX = 65535;
-    m_tilePosY = 65535;
-
     // Calculate how many degrees are being represented per pixel.
     const float rad2Pixel = (float)( 2 * radius ) / M_PI;
 
@@ -184,8 +181,6 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams, TextureC
                 else
                     pixelValue( lon, lat, scanLine );
             }
-            m_prevLon = lon;
-            m_prevLat = lat; // preparing for interpolation
 
             ++scanLine;
             lon += pixel2Rad;

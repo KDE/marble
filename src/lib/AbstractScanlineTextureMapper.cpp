@@ -25,22 +25,22 @@ using namespace Marble;
 AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( StackedTileLoader * const tileLoader,
                                                               QObject * const parent )
     : QObject( parent ),
-      m_prevLat( 0.0 ),
-      m_prevLon( 0.0 ),
       m_interlaced( false ),
       m_tileLoader( tileLoader ),
-      m_tilePosX( 0 ),
-      m_tilePosY( 0 ),
       m_textureProjection( tileLoader->tileProjection() ),  // cache texture projection
       m_tileSize( tileLoader->tileSize() ),  // cache tile size
-      m_tile( 0 ),
-      m_toTileCoordinatesLon( 0.0 ),
-      m_toTileCoordinatesLat( 0.0 ),
       m_tileLevel( 0 ),
       m_globalWidth( 0 ),
       m_globalHeight( 0 ),
       m_normGlobalWidth( 0.0 ),
-      m_normGlobalHeight( 0.0 )
+      m_normGlobalHeight( 0.0 ),
+      m_tile( 0 ),
+      m_tilePosX( 0 ),
+      m_tilePosY( 0 ),
+      m_toTileCoordinatesLon( 0.0 ),
+      m_toTileCoordinatesLat( 0.0 ),
+      m_prevLat( 0.0 ),
+      m_prevLon( 0.0 )
 {
 }
 
@@ -80,6 +80,9 @@ void AbstractScanlineTextureMapper::setRadius( int radius )
 
     m_globalHeight = m_tileSize.height() * m_tileLoader->tileRowCount( m_tileLevel );
     m_normGlobalHeight = (qreal)( m_globalHeight /  M_PI );
+
+    m_tilePosX = 65535;
+    m_tilePosY = 65535;
 
     // These variables move the origin of global texture coordinates from 
     // the center to the upper left corner and subtract the tile position 
@@ -126,6 +129,9 @@ void AbstractScanlineTextureMapper::pixelValueF( const qreal lon, const qreal la
     else {
         *scanLine = 0;
     }
+
+    m_prevLon = lon;
+    m_prevLat = lat; // preparing for interpolation
 }
 
 void AbstractScanlineTextureMapper::pixelValue( const qreal lon, const qreal lat,
@@ -159,6 +165,9 @@ void AbstractScanlineTextureMapper::pixelValue( const qreal lon, const qreal lat
     else {
         *scanLine = 0;
     }
+
+    m_prevLon = lon;
+    m_prevLat = lat; // preparing for interpolation
 }
 
 // This method interpolates color values for skipped pixels in a scanline.

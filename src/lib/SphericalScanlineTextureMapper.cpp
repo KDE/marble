@@ -85,9 +85,6 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams, Texture
 
     const qreal  inverseRadius = 1.0 / (qreal)(radius);
 
-    m_tilePosX = 65535;
-    m_tilePosY = 65535;
-
     // Reset backend
     m_tileLoader->resetTilehash();
     setRadius( viewParams->radius() );
@@ -234,8 +231,6 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams, Texture
                 else
                     pixelValue( lon, lat, scanLine );
             }
-            m_prevLon = lon;
-            m_prevLat = lat; // preparing for interpolation
 
             ++scanLine;
         }

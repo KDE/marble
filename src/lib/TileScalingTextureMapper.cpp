@@ -81,9 +81,6 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *v
     const bool highQuality  = ( viewParams->mapQuality() == HighQuality
                 || viewParams->mapQuality() == PrintQuality );
 
-    m_tilePosX = 65535;
-    m_tilePosY = 65535;
-
     // Reset backend
     m_tileLoader->resetTilehash();
     setRadius( viewParams->radius() );
