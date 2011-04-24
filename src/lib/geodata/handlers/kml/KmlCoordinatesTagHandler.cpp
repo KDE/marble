@@ -50,7 +50,24 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
      || parentItem.represents( kmlTag_LineString )
      || parentItem.represents( kmlTag_MultiGeometry )
      || parentItem.represents( kmlTag_LinearRing ) ) {
-        QStringList  coordinatesLines = parser.readElementText().trimmed().split( QRegExp("\\s"), QString::SkipEmptyParts );
+        QStringList  coordinatesLines;// = parser.readElementText().trimmed().split( QRegExp("\\s"), QString::SkipEmptyParts );
+        // Splitting using the "\\s" regexp is slow, split manually instead.
+        QString const text = parser.readElementText().trimmed();
+        int index = 0;
+        bool inside = true;
+        int const size = text.size();
+        for ( int i=0; i<size; ++i ) {
+            if ( text[i].isSpace() ) {
+                if ( inside ) {
+                    coordinatesLines.append( text.mid( index, i-index ) );
+                    inside = false;
+                }
+                index = i+1;
+            } else {
+                inside = true;
+            }
+        }
+        coordinatesLines.append( text.mid( index ) );
         Q_FOREACH( const QString& line, coordinatesLines ) {
             QStringList coordinates = line.trimmed().split( ',' );
             if ( parentItem.represents( kmlTag_Point ) && parentItem.is<GeoDataFeature>() ) {
