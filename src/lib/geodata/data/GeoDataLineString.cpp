@@ -206,34 +206,37 @@ QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constEnd() const
 void GeoDataLineString::append ( const GeoDataCoordinates& value )
 {
     GeoDataGeometry::detach();
-    p()->m_rangeCorrected.clear();
-    p()->m_dirtyRange = true;
-    p()->m_dirtyBox = true;
-    p()->m_vector.append( value );
+    GeoDataLineStringPrivate* d = p();
+    d->m_rangeCorrected.clear();
+    d->m_dirtyRange = true;
+    d->m_dirtyBox = true;
+    d->m_vector.append( value );
 }
 
 GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& value )
 {
     GeoDataGeometry::detach();
-    p()->m_rangeCorrected.clear();
-    p()->m_dirtyRange = true;
-    p()->m_dirtyBox = true;
-    p()->m_vector.append( value );
+    GeoDataLineStringPrivate* d = p();
+    d->m_rangeCorrected.clear();
+    d->m_dirtyRange = true;
+    d->m_dirtyBox = true;
+    d->m_vector.append( value );
     return *this;
 }
 
 GeoDataLineString& GeoDataLineString::operator << ( const GeoDataLineString& value )
 {
     GeoDataGeometry::detach();
-    p()->m_rangeCorrected.clear();
-    p()->m_dirtyRange = true;
-    p()->m_dirtyBox = true;
+    GeoDataLineStringPrivate* d = p();
+    d->m_rangeCorrected.clear();
+    d->m_dirtyRange = true;
+    d->m_dirtyBox = true;
 
     QVector<GeoDataCoordinates>::const_iterator itCoords = value.constBegin();
     QVector<GeoDataCoordinates>::const_iterator itEnd = value.constEnd();
 
     for( ; itCoords != itEnd; ++itCoords ) {
-        p()->m_vector.append( *itCoords );
+        d->m_vector.append( *itCoords );
     }
 
     return *this;
@@ -242,11 +245,12 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataLineString& val
 void GeoDataLineString::clear()
 {
     GeoDataGeometry::detach();
-    p()->m_rangeCorrected.clear();
-    p()->m_dirtyRange = true;
-    p()->m_dirtyBox = true;
+    GeoDataLineStringPrivate* d = p();
+    d->m_rangeCorrected.clear();
+    d->m_dirtyRange = true;
+    d->m_dirtyBox = true;
 
-    p()->m_vector.clear();
+    d->m_vector.clear();
 }
 
 bool GeoDataLineString::isClosed() const
@@ -297,9 +301,10 @@ GeoDataLineString GeoDataLineString::toNormalized() const
 
     // FIXME: Think about how we can avoid unnecessary copies
     //        if the linestring stays the same.
+    QVector<GeoDataCoordinates>::const_iterator end = p()->m_vector.constEnd();
     for( QVector<GeoDataCoordinates>::const_iterator itCoords
           = p()->m_vector.constBegin();
-         itCoords != p()->m_vector.constEnd();
+         itCoords != end;
          ++itCoords ) {
 
         itCoords->geoCoordinates( lon, lat );
@@ -558,28 +563,31 @@ qreal GeoDataLineString::length( qreal planetRadius, int offset ) const
 QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator pos )
 {
     GeoDataGeometry::detach();
-    p()->m_rangeCorrected.clear();
-    p()->m_dirtyRange = true;
-    p()->m_dirtyBox = true;
-    return p()->m_vector.erase( pos );
+    GeoDataLineStringPrivate* d = p();
+    d->m_rangeCorrected.clear();
+    d->m_dirtyRange = true;
+    d->m_dirtyBox = true;
+    return d->m_vector.erase( pos );
 }
 
 QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator begin,
                                                                  QVector<GeoDataCoordinates>::Iterator end )
 {
     GeoDataGeometry::detach();
-    p()->m_rangeCorrected.clear();
-    p()->m_dirtyRange = true;
-    p()->m_dirtyBox = true;
-    return p()->m_vector.erase( begin, end );
+    GeoDataLineStringPrivate* d = p();
+    d->m_rangeCorrected.clear();
+    d->m_dirtyRange = true;
+    d->m_dirtyBox = true;
+    return d->m_vector.erase( begin, end );
 }
 
 void GeoDataLineString::remove ( int i )
 {
     GeoDataGeometry::detach();
-    p()->m_dirtyRange = true;
-    p()->m_dirtyBox = true;
-    p()->m_vector.remove( i );
+    GeoDataLineStringPrivate* d = p();
+    d->m_dirtyRange = true;
+    d->m_dirtyBox = true;
+    d->m_vector.remove( i );
 }
 
 void GeoDataLineString::pack( QDataStream& stream ) const
