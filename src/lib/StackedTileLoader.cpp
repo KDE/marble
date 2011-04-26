@@ -349,14 +349,10 @@ void StackedTileLoader::updateTile( TileId const & stackedTileId )
     if ( displayedTile ) {
         mergeDecorations( displayedTile );
         emit tileUpdateAvailable( stackedTileId );
+        return;
     }
-    else {
-        StackedTile * const cachedTile = d->m_tileCache.object( stackedTileId );
-        if ( cachedTile ) {
-            mergeDecorations( cachedTile );
-            emit tileUpdateAvailable( stackedTileId );
-        }
-    }
+
+    d->m_tileCache.remove( stackedTileId );
 }
 
 void StackedTileLoader::update()
