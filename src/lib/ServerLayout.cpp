@@ -112,11 +112,11 @@ WmsServerLayout::WmsServerLayout( GeoSceneTexture *texture )
 
 QUrl WmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const
 {
-    const qint64 radius = numTilesX( tileId ) / 2;
+    const qreal radius = numTilesX( tileId ) / 2.0;
     const qint64 x = tileId.x();
 
-    const qreal lonLeft   = ( x - radius     ) / (double)radius * 180.0;
-    const qreal lonRight  = ( x - radius + 1 ) / (double)radius * 180.0;
+    const qreal lonLeft   = ( x - radius ) / radius * 180.0;
+    const qreal lonRight  = ( x - radius + 1 ) / radius * 180.0;
 
     QUrl url = prototypeUrl;
     url.addQueryItem( "service", "WMS" );
@@ -152,14 +152,14 @@ QString WmsServerLayout::name() const
 
 qreal WmsServerLayout::latBottom( const Marble::TileId &tileId ) const
 {
-    const qint64 radius = numTilesY( tileId ) / 2;
+    const qreal radius = numTilesY( tileId ) / 2.0;
 
     switch( m_textureLayer->projection() )
     {
     case GeoSceneTexture::Equirectangular:
-        return ( radius - tileId.y() - 1 ) / (double)radius *  90.0;
+        return ( radius - tileId.y() - 1 ) / radius *  90.0;
     case GeoSceneTexture::Mercator:
-        return atan( sinh( ( radius - tileId.y() - 1 ) / (double)radius * M_PI ) ) * 180.0 / M_PI;
+        return atan( sinh( ( radius - tileId.y() - 1 ) / radius * M_PI ) ) * 180.0 / M_PI;
     }
 
     Q_ASSERT( false ); // not reached
@@ -168,14 +168,14 @@ qreal WmsServerLayout::latBottom( const Marble::TileId &tileId ) const
 
 qreal WmsServerLayout::latTop( const Marble::TileId &tileId ) const
 {
-    const qint64 radius = numTilesY( tileId ) / 2;
+    const qreal radius = numTilesY( tileId ) / 2.0;
 
     switch( m_textureLayer->projection() )
     {
     case GeoSceneTexture::Equirectangular:
-        return ( radius - tileId.y() ) / (double)radius *  90.0;
+        return ( radius - tileId.y() ) / radius *  90.0;
     case GeoSceneTexture::Mercator:
-        return atan( sinh( ( radius - tileId.y() ) / (double)radius * M_PI ) ) * 180.0 / M_PI;
+        return atan( sinh( ( radius - tileId.y() ) / radius * M_PI ) ) * 180.0 / M_PI;
     }
 
     Q_ASSERT( false ); // not reached
