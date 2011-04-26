@@ -19,10 +19,9 @@
 #include <QtCore/QHash>
 #include <QtCore/QObject>
 #include <QtCore/QSet>
-#include <QtCore/QSharedPointer>
 #include <QtCore/QString>
+#include <QtGui/QImage>
 
-#include "TextureTile.h"
 #include "TileId.h"
 #include "global.h"
 
@@ -43,7 +42,7 @@ class TileLoader: public QObject
  public:
     TileLoader( HttpDownloadManager * const, MapThemeManager const * mapThemeManager );
 
-    QSharedPointer<TextureTile> loadTile( TileId const & tileId, DownloadUsage const );
+    QImage loadTile( TileId const & tileId, DownloadUsage const );
     void reloadTile( TileId const &tileId, DownloadUsage const );
     void downloadTile( TileId const & tileId );
 
@@ -64,7 +63,7 @@ class TileLoader: public QObject
     GeoSceneTexture const * findTextureLayer( TileId const & ) const;
     QString tileFileName( TileId const & ) const;
     void triggerDownload( TileId const &, DownloadUsage const );
-    QImage * scaledLowerLevelTile( TileId const & );
+    QImage scaledLowerLevelTile( TileId const & );
 
     MapThemeManager const * const m_mapThemeManager;
 

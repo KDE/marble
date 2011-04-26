@@ -27,7 +27,6 @@
 #include "MapThemeManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "TextureTile.h"
 #include "TileLoaderHelper.h"
 
 namespace Marble
@@ -49,7 +48,7 @@ TileLoader::TileLoader( HttpDownloadManager * const downloadManager, MapThemeMan
 //     - if not expired: create TextureTile, set state to "uptodate", return it => done
 //     - if expired: create TextureTile, state is set to Expired by default, trigger dl,
 
-QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
+QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
 {
     GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
     QString const fileName = tileFileName( tileId );
@@ -57,7 +56,6 @@ QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & tileId, Downloa
     if ( !image.isNull() ) {
         // file is there, so create and return a tile object in any case,
         // but check if an update should be triggered
-        QSharedPointer<TextureTile> const tile( new TextureTile( tileId, new QImage( image ), textureLayer->blending() ));
 
         const QDateTime lastModified = QFileInfo( fileName ).lastModified();
         const int expireSecs = textureLayer->expire();
@@ -70,20 +68,19 @@ QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & tileId, Downloa
             m_waitingForUpdate.insert( tileId );
             triggerDownload( tileId, usage );
         }
-        return tile;
+
+        return image;
     }
 
     // tile was not locally available => trigger download and look for tiles in other levels
     // for scaling
-    QImage * replacementTile = scaledLowerLevelTile( tileId );
-    Q_ASSERT( replacementTile && !replacementTile->isNull() );
-
-    QSharedPointer<TextureTile> const tile( new TextureTile( tileId, replacementTile, textureLayer->blending() ));
+    QImage replacementTile = scaledLowerLevelTile( tileId );
+    Q_ASSERT( !replacementTile.isNull() );
 
     m_waitingForUpdate.insert( tileId );
     triggerDownload( tileId, usage );
 
-    return tile;
+    return replacementTile;
 }
 
 // This method triggers a download of the given tile (without checking
@@ -196,8 +193,7 @@ void TileLoader::triggerDownload( TileId const & id, DownloadUsage const usage )
     emit downloadTile( sourceUrl, destFileName, id.toString(), usage );
 }
 
-    // TODO: get lastModified time stamp into the TextureTile
-QImage * TileLoader::scaledLowerLevelTile( TileId const & id )
+QImage TileLoader::scaledLowerLevelTile( TileId const & id )
 {
     mDebug() << "TileLoader::scaledLowerLevelTile" << id.toString();
 
@@ -229,12 +225,12 @@ QImage * TileLoader::scaledLowerLevelTile( TileId const & id )
             mDebug() << "QImage::copy:" << startX << startY << partWidth << partHeight;
             QImage const part = toScale.copy( startX, startY, partWidth, partHeight );
             mDebug() << "QImage::scaled:" << toScale.size();
-            return new QImage( part.scaled( toScale.size() ) );
+            return part.scaled( toScale.size() );
         }
     }
 
     Q_ASSERT_X( false, "scaled image", "level zero image missing" ); // not reached
-    return 0;
+    return QImage();
 }
 
 }

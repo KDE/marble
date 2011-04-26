@@ -36,7 +36,6 @@
 
 #include <QtGui/QPainter>
 #include <QtCore/QPointer>
-#include "TextureTile.h"
 
 using namespace Marble;
 
@@ -125,7 +124,7 @@ bool MergedLayerDecorator::showTileId() const
 QImage MergedLayerDecorator::loadDataset()
 {
     const TileId decorationTileId( m_cityLightsTextureLayer->sourceDir(), m_id.zoomLevel(), m_id.x(), m_id.y());
-    QImage image = *m_tileLoader->loadTile( decorationTileId, DownloadBrowse )->image();
+    const QImage image = m_tileLoader->loadTile( decorationTileId, DownloadBrowse );
     return image;
 }
 

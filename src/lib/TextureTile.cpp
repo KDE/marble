@@ -22,18 +22,16 @@
 namespace Marble
 {
 
-TextureTile::TextureTile( TileId const & tileId, QImage const * image, const Blending * blending )
+TextureTile::TextureTile( TileId const & tileId, QImage const & image, const Blending * blending )
     : m_id( tileId ),
       m_blending( blending ),
       m_image( image )
 {
-    Q_ASSERT( image );
-    Q_ASSERT( !image->isNull() );
+    Q_ASSERT( !image.isNull() );
 }
 
 TextureTile::~TextureTile()
 {
-    delete m_image;
 }
 
 }

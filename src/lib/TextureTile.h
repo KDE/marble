@@ -26,8 +26,6 @@ class QImage;
 namespace Marble
 {
 class Blending;
-class TileLoader;
-class StackedTileLoader;
 
 /*!
     \class TextureTile
@@ -57,7 +55,7 @@ class StackedTileLoader;
 class TextureTile
 {
  public:
-    TextureTile( TileId const & tileId, QImage const * image, const Blending * blending );
+    TextureTile( TileId const & tileId, QImage const & image, const Blending * blending );
     ~TextureTile();
 
 /*!
@@ -86,7 +84,7 @@ class TextureTile
 
     TileId const m_id;
     Blending const * const m_blending;
-    QImage const * const m_image;
+    QImage const m_image;
 };
 
 
@@ -99,7 +97,7 @@ inline TileId const & TextureTile::id() const
 
 inline QImage const * TextureTile::image() const
 {
-    return m_image;
+    return &m_image;
 }
 
 inline Blending const * TextureTile::blending() const
@@ -109,10 +107,7 @@ inline Blending const * TextureTile::blending() const
 
 inline int TextureTile::byteCount() const
 {
-    Q_ASSERT( m_image );
-
-    // FIXME: once Qt 4.6 is required for Marble, use QImage::byteCount()
-    return m_image->numBytes();
+    return m_image.byteCount();
 }
 
 }

@@ -219,10 +219,9 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
                              stackedTileId.x(), stackedTileId.y() );
         mDebug() << "StackedTileLoader::loadTile: tile" << textureLayer->sourceDir()
                  << tileId.toString() << textureLayer->tileSize();
-        QSharedPointer<TextureTile> const tile = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
-        if ( tile ) {
-            tiles.append( tile );
-        }
+        const QImage tileImage = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
+        QSharedPointer<TextureTile> tile( new TextureTile( tileId, tileImage, textureLayer->blending() ) ); 
+        tiles.append( tile );
     }
     Q_ASSERT( !tiles.isEmpty() );
 
@@ -352,7 +351,9 @@ void StackedTileLoader::updateTile( TileId const & tileId )
         QVector<QSharedPointer<TextureTile> > *tiles = displayedTile->tiles();
         for ( int i = 0; i < tiles->count(); ++ i) {
             if ( (*tiles)[i]->id() == tileId ) {
-                (*tiles)[i] = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
+                const QImage tileImage = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
+                const Blending *blending = (*tiles)[i]->blending();
+                (*tiles)[i] = QSharedPointer<TextureTile>( new TextureTile( tileId, tileImage, blending ) );
             }
         }
         mergeDecorations( displayedTile );
