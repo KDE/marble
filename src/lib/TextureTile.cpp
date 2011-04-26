@@ -22,10 +22,9 @@
 namespace Marble
 {
 
-TextureTile::TextureTile( TileId const & tileId, QImage const * image )
+TextureTile::TextureTile( TileId const & tileId, QImage const * image, const Blending * blending )
     : m_id( tileId ),
-      m_blending( 0 ),
-      m_expireSecs( std::numeric_limits<int>::max() ),
+      m_blending( blending ),
       m_image( image )
 {
     Q_ASSERT( image );

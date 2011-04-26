@@ -26,9 +26,7 @@ namespace Marble
 {
 
 class StackedTilePrivate;
-class GeoSceneTexture;
 class TextureTile;
-class StackedTileLoader;
 
 /*!
     \class StackedTile
@@ -67,7 +65,6 @@ class StackedTile : public AbstractTile
 
     int depth() const;
     int numBytes() const;
-    bool isExpired() const;
 
 /*!
     \brief Returns the stack of TextureTiles

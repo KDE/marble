@@ -219,10 +219,8 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
                              stackedTileId.x(), stackedTileId.y() );
         mDebug() << "StackedTileLoader::loadTile: tile" << textureLayer->sourceDir()
                  << tileId.toString() << textureLayer->tileSize();
-        QSharedPointer<TextureTile> const tile = d->m_tileLoader->loadTile( stackedTileId, tileId,
-                                                                            DownloadBrowse );
+        QSharedPointer<TextureTile> const tile = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
         if ( tile ) {
-            tile->setBlending( textureLayer->blending() );
             tiles.append( tile );
         }
     }

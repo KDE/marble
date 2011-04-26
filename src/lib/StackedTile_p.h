@@ -32,15 +32,12 @@ class StackedTilePrivate : AbstractTilePrivate
     Q_DECLARE_PUBLIC( StackedTile )
 
  public:
-    uchar   **jumpTable8;
-    uint    **jumpTable32;
+    const uchar   **jumpTable8;
+    const uint    **jumpTable32;
 
     QVector<QSharedPointer<TextureTile> > m_tiles;
     QImage    m_resultTile;
     int m_byteCount;
-
-    int       m_depth;
-    bool      m_isGrayscale;
 
     explicit StackedTilePrivate( const TileId& id );
     virtual ~StackedTilePrivate();

@@ -125,7 +125,7 @@ bool MergedLayerDecorator::showTileId() const
 QImage MergedLayerDecorator::loadDataset()
 {
     const TileId decorationTileId( m_cityLightsTextureLayer->sourceDir(), m_id.zoomLevel(), m_id.x(), m_id.y());
-    QImage image = *m_tileLoader->loadTile( decorationTileId, decorationTileId, DownloadBrowse )->image();
+    QImage image = *m_tileLoader->loadTile( decorationTileId, DownloadBrowse )->image();
     return image;
 }
 

@@ -24,12 +24,12 @@
 
 using namespace Marble;
 
-static uint **jumpTableFromQImage32( QImage &img )
+static const uint **jumpTableFromQImage32( const QImage &img )
 {
     const int  height = img.height();
     const int  bpl    = img.bytesPerLine() / 4;
-    uint      *data = reinterpret_cast<QRgb*>(img.bits());
-    uint     **jumpTable = new uint*[height];
+    const uint  *data = reinterpret_cast<const QRgb*>(img.bits());
+    const uint **jumpTable = new const uint*[height];
 
     for ( int y = 0; y < height; ++y ) {
         jumpTable[ y ] = data;
@@ -40,12 +40,12 @@ static uint **jumpTableFromQImage32( QImage &img )
 }
 
 
-static uchar **jumpTableFromQImage8( QImage &img )
+static const uchar **jumpTableFromQImage8( const QImage &img )
 {
     const int  height = img.height();
     const int  bpl    = img.bytesPerLine();
-    uchar     *data = img.bits();
-    uchar    **jumpTable = new uchar*[height];
+    const uchar  *data = img.bits();
+    const uchar **jumpTable = new const uchar*[height];
 
     for ( int y = 0; y < height; ++y ) {
         jumpTable[ y ] = data;
@@ -61,9 +61,7 @@ StackedTilePrivate::StackedTilePrivate( const TileId& id ) :
       jumpTable8(0),
       jumpTable32(0),
       m_resultTile(),
-      m_byteCount(0),
-      m_depth(0),
-      m_isGrayscale( false )
+      m_byteCount(0)
 {
 }
 
@@ -75,16 +73,16 @@ StackedTilePrivate::~StackedTilePrivate()
 
 uint StackedTilePrivate::pixel( int x, int y ) const
 {
-    if ( m_depth == 8 ) {
-        if ( m_isGrayscale )
+    if ( m_resultTile.depth() == 8 ) {
+        if ( m_resultTile.isGrayscale() )
             return (jumpTable8)[y][x];
         else
             return m_resultTile.color( (jumpTable8)[y][x] );
     }
-    if ( m_depth == 32 )
+    if ( m_resultTile.depth() == 32 )
         return (jumpTable32)[y][x];
-    
-    if ( m_depth == 1 && !m_isGrayscale )
+
+    if ( m_resultTile.depth() == 1 && !m_resultTile.isGrayscale() )
         return m_resultTile.color((jumpTable8)[y][x/8] >> 7);
 
     return m_resultTile.pixel( x, y );
@@ -113,7 +111,7 @@ uint StackedTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) co
                             + (bottomLeftValue & topLeftValue);
         else 
             leftValue = bottomLeftValue;
-#else        
+#else
         // blending the color values of the top left and bottom left point
         qreal ml_red   = ( 1.0 - fY ) * qRed  ( topLeftValue  ) + fY * qRed  ( bottomLeftValue  );
         qreal ml_green = ( 1.0 - fY ) * qGreen( topLeftValue  ) + fY * qGreen( bottomLeftValue  );
@@ -243,16 +241,6 @@ StackedTile::~StackedTile()
 {
 }
 
-bool StackedTile::isExpired() const
-{
-    bool result = false;
-    QVector<QSharedPointer<TextureTile> >::const_iterator pos = d->m_tiles.constBegin();
-    QVector<QSharedPointer<TextureTile> >::const_iterator const end = d->m_tiles.constEnd();
-    for (; pos != end; ++pos )
-        result |= (*pos)->isExpired();
-    return result;
-}
-
 void StackedTile::initJumpTables()
 {
     //    mDebug() << "Entered initJumpTables( bool ) of Tile" << d->m_id;
@@ -302,7 +290,7 @@ uint StackedTile::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) const
 
 int StackedTile::depth() const
 {
-    return d->m_depth;
+    return d->m_resultTile.depth();
 }
 
 int StackedTile::numBytes() const
@@ -329,7 +317,7 @@ void StackedTile::initResultTile()
 {
     // TODO: Free all the TextureTiles once the completion status is reached 
     // to save memory.
-    
+
     Q_ASSERT( !d->m_tiles.isEmpty() );
     // if there are more than one active texture layers, we have to convert the
     // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
@@ -352,7 +340,5 @@ void StackedTile::initResultTile()
     initJumpTables();
 
     // for now, this seems to be the best place for initializing this stuff
-    d->m_depth = d->m_resultTile.depth();
-    d->m_isGrayscale = d->m_resultTile.isGrayscale();
     d->calcByteCount();
 }

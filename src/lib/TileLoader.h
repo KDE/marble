@@ -31,7 +31,7 @@ class QUrl;
 
 namespace Marble
 {
-class HttpDownloadManager; // remove?
+class HttpDownloadManager;
 class GeoSceneTexture;
 class MapThemeManager;
 
@@ -42,10 +42,7 @@ class TileLoader: public QObject
  public:
     TileLoader( HttpDownloadManager * const, MapThemeManager const * mapThemeManager );
 
-    QSharedPointer<TextureTile> loadTile( TileId const & stackedTileId, TileId const & tileId,
-                                          DownloadUsage const );
-    QSharedPointer<TextureTile> reloadTile( TileId const & stackedTileId, TileId const & tileId,
-                                            DownloadUsage const );
+    QSharedPointer<TextureTile> loadTile( TileId const & tileId, DownloadUsage const );
     void reloadTile( QSharedPointer<TextureTile> const & tile, DownloadUsage const );
     void downloadTile( TileId const & tileId );
 

@@ -21,7 +21,6 @@
 
 #include "TileId.h"
 
-class QByteArray;
 class QImage;
 
 namespace Marble
@@ -58,10 +57,9 @@ class StackedTileLoader;
 class TextureTile
 {
     friend class TileLoader;
-    friend class StackedTileLoader;
 
  public:
-    TextureTile( TileId const & tileId, QImage const * image );
+    TextureTile( TileId const & tileId, QImage const * image, const Blending * blending );
     ~TextureTile();
 
 /*!
@@ -69,25 +67,7 @@ class TextureTile
     \return A TileId object that encodes zoom level, position and map theme.
 */     
     TileId const & id() const;
-    
-/*!
-    \brief Returns a unique ID for the StackedTile that contains this tile.
-    \return A TileId object that encodes zoom level, position and map theme.
-*/         
-    TileId const & stackedTileId() const;
-    
-/*!
-    \brief Returns the time at which the tile was previously loaded onto the harddisc.
-    \return A QDateTime object that holds the modification time of the tile.
-*/         
-    QDateTime const & lastModified() const;
-    
-/*!
-    \brief Returns whether the tile is considered outdated.
-    \return Whether the tile needs to be reloaded according to its last modification time.
-*/         
-    bool isExpired() const;
-    
+
 /*!
     \brief Returns the QImage that describes the look of the TextureTile
     \return A non-zero pointer to a QImage associated with the tile.
@@ -107,16 +87,9 @@ class TextureTile
     Q_DISABLE_COPY( TextureTile )
 
     void setImage( QImage * const );
-    void setBlending( Blending const * const );
-    void setStackedTileId( TileId const & );
-    void setLastModified( QDateTime const & );
-    void setExpireSecs( int const );
 
     TileId const m_id;
-    TileId m_stackedTileId;
-    Blending const * m_blending;
-    QDateTime m_lastModified;
-    int m_expireSecs;
+    Blending const * const m_blending;
     QImage const * m_image;
 };
 
@@ -126,21 +99,6 @@ class TextureTile
 inline TileId const & TextureTile::id() const
 {
     return m_id;
-}
-
-inline TileId const & TextureTile::stackedTileId() const
-{
-    return m_stackedTileId;
-}
-
-inline QDateTime const & TextureTile::lastModified() const
-{
-    return m_lastModified;
-}
-
-inline bool TextureTile::isExpired() const
-{
-    return m_lastModified.secsTo( QDateTime::currentDateTime() ) >= m_expireSecs;
 }
 
 inline QImage const * TextureTile::image() const
@@ -169,26 +127,6 @@ inline void TextureTile::setImage( QImage * const image )
     delete m_image;
 
     m_image = image;
-}
-
-inline void TextureTile::setBlending( Blending const * const blending )
-{
-    m_blending = blending;
-}
-
-inline void TextureTile::setStackedTileId( TileId const & id )
-{
-    m_stackedTileId = id;
-}
-
-inline void TextureTile::setLastModified( QDateTime const & lastModified )
-{
-    m_lastModified = lastModified;
-}
-
-inline void TextureTile::setExpireSecs( int const expireSecs )
-{
-    m_expireSecs = expireSecs;
 }
 
 }
