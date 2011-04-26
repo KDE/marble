@@ -160,7 +160,7 @@ class StackedTileLoader : public QObject
     private Q_SLOTS:
         /**
          */
-        void updateTile( TileId const & stackedTileId );
+        void updateTile( TileId const & tileId );
 
     private:
         Q_DISABLE_COPY( StackedTileLoader )

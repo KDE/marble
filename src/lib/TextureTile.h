@@ -56,8 +56,6 @@ class StackedTileLoader;
 
 class TextureTile
 {
-    friend class TileLoader;
-
  public:
     TextureTile( TileId const & tileId, QImage const * image, const Blending * blending );
     ~TextureTile();
@@ -86,11 +84,9 @@ class TextureTile
  private:
     Q_DISABLE_COPY( TextureTile )
 
-    void setImage( QImage * const );
-
     TileId const m_id;
     Blending const * const m_blending;
-    QImage const * m_image;
+    QImage const * const m_image;
 };
 
 
@@ -117,16 +113,6 @@ inline int TextureTile::byteCount() const
 
     // FIXME: once Qt 4.6 is required for Marble, use QImage::byteCount()
     return m_image->numBytes();
-}
-
-inline void TextureTile::setImage( QImage * const image )
-{
-    Q_ASSERT( image );
-    Q_ASSERT( !image->isNull() );
-
-    delete m_image;
-
-    m_image = image;
 }
 
 }

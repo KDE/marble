@@ -18,6 +18,7 @@
 
 #include <QtCore/QHash>
 #include <QtCore/QObject>
+#include <QtCore/QSet>
 #include <QtCore/QSharedPointer>
 #include <QtCore/QString>
 
@@ -43,7 +44,7 @@ class TileLoader: public QObject
     TileLoader( HttpDownloadManager * const, MapThemeManager const * mapThemeManager );
 
     QSharedPointer<TextureTile> loadTile( TileId const & tileId, DownloadUsage const );
-    void reloadTile( QSharedPointer<TextureTile> const & tile, DownloadUsage const );
+    void reloadTile( TileId const &tileId, DownloadUsage const );
     void downloadTile( TileId const & tileId );
 
  public Q_SLOTS:
@@ -57,7 +58,7 @@ class TileLoader: public QObject
 
     // when this signal is emitted, the TileLoader gives up ownership of
     // the corrsponding tile. Might be better to explicitly transfer...
-    void tileCompleted( TileId const & stackedTileId );
+    void tileCompleted( TileId const & tileId );
 
  private:
     GeoSceneTexture const * findTextureLayer( TileId const & ) const;
@@ -72,7 +73,7 @@ class TileLoader: public QObject
 
     // contains tiles, for which a download has been triggered
     // because the tile was not there at all or is expired.
-    QHash<TileId, QSharedPointer<TextureTile> > m_waitingForUpdate;
+    QSet<TileId> m_waitingForUpdate;
 };
 
 }

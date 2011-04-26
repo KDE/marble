@@ -67,7 +67,7 @@ QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & tileId, Downloa
             mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateUptodate";
         } else {
             mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateExpired";
-            m_waitingForUpdate.insert( tileId, tile );
+            m_waitingForUpdate.insert( tileId );
             triggerDownload( tileId, usage );
         }
         return tile;
@@ -80,7 +80,7 @@ QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & tileId, Downloa
 
     QSharedPointer<TextureTile> const tile( new TextureTile( tileId, replacementTile, textureLayer->blending() ));
 
-    m_waitingForUpdate.insert( tileId, tile );
+    m_waitingForUpdate.insert( tileId );
     triggerDownload( tileId, usage );
 
     return tile;
@@ -93,12 +93,12 @@ QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & tileId, Downloa
 // post condition
 //     - download is triggered, but only if not in progress (indicated by
 //       m_waitingForUpdate)
-void TileLoader::reloadTile( QSharedPointer<TextureTile> const & tile, DownloadUsage const usage )
+void TileLoader::reloadTile( TileId const &tileId, DownloadUsage const usage )
 {
-    if ( m_waitingForUpdate.contains( tile->id() ))
+    if ( m_waitingForUpdate.contains( tileId ) )
         return;
-    m_waitingForUpdate.insert( tile->id(), tile );
-    triggerDownload( tile->id(), usage );
+    m_waitingForUpdate.insert( tileId );
+    triggerDownload( tileId, usage );
 }
 
 void TileLoader::downloadTile( TileId const & tileId )
@@ -108,22 +108,19 @@ void TileLoader::downloadTile( TileId const & tileId )
 
 void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
 {
+    Q_UNUSED( data ); // image data has been written to disk by HttpDownloadManager,
+                      // so it can be loaded using loadTile()
+
     TileId const id = TileId::fromString( tileId );
-    QSharedPointer<TextureTile> const tile =
-        m_waitingForUpdate.value( id, QSharedPointer<TextureTile>() );
+
     // preliminary fix for reload map crash
     // TODO: fix properly
-    if ( !tile )
-        return;
-    Q_ASSERT( tile );
-    m_waitingForUpdate.remove( id );
-    QImage *image( new QImage( QImage::fromData( data ) ) );
-    if ( image->isNull() )
+    if ( !m_waitingForUpdate.contains( id ) )
         return;
 
-    tile->setImage( image );
-    TileId stackedTileId( 0, id.zoomLevel(), id.x(), id.y() );
-    emit tileCompleted( stackedTileId );
+    m_waitingForUpdate.remove( id );
+
+    emit tileCompleted( id );
 }
 
 void TileLoader::updateTextureLayers()
