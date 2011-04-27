@@ -37,6 +37,7 @@ GeoNode* OsmWayTagHandler::parse( GeoParser& parser ) const
     GeoDataLineString *polyline = new GeoDataLineString();
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
     placemark->setGeometry( polyline );
+    placemark->setVisible( false );
     doc->append( placemark );
     return polyline;
 }

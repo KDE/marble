@@ -50,6 +50,13 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
             Q_ASSERT( l );
             doc->remove( doc->childPosition( p ) );
             GeoDataPlacemark *newp = new GeoDataPlacemark( *p );
+	    
+	    if ( key == "building" )
+	    {
+		newp->setStyle( &doc->style( "building" ) );
+                newp->setVisible( true );
+	    }
+	    
             GeoDataPolygon *pol = new GeoDataPolygon;
             pol->setOuterBoundary( *l );
             newp->setGeometry( pol );

@@ -25,13 +25,37 @@ namespace Marble
 
 namespace osm
 {
-
 static GeoTagHandlerRegistrar osmOsmTagHandler( GeoTagHandler::QualifiedName( osmTag_osm, "" ),
         new OsmOsmTagHandler() );
+
+static QColor osmBuildingColor( 0xBE, 0xAD, 0xAD );
+static QColor osmBackgroundColor( 0xF1, 0xEE, 0xE8 );
 
 GeoNode* OsmOsmTagHandler::parse( GeoParser& parser ) const
 {
     GeoDataDocument* doc = geoDataDoc( parser );
+
+    GeoDataPolyStyle buildingPolyStyle;
+    GeoDataLineStyle buildingLineStyle;
+    buildingPolyStyle.setFill( true );
+    buildingPolyStyle.setOutline( true );
+    buildingPolyStyle.setColor( osmBuildingColor );
+    buildingLineStyle.setColor( osmBuildingColor.darker() );
+    GeoDataStyle buildingStyle;
+    buildingStyle.setPolyStyle( buildingPolyStyle );
+    buildingStyle.setLineStyle( buildingLineStyle );
+    buildingStyle.setStyleId( "building" );
+    doc->addStyle( buildingStyle );
+
+    GeoDataPolyStyle backgroundPolyStyle;
+    backgroundPolyStyle.setFill( true );
+    backgroundPolyStyle.setOutline( false );
+    backgroundPolyStyle.setColor( osmBackgroundColor );
+    GeoDataStyle backgroundStyle;
+    backgroundStyle.setPolyStyle( backgroundPolyStyle );
+    backgroundStyle.setStyleId( "background" );
+    doc->addStyle( backgroundStyle );
+
     return doc;
 }
 

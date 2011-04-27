@@ -17,6 +17,7 @@ namespace Marble
 namespace osm
 {
 extern const char* osmTag_osm;
+extern const char* osmTag_bound;
 extern const char* osmTag_nd;
 extern const char* osmTag_node;
 extern const char* osmTag_way;

@@ -15,6 +15,7 @@ namespace Marble
 namespace osm
 {
 const char* osmTag_osm = "osm";
+const char* osmTag_bound = "bound";
 const char* osmTag_nd = "nd";
 const char* osmTag_node = "node";
 const char* osmTag_way = "way";
