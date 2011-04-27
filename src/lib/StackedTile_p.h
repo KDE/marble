@@ -33,6 +33,8 @@ class StackedTilePrivate : AbstractTilePrivate
 
  public:
     const QImage    m_resultTile;
+    const int       m_depth;
+    const bool      m_isGrayscale;
     const QVector<QSharedPointer<TextureTile> > m_tiles;
     const uchar   **jumpTable8;
     const uint    **jumpTable32;

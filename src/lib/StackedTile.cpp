@@ -55,6 +55,8 @@ static const uchar **jumpTableFromQImage8( const QImage &img )
 StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles ) :
       AbstractTilePrivate( id ), 
       m_resultTile( resultImage ),
+      m_depth( resultImage.depth() ),
+      m_isGrayscale( resultImage.isGrayscale() ),
       m_tiles( tiles ),
       jumpTable8( 0 ),
       jumpTable32( 0 ),
@@ -70,16 +72,16 @@ StackedTilePrivate::~StackedTilePrivate()
 
 uint StackedTilePrivate::pixel( int x, int y ) const
 {
-    if ( m_resultTile.depth() == 8 ) {
-        if ( m_resultTile.isGrayscale() )
+    if ( m_depth == 8 ) {
+        if ( m_isGrayscale )
             return (jumpTable8)[y][x];
         else
             return m_resultTile.color( (jumpTable8)[y][x] );
     }
-    if ( m_resultTile.depth() == 32 )
+    if ( m_depth == 32 )
         return (jumpTable32)[y][x];
 
-    if ( m_resultTile.depth() == 1 && !m_resultTile.isGrayscale() )
+    if ( m_depth == 1 && !m_isGrayscale )
         return m_resultTile.color((jumpTable8)[y][x/8] >> 7);
 
     return m_resultTile.pixel( x, y );
@@ -228,7 +230,7 @@ StackedTile::StackedTile( TileId const &id, QImage const &resultImage, QVector<Q
         return;
     }
 
-    switch ( d->m_resultTile.depth() ) {
+    switch ( d->m_depth ) {
         case 48:
         case 32:
             delete [] d->jumpTable32;
@@ -240,7 +242,7 @@ StackedTile::StackedTile( TileId const &id, QImage const &resultImage, QVector<Q
             d->jumpTable8 = jumpTableFromQImage8( d->m_resultTile );
             break;
         default:
-            qWarning() << "Color depth" << d->m_resultTile.depth() << " is not supported.";
+            qWarning() << "Color depth" << d->m_depth << " is not supported.";
             return;
     }
 }
@@ -271,7 +273,7 @@ uint StackedTile::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) const
 
 int StackedTile::depth() const
 {
-    return d->m_resultTile.depth();
+    return d->m_depth;
 }
 
 int StackedTile::numBytes() const
