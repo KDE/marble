@@ -105,9 +105,6 @@ void TileLoader::downloadTile( TileId const & tileId )
 
 void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
 {
-    Q_UNUSED( data ); // image data has been written to disk by HttpDownloadManager,
-                      // so it can be loaded using loadTile()
-
     TileId const id = TileId::fromString( tileId );
 
     // preliminary fix for reload map crash
@@ -117,7 +114,11 @@ void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
 
     m_waitingForUpdate.remove( id );
 
-    emit tileCompleted( id );
+    QImage const tileImage = QImage::fromData( data );
+    if ( tileImage.isNull() )
+        return;
+
+    emit tileCompleted( id, tileImage );
 }
 
 void TileLoader::updateTextureLayers()

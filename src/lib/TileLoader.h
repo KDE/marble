@@ -55,9 +55,7 @@ class TileLoader: public QObject
     void downloadTile( QUrl const & sourceUrl, QString const & destinationFileName,
                        QString const & id, DownloadUsage );
 
-    // when this signal is emitted, the TileLoader gives up ownership of
-    // the corrsponding tile. Might be better to explicitly transfer...
-    void tileCompleted( TileId const & tileId );
+    void tileCompleted( TileId const & tileId, QImage const & tileImage );
 
  private:
     GeoSceneTexture const * findTextureLayer( TileId const & ) const;

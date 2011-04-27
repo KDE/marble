@@ -86,8 +86,8 @@ StackedTileLoader::StackedTileLoader( TileLoader * const tileLoader,
                                       SunLocator * const sunLocator )
     : d( new StackedTileLoaderPrivate( tileLoader, sunLocator ) )
 {
-    connect( d->m_tileLoader, SIGNAL( tileCompleted( TileId )),
-             SLOT( updateTile( TileId )));
+    connect( d->m_tileLoader, SIGNAL( tileCompleted( TileId, const QImage & )),
+             SLOT( updateTile( TileId, const QImage & )));
 }
 
 StackedTileLoader::~StackedTileLoader()
@@ -342,7 +342,7 @@ void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
     d->m_tileCache.setMaxCost( kiloBytes * 1024 );
 }
 
-void StackedTileLoader::updateTile( TileId const & tileId )
+void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImage )
 {
     d->detectMaxTileLevel();
 
@@ -358,7 +358,6 @@ void StackedTileLoader::updateTile( TileId const & tileId )
 
         for ( int i = 0; i < tiles.count(); ++ i) {
             if ( tiles[i]->id() == tileId ) {
-                const QImage tileImage = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
                 const Blending *blending = tiles[i]->blending();
                 tiles[i] = QSharedPointer<TextureTile>( new TextureTile( tileId, tileImage, blending ) );
             }

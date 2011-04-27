@@ -32,6 +32,7 @@
 #include "TileId.h"
 #include "global.h"
 
+class QImage;
 class QString;
 
 namespace Marble
@@ -160,7 +161,7 @@ class StackedTileLoader : public QObject
     private Q_SLOTS:
         /**
          */
-        void updateTile( TileId const & tileId );
+        void updateTile( TileId const & tileId, QImage const &tileImage );
 
     private:
         Q_DISABLE_COPY( StackedTileLoader )
