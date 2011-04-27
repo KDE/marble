@@ -72,7 +72,7 @@ public:
     QStringList speakers() const;
 
 private:
-    Q_PRIVATE_SLOT( d, void audioOutputFinished() );
+    Q_PRIVATE_SLOT( d, void audioOutputFinished() )
 
     AudioOutputPrivate * const d;
 };

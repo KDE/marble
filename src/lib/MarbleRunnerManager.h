@@ -115,9 +115,9 @@ private slots:
     void addRoutingResult( GeoDataDocument* route );
 
 private:
-    Q_PRIVATE_SLOT( d, void cleanupSearchTask( RunnerTask* task ) );
+    Q_PRIVATE_SLOT( d, void cleanupSearchTask( RunnerTask* task ) )
 
-    Q_PRIVATE_SLOT( d, void cleanupRoutingTask( RunnerTask* task ) );
+    Q_PRIVATE_SLOT( d, void cleanupRoutingTask( RunnerTask* task ) )
 
     friend class MarbleRunnerManagerPrivate;
 

@@ -82,7 +82,7 @@ private:
     /** Activate or deactivate position tracking */
     Q_PRIVATE_SLOT( d, void togglePositionTracking( bool enabled ) )
 
-    Q_PRIVATE_SLOT( d, void updateGuidanceModeButton() );
+    Q_PRIVATE_SLOT( d, void updateGuidanceModeButton() )
 
     /** Read settings */
     Q_PRIVATE_SLOT( d, void readSettings() )
