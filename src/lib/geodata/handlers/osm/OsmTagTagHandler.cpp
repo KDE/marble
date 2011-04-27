@@ -25,40 +25,40 @@ namespace Marble
 namespace osm
 {
 
-static GeoTagHandlerRegistrar osmTagTagHandler( GeoTagHandler::QualifiedName(osmTag_tag, ""),
-                                               new OsmTagTagHandler() );
+static GeoTagHandlerRegistrar osmTagTagHandler( GeoTagHandler::QualifiedName( osmTag_tag, "" ),
+        new OsmTagTagHandler() );
 
-GeoNode* OsmTagTagHandler::parse ( GeoParser& parser) const
+GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() );
-    
+
     GeoStackItem parentItem = parser.parentElement();
     GeoDataDocument* doc = geoDataDoc( parser );
-    QString key = parser.attribute("k");
-    QString value = parser.attribute("v");
-       
-    if (parentItem.represents(osmTag_way))
-    {	
+    QString key = parser.attribute( "k" );
+    QString value = parser.attribute( "v" );
+
+    if ( parentItem.represents( osmTag_way ) )
+    {
         GeoDataGeometry *g = parentItem.nodeAs<GeoDataGeometry>();
-        Q_ASSERT(g);
-        GeoDataPlacemark *p = dynamic_cast<GeoDataPlacemark*>(g->parent());
-        Q_ASSERT(p);
-	//Convert area ways to polygons
-	if((key == "building" || key == "area") && (value == "yes"))
-	{
-	    GeoDataLineString *l = dynamic_cast<GeoDataLineString *>(g);
-	    Q_ASSERT(l);
-	    doc->remove(doc->childPosition(p));
-	    GeoDataPlacemark *newp = new GeoDataPlacemark(*p);
-	    GeoDataPolygon *pol = new GeoDataPolygon;
-	    pol->setOuterBoundary(*l);
-	    newp->setGeometry(pol);
-	    doc->append(newp);
-	}
-	
-	return 0;
+        Q_ASSERT( g );
+        GeoDataPlacemark *p = dynamic_cast<GeoDataPlacemark*>( g->parent() );
+        Q_ASSERT( p );
+        //Convert area ways to polygons
+        if (( key == "building" || key == "area" ) && ( value == "yes" ) )
+        {
+            GeoDataLineString *l = dynamic_cast<GeoDataLineString *>( g );
+            Q_ASSERT( l );
+            doc->remove( doc->childPosition( p ) );
+            GeoDataPlacemark *newp = new GeoDataPlacemark( *p );
+            GeoDataPolygon *pol = new GeoDataPolygon;
+            pol->setOuterBoundary( *l );
+            newp->setGeometry( pol );
+            doc->append( newp );
+        }
+
+        return 0;
     }
-    
+
     return 0;
 }
 

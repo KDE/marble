@@ -12,25 +12,25 @@
 #include "GeoDataPoint.h"
 
 namespace Marble
-{ 
+{
 namespace osm
 {
 QMap<quint64, GeoDataPoint *> OsmNodeFactory::m_points;
 
-void OsmNodeFactory::appendPoint(quint64 id, GeoDataPoint* p)
+void OsmNodeFactory::appendPoint( quint64 id, GeoDataPoint* p )
 {
     //FIXME: fix possible memory leaks.
     m_points[id] = p;
 }
 
-GeoDataPoint* OsmNodeFactory::getPoint(quint64 id)
+GeoDataPoint* OsmNodeFactory::getPoint( quint64 id )
 {
-    return m_points.value(id);
+    return m_points.value( id );
 }
 
 void OsmNodeFactory::cleanUp()
 {
-    foreach(GeoDataPoint *p, m_points)
+    foreach( GeoDataPoint *p, m_points )
     {
         delete p;
     }

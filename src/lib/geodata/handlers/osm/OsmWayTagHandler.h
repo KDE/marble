@@ -22,7 +22,7 @@ namespace osm
 class OsmWayTagHandler : public GeoTagHandler
 {
 public:
-    virtual GeoNode* parse(GeoParser&) const;
+    virtual GeoNode* parse( GeoParser& ) const;
 };
 
 }

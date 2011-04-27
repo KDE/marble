@@ -26,12 +26,12 @@ namespace Marble
 namespace osm
 {
 
-static GeoTagHandlerRegistrar osmOsmTagHandler( GeoTagHandler::QualifiedName(osmTag_osm, ""),
-                                               new OsmOsmTagHandler() );
+static GeoTagHandlerRegistrar osmOsmTagHandler( GeoTagHandler::QualifiedName( osmTag_osm, "" ),
+        new OsmOsmTagHandler() );
 
-GeoNode* OsmOsmTagHandler::parse ( GeoParser& parser) const
+GeoNode* OsmOsmTagHandler::parse( GeoParser& parser ) const
 {
-    GeoDataDocument* doc = geoDataDoc( parser );    
+    GeoDataDocument* doc = geoDataDoc( parser );
     return doc;
 }
 

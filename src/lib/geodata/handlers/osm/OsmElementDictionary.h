@@ -16,11 +16,11 @@ namespace Marble
 {
 namespace osm
 {
-    extern const char* osmTag_osm;
-    extern const char* osmTag_nd;
-    extern const char* osmTag_node;
-    extern const char* osmTag_way;
-    extern const char* osmTag_tag;
+extern const char* osmTag_osm;
+extern const char* osmTag_nd;
+extern const char* osmTag_node;
+extern const char* osmTag_way;
+extern const char* osmTag_tag;
 }
 }
 

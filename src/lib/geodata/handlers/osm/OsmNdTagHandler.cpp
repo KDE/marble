@@ -25,28 +25,28 @@ namespace Marble
 namespace osm
 {
 
-static GeoTagHandlerRegistrar osmNdTagHandler( GeoTagHandler::QualifiedName(osmTag_nd, ""),
-                                               new OsmNdTagHandler() );
+static GeoTagHandlerRegistrar osmNdTagHandler( GeoTagHandler::QualifiedName( osmTag_nd, "" ),
+        new OsmNdTagHandler() );
 
-GeoNode* OsmNdTagHandler::parse ( GeoParser& parser) const
+GeoNode* OsmNdTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() );
-    
+
     GeoStackItem parentItem = parser.parentElement();
-    
-    if (parentItem.represents(osmTag_way))
-    {	
-	GeoDataLineString *s = parentItem.nodeAs<GeoDataLineString>();
-	Q_ASSERT(s);
-	quint64 id = parser.attribute("ref").toULongLong();
-	if(GeoDataPoint *p = osm::OsmNodeFactory::getPoint(id))
-	{
-	    s->append(GeoDataCoordinates(p->longitude(), p->latitude()));
-	}
-	
-	return 0;
+
+    if ( parentItem.represents( osmTag_way ) )
+    {
+        GeoDataLineString *s = parentItem.nodeAs<GeoDataLineString>();
+        Q_ASSERT( s );
+        quint64 id = parser.attribute( "ref" ).toULongLong();
+        if ( GeoDataPoint *p = osm::OsmNodeFactory::getPoint( id ) )
+        {
+            s->append( GeoDataCoordinates( p->longitude(), p->latitude() ) );
+        }
+
+        return 0;
     }
-    
+
     return 0;
 }
 

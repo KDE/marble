@@ -24,19 +24,19 @@ namespace Marble
 namespace osm
 {
 
-static GeoTagHandlerRegistrar osmWayTagHandler( GeoTagHandler::QualifiedName(osmTag_way, ""),
-                                               new OsmWayTagHandler() );
+static GeoTagHandlerRegistrar osmWayTagHandler( GeoTagHandler::QualifiedName( osmTag_way, "" ),
+        new OsmWayTagHandler() );
 
-GeoNode* OsmWayTagHandler::parse ( GeoParser& parser) const
+GeoNode* OsmWayTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() );
-    
+
     GeoDataDocument* doc = geoDataDoc( parser );
-    Q_ASSERT(doc);
-        
+    Q_ASSERT( doc );
+
     GeoDataLineString *polyline = new GeoDataLineString();
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
-    placemark->setGeometry(polyline);
+    placemark->setGeometry( polyline );
     doc->append( placemark );
     return polyline;
 }
