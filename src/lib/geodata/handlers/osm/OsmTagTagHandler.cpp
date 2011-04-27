@@ -44,19 +44,16 @@ GeoNode* OsmTagTagHandler::parse ( GeoParser& parser) const
         GeoDataPlacemark *p = dynamic_cast<GeoDataPlacemark*>(g->parent());
         Q_ASSERT(p);
 	//Convert area ways to polygons
-	if(key == "building" || key == "area")
+	if((key == "building" || key == "area") && (value == "yes"))
 	{
-	    if(value == "yes")
-	    {
-	        GeoDataLineString *l = dynamic_cast<GeoDataLineString *>(g);
-		Q_ASSERT(l);
-		doc->remove(doc->childPosition(p));
-		GeoDataPlacemark *newp = new GeoDataPlacemark(*p);
-		GeoDataPolygon *pol = new GeoDataPolygon;
-		pol->setOuterBoundary(*l);
-		newp->setGeometry(pol);
-		doc->append(newp);
-	    }
+	    GeoDataLineString *l = dynamic_cast<GeoDataLineString *>(g);
+	    Q_ASSERT(l);
+	    doc->remove(doc->childPosition(p));
+	    GeoDataPlacemark *newp = new GeoDataPlacemark(*p);
+	    GeoDataPolygon *pol = new GeoDataPolygon;
+	    pol->setOuterBoundary(*l);
+	    newp->setGeometry(pol);
+	    doc->append(newp);
 	}
 	
 	return 0;
