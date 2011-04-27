@@ -260,7 +260,6 @@ void StackedTileLoader::reloadVisibleTiles()
             // allows for more connections (in our model), use "DownloadBrowse"
             d->m_tileLoader->reloadTile( tile->id(), DownloadBrowse );
         }
-        mergeDecorations( displayedTile );
     }
 
     emit tileUpdatesAvailable();
