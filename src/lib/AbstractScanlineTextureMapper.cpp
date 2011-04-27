@@ -92,8 +92,6 @@ void AbstractScanlineTextureMapper::setRadius( int radius )
     m_toTileCoordinatesLat = (qreal)(0.5 * m_globalHeight - m_tilePosY);
 
     if ( changedTileLevel ) {
-        m_tileLoader->flush();
-
         emit tileLevelChanged( m_tileLevel );
     }
 }
