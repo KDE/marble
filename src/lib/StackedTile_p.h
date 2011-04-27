@@ -32,21 +32,18 @@ class StackedTilePrivate : AbstractTilePrivate
     Q_DECLARE_PUBLIC( StackedTile )
 
  public:
+    const QImage    m_resultTile;
+    const QVector<QSharedPointer<TextureTile> > m_tiles;
     const uchar   **jumpTable8;
     const uint    **jumpTable32;
+    const int m_byteCount;
 
-    QVector<QSharedPointer<TextureTile> > m_tiles;
-    QImage    m_resultTile;
-    int m_byteCount;
-
-    explicit StackedTilePrivate( const TileId& id );
+    explicit StackedTilePrivate( const TileId &id, const QImage &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles );
     virtual ~StackedTilePrivate();
 
     inline uint pixel( int x, int y ) const;
     inline uint pixelF( qreal x, qreal y, const QRgb& pixel ) const;
-    void setResultTile( QSharedPointer<TextureTile> const & tile,
-                        const bool withConversion = true );
-    void calcByteCount();
+    static int calcByteCount( const QImage &resultImage, const QVector<QSharedPointer<TextureTile> > &tiles );
 };
 
 }

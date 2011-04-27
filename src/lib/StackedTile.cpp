@@ -15,10 +15,6 @@
 
 #include <QtGui/QImage>
 
-#include <cmath>
-
-#include "blendings/Blending.h"
-#include "GeoSceneTexture.h"
 #include "MarbleDebug.h"
 #include "TextureTile.h"
 
@@ -56,12 +52,13 @@ static const uchar **jumpTableFromQImage8( const QImage &img )
 }
 
 
-StackedTilePrivate::StackedTilePrivate( const TileId& id ) :
+StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles ) :
       AbstractTilePrivate( id ), 
-      jumpTable8(0),
-      jumpTable32(0),
-      m_resultTile(),
-      m_byteCount(0)
+      m_resultTile( resultImage ),
+      m_tiles( tiles ),
+      jumpTable8( 0 ),
+      jumpTable32( 0 ),
+      m_byteCount( calcByteCount( resultImage, tiles ) )
 {
 }
 
@@ -203,29 +200,21 @@ uint StackedTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) co
     return topLeftValue;
 }
 
-inline void StackedTilePrivate::setResultTile( QSharedPointer<TextureTile> const & tile,
-                                               bool const withConversion )
+int StackedTilePrivate::calcByteCount( const QImage &resultImage, const QVector<QSharedPointer<TextureTile> > &tiles )
 {
-    if ( withConversion ) {
-        m_resultTile = tile->image()->convertToFormat( QImage::Format_ARGB32_Premultiplied );
-    } else {
-        m_resultTile = tile->image()->copy();
-    }
-}
+    int byteCount = resultImage.numBytes();
 
-void StackedTilePrivate::calcByteCount()
-{
-    int byteCount = m_resultTile.numBytes();
-    QVector<QSharedPointer<TextureTile> >::const_iterator pos = m_tiles.constBegin();
-    QVector<QSharedPointer<TextureTile> >::const_iterator const end = m_tiles.constEnd();
+    QVector<QSharedPointer<TextureTile> >::const_iterator pos = tiles.constBegin();
+    QVector<QSharedPointer<TextureTile> >::const_iterator const end = tiles.constEnd();
     for (; pos != end; ++pos )
         byteCount += (*pos)->byteCount();
-    m_byteCount = byteCount;
+
+    return byteCount;
 }
 
 
-StackedTile::StackedTile( TileId const& id, QVector<QSharedPointer<TextureTile> > const &tiles )
-    : AbstractTile( *new StackedTilePrivate( id ), 0 ), d(0)
+StackedTile::StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles )
+    : AbstractTile( *new StackedTilePrivate( id, resultImage, tiles ), 0 ), d(0)
 {
     Q_ASSERT( !tiles.isEmpty() );
 
@@ -233,17 +222,6 @@ StackedTile::StackedTile( TileId const& id, QVector<QSharedPointer<TextureTile> 
     // or the Q_D macro in the pixel() function. Otherwise it leads
     // to measurable runtime overhead because pixel() is called frequently.
     d = d_func();
-
-    d->m_tiles = tiles;
-}
-
-StackedTile::~StackedTile()
-{
-}
-
-void StackedTile::initJumpTables()
-{
-    //    mDebug() << "Entered initJumpTables( bool ) of Tile" << d->m_id;
 
     if ( d->m_resultTile.isNull() ) {
         qWarning() << "An essential tile is missing. Please rerun the application.";
@@ -265,7 +243,10 @@ void StackedTile::initJumpTables()
             qWarning() << "Color depth" << d->m_resultTile.depth() << " is not supported.";
             return;
     }
+}
 
+StackedTile::~StackedTile()
+{
 }
 
 uint StackedTile::pixel( int x, int y ) const
@@ -298,47 +279,12 @@ int StackedTile::numBytes() const
     return d->m_byteCount;
 }
 
-QVector<QSharedPointer<TextureTile> > * StackedTile::tiles()
+QVector<QSharedPointer<TextureTile> > StackedTile::tiles() const
 {
-    return &d->m_tiles;
+    return d->m_tiles;
 }
 
 QImage const * StackedTile::resultTile() const
 {
     return &d->m_resultTile;
-}
-
-QImage * StackedTile::resultTile()
-{
-    return &d->m_resultTile;
-}
-
-void StackedTile::initResultTile()
-{
-    // TODO: Free all the TextureTiles once the completion status is reached 
-    // to save memory.
-
-    Q_ASSERT( !d->m_tiles.isEmpty() );
-    // if there are more than one active texture layers, we have to convert the
-    // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
-    const bool withConversion = d->m_tiles.count() > 1;
-    QVector<QSharedPointer<TextureTile> >::const_iterator pos = d->m_tiles.constBegin();
-    QVector<QSharedPointer<TextureTile> >::const_iterator const end = d->m_tiles.constEnd();
-    for (; pos != end; ++pos ) {
-            Blending const * const blending = (*pos)->blending();
-            if ( blending ) {
-                mDebug() << "StackedTile::initResultTile: blending";
-                blending->blend( &d->m_resultTile, *pos );
-            }
-            else {
-                mDebug() << "StackedTile::initResultTile: "
-                    "no blending defined => copying top over bottom image";
-                d->setResultTile( *pos, withConversion );
-            }
-    }
-
-    initJumpTables();
-
-    // for now, this seems to be the best place for initializing this stuff
-    d->calcByteCount();
 }

@@ -60,7 +60,7 @@ class StackedTile : public AbstractTile
     friend class StackedTileLoader;
 
  public:
-    explicit StackedTile( TileId const& tid, QVector<QSharedPointer<TextureTile> > const &tiles );
+    explicit StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles );
     virtual ~StackedTile();
 
     int depth() const;
@@ -68,16 +68,15 @@ class StackedTile : public AbstractTile
 
 /*!
     \brief Returns the stack of TextureTiles
-    \return A non-zero pointer to the container of TextureTile objects.
+    \return A container of TextureTile objects.
 */
-    QVector<QSharedPointer<TextureTile> > * tiles();
+    QVector<QSharedPointer<TextureTile> > tiles() const;
 
 /*!
     \brief Returns the QImage that describes the merged stack of TextureTiles
     \return A non-zero pointer to the resulting QImage 
 */
     QImage const * resultTile() const; // Note: maybe this should be resultImage() ?
-    QImage * resultTile();
 
 /*!
     \brief Returns the color value of the result tile at the given integer position.
@@ -104,13 +103,6 @@ class StackedTile : public AbstractTile
  private:
     Q_DECLARE_PRIVATE( StackedTile )
     Q_DISABLE_COPY( StackedTile )
-
-    void initJumpTables();
-    
-/*!
-    \brief This method performs the actual merge process.
-*/    
-    void initResultTile();
 
     StackedTilePrivate *d;
 };

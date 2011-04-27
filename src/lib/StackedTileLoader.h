@@ -164,7 +164,6 @@ class StackedTileLoader : public QObject
 
     private:
         Q_DISABLE_COPY( StackedTileLoader )
-        void mergeDecorations( StackedTile * const ) const;
 
         StackedTileLoaderPrivate* const d;
 };
