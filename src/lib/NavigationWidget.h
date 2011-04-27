@@ -125,6 +125,9 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
 
     void mapCenterOnSignal( const QModelIndex & );
 
+    void adjustForAnimation();
+    void adjustForStill();
+
  protected:
     /**
      * @brief Reimplementation of the resizeEvent() of the widget.
