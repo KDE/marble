@@ -92,8 +92,7 @@ StackedTileLoader::StackedTileLoader( TileLoader * const tileLoader,
 
 StackedTileLoader::~StackedTileLoader()
 {
-    flush();
-    d->m_tileCache.clear();
+    qDeleteAll( d->m_tilesOnDisplay.values() );
     delete d;
 }
 
@@ -103,6 +102,7 @@ void StackedTileLoader::setTextureLayers( QVector<GeoSceneTexture const *> & tex
 
     d->m_textureLayers = textureLayers;
 
+    qDeleteAll( d->m_tilesOnDisplay.values() );
     d->m_tilesOnDisplay.clear();
     d->m_tileCache.clear();
 
@@ -171,20 +171,6 @@ void StackedTileLoader::cleanupTilehash()
             d->m_tilesOnDisplay.remove( it.key() );
         }
     }
-}
-
-void StackedTileLoader::flush()
-{
-    // move all tiles from m_tilesOnDisplay into tile cache
-    QHash<TileId, StackedTile*>::const_iterator it = d->m_tilesOnDisplay.constBegin();
-    QHash<TileId, StackedTile*>::const_iterator const end = d->m_tilesOnDisplay.constEnd();
-    for (; it != end; ++it ) {
-        // If insert call result is false then the cache is too small to store the tile
-        // but the item will get deleted nevertheless and the pointer we have
-        // doesn't get set to zero (so don't delete it in this case or it will crash!)
-        d->m_tileCache.insert( it.key(), it.value(), it.value()->numBytes() );
-    }
-    d->m_tilesOnDisplay.clear();
 }
 
 StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
@@ -372,14 +358,6 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
     }
 
     d->m_tileCache.remove( stackedTileId );
-}
-
-void StackedTileLoader::update()
-{
-    mDebug() << "StackedTileLoader::update()";
-    flush(); // trigger a reload of all tiles that are currently in use
-    d->m_tileCache.clear(); // clear the tile cache in physical memory
-    emit tileUpdatesAvailable();
 }
 
 // 
