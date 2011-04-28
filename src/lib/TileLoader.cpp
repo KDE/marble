@@ -103,6 +103,56 @@ void TileLoader::downloadTile( TileId const & tileId )
     triggerDownload( tileId, DownloadBulk );
 }
 
+int TileLoader::maximumTileLevel( GeoSceneTexture const & texture )
+{
+    // if maximum tile level is configured in the DGML files,
+    // then use it, otherwise use old detection code.
+    if ( texture.maximumTileLevel() >= 0 ) {
+        return texture.maximumTileLevel();
+    }
+
+    int maximumTileLevel = -1;
+    QString tilepath = MarbleDirs::path( texture.themeStr() );
+    //    mDebug() << "StackedTileLoader::maxPartialTileLevel tilepath" << tilepath;
+    QStringList leveldirs = QDir( tilepath ).entryList( QDir::AllDirs | QDir::NoSymLinks
+                                                        | QDir::NoDotAndDotDot );
+
+    QStringList::const_iterator it = leveldirs.constBegin();
+    QStringList::const_iterator const end = leveldirs.constEnd();
+    for (; it != end; ++it ) {
+        bool ok = true;
+        const int value = (*it).toInt( &ok, 10 );
+
+        if ( ok && value > maximumTileLevel )
+            maximumTileLevel = value;
+    }
+
+    //    mDebug() << "Detected maximum tile level that contains data: "
+    //             << maxtilelevel;
+    return maximumTileLevel + 1;
+}
+
+bool TileLoader::baseTilesAvailable( GeoSceneTexture const & texture )
+{
+    const int  levelZeroColumns = texture.levelZeroColumns();
+    const int  levelZeroRows    = texture.levelZeroRows();
+
+    bool result = true;
+
+    // Check whether the tiles from the lowest texture level are available
+    //
+    for ( int column = 0; result && column < levelZeroColumns; ++column ) {
+        for ( int row = 0; result && row < levelZeroRows; ++row ) {
+
+            const QString tilepath = MarbleDirs::path( texture.relativeTileFileName(
+                TileId( texture.sourceDir(), 0, column, row )));
+            result = QFile::exists( tilepath );
+        }
+    }
+
+    return result;
+}
+
 void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
 {
     TileId const id = TileId::fromString( tileId );

@@ -46,6 +46,14 @@ class TileLoader: public QObject
     void reloadTile( TileId const &tileId, DownloadUsage const );
     void downloadTile( TileId const & tileId );
 
+    static int maximumTileLevel( GeoSceneTexture const & texture );
+
+    /**
+     * Returns whether the mandatory most basic tile level is fully available for
+     * the given @p texture layer.
+     */
+    static bool baseTilesAvailable( GeoSceneTexture const & texture );
+
  public Q_SLOTS:
     void updateTile( QByteArray const & imageData, QString const & tileId );
 

@@ -24,15 +24,8 @@
 #include "StackedTileLoader.h"
 
 #include "blendings/Blending.h"
-#include "GeoSceneDocument.h"
-#include "GeoSceneGroup.h"
-#include "GeoSceneHead.h"
-#include "GeoSceneLayer.h"
-#include "GeoSceneMap.h"
-#include "GeoSceneSettings.h"
 #include "GeoSceneTexture.h"
 #include "MarbleDebug.h"
-#include "MarbleDirs.h"
 #include "MergedLayerDecorator.h"
 #include "StackedTile.h"
 #include "TextureTile.h"
@@ -267,59 +260,7 @@ void StackedTileLoaderPrivate::detectMaxTileLevel()
         return;
     }
 
-    GeoSceneTexture const * const texture = m_textureLayers.at( 0 );
-
-    // if maximum tile level is configured in the DGML files,
-    // then use it, otherwise use old detection code.
-    if ( texture->maximumTileLevel() >= 0 ) {
-        m_maxTileLevel = texture->maximumTileLevel();
-        return;
-    }
-
-    int maximumTileLevel = -1;
-    QString tilepath = MarbleDirs::path( texture->themeStr() );
-    //    mDebug() << "StackedTileLoader::maxPartialTileLevel tilepath" << tilepath;
-    QStringList leveldirs = QDir( tilepath ).entryList( QDir::AllDirs | QDir::NoSymLinks
-                                                        | QDir::NoDotAndDotDot );
-
-    QStringList::const_iterator it = leveldirs.constBegin();
-    QStringList::const_iterator const end = leveldirs.constEnd();
-    for (; it != end; ++it ) {
-        bool ok = true;
-        const int value = (*it).toInt( &ok, 10 );
-
-        if ( ok && value > maximumTileLevel )
-            maximumTileLevel = value;
-    }
-
-    //    mDebug() << "Detected maximum tile level that contains data: "
-    //             << maxtilelevel;
-    m_maxTileLevel = maximumTileLevel + 1;
-}
-
-bool StackedTileLoader::baseTilesAvailable( GeoSceneLayer * layer )
-{
-    if ( !layer ) return false;
-
-    GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( layer->groundDataset() );
-
-    const int  levelZeroColumns = texture->levelZeroColumns();
-    const int  levelZeroRows    = texture->levelZeroRows();
-
-    bool noerr = true;
-
-    // Check whether the tiles from the lowest texture level are available
-    //
-    for ( int column = 0; noerr && column < levelZeroColumns; ++column ) {
-        for ( int row = 0; noerr && row < levelZeroRows; ++row ) {
-
-            const QString tilepath = MarbleDirs::path( texture->relativeTileFileName(
-                TileId( texture->sourceDir(), 0, column, row )));
-            noerr = QFile::exists( tilepath );
-        }
-    }
-
-    return noerr;
+    m_maxTileLevel = TileLoader::maximumTileLevel( *m_textureLayers.at( 0 ) );
 }
 
 

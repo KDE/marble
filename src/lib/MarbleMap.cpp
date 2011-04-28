@@ -55,12 +55,11 @@
 #include "Planet.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
-#include "StackedTileLoader.h"
-#include "TextureColorizer.h"
 #include "TextureLayer.h"
 #include "TileCoordsPyramid.h"
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
+#include "TileLoader.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
@@ -857,7 +856,7 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
         QString installMap = texture->installMap();
         QString role = mapTheme->map()->layer( themeID )->role();
 
-        if ( !StackedTileLoader::baseTilesAvailable( layer )
+        if ( !TileLoader::baseTilesAvailable( *texture )
             && !installMap.isEmpty() )
         {
             mDebug() << "Base tiles not available. Creating Tiles ... \n"

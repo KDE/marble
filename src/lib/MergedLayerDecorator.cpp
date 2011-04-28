@@ -18,7 +18,6 @@
 #include "MergedLayerDecorator.h"
 
 #include "SunLocator.h"
-#include "StackedTileLoader.h"
 #include "global.h"
 #include "MarbleDebug.h"
 #include "GeoSceneDocument.h"
@@ -67,7 +66,7 @@ void MergedLayerDecorator::initCityLights()
 
         QString sourceDir = texture->sourceDir();
         QString installMap = texture->installMap();
-        if ( !StackedTileLoader::baseTilesAvailable( layer ) ) {
+        if ( !TileLoader::baseTilesAvailable( *texture ) ) {
             TileCreator *tileCreator = new TileCreator(
                                      sourceDir,
                                      installMap,

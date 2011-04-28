@@ -40,8 +40,6 @@ namespace Marble
 
 class StackedTile;
 class MapThemeManager;
-class GeoSceneDocument;
-class GeoSceneLayer;
 class HttpDownloadManager;
 class SunLocator;
 
@@ -125,12 +123,6 @@ class StackedTileLoader : public QObject
          * available for the current texture layers.
          */
         int maximumTileLevel() const;
-
-        /**
-         * Returns whether the mandatory most basic tile level is fully available for
-         * the given @p texture layer.
-         */
-        static bool baseTilesAvailable( GeoSceneLayer * layer );
 
     public Q_SLOTS:
         /**

@@ -49,7 +49,6 @@
 #include "MarbleClock.h"
 #include "FileStoragePolicy.h"
 #include "FileStorageWatcher.h"
-#include "GeoPainter.h"
 #include "FileViewModel.h"
 #include "PositionTracking.h"
 #include "HttpDownloadManager.h"
@@ -60,10 +59,9 @@
 #include "PluginManager.h"
 #include "StoragePolicy.h"
 #include "SunLocator.h"
-#include "StackedTile.h"
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
-#include "StackedTileLoader.h"
+#include "TileLoader.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "routing/RoutingManager.h"
@@ -466,7 +464,7 @@ void MarbleModel::clearPersistentTileCache()
         QString installMap = texture->installMap();
         QString role = d->m_mapTheme->map()->layer( themeID )->role();
 
-        if ( !StackedTileLoader::baseTilesAvailable( layer )
+        if ( !TileLoader::baseTilesAvailable( *texture )
             && !installMap.isEmpty() )
         {
             mDebug() << "Base tiles not available. Creating Tiles ... \n"
