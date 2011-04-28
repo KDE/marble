@@ -1,6 +1,7 @@
 # Search and/or reverse geocoding
 add_subdirectory( hostip )
 add_subdirectory( latlon )
+add_subdirectory( local-osm-search )
 add_subdirectory( localdatabase )
 add_subdirectory( nominatim )
 
