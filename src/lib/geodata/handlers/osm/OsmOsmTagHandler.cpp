@@ -30,6 +30,7 @@ static GeoTagHandlerRegistrar osmOsmTagHandler( GeoTagHandler::QualifiedName( os
 
 static QColor osmBuildingColor( 0xBE, 0xAD, 0xAD );
 static QColor osmBackgroundColor( 0xF1, 0xEE, 0xE8 );
+static QColor osmWaterColor( 0xB5, 0xD0, 0xD0 );
 
 GeoNode* OsmOsmTagHandler::parse( GeoParser& parser ) const
 {
@@ -46,6 +47,19 @@ GeoNode* OsmOsmTagHandler::parse( GeoParser& parser ) const
     buildingStyle.setLineStyle( buildingLineStyle );
     buildingStyle.setStyleId( "building" );
     doc->addStyle( buildingStyle );
+
+    GeoDataPolyStyle waterPolyStyle;
+    GeoDataLineStyle waterLineStyle;
+    waterPolyStyle.setFill( true );
+    waterPolyStyle.setOutline( true );
+    waterPolyStyle.setColor( osmWaterColor );
+    waterLineStyle.setColor( osmWaterColor );
+    waterLineStyle.setWidth( 2 );
+    GeoDataStyle waterStyle;
+    waterStyle.setPolyStyle( waterPolyStyle );
+    waterStyle.setLineStyle( waterLineStyle );
+    waterStyle.setStyleId( "water" );
+    doc->addStyle( waterStyle );
 
     GeoDataPolyStyle backgroundPolyStyle;
     backgroundPolyStyle.setFill( true );

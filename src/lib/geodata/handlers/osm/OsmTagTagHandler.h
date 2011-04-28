@@ -14,6 +14,10 @@
 #include "GeoTagHandler.h"
 namespace Marble
 {
+class GeoDataGeometry;
+class GeoDataPlacemark;
+class GeoDataDocument;
+
 namespace osm
 {
 
@@ -21,6 +25,9 @@ class OsmTagTagHandler : public GeoTagHandler
 {
 public:
     virtual GeoNode* parse( GeoParser& ) const;
+
+private:
+    GeoDataPlacemark *convertWayToPolygon( GeoDataDocument *doc, GeoDataPlacemark *placemark, GeoDataGeometry *geometry ) const;
 };
 
 }

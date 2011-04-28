@@ -37,30 +37,36 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
     QString key = parser.attribute( "k" );
     QString value = parser.attribute( "v" );
 
+    GeoDataGeometry * geometry = parentItem.nodeAs<GeoDataGeometry>();
+    if ( !geometry )
+        return 0;
+    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( geometry->parent() );
+    if ( !placemark )
+        return 0;
+
     if ( parentItem.represents( osmTag_way ) )
     {
-        GeoDataGeometry *g = parentItem.nodeAs<GeoDataGeometry>();
-        Q_ASSERT( g );
-        GeoDataPlacemark *p = dynamic_cast<GeoDataPlacemark*>( g->parent() );
-        Q_ASSERT( p );
         //Convert area ways to polygons
-        if (( key == "building" || key == "area" ) && ( value == "yes" ) )
+        if ( key == "building" && value == "yes" )
         {
-            GeoDataLineString *l = dynamic_cast<GeoDataLineString *>( g );
-            Q_ASSERT( l );
-            doc->remove( doc->childPosition( p ) );
-            GeoDataPlacemark *newp = new GeoDataPlacemark( *p );
-	    
-	    if ( key == "building" )
-	    {
-		newp->setStyle( &doc->style( "building" ) );
-                newp->setVisible( true );
-	    }
-	    
-            GeoDataPolygon *pol = new GeoDataPolygon;
-            pol->setOuterBoundary( *l );
-            newp->setGeometry( pol );
-            doc->append( newp );
+            placemark = convertWayToPolygon( doc, placemark, geometry );
+            placemark->setStyle( &doc->style( "building" ) );
+            placemark->setVisible( true );
+        }
+        else if ( key == "highway" )
+        {
+            placemark->setVisible( true );
+        }
+        else if ( key == "area" && value == "yes" )
+        {
+            placemark = convertWayToPolygon( doc, placemark, geometry );
+        }
+        else if ( key == "waterway" )
+        {
+            if ( value == "riverbank" )
+                placemark = convertWayToPolygon( doc, placemark, geometry );
+            placemark->setStyle( &doc->style( "water" ) );
+            placemark->setVisible( true );
         }
 
         return 0;
@@ -69,6 +75,21 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
     return 0;
 }
 
+GeoDataPlacemark *OsmTagTagHandler::convertWayToPolygon( GeoDataDocument *doc, GeoDataPlacemark *placemark, GeoDataGeometry *geometry ) const
+{
+    GeoDataLineString *polyline = dynamic_cast<GeoDataLineString *>( geometry );
+    Q_ASSERT( polyline );
+    doc->remove( doc->childPosition( placemark ) );
+    GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );
+    GeoDataPolygon *polygon = new GeoDataPolygon;
+    polygon->setOuterBoundary( *polyline );
+    newPlacemark->setGeometry( polygon );
+    doc->append( newPlacemark );
+    return newPlacemark;
+}
+
+
 }
 
 }
+
