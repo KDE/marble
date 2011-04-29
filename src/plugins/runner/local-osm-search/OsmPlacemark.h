@@ -22,18 +22,77 @@ namespace Marble {
 class OsmPlacemark
 {
 public:
+    enum OsmCategory {
+        UnknownCategory,
+        Highway,
+        AccomodationCamping,
+        AccomodationHostel,
+        AccomodationHotel,
+        AccomodationMotel,
+        AccomodationYouthHostel,
+        AmenityLibrary,
+        EducationCollege,
+        EducationSchool,
+        EducationUniversity,
+        FoodBar,
+        FoodBiergarten,
+        FoodCafe,
+        FoodFastFood,
+        FoodPub,
+        FoodRestaurant,
+        HealthDoctors,
+        HealthHospital,
+        HealthPharmacy,
+        MoneyBank,
+        ShoppingBeverages,
+        ShoppingHifi,
+        ShoppingSupermarket,
+        TouristAttraction,
+        TouristCastle,
+        TouristCinema,
+        TouristMonument,
+        TouristMuseum,
+        TouristRuin,
+        TouristTheatre,
+        TouristThemePark,
+        TouristViewPoint,
+        TouristZoo,
+        TransportAerodrome,
+        TransportAirportTerminal,
+        TransportBusStation,
+        TransportBusStop,
+        TransportCarShare,
+        TransportFuel,
+        TransportParking,
+        TransportTrainStation
+    };
+
     OsmPlacemark();
+
+    OsmCategory category() const;
+
+    void setCategory( OsmCategory category );
 
     /** Placemark name */
     QString name() const;
 
     void setName( const QString &name );
 
+    /** Placemark's house number, if any */
+    QString houseNumber() const;
+
+    void setHouseNumber( const QString &houseNumber );
+
     /** Identifier of the smallest region containing this placemark,
-        -1 if none. */
+        0 if none (~main area). */
     int regionId() const;
 
-    void setOsmRegionId( int id );
+    void setRegionId( int id );
+
+    /** Regions' name */
+    QString regionName() const;
+
+    void setRegionName( const QString &name );
 
     /** Longitude of the placemark's center point, in degree */
     qreal longitude() const;
@@ -51,7 +110,13 @@ public:
 private:
     int m_regionId;
 
+    OsmCategory m_category;
+
     QString m_name;
+
+    QString m_houseNumber;
+
+    QString m_regionName;
 
     qreal m_longitude;
 

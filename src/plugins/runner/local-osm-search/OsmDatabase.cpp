@@ -15,6 +15,13 @@
 #include <QtCore/QFile>
 #include <QtCore/QDataStream>
 #include <QtCore/QStringList>
+#include <QtCore/QRegExp>
+#include <QtCore/QVariant>
+#include <QtCore/QTime>
+
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
+#include <QtSql/QSqlError>
 
 namespace Marble {
 
@@ -30,27 +37,11 @@ OsmDatabase::OsmDatabase()
 
 void OsmDatabase::addFile( const QString &fileName )
 {
-    QFile file( fileName );
-    file.open( QFile::ReadOnly );
-
-    QDataStream stream( &file );
-
-    // Read and check the header
-    quint32 magic;
-    stream >> magic;
-    if ( magic != osmDatabaseFileMagicNumber ) {
-        mDebug() << "Wrong magic number:" << fileName << "is not an osm database file.";
-        return;
+    QSqlDatabase database = QSqlDatabase::addDatabase( "QSQLITE" );
+    database.setDatabaseName( fileName );
+    if ( !database.open() ) {
+        qDebug() << "Failed to connect to database " << fileName;
     }
-    quint32 version;
-    stream >> version; // not needed atm
-    stream.setVersion( QDataStream::Qt_4_0 );
-
-    /** @todo: Use a B-tree or similar */
-    stream >> m_regions;
-    stream >> m_placemarks;
-
-    file.close();
 }
 
 void OsmDatabase::save( const QString &filename )
@@ -85,13 +76,59 @@ void OsmDatabase::addOsmPlacemark( const OsmPlacemark &placemark )
 
 QList<OsmPlacemark> OsmDatabase::find( const QString &searchTerm ) const
 {
-    QStringList const terms = searchTerm.split( ",", QString::SkipEmptyParts );
+    QString const queryString = " SELECT regions.name,"
+                                " placemarks.name, placemarks.number,"
+                                " placemarks.category, placemarks.lon, placemarks.lat"
+                                " FROM regions, placemarks"
+                                " WHERE regions.id = placemarks.region"
+                                "   AND placemarks.name LIKE '%%1%'"
+                                " LIMIT 20";
+
+    QList<OsmPlacemark> result;
+    QTime timer;
+    timer.start();
+    QSqlQuery query;
+    query.setForwardOnly( true );
+    if ( !query.exec( queryString.arg( searchTerm ) ) ) {
+        qDebug() << "Failed to execute query: " << query.lastError();
+        return result;
+    }
+    qDebug() << "Query took " << timer.elapsed() << " ms.";
+
+    while ( query.next() ) {
+        OsmPlacemark placemark;
+        placemark.setRegionName( query.value( 0 ).toString() );
+        placemark.setName( query.value(1).toString() );
+        placemark.setHouseNumber( query.value(2).toString() );
+        placemark.setCategory( (OsmPlacemark::OsmCategory) query.value(3).toInt() );
+        placemark.setLongitude( query.value(4).toFloat() );
+        placemark.setLatitude( query.value(5).toFloat() );
+        result.push_back( placemark );
+        qDebug() << "found " << placemark.name();
+    }
+
+    return result;
+
+    QStringList terms = searchTerm.split( ",", QString::SkipEmptyParts );
+
+    QRegExp streetAndHouse( "^(.*)\\s+(\\d+\\D?)$" );
+    if ( streetAndHouse.indexIn( terms.first() ) != -1 ) {
+        if ( streetAndHouse.capturedTexts().size() == 3 ) {
+            terms.removeFirst();
+            terms.push_front( streetAndHouse.capturedTexts().at( 1 ) );
+            terms.push_front( streetAndHouse.capturedTexts().at( 2 ) );
+        }
+    }
+
     if ( terms.size() == 1 ) {
         return findOsmTerm( terms.first().trimmed() );
     } else if ( terms.size() == 2 ) {
-        return findStreets( terms.at( 1 ).trimmed(), terms.first().trimmed() );
+        return findStreets( terms.last().trimmed(), terms.first().trimmed() );
     } else {
-        // Search terms with more than one ',' silently ignored for now
+        Q_ASSERT( terms.size() > 2 ); // according to split() docs
+        return findHouseNumber( terms.at( 2 ).trimmed(),
+                                       terms.at( 1 ).trimmed(),
+                                       terms.at( 0 ).trimmed() );
     }
 
     /** @todo: alternative words, etc. */
@@ -133,6 +170,27 @@ QList<OsmPlacemark> OsmDatabase::findStreets( const QString &reg, const QString 
 
     foreach( const OsmPlacemark &placemark, m_placemarks ) {
         if ( regions.contains( placemark.regionId() ) && placemark.name().startsWith( street, Qt::CaseInsensitive ) ) {
+            result.push_back( placemark );
+        }
+    }
+
+    return result;
+}
+
+QList<OsmPlacemark> OsmDatabase::findHouseNumber( const QString &reg, const QString &street, const QString &houseNumber ) const
+{
+    QList<OsmPlacemark> result;
+    QList<int> regions;
+    foreach( const OsmRegion &region, m_regions ) {
+        if ( region.name().startsWith( reg, Qt::CaseInsensitive ) ) {
+            regions << region.identifier();
+        }
+    }
+
+    foreach( const OsmPlacemark &placemark, m_placemarks ) {
+        if ( regions.contains( placemark.regionId() ) &&
+             placemark.name().startsWith( street, Qt::CaseInsensitive ) &&
+             placemark.houseNumber() == houseNumber ) {
             result.push_back( placemark );
         }
     }

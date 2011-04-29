@@ -11,6 +11,8 @@
 #define MARBLE_LOCALOSMSEARCHRUNNER_H
 
 #include "MarbleAbstractRunner.h"
+#include "OsmPlacemark.h"
+#include "GeoDataFeature.h"
 
 #include <QtCore/QString>
 
@@ -34,6 +36,8 @@ public:
 
 private:
     OsmDatabase *m_database;
+
+    static QMap<OsmPlacemark::OsmCategory, GeoDataFeature::GeoDataVisualCategory> m_categoryMap;
 };
 
 }

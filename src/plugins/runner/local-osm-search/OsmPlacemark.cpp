@@ -14,10 +14,21 @@
 
 namespace Marble {
 
-OsmPlacemark::OsmPlacemark() : m_regionId( -1 ),
+OsmPlacemark::OsmPlacemark() : m_regionId( 0 ),
+    m_category( UnknownCategory ),
     m_longitude( 0.0 ), m_latitude( 0.0 )
 {
     // nothing to do
+}
+
+OsmPlacemark::OsmCategory OsmPlacemark::category() const
+{
+    return m_category;
+}
+
+void OsmPlacemark::setCategory( OsmCategory category )
+{
+    m_category = category;
 }
 
 QString OsmPlacemark::name() const
@@ -30,14 +41,34 @@ void OsmPlacemark::setName( const QString &name )
     m_name = name;
 }
 
+QString OsmPlacemark::houseNumber() const
+{
+    return m_houseNumber;
+}
+
+void OsmPlacemark::setHouseNumber( const QString &houseNumber )
+{
+    m_houseNumber = houseNumber;
+}
+
 int OsmPlacemark::regionId() const
 {
     return m_regionId;
 }
 
-void OsmPlacemark::setOsmRegionId( int id )
+void OsmPlacemark::setRegionId( int id )
 {
     m_regionId = id;
+}
+
+QString OsmPlacemark::regionName() const
+{
+    return m_regionName;
+}
+
+void OsmPlacemark::setRegionName( const QString &name )
+{
+    m_regionName = name;
 }
 
 qreal OsmPlacemark::longitude() const
@@ -82,8 +113,10 @@ bool OsmPlacemark::operator<( const OsmPlacemark &other) const
 
 QDataStream& operator<<( QDataStream& out, const Marble::OsmPlacemark& placemark )
 {
-    out << placemark.regionId();
+    out << (qint16) placemark.regionId();
+    out << (quint8) placemark.category();
     out << placemark.name();
+    out << placemark.houseNumber();
     out << placemark.longitude();
     out << placemark.latitude();
     return out;
@@ -91,12 +124,18 @@ QDataStream& operator<<( QDataStream& out, const Marble::OsmPlacemark& placemark
 
 QDataStream& operator>>( QDataStream& out, Marble::OsmPlacemark& placemark )
 {
-    qint32 regionId;
+    qint16 regionId;
     out >> regionId;
-    placemark.setOsmRegionId( regionId );
+    placemark.setRegionId( regionId );
+    quint8 category;
+    out >> category;
+    placemark.setCategory( (Marble::OsmPlacemark::OsmCategory) category );
     QString name;
     out >> name;
     placemark.setName( name );
+    QString houseNumber;
+    out >> houseNumber;
+    placemark.setHouseNumber( houseNumber );
     qreal lon;
     out >> lon;
     placemark.setLongitude( lon );

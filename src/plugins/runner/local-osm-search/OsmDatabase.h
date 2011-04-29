@@ -49,6 +49,8 @@ private:
 
     QList<OsmPlacemark> findStreets( const QString &region, const QString &street ) const;
 
+    QList<OsmPlacemark> findHouseNumber( const QString &region, const QString &street, const QString &houseNumber ) const;
+
     QList<OsmRegion> m_regions;
 
     QList<OsmPlacemark> m_placemarks;

@@ -40,7 +40,7 @@ MarbleAbstractRunner* LocalOsmSearchPlugin::newRunner() const
         QDirIterator iter( base, filters, flags );
         while ( iter.hasNext() ) {
             iter.next();
-            QFileInfo databaseFile( QDir( iter.filePath() ), "placemarks.dat" );
+            QFileInfo databaseFile( QDir( iter.filePath() ), "placemarks.sqlite" );
             if ( databaseFile.exists() ) {
                 m_database.addFile( databaseFile.absoluteFilePath() );
             }

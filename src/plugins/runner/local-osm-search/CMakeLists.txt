@@ -16,3 +16,4 @@ OsmDatabase.cpp
  )
 
 marble_add_plugin( LocalOsmSearchPlugin ${localOsmSearch_SRCS} )
+target_link_libraries( LocalOsmSearchPlugin ${QT_QTSQL_LIBRARY} )
