@@ -31,8 +31,6 @@
 #include "GeoSceneMap.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneTexture.h"
-#include "HttpDownloadManager.h"
-#include "MapThemeManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MergedLayerDecorator.h"
@@ -60,9 +58,11 @@ namespace Marble
 class StackedTileLoaderPrivate
 {
 public:
-    StackedTileLoaderPrivate( TileLoader *tileLoader, SunLocator *sunLocator )
-        : m_layerDecorator( tileLoader, sunLocator ),
-          m_tileLoader( tileLoader ),
+    StackedTileLoaderPrivate( HttpDownloadManager * const downloadManager,
+                              MapThemeManager *const mapThemeManager,
+                              SunLocator * const sunLocator )
+        : m_tileLoader( downloadManager, mapThemeManager ),
+          m_layerDecorator( &m_tileLoader, sunLocator ),
           m_maxTileLevel( 0 )
     {
         m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
@@ -74,19 +74,20 @@ public:
     QVector<GeoSceneTexture const *>
         findRelevantTextureLayers( TileId const & stackedTileId ) const;
 
+    TileLoader  m_tileLoader;
     MergedLayerDecorator m_layerDecorator;
-    TileLoader *m_tileLoader;
     int         m_maxTileLevel;
     QVector<GeoSceneTexture const *> m_textureLayers;
     QHash <TileId, StackedTile*>  m_tilesOnDisplay;
     QCache <TileId, StackedTile>  m_tileCache;
 };
 
-StackedTileLoader::StackedTileLoader( TileLoader * const tileLoader,
+StackedTileLoader::StackedTileLoader( HttpDownloadManager * const downloadManager,
+                                      MapThemeManager * const mapThemeManager,
                                       SunLocator * const sunLocator )
-    : d( new StackedTileLoaderPrivate( tileLoader, sunLocator ) )
+    : d( new StackedTileLoaderPrivate( downloadManager, mapThemeManager, sunLocator ) )
 {
-    connect( d->m_tileLoader, SIGNAL( tileCompleted( TileId, const QImage & )),
+    connect( &d->m_tileLoader, SIGNAL( tileCompleted( TileId, const QImage & )),
              SLOT( updateTile( TileId, const QImage & )));
 }
 
@@ -208,7 +209,7 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
                              stackedTileId.x(), stackedTileId.y() );
         mDebug() << "StackedTileLoader::loadTile: tile" << textureLayer->sourceDir()
                  << tileId.toString() << textureLayer->tileSize();
-        const QImage tileImage = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
+        const QImage tileImage = d->m_tileLoader.loadTile( tileId, DownloadBrowse );
         QSharedPointer<TextureTile> tile( new TextureTile( tileId, tileImage, textureLayer->blending() ) ); 
         tiles.append( tile );
     }
@@ -230,7 +231,7 @@ void StackedTileLoader::downloadTile( TileId const & stackedTileId )
         GeoSceneTexture const * const textureLayer = *pos;
         TileId const tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
-        d->m_tileLoader->downloadTile( tileId );
+        d->m_tileLoader.downloadTile( tileId );
     }
 }
 
@@ -247,7 +248,7 @@ void StackedTileLoader::reloadVisibleTiles()
             // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
             // but since "reload" or "refresh" seems to be a common action of a browser and it
             // allows for more connections (in our model), use "DownloadBrowse"
-            d->m_tileLoader->reloadTile( tile->id(), DownloadBrowse );
+            d->m_tileLoader.reloadTile( tile->id(), DownloadBrowse );
         }
     }
 

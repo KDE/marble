@@ -42,8 +42,8 @@ class StackedTile;
 class MapThemeManager;
 class GeoSceneDocument;
 class GeoSceneLayer;
+class HttpDownloadManager;
 class SunLocator;
-class TileLoader;
 
 class StackedTileLoaderPrivate;
 
@@ -71,7 +71,9 @@ class StackedTileLoader : public QObject
          * @param downloadManager The download manager that shall be used to fetch
          *                        the tiles from a remote resource.
          */
-        StackedTileLoader( TileLoader * const tileLoader, SunLocator * const sunLocator );
+        StackedTileLoader( HttpDownloadManager * const downloadManager,
+                           MapThemeManager * const mapThemeManager,
+                           SunLocator * const sunLocator );
         virtual ~StackedTileLoader();
 
         void setTextureLayers( QVector<GeoSceneTexture const *> & );
