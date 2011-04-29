@@ -119,7 +119,7 @@ class GeoDataFeaturePrivate
 
     static GeoDataStyle* createOsmStyle( const QFont &font, const QString &bitmap )
     {
-        QPixmap const pixmap = QPixmap( MarbleDirs::path( "bitmaps/" + bitmap + ".png" ) );
+        QPixmap const pixmap = QPixmap( MarbleDirs::path( "bitmaps/poi/" + bitmap + ".png" ) );
         return new GeoDataStyle( pixmap, font, QColor( Qt::black ) );
     }
 
