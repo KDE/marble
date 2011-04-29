@@ -19,6 +19,7 @@
 #include "GeoDataStyleMap.h"
 #include "GeoDataStyle.h"
 #include "OsmElementDictionary.h"
+#include "OsmGlobals.h"
 
 namespace Marble
 {
@@ -28,10 +29,6 @@ namespace osm
 static GeoTagHandlerRegistrar osmOsmTagHandler( GeoTagHandler::QualifiedName( osmTag_osm, "" ),
         new OsmOsmTagHandler() );
 
-static QColor osmBuildingColor( 0xBE, 0xAD, 0xAD );
-static QColor osmBackgroundColor( 0xF1, 0xEE, 0xE8 );
-static QColor osmWaterColor( 0xB5, 0xD0, 0xD0 );
-
 GeoNode* OsmOsmTagHandler::parse( GeoParser& parser ) const
 {
     GeoDataDocument* doc = geoDataDoc( parser );
@@ -40,8 +37,8 @@ GeoNode* OsmOsmTagHandler::parse( GeoParser& parser ) const
     GeoDataLineStyle buildingLineStyle;
     buildingPolyStyle.setFill( true );
     buildingPolyStyle.setOutline( true );
-    buildingPolyStyle.setColor( osmBuildingColor );
-    buildingLineStyle.setColor( osmBuildingColor.darker() );
+    buildingPolyStyle.setColor( OsmGlobals::buildingColor );
+    buildingLineStyle.setColor( OsmGlobals::buildingColor.darker() );
     GeoDataStyle buildingStyle;
     buildingStyle.setPolyStyle( buildingPolyStyle );
     buildingStyle.setLineStyle( buildingLineStyle );
@@ -52,8 +49,8 @@ GeoNode* OsmOsmTagHandler::parse( GeoParser& parser ) const
     GeoDataLineStyle waterLineStyle;
     waterPolyStyle.setFill( true );
     waterPolyStyle.setOutline( true );
-    waterPolyStyle.setColor( osmWaterColor );
-    waterLineStyle.setColor( osmWaterColor );
+    waterPolyStyle.setColor( OsmGlobals::waterColor );
+    waterLineStyle.setColor( OsmGlobals::waterColor );
     waterLineStyle.setWidth( 2 );
     GeoDataStyle waterStyle;
     waterStyle.setPolyStyle( waterPolyStyle );
@@ -64,7 +61,7 @@ GeoNode* OsmOsmTagHandler::parse( GeoParser& parser ) const
     GeoDataPolyStyle backgroundPolyStyle;
     backgroundPolyStyle.setFill( true );
     backgroundPolyStyle.setOutline( false );
-    backgroundPolyStyle.setColor( osmBackgroundColor );
+    backgroundPolyStyle.setColor( OsmGlobals::backgroundColor );
     GeoDataStyle backgroundStyle;
     backgroundStyle.setPolyStyle( backgroundPolyStyle );
     backgroundStyle.setStyleId( "background" );

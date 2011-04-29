@@ -18,13 +18,14 @@
 #include "GeoDataLineString.h"
 #include "MarbleDebug.h"
 #include "OsmElementDictionary.h"
+#include "OsmGlobals.h"
+#include "GeoDataStyle.h"
 
 namespace Marble
 {
 
 namespace osm
 {
-
 static GeoTagHandlerRegistrar osmTagTagHandler( GeoTagHandler::QualifiedName( osmTag_tag, "" ),
         new OsmTagTagHandler() );
 
@@ -41,11 +42,12 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
     if ( !geometry )
         return 0;
     GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( geometry->parent() );
-    if ( !placemark )
-        return 0;
 
     if ( parentItem.represents( osmTag_way ) )
     {
+        if ( !placemark )
+            return 0;
+
         //Convert area ways to polygons
         if ( key == "building" && value == "yes" )
         {
@@ -68,8 +70,24 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
             placemark->setStyle( &doc->style( "water" ) );
             placemark->setVisible( true );
         }
+    }
+    else if ( parentItem.represents( osmTag_node ) ) //POI
+    {
+        GeoDataStyle *poiStyle = OsmGlobals::poiStyles().value( key + "=" + value );
 
-        return 0;
+        if ( !poiStyle )
+            return 0;
+
+        GeoDataPoint *point = dynamic_cast<GeoDataPoint *>( geometry );
+        Q_ASSERT( point );
+
+        if ( !placemark )
+        {
+            placemark = new GeoDataPlacemark();
+            doc->append( placemark );
+        }
+        placemark->setGeometry( point );
+        placemark->setStyle( poiStyle );
     }
 
     return 0;
