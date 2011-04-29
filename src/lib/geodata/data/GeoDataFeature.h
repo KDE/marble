@@ -142,6 +142,64 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         Folder,
         Bookmark,
 
+        // OpenStreetMap category Accomodation
+        AccomodationCamping,
+        AccomodationHostel,
+        AccomodationHotel,
+        AccomodationMotel,
+        AccomodationYouthHostel,
+
+        // OpenStreetMap category Amenity
+        AmenityLibrary,
+
+        // OpenStreetMap category Education
+        EducationCollege,
+        EducationSchool,
+        EducationUniversity,
+
+        // OpenStreetMap category Food
+        FoodBar,
+        FoodBiergarten,
+        FoodCafe,
+        FoodFastFood,
+        FoodPub,
+        FoodRestaurant,
+
+        // OpenStreetMap category Health
+        HealthDoctors,
+        HealthHospital,
+        HealthPharmacy,
+
+        // OpenStreetMap category Money
+        MoneyBank,
+
+        // OpenStreetMap category Shopping
+        ShoppingBeverages,
+        ShoppingHifi,
+        ShoppingSupermarket,
+
+        // OpenStreetMap category Tourist
+        TouristAttraction,
+        TouristCastle,
+        TouristCinema,
+        TouristMonument,
+        TouristMuseum,
+        TouristRuin,
+        TouristTheatre,
+        TouristThemePark,
+        TouristViewPoint,
+        TouristZoo,
+
+        // OpenStreetMap category Transport
+        TransportAerodrome,
+        TransportAirportTerminal,
+        TransportBusStation,
+        TransportBusStop,
+        TransportCarShare,
+        TransportFuel,
+        TransportParking,
+        TransportTrainStation,
+
         // Important: Make sure that this is always the last 
         // item and just use it to specify the array size
         LastIndex

@@ -115,15 +115,15 @@ void GeoDataFeature::initializeDefaultStyles()
 #endif
 
     s_defaultStyle[None]
-        = new GeoDataStyle( QPixmap(), 
+        = new GeoDataStyle( QPixmap(),
               QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
 
     s_defaultStyle[Default]
-        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/default_location.png" ) ), 
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/default_location.png" ) ),
               QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::white ) );
 
     s_defaultStyle[Unknown]
-        = new GeoDataStyle( QPixmap(), 
+        = new GeoDataStyle( QPixmap(),
               QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
 
     s_defaultStyle[SmallCity]
@@ -295,6 +295,47 @@ void GeoDataFeature::initializeDefaultStyles()
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/bookmark.png" ) ),
               QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
 
+    QFont const osmFont( defaultFamily, defaultSize, 50, false );
+    s_defaultStyle[AccomodationCamping]      = GeoDataFeaturePrivate::createOsmStyle( osmFont, "accommodation_camping.p.16" );
+    s_defaultStyle[AccomodationHostel]       = GeoDataFeaturePrivate::createOsmStyle( osmFont, "accommodation_hostel.p.16" );
+    s_defaultStyle[AccomodationHotel]        = GeoDataFeaturePrivate::createOsmStyle( osmFont, "accommodation_hotel2.p.16" );
+    s_defaultStyle[AccomodationMotel]        = GeoDataFeaturePrivate::createOsmStyle( osmFont, "accommodation_motel.p.16" );
+    s_defaultStyle[AccomodationYouthHostel]  = GeoDataFeaturePrivate::createOsmStyle( osmFont, "accommodation_youth_hostel.p.16" );
+    s_defaultStyle[AmenityLibrary]           = GeoDataFeaturePrivate::createOsmStyle( osmFont, "amenity_library.p.16" );
+    s_defaultStyle[EducationCollege]         = GeoDataFeaturePrivate::createOsmStyle( osmFont, "education_college.p.16" );
+    s_defaultStyle[EducationSchool]          = GeoDataFeaturePrivate::createOsmStyle( osmFont, "education_school.p.16" );
+    s_defaultStyle[EducationUniversity]      = GeoDataFeaturePrivate::createOsmStyle( osmFont, "education_university.p.16" );
+    s_defaultStyle[FoodBar]                  = GeoDataFeaturePrivate::createOsmStyle( osmFont, "food_bar.p.16" );
+    s_defaultStyle[FoodBiergarten]           = GeoDataFeaturePrivate::createOsmStyle( osmFont, "food_biergarten.p.16" );
+    s_defaultStyle[FoodCafe]                 = GeoDataFeaturePrivate::createOsmStyle( osmFont, "food_cafe.p.16" );
+    s_defaultStyle[FoodFastFood]             = GeoDataFeaturePrivate::createOsmStyle( osmFont, "food_fastfood2.p.16" );
+    s_defaultStyle[FoodPub]                  = GeoDataFeaturePrivate::createOsmStyle( osmFont, "food_pub.p.16" );
+    s_defaultStyle[FoodRestaurant]           = GeoDataFeaturePrivate::createOsmStyle( osmFont, "food_restaurant.p.16" );
+    s_defaultStyle[HealthDoctors]            = GeoDataFeaturePrivate::createOsmStyle( osmFont, "health_doctors2.p.16" );
+    s_defaultStyle[HealthHospital]           = GeoDataFeaturePrivate::createOsmStyle( osmFont, "health_hospital.p.16" );
+    s_defaultStyle[HealthPharmacy]           = GeoDataFeaturePrivate::createOsmStyle( osmFont, "health_pharmacy.p.16" );
+    s_defaultStyle[MoneyBank]                = GeoDataFeaturePrivate::createOsmStyle( osmFont, "money_bank2.p.16" );
+    s_defaultStyle[ShoppingBeverages]        = GeoDataFeaturePrivate::createOsmStyle( osmFont, "shopping_alcohol.p.16" );
+    s_defaultStyle[ShoppingHifi]             = GeoDataFeaturePrivate::createOsmStyle( osmFont, "shopping_hifi.p.16" );
+    s_defaultStyle[ShoppingSupermarket]      = GeoDataFeaturePrivate::createOsmStyle( osmFont, "shopping_supermarket.p.16" );
+    s_defaultStyle[TouristAttraction]        = GeoDataFeaturePrivate::createOsmStyle( osmFont, "tourist_attraction.p.16" );
+    s_defaultStyle[TouristCastle]            = GeoDataFeaturePrivate::createOsmStyle( osmFont, "tourist_castle2.p.16" );
+    s_defaultStyle[TouristCinema]            = GeoDataFeaturePrivate::createOsmStyle( osmFont, "tourist_cinema.p.16" );
+    s_defaultStyle[TouristMonument]          = GeoDataFeaturePrivate::createOsmStyle( osmFont, "tourist_monument.p.16" );
+    s_defaultStyle[TouristMuseum]            = GeoDataFeaturePrivate::createOsmStyle( osmFont, "tourist_museum.p.16" );
+    s_defaultStyle[TouristRuin]              = GeoDataFeaturePrivate::createOsmStyle( osmFont, "tourist_ruin.p.16" );
+    s_defaultStyle[TouristTheatre]           = GeoDataFeaturePrivate::createOsmStyle( osmFont, "tourist_theatre.p.16" );
+    s_defaultStyle[TouristThemePark]         = GeoDataFeaturePrivate::createOsmStyle( osmFont, "tourist_theme_park.p.16" );
+    s_defaultStyle[TouristViewPoint]         = GeoDataFeaturePrivate::createOsmStyle( osmFont, "tourist_view_point.p.16" );
+    s_defaultStyle[TouristZoo]               = GeoDataFeaturePrivate::createOsmStyle( osmFont, "tourist_zoo.p.16" );
+    s_defaultStyle[TransportAerodrome]       = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_aerodrome.p.16" );
+    s_defaultStyle[TransportAirportTerminal] = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_airport_terminal.p.16" );
+    s_defaultStyle[TransportBusStation]      = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_bus_station.p.16" );
+    s_defaultStyle[TransportBusStop]         = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_bus_stop.p.16" );
+    s_defaultStyle[TransportCarShare]        = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_car_share.p.16" );
+    s_defaultStyle[TransportFuel]            = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_fuel.p.16" );
+    s_defaultStyle[TransportParking]         = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_parking.p.16" );
+    s_defaultStyle[TransportTrainStation]    = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_train_station.p.16" );
     s_defaultStyleInitialized = true;
     s_defaultFont = QFont("Sans Serif");
 

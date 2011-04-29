@@ -20,8 +20,9 @@
 #include "GeoDataRegion.h"
 #include "GeoDataTimeStamp.h"
 #include "GeoDataTimeSpan.h"
-
 #include "GeoDataTypes.h"
+#include "GeoDataStyle.h"
+#include "MarbleDirs.h"
 
 namespace Marble
 {
@@ -114,6 +115,12 @@ class GeoDataFeaturePrivate
     virtual const char* nodeType() const
     {
         return GeoDataTypes::GeoDataFeatureType;
+    }
+
+    static GeoDataStyle* createOsmStyle( const QFont &font, const QString &bitmap )
+    {
+        QPixmap const pixmap = QPixmap( MarbleDirs::path( "bitmaps/" + bitmap + ".png" ) );
+        return new GeoDataStyle( pixmap, font, QColor( Qt::black ) );
     }
 
     QString             m_name;         // Name of the feature. Is shown on screen
