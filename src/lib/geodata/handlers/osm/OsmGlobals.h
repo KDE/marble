@@ -24,11 +24,11 @@ namespace osm
 class OsmGlobals
 {
 public:
-    static const QMap<QString, GeoDataStyle*>& poiStyles();
+    static QMap<QString, GeoDataStyle*> poiStyles();
 
-    static QColor buildingColor( 0xBE, 0xAD, 0xAD );
-    static QColor backgroundColor( 0xF1, 0xEE, 0xE8 );
-    static QColor waterColor( 0xB5, 0xD0, 0xD0 );
+    static QColor buildingColor;
+    static QColor backgroundColor;
+    static QColor waterColor;
 
 private:
     static void appendStyle( const QString& name, const QString& icon );

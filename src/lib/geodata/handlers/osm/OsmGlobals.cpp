@@ -20,7 +20,11 @@ namespace osm
 {
 QMap<QString, GeoDataStyle*> OsmGlobals::m_poiStyles;
 
-const QMap< QString, GeoDataStyle* >& OsmGlobals::poiStyles()
+QColor OsmGlobals::buildingColor( 0xBE, 0xAD, 0xAD );
+QColor OsmGlobals::backgroundColor( 0xF1, 0xEE, 0xE8 );
+QColor OsmGlobals::waterColor( 0xB5, 0xD0, 0xD0 );
+
+QMap< QString, GeoDataStyle* > OsmGlobals::poiStyles()
 {
     if ( m_poiStyles.count() < 1 )
         setupPOIStyles();
