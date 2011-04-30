@@ -11,6 +11,8 @@
 #include "GoToDialog.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
+#include "MarbleRunnerManager.h"
+#include "MarblePlacemarkModel.h"
 #include "GeoDataFolder.h"
 #include "PositionTracking.h"
 #include "BookmarkManager.h"
@@ -18,6 +20,7 @@
 #include "routing/RouteRequest.h"
 
 #include <QtCore/QAbstractListModel>
+#include <QtGui/QPushButton>
 
 namespace Marble
 {
@@ -68,6 +71,10 @@ public:
     GeoDataLookAt m_lookAt;
 
     TargetModel* m_targetModel;
+
+    MarbleRunnerManager* m_runnerManager;
+
+    MarblePlacemarkModel *m_placemarkModel;
 
     GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWidget );
 
@@ -239,27 +246,69 @@ void TargetModel::setShowRoutingItems( bool show )
 }
 
 GoToDialogPrivate::GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWidget ) :
-    m_parent( parent), m_marbleWidget( marbleWidget ), m_targetModel( 0 )
+    m_parent( parent), m_marbleWidget( marbleWidget ), m_targetModel( 0 ),
+    m_runnerManager( 0 ), m_placemarkModel( 0 )
 {
     // nothing to do
 }
 
 void GoToDialogPrivate::saveSelection( const QModelIndex &index )
 {
-    QVariant data = index.data( GeoDataLookAtRole );
-    m_lookAt = qVariantValue<GeoDataLookAt>( data );
+    if ( m_placemarkModel ) {
+        QVariant coordinates = m_placemarkModel->data( index, MarblePlacemarkModel::CoordinateRole );
+        m_lookAt = GeoDataLookAt();
+        m_lookAt.setCoordinates( qVariantValue<GeoDataCoordinates>( coordinates ) );
+        m_lookAt.setRange( 750.0 );
+    } else {
+        QVariant data = index.data( GeoDataLookAtRole );
+        m_lookAt = qVariantValue<GeoDataLookAt>( data );
+    }
     m_parent->accept();
+}
+
+void GoToDialog::startSearch()
+{
+    QString const searchTerm = searchLineEdit->text().trimmed();
+    if ( searchTerm.isEmpty() ) {
+        return;
+    }
+
+    if ( !d->m_runnerManager ) {
+        d->m_runnerManager = new MarbleRunnerManager( d->m_marbleWidget->model()->pluginManager(), this );
+        d->m_runnerManager->setModel( d->m_marbleWidget->model() );
+        connect( d->m_runnerManager, SIGNAL( searchResultChanged( QAbstractItemModel* ) ),
+                 this, SLOT( updateSearchResult( QAbstractItemModel* ) ) );
+    }
+
+    d->m_runnerManager->findPlacemarks( searchTerm );
+}
+
+void GoToDialog::updateSearchResult( QAbstractItemModel* model )
+{
+    d->m_placemarkModel = dynamic_cast<MarblePlacemarkModel*>( model );
+    bookmarkListView->setModel( model );
+    descriptionLabel->setText( tr( "%n results found.", "Number of search results", model->rowCount() ) );
 }
 
 GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::WindowFlags flags ) :
     QDialog( parent, flags ), d( new GoToDialogPrivate( this, marbleWidget ) )
 {
+#ifdef Q_WS_MAEMO_5
+        setAttribute( Qt::WA_Maemo5StackedWindow );
+        setWindowFlags( Qt::Window );
+#endif // Q_WS_MAEMO_5
     setupUi( this );
 
     d->m_targetModel = new TargetModel( marbleWidget, this );
     bookmarkListView->setModel( d->m_targetModel );
     connect( bookmarkListView, SIGNAL( activated( QModelIndex ) ),
              this, SLOT( saveSelection ( QModelIndex ) ) );
+    connect( searchLineEdit, SIGNAL( returnPressed() ),
+             this, SLOT( startSearch() ) );
+    buttonBox->button( QDialogButtonBox::Close )->setAutoDefault( false );
+    connect( searchButton, SIGNAL( clicked( bool ) ),
+             this, SLOT( updateSearchMode( bool ) ) );
+    updateSearchMode( false );
 }
 
 GoToDialog::~GoToDialog()
@@ -275,6 +324,17 @@ GeoDataLookAt GoToDialog::lookAt() const
 void GoToDialog::setShowRoutingItems( bool show )
 {
     d->m_targetModel->setShowRoutingItems( show );
+}
+
+void GoToDialog::updateSearchMode( bool enabled )
+{
+    searchLineEdit->setVisible( enabled );
+    descriptionLabel->setVisible( enabled );
+    if ( enabled ) {
+        bookmarkListView->setModel( d->m_placemarkModel );
+    } else {
+        bookmarkListView->setModel( d->m_targetModel );
+    }
 }
 
 }

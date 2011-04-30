@@ -51,6 +51,13 @@ public:
 
     Q_PRIVATE_SLOT( d, void saveSelection( const QModelIndex &index ) )
 
+private Q_SLOTS:
+    void startSearch();
+
+    void updateSearchResult( QAbstractItemModel* model );
+
+    void updateSearchMode( bool enabled );
+
 private:
     GoToDialogPrivate * const d;
 };
