@@ -8,8 +8,8 @@
 // Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef MARBLE_DECLARATIVE_ROUTE_H
-#define MARBLE_DECLARATIVE_ROUTE_H
+#ifndef MARBLE_ROUTE_H
+#define MARBLE_ROUTE_H
 
 #include "RouteSegment.h"
 #include "GeoDataLatLonBox.h"

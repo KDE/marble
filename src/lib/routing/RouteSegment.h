@@ -8,8 +8,8 @@
 // Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef MARBLE_DECLARATIVE_ROUTESEGMENT_H
-#define MARBLE_DECLARATIVE_ROUTESEGMENT_H
+#ifndef MARBLE_ROUTESEGMENT_H
+#define MARBLE_ROUTESEGMENT_H
 
 #include "Maneuver.h"
 #include "GeoDataLineString.h"

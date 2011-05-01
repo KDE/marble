@@ -8,8 +8,8 @@
 // Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef MARBLE_DECLARATIVE_MANEUVER_H
-#define MARBLE_DECLARATIVE_MANEUVER_H
+#ifndef MARBLE_MANEUVER_H
+#define MARBLE_MANEUVER_H
 
 #include "GeoDataCoordinates.h"
 #include "routing/instructions/RoutingInstruction.h"
