@@ -207,6 +207,7 @@ void GeoDataLineString::append ( const GeoDataCoordinates& value )
 {
     GeoDataGeometry::detach();
     GeoDataLineStringPrivate* d = p();
+    qDeleteAll( d->m_rangeCorrected );
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
@@ -217,6 +218,7 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& va
 {
     GeoDataGeometry::detach();
     GeoDataLineStringPrivate* d = p();
+    qDeleteAll( d->m_rangeCorrected );
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
@@ -228,6 +230,7 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataLineString& val
 {
     GeoDataGeometry::detach();
     GeoDataLineStringPrivate* d = p();
+    qDeleteAll( d->m_rangeCorrected );
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
@@ -246,6 +249,7 @@ void GeoDataLineString::clear()
 {
     GeoDataGeometry::detach();
     GeoDataLineStringPrivate* d = p();
+    qDeleteAll( d->m_rangeCorrected );
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
