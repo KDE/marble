@@ -211,6 +211,7 @@ QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constEnd() const
 void GeoDataLineString::append ( const GeoDataCoordinates& value )
 {
     GeoDataGeometry::detach();
+    qDeleteAll( p()->m_rangeCorrected );
     p()->m_rangeCorrected.clear();
     p()->m_dirtyRange = true;
     p()->m_dirtyBox = true;
@@ -220,6 +221,7 @@ void GeoDataLineString::append ( const GeoDataCoordinates& value )
 GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& value )
 {
     GeoDataGeometry::detach();
+    qDeleteAll( p()->m_rangeCorrected );
     p()->m_rangeCorrected.clear();
     p()->m_dirtyRange = true;
     p()->m_dirtyBox = true;
@@ -230,6 +232,7 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& va
 GeoDataLineString& GeoDataLineString::operator << ( const GeoDataLineString& value )
 {
     GeoDataGeometry::detach();
+    qDeleteAll( p()->m_rangeCorrected );
     p()->m_rangeCorrected.clear();
     p()->m_dirtyRange = true;
     p()->m_dirtyBox = true;
@@ -247,6 +250,7 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataLineString& val
 void GeoDataLineString::clear()
 {
     GeoDataGeometry::detach();
+    qDeleteAll( p()->m_rangeCorrected );
     p()->m_rangeCorrected.clear();
     p()->m_dirtyRange = true;
     p()->m_dirtyBox = true;
