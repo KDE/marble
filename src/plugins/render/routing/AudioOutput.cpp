@@ -185,9 +185,9 @@ void AudioOutput::update( const Route &route, qreal distance )
         return;
     }
 
-    RoutingInstruction::TurnType turnType = route.currentSegment().maneuver().direction();
-    if ( !( d->m_lastTurnPoint == route.currentSegment().maneuver().position() ) || turnType != d->m_lastTurnType ) {
-        d->m_lastTurnPoint = route.currentSegment().maneuver().position();
+    RoutingInstruction::TurnType turnType = route.currentSegment().nextRouteSegment().maneuver().direction();
+    if ( !( d->m_lastTurnPoint == route.currentSegment().nextRouteSegment().maneuver().position() ) || turnType != d->m_lastTurnType ) {
+        d->m_lastTurnPoint = route.currentSegment().nextRouteSegment().maneuver().position();
         d->reset();
     }
 
