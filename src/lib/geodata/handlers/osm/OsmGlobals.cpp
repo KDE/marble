@@ -34,7 +34,7 @@ QMap< QString, GeoDataStyle* > OsmGlobals::poiStyles()
 
 void OsmGlobals::setupPOIStyles()
 {
-    appendStyle( "amenity=restaurant", "food_restaurant.png" );
+    appendStyle( "amenity=restaurant", "food_restaurant.p.16.png" );
 }
 
 void OsmGlobals::appendStyle( const QString& name, const QString& icon )
