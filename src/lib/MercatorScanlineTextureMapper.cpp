@@ -66,7 +66,7 @@ void MercatorScanlineTextureMapper::setRepaintNeeded()
 
 void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer )
 {
-    QImage       *canvasImage = viewParams->canvasImage();
+    QSharedPointer<QImage> canvasImage = viewParams->canvasImagePtr();
     const int imageHeight = canvasImage->height();
     const int imageWidth  = canvasImage->width();
     const qint64  radius      = viewParams->radius();

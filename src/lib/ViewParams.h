@@ -19,6 +19,7 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
+#include <QtCore/QSharedPointer>
 #include <QtCore/QString>
 
 #include "marble_export.h"
@@ -114,8 +115,10 @@ class MARBLE_EXPORT ViewParams
      */
     void setSize( int width, int height );
 
+    QSharedPointer<QImage> canvasImagePtr() const;
     QImage * canvasImage() const;
 
+    QSharedPointer<QImage> coastImagePtr() const;
     QImage * coastImage() const;
 
     bool showGps() const;

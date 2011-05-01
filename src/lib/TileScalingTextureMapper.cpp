@@ -73,7 +73,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *v
     if ( viewParams->radius() <= 0 )
         return;
 
-    QImage       *canvasImage = viewParams->canvasImage();
+    QSharedPointer<QImage> canvasImage = viewParams->canvasImagePtr();
     const int imageHeight = canvasImage->height();
     const int imageWidth  = canvasImage->width();
     const qint64  radius      = viewParams->radius();
@@ -108,7 +108,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *v
     if ( texColorizer || m_oldRadius != radius ) {
         m_cache->clear();
 
-        QPainter painter( canvasImage );
+        QPainter painter( canvasImage.data() );
         painter.setRenderHint( QPainter::SmoothPixmapTransform, highQuality );
 
         for ( int tileY = minTileY; tileY <= maxTileY; ++tileY ) {
