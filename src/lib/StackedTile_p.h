@@ -17,7 +17,7 @@
 #ifndef MARBLE_STACKEDTILE_P_H
 #define MARBLE_STACKEDTILE_P_H
 
-#include "AbstractTile_p.h"
+#include "TileId.h"
 
 #include <QtCore/QSharedPointer>
 #include <QtCore/QVector>
@@ -27,11 +27,10 @@ namespace Marble
 {
 class TextureTile;
 
-class StackedTilePrivate : AbstractTilePrivate
+class StackedTilePrivate
 {
-    Q_DECLARE_PUBLIC( StackedTile )
-
  public:
+    const TileId    m_id;
     const QImage    m_resultTile;
     const int       m_depth;
     const bool      m_isGrayscale;

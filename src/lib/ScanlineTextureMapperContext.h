@@ -80,7 +80,7 @@ private:
     qreal const      m_normGlobalWidth;
     qreal const      m_normGlobalHeight;
 
-    StackedTile *m_tile;
+    const StackedTile *m_tile;
     int m_deltaLevel;
 
     // Coordinate transformations:
