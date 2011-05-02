@@ -68,6 +68,10 @@ void OsmGlobals::setupPOIStyles()
 
     appendStyle( "amenity=cinema", "tourist_cinema.p.16.png" );
     appendStyle( "amenity=theatre", "tourist_theatre.p.16.png" );
+
+    appendStyle( "shop=alcohol", "shopping_alcohol.p.16.png" );
+    appendStyle( "shop=hifi", "shopping_hifi.p.16.png" );
+    appendStyle( "shop=supermarket", "shopping_supermarket.p.16.png" );
 }
 
 void OsmGlobals::setupCategories()
@@ -97,6 +101,11 @@ void OsmGlobals::setupCategories()
 
     m_visualCategories["amenity=cinema"] = GeoDataFeature::TouristCinema;
     m_visualCategories["amenity=theatre"] = GeoDataFeature::TouristTheatre;
+
+    //FIXME: alcohol != beverages
+    m_visualCategories["shop=alcohol"] = GeoDataFeature::ShoppingBeverages;
+    m_visualCategories["shop=hifi"] = GeoDataFeature::ShoppingHifi;
+    m_visualCategories["shop=supermarket"] = GeoDataFeature::ShoppingSupermarket;
 }
 
 void OsmGlobals::appendStyle( const QString& name, const QString& icon )
