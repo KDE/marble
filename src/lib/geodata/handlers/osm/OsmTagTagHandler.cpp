@@ -29,6 +29,8 @@ namespace osm
 static GeoTagHandlerRegistrar osmTagTagHandler( GeoTagHandler::QualifiedName( osmTag_tag, "" ),
         new OsmTagTagHandler() );
 
+static QStringList tagBlackList = QStringList() << "created_by";
+
 GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() );
@@ -38,15 +40,30 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
     QString key = parser.attribute( "k" );
     QString value = parser.attribute( "v" );
 
+    if ( tagBlackList.contains( key ) )
+        return 0;
+
     GeoDataGeometry * geometry = parentItem.nodeAs<GeoDataGeometry>();
     if ( !geometry )
         return 0;
     GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( geometry->parent() );
 
-    if ( parentItem.represents( osmTag_way ) )
+    if ( key == "name" )
     {
         if ( !placemark )
-            return 0;
+        {
+            if ( parentItem.represents( osmTag_way ) )
+                placemark = createPOI( doc, geometry );
+            else
+                return 0;
+        }
+        placemark->setName( value );
+        return 0;
+    }
+
+    if ( parentItem.represents( osmTag_way ) )
+    {
+        Q_ASSERT( placemark );
 
         //Convert area ways to polygons
         if ( key == "building" && value == "yes" )
@@ -75,22 +92,37 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
     {
         GeoDataStyle *poiStyle = OsmGlobals::poiStyles().value( key + "=" + value );
 
-        if ( !poiStyle )
-            return 0;
-
-        GeoDataPoint *point = dynamic_cast<GeoDataPoint *>( geometry );
-        Q_ASSERT( point );
-
-        if ( !placemark )
+        //Placemark is an accepted POI
+        if ( poiStyle )
         {
-            placemark = new GeoDataPlacemark();
-            doc->append( placemark );
+            if ( !placemark )
+                placemark = createPOI( doc, geometry );
+
+            placemark->setStyle( poiStyle );
         }
-        placemark->setGeometry( point );
-        placemark->setStyle( poiStyle );
+    }
+
+    if ( placemark )
+    {
+        GeoDataFeature::GeoDataVisualCategory category;
+
+        if ( category = OsmGlobals::visualCategories().value( key + "=" + value ) )
+            placemark->setVisualCategory( category );
+        else if ( category = OsmGlobals::visualCategories().value( key ) )
+            placemark->setVisualCategory( category );
     }
 
     return 0;
+}
+
+GeoDataPlacemark* OsmTagTagHandler::createPOI( GeoDataDocument* doc, GeoDataGeometry* geometry ) const
+{
+    GeoDataPoint *point = dynamic_cast<GeoDataPoint *>( geometry );
+    Q_ASSERT( point );
+    GeoDataPlacemark *placemark = new GeoDataPlacemark();
+    placemark->setGeometry( point );
+    doc->append( placemark );
+    return placemark;
 }
 
 GeoDataPlacemark *OsmTagTagHandler::convertWayToPolygon( GeoDataDocument *doc, GeoDataPlacemark *placemark, GeoDataGeometry *geometry ) const

@@ -13,6 +13,7 @@
 
 #include <QtCore/QMap>
 #include <QtGui/QColor>
+#include <root/include/marble/GeoDataFeature.h>
 
 namespace Marble
 {
@@ -25,6 +26,7 @@ class OsmGlobals
 {
 public:
     static QMap<QString, GeoDataStyle*> poiStyles();
+    static QMap<QString, GeoDataFeature::GeoDataVisualCategory> visualCategories();
 
     static QColor buildingColor;
     static QColor backgroundColor;
@@ -32,11 +34,15 @@ public:
 
 private:
     static void appendStyle( const QString& name, const QString& icon );
-    static QMap<QString, GeoDataStyle*> m_poiStyles;
     static void setupPOIStyles();
+    static void setupCategories();
+
+    static QMap<QString, GeoDataStyle*> m_poiStyles;
+    static QMap<QString, GeoDataFeature::GeoDataVisualCategory> m_visualCategories;
 };
 
 }
 }
 
 #endif // MARBLE_OSMGLOBALS_H
+

@@ -28,6 +28,7 @@ public:
 
 private:
     GeoDataPlacemark *convertWayToPolygon( GeoDataDocument *doc, GeoDataPlacemark *placemark, GeoDataGeometry *geometry ) const;
+    GeoDataPlacemark *createPOI( GeoDataDocument *doc, GeoDataGeometry *geometry ) const;
 };
 
 }
