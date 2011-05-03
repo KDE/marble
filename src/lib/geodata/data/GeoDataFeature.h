@@ -171,6 +171,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         HealthPharmacy,
 
         // OpenStreetMap category Money
+        MoneyAtm,
         MoneyBank,
 
         // OpenStreetMap category Shopping
@@ -198,7 +199,11 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         TransportCarShare,
         TransportFuel,
         TransportParking,
+        TransportRentalBicycle,
+        TransportRentalCar,
+        TransportTaxiRank,
         TransportTrainStation,
+        TransportTramStop,
 
         // Important: Make sure that this is always the last 
         // item and just use it to specify the array size

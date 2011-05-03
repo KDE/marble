@@ -314,6 +314,7 @@ void GeoDataFeature::initializeDefaultStyles()
     s_defaultStyle[HealthDoctors]            = GeoDataFeaturePrivate::createOsmStyle( osmFont, "health_doctors2.p.16" );
     s_defaultStyle[HealthHospital]           = GeoDataFeaturePrivate::createOsmStyle( osmFont, "health_hospital.p.16" );
     s_defaultStyle[HealthPharmacy]           = GeoDataFeaturePrivate::createOsmStyle( osmFont, "health_pharmacy.p.16" );
+    s_defaultStyle[MoneyAtm]                 = GeoDataFeaturePrivate::createOsmStyle( osmFont, "money_atm2.p.16" );
     s_defaultStyle[MoneyBank]                = GeoDataFeaturePrivate::createOsmStyle( osmFont, "money_bank2.p.16" );
     s_defaultStyle[ShoppingBeverages]        = GeoDataFeaturePrivate::createOsmStyle( osmFont, "shopping_alcohol.p.16" );
     s_defaultStyle[ShoppingHifi]             = GeoDataFeaturePrivate::createOsmStyle( osmFont, "shopping_hifi.p.16" );
@@ -336,6 +337,11 @@ void GeoDataFeature::initializeDefaultStyles()
     s_defaultStyle[TransportFuel]            = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_fuel.p.16" );
     s_defaultStyle[TransportParking]         = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_parking.p.16" );
     s_defaultStyle[TransportTrainStation]    = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_train_station.p.16" );
+    s_defaultStyle[TransportTramStop]        = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_tram_stop.p.16" );
+    s_defaultStyle[TransportRentalBicycle]   = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_rental_bicycle.p.16" );
+    s_defaultStyle[TransportRentalCar]       = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_rental_car.p.16" );
+    s_defaultStyle[TransportTaxiRank]        = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_taxi_rank.p.16" );
+
     s_defaultStyleInitialized = true;
     s_defaultFont = QFont("Sans Serif");
 
