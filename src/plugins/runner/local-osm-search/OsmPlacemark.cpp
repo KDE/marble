@@ -10,8 +10,6 @@
 
 #include "OsmPlacemark.h"
 
-#include <QtCore/QDataStream>
-
 namespace Marble {
 
 OsmPlacemark::OsmPlacemark() : m_regionId( 0 ),
@@ -61,14 +59,14 @@ void OsmPlacemark::setRegionId( int id )
     m_regionId = id;
 }
 
-QString OsmPlacemark::regionName() const
+QString OsmPlacemark::additionalInformation() const
 {
-    return m_regionName;
+    return m_additionalInformation;
 }
 
-void OsmPlacemark::setRegionName( const QString &name )
+void OsmPlacemark::setAdditionalInformation( const QString &name )
 {
-    m_regionName = name;
+    m_additionalInformation = name;
 }
 
 qreal OsmPlacemark::longitude() const
@@ -109,38 +107,4 @@ bool OsmPlacemark::operator<( const OsmPlacemark &other) const
     return latitude() < other.latitude();
 }
 
-}
-
-QDataStream& operator<<( QDataStream& out, const Marble::OsmPlacemark& placemark )
-{
-    out << (qint16) placemark.regionId();
-    out << (quint8) placemark.category();
-    out << placemark.name();
-    out << placemark.houseNumber();
-    out << placemark.longitude();
-    out << placemark.latitude();
-    return out;
-}
-
-QDataStream& operator>>( QDataStream& out, Marble::OsmPlacemark& placemark )
-{
-    qint16 regionId;
-    out >> regionId;
-    placemark.setRegionId( regionId );
-    quint8 category;
-    out >> category;
-    placemark.setCategory( (Marble::OsmPlacemark::OsmCategory) category );
-    QString name;
-    out >> name;
-    placemark.setName( name );
-    QString houseNumber;
-    out >> houseNumber;
-    placemark.setHouseNumber( houseNumber );
-    qreal lon;
-    out >> lon;
-    placemark.setLongitude( lon );
-    qreal lat;
-    out >> lat;
-    placemark.setLatitude( lat );
-    return out;
 }

@@ -24,12 +24,12 @@ class OsmPlacemark
 public:
     enum OsmCategory {
         UnknownCategory,
-        Highway,
         AccomodationCamping,
         AccomodationHostel,
         AccomodationHotel,
         AccomodationMotel,
         AccomodationYouthHostel,
+        Address,
         AmenityLibrary,
         EducationCollege,
         EducationSchool,
@@ -43,6 +43,7 @@ public:
         HealthDoctors,
         HealthHospital,
         HealthPharmacy,
+        MoneyAtm,
         MoneyBank,
         ShoppingBeverages,
         ShoppingHifi,
@@ -57,14 +58,19 @@ public:
         TouristThemePark,
         TouristViewPoint,
         TouristZoo,
-        TransportAerodrome,
+        TransportAirport,
         TransportAirportTerminal,
         TransportBusStation,
         TransportBusStop,
         TransportCarShare,
         TransportFuel,
         TransportParking,
-        TransportTrainStation
+        TransportRentalBicycle,
+        TransportRentalCar,
+        TransportSpeedCamera,
+        TransportTaxiRank,
+        TransportTrainStation,
+        TransportTramStop
     };
 
     OsmPlacemark();
@@ -90,9 +96,9 @@ public:
     void setRegionId( int id );
 
     /** Regions' name */
-    QString regionName() const;
+    QString additionalInformation() const;
 
-    void setRegionName( const QString &name );
+    void setAdditionalInformation( const QString &name );
 
     /** Longitude of the placemark's center point, in degree */
     qreal longitude() const;
@@ -116,7 +122,7 @@ private:
 
     QString m_houseNumber;
 
-    QString m_regionName;
+    QString m_additionalInformation;
 
     qreal m_longitude;
 
@@ -124,9 +130,5 @@ private:
 };
 
 }
-
-QDataStream& operator<<( QDataStream& out, const Marble::OsmPlacemark& region );
-
-QDataStream& operator>>( QDataStream& out, Marble::OsmPlacemark& region );
 
 #endif // MARBLE_OSMPLACEMARK_H

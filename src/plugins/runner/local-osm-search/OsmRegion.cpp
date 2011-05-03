@@ -10,7 +10,7 @@
 
 #include "OsmRegion.h"
 
-#include <QtCore/QDataStream>
+#include <QtCore/QList>
 
 namespace Marble {
 
@@ -19,7 +19,7 @@ int OsmRegion::m_idFactory = 0;
 OsmRegion::OsmRegion() : m_identifier( ++m_idFactory ),
     m_longitude( 0.0 ), m_latitude( 0.0 )
 {
-    // nothing to do
+    m_parents << 0;
 }
 
 int OsmRegion::identifier() const
@@ -30,6 +30,16 @@ int OsmRegion::identifier() const
 void OsmRegion::setIdentifier( int identifier )
 {
     m_identifier = identifier;
+}
+
+QList<int> OsmRegion::parentIdentifiers() const
+{
+    return m_parents;
+}
+
+void OsmRegion::setParentIdentifiers( const QList<int> &identifiers )
+{
+    m_parents = identifiers;
 }
 
 QString OsmRegion::name() const
@@ -62,30 +72,4 @@ void OsmRegion::setLatitude( qreal latitude )
     m_latitude = latitude;
 }
 
-}
-
-QDataStream& operator<<( QDataStream& out, const Marble::OsmRegion& region )
-{
-    out << (qint32) region.identifier();
-    out << region.name();
-    out << region.longitude();
-    out << region.latitude();
-    return out;
-}
-
-QDataStream& operator>>( QDataStream& out, Marble::OsmRegion& region )
-{
-    qint32 identifier;
-    out >> identifier;
-    region.setIdentifier( identifier );
-    QString name;
-    out >> name;
-    region.setName( name );
-    qreal lon;
-    out >> lon;
-    region.setLongitude( lon );
-    qreal lat;
-    out >> lat;
-    region.setLatitude( lat );
-    return out;
 }

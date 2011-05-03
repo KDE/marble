@@ -11,6 +11,9 @@
 #include "OsmDatabase.h"
 #include "OsmRegion.h"
 #include "MarbleDebug.h"
+#include "MarbleMath.h"
+#include "MarbleLocale.h"
+#include "DatabaseQuery.h"
 
 #include <QtCore/QFile>
 #include <QtCore/QDataStream>
@@ -25,177 +28,159 @@
 
 namespace Marble {
 
-namespace {
-    quint32 const osmDatabaseFileMagicNumber = 0xAEB4E6D8;
-    quint32 const osmDatabaseFileVersion = 160;
-}
-
 OsmDatabase::OsmDatabase()
 {
-    // nothing to do
+    m_database = QSqlDatabase::addDatabase( "QSQLITE" );
 }
 
 void OsmDatabase::addFile( const QString &fileName )
 {
-    QSqlDatabase database = QSqlDatabase::addDatabase( "QSQLITE" );
-    database.setDatabaseName( fileName );
-    if ( !database.open() ) {
-        qDebug() << "Failed to connect to database " << fileName;
+    m_databases << fileName;
+}
+
+QList<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &searchTerm )
+{
+    if ( m_databases.isEmpty() ) {
+        return QList<OsmPlacemark>();
     }
-}
 
-void OsmDatabase::save( const QString &filename )
-{
-    QFile file( filename );
-    file.open( QFile::WriteOnly );
+    DatabaseQuery userQuery( model, searchTerm );
 
-    QDataStream stream( &file );
+    QString queryString;
 
-    // Write a header with a "magic number" and a version
-    stream << (quint32) osmDatabaseFileMagicNumber;
-    stream << (quint32) osmDatabaseFileVersion;
-    stream.setVersion( QDataStream::Qt_4_0 );
+    queryString = " SELECT regions.name,"
+            " places.name, places.number,"
+            " places.category, places.lon, places.lat"
+            " FROM regions, places";
 
-    /** @todo: Use a B-tree or similar */
-    stream << m_regions;
-    qSort( m_placemarks );
-    stream << m_placemarks;
+    if ( userQuery.queryType() == DatabaseQuery::CategorySearch ) {
+        queryString += " WHERE regions.id = places.region AND places.category = %1";
+        queryString = queryString.arg( (qint32) userQuery.category() );
+        if ( userQuery.resultFormat() == DatabaseQuery::DistanceFormat && userQuery.region().isEmpty() ) {
+            queryString += " ORDER BY ((places.lat-%1)*(places.lat-%1)+(places.lon-%2)*(places.lon-%2))";
+            GeoDataCoordinates position = userQuery.position();
+            queryString = queryString.arg( position.latitude( GeoDataCoordinates::Degree ), 0, 'f', 8 )
+                    .arg( position.longitude( GeoDataCoordinates::Degree ), 0, 'f', 8 );
+        } else {
+            queryString += " AND regions.name LIKE '%%2%'";
+            queryString = queryString.arg( userQuery.region() );
+        }
+    } else if ( userQuery.queryType() == DatabaseQuery::BroadSearch ) {
+        queryString += " WHERE regions.id = places.region"
+                " AND places.name LIKE '%%1%'";
+        queryString = queryString.arg( searchTerm );
+    } else {
+        queryString += " WHERE regions.id = places.region"
+                "   AND places.name LIKE '%%1%'";
+        queryString = queryString.arg( userQuery.street() );
+        if ( !userQuery.houseNumber().isEmpty() ) {
+            queryString += " AND places.number IS '%1'";
+            queryString = queryString.arg( userQuery.houseNumber() );
+        }
+        queryString += " AND regions.name LIKE '%%2%'";
+        queryString = queryString.arg( userQuery.region() );
+    }
 
-    file.close();
-}
-
-void OsmDatabase::addOsmRegion( const OsmRegion &region )
-{
-    m_regions.push_back( region );
-}
-
-void OsmDatabase::addOsmPlacemark( const OsmPlacemark &placemark )
-{
-    m_placemarks.push_back( placemark );
-}
-
-QList<OsmPlacemark> OsmDatabase::find( const QString &searchTerm ) const
-{
-    QString const queryString = " SELECT regions.name,"
-                                " placemarks.name, placemarks.number,"
-                                " placemarks.category, placemarks.lon, placemarks.lat"
-                                " FROM regions, placemarks"
-                                " WHERE regions.id = placemarks.region"
-                                "   AND placemarks.name LIKE '%%1%'"
-                                " LIMIT 20";
+    queryString += " LIMIT 50;";
 
     QList<OsmPlacemark> result;
     QTime timer;
     timer.start();
-    QSqlQuery query;
-    query.setForwardOnly( true );
-    if ( !query.exec( queryString.arg( searchTerm ) ) ) {
-        qDebug() << "Failed to execute query: " << query.lastError();
-        return result;
-    }
-    qDebug() << "Query took " << timer.elapsed() << " ms.";
+    foreach( const QString &databaseFile, m_databases ) {
+        /** @todo: sort/filter results from several databases */
 
-    while ( query.next() ) {
-        OsmPlacemark placemark;
-        placemark.setRegionName( query.value( 0 ).toString() );
-        placemark.setName( query.value(1).toString() );
-        placemark.setHouseNumber( query.value(2).toString() );
-        placemark.setCategory( (OsmPlacemark::OsmCategory) query.value(3).toInt() );
-        placemark.setLongitude( query.value(4).toFloat() );
-        placemark.setLatitude( query.value(5).toFloat() );
-        result.push_back( placemark );
-        qDebug() << "found " << placemark.name();
-    }
-
-    return result;
-
-    QStringList terms = searchTerm.split( ",", QString::SkipEmptyParts );
-
-    QRegExp streetAndHouse( "^(.*)\\s+(\\d+\\D?)$" );
-    if ( streetAndHouse.indexIn( terms.first() ) != -1 ) {
-        if ( streetAndHouse.capturedTexts().size() == 3 ) {
-            terms.removeFirst();
-            terms.push_front( streetAndHouse.capturedTexts().at( 1 ) );
-            terms.push_front( streetAndHouse.capturedTexts().at( 2 ) );
+        m_database.setDatabaseName( databaseFile );
+        if ( !m_database.open() ) {
+            qDebug() << "Failed to connect to database " << databaseFile;
         }
-    }
 
-    if ( terms.size() == 1 ) {
-        return findOsmTerm( terms.first().trimmed() );
-    } else if ( terms.size() == 2 ) {
-        return findStreets( terms.last().trimmed(), terms.first().trimmed() );
-    } else {
-        Q_ASSERT( terms.size() > 2 ); // according to split() docs
-        return findHouseNumber( terms.at( 2 ).trimmed(),
-                                       terms.at( 1 ).trimmed(),
-                                       terms.at( 0 ).trimmed() );
-    }
+        QSqlQuery query;
+        query.setForwardOnly( true );
+        if ( !query.exec( queryString ) ) {
+            qDebug() << "Failed to execute query: " << query.lastError();
+            return result;
+        }
 
-    /** @todo: alternative words, etc. */
-
-    return QList<OsmPlacemark>();
-}
-
-QList<OsmPlacemark> OsmDatabase::findOsmTerm( const QString &term ) const
-{
-    QList<OsmPlacemark> result;
-    foreach( const OsmRegion &region, m_regions ) {
-        if ( region.name().startsWith( term, Qt::CaseInsensitive ) ) {
+        while ( query.next() ) {
             OsmPlacemark placemark;
-            placemark.setLongitude( region.longitude() );
-            placemark.setLatitude( region.latitude() );
-            placemark.setName( region.name() );
-            result << placemark;
-        }
-    }
-
-    foreach( const OsmPlacemark &placemark, m_placemarks ) {
-        if ( placemark.name().startsWith( term, Qt::CaseInsensitive ) ) {
-            result << placemark;
-        }
-    }
-
-    return result;
-}
-
-QList<OsmPlacemark> OsmDatabase::findStreets( const QString &reg, const QString &street ) const
-{
-    QList<OsmPlacemark> result;
-    QList<int> regions;
-    foreach( const OsmRegion &region, m_regions ) {
-        if ( region.name().startsWith( reg, Qt::CaseInsensitive ) ) {
-            regions << region.identifier();
-        }
-    }
-
-    foreach( const OsmPlacemark &placemark, m_placemarks ) {
-        if ( regions.contains( placemark.regionId() ) && placemark.name().startsWith( street, Qt::CaseInsensitive ) ) {
+            if ( userQuery.resultFormat() == DatabaseQuery::DistanceFormat ) {
+                GeoDataCoordinates coordinates( query.value(4).toFloat(), query.value(5).toFloat(), 0.0, GeoDataCoordinates::Degree );
+                placemark.setAdditionalInformation( formatDistance( coordinates, userQuery.position() ) );
+            } else {
+                placemark.setAdditionalInformation( query.value( 0 ).toString() );
+            }
+            placemark.setName( query.value(1).toString() );
+            placemark.setHouseNumber( query.value(2).toString() );
+            placemark.setCategory( (OsmPlacemark::OsmCategory) query.value(3).toInt() );
+            placemark.setLongitude( query.value(4).toFloat() );
+            placemark.setLatitude( query.value(5).toFloat() );
             result.push_back( placemark );
         }
     }
 
+    mDebug() << "Offline OSM search query took " << timer.elapsed() << " ms. Query: " << queryString;
     return result;
 }
 
-QList<OsmPlacemark> OsmDatabase::findHouseNumber( const QString &reg, const QString &street, const QString &houseNumber ) const
+QString OsmDatabase::formatDistance( const GeoDataCoordinates &a, const GeoDataCoordinates &b ) const
 {
-    QList<OsmPlacemark> result;
-    QList<int> regions;
-    foreach( const OsmRegion &region, m_regions ) {
-        if ( region.name().startsWith( reg, Qt::CaseInsensitive ) ) {
-            regions << region.identifier();
+    qreal distance = EARTH_RADIUS * distanceSphere( a, b);
+
+    int precision = 0;
+    QString distanceUnit = "m";
+
+    if ( MarbleGlobal::getInstance()->locale()->distanceUnit() == Marble::MilesFeet ) {
+        precision = 1;
+        distanceUnit = "mi";
+        distance *= METER2KM;
+        distance *= KM2MI;
+    } else {
+        if ( distance >= 1000 ) {
+            distance /= 1000;
+            distanceUnit = "km";
+            precision = 1;
+        } else if ( distance >= 200 ) {
+            distance = 50 * qRound( distance / 50 );
+        } else if ( distance >= 100 ) {
+            distance = 25 * qRound( distance / 25 );
+        } else {
+            distance = 10 * qRound( distance / 10 );
         }
     }
 
-    foreach( const OsmPlacemark &placemark, m_placemarks ) {
-        if ( regions.contains( placemark.regionId() ) &&
-             placemark.name().startsWith( street, Qt::CaseInsensitive ) &&
-             placemark.houseNumber() == houseNumber ) {
-            result.push_back( placemark );
-        }
+    QString const fuzzyDistance = QString( "%1 %2" ).arg( distance, 0, 'f', precision ).arg( distanceUnit );
+
+    int direction = 180 + bearing( a, b ) * RAD2DEG;
+
+    QString heading = QObject::tr( "north" );
+    if ( direction > 337 ) {
+        heading = QObject::tr( "north" );
+    } else if ( direction > 292 ) {
+        heading = QObject::tr( "north-west" );
+    } else if ( direction > 247 ) {
+        heading = QObject::tr( "west" );
+    } else if ( direction > 202 ) {
+        heading = QObject::tr( "south-west" );
+    } else if ( direction > 157 ) {
+        heading = QObject::tr( "south" );
+    } else if ( direction > 112 ) {
+        heading = QObject::tr( "south-east" );
+    } else if ( direction > 67 ) {
+        heading = QObject::tr( "east" );
+    } else if ( direction > 22 ) {
+        heading = QObject::tr( "north-east" );
     }
 
-    return result;
+    return fuzzyDistance + " " + heading;
+}
+
+qreal OsmDatabase::bearing( const GeoDataCoordinates &a, const GeoDataCoordinates &b ) const
+{
+    qreal delta = b.longitude() - a.longitude();
+    qreal lat1 = a.latitude();
+    qreal lat2 = b.latitude();
+    return fmod( atan2( sin ( delta ) * cos ( lat2 ),
+                       cos( lat1 ) * sin( lat2 ) - sin( lat1 ) * cos( lat2 ) * cos ( delta ) ), 2 * M_PI );
 }
 
 }

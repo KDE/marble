@@ -13,6 +13,7 @@ LocalOsmSearchPlugin.cpp
 OsmPlacemark.cpp
 OsmRegion.cpp
 OsmDatabase.cpp
+DatabaseQuery.cpp
  )
 
 marble_add_plugin( LocalOsmSearchPlugin ${localOsmSearch_SRCS} )

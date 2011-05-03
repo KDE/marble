@@ -15,8 +15,13 @@
 #include "OsmPlacemark.h"
 
 #include <QtCore/QString>
+#include <QtCore/QStringList>
+#include <QtSql/QSqlDatabase>
 
 namespace Marble {
+
+class MarbleModel;
+class GeoDataCoordinates;
 
 class OsmDatabase
 {
@@ -29,31 +34,18 @@ public:
     void addFile( const QString &file );
 
     /** Search the database for matching regions and placemarks */
-    QList<OsmPlacemark> find( const QString &searchTerm ) const;
-
-    // Methods for write access
-
-    /** Add a new region to the database */
-    void addOsmRegion( const OsmRegion &region );
-
-    /** Add a new placemark to the database */
-    void addOsmPlacemark( const OsmPlacemark &placemark );
-
-    /** Write the database to the given file */
-    void save( const QString &file );
+    QList<OsmPlacemark> find( MarbleModel* model, const QString &searchTerm );
 
 private:
+    QStringList m_databases;
+
+    QSqlDatabase m_database;
+
+    QString formatDistance( const GeoDataCoordinates &a, const GeoDataCoordinates &b ) const;
+
+    qreal bearing( const GeoDataCoordinates &a, const GeoDataCoordinates &b ) const;
+
     Q_DISABLE_COPY( OsmDatabase )
-
-    QList<OsmPlacemark> findOsmTerm( const QString &region ) const;
-
-    QList<OsmPlacemark> findStreets( const QString &region, const QString &street ) const;
-
-    QList<OsmPlacemark> findHouseNumber( const QString &region, const QString &street, const QString &houseNumber ) const;
-
-    QList<OsmRegion> m_regions;
-
-    QList<OsmPlacemark> m_placemarks;
 };
 
 }

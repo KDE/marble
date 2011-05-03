@@ -34,6 +34,10 @@ public:
       */
     void setIdentifier( int identifier );
 
+    QList<int> parentIdentifiers() const;
+
+    void setParentIdentifiers( const QList<int> &identifiers );
+
     QString name() const;
 
     void setName( const QString &name );
@@ -53,6 +57,8 @@ private:
 
     int m_identifier;
 
+    QList<int> m_parents;
+
     QString m_name;
 
     qreal m_longitude;
@@ -61,9 +67,5 @@ private:
 };
 
 }
-
-QDataStream& operator<<( QDataStream& out, const Marble::OsmRegion& region );
-
-QDataStream& operator>>( QDataStream& out, Marble::OsmRegion& region );
 
 #endif // MARBLE_OSMREGION_H
