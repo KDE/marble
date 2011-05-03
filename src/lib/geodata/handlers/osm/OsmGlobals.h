@@ -13,7 +13,7 @@
 
 #include <QtCore/QMap>
 #include <QtGui/QColor>
-#include <root/include/marble/GeoDataFeature.h>
+#include "GeoDataFeature.h"
 
 namespace Marble
 {
