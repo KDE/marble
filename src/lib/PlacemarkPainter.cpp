@@ -149,6 +149,11 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSe
 
     QString labelName = mark->name();
     QRect  labelRect  = mark->labelRect();
+    if ( !labelRect.isValid() ) {
+        mark->setLabelPixmap( QPixmap() );
+        return;
+    }
+    
     QFont  labelFont  = style->labelStyle().font();
     QColor labelColor = style->labelStyle().color();
 
