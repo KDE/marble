@@ -182,7 +182,9 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
         m_atmosphereLayer.render( &painter, m_viewParams.viewport() );
     }
 
-    m_textureLayer.paintGlobe( &painter, &m_viewParams, dirtyRect );
+    if ( m_model->mapTheme()->map()->hasTextureLayers() ) {
+        m_textureLayer.paintGlobe( &painter, &m_viewParams, dirtyRect );
+    }
 
     renderPositions.clear();
     renderPositions << "SURFACE";
