@@ -52,7 +52,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
     {
         if ( !placemark )
         {
-            if ( parentItem.represents( osmTag_way ) )
+            if ( parentItem.represents( osmTag_node ) )
                 placemark = createPOI( doc, geometry );
             else
                 return 0;
@@ -99,6 +99,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
                 placemark = createPOI( doc, geometry );
 
             placemark->setStyle( poiStyle );
+            placemark->setVisible( true );
         }
     }
 
@@ -121,6 +122,7 @@ GeoDataPlacemark* OsmTagTagHandler::createPOI( GeoDataDocument* doc, GeoDataGeom
     Q_ASSERT( point );
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
     placemark->setGeometry( point );
+    placemark->setVisible( false );
     doc->append( placemark );
     return placemark;
 }
