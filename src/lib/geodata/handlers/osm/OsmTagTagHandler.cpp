@@ -90,15 +90,14 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
     }
     else if ( parentItem.represents( osmTag_node ) ) //POI
     {
-        GeoDataStyle *poiStyle = OsmGlobals::poiStyles().value( key + "=" + value );
+        GeoDataFeature::GeoDataVisualCategory poiCategory = OsmGlobals::visualCategories().value( key + "=" + value );
 
         //Placemark is an accepted POI
-        if ( poiStyle )
+        if ( poiCategory )
         {
             if ( !placemark )
                 placemark = createPOI( doc, geometry );
 
-            placemark->setStyle( poiStyle );
             placemark->setVisible( true );
         }
     }
@@ -123,6 +122,7 @@ GeoDataPlacemark* OsmTagTagHandler::createPOI( GeoDataDocument* doc, GeoDataGeom
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
     placemark->setGeometry( point );
     placemark->setVisible( false );
+    placemark->setPopularityIndex( 1 );
     doc->append( placemark );
     return placemark;
 }

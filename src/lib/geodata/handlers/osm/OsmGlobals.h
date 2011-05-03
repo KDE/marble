@@ -25,7 +25,6 @@ namespace osm
 class OsmGlobals
 {
 public:
-    static QMap<QString, GeoDataStyle*> poiStyles();
     static QMap<QString, GeoDataFeature::GeoDataVisualCategory> visualCategories();
 
     static QColor buildingColor;
@@ -33,11 +32,8 @@ public:
     static QColor waterColor;
 
 private:
-    static void appendStyle( const QString& name, const QString& icon );
-    static void setupPOIStyles();
     static void setupCategories();
 
-    static QMap<QString, GeoDataStyle*> m_poiStyles;
     static QMap<QString, GeoDataFeature::GeoDataVisualCategory> m_visualCategories;
 };
 
