@@ -341,7 +341,15 @@ void GeoDataFeature::initializeDefaultStyles()
     s_defaultStyle[TransportRentalBicycle]   = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_rental_bicycle.p.16" );
     s_defaultStyle[TransportRentalCar]       = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_rental_car.p.16" );
     s_defaultStyle[TransportTaxiRank]        = GeoDataFeaturePrivate::createOsmStyle( osmFont, "transport_taxi_rank.p.16" );
-
+    s_defaultStyle[ReligionPlaceOfWorship]   = GeoDataFeaturePrivate::createOsmStyle( osmFont, "place_of_worship_unknown3.p.16" );
+    s_defaultStyle[ReligionBahai]            = GeoDataFeaturePrivate::createOsmStyle( osmFont, "place_of_worship_bahai3.p.16" );
+    s_defaultStyle[ReligionBuddhist]         = GeoDataFeaturePrivate::createOsmStyle( osmFont, "place_of_worship_buddhist3.p.16" );
+    s_defaultStyle[ReligionChristian]        = GeoDataFeaturePrivate::createOsmStyle( osmFont, "place_of_worship_christian3.p.16" );
+    s_defaultStyle[ReligionHindu]            = GeoDataFeaturePrivate::createOsmStyle( osmFont, "place_of_worship_hindu3.p.16" );
+    s_defaultStyle[ReligionJain]             = GeoDataFeaturePrivate::createOsmStyle( osmFont, "place_of_worship_jain3.p.16" );
+    s_defaultStyle[ReligionJewish]           = GeoDataFeaturePrivate::createOsmStyle( osmFont, "place_of_worship_jewish3.p.16" );
+    s_defaultStyle[ReligionShinto]           = GeoDataFeaturePrivate::createOsmStyle( osmFont, "place_of_worship_shinto3.p.16" );
+    s_defaultStyle[ReligionSikh]             = GeoDataFeaturePrivate::createOsmStyle( osmFont, "place_of_worship_sikh3.p.16" );
     s_defaultStyleInitialized = true;
     s_defaultFont = QFont("Sans Serif");
 

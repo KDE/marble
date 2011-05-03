@@ -59,11 +59,23 @@ void OsmGlobals::setupCategories()
 
     m_visualCategories["amenity=cinema"] = GeoDataFeature::TouristCinema;
     m_visualCategories["amenity=theatre"] = GeoDataFeature::TouristTheatre;
+    
+    m_visualCategories["amenity=place_of_worship"] = GeoDataFeature::ReligionPlaceOfWorship;
 
     //FIXME: alcohol != beverages
     m_visualCategories["shop=alcohol"] = GeoDataFeature::ShoppingBeverages;
     m_visualCategories["shop=hifi"] = GeoDataFeature::ShoppingHifi;
     m_visualCategories["shop=supermarket"] = GeoDataFeature::ShoppingSupermarket;
+    
+    m_visualCategories["religion"] = GeoDataFeature::ReligionPlaceOfWorship;
+    m_visualCategories["religion=bahai"] = GeoDataFeature::ReligionBahai;
+    m_visualCategories["religion=buddhist"] = GeoDataFeature::ReligionBuddhist;
+    m_visualCategories["religion=christian"] = GeoDataFeature::ReligionChristian;
+    m_visualCategories["religion=hindu"] = GeoDataFeature::ReligionHindu;
+    m_visualCategories["religion=jain"] = GeoDataFeature::ReligionJain;
+    m_visualCategories["religion=jewish"] = GeoDataFeature::ReligionJewish;
+    m_visualCategories["religion=shinto"] = GeoDataFeature::ReligionShinto;
+    m_visualCategories["religion=sikh"] = GeoDataFeature::ReligionSikh;
 }
 
 }
