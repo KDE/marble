@@ -34,15 +34,17 @@ MarbleAbstractRunner* LocalOsmSearchPlugin::newRunner() const
 {
     if ( !m_databaseLoaded ) {
         m_databaseLoaded = true;
-        QString base = MarbleDirs::localPath() + "/maps/earth/monav/";
-        QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotAndDotDot;
+        QString base = MarbleDirs::localPath() + "/placemarks/";
+        QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotDot;
         QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories | QDirIterator::FollowSymlinks;
         QDirIterator iter( base, filters, flags );
         while ( iter.hasNext() ) {
             iter.next();
-            QFileInfo databaseFile( QDir( iter.filePath() ), "placemarks.sqlite" );
-            if ( databaseFile.exists() ) {
-                m_database.addFile( databaseFile.absoluteFilePath() );
+            QDir directory( iter.filePath() );
+            QStringList const nameFilters = QStringList() << "*.sqlite";
+            QStringList const files( directory.entryList( nameFilters, QDir::Files ) );
+            foreach( const QString &file, files ) {
+                m_database.addFile( directory.filePath( file ) );
             }
         }
     }
