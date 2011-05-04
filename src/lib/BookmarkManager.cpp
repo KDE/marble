@@ -198,9 +198,11 @@ bool BookmarkManager::updateBookmarkFile()
 
         if ( !writer.write( &file,  d->bookmarkDocument() ) ) {
             mDebug() << "Could not write the bookmarks file" << absoluteLocalFilePath;
+            file.close();
             return false;
         }
         emit bookmarksChanged();
+        file.close();
         return true;
     }
     return false;
