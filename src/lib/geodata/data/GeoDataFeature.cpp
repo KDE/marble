@@ -350,6 +350,17 @@ void GeoDataFeature::initializeDefaultStyles()
     s_defaultStyle[ReligionJewish]           = GeoDataFeaturePrivate::createOsmStyle( osmFont, "place_of_worship_jewish3.p.16" );
     s_defaultStyle[ReligionShinto]           = GeoDataFeaturePrivate::createOsmStyle( osmFont, "place_of_worship_shinto3.p.16" );
     s_defaultStyle[ReligionSikh]             = GeoDataFeaturePrivate::createOsmStyle( osmFont, "place_of_worship_sikh3.p.16" );
+    
+    s_defaultStyle[HighwayUnknown]           = GeoDataFeaturePrivate::createHighwayStyle( "#808080" );
+    s_defaultStyle[HighwayPath]              = GeoDataFeaturePrivate::createHighwayStyle( "#F98072" );
+    s_defaultStyle[HighwayTrack]             = GeoDataFeaturePrivate::createHighwayStyle( "#986600" );
+    s_defaultStyle[HighwayService]           = GeoDataFeaturePrivate::createHighwayStyle( "#FEFEFE" );
+    s_defaultStyle[HighwayRoad]              = GeoDataFeaturePrivate::createHighwayStyle( "#FEFEFE" );
+    s_defaultStyle[HighwayTertiary]          = GeoDataFeaturePrivate::createHighwayStyle( "#FEFEB3" );
+    s_defaultStyle[HighwaySecondary]         = GeoDataFeaturePrivate::createHighwayStyle( "#FDD6A4" );
+    s_defaultStyle[HighwayPrimary]           = GeoDataFeaturePrivate::createHighwayStyle( "#EB989A" );
+    s_defaultStyle[HighwayTrunk]             = GeoDataFeaturePrivate::createHighwayStyle( "#A9DAA9" );
+    s_defaultStyle[HighwayMotorway]          = GeoDataFeaturePrivate::createHighwayStyle( "#809BC0" );
     s_defaultStyleInitialized = true;
     s_defaultFont = QFont("Sans Serif");
 

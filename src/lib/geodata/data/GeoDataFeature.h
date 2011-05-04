@@ -142,6 +142,18 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         Folder,
         Bookmark,
 
+        // OpenStreetMap highways
+        HighwayUnknown,
+        HighwayPath,
+        HighwayTrack,
+        HighwayService,
+        HighwayRoad,
+        HighwayTertiary,
+        HighwaySecondary,
+        HighwayPrimary,
+        HighwayTrunk,
+        HighwayMotorway,
+
         // OpenStreetMap category Accomodation
         AccomodationCamping,
         AccomodationHostel,

@@ -122,6 +122,13 @@ class GeoDataFeaturePrivate
         QPixmap const pixmap = QPixmap( MarbleDirs::path( "bitmaps/poi/" + bitmap + ".png" ) );
         return new GeoDataStyle( pixmap, font, QColor( Qt::black ) );
     }
+    
+    static GeoDataStyle* createHighwayStyle( const QColor& color )
+    {
+        GeoDataStyle *style = new GeoDataStyle;
+        style->setLineStyle( GeoDataLineStyle( color ) );
+        return style;
+    }
 
     QString             m_name;         // Name of the feature. Is shown on screen
     QString             m_description;  // A longer textual description
@@ -155,3 +162,4 @@ class GeoDataFeaturePrivate
 } // namespace Marble
 
 #endif
+

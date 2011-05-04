@@ -76,6 +76,24 @@ void OsmGlobals::setupCategories()
     m_visualCategories["religion=jewish"] = GeoDataFeature::ReligionJewish;
     m_visualCategories["religion=shinto"] = GeoDataFeature::ReligionShinto;
     m_visualCategories["religion=sikh"] = GeoDataFeature::ReligionSikh;
+    
+    m_visualCategories["highway"] = GeoDataFeature::HighwayUnknown;
+    m_visualCategories["highway=path"] = GeoDataFeature::HighwayPath;
+    m_visualCategories["highway=track"] = GeoDataFeature::HighwayTrack;
+    m_visualCategories["highway=service"] = GeoDataFeature::HighwayService;
+    m_visualCategories["highway=living_street"] = GeoDataFeature::HighwayRoad;
+    m_visualCategories["highway=unclassified"] = GeoDataFeature::HighwayRoad;
+    m_visualCategories["highway=residental"] = GeoDataFeature::HighwayRoad;
+    m_visualCategories["highway=tertiary_link"] = GeoDataFeature::HighwayTertiary;
+    m_visualCategories["highway=tertiary"] = GeoDataFeature::HighwayTertiary;
+    m_visualCategories["highway=secondary_link"] = GeoDataFeature::HighwaySecondary;
+    m_visualCategories["highway=secondary"] = GeoDataFeature::HighwaySecondary;
+    m_visualCategories["highway=primary_link"] = GeoDataFeature::HighwayPrimary;
+    m_visualCategories["highway=primary"] = GeoDataFeature::HighwayPrimary;
+    m_visualCategories["highway=trunk_link"] = GeoDataFeature::HighwayTrunk;
+    m_visualCategories["highway=trunk"] = GeoDataFeature::HighwayTrunk;
+    m_visualCategories["highway=motorway_link"] = GeoDataFeature::HighwayMotorway;
+    m_visualCategories["highway=motorway"] = GeoDataFeature::HighwayMotorway;
 }
 
 }
