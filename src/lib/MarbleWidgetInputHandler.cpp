@@ -197,7 +197,7 @@ class MarbleWidgetDefaultInputHandler::Private
 MarbleWidgetDefaultInputHandler::Private::Private()
     : m_leftPressed( false ),
       m_midPressed( false ),
-      m_dragThreshold( 3 ),
+      m_dragThreshold( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 15 : 3 ),
       m_popupmenu( 0 )
 {
     m_curpmtl.load( MarbleDirs::path("bitmaps/cursor_tl.xpm") );
