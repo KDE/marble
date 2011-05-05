@@ -28,6 +28,7 @@
 #include <QtCore/QTimer>
 #include <QtNetwork/QLocalSocket>
 #include <QtCore/QThread>
+#include <QtCore/QTextStream>
 
 namespace Marble
 {
@@ -54,6 +55,10 @@ public:
 
     bool m_ownsServer;
 
+    QString m_monavDaemonProcess;
+
+    MonavPlugin::MonavRoutingDaemonVersion m_monavVersion;
+
     MonavPluginPrivate();
 
     ~MonavPluginPrivate();
@@ -76,7 +81,9 @@ private:
     bool m_initialized;
 };
 
-MonavPluginPrivate::MonavPluginPrivate() : m_ownsServer( false ), m_initialized( false )
+MonavPluginPrivate::MonavPluginPrivate() : m_ownsServer( false ),
+    m_monavDaemonProcess("monav-daemon"), m_monavVersion( MonavPlugin::Monav_0_3 ),
+    m_initialized( false )
 {
     // nothing to do
 }
@@ -97,22 +104,28 @@ bool MonavPluginPrivate::startDaemon()
 {
     if ( !isDaemonRunning() ) {
         QProcess process;
-        if ( process.startDetached( "MoNavD" ) ) {
+        if ( process.startDetached( m_monavDaemonProcess ) ) {
             m_ownsServer = true;
-
-            // Give MoNavD up to one second to set up its server
-            // Without that, the first route request would fail
-            for ( int i = 0; i < 10; ++i ) {
-                if ( isDaemonRunning() ) {
-                    break;
-                }
-                MonavWaiter::msleep( 100 );
+        } else {
+            if ( process.startDetached( "MoNavD" ) ) {
+                m_ownsServer = true;
+                m_monavDaemonProcess = "MoNavD";
+                m_monavVersion = MonavPlugin::Monav_0_2;
+            } else {
+                return false;
             }
-
-            return true;
         }
 
-        return false;
+        // Give monav-daemon up to one second to set up its server
+        // Without that, the first route request would fail
+        for ( int i = 0; i < 10; ++i ) {
+            if ( isDaemonRunning() ) {
+                break;
+            }
+            MonavWaiter::msleep( 100 );
+        }
+
+        return true;
     }
 
     return true;
@@ -130,7 +143,7 @@ void MonavPluginPrivate::stopDaemon()
     if ( smallScreen || m_ownsServer ) {
         m_ownsServer = false;
         QProcess process;
-        process.startDetached( "MoNavD", QStringList() << "-t" );
+        process.startDetached( m_monavDaemonProcess, QStringList() << "-t" );
     }
 }
 
@@ -155,7 +168,21 @@ void MonavPluginPrivate::loadMap( const QString &path )
 {
     QDir mapDir( path );
     QFileInfo pluginsFile( mapDir, "plugins.ini" );
-    if ( pluginsFile.exists() ) {
+    QFileInfo moduleFile( mapDir, "Module.ini" );
+    if ( pluginsFile.exists() && !moduleFile.exists() ) {
+        qDebug() << "Migrating" << mapDir.dirName() << "from monav-0.2";
+        QFile file( moduleFile.absoluteFilePath() );
+        file.open( QIODevice::WriteOnly );
+        QTextStream stream( &file );
+        stream << "[General]\nconfigVersion=2\n";
+        stream << "router=Contraction Hierarchies\ngpsLookup=GPS Grid\n";
+        stream << "routerFileFormatVersion=1\ngpsLookupFileFormatVersion=1\n";
+        stream.flush();
+        file.close();
+        moduleFile.refresh();
+    }
+
+    if ( moduleFile.exists() ) {
         MonavMap map;
         map.setDirectory( mapDir );
         m_maps.append( map );
@@ -190,7 +217,7 @@ MarbleAbstractRunner* MonavPlugin::newRunner() const
 {
     d->initialize();
     if ( !d->startDaemon() ) {
-        mDebug() << "Failed to connect to MoNavD daemon";
+        mDebug() << "Failed to start the monav routing daemon";
     }
 
     return new MonavRunner( this );
@@ -262,6 +289,11 @@ bool MonavPlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate profil
     // Since we support multiple maps, pretty much anything can be installed, but ecological is
     // not supported by monav
     return profileTemplate != RoutingProfilesModel::CarEcologicalTemplate;
+}
+
+MonavPlugin::MonavRoutingDaemonVersion MonavPlugin::monavVersion() const
+{
+    return d->m_monavVersion;
 }
 
 }

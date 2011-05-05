@@ -24,6 +24,8 @@
 #include <QtCore/QTime>
 #include <QtNetwork/QLocalSocket>
 
+using namespace MoNav;
+
 namespace Marble
 {
 
@@ -34,7 +36,7 @@ public:
 
     MonavRunnerPrivate( const MonavPlugin* plugin );
 
-    bool retrieveData( RouteRequest *route, RoutingDaemonResult* result ) const;
+    bool retrieveData( RouteRequest *route, RoutingResult* result ) const;
 
     GeoDataLineString* retrieveRoute( RouteRequest *route, QVector<GeoDataPlacemark*> *instructions ) const;
 
@@ -47,7 +49,7 @@ MonavRunnerPrivate::MonavRunnerPrivate( const MonavPlugin* plugin ) :
     // nothing to do
 }
 
-bool MonavRunnerPrivate::retrieveData( RouteRequest *route, RoutingDaemonResult* reply ) const
+bool MonavRunnerPrivate::retrieveData( RouteRequest *route, RoutingResult* reply ) const
 {
     QString mapDir = m_plugin->mapDirectoryForRequest( route );
     if ( mapDir.isEmpty() ) {
@@ -57,11 +59,17 @@ bool MonavRunnerPrivate::retrieveData( RouteRequest *route, RoutingDaemonResult*
     QLocalSocket socket;
     socket.connectToServer( "MoNavD" );
     if ( socket.waitForConnected() ) {
-        RoutingDaemonCommand command;
-        QVector<RoutingDaemonNode> waypoints;
+        if ( m_plugin->monavVersion() == MonavPlugin::Monav_0_3 ) {
+            CommandType commandType;
+            commandType.value = CommandType::RoutingCommand;
+            commandType.post( &socket );
+        }
+
+        RoutingCommand command;
+        QVector<Node> waypoints;
 
         for ( int i = 0; i < route->size(); ++i ) {
-            RoutingDaemonNode coordinate;
+            Node coordinate;
             coordinate.longitude = route->at( i ).longitude( GeoDataCoordinates::Degree );
             coordinate.latitude = route->at( i ).latitude( GeoDataCoordinates::Degree );
             waypoints << coordinate;
@@ -77,23 +85,23 @@ bool MonavRunnerPrivate::retrieveData( RouteRequest *route, RoutingDaemonResult*
 
         if ( reply->read( &socket ) ) {
             switch ( reply->type ) {
-            case RoutingDaemonResult::LoadFailed:
+            case RoutingResult::LoadFailed:
                 mDebug() << "failed to load monav map from " << mapDir;
                 return false;
                 break;
-            case RoutingDaemonResult::RouteFailed:
+            case RoutingResult::RouteFailed:
                 mDebug() << "failed to retrieve route from monav daemon";
                 return false;
                 break;
-            case RoutingDaemonResult::TypeLookupFailed:
+            case RoutingResult::TypeLookupFailed:
                 mDebug() << "failed to lookup type from monav daemon";
                 return false;
                 break;
-            case RoutingDaemonResult::NameLookupFailed:
+            case RoutingResult::NameLookupFailed:
                 mDebug() << "failed to lookup name from monav daemon";
                 return false;
                 break;
-            case RoutingDaemonResult::Success:
+            case RoutingResult::Success:
                 return true;
             }
         } else {
@@ -109,7 +117,7 @@ bool MonavRunnerPrivate::retrieveData( RouteRequest *route, RoutingDaemonResult*
 GeoDataLineString* MonavRunnerPrivate::retrieveRoute( RouteRequest *route, QVector<GeoDataPlacemark*> *instructions ) const
 {
     GeoDataLineString* geometry = new GeoDataLineString;
-    RoutingDaemonResult reply;
+    RoutingResult reply;
     if ( retrieveData( route, &reply ) ) {
         /** @todo: make use of reply.seconds, the estimated travel time */
         for ( int i = 0; i < reply.pathNodes.size(); ++i ) {
@@ -219,7 +227,7 @@ void MonavRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
     RouteRequest route;
     route.append( coordinates );
     route.append( coordinates );
-    RoutingDaemonResult reply;
+    RoutingResult reply;
 
     if ( d->retrieveData( &route, &reply ) && !reply.pathEdges.isEmpty() ) {
         QString road = reply.nameStrings[reply.pathEdges[0].name];

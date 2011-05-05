@@ -31,170 +31,290 @@ any later version.
 #include <QtCore/QStringList>
 #include <QtNetwork/QLocalSocket>
 
-struct RoutingDaemonNode {
-	double latitude;
-	double longitude;
+namespace MoNav {
 
-	friend QDataStream& operator<< ( QDataStream& out, const RoutingDaemonNode& node )
-	{
-		out << node.latitude;
-		out << node.longitude;
-		return out;
-	}
+	// has to be send before each command to identify the following command type
+	struct CommandType {
+		enum Type{
+			RoutingCommand = 0,
+			UnpackCommand = 1
+		} value;
 
-	friend QDataStream& operator>> ( QDataStream& in, RoutingDaemonNode& node )
-	{
-		in >> node.latitude;
-		in >> node.longitude;
-		return in;
-	}
-};
-
-struct RoutingDaemonEdge {
-	unsigned length; // length of the edge == number of edges it represents == number of nodes - 1
-	unsigned name; // name ID of the edge
-	unsigned type; // type ID of the edge
-	unsigned seconds; // travel time metric for the edge
-	bool branchingPossible; // is it possible to choose between more than one subsequent edge ( turning around on bidirectional edges does not count )
-
-	friend QDataStream& operator<< ( QDataStream& out, const RoutingDaemonEdge& edge )
-	{
-		out << edge.length;
-		out << edge.name;
-		out << edge.type;
-		out << edge.seconds;
-		out << edge.branchingPossible;
-		return out;
-	}
-
-	friend QDataStream& operator>> ( QDataStream& in, RoutingDaemonEdge& edge )
-	{
-		in >> edge.length;
-		in >> edge.name;
-		in >> edge.type;
-		in >> edge.seconds;
-		in >> edge.branchingPossible;
-		return in;
-	}
-};
-
-class RoutingDaemonCommand {
-
-public:
-
-	RoutingDaemonCommand()
-	{
-		lookupRadius = 10000; // 10km should suffice for most applications
-		lookupStrings = false;
-	}
-
-	double lookupRadius;
-	bool lookupStrings;
-	QString dataDirectory;
-	QVector< RoutingDaemonNode > waypoints;
-
-	void post( QIODevice* out )
-	{
-		QByteArray buffer;
-		QDataStream stream( &buffer, QIODevice::WriteOnly );
-		stream << lookupRadius;
-		stream << lookupStrings;
-		stream << dataDirectory;
-		stream << waypoints;
-		qint32 size = buffer.size();
-		out->write( ( const char* ) &size, sizeof( qint32 ) );
-		out->write( buffer.data(), size );
-	}
-
-	bool read( QLocalSocket* in )
-	{
-		qint32 size;
-		while ( in->bytesAvailable() < ( int ) sizeof( qint32 ) ) {
-			if ( in->state() != QLocalSocket::ConnectedState )
-				return false;
-			in->waitForReadyRead( 100 );
+		void post( QIODevice* out )
+		{
+			qint32 temp = value;
+			out->write( ( const char* ) &temp, sizeof( qint32 ) );
 		}
 
-		in->read( ( char* ) &size, sizeof( quint32 ) );
+		bool read( QLocalSocket* in )
+		{
+			while ( in->bytesAvailable() < ( int ) sizeof( qint32 ) ) {
+				if ( in->state() != QLocalSocket::ConnectedState )
+					return false;
+				in->waitForReadyRead( 100 );
+			}
 
-		while ( in->bytesAvailable() < size ) {
-			if ( in->state() != QLocalSocket::ConnectedState )
-				return false;
-			in->waitForReadyRead( 100 );
+			qint32 temp;
+			in->read( ( char* ) &temp, sizeof( qint32 ) );
+			value = ( Type ) temp;
+
+			return true;
+		}
+	};
+
+	struct Node {
+		double latitude;
+		double longitude;
+
+		friend QDataStream& operator<< ( QDataStream& out, const Node& node )
+		{
+			out << node.latitude;
+			out << node.longitude;
+			return out;
 		}
 
-		QByteArray buffer= in->read( size );
-		QDataStream stream( buffer );
-		stream >> lookupRadius;
-		stream >> lookupStrings;
-		stream >> dataDirectory;
-		stream >> waypoints;
+		friend QDataStream& operator>> ( QDataStream& in, Node& node )
+		{
+			in >> node.latitude;
+			in >> node.longitude;
+			return in;
+		}
+	};
 
-		return true;
-	}
+	struct Edge {
+		unsigned length; // length of the edge == number of edges it represents == number of nodes - 1
+		unsigned name; // name ID of the edge
+		unsigned type; // type ID of the edge
+		unsigned seconds; // travel time metric for the edge
+		bool branchingPossible; // is it possible to choose between more than one subsequent edge ( turning around on bidirectional edges does not count )
 
-};
+		friend QDataStream& operator<< ( QDataStream& out, const Edge& edge )
+		{
+			out << edge.length;
+			out << edge.name;
+			out << edge.type;
+			out << edge.seconds;
+			out << edge.branchingPossible;
+			return out;
+		}
 
-class RoutingDaemonResult {
+		friend QDataStream& operator>> ( QDataStream& in, Edge& edge )
+		{
+			in >> edge.length;
+			in >> edge.name;
+			in >> edge.type;
+			in >> edge.seconds;
+			in >> edge.branchingPossible;
+			return in;
+		}
+	};
 
-public:
+	class RoutingCommand {
 
-	enum ResultType {
-		LoadFailed = 1, RouteFailed = 2, NameLookupFailed = 3, TypeLookupFailed = 4, Success = 5
-	} type;
+	public:
 
-	double seconds;
-	QVector< RoutingDaemonNode > pathNodes;
-	QVector< RoutingDaemonEdge > pathEdges;
-	QStringList nameStrings;
-	QStringList typeStrings;
+		RoutingCommand()
+		{
+			lookupRadius = 10000; // 10km should suffice for most applications
+			lookupStrings = false;
+		}
 
-	void post( QIODevice* out )
+		// waypoint edge lookup radius in meters
+		double lookupRadius;
+		// lookup street name / type strings?
+		bool lookupStrings;
+		// a valid  routing module directory
+		QString dataDirectory;
+		// waypoints of the route
+		QVector< Node > waypoints;
+
+		void post( QIODevice* out )
+		{
+			QByteArray buffer;
+			QDataStream stream( &buffer, QIODevice::WriteOnly );
+			stream << lookupRadius;
+			stream << lookupStrings;
+			stream << dataDirectory;
+			stream << waypoints;
+			qint32 size = buffer.size();
+			out->write( ( const char* ) &size, sizeof( qint32 ) );
+			out->write( buffer.data(), size );
+		}
+
+		bool read( QLocalSocket* in )
+		{
+			qint32 size;
+			while ( in->bytesAvailable() < ( int ) sizeof( qint32 ) ) {
+				if ( in->state() != QLocalSocket::ConnectedState )
+					return false;
+				in->waitForReadyRead( 100 );
+			}
+
+			in->read( ( char* ) &size, sizeof( quint32 ) );
+
+			while ( in->bytesAvailable() < size ) {
+				if ( in->state() != QLocalSocket::ConnectedState )
+					return false;
+				in->waitForReadyRead( 100 );
+			}
+
+			QByteArray buffer= in->read( size );
+			QDataStream stream( buffer );
+			stream >> lookupRadius;
+			stream >> lookupStrings;
+			stream >> dataDirectory;
+			stream >> waypoints;
+
+			return true;
+		}
+
+	};
+
+	class RoutingResult {
+
+	public:
+
+		enum ResultType {
+			LoadFailed = 1, RouteFailed = 2, NameLookupFailed = 3, TypeLookupFailed = 4, Success = 5
+		} type;
+
+		double seconds;
+		QVector< Node > pathNodes;
+		QVector< Edge > pathEdges;
+		QStringList nameStrings;
+		QStringList typeStrings;
+
+		void post( QIODevice* out )
+		{
+			QByteArray buffer;
+			QDataStream stream( &buffer, QIODevice::WriteOnly );
+			stream << qint32( type );
+			stream << seconds;
+			stream << pathNodes;
+			stream << pathEdges;
+			stream << nameStrings;
+			stream << typeStrings;
+			qint32 size = buffer.size();
+			out->write( ( const char* ) &size, sizeof( qint32 ) );
+			out->write( buffer.data(), size );
+		}
+
+		bool read( QLocalSocket* in )
+		{
+			qint32 size;
+			while ( in->bytesAvailable() < ( int ) sizeof( qint32 ) ) {
+				if ( in->state() != QLocalSocket::ConnectedState )
+					return false;
+				in->waitForReadyRead( 100 );
+			}
+
+			in->read( ( char* ) &size, sizeof( quint32 ) );
+
+			while ( in->bytesAvailable() < size ) {
+				if ( in->state() != QLocalSocket::ConnectedState )
+					return false;
+				in->waitForReadyRead( 100 );
+			}
+
+			QByteArray buffer= in->read( size );
+			QDataStream stream( buffer );
+			qint32 temp;
+			stream >> temp;
+			type = ( ResultType ) temp;
+			stream >> seconds;
+			stream >> pathNodes;
+			stream >> pathEdges;
+			stream >> nameStrings;
+			stream >> typeStrings;
+
+			return true;
+		}
+
+	};
+
+	class UnpackCommand
 	{
-		QByteArray buffer;
-		QDataStream stream( &buffer, QIODevice::WriteOnly );
-		stream << qint32( type );
-		stream << seconds;
-		stream << pathNodes;
-		stream << pathEdges;
-		stream << nameStrings;
-		stream << typeStrings;
-		qint32 size = buffer.size();
-		out->write( ( const char* ) &size, sizeof( qint32 ) );
-		out->write( buffer.data(), size );
-	}
+	public:
 
-	bool read( QLocalSocket* in )
+		UnpackCommand()
+		{
+			deleteFile = false;
+		}
+
+		// MoNav Map Module file to be unpacked
+		// it will be unpacked in the directory of the same name
+		// e.g. test.mmm -> test/
+		QString mapModuleFile;
+		// delete file after unpacking?
+		bool deleteFile;
+
+		void post( QIODevice* out )
+		{
+			QByteArray buffer;
+			QDataStream stream( &buffer, QIODevice::WriteOnly );
+			stream << mapModuleFile;
+			stream << deleteFile;
+			qint32 size = buffer.size();
+			out->write( ( const char* ) &size, sizeof( qint32 ) );
+			out->write( buffer.data(), size );
+		}
+
+		bool read( QLocalSocket* in )
+		{
+			qint32 size;
+			while ( in->bytesAvailable() < ( int ) sizeof( qint32 ) ) {
+				if ( in->state() != QLocalSocket::ConnectedState )
+					return false;
+				in->waitForReadyRead( 100 );
+			}
+
+			in->read( ( char* ) &size, sizeof( quint32 ) );
+
+			while ( in->bytesAvailable() < size ) {
+				if ( in->state() != QLocalSocket::ConnectedState )
+					return false;
+				in->waitForReadyRead( 100 );
+			}
+
+			QByteArray buffer= in->read( size );
+			QDataStream stream( buffer );
+			stream >> mapModuleFile;
+			stream >> deleteFile;
+
+			return true;
+		}
+	};
+
+	class UnpackResult
 	{
-		qint32 size;
-		while ( in->bytesAvailable() < ( int ) sizeof( qint32 ) ) {
-			if ( in->state() != QLocalSocket::ConnectedState )
-				return false;
-			in->waitForReadyRead( 100 );
+	public:
+
+		enum ResultType {
+			FailUnpacking = 1, Success = 2
+		} type;
+
+		void post( QIODevice* out )
+		{
+			qint32 temp = type;
+			out->write( ( const char* ) &temp, sizeof( qint32 ) );
 		}
 
-		in->read( ( char* ) &size, sizeof( quint32 ) );
+		bool read( QLocalSocket* in )
+		{
+			while ( in->bytesAvailable() < ( int ) sizeof( qint32 ) ) {
+				if ( in->state() != QLocalSocket::ConnectedState )
+					return false;
+				in->waitForReadyRead( 100 );
+			}
 
-		while ( in->bytesAvailable() < size ) {
-			if ( in->state() != QLocalSocket::ConnectedState )
-				return false;
-			in->waitForReadyRead( 100 );
+			qint32 temp;
+			in->read( ( char* ) &temp, sizeof( qint32 ) );
+			type = ResultType( temp );
+
+			return true;
 		}
+	};
 
-		QByteArray buffer= in->read( size );
-		QDataStream stream( buffer );
-		qint32 temp;
-		stream >> temp;
-		type = ( ResultType ) temp;
-		stream >> seconds;
-		stream >> pathNodes;
-		stream >> pathEdges;
-		stream >> nameStrings;
-		stream >> typeStrings;
-
-		return true;
-	}
-
-};
+}
 
 #endif // SIGNALS_H
