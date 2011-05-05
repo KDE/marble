@@ -15,6 +15,8 @@
 
 #include <QtCore/QString>
 #include <QtCore/QThread>
+#include <QtCore/QSize>
+#include <QtGui/QImage>
 
 #include "marble_export.h"
 
@@ -23,14 +25,31 @@ namespace Marble
 
 class TileCreatorPrivate;
 
+class MARBLE_EXPORT TileCreatorSource
+{
+public:
+    virtual ~TileCreatorSource() {}
+    virtual QSize fullImageSize() const = 0;
+    virtual QImage tile( int n, int m, int maxTileLevel ) = 0;
+    virtual QString sourcePath() const = 0;
+};
 
 class MARBLE_EXPORT TileCreator : public QThread
 {
     Q_OBJECT
 
- public: 
+ public:
+    /*
+     * Constructor for standard Image source
+     */
     TileCreator( const QString& sourceDir, const QString& installMap, 
                  const QString& dem,       const QString& targetDir=QString() );
+
+    /*
+     * Constructor for own, custom source class
+     */
+    TileCreator( TileCreatorSource *source, const QString& dem, const QString& targetDir );
+
     virtual ~TileCreator();
 
     void cancelTileCreation();

@@ -33,34 +33,153 @@ namespace Marble
 class TileCreatorPrivate
 {
  public:
-    TileCreatorPrivate( const QString& sourceDir, const QString& installMap, 
-			const QString& dem, const QString& targetDir=QString() )
-	: m_sourceDir( sourceDir ),
-	  m_installMap( installMap ),
-	  m_dem( dem ),
-	  m_targetDir( targetDir ),
-	  m_cancelled( false )
+    TileCreatorPrivate( TileCreatorSource *source,
+                        const QString& dem, const QString& targetDir=QString() )
+       : m_dem( dem ),
+         m_targetDir( targetDir ),
+         m_cancelled( false ),
+         m_source( source )
     {
     }
 
     ~TileCreatorPrivate()
     {
+        delete m_source;
     }
 
  public:
-    QString  m_sourceDir;
-    QString  m_installMap;
     QString  m_dem;
     QString  m_targetDir;
     bool     m_cancelled;
 
+    TileCreatorSource  *m_source;
+};
+
+class TileCreatorSourceImage : public TileCreatorSource
+{
+public:
+    TileCreatorSourceImage(QString sourceDir, QString installMap)
+        : m_cachedRowNum(-1)
+    {
+        mDebug() << "Prefix: " << sourceDir
+            << "installmap:" << installMap;
+
+        // If the sourceDir starts with a '/' assume an absolute path.
+        // Otherwise assume a relative marble data path
+        if ( QDir::isAbsolutePath( sourceDir ) ) {
+            m_sourcePath = sourceDir + '/' + installMap;
+            mDebug() << "Trying absolute path:" << m_sourcePath;
+        }
+        else {
+            m_sourcePath = MarbleDirs::path( "maps/" + sourceDir
+                                        + '/' + installMap );
+            mDebug() << "Trying relative path:"
+                    << "maps/" + sourceDir + '/' + installMap;
+        }
+
+        mDebug() << "Creating tiles from: " << m_sourcePath;
+
+        m_sourceImage = QImage( sourcePath() );
+    }
+
+    virtual QSize fullImageSize() const
+    {
+        return m_sourceImage.size();
+    }
+
+    virtual QImage tile(int n, int m, int maxTileLevel)
+    {
+        int  mmax = TileLoaderHelper::levelToColumn( defaultLevelZeroColumns, maxTileLevel );
+        int  nmax = TileLoaderHelper::levelToRow( defaultLevelZeroRows, maxTileLevel );
+
+        int maxRows = TileLoaderHelper::levelToRow( defaultLevelZeroRows, maxTileLevel );
+
+        int imageHeight = m_sourceImage.height();
+        int imageWidth = m_sourceImage.width();
+
+        // If the image size of the image source does not match the expected
+        // geometry we need to smooth-scale the image in advance to match
+        // the required size
+        bool needsScaling = ( imageWidth != 2 * maxRows * (int)( c_defaultTileSize )
+                            ||  imageHeight != maxRows * (int)( c_defaultTileSize ) );
+
+        if ( needsScaling )
+            mDebug() << "Image Size doesn't match 2*n*TILEWIDTH x n*TILEHEIGHT geometry. Scaling ...";
+
+        int  stdImageWidth  = 2 * maxRows * c_defaultTileSize;
+        if ( stdImageWidth == 0 )
+            stdImageWidth = 2 * c_defaultTileSize;
+
+        int  stdImageHeight  = maxRows * c_defaultTileSize;
+        if ( stdImageWidth != imageWidth ) {
+            mDebug() <<
+            QString( "TileCreator::createTiles() The size of the final image will measure  %1 x %2 pixels").arg(stdImageWidth).arg(stdImageHeight);
+        }
+
+        QImage row;
+
+        if ( m_cachedRowNum == n ) {
+
+            row = m_rowCache;
+
+        } else {
+
+
+
+            QRect   sourceRowRect( 0, (int)( (qreal)( n * imageHeight ) / (qreal)( nmax )),
+                                imageWidth,(int)( (qreal)( imageHeight ) / (qreal)( nmax ) ) );
+
+
+            row = m_sourceImage.copy( sourceRowRect );
+
+            if ( needsScaling ) {
+                // Pick the current row and smooth scale it
+                // to make it match the expected size
+                QSize destSize( stdImageWidth, c_defaultTileSize );
+                row = row.scaled( destSize,
+                                Qt::IgnoreAspectRatio,
+                                Qt::SmoothTransformation );
+            }
+
+            m_cachedRowNum = n;
+            m_rowCache = row;
+        }
+
+        if ( row.isNull() ) {
+            mDebug() << "Read-Error! Null QImage!";
+            return QImage();
+        }
+
+        QImage  tile = row.copy( m * stdImageWidth / mmax, 0, c_defaultTileSize, c_defaultTileSize );
+
+        return tile;
+    }
+
+    virtual QString sourcePath() const
+    {
+        return m_sourcePath;
+    }
+
+private:
+    QString m_sourcePath;
+    QImage m_sourceImage;
+
+    QImage m_rowCache;
+    int m_cachedRowNum;
 };
 
 
 TileCreator::TileCreator(const QString& sourceDir, const QString& installMap,
-                         const QString& dem, const QString& targetDir) 
+                         const QString& dem, const QString& targetDir)
     : QThread(0),
-      d( new TileCreatorPrivate( sourceDir, installMap, dem, targetDir ) )
+      d( new TileCreatorPrivate( new TileCreatorSourceImage( sourceDir, installMap ), dem, targetDir ) )
+{
+    setTerminationEnabled( true );
+}
+
+TileCreator::TileCreator( TileCreatorSource* source, const QString& dem, const QString& targetDir )
+    : QThread(0),
+      d( new TileCreatorPrivate( source, dem, targetDir ) )
 {
     setTerminationEnabled( true );
 }
@@ -77,39 +196,22 @@ void TileCreator::cancelTileCreation()
 
 void TileCreator::run()
 {
-    mDebug() << "Prefix: " << d->m_sourceDir 
-	     << "installmap:" << d->m_installMap;
-
-    // If the sourceDir starts with a '/' assume an absolute path.
-    // Otherwise assume a relative marble data path
-    QString  sourcePath;
-    if ( QDir::isAbsolutePath( d->m_sourceDir ) ) {
-        sourcePath = d->m_sourceDir + '/' + d->m_installMap;
-        mDebug() << "Trying absolute path:" << sourcePath;
-    }
-    else {
-        sourcePath = MarbleDirs::path( "maps/" + d->m_sourceDir 
-				       + '/' + d->m_installMap );
-        mDebug() << "Trying relative path:" 
-		 << "maps/" + d->m_sourceDir + '/' + d->m_installMap;
-    }
     if ( d->m_targetDir.isNull() )
         d->m_targetDir = MarbleDirs::localPath() + "/maps/"
-	    + sourcePath.section( '/', -3, -2 ) + '/';
+            + d->m_source->sourcePath().section( '/', -3, -2 ) + '/';
     if ( !d->m_targetDir.endsWith('/') )
         d->m_targetDir += '/';
 
-    mDebug() << "Creating tiles from: " << sourcePath;
     mDebug() << "Installing tiles to: " << d->m_targetDir;
-    QImageReader testImage( sourcePath );
 
     QVector<QRgb> grayScalePalette;
     for ( int cnt = 0; cnt <= 255; ++cnt ) {
         grayScalePalette.insert(cnt, qRgb(cnt, cnt, cnt));
     }
 
-    int  imageWidth  = testImage.size().width();
-    int  imageHeight = testImage.size().height();
+    QSize fullImageSize = d->m_source->fullImageSize();
+    int  imageWidth  = fullImageSize.width();
+    int  imageHeight = fullImageSize.height();
 
     mDebug() << QString( "TileCreator::createTiles() image dimensions %1 x %2").arg(imageWidth).arg(imageHeight);
 
@@ -138,26 +240,6 @@ void TileCreator::run()
     }
     mDebug() << "Maximum Tile Level: " << maxTileLevel;
 
-    int maxRows = TileLoaderHelper::levelToRow( defaultLevelZeroRows, maxTileLevel );
-
-    // If the image size of the image source does not match the expected 
-    // geometry we need to smooth-scale the image in advance to match
-    // the required size 
-    bool needsScaling = ( imageWidth != 2 * maxRows * (int)( c_defaultTileSize )
-                          ||  imageHeight != maxRows * (int)( c_defaultTileSize ) );
-
-    if ( needsScaling ) 
-        mDebug() << "Image Size doesn't match 2*n*TILEWIDTH x n*TILEHEIGHT geometry. Scaling ...";  
-
-    int  stdImageWidth  = 2 * maxRows * c_defaultTileSize;
-    if ( stdImageWidth == 0 )
-        stdImageWidth = 2 * c_defaultTileSize;
-
-    int  stdImageHeight  = maxRows * c_defaultTileSize;
-    if ( stdImageWidth != imageWidth ) {
-        mDebug() << 
-        QString( "TileCreator::createTiles() The size of the final image will measure  %1 x %2 pixels").arg(stdImageWidth).arg(stdImageHeight);
-    }
 
     if ( !QDir( d->m_targetDir ).exists() )
         ( QDir::root() ).mkpath( d->m_targetDir );
@@ -197,35 +279,19 @@ void TileCreator::run()
             ( QDir::root() ).mkpath( dirName );
     }
 
-    QImage  sourceImage( sourcePath );
-
     for ( int n = 0; n < nmax; ++n ) {
-        QRect   sourceRowRect( 0, (int)( (qreal)( n * imageHeight ) / (qreal)( nmax )),
-                               imageWidth,(int)( (qreal)( imageHeight ) / (qreal)( nmax ) ) );
-
-
-        QImage  row = sourceImage.copy( sourceRowRect );
-
-        if ( needsScaling ) {
-            // Pick the current row and smooth scale it 
-            // to make it match the expected size
-            QSize destSize( stdImageWidth, c_defaultTileSize );
-            row = row.scaled( destSize,
-                              Qt::IgnoreAspectRatio,
-                              Qt::SmoothTransformation );
-        }
-
-        if ( row.isNull() ) {
-            mDebug() << "Read-Error! Null QImage!";
-            return;
-        }
 
         for ( int m = 0; m < mmax; ++m ) {
 
             if ( d->m_cancelled ) 
                 return;
 
-            QImage  tile = row.copy( m * stdImageWidth / mmax, 0, c_defaultTileSize, c_defaultTileSize );
+            QImage tile = d->m_source->tile( n, m, maxTileLevel );
+
+            if ( tile.isNull() ) {
+                mDebug() << "Read-Error! Null QImage!";
+                return;
+            }
 
             tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
                                        .arg( maxTileLevel )
