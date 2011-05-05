@@ -15,6 +15,7 @@
 #include "GeoDataLookAt.h"
 
 #include <QtGui/QDialog>
+#include <QtGui/QRadioButton>
 
 #include "ui_GoToDialog.h"
 
@@ -56,7 +57,7 @@ private Q_SLOTS:
 
     void updateSearchResult( QAbstractItemModel* model );
 
-    void updateSearchMode( bool enabled );
+    void updateSearchMode();
 
 private:
     GoToDialogPrivate * const d;

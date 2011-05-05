@@ -307,8 +307,10 @@ GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::Window
              this, SLOT( startSearch() ) );
     buttonBox->button( QDialogButtonBox::Close )->setAutoDefault( false );
     connect( searchButton, SIGNAL( clicked( bool ) ),
-             this, SLOT( updateSearchMode( bool ) ) );
-    updateSearchMode( false );
+             this, SLOT( updateSearchMode() ) );
+    connect( browseButton, SIGNAL( clicked( bool ) ),
+             this, SLOT( updateSearchMode() ) );
+    updateSearchMode();
 }
 
 GoToDialog::~GoToDialog()
@@ -326,11 +328,12 @@ void GoToDialog::setShowRoutingItems( bool show )
     d->m_targetModel->setShowRoutingItems( show );
 }
 
-void GoToDialog::updateSearchMode( bool enabled )
+void GoToDialog::updateSearchMode()
 {
-    searchLineEdit->setVisible( enabled );
-    descriptionLabel->setVisible( enabled );
-    if ( enabled ) {
+    bool const searchEnabled = searchButton->isChecked();
+    searchLineEdit->setVisible( searchEnabled );
+    descriptionLabel->setVisible( searchEnabled );
+    if ( searchEnabled ) {
         bookmarkListView->setModel( d->m_placemarkModel );
     } else {
         bookmarkListView->setModel( d->m_targetModel );
