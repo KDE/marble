@@ -8,7 +8,7 @@
 
             <!-- describes whether the map theme item will be hidden (e.g.
                 for a clouds layer): -->
-            <visible> false </visible>
+            <!--<visible> false </visible>-->
 
             <zoom>
                 <minimum>   900  </minimum>
@@ -32,7 +32,7 @@
             <layer name="srtm2" backend="texture">
                 <texture name="srtm2_data"><!-- type="texture"-->
                     <sourcedir format="PNG"> earth/srtm2 </sourcedir>
-                    <storageLayout maximumTileLevel="15"/>
+                    <storageLayout maximumTileLevel="9"/>
                     <downloadUrl protocol="http" host="localhost" path="/" />
                     <downloadPolicy usage="Browse" maximumConnections="20" />
                     <downloadPolicy usage="Bulk" maximumConnections="2" />
