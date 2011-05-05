@@ -129,6 +129,17 @@ class GeoDataFeaturePrivate
         style->setLineStyle( GeoDataLineStyle( color ) );
         return style;
     }
+    
+    static GeoDataStyle* createWayStyle( const QColor& color, const QColor& outlineColor, bool fill = true, bool outline = true )
+    {
+        GeoDataStyle *style = new GeoDataStyle;
+        GeoDataPolyStyle polyStyle( color );
+        polyStyle.setFill( fill );
+        polyStyle.setOutline( outline );
+        style->setLineStyle( GeoDataLineStyle( outlineColor ) );
+        style->setPolyStyle( polyStyle );
+        return style;
+    }
 
     QString             m_name;         // Name of the feature. Is shown on screen
     QString             m_description;  // A longer textual description

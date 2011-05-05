@@ -84,7 +84,6 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
         {
             if ( value == "riverbank" )
                 placemark = convertWayToPolygon( doc, placemark, geometry );
-            placemark->setStyle( &doc->style( "water" ) );
             placemark->setVisible( true );
         }
     }

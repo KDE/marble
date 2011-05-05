@@ -45,19 +45,6 @@ GeoNode* OsmOsmTagHandler::parse( GeoParser& parser ) const
     buildingStyle.setStyleId( "building" );
     doc->addStyle( buildingStyle );
 
-    GeoDataPolyStyle waterPolyStyle;
-    GeoDataLineStyle waterLineStyle;
-    waterPolyStyle.setFill( true );
-    waterPolyStyle.setOutline( true );
-    waterPolyStyle.setColor( OsmGlobals::waterColor );
-    waterLineStyle.setColor( OsmGlobals::waterColor );
-    waterLineStyle.setWidth( 2 );
-    GeoDataStyle waterStyle;
-    waterStyle.setPolyStyle( waterPolyStyle );
-    waterStyle.setLineStyle( waterLineStyle );
-    waterStyle.setStyleId( "water" );
-    doc->addStyle( waterStyle );
-
     GeoDataPolyStyle backgroundPolyStyle;
     backgroundPolyStyle.setFill( true );
     backgroundPolyStyle.setOutline( false );

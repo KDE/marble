@@ -141,6 +141,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
         Folder,
         Bookmark,
+        
+        NaturalWater,
 
         // OpenStreetMap highways
         HighwayUnknown,

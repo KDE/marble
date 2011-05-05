@@ -361,6 +361,9 @@ void GeoDataFeature::initializeDefaultStyles()
     s_defaultStyle[HighwayPrimary]           = GeoDataFeaturePrivate::createHighwayStyle( "#EB989A" );
     s_defaultStyle[HighwayTrunk]             = GeoDataFeaturePrivate::createHighwayStyle( "#A9DAA9" );
     s_defaultStyle[HighwayMotorway]          = GeoDataFeaturePrivate::createHighwayStyle( "#809BC0" );
+    
+    s_defaultStyle[NaturalWater]             = GeoDataFeaturePrivate::createWayStyle( "#B5D0D0", "#B5D0D0" );
+
     s_defaultStyleInitialized = true;
     s_defaultFont = QFont("Sans Serif");
 

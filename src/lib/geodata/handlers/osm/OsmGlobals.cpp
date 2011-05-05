@@ -92,7 +92,7 @@ void OsmGlobals::setupCategories()
     m_visualCategories["highway=service"]            = GeoDataFeature::HighwayService;
     m_visualCategories["highway=living_street"]      = GeoDataFeature::HighwayRoad;
     m_visualCategories["highway=unclassified"]       = GeoDataFeature::HighwayRoad;
-    m_visualCategories["highway=residental"]         = GeoDataFeature::HighwayRoad;
+    m_visualCategories["highway=residential"]        = GeoDataFeature::HighwayRoad;
     m_visualCategories["highway=tertiary_link"]      = GeoDataFeature::HighwayTertiary;
     m_visualCategories["highway=tertiary"]           = GeoDataFeature::HighwayTertiary;
     m_visualCategories["highway=secondary_link"]     = GeoDataFeature::HighwaySecondary;
@@ -103,6 +103,11 @@ void OsmGlobals::setupCategories()
     m_visualCategories["highway=trunk"]              = GeoDataFeature::HighwayTrunk;
     m_visualCategories["highway=motorway_link"]      = GeoDataFeature::HighwayMotorway;
     m_visualCategories["highway=motorway"]           = GeoDataFeature::HighwayMotorway;
+    
+    m_visualCategories["waterway=stream"]            = GeoDataFeature::NaturalWater;
+    m_visualCategories["waterway=river"]             = GeoDataFeature::NaturalWater;
+    m_visualCategories["waterway=riverbank"]         = GeoDataFeature::NaturalWater;
+    m_visualCategories["waterway=canal"]             = GeoDataFeature::NaturalWater;
 }
 
 }
