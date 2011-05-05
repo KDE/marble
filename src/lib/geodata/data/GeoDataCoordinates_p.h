@@ -32,7 +32,7 @@ class GeoDataCoordinatesPrivate
           m_lat( 0 ),
           m_altitude( 0 ),
           m_detail( 0 ),
-          ref( 1 )
+          ref( 0 )
     {
     }
 
@@ -48,7 +48,7 @@ class GeoDataCoordinatesPrivate
                         int _detail )
         : m_altitude( _alt ),
           m_detail( _detail ),
-          ref( 1 )
+          ref( 0 )
     {
         switch( unit ){
         default:
@@ -74,7 +74,7 @@ class GeoDataCoordinatesPrivate
           m_lat( other.m_lat ),
           m_altitude( other.m_altitude ),
           m_detail( other.m_detail ),
-          ref( other.ref )
+          ref( 0 )
     {
         m_q.set( m_lon, m_lat );
     }
@@ -89,7 +89,7 @@ class GeoDataCoordinatesPrivate
         m_altitude = other.m_altitude;
         m_detail = other.m_detail;
         m_q.set( m_lon, m_lat );
-        ref = other.ref;
+        ref = 0;
         return *this;
     }
 
