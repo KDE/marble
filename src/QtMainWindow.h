@@ -125,6 +125,7 @@ private Q_SLOTS:
     void showLegendTab( bool enabled );
     void showRoutingDialog();
     void showTrackingDialog();
+    void showGoToDialog();
 
 private:
     void setupZoomButtons();

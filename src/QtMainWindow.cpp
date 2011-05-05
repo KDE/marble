@@ -69,6 +69,7 @@
 #include "PluginManager.h"
 #include "MapWizard.h"
 #include "StackableWindow.h"
+#include "GoToDialog.h"
 
 // For zoom buttons on Maemo
 #ifdef Q_WS_MAEMO_5
@@ -311,6 +312,9 @@ void MainWindow::createMenus()
         m_showTrackingDialogAction = menuBar()->addAction( tr( "Tracking" ) );
         connect( m_showTrackingDialogAction, SIGNAL( triggered()),
                  this, SLOT( showTrackingDialog()) );
+        QAction *goToAction = menuBar()->addAction( tr( "&Go To...") );
+        connect( goToAction, SIGNAL( triggered() ),
+                 this, SLOT( showGoToDialog() ) );
 
         m_controlView->marbleControl()->setNavigationTabShown( false );
         m_controlView->marbleControl()->setLegendTabShown( false );
@@ -1362,6 +1366,16 @@ void MainWindow::showMapWizard()
         settings.setValue( "wmsServers", mapWizard->wmsServers() );
         settings.setValue( "staticUrlServers", mapWizard->staticUrlServers() );
     settings.endGroup();
+}
+
+void MainWindow::showGoToDialog()
+{
+    QPointer<GoToDialog> dialog = new GoToDialog( m_controlView->marbleWidget(), this );
+    if ( dialog->exec() == QDialog::Accepted ) {
+        GeoDataLookAt lookAt = dialog->lookAt();
+        m_controlView->marbleWidget()->flyTo( lookAt );
+    }
+    delete dialog;
 }
 
 #include "QtMainWindow.moc"

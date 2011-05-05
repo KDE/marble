@@ -27,7 +27,6 @@
 #include "routing/RouteRequest.h"
 #include "MarbleRunnerManager.h"
 #include "EditBookmarkDialog.h"
-#include "GoToDialog.h"
 
 // Qt
 #include <QtCore/QMimeData>
@@ -71,7 +70,6 @@ void MarbleWidgetPopupMenu::createActions()
                                         tr( "Add &Bookmark" ), this );
 
     m_aboutDialogAction = new QAction( tr( "&About" ), this );
-    QAction *goToAction = new QAction( tr( "&Go to..."), this );
 
     QMenu* infoBoxMenu = createInfoBoxMenu();
 
@@ -91,7 +89,6 @@ void MarbleWidgetPopupMenu::createActions()
     m_smallScreenMenu->addAction( m_setHomePointAction );
     m_smallScreenMenu->addAction( addBookmark );
     m_smallScreenMenu->addSeparator();
-    m_smallScreenMenu->addAction( goToAction );
     m_smallScreenMenu->addMenu( infoBoxMenu );
     m_smallScreenMenu->addSeparator();
 
@@ -101,7 +98,6 @@ void MarbleWidgetPopupMenu::createActions()
     connect( addBookmark, SIGNAL( triggered( ) ), SLOT( addBookmark() ) );
     connect( m_aboutDialogAction, SIGNAL( triggered() ), SLOT( slotAboutDialog() ) );
     connect( m_copyCoordinateAction,SIGNAL( triggered() ), SLOT( slotCopyCoordinates() ) );
-    connect( goToAction, SIGNAL(triggered()), this, SLOT( openGoToDialog() ) );
 }
 
 QMenu* MarbleWidgetPopupMenu::createInfoBoxMenu()
@@ -363,16 +359,6 @@ void MarbleWidgetPopupMenu::addBookmark()
         dialog->exec();
         delete dialog;
     }
-}
-
-void MarbleWidgetPopupMenu::openGoToDialog()
-{
-    QPointer<GoToDialog> dialog = new GoToDialog( m_widget, m_widget );
-    if ( dialog->exec() == QDialog::Accepted ) {
-        GeoDataLookAt lookAt = dialog->lookAt();
-        m_widget->flyTo( lookAt );
-    }
-    delete dialog;
 }
 
 #include "MarbleWidgetPopupMenu.moc"
