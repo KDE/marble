@@ -84,6 +84,10 @@ public:
 
     virtual QSize fullImageSize() const
     {
+        if ( m_sourceImage.size().width() > 21600 || m_sourceImage.height() > 10800 ) {
+            qDebug("Install map too large!");
+            return QSize();
+        }
         return m_sourceImage.size();
     }
 
@@ -217,10 +221,6 @@ void TileCreator::run()
 
     if ( imageWidth < 1 || imageHeight < 1 ) {
         qDebug("Invalid imagemap!");
-        return;
-    }
-    if ( imageWidth > 21600 || imageHeight > 10800 ) {
-        qDebug("Install map too large!");
         return;
     }
 
