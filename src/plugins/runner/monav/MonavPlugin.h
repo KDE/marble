@@ -25,6 +25,12 @@ class MonavPlugin : public RunnerPlugin
     Q_INTERFACES( Marble::RunnerPlugin )
 
 public:
+    enum MonavRoutingDaemonVersion
+    {
+        Monav_0_2,
+        Monav_0_3
+    };
+
     explicit MonavPlugin( QObject *parent = 0 );
 
     ~MonavPlugin();
@@ -42,6 +48,8 @@ public:
     MonavMapsModel* installedMapsModel();
 
     void reloadMaps();
+
+    MonavRoutingDaemonVersion monavVersion() const;
 
 private:
     MonavPluginPrivate* const d;
