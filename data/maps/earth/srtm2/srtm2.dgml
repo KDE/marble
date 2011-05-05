@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
+    <document>
+        <head>
+            <name>SRTM Data</name>
+            <target>earth</target>
+            <theme>srtm2</theme>
+
+            <!-- describes whether the map theme item will be hidden (e.g.
+                for a clouds layer): -->
+            <visible> false </visible>
+
+            <zoom>
+                <minimum>   900  </minimum>
+                <maximum>  2100  </maximum>
+
+                <!-- describes whether you can zoom trough the levels
+                    continuously -->
+                <discrete> false </discrete>
+            </zoom>
+        </head>
+
+            <!-- Now we create the layer structure that gets handled by the
+    layer management class -->
+
+        <map bgcolor="#000000">
+            <canvas/>
+            <!-- In this place one could e.g. insert a sky plugin -->
+            <target/>
+
+            <!-- This layer creates the elevation model -->
+            <layer name="srtm2" backend="texture">
+                <texture name="srtm2_data"><!-- type="texture"-->
+                    <sourcedir format="PNG"> earth/srtm2 </sourcedir>
+                    <storageLayout maximumTileLevel="15"/>
+                    <downloadUrl protocol="http" host="localhost" path="/" />
+                    <downloadPolicy usage="Browse" maximumConnections="20" />
+                    <downloadPolicy usage="Bulk" maximumConnections="2" />
+                </texture>
+            </layer>
+        </map>
+    </document>
+</dgml>

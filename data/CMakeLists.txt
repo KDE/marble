@@ -71,6 +71,16 @@ maps/earth/srtm/srtm.dgml
 maps/earth/srtm/srtm-preview.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/srtm)
 
+install (FILES
+maps/earth/srtm2/srtm2.dgml
+maps/earth/srtm2/0/000000/000000_000000.png
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/srtm2)
+
+install (FILES
+maps/earth/srtm2/srtm2.dgml
+maps/earth/srtm2/0/000000/000000_000000.png
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/srtm2/0/000000)
+
 if(NOT TILES_AT_COMPILETIME)
 install (FILES
 maps/earth/srtm/srtm.jpg

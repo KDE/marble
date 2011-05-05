@@ -13,7 +13,6 @@
 #include <GeoPainter.h>
 #include <GeoSceneLayer.h>
 #include <ViewportParams.h>
-#include <MarbleDataFacade.h>
 #include <routing/RoutingManager.h>
 #include <routing/AlternativeRoutesModel.h>
 #include <GeoDataDocument.h>
@@ -21,7 +20,8 @@
 #include <KPlotWidget>
 #include <KPlotObject>
 #include <KPlotAxis>
-#include <HttpDownloadManager.h>
+#include <AltitudeModel.h>
+#include <MarbleModel.h>
 
 using namespace Marble;
 
@@ -43,12 +43,16 @@ bool AltitudeProfile::isInitialized() const
 
 void AltitudeProfile::initialize()
 {
-    connect( dataFacade()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ), SLOT( currentRouteChanged( GeoDataDocument* ) ) );
     m_isInitialized = true;
+    connect( marbleModel()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ), SLOT( currentRouteChanged( GeoDataDocument* ) ) );
+
+    marbleModel()->altitudeModel()->height(1, 2);
 }
 
 void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
 {
+    marbleModel()->altitudeModel()->height(1, 2);
+    
     KPlotWidget *graphWidget = new KPlotWidget();
     graphWidget->setAntialiasing(true);
     graphWidget->axis(KPlotWidget::TopAxis)->setVisible(false);

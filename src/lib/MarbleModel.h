@@ -61,6 +61,7 @@ class Planet;
 class RoutingManager;
 class BookmarkManager;
 class FileManager;
+class AltitudeModel;
 
 /**
  * @short The data model (not based on QAbstractModel) for a MarbleWidget.
@@ -239,7 +240,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     const Planet *planet() const;
 
-    RoutingManager* routingManager();
+    RoutingManager* routingManager() const;
 
     void setClockDateTime( const QDateTime& datetime );
 
@@ -265,6 +266,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
     bool workOffline() const;
 
     void setWorkOffline( bool workOffline );
+
+    AltitudeModel* altitudeModel() const;
 
  public Q_SLOTS:
     void clearPersistentTileCache();

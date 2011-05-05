@@ -64,6 +64,7 @@
 #include "TileLoader.h"
 #include "routing/RoutingManager.h"
 #include "BookmarkManager.h"
+#include "AltitudeModel.h"
 
 namespace Marble
 {
@@ -145,6 +146,8 @@ class MarbleModelPrivate
     QTextDocument           *m_legend;
 
     bool                     m_workOffline;
+
+    AltitudeModel           *m_altitudeModel;
 };
 
 MarbleModel::MarbleModel( QObject *parent )
@@ -181,6 +184,9 @@ MarbleModel::MarbleModel( QObject *parent )
 
     connect(&d->m_clock,   SIGNAL( timeChanged() ),
             &d->m_sunLocator, SLOT( update() ) );
+
+    d->m_altitudeModel = new AltitudeModel( d->m_mapThemeManager, d->m_downloadManager, this );
+
 }
 
 MarbleModel::~MarbleModel()
@@ -536,7 +542,7 @@ void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
     }
 }
 
-RoutingManager* MarbleModel::routingManager()
+RoutingManager* MarbleModel::routingManager() const
 {
     return d->m_routingManager;
 }
@@ -608,6 +614,11 @@ void MarbleModel::setWorkOffline( bool workOffline )
         d->m_workOffline = workOffline;
         emit workOfflineChanged();
     }
+}
+
+AltitudeModel* MarbleModel::altitudeModel() const
+{
+    return d->m_altitudeModel;
 }
 
 }

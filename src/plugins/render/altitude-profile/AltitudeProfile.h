@@ -17,6 +17,7 @@
 namespace Marble {
 
 class GeoDataDocument;
+class TileLoader;
 
 class AltitudeProfile : public Marble::AbstractFloatItem
 {
@@ -42,6 +43,7 @@ private slots:
 
 private:
     bool m_isInitialized;
+    TileLoader *m_tileLoader;
 };
 
 }
