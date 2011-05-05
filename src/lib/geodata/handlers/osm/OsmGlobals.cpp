@@ -40,26 +40,20 @@ void OsmGlobals::setupCategories()
     m_visualCategories["amenity=bar"]                = GeoDataFeature::FoodBar;
     m_visualCategories["amenity=cafe"]               = GeoDataFeature::FoodCafe;
     m_visualCategories["amenity=biergarten"]         = GeoDataFeature::FoodBiergarten;
-
     m_visualCategories["amenity=school"]             = GeoDataFeature::EducationSchool;
     m_visualCategories["amenity=college"]            = GeoDataFeature::EducationCollege;
     m_visualCategories["amenity=library"]            = GeoDataFeature::AmenityLibrary;
     m_visualCategories["amenity=university"]         = GeoDataFeature::EducationUniversity;
-
     m_visualCategories["amenity=bus_station"]        = GeoDataFeature::TransportBusStation;
     m_visualCategories["amenity=car_sharing"]        = GeoDataFeature::TransportCarShare;
     m_visualCategories["amenity=fuel"]               = GeoDataFeature::TransportFuel;
     m_visualCategories["amenity=parking"]            = GeoDataFeature::TransportParking;
-
     m_visualCategories["amenity=bank"]               = GeoDataFeature::MoneyBank;
-
     m_visualCategories["amenity=pharmacy"]           = GeoDataFeature::HealthPharmacy;
     m_visualCategories["amenity=hospital"]           = GeoDataFeature::HealthHospital;
     m_visualCategories["amenity=doctors"]            = GeoDataFeature::HealthDoctors;
-
     m_visualCategories["amenity=cinema"]             = GeoDataFeature::TouristCinema;
     m_visualCategories["amenity=theatre"]            = GeoDataFeature::TouristTheatre;
-    
     m_visualCategories["amenity=place_of_worship"]   = GeoDataFeature::ReligionPlaceOfWorship;
 
     //FIXME: alcohol != beverages
@@ -76,6 +70,21 @@ void OsmGlobals::setupCategories()
     m_visualCategories["religion=jewish"]            = GeoDataFeature::ReligionJewish;
     m_visualCategories["religion=shinto"]            = GeoDataFeature::ReligionShinto;
     m_visualCategories["religion=sikh"]              = GeoDataFeature::ReligionSikh;
+    
+    m_visualCategories["tourism=attraction"]         = GeoDataFeature::TouristAttraction;
+    m_visualCategories["tourism=camp_site"]          = GeoDataFeature::AccomodationCamping;
+    m_visualCategories["tourism=hostel"]             = GeoDataFeature::AccomodationHostel;
+    m_visualCategories["tourism=hotel"]              = GeoDataFeature::AccomodationHotel;
+    m_visualCategories["tourism=motel"]              = GeoDataFeature::AccomodationMotel;
+    m_visualCategories["tourism=museum"]             = GeoDataFeature::TouristMuseum;
+    m_visualCategories["tourism=theme_park"]         = GeoDataFeature::TouristThemePark;
+    m_visualCategories["tourism=viewpoint"]          = GeoDataFeature::TouristViewPoint;
+    m_visualCategories["tourism=zoo"]                = GeoDataFeature::TouristZoo;
+    
+    m_visualCategories["historic=castle"]            = GeoDataFeature::TouristCastle;
+    m_visualCategories["historic=fort"]              = GeoDataFeature::TouristCastle;
+    m_visualCategories["historic=monument"]          = GeoDataFeature::TouristMonument;
+    m_visualCategories["historic=ruins"]             = GeoDataFeature::TouristRuin;
     
     m_visualCategories["highway"]                    = GeoDataFeature::HighwayUnknown;
     m_visualCategories["highway=path"]               = GeoDataFeature::HighwayPath;
