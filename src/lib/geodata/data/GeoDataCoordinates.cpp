@@ -36,6 +36,7 @@ GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates
 GeoDataCoordinates::GeoDataCoordinates( qreal _lon, qreal _lat, qreal _alt, GeoDataCoordinates::Unit unit, int _detail )
   : d( new GeoDataCoordinatesPrivate( _lon, _lat, _alt, unit, _detail ) )
 {
+    d->ref.ref();
 }
 
 /* simply copy the d pointer
@@ -54,6 +55,7 @@ GeoDataCoordinates::GeoDataCoordinates( const GeoDataCoordinates& other )
 GeoDataCoordinates::GeoDataCoordinates()
   : d( new GeoDataCoordinatesPrivate() )
 {
+    d->ref.ref();
 }
 
 /*
@@ -87,6 +89,7 @@ void GeoDataCoordinates::detach()
         delete d;
 
     d = new_d;
+    d->ref.ref();
 }
 
 /*
