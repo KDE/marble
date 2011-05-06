@@ -64,6 +64,17 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
      * @return the current width
      */
     float width() const;
+    
+    /**
+     * @brief Set the real width of the line (in meters)
+     * @param  width  the new width
+     */
+    void setRealWidth( const float &realWidth );
+    /**
+     * @brief Return the current real width of the line
+     * @return the current width
+     */
+    float realWidth() const;
 
     /**
      * @brief  Serialize the style to a stream.

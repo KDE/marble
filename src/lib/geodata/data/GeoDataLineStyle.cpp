@@ -19,7 +19,7 @@ namespace Marble
 class GeoDataLineStylePrivate
 {
   public:
-    GeoDataLineStylePrivate() : m_width( 1.0 )
+    GeoDataLineStylePrivate() : m_width( 1.0 ), m_realWidth( 0.0 )
     {
     }
 
@@ -30,6 +30,8 @@ class GeoDataLineStylePrivate
 
     /// The current width of the line
     float  m_width;
+    /// The current real width of the line
+    float  m_realWidth;
 };
 
 GeoDataLineStyle::GeoDataLineStyle()
@@ -73,6 +75,16 @@ void GeoDataLineStyle::setWidth( const float &width )
 float GeoDataLineStyle::width() const
 {
     return d->m_width;
+}
+
+float GeoDataLineStyle::realWidth() const
+{
+    return d->m_realWidth;
+}
+
+void GeoDataLineStyle::setRealWidth( const float& realWidth )
+{
+    d->m_realWidth = realWidth;
 }
 
 void GeoDataLineStyle::pack( QDataStream& stream ) const

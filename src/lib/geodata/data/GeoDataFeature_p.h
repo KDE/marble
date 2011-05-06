@@ -126,7 +126,8 @@ class GeoDataFeaturePrivate
     static GeoDataStyle* createHighwayStyle( const QColor& color )
     {
         GeoDataStyle *style = new GeoDataStyle;
-        style->setLineStyle( GeoDataLineStyle( color ) );
+        GeoDataLineStyle lineStyle( color );
+        style->setLineStyle( lineStyle );
         return style;
     }
     
@@ -134,9 +135,10 @@ class GeoDataFeaturePrivate
     {
         GeoDataStyle *style = new GeoDataStyle;
         GeoDataPolyStyle polyStyle( color );
+        GeoDataLineStyle lineStyle( outlineColor );
         polyStyle.setFill( fill );
         polyStyle.setOutline( outline );
-        style->setLineStyle( GeoDataLineStyle( outlineColor ) );
+        style->setLineStyle( lineStyle );
         style->setPolyStyle( polyStyle );
         return style;
     }
