@@ -121,6 +121,12 @@ void GeometryLayerPrivate::setPenStyle( GeoPainter *painter, GeoDataStyle *style
         else
             m_currentPen.setWidthF( float(radius) / EARTH_RADIUS * style->lineStyle().realWidth() );
     }
+    
+    if( m_currentPen.capStyle() != style->lineStyle().capStyle() )
+        m_currentPen.setCapStyle( style->lineStyle().capStyle() );
+    
+    if( m_currentPen.style() != style->lineStyle().penStyle() )
+        m_currentPen.setStyle( style->lineStyle().penStyle() );
 
     if (    painter->mapQuality() != Marble::HighQuality
          && painter->mapQuality() != Marble::PrintQuality )

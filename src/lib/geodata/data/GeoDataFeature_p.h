@@ -123,10 +123,15 @@ class GeoDataFeaturePrivate
         return new GeoDataStyle( pixmap, font, QColor( Qt::black ) );
     }
     
-    static GeoDataStyle* createHighwayStyle( const QColor& color )
+    static GeoDataStyle* createHighwayStyle( const QColor& color, qreal width = 1, qreal realWidth = 0.0, 
+                                             Qt::PenStyle penStyle = Qt::SolidLine, Qt::PenCapStyle capStyle = Qt::RoundCap )
     {
         GeoDataStyle *style = new GeoDataStyle;
         GeoDataLineStyle lineStyle( color );
+        lineStyle.setCapStyle( capStyle );
+        lineStyle.setPenStyle( penStyle );
+        lineStyle.setWidth( width );
+        lineStyle.setRealWidth( realWidth );
         style->setLineStyle( lineStyle );
         return style;
     }

@@ -75,6 +75,30 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
      * @return the current width
      */
     float realWidth() const;
+    
+    /**
+     * @brief Set pen cap style
+     * @param  style cap style
+     */
+    void setCapStyle( Qt::PenCapStyle style );
+    
+    /**
+     * @brief Return the current pen cap style
+     * @return the current pen cap style
+     */
+    Qt::PenCapStyle capStyle() const;
+    
+    /**
+     * @brief Set pen cap style
+     * @param  style cap style
+     */
+    void setPenStyle( Qt::PenStyle style );
+    
+    /**
+     * @brief Return the current pen cap style
+     * @return the current pen cap style
+     */
+    Qt::PenStyle penStyle() const;
 
     /**
      * @brief  Serialize the style to a stream.
