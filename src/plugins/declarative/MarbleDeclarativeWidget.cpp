@@ -94,9 +94,9 @@ QString MarbleWidget::projection( ) const
 
 void MarbleWidget::setProjection( const QString &projection )
 {
-    if ( projection.compare( "Equirectangular", Qt::CaseInsensitive ) ) {
+    if ( projection.compare( "Equirectangular", Qt::CaseInsensitive ) == 0 ) {
         m_marbleWidget->setProjection( Equirectangular );
-    } else if ( projection.compare( "Mercator", Qt::CaseInsensitive ) ) {
+    } else if ( projection.compare( "Mercator", Qt::CaseInsensitive ) == 0 ) {
         m_marbleWidget->setProjection( Mercator );
     } else {
         m_marbleWidget->setProjection( Spherical );
