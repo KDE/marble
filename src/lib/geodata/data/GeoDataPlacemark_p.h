@@ -79,9 +79,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
 
     virtual void* copy()
     {
-        GeoDataPlacemarkPrivate* copy = new GeoDataPlacemarkPrivate;
-        *copy = *this;
-        return copy;
+        return new GeoDataPlacemarkPrivate( *this );
     }
 
     virtual const char* nodeType() const

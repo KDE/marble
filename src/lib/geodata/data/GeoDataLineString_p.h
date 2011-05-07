@@ -41,9 +41,7 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
 
     virtual GeoDataGeometryPrivate* copy()
     { 
-        GeoDataLineStringPrivate* copy = new GeoDataLineStringPrivate;
-        *copy = *this;
-        return copy;
+        return new GeoDataLineStringPrivate( *this );
     }
 
     virtual const char* nodeType() const

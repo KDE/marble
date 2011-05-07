@@ -26,9 +26,7 @@ class GeoDataPointPrivate : public GeoDataGeometryPrivate, public GeoDataCoordin
 
     virtual GeoDataGeometryPrivate* copy()
     { 
-         GeoDataPointPrivate* copy = new  GeoDataPointPrivate;
-        *copy = *this;
-        return copy;
+        return new GeoDataPointPrivate( *this );
     }
 
     virtual EnumGeometryId geometryId() const

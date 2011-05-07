@@ -95,12 +95,10 @@ class GeoDataFeaturePrivate
         m_extendedData = other.m_extendedData;
         m_region = other.m_region;
     }
-    
+
     virtual void* copy() 
     { 
-        GeoDataFeaturePrivate* copy = new GeoDataFeaturePrivate;
-        *copy = *this;
-        return copy;
+        return new GeoDataFeaturePrivate( *this );
     }
 
     virtual EnumFeatureId featureId() const

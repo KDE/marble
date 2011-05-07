@@ -34,9 +34,7 @@ class GeoDataPolygonPrivate : public GeoDataGeometryPrivate
 
     virtual GeoDataGeometryPrivate* copy()
     { 
-         GeoDataPolygonPrivate* copy = new  GeoDataPolygonPrivate;
-        *copy = *this;
-        return copy;
+        return new GeoDataPolygonPrivate( *this );
     }
 
     virtual const char* nodeType() const

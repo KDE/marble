@@ -32,9 +32,7 @@ class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
 
     virtual GeoDataGeometryPrivate* copy()
     { 
-         GeoDataMultiGeometryPrivate* copy = new GeoDataMultiGeometryPrivate;
-        *copy = *this;
-        return copy;
+        return new GeoDataMultiGeometryPrivate( *this );
     }
 
     virtual const char* nodeType() const
