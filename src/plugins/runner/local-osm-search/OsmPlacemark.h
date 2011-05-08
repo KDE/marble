@@ -70,7 +70,17 @@ public:
         TransportSpeedCamera,
         TransportTaxiRank,
         TransportTrainStation,
-        TransportTramStop
+        TransportTramStop,
+        PlacesRegion,
+        PlacesCounty,
+        PlacesCity,
+        PlacesTown,
+        PlacesVillage,
+        PlacesHamlet,
+        PlacesIsolatedDwelling,
+        PlacesSuburb,
+        PlacesLocality,
+        PlacesIsland
     };
 
     OsmPlacemark();

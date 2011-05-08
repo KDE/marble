@@ -77,6 +77,16 @@ LocalOsmSearchRunner::LocalOsmSearchRunner( OsmDatabase *database, QObject *pare
         m_categoryMap[OsmPlacemark::TransportRentalCar] = GeoDataFeature::TransportRentalCar;
         m_categoryMap[OsmPlacemark::TransportSpeedCamera] = GeoDataFeature::OsmSite;
         m_categoryMap[OsmPlacemark::TransportTaxiRank] = GeoDataFeature::TransportTaxiRank;
+        m_categoryMap[OsmPlacemark::PlacesRegion] = GeoDataFeature::OsmSite;
+        m_categoryMap[OsmPlacemark::PlacesCounty] = GeoDataFeature::OsmSite;
+        m_categoryMap[OsmPlacemark::PlacesCity] = GeoDataFeature::LargeCity;
+        m_categoryMap[OsmPlacemark::PlacesTown] = GeoDataFeature::MediumCity;
+        m_categoryMap[OsmPlacemark::PlacesVillage] = GeoDataFeature::SmallCity;
+        m_categoryMap[OsmPlacemark::PlacesHamlet] = GeoDataFeature::OsmSite;
+        m_categoryMap[OsmPlacemark::PlacesIsolatedDwelling] = GeoDataFeature::OsmSite;
+        m_categoryMap[OsmPlacemark::PlacesSuburb] = GeoDataFeature::OsmSite;
+        m_categoryMap[OsmPlacemark::PlacesLocality] = GeoDataFeature::OsmSite;
+        m_categoryMap[OsmPlacemark::PlacesIsland] = GeoDataFeature::OsmSite;
     }
 }
 
