@@ -859,9 +859,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setShowTileId( bool visible );
 
     /**
-     * @brief Set the map quality depending on the view context
+     * @brief Set the map quality for the specified view context.
+     *
+     * @param quality map quality for the specified view context
+     * @param viewContext view context whose map quality should be set
      */
-    void setMapQuality( MapQuality, ViewContext = Still );
+    void setMapQualityForViewContext( MapQuality quality, ViewContext viewContext );
 
     /**
      * @brief Set the view context (i.e. still or animated map)

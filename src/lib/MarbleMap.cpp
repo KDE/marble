@@ -294,16 +294,35 @@ ViewportParams *MarbleMap::viewport()
 }
 
 
-void MarbleMap::setMapQuality( MapQuality quality )
+void MarbleMap::setMapQualityForViewContext( MapQuality quality, ViewContext viewContext )
 {
-    d->m_viewParams.setMapQuality( quality );
+    d->m_viewParams.setMapQualityForViewContext( quality, viewContext );
+
     // Update texture map during the repaint that follows:
     d->m_textureLayer.setNeedsUpdate();
+}
+
+MapQuality MarbleMap::mapQuality( ViewContext viewContext ) const
+{
+    return d->m_viewParams.mapQuality( viewContext );
 }
 
 MapQuality MarbleMap::mapQuality() const
 {
     return d->m_viewParams.mapQuality();
+}
+
+void MarbleMap::setViewContext( ViewContext viewContext )
+{
+    d->m_viewParams.setViewContext( viewContext );
+
+    // Update texture map during the repaint that follows:
+    d->m_textureLayer.setNeedsUpdate();
+}
+
+ViewContext MarbleMap::viewContext() const
+{
+    return d->m_viewParams.viewContext();
 }
 
 

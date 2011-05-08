@@ -1152,8 +1152,8 @@ void MainWindow::updateSettings()
     // FIXME: Font doesn't get updated instantly.
     m_controlView->marbleWidget()->setDefaultFont( m_configDialog->mapFont() );
 
-    m_controlView->marbleWidget()->setMapQuality( m_configDialog->stillQuality(), Marble::Still );
-    m_controlView->marbleWidget()->setMapQuality( m_configDialog->animationQuality(), Marble::Animation );
+    m_controlView->marbleWidget()->setMapQualityForViewContext( m_configDialog->stillQuality(), Marble::Still );
+    m_controlView->marbleWidget()->setMapQualityForViewContext( m_configDialog->animationQuality(), Marble::Animation );
 
     m_controlView->marbleWidget()->setDefaultAngleUnit( m_configDialog->angleUnit() );
     MarbleGlobal::getInstance()->locale()->setDistanceUnit( m_configDialog->distanceUnit() );

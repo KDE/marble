@@ -69,9 +69,6 @@ class MarbleWidgetPrivate
         : m_widget( parent ),
           m_map( map ),
           m_model( map->model() ),
-          m_viewContext( Still ),
-          m_stillQuality( HighQuality ),
-          m_animationQuality( LowQuality ),
           m_animationsEnabled( false ),
           m_logzoom( 0 ),
           m_zoomStep( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 60 : 40 ),
@@ -113,11 +110,6 @@ class MarbleWidgetPrivate
     // The model we are showing.
     MarbleMap       *m_map;
     MarbleModel     *m_model;   // Owned by m_map.  Don't delete.
-
-    ViewContext     m_viewContext;
-
-    MapQuality      m_stillQuality;
-    MapQuality      m_animationQuality;
 
     bool m_animationsEnabled;
 
@@ -179,7 +171,6 @@ void MarbleWidgetPrivate::construct()
 
     // Initialize the map and forward some signals.
     m_map->setSize( m_widget->width(), m_widget->height() );
-    m_map->setMapQuality( m_stillQuality );
 
     m_widget->connect( m_map,    SIGNAL( projectionChanged( Projection ) ),
                        m_widget, SIGNAL( projectionChanged( Projection ) ) );
@@ -1057,55 +1048,31 @@ void MarbleWidget::scheduleRepaint( const QRegion& dirtyRegion )
 
 MapQuality MarbleWidget::mapQuality( ViewContext viewContext )
 {
-    if ( viewContext == Still )
-        return d->m_stillQuality;
-
-    Q_ASSERT( viewContext == Animation );
-    return d->m_animationQuality; 
+    return d->m_map->mapQuality( viewContext );
 }
 
-void MarbleWidget::setMapQuality( MapQuality quality, ViewContext changedViewContext )
+void MarbleWidget::setMapQualityForViewContext( MapQuality quality, ViewContext viewContext )
 {
-    const MapQuality oldQuality = mapQuality( viewContext() );
+    const MapQuality oldQuality = d->m_map->mapQuality();
 
-    // FIXME: Rewrite as a switch
-    if ( changedViewContext == Still ) {
-        d->m_stillQuality = quality;
-    }
-    else if ( changedViewContext == Animation ) {
-        d->m_animationQuality = quality;
-    }
+    d->m_map->setMapQualityForViewContext( quality, viewContext );
 
-    if ( viewContext() == Still ) {
-        d->m_map->setMapQuality( d->m_stillQuality ); 
-    }
-    else if ( viewContext() == Animation )
-    {
-        d->m_map->setMapQuality( d->m_animationQuality ); 
-    }
-
-    if ( mapQuality( viewContext() ) != oldQuality )
+    if ( d->m_map->mapQuality() != oldQuality )
         d->repaint();
 }
 
 ViewContext MarbleWidget::viewContext() const
 {
-    return d->m_viewContext;
+    return d->m_map->viewContext();
 }
 
 void MarbleWidget::setViewContext( ViewContext viewContext )
 {
-    if ( d->m_viewContext == viewContext )
-        return;
+    const MapQuality oldQuality = d->m_map->mapQuality();
 
-    d->m_viewContext = viewContext;
+    d->m_map->setViewContext( viewContext );
 
-    if ( viewContext == Still )
-        d->m_map->setMapQuality( d->m_stillQuality ); 
-    if ( viewContext == Animation )
-        d->m_map->setMapQuality( d->m_animationQuality ); 
-
-    if ( mapQuality( viewContext ) != mapQuality( Animation ) )
+    if ( d->m_map->mapQuality() != oldQuality )
         d->repaint();
 }
 

@@ -126,8 +126,16 @@ class MARBLE_EXPORT MarbleMap : public QObject
     // Accessors to internal objects;
     ViewportParams *viewport();
 
-    void setMapQuality( MapQuality quality );
+    void setMapQualityForViewContext( MapQuality qualityForViewContext, ViewContext viewContext );
+    MapQuality mapQuality( ViewContext viewContext ) const;
+
+    /**
+     * @brief Return the current map quality.
+     */
     MapQuality mapQuality() const;
+
+    void setViewContext( ViewContext viewContext );
+    ViewContext viewContext() const;
 
     void setSize( int width, int height );
     void setSize( const QSize& size );

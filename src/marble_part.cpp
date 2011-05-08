@@ -1411,11 +1411,11 @@ void MarblePart::updateSettings()
     m_controlView->marbleWidget()->setDefaultFont( MarbleSettings::mapFont() );
 
     m_controlView->marbleWidget()->
-        setMapQuality( (MapQuality) MarbleSettings::stillQuality(),
-                       Still );
+        setMapQualityForViewContext( (MapQuality) MarbleSettings::stillQuality(),
+                                     Still );
     m_controlView->marbleWidget()->
-        setMapQuality( (MapQuality) MarbleSettings::animationQuality(),
-                       Animation );
+        setMapQualityForViewContext( (MapQuality) MarbleSettings::animationQuality(),
+                                     Animation );
 
     GraphicsSystem graphicsSystem = (GraphicsSystem) MarbleSettings::graphicsSystem();
 
