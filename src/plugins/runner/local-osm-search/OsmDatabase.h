@@ -37,6 +37,8 @@ public:
     QList<OsmPlacemark> find( MarbleModel* model, const QString &searchTerm );
 
 private:
+    QString wildcardQuery( const QString &term ) const;
+
     QStringList m_databases;
 
     QSqlDatabase m_database;

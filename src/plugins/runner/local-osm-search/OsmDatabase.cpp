@@ -62,23 +62,18 @@ QList<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &search
             queryString = queryString.arg( position.latitude( GeoDataCoordinates::Degree ), 0, 'f', 8 )
                     .arg( position.longitude( GeoDataCoordinates::Degree ), 0, 'f', 8 );
         } else {
-            queryString += " AND regions.name LIKE '%%2%'";
-            queryString = queryString.arg( userQuery.region() );
+            queryString += " AND regions.name LIKE '%" + userQuery.region() + "%'";
         }
     } else if ( userQuery.queryType() == DatabaseQuery::BroadSearch ) {
         queryString += " WHERE regions.id = places.region"
-                " AND places.name LIKE '%%1%'";
-        queryString = queryString.arg( searchTerm );
+                " AND places.name " + wildcardQuery( searchTerm );
     } else {
         queryString += " WHERE regions.id = places.region"
-                "   AND places.name LIKE '%%1%'";
-        queryString = queryString.arg( userQuery.street() );
+                "   AND places.name " + wildcardQuery( userQuery.street() );
         if ( !userQuery.houseNumber().isEmpty() ) {
-            queryString += " AND places.number IS '%1'";
-            queryString = queryString.arg( userQuery.houseNumber() );
+            queryString += " AND places.number " + wildcardQuery( userQuery.houseNumber() );
         }
-        queryString += " AND regions.name LIKE '%%2%'";
-        queryString = queryString.arg( userQuery.region() );
+        queryString += " AND regions.name LIKE '%" + userQuery.region() + "%'";
     }
 
     queryString += " LIMIT 50;";
@@ -91,13 +86,13 @@ QList<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &search
 
         m_database.setDatabaseName( databaseFile );
         if ( !m_database.open() ) {
-            qDebug() << "Failed to connect to database " << databaseFile;
+            mDebug() << "Failed to connect to database " << databaseFile;
         }
 
         QSqlQuery query;
         query.setForwardOnly( true );
         if ( !query.exec( queryString ) ) {
-            qDebug() << "Failed to execute query: " << query.lastError();
+            mDebug() << "Failed to execute query: " << query.lastError();
             return result;
         }
 
@@ -181,6 +176,16 @@ qreal OsmDatabase::bearing( const GeoDataCoordinates &a, const GeoDataCoordinate
     qreal lat2 = b.latitude();
     return fmod( atan2( sin ( delta ) * cos ( lat2 ),
                        cos( lat1 ) * sin( lat2 ) - sin( lat1 ) * cos( lat2 ) * cos ( delta ) ), 2 * M_PI );
+}
+
+QString OsmDatabase::wildcardQuery( const QString &term ) const
+{
+    QString result = term;
+    if ( term.contains( '*' ) ) {
+        return " LIKE '" + result.replace( '*', '%' ) + "'";
+    } else {
+        return " = '" + result + "'";
+    }
 }
 
 }
