@@ -32,7 +32,7 @@ void MarbleTest::timeDemo()
 {
     QMessageBox::information(m_marbleWidget, QString( "Marble Speed Test" ), QString( "Press Ok to start test" ) );
 
-    QTime t;
+    m_marbleWidget->setViewContext( Marble::Animation );
 
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveRight( Instant );
@@ -45,6 +45,7 @@ void MarbleTest::timeDemo()
 
     qDebug() << "Starting Performance Test";
 
+    QTime t;
     t.start();
 
     for ( int j = 0; j < 10; ++j ) {
