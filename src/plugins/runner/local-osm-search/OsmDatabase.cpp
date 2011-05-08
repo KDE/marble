@@ -72,6 +72,8 @@ QList<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &search
                 "   AND places.name " + wildcardQuery( userQuery.street() );
         if ( !userQuery.houseNumber().isEmpty() ) {
             queryString += " AND places.number " + wildcardQuery( userQuery.houseNumber() );
+        } else {
+            queryString += "AND places.number IS NULL";
         }
         queryString += " AND regions.name LIKE '%" + userQuery.region() + "%'";
     }
@@ -113,7 +115,7 @@ QList<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &search
         }
     }
 
-    mDebug() << "Offline OSM search query took " << timer.elapsed() << " ms. Query: " << queryString;
+    qDebug() << "Offline OSM search query took " << timer.elapsed() << " ms. Query: " << queryString;
     return result;
 }
 
