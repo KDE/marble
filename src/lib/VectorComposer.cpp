@@ -151,7 +151,6 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     loadCoastlines();
 
     QSharedPointer<QImage> origimg = viewParams->coastImagePtr();
-    Quaternion     rotAxis = viewParams->planetAxis();
 
     origimg->fill( Qt::transparent );
 
