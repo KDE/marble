@@ -46,55 +46,81 @@ QList<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &search
 
     DatabaseQuery userQuery( model, searchTerm );
 
-    QString queryString;
-
-    queryString = " SELECT regions.name,"
-            " places.name, places.number,"
-            " places.category, places.lon, places.lat"
-            " FROM regions, places";
-
-    if ( userQuery.queryType() == DatabaseQuery::CategorySearch ) {
-        queryString += " WHERE regions.id = places.region AND places.category = %1";
-        queryString = queryString.arg( (qint32) userQuery.category() );
-        if ( userQuery.resultFormat() == DatabaseQuery::DistanceFormat && userQuery.region().isEmpty() ) {
-            queryString += " ORDER BY ((places.lat-%1)*(places.lat-%1)+(places.lon-%2)*(places.lon-%2))";
-            GeoDataCoordinates position = userQuery.position();
-            queryString = queryString.arg( position.latitude( GeoDataCoordinates::Degree ), 0, 'f', 8 )
-                    .arg( position.longitude( GeoDataCoordinates::Degree ), 0, 'f', 8 );
-        } else {
-            queryString += " AND regions.name LIKE '%" + userQuery.region() + "%'";
-        }
-    } else if ( userQuery.queryType() == DatabaseQuery::BroadSearch ) {
-        queryString += " WHERE regions.id = places.region"
-                " AND places.name " + wildcardQuery( searchTerm );
-    } else {
-        queryString += " WHERE regions.id = places.region"
-                "   AND places.name " + wildcardQuery( userQuery.street() );
-        if ( !userQuery.houseNumber().isEmpty() ) {
-            queryString += " AND places.number " + wildcardQuery( userQuery.houseNumber() );
-        } else {
-            queryString += "AND places.number IS NULL";
-        }
-        queryString += " AND regions.name LIKE '%" + userQuery.region() + "%'";
-    }
-
-    queryString += " LIMIT 50;";
-
     QList<OsmPlacemark> result;
     QTime timer;
     timer.start();
     foreach( const QString &databaseFile, m_databases ) {
-        /** @todo: sort/filter results from several databases */
-
         m_database.setDatabaseName( databaseFile );
         if ( !m_database.open() ) {
             mDebug() << "Failed to connect to database " << databaseFile;
         }
 
+        QString regionRestriction;
+        if ( !userQuery.region().isEmpty() ) {
+            // Nested set model to support region hierarchies, see http://en.wikipedia.org/wiki/Nested_set_model
+            QSqlQuery regionsQuery( "SELECT lft, rgt FROM regions WHERE name LIKE '%" + userQuery.region() + "%';" );
+            if ( regionsQuery.lastError().isValid() ) {
+                mDebug() << "Error when executing query" << regionsQuery.executedQuery();
+                mDebug() << "Sql reports" << regionsQuery.lastError();
+            }
+            regionRestriction = " AND (";
+            bool first = true;
+            while ( regionsQuery.next() ) {
+                if ( first ) {
+                    first = false;
+                } else {
+                    regionRestriction += " OR ";
+                }
+                regionRestriction += " (regions.lft >= " + regionsQuery.value( 0 ).toString();
+                regionRestriction += " AND regions.lft <= " + regionsQuery.value( 1 ).toString() + ")";
+            }
+            regionRestriction += ")";
+
+            if ( first ) {
+                return QList<OsmPlacemark>();
+            }
+        }
+
+        QString queryString;
+
+        queryString = " SELECT regions.name,"
+                " places.name, places.number,"
+                " places.category, places.lon, places.lat"
+                " FROM regions, places";
+
+        if ( userQuery.queryType() == DatabaseQuery::CategorySearch ) {
+            queryString += " WHERE regions.id = places.region AND places.category = %1";
+            queryString = queryString.arg( (qint32) userQuery.category() );
+            if ( userQuery.resultFormat() == DatabaseQuery::DistanceFormat && userQuery.region().isEmpty() ) {
+                queryString += " ORDER BY ((places.lat-%1)*(places.lat-%1)+(places.lon-%2)*(places.lon-%2))";
+                GeoDataCoordinates position = userQuery.position();
+                queryString = queryString.arg( position.latitude( GeoDataCoordinates::Degree ), 0, 'f', 8 )
+                        .arg( position.longitude( GeoDataCoordinates::Degree ), 0, 'f', 8 );
+            } else {
+                queryString += regionRestriction;
+            }
+        } else if ( userQuery.queryType() == DatabaseQuery::BroadSearch ) {
+            queryString += " WHERE regions.id = places.region"
+                    " AND places.name " + wildcardQuery( searchTerm );
+        } else {
+            queryString += " WHERE regions.id = places.region"
+                    "   AND places.name " + wildcardQuery( userQuery.street() );
+            if ( !userQuery.houseNumber().isEmpty() ) {
+                queryString += " AND places.number " + wildcardQuery( userQuery.houseNumber() );
+            } else {
+                queryString += "AND places.number IS NULL";
+            }
+            queryString += regionRestriction;
+        }
+
+        queryString += " LIMIT 50;";
+
+        /** @todo: sort/filter results from several databases */
+
         QSqlQuery query;
         query.setForwardOnly( true );
         if ( !query.exec( queryString ) ) {
-            mDebug() << "Failed to execute query: " << query.lastError();
+            mDebug() << "Failed to execute query" << query.lastError();
             return result;
         }
 
@@ -113,9 +139,11 @@ QList<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &search
             placemark.setLatitude( query.value(5).toFloat() );
             result.push_back( placemark );
         }
+
+        // mDebug() << "Query string: " << queryString;
     }
 
-    qDebug() << "Offline OSM search query took " << timer.elapsed() << " ms. Query: " << queryString;
+    mDebug() << "Offline OSM search query took " << timer.elapsed() << " ms.";
     return result;
 }
 
