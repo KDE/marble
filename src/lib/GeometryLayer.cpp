@@ -40,9 +40,10 @@ class GeometryLayerPrivate
     GeoDataDocument *m_root;
 
     void setBrushStyle( GeoPainter *painter, GeoDataStyle *style );
-    void setPenStyle( GeoPainter *painter, GeoDataStyle *style, int radius );
-    bool renderGeoDataObject( GeoPainter *painter, GeoDataObject *object, int radius );
-    bool renderGeoDataGeometry( GeoPainter *painter, GeoDataGeometry *geometry, GeoDataStyle *style, int radius );
+    void setPenStyle( GeoPainter *painter, GeoDataStyle *style, ViewportParams *viewport );
+    bool renderGeoDataObject( GeoPainter *painter, GeoDataObject *object, ViewportParams *viewport );
+    bool renderGeoDataGeometry( GeoPainter *painter, GeoDataGeometry *geometry, 
+                                GeoDataStyle *style, ViewportParams *viewport );
 
     QBrush m_currentBrush;
     QPen m_currentPen;
@@ -75,7 +76,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
 //    mDebug() << "rendering " << m_root;
     if ( d->m_root )
     {
-        d->renderGeoDataObject( painter, d->m_root, viewport->radius() );
+        d->renderGeoDataObject( painter, d->m_root, viewport );
     }
 //    mDebug() << "rendering geometry: " << t.elapsed();
 
@@ -98,7 +99,7 @@ void GeometryLayerPrivate::setBrushStyle( GeoPainter *painter, GeoDataStyle *sty
     }
 }
 
-void GeometryLayerPrivate::setPenStyle( GeoPainter *painter, GeoDataStyle *style, int radius )
+void GeometryLayerPrivate::setPenStyle( GeoPainter *painter, GeoDataStyle *style, ViewportParams *viewport )
 {
     if( !style->polyStyle().outline() ) {
         m_currentPen.setColor( Qt::transparent );
@@ -116,10 +117,10 @@ void GeometryLayerPrivate::setPenStyle( GeoPainter *painter, GeoDataStyle *style
                  << style->lineStyle().width()
                  << m_currentPen.widthF();*/
         m_currentPen.setColor( style->lineStyle().color() );
-        if( float(radius) / EARTH_RADIUS * style->lineStyle().physicalWidth() < style->lineStyle().width() )
+        if( float(viewport->radius()) / EARTH_RADIUS * style->lineStyle().physicalWidth() < style->lineStyle().width() )
             m_currentPen.setWidthF( style->lineStyle().width() );
         else
-            m_currentPen.setWidthF( float(radius) / EARTH_RADIUS * style->lineStyle().physicalWidth() );
+            m_currentPen.setWidthF( float(viewport->radius()) / EARTH_RADIUS * style->lineStyle().physicalWidth() );
     }
     
     if( m_currentPen.capStyle() != style->lineStyle().capStyle() )
@@ -140,7 +141,8 @@ void GeometryLayerPrivate::setPenStyle( GeoPainter *painter, GeoDataStyle *style
     if( painter->pen() != m_currentPen ) painter->setPen( m_currentPen );
 }
 
-bool GeometryLayerPrivate::renderGeoDataObject( GeoPainter *painter, GeoDataObject *object, int radius )
+bool GeometryLayerPrivate::renderGeoDataObject( GeoPainter *painter, 
+                                                GeoDataObject *object, ViewportParams *viewport )
 {
 //    mDebug() << "render object " << object << " " << object->nodeType();
     GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
@@ -150,7 +152,7 @@ bool GeometryLayerPrivate::renderGeoDataObject( GeoPainter *painter, GeoDataObje
 
     else if( dynamic_cast<GeoDataPlacemark*>( object ) ) {
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );
-        renderGeoDataGeometry( painter, placemark->geometry(), placemark->style(), radius );
+        renderGeoDataGeometry( painter, placemark->geometry(), placemark->style(), viewport );
     }
 
     // parse all child objects of the container
@@ -160,14 +162,15 @@ bool GeometryLayerPrivate::renderGeoDataObject( GeoPainter *painter, GeoDataObje
         int rowCount = container->size();
         for ( int row = 0; row < rowCount; ++row )
         {            
-            renderGeoDataObject( painter, container->child( row ), radius );
+            renderGeoDataObject( painter, container->child( row ), viewport );
         }
     }
 
     return true;
 }
 
-bool GeometryLayerPrivate::renderGeoDataGeometry( GeoPainter *painter, GeoDataGeometry *object, GeoDataStyle *style, int radius )
+bool GeometryLayerPrivate::renderGeoDataGeometry( GeoPainter *painter, GeoDataGeometry *object, 
+                                                  GeoDataStyle *style, ViewportParams *viewport )
 {
 //    mDebug() << "render geometry " << object << " " << object->nodeType();
 
@@ -176,18 +179,18 @@ bool GeometryLayerPrivate::renderGeoDataGeometry( GeoPainter *painter, GeoDataGe
 
     if( dynamic_cast<GeoDataLinearRing*>( object ) ) {
         painter->setBrush( QColor( 0, 0, 0, 0 ) );
-        setPenStyle( painter, style, radius );
+        setPenStyle( painter, style, viewport );
         GeoDataLinearRing linearRing( *object );
         painter->drawPolygon( linearRing );
     }
     else if( dynamic_cast<GeoDataLineString*>( object ) ) {
-        setPenStyle( painter, style, radius );
+        setPenStyle( painter, style, viewport );
         GeoDataLineString lineString( *object );
         painter->drawPolyline( lineString );
     }
     else if( dynamic_cast<GeoDataPolygon*>( object ) ) {
         setBrushStyle( painter, style );
-        setPenStyle( painter, style, radius );
+        setPenStyle( painter, style, viewport );
         // geometries are implicitly shared, this shouldn't hurt
         GeoDataPolygon polygon( *object );
         painter->drawPolygon( polygon );
@@ -197,7 +200,7 @@ bool GeometryLayerPrivate::renderGeoDataGeometry( GeoPainter *painter, GeoDataGe
         int rowCount = multigeo->size();
         for ( int row = 0; row < rowCount; ++row )
         {
-            renderGeoDataGeometry( painter, multigeo->child( row ), style, radius );
+            renderGeoDataGeometry( painter, multigeo->child( row ), style, viewport );
         }
     }
 
