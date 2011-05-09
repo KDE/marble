@@ -66,24 +66,13 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
         Q_ASSERT( placemark );
 
         //Convert area ways to polygons
+        if( !dynamic_cast<GeoDataPolygon*>( geometry ) && OsmGlobals::tagNeedArea( key + "=" + value ) )
+        {
+            placemark = convertWayToPolygon( doc, placemark, geometry );
+        } 
         if ( key == "building" && value == "yes" )
         {
-            placemark = convertWayToPolygon( doc, placemark, geometry );
             placemark->setStyle( &doc->style( "building" ) );
-            placemark->setVisible( true );
-        }
-        else if ( key == "highway" )
-        {
-            placemark->setVisible( true );
-        }
-        else if ( key == "area" && value == "yes" )
-        {
-            placemark = convertWayToPolygon( doc, placemark, geometry );
-        }
-        else if ( key == "waterway" )
-        {
-            if ( value == "riverbank" )
-                placemark = convertWayToPolygon( doc, placemark, geometry );
             placemark->setVisible( true );
         }
     }
@@ -106,9 +95,15 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
         GeoDataFeature::GeoDataVisualCategory category;
 
         if ( category = OsmGlobals::visualCategories().value( key + "=" + value ) )
+        {
             placemark->setVisualCategory( category );
+            placemark->setVisible( true );
+        }
         else if ( category = OsmGlobals::visualCategories().value( key ) )
+        {
             placemark->setVisualCategory( category );
+	    placemark->setVisible( true );
+        }
     }
 
     return 0;

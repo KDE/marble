@@ -143,6 +143,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         Bookmark,
         
         NaturalWater,
+        NaturalWood,
 
         // OpenStreetMap highways
         HighwayUnknown,

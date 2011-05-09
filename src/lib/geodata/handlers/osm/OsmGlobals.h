@@ -13,6 +13,8 @@
 
 #include <QtCore/QMap>
 #include <QtGui/QColor>
+#include <QtCore/QString>
+#include <QtCore/QList>
 #include "GeoDataFeature.h"
 
 namespace Marble
@@ -26,15 +28,17 @@ class OsmGlobals
 {
 public:
     static QMap<QString, GeoDataFeature::GeoDataVisualCategory> visualCategories();
+    static bool tagNeedArea( const QString& keyValue );
 
     static QColor buildingColor;
     static QColor backgroundColor;
-    static QColor waterColor;
 
 private:
     static void setupCategories();
-
+    static void setupAreaTags();
+    
     static QMap<QString, GeoDataFeature::GeoDataVisualCategory> m_visualCategories;
+    static QList<QString> m_areaTags;
 };
 
 }

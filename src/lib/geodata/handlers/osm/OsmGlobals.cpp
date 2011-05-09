@@ -19,10 +19,10 @@ namespace Marble
 namespace osm
 {
 QMap<QString, GeoDataFeature::GeoDataVisualCategory> OsmGlobals::m_visualCategories;
+QList<QString> OsmGlobals::m_areaTags;
 
 QColor OsmGlobals::buildingColor( 0xBE, 0xAD, 0xAD );
 QColor OsmGlobals::backgroundColor( 0xF1, 0xEE, 0xE8 );
-QColor OsmGlobals::waterColor( 0xB5, 0xD0, 0xD0 );
 
 QMap< QString, GeoDataFeature::GeoDataVisualCategory > OsmGlobals::visualCategories()
 {
@@ -31,6 +31,15 @@ QMap< QString, GeoDataFeature::GeoDataVisualCategory > OsmGlobals::visualCategor
 
     return m_visualCategories;
 }
+
+bool OsmGlobals::tagNeedArea(const QString& keyValue)
+{
+    if ( m_areaTags.count() < 1 )
+        setupAreaTags();
+    
+    return qBinaryFind( m_areaTags.constBegin(), m_areaTags.constEnd(), keyValue ) != m_areaTags.constEnd();
+}
+
 
 void OsmGlobals::setupCategories()
 {
@@ -110,6 +119,21 @@ void OsmGlobals::setupCategories()
     m_visualCategories["waterway=river"]             = GeoDataFeature::NaturalWater;
     m_visualCategories["waterway=riverbank"]         = GeoDataFeature::NaturalWater;
     m_visualCategories["waterway=canal"]             = GeoDataFeature::NaturalWater;
+    
+    m_visualCategories["natural=wood"]               = GeoDataFeature::NaturalWood;
+    
+    m_visualCategories["landuse=forest"]             = GeoDataFeature::NaturalWood;
+}
+
+void OsmGlobals::setupAreaTags()
+{
+    m_areaTags.append( "landuse=forest" );
+    m_areaTags.append( "natural=wood" );
+    m_areaTags.append( "area=yes" );
+    m_areaTags.append( "waterway=riverbank" );
+    m_areaTags.append( "building=yes" );
+    
+    qSort( m_areaTags.begin(), m_areaTags.end() );
 }
 
 }
