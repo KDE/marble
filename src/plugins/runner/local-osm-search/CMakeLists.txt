@@ -11,7 +11,6 @@ set( localOsmSearch_SRCS
 LocalOsmSearchRunner.cpp
 LocalOsmSearchPlugin.cpp
 OsmPlacemark.cpp
-OsmRegion.cpp
 OsmDatabase.cpp
 DatabaseQuery.cpp
  )

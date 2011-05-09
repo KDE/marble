@@ -9,7 +9,6 @@
 //
 
 #include "OsmDatabase.h"
-#include "OsmRegion.h"
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
 #include "MarbleLocale.h"

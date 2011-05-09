@@ -11,7 +11,6 @@
 #ifndef MARBLE_OSMDATABASE_H
 #define MARBLE_OSMDATABASE_H
 
-#include "OsmRegion.h"
 #include "OsmPlacemark.h"
 
 #include <QtCore/QString>
