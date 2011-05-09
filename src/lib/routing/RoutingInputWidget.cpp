@@ -107,7 +107,7 @@ public:
 RoutingInputLineEdit::RoutingInputLineEdit( QWidget *parent ) : RoutingLineEdit( parent )
 {
 #if QT_VERSION >= 0x40700
-    setPlaceholderText( "Address or search term..." );
+    setPlaceholderText( QObject::tr( "Address or search term..." ) );
 #endif
 }
 
@@ -158,7 +158,7 @@ QMenu* RoutingInputWidgetPrivate::createMenu( RoutingInputWidget *parent )
                        parent, SLOT( requestActivity() ) );
     result->addSeparator();
 
-    m_currentLocationAction = result->addAction( QIcon( ":/icons/gps.png" ), "Current &Location",
+    m_currentLocationAction = result->addAction( QIcon( ":/icons/gps.png" ), QObject::tr( "Current &Location" ),
                                                  parent, SLOT( setCurrentLocation() ) );
     m_currentLocationAction->setEnabled( false );
 
@@ -174,7 +174,7 @@ QMenu* RoutingInputWidgetPrivate::createMenu( RoutingInputWidget *parent )
 QMenu* RoutingInputWidgetPrivate::createBookmarkMenu( RoutingInputWidget *parent )
 {
     QMenu* result = new QMenu( parent );
-    result->addAction( QIcon( ":/icons/go-home.png" ), "&Home", parent, SLOT( setHomePosition() ) );
+    result->addAction( QIcon( ":/icons/go-home.png" ), QObject::tr( "&Home" ), parent, SLOT( setHomePosition() ) );
 
     QVector<GeoDataFolder*> folders = m_marbleModel->bookmarkManager()->folders();
 

@@ -101,7 +101,7 @@ namespace
     const char* POSITION_STRING = I18N_NOOP( "Position: %1" );
     const char* DISTANCE_STRING = I18N_NOOP( "Altitude: %1" );
     const char* TILEZOOMLEVEL_STRING = I18N_NOOP( "Tile Zoom Level: %1" );
-    const char* DATETIME_STRING =  "Time: %1";
+    const char* DATETIME_STRING = I18N_NOOP( "Time: %1" );
 }
 
 typedef KParts::GenericFactory< MarblePart > MarblePartFactory;
@@ -114,8 +114,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     m_downloadRegionDialog( 0 ),
     m_pluginModel( 0 ),
     m_configDialog( 0 ),
-    m_position( NOT_AVAILABLE ),
-    m_tileZoomLevel( NOT_AVAILABLE ),
+    m_position( i18n( NOT_AVAILABLE ) ),
+    m_tileZoomLevel( i18n( NOT_AVAILABLE ) ),
     m_positionLabel( 0 ),
     m_distanceLabel( 0 )
 {
@@ -957,7 +957,7 @@ void MarblePart::showPosition( const QString& position )
 void MarblePart::showZoomLevel( const int tileLevel )
 {
     if ( tileLevel == -1 )
-        m_tileZoomLevel = NOT_AVAILABLE;
+        m_tileZoomLevel = i18n( NOT_AVAILABLE );
     else {
         m_tileZoomLevel.setNum( tileLevel );
     }
@@ -998,7 +998,7 @@ void MarblePart::updateTileZoomLevel()
     const int tileZoomLevel =
         m_controlView->marbleWidget()->tileZoomLevel();
     if ( tileZoomLevel == -1 )
-        m_tileZoomLevel = NOT_AVAILABLE;
+        m_tileZoomLevel = i18n( NOT_AVAILABLE );
     else {
         m_tileZoomLevel.setNum( tileZoomLevel );
     }
