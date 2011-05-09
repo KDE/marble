@@ -139,7 +139,6 @@ GeoDataPlacemark *OsmTagTagHandler::convertWayToPolygon( GeoDataDocument *doc, G
     return newPlacemark;
 }
 
-
 }
 
 }
