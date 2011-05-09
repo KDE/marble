@@ -148,6 +148,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         HighwayUnknown,
         HighwayPath,
         HighwayTrack,
+        HighwayPedestrian,
         HighwayService,
         HighwayRoad,
         HighwayTertiary,

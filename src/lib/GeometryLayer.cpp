@@ -108,7 +108,7 @@ void GeometryLayerPrivate::setPenStyle( GeoPainter *painter, GeoDataStyle *style
 
     if( m_currentPen.color() != style->lineStyle().color() ||
         m_currentPen.widthF() != style->lineStyle().width() ||
-        style->lineStyle().realWidth() != 0.0 ) {
+        style->lineStyle().physicalWidth() != 0.0 ) {
 /*        mDebug() << "PenColor:"
                  << style->lineStyle().color()
                  << m_currentPen.color();
@@ -116,10 +116,10 @@ void GeometryLayerPrivate::setPenStyle( GeoPainter *painter, GeoDataStyle *style
                  << style->lineStyle().width()
                  << m_currentPen.widthF();*/
         m_currentPen.setColor( style->lineStyle().color() );
-        if( float(radius) / EARTH_RADIUS * style->lineStyle().realWidth() < style->lineStyle().width() )
+        if( float(radius) / EARTH_RADIUS * style->lineStyle().physicalWidth() < style->lineStyle().width() )
             m_currentPen.setWidthF( style->lineStyle().width() );
         else
-            m_currentPen.setWidthF( float(radius) / EARTH_RADIUS * style->lineStyle().realWidth() );
+            m_currentPen.setWidthF( float(radius) / EARTH_RADIUS * style->lineStyle().physicalWidth() );
     }
     
     if( m_currentPen.capStyle() != style->lineStyle().capStyle() )

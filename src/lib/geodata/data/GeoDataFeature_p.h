@@ -128,11 +128,13 @@ class GeoDataFeaturePrivate
     {
         GeoDataStyle *style = new GeoDataStyle;
         GeoDataLineStyle lineStyle( color );
+        GeoDataPolyStyle polyStyle( color.lighter() );
         lineStyle.setCapStyle( capStyle );
         lineStyle.setPenStyle( penStyle );
         lineStyle.setWidth( width );
-        lineStyle.setRealWidth( realWidth );
+        lineStyle.setPhysicalWidth( realWidth );
         style->setLineStyle( lineStyle );
+        style->setPolyStyle( polyStyle );
         return style;
     }
     
