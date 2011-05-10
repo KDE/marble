@@ -90,7 +90,7 @@ ControlView::~ControlView()
 
 QString ControlView::applicationVersion()
 {
-    return "PRE 1.2 SVN";
+    return "PRE 1.2 GIT";
 }
 
 void ControlView::zoomIn()
