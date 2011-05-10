@@ -76,7 +76,7 @@
       </sizepolicy>
      </property>
      <property name="toolTip">
-      <string extracomment="Select the method to use to recenter your GPS location on map.">Select the method to use to re-center your GPS location on map.</string>
+      <string comment="Select the method to use to recenter your GPS location on map.">Select the method to use to re-center your GPS location on map.</string>
      </property>
      <property name="text">
       <string>Re-center</string>
@@ -90,17 +90,17 @@
      </property>
      <item>
       <property name="text">
-       <string extracomment="Disable Auto Recenter">Disabled</string>
+       <string comment="Disable Auto Recenter">Disabled</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string extracomment="Always keep gps location at the center of the map">Keep at Center</string>
+       <string comment="Always keep gps location at the center of the map">Keep at Center</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string extracomment="Auto center when required">When required</string>
+       <string comment="Auto center when required">When required</string>
       </property>
      </item>
     </widget>
@@ -111,7 +111,7 @@
       <bool>false</bool>
      </property>
      <property name="toolTip">
-      <string extracomment="Auto Zoom to appropriate zoom level">Auto Zoom to appropriate zoom level</string>
+      <string comment="Auto Zoom to appropriate zoom level">Auto Zoom to appropriate zoom level</string>
      </property>
      <property name="text">
       <string>Auto Zoom</string>
