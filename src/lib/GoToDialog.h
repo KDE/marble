@@ -59,6 +59,10 @@ private Q_SLOTS:
 
     void updateSearchMode();
 
+    void updateProgress();
+
+    void stopProgressAnimation();
+
 private:
     GoToDialogPrivate * const d;
 };

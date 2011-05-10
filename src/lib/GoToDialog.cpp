@@ -20,7 +20,9 @@
 #include "routing/RouteRequest.h"
 
 #include <QtCore/QAbstractListModel>
+#include <QtCore/QTimer>
 #include <QtGui/QPushButton>
+#include <QtGui/QPainter>
 
 namespace Marble
 {
@@ -76,9 +78,17 @@ public:
 
     MarblePlacemarkModel *m_placemarkModel;
 
+    QTimer m_progressTimer;
+
+    int m_currentFrame;
+
+    QVector<QIcon> m_progressAnimation;
+
     GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWidget );
 
     void saveSelection( const QModelIndex &index );
+
+    void createProgressAnimation();
 };
 
 TargetModel::TargetModel( MarbleWidget* marbleWidget, QObject * parent ) :
@@ -245,11 +255,40 @@ void TargetModel::setShowRoutingItems( bool show )
     reset();
 }
 
+void GoToDialogPrivate::createProgressAnimation()
+{
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    int const iconSize = smallScreen ? 32 : 16;
+
+    // Size parameters
+    qreal const h = iconSize / 2.0; // Half of the icon size
+    qreal const q = h / 2.0; // Quarter of the icon size
+    qreal const d = 7.5; // Circle diameter
+    qreal const r = d / 2.0; // Circle radius
+
+    // Canvas parameters
+    QImage canvas( iconSize, iconSize, QImage::Format_ARGB32 );
+    QPainter painter( &canvas );
+    painter.setRenderHint( QPainter::Antialiasing, true );
+    painter.setPen( QColor ( Qt::gray ) );
+    painter.setBrush( QColor( Qt::white ) );
+
+    // Create all frames
+    for( double t = 0.0; t < 2 * M_PI; t += M_PI / 8.0 ) {
+        canvas.fill( Qt::transparent );
+        QRectF firstCircle( h - r + q * cos( t ), h - r + q * sin( t ), d, d );
+        QRectF secondCircle( h - r + q * cos( t + M_PI ), h - r + q * sin( t + M_PI ), d, d );
+        painter.drawEllipse( firstCircle );
+        painter.drawEllipse( secondCircle );
+        m_progressAnimation.push_back( QIcon( QPixmap::fromImage( canvas ) ) );
+    }
+}
+
 GoToDialogPrivate::GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWidget ) :
     m_parent( parent), m_marbleWidget( marbleWidget ), m_targetModel( 0 ),
-    m_runnerManager( 0 ), m_placemarkModel( 0 )
+    m_runnerManager( 0 ), m_placemarkModel( 0 ), m_currentFrame( 0 )
 {
-    // nothing to do
+    m_progressTimer.setInterval( 100 );
 }
 
 void GoToDialogPrivate::saveSelection( const QModelIndex &index )
@@ -278,16 +317,23 @@ void GoToDialog::startSearch()
         d->m_runnerManager->setModel( d->m_marbleWidget->model() );
         connect( d->m_runnerManager, SIGNAL( searchResultChanged( QAbstractItemModel* ) ),
                  this, SLOT( updateSearchResult( QAbstractItemModel* ) ) );
+        connect( d->m_runnerManager, SIGNAL( searchFinished( QString ) ),
+                this, SLOT( stopProgressAnimation() ) );
     }
 
     d->m_runnerManager->findPlacemarks( searchTerm );
+    if ( d->m_progressAnimation.isEmpty() ) {
+        d->createProgressAnimation();
+    }
+    d->m_progressTimer.start();
+    progress->setVisible( true );
+    searchLineEdit->setEnabled( false );
 }
 
 void GoToDialog::updateSearchResult( QAbstractItemModel* model )
 {
     d->m_placemarkModel = dynamic_cast<MarblePlacemarkModel*>( model );
     bookmarkListView->setModel( model );
-    descriptionLabel->setText( tr( "%n results found.", "Number of search results", model->rowCount() ) );
 }
 
 GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::WindowFlags flags ) :
@@ -310,7 +356,10 @@ GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::Window
              this, SLOT( updateSearchMode() ) );
     connect( browseButton, SIGNAL( clicked( bool ) ),
              this, SLOT( updateSearchMode() ) );
+    connect( &d->m_progressTimer, SIGNAL( timeout() ),
+             this, SLOT( updateProgress() ) );
     updateSearchMode();
+    progress->setVisible( false );
 }
 
 GoToDialog::~GoToDialog()
@@ -338,6 +387,23 @@ void GoToDialog::updateSearchMode()
     } else {
         bookmarkListView->setModel( d->m_targetModel );
     }
+}
+
+void GoToDialog::updateProgress()
+{
+    if ( !d->m_progressAnimation.isEmpty() ) {
+        d->m_currentFrame = ( d->m_currentFrame + 1 ) % d->m_progressAnimation.size();
+        QIcon frame = d->m_progressAnimation[d->m_currentFrame];
+        progress->setIcon( frame );
+    }
+}
+
+void GoToDialog::stopProgressAnimation()
+{
+    searchLineEdit->setEnabled( true );
+    d->m_progressTimer.stop();
+    descriptionLabel->setText( tr( "%n results found.", "Number of search results", bookmarkListView->model()->rowCount() ) );
+    progress->setVisible( false );
 }
 
 }
