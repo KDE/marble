@@ -32,7 +32,9 @@ class GeoDataLinearRingPrivate : public GeoDataLineStringPrivate
 
     virtual GeoDataGeometryPrivate* copy()
     { 
-        return new GeoDataLinearRingPrivate( *this );
+        GeoDataLinearRingPrivate* copy = new GeoDataLinearRingPrivate;
+        *copy = *this;
+        return copy;
     }
 
     virtual const char* nodeType() const

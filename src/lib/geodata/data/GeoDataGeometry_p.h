@@ -44,7 +44,9 @@ class GeoDataGeometryPrivate
 
     virtual GeoDataGeometryPrivate* copy()
     { 
-        return new GeoDataGeometryPrivate( *this );
+        GeoDataGeometryPrivate* copy = new GeoDataGeometryPrivate;
+        *copy = *this;
+        return copy;
     }
 
     virtual const char* nodeType() const

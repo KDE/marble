@@ -32,7 +32,9 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
 
     virtual void* copy() 
     { 
-        return new GeoDataContainerPrivate( *this );
+        GeoDataContainerPrivate* copy = new GeoDataContainerPrivate;
+        *copy = *this;
+        return copy;
     }
 
     virtual const char* nodeType() const
