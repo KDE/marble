@@ -17,6 +17,7 @@
 
 #include <QtCore/QDateTime>
 #include <QtCore/QFileInfo>
+#include <QtCore/QMetaType>
 #include <QtGui/QImage>
 
 #include "GeoSceneDocument.h"
@@ -29,12 +30,15 @@
 #include "MarbleDirs.h"
 #include "TileLoaderHelper.h"
 
+Q_DECLARE_METATYPE( Marble::DownloadUsage )
+
 namespace Marble
 {
 
 TileLoader::TileLoader( HttpDownloadManager * const downloadManager, MapThemeManager const * mapThemeManager )
     : m_mapThemeManager( mapThemeManager )
 {
+    qRegisterMetaType<DownloadUsage>( "DownloadUsage" );
     connect( this, SIGNAL( downloadTile( QUrl, QString, QString, DownloadUsage )),
              downloadManager, SLOT( addJob( QUrl, QString, QString, DownloadUsage )));
     connect( downloadManager, SIGNAL( downloadComplete( QByteArray, QString )),

@@ -16,6 +16,9 @@
 // posix
 #include <cmath>
 
+// Qt
+#include <QtCore/QRunnable>
+
 // Marble
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
@@ -25,6 +28,33 @@
 #include "ViewParams.h"
 
 using namespace Marble;
+
+class EquirectScanlineTextureMapper::RenderJob : public QRunnable
+{
+public:
+    RenderJob( StackedTileLoader *tileLoader, int tileLevel, ViewParams *viewParams, int yTop, int yBottom );
+
+    virtual void run();
+
+private:
+    StackedTileLoader *const m_tileLoader;
+    const int m_tileLevel;
+    QSharedPointer<QImage> m_canvasImage;
+    ViewParams *const m_viewParams;
+    const int m_yPaintedTop;
+    const int m_yPaintedBottom;
+};
+
+EquirectScanlineTextureMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel, ViewParams *viewParams, int yTop, int yBottom )
+    : m_tileLoader( tileLoader ),
+      m_tileLevel( tileLevel ),
+      m_canvasImage( viewParams->canvasImagePtr() ),
+      m_viewParams( viewParams ),
+      m_yPaintedTop( yTop ),
+      m_yPaintedBottom( yBottom )
+{
+}
+
 
 EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( StackedTileLoader *tileLoader,
                                                               QObject *parent )
@@ -72,19 +102,9 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     // Initialize needed constants:
 
     const int imageHeight = canvasImage->height();
-    const int imageWidth  = canvasImage->width();
     const qint64  radius      = viewParams->radius();
     // Calculate how many degrees are being represented per pixel.
     const float rad2Pixel = (float)( 2 * radius ) / M_PI;
-    const qreal pixel2Rad = 1.0/rad2Pixel;
-
-    const bool interlaced   = ( viewParams->mapQuality() == LowQuality );
-    const bool highQuality  = ( viewParams->mapQuality() == HighQuality
-                             || viewParams->mapQuality() == PrintQuality );
-    const bool printQuality = ( viewParams->mapQuality() == PrintQuality );
-
-    // Evaluate the degree of interpolation
-    const int n = ScanlineTextureMapperContext::interpolationStep( viewParams );
 
     // Calculate translation of center point
     qreal centerLon, centerLat;
@@ -103,6 +123,60 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     if (yPaintedBottom < 0)             yPaintedBottom = 0;
     if (yPaintedBottom > imageHeight) yPaintedBottom = imageHeight;
 
+    const int numThreads = m_threadPool.maxThreadCount();
+    const int yStep = ( yPaintedBottom - yPaintedTop ) / numThreads;
+    for ( int i = 0; i < numThreads; ++i ) {
+        const int yStart = yPaintedTop +  i      * yStep;
+        const int yEnd   = yPaintedTop + (i + 1) * yStep;
+        QRunnable *const job = new RenderJob( m_tileLoader, tileZoomLevel(), viewParams, yStart, yEnd );
+        m_threadPool.start( job );
+    }
+
+    // Remove unused lines
+    const int clearStart = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? yPaintedBottom : 0;
+    const int clearStop  = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? imageHeight  : yTop;
+
+    QRgb * const itClearBegin = (QRgb*)( canvasImage->scanLine( clearStart ) );
+    QRgb * const itClearEnd = (QRgb*)( canvasImage->scanLine( clearStop ) );
+
+    for ( QRgb * it = itClearBegin; it < itClearEnd; ++it ) {
+        *(it) = 0;
+    }
+
+    m_threadPool.waitForDone();
+
+    m_oldYPaintedTop = yPaintedTop;
+
+    m_tileLoader->cleanupTilehash();
+}
+
+void EquirectScanlineTextureMapper::RenderJob::run()
+{
+    // Scanline based algorithm to do texture mapping
+
+    const int imageHeight = m_canvasImage->height();
+    const int imageWidth  = m_canvasImage->width();
+    const qint64  radius  = m_viewParams->radius();
+    // Calculate how many degrees are being represented per pixel.
+    const qreal rad2Pixel = (qreal)( 2 * radius ) / M_PI;
+    const float pixel2Rad = 1.0/rad2Pixel;  // FIXME chainging to qreal may crash Marble when the equator is visible
+
+    const bool interlaced   = ( m_viewParams->mapQuality() == LowQuality );
+    const bool highQuality  = ( m_viewParams->mapQuality() == HighQuality
+                             || m_viewParams->mapQuality() == PrintQuality );
+    const bool printQuality = ( m_viewParams->mapQuality() == PrintQuality );
+
+    // Evaluate the degree of interpolation
+    const int n = ScanlineTextureMapperContext::interpolationStep( m_viewParams );
+
+    // Calculate translation of center point
+    qreal centerLon, centerLat;
+    m_viewParams->centerCoordinates( centerLon, centerLat );
+
+    const int yCenterOffset = (int)( centerLat * rad2Pixel );
+
+    const int yTop = imageHeight / 2 - radius + yCenterOffset;
+
     qreal leftLon = + centerLon - ( imageWidth / 2 * pixel2Rad );
     while ( leftLon < -M_PI ) leftLon += 2 * M_PI;
     while ( leftLon >  M_PI ) leftLon -= 2 * M_PI;
@@ -112,14 +186,14 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     // initialize needed variables that are modified during texture mapping:
 
-    ScanlineTextureMapperContext context( m_tileLoader, tileZoomLevel() );
+    ScanlineTextureMapperContext context( m_tileLoader, m_tileLevel );
 
 
     // Scanline based algorithm to do texture mapping
 
-    for ( int y = yPaintedTop; y < yPaintedBottom; ++y ) {
+    for ( int y = m_yPaintedTop; y < m_yPaintedBottom; ++y ) {
 
-        QRgb * scanLine = (QRgb*)( canvasImage->scanLine( y ) );
+        QRgb * scanLine = (QRgb*)( m_canvasImage->scanLine( y ) );
 
         qreal lon = leftLon;
         const qreal lat = M_PI/2 - (y - yTop )* pixel2Rad;
@@ -161,32 +235,16 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         }
 
         // copy scanline to improve performance
-        if ( interlaced && y + 1 < yPaintedBottom ) { 
+        if ( interlaced && y + 1 < m_yPaintedBottom ) { 
 
-            const int pixelByteSize = canvasImage->bytesPerLine() / imageWidth;
+            const int pixelByteSize = m_canvasImage->bytesPerLine() / imageWidth;
 
-            memcpy( canvasImage->scanLine( y + 1 ),
-                    canvasImage->scanLine( y     ),
+            memcpy( m_canvasImage->scanLine( y + 1 ),
+                    m_canvasImage->scanLine( y     ),
                     imageWidth * pixelByteSize );
             ++y;
         }
     }
-
-    // Remove unused lines
-    const int clearStart = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? yPaintedBottom : 0;
-    const int clearStop  = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? imageHeight  : yTop;
-
-    QRgb * const clearBegin = (QRgb*)( canvasImage->scanLine( clearStart ) );
-    QRgb * const clearEnd   = (QRgb*)( canvasImage->scanLine( clearStop ) );
-
-    for ( QRgb * it = clearBegin; it < clearEnd; ++it ) {
-        *(it) = 0;
-    }
-
-    m_oldYPaintedTop = yPaintedTop;
-
-    m_tileLoader->cleanupTilehash();
 }
-
 
 #include "EquirectScanlineTextureMapper.moc"

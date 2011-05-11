@@ -36,6 +36,7 @@
 #include <QtCore/QCache>
 #include <QtCore/QDateTime>
 #include <QtCore/QHash>
+#include <QtCore/QReadWriteLock>
 #include <QtGui/QImage>
 
 
@@ -73,6 +74,7 @@ public:
     QVector<GeoSceneTexture const *> m_textureLayers;
     QHash <TileId, StackedTile*>  m_tilesOnDisplay;
     QCache <TileId, StackedTile>  m_tileCache;
+    QReadWriteLock m_cacheLock;
 };
 
 StackedTileLoader::StackedTileLoader( HttpDownloadManager * const downloadManager,
@@ -170,20 +172,30 @@ void StackedTileLoader::cleanupTilehash()
 StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 {
     // check if the tile is in the hash
+    d->m_cacheLock.lockForRead();
     StackedTile * stackedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
+    d->m_cacheLock.unlock();
     if ( stackedTile ) {
         return stackedTile;
     }
     // here ends the performance critical section of this method
 
+    d->m_cacheLock.lockForWrite();
+
+    // has another thread loaded our tile due to a race condition?
+    stackedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
+    if ( d->m_tilesOnDisplay.contains( stackedTileId ) ) {
+        d->m_cacheLock.unlock();
+        return stackedTile;
+    }
+
     mDebug() << "StackedTileLoader::loadTile" << stackedTileId.toString();
 
-    // the tile was not in the hash or has been removed because of expiration
-    // so check if it is in the cache
+    // the tile was not in the hash so check if it is in the cache
     stackedTile = d->m_tileCache.take( stackedTileId );
     if ( stackedTile ) {
-        // the tile was in the cache, but is it up to date?
         d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
+        d->m_cacheLock.unlock();
         return stackedTile;
     }
 
@@ -210,8 +222,9 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 
     const QImage resultImage = d->mergeDecorations( stackedTileId, tiles );
     stackedTile = new StackedTile( stackedTileId, resultImage, tiles );
-    d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
 
+    d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
+    d->m_cacheLock.unlock();
     return stackedTile;
 }
 

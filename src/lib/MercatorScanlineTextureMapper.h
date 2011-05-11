@@ -7,6 +7,7 @@
 //
 // Copyright 2007      Carlos Licea     <carlos _licea@hotmail.com>
 // Copyright 2008      Inge Wallin      <inge@lysator.liu.se>
+// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_MERCATORSCANLINETEXTUREMAPPER_H
@@ -14,6 +15,9 @@
 
 
 #include "TextureMapperInterface.h"
+
+#include <QtCore/QThreadPool>
+
 
 namespace Marble
 {
@@ -36,9 +40,12 @@ class MercatorScanlineTextureMapper : public TextureMapperInterface
     void mapTexture( ViewParams *viewParams );
 
  private:
+    class RenderJob;
+
     StackedTileLoader *const m_tileLoader;
     bool   m_repaintNeeded;
     int    m_oldYPaintedTop;
+    QThreadPool m_threadPool;
 };
 
 }

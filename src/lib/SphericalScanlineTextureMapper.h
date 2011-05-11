@@ -15,6 +15,8 @@
 
 #include "TextureMapperInterface.h"
 
+#include <QtCore/QThreadPool>
+
 
 namespace Marble
 {
@@ -47,8 +49,10 @@ class SphericalScanlineTextureMapper : public TextureMapperInterface
     void mapTexture( ViewParams *viewParams );
 
  private:
+    class RenderJob;
     StackedTileLoader *const m_tileLoader;
     bool m_repaintNeeded;
+    QThreadPool m_threadPool;
 };
 
 }
