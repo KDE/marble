@@ -64,6 +64,8 @@ private Q_SLOTS:
     void stopProgressAnimation();
 
 private:
+    void updateResultMessage( int results );
+
     GoToDialogPrivate * const d;
 };
 

@@ -328,12 +328,14 @@ void GoToDialog::startSearch()
     d->m_progressTimer.start();
     progress->setVisible( true );
     searchLineEdit->setEnabled( false );
+    updateResultMessage( 0 );
 }
 
 void GoToDialog::updateSearchResult( QAbstractItemModel* model )
 {
     d->m_placemarkModel = dynamic_cast<MarblePlacemarkModel*>( model );
     bookmarkListView->setModel( model );
+    updateResultMessage( model->rowCount() );
 }
 
 GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::WindowFlags flags ) :
@@ -382,6 +384,7 @@ void GoToDialog::updateSearchMode()
     bool const searchEnabled = searchButton->isChecked();
     searchLineEdit->setVisible( searchEnabled );
     descriptionLabel->setVisible( searchEnabled );
+    progress->setVisible( searchEnabled && d->m_progressTimer.isActive() );
     if ( searchEnabled ) {
         bookmarkListView->setModel( d->m_placemarkModel );
     } else {
@@ -402,8 +405,13 @@ void GoToDialog::stopProgressAnimation()
 {
     searchLineEdit->setEnabled( true );
     d->m_progressTimer.stop();
-    descriptionLabel->setText( tr( "%n results found.", "Number of search results", bookmarkListView->model()->rowCount() ) );
+    updateResultMessage( bookmarkListView->model()->rowCount() );
     progress->setVisible( false );
+}
+
+void GoToDialog::updateResultMessage( int results )
+{
+    descriptionLabel->setText( tr( "%n results found.", "Number of search results", results ) );
 }
 
 }
