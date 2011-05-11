@@ -130,7 +130,9 @@ void MarbleRunnerManagerPrivate::cleanupRoutingTask( RunnerTask* task )
 MarbleRunnerManager::MarbleRunnerManager( PluginManager* pluginManager, QObject *parent )
     : QObject( parent ), d( new MarbleRunnerManagerPrivate( this, pluginManager ) )
 {
-    // nothing to do
+    if ( QThreadPool::globalInstance()->maxThreadCount() < 4 ) {
+        QThreadPool::globalInstance()->setMaxThreadCount( 4 );
+    }
 }
 
 MarbleRunnerManager::~MarbleRunnerManager()
