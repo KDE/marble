@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2010,2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
@@ -34,7 +34,8 @@ using namespace Marble;
 TileScalingTextureMapper::TileScalingTextureMapper( StackedTileLoader *tileLoader,
                                                     QCache<TileId, QPixmap> *cache,
                                                     QObject *parent )
-    : AbstractScanlineTextureMapper( tileLoader, parent ),
+    : TextureMapperInterface( parent ),
+      m_tileLoader( tileLoader ),
       m_cache( cache ),
       m_repaintNeeded( true ),
       m_oldRadius( 0 )
@@ -83,7 +84,6 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *v
 
     // Reset backend
     m_tileLoader->resetTilehash();
-    setRadius( viewParams->radius() );
 
     // Calculate translation of center point
     qreal centerLon, centerLat;

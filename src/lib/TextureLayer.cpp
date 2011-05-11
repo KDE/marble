@@ -53,7 +53,7 @@ public:
     TextureLayer  *const m_parent;
     StackedTileLoader    m_tileLoader;
     QCache<TileId, QPixmap> m_pixmapCache;
-    AbstractScanlineTextureMapper *m_texmapper;
+    TextureMapperInterface *m_texmapper;
     TextureColorizer              *m_texcolorizer;
     GeoSceneDocument              *m_mapTheme;
 };
@@ -155,6 +155,33 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
     if ( !d->m_texmapper )
         return;
 
+    // As our tile resolution doubles with each level we calculate
+    // the tile level from tilesize and the globe radius via log(2)
+
+    qreal  linearLevel = ( 4.0 * (qreal)( viewParams->radius() )
+                               / (qreal)( d->m_tileLoader.tileSize().width() * d->m_tileLoader.tileColumnCount( 0 ) ) );
+    int     tileLevel   = 0;
+
+    if ( linearLevel < 1.0 )
+        linearLevel = 1.0; // Dirty fix for invalid entry linearLevel
+
+    qreal tileLevelF = log( linearLevel ) / log( 2.0 );
+    tileLevel = (int)( tileLevelF );
+
+//    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
+
+    if ( tileLevel > d->m_tileLoader.maximumTileLevel() )
+        tileLevel = d->m_tileLoader.maximumTileLevel();
+
+    const bool changedTileLevel = tileLevel != d->m_texmapper->tileZoomLevel();
+
+    //    mDebug() << "Texture Level was set to: " << tileLevel;
+    d->m_texmapper->setTileLevel( tileLevel );
+
+    if ( changedTileLevel ) {
+        emit tileLevelChanged( tileLevel );
+    }
+
     d->m_texmapper->mapTexture( painter, viewParams, dirtyRect, d->m_texcolorizer );
 }
 
@@ -188,7 +215,6 @@ void TextureLayer::setupTextureMapper( Projection projection )
             d->m_texmapper = 0;
     }
     Q_ASSERT( d->m_texmapper );
-    connect( d->m_texmapper, SIGNAL( tileLevelChanged( int )), SIGNAL( tileLevelChanged( int )));
     connect( d->m_texmapper, SIGNAL( tileUpdatesAvailable() ), SLOT( mapChanged() ) );
 }
 

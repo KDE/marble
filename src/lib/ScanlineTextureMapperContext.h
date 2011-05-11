@@ -6,58 +6,31 @@
 // the source code.
 //
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
+// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de
 //
 
-#ifndef MARBLE_ABSTRACTSCANLINETEXTUREMAPPER_H
-#define MARBLE_ABSTRACTSCANLINETEXTUREMAPPER_H
+#ifndef MARBLE_SCANLINETEXTUREMAPPERCONTEXT_H
+#define MARBLE_SCANLINETEXTUREMAPPERCONTEXT_H
 
-#include <QtCore/QObject>
 #include <QtCore/QSize>
-#include <QtGui/QColor>
-
-#include <cmath>
-#include <math.h>
 
 #include "GeoSceneTexture.h"
 #include "MarbleMath.h"
 #include "MathHelper.h"
 
-class QRect;
-
 namespace Marble
 {
 
-class GeoPainter;
 class StackedTile;
 class StackedTileLoader;
-class TextureColorizer;
 class ViewParams;
 
-class AbstractScanlineTextureMapper : public QObject
+
+class ScanlineTextureMapperContext
 {
-    Q_OBJECT
-
 public:
-    explicit AbstractScanlineTextureMapper( StackedTileLoader * const tileLoader,
-                                            QObject * const parent = 0 );
-    ~AbstractScanlineTextureMapper();
+    ScanlineTextureMapperContext( StackedTileLoader * const tileLoader, int tileLevel );
 
-    virtual void mapTexture( GeoPainter *painter,
-                             ViewParams *viewParams,
-                             const QRect &dirtyRect,
-                             TextureColorizer *texColorizer ) = 0;
-
-    virtual void setRepaintNeeded() = 0;
-
-    bool interlaced() const;
-    void setInterlaced( const bool enabled );
-    int tileZoomLevel() const;
-
- Q_SIGNALS:
-    void tileLevelChanged( int newTileLevel );
-    void tileUpdatesAvailable();
-
- protected:
     void pixelValueF( const qreal lon, const qreal lat,
                       QRgb* const scanLine );
     void pixelValue( const qreal lon, const qreal lat,
@@ -70,20 +43,10 @@ public:
 
     static int interpolationStep( ViewParams * const viewParams );
 
-    void setRadius( int radius );
-
     int globalWidth() const;
     int globalHeight() const;
 
-    bool m_interlaced;
-
-    StackedTileLoader *m_tileLoader;
-
-    GeoSceneTexture::Projection const m_textureProjection;
-    /// size of the tiles of of the current texture layer
-    QSize const m_tileSize;
-
- private:
+private:
     // method for fast integer calculation
     void nextTile( int& posx, int& posy );
 
@@ -105,14 +68,17 @@ public:
                             const qreal itStepLon, const qreal itStepLat,
                             const int n ) const;
 
- private:
-    Q_DISABLE_COPY( AbstractScanlineTextureMapper )
+private:
+    StackedTileLoader *const m_tileLoader;
+    GeoSceneTexture::Projection const m_textureProjection;
+    /// size of the tiles of of the current texture layer
+    QSize const m_tileSize;
 
-    int         m_tileLevel;
-    int         m_globalWidth;
-    int         m_globalHeight;
-    qreal       m_normGlobalWidth;
-    qreal       m_normGlobalHeight;
+    int const        m_tileLevel;
+    int const        m_globalWidth;
+    int const        m_globalHeight;
+    qreal const      m_normGlobalWidth;
+    qreal const      m_normGlobalHeight;
 
     StackedTile *m_tile;
 
@@ -134,32 +100,22 @@ public:
     qreal  m_prevLon;
 };
 
-inline bool AbstractScanlineTextureMapper::interlaced() const
-{
-    return m_interlaced;
-}
-
-inline void AbstractScanlineTextureMapper::setInterlaced( const bool enabled )
-{
-    m_interlaced = enabled;
-}
-
-inline int AbstractScanlineTextureMapper::globalWidth() const
+inline int ScanlineTextureMapperContext::globalWidth() const
 {
     return m_globalWidth;
 }
 
-inline int AbstractScanlineTextureMapper::globalHeight() const
+inline int ScanlineTextureMapperContext::globalHeight() const
 {
     return m_globalHeight;
 }
 
-inline qreal AbstractScanlineTextureMapper::rad2PixelX( const qreal lon ) const
+inline qreal ScanlineTextureMapperContext::rad2PixelX( const qreal lon ) const
 {
     return lon * m_normGlobalWidth;
 }
 
-inline qreal AbstractScanlineTextureMapper::rad2PixelY( const qreal lat ) const
+inline qreal ScanlineTextureMapperContext::rad2PixelY( const qreal lat ) const
 {
     switch ( m_textureProjection ) {
     case GeoSceneTexture::Equirectangular:
@@ -186,11 +142,6 @@ inline qreal AbstractScanlineTextureMapper::rad2PixelY( const qreal lat ) const
 
     // Dummy value to avoid a warning.
     return 0.0;
-}
-
-inline int AbstractScanlineTextureMapper::tileZoomLevel() const
-{
-    return m_tileLevel;
 }
 
 }

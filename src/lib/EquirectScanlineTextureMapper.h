@@ -7,18 +7,19 @@
 //
 // Copyright 2007      Carlos Licea     <carlos _licea@hotmail.com>
 // Copyright 2008      Inge Wallin      <inge@lysator.liu.se>
+// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_EQUIRECTSCANLINETEXTUREMAPPER_H
 #define MARBLE_EQUIRECTSCANLINETEXTUREMAPPER_H
 
 
-#include "AbstractScanlineTextureMapper.h"
+#include "TextureMapperInterface.h"
 
 namespace Marble
 {
 
-class EquirectScanlineTextureMapper : public AbstractScanlineTextureMapper
+class EquirectScanlineTextureMapper : public TextureMapperInterface
 {
     Q_OBJECT
 
@@ -33,12 +34,11 @@ class EquirectScanlineTextureMapper : public AbstractScanlineTextureMapper
     virtual void setRepaintNeeded();
 
  private:
-    void mapTexture( ViewParams *viewParams,
-                     TextureColorizer *texColorizer );
+    void mapTexture( ViewParams *viewParams );
 
  private:
+    StackedTileLoader *const m_tileLoader;
     bool   m_repaintNeeded;
-    float  m_oldCenterLon;
     int    m_oldYPaintedTop;
 };
 

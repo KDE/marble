@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Torsten Rahn     <tackat@kde.org>
+// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
@@ -13,17 +14,14 @@
 
 #include <cmath>
 
-#include <QtGui/QImage>
-
 #include "global.h"
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
-#include "MarbleDirs.h"
 #include "Quaternion.h"
+#include "ScanlineTextureMapperContext.h"
 #include "StackedTileLoader.h"
 #include "TextureColorizer.h"
 #include "ViewParams.h"
-#include "ViewportParams.h"
 #include "MathHelper.h"
 
 
@@ -31,11 +29,10 @@ using namespace Marble;
 
 SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( StackedTileLoader *tileLoader,
                                                                 QObject *parent )
-    : AbstractScanlineTextureMapper( tileLoader, parent )
+    : TextureMapperInterface( parent )
+    , m_tileLoader( tileLoader )
     , m_repaintNeeded( true )
 {
-    m_interlaced = false;
-
     connect( m_tileLoader, SIGNAL( tileUpdateAvailable( const TileId & ) ),
              this, SIGNAL( tileUpdatesAvailable() ) );
     connect( m_tileLoader, SIGNAL( tileUpdatesAvailable() ),
@@ -48,7 +45,11 @@ void SphericalScanlineTextureMapper::mapTexture( GeoPainter *painter,
                                                  TextureColorizer *texColorizer )
 {
     if ( m_repaintNeeded ) {
-        mapTexture( viewParams, texColorizer );
+        mapTexture( viewParams );
+
+        if ( texColorizer ) {
+            texColorizer->colorize( viewParams );
+        }
 
         m_repaintNeeded = false;
     }
@@ -66,53 +67,55 @@ void SphericalScanlineTextureMapper::setRepaintNeeded()
     m_repaintNeeded = true;
 }
 
-void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams, TextureColorizer *texColorizer )
+void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 {
+    // Reset backend
+    m_tileLoader->resetTilehash();
+
     QSharedPointer<QImage> canvasImage = viewParams->canvasImagePtr();
+
+    // Initialize needed constants:
+
     const int imageHeight = canvasImage->height();
     const int imageWidth  = canvasImage->width();
     const qint64  radius      = viewParams->radius();
-
-    const bool highQuality  = ( viewParams->mapQuality() == HighQuality
-				|| viewParams->mapQuality() == PrintQuality );
-    const bool printQuality = ( viewParams->mapQuality() == PrintQuality );
-
-    // Scanline based algorithm to texture map a sphere
-
-    // Initialize needed variables:
-    qreal  lon = 0.0;
-    qreal  lat = 0.0;
-
     const qreal  inverseRadius = 1.0 / (qreal)(radius);
 
-    // Reset backend
-    m_tileLoader->resetTilehash();
-    setRadius( viewParams->radius() );
+    const bool interlaced   = ( viewParams->mapQuality() == LowQuality );
+    const bool highQuality  = ( viewParams->mapQuality() == HighQuality
+                             || viewParams->mapQuality() == PrintQuality );
+    const bool printQuality = ( viewParams->mapQuality() == PrintQuality );
 
     // Evaluate the degree of interpolation
-    const int n = interpolationStep( viewParams );
-    bool interpolate = false;
+    const int n = ScanlineTextureMapperContext::interpolationStep( viewParams );
 
     // Calculate north pole position to decrease pole distortion later on
     Quaternion northPole( 0.0, (qreal)( M_PI * 0.5 ) );
-
     northPole.rotateAroundAxis( viewParams->planetAxis().inverse() );
+    const int northPoleX = imageWidth / 2 + (int)( radius * northPole.v[Q_X] );
+    const int northPoleY = imageHeight / 2 - (int)( radius * northPole.v[Q_Y] );
 
     // Calculate axis matrix to represent the planet's rotation.
     matrix  planetAxisMatrix;
     viewParams->planetAxis().toMatrix( planetAxisMatrix );
 
-    bool interlaced = ( m_interlaced 
-            || viewParams->mapQuality() == LowQuality );
-
-    int skip = interlaced ? 1 : 0;
-
     // Calculate the actual y-range of the map on the screen 
+    const int skip = interlaced ? 1 : 0;
     const int yTop = ( ( imageHeight / 2 - radius < 0 )
                        ? 0 : imageHeight / 2 - radius );
     const int yBottom = ( (yTop == 0)
                           ? imageHeight - skip
                           : yTop + radius + radius - skip );
+
+
+    // initialize needed variables that are modified during texture mapping:
+
+    ScanlineTextureMapperContext context( m_tileLoader, tileZoomLevel() );
+    qreal  lon = 0.0;
+    qreal  lat = 0.0;
+
+
+    // Scanline based algorithm to texture map a sphere
 
     for ( int y = yTop; y < yBottom ; ++y ) {
 
@@ -121,7 +124,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams, Texture
         const qreal qr = 1.0 - qy * qy;
 
         // rx is the radius component in x direction
-        int rx = (int)sqrt( (qreal)( radius * radius 
+        const int rx = (int)sqrt( (qreal)( radius * radius
                                       - ( ( y - imageHeight / 2 )
                                           * ( y - imageHeight / 2 ) ) ) );
 
@@ -144,17 +147,13 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams, Texture
 
         QRgb * scanLine = (QRgb*)( canvasImage->scanLine( y ) ) + xLeft;
 
-        int  xIpLeft  = 1;
-        int  xIpRight = n * (int)( xRight / n - 1 ) + 1; 
-
-        if ( imageWidth / 2 - rx > 0 ) {
-            xIpLeft  = n * (int)( xLeft  / n + 1 );
-            xIpRight = n * (int)( xRight / n - 1 );
-        }
+        const int xIpLeft  = ( imageWidth / 2 - rx > 0 ) ? n * (int)( xLeft / n + 1 )
+                                                         : 1;
+        const int xIpRight = ( imageWidth / 2 - rx > 0 ) ? n * (int)( xRight / n - 1 )
+                                                         : n * (int)( xRight / n - 1 ) + 1; 
 
         // Decrease pole distortion due to linear approximation ( y-axis )
         bool crossingPoleArea = false;
-        int northPoleY = imageHeight / 2 - (int)( radius * northPole.v[Q_Y] );
         if ( northPole.v[Q_Z] > 0
              && northPoleY - ( n * 0.75 ) <= y
              && northPoleY + ( n * 0.75 ) >= y ) 
@@ -168,13 +167,12 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams, Texture
         for ( int x = xLeft; x < xRight; ++x ) {
             // Prepare for interpolation
 
-            int  leftInterval = xIpLeft + ncount * n;
+            const int leftInterval = xIpLeft + ncount * n;
 
+            bool interpolate = false;
             if ( x >= xIpLeft && x <= xIpRight ) {
 
                 // Decrease pole distortion due to linear approximation ( x-axis )
-                int northPoleX = imageWidth / 2 + (int)( radius * northPole.v[Q_X] );
-
 //                mDebug() << QString("NorthPole X: %1, LeftInterval: %2").arg( northPoleX ).arg( leftInterval );
                 if ( crossingPoleArea
                      && northPoleX >= leftInterval + n
@@ -195,7 +193,6 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams, Texture
             // Evaluate more coordinates for the 3D position vector of
             // the current pixel.
             const qreal qx = (qreal)( x - imageWidth / 2 ) * inverseRadius;
-
             const qreal qr2z = qr - qx * qx;
             const qreal qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
 
@@ -211,9 +208,9 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams, Texture
 
             if ( interpolate ) {
                 if (highQuality)
-                    pixelValueApproxF( lon, lat, scanLine, n );
+                    context.pixelValueApproxF( lon, lat, scanLine, n );
                 else
-                    pixelValueApprox( lon, lat, scanLine, n );
+                    context.pixelValueApprox( lon, lat, scanLine, n );
 
                 scanLine += ( n - 1 );
             }
@@ -227,9 +224,9 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams, Texture
 //            if ( !crossingPoleArea )
             if ( x < imageWidth ) {
                 if ( highQuality )
-                    pixelValueF( lon, lat, scanLine );
+                    context.pixelValueF( lon, lat, scanLine );
                 else
-                    pixelValue( lon, lat, scanLine );
+                    context.pixelValue( lon, lat, scanLine );
             }
 
             ++scanLine;
@@ -238,7 +235,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams, Texture
         // copy scanline to improve performance
         if ( interlaced && y + 1 < yBottom ) { 
 
-            int pixelByteSize = canvasImage->bytesPerLine() / imageWidth;
+            const int pixelByteSize = canvasImage->bytesPerLine() / imageWidth;
 
             memcpy( canvasImage->scanLine( y + 1 ) + xLeft * pixelByteSize, 
                     canvasImage->scanLine( y ) + xLeft * pixelByteSize, 
@@ -248,28 +245,4 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams, Texture
     }
 
     m_tileLoader->cleanupTilehash();
-
-    if ( texColorizer ) {
-        texColorizer->colorize( viewParams );
-    }
-}
-
-
-bool SphericalScanlineTextureMapper::needsFilter( const QRgb& rgb, int& oldR, int& oldB, int &oldG  )
-{
-    int red = qRed( rgb );
-    int green = qGreen( rgb );
-    int blue = qBlue( rgb );
-
-    bool differs = false;
-
-    if ( abs( red - oldR ) > 0 || abs( blue - oldB ) > 0 || abs( green - oldG ) > 0 ) {
-        differs = true;
-    }
-
-    oldR = red;
-    oldG = green;
-    oldB = blue;
-
-    return differs;
 }

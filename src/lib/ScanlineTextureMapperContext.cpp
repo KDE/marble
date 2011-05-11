@@ -6,99 +6,43 @@
 // the source code.
 //
 // Copyright 2007      Carlos Licea     <carlos _licea@hotmail.com>
+// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de
 //
 
-#include "AbstractScanlineTextureMapper.h"
+#include "ScanlineTextureMapperContext.h"
 
 #include <QtGui/QImage>
 
 #include "MarbleDebug.h"
 #include "StackedTile.h"
-#include "TileId.h"
 #include "StackedTileLoader.h"
-#include "TileLoaderHelper.h"
+#include "TileId.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
 using namespace Marble;
 
-AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( StackedTileLoader * const tileLoader,
-                                                              QObject * const parent )
-    : QObject( parent ),
-      m_interlaced( false ),
-      m_tileLoader( tileLoader ),
+ScanlineTextureMapperContext::ScanlineTextureMapperContext( StackedTileLoader * const tileLoader, int tileLevel )
+    : m_tileLoader( tileLoader ),
       m_textureProjection( tileLoader->tileProjection() ),  // cache texture projection
       m_tileSize( tileLoader->tileSize() ),  // cache tile size
-      m_tileLevel( 0 ),
-      m_globalWidth( 0 ),
-      m_globalHeight( 0 ),
-      m_normGlobalWidth( 0.0 ),
-      m_normGlobalHeight( 0.0 ),
+      m_tileLevel( tileLevel ),
+      m_globalWidth( m_tileSize.width() * m_tileLoader->tileColumnCount( m_tileLevel ) ),
+      m_globalHeight( m_tileSize.height() * m_tileLoader->tileRowCount( m_tileLevel ) ),
+      m_normGlobalWidth( m_globalWidth / ( 2 * M_PI ) ),
+      m_normGlobalHeight( m_globalHeight /  M_PI ),
       m_tile( 0 ),
-      m_tilePosX( 0 ),
-      m_tilePosY( 0 ),
-      m_toTileCoordinatesLon( 0.0 ),
-      m_toTileCoordinatesLat( 0.0 ),
+      m_tilePosX( 65535 ),
+      m_tilePosY( 65535 ),
+      m_toTileCoordinatesLon( 0.5 * m_globalWidth  - m_tilePosX ),
+      m_toTileCoordinatesLat( 0.5 * m_globalHeight - m_tilePosY ),
       m_prevLat( 0.0 ),
       m_prevLon( 0.0 )
 {
 }
 
-
-AbstractScanlineTextureMapper::~AbstractScanlineTextureMapper()
-{
-}
-
-
-void AbstractScanlineTextureMapper::setRadius( int radius )
-{
-    // As our tile resolution doubles with each level we calculate
-    // the tile level from tilesize and the globe radius via log(2)
-
-    qreal  linearLevel = ( 4.0 * (qreal)( radius )
-                               / (qreal)( m_tileSize.width() * m_tileLoader->tileColumnCount( 0 ) ) );
-    int     tileLevel   = 0;
-
-    if ( linearLevel < 1.0 )
-        linearLevel = 1.0; // Dirty fix for invalid entry linearLevel
-
-    qreal tileLevelF = log( linearLevel ) / log( 2.0 );
-    tileLevel = (int)( tileLevelF );
-
-//    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
-
-    if ( tileLevel > m_tileLoader->maximumTileLevel() )
-        tileLevel = m_tileLoader->maximumTileLevel();
-
-    const bool changedTileLevel = tileLevel != m_tileLevel;
-
-    //    mDebug() << "Texture Level was set to: " << tileLevel;
-    m_tileLevel = tileLevel;
-
-    m_globalWidth = m_tileSize.width() * m_tileLoader->tileColumnCount( m_tileLevel );
-    m_normGlobalWidth = (qreal)( m_globalWidth / ( 2 * M_PI ) );
-
-    m_globalHeight = m_tileSize.height() * m_tileLoader->tileRowCount( m_tileLevel );
-    m_normGlobalHeight = (qreal)( m_globalHeight /  M_PI );
-
-    m_tilePosX = 65535;
-    m_tilePosY = 65535;
-
-    // These variables move the origin of global texture coordinates from 
-    // the center to the upper left corner and subtract the tile position 
-    // in that coordinate system. In total this equals a coordinate 
-    // transformation to tile coordinates.
-    m_toTileCoordinatesLon = (qreal)(0.5 * m_globalWidth - m_tilePosX);
-    m_toTileCoordinatesLat = (qreal)(0.5 * m_globalHeight - m_tilePosY);
-
-    if ( changedTileLevel ) {
-        emit tileLevelChanged( m_tileLevel );
-    }
-}
-
-
-void AbstractScanlineTextureMapper::pixelValueF( const qreal lon, const qreal lat,
-                                                 QRgb* const scanLine )
+void ScanlineTextureMapperContext::pixelValueF( const qreal lon, const qreal lat,
+                                                QRgb* const scanLine )
 {
     // The same method using integers performs about 33% faster.
     // However we need the qreal version to create the high quality mode.
@@ -132,8 +76,8 @@ void AbstractScanlineTextureMapper::pixelValueF( const qreal lon, const qreal la
     m_prevLat = lat; // preparing for interpolation
 }
 
-void AbstractScanlineTextureMapper::pixelValue( const qreal lon, const qreal lat,
-                                                QRgb* const scanLine )
+void ScanlineTextureMapperContext::pixelValue( const qreal lon, const qreal lat,
+                                               QRgb* const scanLine )
 {
     // The same method using integers performs about 33% faster.
     // However we need the qreal version to create the high quality mode.
@@ -178,8 +122,8 @@ void AbstractScanlineTextureMapper::pixelValue( const qreal lon, const qreal lat
 // This method will do by far most of the calculations for the 
 // texturemapping, so we move towards integer math to improve speed.
 
-void AbstractScanlineTextureMapper::pixelValueApproxF( const qreal lon, const qreal lat,
-                                                       QRgb *scanLine, const int n )
+void ScanlineTextureMapperContext::pixelValueApproxF( const qreal lon, const qreal lat,
+                                                      QRgb *scanLine, const int n )
 {
     // stepLon/Lat: Distance between two subsequent approximated positions
 
@@ -304,9 +248,9 @@ void AbstractScanlineTextureMapper::pixelValueApproxF( const qreal lon, const qr
 }
 
 
-bool AbstractScanlineTextureMapper::isOutOfTileRangeF( const qreal itLon, const qreal itLat,
-                                                       const qreal itStepLon, const qreal itStepLat,
-                                                       const int n ) const
+bool ScanlineTextureMapperContext::isOutOfTileRangeF( const qreal itLon, const qreal itLat,
+                                                      const qreal itStepLon, const qreal itStepLat,
+                                                      const int n ) const
 {
     const qreal minIPosX = itLon + itStepLon;
     const qreal minIPosY = itLat + itStepLat;
@@ -319,8 +263,8 @@ bool AbstractScanlineTextureMapper::isOutOfTileRangeF( const qreal itLon, const 
 }
 
 
-void AbstractScanlineTextureMapper::pixelValueApprox( const qreal lon, const qreal lat,
-                                                      QRgb *scanLine, const int n )
+void ScanlineTextureMapperContext::pixelValueApprox( const qreal lon, const qreal lat,
+                                                     QRgb *scanLine, const int n )
 {
     // stepLon/Lat: Distance between two subsequent approximated positions
 
@@ -427,9 +371,9 @@ void AbstractScanlineTextureMapper::pixelValueApprox( const qreal lon, const qre
 }
 
 
-bool AbstractScanlineTextureMapper::isOutOfTileRange( const int itLon, const int itLat,
-                                                      const int itStepLon, const int itStepLat,
-                                                      const int n ) const
+bool ScanlineTextureMapperContext::isOutOfTileRange( const int itLon, const int itLat,
+                                                     const int itStepLon, const int itStepLat,
+                                                     const int n ) const
 {
     const int minIPosX = ( itLon + itStepLon ) >> 7;
     const int minIPosY = ( itLat + itStepLat ) >> 7;
@@ -442,7 +386,7 @@ bool AbstractScanlineTextureMapper::isOutOfTileRange( const int itLon, const int
 }
 
 
-int AbstractScanlineTextureMapper::interpolationStep( ViewParams * const viewParams )
+int ScanlineTextureMapperContext::interpolationStep( ViewParams * const viewParams )
 {
     if ( viewParams->mapQuality() == PrintQuality ) {
         return 1;    // Don't interpolate for print quality.
@@ -470,7 +414,7 @@ int AbstractScanlineTextureMapper::interpolationStep( ViewParams * const viewPar
 }
 
 
-void AbstractScanlineTextureMapper::nextTile( int &posX, int &posY )
+void ScanlineTextureMapperContext::nextTile( int &posX, int &posY )
 {
     // Move from tile coordinates to global texture coordinates 
     // ( with origin in upper left corner, measured in pixel) 
@@ -510,7 +454,7 @@ void AbstractScanlineTextureMapper::nextTile( int &posX, int &posY )
     posY = lat - m_tilePosY;
 }
 
-void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
+void ScanlineTextureMapperContext::nextTile( qreal &posX, qreal &posY )
 {
     // Move from tile coordinates to global texture coordinates 
     // ( with origin in upper left corner, measured in pixel) 
@@ -549,5 +493,3 @@ void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
     m_toTileCoordinatesLat = (qreal)(0.5 * m_globalHeight - m_tilePosY);
     posY = lat - m_tilePosY;
 }
-
-#include "AbstractScanlineTextureMapper.moc"

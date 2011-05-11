@@ -5,14 +5,14 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2010,2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_TILESCALINGTEXTUREMAPPER_H
 #define MARBLE_TILESCALINGTEXTUREMAPPER_H
 
 
-#include "AbstractScanlineTextureMapper.h"
+#include "TextureMapperInterface.h"
 #include "TileId.h"
 
 #include <QtCore/QCache>
@@ -22,7 +22,7 @@ class QPixmap;
 namespace Marble
 {
 
-class TileScalingTextureMapper : public AbstractScanlineTextureMapper
+class TileScalingTextureMapper : public TextureMapperInterface
 {
     Q_OBJECT
 
@@ -48,6 +48,7 @@ class TileScalingTextureMapper : public AbstractScanlineTextureMapper
                      TextureColorizer *texColorizer );
 
  private:
+    StackedTileLoader *const m_tileLoader;
     QCache<TileId, QPixmap> *const m_cache;
     bool   m_repaintNeeded;
     int    m_oldRadius;

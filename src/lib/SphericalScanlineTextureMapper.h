@@ -6,15 +6,14 @@
 // the source code.
 //
 // Copyright 2007      Torsten Rahn     <tackat@kde.org>
+// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_SPHERICALSCANLINETEXTUREMAPPER_H
 #define MARBLE_SPHERICALSCANLINETEXTUREMAPPER_H
 
 
-#include <QtGui/QColor>
-
-#include "AbstractScanlineTextureMapper.h"
+#include "TextureMapperInterface.h"
 
 
 namespace Marble
@@ -32,7 +31,7 @@ class StackedTileLoader;
  * @author Torsten Rahn <rahn@kde.org>
  */
 
-class SphericalScanlineTextureMapper : public AbstractScanlineTextureMapper
+class SphericalScanlineTextureMapper : public TextureMapperInterface
 {
  public:
     explicit SphericalScanlineTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
@@ -45,12 +44,10 @@ class SphericalScanlineTextureMapper : public AbstractScanlineTextureMapper
     virtual void setRepaintNeeded();
 
  private:
-    void mapTexture( ViewParams *viewParams,
-                     TextureColorizer *texColorizer );
-
-    inline bool needsFilter( const QRgb& rgb, int& oldR, int& oldB, int &oldG  );
+    void mapTexture( ViewParams *viewParams );
 
  private:
+    StackedTileLoader *const m_tileLoader;
     bool m_repaintNeeded;
 };
 

@@ -13,12 +13,12 @@
 #define MARBLE_MERCATORSCANLINETEXTUREMAPPER_H
 
 
-#include "AbstractScanlineTextureMapper.h"
+#include "TextureMapperInterface.h"
 
 namespace Marble
 {
 
-class MercatorScanlineTextureMapper : public AbstractScanlineTextureMapper
+class MercatorScanlineTextureMapper : public TextureMapperInterface
 {
     Q_OBJECT
 
@@ -33,12 +33,11 @@ class MercatorScanlineTextureMapper : public AbstractScanlineTextureMapper
     virtual void setRepaintNeeded();
 
  private:
-    void mapTexture( ViewParams *viewParams,
-                     TextureColorizer *texColorizer );
+    void mapTexture( ViewParams *viewParams );
 
  private:
+    StackedTileLoader *const m_tileLoader;
     bool   m_repaintNeeded;
-    float  m_oldCenterLon;
     int    m_oldYPaintedTop;
 };
 

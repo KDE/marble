@@ -34,7 +34,6 @@
 // Marble
 #include "AbstractFloatItem.h"
 #include "AbstractProjection.h"
-#include "AbstractScanlineTextureMapper.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFeature.h"
 #include "GeoDataLatLonAltBox.h"

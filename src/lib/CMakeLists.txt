@@ -125,7 +125,8 @@ set(marblewidget_SRCS
     Planet.cpp
     Quaternion.cpp
     TextureColorizer.cpp
-    AbstractScanlineTextureMapper.cpp
+    TextureMapperInterface.cpp
+    ScanlineTextureMapperContext.cpp
     SphericalScanlineTextureMapper.cpp
     EquirectScanlineTextureMapper.cpp
     MercatorScanlineTextureMapper.cpp
