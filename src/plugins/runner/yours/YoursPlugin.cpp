@@ -21,7 +21,8 @@ YoursPlugin::YoursPlugin( QObject *parent ) : RunnerPlugin( parent )
     setCanWorkOffline( false );
     setName( tr( "Yours" ) );
     setNameId( "yours" );
-    setDescription( tr( "Retrieves routes from a yours server" ) );
+    setDescription( tr( "Worldwide routing using a YOURS server" ) );
+    setStatusMessage( tr ( "This service requires an Internet connection." ) );
     setGuiString( tr( "Yours Routing" ) );
 }
 

@@ -23,7 +23,8 @@ OpenRouteServicePlugin::OpenRouteServicePlugin( QObject *parent ) : RunnerPlugin
     setCanWorkOffline( false );
     setName( tr( "OpenRouteService" ) );
     setNameId( "openrouteservice" );
-    setDescription( tr( "Retrieves routes from openrouteservice.org" ) );
+    setDescription( tr( "Routing in Europe using openrouteservice.org" ) );
+    setStatusMessage( tr ( "This service requires an Internet connection." ) );
     setGuiString( tr( "OpenRouteService Routing" ) );
 }
 

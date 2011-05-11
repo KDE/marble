@@ -70,6 +70,8 @@ public:
 
     bool isDaemonRunning() const;
 
+    bool isDaemonInstalled() const;
+
     void loadMaps();
 
     void initialize();
@@ -99,6 +101,21 @@ bool MonavPluginPrivate::isDaemonRunning() const
     QLocalSocket socket;
     socket.connectToServer( "MoNavD" );
     return socket.waitForConnected();
+}
+
+bool MonavPluginPrivate::isDaemonInstalled() const
+{
+    QString path = QProcessEnvironment::systemEnvironment().value( "PATH", "/usr/local/bin:/usr/bin:/bin" );
+    foreach( const QString &application, QStringList() << "monav-daemon" << "MoNavD" ) {
+        foreach( const QString &dir, path.split( ":" ) ) {
+            QFileInfo executable( QDir( dir ), application );
+            if ( executable.exists() ) {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 bool MonavPluginPrivate::startDaemon()
@@ -204,9 +221,18 @@ MonavPlugin::MonavPlugin( QObject *parent ) : RunnerPlugin( parent ), d( new Mon
     setCanWorkOffline( true );
     setName( tr( "Monav" ) );
     setNameId( "monav" );
-    setDescription( tr( "Retrieves routes from monav" ) );
+    setDescription( tr( "Offline routing using the monav daemon" ) );
     setGuiString( tr( "Monav Routing" ) );
     setCapabilities( Routing /*| ReverseGeocoding */ );
+
+    if ( d->isDaemonInstalled() ) {
+        d->initialize();
+        if ( d->m_maps.isEmpty() ) {
+            setStatusMessage( tr ( "No offline maps installed yet." ) );
+        }
+    } else {
+        setStatusMessage( tr ( "The monav routing daemon does not seem to be installed on your system." ) );
+    }
 }
 
 MonavPlugin::~MonavPlugin()
