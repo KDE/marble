@@ -77,6 +77,9 @@ public:
     /** @brief Returns the status of the current position provider plugin, if any */
     PositionProviderStatus status() const;
 
+    /** @brief Returns true if there is no position in the track */
+    bool isTrackEmpty() const;
+
 public Q_SLOTS:
     /**
       * Toggles the visibility of the Position Tracking document
