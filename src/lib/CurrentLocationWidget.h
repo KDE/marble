@@ -74,6 +74,7 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
      Q_PRIVATE_SLOT( d, void updateActivePositionProvider( PositionProviderPlugin* ) )
 
      Q_PRIVATE_SLOT( d, void saveTrack() )
+     Q_PRIVATE_SLOT( d, void openTrack() )
      Q_PRIVATE_SLOT( d, void clearTrack() )
 };
 

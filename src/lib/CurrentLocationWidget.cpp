@@ -56,6 +56,7 @@ class CurrentLocationWidgetPrivate
     void updateAutoZoomCheckBox( bool autoZoom );
     void updateActivePositionProvider( PositionProviderPlugin* );
     void saveTrack();
+    void openTrack();
     void clearTrack();
 };
 
@@ -76,6 +77,7 @@ CurrentLocationWidget::CurrentLocationWidget( QWidget *parent, Qt::WindowFlags f
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     d->m_currentLocationUi.positionTrackingComboBox->setVisible( !smallScreen );
     d->m_currentLocationUi.locationLabel->setVisible( !smallScreen );
+    d->m_currentLocationUi.openTrackPushButton->setVisible( smallScreen );
 }
 
 CurrentLocationWidget::~CurrentLocationWidget()
@@ -155,6 +157,8 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
     }
     connect ( d->m_currentLocationUi.saveTrackPushButton, SIGNAL( clicked(bool)),
               this, SLOT(saveTrack()));
+    connect ( d->m_currentLocationUi.openTrackPushButton, SIGNAL( clicked(bool)),
+              this, SLOT(openTrack()));
     connect (d->m_currentLocationUi.clearTrackPushButton, SIGNAL( clicked(bool)),
              this, SLOT(clearTrack()));
 }
@@ -317,6 +321,19 @@ void CurrentLocationWidgetPrivate::saveTrack()
         QFileInfo file( fileName );
         s_dirName = file.absolutePath();
         m_widget->model()->positionTracking()->saveTrack( fileName );
+    }
+}
+
+void CurrentLocationWidgetPrivate::openTrack()
+{
+    static QString s_dirOpen = QDir::homePath();
+    QString suggested = s_dirOpen;
+    QString fileName = QFileDialog::getOpenFileName( m_widget, QObject::tr("Open Track"), // krazy:exclude=qclasses
+                                                    suggested, QObject::tr("KML File (*.kml)"));
+    if ( !fileName.isEmpty() ) {
+        QFileInfo file( fileName );
+        s_dirOpen = file.absolutePath();
+        m_widget->model()->addGeoDataFile( fileName );
     }
 }
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>137</width>
-    <height>237</height>
+    <height>288</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,6 +46,13 @@
      </property>
      <property name="text">
       <string>Show Track</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="openTrackPushButton">
+     <property name="text">
+      <string>Open Track</string>
      </property>
     </widget>
    </item>
