@@ -85,6 +85,8 @@ void RoutingProfileSettingsDialog::updateConfigWidget( )
     if ( configWidget ) {
         bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
         m_ui->settingsStack->setCurrentWidget( smallScreen ? m_ui->configurePage : configWidget );
+        m_ui->descriptionLabel->setText( plugin->description() );
+        m_ui->statusLabel->setText( plugin->statusMessage() );
         QStandardItem *item = m_servicesModel->invisibleRootItem()->child( current.row() );
         m_ui->settingsStack->setEnabled( item->checkState() == Qt::Checked );
     } else {
