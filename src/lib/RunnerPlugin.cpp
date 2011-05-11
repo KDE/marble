@@ -22,6 +22,8 @@ public:
 
     QIcon m_icon;
 
+    QString m_statusMessage;
+
     RunnerPluginPrivate();
 };
 
@@ -162,6 +164,16 @@ QHash< QString, QVariant > RunnerPlugin::templateSettings( RoutingProfilesModel:
 bool RunnerPlugin::canWork( Capability capability ) const
 {
     return supports( capability );
+}
+
+QString RunnerPlugin::statusMessage() const
+{
+    return d->m_statusMessage;
+}
+
+void RunnerPlugin::setStatusMessage( const QString &message )
+{
+    d->m_statusMessage = message;
 }
 
 }

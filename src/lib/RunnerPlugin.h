@@ -88,6 +88,8 @@ public:
 
     virtual bool isInitialized() const;
 
+    /** A status message showing whether the plugin will be able to deliver results */
+    QString statusMessage() const;
 
     class ConfigWidget : public QWidget
     {
@@ -125,6 +127,8 @@ protected:
     void setDescription( const QString &description );
 
     void setIcon( const QIcon &icon );
+
+    void setStatusMessage( const QString &message );
 
 private:
     RunnerPluginPrivate * const d;
