@@ -100,9 +100,10 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
         QString html = "<p>No Position Tracking Plugin installed.</p>";
         d->m_currentLocationUi.locationLabel->setText( html );
         d->m_currentLocationUi.locationLabel->setEnabled ( true );
-        d->m_currentLocationUi.showTrackCheckBox->setEnabled( false );
-        d->m_currentLocationUi.saveTrackPushButton->setEnabled( false );
-        d->m_currentLocationUi.clearTrackPushButton->setEnabled( false );
+        bool const hasTrack = !d->m_widget->model()->positionTracking()->isTrackEmpty();
+        d->m_currentLocationUi.showTrackCheckBox->setEnabled( hasTrack );
+        d->m_currentLocationUi.saveTrackPushButton->setEnabled( hasTrack );
+        d->m_currentLocationUi.clearTrackPushButton->setEnabled( hasTrack );
     }
 
     //disconnect CurrentLocation Signals

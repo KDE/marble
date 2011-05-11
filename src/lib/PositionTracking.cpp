@@ -223,7 +223,21 @@ void PositionTracking::clearTrack()
     d->m_currentLineString = new GeoDataLineString;
     multiGeometry->clear();
     multiGeometry->append(d->m_currentLineString);
+}
 
+bool PositionTracking::isTrackEmpty() const
+{
+    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(d->m_document->child(d->m_document->size()-1));
+    GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
+    if ( multiGeometry->size() < 1 ) {
+        return true;
+    }
+
+    if ( multiGeometry->size() == 1 ) {
+        return d->m_currentLineString->isEmpty();
+    }
+
+    return false;
 }
 
 GeoDataAccuracy PositionTracking::accuracy() const
