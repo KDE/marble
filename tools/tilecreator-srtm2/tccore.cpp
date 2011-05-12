@@ -65,7 +65,6 @@ public:
         int startLngPxResized = c_defaultTileSize * m;
         int startLatPxResized = c_defaultTileSize * n;
 
-
         QImage image( 2400, 2400, QImage::Format_ARGB32  );
         {
             QPainter painter( &image );
@@ -139,7 +138,7 @@ private:
         QChar EW( lng >= 0 ? 'E' : 'W' );
         QChar NS( lat >= 0 ? 'N' : 'S' );
 
-        QString fileName = m_sourceDir; //"/home/niko/kdesvn/srtm2postgis/data/";
+        QString fileName = m_sourceDir;
         fileName += "Eurasia/"; //TODO there is more than that
         if ( lat < 0 ) lat *= -1;
         fileName += QString( "%1%2%3%4.hgt" ).arg( NS ).arg( lat<0 ? lat*-1 : lat, 2, 10, QLatin1Char('0') )
@@ -149,20 +148,16 @@ private:
         if ( !file.exists() && QFile::exists( fileName + ".zip" ) ) {
             qDebug() << "zip found, unzipping";
             QProcess p;
-            p.setWorkingDirectory( QFileInfo(fileName).dir().absolutePath() );
-            p.setWorkingDirectory( "/home/niko/kdesvn/srtm2postgis/data/Eurasia" );
             p.execute("unzip", QStringList() << fileName + ".zip" );
-            qDebug() << QFile( QDir::currentPath() + "/" + QFileInfo( fileName ).fileName()).fileName();
-            Q_ASSERT( QFile( QDir::currentPath() + "/" + QFileInfo( fileName ).fileName()).rename(fileName) );
-            p.execute("pwd");
-            
             p.waitForFinished();
+            QFile( QDir::currentPath() + "/" + QFileInfo( fileName ).fileName()).rename(fileName);
         }
+
         if (!file.exists() ) {
             qDebug() << "hgt file does not exist, returing null image";
             return QImage();
         }
-    //     qDebug() << fileName;
+
         file.open( QIODevice::ReadOnly );
         int iLat = 0;
         int iLng = 0;
