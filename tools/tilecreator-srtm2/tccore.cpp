@@ -142,8 +142,8 @@ private:
         QString fileName = m_sourceDir; //"/home/niko/kdesvn/srtm2postgis/data/";
         fileName += "Eurasia/"; //TODO there is more than that
         if ( lat < 0 ) lat *= -1;
-        fileName += QString( "%1%2%3%4.hgt" ).arg( NS ).arg( std::abs( lat ), 2, 10, QLatin1Char('0') )
-                                    .arg( EW ).arg( std::abs( lng ), 3, 10, QLatin1Char('0' ) );
+        fileName += QString( "%1%2%3%4.hgt" ).arg( NS ).arg( lat<0 ? lat*-1 : lat, 2, 10, QLatin1Char('0') )
+                                    .arg( EW ).arg( lng<0 ? lng*-1 : lng, 3, 10, QLatin1Char('0' ) );
         qDebug() << fileName;
         QFile file( fileName );
         if ( !file.exists() && QFile::exists( fileName + ".zip" ) ) {
