@@ -283,35 +283,48 @@ void TileCreator::run()
 
         for ( int m = 0; m < mmax; ++m ) {
 
+            mDebug() << "tile" << m << "x" << n;
+
             if ( d->m_cancelled ) 
                 return;
-
-            QImage tile = d->m_source->tile( n, m, maxTileLevel );
-
-            if ( tile.isNull() ) {
-                mDebug() << "Read-Error! Null QImage!";
-                return;
-            }
 
             tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
                                        .arg( maxTileLevel )
                                        .arg( n, tileDigits, 10, QChar('0') )
                                        .arg( m, tileDigits, 10, QChar('0') ) );
 
-            if ( d->m_dem == "true" ) {
-                tile = tile.convertToFormat(QImage::Format_Indexed8, 
-                                            grayScalePalette, 
-                                            Qt::ThresholdDither);
+            if ( QFile::exists( tileName ) ) {
+
+                mDebug() << tileName << "exists already";
+
+            } else {
+
+                QImage tile = d->m_source->tile( n, m, maxTileLevel );
+
+                if ( tile.isNull() ) {
+                    mDebug() << "Read-Error! Null QImage!";
+                    return;
+                }
+
+                if ( d->m_dem == "true" ) {
+                    tile = tile.convertToFormat(QImage::Format_Indexed8,
+                                                grayScalePalette,
+                                                Qt::ThresholdDither);
+                }
+
+                mDebug() << tileName;
+                bool  ok = tile.save( tileName, "jpg", 100 );
+                if ( !ok )
+                    mDebug() << "Error while writing Tile: " << tileName;
+
             }
 
-            bool  ok = tile.save( tileName, "jpg", 100 );
-            if ( !ok )
-                mDebug() << "Error while writing Tile: " << tileName;
 
             percentCompleted =  (int) ( 90 * (qreal)(createdTilesCount) 
                                         / (qreal)(totalTileCount) );	
             createdTilesCount++;
-						
+
+            mDebug() << "percentCompleted" << percentCompleted;
             emit progress( percentCompleted );
         }
     }
