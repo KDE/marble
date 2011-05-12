@@ -8,11 +8,11 @@
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 // Copyright 2008, 2009, 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
-// Copyright 2010      Bernhard Beschow  <bbeschow@cs.tu-berlin.de>
-//
+// Copyright 2010,2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>//
 
 #include "TextureLayer.h"
 
+#include <QtCore/qmath.h>
 #include <QtCore/QCache>
 #include <QtCore/QTimer>
 
@@ -294,6 +294,28 @@ int TextureLayer::tileRowCount( int level ) const
 qint64 TextureLayer::volatileCacheLimit() const
 {
     return d->m_tileLoader.volatileCacheLimit();
+}
+
+int TextureLayer::preferredRadiusCeil( int radius ) const
+{
+    const int tileWidth = d->m_tileLoader.tileSize().width();
+    const int levelZeroColumns = d->m_tileLoader.tileColumnCount( 0 );
+    const qreal linearLevel = 4.0 * (qreal)( radius ) / (qreal)( tileWidth * levelZeroColumns );
+    const qreal tileLevelF = log( linearLevel ) / log( 2.0 );
+    const int tileLevel = qCeil( tileLevelF );
+
+    return tileWidth * d->m_tileLoader.tileColumnCount( tileLevel ) / 4;
+}
+
+int TextureLayer::preferredRadiusFloor( int radius ) const
+{
+    const int tileWidth = d->m_tileLoader.tileSize().width();
+    const int levelZeroColumns = d->m_tileLoader.tileColumnCount( 0 );
+    const qreal linearLevel = 4.0 * (qreal)( radius ) / (qreal)( tileWidth * levelZeroColumns );
+    const qreal tileLevelF = log( linearLevel ) / log( 2.0 );
+    const int tileLevel = qFloor( tileLevelF );
+
+    return tileWidth * d->m_tileLoader.tileColumnCount( tileLevel ) / 4;
 }
 
 }

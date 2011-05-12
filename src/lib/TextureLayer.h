@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010      Bernhard Beschow  <bbeschow@cs.tu-berlin.de>
+// Copyright 2010,2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_MARBLETEXTURELAYER_H
@@ -55,6 +55,9 @@ class TextureLayer : public QObject
     int tileRowCount( int level ) const;
 
     qint64 volatileCacheLimit() const;
+
+    int preferredRadiusCeil( int radius ) const;
+    int preferredRadiusFloor( int radius ) const;
 
  public Q_SLOTS:
     void paintGlobe( GeoPainter *painter,

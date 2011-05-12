@@ -146,6 +146,9 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void setRadius( int radius );
 
+    int preferredRadiusCeil( int radius );
+    int preferredRadiusFloor( int radius );
+
     int tileZoomLevel() const;
 
     /**

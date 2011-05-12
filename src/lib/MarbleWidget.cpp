@@ -548,12 +548,30 @@ void MarbleWidget::zoomViewBy( int zoomStep, FlyToMode mode )
 
 void MarbleWidget::zoomIn( FlyToMode mode )
 {
-    zoomViewBy( d->m_zoomStep, mode );
+    if ( d->m_map->tileZoomLevel() < 0 ) {
+        zoomViewBy( d->m_zoomStep, mode );
+    } else {
+        const int radius = d->m_map->preferredRadiusCeil( d->m_map->radius() + 10 ) + 2;
+
+        GeoDataLookAt target = lookAt();
+        target.setRange( KM2METER * distanceFromRadius( radius ) );
+
+        flyTo( target, mode );
+    }
 }
 
 void MarbleWidget::zoomOut( FlyToMode mode )
 {
-    zoomViewBy( -d->m_zoomStep, mode );
+    if ( d->m_map->tileZoomLevel() < 0 ) {
+        zoomViewBy( -d->m_zoomStep, mode );
+    } else {
+        const int radius = d->m_map->preferredRadiusFloor( d->m_map->radius() - 10 ) + 2;
+
+        GeoDataLookAt target = lookAt();
+        target.setRange( KM2METER * distanceFromRadius( radius ) );
+
+        flyTo( target, mode );
+    }
 }
 
 void MarbleWidget::rotateBy( const Quaternion& incRot )
