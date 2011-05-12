@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
+// Copyright 2011 Niko Sams <niko.sams@gmail.com>
 //
 
 #include "tccore.h"
@@ -46,21 +46,8 @@ public:
         Q_ASSERT( nmax == 512 );
         int  mmax = TileLoaderHelper::levelToColumn( defaultLevelZeroColumns, maxTileLevel );
 
-        //int  stdImageHeight  = nmax * c_defaultTileSize;
-        //int  stdImageWidth  = mmax * c_defaultTileSize;
-//n(lat)  m(lng)
-//47      13
-
-// for ( int n = 0; n < nmax; ++n ) {
-//     for ( int m = 0; m < mmax; ++m ) {
-
-        qDebug() << "**************************";
-        qDebug() << "n" << n << "m" << m;
-
         qreal startLat = ( ( ( (qreal)n * 180 ) / nmax ) - 90 ) * -1;
         qreal startLng = ( ( (qreal)m * 360 ) / mmax ) - 180;
-        qDebug() << "lat(n)(47)" << startLat;
-        qDebug() << "lng(m)(13)" << startLng;
 
         int startLngPxResized = c_defaultTileSize * m;
         int startLatPxResized = c_defaultTileSize * n;
@@ -87,8 +74,6 @@ public:
             painter.drawImage( 0, 1200, readHgt( std::floor(startLng), std::floor(startLat)-1 ) );
             painter.drawImage( 1200, 1200, readHgt( std::floor(startLng)+1, std::floor(startLat)-1 ) );
         }
-        qDebug() << "got it";
-
 
         int imageSizeResized = 2400 * (512 * c_defaultTileSize) / (1200 * 180);
 
@@ -99,28 +84,28 @@ public:
                         Qt::SmoothTransformation );
 
 
-        //startL??Px: position in pixeln von dem was wir brauchen
+        //startL??Px: position in px of what we are looking for
         int startLngPx = startLng * 1200;
         startLngPx = ( 180 * 1200 ) + startLngPx;
-        qDebug() << "startLngPx(/1200)" << (qreal)startLngPx / 1200;
+        //qDebug() << "startLngPx(/1200)" << (qreal)startLngPx / 1200;
 
         int startLatPx = startLat * 1200;
         startLatPx = ( 90 * 1200 ) - startLatPx;
-        qDebug() << "startLatPx(/1200)" << (qreal)startLatPx / 1200;
+        //qDebug() << "startLatPx(/1200)" << (qreal)startLatPx / 1200;
 
 
-        //imageL??Px: position in pixeln von image
+        //imageL??Px: position in px of image
         int imageLngPx = std::floor(startLng);
         imageLngPx = 180 + imageLngPx;
-        qDebug() << "imageLngPx(/1200)" << imageLngPx << "*1200" << imageLngPx*1200;
+        //qDebug() << "imageLngPx(/1200)" << imageLngPx << "*1200" << imageLngPx*1200;
         imageLngPx *= 1200;
 
         int imageLatPx = std::floor(90 - startLat);
-        qDebug() << "imageLatPx(/1200)" << imageLatPx;
+        //qDebug() << "imageLatPx(/1200)" << imageLatPx;
         imageLatPx *= 1200;
 
-        qDebug() << "lng" << imageLngPx << startLngPx << "offset" << startLngPx - imageLngPx;
-        qDebug() << "lat" << imageLatPx << startLatPx << "offset" << startLatPx - imageLatPx;
+        //qDebug() << "lng" << imageLngPx << startLngPx << "offset" << startLngPx - imageLngPx;
+        //qDebug() << "lat" << imageLatPx << startLatPx << "offset" << startLatPx - imageLatPx;
         Q_ASSERT(1200*2 - (startLngPx - imageLngPx) >= 675);
         Q_ASSERT(1200*2 - (startLatPx - imageLatPx) >= 675);
         Q_ASSERT(startLngPx - imageLngPx >= 0);
@@ -128,8 +113,8 @@ public:
 
         int imageLngPxResized = imageLngPx * 1.6; //(512 * c_defaultTileSize) / (1200 * 180);
         int imageLatPxResized = imageLatPx * 1.6; //(512 * c_defaultTileSize) / (1200 * 180);
-        qDebug() << "lng(m)" << startLngPxResized << imageLngPxResized << "diff" << startLngPxResized - imageLngPxResized;
-        qDebug() << "lat(n)" << startLatPxResized << imageLngPxResized << "diff" << startLatPxResized - imageLatPxResized;
+        //qDebug() << "lng(m)" << startLngPxResized << imageLngPxResized << "diff" << startLngPxResized - imageLngPxResized;
+        //qDebug() << "lat(n)" << startLatPxResized << imageLngPxResized << "diff" << startLatPxResized - imageLatPxResized;
         Q_ASSERT(startLngPxResized - imageLngPxResized < imageSizeResized);
         Q_ASSERT(startLatPxResized - imageLatPxResized < imageSizeResized);
         Q_ASSERT(startLngPxResized - imageLngPxResized >= 0);
@@ -138,11 +123,7 @@ public:
         QImage croppedImage = image.copy(startLngPx - imageLngPx, startLatPx - imageLatPx, 675, 675);
         QImage ret = image.copy(startLngPxResized - imageLngPxResized, startLatPxResized - imageLatPxResized, c_defaultTileSize, c_defaultTileSize);
         qDebug() << image.size() << ret.size();
-//     }
-// }
-//         Q_ASSERT(false);
         return ret;
-//         return QImage();
     }
 
 private:
@@ -182,7 +163,7 @@ private:
         int iLat = 0;
         int iLng = 0;
 
-        //eigentlich ist es 1201 groß, aber das letze pixel ist überlappung glaub ich
+        //hgt file is 1201px large, but the last px is overlapping
         QImage image( 1200, 1200, QImage::Format_ARGB32 );
         while(true) {
             QByteArray data = file.read( 2 );
@@ -199,7 +180,7 @@ private:
             if ( iLat >= 1199 && iLng >= 1199 ) break;
 
             iLng++;
-            if ( iLng > 1200 ) { //hier nicht nur bis 1199 sondern eins mehr, wegen dem letzten überlappungspixel
+            if ( iLng > 1200 ) { //here not 1199 but one more, because of overlapping px at the end of the line
                 iLng = 0;
                 iLat++;
             }

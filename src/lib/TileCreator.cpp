@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
+// Copyright 2011 Niko Sams <niko.sams@gmail.com>
 //
 
 #include "TileCreator.h"
@@ -127,8 +128,6 @@ public:
             row = m_rowCache;
 
         } else {
-
-
 
             QRect   sourceRowRect( 0, (int)( (qreal)( n * imageHeight ) / (qreal)( nmax )),
                                 imageWidth,(int)( (qreal)( imageHeight ) / (qreal)( nmax ) ) );
@@ -283,7 +282,7 @@ void TileCreator::run()
 
         for ( int m = 0; m < mmax; ++m ) {
 
-            mDebug() << "tile" << m << "x" << n;
+            mDebug() << "** tile" << m << "x" << n;
 
             if ( d->m_cancelled ) 
                 return;
