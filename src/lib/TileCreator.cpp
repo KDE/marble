@@ -368,24 +368,28 @@ void TileCreator::run()
                                             .arg( 2*n, tileDigits, 10, QChar('0') )
                                             .arg( 2*m, tileDigits, 10, QChar('0') ) );
                     QImage  img_topleft( tileName );
+                    Q_ASSERT( img_topleft.size() == QSize( c_defaultTileSize, c_defaultTileSize ) );
 
                     tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
                                             .arg( tileLevel + 1 )
                                             .arg( 2*n, tileDigits, 10, QChar('0') )
                                             .arg( 2*m+1, tileDigits, 10, QChar('0') ) );
                     QImage  img_topright( tileName );
+                    Q_ASSERT( img_topright.size() == QSize( c_defaultTileSize, c_defaultTileSize ) );
 
                     tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
                                             .arg( tileLevel + 1 )
                                             .arg( 2*n+1, tileDigits, 10, QChar('0') )
                                             .arg( 2*m, tileDigits, 10, QChar('0') ) );
                     QImage  img_bottomleft( tileName );
+                    Q_ASSERT( img_bottomleft.size() == QSize( c_defaultTileSize, c_defaultTileSize ) );
 
                     tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
                                             .arg( tileLevel + 1 )
                                             .arg( 2*n+1, tileDigits, 10, QChar('0') )
                                             .arg( 2*m+1, tileDigits, 10, QChar('0') ) );
                     QImage  img_bottomright( tileName );
+                    Q_ASSERT( img_bottomright.size() == QSize( c_defaultTileSize, c_defaultTileSize ) );
 
                     QImage  tile = img_topleft;
 
