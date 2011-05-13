@@ -318,7 +318,6 @@ void TileCreator::run()
 
             }
 
-
             percentCompleted =  (int) ( 90 * (qreal)(createdTilesCount) 
                                         / (qreal)(totalTileCount) );	
             createdTilesCount++;
@@ -356,110 +355,116 @@ void TileCreator::run()
                 if ( d->m_cancelled )
                     return;
 
-                tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
-                                           .arg( tileLevel + 1 )
-                                           .arg( 2*n, tileDigits, 10, QChar('0') )
-                                           .arg( 2*m, tileDigits, 10, QChar('0') ) );
-                QImage  img_topleft( tileName );
-				
-                tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
-                                           .arg( tileLevel + 1 )
-                                           .arg( 2*n, tileDigits, 10, QChar('0') )
-                                           .arg( 2*m+1, tileDigits, 10, QChar('0') ) );
-                QImage  img_topright( tileName );
-
-                tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
-                                           .arg( tileLevel + 1 )
-                                           .arg( 2*n+1, tileDigits, 10, QChar('0') )
-                                           .arg( 2*m, tileDigits, 10, QChar('0') ) );
-                QImage  img_bottomleft( tileName );
-				
-                tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
-                                           .arg( tileLevel + 1 )
-                                           .arg( 2*n+1, tileDigits, 10, QChar('0') )
-                                           .arg( 2*m+1, tileDigits, 10, QChar('0') ) );
-                QImage  img_bottomright( tileName );
-
-                QImage  tile = img_topleft;
-
-                if ( tile.depth() == 8 ) { 
-
-                    tile.setColorTable( grayScalePalette );
-                    uchar* destLine;
-
-                    for ( uint y = 0; y < c_defaultTileSize / 2; ++y ) {
-                        destLine = tile.scanLine( y );
-                        const uchar* srcLine = img_topleft.scanLine( 2 * y );
-                        for ( uint x = 0; x < c_defaultTileSize / 2; ++x )
-                            destLine[x] = srcLine[ 2*x ];
-                    }
-                    for ( uint y = 0; y < c_defaultTileSize / 2; ++y ) {
-                        destLine = tile.scanLine( y );
-                        const uchar* srcLine = img_topright.scanLine( 2 * y );
-                        for ( uint x = c_defaultTileSize / 2; x < c_defaultTileSize; ++x )
-                            destLine[x] = srcLine[ 2 * ( x - c_defaultTileSize / 2 ) ];
-                    }
-                    for ( uint y = c_defaultTileSize / 2; y < c_defaultTileSize; ++y ) {
-                        destLine = tile.scanLine( y );
-                        const uchar* srcLine = img_bottomleft.scanLine( 2 * ( y - c_defaultTileSize / 2 ) );
-                        for ( uint x = 0; x < c_defaultTileSize / 2; ++x )
-                            destLine[ x ] = srcLine[ 2 * x ];	
-                    }
-                    for ( uint y = c_defaultTileSize / 2; y < c_defaultTileSize; ++y ) {
-                        destLine = tile.scanLine( y );
-                        const uchar* srcLine = img_bottomright.scanLine( 2 * ( y - c_defaultTileSize/2 ) );
-                        for ( uint x = c_defaultTileSize / 2; x < c_defaultTileSize; ++x )
-                            destLine[x] = srcLine[ 2 * ( x - c_defaultTileSize / 2 ) ];
-                    }
-                }
-                else {
-                    // tile.depth() != 8
-
-                    QRgb* destLine;
-
-                    for ( uint y = 0; y < c_defaultTileSize / 2; ++y ) {
-                        destLine = (QRgb*) tile.scanLine( y );
-                        const QRgb* srcLine = (QRgb*) img_topleft.scanLine( 2 * y );
-                        for ( uint x = 0; x < c_defaultTileSize / 2; ++x )
-                            destLine[x] = srcLine[ 2 * x ];
-                    }
-                    for ( uint y = 0; y < c_defaultTileSize / 2; ++y ) {
-                        destLine = (QRgb*) tile.scanLine( y );
-                        const QRgb* srcLine = (QRgb*) img_topright.scanLine( 2 * y );
-                        for ( uint x = c_defaultTileSize / 2; x < c_defaultTileSize; ++x )
-                            destLine[x] = srcLine[ 2 * ( x - c_defaultTileSize / 2 ) ];
-                    }
-                    for ( uint y = c_defaultTileSize / 2; y < c_defaultTileSize; ++y ) {
-                        destLine = (QRgb*) tile.scanLine( y );
-                        const QRgb* srcLine = (QRgb*) img_bottomleft.scanLine( 2 * ( y-c_defaultTileSize/2 ) );
-                        for ( uint x = 0; x < c_defaultTileSize / 2; ++x )
-                            destLine[x] = srcLine[ 2 * x ];	
-                    }
-                    for ( uint y = c_defaultTileSize / 2; y < c_defaultTileSize; ++y ) {
-                        destLine = (QRgb*) tile.scanLine( y );
-                        const QRgb* srcLine = (QRgb*) img_bottomright.scanLine( 2 * ( y-c_defaultTileSize / 2 ) );
-                        for ( uint x = c_defaultTileSize / 2; x < c_defaultTileSize; ++x )
-                            destLine[x] = srcLine[ 2*( x-c_defaultTileSize / 2 ) ];
-                    }
-                }
-
-                tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                QString newTileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
                                            .arg( tileLevel )
                                            .arg( n, tileDigits, 10, QChar('0') )
                                            .arg( m, tileDigits, 10, QChar('0') ) );
 
-                // Saving at 100% JPEG quality to have a high-quality
-                // version to create the remaining needed tiles from.
+                if ( QFile::exists( newTileName ) ) {
+                    mDebug() << newTileName << "exists already";
+                } else {
+                    tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                                            .arg( tileLevel + 1 )
+                                            .arg( 2*n, tileDigits, 10, QChar('0') )
+                                            .arg( 2*m, tileDigits, 10, QChar('0') ) );
+                    QImage  img_topleft( tileName );
 
-                bool  ok = tile.save( tileName, "jpg", 100 );
-                if ( ! ok ) 
-                    mDebug() << "Error while writing Tile: " << tileName;
+                    tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                                            .arg( tileLevel + 1 )
+                                            .arg( 2*n, tileDigits, 10, QChar('0') )
+                                            .arg( 2*m+1, tileDigits, 10, QChar('0') ) );
+                    QImage  img_topright( tileName );
+
+                    tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                                            .arg( tileLevel + 1 )
+                                            .arg( 2*n+1, tileDigits, 10, QChar('0') )
+                                            .arg( 2*m, tileDigits, 10, QChar('0') ) );
+                    QImage  img_bottomleft( tileName );
+
+                    tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                                            .arg( tileLevel + 1 )
+                                            .arg( 2*n+1, tileDigits, 10, QChar('0') )
+                                            .arg( 2*m+1, tileDigits, 10, QChar('0') ) );
+                    QImage  img_bottomright( tileName );
+
+                    QImage  tile = img_topleft;
+
+                    if ( tile.depth() == 8 ) {
+
+                        tile.setColorTable( grayScalePalette );
+                        uchar* destLine;
+
+                        for ( uint y = 0; y < c_defaultTileSize / 2; ++y ) {
+                            destLine = tile.scanLine( y );
+                            const uchar* srcLine = img_topleft.scanLine( 2 * y );
+                            for ( uint x = 0; x < c_defaultTileSize / 2; ++x )
+                                destLine[x] = srcLine[ 2*x ];
+                        }
+                        for ( uint y = 0; y < c_defaultTileSize / 2; ++y ) {
+                            destLine = tile.scanLine( y );
+                            const uchar* srcLine = img_topright.scanLine( 2 * y );
+                            for ( uint x = c_defaultTileSize / 2; x < c_defaultTileSize; ++x )
+                                destLine[x] = srcLine[ 2 * ( x - c_defaultTileSize / 2 ) ];
+                        }
+                        for ( uint y = c_defaultTileSize / 2; y < c_defaultTileSize; ++y ) {
+                            destLine = tile.scanLine( y );
+                            const uchar* srcLine = img_bottomleft.scanLine( 2 * ( y - c_defaultTileSize / 2 ) );
+                            for ( uint x = 0; x < c_defaultTileSize / 2; ++x )
+                                destLine[ x ] = srcLine[ 2 * x ];
+                        }
+                        for ( uint y = c_defaultTileSize / 2; y < c_defaultTileSize; ++y ) {
+                            destLine = tile.scanLine( y );
+                            const uchar* srcLine = img_bottomright.scanLine( 2 * ( y - c_defaultTileSize/2 ) );
+                            for ( uint x = c_defaultTileSize / 2; x < c_defaultTileSize; ++x )
+                                destLine[x] = srcLine[ 2 * ( x - c_defaultTileSize / 2 ) ];
+                        }
+                    }
+                    else {
+                        // tile.depth() != 8
+
+                        QRgb* destLine;
+
+                        for ( uint y = 0; y < c_defaultTileSize / 2; ++y ) {
+                            destLine = (QRgb*) tile.scanLine( y );
+                            const QRgb* srcLine = (QRgb*) img_topleft.scanLine( 2 * y );
+                            for ( uint x = 0; x < c_defaultTileSize / 2; ++x )
+                                destLine[x] = srcLine[ 2 * x ];
+                        }
+                        for ( uint y = 0; y < c_defaultTileSize / 2; ++y ) {
+                            destLine = (QRgb*) tile.scanLine( y );
+                            const QRgb* srcLine = (QRgb*) img_topright.scanLine( 2 * y );
+                            for ( uint x = c_defaultTileSize / 2; x < c_defaultTileSize; ++x )
+                                destLine[x] = srcLine[ 2 * ( x - c_defaultTileSize / 2 ) ];
+                        }
+                        for ( uint y = c_defaultTileSize / 2; y < c_defaultTileSize; ++y ) {
+                            destLine = (QRgb*) tile.scanLine( y );
+                            const QRgb* srcLine = (QRgb*) img_bottomleft.scanLine( 2 * ( y-c_defaultTileSize/2 ) );
+                            for ( uint x = 0; x < c_defaultTileSize / 2; ++x )
+                                destLine[x] = srcLine[ 2 * x ];
+                        }
+                        for ( uint y = c_defaultTileSize / 2; y < c_defaultTileSize; ++y ) {
+                            destLine = (QRgb*) tile.scanLine( y );
+                            const QRgb* srcLine = (QRgb*) img_bottomright.scanLine( 2 * ( y-c_defaultTileSize / 2 ) );
+                            for ( uint x = c_defaultTileSize / 2; x < c_defaultTileSize; ++x )
+                                destLine[x] = srcLine[ 2*( x-c_defaultTileSize / 2 ) ];
+                        }
+                    }
+
+                    mDebug() << newTileName;
+
+                    // Saving at 100% JPEG quality to have a high-quality
+                    // version to create the remaining needed tiles from.
+                    bool  ok = tile.save( newTileName, "jpg", 100 );
+                    if ( ! ok )
+                        mDebug() << "Error while writing Tile: " << newTileName;
+                }
 
                 percentCompleted =  (int) ( 90 * (qreal)(createdTilesCount)
                                             / (qreal)(totalTileCount) );	
                 createdTilesCount++;
 						
                 emit progress( percentCompleted );
+                mDebug() << "percentCompleted" << percentCompleted;
             }
         }
         mDebug() << "tileLevel: " << tileLevel << " successfully created.";
@@ -503,6 +508,7 @@ void TileCreator::run()
                 percentCompleted = 90 + (int)( 9 * (qreal)(savedTilesCount) 
                                                / (qreal)(totalTileCount) );	
                 emit progress( percentCompleted );
+                mDebug() << "percentCompleted" << percentCompleted;
                 //mDebug() << "Saving Tile #" << savedTilesCount
                 //         << " of " << totalTileCount
                 //         << " Percent: " << percentCompleted;
