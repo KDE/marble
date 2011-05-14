@@ -146,7 +146,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *v
                 StackedTile *const tile = m_tileLoader->loadTile( stackedId );
                 tile->setUsed( true );
 
-                const QSize size = QSize( qCeil( rect.right() - rect.left() ), qCeil( rect.bottom() - rect.top() ) );
+                const QSize size = QSize( qRound( rect.right() - rect.left() ), qRound( rect.bottom() - rect.top() ) );
                 const int cacheHash = 2 * ( size.width() % 2 ) + ( size.height() % 2 );
                 const TileId cacheId = TileId( cacheHash, stackedId.zoomLevel(), stackedId.x(), stackedId.y() );
                 QPixmap *im = (*m_cache)[cacheId];
