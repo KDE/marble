@@ -229,7 +229,7 @@ bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineStrin
         isAtHorizon = false;
 
         // Optimization for line strings with a big amount of nodes
-        bool skipNode = isLong && !processingLastNode &&
+        bool skipNode = itCoords != itBegin && isLong && !processingLastNode &&
                         viewport->resolves( *itPreviousCoords, *itCoords );
 
         if ( !skipNode ) {
