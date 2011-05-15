@@ -54,7 +54,6 @@ private:
 
 PluginManagerPrivate::~PluginManagerPrivate()
 {
-    QMap<QPluginLoader*, RunnerPlugin *>::const_iterator i = m_runnerPlugins.constBegin();
     bool allUnloaded = cleanup( m_renderPluginTemplates.keys() );
     allUnloaded = allUnloaded && cleanup( m_networkPluginTemplates.keys() );
     allUnloaded = allUnloaded && cleanup( m_positionProviderPluginTemplates.keys() );
