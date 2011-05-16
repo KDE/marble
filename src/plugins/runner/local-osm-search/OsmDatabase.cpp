@@ -76,7 +76,7 @@ QList<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &search
             regionRestriction += ")";
 
             if ( first ) {
-                return QList<OsmPlacemark>();
+                continue;
             }
         }
 
