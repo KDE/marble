@@ -109,9 +109,9 @@ qreal RouteSegment::distancePointToLine(const GeoDataCoordinates &p, const GeoDa
     qreal const len =(x1-x2)*(x1-x2)+(y1-y2)*(y1-y2);
     qreal const t = (x01*x21 + y01*y21) / len;
     if ( t<0.0 ) {
-        return EARTH_RADIUS * distanceSphere(p, b);
-    } else if ( t > 1.0 ) {
         return EARTH_RADIUS * distanceSphere(p, a);
+    } else if ( t > 1.0 ) {
+        return EARTH_RADIUS * distanceSphere(p, b);
     } else {
         qreal const nom = qAbs( x21 * y10 - x10 * y21 );
         qreal const den = sqrt( x21 * x21 + y21 * y21 );
@@ -134,9 +134,9 @@ GeoDataCoordinates RouteSegment::projected(const GeoDataCoordinates &p, const Ge
     qreal const len =(x1-x2)*(x1-x2)+(y1-y2)*(y1-y2);
     qreal const t = (x01*x21 + y01*y21) / len;
     if ( t<0.0 ) {
-        return b;
-    } else if ( t > 1.0 ) {
         return a;
+    } else if ( t > 1.0 ) {
+        return b;
     } else {
         // a + t (b - a);
         qreal const lon = x1 + t * ( x2 - x1 );
