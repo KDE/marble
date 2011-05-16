@@ -80,8 +80,8 @@ bool GeoDataLinearRing::contains( const GeoDataCoordinates &coordinates ) const
     int j = points - 1;
 
     for ( int i=0; i<points; ++i ) {
-        GeoDataCoordinates one = at( i );
-        GeoDataCoordinates two = at( j );
+        GeoDataCoordinates const & one = at( i );
+        GeoDataCoordinates const & two = at( j );
 
         if ( ( one.longitude() < coordinates.longitude() && two.longitude() >= coordinates.longitude() ) ||
              ( two.longitude() < coordinates.longitude() && one.longitude() >= coordinates.longitude() ) ) {
