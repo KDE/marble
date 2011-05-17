@@ -222,7 +222,7 @@ void BookmarkManagerDialogPrivate::deleteFolder()
             Q_ASSERT( folder->name() == folderName );
             if ( folder->size() > 0 ) {
                 QString const text = m_parent->tr( "The folder %1 is not empty. Removing it will delete all bookmarks it contains. Are you sure you want to delete the folder?" ).arg( folderName );
-                if ( QMessageBox::question( m_parent, "Remove Folder - Marble", text, QMessageBox::Yes, QMessageBox::No ) != QMessageBox::Yes) {
+                if ( QMessageBox::question( m_parent, m_parent->tr("Remove Folder - Marble"), text, QMessageBox::Yes, QMessageBox::No ) != QMessageBox::Yes) {
                     return;
                 }
             }
