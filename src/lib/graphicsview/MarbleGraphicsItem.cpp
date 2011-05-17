@@ -168,6 +168,17 @@ QSizeF MarbleGraphicsItem::size() const
     return p()->m_size;
 }
 
+qreal MarbleGraphicsItem::zValue() const
+{
+    return p()->m_zValue;
+}
+
+void MarbleGraphicsItem::setZValue( qreal z )
+{
+    p()->m_zValue = z;
+    update();
+}
+
 AbstractMarbleGraphicsLayout *MarbleGraphicsItem::layout() const
 {
     return p()->m_layout;
