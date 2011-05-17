@@ -223,6 +223,7 @@ set(marblewidget_SRCS
     GoToDialog.cpp
 
     MapWizard.cpp
+    GeoGraphicsScene.cpp
 )
 
 set (marblewidget_UI
@@ -357,6 +358,7 @@ else (APPLE AND QTONLY)
     Quaternion.h
     SunLocator.h
     ClipPainter.h
+    GeoGraphicsScene.h
     geodata/data/GeoDataAbstractView.h
     geodata/data/GeoDataAccuracy.h
     geodata/data/GeoDataColorStyle.h
