@@ -39,8 +39,14 @@ class TileCreatorPrivate
        : m_dem( dem ),
          m_targetDir( targetDir ),
          m_cancelled( false ),
+         m_tileFormat( "jpg" ),
          m_source( source )
-    {
+     {
+        if ( m_dem == "true" ) {
+            m_tileQuality = 70;
+        } else {
+            m_tileQuality = 85;
+        }
     }
 
     ~TileCreatorPrivate()
@@ -52,6 +58,8 @@ class TileCreatorPrivate
     QString  m_dem;
     QString  m_targetDir;
     bool     m_cancelled;
+    QString  m_tileFormat;
+    int      m_tileQuality;
 
     TileCreatorSource  *m_source;
 };
@@ -287,10 +295,11 @@ void TileCreator::run()
             if ( d->m_cancelled ) 
                 return;
 
-            tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+            tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.%4")
                                        .arg( maxTileLevel )
                                        .arg( n, tileDigits, 10, QChar('0') )
-                                       .arg( m, tileDigits, 10, QChar('0') ) );
+                                       .arg( m, tileDigits, 10, QChar('0') ) )
+                                       .arg( d->m_tileFormat );
 
             if ( QFile::exists( tileName ) ) {
 
@@ -312,7 +321,7 @@ void TileCreator::run()
                 }
 
                 mDebug() << tileName;
-                bool  ok = tile.save( tileName, "jpg", 100 );
+                bool  ok = tile.save( tileName, d->m_tileFormat.toAscii().data(), 100 );
                 if ( !ok )
                     mDebug() << "Error while writing Tile: " << tileName;
 
@@ -355,39 +364,44 @@ void TileCreator::run()
                 if ( d->m_cancelled )
                     return;
 
-                QString newTileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                QString newTileName = d->m_targetDir + ( QString("%1/%2/%2_%3.%4")
                                            .arg( tileLevel )
                                            .arg( n, tileDigits, 10, QChar('0') )
-                                           .arg( m, tileDigits, 10, QChar('0') ) );
+                                           .arg( m, tileDigits, 10, QChar('0') ) )
+                                           .arg( d->m_tileFormat );
 
                 if ( QFile::exists( newTileName ) ) {
                     mDebug() << newTileName << "exists already";
                 } else {
-                    tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                    tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.%4")
                                             .arg( tileLevel + 1 )
                                             .arg( 2*n, tileDigits, 10, QChar('0') )
-                                            .arg( 2*m, tileDigits, 10, QChar('0') ) );
+                                            .arg( 2*m, tileDigits, 10, QChar('0') ) )
+                                            .arg( d->m_tileFormat );
                     QImage  img_topleft( tileName );
                     Q_ASSERT( img_topleft.size() == QSize( c_defaultTileSize, c_defaultTileSize ) );
 
-                    tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                    tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.%4")
                                             .arg( tileLevel + 1 )
                                             .arg( 2*n, tileDigits, 10, QChar('0') )
-                                            .arg( 2*m+1, tileDigits, 10, QChar('0') ) );
+                                            .arg( 2*m+1, tileDigits, 10, QChar('0') ) )
+                                            .arg( d->m_tileFormat );
                     QImage  img_topright( tileName );
                     Q_ASSERT( img_topright.size() == QSize( c_defaultTileSize, c_defaultTileSize ) );
 
-                    tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                    tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.%4")
                                             .arg( tileLevel + 1 )
                                             .arg( 2*n+1, tileDigits, 10, QChar('0') )
-                                            .arg( 2*m, tileDigits, 10, QChar('0') ) );
+                                            .arg( 2*m, tileDigits, 10, QChar('0') ) )
+                                            .arg( d->m_tileFormat );
                     QImage  img_bottomleft( tileName );
                     Q_ASSERT( img_bottomleft.size() == QSize( c_defaultTileSize, c_defaultTileSize ) );
 
-                    tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                    tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.%4")
                                             .arg( tileLevel + 1 )
                                             .arg( 2*n+1, tileDigits, 10, QChar('0') )
-                                            .arg( 2*m+1, tileDigits, 10, QChar('0') ) );
+                                            .arg( 2*m+1, tileDigits, 10, QChar('0') ) )
+                                            .arg( d->m_tileFormat );
                     QImage  img_bottomright( tileName );
                     Q_ASSERT( img_bottomright.size() == QSize( c_defaultTileSize, c_defaultTileSize ) );
 
@@ -458,7 +472,7 @@ void TileCreator::run()
 
                     // Saving at 100% JPEG quality to have a high-quality
                     // version to create the remaining needed tiles from.
-                    bool  ok = tile.save( newTileName, "jpg", 100 );
+                    bool  ok = tile.save( newTileName, d->m_tileFormat.toAscii().data(), 100 );
                     if ( ! ok )
                         mDebug() << "Error while writing Tile: " << newTileName;
                 }
@@ -475,56 +489,76 @@ void TileCreator::run()
     }
     mDebug() << "Tile creation completed.";
 
-    // Applying correct lower JPEG compression now that we created all tiles
+    if (d->m_tileQuality != 100) {
 
-    int savedTilesCount = 0;
- 
-    tileLevel = 0;
-    while ( tileLevel <= maxTileLevel ) {
-        int nmaxit =  TileLoaderHelper::levelToRow( defaultLevelZeroRows, tileLevel );
-        for ( int n = 0; n < nmaxit; ++n) {
-            int mmaxit =  TileLoaderHelper::levelToColumn( defaultLevelZeroColumns, tileLevel );
-            for ( int m = 0; m < mmaxit; ++m) { 
+        // Applying correct lower JPEG compression now that we created all tiles
+        int savedTilesCount = 0;
 
-                if ( d->m_cancelled )
-                    return;
+        tileLevel = 0;
+        while ( tileLevel <= maxTileLevel ) {
+            int nmaxit =  TileLoaderHelper::levelToRow( defaultLevelZeroRows, tileLevel );
+            for ( int n = 0; n < nmaxit; ++n) {
+                int mmaxit =  TileLoaderHelper::levelToColumn( defaultLevelZeroColumns, tileLevel );
+                for ( int m = 0; m < mmaxit; ++m) {
 
-                savedTilesCount++;
+                    if ( d->m_cancelled )
+                        return;
 
-                tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
-                                           .arg( tileLevel )
-                                           .arg( n, tileDigits, 10, QChar('0') )
-                                           .arg( m, tileDigits, 10, QChar('0') ) );
-                QImage tile( tileName );
+                    savedTilesCount++;
 
-                bool ok;
+                    tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.%4")
+                                            .arg( tileLevel )
+                                            .arg( n, tileDigits, 10, QChar('0') )
+                                            .arg( m, tileDigits, 10, QChar('0') ) )
+                                            .arg( d->m_tileFormat );
+                    QImage tile( tileName );
 
-                if ( d->m_dem == "true" ) {
-                    ok = tile.save( tileName, "jpg", 70 );
+                    bool ok;
+
+                    ok = tile.save( tileName, d->m_tileFormat.toAscii().data(), d->m_tileQuality );
+
+                    if ( !ok )
+                        mDebug() << "Error while writing Tile: " << tileName;
+                    // Don't exceed 99% as this would cancel the thread unexpectedly
+                    percentCompleted = 90 + (int)( 9 * (qreal)(savedTilesCount)
+                                                / (qreal)(totalTileCount) );
+                    emit progress( percentCompleted );
+                    mDebug() << "percentCompleted" << percentCompleted;
+                    //mDebug() << "Saving Tile #" << savedTilesCount
+                    //         << " of " << totalTileCount
+                    //         << " Percent: " << percentCompleted;
                 }
-                else {
-                    ok = tile.save( tileName, "jpg", 85 );
-                }
-
-                if ( !ok )
-                    mDebug() << "Error while writing Tile: " << tileName; 
-                // Don't exceed 99% as this would cancel the thread unexpectedly
-                percentCompleted = 90 + (int)( 9 * (qreal)(savedTilesCount) 
-                                               / (qreal)(totalTileCount) );	
-                emit progress( percentCompleted );
-                mDebug() << "percentCompleted" << percentCompleted;
-                //mDebug() << "Saving Tile #" << savedTilesCount
-                //         << " of " << totalTileCount
-                //         << " Percent: " << percentCompleted;
             }
+            tileLevel++;
         }
-        tileLevel++;	
     }
 
     percentCompleted = 100;
     emit progress( percentCompleted );
 
     mDebug() << "percentCompleted: " << percentCompleted;
+}
+
+void TileCreator::setTileFormat(const QString& format)
+{
+    d->m_tileFormat = format;
+
+}
+
+QString TileCreator::tileFormat()
+{
+    return d->m_tileFormat;
+}
+
+void TileCreator::setTileQuality(int quality)
+{
+    d->m_tileQuality = quality;
+}
+
+int TileCreator::tileQuality()
+{
+    return d->m_tileQuality;
+
 }
 
 }
