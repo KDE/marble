@@ -40,6 +40,7 @@ class TileCreatorPrivate
          m_targetDir( targetDir ),
          m_cancelled( false ),
          m_tileFormat( "jpg" ),
+         m_resume( false ),
          m_source( source )
      {
         if ( m_dem == "true" ) {
@@ -60,6 +61,7 @@ class TileCreatorPrivate
     bool     m_cancelled;
     QString  m_tileFormat;
     int      m_tileQuality;
+    bool     m_resume;
 
     TileCreatorSource  *m_source;
 };
@@ -207,6 +209,11 @@ void TileCreator::cancelTileCreation()
 
 void TileCreator::run()
 {
+    if ( d->m_resume && d->m_tileQuality != 100 ) {
+        qWarning() << "Resuming is only supported with tileQuality 100";
+        return;
+    }
+
     if ( d->m_targetDir.isNull() )
         d->m_targetDir = MarbleDirs::localPath() + "/maps/"
             + d->m_source->sourcePath().section( '/', -3, -2 ) + '/';
@@ -301,7 +308,7 @@ void TileCreator::run()
                                        .arg( m, tileDigits, 10, QChar('0') ) )
                                        .arg( d->m_tileFormat );
 
-            if ( QFile::exists( tileName ) ) {
+            if ( QFile::exists( tileName ) && d->m_resume ) {
 
                 mDebug() << tileName << "exists already";
 
@@ -370,7 +377,7 @@ void TileCreator::run()
                                            .arg( m, tileDigits, 10, QChar('0') ) )
                                            .arg( d->m_tileFormat );
 
-                if ( QFile::exists( newTileName ) ) {
+                if ( QFile::exists( newTileName ) && d->m_resume ) {
                     mDebug() << newTileName << "exists already";
                 } else {
                     tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.%4")
@@ -542,10 +549,9 @@ void TileCreator::run()
 void TileCreator::setTileFormat(const QString& format)
 {
     d->m_tileFormat = format;
-
 }
 
-QString TileCreator::tileFormat()
+QString TileCreator::tileFormat() const
 {
     return d->m_tileFormat;
 }
@@ -555,11 +561,21 @@ void TileCreator::setTileQuality(int quality)
     d->m_tileQuality = quality;
 }
 
-int TileCreator::tileQuality()
+int TileCreator::tileQuality() const
 {
     return d->m_tileQuality;
-
 }
+
+void TileCreator::setResume(bool resume)
+{
+    d->m_resume = resume;
+}
+
+bool TileCreator::resume() const
+{
+    return d->m_resume;
+}
+
 
 }
 

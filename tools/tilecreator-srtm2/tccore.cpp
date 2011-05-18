@@ -207,8 +207,9 @@ TCCoreApplication::TCCoreApplication( int argc, char ** argv ) : QCoreApplicatio
     {
         TileCreatorSource *source = new TileCreatorSourceSrtm( argv[1] );
         m_tilecreator = new TileCreator( source, "false", argv[2] );
-        m_tilecreator->setTileFormat("png");
-        m_tilecreator->setTileQuality(100);
+        m_tilecreator->setTileFormat( "png" );
+        m_tilecreator->setTileQuality( 100 );
+        m_tilecreator->setResume( true );
         connect( m_tilecreator, SIGNAL( finished() ), this, SLOT( quit() ) );
         m_tilecreator->start();
     }

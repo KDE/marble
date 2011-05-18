@@ -56,8 +56,10 @@ class MARBLE_EXPORT TileCreator : public QThread
 
     void setTileFormat( const QString &format );
     void setTileQuality( int quality );
-    QString tileFormat();
-    int tileQuality();
+    void setResume( bool resume );
+    QString tileFormat() const;
+    int tileQuality() const;
+    bool resume() const;
 
  protected:
     virtual void run();
