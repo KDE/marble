@@ -142,7 +142,7 @@ int save( GeoDataDocument* document, const QFileInfo &filename )
         return usage();
     }
 
-    if ( !writer.write( &file, *document ) ) {
+    if ( !writer.write( &file, document ) ) {
         qDebug() << "Can not write to " << file.fileName();
     }
     file.close();
