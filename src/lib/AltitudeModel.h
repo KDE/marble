@@ -30,6 +30,7 @@ namespace Marble {
 class MarbleModel;
 class HttpDownloadManager;
 class GeoSceneGroup;
+class GeoSceneTexture;
 class MapThemeManager;
 class TileLoader;
 
@@ -44,12 +45,14 @@ public:
     qreal height(qreal lat, qreal lon);
 
 
-private Q_SLOTS:
+private:
     void updateTextureLayers();
 
 private: //TODO d pointer
     TileLoader *m_tileLoader;
     const MapThemeManager* m_mapThemeManager;
+    const GeoSceneTexture *m_textureLayer;
+    MarbleModel *m_model;
 };
 
 }

@@ -46,12 +46,12 @@ void AltitudeProfile::initialize()
     m_isInitialized = true;
     connect( marbleModel()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ), SLOT( currentRouteChanged( GeoDataDocument* ) ) );
 
-    marbleModel()->altitudeModel()->height(1, 2);
+    marbleModel()->altitudeModel()->height(47.95, 13.23);
 }
 
 void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
 {
-    marbleModel()->altitudeModel()->height(1, 2);
+    marbleModel()->altitudeModel()->height(47.95, 13.23);
     
     KPlotWidget *graphWidget = new KPlotWidget();
     graphWidget->setAntialiasing(true);
@@ -67,6 +67,25 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
     quint32 numDataPoints = 0;
     qDebug() << "*************************";
 
+    GeoDataPlacemark* routePlacemark = route->placemarkList().first();
+    Q_ASSERT(routePlacemark->geometry()->geometryId() ==  GeoDataLineStringId);
+    GeoDataLineString* routeWaypoints = static_cast<GeoDataLineString*>(routePlacemark->geometry());
+    mDebug() << routeWaypoints->length( EARTH_RADIUS );
+    for(int i=0; i < routeWaypoints->size(); ++i) {
+        GeoDataCoordinates coordinate = routeWaypoints->at( i );
+        //coordinate.altitude();
+        qreal altitude = marbleModel()->altitudeModel()->height(coordinate.latitude(Marble::GeoDataCoordinates::Degree), coordinate.longitude(Marble::GeoDataCoordinates::Degree));
+        qDebug() << "POINT" << numDataPoints << coordinate.longitude(Marble::GeoDataCoordinates::Degree) << coordinate.latitude(Marble::GeoDataCoordinates::Degree)
+                 << "height" << altitude;
+
+        double value = altitude;
+        qDebug() << "value" << value;
+        plot->addPoint(numDataPoints++, value);
+        if (value > maxY) maxY = value;
+        if (value < minY) minY = value;
+    }
+
+/*
     QImage image;
     image.load("/home/niko/kdesvn/build/marble-git/tools/altitude-reader/N47E013.hgt.png");
     //foreach ( GeoDataPlacemark *placemark, route->placemarkList() ) {
@@ -88,7 +107,7 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
         if (value > maxY) maxY = value;
         if (value < minY) minY = value;
     }
-
+*/
 
     graphWidget->setLimits(0, numDataPoints, minY - minY / 5, maxY + maxY / 5);
     graphWidget->addPlotObject(plot);
