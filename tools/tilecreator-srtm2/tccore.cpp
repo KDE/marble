@@ -53,10 +53,10 @@ public:
         int startLatPxResized = c_defaultTileSize * n;
 
 
-        if (!QFile::exists( hgtFileName(std::floor(startLng), std::floor(startLat)) )
-            && !QFile::exists( hgtFileName(std::floor(startLng)+1, std::floor(startLat)) )
-            && !QFile::exists( hgtFileName(std::floor(startLng), std::floor(startLat)-1) )
-            && !QFile::exists( hgtFileName(std::floor(startLng)+1, std::floor(startLat)-1) )
+        if (hgtFileName(std::floor(startLng), std::floor(startLat)).isNull()
+            && hgtFileName(std::floor(startLng)+1, std::floor(startLat)).isNull()
+            && hgtFileName(std::floor(startLng), std::floor(startLat)-1).isNull()
+            && hgtFileName(std::floor(startLng)+1, std::floor(startLat)-1).isNull()
         ) {
             QImage ret( c_defaultTileSize, c_defaultTileSize, QImage::Format_ARGB32  );
             QPainter painter( &ret );
@@ -132,32 +132,39 @@ private:
         QChar EW( lng >= 0 ? 'E' : 'W' );
         QChar NS( lat >= 0 ? 'N' : 'S' );
 
-        QString fileName = m_sourceDir;
-        fileName += "Eurasia/"; //TODO there is more than that
-        if ( lat < 0 ) lat *= -1;
-        fileName += QString( "%1%2%3%4.hgt" ).arg( NS ).arg( lat<0 ? lat*-1 : lat, 2, 10, QLatin1Char('0') )
-                                    .arg( EW ).arg( lng<0 ? lng*-1 : lng, 3, 10, QLatin1Char('0' ) );
-        qDebug() << fileName;
+        QStringList dirs;
+        dirs << "Africa" << "Australia" << "Eurasia" << "Silands" << "North_America" << "South_America";
+        foreach( QString dir, dirs) {
+            QString fileName = m_sourceDir + "/" + dir + "/";
+            if ( lat < 0 ) lat *= -1;
+            fileName += QString( "%1%2%3%4.hgt" ).arg( NS ).arg( lat<0 ? lat*-1 : lat, 2, 10, QLatin1Char('0') )
+                                        .arg( EW ).arg( lng<0 ? lng*-1 : lng, 3, 10, QLatin1Char('0' ) );
+            qDebug() << fileName;
 
-        if ( !QFile::exists( fileName ) && QFile::exists( fileName + ".zip" ) ) {
-            qDebug() << "zip found, unzipping";
-            QProcess p;
-            p.execute("unzip", QStringList() << fileName + ".zip" );
-            p.waitForFinished();
-            QFile( QDir::currentPath() + "/" + QFileInfo( fileName ).fileName()).rename(fileName);
+            if ( !QFile::exists( fileName ) && QFile::exists( fileName + ".zip" ) ) {
+                qDebug() << "zip found, unzipping";
+                QProcess p;
+                p.execute("unzip", QStringList() << fileName + ".zip" );
+                p.waitForFinished();
+                QFile( QDir::currentPath() + "/" + QFileInfo( fileName ).fileName()).rename(fileName);
+            }
+            if ( QFile::exists( fileName ) ) {
+                return fileName;
+            }
         }
 
-        return fileName;
+        return QString();
     }
 
     QImage readHgt( int lng, int lat )
     {
-        QFile file( hgtFileName( lng, lat ) );;
-
-        if (!file.exists() ) {
+        QString fileName = hgtFileName( lng, lat );
+        if ( fileName.isNull() ) {
             qDebug() << "hgt file does not exist, returing null image";
             return QImage();
         }
+
+        QFile file( fileName );
 
         file.open( QIODevice::ReadOnly );
         int iLat = 0;
