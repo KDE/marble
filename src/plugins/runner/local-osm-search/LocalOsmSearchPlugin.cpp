@@ -34,7 +34,7 @@ MarbleAbstractRunner* LocalOsmSearchPlugin::newRunner() const
 {
     if ( !m_databaseLoaded ) {
         m_databaseLoaded = true;
-        QString base = MarbleDirs::localPath() + "/placemarks/";
+        QString base = MarbleDirs::localPath() + "/maps/earth/placemarks/";
         QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotDot;
         QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories | QDirIterator::FollowSymlinks;
         QDirIterator iter( base, filters, flags );
