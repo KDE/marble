@@ -10,6 +10,8 @@
 
 #include "MonavMapsModel.h"
 
+#include <QtCore/QDate>
+
 namespace Marble
 {
 
@@ -71,7 +73,9 @@ QVariant MonavMapsModel::data ( const QModelIndex & index, int role ) const
                 QString payload = m_data.at( row ).payload();
                 payload = payload.mid( payload.lastIndexOf( "/" ) + 1 );
                 if ( m_remoteMaps.contains( payload ) ) {
-                    return m_remoteMaps[payload] > m_data.at( row ).date();
+                    QDate remote = QDate::fromString( m_remoteMaps[payload], "MM/dd/yy" );
+                    QDate local = QDate::fromString( m_data.at( row ).date(), "MM/dd/yy" );
+                    return remote > local;
                 }
 
                 return false;
