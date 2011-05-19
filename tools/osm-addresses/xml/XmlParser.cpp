@@ -73,6 +73,8 @@ bool XmlParser::startElement ( const QString & /*namespaceURI*/, const QString &
     } else if ( qName == "tag" && m_element == RelationType ) {
         if ( atts.value( "k" ) == "boundary" && atts.value( "v" ) == "administrative" ) {
             m_relation.isAdministrativeBoundary = true;
+        } else if ( atts.value( "k" ) == "admin_level" ) {
+            m_relation.adminLevel = atts.value( "v" ).toInt();
         } else if ( atts.value( "k" ) == "name" ) {
             m_relation.name = atts.value( "v" );
         } else if ( atts.value( "k" ) == "type" && atts.value( "v" ) == "multipolygon" ) {

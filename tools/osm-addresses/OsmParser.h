@@ -46,8 +46,9 @@ struct OsmOsmRegion {
     Marble::GeoDataPolygon geometry;
     OsmRegion region;
     OsmOsmRegion* parent;
+    int adminLevel;
 
-    OsmOsmRegion() : parent( 0 ) {}
+    OsmOsmRegion() : parent( 0 ), adminLevel( 0 ) {}
 };
 
 struct Element {
@@ -119,8 +120,12 @@ struct Relation : public Element {
     QString name;
     bool isMultipolygon;
     bool isAdministrativeBoundary;
+    int adminLevel;
 
-    Relation() : isMultipolygon( false ), isAdministrativeBoundary( false ) {
+    Relation() : isMultipolygon( false ),
+        isAdministrativeBoundary( false ),
+        adminLevel( 0 )
+    {
         // nothing to do
     }
 };

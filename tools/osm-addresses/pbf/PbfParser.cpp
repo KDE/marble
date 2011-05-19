@@ -361,6 +361,8 @@ void PbfParser::parseRelation()
 
         if ( key == "boundary" && value == "administrative" ) {
             relation.isAdministrativeBoundary = true;
+        } else if ( key == "admin_level" ) {
+            relation.adminLevel = value.toInt();
         } else if ( key == "name" ) {
             relation.name = value;
         } else if ( key == "type" && value == "multipolygon" ) {

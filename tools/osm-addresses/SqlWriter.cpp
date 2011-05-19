@@ -36,12 +36,12 @@ SqlWriter::SqlWriter( const QString &filename, QObject* parent ) :
                " number VARCHAR(8),"
                " category INTEGER,"
                " lon FLOAT(8),"
-               " lat FLOAT(8) );" );
-    execQuery( "DROP TABLE IF EXISTS names;" );
+               " lat FLOAT(8) )" );
+    execQuery( "DROP TABLE IF EXISTS names" );
     execQuery( "CREATE TABLE names ("
                " id INTEGER PRIMARY KEY,"
-               " name VARCHAR(50) );" );
-    execQuery( "DROP TABLE IF EXISTS regions;" );
+               " name VARCHAR(50) )" );
+    execQuery( "DROP TABLE IF EXISTS regions" );
     execQuery( "CREATE TABLE regions ("
                " id INTEGER PRIMARY KEY,"
                " parent INTEGER NOT NULL,"
@@ -49,8 +49,8 @@ SqlWriter::SqlWriter( const QString &filename, QObject* parent ) :
                " rgt INTEGER NOT NULL,"
                " name VARCHAR(50),"
                " lon FLOAT(8),"
-               " lat FLOAT(8) );" );
-    execQuery( "DROP VIEW IF EXISTS places;" );
+               " lat FLOAT(8) )" );
+    execQuery( "DROP VIEW IF EXISTS places" );
     execQuery( "CREATE VIEW places AS "
                " SELECT"
                "  placemarks.regionId AS region,"
@@ -61,16 +61,16 @@ SqlWriter::SqlWriter( const QString &filename, QObject* parent ) :
                "  placemarks.lat AS lat"
                " FROM names"
                " INNER JOIN placemarks"
-               " ON names.id=placemarks.nameId;" );
+               " ON names.id=placemarks.nameId" );
     execQuery( "BEGIN TRANSACTION" );
 }
 
 SqlWriter::~SqlWriter()
 {
     execQuery( "END TRANSACTION" );
-    execQuery( "CREATE INDEX namesIndex ON names(name);" );
-    execQuery( "CREATE INDEX placemarksIndex ON placemarks(regionId,nameId,category);" );
-    execQuery( "CREATE INDEX regionsIndex ON regions(name,parent,lft,rgt);" );
+    execQuery( "CREATE INDEX namesIndex ON names(name)" );
+    execQuery( "CREATE INDEX placemarksIndex ON placemarks(regionId,nameId,category)" );
+    execQuery( "CREATE INDEX regionsIndex ON regions(name,parent,lft,rgt)" );
 }
 
 void SqlWriter::addOsmRegion( const OsmRegion &region )
