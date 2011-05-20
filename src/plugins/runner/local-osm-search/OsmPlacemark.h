@@ -15,6 +15,8 @@
 
 namespace Marble {
 
+class DatabaseQuery;
+
 /**
   * A lightweight data structure to represent points of interest
   * like addresses with support for serialization.
@@ -122,6 +124,8 @@ public:
 
     /** Placemarks are sorted by name by default */
     bool operator<( const OsmPlacemark &other) const;
+
+    qreal matchScore( const DatabaseQuery* query ) const;
 
 private:
     int m_regionId;

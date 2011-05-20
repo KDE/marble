@@ -8,11 +8,13 @@
 // Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#include "OsmDatabase.h"
+#include "DatabaseQuery.h"
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
 #include "MarbleLocale.h"
-#include "DatabaseQuery.h"
+#include "MarbleModel.h"
+#include "OsmDatabase.h"
+#include "PositionTracking.h"
 
 #include <QtCore/QFile>
 #include <QtCore/QDataStream>
@@ -26,6 +28,26 @@
 #include <QtSql/QSqlError>
 
 namespace Marble {
+
+namespace {
+
+static GeoDataCoordinates s_currentPosition;
+static DatabaseQuery* s_currentQuery = 0;
+
+bool placemarkSmallerDistance( const OsmPlacemark &a, const OsmPlacemark &b )
+{
+    return distanceSphere( a.longitude() * DEG2RAD, a.latitude() * DEG2RAD,
+                           s_currentPosition.longitude(), s_currentPosition.latitude() )
+         < distanceSphere( b.longitude() * DEG2RAD, b.latitude() * DEG2RAD,
+                           s_currentPosition.longitude(), s_currentPosition.latitude() );
+}
+
+bool placemarkHigherScore( const OsmPlacemark &a, const OsmPlacemark &b )
+{
+    return a.matchScore( s_currentQuery ) > b.matchScore( s_currentQuery );
+}
+
+}
 
 OsmDatabase::OsmDatabase()
 {
@@ -107,7 +129,7 @@ QList<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &search
             if ( !userQuery.houseNumber().isEmpty() ) {
                 queryString += " AND places.number " + wildcardQuery( userQuery.houseNumber() );
             } else {
-                queryString += "AND places.number IS NULL";
+                queryString += " AND places.number IS NULL";
             }
             queryString += regionRestriction;
         }
@@ -143,6 +165,15 @@ QList<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &search
     }
 
     mDebug() << "Offline OSM search query took " << timer.elapsed() << " ms.";
+
+    if ( userQuery.resultFormat() == DatabaseQuery::DistanceFormat ) {
+        s_currentPosition = model->positionTracking()->currentLocation();
+        qSort( result.begin(), result.end(), placemarkSmallerDistance );
+    } else {
+        *s_currentQuery = userQuery;
+        qSort( result.begin(), result.end(), placemarkHigherScore );
+    }
+
     return result;
 }
 

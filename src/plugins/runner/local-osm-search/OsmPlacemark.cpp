@@ -9,6 +9,7 @@
 //
 
 #include "OsmPlacemark.h"
+#include "DatabaseQuery.h"
 
 namespace Marble {
 
@@ -105,6 +106,39 @@ bool OsmPlacemark::operator<( const OsmPlacemark &other) const
     }
 
     return latitude() < other.latitude();
+}
+
+qreal OsmPlacemark::matchScore( const DatabaseQuery* query ) const
+{
+    qreal score = 0.0;
+
+    if ( query && query->resultFormat() == DatabaseQuery::AddressFormat ) {
+        if ( !query->region().isEmpty() ) {
+            if ( m_additionalInformation.compare( query->region(), Qt::CaseInsensitive ) == 0 ) {
+                score += 2.0;
+            } else if ( m_additionalInformation.startsWith( query->region(), Qt::CaseInsensitive ) ) {
+                score += 0.5;
+            }
+        }
+
+        if ( !query->houseNumber().isEmpty() ) {
+            if ( m_houseNumber.compare( query->houseNumber(), Qt::CaseInsensitive ) == 0 ) {
+                score += 1.0;
+            } else if ( m_houseNumber.startsWith( query->houseNumber(), Qt::CaseInsensitive ) ) {
+                score += 0.5;
+            }
+        }
+
+        if ( !query->street().isEmpty() ) {
+            if ( m_name.compare( query->street(), Qt::CaseInsensitive ) == 0 ) {
+                score += 2.0;
+            } else if ( m_name.startsWith( query->street(), Qt::CaseInsensitive ) ) {
+                score += 0.5;
+            }
+        }
+    }
+
+    return score;
 }
 
 }
