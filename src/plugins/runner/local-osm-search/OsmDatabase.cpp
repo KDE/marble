@@ -170,8 +170,9 @@ QList<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &search
         s_currentPosition = model->positionTracking()->currentLocation();
         qSort( result.begin(), result.end(), placemarkSmallerDistance );
     } else {
-        *s_currentQuery = userQuery;
+        s_currentQuery = &userQuery;
         qSort( result.begin(), result.end(), placemarkHigherScore );
+        s_currentQuery = 0;
     }
 
     return result;
