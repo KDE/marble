@@ -430,6 +430,11 @@ BookmarkManagerDialog::BookmarkManagerDialog( MarbleModel* model, QWidget *paren
       d( new BookmarkManagerDialogPrivate( this, model->bookmarkManager() ) )
 {
     setupUi( this );
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    importButton->setVisible( !smallScreen );
+    exportButton->setVisible( !smallScreen );
+    foldersLabel->setVisible( !smallScreen );
+    bookmarkLabel->setVisible( !smallScreen );
 
     d->m_treeModel = new GeoDataTreeModel( this );
     d->m_treeModel->setRootDocument( bookmarkDocument() );
