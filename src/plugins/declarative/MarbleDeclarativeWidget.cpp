@@ -37,6 +37,8 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
 
     connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
              this, SIGNAL( visibleLatLonAltBoxChanged( ) ) );
+    connect( &m_center, SIGNAL(latitudeChanged()), this, SLOT(updateCenterPosition()));
+    connect( &m_center, SIGNAL(longitudeChanged()), this, SLOT(updateCenterPosition()));
 }
 
 QStringList MarbleWidget::activeFloatItems() const
@@ -158,9 +160,14 @@ void MarbleWidget::setCenter( Coordinate* center )
         m_center.setLongitude( center->longitude() );
         m_center.setLatitude( center->latitude() );
         m_center.setAltitude( center->altitude() );
-        m_marbleWidget->centerOn( center->longitude(), center->latitude() );
-        emit centerChanged();
+        updateCenterPosition();
     }
+}
+
+void MarbleWidget::updateCenterPosition()
+{
+  m_marbleWidget->centerOn( m_center.longitude(), m_center.latitude() );
+  emit centerChanged();
 }
 
 }

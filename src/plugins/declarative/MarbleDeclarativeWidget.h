@@ -117,6 +117,9 @@ public Q_SLOTS:
 
     Marble::Declarative::Tracking* tracking();
 
+private Q_SLOTS:
+    void updateCenterPosition();
+
 private:
     /** Wrapped MarbleWidget */
     Marble::MarbleWidget* m_marbleWidget;
