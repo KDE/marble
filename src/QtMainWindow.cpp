@@ -324,7 +324,6 @@ void MainWindow::createMenus()
 
         setupZoomButtons();
 
-        m_manageBookmarksAct->setText( tr( "Bookmarks" ) );
         menuBar()->addAction( m_manageBookmarksAct );
         menuBar()->addAction( m_aboutMarbleAct );
         m_controlView->setSideBarShown( false );
