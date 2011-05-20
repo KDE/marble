@@ -66,6 +66,7 @@ private Q_SLOTS:
     void startReverseGeocoding();
     void showAddressInformation( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark );
     void addBookmark();
+    void toggleFullscreen( bool enabled );
 
  private:
     /**

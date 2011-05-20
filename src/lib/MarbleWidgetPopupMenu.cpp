@@ -68,6 +68,8 @@ void MarbleWidgetPopupMenu::createActions()
     m_setHomePointAction  = new QAction( tr( "&Set Home Location" ), this);
     QAction* addBookmark = new QAction( QIcon(":/icons/bookmark-new.png"),
                                         tr( "Add &Bookmark" ), this );
+    QAction* fullscreenAction = new QAction( tr( "&Full Screen Mode" ), this );
+    fullscreenAction->setCheckable( true );
 
     m_aboutDialogAction = new QAction( tr( "&About" ), this );
 
@@ -90,6 +92,7 @@ void MarbleWidgetPopupMenu::createActions()
     m_smallScreenMenu->addAction( addBookmark );
     m_smallScreenMenu->addSeparator();
     m_smallScreenMenu->addMenu( infoBoxMenu );
+    m_smallScreenMenu->addAction( fullscreenAction );
     m_smallScreenMenu->addSeparator();
 
     connect( fromHere, SIGNAL( triggered( ) ), SLOT( directionsFromHere() ) );
@@ -98,6 +101,7 @@ void MarbleWidgetPopupMenu::createActions()
     connect( addBookmark, SIGNAL( triggered( ) ), SLOT( addBookmark() ) );
     connect( m_aboutDialogAction, SIGNAL( triggered() ), SLOT( slotAboutDialog() ) );
     connect( m_copyCoordinateAction,SIGNAL( triggered() ), SLOT( slotCopyCoordinates() ) );
+    connect( fullscreenAction, SIGNAL( triggered( bool ) ), this, SLOT( toggleFullscreen( bool ) ) );
 }
 
 QMenu* MarbleWidgetPopupMenu::createInfoBoxMenu()
@@ -358,6 +362,20 @@ void MarbleWidgetPopupMenu::addBookmark()
         dialog->setMarbleWidget( m_widget );
         dialog->exec();
         delete dialog;
+    }
+}
+
+void MarbleWidgetPopupMenu::toggleFullscreen( bool enabled )
+{
+    QWidget* parent = m_widget;
+    for ( ; parent->parentWidget(); parent = parent->parentWidget() ) {
+        // nothing to do
+    }
+
+    if ( enabled ) {
+        parent->setWindowState( parent->windowState() | Qt::WindowFullScreen );
+    } else {
+        parent->setWindowState( parent->windowState() & ~Qt::WindowFullScreen );
     }
 }
 
