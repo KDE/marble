@@ -35,21 +35,27 @@ MarbleAbstractRunner* LocalOsmSearchPlugin::newRunner() const
     if ( !m_databaseLoaded ) {
         m_databaseLoaded = true;
         QString base = MarbleDirs::localPath() + "/maps/earth/placemarks/";
-        QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotDot;
+        addDatabaseDirectory( base );
+        QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotAndDotDot;
         QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories | QDirIterator::FollowSymlinks;
         QDirIterator iter( base, filters, flags );
         while ( iter.hasNext() ) {
             iter.next();
-            QDir directory( iter.filePath() );
-            QStringList const nameFilters = QStringList() << "*.sqlite";
-            QStringList const files( directory.entryList( nameFilters, QDir::Files ) );
-            foreach( const QString &file, files ) {
-                m_database.addFile( directory.filePath( file ) );
-            }
+            addDatabaseDirectory( iter.filePath() );
         }
     }
 
     return new LocalOsmSearchRunner( &m_database );
+}
+
+void LocalOsmSearchPlugin::addDatabaseDirectory( const QString &path ) const
+{
+    QDir directory( path );
+    QStringList const nameFilters = QStringList() << "*.sqlite";
+    QStringList const files( directory.entryList( nameFilters, QDir::Files ) );
+    foreach( const QString &file, files ) {
+        m_database.addFile( directory.filePath( file ) );
+    }
 }
 
 }

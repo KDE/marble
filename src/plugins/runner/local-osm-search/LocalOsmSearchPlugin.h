@@ -29,6 +29,8 @@ public:
     virtual MarbleAbstractRunner* newRunner() const;
 
 private:
+    void addDatabaseDirectory( const QString &path ) const;
+
     /** @todo: FIXME newRunner() is another virtual method that shouldn't be const */
     mutable bool m_databaseLoaded;
     mutable OsmDatabase m_database;
