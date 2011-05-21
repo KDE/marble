@@ -47,6 +47,9 @@ public:
     /** Toggles whether to work offline, i.e. use search runners that use the network */
     void setWorkOffline( bool workOffline );
 
+    /** Toggle whether the dialog can be used to search for placemarks */
+    void setSearchEnabled( bool enabled );
+
     /**
       * Returns the position of the item selected by the user, or a default
       * constructed GeoDataLookAt if the dialog was cancelled by the user

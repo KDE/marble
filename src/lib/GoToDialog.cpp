@@ -390,6 +390,16 @@ void GoToDialog::setShowRoutingItems( bool show )
     d->m_targetModel->setShowRoutingItems( show );
 }
 
+void GoToDialog::setSearchEnabled( bool enabled )
+{
+    browseButton->setVisible( enabled );
+    searchButton->setVisible( enabled );
+    if ( !enabled ) {
+        searchButton->setChecked( false );
+        updateSearchMode();
+    }
+}
+
 void GoToDialog::setWorkOffline( bool workOffline )
 {
     d->m_workOffline = workOffline;

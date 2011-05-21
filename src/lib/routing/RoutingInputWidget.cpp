@@ -475,6 +475,7 @@ void RoutingInputWidget::openTargetSelectionDialog()
     QPointer<GoToDialog> dialog = new GoToDialog( d->m_marbleWidget, this );
     dialog->setWindowTitle( tr( "Choose Placemark" ) );
     dialog->setShowRoutingItems( false );
+    dialog->setSearchEnabled( false );
     if ( dialog->exec() == QDialog::Accepted ) {
         GeoDataLookAt lookAt = dialog->lookAt();
         setTargetPosition( lookAt.coordinates() );
