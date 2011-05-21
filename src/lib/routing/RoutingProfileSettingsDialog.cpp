@@ -91,6 +91,8 @@ void RoutingProfileSettingsDialog::updateConfigWidget( )
         m_ui->settingsStack->setEnabled( item->checkState() == Qt::Checked );
     } else {
         m_ui->settingsStack->setEnabled( false );
+        m_ui->noConfigDescriptionLabel->setText( plugin->description() );
+        m_ui->noConfigStatusLabel->setText( plugin->statusMessage() );
         m_ui->settingsStack->setCurrentWidget( m_ui->noConfigAvailablePage );
     }
 }
