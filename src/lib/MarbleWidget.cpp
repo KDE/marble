@@ -542,7 +542,8 @@ void MarbleWidget::zoomIn( FlyToMode mode )
     if ( d->m_map->tileZoomLevel() < 0 ) {
         zoomViewBy( d->m_zoomStep, mode );
     } else {
-        const int radius = d->m_map->preferredRadiusCeil( d->m_map->radius() * 1.05 ) + 2;
+        int radius = d->m_map->preferredRadiusCeil( d->m_map->radius() * 1.05 ) + 2;
+        radius = qMax<int>( d->radius( minimumZoom() ), qMin<int>( radius, d->radius( maximumZoom() ) ) );
 
         GeoDataLookAt target = lookAt();
         target.setRange( KM2METER * distanceFromRadius( radius ) );
@@ -556,7 +557,8 @@ void MarbleWidget::zoomOut( FlyToMode mode )
     if ( d->m_map->tileZoomLevel() < 0 ) {
         zoomViewBy( -d->m_zoomStep, mode );
     } else {
-        const int radius = d->m_map->preferredRadiusFloor( d->m_map->radius() * 0.95 ) + 2;
+        int radius = d->m_map->preferredRadiusFloor( d->m_map->radius() * 0.95 ) + 2;
+        radius = qMax<int>( d->radius( minimumZoom() ), qMin<int>( radius, d->radius( maximumZoom() ) ) );
 
         GeoDataLookAt target = lookAt();
         target.setRange( KM2METER * distanceFromRadius( radius ) );
