@@ -260,7 +260,8 @@ void RoutingPluginPrivate::toggleGuidanceMode( bool enabled )
             if ( source.longitude() != 0.0 || source.latitude() != 0.0 ) {
                 GeoDataLookAt view;
                 view.setCoordinates( source );
-                view.setRange( 750 );
+                // By happy coincidence this equals OpenStreetMap tile level 15
+                view.setRange( 851.807 );
                 m_marbleWidget->flyTo( view );
             }
         }

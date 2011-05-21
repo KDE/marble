@@ -155,7 +155,8 @@ QVariant TargetModel::currentLocationData ( int role ) const
         case GeoDataLookAtRole: {
             GeoDataLookAt result;
             result.setCoordinates( currentLocation );
-            result.setRange( 750.0 );
+            // By happy coincidence this equals OpenStreetMap tile level 15
+            result.setRange( 851.807 );
             return qVariantFromValue( result );
         }
         }
@@ -173,7 +174,8 @@ QVariant TargetModel::routeData ( const QVector<GeoDataPlacemark> &via, int inde
     case GeoDataLookAtRole: {
         GeoDataLookAt result;
         result.setCoordinates( via.at( index ).coordinate() );
-        result.setRange( 750.0 );
+        // By happy coincidence this equals OpenStreetMap tile level 16
+        result.setRange( 425.903 );
         return qVariantFromValue( result );
     }
     }
@@ -297,7 +299,8 @@ void GoToDialogPrivate::saveSelection( const QModelIndex &index )
         QVariant coordinates = m_placemarkModel->data( index, MarblePlacemarkModel::CoordinateRole );
         m_lookAt = GeoDataLookAt();
         m_lookAt.setCoordinates( qVariantValue<GeoDataCoordinates>( coordinates ) );
-        m_lookAt.setRange( 750.0 );
+        // By happy coincidence this equals OpenStreetMap tile level 16
+        m_lookAt.setRange( 425.903 );
     } else {
         QVariant data = index.data( GeoDataLookAtRole );
         m_lookAt = qVariantValue<GeoDataLookAt>( data );
