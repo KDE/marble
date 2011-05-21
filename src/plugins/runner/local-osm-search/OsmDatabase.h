@@ -33,7 +33,7 @@ public:
     void addFile( const QString &file );
 
     /** Search the database for matching regions and placemarks */
-    QList<OsmPlacemark> find( MarbleModel* model, const QString &searchTerm );
+    QVector<OsmPlacemark> find( MarbleModel* model, const QString &searchTerm );
 
 private:
     QString wildcardQuery( const QString &term ) const;

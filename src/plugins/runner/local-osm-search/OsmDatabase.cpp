@@ -59,15 +59,15 @@ void OsmDatabase::addFile( const QString &fileName )
     m_databases << fileName;
 }
 
-QList<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &searchTerm )
+QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &searchTerm )
 {
     if ( m_databases.isEmpty() ) {
-        return QList<OsmPlacemark>();
+        return QVector<OsmPlacemark>();
     }
 
     DatabaseQuery userQuery( model, searchTerm );
 
-    QList<OsmPlacemark> result;
+    QVector<OsmPlacemark> result;
     QTime timer;
     timer.start();
     foreach( const QString &databaseFile, m_databases ) {
@@ -173,6 +173,10 @@ QList<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &search
         s_currentQuery = &userQuery;
         qSort( result.begin(), result.end(), placemarkHigherScore );
         s_currentQuery = 0;
+    }
+
+    if ( result.size() > 50 ) {
+        result.remove( 50, result.size()-50 );
     }
 
     return result;
