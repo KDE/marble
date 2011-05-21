@@ -83,14 +83,6 @@ private:
     long long m_lastDenseLatitude;
     long long m_lastDenseLongitude;
     int m_lastDenseTag;
-
-    std::vector< int > m_nodeTagIDs;
-    std::vector< int > m_wayTagIDs;
-    std::vector< int > m_relationTagIDs;
-
-    QHash< QString, int > m_nodeTags;
-    QHash< QString, int > m_wayTags;
-    QHash< QString, int > m_relationTags;
 };
 
 #endif // PBFPARSER_H

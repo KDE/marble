@@ -42,10 +42,8 @@ enum RelationRole {
 };
 
 struct OsmOsmRegion {
-    QString name;
-    Marble::GeoDataPolygon geometry;
-    OsmRegion region;
     OsmOsmRegion* parent;
+    OsmRegion region;
     int adminLevel;
 
     OsmOsmRegion() : parent( 0 ), adminLevel( 0 ) {}

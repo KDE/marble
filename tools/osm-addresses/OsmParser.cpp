@@ -140,7 +140,7 @@ void Way::setRegion( const QMap<int, Node> &database,  const OsmRegionTree & tre
 {
     if ( !city.isEmpty() ) {
         foreach( const OsmOsmRegion & region, osmOsmRegions ) {
-            if ( region.name == city ) {
+            if ( region.region.name() == city ) {
                 placemark.setRegionId( region.region.identifier() );
                 return;
             }
@@ -152,7 +152,6 @@ void Way::setRegion( const QMap<int, Node> &database,  const OsmRegionTree & tre
                     node.name == city ) {
                 qDebug() << "Creating a new implicit region from " << node.name << " at " << node.lon << "," << node.lat;
                 OsmOsmRegion region;
-                region.name = city;
                 region.region.setName( city );
                 region.region.setLongitude( node.lon );
                 region.region.setLatitude( node.lat );
@@ -164,7 +163,6 @@ void Way::setRegion( const QMap<int, Node> &database,  const OsmRegionTree & tre
 
         qDebug() << "Unable to locate city " << city << ", setting it up without coordinates";
         OsmOsmRegion region;
-        region.name = city;
         region.region.setName( city );
         placemark.setRegionId( region.region.identifier() );
         osmOsmRegions.push_back( region );
@@ -200,9 +198,7 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
 
     for ( int i = 0; i < m_osmOsmRegions.size(); ++i ) {
         OsmOsmRegion &osmOsmRegion = m_osmOsmRegions[i];
-        osmOsmRegion.region.setName( osmOsmRegion.name );
-        GeoDataCoordinates center = osmOsmRegion.geometry.latLonAltBox().center();
-        osmOsmRegion.region.setGeometry( osmOsmRegion.geometry );
+        GeoDataCoordinates center = osmOsmRegion.region.geometry().latLonAltBox().center();
         osmOsmRegion.region.setLongitude( center.longitude( GeoDataCoordinates::Degree ) );
         osmOsmRegion.region.setLatitude( center.latitude( GeoDataCoordinates::Degree ) );
     }
@@ -215,16 +211,16 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
     }
 
     for ( int i = 0; i < m_osmOsmRegions.size(); ++i ) {
-        GeoDataLinearRing const & ring = m_osmOsmRegions[i].geometry.outerBoundary();
+        GeoDataLinearRing const & ring = m_osmOsmRegions[i].region.geometry().outerBoundary();
         OsmOsmRegion* parent = 0;
         for ( int level=m_osmOsmRegions[i].adminLevel-1; level >= 0 && parent == 0; --level ) {
             QList<int> candidates = sortedRegions.values( level );
             foreach( int j, candidates ) {
-                GeoDataLinearRing const & outer = m_osmOsmRegions[j].geometry.outerBoundary();
+                GeoDataLinearRing const & outer = m_osmOsmRegions[j].region.geometry().outerBoundary();
                 if ( contains<GeoDataLinearRing, GeoDataLinearRing>( outer, ring ) ) {
-                    if ( parent == 0 || contains<GeoDataLinearRing, GeoDataLinearRing>( parent->geometry.outerBoundary(), outer ) ) {
-                        qDebug() << "Parent found: " << m_osmOsmRegions[i].name << ", level " << m_osmOsmRegions[i].adminLevel
-                                   << "is a child of " << m_osmOsmRegions[j].name << ", level " << m_osmOsmRegions[j].adminLevel ;
+                    if ( parent == 0 || contains<GeoDataLinearRing, GeoDataLinearRing>( parent->region.geometry().outerBoundary(), outer ) ) {
+                        qDebug() << "Parent found: " << m_osmOsmRegions[i].region.name() << ", level " << m_osmOsmRegions[i].adminLevel
+                                   << "is a child of " << m_osmOsmRegions[j].region.name() << ", level " << m_osmOsmRegions[j].adminLevel ;
                         parent = &m_osmOsmRegions[j];
                         break;
                     }
@@ -351,7 +347,7 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
         }
     }
 
-    qWarning() << "Step 8: There is no step 8. Done after " << timer.elapsed() << "ms.";
+    qWarning() << "Step 8: There is no step 8. Done after " << timer.elapsed() / 1000 << "s.";
     //writeOutlineKml( areaName );
 }
 
@@ -418,8 +414,8 @@ void OsmParser::importMultipolygon( const Relation &relation )
         }
 
         OsmOsmRegion region;
-        region.name = relation.name;
-        region.geometry = polygon;
+        region.region.setName( relation.name );
+        region.region.setGeometry( polygon );
         region.adminLevel = relation.adminLevel;
         m_osmOsmRegions.push_back( region );
     }
@@ -575,7 +571,7 @@ void OsmParser::writeOutlineKml( const QString & ) const
 
     foreach( const OsmOsmRegion & region, m_osmOsmRegions ) {
         GeoDataPlacemark* placemark = new GeoDataPlacemark;
-        placemark->setName( region.name );
+        placemark->setName( region.region.name() );
 
         GeoDataStyle style;
         GeoDataLineStyle lineStyle;
@@ -593,7 +589,7 @@ void OsmParser::writeOutlineKml( const QString & ) const
 
         placemark->setStyleUrl( QString( "#" ).append( styleMap.styleId() ) );
 
-        placemark->setGeometry( new GeoDataLinearRing( region.geometry.outerBoundary() ) );
+        placemark->setGeometry( new GeoDataLinearRing( region.region.geometry().outerBoundary() ) );
         document->append( placemark );
         document->addStyleMap( styleMap );
     }

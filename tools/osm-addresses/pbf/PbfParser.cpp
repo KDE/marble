@@ -244,16 +244,6 @@ void PbfParser::loadBlock()
     m_loadBlock = false;
     m_currentGroup = 0;
     m_currentEntity = 0;
-    int stringCount = m_primitiveBlock.stringtable().s_size();
-    m_nodeTagIDs.resize( m_primitiveBlock.stringtable().s_size() );
-    for ( int i = 1; i < stringCount; i++ )
-        m_nodeTagIDs[i] = m_nodeTags.value( m_primitiveBlock.stringtable().s( i ).data(), -1 );
-    m_wayTagIDs.resize( m_primitiveBlock.stringtable().s_size() );
-    for ( int i = 1; i < stringCount; i++ )
-        m_wayTagIDs[i] = m_wayTags.value( m_primitiveBlock.stringtable().s( i ).data(), -1 );
-    m_relationTagIDs.resize( m_primitiveBlock.stringtable().s_size() );
-    for ( int i = 1; i < stringCount; i++ )
-        m_relationTagIDs[i] = m_relationTags.value( m_primitiveBlock.stringtable().s( i ).data(), -1 );
 }
 
 void PbfParser::parseNode()
