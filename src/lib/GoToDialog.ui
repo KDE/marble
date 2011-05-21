@@ -17,11 +17,7 @@
    <item row="0" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLineEdit" name="searchLineEdit">
-       <property name="placeholderText">
-        <string>Address or search term</string>
-       </property>
-      </widget>
+      <widget class="QLineEdit" name="searchLineEdit"/>
      </item>
      <item>
       <widget class="QPushButton" name="progress">

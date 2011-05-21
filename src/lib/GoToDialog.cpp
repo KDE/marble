@@ -350,6 +350,10 @@ GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::Window
 #endif // Q_WS_MAEMO_5
     setupUi( this );
 
+#if QT_VERSION >= 0x40700
+    searchLineEdit->setPlaceholderText( tr( "Address or search term" ) );
+#endif
+
     d->m_targetModel = new TargetModel( marbleWidget, this );
     bookmarkListView->setModel( d->m_targetModel );
     connect( bookmarkListView, SIGNAL( activated( QModelIndex ) ),
