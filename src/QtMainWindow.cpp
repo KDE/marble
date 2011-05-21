@@ -98,6 +98,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
         m_mapViewWindow( 0 ),
         m_routingWindow( 0 ),
         m_trackingWindow( 0 ),
+        m_gotoDialog( 0 ),
         m_routingWidget( 0 )
 {
 #ifdef Q_WS_MAEMO_5
@@ -1369,12 +1370,16 @@ void MainWindow::showMapWizard()
 
 void MainWindow::showGoToDialog()
 {
-    QPointer<GoToDialog> dialog = new GoToDialog( m_controlView->marbleWidget(), this );
-    if ( dialog->exec() == QDialog::Accepted ) {
-        GeoDataLookAt lookAt = dialog->lookAt();
+    if ( !m_gotoDialog ) {
+        m_gotoDialog = new GoToDialog( m_controlView->marbleWidget(), this );
+    }
+
+    m_gotoDialog->show();
+    m_gotoDialog->setWorkOffline( m_workOfflineAct->isChecked() );
+    if ( m_gotoDialog->exec() == QDialog::Accepted ) {
+        GeoDataLookAt lookAt = m_gotoDialog->lookAt();
         m_controlView->marbleWidget()->flyTo( lookAt );
     }
-    delete dialog;
 }
 
 #include "QtMainWindow.moc"

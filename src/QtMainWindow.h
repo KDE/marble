@@ -33,6 +33,7 @@ class QtMarbleConfigDialog;
 class DownloadRegionDialog;
 class RoutingWidget;
 class StackableWindow;
+class GoToDialog;
 
 class MainWindow : public QMainWindow
 {
@@ -205,6 +206,7 @@ private:
     StackableWindow *m_mapViewWindow;
     StackableWindow *m_routingWindow;
     StackableWindow *m_trackingWindow;
+    GoToDialog *m_gotoDialog;
 
     RoutingWidget *m_routingWidget;
 };

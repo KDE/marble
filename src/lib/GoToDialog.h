@@ -44,6 +44,9 @@ public:
     /** Toggle whether routing items (source, destination and via points) are visible */
     void setShowRoutingItems( bool show );
 
+    /** Toggles whether to work offline, i.e. use search runners that use the network */
+    void setWorkOffline( bool workOffline );
+
     /**
       * Returns the position of the item selected by the user, or a default
       * constructed GeoDataLookAt if the dialog was cancelled by the user
