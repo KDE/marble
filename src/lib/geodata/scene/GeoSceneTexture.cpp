@@ -189,7 +189,7 @@ QUrl GeoSceneTexture::downloadUrl( const TileId &id ) const
 {
     // default download url
     if ( m_downloadUrls.empty() )
-        return m_serverLayout->downloadUrl( QUrl( "http://download.kde.org/apps/marble/" ), id );
+        return m_serverLayout->downloadUrl( QUrl( "http://files.kde.org/marble/" ), id );
 
     if ( m_nextUrl == m_downloadUrls.constEnd() )
         m_nextUrl = m_downloadUrls.constBegin();
