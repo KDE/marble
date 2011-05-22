@@ -22,6 +22,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QFileInfo>
 #include <QtCore/QMap>
+#include <QtCore/QHash>
 #include <QtCore/QList>
 #include <QtCore/QPair>
 
@@ -61,11 +62,17 @@ struct Element {
         category( OsmPlacemark::UnknownCategory ) {}
 };
 
+struct Coordinate {
+    float lon;
+    float lat;
+};
+
 struct Node : public Element {
     float lon;
     float lat;
 
     operator OsmPlacemark() const;
+    operator Coordinate() const;
 };
 
 struct Way : public Element {
@@ -73,8 +80,8 @@ struct Way : public Element {
     bool isBuilding;
 
     operator OsmPlacemark() const;
-    void setPosition( const QMap<int, Node> &database, OsmPlacemark &placemark ) const;
-    void setRegion( const QMap<int, Node> &database, const OsmRegionTree & tree, QList<OsmOsmRegion> & osmOsmRegions, OsmPlacemark &placemark ) const;
+    void setPosition( const QHash<int, Coordinate> &database, OsmPlacemark &placemark ) const;
+    void setRegion( const QHash<int, Node> &database, const OsmRegionTree & tree, QList<OsmOsmRegion> & osmOsmRegions, OsmPlacemark &placemark ) const;
 };
 
 struct WayMerger {
@@ -128,6 +135,15 @@ struct Relation : public Element {
     }
 };
 
+struct Statistic {
+    unsigned int mergedWays;
+    unsigned int uselessWays;
+
+    Statistic() : mergedWays( 0 ),
+        uselessWays( 0 )
+    {}
+};
+
 class OsmParser : public QObject
 {
     Q_OBJECT
@@ -139,17 +155,19 @@ public:
     void read( const QFileInfo &file, const QString &areaName );
 
 protected:
-    virtual bool parse( const QFileInfo &file ) = 0;
+    virtual bool parse( const QFileInfo &file, int pass, bool &needAnotherPass ) = 0;
 
     bool shouldSave( ElementType type, const QString &key, const QString &value );
 
     void setCategory( Element &element, const QString &key, const QString &value );
 
-    QMap<int, Node> m_nodes;
+    QHash<int, Coordinate> m_coordinates;
 
-    QMap<int, Way> m_ways;
+    QHash<int, Node> m_nodes;
 
-    QMap<int, Relation> m_relations;
+    QHash<int, Way> m_ways;
+
+    QHash<int, Relation> m_relations;
 
 private:
     void importMultipolygon( const Relation &relation );
@@ -181,7 +199,9 @@ private:
 
     QList<OsmPlacemark> m_placemarks;
 
-    QMap<QString, OsmPlacemark::OsmCategory> m_categoryMap;
+    QHash<QString, OsmPlacemark::OsmCategory> m_categoryMap;
+
+    mutable Statistic m_statistic;
 };
 
 }

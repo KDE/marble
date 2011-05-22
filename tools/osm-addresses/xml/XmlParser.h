@@ -38,7 +38,7 @@ public:
     explicit XmlParser( QObject *parent = 0 );
 
 protected:
-    virtual bool parse( const QFileInfo &file );
+    virtual bool parse( const QFileInfo &file, int pass, bool &needAnotherPass );
 
 private:
     virtual bool startElement ( const QString & namespaceURI, const QString & localName, const QString & qName, const QXmlAttributes & atts );

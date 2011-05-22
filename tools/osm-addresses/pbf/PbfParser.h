@@ -21,6 +21,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QHash>
+#include <QtCore/QSet>
 #include <QtCore/QFile>
 #include <QtCore/QDataStream>
 
@@ -29,7 +30,7 @@ class PbfParser : public Marble::OsmParser
 public:
     PbfParser();
 
-    virtual bool parse( const QFileInfo &file );
+    virtual bool parse( const QFileInfo &file, int pass, bool &needAnotherPass );
 
 private:
     enum Mode {
@@ -83,6 +84,10 @@ private:
     long long m_lastDenseLatitude;
     long long m_lastDenseLongitude;
     int m_lastDenseTag;
+    int m_pass;
+
+    QSet<int> m_referencedWays;
+    QSet<int> m_referencedNodes;
 };
 
 #endif // PBFPARSER_H

@@ -21,8 +21,10 @@ XmlParser::XmlParser( QObject *parent ) :
     // nothing to do
 }
 
-bool XmlParser::parse( const QFileInfo &content )
+bool XmlParser::parse( const QFileInfo &content, int, bool &needAnotherPass )
 {
+    needAnotherPass = false;
+
     QXmlSimpleReader xmlReader;
     xmlReader.setContentHandler( this );
     xmlReader.setErrorHandler( this );

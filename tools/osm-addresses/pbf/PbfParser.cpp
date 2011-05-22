@@ -33,8 +33,11 @@ PbfParser::PbfParser() :
     GOOGLE_PROTOBUF_VERIFY_VERSION;
 }
 
-bool PbfParser::parse( const QFileInfo &fileInfo )
+bool PbfParser::parse( const QFileInfo &fileInfo, int pass, bool &needAnotherPass )
 {
+    m_pass = pass;
+    needAnotherPass = pass < 2;
+
     QFile file( fileInfo.absoluteFilePath() );
     if ( !file.open( QFile::ReadOnly ) ) {
         qCritical() << "Unable to open file " << fileInfo.absoluteFilePath() << " for reading.";
@@ -67,6 +70,12 @@ bool PbfParser::parse( const QFileInfo &fileInfo )
 
         if ( m_loadBlock ) {
             if ( !readNext() ) {
+                if ( pass == 1 ) {
+                    m_referencedWays.clear();
+                } else if ( pass == 2 ) {
+                    m_referencedNodes.clear();
+                }
+
                 return true;
             }
             loadBlock();
@@ -248,36 +257,44 @@ void PbfParser::loadBlock()
 
 void PbfParser::parseNode()
 {
-    const Node& inputNode = m_primitiveBlock.primitivegroup( m_currentGroup ).nodes( m_currentEntity );
-    Marble::Node node;
-    node.lat = ( ( double ) inputNode.lat() * m_primitiveBlock.granularity() + m_primitiveBlock.lat_offset() ) / ( 1000.0 * 1000.0 * 1000.0 );
-    node.lon = ( ( double ) inputNode.lon() * m_primitiveBlock.granularity() + m_primitiveBlock.lon_offset() ) / ( 1000.0 * 1000.0 * 1000.0 );
+    if ( m_pass == 2 ) {
+        const Node& inputNode = m_primitiveBlock.primitivegroup( m_currentGroup ).nodes( m_currentEntity );
+        Marble::Node node;
+        node.lat = ( ( double ) inputNode.lat() * m_primitiveBlock.granularity() + m_primitiveBlock.lat_offset() ) / ( 1000.0 * 1000.0 * 1000.0 );
+        node.lon = ( ( double ) inputNode.lon() * m_primitiveBlock.granularity() + m_primitiveBlock.lon_offset() ) / ( 1000.0 * 1000.0 * 1000.0 );
 
-    for ( int tag = 0; tag < inputNode.keys_size(); tag++ ) {
+        for ( int tag = 0; tag < inputNode.keys_size(); tag++ ) {
 
-        QString key = QString::fromUtf8( m_primitiveBlock.stringtable().s( inputNode.keys( tag ) ).data() );
-        QString value = QString::fromUtf8( m_primitiveBlock.stringtable().s( inputNode.vals( tag ) ).data() );
+            QString key = QString::fromUtf8( m_primitiveBlock.stringtable().s( inputNode.keys( tag ) ).data() );
+            QString value = QString::fromUtf8( m_primitiveBlock.stringtable().s( inputNode.vals( tag ) ).data() );
 
-        if ( key == "name" ) {
-            node.name = value;
-        } else if ( key == "addr:street" ) {
-            node.street = value;
-            node.save = true;
-        } else if ( key == "addr:housenumber" ) {
-            node.houseNumber = value;
-            node.save = true;
-        } else if ( key == "addr:city" ) {
-            node.city = value;
-            node.save = true;
-        } else {
-            if ( shouldSave( Marble::NodeType, key, value ) ) {
+            if ( key == "name" ) {
+                node.name = value;
+            } else if ( key == "addr:street" ) {
+                node.street = value;
                 node.save = true;
+            } else if ( key == "addr:housenumber" ) {
+                node.houseNumber = value;
+                node.save = true;
+            } else if ( key == "addr:city" ) {
+                node.city = value;
+                node.save = true;
+            } else {
+                if ( shouldSave( Marble::NodeType, key, value ) ) {
+                    node.save = true;
+                }
+                setCategory( node, key, value );
             }
-            setCategory( node, key, value );
+        }
+
+        if ( node.save ) {
+            m_nodes[inputNode.id()] = node;
+        }
+
+        if ( m_referencedNodes.contains( inputNode.id() ) ) {
+            m_coordinates[inputNode.id()] = node;
         }
     }
-
-    m_nodes[inputNode.id()] = node;
 
     m_currentEntity++;
     if ( m_currentEntity >= m_primitiveBlock.primitivegroup( m_currentGroup ).nodes_size() ) {
@@ -292,41 +309,59 @@ void PbfParser::parseNode()
 
 void PbfParser::parseWay()
 {
-    const Way& inputWay = m_primitiveBlock.primitivegroup( m_currentGroup ).ways( m_currentEntity );
-    Marble::Way way;
+    if ( m_pass == 1 ) {
+        const Way& inputWay = m_primitiveBlock.primitivegroup( m_currentGroup ).ways( m_currentEntity );
+        Marble::Way way;
 
-    for ( int tag = 0; tag < inputWay.keys_size(); tag++ ) {
-        QString key = QString::fromUtf8( m_primitiveBlock.stringtable().s( inputWay.keys( tag ) ).data() );
-        QString value = QString::fromUtf8( m_primitiveBlock.stringtable().s( inputWay.vals( tag ) ).data() );
+        for ( int tag = 0; tag < inputWay.keys_size(); tag++ ) {
+            QString key = QString::fromUtf8( m_primitiveBlock.stringtable().s( inputWay.keys( tag ) ).data() );
+            QString value = QString::fromUtf8( m_primitiveBlock.stringtable().s( inputWay.vals( tag ) ).data() );
 
-        if ( key == "name" ) {
-            way.name = value;
-        } else if ( key == "addr:street" ) {
-            way.street = value;
-            way.save = true;
-        } else if ( key == "addr:housenumber" ) {
-            way.houseNumber = value;
-            way.save = true;
-        } else if ( key == "addr:city" ) {
-            way.city = value;
-            way.save = true;
-        } else if ( key == "building" && value == "yes" ) {
-            way.isBuilding = true;
-        } else  {
-            if ( shouldSave( Marble::WayType, key, value ) ) {
+            if ( key == "name" ) {
+                way.name = value;
+            } else if ( key == "addr:street" ) {
+                way.street = value;
                 way.save = true;
+            } else if ( key == "addr:housenumber" ) {
+                way.houseNumber = value;
+                way.save = true;
+            } else if ( key == "addr:city" ) {
+                way.city = value;
+                way.save = true;
+            } else if ( key == "building" && value == "yes" ) {
+                way.isBuilding = true;
+            } else  {
+                if ( shouldSave( Marble::WayType, key, value ) ) {
+                    way.save = true;
+                }
+                setCategory( way, key, value );
             }
-            setCategory( way, key, value );
+        }
+
+        long long lastRef = 0;
+        for ( int i = 0; i < inputWay.refs_size(); i++ ) {
+            lastRef += inputWay.refs( i );
+            way.nodes.push_back( lastRef );
+        }
+
+        if ( way.save || m_referencedWays.contains( inputWay.id() ) ) {
+            if ( !way.isBuilding && way.nodes.size() > 1 && !m_referencedWays.contains( inputWay.id() ) ) {
+                QList<int> nodes = way.nodes;
+                way.nodes.clear();
+                way.nodes << nodes.first();
+                if ( nodes.size() > 2 ) {
+                    way.nodes << nodes.at( nodes.size() / 2 );
+                }
+                way.nodes << nodes.last();
+            }
+
+            foreach( int node, way.nodes ) {
+                m_referencedNodes << node;
+            }
+
+            m_ways[inputWay.id()] = way;
         }
     }
-
-    long long lastRef = 0;
-    for ( int i = 0; i < inputWay.refs_size(); i++ ) {
-        lastRef += inputWay.refs( i );
-        way.nodes.push_back( lastRef );
-    }
-
-    m_ways[inputWay.id()] = way;
 
     m_currentEntity++;
     if ( m_currentEntity >= m_primitiveBlock.primitivegroup( m_currentGroup ).ways_size() ) {
@@ -341,50 +376,51 @@ void PbfParser::parseWay()
 
 void PbfParser::parseRelation()
 {
-    const Relation& inputRelation = m_primitiveBlock.primitivegroup( m_currentGroup ).relations( m_currentEntity );
-    Marble::Relation relation;
+    if ( m_pass == 0 ) {
+        const Relation& inputRelation = m_primitiveBlock.primitivegroup( m_currentGroup ).relations( m_currentEntity );
+        Marble::Relation relation;
 
-    for ( int tag = 0; tag < inputRelation.keys_size(); tag++ ) {
+        for ( int tag = 0; tag < inputRelation.keys_size(); tag++ ) {
 
-        QString key = QString::fromUtf8( m_primitiveBlock.stringtable().s( inputRelation.keys( tag ) ).data() );
-        QString value = QString::fromUtf8( m_primitiveBlock.stringtable().s( inputRelation.vals( tag ) ).data() );
+            QString key = QString::fromUtf8( m_primitiveBlock.stringtable().s( inputRelation.keys( tag ) ).data() );
+            QString value = QString::fromUtf8( m_primitiveBlock.stringtable().s( inputRelation.vals( tag ) ).data() );
 
-        if ( key == "boundary" && value == "administrative" ) {
-            relation.isAdministrativeBoundary = true;
-        } else if ( key == "admin_level" ) {
-            relation.adminLevel = value.toInt();
-        } else if ( key == "name" ) {
-            relation.name = value;
-        } else if ( key == "type" && value == "multipolygon" ) {
-            relation.isMultipolygon = true;
+            if ( key == "boundary" && value == "administrative" ) {
+                relation.isAdministrativeBoundary = true;
+            } else if ( key == "admin_level" ) {
+                relation.adminLevel = value.toInt();
+            } else if ( key == "name" ) {
+                relation.name = value;
+            } else if ( key == "type" && value == "multipolygon" ) {
+                relation.isMultipolygon = true;
+            }
+        }
+
+        if ( relation.isAdministrativeBoundary ) {
+            long long lastRef = 0;
+            for ( int i = 0; i < inputRelation.types_size(); i++ ) {
+                lastRef += inputRelation.memids( i );
+                switch ( inputRelation.types( i ) ) {
+                case OSMPBF::Relation::NODE:
+                    relation.nodes.push_back( lastRef );
+                    break;
+                case OSMPBF::Relation::WAY: {
+                    string role = m_primitiveBlock.stringtable().s( inputRelation.roles_sid( i ) ).data();
+                    Marble::RelationRole relationRole = Marble::None;
+                    if ( role == "outer" ) relationRole = Marble::Outer;
+                    if ( role == "inner" ) relationRole = Marble::Inner;
+                    m_referencedWays << lastRef;
+                    relation.ways.push_back( QPair<int, Marble::RelationRole>( lastRef, relationRole ) );
+                }
+                break;
+                case OSMPBF::Relation::RELATION:
+                    relation.relations.push_back( lastRef );
+                }
+            }
+
+            m_relations[inputRelation.id()] = relation;
         }
     }
-
-    long long lastRef = 0;
-    for ( int i = 0; i < inputRelation.types_size(); i++ ) {
-        //        RelationMember member;
-        lastRef += inputRelation.memids( i );
-        switch ( inputRelation.types( i ) ) {
-        case OSMPBF::Relation::NODE:
-            relation.nodes.push_back( lastRef );
-            break;
-        case OSMPBF::Relation::WAY: {
-            string role = m_primitiveBlock.stringtable().s( inputRelation.roles_sid( i ) ).data();
-            Marble::RelationRole relationRole = Marble::None;
-            if ( role == "outer" ) relationRole = Marble::Outer;
-            if ( role == "inner" ) relationRole = Marble::Inner;
-            relation.ways.push_back( QPair<int, Marble::RelationRole>( lastRef, relationRole ) );
-        }
-        break;
-        case OSMPBF::Relation::RELATION:
-            relation.relations.push_back( lastRef );
-        }
-        //            member.ref = lastRef;
-        //            member.role = m_primitiveBlock.stringtable().s( inputRelation.roles_sid( i ) ).data();
-        //            relation->members.push_back( member );
-    }
-
-    m_relations[inputRelation.id()] = relation;
 
     m_currentEntity++;
     if ( m_currentEntity >= m_primitiveBlock.primitivegroup( m_currentGroup ).relations_size() ) {
@@ -400,49 +436,57 @@ void PbfParser::parseRelation()
 void PbfParser::parseDense()
 {
     const DenseNodes& dense = m_primitiveBlock.primitivegroup( m_currentGroup ).dense();
-    m_lastDenseID += dense.id( m_currentEntity );
-    m_lastDenseLatitude += dense.lat( m_currentEntity );
-    m_lastDenseLongitude += dense.lon( m_currentEntity );
+    if ( m_pass == 2 ) {
+        m_lastDenseID += dense.id( m_currentEntity );
+        m_lastDenseLatitude += dense.lat( m_currentEntity );
+        m_lastDenseLongitude += dense.lon( m_currentEntity );
 
-    Marble::Node node;
-    node.lat = ( ( double ) m_lastDenseLatitude * m_primitiveBlock.granularity() + m_primitiveBlock.lat_offset() ) / ( 1000.0 * 1000.0 * 1000.0 );
-    node.lon = ( ( double ) m_lastDenseLongitude * m_primitiveBlock.granularity() + m_primitiveBlock.lon_offset() ) / ( 1000.0 * 1000.0 * 1000.0 );
+        Marble::Node node;
+        node.lat = ( ( double ) m_lastDenseLatitude * m_primitiveBlock.granularity() + m_primitiveBlock.lat_offset() ) / ( 1000.0 * 1000.0 * 1000.0 );
+        node.lon = ( ( double ) m_lastDenseLongitude * m_primitiveBlock.granularity() + m_primitiveBlock.lon_offset() ) / ( 1000.0 * 1000.0 * 1000.0 );
 
-    while ( true ) {
-        if ( m_lastDenseTag >= dense.keys_vals_size() )
-            break;
+        while ( true ) {
+            if ( m_lastDenseTag >= dense.keys_vals_size() )
+                break;
 
-        int tagValue = dense.keys_vals( m_lastDenseTag );
-        if ( tagValue == 0 ) {
-            m_lastDenseTag++;
-            break;
-        }
-
-        QString key = QString::fromUtf8( m_primitiveBlock.stringtable().s( dense.keys_vals( m_lastDenseTag ) ).data() );
-        QString value = QString::fromUtf8( m_primitiveBlock.stringtable().s( dense.keys_vals( m_lastDenseTag + 1 ) ).data() );
-
-        if ( key == "name" ) {
-            node.name = value;
-        } else if ( key == "addr:street" ) {
-            node.street = value;
-            node.save = true;
-        } else if ( key == "addr:housenumber" ) {
-            node.houseNumber = value;
-            node.save = true;
-        } else if ( key == "addr:city" ) {
-            node.city = value;
-            node.save = true;
-        } else {
-            if ( shouldSave( Marble::NodeType, key, value ) ) {
-                node.save = true;
+            int tagValue = dense.keys_vals( m_lastDenseTag );
+            if ( tagValue == 0 ) {
+                m_lastDenseTag++;
+                break;
             }
-            setCategory( node, key, value );
+
+            QString key = QString::fromUtf8( m_primitiveBlock.stringtable().s( dense.keys_vals( m_lastDenseTag ) ).data() );
+            QString value = QString::fromUtf8( m_primitiveBlock.stringtable().s( dense.keys_vals( m_lastDenseTag + 1 ) ).data() );
+
+            if ( key == "name" ) {
+                node.name = value;
+            } else if ( key == "addr:street" ) {
+                node.street = value;
+                node.save = true;
+            } else if ( key == "addr:housenumber" ) {
+                node.houseNumber = value;
+                node.save = true;
+            } else if ( key == "addr:city" ) {
+                node.city = value;
+                node.save = true;
+            } else {
+                if ( shouldSave( Marble::NodeType, key, value ) ) {
+                    node.save = true;
+                }
+                setCategory( node, key, value );
+            }
+
+            m_lastDenseTag += 2;
         }
 
-        m_lastDenseTag += 2;
-    }
+        if ( node.save) {
+            m_nodes[m_lastDenseID] = node;
+        }
 
-    m_nodes[m_lastDenseID] = node;
+        if ( m_referencedNodes.contains( m_lastDenseID ) ) {
+            m_coordinates[m_lastDenseID] = node;
+        }
+    }
 
     ++m_currentEntity;
     if ( m_currentEntity >= dense.id_size() ) {
