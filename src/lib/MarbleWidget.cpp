@@ -309,12 +309,22 @@ int MarbleWidget::radius() const
 
 void MarbleWidget::setRadius( int radius )
 {
+    Q_ASSERT( radius >= 0 );
     if ( radius == d->m_map->radius() ) {
         return;
     }
-        
+
+    qreal const zoom = d->zoom( radius );
+
+    // Prevent exceeding zoom range
+    if ( zoom < minimumZoom() ) {
+        radius = d->radius( minimumZoom() );
+    } else if ( zoom > maximumZoom() ) {
+        radius = d->radius( maximumZoom() );
+    }
+
     d->m_map->setRadius( radius );
-    d->m_logzoom = qRound( d->zoom( radius ) );
+    d->m_logzoom = qRound( zoom );
 
     emit zoomChanged( d->m_logzoom );
     emit distanceChanged( distanceString() );
@@ -322,7 +332,6 @@ void MarbleWidget::setRadius( int radius )
 
     d->repaint();
 }
-
 
 qreal MarbleWidget::moveStep()
 {
