@@ -623,9 +623,11 @@ void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
     //prevent divide by zero
     if( box.height() && box.width() ) {
         //work out the needed zoom level
-        int horizontalRadius = ( 0.25 * M_PI ) * ( viewparams->height() / box.height() );
-        int verticalRadius = ( 0.25 * M_PI ) * ( viewparams->width() / box.width() );
-        setRadius( qMin<int>( horizontalRadius, verticalRadius ) );
+        int const horizontalRadius = ( 0.25 * M_PI ) * ( viewparams->height() / box.height() );
+        int const verticalRadius = ( 0.25 * M_PI ) * ( viewparams->width() / box.width() );
+        int const radius = qMin<int>( horizontalRadius, verticalRadius );
+        // radius < 0 can happen if the box size approaches zero
+        setRadius( radius < 0 ? d->radius( maximumZoom() ) : radius );
     }
 
     //move the map
