@@ -225,20 +225,20 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
 
     QMultiMap<int,int> sortedRegions;
     for ( int i = 0; i < m_osmOsmRegions.size(); ++i ) {
-        sortedRegions.insert( m_osmOsmRegions[i].adminLevel, i );
+        sortedRegions.insert( m_osmOsmRegions[i].region.adminLevel(), i );
     }
 
     for ( int i = 0; i < m_osmOsmRegions.size(); ++i ) {
         GeoDataLinearRing const & ring = m_osmOsmRegions[i].region.geometry().outerBoundary();
         OsmOsmRegion* parent = 0;
-        for ( int level=m_osmOsmRegions[i].adminLevel-1; level >= 0 && parent == 0; --level ) {
+        for ( int level=m_osmOsmRegions[i].region.adminLevel()-1; level >= 0 && parent == 0; --level ) {
             QList<int> candidates = sortedRegions.values( level );
             foreach( int j, candidates ) {
                 GeoDataLinearRing const & outer = m_osmOsmRegions[j].region.geometry().outerBoundary();
                 if ( contains<GeoDataLinearRing, GeoDataLinearRing>( outer, ring ) ) {
                     if ( parent == 0 || contains<GeoDataLinearRing, GeoDataLinearRing>( parent->region.geometry().outerBoundary(), outer ) ) {
-                        qDebug() << "Parent found: " << m_osmOsmRegions[i].region.name() << ", level " << m_osmOsmRegions[i].adminLevel
-                                   << "is a child of " << m_osmOsmRegions[j].region.name() << ", level " << m_osmOsmRegions[j].adminLevel ;
+                        qDebug() << "Parent found: " << m_osmOsmRegions[i].region.name() << ", level " << m_osmOsmRegions[i].region.adminLevel()
+                                   << "is a child of " << m_osmOsmRegions[j].region.name() << ", level " << m_osmOsmRegions[j].region.adminLevel();
                         parent = &m_osmOsmRegions[j];
                         break;
                     }
@@ -446,7 +446,7 @@ void OsmParser::importMultipolygon( const Relation &relation )
         OsmOsmRegion region;
         region.region.setName( relation.name );
         region.region.setGeometry( polygon );
-        region.adminLevel = relation.adminLevel;
+        region.region.setAdminLevel( relation.adminLevel );
         m_osmOsmRegions.push_back( region );
     }
 }

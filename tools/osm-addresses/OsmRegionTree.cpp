@@ -81,13 +81,27 @@ void OsmRegionTree::enumerate( QList<OsmRegion> &list ) const
 
 int OsmRegionTree::smallestRegionId( const GeoDataCoordinates &coordinates ) const
 {
+    int rootLevel = m_node.adminLevel();
+    return smallestRegionId( coordinates, rootLevel );
+}
+
+int OsmRegionTree::smallestRegionId( const GeoDataCoordinates &coordinates, int &level ) const
+{
+    int maxLevel = m_node.adminLevel();
+    int minId = m_node.identifier();
     foreach( const OsmRegionTree & child, m_children ) {
         if ( child.node().geometry().contains( coordinates ) ) {
-            return child.smallestRegionId( coordinates );
+            int childLevel = level;
+            int id = child.smallestRegionId( coordinates, childLevel );
+            if ( childLevel >= maxLevel ) {
+                maxLevel = childLevel;
+                minId = id;
+            }
         }
     }
 
-    return m_node.identifier();
+    level = maxLevel;
+    return minId;
 }
 
 }

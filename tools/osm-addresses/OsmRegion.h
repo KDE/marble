@@ -69,6 +69,10 @@ public:
 
     void setGeometry( const GeoDataPolygon &polygon );
 
+    int adminLevel() const;
+
+    void setAdminLevel( int level );
+
 private:
     static int m_idFactory;
 
@@ -87,6 +91,8 @@ private:
     int m_right;
 
     GeoDataPolygon m_geometry;
+
+    int m_adminLevel;
 };
 
 }

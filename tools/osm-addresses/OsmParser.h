@@ -45,9 +45,8 @@ enum RelationRole {
 struct OsmOsmRegion {
     OsmOsmRegion* parent;
     OsmRegion region;
-    int adminLevel;
 
-    OsmOsmRegion() : parent( 0 ), adminLevel( 0 ) {}
+    OsmOsmRegion() : parent( 0 ) {}
 };
 
 struct Element {

@@ -19,7 +19,7 @@ int OsmRegion::m_idFactory = 0;
 
 OsmRegion::OsmRegion() : m_identifier( ++m_idFactory ),
     m_parent( 0 ), m_longitude( 0.0 ), m_latitude( 0.0 ),
-    m_left( 0 ), m_right( 0 )
+    m_left( 0 ), m_right( 0 ), m_adminLevel( 10 )
 {
     // nothing to do
 }
@@ -108,5 +108,16 @@ void OsmRegion::setGeometry( const GeoDataPolygon &polygon )
 {
     m_geometry = polygon;
 }
+
+int OsmRegion::adminLevel() const
+{
+    return m_adminLevel;
+}
+
+void OsmRegion::setAdminLevel( int level )
+{
+    m_adminLevel = level;
+}
+
 
 }

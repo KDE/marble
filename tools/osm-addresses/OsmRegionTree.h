@@ -38,6 +38,8 @@ public:
     int smallestRegionId( const GeoDataCoordinates &coordinates ) const;
 
 private:
+    int smallestRegionId( const GeoDataCoordinates &coordinates, int &level ) const;
+
     void enumerate( QList<OsmRegion> &list ) const;
 
     OsmRegion m_node;
