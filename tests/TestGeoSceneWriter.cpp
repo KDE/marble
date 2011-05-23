@@ -12,6 +12,7 @@
 #include <QtCore/QTemporaryFile>
 #include <QtTest/QTest>
 #include <QtCore/QDebug>
+#include <QtCore/QDir>
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
@@ -27,6 +28,7 @@
 #include "GeoSceneSection.h"
 #include "GeoSceneItem.h"
 #include "GeoSceneVector.h"
+#include "DgmlElementDictionary.h"
 
 #include "GeoWriter.h"
 #include "GeoSceneParser.h"
@@ -38,8 +40,160 @@ class TestGeoSceneWriter : public QObject
     Q_OBJECT
 
 private slots:
+    void initTestCase();
+    void saveFile_data();
+    void saveFile();
+    void saveAndLoad_data();
+    void saveAndLoad();
+    void saveAndCompare_data();
+    void saveAndCompare();
+
     void writeHeadTag();
+private:
+    QDir dgmlPath;
+    QMap<QString, QSharedPointer<GeoSceneParser> > parsers;
 };
+
+Q_DECLARE_METATYPE( QSharedPointer<GeoSceneParser> )
+
+void TestGeoSceneWriter::initTestCase()
+{
+    QStringList dgmlFilters;
+    dgmlFilters << "*.dgml";
+
+    dgmlPath = QDir( DGML_PATH );
+    dgmlPath.setFilter(QDir::AllDirs | QDir::NoDotAndDotDot);
+
+    QString dgmlDirname;
+    foreach( dgmlDirname, dgmlPath.entryList() ) {
+        qDebug() << dgmlDirname;
+        QDir dataDir(dgmlPath.absoluteFilePath(dgmlDirname));
+        dataDir.setNameFilters( dgmlFilters );
+
+        //check there are dgml files in the data dir
+        if( dataDir.count() == 0 ) {
+            continue;
+        }
+
+        QString filename;
+        //test the loading of each file in the data dir
+        foreach( filename, dataDir.entryList(dgmlFilters, QDir::Files) ){
+
+            //Add example files
+            QFile file( dataDir.filePath(filename));
+
+            //Verify file existence
+            QVERIFY( file.exists() );
+
+            //Make the parsers
+            GeoSceneParser* parser = new GeoSceneParser( GeoScene_DGML );
+
+            QSharedPointer<GeoSceneParser>parserPointer ( parser );
+
+            //Open the files and verify
+            QVERIFY( file.open( QIODevice::ReadOnly ) );
+
+            //Parser and verify
+            QVERIFY2( parser->read( &file ), filename.toAscii() );
+
+            parsers.insert( dataDir.filePath(filename), parserPointer );
+
+            //close files
+            file.close();
+        }
+    }
+}
+
+void TestGeoSceneWriter::saveFile_data()
+{
+    QTest::addColumn<QSharedPointer<GeoSceneParser> >( "parser" );
+
+    foreach( QString key, parsers.keys() ) {
+        QTest::newRow( key.toLocal8Bit() ) << parsers.value(key);
+    }
+}
+
+void TestGeoSceneWriter::saveFile()
+{
+    QFETCH( QSharedPointer<GeoSceneParser>, parser );
+
+    //attempt to save a file using the GeoWriter
+    QTemporaryFile tempFile;
+
+    GeoWriter writer;
+    writer.setDocumentType( dgml::dgmlTag_nameSpace20 );
+
+    // Open file in right mode
+    QVERIFY( tempFile.open() );
+
+    QVERIFY( writer.write( &tempFile, (dynamic_cast<GeoSceneDocument*>(parser->activeDocument() ) ) ) );
+}
+
+void TestGeoSceneWriter::saveAndLoad_data()
+{
+    QTest::addColumn<QSharedPointer<GeoSceneParser> >( "parser" );
+
+    foreach( QString key, parsers.keys() ) {
+        QTest::newRow( key.toLocal8Bit() ) << parsers.value(key);
+    }
+}
+
+void TestGeoSceneWriter::saveAndLoad()
+{
+    //Save the file and then verify loading it again
+    QFETCH( QSharedPointer<GeoSceneParser>, parser );
+
+    QTemporaryFile tempFile;
+    GeoWriter writer;
+    writer.setDocumentType( dgml::dgmlTag_nameSpace20 );
+
+    // Open file in right mode
+    QVERIFY( tempFile.open() );
+
+    QVERIFY( writer.write( &tempFile, (dynamic_cast<GeoSceneDocument*>(parser->activeDocument() ) ) ) );
+
+    GeoSceneParser resultParser( GeoScene_DGML );
+
+    tempFile.reset();
+    QVERIFY( resultParser.read( &tempFile ) );
+}
+
+void TestGeoSceneWriter::saveAndCompare_data()
+{
+    QTest::addColumn<QSharedPointer<GeoSceneParser> >("parser");
+    QTest::addColumn<QString>("original");
+
+    foreach( QString key, parsers.keys() ) {
+        QTest::newRow( key.toLocal8Bit() ) << parsers.value(key) << key;
+    }
+}
+
+void TestGeoSceneWriter::saveAndCompare()
+{
+    //save the file and compare it to the original
+    QFETCH( QSharedPointer<GeoSceneParser>, parser );
+    QFETCH( QString, original );
+
+    //attempt to save a file using the GeoWriter
+    QTemporaryFile tempFile;
+
+    GeoWriter writer;
+    //FIXME: a better way to do this?
+    writer.setDocumentType( dgml::dgmlTag_nameSpace20 );
+
+    // Open file in right mode
+    QVERIFY( tempFile.open() );
+
+    QVERIFY( writer.write( &tempFile, (dynamic_cast<GeoSceneDocument*>(parser->activeDocument() ) ) ) );
+
+    QFile file( original );
+    QVERIFY( file.open( QIODevice::ReadOnly ) );
+    QVERIFY( tempFile.reset() );
+    QTextStream oldFile( &file );
+    QTextStream newFile( &tempFile );
+
+    QVERIFY( newFile.readAll().simplified().compare( oldFile.readAll().simplified() ) );
+}
 
 void TestGeoSceneWriter::writeHeadTag()
 {
@@ -145,11 +299,11 @@ void TestGeoSceneWriter::writeHeadTag()
     QVERIFY( writer.write( &tempFile, document ) );
     
     //Parser and verify
-    GeoSceneParser* parser = new GeoSceneParser( GeoScene_DGML );
+    GeoSceneParser parser( GeoScene_DGML );
     tempFile.reset();
-    QVERIFY( parser->read( &tempFile ) );
+    QVERIFY( parser.read( &tempFile ) );
 
-    GeoSceneDocument *document2 = static_cast<GeoSceneDocument*>( parser->activeDocument() );
+    GeoSceneDocument *document2 = static_cast<GeoSceneDocument*>( parser.activeDocument() );
     QTemporaryFile tempFile2;
     tempFile2.open();
     GeoWriter writer2;
@@ -160,7 +314,9 @@ void TestGeoSceneWriter::writeHeadTag()
     QTextStream file( &tempFile );
     tempFile2.reset();
     QTextStream file2( &tempFile2 );
-    QCOMPARE( file.readAll().simplified(), file2.readAll().simplified() );
+    QVERIFY( file.readAll().simplified().compare( file2.readAll().simplified() ) );
+
+    delete document;
 }
 
 QTEST_MAIN( TestGeoSceneWriter )

@@ -104,6 +104,7 @@ endif (QTONLY)
 marble_add_test( GeoPolygonTest )
 marble_add_test( TestGeoDataParser )
 marble_add_test( TestGeoDataWriter )
+add_definitions( -DDGML_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}/../data/maps/earth\\\"" )
 marble_add_test( TestGeoSceneWriter )
 
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
