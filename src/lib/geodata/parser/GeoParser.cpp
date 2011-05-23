@@ -102,9 +102,10 @@ bool GeoParser::read( QIODevice* device )
         }
     }
 
-    if ( error() )
+    if ( error() ) {
         mDebug() << "[GeoParser::read] -> Error occurred:" << errorString() << " at line: " << lineNumber();
-
+        delete releaseDocument();
+    }
     return !error();
 }
 

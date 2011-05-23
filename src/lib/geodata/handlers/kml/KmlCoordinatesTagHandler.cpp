@@ -71,16 +71,16 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
         Q_FOREACH( const QString& line, coordinatesLines ) {
             QStringList coordinates = line.trimmed().split( ',' );
             if ( parentItem.represents( kmlTag_Point ) && parentItem.is<GeoDataFeature>() ) {
-                GeoDataPoint *coord = new GeoDataPoint;
+                GeoDataPoint coord;
                 if ( coordinates.size() == 2 ) {
-                    coord->set( DEG2RAD * coordinates.at( 0 ).toDouble(),
+                    coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(),
                                 DEG2RAD * coordinates.at( 1 ).toDouble() );
                 } else if( coordinates.size() == 3 ) {
-                    coord->set( DEG2RAD * coordinates.at( 0 ).toDouble(),
+                    coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(),
                                 DEG2RAD * coordinates.at( 1 ).toDouble(),
                                 coordinates.at( 2 ).toDouble() );
                 }
-                parentItem.nodeAs<GeoDataPlacemark>()->setCoordinate( *coord );
+                parentItem.nodeAs<GeoDataPlacemark>()->setCoordinate( coord );
             } else {
                 GeoDataCoordinates coord;
                 if ( coordinates.size() == 2 ) {

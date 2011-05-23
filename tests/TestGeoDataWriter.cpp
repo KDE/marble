@@ -202,6 +202,9 @@ void TestGeoDataWriter::saveAndCompare()
 
 void TestGeoDataWriter::cleanupTestCase()
 {
+    foreach (QSharedPointer<GeoDataParser> parser, parsers.values()) {
+        delete parser->releaseDocument();
+    }
 }
 
 QTEST_MAIN( TestGeoDataWriter )

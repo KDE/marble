@@ -51,6 +51,7 @@ GeoDataParser::GeoDataParser(GeoDataSourceType source)
 
 GeoDataParser::~GeoDataParser()
 {
+    delete m_document;
 }
 
 bool GeoDataParser::isValidRootElement()
