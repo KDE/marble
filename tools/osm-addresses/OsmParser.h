@@ -181,7 +181,16 @@ private:
     bool contains( const T &outer, const T &inner ) const {
         for ( int i = 0; i < inner.size(); ++i ) {
             if ( !outer.contains( inner[i] ) ) {
-                return false;
+                bool onBorder = false;
+                for ( int k=0; k<outer.size(); ++k ) {
+                    if ( inner[i] == outer[k] ) {
+                        onBorder = true;
+                        break;
+                    }
+                }
+                if ( !onBorder ) {
+                    return false;
+                }
             }
         }
 

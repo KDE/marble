@@ -312,6 +312,7 @@ void PbfParser::parseWay()
     if ( m_pass == 1 ) {
         const Way& inputWay = m_primitiveBlock.primitivegroup( m_currentGroup ).ways( m_currentEntity );
         Marble::Way way;
+        Marble::Relation relation;
 
         for ( int tag = 0; tag < inputWay.keys_size(); tag++ ) {
             QString key = QString::fromUtf8( m_primitiveBlock.stringtable().s( inputWay.keys( tag ) ).data() );
@@ -330,6 +331,10 @@ void PbfParser::parseWay()
                 way.save = true;
             } else if ( key == "building" && value == "yes" ) {
                 way.isBuilding = true;
+            } else if ( key == "boundary" && value == "administrative" ) {
+                relation.isAdministrativeBoundary = true;
+            } else if ( key == "admin_level" ) {
+                relation.adminLevel = value.toInt();
             } else  {
                 if ( shouldSave( Marble::WayType, key, value ) ) {
                     way.save = true;
@@ -342,6 +347,12 @@ void PbfParser::parseWay()
         for ( int i = 0; i < inputWay.refs_size(); i++ ) {
             lastRef += inputWay.refs( i );
             way.nodes.push_back( lastRef );
+        }
+
+        if ( relation.isAdministrativeBoundary && !way.name.isEmpty() ) {
+            relation.name = way.name;
+            relation.ways << QPair<int, Marble::RelationRole>( inputWay.id(), Marble::Outer );
+            m_relations[inputWay.id()] = relation;
         }
 
         if ( way.save || m_referencedWays.contains( inputWay.id() ) ) {

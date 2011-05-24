@@ -30,6 +30,11 @@
 namespace Marble
 {
 
+bool moreImportantAdminArea( const OsmRegion &a, const OsmRegion b )
+{
+    return a.adminLevel() < b.adminLevel();
+}
+
 OsmParser::OsmParser( QObject *parent ) :
     QObject( parent )
 {
@@ -207,8 +212,11 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
                << "Now extracting regions from" << m_relations.size() << "relations";
 
     foreach( const Relation & relation, m_relations.values() ) {
-        if ( relation.isAdministrativeBoundary && relation.isMultipolygon ) {
+        if ( relation.isAdministrativeBoundary /*&& relation.isMultipolygon*/ ) {
             importMultipolygon( relation );
+            if ( !relation.relations.isEmpty() ) {
+                qDebug() << "Ignoring relations inside the relation " << relation.name;
+            }
         }
     }
 
@@ -257,6 +265,7 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
     OsmRegion mainArea;
     mainArea.setIdentifier( 0 );
     mainArea.setName( areaName );
+    mainArea.setAdminLevel( 1 );
     QPair<float, float> minLon( -180.0, 180.0 ), minLat( -90.0, 90.0 );
     foreach( const Coordinate & node, m_coordinates ) {
         minLon.first  = qMin( node.lon, minLon.first );
@@ -274,6 +283,7 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
         regions << region.region;
     }
 
+    qSort( regions.begin(), regions.end(), moreImportantAdminArea );
     OsmRegionTree regionTree( mainArea );
     regionTree.append( regions );
     Q_ASSERT( regions.isEmpty() );
@@ -353,6 +363,7 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
         regions << region.region;
     }
 
+    qSort( regions.begin(), regions.end(), moreImportantAdminArea );
     regionTree = OsmRegionTree( mainArea );
     regionTree.append( regions );
     Q_ASSERT( regions.isEmpty() );
@@ -429,7 +440,7 @@ void OsmParser::importMultipolygon( const Relation &relation )
 
     foreach( const GeoDataLineString & string, outer ) {
         if ( string.isEmpty() || !( string.first() == string.last() ) ) {
-            qDebug() << "Ignoring open polygon. Check data.";
+            qDebug() << "Ignoring open polygon in relation " << relation.name << ". Check data.";
             continue;
         }
 
@@ -447,6 +458,7 @@ void OsmParser::importMultipolygon( const Relation &relation )
         region.region.setName( relation.name );
         region.region.setGeometry( polygon );
         region.region.setAdminLevel( relation.adminLevel );
+        qDebug() << "Adding administrative region " << relation.name;
         m_osmOsmRegions.push_back( region );
     }
 }
