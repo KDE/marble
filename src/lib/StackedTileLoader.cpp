@@ -23,7 +23,6 @@
 
 #include "StackedTileLoader.h"
 
-#include "blendings/Blending.h"
 #include "GeoSceneTexture.h"
 #include "MarbleDebug.h"
 #include "MergedLayerDecorator.h"
@@ -61,8 +60,6 @@ public:
     {
         m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
     }
-
-    QImage mergeDecorations( TileId const &id, const QVector<QSharedPointer<TextureTile> > &tiles );
 
     void detectMaxTileLevel();
     QVector<GeoSceneTexture const *>
@@ -102,6 +99,7 @@ void StackedTileLoader::setTextureLayers( QVector<GeoSceneTexture const *> & tex
     d->m_tileCache.clear();
 
     d->detectMaxTileLevel();
+    d->m_layerDecorator.setThemeId( "maps/" + d->m_textureLayers.at( 0 )->sourceDir() );
 }
 
 void StackedTileLoader::setShowTileId( bool show )
@@ -219,7 +217,7 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
     }
     Q_ASSERT( !tiles.isEmpty() );
 
-    const QImage resultImage = d->mergeDecorations( stackedTileId, tiles );
+    const QImage resultImage = d->m_layerDecorator.merge( stackedTileId, tiles );
     stackedTile = new StackedTile( stackedTileId, resultImage, tiles );
 
     d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
@@ -303,7 +301,7 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
             }
         }
 
-        const QImage resultImage = d->mergeDecorations( stackedTileId, tiles );
+        const QImage resultImage = d->m_layerDecorator.merge( stackedTileId, tiles );
         displayedTile = new StackedTile( stackedTileId, resultImage, tiles );
         d->m_tilesOnDisplay.insert( stackedTileId, displayedTile );
 
@@ -343,45 +341,6 @@ StackedTileLoaderPrivate::findRelevantTextureLayers( TileId const & stackedTileI
             result.append( candidate );
     }
     return result;
-}
-
-QImage StackedTileLoaderPrivate::mergeDecorations( const TileId &id, const QVector<QSharedPointer<TextureTile> > &tiles )
-{
-    Q_ASSERT( !tiles.isEmpty() );
-    Q_ASSERT( !m_textureLayers.isEmpty() );
-//    mDebug() << "MarbleModel::paintTile: " << "x: " << x << "y:" << y << "level: " << level
-//             << "requestTileUpdate" << requestTileUpdate;
-
-    QImage resultImage;
-
-    // if there are more than one active texture layers, we have to convert the
-    // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
-    const bool withConversion = tiles.count() > 1;
-    QVector<QSharedPointer<TextureTile> >::const_iterator pos = tiles.constBegin();
-    QVector<QSharedPointer<TextureTile> >::const_iterator const end = tiles.constEnd();
-    for (; pos != end; ++pos ) {
-            Blending const * const blending = (*pos)->blending();
-            if ( blending ) {
-                mDebug() << "StackedTile::initResultTile: blending";
-                blending->blend( &resultImage, *pos );
-            }
-            else {
-                mDebug() << "StackedTile::initResultTile: "
-                    "no blending defined => copying top over bottom image";
-                if ( withConversion ) {
-                    resultImage = (*pos)->image()->convertToFormat( QImage::Format_ARGB32_Premultiplied );
-                } else {
-                    resultImage = (*pos)->image()->copy();
-                }
-            }
-    }
-
-    m_layerDecorator.setInfo( id );
-    m_layerDecorator.setTile( &resultImage );
-
-    m_layerDecorator.paint( "maps/" + m_textureLayers.at( 0 )->sourceDir() );
-
-    return resultImage;
 }
 
 }

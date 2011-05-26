@@ -16,6 +16,8 @@
 #ifndef MARBLE_MERGEDLAYERDECORATOR_H
 #define MARBLE_MERGEDLAYERDECORATOR_H
 
+#include <QtCore/QSharedPointer>
+#include <QtCore/QVector>
 #include <QtGui/QImage>
 
 #include "TileId.h"
@@ -30,6 +32,7 @@ class GeoSceneDocument;
 class GeoSceneTexture;
 class SunLocator;
 class StackedTile;
+class TextureTile;
 class TileLoader;
 
 class MergedLayerDecorator
@@ -38,31 +41,25 @@ class MergedLayerDecorator
     MergedLayerDecorator( TileLoader * const tileLoader, SunLocator* sunLocator );
     virtual ~MergedLayerDecorator();
 
-    // The Parameter themeId is only used for displaying the TileId,
-    // which is a debugging feature, therefore at this point QString remains.
-    void paint( const QString& themeId );
+    QImage merge( const TileId id, const QVector<QSharedPointer<TextureTile> > &tiles );
 
+    void setThemeId( const QString &themeId );
     void setShowTileId(bool show);
-    bool showTileId() const;
-
-    void setTile(QImage* tile);
-    void setInfo( TileId const &id );
 
  private:
-    QImage loadDataset();
+    QImage loadDataset( const TileId &id );
     int maxDivisor( int maximum, int fullLength );
 
     void initCityLights();
 
-    void paintSunShading();
-    void paintTileId(const QString& themeId);
+    void paintSunShading( QImage *tileImage, const TileId &id );
+    void paintTileId( QImage *tileImage, const TileId &id ) const;
 
  protected:
     Q_DISABLE_COPY( MergedLayerDecorator )
     TileLoader * const m_tileLoader;
-    QImage* m_tile;
-    TileId m_id;
     SunLocator* m_sunLocator;
+    QString m_themeId;
     bool m_showTileId;
     GeoSceneDocument *m_cityLightsTheme;
     GeoSceneTexture *m_cityLightsTextureLayer;
