@@ -39,6 +39,8 @@ public:
 
     virtual bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
 
+    virtual QHash< QString, QVariant > templateSettings( RoutingProfilesModel::ProfileTemplate profileTemplate ) const;
+
     virtual ConfigWidget *configWidget();
 
     virtual bool canWork( Capability capability ) const;

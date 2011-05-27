@@ -318,6 +318,31 @@ bool MonavPlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate profil
     return profileTemplate != RoutingProfilesModel::CarEcologicalTemplate;
 }
 
+QHash< QString, QVariant > MonavPlugin::templateSettings( RoutingProfilesModel::ProfileTemplate profileTemplate ) const
+{
+    QHash<QString, QVariant> result;
+    switch ( profileTemplate ) {
+        case RoutingProfilesModel::CarFastestTemplate:
+            result["transport"] = "Motorcar";
+            break;
+        case RoutingProfilesModel::CarShortestTemplate:
+            result["transport"] = "Motorcar";
+            break;
+        case RoutingProfilesModel::CarEcologicalTemplate:
+            break;
+        case RoutingProfilesModel::BicycleTemplate:
+            result["transport"] = "Bicycle";
+            break;
+        case RoutingProfilesModel::PedestrianTemplate:
+            result["transport"] = "Pedestrian";
+            break;
+        case RoutingProfilesModel::LastTemplate:
+            Q_ASSERT( false );
+            break;
+    }
+    return result;
+}
+
 MonavPlugin::MonavRoutingDaemonVersion MonavPlugin::monavVersion() const
 {
     return d->m_monavVersion;
