@@ -195,7 +195,7 @@ bool BookmarkManager::updateBookmarkFile()
             directory.mkpath( directoryPath );
         }
 
-        file.open( QIODevice::ReadWrite );
+        file.open( QIODevice::WriteOnly );
 
         if ( !writer.write( &file,  d->bookmarkDocument() ) ) {
             mDebug() << "Could not write the bookmarks file" << absoluteLocalFilePath;
