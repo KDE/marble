@@ -96,6 +96,7 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
 
         if ( !parser.read( &file ) ) {
             mDebug() << "Could not parse file" << absoluteFilePath;
+            return false;
         }
 
         delete d->m_bookmarkDocument;
