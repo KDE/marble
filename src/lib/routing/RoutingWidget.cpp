@@ -113,7 +113,6 @@ void RoutingWidgetPrivate::adjustInputWidgets()
         m_inputWidgets[i]->setIndex( i );
     }
 
-    //m_ui.optionsLabel->setVisible( !simple );
     adjustSearchButton();
 }
 
@@ -230,7 +229,7 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( retrieveRoute () ) );
     connect( d->m_ui.showInstructionsButton, SIGNAL( clicked( bool ) ),
              this, SLOT( showDirections() ) );
-    connect( d->m_ui.optionsLabel, SIGNAL( linkActivated( QString ) ),
+    connect( d->m_ui.configureButton, SIGNAL( clicked() ),
              this, SLOT( configureProfile() ) );
     connect( d->m_ui.routeComboBox, SIGNAL( currentIndexChanged( int ) ),
              this, SLOT( switchRoute( int ) ) );
