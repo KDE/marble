@@ -33,6 +33,8 @@ public:
 
     QHash<QString, QHash<QString, QVariant> >& pluginSettings();
 
+    bool operator==( const RoutingProfile &other ) const;
+
 private:
     QString m_name;
     //icon

@@ -129,6 +129,9 @@ private Q_SLOTS:
     /** Determine route retrieval failures and inform the user */
     void indicateRoutingFailure( GeoDataDocument* route );
 
+    /** Change selected routing profile to the one set in the shared request */
+    void updateActiveRoutingProfile();
+
 private:
     RoutingWidgetPrivate *const d;
 };

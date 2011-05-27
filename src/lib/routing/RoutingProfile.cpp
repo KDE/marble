@@ -40,4 +40,9 @@ QHash<QString, QHash<QString, QVariant> >& RoutingProfile::pluginSettings()
     return m_pluginSettings;
 }
 
+bool RoutingProfile::operator==( const RoutingProfile &other ) const
+{
+    return m_name == other.name() && m_pluginSettings == other.pluginSettings();
+}
+
 }

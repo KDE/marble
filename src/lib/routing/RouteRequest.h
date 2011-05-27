@@ -105,6 +105,9 @@ Q_SIGNALS:
     /** The element at the given position was removed */
     void positionRemoved( int index );
 
+    /** The routing profile was changed */
+    void routingProfileChanged();
+
 private:
     RouteRequestPrivate *const d;
 };

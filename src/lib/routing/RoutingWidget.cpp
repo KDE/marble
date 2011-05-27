@@ -208,6 +208,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( insertInputWidget( int ) ) );
     connect( d->m_routeRequest, SIGNAL( positionRemoved( int ) ),
              this, SLOT( removeInputWidget( int ) ) );
+    connect( d->m_routeRequest, SIGNAL( routingProfileChanged() ),
+             this, SLOT( updateActiveRoutingProfile() ) );
     connect( &d->m_progressTimer, SIGNAL( timeout() ),
              this, SLOT( updateProgress() ) );
     connect( d->m_ui.routeComboBox, SIGNAL( currentIndexChanged( int ) ),
@@ -245,6 +247,7 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     //d->m_ui.descriptionLabel->setVisible( false );
     d->m_ui.resultLabel->setVisible( false );
     setShowDirectionsButtonVisible( false );
+    updateActiveRoutingProfile();
 
     if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         d->m_ui.directionsListView->setVisible( false );
@@ -617,6 +620,13 @@ void RoutingWidget::indicateRoutingFailure( GeoDataDocument* route )
         d->m_ui.resultLabel->setText( "<font color=\"red\">" + results + "</font>" );
         d->m_ui.resultLabel->setVisible( true );
     }
+}
+
+void RoutingWidget::updateActiveRoutingProfile()
+{
+    RoutingProfile const profile = d->m_routingManager->routeRequest()->routingProfile();
+    QList<RoutingProfile> const profiles = d->m_routingManager->profilesModel()->profiles();
+    d->m_ui.routingProfileComboBox->setCurrentIndex( profiles.indexOf( profile ) );
 }
 
 } // namespace Marble

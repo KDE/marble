@@ -284,9 +284,10 @@ void RouteRequest::reverse()
     }
 }
 
-void RouteRequest::setRoutingProfile( const RoutingProfile &index )
+void RouteRequest::setRoutingProfile( const RoutingProfile &profile )
 {
-    d->m_routingProfile = index;
+    d->m_routingProfile = profile;
+    emit routingProfileChanged();
 }
 
 RoutingProfile RouteRequest::routingProfile() const

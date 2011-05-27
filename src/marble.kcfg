@@ -271,5 +271,8 @@
   <entry key="showGuidanceModeStartupWarning" type="Bool" >
    <default>true</default>
   </entry>
+  <entry key="currentRoutingProfile" type="Int" >
+   <default>0</default>
+ </entry>
  </group>
 </kcfg>

@@ -64,6 +64,7 @@
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
 #include "routing/RoutingWidget.h"
+#include "routing/RouteRequest.h"
 #include "PositionTracking.h"
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
@@ -973,6 +974,14 @@ void MainWindow::readSettings()
 
      setUpdatesEnabled(true);
 
+     // Load previous route settings
+     settings.beginGroup( "Routing" );
+     m_controlView->marbleModel()->routingManager()->readSettings();
+     bool const startupWarning = settings.value( "showGuidanceModeStartupWarning", QVariant( true ) ).toBool();
+     m_controlView->marbleModel()->routingManager()->setShowGuidanceModeStartupWarning( startupWarning );
+     settings.endGroup();
+
+
     settings.beginGroup( "Routing Profile" );
     if ( settings.contains( "Num" ) ) {
         QList<RoutingProfile> profiles;
@@ -998,6 +1007,12 @@ void MainWindow::readSettings()
     } else {
         m_controlView->marbleModel()->routingManager()->profilesModel()->loadDefaultProfiles();
     }
+    int const profileIndex = settings.value( "currentIndex", 0 ).toInt();
+    if ( profileIndex >= 0 && profileIndex < m_controlView->marbleModel()->routingManager()->profilesModel()->rowCount() ) {
+        RoutingProfile profile = m_controlView->marbleModel()->routingManager()->profilesModel()->profiles().at( profileIndex );
+        m_controlView->marbleModel()->routingManager()->routeRequest()->setRoutingProfile( profile );
+    }
+
     settings.endGroup();
 
     settings.beginGroup( "Plugins");
@@ -1019,13 +1034,6 @@ void MainWindow::readSettings()
     
      // The config dialog has to read settings.
      m_configDialog->readSettings();
-
-     // Load previous route settings
-     settings.beginGroup( "Routing" );
-     m_controlView->marbleModel()->routingManager()->readSettings();
-     bool const startupWarning = settings.value( "showGuidanceModeStartupWarning", QVariant( true ) ).toBool();
-     m_controlView->marbleModel()->routingManager()->setShowGuidanceModeStartupWarning( startupWarning );
-     settings.endGroup();
 
      settings.beginGroup( "Navigation" );
      m_controlView->setExternalMapEditor( settings.value( "externalMapEditor", "" ).toString() );
@@ -1111,6 +1119,8 @@ void MainWindow::writeSettings()
          }
          settings.endGroup();
      }
+     RoutingProfile const profile = m_controlView->marbleWidget()->model()->routingManager()->routeRequest()->routingProfile();
+     settings.setValue( "currentIndex", profiles.indexOf( profile ) );
      settings.endGroup();
 
      settings.beginGroup( "Plugins");

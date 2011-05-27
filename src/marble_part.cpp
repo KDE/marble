@@ -77,6 +77,7 @@
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
 #include "routing/RoutingProfilesWidget.h"
+#include "routing/RouteRequest.h"
 #include "SunControlWidget.h"
 #include "TimeControlWidget.h"
 #include "SunLocator.h"
@@ -464,6 +465,11 @@ void MarblePart::readSettings()
         }
     }
 
+    // Load previous route settings
+    m_controlView->marbleModel()->routingManager()->readSettings();
+    bool const startupWarning = MarbleSettings::showGuidanceModeStartupWarning();
+    m_controlView->marbleModel()->routingManager()->setShowGuidanceModeStartupWarning( startupWarning );
+
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
     if ( sharedConfig->hasGroup( "Routing Profiles" ) ) {
         QList<RoutingProfile> profiles;
@@ -487,6 +493,11 @@ void MarblePart::readSettings()
         m_controlView->marbleModel()->routingManager()->profilesModel()->setProfiles( profiles );
     } else {
         m_controlView->marbleModel()->routingManager()->profilesModel()->loadDefaultProfiles();
+    }
+    int const profileIndex = MarbleSettings::currentRoutingProfile();
+    if ( profileIndex >= 0 && profileIndex < m_controlView->marbleModel()->routingManager()->profilesModel()->rowCount() ) {
+        RoutingProfile profile = m_controlView->marbleModel()->routingManager()->profilesModel()->profiles().at( profileIndex );
+        m_controlView->marbleModel()->routingManager()->routeRequest()->setRoutingProfile( profile );
     }
 
     QString positionProvider = MarbleSettings::activePositionTrackingPlugin();
@@ -521,10 +532,6 @@ void MarblePart::readSettings()
     }
 
     readPluginSettings();
-    // Load previous route settings
-    m_controlView->marbleModel()->routingManager()->readSettings();
-    bool const startupWarning = MarbleSettings::showGuidanceModeStartupWarning();
-    m_controlView->marbleModel()->routingManager()->setShowGuidanceModeStartupWarning( startupWarning );
 
     disconnect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
                 this,                          SLOT( writePluginSettings() ) );
@@ -653,9 +660,13 @@ void MarblePart::writeSettings()
     writeStatusBarSettings();
 
     // Store current route settings
-    m_controlView->marbleModel()->routingManager()->writeSettings();
-    bool const startupWarning = m_controlView->marbleModel()->routingManager()->showGuidanceModeStartupWarning();
+    RoutingManager *routingManager = m_controlView->marbleWidget()->model()->routingManager();
+    routingManager->writeSettings();
+    bool const startupWarning = routingManager->showGuidanceModeStartupWarning();
     MarbleSettings::setShowGuidanceModeStartupWarning( startupWarning );
+    QList<RoutingProfile>  profiles = routingManager->profilesModel()->profiles();
+    RoutingProfile const profile = routingManager->routeRequest()->routingProfile();
+    MarbleSettings::setCurrentRoutingProfile( profiles.indexOf( profile ) );
 
     QList<QString> const editors = m_externalEditorMapping.values();
     MarbleSettings::setExternalMapEditor( editors.indexOf( m_controlView->externalMapEditor() ) );
