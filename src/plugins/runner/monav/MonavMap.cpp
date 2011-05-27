@@ -119,6 +119,10 @@ QList<QFileInfo> MonavMap::files() const
     }
 
     files << QFileInfo( m_directory, "plugins.ini" );
+    QFileInfo moduleDotIni( m_directory, "Module.ini" );
+    if ( moduleDotIni.exists() ) {
+        files << moduleDotIni;
+    }
     files << QFileInfo( m_directory, "marble.kml" );
     return files;
 }
