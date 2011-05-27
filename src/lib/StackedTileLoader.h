@@ -108,6 +108,13 @@ class StackedTileLoader : public QObject
         void cleanupTilehash();
 
         /**
+         * Clears the internal tile hash.
+         *
+         * Removes all tiles from the hash.
+         */
+        void flush();
+
+        /**
          * @brief  Returns the limit of the volatile (in RAM) cache.
          * @return the cache limit in kilobytes
          */
@@ -130,6 +137,12 @@ class StackedTileLoader : public QObject
          * @param bytes The limit in kilobytes.
          */
         void setVolatileCacheLimit( quint64 kiloBytes );
+
+        /**
+         * Effectively triggers a reload of all tiles that are currently in use
+         * and clears the tile cache in physical memory.
+         */
+        void update();
 
     Q_SIGNALS:
         /**
