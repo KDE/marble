@@ -51,6 +51,9 @@ QVariant MonavMapsModel::headerData ( int section, Qt::Orientation orientation, 
             return tr( "Update" );
         case 4:
             return tr( "Delete" );
+        case 5:
+            /** @todo: Change to 'Date' after string freeze */
+            return tr( "Update" );
         }
     }
 
@@ -81,7 +84,16 @@ QVariant MonavMapsModel::data ( const QModelIndex & index, int role ) const
                 return false;
             }
             case 4:
-                return m_data.at( row ).date();
+                return QFileInfo( m_data.at( row ).directory().absolutePath() ).isWritable();
+            case 5:
+                {
+                    QDate date = QDate::fromString( m_data.at( row ).date(), "MM/dd/yy" );
+                    if ( date.year() < 2000 ) {
+                        // Qt interprets 11 as 1911
+                        date.setDate( date.year() + 100, date.month(), date.day() );
+                    }
+                    return date.toString( Qt::SystemLocaleShortDate );
+                }
             }
     }
 
@@ -95,7 +107,7 @@ int MonavMapsModel::rowCount ( const QModelIndex & parent ) const
 
 int MonavMapsModel::columnCount ( const QModelIndex & parent ) const
 {
-    return parent.isValid() ? 0 : 5;
+    return parent.isValid() ? 0 : 6;
 }
 
 QString MonavMapsModel::payload( int index ) const

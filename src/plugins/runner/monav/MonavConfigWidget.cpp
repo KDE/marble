@@ -91,6 +91,8 @@ public:
 
     QVector<MonavStuffEntry> m_remoteMaps;
 
+    QMap<QString, QString> m_remoteVersions;
+
     QString m_currentDownload;
 
     QFile m_currentFile;
@@ -210,7 +212,6 @@ void MonavConfigWidgetPrivate::parseNewStuff( const QByteArray &data )
         return;
     }
 
-    QMap<QString, QString> remoteMaps;
     QDomElement root = xml.documentElement();
     QDomNodeList items = root.elementsByTagName( "stuff" );
     for ( unsigned int i = 0; i < items.length(); ++i ) {
@@ -239,12 +240,12 @@ void MonavConfigWidgetPrivate::parseNewStuff( const QByteArray &data )
         if ( item.isValid() ) {
             m_remoteMaps.push_back( item );
             if ( !filename.isEmpty() && !releaseDate.isEmpty() ) {
-                remoteMaps[filename] = releaseDate;
+                m_remoteVersions[filename] = releaseDate;
             }
         }
     }
 
-    m_mapsModel->setInstallableVersions( remoteMaps );
+    m_mapsModel->setInstallableVersions( m_remoteVersions );
     updateInstalledMapsViewButtons();
 }
 
@@ -323,8 +324,8 @@ MonavConfigWidget::MonavConfigWidget( MonavPlugin* plugin ) :
 {
     setupUi( this );
     d->setBusy( false );
-    m_installedMapsListView->setModel( d->m_filteredModel );
-    m_configureMapsListView->setModel( d->m_mapsModel );
+    m_installedMapsListView->setModel( d->m_mapsModel );
+    m_configureMapsListView->setModel( d->m_filteredModel );
     m_configureMapsListView->resizeColumnsToContents();
 
     updateComboBoxes();
@@ -359,7 +360,6 @@ void MonavConfigWidgetPrivate::updateTransportPreference()
     if ( m_parent->m_transportTypeComboBox && m_mapsModel ) {
         m_parent->m_transportTypeComboBox->blockSignals( true );
         m_parent->m_transportTypeComboBox->clear();
-        m_parent->m_transportTypeComboBox->addItem( QObject::tr( "Any" ) );
         QSet<QString> transportTypes;
         for( int i=0; i<m_mapsModel->rowCount(); ++i ) {
             QModelIndex index = m_mapsModel->index( i, 1 );
@@ -571,17 +571,20 @@ void MonavConfigWidget::showEvent ( QShowEvent * event )
 void MonavConfigWidgetPrivate::updateInstalledMapsView()
 {
     m_mapsModel = m_plugin->installedMapsModel();
+    m_mapsModel->setInstallableVersions( m_remoteVersions );
     m_filteredModel->setSourceModel( m_mapsModel );
-    m_parent->m_configureMapsListView->setModel( m_mapsModel );
+    m_parent->m_installedMapsListView->setModel( m_mapsModel );
 
-    m_parent->m_installedMapsListView->setColumnHidden( 1, true );
-    m_parent->m_configureMapsListView->setColumnHidden( 2, true );
+    m_parent->m_configureMapsListView->setColumnHidden( 1, true );
+    m_parent->m_installedMapsListView->setColumnHidden( 2, true );
     m_parent->m_configureMapsListView->setColumnHidden( 3, true );
     m_parent->m_configureMapsListView->setColumnHidden( 4, true );
+    m_parent->m_installedMapsListView->setColumnHidden( 5, true );
 
     m_parent->m_configureMapsListView->horizontalHeader()->setVisible( true );
     m_parent->m_installedMapsListView->horizontalHeader()->setVisible( true );
     m_parent->m_configureMapsListView->resizeColumnsToContents();
+    m_parent->m_installedMapsListView->resizeColumnsToContents();
 
     updateTransportPreference();
     updateInstalledMapsViewButtons();
@@ -591,16 +594,15 @@ void MonavConfigWidgetPrivate::updateInstalledMapsViewButtons()
 {
     m_removeMapSignalMapper.removeMappings( m_parent );
     m_upgradeMapSignalMapper.removeMappings( m_parent );
-    for( int i=0; i<m_filteredModel->rowCount(); ++i ) {
+    for( int i=0; i<m_mapsModel->rowCount(); ++i ) {
         {
             QPushButton* button = new QPushButton( QIcon( ":/system-software-update.png" ), "" );
             button->setAutoFillBackground( true );
-            QModelIndex index = m_filteredModel->index( i, 3 );
+            QModelIndex index = m_mapsModel->index( i, 3 );
             m_parent->m_installedMapsListView->setIndexWidget( index, button );
-            QModelIndex origin = m_filteredModel->mapToSource( index );
-            m_upgradeMapSignalMapper.setMapping( button, origin.row() );
+            m_upgradeMapSignalMapper.setMapping( button, index.row() );
             QObject::connect( button, SIGNAL( clicked() ), &m_upgradeMapSignalMapper, SLOT( map() ) );
-            bool upgradable = m_mapsModel->data( origin ).toBool();
+            bool upgradable = m_mapsModel->data( index ).toBool();
             QString canUpgradeText = QObject::tr( "An update is available. Click to install it." );
             QString isLatestText = QObject::tr( "No update available. You are running the latest version." );
             button->setToolTip( upgradable ? canUpgradeText : isLatestText );
@@ -609,11 +611,12 @@ void MonavConfigWidgetPrivate::updateInstalledMapsViewButtons()
         {
             QPushButton* button = new QPushButton( QIcon( ":/edit-delete.png" ), "" );
             button->setAutoFillBackground( true );
-            QModelIndex index = m_filteredModel->index( i, 4 );
+            QModelIndex index = m_mapsModel->index( i, 4 );
             m_parent->m_installedMapsListView->setIndexWidget( index, button );
-            QModelIndex origin = m_filteredModel->mapToSource( index );
-            m_removeMapSignalMapper.setMapping( button, origin.row() );
+            m_removeMapSignalMapper.setMapping( button, index.row() );
             QObject::connect( button, SIGNAL( clicked() ), &m_removeMapSignalMapper, SLOT( map() ) );
+            bool const writable = m_mapsModel->data( index ).toBool();
+            button->setEnabled( writable );
         }
     }
     m_parent->m_installedMapsListView->resizeColumnsToContents();
@@ -621,14 +624,8 @@ void MonavConfigWidgetPrivate::updateInstalledMapsViewButtons()
 
 void MonavConfigWidget::updateTransportTypeFilter( const QString &filter )
 {
-    if ( filter == tr( "Any" ) ) {
-        d->m_filteredModel->setFilterWildcard("*");
-        d->m_transport = QString();
-    } else {
-        d->m_filteredModel->setFilterFixedString( filter );
-        d->m_transport = filter;
-    }
-
+    d->m_filteredModel->setFilterFixedString( filter );
+    d->m_transport = filter;
     m_configureMapsListView->resizeColumnsToContents();
 }
 
@@ -639,7 +636,7 @@ void MonavConfigWidget::removeMap( int index )
     if ( QMessageBox::question( this, tr( "Remove Map" ), text, buttons, QMessageBox::No ) == QMessageBox::Yes ) {
         d->m_mapsModel->deleteMapFiles( index );
         d->m_plugin->reloadMaps();
-        d->updateInstalledMapsViewButtons();
+        d->updateInstalledMapsView();
     }
 }
 
