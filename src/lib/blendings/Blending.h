@@ -16,8 +16,6 @@
 #ifndef MARBLE_BLENDING_H
 #define MARBLE_BLENDING_H
 
-#include <QtCore/QSharedPointer>
-
 class QImage;
 
 namespace Marble
@@ -28,7 +26,7 @@ class Blending
 {
  public:
     virtual ~Blending();
-    virtual void blend( QImage * const bottom, QSharedPointer<TextureTile> const & top ) const = 0;
+    virtual void blend( QImage * const bottom, TextureTile const * const top ) const = 0;
 };
 
 }

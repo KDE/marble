@@ -28,7 +28,7 @@ namespace Marble
 // - bottom and top image have the same size
 // - bottom image format is ARGB32_Premultiplied
 void IndependentChannelBlending::blend( QImage * const bottom,
-                                        QSharedPointer<TextureTile> const & top ) const
+                                        TextureTile const * const top ) const
 {
     QImage const * const topImage = top->image();
     Q_ASSERT( topImage );
@@ -169,7 +169,7 @@ qreal SubtractiveBlending::blendChannel( qreal const bottomColorIntensity,
 
 // Lightening blendings
 
-void AlphaBlending::blend( QImage * const bottom, QSharedPointer< TextureTile > const & top ) const
+void AlphaBlending::blend( QImage * const bottom, TextureTile const * const top ) const
 {
     QImage const * const topImage = top->image();
     Q_ASSERT( topImage );
@@ -304,7 +304,7 @@ qreal HalfDifferenceBlending::blendChannel( qreal const bottomColorIntensity,
 
 // Special purpose blendings
 
-void CloudsBlending::blend( QImage * const bottom, QSharedPointer<TextureTile> const & top ) const
+void CloudsBlending::blend( QImage * const bottom, TextureTile const * const top ) const
 {
     QImage const * const topImage = top->image();
     Q_ASSERT( topImage );

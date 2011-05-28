@@ -26,7 +26,7 @@ namespace Marble
 class IndependentChannelBlending: public Blending
 {
  public:
-    virtual void blend( QImage * const bottom, QSharedPointer<TextureTile> const & top ) const;
+    virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
  private:
     // bottomColorIntensity: intensity of one color channel (of one pixel) of the bottom image
     // topColorIntensity: intensity of one color channel (of one pixel) of the top image
@@ -142,7 +142,7 @@ class SubtractiveBlending: public IndependentChannelBlending
 class AlphaBlending: public Blending
 {
  public:
-    virtual void blend( QImage * const bottom, QSharedPointer<TextureTile> const & top ) const;
+    virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
 };
 
 class AdditiveBlending: public IndependentChannelBlending
@@ -244,7 +244,7 @@ class HalfDifferenceBlending: public IndependentChannelBlending
 class CloudsBlending: public Blending
 {
  public:
-    virtual void blend( QImage * const bottom, QSharedPointer<TextureTile> const & top ) const;
+    virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
 };
 
 }

@@ -40,7 +40,7 @@ SunLightBlending::~SunLightBlending()
     delete m_sunLocator;
 }
 
-void SunLightBlending::blend( QImage * const bottom, QSharedPointer<TextureTile> const & top ) const
+void SunLightBlending::blend( QImage * const bottom, TextureTile const * const top ) const
 {
     QImage const * const topImage = top->image();
     Q_ASSERT( topImage );

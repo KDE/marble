@@ -105,7 +105,7 @@ QImage MergedLayerDecorator::merge( const TileId id, const QVector<QSharedPointe
             const Blending *const blending = tile->blending();
             if ( blending ) {
                 mDebug() << "StackedTile::initResultTile: blending";
-                blending->blend( &resultImage, tile );
+                blending->blend( &resultImage, tile.data() );
             }
             else {
                 mDebug() << "StackedTile::initResultTile: "

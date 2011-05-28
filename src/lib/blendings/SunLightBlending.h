@@ -31,7 +31,7 @@ class SunLightBlending: public Blending
  public:
     SunLightBlending();
     virtual ~SunLightBlending();
-    virtual void blend( QImage * const bottom, QSharedPointer<TextureTile> const & top ) const;
+    virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
 
  private:
     void shadePixelComposite( QRgb & bottom, QRgb const top, qreal const brightness ) const;
