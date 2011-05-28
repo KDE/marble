@@ -209,8 +209,8 @@ void TileCreator::cancelTileCreation()
 
 void TileCreator::run()
 {
-    if ( d->m_resume && d->m_tileQuality != 100 ) {
-        qWarning() << "Resuming is only supported with tileQuality 100";
+    if ( d->m_resume && d->m_tileFormat == "jpg" && d->m_tileQuality != 100 ) {
+        qWarning() << "Resuming jpegs is only supported with tileQuality 100";
         return;
     }
 
@@ -327,7 +327,7 @@ void TileCreator::run()
                                                 Qt::ThresholdDither);
                 }
 
-                bool  ok = tile.save( tileName, d->m_tileFormat.toAscii().data(), 100 );
+                bool  ok = tile.save( tileName, d->m_tileFormat.toAscii().data(), d->m_tileFormat == "jpg" ? 100 : d->m_tileQuality );
                 if ( !ok )
                     mDebug() << "Error while writing Tile: " << tileName;
 
@@ -480,7 +480,7 @@ void TileCreator::run()
 
                     // Saving at 100% JPEG quality to have a high-quality
                     // version to create the remaining needed tiles from.
-                    bool  ok = tile.save( newTileName, d->m_tileFormat.toAscii().data(), 100 );
+                    bool  ok = tile.save( newTileName, d->m_tileFormat.toAscii().data(), d->m_tileFormat == "jpg" ? 100 : d->m_tileQuality );
                     if ( ! ok )
                         mDebug() << "Error while writing Tile: " << newTileName;
                 }
@@ -497,7 +497,7 @@ void TileCreator::run()
     }
     mDebug() << "Tile creation completed.";
 
-    if (d->m_tileQuality != 100) {
+    if ( d->m_tileFormat == "jpg" && d->m_tileQuality != 100 ) {
 
         // Applying correct lower JPEG compression now that we created all tiles
         int savedTilesCount = 0;
