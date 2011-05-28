@@ -68,6 +68,7 @@ public:
         QImage image( 2400, 2400, QImage::Format_ARGB32  );
         {
             QPainter painter( &image );
+            painter.fillRect( 0, 0, 2400, 2400, QColor( Qt::black ) );
             QImage i = readHgt(std::floor(startLng), std::floor(startLat));
             painter.drawImage( 0, 0, i );
             painter.drawImage( 1200, 0, readHgt( std::floor(startLng)+1, std::floor(startLat) ) );
