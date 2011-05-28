@@ -258,7 +258,16 @@ QImage TileLoader::scaledLowerLevelTile( TileId const & id )
                                         id.x() >> deltaLevel, id.y() >> deltaLevel );
         QString const fileName = tileFileName( replacementTileId );
         mDebug() << "TileLoader::scaledLowerLevelTile" << "trying" << fileName;
-        QImage const toScale( fileName );
+        QImage toScale( fileName );
+
+        if ( level == 0 && toScale.isNull() ) {
+            mDebug() << "No level zero tile installed in map theme dir. Falling back to a transparent image for now.";
+            GeoSceneTexture const * const textureLayer = findTextureLayer( replacementTileId );
+            QSize tileSize = textureLayer->tileSize();
+            Q_ASSERT( !tileSize.isEmpty() ); // assured by textureLayer
+            toScale = QImage( tileSize, QImage::Format_ARGB32_Premultiplied );
+            toScale.fill( qRgba( 0, 0, 0, 0 ) );
+        }
 
         if ( !toScale.isNull() ) {
             // which rect to scale?
@@ -275,14 +284,8 @@ QImage TileLoader::scaledLowerLevelTile( TileId const & id )
         }
     }
 
-    mDebug() << "No level zero tile installed in map theme dir. Falling back to a transparent image for now.";
-    GeoSceneTexture const * const textureLayer = findTextureLayer( id );
-    QSize const tileSize = textureLayer->tileSize();
-    Q_ASSERT( !tileSize.isEmpty() ); // assured by textureLayer
-    QImage fallbackImage = QImage( tileSize, QImage::Format_ARGB32_Premultiplied );
-    fallbackImage.fill( qRgba( 0, 0, 0, 0 ) );
-
-    return fallbackImage;
+    Q_ASSERT_X( false, "scaled image", "level zero image missing" ); // not reached
+    return QImage();
 }
 
 }
