@@ -233,7 +233,8 @@ void TextureLayer::setVolatileCacheLimit( quint64 kilobytes )
 void TextureLayer::update()
 {
     mDebug() << "TextureLayer::update()";
-    QTimer::singleShot( 0, &d->m_tileLoader, SLOT( update() ) );
+    d->m_tileLoader.clear();
+    d->mapChanged();
 }
 
 void TextureLayer::reload()
