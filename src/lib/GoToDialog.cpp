@@ -298,7 +298,7 @@ GoToDialogPrivate::GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWi
 
 void GoToDialogPrivate::saveSelection( const QModelIndex &index )
 {
-    if ( m_placemarkModel ) {
+    if ( m_parent->searchButton->isChecked() && m_placemarkModel ) {
         QVariant coordinates = m_placemarkModel->data( index, MarblePlacemarkModel::CoordinateRole );
         m_lookAt = GeoDataLookAt();
         m_lookAt.setCoordinates( qVariantValue<GeoDataCoordinates>( coordinates ) );

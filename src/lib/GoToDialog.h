@@ -73,6 +73,7 @@ private:
     void updateResultMessage( int results );
 
     GoToDialogPrivate * const d;
+    friend class GoToDialogPrivate;
 };
 
 } // namespace Marble
