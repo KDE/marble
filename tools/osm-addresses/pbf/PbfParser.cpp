@@ -269,9 +269,9 @@ void PbfParser::parseNode()
             QString value = QString::fromUtf8( m_primitiveBlock.stringtable().s( inputNode.vals( tag ) ).data() );
 
             if ( key == "name" ) {
-                node.name = value;
+                node.name = value.trimmed();
             } else if ( key == "addr:street" ) {
-                node.street = value;
+                node.street = value.trimmed();
                 node.save = true;
             } else if ( key == "addr:housenumber" ) {
                 node.houseNumber = value;
@@ -319,9 +319,9 @@ void PbfParser::parseWay()
             QString value = QString::fromUtf8( m_primitiveBlock.stringtable().s( inputWay.vals( tag ) ).data() );
 
             if ( key == "name" ) {
-                way.name = value;
+                way.name = value.trimmed();
             } else if ( key == "addr:street" ) {
-                way.street = value;
+                way.street = value.trimmed();
                 way.save = true;
             } else if ( key == "addr:housenumber" ) {
                 way.houseNumber = value;
@@ -401,7 +401,7 @@ void PbfParser::parseRelation()
             } else if ( key == "admin_level" ) {
                 relation.adminLevel = value.toInt();
             } else if ( key == "name" ) {
-                relation.name = value;
+                relation.name = value.trimmed();
             } else if ( key == "type" && value == "multipolygon" ) {
                 relation.isMultipolygon = true;
             }
@@ -470,9 +470,9 @@ void PbfParser::parseDense()
             QString value = QString::fromUtf8( m_primitiveBlock.stringtable().s( dense.keys_vals( m_lastDenseTag + 1 ) ).data() );
 
             if ( key == "name" ) {
-                node.name = value;
+                node.name = value.trimmed();
             } else if ( key == "addr:street" ) {
-                node.street = value;
+                node.street = value.trimmed();
                 node.save = true;
             } else if ( key == "addr:housenumber" ) {
                 node.houseNumber = value;
