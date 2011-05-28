@@ -310,7 +310,7 @@ void TileCreator::run()
 
             if ( QFile::exists( tileName ) && d->m_resume ) {
 
-                mDebug() << tileName << "exists already";
+                //mDebug() << tileName << "exists already";
 
             } else {
 
@@ -327,10 +327,11 @@ void TileCreator::run()
                                                 Qt::ThresholdDither);
                 }
 
-                mDebug() << tileName;
                 bool  ok = tile.save( tileName, d->m_tileFormat.toAscii().data(), 100 );
                 if ( !ok )
                     mDebug() << "Error while writing Tile: " << tileName;
+
+                mDebug() << tileName << "size" << QFile( tileName ).size();
 
             }
 
@@ -378,7 +379,7 @@ void TileCreator::run()
                                            .arg( d->m_tileFormat );
 
                 if ( QFile::exists( newTileName ) && d->m_resume ) {
-                    mDebug() << newTileName << "exists already";
+                    //mDebug() << newTileName << "exists already";
                 } else {
                     tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.%4")
                                             .arg( tileLevel + 1 )
