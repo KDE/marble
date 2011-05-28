@@ -123,7 +123,7 @@ public:
 
         QImage croppedImage = image.copy(startLngPx - imageLngPx, startLatPx - imageLatPx, 675, 675);
         QImage ret = image.copy(startLngPxResized - imageLngPxResized, startLatPxResized - imageLatPxResized, c_defaultTileSize, c_defaultTileSize);
-        qDebug() << image.size() << ret.size();
+        //qDebug() << image.size() << ret.size();
         return ret;
     }
 
@@ -140,7 +140,7 @@ private:
             if ( lat < 0 ) lat *= -1;
             fileName += QString( "%1%2%3%4.hgt" ).arg( NS ).arg( lat<0 ? lat*-1 : lat, 2, 10, QLatin1Char('0') )
                                         .arg( EW ).arg( lng<0 ? lng*-1 : lng, 3, 10, QLatin1Char('0' ) );
-            qDebug() << fileName;
+            //qDebug() << fileName;
 
             if ( !QFile::exists( fileName ) && QFile::exists( fileName + ".zip" ) ) {
                 qDebug() << "zip found, unzipping";
