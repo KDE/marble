@@ -66,105 +66,10 @@ void AltitudeModel::updateTextureLayers()
 
     m_textureLayer = dynamic_cast<GeoSceneTexture*>( sceneLayer->datasets().first() );
     Q_ASSERT( m_textureLayer );
-
-/*
-    return textureLayer;
-    
-    QHash<uint, GeoSceneLayer const *> sceneLayers;
-
-    QList<GeoSceneDocument const *> const & mapThemes = m_mapThemeManager->mapThemes();
-    QList<GeoSceneDocument const *>::const_iterator pos = mapThemes.constBegin();
-    QList<GeoSceneDocument const *>::const_iterator const end = mapThemes.constEnd();
-    for (; pos != end; ++pos ) {
-        GeoSceneHead const * head = (*pos)->head();
-        Q_ASSERT( head );
-        const QString mapThemeId = head->target() + '/' + head->theme();
-        mDebug() << "AltitudeModel::updateTextureLayers" << mapThemeId;
-
-        GeoSceneMap const * map = (*pos)->map();
-        Q_ASSERT( map );
-        GeoSceneLayer const * sceneLayer = map->layer( head->theme() );
-        if ( !sceneLayer ) {
-            mDebug() << "ignoring, has no GeoSceneLayer for" << head->theme();
-            continue;
-        }
-
-        uint const mapThemeIdHash = qHash( mapThemeId );
-        if ( sceneLayers.contains( mapThemeIdHash ) ) {
-            mDebug() << "AltitudeModel::updateTextureLayers:"
-                     << mapThemeIdHash << mapThemeId
-                     << "already exists";
-            continue;
-        }
-
-        sceneLayers.insert( mapThemeIdHash, sceneLayer );
-
-        // find srtm2 texture layer
-        QVector<GeoSceneAbstractDataset *> layers = sceneLayer->datasets();
-        QVector<GeoSceneAbstractDataset *>::const_iterator pos = layers.constBegin();
-        QVector<GeoSceneAbstractDataset *>::const_iterator const end = layers.constEnd();
-        for (; pos != end; ++pos ) {
-            GeoSceneTexture const * const textureLayer = dynamic_cast<GeoSceneTexture *>( *pos );
-            if ( !textureLayer ) {
-                mDebug() << "ignoring dataset, is not a texture layer";
-                continue;
-            }
-            if ( textureLayer->sourceDir() != "earth/srtm2" ) {
-                mDebug() << "ignoring dataset, not srtm2 layer";
-                continue;
-            }
-            Q_ASSERT( !m_textureLayer ); //there should only be one
-            m_textureLayer = textureLayer;
-            mDebug() << "AltitudeModel::updateTextureLayers" << "using texture layer:"
-                     << qHash( textureLayer->sourceDir() ) << textureLayer->sourceDir();
-        }
-    }
-*/
-    Q_ASSERT( m_textureLayer );
 }
-
-/*
-1° = 1200px
-360° = 432360px
-
-1200*360 / 640 = 675
-
-
-max zoom: 9 640 * 675 = 432000
-          8  320 * 675 = 216000
-          7  160 * 675 = 108000
-          6  80 * 675
-          5  40 * 675
-          4  20 * 675
-          3  10 * 675 = 6750
-          2  5 * 675 = 3375
-          1  2.5 * 675 = 1687.5
-          0  1.25 * 675 = 843.75
-
-
-          9 1024 * y = 432000
-          8  512
-          7  256
-          6  128
-          5   64
-          4   32
-          3   16
-          2    8
-          1    4
-          0    2 * x = y*2
-
-
-
-*/
-
 
 qreal AltitudeModel::height( qreal lat, qreal lon )
 {
-    //QImage testTile = m_tileLoader->loadTile( TileId("earth/srtm2", 9, 548, 119), DownloadBrowse );
-
-
-
-    
     const int tileZoomLevel = m_tileLoader->maximumTileLevel( *m_textureLayer );
     Q_ASSERT( tileZoomLevel == 9 );
 
@@ -277,19 +182,6 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
         }
     }
 */
-    TileId tileId("earth/srtm2", 9, 548, 119);
-    QImage tile = m_tileLoader->loadTile( tileId, DownloadBrowse );
-
-    Q_ASSERT(!tile.isNull());
-    qDebug() << tile.size();
-
-    tile.save("/home/niko/srtm2.jpg");
-
-    QLabel* l = new QLabel();
-    l->setPixmap(QPixmap::fromImage(tile));
-    l->show();
-
-    return 0;
 }
 
 }
