@@ -219,6 +219,7 @@ TCCoreApplication::TCCoreApplication( int argc, char ** argv ) : QCoreApplicatio
         m_tilecreator->setTileFormat( "png" );
         m_tilecreator->setTileQuality( 25 );
         m_tilecreator->setResume( true );
+        m_tilecreator->setVerifyExactResult( true );
         connect( m_tilecreator, SIGNAL( finished() ), this, SLOT( quit() ) );
         m_tilecreator->start();
     }

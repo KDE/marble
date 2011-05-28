@@ -41,6 +41,7 @@ class TileCreatorPrivate
          m_cancelled( false ),
          m_tileFormat( "jpg" ),
          m_resume( false ),
+         m_verify( false ),
          m_source( source )
      {
         if ( m_dem == "true" ) {
@@ -62,6 +63,7 @@ class TileCreatorPrivate
     QString  m_tileFormat;
     int      m_tileQuality;
     bool     m_resume;
+    bool     m_verify;
 
     TileCreatorSource  *m_source;
 };
@@ -333,6 +335,25 @@ void TileCreator::run()
 
                 mDebug() << tileName << "size" << QFile( tileName ).size();
 
+                if ( d->m_verify ) {
+                    QImage writtenTile(tileName);
+                    Q_ASSERT( writtenTile.size() == tile.size() );
+                    for ( int i=0; i < writtenTile.size().width(); ++i) {
+                        for ( int j=0; j < writtenTile.size().height(); ++j) {
+                            if ( writtenTile.pixel( i, j ) != tile.pixel( i, j ) ) {
+                                unsigned int  pixel = tile.pixel( i, j);
+                                unsigned int  writtenPixel = writtenTile.pixel( i, j);
+                                qWarning() << "***** pixel" << i << j << "is off by" << (pixel - writtenPixel) << "pixel" << pixel << "writtenPixel" << writtenPixel;
+                                QByteArray baPixel((char*)&pixel, sizeof(unsigned int));
+                                qWarning() << "pixel" << baPixel.size() << "0x" << baPixel.toHex();
+                                QByteArray baWrittenPixel((char*)&writtenPixel, sizeof(unsigned int));
+                                qWarning() << "writtenPixel" << baWrittenPixel.size() << "0x" << baWrittenPixel.toHex();
+                                Q_ASSERT(false);
+                            }
+                        }
+                    }
+                }
+
             }
 
             percentCompleted =  (int) ( 90 * (qreal)(createdTilesCount) 
@@ -575,6 +596,16 @@ void TileCreator::setResume(bool resume)
 bool TileCreator::resume() const
 {
     return d->m_resume;
+}
+
+void TileCreator::setVerifyExactResult(bool verify)
+{
+    d->m_verify = verify;
+}
+
+bool TileCreator::verifyExactResult() const
+{
+    return d->m_verify;
 }
 
 
