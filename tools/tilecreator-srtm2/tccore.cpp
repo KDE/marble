@@ -17,6 +17,7 @@
 #include <QProcess>
 #include <QFileInfo>
 #include <QDir>
+#include <QCache>
 
 using namespace Marble;
 
@@ -63,7 +64,6 @@ public:
             painter.fillRect( 0, 0, c_defaultTileSize, c_defaultTileSize, QColor( Qt::black ) );
             return ret;
         }
-
 
         QImage image( 2400, 2400, QImage::Format_ARGB32  );
         {
@@ -158,10 +158,16 @@ private:
 
     QImage readHgt( int lng, int lat )
     {
+        static QCache<QPair<int, int>, QImage > cache( 10 );
+        if ( cache.contains( qMakePair( lng, lat ) ) ) {
+            return *cache[ qMakePair( lng, lat ) ];
+        }
         QString fileName = hgtFileName( lng, lat );
         if ( fileName.isNull() ) {
-            qDebug() << "hgt file does not exist, returing null image";
+            //qDebug() << lng << lat << "hgt file does not exist, returing null image";
             return QImage();
+        } else {
+            //qDebug() << lng << lat << "reading hgt file" << fileName;
         }
 
         QFile file( fileName );
@@ -193,6 +199,8 @@ private:
             }
         }
         file.close();
+
+        cache.insert( qMakePair( lng, lat ), new QImage( image ) );
 
         return image;
     }
