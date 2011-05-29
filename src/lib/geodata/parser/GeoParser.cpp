@@ -46,6 +46,7 @@ GeoParser::GeoParser( GeoDataGenericSourceType source )
 
 GeoParser::~GeoParser()
 {
+    delete m_document;
 }
 
 #if DUMP_PARENT_STACK > 0
@@ -104,7 +105,11 @@ bool GeoParser::read( QIODevice* device )
 
     if ( error() ) {
         mDebug() << "[GeoParser::read] -> Error occurred:" << errorString() << " at line: " << lineNumber();
-        delete releaseDocument();
+
+        // Defer the deletion to the dtor
+        // This allows the BookmarkManager to recover the broken .kml files it produced in Marble 1.0 and 1.1
+        /** @todo: Remove this workaround around Marble 1.4 */
+        // delete releaseDocument();
     }
     return !error();
 }

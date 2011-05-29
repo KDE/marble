@@ -94,9 +94,13 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
         // Open file in read mode
         file.open( QIODevice::ReadOnly );
 
+        bool recover = false;
         if ( !parser.read( &file ) ) {
             mDebug() << "Could not parse file" << absoluteFilePath;
-            return false;
+            mDebug() << "This could be caused by a previous broken bookmark file. Trying to recover.";
+            /** @todo: Remove this workaround and return false around Marble 1.4 */
+            recover = true;
+            // return false;
         }
 
         delete d->m_bookmarkDocument;
@@ -111,6 +115,11 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
         }
 
         file.close();
+
+        if ( recover ) {
+            updateBookmarkFile();
+        }
+
         emit bookmarksChanged();
         return true;
     }
