@@ -10,6 +10,12 @@
     <height>277</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Monav Configuration</string>
   </property>
@@ -27,6 +33,12 @@
           <number>0</number>
          </property>
          <widget class="QWidget" name="tab">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <attribute name="title">
            <string>Configure</string>
           </attribute>
@@ -52,6 +64,12 @@
            </item>
            <item row="1" column="0" colspan="3">
             <widget class="QTableView" name="m_configureMapsListView">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="horizontalScrollBarPolicy">
               <enum>Qt::ScrollBarAlwaysOff</enum>
              </property>
@@ -75,12 +93,24 @@
           </layout>
          </widget>
          <widget class="QWidget" name="tab_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <attribute name="title">
            <string>Manage Maps</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_5">
            <item row="0" column="0">
             <widget class="QTableView" name="m_installedMapsListView">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="horizontalScrollBarPolicy">
               <enum>Qt::ScrollBarAlwaysOff</enum>
              </property>

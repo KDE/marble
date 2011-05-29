@@ -158,12 +158,8 @@ void RoutingProfileSettingsDialog::openConfigDialog()
         if ( !m_dialog ) {
             m_dialog = new QDialog( this );
 
-            QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Vertical );
-            connect( buttonBox, SIGNAL( accepted() ), m_dialog, SLOT( accept() ) );
-
             m_dialogLayout = new QHBoxLayout();
             m_dialogLayout->addWidget( m_configWidgets[plugin] );
-            m_dialogLayout->addWidget( buttonBox );
 
             m_dialog->setLayout( m_dialogLayout );
             m_dialog->setMinimumHeight( 480 );
