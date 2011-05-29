@@ -1261,17 +1261,21 @@ void MarbleWidget::flyTo( const GeoDataLookAt &newLookAt, FlyToMode mode )
 {
     if ( !d->m_animationsEnabled || mode == Instant ) {
         const int radius = qRound( radiusFromDistance( newLookAt.range() * METER2KM ) );
-        d->m_map->setRadius( radius );
-        d->m_logzoom = qRound( d->zoom( radius ) );
+        qreal const zoom = d->zoom( radius );
+        // Prevent exceeding zoom range. Note: Bounding to range is not useful here
+        if ( zoom >= minimumZoom() && zoom <= maximumZoom() ) {
+            d->m_map->setRadius( radius );
+            d->m_logzoom = qRound( d->zoom( radius ) );
 
-        GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
-        d->m_map->centerOn( newLookAt.longitude( deg ), newLookAt.latitude( deg ) );
+            GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
+            d->m_map->centerOn( newLookAt.longitude( deg ), newLookAt.latitude( deg ) );
 
-        emit zoomChanged( d->m_logzoom );
-        emit distanceChanged( distanceString() );
-        emit visibleLatLonAltBoxChanged( d->m_map->viewport()->viewLatLonAltBox() );
+            emit zoomChanged( d->m_logzoom );
+            emit distanceChanged( distanceString() );
+            emit visibleLatLonAltBoxChanged( d->m_map->viewport()->viewLatLonAltBox() );
 
-        d->repaint();
+            d->repaint();
+        }
     }
     else {
         d->m_physics->flyTo( newLookAt, mode );
