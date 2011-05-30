@@ -202,23 +202,23 @@ void dumpFoldersRecursively(const GeoDataContainer *container, int depth)
     QVector<GeoDataPlacemark*> placemarks = container->placemarkList();
     QString format = formatOutput(depth);
 
-    qDebug() << qPrintable(format + QString("Dumping container with %1 child folders!\n").arg(folders.size()));
+    qDebug() << qPrintable(QString(format + QString::fromLatin1("Dumping container with %1 child folders!\n").arg(folders.size())));
 
     QVector<GeoDataFolder*>::const_iterator it = folders.constBegin();
     const QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
 
     for (; it != end; ++it) {
-        qDebug() << qPrintable(format + QString("Dumping child %1\n").arg(it - folders.constBegin() + 1));
+        qDebug() << qPrintable(QString(format + QString::fromLatin1("Dumping child %1\n").arg(it - folders.constBegin() + 1)));
         dumpFoldersRecursively(*it, ++depth);
     }
 
-    qDebug() << qPrintable(format + QString("Dumping container with %1 child placemarks!\n").arg(placemarks.size()));
+    qDebug() << qPrintable(QString(format + QString::fromLatin1("Dumping container with %1 child placemarks!\n").arg(placemarks.size())));
 
     QVector<GeoDataPlacemark*>::const_iterator pit = placemarks.constBegin();
     const QVector<GeoDataPlacemark*>::const_iterator pend = placemarks.constEnd();
 
     for (; pit != pend; ++pit) {
-        qDebug() << qPrintable(format + QString("Dumping child %1\n").arg(pit - placemarks.constBegin() + 1));
+        qDebug() << qPrintable(QString(format + QString::fromLatin1("Dumping child %1\n").arg(pit - placemarks.constBegin() + 1)));
         dumpGeoDataPlacemark(*pit);
     }
 }
