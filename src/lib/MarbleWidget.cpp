@@ -166,7 +166,7 @@ void MarbleWidgetPrivate::construct()
     m_widget->setFocusPolicy( Qt::WheelFocus );
     m_widget->setFocus( Qt::OtherFocusReason );
 #if QT_VERSION >= 0x40600
-    m_widget->setAttribute( Qt::WA_AcceptTouchEvents );
+    m_widget->grabGesture(Qt::PinchGesture);
 #endif
 
     // Initialize the map and forward some signals.

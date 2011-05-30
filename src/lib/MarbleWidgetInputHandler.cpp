@@ -25,7 +25,8 @@
 #include <QtGui/QToolTip>
 
 #if QT_VERSION >= 0x40600
-  #include <QtGui/QTouchEvent>
+  #include <QtGui/QGestureEvent>
+  #include <QtGui/QPinchGesture>
 #endif
 
 #include "global.h"
@@ -728,32 +729,19 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             MarbleWidgetInputHandler::d->m_mouseWheelTimer->start( 400 );
             return true;
         }
-#if QT_VERSION >= 0x40600
-        else if ( e->type() == QEvent::TouchBegin ||
-                  e->type() == QEvent::TouchUpdate ||
-                  e->type() == QEvent::TouchEnd) {
-
-            QList<QTouchEvent::TouchPoint> touchPoints = static_cast<QTouchEvent *>( e )->touchPoints();
-            if (touchPoints.count() == 2) {
-                const QTouchEvent::TouchPoint &touchPoint0 = touchPoints.first();
-                const QTouchEvent::TouchPoint &touchPoint1 = touchPoints.last();
-                const QLineF line0(touchPoint0.lastPos(), touchPoint1.lastPos());
-                const QLineF line1(touchPoint0.pos(), touchPoint1.pos());
-                //scaleFactor is the ratio the view will be scaled compared to now,
-                // 1:the same, 2: the double, 0.5: half
-                qreal scaleFactor = 1;
-
-                if (line0.length() > 0) {
-                    scaleFactor = line1.length() / line0.length();
-                }
+        else if ( e->type() == QEvent::Gesture ) {
+            QGestureEvent *ge = static_cast<QGestureEvent *>(e);
+            QPinchGesture *pinch = static_cast<QPinchGesture*>(ge->gesture(Qt::PinchGesture));
+            if (pinch) {
+                qreal scaleFactor = pinch->scaleFactor();
+                qreal  destLat;
+                qreal  destLon;
+                QPointF center = pinch->centerPoint();
 
                 MarbleWidget *marbleWidget = MarbleWidgetInputHandler::d->m_widget;
 
                 marbleWidget->setViewContext( Animation );
 
-                qreal  destLat;
-                qreal  destLon;
-                QPointF center = line1.pointAt(0.5);
                 bool isValid = marbleWidget->geoCoordinates(center.x(), center.y(),
                              destLon, destLat, GeoDataCoordinates::Radian );
 
@@ -762,11 +750,10 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 }
 
                 //convert the scaleFactor to be 0: the same: < 0: smaller, > 0: bigger and make it bigger by multiplying for an arbitrary big value
-                marbleWidget->zoomViewBy( (scaleFactor-1)*200);
-                MarbleWidgetInputHandler::d->m_mouseWheelTimer->start( 400 );
+               marbleWidget->zoomViewBy( (scaleFactor-1)*200); 
+               return true;
             }
         }
-#endif
         else
             return false;
     }
