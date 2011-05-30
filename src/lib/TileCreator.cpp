@@ -436,7 +436,7 @@ void TileCreator::run()
 
                     QImage  tile = img_topleft;
 
-                    if ( tile.depth() == 8 ) {
+                    if ( d->m_dem == "true" ) {
 
                         tile.setColorTable( grayScalePalette );
                         uchar* destLine;
@@ -467,7 +467,14 @@ void TileCreator::run()
                         }
                     }
                     else {
+
                         // tile.depth() != 8
+
+                        img_topleft = img_topleft.convertToFormat( QImage::Format_ARGB32 );
+                        img_topright = img_topright.convertToFormat( QImage::Format_ARGB32 );
+                        img_bottomleft = img_bottomleft.convertToFormat( QImage::Format_ARGB32 );
+                        img_bottomright = img_bottomright.convertToFormat( QImage::Format_ARGB32 );
+                        tile = img_topleft;
 
                         QRgb* destLine;
 
