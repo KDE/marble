@@ -14,9 +14,6 @@
 #ifndef MARBLE_DOWNLOADREGIONDIALOG_H
 #define MARBLE_DOWNLOADREGIONDIALOG_H
 
-//used in updateTileCount()
-#define QT_USE_FAST_CONCATENATION
-
 #include <QtGui/QDialog>
 #include <QtCore/QVector>
 
