@@ -81,8 +81,7 @@ public:
         // Pick the current row and smooth scale it
         // to make it match the expected size
         image = image.scaled( QSize(imageSizeResized, imageSizeResized),
-                        Qt::IgnoreAspectRatio,
-                        Qt::SmoothTransformation );
+                        Qt::IgnoreAspectRatio );
 
 
         //startL??Px: position in px of what we are looking for
