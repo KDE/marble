@@ -14,6 +14,7 @@
 
 // Marble
 #include "LayerInterface.h"
+#include "GeoDataFeature.h"
 
 // Qt
 class QAbstractItemModel;
@@ -36,12 +37,18 @@ public:
 
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
                          const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
+    
+    static int s_defaultZValues[GeoDataFeature::LastIndex];
+    static bool s_defaultZValuesInitialized;
+    static int s_defaultZValue;
 
 public Q_SLOTS:
     void invalidateScene();
 
 private:
     GeometryLayerPrivate *d;
+    
+    static void initializeDefaultZValues();
 };
 
 } // namespace Marble

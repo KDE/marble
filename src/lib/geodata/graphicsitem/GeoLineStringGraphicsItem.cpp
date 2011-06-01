@@ -46,6 +46,7 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* view
         return;
     }
 
+    painter->save();
     QPen currentPen = painter->pen();
 
     if ( currentPen.color() != style()->lineStyle().color() ||
@@ -72,8 +73,10 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* view
         penColor.setAlpha( 255 );
         currentPen.setColor( penColor );
     }
-    painter->setPen( currentPen );
+
+    if ( painter->pen() != currentPen ) painter->setPen( currentPen );
     painter->drawPolyline( m_lineString );
+    painter->restore();
 }
 
 }

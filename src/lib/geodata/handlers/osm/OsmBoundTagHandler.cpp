@@ -48,6 +48,7 @@ GeoNode* OsmBoundTagHandler::parse( GeoParser& parser ) const
 
     GeoDataPlacemark *pl = new GeoDataPlacemark();
     pl->setGeometry( p );
+    pl->setVisualCategory( GeoDataFeature::None );
     pl->setStyle( &doc->style( "background" ) );
     pl->setVisible( true );
     doc->append( pl );

@@ -23,26 +23,29 @@
 #include "GeoDataStyleMap.h"
 #include "MarbleDebug.h"
 #include "GeoDataTypes.h"
-
+#include "GeoDataFeature.h"
 #include "GeoPainter.h"
-
-// Qt
-#include <QtCore/QTime>
 #include "ViewportParams.h"
 #include "GeoGraphicsScene.h"
 #include "GeoGraphicsItem.h"
 #include "GeoLineStringGraphicsItem.h"
-#include <QAbstractItemModel>
+#include "GeoPolygonGraphicsItem.h"
+
+// Qt
+#include <QtCore/QTime>
+#include <QtCore/QAbstractItemModel>
 
 namespace Marble
 {
-
+int GeometryLayer::s_defaultZValues[GeoDataFeature::LastIndex];
+bool GeometryLayer::s_defaultZValuesInitialized = false;
+int GeometryLayer::s_defaultZValue = 50;
 
 class GeometryLayerPrivate
 {
 public:
     void createGraphicsItems( GeoDataObject *object );
-    void createGraphicsItemFromGeometry( GeoDataGeometry *object, GeoDataStyle *style );
+    void createGraphicsItemFromGeometry( GeoDataGeometry *object, GeoDataPlacemark *placemark );
 
     QBrush m_currentBrush;
     QPen m_currentPen;
@@ -53,6 +56,9 @@ public:
 GeometryLayer::GeometryLayer( QAbstractItemModel *model )
         : d( new GeometryLayerPrivate() )
 {
+    if ( !s_defaultZValuesInitialized )
+        initializeDefaultZValues();
+
     d->m_model = model;
     GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
@@ -69,6 +75,31 @@ QStringList GeometryLayer::renderPosition() const
     return QStringList( "HOVERS_ABOVE_SURFACE" );
 }
 
+void GeometryLayer::initializeDefaultZValues()
+{
+    for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
+        s_defaultZValues[i] = s_defaultZValue;
+
+    s_defaultZValues[GeoDataFeature::None]                = 0;
+    s_defaultZValues[GeoDataFeature::NaturalWater]        = s_defaultZValue - 13;
+    s_defaultZValues[GeoDataFeature::NaturalWood]         = s_defaultZValue - 12;
+
+    s_defaultZValues[GeoDataFeature::HighwayUnknown]      = s_defaultZValue - 11;
+    s_defaultZValues[GeoDataFeature::HighwayPath]         = s_defaultZValue - 10;
+    s_defaultZValues[GeoDataFeature::HighwayTrack]        = s_defaultZValue - 9;
+    s_defaultZValues[GeoDataFeature::HighwayPedestrian]   = s_defaultZValue - 8;
+    s_defaultZValues[GeoDataFeature::HighwayService]      = s_defaultZValue - 7;
+    s_defaultZValues[GeoDataFeature::HighwayRoad]         = s_defaultZValue - 6;
+    s_defaultZValues[GeoDataFeature::HighwayTertiary]     = s_defaultZValue - 5;
+    s_defaultZValues[GeoDataFeature::HighwaySecondary]    = s_defaultZValue - 4;
+    s_defaultZValues[GeoDataFeature::HighwayPrimary]      = s_defaultZValue - 3;
+    s_defaultZValues[GeoDataFeature::HighwayTrunk]        = s_defaultZValue - 2;
+    s_defaultZValues[GeoDataFeature::HighwayMotorway]     = s_defaultZValue - 1;
+
+    s_defaultZValuesInitialized = true;
+}
+
+
 bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
                             const QString& renderPos, GeoSceneLayer * layer )
 {
@@ -83,8 +114,8 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox() );
     foreach( GeoGraphicsItem* item, items )
     {
-        //if(item->flags() & GeoGraphicsItem::ItemIsVisible)
-        item->paint( painter, viewport, renderPos, layer );
+        if ( item->visible() )
+            item->paint( painter, viewport, renderPos, layer );
     }
     return true;
 }
@@ -96,7 +127,7 @@ void GeometryLayerPrivate::createGraphicsItems( GeoDataObject *object )
     if ( dynamic_cast<GeoDataPlacemark*>( object ) )
     {
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );
-        createGraphicsItemFromGeometry( placemark->geometry(), placemark->style() );
+        createGraphicsItemFromGeometry( placemark->geometry(), placemark );
     }
 
     // parse all child objects of the container
@@ -111,20 +142,21 @@ void GeometryLayerPrivate::createGraphicsItems( GeoDataObject *object )
     }
 }
 
-void GeometryLayerPrivate::createGraphicsItemFromGeometry( GeoDataGeometry* object, GeoDataStyle* style )
+void GeometryLayerPrivate::createGraphicsItemFromGeometry( GeoDataGeometry* object, GeoDataPlacemark *placemark )
 {
+    GeoGraphicsItem *item = 0;
     if ( dynamic_cast<GeoDataLinearRing*>( object ) )
     {
     }
     else if ( GeoDataLineString* line = dynamic_cast<GeoDataLineString*>( object ) )
     {
-        GeoLineStringGraphicsItem *item = new GeoLineStringGraphicsItem();
-        item->setLineString( *line );
-        item->setStyle( style );
-        m_scene.addIdem( item );
+        item = new GeoLineStringGraphicsItem();
+        static_cast<GeoLineStringGraphicsItem*>( item )->setLineString( *line );
     }
-    else if ( dynamic_cast<GeoDataPolygon*>( object ) )
+    else if ( GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon*>( object ) )
     {
+        item = new GeoPolygonGraphicsItem();
+        static_cast<GeoPolygonGraphicsItem*>( item )->setPolygon( *poly );
     }
     else if ( dynamic_cast<GeoDataMultiGeometry*>( object ) )
     {
@@ -132,9 +164,15 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( GeoDataGeometry* obje
         int rowCount = multigeo->size();
         for ( int row = 0; row < rowCount; ++row )
         {
-            createGraphicsItemFromGeometry( multigeo->child( row ), style );
+            createGraphicsItemFromGeometry( multigeo->child( row ), placemark );
         }
     }
+    if ( !item )
+        return;
+    item->setStyle( placemark->style() );
+    item->setVisible( placemark->isVisible() );
+    item->setZValue( GeometryLayer::s_defaultZValues[placemark->visualCategory()] );
+    m_scene.addIdem( item );
 }
 
 void GeometryLayer::invalidateScene()
