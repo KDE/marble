@@ -165,8 +165,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), parent ),
           m_measureTool( model )
 {
-    GeoDataDocument *document =  model->treeModel()->rootDocument();
-    m_geometryLayer = new GeometryLayer( document );
+    m_geometryLayer = new GeometryLayer( model->treeModel() );
     m_layerManager.addLayer( m_geometryLayer );
 
     m_layerManager.addLayer( &m_placemarkLayout );
@@ -198,6 +197,9 @@ void MarbleMapPrivate::construct()
                        m_parent,        SIGNAL( repaintNeeded( QRegion ) ) );
     QObject::connect ( &m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        m_parent,        SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
+    
+    QObject::connect ( m_model,  SIGNAL( modelChanged() ),
+                       m_geometryLayer,  SLOT( invalidateScene() ) );
 
     m_parent->connect( &m_textureLayer, SIGNAL( tileLevelChanged( int ) ),
                        m_parent, SIGNAL( tileLevelChanged( int ) ) );

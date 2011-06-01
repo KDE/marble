@@ -29,6 +29,7 @@ class GeoDataCoordinates;
 class GeoDataLatLonAltBox;
 
 class GeoGraphicsItemPrivate;
+class GeoDataStyle;
 
 class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
 {
@@ -134,6 +135,17 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
      * the item will be shown in every case.
      */
     void setLatLonAltBox( const GeoDataLatLonAltBox& latLonAltBox );
+    
+    /**
+     * Returns the style of item.
+     */
+    GeoDataStyle* style() const;
+
+    /**
+     * Set the box used to determine if an item is active or inactive. If an empty box is passed
+     * the item will be shown in every case.
+     */
+    void setStyle( GeoDataStyle* style );
 
     /**
      * Returns all coordinates of the item in view coordinates according to the given projection.

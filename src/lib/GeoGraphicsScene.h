@@ -13,12 +13,13 @@
 #define MARBLE_GEOGRAPHICSSCENE_H
 
 #include "marble_export.h"
-#include "global.h" 
+#include "global.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QList>
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoGraphicsItem;
 class GeoDataLatLonAltBox;
@@ -30,7 +31,7 @@ class GeoGraphicsScenePrivate;
 class MARBLE_EXPORT GeoGraphicsScene : public QObject
 {
     Q_OBJECT
-    
+
 public:
     /**
      * Creates a new instance of GeoGraphicsScene
@@ -38,7 +39,7 @@ public:
      */
     GeoGraphicsScene( QObject *parent = 0 );
     ~GeoGraphicsScene();
-    
+
     /**
      * @brief Add an item to the GeoGraphicsScene
      * Adds the item @p item to the GeoGraphicsScene
@@ -50,7 +51,13 @@ public:
      * Removes the item @p item from the GeoGraphicsScene
      */
     void removeItem( GeoGraphicsItem *item );
-    
+
+    /**
+     * @brief Remove all items from the GeoGraphicsScene
+     * Removes all items from the GeoGraphicsScene
+     */
+    void clear();
+
     /**
      * @brief Get all items in the GeoGraphicsScene
      * Returns all items in the GeoGraphicsScene.

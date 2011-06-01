@@ -119,6 +119,16 @@ void GeoGraphicsItem::setLatLonAltBox( const GeoDataLatLonAltBox& latLonAltBox )
     p()->m_latLonAltBox = latLonAltBox;
 }
 
+void GeoGraphicsItem::setStyle( GeoDataStyle* style )
+{
+    p()->m_style = style;
+}
+
+GeoDataStyle* GeoGraphicsItem::style() const
+{
+    return p()->m_style;
+}
+
 QList<QPointF> GeoGraphicsItem::positions() const
 {
     return p()->positions();

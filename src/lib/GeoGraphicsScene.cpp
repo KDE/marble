@@ -57,6 +57,11 @@ void GeoGraphicsScene::removeItem( GeoGraphicsItem* item )
     d->m_items.removeOne( item );
 }
 
+void GeoGraphicsScene::clear()
+{
+    d->m_items.clear();
+}
+
 void GeoGraphicsScene::addIdem( GeoGraphicsItem* item )
 {
     QList< GeoGraphicsItem* >::iterator position = qLowerBound( d->m_items.begin(), d->m_items.end(), item, zValueLessThan );

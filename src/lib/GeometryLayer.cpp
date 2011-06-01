@@ -29,6 +29,10 @@
 // Qt
 #include <QtCore/QTime>
 #include "ViewportParams.h"
+#include "GeoGraphicsScene.h"
+#include "GeoGraphicsItem.h"
+#include "GeoLineStringGraphicsItem.h"
+#include <QAbstractItemModel>
 
 namespace Marble
 {
@@ -36,23 +40,23 @@ namespace Marble
 
 class GeometryLayerPrivate
 {
- public:
-    GeoDataDocument *m_root;
-
-    void setBrushStyle( GeoPainter *painter, GeoDataStyle *style );
-    void setPenStyle( GeoPainter *painter, GeoDataStyle *style, ViewportParams *viewport );
-    bool renderGeoDataObject( GeoPainter *painter, GeoDataObject *object, ViewportParams *viewport );
-    bool renderGeoDataGeometry( GeoPainter *painter, GeoDataGeometry *geometry, 
-                                GeoDataStyle *style, ViewportParams *viewport );
+public:
+    void createGraphicsItems( GeoDataObject *object );
+    void createGraphicsItemFromGeometry( GeoDataGeometry *object, GeoDataStyle *style );
 
     QBrush m_currentBrush;
     QPen m_currentPen;
+    GeoGraphicsScene m_scene;
+    QAbstractItemModel *m_model;
 };
 
-GeometryLayer::GeometryLayer( GeoDataDocument *document )
-    : d( new GeometryLayerPrivate() )
+GeometryLayer::GeometryLayer( QAbstractItemModel *model )
+        : d( new GeometryLayerPrivate() )
 {
-    d->m_root = document;
+    d->m_model = model;
+    GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
+    if ( object && object->parent() )
+        d->createGraphicsItems( object->parent() );
 }
 
 GeometryLayer::~GeometryLayer()
@@ -62,97 +66,37 @@ GeometryLayer::~GeometryLayer()
 
 QStringList GeometryLayer::renderPosition() const
 {
-    return QStringList("HOVERS_ABOVE_SURFACE");
+    return QStringList( "HOVERS_ABOVE_SURFACE" );
 }
 
 bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
-   const QString& renderPos, GeoSceneLayer * layer )
+                            const QString& renderPos, GeoSceneLayer * layer )
 {
-    Q_UNUSED(viewport)
-    Q_UNUSED(renderPos)
-    Q_UNUSED(layer)
 //    QTime t;
 //    t.start();
 //    mDebug() << "rendering " << m_root;
-    if ( d->m_root )
+    /*if ( d->m_root )
     {
         d->renderGeoDataObject( painter, d->m_root, viewport );
-    }
+    }*/
 //    mDebug() << "rendering geometry: " << t.elapsed();
-
+    QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox() );
+    foreach( GeoGraphicsItem* item, items )
+    {
+        //if(item->flags() & GeoGraphicsItem::ItemIsVisible)
+        item->paint( painter, viewport, renderPos, layer );
+    }
     return true;
 }
 
-void GeometryLayerPrivate::setBrushStyle( GeoPainter *painter, GeoDataStyle *style )
+void GeometryLayerPrivate::createGraphicsItems( GeoDataObject *object )
 {
-    if( !style->polyStyle().fill() ) {
-        if( painter->brush().color() != Qt::transparent )
-        painter->setBrush( QColor( Qt::transparent ) );
-        return;
-    }
-
-    if( painter->brush().color() != style->polyStyle().color() ) {
-/*        mDebug() << "BrushColor:" 
-                 << style->polyStyle().color()
-                 << painter->brush().color();*/
-        painter->setBrush( style->polyStyle().color() );
-    }
-}
-
-void GeometryLayerPrivate::setPenStyle( GeoPainter *painter, GeoDataStyle *style, ViewportParams *viewport )
-{
-    if( !style->polyStyle().outline() ) {
-        m_currentPen.setColor( Qt::transparent );
-        if( painter->pen() != m_currentPen ) painter->setPen( m_currentPen );
-        return;
-    }
-
-    if( m_currentPen.color() != style->lineStyle().color() ||
-        m_currentPen.widthF() != style->lineStyle().width() ||
-        style->lineStyle().physicalWidth() != 0.0 ) {
-/*        mDebug() << "PenColor:"
-                 << style->lineStyle().color()
-                 << m_currentPen.color();
-        mDebug() << "PenWidth:" 
-                 << style->lineStyle().width()
-                 << m_currentPen.widthF();*/
-        m_currentPen.setColor( style->lineStyle().color() );
-        if( float(viewport->radius()) / EARTH_RADIUS * style->lineStyle().physicalWidth() < style->lineStyle().width() )
-            m_currentPen.setWidthF( style->lineStyle().width() );
-        else
-            m_currentPen.setWidthF( float(viewport->radius()) / EARTH_RADIUS * style->lineStyle().physicalWidth() );
-    }
-    
-    if( m_currentPen.capStyle() != style->lineStyle().capStyle() )
-        m_currentPen.setCapStyle( style->lineStyle().capStyle() );
-    
-    if( m_currentPen.style() != style->lineStyle().penStyle() )
-        m_currentPen.setStyle( style->lineStyle().penStyle() );
-
-    if (    painter->mapQuality() != Marble::HighQuality
-         && painter->mapQuality() != Marble::PrintQuality )
-    {
-//            m_currentPen.setWidth( 0 );
-        QColor penColor = m_currentPen.color();
-        penColor.setAlpha( 255 );
-        m_currentPen.setColor( penColor );
-    }
-
-    if( painter->pen() != m_currentPen ) painter->setPen( m_currentPen );
-}
-
-bool GeometryLayerPrivate::renderGeoDataObject( GeoPainter *painter, 
-                                                GeoDataObject *object, ViewportParams *viewport )
-{
-//    mDebug() << "render object " << object << " " << object->nodeType();
     GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
-    if ( feature && !feature->isVisible() ) {
-        return false;
-    }
 
-    else if( dynamic_cast<GeoDataPlacemark*>( object ) ) {
+    if ( dynamic_cast<GeoDataPlacemark*>( object ) )
+    {
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );
-        renderGeoDataGeometry( painter, placemark->geometry(), placemark->style(), viewport );
+        createGraphicsItemFromGeometry( placemark->geometry(), placemark->style() );
     }
 
     // parse all child objects of the container
@@ -161,51 +105,51 @@ bool GeometryLayerPrivate::renderGeoDataObject( GeoPainter *painter,
     {
         int rowCount = container->size();
         for ( int row = 0; row < rowCount; ++row )
-        {            
-            renderGeoDataObject( painter, container->child( row ), viewport );
+        {
+            createGraphicsItems( container->child( row ) );
         }
     }
-
-    return true;
 }
 
-bool GeometryLayerPrivate::renderGeoDataGeometry( GeoPainter *painter, GeoDataGeometry *object, 
-                                                  GeoDataStyle *style, ViewportParams *viewport )
+void GeometryLayerPrivate::createGraphicsItemFromGeometry( GeoDataGeometry* object, GeoDataStyle* style )
 {
-//    mDebug() << "render geometry " << object << " " << object->nodeType();
-
-    painter->save();
-    painter->autoMapQuality();
-
-    if( dynamic_cast<GeoDataLinearRing*>( object ) ) {
-        painter->setBrush( QColor( 0, 0, 0, 0 ) );
-        setPenStyle( painter, style, viewport );
-        GeoDataLinearRing linearRing( *object );
-        painter->drawPolygon( linearRing );
+    if ( dynamic_cast<GeoDataLinearRing*>( object ) )
+    {
     }
-    else if( dynamic_cast<GeoDataLineString*>( object ) ) {
-        setPenStyle( painter, style, viewport );
-        GeoDataLineString lineString( *object );
-        painter->drawPolyline( lineString );
+    else if ( GeoDataLineString* line = dynamic_cast<GeoDataLineString*>( object ) )
+    {
+        GeoLineStringGraphicsItem *item = new GeoLineStringGraphicsItem();
+        item->setLineString( *line );
+        item->setStyle( style );
+        m_scene.addIdem( item );
     }
-    else if( dynamic_cast<GeoDataPolygon*>( object ) ) {
-        setBrushStyle( painter, style );
-        setPenStyle( painter, style, viewport );
-        // geometries are implicitly shared, this shouldn't hurt
-        GeoDataPolygon polygon( *object );
-        painter->drawPolygon( polygon );
+    else if ( dynamic_cast<GeoDataPolygon*>( object ) )
+    {
     }
-    else if( dynamic_cast<GeoDataMultiGeometry*>( object ) ) {
+    else if ( dynamic_cast<GeoDataMultiGeometry*>( object ) )
+    {
         GeoDataMultiGeometry *multigeo = dynamic_cast<GeoDataMultiGeometry*>( object );
         int rowCount = multigeo->size();
         for ( int row = 0; row < rowCount; ++row )
         {
-            renderGeoDataGeometry( painter, multigeo->child( row ), style, viewport );
+            createGraphicsItemFromGeometry( multigeo->child( row ), style );
         }
     }
+}
 
-    painter->restore();
-    return true;
+void GeometryLayer::invalidateScene()
+{
+    QList<GeoGraphicsItem*> items = d->m_scene.items();
+    foreach( GeoGraphicsItem* item, items )
+    {
+        delete item;
+    }
+    d->m_scene.clear();
+    GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
+    if ( object && object->parent() )
+        d->createGraphicsItems( object->parent() );
 }
 
 }
+
+#include "GeometryLayer.moc"

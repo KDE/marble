@@ -16,7 +16,7 @@
 #include "LayerInterface.h"
 
 // Qt
-
+class QAbstractItemModel;
 
 namespace Marble
 {
@@ -25,18 +25,22 @@ class GeoPainter;
 class ViewportParams;
 class GeometryLayerPrivate;
 
-class GeometryLayer : public LayerInterface
+class GeometryLayer : public QObject, public LayerInterface
 {
- public:
-    GeometryLayer( GeoDataDocument *document );
+    Q_OBJECT
+public:
+    GeometryLayer( QAbstractItemModel *model );
     ~GeometryLayer();
 
     virtual QStringList renderPosition() const;
 
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-       const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
+                         const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
 
- private:
+public Q_SLOTS:
+    void invalidateScene();
+
+private:
     GeometryLayerPrivate *d;
 };
 

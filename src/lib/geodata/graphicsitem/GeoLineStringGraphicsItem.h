@@ -17,7 +17,7 @@
 
 namespace Marble
 {
-
+class GeoDataLineStyle;
 class MARBLE_EXPORT GeoLineStringGraphicsItem : public GeoGraphicsItem
 {
 public:
