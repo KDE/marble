@@ -355,13 +355,19 @@ void GeoDataFeature::initializeDefaultStyles()
     s_defaultStyle[HighwayPath]              = GeoDataFeaturePrivate::createHighwayStyle( "#F98072", 1.0, 2, Qt::DashLine );
     s_defaultStyle[HighwayTrack]             = GeoDataFeaturePrivate::createHighwayStyle( "#986600", 1.0, 3, Qt::DashLine );
     s_defaultStyle[HighwayPedestrian]        = GeoDataFeaturePrivate::createHighwayStyle( "#F98072", 1.0, 2, Qt::DashLine );
-    s_defaultStyle[HighwayService]           = GeoDataFeaturePrivate::createHighwayStyle( "#FEFEFE", 1.0, 5 );
-    s_defaultStyle[HighwayRoad]              = GeoDataFeaturePrivate::createHighwayStyle( "#FEFEFE", 1.0, 9 );
-    s_defaultStyle[HighwayTertiary]          = GeoDataFeaturePrivate::createHighwayStyle( "#FEFEB3", 2.0, 10 );
-    s_defaultStyle[HighwaySecondary]         = GeoDataFeaturePrivate::createHighwayStyle( "#FDD6A4", 2.0, 12.5 );
-    s_defaultStyle[HighwayPrimary]           = GeoDataFeaturePrivate::createHighwayStyle( "#EB989A", 2.0, 15 );
-    s_defaultStyle[HighwayTrunk]             = GeoDataFeaturePrivate::createHighwayStyle( "#A9DAA9", 2.0, 17.5 );
+    s_defaultStyle[HighwayService]           = GeoDataFeaturePrivate::createHighwayStyle( "#FEFEFE", 1.0, 6 );
+    s_defaultStyle[HighwayRoad]              = GeoDataFeaturePrivate::createHighwayStyle( "#FEFEFE", 1.5, 9 );
+    s_defaultStyle[HighwayTertiary]          = GeoDataFeaturePrivate::createHighwayStyle( "#FEFEB3", 2.0, 11 );
+    s_defaultStyle[HighwaySecondary]         = GeoDataFeaturePrivate::createHighwayStyle( "#FDD6A4", 2.0, 13 );
+    s_defaultStyle[HighwayPrimary]           = GeoDataFeaturePrivate::createHighwayStyle( "#EB989A", 3.0, 15 );
+    s_defaultStyle[HighwayTrunk]             = GeoDataFeaturePrivate::createHighwayStyle( "#A9DAA9", 3.0, 18 );
     s_defaultStyle[HighwayMotorway]          = GeoDataFeaturePrivate::createHighwayStyle( "#809BC0", 3.0, 20 );
+    
+    s_defaultStyle[HighwayTertiaryLink]      = GeoDataFeaturePrivate::createHighwayStyle( "#FEFEB3", 2.0, 9 );
+    s_defaultStyle[HighwaySecondaryLink]     = GeoDataFeaturePrivate::createHighwayStyle( "#FDD6A4", 2.0, 11 );
+    s_defaultStyle[HighwayPrimaryLink]       = GeoDataFeaturePrivate::createHighwayStyle( "#EB989A", 2.0, 13 );
+    s_defaultStyle[HighwayTrunkLink]         = GeoDataFeaturePrivate::createHighwayStyle( "#A9DAA9", 3.0, 15 );
+    s_defaultStyle[HighwayMotorwayLink]      = GeoDataFeaturePrivate::createHighwayStyle( "#809BC0", 3.0, 18 );
     
     s_defaultStyle[NaturalWater]             = GeoDataFeaturePrivate::createWayStyle( "#B5D0D0", "#B5D0D0" );
     s_defaultStyle[NaturalWood]              = GeoDataFeaturePrivate::createWayStyle( "#8DC46C", "#8DC46C" );

@@ -104,15 +104,15 @@ void OsmGlobals::setupCategories()
     m_visualCategories["highway=living_street"]      = GeoDataFeature::HighwayRoad;
     m_visualCategories["highway=unclassified"]       = GeoDataFeature::HighwayRoad;
     m_visualCategories["highway=residential"]        = GeoDataFeature::HighwayRoad;
-    m_visualCategories["highway=tertiary_link"]      = GeoDataFeature::HighwayTertiary;
+    m_visualCategories["highway=tertiary_link"]      = GeoDataFeature::HighwayTertiaryLink;
     m_visualCategories["highway=tertiary"]           = GeoDataFeature::HighwayTertiary;
-    m_visualCategories["highway=secondary_link"]     = GeoDataFeature::HighwaySecondary;
+    m_visualCategories["highway=secondary_link"]     = GeoDataFeature::HighwaySecondaryLink;
     m_visualCategories["highway=secondary"]          = GeoDataFeature::HighwaySecondary;
-    m_visualCategories["highway=primary_link"]       = GeoDataFeature::HighwayPrimary;
+    m_visualCategories["highway=primary_link"]       = GeoDataFeature::HighwayPrimaryLink;
     m_visualCategories["highway=primary"]            = GeoDataFeature::HighwayPrimary;
-    m_visualCategories["highway=trunk_link"]         = GeoDataFeature::HighwayTrunk;
+    m_visualCategories["highway=trunk_link"]         = GeoDataFeature::HighwayTrunkLink;
     m_visualCategories["highway=trunk"]              = GeoDataFeature::HighwayTrunk;
-    m_visualCategories["highway=motorway_link"]      = GeoDataFeature::HighwayMotorway;
+    m_visualCategories["highway=motorway_link"]      = GeoDataFeature::HighwayMotorwayLink;
     m_visualCategories["highway=motorway"]           = GeoDataFeature::HighwayMotorway;
     
     m_visualCategories["waterway=stream"]            = GeoDataFeature::NaturalWater;

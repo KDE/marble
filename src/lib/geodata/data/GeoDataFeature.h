@@ -152,10 +152,15 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         HighwayPedestrian,
         HighwayService,
         HighwayRoad,
+        HighwayTertiaryLink,
         HighwayTertiary,
+        HighwaySecondaryLink,
         HighwaySecondary,
+        HighwayPrimaryLink,
         HighwayPrimary,
+        HighwayTrunkLink,
         HighwayTrunk,
+        HighwayMotorwayLink,
         HighwayMotorway,
 
         // OpenStreetMap category Accomodation

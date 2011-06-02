@@ -38,7 +38,8 @@
 namespace Marble
 {
 int GeometryLayer::s_defaultZValues[GeoDataFeature::LastIndex];
-bool GeometryLayer::s_defaultZValuesInitialized = false;
+int GeometryLayer::s_defaultLODValues[GeoDataFeature::LastIndex];
+bool GeometryLayer::s_defaultValuesInitialized = false;
 int GeometryLayer::s_defaultZValue = 50;
 
 class GeometryLayerPrivate
@@ -56,8 +57,8 @@ public:
 GeometryLayer::GeometryLayer( QAbstractItemModel *model )
         : d( new GeometryLayerPrivate() )
 {
-    if ( !s_defaultZValuesInitialized )
-        initializeDefaultZValues();
+    if ( !s_defaultValuesInitialized )
+        initializeDefaultValues();
 
     d->m_model = model;
     GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
@@ -75,14 +76,23 @@ QStringList GeometryLayer::renderPosition() const
     return QStringList( "HOVERS_ABOVE_SURFACE" );
 }
 
-void GeometryLayer::initializeDefaultZValues()
+void GeometryLayer::initializeDefaultValues()
 {
     for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
         s_defaultZValues[i] = s_defaultZValue;
+    
+    for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
+        s_defaultLODValues[i] = -1;
 
     s_defaultZValues[GeoDataFeature::None]                = 0;
-    s_defaultZValues[GeoDataFeature::NaturalWater]        = s_defaultZValue - 13;
-    s_defaultZValues[GeoDataFeature::NaturalWood]         = s_defaultZValue - 12;
+    s_defaultZValues[GeoDataFeature::NaturalWater]        = s_defaultZValue - 14;
+    s_defaultZValues[GeoDataFeature::NaturalWood]         = s_defaultZValue - 13;
+    
+    s_defaultZValues[GeoDataFeature::HighwayTertiaryLink] = s_defaultZValue - 12;
+    s_defaultZValues[GeoDataFeature::HighwaySecondaryLink]= s_defaultZValue - 12;
+    s_defaultZValues[GeoDataFeature::HighwayPrimaryLink]  = s_defaultZValue - 12;
+    s_defaultZValues[GeoDataFeature::HighwayTrunkLink]    = s_defaultZValue - 12;
+    s_defaultZValues[GeoDataFeature::HighwayMotorwayLink] = s_defaultZValue - 12;
 
     s_defaultZValues[GeoDataFeature::HighwayUnknown]      = s_defaultZValue - 11;
     s_defaultZValues[GeoDataFeature::HighwayPath]         = s_defaultZValue - 10;
@@ -96,7 +106,7 @@ void GeometryLayer::initializeDefaultZValues()
     s_defaultZValues[GeoDataFeature::HighwayTrunk]        = s_defaultZValue - 2;
     s_defaultZValues[GeoDataFeature::HighwayMotorway]     = s_defaultZValue - 1;
 
-    s_defaultZValuesInitialized = true;
+    s_defaultValuesInitialized = true;
 }
 
 
@@ -172,6 +182,7 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( GeoDataGeometry* obje
     item->setStyle( placemark->style() );
     item->setVisible( placemark->isVisible() );
     item->setZValue( GeometryLayer::s_defaultZValues[placemark->visualCategory()] );
+    item->setMinLodPixels( GeometryLayer::s_defaultLODValues[placemark->visualCategory()] );
     m_scene.addIdem( item );
 }
 
