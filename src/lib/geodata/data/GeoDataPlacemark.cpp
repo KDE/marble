@@ -116,7 +116,8 @@ void GeoDataPlacemark::setCoordinate( const GeoDataPoint &point )
 void GeoDataPlacemark::setGeometry( GeoDataGeometry *entry )
 {
     detach();
-    delete p()->m_geometry;
+    //FIXME: Why deleting was there?!
+    //delete p()->m_geometry;
     p()->m_geometry = entry;
     p()->m_geometry->setParent( this );
 }

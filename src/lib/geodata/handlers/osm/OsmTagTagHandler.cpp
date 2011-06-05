@@ -125,13 +125,10 @@ GeoDataPlacemark *OsmTagTagHandler::convertWayToPolygon( GeoDataDocument *doc, G
 {
     GeoDataLineString *polyline = dynamic_cast<GeoDataLineString *>( geometry );
     Q_ASSERT( polyline );
-    doc->remove( doc->childPosition( placemark ) );
-    GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );
-    GeoDataPolygon *polygon = new GeoDataPolygon;
+    GeoDataPolygon *polygon = new GeoDataPolygon();
     polygon->setOuterBoundary( *polyline );
-    newPlacemark->setGeometry( polygon );
-    doc->append( newPlacemark );
-    return newPlacemark;
+    placemark->setGeometry( polygon );
+    return placemark; 
 }
 
 }
