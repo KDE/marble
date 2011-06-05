@@ -28,11 +28,9 @@ class AbstractDataPluginModel : QObject /Abstract/
 %End
 
 public:
-    QList<Marble::AbstractDataPluginItem*>  items (Marble::ViewportParams* viewport, Marble::MarbleDataFacade* facade, qint32 number = 10);
     QList<Marble::AbstractDataPluginItem*>  whichItemAt (const QPoint& curpos);
 
 protected:
-    virtual void            getAdditionalItems (const Marble::GeoDataLatLonAltBox& box, Marble::MarbleDataFacade* facade, qint32 number = 10)=0;
     virtual void            parseFile (const QByteArray& file)=0;
     void                    downloadItemData (const QUrl& url, const QString& type, Marble::AbstractDataPluginItem* item);
     void                    downloadDescriptionFile (const QUrl& url);
@@ -53,6 +51,9 @@ signals:
     void                    itemsUpdated ();
 public:
 //ig    explicit                AbstractDataPluginModel (const QString& name, PluginManager* pluginManager, QObject* parent /TransferThis/ = 0);
+    QList<Marble::AbstractDataPluginItem*>  items (Marble::ViewportParams* viewport, const Marble::MarbleModel* model, qint32 number = 10);
+protected:
+    virtual void            getAdditionalItems (const Marble::GeoDataLatLonAltBox& box, const Marble::MarbleModel* model, qint32 number = 10)=0;
 };
 // AbstractDataPluginModel
 

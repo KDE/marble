@@ -29,7 +29,6 @@ public:
                             GeoDataFolder ();
                             GeoDataFolder (const Marble::GeoDataFolder& other);
     ~GeoDataFolder ();
-    virtual QString         nodeType () const;
 };
 // GeoDataFolder
 

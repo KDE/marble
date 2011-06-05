@@ -28,10 +28,6 @@ class GeoDataGeometry : Marble::GeoDataObject
 public:
                             GeoDataGeometry ();
                             GeoDataGeometry (const Marble::GeoDataGeometry& other);
-                            GeoDataGeometry (const Marble::GeoDataPolygon& other);
-                            GeoDataGeometry (const Marble::GeoDataPoint& other);
-                            GeoDataGeometry (const Marble::GeoDataLineString& other);
-                            GeoDataGeometry (const Marble::GeoDataMultiGeometry& other);
     bool                    operator == (const Marble::GeoDataGeometry& other) const;
     virtual EnumGeometryId  geometryId () const;
     bool                    extrude () const;
@@ -43,7 +39,7 @@ public:
     void                    detach ();
 
     virtual ~GeoDataGeometry ();
-    virtual QString         nodeType () const;
+    virtual const char*     nodeType () const;
 private:
 //ig                            GeoDataGeometry (GeoDataGeometryPrivate* priv);
 public:

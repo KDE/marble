@@ -26,6 +26,7 @@
 #include <AbstractDataPluginModel.h>
 #include <AbstractFloatItem.h>
 #include <AbstractWorkerThread.h>
+#include <BookmarkManager.h>
 #include <CurrentLocationWidget.h>
 #include <DownloadRegionDialog.h>
 #include <FileViewWidget.h>
@@ -34,12 +35,14 @@
 #include <LegendWidget.h>
 #include <MapThemeManager.h>
 #include <MapViewWidget.h>
+#include <MapWizard.h>
 #include <MarbleAboutDialog.h>
 #include <MarbleAbstractRunner.h>
 #include <MarbleControlBox.h>
 #include <MarbleMap.h>
 #include <MarbleModel.h>
 #include <MarbleNavigator.h>
+#include <MarbleRunnerManager.h>
 #include <MarbleWidget.h>
 #include <NavigationWidget.h>
 #include <PluginAboutDialog.h>
@@ -88,6 +91,8 @@ public:
         sipType = sipType_Marble_AbstractDataPluginItem;
     else if (dynamic_cast<Marble::AbstractDataPluginModel*>(sipCpp))
         sipType = sipType_Marble_AbstractDataPluginModel;
+    else if (dynamic_cast<Marble::BookmarkManager*>(sipCpp))
+        sipType = sipType_Marble_BookmarkManager;
     else if (dynamic_cast<Marble::MapThemeManager*>(sipCpp))
         sipType = sipType_Marble_MapThemeManager;
     else if (dynamic_cast<Marble::MarbleAbstractRunner*>(sipCpp))
@@ -96,6 +101,8 @@ public:
         sipType = sipType_Marble_MarbleMap;
     else if (dynamic_cast<Marble::MarbleModel*>(sipCpp))
         sipType = sipType_Marble_MarbleModel;
+    else if (dynamic_cast<Marble::MarbleRunnerManager*>(sipCpp))
+        sipType = sipType_Marble_MarbleRunnerManager;
     else if (dynamic_cast<Marble::PositionTracking*>(sipCpp))
         sipType = sipType_Marble_PositionTracking;
     else if (dynamic_cast<Marble::RenderPlugin*>(sipCpp))
@@ -144,6 +151,8 @@ public:
         sipType = sipType_Marble_PluginAboutDialog;
     else if (dynamic_cast<Marble::QtMarbleConfigDialog*>(sipCpp))
         sipType = sipType_Marble_QtMarbleConfigDialog;
+    else if (dynamic_cast<Marble::MapWizard*>(sipCpp))
+        sipType = sipType_Marble_MapWizard;
     else if (dynamic_cast<Marble::TinyWebBrowser*>(sipCpp))
         sipType = sipType_Marble_TinyWebBrowser;
 %End

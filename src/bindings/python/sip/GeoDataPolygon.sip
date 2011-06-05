@@ -41,7 +41,6 @@ public:
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
     virtual ~GeoDataPolygon ();
-    virtual QString         nodeType () const;
 protected:
 //ig    GeoDataPolygonPrivate*  p () const;
 public:

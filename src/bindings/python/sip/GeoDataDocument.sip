@@ -42,7 +42,6 @@ public:
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
     ~GeoDataDocument ();
-    virtual QString         nodeType () const;
 };
 // GeoDataDocument
 

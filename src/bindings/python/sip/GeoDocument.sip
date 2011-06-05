@@ -127,6 +127,8 @@ protected:
             }
         }
 %End
+public:
+    virtual const char*     nodeType () const;
 };
 // GeoNode
 

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.6 PyKDE API Reference
+        KDE 4.7 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,7 +48,7 @@
 <h1>RunnerPlugin Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>,<a href="../marble/Marble.PluginInterface.html">Marble.PluginInterface</a><br />
+Inherits: QObject,<a href="../marble/Marble.PluginInterface.html">Marble.PluginInterface</a><br />
 
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
@@ -58,28 +58,30 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Capability">Capability</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;None, Search, ReverseGeocoding, Routing&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#RunnerPlugin">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#RunnerPlugin">__init__</a> (self, QObject parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#canWork">canWork</a> (self, <a href="../marble/Marble.RunnerPlugin.html#Capability">Marble.RunnerPlugin.Capability</a> capability)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#canWorkOffline">canWorkOffline</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.RunnerPlugin.html">Marble.RunnerPlugin.Capabilities</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#capabilities">capabilities</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#description">description</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#guiString">guiString</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#icon">icon</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#description">description</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#guiString">guiString</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QIcon&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#icon">icon</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#initialize">initialize</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isInitialized">isInitialized</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#name">name</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nameId">nameId</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#name">name</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nameId">nameId</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.MarbleAbstractRunner.html">Marble.MarbleAbstractRunner</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#newRunner">newRunner</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCanWorkOffline">setCanWorkOffline</a> (self, bool canWorkOffline)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCapabilities">setCapabilities</a> (self, <a href="../marble/Marble.RunnerPlugin.html">Marble.RunnerPlugin.Capabilities</a> capabilities)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDescription">setDescription</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> description)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setGuiString">setGuiString</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> guiString)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setIcon">setIcon</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a> icon)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setName">setName</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setNameId">setNameId</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> nameId)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSupportedCelestialBodies">setSupportedCelestialBodies</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> celestialBodies)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDescription">setDescription</a> (self, QString description)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setGuiString">setGuiString</a> (self, QString guiString)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setIcon">setIcon</a> (self, QIcon icon)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setName">setName</a> (self, QString name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setNameId">setNameId</a> (self, QString nameId)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setStatusMessage">setStatusMessage</a> (self, QString message)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSupportedCelestialBodies">setSupportedCelestialBodies</a> (self, QStringList celestialBodies)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statusMessage">statusMessage</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#supports">supports</a> (self, <a href="../marble/Marble.RunnerPlugin.html#Capability">Marble.RunnerPlugin.Capability</a> capability)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#supportsCelestialBody">supportsCelestialBody</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> celestialBodyId)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#supportsCelestialBody">supportsCelestialBody</a> (self, QString celestialBodyId)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="RunnerPlugin"></a>
 <div class="memitem">
@@ -92,7 +94,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramtype">QObject&nbsp;</td>
 <td class="paramname"><em>parent=0</em></td>
 </tr>
 <tr>
@@ -160,7 +162,7 @@ indicate an incomplete installation.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> description</td>
+<td class="memname">QString description</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -172,7 +174,7 @@ indicate an incomplete installation.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> guiString</td>
+<td class="memname">QString guiString</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -184,7 +186,7 @@ indicate an incomplete installation.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a> icon</td>
+<td class="memname">QIcon icon</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -220,7 +222,7 @@ indicate an incomplete installation.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name</td>
+<td class="memname">QString name</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -232,7 +234,7 @@ indicate an incomplete installation.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> nameId</td>
+<td class="memname">QString nameId</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -309,7 +311,7 @@ Method caller gets ownership of the returned object
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>description</em></td>
 </tr>
 <tr>
@@ -331,7 +333,7 @@ Method caller gets ownership of the returned object
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>guiString</em></td>
 </tr>
 <tr>
@@ -353,7 +355,7 @@ Method caller gets ownership of the returned object
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a>&nbsp;</td>
+<td class="paramtype">QIcon&nbsp;</td>
 <td class="paramname"><em>icon</em></td>
 </tr>
 <tr>
@@ -375,7 +377,7 @@ Method caller gets ownership of the returned object
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>name</em></td>
 </tr>
 <tr>
@@ -397,8 +399,30 @@ Method caller gets ownership of the returned object
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>nameId</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="setStatusMessage"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setStatusMessage</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>message</em></td>
 </tr>
 <tr>
 <td></td>
@@ -419,7 +443,7 @@ Method caller gets ownership of the returned object
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td>
+<td class="paramtype">QStringList&nbsp;</td>
 <td class="paramname"><em>celestialBodies</em></td>
 </tr>
 <tr>
@@ -430,7 +454,20 @@ Method caller gets ownership of the returned object
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="supports"></a>
+<div class="memdoc"></div></div><a class="anchor" name="statusMessage"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString statusMessage</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>A status message showing whether the plugin will be able to deliver results
+</p></div></div><a class="anchor" name="supports"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -464,7 +501,7 @@ Method caller gets ownership of the returned object
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>celestialBodyId</em></td>
 </tr>
 <tr>

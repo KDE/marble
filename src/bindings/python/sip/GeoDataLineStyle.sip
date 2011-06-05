@@ -33,7 +33,7 @@ public:
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
     ~GeoDataLineStyle ();
-    virtual QString         nodeType () const;
+    virtual const char*     nodeType () const;
 };
 // GeoDataLineStyle
 

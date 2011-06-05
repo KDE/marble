@@ -74,6 +74,53 @@ public:
         RoboticRover,
         UnmannedSoftLandingSite,
         UnmannedHardLandingSite,
+        Folder,
+        Bookmark,
+        AccomodationCamping,
+        AccomodationHostel,
+        AccomodationHotel,
+        AccomodationMotel,
+        AccomodationYouthHostel,
+        AmenityLibrary,
+        EducationCollege,
+        EducationSchool,
+        EducationUniversity,
+        FoodBar,
+        FoodBiergarten,
+        FoodCafe,
+        FoodFastFood,
+        FoodPub,
+        FoodRestaurant,
+        HealthDoctors,
+        HealthHospital,
+        HealthPharmacy,
+        MoneyAtm,
+        MoneyBank,
+        ShoppingBeverages,
+        ShoppingHifi,
+        ShoppingSupermarket,
+        TouristAttraction,
+        TouristCastle,
+        TouristCinema,
+        TouristMonument,
+        TouristMuseum,
+        TouristRuin,
+        TouristTheatre,
+        TouristThemePark,
+        TouristViewPoint,
+        TouristZoo,
+        TransportAerodrome,
+        TransportAirportTerminal,
+        TransportBusStation,
+        TransportBusStop,
+        TransportCarShare,
+        TransportFuel,
+        TransportParking,
+        TransportRentalBicycle,
+        TransportRentalCar,
+        TransportTaxiRank,
+        TransportTrainStation,
+        TransportTramStop,
         LastIndex
     };
 
@@ -110,7 +157,7 @@ public:
     virtual void            detach ();
 
     virtual ~GeoDataFeature ();
-    virtual QString         nodeType () const;
+    virtual const char*     nodeType () const;
     bool                    descriptionIsCDATA () const;
     void                    setDescriptionCDATA (bool cdata);
     Marble::GeoDataRegion&  region () const;

@@ -26,8 +26,6 @@ class MarbleWidget : QWidget
 
 public:
     explicit                MarbleWidget (QWidget* parent /TransferThis/ = 0);
-    explicit                MarbleWidget (Marble::MarbleMap* map, QWidget* parent /TransferThis/ = 0);
-    Marble::MarbleMap*      map () const;
     Marble::MarbleModel*    model () const;
     const QRegion           activeRegion ();
     int                     radius () const;
@@ -41,8 +39,6 @@ public:
     bool                    geoCoordinates (int x, int y, qreal& lon /out/, qreal& lat /out/, Marble::GeoDataCoordinates::Unit = Marble::GeoDataCoordinates::Degree);
     qreal                   centerLongitude () const;
     qreal                   centerLatitude () const;
-    QAbstractItemModel*     placemarkModel () const;
-    QItemSelectionModel*    placemarkSelectionModel () const;
     qreal                   moveStep ();
     Marble::Quaternion      planetAxis () const;
     QPixmap                 mapScreenShot ();
@@ -65,14 +61,11 @@ public:
     bool                    showLakes () const;
     bool                    showGps () const;
     bool                    showFrameRate () const;
-    quint64                 persistentTileCacheLimit () const;
     quint64                 volatileTileCacheLimit () const;
-    Marble::SunLocator*     sunLocator ();
     QList<Marble::RenderPlugin*>  renderPlugins () const;
     QList<Marble::AbstractFloatItem*>  floatItems () const;
     Marble::Projection      projection () const;
     QString                 mapThemeId () const;
-//ig    FileViewModel*          fileViewModel () const;
     Marble::MapQuality      mapQuality (Marble::ViewContext = Marble::Still);
     Marble::ViewContext     viewContext () const;
     bool                    animationsEnabled () const;
@@ -80,22 +73,16 @@ public:
     void                    setDefaultAngleUnit (Marble::AngleUnit angleUnit);
     QFont                   defaultFont () const;
     void                    setDefaultFont (const QFont& font);
-    void                    updateSun ();
-    void                    centerSun ();
     void                    zoomView (int zoom, Marble::FlyToMode mode = Marble::Instant);
     void                    zoomViewBy (int zoomStep, Marble::FlyToMode mode = Marble::Instant);
     void                    zoomIn (Marble::FlyToMode mode = Marble::Automatic);
     void                    zoomOut (Marble::FlyToMode mode = Marble::Automatic);
     void                    rotateBy (const Marble::Quaternion& incRot);
-    void                    centerOn (const QModelIndex& index, bool animated = 0);
     void                    centerOn (const Marble::GeoDataCoordinates& point, bool animated = 0);
     void                    setCenterLatitude (qreal lat, Marble::FlyToMode mode = Marble::Instant);
     void                    setCenterLongitude (qreal lon, Marble::FlyToMode mode = Marble::Instant);
     void                    setProjection (int projection);
     void                    setProjection (Marble::Projection projection /Constrained/);
-    void                    home (qreal& lon /out/, qreal& lat /out/, int& zoom /out/);
-    void                    setHome (qreal lon, qreal lat, int zoom = 1050);
-    void                    setHome (const Marble::GeoDataCoordinates& homePoint, int zoom = 1050);
     void                    moveLeft (Marble::FlyToMode mode = Marble::Automatic);
     void                    moveRight (Marble::FlyToMode mode = Marble::Automatic);
     void                    moveUp (Marble::FlyToMode mode = Marble::Automatic);
@@ -124,12 +111,9 @@ public:
     void                    setShowFrameRate (bool visible);
     void                    setShowTileId (bool visible);
     void                    notifyMouseClick (int x, int y);
-    void                    clearPersistentTileCache ();
-    void                    setPersistentTileCacheLimit (quint64 kiloBytes);
     void                    clearVolatileTileCache ();
     void                    setVolatileTileCacheLimit (quint64 kiloBytes);
     void                    creatingTilesStart (Marble::TileCreator* creator, const QString& name, const QString& description);
-    void                    setMapQuality (Marble::MapQuality, Marble::ViewContext = Marble::Still);
     void                    setViewContext (Marble::ViewContext viewContext);
     void                    setAnimationsEnabled (bool enabled);
     void                    setSelection (const QRect& region);
@@ -170,23 +154,10 @@ public:
 //ig    Marble::ViewportParams*  viewport ();
     const Marble::ViewportParams*  viewport () const;
     Marble::GeoDataLookAt   lookAt () const;
-    void                    addPlacemarkFile (const QString& filename);
-    void                    addPlacemarkData (const QString& data, const QString& key = "data");
-    void                    removePlacemarkKey (const QString& key);
     Marble::AbstractFloatItem*  floatItem (const QString& nameId) const;
-    void                    addBookmark (const Marble::GeoDataPlacemark& bookmark, const QString& folderName) const;
-    QString                 bookmarkFile () const;
-    bool                    loadBookmarkFile (const QString& relativeFileName);
-//ig    QVector<Marble::GeoDataFolder*>  bookmarkFolders ();
-    void                    removeAllBookmarks ();
-    void                    addNewBookmarkFolder (const QString& name) const;
 //ig    RoutingLayer*           routingLayer ();
     void                    rotateBy (const qreal deltaLon, const qreal deltaLat, Marble::FlyToMode mode = Marble::Instant);
     void                    centerOn (const qreal lon, const qreal lat, bool animated = 0);
-    void                    openGpxFile (const QString& filename);
-    void                    addGeoDataFile (const QString& filename);
-    void                    addGeoDataString (const QString& data, const QString& key = "data");
-    void                    removeGeoData (const QString& key);
     void                    scheduleRepaint (const QRegion& dirtyRegion);
     void                    flyTo (const Marble::GeoDataLookAt& lookAt, Marble::FlyToMode mode = Marble::Automatic);
     void                    reloadMap ();
@@ -196,11 +167,22 @@ signals:
     void                    visibleLatLonAltBoxChanged (const Marble::GeoDataLatLonAltBox& visibleLatLonAltBox);
 public:
     int                     tileZoomLevel () const;
-    QVector<QModelIndex>    whichFeatureAt (const QPoint&) const;
     QList<Marble::AbstractDataPluginItem*>  whichItemAt (const QPoint& curpos) const;
     void                    downloadRegion (const QString& sourceDir, const QVector<Marble::TileCoordsPyramid>&);
 signals:
     void                    tileLevelChanged (int level);
+public:
+    void                    addLayer (Marble::LayerInterface* layer);
+    void                    removeLayer (Marble::LayerInterface* layer);
+    qreal                   radiusFromDistance (qreal distance) const;
+    qreal                   distanceFromRadius (qreal radius) const;
+    qreal                   zoomFromDistance (qreal distance) const;
+    qreal                   distanceFromZoom (qreal zoom) const;
+    bool                    showBackground () const;
+    void                    setShowBackground (bool visible);
+    void                    setMapQualityForViewContext (Marble::MapQuality quality, Marble::ViewContext viewContext);
+//FIXME
+//ig    QVector<const Marble::GeoDataPlacemark*>  whichFeatureAt (const QPoint&) const;
 };
 // MarbleWidget
 

@@ -43,5 +43,8 @@ signals:
     void                    gpsLocation (Marble::GeoDataCoordinates, qreal);
 //ig    void                    statusChanged (PositionProviderStatus status);
 //ig    void                    positionProviderPluginChanged (PositionProviderPlugin* activePlugin);
+public:
+    bool                    isTrackEmpty () const;
+    bool                    saveTrack (QString& fileName);
 };
 };

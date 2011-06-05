@@ -62,7 +62,6 @@ protected:
 
 public:
     virtual ~GeoDataLineString ();
-    virtual QString         nodeType () const;
     virtual qreal           length (qreal planetRadius, int offset = 0) const;
 //ig    virtual QVector<Marble::GeoDataLineString*>  toRangeCorrected () const;
     virtual Marble::GeoDataLineString  toNormalized () const;

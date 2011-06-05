@@ -34,19 +34,10 @@ public:
     int                     height () const;
     int                     radius () const;
     void                    setRadius (int radius);
-    int                     zoom () const;
-    qreal                   distance () const;
-    void                    setDistance (qreal distance);
-    QString                 distanceString () const;
     int                     minimumZoom () const;
     int                     maximumZoom () const;
     qreal                   centerLongitude () const;
     qreal                   centerLatitude () const;
-    QAbstractItemModel*     placemarkModel () const;
-    QItemSelectionModel*    placemarkSelectionModel () const;
-    void                    addPlacemarkFile (const QString& filename);
-    void                    addPlacemarkData (const QString& data, const QString& key = "data");
-    void                    removePlacemarkKey (const QString& key);
     Marble::Quaternion      planetAxis () const;
     QPixmap                 mapScreenShot ();
     bool                    propertyValue (const QString& name) const;
@@ -69,19 +60,12 @@ public:
     bool                    showLakes () const;
     bool                    showGps () const;
     bool                    showFrameRate () const;
-    quint64                 persistentTileCacheLimit () const;
     quint64                 volatileTileCacheLimit () const;
-    Marble::SunLocator*     sunLocator ();
     QList<Marble::RenderPlugin*>  renderPlugins () const;
     QList<Marble::AbstractFloatItem*>  floatItems () const;
-    void                    updateSun ();
-    void                    centerSun ();
     void                    paint (Marble::GeoPainter& painter, QRect& dirtyRect);
-    void                    zoomView (int zoom);
-    void                    zoomViewBy (int zoomStep);
     void                    rotateBy (const qreal& deltaLon /in/, const qreal& deltaLat /in/);
     void                    rotateBy (const Marble::Quaternion& incRot);
-    void                    centerOn (const QModelIndex& index);
     void                    setCenterLatitude (qreal lat);
     void                    setCenterLongitude (qreal lon);
     Marble::Projection      projection () const;
@@ -110,9 +94,6 @@ public:
     void                    setShowGps (bool visible);
     void                    setShowFrameRate (bool visible);
     void                    notifyMouseClick (int x, int y);
-//ig    FileViewModel*          fileViewModel () const;
-    void                    clearPersistentTileCache ();
-    void                    setPersistentTileCacheLimit (quint64 kiloBytes);
     void                    clearVolatileTileCache ();
     void                    setVolatileTileCacheLimit (quint64 kiloBytes);
     bool                    mapCoversViewport ();
@@ -122,8 +103,6 @@ public:
     void                    setDefaultFont (const QFont& font);
 
 signals:
-    void                    zoomChanged (int zoom);
-    void                    distanceChanged (const QString& distanceString);
     void                    projectionChanged (Marble::Projection);
     void                    mouseClickGeoPosition (qreal lon, qreal lat, Marble::GeoDataCoordinates::Unit);
     void                    framesPerSecond (qreal fps);
@@ -135,30 +114,18 @@ public:
     virtual ~MarbleMap ();
     void                    reload () const;
     Marble::ViewportParams*  viewport ();
-    void                    setMapQuality (Marble::MapQuality quality);
     Marble::MapQuality      mapQuality () const;
     void                    setSize (const QSize& size);
     bool                    screenCoordinates (qreal lon, qreal lat, qreal& x, qreal& y) const;
     bool                    geoCoordinates (int x, int y, qreal& lon, qreal& lat, Marble::GeoDataCoordinates::Unit = Marble::GeoDataCoordinates::Degree) const;
     Marble::AbstractFloatItem*  floatItem (const QString& nameId) const;
-    void                    flyTo (const Marble::GeoDataLookAt& lookAt);
-    Marble::GeoDataLookAt   lookAt () const;
-    qreal                   radiusFromDistance (qreal distance) const;
-    qreal                   distanceFromRadius (qreal radius) const;
-    qreal                   zoomFromDistance (qreal distance) const;
-    qreal                   distanceFromZoom (qreal zoom) const;
     void                    centerOn (const qreal lon, const qreal lat);
-    void                    openGpxFile (const QString& filename);
-    void                    addGeoDataFile (const QString& filename);
-    void                    addGeoDataString (const QString& data, const QString& key = "data");
-    void                    removeGeoData (const QString& key);
 signals:
     void                    themeChanged (const QString& theme);
     void                    mouseMoveGeoPosition (const QString&);
     void                    visibleLatLonAltBoxChanged (const Marble::GeoDataLatLonAltBox& visibleLatLonAltBox);
 public:
     int                     tileZoomLevel () const;
-    QVector<QModelIndex>    whichFeatureAt (const QPoint&) const;
     bool                    showBackground () const;
     QList<Marble::AbstractDataPlugin*>  dataPlugins () const;
     QList<Marble::AbstractDataPluginItem*>  whichItemAt (const QPoint& curpos) const;
@@ -171,6 +138,15 @@ signals:
     void                    repaintNeeded (const QRegion& dirtyRegion = QRegion());
     void                    pluginSettingsChanged ();
     void                    renderPluginInitialized (Marble::RenderPlugin* renderPlugin);
+public:
+    void                    setMapQualityForViewContext (Marble::MapQuality qualityForViewContext, Marble::ViewContext viewContext);
+    Marble::MapQuality      mapQuality (Marble::ViewContext viewContext) const;
+    void                    setViewContext (Marble::ViewContext viewContext);
+    Marble::ViewContext     viewContext () const;
+    int                     preferredRadiusCeil (int radius);
+    int                     preferredRadiusFloor (int radius);
+//FIXME
+//ig    QVector<const Marble::GeoDataPlacemark*>  whichFeatureAt (const QPoint&) const;
 };
 // MarbleMap
 

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.6 PyKDE API Reference
+        KDE 4.7 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,7 +48,7 @@
 <h1>SunLocator Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+Inherits: QObject<br />
 
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
@@ -56,7 +56,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <dd>This class can be used as a base class for new classes, but can not be instantiated directly.</dd></dl>
 
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#centerSun">centerSun</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#centerSun">centerSun</a> (float lon, float lat)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#enableWidgetInput">enableWidgetInput</a> (bool a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#updateStars">updateStars</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#updateSun">updateSun</a> ()</td></tr>
@@ -82,13 +82,24 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <table class="memname"><tr>
 <td class="memname"> centerSun</td>
 <td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname">)</td>
-<td width="100%"> </td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em>, </td>
 </tr>
-</table>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("centerSun()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="enableWidgetInput"></a>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("centerSun(qreal, qreal)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="enableWidgetInput"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

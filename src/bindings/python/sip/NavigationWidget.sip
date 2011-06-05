@@ -30,7 +30,6 @@ public:
     ~NavigationWidget ();
     void                    setMarbleWidget (Marble::MarbleWidget* widget);
     void                    setWorkOffline (bool offline);
-    int                     minimumZoom () const;
 signals:
     void                    goHome ();
     void                    zoomIn ();
@@ -40,12 +39,12 @@ signals:
     void                    moveRight ();
     void                    moveUp ();
     void                    moveDown ();
-    void                    centerOn (const QModelIndex&, bool);
 public:
-//ig    void                    setLocations (MarblePlacemarkModel* locations);
     void                    selectTheme (const QString&);
     void                    changeZoom (int zoom);
 protected:
     void                    resizeEvent (QResizeEvent*);
+public:
+    void                    setLocations (QAbstractItemModel* locations);
 };
 };

@@ -39,7 +39,6 @@ public:
     void                    setWest (const qreal west, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
     qreal                   rotation (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
     void                    setRotation (const qreal rotation, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
-    void                    boundaries (qreal& north /out/, qreal& south /out/, qreal& east /out/, qreal& west /out/, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
     void                    setBoundaries (qreal north, qreal south, qreal east, qreal west, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
     qreal                   width (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
     qreal                   height (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
@@ -58,13 +57,14 @@ public:
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
     virtual ~GeoDataLatLonBox ();
-    virtual QString         nodeType () const;
+    virtual const char*     nodeType () const;
     virtual Marble::GeoDataCoordinates  center () const;
     bool                    containsPole (Marble::Pole pole = Marble::AnyPole) const;
     Marble::GeoDataLatLonBox  united (const Marble::GeoDataLatLonBox& other) const;
     virtual bool            isEmpty () const;
     Marble::GeoDataLatLonBox  operator | (const Marble::GeoDataLatLonBox& other) const;
     Marble::GeoDataLatLonBox&  operator |= (const Marble::GeoDataLatLonBox& other);
+    void                    boundaries (qreal& north, qreal& south, qreal& east, qreal& west, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
 };
 // GeoDataLatLonBox
 

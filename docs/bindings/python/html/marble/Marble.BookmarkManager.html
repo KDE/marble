@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
-  <title>Marble.LatLonEdit</title>
+  <title>Marble.BookmarkManager</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
@@ -45,59 +45,42 @@
 <div id="main">
 <div class="clearer">&nbsp;</div>
 
-<h1>LatLonEdit Class Reference</h1>
+<h1>BookmarkManager Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: QWidget &#x2192; QObject<br />
+Inherits: QObject<br />
 
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
-
+<p>This class is responsible for loading the
+book mark objects from the files and various
+book mark operations
+</p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dimensionChanged">dimensionChanged</a> (<a href="../marble/Marble.html#Dimension">Marble.Dimension</a> dimension)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#valueChanged">valueChanged</a> (float value)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#bookmarksChanged">bookmarksChanged</a> ()</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#LatLonEdit">__init__</a> (self, QWidget parent=0, <a href="../marble/Marble.html#Dimension">Marble.Dimension</a> dimension=Marble.Longitude)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDimension">setDimension</a> (self, <a href="../marble/Marble.html#Dimension">Marble.Dimension</a> dimension)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setValue">setValue</a> (self, float newvalue)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#value">value</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#BookmarkManager">__init__</a> (self, QObject parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addBookmark">addBookmark</a> (self, <a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a> bookmark, QString folderName)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addNewBookmarkFolder">addNewBookmarkFolder</a> (self, QString folder)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#bookmarkFile">bookmarkFile</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#loadFile">loadFile</a> (self, QString relativeFilePath)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeAllBookmarks">removeAllBookmarks</a> (self)</td></tr>
 </table>
-<hr><h2>Signal Documentation</h2><a class="anchor" name="dimensionChanged"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="bookmarksChanged"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> dimensionChanged</td>
+<td class="memname"> bookmarksChanged</td>
 <td>(</td>
-<td class="paramtype"><a href="../marble/Marble.html#Dimension">Marble.Dimension</a>&nbsp;</td>
-<td class="paramname"><em>dimension</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
 <td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("dimensionChanged(Marble::Dimension)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="valueChanged"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> valueChanged</td>
-<td>(</td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>value</em></td>
 </tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
+</table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("valueChanged(qreal)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="LatLonEdit"></a>
+<div class="memdoc"><p>One or more bookmarks were added or removed
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("bookmarksChanged()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="BookmarkManager"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -108,14 +91,8 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">QWidget&nbsp;</td>
-<td class="paramname"><em>parent=0</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.html#Dimension">Marble.Dimension</a>&nbsp;</td>
-<td class="paramname"><em>dimension=Marble.Longitude</em></td>
+<td class="paramtype">QObject&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
 </tr>
 <tr>
 <td></td>
@@ -125,19 +102,25 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="setDimension"></a>
+<div class="memdoc"></div></div><a class="anchor" name="addBookmark"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> setDimension</td>
+<td class="memname"> addBookmark</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.html#Dimension">Marble.Dimension</a>&nbsp;</td>
-<td class="paramname"><em>dimension</em></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a>&nbsp;</td>
+<td class="paramname"><em>bookmark</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>folderName</em></td>
 </tr>
 <tr>
 <td></td>
@@ -147,19 +130,28 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="setValue"></a>
+<div class="memdoc"><p>add bookmark in a folder
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>bookmark</em>&nbsp;</td><td> bookmark to be added
+
+<tr><td></td><td valign="top"><em>folderName</em>&nbsp;</td><td> folder name in which bookmark to be added
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addNewBookmarkFolder"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> setValue</td>
+<td class="memname"> addNewBookmarkFolder</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>newvalue</em></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>folder</em></td>
 </tr>
 <tr>
 <td></td>
@@ -169,11 +161,18 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="value"></a>
+<div class="memdoc"><p>add a folder
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>folder</em>&nbsp;</td><td> name of folder to be created
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="bookmarkFile"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">float value</td>
+<td class="memname">QString bookmarkFile</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -181,7 +180,51 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div>
+<div class="memdoc"><p>return bookmark file path
+</p></div></div><a class="anchor" name="loadFile"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool loadFile</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>relativeFilePath</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>load bookmark file as GeoDataDocument and return true
+if loaded successfully else false
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>relativeFilePath</em>&nbsp;</td><td> relative path of bookmark file
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="removeAllBookmarks"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> removeAllBookmarks</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>remove all folders and bookmarks except default folder
+</p></div></div>
 </div>
 </div>
 </div>

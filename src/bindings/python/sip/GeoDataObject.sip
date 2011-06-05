@@ -34,7 +34,7 @@ public:
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& steam);
     virtual ~GeoDataObject ();
-    virtual QString         nodeType () const;
+    virtual const char*     nodeType () const;
     virtual Marble::GeoDataObject*  parent () const;
     virtual void            setParent (Marble::GeoDataObject* parent);
 };

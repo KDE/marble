@@ -44,7 +44,6 @@ public:
     virtual void            unpack (QDataStream& stream);
 
     ~GeoDataPlacemark ();
-    virtual QString         nodeType () const;
     virtual QXmlStreamWriter&  pack (QXmlStreamWriter& stream) const;
     virtual QXmlStreamWriter&  operator << (QXmlStreamWriter& stream) const;
     void                    setGeometry (Marble::GeoDataGeometry* entry);

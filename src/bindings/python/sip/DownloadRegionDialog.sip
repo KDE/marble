@@ -50,5 +50,6 @@ protected:
     virtual void            showEvent (QShowEvent* event);
 public:
     explicit                DownloadRegionDialog (Marble::MarbleWidget* widget, QWidget* parent = 0, const Qt::WindowFlags f = 0);
+//ig    explicit                DownloadRegionDialog (MarbleWidget*const widget, QWidget*const parent = 0, const Qt::WindowFlags f = 0);
 };
 };

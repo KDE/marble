@@ -31,7 +31,6 @@ public:
     Marble::Projection      projection () const;
 //ig    Marble::AbstractProjection*  currentProjection () const;
     void                    setProjection (Marble::Projection newProjection);
-    void                    setMapQuality (Marble::MapQuality);
     void                    setPropertyValue (const QString& name, bool value);
     void                    propertyAvailable (const QString& name, bool& available /out/);
     void                    propertyValue (const QString& name, bool& value /out/);
@@ -67,6 +66,13 @@ public:
     bool                    showClouds () const;
     void                    setShowClouds (const bool);
     void                    setSize (int width, int height);
+    Marble::MapQuality      mapQuality (Marble::ViewContext viewContext) const;
+    void                    setMapQualityForViewContext (Marble::MapQuality quality, Marble::ViewContext viewContext);
+    Marble::ViewContext     viewContext () const;
+    void                    setViewContext (Marble::ViewContext viewContext);
+//FIXME
+//ig    QSharedPointer<QImage>  canvasImagePtr () const;
+//ig    QSharedPointer<QImage>  coastImagePtr () const;
 };
 // ViewParams
 

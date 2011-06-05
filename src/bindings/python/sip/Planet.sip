@@ -63,6 +63,7 @@ public:
     void                    setId (const QString& id);
     static QString          name (const QString& id);
     ~Planet ();
+    static QStringList      planetList ();
 };
 // Planet
 

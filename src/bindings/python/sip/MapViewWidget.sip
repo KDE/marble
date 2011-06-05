@@ -38,5 +38,7 @@ public:
 signals:
     void                    selectMapTheme (const QString&);
     void                    projectionSelected (Marble::Projection);
+    void                    showMapWizard ();
+    void                    showUploadDialog ();
 };
 };

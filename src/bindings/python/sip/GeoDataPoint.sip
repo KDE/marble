@@ -41,7 +41,7 @@ public:
 
                             GeoDataPoint (const Marble::GeoDataCoordinates& other);
     ~GeoDataPoint ();
-    virtual QString         nodeType () const;
+    virtual const char*     nodeType () const;
 };
 // GeoDataPoint
 

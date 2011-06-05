@@ -42,11 +42,13 @@ public:
 //ig    QVector<Marble::GeoDataGeometry>::ConstIterator  constBegin () const;
 //ig    QVector<Marble::GeoDataGeometry>::ConstIterator  constEnd () const;
     void                    clear ();
-    QVector<Marble::GeoDataGeometry>&  vector () const;
+
+//FIXME the result here should be copied.
+//ig    QVector<Marble::GeoDataGeometry>&  vector () const;
+
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
     virtual ~GeoDataMultiGeometry ();
-    virtual QString         nodeType () const;
     virtual Marble::GeoDataLatLonAltBox  latLonAltBox () const;
     Marble::GeoDataGeometry*  child (int);
     int                     childPosition (Marble::GeoDataGeometry* child);

@@ -47,6 +47,12 @@ public:
     void                    setVisible (bool visible);
     bool                    visible () const;
     bool                    positionLocked ();
+    void                    show ();
+    void                    hide ();
+protected:
+    virtual void            contextMenuEvent (QWidget* w, QContextMenuEvent* e);
+    virtual void            toolTipEvent (QHelpEvent* e);
+    QMenu*                  contextMenu ();
 };
 // AbstractFloatItem
 

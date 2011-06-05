@@ -41,7 +41,7 @@ public:
     Marble::GeoDataPolyStyle&  polyStyle () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-    virtual QString         nodeType () const;
+    virtual const char*     nodeType () const;
 };
 // GeoDataStyle
 

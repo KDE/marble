@@ -32,7 +32,7 @@ public:
                             GeoDataStyleSelector ();
                             GeoDataStyleSelector (const Marble::GeoDataStyleSelector& other);
     ~GeoDataStyleSelector ();
-    virtual QString         nodeType () const;
+    virtual const char*     nodeType () const;
 };
 // GeoDataStyleSelector
 

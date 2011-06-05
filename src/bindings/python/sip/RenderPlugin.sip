@@ -29,10 +29,7 @@ class RenderPlugin : QObject, Marble::RenderPluginInterface /Abstract/
 
 public:
                             RenderPlugin ();
-    Marble::MarbleDataFacade*  dataFacade () const;
-    void                    setDataFacade (Marble::MarbleDataFacade*);
     QAction*                action () const;
-    QStandardItem*          item () const;
     void                    applyItemState ();
     void                    retrieveItemState ();
     bool                    enabled () const;
@@ -55,8 +52,6 @@ public:
     virtual ~RenderPlugin ();
     virtual QList<QActionGroup*>*  actionGroups () const;
     virtual QList<QActionGroup*>*  toolbarActionGroups () const;
-    virtual QDialog*        aboutDialog () const;
-    virtual QDialog*        configDialog () const;
     virtual QHash<QString,QVariant>  settings () const;
     virtual void            setSettings (QHash<QString,QVariant> settings);
 signals:
@@ -71,6 +66,12 @@ public:
         Online
     };
     virtual Marble::RenderPlugin::RenderType  renderType () const;
+    const Marble::MarbleModel*  marbleModel () const;
+    void                    setMarbleModel (const Marble::MarbleModel*);
+    QStandardItem*          item ();
+    virtual QDialog*        aboutDialog ();
+    virtual QDialog*        configDialog ();
+    void                    restoreDefaultSettings ();
 };
 // RenderPlugin
 

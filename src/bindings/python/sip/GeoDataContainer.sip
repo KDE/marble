@@ -46,7 +46,6 @@ public:
 
 
     virtual ~GeoDataContainer ();
-    virtual QString         nodeType () const;
 private:
 //ig                            GeoDataContainer (GeoDataContainerPrivate* priv);
 public:

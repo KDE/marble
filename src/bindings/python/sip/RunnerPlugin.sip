@@ -62,5 +62,8 @@ protected:
     void                    setIcon (const QIcon& icon);
 public:
     virtual bool            canWork (Marble::RunnerPlugin::Capability capability) const;
+    QString                 statusMessage () const;
+protected:
+    void                    setStatusMessage (const QString& message);
 };
 };

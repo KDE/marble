@@ -42,6 +42,11 @@ public:
     ~MarbleControlBox ();
     void                    setWorkOffline (bool offline);
     void                    setRoutingTabShown (bool show);
+signals:
+    void                    showMapWizard ();
+    void                    showUploadDialog ();
+public:
+    Marble::CurrentLocationWidget*  currentLocationWidget ();
 };
 // MarbleControlBox
 

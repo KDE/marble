@@ -39,7 +39,7 @@ public:
     void                    setRange (qreal range);
     qreal                   range () const;
     void                    setCoordinates (const Marble::GeoDataCoordinates& coordinates);
-    virtual QString         nodeType () const;
+    virtual const char*     nodeType () const;
     void                    detach ();
 };
 };

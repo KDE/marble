@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.6 PyKDE API Reference
+        KDE 4.7 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,7 +48,7 @@
 <h1>RenderPlugin Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>,<a href="../marble/Marble.RenderPluginInterface.html">Marble.RenderPluginInterface</a> &#x2192; <a href="../marble/Marble.PluginInterface.html">Marble.PluginInterface</a><br />
+Inherits: QObject,<a href="../marble/Marble.RenderPluginInterface.html">Marble.RenderPluginInterface</a> &#x2192; <a href="../marble/Marble.PluginInterface.html">Marble.PluginInterface</a><br />
 
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
@@ -61,28 +61,29 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#RenderType">RenderType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Unknown, Online&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actionGroupsChanged">actionGroupsChanged</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#repaintNeeded">repaintNeeded</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregion.html">QRegion</a> dirtyRegion)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#settingsChanged">settingsChanged</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> nameId)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#visibilityChanged">visibilityChanged</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> nameId, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#repaintNeeded">repaintNeeded</a> (QRegion dirtyRegion)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#settingsChanged">settingsChanged</a> (QString nameId)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#visibilityChanged">visibilityChanged</a> (QString nameId, bool visible)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#RenderPlugin">__init__</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdialog.html">QDialog</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aboutDialog">aboutDialog</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#action">action</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qactiongroup.html">QActionGroup</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actionGroups">actionGroups</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QDialog&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aboutDialog">aboutDialog</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QAction&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#action">action</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[QActionGroup]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actionGroups">actionGroups</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#applyItemState">applyItemState</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdialog.html">QDialog</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configDialog">configDialog</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.MarbleDataFacade.html">Marble.MarbleDataFacade</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dataFacade">dataFacade</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QDialog&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configDialog">configDialog</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#enabled">enabled</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#eventFilter">eventFilter</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> a0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a> a1)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstandarditem.html">QStandardItem</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#item">item</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#eventFilter">eventFilter</a> (self, QObject a0, QEvent a1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QStandardItem&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#item">item</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.MarbleModel.html">Marble.MarbleModel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#marbleModel">marbleModel</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.RenderPlugin.html#RenderType">Marble.RenderPlugin.RenderType</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderType">renderType</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#restoreDefaultSettings">restoreDefaultSettings</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#retrieveItemState">retrieveItemState</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDataFacade">setDataFacade</a> (self, <a href="../marble/Marble.MarbleDataFacade.html">Marble.MarbleDataFacade</a> a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setEnabled">setEnabled</a> (self, bool enabled)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSettings">setSettings</a> (self, {<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>:<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>} settings)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMarbleModel">setMarbleModel</a> (self, <a href="../marble/Marble.MarbleModel.html">Marble.MarbleModel</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSettings">setSettings</a> (self, {QString:QVariant} settings)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setVisible">setVisible</a> (self, bool visible)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">{<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>:<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>}&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#settings">settings</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qactiongroup.html">QActionGroup</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toolbarActionGroups">toolbarActionGroups</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">{QString:QVariant}&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#settings">settings</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[QActionGroup]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toolbarActionGroups">toolbarActionGroups</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#visible">visible</a> (self)</td></tr>
 </table>
 <hr><h2>Signal Documentation</h2><a class="anchor" name="actionGroupsChanged"></a>
@@ -105,7 +106,7 @@ any way
 <table class="memname"><tr>
 <td class="memname"> repaintNeeded</td>
 <td>(</td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregion.html">QRegion</a>&nbsp;</td>
+<td class="paramtype">QRegion&nbsp;</td>
 <td class="paramname"><em>dirtyRegion</em></td>
 </tr>
 <tr>
@@ -125,7 +126,7 @@ true, the whole viewport has to be repainted.
 <table class="memname"><tr>
 <td class="memname"> settingsChanged</td>
 <td>(</td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>nameId</em></td>
 </tr>
 <tr>
@@ -143,7 +144,7 @@ true, the whole viewport has to be repainted.
 <table class="memname"><tr>
 <td class="memname"> visibilityChanged</td>
 <td>(</td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>nameId</em>, </td>
 </tr>
 <tr>
@@ -177,7 +178,7 @@ true, the whole viewport has to be repainted.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdialog.html">QDialog</a> aboutDialog</td>
+<td class="memname">QDialog aboutDialog</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -193,7 +194,7 @@ true, the whole viewport has to be repainted.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a> action</td>
+<td class="memname">QAction action</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -205,7 +206,7 @@ true, the whole viewport has to be repainted.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qactiongroup.html">QActionGroup</a>] actionGroups</td>
+<td class="memname">[QActionGroup] actionGroups</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -235,7 +236,7 @@ also contain all of the actions returned by <dl class="see" compact><dt><b>See a
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdialog.html">QDialog</a> configDialog</td>
+<td class="memname">QDialog configDialog</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -247,19 +248,7 @@ also contain all of the actions returned by <dl class="see" compact><dt><b>See a
 </p>
 <p>
 @return: The configuration dialog or, if no configuration dialog exists, 0.
-</p></div></div><a class="anchor" name="dataFacade"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.MarbleDataFacade.html">Marble.MarbleDataFacade</a> dataFacade</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="enabled"></a>
+</p></div></div><a class="anchor" name="enabled"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -282,13 +271,13 @@ also contain all of the actions returned by <dl class="see" compact><dt><b>See a
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramtype">QObject&nbsp;</td>
 <td class="paramname"><em>a0</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a>&nbsp;</td>
+<td class="paramtype">QEvent&nbsp;</td>
 <td class="paramname"><em>a1</em></td>
 </tr>
 <tr>
@@ -303,7 +292,19 @@ also contain all of the actions returned by <dl class="see" compact><dt><b>See a
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstandarditem.html">QStandardItem</a> item</td>
+<td class="memname">QStandardItem item</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="marbleModel"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.MarbleModel.html">Marble.MarbleModel</a> marbleModel</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -328,7 +329,19 @@ This affects where in the menu tree the action() is placed.
 </p>
 <p>
 @return: The type of render plugin this is.
-</p></div></div><a class="anchor" name="retrieveItemState"></a>
+</p></div></div><a class="anchor" name="restoreDefaultSettings"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> restoreDefaultSettings</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="retrieveItemState"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -339,28 +352,6 @@ This affects where in the menu tree the action() is placed.
 <td width="100%"> </td>
 </tr>
 </table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="setDataFacade"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setDataFacade</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.MarbleDataFacade.html">Marble.MarbleDataFacade</a>&nbsp;</td>
-<td class="paramname"><em>a0</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
 </div>
 <div class="memdoc"></div></div><a class="anchor" name="setEnabled"></a>
 <div class="memitem">
@@ -384,6 +375,28 @@ This affects where in the menu tree the action() is placed.
 <td width="100%"> </td>
 </tr></table>
 </div>
+<div class="memdoc"></div></div><a class="anchor" name="setMarbleModel"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setMarbleModel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.MarbleModel.html">Marble.MarbleModel</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
 <div class="memdoc"></div></div><a class="anchor" name="setSettings"></a>
 <div class="memitem">
 <div class="memproto">
@@ -395,7 +408,7 @@ This affects where in the menu tree the action() is placed.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">{<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>:<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>}&nbsp;</td>
+<td class="paramtype">{QString:QVariant}&nbsp;</td>
 <td class="paramname"><em>settings</em></td>
 </tr>
 <tr>
@@ -433,7 +446,7 @@ This affects where in the menu tree the action() is placed.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">{<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>:<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>} settings</td>
+<td class="memname">{QString:QVariant} settings</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -446,7 +459,7 @@ This affects where in the menu tree the action() is placed.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qactiongroup.html">QActionGroup</a>] toolbarActionGroups</td>
+<td class="memname">[QActionGroup] toolbarActionGroups</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>

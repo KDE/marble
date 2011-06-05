@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
-  <title>Marble.MarbleAbstractRunner</title>
+  <title>Marble.MarbleRunnerManager</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
@@ -45,7 +45,7 @@
 <div id="main">
 <div class="clearer">&nbsp;</div>
 
-<h1>MarbleAbstractRunner Class Reference</h1>
+<h1>MarbleRunnerManager Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
 Inherits: QObject<br />
@@ -53,18 +53,17 @@ Inherits: QObject<br />
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
-<p>This class is the base class for all Marble Runners.
-</p>
+
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#reverseGeocodingFinished">reverseGeocodingFinished</a> (<a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinates, <a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a> placemark)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#routeCalculated">routeCalculated</a> (<a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a> route)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#routeRetrieved">routeRetrieved</a> (<a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a> route)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#searchFinished">searchFinished</a> (QString searchTerm)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#searchResultChanged">searchResultChanged</a> (QAbstractItemModel model)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#MarbleAbstractRunner">__init__</a> (self, QObject parent=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataFeature.html#GeoDataVisualCategory">Marble.GeoDataFeature.GeoDataVisualCategory</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#category">category</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.MarbleModel.html">Marble.MarbleModel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#model">model</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findPlacemarks">findPlacemarks</a> (self, QString searchTerm)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#reverseGeocoding">reverseGeocoding</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinates)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#search">search</a> (self, QString searchTerm)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setModel">setModel</a> (self, <a href="../marble/Marble.MarbleModel.html">Marble.MarbleModel</a> model)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setWorkOffline">setWorkOffline</a> (self, bool offline)</td></tr>
 </table>
 <hr><h2>Signal Documentation</h2><a class="anchor" name="reverseGeocodingFinished"></a>
 <div class="memitem">
@@ -89,14 +88,16 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Reverse geocoding is finished, result in the given placemark.
-To be emitted by runners after a <dl class="see" compact><dt><b>See also:</b></dt><dd> reverseGeocoding call.
-</dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("reverseGeocodingFinished(const Marble::GeoDataCoordinates&, const Marble::GeoDataPlacemark&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="routeCalculated"></a>
+<div class="memdoc"><p>The reverse geocoding request is finished, the result is stored
+in the given placemark. This signal is emitted when the first
+runner found a result, subsequent results are discarded and do not
+emit further signals. If no result is found, this signal is emitted
+with an empty (default constructed) placemark.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("reverseGeocodingFinished(const Marble::GeoDataCoordinates&, const Marble::GeoDataPlacemark&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="routeRetrieved"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> routeCalculated</td>
+<td class="memname"> routeRetrieved</td>
 <td>(</td>
 <td class="paramtype"><a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a>&nbsp;</td>
 <td class="paramname"><em>route</em></td>
@@ -109,22 +110,15 @@ To be emitted by runners after a <dl class="see" compact><dt><b>See also:</b></d
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Route download/calculation is finished, result in the given route object.
-To be emitted by runners after a <dl class="see" compact><dt><b>See also:</b></dt><dd> retrieveRoute call.
-</dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("routeCalculated(Marble::GeoDataDocument*)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="MarbleAbstractRunner"></a>
+<div class="memdoc"><p>A route was retrieved
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("routeRetrieved(Marble::GeoDataDocument*)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="searchFinished"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">__init__</td>
+<td class="memname"> searchFinished</td>
 <td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QObject&nbsp;</td>
-<td class="paramname"><em>parent=0</em></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>searchTerm</em></td>
 </tr>
 <tr>
 <td></td>
@@ -134,36 +128,53 @@ To be emitted by runners after a <dl class="see" compact><dt><b>See also:</b></d
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Constructor; note that <b>parent</b> should be 0 in order to move the
-thread object into its own thread.
-</p></div></div><a class="anchor" name="category"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.GeoDataFeature.html#GeoDataVisualCategory">Marble.GeoDataFeature.GeoDataVisualCategory</a> category</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>This function gives the icon for this runner
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> the icon of the runner
+<div class="memdoc"><p>The search request for the given search term has finished, i.e. all
+runners are finished and reported their results via the
+<dl class="see" compact><dt><b>See also:</b></dt><dd> searchResultChanged signal
 </dd></dl>
-</p></div></div><a class="anchor" name="model"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("searchFinished(const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="searchResultChanged"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.MarbleModel.html">Marble.MarbleModel</a> model</td>
+<td class="memname"> searchResultChanged</td>
 <td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
+<td class="paramtype">QAbstractItemModel&nbsp;</td>
+<td class="paramname"><em>model</em></td>
 </tr>
-</table>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
 </div>
-<div class="memdoc"><p>Access to the currently used map, or null if no was set with <dl class="see" compact><dt><b>See also:</b></dt><dd> setMap
+<div class="memdoc"><p>Placemarks were added to or removed from the model
+To do: FIXME: this sounds like a duplication of QAbstractItemModel signals
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("searchResultChanged(QAbstractItemModel*)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="findPlacemarks"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> findPlacemarks</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>searchTerm</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Search for placemarks matching the given search term. Results are returned
+using the <dl class="see" compact><dt><b>See also:</b></dt><dd> searchResultChanged and the <dl class="see" compact><dt><b>See also:</b></dt><dd> searchFinished signals
 </dd></dl>
 </p></div></div><a class="anchor" name="reverseGeocoding"></a>
 <div class="memitem">
@@ -187,36 +198,9 @@ thread object into its own thread.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Start a reverse geocoding request. Called by MarbleRunnerManager, runners
-are expected to return the result via the reverseGeocodingFinished signal.
-If implemented in a plugin, make sure to include ReverseGeocoding in the
-plugin capabilities, otherwise MarbleRunnerManager will ignore the plugin
-</p></div></div><a class="anchor" name="search"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> search</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>searchTerm</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Start a placemark search. Called by MarbleRunnerManager, runners
-are expected to return the result via the searchFinished signal.
-If implemented in a plugin, make sure to include Search in the
-plugin capabilities, otherwise MarbleRunnerManager will ignore the plugin
+<div class="memdoc"><p>Find the address and other meta information for a given geoposition.
+The result is returned through the <dl class="see" compact><dt><b>See also:</b></dt><dd> reverseGeocodingFinished signal
+</dd></dl>
 </p></div></div><a class="anchor" name="setModel"></a>
 <div class="memitem">
 <div class="memproto">
@@ -239,7 +223,31 @@ plugin capabilities, otherwise MarbleRunnerManager will ignore the plugin
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Stores a pointer to the currently used map
+<div class="memdoc"><p>Set a pointer to the map instance to be passed to MarbleAbstractRunner instances
+</p></div></div><a class="anchor" name="setWorkOffline"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setWorkOffline</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>offline</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Toggle offline mode. In offline mode, runners shall not try to access
+the network (possibly not returning any results).
 </p></div></div>
 </div>
 </div>

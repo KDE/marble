@@ -42,17 +42,18 @@ public:
 signals:
     void                    updateStars ();
     void                    updateSun ();
-    void                    centerSun ();
 
 public:
 //ig                            SunLocator (MarbleClock* clock, Marble::Planet* planet);
     virtual ~SunLocator ();
     void                    shadePixel (QRgb& pixcol, qreal shade) const;
-    void                    shadePixelComposite (QRgb& pixcol, QRgb& dpixcol, qreal shade) const;
 signals:
     void                    enableWidgetInput (bool);
 public:
 //ig    MarbleClock*            clock () const;
+    void                    shadePixelComposite (QRgb& pixcol, const QRgb& dpixcol, qreal shade) const;
+signals:
+    void                    centerSun (qreal lon, qreal lat);
 };
 // SunLocator
 

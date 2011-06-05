@@ -33,7 +33,7 @@ public:
 private:
                             GeoDataStyleMap (const Marble::GeoDataStyleMap& other);
 public:
-    virtual QString         nodeType () const;
+    virtual const char*     nodeType () const;
     QString                 lastKey () const;
     ~GeoDataStyleMap ();
 };

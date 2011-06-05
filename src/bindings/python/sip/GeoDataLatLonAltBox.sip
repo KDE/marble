@@ -46,7 +46,7 @@ public:
     virtual void            unpack (QDataStream& stream);
                             GeoDataLatLonAltBox (const Marble::GeoDataCoordinates& coordinates);
     virtual ~GeoDataLatLonAltBox ();
-    virtual QString         nodeType () const;
+    virtual const char*     nodeType () const;
     virtual Marble::GeoDataCoordinates  center () const;
 };
 // GeoDataLatLonAltBox

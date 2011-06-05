@@ -29,7 +29,7 @@ public:
                             GeoDataLod ();
                             GeoDataLod (const Marble::GeoDataLod& other);
     virtual ~GeoDataLod ();
-    virtual QString         nodeType () const;
+    virtual const char*     nodeType () const;
     qreal                   minLodPixels () const;
     void                    setMinLodPixels (qreal pixels);
     qreal                   maxLodPixels () const;

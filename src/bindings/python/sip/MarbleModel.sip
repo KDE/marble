@@ -72,10 +72,9 @@ public:
     QTextDocument*          legend ();
     void                    setLegend (QTextDocument* document);
     void                    setPersistentTileCacheLimit (quint64 kiloBytes);
-    QAbstractItemModel*     popSortModel () const;
 //ig    void                    setMapTheme (GeoSceneDocument* mapTheme);
     Marble::MapThemeManager*  mapThemeManager () const;
-    Marble::MarbleDataFacade*  dataFacade () const;
+    QString                 planetId () const;
 };
 // MarbleModel
 

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.6 PyKDE API Reference
+        KDE 4.7 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,7 +48,7 @@
 <h1>AbstractFloatItem Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: <a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+Inherits: <a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a> &#x2192; QObject<br />
 
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
@@ -57,19 +57,24 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <p>The abstract class that creates an "empty" float item.
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#AbstractFloatItem">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpointf.html">QPointF</a> point=QPointF(10.0,10.0), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsizef.html">QSizeF</a> size=QSizeF(150.0,50.0))</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#eventFilter">eventFilter</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> object, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a> e)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#font">font</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpen.html">QPen</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pen">pen</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#AbstractFloatItem">__init__</a> (self, QPointF point=QPointF(10.0,10.0), QSizeF size=QSizeF(150.0,50.0))</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QMenu&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#contextMenu">contextMenu</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#contextMenuEvent">contextMenuEvent</a> (self, QWidget w, QContextMenuEvent e)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#eventFilter">eventFilter</a> (self, QObject object, QEvent e)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QFont&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#font">font</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#hide">hide</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QPen&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pen">pen</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#positionLocked">positionLocked</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#render">render</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> renderPos="FLOAT_ITEM", <a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a> layer=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderOnMap">renderOnMap</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> renderPos, <a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a> layer=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPolicy">renderPolicy</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPosition">renderPosition</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setFont">setFont</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a> font)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPen">setPen</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpen.html">QPen</a> pen)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#render">render</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, QString renderPos="FLOAT_ITEM", <a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a> layer=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderOnMap">renderOnMap</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, QString renderPos, <a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a> layer=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPolicy">renderPolicy</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QStringList&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPosition">renderPosition</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setFont">setFont</a> (self, QFont font)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPen">setPen</a> (self, QPen pen)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPositionLocked">setPositionLocked</a> (self, bool lock)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setVisible">setVisible</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#show">show</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toolTipEvent">toolTipEvent</a> (self, QHelpEvent e)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#visible">visible</a> (self)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="AbstractFloatItem"></a>
@@ -83,14 +88,54 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpointf.html">QPointF</a>&nbsp;</td>
+<td class="paramtype">QPointF&nbsp;</td>
 <td class="paramname"><em>point=QPointF(10.0,10.0)</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsizef.html">QSizeF</a>&nbsp;</td>
+<td class="paramtype">QSizeF&nbsp;</td>
 <td class="paramname"><em>size=QSizeF(150.0,50.0)</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="contextMenu"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QMenu contextMenu</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="contextMenuEvent"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> contextMenuEvent</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QWidget&nbsp;</td>
+<td class="paramname"><em>w</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QContextMenuEvent&nbsp;</td>
+<td class="paramname"><em>e</em></td>
 </tr>
 <tr>
 <td></td>
@@ -111,13 +156,13 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramtype">QObject&nbsp;</td>
 <td class="paramname"><em>object</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a>&nbsp;</td>
+<td class="paramtype">QEvent&nbsp;</td>
 <td class="paramname"><em>e</em></td>
 </tr>
 <tr>
@@ -132,7 +177,19 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a> font</td>
+<td class="memname">QFont font</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="hide"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> hide</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -144,7 +201,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpen.html">QPen</a> pen</td>
+<td class="memname">QPen pen</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -187,7 +244,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>renderPos="FLOAT_ITEM"</em>, </td>
 </tr>
 <tr>
@@ -227,7 +284,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>renderPos</em>, </td>
 </tr>
 <tr>
@@ -248,7 +305,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> renderPolicy</td>
+<td class="memname">QString renderPolicy</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -260,7 +317,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> renderPosition</td>
+<td class="memname">QStringList renderPosition</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -279,7 +336,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a>&nbsp;</td>
+<td class="paramtype">QFont&nbsp;</td>
 <td class="paramname"><em>font</em></td>
 </tr>
 <tr>
@@ -301,7 +358,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpen.html">QPen</a>&nbsp;</td>
+<td class="paramtype">QPen&nbsp;</td>
 <td class="paramname"><em>pen</em></td>
 </tr>
 <tr>
@@ -347,6 +404,40 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <td></td>
 <td class="paramtype">bool&nbsp;</td>
 <td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="show"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> show</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="toolTipEvent"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> toolTipEvent</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QHelpEvent&nbsp;</td>
+<td class="paramname"><em>e</em></td>
 </tr>
 <tr>
 <td></td>
