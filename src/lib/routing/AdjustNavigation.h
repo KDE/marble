@@ -45,7 +45,8 @@ public:
     * An enum type
     * Represents which recentering method is selected
     */
-    enum CenterMode{
+    enum CenterMode {
+            DontRecenter = 0,
             AlwaysRecenter = 1,    /**< Enum Value AlwaysRecenter. Recenter always to the map center */
             RecenterOnBorder = 2   /**< Enum Value RecenterOnBorder. Recenter when reaching map border */
     };
@@ -55,13 +56,17 @@ public:
      * @param recenterMode toggles among the recenteing method chosen
      * @see CenterMode
      */
-    void setRecenter( int recenterMode );
+    void setRecenter( CenterMode recenterMode );
 
     /**
      * @brief For Auto Zooming adjustment of map in Navigation Mode
      * @param activate true to enable auto zooming
      */
      void setAutoZoom( bool activate );
+
+     AdjustNavigation::CenterMode recenterMode() const;
+
+     bool autoZoom() const;
 
 public Q_SLOTS:
 
@@ -77,7 +82,7 @@ Q_SIGNALS:
      * signal emitted when auto center is turned on (Always re-center, re-center when required ) or off(Disabled)
      * @param recenterMode the mode for re-centering selected
      */
-     void recenterModeChanged( int mode );
+     void recenterModeChanged( AdjustNavigation::CenterMode mode );
 
     /**
      * signal emitted when auto zoom is toggled

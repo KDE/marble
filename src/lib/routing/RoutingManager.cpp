@@ -371,7 +371,7 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
     }
 
     adjustNavigation()->setAutoZoom( enabled );
-    adjustNavigation()->setRecenter( enabled ? AdjustNavigation::RecenterOnBorder : 0 );
+    adjustNavigation()->setRecenter( enabled ? AdjustNavigation::RecenterOnBorder : AdjustNavigation::DontRecenter );
 }
 
 void RoutingManager::recalculateRoute( bool deviated )

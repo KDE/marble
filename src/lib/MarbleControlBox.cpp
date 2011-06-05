@@ -237,6 +237,11 @@ void MarbleControlBox::updateMapThemeView()
     d->m_mapViewWidget->updateMapThemeView();
 }
 
+CurrentLocationWidget * MarbleControlBox::currentLocationWidget()
+{
+    return d->m_currentLocationWidget;
+}
+
 }
 
 #include "MarbleControlBox.moc"

@@ -1031,7 +1031,22 @@ void MainWindow::readSettings()
         }
     }
     settings.endGroup();
-    
+
+    settings.beginGroup( "Tracking" );
+    if ( settings.contains( "autoCenter" ) || settings.contains( "recenterMode" ) ) {
+        CurrentLocationWidget* trackingWidget = 0;
+        if ( smallScreen ) {
+            initializeTrackingWidget();
+            trackingWidget = qobject_cast<CurrentLocationWidget*>( m_trackingWindow->centralWidget() );
+        } else {
+            trackingWidget = m_controlView->marbleControl()->currentLocationWidget();
+        }
+        Q_ASSERT( trackingWidget );
+        trackingWidget->setRecenterMode( settings.value( "recenterMode", 0 ).toInt() );
+        trackingWidget->setAutoZoom( settings.value( "autoZoom", false ).toBool() );
+    }
+    settings.endGroup();
+
      // The config dialog has to read settings.
      m_configDialog->readSettings();
 
@@ -1130,6 +1145,21 @@ void MainWindow::writeSettings()
          positionProvider = tracking->positionProviderPlugin()->nameId();
      }
      settings.setValue( "activePositionTrackingPlugin", positionProvider );
+     settings.endGroup();
+
+     settings.beginGroup( "Tracking" );
+     CurrentLocationWidget* trackingWidget = 0;
+     if ( m_trackingWindow ) {
+         trackingWidget = qobject_cast<CurrentLocationWidget*>( m_trackingWindow->centralWidget() );
+     } else {
+         trackingWidget = m_controlView->marbleControl()->currentLocationWidget();
+     }
+     if ( trackingWidget ) {
+         // Can be null due to lazy initialization
+         settings.setValue( "recenterMode", trackingWidget->recenterMode() );
+         settings.setValue( "autoZoom", trackingWidget->autoZoom() );
+     }
+
      settings.endGroup();
 
      // The config dialog has to write settings.
@@ -1316,6 +1346,14 @@ void MainWindow::showRoutingDialog()
 
 void MainWindow::showTrackingDialog()
 {
+    initializeTrackingWidget();
+    m_trackingWindow->show();
+    m_trackingWindow->raise();
+    m_trackingWindow->activateWindow();
+}
+
+void MainWindow::initializeTrackingWidget()
+{
     if( !m_trackingWindow ) {
         m_trackingWindow = new StackableWindow( this );
         m_trackingWindow->setWindowTitle( tr( "Tracking - Marble" ) );
@@ -1324,10 +1362,6 @@ void MainWindow::showTrackingDialog()
 
         m_trackingWindow->setCentralWidget( trackingWidget );
     }
-
-    m_trackingWindow->show();
-    m_trackingWindow->raise();
-    m_trackingWindow->activateWindow();
 }
 
 void MainWindow::updateMapEditButtonVisibility( const QString &mapTheme )

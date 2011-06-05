@@ -14,6 +14,7 @@
 // Marble
 #include "marble_export.h"
 #include "PositionProviderPlugin.h"
+#include "routing/AdjustNavigation.h"
 
 // Qt
 #include <QtGui/QWidget>
@@ -40,11 +41,15 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
      */
     void setMarbleWidget( MarbleWidget *widget );
 
+    AdjustNavigation::CenterMode recenterMode() const;
+
+    bool autoZoom() const;
+
  public Q_SLOTS:
     void receiveGpsCoordinates( const GeoDataCoordinates& in, qreal speed );
 
      /// Slot that decides whether recentering should be done
-    void setRecenterMode( int activate );
+    void setRecenterMode( int recenterMode );
 
     /// Slot for Auto Zooming while navigating
     void setAutoZoom( bool activate );
@@ -63,7 +68,7 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
      * @brief Slot for setting re-center combobox if re-centering is enabled other than from CurrentLocationWidget
      * @see RoutingPlugin
      */
-     Q_PRIVATE_SLOT( d, void updateRecenterComboBox( int centerMode ) )
+     Q_PRIVATE_SLOT( d, void updateRecenterComboBox( AdjustNavigation::CenterMode centerMode ) )
 
     /**
      * @brief Slot for toggling auto zoom checkbox if auto zooming is enabled other than from CurrentLocationWidget

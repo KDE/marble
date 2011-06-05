@@ -52,7 +52,7 @@ class CurrentLocationWidgetPrivate
     void adjustPositionTrackingStatus( PositionProviderStatus status );
     void changePositionProvider( const QString &provider );
     void centerOnCurrentLocation();
-    void updateRecenterComboBox( int centerMode );
+    void updateRecenterComboBox( AdjustNavigation::CenterMode centerMode );
     void updateAutoZoomCheckBox( bool autoZoom );
     void updateActivePositionProvider( PositionProviderPlugin* );
     void saveTrack();
@@ -123,8 +123,8 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
              SIGNAL( statusChanged( PositionProviderStatus) ),this,
              SLOT( adjustPositionTrackingStatus( PositionProviderStatus) ) );
 
-    disconnect( d->m_adjustNavigation, SIGNAL( recenterModeChanged( int ) ),
-             this, SLOT( updateRecenterComboBox( int ) ) );
+    disconnect( d->m_adjustNavigation, SIGNAL( recenterModeChanged( AdjustNavigation::CenterMode ) ),
+             this, SLOT( updateRecenterComboBox( AdjustNavigation::CenterMode ) ) );
     disconnect( d->m_adjustNavigation, SIGNAL( autoZoomToggled( bool ) ),
              this, SLOT( updateAutoZoomCheckBox( bool ) ) );
 
@@ -144,8 +144,8 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
              SIGNAL( statusChanged( PositionProviderStatus) ), this,
              SLOT( adjustPositionTrackingStatus( PositionProviderStatus) ) );
 
-    connect( d->m_adjustNavigation, SIGNAL( recenterModeChanged( int ) ),
-             this, SLOT( updateRecenterComboBox( int ) ) );
+    connect( d->m_adjustNavigation, SIGNAL( recenterModeChanged( AdjustNavigation::CenterMode ) ),
+             this, SLOT( updateRecenterComboBox( AdjustNavigation::CenterMode ) ) );
     connect( d->m_adjustNavigation, SIGNAL( autoZoomToggled( bool ) ),
              this, SLOT( updateAutoZoomCheckBox( bool ) ) );
     connect (d->m_currentLocationUi.showTrackCheckBox, SIGNAL( clicked(bool) ),
@@ -285,9 +285,12 @@ void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provid
     }
 }
 
-void CurrentLocationWidget::setRecenterMode( int centerMode )
+void CurrentLocationWidget::setRecenterMode( int mode )
 {
-    d->m_adjustNavigation->setRecenter( centerMode );
+    if ( mode >= 0 && mode <= AdjustNavigation::RecenterOnBorder ) {
+        AdjustNavigation::CenterMode centerMode = ( AdjustNavigation::CenterMode ) mode;
+        d->m_adjustNavigation->setRecenter( centerMode );
+    }
 }
 
 void CurrentLocationWidget::setAutoZoom( bool autoZoom )
@@ -300,7 +303,7 @@ void CurrentLocationWidgetPrivate::updateAutoZoomCheckBox( bool autoZoom )
     m_currentLocationUi.autoZoomCheckBox->setChecked( autoZoom );
 }
 
-void CurrentLocationWidgetPrivate::updateRecenterComboBox( int centerMode )
+void CurrentLocationWidgetPrivate::updateRecenterComboBox( AdjustNavigation::CenterMode centerMode )
 {
     m_currentLocationUi.recenterComboBox->setCurrentIndex( centerMode );
 }
@@ -343,6 +346,16 @@ void CurrentLocationWidgetPrivate::clearTrack()
     m_widget->repaint();
     m_currentLocationUi.saveTrackPushButton->setEnabled( false );
     m_currentLocationUi.clearTrackPushButton->setEnabled( false );
+}
+
+AdjustNavigation::CenterMode CurrentLocationWidget::recenterMode() const
+{
+    return d->m_adjustNavigation->recenterMode();
+}
+
+bool CurrentLocationWidget::autoZoom() const
+{
+    return d->m_adjustNavigation->autoZoom();
 }
 
 }

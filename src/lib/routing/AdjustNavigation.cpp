@@ -37,7 +37,7 @@ public:
     PositionTracking    *m_tracking;
     qreal                m_gpsSpeed;
     qreal                m_gpsDirection;
-    int                  m_recenterMode;
+    AdjustNavigation::CenterMode m_recenterMode;
     bool                 m_adjustZoom;
     QTime                m_lastWidgetInteraction;
     bool                 m_selfInteraction;
@@ -78,7 +78,7 @@ AdjustNavigationPrivate::AdjustNavigationPrivate( MarbleWidget *widget ) :
         m_tracking( 0 ),
         m_gpsSpeed( 0 ),
         m_gpsDirection( 0 ),
-        m_recenterMode( 0 ),
+        m_recenterMode( AdjustNavigation::DontRecenter ),
         m_adjustZoom( 0 ),
         m_selfInteraction( false )
 {
@@ -345,6 +345,10 @@ AdjustNavigation::AdjustNavigation( MarbleWidget *widget, QObject *parent )
 {
     connect( widget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
              this, SLOT( inhibitAutoAdjustments() ) );
+
+    d->m_tracking = widget->model()->positionTracking();
+    connect( d->m_tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
+                this, SLOT( adjust( GeoDataCoordinates, qreal ) ) );
 }
 
 AdjustNavigation::~AdjustNavigation()
@@ -384,34 +388,12 @@ void AdjustNavigation::setAutoZoom( bool autoZoom )
 {
     d->m_adjustZoom = autoZoom;
     emit autoZoomToggled( autoZoom );
-
-    PositionTracking * tracking = d->m_widget->model()->positionTracking();
-    if( autoZoom ) {
-        d->m_tracking = tracking;
-        QObject::connect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-                this, SLOT( adjust( GeoDataCoordinates, qreal ) ), Qt::UniqueConnection );
-    }
-    else {
-        QObject::disconnect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-                 this, SLOT( adjust( GeoDataCoordinates, qreal ) ) );
-    }
 }
 
-void AdjustNavigation::setRecenter( int recenterMode )
+void AdjustNavigation::setRecenter( CenterMode recenterMode )
 {
     d->m_recenterMode = recenterMode;
     emit recenterModeChanged( recenterMode );
-
-    PositionTracking * tracking = d->m_widget->model()->positionTracking();
-    if( recenterMode ) {
-        d->m_tracking = tracking;
-        QObject::connect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-                  this, SLOT( adjust( GeoDataCoordinates, qreal ) ), Qt::UniqueConnection );
-    }
-    else {
-        QObject::disconnect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-                  this, SLOT( adjust( GeoDataCoordinates, qreal ) ) );
-    }
 }
 
 void AdjustNavigation::inhibitAutoAdjustments()
@@ -419,6 +401,16 @@ void AdjustNavigation::inhibitAutoAdjustments()
     if ( !d->m_selfInteraction ) {
         d->m_lastWidgetInteraction.restart();
     }
+}
+
+AdjustNavigation::CenterMode AdjustNavigation::recenterMode() const
+{
+    return d->m_recenterMode;
+}
+
+bool AdjustNavigation::autoZoom() const
+{
+    return d->m_adjustZoom;
 }
 
 } // namespace Marble

@@ -130,6 +130,7 @@ private Q_SLOTS:
 
 private:
     void setupZoomButtons();
+    void initializeTrackingWidget();
 
     ControlView *m_controlView;
     SunControlWidget* m_sunControlDialog;

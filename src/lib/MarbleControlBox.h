@@ -38,6 +38,8 @@ namespace Marble
 class MarbleWidget;
 class MarbleControlBoxPrivate;
 class AdjustNavigation;
+class CurrentLocationWidget;
+
 /**
  * @short A widget class that contains advanced controls for a
  * MarbleWidget.
@@ -94,6 +96,9 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
       * Toggle offline mode of download manager and runners.
       */
     void setWorkOffline(bool offline);
+
+    /** Provides access to the current location widget for session restoring */
+    CurrentLocationWidget * currentLocationWidget();
 
  public Q_SLOTS:
     void selectTheme( const QString & );
