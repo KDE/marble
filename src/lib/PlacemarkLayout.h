@@ -23,6 +23,7 @@
 #include <QtCore/QModelIndex>
 #include <QtCore/QRect>
 #include <QtCore/QVector>
+#include <GeoDataFeature.h>
 
 class QAbstractItemModel;
 class QSortFilterProxyModel;
@@ -135,6 +136,7 @@ class PlacemarkLayout : public QObject, public LayerInterface
     QMap<TileId, QList<GeoDataPlacemark*> > m_placemarkCache;
 
     QVector< int > m_weightfilter;
+    QVector< GeoDataFeature::GeoDataVisualCategory > m_acceptedVisualCategories;
 
     // earth
     bool m_showPlaces;

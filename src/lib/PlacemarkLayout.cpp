@@ -111,6 +111,90 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
         << 50       // 19
 
         << 0;       // 20
+        
+    m_acceptedVisualCategories
+        << GeoDataFeature::SmallCity
+        << GeoDataFeature::SmallCountyCapital  
+        << GeoDataFeature::SmallStateCapital   
+        << GeoDataFeature::SmallNationCapital
+        << GeoDataFeature::MediumCity
+        << GeoDataFeature::MediumCountyCapital
+        << GeoDataFeature::MediumStateCapital
+        << GeoDataFeature::MediumNationCapital
+        << GeoDataFeature::BigCity
+        << GeoDataFeature::BigCountyCapital
+        << GeoDataFeature::BigStateCapital
+        << GeoDataFeature::BigNationCapital
+        << GeoDataFeature::LargeCity
+        << GeoDataFeature::LargeCountyCapital
+        << GeoDataFeature::LargeStateCapital
+        << GeoDataFeature::LargeNationCapital
+        << GeoDataFeature::Nation
+        << GeoDataFeature::Mountain
+        << GeoDataFeature::Volcano
+        << GeoDataFeature::Mons
+        << GeoDataFeature::Valley
+        << GeoDataFeature::Continent
+        << GeoDataFeature::Ocean
+        << GeoDataFeature::OtherTerrain
+        << GeoDataFeature::Crater
+        << GeoDataFeature::Mare
+        << GeoDataFeature::GeographicPole
+        << GeoDataFeature::MagneticPole
+        << GeoDataFeature::ShipWreck
+        << GeoDataFeature::AirPort
+        << GeoDataFeature::Observatory
+        << GeoDataFeature::AccomodationCamping
+        << GeoDataFeature::AccomodationHostel
+        << GeoDataFeature::AccomodationHotel
+        << GeoDataFeature::AccomodationMotel
+        << GeoDataFeature::AccomodationYouthHostel
+        << GeoDataFeature::AmenityLibrary
+        << GeoDataFeature::EducationCollege
+        << GeoDataFeature::EducationSchool
+        << GeoDataFeature::EducationUniversity
+        << GeoDataFeature::FoodBar
+        << GeoDataFeature::FoodBiergarten
+        << GeoDataFeature::FoodCafe
+        << GeoDataFeature::FoodFastFood
+        << GeoDataFeature::FoodPub
+        << GeoDataFeature::FoodRestaurant
+        << GeoDataFeature::HealthDoctors
+        << GeoDataFeature::HealthHospital
+        << GeoDataFeature::HealthPharmacy
+        << GeoDataFeature::MoneyBank
+        << GeoDataFeature::ShoppingBeverages
+        << GeoDataFeature::ShoppingHifi
+        << GeoDataFeature::ShoppingSupermarket
+        << GeoDataFeature::TouristAttraction
+        << GeoDataFeature::TouristCastle
+        << GeoDataFeature::TouristCinema
+        << GeoDataFeature::TouristMonument
+        << GeoDataFeature::TouristMuseum
+        << GeoDataFeature::TouristRuin
+        << GeoDataFeature::TouristTheatre
+        << GeoDataFeature::TouristThemePark
+        << GeoDataFeature::TouristViewPoint
+        << GeoDataFeature::TouristZoo
+        << GeoDataFeature::TransportAerodrome
+        << GeoDataFeature::TransportAirportTerminal
+        << GeoDataFeature::TransportBusStation
+        << GeoDataFeature::TransportBusStop
+        << GeoDataFeature::TransportCarShare
+        << GeoDataFeature::TransportFuel
+        << GeoDataFeature::TransportParking
+        << GeoDataFeature::TransportTrainStation
+        << GeoDataFeature::ReligionPlaceOfWorship
+        << GeoDataFeature::ReligionBahai
+        << GeoDataFeature::ReligionBuddhist
+        << GeoDataFeature::ReligionChristian
+        << GeoDataFeature::ReligionHindu
+        << GeoDataFeature::ReligionJain
+        << GeoDataFeature::ReligionJewish
+        << GeoDataFeature::ReligionShinto
+        << GeoDataFeature::ReligionSikh;
+
+    qSort( m_acceptedVisualCategories.begin(), m_acceptedVisualCategories.end() );
 
     m_placemarkPainter =  new PlacemarkPainter( this );
 }
@@ -284,7 +368,8 @@ void PlacemarkLayout::setCacheData()
 
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
         GeoDataGeometry *geometry = placemark->geometry();
-        if( geometry->nodeType() != GeoDataTypes::GeoDataPointType ) {
+        if( qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() ) == m_acceptedVisualCategories.end() &&
+            ( geometry->nodeType() != GeoDataTypes::GeoDataPointType ) ) {
             continue;
         }
 
@@ -394,7 +479,8 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         const QModelIndex index = selectedIndexes.at( i );
         GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
         GeoDataGeometry *geometry = placemark->geometry();
-        if( !dynamic_cast<GeoDataPoint*>(geometry) ) {
+        if( qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() ) == m_acceptedVisualCategories.end() &&
+            !dynamic_cast<GeoDataPoint*>(geometry) ) {
             continue;
         }
 
@@ -482,7 +568,8 @@ bool PlacemarkLayout::render( GeoPainter *painter,
     {
         GeoDataPlacemark *placemark = placemarkList.at(i);
         GeoDataGeometry *geometry = placemark->geometry();
-        if( !dynamic_cast<GeoDataPoint*>(geometry) ) {
+        if( qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() ) == m_acceptedVisualCategories.end() &&
+            !dynamic_cast<GeoDataPoint*>(geometry) ) {
             continue;
         }
 
