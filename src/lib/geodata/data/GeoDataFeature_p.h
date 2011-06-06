@@ -96,7 +96,7 @@ class GeoDataFeaturePrivate
         m_region = other.m_region;
     }
     
-    virtual void* copy() 
+    virtual GeoDataFeaturePrivate* copy()
     { 
         GeoDataFeaturePrivate* copy = new GeoDataFeaturePrivate;
         *copy = *this;

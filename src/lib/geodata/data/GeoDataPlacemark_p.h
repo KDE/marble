@@ -77,7 +77,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         m_lookAt = lookAt;
     }
 
-    virtual void* copy()
+    virtual GeoDataFeaturePrivate* copy()
     {
         GeoDataPlacemarkPrivate* copy = new GeoDataPlacemarkPrivate;
         *copy = *this;

@@ -30,7 +30,7 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
         qDeleteAll(m_vector);
     }
 
-    virtual void* copy() 
+    virtual GeoDataFeaturePrivate* copy()
     { 
         GeoDataContainerPrivate* copy = new GeoDataContainerPrivate;
         *copy = *this;
