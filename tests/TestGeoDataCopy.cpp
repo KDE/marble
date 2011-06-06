@@ -263,31 +263,31 @@ void TestGeoDataCopy::copyPolygon()
 
 void TestGeoDataCopy::copyMultiGeometry()
 {
-    GeoDataMultiGeometry multiGeometry;
-    GeoDataLinearRing *linearRing1 = new GeoDataLinearRing;
-    GeoDataLinearRing *linearRing2 = new GeoDataLinearRing;
-    GeoDataLinearRing *linearRing3 = new GeoDataLinearRing;
-    GeoDataLinearRing *linearRing4 = new GeoDataLinearRing;
+    GeoDataLinearRing linearRing1;
+    GeoDataLinearRing linearRing2;
+    GeoDataLinearRing linearRing3;
+    GeoDataLinearRing linearRing4;
     
-    linearRing1->append(coord1); linearRing1->append(coord2); linearRing1->append(coord3);
-    linearRing2->append(coord3); linearRing2->append(coord2); linearRing2->append(coord1);
-    linearRing3->append(coord1); linearRing3->append(coord2); linearRing3->append(coord3);
-    linearRing3->append(coord3); linearRing3->append(coord2); linearRing3->append(coord1);
-    linearRing4->append(coord3); linearRing4->append(coord2); linearRing4->append(coord1);
-    linearRing4->append(coord1); linearRing4->append(coord2); linearRing4->append(coord3);
+    linearRing1.append(coord1); linearRing1.append(coord2); linearRing1.append(coord3);
+    linearRing2.append(coord3); linearRing2.append(coord2); linearRing2.append(coord1);
+    linearRing3.append(coord1); linearRing3.append(coord2); linearRing3.append(coord3);
+    linearRing3.append(coord3); linearRing3.append(coord2); linearRing3.append(coord1);
+    linearRing4.append(coord3); linearRing4.append(coord2); linearRing4.append(coord1);
+    linearRing4.append(coord1); linearRing4.append(coord2); linearRing4.append(coord3);
     
     GeoDataPolygon *polygon = new GeoDataPolygon;
-    polygon->appendInnerBoundary(*linearRing1);
-    polygon->appendInnerBoundary(*linearRing2);
-    polygon->appendInnerBoundary(*linearRing3);
-    polygon->setOuterBoundary(*linearRing4);
+    polygon->appendInnerBoundary(linearRing1);
+    polygon->appendInnerBoundary(linearRing2);
+    polygon->appendInnerBoundary(linearRing3);
+    polygon->setOuterBoundary(linearRing4);
     polygon->setTessellate(true);
     
+    GeoDataMultiGeometry multiGeometry;
     multiGeometry.append(polygon);
-    multiGeometry.append(linearRing1);
-    multiGeometry.append(linearRing2);
-    multiGeometry.append(linearRing3);
-    multiGeometry.append(linearRing4);
+    multiGeometry.append(new GeoDataLinearRing(linearRing1));
+    multiGeometry.append(new GeoDataLinearRing(linearRing2));
+    multiGeometry.append(new GeoDataLinearRing(linearRing3));
+    multiGeometry.append(new GeoDataLinearRing(linearRing4));
 
     GeoDataMultiGeometry other = multiGeometry;
 
@@ -315,12 +315,6 @@ void TestGeoDataCopy::copyMultiGeometry()
     QVERIFY(static_cast<GeoDataPolygon*>(other.child(0))->outerBoundary()[4] == coord2);
     QVERIFY(static_cast<GeoDataPolygon*>(other.child(0))->outerBoundary()[5] == coord3);
     
-
-    delete linearRing1;
-    delete linearRing2;
-    delete linearRing3;
-    delete linearRing4;
-    delete polygon;
     QVERIFY(static_cast<GeoDataLinearRing*>(other.child(1))->at(0) == coord1);
     QVERIFY(static_cast<GeoDataLinearRing*>(other.child(1))->at(1) == coord2);
     QVERIFY(static_cast<GeoDataLinearRing*>(other.child(1))->at(2) == coord3);
@@ -345,23 +339,23 @@ void TestGeoDataCopy::copyMultiGeometry()
 void TestGeoDataCopy::copyDocument()
 {
     QWARN("add more document specific data");
-    GeoDataPlacemark *pl1 = new GeoDataPlacemark;
-    GeoDataPlacemark *pl2 = new GeoDataPlacemark;
-    GeoDataPlacemark *pl3 = new GeoDataPlacemark;
+    GeoDataPlacemark pl1;
+    GeoDataPlacemark pl2;
+    GeoDataPlacemark pl3;
 
-    pl1->setCoordinate(point1);
-    pl2->setCoordinate(point2);
-    pl3->setCoordinate(point3);
+    pl1.setCoordinate(point1);
+    pl2.setCoordinate(point2);
+    pl3.setCoordinate(point3);
 
     GeoDataFolder *folder = new GeoDataFolder;
-    folder->append(pl1);
-    folder->append(pl2);
-    folder->append(pl3);
+    folder->append(new GeoDataPlacemark(pl1));
+    folder->append(new GeoDataPlacemark(pl2));
+    folder->append(new GeoDataPlacemark(pl3));
 
     GeoDataDocument document;
-    document.append(pl3);
+    document.append(new GeoDataPlacemark(pl3));
     document.append(folder);
-    document.append(pl1);
+    document.append(new GeoDataPlacemark(pl1));
 
     GeoDataDocument other = document;
 
@@ -376,7 +370,7 @@ void TestGeoDataCopy::copyDocument()
     testCoordinate(static_cast<GeoDataPlacemark*>(otherFolder->child(1))->coordinate(), 133.4, 3, coordString[1]);
     testCoordinate(static_cast<GeoDataPlacemark*>(otherFolder->child(2))->coordinate(), 143.4, 4, coordString[2]);
 
-    other.append(pl1);
+    other.append(new GeoDataPlacemark(pl1));
 
     QCOMPARE(document.size(), 3);
     QCOMPARE(other.size(), 4);
@@ -391,9 +385,9 @@ void TestGeoDataCopy::copyFolder()
     pl3.setCoordinate(point3);
 
     GeoDataFolder folder;
-    folder.append(&pl1);
-    folder.append(&pl2);
-    folder.append(&pl3);
+    folder.append(new GeoDataPlacemark(pl1));
+    folder.append(new GeoDataPlacemark(pl2));
+    folder.append(new GeoDataPlacemark(pl3));
 
     QCOMPARE(folder.size(), 3);
 
@@ -403,7 +397,7 @@ void TestGeoDataCopy::copyFolder()
     testCoordinate(static_cast<GeoDataPlacemark*>(other.child(1))->coordinate(), 133.4, 3, coordString[1]);
     testCoordinate(static_cast<GeoDataPlacemark*>(other.child(2))->coordinate(), 143.4, 4, coordString[2]);
 
-    other.append(&pl1);
+    other.append(new GeoDataPlacemark(pl1));
 
     QCOMPARE(folder.size(), 3);
     QCOMPARE(other.size(), 4);
@@ -412,20 +406,18 @@ void TestGeoDataCopy::copyFolder()
 
 void TestGeoDataCopy::copyPlacemark()
 {
-    GeoDataPoint point;
-
-    point.set(13.7107,51.0235, 123.4, GeoDataCoordinates::Degree);
-    point.setDetail(2);
-    point.setExtrude( true );
+    GeoDataPoint *point = new GeoDataPoint;
+    point->set(13.7107,51.0235, 123.4, GeoDataCoordinates::Degree);
+    point->setDetail(2);
+    point->setExtrude( true );
 
     // make sure that the coordinate contains the right values
-    testCoordinate(point, 123.4, 2, coordString[0]);
-    QCOMPARE(point.extrude(), true);
+    testCoordinate(*point, 123.4, 2, coordString[0]);
+    QCOMPARE(point->extrude(), true);
 
     GeoDataPlacemark placemark;
     placemark.setName("Patrick Spendrin");
-    placemark.setGeometry(&point);
-    placemark.setCoordinate(point);
+    placemark.setGeometry(point);
     placemark.setArea(12345678.0);
     placemark.setPopulation(123456789);
     placemark.setId(281012);
