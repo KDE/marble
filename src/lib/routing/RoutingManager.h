@@ -138,6 +138,9 @@ public Q_SLOTS:
     /** Update the route */
     void updateRoute();
 
+    /** Clear all via points */
+    void clearRoute();
+
     /** Toggle turn by turn navigation mode */
     void setGuidanceModeEnabled( bool enabled );
 

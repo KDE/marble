@@ -1336,6 +1336,11 @@ void MainWindow::showRoutingDialog()
         connect( reverseAction, SIGNAL( triggered() ), manager, SLOT( reverseRoute() ) );
         m_routingWindow->menuBar()->addAction( reverseAction );
 
+        /** @todo: Change 'Clear' to 'Clear Route' after string freeze */
+        QAction* clearAction = new QAction( tr( "Clear" ), this );
+        connect( clearAction, SIGNAL( triggered() ), manager, SLOT( clearRoute() ) );
+        m_routingWindow->menuBar()->addAction( clearAction );
+
         m_routingWindow->setCentralWidget( scrollArea );
     }
 
