@@ -3,8 +3,3 @@
         <file>heart.svg</file>
     </qresource>
 </RCC>
-<RCC>
-    <qresource prefix="/" >
-        <file>heart.svg</file>
-    </qresource>
-</RCC>

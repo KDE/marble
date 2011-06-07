@@ -101,6 +101,9 @@ endif (QTONLY)
 ############################
 # Drop in New Tests
 ############################
+qt4_add_resources(TestGeoDataCopy_SRCS TestGeoDataCopy.qrc)
+marble_add_test( TestGeoDataCopy ${TestGeoDataCopy_SRCS} )
+
 marble_add_test( GeoPolygonTest )
 marble_add_test( TestGeoDataParser )
 marble_add_test( TestGeoDataWriter )
