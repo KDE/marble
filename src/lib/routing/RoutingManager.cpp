@@ -399,6 +399,12 @@ void RoutingManager::reverseRoute()
     updateRoute();
 }
 
+void RoutingManager::clearRoute()
+{
+    d->m_routeRequest->clear();
+    updateRoute();
+}
+
 void RoutingManager::setShowGuidanceModeStartupWarning( bool show )
 {
     d->m_guidanceModeWarning = show;

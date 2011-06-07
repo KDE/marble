@@ -27,7 +27,7 @@ class GeoDataDocumentPrivate : public GeoDataContainerPrivate
     {
     }
     
-    virtual void* copy() 
+    virtual GeoDataFeaturePrivate* copy()
     { 
         GeoDataDocumentPrivate* copy = new GeoDataDocumentPrivate;
         *copy = *this;

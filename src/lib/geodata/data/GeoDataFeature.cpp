@@ -633,7 +633,7 @@ void GeoDataFeature::detach()
     if(d->ref == 1)
         return;
 
-    GeoDataFeaturePrivate* new_d = static_cast<GeoDataFeaturePrivate*>(d->copy());
+    GeoDataFeaturePrivate* new_d = d->copy();
 
     if (!d->ref.deref()) {
         delete d;

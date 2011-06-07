@@ -30,7 +30,16 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
         qDeleteAll(m_vector);
     }
 
-    virtual void* copy() 
+    void operator=( const GeoDataContainerPrivate &other)
+    {
+        qDeleteAll( m_vector );
+        foreach( GeoDataFeature *feature, other.m_vector )
+        {
+            m_vector.append( new GeoDataFeature( *feature ) );
+        }
+    }
+
+    virtual GeoDataFeaturePrivate* copy()
     { 
         GeoDataContainerPrivate* copy = new GeoDataContainerPrivate;
         *copy = *this;

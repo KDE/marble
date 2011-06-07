@@ -190,7 +190,9 @@ QPixmap RouteRequest::pixmap( int position ) const
 
 void RouteRequest::clear()
 {
-    d->m_route.clear();
+    for ( int i=d->m_route.size()-1; i>=0; --i ) {
+        remove( i );
+    }
 }
 
 void RouteRequest::insert( int index, const GeoDataCoordinates &coordinates )

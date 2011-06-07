@@ -166,6 +166,9 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
 
     mDebug() << "Offline OSM search query took " << timer.elapsed() << " ms.";
 
+    qSort( result.begin(), result.end() );
+    unique( result );
+
     if ( userQuery.resultFormat() == DatabaseQuery::DistanceFormat ) {
         s_currentPosition = model->positionTracking()->currentLocation();
         qSort( result.begin(), result.end(), placemarkSmallerDistance );
@@ -180,6 +183,16 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
     }
 
     return result;
+}
+
+void OsmDatabase::unique( QVector<OsmPlacemark> &placemarks ) const
+{
+    for ( int i=1; i<placemarks.size(); ++i ) {
+        if ( placemarks[i-1] == placemarks[i] ) {
+            placemarks.remove( i );
+            --i;
+        }
+    }
 }
 
 QString OsmDatabase::formatDistance( const GeoDataCoordinates &a, const GeoDataCoordinates &b ) const

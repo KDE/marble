@@ -52,7 +52,6 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
  public:
     GeoDataGeometry();
     GeoDataGeometry( const GeoDataGeometry& other );
-    virtual bool operator==( const GeoDataGeometry& other ) const { Q_UNUSED(other); return false; };
     GeoDataGeometry& operator=( const GeoDataGeometry& other );
     
     virtual ~GeoDataGeometry();
