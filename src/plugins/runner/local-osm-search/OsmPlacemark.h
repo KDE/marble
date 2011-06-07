@@ -125,6 +125,8 @@ public:
     /** Placemarks are sorted by name by default */
     bool operator<( const OsmPlacemark &other) const;
 
+    bool operator==( const OsmPlacemark &other ) const;
+
     qreal matchScore( const DatabaseQuery* query ) const;
 
 private:

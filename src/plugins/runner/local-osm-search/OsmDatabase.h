@@ -38,6 +38,8 @@ public:
 private:
     QString wildcardQuery( const QString &term ) const;
 
+    void unique( QVector<OsmPlacemark> &placemarks ) const;
+
     QStringList m_databases;
 
     QSqlDatabase m_database;

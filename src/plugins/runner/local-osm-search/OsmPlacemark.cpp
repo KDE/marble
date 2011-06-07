@@ -97,6 +97,14 @@ bool OsmPlacemark::operator<( const OsmPlacemark &other) const
         return name() < other.name();
     }
 
+    if ( additionalInformation() != other.additionalInformation() ) {
+        return additionalInformation() < other.additionalInformation();
+    }
+
+    if ( houseNumber() != other.houseNumber() ) {
+        return houseNumber() < other.houseNumber();
+    }
+
     if ( regionId() != other.regionId() ) {
         return regionId() < other.regionId();
     }
@@ -106,6 +114,17 @@ bool OsmPlacemark::operator<( const OsmPlacemark &other) const
     }
 
     return latitude() < other.latitude();
+}
+
+bool OsmPlacemark::operator==( const OsmPlacemark &other ) const
+{
+    return m_regionId == other.m_regionId &&
+           m_category == other.m_category &&
+           m_longitude == other.m_longitude &&
+           m_latitude == other.m_latitude &&
+           m_name == other.m_name &&
+           m_houseNumber == other.m_houseNumber &&
+           m_additionalInformation == other.m_additionalInformation;
 }
 
 qreal OsmPlacemark::matchScore( const DatabaseQuery* query ) const
