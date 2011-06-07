@@ -29,6 +29,8 @@ public:
 
     QMap<RoutingInstruction::TurnType, QString> m_turnTypeMap;
 
+    QMap<RoutingInstruction::TurnType, QString> m_announceMap;
+
     QString m_speaker;
 
     Phonon::MediaObject *m_output;
@@ -51,7 +53,7 @@ public:
 
     QString distanceAudioFile( qreal distance );
 
-    QString turnTypeAudioFile( RoutingInstruction::TurnType turnType );
+    QString turnTypeAudioFile( RoutingInstruction::TurnType turnType, qreal distance );
 
     QString audioFile( const QString &name );
 
@@ -71,6 +73,7 @@ AudioOutputPrivate::AudioOutputPrivate( AudioOutput* parent ) :
 
 void AudioOutputPrivate::audioOutputFinished()
 {
+    m_output->setCurrentSource( QString() );
     m_output->clearQueue();
 }
 
@@ -98,10 +101,11 @@ QString AudioOutputPrivate::distanceAudioFile( qreal dest )
     return QString();
 }
 
-QString AudioOutputPrivate::turnTypeAudioFile( RoutingInstruction::TurnType turnType )
+QString AudioOutputPrivate::turnTypeAudioFile( RoutingInstruction::TurnType turnType, qreal distance )
 {
-    if ( m_turnTypeMap.contains( turnType ) ) {
-        return audioFile( m_turnTypeMap[turnType] );
+    QMap<RoutingInstruction::TurnType, QString> const & map = distance < 50 ? m_turnTypeMap : m_announceMap;
+    if ( map.contains( turnType ) ) {
+        return audioFile( map[turnType] );
     }
 
     return QString();
@@ -135,19 +139,19 @@ void AudioOutputPrivate::enqueue( qreal distance, RoutingInstruction::TurnType t
         return;
     }
 
-    QString distanceAudio = distanceAudioFile( distance );
-    QString turnTypeAudio = turnTypeAudioFile( turnType );
+    //QString distanceAudio = distanceAudioFile( distance );
+    QString turnTypeAudio = turnTypeAudioFile( turnType, distance );
     if ( turnTypeAudio.isEmpty() ) {
         mDebug() << "Missing audio file for turn type " << turnType;
         return;
     }
 
     m_output->enqueue( turnTypeAudio );
-    if ( !distanceAudio.isEmpty() ) {
-        m_output->enqueue( audioFile( "After" ) );
-        m_output->enqueue( distanceAudio );
-        m_output->enqueue( audioFile( "Meters" ) );
-    }
+//    if ( !distanceAudio.isEmpty() ) {
+//        m_output->enqueue( audioFile( "After" ) );
+//        m_output->enqueue( distanceAudio );
+//        m_output->enqueue( audioFile( "Meters" ) );
+//    }
 }
 
 void AudioOutputPrivate::enqueue( const QString &file )
@@ -191,7 +195,9 @@ void AudioOutput::update( const Route &route, qreal distance )
         d->reset();
     }
 
-    if ( ( d->m_lastDistance == 0 || d->m_lastDistance > 850 ) && distance <= 850 ) {
+    bool const announcement = ( d->m_lastDistance == 0 || d->m_lastDistance > 850 ) && distance <= 850;
+    bool const turn = ( d->m_lastDistance == 0 || d->m_lastDistance > 50 ) && distance <= 50;
+    if ( announcement || turn ) {
         if ( !d->m_output || d->m_output->currentSource().fileName().isEmpty() ) {
             d->setupAudio();
             d->enqueue( distance, turnType );
@@ -231,8 +237,21 @@ void AudioOutput::setSoundEnabled( bool enabled )
 {
     d->m_soundEnabled = enabled;
     d->m_turnTypeMap.clear();
+    d->m_announceMap.clear();
 
     if ( enabled ) {
+        d->m_announceMap[RoutingInstruction::Straight] = "KDE-Sys-List-End";
+        d->m_announceMap[RoutingInstruction::SlightRight] = "KDE-Sys-List-End";
+        d->m_announceMap[RoutingInstruction::Right] = "KDE-Sys-List-End";
+        d->m_announceMap[RoutingInstruction::SharpRight] = "KDE-Sys-List-End";
+        d->m_announceMap[RoutingInstruction::TurnAround] = "KDE-Sys-List-End";
+        d->m_announceMap[RoutingInstruction::SharpLeft] = "KDE-Sys-List-End";
+        d->m_announceMap[RoutingInstruction::Left] = "KDE-Sys-List-End";
+        d->m_announceMap[RoutingInstruction::SlightLeft] = "KDE-Sys-List-End";
+        d->m_announceMap[RoutingInstruction::RoundaboutFirstExit] = "KDE-Sys-List-End";
+        d->m_announceMap[RoutingInstruction::RoundaboutSecondExit] = "KDE-Sys-List-End";
+        d->m_announceMap[RoutingInstruction::RoundaboutThirdExit] = "KDE-Sys-List-End";
+
         d->m_turnTypeMap[RoutingInstruction::Straight] = "KDE-Sys-App-Positive";
         d->m_turnTypeMap[RoutingInstruction::SlightRight] = "KDE-Sys-App-Positive";
         d->m_turnTypeMap[RoutingInstruction::Right] = "KDE-Sys-App-Positive";
@@ -245,6 +264,18 @@ void AudioOutput::setSoundEnabled( bool enabled )
         d->m_turnTypeMap[RoutingInstruction::RoundaboutSecondExit] = "KDE-Sys-App-Positive";
         d->m_turnTypeMap[RoutingInstruction::RoundaboutThirdExit] = "KDE-Sys-App-Positive";
     } else {
+        d->m_announceMap[RoutingInstruction::Straight] = "";
+        d->m_announceMap[RoutingInstruction::SlightRight] = "AhKeepRight";
+        d->m_announceMap[RoutingInstruction::Right] = "AhRightTurn";
+        d->m_announceMap[RoutingInstruction::SharpRight] = "AhRightTurn";
+        d->m_announceMap[RoutingInstruction::TurnAround] = "AhUTurn";
+        d->m_announceMap[RoutingInstruction::SharpLeft] = "AhLeftTurn";
+        d->m_announceMap[RoutingInstruction::Left] = "AhLeftTurn";
+        d->m_announceMap[RoutingInstruction::SlightLeft] = "AhKeepLeft";
+        d->m_announceMap[RoutingInstruction::RoundaboutFirstExit] = "RbExit1";
+        d->m_announceMap[RoutingInstruction::RoundaboutSecondExit] = "RbExit2";
+        d->m_announceMap[RoutingInstruction::RoundaboutThirdExit] = "RbExit3";
+
         d->m_turnTypeMap[RoutingInstruction::Straight] = "Straight";
         d->m_turnTypeMap[RoutingInstruction::SlightRight] = "BearRight";
         d->m_turnTypeMap[RoutingInstruction::Right] = "TurnRight";
@@ -253,9 +284,9 @@ void AudioOutput::setSoundEnabled( bool enabled )
         d->m_turnTypeMap[RoutingInstruction::SharpLeft] = "SharpLeft";
         d->m_turnTypeMap[RoutingInstruction::Left] = "TurnLeft";
         d->m_turnTypeMap[RoutingInstruction::SlightLeft] = "BearLeft";
-        d->m_turnTypeMap[RoutingInstruction::RoundaboutFirstExit] = "RbExit1";
-        d->m_turnTypeMap[RoutingInstruction::RoundaboutSecondExit] = "RbExit2";
-        d->m_turnTypeMap[RoutingInstruction::RoundaboutThirdExit] = "RbExit3";
+        d->m_turnTypeMap[RoutingInstruction::RoundaboutFirstExit] = "";
+        d->m_turnTypeMap[RoutingInstruction::RoundaboutSecondExit] = "";
+        d->m_turnTypeMap[RoutingInstruction::RoundaboutThirdExit] = "";
     }
 }
 
