@@ -69,7 +69,6 @@ void MarbleWidgetPopupMenu::createActions()
     QAction* addBookmark = new QAction( QIcon(":/icons/bookmark-new.png"),
                                         tr( "Add &Bookmark" ), this );
     QAction* fullscreenAction = new QAction( tr( "&Full Screen Mode" ), this );
-    fullscreenAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_F );
     fullscreenAction->setCheckable( true );
 
     m_aboutDialogAction = new QAction( tr( "&About" ), this );

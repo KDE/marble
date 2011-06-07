@@ -309,15 +309,12 @@ void MainWindow::createMenus()
         connect( m_toggleLegendTabAction, SIGNAL( triggered( bool ) ),
                  this, SLOT( showLegendTab( bool ) ) );
         m_toggleRoutingTabAction = menuBar()->addAction( tr( "Routing" ) );
-        m_toggleRoutingTabAction->setShortcut( Qt::CTRL + Qt::Key_R );
         connect( m_toggleRoutingTabAction, SIGNAL( triggered( bool ) ),
                  this, SLOT( showRoutingDialog() ) );
         m_showTrackingDialogAction = menuBar()->addAction( tr( "Tracking" ) );
-        m_showTrackingDialogAction->setShortcut( Qt::CTRL + Qt::Key_T );
         connect( m_showTrackingDialogAction, SIGNAL( triggered()),
                  this, SLOT( showTrackingDialog()) );
         QAction *goToAction = menuBar()->addAction( tr( "&Go To...") );
-        goToAction->setShortcut( Qt::CTRL + Qt::Key_G );
         connect( goToAction, SIGNAL( triggered() ),
                  this, SLOT( showGoToDialog() ) );
 
