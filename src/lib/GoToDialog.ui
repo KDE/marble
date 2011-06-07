@@ -20,7 +20,7 @@
       <widget class="QLineEdit" name="searchLineEdit"/>
      </item>
      <item>
-      <widget class="QPushButton" name="progress">
+      <widget class="QPushButton" name="progressButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>

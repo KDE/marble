@@ -333,7 +333,7 @@ void GoToDialog::startSearch()
         d->createProgressAnimation();
     }
     d->m_progressTimer.start();
-    progress->setVisible( true );
+    progressButton->setVisible( true );
     searchLineEdit->setEnabled( false );
     updateResultMessage( 0 );
 }
@@ -371,8 +371,10 @@ GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::Window
              this, SLOT( updateSearchMode() ) );
     connect( &d->m_progressTimer, SIGNAL( timeout() ),
              this, SLOT( updateProgress() ) );
+    connect( progressButton, SIGNAL( clicked( bool ) ),
+             this, SLOT( stopProgressAnimation() ) );
     updateSearchMode();
-    progress->setVisible( false );
+    progressButton->setVisible( false );
 }
 
 GoToDialog::~GoToDialog()
@@ -410,7 +412,7 @@ void GoToDialog::updateSearchMode()
     bool const searchEnabled = searchButton->isChecked();
     searchLineEdit->setVisible( searchEnabled );
     descriptionLabel->setVisible( searchEnabled );
-    progress->setVisible( searchEnabled && d->m_progressTimer.isActive() );
+    progressButton->setVisible( searchEnabled && d->m_progressTimer.isActive() );
     if ( searchEnabled ) {
         bookmarkListView->setModel( d->m_placemarkModel );
     } else {
@@ -423,7 +425,7 @@ void GoToDialog::updateProgress()
     if ( !d->m_progressAnimation.isEmpty() ) {
         d->m_currentFrame = ( d->m_currentFrame + 1 ) % d->m_progressAnimation.size();
         QIcon frame = d->m_progressAnimation[d->m_currentFrame];
-        progress->setIcon( frame );
+        progressButton->setIcon( frame );
     }
 }
 
@@ -432,7 +434,7 @@ void GoToDialog::stopProgressAnimation()
     searchLineEdit->setEnabled( true );
     d->m_progressTimer.stop();
     updateResultMessage( bookmarkListView->model()->rowCount() );
-    progress->setVisible( false );
+    progressButton->setVisible( false );
 }
 
 void GoToDialog::updateResultMessage( int results )
