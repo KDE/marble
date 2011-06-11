@@ -74,6 +74,7 @@ DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/srtm)
 install (FILES
 maps/earth/srtm2/srtm2.dgml
 maps/earth/srtm2/0/000000/000000_000000.png
+maps/earth/srtm2/0/000000/000000_000001.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/srtm2)
 
 install (FILES
