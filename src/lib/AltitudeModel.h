@@ -22,8 +22,11 @@
 #define MARBLE_ALTITUDEMODEL_H
 
 #include <QObject>
+#include <QCache>
+#include <QImage>
 
 #include "marble_export.h"
+#include "TileId.h"
 
 namespace Marble {
 
@@ -43,7 +46,7 @@ public:
                         HttpDownloadManager * const downloadManager, MarbleModel * const model );
 
     qreal height(qreal lat, qreal lon);
-
+    QList<qreal> heightProfile( qreal fromLat, qreal fromLon, qreal toLat, qreal toLon );
 
 private:
     void updateTextureLayers();
@@ -53,6 +56,7 @@ private: //TODO d pointer
     const MapThemeManager* m_mapThemeManager;
     const GeoSceneTexture *m_textureLayer;
     MarbleModel *m_model;
+    QCache<TileId, const QImage> m_cache;
 };
 
 }

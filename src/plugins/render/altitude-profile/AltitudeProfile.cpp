@@ -46,7 +46,10 @@ void AltitudeProfile::initialize()
     m_isInitialized = true;
     connect( marbleModel()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ), SLOT( currentRouteChanged( GeoDataDocument* ) ) );
 
-    marbleModel()->altitudeModel()->height(47.95, 13.23);
+    //marbleModel()->altitudeModel()->height(47.95, 13.23);
+    qDebug() << marbleModel()->altitudeModel()->height(47.8481, 13.0734);
+    qDebug() << marbleModel()->altitudeModel()->height(47.8478, 13.0731);
+    //POINT 322 13.0734 47.8481 height 285
 }
 
 void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
@@ -70,20 +73,36 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
     GeoDataPlacemark* routePlacemark = route->placemarkList().first();
     Q_ASSERT(routePlacemark->geometry()->geometryId() ==  GeoDataLineStringId);
     GeoDataLineString* routeWaypoints = static_cast<GeoDataLineString*>(routePlacemark->geometry());
-    mDebug() << routeWaypoints->length( EARTH_RADIUS );
-    for(int i=0; i < routeWaypoints->size(); ++i) {
+    qDebug() << routeWaypoints->length( EARTH_RADIUS );
+    qreal totalIncrease = 0;
+    qreal lastAltitude = -100000;
+    for(int i=1; i < routeWaypoints->size(); ++i) {
         GeoDataCoordinates coordinate = routeWaypoints->at( i );
-        //coordinate.altitude();
-        qreal altitude = marbleModel()->altitudeModel()->height(coordinate.latitude(Marble::GeoDataCoordinates::Degree), coordinate.longitude(Marble::GeoDataCoordinates::Degree));
-        qDebug() << "POINT" << numDataPoints << coordinate.longitude(Marble::GeoDataCoordinates::Degree) << coordinate.latitude(Marble::GeoDataCoordinates::Degree)
-                 << "height" << altitude;
+        GeoDataCoordinates coordinatePrev = routeWaypoints->at( i - 1 );
+        //qreal altitude = marbleModel()->altitudeModel()->height(coordinate.latitude(Marble::GeoDataCoordinates::Degree), coordinate.longitude(Marble::GeoDataCoordinates::Degree));
+        QList<qreal> altitudes = marbleModel()->altitudeModel()->heightProfile(
+            coordinatePrev.latitude(Marble::GeoDataCoordinates::Degree),
+            coordinatePrev.longitude(Marble::GeoDataCoordinates::Degree),
+            coordinate.latitude(Marble::GeoDataCoordinates::Degree),
+            coordinate.longitude(Marble::GeoDataCoordinates::Degree)
+        );
+        foreach(const qreal altitude, altitudes) {
+            qDebug() << "POINT" << numDataPoints << coordinate.longitude(Marble::GeoDataCoordinates::Degree) << coordinate.latitude(Marble::GeoDataCoordinates::Degree)
+                    << "height" << altitude;
+            if ( lastAltitude != -100000 && altitude > lastAltitude ) {
+                totalIncrease += altitude - lastAltitude;
+                qDebug() << "INCREASE +=" << altitude - lastAltitude << "totalIncrease is now" << totalIncrease;
+            }
 
-        double value = altitude;
-        qDebug() << "value" << value;
-        plot->addPoint(numDataPoints++, value);
-        if (value > maxY) maxY = value;
-        if (value < minY) minY = value;
+            double value = altitude;
+            //qDebug() << "value" << value;
+            plot->addPoint(numDataPoints++, value);
+            if (value > maxY) maxY = value;
+            if (value < minY) minY = value;
+            lastAltitude = altitude;
+        }
     }
+    qDebug() << "TOTAL INCREASE" << totalIncrease;
 
 /*
     QImage image;
