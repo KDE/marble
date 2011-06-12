@@ -316,6 +316,19 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
                                   const QPen& tropicsCirclePen,
                                   const QPen& gridCirclePen )
 {
+    GeoDataLatLonAltBox viewLatLonAltBox = viewport->viewLatLonAltBox();
+
+    // Render UTM grid zones
+    if ( m_currentNotation == GeoDataCoordinates::UTM ) {
+        renderLatitudeLine( painter, 84.0, viewLatLonAltBox );
+
+        renderLongitudeLines( painter, viewLatLonAltBox,
+                    6.0, 6.0, 10.0, LineStart | IgnoreXMargin );
+        renderLatitudeLines( painter, viewLatLonAltBox, 8.0 );
+
+        return;
+    }
+
     // Render the normal grid
 
     painter->setPen( gridCirclePen );
@@ -488,6 +501,14 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
 
     qreal southLineLat = step * static_cast<int>( southLat / step ); 
     qreal northLineLat = step * ( static_cast<int>( northLat / step ) + 1 );
+    
+    if ( m_currentNotation == GeoDataCoordinates::UTM ) {
+    	if ( northLineLat > 84.0 )
+	    	northLineLat = 84.0;
+	    	
+	    if ( southLineLat < -80.0 )
+	    	southLineLat = -80.0;
+    }
 
     qreal itStep = southLineLat;
 
@@ -505,10 +526,12 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
         }
 
         // Paint all latitude coordinate lines except for the equator
-        if ( itStep != 0.0 ) {
-            renderLatitudeLine( painter, itStep, viewLatLonAltBox, label, labelPositionFlags );
+        if ( itStep == 0.0 && m_currentNotation == GeoDataCoordinates::DMS ) {
+			itStep += step;
+			continue;
         }
-
+        
+        renderLatitudeLine( painter, itStep, viewLatLonAltBox, label, labelPositionFlags );
         itStep += step;
     }
 }
