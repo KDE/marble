@@ -78,7 +78,9 @@ class GEODATA_EXPORT GeoDataCoordinates
      */
     enum Notation{
         Decimal,
-        DMS
+        DMS,
+        UTM,
+        MGRS
     };
 
     // Type definitions

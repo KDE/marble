@@ -94,6 +94,7 @@
     <choice name="AngleUnit::DMSDegree"/>
     <choice name="AngleUnit::DecimalDegree"/>
     <choice name="AngleUnit::UTM"/>
+    <choice name="AngleUnit::MGRS"/>
    </choices>
    <default>Marble::DMSDegree</default>
   </entry>

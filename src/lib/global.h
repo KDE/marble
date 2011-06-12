@@ -79,7 +79,8 @@ Q_DECLARE_FLAGS(Dimensions, Dimension)
 enum AngleUnit {
     DMSDegree,          ///< Degrees in DMS notation
     DecimalDegree,      ///< Degrees in decimal notation
-    UTM                 ///< UTM
+    UTM,                ///< UTM
+    MGRS
 };
 
 /**
