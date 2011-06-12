@@ -576,6 +576,13 @@ void RoutingWidget::openRoute()
     if ( !file.isEmpty() ) {
         d->m_routingManager->alternativeRoutesModel()->clear();
         d->m_routingManager->loadRoute( file );
+        GeoDataDocument* route = d->m_routingManager->alternativeRoutesModel()->route( 0 );
+        if ( route ) {
+            GeoDataLineString* waypoints = d->m_routingManager->alternativeRoutesModel()->waypoints( route );
+            if ( waypoints ) {
+                d->m_widget->centerOn( waypoints->latLonAltBox() );
+            }
+        }
     }
 }
 
