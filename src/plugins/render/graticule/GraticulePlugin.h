@@ -144,7 +144,7 @@ class GraticulePlugin : public RenderPlugin
      */
     void renderLongitudeLine( GeoPainter *painter, qreal longitude,                         
                               const GeoDataLatLonAltBox& viewLatLonAltBox = GeoDataLatLonAltBox(),
-                              qreal polarGap = 0.0,
+                              qreal northPolarGap = 0.0, qreal southPolarGap = 0.0,
                               const QString& lineLabel = QString(),
                               LabelPositionFlags labelPositionFlags = LineCenter );
 
@@ -173,7 +173,7 @@ class GraticulePlugin : public RenderPlugin
     void renderLongitudeLines( GeoPainter *painter, 
                               const GeoDataLatLonAltBox& viewLatLonAltBox, 
                               qreal step, 
-                              qreal polarGap = 0.0,
+                              qreal northPolarGap = 0.0, qreal southPolarGap = 0.0,
                               LabelPositionFlags labelPositionFlags = LineCenter
                              );
 

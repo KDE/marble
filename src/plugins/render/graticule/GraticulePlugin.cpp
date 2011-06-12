@@ -362,8 +362,8 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
     renderLatitudeLine( painter, 0.0, viewLatLonAltBox, tr( "Equator" ) );
 
     // Render the Prime Meridian and Antimeridian
-    renderLongitudeLine( painter, 0.0, viewLatLonAltBox, 0.0, tr( "Prime Meridian" ) );
-    renderLongitudeLine( painter, 180.0, viewLatLonAltBox, 0.0, tr( "Antimeridian" ) );
+    renderLongitudeLine( painter, 0.0, viewLatLonAltBox, 0.0, 0.0, tr( "Prime Meridian" ) );
+    renderLongitudeLine( painter, 180.0, viewLatLonAltBox, 0.0, 0.0, tr( "Antimeridian" ) );
 
     QPen tropicsPen = tropicsCirclePen;
     if (   painter->mapQuality() != OutlineQuality
@@ -431,7 +431,7 @@ void GraticulePlugin::renderLatitudeLine( GeoPainter *painter, qreal latitude,
 
 void GraticulePlugin::renderLongitudeLine( GeoPainter *painter, qreal longitude,
                                            const GeoDataLatLonAltBox& viewLatLonAltBox, 
-                                           qreal polarGap,
+                                           qreal northPolarGap, qreal southPolarGap,
                                            const QString& lineLabel,
                                            LabelPositionFlags labelPositionFlags )
 {
@@ -452,8 +452,8 @@ void GraticulePlugin::renderLongitudeLine( GeoPainter *painter, qreal longitude,
     qreal fromSouthLat = viewLatLonAltBox.south( GeoDataCoordinates::Degree );
     qreal toNorthLat   = viewLatLonAltBox.north( GeoDataCoordinates::Degree );
     
-    qreal southLat = ( fromSouthLat < -90.0 + polarGap ) ? -90.0 + polarGap : fromSouthLat;
-    qreal northLat = ( toNorthLat   > +90.0 - polarGap ) ? +90.0 - polarGap : toNorthLat;
+    qreal southLat = ( fromSouthLat < -90.0 + southPolarGap ) ? -90.0 + southPolarGap : fromSouthLat;
+    qreal northLat = ( toNorthLat   > +90.0 - northPolarGap ) ? +90.0 - northPolarGap : toNorthLat;
 
     GeoDataCoordinates n1( longitude, southLat, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates n3( longitude, northLat, 0.0, GeoDataCoordinates::Degree );
@@ -515,7 +515,7 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
 
 void GraticulePlugin::renderLongitudeLines( GeoPainter *painter, 
                                             const GeoDataLatLonAltBox& viewLatLonAltBox, 
-                                            qreal step, qreal polarGap,
+                                            qreal step, qreal northPolarGap, qreal southPolarGap,
                                             LabelPositionFlags labelPositionFlags
                                            )
 {
@@ -552,8 +552,8 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
             // Paint all longitude coordinate lines except for the meridians
             if ( itStep != 0.0 || itStep != 180.0 || itStep != -180.0 ) {
-                renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap, 
-                                    label, labelPositionFlags );           
+                renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap, 
+                southPolarGap, label, labelPositionFlags );           
             }
 
             itStep += step;
@@ -578,8 +578,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
             // Paint all longitude coordinate lines except for the meridians
             if ( itStep != 0.0 || itStep != 180.0 || itStep != -180.0 ) {
-                renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap, 
-                                    label, labelPositionFlags );           
+                renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap, southPolarGap, label, labelPositionFlags );           
             }
             itStep += step;
         }
@@ -600,8 +599,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
             // Paint all longitude coordinate lines except for the meridians
             if ( itStep != 0.0 || itStep != 180.0 || itStep != -180.0 ) {
-                renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap, 
-                                    label, labelPositionFlags );           
+                renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap, southPolarGap, label, labelPositionFlags );           
             }
             itStep += step;
         }
