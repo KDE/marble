@@ -567,6 +567,12 @@ void LatLonEdit::setNotation(GeoDataCoordinates::Notation notation)
     case GeoDataCoordinates::DM:
         d->m_inputHandler = new DMInputHandler(d);
         break;
+    case GeoDataCoordinates::UTM:
+        /** @todo implement */
+        break;
+    case GeoDataCoordinates::MGRS:
+        /** @todo implement */
+        break;
     }
 
     d->m_notation = notation;
