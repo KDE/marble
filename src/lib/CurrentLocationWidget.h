@@ -45,6 +45,8 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
 
     bool autoZoom() const;
 
+    bool trackVisible() const;
+
  public Q_SLOTS:
     void receiveGpsCoordinates( const GeoDataCoordinates& in, qreal speed );
 
@@ -54,6 +56,7 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
     /// Slot for Auto Zooming while navigating
     void setAutoZoom( bool activate );
 
+    void setTrackVisible( bool visible );
 
  private:
     Q_DISABLE_COPY( CurrentLocationWidget )

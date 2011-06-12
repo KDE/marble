@@ -358,6 +358,17 @@ bool CurrentLocationWidget::autoZoom() const
     return d->m_adjustNavigation->autoZoom();
 }
 
+bool CurrentLocationWidget::trackVisible() const
+{
+    return d->m_widget->model()->positionTracking()->trackVisible();
+}
+
+void CurrentLocationWidget::setTrackVisible( bool visible )
+{
+    d->m_currentLocationUi.showTrackCheckBox->setChecked( visible );
+    d->m_widget->model()->positionTracking()->setTrackVisible( visible );
+}
+
 }
 
 #include "CurrentLocationWidget.moc"

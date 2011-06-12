@@ -1044,6 +1044,7 @@ void MainWindow::readSettings()
         Q_ASSERT( trackingWidget );
         trackingWidget->setRecenterMode( settings.value( "recenterMode", 0 ).toInt() );
         trackingWidget->setAutoZoom( settings.value( "autoZoom", false ).toBool() );
+        trackingWidget->setTrackVisible( settings.value( "trackVisible", true ).toBool() );
     }
     settings.endGroup();
 
@@ -1158,6 +1159,7 @@ void MainWindow::writeSettings()
          // Can be null due to lazy initialization
          settings.setValue( "recenterMode", trackingWidget->recenterMode() );
          settings.setValue( "autoZoom", trackingWidget->autoZoom() );
+         settings.setValue( "trackVisible", trackingWidget->trackVisible() );
      }
 
      settings.endGroup();
