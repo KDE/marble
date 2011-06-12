@@ -68,6 +68,7 @@ class PluginManager;
 class AbstractFloatItem;
 class GeoDataCoordinates;
 class GeoDataDocument;
+class GeoDataTreeModel;
 class GeoSceneDocument;
 class GeoSceneTexture;
 class Planet;
@@ -120,7 +121,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief Return the list of Placemarks as a QAbstractItemModel *
      * @return a list of all Placemarks in the MarbleModel.
      */
-    QAbstractItemModel*  treeModel() const;
+    GeoDataTreeModel*  treeModel() const;
     QAbstractItemModel*  placemarkModel() const;
     QItemSelectionModel* placemarkSelectionModel() const;
 

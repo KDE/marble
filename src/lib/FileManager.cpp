@@ -129,6 +129,7 @@ void FileManager::closeFile( int index )
 {
     mDebug() << "FileManager::closeFile " << d->m_fileItemList.at( index )->fileName();
     if ( index < d->m_fileItemList.size() ) {
+        d->m_model->treeModel()->removeDocument( index );
         emit fileRemoved( index );
         delete d->m_fileItemList.at( index );
         d->m_fileItemList.removeAt( index );
@@ -151,6 +152,7 @@ GeoDataDocument * FileManager::at( int index )
 void FileManager::addGeoDataDocument( GeoDataDocument* document )
 {
     d->m_fileItemList.append( document );
+    d->m_model->treeModel()->addDocument( document );
     emit fileAdded( d->m_fileItemList.indexOf( document ) );
 
     if ( document->name().isEmpty() && !document->fileName().isEmpty() )

@@ -37,13 +37,11 @@ class GeoDataTreeModel::Private {
     ~Private();
 
     GeoDataDocument* m_rootDocument;
-    FileManager     *m_fileManager;
     bool             m_ownsRootDocument;
 };
 
 GeoDataTreeModel::Private::Private() :
     m_rootDocument( new GeoDataDocument ),
-    m_fileManager( 0 ),
     m_ownsRootDocument( true )
 {
     // nothing to do
@@ -431,20 +429,12 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
 }
 
 
-void GeoDataTreeModel::setFileManager( FileManager *fileManager )
+int GeoDataTreeModel::addDocument( GeoDataDocument *document )
 {
-    d->m_fileManager = fileManager;
-}
-
-void GeoDataTreeModel::addDocument( int index )
-{
-    GeoDataDocument *document = d->m_fileManager->at(index);
-    if (document)
-    {
-        beginResetModel();
-        d->m_rootDocument->append( document ) ;
-        endResetModel();
-    }
+    beginResetModel();
+    d->m_rootDocument->append( document ) ;
+    endResetModel();
+    return d->m_rootDocument->childPosition( document );
 }
 
 void GeoDataTreeModel::removeDocument( int index )

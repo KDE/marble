@@ -17,7 +17,6 @@
 namespace Marble
 {
 class GeoDataDocument;
-class FileManager;
 
 /**
  * @short The representation of GeoData in a model
@@ -67,22 +66,17 @@ class GeoDataTreeModel : public QAbstractItemModel
     void reset() { QAbstractItemModel::reset(); }
 
     /**
-     * Sets the FileManager from which the documents are loaded.
-     */
-    void setFileManager ( FileManager *fileManager );
-
-    /**
       * Sets the root document to use. This replaces previously loaded data, if any.
       * @param document The new root document. Ownership retains with the caller,
       *   i.e. GeoDataTreeModel will not delete the passed document at its destruction.
       */
     void setRootDocument( GeoDataDocument* document );
 
-  public Q_SLOTS:
-    void addDocument( int index );
+    int addDocument( GeoDataDocument* document );
 
     void removeDocument( int index );
 
+  public Q_SLOTS:
     void update();
     
  private:

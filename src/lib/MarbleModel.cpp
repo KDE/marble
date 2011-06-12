@@ -187,12 +187,6 @@ MarbleModel::MarbleModel( QObject *parent )
     connect( d->m_fileManager,    SIGNAL( fileRemoved(int)),
              &d->m_fileviewmodel, SLOT(remove(int)) );
 
-    d->m_treemodel.setFileManager( d->m_fileManager );
-    connect( d->m_fileManager, SIGNAL( fileAdded(int)),
-             &d->m_treemodel,  SLOT(addDocument(int)) );
-    connect( d->m_fileManager, SIGNAL( fileRemoved(int)),
-             &d->m_treemodel,  SLOT(removeDocument(int)) );
-
     d->m_positionTracking = new PositionTracking( d->m_fileManager, this );
 
     d->m_routingManager = new RoutingManager( d->m_parent, this );
@@ -368,7 +362,7 @@ HttpDownloadManager* MarbleModel::downloadManager() const
 }
 
 
-QAbstractItemModel *MarbleModel::treeModel() const
+GeoDataTreeModel *MarbleModel::treeModel() const
 {
     return &d->m_treemodel;
 }
