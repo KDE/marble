@@ -32,9 +32,11 @@ endif( NOT QTONLY AND NOT KDE4_FOUND)
 #### Python support ####
 set(PythonSupport_FOUND FALSE)
 
+if( NOT QTONLY )
 macro_log_feature(EXPERIMENTAL_PYTHON_BINDINGS "Experimental Python binding support for the Marble library" "Experimental Python binding support for the Marble library"
   "http://techbase.kde.org/Development/Languages/Python" FALSE ""
   "Experimental Python binding support for the Marble library. To activate it pass -DEXPERIMENTAL_PYTHON_BINDINGS=TRUE to cmake.")
+endif()
 
 if(EXPERIMENTAL_PYTHON_BINDINGS)
     macro_optional_find_package(PythonLibrary)
@@ -52,15 +54,19 @@ if(EXPERIMENTAL_PYTHON_BINDINGS)
         message(STATUS "The version of PyQt found is too old. 4.8.4 or later is required.")
         set(PYQT4_FOUND)
     endif(PYQT4_FOUND AND PYQT4_VERSION STRLESS "040804")
-    macro_log_feature(PYQT4_FOUND "PyQt4" "PyQt4 was not found.  It is needed by marble python plugins to run. " "http://www.riverbankcomputing.co.uk/software/pyqt/intro" FALSE)
+    if( NOT QTONLY )
+      macro_log_feature(PYQT4_FOUND "PyQt4" "PyQt4 was not found.  It is needed by marble python plugins to run. " "http://www.riverbankcomputing.co.uk/software/pyqt/intro" FALSE)
+    endif()
 
     if (PYTHONLIBRARY_FOUND AND SIP_FOUND AND PYQT4_FOUND)
       set(PythonSupport_FOUND TRUE)
     endif (PYTHONLIBRARY_FOUND AND SIP_FOUND AND PYQT4_FOUND)
 
-    macro_log_feature(PythonSupport_FOUND "Python" "KDE Python support"
+    if( NOT QTONLY )
+      macro_log_feature(PythonSupport_FOUND "Python" "KDE Python support"
       "http://techbase.kde.org/Development/Languages/Python" FALSE ""
       "Needed for Python bindings to the marble widget.")
+    endif()
 endif(EXPERIMENTAL_PYTHON_BINDINGS)
 
 #### End Python support ####
