@@ -201,6 +201,8 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
 
     Ui::GraticuleConfigWidget *ui_configWidget;
     QDialog *m_configDialog;
+
+    QString m_utmBandLetters;
 };
 
 }

@@ -118,6 +118,12 @@ void GraticulePlugin::initialize ()
     
     initLineMaps( GeoDataCoordinates::defaultNotation() );                
 
+    m_shadowPen = QPen( Qt::NoPen );
+
+    m_utmBandLetters = "CDEFGHJKLMNPQRSTUVWX???";
+
+    readSettings();
+
     m_isInitialized = true;
 }
 
@@ -299,26 +305,25 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
 {
     GeoDataLatLonAltBox viewLatLonAltBox = viewport->viewLatLonAltBox();
 
+    painter->setPen( gridCirclePen );
+    // painter->setPen( QPen( QBrush( Qt::white ), 0.75 ) );
+
     // Render UTM grid zones
     if ( m_currentNotation == GeoDataCoordinates::UTM ) {
         renderLatitudeLine( painter, 84.0, viewLatLonAltBox );
 
         renderLongitudeLines( painter, viewLatLonAltBox,
                     6.0, 6.0, 10.0, LineStart | IgnoreXMargin );
-        renderLatitudeLines( painter, viewLatLonAltBox, 8.0 );
+        renderLatitudeLines( painter, viewLatLonAltBox, 8.0 /*,
+                             LineStart | IgnoreYMargin */ );
 
         return;
     }
 
     // Render the normal grid
 
-    painter->setPen( gridCirclePen );
-    // painter->setPen( QPen( QBrush( Qt::white ), 0.75 ) );
-
     // calculate the angular distance between coordinate lines of the normal grid
     qreal normalDegreeStep = 360.0 / m_normalLineMap.lowerBound(viewport->radius()).value();
-
-    GeoDataLatLonAltBox viewLatLonAltBox = viewport->viewLatLonAltBox();
 
     renderLongitudeLines( painter, viewLatLonAltBox,
                           normalDegreeStep, normalDegreeStep,
@@ -485,7 +490,7 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
     
     if ( m_currentNotation == GeoDataCoordinates::UTM ) {
     	if ( northLineLat > 84.0 )
-	    	northLineLat = 84.0;
+	    	northLineLat = 76.0;
 	    	
 	    if ( southLineLat < -80.0 )
 	    	southLineLat = -80.0;
@@ -497,10 +502,15 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
 
     while ( itStep < northLineLat ) {
         // Create a matching label
-        QString label = GeoDataCoordinates::latToString( itStep, 
-                            notation, GeoDataCoordinates::Degree, 
-                            -1, 'g' );
-
+        QString label;
+        
+        if ( notation == GeoDataCoordinates::UTM ) {
+           	int bandLetterIndex = static_cast<int>( itStep / 8.0 ) + 10;
+            label = m_utmBandLetters.at( bandLetterIndex );
+        } else {
+            label = GeoDataCoordinates::latToString( itStep, notation,
+                                 GeoDataCoordinates::Degree, -1, 'g' );
+        }
         // No additional labels for the equator
         if ( labelPositionFlags.testFlag( LineCenter ) && itStep == 0.0 ) {
             label.clear();
@@ -508,8 +518,8 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
 
         // Paint all latitude coordinate lines except for the equator
         if ( itStep == 0.0 && m_currentNotation == GeoDataCoordinates::DMS ) {
-			itStep += step;
-			continue;
+            itStep += step;
+            continue;
         }
         
         renderLatitudeLine( painter, itStep, viewLatLonAltBox, label, labelPositionFlags );
@@ -543,9 +553,16 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
         while ( itStep < eastLineLon ) {
             // Create a matching label
-            QString label = GeoDataCoordinates::lonToString( itStep, 
-                                notation, GeoDataCoordinates::Degree, 
-                                -1, 'g' );
+            QString label;
+            // FIXME: East of 66° zones are notated in degrees.
+            if ( notation == GeoDataCoordinates::UTM ) {
+                int zoneNumber = static_cast<int>( itStep / 6.0 ) + 30;
+                label = QString::number( zoneNumber );
+            } else {
+                label = GeoDataCoordinates::lonToString( itStep,
+                                  notation, GeoDataCoordinates::Degree,
+                                  -1, 'g' );
+            }
 
             // No additional labels for the prime meridian and the antimeridian
 
