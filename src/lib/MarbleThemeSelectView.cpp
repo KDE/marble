@@ -121,8 +121,15 @@ MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
     setSelectionMode( QAbstractItemView::SingleSelection );
     loadFavorites();
 
+#ifdef Q_WS_MAEMO_5
+    // The pressed signal on Maemo interfers with touch-based
+    // scrolling, leading to sluggish behavior
     connect( this, SIGNAL( activated( QModelIndex ) ),
                    SLOT( selectedMapTheme( QModelIndex ) ) );
+#else //  Q_WS_MAEMO_5
+    connect( this, SIGNAL( pressed( QModelIndex ) ),
+                   SLOT( selectedMapTheme( QModelIndex ) ) );
+#endif //  Q_WS_MAEMO_5
     connect( this, SIGNAL( customContextMenuRequested( QPoint ) ),
                    SLOT( showContextMenu( QPoint ) ) );
 }
