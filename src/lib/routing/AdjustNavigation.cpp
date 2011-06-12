@@ -106,7 +106,7 @@ void AdjustNavigationPrivate::moveOnBorderToCenter( GeoDataCoordinates position,
 
     m_widget->screenCoordinates( centerLon, centerLat, centerX, centerY );
 
-    const qreal borderRatio = 0.33;
+    const qreal borderRatio = 0.25;
     //defining the default border distance from map center
     int shiftX = qRound( centerX * borderRatio );
     int shiftY = qRound( centerY * borderRatio );

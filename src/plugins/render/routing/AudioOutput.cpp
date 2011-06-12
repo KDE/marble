@@ -103,7 +103,7 @@ QString AudioOutputPrivate::distanceAudioFile( qreal dest )
 
 QString AudioOutputPrivate::turnTypeAudioFile( RoutingInstruction::TurnType turnType, qreal distance )
 {
-    QMap<RoutingInstruction::TurnType, QString> const & map = distance < 50 ? m_turnTypeMap : m_announceMap;
+    QMap<RoutingInstruction::TurnType, QString> const & map = distance < 75 ? m_turnTypeMap : m_announceMap;
     if ( map.contains( turnType ) ) {
         return audioFile( map[turnType] );
     }
@@ -196,7 +196,7 @@ void AudioOutput::update( const Route &route, qreal distance )
     }
 
     bool const announcement = ( d->m_lastDistance == 0 || d->m_lastDistance > 850 ) && distance <= 850;
-    bool const turn = ( d->m_lastDistance == 0 || d->m_lastDistance > 50 ) && distance <= 50;
+    bool const turn = ( d->m_lastDistance == 0 || d->m_lastDistance > 75 ) && distance <= 75;
     if ( announcement || turn ) {
         if ( !d->m_output || d->m_output->currentSource().fileName().isEmpty() ) {
             d->setupAudio();
