@@ -12,5 +12,11 @@ if(liblocation_FOUND)
      add_subdirectory( maemo )
 endif(liblocation_FOUND)
 
+find_package(QtLocation)
+if(QtLocation_FOUND)
+     message( STATUS "Building with QtLocation support")
+     add_subdirectory( qtmobility )
+endif(QtLocation_FOUND)
+
 # experimental implementation
 # add_subdirectory( geoclue )
