@@ -39,6 +39,7 @@ GeoDataDocument* BookmarkManagerPrivate::createEmptyBookmarkDocument()
     GeoDataFolder* folder = new GeoDataFolder;
     folder->setName( QObject::tr( "Default" ) );
     GeoDataDocument* result = new GeoDataDocument;
+    result->setDocumentRole( BookmarkDocument );
     result->append( folder );
     return result;
 }
@@ -106,6 +107,7 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
         delete d->m_bookmarkDocument;
         d->m_bookmarkDocument = dynamic_cast<GeoDataDocument*>( parser.releaseDocument() );
         Q_ASSERT( d->m_bookmarkDocument );
+        d->m_bookmarkDocument->setDocumentRole( BookmarkDocument );
 
         foreach( GeoDataFolder* folder, d->m_bookmarkDocument->folderList() )
         {

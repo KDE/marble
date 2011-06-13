@@ -80,6 +80,7 @@ PositionTracking::PositionTracking( FileManager *fileManager,
              this, SIGNAL( statusChanged(PositionProviderStatus) ) );
 
     d->m_document     = new GeoDataDocument();
+    d->m_document->setDocumentRole( TrackingDocument );
     d->m_document->setName("Position Tracking");
 
     // First point is current position

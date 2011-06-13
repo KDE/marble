@@ -324,7 +324,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme )
     // load new standard Placemarks
     foreach(const QString& container, loadList) {
         loadList.pop_front();
-        d->m_fileManager->addFile( container );
+        d->m_fileManager->addFile( container, MapDocument );
     }
 
     mDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
@@ -594,12 +594,12 @@ void MarbleModel::setLegend( QTextDocument * legend )
 
 void MarbleModel::addGeoDataFile( const QString& filename )
 {
-    d->m_fileManager->addFile( filename );
+    d->m_fileManager->addFile( filename, UserDocument );
 }
 
 void MarbleModel::addGeoDataString( const QString& data, const QString& key )
 {
-    d->m_fileManager->addData( key, data );
+    d->m_fileManager->addData( key, data, UserDocument );
 }
 
 void MarbleModel::removeGeoData( const QString& fileName )

@@ -12,6 +12,8 @@
 #ifndef MARBLE_FILEMANAGER_H
 #define MARBLE_FILEMANAGER_H
 
+#include "GeoDataTypes.h"
+
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
@@ -57,7 +59,7 @@ class FileManager : public QObject
     /**
      * Loads a new file into the manager.
      */
-    void addFile( const QString &fileName );
+    void addFile( const QString &fileName, DocumentRole role );
 
     /**
     * removes an existing file from the manager
@@ -67,7 +69,7 @@ class FileManager : public QObject
     /**
     * add Data containing KML code as string
     */
-    void addData( const QString &name, const QString &data );
+    void addData( const QString &name, const QString &data, DocumentRole role );
 
     void saveFile( int index );
     void closeFile( int index );

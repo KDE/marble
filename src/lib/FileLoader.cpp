@@ -33,18 +33,20 @@ namespace Marble
 // distance of 180deg in arcminutes
 const qreal INT2RAD = M_PI / 10800.0;
 
-FileLoader::FileLoader( QObject* parent, const QString& file )
+FileLoader::FileLoader( QObject* parent, const QString& file, DocumentRole role = UnknownDocument )
     : QThread( parent ),
       m_filepath( file ),
       m_contents( QString() ),
+      m_documentRole( role ),
       m_document( 0 )
 {
 }
 
-FileLoader::FileLoader( QObject* parent, const QString& contents, const QString& file )
+FileLoader::FileLoader( QObject* parent, const QString& contents, const QString& file, DocumentRole role = UnknownDocument)
     : QThread( parent ),
       m_filepath( file ),
       m_contents( contents ),
+      m_documentRole( role ),
       m_document( 0 )
 {
 }
@@ -108,16 +110,8 @@ void FileLoader::run()
                     cacheoutdated = true;
             }
 
-            bool loadok = false;
-
             if ( !cacheoutdated ) {
-                loadok = loadFile( defaultCacheName );
-                if ( loadok )
-                    emit newGeoDataDocumentAdded( m_document );
-            }
-            mDebug() << "Loading ended" << loadok;
-            if ( loadok ) {
-                mDebug() << "placemarksLoaded";
+                loadFile( defaultCacheName );
             }
         }
         else {
@@ -170,6 +164,7 @@ void FileLoader::importKml( const QString& filename )
     Q_ASSERT( document );
 
     m_document = static_cast<GeoDataDocument*>( document );
+    m_document->setDocumentRole( m_documentRole );
     m_document->setFileName( m_filepath );
     setupStyle( m_document, m_document );
 
@@ -196,6 +191,7 @@ void FileLoader::importKmlFromData()
     Q_ASSERT( document );
 
     m_document = static_cast<GeoDataDocument*>( document );
+    m_document->setDocumentRole( m_documentRole );
     m_document->setFileName( m_filepath );
     setupStyle( m_document, m_document );
 
@@ -206,7 +202,7 @@ void FileLoader::importKmlFromData()
     emit newGeoDataDocumentAdded( m_document );
 }
 
-bool FileLoader::loadFile( const QString &filename )
+void FileLoader::loadFile( const QString &filename )
 {
     QFile file( filename );
     file.open( QIODevice::ReadOnly );
@@ -217,7 +213,7 @@ bool FileLoader::loadFile( const QString &filename )
     in >> magic;
     if ( magic != MarbleMagicNumber ) {
         qDebug( "Bad file format!" );
-        return false;
+        return;
     }
 
     // Read the version
@@ -225,7 +221,7 @@ bool FileLoader::loadFile( const QString &filename )
     in >> version;
     if ( version < 015 ) {
         qDebug( "Bad file - too old!" );
-        return false;
+        return;
     }
     /*
       if (version > 002) {
@@ -234,7 +230,7 @@ bool FileLoader::loadFile( const QString &filename )
       }
     */
     m_document = new GeoDataDocument();
-
+    m_document->setDocumentRole( m_documentRole );
     m_document->setFileName( m_filepath );
 
     in.setVersion( QDataStream::Qt_4_2 );
@@ -280,7 +276,7 @@ bool FileLoader::loadFile( const QString &filename )
     m_document->setVisible( false );
     setupStyle( m_document, m_document );
     createFilterProperties( m_document );
-    return true;
+    emit newGeoDataDocumentAdded( m_document );
 }
 
 void FileLoader::saveFile( const QString& filename )
@@ -348,6 +344,7 @@ void FileLoader::loadPntFile( const QString &fileName )
     stream.setByteOrder( QDataStream::LittleEndian );
 
     m_document = new GeoDataDocument();
+    m_document->setDocumentRole( m_documentRole );
     m_document->setFileName( fileName );
 
     short  header;

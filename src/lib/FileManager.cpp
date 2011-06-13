@@ -72,7 +72,7 @@ QStringList FileManager::containers() const
     return retList + d->m_pathList;
 }
 
-void FileManager::addFile( const QString& filepath )
+void FileManager::addFile( const QString& filepath, DocumentRole role )
 {
     if ( !containers().contains( filepath ) ) {
         mDebug() << "adding container:" << filepath;
@@ -84,18 +84,18 @@ void FileManager::addFile( const QString& filepath )
             d->m_t = new QTime();
             d->m_t->start();
         }
-        FileLoader* loader = new FileLoader( this, filepath );
+        FileLoader* loader = new FileLoader( this, filepath, role );
         appendLoader( loader );
         d->m_pathList.append( filepath );
     }
 }
 
-void FileManager::addData( const QString &name, const QString &data )
+void FileManager::addData( const QString &name, const QString &data, DocumentRole role )
 {
     if ( d->m_model ) {
         d->m_model->connectTree( false );
     }
-    FileLoader* loader = new FileLoader( this, data, name );
+    FileLoader* loader = new FileLoader( this, data, name, role );
     appendLoader( loader );
 }
 

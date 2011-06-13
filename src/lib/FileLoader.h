@@ -10,6 +10,8 @@
 #ifndef MARBLE_FILELOADER_H
 #define MARBLE_FILELOADER_H
 
+#include "GeoDataTypes.h"
+
 #include <QtCore/QThread>
 #include <QtCore/QString>
 
@@ -22,8 +24,8 @@ class FileLoader : public QThread
 {
     Q_OBJECT
     public:
-        FileLoader( QObject* parent, const QString& file );
-        FileLoader( QObject* parent, const QString& contents, const QString& name );
+        FileLoader( QObject* parent, const QString& file, DocumentRole role );
+        FileLoader( QObject* parent, const QString& contents, const QString& name, DocumentRole role );
         virtual ~FileLoader();
 
         void run();
@@ -35,7 +37,7 @@ class FileLoader : public QThread
     private:
         void importKml( const QString& filename );
         void importKmlFromData();
-        bool loadFile(const QString &filename );
+        void loadFile(const QString &filename );
         void saveFile(const QString& filename );
         void savePlacemarks(QDataStream &out, const GeoDataContainer *container);
         void loadPntFile( const QString &fileName );
@@ -48,6 +50,7 @@ class FileLoader : public QThread
 
         QString m_filepath;
         QString m_contents;
+        DocumentRole m_documentRole;
         GeoDataDocument *m_document;
 };
 
