@@ -29,7 +29,7 @@ class AlternativeRoutesModelPrivate;
 class RouteRequest;
 class GeoDataDocument;
 
-class AlternativeRoutesModel : public QAbstractListModel
+class MARBLE_EXPORT AlternativeRoutesModel : public QAbstractListModel
 {
     Q_OBJECT
 
