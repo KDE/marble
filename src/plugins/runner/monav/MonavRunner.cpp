@@ -132,11 +132,17 @@ GeoDataLineString* MonavRunnerPrivate::retrieveRoute( RouteRequest *route, QVect
         for ( int i = 0; i < reply.pathEdges.size(); ++i ) {
             QString road = reply.nameStrings[reply.pathEdges[i].name];
             QString type = reply.typeStrings[reply.pathEdges[i].type];
+            RoutingWaypoint::JunctionType junction = RoutingWaypoint::Other;
+            if ( type == "roundabout" && reply.pathEdges[i].branchingPossible ) {
+                junction = RoutingWaypoint::Roundabout;
+            }
             for ( unsigned int l = 0; l < reply.pathEdges[i].length; ++k, ++l ) {
                 qreal lon = reply.pathNodes[k].longitude;
                 qreal lat = reply.pathNodes[k].latitude;
                 RoutingPoint point( lon, lat );
-                RoutingWaypoint waypoint( point, RoutingWaypoint::Other, "", type, -1, road );
+                bool const last = l == reply.pathEdges[i].length - 1;
+                RoutingWaypoint::JunctionType finalJunction = last ? junction : RoutingWaypoint::Other;
+                RoutingWaypoint waypoint( point, finalJunction, "", type, -1, road );
                 waypoints.push_back( waypoint );
             }
         }

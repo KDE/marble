@@ -29,14 +29,27 @@ RoutingInstruction::RoutingInstruction( const RoutingWaypoint &item ) :
 
 bool RoutingInstruction::append( const RoutingWaypoint &item )
 {
+    if ( m_points.size() && m_points.last().roadType() != "roundabout" && item.roadType() == "roundabout" ) {
+        // Entering a roundabout. Merge with previous segment to avoid 'Enter the roundabout' instructions
+        m_points.push_back( item );
+        return true;
+    }
+
+    if ( m_points.size() && m_points.last().roadType() == "roundabout" && item.roadType() != "roundabout" ) {
+        // Exiting a roundabout
+        m_points.push_back( item );
+        return false;
+    }
+
     m_points.push_back( item );
 
     if ( item.junctionType() == RoutingWaypoint::Roundabout ) {
+        // Passing a roundabout exit
         ++m_roundaboutExit;
         return true;
     }
 
-    return item.roadName() == roadName();
+    return item.roadType() == "roundabout" || item.roadName() == roadName();
 }
 
 QString RoutingInstruction::roadName() const
@@ -224,8 +237,9 @@ qreal RoutingInstruction::distanceToEnd() const
 
 QString RoutingInstruction::nextRoadInstruction() const
 {
-    // Unused so far, but may come in handy after string freeze.
-    QObject::tr( "Enter the roundabout." );
+    if ( roadType() == "roundabout" ) {
+        return QObject::tr( "Enter the roundabout." );
+    }
 
     if ( roadType() == "motorway_link" ) {
         QStringList motorways = QStringList() << "motorway" << "motorway_link";
