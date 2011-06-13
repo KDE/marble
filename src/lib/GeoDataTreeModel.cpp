@@ -444,6 +444,14 @@ void GeoDataTreeModel::removeDocument( int index )
     endResetModel();
 }
 
+void GeoDataTreeModel::removeDocument( GeoDataDocument *document )
+{
+    int index = d->m_rootDocument->childPosition( document );
+    if ( index != -1 ) {
+        removeDocument( index );
+    }
+}
+
 void GeoDataTreeModel::update()
 {
 //    mDebug() << "updating GeoDataTreeModel";

@@ -76,7 +76,9 @@ class GeoDataTreeModel : public QAbstractItemModel
 
     void removeDocument( int index );
 
-  public Q_SLOTS:
+    void removeDocument( GeoDataDocument* document );
+
+public Q_SLOTS:
     void update();
     
  private:

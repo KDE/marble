@@ -324,10 +324,8 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme )
         d->m_fileManager->removeFile( container );
     }
     // load new standard Placemarks
-    foreach(const QString& container, loadList) {
-        loadList.pop_front();
-        d->m_fileManager->addFile( container, MapDocument );
-    }
+    d->m_fileManager->addFile( loadList, MapDocument );
+    loadList.clear();
 
     mDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
     emit themeChanged( mapTheme->head()->mapThemeId() );

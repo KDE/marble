@@ -32,7 +32,8 @@ class FileManagerPrivate
 public:
     FileManagerPrivate( MarbleModel* model )
         : m_model( model ),
-        m_t ( 0 )
+        m_t ( 0 ),
+        m_multipleFiles( false )
     {
     }
 
@@ -41,6 +42,7 @@ public:
     QStringList m_pathList;
     QList < GeoDataDocument* > m_fileItemList;
     QTime *m_t;
+    bool m_multipleFiles;
 };
 }
 
@@ -75,10 +77,10 @@ void FileManager::addFile( const QString& filepath, DocumentRole role )
 {
     if ( !containers().contains( filepath ) ) {
         mDebug() << "adding container:" << filepath;
-        if ( d->m_model ) {
-            d->m_model->connectTree( false );
-        }
         if (d->m_t == 0) {
+            if ( d->m_multipleFiles ) {
+                d->m_model->connectTree( false );
+            }
             mDebug() << "Starting placemark loading timer";
             d->m_t = new QTime();
             d->m_t->start();
@@ -89,11 +91,18 @@ void FileManager::addFile( const QString& filepath, DocumentRole role )
     }
 }
 
+void FileManager::addFile( const QStringList& filepaths, DocumentRole role )
+{
+    if ( filepaths.size() > 1 ) {
+        d->m_multipleFiles = true;
+    }
+    foreach(const QString& file, filepaths) {
+        addFile( file, role );
+    }
+}
+
 void FileManager::addData( const QString &name, const QString &data, DocumentRole role )
 {
-    if ( d->m_model ) {
-        d->m_model->connectTree( false );
-    }
     FileLoader* loader = new FileLoader( this, data, name, role );
     appendLoader( loader );
 }
@@ -123,13 +132,14 @@ void FileManager::removeFile( const QString& key )
 
 void FileManager::saveFile( int index )
 {
+    Q_UNUSED(index)
 }
 
 void FileManager::closeFile( int index )
 {
     mDebug() << "FileManager::closeFile " << d->m_fileItemList.at( index )->fileName();
     if ( index < d->m_fileItemList.size() ) {
-        d->m_model->treeModel()->removeDocument( index );
+        d->m_model->treeModel()->removeDocument( d->m_fileItemList.at( index ) );
         emit fileRemoved( index );
         delete d->m_fileItemList.at( index );
         d->m_fileItemList.removeAt( index );
@@ -169,7 +179,7 @@ void FileManager::cleanupLoader( FileLoader* loader )
         d->m_pathList.removeAll( loader->path() );
         delete loader;
     }
-    if (d->m_loaderList.isEmpty() )
+    if ( d->m_loaderList.isEmpty() && d->m_multipleFiles )
     {
         mDebug() << "Empty loader list, connecting";
         QTime t;
@@ -177,6 +187,7 @@ void FileManager::cleanupLoader( FileLoader* loader )
         if ( d->m_model ) {
             d->m_model->connectTree( true );
         }
+        d->m_multipleFiles = false;
         mDebug() << "Done " << t.elapsed() << " ms";
         qDebug() << "Finished loading all placemarks " << d->m_t->elapsed();
         delete d->m_t;
