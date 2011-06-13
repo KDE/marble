@@ -22,6 +22,13 @@
 #include <KPlotAxis>
 #include <AltitudeModel.h>
 #include <MarbleModel.h>
+#include <GeoDataParser.h>
+#include <QFile>
+
+#include "MarbleGraphicsGridLayout.h"
+#include "WidgetGraphicsItem.h"
+#include <QLabel>
+#include <QLayout>
 
 using namespace Marble;
 
@@ -44,26 +51,79 @@ bool AltitudeProfile::isInitialized() const
 void AltitudeProfile::initialize()
 {
     m_isInitialized = true;
+
+    connect( marbleModel()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ), SLOT( currentRouteChanged( GeoDataDocument* ) ) );
     connect( marbleModel()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ), SLOT( currentRouteChanged( GeoDataDocument* ) ) );
 
-    //marbleModel()->altitudeModel()->height(47.95, 13.23);
-    qDebug() << marbleModel()->altitudeModel()->height(47.8481, 13.0734);
-    qDebug() << marbleModel()->altitudeModel()->height(47.8478, 13.0731);
-    //POINT 322 13.0734 47.8481 height 285
-}
+    m_graph = new KPlotWidget();
+    m_graph->setAntialiasing( true );
+    m_graph->axis( KPlotWidget::TopAxis )->setVisible( false );
+    m_graph->axis( KPlotWidget::RightAxis )->setVisible( false );
+    m_graph->resetPlot();
+    //m_graph->axis( KPlotWidget::LeftAxis )->setLabel( QString() );
+    //m_graph->axis( KPlotWidget::LeftAxis )->setLabel(tr("Altitude"));
+    m_graph->axis( KPlotWidget::BottomAxis )->setTickLabelsShown(false);
 
+    m_plot = new KPlotObject(Qt::red, KPlotObject::Lines, 3);
+    m_graph->addPlotObject(m_plot);
+    m_graph->setMaximumSize( QSize( 300, 100 ) );
+    m_graph->setMinimumSize( QSize( 300, 100 ) );
+
+    m_stats = new QLabel("Stats");
+//     setContentSize( QSize( 400, 100 ) );
+    QWidget *w = new QWidget();
+    w->setMaximumSize( QSize( 400, 100 ) );
+    w->setMinimumSize( QSize( 400, 100 ) );
+    QHBoxLayout* l = new QHBoxLayout;
+    w->setLayout( l );
+    l->addWidget( m_graph, 3 );
+    l->addWidget( m_stats, 1 );
+
+    m_widgetItem = new WidgetGraphicsItem( this );
+    m_widgetItem->setWidget( w );
+
+    MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout( 1, 1 );
+    layout->addItem( m_widgetItem, 0, 0 );
+
+    setLayout( layout );
+
+#if 0
+    GeoDataParser parser( GeoData_UNKNOWN );
+
+    QFile file( "/home/niko/tracks/2011-06-12-mattighofen.gpx" );
+    file.open( QIODevice::ReadOnly );
+    Q_ASSERT( parser.read( &file ) );
+    GeoDataDocument* document = static_cast<GeoDataDocument*>( parser.releaseDocument() );
+    Q_ASSERT( document );
+    file.close();
+    GeoDataPlacemark* routePlacemark = document->placemarkList().first();
+    qDebug() << routePlacemark->geometry()->geometryId();
+    Q_ASSERT(routePlacemark->geometry()->geometryId() ==  GeoDataMultiGeometryId);
+    GeoDataMultiGeometry* routeWaypoints = static_cast<GeoDataMultiGeometry*>(routePlacemark->geometry());
+    qDebug() << "size" << routeWaypoints->size(); // << "length" << routeWaypoints->length( EARTH_RADIUS );
+    for(int i=0; i < routeWaypoints->size(); ++i) {
+        GeoDataGeometry* route2 = routeWaypoints->child(i);
+        qDebug() << "route2.geometryId" << route2->geometryId();
+        Q_ASSERT(route2->geometryId() == GeoDataLineStringId);
+        GeoDataLineString* routeWaypoints2 = static_cast<GeoDataLineString*>(route2);
+        qDebug() << "size" << routeWaypoints2->size() << "length" << routeWaypoints2->length(EARTH_RADIUS);
+        qreal previousAlt = 0;
+        qreal totalIncrease = 0;
+        for(int j=0; j< routeWaypoints2->size(); ++j) {
+            GeoDataCoordinates coordinate = routeWaypoints2->at( j );
+            qDebug() << coordinate.latitude(Marble::GeoDataCoordinates::Degree) << coordinate.longitude(Marble::GeoDataCoordinates::Degree) << coordinate.altitude();
+            if (previousAlt && coordinate.altitude() > previousAlt) {
+                totalIncrease += coordinate.altitude() - previousAlt;
+            }
+            previousAlt = coordinate.altitude();
+        }
+        qDebug() << "totalIncrease" << totalIncrease << "vs. 254m von garmin gemessen";
+    }
+#endif
+}
 void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
 {
-    marbleModel()->altitudeModel()->height(47.95, 13.23);
-    
-    KPlotWidget *graphWidget = new KPlotWidget();
-    graphWidget->setAntialiasing(true);
-    graphWidget->axis(KPlotWidget::TopAxis)->setVisible(false);
-    graphWidget->axis(KPlotWidget::RightAxis)->setVisible(false);
-    graphWidget->resetPlot();
-    graphWidget->axis(KPlotWidget::LeftAxis)->setLabel(QString());
-
-    KPlotObject* plot = new KPlotObject(Qt::red, KPlotObject::Lines, 3);
+    m_plot->clearPoints();
 
     qint32 minY = INT_MAX;
     qint32 maxY = 0;
@@ -75,7 +135,11 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
     GeoDataLineString* routeWaypoints = static_cast<GeoDataLineString*>(routePlacemark->geometry());
     qDebug() << routeWaypoints->length( EARTH_RADIUS );
     qreal totalIncrease = 0;
+    qreal totalIncreaseAvg = 0;
+    qreal totalDecreaseAvg = 0;
     qreal lastAltitude = -100000;
+    qreal lastAvgAltitude = -100000;
+    QList<qreal> allAltitudes;
     for(int i=1; i < routeWaypoints->size(); ++i) {
         GeoDataCoordinates coordinate = routeWaypoints->at( i );
         GeoDataCoordinates coordinatePrev = routeWaypoints->at( i - 1 );
@@ -89,6 +153,21 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
         foreach(const qreal altitude, altitudes) {
             qDebug() << "POINT" << numDataPoints << coordinate.longitude(Marble::GeoDataCoordinates::Degree) << coordinate.latitude(Marble::GeoDataCoordinates::Degree)
                     << "height" << altitude;
+            allAltitudes << altitude;
+            if ( allAltitudes.count() >= 10 ) {
+                qreal avgAltitude = 0;
+                for(int j=0; j<10; ++j) {
+                    avgAltitude += allAltitudes.at(allAltitudes.count()-j-1);
+                }
+                avgAltitude = avgAltitude / 10;
+                if (lastAvgAltitude != -100000 && avgAltitude > lastAvgAltitude) {
+                    totalIncreaseAvg += avgAltitude-lastAvgAltitude;
+                }
+                if (lastAvgAltitude != -100000 && avgAltitude < lastAvgAltitude) {
+                    totalDecreaseAvg -= avgAltitude-lastAvgAltitude;
+                }
+                lastAvgAltitude = avgAltitude;
+            }
             if ( lastAltitude != -100000 && altitude > lastAltitude ) {
                 totalIncrease += altitude - lastAltitude;
                 qDebug() << "INCREASE +=" << altitude - lastAltitude << "totalIncrease is now" << totalIncrease;
@@ -96,44 +175,18 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
 
             double value = altitude;
             //qDebug() << "value" << value;
-            plot->addPoint(numDataPoints++, value);
+            m_plot->addPoint(numDataPoints++, value);
             if (value > maxY) maxY = value;
             if (value < minY) minY = value;
             lastAltitude = altitude;
         }
     }
     qDebug() << "TOTAL INCREASE" << totalIncrease;
+    qDebug() << "TOTAL INCREASE AVG" << totalIncreaseAvg;
 
-/*
-    QImage image;
-    image.load("/home/niko/kdesvn/build/marble-git/tools/altitude-reader/N47E013.hgt.png");
-    //foreach ( GeoDataPlacemark *placemark, route->placemarkList() ) {
-    GeoDataPlacemark* routePlacemark = route->placemarkList().first();
-    Q_ASSERT(routePlacemark->geometry()->geometryId() ==  GeoDataLineStringId);
-    GeoDataLineString* routeWaypoints = static_cast<GeoDataLineString*>(routePlacemark->geometry());
-    mDebug() << routeWaypoints->length( EARTH_RADIUS );
-    for(int i=0; i < routeWaypoints->size(); ++i) {
-        GeoDataCoordinates coordinate = routeWaypoints->at( i );
-        //coordinate.altitude();
-        int x = 1200 * (coordinate.longitude(Marble::GeoDataCoordinates::Degree)-13);
-        int y = 1200 * (1-(coordinate.latitude(Marble::GeoDataCoordinates::Degree)-47));
-        uint altitude = image.pixel(x, y) - 0xFF000000;
-        mDebug() << numDataPoints << coordinate.longitude(Marble::GeoDataCoordinates::Degree) << coordinate.latitude(Marble::GeoDataCoordinates::Degree)
-                 << x << y << altitude;
+    m_graph->setLimits( 0, numDataPoints, minY - minY / 5, maxY + maxY / 5 );
 
-        double value = altitude;
-        plot->addPoint(numDataPoints++, value);
-        if (value > maxY) maxY = value;
-        if (value < minY) minY = value;
-    }
-*/
-
-    graphWidget->setLimits(0, numDataPoints, minY - minY / 5, maxY + maxY / 5);
-    graphWidget->addPlotObject(plot);
-    graphWidget->axis(KPlotWidget::LeftAxis)->setLabel(tr("Altitude"));
-    graphWidget->axis(KPlotWidget::BottomAxis)->setTickLabelsShown(false);
-    graphWidget->update();
-    graphWidget->show();
+    m_stats->setText( tr( "Gain:<br>%0m<br>Loss:<br>%1m" ).arg( totalIncreaseAvg ).arg( totalDecreaseAvg ) );
 }
 
 
@@ -160,11 +213,6 @@ QString AltitudeProfile::guiString() const
 QString AltitudeProfile::name() const
 {
     return QString( "Altitude Profile" );
-}
-
-void AltitudeProfile::paintContent(GeoPainter* painter, ViewportParams* viewport, const QString& renderPos, GeoSceneLayer* layer)
-{
-    painter->drawRect( QRectF( QPoint( 10, 10 ), QPoint( 100, 100 ) ) );
 }
 
 Q_EXPORT_PLUGIN2( AltitudeProfile, Marble::AltitudeProfile )
