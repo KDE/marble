@@ -30,9 +30,9 @@ void RunnerTask::run()
         watchdog.stop(); // completed within timeout
     } else {
         mDebug() << "Timeout reached while waiting for result. Killing the runner.";
-        runner()->deleteLater();
     }
 
+    runner()->deleteLater();
     emit finished( this );
 }
 

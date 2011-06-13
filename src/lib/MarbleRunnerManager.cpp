@@ -145,6 +145,7 @@ void MarbleRunnerManager::reverseGeocoding( const GeoDataCoordinates &coordinate
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::ReverseGeocoding );
     foreach( RunnerPlugin* plugin, plugins ) {
         MarbleAbstractRunner* runner = plugin->newRunner();
+        runner->setParent( this );
         connect( runner, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
                  this, SLOT( addReverseGeocodingResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
         runner->setModel( d->m_marbleModel );
@@ -178,6 +179,7 @@ void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Search );
     foreach( RunnerPlugin* plugin, plugins ) {
         MarbleAbstractRunner* runner = plugin->newRunner();
+        runner->setParent( this );
         connect( runner, SIGNAL( searchFinished( QVector<GeoDataPlacemark*> ) ),
                  this, SLOT( addSearchResult( QVector<GeoDataPlacemark*> ) ) );
         runner->setModel( d->m_marbleModel );
@@ -238,6 +240,7 @@ void MarbleRunnerManager::retrieveRoute( RouteRequest *request )
 
         started = true;
         MarbleAbstractRunner* runner = plugin->newRunner();
+        runner->setParent( this );
         connect( runner, SIGNAL( routeCalculated( GeoDataDocument* ) ),
                  this, SLOT( addRoutingResult( GeoDataDocument* ) ) );
         runner->setModel( d->m_marbleModel );
