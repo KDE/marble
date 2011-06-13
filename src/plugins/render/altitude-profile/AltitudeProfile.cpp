@@ -88,6 +88,8 @@ void AltitudeProfile::initialize()
     currentRouteChanged( marbleModel()->routingManager()->alternativeRoutesModel()->currentRoute() );
     connect( marbleModel()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ), SLOT( currentRouteChanged( GeoDataDocument* ) ) );
 
+    connect( marbleModel()->altitudeModel(), SIGNAL( loadCompleted() ), SLOT( altitudeDataLoadCompleted() ) );
+
 #if 0
     GeoDataParser parser( GeoData_UNKNOWN );
 
@@ -122,9 +124,18 @@ void AltitudeProfile::initialize()
     }
 #endif
 }
+
+void AltitudeProfile::altitudeDataLoadCompleted()
+{
+    currentRouteChanged( marbleModel()->routingManager()->alternativeRoutesModel()->currentRoute() );
+}
+
 void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
 {
     m_plot->clearPoints();
+    m_stats->setText( QString() );
+
+    if (!route) return;
 
     qint32 minY = INT_MAX;
     qint32 maxY = 0;
@@ -148,7 +159,7 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
     Q_ASSERT(routePlacemark);
     Q_ASSERT(routePlacemark->geometry()->geometryId() ==  GeoDataLineStringId);
     GeoDataLineString* routeWaypoints = static_cast<GeoDataLineString*>(routePlacemark->geometry());
-    qDebug() << routeWaypoints->length( EARTH_RADIUS );
+    //qDebug() << routeWaypoints->length( EARTH_RADIUS );
     qreal totalIncrease = 0;
     qreal totalIncreaseAvg = 0;
     qreal totalDecreaseAvg = 0;
@@ -166,8 +177,8 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
             coordinate.longitude(Marble::GeoDataCoordinates::Degree)
         );
         foreach(const qreal altitude, altitudes) {
-            qDebug() << "POINT" << numDataPoints << coordinate.longitude(Marble::GeoDataCoordinates::Degree) << coordinate.latitude(Marble::GeoDataCoordinates::Degree)
-                    << "height" << altitude;
+            //qDebug() << "POINT" << numDataPoints << coordinate.longitude(Marble::GeoDataCoordinates::Degree) << coordinate.latitude(Marble::GeoDataCoordinates::Degree)
+            //        << "height" << altitude;
             allAltitudes << altitude;
             if ( allAltitudes.count() >= 10 ) {
                 qreal avgAltitude = 0;
@@ -185,7 +196,7 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
             }
             if ( lastAltitude != -100000 && altitude > lastAltitude ) {
                 totalIncrease += altitude - lastAltitude;
-                qDebug() << "INCREASE +=" << altitude - lastAltitude << "totalIncrease is now" << totalIncrease;
+                //qDebug() << "INCREASE +=" << altitude - lastAltitude << "totalIncrease is now" << totalIncrease;
             }
 
             double value = altitude;
@@ -196,8 +207,8 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
             lastAltitude = altitude;
         }
     }
-    qDebug() << "TOTAL INCREASE" << totalIncrease;
-    qDebug() << "TOTAL INCREASE AVG" << totalIncreaseAvg;
+    //qDebug() << "TOTAL INCREASE" << totalIncrease;
+    //qDebug() << "TOTAL INCREASE AVG" << totalIncreaseAvg;
 
     m_graph->setLimits( 0, numDataPoints, minY - minY / 5, maxY + maxY / 5 );
 

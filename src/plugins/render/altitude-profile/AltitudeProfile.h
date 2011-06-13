@@ -43,6 +43,7 @@ public:
 
 private slots:
     void currentRouteChanged( GeoDataDocument* );
+    void altitudeDataLoadCompleted();
 
 private:
     bool m_isInitialized;

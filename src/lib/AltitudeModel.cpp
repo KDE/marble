@@ -43,8 +43,8 @@ AltitudeModel::AltitudeModel(const MapThemeManager*const mapThemeManager, HttpDo
 //     setTextureLayerSettings( textureLayerSettings );
     m_tileLoader = new TileLoader( downloadManager, mapThemeManager );
     updateTextureLayers();
-//     connect( d->m_tileLoader, SIGNAL( tileCompleted( TileId, TileId )),
-//              SLOT( updateTile( TileId, TileId )));
+    connect( m_tileLoader, SIGNAL( tileCompleted( TileId, QImage ) ),
+             SLOT( tileCompleted( TileId, QImage ) ) );
 }
 
 //copied from TileLoader
@@ -123,7 +123,7 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
         ret += (qreal)pixel * (1-dx) * (1-dy);
     }
 
-    qDebug() << lat << lon << "altitude" << ret;
+    //qDebug() << lat << lon << "altitude" << ret;
     return ret;
 }
 
@@ -134,14 +134,14 @@ QList<qreal> AltitudeModel::heightProfile( qreal fromLat, qreal fromLon, qreal t
     const int numTilesX = TileLoaderHelper::levelToColumn( m_textureLayer->levelZeroColumns(), tileZoomLevel );
 
     qreal distPerPixel = (qreal)360 / ( width * numTilesX );
-    qDebug() << "heightProfile" << fromLat << fromLon << toLat << toLon << "distPerPixel" << distPerPixel;
+    //qDebug() << "heightProfile" << fromLat << fromLon << toLat << toLon << "distPerPixel" << distPerPixel;
 
     qreal lat = fromLat;
     qreal lon = fromLon;
     char dirLat = fromLat < toLat ? 1 : -1;
     char dirLon = fromLon < toLon ? 1 : -1;
     qreal k = ( fromLon - toLon ) / ( fromLat - toLat );
-    qDebug() << "dirLat" << QString::number(dirLat) << "dirLon" << QString::number(dirLon) << "k" << k;
+    //qDebug() << "dirLat" << QString::number(dirLat) << "dirLon" << QString::number(dirLon) << "k" << k;
     QList<qreal> ret;
     while ( lat*dirLat <= toLat*dirLat && lon*dirLon <= toLon*dirLon ) {
         ret << height( lat, lon );
@@ -153,8 +153,14 @@ QList<qreal> AltitudeModel::heightProfile( qreal fromLat, qreal fromLon, qreal t
             lon += distPerPixel * dirLon;
         }
     }
-    qDebug() << ret;
+    //qDebug() << ret;
     return ret;
+}
+
+void AltitudeModel::tileCompleted( const TileId & tileId, const QImage &image )
+{
+    m_cache.insert( tileId, new QImage( image ) );
+    emit loadCompleted();
 }
 
 }

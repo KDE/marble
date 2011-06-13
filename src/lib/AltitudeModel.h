@@ -48,6 +48,12 @@ public:
     qreal height(qreal lat, qreal lon);
     QList<qreal> heightProfile( qreal fromLat, qreal fromLon, qreal toLat, qreal toLon );
 
+Q_SIGNALS:
+    void loadCompleted();
+
+private Q_SLOTS:
+    void tileCompleted( const TileId & tileId, const QImage &image );
+
 private:
     void updateTextureLayers();
 
