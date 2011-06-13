@@ -476,15 +476,19 @@ void RoutingPlugin::initialize()
 {
     QWidget *widget = new QWidget;
     d->m_widget.setupUi( widget );
-    PositionProviderPlugin* activePlugin = marbleModel()->positionTracking()->positionProviderPlugin();
-    d->m_widget.gpsButton->setChecked( activePlugin != 0 );
-    d->m_widget.routingButton->setEnabled( false );
-    connect( d->m_widget.instructionLabel, SIGNAL( linkActivated( QString ) ),
-             this, SLOT( reverseRoute() ) );
-
     d->m_widgetItem = new WidgetGraphicsItem( this );
     d->m_widgetItem->setWidget( widget );
     d->m_widgetItem->setCacheMode( MarbleGraphicsItem::DeviceCoordinateCache );
+
+    PositionProviderPlugin* activePlugin = marbleModel()->positionTracking()->positionProviderPlugin();
+    d->updateGpsButton( activePlugin );
+    connect( marbleModel()->positionTracking(),
+             SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
+             this, SLOT( updateGpsButton( PositionProviderPlugin* ) ) );
+
+    d->m_widget.routingButton->setEnabled( false );
+    connect( d->m_widget.instructionLabel, SIGNAL( linkActivated( QString ) ),
+             this, SLOT( reverseRoute() ) );
 
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
@@ -518,10 +522,6 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
     if ( widget && !d->m_marbleWidget ) {
         d->m_marbleWidget = widget;
         d->m_routingModel = d->m_marbleWidget->model()->routingManager()->routingModel();
-
-        connect( d->m_marbleWidget->model()->positionTracking(),
-                 SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
-                 this, SLOT( updateGpsButton( PositionProviderPlugin* ) ) );
 
         connect( d->m_widget.routingButton, SIGNAL( clicked( bool ) ),
                  this, SLOT( toggleGuidanceMode( bool ) ) );
