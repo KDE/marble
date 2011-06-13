@@ -165,6 +165,8 @@ MarbleModel::MarbleModel( QObject *parent )
             this, SIGNAL( modelChanged() ) );
     connect(&d->m_treemodel, SIGNAL( modelReset() ),
             this, SIGNAL( modelChanged() ) );
+    connect(&d->m_treemodel, SIGNAL( treeChanged() ),
+            this, SIGNAL( modelChanged() ) );
 
     // A new instance of FileStorageWatcher.
     // The thread will be started at setting persistent tile cache size.
@@ -324,10 +326,8 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme )
         d->m_fileManager->removeFile( container );
     }
     // load new standard Placemarks
-    foreach(const QString& container, loadList) {
-        loadList.pop_front();
-        d->m_fileManager->addFile( container, MapDocument );
-    }
+    d->m_fileManager->addFile( loadList, MapDocument );
+    loadList.clear();
 
     mDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
     emit themeChanged( mapTheme->head()->mapThemeId() );

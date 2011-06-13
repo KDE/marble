@@ -76,9 +76,16 @@ class GeoDataTreeModel : public QAbstractItemModel
 
     void removeDocument( int index );
 
-  public Q_SLOTS:
+    void removeDocument( GeoDataDocument* document );
+
+public Q_SLOTS:
     void update();
     
+signals:
+    /// insert and remove row don't trigger any signal that proxies forward
+    /// this signal will refresh geometry layer and placemark layout
+    void treeChanged();
+
  private:
     Q_DISABLE_COPY( GeoDataTreeModel )
     class Private;
