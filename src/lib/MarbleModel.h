@@ -304,7 +304,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     // the following method is a bit of a hack...
     // make it private and document the class using it:
     friend class FileManager;
-    void connectTree( bool connect ) const;
+    void connectTree( bool connect );
 
     void addDownloadPolicies( GeoSceneDocument *mapTheme );
     MarbleModelPrivate  * const d;

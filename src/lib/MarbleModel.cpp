@@ -514,10 +514,11 @@ Planet* MarbleModel::planet() const
     return d->m_planet;
 }
 
-void MarbleModel::connectTree( bool connect ) const
+void MarbleModel::connectTree( bool connect )
 {
     if ( connect ) {
         d->m_descendantproxy.setSourceModel( &d->m_treemodel );
+        emit modelChanged();
     } else {
         d->m_descendantproxy.setSourceModel( &d->m_dummytree );
     }
