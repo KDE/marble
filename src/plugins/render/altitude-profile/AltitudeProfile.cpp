@@ -53,9 +53,6 @@ void AltitudeProfile::initialize()
 {
     m_isInitialized = true;
 
-    connect( marbleModel()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ), SLOT( currentRouteChanged( GeoDataDocument* ) ) );
-    connect( marbleModel()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ), SLOT( currentRouteChanged( GeoDataDocument* ) ) );
-
     m_graph = new KPlotWidget();
     m_graph->setAntialiasing( true );
     m_graph->axis( KPlotWidget::TopAxis )->setVisible( false );
@@ -71,7 +68,6 @@ void AltitudeProfile::initialize()
     m_graph->setMinimumSize( QSize( 300, 100 ) );
 
     m_stats = new QLabel("Stats");
-//     setContentSize( QSize( 400, 100 ) );
     QWidget *w = new QWidget();
     w->setMaximumSize( QSize( 400, 100 ) );
     w->setMinimumSize( QSize( 400, 100 ) );
@@ -87,6 +83,10 @@ void AltitudeProfile::initialize()
     layout->addItem( m_widgetItem, 0, 0 );
 
     setLayout( layout );
+
+
+    currentRouteChanged( marbleModel()->routingManager()->alternativeRoutesModel()->currentRoute() );
+    connect( marbleModel()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ), SLOT( currentRouteChanged( GeoDataDocument* ) ) );
 
 #if 0
     GeoDataParser parser( GeoData_UNKNOWN );
