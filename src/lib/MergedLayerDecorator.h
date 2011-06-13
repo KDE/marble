@@ -53,6 +53,7 @@ class MergedLayerDecorator
 
     void initCityLights();
 
+    void paintCityLights( QImage *tileImage, const TileId &id );
     void paintSunShading( QImage *tileImage, const TileId &id );
     void paintTileId( QImage *tileImage, const TileId &id ) const;
 

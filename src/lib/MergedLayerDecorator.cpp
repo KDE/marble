@@ -124,12 +124,16 @@ QImage MergedLayerDecorator::merge( const TileId id, const QVector<QSharedPointe
     }
 
     if ( m_sunLocator->getShow() ) {
-
         // Initialize citylights layer if it hasn't happened already
         if ( !m_cityLightsTheme ) {
             initCityLights();
         }
-        paintSunShading( &resultImage, id );
+
+        if ( m_sunLocator->getCitylights() && m_sunLocator->planet()->id() == "earth" ) {
+            paintCityLights( &resultImage, id );
+        } else {
+            paintSunShading( &resultImage, id );
+        }
     }
 
     if ( m_showTileId ) {
@@ -156,15 +160,10 @@ QImage MergedLayerDecorator::loadDataset( const TileId &id )
     return image;
 }
 
-void MergedLayerDecorator::paintSunShading( QImage *tileImage, const TileId &id )
+void MergedLayerDecorator::paintCityLights( QImage *tileImage, const TileId &id )
 {
     if ( tileImage->depth() != 32 )
         return;
-
-    // Initialize citylights layer if it hasn't happened already
-    if ( !m_cityLightsTheme ) {
-        initCityLights();
-    }
 
     // TODO add support for 8-bit maps?
     // add sun shading
@@ -183,134 +182,153 @@ void MergedLayerDecorator::paintSunShading( QImage *tileImage, const TileId &id 
     const int n = maxDivisor( 30, tileWidth );
     const int ipRight = n * (int)( tileWidth / n );
 
-    //Don't use city lights on non-earth planets!
-    if ( m_sunLocator->getCitylights() && m_sunLocator->planet()->id() == "earth" ) {
+    const QImage nighttile = loadDataset( id );
 
-        const QImage nighttile = loadDataset( id );
+    for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
+        const qreal lat = lat_scale * ( id.y() * tileHeight + cur_y ) - 0.5*M_PI;
+        const qreal a = sin( ( lat+DEG2RAD * m_sunLocator->getLat() )/2.0 );
+        const qreal c = cos(lat)*cos( -DEG2RAD * m_sunLocator->getLat() );
 
-        for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
-            const qreal lat = lat_scale * ( id.y() * tileHeight + cur_y ) - 0.5*M_PI;
-            const qreal a = sin( ( lat+DEG2RAD * m_sunLocator->getLat() )/2.0 );
-            const qreal c = cos(lat)*cos( -DEG2RAD * m_sunLocator->getLat() );
+        QRgb* scanline  = (QRgb*)tileImage->scanLine( cur_y );
+        const QRgb* nscanline = (QRgb*)nighttile.scanLine( cur_y );
 
-            QRgb* scanline  = (QRgb*)tileImage->scanLine( cur_y );
-            const QRgb* nscanline = (QRgb*)nighttile.scanLine( cur_y );
+        qreal lastShade = -10.0;
 
-            qreal lastShade = -10.0;
+        int cur_x = 0;
 
-            int cur_x = 0;
+        while ( cur_x < tileWidth ) {
 
-            while ( cur_x < tileWidth ) {
+            const bool interpolate = ( cur_x != 0 && cur_x < ipRight && cur_x + n < tileWidth );
 
-                const bool interpolate = ( cur_x != 0 && cur_x < ipRight && cur_x + n < tileWidth );
+            qreal shade = 0;
 
-                qreal shade = 0;
+            if ( interpolate ) {
+                const int check = cur_x + n;
+                const qreal checklon   = lon_scale * ( id.x() * tileWidth + check );
+                shade = m_sunLocator->shading( checklon, a, c );
 
-                if ( interpolate ) {
-                    const int check = cur_x + n;
-                    const qreal checklon   = lon_scale * ( id.x() * tileWidth + check );
-                    shade = m_sunLocator->shading( checklon, a, c );
-
-                    // if the shading didn't change across the interpolation
-                    // interval move on and don't change anything.
-                    if ( shade == lastShade && shade == 1.0 ) {
-                        scanline += n;
-                        nscanline += n;
-                        cur_x += n;
-                        continue;
-                    }
-                    if ( shade == lastShade && shade == 0.0 ) {
-                        for ( int t = 0; t < n; ++t ) {
-                            m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
-                            ++scanline;
-                            ++nscanline;
-                        }
-                        cur_x += n; 
-                        continue;
-                    }
-                    for ( int t = 0; t < n ; ++t ) {
-                        qreal lon   = lon_scale * ( id.x() * tileWidth + cur_x );
-                        shade = m_sunLocator->shading( lon, a, c );
+                // if the shading didn't change across the interpolation
+                // interval move on and don't change anything.
+                if ( shade == lastShade && shade == 1.0 ) {
+                    scanline += n;
+                    nscanline += n;
+                    cur_x += n;
+                    continue;
+                }
+                if ( shade == lastShade && shade == 0.0 ) {
+                    for ( int t = 0; t < n; ++t ) {
                         m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
                         ++scanline;
                         ++nscanline;
-                        ++cur_x;
                     }
+                    cur_x += n;
+                    continue;
                 }
-
-                else {
-                    // Make sure we don't exceed the image memory
-                    if ( cur_x < tileWidth ) {
-                        qreal lon   = lon_scale * ( id.x() * tileWidth + cur_x );
-                        shade = m_sunLocator->shading( lon, a, c );
-                        m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
-                        ++scanline;
-                        ++nscanline;
-                        ++cur_x;
-                    }
+                for ( int t = 0; t < n ; ++t ) {
+                    qreal lon   = lon_scale * ( id.x() * tileWidth + cur_x );
+                    shade = m_sunLocator->shading( lon, a, c );
+                    m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
+                    ++scanline;
+                    ++nscanline;
+                    ++cur_x;
                 }
-                lastShade = shade;
             }
+
+            else {
+                // Make sure we don't exceed the image memory
+                if ( cur_x < tileWidth ) {
+                    qreal lon   = lon_scale * ( id.x() * tileWidth + cur_x );
+                    shade = m_sunLocator->shading( lon, a, c );
+                    m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
+                    ++scanline;
+                    ++nscanline;
+                    ++cur_x;
+                }
+            }
+            lastShade = shade;
         }
-    } else {
-        for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
-            const qreal lat = lat_scale * ( id.y() * tileHeight + cur_y ) - 0.5*M_PI;
-            const qreal a = sin( (lat+DEG2RAD * m_sunLocator->getLat() )/2.0 );
-            const qreal c = cos(lat)*cos( -DEG2RAD * m_sunLocator->getLat() );
+    }
+}
 
-            QRgb* scanline = (QRgb*)tileImage->scanLine( cur_y );
+void MergedLayerDecorator::paintSunShading( QImage *tileImage, const TileId &id )
+{
+    if ( tileImage->depth() != 32 )
+        return;
 
-            qreal lastShade = -10.0;
+    // TODO add support for 8-bit maps?
+    // add sun shading
+    const qreal  global_width  = tileImage->width()
+        * TileLoaderHelper::levelToColumn( m_cityLightsTextureLayer->levelZeroColumns(),
+                                           id.zoomLevel() );
+    const qreal  global_height = tileImage->height()
+        * TileLoaderHelper::levelToRow( m_cityLightsTextureLayer->levelZeroRows(),
+                                        id.zoomLevel() );
+    const qreal lon_scale = 2*M_PI / global_width;
+    const qreal lat_scale = -M_PI / global_height;
+    const int tileHeight = tileImage->height();
+    const int tileWidth = tileImage->width();
 
-            int cur_x = 0;
+    // First we determine the supporting point interval for the interpolation.
+    const int n = maxDivisor( 30, tileWidth );
+    const int ipRight = n * (int)( tileWidth / n );
 
-            while ( cur_x < tileWidth ) {
+    for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
+        const qreal lat = lat_scale * ( id.y() * tileHeight + cur_y ) - 0.5*M_PI;
+        const qreal a = sin( (lat+DEG2RAD * m_sunLocator->getLat() )/2.0 );
+        const qreal c = cos(lat)*cos( -DEG2RAD * m_sunLocator->getLat() );
 
-                const bool interpolate = ( cur_x != 0 && cur_x < ipRight && cur_x + n < tileWidth );
+        QRgb* scanline = (QRgb*)tileImage->scanLine( cur_y );
 
-                qreal shade = 0;
+        qreal lastShade = -10.0;
 
-                if ( interpolate ) {
-                    const int check = cur_x + n;
-                    const qreal checklon   = lon_scale * ( id.x() * tileWidth + check );
-                    shade = m_sunLocator->shading( checklon, a, c );
+        int cur_x = 0;
 
-                    // if the shading didn't change across the interpolation
-                    // interval move on and don't change anything.
-                    if ( shade == lastShade && shade == 1.0 ) {
-                        scanline += n;
-                        cur_x += n;
-                        continue;
-                    }
-                    if ( shade == lastShade && shade == 0.0 ) {
-                        for ( int t = 0; t < n; ++t ) {
-                            m_sunLocator->shadePixel( *scanline, shade );
-                            ++scanline;
-                        }
-                        cur_x += n; 
-                        continue;
-                    }
-                    for ( int t = 0; t < n ; ++t ) {
-                        const qreal lon   = lon_scale * ( id.x() * tileWidth + cur_x );
-                        shade = m_sunLocator->shading( lon, a, c );
+        while ( cur_x < tileWidth ) {
+
+            const bool interpolate = ( cur_x != 0 && cur_x < ipRight && cur_x + n < tileWidth );
+
+            qreal shade = 0;
+
+            if ( interpolate ) {
+                const int check = cur_x + n;
+                const qreal checklon   = lon_scale * ( id.x() * tileWidth + check );
+                shade = m_sunLocator->shading( checklon, a, c );
+
+                // if the shading didn't change across the interpolation
+                // interval move on and don't change anything.
+                if ( shade == lastShade && shade == 1.0 ) {
+                    scanline += n;
+                    cur_x += n;
+                    continue;
+                }
+                if ( shade == lastShade && shade == 0.0 ) {
+                    for ( int t = 0; t < n; ++t ) {
                         m_sunLocator->shadePixel( *scanline, shade );
                         ++scanline;
-                        ++cur_x;
                     }
+                    cur_x += n;
+                    continue;
                 }
-
-                else {
-                    // Make sure we don't exceed the image memory
-                    if ( cur_x < tileWidth ) {
-                        const qreal lon   = lon_scale * ( id.x() * tileWidth + cur_x );
-                        shade = m_sunLocator->shading( lon, a, c );
-                        m_sunLocator->shadePixel( *scanline, shade );
-                        ++scanline;
-                        ++cur_x;
-                    }
+                for ( int t = 0; t < n ; ++t ) {
+                    const qreal lon   = lon_scale * ( id.x() * tileWidth + cur_x );
+                    shade = m_sunLocator->shading( lon, a, c );
+                    m_sunLocator->shadePixel( *scanline, shade );
+                    ++scanline;
+                    ++cur_x;
                 }
-                lastShade = shade;
             }
+
+            else {
+                // Make sure we don't exceed the image memory
+                if ( cur_x < tileWidth ) {
+                    const qreal lon   = lon_scale * ( id.x() * tileWidth + cur_x );
+                    shade = m_sunLocator->shading( lon, a, c );
+                    m_sunLocator->shadePixel( *scanline, shade );
+                    ++scanline;
+                    ++cur_x;
+                }
+            }
+            lastShade = shade;
         }
     }
 }
