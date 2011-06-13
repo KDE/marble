@@ -54,7 +54,7 @@ p, li { white-space: pre-wrap; }
          <number>999999</number>
         </property>
         <property name="value">
-         <number>30</number>
+         <number>100</number>
         </property>
        </widget>
       </item>

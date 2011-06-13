@@ -182,7 +182,7 @@
  <group name="Cache" >
   <entry key="volatileTileCacheLimit" type="Int" >
    <label>Cache for tiles reserved in the physical memory.</label>
-   <default>30</default>
+   <default>100</default>
    <min>0</min>
    <max>999999</max>
   </entry>
