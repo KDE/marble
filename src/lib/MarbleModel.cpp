@@ -182,8 +182,16 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_fileManager = new FileManager( this );
     d->m_fileviewmodel.setFileManager( d->m_fileManager );
-    d->m_treemodel.setFileManager( d->m_fileManager );
+    connect( d->m_fileManager,    SIGNAL( fileAdded(int)),
+             &d->m_fileviewmodel, SLOT( append(int)) );
+    connect( d->m_fileManager,    SIGNAL( fileRemoved(int)),
+             &d->m_fileviewmodel, SLOT(remove(int)) );
 
+    d->m_treemodel.setFileManager( d->m_fileManager );
+    connect( d->m_fileManager, SIGNAL( fileAdded(int)),
+             &d->m_treemodel,  SLOT(addDocument(int)) );
+    connect( d->m_fileManager, SIGNAL( fileRemoved(int)),
+             &d->m_treemodel,  SLOT(removeDocument(int)) );
 
     d->m_positionTracking = new PositionTracking( d->m_fileManager, this );
 

@@ -433,13 +433,7 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
 
 void GeoDataTreeModel::setFileManager( FileManager *fileManager )
 {
-    disconnect( this, SLOT(addDocument(int)) );
-    disconnect( this, SLOT(removeDocument(int)) );
     d->m_fileManager = fileManager;
-    connect( d->m_fileManager, SIGNAL( fileAdded(int)),
-             this,          SLOT(addDocument(int)) );
-    connect( d->m_fileManager, SIGNAL( fileRemoved(int)),
-             this,          SLOT(removeDocument(int)) );
 }
 
 void GeoDataTreeModel::addDocument( int index )

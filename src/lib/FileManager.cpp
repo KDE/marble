@@ -16,7 +16,6 @@
 #include <QtCore/QTime>
 
 #include "FileLoader.h"
-#include "FileViewModel.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "GeoDataTreeModel.h"
