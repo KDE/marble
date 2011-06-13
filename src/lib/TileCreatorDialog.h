@@ -41,6 +41,9 @@ class MARBLE_EXPORT TileCreatorDialog : public QDialog
     void setProgress( int progress );
     void setSummary( const QString& name, const QString& description );
 
+private Q_SLOTS:
+    void cancelTileCreation();
+
  private:
     Q_DISABLE_COPY( TileCreatorDialog )
     TileCreatorDialogPrivate  * const d;
