@@ -16,6 +16,7 @@
 
 // Marble
 #include "MarbleWidget.h"
+#include "MarbleModel.h"
 #include "MapThemeManager.h"
 #include "MapThemeSortFilterProxyModel.h"
 #include "Planet.h"
@@ -37,17 +38,12 @@ class MapViewWidgetPrivate {
  public:
     MapViewWidgetPrivate( MapViewWidget *parent )
         : m_parent( parent ),
-          m_mapThemeManager( 0 ),
           m_celestialList( 0 )
     {
     }
 
     void setMapThemeModel( QStandardItemModel *mapThemeModel )
     {
-        if ( mapThemeModel != m_mapThemeModel ) {
-            delete m_mapThemeModel;
-        }
-
         m_mapThemeModel = mapThemeModel;
         m_mapSortProxy->setSourceModel( m_mapThemeModel );
         int currentIndex = m_mapViewUi.celestialBodyComboBox->currentIndex();
@@ -70,7 +66,6 @@ class MapViewWidgetPrivate {
     Ui::MapViewWidget  m_mapViewUi;
     MarbleWidget      *m_widget;
 
-    MapThemeManager        *m_mapThemeManager;
     QStandardItemModel     *m_mapThemeModel;
     MapThemeSortFilterProxyModel *m_mapSortProxy;
 
@@ -156,13 +151,8 @@ void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
     connect( this,        SIGNAL( selectMapTheme( const QString& ) ),
              d->m_widget, SLOT( setMapThemeId( const QString& ) ) );
 
-    // TODO: Creating a second MapThemeManager may not be the best solution here.
-    // MarbleModel also holds one with a QFileSystemWatcher.
-    if( !d->m_mapThemeManager ) {
-        d->m_mapThemeManager = new MapThemeManager();
-        d->setMapThemeModel( d->m_mapThemeManager->mapThemeModel() );
-        updateMapThemeView();
-    }
+    d->setMapThemeModel( widget->model()->mapThemeManager()->mapThemeModel() );
+    updateMapThemeView();
 }
 
 void MapViewWidget::updateMapThemeView()

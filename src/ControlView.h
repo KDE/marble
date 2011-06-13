@@ -32,7 +32,6 @@ class QTextDocument;
 namespace Marble
 {
 
-class MapThemeManager;
 class MarbleModel;
 class SunLocator;
 
@@ -132,7 +131,6 @@ class ControlView : public QWidget
     MarbleWidget      *m_marbleWidget;
     MarbleControlBox  *m_control;
     QSplitter         *m_splitter;
-    MapThemeManager   *m_mapThemeManager;
     QString            m_externalEditor;
 };
 

@@ -75,17 +75,13 @@ ControlView::ControlView( QWidget *parent )
 
     m_control->addMarbleWidget( m_marbleWidget );
 
-    // TODO: Creating a second MapThemeManager may not be the best solution here.
-    // MarbleModel also holds one with a QFileSystemWatcher.
-    m_mapThemeManager = new MapThemeManager;
-    
     connect( m_control, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
     connect( m_control, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
 }
 
 ControlView::~ControlView()
 {
-    delete m_mapThemeManager;
+    // nothing to do
 }
 
 QString ControlView::applicationVersion()
@@ -168,7 +164,7 @@ QString ControlView::defaultMapThemeId() const
     }
 
     QStringList installedThemes;
-    QList<GeoSceneDocument const*> themes = m_mapThemeManager->mapThemes();
+    QList<GeoSceneDocument const*> themes = m_marbleWidget->model()->mapThemeManager()->mapThemes();
     foreach(GeoSceneDocument const* theme, themes) {
         installedThemes << theme->head()->mapThemeId();
     }
