@@ -91,7 +91,6 @@ class MarbleModelPrivate
           m_treemodel(),
           m_descendantproxy(),
           m_sortproxy(),
-          m_dummytree(),
           m_placemarkselectionmodel( 0 ),
           m_positionTracking( 0 ),
           m_bookmarkManager( 0 ),
@@ -101,6 +100,7 @@ class MarbleModelPrivate
         m_sortproxy.setFilterFixedString( GeoDataTypes::GeoDataPlacemarkType );
         m_sortproxy.setFilterKeyColumn( 1 );
         m_sortproxy.setSourceModel( &m_descendantproxy );
+        m_descendantproxy.setSourceModel( &m_treemodel );
     }
 
     ~MarbleModelPrivate()
@@ -139,7 +139,6 @@ class MarbleModelPrivate
     GeoDataTreeModel         m_treemodel;
     KDescendantsProxyModel   m_descendantproxy;
     QSortFilterProxyModel    m_sortproxy;
-    GeoDataTreeModel         m_dummytree;
 
     // Selection handling
     QItemSelectionModel      m_placemarkselectionmodel;
@@ -512,16 +511,6 @@ PluginManager* MarbleModel::pluginManager() const
 Planet* MarbleModel::planet() const
 {
     return d->m_planet;
-}
-
-void MarbleModel::connectTree( bool connect )
-{
-    if ( connect ) {
-        d->m_descendantproxy.setSourceModel( &d->m_treemodel );
-        emit modelChanged();
-    } else {
-        d->m_descendantproxy.setSourceModel( &d->m_dummytree );
-    }
 }
 
 void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )

@@ -32,8 +32,7 @@ class FileManagerPrivate
 public:
     FileManagerPrivate( MarbleModel* model )
         : m_model( model ),
-        m_t ( 0 ),
-        m_multipleFiles( false )
+        m_t ( 0 )
     {
     }
 
@@ -42,7 +41,6 @@ public:
     QStringList m_pathList;
     QList < GeoDataDocument* > m_fileItemList;
     QTime *m_t;
-    bool m_multipleFiles;
 };
 }
 
@@ -78,9 +76,6 @@ void FileManager::addFile( const QString& filepath, DocumentRole role )
     if ( !containers().contains( filepath ) ) {
         mDebug() << "adding container:" << filepath;
         if (d->m_t == 0) {
-            if ( d->m_multipleFiles ) {
-                d->m_model->connectTree( false );
-            }
             mDebug() << "Starting placemark loading timer";
             d->m_t = new QTime();
             d->m_t->start();
@@ -93,9 +88,6 @@ void FileManager::addFile( const QString& filepath, DocumentRole role )
 
 void FileManager::addFile( const QStringList& filepaths, DocumentRole role )
 {
-    if ( filepaths.size() > 1 ) {
-        d->m_multipleFiles = true;
-    }
     foreach(const QString& file, filepaths) {
         addFile( file, role );
     }
@@ -179,15 +171,11 @@ void FileManager::cleanupLoader( FileLoader* loader )
         d->m_pathList.removeAll( loader->path() );
         delete loader;
     }
-    if ( d->m_loaderList.isEmpty() && d->m_multipleFiles )
+    if ( d->m_loaderList.isEmpty()  )
     {
         mDebug() << "Empty loader list, connecting";
         QTime t;
         t.start();
-        if ( d->m_model ) {
-            d->m_model->connectTree( true );
-        }
-        d->m_multipleFiles = false;
         mDebug() << "Done " << t.elapsed() << " ms";
         qDebug() << "Finished loading all placemarks " << d->m_t->elapsed();
         delete d->m_t;
