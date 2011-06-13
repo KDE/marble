@@ -187,7 +187,7 @@ MarbleModel::MarbleModel( QObject *parent )
     connect( d->m_fileManager,    SIGNAL( fileRemoved(int)),
              &d->m_fileviewmodel, SLOT(remove(int)) );
 
-    d->m_positionTracking = new PositionTracking( d->m_fileManager, this );
+    d->m_positionTracking = new PositionTracking( this );
 
     d->m_routingManager = new RoutingManager( d->m_parent, this );
 

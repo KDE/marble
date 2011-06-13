@@ -20,7 +20,7 @@
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
 #include "AbstractProjection.h"
-#include "FileManager.h"
+#include "MarbleModel.h"
 #include "MarbleMath.h"
 #include "MarbleDebug.h"
 #include "PositionProviderPlugin.h"
@@ -31,11 +31,10 @@ class PositionTrackingPrivate : public QObject
 {
     Q_OBJECT
     public:
-    PositionTrackingPrivate( FileManager *fileManager,
-                             QObject *parent )
-        : QObject( parent ),
+    PositionTrackingPrivate( MarbleModel *model )
+        : QObject( model ),
         m_document( 0 ),
-        m_fileManager( fileManager ),
+        m_marbleModel( model ),
         m_positionProvider( 0 )
     {
     }
@@ -53,7 +52,7 @@ class PositionTrackingPrivate : public QObject
 
     public:
     GeoDataDocument     *m_document;
-    FileManager         *m_fileManager;
+    MarbleModel         *m_marbleModel;
 
     GeoDataCoordinates  m_gpsCurrentPosition;
     GeoDataCoordinates  m_gpsPreviousPosition;

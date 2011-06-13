@@ -21,12 +21,12 @@
 namespace Marble
 {
 
-class FileManager;
 class GeoDataAccuracy;
 class GeoDataDocument;
 class GeoDataCoordinates;
 class PositionProviderPlugin;
 class PositionTrackingPrivate;
+class MarbleModel;
 
 class MARBLE_EXPORT PositionTracking : public QObject
 {
@@ -35,8 +35,7 @@ class MARBLE_EXPORT PositionTracking : public QObject
     Q_PROPERTY( PositionProviderPlugin* positionProviderPlugin READ positionProviderPlugin WRITE setPositionProviderPlugin NOTIFY positionProviderPluginChanged )
 
 public:
-    explicit PositionTracking( FileManager *fileManager,
-                          QObject *parent = 0 );
+    explicit PositionTracking( MarbleModel* model );
     ~PositionTracking();
 
     /**

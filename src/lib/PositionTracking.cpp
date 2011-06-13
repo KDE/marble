@@ -16,6 +16,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+#include "GeoDataTreeModel.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 #include "AbstractProjection.h"
@@ -69,9 +70,8 @@ void PositionTrackingPrivate::setStatus( PositionProviderStatus status )
     emit statusChanged( status );
 }
 
-PositionTracking::PositionTracking( FileManager *fileManager,
-                          QObject *parent )
-     : QObject( parent ), d (new PositionTrackingPrivate(fileManager, parent))
+PositionTracking::PositionTracking( MarbleModel *model )
+     : QObject( model ), d (new PositionTrackingPrivate( model ))
 {
 
     connect( d, SIGNAL( gpsLocation(GeoDataCoordinates,qreal) ),
@@ -117,7 +117,7 @@ PositionTracking::PositionTracking( FileManager *fileManager,
     placemark->setStyle( &d->m_document->style(style.styleId()));
     d->m_document->append(placemark);
 
-    d->m_fileManager->addGeoDataDocument(d->m_document);
+    d->m_marbleModel->treeModel()->addDocument(d->m_document);
 }
 
 
@@ -224,6 +224,7 @@ void PositionTracking::clearTrack()
     d->m_currentLineString = new GeoDataLineString;
     multiGeometry->clear();
     multiGeometry->append(d->m_currentLineString);
+    d->m_marbleModel->treeModel()->update();
 }
 
 bool PositionTracking::isTrackEmpty() const
