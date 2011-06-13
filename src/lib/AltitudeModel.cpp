@@ -37,6 +37,7 @@ namespace Marble {
 AltitudeModel::AltitudeModel(const MapThemeManager*const mapThemeManager, HttpDownloadManager*const downloadManager, MarbleModel*const model)
     : QObject(0), m_model(model)
 {
+    m_cache.setMaxCost(10); //keep 10 tiles in memory (~17MB)
     m_mapThemeManager = mapThemeManager;
     //connect( mapThemeManager, SIGNAL( themesChanged() ),
     //         this, SLOT( updateTextureLayers() ) );
