@@ -96,8 +96,10 @@ void MarbleMapPrivate::construct()
     m_parent->connect( &m_veccomposer, SIGNAL( datasetLoaded() ),
                        m_parent, SIGNAL( repaintNeeded() ));
 
-    m_parent->connect( m_model, SIGNAL( modelChanged() ),
-                       &m_placemarkLayout, SLOT( setCacheData() ) );
+    QObject::connect( m_model->placemarkSelectionModel(), SIGNAL( selectionChanged( QItemSelection, QItemSelection) ),
+                      &m_placemarkLayout,                 SLOT( requestStyleReset() ) );
+    QObject::connect( m_model->placemarkModel(),          SIGNAL( layoutChanged() ),
+                      &m_placemarkLayout,                 SLOT( requestStyleReset() ) );
 
     // FIXME: more on the spot update names and API
     QObject::connect ( &m_layerManager, SIGNAL( floatItemsChanged() ),

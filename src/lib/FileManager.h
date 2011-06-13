@@ -61,13 +61,6 @@ class FileManager : public QObject
      */
     void addFile( const QString &fileName, DocumentRole role );
 
-
-    /**
-     * Loads multiple files into the manager.
-     */
-    void addFile( const QStringList &fileNames, DocumentRole role );
-
-
     /**
     * removes an existing file from the manager
     */

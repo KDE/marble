@@ -61,6 +61,11 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
                                                            QItemSelection) ),
              this,               SLOT( requestStyleReset() ) );
 
+    connect( placemarkModel, SIGNAL(modelReset()),
+             this, SLOT(setCacheData()) );
+    connect( placemarkModel, SIGNAL(layoutChanged()),
+             this, SLOT(setCacheData()) );
+
 //  Old weightfilter array. Still here
 // to be able to compare performance
 /*

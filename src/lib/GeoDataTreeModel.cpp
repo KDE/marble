@@ -431,27 +431,17 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
 
 int GeoDataTreeModel::addDocument( GeoDataDocument *document )
 {
-    beginInsertRows( QModelIndex(), d->m_rootDocument->size(), d->m_rootDocument->size() );
+    beginResetModel();
     d->m_rootDocument->append( document ) ;
-    endInsertRows();
-    emit treeChanged();
+    endResetModel();
     return d->m_rootDocument->childPosition( document );
 }
 
 void GeoDataTreeModel::removeDocument( int index )
 {
-    beginRemoveRows( QModelIndex(), index, index);
+    beginResetModel();
     d->m_rootDocument->remove( index );
-    endRemoveRows();
-    emit treeChanged();
-}
-
-void GeoDataTreeModel::removeDocument( GeoDataDocument *document )
-{
-    int index = d->m_rootDocument->childPosition( document );
-    if ( index != -1 ) {
-        removeDocument( index );
-    }
+    endResetModel();
 }
 
 void GeoDataTreeModel::update()
