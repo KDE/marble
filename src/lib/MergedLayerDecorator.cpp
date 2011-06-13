@@ -73,13 +73,9 @@ void MergedLayerDecorator::initCityLights()
                                      sourceDir,
                                      installMap,
                                      "false" );
-
-            QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
-            tileCreatorDlg->setSummary( m_cityLightsTheme->head()->name(),
-                                        m_cityLightsTheme->head()->description() );
-            tileCreatorDlg->exec();
-            qDebug("Tile creation completed");
-            delete tileCreatorDlg;
+            tileCreator->start();
+            tileCreator->wait();
+            tileCreator->deleteLater();
         }
 
         m_cityLightsTextureLayer = static_cast<GeoSceneTexture*>(
