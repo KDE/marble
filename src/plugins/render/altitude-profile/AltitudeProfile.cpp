@@ -29,6 +29,7 @@
 #include "WidgetGraphicsItem.h"
 #include <QLabel>
 #include <QLayout>
+#include <GeoDataFolder.h>
 
 using namespace Marble;
 
@@ -130,7 +131,21 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
     quint32 numDataPoints = 0;
     qDebug() << "*************************";
 
-    GeoDataPlacemark* routePlacemark = route->placemarkList().first();
+    GeoDataPlacemark* routePlacemark = 0;
+    Q_ASSERT(route->size());
+    if ( !route->placemarkList().count() ) {
+        qDebug() << "no placemarks found?!";
+        for(int i=0; i<route->size(); ++i) {
+            qDebug() << "nodeType" << i << route->child( i )->nodeType();
+            if ( dynamic_cast<GeoDataFolder*>( route->child( i ) ) ) {
+                Q_ASSERT( static_cast<GeoDataFolder*>( route->child( i ) )->placemarkList().size() );
+                routePlacemark = static_cast<GeoDataFolder*>( route->child( i ) )->placemarkList().first();
+            }
+        }
+    } else {
+        routePlacemark = route->placemarkList().first();
+    }
+    Q_ASSERT(routePlacemark);
     Q_ASSERT(routePlacemark->geometry()->geometryId() ==  GeoDataLineStringId);
     GeoDataLineString* routeWaypoints = static_cast<GeoDataLineString*>(routePlacemark->geometry());
     qDebug() << routeWaypoints->length( EARTH_RADIUS );
