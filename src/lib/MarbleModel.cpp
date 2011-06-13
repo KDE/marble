@@ -165,6 +165,8 @@ MarbleModel::MarbleModel( QObject *parent )
             this, SIGNAL( modelChanged() ) );
     connect(&d->m_treemodel, SIGNAL( modelReset() ),
             this, SIGNAL( modelChanged() ) );
+    connect(&d->m_treemodel, SIGNAL( treeChanged() ),
+            this, SIGNAL( modelChanged() ) );
 
     // A new instance of FileStorageWatcher.
     // The thread will be started at setting persistent tile cache size.
