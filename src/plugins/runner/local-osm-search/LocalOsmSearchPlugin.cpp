@@ -28,23 +28,18 @@ LocalOsmSearchPlugin::LocalOsmSearchPlugin( QObject *parent ) :
     setNameId( "local-osm-search" );
     setDescription( tr( "Searches for addresses and points of interest in offline maps." ) );
     setGuiString( tr( "Offline OpenStreetMap Search")  );
+
+    m_watcher.addPath( MarbleDirs::localPath() + "/maps/earth/placemarks/" );
+    connect( &m_watcher, SIGNAL( directoryChanged( QString ) ), this, SLOT( updateDirectory( QString ) ) );
+    connect( &m_watcher, SIGNAL( fileChanged( QString ) ), this, SLOT( updateFile( QString ) ) );
 }
 
 MarbleAbstractRunner* LocalOsmSearchPlugin::newRunner() const
 {
     if ( !m_databaseLoaded ) {
         m_databaseLoaded = true;
-        QString base = MarbleDirs::localPath() + "/maps/earth/placemarks/";
-        addDatabaseDirectory( base );
-        QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotAndDotDot;
-        QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories | QDirIterator::FollowSymlinks;
-        QDirIterator iter( base, filters, flags );
-        while ( iter.hasNext() ) {
-            iter.next();
-            addDatabaseDirectory( iter.filePath() );
-        }
+        updateDatabase();
     }
-
     return new LocalOsmSearchRunner( &m_database );
 }
 
@@ -55,6 +50,32 @@ void LocalOsmSearchPlugin::addDatabaseDirectory( const QString &path ) const
     QStringList const files( directory.entryList( nameFilters, QDir::Files ) );
     foreach( const QString &file, files ) {
         m_database.addFile( directory.filePath( file ) );
+    }
+}
+
+void LocalOsmSearchPlugin::updateDirectory( const QString &dir ) const
+{
+    m_databaseLoaded = false;
+}
+
+void LocalOsmSearchPlugin::updateFile( const QString &file ) const
+{
+    if ( file.endsWith( ".sqlite" ) ) {
+        m_databaseLoaded = false;
+    }
+}
+
+void LocalOsmSearchPlugin::updateDatabase() const
+{
+    m_database.clear();
+    QString base = MarbleDirs::localPath() + "/maps/earth/placemarks/";
+    addDatabaseDirectory( base );
+    QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotAndDotDot;
+    QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories | QDirIterator::FollowSymlinks;
+    QDirIterator iter( base, filters, flags );
+    while ( iter.hasNext() ) {
+        iter.next();
+        addDatabaseDirectory( iter.filePath() );
     }
 }
 

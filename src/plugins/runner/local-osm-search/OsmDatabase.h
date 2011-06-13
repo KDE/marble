@@ -32,6 +32,9 @@ public:
     /** Open the given file. Previously opened files remain valid. */
     void addFile( const QString &file );
 
+    /** Remove all files */
+    void clear();
+
     /** Search the database for matching regions and placemarks */
     QVector<OsmPlacemark> find( MarbleModel* model, const QString &searchTerm );
 

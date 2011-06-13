@@ -15,6 +15,8 @@
 #include "RunnerPlugin.h"
 #include "OsmDatabase.h"
 
+#include <QtCore/QFileSystemWatcher>
+
 namespace Marble
 {
 
@@ -28,12 +30,20 @@ public:
 
     virtual MarbleAbstractRunner* newRunner() const;
 
+private Q_SLOTS:
+    void updateDirectory( const QString &directory ) const;
+
+    void updateFile( const QString &directory ) const;
+
 private:
     void addDatabaseDirectory( const QString &path ) const;
+
+    void updateDatabase() const;
 
     /** @todo: FIXME newRunner() is another virtual method that shouldn't be const */
     mutable bool m_databaseLoaded;
     mutable OsmDatabase m_database;
+    QFileSystemWatcher m_watcher;
 };
 
 }

@@ -266,4 +266,9 @@ QString OsmDatabase::wildcardQuery( const QString &term ) const
     }
 }
 
+void OsmDatabase::clear()
+{
+    m_databases.clear();
+}
+
 }
