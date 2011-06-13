@@ -276,7 +276,8 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
     painter->drawPolyline( waypoints );
     if ( m_viewportChanged ) {
-        m_routeRegion = painter->regionFromPolyline( waypoints, 8 );
+        int const offset = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 24 : 8;
+        m_routeRegion = painter->regionFromPolyline( waypoints, offset );
     }
 
 
