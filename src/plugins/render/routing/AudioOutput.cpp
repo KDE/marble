@@ -297,10 +297,10 @@ void AudioOutput::announceStart()
     }
 
     d->setupAudio();
-    d->enqueue( "Depart" );
-    if ( d->m_output ) {
-        d->m_output->play();
-    }
+//    d->enqueue( "Depart" );
+//    if ( d->m_output ) {
+//        d->m_output->play();
+//    }
 }
 
 void AudioOutput::announceDestination()
