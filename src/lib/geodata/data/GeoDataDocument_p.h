@@ -24,6 +24,7 @@ class GeoDataDocumentPrivate : public GeoDataContainerPrivate
 {
   public:
     GeoDataDocumentPrivate()
+    :  m_documentRole( UnknownDocument )
     {
     }
     
@@ -47,6 +48,7 @@ class GeoDataDocumentPrivate : public GeoDataContainerPrivate
     QMap<QString, GeoDataStyle> m_styleHash;
     QMap<QString, GeoDataStyleMap> m_styleMapHash;
     QString m_filename;
+    DocumentRole m_documentRole;
 };
 
 } // namespace Marble

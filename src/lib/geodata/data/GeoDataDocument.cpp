@@ -53,6 +53,16 @@ GeoDataDocumentPrivate* GeoDataDocument::p() const
     return static_cast<GeoDataDocumentPrivate*>(d);
 }
 
+DocumentRole GeoDataDocument::documentRole() const
+{
+    return p()->m_documentRole;
+}
+
+void GeoDataDocument::setDocumentRole( DocumentRole role )
+{
+    p()->m_documentRole = role;
+}
+
 QString GeoDataDocument::fileName() const
 {
     return p()->m_filename;

@@ -32,6 +32,7 @@
 
 #include "GeoDataContainer.h"
 #include "GeoDocument.h"
+#include "GeoDataTypes.h"
 
 namespace Marble
 {
@@ -60,6 +61,9 @@ public:
 
     /// Provides type information for downcasting a GeoData
     virtual bool isGeoDataDocument() const { return true; }
+
+    DocumentRole documentRole() const;
+    void setDocumentRole( DocumentRole role );
 
     /**
      * @brief The filename of the document
