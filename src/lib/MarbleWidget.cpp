@@ -11,8 +11,7 @@
 
 #include "MarbleWidget.h"
 
-#include <cmath>
-
+#include <QtCore/qmath.h>
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QHash>
 #include <QtCore/QSettings>
@@ -52,12 +51,6 @@
 
 namespace Marble
 {
-
-#ifdef Q_CC_MSVC
-# ifndef KDEWIN_MATH_H
-   static long double sqrt( int a ) { return sqrt( (long double)a ); }
-# endif
-#endif
 
 const int REPAINT_SCHEDULING_INTERVAL = 1000;
 
@@ -335,10 +328,10 @@ void MarbleWidget::setRadius( int radius )
 
 qreal MarbleWidget::moveStep()
 {
-    if ( radius() < sqrt( (qreal)(width() * width() + height() * height()) ) )
+    if ( radius() < qSqrt( (qreal)(width() * width() + height() * height()) ) )
         return 180.0 * 0.1;
     else
-        return 180.0 * atan( (qreal)width()
+        return 180.0 * qAtan( (qreal)width()
                      / (qreal)( 2 * radius() ) ) * 0.2;
 }
 
