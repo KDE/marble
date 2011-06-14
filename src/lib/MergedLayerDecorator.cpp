@@ -36,8 +36,9 @@
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
 
-#include <QtGui/QPainter>
+#include <QtCore/QMutexLocker>
 #include <QtCore/QPointer>
+#include <QtGui/QPainter>
 
 using namespace Marble;
 
@@ -48,12 +49,20 @@ MergedLayerDecorator::MergedLayerDecorator( TileLoader * const tileLoader,
       m_themeId(),
       m_showTileId( false ),
       m_cityLightsTheme( 0 ),
-      m_cityLightsTextureLayer( 0 )
+      m_cityLightsTextureLayer( 0 ),
+      m_initCityLightsMutex()
 {
 }
 
 void MergedLayerDecorator::initCityLights()
 {
+    QMutexLocker lock(&m_initCityLightsMutex);
+
+    if (m_cityLightsTheme) {
+        // theme has been loaded while we were waiting
+        return;
+    }
+
     // look for the texture layers inside the themes
     // As long as we don't have an Layer Management Class we just lookup 
     // the name of the layer that has the same name as the theme ID

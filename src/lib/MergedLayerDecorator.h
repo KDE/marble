@@ -16,6 +16,7 @@
 #ifndef MARBLE_MERGEDLAYERDECORATOR_H
 #define MARBLE_MERGEDLAYERDECORATOR_H
 
+#include <QtCore/QMutex>
 #include <QtCore/QSharedPointer>
 #include <QtCore/QVector>
 #include <QtGui/QImage>
@@ -63,6 +64,7 @@ class MergedLayerDecorator
     bool m_showTileId;
     GeoSceneDocument *m_cityLightsTheme;
     GeoSceneTexture *m_cityLightsTextureLayer;
+    QMutex m_initCityLightsMutex;
 };
 
 }
