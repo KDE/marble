@@ -89,6 +89,7 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
     textureY *= numTilesY * height / 180;
 
     qreal ret = 0;
+    bool hasHeight = false;
 
     for ( int i = 0; i < 4; ++i ) {
         const int x = static_cast<int>( textureX + ( i % 2 ) );
@@ -112,17 +113,21 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
 
         const qreal dx = ( textureX > (qreal)x ) ? textureX - (qreal)x : (qreal)x - textureX;
         const qreal dy = ( textureY > (qreal)y ) ? textureY - (qreal)y : (qreal)y - textureY;
-        //qDebug() << "dx" << dx << "dy" << dy;
+        qDebug() << "dx" << dx << "dy" << dy;
         Q_ASSERT( 0 <= dx && dx <= 1 );
         Q_ASSERT( 0 <= dy && dy <= 1 );
         unsigned int pixel;
         pixel = image->pixel( x % width, y % height );
         //qDebug() << "RGB" << qRed(pixel) << qGreen(pixel) << qBlue(pixel);
         pixel -= 0xFF000000; //fully opaque
-        //qDebug() << "got at x" << x % width << "y" << y % height << "a height of" << pixel;
-
-        ret += (qreal)pixel * (1-dx) * (1-dy);
+        if (pixel != 32768) { //no data?
+            //qDebug() << "got at x" << x % width << "y" << y % height << "a height of" << pixel;
+            ret += (qreal)pixel * (1-dx) * (1-dy);
+            hasHeight = true;
+        }
     }
+
+    if (!hasHeight) ret = 32768; //no data
 
     //qDebug() << lat << lon << "altitude" << ret;
     return ret;
@@ -145,7 +150,10 @@ QList<qreal> AltitudeModel::heightProfile( qreal fromLat, qreal fromLon, qreal t
     //qDebug() << "dirLat" << QString::number(dirLat) << "dirLon" << QString::number(dirLon) << "k" << k;
     QList<qreal> ret;
     while ( lat*dirLat <= toLat*dirLat && lon*dirLon <= toLon*dirLon ) {
-        ret << height( lat, lon );
+        qreal h = height( lat, lon );
+        if (h < 32000) {
+            ret << h;
+        }
         if ( k < 0.5 ) {
             lat += distPerPixel * dirLat;
             lon += distPerPixel * k;
