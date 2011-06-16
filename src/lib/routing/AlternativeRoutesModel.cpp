@@ -322,7 +322,7 @@ QVariant AlternativeRoutesModel::data ( const QModelIndex &index, int role ) con
 
 GeoDataDocument* AlternativeRoutesModel::route( int index )
 {
-    if ( index >= 0 && index <= d->m_routes.size() ) {
+    if ( index >= 0 && index < d->m_routes.size() ) {
         return d->m_routes.at(index);
     }
 
