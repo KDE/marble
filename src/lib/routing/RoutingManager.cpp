@@ -161,7 +161,7 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
 {
     QFile file( filename );
     if ( !file.open( QIODevice::ReadOnly ) ) {
-        mDebug() << "Can not read route state from " << file.fileName();
+        mDebug() << "Can not read route from " << file.fileName();
         return;
     }
 
@@ -190,7 +190,7 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
                 m_routeRequest->remove( i );
             }
         } else {
-            mDebug() << "Expected a GeoDataDocument, didn't get one though";
+            mDebug() << "Expected a GeoDataDocument with two children, didn't get one though";
         }
 
         GeoDataDocument* route = dynamic_cast<GeoDataDocument*>(&container->last());
@@ -198,13 +198,20 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
             m_alternativeRoutesModel->addRoute( route, AlternativeRoutesModel::Instant );
             m_alternativeRoutesModel->setCurrentRoute( 0 );
         } else {
-            mDebug() << "Expected a GeoDataDocument, didn't get one though";
+            mDebug() << "Expected a GeoDataDocument child, didn't get one though";
+            delete doc;
+            doc = 0;
         }
     } else {
         mDebug() << "Expected a GeoDataDocument, didn't get one though";
+        delete doc;
+        doc = 0;
     }
 
     file.close();
+    if ( !doc ) {
+        m_marbleModel->addGeoDataFile( filename );
+    }
 }
 
 RoutingManager::RoutingManager( MarbleModel *marbleModel, QObject *parent ) : QObject( parent ),
