@@ -131,8 +131,8 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *v
             texColorizer->colorize( viewParams );
         }
     } else {
-        QPainter painter( geoPainter->device() );
-        painter.setRenderHint( QPainter::SmoothPixmapTransform, highQuality );
+        geoPainter->save();
+        geoPainter->setRenderHint( QPainter::SmoothPixmapTransform, highQuality );
 
         for ( int tileY = minTileY; tileY <= maxTileY; ++tileY ) {
             for ( int tileX = minTileX; tileX <= maxTileX; ++tileX ) {
@@ -155,9 +155,11 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *v
                     m_cache->insert( cacheId, im );
                 }
 
-                painter.drawPixmap( rect.topLeft(), *im );
+                geoPainter->drawPixmap( rect.topLeft(), *im );
             }
         }
+
+        geoPainter->restore();
     }
 
     m_tileLoader->cleanupTilehash();
