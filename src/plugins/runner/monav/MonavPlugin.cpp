@@ -168,14 +168,17 @@ void MonavPluginPrivate::stopDaemon()
 void MonavPluginPrivate::loadMaps()
 {
     if ( m_maps.isEmpty() ) {
-        QString base = MarbleDirs::localPath() + "/maps/earth/monav/";
-        loadMap( base );
-        QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotAndDotDot;
-        QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories | QDirIterator::FollowSymlinks;
-        QDirIterator iter( base, filters, flags );
-        while ( iter.hasNext() ) {
-            iter.next();
-            loadMap( iter.filePath() );
+        QStringList const baseDirs = QStringList() << MarbleDirs::systemPath() << MarbleDirs::localPath();
+        foreach ( const QString &baseDir, baseDirs ) {
+            QString base = baseDir + "/maps/earth/monav/";
+            loadMap( base );
+            QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotAndDotDot;
+            QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories | QDirIterator::FollowSymlinks;
+            QDirIterator iter( base, filters, flags );
+            while ( iter.hasNext() ) {
+                iter.next();
+                loadMap( iter.filePath() );
+            }
         }
         // Prefer maps where bounding boxes are known
         qSort( m_maps.begin(), m_maps.end(), MonavMap::areaLessThan );

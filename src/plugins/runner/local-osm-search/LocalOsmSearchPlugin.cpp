@@ -53,7 +53,7 @@ void LocalOsmSearchPlugin::addDatabaseDirectory( const QString &path ) const
     }
 }
 
-void LocalOsmSearchPlugin::updateDirectory( const QString &dir ) const
+void LocalOsmSearchPlugin::updateDirectory( const QString & ) const
 {
     m_databaseLoaded = false;
 }
@@ -68,14 +68,17 @@ void LocalOsmSearchPlugin::updateFile( const QString &file ) const
 void LocalOsmSearchPlugin::updateDatabase() const
 {
     m_database.clear();
-    QString base = MarbleDirs::localPath() + "/maps/earth/placemarks/";
-    addDatabaseDirectory( base );
-    QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotAndDotDot;
-    QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories | QDirIterator::FollowSymlinks;
-    QDirIterator iter( base, filters, flags );
-    while ( iter.hasNext() ) {
-        iter.next();
-        addDatabaseDirectory( iter.filePath() );
+    QStringList const baseDirs = QStringList() << MarbleDirs::systemPath() << MarbleDirs::localPath();
+    foreach ( const QString &baseDir, baseDirs ) {
+        QString base = baseDir + "/maps/earth/placemarks/";
+        addDatabaseDirectory( base );
+        QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotAndDotDot;
+        QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories | QDirIterator::FollowSymlinks;
+        QDirIterator iter( base, filters, flags );
+        while ( iter.hasNext() ) {
+            iter.next();
+            addDatabaseDirectory( iter.filePath() );
+        }
     }
 }
 
