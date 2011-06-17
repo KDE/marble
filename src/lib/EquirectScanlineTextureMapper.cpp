@@ -18,9 +18,9 @@
 
 // Qt
 #include <QtCore/QRunnable>
+#include <QtGui/QPainter>
 
 // Marble
-#include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "ScanlineTextureMapperContext.h"
 #include "StackedTileLoader.h"
@@ -69,7 +69,7 @@ EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( StackedTileLoader 
              this, SIGNAL( tileUpdatesAvailable() ) );
 }
 
-void EquirectScanlineTextureMapper::mapTexture( GeoPainter *painter,
+void EquirectScanlineTextureMapper::mapTexture( QPainter *painter,
                                                 ViewParams *viewParams,
                                                 const QRect &dirtyRect,
                                                 TextureColorizer *texColorizer )

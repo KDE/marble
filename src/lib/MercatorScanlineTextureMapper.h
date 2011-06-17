@@ -29,7 +29,7 @@ class MercatorScanlineTextureMapper : public TextureMapperInterface
  public:
     explicit MercatorScanlineTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
 
-    virtual void mapTexture( GeoPainter *painter,
+    virtual void mapTexture( QPainter *painter,
                              ViewParams *viewParams,
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer );

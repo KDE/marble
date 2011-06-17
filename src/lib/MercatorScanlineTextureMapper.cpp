@@ -19,9 +19,9 @@
 
 // Qt
 #include <QtCore/QRunnable>
+#include <QtGui/QPainter>
 
 // Marble
-#include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "ScanlineTextureMapperContext.h"
 #include "StackedTileLoader.h"
@@ -70,7 +70,7 @@ MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( StackedTileLoader 
              this, SIGNAL( tileUpdatesAvailable() ) );
 }
 
-void MercatorScanlineTextureMapper::mapTexture( GeoPainter *painter,
+void MercatorScanlineTextureMapper::mapTexture( QPainter *painter,
                                                 ViewParams *viewParams,
                                                 const QRect &dirtyRect,
                                                 TextureColorizer *texColorizer )

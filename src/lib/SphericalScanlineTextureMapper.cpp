@@ -15,9 +15,9 @@
 #include <cmath>
 
 #include <QtCore/QRunnable>
+#include <QtGui/QPainter>
 
 #include "global.h"
-#include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "Quaternion.h"
 #include "ScanlineTextureMapperContext.h"
@@ -68,7 +68,7 @@ SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( StackedTileLoade
              this, SIGNAL( tileUpdatesAvailable() ) );
 }
 
-void SphericalScanlineTextureMapper::mapTexture( GeoPainter *painter,
+void SphericalScanlineTextureMapper::mapTexture( QPainter *painter,
                                                  ViewParams *viewParams,
                                                  const QRect &dirtyRect,
                                                  TextureColorizer *texColorizer )

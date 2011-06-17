@@ -31,7 +31,7 @@ class TileScalingTextureMapper : public TextureMapperInterface
                               QCache<TileId, QPixmap> *cache,
                               QObject *parent = 0 );
 
-    virtual void mapTexture( GeoPainter *painter,
+    virtual void mapTexture( QPainter *painter,
                              ViewParams *viewParams,
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer );
@@ -43,7 +43,7 @@ class TileScalingTextureMapper : public TextureMapperInterface
     void updateTiles();
 
  private:
-    void mapTexture( GeoPainter *painter,
+    void mapTexture( QPainter *painter,
                      ViewParams *viewParams,
                      TextureColorizer *texColorizer );
 

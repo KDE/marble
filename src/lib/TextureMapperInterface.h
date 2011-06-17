@@ -14,12 +14,12 @@
 
 #include <QtCore/QObject>
 
+class QPainter;
 class QRect;
 
 namespace Marble
 {
 
-class GeoPainter;
 class StackedTile;
 class StackedTileLoader;
 class TextureColorizer;
@@ -36,7 +36,7 @@ public:
 
     void setTileLevel( int tileLevel );
 
-    virtual void mapTexture( GeoPainter *painter,
+    virtual void mapTexture( QPainter *painter,
                              ViewParams *viewParams,
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer ) = 0;

@@ -38,7 +38,7 @@ class SphericalScanlineTextureMapper : public TextureMapperInterface
  public:
     explicit SphericalScanlineTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
 
-    virtual void mapTexture( GeoPainter *painter,
+    virtual void mapTexture( QPainter *painter,
                              ViewParams *viewParams,
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer );

@@ -21,7 +21,6 @@
 #include <QtGui/QPainter>
 
 // Marble
-#include "GeoPainter.h"
 #include "StackedTileLoader.h"
 #include "ViewParams.h"
 #include "TextureColorizer.h"
@@ -46,7 +45,7 @@ TileScalingTextureMapper::TileScalingTextureMapper( StackedTileLoader *tileLoade
              this, SLOT( updateTiles() ) );
 }
 
-void TileScalingTextureMapper::mapTexture( GeoPainter *painter,
+void TileScalingTextureMapper::mapTexture( QPainter *painter,
                                            ViewParams *viewParams,
                                            const QRect &dirtyRect,
                                            TextureColorizer *texColorizer )
@@ -69,7 +68,7 @@ void TileScalingTextureMapper::setRepaintNeeded()
     m_repaintNeeded = true;
 }
 
-void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *viewParams, TextureColorizer *texColorizer )
+void TileScalingTextureMapper::mapTexture( QPainter *painter, ViewParams *viewParams, TextureColorizer *texColorizer )
 {
     if ( viewParams->radius() <= 0 )
         return;
@@ -108,8 +107,8 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *v
     if ( texColorizer || m_oldRadius != radius ) {
         m_cache->clear();
 
-        QPainter painter( canvasImage.data() );
-        painter.setRenderHint( QPainter::SmoothPixmapTransform, highQuality );
+        QPainter imagePainter( canvasImage.data() );
+        imagePainter.setRenderHint( QPainter::SmoothPixmapTransform, highQuality );
 
         for ( int tileY = minTileY; tileY <= maxTileY; ++tileY ) {
             for ( int tileX = minTileX; tileX <= maxTileX; ++tileX ) {
@@ -123,7 +122,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *v
                 StackedTile *const tile = m_tileLoader->loadTile( stackedId );
                 tile->setUsed( true );
 
-                painter.drawImage( rect, *tile->resultTile() );
+                imagePainter.drawImage( rect, *tile->resultTile() );
             }
         }
 
@@ -131,8 +130,8 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *v
             texColorizer->colorize( viewParams );
         }
     } else {
-        geoPainter->save();
-        geoPainter->setRenderHint( QPainter::SmoothPixmapTransform, highQuality );
+        painter->save();
+        painter->setRenderHint( QPainter::SmoothPixmapTransform, highQuality );
 
         for ( int tileY = minTileY; tileY <= maxTileY; ++tileY ) {
             for ( int tileX = minTileX; tileX <= maxTileX; ++tileX ) {
@@ -155,11 +154,11 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *geoPainter, ViewParams *v
                     m_cache->insert( cacheId, im );
                 }
 
-                geoPainter->drawPixmap( rect.topLeft(), *im );
+                painter->drawPixmap( rect.topLeft(), *im );
             }
         }
 
-        geoPainter->restore();
+        painter->restore();
     }
 
     m_tileLoader->cleanupTilehash();
