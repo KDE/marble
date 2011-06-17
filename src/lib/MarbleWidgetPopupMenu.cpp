@@ -120,9 +120,9 @@ QMenu* MarbleWidgetPopupMenu::createInfoBoxMenu()
 void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 {
     QPoint  curpos = QPoint( xpos, ypos ); 
+    m_setHomePointAction->setData( curpos );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
-        m_setHomePointAction->setData( curpos );
         m_smallScreenMenu->popup( m_widget->mapToGlobal( curpos ) );
         return;
     }
