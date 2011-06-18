@@ -159,20 +159,25 @@ QList<qreal> AltitudeModel::heightProfile( qreal fromLat, qreal fromLon, qreal t
     qreal lon = fromLon;
     char dirLat = fromLat < toLat ? 1 : -1;
     char dirLon = fromLon < toLon ? 1 : -1;
-    qreal k = ( fromLon - toLon ) / ( fromLat - toLat );
-    //qDebug() << "dirLat" << QString::number(dirLat) << "dirLon" << QString::number(dirLon) << "k" << k;
+    qreal k = qAbs( ( fromLat - toLat ) / ( fromLon - toLon ) );
+    //qDebug() << "fromLon" << fromLon << "fromLat" << fromLat;
+    //qDebug() << "diff lon" << ( fromLon - toLon ) << "diff lat" << ( fromLat - toLat );
+    //qDebug() << "dirLon" << QString::number(dirLon) << "dirLat" << QString::number(dirLat) << "k" << k;
     QList<qreal> ret;
     while ( lat*dirLat <= toLat*dirLat && lon*dirLon <= toLon*dirLon ) {
+        //qDebug() << lat << lon;
         qreal h = height( lat, lon );
         if (h < 32000) {
             ret << h;
         }
         if ( k < 0.5 ) {
-            lat += distPerPixel * dirLat;
-            lon += distPerPixel * k;
-        } else {
-            lat += distPerPixel * k;
+            //qDebug() << "lon(x) += distPerPixel";
+            lat += distPerPixel * k * dirLat;
             lon += distPerPixel * dirLon;
+        } else {
+            //qDebug() << "lat(y) += distPerPixel";
+            lat += distPerPixel * dirLat;
+            lon += distPerPixel / k * dirLon;
         }
     }
     //qDebug() << ret;
