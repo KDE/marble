@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010 Niko Sams <niko.sams@gmail.com>
+// Copyright 2011 Niko Sams <niko.sams@gmail.com>
 //
 
 
