@@ -90,6 +90,7 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
 
     qreal ret = 0;
     bool hasHeight = false;
+    qreal noData = 0;
 
     for ( int i = 0; i < 4; ++i ) {
         const int x = static_cast<int>( textureX + ( i % 2 ) );
@@ -99,7 +100,7 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
         //qDebug() << "y" << y << ( y / height );
 
         const TileId id( "earth/srtm2", tileZoomLevel, ( x % ( numTilesX * width ) ) / width, ( y % ( numTilesY * height ) ) / height );
-        qDebug() << "tile" << ( x % ( numTilesX * width ) ) / width << ( y % ( numTilesY * height ) ) / height;
+        //qDebug() << "LAT" << lat << "LON" << lon << "tile" << ( x % ( numTilesX * width ) ) / width << ( y % ( numTilesY * height ) ) / height;
 
         const QImage *image = m_cache[id];
         if ( image == 0 ) {
@@ -113,22 +114,35 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
 
         const qreal dx = ( textureX > (qreal)x ) ? textureX - (qreal)x : (qreal)x - textureX;
         const qreal dy = ( textureY > (qreal)y ) ? textureY - (qreal)y : (qreal)y - textureY;
-        qDebug() << "dx" << dx << "dy" << dy << "textureX" << textureX << "textureY" << textureY << "x" << x << "y" << y;
+        if ( !( 0 <= dx && dx <= 1 ) || !( 0 <= dy && dy <= 1 ) ) {
+            qDebug() << "dx" << dx << "dy" << dy << "textureX" << textureX << "textureY" << textureY << "x" << x << "y" << y;
+        }
         Q_ASSERT( 0 <= dx && dx <= 1 );
         Q_ASSERT( 0 <= dy && dy <= 1 );
         unsigned int pixel;
         pixel = image->pixel( x % width, y % height );
         pixel -= 0xFF000000; //fully opaque
+        //qDebug() << "(1-dx)" << (1-dx) << "(1-dy)" << (1-dy);
         if (pixel != 32768) { //no data?
-            qDebug() << "got at x" << x % width << "y" << y % height << "a height of" << pixel << "** RGB" << qRed(pixel) << qGreen(pixel) << qBlue(pixel);
+            //qDebug() << "got at x" << x % width << "y" << y % height << "a height of" << pixel << "** RGB" << qRed(pixel) << qGreen(pixel) << qBlue(pixel);
             ret += (qreal)pixel * (1-dx) * (1-dy);
             hasHeight = true;
+        } else {
+            //qDebug() << "no data at" <<  x % width << "y" << y % height;
+            noData += (1-dx) * (1-dy);
         }
     }
 
-    if (!hasHeight) ret = 32768; //no data
+    if (!hasHeight) {
+        ret = 32768; //no data
+    } else {
+        if (noData) {
+            //qDebug() << "NO DATA" << noData;
+            ret += (ret / (1-noData))*noData;
+        }
+    }
 
-    //qDebug() << lat << lon << "altitude" << ret;
+    //qDebug() << ">>>" << lat << lon << "returning an altitude of" << ret;
     return ret;
 }
 
