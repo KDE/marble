@@ -99,7 +99,7 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
         //qDebug() << "y" << y << ( y / height );
 
         const TileId id( "earth/srtm2", tileZoomLevel, ( x % ( numTilesX * width ) ) / width, ( y % ( numTilesY * height ) ) / height );
-        //qDebug() << "tile" << ( x % ( numTilesX * width ) ) / width << ( y % ( numTilesY * height ) ) / height;
+        qDebug() << "tile" << ( x % ( numTilesX * width ) ) / width << ( y % ( numTilesY * height ) ) / height;
 
         const QImage *image = m_cache[id];
         if ( image == 0 ) {
@@ -113,15 +113,14 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
 
         const qreal dx = ( textureX > (qreal)x ) ? textureX - (qreal)x : (qreal)x - textureX;
         const qreal dy = ( textureY > (qreal)y ) ? textureY - (qreal)y : (qreal)y - textureY;
-        qDebug() << "dx" << dx << "dy" << dy;
+        qDebug() << "dx" << dx << "dy" << dy << "textureX" << textureX << "textureY" << textureY << "x" << x << "y" << y;
         Q_ASSERT( 0 <= dx && dx <= 1 );
         Q_ASSERT( 0 <= dy && dy <= 1 );
         unsigned int pixel;
         pixel = image->pixel( x % width, y % height );
-        //qDebug() << "RGB" << qRed(pixel) << qGreen(pixel) << qBlue(pixel);
         pixel -= 0xFF000000; //fully opaque
         if (pixel != 32768) { //no data?
-            //qDebug() << "got at x" << x % width << "y" << y % height << "a height of" << pixel;
+            qDebug() << "got at x" << x % width << "y" << y % height << "a height of" << pixel << "** RGB" << qRed(pixel) << qGreen(pixel) << qBlue(pixel);
             ret += (qreal)pixel * (1-dx) * (1-dy);
             hasHeight = true;
         }
