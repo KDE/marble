@@ -16,6 +16,7 @@
 namespace Marble {
 
 class AltitudeProfile;
+class PlotPoint;
 
 class PlotWidget : public KPlotWidget
 {
@@ -24,6 +25,7 @@ public:
     explicit PlotWidget( AltitudeProfile * parent = 0 );
 
     void clearHighligtedPoint();
+    PlotPoint *highlightedPoint() const { return m_highligtedPoint; }
 
 protected:
     virtual void mouseMoveEvent(QMouseEvent* );
@@ -31,7 +33,7 @@ protected:
 
 private:
     AltitudeProfile *m_altitudeProfile;
-    KPlotPoint *m_highligtedPoint;
+    PlotPoint *m_highligtedPoint;
 };
 
 }

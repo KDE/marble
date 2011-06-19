@@ -18,6 +18,7 @@
 #include <KPlotObject>
 
 #include "AltitudeProfile.h"
+#include "PlotPoint.h"
 
 namespace Marble {
 
@@ -44,7 +45,7 @@ void PlotWidget::mouseMoveEvent( QMouseEvent* ev )
         }
     }
     if ( point != m_highligtedPoint ) {
-        m_highligtedPoint = point;
+        m_highligtedPoint = static_cast<PlotPoint*>( point );
         update();
         m_altitudeProfile->forceUpdate();
     }

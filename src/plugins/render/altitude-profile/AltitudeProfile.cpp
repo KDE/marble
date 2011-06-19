@@ -31,6 +31,8 @@
 #include <QLayout>
 #include <GeoDataFolder.h>
 #include <MarbleWidget.h>
+#include "PlotPoint.h"
+#include <QApplication>
 
 using namespace Marble;
 
@@ -43,6 +45,42 @@ AltitudeProfile::AltitudeProfile(const QPointF& point, const QSizeF& size)
 QStringList AltitudeProfile::backendTypes() const
 {
     return QStringList( "altitudeProfile" );
+}
+
+QStringList AltitudeProfile::renderPosition() const
+{
+    return QStringList() << "FLOAT_ITEM" << "HOVERS_ABOVE_SURFACE";
+}
+
+qreal AltitudeProfile::zValue() const
+{
+    return 1.0;
+}
+
+bool AltitudeProfile::renderOnMap( GeoPainter     *painter,
+                                     ViewportParams *viewport,
+                                     const QString  &renderPos,
+                                     GeoSceneLayer  *layer )
+{
+    if ( renderPos == "HOVERS_ABOVE_SURFACE" )
+    {
+        painter->save();
+        painter->autoMapQuality();
+
+        PlotPoint* hightlightedPoint = m_graph->highlightedPoint();
+        if ( hightlightedPoint ) {
+            QString text = QString::number( hightlightedPoint->coordinates().altitude() ) + "m";
+            QRect textRect = painter->fontMetrics().boundingRect( text );
+            painter->setBrush( QApplication::palette().toolTipBase() );
+            painter->drawRect( hightlightedPoint->coordinates(), textRect.width(), textRect.height(), false );
+            painter->setPen( QApplication::palette().toolTipText().color() );
+            painter->drawText( hightlightedPoint->coordinates(), text );
+            painter->setPen( QPen( Qt::red, 5, Qt::SolidLine, Qt::RoundCap ) );
+            painter->drawPoint( hightlightedPoint->coordinates() );
+        }
+        painter->restore();
+    }
+    return true;
 }
 
 bool AltitudeProfile::isInitialized() const
@@ -203,7 +241,7 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
 
             double value = coord.altitude();
             //qDebug() << "value" << value;
-            m_plot->addPoint(numDataPoints++, value);
+            m_plot->addPoint(new PlotPoint( numDataPoints++, value, coord ));
             if (value > maxY) maxY = value;
             if (value < minY) minY = value;
             lastAltitude = coord.altitude();

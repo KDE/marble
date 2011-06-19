@@ -33,7 +33,14 @@ class AltitudeProfile : public Marble::AbstractFloatItem
     
 public:
     explicit AltitudeProfile(const QPointF& point = QPointF( 10.0, 10.0 ), const QSizeF& size = QSizeF( 150.0, 50.0 ));
+
     virtual QStringList backendTypes() const;
+    virtual QStringList renderPosition() const;
+    virtual qreal zValue() const; // Overriding LayerInterface to paint on top of the route
+
+    virtual bool renderOnMap( GeoPainter *painter, ViewportParams *viewport,
+                              const QString& renderPos, GeoSceneLayer * layer = 0 );
+
     virtual bool isInitialized() const;
     virtual void initialize();
     virtual QIcon icon() const;
