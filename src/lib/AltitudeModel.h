@@ -40,6 +40,10 @@ public:
     QList<qreal> heightProfile( qreal fromLat, qreal fromLon, qreal toLat, qreal toLon );
 
 Q_SIGNALS:
+    /**
+     * Altitude tiles loaded. You will get more acurate results when quering height
+     * for at least one that was queried before.
+     **/
     void loadCompleted();
 
 private Q_SLOTS:
