@@ -18,6 +18,7 @@
 
 #include "marble_export.h"
 #include "TileId.h"
+#include <GeoDataCoordinates.h>
 
 namespace Marble {
 
@@ -37,7 +38,7 @@ public:
                         HttpDownloadManager * const downloadManager, MarbleModel * const model );
 
     qreal height(qreal lat, qreal lon);
-    QList<qreal> heightProfile( qreal fromLat, qreal fromLon, qreal toLat, qreal toLon );
+    QList<GeoDataCoordinates> heightProfile( qreal fromLat, qreal fromLon, qreal toLat, qreal toLon );
 
 Q_SIGNALS:
     /**

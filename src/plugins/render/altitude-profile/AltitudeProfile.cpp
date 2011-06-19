@@ -167,25 +167,25 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
     qreal totalDecreaseAvg = 0;
     qreal lastAltitude = -100000;
     qreal lastAvgAltitude = -100000;
-    QList<qreal> allAltitudes;
+    QList<GeoDataCoordinates> allAltitudes;
     for(int i=1; i < routeWaypoints->size(); ++i) {
         GeoDataCoordinates coordinate = routeWaypoints->at( i );
         GeoDataCoordinates coordinatePrev = routeWaypoints->at( i - 1 );
         //qreal altitude = marbleModel()->altitudeModel()->height(coordinate.latitude(Marble::GeoDataCoordinates::Degree), coordinate.longitude(Marble::GeoDataCoordinates::Degree));
-        QList<qreal> altitudes = marbleModel()->altitudeModel()->heightProfile(
+        QList<GeoDataCoordinates> coordinatesList = marbleModel()->altitudeModel()->heightProfile(
             coordinatePrev.latitude(Marble::GeoDataCoordinates::Degree),
             coordinatePrev.longitude(Marble::GeoDataCoordinates::Degree),
             coordinate.latitude(Marble::GeoDataCoordinates::Degree),
             coordinate.longitude(Marble::GeoDataCoordinates::Degree)
         );
-        foreach(const qreal altitude, altitudes) {
+        foreach(const GeoDataCoordinates &coord, coordinatesList) {
             //qDebug() << "POINT" << numDataPoints << coordinate.longitude(Marble::GeoDataCoordinates::Degree) << coordinate.latitude(Marble::GeoDataCoordinates::Degree)
             //        << "height" << altitude;
-            allAltitudes << altitude;
+            allAltitudes << coord;
             if ( allAltitudes.count() >= 10 ) {
                 qreal avgAltitude = 0;
-                for(int j=0; j<10; ++j) {
-                    avgAltitude += allAltitudes.at(allAltitudes.count()-j-1);
+                for( int j=0; j<10; ++j ) {
+                    avgAltitude += allAltitudes.at( allAltitudes.count()-j-1 ).altitude();
                 }
                 avgAltitude = avgAltitude / 10;
                 if (lastAvgAltitude != -100000 && avgAltitude > lastAvgAltitude) {
@@ -196,17 +196,17 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
                 }
                 lastAvgAltitude = avgAltitude;
             }
-            if ( lastAltitude != -100000 && altitude > lastAltitude ) {
-                totalIncrease += altitude - lastAltitude;
+            if ( lastAltitude != -100000 && coord.altitude() > lastAltitude ) {
+                totalIncrease += coord.altitude() - lastAltitude;
                 //qDebug() << "INCREASE +=" << altitude - lastAltitude << "totalIncrease is now" << totalIncrease;
             }
 
-            double value = altitude;
+            double value = coord.altitude();
             //qDebug() << "value" << value;
             m_plot->addPoint(numDataPoints++, value);
             if (value > maxY) maxY = value;
             if (value < minY) minY = value;
-            lastAltitude = altitude;
+            lastAltitude = coord.altitude();
         }
     }
     //qDebug() << "TOTAL INCREASE" << totalIncrease;
