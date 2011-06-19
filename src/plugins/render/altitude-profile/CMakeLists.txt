@@ -13,7 +13,7 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( altitudeprofile_SRCS AltitudeProfile.cpp )
+set( altitudeprofile_SRCS AltitudeProfile.cpp PlotWidget.cpp )
 
 marble_add_plugin( AltitudeProfile ${altitudeprofile_SRCS} )
 target_link_libraries( AltitudeProfile

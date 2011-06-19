@@ -15,14 +15,15 @@
 #include "AbstractFloatItem.h"
 
 class QLabel;
-class KPlotWidget;
 class KPlotObject;
 
 namespace Marble {
 
+class MarbleWidget;
 class WidgetGraphicsItem;
 class GeoDataDocument;
 class TileLoader;
+class PlotWidget;
 
 class AltitudeProfile : public Marble::AbstractFloatItem
 {
@@ -41,6 +42,11 @@ public:
     virtual QString guiString() const;
     virtual QString name() const;
 
+    void forceUpdate();
+
+protected:
+    bool eventFilter(QObject *object, QEvent *e);
+
 private slots:
     void currentRouteChanged( GeoDataDocument* );
     void altitudeDataLoadCompleted();
@@ -49,11 +55,13 @@ private:
     bool m_isInitialized;
     TileLoader *m_tileLoader;
 
+    MarbleWidget *m_marbleWidget;
+
     /** The GraphicsItem presenting the widgets. NavigationFloatItem doesn't take direct ownership
         of this */
     WidgetGraphicsItem *m_widgetItem;
 
-    KPlotWidget *m_graph;
+    PlotWidget *m_graph;
     KPlotObject *m_plot;
     QLabel *m_stats;
 };

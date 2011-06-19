@@ -17,7 +17,6 @@
 #include <routing/AlternativeRoutesModel.h>
 #include <GeoDataDocument.h>
 #include <MarbleDebug.h>
-#include <KPlotWidget>
 #include <KPlotObject>
 #include <KPlotAxis>
 #include <AltitudeModel.h>
@@ -27,14 +26,16 @@
 
 #include "MarbleGraphicsGridLayout.h"
 #include "WidgetGraphicsItem.h"
+#include "PlotWidget.h"
 #include <QLabel>
 #include <QLayout>
 #include <GeoDataFolder.h>
+#include <MarbleWidget.h>
 
 using namespace Marble;
 
 AltitudeProfile::AltitudeProfile(const QPointF& point, const QSizeF& size)
-    : AbstractFloatItem(point, size), m_isInitialized(false)
+    : AbstractFloatItem( point, size ), m_isInitialized( false ), m_marbleWidget( 0 )
 {
 
 }
@@ -53,7 +54,7 @@ void AltitudeProfile::initialize()
 {
     m_isInitialized = true;
 
-    m_graph = new KPlotWidget();
+    m_graph = new PlotWidget( this );
     m_graph->setAntialiasing( true );
     m_graph->axis( KPlotWidget::TopAxis )->setVisible( false );
     m_graph->axis( KPlotWidget::RightAxis )->setVisible( false );
@@ -84,11 +85,11 @@ void AltitudeProfile::initialize()
 
     setLayout( layout );
 
-
     currentRouteChanged( marbleModel()->routingManager()->alternativeRoutesModel()->currentRoute() );
     connect( marbleModel()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ), SLOT( currentRouteChanged( GeoDataDocument* ) ) );
 
     connect( marbleModel()->altitudeModel(), SIGNAL( loadCompleted() ), SLOT( altitudeDataLoadCompleted() ) );
+
 
 #if 0
     GeoDataParser parser( GeoData_UNKNOWN );
@@ -132,6 +133,7 @@ void AltitudeProfile::altitudeDataLoadCompleted()
 
 void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
 {
+    m_graph->clearHighligtedPoint();
     m_plot->clearPoints();
     m_stats->setText( QString() );
 
@@ -213,8 +215,30 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
     m_graph->setLimits( 0, numDataPoints, minY - minY / 5, maxY + maxY / 5 );
 
     m_stats->setText( tr( "Gain:<br>%0m<br>Loss:<br>%1m" ).arg( totalIncreaseAvg ).arg( totalDecreaseAvg ) );
+
+    forceUpdate();
 }
 
+void AltitudeProfile::forceUpdate()
+{
+    if ( m_marbleWidget ) {
+        m_marbleWidget->update();
+    }
+}
+
+bool AltitudeProfile::eventFilter(QObject *object, QEvent *e)
+{
+    if ( !enabled() || !visible() ) {
+        return false;
+    }
+
+    MarbleWidget *widget = dynamic_cast<MarbleWidget*> (object);
+    if ( !m_marbleWidget ) {
+        m_marbleWidget = widget;
+    }
+
+    return AbstractFloatItem::eventFilter( object, e );
+}
 
 QIcon AltitudeProfile::icon() const
 {
