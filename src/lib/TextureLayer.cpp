@@ -331,7 +331,10 @@ int TextureLayer::preferredRadiusCeil( int radius ) const
     const qreal tileLevelF = log( linearLevel ) / log( 2.0 );
     const int tileLevel = qCeil( tileLevelF );
 
-    return tileWidth * d->m_tileLoader.tileColumnCount( tileLevel ) / 4;
+    if ( tileLevel < 0 )
+        return ( tileWidth * levelZeroColumns / 4 ) >> (-tileLevel);
+
+    return ( tileWidth * levelZeroColumns / 4 ) << tileLevel;
 }
 
 int TextureLayer::preferredRadiusFloor( int radius ) const
@@ -342,7 +345,12 @@ int TextureLayer::preferredRadiusFloor( int radius ) const
     const qreal tileLevelF = log( linearLevel ) / log( 2.0 );
     const int tileLevel = qFloor( tileLevelF );
 
-    return tileWidth * d->m_tileLoader.tileColumnCount( tileLevel ) / 4;
+    qDebug() << tileLevelF << tileLevel;
+
+    if ( tileLevel < 0 )
+        return ( tileWidth * levelZeroColumns / 4 ) >> (-tileLevel);
+
+    return ( tileWidth * levelZeroColumns / 4 ) << tileLevel;
 }
 
 }
