@@ -39,12 +39,6 @@
 #include <QtGui/QImage>
 
 
-#ifdef Q_CC_MSVC
-# ifndef KDEWIN_MATH_H
-   long double log(int i) { return log((long double)i); }
-# endif
-#endif
-
 namespace Marble
 {
 
