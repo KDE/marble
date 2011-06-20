@@ -42,10 +42,10 @@ if(EXPERIMENTAL_PYTHON_BINDINGS)
     macro_optional_find_package(PythonLibrary)
 
     macro_optional_find_package(SIP)
-    if(SIP_FOUND AND SIP_VERSION STRLESS "041202")
+    if(SIP_FOUND AND SIP_VERSION STRLESS "040c02")
         message(STATUS "The version of SIP found is too old. 4.12.2 or later is needed.")
         set(SIP_FOUND)
-    endif(SIP_FOUND AND SIP_VERSION STRLESS "041202")
+    endif(SIP_FOUND AND SIP_VERSION STRLESS "040c02")
 
     include(SIPMacros)
 
