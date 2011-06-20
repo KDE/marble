@@ -345,8 +345,6 @@ int TextureLayer::preferredRadiusFloor( int radius ) const
     const qreal tileLevelF = log( linearLevel ) / log( 2.0 );
     const int tileLevel = qFloor( tileLevelF );
 
-    qDebug() << tileLevelF << tileLevel;
-
     if ( tileLevel < 0 )
         return ( tileWidth * levelZeroColumns / 4 ) >> (-tileLevel);
 
