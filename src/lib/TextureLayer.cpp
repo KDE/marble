@@ -155,18 +155,21 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
     if ( !d->m_texmapper )
         return;
 
-    // As our tile resolution doubles with each level we calculate
-    // the tile level from tilesize and the globe radius via log(2)
+    // choose the smaller dimension for selecting the tile level, leading to higher-resolution results
+    const int levelZeroWidth = d->m_tileLoader.tileSize().width() * d->m_tileLoader.tileColumnCount( 0 );
+    const int levelZeroHight = d->m_tileLoader.tileSize().height() * d->m_tileLoader.tileRowCount( 0 );
+    const int levelZeroMinDimension = ( levelZeroWidth < levelZeroHight ) ? levelZeroWidth : levelZeroHight;
 
-    qreal  linearLevel = ( 4.0 * (qreal)( viewParams->radius() )
-                               / (qreal)( d->m_tileLoader.tileSize().width() * d->m_tileLoader.tileColumnCount( 0 ) ) );
-    int     tileLevel   = 0;
+    qreal linearLevel = ( 4.0 * (qreal)( viewParams->radius() ) / (qreal)( levelZeroMinDimension ) );
 
     if ( linearLevel < 1.0 )
         linearLevel = 1.0; // Dirty fix for invalid entry linearLevel
 
+    // As our tile resolution doubles with each level we calculate
+    // the tile level from tilesize and the globe radius via log(2)
+
     qreal tileLevelF = log( linearLevel ) / log( 2.0 );
-    tileLevel = (int)( tileLevelF );
+    int tileLevel = (int)( tileLevelF );
 
 //    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
 
