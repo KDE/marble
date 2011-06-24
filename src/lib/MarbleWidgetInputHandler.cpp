@@ -357,7 +357,11 @@ void MarbleWidgetInputHandler::installPluginEventFilter( RenderPlugin *renderPlu
 void MarbleWidgetDefaultInputHandler::showLmbMenu( int x, int y )
 {
     if ( isMouseButtonPopupEnabled( Qt::LeftButton ) ) {
+<<<<<<< HEAD
         MarbleWidgetInputHandler::d->m_widget->popupMenu()->showLmbMenu( x, y );
+=======
+        d->m_popupmenu->showLmbMenu( x, y );
+>>>>>>> stop tooltip timer when lmb menu is visible
         d->m_toolTipTimer.stop();
     }
 }
