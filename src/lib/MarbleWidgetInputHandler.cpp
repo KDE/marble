@@ -368,6 +368,7 @@ void MarbleWidgetDefaultInputHandler::showLmbMenu( int x, int y )
 {
     if ( isMouseButtonPopupEnabled( Qt::LeftButton ) ) {
         d->m_popupmenu->showLmbMenu( x, y );
+        d->m_toolTipTimer.stop();
     }
 }
 
