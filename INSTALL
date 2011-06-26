@@ -1,5 +1,9 @@
          This file describes how to build and install Marble
 
+The most recent version of this file can be found at:
+
+http://edu.kde.org/marble/obtain.php
+
 
 NOTE: This file describes how to build Marble as a stand-alone
       application.  If you are building Marble as part of the KDE-EDU
