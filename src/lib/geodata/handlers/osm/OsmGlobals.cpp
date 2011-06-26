@@ -132,6 +132,7 @@ void OsmGlobals::setupAreaTags()
     m_areaTags.append( "area=yes" );
     m_areaTags.append( "waterway=riverbank" );
     m_areaTags.append( "building=yes" );
+    m_areaTags.append( "amenity=parking" );
     
     qSort( m_areaTags.begin(), m_areaTags.end() );
 }

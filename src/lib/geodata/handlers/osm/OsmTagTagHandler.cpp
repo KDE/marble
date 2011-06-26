@@ -46,7 +46,16 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
     GeoDataGeometry * geometry = parentItem.nodeAs<GeoDataGeometry>();
     if ( !geometry )
         return 0;
-    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( geometry->parent() );
+    
+    GeoDataGeometry *placemarkGeometry = geometry;
+    
+    //If node geometry is part of multigeometry -> go up to placemark geometry.
+    while( dynamic_cast<GeoDataMultiGeometry*>(placemarkGeometry->parent()) )
+        placemarkGeometry = dynamic_cast<GeoDataMultiGeometry*>(placemarkGeometry->parent());
+    
+    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(placemarkGeometry->parent());
+    if( !placemark )
+        return 0;
 
     if ( key == "name" )
     {
@@ -69,8 +78,8 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
         if( !dynamic_cast<GeoDataPolygon*>( geometry ) && OsmGlobals::tagNeedArea( key + "=" + value ) )
         {
             placemark = convertWayToPolygon( doc, placemark, geometry );
-        } 
-        if ( key == "building" && value == "yes" )
+        }
+        if ( key == "building" && value == "yes" && placemark->visualCategory() == GeoDataFeature::Default )
         {
             placemark->setStyle( &doc->style( "building" ) );
             placemark->setVisible( true );
@@ -96,13 +105,17 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
 
         if ( category = OsmGlobals::visualCategories().value( key + "=" + value ) )
         {
+            //Remove assigned style (i.e. building style)
+            placemark->setStyle( 0 );
             placemark->setVisualCategory( category );
             placemark->setVisible( true );
         }
         else if ( category = OsmGlobals::visualCategories().value( key ) )
         {
+            //Remove assigned style (i.e. building style)
+            placemark->setStyle( 0 );
             placemark->setVisualCategory( category );
-	    placemark->setVisible( true );
+            placemark->setVisible( true );
         }
     }
 
@@ -125,10 +138,13 @@ GeoDataPlacemark *OsmTagTagHandler::convertWayToPolygon( GeoDataDocument *doc, G
 {
     GeoDataLineString *polyline = dynamic_cast<GeoDataLineString *>( geometry );
     Q_ASSERT( polyline );
-    GeoDataPolygon *polygon = new GeoDataPolygon();
+    doc->remove( doc->childPosition( placemark ) );
+    GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );
+    GeoDataPolygon *polygon = new GeoDataPolygon;
     polygon->setOuterBoundary( *polyline );
-    placemark->setGeometry( polygon );
-    return placemark; 
+    newPlacemark->setGeometry( polygon );
+    doc->append( newPlacemark );
+    return newPlacemark;
 }
 
 }

@@ -117,10 +117,22 @@ class GeoDataFeaturePrivate
         return GeoDataTypes::GeoDataFeatureType;
     }
 
-    static GeoDataStyle* createOsmStyle( const QFont &font, const QString &bitmap )
+    static GeoDataStyle* createOsmPOIStyle( const QFont &font, const QString &bitmap, 
+                                         const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
+                                         const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker())
     {
+        GeoDataStyle *style = new GeoDataStyle();
         QPixmap const pixmap = QPixmap( MarbleDirs::path( "bitmaps/poi/" + bitmap + ".png" ) );
-        return new GeoDataStyle( pixmap, font, QColor( Qt::black ) );
+        GeoDataPolyStyle polyStyle( color );
+        GeoDataLineStyle lineStyle( outline );
+        //if(color != Qt::transparent)
+        polyStyle.setFill( true );
+        polyStyle.setOutline( true );
+        style->setIconStyle( GeoDataIconStyle( pixmap ) );
+        style->setPolyStyle( polyStyle );
+        style->setLineStyle( lineStyle );
+        style->setLabelStyle( GeoDataLabelStyle( font, Qt::black ) );
+        return style;
     }
     
     static GeoDataStyle* createHighwayStyle( const QColor& color, qreal width = 1, qreal realWidth = 0.0, 
