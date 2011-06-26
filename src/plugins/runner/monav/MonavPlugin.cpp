@@ -257,6 +257,35 @@ QString MonavPlugin::mapDirectoryForRequest( RouteRequest* request ) const
     return QString();
 }
 
+QStringList MonavPlugin::mapDirectoriesForRequest( RouteRequest* request ) const
+{
+    QStringList result;
+    d->initialize();
+    QHash<QString, QVariant> settings = request->routingProfile().pluginSettings()[nameId()];
+    QString transport = settings["transport"].toString();
+
+    for ( int j=0; j<d->m_maps.size(); ++j ) {
+        bool valid = true;
+        if ( transport.isEmpty() || transport == d->m_maps[j].transport() ) {
+            for ( int i = 0; i < request->size(); ++i ) {
+                GeoDataCoordinates via = request->at( i );
+                if ( !d->m_maps[j].containsPoint( via ) ) {
+                    valid = false;
+                    break;
+                }
+            }
+        } else {
+            valid = false;
+        }
+
+        if ( valid ) {
+            result << d->m_maps[j].directory().absolutePath();
+        }
+    }
+
+    return result;
+}
+
 RunnerPlugin::ConfigWidget *MonavPlugin::configWidget()
 {
     return new MonavConfigWidget( this );
