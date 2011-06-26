@@ -21,7 +21,3 @@ Features:
  * Support to display Timezones, Data available e.g. at:                ----
         http://sarangworld.com/NMLUG/WorldTZ_102.zip
 
-Data
- * Evaluate the implementation of tile specifications like              ----
-   - http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation   --
-   - http://wiki.osgeo.org/index.php/Tile_Map_Service_Specification     --
