@@ -47,6 +47,8 @@ public:
 
     QString mapDirectoryForRequest( RouteRequest* request ) const;
 
+    QStringList mapDirectoriesForRequest( RouteRequest* request ) const;
+
     MonavMapsModel* installedMapsModel();
 
     void reloadMaps();
