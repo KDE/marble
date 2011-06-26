@@ -20,6 +20,7 @@
 namespace Marble
 {
 class GeoDataStyle;
+class GeoDataPlacemark;
 
 namespace osm
 {
@@ -29,6 +30,8 @@ class OsmGlobals
 public:
     static QMap<QString, GeoDataFeature::GeoDataVisualCategory> visualCategories();
     static bool tagNeedArea( const QString& keyValue );
+    static void addDummyPlacemark( GeoDataPlacemark *placemark );
+    static void cleanUpDummyPlacemarks();
 
     static QColor buildingColor;
     static QColor backgroundColor;
@@ -39,6 +42,7 @@ private:
     
     static QMap<QString, GeoDataFeature::GeoDataVisualCategory> m_visualCategories;
     static QList<QString> m_areaTags;
+    static QList<GeoDataPlacemark*> dummyPlacemarks;
 };
 
 }

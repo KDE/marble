@@ -139,9 +139,12 @@ GeoDataPlacemark *OsmTagTagHandler::convertWayToPolygon( GeoDataDocument *doc, G
     GeoDataLineString *polyline = dynamic_cast<GeoDataLineString *>( geometry );
     Q_ASSERT( polyline );
     doc->remove( doc->childPosition( placemark ) );
+    OsmGlobals::addDummyPlacemark( placemark );
     GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );
     GeoDataPolygon *polygon = new GeoDataPolygon;
     polygon->setOuterBoundary( *polyline );
+    //FIXME: Dirty hack to change placemark associated with node, for parsing purposes.
+    polyline->setParent( newPlacemark );
     newPlacemark->setGeometry( polygon );
     doc->append( newPlacemark );
     return newPlacemark;
