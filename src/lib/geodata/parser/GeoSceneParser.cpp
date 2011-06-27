@@ -44,7 +44,7 @@ GeoSceneParser::GeoSceneParser(GeoSceneSourceType source)
 
 GeoSceneParser::~GeoSceneParser()
 {
-    delete m_document;
+    // nothing to do
 }
 
 bool GeoSceneParser::isValidRootElement()
