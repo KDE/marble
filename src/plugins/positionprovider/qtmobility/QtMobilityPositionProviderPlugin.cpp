@@ -70,7 +70,7 @@ QString QtMobilityPositionProviderPlugin::nameId() const
 
 QString QtMobilityPositionProviderPlugin::guiString() const
 {
-    return "QtMobilityPositionProviderPlugin"; /** @todo FIXME I18N ... */
+    return "Qt Mobility Location"; /** @todo FIXME I18N ... */
 }
 
 QString QtMobilityPositionProviderPlugin::description() const
