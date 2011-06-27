@@ -172,10 +172,14 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
     }
 
     GeoDocument *doc = parser.releaseDocument();
+    file.close();
+    bool loaded = false;
+
     GeoDataDocument* container = dynamic_cast<GeoDataDocument*>( doc );
-    if ( container && container->size() == 2 ) {
+    if ( container && container->size() > 0 ) {
         GeoDataFolder* viaPoints = dynamic_cast<GeoDataFolder*>( &container->first() );
         if ( viaPoints ) {
+            loaded = true;
             QVector<GeoDataPlacemark*> placemarks = viaPoints->placemarkList();
             for( int i=0; i<placemarks.size(); ++i ) {
                 if ( i < m_routeRequest->size() ) {
@@ -190,26 +194,24 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
                 m_routeRequest->remove( i );
             }
         } else {
-            mDebug() << "Expected a GeoDataDocument with two children, didn't get one though";
+            mDebug() << "Expected a GeoDataDocument with at least one child, didn't get one though";
         }
+    }
 
+    if ( container && container->size() == 2 ) {
         GeoDataDocument* route = dynamic_cast<GeoDataDocument*>(&container->last());
         if ( route ) {
+            loaded = true;
             m_alternativeRoutesModel->addRoute( route, AlternativeRoutesModel::Instant );
             m_alternativeRoutesModel->setCurrentRoute( 0 );
         } else {
             mDebug() << "Expected a GeoDataDocument child, didn't get one though";
-            delete doc;
-            doc = 0;
         }
-    } else {
-        mDebug() << "Expected a GeoDataDocument, didn't get one though";
-        delete doc;
-        doc = 0;
     }
 
-    file.close();
-    if ( !doc ) {
+    if ( !loaded ) {
+        mDebug() << "File " << filename << " is not a valid Marble route .kml file";
+        delete doc;
         m_marbleModel->addGeoDataFile( filename );
     }
 }
