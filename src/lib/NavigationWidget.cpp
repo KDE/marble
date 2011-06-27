@@ -254,7 +254,9 @@ void NavigationWidget::adjustForStill()
 
 void NavigationWidget::resizeEvent ( QResizeEvent * )
 {
-    if ( height() < 500 ) {
+    bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+
+    if ( smallScreen || height() < 390 ) {
         if ( !d->m_navigationUi.zoomSlider->isHidden() ) {
             setUpdatesEnabled(false);
             d->m_navigationUi.zoomSlider->hide();
