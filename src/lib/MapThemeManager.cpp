@@ -83,7 +83,10 @@ QList<GeoSceneDocument const*> MapThemeManager::mapThemes() const
     QStringList::const_iterator pos = mapThemes.constBegin();
     QStringList::const_iterator const end = mapThemes.constEnd();
     for (; pos != end; ++pos ) {
-        result.append( loadMapTheme( *pos ));
+        GeoSceneDocument* document = loadMapTheme( *pos );
+        if ( document ) {
+            result.append( document );
+        }
     }
     return result;
 }
