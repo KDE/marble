@@ -543,7 +543,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             {
                 qDebug("Marble: Starting selection");
                 d->m_lmbTimer.stop();                
-                d->m_selectionOrigin = event->globalPos();
+                d->m_selectionOrigin = event->pos();
                 d->m_selectionRubber->setGeometry( QRect( d->m_selectionOrigin, QSize() ));
                 d->m_selectionRubber->show();
             }
@@ -611,8 +611,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( d->m_selectionRubber->isVisible() ) 
             {
                 // We change selection.
-                d->m_selectionRubber->setGeometry( QRect( d->m_selectionOrigin,
-                                                          event->globalPos() ).normalized() );
+                d->m_selectionRubber->setGeometry( QRect( d->m_selectionOrigin, event->pos() ).normalized() );
             }
         }
         else {
