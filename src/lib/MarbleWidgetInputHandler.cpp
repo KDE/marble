@@ -181,6 +181,8 @@ class MarbleWidgetDefaultInputHandler::Private
     QTimer m_toolTipTimer;
     QPoint m_toolTipPosition;
 
+    MarbleWidgetPopupMenu m_popupmenu;
+
     QAction  *m_addMeasurePointAction;
     QAction  *m_removeLastMeasurePointAction;
     QAction  *m_removeMeasurePointsAction;
@@ -190,7 +192,8 @@ MarbleWidgetDefaultInputHandler::Private::Private( MarbleWidget *widget )
     : m_leftPressed( false ),
       m_midPressed( false ),
       m_dragThreshold( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 15 : 3 ),
-      m_selectionRubber( QRubberBand::Rectangle, widget )
+      m_selectionRubber( QRubberBand::Rectangle, widget ),
+      m_popupmenu( widget, widget->model() )
 {
     m_curpmtl.load( MarbleDirs::path("bitmaps/cursor_tl.xpm") );
     m_curpmtc.load( MarbleDirs::path("bitmaps/cursor_tc.xpm") );
@@ -301,15 +304,15 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler( MarbleWidget *
 
     // Connect the inputHandler and the measure tool to the popup menu
     d->m_addMeasurePointAction = new QAction( tr( "Add &Measure Point" ), this);
-    MarbleWidgetInputHandler::d->m_widget->popupMenu()->addAction( Qt::RightButton, d->m_addMeasurePointAction );
+    d->m_popupmenu.addAction( Qt::RightButton, d->m_addMeasurePointAction );
     d->m_removeLastMeasurePointAction = new QAction( tr( "Remove &Last Measure Point" ),
                                                   this);
     d->m_removeLastMeasurePointAction->setEnabled(false);
-    MarbleWidgetInputHandler::d->m_widget->popupMenu()->addAction( Qt::RightButton, d->m_removeLastMeasurePointAction );
+    d->m_popupmenu.addAction( Qt::RightButton, d->m_removeLastMeasurePointAction );
     d->m_removeMeasurePointsAction = new QAction( tr( "&Remove Measure Points" ),
                                                 this);
     d->m_removeMeasurePointsAction->setEnabled(false);
-    MarbleWidgetInputHandler::d->m_widget->popupMenu()->addAction( Qt::RightButton, d->m_removeMeasurePointsAction );
+    d->m_popupmenu.addAction( Qt::RightButton, d->m_removeMeasurePointsAction );
 
     connect( d->m_addMeasurePointAction, SIGNAL( triggered() ),
              SLOT( addMeasurePoint() ) );
@@ -357,7 +360,7 @@ void MarbleWidgetInputHandler::installPluginEventFilter( RenderPlugin *renderPlu
 void MarbleWidgetDefaultInputHandler::showLmbMenu( int x, int y )
 {
     if ( isMouseButtonPopupEnabled( Qt::LeftButton ) ) {
-        d->m_popupmenu->showLmbMenu( x, y );
+        d->m_popupmenu.showLmbMenu( x, y );
         d->m_toolTipTimer.stop();
     }
 }
@@ -366,7 +369,7 @@ void MarbleWidgetDefaultInputHandler::showRmbMenu( int x, int y )
 {
     if ( isMouseButtonPopupEnabled( Qt::RightButton ) ) {
         d->m_addMeasurePointAction->setData( QPoint( x, y ) );
-        MarbleWidgetInputHandler::d->m_widget->popupMenu()->showRmbMenu( x, y );
+        d->m_popupmenu.showRmbMenu( x, y );
     }
 }
 
@@ -534,8 +537,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 qDebug("Marble: Starting selection");
                 d->m_lmbTimer.stop();                
                 d->m_selectionOrigin = event->pos();
-                d->m_selectionRubber->setGeometry( QRect( d->m_selectionOrigin, QSize() ));
-                d->m_selectionRubber->show();
+                d->m_selectionRubber.setGeometry( QRect( d->m_selectionOrigin, QSize() ));
+                d->m_selectionRubber.show();
             }
 
             // Regarding mouse button releases:
@@ -601,7 +604,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( d->m_selectionRubber.isVisible() )
             {
                 // We change selection.
-                d->m_selectionRubber->setGeometry( QRect( d->m_selectionOrigin, event->pos() ).normalized() );
+                d->m_selectionRubber.setGeometry( QRect( d->m_selectionOrigin, event->pos() ).normalized() );
             }
         }
         else {
