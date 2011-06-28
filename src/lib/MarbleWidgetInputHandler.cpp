@@ -357,11 +357,7 @@ void MarbleWidgetInputHandler::installPluginEventFilter( RenderPlugin *renderPlu
 void MarbleWidgetDefaultInputHandler::showLmbMenu( int x, int y )
 {
     if ( isMouseButtonPopupEnabled( Qt::LeftButton ) ) {
-<<<<<<< HEAD
-        MarbleWidgetInputHandler::d->m_widget->popupMenu()->showLmbMenu( x, y );
-=======
         d->m_popupmenu->showLmbMenu( x, y );
->>>>>>> stop tooltip timer when lmb menu is visible
         d->m_toolTipTimer.stop();
     }
 }
@@ -538,8 +534,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 qDebug("Marble: Starting selection");
                 d->m_lmbTimer.stop();                
                 d->m_selectionOrigin = event->pos();
-                d->m_selectionRubber.setGeometry( QRect( d->m_selectionOrigin, QSize() ));
-                d->m_selectionRubber.show();
+                d->m_selectionRubber->setGeometry( QRect( d->m_selectionOrigin, QSize() ));
+                d->m_selectionRubber->show();
             }
 
             // Regarding mouse button releases:
@@ -605,7 +601,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( d->m_selectionRubber.isVisible() )
             {
                 // We change selection.
-                d->m_selectionRubber.setGeometry( QRect( d->m_selectionOrigin, event->pos() ).normalized() );
+                d->m_selectionRubber->setGeometry( QRect( d->m_selectionOrigin, event->pos() ).normalized() );
             }
         }
         else {
