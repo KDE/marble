@@ -50,6 +50,34 @@ GeoDataContainerPrivate* GeoDataContainer::p() const
     return static_cast<GeoDataContainerPrivate*>(d);
 }
 
+GeoDataLatLonAltBox GeoDataContainer::latLonAltBox() const
+{
+    GeoDataLatLonAltBox result;
+
+    QVector<GeoDataFeature*>::const_iterator it = p()->m_vector.constBegin();
+    QVector<GeoDataFeature*>::const_iterator end = p()->m_vector.constEnd();
+    for (; it != end; ++it) {
+        if ( (*it)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(*it);
+            if (result.isEmpty()) {
+                result = placemark->geometry()->latLonAltBox();
+            } else {
+                result |= placemark->geometry()->latLonAltBox();
+            }
+        }
+        else if ( (*it)->nodeType() == GeoDataTypes::GeoDataFolderType
+                 || (*it)->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+            GeoDataContainer *container = static_cast<GeoDataContainer*>(*it);
+            if (result.isEmpty()) {
+                result = container->latLonAltBox();
+            } else {
+                result |= container->latLonAltBox();
+            }
+        }
+    }
+    return result;
+}
+
 QVector<GeoDataFolder*> GeoDataContainer::folderList() const
 {
     QVector<GeoDataFolder*> results;

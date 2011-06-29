@@ -14,10 +14,12 @@
 #include "MarbleWidget.h"
 #include "AbstractFloatItem.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataFolder.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLatLonBox.h"
+#include "GeoDataPlacemark.h"
 
 using namespace Marble;
 
@@ -38,6 +40,8 @@ private slots:
     void testToString();
     void testPack_data();
     void testPack();
+    void testContainerBox_data();
+    void testContainerBox();
 
 private: 
     qreal randomLon();
@@ -253,6 +257,43 @@ void TestGeoDataLatLonAltBox::testPack() {
     QCOMPARE(box2.maxAltitude(), box3.maxAltitude());
     QCOMPARE(box2.minAltitude(), box3.minAltitude());
     QCOMPARE(box2.altitudeMode(), box3.altitudeMode());
+}
+
+void TestGeoDataLatLonAltBox::testContainerBox_data() {
+    QTest::addColumn<qreal>("lon1");
+    QTest::addColumn<qreal>("lat1");
+    QTest::addColumn<qreal>("lon2");
+    QTest::addColumn<qreal>("lat2");
+    QTest::addColumn<qreal>("lon3");
+    QTest::addColumn<qreal>("lat3");
+
+    QTest::newRow("rad1") << 2.4 << 0.1 << 1.0 << 1.2 << -1.8 << -0.7 ;
+    QTest::newRow("rad2") << -1.3 << -0.1 << 0.2 << 1.1 << 2.9 << 0.9 ;
+}
+
+void TestGeoDataLatLonAltBox::testContainerBox() {
+    QFETCH(qreal, lon1);
+    QFETCH(qreal, lat1);
+    QFETCH(qreal, lon2);
+    QFETCH(qreal, lat2);
+    QFETCH(qreal, lon3);
+    QFETCH(qreal, lat3);
+
+    GeoDataPlacemark p1, p2, p3;
+    p1.setCoordinate(lon1, lat1, GeoDataCoordinates::Degree);
+    p2.setCoordinate(lon2, lat2, GeoDataCoordinates::Degree);
+    p3.setCoordinate(lon3, lat3, GeoDataCoordinates::Degree);
+    GeoDataFolder f1, f2;
+    f1.append(new GeoDataPlacemark(p1));
+    f2.append(new GeoDataPlacemark(p2));
+    f2.append(new GeoDataPlacemark(p3));
+    f1.append(new GeoDataFolder(f2));
+    GeoDataLatLonAltBox box = f1.latLonAltBox();
+
+    QCOMPARE(box.north(), qMax(qMax(lat1, lat2), lat3));
+    QCOMPARE(box.east(), qMax(qMax(lon1, lon2), lon3));
+    QCOMPARE(box.south(), qMin(qMin(lat1, lat2), lat3));
+    QCOMPARE(box.west(), qMin(qMin(lon1, lon2), lon3));
 }
 
 QTEST_MAIN(TestGeoDataLatLonAltBox)

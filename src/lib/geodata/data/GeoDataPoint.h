@@ -72,6 +72,8 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
     /// Provides type information for downcasting a GeoData
     virtual const char* nodeType() const;
 
+    virtual GeoDataLatLonAltBox latLonAltBox() const;
+
     // Type definitions
     typedef QVector<GeoDataPoint> Vector;
 
