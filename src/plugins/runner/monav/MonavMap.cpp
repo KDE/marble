@@ -44,6 +44,7 @@ void MonavMap::parseBoundingBox( const QFileInfo &file )
         }
 
         GeoDocument *doc = parser.releaseDocument();
+        input.close();
         GeoDataDocument *document = dynamic_cast<GeoDataDocument*>( doc );
         QVector<GeoDataPlacemark*> placemarks = document->placemarkList();
         if ( placemarks.size() == 1 ) {
@@ -73,6 +74,8 @@ void MonavMap::parseBoundingBox( const QFileInfo &file )
         } else {
             mDebug() << "File " << file.absoluteFilePath() << " does not contain one placemark, but " << placemarks.size();
         }
+
+        delete doc;
     }
     m_boundingBox = points.latLonAltBox();
 
