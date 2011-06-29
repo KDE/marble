@@ -228,8 +228,8 @@ void NavigationWidget::mapCenterOnSignal( const QModelIndex &index )
             = qVariantValue<GeoDataObject*>( index.model()->data(index, MarblePlacemarkModel::ObjectPointerRole ) );
     if ( dynamic_cast<GeoDataPlacemark*>(object) )
     {
-        GeoDataCoordinates coord = ( dynamic_cast<GeoDataPlacemark*>( object ) )->coordinate();
-        d->m_widget->centerOn( coord, true );
+        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(object);
+        d->m_widget->centerOn( *placemark, true );
         d->m_widget->model()->placemarkSelectionModel()->select( d->m_sortproxy->mapToSource( index ), QItemSelectionModel::ClearAndSelect );
     }
 }
