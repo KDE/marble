@@ -115,20 +115,15 @@ void GeometryLayer::initializeDefaultValues()
 bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
                             const QString& renderPos, GeoSceneLayer * layer )
 {
-//    QTime t;
-//    t.start();
-//    mDebug() << "rendering " << m_root;
-    /*if ( d->m_root )
-    {
-        d->renderGeoDataObject( painter, d->m_root, viewport );
-    }*/
-//    mDebug() << "rendering geometry: " << t.elapsed();
+    painter->save();
+    painter->autoMapQuality();
     QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox() );
     foreach( GeoGraphicsItem* item, items )
     {
         if ( item->visible() )
             item->paint( painter, viewport, renderPos, layer );
     }
+    painter->restore();
     return true;
 }
 
