@@ -27,6 +27,7 @@ class GeoDataContainerPrivate;
 
 class GeoDataFolder;
 class GeoDataPlacemark;
+class GeoDataLatLonAltBox;
 
 /**
  * @short  A base class that can hold GeoDataFeatures
@@ -52,6 +53,16 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     GeoDataContainerPrivate* p() const;
     /// Destruct the GeoDataContainer
     virtual ~GeoDataContainer();
+
+
+    /**
+     * @brief A convenience function that returns the LatLonAltBox of all
+     * placemarks in this container.
+     * @return The GeoDataLatLonAltBox
+     *
+     * @see GeoDataLatLonAltBox
+     */
+    GeoDataLatLonAltBox latLonAltBox() const;
 
     /**
      * @brief A convenience function that returns all folders in this container.
