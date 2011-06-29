@@ -642,6 +642,16 @@ void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
     repaint();
 }
 
+void MarbleWidget::centerOn( const GeoDataPlacemark& placemark, bool animated )
+{
+    GeoDataLookAt *lookAt( placemark.lookAt() );
+    if ( lookAt ) {
+        flyTo( *lookAt, animated ? Automatic : Instant );
+    } else {
+        centerOn( placemark.geometry()->latLonAltBox(), animated );
+    }
+}
+
 void MarbleWidget::setCenterLatitude( qreal lat, FlyToMode mode )
 {
     centerOn( centerLongitude(), lat, mode );

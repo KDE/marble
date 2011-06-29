@@ -93,8 +93,12 @@ void FileViewWidget::mapCenterOnTreeViewModel( const QModelIndex &index )
         = static_cast<GeoDataObject*>( d->m_treeSortProxy->mapToSource(index).internalPointer() );
     if ( dynamic_cast<GeoDataPlacemark*>(object) )
     {
-        GeoDataCoordinates coord = ( dynamic_cast<GeoDataPlacemark*>( object ) )->coordinate();
-        d->m_widget->centerOn( coord, true );
+        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(object);
+        d->m_widget->centerOn( *placemark, true );
+    }
+    else if ( dynamic_cast<GeoDataContainer*>(object) ) {
+        GeoDataLatLonAltBox box = dynamic_cast<GeoDataContainer*>( object )->latLonAltBox();
+        d->m_widget->centerOn( box, true );
     }
 }
 

@@ -651,6 +651,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void centerOn( const GeoDataLatLonBox& box, bool animated = false );
 
     /**
+     * @brief Center the view on a placemark according to the following logic:
+     * - if the placemark has a lookAt, zoom and center on that lookAt
+     * - otherwise use the placemark geometry's latLonAltBox
+     * @param box The GeoDataPlacemark to zoom and move the MarbleWidget to.
+     */
+    void centerOn( const GeoDataPlacemark& placemark, bool animated = false );
+
      * @brief  Set the latitude for the center point
      * @param  lat  the new value for the latitude in degree.
      * @param  mode the FlyToMode that will be used.
