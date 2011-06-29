@@ -39,6 +39,7 @@
 #include "MarbleModel.h"
 #include "MarblePhysics.h"
 #include "MarbleWidgetInputHandler.h"
+#include "MarbleWidgetPopupMenu.h"
 #include "MeasureTool.h"
 #include "Planet.h"
 #include "RenderPlugin.h"
@@ -69,6 +70,7 @@ class MarbleWidgetPrivate
           m_physics( new MarblePhysics( parent ) ),
           m_repaintTimer(),
           m_routingLayer( 0 ),
+          m_popupmenu( 0 ),
           m_viewAngle( 110.0 )
     {
     }
@@ -118,6 +120,8 @@ class MarbleWidgetPrivate
     QTimer           m_repaintTimer;
 
     RoutingLayer     *m_routingLayer;
+
+    MarbleWidgetPopupMenu *m_popupmenu;
 
     const qreal      m_viewAngle;
 };
@@ -215,6 +219,8 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
                        m_widget, SLOT( centerOn( qreal, qreal ) ) );
 
+    m_popupmenu = new MarbleWidgetPopupMenu( m_widget, m_model );
+
     m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler( m_widget ) );
     m_widget->setMouseTracking( m_widget );
 
@@ -265,6 +271,11 @@ ViewportParams* MarbleWidget::viewport()
 const ViewportParams* MarbleWidget::viewport() const
 {
     return d->m_map->viewport();
+}
+
+MarbleWidgetPopupMenu *MarbleWidget::popupMenu()
+{
+    return d->m_popupmenu;
 }
 
 

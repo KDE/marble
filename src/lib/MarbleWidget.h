@@ -45,6 +45,7 @@ class GeoPainter;
 class GeoSceneDocument;
 class LayerInterface;
 class MarbleModel;
+class MarbleWidgetPopupMenu;
 class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
 class MeasureTool;
@@ -169,6 +170,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     ViewportParams *viewport();
     const ViewportParams *viewport() const;
+
+    MarbleWidgetPopupMenu *popupMenu();
 
     /**
      * Returns the current input handler
