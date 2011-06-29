@@ -54,8 +54,6 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
         placemarkGeometry = dynamic_cast<GeoDataMultiGeometry*>(placemarkGeometry->parent());
     
     GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(placemarkGeometry->parent());
-    if( !placemark )
-        return 0;
 
     if ( key == "name" )
     {
