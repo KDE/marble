@@ -39,7 +39,7 @@ class MeasureTool : public QObject, public LayerInterface
  public:
     explicit MeasureTool( MarbleModel *model, QObject *parent = 0 );
 
-    virtual QStringList renderPosition() const { return QStringList(); }
+    virtual QStringList renderPosition() const;
 
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
        const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );

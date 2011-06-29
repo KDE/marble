@@ -777,7 +777,6 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
     d->m_map->d->paintGround( painter, dirtyRect );
     d->m_map->customPaint( &painter );
     customPaint( &painter );
-    d->m_map->measureTool()->render( &painter, viewport() );
 
     if ( !isEnabled() )
     {
