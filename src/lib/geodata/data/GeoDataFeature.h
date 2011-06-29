@@ -236,6 +236,27 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         ReligionJewish,
         ReligionShinto,
         ReligionSikh,
+        // OpenStreetMap category Leisure
+        LeisurePark,
+
+        LanduseAllotments,
+        LanduseBasin,
+        LanduseCemetery,
+        LanduseCommercial,
+        LanduseConstruction,
+        LanduseFarmland,
+        LanduseFarmyard,
+        LanduseGarages,
+        LanduseGrass,
+        LanduseIndustrial,
+        LanduseLandfill,
+        LanduseMeadow,
+        LanduseMilitary,
+        LanduseQuarry,
+        LanduseRailway,
+        LanduseReservoir,
+        LanduseResidential,
+        LanduseRetail,
 
         // Important: Make sure that this is always the last 
         // item and just use it to specify the array size

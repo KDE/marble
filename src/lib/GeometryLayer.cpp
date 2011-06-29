@@ -85,8 +85,16 @@ void GeometryLayer::initializeDefaultValues()
         s_defaultLODValues[i] = -1;
 
     s_defaultZValues[GeoDataFeature::None]                = 0;
-    s_defaultZValues[GeoDataFeature::NaturalWater]        = s_defaultZValue - 15;
-    s_defaultZValues[GeoDataFeature::NaturalWood]         = s_defaultZValue - 14;
+    
+    for ( int i = GeoDataFeature::LanduseAllotments; i <= GeoDataFeature::LanduseRetail; i++ )
+        s_defaultZValues[(GeoDataFeature::GeoDataVisualCategory)i] = s_defaultZValue - 16;
+    
+    s_defaultZValues[GeoDataFeature::NaturalWater]        = s_defaultZValue - 16;
+    s_defaultZValues[GeoDataFeature::NaturalWood]         = s_defaultZValue - 15;
+    
+    //Landuse
+    
+    s_defaultZValues[GeoDataFeature::LeisurePark]         = s_defaultZValue - 14; 
     
     s_defaultZValues[GeoDataFeature::TransportParking]    = s_defaultZValue - 13;
     

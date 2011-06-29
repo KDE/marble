@@ -124,8 +124,31 @@ void OsmGlobals::setupCategories()
     m_visualCategories["waterway=canal"]             = GeoDataFeature::NaturalWater;
     
     m_visualCategories["natural=wood"]               = GeoDataFeature::NaturalWood;
-    
+  
     m_visualCategories["landuse=forest"]             = GeoDataFeature::NaturalWood;
+    m_visualCategories["landuse=allotments"]         = GeoDataFeature::LanduseAllotments;
+    m_visualCategories["landuse=basin"]              = GeoDataFeature::LanduseBasin;
+    m_visualCategories["landuse=brownfield"]         = GeoDataFeature::LanduseConstruction;
+    m_visualCategories["landuse=cemetery"]           = GeoDataFeature::LanduseCemetery;
+    m_visualCategories["landuse=commercial"]         = GeoDataFeature::LanduseCommercial;
+    m_visualCategories["landuse=construction"]       = GeoDataFeature::LanduseConstruction;
+    m_visualCategories["landuse=farm"]               = GeoDataFeature::LanduseFarmland;
+    m_visualCategories["landuse=farmland"]           = GeoDataFeature::LanduseFarmland;
+    m_visualCategories["landuse=farmyard"]           = GeoDataFeature::LanduseFarmyard;
+    m_visualCategories["landuse=garages"]            = GeoDataFeature::LanduseGarages;
+    m_visualCategories["landuse=greenfield"]         = GeoDataFeature::LanduseConstruction;
+    m_visualCategories["landuse=industrial"]         = GeoDataFeature::LanduseIndustrial;
+    m_visualCategories["landuse=landfill"]           = GeoDataFeature::LanduseLandfill;
+    m_visualCategories["landuse=meadow"]             = GeoDataFeature::LanduseMeadow;
+    m_visualCategories["landuse=military"]           = GeoDataFeature::LanduseMilitary;
+    m_visualCategories["landuse=orchard"]            = GeoDataFeature::LanduseFarmland;
+    m_visualCategories["landuse=quarry"]             = GeoDataFeature::LanduseQuarry;
+    m_visualCategories["landuse=railway"]            = GeoDataFeature::LanduseRailway;
+    m_visualCategories["landuse=reservoir"]          = GeoDataFeature::LanduseReservoir;
+    m_visualCategories["landuse=residential"]        = GeoDataFeature::LanduseResidential;
+    m_visualCategories["landuse=retail"]             = GeoDataFeature::LanduseRetail;
+    
+    m_visualCategories["leisure=park"]               = GeoDataFeature::LeisurePark;
 }
 
 void OsmGlobals::setupAreaTags()
@@ -136,6 +159,29 @@ void OsmGlobals::setupAreaTags()
     m_areaTags.append( "waterway=riverbank" );
     m_areaTags.append( "building=yes" );
     m_areaTags.append( "amenity=parking" );
+    m_areaTags.append( "leisure=park" );
+    
+    m_areaTags.append( "landuse=allotments" );
+    m_areaTags.append( "landuse=basin" );
+    m_areaTags.append( "landuse=brownfield" );
+    m_areaTags.append( "landuse=cemetery" );
+    m_areaTags.append( "landuse=commercial" );
+    m_areaTags.append( "landuse=construction" );
+    m_areaTags.append( "landuse=farm" );
+    m_areaTags.append( "landuse=farmland" );
+    m_areaTags.append( "landuse=farmyard" );
+    m_areaTags.append( "landuse=garages" );
+    m_areaTags.append( "landuse=greenfield" );
+    m_areaTags.append( "landuse=industrial" );
+    m_areaTags.append( "landuse=landfill" );
+    m_areaTags.append( "landuse=meadow" );
+    m_areaTags.append( "landuse=military" );
+    m_areaTags.append( "landuse=orchard" );
+    m_areaTags.append( "landuse=quarry" );
+    m_areaTags.append( "landuse=railway" );
+    m_areaTags.append( "landuse=reservoir" );
+    m_areaTags.append( "landuse=residential" );
+    m_areaTags.append( "landuse=retail" );
     
     qSort( m_areaTags.begin(), m_areaTags.end() );
 }
