@@ -22,12 +22,12 @@ OpenCachingCacheLogEntry& OpenCachingCacheLog::operator[]( int index )
     return m_logEntries[index];
 }
 
-void OpenCachingCacheLog::setCacheId( int cacheId )
+void OpenCachingCacheLog::setCacheId( unsigned long long cacheId )
 {
     m_cacheId = cacheId;
 }
 
-int OpenCachingCacheLog::cacheId() const
+unsigned long long OpenCachingCacheLog::cacheId() const
 {
     return m_cacheId;
 }

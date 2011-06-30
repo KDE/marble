@@ -25,9 +25,9 @@ class OpenCachingCache
 public:
     OpenCachingCache( const QHash<QString, QVariant>& properties = QHash<QString, QVariant>() );
 
-    void setId( int id );
+    void setId( unsigned long long id );
 
-    int id() const;
+    unsigned long long id() const;
 
     void setDateHidden( const QDateTime& dateHidden );
 
@@ -92,7 +92,7 @@ public:
 private:
     void updateTooltip();
 
-    long m_id;
+    unsigned long long m_id;
 
     QDateTime m_dateHidden;
 

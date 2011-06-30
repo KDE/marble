@@ -24,9 +24,9 @@ class OpenCachingCacheDescription
 public:    
     OpenCachingCacheDescription( const QHash<QString, QVariant>& properties = QHash<QString, QVariant>() );
 
-    void setCacheId( int cacheId );
+    void setCacheId( unsigned long long cacheId );
 
-    int cacheId() const;
+    unsigned long long cacheId() const;
 
     void setLanguage( const QString& language );
 
@@ -49,7 +49,7 @@ public:
     const QDateTime& lastModifiedDate() const;
 
 private:
-    int m_cacheId;
+    unsigned long long m_cacheId;
 
     QString m_language;
 

@@ -28,8 +28,9 @@ OpenCachingItem::OpenCachingItem( const OpenCachingCache& cache, QObject *parent
     : AbstractDataPluginItem( parent ), m_cache( cache )
 {
     // The size of an item without a text is 0
-    setSize( QSize( 0, 0 ) );
+    setSize( QSize( m_cache.difficulty() * 10, m_cache.difficulty() * 10 ) );
     s_font.setBold( true );
+    updateTooltip();
 }
 
 OpenCachingItem::~OpenCachingItem()
@@ -45,7 +46,7 @@ QString OpenCachingItem::itemType() const
 
 bool OpenCachingItem::initialized()
 {
-    return m_cache.id() != -1;
+    return m_cache.id() != 0;
 }
 
 bool OpenCachingItem::operator<( const AbstractDataPluginItem *other ) const
@@ -69,6 +70,7 @@ void OpenCachingItem::paint( GeoPainter *painter, ViewportParams *viewport,
     // Draw the arch into the given rect.
     qreal width = m_cache.difficulty() * 10;
     qreal height = m_cache.difficulty() * 10;
+    mDebug() << "painting item" << m_cache.cacheName() << width << height;
 
     // Draws the circle with circles' center as rectangle's top-left corner.
     QRect arcRect( 0, 0, width, height );

@@ -72,7 +72,6 @@ class MarbleWidgetPrivate
           m_repaintTimer(),
           m_routingLayer( 0 ),
           m_popupmenu( 0 ),
-          m_showFrameRate( false ),
           m_viewAngle( 110.0 )
     {
     }
@@ -124,8 +123,6 @@ class MarbleWidgetPrivate
     RoutingLayer     *m_routingLayer;
 
     MarbleWidgetPopupMenu *m_popupmenu;
-
-    bool             m_showFrameRate;
 
     const qreal      m_viewAngle;
 };
@@ -218,12 +215,6 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
                        m_widget, SLOT( centerOn( qreal, qreal ) ) );
-
-    // Repaint timer
-    m_repaintTimer.setSingleShot( true );
-    m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
-    m_widget->connect( &m_repaintTimer, SIGNAL( timeout() ),
-                       m_widget, SLOT( update() ) );
 
     m_popupmenu = new MarbleWidgetPopupMenu( m_widget, m_model );
 

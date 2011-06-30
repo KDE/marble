@@ -123,8 +123,6 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
     m_geometryLayer = new GeometryLayer( document );
     m_layerManager.addLayer( m_geometryLayer );
 
-    m_layerManager.addLayer( &m_placemarkLayout );
-    m_layerManager.addLayer( &m_fogLayer );
     m_layerManager.addLayer( &m_measureTool );
 }
 
@@ -255,8 +253,6 @@ MarbleMap::~MarbleMap()
     MarbleModel *model = d->m_modelIsOwned ? d->m_model : 0;
 
     d->m_layerManager.removeLayer( &d->m_measureTool );
-    d->m_layerManager.removeLayer( &d->m_fogLayer );
-    d->m_layerManager.removeLayer( &d->m_placemarkLayout );
     delete d;
 
     delete model;  // delete the model after private data
