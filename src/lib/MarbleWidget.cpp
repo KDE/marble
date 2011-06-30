@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2010-2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "MarbleWidget.h"
@@ -29,6 +30,7 @@
 
 #include "AbstractProjection.h"
 #include "DataMigration.h"
+#include "FpsLayer.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
@@ -819,8 +821,10 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
 
     if ( d->m_showFrameRate )
     {
-        qreal fps = 1000.0 / (qreal)( t.elapsed() + 1 );
-        d->m_map->d->paintFps( painter, dirtyRect, fps );
+        FpsLayer fpsLayer( &t );
+        fpsLayer.render( &painter, d->m_map->viewport() );
+
+        const qreal fps = 1000.0 / (qreal)( t.elapsed() + 1 );
         emit framesPerSecond( fps );
     }
 }
