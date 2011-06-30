@@ -71,6 +71,7 @@ class MarbleWidgetPrivate
           m_repaintTimer(),
           m_routingLayer( 0 ),
           m_popupmenu( 0 ),
+          m_showFrameRate( false ),
           m_viewAngle( 110.0 )
     {
     }
@@ -122,6 +123,8 @@ class MarbleWidgetPrivate
     RoutingLayer     *m_routingLayer;
 
     MarbleWidgetPopupMenu *m_popupmenu;
+
+    bool             m_showFrameRate;
 
     const qreal      m_viewAngle;
 };
@@ -175,14 +178,14 @@ void MarbleWidgetPrivate::construct()
 
     // Initialize the map and forward some signals.
     m_map->setSize( m_widget->width(), m_widget->height() );
+    m_map->setShowFrameRate( false );  // never let the map draw the frame rate,
+                                       // we do this differently here in the widget
 
     // forward some signals of m_map
     m_widget->connect( m_map,    SIGNAL( projectionChanged( Projection ) ),
                        m_widget, SIGNAL( projectionChanged( Projection ) ) );
     m_widget->connect( m_map,    SIGNAL( tileLevelChanged( int ) ),
                        m_widget, SIGNAL( tileLevelChanged( int ) ) );
-    m_widget->connect( m_map,    SIGNAL( framesPerSecond( qreal ) ),
-                       m_widget, SIGNAL( framesPerSecond( qreal ) ) );
 
     m_widget->connect( m_map,    SIGNAL( pluginSettingsChanged() ),
                        m_widget, SIGNAL( pluginSettingsChanged() ) );
@@ -500,7 +503,7 @@ bool MarbleWidget::showGps() const
 
 bool MarbleWidget::showFrameRate() const
 {
-    return d->m_map->showFrameRate();
+    return d->m_showFrameRate;
 }
 
 bool MarbleWidget::showBackground() const
@@ -797,8 +800,7 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
     QRect  dirtyRect = evt->rect();
 
     // Draws the map like MarbleMap::paint does, but adds our customPaint in between
-    d->m_map->d->paintGround( painter, dirtyRect );
-    d->m_map->customPaint( &painter );
+    d->m_map->paint( painter, dirtyRect );
     customPaint( &painter );
 
     if ( !isEnabled() )
@@ -815,11 +817,11 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
         widgetPainter.drawImage( rect(), image );
     }
 
-    if ( showFrameRate() )
+    if ( d->m_showFrameRate )
     {
         qreal fps = 1000.0 / (qreal)( t.elapsed() + 1 );
         d->m_map->d->paintFps( painter, dirtyRect, fps );
-        emit d->m_map->framesPerSecond( fps );
+        emit framesPerSecond( fps );
     }
 }
 
@@ -1008,7 +1010,7 @@ void MarbleWidget::setShowLakes( bool visible )
 
 void MarbleWidget::setShowFrameRate( bool visible )
 {
-    d->m_map->setShowFrameRate( visible );
+    d->m_showFrameRate = visible;
 
     repaint();
 }
