@@ -120,6 +120,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
     m_geometryLayer = new GeometryLayer( document );
     m_layerManager.addLayer( m_geometryLayer );
 
+    m_layerManager.addLayer( &m_fogLayer );
     m_layerManager.addLayer( &m_measureTool );
 }
 
@@ -230,6 +231,7 @@ MarbleMap::~MarbleMap()
     MarbleModel *model = d->m_modelIsOwned ? d->m_model : 0;
 
     d->m_layerManager.removeLayer( &d->m_measureTool );
+    d->m_layerManager.removeLayer( &d->m_fogLayer );
     delete d;
 
     delete model;  // delete the model after private data
@@ -712,13 +714,6 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
     renderPositions.clear();
     renderPositions << "HOVERS_ABOVE_SURFACE";
     d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
-
-    // FIXME: This is really slow. That's why we defer this to
-    //        PrintQuality. Either cache on a pixmap - or maybe
-    //        better: Add to GlobeScanlineTextureMapper.
-
-    if ( d->m_viewParams.mapQuality() == PrintQuality )
-        d->m_fogLayer.render( &painter, d->m_viewParams.viewport() );
 
     renderPositions.clear();
     renderPositions << "ATMOSPHERE"
