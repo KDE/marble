@@ -181,6 +181,8 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SIGNAL( projectionChanged( Projection ) ) );
     m_widget->connect( m_map,    SIGNAL( tileLevelChanged( int ) ),
                        m_widget, SIGNAL( tileLevelChanged( int ) ) );
+    m_widget->connect( m_map,    SIGNAL( framesPerSecond( qreal ) ),
+                       m_widget, SIGNAL( framesPerSecond( qreal ) ) );
 
     m_widget->connect( m_map,    SIGNAL( pluginSettingsChanged() ),
                        m_widget, SIGNAL( pluginSettingsChanged() ) );
