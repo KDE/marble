@@ -32,6 +32,12 @@ bool FogLayer::render( GeoPainter *painter,
     Q_UNUSED(renderPos)
     Q_UNUSED(layer)
 
+    // FIXME: The fog layer is really slow. That's why we defer it to
+    //        PrintQuality. Either cache on a pixmap - or maybe
+    //        better: Add to GlobeScanlineTextureMapper.
+    if ( painter->mapQuality() != PrintQuality )
+        return true;
+
     if ( viewParams->projection() != Spherical)
         return true;
 
