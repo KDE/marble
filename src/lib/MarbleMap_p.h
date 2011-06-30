@@ -8,6 +8,7 @@
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 // Copyright 2008      Carlos Licea <carlos.licea@kdemail.net>
+// Copyright 2010-2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_MARBLEMAP_P_H
@@ -48,7 +49,6 @@ class MarbleMapPrivate
     void setBoundingBox();
 
     void paintGround( GeoPainter &painter, QRect &dirtyRect);
-    void paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps);
 
     MarbleMap       *m_parent;
 

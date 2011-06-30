@@ -9,6 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 // Copyright 2008      Carlos Licea <carlos.licea@kdemail.net>
 // Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2010-2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
@@ -34,6 +35,7 @@
 // Marble
 #include "AbstractFloatItem.h"
 #include "AbstractProjection.h"
+#include "FpsLayer.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFeature.h"
 #include "GeoDataLatLonAltBox.h"
@@ -212,25 +214,6 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
     renderPositions << "ATMOSPHERE"
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
     m_layerManager.renderLayers( &painter, &m_viewParams, renderPositions );
-}
-
-void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps )
-{
-    Q_UNUSED( dirtyRect );
-
-    QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
-
-    QPoint fpsLabelPos( 10, 20 );
-
-    painter.setFont( QFont( "Sans Serif", 10 ) );
-
-    painter.setPen( Qt::black );
-    painter.setBrush( Qt::black );
-    painter.drawText( fpsLabelPos, fpsString );
-
-    painter.setPen( Qt::white );
-    painter.setBrush( Qt::white );
-    painter.drawText( fpsLabelPos.x() - 1, fpsLabelPos.y() - 1, fpsString );
 }
 
 // ----------------------------------------------------------------
@@ -709,10 +692,12 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
     d->paintGround( painter, dirtyRect );
     customPaint( &painter );
 
-    qreal fps = 1000.0 / (qreal)( t.elapsed() );
     if ( d->m_showFrameRate ) {
-        d->paintFps( painter, dirtyRect, fps );
+        FpsLayer fpsLayer( &t );
+        fpsLayer.render( &painter, d->m_viewParams.viewport() );
     }
+
+    const qreal fps = 1000.0 / (qreal)( t.elapsed() );
     emit framesPerSecond( fps );
 }
 
