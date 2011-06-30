@@ -218,21 +218,19 @@ void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fp
 {
     Q_UNUSED( dirtyRect );
 
-    if ( m_showFrameRate ) {
-        QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
+    QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
 
-        QPoint fpsLabelPos( 10, 20 );
+    QPoint fpsLabelPos( 10, 20 );
 
-        painter.setFont( QFont( "Sans Serif", 10 ) );
+    painter.setFont( QFont( "Sans Serif", 10 ) );
 
-        painter.setPen( Qt::black );
-        painter.setBrush( Qt::black );
-        painter.drawText( fpsLabelPos, fpsString );
+    painter.setPen( Qt::black );
+    painter.setBrush( Qt::black );
+    painter.drawText( fpsLabelPos, fpsString );
 
-        painter.setPen( Qt::white );
-        painter.setBrush( Qt::white );
-        painter.drawText( fpsLabelPos.x() - 1, fpsLabelPos.y() - 1, fpsString );
-    }
+    painter.setPen( Qt::white );
+    painter.setBrush( Qt::white );
+    painter.drawText( fpsLabelPos.x() - 1, fpsLabelPos.y() - 1, fpsString );
 }
 
 // ----------------------------------------------------------------
@@ -712,7 +710,9 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
     customPaint( &painter );
 
     qreal fps = 1000.0 / (qreal)( t.elapsed() );
-    d->paintFps( painter, dirtyRect, fps );
+    if ( d->m_showFrameRate ) {
+        d->paintFps( painter, dirtyRect, fps );
+    }
     emit framesPerSecond( fps );
 }
 
