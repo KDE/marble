@@ -166,29 +166,19 @@ void MarbleWidgetPrivate::construct()
     m_widget->grabGesture(Qt::PinchGesture);
 #endif
 
+    // Set background: black.
+    m_widget->setPalette( QPalette ( Qt::black ) );
+
+    // Set whether the black space gets displayed or the earth gets simply
+    // displayed on the widget background.
+    m_widget->setAutoFillBackground( true );
+
     // Initialize the map and forward some signals.
     m_map->setSize( m_widget->width(), m_widget->height() );
 
+    // forward some signals of m_map
     m_widget->connect( m_map,    SIGNAL( projectionChanged( Projection ) ),
                        m_widget, SIGNAL( projectionChanged( Projection ) ) );
-
-    // When some fundamental things change in the model, we got to
-    // show this in the view, i.e. here.
-    m_widget->connect( m_model,  SIGNAL( themeChanged( QString ) ),
-		       m_widget, SIGNAL( themeChanged( QString ) ) );
-    m_widget->connect( m_model, SIGNAL( modelChanged() ),
-                       m_widget, SLOT( update() ) );
-
-    // Repaint scheduling
-    m_widget->connect( m_map,    SIGNAL( repaintNeeded( QRegion ) ),
-                       m_widget, SLOT( scheduleRepaint( QRegion ) ) );
-    m_repaintTimer.setSingleShot( true );
-    m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
-    m_widget->connect( &m_repaintTimer, SIGNAL( timeout() ),
-                       m_widget, SLOT( update() ) );
-
-    // When some fundamental things change in the map, we got to show
-    // this in the view, i.e. here.
     m_widget->connect( m_map,    SIGNAL( tileLevelChanged( int ) ),
                        m_widget, SIGNAL( tileLevelChanged( int ) ) );
 
@@ -197,12 +187,16 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( m_map,    SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
 
-    // Set background: black.
-    m_widget->setPalette( QPalette ( Qt::black ) );
+    // react to some signals of m_map
+    m_widget->connect( m_map,    SIGNAL( repaintNeeded( QRegion ) ),
+                       m_widget, SLOT( scheduleRepaint( QRegion ) ) );
 
-    // Set whether the black space gets displayed or the earth gets simply 
-    // displayed on the widget background.
-    m_widget->setAutoFillBackground( true );
+    // When some fundamental things change in the model, we got to
+    // show this in the view, i.e. here.
+    m_widget->connect( m_model,  SIGNAL( themeChanged( QString ) ),
+		       m_widget, SIGNAL( themeChanged( QString ) ) );
+    m_widget->connect( m_model, SIGNAL( modelChanged() ),
+                       m_widget, SLOT( update() ) );
 
     // Show a progress dialog when the model calculates new map tiles.
     m_widget->connect( m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&,
@@ -218,6 +212,12 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
                        m_widget, SLOT( centerOn( qreal, qreal ) ) );
+
+    // Repaint timer
+    m_repaintTimer.setSingleShot( true );
+    m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
+    m_widget->connect( &m_repaintTimer, SIGNAL( timeout() ),
+                       m_widget, SLOT( update() ) );
 
     m_popupmenu = new MarbleWidgetPopupMenu( m_widget, m_model );
 
