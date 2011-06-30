@@ -37,7 +37,6 @@
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
 #include "MarbleMap.h"
-#include "MarbleMap_p.h" // FIXME: remove this
 #include "MarbleModel.h"
 #include "MarblePhysics.h"
 #include "MarbleWidgetInputHandler.h"
