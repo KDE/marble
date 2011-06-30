@@ -658,6 +658,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void centerOn( const GeoDataPlacemark& placemark, bool animated = false );
 
+    /**
      * @brief  Set the latitude for the center point
      * @param  lat  the new value for the latitude in degree.
      * @param  mode the FlyToMode that will be used.
