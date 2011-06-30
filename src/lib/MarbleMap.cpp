@@ -15,7 +15,6 @@
 
 // Own
 #include "MarbleMap.h"
-#include "MarbleMap_p.h"
 
 // Posix
 #include <cmath>
@@ -35,17 +34,21 @@
 // Marble
 #include "AbstractFloatItem.h"
 #include "AbstractProjection.h"
+#include "AtmosphereLayer.h"
+#include "FogLayer.h"
 #include "FpsLayer.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFeature.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataTreeModel.h"
+#include "GeometryLayer.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
 #include "GeoSceneVector.h"
 #include "GeoSceneZoom.h"
+#include "LayerManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
@@ -60,12 +63,50 @@
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
+#include "VectorComposer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
-using namespace Marble;
-/* TRANSLATOR Marble::MarbleMap */
+namespace Marble
+{
 
+class MarbleMapPrivate
+{
+    friend class MarbleWidget;
+
+ public:
+    explicit MarbleMapPrivate( MarbleMap *parent, MarbleModel *model );
+
+    void construct();
+
+    void paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect );
+
+    void setBoundingBox();
+
+    void paintGround( GeoPainter &painter, QRect &dirtyRect);
+
+    MarbleMap       *m_parent;
+
+    // The model we are showing.
+    MarbleModel     *const m_model;
+    bool             m_modelIsOwned;
+
+    ViewParams       m_viewParams;
+    bool             m_backgroundVisible;
+
+    LayerManager     m_layerManager;
+    GeometryLayer           *m_geometryLayer;
+    AtmosphereLayer          m_atmosphereLayer;
+    FogLayer                 m_fogLayer;
+    TextureLayer     m_textureLayer;
+    PlacemarkLayout  m_placemarkLayout;
+    VectorComposer   m_veccomposer;
+    MeasureTool      m_measureTool;
+
+    // Parameters for the maps appearance.
+
+    bool             m_showFrameRate;
+};
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
         : m_parent( parent ),
@@ -1073,6 +1114,8 @@ MeasureTool *MarbleMap::measureTool()
 TextureLayer* MarbleMap::textureLayer()
 {
     return &d->m_textureLayer;
+}
+
 }
 
 #include "MarbleMap.moc"
