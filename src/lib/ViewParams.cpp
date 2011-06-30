@@ -70,6 +70,7 @@ public:
     QSharedPointer<QImage>  m_coastImage;      // A slightly higher level image.
 
     void initGlobalSettings();
+    void optimizeCanvasImageFormat();
     void propagateGlobalToLocalSettings();
 };
 
@@ -101,6 +102,27 @@ void ViewParamsPrivate::initGlobalSettings()
     GeoSceneProperty * const showClouds = new GeoSceneProperty( showCloudsPropertyName );
     m_globalSettings.addProperty( showClouds );
 }
+
+void ViewParamsPrivate::optimizeCanvasImageFormat()
+{
+    // If the globe covers fully the screen then we can use the faster
+    // RGB32 as there are no translucent areas involved.
+    QImage::Format imageFormat = ( m_viewport.mapCoversViewport() )
+                                 ? QImage::Format_RGB32
+                                 : QImage::Format_ARGB32_Premultiplied;
+
+    // Recreate the canvas image with the new size.
+    m_canvasImage = QSharedPointer<QImage>( new QImage( m_viewport.size(), imageFormat ) );
+
+    // Repaint the background if necessary
+    if ( !m_viewport.currentProjection()->mapCoversViewport( &m_viewport ) ) {
+        m_canvasImage->fill(0); // Using Qt::transparent is wrong here (equals "18")!
+    }
+
+    // Recreate the coastline detection offscreen image
+    m_coastImage = QSharedPointer<QImage>( new QImage( m_viewport.size(), QImage::Format_RGB32 ) );
+}
+
 
 void ViewParamsPrivate::propagateGlobalToLocalSettings()
 {
@@ -274,13 +296,21 @@ int ViewParams::radius() const
 
 void ViewParams::setRadius(int newRadius)
 {
+    // Avoid expensive clearing of the canvas image if there is no change:
+    if ( d->m_viewport.radius() == newRadius ) return;
+
+    bool mapDidCoverViewport = d->m_viewport.mapCoversViewport();
+
     d->m_viewport.setRadius( newRadius );
 
-    // Repaint the background if necessary
+    if ( mapDidCoverViewport != d->m_viewport.mapCoversViewport() ) {
+        d->optimizeCanvasImageFormat();
+        return;
+    }
+
     if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
         d->m_canvasImage->fill(0); // Using Qt::transparent is wrong here (equals "18")!
     }
-
 }
 
 Quaternion ViewParams::planetAxis() const
@@ -291,12 +321,6 @@ Quaternion ViewParams::planetAxis() const
 void ViewParams::setPlanetAxis(const Quaternion &newAxis)
 {
     d->m_viewport.setPlanetAxis( newAxis );
-/*
-    // Repaint the background if necessary
-    if ( projection() != Spherical && !currentProjection()->mapCoversViewport( viewport() ) ) {
-        canvasImage()->fill(0); // Using Qt::transparent is wrong here (equals "18")!
-    }
-*/
 }
 
 void ViewParams::centerCoordinates( qreal &centerLon, qreal &centerLat )
@@ -315,25 +339,9 @@ int ViewParams::height() const
 }
 
 void ViewParams::setSize( int width, int height )
-{
+{    
     d->m_viewport.setSize( QSize( width, height ) );
-
-    // If the globe covers fully the screen then we can use the faster
-    // RGB32 as there are no translucent areas involved.
-    QImage::Format imageFormat = ( d->m_viewport.mapCoversViewport() )
-                                 ? QImage::Format_RGB32
-                                 : QImage::Format_ARGB32_Premultiplied;
-
-    // Recreate the canvas image with the new size.
-    d->m_canvasImage = QSharedPointer<QImage>( new QImage( width, height, imageFormat ) );
-
-    // Repaint the background if necessary
-    if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
-        d->m_canvasImage->fill(0); // Using Qt::transparent is wrong here (equals "18")!
-    }
-
-    // Recreate the coastline detection offscreen image
-    d->m_coastImage = QSharedPointer<QImage>( new QImage( width, height, QImage::Format_RGB32 ) );
+    d->optimizeCanvasImageFormat();
 }
 
 QSharedPointer<QImage> ViewParams::canvasImagePtr() const

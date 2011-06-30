@@ -25,9 +25,9 @@ public:
 
     OpenCachingCacheLogEntry& operator[]( int index );
 
-    void setCacheId( int cacheId );
+    void setCacheId( unsigned long long cacheId );
 
-    int cacheId() const;
+    unsigned long long cacheId() const;
 
     void addLogEntry( const OpenCachingCacheLogEntry& logEntry );
 
@@ -38,7 +38,7 @@ public:
     void clear();
 
 private:
-    long m_cacheId;
+    unsigned long long m_cacheId;
 
     QList<OpenCachingCacheLogEntry> m_logEntries;
 };

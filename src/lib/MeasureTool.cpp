@@ -52,6 +52,12 @@ MeasureTool::MeasureTool( MarbleModel *model, QObject* parent )
 }
 
 
+QStringList MeasureTool::renderPosition() const
+{
+    return QStringList() << "USER_TOOLS";
+}
+
+
 bool MeasureTool::render( GeoPainter *painter, 
                           ViewportParams *viewport,
                           const QString& renderPos,

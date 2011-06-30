@@ -34,6 +34,7 @@ void MonavMap::setDirectory( const QDir &dir )
 void MonavMap::parseBoundingBox( const QFileInfo &file )
 {
     GeoDataLineString points;
+    bool tooLarge = false;
     QFile input( file.absoluteFilePath() );
     if ( input.open( QFile::ReadOnly ) ) {
         GeoDataParser parser( GeoData_KML );
@@ -53,6 +54,9 @@ void MonavMap::parseBoundingBox( const QFileInfo &file )
             m_transport = placemark->extendedData().value( "transport" ).value().toString();
             m_payload = placemark->extendedData().value( "payload" ).value().toString();
             GeoDataMultiGeometry* geometry = dynamic_cast<GeoDataMultiGeometry*>( placemark->geometry() );
+            if ( geometry->size() > 1500 ) {
+                tooLarge = true;
+            }
             for ( int i = 0; geometry && i < geometry->size(); ++i ) {
                 GeoDataLinearRing* poly = dynamic_cast<GeoDataLinearRing*>( geometry->child( i ) );
                 if ( poly ) {
@@ -61,24 +65,40 @@ void MonavMap::parseBoundingBox( const QFileInfo &file )
                     }
                     m_tiles.push_back( *poly );
                 }
+
+                if ( poly->size() > 1500 ) {
+                    tooLarge = true;
+                }
             }
         } else {
             mDebug() << "File " << file.absoluteFilePath() << " does not contain one placemark, but " << placemarks.size();
         }
     }
     m_boundingBox = points.latLonAltBox();
+
+    if ( tooLarge ) {
+        // The bounding box polygon is rather complicated, therefore not allowing a quick check
+        // and also occupying memory. Discard the polygon and only store the rectangular bounding
+        // box. Only happens for non-simplified bounding box polygons.
+        mDebug() << "Discarding too large bounding box poylgon for " << file.absoluteFilePath() << ". Please check for a map update.";
+        m_tiles.clear();
+    }
 }
 
 bool MonavMap::containsPoint( const GeoDataCoordinates &point ) const
 {
     // If we do not have a bounding box at all, we err on the safe side
-    if ( m_tiles.isEmpty() ) {
+    if ( m_boundingBox.isEmpty() ) {
         return true;
     }
 
     // Quick check for performance reasons
     if ( !m_boundingBox.contains( point ) ) {
         return false;
+    }
+
+    if ( m_tiles.isEmpty() ) {
+        return true; // Tiles discarded for performance reason
     }
 
     // GeoDataLinearRing does a 3D check, but we only have 2D data for

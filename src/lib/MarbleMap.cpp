@@ -78,6 +78,8 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
     GeoDataDocument *document = dynamic_cast<GeoDataDocument*>( object->parent() );
     m_geometryLayer = new GeometryLayer( document );
     m_layerManager.addLayer( m_geometryLayer );
+
+    m_layerManager.addLayer( &m_measureTool );
 }
 
 void MarbleMapPrivate::construct()
@@ -269,6 +271,7 @@ MarbleMap::~MarbleMap()
 {
     MarbleModel *model = d->m_modelIsOwned ? d->m_model : 0;
 
+    d->m_layerManager.removeLayer( &d->m_measureTool );
     delete d;
 
     delete model;  // delete the model after private data
@@ -707,7 +710,6 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
     
     d->paintGround( painter, dirtyRect );
     customPaint( &painter );
-    d->m_measureTool.render( &painter, viewport() );
 
     qreal fps = 1000.0 / (qreal)( t.elapsed() );
     d->paintFps( painter, dirtyRect, fps );

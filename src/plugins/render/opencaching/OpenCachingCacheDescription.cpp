@@ -15,7 +15,7 @@ namespace Marble
 
 OpenCachingCacheDescription::OpenCachingCacheDescription( const QHash<QString, QVariant>& properties  )
 {
-    m_cacheId = properties["cacheid"].toInt();
+    m_cacheId = properties["cacheid"].toULongLong();
     m_language = properties["language"].toString();
     m_shortDescription = properties["shortdesc"].toString();
     m_description = properties["desc"].toString();
@@ -23,12 +23,12 @@ OpenCachingCacheDescription::OpenCachingCacheDescription( const QHash<QString, Q
     m_lastModifiedDate = properties["lastmodified"].toDateTime();
 }
 
-void OpenCachingCacheDescription::setCacheId( int cacheId )
+void OpenCachingCacheDescription::setCacheId( unsigned long long cacheId )
 {
     m_cacheId = cacheId;
 }
 
-int OpenCachingCacheDescription::cacheId() const
+unsigned long long OpenCachingCacheDescription::cacheId() const
 {
     return m_cacheId;
 }

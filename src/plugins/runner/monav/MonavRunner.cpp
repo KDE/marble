@@ -38,6 +38,8 @@ public:
 
     bool retrieveData( RouteRequest *route, RoutingResult* result ) const;
 
+    bool retrieveData( RouteRequest *route, const QString &mapDir, RoutingResult* result ) const;
+
     GeoDataLineString* retrieveRoute( RouteRequest *route, QVector<GeoDataPlacemark*> *instructions ) const;
 
     GeoDataDocument* createDocument( GeoDataLineString* geometry, const QVector<GeoDataPlacemark*> &instructions  ) const;
@@ -56,6 +58,26 @@ bool MonavRunnerPrivate::retrieveData( RouteRequest *route, RoutingResult* reply
         return false;
     }
 
+    if ( retrieveData( route, mapDir, reply ) ) {
+        return true;
+    }
+
+    // The separation into two different methods to determine a first country candidate
+    // and a list of alternative ones if the first candidate fails is intentional
+    // for performance reasons. Do not merge both.
+    QStringList alternatives = m_plugin->mapDirectoriesForRequest( route );
+    alternatives.removeOne( mapDir );
+    foreach( const QString &mapDir, alternatives ) {
+        if ( retrieveData( route, mapDir, reply ) ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool MonavRunnerPrivate::retrieveData( RouteRequest *route, const QString &mapDir, RoutingResult* reply ) const
+{
     QLocalSocket socket;
     socket.connectToServer( "MoNavD" );
     if ( socket.waitForConnected() ) {

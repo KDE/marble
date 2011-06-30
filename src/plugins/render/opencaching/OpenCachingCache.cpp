@@ -15,7 +15,7 @@ namespace Marble
 
 OpenCachingCache::OpenCachingCache( const QHash<QString, QVariant>& properties )
 {
-    m_id = properties["id"].toInt();
+    m_id =  properties["id"].toULongLong();
     m_dateHidden = properties["datehidden"].toDateTime();
     m_dateCreated = properties["datecreated"].toDateTime();
     m_dateLastModified = properties["lastmodified"].toDateTime();
@@ -31,12 +31,12 @@ OpenCachingCache::OpenCachingCache( const QHash<QString, QVariant>& properties )
     m_latitude = properties["latitude"].toReal();
 }
 
-void OpenCachingCache::setId( int id )
+void OpenCachingCache::setId( unsigned long long id )
 {
     m_id = id;
 }
 
-int OpenCachingCache::id() const
+unsigned long long OpenCachingCache::id() const
 {
     return m_id;
 }

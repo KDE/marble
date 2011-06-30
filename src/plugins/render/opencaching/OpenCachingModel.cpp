@@ -37,13 +37,12 @@ QHash<QString, QVariant> OpenCachingModelPrivate::parseCache( QXmlStreamReader& 
 {
     QHash<QString, QVariant> cache;
     while ( !reader.atEnd() ) {
-        if ( reader.isStartElement() && reader.text() != "cache" ) {
+        if ( reader.isStartElement() && reader.name() != "cache" ) {
             if( reader.name() == "id" ) {
                 cache["id"] = reader.attributes().value("id").toString();
             }
-            else {
-                mDebug() << reader.name().toString() << " = " << reader.readElementText();
-                cache[reader.name().toString()] = reader.text().toString();
+            else if( reader.name() != "attributes" && reader.name() != "attribute" ) {
+                cache[reader.name().toString()] = reader.readElementText();
             }
         }
         else if( reader.isEndElement() && reader.name() == "cache" ) {
@@ -58,7 +57,7 @@ QHash<QString, QVariant> OpenCachingModelPrivate::parseLogEntry( QXmlStreamReade
 {
     QHash<QString, QVariant> cacheLogEntry;
     while ( !reader.atEnd() ) {
-        if ( reader.isStartElement() && reader.text() != "cachelog" ) {
+        if ( reader.isStartElement() && reader.name() != "cachelog" ) {
             cacheLogEntry[reader.name().toString()] = reader.readElementText();
         }
         else if( reader.isEndElement() && reader.name() == "cachelog" ) {
@@ -73,7 +72,7 @@ QHash<QString, QVariant> OpenCachingModelPrivate::parseDescription( QXmlStreamRe
 {
     QHash<QString, QVariant> cacheDesc;
     while ( !reader.atEnd() ) {
-        if ( reader.isStartElement() && reader.text() != "cachedesc" ) {
+        if ( reader.isStartElement() && reader.name() != "cachedesc" ) {
             cacheDesc[reader.name().toString()] = reader.readElementText();
         }
         else if( reader.isEndElement() && reader.name() == "cachedesc" ) {
@@ -141,38 +140,35 @@ void OpenCachingModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const
 void OpenCachingModel::parseFile( const QByteArray& file )
 {
     QXmlStreamReader reader( file );
+    QXmlStreamReader::TokenType token;
     QHash<int, OpenCachingCache> caches;
     QHash<int, QHash<QString, OpenCachingCacheDescription> > descriptions;
     QHash<int, OpenCachingCacheLog> logs;
 
     mDebug() << "start parsing";
     while( !reader.atEnd() && !reader.hasError() ) {
-        QXmlStreamReader::TokenType token = reader.readNext();
+        token = reader.readNext();
         if( token == QXmlStreamReader::StartDocument ) {
             continue;
         }
         if( token == QXmlStreamReader::StartElement ) {
             if( reader.name() == "cache" ) {
-                mDebug() << "found cache";
                 OpenCachingCache cache = d->parseCache( reader );
                 caches[cache.id()] = cache;
             }
             else if( reader.name() == "cachedesc" ) {
-                mDebug() << "found cachedesc";
                 OpenCachingCacheDescription description = d->parseDescription( reader );
                 descriptions[description.cacheId()][description.language()] = description;
             }
             else if( reader.name() == "cachelog" ) {
-                mDebug() << "found cachelog";
                 OpenCachingCacheLogEntry logEntry = d->parseLogEntry( reader );
                 logs[logEntry.cacheId()].addLogEntry( logEntry );
             }
         }
     }
 
-    mDebug() << "parsed " << caches.size() << " elements";
+    mDebug() << "finished parsing, " << caches.size() << " elements:" << caches.keys();
     foreach( const int key, caches.keys() ) {
-        mDebug() << "adding item " << caches[key].cacheName();
         caches[key].setDescription( descriptions[key] );
         caches[key].setLog( logs[key] );
         addItemToList( new OpenCachingItem( caches[key], this ) );

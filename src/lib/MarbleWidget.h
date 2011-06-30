@@ -45,6 +45,7 @@ class GeoPainter;
 class GeoSceneDocument;
 class LayerInterface;
 class MarbleModel;
+class MarbleWidgetPopupMenu;
 class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
 class MeasureTool;
@@ -169,6 +170,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     ViewportParams *viewport();
     const ViewportParams *viewport() const;
+
+    MarbleWidgetPopupMenu *popupMenu();
 
     /**
      * Returns the current input handler
@@ -1016,7 +1019,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Enables custom drawing onto the MarbleWidget straight after
      * @brief the globe and before all other layers has been rendered.
-     * @param painter 
+     * @param painter
+     *
+     * @deprecated implement LayerInterface and add it using @p addLayer()
      */
     virtual void customPaint( GeoPainter *painter );
 
