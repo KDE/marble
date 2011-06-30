@@ -622,30 +622,29 @@ void MarbleWidget::centerOn( const qreal lon, const qreal lat, bool animated )
 void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )
 {
     GeoDataLookAt target = lookAt();
-    target.setLongitude( position.longitude() );
-    target.setLatitude( position.latitude() );
+    target.setCoordinates( position );
     flyTo( target, animated ? Automatic : Instant );
 }
 
 void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
 {
+    int newRadius = radius();
     ViewportParams* viewparams = viewport();
     //prevent divide by zero
     if( box.height() && box.width() ) {
         //work out the needed zoom level
         int const horizontalRadius = ( 0.25 * M_PI ) * ( viewparams->height() / box.height() );
         int const verticalRadius = ( 0.25 * M_PI ) * ( viewparams->width() / box.width() );
-        int const radius = qMin<int>( horizontalRadius, verticalRadius );
-        // radius < 0 can happen if the box size approaches zero
-        setRadius( radius < 0 ? d->radius( maximumZoom() ) : radius );
+        newRadius = qMin<int>( horizontalRadius, verticalRadius );
+        newRadius = qMax<int>( d->radius( minimumZoom() ), qMin<int>( newRadius, d->radius( maximumZoom() ) ) );
     }
 
     //move the map
-    centerOn( box.center().longitude( GeoDataCoordinates::Degree ),
-              box.center().latitude( GeoDataCoordinates::Degree ),
-              animated );
-
-    repaint();
+    GeoDataLookAt target;
+    target.setCoordinates( box.center() );
+    target.setAltitude( box.center().altitude() );
+    target.setRange(KM2METER * distanceFromRadius( newRadius ));
+    flyTo( target, animated ? Automatic : Instant );
 }
 
 void MarbleWidget::centerOn( const GeoDataPlacemark& placemark, bool animated )
