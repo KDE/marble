@@ -148,13 +148,15 @@ void TileScalingTextureMapper::mapTexture( QPainter *painter, ViewParams *viewPa
                 const QSize size = QSize( qRound( rect.right() - rect.left() ), qRound( rect.bottom() - rect.top() ) );
                 const int cacheHash = 2 * ( size.width() % 2 ) + ( size.height() % 2 );
                 const TileId cacheId = TileId( cacheHash, stackedId.zoomLevel(), stackedId.x(), stackedId.y() );
-                QPixmap *im = (*m_cache)[cacheId];
-                if ( im == 0 ) {
+                QPixmap *im_cached = (*m_cache)[cacheId];
+                QPixmap *im = im_cached;
+                if ( im == 0 )
                     im = new QPixmap( QPixmap::fromImage( tile->resultTile()->scaled( size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation ) ) );
-                    m_cache->insert( cacheId, im );
-                }
 
                 painter->drawPixmap( rect.topLeft(), *im );
+
+                if (im != im_cached)
+                    m_cache->insert( cacheId, im );
             }
         }
 
