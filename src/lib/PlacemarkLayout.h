@@ -35,6 +35,7 @@ namespace Marble
 class GeoDataCoordinates;
 class GeoDataPlacemark;
 class GeoDataStyle;
+class GeoSceneLayer;
 class PlacemarkPainter;
 class TileId;
 class VisiblePlacemark;
@@ -63,6 +64,8 @@ class PlacemarkLayout : public QObject
      */
     ~PlacemarkLayout();
 
+    void setDefaultLabelColor( const QColor &color );
+
     /**
      * Layouts the place marks.
      *
@@ -89,6 +92,16 @@ class PlacemarkLayout : public QObject
     QVector<const GeoDataPlacemark*> whichPlacemarkAt( const QPoint &pos );
 
  public Q_SLOTS:
+    // earth
+    void setShowPlaces( bool show );
+    void setShowCities( bool show );
+    void setShowTerrain( bool show );
+    void setShowOtherPlaces( bool show );
+
+    // other planets
+    void setShowLandingSites( bool show );
+    void setShowCraters( bool show );
+    void setShowMaria( bool show );
 
     void requestStyleReset();
     void setCacheData();
@@ -117,6 +130,17 @@ class PlacemarkLayout : public QObject
     QMap<TileId, QList<GeoDataPlacemark*> > m_placemarkCache;
 
     QVector< int > m_weightfilter;
+
+    // earth
+    bool m_showPlaces;
+    bool m_showCities;
+    bool m_showTerrain;
+    bool m_showOtherPlaces;
+
+    // other planets
+    bool m_showLandingSites;
+    bool m_showCraters;
+    bool m_showMaria;
 
     int     m_maxLabelHeight;
     bool    m_styleResetRequested;
