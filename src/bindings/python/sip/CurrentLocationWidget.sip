@@ -34,5 +34,7 @@ public:
     void                    setAutoZoom (bool activate);
 //ig    Marble::AdjustNavigation::CenterMode  recenterMode () const;
     bool                    autoZoom () const;
+    bool                    trackVisible () const;
+    void                    setTrackVisible (bool visible);
 };
 };
