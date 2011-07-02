@@ -26,7 +26,6 @@ class PositionTracking : QObject /Abstract/
 %End
 
 public:
-//ig    explicit                PositionTracking (FileManager* fileManager, QObject* parent /TransferThis/ = 0);
     ~PositionTracking ();
 //ig    void                    setPositionProviderPlugin (PositionProviderPlugin* plugin);
 //ig    PositionProviderPlugin*  positionProviderPlugin ();
@@ -46,5 +45,6 @@ signals:
 public:
     bool                    isTrackEmpty () const;
     bool                    saveTrack (QString& fileName);
+    explicit                PositionTracking (Marble::MarbleModel* model);
 };
 };
