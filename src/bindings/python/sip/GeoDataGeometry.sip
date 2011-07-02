@@ -28,7 +28,6 @@ class GeoDataGeometry : Marble::GeoDataObject
 public:
                             GeoDataGeometry ();
                             GeoDataGeometry (const Marble::GeoDataGeometry& other);
-    bool                    operator == (const Marble::GeoDataGeometry& other) const;
     virtual EnumGeometryId  geometryId () const;
     bool                    extrude () const;
     void                    setExtrude (bool extrude);
