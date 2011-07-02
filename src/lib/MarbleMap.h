@@ -679,6 +679,9 @@ class MARBLE_EXPORT MarbleMap : public QObject
     virtual void customPaint( GeoPainter *painter );
 
  private:
+    Q_PRIVATE_SLOT( d, void updateProperty( const QString &, bool ) )
+
+ private:
     Q_DISABLE_COPY( MarbleMap )
     MarbleMapPrivate * const d;
 

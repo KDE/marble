@@ -46,6 +46,7 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
+#include "GeoSceneSettings.h"
 #include "GeoSceneVector.h"
 #include "GeoSceneZoom.h"
 #include "LayerManager.h"
@@ -82,6 +83,8 @@ class MarbleMapPrivate
     void paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect );
 
     void setBoundingBox();
+
+    void updateProperty( const QString &, bool );
 
     MarbleMap       *m_parent;
 
@@ -192,6 +195,26 @@ void  MarbleMapPrivate::paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect
     painter.drawText( textRect, Qt::AlignHCenter | Qt::AlignTop, message ); 
 
     painter.restore();
+}
+
+void MarbleMapPrivate::updateProperty( const QString &name, bool show )
+{
+    if ( name == "places" ) {
+        m_placemarkLayout.setShowPlaces( show );
+    } else if ( name == "cities" ) {
+        m_placemarkLayout.setShowCities( show );
+    } else if ( name == "terrain" ) {
+        m_placemarkLayout.setShowTerrain( show );
+    } else if ( name == "otherplaces" ) {
+        m_placemarkLayout.setShowOtherPlaces( show );
+    }
+    if ( name == "landingsites" ) {
+        m_placemarkLayout.setShowLandingSites( show );
+    } else if ( name == "craters" ) {
+        m_placemarkLayout.setShowCraters( show );
+    } else if ( name == "maria" ) {
+        m_placemarkLayout.setShowMaria( show );
+    }
 }
 
 // ----------------------------------------------------------------
@@ -750,12 +773,20 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     if ( !mapThemeId.isEmpty() && mapThemeId == d->m_model->mapThemeId() )
         return;
 
+    if ( d->m_model->mapTheme() ) {
+        disconnect( d->m_model->mapTheme()->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
+                    this, SLOT( updateProperty( const QString &, bool ) ) );
+    }
+
     d->m_viewParams.setMapThemeId( mapThemeId );
     GeoSceneDocument *mapTheme = d->m_viewParams.mapTheme();
 
     if ( !mapTheme ) {
         return;
     }
+
+    connect( mapTheme->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
+             this, SLOT( updateProperty( const QString &, bool ) ) );
 
     // NOTE due to frequent regressions: 
     // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
@@ -847,7 +878,19 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     // NOTE due to frequent regressions: 
     // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
     // at this point!
-    
+
+    // earth
+    d->m_placemarkLayout.setShowPlaces( showPlaces() );
+    d->m_placemarkLayout.setShowCities( showCities() );
+    d->m_placemarkLayout.setShowTerrain( showTerrain() );
+    d->m_placemarkLayout.setShowOtherPlaces( showOtherPlaces() );
+
+    // other planets
+    d->m_placemarkLayout.setShowLandingSites( propertyValue( "landingsites" ) );
+    d->m_placemarkLayout.setShowCraters( propertyValue( "craters") );
+    d->m_placemarkLayout.setShowMaria( propertyValue( "maria" ) );
+
+    d->m_placemarkLayout.setDefaultLabelColor( mapTheme->map()->labelColor() );
     d->m_placemarkLayout.requestStyleReset();
 
     d->m_model->setMapTheme( mapTheme );
