@@ -26,8 +26,6 @@ class QDateTime;
 namespace Marble
 {
 
-class MarbleWidget;
-
 class StarPoint
 {
  public:
@@ -103,7 +101,6 @@ class StarsPlugin : public RenderPlugin
     bool m_isInitialized;
     bool m_starsLoaded;
     QVector<StarPoint> m_stars;
-    MarbleWidget* m_marbleWidget;
 };
 
 }
