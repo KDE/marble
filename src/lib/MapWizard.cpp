@@ -70,6 +70,7 @@ public:
     QNetworkAccessManager legendAccessManager;
     QNetworkAccessManager levelZeroAccessManager;
     QStringList wmsServerList;
+    QMap<QString, QString> wmsFetchedMaps;
     QStringList staticUrlServerList;
     bool m_serverCapabilitiesValid;
 
@@ -136,7 +137,7 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
     connect( d->uiWidget.pushButtonLegend_2, SIGNAL( clicked( bool ) ), this, SLOT( queryLegendImage() ) );
 
     connect( d->uiWidget.comboBoxWmsServer, SIGNAL( currentIndexChanged( QString ) ), d->uiWidget.lineEditWmsUrl, SLOT( setText( QString ) ) );
-    connect( d->uiWidget.comboBoxWmsMap, SIGNAL( currentIndexChanged( QString ) ), this, SLOT( autoFillDetails() ) );
+    connect( d->uiWidget.listWidgetWmsMaps, SIGNAL( itemSelectionChanged() ), this, SLOT( autoFillDetails() ) );
     
     connect( d->uiWidget.lineEditTitle, SIGNAL( textChanged( QString ) ), d->uiWidget.labelSumMName, SLOT( setText( QString ) ) );
     connect( d->uiWidget.lineEditTheme, SIGNAL( textChanged( QString ) ), d->uiWidget.labelSumMTheme, SLOT( setText( QString ) ) );
@@ -181,14 +182,14 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
     QDomNodeList layers = firstLayer.elementsByTagName( "Layer" );
 
     d->wmsProjection = firstLayer.firstChildElement( "SRS" ).text();
-    d->uiWidget.comboBoxWmsMap->clear();
+    d->uiWidget.listWidgetWmsMaps->clear();
 
     for( int i = 0; i < layers.size(); ++i )
     {
         QString theme = layers.at( i ).firstChildElement( "Name" ).text();
         QString title = layers.at( i ).firstChildElement( "Title" ).text();
         QDomElement legendUrl = layers.at( i ).firstChildElement( "Style" ).firstChildElement( "LegendURL" );
-        d->uiWidget.comboBoxWmsMap->addItem( title, theme );
+        d->wmsFetchedMaps[ theme ] = title;
 
         d->wmsLegends.clear();
         if( legendUrl.isNull() ) {
@@ -197,6 +198,8 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
             d->wmsLegends.append( legendUrl.firstChildElement( "OnlineResource" ).attribute( "xlink:href" ) );
         }
     }
+    
+    d->uiWidget.listWidgetWmsMaps->addItems( d->wmsFetchedMaps.values() );
 
     QDomElement format = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Request" )
                          .firstChildElement( "GetMap" ).firstChildElement( "Format" );
@@ -207,7 +210,7 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
         d->format = "jpg";
     }
 
-    if( !d->uiWidget.comboBoxWmsMap->currentText().isEmpty() && !d->wmsServerList.contains( d->uiWidget.lineEditWmsUrl->text() ) ) {
+    if( !d->wmsFetchedMaps.isEmpty() && !d->wmsServerList.contains( d->uiWidget.lineEditWmsUrl->text() ) ) {
         d->wmsServerList.append( d->uiWidget.lineEditWmsUrl->text() );
         setWmsServers( d->wmsServerList );
     }
@@ -259,9 +262,9 @@ void MapWizard::setStaticUrlServers( const QStringList& uris )
 
 void MapWizard::autoFillDetails()
 {
-    int selected = d->uiWidget.comboBoxWmsMap->currentIndex();
-    d->uiWidget.lineEditTitle->setText( d->uiWidget.comboBoxWmsMap->currentText() );
-    d->uiWidget.lineEditTheme->setText( d->uiWidget.comboBoxWmsMap->itemData( selected ).toString() );
+    QString selected = d->uiWidget.listWidgetWmsMaps->currentItem()->text();
+    d->uiWidget.lineEditTitle->setText( selected );
+    d->uiWidget.lineEditTheme->setText( d->wmsFetchedMaps.key( selected ) );
 }
 
 bool MapWizard::createFiles( const GeoSceneDocument* document )
@@ -374,12 +377,12 @@ void MapWizard::downloadLevelZero()
 {
     if( d->mapProviderType == MapWizardPrivate::WmsMap )
     {
-        int selected = d->uiWidget.comboBoxWmsMap->currentIndex();
+        QString selected = d->uiWidget.listWidgetWmsMaps->currentItem()->text();
         
         QUrl downloadUrl( d->uiWidget.lineEditWmsUrl->text() );
         downloadUrl.addQueryItem( "request", "GetMap" );
         downloadUrl.addQueryItem( "version", "1.1.1" );
-        downloadUrl.addQueryItem( "layers", d->uiWidget.comboBoxWmsMap->itemData( selected ).toString() );
+        downloadUrl.addQueryItem( "layers", d->wmsFetchedMaps.key( selected ) );
         downloadUrl.addQueryItem( "srs", "EPSG:4326" );
         downloadUrl.addQueryItem( "width", "400" );
         downloadUrl.addQueryItem( "height", "200" );
@@ -701,7 +704,7 @@ GeoSceneDocument* MapWizard::createDocument()
     if( d->mapProviderType == MapWizardPrivate::WmsMap )
     {
         texture->setFileFormat( d->format );
-        QString layer = d->uiWidget.comboBoxWmsMap->itemData( d->uiWidget.comboBoxWmsMap->currentIndex() ).toString();
+        QString layer = d->wmsFetchedMaps.key( d->uiWidget.listWidgetWmsMaps->currentItem()->text() );
         QUrl downloadUrl = QUrl( d->uiWidget.lineEditWmsUrl->text() );
         downloadUrl.addQueryItem( "layers", layer );
         texture->addDownloadUrl( downloadUrl );
@@ -977,13 +980,13 @@ void MapWizard::accept()
     }
     else if ( d->mapProviderType == MapWizardPrivate::WmsMap )
     {
-        Q_ASSERT( !d->uiWidget.comboBoxWmsMap->currentText().isEmpty() );
+        Q_ASSERT( !d->wmsFetchedMaps.isEmpty() );
 
         QUrl wmsUrl( d->uiWidget.lineEditWmsUrl->text() );
         d->protocol = wmsUrl.toString().left( wmsUrl.toString().indexOf( ':' ) );
         d->host =  QString( wmsUrl.encodedHost() );
         d->path =  QString( wmsUrl.encodedPath() );
-        d->query = QString( "layers=%1&%2" ).arg( d->uiWidget.comboBoxWmsMap->itemData( d->uiWidget.comboBoxWmsMap->currentIndex() ).toString() )
+        d->query = QString( "layers=%1&%2" ).arg( d->wmsFetchedMaps.key( d->uiWidget.listWidgetWmsMaps->currentItem()->text() ) )
                       .arg( QString( wmsUrl.encodedQuery() ) );
 
         Q_ASSERT( !d->levelZero.isNull() );
@@ -1008,8 +1011,10 @@ void MapWizard::accept()
     {
         if( d->mapProviderType == MapWizardPrivate::WmsMap )
         {
-            if( d->wmsLegends.isEmpty() && d->wmsLegends.at( d->uiWidget.comboBoxWmsMap->currentIndex() ).isEmpty() )
-                downloadLegend( d->wmsLegends.at( d->uiWidget.comboBoxWmsMap->currentIndex() ) );
+            if( d->wmsLegends.isEmpty() && d->wmsLegends.at( d->uiWidget.listWidgetWmsMaps->currentRow() ).isEmpty() )
+            {
+                downloadLegend( d->wmsLegends.at( d->uiWidget.listWidgetWmsMaps->currentRow() ) );
+            }
         } else if( d->mapProviderType == MapWizardPrivate::StaticImageMap || d->mapProviderType == MapWizardPrivate::StaticUrlMap ) {
             createLegend();
         }
