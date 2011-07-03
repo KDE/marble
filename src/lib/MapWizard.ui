@@ -172,16 +172,19 @@ p, li { white-space: pre-wrap; }
    </layout>
   </widget>
   <widget class="QWizardPage" name="wizardPageWmsAvailableMaps">
-   <layout class="QHBoxLayout" name="horizontalLayout_7">
-    <item>
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0" rowspan="2">
      <widget class="QLabel" name="labelWmsMaps">
       <property name="text">
        <string>Available Maps:</string>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
      </widget>
     </item>
-    <item>
-     <widget class="QComboBox" name="comboBoxWmsMap"/>
+    <item row="0" column="1" rowspan="2">
+     <widget class="QListWidget" name="listWidgetWmsMaps"/>
     </item>
    </layout>
   </widget>
