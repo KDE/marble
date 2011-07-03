@@ -12,8 +12,7 @@
 
 #include "TextureColorizer.h"
 
-#include <cmath>
-
+#include <QtCore/qmath.h>
 #include <QtCore/QFile>
 #include <QtCore/QSharedPointer>
 #include <QtCore/QString>
@@ -24,12 +23,9 @@
 
 #include "global.h"
 #include "MarbleDebug.h"
-#include "GeoSceneDocument.h"
-#include "GeoSceneSettings.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
-#include "MathHelper.h"
 
 namespace Marble
 {
@@ -190,7 +186,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     int     bump = 8;
 
     bool showRelief;
-    viewParams->mapTheme()->settings()->propertyValue( "relief", showRelief );
+    viewParams->propertyValue( "relief", showRelief );
 
     if ( radius * radius > imgradius
          || viewParams->projection() == Equirectangular
