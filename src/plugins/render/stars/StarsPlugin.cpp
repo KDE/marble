@@ -19,7 +19,6 @@
 #include "GeoPainter.h"
 #include "SunLocator.h"
 #include "ViewportParams.h"
-#include "MarbleWidget.h"
 #include "MarbleModel.h"
 
 namespace Marble
@@ -27,8 +26,7 @@ namespace Marble
 
 StarsPlugin::StarsPlugin()
     : m_isInitialized( false ),
-      m_starsLoaded( false ),
-      m_marbleWidget( 0 )
+      m_starsLoaded( false )
 {
 }
 
@@ -44,7 +42,7 @@ QString StarsPlugin::renderPolicy() const
 
 QStringList StarsPlugin::renderPosition() const
 {
-    QStringList layers = QStringList() << "STARS" << "ALWAYS_ON_TOP";
+    QStringList layers = QStringList() << "STARS";
     return layers;
 }
 
@@ -124,14 +122,9 @@ void StarsPlugin::loadStars() {
 bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                           const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    if ( !(renderPos == "STARS" || renderPos == "ALWAYS_ON_TOP") ) {
-        return true;
-    }
-
-    if( renderPos=="STARS" )
-    {
         QString target = marbleModel()->planetId();
 
         // So far this starry sky plugin only supports displaying stars on earth.
@@ -223,18 +216,6 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         }
 
         painter->restore();
-    }
-
-    if( renderPos == "ALWAYS_ON_TOP" )
-    {
-        m_marbleWidget = dynamic_cast<MarbleWidget*>( painter->device() );
-        if( m_marbleWidget && m_marbleWidget->model()->sunLocator()->getCentered() == true )
-        {
-            GeoDataCoordinates point( m_marbleWidget->model()->sunLocator()->getLon(), m_marbleWidget->model()->sunLocator()->getLat(), 0, GeoDataCoordinates::Degree );
-            QImage image( MarbleDirs::path( "svg/sunshine.png" ) );
-            painter->drawImage( point, image.scaled( QSize( 30, 30 ) ) );
-        }
-    }
 
     return true;
 }
