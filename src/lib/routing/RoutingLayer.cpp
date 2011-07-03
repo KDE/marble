@@ -174,9 +174,9 @@ public:
 RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget ) :
         q( parent ), m_movingIndex( -1 ), m_marbleWidget( widget ),
         m_targetPixmap( ":/data/bitmaps/routing_pick.png" ), m_dragStopOverRightIndex( -1 ),
-        m_pointSelection( false ), m_routingModel( 0 ), m_placemarkModel( 0 ), m_selectionModel( 0 ),
-        m_routeDirty( false ), m_pixmapSize( 22, 22 ), m_routeRequest( 0 ), m_activeMenuIndex( -1 ),
-        m_alternativeRoutesView( 0 ),
+        m_pointSelection( false ), m_routingModel( widget->model()->routingManager()->routingModel() ),
+        m_placemarkModel( 0 ), m_selectionModel( 0 ), m_routeDirty( false ), m_pixmapSize( 22, 22 ),
+        m_routeRequest( 0 ), m_activeMenuIndex( -1 ), m_alternativeRoutesView( 0 ),
         m_alternativeRoutesModel( widget->model()->routingManager()->alternativeRoutesModel() ),
         m_viewportChanged( true )
 {
@@ -322,10 +322,10 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         QModelIndex index = m_routingModel->index( i, 0 );
         GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
 
-        if ( m_routingModel && m_selectionModel ) {
+        if ( m_routingModel ) {
 
             painter->setBrush( QBrush( alphaAdjusted( oxygenAluminumGray4, 200 ) ) );
-            if ( m_selectionModel->selection().contains( index ) ) {
+            if ( m_selectionModel && m_selectionModel->selection().contains( index ) ) {
                 for ( int j=0; j<m_routingModel->route().size(); ++j ) {
                     const RouteSegment & segment = m_routingModel->route().at( j );
                     if ( segment.maneuver().position() == pos ) {
@@ -746,16 +746,8 @@ bool RoutingLayer::eventFilter( QObject *obj, QEvent *event )
     return false;
 }
 
-void RoutingLayer::setModel ( RoutingModel *model )
+void RoutingLayer::setPlacemarkModel ( MarblePlacemarkModel *model )
 {
-    d->m_placemarkModel = 0;
-    d->m_routingModel = model;
-    setViewportChanged();
-}
-
-void RoutingLayer::setModel ( MarblePlacemarkModel *model )
-{
-    d->m_routingModel = 0;
     d->m_placemarkModel = model;
     setViewportChanged();
 }

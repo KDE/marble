@@ -144,7 +144,7 @@ void RoutingWidgetPrivate::setActiveInput( RoutingInputWidget *widget )
 
     m_activeInput = widget;
     m_ui.directionsListView->setModel( model );
-    m_routingLayer->setModel( model );
+    m_routingLayer->setPlacemarkModel( model );
     m_routingLayer->synchronizeWith( m_ui.directionsListView->selectionModel() );
 }
 
@@ -290,7 +290,7 @@ void RoutingWidget::retrieveRoute()
     d->m_activeInput = 0;
     if ( d->m_routeRequest->size() > 1 ) {
         d->m_zoomRouteAfterDownload = true;
-        d->m_routingLayer->setModel( d->m_routingManager->routingModel() );
+        d->m_routingLayer->setPlacemarkModel( 0 );
         d->m_routingManager->retrieveRoute( d->m_routeRequest );
         d->m_ui.directionsListView->setModel( d->m_routingModel );
         d->m_routingLayer->synchronizeWith( d->m_ui.directionsListView->selectionModel() );
@@ -418,7 +418,7 @@ void RoutingWidget::removeInputWidget( int index )
         widget->deleteLater();
         if ( widget == d->m_activeInput ) {
             d->m_activeInput = 0;
-            d->m_routingLayer->setModel( d->m_routingManager->routingModel() );
+            d->m_routingLayer->setPlacemarkModel( 0 );
         }
         d->adjustInputWidgets();
     }

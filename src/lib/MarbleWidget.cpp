@@ -232,7 +232,7 @@ void MarbleWidgetPrivate::construct()
 
     m_routingLayer = new RoutingLayer( m_widget, m_widget );
     m_routingLayer->setRouteRequest( m_model->routingManager()->routeRequest() );
-    m_routingLayer->setModel( m_model->routingManager()->routingModel() );
+    m_routingLayer->setPlacemarkModel( 0 );
     m_map->addLayer( m_routingLayer );
 
     m_widget->connect( m_routingLayer, SIGNAL( routeDirty() ),
