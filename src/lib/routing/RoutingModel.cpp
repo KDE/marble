@@ -30,6 +30,8 @@
 #include <QtCore/QPointer>
 #include <QtCore/QRegExp>
 #include <QtCore/QVector>
+#include <QtCore/QHash>
+#include <QtCore/QByteArray>
 #include <QtGui/QMessageBox>
 #include <QtGui/QPixmap>
 #include <QtXml/QDomDocument>
@@ -147,6 +149,10 @@ RoutingModel::RoutingModel( RouteRequest* request, MarbleModel *model, QObject *
         QObject::connect( d->m_positionTracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
                  this, SLOT( updatePosition( GeoDataCoordinates, qreal ) ) );
     }
+
+   QHash<int, QByteArray> roles = roleNames();
+   roles.insert( RoutingModel::TurnTypeIconRole, "turnTypeIcon" );
+   setRoleNames( roles );
 }
 
 RoutingModel::~RoutingModel()
@@ -193,8 +199,11 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
                 return QVariant();
             }
             break;
-        case MarblePlacemarkModel::CoordinateRole:
+        case RoutingModel::CoordinateRole:
             return QVariant::fromValue( segment.maneuver().position() );
+            break;
+        case RoutingModel::TurnTypeIconRole:
+            return segment.maneuver().directionPixmap();
             break;
         default:
             return QVariant();

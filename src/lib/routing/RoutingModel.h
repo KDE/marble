@@ -40,6 +40,11 @@ class MARBLE_EXPORT RoutingModel : public QAbstractListModel
     Q_PROPERTY( bool deviatedFromRoute READ deviatedFromRoute NOTIFY deviatedFromRoute )
 
 public:
+    enum RoutingModelRoles {
+        CoordinateRole = MarblePlacemarkModel::CoordinateRole,
+        TurnTypeIconRole
+    };
+
     /** Constructor */
     explicit RoutingModel( RouteRequest* request, MarbleModel *model, QObject *parent = 0 );
 
