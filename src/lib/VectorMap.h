@@ -40,13 +40,8 @@ class VectorMap : public ScreenPolygon::Vector
     /**
      * @brief Paint the background, i.e. the water.
      */
-    void paintBase( GeoPainter *painter, ViewportParams *viewport, bool antialiasing );
-    void paintMap( GeoPainter *painter, bool antialiasing );
-    void drawMap( QPaintDevice *paintDevice, bool antialiasing,
-		  ViewportParams *viewport, MapQuality mapQuality );
-
-    void setPen ( const QPen & p )     { m_pen   = p; }
-    void setBrush ( const QBrush & b ) { m_brush = b; }
+    void paintMap( GeoPainter *painter );
+    void drawMap( GeoPainter *painter );
 
     void setzBoundingBoxLimit ( const qreal zBoundingBoxLimit ) {
         m_zBoundingBoxLimit = zBoundingBoxLimit; }
@@ -95,9 +90,6 @@ class VectorMap : public ScreenPolygon::Vector
 
     QPointF           m_currentPoint;
     QPointF           m_lastPoint; 
-
-    QPen              m_pen;
-    QBrush            m_brush;
 
     // Dealing with the horizon for spherical projection.
     bool              m_firsthorizon;

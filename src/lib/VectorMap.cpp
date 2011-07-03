@@ -35,7 +35,6 @@ VectorMap::VectorMap()
       m_plimit( 0.0 ),
       m_zBoundingBoxLimit( 0.0 ),
       m_zPointLimit( 0.0 ),
-      m_brush( QBrush( QColor( 0, 0, 0 ) ) ),
       // Initialising booleans for horizoncrossing
       m_firsthorizon( false ),
       m_lastvisible( false ),
@@ -683,66 +682,25 @@ void VectorMap::mercatorCreatePolyLine(
 }
 
 
-// Paint the background of the ground, i.e. the water.
-//
-// FIXME: This is a strange thing to have in the vector code. 
-//        Move it somewhere better.
-//
-void VectorMap::paintBase( GeoPainter * painter, ViewportParams* viewport,
-			   bool antialiasing )
+void VectorMap::drawMap( GeoPainter *painter )
 {
-    painter->setRenderHint( QPainter::Antialiasing, antialiasing );
-    painter->setPen( m_pen );
-    painter->setBrush( m_brush );
-
-    painter->drawPath( viewport->currentProjection()->mapShape( viewport ) );
-}
-
-
-void VectorMap::drawMap( QPaintDevice *origimg, bool antialiasing,
-			 ViewportParams *viewport, MapQuality mapQuality )
-{
-    bool doClip = false; //assume false
-    switch( viewport->projection() ) {
-        case Spherical:
-            doClip = ( viewport->radius() > ( viewport->width()  / 2 )
-		       || viewport->radius() > ( viewport->height() / 2 ) );
-            break;
-        case Equirectangular:
-            doClip = true; // clipping should always be enabled
-            break;
-        case Mercator:
-            doClip = true; // clipping should always be enabled
-            break;
-    }
-
-    GeoPainter  painter( origimg, viewport, mapQuality, doClip );
-    painter.setRenderHint( QPainter::Antialiasing, antialiasing );
-    painter.setPen( m_pen );
-    painter.setBrush( m_brush );
-
     ScreenPolygon::Vector::const_iterator  itEndPolygon = constEnd();
     for ( ScreenPolygon::Vector::const_iterator itPolygon = constBegin();
           itPolygon != itEndPolygon; 
           ++itPolygon )
     {
         if ( itPolygon->closed() )  
-            painter.drawPolygon( *itPolygon );
+            painter->drawPolygon( *itPolygon );
         else
-            painter.drawPolyline( *itPolygon );
+            painter->drawPolyline( *itPolygon );
     }
 }
 
 
 // Paint the prepared vectors in screen coordinates.
 
-void VectorMap::paintMap(GeoPainter * painter, bool antialiasing)
+void VectorMap::paintMap(GeoPainter * painter)
 {
-    painter->setRenderHint( QPainter::Antialiasing, antialiasing );
-
-    painter->setPen( m_pen );
-    painter->setBrush( m_brush );
-
     ScreenPolygon::Vector::const_iterator  itEndPolygon = constEnd();
 
     for ( ScreenPolygon::Vector::const_iterator itPolygon = constBegin();
