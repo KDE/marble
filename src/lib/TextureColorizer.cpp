@@ -22,6 +22,7 @@
 #include <QtGui/QPainter>
 
 #include "global.h"
+#include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
@@ -165,10 +166,33 @@ TextureColorizer::TextureColorizer( const QString &seafile,
 void TextureColorizer::colorize(ViewParams *viewParams)
 {
     // update coastimg
-    m_veccomposer.drawTextureMap( viewParams );
+    QSharedPointer<QImage> coastimg = viewParams->coastImagePtr();
+
+    coastimg->fill( Qt::transparent );
+
+    bool doClip = false; //assume false
+    switch( viewParams->projection() ) {
+        case Spherical:
+            doClip = ( viewParams->radius() > ( viewParams->width()  / 2 )
+                       || viewParams->radius() > ( viewParams->height() / 2 ) );
+            break;
+        case Equirectangular:
+            doClip = true; // clipping should always be enabled
+            break;
+        case Mercator:
+            doClip = true; // clipping should always be enabled
+            break;
+    }
+
+    const bool antialiased =    viewParams->mapQuality() == HighQuality
+                             || viewParams->mapQuality() == PrintQuality;
+
+    GeoPainter painter( coastimg.data(), viewParams->viewport(), viewParams->mapQuality(), doClip );
+    painter.setRenderHint( QPainter::Antialiasing, antialiased );
+
+    m_veccomposer.drawTextureMap( &painter, viewParams );
 
     QSharedPointer<QImage>        origimg = viewParams->canvasImagePtr();
-    QSharedPointer<const QImage>  coastimg = viewParams->coastImagePtr();
     const qint64   radius   = viewParams->radius();
 
     const int  imgheight = origimg->height();

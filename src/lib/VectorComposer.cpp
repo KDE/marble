@@ -148,33 +148,9 @@ void VectorComposer::loadOverlays()
     s_dateLine->load( MarbleDirs::path( "mwdbii/DATELINE.PNT" ) );
 }
 
-void VectorComposer::drawTextureMap(ViewParams *viewParams)
+void VectorComposer::drawTextureMap(GeoPainter *painter, ViewParams *viewParams)
 {
     loadCoastlines();
-
-    QSharedPointer<QImage> origimg = viewParams->coastImagePtr();
-
-    origimg->fill( Qt::transparent );
-
-    bool doClip = false; //assume false
-    switch( viewParams->projection() ) {
-        case Spherical:
-            doClip = ( viewParams->radius() > ( viewParams->width()  / 2 )
-                       || viewParams->radius() > ( viewParams->height() / 2 ) );
-            break;
-        case Equirectangular:
-            doClip = true; // clipping should always be enabled
-            break;
-        case Mercator:
-            doClip = true; // clipping should always be enabled
-            break;
-    }
-
-    const bool antialiased =    viewParams->mapQuality() == HighQuality
-                             || viewParams->mapQuality() == PrintQuality;
-
-    GeoPainter painter( origimg.data(), viewParams->viewport(), viewParams->mapQuality(), doClip );
-    painter.setRenderHint( QPainter::Antialiasing, antialiased );
 
     // Coastlines
     m_vectorMap->setzBoundingBoxLimit( 0.4 ); 
@@ -182,18 +158,18 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
 
     // Draw the coast line vectors
     m_vectorMap->createFromPntMap( s_coastLines, viewParams->viewport() );
-    painter.setPen( m_textureLandPen );
-    painter.setBrush( m_textureLandBrush );
-    m_vectorMap->drawMap( &painter );
+    painter->setPen( m_textureLandPen );
+    painter->setBrush( m_textureLandBrush );
+    m_vectorMap->drawMap( painter );
 
     // Islands
     m_vectorMap->setzBoundingBoxLimit( 0.8 );
     m_vectorMap->setzPointLimit( 0.9 );
 
     m_vectorMap->createFromPntMap( s_islands, viewParams->viewport() );
-    painter.setPen( m_textureLandPen );
-    painter.setBrush( m_textureLandBrush );
-    m_vectorMap->drawMap( &painter );
+    painter->setPen( m_textureLandPen );
+    painter->setBrush( m_textureLandBrush );
+    m_vectorMap->drawMap( painter );
 
     bool showWaterbodies, showLakes;
     viewParams->propertyValue( "waterbodies", showWaterbodies );
@@ -205,14 +181,14 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
          m_vectorMap->setzPointLimit( 0.98 ); 
 
          m_vectorMap->createFromPntMap( s_lakes, viewParams->viewport() );
-         painter.setPen( Qt::NoPen );
-         painter.setBrush( m_textureLakeBrush );
-         m_vectorMap->drawMap( &painter );
+         painter->setPen( Qt::NoPen );
+         painter->setBrush( m_textureLakeBrush );
+         m_vectorMap->drawMap( painter );
 
          m_vectorMap->createFromPntMap( s_lakeislands, viewParams->viewport() );
-         painter.setPen( Qt::NoPen );
-         painter.setBrush( m_textureLandBrush );
-         m_vectorMap->drawMap( &painter );
+         painter->setPen( Qt::NoPen );
+         painter->setBrush( m_textureLandBrush );
+         m_vectorMap->drawMap( painter );
     }
 
     bool showIce;
@@ -223,10 +199,10 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
          m_vectorMap->setzBoundingBoxLimit( 0.8 );
          m_vectorMap->setzPointLimit( 0.9 );
          m_vectorMap->createFromPntMap( s_glaciers, viewParams->viewport() );
-         painter.setPen( Qt::NoPen );
-         painter.setBrush( m_textureGlacierBrush );
+         painter->setPen( Qt::NoPen );
+         painter->setBrush( m_textureGlacierBrush );
 
-         m_vectorMap->drawMap( &painter );
+         m_vectorMap->drawMap( painter );
     }
 
     // mDebug() << "TextureMap calculated nodes: " << m_vectorMap->nodeCount();
