@@ -18,19 +18,18 @@
 #include <QtCore/QVectorIterator>
 #include <QtGui/QFont>
 #include <QtGui/QItemSelectionModel>
-#include <QtGui/QPainter>
 #include <QtGui/QSortFilterProxyModel>
 
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
+#include "GeoPainter.h"
 
 #include "MarbleDebug.h"
 #include "global.h"
 #include "PlacemarkPainter.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleDirs.h"
-#include "ViewParams.h"
 #include "ViewportParams.h"
 #include "TileId.h"
 #include "TileCoordsPyramid.h"
@@ -292,18 +291,28 @@ void PlacemarkLayout::setCacheData()
     }
 }
 
-void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
-                                        ViewParams *viewParams )
+QStringList PlacemarkLayout::renderPosition() const
 {
+    return QStringList() << "HOVERS_ABOVE_SURFACE";
+}
+
+bool PlacemarkLayout::render( GeoPainter *painter,
+                              ViewportParams *viewport,
+                              const QString &renderPos,
+                              GeoSceneLayer *layer )
+{
+    Q_UNUSED( renderPos );
+    Q_UNUSED( layer );
+
     if ( !m_showPlaces && !m_showCities && !m_showTerrain && !m_showOtherPlaces &&
          !m_showLandingSites && !m_showCraters && !m_showMaria )
-        return;
+        return true;
 
     if ( m_placemarkModel->rowCount() <= 0 )
-        return;
+        return true;
 
-    // const int imgwidth  = viewParams->canvasImage()->width();
-    const int imgheight = viewParams->canvasImagePtr()->height();
+    // const int imgwidth  = viewport->width();
+    const int imgheight = viewport->height();
 
     if ( m_styleResetRequested ) {
         m_styleResetRequested = false;
@@ -311,7 +320,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
     }
 
     if ( m_maxLabelHeight == 0 ) {
-        return;
+        return true;
     }
     const int   secnumber         = imgheight / m_maxLabelHeight + 1;
 
@@ -327,10 +336,10 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
     qreal x = 0;
     qreal y = 0;
 
-    GeoDataLatLonAltBox latLonAltBox = viewParams->viewport()->viewLatLonAltBox();
+    GeoDataLatLonAltBox latLonAltBox = viewport->viewLatLonAltBox();
 
     int popularity = 0;
-    while ( m_weightfilter.at( popularity ) > viewParams->radius() ) {
+    while ( m_weightfilter.at( popularity ) > viewport->radius() ) {
         ++popularity;
     }
     popularity = (20 - popularity)/2;
@@ -389,7 +398,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         GeoDataCoordinates geopoint = placemark->coordinate();
 
         if ( !latLonAltBox.contains( geopoint ) ||
-             ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
+             ! viewport->currentProjection()->screenCoordinates( geopoint, viewport, x, y ))
             {
                 delete m_visiblePlacemarks.take( placemark );
                 continue;
@@ -482,14 +491,14 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         }
 
         // Skip the places that are too small.
-        if ( m_weightfilter.at( popularityIndex ) > viewParams->radius() ) {
+        if ( m_weightfilter.at( popularityIndex ) > viewport->radius() ) {
             break;
         }
 
         GeoDataCoordinates geopoint = placemark->coordinate();
 
         if ( !latLonAltBox.contains( geopoint ) ||
-             ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
+             ! viewport->currentProjection()->screenCoordinates( geopoint, viewport, x, y ))
             {
                 delete m_visiblePlacemarks.take( placemark );
                 continue;
@@ -613,7 +622,14 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
     }
 
     m_placemarkPainter->drawPlacemarks( painter, m_paintOrder, selection, 
-                                        viewParams->viewport() );
+                                        viewport );
+
+    return true;
+}
+
+qreal PlacemarkLayout::zValue() const
+{
+    return -1.0;
 }
 
 QRect PlacemarkLayout::roomForLabel( GeoDataStyle * style,
