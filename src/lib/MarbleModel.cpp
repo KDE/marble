@@ -36,7 +36,6 @@
 #include "GeoSceneLayer.h"
 #include "GeoSceneMap.h"
 #include "GeoScenePalette.h"
-#include "GeoSceneSettings.h"
 #include "GeoSceneTexture.h"
 #include "GeoSceneVector.h"
 #include "GeoSceneXmlDataSource.h"

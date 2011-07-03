@@ -25,7 +25,6 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
-#include "GeoSceneSettings.h"
 #include "GeoSceneTexture.h"
 #include "MapThemeManager.h"
 #include "StackedTile.h"
