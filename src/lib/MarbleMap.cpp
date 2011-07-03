@@ -123,6 +123,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
     m_geometryLayer = new GeometryLayer( document );
     m_layerManager.addLayer( m_geometryLayer );
 
+    m_layerManager.addLayer( &m_placemarkLayout );
     m_layerManager.addLayer( &m_fogLayer );
     m_layerManager.addLayer( &m_measureTool );
 }
@@ -255,6 +256,7 @@ MarbleMap::~MarbleMap()
 
     d->m_layerManager.removeLayer( &d->m_measureTool );
     d->m_layerManager.removeLayer( &d->m_fogLayer );
+    d->m_layerManager.removeLayer( &d->m_placemarkLayout );
     delete d;
 
     delete model;  // delete the model after private data
@@ -731,15 +733,8 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
         d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
     }
 
-    // Paint the GeoDataPlacemark layer
-    d->m_placemarkLayout.paintPlaceFolder( &painter, &d->m_viewParams );
-
     renderPositions.clear();
-    renderPositions << "HOVERS_ABOVE_SURFACE";
-    d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
-
-    renderPositions.clear();
-    renderPositions << "ATMOSPHERE"
+    renderPositions << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
     d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
 

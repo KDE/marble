@@ -17,6 +17,8 @@
 #define MARBLE_PLACEMARKLAYOUT_H
 
 
+#include "LayerInterface.h"
+
 #include <QtCore/QHash>
 #include <QtCore/QModelIndex>
 #include <QtCore/QRect>
@@ -25,7 +27,6 @@
 class QAbstractItemModel;
 class QSortFilterProxyModel;
 class QItemSelectionModel;
-class QPainter;
 class QPoint;
 
 
@@ -35,11 +36,12 @@ namespace Marble
 class GeoDataCoordinates;
 class GeoDataPlacemark;
 class GeoDataStyle;
+class GeoPainter;
 class GeoSceneLayer;
 class PlacemarkPainter;
 class TileId;
 class VisiblePlacemark;
-class ViewParams;
+class ViewportParams;
 
 /**
  * Layouts the place marks with a passed QPainter.
@@ -47,7 +49,7 @@ class ViewParams;
 
 
 
-class PlacemarkLayout : public QObject
+class PlacemarkLayout : public QObject, public LayerInterface
 {
     Q_OBJECT
 
@@ -64,15 +66,23 @@ class PlacemarkLayout : public QObject
      */
     ~PlacemarkLayout();
 
-    void setDefaultLabelColor( const QColor &color );
+    /**
+     * @reimp
+     */
+    virtual QStringList renderPosition() const;
 
     /**
-     * Layouts the place marks.
-     *
-     * @param painter The painter that is used for painting.
-     * @param viewParams Parameters that influence the painting.
+     * @reimp
      */
-    void paintPlaceFolder( QPainter *painter, ViewParams *viewParams );
+    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
+                         const QString& renderPos = "HOVERS_ABOVE_SURFACE", GeoSceneLayer * layer = 0 );
+
+    /**
+     * @reimp
+     */
+    virtual qreal zValue() const;
+
+    void setDefaultLabelColor( const QColor &color );
 
     /**
      * Returns a the maximum height of all possible labels.
