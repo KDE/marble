@@ -89,8 +89,7 @@ void StackedTileLoader::setTextureLayers( QVector<GeoSceneTexture const *> & tex
 
     d->m_textureLayers = textureLayers;
 
-    d->m_tilesOnDisplay.clear();
-    d->m_tileCache.clear();
+    clear();
 
     d->detectMaxTileLevel();
     d->m_layerDecorator.setThemeId( "maps/" + d->m_textureLayers.at( 0 )->sourceDir() );
