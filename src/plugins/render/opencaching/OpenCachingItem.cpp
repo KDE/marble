@@ -31,6 +31,9 @@ OpenCachingItem::OpenCachingItem( const OpenCachingCache& cache, QObject *parent
     setSize( QSize( m_cache.difficulty() * 10, m_cache.difficulty() * 10 ) );
     s_font.setBold( true );
     updateTooltip();
+    setId( QString( "opencache-%1" ).arg( cache.id() ) );
+    setCoordinate( GeoDataCoordinates( cache.longitude(), cache.latitude(), 0.0, GeoDataCoordinates::Degree ) );
+    setTarget( "earth" );
 }
 
 OpenCachingItem::~OpenCachingItem()
