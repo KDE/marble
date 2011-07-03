@@ -12,6 +12,7 @@
 #define DECLARATIVE_MARBLE_WIDGET_H
 
 #include "Tracking.h"
+#include "Routing.h"
 #include "Coordinate.h"
 
 #include <QtGui/QGraphicsProxyWidget>
@@ -43,6 +44,7 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( bool inputEnabled READ inputEnabled WRITE setInputEnabled )
     Q_PROPERTY( QStringList activeFloatItems READ activeFloatItems WRITE setActiveFloatItems )
     Q_PROPERTY( Marble::Declarative::Tracking* tracking READ tracking NOTIFY trackingChanged )
+    Q_PROPERTY( Marble::Declarative::Routing* routing READ routing NOTIFY routingChanged )
 
 public:
     /** Constructor */
@@ -53,6 +55,8 @@ Q_SIGNALS:
     void visibleLatLonAltBoxChanged();
 
     void trackingChanged();
+
+    void routingChanged();
 
     void centerChanged();
 
@@ -117,6 +121,8 @@ public Q_SLOTS:
 
     Marble::Declarative::Tracking* tracking();
 
+    Marble::Declarative::Routing* routing();
+
 private Q_SLOTS:
     void updateCenterPosition();
 
@@ -127,6 +133,8 @@ private:
     bool m_inputEnabled;
 
     Marble::Declarative::Tracking* m_tracking;
+
+    Marble::Declarative::Routing* m_routing;
 
     Marble::Declarative::Coordinate m_center;
 };
