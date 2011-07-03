@@ -16,6 +16,8 @@
 #include "MarbleDeclarativeRunnerManager.h"
 #include "PositionSource.h"
 #include "Tracking.h"
+#include "Routing.h"
+#include "RouteRequestModel.h"
 
 #include <QtDeclarative/qdeclarative.h>
 #include <QtDeclarative/QDeclarativeEngine>
@@ -32,6 +34,8 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
     qmlRegisterType<Marble::Declarative::Coordinate>( uri, 0, 11, "Coordinate" );
     qmlRegisterType<Marble::Declarative::PositionSource>( uri, 0, 11, "PositionSource" );
     qmlRegisterType<Marble::Declarative::Tracking>( uri, 0, 11, "Tracking" );
+    qmlRegisterType<Marble::Declarative::Routing>( uri, 0, 11, "Routing" );
+    qmlRegisterType<Marble::Declarative::RouteRequestModel>( uri, 0, 11, "RouteRequestModel" );
 
     qmlRegisterType<Marble::Declarative::MarbleWidget>( uri, 0, 11, "MarbleWidget" );
     qmlRegisterType<Marble::Declarative::MarbleRunnerManager>( uri, 0, 11, "MarbleRunnerManager" );

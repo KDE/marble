@@ -19,6 +19,8 @@ MarbleDeclarativeWidget.cpp
 Placemark.cpp
 PositionSource.cpp
 Tracking.cpp
+Routing.cpp
+RouteRequestModel.cpp
 )
 
 marble_add_declarative_plugin( MarbleDeclarativePlugin ${marbleplugin_SRCS})
