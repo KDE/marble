@@ -81,6 +81,10 @@ class MercatorProjection : public AbstractProjection
 
    /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
+     *
+     * If the pixel (x, y) is outside the globe, only @p lon will be calculated,
+     * and lat will be unchanged.
+     *
      * @param x      the x coordinate of the pixel
      * @param y      the y coordinate of the pixel
      * @param lon    the longitude angle is returned through this parameter
