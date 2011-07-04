@@ -234,7 +234,7 @@ void MarbleRunnerManager::retrieveRoute( RouteRequest *request )
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Routing );
     bool started = false;
     foreach( RunnerPlugin* plugin, plugins ) {
-        if ( !profile.pluginSettings().contains( plugin->nameId() ) ) {
+        if ( !profile.name().isEmpty() && !profile.pluginSettings().contains( plugin->nameId() ) ) {
             continue;
         }
 
