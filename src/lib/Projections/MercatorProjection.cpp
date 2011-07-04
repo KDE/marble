@@ -304,6 +304,8 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
     latLonAltBox.setSouth( south, GeoDataCoordinates::Radian );
     latLonAltBox.setWest( west, GeoDataCoordinates::Radian );
     latLonAltBox.setEast( east, GeoDataCoordinates::Radian );
+    latLonAltBox.setMinAltitude(      -100000000.0 );
+    latLonAltBox.setMaxAltitude( 100000000000000.0 );
 
     // The remaining algorithm should be pretty generic for all kinds of 
     // flat projections:
