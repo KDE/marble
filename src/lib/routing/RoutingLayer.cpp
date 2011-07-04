@@ -484,7 +484,11 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
 
     foreach( const RequestRegion &region, m_alternativeRouteRegions ) {
         if ( region.region.contains( e->pos() ) ) {
-            m_alternativeRoutesView->setCurrentIndex( region.index );
+            if ( m_alternativeRoutesView ) {
+                m_alternativeRoutesView->setCurrentIndex( region.index );
+            } else {
+                m_alternativeRoutesModel->setCurrentRoute( region.index );
+            }
             return true;
         }
     }
