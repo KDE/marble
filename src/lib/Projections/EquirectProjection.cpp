@@ -195,52 +195,75 @@ bool EquirectProjection::geoCoordinates( const int x, const int y,
                                          qreal& lon, qreal& lat,
                                          GeoDataCoordinates::Unit unit ) const
 {
-    int   radius          = viewport->radius();
-    int   halfImageWidth  = viewport->width() / 2;
-    int   halfImageHeight = viewport->height() / 2;
+    const int radius = viewport->radius();
+    const qreal pixel2Rad = M_PI / (2.0 * radius);
 
     // Get the Lat and Lon of the center point of the screen.
     qreal  centerLon;
     qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    // Get yTop and yBottom, the limits of the map on the screen.
-    int yCenterOffset = (int)( centerLat * (qreal)(2 * radius) / M_PI);
-    int yTop          = halfImageHeight - radius + yCenterOffset;
-    int yBottom       = yTop + 2 * radius;
+    {
+        const int halfImageWidth = viewport->width() / 2;
+        const int xPixels = x - halfImageWidth;
 
-    // Return here if the y coordinate is outside the map
-    if ( y < yTop || y >= yBottom )
-        return false;
+        lon = + xPixels * pixel2Rad + centerLon;
 
-    int const xPixels = x - halfImageWidth;
-    int const yPixels = y - halfImageHeight;
+        while ( lon > M_PI )  lon -= 2.0 * M_PI;
+        while ( lon < -M_PI ) lon += 2.0 * M_PI;
 
-    qreal const pixel2Rad = M_PI / (2.0 * radius);
-    lat = - yPixels * pixel2Rad + centerLat;
-    lon = + xPixels * pixel2Rad + centerLon;
-
-    while ( lon > M_PI )  lon -= 2.0 * M_PI;
-    while ( lon < -M_PI ) lon += 2.0 * M_PI;
-
-    if ( unit == GeoDataCoordinates::Degree ) {
-        lon *= RAD2DEG;
-        lat *= RAD2DEG;
+        if ( unit == GeoDataCoordinates::Degree ) {
+            lon *= RAD2DEG;
+        }
     }
 
-    return true;
+    {
+        // Get yTop and yBottom, the limits of the map on the screen.
+        const int halfImageHeight = viewport->height() / 2;
+        const int yCenterOffset = (int)( centerLat * (qreal)(2 * radius) / M_PI);
+        const int yTop          = halfImageHeight - radius + yCenterOffset;
+        const int yBottom       = yTop + 2 * radius;
+
+        // Return here if the y coordinate is outside the map
+        if ( yTop <= y && y < yBottom ) {
+            const int yPixels = y - halfImageHeight;
+            lat = - yPixels * pixel2Rad + centerLat;
+
+            if ( unit == GeoDataCoordinates::Degree ) {
+                lat *= RAD2DEG;
+            }
+
+            return true;
+        }
+    }
+
+    return false;
 }
 
 GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
                                                       const ViewportParams *viewport ) const
 {
+    qreal west;
+    qreal north = 90*DEG2RAD;
+    geoCoordinates( screenRect.left(), screenRect.top(), viewport, west, north, GeoDataCoordinates::Radian );
+
+    qreal east;
+    qreal south = -90*DEG2RAD;
+    geoCoordinates( screenRect.right(), screenRect.bottom(), viewport, east, south, GeoDataCoordinates::Radian );
+
+    // For the case where the whole viewport gets covered there is a
+    // pretty dirty and generic detection algorithm:
+    GeoDataLatLonAltBox latLonAltBox;
+    latLonAltBox.setNorth( north, GeoDataCoordinates::Radian );
+    latLonAltBox.setSouth( south, GeoDataCoordinates::Radian );
+    latLonAltBox.setWest( west, GeoDataCoordinates::Radian );
+    latLonAltBox.setEast( east, GeoDataCoordinates::Radian );
+    latLonAltBox.setMinAltitude(      -100000000.0 );
+    latLonAltBox.setMaxAltitude( 100000000000000.0 );
+
     // Convenience variables
     int  radius = viewport->radius();
     int  width  = viewport->width();
-
-    // For the case where the whole viewport gets covered there is a 
-    // pretty dirty and generic detection algorithm:
-    GeoDataLatLonAltBox latLonAltBox = AbstractProjection::latLonAltBox( screenRect, viewport );
 
     // The remaining algorithm should be pretty generic for all kinds of 
     // flat projections:
