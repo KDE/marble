@@ -82,12 +82,16 @@ class EquirectProjection : public AbstractProjection
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
+     *
+     * If the pixel (x, y) is outside the globe, only @p lon will be calculated,
+     * and lat will be unchanged.
+     *
      * @param x      the x coordinate of the pixel
      * @param y      the y coordinate of the pixel
      * @param lon    the longitude angle is returned through this parameter
      * @param lat    the latitude angle is returned through this parameter
-     * @return @c true  if the pixel (x, y) is within the globe
-     *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
+     * @return @c true  if the pixel (x, y) is within the map
+     *         @c false if the pixel (x, y) is above or underneath the map
      */
     bool geoCoordinates( const int x, const int y,
                          const ViewportParams *params,
