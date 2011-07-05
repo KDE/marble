@@ -35,7 +35,9 @@ public:
     ~OpenCachingModel();
 
     void setNumResults( int numResults );
+    void setMaxDistance( int maxDistance );
     void setMinDifficulty( double minDifficulty );
+    void setMaxDifficulty( double maxDifficulty );
     void setStartDate( const QDateTime& startDate );
     void setEndDate( const QDateTime& endDate );
 
@@ -56,8 +58,9 @@ protected:
 
 private:
     int m_numResults;
+    int m_maxDistance;
     qreal m_minDifficulty;
-    qreal m_maxDistance;
+    qreal m_maxDifficulty;
     QDateTime m_startDate;
     QDateTime m_endDate;
     OpenCachingModelPrivate *const d;

@@ -71,7 +71,7 @@ QDialog* OpenCachingPlugin::aboutDialog()
         m_aboutDialog->setName( "OpenCaching Plugin" );
         m_aboutDialog->setVersion( "0.1" );
         // FIXME: Can we store this string for all of Marble
-        m_aboutDialog->setAboutText( tr( "<br />(c) 2009, 2010 The Marble Project <br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
+        m_aboutDialog->setAboutText( tr( "<br />(c) 2009, 2010, 2011 The Marble Project <br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
         QList<Author> authors;
         Author daniel;
 
@@ -104,6 +104,10 @@ QDialog *OpenCachingPlugin::configDialog()
         QPushButton *applyButton = m_ui->m_buttonBox->button( QDialogButtonBox::Apply );
         connect( applyButton, SIGNAL( clicked() ),
                  SLOT( writeSettings() ) );
+        connect( m_ui->m_endDate, SIGNAL( dateTimeChanged ( const QDateTime& ) ),
+                 SLOT( validateDateRange() ) );
+        connect( m_ui->m_maxDifficulty, SIGNAL( valueChanged( double) ),
+                 SLOT( validateDifficultyRange() ) );
     }
     return m_configDialog;
 }
@@ -115,15 +119,20 @@ QHash<QString,QVariant> OpenCachingPlugin::settings() const
 
 void OpenCachingPlugin::setSettings( QHash<QString,QVariant> settings )
 {
-  /*
     if ( !settings.contains( "numResults" ) ) {
         settings.insert( "numResults", numberOfItemsOnScreen );
     }
-    if ( !settings.contains( "minMagnitude" ) ) {
-        settings.insert( "minMagnitude", 0.0 );
+    if ( !settings.contains( "maxDistance" ) ) {
+        settings.insert( "maxDistance", 20 );
+    }
+    if ( !settings.contains( "minDfficulty" ) ) {
+        settings.insert( "minDfficulty", 0.0 );
+    }
+    if ( !settings.contains( "maxDifficulty" ) ) {
+        settings.insert( "maxDifficulty", 5.0 );
     }
     if ( !settings.contains( "startDate" ) ) {
-        settings.insert( "startDate", QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) );
+        settings.insert( "startDate", QDateTime::fromString( "2006-01-01", "yyyy-MM-dd" ) );
     }
     if ( !settings.contains( "endDate" ) ) {
         settings.insert( "endDate", QDateTime::currentDateTime() );
@@ -132,51 +141,68 @@ void OpenCachingPlugin::setSettings( QHash<QString,QVariant> settings )
     m_settings = settings;
     readSettings();
     emit settingsChanged( nameId() );
-    */
 }
 
 void OpenCachingPlugin::readSettings()
 {
-  /*
     if ( !m_configDialog ) {
         return;
     }
 
     m_ui->m_numResults->setValue( m_settings.value( "numResults" ).toInt() );
-    m_ui->m_minMagnitude->setValue( m_settings.value( "minMagnitude" ).toDouble() );
+    m_ui->m_minDifficulty->setValue( m_settings.value( "maxDistance" ).toInt() );
+    m_ui->m_minDifficulty->setValue( m_settings.value( "minDifficulty" ).toDouble() );
+    m_ui->m_maxDifficulty->setValue( m_settings.value( "maxDifficulty" ).toDouble() );
     m_ui->m_startDate->setDateTime( m_settings.value( "startDate" ).toDateTime() );
     m_ui->m_endDate->setDateTime( m_settings.value( "endDate" ).toDateTime() );
     m_ui->m_startDate->setMaximumDateTime( m_ui->m_endDate->dateTime() );
-    */
 }
 
 void OpenCachingPlugin::writeSettings()
 {
-  /*
     Q_ASSERT( m_configDialog );
     m_settings.insert( "numResults", m_ui->m_numResults->value() );
-    m_settings.insert( "minMagnitude", m_ui->m_minMagnitude->value() );
+    m_settings.insert( "maxDistance", m_ui->m_maxDistance->value() );
+    m_settings.insert( "minDifficulty", m_ui->m_minDifficulty->value() );
+    m_settings.insert( "maxDifficulty", m_ui->m_maxDifficulty->value() );
     m_settings.insert( "startDate", m_ui->m_startDate->dateTime() );
     m_settings.insert( "endDate", m_ui->m_endDate->dateTime() );
 
     emit settingsChanged( nameId() );
-    */
 }
 
 void OpenCachingPlugin::updateSettings()
 {
-  /*
-    OpenCachingModel *OpenCachingModel = dynamic_cast<OpenCachingModel *>( model() );
-    if( OpenCachingModel ) {
-        OpenCachingModel = new OpenCachingModel( pluginManager(), this );
+    OpenCachingModel *model = dynamic_cast<OpenCachingModel *>( this->model() );
+    if( model ) {
+        model = new OpenCachingModel( pluginManager(), this );
         Q_ASSERT( m_configDialog );
-        OpenCachingModel->setNumResults( m_ui->m_numResults->value() );
-        OpenCachingModel->setMinMagnitude( m_ui->m_minMagnitude->value() );
-        OpenCachingModel->setEndDate( m_ui->m_endDate->dateTime() );
-        OpenCachingModel->setStartDate( m_ui->m_startDate->dateTime() );
-        setModel( OpenCachingModel );
+        model->setNumResults( m_ui->m_numResults->value() );
+        model->setMaxDistance( m_ui->m_maxDistance->value () );
+        model->setMinDifficulty( m_ui->m_minDifficulty->value() );
+        model->setMaxDifficulty( m_ui->m_maxDifficulty->value() );
+        model->setEndDate( m_ui->m_endDate->dateTime() );
+        model->setStartDate( m_ui->m_startDate->dateTime() );
+        setModel( model );
     }
-    */
+}
+
+void OpenCachingPlugin::validateDateRange()
+{
+    Q_ASSERT( m_configDialog );
+    if( m_ui->m_startDate->dateTime() > m_ui->m_endDate->dateTime() ) {
+        m_ui->m_startDate->setDateTime( m_ui->m_endDate->dateTime() );
+    }
+    m_ui->m_startDate->setMaximumDateTime( m_ui->m_endDate->dateTime() );
+}
+
+void OpenCachingPlugin::validateDifficultyRange()
+{
+    Q_ASSERT( m_configDialog );
+    if( m_ui->m_minDifficulty->value() > m_ui->m_maxDifficulty->value() ) {
+        m_ui->m_minDifficulty->setValue( m_ui->m_maxDifficulty->value() );
+    }
+    m_ui->m_minDifficulty->setMaximum( m_ui->m_maxDifficulty->value() );
 }
 
 }

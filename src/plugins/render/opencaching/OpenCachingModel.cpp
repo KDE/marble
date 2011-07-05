@@ -58,7 +58,12 @@ QHash<QString, QVariant> OpenCachingModelPrivate::parseLogEntry( QXmlStreamReade
     QHash<QString, QVariant> cacheLogEntry;
     while ( !reader.atEnd() ) {
         if ( reader.isStartElement() && reader.name() != "cachelog" ) {
-            cacheLogEntry[reader.name().toString()] = reader.readElementText();
+            if( reader.name() == "cacheid" ) {
+                cacheLogEntry["cacheid"] = reader.attributes().value( "id" ).toString();
+            }
+            else {
+                cacheLogEntry[reader.name().toString()] = reader.readElementText();
+            }
         }
         else if( reader.isEndElement() && reader.name() == "cachelog" ) {
             return cacheLogEntry;
@@ -73,7 +78,12 @@ QHash<QString, QVariant> OpenCachingModelPrivate::parseDescription( QXmlStreamRe
     QHash<QString, QVariant> cacheDesc;
     while ( !reader.atEnd() ) {
         if ( reader.isStartElement() && reader.name() != "cachedesc" ) {
-            cacheDesc[reader.name().toString()] = reader.readElementText();
+            if( reader.name() == "cacheid" ) {
+                cacheDesc["cacheid"] = reader.attributes().value( "id" ).toString();
+            }
+            else {
+                cacheDesc[reader.name().toString()] = reader.readElementText();
+            }
         }
         else if( reader.isEndElement() && reader.name() == "cachedesc" ) {
             return cacheDesc;
@@ -86,8 +96,9 @@ QHash<QString, QVariant> OpenCachingModelPrivate::parseDescription( QXmlStreamRe
 OpenCachingModel::OpenCachingModel( PluginManager *pluginManager, QObject *parent )
     : AbstractDataPluginModel( "opencaching", pluginManager, parent ),
       m_numResults( numberOfItemsOnScreen ),
+      m_maxDistance( 20 ),
       m_minDifficulty( 0.0 ),
-      m_maxDistance( 20.0 ),
+      m_maxDifficulty( 5.0 ),
       m_startDate( QDateTime::fromString( "2006-01-01", "yyyy-MM-dd" ) ),
       m_endDate( QDateTime::currentDateTime() ),
       d( new OpenCachingModelPrivate )
@@ -103,9 +114,19 @@ void OpenCachingModel::setNumResults( int numResults )
     m_numResults = numResults;
 }
 
+void OpenCachingModel::setMaxDistance( int maxDistance )
+{
+    m_maxDistance = maxDistance;
+}
+
 void OpenCachingModel::setMinDifficulty( double minDifficulty )
 {
     m_minDifficulty = minDifficulty;
+}
+
+void OpenCachingModel::setMaxDifficulty( double maxDifficulty )
+{
+    m_maxDifficulty = maxDifficulty;
 }
 
 void OpenCachingModel::setStartDate( const QDateTime& startDate )
@@ -145,7 +166,6 @@ void OpenCachingModel::parseFile( const QByteArray& file )
     QHash<int, QHash<QString, OpenCachingCacheDescription> > descriptions;
     QHash<int, OpenCachingCacheLog> logs;
 
-    mDebug() << "start parsing";
     while( !reader.atEnd() && !reader.hasError() ) {
         token = reader.readNext();
         if( token == QXmlStreamReader::StartDocument ) {
@@ -167,11 +187,14 @@ void OpenCachingModel::parseFile( const QByteArray& file )
         }
     }
 
-    mDebug() << "finished parsing, " << caches.size() << " elements:" << caches.keys();
     foreach( const int key, caches.keys() ) {
-        caches[key].setDescription( descriptions[key] );
-        caches[key].setLog( logs[key] );
-        addItemToList( new OpenCachingItem( caches[key], this ) );
+        if( caches[key].difficulty() >= m_minDifficulty &&
+            caches[key].difficulty() <= m_maxDifficulty )
+        {
+            caches[key].setDescription( descriptions[key] );
+            caches[key].setLog( logs[key] );
+            addItemToList( new OpenCachingItem( caches[key], this ) );
+        }
     }
 }
 

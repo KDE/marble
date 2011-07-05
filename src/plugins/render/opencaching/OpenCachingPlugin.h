@@ -77,6 +77,10 @@ private:
     Ui::OpenCachingConfigWidget *m_ui;
     QDialog *m_configDialog;
     QHash<QString,QVariant> m_settings;
+
+private slots:
+    void validateDateRange();
+    void validateDifficultyRange();
 };
 
 }
