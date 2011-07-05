@@ -37,6 +37,8 @@ public:
 
     void clear();
 
+    int currentIndex() const;
+
 private:
     unsigned long long m_cacheId;
 

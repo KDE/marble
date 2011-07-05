@@ -15,6 +15,7 @@ namespace Marble
 
 OpenCachingCacheLogEntry::OpenCachingCacheLogEntry( const QHash<QString, QVariant>& properties )
 {
+    m_cacheId = properties["cacheid"].toULongLong();
     m_userName = properties["userid"].toString();
     m_logType = properties["logtype"].toString();
     m_text = properties["text"].toString();
