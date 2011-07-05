@@ -136,7 +136,8 @@ class GeoDataFeaturePrivate
     }
     
     static GeoDataStyle* createHighwayStyle( const QColor& color, qreal width = 1, qreal realWidth = 0.0, 
-                                             Qt::PenStyle penStyle = Qt::SolidLine, Qt::PenCapStyle capStyle = Qt::RoundCap )
+                                             Qt::PenStyle penStyle = Qt::SolidLine, 
+                                             Qt::PenCapStyle capStyle = Qt::RoundCap )
     {
         GeoDataStyle *style = new GeoDataStyle;
         GeoDataLineStyle lineStyle( color );
@@ -150,13 +151,16 @@ class GeoDataFeaturePrivate
         return style;
     }
     
-    static GeoDataStyle* createWayStyle( const QColor& color, const QColor& outlineColor, bool fill = true, bool outline = true )
+    static GeoDataStyle* createWayStyle( const QColor& color, const QColor& outlineColor, 
+                                         bool fill = true, bool outline = true,
+                                         Qt::BrushStyle brushStyle = Qt::SolidPattern )
     {
         GeoDataStyle *style = new GeoDataStyle;
         GeoDataPolyStyle polyStyle( color );
         GeoDataLineStyle lineStyle( outlineColor );
         polyStyle.setFill( fill );
         polyStyle.setOutline( outline );
+        polyStyle.setBrushStyle( brushStyle );
         style->setLineStyle( lineStyle );
         style->setPolyStyle( polyStyle );
         return style;

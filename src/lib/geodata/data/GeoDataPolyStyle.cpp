@@ -20,7 +20,7 @@ class GeoDataPolyStylePrivate
 {
   public:
     GeoDataPolyStylePrivate()
-     : m_fill( true ), m_outline( true )
+     : m_fill( true ), m_outline( true ), m_brushStyle( Qt::SolidPattern )
     {
     }
 
@@ -33,6 +33,7 @@ class GeoDataPolyStylePrivate
     bool  m_fill;
     /// whether to draw the outline
     bool  m_outline;
+    Qt::BrushStyle m_brushStyle;
 };
 
 GeoDataPolyStyle::GeoDataPolyStyle()
@@ -86,6 +87,16 @@ void GeoDataPolyStyle::setOutline( const bool &outline )
 bool GeoDataPolyStyle::outline() const
 {
     return d->m_outline;
+}
+
+void GeoDataPolyStyle::setBrushStyle( const Qt::BrushStyle style )
+{
+    d->m_brushStyle = style;
+}
+
+Qt::BrushStyle GeoDataPolyStyle::brushStyle() const
+{
+    return d->m_brushStyle;
 }
 
 void GeoDataPolyStyle::pack( QDataStream& stream ) const

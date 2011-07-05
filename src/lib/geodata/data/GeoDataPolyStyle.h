@@ -74,6 +74,17 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
      * @return whether outline is drawn
      */
     bool outline() const;
+    
+    /**
+     * @brief Set brush style
+     * @param style  
+     */
+    void setBrushStyle( const Qt::BrushStyle style );
+    /**
+     * @brief Return brush style
+     * @return brush style.
+     */
+    Qt::BrushStyle brushStyle() const;
 
     /**
      * @brief  Serialize the style to a stream.
