@@ -33,12 +33,19 @@
 #include <MarbleWidget.h>
 #include "PlotPoint.h"
 #include <QApplication>
+#include <LabelGraphicsItem.h>
 
 using namespace Marble;
 
 AltitudeProfile::AltitudeProfile(const QPointF& point, const QSizeF& size)
     : AbstractFloatItem( point, size ), m_isInitialized( false ), m_marbleWidget( 0 )
 {
+    m_label = new LabelGraphicsItem( &m_labelContainer );
+    m_label->setFrame( FrameGraphicsItem::RoundedRectFrame );
+
+    MarbleGraphicsGridLayout *topLayout = new MarbleGraphicsGridLayout( 1, 1 );
+    m_labelContainer.setLayout( topLayout );
+    topLayout->addItem( m_label, 0, 0 );
 
 }
 
@@ -64,6 +71,7 @@ bool AltitudeProfile::renderOnMap( GeoPainter     *painter,
 {
     if ( renderPos == "HOVERS_ABOVE_SURFACE" )
     {
+/*
         painter->save();
         painter->autoMapQuality();
 
@@ -71,14 +79,20 @@ bool AltitudeProfile::renderOnMap( GeoPainter     *painter,
         if ( hightlightedPoint ) {
             QString text = QString::number( hightlightedPoint->coordinates().altitude() ) + "m";
             QRect textRect = painter->fontMetrics().boundingRect( text );
+
             painter->setBrush( QApplication::palette().toolTipBase() );
             painter->drawRect( hightlightedPoint->coordinates(), textRect.width(), textRect.height(), false );
+            painter->viewport();
             painter->setPen( QApplication::palette().toolTipText().color() );
             painter->drawText( hightlightedPoint->coordinates(), text );
+
             painter->setPen( QPen( Qt::red, 5, Qt::SolidLine, Qt::RoundCap ) );
             painter->drawPoint( hightlightedPoint->coordinates() );
+
         }
         painter->restore();
+*/
+        m_labelContainer.paintEvent( painter, viewport, renderPos, layer );
     }
     return true;
 }
@@ -259,6 +273,14 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
 
 void AltitudeProfile::forceUpdate()
 {
+    PlotPoint* hightlightedPoint = m_graph->highlightedPoint();
+    if ( hightlightedPoint ) {
+        m_labelContainer.show();
+        m_labelContainer.setCoordinate( hightlightedPoint->coordinates() );
+        m_label->setText( QString::number( hightlightedPoint->coordinates().altitude() ) + "m" );
+    } else {
+        m_labelContainer.hide();
+    }
     if ( m_marbleWidget ) {
         m_marbleWidget->update();
     }

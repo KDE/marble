@@ -13,6 +13,7 @@
 #define MARBLE_ALTITUDEPROFILE_H
 
 #include "AbstractFloatItem.h"
+#include <GeoGraphicsItem.h>
 
 class QLabel;
 class KPlotObject;
@@ -24,6 +25,8 @@ class WidgetGraphicsItem;
 class GeoDataDocument;
 class TileLoader;
 class PlotWidget;
+class LabelGraphicsItem;
+
 
 class AltitudeProfile : public Marble::AbstractFloatItem
 {
@@ -71,6 +74,9 @@ private:
     PlotWidget *m_graph;
     KPlotObject *m_plot;
     QLabel *m_stats;
+
+    GeoGraphicsItem m_labelContainer;
+    LabelGraphicsItem *m_label;
 };
 
 }
