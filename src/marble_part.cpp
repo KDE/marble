@@ -1167,7 +1167,7 @@ void MarblePart::showNewStuffDialog()
                                                       "marble/marble.knsrc" );
     kDebug() << "KNS config file:" << newStuffConfig;
 
-    QPointer<KNS3::DownloadDialog> dialog(new KNS3::DownloadDialog(newStuffConfig));
+    QPointer<KNS3::DownloadDialog> dialog(new KNS3::DownloadDialog(newStuffConfig, m_controlView));
     dialog->exec();
     delete dialog;
 }
@@ -1177,7 +1177,7 @@ void MarblePart::showUploadNewStuffDialog()
     QString  newStuffConfig = KStandardDirs::locate ( "data", "marble/marble.knsrc" );
     kDebug() << "KNS config file:" << newStuffConfig;
 
-    QPointer<KNS3::UploadDialog> dialog( new KNS3::UploadDialog( newStuffConfig ) );
+    QPointer<KNS3::UploadDialog> dialog( new KNS3::UploadDialog( newStuffConfig, m_controlView ) );
     kDebug() << "Creating the archive";
     dialog->setUploadFile( KUrl( MapWizard::createArchive( m_controlView, m_controlView->marbleWidget()->mapThemeId() ) ) );
     dialog->exec();
