@@ -16,8 +16,9 @@ test -x ./merge_ts_po || { echo "./merge_ts_po is not there. Please compile it: 
 
 workdir="$(mktemp -d)"
 
-TAG="4.6.0"
-prefix="svn://anonsvn.kde.org/home/kde/tags/KDE/${TAG}/kde-l10n/"
+prefix="svn://anonsvn.kde.org/home/kde/branches/stable/l10n-kde4/"
+#TAG="4.6.0"
+#prefix="svn://anonsvn.kde.org/home/kde/tags/KDE/${TAG}/kde-l10n/"
 # Translations can also be loaded from SVN trunk, uncomment below.
 #prefix="svn://anonsvn.kde.org/home/kde/trunk/l10n-kde4"
 
