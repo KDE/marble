@@ -16,6 +16,7 @@
 
 #include "GeoDataCoordinates.h"
 #include "MarbleWidget.h"
+#include "MarbleWidgetInputHandler.h"
 #include "MarbleMath.h"
 #include "AbstractFloatItem.h"
 #include "MarbleMap.h"
@@ -39,6 +40,8 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
              this, SIGNAL( visibleLatLonAltBoxChanged( ) ) );
     connect( &m_center, SIGNAL(latitudeChanged()), this, SLOT(updateCenterPosition()));
     connect( &m_center, SIGNAL(longitudeChanged()), this, SLOT(updateCenterPosition()));
+
+    m_marbleWidget->inputHandler()->setMouseButtonPopupEnabled( Qt::LeftButton, false );
 }
 
 QStringList MarbleWidget::activeFloatItems() const
