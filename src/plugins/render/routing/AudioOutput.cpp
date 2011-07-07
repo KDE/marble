@@ -113,13 +113,26 @@ QString AudioOutputPrivate::turnTypeAudioFile( RoutingInstruction::TurnType turn
 
 QString AudioOutputPrivate::audioFile( const QString &name )
 {
+    QStringList const formats = QStringList() << "ogg" << "mp3" << "wav";
     if ( m_soundEnabled ) {
-        QString const audioTemplate = "audio/%1.ogg";
-        return MarbleDirs::path( audioTemplate.arg( name ) );
+        QString const audioTemplate = "audio/%1.%2";
+        foreach( const QString &format, formats ) {
+            QString const result = MarbleDirs::path( audioTemplate.arg( name ).arg( format ) );
+            if ( !result.isEmpty() ) {
+                return result;
+            }
+        }
     } else {
-        QString const audioTemplate = "audio/speakers/%1/%2.ogg";
-        return MarbleDirs::path( audioTemplate.arg( m_speaker ).arg( name ) );
+        QString const audioTemplate = "audio/speakers/%1/%2.%3";
+        foreach( const QString &format, formats ) {
+            QString const result = MarbleDirs::path( audioTemplate.arg( m_speaker ).arg( name ).arg( format ) );
+            if ( !result.isEmpty() ) {
+                return result;
+            }
+        }
     }
+
+    return QString();
 }
 
 void AudioOutputPrivate::setupAudio()
