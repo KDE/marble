@@ -30,11 +30,10 @@ GeoDataPoint* OsmNodeFactory::getPoint( quint64 id )
 
 void OsmNodeFactory::cleanUp()
 {
-    //TODO: Clean up
-    /*foreach( GeoDataPoint *p, m_points )
+    foreach( GeoDataPoint *p, m_points )
     {
         delete p;
-    }*/
+    }
     m_points.clear();
 }
 

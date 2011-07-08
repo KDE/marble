@@ -125,7 +125,8 @@ GeoDataPlacemark* OsmTagTagHandler::createPOI( GeoDataDocument* doc, GeoDataGeom
     GeoDataPoint *point = dynamic_cast<GeoDataPoint *>( geometry );
     Q_ASSERT( point );
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
-    placemark->setGeometry( point );
+    placemark->setGeometry( new GeoDataPoint( *point ) );
+    point->setParent( placemark );
     placemark->setVisible( false );
     placemark->setPopularityIndex( 1 );
     doc->append( placemark );
