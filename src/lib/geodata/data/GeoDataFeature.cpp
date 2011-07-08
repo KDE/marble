@@ -368,7 +368,8 @@ void GeoDataFeature::initializeDefaultStyles()
     s_defaultStyle[HighwayTrunkLink]         = GeoDataFeaturePrivate::createHighwayStyle( "#A9DAA9", 3.0, 15 );
     s_defaultStyle[HighwayMotorwayLink]      = GeoDataFeaturePrivate::createHighwayStyle( "#809BC0", 3.0, 18 );
     
-    s_defaultStyle[NaturalWater]             = GeoDataFeaturePrivate::createWayStyle( "#B5D0D0", "#B5D0D0" );
+    s_defaultStyle[NaturalWater]             = GeoDataFeaturePrivate::createStyle( 2, 10, "#B5D0D0", "#B5D0D0", 
+                                                                                   true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap );
     s_defaultStyle[NaturalWood]              = GeoDataFeaturePrivate::createWayStyle( "#8DC46C", "#8DC46C" );
     
     s_defaultStyle[LeisurePark]              = GeoDataFeaturePrivate::createWayStyle( "#CDF6CA", "#CDF6CA" );
