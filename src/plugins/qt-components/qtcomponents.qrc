@@ -1,0 +1,5 @@
+<RCC>
+    <qresource>
+        <file>MainWidget.qml</file>
+    </qresource>
+</RCC>
