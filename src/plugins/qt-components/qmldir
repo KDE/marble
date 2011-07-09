@@ -1,1 +1,6 @@
 MainWidget 0.12 MainWidget.qml
+SettingsPage 0.12 SettingsPage.qml
+SettingsListPage 0.12 SettingsListPage.qml
+MapThemeSelectionPage 0.12 MapThemeSelectionPage.qml
+NavigationSettingsPage 0.12 NavigationSettingsPage.qml
+ViewSettingsPage 0.12 ViewSettingsPage.qml

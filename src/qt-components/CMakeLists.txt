@@ -1,1 +1,1 @@
-add_subdirectory( meego )
+add_subdirectory( marble-touch )
