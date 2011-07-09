@@ -149,6 +149,17 @@ void OsmGlobals::setupCategories()
     m_visualCategories["landuse=retail"]             = GeoDataFeature::LanduseRetail;
     
     m_visualCategories["leisure=park"]               = GeoDataFeature::LeisurePark;
+    
+    m_visualCategories["railway=rail"]               = GeoDataFeature::RailwayRail;
+    m_visualCategories["railway=tram"]               = GeoDataFeature::RailwayTram;
+    m_visualCategories["railway=light_rail"]         = GeoDataFeature::RailwayLightRail;
+    m_visualCategories["railway=abandoned"]          = GeoDataFeature::RailwayAbandoned;
+    m_visualCategories["railway=disused"]            = GeoDataFeature::RailwayAbandoned;
+    m_visualCategories["railway=subway"]             = GeoDataFeature::RailwaySubway;
+    m_visualCategories["railway=miniature"]          = GeoDataFeature::RailwayMiniature;
+    m_visualCategories["railway=construction"]       = GeoDataFeature::RailwayConstruction;
+    m_visualCategories["railway=monorail"]           = GeoDataFeature::RailwayMonorail;
+    m_visualCategories["railway=funicular"]          = GeoDataFeature::RailwayFunicular;
 }
 
 void OsmGlobals::setupAreaTags()

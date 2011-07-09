@@ -392,6 +392,17 @@ void GeoDataFeature::initializeDefaultStyles()
     s_defaultStyle[LanduseReservoir]         = GeoDataFeaturePrivate::createWayStyle( "#B5D0D0", "#B5D0D0" );
     s_defaultStyle[LanduseResidential]       = GeoDataFeaturePrivate::createWayStyle( "#DCDCDC", "#DCDCDC" );
     s_defaultStyle[LanduseRetail]            = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
+    
+    s_defaultStyle[RailwayRail]              = GeoDataFeaturePrivate::createStyle( 2, 5, "#989898", "#989898", true, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap );
+    s_defaultStyle[RailwayTram]              = GeoDataFeaturePrivate::createStyle( 1, 4, "#989898", "#989898", true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap );
+    s_defaultStyle[RailwayLightRail]         = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
+    s_defaultStyle[RailwayAbandoned]         = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
+    s_defaultStyle[RailwaySubway]            = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
+    s_defaultStyle[RailwayPreserved]         = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
+    s_defaultStyle[RailwayMiniature]         = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
+    s_defaultStyle[RailwayConstruction]      = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
+    s_defaultStyle[RailwayMonorail]          = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
+    s_defaultStyle[RailwayFunicular]         = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
 
     s_defaultStyleInitialized = true;
     s_defaultFont = QFont("Sans Serif");

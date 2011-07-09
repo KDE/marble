@@ -258,6 +258,17 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         LanduseResidential,
         LanduseRetail,
 
+        RailwayRail,
+        RailwayTram,
+        RailwayLightRail,
+        RailwayAbandoned,
+        RailwaySubway,
+        RailwayPreserved,
+        RailwayMiniature,
+        RailwayConstruction,
+        RailwayMonorail,
+        RailwayFunicular,
+
         // Important: Make sure that this is always the last 
         // item and just use it to specify the array size
         LastIndex

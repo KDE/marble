@@ -103,17 +103,39 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
 
         if ( category = OsmGlobals::visualCategories().value( key + "=" + value ) )
         {
-            //Remove assigned style (i.e. building style)
-            placemark->setStyle( 0 );
-            placemark->setVisualCategory( category );
-            placemark->setVisible( true );
+            if( placemark->visualCategory() != GeoDataFeature::Default )
+            {
+                GeoDataPlacemark* newPlacemark = new GeoDataPlacemark( *placemark );
+                newPlacemark->setVisualCategory( category );
+                newPlacemark->setStyle( 0 );
+                newPlacemark->setVisible( true );
+                doc->append( newPlacemark );
+            }
+            else
+            {
+                //Remove assigned style (i.e. building style)
+                placemark->setStyle( 0 );
+                placemark->setVisualCategory( category );
+                placemark->setVisible( true );
+            }
         }
         else if ( category = OsmGlobals::visualCategories().value( key ) )
         {
-            //Remove assigned style (i.e. building style)
-            placemark->setStyle( 0 );
-            placemark->setVisualCategory( category );
-            placemark->setVisible( true );
+            if( placemark->visualCategory() != GeoDataFeature::Default )
+            {
+                GeoDataPlacemark* newPlacemark = new GeoDataPlacemark( *placemark );
+                newPlacemark->setVisualCategory( category );
+                newPlacemark->setStyle( 0 );
+                newPlacemark->setVisible( true );
+                doc->append( newPlacemark );
+            }
+            else
+            {
+                //Remove assigned style (i.e. building style)
+                placemark->setStyle( 0 );
+                placemark->setVisualCategory( category );
+                placemark->setVisible( true );
+            }
         }
     }
 
