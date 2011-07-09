@@ -76,11 +76,6 @@ public:
     void setIndex( int index );
 
     /**
-      * Toggle offline mode. In offline mode, reverse geocoding is disabled
-      */
-    void setWorkOffline( bool offline );
-
-    /**
       * Remove target position and user input, if any
       */
     void clear();

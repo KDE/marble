@@ -78,12 +78,6 @@ public:
       */
     void retrieveRoute( RouteRequest *route );
 
-    /**
-      * Toggle offline mode. In offline mode, new routes cannot be downloaded
-      */
-    void setWorkOffline( bool offline );
-
-
     // This is a temporary location for AdjustNavigation. The code would be refactored soon.
     void setAdjustNavigation( AdjustNavigation * adjustNavigation );
 

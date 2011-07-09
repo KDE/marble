@@ -706,9 +706,6 @@ void MainWindow::workOffline( bool offline )
     m_controlView->marbleControl()->setWorkOffline( offline );
 
     m_workOfflineAct->setChecked( offline ); // Sync state with the GUI
-    if ( m_routingWidget ) {
-        m_routingWidget->setWorkOffline( offline );
-    }
 }
 
 void MainWindow::showAtmosphere( bool isChecked )
@@ -1318,7 +1315,6 @@ void MainWindow::showRoutingDialog()
         m_routingWindow->setWindowTitle( tr( "Routing - Marble" ) );
 
         m_routingWidget = new RoutingWidget( m_controlView->marbleWidget(), m_routingWindow );
-        m_routingWidget->setWorkOffline( m_workOfflineAct->isChecked() );
         m_routingWidget->setShowDirectionsButtonVisible( true );
 
         QScrollArea* scrollArea = new QScrollArea;
@@ -1426,7 +1422,6 @@ void MainWindow::showGoToDialog()
     }
 
     m_gotoDialog->show();
-    m_gotoDialog->setWorkOffline( m_workOfflineAct->isChecked() );
     if ( m_gotoDialog->exec() == QDialog::Accepted ) {
         GeoDataLookAt lookAt = m_gotoDialog->lookAt();
         m_controlView->marbleWidget()->flyTo( lookAt );

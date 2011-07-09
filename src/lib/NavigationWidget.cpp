@@ -275,11 +275,6 @@ void NavigationWidget::resizeEvent ( QResizeEvent * )
     }
 }
 
-void NavigationWidget::setWorkOffline(bool offline)
-{
-    d->m_runnerManager->setWorkOffline( offline );
-}
-
 }
 
 #include "NavigationWidget.moc"

@@ -44,11 +44,6 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
      */
     void setMarbleWidget( MarbleWidget *widget );
 
-    /**
-      * Toggle offline mode of download manager and runners.
-      */
-    void setWorkOffline(bool offline);
-
  Q_SIGNALS:
     /**
      * @brief Signal emitted when the Home button has been pressed.

@@ -44,7 +44,6 @@ public:
     QVector<GeoDataDocument*> m_routingResult;
     QList<GeoDataCoordinates> m_reverseGeocodingResults;
     RouteRequest* m_routeRequest;
-    bool m_workOffline;
     PluginManager* m_pluginManager;
 
     MarbleRunnerManagerPrivate( MarbleRunnerManager* parent, PluginManager* pluginManager );
@@ -66,7 +65,6 @@ MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( MarbleRunnerManager* par
         m_marbleModel( 0 ),
         m_model( new MarblePlacemarkModel ),
         m_routeRequest( 0 ),
-        m_workOffline( false ),
         m_pluginManager( pluginManager )
 {
     m_model->setPlacemarkContainer( &m_placemarkContainer );
@@ -89,7 +87,7 @@ QList<RunnerPlugin*> MarbleRunnerManagerPrivate::plugins( RunnerPlugin::Capabili
             continue;
         }
 
-        if ( ( m_workOffline && !plugin->canWorkOffline() ) ) {
+        if ( ( m_marbleModel && m_marbleModel->workOffline() && !plugin->canWorkOffline() ) ) {
             continue;
         }
 
@@ -208,11 +206,6 @@ void MarbleRunnerManager::setModel( MarbleModel * model )
 {
     // TODO: Terminate runners which are making use of the map.
     d->m_marbleModel = model;
-}
-
-void MarbleRunnerManager::setWorkOffline( bool offline )
-{
-    d->m_workOffline = offline;
 }
 
 void MarbleRunnerManager::addReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark )

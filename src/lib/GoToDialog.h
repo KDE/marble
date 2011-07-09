@@ -44,9 +44,6 @@ public:
     /** Toggle whether routing items (source, destination and via points) are visible */
     void setShowRoutingItems( bool show );
 
-    /** Toggles whether to work offline, i.e. use search runners that use the network */
-    void setWorkOffline( bool workOffline );
-
     /** Toggle whether the dialog can be used to search for placemarks */
     void setSearchEnabled( bool enabled );
 

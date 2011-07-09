@@ -397,11 +397,6 @@ void RoutingInputWidget::updatePosition( int index, const GeoDataCoordinates & )
     }
 }
 
-void RoutingInputWidget::setWorkOffline( bool offline )
-{
-    d->m_runnerManager->setWorkOffline( offline );
-}
-
 void RoutingInputWidget::clear()
 {
     d->m_nominatimTimer.stop();

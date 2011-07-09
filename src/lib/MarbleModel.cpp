@@ -94,7 +94,8 @@ class MarbleModelPrivate
           m_positionTracking( 0 ),
           m_bookmarkManager( 0 ),
           m_routingManager( 0 ),
-          m_legend( 0 )
+          m_legend( 0 ),
+          m_workOffline( false )
     {
         m_sortproxy.setFilterFixedString( GeoDataTypes::GeoDataPlacemarkType );
         m_sortproxy.setFilterKeyColumn( 1 );
@@ -148,6 +149,8 @@ class MarbleModelPrivate
     BookmarkManager         *m_bookmarkManager; 
     RoutingManager          *m_routingManager;
     QTextDocument           *m_legend;
+
+    bool                     m_workOffline;
 };
 
 MarbleModel::MarbleModel( QObject *parent )
@@ -596,6 +599,20 @@ void MarbleModel::addGeoDataString( const QString& data, const QString& key )
 void MarbleModel::removeGeoData( const QString& fileName )
 {
     d->m_fileManager->removeFile( fileName );
+}
+
+bool MarbleModel::workOffline() const
+{
+    return d->m_workOffline;
+}
+
+void MarbleModel::setWorkOffline( bool workOffline )
+{
+    if ( d->m_workOffline != workOffline ) {
+        downloadManager()->setDownloadEnabled( !workOffline );
+        d->m_workOffline = workOffline;
+        emit workOfflineChanged();
+    }
 }
 
 }

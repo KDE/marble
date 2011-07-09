@@ -84,8 +84,6 @@ public:
 
     QVector<QIcon> m_progressAnimation;
 
-    bool m_workOffline;
-
     GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWidget );
 
     void saveSelection( const QModelIndex &index );
@@ -290,8 +288,7 @@ void GoToDialogPrivate::createProgressAnimation()
 
 GoToDialogPrivate::GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWidget ) :
     m_parent( parent), m_marbleWidget( marbleWidget ), m_targetModel( 0 ),
-    m_runnerManager( 0 ), m_placemarkModel( 0 ), m_currentFrame( 0 ),
-    m_workOffline( false )
+    m_runnerManager( 0 ), m_placemarkModel( 0 ), m_currentFrame( 0 )
 {
     m_progressTimer.setInterval( 100 );
 }
@@ -327,7 +324,6 @@ void GoToDialog::startSearch()
                 this, SLOT( stopProgressAnimation() ) );
     }
 
-    d->m_runnerManager->setWorkOffline( d->m_workOffline );
     d->m_runnerManager->findPlacemarks( searchTerm );
     if ( d->m_progressAnimation.isEmpty() ) {
         d->createProgressAnimation();
@@ -400,11 +396,6 @@ void GoToDialog::setSearchEnabled( bool enabled )
         searchButton->setChecked( false );
         updateSearchMode();
     }
-}
-
-void GoToDialog::setWorkOffline( bool workOffline )
-{
-    d->m_workOffline = workOffline;
 }
 
 void GoToDialog::updateSearchMode()

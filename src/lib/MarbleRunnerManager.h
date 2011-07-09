@@ -52,12 +52,6 @@ public:
     void setModel( MarbleModel * model );
 
     /**
-      * Toggle offline mode. In offline mode, runners shall not try to access
-      * the network (possibly not returning any results).
-      */
-    void setWorkOffline( bool offline );
-
-    /**
       * Search for placemarks matching the given search term. Results are returned
       * using the @see searchResultChanged and the @see searchFinished signals
       */

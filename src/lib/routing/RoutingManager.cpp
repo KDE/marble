@@ -51,8 +51,6 @@ public:
 
     AlternativeRoutesModel* m_alternativeRoutesModel;
 
-    bool m_workOffline;
-
     MarbleRunnerManager* m_runnerManager;
 
     bool m_haveRoute;
@@ -85,14 +83,13 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager
         m_profilesModel( new RoutingProfilesModel( model->pluginManager() ) ),
         m_marbleModel( model ),
         m_alternativeRoutesModel(new AlternativeRoutesModel( model, parent ) ),
-        m_workOffline( false ),
         m_runnerManager( new MarbleRunnerManager( model->pluginManager(), q ) ),
         m_haveRoute( false ), m_adjustNavigation( 0 ),
         m_guidanceModeEnabled( false ),
         m_shutdownPositionTracking( false ),
         m_guidanceModeWarning( true )
 {
-    // nothing to do
+    m_runnerManager->setModel( model );
 }
 
 GeoDataFolder* RoutingManagerPrivate::routeRequest() const
@@ -272,17 +269,11 @@ void RoutingManager::updateRoute()
     d->m_alternativeRoutesModel->newRequest( d->m_routeRequest );
     if ( realSize > 1 ) {
         emit stateChanged( RoutingManager::Downloading, d->m_routeRequest );
-        d->m_runnerManager->setWorkOffline( d->m_workOffline );
         d->m_runnerManager->retrieveRoute( d->m_routeRequest );
     } else {
         d->m_routingModel->clear();
         emit stateChanged( RoutingManager::Retrieved, d->m_routeRequest );
     }
-}
-
-void RoutingManager::setWorkOffline( bool offline )
-{
-    d->m_workOffline = offline;
 }
 
 void RoutingManager::retrieveRoute( GeoDataDocument* route )

@@ -109,6 +109,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     Q_OBJECT
 
+    Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
+
  public:
     /**
      * @brief  Construct a new MarbleModel.
@@ -267,6 +269,10 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     void setLegend( QTextDocument * document );
 
+    bool workOffline() const;
+
+    void setWorkOffline( bool workOffline );
+
  public Q_SLOTS:
     void clearPersistentTileCache();
 
@@ -296,6 +302,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief Signal that the MarbleModel has changed in general
      */
     void modelChanged();
+
+    void workOfflineChanged();
 
  private:
     Q_DISABLE_COPY( MarbleModel )
