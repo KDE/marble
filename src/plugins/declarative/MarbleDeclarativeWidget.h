@@ -38,6 +38,7 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_OBJECT
 
     Q_PROPERTY( Marble::Declarative::Coordinate* center READ center WRITE setCenter NOTIFY centerChanged )
+    Q_PROPERTY( int zoom READ zoom WRITE setZoom NOTIFY zoomChanged )
 
     Q_PROPERTY( QString mapThemeId READ mapThemeId WRITE setMapThemeId )
     Q_PROPERTY( QString projection READ projection WRITE setProjection )
@@ -55,6 +56,10 @@ public:
 
     void setWorkOffline( bool workOffline );
 
+    int zoom() const;
+
+    void setZoom( int zoom );
+
 Q_SIGNALS:
     /** Forwarded from MarbleWidget. Zoom value and/or center position have changed */
     void visibleLatLonAltBoxChanged();
@@ -66,6 +71,8 @@ Q_SIGNALS:
     void centerChanged();
 
     void workOfflineChanged();
+
+    void zoomChanged();
 
 public Q_SLOTS:
     Marble::Declarative::Coordinate* center();

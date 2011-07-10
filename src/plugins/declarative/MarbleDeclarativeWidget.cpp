@@ -41,6 +41,8 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
              this, SIGNAL( visibleLatLonAltBoxChanged( ) ) );
     connect( m_marbleWidget->model(), SIGNAL( workOfflineChanged() ),
              this, SIGNAL( workOfflineChanged() ) );
+    connect( m_marbleWidget, SIGNAL( zoomChanged( int ) ),
+             this, SIGNAL( zoomChanged() ) );
     connect( &m_center, SIGNAL(latitudeChanged()), this, SLOT(updateCenterPosition()));
     connect( &m_center, SIGNAL(longitudeChanged()), this, SLOT(updateCenterPosition()));
 
@@ -194,6 +196,16 @@ bool MarbleWidget::workOffline() const
 void MarbleWidget::setWorkOffline( bool workOffline )
 {
     m_marbleWidget->model()->setWorkOffline( workOffline );
+}
+
+int MarbleWidget::zoom() const
+{
+    return m_marbleWidget->zoom();
+}
+
+void MarbleWidget::setZoom( int zoom )
+{
+    m_marbleWidget->zoomView( zoom );
 }
 
 }
