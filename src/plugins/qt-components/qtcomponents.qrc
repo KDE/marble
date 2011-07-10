@@ -3,8 +3,11 @@
         <file>MainWidget.qml</file>
         <file>SettingsPage.qml</file>
         <file>SettingsListPage.qml</file>
+        <file>ConnectionSettingsPage.qml</file>
         <file>MapThemeSelectionPage.qml</file>
         <file>NavigationSettingsPage.qml</file>
         <file>ViewSettingsPage.qml</file>
+        <file>Settings.qml</file>
+        <file>SearchBar.qml</file>
     </qresource>
 </RCC>

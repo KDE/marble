@@ -14,6 +14,10 @@ Page {
     ListModel {
         id: pagesModel
         ListElement {
+            page: "ConnectionSettingsPage.qml"
+            title: "Connections"
+        }
+        ListElement {
             page: "MapThemeSelectionPage.qml"
             title: "Select Map Theme"
         }
@@ -33,10 +37,10 @@ Page {
         model: pagesModel
 
         delegate: Item {
+            id: settingsItem
             height: 60
             width: parent.width
             Label {
-                id: itemText
                 anchors.fill: parent
                 text: model.title
             }

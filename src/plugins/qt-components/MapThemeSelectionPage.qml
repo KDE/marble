@@ -16,6 +16,7 @@ ListView {
     anchors.fill: parent
     //titleText: "Select Map Theme"
     model: themes.mapThemes()
+    property Settings settings: undefined
     
     MapThemeManager {
       id: themes
@@ -29,7 +30,7 @@ ListView {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    main.mainWidget.screen.map.mapThemeId = themes.mapThemes()[mapListView.currentIndex].id
+                    settings.mapThemeId = themes.mapThemes()[mapListView.currentIndex].id
                     settingsPage.pageStack.pop( null )
                 }
             }

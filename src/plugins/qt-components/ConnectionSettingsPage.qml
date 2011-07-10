@@ -9,8 +9,21 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
 
-PageStackWindow {
-    id: pageStack
-    initialPage: SettingsListPage { }
-    property Settings settings: Settings { }
+Column {
+    id: connectionSettings
+    anchors.fill: parent
+    spacing: 10
+    
+    CheckBox {
+        id: gpsEnabled
+        text: "GPS enabled"
+        checked: false
+    }
+    
+    CheckBox {
+        id: offlineMode
+        text: "Offline-mode enabled"
+        checked: false
+    }
+
 }

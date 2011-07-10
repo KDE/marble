@@ -9,8 +9,8 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
 
-PageStackWindow {
-    id: pageStack
-    initialPage: SettingsListPage { }
-    property Settings settings: Settings { }
+TextField {
+    id: textField
+    placeholderText: "Search..."
+    focus: true
 }

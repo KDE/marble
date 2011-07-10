@@ -15,6 +15,15 @@ Rectangle {
     width: 800
     height: 480
 
+    SearchBar {
+        id: searchBar
+        visible: false
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: 40
+    }
+
     MainWidget {
         id: mainWidget
         anchors.top: parent.top
@@ -43,6 +52,7 @@ Rectangle {
             id: toolBarLayout
             anchors.fill: parent
             ToolIcon {
+                id: backButton
                 iconId: "toolbar-back"
                 visible: settingsPage.visible
                 anchors.left: parent.left
@@ -58,6 +68,25 @@ Rectangle {
                 }
             }
             ToolIcon {
+                id: searchButton
+                iconId: "toolbar-search"
+                anchors.right: settingsButton.left
+                anchors.bottom: parent.bottom
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        searchBar.visible = !searchBar.visible
+                        if( searchBar.visible ) {
+                            mainWidget.anchors.top = searchBar.bottom
+                        }
+                        else {
+                            mainWidget.anchors.top = main.top;
+                        }
+                    }
+                }
+            }
+            ToolIcon {
+                id: settingsButton
                 iconId: "toolbar-settings"
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom

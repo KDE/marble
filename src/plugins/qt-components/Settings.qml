@@ -6,11 +6,8 @@
 //
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 
-import QtQuick 1.1
-import com.nokia.meego 1.0
+import Qt 4.7
 
-PageStackWindow {
-    id: pageStack
-    initialPage: SettingsListPage { }
-    property Settings settings: Settings { }
+Item {
+    property string mapThemeId: "earth/openstreetmap/openstreetmap.dgml"
 }
