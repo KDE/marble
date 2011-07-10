@@ -42,6 +42,7 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( QString mapThemeId READ mapThemeId WRITE setMapThemeId )
     Q_PROPERTY( QString projection READ projection WRITE setProjection )
     Q_PROPERTY( bool inputEnabled READ inputEnabled WRITE setInputEnabled )
+    Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
     Q_PROPERTY( QStringList activeFloatItems READ activeFloatItems WRITE setActiveFloatItems )
     Q_PROPERTY( Marble::Declarative::Tracking* tracking READ tracking NOTIFY trackingChanged )
     Q_PROPERTY( Marble::Declarative::Routing* routing READ routing NOTIFY routingChanged )
@@ -49,6 +50,10 @@ class MarbleWidget : public QGraphicsProxyWidget
 public:
     /** Constructor */
     explicit MarbleWidget( QGraphicsItem *parent = 0, Qt::WindowFlags flags = 0 );
+
+    bool workOffline() const;
+
+    void setWorkOffline( bool workOffline );
 
 Q_SIGNALS:
     /** Forwarded from MarbleWidget. Zoom value and/or center position have changed */
@@ -59,6 +64,8 @@ Q_SIGNALS:
     void routingChanged();
 
     void centerChanged();
+
+    void workOfflineChanged();
 
 public Q_SLOTS:
     Marble::Declarative::Coordinate* center();
