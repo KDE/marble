@@ -32,7 +32,7 @@ namespace Declarative
 
 MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     QGraphicsProxyWidget( parent, flags ), m_marbleWidget( new Marble::MarbleWidget ),
-    m_inputEnabled( true ), m_tracking( 0 ), m_routing( 0 )
+    m_inputEnabled( true ), m_tracking( 0 ), m_routing( 0 ), m_search( 0 )
 {
     m_marbleWidget->setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
     setWidget( m_marbleWidget );
@@ -186,6 +186,17 @@ Marble::Declarative::Routing* MarbleWidget::routing()
     }
 
     return m_routing;
+}
+
+Marble::Declarative::Search* MarbleWidget::search()
+{
+    if ( !m_search ) {
+        m_search = new Search( this );
+        m_search->setMarbleWidget( m_marbleWidget );
+        m_search->setDelegateParent( this );
+    }
+
+    return m_search;
 }
 
 bool MarbleWidget::workOffline() const

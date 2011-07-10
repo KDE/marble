@@ -14,12 +14,11 @@ Coordinate.cpp
 DeclarativeMapThemeManager.cpp
 MapTheme.cpp
 MarbleDeclarativePlugin.cpp
-MarbleDeclarativeRunnerManager.cpp
 MarbleDeclarativeWidget.cpp
-Placemark.cpp
 PositionSource.cpp
 Tracking.cpp
 Routing.cpp
+Search.cpp
 RouteRequestModel.cpp
 Settings.cpp
 )
