@@ -16,6 +16,7 @@
 
 #include "GeoDataCoordinates.h"
 #include "MarbleWidget.h"
+#include "MarbleModel.h"
 #include "MarbleWidgetInputHandler.h"
 #include "MarbleMath.h"
 #include "AbstractFloatItem.h"
@@ -38,6 +39,10 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
 
     connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
              this, SIGNAL( visibleLatLonAltBoxChanged( ) ) );
+    connect( m_marbleWidget->model(), SIGNAL( workOfflineChanged() ),
+             this, SIGNAL( workOfflineChanged() ) );
+    connect( m_marbleWidget, SIGNAL( zoomChanged( int ) ),
+             this, SIGNAL( zoomChanged() ) );
     connect( &m_center, SIGNAL(latitudeChanged()), this, SLOT(updateCenterPosition()));
     connect( &m_center, SIGNAL(longitudeChanged()), this, SLOT(updateCenterPosition()));
 
@@ -181,6 +186,26 @@ Marble::Declarative::Routing* MarbleWidget::routing()
     }
 
     return m_routing;
+}
+
+bool MarbleWidget::workOffline() const
+{
+    return m_marbleWidget->model()->workOffline();
+}
+
+void MarbleWidget::setWorkOffline( bool workOffline )
+{
+    m_marbleWidget->model()->setWorkOffline( workOffline );
+}
+
+int MarbleWidget::zoom() const
+{
+    return m_marbleWidget->zoom();
+}
+
+void MarbleWidget::setZoom( int zoom )
+{
+    m_marbleWidget->zoomView( zoom );
 }
 
 }

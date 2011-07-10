@@ -21,11 +21,12 @@ PositionSource.cpp
 Tracking.cpp
 Routing.cpp
 RouteRequestModel.cpp
+Settings.cpp
 )
 
 marble_add_declarative_plugin( MarbleDeclarativePlugin ${marbleplugin_SRCS})
 qt4_automoc(${marbleplugin_SRCS})
 target_link_libraries( MarbleDeclarativePlugin ${QT_QTDECLARATIVE_LIBRARY} ${QT_QTWEBKIT_LIBRARY} )
-INSTALL( FILES qmldir DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble )
+INSTALL( FILES qmldir MarbleSettings.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble )
 
 endif( QT_QTDECLARATIVE_FOUND )
