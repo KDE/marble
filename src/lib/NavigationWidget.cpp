@@ -216,6 +216,7 @@ void NavigationWidget::setLocations( QVector<GeoDataPlacemark*> locations )
         d->m_document->append( new GeoDataPlacemark( *placemark ) );
     }
     d->m_widget->model()->treeModel()->addDocument( d->m_document );
+    d->m_widget->centerOn( d->m_document->latLonAltBox() );
 
     // set the proxy list to the list of results
     d->m_sortproxy->setSourceModel( &d->m_treeModel );
