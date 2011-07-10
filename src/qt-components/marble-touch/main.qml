@@ -22,6 +22,14 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         height: 40
+    
+        Keys.onPressed: {
+            if ( event.key == Qt.Key_Enter ) {
+                console.log( "search: ", text );
+                mainWidget.find( text )
+                event.accepted = true;
+            }
+        }
     }
 
     MainWidget {
@@ -30,6 +38,10 @@ Rectangle {
         anchors.bottom: toolBar.top
         anchors.left: parent.left
         anchors.right: parent.right
+        
+        function find( text ) {
+            mainWidget.screen.map.search.find( text )
+        }
     }
     
     SettingsPage {
@@ -78,6 +90,7 @@ Rectangle {
                         searchBar.visible = !searchBar.visible
                         if( searchBar.visible ) {
                             mainWidget.anchors.top = searchBar.bottom
+                            searchBar.focus = true
                         }
                         else {
                             mainWidget.anchors.top = main.top;

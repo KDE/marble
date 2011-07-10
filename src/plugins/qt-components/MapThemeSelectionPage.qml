@@ -16,23 +16,33 @@ ListView {
     anchors.fill: parent
     //titleText: "Select Map Theme"
     model: themes.mapThemes()
-    property Settings settings: undefined
+    
+    MarbleSettings {
+        id: settings
+    }
     
     MapThemeManager {
       id: themes
     }
     
     delegate: 
-        Label {
+        Item {
             width: mapListView.width
-            height: 60
-            text: model.modelData.name;
-            MouseArea {
+            height: 50
+            Label {
                 anchors.fill: parent
-                onClicked: {
-                    settings.mapThemeId = themes.mapThemes()[mapListView.currentIndex].id
-                    settingsPage.pageStack.pop( null )
-                }
+                text: model.modelData.name;
+            }
+        }
+        
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                var x = mouseX + mapListView.contentX
+                var y = mouseY + mapListView.contentY
+                mapListView.currentIndex = mapListView.indexAt( x, y )
+                settings.mapTheme = themes.mapThemes()[mapListView.currentIndex].id
+                console.log( "applying theme: ", settings.mapTheme )
             }
         }
 

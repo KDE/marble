@@ -13,6 +13,10 @@ import org.kde.edu.marble 0.11
 Rectangle {
     id: screen
 
+    MarbleSettings {
+        id: settings
+    }
+
     // Delivers the current (gps) position
     PositionSource {
         id: positionProvider
@@ -42,7 +46,10 @@ Rectangle {
 
         property bool autoCenter: false
 
-        mapThemeId: "earth/openstreetmap/openstreetmap.dgml"
+        mapThemeId: settings.mapTheme
+        center.longitude: settings.quitLongitude
+        center.latitude: settings.quitLatitude
+        zoom: settings.quitZoom
         activeFloatItems: [ "compass", "scalebar", "progress" ]
 
         // The grouped property tracking provides access to tracking related
@@ -57,6 +64,22 @@ Rectangle {
             // Initially we don't show the track
             showTrack: false
         }
+        
+        onZoomChanged: {
+            settings.quitZoom = zoom
+        }
+        
+        onVisibleLatLonAltBoxChanged: {
+            console.log( "center changed: ", center.longitude, center.latitude )
+            settings.quitLongitude = center.longitude
+            settings.quitLatitude = center.latitude
+        }
+        
+        // FIXME
+        search {
+            placemarkDelegate: Rectangle { color: "orange"; width: 10; height: 10 }
+        }
+
     }
 
 }

@@ -8,11 +8,16 @@
 
 import QtQuick 1.1
 import com.nokia.meego 1.0
+import org.kde.edu.marble 0.11
 
 Column {
     id: connectionSettings
     anchors.fill: parent
     spacing: 10
+    
+    MarbleSettings {
+        id: settings
+    }
     
     CheckBox {
         id: gpsEnabled
@@ -23,7 +28,10 @@ Column {
     CheckBox {
         id: offlineMode
         text: "Offline-mode enabled"
-        checked: false
+        checked: settings.workOffline
+        onClicked: {
+            settings.workOffline = offlineMode.checked
+        }
     }
 
 }

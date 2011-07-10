@@ -12,5 +12,4 @@ import com.nokia.meego 1.0
 PageStackWindow {
     id: pageStack
     initialPage: SettingsListPage { }
-    property Settings settings: Settings { }
 }

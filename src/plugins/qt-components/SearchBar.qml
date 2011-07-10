@@ -12,5 +12,4 @@ import com.nokia.meego 1.0
 TextField {
     id: textField
     placeholderText: "Search..."
-    focus: true
 }
