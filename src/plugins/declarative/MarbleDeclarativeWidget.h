@@ -13,6 +13,7 @@
 
 #include "Tracking.h"
 #include "Routing.h"
+#include "Search.h"
 #include "Coordinate.h"
 
 #include <QtGui/QGraphicsProxyWidget>
@@ -47,6 +48,7 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( QStringList activeFloatItems READ activeFloatItems WRITE setActiveFloatItems )
     Q_PROPERTY( Marble::Declarative::Tracking* tracking READ tracking NOTIFY trackingChanged )
     Q_PROPERTY( Marble::Declarative::Routing* routing READ routing NOTIFY routingChanged )
+    Q_PROPERTY( Marble::Declarative::Search* search READ search NOTIFY searchChanged )
 
 public:
     /** Constructor */
@@ -67,6 +69,8 @@ Q_SIGNALS:
     void trackingChanged();
 
     void routingChanged();
+
+    void searchChanged();
 
     void centerChanged();
 
@@ -137,6 +141,8 @@ public Q_SLOTS:
 
     Marble::Declarative::Routing* routing();
 
+    Marble::Declarative::Search* search();
+
 private Q_SLOTS:
     void updateCenterPosition();
 
@@ -149,6 +155,8 @@ private:
     Marble::Declarative::Tracking* m_tracking;
 
     Marble::Declarative::Routing* m_routing;
+
+    Marble::Declarative::Search* m_search;
 
     Marble::Declarative::Coordinate m_center;
 };
