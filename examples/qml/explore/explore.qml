@@ -23,6 +23,10 @@ Rectangle {
       id: themes
     }
 
+    MarbleSettings {
+        id: settings
+    }
+
     front:
 
     MarbleWidget {
@@ -30,7 +34,7 @@ Rectangle {
       width: flipable.width
       height: flipable.height
 
-      mapThemeId: "earth/openstreetmap/openstreetmap.dgml"
+      mapThemeId: settings.mapTheme
       activeFloatItems: [ "compass", "scalebar", "progress" ]
 
       FloatButton {
@@ -59,6 +63,12 @@ Rectangle {
         x: flipable.width - width - 10
 
         onClicked: map.zoomOut()
+      }
+
+      Component.onCompleted: {
+          map.center.longitude = settings.quitLongitude
+          map.center.latitude = settings.quitLatitude
+          map.zoom = settings.quitZoom
       }
     }
 
