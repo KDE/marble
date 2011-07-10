@@ -472,4 +472,9 @@ void GeoDataTreeModel::setRootDocument( GeoDataDocument* document )
     endResetModel();
 }
 
+GeoDataDocument * GeoDataTreeModel::rootDocument()
+{
+    return d->m_rootDocument;
+}
+
 #include "GeoDataTreeModel.moc"

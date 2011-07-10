@@ -118,8 +118,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), parent ),
           m_measureTool( model )
 {
-    GeoDataObject *object = static_cast<GeoDataObject*>( model->treeModel()->index(0, 0, QModelIndex()).internalPointer());
-    GeoDataDocument *document = dynamic_cast<GeoDataDocument*>( object->parent() );
+    GeoDataDocument *document =  model->treeModel()->rootDocument();
     m_geometryLayer = new GeometryLayer( document );
     m_layerManager.addLayer( m_geometryLayer );
 
