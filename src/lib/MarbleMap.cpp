@@ -44,8 +44,10 @@
 #include "GeometryLayer.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
+#include "GeoSceneFilter.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
+#include "GeoScenePalette.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneVector.h"
 #include "GeoSceneZoom.h"
@@ -59,6 +61,7 @@
 #include "Planet.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
+#include "TextureColorizer.h"
 #include "TextureLayer.h"
 #include "TileCoordsPyramid.h"
 #include "TileCreator.h"
@@ -95,6 +98,8 @@ class MarbleMapPrivate
     ViewParams       m_viewParams;
     bool             m_backgroundVisible;
 
+    TextureColorizer *m_texcolorizer;
+
     LayerManager     m_layerManager;
     GeometryLayer           *m_geometryLayer;
     AtmosphereLayer          m_atmosphereLayer;
@@ -113,6 +118,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
         : m_parent( parent ),
           m_model( model ),
           m_backgroundVisible( true ),
+          m_texcolorizer( 0 ),
           m_layerManager( model, parent ),
           m_textureLayer( model->mapThemeManager(), model->downloadManager(), model->sunLocator() ),
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), parent ),
@@ -781,6 +787,33 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 
     connect( mapTheme->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
              this, SLOT( updateProperty( const QString &, bool ) ) );
+
+    delete d->m_texcolorizer;
+    d->m_texcolorizer = 0;
+    if( !mapTheme->map()->filters().isEmpty() ) {
+        GeoSceneFilter *filter= mapTheme->map()->filters().first();
+
+        if( filter->type() == "colorize" ) {
+             //no need to look up with MarbleDirs twice so they are left null for now
+            QString seafile, landfile;
+            QList<GeoScenePalette*> palette = filter->palette();
+            foreach ( GeoScenePalette *curPalette, palette ) {
+                if( curPalette->type() == "sea" ) {
+                    seafile = MarbleDirs::path( curPalette->file() );
+                } else if( curPalette->type() == "land" ) {
+                    landfile = MarbleDirs::path( curPalette->file() );
+                }
+            }
+            //look up locations if they are empty
+            if( seafile.isEmpty() )
+                seafile = MarbleDirs::path( "seacolors.leg" );
+            if( landfile.isEmpty() )
+                landfile = MarbleDirs::path( "landcolors.leg" );
+
+            d->m_texcolorizer = new TextureColorizer( seafile, landfile, this );
+        }
+    }
+    d->m_textureLayer.setTextureColorizer( d->m_texcolorizer );
 
     // NOTE due to frequent regressions: 
     // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
