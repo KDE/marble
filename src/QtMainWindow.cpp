@@ -1024,8 +1024,8 @@ void MainWindow::readSettings()
                 tracking->setPositionProviderPlugin( plugin );
                 break;
             }
-            qDeleteAll( plugins );
         }
+        qDeleteAll( plugins );
     }
     settings.endGroup();
 
