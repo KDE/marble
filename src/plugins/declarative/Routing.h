@@ -34,6 +34,14 @@ public:
     void setMarbleWidget( Marble::MarbleWidget* widget );
 
 public Q_SLOTS:
+    void addVia( qreal lon, qreal lat );
+
+    void setVia( int index, qreal lon, qreal lat );
+
+    void removeVia( int index );
+
+    void clearRoute();
+
     QObject* waypointModel();
 
     QObject* routeRequestModel();
