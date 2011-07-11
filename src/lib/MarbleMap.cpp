@@ -749,13 +749,13 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
     if ( d->m_model->mapTheme()->map()->hasVectorLayers() ) {
 
         if ( !d->m_model->mapTheme()->map()->hasTextureLayers() ) {
-            d->m_veccomposer.paintBaseVectorMap( &painter, &d->m_viewParams );
+            d->m_veccomposer.paintBaseVectorMap( &painter, d->m_viewParams.viewport() );
         }
 
         d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
 
         // Add further Vectors
-        d->m_veccomposer.paintVectorMap( &painter, &d->m_viewParams );
+        d->m_veccomposer.paintVectorMap( &painter, d->m_viewParams.viewport() );
     }
     else {
         d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );

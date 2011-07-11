@@ -34,7 +34,7 @@ namespace Marble
 class GeoPainter;
 class PntMap;
 class VectorMap;
-class ViewParams;
+class ViewportParams;
 
 
 class VectorComposer : public QObject
@@ -44,9 +44,9 @@ class VectorComposer : public QObject
     VectorComposer( QObject * parent = 0 );
     virtual ~VectorComposer();
 
-    void  drawTextureMap( GeoPainter *painter, ViewParams *viewParams );
-    void  paintBaseVectorMap( GeoPainter*, ViewParams* );
-    void  paintVectorMap(GeoPainter*, ViewParams* );
+    void  drawTextureMap( GeoPainter *painter, ViewportParams *viewport );
+    void  paintBaseVectorMap( GeoPainter *, ViewportParams * );
+    void  paintVectorMap( GeoPainter *, ViewportParams * );
 
     void setShowWaterBodies( bool show );
     void setShowLakes( bool show );

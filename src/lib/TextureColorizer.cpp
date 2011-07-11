@@ -198,7 +198,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     GeoPainter painter( coastimg.data(), viewParams->viewport(), viewParams->mapQuality(), doClip );
     painter.setRenderHint( QPainter::Antialiasing, antialiased );
 
-    m_veccomposer->drawTextureMap( &painter, viewParams );
+    m_veccomposer->drawTextureMap( &painter, viewParams->viewport() );
 
     QSharedPointer<QImage>        origimg = viewParams->canvasImagePtr();
     const qint64   radius   = viewParams->radius();
