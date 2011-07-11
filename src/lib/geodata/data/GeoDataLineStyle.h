@@ -66,12 +66,12 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
     float width() const;
     
     /**
-     * @brief Set the real width of the line (in meters)
+     * @brief Set the physical width of the line (in meters)
      * @param  width  the new width
      */
     void setPhysicalWidth( const float &realWidth );
     /**
-     * @brief Return the current real width of the line
+     * @brief Return the current physical width of the line
      * @return the current width
      */
     float physicalWidth() const;
@@ -99,6 +99,18 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
      * @return the current pen cap style
      */
     Qt::PenStyle penStyle() const;
+    
+     /**
+     * @brief Set whether to draw the solid background
+     * @param bool
+     */
+    void setBackground( bool background );
+    
+    /**
+     * @brief Return true if background get drawn
+     * @return 
+     */
+    bool background() const;
 
     /**
      * @brief  Serialize the style to a stream.

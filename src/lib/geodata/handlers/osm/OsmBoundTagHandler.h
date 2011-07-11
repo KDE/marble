@@ -1,4 +1,3 @@
-//
 // This file is part of the Marble Virtual Globe.
 //
 // This program is free software licensed under the GNU LGPL. You can

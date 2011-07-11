@@ -121,7 +121,7 @@ class GeoDataFeaturePrivate
                                          const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
                                          const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker())
     {
-        GeoDataStyle *style =  createStyle(1, 0, color, outline, true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap);
+        GeoDataStyle *style =  createStyle(1, 0, color, outline, true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false);
         QPixmap const pixmap = QPixmap( MarbleDirs::path( "bitmaps/poi/" + bitmap + ".png" ) );
         style->setIconStyle( GeoDataIconStyle( pixmap ) );
         style->setLabelStyle( GeoDataLabelStyle( font, Qt::black ) );
@@ -132,20 +132,20 @@ class GeoDataFeaturePrivate
                                              Qt::PenStyle penStyle = Qt::SolidLine, 
                                              Qt::PenCapStyle capStyle = Qt::RoundCap )
     {
-        return createStyle(width, realWidth, color, color, true, true, Qt::SolidPattern, penStyle, capStyle);
+        return createStyle( width, realWidth, color, color, true, true, Qt::SolidPattern, penStyle, capStyle, false );
     }
     
     static GeoDataStyle* createWayStyle( const QColor& color, const QColor& outlineColor, 
                                          bool fill = true, bool outline = true,
                                          Qt::BrushStyle brushStyle = Qt::SolidPattern )
     {
-        return createStyle(1, 0, color, outlineColor, fill, outline, brushStyle, Qt::SolidLine, Qt::RoundCap);
+        return createStyle( 1, 0, color, outlineColor, fill, outline, brushStyle, Qt::SolidLine, Qt::RoundCap, false );
     }
     
-    static GeoDataStyle* createStyle(qreal width, qreal realWidth, const QColor& color, 
-                                     const QColor& outlineColor, bool fill, bool outline,
-                                     Qt::BrushStyle brushStyle, Qt::PenStyle penStyle, 
-                                     Qt::PenCapStyle capStyle)
+    static GeoDataStyle* createStyle( qreal width, qreal realWidth, const QColor& color, 
+                                      const QColor& outlineColor, bool fill, bool outline,
+                                      Qt::BrushStyle brushStyle, Qt::PenStyle penStyle, 
+                                      Qt::PenCapStyle capStyle, bool lineBackground )
     {
         GeoDataStyle *style = new GeoDataStyle;
         GeoDataLineStyle lineStyle( outlineColor );
@@ -153,6 +153,7 @@ class GeoDataFeaturePrivate
         lineStyle.setPenStyle( penStyle );
         lineStyle.setWidth( width );
         lineStyle.setPhysicalWidth( realWidth );
+        lineStyle.setBackground( lineBackground );
         GeoDataPolyStyle polyStyle( color );
         polyStyle.setOutline( outline );
         polyStyle.setFill( fill );

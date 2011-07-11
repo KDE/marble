@@ -115,6 +115,7 @@ void GeometryLayer::initializeDefaultValues()
     s_defaultZValues[GeoDataFeature::HighwayPrimary]      = s_defaultZValue - 3;
     s_defaultZValues[GeoDataFeature::HighwayTrunk]        = s_defaultZValue - 2;
     s_defaultZValues[GeoDataFeature::HighwayMotorway]     = s_defaultZValue - 1;
+    s_defaultZValues[GeoDataFeature::RailwayRail]         = s_defaultZValue - 1;
 
     s_defaultValuesInitialized = true;
 }

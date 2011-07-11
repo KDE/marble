@@ -21,7 +21,7 @@ class GeoDataLineStylePrivate
   public:
     GeoDataLineStylePrivate() 
         : m_width( 1.0 ), m_physicalWidth( 0.0 ), m_capStyle( Qt::FlatCap ),
-          m_penStyle( Qt::SolidLine )
+          m_penStyle( Qt::SolidLine ), m_background( false )
     {
     }
 
@@ -36,6 +36,7 @@ class GeoDataLineStylePrivate
     float  m_physicalWidth;
     Qt::PenCapStyle m_capStyle;
     Qt::PenStyle m_penStyle;
+    bool m_background;
 };
 
 GeoDataLineStyle::GeoDataLineStyle()
@@ -111,12 +112,25 @@ void GeoDataLineStyle::setPenStyle( Qt::PenStyle style )
    d->m_penStyle = style;
 }
 
+bool GeoDataLineStyle::background() const
+{
+    return d->m_background;
+}
+
+void GeoDataLineStyle::setBackground( bool background )
+{
+    d->m_background = background;
+}
 
 void GeoDataLineStyle::pack( QDataStream& stream ) const
 {
     GeoDataColorStyle::pack( stream );
     
     stream << d->m_width;
+    stream << d->m_physicalWidth;
+    stream << (int)d->m_penStyle;
+    stream << (int)d->m_capStyle;
+    stream << d->m_background;
 }
 
 void GeoDataLineStyle::unpack( QDataStream& stream )
@@ -124,6 +138,13 @@ void GeoDataLineStyle::unpack( QDataStream& stream )
     GeoDataColorStyle::unpack( stream );
     
     stream >> d->m_width;
+    stream >> d->m_physicalWidth;
+    int style;
+    stream >> style;
+    d->m_penStyle = ( Qt::PenStyle ) style;
+    stream >> style;
+    d->m_capStyle = ( Qt::PenCapStyle ) style;
+    stream >> d->m_background;
 }
 
 }

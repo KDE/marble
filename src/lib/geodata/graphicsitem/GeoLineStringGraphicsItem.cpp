@@ -78,6 +78,17 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* view
     }
 
     if ( painter->pen() != currentPen ) painter->setPen( currentPen );
+    if ( style()->lineStyle().background() )
+    {
+        painter->save();
+        QPen bgPen( painter->pen() );
+        bgPen.setColor( style()->polyStyle().color() );
+        bgPen.setStyle( Qt::SolidLine );
+        bgPen.setCapStyle( Qt::RoundCap );
+        painter->setPen( bgPen );
+        painter->drawPolyline( m_lineString );
+        painter->restore();
+    }
     painter->drawPolyline( m_lineString );
     painter->restore();
 }

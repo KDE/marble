@@ -369,7 +369,7 @@ void GeoDataFeature::initializeDefaultStyles()
     s_defaultStyle[HighwayMotorwayLink]      = GeoDataFeaturePrivate::createHighwayStyle( "#809BC0", 3.0, 18 );
     
     s_defaultStyle[NaturalWater]             = GeoDataFeaturePrivate::createStyle( 2, 10, "#B5D0D0", "#B5D0D0", 
-                                                                                   true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap );
+                                                                                   true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false );
     s_defaultStyle[NaturalWood]              = GeoDataFeaturePrivate::createWayStyle( "#8DC46C", "#8DC46C" );
     
     s_defaultStyle[LeisurePark]              = GeoDataFeaturePrivate::createWayStyle( "#CDF6CA", "#CDF6CA" );
@@ -393,8 +393,8 @@ void GeoDataFeature::initializeDefaultStyles()
     s_defaultStyle[LanduseResidential]       = GeoDataFeaturePrivate::createWayStyle( "#DCDCDC", "#DCDCDC" );
     s_defaultStyle[LanduseRetail]            = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
     
-    s_defaultStyle[RailwayRail]              = GeoDataFeaturePrivate::createStyle( 2, 5, "#989898", "#989898", true, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap );
-    s_defaultStyle[RailwayTram]              = GeoDataFeaturePrivate::createStyle( 1, 4, "#989898", "#989898", true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap );
+    s_defaultStyle[RailwayRail]              = GeoDataFeaturePrivate::createStyle( 2, 5, "#989898", "#E1E1E1", true, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, true );
+    s_defaultStyle[RailwayTram]              = GeoDataFeaturePrivate::createStyle( 1, 4, "#989898", "#989898", true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false );
     s_defaultStyle[RailwayLightRail]         = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
     s_defaultStyle[RailwayAbandoned]         = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
     s_defaultStyle[RailwaySubway]            = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
