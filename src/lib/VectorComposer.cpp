@@ -148,6 +148,36 @@ void VectorComposer::loadOverlays()
     s_dateLine->load( MarbleDirs::path( "mwdbii/DATELINE.PNT" ) );
 }
 
+void VectorComposer::setShowWaterBodies( bool show )
+{
+    m_showWaterBodies = show;
+}
+
+void VectorComposer::setShowLakes( bool show )
+{
+    m_showLakes = show;
+}
+
+void VectorComposer::setShowIce( bool show )
+{
+    m_showIce = show;
+}
+
+void VectorComposer::setShowCoastLines( bool show )
+{
+    m_showCoastLines = show;
+}
+
+void VectorComposer::setShowRivers( bool show )
+{
+    m_showRivers = show;
+}
+
+void VectorComposer::setShowBorders( bool show )
+{
+    m_showBorders = show;
+}
+
 void VectorComposer::drawTextureMap(GeoPainter *painter, ViewParams *viewParams)
 {
     loadCoastlines();
@@ -171,11 +201,7 @@ void VectorComposer::drawTextureMap(GeoPainter *painter, ViewParams *viewParams)
     painter->setBrush( m_textureLandBrush );
     m_vectorMap->drawMap( painter );
 
-    bool showWaterbodies, showLakes;
-    viewParams->propertyValue( "waterbodies", showWaterbodies );
-    viewParams->propertyValue( "lakes", showLakes );
-
-    if ( showWaterbodies && showLakes ) {
+    if ( m_showWaterBodies && m_showLakes ) {
          // Lakes
          m_vectorMap->setzBoundingBoxLimit( 0.95 );
          m_vectorMap->setzPointLimit( 0.98 ); 
@@ -191,10 +217,7 @@ void VectorComposer::drawTextureMap(GeoPainter *painter, ViewParams *viewParams)
          m_vectorMap->drawMap( painter );
     }
 
-    bool showIce;
-    viewParams->propertyValue( "ice", showIce );
-
-    if ( showIce ) {
+    if ( m_showIce ) {
         // Glaciers
          m_vectorMap->setzBoundingBoxLimit( 0.8 );
          m_vectorMap->setzPointLimit( 0.9 );
@@ -227,10 +250,7 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
     m_vectorMap->setzBoundingBoxLimit( 0.4 ); 
     m_vectorMap->setzPointLimit( 0 ); // 0.6 results in green pacific
 
-    bool showCoastlines;
-    viewParams->propertyValue( "coastlines", showCoastlines );
-
-    if ( showCoastlines ) {
+    if ( m_showCoastLines ) {
         painter->setPen( m_landPen );
         painter->setBrush( Qt::NoBrush );
     }
@@ -249,7 +269,7 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
 
     m_vectorMap->createFromPntMap( s_islands, viewParams->viewport() );
 
-    if ( showCoastlines ) {
+    if ( m_showCoastLines ) {
         painter->setPen( m_landPen );
         painter->setBrush( Qt::NoBrush );
     }
@@ -261,11 +281,7 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
 
     m_vectorMap->paintMap( painter );
 
-    bool showWaterbodies, showLakes;
-    viewParams->propertyValue( "waterbodies", showWaterbodies );
-    viewParams->propertyValue( "lakes", showLakes );
-
-    if ( ( showWaterbodies && showLakes ) || showCoastlines ) {
+    if ( ( m_showWaterBodies && m_showLakes ) || m_showCoastLines ) {
          // Lakes
          m_vectorMap->setzBoundingBoxLimit( 0.95 );
          m_vectorMap->setzPointLimit( 0.98 ); 
@@ -292,10 +308,7 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
     painter->setRenderHint( QPainter::Antialiasing, antialiased );
 
     // Coastlines
-    bool showCoastlines;
-    viewParams->propertyValue( "coastlines", showCoastlines );
-
-    if ( showCoastlines ) {
+    if ( m_showCoastLines ) {
 
         loadCoastlines();
 
@@ -328,11 +341,7 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
         m_vectorMap->paintMap( painter );
     }
 
-    bool showWaterbodies, showRivers;
-    viewParams->propertyValue( "waterbodies", showWaterbodies );
-    viewParams->propertyValue( "rivers", showRivers );
-
-    if ( showWaterbodies && showRivers ) {
+    if ( m_showWaterBodies && m_showRivers ) {
         loadOverlays();
         // Rivers
          m_vectorMap->setzBoundingBoxLimit( -1.0 );
@@ -344,10 +353,7 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
          m_vectorMap->paintMap( painter );
     }
 
-    bool showBorders;
-    viewParams->propertyValue( "borders", showBorders );
-
-    if ( showBorders ) {
+    if ( m_showBorders ) {
         loadOverlays();
         // Countries
          m_vectorMap->setzBoundingBoxLimit( -1.0 );
@@ -362,7 +368,7 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
         qreal penWidth = (double)(radius) / 400.0;
         if ( radius < 400.0 ) penWidth = 1.0;
         if ( radius > 800.0 ) penWidth = 1.75;
-        if ( showCoastlines ) penWidth = 1.0;
+        if ( m_showCoastLines ) penWidth = 1.0;
 
         QPen countryPen( m_countryPen);
         countryPen.setWidthF( penWidth );
@@ -381,7 +387,7 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
             // Only paint fancy style if the coast line doesn't get painted as well
             // (as it looks a bit awkward otherwise)
 
-            if ( !showCoastlines ) {
+            if ( !m_showCoastLines ) {
                 borderDashPen.setDashPattern( QVector<qreal>() << 1 << 5 );
                 borderDashPen.setWidthF( penWidth * 0.5 );
                 painter->setPen( borderDashPen );
@@ -392,7 +398,7 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
           || viewParams->mapQuality() == LowQuality
           || viewParams->mapQuality() == NormalQuality ) {
 
-            if ( !showCoastlines ) {
+            if ( !m_showCoastLines ) {
                 countryPen.setWidthF( 1.0 );
                 countryPen.setColor( penColor.darker(115) );
             }

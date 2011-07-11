@@ -48,6 +48,13 @@ class VectorComposer : public QObject
     void  paintBaseVectorMap( GeoPainter*, ViewParams* );
     void  paintVectorMap(GeoPainter*, ViewParams* );
 
+    void setShowWaterBodies( bool show );
+    void setShowLakes( bool show );
+    void setShowIce( bool show );
+    void setShowCoastLines( bool show );
+    void setShowRivers( bool show );
+    void setShowBorders( bool show );
+
     /**
      * @brief  Set color of the oceans
      * @param  color  ocean color
@@ -123,6 +130,13 @@ class VectorComposer : public QObject
  private:
     Q_DISABLE_COPY( VectorComposer )
     VectorMap  *m_vectorMap;
+
+    bool m_showWaterBodies;
+    bool m_showLakes;
+    bool m_showIce;
+    bool m_showCoastLines;
+    bool m_showRivers;
+    bool m_showBorders;
 
     static QAtomicInt refCounter;
 

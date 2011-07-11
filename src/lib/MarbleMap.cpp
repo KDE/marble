@@ -225,6 +225,20 @@ void MarbleMapPrivate::updateProperty( const QString &name, bool show )
         m_placemarkLayout.setShowMaria( show );
     }
 
+    else if ( name == "waterbodies" ) {
+        m_veccomposer.setShowWaterBodies( show );
+    } else if ( name == "lakes" ) {
+        m_veccomposer.setShowLakes( show );
+    } else if ( name == "ice" ) {
+        m_veccomposer.setShowIce( show );
+    } else if ( name == "coastlines" ) {
+        m_veccomposer.setShowCoastLines( show );
+    } else if ( name == "rivers" ) {
+        m_veccomposer.setShowRivers( show );
+    } else if ( name == "borders" ) {
+        m_veccomposer.setShowBorders( show );
+    }
+
     else if ( name == "relief" ) {
         if ( m_texcolorizer ) {
             m_texcolorizer->setShowRelief( show );
@@ -831,6 +845,13 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     
     // Check whether there is a vector layer available:
     if ( mapTheme->map()->hasVectorLayers() ) {
+        d->m_veccomposer.setShowWaterBodies( propertyValue( "waterbodies" ) );
+        d->m_veccomposer.setShowLakes( propertyValue( "lakes" ) );
+        d->m_veccomposer.setShowIce( propertyValue( "ice" ) );
+        d->m_veccomposer.setShowCoastLines( propertyValue( "coastlines" ) );
+        d->m_veccomposer.setShowRivers( propertyValue( "rivers" ) );
+        d->m_veccomposer.setShowBorders( propertyValue( "borders" ) );
+
 	// Set all the colors for the vector layers
         d->m_veccomposer.setOceanColor( mapTheme->map()->backgroundColor() );
 
