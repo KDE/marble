@@ -27,6 +27,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         height: 35
+        property bool activated: false
         Keys.onPressed: {
             if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter ) {
                 console.log( "search triggered: ", text )
@@ -83,9 +84,11 @@ Rectangle {
                         if( searchBar.visible ) {
                             mainWidget.anchors.top = searchBar.bottom
                             searchBar.focus = true
+                            searchBar.activated = true
                         }
                         else {
                             mainWidget.anchors.top = main.top;
+                            searchBar.activated = false
                         }
                     }
                 }
@@ -98,11 +101,28 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        mainWidget.visible = searchBar.visible = !mainWidget.visible
                         settingsPage.visible = !settingsPage.visible
+                        if( settingsPage.visible ) {
+                            mainWidget.visible = searchBar.visible = false
+                        }
+                        else {
+                            main.hideSettings()
+                        }
                     }
                 }
             }
+        }
+    }
+    
+    function hideSettings() {
+        settingsPage.visible = false
+        mainWidget.visible = true
+        if( searchBar.activated ) {
+            searchBar.visible = true
+            mainWidget.anchors.top = searchBar.bottom
+        }
+        else {
+            mainWidget.anchors.top = main.top
         }
     }
 

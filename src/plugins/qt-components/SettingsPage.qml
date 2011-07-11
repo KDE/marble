@@ -19,8 +19,7 @@ PageStack {
 
     function back() {
         if( pageStack.depth == 1 ) {
-            mainWidget.visible = true
-            settingsPage.visible = false
+            main.hideSettings()
         }
         else {
             pageStack.pop();
