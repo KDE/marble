@@ -21,8 +21,6 @@ Rectangle {
         property bool autoCenter: settings.autoCenter
 
         mapThemeId: settings.mapTheme
-        center.longitude: settings.quitLongitude
-        center.latitude: settings.quitLatitude
         zoom: settings.quitZoom
         activeFloatItems: [ "compass", "scalebar", "progress" ]
 
@@ -38,6 +36,12 @@ Rectangle {
             // be hidden when there is no current position or it is not
             // visible on the screen
             positionMarker: marker
+        }
+        
+        Component.onCompleted: {
+            console.log( "assigning: ", settings.quitLongitude, settings.quitLatitude )
+            center.longitude = settings.quitLongitude
+            center.latitude = settings.quitLatitude
         }
         
         onZoomChanged: {

@@ -15,20 +15,27 @@ ListView {
     id: mapListView
     anchors.fill: parent
     anchors.margins: UiConstants.DefaultMargin
-    //titleText: "Select Map Theme"
+    highlightFollowsCurrentItem: true
     model: themes.mapThemes()
+    currentIndex: themes.mapThemes().indexOf( settings.mapTheme )
+    spacing: 10
     
     MapThemeManager {
       id: themes
     }
     
-    delegate: 
-        Item {
+    delegate:
+        Rectangle {
+            id: themeItem
             width: mapListView.width
             height: 50
+            color: model.modelData.id == settings.mapTheme ? "lightsteelblue" : "white"
             Label {
-                anchors.fill: parent
-                text: model.modelData.name;
+                id: themeLabel
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 15
+                text: model.modelData.name
             }
         }
         
@@ -39,7 +46,6 @@ ListView {
                 var y = mouseY + mapListView.contentY
                 mapListView.currentIndex = mapListView.indexAt( x, y )
                 settings.mapTheme = themes.mapThemes()[mapListView.currentIndex].id
-                console.log( "applying theme: ", settings.mapTheme )
             }
         }
 
