@@ -13,15 +13,18 @@ Item {
     property real quitLongitude: settings.value( "MarbleWidget", "quitLongitude", 0.0 )
     property real quitLatitude: settings.value( "MarbleWidget", "quitLatitude", 0.0 )
     property real quitZoom: settings.value( "MarbleWidget", "quitZoom", 1000.0 )
+    property bool gpsTracking: settings.value( "MarbleWidget", "gpsTracking", false )
+    property bool showPosition: settings.value( "MarbleWidget", "showPosition", false )
+    property bool showTrack: settings.value( "MarbleWidget", "showTrack", false )
     
     Component.onDestruction: {
-        console.log( "saving settings: ", root.mapTheme, root.workOffline, 
-                                          root.quitLongitude, root.quitLatitude,
-                                          root.quitZoom )
         settings.setValue( "MarbleWidget", "mapTheme", root.mapTheme )
         settings.setValue( "MainWindow", "workOffline", root.workOffline )
         settings.setValue( "MarbleWidget", "quitLongitude", root.quitLongitude )
         settings.setValue( "MarbleWidget", "quitLatitude", root.quitLatitude )
         settings.setValue( "MarbleWidget", "quitZoom", root.quitZoom )
+        settings.setValue( "MarbleWidget", "gpsTracking", root.gpsTracking )
+        settings.setValue( "MarbleWidget", "showPosition", root.showPosition )
+        settings.setValue( "MarbleWidget", "showTrack", root.showTrack )
     }
 }

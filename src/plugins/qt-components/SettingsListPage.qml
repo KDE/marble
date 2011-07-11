@@ -10,12 +10,13 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 
 Page {
+    anchors.margins: UiConstants.DefaultMargin
     
     ListModel {
         id: pagesModel
         ListElement {
             page: "ConnectionSettingsPage.qml"
-            title: "Connections"
+            title: "GPS and Internet"
         }
         ListElement {
             page: "MapThemeSelectionPage.qml"
@@ -51,7 +52,6 @@ Page {
                 }
             }
         }
-
     }
 
     function openPage( file ) {

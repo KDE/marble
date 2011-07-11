@@ -13,10 +13,6 @@ import org.kde.edu.marble 0.11
 Rectangle {
     id: screen
 
-    MarbleSettings {
-        id: settings
-    }
-
     // Delivers the current (gps) position
     PositionSource {
         id: positionProvider
@@ -28,7 +24,7 @@ Rectangle {
         source: "QtMobilityPositionProviderPlugin"
 
         // This starts/stops gps tracking
-        active: false
+        active: settings.gpsTracking
 
         // A small grow/shrink animation of the ghost to indicate position updates
         onPositionChanged: {
@@ -59,10 +55,10 @@ Rectangle {
             positionSource: positionProvider
 
             // Don't show the default Marble position indicator (arrow)
-            showPosition: false
+            showPosition: settings.showPosition
 
             // Initially we don't show the track
-            showTrack: false
+            showTrack: settings.showTrack
         }
         
         onZoomChanged: {
@@ -75,11 +71,15 @@ Rectangle {
             settings.quitLatitude = center.latitude
         }
         
-        // FIXME
+        // FIXME delegate
         search {
             placemarkDelegate: Rectangle { color: "orange"; width: 10; height: 10 }
         }
 
+    }
+    
+    function find( term ) {
+        map.search.find( term )
     }
 
 }

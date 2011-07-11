@@ -14,12 +14,9 @@ import org.kde.edu.marble 0.11
 ListView {
     id: mapListView
     anchors.fill: parent
+    anchors.margins: UiConstants.DefaultMargin
     //titleText: "Select Map Theme"
     model: themes.mapThemes()
-    
-    MarbleSettings {
-        id: settings
-    }
     
     MapThemeManager {
       id: themes

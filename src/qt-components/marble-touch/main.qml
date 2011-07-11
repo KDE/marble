@@ -7,6 +7,7 @@
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 
 import org.kde.edu.marble.qtcomponents 0.12
+import org.kde.edu.marble 0.11
 import QtQuick 1.1
 import com.nokia.meego 1.0
 
@@ -15,19 +16,22 @@ Rectangle {
     width: 800
     height: 480
 
+    MarbleSettings {
+        id: settings
+    }
+
     SearchBar {
         id: searchBar
         visible: false
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        height: 40
+        height: 35
     
         Keys.onPressed: {
-            if ( event.key == Qt.Key_Enter ) {
-                console.log( "search: ", text );
+            if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter ) {
+                console.log( "search triggered: ", text )
                 mainWidget.find( text )
-                event.accepted = true;
             }
         }
     }
@@ -38,10 +42,6 @@ Rectangle {
         anchors.bottom: toolBar.top
         anchors.left: parent.left
         anchors.right: parent.right
-        
-        function find( text ) {
-            mainWidget.screen.map.search.find( text )
-        }
     }
     
     SettingsPage {
@@ -59,7 +59,6 @@ Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: 60
-        color: "white"
         ToolBarLayout {
             id: toolBarLayout
             anchors.fill: parent

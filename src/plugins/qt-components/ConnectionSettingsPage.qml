@@ -13,16 +13,33 @@ import org.kde.edu.marble 0.11
 Column {
     id: connectionSettings
     anchors.fill: parent
-    spacing: 10
-    
-    MarbleSettings {
-        id: settings
-    }
+    anchors.margins: UiConstants.DefaultMargin
     
     CheckBox {
         id: gpsEnabled
         text: "GPS enabled"
-        checked: false
+        checked: settings.gpsTracking
+        onClicked: {
+            settings.gpsTracking = gpsEnabled.checked
+        }
+    }
+
+    CheckBox {
+        id: showPosition
+        text: "Show position"
+        checked: settings.showPosition
+        onClicked: {
+            settings.showPosition = showPosition.checked
+        }
+    }
+    
+    CheckBox {
+        id: showTrack
+        text: "Show track"
+        checked: settings.showTrack
+        onClicked: {
+            settings.showTrack = showTrack.checked
+        }
     }
     
     CheckBox {
