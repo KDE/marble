@@ -15,6 +15,7 @@
 #include "MarbleDirs.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
+#include "routing/RouteRequest.h"
 #include "RouteRequestModel.h"
 
 namespace Marble
@@ -54,6 +55,54 @@ void Routing::setMarbleWidget( Marble::MarbleWidget* widget )
         }
     }
 }
+
+void Routing::addVia( qreal lon, qreal lat )
+{
+    if ( m_marbleWidget ) {
+        RouteRequest* request = m_marbleWidget->model()->routingManager()->routeRequest();
+        request->append( GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree ) );
+        m_marbleWidget->model()->routingManager()->updateRoute();
+    }
+}
+
+void Routing::setVia( int index, qreal lon, qreal lat )
+{
+    if ( index < 0 || index > 200 || !m_marbleWidget ) {
+        return;
+    }
+
+    RouteRequest* request = m_marbleWidget->model()->routingManager()->routeRequest();
+    Q_ASSERT( request );
+    if ( index < request->size() ) {
+        request->append( GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree ) );
+    } else {
+        for ( int i=request->size(); i<index; ++i ) {
+            request->append( GeoDataCoordinates( 0.0, 0.0 ) );
+        }
+        request->append( GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree ) );
+    }
+    m_marbleWidget->model()->routingManager()->updateRoute();
+}
+
+void Routing::removeVia( int index )
+{
+    if ( index < 0 || !m_marbleWidget ) {
+        return;
+    }
+
+    RouteRequest* request = m_marbleWidget->model()->routingManager()->routeRequest();
+    if ( index < request->size() ) {
+        m_marbleWidget->model()->routingManager()->routeRequest()->remove( index );
+    }
+}
+
+void Routing::clearRoute()
+{
+    if ( m_marbleWidget ) {
+        m_marbleWidget->model()->routingManager()->clearRoute();
+    }
+}
+
 
 }
 }

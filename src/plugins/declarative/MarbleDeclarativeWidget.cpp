@@ -159,23 +159,28 @@ Marble::Declarative::Tracking* MarbleWidget::tracking()
 
 Coordinate* MarbleWidget::center()
 {
+    m_center.blockSignals( true );
+    m_center.setLongitude( m_marbleWidget->centerLongitude() );
+    m_center.setLatitude( m_marbleWidget->centerLatitude() );
+    m_center.blockSignals( false );
     return &m_center;
 }
 
 void MarbleWidget::setCenter( Coordinate* center )
 {
     if ( center ) {
+        m_center.blockSignals( true );
         m_center.setLongitude( center->longitude() );
         m_center.setLatitude( center->latitude() );
         m_center.setAltitude( center->altitude() );
+        m_center.blockSignals( false );
         updateCenterPosition();
     }
 }
 
 void MarbleWidget::updateCenterPosition()
 {
-  m_marbleWidget->centerOn( m_center.longitude(), m_center.latitude() );
-  emit centerChanged();
+    m_marbleWidget->centerOn( m_center.longitude(), m_center.latitude() );
 }
 
 Marble::Declarative::Routing* MarbleWidget::routing()
