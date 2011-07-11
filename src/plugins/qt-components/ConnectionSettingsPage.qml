@@ -43,6 +43,15 @@ Column {
     }
     
     CheckBox {
+        id: autoCenter
+        text: "Auto-center"
+        checked: settings.autoCenter
+        onClicked: {
+            settings.autoCenter = autoCenter.checked
+        }
+    }
+    
+    CheckBox {
         id: offlineMode
         text: "Offline-mode enabled"
         checked: settings.workOffline

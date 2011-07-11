@@ -1,3 +1,12 @@
+// This file is part of the Marble Virtual Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2011 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2011 Daniel Marth <danielmarth@gmx.at>
+
 import Qt 4.7
 import org.kde.edu.marble 0.11
 
@@ -16,6 +25,7 @@ Item {
     property bool gpsTracking: settings.value( "MarbleWidget", "gpsTracking", false )
     property bool showPosition: settings.value( "MarbleWidget", "showPosition", false )
     property bool showTrack: settings.value( "MarbleWidget", "showTrack", false )
+    property bool autoCenter: settings.value( "MarbleWidget", "autoCenter", false )
     
     Component.onDestruction: {
         settings.setValue( "MarbleWidget", "mapTheme", root.mapTheme )
@@ -26,5 +36,6 @@ Item {
         settings.setValue( "MarbleWidget", "gpsTracking", root.gpsTracking )
         settings.setValue( "MarbleWidget", "showPosition", root.showPosition )
         settings.setValue( "MarbleWidget", "showTrack", root.showTrack )
+        settings.setValue( "MarbleWidget", "autoCenter", root.autoCenter )
     }
 }

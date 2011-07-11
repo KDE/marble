@@ -1,5 +1,6 @@
 <RCC>
     <qresource>
         <file>main.qml</file>
+        <file>marker.svg</file>
     </qresource>
 </RCC>

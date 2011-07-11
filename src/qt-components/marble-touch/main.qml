@@ -27,7 +27,6 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         height: 35
-    
         Keys.onPressed: {
             if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter ) {
                 console.log( "search triggered: ", text )
@@ -39,7 +38,7 @@ Rectangle {
     MainWidget {
         id: mainWidget
         anchors.top: parent.top
-        anchors.bottom: toolBar.top
+        anchors.bottom: mainToolBar.top
         anchors.left: parent.left
         anchors.right: parent.right
     }
@@ -48,18 +47,17 @@ Rectangle {
         id: settingsPage
         visible: false
         anchors.top: parent.top
-        anchors.bottom: toolBar.top
+        anchors.bottom: mainToolBar.top
         anchors.left: parent.left
         anchors.right: parent.right
     }
     
-    Rectangle {
-        id: toolBar
+    ToolBar {
+        id: mainToolBar
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        height: 60
-        ToolBarLayout {
+        tools: ToolBarLayout {
             id: toolBarLayout
             anchors.fill: parent
             ToolIcon {
@@ -68,19 +66,14 @@ Rectangle {
                 visible: settingsPage.visible
                 anchors.left: parent.left
                 anchors.bottom: parent.bottom
-                onClicked: { 
-                    if( settingsPage.pageStack.depth == 1 ) {
-                        mainWidget.visible = true
-                        settingsPage.visible = false
-                    }
-                    else {
-                        settingsPage.pageStack.pop();
-                    }
+                onClicked: {
+                    settingsPage.back()
                 }
             }
             ToolIcon {
                 id: searchButton
                 iconId: "toolbar-search"
+                visible: !settingsPage.visible
                 anchors.right: settingsButton.left
                 anchors.bottom: parent.bottom
                 MouseArea {
@@ -105,7 +98,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        mainWidget.visible = !mainWidget.visible
+                        mainWidget.visible = searchBar.visible = !mainWidget.visible
                         settingsPage.visible = !settingsPage.visible
                     }
                 }

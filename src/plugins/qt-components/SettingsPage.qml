@@ -9,7 +9,21 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
 
-PageStackWindow {
+PageStack {
     id: pageStack
-    initialPage: SettingsListPage { }
+
+    Component.onCompleted: {
+        // FIXME check necessary?
+        pageStack.push( Qt.createComponent( "SettingsListPage.qml" ) )
+    }
+
+    function back() {
+        if( pageStack.depth == 1 ) {
+            mainWidget.visible = true
+            settingsPage.visible = false
+        }
+        else {
+            pageStack.pop();
+        }
+    }
 }
