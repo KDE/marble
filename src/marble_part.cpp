@@ -511,8 +511,8 @@ void MarblePart::readSettings()
                 tracking->setPositionProviderPlugin( plugin );
                 break;
             }
-            qDeleteAll( plugins );
         }
+        qDeleteAll( plugins );
     }
 
     readStatusBarSettings();
