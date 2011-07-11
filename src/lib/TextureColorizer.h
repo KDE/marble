@@ -36,6 +36,8 @@ class TextureColorizer : public QObject
 
     virtual ~TextureColorizer(){}
 
+    void setShowRelief( bool show );
+
     void colorize(ViewParams *viewParams);
 
  Q_SIGNALS:
@@ -46,6 +48,7 @@ class TextureColorizer : public QObject
     QString m_seafile;
     QString m_landfile;
     uint texturepalette[16][512];
+    bool m_showRelief;
 };
 
 }

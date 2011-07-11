@@ -147,6 +147,11 @@ TextureColorizer::TextureColorizer( const QString &seafile,
     qDebug("TextureColorizer::setSeaFileLandFile: Time elapsed: %d ms", t.elapsed());
 }
 
+void TextureColorizer::setShowRelief( bool show )
+{
+    m_showRelief = show;
+}
+
 // This function takes two images, both in viewParams:
 //  - The coast image, which has a number of colors where each color
 //    represents a sort of terrain (ex: land/sea)
@@ -210,9 +215,6 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 
     int     bump = 8;
 
-    bool showRelief;
-    viewParams->propertyValue( "relief", showRelief );
-
     if ( radius * radius > imgradius
          || viewParams->projection() == Equirectangular
          || viewParams->projection() == Mercator )
@@ -261,7 +263,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 // Cheap Emboss / Bumpmapping
                 uchar&  grey = *readData; // qBlue(*data);
 
-                if ( showRelief ) {
+                if ( m_showRelief ) {
                     emboss << grey;
                     bump = ( emboss.head() + 8 - grey );
                     if ( bump  < 0 )  bump = 0;
@@ -350,7 +352,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 
                 uchar& grey = *readData; // qBlue(*data);
 
-                if ( showRelief ) {
+                if ( m_showRelief ) {
                     emboss << grey;
                     bump = ( emboss.head() + 16 - grey ) >> 1;
                     if ( bump > 15 ) bump = 15;

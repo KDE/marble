@@ -205,6 +205,7 @@ void  MarbleMapPrivate::paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect
 
 void MarbleMapPrivate::updateProperty( const QString &name, bool show )
 {
+    // earth
     if ( name == "places" ) {
         m_placemarkLayout.setShowPlaces( show );
     } else if ( name == "cities" ) {
@@ -214,12 +215,20 @@ void MarbleMapPrivate::updateProperty( const QString &name, bool show )
     } else if ( name == "otherplaces" ) {
         m_placemarkLayout.setShowOtherPlaces( show );
     }
-    if ( name == "landingsites" ) {
+
+    // other planets
+    else if ( name == "landingsites" ) {
         m_placemarkLayout.setShowLandingSites( show );
     } else if ( name == "craters" ) {
         m_placemarkLayout.setShowCraters( show );
     } else if ( name == "maria" ) {
         m_placemarkLayout.setShowMaria( show );
+    }
+
+    else if ( name == "relief" ) {
+        if ( m_texcolorizer ) {
+            m_texcolorizer->setShowRelief( show );
+        }
     }
 }
 
@@ -811,6 +820,7 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
                 landfile = MarbleDirs::path( "landcolors.leg" );
 
             d->m_texcolorizer = new TextureColorizer( seafile, landfile, this );
+            d->m_texcolorizer->setShowRelief( showRelief() );
         }
     }
     d->m_textureLayer.setTextureColorizer( d->m_texcolorizer );
