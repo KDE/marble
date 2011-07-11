@@ -819,7 +819,7 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
             if( landfile.isEmpty() )
                 landfile = MarbleDirs::path( "landcolors.leg" );
 
-            d->m_texcolorizer = new TextureColorizer( seafile, landfile, this );
+            d->m_texcolorizer = new TextureColorizer( seafile, landfile, &d->m_veccomposer, this );
             d->m_texcolorizer->setShowRelief( showRelief() );
         }
     }

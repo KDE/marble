@@ -24,6 +24,7 @@
 #include "global.h"
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
+#include "VectorComposer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
@@ -64,11 +65,12 @@ private:
 
 TextureColorizer::TextureColorizer( const QString &seafile,
                                     const QString &landfile,
+                                    VectorComposer *veccomposer,
                                     QObject *parent )
     : QObject( parent )
-    , m_veccomposer( this )
+    , m_veccomposer( veccomposer )
 {
-    connect( &m_veccomposer, SIGNAL( datasetLoaded() ), SIGNAL( datasetLoaded() ) );
+    connect( m_veccomposer, SIGNAL( datasetLoaded() ), SIGNAL( datasetLoaded() ) );
 
     QTime t;
     t.start();
@@ -196,7 +198,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     GeoPainter painter( coastimg.data(), viewParams->viewport(), viewParams->mapQuality(), doClip );
     painter.setRenderHint( QPainter::Antialiasing, antialiased );
 
-    m_veccomposer.drawTextureMap( &painter, viewParams );
+    m_veccomposer->drawTextureMap( &painter, viewParams );
 
     QSharedPointer<QImage>        origimg = viewParams->canvasImagePtr();
     const qint64   radius   = viewParams->radius();
