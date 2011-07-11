@@ -720,6 +720,11 @@ bool GeoDataCoordinates::operator==( const GeoDataCoordinates &rhs ) const
     return *d == *rhs.d;
 }
 
+bool GeoDataCoordinates::operator!=( const GeoDataCoordinates &rhs ) const
+{
+    return *d != *rhs.d;
+}
+
 void GeoDataCoordinates::setAltitude( const qreal altitude )
 {
     detach();

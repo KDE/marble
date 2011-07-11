@@ -200,6 +200,7 @@ void MarbleRunnerManager::addSearchResult( QVector<GeoDataPlacemark*> result )
     d->m_model->addPlacemarks( start, result.size() );
     d->m_modelMutex.unlock();
     emit searchResultChanged( d->m_model );
+    emit searchResultChanged( d->m_placemarkContainer );
 }
 
 void MarbleRunnerManager::setModel( MarbleModel * model )

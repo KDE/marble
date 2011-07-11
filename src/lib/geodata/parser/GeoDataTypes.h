@@ -28,7 +28,8 @@ enum DocumentRole {
     MapDocument,
     UserDocument,
     TrackingDocument,
-    BookmarkDocument
+    BookmarkDocument,
+    SearchResultDocument
 };
 
 namespace Marble

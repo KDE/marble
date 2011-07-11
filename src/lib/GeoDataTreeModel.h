@@ -71,6 +71,7 @@ class GeoDataTreeModel : public QAbstractItemModel
       *   i.e. GeoDataTreeModel will not delete the passed document at its destruction.
       */
     void setRootDocument( GeoDataDocument* document );
+    GeoDataDocument *rootDocument();
 
     int addDocument( GeoDataDocument* document );
 
