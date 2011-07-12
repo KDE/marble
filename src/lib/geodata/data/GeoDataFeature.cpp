@@ -350,6 +350,10 @@ void GeoDataFeature::initializeDefaultStyles()
     s_defaultStyle[ReligionShinto]           = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "place_of_worship_shinto3.p.16" );
     s_defaultStyle[ReligionSikh]             = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "place_of_worship_sikh3.p.16" );
     
+    s_defaultStyle[HighwaySteps]             = GeoDataFeaturePrivate::createStyle( 1, 5, "#F98072", "#F98072", true, true, 
+                                                                                   Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, 
+                                                                                   false, QVector< qreal >() << 0.2 << 0.2 );
+
     s_defaultStyle[HighwayUnknown]           = GeoDataFeaturePrivate::createHighwayStyle( "#808080" );
     s_defaultStyle[HighwayPath]              = GeoDataFeaturePrivate::createHighwayStyle( "#F98072", 1.0, 2, Qt::DashLine );
     s_defaultStyle[HighwayTrack]             = GeoDataFeaturePrivate::createHighwayStyle( "#986600", 1.0, 3, Qt::DashLine );

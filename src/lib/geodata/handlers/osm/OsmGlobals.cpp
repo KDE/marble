@@ -98,7 +98,8 @@ void OsmGlobals::setupCategories()
     m_visualCategories["historic=monument"]          = GeoDataFeature::TouristMonument;
     m_visualCategories["historic=ruins"]             = GeoDataFeature::TouristRuin;
     
-    m_visualCategories["highway"]                    = GeoDataFeature::HighwayUnknown;
+    m_visualCategories["highway"]                    = GeoDataFeature::HighwayUnknown;  
+    m_visualCategories["highway=steps"]              = GeoDataFeature::HighwaySteps;
     m_visualCategories["highway=footway"]            = GeoDataFeature::HighwayPedestrian;
     m_visualCategories["highway=path"]               = GeoDataFeature::HighwayPath;
     m_visualCategories["highway=track"]              = GeoDataFeature::HighwayTrack;

@@ -68,6 +68,9 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* view
 
     if ( currentPen.style() != style()->lineStyle().penStyle() )
         currentPen.setStyle( style()->lineStyle().penStyle() );
+    
+    if ( style()->lineStyle().penStyle() == Qt::CustomDashLine )
+        currentPen.setDashPattern( style()->lineStyle().dashPattern() );
 
     if ( painter->mapQuality() != Marble::HighQuality
             && painter->mapQuality() != Marble::PrintQuality )

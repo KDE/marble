@@ -37,6 +37,7 @@ class GeoDataLineStylePrivate
     Qt::PenCapStyle m_capStyle;
     Qt::PenStyle m_penStyle;
     bool m_background;
+    QVector< qreal > m_pattern;
 };
 
 GeoDataLineStyle::GeoDataLineStyle()
@@ -120,6 +121,16 @@ bool GeoDataLineStyle::background() const
 void GeoDataLineStyle::setBackground( bool background )
 {
     d->m_background = background;
+}
+
+QVector< qreal > GeoDataLineStyle::dashPattern() const
+{
+    return d->m_pattern;
+}
+
+void GeoDataLineStyle::setDashPattern( const QVector< qreal >& pattern )
+{
+    d->m_pattern = pattern;
 }
 
 void GeoDataLineStyle::pack( QDataStream& stream ) const

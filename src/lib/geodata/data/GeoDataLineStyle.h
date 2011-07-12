@@ -14,6 +14,7 @@
 
 
 #include <QtGui/QFont>
+#include <QtCore/QVector>
 
 #include "GeoDataColorStyle.h"
 
@@ -112,6 +113,18 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
      */
     bool background() const;
 
+    /**
+     * @brief Sets the dash pattern
+     * @param pattern dash pattern
+     */
+    void setDashPattern( const QVector<qreal>& pattern );
+    
+    /**
+     * @brief Return the current dash pattern
+     * @return the current dash pattern
+     */
+    QVector<qreal> dashPattern() const;
+    
     /**
      * @brief  Serialize the style to a stream.
      * @param  stream  the stream

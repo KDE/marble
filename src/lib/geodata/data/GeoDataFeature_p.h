@@ -145,7 +145,9 @@ class GeoDataFeaturePrivate
     static GeoDataStyle* createStyle( qreal width, qreal realWidth, const QColor& color, 
                                       const QColor& outlineColor, bool fill, bool outline,
                                       Qt::BrushStyle brushStyle, Qt::PenStyle penStyle, 
-                                      Qt::PenCapStyle capStyle, bool lineBackground )
+                                      Qt::PenCapStyle capStyle, bool lineBackground,
+                                      const QVector< qreal >& dashPattern = QVector< qreal >()
+                                    )
     {
         GeoDataStyle *style = new GeoDataStyle;
         GeoDataLineStyle lineStyle( outlineColor );
@@ -154,6 +156,7 @@ class GeoDataFeaturePrivate
         lineStyle.setWidth( width );
         lineStyle.setPhysicalWidth( realWidth );
         lineStyle.setBackground( lineBackground );
+        lineStyle.setDashPattern( dashPattern );
         GeoDataPolyStyle polyStyle( color );
         polyStyle.setOutline( outline );
         polyStyle.setFill( fill );

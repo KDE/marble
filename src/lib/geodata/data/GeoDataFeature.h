@@ -146,6 +146,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         NaturalWood,
 
         // OpenStreetMap highways
+        HighwaySteps,
         HighwayUnknown,
         HighwayPath,
         HighwayTrack,

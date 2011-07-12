@@ -107,6 +107,7 @@ void GeometryLayer::initializeDefaultValues()
     s_defaultZValues[GeoDataFeature::HighwayUnknown]      = s_defaultZValue - 11;
     s_defaultZValues[GeoDataFeature::HighwayPath]         = s_defaultZValue - 10;
     s_defaultZValues[GeoDataFeature::HighwayTrack]        = s_defaultZValue - 9;
+    s_defaultZValues[GeoDataFeature::HighwaySteps]        = s_defaultZValue - 8;
     s_defaultZValues[GeoDataFeature::HighwayPedestrian]   = s_defaultZValue - 8;
     s_defaultZValues[GeoDataFeature::HighwayService]      = s_defaultZValue - 7;
     s_defaultZValues[GeoDataFeature::HighwayRoad]         = s_defaultZValue - 6;
