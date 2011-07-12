@@ -88,10 +88,16 @@ Rectangle {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
+                            map.centerOn( longitude, latitude )
                             routingOptions.visible = !routingOptions.visible
                         }
                     }
                 }
+        }
+        
+        function centerOn( lon, lat ) {
+            map.center.longitude = lon
+            map.center.latitude = lat
         }
 
     }
