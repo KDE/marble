@@ -158,8 +158,8 @@ void MarbleRunnerManager::reverseGeocoding( const GeoDataCoordinates &coordinate
 void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
 {
     if ( searchTerm == d->m_lastSearchTerm ) {
-      emit searchFinished( searchTerm );
       emit searchResultChanged( d->m_model );
+      emit searchFinished( searchTerm );
       return;
     }
 
@@ -173,6 +173,11 @@ void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
     d->m_placemarkContainer.clear();
     d->m_modelMutex.unlock();
     emit searchResultChanged( d->m_model );
+
+    if ( searchTerm.trimmed().isEmpty() ) {
+        emit searchFinished( searchTerm );
+        return;
+    }
 
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Search );
     foreach( RunnerPlugin* plugin, plugins ) {
