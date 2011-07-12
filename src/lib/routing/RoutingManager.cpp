@@ -79,7 +79,7 @@ public:
 RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager* manager, QObject *parent ) :
         q( manager ),
         m_routeRequest( new RouteRequest( manager ) ),
-        m_routingModel( new RoutingModel( m_routeRequest, model ) ),
+        m_routingModel( new RoutingModel( m_routeRequest, model, manager ) ),
         m_profilesModel( new RoutingProfilesModel( model->pluginManager() ) ),
         m_marbleModel( model ),
         m_alternativeRoutesModel(new AlternativeRoutesModel( model, parent ) ),
