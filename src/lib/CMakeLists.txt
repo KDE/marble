@@ -122,6 +122,8 @@ set(marblewidget_SRCS
     FogLayer.cpp
     FpsLayer.cpp
     TextureLayer.cpp
+    VectorMapBaseLayer.cpp
+    VectorMapLayer.cpp
     GeometryLayer.cpp
     Planet.cpp
     Quaternion.cpp

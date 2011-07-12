@@ -44,8 +44,10 @@
 #include "GeometryLayer.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
+#include "GeoSceneFilter.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
+#include "GeoScenePalette.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneVector.h"
 #include "GeoSceneZoom.h"
@@ -59,12 +61,15 @@
 #include "Planet.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
+#include "TextureColorizer.h"
 #include "TextureLayer.h"
 #include "TileCoordsPyramid.h"
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
 #include "VectorComposer.h"
+#include "VectorMapBaseLayer.h"
+#include "VectorMapLayer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
@@ -95,10 +100,14 @@ class MarbleMapPrivate
     ViewParams       m_viewParams;
     bool             m_backgroundVisible;
 
+    TextureColorizer *m_texcolorizer;
+
     LayerManager     m_layerManager;
     GeometryLayer           *m_geometryLayer;
     AtmosphereLayer          m_atmosphereLayer;
     FogLayer                 m_fogLayer;
+    VectorMapBaseLayer       m_vectorMapBaseLayer;
+    VectorMapLayer   m_vectorMapLayer;
     TextureLayer     m_textureLayer;
     PlacemarkLayout  m_placemarkLayout;
     VectorComposer   m_veccomposer;
@@ -113,7 +122,10 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
         : m_parent( parent ),
           m_model( model ),
           m_backgroundVisible( true ),
+          m_texcolorizer( 0 ),
           m_layerManager( model, parent ),
+          m_vectorMapBaseLayer( &m_veccomposer ),
+          m_vectorMapLayer( &m_veccomposer ),
           m_textureLayer( model->mapThemeManager(), model->downloadManager(), model->sunLocator() ),
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), parent ),
           m_measureTool( model )
@@ -199,6 +211,7 @@ void  MarbleMapPrivate::paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect
 
 void MarbleMapPrivate::updateProperty( const QString &name, bool show )
 {
+    // earth
     if ( name == "places" ) {
         m_placemarkLayout.setShowPlaces( show );
     } else if ( name == "cities" ) {
@@ -208,12 +221,34 @@ void MarbleMapPrivate::updateProperty( const QString &name, bool show )
     } else if ( name == "otherplaces" ) {
         m_placemarkLayout.setShowOtherPlaces( show );
     }
-    if ( name == "landingsites" ) {
+
+    // other planets
+    else if ( name == "landingsites" ) {
         m_placemarkLayout.setShowLandingSites( show );
     } else if ( name == "craters" ) {
         m_placemarkLayout.setShowCraters( show );
     } else if ( name == "maria" ) {
         m_placemarkLayout.setShowMaria( show );
+    }
+
+    else if ( name == "waterbodies" ) {
+        m_veccomposer.setShowWaterBodies( show );
+    } else if ( name == "lakes" ) {
+        m_veccomposer.setShowLakes( show );
+    } else if ( name == "ice" ) {
+        m_veccomposer.setShowIce( show );
+    } else if ( name == "coastlines" ) {
+        m_veccomposer.setShowCoastLines( show );
+    } else if ( name == "rivers" ) {
+        m_veccomposer.setShowRivers( show );
+    } else if ( name == "borders" ) {
+        m_veccomposer.setShowBorders( show );
+    }
+
+    else if ( name == "relief" ) {
+        if ( m_texcolorizer ) {
+            m_texcolorizer->setShowRelief( show );
+        }
     }
 }
 
@@ -256,6 +291,8 @@ MarbleMap::~MarbleMap()
     d->m_layerManager.removeLayer( &d->m_measureTool );
     d->m_layerManager.removeLayer( &d->m_fogLayer );
     d->m_layerManager.removeLayer( &d->m_placemarkLayout );
+    d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
+    d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
     delete d;
 
     delete model;  // delete the model after private data
@@ -714,26 +751,7 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
     }
 
     renderPositions.clear();
-    renderPositions << "SURFACE";
-
-    // Paint the vector layer.
-    if ( d->m_model->mapTheme()->map()->hasVectorLayers() ) {
-
-        if ( !d->m_model->mapTheme()->map()->hasTextureLayers() ) {
-            d->m_veccomposer.paintBaseVectorMap( &painter, &d->m_viewParams );
-        }
-
-        d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
-
-        // Add further Vectors
-        d->m_veccomposer.paintVectorMap( &painter, &d->m_viewParams );
-    }
-    else {
-        d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
-    }
-
-    renderPositions.clear();
-    renderPositions << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
+    renderPositions << "SURFACE" << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
     d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
 
@@ -775,6 +793,9 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     d->m_viewParams.setMapThemeId( mapThemeId );
     GeoSceneDocument *mapTheme = d->m_viewParams.mapTheme();
 
+    d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
+    d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
+
     if ( !mapTheme ) {
         return;
     }
@@ -782,12 +803,47 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     connect( mapTheme->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
              this, SLOT( updateProperty( const QString &, bool ) ) );
 
+    delete d->m_texcolorizer;
+    d->m_texcolorizer = 0;
+    if( !mapTheme->map()->filters().isEmpty() ) {
+        GeoSceneFilter *filter= mapTheme->map()->filters().first();
+
+        if( filter->type() == "colorize" ) {
+             //no need to look up with MarbleDirs twice so they are left null for now
+            QString seafile, landfile;
+            QList<GeoScenePalette*> palette = filter->palette();
+            foreach ( GeoScenePalette *curPalette, palette ) {
+                if( curPalette->type() == "sea" ) {
+                    seafile = MarbleDirs::path( curPalette->file() );
+                } else if( curPalette->type() == "land" ) {
+                    landfile = MarbleDirs::path( curPalette->file() );
+                }
+            }
+            //look up locations if they are empty
+            if( seafile.isEmpty() )
+                seafile = MarbleDirs::path( "seacolors.leg" );
+            if( landfile.isEmpty() )
+                landfile = MarbleDirs::path( "landcolors.leg" );
+
+            d->m_texcolorizer = new TextureColorizer( seafile, landfile, &d->m_veccomposer, this );
+            d->m_texcolorizer->setShowRelief( showRelief() );
+        }
+    }
+    d->m_textureLayer.setTextureColorizer( d->m_texcolorizer );
+
     // NOTE due to frequent regressions: 
     // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
     // at this point. Some themes do NOT have either vector or texture data!
     
     // Check whether there is a vector layer available:
     if ( mapTheme->map()->hasVectorLayers() ) {
+        d->m_veccomposer.setShowWaterBodies( propertyValue( "waterbodies" ) );
+        d->m_veccomposer.setShowLakes( propertyValue( "lakes" ) );
+        d->m_veccomposer.setShowIce( propertyValue( "ice" ) );
+        d->m_veccomposer.setShowCoastLines( propertyValue( "coastlines" ) );
+        d->m_veccomposer.setShowRivers( propertyValue( "rivers" ) );
+        d->m_veccomposer.setShowBorders( propertyValue( "borders" ) );
+
 	// Set all the colors for the vector layers
         d->m_veccomposer.setOceanColor( mapTheme->map()->backgroundColor() );
 
@@ -822,7 +878,15 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
             }
         }
     }
-    
+
+    if ( mapTheme->map()->hasVectorLayers() ) {
+        if ( !mapTheme->map()->hasTextureLayers() ) {
+            d->m_layerManager.addLayer( &d->m_vectorMapBaseLayer );
+        }
+
+        d->m_layerManager.addLayer( &d->m_vectorMapLayer );
+    }
+
     // NOTE due to frequent regressions: 
     // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
     // at this point.

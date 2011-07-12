@@ -17,7 +17,6 @@
 #include "GeoSceneTexture.h"
 
 #include <QtCore/QSize>
-#include <QtGui/QRegion>
 
 class QImage;
 class QRegion;
@@ -31,6 +30,7 @@ class GeoSceneDocument;
 class HttpDownloadManager;
 class MapThemeManager;
 class SunLocator;
+class TextureColorizer;
 class ViewParams;
 
 class TextureLayer : public QObject
@@ -65,6 +65,8 @@ class TextureLayer : public QObject
                      const QRect& dirtyRect );
 
     void setShowTileId( bool show );
+
+    void setTextureColorizer( TextureColorizer *texcolorizer );
 
     /**
      * @brief  Set the Projection used for the map

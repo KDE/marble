@@ -14,6 +14,7 @@
 
 #include <QtCore/qmath.h>
 #include <QtCore/QCache>
+#include <QtCore/QPointer>
 #include <QtCore/QTimer>
 
 #include "SphericalScanlineTextureMapper.h"
@@ -22,11 +23,9 @@
 #include "TileScalingTextureMapper.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
-#include "GeoSceneFilter.h"
 #include "GeoSceneGroup.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
-#include "GeoScenePalette.h"
 #include "GeoSceneSettings.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
@@ -54,7 +53,7 @@ public:
     StackedTileLoader    m_tileLoader;
     QCache<TileId, QPixmap> m_pixmapCache;
     TextureMapperInterface *m_texmapper;
-    TextureColorizer              *m_texcolorizer;
+    QPointer<TextureColorizer> m_texcolorizer;
     GeoSceneDocument              *m_mapTheme;
 };
 
@@ -193,6 +192,19 @@ void TextureLayer::setShowTileId( bool show )
     d->m_tileLoader.setShowTileId( show );
 }
 
+void TextureLayer::setTextureColorizer( TextureColorizer *texcolorizer )
+{
+    if ( d->m_texcolorizer ) {
+        disconnect( d->m_texcolorizer, 0, this, 0 );
+    }
+
+    d->m_texcolorizer = texcolorizer;
+
+    if ( d->m_texcolorizer ) {
+        connect( d->m_texcolorizer, SIGNAL( datasetLoaded() ), SLOT( mapChanged() ) );
+    }
+}
+
 void TextureLayer::setupTextureMapper( Projection projection )
 {
     if ( !d->m_mapTheme || !d->m_mapTheme->map()->hasTextureLayers() )
@@ -264,33 +276,6 @@ void TextureLayer::setMapTheme(GeoSceneDocument* mapTheme)
                  this,                      SLOT( updateTextureLayers() ) );
     }
     d->updateTextureLayers();
-
-    delete d->m_texcolorizer;
-    d->m_texcolorizer = 0;
-    if( !d->m_mapTheme->map()->filters().isEmpty() ) {
-        GeoSceneFilter *filter= d->m_mapTheme->map()->filters().first();
-
-        if( filter->type() == "colorize" ) {
-             //no need to look up with MarbleDirs twice so they are left null for now
-            QString seafile, landfile;
-            QList<GeoScenePalette*> palette = filter->palette();
-            foreach ( GeoScenePalette *curPalette, palette ) {
-                if( curPalette->type() == "sea" ) {
-                    seafile = MarbleDirs::path( curPalette->file() );
-                } else if( curPalette->type() == "land" ) {
-                    landfile = MarbleDirs::path( curPalette->file() );
-                }
-            }
-            //look up locations if they are empty
-            if(seafile.isEmpty())
-                seafile = MarbleDirs::path( "seacolors.leg" );
-            if(landfile.isEmpty())
-                landfile = MarbleDirs::path( "landcolors.leg" );
-
-            d->m_texcolorizer = new TextureColorizer( seafile, landfile, this );
-            connect( d->m_texcolorizer, SIGNAL( datasetLoaded() ), SLOT( mapChanged() ) );
-        }
-    }
 }
 
 int TextureLayer::tileZoomLevel() const

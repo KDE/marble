@@ -24,6 +24,7 @@
 #include "global.h"
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
+#include "VectorComposer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
@@ -64,11 +65,12 @@ private:
 
 TextureColorizer::TextureColorizer( const QString &seafile,
                                     const QString &landfile,
+                                    VectorComposer *veccomposer,
                                     QObject *parent )
     : QObject( parent )
-    , m_veccomposer( this )
+    , m_veccomposer( veccomposer )
 {
-    connect( &m_veccomposer, SIGNAL( datasetLoaded() ), SIGNAL( datasetLoaded() ) );
+    connect( m_veccomposer, SIGNAL( datasetLoaded() ), SIGNAL( datasetLoaded() ) );
 
     QTime t;
     t.start();
@@ -147,6 +149,11 @@ TextureColorizer::TextureColorizer( const QString &seafile,
     qDebug("TextureColorizer::setSeaFileLandFile: Time elapsed: %d ms", t.elapsed());
 }
 
+void TextureColorizer::setShowRelief( bool show )
+{
+    m_showRelief = show;
+}
+
 // This function takes two images, both in viewParams:
 //  - The coast image, which has a number of colors where each color
 //    represents a sort of terrain (ex: land/sea)
@@ -191,7 +198,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     GeoPainter painter( coastimg.data(), viewParams->viewport(), viewParams->mapQuality(), doClip );
     painter.setRenderHint( QPainter::Antialiasing, antialiased );
 
-    m_veccomposer.drawTextureMap( &painter, viewParams );
+    m_veccomposer->drawTextureMap( &painter, viewParams->viewport() );
 
     QSharedPointer<QImage>        origimg = viewParams->canvasImagePtr();
     const qint64   radius   = viewParams->radius();
@@ -209,9 +216,6 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     // const uint glaciercolor = qRgb(200,200,200);
 
     int     bump = 8;
-
-    bool showRelief;
-    viewParams->propertyValue( "relief", showRelief );
 
     if ( radius * radius > imgradius
          || viewParams->projection() == Equirectangular
@@ -261,7 +265,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 // Cheap Emboss / Bumpmapping
                 uchar&  grey = *readData; // qBlue(*data);
 
-                if ( showRelief ) {
+                if ( m_showRelief ) {
                     emboss << grey;
                     bump = ( emboss.head() + 8 - grey );
                     if ( bump  < 0 )  bump = 0;
@@ -350,7 +354,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 
                 uchar& grey = *readData; // qBlue(*data);
 
-                if ( showRelief ) {
+                if ( m_showRelief ) {
                     emboss << grey;
                     bump = ( emboss.head() + 16 - grey ) >> 1;
                     if ( bump > 15 ) bump = 15;

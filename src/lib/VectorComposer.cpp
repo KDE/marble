@@ -22,7 +22,6 @@
 #include "GeoPainter.h"
 #include "global.h"
 #include "VectorMap.h"
-#include "ViewParams.h"
 #include "ViewportParams.h"
 #include "MarbleDirs.h"
 
@@ -148,7 +147,37 @@ void VectorComposer::loadOverlays()
     s_dateLine->load( MarbleDirs::path( "mwdbii/DATELINE.PNT" ) );
 }
 
-void VectorComposer::drawTextureMap(GeoPainter *painter, ViewParams *viewParams)
+void VectorComposer::setShowWaterBodies( bool show )
+{
+    m_showWaterBodies = show;
+}
+
+void VectorComposer::setShowLakes( bool show )
+{
+    m_showLakes = show;
+}
+
+void VectorComposer::setShowIce( bool show )
+{
+    m_showIce = show;
+}
+
+void VectorComposer::setShowCoastLines( bool show )
+{
+    m_showCoastLines = show;
+}
+
+void VectorComposer::setShowRivers( bool show )
+{
+    m_showRivers = show;
+}
+
+void VectorComposer::setShowBorders( bool show )
+{
+    m_showBorders = show;
+}
+
+void VectorComposer::drawTextureMap( GeoPainter *painter, ViewportParams *viewport )
 {
     loadCoastlines();
 
@@ -157,7 +186,7 @@ void VectorComposer::drawTextureMap(GeoPainter *painter, ViewParams *viewParams)
     m_vectorMap->setzPointLimit( 0 ); // 0.6 results in green pacific
 
     // Draw the coast line vectors
-    m_vectorMap->createFromPntMap( s_coastLines, viewParams->viewport() );
+    m_vectorMap->createFromPntMap( s_coastLines, viewport );
     painter->setPen( m_textureLandPen );
     painter->setBrush( m_textureLandBrush );
     m_vectorMap->drawMap( painter );
@@ -166,39 +195,32 @@ void VectorComposer::drawTextureMap(GeoPainter *painter, ViewParams *viewParams)
     m_vectorMap->setzBoundingBoxLimit( 0.8 );
     m_vectorMap->setzPointLimit( 0.9 );
 
-    m_vectorMap->createFromPntMap( s_islands, viewParams->viewport() );
+    m_vectorMap->createFromPntMap( s_islands, viewport );
     painter->setPen( m_textureLandPen );
     painter->setBrush( m_textureLandBrush );
     m_vectorMap->drawMap( painter );
 
-    bool showWaterbodies, showLakes;
-    viewParams->propertyValue( "waterbodies", showWaterbodies );
-    viewParams->propertyValue( "lakes", showLakes );
-
-    if ( showWaterbodies && showLakes ) {
+    if ( m_showWaterBodies && m_showLakes ) {
          // Lakes
          m_vectorMap->setzBoundingBoxLimit( 0.95 );
          m_vectorMap->setzPointLimit( 0.98 ); 
 
-         m_vectorMap->createFromPntMap( s_lakes, viewParams->viewport() );
+         m_vectorMap->createFromPntMap( s_lakes, viewport );
          painter->setPen( Qt::NoPen );
          painter->setBrush( m_textureLakeBrush );
          m_vectorMap->drawMap( painter );
 
-         m_vectorMap->createFromPntMap( s_lakeislands, viewParams->viewport() );
+         m_vectorMap->createFromPntMap( s_lakeislands, viewport );
          painter->setPen( Qt::NoPen );
          painter->setBrush( m_textureLandBrush );
          m_vectorMap->drawMap( painter );
     }
 
-    bool showIce;
-    viewParams->propertyValue( "ice", showIce );
-
-    if ( showIce ) {
+    if ( m_showIce ) {
         // Glaciers
          m_vectorMap->setzBoundingBoxLimit( 0.8 );
          m_vectorMap->setzPointLimit( 0.9 );
-         m_vectorMap->createFromPntMap( s_glaciers, viewParams->viewport() );
+         m_vectorMap->createFromPntMap( s_glaciers, viewport );
          painter->setPen( Qt::NoPen );
          painter->setBrush( m_textureGlacierBrush );
 
@@ -209,28 +231,25 @@ void VectorComposer::drawTextureMap(GeoPainter *painter, ViewParams *viewParams)
 }
 
 void VectorComposer::paintBaseVectorMap( GeoPainter *painter, 
-                                         ViewParams *viewParams )
+                                         ViewportParams *viewport )
 {
     loadCoastlines();
 
-    const bool antialiased =    viewParams->mapQuality() == HighQuality
-                             || viewParams->mapQuality() == PrintQuality;
+    const bool antialiased =    painter->mapQuality() == HighQuality
+                             || painter->mapQuality() == PrintQuality;
 
     painter->setRenderHint( QPainter::Antialiasing, antialiased );
 
     // Paint the background of it all, i.e. the water.
     painter->setPen( m_oceanPen );
     painter->setBrush( m_oceanBrush );
-    painter->drawPath( viewParams->currentProjection()->mapShape( viewParams->viewport() ) );
+    painter->drawPath( viewport->currentProjection()->mapShape( viewport ) );
 
     // Coastlines
     m_vectorMap->setzBoundingBoxLimit( 0.4 ); 
     m_vectorMap->setzPointLimit( 0 ); // 0.6 results in green pacific
 
-    bool showCoastlines;
-    viewParams->propertyValue( "coastlines", showCoastlines );
-
-    if ( showCoastlines ) {
+    if ( m_showCoastLines ) {
         painter->setPen( m_landPen );
         painter->setBrush( Qt::NoBrush );
     }
@@ -240,16 +259,16 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
         painter->setBrush( m_landBrush );
     }
 
-    m_vectorMap->createFromPntMap( s_coastLines, viewParams->viewport() );
+    m_vectorMap->createFromPntMap( s_coastLines, viewport );
     m_vectorMap->paintMap( painter );
 
     // Islands
     m_vectorMap->setzBoundingBoxLimit( 0.8 );
     m_vectorMap->setzPointLimit( 0.9 );
 
-    m_vectorMap->createFromPntMap( s_islands, viewParams->viewport() );
+    m_vectorMap->createFromPntMap( s_islands, viewport );
 
-    if ( showCoastlines ) {
+    if ( m_showCoastLines ) {
         painter->setPen( m_landPen );
         painter->setBrush( Qt::NoBrush );
     }
@@ -261,48 +280,41 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
 
     m_vectorMap->paintMap( painter );
 
-    bool showWaterbodies, showLakes;
-    viewParams->propertyValue( "waterbodies", showWaterbodies );
-    viewParams->propertyValue( "lakes", showLakes );
-
-    if ( ( showWaterbodies && showLakes ) || showCoastlines ) {
+    if ( ( m_showWaterBodies && m_showLakes ) || m_showCoastLines ) {
          // Lakes
          m_vectorMap->setzBoundingBoxLimit( 0.95 );
          m_vectorMap->setzPointLimit( 0.98 ); 
 
-         m_vectorMap->createFromPntMap( s_lakes, viewParams->viewport() );
+         m_vectorMap->createFromPntMap( s_lakes, viewport );
          painter->setPen( m_lakePen );
          painter->setBrush( m_lakeBrush );
          m_vectorMap->paintMap( painter );
 
-         m_vectorMap->createFromPntMap( s_lakeislands, viewParams->viewport() );
+         m_vectorMap->createFromPntMap( s_lakeislands, viewport );
          painter->setBrush( m_landBrush );
          m_vectorMap->paintMap( painter );
     }
 }
 
 void VectorComposer::paintVectorMap( GeoPainter *painter,
-                                     ViewParams *viewParams )
+                                     ViewportParams *viewport )
 {
     // m_vectorMap->clearNodeCount();
 
-    const bool antialiased =    viewParams->mapQuality() == HighQuality
-                             || viewParams->mapQuality() == PrintQuality;
+    const bool antialiased =    painter->mapQuality() == HighQuality
+                             || painter->mapQuality() == PrintQuality;
 
     painter->setRenderHint( QPainter::Antialiasing, antialiased );
 
     // Coastlines
-    bool showCoastlines;
-    viewParams->propertyValue( "coastlines", showCoastlines );
-
-    if ( showCoastlines ) {
+    if ( m_showCoastLines ) {
 
         loadCoastlines();
 
         m_vectorMap->setzBoundingBoxLimit( 0.4 );
         m_vectorMap->setzPointLimit( 0 ); // 0.6 results in green pacific
     
-        m_vectorMap->createFromPntMap( s_coastLines, viewParams->viewport() );
+        m_vectorMap->createFromPntMap( s_coastLines, viewport );
         painter->setPen( m_landPen );
         painter->setBrush( Qt::NoBrush );
         m_vectorMap->paintMap( painter );
@@ -310,7 +322,7 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
         m_vectorMap->setzBoundingBoxLimit( 0.8 );
         m_vectorMap->setzPointLimit( 0.9 );
 
-        m_vectorMap->createFromPntMap( s_islands, viewParams->viewport() );
+        m_vectorMap->createFromPntMap( s_islands, viewport );
         painter->setPen( m_landPen );
         painter->setBrush( Qt::NoBrush );
         m_vectorMap->paintMap( painter );
@@ -319,50 +331,43 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
         m_vectorMap->setzBoundingBoxLimit( 0.95 );
         m_vectorMap->setzPointLimit( 0.98 ); 
 
-        m_vectorMap->createFromPntMap( s_lakes, viewParams->viewport() );
+        m_vectorMap->createFromPntMap( s_lakes, viewport );
         painter->setPen( m_landPen );
         painter->setBrush( Qt::NoBrush );
         m_vectorMap->paintMap( painter );
 
-        m_vectorMap->createFromPntMap( s_lakeislands, viewParams->viewport() );
+        m_vectorMap->createFromPntMap( s_lakeislands, viewport );
         m_vectorMap->paintMap( painter );
     }
 
-    bool showWaterbodies, showRivers;
-    viewParams->propertyValue( "waterbodies", showWaterbodies );
-    viewParams->propertyValue( "rivers", showRivers );
-
-    if ( showWaterbodies && showRivers ) {
+    if ( m_showWaterBodies && m_showRivers ) {
         loadOverlays();
         // Rivers
          m_vectorMap->setzBoundingBoxLimit( -1.0 );
          m_vectorMap->setzPointLimit( -1.0 );
-         m_vectorMap->createFromPntMap( s_rivers, viewParams->viewport() );
+         m_vectorMap->createFromPntMap( s_rivers, viewport );
 
          painter->setPen( m_riverPen );
          painter->setBrush( m_riverBrush );
          m_vectorMap->paintMap( painter );
     }
 
-    bool showBorders;
-    viewParams->propertyValue( "borders", showBorders );
-
-    if ( showBorders ) {
+    if ( m_showBorders ) {
         loadOverlays();
         // Countries
          m_vectorMap->setzBoundingBoxLimit( -1.0 );
          m_vectorMap->setzPointLimit( -1.0 );
-         m_vectorMap->createFromPntMap( s_countries, viewParams->viewport() );
+         m_vectorMap->createFromPntMap( s_countries, viewport );
 
         // Fancy Boundaries Hack:
         // FIXME: Find a clean solution that allows for all the 
         // tuning necessary for the different quality levels.
 
-        int radius = viewParams->radius();
+        int radius = viewport->radius();
         qreal penWidth = (double)(radius) / 400.0;
         if ( radius < 400.0 ) penWidth = 1.0;
         if ( radius > 800.0 ) penWidth = 1.75;
-        if ( showCoastlines ) penWidth = 1.0;
+        if ( m_showCoastLines ) penWidth = 1.0;
 
         QPen countryPen( m_countryPen);
         countryPen.setWidthF( penWidth );
@@ -371,8 +376,8 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
         QPen borderDashPen( Qt::black );
         painter->setBrush( m_countryBrush );
 
-        if ( viewParams->mapQuality() == HighQuality 
-          || viewParams->mapQuality() == PrintQuality ) {
+        if ( painter->mapQuality() == HighQuality
+          || painter->mapQuality() == PrintQuality ) {
 
             countryPen.setColor( penColor );
             painter->setPen( countryPen );
@@ -381,18 +386,18 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
             // Only paint fancy style if the coast line doesn't get painted as well
             // (as it looks a bit awkward otherwise)
 
-            if ( !showCoastlines ) {
+            if ( !m_showCoastLines ) {
                 borderDashPen.setDashPattern( QVector<qreal>() << 1 << 5 );
                 borderDashPen.setWidthF( penWidth * 0.5 );
                 painter->setPen( borderDashPen );
                 m_vectorMap->paintMap( painter );
             }
         }
-        if ( viewParams->mapQuality() == OutlineQuality
-          || viewParams->mapQuality() == LowQuality
-          || viewParams->mapQuality() == NormalQuality ) {
+        if ( painter->mapQuality() == OutlineQuality
+          || painter->mapQuality() == LowQuality
+          || painter->mapQuality() == NormalQuality ) {
 
-            if ( !showCoastlines ) {
+            if ( !m_showCoastLines ) {
                 countryPen.setWidthF( 1.0 );
                 countryPen.setColor( penColor.darker(115) );
             }
@@ -403,11 +408,11 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
         // US-States
         m_vectorMap->setzBoundingBoxLimit( -1.0 );
         m_vectorMap->setzPointLimit( -1.0 );
-        m_vectorMap->createFromPntMap( s_usaStates, viewParams->viewport() );
+        m_vectorMap->createFromPntMap( s_usaStates, viewport );
 
         QPen statePen( m_statePen);
-        if ( viewParams->mapQuality() == OutlineQuality
-          || viewParams->mapQuality() == LowQuality ) {
+        if ( painter->mapQuality() == OutlineQuality
+          || painter->mapQuality() == LowQuality ) {
             statePen.setStyle( Qt::SolidLine );
         }
         painter->setPen( statePen );
@@ -417,11 +422,11 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
         // International Dateline
         m_vectorMap->setzBoundingBoxLimit( -1.0 );
         m_vectorMap->setzPointLimit( -1.0 );
-        m_vectorMap->createFromPntMap( s_dateLine, viewParams->viewport() );
+        m_vectorMap->createFromPntMap( s_dateLine, viewport );
 
         QPen dateLinePen( m_dateLinePen);
-        if ( viewParams->mapQuality() == OutlineQuality
-          || viewParams->mapQuality() == LowQuality ) {
+        if ( painter->mapQuality() == OutlineQuality
+          || painter->mapQuality() == LowQuality ) {
             dateLinePen.setStyle( Qt::SolidLine );
         }
         painter->setPen( dateLinePen );
