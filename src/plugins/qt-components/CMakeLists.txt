@@ -16,3 +16,4 @@ INSTALL( FILES MapThemeSelectionPage.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/k
 INSTALL( FILES NavigationSettingsPage.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
 INSTALL( FILES ViewSettingsPage.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
 INSTALL( FILES SearchBar.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
+INSTALL( FILES RoutingDialog.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )

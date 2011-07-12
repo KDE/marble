@@ -53,6 +53,12 @@ Rectangle {
         anchors.right: parent.right
     }
     
+    RoutingDialog {
+        id: routingDialog
+        anchors.fill: parent
+        visible: false
+    }
+    
     ToolBar {
         id: mainToolBar
         anchors.left: parent.left
@@ -69,6 +75,16 @@ Rectangle {
                 anchors.bottom: parent.bottom
                 onClicked: {
                     settingsPage.back()
+                }
+            }
+            ToolIcon {
+                id: routingButton
+                iconId: "toolbar-callhistory"
+                visible: !settingsPage.visible
+                anchors.right: searchButton.left
+                anchors.bottom: parent.bottom
+                onClicked: {
+                    routingDialog.visible = !routingDialog.visible
                 }
             }
             ToolIcon {

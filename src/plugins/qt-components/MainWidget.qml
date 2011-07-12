@@ -9,6 +9,7 @@
 
 import Qt 4.7
 import org.kde.edu.marble 0.11
+import com.nokia.meego 1.0
 
 Rectangle {
     id: screen
@@ -19,6 +20,7 @@ Rectangle {
         anchors.fill: parent
 
         property bool autoCenter: settings.autoCenter
+        property bool initialized: false
 
         mapThemeId: settings.mapTheme
         zoom: settings.quitZoom
@@ -39,9 +41,9 @@ Rectangle {
         }
         
         Component.onCompleted: {
-            console.log( "assigning: ", settings.quitLongitude, settings.quitLatitude )
             center.longitude = settings.quitLongitude
             center.latitude = settings.quitLatitude
+            initialized = true
         }
         
         onZoomChanged: {
@@ -49,14 +51,47 @@ Rectangle {
         }
         
         onVisibleLatLonAltBoxChanged: {
-            console.log( "center changed: ", center.longitude, center.latitude )
-            settings.quitLongitude = center.longitude
-            settings.quitLatitude = center.latitude
+            if( initialized ) {
+                settings.quitLongitude = center.longitude
+                settings.quitLatitude = center.latitude
+            }
         }
         
         // FIXME delegate
         search {
-            placemarkDelegate: Rectangle { color: "orange"; width: 10; height: 10 }
+            placemarkDelegate: 
+                Rectangle { 
+                    id: searchDelegate
+                    color: "orange"
+                    width: 15
+                    height: 15
+                    Rectangle {
+                        id: routingOptions
+                        visible: false
+                        Column {
+                            Button {
+                                text: "Directions from here"
+                                onClicked: {
+                                    routingOptions.visible = false
+                                    map.routing.setVia( 0, longitude, latitude )
+                                }
+                            }
+                            Button {
+                                text: "Directions to here"
+                                onClicked: {
+                                    routingOptions.visible = false
+                                    map.routing.setVia( 1, longitude, latitude )
+                                }
+                            }
+                        }
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            routingOptions.visible = !routingOptions.visible
+                        }
+                    }
+                }
         }
 
     }

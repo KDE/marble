@@ -12,4 +12,17 @@ import com.nokia.meego 1.0
 TextField {
     id: textField
     placeholderText: "Search..."
+    ToolIcon {
+        id: clearButton
+        iconId: "input-clear"
+        anchors.top: textField.top
+        anchors.right: textField.right
+        anchors.rightMargin: 5
+        height: parent.height - 2
+        width: parent.height - 2
+        onClicked: {
+            textField.text = ""
+            mainWidget.find( text )
+        }
+    }
 }

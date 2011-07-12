@@ -28,7 +28,6 @@ Item {
     property bool autoCenter: settings.value( "MarbleWidget", "autoCenter", false )
     
     Component.onDestruction: {
-        console.log( "save: ", root.quitLongitude, root.quitLatitude )
         settings.setValue( "MarbleWidget", "mapTheme", root.mapTheme )
         settings.setValue( "MainWindow", "workOffline", root.workOffline )
         settings.setValue( "MarbleWidget", "quitLongitude", root.quitLongitude )

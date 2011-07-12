@@ -8,5 +8,6 @@
         <file>NavigationSettingsPage.qml</file>
         <file>ViewSettingsPage.qml</file>
         <file>SearchBar.qml</file>
+        <file>RoutingDialog.qml</file>
     </qresource>
 </RCC>
