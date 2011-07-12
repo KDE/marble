@@ -68,6 +68,8 @@
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
 #include "VectorComposer.h"
+#include "VectorMapBaseLayer.h"
+#include "VectorMapLayer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
@@ -104,6 +106,8 @@ class MarbleMapPrivate
     GeometryLayer           *m_geometryLayer;
     AtmosphereLayer          m_atmosphereLayer;
     FogLayer                 m_fogLayer;
+    VectorMapBaseLayer       m_vectorMapBaseLayer;
+    VectorMapLayer   m_vectorMapLayer;
     TextureLayer     m_textureLayer;
     PlacemarkLayout  m_placemarkLayout;
     VectorComposer   m_veccomposer;
@@ -120,6 +124,8 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_backgroundVisible( true ),
           m_texcolorizer( 0 ),
           m_layerManager( model, parent ),
+          m_vectorMapBaseLayer( &m_veccomposer ),
+          m_vectorMapLayer( &m_veccomposer ),
           m_textureLayer( model->mapThemeManager(), model->downloadManager(), model->sunLocator() ),
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), parent ),
           m_measureTool( model )
@@ -285,6 +291,8 @@ MarbleMap::~MarbleMap()
     d->m_layerManager.removeLayer( &d->m_measureTool );
     d->m_layerManager.removeLayer( &d->m_fogLayer );
     d->m_layerManager.removeLayer( &d->m_placemarkLayout );
+    d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
+    d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
     delete d;
 
     delete model;  // delete the model after private data
@@ -743,26 +751,7 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
     }
 
     renderPositions.clear();
-    renderPositions << "SURFACE";
-
-    // Paint the vector layer.
-    if ( d->m_model->mapTheme()->map()->hasVectorLayers() ) {
-
-        if ( !d->m_model->mapTheme()->map()->hasTextureLayers() ) {
-            d->m_veccomposer.paintBaseVectorMap( &painter, d->m_viewParams.viewport() );
-        }
-
-        d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
-
-        // Add further Vectors
-        d->m_veccomposer.paintVectorMap( &painter, d->m_viewParams.viewport() );
-    }
-    else {
-        d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
-    }
-
-    renderPositions.clear();
-    renderPositions << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
+    renderPositions << "SURFACE" << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
     d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
 
@@ -803,6 +792,9 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 
     d->m_viewParams.setMapThemeId( mapThemeId );
     GeoSceneDocument *mapTheme = d->m_viewParams.mapTheme();
+
+    d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
+    d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
 
     if ( !mapTheme ) {
         return;
@@ -886,7 +878,15 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
             }
         }
     }
-    
+
+    if ( mapTheme->map()->hasVectorLayers() ) {
+        if ( !mapTheme->map()->hasTextureLayers() ) {
+            d->m_layerManager.addLayer( &d->m_vectorMapBaseLayer );
+        }
+
+        d->m_layerManager.addLayer( &d->m_vectorMapLayer );
+    }
+
     // NOTE due to frequent regressions: 
     // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
     // at this point.
