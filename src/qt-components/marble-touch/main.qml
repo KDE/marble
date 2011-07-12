@@ -53,8 +53,14 @@ Rectangle {
         anchors.right: parent.right
     }
     
-    RoutingDialog {
-        id: routingDialog
+    RouteRequestView {
+        id: routeRequestView
+        anchors.fill: parent
+        visible: false
+    }
+    
+    WaypointView {
+        id: waypointView
         anchors.fill: parent
         visible: false
     }
@@ -78,13 +84,23 @@ Rectangle {
                 }
             }
             ToolIcon {
-                id: routingButton
+                id: waypointButton
+                iconId: "common-location-picker"
+                visible: !settingsPage.visible
+                anchors.right: routeRequestButton.left
+                anchors.bottom: parent.bottom
+                onClicked: {
+                    waypointView.visible = !waypointView.visible
+                }
+            }
+            ToolIcon {
+                id: routeRequestButton
                 iconId: "toolbar-callhistory"
                 visible: !settingsPage.visible
                 anchors.right: searchButton.left
                 anchors.bottom: parent.bottom
                 onClicked: {
-                    routingDialog.visible = !routingDialog.visible
+                    routeRequestView.visible = !routeRequestView.visible
                 }
             }
             ToolIcon {
@@ -140,6 +156,14 @@ Rectangle {
         else {
             mainWidget.anchors.top = main.top
         }
+    }
+    
+    function routeRequestModel() {
+        return mainWidget.routeRequestModel()
+    }
+    
+    function waypointModel() {
+        return mainWidget.waypointModel()
     }
 
 }

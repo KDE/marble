@@ -43,6 +43,7 @@ Rectangle {
         Component.onCompleted: {
             center.longitude = settings.quitLongitude
             center.latitude = settings.quitLatitude
+            routing.clearRoute()
             initialized = true
         }
         
@@ -57,7 +58,6 @@ Rectangle {
             }
         }
         
-        // FIXME delegate
         search {
             placemarkDelegate: 
                 Rectangle { 
@@ -155,6 +155,14 @@ Rectangle {
     
     function find( term ) {
         map.search.find( term )
+    }
+    
+    function routeRequestModel() {
+        return map.routing.routeRequestModel()
+    }
+    
+    function waypointModel() {
+        return map.routing.waypointModel()
     }
 
 }

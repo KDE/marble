@@ -6,4 +6,5 @@ MapThemeSelectionPage 0.12 MapThemeSelectionPage.qml
 NavigationSettingsPage 0.12 NavigationSettingsPage.qml
 ViewSettingsPage 0.12 ViewSettingsPage.qml
 SearchBar 0.12 SearchBar.qml
-RoutingDialog 0.12 RoutingDialog.qml
+RouteRequestView 0.12 RouteRequestView.qml
+WaypointView 0.12 WaypointView.qml
