@@ -796,6 +796,10 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
 
+    d->m_textureLayer.setTextureColorizer( 0 );
+    delete d->m_texcolorizer;
+    d->m_texcolorizer = 0;
+
     if ( !mapTheme ) {
         return;
     }
@@ -803,8 +807,6 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     connect( mapTheme->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
              this, SLOT( updateProperty( const QString &, bool ) ) );
 
-    delete d->m_texcolorizer;
-    d->m_texcolorizer = 0;
     if( !mapTheme->map()->filters().isEmpty() ) {
         GeoSceneFilter *filter= mapTheme->map()->filters().first();
 
@@ -827,9 +829,10 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 
             d->m_texcolorizer = new TextureColorizer( seafile, landfile, &d->m_veccomposer, this );
             d->m_texcolorizer->setShowRelief( showRelief() );
+
+            d->m_textureLayer.setTextureColorizer( d->m_texcolorizer );
         }
     }
-    d->m_textureLayer.setTextureColorizer( d->m_texcolorizer );
 
     // NOTE due to frequent regressions: 
     // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
