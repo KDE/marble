@@ -796,40 +796,16 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
 
+    d->m_textureLayer.setTextureColorizer( 0 );
+    delete d->m_texcolorizer;
+    d->m_texcolorizer = 0;
+
     if ( !mapTheme ) {
         return;
     }
 
     connect( mapTheme->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
              this, SLOT( updateProperty( const QString &, bool ) ) );
-
-    delete d->m_texcolorizer;
-    d->m_texcolorizer = 0;
-    if( !mapTheme->map()->filters().isEmpty() ) {
-        GeoSceneFilter *filter= mapTheme->map()->filters().first();
-
-        if( filter->type() == "colorize" ) {
-             //no need to look up with MarbleDirs twice so they are left null for now
-            QString seafile, landfile;
-            QList<GeoScenePalette*> palette = filter->palette();
-            foreach ( GeoScenePalette *curPalette, palette ) {
-                if( curPalette->type() == "sea" ) {
-                    seafile = MarbleDirs::path( curPalette->file() );
-                } else if( curPalette->type() == "land" ) {
-                    landfile = MarbleDirs::path( curPalette->file() );
-                }
-            }
-            //look up locations if they are empty
-            if( seafile.isEmpty() )
-                seafile = MarbleDirs::path( "seacolors.leg" );
-            if( landfile.isEmpty() )
-                landfile = MarbleDirs::path( "landcolors.leg" );
-
-            d->m_texcolorizer = new TextureColorizer( seafile, landfile, &d->m_veccomposer, this );
-            d->m_texcolorizer->setShowRelief( showRelief() );
-        }
-    }
-    d->m_textureLayer.setTextureColorizer( d->m_texcolorizer );
 
     // NOTE due to frequent regressions: 
     // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
@@ -931,6 +907,33 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
         }
 
         d->m_textureLayer.setupTextureMapper( d->m_viewParams.projection() );
+
+        if( !mapTheme->map()->filters().isEmpty() ) {
+            GeoSceneFilter *filter= mapTheme->map()->filters().first();
+
+            if( filter->type() == "colorize" ) {
+                 //no need to look up with MarbleDirs twice so they are left null for now
+                QString seafile, landfile;
+                QList<GeoScenePalette*> palette = filter->palette();
+                foreach ( GeoScenePalette *curPalette, palette ) {
+                    if( curPalette->type() == "sea" ) {
+                        seafile = MarbleDirs::path( curPalette->file() );
+                    } else if( curPalette->type() == "land" ) {
+                        landfile = MarbleDirs::path( curPalette->file() );
+                    }
+                }
+                //look up locations if they are empty
+                if( seafile.isEmpty() )
+                    seafile = MarbleDirs::path( "seacolors.leg" );
+                if( landfile.isEmpty() )
+                    landfile = MarbleDirs::path( "landcolors.leg" );
+
+                d->m_texcolorizer = new TextureColorizer( seafile, landfile, &d->m_veccomposer, this );
+                d->m_texcolorizer->setShowRelief( showRelief() );
+
+                d->m_textureLayer.setTextureColorizer( d->m_texcolorizer );
+            }
+        }
     }
 
     // NOTE due to frequent regressions: 
