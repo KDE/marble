@@ -12,7 +12,7 @@ import org.kde.edu.marble 0.11
 
 ListView {
     id: mapListView
-    anchors.fill: parent
+    z: 1
     anchors.margins: UiConstants.DefaultMargin
     model: main.routeRequestModel()
     spacing: 10

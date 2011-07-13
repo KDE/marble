@@ -56,13 +56,19 @@ Rectangle {
     RouteRequestView {
         id: routeRequestView
         visible: false
-        anchors.fill: parent
+        anchors.top: parent.top
+        anchors.bottom: mainToolBar.top
+        anchors.left: parent.left
+        anchors.right: parent.right
     }
     
     WaypointView {
         id: waypointView
         visible: false
-        anchors.fill: parent
+        anchors.top: parent.top
+        anchors.bottom: mainToolBar.top
+        anchors.left: parent.left
+        anchors.right: parent.right
     }
     
     ToolBar {
