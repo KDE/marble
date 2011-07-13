@@ -25,7 +25,6 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataExtendedData.h"
 #include "MarbleDirs.h"
-#include "MarblePlacemarkModel.h"
 
 using namespace Marble;
 /* TRANSLATOR Marble::PlacemarkInfoDialog */
