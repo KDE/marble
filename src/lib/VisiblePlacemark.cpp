@@ -14,7 +14,6 @@
 #include "MarbleDebug.h"
 
 #include "GeoDataStyle.h"
-#include "MarblePlacemarkModel.h"
 
 using namespace Marble;
 
