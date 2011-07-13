@@ -14,7 +14,6 @@ ListView {
     id: mapListView
     anchors.fill: parent
     anchors.margins: UiConstants.DefaultMargin
-    highlightFollowsCurrentItem: true
     model: main.routeRequestModel()
     spacing: 10
     
@@ -28,6 +27,7 @@ ListView {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
                 anchors.leftMargin: 15
+                text: display
             }
         }
 

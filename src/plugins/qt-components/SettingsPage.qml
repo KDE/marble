@@ -19,7 +19,7 @@ PageStack {
 
     function back() {
         if( pageStack.depth == 1 ) {
-            main.hideSettings()
+            pageStack.visible = false
         }
         else {
             pageStack.pop();

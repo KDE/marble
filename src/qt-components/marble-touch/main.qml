@@ -132,32 +132,31 @@ Rectangle {
                 anchors.bottom: parent.bottom
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: {
-                        settingsPage.visible = !settingsPage.visible
-                        if( settingsPage.visible ) {
-                            mainWidget.visible = searchBar.visible = false
-                        }
-                        else {
-                            main.hideSettings()
-                        }
-                    }
+                    onClicked: { settingsPage.visible = !settingsPage.visible }
                 }
             }
         }
     }
     
-    function hideSettings() {
-        settingsPage.visible = false
-        mainWidget.visible = true
-        if( searchBar.activated ) {
-            searchBar.visible = true
-            mainWidget.anchors.top = searchBar.bottom
+    states: [
+        State {
+            name: "settings"
+            when: settingsPage.visible
+            PropertyChanges { target: mainWidget; visible: false }
+            PropertyChanges { target: searchBar;  visible: false }
+        },
+        State {
+            name: "withoutSearch"
+            when: !settingsPage.visible && !searchBar.activated
+            PropertyChanges { target: mainWidget; anchors.top: main.top }
+        },
+        State {
+            name: "withSearch"
+            when: !settingsPage.visible && searchBar.activated
+            PropertyChanges { target: mainWidget; anchors.top: searchBar.bottom }
         }
-        else {
-            mainWidget.anchors.top = main.top
-        }
-    }
-    
+    ]
+
     function routeRequestModel() {
         return mainWidget.routeRequestModel()
     }
