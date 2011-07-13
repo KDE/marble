@@ -162,5 +162,9 @@ Rectangle {
     function waypointModel() {
         return mainWidget.waypointModel()
     }
+    
+    function getRouting() {
+        return mainWidget.getRouting()
+    }
 
 }

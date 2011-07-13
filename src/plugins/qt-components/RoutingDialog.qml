@@ -15,14 +15,14 @@ Rectangle {
         id: routingRect
         anchors.top: parent.top
         anchors.left: parent.left
-        height: 320
+        height: 310
+        width: parent.width
+        clip: true
         ListView {
             id: routingView
             anchors.fill: parent
             model: ListModel {
                 id: routingModel
-                ListElement { }
-                ListElement { }
             }
 
             delegate:
@@ -39,10 +39,7 @@ Rectangle {
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
-                                if( routingModel.count > 2 ) {
-                                    routingModel.remove( routingView.indexAt( mouse.x + routingView.contentX, 
-                                                                              mouse.y + routingView.contentY ) )
-                                }
+                                routingModel.remove( index )
                             }
                         }
                     }
@@ -53,11 +50,17 @@ Rectangle {
         id: buttonRect
         anchors.top: routingRect.bottom
         anchors.left: parent.left
+        anchors.topMargin: 10
         Column {
             Button {
                 text: "Go!"
                 width: 200
                 platformStyle: ButtonStyle { fontPixelSize: 20 }
+                onClicked: {
+                    for( var i = 0; i < routingView.count; i++ ) {
+                        main.getRouting().setVia( i, 0.0, 0.0 )  // FIXME
+                    }
+                }
             }
             Button {
                 text: "Add destination"

@@ -165,6 +165,10 @@ Rectangle {
             map.center.longitude = lon
             map.center.latitude = lat
         }
+        
+        function getRouting() {
+            return map.routing
+        }
 
     }
     
@@ -229,6 +233,10 @@ Rectangle {
     
     function waypointModel() {
         return map.routing.waypointModel()
+    }
+    
+    function getRouting() {
+        return map.getRouting()
     }
 
 }
