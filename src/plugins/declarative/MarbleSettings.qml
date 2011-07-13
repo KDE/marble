@@ -26,6 +26,7 @@ Item {
     property bool showPosition: settings.value( "MarbleWidget", "showPosition", false )
     property bool showTrack: settings.value( "MarbleWidget", "showTrack", false )
     property bool autoCenter: settings.value( "MarbleWidget", "autoCenter", false )
+    property string projection: settings.value( "MarbleWidget", "projection", "Spherical" )
     
     Component.onDestruction: {
         settings.setValue( "MarbleWidget", "mapTheme", root.mapTheme )
@@ -37,5 +38,6 @@ Item {
         settings.setValue( "MarbleWidget", "showPosition", root.showPosition )
         settings.setValue( "MarbleWidget", "showTrack", root.showTrack )
         settings.setValue( "MarbleWidget", "autoCenter", root.autoCenter )
+        settings.setValue( "MarbleWidget", "projection", root.projection )
     }
 }

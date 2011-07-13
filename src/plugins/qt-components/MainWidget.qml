@@ -24,6 +24,7 @@ Rectangle {
 
         mapThemeId: settings.mapTheme
         zoom: settings.quitZoom
+        projection: settings.projection
         activeFloatItems: [ "compass", "scalebar", "progress" ]
 
         // The grouped property tracking provides access to tracking related

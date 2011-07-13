@@ -10,10 +10,31 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 
 Rectangle {
+    id: viewSettings
+    anchors.fill: parent
     anchors.margins: UiConstants.DefaultMargin
-    
-    Label {
-        text: "View"
+    ButtonColumn {
+        Label {
+            text: "Projection:"
+        }
+        RadioButton {
+            id: equirectangularButton
+            text: "Equirectangular"
+            checked: text == settings.projection
+            onClicked: { settings.projection = text }
+        }
+        RadioButton {
+            id: mercatorButton
+            text: "Mercator"
+            checked: text == settings.projection
+            onClicked: { settings.projection = text }
+        }
+        RadioButton {
+            id: sphericalButton
+            text: "Spherical"
+            checked: text == settings.projection
+            onClicked: { settings.projection = text }
+        }
     }
     
 }
