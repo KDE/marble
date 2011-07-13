@@ -55,14 +55,14 @@ Rectangle {
     
     RouteRequestView {
         id: routeRequestView
-        anchors.fill: parent
         visible: false
+        anchors.fill: parent
     }
     
     WaypointView {
         id: waypointView
-        anchors.fill: parent
         visible: false
+        anchors.fill: parent
     }
     
     ToolBar {
@@ -79,9 +79,7 @@ Rectangle {
                 visible: settingsPage.visible
                 anchors.left: parent.left
                 anchors.bottom: parent.bottom
-                onClicked: {
-                    settingsPage.back()
-                }
+                onClicked: { settingsPage.back() }
             }
             ToolIcon {
                 id: waypointButton
@@ -89,9 +87,7 @@ Rectangle {
                 visible: !settingsPage.visible
                 anchors.right: routeRequestButton.left
                 anchors.bottom: parent.bottom
-                onClicked: {
-                    waypointView.visible = !waypointView.visible
-                }
+                onClicked: { waypointView.visible = !waypointView.visible }
             }
             ToolIcon {
                 id: routeRequestButton
@@ -99,9 +95,7 @@ Rectangle {
                 visible: !settingsPage.visible
                 anchors.right: searchButton.left
                 anchors.bottom: parent.bottom
-                onClicked: {
-                    routeRequestView.visible = !routeRequestView.visible
-                }
+                onClicked: { routeRequestView.visible = !routeRequestView.visible }
             }
             ToolIcon {
                 id: searchButton
@@ -111,18 +105,7 @@ Rectangle {
                 anchors.bottom: parent.bottom
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: {
-                        searchBar.visible = !searchBar.visible
-                        if( searchBar.visible ) {
-                            mainWidget.anchors.top = searchBar.bottom
-                            searchBar.focus = true
-                            searchBar.activated = true
-                        }
-                        else {
-                            mainWidget.anchors.top = main.top;
-                            searchBar.activated = false
-                        }
-                    }
+                    onClicked: { searchBar.visible = searchBar.activated = !searchBar.visible }
                 }
             }
             ToolIcon {
@@ -140,20 +123,21 @@ Rectangle {
     
     states: [
         State {
-            name: "settings"
+            name: "settingsVisible"
             when: settingsPage.visible
             PropertyChanges { target: mainWidget; visible: false }
             PropertyChanges { target: searchBar;  visible: false }
         },
         State {
-            name: "withoutSearch"
+            name: "mainWithoutSearch"
             when: !settingsPage.visible && !searchBar.activated
             PropertyChanges { target: mainWidget; anchors.top: main.top }
         },
         State {
-            name: "withSearch"
+            name: "mainWithSearch"
             when: !settingsPage.visible && searchBar.activated
             PropertyChanges { target: mainWidget; anchors.top: searchBar.bottom }
+            PropertyChanges { target: searchBar;  focus: true }
         }
     ]
 

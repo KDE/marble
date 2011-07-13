@@ -8,3 +8,5 @@ ViewSettingsPage 0.12 ViewSettingsPage.qml
 SearchBar 0.12 SearchBar.qml
 RouteRequestView 0.12 RouteRequestView.qml
 WaypointView 0.12 WaypointView.qml
+TextFieldView 0.12 TextFieldView.qml
+TextFieldModel 0.12 TextFieldModel.qml

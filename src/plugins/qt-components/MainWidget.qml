@@ -60,27 +60,93 @@ Rectangle {
         
         search {
             placemarkDelegate: 
-                Rectangle { 
+                Rectangle {
                     id: searchDelegate
-                    color: "orange"
-                    width: 15
-                    height: 15
+                    color: "red"
+                    width: 20
+                    height: 20
+                    border.width: 3
+                    border.color: "black"
+                    smooth: true
                     Rectangle {
                         id: routingOptions
                         visible: false
+                        color: "white"
+                        width: 350
+                        height: nameLabel.height + routingButtons.height + 30
+                        border.width: 1
+                        border.color: "blue"
+                        radius: 10
+                        Label {
+                            id: nameLabel
+                            text: name
+                            width: 340
+                            anchors.top: parent.top
+                            anchors.left: parent.left
+                            anchors.topMargin: 10
+                            anchors.leftMargin: 10
+                            anchors.rightMargin: 10
+                            platformStyle: LabelStyle { fontPixelSize: 20 }
+                        }
                         Column {
-                            Button {
-                                text: "Directions from here"
-                                onClicked: {
-                                    routingOptions.visible = false
-                                    map.routing.setVia( 0, longitude, latitude )
+                            id: routingButtons
+                            anchors.bottom: parent.bottom
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            anchors.bottomMargin: 10
+                            spacing: 5
+                            Rectangle {
+                                color: "white"
+                                width: 230
+                                height: 35
+                                border.width: 1
+                                border.color: "blue"
+                                radius: 10
+                                Label {
+                                    text: "Directions from here"
+                                    anchors.centerIn: parent
+                                    platformStyle: LabelStyle { fontPixelSize: 20 }
+                                }
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: {
+                                        routingOptions.visible = false
+                                        map.routing.setVia( 0, longitude, latitude )
+                                    }
                                 }
                             }
-                            Button {
-                                text: "Directions to here"
+                            Rectangle {
+                                color: "white"
+                                width: 230
+                                height: 35
+                                border.width: 1
+                                border.color: "blue"
+                                radius: 10
+                                Label {
+                                    text: "Directions to here"
+                                    anchors.centerIn: parent
+                                    platformStyle: LabelStyle { fontPixelSize: 20 }
+                                }
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: {
+                                        routingOptions.visible = false
+                                        map.routing.setVia( 1, longitude, latitude )
+                                    }
+                                }
+                            }
+                        }
+                        Image {
+                            id: closeImage
+                            width: 30
+                            fillMode: Image.PreserveAspectFit
+                            smooth: true
+                            source: "image://theme/icon-m-toolbar-close"
+                            anchors.bottom: parent.top
+                            anchors.left: parent.right
+                            MouseArea {
+                                anchors.fill: parent
                                 onClicked: {
                                     routingOptions.visible = false
-                                    map.routing.setVia( 1, longitude, latitude )
                                 }
                             }
                         }
@@ -88,7 +154,6 @@ Rectangle {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            map.centerOn( longitude, latitude )
                             routingOptions.visible = !routingOptions.visible
                         }
                     }

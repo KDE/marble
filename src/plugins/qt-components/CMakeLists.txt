@@ -18,3 +18,5 @@ INSTALL( FILES ViewSettingsPage.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/ed
 INSTALL( FILES SearchBar.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
 INSTALL( FILES RouteRequestView.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
 INSTALL( FILES WaypointView.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
+INSTALL( FILES TextFieldView.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
+INSTALL( FILES TextFieldModel.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )

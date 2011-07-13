@@ -10,5 +10,7 @@
         <file>SearchBar.qml</file>
         <file>RouteRequestView.qml</file>
         <file>WaypointView.qml</file>
+        <file>TextFieldView.qml</file>
+        <file>TextFieldModel.qml</file>
     </qresource>
 </RCC>
