@@ -28,8 +28,13 @@ Rectangle {
             delegate:
                 Row {
                     TextField { 
+                        id: textField
                         width: 200
                         height: 35
+                        Keys.onPressed: {
+                            console.log( "text changed: ", text )
+                            routingModel.get( index ).destinationText = text
+                        }
                     }
                     Image {
                         width: 30
@@ -57,8 +62,14 @@ Rectangle {
                 width: 200
                 platformStyle: ButtonStyle { fontPixelSize: 20 }
                 onClicked: {
+                    console.log( "routing started..." )
                     for( var i = 0; i < routingView.count; i++ ) {
-                        main.getRouting().setVia( i, 0.0, 0.0 )  // FIXME
+                        console.log( "search: ", i, routingView.model.get( i ).destinationText )
+                        main.getSearch().find( routingView.model.get( i ).destinationText )
+                        //console.log( "results: ", main.getSearch().searchResultModel().rowCount )
+                        //if( main.getSearch().searchResultModel().rowCount > 1 ) {
+                            resultSelectionDialog.visible = true
+                        //}
                     }
                 }
             }
@@ -67,9 +78,17 @@ Rectangle {
                 width: 200
                 platformStyle: ButtonStyle { fontPixelSize: 20 }
                 onClicked: {
-                    routingModel.append( {} )
+                    console.log( "adding input field" )
+                    routingModel.append( { "destinationText": "" } )
                 }
             }
         }
     }
+
+    SearchResultSelectionDialog {
+        id: resultSelectionDialog
+        visible: false
+        anchors.fill: parent
+    }
+    
 }

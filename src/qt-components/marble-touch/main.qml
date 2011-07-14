@@ -167,4 +167,8 @@ Rectangle {
         return mainWidget.getRouting()
     }
 
+    function getSearch() {
+        return mainWidget.getSearch()
+    }
+
 }

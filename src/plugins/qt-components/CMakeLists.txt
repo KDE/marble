@@ -19,3 +19,4 @@ INSTALL( FILES SearchBar.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marbl
 INSTALL( FILES RouteRequestView.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
 INSTALL( FILES WaypointView.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
 INSTALL( FILES RoutingDialog.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
+INSTALL( FILES SearchResultSelectionDialog.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )

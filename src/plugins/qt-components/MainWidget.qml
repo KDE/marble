@@ -169,6 +169,10 @@ Rectangle {
         function getRouting() {
             return map.routing
         }
+        
+        function getSearch() {
+            return map.search
+        }
 
     }
     
@@ -237,6 +241,10 @@ Rectangle {
     
     function getRouting() {
         return map.getRouting()
+    }
+    
+    function getSearch() {
+        return map.getSearch()
     }
 
 }
