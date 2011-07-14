@@ -13,7 +13,7 @@
 
 #include "KmlElementDictionary.h"
 #include "GeoDataLookAt.h"
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 #include "GeoDataContainer.h"
 #include "GeoDataPlacemark.h"
 

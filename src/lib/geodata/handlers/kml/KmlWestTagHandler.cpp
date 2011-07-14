@@ -14,7 +14,7 @@
 
 #include "KmlElementDictionary.h"
 #include "GeoDataLatLonAltBox.h"
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 
 namespace Marble
 {

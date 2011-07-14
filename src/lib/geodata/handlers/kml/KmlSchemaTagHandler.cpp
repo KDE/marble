@@ -27,7 +27,7 @@
 
 #include "GeoDataDocument.h"
 
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 
 namespace Marble
 {

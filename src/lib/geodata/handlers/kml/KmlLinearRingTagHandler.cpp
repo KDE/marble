@@ -28,7 +28,7 @@
 #include "GeoDataPolygon.h"
 #include "GeoDataMultiGeometry.h"
 
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 
 namespace Marble
 {
