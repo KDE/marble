@@ -49,6 +49,11 @@ MarblePlacemarkModel::MarblePlacemarkModel( QObject *parent )
     : QAbstractListModel( parent ),
       d( new Private )
 {
+    QHash<int,QByteArray> roles = roleNames();
+    roles[DescriptionRole] = "description";
+    roles[LongitudeRole] = "longitude";
+    roles[LatitudeRole] = "latitude";
+    setRoleNames( roles );
 }
 
 MarblePlacemarkModel::~MarblePlacemarkModel()
@@ -121,6 +126,10 @@ QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
         return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->geometry() );
     } else if ( role == ObjectPointerRole ) {
         return qVariantFromValue( dynamic_cast<GeoDataObject*>( d->m_placemarkContainer->at( index.row() ) ) );
+    } else if ( role == LongitudeRole ) {
+        return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->coordinate().longitude( GeoDataCoordinates::Degree ) );
+    } else if ( role == LatitudeRole ) {
+        return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->coordinate().latitude( GeoDataCoordinates::Degree ) );
     } else
         return QVariant();
 }

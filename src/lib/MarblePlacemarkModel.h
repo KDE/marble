@@ -60,7 +60,9 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
       ObjectPointerRole,               ///< The pointer to a specific object
       GmtRole,                         ///< The Greenwich Mean Time
       DstRole,                         ///< The Daylight Saving Time
-      GeometryRole                     ///< The GeoDataGeometry geometry
+      GeometryRole,                    ///< The GeoDataGeometry geometry
+      LongitudeRole,                   ///< The longitude in degree (for use in QML)
+      LatitudeRole                     ///< The latitude in degree (for use in QML)
     };
 
     /**

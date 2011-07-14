@@ -63,7 +63,7 @@ public:
 MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( MarbleRunnerManager* parent, PluginManager* pluginManager ) :
         q( parent ),
         m_marbleModel( 0 ),
-        m_model( new MarblePlacemarkModel ),
+        m_model( new MarblePlacemarkModel( parent ) ),
         m_routeRequest( 0 ),
         m_pluginManager( pluginManager )
 {
@@ -75,7 +75,7 @@ MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( MarbleRunnerManager* par
 
 MarbleRunnerManagerPrivate::~MarbleRunnerManagerPrivate()
 {
-    delete m_model;
+    // nothing to do
 }
 
 QList<RunnerPlugin*> MarbleRunnerManagerPrivate::plugins( RunnerPlugin::Capability capability )
