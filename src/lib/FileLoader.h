@@ -19,6 +19,7 @@ namespace Marble
 {
 class GeoDataContainer;
 class GeoDataDocument;
+class FileLoaderPrivate;
 
 class FileLoader : public QThread
 {
@@ -34,24 +35,12 @@ class FileLoader : public QThread
     Q_SIGNALS:
         void loaderFinished( FileLoader* );
         void newGeoDataDocumentAdded( GeoDataDocument* );
-    private:
-        void importKml( const QString& filename );
-        void importKmlFromData();
-        void loadFile(const QString &filename );
-        void saveFile(const QString& filename );
-        void savePlacemarks(QDataStream &out, const GeoDataContainer *container);
-        void loadPntFile( const QString &fileName );
 
-        void setupStyle( GeoDataDocument *doc, GeoDataContainer *container );
-        void createFilterProperties( GeoDataContainer *container );
-        int cityPopIdx( qint64 population ) const;
-        int spacePopIdx( qint64 population ) const;
-        int areaPopIdx( qreal area ) const;
+private:
+        friend class FileLoaderPrivate;
 
-        QString m_filepath;
-        QString m_contents;
-        DocumentRole m_documentRole;
-        GeoDataDocument *m_document;
+        FileLoaderPrivate *d;
+
 };
 
 } // namespace Marble

@@ -33,42 +33,76 @@ namespace Marble
 // distance of 180deg in arcminutes
 const qreal INT2RAD = M_PI / 10800.0;
 
+class FileLoaderPrivate
+{
+public:
+    FileLoaderPrivate( FileLoader* parent, const QString& file, DocumentRole role )
+        : q( parent),
+          m_filepath ( file ),
+          m_documentRole ( role )
+    {
+    };
+
+    FileLoaderPrivate( FileLoader* parent, const QString& contents, const QString& file, DocumentRole role )
+        : q( parent ),
+          m_filepath ( file ),
+          m_contents ( contents ),
+          m_documentRole ( role )
+    {
+    };
+
+    void importKml( const QString& filename );
+    void importKmlFromData();
+    void loadFile(const QString &filename );
+    void saveFile(const QString& filename );
+    void savePlacemarks(QDataStream &out, const GeoDataContainer *container);
+    void loadPntFile( const QString &fileName );
+
+    void setupStyle( GeoDataDocument *doc, GeoDataContainer *container );
+    void createFilterProperties( GeoDataContainer *container );
+    int cityPopIdx( qint64 population ) const;
+    int spacePopIdx( qint64 population ) const;
+    int areaPopIdx( qreal area ) const;
+
+    FileLoader *q;
+    QString m_filepath;
+    QString m_contents;
+    DocumentRole m_documentRole;
+    GeoDataDocument *m_document;
+
+};
+
 FileLoader::FileLoader( QObject* parent, const QString& file, DocumentRole role = UnknownDocument )
     : QThread( parent ),
-      m_filepath( file ),
-      m_contents( QString() ),
-      m_documentRole( role ),
-      m_document( 0 )
+      d( new FileLoaderPrivate( this, file, role ) )
 {
 }
 
 FileLoader::FileLoader( QObject* parent, const QString& contents, const QString& file, DocumentRole role = UnknownDocument)
     : QThread( parent ),
-      m_filepath( file ),
-      m_contents( contents ),
-      m_documentRole( role ),
-      m_document( 0 )
+      d( new FileLoaderPrivate( this, contents, file, role ) )
 {
 }
 
 FileLoader::~FileLoader()
 {
+    delete d;
 }
 
 QString FileLoader::path() const
 {
-    return m_filepath;
+    return d->m_filepath;
 }
 
 void FileLoader::run()
 {
-    if ( m_contents.isEmpty() ) {
+    if ( d->m_contents.isEmpty() ) {
         QString defaultCacheName;
         QString defaultSourceName;
 
-        mDebug() << "starting parser for" << m_filepath;
+        mDebug() << "starting parser for" << d->m_filepath;
 
-        QFileInfo fileinfo( m_filepath );
+        QFileInfo fileinfo( d->m_filepath );
         QString path = fileinfo.path();
         if ( path == "." ) path.clear();
         QString name = fileinfo.completeBaseName();
@@ -80,7 +114,7 @@ void FileLoader::run()
             defaultSourceName   = path + '/' + name + '.' + suffix;
         }
         else {
-            if ( m_filepath.contains( '/' ) ) {
+            if ( d->m_filepath.contains( '/' ) ) {
                 // _relative_ path: "maps/mars/viking/patrick.kml"
                 // defaultCacheName = MarbleDirs::path( path + '/' + name + ".cache" );
                 defaultSourceName   = MarbleDirs::path( path + '/' + name + '.' + suffix );
@@ -111,21 +145,21 @@ void FileLoader::run()
             }
 
             if ( !cacheoutdated ) {
-                loadFile( defaultCacheName );
+                d->loadFile( defaultCacheName );
             }
         }
         else {
             if( suffix.compare( "pnt", Qt::CaseInsensitive ) == 0 ) {
-                loadPntFile( m_filepath );
+                d->loadPntFile( d->m_filepath );
             }
             else {
                 mDebug() << "No recent Default Placemark Cache File available!";
                 if ( QFile::exists( defaultSourceName ) ) {
                     // Read the KML file.
-                    importKml( defaultSourceName );
+                    d->importKml( defaultSourceName );
 
                     if (!defaultCacheName.isEmpty() ) {
-                        saveFile(defaultCacheName);
+                        d->saveFile(defaultCacheName);
                     }
                 }
                 else {
@@ -135,7 +169,7 @@ void FileLoader::run()
         }
     } else {
         // Read the KML Data
-        importKmlFromData();
+        d->importKmlFromData();
     }
 
     emit loaderFinished( this );
@@ -143,7 +177,7 @@ void FileLoader::run()
 
 const quint32 MarbleMagicNumber = 0x31415926;
 
-void FileLoader::importKml( const QString& filename )
+void FileLoaderPrivate::importKml( const QString& filename )
 {
     GeoDataParser parser( GeoData_UNKNOWN );
 
@@ -172,10 +206,10 @@ void FileLoader::importKml( const QString& filename )
 
     mDebug() << "newGeoDataDocumentAdded" << m_filepath;
 
-    emit newGeoDataDocumentAdded( m_document );
+    emit q->newGeoDataDocumentAdded( m_document );
 }
 
-void FileLoader::importKmlFromData()
+void FileLoaderPrivate::importKmlFromData()
 {
     GeoDataParser parser( GeoData_KML );
 
@@ -199,10 +233,10 @@ void FileLoader::importKmlFromData()
 
     mDebug() << "newGeoDataDocumentAdded" << m_filepath;
 
-    emit newGeoDataDocumentAdded( m_document );
+    emit q->newGeoDataDocumentAdded( m_document );
 }
 
-void FileLoader::loadFile( const QString &filename )
+void FileLoaderPrivate::loadFile( const QString &filename )
 {
     QFile file( filename );
     file.open( QIODevice::ReadOnly );
@@ -276,10 +310,10 @@ void FileLoader::loadFile( const QString &filename )
     m_document->setVisible( false );
     setupStyle( m_document, m_document );
     createFilterProperties( m_document );
-    emit newGeoDataDocumentAdded( m_document );
+    emit q->newGeoDataDocumentAdded( m_document );
 }
 
-void FileLoader::saveFile( const QString& filename )
+void FileLoaderPrivate::saveFile( const QString& filename )
 {
 
     if ( !QDir( MarbleDirs::localPath() + "/placemarks/" ).exists() )
@@ -301,7 +335,7 @@ void FileLoader::saveFile( const QString& filename )
     savePlacemarks(out, m_document);
 }
 
-void FileLoader::savePlacemarks(QDataStream &out, const GeoDataContainer *container)
+void FileLoaderPrivate::savePlacemarks(QDataStream &out, const GeoDataContainer *container)
 {
 
     qreal lon;
@@ -335,7 +369,7 @@ void FileLoader::savePlacemarks(QDataStream &out, const GeoDataContainer *contai
     }
 }
 
-void FileLoader::loadPntFile( const QString &fileName )
+void FileLoaderPrivate::loadPntFile( const QString &fileName )
 {
     QFile  file( fileName );
 
@@ -383,11 +417,11 @@ void FileLoader::loadPntFile( const QString &fileName )
 
     file.close();
 
-    emit newGeoDataDocumentAdded( m_document );
+    emit q->newGeoDataDocumentAdded( m_document );
 
 }
 
-void FileLoader::setupStyle( GeoDataDocument *doc, GeoDataContainer *container )
+void FileLoaderPrivate::setupStyle( GeoDataDocument *doc, GeoDataContainer *container )
 {
     QVector<GeoDataFeature*>::Iterator i = container->begin();
     QVector<GeoDataFeature*>::Iterator const end = container->end();
@@ -414,7 +448,7 @@ void FileLoader::setupStyle( GeoDataDocument *doc, GeoDataContainer *container )
     }
 }
 
-void FileLoader::createFilterProperties( GeoDataContainer *container )
+void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
 {
 
     QVector<GeoDataFeature*>::Iterator i = container->begin();
@@ -591,7 +625,7 @@ void FileLoader::createFilterProperties( GeoDataContainer *container )
     }
 }
 
-int FileLoader::cityPopIdx( qint64 population ) const
+int FileLoaderPrivate::cityPopIdx( qint64 population ) const
 {
     int popidx = 15;
 
@@ -613,7 +647,7 @@ int FileLoader::cityPopIdx( qint64 population ) const
     return popidx;
 }
 
-int FileLoader::spacePopIdx( qint64 population ) const
+int FileLoaderPrivate::spacePopIdx( qint64 population ) const
 {
     int popidx = 18;
 
@@ -636,7 +670,7 @@ int FileLoader::spacePopIdx( qint64 population ) const
     return popidx;
 }
 
-int FileLoader::areaPopIdx( qreal area ) const
+int FileLoaderPrivate::areaPopIdx( qreal area ) const
 {
     int popidx = 17;
     if      ( area <  200000  )      popidx=11;
