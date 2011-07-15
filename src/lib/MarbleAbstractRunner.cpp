@@ -55,6 +55,12 @@ void MarbleAbstractRunner::retrieveRoute( RouteRequest* )
     emit routeCalculated( 0 );
 }
 
+void MarbleAbstractRunner::parseFile( const QString &, DocumentRole )
+{
+    // dummy implementation
+    emit parsingFinished( 0 );
+}
+
 }
 
 #include "MarbleAbstractRunner.moc"

@@ -14,6 +14,7 @@
 #include "marble_export.h"
 #include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataTypes.h"
 
 #include <QtCore/QThread>
 #include <QtCore/QVector>
@@ -73,6 +74,14 @@ public:
       */
     virtual void search( const QString &searchTerm );
 
+    /**
+      * Start a file parsing. Called by MarbleRunnerManager, runners
+      * are expected to return the result via the parsingFinished signal.
+      * If implemented in a plugin, make sure to include Parsing in the
+      * plugin capabilities, otherwise MarbleRunnerManager will ignore the plugin
+      */
+    virtual void parseFile( const QString &fileName, DocumentRole role );
+
 Q_SIGNALS:
 
     /**
@@ -92,6 +101,12 @@ Q_SIGNALS:
       * To be emitted by runners after a @see retrieveRoute call.
       */
     void routeCalculated( GeoDataDocument* route );
+
+    /**
+      * File parsing is finished, result in the given document object.
+      * To be emitted by runners after a @see parseFile call.
+      */
+    void parsingFinished( GeoDataDocument* document );
 
 protected:
     /**

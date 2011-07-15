@@ -36,7 +36,8 @@ public:
         None = 0x0, // The plugin is useless
         Search = 0x1, // The plugin can search for placemarks
         ReverseGeocoding = 0x2, // The plugin can do reverse geocoding
-        Routing = 0x4 // The plugin can calculate routes
+        Routing = 0x4, // The plugin can calculate routes
+        Parsing = 0x8 // The plugin can parse files
     };
 
     /** One plugin can support multiple tasks */

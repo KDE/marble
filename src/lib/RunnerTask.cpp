@@ -80,6 +80,19 @@ void RoutingTask::runTask( QEventLoop *localEventLoop )
     runner()->retrieveRoute( m_routeRequest );
 }
 
+ParsingTask::ParsingTask( MarbleAbstractRunner* runner, const QString& fileName, DocumentRole role ) :
+        RunnerTask( runner ), m_fileName( fileName ), m_role( role )
+{
+    // nothing to do
+}
+
+void ParsingTask::runTask( QEventLoop *localEventLoop )
+{
+    QObject::connect( runner(), SIGNAL( parsingFinished(GeoDataDocument*) ),
+                      localEventLoop, SLOT( quit() ) );
+    runner()->parseFile( m_fileName, m_role );
+}
+
 }
 
 #include "RunnerTask.moc"

@@ -12,6 +12,7 @@
 #define MARBLE_MARBLERUNNERMANAGER_H
 
 #include "GeoDataCoordinates.h"
+#include "GeoDataTypes.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QVector>
@@ -69,6 +70,12 @@ public:
       */
     void retrieveRoute( RouteRequest *request );
 
+    /**
+      * Parse the file using the runners for various formats
+      * The result is returned through the @see parsingFinished signal
+      */
+    void parseFile( const QString& fileName, DocumentRole role );
+
 signals:
     /**
       * Placemarks were added to or removed from the model
@@ -98,6 +105,11 @@ signals:
       */
     void routeRetrieved( GeoDataDocument* route );
 
+    /**
+      * The file was parsed successfully
+      */
+    void parsingFinished( GeoDataDocument* document );
+
     /** @todo: add signals that reverse geocoding and routing have finished
       * to be able to cope with misbehaving runners
       */
@@ -109,10 +121,14 @@ private slots:
 
     void addRoutingResult( GeoDataDocument* route );
 
+    void addParsingResult( GeoDataDocument* document );
+
 private:
     Q_PRIVATE_SLOT( d, void cleanupSearchTask( RunnerTask* task ) )
 
     Q_PRIVATE_SLOT( d, void cleanupRoutingTask( RunnerTask* task ) )
+
+    Q_PRIVATE_SLOT( d, void cleanupParsingTask( RunnerTask* task ) )
 
     friend class MarbleRunnerManagerPrivate;
 
