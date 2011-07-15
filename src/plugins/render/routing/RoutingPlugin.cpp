@@ -323,7 +323,7 @@ void RoutingPluginPrivate::updateDestinationInformation()
             } else {
                 if ( !m_routeCompleted ) {
                     m_audio->announceDestination();
-                    QString content = "Arrived at destination. <a href=\"#reverse\">Calculate the way back.</a>";
+                    QString content = QObject::tr( "Arrived at destination. <a href=\"#reverse\">Calculate the way back.</a>" );
                     m_widget.instructionLabel->setText( richText( "%1" ).arg( content ) );
                 }
                 m_routeCompleted = true;
