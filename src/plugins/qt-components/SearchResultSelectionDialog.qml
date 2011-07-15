@@ -14,17 +14,21 @@ import org.kde.edu.marble 0.11
 Rectangle {
     id: searchResultSelectionDialog
     color: "white"
+    property int searchIndex
+    signal selected( int index, string text, real lat, real lon )
     ListView {
         id: resultView
         anchors.fill: parent
         anchors.margins: UiConstants.DefaultMargin
         model: main.getSearch().searchResultModel()
         spacing: 10
-        signal selected( string text, real lat, real lon )
 
         delegate:
             Rectangle {
                 id: result
+                property string destinationText: display
+                property real lon: longitude
+                property real lat: latitude
                 border.width: 1
                 border.color: "blue"
                 radius: 15
@@ -47,9 +51,12 @@ Rectangle {
             onClicked: {
                 var x = mouseX + resultView.contentX
                 var y = mouseY + resultView.contentY
-                var item = resultView.model.index( resultView.indexAt( x, y ) )
+                // FIXME better way to query data?
+                resultView.currentIndex = resultView.indexAt( x, y )
+                console.log( "current index: ", resultView.currentIndex )
+                var item = resultView.currentItem
                 searchResultSelectionDialog.visible = false
-                selected( item.display, item.coordinate.longitude, item.coordinate.latitude )
+                searchResultSelectionDialog.selected( searchResultSelectionDialog.searchIndex, item.destinationText, item.lon, item.lat )
             }
         }
     }

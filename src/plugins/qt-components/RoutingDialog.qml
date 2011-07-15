@@ -18,12 +18,13 @@ Rectangle {
         height: 310
         width: parent.width
         clip: true
+        ListModel {
+            id: routingModel
+        }
         ListView {
             id: routingView
             anchors.fill: parent
-            model: ListModel {
-                id: routingModel
-            }
+            model: routingModel
 
             delegate:
                 Row {
@@ -34,6 +35,9 @@ Rectangle {
                         Keys.onPressed: {
                             console.log( "text changed: ", text )
                             routingModel.get( index ).destinationText = text
+                            main.getSearch().find( text )
+                            resultSelectionDialog.searchIndex = index
+                            resultSelectionDialog.visible = true
                         }
                     }
                     Image {
@@ -45,6 +49,7 @@ Rectangle {
                             anchors.fill: parent
                             onClicked: {
                                 routingModel.remove( index )
+                                calculateRoute()
                             }
                         }
                     }
@@ -62,15 +67,7 @@ Rectangle {
                 width: 200
                 platformStyle: ButtonStyle { fontPixelSize: 20 }
                 onClicked: {
-                    console.log( "routing started..." )
-                    for( var i = 0; i < routingView.count; i++ ) {
-                        console.log( "search: ", i, routingView.model.get( i ).destinationText )
-                        main.getSearch().find( routingView.model.get( i ).destinationText )
-                        //console.log( "results: ", main.getSearch().searchResultModel().rowCount )
-                        //if( main.getSearch().searchResultModel().rowCount > 1 ) {
-                            resultSelectionDialog.visible = true
-                        //}
-                    }
+                    calculateRoute()
                 }
             }
             Button {
@@ -89,6 +86,26 @@ Rectangle {
         id: resultSelectionDialog
         visible: false
         anchors.fill: parent
+        Component.onCompleted: {
+            resultSelectionDialog.selected.connect( setRoutingPoint )
+        }
+        function setRoutingPoint( index, text, lon, lat ) {
+            main.getSearch().find( "" )
+            console.log( "setRoutingPoint: ", index, text, lon, lat )
+            routingModel.get( index ).display = text
+            routingModel.get( index ).longitude = lon
+            routingModel.get( index ).latitude = lat
+        }
+    }
+    
+    function calculateRoute() {
+        console.log( "routing started..." )
+        main.getRouting().clearRoute()
+        for( var i = 0; i < routingView.count; i++ ) {
+            console.log( "search: ", i, routingView.model.get( i ).destinationText, routingView.model.get( i ).longitude, routingView.model.get( i ).latitude
+            )
+            main.getRouting().setVia( i, routingView.model.get( i ).longitude, routingView.model.get( i ).latitude )
+        }
     }
     
 }
