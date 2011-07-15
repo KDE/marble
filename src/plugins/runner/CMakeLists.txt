@@ -10,6 +10,9 @@ add_subdirectory( gosmore )
 add_subdirectory( openrouteservice )
 add_subdirectory( routino )
 
+#Parsing
+add_subdirectory( pnt )
+
 # traveling-salesman works, but it is quite slow (tested version 1.0.3-RC1)
 #add_subdirectory( traveling-salesman )
 
