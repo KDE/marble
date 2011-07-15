@@ -11,6 +11,7 @@ add_subdirectory( openrouteservice )
 add_subdirectory( routino )
 
 #Parsing
+add_subdirectory( gpx )
 add_subdirectory( pnt )
 
 # traveling-salesman works, but it is quite slow (tested version 1.0.3-RC1)
