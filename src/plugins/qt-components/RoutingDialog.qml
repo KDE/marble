@@ -37,7 +37,7 @@ Rectangle {
                             routingModel.get( index ).destinationText = text
                             main.getSearch().find( text )
                             resultSelectionDialog.searchIndex = index
-                            resultSelectionDialog.visible = true
+                            resultSelectionDialog.load()
                         }
                     }
                     Image {
@@ -61,6 +61,7 @@ Rectangle {
         anchors.top: routingRect.bottom
         anchors.left: parent.left
         anchors.topMargin: 10
+        anchors.leftMargin: 10
         Column {
             Button {
                 text: "Go!"

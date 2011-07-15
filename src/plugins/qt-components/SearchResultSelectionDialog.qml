@@ -53,7 +53,6 @@ Rectangle {
                 var y = mouseY + resultView.contentY
                 // FIXME better way to query data?
                 resultView.currentIndex = resultView.indexAt( x, y )
-                console.log( "current index: ", resultView.currentIndex )
                 var item = resultView.currentItem
                 searchResultSelectionDialog.visible = false
                 searchResultSelectionDialog.selected( searchResultSelectionDialog.searchIndex, item.destinationText, item.lon, item.lat )
@@ -65,13 +64,30 @@ Rectangle {
         z: 1
         anchors.fill: parent
         color: "white"
-        Label {
-            text: "Searching..."
+        Column {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            Label {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "Searching..."
+            }
+            BusyIndicator {
+                anchors.horizontalCenter: parent.horizontalCenter
+                platformStyle: BusyIndicatorStyle {
+                    size: "medium"
+                    period: 800
+                    numberOfFrames: 5
+                }
+                running: loadRect.visible
+            }
         }
-        // FIXME fancy search animation ;)
     }
     Component.onCompleted: {
         main.getSearch().searchFinished.connect( hideLoadRect )
+    }
+    function load() {
+        searchResultSelectionDialog.visible = true
+        loadRect.visible = true
     }
     function hideLoadRect() {
         resultView.model = main.getSearch().searchResultModel()
