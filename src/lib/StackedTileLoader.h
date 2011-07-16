@@ -39,8 +39,7 @@ namespace Marble
 {
 
 class StackedTile;
-class MapThemeManager;
-class HttpDownloadManager;
+class TileLoader;
 class SunLocator;
 
 class StackedTileLoaderPrivate;
@@ -69,8 +68,7 @@ class StackedTileLoader : public QObject
          * @param downloadManager The download manager that shall be used to fetch
          *                        the tiles from a remote resource.
          */
-        StackedTileLoader( HttpDownloadManager * const downloadManager,
-                           MapThemeManager * const mapThemeManager,
+        StackedTileLoader( TileLoader *tileLoader,
                            SunLocator * const sunLocator );
         virtual ~StackedTileLoader();
 
@@ -137,6 +135,10 @@ class StackedTileLoader : public QObject
          */
         void clear();
 
+        /**
+         */
+        void updateTile( TileId const & tileId, QImage const &tileImage );
+
     Q_SIGNALS:
         /**
          * This signal is emitted whenever a requested tile has been
@@ -144,11 +146,6 @@ class StackedTileLoader : public QObject
          */
         void tileUpdateAvailable( TileId const & stacedTileId );
         void tileUpdatesAvailable();
-
-    private Q_SLOTS:
-        /**
-         */
-        void updateTile( TileId const & tileId, QImage const &tileImage );
 
     private:
         Q_DISABLE_COPY( StackedTileLoader )
