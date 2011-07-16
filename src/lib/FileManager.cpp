@@ -34,7 +34,16 @@ public:
         : m_model( model ),
         m_t ( 0 )
     {
-    }
+    };
+
+    ~FileManagerPrivate()
+    {
+        foreach ( FileLoader *loader, m_loaderList ) {
+            if ( loader ) {
+                loader->wait();
+            }
+        }
+    };
 
     MarbleModel* const m_model;
     QList<FileLoader*> m_loaderList;
@@ -53,12 +62,6 @@ FileManager::FileManager( MarbleModel *model, QObject *parent )
 
 FileManager::~FileManager()
 {
-    foreach ( FileLoader *loader, d->m_loaderList ) {
-        if ( loader ) {
-            loader->wait();
-        }
-    }
-
     delete d;
 }
 
@@ -153,15 +156,15 @@ GeoDataDocument * FileManager::at( int index )
 
 void FileManager::addGeoDataDocument( GeoDataDocument* document )
 {
-    d->m_fileItemList.append( document );
-    d->m_model->treeModel()->addDocument( document );
-    emit fileAdded( d->m_fileItemList.indexOf( document ) );
-
     if ( document->name().isEmpty() && !document->fileName().isEmpty() )
     {
         QFileInfo file( document->fileName() );
         document->setName( file.baseName() );
     }
+
+    d->m_fileItemList.append( document );
+    d->m_model->treeModel()->addDocument( document );
+    emit fileAdded( d->m_fileItemList.indexOf( document ) );
 }
 
 void FileManager::cleanupLoader( FileLoader* loader )
@@ -173,10 +176,6 @@ void FileManager::cleanupLoader( FileLoader* loader )
     }
     if ( d->m_loaderList.isEmpty()  )
     {
-        mDebug() << "Empty loader list, connecting";
-        QTime t;
-        t.start();
-        mDebug() << "Done " << t.elapsed() << " ms";
         qDebug() << "Finished loading all placemarks " << d->m_t->elapsed();
         delete d->m_t;
         d->m_t = 0;
