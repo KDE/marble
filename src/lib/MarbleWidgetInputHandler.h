@@ -57,6 +57,10 @@ class MARBLE_EXPORT MarbleWidgetInputHandler  : public QObject
      */
     bool isMouseButtonPopupEnabled( Qt::MouseButton mouseButton ) const;
 
+    void setPanViaArrowsEnabled( bool enabled );
+
+    bool panViaArrowsEnabled() const;
+
  Q_SIGNALS:
     // Mouse button menus
     void lmbRequest( int, int );

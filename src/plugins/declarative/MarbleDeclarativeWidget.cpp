@@ -47,6 +47,7 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     connect( &m_center, SIGNAL(longitudeChanged()), this, SLOT(updateCenterPosition()));
 
     m_marbleWidget->inputHandler()->setMouseButtonPopupEnabled( Qt::LeftButton, false );
+    m_marbleWidget->inputHandler()->setPanViaArrowsEnabled( false );
 }
 
 QStringList MarbleWidget::activeFloatItems() const
