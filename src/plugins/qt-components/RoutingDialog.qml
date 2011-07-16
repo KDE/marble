@@ -33,9 +33,10 @@ Rectangle {
                         width: 200
                         height: 35
                         Keys.onPressed: {
+                            console.log( "text changed: ", text )
+                            routingModel.get( index ).destinationText = text
                             if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter ) {
                                 if( text.trim() != "" ) {
-                                    routingModel.get( index ).destinationText = text
                                     main.getSearch().find( text )
                                     resultSelectionDialog.searchIndex = index
                                     resultSelectionDialog.load()

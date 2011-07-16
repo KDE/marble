@@ -27,6 +27,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QSize>
 #include <QtCore/QVector>
+#include <QtGui/QImage>
 
 #include "GeoSceneTexture.h"
 #include "TileId.h"
@@ -90,7 +91,7 @@ class StackedTileLoader : public QObject
          * @param stackedTileId The Id of the requested tile, containing the x and y coordinate
          *                      and the zoom level.
          */
-        StackedTile* loadTile( TileId const &stackedTileId );
+        const StackedTile* loadTile( TileId const &stackedTileId );
         void downloadTile( TileId const & stackedTileId );
 
         /**
@@ -138,6 +139,8 @@ class StackedTileLoader : public QObject
         /**
          */
         void updateTile( TileId const & tileId, QImage const &tileImage );
+
+        void update();
 
     Q_SIGNALS:
         /**

@@ -24,7 +24,7 @@ Rectangle {
         id: searchBar
         visible: false
         anchors.top: parent.top
-        anchors.left: parent.left
+        anchors.left: mainWidget.left
         anchors.right: parent.right
         height: 35
         property bool activated: false
@@ -40,8 +40,7 @@ Rectangle {
         id: mainWidget
         anchors.top: parent.top
         anchors.bottom: mainToolBar.top
-        //anchors.left: routingDialog.right
-        anchors.left: parent.left
+        anchors.left: routingDialog.right
         anchors.right: parent.right
     }
     
@@ -75,12 +74,36 @@ Rectangle {
     RoutingDialog {
         id: routingDialog
         visible: false
-        anchors.top: mainWidget.top
+        anchors.top: main.top
         anchors.left: main.left
         anchors.bottom: mainToolBar.top
-        width: 240
+        width: visible ? 240 : 0
     }
     
+    Rectangle {
+        color: "grey"
+        opacity: 0.5
+        visible: !searchBar.visible
+        anchors.top: routingDialog.top
+        anchors.left: routingDialog.right
+        width: routingButton.width
+        height: routingButton.height
+        radius: 5
+        Image {
+            id: routingButton
+            opacity: 1.0
+            source: "image://theme/icon-m-common-drilldown-arrow"
+            smooth: true
+            transform: Rotation { origin.x: 16; origin.y: 16; angle: routingDialog.visible ? 180 : 0 }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    routingDialog.visible = !routingDialog.visible
+                }
+            }
+        }
+    }
+
     ToolBar {
         id: mainToolBar
         anchors.left: parent.left
@@ -116,7 +139,7 @@ Rectangle {
             ToolIcon {
                 id: searchButton
                 iconId: "toolbar-search"
-                visible: !settingsPage.visible
+                visible: !settingsPage.visible && !routingDialog.visible
                 anchors.right: settingsButton.left
                 anchors.bottom: parent.bottom
                 MouseArea {

@@ -46,6 +46,7 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( bool inputEnabled READ inputEnabled WRITE setInputEnabled )
     Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
     Q_PROPERTY( QStringList activeFloatItems READ activeFloatItems WRITE setActiveFloatItems )
+    Q_PROPERTY( QStringList activeRenderPlugins READ activeRenderPlugins WRITE setActiveRenderPlugins )
     Q_PROPERTY( Marble::Declarative::Tracking* tracking READ tracking NOTIFY trackingChanged )
     Q_PROPERTY( Marble::Declarative::Routing* routing READ routing NOTIFY routingChanged )
     Q_PROPERTY( Marble::Declarative::Search* search READ search NOTIFY searchChanged )
@@ -61,6 +62,10 @@ public:
     int zoom() const;
 
     void setZoom( int zoom );
+
+    void setActiveRenderPlugins( const QStringList &items );
+
+    QStringList activeRenderPlugins() const;
 
 Q_SIGNALS:
     /** Forwarded from MarbleWidget. Zoom value and/or center position have changed */

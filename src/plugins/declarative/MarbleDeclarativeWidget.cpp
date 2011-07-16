@@ -20,6 +20,7 @@
 #include "MarbleWidgetInputHandler.h"
 #include "MarbleMath.h"
 #include "AbstractFloatItem.h"
+#include "RenderPlugin.h"
 #include "MarbleMap.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
@@ -47,6 +48,7 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     connect( &m_center, SIGNAL(longitudeChanged()), this, SLOT(updateCenterPosition()));
 
     m_marbleWidget->inputHandler()->setMouseButtonPopupEnabled( Qt::LeftButton, false );
+    m_marbleWidget->inputHandler()->setPanViaArrowsEnabled( false );
 }
 
 QStringList MarbleWidget::activeFloatItems() const
@@ -65,6 +67,25 @@ void MarbleWidget::setActiveFloatItems( const QStringList &items )
     foreach( AbstractFloatItem * floatItem, m_marbleWidget->floatItems() ) {
         floatItem->setEnabled( items.contains( floatItem->nameId() ) );
         floatItem->setVisible( items.contains( floatItem->nameId() ) );
+    }
+}
+
+QStringList MarbleWidget::activeRenderPlugins() const
+{
+    QStringList result;
+    foreach( RenderPlugin * plugin, m_marbleWidget->renderPlugins() ) {
+        if ( plugin->enabled() && plugin->visible() ) {
+            result << plugin->nameId();
+        }
+    }
+    return result;
+}
+
+void MarbleWidget::setActiveRenderPlugins( const QStringList &items )
+{
+    foreach( RenderPlugin * plugin, m_marbleWidget->renderPlugins() ) {
+        plugin->setEnabled( items.contains( plugin->nameId() ) );
+        plugin->setVisible( items.contains( plugin->nameId() ) );
     }
 }
 

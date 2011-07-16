@@ -58,6 +58,7 @@ public:
     QTimer *m_mouseWheelTimer;
     Qt::MouseButtons m_disabledMouseButtons;
     qreal m_wheelZoomTargetDistance;
+    bool m_panViaArrowsEnabled;
 };
 
 MarbleWidgetInputHandler::Protected::Protected( MarbleWidget *widget )
@@ -66,7 +67,8 @@ MarbleWidgetInputHandler::Protected::Protected( MarbleWidget *widget )
       m_positionSignalConnected( false ),
       m_mouseWheelTimer( 0 ),
       m_disabledMouseButtons( Qt::NoButton ),
-      m_wheelZoomTargetDistance( 0.0 )
+      m_wheelZoomTargetDistance( 0.0 ),
+      m_panViaArrowsEnabled( true )
 {
 }
 
@@ -118,6 +120,15 @@ bool MarbleWidgetInputHandler::isMouseButtonPopupEnabled( Qt::MouseButton mouseB
     return !( d->m_disabledMouseButtons & mouseButton );
 }
 
+void MarbleWidgetInputHandler::setPanViaArrowsEnabled( bool enabled )
+{
+    d->m_panViaArrowsEnabled = enabled;
+}
+
+bool MarbleWidgetInputHandler::panViaArrowsEnabled() const
+{
+    return d->m_panViaArrowsEnabled;
+}
 
 class MarbleWidgetDefaultInputHandler::Private
 {
@@ -628,7 +639,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 dirY = -1;
 
             if ( event->button() == Qt::LeftButton
-                 && e->type() == QEvent::MouseButtonPress ) {
+                 && e->type() == QEvent::MouseButtonPress && panViaArrowsEnabled() ) {
 
                 d->m_lmbTimer.stop();                
                 if ( polarity < 0 )
@@ -690,7 +701,11 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 d->m_arrowCur [1][1] = QCursor( Qt::PointingHandCursor );
         }
 
-        MarbleWidgetInputHandler::d->m_widget->setCursor( d->m_arrowCur[dirX+1][dirY+1] );
+        if ( panViaArrowsEnabled() ) {
+            MarbleWidgetInputHandler::d->m_widget->setCursor( d->m_arrowCur[dirX+1][dirY+1] );
+        } else {
+            MarbleWidgetInputHandler::d->m_widget->setCursor( d->m_arrowCur [1][1] );
+        }
 
         // let others, especially float items, still process the event
         // Mouse move events need to be eaten to avoid the default oxygen behavior of

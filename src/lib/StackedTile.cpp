@@ -53,7 +53,7 @@ static const uchar **jumpTableFromQImage8( const QImage &img )
 
 
 StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles ) :
-      AbstractTilePrivate( id ), 
+      m_id( id ), 
       m_resultTile( resultImage ),
       m_depth( resultImage.depth() ),
       m_isGrayscale( resultImage.isGrayscale() ),
@@ -216,14 +216,9 @@ int StackedTilePrivate::calcByteCount( const QImage &resultImage, const QVector<
 
 
 StackedTile::StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles )
-    : AbstractTile( *new StackedTilePrivate( id, resultImage, tiles ), 0 ), d(0)
+    : d( new StackedTilePrivate( id, resultImage, tiles ) )
 {
     Q_ASSERT( !tiles.isEmpty() );
-
-    // The d-ptr is cached as a member to avoid having to use d_func()
-    // or the Q_D macro in the pixel() function. Otherwise it leads
-    // to measurable runtime overhead because pixel() is called frequently.
-    d = d_func();
 
     if ( d->m_resultTile.isNull() ) {
         qWarning() << "An essential tile is missing. Please rerun the application.";
@@ -249,6 +244,12 @@ StackedTile::StackedTile( TileId const &id, QImage const &resultImage, QVector<Q
 
 StackedTile::~StackedTile()
 {
+    delete d;
+}
+
+TileId const& StackedTile::id() const
+{
+    return d->m_id;
 }
 
 uint StackedTile::pixel( int x, int y ) const

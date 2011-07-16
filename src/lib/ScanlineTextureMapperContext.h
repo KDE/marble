@@ -80,7 +80,8 @@ private:
     qreal const      m_normGlobalWidth;
     qreal const      m_normGlobalHeight;
 
-    StackedTile *m_tile;
+    const StackedTile *m_tile;
+    int m_deltaLevel;
 
     // Coordinate transformations:
 
@@ -88,6 +89,8 @@ private:
     // ( with origin in upper left corner, measured in pixel) 
     int          m_tilePosX;
     int          m_tilePosY;
+    int m_vTileStartX;
+    int m_vTileStartY;
 
     // Converts global texture coordinates 
     // ( with origin in center, measured in pixel) 

@@ -75,7 +75,7 @@ Rectangle {
             id: map
             width: 600
             height: 400
-            activeFloatItems: [ "scalebar", "navigation" ]
+            activeRenderPlugins: [ "navigation", "scalebar" ]
 
             search {
                 placemarkDelegate: myDelegate

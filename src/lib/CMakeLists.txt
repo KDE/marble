@@ -140,7 +140,6 @@ set(marblewidget_SRCS
     CacheStoragePolicy.cpp
     FileStoragePolicy.cpp
     FileStorageWatcher.cpp
-    AbstractTile.cpp
     StackedTile.cpp
     TileId.cpp
     StackedTileLoader.cpp

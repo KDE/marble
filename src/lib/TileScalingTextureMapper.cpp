@@ -119,10 +119,19 @@ void TileScalingTextureMapper::mapTexture( QPainter *painter, ViewParams *viewPa
 
                 const QRectF rect = QRectF( QPointF( xLeft, yTop ), QPointF( xRight, yBottom ) );
                 const TileId stackedId = TileId( 0, tileZoomLevel(), ( ( tileX % numTilesX ) + numTilesX ) % numTilesX, tileY );
-                StackedTile *const tile = m_tileLoader->loadTile( stackedId );
-                tile->setUsed( true );
+                const StackedTile *const tile = m_tileLoader->loadTile( stackedId );
 
-                imagePainter.drawImage( rect, *tile->resultTile() );
+                const QImage *const toScale = tile->resultTile();
+                const int deltaLevel = stackedId.zoomLevel() - tile->id().zoomLevel();
+                const int restTileX = stackedId.x() % ( 1 << deltaLevel );
+                const int restTileY = stackedId.y() % ( 1 << deltaLevel );
+                const int partWidth = toScale->width() >> deltaLevel;
+                const int partHeight = toScale->height() >> deltaLevel;
+                const int startX = restTileX * partWidth;
+                const int startY = restTileY * partHeight;
+                QImage const part = toScale->copy( startX, startY, partWidth, partHeight ).scaled( toScale->size() );
+
+                imagePainter.drawImage( rect, part );
             }
         }
 
@@ -142,17 +151,27 @@ void TileScalingTextureMapper::mapTexture( QPainter *painter, ViewParams *viewPa
 
                 const QRectF rect = QRectF( QPointF( xLeft, yTop ), QPointF( xRight, yBottom ) );
                 const TileId stackedId = TileId( 0, tileZoomLevel(), ( ( tileX % numTilesX ) + numTilesX ) % numTilesX, tileY );
-                StackedTile *const tile = m_tileLoader->loadTile( stackedId );
-                tile->setUsed( true );
+                const StackedTile *const tile = m_tileLoader->loadTile( stackedId );
 
                 const QSize size = QSize( qRound( rect.right() - rect.left() ), qRound( rect.bottom() - rect.top() ) );
                 const int cacheHash = 2 * ( size.width() % 2 ) + ( size.height() % 2 );
                 const TileId cacheId = TileId( cacheHash, stackedId.zoomLevel(), stackedId.x(), stackedId.y() );
+
                 QPixmap *im_cached = (*m_cache)[cacheId];
                 QPixmap *im = im_cached;
-                if ( im == 0 )
-                    im = new QPixmap( QPixmap::fromImage( tile->resultTile()->scaled( size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation ) ) );
+                if ( im == 0 ) {
+                    const QImage *const toScale = tile->resultTile();
+                    const int deltaLevel = stackedId.zoomLevel() - tile->id().zoomLevel();
+                    const int restTileX = stackedId.x() % ( 1 << deltaLevel );
+                    const int restTileY = stackedId.y() % ( 1 << deltaLevel );
+                    const int partWidth = toScale->width() >> deltaLevel;
+                    const int partHeight = toScale->height() >> deltaLevel;
+                    const int startX = restTileX * partWidth;
+                    const int startY = restTileY * partHeight;
+                    QImage const part = toScale->copy( startX, startY, partWidth, partHeight ).scaled( toScale->size() );
 
+                    im = new QPixmap( QPixmap::fromImage( part.scaled( size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation ) ) );
+                }
                 painter->drawPixmap( rect.topLeft(), *im );
 
                 if (im != im_cached)
