@@ -33,6 +33,7 @@
 #include "StackedTile.h"
 #include "StackedTileLoader.h"
 #include "TextureColorizer.h"
+#include "TileLoader.h"
 #include "ViewParams.h"
 
 namespace Marble
@@ -45,12 +46,14 @@ public:
 
     void mapChanged();
     void updateTextureLayers();
+    void updateTile( const TileId &tileId, const QImage &tileImage );
 
     const GeoSceneLayer *sceneLayer() const;
     GeoSceneGroup *textureLayerSettings() const;
 
 public:
     TextureLayer  *const m_parent;
+    TileLoader m_loader;
     StackedTileLoader    m_tileLoader;
     QCache<TileId, QPixmap> m_pixmapCache;
     TextureMapperInterface *m_texmapper;
@@ -60,7 +63,8 @@ public:
 
 TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator, TextureLayer *parent )
     : m_parent( parent )
-    , m_tileLoader( downloadManager, mapThemeManager, sunLocator )
+    , m_loader( downloadManager, mapThemeManager )
+    , m_tileLoader( &m_loader, sunLocator )
     , m_pixmapCache( 100 )
     , m_texmapper( 0 )
     , m_texcolorizer( 0 )
@@ -96,6 +100,14 @@ void TextureLayer::Private::updateTextureLayers()
 
     m_tileLoader.setTextureLayers( result );
     m_pixmapCache.clear();
+}
+
+void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage )
+{
+    const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );
+    m_pixmapCache.remove( stackedTileId );
+
+    m_tileLoader.updateTile( tileId, tileImage );
 }
 
 const GeoSceneLayer *TextureLayer::Private::sceneLayer() const
@@ -135,6 +147,8 @@ TextureLayer::TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManage
     : QObject()
     , d( new Private( mapThemeManager, downloadManager, sunLocator, this ) )
 {
+    connect( &d->m_loader, SIGNAL( tileCompleted( const TileId &, const QImage & ) ),
+             this, SLOT( updateTile( const TileId &, const QImage & ) ) );
 }
 
 TextureLayer::~TextureLayer()
