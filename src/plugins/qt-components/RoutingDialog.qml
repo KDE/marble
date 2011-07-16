@@ -33,11 +33,14 @@ Rectangle {
                         width: 200
                         height: 35
                         Keys.onPressed: {
-                            console.log( "text changed: ", text )
-                            routingModel.get( index ).destinationText = text
-                            main.getSearch().find( text )
-                            resultSelectionDialog.searchIndex = index
-                            resultSelectionDialog.load()
+                            if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter ) {
+                                if( text.trim() != "" ) {
+                                    routingModel.get( index ).destinationText = text
+                                    main.getSearch().find( text )
+                                    resultSelectionDialog.searchIndex = index
+                                    resultSelectionDialog.load()
+                                }
+                            }
                         }
                     }
                     Image {
@@ -76,7 +79,6 @@ Rectangle {
                 width: 200
                 platformStyle: ButtonStyle { fontPixelSize: 20 }
                 onClicked: {
-                    console.log( "adding input field" )
                     routingModel.append( { "destinationText": "" } )
                 }
             }

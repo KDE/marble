@@ -61,13 +61,11 @@ Rectangle {
         
         search {
             placemarkDelegate: 
-                Rectangle {
+                Image {
                     id: searchDelegate
-                    color: "red"
-                    width: 20
-                    height: 20
-                    border.width: 3
-                    border.color: "black"
+                    source: "qrc:/placemark.svg"
+                    width: 30
+                    fillMode: Image.PreserveAspectFit
                     smooth: true
                     Rectangle {
                         id: routingOptions

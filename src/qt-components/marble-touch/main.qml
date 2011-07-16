@@ -40,7 +40,8 @@ Rectangle {
         id: mainWidget
         anchors.top: parent.top
         anchors.bottom: mainToolBar.top
-        anchors.left: routingDialog.right
+        //anchors.left: routingDialog.right
+        anchors.left: parent.left
         anchors.right: parent.right
     }
     
@@ -73,6 +74,7 @@ Rectangle {
     
     RoutingDialog {
         id: routingDialog
+        visible: false
         anchors.top: mainWidget.top
         anchors.left: main.left
         anchors.bottom: mainToolBar.top
