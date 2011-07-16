@@ -52,6 +52,7 @@ class NavigationWidgetPrivate
     NavigationWidgetPrivate()
         : m_document( new GeoDataDocument ) {
     m_document->setDocumentRole( SearchResultDocument );
+    m_document->setName("Search Results");
     m_treeModel.setRootDocument( m_document );
     };
 
