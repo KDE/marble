@@ -120,7 +120,7 @@ void GeoDataFeature::initializeDefaultStyles()
 
     s_defaultStyle[Default]
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/default_location.png" ) ),
-              QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::white ) );
+              QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
 
     s_defaultStyle[Unknown]
         = new GeoDataStyle( QPixmap(),
