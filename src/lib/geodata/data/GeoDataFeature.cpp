@@ -467,6 +467,23 @@ void GeoDataFeature::setStyleUrl( const QString &value)
 {
     detach();
     d->m_styleUrl = value;
+    QString styleUrl = value;
+    styleUrl.remove('#');
+    GeoDataObject *object = parent();
+    bool found = false;
+    while ( object && !found ) {
+        if( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+            GeoDataDocument *doc = static_cast<GeoDataDocument*> ( object );
+            GeoDataStyleMap &styleMap = doc->styleMap( styleUrl );
+            if( !styleMap.value( QString( "normal" ) ).isEmpty() ) {
+                styleUrl = styleMap.value( QString( "normal" ) );
+                styleUrl.remove('#');
+            }
+            setStyle( &doc->style( styleUrl ) );
+            found = true;
+        }
+        object = object->parent();
+    }
 }
 
 bool GeoDataFeature::isVisible() const

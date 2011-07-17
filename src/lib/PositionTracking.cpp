@@ -112,10 +112,10 @@ PositionTracking::PositionTracking( MarbleModel *model )
     styleMap.insert("normal", QString("#").append(style.styleId()));
     d->m_document->addStyleMap(styleMap);
     d->m_document->addStyle(style);
+    d->m_document->append(placemark);
 
     placemark->setStyleUrl(QString("#").append(styleMap.styleId()));
     placemark->setStyle( &d->m_document->style(style.styleId()));
-    d->m_document->append(placemark);
 
     d->m_marbleModel->treeModel()->addDocument(d->m_document);
 }
