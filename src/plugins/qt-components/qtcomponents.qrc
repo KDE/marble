@@ -12,5 +12,6 @@
         <file>WaypointView.qml</file>
         <file>RoutingDialog.qml</file>
         <file>SearchResultSelectionDialog.qml</file>
+        <file>ActivitySelectionView.qml</file>
     </qresource>
 </RCC>

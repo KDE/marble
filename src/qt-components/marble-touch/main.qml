@@ -19,6 +19,11 @@ Rectangle {
     MarbleSettings {
         id: settings
     }
+    
+    ActivitySelectionView {
+        id: activitySelection
+        anchors.fill: parent
+    }
 
     SearchBar {
         id: searchBar
@@ -38,6 +43,7 @@ Rectangle {
 
     MainWidget {
         id: mainWidget
+        visible: false
         anchors.top: parent.top
         anchors.bottom: mainToolBar.top
         anchors.left: routingDialog.right
@@ -83,7 +89,7 @@ Rectangle {
     Rectangle {
         color: "grey"
         opacity: 0.5
-        visible: !searchBar.visible
+        visible: !searchBar.visible && mainWidget.visible
         anchors.top: routingDialog.top
         anchors.left: routingDialog.right
         width: routingButton.width
@@ -106,6 +112,7 @@ Rectangle {
 
     ToolBar {
         id: mainToolBar
+        visible: false
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -150,17 +157,28 @@ Rectangle {
             ToolIcon {
                 id: settingsButton
                 iconId: "toolbar-settings"
-                anchors.right: parent.right
+                anchors.right: activityButton.left
                 anchors.bottom: parent.bottom
                 MouseArea {
                     anchors.fill: parent
                     onClicked: { settingsPage.visible = !settingsPage.visible }
                 }
             }
+            ToolIcon {
+                id: activityButton
+                iconId: "toolbar-view-menu-dimmed-white"
+                visible: !settingsPage.visible
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: { activitySelection.visible = true; activitySelection.activity = -1 }
+                }
+            }
         }
     }
     
-    states: [
+    /*states: [
         State {
             name: "settingsVisible"
             when: settingsPage.visible
@@ -177,6 +195,129 @@ Rectangle {
             when: !settingsPage.visible && searchBar.activated
             PropertyChanges { target: mainWidget; anchors.top: searchBar.bottom }
             PropertyChanges { target: searchBar;  focus: true }
+        }
+    ]*/
+
+    states: [
+        State {
+            name: "activitySelection"
+            when: activitySelection.visible && activitySelection.activity == -1
+            PropertyChanges { target: mainWidget; visible: false }
+            PropertyChanges { target: searchBar;  visible: false }
+            PropertyChanges { target: settingsPage; visible: false }
+            PropertyChanges { target: waypointView;  visible: false }
+            PropertyChanges { target: routeRequestView; visible: false }
+            PropertyChanges { target: routingDialog;  visible: false }
+            PropertyChanges { target: mainToolBar; visible: false }
+        },
+        State {
+            name: "Virtual Globe"
+            when: activitySelection.activity == 0
+            PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainWidget; visible: true }
+            PropertyChanges { target: mainToolBar; visible: true }
+            PropertyChanges { target: settings; projection: "Spherical" }
+            PropertyChanges { target: settings; mapTheme: "earth/bluemarble/bluemarble.dgml" }
+        },
+        State {
+            name: "Drive"
+            when: activitySelection.activity == 1
+            PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainWidget; visible: true }
+            PropertyChanges { target: mainToolBar; visible: true }
+            PropertyChanges { target: routingDialog; visible: true }
+            PropertyChanges { target: settings; projection: "Mercator" }
+            PropertyChanges { target: settings; mapTheme: "earth/openstreetmap/openstreetmap.dgml" }
+        },
+        State {
+            name: "Cycle"
+            when: activitySelection.activity == 2
+            PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainWidget; visible: true }
+            PropertyChanges { target: mainToolBar; visible: true }
+            PropertyChanges { target: routingDialog; visible: true }
+            PropertyChanges { target: settings; projection: "Mercator" }
+            PropertyChanges { target: settings; mapTheme: "earth/openstreetmap/openstreetmap.dgml" }
+        },
+        State {
+            name: "Walk"
+            when: activitySelection.activity == 3
+            PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainWidget; visible: true }
+            PropertyChanges { target: mainToolBar; visible: true }
+            PropertyChanges { target: routingDialog; visible: true }
+            PropertyChanges { target: settings; projection: "Mercator" }
+            PropertyChanges { target: settings; mapTheme: "earth/openstreetmap/openstreetmap.dgml" }
+        },
+        State {
+            name: "Guidance"
+            when: activitySelection.activity == 4
+            PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainToolBar; visible: true }
+        },
+        State {
+            name: "Search"
+            when: activitySelection.activity == 5
+            PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainWidget; visible: true }
+            PropertyChanges { target: mainWidget; anchors.top: searchBar.bottom }
+            PropertyChanges { target: mainToolBar; visible: true }
+            PropertyChanges { target: searchBar; visible: true }
+        },
+        State {
+            name: "Bookmarks"
+            when: activitySelection.activity == 6
+            PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainToolBar; visible: true }
+        },
+        State {
+            name: "Around Me"
+            when: activitySelection.activity == 7
+            PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainToolBar; visible: true }
+        },
+        State {
+            name: "Weather"
+            when: activitySelection.activity == 8
+            PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainToolBar; visible: true }
+        },
+        State {
+            name: "Tracking"
+            when: activitySelection.activity == 9
+            PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainWidget; visible: true }
+            PropertyChanges { target: mainToolBar; visible: true }
+            PropertyChanges { target: settings; projection: "Mercator" }
+            PropertyChanges { target: settings; mapTheme: "earth/openstreetmap/openstreetmap.dgml" }
+            PropertyChanges { target: settings; gpsTracking: true }
+            PropertyChanges { target: settings; showPosition: true }
+            PropertyChanges { target: settings; showTrack: true }
+            PropertyChanges { target: settings; autoCenter: true }
+        },
+        State {
+            name: "Geocaching"
+            when: activitySelection.activity == 10
+            PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainToolBar; visible: true }
+        },
+        State {
+            name: "Friends"
+            when: activitySelection.activity == 11
+            PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainToolBar; visible: true }
+        },
+        State {
+            name: "Download"
+            when: activitySelection.activity == 12
+            PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainToolBar; visible: true }
+        },
+        State {
+            name: "Configuration"
+            when: activitySelection.activity == 13
+            PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainToolBar; visible: true }
         }
     ]
 
