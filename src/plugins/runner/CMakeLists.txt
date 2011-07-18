@@ -13,6 +13,7 @@ add_subdirectory( routino )
 #Parsing
 add_subdirectory( gpx )
 add_subdirectory( pnt )
+add_subdirectory( cache )
 
 # traveling-salesman works, but it is quite slow (tested version 1.0.3-RC1)
 #add_subdirectory( traveling-salesman )
