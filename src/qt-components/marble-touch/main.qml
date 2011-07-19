@@ -198,6 +198,7 @@ Rectangle {
         }
     ]*/
 
+    // see http://techbase.kde.org/Projects/Marble/Devices_and_Use_Cases
     states: [
         State {
             name: "activitySelection"

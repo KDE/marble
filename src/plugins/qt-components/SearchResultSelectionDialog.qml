@@ -82,15 +82,42 @@ Rectangle {
             }
         }
     }
+    Rectangle {
+        id: noResultsRect
+        visible: false
+        z: 1
+        anchors.fill: parent
+        color: "white"
+        Column {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            Label {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "No search results."
+            }
+            Button {
+                text: "Back"
+                width: parent.width
+                onClicked: {
+                    noResultsRect.visible = false
+                    searchResultSelectionDialog.visible = false
+                }
+            }
+        }
+    }
     Component.onCompleted: {
-        main.getSearch().searchFinished.connect( hideLoadRect )
+        main.getSearch().searchFinished.connect( showSearchResults )
     }
     function load() {
         searchResultSelectionDialog.visible = true
         loadRect.visible = true
     }
-    function hideLoadRect() {
+    function showSearchResults() {
         resultView.model = main.getSearch().searchResultModel()
-        loadRect.visible = false
+        noResultsRect.visible = loadRect.visible = false
+        console.log( "numResults: ", resultView.model.numResults )
+        if( resultView.model.numResults < 1 ) {
+            noResultsRect.visible = true
+        }
     }
 }

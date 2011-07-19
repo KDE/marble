@@ -40,6 +40,8 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
 
     Q_OBJECT
 
+    Q_PROPERTY( int numResults READ rowCount )
+
  public:
     /**
      * The roles of the place marks.
