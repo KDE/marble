@@ -22,6 +22,9 @@ using namespace Marble;
 
 static const uint **jumpTableFromQImage32( const QImage &img )
 {
+    if ( img.depth() != 48 && img.depth() != 32 )
+        return 0;
+
     const int  height = img.height();
     const int  bpl    = img.bytesPerLine() / 4;
     const uint  *data = reinterpret_cast<const QRgb*>(img.bits());
@@ -38,6 +41,9 @@ static const uint **jumpTableFromQImage32( const QImage &img )
 
 static const uchar **jumpTableFromQImage8( const QImage &img )
 {
+    if ( img.depth() != 8 && img.depth() != 1 )
+        return 0;
+
     const int  height = img.height();
     const int  bpl    = img.bytesPerLine();
     const uchar  *data = img.bits();
@@ -58,8 +64,8 @@ StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultIm
       m_depth( resultImage.depth() ),
       m_isGrayscale( resultImage.isGrayscale() ),
       m_tiles( tiles ),
-      jumpTable8( 0 ),
-      jumpTable32( 0 ),
+      jumpTable8( jumpTableFromQImage8( m_resultTile ) ),
+      jumpTable32( jumpTableFromQImage32( m_resultTile ) ),
       m_byteCount( calcByteCount( resultImage, tiles ) )
 {
 }
@@ -225,20 +231,8 @@ StackedTile::StackedTile( TileId const &id, QImage const &resultImage, QVector<Q
         return;
     }
 
-    switch ( d->m_depth ) {
-        case 48:
-        case 32:
-            delete [] d->jumpTable32;
-            d->jumpTable32 = jumpTableFromQImage32( d->m_resultTile );
-            break;
-        case 8:
-        case 1:
-            delete [] d->jumpTable8;
-            d->jumpTable8 = jumpTableFromQImage8( d->m_resultTile );
-            break;
-        default:
-            qWarning() << "Color depth" << d->m_depth << " is not supported.";
-            return;
+    if ( d->jumpTable32 == 0 && d->jumpTable8 == 0 ) {
+        qWarning() << "Color depth" << d->m_depth << " is not supported.";
     }
 }
 

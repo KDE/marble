@@ -35,8 +35,8 @@ class StackedTilePrivate
     const int       m_depth;
     const bool      m_isGrayscale;
     const QVector<QSharedPointer<TextureTile> > m_tiles;
-    const uchar   **jumpTable8;
-    const uint    **jumpTable32;
+    const uchar   **const jumpTable8;
+    const uint    **const jumpTable32;
     const int m_byteCount;
 
     explicit StackedTilePrivate( const TileId &id, const QImage &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles );
