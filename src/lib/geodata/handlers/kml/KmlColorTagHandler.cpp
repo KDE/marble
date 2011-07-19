@@ -26,7 +26,7 @@
 #include "MarbleDebug.h"
 #include "KmlElementDictionary.h"
 #include "GeoDataColorStyle.h"
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 
 namespace Marble
 {

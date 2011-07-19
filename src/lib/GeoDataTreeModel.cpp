@@ -22,7 +22,6 @@
 #include "GeoDataContainer.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataParser.h"
 #include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
 #include "FileManager.h"

@@ -28,7 +28,7 @@
 #include "GeoDataFeature.h"
 #include "GeoDataStyleMap.h"
 
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 
 namespace Marble
 {

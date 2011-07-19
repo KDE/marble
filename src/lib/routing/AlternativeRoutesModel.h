@@ -12,7 +12,6 @@
 #define MARBLE_ALTERNATIVEROUTESMODEL_H
 
 #include "GeoDataLineString.h"
-#include "MarblePlacemarkModel.h"
 
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QTime>
@@ -29,6 +28,7 @@ namespace Marble
 class AlternativeRoutesModelPrivate;
 class RouteRequest;
 class MarbleModel;
+class GeoDataDocument;
 
 class AlternativeRoutesModel : public QAbstractListModel
 {

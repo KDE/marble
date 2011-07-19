@@ -32,6 +32,7 @@
 #include "DataMigration.h"
 #include "FpsLayer.h"
 #include "GeoDataLatLonAltBox.h"
+#include "GeoDataPlacemark.h"
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"

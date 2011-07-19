@@ -167,7 +167,7 @@ void FileLoader::importKml( const QString& filename )
     m_document->setDocumentRole( m_documentRole );
     m_document->setFileName( m_filepath );
     setupStyle( m_document, m_document );
-
+    createFilterProperties( m_document );
     file.close();
 
     mDebug() << "newGeoDataDocumentAdded" << m_filepath;

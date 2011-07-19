@@ -270,6 +270,9 @@ void PlacemarkLayout::setCacheData()
 {
     const int rowCount = m_placemarkModel->rowCount();
 
+    m_paintOrder.clear();
+    qDeleteAll( m_visiblePlacemarks );
+    m_visiblePlacemarks.clear();
     m_placemarkCache.clear();
     for ( int i = 0; i != rowCount; ++i )
     {

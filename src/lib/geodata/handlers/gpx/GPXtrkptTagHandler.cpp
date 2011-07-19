@@ -22,7 +22,7 @@
 #include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 #include "GeoDataLineString.h"
 #include "GeoDataCoordinates.h"
 

@@ -15,7 +15,7 @@
 
 #include "global.h"
 #include "GeoDataLookAt.h"
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 #include "GeoDataCoordinates.h"
 
 
