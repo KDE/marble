@@ -20,6 +20,8 @@ PageStack {
     function back() {
         if( pageStack.depth == 1 ) {
             pageStack.visible = false
+            activitySelection.visible = true
+            activitySelection.activity = -1
         }
         else {
             pageStack.pop();

@@ -58,11 +58,11 @@ Rectangle {
             }
             ListElement {
                 name: "Search"
-                imagePath: "image://theme/icon-m-common-checkbox-checked"
+                imagePath: "/usr/share/icons/oxygen/128x128/actions/edit-find.png"
             }
             ListElement {
                 name: "Bookmarks"
-                imagePath: "image://theme/icon-m-common-checkbox-checked"
+                imagePath: "/usr/share/icons/oxygen/128x128/actions/bookmarks-organize.png"
             }
             ListElement {
                 name: "Around Me"
@@ -70,7 +70,7 @@ Rectangle {
             }
             ListElement {
                 name: "Weather"
-                imagePath: "image://theme/icon-m-common-checkbox-checked"
+                imagePath: "/usr/share/icons/oxygen/128x128/status/weather-showers-day.png"
             }
             ListElement {
                 name: "Tracking"
@@ -86,11 +86,11 @@ Rectangle {
             }
             ListElement {
                 name: "Download"
-                imagePath: "image://theme/icon-m-common-checkbox-checked"
+                imagePath: "/usr/share/icons/oxygen/128x128/places/folder-downloads.png"
             }
             ListElement {
                 name: "Configuration"
-                imagePath: "image://theme/icon-m-common-checkbox-checked"
+                imagePath: "/usr/share/icons/oxygen/128x128/actions/configure.png"
             }
         }
 

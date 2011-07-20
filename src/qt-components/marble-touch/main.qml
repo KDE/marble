@@ -119,84 +119,416 @@ Rectangle {
         tools: ToolBarLayout {
             id: toolBarLayout
             anchors.fill: parent
-            ToolIcon {
-                id: backButton
-                iconId: "toolbar-back"
-                visible: settingsPage.visible
-                anchors.left: parent.left
-                anchors.bottom: parent.bottom
-                onClicked: { settingsPage.back() }
-            }
-            ToolIcon {
-                id: waypointButton
-                iconId: "common-location-picker"
-                visible: !settingsPage.visible
-                anchors.right: routeRequestButton.left
-                anchors.bottom: parent.bottom
-                onClicked: { waypointView.visible = !waypointView.visible }
-            }
-            ToolIcon {
-                id: routeRequestButton
-                iconId: "toolbar-callhistory"
-                visible: !settingsPage.visible
-                anchors.right: searchButton.left
-                anchors.bottom: parent.bottom
-                onClicked: { routeRequestView.visible = !routeRequestView.visible }
-            }
-            ToolIcon {
-                id: searchButton
-                iconId: "toolbar-search"
-                visible: !settingsPage.visible && !routingDialog.visible
-                anchors.right: settingsButton.left
-                anchors.bottom: parent.bottom
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: { searchBar.visible = searchBar.activated = !searchBar.visible }
+            // FIXME icons
+            Row {
+                ToolIcon {
+                    id: backButton
+                    iconId: "toolbar-back"
+                    onClicked: { settingsPage.back() }
                 }
-            }
-            ToolIcon {
-                id: settingsButton
-                iconId: "toolbar-settings"
-                anchors.right: activityButton.left
-                anchors.bottom: parent.bottom
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: { settingsPage.visible = !settingsPage.visible }
+                ToolIcon {
+                    id: waypointButton
+                    iconId: "common-location-picker"
+                    onClicked: { waypointView.visible = !waypointView.visible }
                 }
-            }
-            ToolIcon {
-                id: activityButton
-                iconId: "toolbar-view-menu-dimmed-white"
-                visible: !settingsPage.visible
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                MouseArea {
-                    anchors.fill: parent
+                ToolIcon {
+                    id: routeRequestButton
+                    iconId: "toolbar-callhistory"
+                    onClicked: { routeRequestView.visible = !routeRequestView.visible }
+                }
+                ToolIcon {
+                    id: virtualGlobeButton
+                    iconId: "ovi-service-maps"
+                    onClicked: { main.state = "Virtual Globe" }
+                }
+                ToolIcon {
+                    id: driveButton
+                    iconId: "content-automobile"
+                    visible: !settingsPage.visible
+                    onClicked: { main.state = "Drive" }
+                }
+                ToolIcon {
+                    id: cycleButton
+                    iconId: "common-clock"
+                    onClicked: { main.state = "Cycle" }
+                }
+                ToolIcon {
+                    id: walkButton
+                    iconId: "camera-scene-sports-screen"
+                    onClicked: { main.state = "Walk" }
+                }
+                ToolIcon {
+                    id: guidanceButton
+                    iconId: "telephony-content-sms-dimmed"
+                    onClicked: { main.state = "Guidance" }
+                }
+                ToolIcon {
+                    id: bookmarksButton
+                    iconId: "content-bookmark"
+                    onClicked: { main.state = "Bookmarks" }
+                }
+                ToolIcon {
+                    id: aroundMeButton
+                    iconId: "transfer-sync"
+                    onClicked: { main.state = "Around Me" }
+                }
+                ToolIcon {
+                    id: weatherButton
+                    iconId: "weather-sunny-thunder"
+                    onClicked: { main.state = "Weather" }
+                }
+                ToolIcon {
+                    id: trackingButton
+                    iconId: "content-feed"
+                    onClicked: { main.state = "Tracking" }
+                }
+                ToolIcon {
+                    id: geocachingButton
+                    iconId: "email-combined-mailbox"
+                    onClicked: { main.state = "Geocaching" }
+                }
+                ToolIcon {
+                    id: friendsButton
+                    iconId: "conversation-group-chat"
+                    onClicked: { main.state = "Friends" }
+                }
+                ToolIcon {
+                    id: downloadButton
+                    iconId: "transfer-download"
+                    onClicked: { main.state = "Download" }
+                }
+                ToolIcon {
+                    id: searchButton
+                    iconId: "toolbar-search"
+                    onClicked: { main.state = "Search" }
+                }
+                ToolIcon {
+                    id: settingsButton
+                    iconId: "toolbar-settings"
+                    onClicked: { main.state = "Configuration" }
+                }
+                ToolIcon {
+                    id: activityButton
+                    iconId: "toolbar-view-menu-dimmed-white"
                     onClicked: { activitySelection.visible = true; activitySelection.activity = -1 }
                 }
             }
         }
+        states: [
+            State {
+                name: "activitySelection"
+                when: main.state == name
+            },
+            State {
+                name: "Virtual Globe"
+                when: main.state == name
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: waypointButton; visible: false }
+                PropertyChanges { target: routeRequestButton; visible: false }
+                PropertyChanges { target: virtualGlobeButton; visible: false }
+                PropertyChanges { target: driveButton; visible: false }
+                PropertyChanges { target: cycleButton; visible: false }
+                PropertyChanges { target: walkButton; visible: false }
+                PropertyChanges { target: guidanceButton; visible: false }
+                PropertyChanges { target: bookmarksButton; visible: false }
+                PropertyChanges { target: aroundMeButton; visible: false }
+                PropertyChanges { target: weatherButton; visible: false }
+                PropertyChanges { target: trackingButton; visible: false }
+                PropertyChanges { target: geocachingButton; visible: false }
+                PropertyChanges { target: friendsButton; visible: false }
+                PropertyChanges { target: downloadButton; visible: false }
+                PropertyChanges { target: searchButton; visible: true }
+                PropertyChanges { target: settingsButton; visible: true }
+                PropertyChanges { target: activityButton; visible: true }
+            },
+            State {
+                name: "Drive"
+                when: main.state == name
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: waypointButton; visible: false }
+                PropertyChanges { target: routeRequestButton; visible: false }
+                PropertyChanges { target: virtualGlobeButton; visible: true }
+                PropertyChanges { target: driveButton; visible: false }
+                PropertyChanges { target: cycleButton; visible: false }
+                PropertyChanges { target: walkButton; visible: false }
+                PropertyChanges { target: guidanceButton; visible: true }
+                PropertyChanges { target: bookmarksButton; visible: false }
+                PropertyChanges { target: aroundMeButton; visible: false }
+                PropertyChanges { target: weatherButton; visible: false }
+                PropertyChanges { target: trackingButton; visible: false }
+                PropertyChanges { target: geocachingButton; visible: false }
+                PropertyChanges { target: friendsButton; visible: false }
+                PropertyChanges { target: downloadButton; visible: false }
+                PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: settingsButton; visible: true }
+                PropertyChanges { target: activityButton; visible: true }
+            },
+            State {
+                name: "Cycle"
+                when: main.state == name
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: waypointButton; visible: false }
+                PropertyChanges { target: routeRequestButton; visible: false }
+                PropertyChanges { target: virtualGlobeButton; visible: true }
+                PropertyChanges { target: driveButton; visible: false }
+                PropertyChanges { target: cycleButton; visible: false }
+                PropertyChanges { target: walkButton; visible: false }
+                PropertyChanges { target: guidanceButton; visible: true }
+                PropertyChanges { target: bookmarksButton; visible: false }
+                PropertyChanges { target: aroundMeButton; visible: false }
+                PropertyChanges { target: weatherButton; visible: false }
+                PropertyChanges { target: trackingButton; visible: false }
+                PropertyChanges { target: geocachingButton; visible: false }
+                PropertyChanges { target: friendsButton; visible: false }
+                PropertyChanges { target: downloadButton; visible: false }
+                PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: settingsButton; visible: true }
+                PropertyChanges { target: activityButton; visible: true }
+            },
+            State {
+                name: "Walk"
+                when: main.state == name
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: waypointButton; visible: false }
+                PropertyChanges { target: routeRequestButton; visible: false }
+                PropertyChanges { target: virtualGlobeButton; visible: true }
+                PropertyChanges { target: driveButton; visible: false }
+                PropertyChanges { target: cycleButton; visible: false }
+                PropertyChanges { target: walkButton; visible: false }
+                PropertyChanges { target: guidanceButton; visible: true }
+                PropertyChanges { target: bookmarksButton; visible: false }
+                PropertyChanges { target: aroundMeButton; visible: false }
+                PropertyChanges { target: weatherButton; visible: false }
+                PropertyChanges { target: trackingButton; visible: false }
+                PropertyChanges { target: geocachingButton; visible: false }
+                PropertyChanges { target: friendsButton; visible: false }
+                PropertyChanges { target: downloadButton; visible: false }
+                PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: settingsButton; visible: true }
+                PropertyChanges { target: activityButton; visible: true }
+            },
+            State {
+                name: "Guidance"
+                when: main.state == name
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: waypointButton; visible: false }
+                PropertyChanges { target: routeRequestButton; visible: false }
+                PropertyChanges { target: virtualGlobeButton; visible: true }
+                PropertyChanges { target: driveButton; visible: true }
+                PropertyChanges { target: cycleButton; visible: true }
+                PropertyChanges { target: walkButton; visible: true }
+                PropertyChanges { target: guidanceButton; visible: false }
+                PropertyChanges { target: bookmarksButton; visible: false }
+                PropertyChanges { target: aroundMeButton; visible: false }
+                PropertyChanges { target: weatherButton; visible: false }
+                PropertyChanges { target: trackingButton; visible: false }
+                PropertyChanges { target: geocachingButton; visible: false }
+                PropertyChanges { target: friendsButton; visible: false }
+                PropertyChanges { target: downloadButton; visible: false }
+                PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: settingsButton; visible: true }
+                PropertyChanges { target: activityButton; visible: true }
+            },
+            State {
+                name: "Search"
+                when: main.state == name
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: waypointButton; visible: false }
+                PropertyChanges { target: routeRequestButton; visible: false }
+                PropertyChanges { target: virtualGlobeButton; visible: true }
+                PropertyChanges { target: driveButton; visible: false }
+                PropertyChanges { target: cycleButton; visible: false }
+                PropertyChanges { target: walkButton; visible: false }
+                PropertyChanges { target: guidanceButton; visible: false }
+                PropertyChanges { target: bookmarksButton; visible: true }
+                PropertyChanges { target: aroundMeButton; visible: true }
+                PropertyChanges { target: weatherButton; visible: false }
+                PropertyChanges { target: trackingButton; visible: false }
+                PropertyChanges { target: geocachingButton; visible: false }
+                PropertyChanges { target: friendsButton; visible: false }
+                PropertyChanges { target: downloadButton; visible: false }
+                PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: settingsButton; visible: true }
+                PropertyChanges { target: activityButton; visible: true }
+            },
+            State {
+                name: "Bookmarks"
+                when: main.state == name
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: waypointButton; visible: false }
+                PropertyChanges { target: routeRequestButton; visible: false }
+                PropertyChanges { target: virtualGlobeButton; visible: true }
+                PropertyChanges { target: driveButton; visible: false }
+                PropertyChanges { target: cycleButton; visible: false }
+                PropertyChanges { target: walkButton; visible: false }
+                PropertyChanges { target: guidanceButton; visible: false }
+                PropertyChanges { target: bookmarksButton; visible: false }
+                PropertyChanges { target: aroundMeButton; visible: true }
+                PropertyChanges { target: weatherButton; visible: false }
+                PropertyChanges { target: trackingButton; visible: false }
+                PropertyChanges { target: geocachingButton; visible: false }
+                PropertyChanges { target: friendsButton; visible: false }
+                PropertyChanges { target: downloadButton; visible: false }
+                PropertyChanges { target: searchButton; visible: true }
+                PropertyChanges { target: settingsButton; visible: true }
+                PropertyChanges { target: activityButton; visible: true }
+            },
+            State {
+                name: "Around Me"
+                when: main.state == name
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: waypointButton; visible: false }
+                PropertyChanges { target: routeRequestButton; visible: false }
+                PropertyChanges { target: virtualGlobeButton; visible: true }
+                PropertyChanges { target: driveButton; visible: false }
+                PropertyChanges { target: cycleButton; visible: false }
+                PropertyChanges { target: walkButton; visible: false }
+                PropertyChanges { target: guidanceButton; visible: false }
+                PropertyChanges { target: bookmarksButton; visible: true }
+                PropertyChanges { target: aroundMeButton; visible: false }
+                PropertyChanges { target: weatherButton; visible: false }
+                PropertyChanges { target: trackingButton; visible: false }
+                PropertyChanges { target: geocachingButton; visible: false }
+                PropertyChanges { target: friendsButton; visible: false }
+                PropertyChanges { target: downloadButton; visible: false }
+                PropertyChanges { target: searchButton; visible: true }
+                PropertyChanges { target: settingsButton; visible: true }
+                PropertyChanges { target: activityButton; visible: true }
+            },
+            State {
+                name: "Weather"
+                when: main.state == name
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: waypointButton; visible: false }
+                PropertyChanges { target: routeRequestButton; visible: false }
+                PropertyChanges { target: virtualGlobeButton; visible: true }
+                PropertyChanges { target: driveButton; visible: false }
+                PropertyChanges { target: cycleButton; visible: false }
+                PropertyChanges { target: walkButton; visible: false }
+                PropertyChanges { target: guidanceButton; visible: false }
+                PropertyChanges { target: bookmarksButton; visible: false }
+                PropertyChanges { target: aroundMeButton; visible: false }
+                PropertyChanges { target: weatherButton; visible: false }
+                PropertyChanges { target: trackingButton; visible: false }
+                PropertyChanges { target: geocachingButton; visible: false }
+                PropertyChanges { target: friendsButton; visible: false }
+                PropertyChanges { target: downloadButton; visible: false }
+                PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: settingsButton; visible: true }
+                PropertyChanges { target: activityButton; visible: true }
+            },
+            State {
+                name: "Tracking"
+                when: main.state == name
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: waypointButton; visible: false }
+                PropertyChanges { target: routeRequestButton; visible: false }
+                PropertyChanges { target: virtualGlobeButton; visible: true }
+                PropertyChanges { target: driveButton; visible: false }
+                PropertyChanges { target: cycleButton; visible: false }
+                PropertyChanges { target: walkButton; visible: false }
+                PropertyChanges { target: guidanceButton; visible: false }
+                PropertyChanges { target: bookmarksButton; visible: false }
+                PropertyChanges { target: aroundMeButton; visible: false }
+                PropertyChanges { target: weatherButton; visible: false }
+                PropertyChanges { target: trackingButton; visible: false }
+                PropertyChanges { target: geocachingButton; visible: false }
+                PropertyChanges { target: friendsButton; visible: false }
+                PropertyChanges { target: downloadButton; visible: false }
+                PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: settingsButton; visible: true }
+                PropertyChanges { target: activityButton; visible: true }
+            },
+            State {
+                name: "Geocaching"
+                when: main.state == name
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: waypointButton; visible: false }
+                PropertyChanges { target: routeRequestButton; visible: false }
+                PropertyChanges { target: virtualGlobeButton; visible: true }
+                PropertyChanges { target: driveButton; visible: false }
+                PropertyChanges { target: cycleButton; visible: true }
+                PropertyChanges { target: walkButton; visible: true }
+                PropertyChanges { target: guidanceButton; visible: false }
+                PropertyChanges { target: bookmarksButton; visible: false }
+                PropertyChanges { target: aroundMeButton; visible: false }
+                PropertyChanges { target: weatherButton; visible: false }
+                PropertyChanges { target: trackingButton; visible: false }
+                PropertyChanges { target: geocachingButton; visible: false }
+                PropertyChanges { target: friendsButton; visible: false }
+                PropertyChanges { target: downloadButton; visible: false }
+                PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: settingsButton; visible: true }
+                PropertyChanges { target: activityButton; visible: true }
+            },
+            State {
+                name: "Friends"
+                when: main.state == name
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: waypointButton; visible: false }
+                PropertyChanges { target: routeRequestButton; visible: false }
+                PropertyChanges { target: virtualGlobeButton; visible: true }
+                PropertyChanges { target: driveButton; visible: false }
+                PropertyChanges { target: cycleButton; visible: false }
+                PropertyChanges { target: walkButton; visible: false }
+                PropertyChanges { target: guidanceButton; visible: false }
+                PropertyChanges { target: bookmarksButton; visible: false }
+                PropertyChanges { target: aroundMeButton; visible: false }
+                PropertyChanges { target: weatherButton; visible: false }
+                PropertyChanges { target: trackingButton; visible: false }
+                PropertyChanges { target: geocachingButton; visible: false }
+                PropertyChanges { target: friendsButton; visible: false }
+                PropertyChanges { target: downloadButton; visible: false }
+                PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: settingsButton; visible: true }
+                PropertyChanges { target: activityButton; visible: true }
+            },
+            State {
+                name: "Download"
+                when: main.state == name
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: waypointButton; visible: false }
+                PropertyChanges { target: routeRequestButton; visible: false }
+                PropertyChanges { target: virtualGlobeButton; visible: true }
+                PropertyChanges { target: driveButton; visible: false }
+                PropertyChanges { target: cycleButton; visible: false }
+                PropertyChanges { target: walkButton; visible: false }
+                PropertyChanges { target: guidanceButton; visible: false }
+                PropertyChanges { target: bookmarksButton; visible: false }
+                PropertyChanges { target: aroundMeButton; visible: false }
+                PropertyChanges { target: weatherButton; visible: false }
+                PropertyChanges { target: trackingButton; visible: false }
+                PropertyChanges { target: geocachingButton; visible: false }
+                PropertyChanges { target: friendsButton; visible: false }
+                PropertyChanges { target: downloadButton; visible: false }
+                PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: settingsButton; visible: true }
+                PropertyChanges { target: activityButton; visible: true }
+            },
+            State {
+                name: "Configuration"
+                when: main.state == name
+                PropertyChanges { target: backButton; visible: true }
+                PropertyChanges { target: waypointButton; visible: false }
+                PropertyChanges { target: routeRequestButton; visible: false }
+                PropertyChanges { target: virtualGlobeButton; visible: true }
+                PropertyChanges { target: driveButton; visible: false }
+                PropertyChanges { target: cycleButton; visible: false }
+                PropertyChanges { target: walkButton; visible: false }
+                PropertyChanges { target: guidanceButton; visible: false }
+                PropertyChanges { target: bookmarksButton; visible: false }
+                PropertyChanges { target: aroundMeButton; visible: false }
+                PropertyChanges { target: weatherButton; visible: false }
+                PropertyChanges { target: trackingButton; visible: false }
+                PropertyChanges { target: geocachingButton; visible: false }
+                PropertyChanges { target: friendsButton; visible: false }
+                PropertyChanges { target: downloadButton; visible: false }
+                PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: settingsButton; visible: false }
+                PropertyChanges { target: activityButton; visible: true }
+            }
+        ]
     }
-    
-    /*states: [
-        State {
-            name: "settingsVisible"
-            when: settingsPage.visible
-            PropertyChanges { target: mainWidget; visible: false }
-            PropertyChanges { target: searchBar;  visible: false }
-        },
-        State {
-            name: "mainWithoutSearch"
-            when: !settingsPage.visible && !searchBar.activated
-            PropertyChanges { target: mainWidget; anchors.top: main.top }
-        },
-        State {
-            name: "mainWithSearch"
-            when: !settingsPage.visible && searchBar.activated
-            PropertyChanges { target: mainWidget; anchors.top: searchBar.bottom }
-            PropertyChanges { target: searchBar;  focus: true }
-        }
-    ]*/
 
     // see http://techbase.kde.org/Projects/Marble/Devices_and_Use_Cases
     states: [
@@ -319,6 +651,8 @@ Rectangle {
             when: activitySelection.activity == 13
             PropertyChanges { target: activitySelection; visible: false }
             PropertyChanges { target: mainToolBar; visible: true }
+            PropertyChanges { target: mainWidget; visible: false }
+            PropertyChanges { target: settingsPage; visible: true }
         }
     ]
 
