@@ -45,14 +45,13 @@ void GpxRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     GeoDataParser parser( GeoData_GPX );
 
     if ( !parser.read( &file ) ) {
-        qWarning( "Could not parse file!" );
+        emit parsingFinished( 0 );
         return;
     }
     GeoDocument* document = parser.releaseDocument();
     Q_ASSERT( document );
     GeoDataDocument* doc = static_cast<GeoDataDocument*>( document );
     doc->setDocumentRole( role );
-    doc->setFileName( fileName );
 
     file.close();
     emit parsingFinished( doc );

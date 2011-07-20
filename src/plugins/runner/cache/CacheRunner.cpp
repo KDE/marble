@@ -64,7 +64,6 @@ void CacheRunner::parseFile( const QString &fileName, DocumentRole role = Unknow
     */
     GeoDataDocument *document = new GeoDataDocument();
     document->setDocumentRole( role );
-    document->setFileName( fileName );
 
     in.setVersion( QDataStream::Qt_4_2 );
 

@@ -282,10 +282,8 @@ void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role 
     foreach( RunnerPlugin *plugin, plugins ) {
         started = true;
         MarbleAbstractRunner* runner = plugin->newRunner();
-        runner->setParent( this );
         connect( runner, SIGNAL( parsingFinished(GeoDataDocument*) ),
                  this, SLOT(addParsingResult(GeoDataDocument*)) );
-        runner->setModel( d->m_marbleModel );
         ParsingTask *task = new ParsingTask( runner, fileName, role );
         d->m_parsingTasks << task;
         connect( task, SIGNAL( finished( RunnerTask* ) ),

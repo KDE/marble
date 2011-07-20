@@ -12,6 +12,7 @@
 #include "GeoDataDocument.h"
 
 #include <QtCore/QFile>
+#include <QtCore/QFileInfo>
 
 namespace Marble
 {
@@ -35,6 +36,12 @@ GeoDataFeature::GeoDataVisualCategory PntRunner::category() const
 
 void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
 {
+    QFileInfo fileinfo( fileName );
+    if( fileinfo.suffix().compare( "pnt", Qt::CaseInsensitive ) != 0 ) {
+        emit parsingFinished( 0 );
+        return;
+    }
+
     QFile  file( fileName );
 
     file.open( QIODevice::ReadOnly );
@@ -43,7 +50,6 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
 
     GeoDataDocument *document = new GeoDataDocument();
     document->setDocumentRole( role );
-    document->setFileName( fileName );
 
     short  header;
     short  iLat;
@@ -82,6 +88,8 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     file.close();
     if ( geom->size() ) {
         emit parsingFinished( document );
+    } else {
+        emit parsingFinished( 0 );
     }
 }
 
