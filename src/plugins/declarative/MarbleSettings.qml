@@ -27,6 +27,10 @@ Item {
     property bool showTrack: settings.value( "MarbleWidget", "showTrack", false )
     property bool autoCenter: settings.value( "MarbleWidget", "autoCenter", false )
     property string projection: settings.value( "MarbleWidget", "projection", "Spherical" )
+    property variant defaultRenderPlugins: ["compass", "coordinate-grid", "progress", 
+                                            "crosshairs", "positionMarker", "sun", 
+                                            "stars", "scalebar"]
+    property variant activeRenderPlugins: settings.value( "MarbleWidget", "activeRenderPlugins", defaultRenderPlugins )
     
     Component.onDestruction: {
         settings.setValue( "MarbleWidget", "mapTheme", root.mapTheme )
@@ -39,5 +43,6 @@ Item {
         settings.setValue( "MarbleWidget", "showTrack", root.showTrack )
         settings.setValue( "MarbleWidget", "autoCenter", root.autoCenter )
         settings.setValue( "MarbleWidget", "projection", root.projection )
+        settings.setValue( "MarbleWidget", "activeRenderPlugins", root.activeRenderPlugins )
     }
 }

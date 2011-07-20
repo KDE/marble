@@ -542,6 +542,7 @@ Rectangle {
             PropertyChanges { target: routeRequestView; visible: false }
             PropertyChanges { target: routingDialog;  visible: false }
             PropertyChanges { target: mainToolBar; visible: false }
+            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Virtual Globe"
@@ -551,6 +552,7 @@ Rectangle {
             PropertyChanges { target: mainToolBar; visible: true }
             PropertyChanges { target: settings; projection: "Spherical" }
             PropertyChanges { target: settings; mapTheme: "earth/bluemarble/bluemarble.dgml" }
+            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Drive"
@@ -561,6 +563,7 @@ Rectangle {
             PropertyChanges { target: routingDialog; visible: true }
             PropertyChanges { target: settings; projection: "Mercator" }
             PropertyChanges { target: settings; mapTheme: "earth/openstreetmap/openstreetmap.dgml" }
+            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Cycle"
@@ -571,6 +574,7 @@ Rectangle {
             PropertyChanges { target: routingDialog; visible: true }
             PropertyChanges { target: settings; projection: "Mercator" }
             PropertyChanges { target: settings; mapTheme: "earth/openstreetmap/openstreetmap.dgml" }
+            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Walk"
@@ -581,12 +585,14 @@ Rectangle {
             PropertyChanges { target: routingDialog; visible: true }
             PropertyChanges { target: settings; projection: "Mercator" }
             PropertyChanges { target: settings; mapTheme: "earth/openstreetmap/openstreetmap.dgml" }
+            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Guidance"
             when: activitySelection.activity == 4
             PropertyChanges { target: activitySelection; visible: false }
             PropertyChanges { target: mainToolBar; visible: true }
+            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Search"
@@ -596,24 +602,31 @@ Rectangle {
             PropertyChanges { target: mainWidget; anchors.top: searchBar.bottom }
             PropertyChanges { target: mainToolBar; visible: true }
             PropertyChanges { target: searchBar; visible: true }
+            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Bookmarks"
             when: activitySelection.activity == 6
             PropertyChanges { target: activitySelection; visible: false }
             PropertyChanges { target: mainToolBar; visible: true }
+            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Around Me"
             when: activitySelection.activity == 7
             PropertyChanges { target: activitySelection; visible: false }
             PropertyChanges { target: mainToolBar; visible: true }
+            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Weather"
             when: activitySelection.activity == 8
             PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainWidget; visible: true }
             PropertyChanges { target: mainToolBar; visible: true }
+            PropertyChanges { target: settings; projection: "Spherical" }
+            PropertyChanges { target: settings; mapTheme: "earth/bluemarble/bluemarble.dgml" }
+            StateChangeScript { script: enablePlugin( "weather" ) }
         },
         State {
             name: "Tracking"
@@ -627,24 +640,31 @@ Rectangle {
             PropertyChanges { target: settings; showPosition: true }
             PropertyChanges { target: settings; showTrack: true }
             PropertyChanges { target: settings; autoCenter: true }
+            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Geocaching"
             when: activitySelection.activity == 10
             PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainWidget; visible: true }
             PropertyChanges { target: mainToolBar; visible: true }
+            PropertyChanges { target: settings; projection: "Mercator" }
+            PropertyChanges { target: settings; mapTheme: "earth/openstreetmap/openstreetmap.dgml" }
+            StateChangeScript { script: enablePlugin( "opencaching" ) }
         },
         State {
             name: "Friends"
             when: activitySelection.activity == 11
             PropertyChanges { target: activitySelection; visible: false }
             PropertyChanges { target: mainToolBar; visible: true }
+            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Download"
             when: activitySelection.activity == 12
             PropertyChanges { target: activitySelection; visible: false }
             PropertyChanges { target: mainToolBar; visible: true }
+            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Configuration"
@@ -653,6 +673,7 @@ Rectangle {
             PropertyChanges { target: mainToolBar; visible: true }
             PropertyChanges { target: mainWidget; visible: false }
             PropertyChanges { target: settingsPage; visible: true }
+            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         }
     ]
 
@@ -670,6 +691,15 @@ Rectangle {
 
     function getSearch() {
         return mainWidget.getSearch()
+    }
+    
+    // FIXME only enable default+passed?
+    function enablePlugin( name ) {
+        var tmp = settings.defaultRenderPlugins
+        if( tmp.indexOf( name ) == -1 ) {
+            tmp.push( name )
+            settings.activeRenderPlugins = tmp
+        }
     }
 
 }

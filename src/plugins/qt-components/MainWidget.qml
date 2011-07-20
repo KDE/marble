@@ -26,6 +26,7 @@ Rectangle {
         zoom: settings.quitZoom
         projection: settings.projection
         activeFloatItems: [ "compass", "scalebar", "progress" ]
+        activeRenderPlugins: settings.activeRenderPlugins
 
         // The grouped property tracking provides access to tracking related
         // properties
