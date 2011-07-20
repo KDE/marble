@@ -83,7 +83,7 @@ void FileManager::addFile( const QString& filepath, DocumentRole role )
             d->m_t = new QTime();
             d->m_t->start();
         }
-        FileLoader* loader = new FileLoader( this, filepath, role );
+        FileLoader* loader = new FileLoader( this, d->m_model, filepath, role );
         appendLoader( loader );
         d->m_pathList.append( filepath );
     }
@@ -98,7 +98,7 @@ void FileManager::addFile( const QStringList& filepaths, DocumentRole role )
 
 void FileManager::addData( const QString &name, const QString &data, DocumentRole role )
 {
-    FileLoader* loader = new FileLoader( this, data, name, role );
+    FileLoader* loader = new FileLoader( this, d->m_model, data, name, role );
     appendLoader( loader );
 }
 

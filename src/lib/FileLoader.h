@@ -20,13 +20,16 @@ namespace Marble
 class GeoDataContainer;
 class GeoDataDocument;
 class FileLoaderPrivate;
+class MarbleModel;
 
 class FileLoader : public QThread
 {
     Q_OBJECT
     public:
-        FileLoader( QObject* parent, const QString& file, DocumentRole role );
-        FileLoader( QObject* parent, const QString& contents, const QString& name, DocumentRole role );
+        FileLoader( QObject* parent, MarbleModel *model,
+                    const QString& file, DocumentRole role );
+        FileLoader( QObject* parent, MarbleModel *model,
+                    const QString& contents, const QString& name, DocumentRole role );
         virtual ~FileLoader();
 
         void run();
@@ -37,6 +40,8 @@ class FileLoader : public QThread
         void newGeoDataDocumentAdded( GeoDataDocument* );
 
 private:
+        Q_PRIVATE_SLOT ( d, void documentParsed( GeoDataDocument *) )
+
         friend class FileLoaderPrivate;
 
         FileLoaderPrivate *d;
