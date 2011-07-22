@@ -235,7 +235,7 @@ void StackedTileLoader::reloadVisibleTiles()
     foreach ( TileId const & id, d->m_tilesOnDisplay.keys() ) {
         if ( id.zoomLevel() != 0 && !d->m_tileCache.contains( id ) ) {
             const StackedTile * tile = d->createTile( id );
-            d->m_tileCache.insert( id, tile );
+            d->m_tileCache.insert( id, tile, tile->numBytes() );
         }
         const StackedTile *const displayedTile = ( id.zoomLevel() == 0 ? d->m_levelZeroHash.value( id )
                                                                        : d->m_tileCache.object( id ) );
@@ -288,7 +288,7 @@ void StackedTileLoader::update()
     foreach ( TileId const & id, requiredTiles ) {
             if ( !d->m_tileCache.contains( id ) ) {
                 const StackedTile *const tile = d->createTile( id );
-                d->m_tileCache.insert( id , tile );
+                d->m_tileCache.insert( id , tile, tile->numBytes() );
                 needsUpdate = true;
             }
     }
@@ -330,7 +330,7 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
         if ( stackedTileId.zoomLevel() == 0 ) {
             d->m_levelZeroHash.insert( stackedTileId, displayedTile );
         } else {
-            d->m_tileCache.insert( stackedTileId, displayedTile );
+            d->m_tileCache.insert( stackedTileId, displayedTile, displayedTile->numBytes() );
         }
 
         emit tileUpdateAvailable( stackedTileId );

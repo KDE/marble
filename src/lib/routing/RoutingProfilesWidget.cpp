@@ -43,7 +43,7 @@ RoutingProfilesWidget::RoutingProfilesWidget( MarbleWidget *marbleWidget )
     connect( m_profilesModel, SIGNAL( layoutChanged() ), SLOT( updateButtons() ) );
     connect( m_ui->profilesList, SIGNAL( doubleClicked( QModelIndex ) ), SLOT( configure() ) );
 
-    m_profileDialog = new RoutingProfileSettingsDialog( m_marbleWidget->model()->pluginManager(), m_profilesModel );
+    m_profileDialog = new RoutingProfileSettingsDialog( m_marbleWidget->model()->pluginManager(), m_profilesModel, this );
 }
 
 RoutingProfilesWidget::~RoutingProfilesWidget()
