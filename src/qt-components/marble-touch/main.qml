@@ -208,6 +208,11 @@ Rectangle {
                     onClicked: { main.togglePlugin( "wikipedia" ) }
                 }
                 ToolIcon {
+                    id: photoButton
+                    iconId: "content-photoalbum"
+                    onClicked: { main.togglePlugin( "photo" ) }
+                }
+                ToolIcon {
                     id: settingsButton
                     iconId: "toolbar-settings"
                     onClicked: { main.state = "Configuration" }
@@ -244,6 +249,7 @@ Rectangle {
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: true }
                 PropertyChanges { target: wikipediaButton; visible: true }
+                PropertyChanges { target: photoButton; visible: true }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -267,6 +273,7 @@ Rectangle {
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
                 PropertyChanges { target: wikipediaButton; visible: false }
+                PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -290,6 +297,7 @@ Rectangle {
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
                 PropertyChanges { target: wikipediaButton; visible: false }
+                PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -313,6 +321,7 @@ Rectangle {
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
                 PropertyChanges { target: wikipediaButton; visible: false }
+                PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -336,6 +345,7 @@ Rectangle {
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
                 PropertyChanges { target: wikipediaButton; visible: false }
+                PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -359,6 +369,7 @@ Rectangle {
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
                 PropertyChanges { target: wikipediaButton; visible: true }
+                PropertyChanges { target: photoButton; visible: true }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -382,6 +393,7 @@ Rectangle {
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: true }
                 PropertyChanges { target: wikipediaButton; visible: false }
+                PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -405,6 +417,7 @@ Rectangle {
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: true }
                 PropertyChanges { target: wikipediaButton; visible: true }
+                PropertyChanges { target: photoButton; visible: true }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -428,6 +441,7 @@ Rectangle {
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
                 PropertyChanges { target: wikipediaButton; visible: false }
+                PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -451,6 +465,7 @@ Rectangle {
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
                 PropertyChanges { target: wikipediaButton; visible: false }
+                PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -474,6 +489,7 @@ Rectangle {
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
                 PropertyChanges { target: wikipediaButton; visible: true }
+                PropertyChanges { target: photoButton; visible: true }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -497,6 +513,7 @@ Rectangle {
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
                 PropertyChanges { target: wikipediaButton; visible: false }
+                PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -520,6 +537,7 @@ Rectangle {
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
                 PropertyChanges { target: wikipediaButton; visible: false }
+                PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -543,6 +561,7 @@ Rectangle {
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
                 PropertyChanges { target: wikipediaButton; visible: false }
+                PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: false }
                 PropertyChanges { target: activityButton; visible: true }
             }
