@@ -203,6 +203,11 @@ Rectangle {
                     onClicked: { main.state = "Search" }
                 }
                 ToolIcon {
+                    id: wikipediaButton
+                    iconId: "content-wikipedia"
+                    onClicked: { main.togglePlugin( "wikipedia" ) }
+                }
+                ToolIcon {
                     id: settingsButton
                     iconId: "toolbar-settings"
                     onClicked: { main.state = "Configuration" }
@@ -238,6 +243,7 @@ Rectangle {
                 PropertyChanges { target: friendsButton; visible: false }
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: true }
+                PropertyChanges { target: wikipediaButton; visible: true }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -260,6 +266,7 @@ Rectangle {
                 PropertyChanges { target: friendsButton; visible: false }
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -282,6 +289,7 @@ Rectangle {
                 PropertyChanges { target: friendsButton; visible: false }
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -304,6 +312,7 @@ Rectangle {
                 PropertyChanges { target: friendsButton; visible: false }
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -326,6 +335,7 @@ Rectangle {
                 PropertyChanges { target: friendsButton; visible: false }
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -348,6 +358,7 @@ Rectangle {
                 PropertyChanges { target: friendsButton; visible: false }
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: wikipediaButton; visible: true }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -370,6 +381,7 @@ Rectangle {
                 PropertyChanges { target: friendsButton; visible: false }
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: true }
+                PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -392,6 +404,7 @@ Rectangle {
                 PropertyChanges { target: friendsButton; visible: false }
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: true }
+                PropertyChanges { target: wikipediaButton; visible: true }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -414,6 +427,7 @@ Rectangle {
                 PropertyChanges { target: friendsButton; visible: false }
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -436,6 +450,7 @@ Rectangle {
                 PropertyChanges { target: friendsButton; visible: false }
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -458,6 +473,7 @@ Rectangle {
                 PropertyChanges { target: friendsButton; visible: false }
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: wikipediaButton; visible: true }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -480,6 +496,7 @@ Rectangle {
                 PropertyChanges { target: friendsButton; visible: false }
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -502,6 +519,7 @@ Rectangle {
                 PropertyChanges { target: friendsButton; visible: false }
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
                 PropertyChanges { target: activityButton; visible: true }
             },
@@ -524,6 +542,7 @@ Rectangle {
                 PropertyChanges { target: friendsButton; visible: false }
                 PropertyChanges { target: downloadButton; visible: false }
                 PropertyChanges { target: searchButton; visible: false }
+                PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: false }
                 PropertyChanges { target: activityButton; visible: true }
             }
@@ -699,6 +718,25 @@ Rectangle {
         if( tmp.indexOf( name ) == -1 ) {
             tmp.push( name )
             settings.activeRenderPlugins = tmp
+        }
+    }
+    
+    function disablePlugin( name ) {
+        var tmp = new Array()
+        for( var i = 0; i < settings.activeRenderPlugins.length; i++ ) {
+            if( settings.activeRenderPlugins[i] != name ) {
+                tmp.push( settings.activeRenderPlugins[i] )
+            }
+        }
+        settings.activeRenderPlugins = tmp
+    }
+    
+    function togglePlugin( name ) {
+        if( settings.activeRenderPlugins.indexOf( name ) == -1 ) {
+            enablePlugin( name )
+        }
+        else {
+            disablePlugin( name )
         }
     }
 
