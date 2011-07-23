@@ -1413,6 +1413,8 @@ void MainWindow::showMapWizard()
         settings.setValue( "wmsServers", mapWizard->wmsServers() );
         settings.setValue( "staticUrlServers", mapWizard->staticUrlServers() );
     settings.endGroup();
+
+    mapWizard->deleteLater();
 }
 
 void MainWindow::showGoToDialog()
