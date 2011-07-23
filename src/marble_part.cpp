@@ -1264,6 +1264,7 @@ void MarblePart::showMapWizard()
     mapWizard->exec();
     MarbleSettings::setWmsServers( mapWizard->wmsServers() );
     MarbleSettings::setStaticUrlServers( mapWizard->staticUrlServers() );
+    mapWizard->deleteLater();
 }
 
 void MarblePart::editSettings()
