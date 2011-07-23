@@ -479,7 +479,7 @@ Rectangle {
                 PropertyChanges { target: driveButton; visible: false }
                 PropertyChanges { target: cycleButton; visible: true }
                 PropertyChanges { target: walkButton; visible: true }
-                PropertyChanges { target: guidanceButton; visible: false }
+                PropertyChanges { target: guidanceButton; visible: true }
                 PropertyChanges { target: bookmarksButton; visible: false }
                 PropertyChanges { target: aroundMeButton; visible: false }
                 PropertyChanges { target: weatherButton; visible: false }
@@ -580,7 +580,6 @@ Rectangle {
             PropertyChanges { target: routeRequestView; visible: false }
             PropertyChanges { target: routingDialog;  visible: false }
             PropertyChanges { target: mainToolBar; visible: false }
-            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Virtual Globe"
@@ -629,7 +628,9 @@ Rectangle {
             name: "Guidance"
             when: activitySelection.activity == 4
             PropertyChanges { target: activitySelection; visible: false }
+            PropertyChanges { target: mainWidget; visible: true }
             PropertyChanges { target: mainToolBar; visible: true }
+            PropertyChanges { target: routingDialog; visible: true }
             PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
@@ -688,7 +689,6 @@ Rectangle {
             PropertyChanges { target: mainToolBar; visible: true }
             PropertyChanges { target: settings; projection: "Mercator" }
             PropertyChanges { target: settings; mapTheme: "earth/openstreetmap/openstreetmap.dgml" }
-            StateChangeScript { script: enablePlugin( "opencaching" ) }
         },
         State {
             name: "Friends"
@@ -714,6 +714,17 @@ Rectangle {
             PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         }
     ]
+    
+    transitions: [
+        Transition {
+            from: "*"; to: "*"
+            ScriptAction { 
+                script: adjustPlugins( activitySelection.getModel().get( activitySelection.activity ).enablePlugins,
+                                       activitySelection.getModel().get( activitySelection.activity ).disablePlugins,
+                                       activitySelection.getModel().get( activitySelection.previousActivity ).relatedActivities[activitySelection.activity] )
+            }
+        }
+    ]
 
     function routeRequestModel() {
         return mainWidget.routeRequestModel()
@@ -733,21 +744,32 @@ Rectangle {
     
     // FIXME only enable default+passed?
     function enablePlugin( name ) {
-        var tmp = settings.defaultRenderPlugins
+        console.log( "trying to enable ", name )
+        var tmp = settings.activeRenderPlugins
         if( tmp.indexOf( name ) == -1 ) {
+            console.log( "- enabling: ", name )
             tmp.push( name )
             settings.activeRenderPlugins = tmp
         }
+        else {
+            console.log( "- ", name, " is already enabled" )
+        }
+        console.log( "finished enablePlugin ", name )
     }
     
     function disablePlugin( name ) {
+        console.log( "trying to disable ", name )
         var tmp = new Array()
         for( var i = 0; i < settings.activeRenderPlugins.length; i++ ) {
             if( settings.activeRenderPlugins[i] != name ) {
                 tmp.push( settings.activeRenderPlugins[i] )
             }
+            else {
+                console.log( "- disabled: ", name )
+            }
         }
         settings.activeRenderPlugins = tmp
+        console.log( "finished enablePlugin ", name )
     }
     
     function togglePlugin( name ) {
@@ -756,6 +778,24 @@ Rectangle {
         }
         else {
             disablePlugin( name )
+        }
+    }
+    
+    function adjustPlugins( enable, disable, preserve ) {
+        console.log( "adjustinPlugins ", enable, disable, preserve )
+        if( enable != null ) {
+            for( var i = 0; i < enable.length; i++ ) {
+                if( preserve == null || preserve.indexOf( enable[i] ) == -1 ) {
+                    enablePlugin( enable[i] )
+                }
+            }
+        }
+        if( disable != null ) {
+            for( var i = 0; i < disable.length; i++ ) {
+                if( preserve == null || preserve.indexOf( disable[i] ) == -1 ) {
+                    disablePlugin( disable[i] )
+                }
+            }
         }
     }
 
