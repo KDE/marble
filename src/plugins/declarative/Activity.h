@@ -11,19 +11,21 @@
 #ifndef MARBLE_ACTIVITY_H
 #define MARBLE_ACTIVITY_H
 
-
 #include <QtCore/QStringList>
 #include <QtCore/QMap>
 #include <QtCore/QVariant>
 
-#include "marble_export.h"
-
 namespace Marble
 {
-
-class MARBLE_EXPORT Activity
+    
+namespace Declarative
 {
 
+class Activity : public QObject
+{
+
+    Q_OBJECT
+    
     Q_PROPERTY( QString name READ name WRITE setName )
     Q_PROPERTY( QString imagePath READ imagePath WRITE setImagePath )
     Q_PROPERTY( QStringList enablePlugins READ enablePlugins WRITE setEnablePlugins )
@@ -31,6 +33,7 @@ class MARBLE_EXPORT Activity
     Q_PROPERTY( QVariant relatedActivities READ relatedActivities WRITE setRelatedActivities )
     
  public:
+    explicit Activity();
     explicit Activity( const QString& name, const QString& imagePath, 
                        const QStringList& enablePlugins, const QStringList& disablePlugins,
                        const QMap<QString, QVariant>& relatedActivities );
@@ -48,8 +51,8 @@ class MARBLE_EXPORT Activity
     void setDisablePlugins( const QStringList& disablePlugins );
     QStringList disablePlugins() const;
     
-    void setRelatedActivities( const QMap<QString, QVariant>& relatedActivities );
-    QMap<QString, QVariant> relatedActivities() const;
+    void setRelatedActivities( const QVariant& relatedActivities );
+    QVariant relatedActivities() const;
 
  private:
     Q_DISABLE_COPY( Activity )
@@ -59,6 +62,8 @@ class MARBLE_EXPORT Activity
     QStringList m_disablePlugins;
     QMap<QString, QVariant> m_relatedActivities;
 };
+
+}
 
 }
 

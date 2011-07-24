@@ -23,7 +23,6 @@ class ActivityModel::Private
 
  public:
     Private()
-      : m_size(0)
     {
     }
 
@@ -31,7 +30,6 @@ class ActivityModel::Private
     {
     }
 
-    int m_size;
     QList<Activity*>     m_activityContainer;
 };
 
@@ -77,10 +75,7 @@ void ActivityModel::removeActivity( const QString& name )
 
 int ActivityModel::rowCount( const QModelIndex &parent ) const
 {
-    if ( !parent.isValid() )
-        return d->m_size;
-    else
-        return 0;
+    return d->m_activityContainer.size();
 }
 
 int ActivityModel::columnCount( const QModelIndex &parent ) const
@@ -109,6 +104,27 @@ QVariant ActivityModel::data( const QModelIndex &index, int role ) const
         return qVariantFromValue( d->m_activityContainer.at( index.row() )->disablePlugins() );
     } else if ( role == RelatedActivitiesRole ) {
         return qVariantFromValue( d->m_activityContainer.at( index.row() )->relatedActivities() );
+    } else
+        return QVariant();
+}
+
+QVariant ActivityModel::get( const int index, const QString& role ) const
+{
+    if ( index < 0 || index > d->m_activityContainer.size() )
+        return QVariant();
+
+    static QHash<int,QByteArray> roles = roleNames();
+    
+    if ( role == roles[NameRole] ) {
+        return d->m_activityContainer.at( index )->name();
+    } else if( role == roles[ImagePathRole] ) {
+        return d->m_activityContainer.at( index )->imagePath();
+    } else if ( role == roles[EnablePluginsRole] ) {
+        return qVariantFromValue( d->m_activityContainer.at( index )->enablePlugins() );
+    } else if ( role == roles[DisablePluginsRole] ) {
+        return qVariantFromValue( d->m_activityContainer.at( index )->disablePlugins() );
+    } else if ( role == roles[RelatedActivitiesRole] ) {
+        return qVariantFromValue( d->m_activityContainer.at( index )->relatedActivities() );
     } else
         return QVariant();
 }

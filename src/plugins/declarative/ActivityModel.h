@@ -11,7 +11,6 @@
 #ifndef MARBLE_ACTIVITYMODEL_H
 #define MARBLE_ACTIVITYMODEL_H
 
-
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QModelIndex>
 #include <QtCore/QVariant>
@@ -57,6 +56,7 @@ class ActivityModel : public QAbstractListModel
      * @param role   which part of the data to return.  @see Roles
      */
     QVariant data( const QModelIndex &index, int role ) const;
+    QVariant get( const int index, const QString& role ) const;
 
  public Q_SLOTS:
     void addActivity( const QString& name, const QString& imagePath, 

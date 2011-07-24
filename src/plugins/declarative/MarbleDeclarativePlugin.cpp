@@ -19,6 +19,7 @@
 #include "Search.h"
 #include "RouteRequestModel.h"
 #include "ActivityModel.h"
+#include "Activity.h"
 #include "Settings.h"
 
 #include <QtDeclarative/qdeclarative.h>
@@ -40,7 +41,7 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
     qmlRegisterType<Marble::Declarative::Search>( uri, 0, 11, "Search" );
     qmlRegisterType<Marble::Declarative::RouteRequestModel>( uri, 0, 11, "RouteRequestModel" );
     qmlRegisterType<Marble::Declarative::ActivityModel>( uri, 0, 11, "ActivityModel" );
-    qmlRegisterType<Marble::Declarative::ActivityModel>( uri, 0, 11, "Activity" );
+    qmlRegisterType<Marble::Declarative::Activity>( uri, 0, 11, "Activity" );
     qmlRegisterType<Marble::Declarative::Settings>( uri, 0, 11, "Settings" );
 
     qmlRegisterType<Marble::Declarative::MarbleWidget>( uri, 0, 11, "MarbleWidget" );

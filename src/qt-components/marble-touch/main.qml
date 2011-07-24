@@ -719,9 +719,9 @@ Rectangle {
         Transition {
             from: "*"; to: "*"
             ScriptAction { 
-                script: adjustPlugins( activitySelection.getModel().get( activitySelection.activity ).enablePlugins,
-                                       activitySelection.getModel().get( activitySelection.activity ).disablePlugins,
-                                       activitySelection.getModel().get( activitySelection.previousActivity ).relatedActivities[activitySelection.activity] )
+                script: adjustPlugins( activitySelection.model.get( activitySelection.activity, "enablePlugins" ),
+                                       activitySelection.model.get( activitySelection.activity, "disablePlugins" ),
+                                       activitySelection.model.get( activitySelection.previousActivity, "relatedActivities" )[activitySelection.activity] )
             }
         }
     ]

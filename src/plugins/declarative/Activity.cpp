@@ -13,6 +13,13 @@
 
 namespace Marble
 {
+    
+namespace Declarative
+{
+    
+Activity::Activity()
+{
+}
 
 Activity::Activity( const QString& name, const QString& imagePath, 
                     const QStringList& enablePlugins, const QStringList& disablePlugins,
@@ -22,10 +29,8 @@ Activity::Activity( const QString& name, const QString& imagePath,
                                                                          m_disablePlugins( disablePlugins ),
                                                                          m_relatedActivities( relatedActivities )
 {
-    mDebug() << "new activity: " << m_name << m_imagePath << m_enablePlugins << m_disablePlugins << m_relatedActivities;
-    qDebug() << "new activity: " << m_name << m_imagePath << m_enablePlugins << m_disablePlugins << m_relatedActivities;
 }
-    
+
 void Activity::setName( const QString& name )
 {
     m_name = name;
@@ -66,14 +71,18 @@ QStringList Activity::disablePlugins() const
     return m_disablePlugins;
 }
 
-void Activity::setRelatedActivities( const QMap<QString, QVariant>& relatedActivities )
+void Activity::setRelatedActivities( const QVariant& relatedActivities )
 {
-    m_relatedActivities = relatedActivities;
+    m_relatedActivities = relatedActivities.value<QMap<QString, QVariant> >();
 }
 
-QMap<QString, QVariant> Activity::relatedActivities() const
+QVariant Activity::relatedActivities() const
 {
     return m_relatedActivities;
 }
 
 }
+
+}
+
+#include "Activity.moc"
