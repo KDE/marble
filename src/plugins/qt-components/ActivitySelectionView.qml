@@ -64,107 +64,110 @@ Rectangle {
             }
         }
     }
-    ListModel {
+
+    ActivityModel {
         id: activityModel
-        ListElement {
-            name: "Virtual Globe"
-            imagePath: "image://theme/icon-m-common-checkbox-checked"
-            property variant enablePlugins: [  ]
-            property variant disablePlugins: [  ]
-            property variant relatedActivities: {  }
-        }
-        ListElement {
-            name: "Drive"
-            imagePath: "image://theme/icon-m-common-checkbox-checked"
-            property variant enablePlugins: [  ]
-            property variant disablePlugins: [  ]
-            property variant relatedActivities: {  }
-        }
-        ListElement {
-            name: "Cycle"
-            imagePath: "image://theme/icon-m-common-checkbox-checked"
-            property variant enablePlugins: [  ]
-            property variant disablePlugins: [  ]
-            property variant relatedActivities: {  }
-        }
-        ListElement {
-            name: "Walk"
-            imagePath: "image://theme/icon-m-common-checkbox-checked"
-            property variant enablePlugins: [  ]
-            property variant disablePlugins: [  ]
-            property variant relatedActivities: {  }
-        }
-        ListElement {
-            name: "Guidance"
-            imagePath: "image://theme/icon-m-common-checkbox-checked"
-            property variant enablePlugins: [  ]
-            property variant disablePlugins: [  ]
-            property variant relatedActivities: {  }
-        }
-        ListElement {
-            name: "Search"
-            imagePath: "/usr/share/icons/oxygen/128x128/actions/edit-find.png"
-            property variant enablePlugins: [  ]
-            property variant disablePlugins: [  ]
-            property variant relatedActivities: {  }
-        }
-        ListElement {
-            name: "Bookmarks"
-            imagePath: "/usr/share/icons/oxygen/128x128/actions/bookmarks-organize.png"
-            property variant enablePlugins: [  ]
-            property variant disablePlugins: [  ]
-            property variant relatedActivities: {  }
-        }
-        ListElement {
-            name: "Around Me"
-            imagePath: "image://theme/icon-m-common-checkbox-checked"
-            property variant enablePlugins: [  ]
-            property variant disablePlugins: [  ]
-            property variant relatedActivities: {  }
-        }
-        ListElement {
-            name: "Weather"
-            imagePath: "/usr/share/icons/oxygen/128x128/status/weather-showers-day.png"
-            property variant enablePlugins: [  ]
-            property variant disablePlugins: [  ]
-            property variant relatedActivities: {  }
-        }
-        ListElement {
-            name: "Tracking"
-            imagePath: "image://theme/icon-m-common-checkbox-checked"
-            property variant enablePlugins: [  ]
-            property variant disablePlugins: [  ]
-            property variant relatedActivities: {  }
-        }
-        ListElement {
-            name: "Geocaching"
-            imagePath: "image://theme/icon-m-common-checkbox-checked"
-            property variant enablePlugins: [ "opencaching" ]
-            property variant disablePlugins: [ "weather" ]
-            property variant relatedActivities: {
-                "Guidance": [ "geocaching" ]
-            }
-        }
-        ListElement {
-            name: "Friends"
-            imagePath: "image://theme/icon-m-common-checkbox-checked"
-            property variant enablePlugins: [  ]
-            property variant disablePlugins: [  ]
-            property variant relatedActivities: {  }
-        }
-        ListElement {
-            name: "Download"
-            imagePath: "/usr/share/icons/oxygen/128x128/places/folder-downloads.png"
-            property variant enablePlugins: [  ]
-            property variant disablePlugins: [  ]
-            property variant relatedActivities: {  }
-        }
-        ListElement {
-            name: "Configuration"
-            imagePath: "/usr/share/icons/oxygen/128x128/actions/configure.png"
-            property variant enablePlugins: [  ]
-            property variant disablePlugins: [  ]
-            property variant relatedActivities: {  }
+        Component.onCompleted: {
+            console.log( "adding activities" )
+            activityModel.addActivity(
+                "Virtual Globe",
+                "image://theme/icon-m-common-checkbox-checked",
+                [],
+                [],
+                {}
+            )
+            activityModel.addActivity(
+                "Drive",
+                "image://theme/icon-m-common-checkbox-checked",
+                [],
+                [],
+                {}
+            )
+            activityModel.addActivity(
+                "Cycle",
+                "image://theme/icon-m-common-checkbox-checked",
+                [],
+                [],
+                {}
+            )
+            activityModel.addActivity(
+                "Walk",
+                "image://theme/icon-m-common-checkbox-checked",
+                [],
+                [],
+                {}
+            )
+            activityModel.addActivity(
+                "Guidance",
+                "image://theme/icon-m-common-checkbox-checked",
+                [],
+                [],
+                {}
+            )
+            activityModel.addActivity(
+                "Search",
+                "/usr/share/icons/oxygen/128x128/actions/edit-find.png",
+                [],
+                [],
+                {}
+            )
+            activityModel.addActivity(
+                "Bookmarks",
+                "/usr/share/icons/oxygen/128x128/actions/bookmarks-organize.png",
+                [],
+                [],
+                {}
+            )
+            activityModel.addActivity(
+                "Around Me",
+                "image://theme/icon-m-common-checkbox-checked",
+                [],
+                [],
+                {}
+            )
+            activityModel.addActivity(
+                "Weather",
+                "/usr/share/icons/oxygen/128x128/status/weather-showers-day.png",
+                [],
+                [],
+                {}
+            )
+            activityModel.addActivity(
+                "Tracking",
+                "image://theme/icon-m-common-checkbox-checked",
+                [],
+                [],
+                {}
+            )
+            activityModel.addActivity(
+                "Geocaching",
+                "image://theme/icon-m-common-checkbox-checked",
+                [ "opencaching" ],
+                [ "weather" ],
+                { "Guidance": [ "geocaching" ] }
+            )
+            activityModel.addActivity(
+                "Friends",
+                "image://theme/icon-m-common-checkbox-checked",
+                [],
+                [],
+                {}
+            )
+            activityModel.addActivity(
+                "Download",
+                "/usr/share/icons/oxygen/128x128/places/folder-downloads.png",
+                [],
+                [],
+                {}
+            )
+            activityModel.addActivity(
+                "Configuration",
+                "/usr/share/icons/oxygen/128x128/actions/configure.png",
+                [],
+                [],
+                {}
+            )
+            console.log( "finished adding activities" )
         }
     }
 

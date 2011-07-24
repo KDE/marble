@@ -21,6 +21,8 @@ Routing.cpp
 Search.cpp
 RouteRequestModel.cpp
 Settings.cpp
+Activity.cpp
+ActivityModel.cpp
 )
 
 marble_add_declarative_plugin( MarbleDeclarativePlugin ${marbleplugin_SRCS})
