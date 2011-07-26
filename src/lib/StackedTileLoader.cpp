@@ -300,6 +300,8 @@ void StackedTileLoader::update()
 
 void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImage )
 {
+    Q_ASSERT( !tileImage.isNull() );
+
     d->detectMaxTileLevel();
 
     const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );
@@ -313,7 +315,7 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
         delete displayedTile;
         displayedTile = 0;
 
-        if ( !tiles.isEmpty() && !tileImage.isNull() ) {
+        if ( !tiles.isEmpty() ) {
             for ( int i = 0; i < tiles.count(); ++ i) {
                 if ( tiles[i]->id() == tileId ) {
                     const Blending *blending = tiles[i]->blending();
@@ -334,10 +336,9 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
         }
 
         emit tileUpdateAvailable( stackedTileId );
-        return;
+    } else {
+        d->m_tileCache.remove( stackedTileId );
     }
-
-    d->m_tileCache.remove( stackedTileId );
 }
 
 void StackedTileLoader::clear()

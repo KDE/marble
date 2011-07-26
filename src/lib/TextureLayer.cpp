@@ -103,6 +103,9 @@ void TextureLayer::Private::updateTextureLayers()
 
 void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage )
 {
+    if ( tileImage.isNull() )
+        return; // keep tiles in cache to improve performance
+
     const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );
     m_pixmapCache.remove( stackedTileId );
 
