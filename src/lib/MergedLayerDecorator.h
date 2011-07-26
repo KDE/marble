@@ -52,12 +52,12 @@ class MergedLayerDecorator
 
  private:
     QImage loadDataset( const TileId &id );
-    int maxDivisor( int maximum, int fullLength );
+    static int maxDivisor( int maximum, int fullLength );
 
     void initCityLights();
 
     void paintCityLights( QImage *tileImage, const TileId &id );
-    void paintSunShading( QImage *tileImage, const TileId &id );
+    void paintSunShading( QImage *tileImage, const TileId &id ) const;
     void paintTileId( QImage *tileImage, const TileId &id ) const;
 
  protected:

@@ -257,7 +257,7 @@ void MergedLayerDecorator::paintCityLights( QImage *tileImage, const TileId &id 
     }
 }
 
-void MergedLayerDecorator::paintSunShading( QImage *tileImage, const TileId &id )
+void MergedLayerDecorator::paintSunShading( QImage *tileImage, const TileId &id ) const
 {
     if ( tileImage->depth() != 32 )
         return;
