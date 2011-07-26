@@ -715,7 +715,7 @@ Rectangle {
                         var enable = activitySelection.model.get( activitySelection.activity, "enablePlugins" )
                         var disable = activitySelection.model.get( activitySelection.activity, "disablePlugins" )
                         if( activitySelection.previousActivity != -1 ) {
-                           related = activitySelection.model.get( activitySelection.previousActivity, "relatedActivities" )
+                           related = activitySelection.model.get( activitySelection.previousActivity, "relatedActivities" )[main.state]
                         }
                         adjustPlugins( enable, disable, related )
                     }
@@ -781,7 +781,7 @@ Rectangle {
     function adjustPlugins( enable, disable, preserve ) {
         console.log( "adjustinPlugins ", enable, disable, preserve )
         if( preserve != undefined ) {
-            for( var i in preserve ) {
+            for( var i = 0; i < preserve.length; i++ ) {
                 console.log( "- preserved: ", preserve[i] )
             }
         }

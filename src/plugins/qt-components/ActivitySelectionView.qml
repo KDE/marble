@@ -103,7 +103,7 @@ Rectangle {
                 "Guidance",
                 "image://theme/icon-m-common-checkbox-checked",
                 [],
-                [],
+                [ "opencaching" ],
                 {}
             )
             activityModel.addActivity(
@@ -146,7 +146,7 @@ Rectangle {
                 "image://theme/icon-m-common-checkbox-checked",
                 [ "opencaching" ],
                 [ "weather" ],
-                { "Guidance": [ "geocaching" ] }
+                { "Guidance": [ "opencaching" ] }
             )
             activityModel.addActivity(
                 "Friends",
