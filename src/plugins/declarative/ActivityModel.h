@@ -42,12 +42,6 @@ class ActivityModel : public QAbstractListModel
     explicit ActivityModel( QObject *parent = 0 );
 
     ~ActivityModel();
-    
-    /**
-     * Return the number of activities in the Model.
-     */
-    int rowCount( const QModelIndex &parent = QModelIndex() ) const;
-    int columnCount( const QModelIndex &parent = QModelIndex() ) const;
 
     /**
      * Return the data according to the index.
@@ -56,13 +50,18 @@ class ActivityModel : public QAbstractListModel
      * @param role   which part of the data to return.  @see Roles
      */
     QVariant data( const QModelIndex &index, int role ) const;
-    QVariant get( const int index, const QString& role ) const;
 
  public Q_SLOTS:
     void addActivity( const QString& name, const QString& imagePath, 
                       const QStringList& enablePlugins, const QStringList& disablePlugins,
                       const QVariant& relatedActivities );
     void removeActivity( const QString& name );
+    QVariant get( const int index, const QString& role ) const;
+    /**
+     * Return the number of activities in the Model.
+     */
+    int rowCount( const QModelIndex &parent = QModelIndex() ) const;
+    int columnCount( const QModelIndex &parent = QModelIndex() ) const;
     
  private:
     Q_DISABLE_COPY( ActivityModel )

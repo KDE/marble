@@ -10,7 +10,6 @@
 
 #include "ActivityModel.h"
 #include "Activity.h"
-#include "MarbleDebug.h"
 
 namespace Marble
 {
@@ -75,6 +74,7 @@ void ActivityModel::removeActivity( const QString& name )
 
 int ActivityModel::rowCount( const QModelIndex &parent ) const
 {
+    Q_UNUSED( parent )
     return d->m_activityContainer.size();
 }
 

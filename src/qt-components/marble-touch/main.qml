@@ -139,68 +139,68 @@ Rectangle {
                 ToolIcon {
                     id: virtualGlobeButton
                     iconId: "ovi-service-maps"
-                    onClicked: { main.state = "Virtual Globe" }
+                    onClicked: { activitySelection.setCurrentActivity( "Virtual Globe" ) }
                 }
                 ToolIcon {
                     id: driveButton
                     iconId: "content-automobile"
                     visible: !settingsPage.visible
-                    onClicked: { main.state = "Drive" }
+                    onClicked: { activitySelection.setCurrentActivity( "Drive" ) }
                 }
                 ToolIcon {
                     id: cycleButton
                     iconId: "common-clock"
-                    onClicked: { main.state = "Cycle" }
+                    onClicked: { activitySelection.setCurrentActivity( "Cycle" ) }
                 }
                 ToolIcon {
                     id: walkButton
                     iconId: "camera-scene-sports-screen"
-                    onClicked: { main.state = "Walk" }
+                    onClicked: { activitySelection.setCurrentActivity( "Walk" ) }
                 }
                 ToolIcon {
                     id: guidanceButton
                     iconId: "telephony-content-sms-dimmed"
-                    onClicked: { main.state = "Guidance" }
+                    onClicked: { activitySelection.setCurrentActivity( "Guidance" ) }
                 }
                 ToolIcon {
                     id: bookmarksButton
                     iconId: "content-bookmark"
-                    onClicked: { main.state = "Bookmarks" }
+                    onClicked: { activitySelection.setCurrentActivity( "Bookmarks" ) }
                 }
                 ToolIcon {
                     id: aroundMeButton
                     iconId: "transfer-sync"
-                    onClicked: { main.state = "Around Me" }
+                    onClicked: { activitySelection.setCurrentActivity( "Around Me" ) }
                 }
                 ToolIcon {
                     id: weatherButton
                     iconId: "weather-sunny-thunder"
-                    onClicked: { main.state = "Weather" }
+                    onClicked: { activitySelection.setCurrentActivity( "Weather" ) }
                 }
                 ToolIcon {
                     id: trackingButton
                     iconId: "content-feed"
-                    onClicked: { main.state = "Tracking" }
+                    onClicked: { activitySelection.setCurrentActivity( "Tracking" ) }
                 }
                 ToolIcon {
                     id: geocachingButton
                     iconId: "email-combined-mailbox"
-                    onClicked: { main.state = "Geocaching" }
+                    onClicked: { activitySelection.setCurrentActivity( "Geocaching" ) }
                 }
                 ToolIcon {
                     id: friendsButton
                     iconId: "conversation-group-chat"
-                    onClicked: { main.state = "Friends" }
+                    onClicked: { activitySelection.setCurrentActivity( "Friends" ) }
                 }
                 ToolIcon {
                     id: downloadButton
                     iconId: "transfer-download"
-                    onClicked: { main.state = "Download" }
+                    onClicked: { activitySelection.setCurrentActivity( "Download" ) }
                 }
                 ToolIcon {
                     id: searchButton
                     iconId: "toolbar-search"
-                    onClicked: { main.state = "Search" }
+                    onClicked: { activitySelection.setCurrentActivity( "Search" ) }
                 }
                 ToolIcon {
                     id: wikipediaButton
@@ -215,7 +215,7 @@ Rectangle {
                 ToolIcon {
                     id: settingsButton
                     iconId: "toolbar-settings"
-                    onClicked: { main.state = "Configuration" }
+                    onClicked: { activitySelection.setCurrentActivity( "Configuration" ) }
                 }
                 ToolIcon {
                     id: activityButton
@@ -580,6 +580,7 @@ Rectangle {
             PropertyChanges { target: routeRequestView; visible: false }
             PropertyChanges { target: routingDialog;  visible: false }
             PropertyChanges { target: mainToolBar; visible: false }
+            // FIXME disable all plugins?
         },
         State {
             name: "Virtual Globe"
@@ -589,7 +590,6 @@ Rectangle {
             PropertyChanges { target: mainToolBar; visible: true }
             PropertyChanges { target: settings; projection: "Spherical" }
             PropertyChanges { target: settings; mapTheme: "earth/bluemarble/bluemarble.dgml" }
-            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Drive"
@@ -600,7 +600,6 @@ Rectangle {
             PropertyChanges { target: routingDialog; visible: true }
             PropertyChanges { target: settings; projection: "Mercator" }
             PropertyChanges { target: settings; mapTheme: "earth/openstreetmap/openstreetmap.dgml" }
-            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Cycle"
@@ -611,7 +610,6 @@ Rectangle {
             PropertyChanges { target: routingDialog; visible: true }
             PropertyChanges { target: settings; projection: "Mercator" }
             PropertyChanges { target: settings; mapTheme: "earth/openstreetmap/openstreetmap.dgml" }
-            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Walk"
@@ -622,7 +620,6 @@ Rectangle {
             PropertyChanges { target: routingDialog; visible: true }
             PropertyChanges { target: settings; projection: "Mercator" }
             PropertyChanges { target: settings; mapTheme: "earth/openstreetmap/openstreetmap.dgml" }
-            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Guidance"
@@ -631,7 +628,6 @@ Rectangle {
             PropertyChanges { target: mainWidget; visible: true }
             PropertyChanges { target: mainToolBar; visible: true }
             PropertyChanges { target: routingDialog; visible: true }
-            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Search"
@@ -641,21 +637,18 @@ Rectangle {
             PropertyChanges { target: mainWidget; anchors.top: searchBar.bottom }
             PropertyChanges { target: mainToolBar; visible: true }
             PropertyChanges { target: searchBar; visible: true }
-            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Bookmarks"
             when: activitySelection.activity == 6
             PropertyChanges { target: activitySelection; visible: false }
             PropertyChanges { target: mainToolBar; visible: true }
-            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Around Me"
             when: activitySelection.activity == 7
             PropertyChanges { target: activitySelection; visible: false }
             PropertyChanges { target: mainToolBar; visible: true }
-            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Weather"
@@ -679,7 +672,6 @@ Rectangle {
             PropertyChanges { target: settings; showPosition: true }
             PropertyChanges { target: settings; showTrack: true }
             PropertyChanges { target: settings; autoCenter: true }
-            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Geocaching"
@@ -695,14 +687,12 @@ Rectangle {
             when: activitySelection.activity == 11
             PropertyChanges { target: activitySelection; visible: false }
             PropertyChanges { target: mainToolBar; visible: true }
-            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Download"
             when: activitySelection.activity == 12
             PropertyChanges { target: activitySelection; visible: false }
             PropertyChanges { target: mainToolBar; visible: true }
-            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         },
         State {
             name: "Configuration"
@@ -711,7 +701,6 @@ Rectangle {
             PropertyChanges { target: mainToolBar; visible: true }
             PropertyChanges { target: mainWidget; visible: false }
             PropertyChanges { target: settingsPage; visible: true }
-            PropertyChanges { target: settings; activeRenderPlugins: settings.defaultRenderPlugins }
         }
     ]
     
@@ -719,9 +708,18 @@ Rectangle {
         Transition {
             from: "*"; to: "*"
             ScriptAction { 
-                script: adjustPlugins( activitySelection.model.get( activitySelection.activity, "enablePlugins" ),
-                                       activitySelection.model.get( activitySelection.activity, "disablePlugins" ),
-                                       activitySelection.model.get( activitySelection.previousActivity, "relatedActivities" )[activitySelection.activity] )
+                script: {
+                    console.log( "switching from ", activitySelection.previousActivity, " to ", activitySelection.activity )
+                    if( activitySelection.activity != -1 ) {
+                        var related = undefined
+                        var enable = activitySelection.model.get( activitySelection.activity, "enablePlugins" )
+                        var disable = activitySelection.model.get( activitySelection.activity, "disablePlugins" )
+                        if( activitySelection.previousActivity != -1 ) {
+                           related = activitySelection.model.get( activitySelection.previousActivity, "relatedActivities" )
+                        }
+                        adjustPlugins( enable, disable, related )
+                    }
+                }
             }
         }
     ]
@@ -742,7 +740,6 @@ Rectangle {
         return mainWidget.getSearch()
     }
     
-    // FIXME only enable default+passed?
     function enablePlugin( name ) {
         console.log( "trying to enable ", name )
         var tmp = settings.activeRenderPlugins
@@ -769,7 +766,7 @@ Rectangle {
             }
         }
         settings.activeRenderPlugins = tmp
-        console.log( "finished enablePlugin ", name )
+        console.log( "finished disablePlugin ", name )
     }
     
     function togglePlugin( name ) {
@@ -783,20 +780,26 @@ Rectangle {
     
     function adjustPlugins( enable, disable, preserve ) {
         console.log( "adjustinPlugins ", enable, disable, preserve )
-        if( enable != null ) {
+        if( preserve != undefined ) {
+            for( var i in preserve ) {
+                console.log( "- preserved: ", preserve[i] )
+            }
+        }
+        if( enable != undefined ) {
             for( var i = 0; i < enable.length; i++ ) {
-                if( preserve == null || preserve.indexOf( enable[i] ) == -1 ) {
+                if( preserve == undefined || preserve.indexOf( enable[i] ) == -1 ) {
                     enablePlugin( enable[i] )
                 }
             }
         }
-        if( disable != null ) {
+        if( disable != undefined ) {
             for( var i = 0; i < disable.length; i++ ) {
-                if( preserve == null || preserve.indexOf( disable[i] ) == -1 ) {
+                if( preserve == undefined || preserve.indexOf( disable[i] ) == -1 ) {
                     disablePlugin( disable[i] )
                 }
             }
         }
+        console.log( "finished adjusting plugins" )
     }
 
 }

@@ -16,7 +16,7 @@ Rectangle {
     color: "white"
     property int activity: -1
     property int previousActivity: -1
-    property alias model: activityModel
+    property alias model: activityView.model
 
     GridView {
         id: activityView
@@ -170,6 +170,16 @@ Rectangle {
                 {}
             )
             console.log( "finished adding activities" )
+        }
+    }
+    
+    function setCurrentActivity( name ) {
+        for( var i = 0; i < activityModel.rowCount(); i++ ) {
+            if( name == activityModel.get( i, "name" ) ) {
+                previousActivity = activity
+                activity = i
+                return
+            }
         }
     }
 }

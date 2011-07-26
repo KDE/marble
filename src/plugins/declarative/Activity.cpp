@@ -9,14 +9,13 @@
 //
 
 #include "Activity.h"
-#include "MarbleDebug.h"
 
 namespace Marble
 {
     
 namespace Declarative
 {
-    
+
 Activity::Activity()
 {
 }
@@ -73,12 +72,12 @@ QStringList Activity::disablePlugins() const
 
 void Activity::setRelatedActivities( const QVariant& relatedActivities )
 {
-    m_relatedActivities = relatedActivities.value<QMap<QString, QVariant> >();
+    m_relatedActivities.setRelatedActivities( relatedActivities.toMap() );
 }
 
-QVariant Activity::relatedActivities() const
+QMap<QString, QVariant> Activity::relatedActivities() const
 {
-    return m_relatedActivities;
+    return m_relatedActivities.relatedActivities();
 }
 
 }

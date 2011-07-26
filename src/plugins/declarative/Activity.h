@@ -15,6 +15,8 @@
 #include <QtCore/QMap>
 #include <QtCore/QVariant>
 
+#include "RelatedActivities.h"
+
 namespace Marble
 {
     
@@ -52,7 +54,7 @@ class Activity : public QObject
     QStringList disablePlugins() const;
     
     void setRelatedActivities( const QVariant& relatedActivities );
-    QVariant relatedActivities() const;
+    QMap<QString, QVariant> relatedActivities() const;
 
  private:
     Q_DISABLE_COPY( Activity )
@@ -60,7 +62,7 @@ class Activity : public QObject
     QString m_imagePath;
     QStringList m_enablePlugins;
     QStringList m_disablePlugins;
-    QMap<QString, QVariant> m_relatedActivities;
+    RelatedActivities m_relatedActivities;
 };
 
 }
