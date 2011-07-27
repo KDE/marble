@@ -250,6 +250,24 @@ class MARBLE_EXPORT MarbleMap : public QObject
     bool showClouds() const;
 
     /**
+     * @brief  Return whether the night shadow is visible.
+     * @return visibility of night shadow
+     */
+    bool showSunShading() const;
+
+    /**
+     * @brief  Return whether the city lights are shown instead of the night shadow.
+     * @return visibility of city lights
+     */
+    bool showCityLights() const;
+
+    /**
+     * @brief  Return whether the sun is shown in the zenith.
+     * @return visibility of sun in the zenith
+     */
+    bool showSunInZenith() const;
+
+    /**
      * @brief  Return whether the atmospheric glow is visible.
      * @return The cloud cover visibility.
      */
@@ -497,6 +515,24 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param  visible  visibility of the cloud cover
      */
     void setShowClouds( bool visible );
+
+    /**
+     * @brief  Set whether the night shadow is visible.
+     * @param  visibile visibility of shadow
+     */
+    void setShowSunShading( bool visible );
+
+    /**
+     * @brief  Set whether city lights instead of night shadow are visible.
+     * @param  visible visibility of city lights
+     */
+    void setShowCityLights( bool visible );
+
+    /**
+     * @brief Set whether the sun is visible in the zenith.
+     * @param visible  visibility of the sun in the zenith
+     */
+    void setShowSunInZenith( bool visible );
 
     /**
      * @brief Set whether the is tile is visible

@@ -552,6 +552,21 @@ bool MarbleMap::showClouds() const
     return d->m_viewParams.showClouds();
 }
 
+bool MarbleMap::showSunShading() const
+{
+    return d->m_model->sunLocator()->getShow();
+}
+
+bool MarbleMap::showCityLights() const
+{
+    return d->m_model->sunLocator()->getCitylights();
+}
+
+bool MarbleMap::showSunInZenith() const
+{
+    return d->m_model->sunLocator()->getCentered();
+}
+
 bool MarbleMap::showAtmosphere() const
 {
     return d->m_viewParams.showAtmosphere();
@@ -1012,6 +1027,23 @@ void MarbleMap::setShowClouds( bool visible )
 {
     d->m_viewParams.setShowClouds( visible );
     d->m_textureLayer.setNeedsUpdate();
+}
+
+void MarbleMap::setShowSunShading( bool visible )
+{
+    d->m_model->sunLocator()->setShow( visible );
+    d->m_model->sunLocator()->update();
+}
+
+void MarbleMap::setShowCityLights( bool visible )
+{
+    d->m_model->sunLocator()->setCitylights( visible );
+    d->m_model->sunLocator()->update();
+}
+
+void MarbleMap::setShowSunInZenith( bool visible )
+{
+    d->m_model->sunLocator()->setCentered( visible );
 }
 
 void MarbleMap::setShowTileId( bool visible )

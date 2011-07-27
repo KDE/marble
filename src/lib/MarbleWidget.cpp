@@ -433,6 +433,21 @@ bool MarbleWidget::showClouds() const
     return d->m_map->showClouds();
 }
 
+bool MarbleWidget::showSunShading() const
+{
+    return d->m_map->showSunShading();
+}
+
+bool MarbleWidget::showCityLights() const
+{
+    return d->m_map->showCityLights();
+}
+
+bool MarbleWidget::showSunInZenith() const
+{
+    return d->m_map->showSunInZenith();
+}
+
 bool MarbleWidget::showAtmosphere() const
 {
     return d->m_map->showAtmosphere();
@@ -918,6 +933,25 @@ void MarbleWidget::setShowClouds( bool visible )
     d->m_map->setShowClouds( visible );
 
     repaint();
+}
+
+void MarbleWidget::setShowSunShading( bool visible )
+{
+    d->m_map->setShowSunShading( visible );
+
+    repaint();
+}
+
+void MarbleWidget::setShowCityLights( bool visible )
+{
+    d->m_map->setShowCityLights( visible );
+
+    repaint();
+}
+
+void MarbleWidget::setShowSunInZenith( bool visible )
+{
+    d->m_map->setShowSunInZenith( visible );
 }
 
 void MarbleWidget::setShowAtmosphere( bool visible )
