@@ -371,8 +371,13 @@ void RoutingPluginPrivate::readSettings()
     m_audio->setSpeaker( speaker );
 
     if ( m_configDialog ) {
-        QStringList const speakers = m_audio->speakers();
-        int const index = speakers.indexOf( speaker );
+        QStringList const speakerPaths = m_audio->speakers();
+        QStringList speakers;
+        foreach( const QString &speaker, speakerPaths ) {
+            speakers << QFileInfo( speaker ).fileName();
+        }
+
+        int const index = speakerPaths.indexOf( speaker );
         m_configUi.speakerComboBox->clear();
         m_configUi.speakerComboBox->addItems( speakers );
         m_configUi.speakerComboBox->setCurrentIndex( index );
@@ -417,7 +422,11 @@ qreal RoutingPluginPrivate::remainingDistance() const
 void RoutingPlugin::writeSettings()
 {
     Q_ASSERT( d->m_configDialog );
-    d->m_settings["speaker"] = d->m_configUi.speakerComboBox->currentText();
+    QStringList const speakerPaths = d->m_audio->speakers();
+    int const index = d->m_configUi.speakerComboBox->currentIndex();
+    if ( index >= 0 && index < speakerPaths.size() ) {
+        d->m_settings["speaker"] = speakerPaths.at( index );
+    }
     d->m_settings["muted"] = !d->m_configUi.voiceNavigationCheckBox->isChecked();
     d->m_settings["sound"] = d->m_configUi.soundRadioButton->isChecked();
     d->readSettings();

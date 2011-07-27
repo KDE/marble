@@ -123,10 +123,11 @@ QString AudioOutputPrivate::audioFile( const QString &name )
             }
         }
     } else {
-        QString const audioTemplate = "audio/speakers/%1/%2.%3";
+        QString const audioTemplate = "%1/%2.%3";
         foreach( const QString &format, formats ) {
-            QString const result = MarbleDirs::path( audioTemplate.arg( m_speaker ).arg( name ).arg( format ) );
-            if ( !result.isEmpty() ) {
+            QString const result = audioTemplate.arg( m_speaker ).arg( name ).arg( format );
+            QFileInfo audioFile( result );
+            if ( audioFile.exists() ) {
                 return result;
             }
         }
@@ -231,19 +232,34 @@ void AudioOutput::setMuted( bool muted )
 
 void AudioOutput::setSpeaker( const QString &speaker )
 {
-    d->m_speaker = speaker;
+    QFileInfo speakerDir = QFileInfo( speaker );
+    if ( !speakerDir.exists() ) {
+        d->m_speaker = MarbleDirs::path( "/audio/speakers/" + speaker );
+    } else {
+        d->m_speaker = speaker;
+    }
+}
+
+QString AudioOutput::speaker() const
+{
+    return d->m_speaker;
 }
 
 QStringList AudioOutput::speakers() const
 {
-    QString const voicePath = MarbleDirs::path( "audio/speakers" );
-    if ( !voicePath.isEmpty() ) {
+    QStringList result;
+    QStringList const baseDirs = QStringList() << MarbleDirs::systemPath() << MarbleDirs::localPath();
+    foreach ( const QString &baseDir, baseDirs ) {
+        QString base = baseDir + "/audio/speakers/";
+
         QDir::Filters filter = QDir::Readable | QDir::Dirs | QDir::NoDotAndDotDot;
-        QDir voiceDir( voicePath );
-        return voiceDir.entryList( filter, QDir::Name );
+        QFileInfoList const speakers = QDir( base ).entryInfoList( filter, QDir::Name );
+        foreach( const QFileInfo &speaker, speakers ) {
+            result << speaker.absoluteFilePath();
+        }
     }
 
-    return QStringList();
+    return result;
 }
 
 void AudioOutput::setSoundEnabled( bool enabled )
