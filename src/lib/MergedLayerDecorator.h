@@ -58,8 +58,6 @@ class MergedLayerDecorator
     QImage loadDataset( const TileId &id );
     static int maxDivisor( int maximum, int fullLength );
 
-    void initCityLights();
-
     void paintCityLights( QImage *tileImage, const TileId &id );
     void paintSunShading( QImage *tileImage, const TileId &id ) const;
     void paintTileId( QImage *tileImage, const TileId &id ) const;
@@ -74,7 +72,6 @@ class MergedLayerDecorator
     bool m_showTileId;
     GeoSceneDocument *m_cityLightsTheme;
     GeoSceneTexture *m_cityLightsTextureLayer;
-    QMutex m_initCityLightsMutex;
 };
 
 }

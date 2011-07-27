@@ -50,47 +50,8 @@ MergedLayerDecorator::MergedLayerDecorator( TileLoader * const tileLoader,
       m_showCityLights( false ),
       m_showTileId( false ),
       m_cityLightsTheme( 0 ),
-      m_cityLightsTextureLayer( 0 ),
-      m_initCityLightsMutex()
+      m_cityLightsTextureLayer( 0 )
 {
-}
-
-void MergedLayerDecorator::initCityLights()
-{
-    QMutexLocker lock(&m_initCityLightsMutex);
-
-    if (m_cityLightsTheme) {
-        // theme has been loaded while we were waiting
-        return;
-    }
-
-    // look for the texture layers inside the themes
-    // As long as we don't have an Layer Management Class we just lookup 
-    // the name of the layer that has the same name as the theme ID
-
-    mDebug() << Q_FUNC_INFO;
-    m_cityLightsTheme = MapThemeManager::loadMapTheme( "earth/citylights/citylights.dgml" );
-    if (m_cityLightsTheme) {
-        QString cityLightsId = m_cityLightsTheme->head()->theme();
-        GeoSceneLayer* layer = m_cityLightsTheme->map()->layer( cityLightsId );
-        GeoSceneTexture *texture =
-            static_cast<GeoSceneTexture*>( layer->groundDataset() );
-
-        QString sourceDir = texture->sourceDir();
-        QString installMap = texture->installMap();
-        if ( !TileLoader::baseTilesAvailable( *texture ) ) {
-            TileCreator *tileCreator = new TileCreator(
-                                     sourceDir,
-                                     installMap,
-                                     "false" );
-            tileCreator->start();
-            tileCreator->wait();
-            tileCreator->deleteLater();
-        }
-
-        m_cityLightsTextureLayer = static_cast<GeoSceneTexture*>(
-            m_cityLightsTheme->map()->layer( cityLightsId )->datasets().first() );
-    }
 }
 
 MergedLayerDecorator::~MergedLayerDecorator()
@@ -124,12 +85,7 @@ QImage MergedLayerDecorator::merge( const TileId id, const QVector<QSharedPointe
             }
     }
 
-    if ( m_showSunShading ) {
-        // Initialize citylights layer if it hasn't happened already
-        if ( !m_cityLightsTheme ) {
-            initCityLights();
-        }
-
+    if ( m_showSunShading && m_cityLightsTextureLayer ) {
         if ( m_showCityLights && m_sunLocator->planet()->id() == "earth" ) {
             paintCityLights( &resultImage, id );
         } else {
@@ -151,6 +107,12 @@ void MergedLayerDecorator::setThemeId( const QString &themeId )
 
 void MergedLayerDecorator::setShowSunShading( bool show )
 {
+    // FIXME: trigger loading of citylights texture layer,
+    // since it is (incorrectly) also used for painting the shadow
+    bool _showCityLights = showCityLights();
+    setShowCityLights( true );
+    setShowCityLights( _showCityLights );
+
     m_showSunShading = show;
     m_sunLocator->update();
 }
@@ -163,6 +125,35 @@ bool MergedLayerDecorator::showSunShading() const
 void MergedLayerDecorator::setShowCityLights( bool show )
 {
     m_showCityLights = show;
+
+    if ( !m_showCityLights )
+        return;
+
+    if ( m_cityLightsTheme ) {
+        return;
+    }
+
+    // look for the texture layers inside the themes
+    // As long as we don't have an Layer Management Class we just lookup
+    // the name of the layer that has the same name as the theme ID
+    mDebug() << Q_FUNC_INFO;
+
+    m_cityLightsTheme = MapThemeManager::loadMapTheme( "earth/citylights/citylights.dgml" );
+    if ( !m_cityLightsTheme )
+        return;
+
+    QString cityLightsId = m_cityLightsTheme->head()->theme();
+    GeoSceneLayer* layer = m_cityLightsTheme->map()->layer( cityLightsId );
+    m_cityLightsTextureLayer = static_cast<GeoSceneTexture*>( layer->groundDataset() );
+
+    QString sourceDir = m_cityLightsTextureLayer->sourceDir();
+    QString installMap = m_cityLightsTextureLayer->installMap();
+    if ( !TileLoader::baseTilesAvailable( *m_cityLightsTextureLayer ) ) {
+        TileCreator *tileCreator = new TileCreator( sourceDir, installMap, "false" );
+        tileCreator->start();
+        tileCreator->wait();
+        tileCreator->deleteLater();
+    }
 }
 
 bool MergedLayerDecorator::showCityLights() const
