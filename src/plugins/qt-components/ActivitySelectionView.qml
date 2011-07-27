@@ -108,14 +108,14 @@ Rectangle {
             )
             activityModel.addActivity(
                 "Search",
-                "/usr/share/icons/oxygen/128x128/actions/edit-find.png",
+                "qrc:/icons/activity-search.png",
                 [],
                 [],
                 {}
             )
             activityModel.addActivity(
                 "Bookmarks",
-                "/usr/share/icons/oxygen/128x128/actions/bookmarks-organize.png",
+                "qrc:/icons/activity-bookmarks.png",
                 [],
                 [],
                 {}
@@ -129,7 +129,7 @@ Rectangle {
             )
             activityModel.addActivity(
                 "Weather",
-                "/usr/share/icons/oxygen/128x128/status/weather-showers-day.png",
+                "qrc:/icons/activity-weather.png",
                 [],
                 [],
                 {}
@@ -157,14 +157,14 @@ Rectangle {
             )
             activityModel.addActivity(
                 "Download",
-                "/usr/share/icons/oxygen/128x128/places/folder-downloads.png",
+                "qrc:/icons/activity-download.png",
                 [],
                 [],
                 {}
             )
             activityModel.addActivity(
                 "Configuration",
-                "/usr/share/icons/oxygen/128x128/actions/configure.png",
+                "qrc:/icons/activity-configure.png",
                 [],
                 [],
                 {}
