@@ -96,6 +96,26 @@ void StackedTileLoader::setTextureLayers( QVector<GeoSceneTexture const *> & tex
     d->detectMaxTileLevel();
 }
 
+void StackedTileLoader::setShowSunShading( bool show )
+{
+    d->m_layerDecorator.setShowSunShading( show );
+}
+
+bool StackedTileLoader::showSunShading() const
+{
+    return d->m_layerDecorator.showSunShading();
+}
+
+void StackedTileLoader::setShowCityLights( bool show )
+{
+    d->m_layerDecorator.setShowCityLights( show );
+}
+
+bool StackedTileLoader::showCityLights() const
+{
+    return d->m_layerDecorator.showCityLights();
+}
+
 void StackedTileLoader::setShowTileId( bool show )
 {
     d->m_layerDecorator.setShowTileId( show );

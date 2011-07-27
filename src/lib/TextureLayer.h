@@ -41,6 +41,9 @@ class TextureLayer : public QObject
     TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator );
     ~TextureLayer();
 
+    bool showSunShading() const;
+    bool showCityLights() const;
+
     /**
      * @brief Return the current tile zoom level. For example for OpenStreetMap
      *        possible values are 1..18, for BlueMarble 0..6.
@@ -63,6 +66,10 @@ class TextureLayer : public QObject
     void paintGlobe( GeoPainter *painter,
                      ViewParams *viewParams,
                      const QRect& dirtyRect );
+
+    void setShowSunShading( bool show );
+
+    void setShowCityLights( bool show );
 
     void setShowTileId( bool show );
 

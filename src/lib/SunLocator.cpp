@@ -55,8 +55,6 @@ public:
         : m_lon( 0.0 ),
           m_lat( 0.0 ),
           m_clock( clock ),
-          m_show( false ),
-          m_citylights( false ),
           m_centered( false ),
           m_planet( planet )
     {
@@ -66,8 +64,6 @@ public:
     qreal m_lat;
 
     MarbleClock* m_clock;
-    bool m_show;
-    bool m_citylights;
     bool m_centered;
     Planet* m_planet;
 };
@@ -234,28 +230,15 @@ void SunLocator::shadePixelComposite(QRgb& pixcol, const QRgb& dpixcol,
 void SunLocator::update()
 {
     updatePosition();
-    if ( d->m_show || d->m_centered ) {
-        if ( d->m_show )
-            emit updateSun();
-        if ( d->m_centered )
-            emit centerSun( getLon(), getLat() );
+
+    emit updateSun();
+
+    if ( d->m_centered ) {
+        emit centerSun( getLon(), getLat() );
         return;
     }
 
     emit updateStars();
-}
-
-void SunLocator::setShow(bool show)
-{
-    if ( show == d->m_show ) {
-        return;
-    }
-
-    mDebug() << "void SunLocator::setShow( bool )";
-    d->m_show = show;
-    updatePosition();
-
-    emit updateSun();
 }
 
 void SunLocator::setCentered(bool centered)
@@ -296,21 +279,6 @@ void SunLocator::setPlanet(Planet *planet)
     if ( !previousPlanet->id().isEmpty() ) {
         emit updateSun();
     }
-}
-
-void SunLocator::setCitylights(bool show)
-{
-    d->m_citylights = show;
-}
-
-bool SunLocator::getShow() const
-{
-    return d->m_show;
-}
-
-bool SunLocator::getCitylights() const
-{
-    return d->m_citylights;
 }
 
 bool SunLocator::getCentered() const

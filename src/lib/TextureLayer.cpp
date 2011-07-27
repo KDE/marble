@@ -31,6 +31,7 @@
 #include "MarbleDirs.h"
 #include "StackedTile.h"
 #include "StackedTileLoader.h"
+#include "SunLocator.h"
 #include "TextureColorizer.h"
 #include "TileLoader.h"
 #include "ViewParams.h"
@@ -52,6 +53,7 @@ public:
 
 public:
     TextureLayer  *const m_parent;
+    SunLocator *const m_sunLocator;
     TileLoader m_loader;
     StackedTileLoader    m_tileLoader;
     QCache<TileId, QPixmap> m_pixmapCache;
@@ -62,6 +64,7 @@ public:
 
 TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator, TextureLayer *parent )
     : m_parent( parent )
+    , m_sunLocator( sunLocator )
     , m_loader( downloadManager, mapThemeManager )
     , m_tileLoader( &m_loader, sunLocator )
     , m_pixmapCache( 100 )
@@ -158,6 +161,16 @@ TextureLayer::~TextureLayer()
     delete d;
 }
 
+bool TextureLayer::showSunShading() const
+{
+    return d->m_tileLoader.showSunShading();
+}
+
+bool TextureLayer::showCityLights() const
+{
+    return d->m_tileLoader.showCityLights();
+}
+
 void TextureLayer::paintGlobe( GeoPainter *painter,
                                ViewParams *viewParams,
                                const QRect& dirtyRect )
@@ -207,9 +220,33 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
     }
 }
 
+void TextureLayer::setShowSunShading( bool show )
+{
+    disconnect( d->m_sunLocator, SIGNAL( updateSun() ),
+                this, SLOT( update() ) );
+
+    if ( show ) {
+        connect( d->m_sunLocator, SIGNAL( updateSun() ),
+                 this,       SLOT( update() ) );
+    }
+
+    d->m_tileLoader.setShowSunShading( show );
+
+    update();
+}
+
+void TextureLayer::setShowCityLights( bool show )
+{
+    d->m_tileLoader.setShowCityLights( show );
+
+    update();
+}
+
 void TextureLayer::setShowTileId( bool show )
 {
     d->m_tileLoader.setShowTileId( show );
+
+    update();
 }
 
 void TextureLayer::setTextureColorizer( TextureColorizer *texcolorizer )

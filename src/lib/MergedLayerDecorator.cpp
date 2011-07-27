@@ -46,6 +46,8 @@ MergedLayerDecorator::MergedLayerDecorator( TileLoader * const tileLoader,
     : m_tileLoader( tileLoader ),
       m_sunLocator( sunLocator ),
       m_themeId(),
+      m_showSunShading( false ),
+      m_showCityLights( false ),
       m_showTileId( false ),
       m_cityLightsTheme( 0 ),
       m_cityLightsTextureLayer( 0 ),
@@ -122,13 +124,13 @@ QImage MergedLayerDecorator::merge( const TileId id, const QVector<QSharedPointe
             }
     }
 
-    if ( m_sunLocator->getShow() ) {
+    if ( m_showSunShading ) {
         // Initialize citylights layer if it hasn't happened already
         if ( !m_cityLightsTheme ) {
             initCityLights();
         }
 
-        if ( m_sunLocator->getCitylights() && m_sunLocator->planet()->id() == "earth" ) {
+        if ( m_showCityLights && m_sunLocator->planet()->id() == "earth" ) {
             paintCityLights( &resultImage, id );
         } else {
             paintSunShading( &resultImage, id );
@@ -145,6 +147,27 @@ QImage MergedLayerDecorator::merge( const TileId id, const QVector<QSharedPointe
 void MergedLayerDecorator::setThemeId( const QString &themeId )
 {
     m_themeId = themeId;
+}
+
+void MergedLayerDecorator::setShowSunShading( bool show )
+{
+    m_showSunShading = show;
+    m_sunLocator->update();
+}
+
+bool MergedLayerDecorator::showSunShading() const
+{
+    return m_showSunShading;
+}
+
+void MergedLayerDecorator::setShowCityLights( bool show )
+{
+    m_showCityLights = show;
+}
+
+bool MergedLayerDecorator::showCityLights() const
+{
+    return m_showCityLights;
 }
 
 void MergedLayerDecorator::setShowTileId( bool visible )
