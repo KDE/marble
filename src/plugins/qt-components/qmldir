@@ -1,3 +1,4 @@
+plugin QtComponentsPlugin
 MainWidget 0.12 MainWidget.qml
 SettingsPage 0.12 SettingsPage.qml
 SettingsListPage 0.12 SettingsListPage.qml
