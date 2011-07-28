@@ -98,7 +98,6 @@ LayerManager::LayerManager( MarbleModel* model, QObject *parent )
             d->m_dataPlugins.append( dataPlugin );
     }
 
-    // Just for initial testing
     foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
         renderPlugin->setMarbleModel( d->m_marbleModel );
     }
