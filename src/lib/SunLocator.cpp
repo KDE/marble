@@ -253,8 +253,7 @@ void SunLocator::setCentered(bool centered)
     if ( d->m_centered ) {
         updatePosition();
         emit centerSun( getLon(), getLat() );
-    } else
-        emit enableWidgetInput( true );
+    }
 }
 
 void SunLocator::setPlanet(Planet *planet)

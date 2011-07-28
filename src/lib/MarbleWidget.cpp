@@ -211,9 +211,6 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SLOT( creatingTilesStart( TileCreator*, const QString&,
                                                            const QString& ) ) );
 
-    m_widget->connect( m_model->sunLocator(), SIGNAL( enableWidgetInput( bool ) ),
-                       m_widget, SLOT( setInputEnabled( bool ) ) );
-
     m_widget->connect( m_model->sunLocator(), SIGNAL( updateStars() ),
                        m_widget, SLOT( update() ) );
 
@@ -952,6 +949,7 @@ void MarbleWidget::setShowCityLights( bool visible )
 void MarbleWidget::setShowSunInZenith( bool visible )
 {
     d->m_map->setShowSunInZenith( visible );
+    setInputEnabled( !d->m_map->showSunInZenith() );
 }
 
 void MarbleWidget::setShowAtmosphere( bool visible )
