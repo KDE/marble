@@ -85,10 +85,15 @@ void StackedTileLoader::setTextureLayers( QVector<GeoSceneTexture const *> & tex
 
     d->m_textureLayers = textureLayers;
 
+    if ( !d->m_textureLayers.isEmpty() ) {
+        const GeoSceneTexture *const firstTexture = d->m_textureLayers.at( 0 );
+        d->m_layerDecorator.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
+        d->m_layerDecorator.setThemeId( "maps/" + firstTexture->sourceDir() );
+    }
+
     clear();
 
     d->detectMaxTileLevel();
-    d->m_layerDecorator.setThemeId( "maps/" + d->m_textureLayers.at( 0 )->sourceDir() );
 }
 
 void StackedTileLoader::setShowTileId( bool show )

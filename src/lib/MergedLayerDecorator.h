@@ -45,6 +45,9 @@ class MergedLayerDecorator
     QImage merge( const TileId id, const QVector<QSharedPointer<TextureTile> > &tiles );
 
     void setThemeId( const QString &themeId );
+
+    void setLevelZeroLayout( int levelZeroColumns, int levelZeroRows );
+
     void setShowTileId(bool show);
 
  private:
@@ -62,6 +65,8 @@ class MergedLayerDecorator
     TileLoader * const m_tileLoader;
     SunLocator* m_sunLocator;
     QString m_themeId;
+    int m_levelZeroColumns;
+    int m_levelZeroRows;
     bool m_showTileId;
     GeoSceneDocument *m_cityLightsTheme;
     GeoSceneTexture *m_cityLightsTextureLayer;

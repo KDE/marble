@@ -47,6 +47,8 @@ MergedLayerDecorator::MergedLayerDecorator( TileLoader * const tileLoader,
     : m_tileLoader( tileLoader ),
       m_sunLocator( sunLocator ),
       m_themeId(),
+      m_levelZeroColumns( 0 ),
+      m_levelZeroRows( 0 ),
       m_showTileId( false ),
       m_cityLightsTheme( 0 ),
       m_cityLightsTextureLayer( 0 ),
@@ -125,11 +127,11 @@ QImage MergedLayerDecorator::merge( const TileId id, const QVector<QSharedPointe
 
     if ( m_sunLocator->getShow() ) {
         // Initialize citylights layer if it hasn't happened already
-        if ( !m_cityLightsTheme ) {
+        if ( m_sunLocator->getCitylights() && !m_cityLightsTheme ) {
             initCityLights();
         }
 
-        if ( m_sunLocator->getCitylights() && m_sunLocator->planet()->id() == "earth" ) {
+        if ( m_sunLocator->getCitylights() && m_sunLocator->planet()->id() == "earth" && m_cityLightsTextureLayer ) {
             paintCityLights( &resultImage, id );
         } else {
             paintSunShading( &resultImage, id );
@@ -148,6 +150,11 @@ void MergedLayerDecorator::setThemeId( const QString &themeId )
     m_themeId = themeId;
 }
 
+void MergedLayerDecorator::setLevelZeroLayout( int levelZeroColumns, int levelZeroRows )
+{
+    m_levelZeroColumns = levelZeroColumns;
+    m_levelZeroRows = levelZeroRows;
+}
 void MergedLayerDecorator::setShowTileId( bool visible )
 {
     m_showTileId = visible;
@@ -258,11 +265,9 @@ void MergedLayerDecorator::paintSunShading( QImage *tileImage, const TileId &id 
     // TODO add support for 8-bit maps?
     // add sun shading
     const qreal  global_width  = tileImage->width()
-        * TileLoaderHelper::levelToColumn( m_cityLightsTextureLayer->levelZeroColumns(),
-                                           id.zoomLevel() );
+        * TileLoaderHelper::levelToColumn( m_levelZeroColumns, id.zoomLevel() );
     const qreal  global_height = tileImage->height()
-        * TileLoaderHelper::levelToRow( m_cityLightsTextureLayer->levelZeroRows(),
-                                        id.zoomLevel() );
+        * TileLoaderHelper::levelToRow( m_levelZeroRows, id.zoomLevel() );
     const qreal lon_scale = 2*M_PI / global_width;
     const qreal lat_scale = -M_PI / global_height;
     const int tileHeight = tileImage->height();
