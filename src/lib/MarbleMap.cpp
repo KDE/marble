@@ -1078,6 +1078,7 @@ void MarbleMap::setShowSunShading( bool visible )
 void MarbleMap::setShowCityLights( bool visible )
 {
     d->m_textureLayer.setShowCityLights( visible );
+    setPropertyValue( "citylights", visible );
     d->m_model->sunLocator()->update();
 }
 
