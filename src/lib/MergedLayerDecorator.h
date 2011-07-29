@@ -46,6 +46,8 @@ class MergedLayerDecorator
 
     void setThemeId( const QString &themeId );
 
+    void setLevelZeroLayout( int levelZeroColumns, int levelZeroRows );
+
     void setShowSunShading( bool show );
     bool showSunShading() const;
 
@@ -67,6 +69,8 @@ class MergedLayerDecorator
     TileLoader * const m_tileLoader;
     SunLocator* m_sunLocator;
     QString m_themeId;
+    int m_levelZeroColumns;
+    int m_levelZeroRows;
     bool m_showSunShading;
     bool m_showCityLights;
     bool m_showTileId;

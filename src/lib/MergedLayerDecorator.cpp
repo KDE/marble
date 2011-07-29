@@ -46,6 +46,8 @@ MergedLayerDecorator::MergedLayerDecorator( TileLoader * const tileLoader,
     : m_tileLoader( tileLoader ),
       m_sunLocator( sunLocator ),
       m_themeId(),
+      m_levelZeroColumns( 0 ),
+      m_levelZeroRows( 0 ),
       m_showSunShading( false ),
       m_showCityLights( false ),
       m_showTileId( false ),
@@ -85,8 +87,8 @@ QImage MergedLayerDecorator::merge( const TileId id, const QVector<QSharedPointe
             }
     }
 
-    if ( m_showSunShading && m_cityLightsTextureLayer ) {
-        if ( m_showCityLights && m_sunLocator->planet()->id() == "earth" ) {
+    if ( m_showSunShading ) {
+        if ( m_showCityLights && m_sunLocator->planet()->id() == "earth" && m_cityLightsTextureLayer ) {
             paintCityLights( &resultImage, id );
         } else {
             paintSunShading( &resultImage, id );
@@ -107,14 +109,14 @@ void MergedLayerDecorator::setThemeId( const QString &themeId )
 
 void MergedLayerDecorator::setShowSunShading( bool show )
 {
-    // FIXME: trigger loading of citylights texture layer,
-    // since it is (incorrectly) also used for painting the shadow
-    bool _showCityLights = showCityLights();
-    setShowCityLights( true );
-    setShowCityLights( _showCityLights );
-
     m_showSunShading = show;
     m_sunLocator->update();
+}
+
+void MergedLayerDecorator::setLevelZeroLayout( int levelZeroColumns, int levelZeroRows )
+{
+    m_levelZeroColumns = levelZeroColumns;
+    m_levelZeroRows = levelZeroRows;
 }
 
 bool MergedLayerDecorator::showSunShading() const
@@ -184,8 +186,8 @@ void MergedLayerDecorator::paintCityLights( QImage *tileImage, const TileId &id 
         * TileLoaderHelper::levelToColumn( m_cityLightsTextureLayer->levelZeroColumns(),
                                            id.zoomLevel() );
     const qreal  global_height = tileImage->height()
-        * TileLoaderHelper::levelToRow( m_cityLightsTextureLayer->levelZeroRows(),
-                                        id.zoomLevel() );
+            * TileLoaderHelper::levelToRow( m_cityLightsTextureLayer->levelZeroRows(),
+                                            id.zoomLevel() );
     const qreal lon_scale = 2*M_PI / global_width;
     const qreal lat_scale = -M_PI / global_height;
     const int tileHeight = tileImage->height();
@@ -271,11 +273,9 @@ void MergedLayerDecorator::paintSunShading( QImage *tileImage, const TileId &id 
     // TODO add support for 8-bit maps?
     // add sun shading
     const qreal  global_width  = tileImage->width()
-        * TileLoaderHelper::levelToColumn( m_cityLightsTextureLayer->levelZeroColumns(),
-                                           id.zoomLevel() );
+        * TileLoaderHelper::levelToColumn( m_levelZeroColumns, id.zoomLevel() );
     const qreal  global_height = tileImage->height()
-        * TileLoaderHelper::levelToRow( m_cityLightsTextureLayer->levelZeroRows(),
-                                        id.zoomLevel() );
+        * TileLoaderHelper::levelToRow( m_levelZeroRows, id.zoomLevel() );
     const qreal lon_scale = 2*M_PI / global_width;
     const qreal lat_scale = -M_PI / global_height;
     const int tileHeight = tileImage->height();
