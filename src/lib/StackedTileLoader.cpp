@@ -94,6 +94,7 @@ void StackedTileLoader::setTextureLayers( QVector<GeoSceneTexture const *> & tex
 
     if ( !d->m_textureLayers.isEmpty() ) {
         const GeoSceneTexture *const firstTexture = d->m_textureLayers.at( 0 );
+        d->m_blendingFactory.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
         d->m_layerDecorator.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
         d->m_layerDecorator.setThemeId( "maps/" + d->m_textureLayers.at( 0 )->sourceDir() );
     }

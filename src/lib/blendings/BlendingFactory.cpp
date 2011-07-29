@@ -22,6 +22,11 @@
 namespace Marble
 {
 
+void BlendingFactory::setLevelZeroLayout( int levelZeroColumns, int levelZeroRows )
+{
+    m_sunLightBlending->setLevelZeroLayout( levelZeroColumns, levelZeroRows );
+}
+
 Blending const * BlendingFactory::findBlending( QString const & name ) const
 {
     Blending const * const result = m_blendings.value( name, 0 );
@@ -31,6 +36,7 @@ Blending const * BlendingFactory::findBlending( QString const & name ) const
 }
 
 BlendingFactory::BlendingFactory( SunLocator *sunLocator )
+    : m_sunLightBlending( new SunLightBlending( sunLocator ) )
 {
     // Neutral blendings
     m_blendings.insert( "AllanonBlending", new AllanonBlending );
@@ -74,7 +80,14 @@ BlendingFactory::BlendingFactory( SunLocator *sunLocator )
 
     // Special purpose blendings
     m_blendings.insert( "CloudsBlending", new CloudsBlending );
-    m_blendings.insert( "SunLightBlending", new SunLightBlending( sunLocator ) );
+    m_blendings.insert( "SunLightBlending", m_sunLightBlending );
+}
+
+BlendingFactory::~BlendingFactory()
+{
+    m_blendings.remove( "SunLightBlending" );
+    delete m_sunLightBlending;
+    qDeleteAll( m_blendings );
 }
 
 }

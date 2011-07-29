@@ -29,15 +29,17 @@ class SunLocator;
 class SunLightBlending: public Blending
 {
  public:
-    explicit SunLightBlending( SunLocator * sunLocator );
+    explicit SunLightBlending( const SunLocator * sunLocator );
     virtual ~SunLightBlending();
     virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
 
+    void setLevelZeroLayout( int levelZeroColumns, int levelZeroRows );
+
  private:
-    void shadePixelComposite( QRgb & bottom, QRgb const top, qreal const brightness ) const;
-    qreal shading( qreal const deltaLon, qreal const a, qreal const c ) const;
-    int maxDivisor( int const maximum, int const fullLength ) const;
-    SunLocator * const m_sunLocator;
+    static int maxDivisor( int maximum, int fullLength );
+    const SunLocator * const m_sunLocator;
+    int m_levelZeroColumns;
+    int m_levelZeroRows;
 };
 
 }
