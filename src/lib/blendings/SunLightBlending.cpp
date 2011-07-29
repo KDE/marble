@@ -15,9 +15,7 @@
 
 #include "SunLightBlending.h"
 
-#include "MarbleClock.h"
 #include "MarbleDebug.h"
-#include "Planet.h"
 #include "SunLocator.h"
 #include "TextureTile.h"
 #include "global.h"
@@ -29,15 +27,14 @@
 namespace Marble
 {
 
-SunLightBlending::SunLightBlending()
+SunLightBlending::SunLightBlending( SunLocator * sunLocator )
     : Blending(),
-      m_sunLocator( new SunLocator( new MarbleClock, new Planet( "earth" )))
+      m_sunLocator( sunLocator )
 {
 }
 
 SunLightBlending::~SunLightBlending()
 {
-    delete m_sunLocator;
 }
 
 void SunLightBlending::blend( QImage * const bottom, TextureTile const * const top ) const

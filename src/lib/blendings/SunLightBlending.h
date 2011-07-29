@@ -29,7 +29,7 @@ class SunLocator;
 class SunLightBlending: public Blending
 {
  public:
-    SunLightBlending();
+    explicit SunLightBlending( SunLocator * sunLocator );
     virtual ~SunLightBlending();
     virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
 

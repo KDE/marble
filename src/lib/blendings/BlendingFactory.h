@@ -22,16 +22,15 @@
 namespace Marble
 {
 class Blending;
+class SunLocator;
 
 class BlendingFactory
 {
  public:
-    static BlendingFactory const * instance();
+    BlendingFactory( SunLocator *sunLocator );
     Blending const * findBlending( QString const & name ) const;
 
  private:
-    static BlendingFactory const * s_instance;
-    BlendingFactory();
     QHash<QString, Blending const *> m_blendings;
 };
 
