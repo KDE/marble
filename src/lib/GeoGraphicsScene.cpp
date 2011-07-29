@@ -93,7 +93,7 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAl
     rect.setRight( key.x() );
     rect.setBottom( key.y() );
     
-    TileCoordsPyramid pyramid( s_tileZoomLevel, s_tileZoomLevel );
+    TileCoordsPyramid pyramid( 0, s_tileZoomLevel );
     pyramid.setBottomLevelCoords( rect );
 
     for ( int level = pyramid.topLevel(); level <= pyramid.bottomLevel(); ++level ) {
@@ -125,11 +125,36 @@ void GeoGraphicsScene::clear()
 
 void GeoGraphicsScene::addIdem( GeoGraphicsItem* item )
 {
+    // Select zoom level so that the object fit in single tile
+    int zoomLevel;
+    qreal north, south, east, west;
+    item->latLonAltBox().boundaries( north, south, east, west );
+    for(zoomLevel = s_tileZoomLevel; zoomLevel >= 0; zoomLevel--)
+    {
+        if( d->coordToTileId( GeoDataCoordinates(west, north, 0), zoomLevel ) == 
+            d->coordToTileId( GeoDataCoordinates(east, south, 0), zoomLevel ) )
+            break;
+    }
+    int tnorth, tsouth, teast, twest;
+    TileId key;
+    
+    key = d->coordToTileId( GeoDataCoordinates(west, north, 0), zoomLevel );
+    twest = key.x();
+    tnorth = key.y();
 
-    TileId key = d->coordToTileId( item->coordinate(), s_tileZoomLevel );
-    QList< GeoGraphicsItem* >& tileList = d->m_items[key]; 
-    QList< GeoGraphicsItem* >::iterator position = qLowerBound( tileList.begin(), tileList.end(), item, zValueLessThan );
-    tileList.insert( position, item );
+    key = d->coordToTileId( GeoDataCoordinates(east, south, 0), zoomLevel );
+    teast = key.x();
+    tsouth = key.y();
+        
+    for( int i = twest; i <= teast; i++ )
+    {
+        for( int j = tsouth; j <= tnorth; j++ )
+        {
+            QList< GeoGraphicsItem* >& tileList = d->m_items[TileId( "", zoomLevel, i, j )]; 
+            QList< GeoGraphicsItem* >::iterator position = qLowerBound( tileList.begin(), tileList.end(), item, zValueLessThan );
+            tileList.insert( position, item );
+        }
+    }
 }
 };
 

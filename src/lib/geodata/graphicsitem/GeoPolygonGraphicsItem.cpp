@@ -25,6 +25,7 @@ void GeoPolygonGraphicsItem::setPolygon( const GeoDataPolygon& polygon )
 {
     m_polygon = GeoDataPolygon( polygon );
     setCoordinate( m_polygon.latLonAltBox().center() );
+    setLatLonAltBox( m_polygon.latLonAltBox() );
 }
 
 void GeoPolygonGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,

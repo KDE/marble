@@ -26,12 +26,14 @@ void GeoLineStringGraphicsItem::setLineString( const GeoDataLineString& lineStri
 {
     m_lineString = GeoDataLineString( lineString );
     setCoordinate( lineString.latLonAltBox().center() );
+    setLatLonAltBox( lineString.latLonAltBox() );
 }
 
 void GeoLineStringGraphicsItem::append( const GeoDataCoordinates& coordinates )
 {
     m_lineString.append( coordinates );
     setCoordinate( m_lineString.latLonAltBox().center() );
+    setLatLonAltBox( m_lineString.latLonAltBox() );
 }
 
 void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
