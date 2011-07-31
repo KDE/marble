@@ -103,12 +103,23 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAl
         for ( int x = x1; x <= x2; ++x ) {
             for ( int y = y1; y <= y2; ++y ) {
                 TileId const tileId( "", level, x, y );
-                result += d->m_items.value(tileId);
+                const QList< GeoGraphicsItem* > &objects = d->m_items.value(tileId);
+                QList< GeoGraphicsItem* >::iterator before = result.begin();
+                QList< GeoGraphicsItem* >::const_iterator currentItem = objects.constBegin();
+                while( currentItem != objects.end() )
+                {
+                    while( ( currentItem != objects.end() )
+                      && ( ( before == result.end() ) || ( (*currentItem)->zValue() < (*before)->zValue() ) ) )
+                    {
+                        before = result.insert( before, *currentItem );
+                        currentItem++;
+                    }
+                    if ( before != result.end() )
+                        before++;
+                }
             }
         }
     }
-    //TODO: Even quicksort isn't fast enouth... 
-    qSort( result.begin(), result.end(), zValueLessThan );
     return result;
 }
 
