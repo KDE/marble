@@ -128,6 +128,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(bool showGrid     READ showGrid        WRITE setShowGrid)
 
     Q_PROPERTY(bool showClouds   READ showClouds      WRITE setShowClouds)
+    Q_PROPERTY(bool showSunShading READ showSunShading WRITE setShowSunShading)
+    Q_PROPERTY(bool showCityLights READ showCityLights WRITE setShowCityLights)
+    Q_PROPERTY(bool showSunInZenith READ showSunInZenith WRITE setShowSunInZenith)
     Q_PROPERTY(bool showAtmosphere READ showAtmosphere WRITE setShowAtmosphere)
     Q_PROPERTY(bool showCrosshairs READ showCrosshairs WRITE setShowCrosshairs)
 
@@ -439,6 +442,24 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return The cloud cover visibility.
      */
     bool showClouds() const;
+
+    /**
+     * @brief  Return whether the night shadow is visible.
+     * @return visibility of night shadow
+     */
+    bool showSunShading() const;
+
+    /**
+     * @brief  Return whether the city lights are shown instead of the night shadow.
+     * @return visibility of city lights
+     */
+    bool showCityLights() const;
+
+    /**
+     * @brief  Return whether the sun is shown in the zenith.
+     * @return visibility of sun in the zenith
+     */
+    bool showSunInZenith() const;
 
     /**
      * @brief  Return whether the atmospheric glow is visible.
@@ -768,6 +789,24 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  visible  visibility of the cloud cover
      */
     void setShowClouds( bool visible );
+
+    /**
+     * @brief  Set whether the night shadow is visible.
+     * @param  visibile visibility of shadow
+     */
+    void setShowSunShading( bool visible );
+
+    /**
+     * @brief  Set whether city lights instead of night shadow are visible.
+     * @param  visible visibility of city lights
+     */
+    void setShowCityLights( bool visible );
+
+    /**
+     * @brief Set whether the sun is visible in the zenith.
+     * @param visible  visibility of the sun in the zenith
+     */
+    void setShowSunInZenith( bool visible );
 
     /**
      * @brief  Set whether the atmospheric glow is visible

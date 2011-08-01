@@ -19,13 +19,17 @@ namespace Marble
 {
 class GeoDataContainer;
 class GeoDataDocument;
+class FileLoaderPrivate;
+class MarbleModel;
 
 class FileLoader : public QThread
 {
     Q_OBJECT
     public:
-        FileLoader( QObject* parent, const QString& file, DocumentRole role );
-        FileLoader( QObject* parent, const QString& contents, const QString& name, DocumentRole role );
+        FileLoader( QObject* parent, MarbleModel *model,
+                    const QString& file, DocumentRole role );
+        FileLoader( QObject* parent, MarbleModel *model,
+                    const QString& contents, const QString& name, DocumentRole role );
         virtual ~FileLoader();
 
         void run();
@@ -34,24 +38,14 @@ class FileLoader : public QThread
     Q_SIGNALS:
         void loaderFinished( FileLoader* );
         void newGeoDataDocumentAdded( GeoDataDocument* );
-    private:
-        void importKml( const QString& filename );
-        void importKmlFromData();
-        void loadFile(const QString &filename );
-        void saveFile(const QString& filename );
-        void savePlacemarks(QDataStream &out, const GeoDataContainer *container);
-        void loadPntFile( const QString &fileName );
 
-        void setupStyle( GeoDataDocument *doc, GeoDataContainer *container );
-        void createFilterProperties( GeoDataContainer *container );
-        int cityPopIdx( qint64 population ) const;
-        int spacePopIdx( qint64 population ) const;
-        int areaPopIdx( qreal area ) const;
+private:
+        Q_PRIVATE_SLOT ( d, void documentParsed( GeoDataDocument *) )
 
-        QString m_filepath;
-        QString m_contents;
-        DocumentRole m_documentRole;
-        GeoDataDocument *m_document;
+        friend class FileLoaderPrivate;
+
+        FileLoaderPrivate *d;
+
 };
 
 } // namespace Marble

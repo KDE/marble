@@ -38,7 +38,6 @@ namespace Marble
 {
 
 class MarbleMap;
-class SunLocator;
 
 class WorldClock : public Plasma::Applet
 {
@@ -89,7 +88,6 @@ class WorldClock : public Plasma::Applet
 
         //the map
         MarbleMap  *m_map;
-        SunLocator *m_sun;
 
         //hover stuff
         bool m_isHovered;

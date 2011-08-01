@@ -211,9 +211,6 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SLOT( creatingTilesStart( TileCreator*, const QString&,
                                                            const QString& ) ) );
 
-    m_widget->connect( m_model->sunLocator(), SIGNAL( enableWidgetInput( bool ) ),
-                       m_widget, SLOT( setInputEnabled( bool ) ) );
-
     m_widget->connect( m_model->sunLocator(), SIGNAL( updateStars() ),
                        m_widget, SLOT( update() ) );
 
@@ -431,6 +428,21 @@ bool MarbleWidget::showCompass() const
 bool MarbleWidget::showClouds() const
 {
     return d->m_map->showClouds();
+}
+
+bool MarbleWidget::showSunShading() const
+{
+    return d->m_map->showSunShading();
+}
+
+bool MarbleWidget::showCityLights() const
+{
+    return d->m_map->showCityLights();
+}
+
+bool MarbleWidget::showSunInZenith() const
+{
+    return d->m_map->showSunInZenith();
 }
 
 bool MarbleWidget::showAtmosphere() const
@@ -918,6 +930,26 @@ void MarbleWidget::setShowClouds( bool visible )
     d->m_map->setShowClouds( visible );
 
     repaint();
+}
+
+void MarbleWidget::setShowSunShading( bool visible )
+{
+    d->m_map->setShowSunShading( visible );
+
+    repaint();
+}
+
+void MarbleWidget::setShowCityLights( bool visible )
+{
+    d->m_map->setShowCityLights( visible );
+
+    repaint();
+}
+
+void MarbleWidget::setShowSunInZenith( bool visible )
+{
+    d->m_map->setShowSunInZenith( visible );
+    setInputEnabled( !d->m_map->showSunInZenith() );
 }
 
 void MarbleWidget::setShowAtmosphere( bool visible )

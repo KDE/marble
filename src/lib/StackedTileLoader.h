@@ -75,6 +75,12 @@ class StackedTileLoader : public QObject
 
         void setTextureLayers( QVector<GeoSceneTexture const *> & );
 
+        void setShowSunShading( bool show );
+        bool showSunShading() const;
+
+        void setShowCityLights( bool show );
+        bool showCityLights() const;
+
         void setShowTileId( bool show );
 
         int tileColumnCount( int level ) const;

@@ -167,8 +167,6 @@ void MarbleMapPrivate::construct()
     m_showFrameRate = false;
 
 
-    m_parent->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
-                       &m_textureLayer,       SLOT( update() ) );
     m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
                        m_parent,              SLOT( centerOn( qreal, qreal ) ) );
 
@@ -550,6 +548,21 @@ bool MarbleMap::showGrid() const
 bool MarbleMap::showClouds() const
 {
     return d->m_viewParams.showClouds();
+}
+
+bool MarbleMap::showSunShading() const
+{
+    return d->m_textureLayer.showSunShading();
+}
+
+bool MarbleMap::showCityLights() const
+{
+    return d->m_textureLayer.showCityLights();
+}
+
+bool MarbleMap::showSunInZenith() const
+{
+    return d->m_model->sunLocator()->getCentered();
 }
 
 bool MarbleMap::showAtmosphere() const
@@ -1012,6 +1025,23 @@ void MarbleMap::setShowClouds( bool visible )
 {
     d->m_viewParams.setShowClouds( visible );
     d->m_textureLayer.setNeedsUpdate();
+}
+
+void MarbleMap::setShowSunShading( bool visible )
+{
+    d->m_textureLayer.setShowSunShading( visible );
+    d->m_model->sunLocator()->update();
+}
+
+void MarbleMap::setShowCityLights( bool visible )
+{
+    d->m_textureLayer.setShowCityLights( visible );
+    d->m_model->sunLocator()->update();
+}
+
+void MarbleMap::setShowSunInZenith( bool visible )
+{
+    d->m_model->sunLocator()->setCentered( visible );
 }
 
 void MarbleMap::setShowTileId( bool visible )

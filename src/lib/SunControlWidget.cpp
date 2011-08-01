@@ -18,16 +18,16 @@
 #include <QtGui/QShowEvent>
 
 // Marble
-#include "SunLocator.h"
 #include "MarbleDebug.h"
+#include "MarbleWidget.h"
 
 using namespace Marble;
 /* TRANSLATOR Marble::SunControlWidget */
 
-SunControlWidget::SunControlWidget( SunLocator* sunLocator, QWidget* parent )
+SunControlWidget::SunControlWidget( MarbleWidget* marbleWidget, QWidget* parent )
     : QDialog( parent ),
       m_uiWidget( new Ui::SunControlWidget ),
-      m_sunLocator( sunLocator ),
+      m_marbleWidget( marbleWidget ),
       m_shadow( "shadow" )
 {
     m_uiWidget->setupUi( this );
@@ -53,33 +53,30 @@ void SunControlWidget::apply()
         if( m_uiWidget->showShadow->isChecked() )
         {
             emit showSun( true );
-            m_sunLocator->setCitylights( false );
-            m_sunLocator->update();
+            m_marbleWidget->setShowCityLights( false );
             m_shadow = "shadow";
         }
         else if( m_uiWidget->showNightMap->isChecked() )
         {
             emit showSun( true );
-            m_sunLocator->setCitylights( true );
-            m_sunLocator->update();
+            m_marbleWidget->setShowCityLights( true );
             m_shadow = "nightmap";
         }
     }
     else
     {
         emit showSun( false );
-        m_sunLocator->setCitylights( false );
-        m_sunLocator->update();
+        m_marbleWidget->setShowCityLights( false );
     }
 
     if( m_uiWidget->showZenith->isChecked() )
     {
-        m_sunLocator->setCentered( true );
+        m_marbleWidget->setShowSunInZenith( true );
         emit showSunInZenith( true );
     }
     else if( m_uiWidget->hideZenith->isChecked() )
     {
-        m_sunLocator->setCentered( false );
+        m_marbleWidget->setShowSunInZenith( false );
         emit showSunInZenith( false );
     }
 }
@@ -94,11 +91,11 @@ void SunControlWidget::showEvent( QShowEvent* event )
     if( !event->spontaneous() ) 
     {
         // Loading all options
-        if( m_sunLocator->getShow() )
+        if( m_marbleWidget->showSunShading() )
         {
             m_uiWidget->sunShading->setChecked( true );
-            m_uiWidget->showShadow->setChecked( m_sunLocator->getShow() );
-            m_uiWidget->showNightMap->setChecked( m_sunLocator->getCitylights() );
+            m_uiWidget->showShadow->setChecked( m_marbleWidget->showSunShading() );
+            m_uiWidget->showNightMap->setChecked( m_marbleWidget->showCityLights() );
         }
         else
         {   
@@ -112,8 +109,8 @@ void SunControlWidget::showEvent( QShowEvent* event )
                 m_uiWidget->showNightMap->setChecked( true );
             }
         }
-        m_uiWidget->showZenith->setChecked( m_sunLocator->getCentered() );
-        m_uiWidget->hideZenith->setChecked( !m_sunLocator->getCentered() );
+        m_uiWidget->showZenith->setChecked( m_marbleWidget->showSunInZenith() );
+        m_uiWidget->hideZenith->setChecked( !m_marbleWidget->showSunInZenith() );
     }
 }
 

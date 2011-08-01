@@ -80,7 +80,6 @@
 #include "routing/RouteRequest.h"
 #include "SunControlWidget.h"
 #include "TimeControlWidget.h"
-#include "SunLocator.h"
 #include "TileCoordsPyramid.h"
 #include "ViewportParams.h"
 #include "MarbleClock.h"
@@ -320,7 +319,7 @@ void MarblePart::showStatusBar( bool isChecked )
 void MarblePart::controlSun()
 {
     if ( !m_sunControlDialog ) {
-        m_sunControlDialog = new SunControlWidget( m_controlView->sunLocator() );
+        m_sunControlDialog = new SunControlWidget( m_controlView->marbleWidget(), m_controlView );
         connect( m_sunControlDialog, SIGNAL( showSun( bool ) ),
                  this,               SLOT ( showSun( bool ) ) );
         connect( m_sunControlDialog, SIGNAL( showSun( bool ) ),
@@ -348,13 +347,13 @@ void MarblePart::controlTime()
 
 void MarblePart::showSun( bool active )
 {
-    m_controlView->sunLocator()->setShow( active ); 
+    m_controlView->marbleWidget()->setShowSunShading( active );
     m_sunControlDialog->setSunShading( active );
 }
 
 void MarblePart::showSunInZenith( bool active )
 {
-    m_controlView->sunLocator()->setCentered( active );
+    m_controlView->marbleWidget()->setShowSunInZenith( active );
 }
 
 void MarblePart::workOffline( bool offline )
@@ -419,10 +418,10 @@ void MarblePart::readSettings()
     lockFloatItemPosition(MarbleSettings::lockFloatItemPositions());
     
     // Sun
-    m_controlView->sunLocator()->setShow( MarbleSettings::showSun() );
+    m_controlView->marbleWidget()->setShowSunShading( MarbleSettings::showSun() );
     m_showShadow->setChecked( MarbleSettings::showSun() );
-    m_controlView->sunLocator()->setCitylights( MarbleSettings::showCitylights() );
-    m_controlView->sunLocator()->setCentered( MarbleSettings::centerOnSun() );
+    m_controlView->marbleWidget()->setShowCityLights( MarbleSettings::showCitylights() );
+    m_controlView->marbleWidget()->setShowSunInZenith( MarbleSettings::centerOnSun() );
     m_showSunInZenith->setChecked( MarbleSettings::centerOnSun() );
 
     // View
@@ -617,9 +616,9 @@ void MarblePart::writeSettings()
     MarbleSettings::setAngleUnit( m_controlView->marbleWidget()->defaultAngleUnit() );
 
     // Sun
-    MarbleSettings::setShowSun( m_controlView->sunLocator()->getShow() );
-    MarbleSettings::setShowCitylights( m_controlView->sunLocator()->getCitylights() );
-    MarbleSettings::setCenterOnSun( m_controlView->sunLocator()->getCentered() );
+    MarbleSettings::setShowSun( m_controlView->marbleWidget()->showSunShading() );
+    MarbleSettings::setShowCitylights( m_controlView->marbleWidget()->showCityLights() );
+    MarbleSettings::setCenterOnSun( m_controlView->marbleWidget()->showSunInZenith() );
 
     // Caches
     MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->
@@ -1264,6 +1263,7 @@ void MarblePart::showMapWizard()
     mapWizard->exec();
     MarbleSettings::setWmsServers( mapWizard->wmsServers() );
     MarbleSettings::setStaticUrlServers( mapWizard->staticUrlServers() );
+    mapWizard->deleteLater();
 }
 
 void MarblePart::editSettings()

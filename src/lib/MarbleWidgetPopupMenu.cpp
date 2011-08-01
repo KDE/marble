@@ -128,7 +128,11 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
         return;
     }
 
-    m_lmbMenu->clear();
+    if (!m_lmbMenu->isEmpty()) {
+        // just clear()-ing the menu won't delete the submenus
+        m_lmbMenu->deleteLater();
+        m_lmbMenu = new QMenu( m_widget );
+    }
     m_featurelist = m_widget->whichFeatureAt( curpos );
 
     int  actionidx = 1;

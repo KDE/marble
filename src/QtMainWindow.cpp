@@ -57,7 +57,6 @@
 #include "AbstractFloatItem.h"
 #include "MarbleModel.h"
 #include "MarbleClock.h"
-#include "SunLocator.h"
 #include "BookmarkManager.h"
 #include "NewBookmarkFolderDialog.h"
 #include "GeoDataPlacemark.h"
@@ -732,7 +731,7 @@ void MainWindow::lockPosition( bool isChecked )
 void MainWindow::controlSun()
 {
     if (!m_sunControlDialog) {
-        m_sunControlDialog = new SunControlWidget( m_controlView->sunLocator() );
+        m_sunControlDialog = new SunControlWidget( m_controlView->marbleWidget(), this );
         connect( m_sunControlDialog, SIGNAL( showSun( bool ) ),
                  this,               SLOT ( showSun( bool ) ) );
     }
@@ -757,7 +756,7 @@ void MainWindow::controlTime()
 
 void MainWindow::showSun( bool active )
 {
-    m_controlView->sunLocator()->setShow( active );
+    m_controlView->marbleWidget()->setShowSunShading( active );
 }
 
 void MainWindow::reload()
@@ -951,9 +950,9 @@ void MainWindow::readSettings()
      settings.endGroup();
 
      settings.beginGroup( "Sun" );
-         m_controlView->sunLocator()->setShow( settings.value( "showSun", false ).toBool() );
-         m_controlView->sunLocator()->setCitylights( settings.value( "showCitylights", false ).toBool() );
-         m_controlView->sunLocator()->setCentered( settings.value( "centerOnSun", false ).toBool() );
+         m_controlView->marbleWidget()->setShowSunShading( settings.value( "showSun", false ).toBool() );
+         m_controlView->marbleWidget()->setShowCityLights( settings.value( "showCitylights", false ).toBool() );
+         m_controlView->marbleWidget()->setShowSunInZenith( settings.value( "centerOnSun", false ).toBool() );
      settings.endGroup();
 
      settings.beginGroup( "Time" );
@@ -1098,9 +1097,9 @@ void MainWindow::writeSettings()
      settings.endGroup();
 
      settings.beginGroup( "Sun" );
-         settings.setValue( "showSun",        m_controlView->sunLocator()->getShow() );
-         settings.setValue( "showCitylights", m_controlView->sunLocator()->getCitylights() );
-         settings.setValue( "centerOnSun",    m_controlView->sunLocator()->getCentered() );
+         settings.setValue( "showSun",        m_controlView->marbleWidget()->showSunShading() );
+         settings.setValue( "showCitylights", m_controlView->marbleWidget()->showCityLights() );
+         settings.setValue( "centerOnSun",    m_controlView->marbleWidget()->showSunInZenith() );
      settings.endGroup();
 
       settings.beginGroup( "Time" );
@@ -1413,6 +1412,8 @@ void MainWindow::showMapWizard()
         settings.setValue( "wmsServers", mapWizard->wmsServers() );
         settings.setValue( "staticUrlServers", mapWizard->staticUrlServers() );
     settings.endGroup();
+
+    mapWizard->deleteLater();
 }
 
 void MainWindow::showGoToDialog()

@@ -17,7 +17,6 @@
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "GeoPainter.h"
-#include "SunLocator.h"
 #include "ViewportParams.h"
 #include "MarbleModel.h"
 
