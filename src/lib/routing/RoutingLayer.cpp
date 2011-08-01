@@ -266,7 +266,6 @@ void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
 
 void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 {
-    m_instructionRegions.clear();
     GeoDataLineString waypoints = m_routingModel->route().path();
 
     QPen bluePen( alphaAdjusted( oxygenSkyBlue4, 200 ) );
@@ -320,6 +319,11 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         }
     }
 
+    if ( m_viewContext == Animation ) {
+        return;
+    }
+
+    m_instructionRegions.clear();
     for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
         QModelIndex index = m_routingModel->index( i, 0 );
         GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
