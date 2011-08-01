@@ -107,6 +107,8 @@ public:
 
     AlternativeRoutesModel* m_alternativeRoutesModel;
 
+    ViewContext m_viewContext;
+
     bool m_viewportChanged;
 
     /** Constructor */
@@ -239,7 +241,7 @@ void RoutingLayerPrivate::renderPlacemarks( GeoPainter *painter )
 
 void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
 {
-    if ( m_viewportChanged ) {
+    if ( m_viewportChanged && m_viewContext == Still ) {
         m_alternativeRouteRegions.clear();
     }
 
@@ -253,7 +255,7 @@ void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
             GeoDataLineString* points = AlternativeRoutesModel::waypoints( route );
             if ( points ) {
                 painter->drawPolyline( *points );
-                if ( m_viewportChanged ) {
+                if ( m_viewportChanged && m_viewContext == Still ) {
                     QRegion region = painter->regionFromPolyline( *points, 8 );
                     m_alternativeRouteRegions.push_back( RequestRegion( i, region ) );
                 }
@@ -275,7 +277,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
     painter->setPen( bluePen );
 
     painter->drawPolyline( waypoints );
-    if ( m_viewportChanged ) {
+    if ( m_viewportChanged && m_viewContext == Still ) {
         int const offset = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 24 : 8;
         m_routeRegion = painter->regionFromPolyline( waypoints, offset );
     }
@@ -719,7 +721,9 @@ bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
     }
 
     painter->restore();
-    d->m_viewportChanged = false;
+    if ( d->m_viewportChanged && d->m_viewContext == Still ) {
+        d->m_viewportChanged = false;
+    }
     return true;
 }
 
@@ -837,6 +841,11 @@ void RoutingLayer::updateRouteState( RoutingManager::State state, RouteRequest *
 void RoutingLayer::setViewportChanged()
 {
     d->m_viewportChanged = true;
+}
+
+void RoutingLayer::setViewContext( ViewContext viewContext )
+{
+    d->m_viewContext = viewContext;
 }
 
 } // namespace Marble
