@@ -7,7 +7,7 @@
 // Copyright 2011 Dennis Nienhüser <earthwings@gentoo.org>
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 
-import QtQuick 1.1
+import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
@@ -73,35 +73,35 @@ Rectangle {
             console.log( "adding activities" )
             activityModel.addActivity(
                 "Virtual Globe",
-                "image://theme/icon-m-common-checkbox-checked",
+                "qrc:/icons/activity-virtualglobe.png",
                 [],
                 [],
                 {}
             )
             activityModel.addActivity(
                 "Drive",
-                "image://theme/icon-m-common-checkbox-checked",
+                "qrc:/icons/activity-default.png",
                 [],
                 [],
                 {}
             )
             activityModel.addActivity(
                 "Cycle",
-                "image://theme/icon-m-common-checkbox-checked",
+                "qrc:/icons/activity-default.png",
                 [],
                 [],
                 {}
             )
             activityModel.addActivity(
                 "Walk",
-                "image://theme/icon-m-common-checkbox-checked",
+                "qrc:/icons/activity-default.png",
                 [],
                 [],
                 {}
             )
             activityModel.addActivity(
                 "Guidance",
-                "image://theme/icon-m-common-checkbox-checked",
+                "qrc:/icons/activity-default.png",
                 [],
                 [ "opencaching" ],
                 {}
@@ -122,7 +122,7 @@ Rectangle {
             )
             activityModel.addActivity(
                 "Around Me",
-                "image://theme/icon-m-common-checkbox-checked",
+                "qrc:/icons/activity-default.png",
                 [],
                 [],
                 {}
@@ -136,21 +136,21 @@ Rectangle {
             )
             activityModel.addActivity(
                 "Tracking",
-                "image://theme/icon-m-common-checkbox-checked",
+                "qrc:/icons/activity-default.png",
                 [],
                 [],
                 {}
             )
             activityModel.addActivity(
                 "Geocaching",
-                "image://theme/icon-m-common-checkbox-checked",
+                "qrc:/icons/activity-default.png",
                 [ "opencaching" ],
                 [ "weather" ],
                 { "Guidance": [ "opencaching" ] }
             )
             activityModel.addActivity(
                 "Friends",
-                "image://theme/icon-m-common-checkbox-checked",
+                "qrc:/icons/activity-friends.png",
                 [],
                 [],
                 {}

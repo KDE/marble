@@ -15,8 +15,11 @@
         <file>ActivitySelectionView.qml</file>
         <file>icons/activity-bookmarks.png</file>
         <file>icons/activity-configure.png</file>
+        <file>icons/activity-default.png</file>
         <file>icons/activity-download.png</file>
+        <file>icons/activity-friends.png</file>
         <file>icons/activity-search.png</file>
+        <file>icons/activity-virtualglobe.png</file>
         <file>icons/activity-weather.png</file>
     </qresource>
 </RCC>

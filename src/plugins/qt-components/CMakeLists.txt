@@ -1,6 +1,8 @@
 PROJECT( QtComponentsPlugin )
 
 INCLUDE_DIRECTORIES(
+ ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/qt-components
+ ${CMAKE_BINARY_DIR}/src/plugins/qt-components
  ${QT_INCLUDE_DIR}
 )
 

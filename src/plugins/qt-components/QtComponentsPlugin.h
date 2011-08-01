@@ -15,6 +15,7 @@
 
 namespace Marble
 {
+
 namespace Declarative
 {
 
@@ -27,6 +28,7 @@ public:
 };
 
 } // namespace Declarative
+
 } // namespace Marble
 
 #endif
