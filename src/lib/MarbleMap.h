@@ -316,12 +316,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     bool showRelief() const;
 
     /**
-     * @brief  Return whether the elevation model is visible.
-     * @return The elevation model visibility.
-     */
-    bool showElevationModel() const;
-
-    /**
      * @brief  Return whether the ice layer is visible.
      * @return The ice layer visibility.
      */
@@ -344,12 +338,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @return The lakes' visibility.
      */
     bool showLakes() const;
-
-    /**
-     * @brief Return whether Gps Data is visible.
-     * @return The Gps Data's visibility.
-     */
-    bool showGps() const;
 
     /**
      * @brief  Return whether the frame rate gets displayed.
@@ -591,12 +579,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void setShowRelief( bool visible );
 
     /**
-     * @brief  Set whether the elevation model is visible
-     * @param  visible  visibility of the elevation model
-     */
-    void setShowElevationModel( bool visible );
-
-    /**
      * @brief  Set whether the ice layer is visible
      * @param  visible  visibility of the ice layer
      */
@@ -619,12 +601,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param  visible  visibility of the lakes
      */
     void setShowLakes( bool visible );
-
-    /**
-     * @brief Set whether Gps Data is visible
-     * @param visible  visibility of the Gps Data
-     */
-    void setShowGps( bool visible );
 
     /**
      * @brief Set whether the frame rate gets shown

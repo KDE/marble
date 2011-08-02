@@ -125,12 +125,6 @@ class MARBLE_EXPORT ViewParams
     QSharedPointer<QImage> coastImagePtr() const;
     QImage * coastImage() const;
 
-    bool showGps() const;
-    void setShowGps( bool );
-
-    bool showElevationModel() const;
-    void setShowElevationModel( bool );
-
     bool showAtmosphere() const;
     void setShowAtmosphere( bool );
 

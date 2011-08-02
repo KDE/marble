@@ -271,7 +271,6 @@ void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provid
                 PositionProviderPlugin* instance = plugin->newInstance();
                 PositionTracking *tracking = m_widget->model()->positionTracking();
                 tracking->setPositionProviderPlugin( instance );
-                m_widget->setShowGps( true );
                 m_widget->update();
                 return;
             }
@@ -279,7 +278,6 @@ void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provid
     }
     else {
         m_currentLocationUi.locationLabel->setEnabled( false );
-        m_widget->setShowGps( false );
         m_widget->model()->positionTracking()->setPositionProviderPlugin( 0 );
         m_widget->update();
     }

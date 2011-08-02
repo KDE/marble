@@ -54,11 +54,6 @@ public:
     // FIXME: All of these parameters should get stored as a GeoSceneSettings 
     //        property object in the future instead ...
     bool        m_showAtmosphere;
-    bool        m_showCrosshairs;
-
-    bool        m_showElevationModel;
-    
-    bool        m_showGps; //for gps layer
 
     // here "global" settings are stored, which are used for every map theme
     // where they are applicable. For example, clouds visibility is stored here,
@@ -83,9 +78,6 @@ ViewParamsPrivate::ViewParamsPrivate()
       m_mapQuality( m_stillQuality ),
       // Show / don't show parameters
       m_showAtmosphere( true ),
-      m_showElevationModel( false ),
-      // Other layers
-      m_showGps( false ),
       // Just to have something.  These will be resized anyway.
       m_canvasImage( new QImage( 10, 10, QImage::Format_RGB32 )),
       m_coastImage( new QImage( 10, 10, QImage::Format_RGB32 ))
@@ -362,26 +354,6 @@ QSharedPointer<QImage> ViewParams::coastImagePtr() const
 QImage * ViewParams::coastImage() const
 {
     return d->m_coastImage.data();
-}
-
-bool ViewParams::showGps() const
-{
-    return d->m_showGps;
-}
-
-void ViewParams::setShowGps( bool showGps )
-{
-    d->m_showGps = showGps;
-}
-
-bool ViewParams::showElevationModel() const
-{
-    return d->m_showElevationModel;
-}
-
-void ViewParams::setShowElevationModel( bool showElevationModel )
-{
-    d->m_showElevationModel = showElevationModel;
 }
 
 bool ViewParams::showAtmosphere() const

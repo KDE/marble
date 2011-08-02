@@ -611,11 +611,6 @@ bool MarbleMap::showRelief() const
     return propertyValue( "relief" );
 }
 
-bool MarbleMap::showElevationModel() const
-{
-    return d->m_viewParams.showElevationModel();
-}
-
 bool MarbleMap::showIceLayer() const
 {
     return propertyValue( "ice" );
@@ -634,11 +629,6 @@ bool MarbleMap::showRivers() const
 bool MarbleMap::showLakes() const
 {
     return propertyValue( "lakes" );
-}
-
-bool MarbleMap::showGps() const
-{
-    return d->m_viewParams.showGps();
 }
 
 bool MarbleMap::showFrameRate() const
@@ -1081,13 +1071,6 @@ void MarbleMap::setShowRelief( bool visible )
     d->m_textureLayer.setNeedsUpdate();
 }
 
-void MarbleMap::setShowElevationModel( bool visible )
-{
-    d->m_viewParams.setShowElevationModel( visible );
-    // Update texture map during the repaint that follows:
-    d->m_textureLayer.setNeedsUpdate();
-}
-
 void MarbleMap::setShowIceLayer( bool visible )
 {
     setPropertyValue( "ice", visible );
@@ -1120,11 +1103,6 @@ void MarbleMap::setShowFrameRate( bool visible )
 void MarbleMap::setShowBackground( bool visible )
 {
     d->m_backgroundVisible = visible;
-}
-
-void MarbleMap::setShowGps( bool visible )
-{
-    d->m_viewParams.setShowGps( visible );
 }
 
 void MarbleMap::notifyMouseClick( int x, int y )
