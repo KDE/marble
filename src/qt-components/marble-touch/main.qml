@@ -120,108 +120,106 @@ Rectangle {
             id: toolBarLayout
             anchors.fill: parent
             // FIXME icons
-            Row {
-                ToolIcon {
-                    id: backButton
-                    iconId: "toolbar-back"
-                    onClicked: { settingsPage.back() }
-                }
-                ToolIcon {
-                    id: waypointButton
-                    iconId: "common-location-picker"
-                    onClicked: { waypointView.visible = !waypointView.visible }
-                }
-                ToolIcon {
-                    id: routeRequestButton
-                    iconId: "toolbar-callhistory"
-                    onClicked: { routeRequestView.visible = !routeRequestView.visible }
-                }
-                ToolIcon {
-                    id: virtualGlobeButton
-                    iconId: "ovi-service-maps"
-                    onClicked: { activitySelection.setCurrentActivity( "Virtual Globe" ) }
-                }
-                ToolIcon {
-                    id: driveButton
-                    iconId: "content-automobile"
-                    visible: !settingsPage.visible
-                    onClicked: { activitySelection.setCurrentActivity( "Drive" ) }
-                }
-                ToolIcon {
-                    id: cycleButton
-                    iconId: "common-clock"
-                    onClicked: { activitySelection.setCurrentActivity( "Cycle" ) }
-                }
-                ToolIcon {
-                    id: walkButton
-                    iconId: "camera-scene-sports-screen"
-                    onClicked: { activitySelection.setCurrentActivity( "Walk" ) }
-                }
-                ToolIcon {
-                    id: guidanceButton
-                    iconId: "telephony-content-sms-dimmed"
-                    onClicked: { activitySelection.setCurrentActivity( "Guidance" ) }
-                }
-                ToolIcon {
-                    id: bookmarksButton
-                    iconId: "content-bookmark"
-                    onClicked: { activitySelection.setCurrentActivity( "Bookmarks" ) }
-                }
-                ToolIcon {
-                    id: aroundMeButton
-                    iconId: "transfer-sync"
-                    onClicked: { activitySelection.setCurrentActivity( "Around Me" ) }
-                }
-                ToolIcon {
-                    id: weatherButton
-                    iconId: "weather-sunny-thunder"
-                    onClicked: { activitySelection.setCurrentActivity( "Weather" ) }
-                }
-                ToolIcon {
-                    id: trackingButton
-                    iconId: "content-feed"
-                    onClicked: { activitySelection.setCurrentActivity( "Tracking" ) }
-                }
-                ToolIcon {
-                    id: geocachingButton
-                    iconId: "email-combined-mailbox"
-                    onClicked: { activitySelection.setCurrentActivity( "Geocaching" ) }
-                }
-                ToolIcon {
-                    id: friendsButton
-                    iconId: "conversation-group-chat"
-                    onClicked: { activitySelection.setCurrentActivity( "Friends" ) }
-                }
-                ToolIcon {
-                    id: downloadButton
-                    iconId: "transfer-download"
-                    onClicked: { activitySelection.setCurrentActivity( "Download" ) }
-                }
-                ToolIcon {
-                    id: searchButton
-                    iconId: "toolbar-search"
-                    onClicked: { activitySelection.setCurrentActivity( "Search" ) }
-                }
-                ToolIcon {
-                    id: wikipediaButton
-                    iconId: "content-wikipedia"
-                    onClicked: { main.togglePlugin( "wikipedia" ) }
-                }
-                ToolIcon {
-                    id: photoButton
-                    iconId: "content-photoalbum"
-                    onClicked: { main.togglePlugin( "photo" ) }
-                }
-                ToolIcon {
-                    id: settingsButton
-                    iconId: "toolbar-settings"
-                    onClicked: { activitySelection.setCurrentActivity( "Configuration" ) }
-                }
-                ToolIcon {
-                    id: activityButton
-                    iconId: "toolbar-view-menu-dimmed-white"
-                    onClicked: { activitySelection.visible = true; activitySelection.activity = -1 }
-                }
+            ToolIcon {
+                id: backButton
+                iconId: "toolbar-back"
+                onClicked: { main.back() }
+            }
+            ToolIcon {
+                id: waypointButton
+                iconId: "common-location-picker"
+                onClicked: { waypointView.visible = !waypointView.visible }
+            }
+            ToolIcon {
+                id: routeRequestButton
+                iconId: "toolbar-callhistory"
+                onClicked: { routeRequestView.visible = !routeRequestView.visible }
+            }
+            ToolIcon {
+                id: virtualGlobeButton
+                iconId: "ovi-service-maps"
+                onClicked: { activitySelection.setCurrentActivity( "Virtual Globe" ) }
+            }
+            ToolIcon {
+                id: driveButton
+                iconId: "content-automobile"
+                visible: !settingsPage.visible
+                onClicked: { activitySelection.setCurrentActivity( "Drive" ) }
+            }
+            ToolIcon {
+                id: cycleButton
+                iconId: "common-clock"
+                onClicked: { activitySelection.setCurrentActivity( "Cycle" ) }
+            }
+            ToolIcon {
+                id: walkButton
+                iconId: "camera-scene-sports-screen"
+                onClicked: { activitySelection.setCurrentActivity( "Walk" ) }
+            }
+            ToolIcon {
+                id: guidanceButton
+                iconId: "telephony-content-sms-dimmed"
+                onClicked: { activitySelection.setCurrentActivity( "Guidance" ) }
+            }
+            ToolIcon {
+                id: bookmarksButton
+                iconId: "content-bookmark"
+                onClicked: { activitySelection.setCurrentActivity( "Bookmarks" ) }
+            }
+            ToolIcon {
+                id: aroundMeButton
+                iconId: "transfer-sync"
+                onClicked: { activitySelection.setCurrentActivity( "Around Me" ) }
+            }
+            ToolIcon {
+                id: weatherButton
+                iconId: "weather-sunny-thunder"
+                onClicked: { activitySelection.setCurrentActivity( "Weather" ) }
+            }
+            ToolIcon {
+                id: trackingButton
+                iconId: "content-feed"
+                onClicked: { activitySelection.setCurrentActivity( "Tracking" ) }
+            }
+            ToolIcon {
+                id: geocachingButton
+                iconId: "email-combined-mailbox"
+                onClicked: { activitySelection.setCurrentActivity( "Geocaching" ) }
+            }
+            ToolIcon {
+                id: friendsButton
+                iconId: "conversation-group-chat"
+                onClicked: { activitySelection.setCurrentActivity( "Friends" ) }
+            }
+            ToolIcon {
+                id: downloadButton
+                iconId: "transfer-download"
+                onClicked: { activitySelection.setCurrentActivity( "Download" ) }
+            }
+            ToolIcon {
+                id: searchButton
+                iconId: "toolbar-search"
+                onClicked: { activitySelection.setCurrentActivity( "Search" ) }
+            }
+            ToolIcon {
+                id: wikipediaButton
+                iconId: "content-wikipedia"
+                onClicked: { main.togglePlugin( "wikipedia" ) }
+            }
+            ToolIcon {
+                id: photoButton
+                iconId: "content-photoalbum"
+                onClicked: { main.togglePlugin( "photo" ) }
+            }
+            ToolIcon {
+                id: settingsButton
+                iconId: "toolbar-settings"
+                onClicked: { activitySelection.setCurrentActivity( "Configuration" ) }
+            }
+            ToolIcon {
+                id: activityButton
+                iconId: "toolbar-view-menu-dimmed-white"
+                onClicked: { activitySelection.visible = true; activitySelection.activity = -1 }
             }
         }
         states: [
@@ -232,7 +230,7 @@ Rectangle {
             State {
                 name: "Virtual Globe"
                 when: main.state == name
-                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: backButton; visible: true }
                 PropertyChanges { target: waypointButton; visible: false }
                 PropertyChanges { target: routeRequestButton; visible: false }
                 PropertyChanges { target: virtualGlobeButton; visible: false }
@@ -256,7 +254,7 @@ Rectangle {
             State {
                 name: "Drive"
                 when: main.state == name
-                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: backButton; visible: true }
                 PropertyChanges { target: waypointButton; visible: false }
                 PropertyChanges { target: routeRequestButton; visible: false }
                 PropertyChanges { target: virtualGlobeButton; visible: true }
@@ -280,7 +278,7 @@ Rectangle {
             State {
                 name: "Cycle"
                 when: main.state == name
-                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: backButton; visible: true }
                 PropertyChanges { target: waypointButton; visible: false }
                 PropertyChanges { target: routeRequestButton; visible: false }
                 PropertyChanges { target: virtualGlobeButton; visible: true }
@@ -304,7 +302,7 @@ Rectangle {
             State {
                 name: "Walk"
                 when: main.state == name
-                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: backButton; visible: true }
                 PropertyChanges { target: waypointButton; visible: false }
                 PropertyChanges { target: routeRequestButton; visible: false }
                 PropertyChanges { target: virtualGlobeButton; visible: true }
@@ -328,7 +326,7 @@ Rectangle {
             State {
                 name: "Guidance"
                 when: main.state == name
-                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: backButton; visible: true }
                 PropertyChanges { target: waypointButton; visible: false }
                 PropertyChanges { target: routeRequestButton; visible: false }
                 PropertyChanges { target: virtualGlobeButton; visible: true }
@@ -352,7 +350,7 @@ Rectangle {
             State {
                 name: "Search"
                 when: main.state == name
-                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: backButton; visible: true }
                 PropertyChanges { target: waypointButton; visible: false }
                 PropertyChanges { target: routeRequestButton; visible: false }
                 PropertyChanges { target: virtualGlobeButton; visible: true }
@@ -376,7 +374,7 @@ Rectangle {
             State {
                 name: "Bookmarks"
                 when: main.state == name
-                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: backButton; visible: true }
                 PropertyChanges { target: waypointButton; visible: false }
                 PropertyChanges { target: routeRequestButton; visible: false }
                 PropertyChanges { target: virtualGlobeButton; visible: true }
@@ -400,7 +398,7 @@ Rectangle {
             State {
                 name: "Around Me"
                 when: main.state == name
-                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: backButton; visible: true }
                 PropertyChanges { target: waypointButton; visible: false }
                 PropertyChanges { target: routeRequestButton; visible: false }
                 PropertyChanges { target: virtualGlobeButton; visible: true }
@@ -424,7 +422,7 @@ Rectangle {
             State {
                 name: "Weather"
                 when: main.state == name
-                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: backButton; visible: true }
                 PropertyChanges { target: waypointButton; visible: false }
                 PropertyChanges { target: routeRequestButton; visible: false }
                 PropertyChanges { target: virtualGlobeButton; visible: true }
@@ -448,7 +446,7 @@ Rectangle {
             State {
                 name: "Tracking"
                 when: main.state == name
-                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: backButton; visible: true }
                 PropertyChanges { target: waypointButton; visible: false }
                 PropertyChanges { target: routeRequestButton; visible: false }
                 PropertyChanges { target: virtualGlobeButton; visible: true }
@@ -472,7 +470,7 @@ Rectangle {
             State {
                 name: "Geocaching"
                 when: main.state == name
-                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: backButton; visible: true }
                 PropertyChanges { target: waypointButton; visible: false }
                 PropertyChanges { target: routeRequestButton; visible: false }
                 PropertyChanges { target: virtualGlobeButton; visible: true }
@@ -496,7 +494,7 @@ Rectangle {
             State {
                 name: "Friends"
                 when: main.state == name
-                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: backButton; visible: true }
                 PropertyChanges { target: waypointButton; visible: false }
                 PropertyChanges { target: routeRequestButton; visible: false }
                 PropertyChanges { target: virtualGlobeButton; visible: true }
@@ -520,7 +518,7 @@ Rectangle {
             State {
                 name: "Download"
                 when: main.state == name
-                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: backButton; visible: true }
                 PropertyChanges { target: waypointButton; visible: false }
                 PropertyChanges { target: routeRequestButton; visible: false }
                 PropertyChanges { target: virtualGlobeButton; visible: true }
@@ -779,7 +777,7 @@ Rectangle {
     }
     
     function adjustPlugins( enable, disable, preserve ) {
-        console.log( "adjustinPlugins ", enable, disable, preserve )
+        console.log( "adjustingPlugins ", enable, disable, preserve )
         if( preserve != undefined ) {
             for( var i = 0; i < preserve.length; i++ ) {
                 console.log( "- preserved: ", preserve[i] )
@@ -800,6 +798,16 @@ Rectangle {
             }
         }
         console.log( "finished adjusting plugins" )
+    }
+    
+    function back() {
+        if( settingsPage.visible ) {
+            settingsPage.back()
+        }
+        else {
+            activitySelection.visible = true
+            activitySelection.activity = -1
+        }
     }
 
 }
