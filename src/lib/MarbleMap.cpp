@@ -752,7 +752,7 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
 
     if ( d->m_backgroundVisible ) {
         renderPositions << "STARS" << "BEHIND_TARGET";
-        d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
+        d->m_layerManager.renderLayers( &painter, d->m_viewParams.viewport(), renderPositions );
     }
 
     if ( d->m_viewParams.showAtmosphere() ) {
@@ -766,7 +766,7 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
     renderPositions.clear();
     renderPositions << "SURFACE" << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
-    d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
+    d->m_layerManager.renderLayers( &painter, d->m_viewParams.viewport(), renderPositions );
 
     customPaint( &painter );
 
