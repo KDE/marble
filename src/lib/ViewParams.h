@@ -36,7 +36,6 @@ namespace Marble
 class AbstractProjection;
 class ViewportParams;
 class ViewParamsPrivate;
-class GeoSceneDocument;
 
 /** 
  * @short A public class that controls the painting of a MarbleWidget
@@ -51,16 +50,6 @@ class MARBLE_EXPORT ViewParams
 
     // Getters and setters
     ViewportParams  *viewport();
-
-/** 
- *  The actual parameters for the look get loaded 
- *  via setMapThemeID.
- *  mapTheme returns a pointer which then can get
- *  passed on to the MarbleModel and the MarbleLegendBrowser. 
- */
-    void setMapThemeId( const QString& );
-    //QString mapThemeId() const;
-    GeoSceneDocument *mapTheme();
 
     // Convenience methods:
 

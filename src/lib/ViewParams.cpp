@@ -16,8 +16,6 @@
 
 #include "MarbleDebug.h"
 #include "AbstractProjection.h"
-#include "GeoSceneDocument.h"
-#include "MapThemeManager.h"
 #include "ViewportParams.h"
 
 namespace Marble
@@ -28,8 +26,6 @@ class ViewParamsPrivate
 public:
     ViewParamsPrivate();
     ~ViewParamsPrivate();
-
-    GeoSceneDocument *m_mapTheme;
 
     ViewportParams  m_viewport;
 
@@ -58,8 +54,7 @@ public:
 };
 
 ViewParamsPrivate::ViewParamsPrivate()
-    : m_mapTheme( 0 ),
-      m_viewport(),
+    : m_viewport(),
       m_stillQuality( HighQuality ),
       m_animationQuality( LowQuality ),
       m_viewContext( Still ),
@@ -174,40 +169,6 @@ void ViewParams::setProjection(Projection newProjection)
     if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
         d->m_canvasImage->fill(0); // Using Qt::transparent is wrong here (equals "18")!
     }
-}
-
-void ViewParams::setMapThemeId( const QString& mapThemeId )
-{
-    GeoSceneDocument* mapTheme = MapThemeManager::loadMapTheme( mapThemeId );
-
-    // Check whether the selected theme got parsed well
-    if ( !mapTheme ) {
-
-        // Check whether the previous theme works 
-        if ( !d->m_mapTheme ){ 
-            // Fall back to default theme
-            QString defaultTheme = "earth/srtm/srtm.dgml";
-            qWarning() << "Falling back to default theme " << defaultTheme;
-            mapTheme = MapThemeManager::loadMapTheme(defaultTheme);
-
-            // If this last resort doesn't work either shed a tear and exit
-            if ( !mapTheme ) {
-                qWarning() << "Couldn't find a valid DGML map.";
-                return;
-            }
-        }
-        else {
-            qWarning() << "Selected theme doesn't work, so we stick to the previous one";
-            return;
-        }
-    }
-
-    d->m_mapTheme = mapTheme;
-}
-
-GeoSceneDocument *ViewParams::mapTheme()
-{
-    return d->m_mapTheme; 
 }
 
 int ViewParams::radius() const

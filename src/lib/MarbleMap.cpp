@@ -52,6 +52,7 @@
 #include "GeoSceneVector.h"
 #include "GeoSceneZoom.h"
 #include "LayerManager.h"
+#include "MapThemeManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
@@ -97,6 +98,7 @@ class MarbleMapPrivate
     MarbleModel     *const m_model;
     bool             m_modelIsOwned;
 
+    GeoSceneDocument *m_mapTheme;
     ViewParams       m_viewParams;
     bool             m_backgroundVisible;
 
@@ -121,6 +123,7 @@ class MarbleMapPrivate
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
         : m_parent( parent ),
           m_model( model ),
+          m_mapTheme( 0 ),
           m_backgroundVisible( true ),
           m_texcolorizer( 0 ),
           m_layerManager( model, parent ),
@@ -432,16 +435,16 @@ qreal MarbleMap::centerLongitude() const
 
 int  MarbleMap::minimumZoom() const
 {
-    if ( d->m_viewParams.mapTheme() )
-        return d->m_viewParams.mapTheme()->head()->zoom()->minimum();
+    if ( d->m_mapTheme )
+        return d->m_mapTheme->head()->zoom()->minimum();
 
     return 950;
 }
 
 int  MarbleMap::maximumZoom() const
 {
-    if ( d->m_viewParams.mapTheme() )
-        return d->m_viewParams.mapTheme()->head()->zoom()->maximum();
+    if ( d->m_mapTheme )
+        return d->m_mapTheme->head()->zoom()->maximum();
 
     return 2100;
 }
@@ -521,8 +524,8 @@ void MarbleMap::downloadRegion( const QString& sourceDir, QVector<TileCoordsPyra
 bool MarbleMap::propertyValue( const QString& name ) const
 {
     bool value;
-    if ( d->m_viewParams.mapTheme() ) {
-        d->m_viewParams.mapTheme()->settings()->propertyValue( name, value );
+    if ( d->m_mapTheme ) {
+        d->m_mapTheme->settings()->propertyValue( name, value );
     }
     else {
         value = false;
@@ -738,7 +741,7 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
     QTime t;
     t.start();
     
-    if ( !d->m_viewParams.mapTheme() ) {
+    if ( !d->m_mapTheme ) {
         mDebug() << "No theme yet!";
         d->paintMarbleSplash( painter, dirtyRect );
         return;
@@ -779,7 +782,7 @@ void MarbleMap::customPaint( GeoPainter *painter )
 {
     Q_UNUSED( painter );
 
-    if ( !d->m_viewParams.mapTheme() ) {
+    if ( !d->m_mapTheme ) {
         return;
     }
 }
@@ -799,9 +802,6 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
                     this, SLOT( updateProperty( const QString &, bool ) ) );
     }
 
-    d->m_viewParams.setMapThemeId( mapThemeId );
-    GeoSceneDocument *mapTheme = d->m_viewParams.mapTheme();
-
     d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
 
@@ -809,9 +809,29 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     delete d->m_texcolorizer;
     d->m_texcolorizer = 0;
 
+    GeoSceneDocument* mapTheme = MapThemeManager::loadMapTheme( mapThemeId );
     if ( !mapTheme ) {
+        // Check whether the previous theme works
+        if ( d->m_mapTheme ){
+            qWarning() << "Selected theme doesn't work, so we stick to the previous one";
+            mapTheme = d->m_mapTheme;
+        }
+    }
+
+    if ( !mapTheme ) {
+        // Fall back to default theme
+        QString defaultTheme = "earth/srtm/srtm.dgml";
+        qWarning() << "Falling back to default theme " << defaultTheme;
+        mapTheme = MapThemeManager::loadMapTheme(defaultTheme);
+    }
+
+    // If this last resort doesn't work either shed a tear and exit
+    if ( !mapTheme ) {
+        qWarning() << "Couldn't find a valid DGML map.";
         return;
     }
+
+    d->m_mapTheme = mapTheme;
 
     connect( mapTheme->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
              this, SLOT( updateProperty( const QString &, bool ) ) );
@@ -983,8 +1003,8 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 void MarbleMap::setPropertyValue( const QString& name, bool value )
 {
     mDebug() << "In MarbleMap the property " << name << "was set to " << value;
-    if ( d->m_viewParams.mapTheme() ) {
-        d->m_viewParams.mapTheme()->settings()->setPropertyValue( name, value );
+    if ( d->m_mapTheme ) {
+        d->m_mapTheme->settings()->setPropertyValue( name, value );
     }
     else {
         mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
