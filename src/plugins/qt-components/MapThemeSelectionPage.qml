@@ -28,14 +28,22 @@ ListView {
         Rectangle {
             id: themeItem
             width: mapListView.width
-            height: 50
+            height: 150
             color: model.modelData.id == settings.mapTheme ? "lightsteelblue" : "white"
-            Label {
-                id: themeLabel
+            Row {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
                 anchors.leftMargin: 15
-                text: model.modelData.name
+                Image {
+                    id: mapimaged
+                    width: 128; height: 128;
+                    source: "image://maptheme/" + model.modelData.id
+                }
+                Label {
+                    id: themeLabel
+                    text: model.modelData.name
+                    anchors.verticalCenter: parent.verticalCenter
+                }
             }
         }
         
