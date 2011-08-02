@@ -15,7 +15,6 @@
 
 #include "DgmlBlendingTagHandler.h"
 
-#include "blendings/BlendingFactory.h"
 #include "DgmlAttributeDictionary.h"
 #include "DgmlElementDictionary.h"
 #include "GeoParser.h"
@@ -43,10 +42,7 @@ GeoNode* DgmlBlendingTagHandler::parse( GeoParser& parser ) const
     // Attribute name, default to ""
     const QString name = parser.attribute( dgmlAttr_name ).trimmed();
     mDebug() << "DgmlBlendingTagHandler::parse" << name;
-    Blending const * const blending = BlendingFactory::instance()->findBlending( name );
-    if ( !blending )
-        parser.raiseWarning( QString( "Unknown (or no) blending algorithm: '%1'" ).arg( name ));
-    parentItem.nodeAs<GeoSceneTexture>()->setBlending( blending );
+    parentItem.nodeAs<GeoSceneTexture>()->setBlending( name );
     return 0;
 }
 

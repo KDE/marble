@@ -43,7 +43,7 @@ GeoSceneTexture::GeoSceneTexture( const QString& name )
       m_levelZeroRows( defaultLevelZeroRows ),
       m_maximumTileLevel( -1 ),
       m_projection( Equirectangular ),
-      m_blending( 0 ),
+      m_blending(),
       m_downloadUrls(),
       m_nextUrl( m_downloadUrls.constEnd() )
 {

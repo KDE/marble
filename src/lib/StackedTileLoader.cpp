@@ -23,6 +23,7 @@
 
 #include "StackedTileLoader.h"
 
+#include "blendings/BlendingFactory.h"
 #include "GeoSceneTexture.h"
 #include "MarbleDebug.h"
 #include "MergedLayerDecorator.h"
@@ -49,6 +50,7 @@ public:
     StackedTileLoaderPrivate( TileLoader *tileLoader,
                               SunLocator * const sunLocator )
         : m_tileLoader( tileLoader ),
+          m_blendingFactory( sunLocator ),
           m_layerDecorator( m_tileLoader, sunLocator ),
           m_maxTileLevel( 0 )
     {
@@ -62,6 +64,7 @@ public:
         findRelevantTextureLayers( TileId const & stackedTileId ) const;
 
     TileLoader *const m_tileLoader;
+    BlendingFactory m_blendingFactory;
     MergedLayerDecorator m_layerDecorator;
     int         m_maxTileLevel;
     QVector<GeoSceneTexture const *> m_textureLayers;
@@ -89,7 +92,12 @@ void StackedTileLoader::setTextureLayers( QVector<GeoSceneTexture const *> & tex
 
     d->m_textureLayers = textureLayers;
 
-    d->m_layerDecorator.setThemeId( "maps/" + d->m_textureLayers.at( 0 )->sourceDir() );
+    if ( !d->m_textureLayers.isEmpty() ) {
+        const GeoSceneTexture *const firstTexture = d->m_textureLayers.at( 0 );
+        d->m_blendingFactory.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
+        d->m_layerDecorator.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
+        d->m_layerDecorator.setThemeId( "maps/" + d->m_textureLayers.at( 0 )->sourceDir() );
+    }
 
     clear();
 
@@ -221,7 +229,11 @@ const StackedTile *StackedTileLoaderPrivate::createTile( TileId const & stackedT
         mDebug() << "StackedTileLoader::loadTile: tile" << textureLayer->sourceDir()
                  << tileId.toString() << textureLayer->tileSize();
         const QImage tileImage = m_tileLoader->loadTile( tileId, DownloadBrowse );
-        QSharedPointer<TextureTile> tile( new TextureTile( tileId, tileImage, textureLayer->blending() ) ); 
+        const Blending *blending = m_blendingFactory.findBlending( textureLayer->blending() );
+        if ( blending == 0 && !textureLayer->blending().isEmpty() ) {
+            mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
+        }
+        QSharedPointer<TextureTile> tile( new TextureTile( tileId, tileImage, blending ) );
         tiles.append( tile );
     }
     Q_ASSERT( !tiles.isEmpty() );

@@ -95,6 +95,11 @@ public:
       */
     void setRouteRequest( RouteRequest *request );
 
+    /**
+      * Set the view context to determine whether the map is used interactively
+      */
+    void setViewContext( ViewContext viewContext );
+
 Q_SIGNALS:
     /**
       * A placemark was selected (clicked) by the user. The index belongs to
