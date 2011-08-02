@@ -348,7 +348,6 @@ else (APPLE AND QTONLY)
     GeoPainter.h
     TileCreatorDialog.h
     ViewportParams.h
-    ViewParams.h
     Projections/AbstractProjection.h
     Projections/SphericalProjection.h
     Projections/EquirectProjection.h

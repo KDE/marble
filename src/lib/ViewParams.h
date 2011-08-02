@@ -22,8 +22,6 @@
 #include <QtCore/QSharedPointer>
 #include <QtCore/QString>
 
-#include "marble_export.h"
-
 #include "Quaternion.h"
 #include "global.h"
 
@@ -42,7 +40,7 @@ class ViewParamsPrivate;
  *
  */
 
-class MARBLE_EXPORT ViewParams
+class ViewParams
 {
  public:
     ViewParams();

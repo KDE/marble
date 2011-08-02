@@ -16,9 +16,6 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
-// Local dir
-#include "marble_export.h"
-
 class QPoint;
 class QRegion;
 
@@ -42,7 +39,7 @@ class LayerInterface;
  *
  */
 
-class MARBLE_EXPORT LayerManager : public QObject
+class LayerManager : public QObject
 {
     Q_OBJECT
 
