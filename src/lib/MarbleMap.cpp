@@ -521,7 +521,13 @@ void MarbleMap::downloadRegion( const QString& sourceDir, QVector<TileCoordsPyra
 bool MarbleMap::propertyValue( const QString& name ) const
 {
     bool value;
-    d->m_viewParams.propertyValue( name, value );
+    if ( d->m_viewParams.mapTheme() ) {
+        d->m_viewParams.mapTheme()->settings()->propertyValue( name, value );
+    }
+    else {
+        value = false;
+        mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
+    }
     return value;
 }
 
@@ -977,7 +983,12 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 void MarbleMap::setPropertyValue( const QString& name, bool value )
 {
     mDebug() << "In MarbleMap the property " << name << "was set to " << value;
-    d->m_viewParams.setPropertyValue( name, value );
+    if ( d->m_viewParams.mapTheme() ) {
+        d->m_viewParams.mapTheme()->settings()->setPropertyValue( name, value );
+    }
+    else {
+        mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
+    }
     d->m_textureLayer.setNeedsUpdate();
 }
 

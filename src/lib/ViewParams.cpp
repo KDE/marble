@@ -210,38 +210,6 @@ GeoSceneDocument *ViewParams::mapTheme()
     return d->m_mapTheme; 
 }
 
-void ViewParams::setPropertyValue( const QString &name, bool value )
-{
-    if ( d->m_mapTheme ) {
-        d->m_mapTheme->settings()->setPropertyValue( name, value );
-    }
-    else {
-        mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
-    }
-}
-
-void ViewParams::propertyValue( const QString &name, bool &value )
-{
-    if ( d->m_mapTheme ) {
-        d->m_mapTheme->settings()->propertyValue( name, value );
-    }
-    else {
-        value = false;
-        mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
-    }
-}
-
-void ViewParams::propertyAvailable( const QString &name, bool &value )
-{
-    if ( d->m_mapTheme ) {
-        d->m_mapTheme->settings()->propertyAvailable( name, value );
-    }
-    else {
-        value = false;
-        mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
-    }
-}
-
 int ViewParams::radius() const
 {
     return d->m_viewport.radius();

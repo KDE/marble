@@ -75,30 +75,6 @@ class MARBLE_EXPORT ViewParams
     ViewContext viewContext() const;
     void setViewContext( ViewContext viewContext );
 
-    /**
-     * @brief  Set the value of a map theme property
-     * @param  name  the property name
-     * @param  value  the value of the property
-     * @return @c true  the property was found and changed accordingly
-     *         @c false the property couldn't be found here
-     */
-    void setPropertyValue( const QString &name, bool value );
-
-    /**
-     * @brief  Get the availability of a property across groups
-     * @param  name  the property name
-     * @param  available  availability of the property
-     * @return @c true  the property was registered in the settings
-     *         @c false the property wasn't registered in the settings
-     */
-    void propertyAvailable( const QString& name, bool& available  );
-
-    /**
-     * @brief  Get the value of a property across groups
-     * @param  name  the property name
-     */
-    void propertyValue( const QString& name, bool &value );
-
     int radius() const;
     void setRadius( int newRadius );
 
