@@ -17,16 +17,11 @@
 #include "MarbleDebug.h"
 #include "AbstractProjection.h"
 #include "GeoSceneDocument.h"
-#include "GeoSceneGroup.h"
-#include "GeoSceneProperty.h"
-#include "GeoSceneSettings.h"
 #include "MapThemeManager.h"
 #include "ViewportParams.h"
 
 namespace Marble
 {
-static QString const showCloudsPropertyName = "showClouds";
-static QString const cloudsLayerName = "clouds_data";
 
 class ViewParamsPrivate
 {
@@ -51,22 +46,15 @@ public:
     // Parameters that determine the painting
     // Show/don't show options
 
-    // FIXME: All of these parameters should get stored as a GeoSceneSettings 
-    //        property object in the future instead ...
     bool        m_showAtmosphere;
 
-    // here "global" settings are stored, which are used for every map theme
-    // where they are applicable. For example, clouds visibility is stored here,
-    // but this property is only used for some map themes.
-    GeoSceneSettings m_globalSettings;
+    bool        m_showClouds;
 
     // Cached data that will make painting faster.
     QSharedPointer<QImage>  m_canvasImage;     // Base image with space and atmosphere
     QSharedPointer<QImage>  m_coastImage;      // A slightly higher level image.
 
-    void initGlobalSettings();
     void optimizeCanvasImageFormat();
-    void propagateGlobalToLocalSettings();
 };
 
 ViewParamsPrivate::ViewParamsPrivate()
@@ -78,21 +66,15 @@ ViewParamsPrivate::ViewParamsPrivate()
       m_mapQuality( m_stillQuality ),
       // Show / don't show parameters
       m_showAtmosphere( true ),
+      m_showClouds( false ),
       // Just to have something.  These will be resized anyway.
       m_canvasImage( new QImage( 10, 10, QImage::Format_RGB32 )),
       m_coastImage( new QImage( 10, 10, QImage::Format_RGB32 ))
 {
-    initGlobalSettings();
 }
 
 ViewParamsPrivate::~ViewParamsPrivate()
 {
-}
-
-void ViewParamsPrivate::initGlobalSettings()
-{
-    GeoSceneProperty * const showClouds = new GeoSceneProperty( showCloudsPropertyName );
-    m_globalSettings.addProperty( showClouds );
 }
 
 void ViewParamsPrivate::optimizeCanvasImageFormat()
@@ -113,26 +95,6 @@ void ViewParamsPrivate::optimizeCanvasImageFormat()
 
     // Recreate the coastline detection offscreen image
     m_coastImage = QSharedPointer<QImage>( new QImage( m_viewport.size(), QImage::Format_RGB32 ) );
-}
-
-
-void ViewParamsPrivate::propagateGlobalToLocalSettings()
-{
-    bool showClouds = false;
-    bool const propertyFound = m_globalSettings.propertyValue( showCloudsPropertyName, showClouds );
-    if ( propertyFound ) {
-        if ( !m_mapTheme )
-            return;
-
-        GeoSceneSettings * const settings = m_mapTheme->settings();
-        if ( !settings )
-            return;
-
-        GeoSceneGroup * const textureLayerSettings = settings->group( "Texture Layers" );
-        if ( !textureLayerSettings )
-            return;
-        textureLayerSettings->setPropertyValue( cloudsLayerName, showClouds );
-    }
 }
 
 
@@ -241,7 +203,6 @@ void ViewParams::setMapThemeId( const QString& mapThemeId )
     }
 
     d->m_mapTheme = mapTheme;
-    d->propagateGlobalToLocalSettings();
 }
 
 GeoSceneDocument *ViewParams::mapTheme()
@@ -368,16 +329,12 @@ void ViewParams::setShowAtmosphere( bool showAtmosphere )
 
 bool ViewParams::showClouds() const
 {
-    bool showClouds = false;
-    bool const propertyFound = d->m_globalSettings.propertyValue( showCloudsPropertyName,
-                                                                  showClouds );
-    return propertyFound && showClouds;
+    return d->m_showClouds;
 }
 
 void ViewParams::setShowClouds( bool const showClouds )
 {
-    d->m_globalSettings.setPropertyValue( showCloudsPropertyName, showClouds );
-    d->propagateGlobalToLocalSettings();
+    d->m_showClouds = showClouds;
 }
 
 }

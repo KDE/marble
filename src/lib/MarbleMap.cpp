@@ -810,6 +810,8 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     connect( mapTheme->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
              this, SLOT( updateProperty( const QString &, bool ) ) );
 
+    setPropertyValue( "clouds_data", d->m_viewParams.showClouds() );
+
     // NOTE due to frequent regressions: 
     // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
     // at this point. Some themes do NOT have either vector or texture data!
@@ -1015,6 +1017,8 @@ void MarbleMap::setShowClouds( bool visible )
 {
     d->m_viewParams.setShowClouds( visible );
     d->m_textureLayer.setNeedsUpdate();
+
+    setPropertyValue( "clouds_data", visible );
 }
 
 void MarbleMap::setShowSunShading( bool visible )
