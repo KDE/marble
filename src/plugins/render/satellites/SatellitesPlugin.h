@@ -5,21 +5,23 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008 Claudiu Covaci <claudiu.covaci@gmail.com>
+// Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
 //
 
-#ifndef SATELLITESPLUGIN_H
-#define SATELLITESPLUGIN_H
+#ifndef MARBLE_SATELLITESPLUGIN_H
+#define MARBLE_SATELLITESPLUGIN_H
 
 #include <QtCore/QObject>
 
 #include "RenderPlugin.h"
+#include "sgp4/sgp4unit.h"
 
 namespace Marble
 {
+class GeoDataCoordinates;
 
 /**
- * \brief This class displays a layer of satellites (which satellites TBD).
+ * @brief This plugin displays satellites and their orbits.
  *
  */
 class SatellitesPlugin : public RenderPlugin
@@ -28,7 +30,9 @@ class SatellitesPlugin : public RenderPlugin
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( SatellitesPlugin )
 
- public:
+public:
+    SatellitesPlugin();
+    
     QStringList backendTypes() const;
     QString renderPolicy() const;
     QStringList renderPosition() const;
@@ -36,15 +40,26 @@ class SatellitesPlugin : public RenderPlugin
     QString guiString() const;
     QString nameId() const;
     QString description() const;
-    QIcon icon () const;
+    QIcon icon() const;
 
-    void initialize ();
-    bool isInitialized () const;
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
+    void initialize();
+    bool isInitialized() const;
+    bool render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = 0 );
 
-//    QTimer* m_timer; /**< Timer to set the update interval */
+    /**
+     * @brief Create a GeoDataCoordinates object from cartesian coordinates(GEI)
+     * @param x x coordinate in km
+     * @param y y coordinate in km
+     * @param z z coordinate in km
+     */
+    GeoDataCoordinates fromCartesian( double x, double y, double z );
+
+private:
+    bool m_isInitialized;
+    //TODO: use a data structure more appropriate for searching by satellite name
+    QHash<QString, elsetrec> m_satHash;
 };
 
 }
 
-#endif
+#endif // MARBLE_SATELLITESPLUGIN_H

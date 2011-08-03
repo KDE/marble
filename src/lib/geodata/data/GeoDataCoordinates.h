@@ -92,7 +92,7 @@ class GEODATA_EXPORT GeoDataCoordinates
      * @brief create a geocoordinate from longitude and latitude
      * @param _lon longitude
      * @param _lat latitude
-     * @param alt altitude (default: 0)
+     * @param alt altitude in meters (default: 0)
      * @param _unit units that lon and lat get measured in
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      * @param _detail detail (default: 0)
@@ -107,7 +107,7 @@ class GEODATA_EXPORT GeoDataCoordinates
     * @brief (re)set the coordinates in a GeoDataCoordinates object
     * @param _lon longitude
     * @param _lat latitude
-    * @param alt altitude (default: 0)
+    * @param alt altitude in meters (default: 0)
     * @param _unit units that lon and lat get measured in
     * (default for Radian: north pole at pi/2, southpole at -pi/2)
     */
@@ -165,11 +165,11 @@ class GEODATA_EXPORT GeoDataCoordinates
               GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
-        * @brief return the altitude of the Point
+        * @brief return the altitude of the Point in meters
         */
     qreal altitude() const;
     /**
-    * @brief set the altitude of the Point
+    * @brief set the altitude of the Point in meters
     * @param altitude altitude
     */
     void setAltitude( const qreal altitude );

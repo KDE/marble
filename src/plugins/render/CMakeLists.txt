@@ -7,7 +7,7 @@ add_subdirectory( earthquake )
 # and terms of service of opencaching are cleared up.
 #add_subdirectory( opencaching )
 add_subdirectory( graticule )
-# add_subdirectory( satellites )
+add_subdirectory( satellites )
 add_subdirectory( overviewmap )
 add_subdirectory( mapscale )
 add_subdirectory( speedometer )

@@ -5,20 +5,30 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008 Claudiu Covaci <claudiu.covaci@gmail.com>
+// Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
 //
 
 #include "SatellitesPlugin.h"
 
-#include <QtGui/QColor>
-#include <QtGui/QPixmap>
-
+#include "MarbleDebug.h"
 #include "MarbleDirs.h"
+#include "MarbleModel.h"
+#include "ViewportParams.h"
+
 #include "GeoPainter.h"
-#include "GeoDataCoordinates.h"
+#include "GeoDataLinearRing.h"
+
+#include "sgp4/sgp4io.h"
+
+#include <locale.h>
 
 namespace Marble
 {
+
+SatellitesPlugin::SatellitesPlugin()
+    : m_isInitialized(false)
+{
+}
 
 QStringList SatellitesPlugin::backendTypes() const
 {
@@ -52,50 +62,107 @@ QString SatellitesPlugin::nameId() const
 
 QString SatellitesPlugin::description() const
 {
-    return tr( "This plugin displays TBD satellites." );
+    return tr( "This plugin displays satellites and their orbits." );
 }
 
-QIcon SatellitesPlugin::icon () const
+QIcon SatellitesPlugin::icon() const
 {
     return QIcon();
 }
 
-
-void SatellitesPlugin::initialize ()
+void SatellitesPlugin::initialize()
 {
+    //marbleModel()->downloadManager();
+    //Data from http://www.celestrak.com/NORAD/elements/
+    QFile tleFile("/opt/geo.txt");
+    if (!tleFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        mDebug() << "Error opening file";
+        return;
+    }
+
+    //FIXME: terrible hack because twoline2rv uses sscanf
+    setlocale(LC_NUMERIC, "C");
+
+    double startmfe, stopmfe, deltamin;
+    elsetrec satrec;
+    while(!tleFile.atEnd()) {
+        QString satellite(tleFile.readLine());
+        char line1[80];
+        char line2[80];
+        tleFile.readLine(line1, sizeof(line1));
+        tleFile.readLine(line2, sizeof(line2));
+        twoline2rv(line1, line2, 'c', 'd', 'i', wgs84,
+                   startmfe, stopmfe, deltamin, satrec);
+        m_satHash.insert(satellite.trimmed(), satrec);
+        if (satrec.error != 0) {
+            mDebug() << "Error: " << satrec.error;
+            return;
+        }
+    }
+    setlocale(LC_NUMERIC, ""); //reset to environment
+    m_isInitialized = true;
 }
 
-bool SatellitesPlugin::isInitialized () const
+bool SatellitesPlugin::isInitialized() const
 {
-    return true;
+    return m_isInitialized;
 }
 
 bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
+    if ( marbleModel()->planetId() != "earth" ) {
+        return true;
+    }
+
     painter->autoMapQuality();
+    painter->setPen( oxygenSkyBlue4 );
+    painter->setBrush( oxygenSkyBlue4 );
 
-    GeoDataCoordinates flensburg( 9.4, 30.8, 2750000.0, GeoDataCoordinates::Degree );
-    painter->setPen( QColor( 99, 198, 99, 255 ) );
-    painter->setBrush( QColor( 99, 198, 99, 80 ) );
-    painter->drawEllipse( flensburg, 30, 30 );
-//     painter->drawPixmap( flensburg, QPixmap( MarbleDirs::path( "bitmaps/torsten.jpg" ) ) ); 
-    painter->drawText( flensburg, "Torsten-air" );
+    QHash<QString, elsetrec>::iterator it = m_satHash.begin();
+    QHash<QString, elsetrec>::iterator end = m_satHash.end();
+    for (; it != end; ++it ) {
+        double r[3], v[3], polar[3];
+        sgp4( wgs84, it.value(), 0, r, v );
+        if (it.value().error != 0) {
+            mDebug() << "Error: " << it.value().error;
+            return false;
+        }
+        mDebug() << "pos: " << r[0] << " " << r[1] << " " << r[2];
+        mDebug() << "speed: " << v[0] << " " << v[1] << " " << v[2];
 
-    GeoDataCoordinates linkoeping( 15.6, 58.4, 2500000.0, GeoDataCoordinates::Degree );
-    painter->setPen( QColor( 198, 99, 99, 255 ) );
-    painter->setBrush( QColor( 198, 99, 99, 80 ) );
-    painter->drawEllipse( linkoeping, 40, 40 ); 
-//     painter->drawPixmap( linkoeping, QPixmap( MarbleDirs::path( "bitmaps/ingwa.jpg" ) ) ); 
-    painter->drawText( linkoeping, "Inge-air" );
+        GeoDataCoordinates satCoords = fromCartesian( r[0], r[1], r[2] );
+        painter->drawRect( satCoords, 15, 15 );
+        mDebug() << satCoords.altitude();
 
-    GeoDataCoordinates orbit( 105.6, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    painter->setPen( QColor( 99, 99, 198, 255 ) );
-    painter->setBrush( QColor( 99, 99, 198, 80 ) );
-    painter->drawEllipse( orbit, 20, 20 ); 
-//     painter->drawPixmap( orbit, QPixmap( MarbleDirs::path( "bitmaps/ufo.jpeg" ) ) ); 
-    painter->drawText( orbit, "Claudiu-air" );
+        painter->save();
 
+        painter->setPen( QColor( Qt::white ) );
+        painter->drawText( satCoords, it.key() );
+
+        painter->restore();
+
+        GeoDataLinearRing orbit;
+        for ( int i = 1; i < 100; i++ ) {
+            sgp4( wgs84, it.value(), i, r, v );
+            orbit << fromCartesian( r[0], r[1], r[2]);
+        }
+
+        painter->save();
+
+        painter->setPen( oxygenBrickRed4 );
+        painter->setBrush( Qt::NoBrush );
+        painter->drawPolygon( orbit );
+
+        painter->restore();
+    }
     return true;
+}
+
+GeoDataCoordinates SatellitesPlugin::fromCartesian( double x, double y, double z ) {
+    double lat = atan2( y, x );
+    double lon = atan2( z, sqrt( x*x + y*y ) );
+    double alt = sqrt( x*x + y*y + z*z );
+    return GeoDataCoordinates( lat, lon, alt*1000 - marbleModel()->planetRadius() );
 }
 
 }
