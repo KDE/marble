@@ -913,7 +913,40 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
                 const GeoSceneTexture *const texture = dynamic_cast<GeoSceneTexture const *>( pos );
                 if ( !texture )
                     continue;
-                textures.append( texture );
+
+                const QString sourceDir = texture->sourceDir();
+                const QString installMap = texture->installMap();
+                const QString role = sceneLayer->role();
+
+                if ( !TileLoader::baseTilesAvailable( *texture )
+                    && !installMap.isEmpty() )
+                {
+                    mDebug() << "Base tiles not available. Creating Tiles ... \n"
+                             << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
+
+                    TileCreator *tileCreator = new TileCreator(
+                                             sourceDir,
+                                             installMap,
+                                             (role == "dem") ? "true" : "false" );
+
+                    QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
+                    tileCreatorDlg->setSummary( mapTheme->head()->name(),
+                                                mapTheme->head()->description() );
+                    tileCreatorDlg->exec();
+                    if ( TileLoader::baseTilesAvailable( *texture ) ) {
+                        qDebug() << "Base tiles for" << sourceDir << "successfully created.";
+                    } else {
+                        qDebug() << "Some or all base tiles for" << sourceDir << "could not be created.";
+                    }
+
+                    delete tileCreatorDlg;
+                }
+
+                if ( TileLoader::baseTilesAvailable( *texture ) ) {
+                    textures.append( texture );
+                } else {
+                    mDebug() << " Skipping layer" << sourceDir;
+                }
             }
         }
 
@@ -922,36 +955,6 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 
         // As long as we don't have an Layer Management Class we just lookup
         // the name of the layer that has the same name as the theme ID
-        QString themeID = mapTheme->head()->theme();
-
-        GeoSceneLayer *layer =
-            static_cast<GeoSceneLayer*>( mapTheme->map()->layer( themeID ) );
-        GeoSceneTexture *texture =
-            static_cast<GeoSceneTexture*>( layer->groundDataset() );
-
-        QString sourceDir = texture->sourceDir();
-        QString installMap = texture->installMap();
-        QString role = mapTheme->map()->layer( themeID )->role();
-
-        if ( !TileLoader::baseTilesAvailable( *texture )
-            && !installMap.isEmpty() )
-        {
-            mDebug() << "Base tiles not available. Creating Tiles ... \n"
-                     << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
-            MarbleDirs::debug();
-
-            TileCreator *tileCreator = new TileCreator(
-                                     sourceDir,
-                                     installMap,
-                                     (role == "dem") ? "true" : "false" );
-
-            QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
-            tileCreatorDlg->setSummary( mapTheme->head()->name(),
-                                        mapTheme->head()->description() );
-            tileCreatorDlg->exec();
-            qDebug("Tile creation completed");
-            delete tileCreatorDlg;
-        }
 
         d->m_textureLayer.setMapTheme( textures, textureLayerSettings );
 
