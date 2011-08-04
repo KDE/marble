@@ -172,9 +172,6 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
     }
 
     d->m_texmapper->mapTexture( painter, viewParams, dirtyRect, d->m_texcolorizer );
-    if ( viewParams->viewContext() == Marble::Still ) {
-        d->m_tileLoader.update();
-    }
 }
 
 void TextureLayer::setShowSunShading( bool show )

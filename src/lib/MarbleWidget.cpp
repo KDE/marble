@@ -55,7 +55,7 @@
 namespace Marble
 {
 
-const int REPAINT_SCHEDULING_INTERVAL = 0;
+const int REPAINT_SCHEDULING_INTERVAL = 1000;
 
 
 class MarbleWidgetPrivate

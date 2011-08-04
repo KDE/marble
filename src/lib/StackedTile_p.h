@@ -38,6 +38,7 @@ class StackedTilePrivate
     const uchar   **const jumpTable8;
     const uint    **const jumpTable32;
     const int m_byteCount;
+    bool            m_isUsed;
 
     explicit StackedTilePrivate( const TileId &id, const QImage &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles );
     virtual ~StackedTilePrivate();

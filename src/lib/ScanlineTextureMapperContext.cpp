@@ -446,11 +446,12 @@ void ScanlineTextureMapperContext::nextTile( int &posX, int &posY )
     // tileCol counts the tile columns left from the current tile.
     // tileRow counts the tile rows on the top from the current tile.
 
-    const int tileCol = lon / m_tileSize.width();
-    const int tileRow = lat / m_tileSize.height();
+    int tileCol = lon / m_tileSize.width();
+    int tileRow = lat / m_tileSize.height();
 
-    m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel, tileCol, tileRow ) );
-    m_deltaLevel = m_tileLevel - m_tile->id().zoomLevel();
+    m_deltaLevel = 0;
+    m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel - m_deltaLevel, tileCol >> m_deltaLevel, tileRow >> m_deltaLevel ) );
+    m_tile->setUsed( true );
 
     // Update position variables:
     // m_tilePosX/Y stores the position of the tiles in 
@@ -488,11 +489,12 @@ void ScanlineTextureMapperContext::nextTile( qreal &posX, qreal &posY )
     // tileCol counts the tile columns left from the current tile.
     // tileRow counts the tile rows on the top from the current tile.
 
-    const int tileCol = lon / m_tileSize.width();
-    const int tileRow = lat / m_tileSize.height();
+    int tileCol = lon / m_tileSize.width();
+    int tileRow = lat / m_tileSize.height();
 
-    m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel, tileCol, tileRow ) );
-    m_deltaLevel = m_tileLevel - m_tile->id().zoomLevel();
+    m_deltaLevel = 0;
+    m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel - m_deltaLevel, tileCol >> m_deltaLevel, tileRow >> m_deltaLevel ) );
+    m_tile->setUsed( true );
 
     // Update position variables:
     // m_tilePosX/Y stores the position of the tiles in 

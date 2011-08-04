@@ -69,6 +69,8 @@ class StackedTile
 */
     TileId const& id() const;
 
+    void setUsed( bool used );
+    bool used() const;
 
     int depth() const;
     int numBytes() const;
