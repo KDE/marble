@@ -900,7 +900,23 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 
     // Check whether there is a texture layer available:
     if ( mapTheme->map()->hasTextureLayers() ) {
-	d->m_textureLayer.setMapTheme( mapTheme );
+        GeoSceneSettings *const settings = mapTheme->settings();
+        GeoSceneGroup *const textureLayerSettings = settings ? settings->group( "Texture Layers" ) : 0;
+
+        const GeoSceneHead *const head = mapTheme->head();
+        const GeoSceneMap *const map = mapTheme->map();
+        const GeoSceneLayer *const sceneLayer = ( head && map ) ? map->layer( head->theme() ) : 0;
+
+        QVector<const GeoSceneTexture *> textures;
+        if ( sceneLayer ) {
+            foreach ( const GeoSceneAbstractDataset *pos, sceneLayer->datasets() ) {
+                const GeoSceneTexture *const texture = dynamic_cast<GeoSceneTexture const *>( pos );
+                if ( !texture )
+                    continue;
+                textures.append( texture );
+            }
+        }
+
         // If the tiles aren't already there, put up a progress dialog
         // while creating them.
 
@@ -936,6 +952,8 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
             qDebug("Tile creation completed");
             delete tileCreatorDlg;
         }
+
+        d->m_textureLayer.setMapTheme( textures, textureLayerSettings );
 
         d->m_textureLayer.setupTextureMapper( d->m_viewParams.projection() );
 

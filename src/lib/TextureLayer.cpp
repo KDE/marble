@@ -22,11 +22,7 @@
 #include "MercatorScanlineTextureMapper.h"
 #include "TileScalingTextureMapper.h"
 #include "GeoPainter.h"
-#include "GeoSceneDocument.h"
 #include "GeoSceneGroup.h"
-#include "GeoSceneHead.h"
-#include "GeoSceneMap.h"
-#include "GeoSceneSettings.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "StackedTile.h"
@@ -48,9 +44,6 @@ public:
     void updateTextureLayers();
     void updateTile( const TileId &tileId, const QImage &tileImage );
 
-    const GeoSceneLayer *sceneLayer() const;
-    GeoSceneGroup *textureLayerSettings() const;
-
 public:
     TextureLayer  *const m_parent;
     SunLocator *const m_sunLocator;
@@ -59,7 +52,8 @@ public:
     QCache<TileId, QPixmap> m_pixmapCache;
     TextureMapperInterface *m_texmapper;
     QPointer<TextureColorizer> m_texcolorizer;
-    GeoSceneDocument              *m_mapTheme;
+    QVector<const GeoSceneTexture *> m_textures;
+    GeoSceneGroup *m_textureLayerSettings;
 };
 
 TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator, TextureLayer *parent )
@@ -70,7 +64,7 @@ TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadMa
     , m_pixmapCache( 100 )
     , m_texmapper( 0 )
     , m_texcolorizer( 0 )
-    , m_mapTheme( 0 )
+    , m_textureLayerSettings( 0 )
 {
 }
 
@@ -87,13 +81,10 @@ void TextureLayer::Private::updateTextureLayers()
 {
     QVector<GeoSceneTexture const *> result;
 
-    foreach ( const GeoSceneAbstractDataset *pos, sceneLayer()->datasets() ) {
-        GeoSceneTexture const * const candidate = dynamic_cast<GeoSceneTexture const *>( pos );
-        if ( !candidate )
-            continue;
+    foreach ( const GeoSceneTexture *candidate, m_textures ) {
         bool enabled = true;
-        if ( textureLayerSettings() ) {
-            const bool propertyExists = textureLayerSettings()->propertyValue( candidate->name(), enabled );
+        if ( m_textureLayerSettings ) {
+            const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
             enabled |= !propertyExists; // if property doesn't exist, enable texture nevertheless
         }
         if ( enabled )
@@ -114,37 +105,6 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
 
     m_tileLoader.updateTile( tileId, tileImage );
 }
-
-const GeoSceneLayer *TextureLayer::Private::sceneLayer() const
-{
-    if ( !m_mapTheme )
-        return 0;
-
-    GeoSceneHead const * head = m_mapTheme->head();
-    if ( !head )
-        return 0;
-
-    GeoSceneMap const * map = m_mapTheme->map();
-    if ( !map )
-        return 0;
-
-    const QString mapThemeId = head->target() + '/' + head->theme();
-    mDebug() << "StackedTileLoader::updateTextureLayers" << mapThemeId;
-
-    return map->layer( head->theme() );
-}
-
-GeoSceneGroup* TextureLayer::Private::textureLayerSettings() const
-{
-    if ( !m_mapTheme )
-        return 0;
-
-    if ( !m_mapTheme->settings() )
-        return 0;
-
-    return m_mapTheme->settings()->group( "Texture Layers" );
-}
-
 
 
 
@@ -175,10 +135,7 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
                                ViewParams *viewParams,
                                const QRect& dirtyRect )
 {
-    if ( !d->m_mapTheme )
-        return;
-
-    if ( !d->m_mapTheme->map()->hasTextureLayers() )
+    if ( d->m_textures.isEmpty() )
         return;
 
     if ( !d->m_texmapper )
@@ -264,8 +221,9 @@ void TextureLayer::setTextureColorizer( TextureColorizer *texcolorizer )
 
 void TextureLayer::setupTextureMapper( Projection projection )
 {
-    if ( !d->m_mapTheme || !d->m_mapTheme->map()->hasTextureLayers() )
+    if ( d->m_textures.isEmpty() )
         return;
+
   // FIXME: replace this with an approach based on the factory method pattern.
     delete d->m_texmapper;
 
@@ -319,19 +277,21 @@ void TextureLayer::downloadTile( const TileId &tileId )
     d->m_tileLoader.downloadTile( tileId );
 }
 
-void TextureLayer::setMapTheme(GeoSceneDocument* mapTheme)
+void TextureLayer::setMapTheme( const QVector<const GeoSceneTexture *> &textures, GeoSceneGroup *textureLayerSettings )
 {
-    if ( d->textureLayerSettings() ) {
-        disconnect( d->textureLayerSettings(), SIGNAL( valueChanged( QString, bool ) ),
+    if ( d->m_textureLayerSettings ) {
+        disconnect( d->m_textureLayerSettings, SIGNAL( valueChanged( QString, bool ) ),
                     this,                      SLOT( updateTextureLayers() ) );
     }
 
-    d->m_mapTheme = mapTheme;
+    d->m_textures = textures;
+    d->m_textureLayerSettings = textureLayerSettings;
 
-    if ( d->textureLayerSettings() ) {
-        connect( d->textureLayerSettings(), SIGNAL( valueChanged( QString, bool )),
+    if ( d->m_textureLayerSettings ) {
+        connect( d->m_textureLayerSettings, SIGNAL( valueChanged( QString, bool ) ),
                  this,                      SLOT( updateTextureLayers() ) );
     }
+
     d->updateTextureLayers();
 }
 

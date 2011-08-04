@@ -26,7 +26,7 @@ namespace Marble
 {
 
 class GeoPainter;
-class GeoSceneDocument;
+class GeoSceneGroup;
 class HttpDownloadManager;
 class MapThemeManager;
 class SunLocator;
@@ -83,7 +83,7 @@ class TextureLayer : public QObject
 
     void setNeedsUpdate();
 
-    void setMapTheme( GeoSceneDocument* mapTheme );
+    void setMapTheme( const QVector<const GeoSceneTexture *> &textures, GeoSceneGroup *textureLayerSettings );
 
     void setVolatileCacheLimit( quint64 kilobytes );
 
