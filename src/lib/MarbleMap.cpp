@@ -918,6 +918,8 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
                 const QString installMap = texture->installMap();
                 const QString role = sceneLayer->role();
 
+                // If the tiles aren't already there, put up a progress dialog
+                // while creating them.
                 if ( !TileLoader::baseTilesAvailable( *texture )
                     && !installMap.isEmpty() )
                 {
@@ -949,12 +951,6 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
                 }
             }
         }
-
-        // If the tiles aren't already there, put up a progress dialog
-        // while creating them.
-
-        // As long as we don't have an Layer Management Class we just lookup
-        // the name of the layer that has the same name as the theme ID
 
         d->m_textureLayer.setMapTheme( textures, textureLayerSettings );
 
