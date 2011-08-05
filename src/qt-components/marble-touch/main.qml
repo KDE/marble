@@ -13,8 +13,12 @@ import com.nokia.meego 1.0
 
 Rectangle {
     id: main
-    width: 800
-    height: 480
+    width: screen.displayWidth
+    height: screen.displayHeight
+
+    Component.onCompleted: {
+        console.log( "cat: ", screen.displayWidth, screen.displayHeight )
+    }
 
     MarbleSettings {
         id: settings
@@ -219,7 +223,7 @@ Rectangle {
             ToolIcon {
                 id: activityButton
                 iconId: "toolbar-view-menu-dimmed-white"
-                onClicked: { activitySelection.visible = true; activitySelection.activity = -1 }
+                onClicked: { activitySelection.visible = false; activitySelection.activity = -1 }
             }
         }
         states: [
@@ -249,7 +253,7 @@ Rectangle {
                 PropertyChanges { target: wikipediaButton; visible: true }
                 PropertyChanges { target: photoButton; visible: true }
                 PropertyChanges { target: settingsButton; visible: true }
-                PropertyChanges { target: activityButton; visible: true }
+                PropertyChanges { target: activityButton; visible: false }
             },
             State {
                 name: "Drive"
@@ -273,7 +277,7 @@ Rectangle {
                 PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
-                PropertyChanges { target: activityButton; visible: true }
+                PropertyChanges { target: activityButton; visible: false }
             },
             State {
                 name: "Cycle"
@@ -297,7 +301,7 @@ Rectangle {
                 PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
-                PropertyChanges { target: activityButton; visible: true }
+                PropertyChanges { target: activityButton; visible: false }
             },
             State {
                 name: "Walk"
@@ -321,7 +325,7 @@ Rectangle {
                 PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
-                PropertyChanges { target: activityButton; visible: true }
+                PropertyChanges { target: activityButton; visible: false }
             },
             State {
                 name: "Guidance"
@@ -345,7 +349,7 @@ Rectangle {
                 PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
-                PropertyChanges { target: activityButton; visible: true }
+                PropertyChanges { target: activityButton; visible: false }
             },
             State {
                 name: "Search"
@@ -369,7 +373,7 @@ Rectangle {
                 PropertyChanges { target: wikipediaButton; visible: true }
                 PropertyChanges { target: photoButton; visible: true }
                 PropertyChanges { target: settingsButton; visible: true }
-                PropertyChanges { target: activityButton; visible: true }
+                PropertyChanges { target: activityButton; visible: false }
             },
             State {
                 name: "Bookmarks"
@@ -393,7 +397,7 @@ Rectangle {
                 PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
-                PropertyChanges { target: activityButton; visible: true }
+                PropertyChanges { target: activityButton; visible: false }
             },
             State {
                 name: "Around Me"
@@ -417,7 +421,7 @@ Rectangle {
                 PropertyChanges { target: wikipediaButton; visible: true }
                 PropertyChanges { target: photoButton; visible: true }
                 PropertyChanges { target: settingsButton; visible: true }
-                PropertyChanges { target: activityButton; visible: true }
+                PropertyChanges { target: activityButton; visible: false }
             },
             State {
                 name: "Weather"
@@ -441,7 +445,7 @@ Rectangle {
                 PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
-                PropertyChanges { target: activityButton; visible: true }
+                PropertyChanges { target: activityButton; visible: false }
             },
             State {
                 name: "Tracking"
@@ -465,7 +469,7 @@ Rectangle {
                 PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
-                PropertyChanges { target: activityButton; visible: true }
+                PropertyChanges { target: activityButton; visible: false }
             },
             State {
                 name: "Geocaching"
@@ -489,7 +493,7 @@ Rectangle {
                 PropertyChanges { target: wikipediaButton; visible: true }
                 PropertyChanges { target: photoButton; visible: true }
                 PropertyChanges { target: settingsButton; visible: true }
-                PropertyChanges { target: activityButton; visible: true }
+                PropertyChanges { target: activityButton; visible: false }
             },
             State {
                 name: "Friends"
@@ -513,7 +517,7 @@ Rectangle {
                 PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
-                PropertyChanges { target: activityButton; visible: true }
+                PropertyChanges { target: activityButton; visible: false }
             },
             State {
                 name: "Download"
@@ -537,7 +541,7 @@ Rectangle {
                 PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: true }
-                PropertyChanges { target: activityButton; visible: true }
+                PropertyChanges { target: activityButton; visible: false }
             },
             State {
                 name: "Configuration"
@@ -561,7 +565,7 @@ Rectangle {
                 PropertyChanges { target: wikipediaButton; visible: false }
                 PropertyChanges { target: photoButton; visible: false }
                 PropertyChanges { target: settingsButton; visible: false }
-                PropertyChanges { target: activityButton; visible: true }
+                PropertyChanges { target: activityButton; visible: false }
             }
         ]
     }
