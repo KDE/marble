@@ -140,7 +140,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(bool showOtherPlaces READ showOtherPlaces WRITE setShowOtherPlaces)
 
     Q_PROPERTY(bool showRelief   READ showRelief      WRITE setShowRelief)
-    Q_PROPERTY(bool showElevationModel READ showElevationModel WRITE setShowElevationModel)
 
     Q_PROPERTY(bool showIceLayer READ showIceLayer    WRITE setShowIceLayer)
     Q_PROPERTY(bool showBorders  READ showBorders     WRITE setShowBorders)
@@ -510,12 +509,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool showRelief() const;
 
     /**
-     * @brief  Return whether the elevation model is visible.
-     * @return The elevation model visibility.
-     */
-    bool showElevationModel() const;
-
-    /**
      * @brief  Return whether the ice layer is visible.
      * @return The ice layer visibility.
      */
@@ -538,12 +531,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return The lakes' visibility.
      */
     bool showLakes() const;
-
-    /**
-     * @brief Return whether Gps Data is visible.
-     * @return The Gps Data's visibility.
-     */
-    bool showGps() const;
 
     /**
      * @brief  Return whether the frame rate gets displayed.
@@ -857,12 +844,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setShowRelief( bool visible );
 
     /**
-     * @brief  Set whether the elevation model is visible
-     * @param  visible  visibility of the elevation model
-     */
-    void setShowElevationModel( bool visible );
-
-    /**
      * @brief  Set whether the ice layer is visible
      * @param  visible  visibility of the ice layer
      */
@@ -885,12 +866,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  visible  visibility of the lakes
      */
     void setShowLakes( bool visible );
-
-    /**
-     * @brief Set whether Gps Data is visible
-     * @param visible  visibility of the Gps Data
-     */
-    void setShowGps( bool visible );
 
     /**
      * @brief Set whether the frame rate gets shown

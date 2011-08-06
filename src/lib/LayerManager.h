@@ -30,7 +30,7 @@ class AbstractDataPluginItem;
 class LayerManagerPrivate;
 class GeoPainter;
 class GeoSceneDocument;
-class ViewParams;
+class ViewportParams;
 class RenderPlugin;
 class AbstractFloatItem;
 class AbstractDataPlugin;
@@ -50,9 +50,9 @@ class MARBLE_EXPORT LayerManager : public QObject
     explicit LayerManager( MarbleModel *model, QObject *parent = 0);
     ~LayerManager();
 
-    void renderLayers( GeoPainter *painter, ViewParams *viewParams, const QStringList& renderPositions );
+    void renderLayers( GeoPainter *painter, ViewportParams *viewport, const QStringList& renderPositions );
 
-    void renderLayer( GeoPainter *painter, ViewParams *viewParams, const QString& renderPosition  );
+    void renderLayer( GeoPainter *painter, ViewportParams *viewport, const QString& renderPosition  );
 
     
     /**

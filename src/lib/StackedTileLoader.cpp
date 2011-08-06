@@ -382,11 +382,13 @@ void StackedTileLoader::clear()
     d->m_levelZeroHash.clear();
     d->m_tileCache.clear();
 
-    for ( int row = 0; row < tileRowCount( 0 ); ++row ) {
-        for ( int column = 0; column < tileColumnCount( 0 ); ++column ) {
-            TileId const id = TileId( 0, 0, column, row );
-            const StackedTile *const levelZeroTile = d->createTile( id );
-            d->m_levelZeroHash.insert( id, levelZeroTile );
+    if ( !d->m_textureLayers.isEmpty() ) {
+        for ( int row = 0; row < d->m_textureLayers.at( 0 )->levelZeroRows(); ++row ) {
+            for ( int column = 0; column < d->m_textureLayers.at( 0 )->levelZeroColumns(); ++column ) {
+                TileId const id = TileId( 0, 0, column, row );
+                const StackedTile *const levelZeroTile = d->createTile( id );
+                d->m_levelZeroHash.insert( id, levelZeroTile );
+            }
         }
     }
 }

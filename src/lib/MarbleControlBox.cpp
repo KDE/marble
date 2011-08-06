@@ -187,10 +187,6 @@ void MarbleControlBox::setCurrentLocationTabShown( bool show )
         if ( locationIndex >= 0 ) {
             setItemEnabled( locationIndex, enabled );
         }
-
-        if ( !enabled ) {
-            d->m_widget->setShowGps( false );
-        }
     }
 }
 

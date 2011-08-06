@@ -485,11 +485,6 @@ bool MarbleWidget::showRelief() const
     return d->m_map->showRelief();
 }
 
-bool MarbleWidget::showElevationModel() const
-{
-    return d->m_map->showElevationModel();
-}
-
 bool MarbleWidget::showIceLayer() const
 {
     return d->m_map->showIceLayer();
@@ -508,11 +503,6 @@ bool MarbleWidget::showRivers() const
 bool MarbleWidget::showLakes() const
 {
     return d->m_map->showLakes();
-}
-
-bool MarbleWidget::showGps() const
-{
-    return d->m_map->showGps();
 }
 
 bool MarbleWidget::showFrameRate() const
@@ -1010,13 +1000,6 @@ void MarbleWidget::setShowRelief( bool visible )
     repaint();
 }
 
-void MarbleWidget::setShowElevationModel( bool visible )
-{
-    d->m_map->setShowElevationModel( visible );
-
-    repaint();
-}
-
 void MarbleWidget::setShowIceLayer( bool visible )
 {
     d->m_map->setShowIceLayer( visible );
@@ -1055,13 +1038,6 @@ void MarbleWidget::setShowFrameRate( bool visible )
 void MarbleWidget::setShowBackground( bool visible )
 {
     d->m_map->setShowBackground( visible );
-
-    repaint();
-}
-
-void MarbleWidget::setShowGps( bool visible )
-{
-    d->m_map->setShowGps( visible );
 
     repaint();
 }

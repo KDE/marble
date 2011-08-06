@@ -52,6 +52,7 @@
 #include "GeoSceneVector.h"
 #include "GeoSceneZoom.h"
 #include "LayerManager.h"
+#include "MapThemeManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
@@ -97,6 +98,7 @@ class MarbleMapPrivate
     MarbleModel     *const m_model;
     bool             m_modelIsOwned;
 
+    GeoSceneDocument *m_mapTheme;
     ViewParams       m_viewParams;
     bool             m_backgroundVisible;
 
@@ -121,6 +123,7 @@ class MarbleMapPrivate
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
         : m_parent( parent ),
           m_model( model ),
+          m_mapTheme( 0 ),
           m_backgroundVisible( true ),
           m_texcolorizer( 0 ),
           m_layerManager( model, parent ),
@@ -432,16 +435,16 @@ qreal MarbleMap::centerLongitude() const
 
 int  MarbleMap::minimumZoom() const
 {
-    if ( d->m_viewParams.mapTheme() )
-        return d->m_viewParams.mapTheme()->head()->zoom()->minimum();
+    if ( d->m_mapTheme )
+        return d->m_mapTheme->head()->zoom()->minimum();
 
     return 950;
 }
 
 int  MarbleMap::maximumZoom() const
 {
-    if ( d->m_viewParams.mapTheme() )
-        return d->m_viewParams.mapTheme()->head()->zoom()->maximum();
+    if ( d->m_mapTheme )
+        return d->m_mapTheme->head()->zoom()->maximum();
 
     return 2100;
 }
@@ -521,7 +524,13 @@ void MarbleMap::downloadRegion( const QString& sourceDir, QVector<TileCoordsPyra
 bool MarbleMap::propertyValue( const QString& name ) const
 {
     bool value;
-    d->m_viewParams.propertyValue( name, value );
+    if ( d->m_mapTheme ) {
+        d->m_mapTheme->settings()->propertyValue( name, value );
+    }
+    else {
+        value = false;
+        mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
+    }
     return value;
 }
 
@@ -611,11 +620,6 @@ bool MarbleMap::showRelief() const
     return propertyValue( "relief" );
 }
 
-bool MarbleMap::showElevationModel() const
-{
-    return d->m_viewParams.showElevationModel();
-}
-
 bool MarbleMap::showIceLayer() const
 {
     return propertyValue( "ice" );
@@ -634,11 +638,6 @@ bool MarbleMap::showRivers() const
 bool MarbleMap::showLakes() const
 {
     return propertyValue( "lakes" );
-}
-
-bool MarbleMap::showGps() const
-{
-    return d->m_viewParams.showGps();
 }
 
 bool MarbleMap::showFrameRate() const
@@ -742,7 +741,7 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
     QTime t;
     t.start();
     
-    if ( !d->m_viewParams.mapTheme() ) {
+    if ( !d->m_mapTheme ) {
         mDebug() << "No theme yet!";
         d->paintMarbleSplash( painter, dirtyRect );
         return;
@@ -752,7 +751,7 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
 
     if ( d->m_backgroundVisible ) {
         renderPositions << "STARS" << "BEHIND_TARGET";
-        d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
+        d->m_layerManager.renderLayers( &painter, d->m_viewParams.viewport(), renderPositions );
     }
 
     if ( d->m_viewParams.showAtmosphere() ) {
@@ -766,7 +765,7 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
     renderPositions.clear();
     renderPositions << "SURFACE" << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
-    d->m_layerManager.renderLayers( &painter, &d->m_viewParams, renderPositions );
+    d->m_layerManager.renderLayers( &painter, d->m_viewParams.viewport(), renderPositions );
 
     customPaint( &painter );
 
@@ -783,7 +782,7 @@ void MarbleMap::customPaint( GeoPainter *painter )
 {
     Q_UNUSED( painter );
 
-    if ( !d->m_viewParams.mapTheme() ) {
+    if ( !d->m_mapTheme ) {
         return;
     }
 }
@@ -803,9 +802,6 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
                     this, SLOT( updateProperty( const QString &, bool ) ) );
     }
 
-    d->m_viewParams.setMapThemeId( mapThemeId );
-    GeoSceneDocument *mapTheme = d->m_viewParams.mapTheme();
-
     d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
 
@@ -813,12 +809,34 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     delete d->m_texcolorizer;
     d->m_texcolorizer = 0;
 
+    GeoSceneDocument* mapTheme = MapThemeManager::loadMapTheme( mapThemeId );
     if ( !mapTheme ) {
+        // Check whether the previous theme works
+        if ( d->m_mapTheme ){
+            qWarning() << "Selected theme doesn't work, so we stick to the previous one";
+            mapTheme = d->m_mapTheme;
+        }
+    }
+
+    if ( !mapTheme ) {
+        // Fall back to default theme
+        QString defaultTheme = "earth/srtm/srtm.dgml";
+        qWarning() << "Falling back to default theme " << defaultTheme;
+        mapTheme = MapThemeManager::loadMapTheme(defaultTheme);
+    }
+
+    // If this last resort doesn't work either shed a tear and exit
+    if ( !mapTheme ) {
+        qWarning() << "Couldn't find a valid DGML map.";
         return;
     }
 
+    d->m_mapTheme = mapTheme;
+
     connect( mapTheme->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
              this, SLOT( updateProperty( const QString &, bool ) ) );
+
+    setPropertyValue( "clouds_data", d->m_viewParams.showClouds() );
 
     // NOTE due to frequent regressions: 
     // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
@@ -882,42 +900,59 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 
     // Check whether there is a texture layer available:
     if ( mapTheme->map()->hasTextureLayers() ) {
-	d->m_textureLayer.setMapTheme( mapTheme );
-        // If the tiles aren't already there, put up a progress dialog
-        // while creating them.
+        GeoSceneSettings *const settings = mapTheme->settings();
+        GeoSceneGroup *const textureLayerSettings = settings ? settings->group( "Texture Layers" ) : 0;
 
-        // As long as we don't have an Layer Management Class we just lookup
-        // the name of the layer that has the same name as the theme ID
-        QString themeID = mapTheme->head()->theme();
+        const GeoSceneHead *const head = mapTheme->head();
+        const GeoSceneMap *const map = mapTheme->map();
+        const GeoSceneLayer *const sceneLayer = ( head && map ) ? map->layer( head->theme() ) : 0;
 
-        GeoSceneLayer *layer =
-            static_cast<GeoSceneLayer*>( mapTheme->map()->layer( themeID ) );
-        GeoSceneTexture *texture =
-            static_cast<GeoSceneTexture*>( layer->groundDataset() );
+        QVector<const GeoSceneTexture *> textures;
+        if ( sceneLayer ) {
+            foreach ( const GeoSceneAbstractDataset *pos, sceneLayer->datasets() ) {
+                const GeoSceneTexture *const texture = dynamic_cast<GeoSceneTexture const *>( pos );
+                if ( !texture )
+                    continue;
 
-        QString sourceDir = texture->sourceDir();
-        QString installMap = texture->installMap();
-        QString role = mapTheme->map()->layer( themeID )->role();
+                const QString sourceDir = texture->sourceDir();
+                const QString installMap = texture->installMap();
+                const QString role = sceneLayer->role();
 
-        if ( !TileLoader::baseTilesAvailable( *texture )
-            && !installMap.isEmpty() )
-        {
-            mDebug() << "Base tiles not available. Creating Tiles ... \n"
-                     << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
-            MarbleDirs::debug();
+                // If the tiles aren't already there, put up a progress dialog
+                // while creating them.
+                if ( !TileLoader::baseTilesAvailable( *texture )
+                    && !installMap.isEmpty() )
+                {
+                    mDebug() << "Base tiles not available. Creating Tiles ... \n"
+                             << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
 
-            TileCreator *tileCreator = new TileCreator(
-                                     sourceDir,
-                                     installMap,
-                                     (role == "dem") ? "true" : "false" );
+                    TileCreator *tileCreator = new TileCreator(
+                                             sourceDir,
+                                             installMap,
+                                             (role == "dem") ? "true" : "false" );
 
-            QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
-            tileCreatorDlg->setSummary( mapTheme->head()->name(),
-                                        mapTheme->head()->description() );
-            tileCreatorDlg->exec();
-            qDebug("Tile creation completed");
-            delete tileCreatorDlg;
+                    QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
+                    tileCreatorDlg->setSummary( mapTheme->head()->name(),
+                                                mapTheme->head()->description() );
+                    tileCreatorDlg->exec();
+                    if ( TileLoader::baseTilesAvailable( *texture ) ) {
+                        qDebug() << "Base tiles for" << sourceDir << "successfully created.";
+                    } else {
+                        qDebug() << "Some or all base tiles for" << sourceDir << "could not be created.";
+                    }
+
+                    delete tileCreatorDlg;
+                }
+
+                if ( TileLoader::baseTilesAvailable( *texture ) ) {
+                    textures.append( texture );
+                } else {
+                    mDebug() << " Skipping layer" << sourceDir;
+                }
+            }
         }
+
+        d->m_textureLayer.setMapTheme( textures, textureLayerSettings );
 
         d->m_textureLayer.setupTextureMapper( d->m_viewParams.projection() );
 
@@ -985,7 +1020,12 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 void MarbleMap::setPropertyValue( const QString& name, bool value )
 {
     mDebug() << "In MarbleMap the property " << name << "was set to " << value;
-    d->m_viewParams.setPropertyValue( name, value );
+    if ( d->m_mapTheme ) {
+        d->m_mapTheme->settings()->setPropertyValue( name, value );
+    }
+    else {
+        mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
+    }
     d->m_textureLayer.setNeedsUpdate();
 }
 
@@ -1025,6 +1065,8 @@ void MarbleMap::setShowClouds( bool visible )
 {
     d->m_viewParams.setShowClouds( visible );
     d->m_textureLayer.setNeedsUpdate();
+
+    setPropertyValue( "clouds_data", visible );
 }
 
 void MarbleMap::setShowSunShading( bool visible )
@@ -1081,13 +1123,6 @@ void MarbleMap::setShowRelief( bool visible )
     d->m_textureLayer.setNeedsUpdate();
 }
 
-void MarbleMap::setShowElevationModel( bool visible )
-{
-    d->m_viewParams.setShowElevationModel( visible );
-    // Update texture map during the repaint that follows:
-    d->m_textureLayer.setNeedsUpdate();
-}
-
 void MarbleMap::setShowIceLayer( bool visible )
 {
     setPropertyValue( "ice", visible );
@@ -1120,11 +1155,6 @@ void MarbleMap::setShowFrameRate( bool visible )
 void MarbleMap::setShowBackground( bool visible )
 {
     d->m_backgroundVisible = visible;
-}
-
-void MarbleMap::setShowGps( bool visible )
-{
-    d->m_viewParams.setShowGps( visible );
 }
 
 void MarbleMap::notifyMouseClick( int x, int y )
