@@ -10,6 +10,12 @@
 
 #include "SatellitesPlugin.h"
 
+#include <QtCore/QTimer>
+
+#include <locale.h>
+
+#include "CacheStoragePolicy.h"
+#include "HttpDownloadManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
@@ -20,13 +26,14 @@
 
 #include "sgp4/sgp4io.h"
 
-#include <locale.h>
+const int timeBetweenDownloads = 6*60*60*1000; //in milliseconds
 
 namespace Marble
 {
 
 SatellitesPlugin::SatellitesPlugin()
-    : m_isInitialized(false)
+    : m_isInitialized(false),
+      m_downloadTimer(new QTimer(this))
 {
 }
 
@@ -72,34 +79,17 @@ QIcon SatellitesPlugin::icon() const
 
 void SatellitesPlugin::initialize()
 {
-    //marbleModel()->downloadManager();
-    //Data from http://www.celestrak.com/NORAD/elements/
-    QFile tleFile("/opt/geo.txt");
-    if (!tleFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        mDebug() << "Error opening file";
-        return;
-    }
+    CacheStoragePolicy *storagePolicy = new CacheStoragePolicy( MarbleDirs::localPath()
+                                                                + "/cache/satellites/" );
+    m_downloadManager = new HttpDownloadManager( storagePolicy, marbleModel()->pluginManager() );
 
-    //FIXME: terrible hack because twoline2rv uses sscanf
-    setlocale(LC_NUMERIC, "C");
+    connect( m_downloadManager, SIGNAL(downloadComplete(QByteArray,QString)),
+             this, SLOT(updateData(QByteArray,QString)) );
+    connect( m_downloadTimer, SIGNAL(timeout()),
+             this, SLOT(triggerDownload()) ) ;
 
-    double startmfe, stopmfe, deltamin;
-    elsetrec satrec;
-    while(!tleFile.atEnd()) {
-        QString satellite(tleFile.readLine());
-        char line1[80];
-        char line2[80];
-        tleFile.readLine(line1, sizeof(line1));
-        tleFile.readLine(line2, sizeof(line2));
-        twoline2rv(line1, line2, 'c', 'd', 'i', wgs84,
-                   startmfe, stopmfe, deltamin, satrec);
-        m_satHash.insert(satellite.trimmed(), satrec);
-        if (satrec.error != 0) {
-            mDebug() << "Error: " << satrec.error;
-            return;
-        }
-    }
-    setlocale(LC_NUMERIC, ""); //reset to environment
+    m_downloadTimer->start( timeBetweenDownloads );
+    triggerDownload();
     m_isInitialized = true;
 }
 
@@ -144,7 +134,7 @@ bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
         GeoDataLinearRing orbit;
         for ( int i = 1; i < 100; i++ ) {
             sgp4( wgs84, it.value(), i, r, v );
-            orbit << fromCartesian( r[0], r[1], r[2]);
+            orbit << fromCartesian( r[0], r[1], r[2] );
         }
 
         painter->save();
@@ -158,6 +148,46 @@ bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     return true;
 }
 
+void SatellitesPlugin::updateData(const QByteArray &data, const QString &initiatorId)
+{
+    //FIXME: terrible hack because twoline2rv uses sscanf
+    setlocale(LC_NUMERIC, "C");
+
+    QList<QByteArray> tleLines = data.split( '\n' );
+    double startmfe, stopmfe, deltamin;
+    elsetrec satrec;
+    int i = 0;
+    // File format: One line of description, two lines of TLE, last line is empty
+    if ( tleLines.size() % 3 != 1 ) {
+        mDebug() << "Malformated satellite data file: " << initiatorId;
+    }
+    while ( i < tleLines.size() - 1 ) {
+        QString satelliteName( tleLines.at( i++ ) );
+        char line1[80];
+        char line2[80];
+        qstrcpy( line1, tleLines.at( i++ ).constData() );
+        qstrcpy( line2, tleLines.at( i++ ).constData() );
+        twoline2rv( line1, line2, 'c', 'd', 'i', wgs84,
+                    startmfe, stopmfe, deltamin, satrec );
+        m_satHash.insert( satelliteName.trimmed(), satrec );
+        if ( satrec.error != 0 ) {
+            mDebug() << "Error: " << satrec.error;
+            return;
+        }
+    }
+
+    repaintNeeded(QRegion());
+
+    //Reset to environment
+    setlocale(LC_NUMERIC, "");
+}
+
+void SatellitesPlugin::triggerDownload()
+{
+    m_downloadManager->addJob( QUrl( "http://www.celestrak.com/NORAD/elements/visual.txt" ),
+                                              "visual.txt", "sat-visual", Marble::DownloadBulk );
+}
+
 GeoDataCoordinates SatellitesPlugin::fromCartesian( double x, double y, double z ) {
     double lat = atan2( y, x );
     double lon = atan2( z, sqrt( x*x + y*y ) );
@@ -167,6 +197,6 @@ GeoDataCoordinates SatellitesPlugin::fromCartesian( double x, double y, double z
 
 }
 
-Q_EXPORT_PLUGIN2(SatellitesPlugin, Marble::SatellitesPlugin)
+Q_EXPORT_PLUGIN2( SatellitesPlugin, Marble::SatellitesPlugin )
 
 #include "SatellitesPlugin.moc"

@@ -18,6 +18,9 @@
 
 namespace Marble
 {
+
+class HttpDownloadManager;
+
 class GeoDataCoordinates;
 
 /**
@@ -54,10 +57,17 @@ public:
      */
     GeoDataCoordinates fromCartesian( double x, double y, double z );
 
+private slots:
+    void updateData( const QByteArray &data, const QString &initiatorId );
+    void triggerDownload();
+
 private:
     bool m_isInitialized;
     //TODO: use a data structure more appropriate for searching by satellite name
     QHash<QString, elsetrec> m_satHash;
+
+    QTimer *m_downloadTimer;
+    HttpDownloadManager *m_downloadManager;
 };
 
 }
