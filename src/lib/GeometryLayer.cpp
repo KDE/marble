@@ -212,9 +212,14 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( GeoDataGeometry* obje
 void GeometryLayer::invalidateScene()
 {
     QList<GeoGraphicsItem*> items = d->m_scene.items();
+    QList<GeoGraphicsItem*> deletedItems;
     foreach( GeoGraphicsItem* item, items )
     {
-        delete item;
+        if( qBinaryFind( deletedItems, item ) != deletedItems.end() )
+        {
+            delete item;
+            deletedItems.insert( qLowerBound( deletedItems.begin(), deletedItems.end(), item ), item );
+        }
     }
     d->m_scene.clear();
     GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );

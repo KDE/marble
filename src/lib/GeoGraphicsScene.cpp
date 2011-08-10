@@ -72,9 +72,26 @@ GeoGraphicsScene::~GeoGraphicsScene()
 
 QList< GeoGraphicsItem* > GeoGraphicsScene::items() const
 {
-    //TODO: insert items
-    return QList< GeoGraphicsItem* >();
-    //return d->m_items;
+    QList< GeoGraphicsItem* > result;
+    for( QMap< TileId, QList< GeoGraphicsItem* > >::const_iterator i = d->m_items.constBegin(); 
+         i != d->m_items.constEnd(); i++ )
+    {
+        const QList< GeoGraphicsItem* > &objects = *i;
+        QList< GeoGraphicsItem* >::iterator before = result.begin();
+        QList< GeoGraphicsItem* >::const_iterator currentItem = objects.constBegin();
+        while( currentItem != objects.end() )
+        {
+            while( ( currentItem != objects.end() )
+                  && ( ( before == result.end() ) || ( (*currentItem)->zValue() < (*before)->zValue() ) ) )
+            {
+                before = result.insert( before, *currentItem );
+                currentItem++;
+            }
+            if ( before != result.end() )
+                before++;
+         }
+    }
+    return result;
 }
 
 QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAltBox& box, int maxZoomLevel ) const
