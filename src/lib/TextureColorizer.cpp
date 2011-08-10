@@ -171,19 +171,19 @@ void TextureColorizer::setShowRelief( bool show )
 // showRelief).
 // 
 
-void TextureColorizer::colorize(ViewParams *viewParams)
+void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport, MapQuality mapQuality )
 {
-    if ( m_coastImage.size() != viewParams->viewport()->size() )
-        m_coastImage = QImage( viewParams->viewport()->size(), QImage::Format_RGB32 );
+    if ( m_coastImage.size() != viewport->size() )
+        m_coastImage = QImage( viewport->size(), QImage::Format_RGB32 );
 
     // update coast image
     m_coastImage.fill( Qt::transparent );
 
     bool doClip = false; //assume false
-    switch( viewParams->projection() ) {
+    switch( viewport->projection() ) {
         case Spherical:
-            doClip = ( viewParams->radius() > ( viewParams->width()  / 2 )
-                       || viewParams->radius() > ( viewParams->height() / 2 ) );
+            doClip = ( viewport->radius() > ( viewport->width()  / 2 )
+                       || viewport->radius() > ( viewport->height() / 2 ) );
             break;
         case Equirectangular:
             doClip = true; // clipping should always be enabled
@@ -193,16 +193,15 @@ void TextureColorizer::colorize(ViewParams *viewParams)
             break;
     }
 
-    const bool antialiased =    viewParams->mapQuality() == HighQuality
-                             || viewParams->mapQuality() == PrintQuality;
+    const bool antialiased =    mapQuality == HighQuality
+                             || mapQuality == PrintQuality;
 
-    GeoPainter painter( &m_coastImage, viewParams->viewport(), viewParams->mapQuality(), doClip );
+    GeoPainter painter( &m_coastImage, viewport, mapQuality, doClip );
     painter.setRenderHint( QPainter::Antialiasing, antialiased );
 
-    m_veccomposer->drawTextureMap( &painter, viewParams->viewport() );
+    m_veccomposer->drawTextureMap( &painter, viewport );
 
-    QSharedPointer<QImage>        origimg = viewParams->canvasImagePtr();
-    const qint64   radius   = viewParams->radius();
+    const qint64   radius   = viewport->radius();
 
     const int  imgheight = origimg->height();
     const int  imgwidth  = origimg->width();
@@ -219,27 +218,27 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     int     bump = 8;
 
     if ( radius * radius > imgradius
-         || viewParams->projection() == Equirectangular
-         || viewParams->projection() == Mercator )
+         || viewport->projection() == Equirectangular
+         || viewport->projection() == Mercator )
     {
         int yTop = 0;
         int yBottom = imgheight;
 
-        if( viewParams->projection() == Equirectangular
-            || viewParams->projection() == Mercator )
+        if( viewport->projection() == Equirectangular
+            || viewport->projection() == Mercator )
         {
             // Calculate translation of center point
             qreal  centerLon;
             qreal  centerLat;
-            viewParams->centerCoordinates( centerLon, centerLat );
+            viewport->centerCoordinates( centerLon, centerLat );
 
             const float rad2Pixel = (qreal)( 2 * radius ) / M_PI;
-            if ( viewParams->projection() == Equirectangular ) {
+            if ( viewport->projection() == Equirectangular ) {
                 int yCenterOffset = (int)( centerLat * rad2Pixel );
                 yTop = ( imgry - radius + yCenterOffset < 0)? 0 : imgry - radius + yCenterOffset;
                 yBottom = ( imgry + yCenterOffset + radius > imgheight )? imgheight : imgry + yCenterOffset + radius;
             }
-            else if ( viewParams->projection() == Mercator ) {
+            else if ( viewport->projection() == Mercator ) {
                 int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
                 yTop = ( imgry - 2 * radius + yCenterOffset < 0 ) ? 0 : imgry - 2 * radius + yCenterOffset;
                 yBottom = ( imgry + 2 * radius + yCenterOffset > imgheight )? imgheight : imgry + 2 * radius + yCenterOffset;

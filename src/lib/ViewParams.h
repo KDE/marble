@@ -26,8 +26,6 @@
 #include "global.h"
 
 
-class QImage;
-
 namespace Marble
 {
 
@@ -81,9 +79,6 @@ class ViewParams
      * @param height new height of viewport
      */
     void setSize( int width, int height );
-
-    QSharedPointer<QImage> canvasImagePtr() const;
-    QImage * canvasImage() const;
 
     bool showAtmosphere() const;
     void setShowAtmosphere( bool );

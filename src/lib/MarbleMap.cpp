@@ -759,7 +759,7 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
     }
 
     if ( d->m_model->mapTheme()->map()->hasTextureLayers() ) {
-        d->m_textureLayer.paintGlobe( &painter, &d->m_viewParams, dirtyRect );
+        d->m_textureLayer.paintGlobe( &painter, d->m_viewParams.viewport(), dirtyRect );
     }
 
     renderPositions.clear();

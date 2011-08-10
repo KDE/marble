@@ -30,7 +30,7 @@
 #include "SunLocator.h"
 #include "TextureColorizer.h"
 #include "TileLoader.h"
-#include "ViewParams.h"
+#include "ViewportParams.h"
 
 namespace Marble
 {
@@ -132,7 +132,7 @@ bool TextureLayer::showCityLights() const
 }
 
 void TextureLayer::paintGlobe( GeoPainter *painter,
-                               ViewParams *viewParams,
+                               const ViewportParams *viewport,
                                const QRect& dirtyRect )
 {
     if ( d->m_textures.isEmpty() )
@@ -146,7 +146,7 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
     const int levelZeroHight = d->m_tileLoader.tileSize().height() * d->m_tileLoader.tileRowCount( 0 );
     const int levelZeroMinDimension = ( levelZeroWidth < levelZeroHight ) ? levelZeroWidth : levelZeroHight;
 
-    qreal linearLevel = ( 4.0 * (qreal)( viewParams->radius() ) / (qreal)( levelZeroMinDimension ) );
+    qreal linearLevel = ( 4.0 * (qreal)( viewport->radius() ) / (qreal)( levelZeroMinDimension ) );
 
     if ( linearLevel < 1.0 )
         linearLevel = 1.0; // Dirty fix for invalid entry linearLevel
@@ -171,7 +171,7 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
         emit tileLevelChanged( tileLevel );
     }
 
-    d->m_texmapper->mapTexture( painter, viewParams, dirtyRect, d->m_texcolorizer );
+    d->m_texmapper->mapTexture( painter, viewport, dirtyRect, d->m_texcolorizer );
 }
 
 void TextureLayer::setShowSunShading( bool show )

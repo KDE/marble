@@ -31,7 +31,7 @@ class HttpDownloadManager;
 class MapThemeManager;
 class SunLocator;
 class TextureColorizer;
-class ViewParams;
+class ViewportParams;
 
 class TextureLayer : public QObject
 {
@@ -64,7 +64,7 @@ class TextureLayer : public QObject
 
  public Q_SLOTS:
     void paintGlobe( GeoPainter *painter,
-                     ViewParams *viewParams,
+                     const ViewportParams *viewport,
                      const QRect& dirtyRect );
 
     void setShowSunShading( bool show );

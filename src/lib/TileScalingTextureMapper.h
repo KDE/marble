@@ -16,7 +16,9 @@
 #include "TileId.h"
 
 #include <QtCore/QCache>
+#include <QtGui/QImage>
 
+class QPainter;
 class QPixmap;
 
 namespace Marble
@@ -31,8 +33,8 @@ class TileScalingTextureMapper : public TextureMapperInterface
                               QCache<TileId, QPixmap> *cache,
                               QObject *parent = 0 );
 
-    virtual void mapTexture( QPainter *painter,
-                             ViewParams *viewParams,
+    virtual void mapTexture( GeoPainter *painter,
+                             const ViewportParams *viewport,
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer );
 
@@ -43,15 +45,16 @@ class TileScalingTextureMapper : public TextureMapperInterface
     void updateTiles();
 
  private:
-    void mapTexture( QPainter *painter,
-                     ViewParams *viewParams,
+    void mapTexture( GeoPainter *painter,
+                     const ViewportParams *viewport,
                      TextureColorizer *texColorizer );
 
  private:
     StackedTileLoader *const m_tileLoader;
     QCache<TileId, QPixmap> *const m_cache;
     bool   m_repaintNeeded;
-    int    m_oldRadius;
+    QImage m_canvasImage;
+    int    m_radius;
 };
 
 }

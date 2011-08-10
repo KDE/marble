@@ -15,15 +15,15 @@
 #include <cmath>
 
 #include <QtCore/QRunnable>
-#include <QtGui/QPainter>
 
 #include "global.h"
+#include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "Quaternion.h"
 #include "ScanlineTextureMapperContext.h"
 #include "StackedTileLoader.h"
 #include "TextureColorizer.h"
-#include "ViewParams.h"
+#include "ViewportParams.h"
 #include "MathHelper.h"
 
 
@@ -32,24 +32,26 @@ using namespace Marble;
 class SphericalScanlineTextureMapper::RenderJob : public QRunnable
 {
 public:
-    RenderJob( StackedTileLoader *tileLoader, int tileLevel, ViewParams *viewParams, int yTop, int yBottom );
+    RenderJob( StackedTileLoader *tileLoader, int tileLevel, QImage *canvasImage, const ViewportParams *viewport, MapQuality mapQuality, int yTop, int yBottom );
 
     virtual void run();
 
 private:
     StackedTileLoader *const m_tileLoader;
     const int m_tileLevel;
-    QSharedPointer<QImage> m_canvasImage;
-    ViewParams *const m_viewParams;
+    QImage *const m_canvasImage;
+    const ViewportParams *const m_viewport;
+    const MapQuality m_mapQuality;
     int const m_yTop;
     int const m_yBottom;
 };
 
-SphericalScanlineTextureMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel, ViewParams *viewParams, int yTop, int yBottom )
+SphericalScanlineTextureMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel, QImage *canvasImage, const ViewportParams *viewport, MapQuality mapQuality, int yTop, int yBottom )
     : m_tileLoader( tileLoader ),
       m_tileLevel( tileLevel ),
-      m_canvasImage( viewParams->canvasImagePtr() ),
-      m_viewParams( viewParams ),
+      m_canvasImage( canvasImage ),
+      m_viewport( viewport ),
+      m_mapQuality( mapQuality ),
       m_yTop( yTop ),
       m_yBottom( yBottom )
 {
@@ -60,6 +62,7 @@ SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( StackedTileLoade
     : TextureMapperInterface( parent )
     , m_tileLoader( tileLoader )
     , m_repaintNeeded( true )
+    , m_radius( 0 )
     , m_threadPool()
 {
     connect( m_tileLoader, SIGNAL( tileUpdateAvailable( const TileId & ) ),
@@ -68,27 +71,42 @@ SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( StackedTileLoade
              this, SIGNAL( tileUpdatesAvailable() ) );
 }
 
-void SphericalScanlineTextureMapper::mapTexture( QPainter *painter,
-                                                 ViewParams *viewParams,
+void SphericalScanlineTextureMapper::mapTexture( GeoPainter *painter,
+                                                 const ViewportParams *viewport,
                                                  const QRect &dirtyRect,
                                                  TextureColorizer *texColorizer )
 {
+    if ( m_canvasImage.size() != viewport->size() || m_radius != viewport->radius() ) {
+        const QImage::Format optimalFormat = ScanlineTextureMapperContext::optimalCanvasImageFormat( viewport );
+
+        if ( m_canvasImage.size() != viewport->size() || m_canvasImage.format() != optimalFormat ) {
+            m_canvasImage = QImage( viewport->size(), optimalFormat );
+        }
+
+        if ( !viewport->mapCoversViewport() ) {
+            m_canvasImage.fill( 0 );
+        }
+
+        m_radius = viewport->radius();
+        m_repaintNeeded = true;
+    }
+
     if ( m_repaintNeeded ) {
-        mapTexture( viewParams );
+        mapTexture( viewport, painter->mapQuality() );
 
         if ( texColorizer ) {
-            texColorizer->colorize( viewParams );
+            texColorizer->colorize( &m_canvasImage, viewport, painter->mapQuality() );
         }
 
         m_repaintNeeded = false;
     }
 
-    const int radius = (int)(1.05 * (qreal)(viewParams->radius()));
+    const int radius = (int)(1.05 * (qreal)(viewport->radius()));
 
-    QRect rect( viewParams->width() / 2 - radius, viewParams->height() / 2 - radius,
+    QRect rect( viewport->width() / 2 - radius, viewport->height() / 2 - radius,
                 2 * radius, 2 * radius);
     rect = rect.intersect( dirtyRect );
-    painter->drawImage( rect, *viewParams->canvasImage(), rect );
+    painter->drawImage( rect, m_canvasImage, rect );
 }
 
 void SphericalScanlineTextureMapper::setRepaintNeeded()
@@ -96,18 +114,18 @@ void SphericalScanlineTextureMapper::setRepaintNeeded()
     m_repaintNeeded = true;
 }
 
-void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
+void SphericalScanlineTextureMapper::mapTexture( const ViewportParams *viewport, MapQuality mapQuality )
 {
     // Reset backend
     m_tileLoader->resetTilehash();
 
     // Initialize needed constants:
 
-    const int imageHeight = viewParams->canvasImagePtr()->height();
-    const qint64  radius      = viewParams->radius();
+    const int imageHeight = m_canvasImage.height();
+    const qint64  radius      = viewport->radius();
 
     // Calculate the actual y-range of the map on the screen 
-    const int skip = ( viewParams->mapQuality() == LowQuality ) ? 1 : 0;
+    const int skip = ( mapQuality == LowQuality ) ? 1 : 0;
     const int yTop = ( ( imageHeight / 2 - radius < 0 )
                        ? 0 : imageHeight / 2 - radius );
     const int yBottom = ( (yTop == 0)
@@ -119,7 +137,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     for ( int i = 0; i < numThreads; ++i ) {
         const int yStart = yTop +  i      * yStep;
         const int yEnd   = yTop + (i + 1) * yStep;
-        QRunnable *const job = new RenderJob( m_tileLoader, tileZoomLevel(), viewParams, yStart, yEnd );
+        QRunnable *const job = new RenderJob( m_tileLoader, tileZoomLevel(), &m_canvasImage, viewport, mapQuality, yStart, yEnd );
         m_threadPool.start( job );
     }
 
@@ -132,26 +150,26 @@ void SphericalScanlineTextureMapper::RenderJob::run()
 {
     const int imageHeight = m_canvasImage->height();
     const int imageWidth  = m_canvasImage->width();
-    const qint64  radius  = m_viewParams->radius();
+    const qint64  radius  = m_viewport->radius();
     const qreal  inverseRadius = 1.0 / (qreal)(radius);
 
-    const bool interlaced   = ( m_viewParams->mapQuality() == LowQuality );
-    const bool highQuality  = ( m_viewParams->mapQuality() == HighQuality
-                             || m_viewParams->mapQuality() == PrintQuality );
-    const bool printQuality = ( m_viewParams->mapQuality() == PrintQuality );
+    const bool interlaced   = ( m_mapQuality == LowQuality );
+    const bool highQuality  = ( m_mapQuality == HighQuality
+                             || m_mapQuality == PrintQuality );
+    const bool printQuality = ( m_mapQuality == PrintQuality );
 
     // Evaluate the degree of interpolation
-    const int n = ScanlineTextureMapperContext::interpolationStep( m_viewParams );
+    const int n = ScanlineTextureMapperContext::interpolationStep( m_viewport, m_mapQuality );
 
     // Calculate north pole position to decrease pole distortion later on
     Quaternion northPole( 0.0, (qreal)( M_PI * 0.5 ) );
-    northPole.rotateAroundAxis( m_viewParams->planetAxis().inverse() );
+    northPole.rotateAroundAxis( m_viewport->planetAxis().inverse() );
     const int northPoleX = imageWidth / 2 + (int)( radius * northPole.v[Q_X] );
     const int northPoleY = imageHeight / 2 - (int)( radius * northPole.v[Q_Y] );
 
     // Calculate axis matrix to represent the planet's rotation.
     matrix  planetAxisMatrix;
-    m_viewParams->planetAxis().toMatrix( planetAxisMatrix );
+    m_viewport->planetAxis().toMatrix( planetAxisMatrix );
 
 
     // initialize needed variables that are modified during texture mapping:

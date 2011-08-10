@@ -16,7 +16,10 @@
 
 #include "TextureMapperInterface.h"
 
+#include "global.h"
+
 #include <QtCore/QThreadPool>
+#include <QtGui/QImage>
 
 
 namespace Marble
@@ -29,21 +32,23 @@ class EquirectScanlineTextureMapper : public TextureMapperInterface
  public:
     explicit EquirectScanlineTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
 
-    virtual void mapTexture( QPainter *painter,
-                             ViewParams *viewParams,
+    virtual void mapTexture( GeoPainter *painter,
+                             const ViewportParams *viewport,
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer );
 
     virtual void setRepaintNeeded();
 
  private:
-    void mapTexture( ViewParams *viewParams );
+    void mapTexture( const ViewportParams *viewport, MapQuality mapQuality );
 
  private:
     class RenderJob;
 
     StackedTileLoader *const m_tileLoader;
     bool   m_repaintNeeded;
+    int m_radius;
+    QImage m_canvasImage;
     int    m_oldYPaintedTop;
     QThreadPool m_threadPool;
 };

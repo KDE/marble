@@ -398,19 +398,19 @@ bool ScanlineTextureMapperContext::isOutOfTileRange( const int itLon, const int 
 }
 
 
-int ScanlineTextureMapperContext::interpolationStep( ViewParams * const viewParams )
+int ScanlineTextureMapperContext::interpolationStep( const ViewportParams *viewport, MapQuality mapQuality )
 {
-    if ( viewParams->mapQuality() == PrintQuality ) {
+    if ( mapQuality == PrintQuality ) {
         return 1;    // Don't interpolate for print quality.
     }
 
-    if ( ! viewParams->viewport()->globeCoversViewport() ) {
+    if ( ! viewport->globeCoversViewport() ) {
         return 8;
     }
 
     // Find the optimal interpolation interval m_nBest for the 
     // current image canvas width
-    const int width = viewParams->canvasImage()->width();
+    const int width = viewport->width();
 
     int nBest = 2;
     int nEvalMin = width - 1;
@@ -423,6 +423,18 @@ int ScanlineTextureMapperContext::interpolationStep( ViewParams * const viewPara
     }
 
     return nBest;
+}
+
+
+QImage::Format ScanlineTextureMapperContext::optimalCanvasImageFormat( const ViewportParams *viewport )
+{
+    // If the globe covers fully the screen then we can use the faster
+    // RGB32 as there are no translucent areas involved.
+    QImage::Format imageFormat = ( viewport->mapCoversViewport() )
+                                 ? QImage::Format_RGB32
+                                 : QImage::Format_ARGB32_Premultiplied;
+
+    return imageFormat;
 }
 
 
