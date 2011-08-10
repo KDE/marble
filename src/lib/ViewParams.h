@@ -87,9 +87,6 @@ class MARBLE_EXPORT ViewParams
     QSharedPointer<QImage> canvasImagePtr() const;
     QImage * canvasImage() const;
 
-    QSharedPointer<QImage> coastImagePtr() const;
-    QImage * coastImage() const;
-
     bool showAtmosphere() const;
     void setShowAtmosphere( bool );
 

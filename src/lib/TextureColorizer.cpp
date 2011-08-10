@@ -173,10 +173,11 @@ void TextureColorizer::setShowRelief( bool show )
 
 void TextureColorizer::colorize(ViewParams *viewParams)
 {
-    // update coastimg
-    QSharedPointer<QImage> coastimg = viewParams->coastImagePtr();
+    if ( m_coastImage.size() != viewParams->viewport()->size() )
+        m_coastImage = QImage( viewParams->viewport()->size(), QImage::Format_RGB32 );
 
-    coastimg->fill( Qt::transparent );
+    // update coast image
+    m_coastImage.fill( Qt::transparent );
 
     bool doClip = false; //assume false
     switch( viewParams->projection() ) {
@@ -195,7 +196,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     const bool antialiased =    viewParams->mapQuality() == HighQuality
                              || viewParams->mapQuality() == PrintQuality;
 
-    GeoPainter painter( coastimg.data(), viewParams->viewport(), viewParams->mapQuality(), doClip );
+    GeoPainter painter( &m_coastImage, viewParams->viewport(), viewParams->mapQuality(), doClip );
     painter.setRenderHint( QPainter::Antialiasing, antialiased );
 
     m_veccomposer->drawTextureMap( &painter, viewParams->viewport() );
@@ -250,7 +251,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
         for (int y = yTop; y < itEnd; ++y) {
 
             QRgb  *writeData         = (QRgb*)( origimg->scanLine( y ) );
-            const QRgb  *coastData   = (QRgb*)( coastimg->scanLine( y ) );
+            const QRgb  *coastData   = (QRgb*)( m_coastImage.scanLine( y ) );
 
             uchar *readDataStart     = origimg->scanLine( y );
             const uchar *readDataEnd = readDataStart + imgwidth*4;
@@ -340,7 +341,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
             }
 
             QRgb  *writeData         = (QRgb*)( origimg->scanLine( y ) )  + xLeft;
-            const QRgb *coastData    = (QRgb*)( coastimg->scanLine( y ) ) + xLeft;
+            const QRgb *coastData    = (QRgb*)( m_coastImage.scanLine( y ) ) + xLeft;
 
             uchar *readDataStart     = origimg->scanLine( y ) + xLeft * 4;
             const uchar *readDataEnd = origimg->scanLine( y ) + xRight * 4;

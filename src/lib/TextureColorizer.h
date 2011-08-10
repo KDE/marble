@@ -18,6 +18,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
+#include <QtGui/QImage>
 
 namespace Marble
 {
@@ -48,6 +49,7 @@ class TextureColorizer : public QObject
     VectorComposer *const m_veccomposer;
     QString m_seafile;
     QString m_landfile;
+    QImage m_coastImage;
     uint texturepalette[16][512];
     bool m_showRelief;
 };

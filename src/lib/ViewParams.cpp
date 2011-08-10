@@ -48,7 +48,6 @@ public:
 
     // Cached data that will make painting faster.
     QSharedPointer<QImage>  m_canvasImage;     // Base image with space and atmosphere
-    QSharedPointer<QImage>  m_coastImage;      // A slightly higher level image.
 
     void optimizeCanvasImageFormat();
 };
@@ -63,8 +62,7 @@ ViewParamsPrivate::ViewParamsPrivate()
       m_showAtmosphere( true ),
       m_showClouds( false ),
       // Just to have something.  These will be resized anyway.
-      m_canvasImage( new QImage( 10, 10, QImage::Format_RGB32 )),
-      m_coastImage( new QImage( 10, 10, QImage::Format_RGB32 ))
+      m_canvasImage( new QImage( 10, 10, QImage::Format_RGB32 ))
 {
 }
 
@@ -87,9 +85,6 @@ void ViewParamsPrivate::optimizeCanvasImageFormat()
     if ( !m_viewport.currentProjection()->mapCoversViewport( &m_viewport ) ) {
         m_canvasImage->fill(0); // Using Qt::transparent is wrong here (equals "18")!
     }
-
-    // Recreate the coastline detection offscreen image
-    m_coastImage = QSharedPointer<QImage>( new QImage( m_viewport.size(), QImage::Format_RGB32 ) );
 }
 
 
@@ -234,16 +229,6 @@ QSharedPointer<QImage> ViewParams::canvasImagePtr() const
 QImage * ViewParams::canvasImage() const
 {
     return d->m_canvasImage.data();
-}
-
-QSharedPointer<QImage> ViewParams::coastImagePtr() const
-{
-    return d->m_coastImage;
-}
-
-QImage * ViewParams::coastImage() const
-{
-    return d->m_coastImage.data();
 }
 
 bool ViewParams::showAtmosphere() const
