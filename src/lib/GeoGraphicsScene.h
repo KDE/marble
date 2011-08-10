@@ -71,9 +71,10 @@ public:
      * @brief Get the list of items in the specified Box
      *
      * @param box The box around the items.
+     * @param maxZoomLevel The max zoom level of tiling
      * @return The list of items in the specified box in no specific order.
      */
-    QList<GeoGraphicsItem *> items( const GeoDataLatLonAltBox& box ) const;
+    QList<GeoGraphicsItem *> items( const GeoDataLatLonAltBox& box, int maxZoomLevel ) const;
     
     /**
      * @brief default zoom level used for tiling

@@ -17,6 +17,8 @@
 #include "GeoDataFeature.h"
 
 // Qt
+#include <QVector>
+
 class QAbstractItemModel;
 
 namespace Marble
@@ -48,6 +50,8 @@ public Q_SLOTS:
 
 private:
     GeometryLayerPrivate *d;
+    
+    static QVector< int > s_weightfilter;
     
     static void initializeDefaultValues();
 };

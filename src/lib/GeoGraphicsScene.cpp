@@ -77,23 +77,24 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items() const
     //return d->m_items;
 }
 
-QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAltBox& box ) const
+QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAltBox& box, int maxZoomLevel ) const
 {
     QList< GeoGraphicsItem* > result;
     QRect rect;
     qreal north, south, east, west;
     box.boundaries( north, south, east, west );
     TileId key;
+    int zoomLevel = maxZoomLevel < s_tileZoomLevel ? maxZoomLevel : s_tileZoomLevel;
 
-    key = d->coordToTileId( GeoDataCoordinates(west, north, 0), s_tileZoomLevel );
+    key = d->coordToTileId( GeoDataCoordinates(west, north, 0), zoomLevel );
     rect.setLeft( key.x() );
     rect.setTop( key.y() );
 
-    key = d->coordToTileId( GeoDataCoordinates(east, south, 0), s_tileZoomLevel );
+    key = d->coordToTileId( GeoDataCoordinates(east, south, 0), zoomLevel );
     rect.setRight( key.x() );
     rect.setBottom( key.y() );
     
-    TileCoordsPyramid pyramid( 0, s_tileZoomLevel );
+    TileCoordsPyramid pyramid( 0, zoomLevel );
     pyramid.setBottomLevelCoords( rect );
 
     for ( int level = pyramid.topLevel(); level <= pyramid.bottomLevel(); ++level ) {

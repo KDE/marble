@@ -30,6 +30,7 @@
 #include "GeoGraphicsItem.h"
 #include "GeoLineStringGraphicsItem.h"
 #include "GeoPolygonGraphicsItem.h"
+#include "TileId.h"
 
 // Qt
 #include <QtCore/QTime>
@@ -41,6 +42,14 @@ int GeometryLayer::s_defaultZValues[GeoDataFeature::LastIndex];
 int GeometryLayer::s_defaultLODValues[GeoDataFeature::LastIndex];
 bool GeometryLayer::s_defaultValuesInitialized = false;
 int GeometryLayer::s_defaultZValue = 50;
+
+QVector< int > GeometryLayer::s_weightfilter = QVector<int>()
+    << 150 << 300 << 600
+    << 1200 << 2400 << 4800
+    << 9600 << 19200 << 38400
+    << 76800 << 153600 << 307200
+    << 614400 << 1228800 << 2457600
+    << 4915200 << 983040;
 
 class GeometryLayerPrivate
 {
@@ -127,7 +136,14 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
 {
     painter->save();
     painter->autoMapQuality();
-    QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox() );
+    
+    //FIXME: Looks ugly, need rewrite.
+    int maxZoomLevel = 3;
+    for(QVector<int>::const_iterator i = s_weightfilter.constBegin(); 
+        ( i != s_weightfilter.constEnd() ) && ( viewport->radius() > *i ); i++)
+        maxZoomLevel++;
+    
+    QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox(), maxZoomLevel );
     foreach( GeoGraphicsItem* item, items )
     {
         if ( item->visible() )
