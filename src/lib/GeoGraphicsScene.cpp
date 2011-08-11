@@ -143,8 +143,34 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAl
 
 void GeoGraphicsScene::removeItem( GeoGraphicsItem* item )
 {
-    //TODO: Remove one item
-    //d->m_items.removeOne( item );
+    int zoomLevel;
+    qreal north, south, east, west;
+    item->latLonAltBox().boundaries( north, south, east, west );
+    for(zoomLevel = s_tileZoomLevel; zoomLevel >= 0; zoomLevel--)
+    {
+        if( d->coordToTileId( GeoDataCoordinates(west, north, 0), zoomLevel ) == 
+            d->coordToTileId( GeoDataCoordinates(east, south, 0), zoomLevel ) )
+            break;
+    }
+    int tnorth, tsouth, teast, twest;
+    TileId key;
+    
+    key = d->coordToTileId( GeoDataCoordinates(west, north, 0), zoomLevel );
+    twest = key.x();
+    tnorth = key.y();
+
+    key = d->coordToTileId( GeoDataCoordinates(east, south, 0), zoomLevel );
+    teast = key.x();
+    tsouth = key.y();
+        
+    for( int i = twest; i <= teast; i++ )
+    {
+        for( int j = tsouth; j <= tnorth; j++ )
+        {
+            QList< GeoGraphicsItem* >& tileList = d->m_items[TileId( "", zoomLevel, i, j )]; 
+            tileList.removeOne( item );
+        }
+    }
 }
 
 void GeoGraphicsScene::clear()
