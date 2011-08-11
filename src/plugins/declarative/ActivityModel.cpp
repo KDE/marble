@@ -43,9 +43,11 @@ ActivityModel::ActivityModel( QObject *parent )
     QHash<int,QByteArray> roles = roleNames();
     roles[NameRole] = "name";
     roles[ImagePathRole] = "imagePath";
+    roles[PathRole] = "path";
     roles[EnablePluginsRole] = "enablePlugins";
     roles[DisablePluginsRole] = "disablePlugins";
     roles[RelatedActivitiesRole] = "relatedActivities";
+    roles[SettingsRole] = "settings";
     setRoleNames( roles );
 }
 
@@ -54,12 +56,14 @@ ActivityModel::~ActivityModel()
     delete d;
 }
 
-void ActivityModel::addActivity( const QString& name, const QString& imagePath, 
+void ActivityModel::addActivity( const QString& name, const QString& imagePath, const QString& path,
                                  const QStringList& enablePlugins, const QStringList& disablePlugins,
-                                 const QVariant& relatedActivities )
+                                 const QVariant& relatedActivities, const QVariant& settings )
 {
-    d->m_activityContainer.push_back( new Activity( name, imagePath, enablePlugins, disablePlugins, 
-                                                    relatedActivities.value<QMap<QString, QVariant> >() ) );
+    d->m_activityContainer.push_back( new Activity( name, imagePath, path, enablePlugins, disablePlugins, 
+                                                    relatedActivities.value<QMap<QString, QVariant> >(),
+                                                    settings.value<QMap<QString, QVariant> >()
+                                                  ) );
 }
 
 void ActivityModel::removeActivity( const QString& name )
@@ -98,12 +102,16 @@ QVariant ActivityModel::data( const QModelIndex &index, int role ) const
         return d->m_activityContainer.at( index.row() )->name();
     } else if( role == ImagePathRole ) {
         return d->m_activityContainer.at( index.row() )->imagePath();
+    } else if( role == PathRole ) {
+        return d->m_activityContainer.at( index.row() )->path();
     } else if ( role == EnablePluginsRole ) {
         return qVariantFromValue( d->m_activityContainer.at( index.row() )->enablePlugins() );
     } else if ( role == DisablePluginsRole ) {
         return qVariantFromValue( d->m_activityContainer.at( index.row() )->disablePlugins() );
     } else if ( role == RelatedActivitiesRole ) {
         return qVariantFromValue( d->m_activityContainer.at( index.row() )->relatedActivities() );
+    } else if ( role == RelatedActivitiesRole ) {
+        return qVariantFromValue( d->m_activityContainer.at( index.row() )->settings() );
     } else
         return QVariant();
 }
@@ -119,13 +127,52 @@ QVariant ActivityModel::get( const int index, const QString& role ) const
         return d->m_activityContainer.at( index )->name();
     } else if( role == roles[ImagePathRole] ) {
         return d->m_activityContainer.at( index )->imagePath();
+    } else if( role == roles[PathRole] ) {
+        return d->m_activityContainer.at( index )->path();
     } else if ( role == roles[EnablePluginsRole] ) {
         return qVariantFromValue( d->m_activityContainer.at( index )->enablePlugins() );
     } else if ( role == roles[DisablePluginsRole] ) {
         return qVariantFromValue( d->m_activityContainer.at( index )->disablePlugins() );
     } else if ( role == roles[RelatedActivitiesRole] ) {
         return qVariantFromValue( d->m_activityContainer.at( index )->relatedActivities() );
+    } else if ( role == roles[SettingsRole] ) {
+        return qVariantFromValue( d->m_activityContainer.at( index )->settings() );
     } else
+        return QVariant();
+}
+
+QVariant ActivityModel::get( const QString& name, const QString& role ) const
+{
+    if( name.isEmpty() )
+        return QVariant();
+    
+    static QHash<int,QByteArray> roles = roleNames();
+    Activity *activity = 0;
+    
+    for( int i = 0; i < d->m_activityContainer.size(); i++ ) {
+        if ( d->m_activityContainer[i]->name() == name ) {
+            activity = d->m_activityContainer.at( i );
+        }
+    }
+    if( activity != 0 ) {
+        if ( role == roles[NameRole] ) {
+            return activity->name();
+        } else if( role == roles[ImagePathRole] ) {
+            return activity->imagePath();
+        } else if( role == roles[PathRole] ) {
+            return activity->path();
+        } else if ( role == roles[EnablePluginsRole] ) {
+            return activity->enablePlugins();
+        } else if ( role == roles[DisablePluginsRole] ) {
+            return activity->disablePlugins();
+        } else if ( role == roles[RelatedActivitiesRole] ) {
+            return activity->relatedActivities();
+        } else if( role == roles[SettingsRole] ) {
+            return activity->settings();
+        } else
+            return QVariant();
+    }
+    else
         return QVariant();
 }
 

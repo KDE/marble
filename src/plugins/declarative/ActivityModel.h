@@ -34,9 +34,11 @@ class ActivityModel : public QAbstractListModel
     {
       NameRole = Qt::UserRole + 1,     ///< Name of the activity
       ImagePathRole,                   ///< Path to image for activity
+      PathRole,                        ///< Path to QML file for activity
       EnablePluginsRole,               ///< Plugins to enable when switching to that activity
       DisablePluginsRole,              ///< Plugins to disable when switching to that activity
-      RelatedActivitiesRole            ///< Related activities and plugins to preserve when switching to them
+      RelatedActivitiesRole,           ///< Related activities and plugins to preserve when switching to them
+      SettingsRole                     ///< Settings for activity
     };
 
     explicit ActivityModel( QObject *parent = 0 );
@@ -52,11 +54,12 @@ class ActivityModel : public QAbstractListModel
     QVariant data( const QModelIndex &index, int role ) const;
 
  public Q_SLOTS:
-    void addActivity( const QString& name, const QString& imagePath, 
+    void addActivity( const QString& name, const QString& imagePath, const QString& path,
                       const QStringList& enablePlugins, const QStringList& disablePlugins,
-                      const QVariant& relatedActivities );
+                      const QVariant& relatedActivities, const QVariant& settings );
     void removeActivity( const QString& name );
     QVariant get( const int index, const QString& role ) const;
+    QVariant get( const QString& name, const QString& role ) const;
     /**
      * Return the number of activities in the Model.
      */

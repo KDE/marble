@@ -9,10 +9,12 @@
 import QtQuick 1.0
 import com.nokia.meego 1.0
 
-Rectangle {
+Page {
     id: viewSettings
     anchors.fill: parent
     anchors.margins: UiConstants.DefaultMargin
+    tools: commonToolBar
+
     ButtonColumn {
         Label {
             text: "Projection:"

@@ -11,12 +11,13 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
-Rectangle {
-    id: background
-    color: "white"
+Page {
+    id: activityPage
     property int activity: -1
     property int previousActivity: -1
     property alias model: activityView.model
+    tools: commonToolBar
+    signal activityChanged( string oldActivity, string newActivity )
 
     GridView {
         id: activityView
@@ -25,43 +26,41 @@ Rectangle {
         cellWidth: 160
         cellHeight: 150
         model: activityModel
-        delegate: delegate
         focus: true
         clip: true
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                var x = mouseX + activityView.contentX
-                var y = mouseY + activityView.contentY
-                if( background.activity != -1 ) {
-                    background.previousActivity = background.activity
-                }
-                background.activity = activityView.currentIndex = activityView.indexAt( x, y )
-            }
-        }
 
-        Component {
-            id: delegate
-            Item {
-                width: 128 + 10
-                height: 128 + 25
-                Column {
-                    x: 5
-                    y: 10
-                    Image {
-                        id: activityImage
-                        width: 128
-                        height: 128
-                        source: imagePath
+        delegate: Item {
+            width: 128 + 10
+            height: 128 + 25
+            Column {
+                x: 5
+                y: 10
+                Image {
+                    id: activityImage
+                    width: 128
+                    height: 128
+                    source: imagePath
+                }
+                Text {
+                    width: parent.width
+                    color: "black"
+                    text: name
+                    font.pointSize: 12
+                    font.bold: true
+                    horizontalAlignment: "AlignHCenter"
+                }
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if( activityPage.activity != -1 ) {
+                        activityPage.previousActivity = activityPage.activity
                     }
-                    Text {
-                        width: parent.width
-                        color: "black"
-                        text: name
-                        font.pointSize: 12
-                        font.bold: true
-                        horizontalAlignment: "AlignHCenter"
-                    }
+                    activityPage.activity = activityView.currentIndex = index
+                    pageStack.push( path )
+                    activityChanged( activityModel.get( activityPage.previousActivity, "name" ), 
+                                     activityModel.get( activityPage.activity, "name" )
+                    )
                 }
             }
         }
@@ -70,116 +69,140 @@ Rectangle {
     ActivityModel {
         id: activityModel
         Component.onCompleted: {
-            console.log( "adding activities" )
             activityModel.addActivity(
                 "Virtual Globe",
                 "qrc:/icons/activity-virtualglobe.png",
+                "qrc:/VirtualGlobeActivityPage.qml",
                 [],
                 [],
-                {}
+                {},
+                { "projection": "Spherical",
+                  "mapTheme": "earth/bluemarble/bluemarble.dgml" }
             )
             activityModel.addActivity(
                 "Drive",
                 "qrc:/icons/activity-default.png",
+                "qrc:/DriveActivityPage.qml",
                 [],
                 [],
-                {}
+                {},
+                { "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
             )
             activityModel.addActivity(
                 "Cycle",
                 "qrc:/icons/activity-default.png",
+                "qrc:/CycleActivityPage.qml",
                 [],
                 [],
-                {}
+                {},
+                { "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
             )
             activityModel.addActivity(
                 "Walk",
                 "qrc:/icons/activity-default.png",
+                "qrc:/WalkActivityPage.qml",
                 [],
                 [],
-                {}
+                {},
+                { "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
             )
             activityModel.addActivity(
                 "Guidance",
                 "qrc:/icons/activity-default.png",
+                "qrc:/GuidanceActivityPage.qml",
                 [],
                 [ "opencaching" ],
-                {}
+                {},
+                { "projection": "Mercator",
+                  "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
             )
             activityModel.addActivity(
                 "Search",
                 "qrc:/icons/activity-search.png",
+                "qrc:/SearchActivityPage.qml",
                 [],
                 [],
+                {},
                 {}
             )
             activityModel.addActivity(
                 "Bookmarks",
                 "qrc:/icons/activity-bookmarks.png",
+                "qrc:/BookmarksActivityPage.qml",
                 [],
                 [],
+                {},
                 {}
             )
             activityModel.addActivity(
                 "Around Me",
                 "qrc:/icons/activity-default.png",
+                "qrc:/AroundMeActivityPage.qml",
                 [],
                 [],
-                {}
+                {},
+                { "projection": "Mercator",
+                  "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
             )
             activityModel.addActivity(
                 "Weather",
                 "qrc:/icons/activity-weather.png",
-                [],
-                [],
-                {}
+                "qrc:/WeatherActivityPage.qml",
+                [ "weather" ],
+                [ "opencaching" ],
+                {},
+                { "projection": "Spherical",
+                  "mapTheme": "earth/bluemarble/bluemarble.dgml" }
             )
             activityModel.addActivity(
                 "Tracking",
                 "qrc:/icons/activity-default.png",
+                "qrc:/TrackingActivityPage.qml",
                 [],
                 [],
-                {}
+                {},
+                { "projection": "Mercator",
+                  "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
             )
             activityModel.addActivity(
                 "Geocaching",
                 "qrc:/icons/activity-default.png",
+                "qrc:/GeocachingActivityPage.qml",
                 [ "opencaching" ],
                 [ "weather" ],
-                { "Guidance": [ "opencaching" ] }
+                { "Guidance": [ "opencaching" ] },
+                { "projection": "Mercator",
+                  "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
             )
             activityModel.addActivity(
                 "Friends",
                 "qrc:/icons/activity-friends.png",
+                "qrc:/FriendsActivityPage.qml",
                 [],
                 [],
+                {},
                 {}
             )
             activityModel.addActivity(
                 "Download",
                 "qrc:/icons/activity-download.png",
+                "qrc:/DownloadActivityPage.qml",
                 [],
                 [],
+                {},
                 {}
             )
             activityModel.addActivity(
                 "Configuration",
                 "qrc:/icons/activity-configure.png",
+                // FIXME filename
+                "qrc:/SettingsListPage.qml",
                 [],
                 [],
+                {},
                 {}
             )
-            console.log( "finished adding activities" )
         }
     }
-    
-    function setCurrentActivity( name ) {
-        for( var i = 0; i < activityModel.rowCount(); i++ ) {
-            if( name == activityModel.get( i, "name" ) ) {
-                previousActivity = activity
-                activity = i
-                return
-            }
-        }
-    }
+
 }

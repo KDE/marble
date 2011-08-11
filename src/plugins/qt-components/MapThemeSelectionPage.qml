@@ -11,50 +11,49 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
-ListView {
-    id: mapListView
-    anchors.fill: parent
-    anchors.margins: UiConstants.DefaultMargin
-    highlightFollowsCurrentItem: true
-    model: themes.mapThemes()
-    currentIndex: themes.mapThemes().indexOf( settings.mapTheme )
-    spacing: 10
-    
-    MapThemeManager {
-      id: themes
-    }
-    
-    delegate:
-        Rectangle {
-            id: themeItem
-            width: mapListView.width
-            height: 150
-            color: model.modelData.id == settings.mapTheme ? "lightsteelblue" : "white"
-            Row {
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: 15
-                Image {
-                    id: mapimaged
-                    width: 128; height: 128;
-                    source: "image://maptheme/" + model.modelData.id
-                }
-                Label {
-                    id: themeLabel
-                    text: model.modelData.name
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-            }
-        }
+Page {
+    tools: commonToolBar
+
+    ListView {
+        id: mapListView
+        anchors.fill: parent
+        anchors.margins: UiConstants.DefaultMargin
+        highlightFollowsCurrentItem: true
+        model: themes.mapThemes()
+        currentIndex: themes.mapThemes().indexOf( settings.mapTheme )
         
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                var x = mouseX + mapListView.contentX
-                var y = mouseY + mapListView.contentY
-                mapListView.currentIndex = mapListView.indexAt( x, y )
-                settings.mapTheme = themes.mapThemes()[mapListView.currentIndex].id
-            }
+        MapThemeManager {
+            id: themes
         }
 
+        delegate:
+            Rectangle {
+                id: themeItem
+                width: mapListView.width
+                height: mapImage.height + 20
+                color: model.modelData.id == settings.mapTheme ? "lightsteelblue" : "white"
+                Row {
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: 15
+                    Image {
+                        id: mapImage
+                        source: "image://maptheme/" + model.modelData.id
+                    }
+                    Label {
+                        id: themeLabel
+                        text: model.modelData.name
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        mapListView.currentIndex = index
+                        settings.mapTheme = themes.mapThemes()[index].id
+                    }
+                }
+            }
+
+    }
 }

@@ -9,8 +9,9 @@
 import QtQuick 1.0
 import com.nokia.meego 1.0
 
-Rectangle {
+Page {
     anchors.margins: UiConstants.DefaultMargin
+    tools: commonToolBar
     
     Label {
         text: "Navigation"

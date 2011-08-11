@@ -29,3 +29,8 @@ INSTALL( FILES WaypointView.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/ma
 INSTALL( FILES RoutingDialog.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
 INSTALL( FILES SearchResultSelectionDialog.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
 INSTALL( FILES ActivitySelectionView.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
+INSTALL( FILES VirtualGlobeActivityPage.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
+INSTALL( FILES SearchActivityPage.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
+INSTALL( FILES GeocachingActivityPage.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
+INSTALL( FILES GuidanceActivityPage.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )
+INSTALL( FILES WeatherActivityPage.qml DESTINATION ${MARBLE_PLUGIN_PATH}/org/kde/edu/marble/qtcomponents )

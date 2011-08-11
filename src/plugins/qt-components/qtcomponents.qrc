@@ -13,6 +13,11 @@
         <file>RoutingDialog.qml</file>
         <file>SearchResultSelectionDialog.qml</file>
         <file>ActivitySelectionView.qml</file>
+        <file>SearchActivityPage.qml</file>
+        <file>GeocachingActivityPage.qml</file>
+        <file>VirtualGlobeActivityPage.qml</file>
+        <file>GuidanceActivityPage.qml</file>
+        <file>WeatherActivityPage.qml</file>
         <file>icons/activity-bookmarks.png</file>
         <file>icons/activity-configure.png</file>
         <file>icons/activity-default.png</file>

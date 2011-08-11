@@ -9,8 +9,12 @@
 import QtQuick 1.0
 import com.nokia.meego 1.0
 
+// FIXME delete; -> ConfigurationActivityPage.qml
+
 Page {
+    id: settingsPage
     anchors.margins: UiConstants.DefaultMargin
+    tools: commonToolBar
     
     ListModel {
         id: pagesModel
@@ -38,14 +42,25 @@ Page {
         model: pagesModel
 
         delegate: Item {
-            id: settingsItem
-            height: 60
+            height: 88
             width: parent.width
-            Label {
+            BorderImage {
                 anchors.fill: parent
+                visible: mouseArea.pressed
+                source: "image://theme/meegotouch-list-background-pressed-center"
+            }
+            Label {
                 text: model.title
+                font: UiConstants.TitleFont
+                anchors.verticalCenter: parent.verticalCenter
+            }
+            Image {
+                source: "image://theme/icon-m-common-drilldown-arrow" + ( theme.inverted ? "-inverse" : "" )
+                anchors.right: parent.right;
+                anchors.verticalCenter: parent.verticalCenter
             }
             MouseArea {
+                id: mouseArea
                 anchors.fill: parent
                 onClicked: {
                     openPage( page )
