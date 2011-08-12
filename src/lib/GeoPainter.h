@@ -107,7 +107,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     inside the viewport.
 */
     GeoPainter( QPaintDevice * paintDevice,
-                ViewportParams *viewportParams,
+                const ViewportParams *viewportParams,
                 MapQuality mapQuality = NormalQuality,
                 bool clip = true );
 

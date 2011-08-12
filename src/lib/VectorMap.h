@@ -35,7 +35,7 @@ class VectorMap : public ScreenPolygon::Vector
  public:
     VectorMap();
     ~VectorMap();
-    void createFromPntMap( const PntMap*, ViewportParams *viewport );
+    void createFromPntMap( const PntMap*, const ViewportParams *viewport );
 
     /**
      * @brief Paint the background, i.e. the water.
@@ -52,26 +52,26 @@ class VectorMap : public ScreenPolygon::Vector
     //	int nodeCount(){ return m_debugNodeCount; }
 
  private:
-    void sphericalCreateFromPntMap( const PntMap*, ViewportParams *viewport );
-    void rectangularCreateFromPntMap( const PntMap*, ViewportParams *viewport );
-    void mercatorCreateFromPntMap( const PntMap*, ViewportParams *viewport );
+    void sphericalCreateFromPntMap( const PntMap*, const ViewportParams *viewport );
+    void rectangularCreateFromPntMap( const PntMap*, const ViewportParams *viewport );
+    void mercatorCreateFromPntMap( const PntMap*, const ViewportParams *viewport );
 
     void createPolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
                          GeoDataCoordinates::Vector::ConstIterator const &, const int,
-			 ViewportParams *viewport );
+                         const ViewportParams *viewport );
     void sphericalCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
 				  GeoDataCoordinates::Vector::ConstIterator const &,
-				  const int detail, ViewportParams *viewport );
+                                  const int detail, const ViewportParams *viewport );
     void rectangularCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
 				    GeoDataCoordinates::Vector::ConstIterator const &,
-				    const int detail, ViewportParams *viewport );
+                                    const int detail, const ViewportParams *viewport );
     void mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
 				 GeoDataCoordinates::Vector::ConstIterator const &,
-				 const int detail, ViewportParams *viewport );
+                                 const int detail, const ViewportParams *viewport );
 
-    void           manageCrossHorizon(ViewportParams *viewport);
-    const QPointF  horizonPoint(ViewportParams *viewport);
-    void           createArc(ViewportParams *viewport);
+    void           manageCrossHorizon( const ViewportParams *viewport );
+    QPointF  horizonPoint( const ViewportParams *viewport ) const;
+    void           createArc( const ViewportParams *viewport );
 
     int            getDetailLevel( int radius ) const;
 

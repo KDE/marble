@@ -31,7 +31,7 @@
 
 using namespace Marble;
 
-GeoPainterPrivate::GeoPainterPrivate( ViewportParams *viewport, MapQuality mapQuality )
+GeoPainterPrivate::GeoPainterPrivate( const ViewportParams *viewport, MapQuality mapQuality )
         : m_viewport( viewport ),
         m_mapQuality( mapQuality ),
         m_x( new qreal[100] )
@@ -182,7 +182,7 @@ GeoDataLinearRing GeoPainterPrivate::createLinearRingFromGeoRect( const GeoDataC
 
 // -------------------------------------------------------------------------------------------------
 
-GeoPainter::GeoPainter( QPaintDevice* pd, ViewportParams *viewport,
+GeoPainter::GeoPainter( QPaintDevice* pd, const ViewportParams *viewport,
 			MapQuality mapQuality, bool clip )
     : ClipPainter( pd, clip ),
       d( new GeoPainterPrivate( viewport, mapQuality ) )

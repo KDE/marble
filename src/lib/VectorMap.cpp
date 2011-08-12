@@ -52,7 +52,7 @@ VectorMap::~VectorMap()
 
 
 void VectorMap::createFromPntMap( const PntMap* pntmap, 
-				  ViewportParams* viewport )
+                                  const ViewportParams* viewport )
 {
     switch( viewport->projection() ) {
         case Spherical:
@@ -68,7 +68,7 @@ void VectorMap::createFromPntMap( const PntMap* pntmap,
 }
 
 void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap, 
-					   ViewportParams* viewport )
+                                           const ViewportParams* viewport )
 {
     clear();
 
@@ -136,7 +136,7 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
 }
 
 void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap, 
-					     ViewportParams* viewport )
+                                             const ViewportParams* viewport )
 {
     clear();
     int  radius = viewport->radius();
@@ -240,7 +240,7 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 }
 
 void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
-                                          ViewportParams* viewport )
+                                          const ViewportParams* viewport )
 {
     clear();
     int  radius = viewport->radius();
@@ -347,7 +347,7 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
 
 void VectorMap::createPolyLine( GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
                                 GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
-                                const int detail, ViewportParams *viewport )
+                                const int detail, const ViewportParams *viewport )
 {
     switch( viewport->projection() ) {
        case Spherical:
@@ -368,7 +368,7 @@ void VectorMap::createPolyLine( GeoDataCoordinates::Vector::ConstIterator const 
 void VectorMap::sphericalCreatePolyLine(
 GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
 GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
-const int detail, ViewportParams *viewport )
+const int detail, const ViewportParams *viewport )
 {
     int  radius = viewport->radius();
 
@@ -446,7 +446,7 @@ const int detail, ViewportParams *viewport )
 void VectorMap::rectangularCreatePolyLine(
     GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
     GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
-    const int detail, ViewportParams *viewport )
+    const int detail, const ViewportParams *viewport )
 {
     Quaternion qpos;
 
@@ -558,7 +558,7 @@ void VectorMap::mercatorCreatePolyLine(
         GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
         GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
         const int detail,
-        ViewportParams *viewport )
+        const ViewportParams *viewport )
 {
     Quaternion qpos;
 
@@ -715,7 +715,7 @@ void VectorMap::paintMap(GeoPainter * painter)
 }
 
 
-void VectorMap::manageCrossHorizon(ViewportParams *viewport)
+void VectorMap::manageCrossHorizon( const ViewportParams *viewport )
 {
     // qDebug("Crossing horizon line");
     // if (!currentlyvisible) qDebug("Leaving visible hemisphere");
@@ -744,7 +744,7 @@ void VectorMap::manageCrossHorizon(ViewportParams *viewport)
 }
 
 
-const QPointF VectorMap::horizonPoint(ViewportParams *viewport)
+QPointF VectorMap::horizonPoint( const ViewportParams *viewport ) const
 {
     // qDebug("Interpolating");
     qreal  xa;
@@ -764,7 +764,7 @@ const QPointF VectorMap::horizonPoint(ViewportParams *viewport)
 }
 
 
-void VectorMap::createArc(ViewportParams *viewport)
+void VectorMap::createArc( const ViewportParams *viewport )
 {
 
     qreal  beta  = (qreal)( RAD2DEG 
