@@ -310,7 +310,7 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
 
     const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );
 
-    StackedTile * displayedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
+    StackedTile * displayedTile = d->m_tilesOnDisplay.take( stackedTileId );
     if ( displayedTile ) {
         Q_ASSERT( !d->m_tileCache.contains( stackedTileId ) );
 
