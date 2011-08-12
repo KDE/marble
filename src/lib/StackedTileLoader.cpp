@@ -184,13 +184,14 @@ void StackedTileLoader::cleanupTilehash()
     }
 }
 
-StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
+const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 {
     // check if the tile is in the hash
     d->m_cacheLock.lockForRead();
     StackedTile * stackedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
     d->m_cacheLock.unlock();
     if ( stackedTile ) {
+        stackedTile->setUsed( true );
         return stackedTile;
     }
     // here ends the performance critical section of this method
@@ -199,7 +200,8 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 
     // has another thread loaded our tile due to a race condition?
     stackedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
-    if ( d->m_tilesOnDisplay.contains( stackedTileId ) ) {
+    if ( stackedTile ) {
+        stackedTile->setUsed( true );
         d->m_cacheLock.unlock();
         return stackedTile;
     }
@@ -209,6 +211,7 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
     // the tile was not in the hash so check if it is in the cache
     stackedTile = d->m_tileCache.take( stackedTileId );
     if ( stackedTile ) {
+        stackedTile->setUsed( true );
         d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
         d->m_cacheLock.unlock();
         return stackedTile;
@@ -241,6 +244,7 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 
     const QImage resultImage = d->m_layerDecorator.merge( stackedTileId, tiles );
     stackedTile = new StackedTile( stackedTileId, resultImage, tiles );
+    stackedTile->setUsed( true );
 
     d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
     d->m_cacheLock.unlock();
