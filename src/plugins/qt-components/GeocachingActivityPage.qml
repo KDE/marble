@@ -15,8 +15,8 @@ Page {
     id: geocachingActivityPage
     tools: ToolBarLayout {
         ToolIcon { iconId: "toolbar-back"; onClicked: { pageStack.pop() } }
-        ToolIcon { iconId: "toolbar-search"; onClicked: { pageStack.replace( main.activityModel.get( "Search", "path" ) ) } }
-        ToolIcon { iconId: "telephony-content-sms-dimmed"; onClicked: { pageStack.replace( main.activityModel.get( "Guidance", "path" ) ) } }
+        ToolIcon { iconId: "toolbar-search"; onClicked: { pageStack.replace( main.activityModel.get( "Search", "path" ) ); main.changeActivity( "Geocaching", "Search" ) } }
+        ToolIcon { iconId: "telephony-content-sms-dimmed"; onClicked: { pageStack.replace( main.activityModel.get( "Guidance", "path" ) ); main.changeActivity( "Geocaching", "Guidance" ) } }
         ToolIcon { iconId: "toolbar-view-menu" }
     }
 
