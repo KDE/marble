@@ -30,7 +30,7 @@ class GeoPainter;
 class PntMap;
 class ViewportParams;
 
-class VectorMap : public ScreenPolygon::Vector
+class VectorMap
 {
  public:
     VectorMap();
@@ -78,8 +78,10 @@ class VectorMap : public ScreenPolygon::Vector
  private:
     qreal            m_zlimit;
     qreal            m_plimit;
-    qreal            m_zBoundingBoxLimit;	
-    qreal            m_zPointLimit;	
+    qreal            m_zBoundingBoxLimit;
+    qreal            m_zPointLimit;
+
+    ScreenPolygon::Vector m_polygons;
 
     //	Quaternion m_invRotAxis;
     matrix            m_rotMatrix;

@@ -70,7 +70,7 @@ void VectorMap::createFromPntMap( const PntMap* pntmap,
 void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap, 
                                            const ViewportParams* viewport )
 {
-    clear();
+    m_polygons.clear();
 
     // We must use qreal or int64 for the calculations because we
     // square radius sometimes below, and it may cause an overflow. We
@@ -138,7 +138,7 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
 void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap, 
                                              const ViewportParams* viewport )
 {
-    clear();
+    m_polygons.clear();
     int  radius = viewport->radius();
 
     // Calculate translation of center point
@@ -242,7 +242,7 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
                                           const ViewportParams* viewport )
 {
-    clear();
+    m_polygons.clear();
     int  radius = viewport->radius();
 
     // Calculate translation of center point
@@ -439,7 +439,7 @@ const int detail, const ViewportParams *viewport )
 
     // Avoid polygons degenerated to Points.
     if ( m_polygon.size() >= 2 ) {
-        append(m_polygon);
+        m_polygons.append(m_polygon);
     }
 }
 
@@ -546,11 +546,11 @@ void VectorMap::rectangularCreatePolyLine(
 
     // Avoid polygons degenerated to Points.
     if ( m_polygon.size() >= 2 ) {
-        append(m_polygon);
+        m_polygons.append(m_polygon);
     }
 
     if ( otherPolygon.size() >= 2 ) {
-        append( otherPolygon );
+        m_polygons.append( otherPolygon );
     }
 }
 
@@ -673,19 +673,19 @@ void VectorMap::mercatorCreatePolyLine(
 
     // Avoid polygons degenerated to Points.
     if ( m_polygon.size() >= 2 ) {
-        append(m_polygon);
+        m_polygons.append(m_polygon);
     }
 
     if ( otherPolygon.size() >= 2 ) {
-        append( otherPolygon );
+        m_polygons.append( otherPolygon );
     }
 }
 
 
 void VectorMap::drawMap( GeoPainter *painter )
 {
-    ScreenPolygon::Vector::const_iterator  itEndPolygon = constEnd();
-    for ( ScreenPolygon::Vector::const_iterator itPolygon = constBegin();
+    ScreenPolygon::Vector::const_iterator  itEndPolygon = m_polygons.constEnd();
+    for ( ScreenPolygon::Vector::const_iterator itPolygon = m_polygons.constBegin();
           itPolygon != itEndPolygon; 
           ++itPolygon )
     {
@@ -701,9 +701,9 @@ void VectorMap::drawMap( GeoPainter *painter )
 
 void VectorMap::paintMap(GeoPainter * painter)
 {
-    ScreenPolygon::Vector::const_iterator  itEndPolygon = constEnd();
+    ScreenPolygon::Vector::const_iterator  itEndPolygon = m_polygons.constEnd();
 
-    for ( ScreenPolygon::Vector::const_iterator itPolygon = constBegin();
+    for ( ScreenPolygon::Vector::const_iterator itPolygon = m_polygons.constBegin();
           itPolygon != itEndPolygon;
           ++itPolygon )
     {
