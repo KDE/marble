@@ -77,11 +77,6 @@ class PlacemarkLayout : public QObject, public LayerInterface
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
                          const QString& renderPos = "HOVERS_ABOVE_SURFACE", GeoSceneLayer * layer = 0 );
 
-    /**
-     * @reimp
-     */
-    virtual qreal zValue() const;
-
     void setDefaultLabelColor( const QColor &color );
 
     /**

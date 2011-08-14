@@ -630,11 +630,6 @@ bool PlacemarkLayout::render( GeoPainter *painter,
     return true;
 }
 
-qreal PlacemarkLayout::zValue() const
-{
-    return -1.0;
-}
-
 QRect PlacemarkLayout::roomForLabel( GeoDataStyle * style,
                                       const QVector<VisiblePlacemark*> &currentsec,
                                       const int x, const int y,
