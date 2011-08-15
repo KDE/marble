@@ -44,12 +44,12 @@ bool GeometryLayer::s_defaultValuesInitialized = false;
 int GeometryLayer::s_defaultZValue = 50;
 
 QVector< int > GeometryLayer::s_weightfilter = QVector<int>()
-    << 150 << 300 << 600
-    << 1200 << 2400 << 4800
-    << 9600 << 19200 << 38400
-    << 76800 << 153600 << 307200
-    << 614400 << 1228800 << 2457600
-    << 4915200 << 983040;
+    << 20 << 40 << 80
+    << 160 << 320 << 640
+    << 1280 << 2560 << 5120
+    << 10240 << 20480 << 40960
+    << 81920 << 163840 << 327680
+    << 655360 << 1310720 << 2621440;
 
 class GeometryLayerPrivate
 {
@@ -137,8 +137,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     painter->save();
     painter->autoMapQuality();
     
-    //FIXME: Looks ugly, need rewrite.
-    int maxZoomLevel = 3;
+    int maxZoomLevel = 0;
     for(QVector<int>::const_iterator i = s_weightfilter.constBegin(); 
         ( i != s_weightfilter.constEnd() ) && ( viewport->radius() > *i ); i++)
         maxZoomLevel++;
