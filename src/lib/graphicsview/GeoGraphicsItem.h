@@ -124,6 +124,16 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
 
     // int minFadeExtend() const;
     // int maxFadeExtend() const;
+    
+    /**
+     * Returns the minim zoom level on which item will be active.
+     */
+    int minZoomLevel() const;
+
+    /**
+     * Sets the minimum zoom level
+     */
+    void setMinZoomLevel( int zoomLevel );
 
     /**
      * Returns the box that is used to determine if an item is active or inactive.

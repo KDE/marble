@@ -41,7 +41,7 @@ public:
                          const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
     
     static int s_defaultZValues[GeoDataFeature::LastIndex];
-    static int s_defaultLODValues[GeoDataFeature::LastIndex];
+    static int s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
     static bool s_defaultValuesInitialized;
     static int s_defaultZValue;
 

@@ -125,11 +125,12 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAl
                 QList< GeoGraphicsItem* >::iterator before = result.begin();
                 QList< GeoGraphicsItem* >::const_iterator currentItem = objects.constBegin();
                 while( currentItem != objects.end() )
-                {
+                {  
                     while( ( currentItem != objects.end() )
                       && ( ( before == result.end() ) || ( (*currentItem)->zValue() < (*before)->zValue() ) ) )
                     {
-                        before = result.insert( before, *currentItem );
+                        if( (*currentItem)->minZoomLevel() <= maxZoomLevel )
+                            before = result.insert( before, *currentItem );
                         currentItem++;
                     }
                     if ( before != result.end() )

@@ -138,3 +138,14 @@ GeoGraphicsItemPrivate *GeoGraphicsItem::p() const
 {
     return reinterpret_cast<GeoGraphicsItemPrivate *>( d );
 }
+
+int GeoGraphicsItem::minZoomLevel() const
+{
+    return p()->m_minZoomLevel;
+}
+
+void GeoGraphicsItem::setMinZoomLevel(int zoomLevel)
+{
+    p()->m_minZoomLevel = zoomLevel;
+}
+

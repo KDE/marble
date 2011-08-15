@@ -29,7 +29,8 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
           m_minLodPixels( 0 ),
           m_maxLodPixels( -1 ),
           m_latLonAltBox(),
-          m_style( 0 )
+          m_style( 0 ),
+          m_minZoomLevel( 0 )
     {
     }
     
@@ -113,6 +114,9 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
     // LOD
     int m_minLodPixels;
     int m_maxLodPixels;
+    
+    int m_minZoomLevel;
+    
     GeoDataLatLonAltBox m_latLonAltBox;
     GeoDataStyle *m_style;
 };
