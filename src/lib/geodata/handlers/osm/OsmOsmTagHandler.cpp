@@ -33,18 +33,6 @@ GeoNode* OsmOsmTagHandler::parse( GeoParser& parser ) const
 {
     GeoDataDocument* doc = geoDataDoc( parser );
 
-    GeoDataPolyStyle buildingPolyStyle;
-    GeoDataLineStyle buildingLineStyle;
-    buildingPolyStyle.setFill( true );
-    buildingPolyStyle.setOutline( true );
-    buildingPolyStyle.setColor( OsmGlobals::buildingColor );
-    buildingLineStyle.setColor( OsmGlobals::buildingColor.darker() );
-    GeoDataStyle buildingStyle;
-    buildingStyle.setPolyStyle( buildingPolyStyle );
-    buildingStyle.setLineStyle( buildingLineStyle );
-    buildingStyle.setStyleId( "building" );
-    doc->addStyle( buildingStyle );
-
     GeoDataPolyStyle backgroundPolyStyle;
     backgroundPolyStyle.setFill( true );
     backgroundPolyStyle.setOutline( false );

@@ -79,7 +79,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
         }
         if ( key == "building" && value == "yes" && placemark->visualCategory() == GeoDataFeature::Default )
         {
-            placemark->setStyle( &doc->style( "building" ) );
+            placemark->setVisualCategory( GeoDataFeature::Building );
             placemark->setVisible( true );
         }
     }
@@ -103,7 +103,8 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
 
         if ( category = OsmGlobals::visualCategories().value( key + "=" + value ) )
         {
-            if( placemark->visualCategory() != GeoDataFeature::Default )
+            if( placemark->visualCategory() != GeoDataFeature::Default 
+             && placemark->visualCategory() != GeoDataFeature::Building )
             {
                 GeoDataPlacemark* newPlacemark = new GeoDataPlacemark( *placemark );
                 newPlacemark->setVisualCategory( category );

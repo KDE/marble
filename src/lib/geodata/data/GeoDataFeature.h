@@ -164,6 +164,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         HighwayMotorwayLink,
         HighwayMotorway,
 
+        //OSM building
+        Building,
+        
         // OpenStreetMap category Accomodation
         AccomodationCamping,
         AccomodationHostel,

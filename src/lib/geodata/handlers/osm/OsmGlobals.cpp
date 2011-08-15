@@ -23,7 +23,6 @@ namespace osm
 QMap<QString, GeoDataFeature::GeoDataVisualCategory> OsmGlobals::m_visualCategories;
 QList<QString> OsmGlobals::m_areaTags;
 
-QColor OsmGlobals::buildingColor( 0xBE, 0xAD, 0xAD );
 QColor OsmGlobals::backgroundColor( 0xF1, 0xEE, 0xE8 );
 QList<GeoDataPlacemark*> OsmGlobals::dummyPlacemarks;
 
