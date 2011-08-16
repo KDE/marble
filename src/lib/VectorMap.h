@@ -61,10 +61,10 @@ class VectorMap
                                   const int detail, const ViewportParams *viewport );
     void rectangularCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
 				    GeoDataCoordinates::Vector::ConstIterator const &,
-                                    const int detail, const ViewportParams *viewport );
+                                    const int detail, const ViewportParams *viewport, int offset );
     void mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
 				 GeoDataCoordinates::Vector::ConstIterator const &,
-                                 const int detail, const ViewportParams *viewport );
+                                 const int detail, const ViewportParams *viewport, int offset );
 
     QPointF  horizonPoint( const ViewportParams *viewport, const QPointF &currentPoint, int rLimit ) const;
     void           createArc( const ViewportParams *viewport, const QPointF &horizona, const QPointF &horizonb, int rLimit );
@@ -83,12 +83,6 @@ class VectorMap
     //	int m_debugNodeCount;
 
     ScreenPolygon     m_polygon;
-
-    // Needed for repetition in the X direction for flat projection
-    int         m_lastSign;
-    int         m_offset;
-    qreal      m_lastLon;
-    qreal      m_lastLat;
 };
 
 }
