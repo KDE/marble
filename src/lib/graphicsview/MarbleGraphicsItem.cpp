@@ -62,9 +62,11 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
     if ( p()->positions().size() == 0 ) {
         return true;
     }
-    
+
     bool successful = true;
-    
+
+    paintViewport( painter, viewport, renderPos, layer );
+
     // At the moment, as GraphicsItems can't be zoomed or rotated ItemCoordinateCache
     // and DeviceCoordianteCache is exactly the same
     if ( ItemCoordinateCache == cacheMode()
@@ -271,6 +273,15 @@ QString MarbleGraphicsItem::toolTip() const
 void MarbleGraphicsItem::setToolTip( const QString& toolTip )
 {
     p()->m_toolTip = toolTip;
+}
+
+void MarbleGraphicsItem::paintViewport( GeoPainter *painter, ViewportParams *viewport,
+                                        const QString &renderPos, GeoSceneLayer *layer )
+{
+    Q_UNUSED( viewport );
+    Q_UNUSED( renderPos );
+    Q_UNUSED( layer );
+    Q_UNUSED( painter );
 }
 
 void MarbleGraphicsItem::paint( GeoPainter *painter, ViewportParams *viewport,

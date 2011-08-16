@@ -13,7 +13,7 @@
 
 #include <QtCore/QObject>
 
-#include "RenderPlugin.h"
+#include "AbstractDataPlugin.h"
 #include "sgp4/sgp4unit.h"
 
 namespace Marble
@@ -27,7 +27,7 @@ class GeoDataCoordinates;
  * @brief This plugin displays satellites and their orbits.
  *
  */
-class SatellitesPlugin : public RenderPlugin
+class SatellitesPlugin : public AbstractDataPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
@@ -47,27 +47,9 @@ public:
 
     void initialize();
     bool isInitialized() const;
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = 0 );
-
-    /**
-     * @brief Create a GeoDataCoordinates object from cartesian coordinates(GEI)
-     * @param x x coordinate in km
-     * @param y y coordinate in km
-     * @param z z coordinate in km
-     */
-    GeoDataCoordinates fromCartesian( double x, double y, double z );
-
-private slots:
-    void updateData( const QByteArray &data, const QString &initiatorId );
-    void triggerDownload();
 
 private:
     bool m_isInitialized;
-    //TODO: use a data structure more appropriate for searching by satellite name
-    QHash<QString, elsetrec> m_satHash;
-
-    QTimer *m_downloadTimer;
-    HttpDownloadManager *m_downloadManager;
 };
 
 }

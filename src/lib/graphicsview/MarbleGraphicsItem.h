@@ -164,6 +164,12 @@ class MARBLE_EXPORT MarbleGraphicsItem
     virtual QRectF contentRect() const;
 
     /**
+     * Paints on the viewport
+     * This function wil be called by paintEvent().
+     */
+    virtual void paintViewport( GeoPainter *painter, ViewportParams *viewport,
+                                const QString &renderPos, GeoSceneLayer *layer = 0 );
+    /**
      * Paints the item in item coordinates. This has to be reimplemented by the subclass
      * This function will be called by paintEvent().
      */
