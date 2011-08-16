@@ -33,7 +33,7 @@ class TextureColorizer : public QObject
  public:
     TextureColorizer( const QString &seafile,
                       const QString &landfile,
-                      VectorComposer *veccomposer,
+                      const VectorComposer *veccomposer,
                       QObject *parent = 0 );
 
     virtual ~TextureColorizer(){}
@@ -46,7 +46,7 @@ class TextureColorizer : public QObject
     void datasetLoaded();
 
  private:
-    VectorComposer *const m_veccomposer;
+    const VectorComposer *const m_veccomposer;
     QString m_seafile;
     QString m_landfile;
     QImage m_coastImage;

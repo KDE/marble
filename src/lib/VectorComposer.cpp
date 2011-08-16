@@ -177,7 +177,7 @@ void VectorComposer::setShowBorders( bool show )
     m_showBorders = show;
 }
 
-void VectorComposer::drawTextureMap( GeoPainter *painter, const ViewportParams *viewport )
+void VectorComposer::drawTextureMap( GeoPainter *painter, const ViewportParams *viewport ) const
 {
     loadCoastlines();
 
@@ -231,7 +231,7 @@ void VectorComposer::drawTextureMap( GeoPainter *painter, const ViewportParams *
 }
 
 void VectorComposer::paintBaseVectorMap( GeoPainter *painter, 
-                                         const ViewportParams *viewport )
+                                         const ViewportParams *viewport ) const
 {
     loadCoastlines();
 
@@ -297,7 +297,7 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
 }
 
 void VectorComposer::paintVectorMap( GeoPainter *painter,
-                                     const ViewportParams *viewport )
+                                     const ViewportParams *viewport ) const
 {
     // m_vectorMap->clearNodeCount();
 

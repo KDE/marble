@@ -65,7 +65,7 @@ private:
 
 TextureColorizer::TextureColorizer( const QString &seafile,
                                     const QString &landfile,
-                                    VectorComposer *veccomposer,
+                                    const VectorComposer *veccomposer,
                                     QObject *parent )
     : QObject( parent )
     , m_veccomposer( veccomposer )

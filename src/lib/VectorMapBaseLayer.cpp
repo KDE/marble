@@ -15,7 +15,7 @@
 namespace Marble
 {
 
-VectorMapBaseLayer::VectorMapBaseLayer( VectorComposer *vectorComposer )
+VectorMapBaseLayer::VectorMapBaseLayer( const VectorComposer *vectorComposer )
     : m_vectorComposer( vectorComposer )
 {
 }
