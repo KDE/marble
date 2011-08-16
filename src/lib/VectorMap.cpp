@@ -31,9 +31,7 @@
 using namespace Marble;
 
 VectorMap::VectorMap()
-    : m_zlimit( 0.0 ),
-      m_plimit( 0.0 ),
-      m_zBoundingBoxLimit( 0.0 ),
+    : m_zBoundingBoxLimit( 0.0 ),
       m_zPointLimit( 0.0 ),
       // Initialising booleans for horizoncrossing
       m_firsthorizon( false ),
@@ -124,8 +122,8 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
                 m_polygon.setClosed( (*itPolyLine)->getClosed() );
 
                 // mDebug() << i << " Visible: YES";
-                createPolyLine( (*itPolyLine)->constBegin(),
-                                (*itPolyLine)->constEnd(), detail, viewport );
+                sphericalCreatePolyLine( (*itPolyLine)->constBegin(),
+                                         (*itPolyLine)->constEnd(), detail, viewport );
 
                 break; // abort foreach test of current boundary
             } 
@@ -230,8 +228,8 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
             m_polygon.reserve( (*itPolyLine)->size() );
             m_polygon.setClosed( (*itPolyLine)->getClosed() );
 
-            createPolyLine( (*itPolyLine)->constBegin(),
-                            (*itPolyLine)->constEnd(), detail, viewport );
+            rectangularCreatePolyLine( (*itPolyLine)->constBegin(),
+                                       (*itPolyLine)->constEnd(), detail, viewport );
 
             m_offset += 4 * radius;
             boundingPolygon.translate( 4 * radius, 0 );
@@ -336,32 +334,12 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
             m_polygon.reserve( (*itPolyLine)->size() );
             m_polygon.setClosed( (*itPolyLine)->getClosed() );
 
-            createPolyLine( (*itPolyLine)->constBegin(),
-                            (*itPolyLine)->constEnd(), detail, viewport );
+            mercatorCreatePolyLine( (*itPolyLine)->constBegin(),
+                                    (*itPolyLine)->constEnd(), detail, viewport );
 
             m_offset += 4 * radius;
             boundingPolygon.translate( 4 * radius, 0 );
         }
-    }
-}
-
-void VectorMap::createPolyLine( GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
-                                GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
-                                const int detail, const ViewportParams *viewport )
-{
-    switch( viewport->projection() ) {
-       case Spherical:
-	   sphericalCreatePolyLine( itStartPoint, itEndPoint,
-				    detail, viewport );
-            break;
-        case Equirectangular:
-            rectangularCreatePolyLine( itStartPoint, itEndPoint, 
-				       detail, viewport );
-            break;
-        case Mercator:
-            mercatorCreatePolyLine( itStartPoint, itEndPoint, 
-				    detail, viewport );
-            break;
     }
 }
 

@@ -56,9 +56,6 @@ class VectorMap
     void rectangularCreateFromPntMap( const PntMap*, const ViewportParams *viewport );
     void mercatorCreateFromPntMap( const PntMap*, const ViewportParams *viewport );
 
-    void createPolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
-                         GeoDataCoordinates::Vector::ConstIterator const &, const int,
-                         const ViewportParams *viewport );
     void sphericalCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
 				  GeoDataCoordinates::Vector::ConstIterator const &,
                                   const int detail, const ViewportParams *viewport );
@@ -76,8 +73,6 @@ class VectorMap
     int            getDetailLevel( int radius ) const;
 
  private:
-    qreal            m_zlimit;
-    qreal            m_plimit;
     qreal            m_zBoundingBoxLimit;
     qreal            m_zPointLimit;
 
