@@ -21,7 +21,7 @@ class VectorComposer;
 class VectorMapBaseLayer : public LayerInterface
 {
 public:
-    VectorMapBaseLayer( const VectorComposer *vectorComposer );
+    VectorMapBaseLayer( VectorComposer *vectorComposer );
 
     /**
      * @reimp
@@ -40,7 +40,7 @@ public:
     virtual qreal zValue() const;
 
 private:
-    const VectorComposer *const m_vectorComposer;
+    VectorComposer *const m_vectorComposer;
 };
 
 }
