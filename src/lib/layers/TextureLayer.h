@@ -30,7 +30,7 @@ class GeoPainter;
 class GeoSceneGroup;
 class HttpDownloadManager;
 class SunLocator;
-class TextureColorizer;
+class VectorComposer;
 class ViewportParams;
 
 class TextureLayer : public QObject, public LayerInterface
@@ -39,7 +39,8 @@ class TextureLayer : public QObject, public LayerInterface
 
  public:
     TextureLayer( HttpDownloadManager *downloadManager,
-                  const SunLocator *sunLocator );
+                  const SunLocator *sunLocator,
+                  VectorComposer *veccomposer );
 
     ~TextureLayer();
 
@@ -73,13 +74,13 @@ class TextureLayer : public QObject, public LayerInterface
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
 
+    void setShowRelief( bool show );
+
     void setShowSunShading( bool show );
 
     void setShowCityLights( bool show );
 
     void setShowTileId( bool show );
-
-    void setTextureColorizer( TextureColorizer *texcolorizer );
 
     /**
      * @brief  Set the Projection used for the map
@@ -89,7 +90,7 @@ class TextureLayer : public QObject, public LayerInterface
 
     void setNeedsUpdate();
 
-    void setMapTheme( const QVector<const GeoSceneTexture *> &textures, GeoSceneGroup *textureLayerSettings );
+    void setMapTheme( const QVector<const GeoSceneTexture *> &textures, GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
 
     void setVolatileCacheLimit( quint64 kilobytes );
 

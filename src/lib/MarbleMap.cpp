@@ -59,7 +59,6 @@
 #include "MarbleModel.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
-#include "TextureColorizer.h"
 #include "TileCoordsPyramid.h"
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
@@ -124,7 +123,6 @@ class MarbleMapPrivate
     bool             m_showFrameRate;
 
     VectorComposer   m_veccomposer;
-    TextureColorizer *m_texcolorizer;
 
     LayerManager     m_layerManager;
     MarbleSplashLayer m_marbleSplashLayer;
@@ -144,13 +142,12 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_viewParams(),
           m_showFrameRate( false ),
           m_veccomposer(),
-          m_texcolorizer( 0 ),
           m_layerManager( model, parent ),
           m_customPaintLayer( parent ),
           m_geometryLayer( model->treeModel() ),
           m_vectorMapBaseLayer( &m_veccomposer ),
           m_vectorMapLayer( &m_veccomposer ),
-          m_textureLayer( model->downloadManager(), model->sunLocator() ),
+          m_textureLayer( model->downloadManager(), model->sunLocator(), &m_veccomposer ),
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), model->clock(), parent )
 {
     m_layerManager.addLayer( &m_fogLayer );
@@ -222,9 +219,7 @@ void MarbleMapPrivate::updateProperty( const QString &name, bool show )
     }
 
     else if ( name == "relief" ) {
-        if ( m_texcolorizer ) {
-            m_texcolorizer->setShowRelief( show );
-        }
+       m_textureLayer.setShowRelief( show );
     }
 
     m_layerManager.setVisible( name, show );
@@ -732,10 +727,6 @@ void MarbleMapPrivate::updateMapTheme()
     m_layerManager.removeLayer( &m_vectorMapLayer );
     m_layerManager.removeLayer( &m_vectorMapBaseLayer );
 
-    m_textureLayer.setTextureColorizer( 0 );
-    delete m_texcolorizer;
-    m_texcolorizer = 0;
-
     QObject::connect( m_model->mapTheme()->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
                       q, SLOT( updateProperty( const QString &, bool ) ) );
 
@@ -857,16 +848,12 @@ void MarbleMapPrivate::updateMapTheme()
             }
         }
 
-        m_textureLayer.setMapTheme( textures, textureLayerSettings );
-
-        m_textureLayer.setupTextureMapper( m_viewport.projection() );
-
+        QString seafile, landfile;
         if( !m_model->mapTheme()->map()->filters().isEmpty() ) {
             GeoSceneFilter *filter= m_model->mapTheme()->map()->filters().first();
 
             if( filter->type() == "colorize" ) {
                  //no need to look up with MarbleDirs twice so they are left null for now
-                QString seafile, landfile;
                 QList<GeoScenePalette*> palette = filter->palette();
                 foreach ( GeoScenePalette *curPalette, palette ) {
                     if( curPalette->type() == "sea" ) {
@@ -880,13 +867,12 @@ void MarbleMapPrivate::updateMapTheme()
                     seafile = MarbleDirs::path( "seacolors.leg" );
                 if( landfile.isEmpty() )
                     landfile = MarbleDirs::path( "landcolors.leg" );
-
-                m_texcolorizer = new TextureColorizer( seafile, landfile, &m_veccomposer, q );
-                m_texcolorizer->setShowRelief( q->showRelief() );
-
-                m_textureLayer.setTextureColorizer( m_texcolorizer );
             }
         }
+
+        m_textureLayer.setMapTheme( textures, textureLayerSettings, seafile, landfile );
+        m_textureLayer.setupTextureMapper( m_viewport.projection() );
+        m_textureLayer.setShowRelief( q->showRelief() );
 
         if ( textureLayersOk ) {
             m_layerManager.addLayer( &m_textureLayer );
