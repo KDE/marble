@@ -7,6 +7,7 @@
 //
 // Copyright 2008 Henry de Valence <hdevalence@gmail.com>
 // Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2011 Thibaut Gridel <tgridel@free.fr>
 
 #include "MarbleRunnerManager.h"
 
@@ -44,7 +45,6 @@ public:
     QVector<GeoDataPlacemark*> m_placemarkContainer;
     QVector<GeoDataDocument*> m_routingResult;
     QList<GeoDataCoordinates> m_reverseGeocodingResults;
-    QVector<GeoDataDocument*> m_parsingResults;
     RouteRequest* m_routeRequest;
     PluginManager* m_pluginManager;
 
@@ -56,13 +56,10 @@ public:
 
     QList<RunnerTask*> m_searchTasks;
     QList<RunnerTask*> m_routingTasks;
-    QList<RunnerTask*> m_parsingTasks;
 
     void cleanupSearchTask( RunnerTask* task );
 
     void cleanupRoutingTask( RunnerTask* task );
-
-    void cleanupParsingTask( RunnerTask* task );
 };
 
 MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( MarbleRunnerManager* parent, PluginManager* pluginManager ) :
@@ -129,10 +126,6 @@ void MarbleRunnerManagerPrivate::cleanupRoutingTask( RunnerTask* task )
     }
 }
 
-void MarbleRunnerManagerPrivate::cleanupParsingTask( RunnerTask* task )
-{
-    m_parsingTasks.removeAll( task );
-}
 
 MarbleRunnerManager::MarbleRunnerManager( PluginManager* pluginManager, QObject *parent )
     : QObject( parent ), d( new MarbleRunnerManagerPrivate( this, pluginManager ) )
@@ -276,18 +269,12 @@ void MarbleRunnerManager::addRoutingResult( GeoDataDocument* route )
 
 void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role )
 {
-    d->m_parsingResults.clear();
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Parsing );
-    bool started = false;
     foreach( RunnerPlugin *plugin, plugins ) {
-        started = true;
         MarbleAbstractRunner* runner = plugin->newRunner();
         connect( runner, SIGNAL( parsingFinished(GeoDataDocument*) ),
                  this, SLOT(addParsingResult(GeoDataDocument*)) );
         ParsingTask *task = new ParsingTask( runner, fileName, role );
-        d->m_parsingTasks << task;
-        connect( task, SIGNAL( finished( RunnerTask* ) ),
-                 this, SLOT( cleanupParsingTask( RunnerTask* ) ) );
         QThreadPool::globalInstance()->start( task );
     }
 }
@@ -295,7 +282,6 @@ void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role 
 void MarbleRunnerManager::addParsingResult( GeoDataDocument *document )
 {
     if ( document ) {
-        d->m_parsingResults.push_back( document );
         emit parsingFinished( document );
     }
 }

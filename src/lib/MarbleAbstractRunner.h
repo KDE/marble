@@ -7,6 +7,7 @@
 //
 // Copyright 2008 Henry de Valence <hdevalence@gmail.com>
 // Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2011 Thibaut Gridel <tgridel@free.fr>
 
 #ifndef MARBLE_MARBLEABSTRACTRUNNER_H
 #define MARBLE_MARBLEABSTRACTRUNNER_H
@@ -104,6 +105,7 @@ Q_SIGNALS:
 
     /**
       * File parsing is finished, result in the given document object.
+      * The signal should be emitted with null document in case of fault.
       * To be emitted by runners after a @see parseFile call.
       */
     void parsingFinished( GeoDataDocument* document );
