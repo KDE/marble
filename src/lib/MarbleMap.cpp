@@ -127,9 +127,13 @@ class MarbleMapPrivate
     MarbleModel     *const m_model;
     bool             m_modelIsOwned;
 
-    GeoSceneDocument *m_mapTheme;
+    // Parameters for the maps appearance.
     ViewParams       m_viewParams;
+    bool             m_showFrameRate;
 
+    GeoSceneDocument *m_mapTheme;
+
+    VectorComposer   m_veccomposer;
     TextureColorizer *m_texcolorizer;
 
     LayerManager     m_layerManager;
@@ -142,18 +146,16 @@ class MarbleMapPrivate
     VectorMapLayer   m_vectorMapLayer;
     TextureLayer     m_textureLayer;
     PlacemarkLayout  m_placemarkLayout;
-    VectorComposer   m_veccomposer;
     MeasureTool      m_measureTool;
-
-    // Parameters for the maps appearance.
-
-    bool             m_showFrameRate;
 };
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
         : m_parent( parent ),
           m_model( model ),
+          m_viewParams(),
+          m_showFrameRate( false ),
           m_mapTheme( 0 ),
+          m_veccomposer(),
           m_texcolorizer( 0 ),
           m_layerManager( model, parent ),
           m_customPaintLayer( parent ),
@@ -196,10 +198,6 @@ void MarbleMapPrivate::construct()
                        m_parent,        SIGNAL( repaintNeeded( QRegion ) ) );
     QObject::connect ( &m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        m_parent,        SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
-
-    // FloatItems
-    m_showFrameRate = false;
-
 
     m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
                        m_parent,              SLOT( centerOn( qreal, qreal ) ) );
