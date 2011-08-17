@@ -21,6 +21,8 @@
 
 #include <QtCore/QDateTime>
 
+#include <cmath>
+
 using namespace Marble;
 
 SatellitesItem::SatellitesItem( const QString &name, const elsetrec &satrec, QObject *parent )
@@ -59,13 +61,15 @@ void SatellitesItem::paintViewport( GeoPainter *painter, ViewportParams *viewpor
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
 
-    mDebug() << "##########";
     painter->save();
 
     double r[3], v[3];
     GeoDataLinearRing orbit;
-    for ( int i = 1; i < 72; i++ ) {
+    int startTime = timeSinceEpoch();
+    int endTime = startTime + orbitalPeriod() / 60 + 1;
+    for ( int i = startTime; i < endTime; i++ ) {
         sgp4( wgs84, m_satrec, i, r, v );
+        mDebug() << i;
         orbit << fromCartesian( r[0], r[1], r[2] );
     }
 
@@ -82,7 +86,7 @@ void SatellitesItem::paint( GeoPainter *painter, ViewportParams *viewport, const
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
 
-    mDebug() << "Painting " << id();
+    mDebug() << "Painting " << id() << orbitalPeriod();
     double r[3], v[3];
     sgp4( wgs84, m_satrec, timeSinceEpoch(), r, v );
     //mDebug() << "pos: " << r[0] << " " << r[1] << " " << r[2];
@@ -119,6 +123,19 @@ double SatellitesItem::timeSinceEpoch()
     QDateTime time = QDateTime( QDate( year, month, day ),
                                 QTime( hours, minutes, (int)seconds, (int)( seconds / 1000.0 ) ) );
     return (double)( QDateTime::currentMSecsSinceEpoch() - time.toMSecsSinceEpoch() ) / ( 1000.0 * 60.0 );
+}
+
+double SatellitesItem::orbitalPeriod()
+{
+    double r[3], v[3];
+    sgp4( wgs84, m_satrec, timeSinceEpoch(), r, v );
+    double radiusearthkm, tumin, xke, j2, j3, j4, j3oj2;
+    double mu; // gravitational parameter (km^3 / s^2)
+    getgravconst( wgs84, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
+    double p, ecc, incl, omega, argp, nu, m, arglat, truelon, lonper;
+    double a; // semi-major axis (km)
+    rv2coe( r, v, mu, p, a, ecc, incl, omega, argp, nu, m, arglat, truelon, lonper);
+    return 2 * M_PI * a * sqrt ( a / mu );
 }
 
 GeoDataCoordinates SatellitesItem::fromCartesian( double x, double y, double z )
