@@ -99,7 +99,6 @@ class MarbleMapPrivate
 
     GeoSceneDocument *m_mapTheme;
     ViewParams       m_viewParams;
-    bool             m_backgroundVisible;
 
     TextureColorizer *m_texcolorizer;
 
@@ -124,7 +123,6 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
         : m_parent( parent ),
           m_model( model ),
           m_mapTheme( 0 ),
-          m_backgroundVisible( true ),
           m_texcolorizer( 0 ),
           m_layerManager( model, parent ),
           m_vectorMapBaseLayer( &m_veccomposer ),
@@ -618,7 +616,7 @@ bool MarbleMap::showFrameRate() const
 
 bool MarbleMap::showBackground() const
 {
-    return d->m_backgroundVisible;
+    return d->m_layerManager.showBackground();
 }
 
 quint64 MarbleMap::volatileTileCacheLimit() const
@@ -720,17 +718,7 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
     QTime t;
     t.start();
 
-    QStringList renderPositions;
-
-    if ( d->m_backgroundVisible ) {
-        renderPositions << "STARS" << "BEHIND_TARGET";
-        d->m_layerManager.renderLayers( &painter, d->m_viewParams.viewport(), renderPositions );
-    }
-
-    renderPositions.clear();
-    renderPositions << "SURFACE" << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
-                    << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
-    d->m_layerManager.renderLayers( &painter, d->m_viewParams.viewport(), renderPositions );
+    d->m_layerManager.renderLayers( &painter, d->m_viewParams.viewport() );
 
     customPaint( &painter );
 
@@ -1128,7 +1116,7 @@ void MarbleMap::setShowFrameRate( bool visible )
 
 void MarbleMap::setShowBackground( bool visible )
 {
-    d->m_backgroundVisible = visible;
+    d->m_layerManager.setShowBackground( visible );
 }
 
 void MarbleMap::notifyMouseClick( int x, int y )
