@@ -11,6 +11,9 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
+/*
+ * Page for geocaching activity.
+ */
 Page {
     id: geocachingActivityPage
     tools: ToolBarLayout {

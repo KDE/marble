@@ -11,28 +11,32 @@ import Qt 4.7
 import org.kde.edu.marble 0.11
 import com.nokia.meego 1.0
 
+/*
+ * Main widget containing the map, models for routing, search, etc.
+ */
 Rectangle {
     id: screen
 
-    // The map widget
+    // The widget representing the map.
     MarbleWidget {
         id: map
         anchors.fill: parent
 
+        // Load settings.
         property bool autoCenter: settings.autoCenter
         property bool initialized: false
-
         mapThemeId: settings.mapTheme
         zoom: settings.quitZoom
         projection: settings.projection
         activeFloatItems: [ "compass", "scalebar", "progress" ]
         activeRenderPlugins: settings.activeRenderPlugins
 
-        // The grouped property tracking provides access to tracking related
-        // properties
+        // The grouped property "tracking" provides access to tracking related
+        // properties.
         tracking {
-            // We connect the position source from above with the map
+            // Connect the position source from below with the map.
             positionSource: positionProvider
+            // Load settings.
             showPosition: settings.showPosition
             showTrack: settings.showTrack
             // We have our own position marker, the image of a ghost.
@@ -43,6 +47,7 @@ Rectangle {
         }
         
         Component.onCompleted: {
+            // Load last center of the map.
             center.longitude = settings.quitLongitude
             center.latitude = settings.quitLatitude
             routing.clearRoute()
@@ -50,17 +55,22 @@ Rectangle {
         }
         
         onZoomChanged: {
+            // Update settings to new zoom level.
             settings.quitZoom = zoom
         }
         
         onVisibleLatLonAltBoxChanged: {
             if( initialized ) {
+                // Update last center.
                 settings.quitLongitude = center.longitude
                 settings.quitLatitude = center.latitude
             }
         }
         
+        // The grouped property "search" provides access to search related
+        // properties.
         search {
+            // Delegate of a search result.
             placemarkDelegate: 
                 Image {
                     id: searchDelegate
@@ -77,6 +87,7 @@ Rectangle {
                         border.width: 1
                         border.color: "blue"
                         radius: 10
+                        // Name of the search result.
                         Label {
                             id: nameLabel
                             text: name
@@ -88,6 +99,7 @@ Rectangle {
                             anchors.rightMargin: 10
                             platformStyle: LabelStyle { fontPixelSize: 20 }
                         }
+                        // Buttons "Directioins from here" and "Directions to here" for routing.
                         Column {
                             id: routingButtons
                             anchors.bottom: parent.bottom
@@ -135,6 +147,7 @@ Rectangle {
                                 }
                             }
                         }
+                        // Small cross that closes the search result info if its clicked.
                         Image {
                             id: closeImage
                             width: 30
@@ -151,6 +164,7 @@ Rectangle {
                             }
                         }
                     }
+                    // Show search result info if the placemark is clicked.
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
@@ -160,22 +174,25 @@ Rectangle {
                 }
         }
         
+        // Centers map on passed coordinates.
         function centerOn( lon, lat ) {
             map.center.longitude = lon
             map.center.latitude = lat
         }
         
+        // Returns the grouped property to access routing functions.
         function getRouting() {
             return map.routing
         }
         
+        // Returns the grouped property to access search functions.
         function getSearch() {
             return map.search
         }
 
     }
     
-    // Delivers the current (gps) position
+    // Delivers the current (gps) position.
     PositionSource {
         id: positionProvider
 
@@ -185,10 +202,10 @@ Rectangle {
         // e.g. Gpsd
         //source: "QtMobilityPositionProviderPlugin"
 
-        // This starts/stops gps tracking
+        // This starts/stops gps tracking.
         active: settings.gpsTracking
 
-        // A small grow/shrink animation of the ghost to indicate position updates
+        // Start a small grow/shrink animation of the marker to indicate position updates.
         onPositionChanged: {
             growAnimation.running = true
             if ( map.autoCenter ) {
@@ -197,7 +214,7 @@ Rectangle {
         }
     }
     
-    // A marker indicates the current position
+    // A marker that indicates the current position.
     Image {
         id: marker
         width: 60
@@ -206,9 +223,9 @@ Rectangle {
         source: "qrc:/marker.svg"
         visible: false
 
+        // Animation that grows/shrinks the marker.
         PropertyAnimation on x { duration: 300; easing.type: Easing.OutBounce }
         PropertyAnimation on y { duration: 300; easing.type: Easing.OutBounce }
-
         SequentialAnimation {
             id: growAnimation
             PropertyAnimation {
@@ -226,22 +243,27 @@ Rectangle {
         }
     }
     
+    // Starts a search for the passed term.
     function find( term ) {
         map.search.find( term )
     }
     
+    // Returns the model that contains routing instructions.
     function routeRequestModel() {
         return map.routing.routeRequestModel()
     }
     
+    // Returns the model that contains points on the route.
     function waypointModel() {
         return map.routing.waypointModel()
     }
     
+    // Returns the grouped property to access routing functions.
     function getRouting() {
         return map.getRouting()
     }
     
+    // Returns the grouped property to access search functions.
     function getSearch() {
         return map.getSearch()
     }

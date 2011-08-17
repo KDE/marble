@@ -10,6 +10,9 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
+/*
+ * Page to change settings of GPS and Internet.
+ */
 Page {
     id: connectionSettings
     anchors.margins: UiConstants.DefaultMargin
@@ -24,7 +27,6 @@ Page {
                 settings.gpsTracking = gpsEnabled.checked
             }
         }
-
         CheckBox {
             id: showPosition
             text: "Show position"
@@ -33,7 +35,6 @@ Page {
                 settings.showPosition = showPosition.checked
             }
         }
-        
         CheckBox {
             id: showTrack
             text: "Show track"
@@ -42,7 +43,6 @@ Page {
                 settings.showTrack = showTrack.checked
             }
         }
-        
         CheckBox {
             id: autoCenter
             text: "Auto-center"
@@ -51,7 +51,6 @@ Page {
                 settings.autoCenter = autoCenter.checked
             }
         }
-        
         CheckBox {
             id: offlineMode
             text: "Offline-mode enabled"

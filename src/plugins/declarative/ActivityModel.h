@@ -21,6 +21,9 @@ namespace Marble
 namespace Declarative
 {
 
+/**
+ * Model to access activities from QML.
+ */
 class ActivityModel : public QAbstractListModel
 {
 
@@ -32,13 +35,13 @@ class ActivityModel : public QAbstractListModel
      */
     enum Roles
     {
-      NameRole = Qt::UserRole + 1,     ///< Name of the activity
-      ImagePathRole,                   ///< Path to image for activity
-      PathRole,                        ///< Path to QML file for activity
-      EnablePluginsRole,               ///< Plugins to enable when switching to that activity
-      DisablePluginsRole,              ///< Plugins to disable when switching to that activity
-      RelatedActivitiesRole,           ///< Related activities and plugins to preserve when switching to them
-      SettingsRole                     ///< Settings for activity
+      NameRole = Qt::UserRole + 1,     ///< Name of the activity.
+      ImagePathRole,                   ///< Path to image for activity.
+      PathRole,                        ///< Path to QML file for activity.
+      EnablePluginsRole,               ///< Plugins to enable when switching to that activity.
+      DisablePluginsRole,              ///< Plugins to disable when switching to that activity.
+      RelatedActivitiesRole,           ///< Related activities and plugins to preserve when switching to them.
+      SettingsRole                     ///< Settings for activity.
     };
 
     explicit ActivityModel( QObject *parent = 0 );
@@ -54,12 +57,55 @@ class ActivityModel : public QAbstractListModel
     QVariant data( const QModelIndex &index, int role ) const;
 
  public Q_SLOTS:
+    /**
+     * Add an activity with the passed data.
+     * 
+     * @param name Name of the activity
+     * @param imagePath Path to the image of the activity.
+     * @param path Path to the QML file of the activity.
+     * @param enablePlugins Names of plugins to enable for this activity.
+     * @param disablePlugins Names of plugins to disable for this activity.
+     * @param relatedActivities Related activities with plugin states to preserve.
+     * @param settings Settings to apply for this activity.
+     * 
+     * @see Activity
+     */
     void addActivity( const QString& name, const QString& imagePath, const QString& path,
                       const QStringList& enablePlugins, const QStringList& disablePlugins,
                       const QVariant& relatedActivities, const QVariant& settings );
+    /**
+     * Remove activity with the passed name.
+     *
+     * @param name Name of the activity to remove.
+     * 
+     * @see Roles
+     */
     void removeActivity( const QString& name );
+    
+    /**
+     * Returns data of activity with passed index and role.
+     *
+     * @param index Index of the activity in the model.
+     * @param role Role of the requested data in the model.
+     * 
+     * @return Data of activity at passed index and role.
+     * 
+     * @see Roles
+     */
     QVariant get( const int index, const QString& role ) const;
+    
+    /**
+     * Returns data of activity with passed name and role.
+     *
+     * @param name Name of the activity in the model.
+     * @param role Role of the requested data in the model.
+     * 
+     * @return Data of activity with passed name and role.
+     * 
+     * @see Roles
+     */
     QVariant get( const QString& name, const QString& role ) const;
+
     /**
      * Return the number of activities in the Model.
      */

@@ -9,13 +9,17 @@
 import QtQuick 1.0
 import com.nokia.meego 1.0
 
-// FIXME delete; -> ConfigurationActivityPage.qml
-
+/*
+ * Page for configuration activity.
+ * 
+ * Gives graphical access to the settings of the application.
+ */
 Page {
-    id: settingsPage
+    id: configurationPage
     anchors.margins: UiConstants.DefaultMargin
     tools: commonToolBar
     
+    // Contains sub-pages for the settings.
     ListModel {
         id: pagesModel
         ListElement {

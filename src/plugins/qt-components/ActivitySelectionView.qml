@@ -11,14 +11,20 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
+/*
+ * Page to select activity. This component also contains the model for
+ * the activities, which stores all relevant information.
+ */
 Page {
     id: activityPage
     property int activity: -1
     property int previousActivity: -1
     property alias model: activityView.model
     tools: commonToolBar
+    // Signal that is emitted when the user changes activities.
     signal activityChanged( string oldActivity, string newActivity )
 
+    // Grid view to display images and names of activities.
     GridView {
         id: activityView
         currentIndex: -1
@@ -66,8 +72,10 @@ Page {
         }
     }
 
+    // Model that stores information about activities.
     ActivityModel {
         id: activityModel
+        // Inserts activities into model, add more activities here.
         Component.onCompleted: {
             activityModel.addActivity(
                 "Virtual Globe",
@@ -195,8 +203,7 @@ Page {
             activityModel.addActivity(
                 "Configuration",
                 "qrc:/icons/activity-configure.png",
-                // FIXME filename
-                "qrc:/SettingsListPage.qml",
+                "qrc:/ConfigurationActivityPage.qml",
                 [],
                 [],
                 {},

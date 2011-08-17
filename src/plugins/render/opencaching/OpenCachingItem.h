@@ -27,6 +27,9 @@ namespace Ui
 namespace Marble
 {
 
+/**
+ * Item representing a single cache.
+ */
 class OpenCachingItem : public AbstractDataPluginItem
 {
     Q_OBJECT
@@ -58,13 +61,13 @@ private:
 
     QDialog *infoDialog();
 
-    OpenCachingCache m_cache;
+    OpenCachingCache m_cache;                             ///< Information about the cache.
 
-    Ui::OpenCachingCacheDialog *m_ui;
+    Ui::OpenCachingCacheDialog *m_ui;                     ///< Dialog displaying information about the cache.
     QDialog *m_infoDialog;
     QAction *m_action;
 
-    int m_logIndex;
+    int m_logIndex;                                       ///< Index of the currently displayed log entry.
 
     static QFont s_font;
     static QPixmap s_icon;
@@ -72,9 +75,9 @@ private:
 private slots:
     void updateDescriptionLanguage( QString language );
 
-    void nextLogEntry();
+    void nextLogEntry();                                  ///< Display next log entry.
 
-    void previousLogEntry();
+    void previousLogEntry();                              ///< Display previous log entry.
 };
 
 }

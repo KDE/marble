@@ -11,6 +11,9 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
+/*
+ * Page for the virtual globe activity.
+ */
 Page {
     id: virtualGlobeActivityPage
     tools: ToolBarLayout {

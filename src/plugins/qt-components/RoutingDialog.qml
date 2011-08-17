@@ -10,6 +10,9 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
+/*
+ * Dialog to select routing points.
+ */
 Rectangle {
     Rectangle {
         id: routingRect
@@ -26,6 +29,7 @@ Rectangle {
             anchors.fill: parent
             model: routingModel
 
+            // Shows a text input field for the search term and a cross to remove it.
             delegate:
                 Row {
                     TextField { 
@@ -33,7 +37,6 @@ Rectangle {
                         width: 200
                         height: 35
                         Keys.onPressed: {
-                            console.log( "text changed: ", text )
                             routingModel.get( index ).destinationText = text
                             if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter ) {
                                 if( text.trim() != "" ) {
@@ -60,6 +63,8 @@ Rectangle {
                 }
         }
     }
+    // Two buttons to start routing and add another input field for an additional
+    // point on the route.
     Rectangle {
         id: buttonRect
         anchors.top: routingRect.bottom
@@ -86,6 +91,8 @@ Rectangle {
         }
     }
 
+    // If there are multiple locations matching the term entered in the
+    // textfield, show a dialog to choose one of them.
     SearchResultSelectionDialog {
         id: resultSelectionDialog
         visible: false
@@ -102,6 +109,7 @@ Rectangle {
         }
     }
     
+    // Calculates the route for the entered points.
     function calculateRoute() {
         console.log( "routing started..." )
         main.getRouting().clearRoute()

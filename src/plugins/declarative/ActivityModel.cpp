@@ -29,7 +29,7 @@ class ActivityModel::Private
     {
     }
 
-    QList<Activity*>     m_activityContainer;
+    QList<Activity*>     m_activityContainer;     ///< Container to store activities.
 };
 
 
@@ -40,6 +40,7 @@ ActivityModel::ActivityModel( QObject *parent )
     : QAbstractListModel( parent ),
       d( new Private )
 {
+    // Setup roles for activities.
     QHash<int,QByteArray> roles = roleNames();
     roles[NameRole] = "name";
     roles[ImagePathRole] = "imagePath";
@@ -92,12 +93,15 @@ int ActivityModel::columnCount( const QModelIndex &parent ) const
 
 QVariant ActivityModel::data( const QModelIndex &index, int role ) const
 {
+    // Check if passed index is valid.
     if ( !index.isValid() )
         return QVariant();
 
+    // Check if index is out of bound.
     if ( index.row() >= d->m_activityContainer.size() )
         return QVariant();
 
+    // Return the requested data, an empty QVariant for an unknown role.
     if ( role == NameRole ) {
         return d->m_activityContainer.at( index.row() )->name();
     } else if( role == ImagePathRole ) {
@@ -118,11 +122,13 @@ QVariant ActivityModel::data( const QModelIndex &index, int role ) const
 
 QVariant ActivityModel::get( const int index, const QString& role ) const
 {
+    // Check if index is out of bound.
     if ( index < 0 || index > d->m_activityContainer.size() )
         return QVariant();
 
     static QHash<int,QByteArray> roles = roleNames();
-    
+
+    // Return the requested data, an empty QVariant for an unknown role.
     if ( role == roles[NameRole] ) {
         return d->m_activityContainer.at( index )->name();
     } else if( role == roles[ImagePathRole] ) {
@@ -143,17 +149,21 @@ QVariant ActivityModel::get( const int index, const QString& role ) const
 
 QVariant ActivityModel::get( const QString& name, const QString& role ) const
 {
+    // Check for valid activity name.
     if( name.isEmpty() )
         return QVariant();
     
     static QHash<int,QByteArray> roles = roleNames();
     Activity *activity = 0;
     
+    // Get a pointer to the activity with the passed name.
     for( int i = 0; i < d->m_activityContainer.size(); i++ ) {
         if ( d->m_activityContainer[i]->name() == name ) {
             activity = d->m_activityContainer.at( i );
         }
     }
+    // Return requested data if activity is valid, an empty QVariant
+    // for an unknown activity or role.
     if( activity != 0 ) {
         if ( role == roles[NameRole] ) {
             return activity->name();

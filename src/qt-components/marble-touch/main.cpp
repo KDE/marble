@@ -20,10 +20,12 @@ int main( int argc, char *argv[] )
 
     QDir::setCurrent( app.applicationDirPath() );
 
+    // Create main window based on QML.
     MainWindow window;
     window.setSource( QUrl( "qrc:/main.qml" ) );
 
 #ifdef __arm__
+    // Window takes up full screen on arm (mobile) devices.
     window.showFullScreen();
 #else
     window.resize( window.initialSize().width(), window.initialSize().height() );

@@ -10,6 +10,9 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
+/*
+ * List that displays routing instructions.
+ */
 ListView {
     id: mapListView
     z: 1

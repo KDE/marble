@@ -11,11 +11,16 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
+/*
+ * Dialog to select a specific search result.
+ */
 Rectangle {
     id: searchResultSelectionDialog
     color: "white"
     property int searchIndex
+    // Signal that is emitted when the user clicked on a search result.
     signal selected( int index, string text, real lat, real lon )
+    // Displays search results in a list of boxes.
     ListView {
         id: resultView
         anchors.fill: parent
@@ -23,6 +28,8 @@ Rectangle {
         model: main.getSearch().searchResultModel()
         spacing: 10
 
+        // Displays search result information in a white box with blue
+        // border and round corners.
         delegate:
             Rectangle {
                 id: result
@@ -44,21 +51,19 @@ Rectangle {
                     anchors.rightMargin: 15
                     platformStyle: LabelStyle { fontPixelSize: 15 }
                 }
+                // Emit signal if user clicked on a search result.
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        resultView.currentIndex = index
+                        var item = resultView.currentItem
+                        searchResultSelectionDialog.visible = false
+                        searchResultSelectionDialog.selected( searchResultSelectionDialog.searchIndex, item.destinationText, item.lon, item.lat )
+                    }
+                }
             }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                var x = mouseX + resultView.contentX
-                var y = mouseY + resultView.contentY
-                // FIXME better way to query data?
-                resultView.currentIndex = resultView.indexAt( x, y )
-                var item = resultView.currentItem
-                searchResultSelectionDialog.visible = false
-                searchResultSelectionDialog.selected( searchResultSelectionDialog.searchIndex, item.destinationText, item.lon, item.lat )
-            }
-        }
     }
+    // Show animation while searching.
     Rectangle {
         id: loadRect
         z: 1
@@ -82,6 +87,7 @@ Rectangle {
             }
         }
     }
+    // Show error message if there are no search results.
     Rectangle {
         id: noResultsRect
         visible: false
@@ -105,13 +111,16 @@ Rectangle {
             }
         }
     }
+    // Show search result in view.
     Component.onCompleted: {
         main.getSearch().searchFinished.connect( showSearchResults )
     }
+    // Show load animation.
     function load() {
         searchResultSelectionDialog.visible = true
         loadRect.visible = true
     }
+    // Update model and view and show results.
     function showSearchResults() {
         resultView.model = main.getSearch().searchResultModel()
         noResultsRect.visible = loadRect.visible = false

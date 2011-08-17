@@ -19,6 +19,9 @@
 namespace Marble
 {
 
+/**
+ * Single log entry for a cache.
+ */
 class OpenCachingCacheLogEntry
 {
 public:
@@ -53,19 +56,19 @@ public:
     const QDateTime& lastModifiedDate() const;
 
 private:
-    long m_cacheId;
+    long m_cacheId;                      ///< Unique ID of the cache.
 
-    QString m_userName;
+    QString m_userName;                  ///< Name of the user that created the log entry.
 
-    QString m_logType;
+    QString m_logType;                   ///< Type of the log. @todo ?
 
-    QString m_text;
+    QString m_text;                      ///< Actual text of the log.
 
-    QDateTime m_logDate;
+    QDateTime m_logDate;                 ///< Date the cache was found.
 
-    QDateTime m_createdDate;
+    QDateTime m_createdDate;             ///< Date the log was created.
 
-    QDateTime m_lastModifiedDate;
+    QDateTime m_lastModifiedDate;        ///< Date the log was last modified.
 };
 
 }

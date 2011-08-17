@@ -29,6 +29,9 @@ namespace Ui
 namespace Marble
 {
 
+/**
+ * Plugin to display geocaches from opencaching.de on the map.
+ */
 class OpenCachingPlugin : public AbstractDataPlugin
 {
     Q_OBJECT

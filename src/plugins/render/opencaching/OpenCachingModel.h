@@ -26,6 +26,9 @@ namespace {
 const quint32 numberOfItemsOnScreen = 20;
 }
 
+/**
+ * Model that manages cache information.
+ */
 class OpenCachingModel : public AbstractDataPluginModel
 {
     Q_OBJECT

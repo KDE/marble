@@ -19,6 +19,9 @@ namespace Marble
 namespace Declarative
 {
 
+/**
+ * Dummy class to export plugin.
+ */
 class QtComponentsPlugin : public QDeclarativeExtensionPlugin
 {
     Q_OBJECT

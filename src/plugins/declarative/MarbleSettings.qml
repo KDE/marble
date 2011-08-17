@@ -10,13 +10,18 @@
 import Qt 4.7
 import org.kde.edu.marble 0.11
 
+/*
+ * Settings of the application.
+ */
 Item {
     id: root
 
+    // Instance of the C++ class that manages the settings.
     Settings {
         id: settings
     }
 
+    // Load settings from file.
     property string mapTheme: settings.value( "MarbleWidget", "mapTheme", "earth/openstreetmap/openstreetmap.dgml" )
     property bool workOffline: settings.value( "MainWindow", "workOffline", false )
     property real quitLongitude: settings.value( "MarbleWidget", "quitLongitude", 0.0 )
@@ -32,6 +37,7 @@ Item {
                                             "stars", "scalebar"]
     property variant activeRenderPlugins: settings.value( "MarbleWidget", "activeRenderPlugins", defaultRenderPlugins )
     
+    // Save settings to file.
     Component.onDestruction: {
         settings.setValue( "MarbleWidget", "mapTheme", root.mapTheme )
         settings.setValue( "MainWindow", "workOffline", root.workOffline )

@@ -10,6 +10,9 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
+/*
+ * View that displays points on the way of a route.
+ */
 ListView {
     id: mapListView
     z: 1

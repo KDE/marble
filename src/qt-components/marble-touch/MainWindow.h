@@ -11,6 +11,10 @@
 
 #include <QtDeclarative/QDeclarativeView>
 
+/**
+ * This class is just a wrapper to display a
+ * QML interface.
+ */
 class MainWindow : public QDeclarativeView
 {
     Q_OBJECT

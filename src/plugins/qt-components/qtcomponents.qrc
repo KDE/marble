@@ -1,8 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>MainWidget.qml</file>
-        <file>SettingsPage.qml</file>
-        <file>SettingsListPage.qml</file>
         <file>ConnectionSettingsPage.qml</file>
         <file>MapThemeSelectionPage.qml</file>
         <file>NavigationSettingsPage.qml</file>
@@ -18,6 +16,7 @@
         <file>VirtualGlobeActivityPage.qml</file>
         <file>GuidanceActivityPage.qml</file>
         <file>WeatherActivityPage.qml</file>
+        <file>ConfigurationActivityPage.qml</file>
         <file>icons/activity-bookmarks.png</file>
         <file>icons/activity-configure.png</file>
         <file>icons/activity-default.png</file>

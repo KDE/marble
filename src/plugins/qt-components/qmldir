@@ -1,7 +1,5 @@
 plugin QtComponentsPlugin
 MainWidget 0.12 MainWidget.qml
-SettingsPage 0.12 SettingsPage.qml
-SettingsListPage 0.12 SettingsListPage.qml
 ConnectionSettingsPage 0.12 ConnectionSettingsPage.qml
 MapThemeSelectionPage 0.12 MapThemeSelectionPage.qml
 NavigationSettingsPage 0.12 NavigationSettingsPage.qml
@@ -17,3 +15,4 @@ SearchActivityPage 0.12 SearchActivityPage.qml
 GeocachingActivityPage 0.12 GeocachingActivityPage.qml
 GuidanceActivityPage 0.12 GuidanceActivityPage.qml
 WeatherActivityPage 0.12 WeatherActivityPage.qml
+ConfigurationActivityPage 0.12 ConfigurationActivityPage.qml

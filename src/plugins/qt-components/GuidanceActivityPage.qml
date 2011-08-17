@@ -11,6 +11,10 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
+/*
+ * Page for guidance activity.
+ * FIXME start end required
+ */
 Page {
     id: guidanceActivityPage
     tools: ToolBarLayout {

@@ -18,6 +18,9 @@
 namespace Marble
 {
 
+/**
+ * All log entries for a cache.
+ */
 class OpenCachingCacheLog
 {
 public:
@@ -40,9 +43,9 @@ public:
     int currentIndex() const;
 
 private:
-    unsigned long long m_cacheId;
+    unsigned long long m_cacheId;                   ///< Unique ID of the cache.
 
-    QList<OpenCachingCacheLogEntry> m_logEntries;
+    QList<OpenCachingCacheLogEntry> m_logEntries;   ///< All log entries.
 };
 
 }

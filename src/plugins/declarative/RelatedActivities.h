@@ -21,6 +21,9 @@ namespace Marble
 namespace Declarative
 {
 
+/**
+ * Stores related activities and plugin states for an activity.
+ */
 class RelatedActivities : public QObject
 {
 
@@ -28,16 +31,36 @@ class RelatedActivities : public QObject
     
  public:
     explicit RelatedActivities();
+    
+    /**
+     * @param relatedActivities Map with activity names as key
+     * and lists of plugin names as values.
+     */
     explicit RelatedActivities( const QMap<QString, QVariant>& relatedActivities );
     
  public Q_SLOTS:
+    /**
+     * Returns a list of plugins for the related activity with the passed name.
+     * 
+     * @param name Name of the related activity.
+     */
     QStringList get( const QString& name ) const;
+    
+    /**
+     * @param name relatedActivities Map with activity names as key
+     * and lists of plugin names as values.
+     */
     void setRelatedActivities( const QMap<QString, QVariant>& relatedActivities );
+    
+    /**
+     * @return Map with activity names as key
+     * and lists of plugin names as values.
+     */
     QMap<QString, QVariant> relatedActivities() const;
 
  private:
     Q_DISABLE_COPY( RelatedActivities )
-    QMap<QString, QVariant> m_relatedActivities;
+    QMap<QString, QVariant> m_relatedActivities;   ///< Map with activity names as key and lists of plugin names as values.
 };
 
 }

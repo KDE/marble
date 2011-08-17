@@ -9,9 +9,13 @@
 import QtQuick 1.0
 import com.nokia.meego 1.0
 
+/*
+ * A textfield for searching locations.
+ */
 TextField {
     id: textField
     placeholderText: "Search..."
+    // Icon to clear text in the textfield.
     ToolIcon {
         id: clearButton
         iconId: "input-clear"
@@ -20,6 +24,7 @@ TextField {
         anchors.rightMargin: 5
         height: parent.height - 2
         width: parent.height - 2
+        // Reset text and clear search.
         onClicked: {
             textField.text = ""
             mainWidget.find( text )

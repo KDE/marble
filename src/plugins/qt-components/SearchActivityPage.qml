@@ -11,6 +11,13 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
+/*
+ * Page for the search activity.
+ * 
+ * Displays a search bar on top of the map.
+ * 
+ * FIXME Text not visible on the desktop.
+ */
 Page {
     id: searchActivityPage
     tools: ToolBarLayout {
@@ -18,21 +25,22 @@ Page {
         ToolIcon { iconId: "toolbar-view-menu"; }
     }
 
-    MainWidget {
-        id: mainWidget
-        anchors.fill: parent
-    }
     SearchBar {
         id: searchBar
-        anchors.top: parent.top
-        anchors.left: mainWidget.left
-        anchors.right: parent.right
         height: 35
-        property bool activated: false
+        anchors.left: parent.left
+        anchors.right: parent.right
         Keys.onPressed: {
             if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter ) {
                 mainWidget.find( text )
             }
         }
+    }
+    MainWidget {
+        id: mainWidget
+        anchors.top: searchBar.bottom
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
     }
 }
