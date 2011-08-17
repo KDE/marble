@@ -292,6 +292,7 @@ MarbleMap::~MarbleMap()
     d->m_layerManager.removeLayer( &d->m_measureTool );
     d->m_layerManager.removeLayer( &d->m_fogLayer );
     d->m_layerManager.removeLayer( &d->m_placemarkLayout );
+    d->m_layerManager.removeLayer( &d->m_textureLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
     delete d;
@@ -758,10 +759,6 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
         d->m_atmosphereLayer.render( &painter, d->m_viewParams.viewport() );
     }
 
-    if ( d->m_model->mapTheme()->map()->hasTextureLayers() ) {
-        d->m_textureLayer.render( &painter, d->m_viewParams.viewport() );
-    }
-
     renderPositions.clear();
     renderPositions << "SURFACE" << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
@@ -802,6 +799,7 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
                     this, SLOT( updateProperty( const QString &, bool ) ) );
     }
 
+    d->m_layerManager.removeLayer( &d->m_textureLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
 
@@ -982,6 +980,8 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
                 d->m_textureLayer.setTextureColorizer( d->m_texcolorizer );
             }
         }
+
+        d->m_layerManager.addLayer( &d->m_textureLayer );
     }
 
     // NOTE due to frequent regressions: 
