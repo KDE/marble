@@ -118,6 +118,7 @@ set(marblewidget_SRCS
     PlacemarkLayout.cpp
     PlacemarkPainter.cpp
     PlacemarkInfoDialog.cpp
+    MarbleSplashLayer.cpp
     AtmosphereLayer.cpp
     FogLayer.cpp
     FpsLayer.cpp

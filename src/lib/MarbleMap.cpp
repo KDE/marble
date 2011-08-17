@@ -56,6 +56,7 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
+#include "MarbleSplashLayer.h"
 #include "MeasureTool.h"
 #include "MergedLayerDecorator.h"
 #include "PlacemarkLayout.h"
@@ -86,8 +87,6 @@ class MarbleMapPrivate
 
     void construct();
 
-    void paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect );
-
     void setBoundingBox();
 
     void updateProperty( const QString &, bool );
@@ -105,6 +104,7 @@ class MarbleMapPrivate
     TextureColorizer *m_texcolorizer;
 
     LayerManager     m_layerManager;
+    MarbleSplashLayer m_marbleSplashLayer;
     GeometryLayer           *m_geometryLayer;
     AtmosphereLayer          m_atmosphereLayer;
     FogLayer                 m_fogLayer;
@@ -177,37 +177,6 @@ void MarbleMapPrivate::construct()
                        m_parent, SIGNAL( tileLevelChanged( int ) ) );
     m_parent->connect( &m_textureLayer, SIGNAL( repaintNeeded( QRegion ) ),
                        m_parent, SIGNAL( repaintNeeded( QRegion ) ) );
-}
-
-void  MarbleMapPrivate::paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect )
-{
-    Q_UNUSED( dirtyRect )
-
-    painter.save();
-
-    QPixmap logoPixmap( MarbleDirs::path( "svg/marble-logo-inverted-72dpi.png" ) );
-
-    if ( logoPixmap.width() > m_parent->width() * 0.7
-         || logoPixmap.height() > m_parent->height() * 0.7 )
-    {
-        logoPixmap = logoPixmap.scaled( QSize( m_parent->width(), m_parent->height() ) * 0.7,
-                                        Qt::KeepAspectRatio, Qt::SmoothTransformation );
-    }
-
-    QPoint logoPosition( ( m_parent->width()  - logoPixmap.width() ) / 2,
-                            ( m_parent->height() - logoPixmap.height() ) / 2 );
-    painter.drawPixmap( logoPosition, logoPixmap );
-
-    QString message; // "Please assign a map theme!";
-
-    painter.setPen( Qt::white );
-
-    int yTop = logoPosition.y() + logoPixmap.height() + 10;
-    QRect textRect( 0, yTop,
-                    m_parent->width(), m_parent->height() - yTop );
-    painter.drawText( textRect, Qt::AlignHCenter | Qt::AlignTop, message ); 
-
-    painter.restore();
 }
 
 void MarbleMapPrivate::updateProperty( const QString &name, bool show )
@@ -740,14 +709,16 @@ bool MarbleMap::geoCoordinates( int x, int y,
 // Used to be paintEvent()
 void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
 {
-    QTime t;
-    t.start();
-    
+    Q_UNUSED( dirtyRect );
+
     if ( !d->m_mapTheme ) {
         mDebug() << "No theme yet!";
-        d->paintMarbleSplash( painter, dirtyRect );
+        d->m_marbleSplashLayer.render( &painter, d->m_viewParams.viewport() );
         return;
     }
+
+    QTime t;
+    t.start();
 
     QStringList renderPositions;
 
