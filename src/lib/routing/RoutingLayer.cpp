@@ -459,7 +459,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
                 m_dropStopOver = e->pos();
                 storeDragPosition( e->pos() );
                 // annotation and old annotation are dirty, large region
-                m_marbleWidget->repaint();
+                m_marbleWidget->update();
                 return true;
             } else if ( e->button() == Qt::RightButton ) {
                 m_removeViaPointAction->setEnabled( false );
@@ -587,7 +587,7 @@ bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
                 m_dragStopOver = QPoint();
                 m_dropStopOver = QPoint();
             }
-            m_marbleWidget->repaint( dirty );
+            m_marbleWidget->update( dirty );
             m_marbleWidget->setCursor( Qt::ArrowCursor );
         } else if ( isInfoPoint( e->pos() ) ) {
             clearStopOver();
@@ -653,11 +653,11 @@ bool RoutingLayerPrivate::isInfoPoint( const QPoint &point )
 
 void RoutingLayerPrivate::paintStopOver( QRect dirty )
 {
-    m_marbleWidget->repaint( m_dirtyRect );
+    m_marbleWidget->update( m_dirtyRect );
     int dx = 1 + m_pixmapSize.width() / 2;
     int dy = 1 + m_pixmapSize.height() / 2;
     dirty.adjust( -dx, -dy, -dx, -dy );
-    m_marbleWidget->repaint( dirty );
+    m_marbleWidget->update( dirty );
     m_dirtyRect = dirty;
 }
 
@@ -665,7 +665,7 @@ void RoutingLayerPrivate::clearStopOver()
 {
     m_dropStopOver = QPoint();
     m_dragStopOver = QPoint();
-    m_marbleWidget->repaint( m_dirtyRect );
+    m_marbleWidget->update( m_dirtyRect );
 }
 
 RoutingLayer::RoutingLayer( MarbleWidget *widget, QWidget *parent ) :
@@ -791,7 +791,7 @@ void RoutingLayer::setRouteDirty( bool dirty )
       * a partly repaint, otherwise we might end up repainting only parts of the route
       */
     // d->m_marbleWidget->repaint( d->m_routeRegion );
-    d->m_marbleWidget->repaint();
+    d->m_marbleWidget->update();
 }
 
 void RoutingLayer::setRouteRequest( RouteRequest *request )
@@ -812,7 +812,7 @@ void RoutingLayer::removeViaPoint()
 void RoutingLayer::showAlternativeRoutes()
 {
     setViewportChanged();
-    d->m_marbleWidget->repaint();
+    d->m_marbleWidget->update();
 }
 
 void RoutingLayer::exportRoute()

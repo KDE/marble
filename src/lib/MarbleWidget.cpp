@@ -255,7 +255,7 @@ void MarbleWidgetPrivate::repaint()
     m_widget->setAttribute( Qt::WA_NoSystemBackground,
                   m_widget->viewport()->mapCoversViewport() && !m_model->mapThemeId().isEmpty() );
 
-    m_widget->repaint();
+    m_widget->update();
 }
 
 // ----------------------------------------------------------------
@@ -878,7 +878,7 @@ void MarbleWidget::setMapThemeId( const QString& mapThemeId )
         setInputEnabled( false );
     }
 
-    repaint();
+    update();
 }
 
 GeoSceneDocument *MarbleWidget::mapTheme() const
@@ -891,49 +891,49 @@ void MarbleWidget::setPropertyValue( const QString& name, bool value )
     mDebug() << "In MarbleWidget the property " << name << "was set to " << value;
     d->m_map->setPropertyValue( name, value );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowOverviewMap( bool visible )
 {
     d->m_map->setShowOverviewMap( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowScaleBar( bool visible )
 {
     d->m_map->setShowScaleBar( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowCompass( bool visible )
 {
     d->m_map->setShowCompass( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowClouds( bool visible )
 {
     d->m_map->setShowClouds( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowSunShading( bool visible )
 {
     d->m_map->setShowSunShading( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowCityLights( bool visible )
 {
     d->m_map->setShowCityLights( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowSunInZenith( bool visible )
@@ -948,98 +948,98 @@ void MarbleWidget::setShowAtmosphere( bool visible )
 {
     d->m_map->setShowAtmosphere( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowCrosshairs( bool visible )
 {
     d->m_map->setShowCrosshairs( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowGrid( bool visible )
 {
     d->m_map->setShowGrid( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowPlaces( bool visible )
 {
     d->m_map->setShowPlaces( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowCities( bool visible )
 {
     d->m_map->setShowCities( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowTerrain( bool visible )
 {
     d->m_map->setShowTerrain( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowOtherPlaces( bool visible )
 {
     d->m_map->setShowOtherPlaces( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowRelief( bool visible )
 {
     d->m_map->setShowRelief( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowIceLayer( bool visible )
 {
     d->m_map->setShowIceLayer( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowBorders( bool visible )
 {
     d->m_map->setShowBorders( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowRivers( bool visible )
 {
     d->m_map->setShowRivers( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowLakes( bool visible )
 {
     d->m_map->setShowLakes( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowFrameRate( bool visible )
 {
     d->m_showFrameRate = visible;
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowBackground( bool visible )
 {
     d->m_map->setShowBackground( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowTileId( bool visible )
