@@ -121,6 +121,11 @@ TextureLayer::~TextureLayer()
     delete d;
 }
 
+QStringList TextureLayer::renderPosition() const
+{
+    return QStringList() << "SURFACE";
+}
+
 bool TextureLayer::showSunShading() const
 {
     return d->m_tileLoader.showSunShading();
@@ -131,15 +136,17 @@ bool TextureLayer::showCityLights() const
     return d->m_tileLoader.showCityLights();
 }
 
-void TextureLayer::paintGlobe( GeoPainter *painter,
-                               const ViewportParams *viewport,
-                               const QRect& dirtyRect )
+bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
+                           const QString &renderPos, GeoSceneLayer *layer )
 {
+    Q_UNUSED( renderPos );
+    Q_UNUSED( layer );
+
     if ( d->m_textures.isEmpty() )
-        return;
+        return false;
 
     if ( !d->m_texmapper )
-        return;
+        return false;
 
     // choose the smaller dimension for selecting the tile level, leading to higher-resolution results
     const int levelZeroWidth = d->m_tileLoader.tileSize().width() * d->m_tileLoader.tileColumnCount( 0 );
@@ -171,7 +178,10 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
         emit tileLevelChanged( tileLevel );
     }
 
+    const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
     d->m_texmapper->mapTexture( painter, viewport, dirtyRect, d->m_texcolorizer );
+
+    return true;
 }
 
 void TextureLayer::setShowSunShading( bool show )

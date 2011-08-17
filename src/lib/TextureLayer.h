@@ -11,6 +11,7 @@
 #ifndef MARBLE_MARBLETEXTURELAYER_H
 #define MARBLE_MARBLETEXTURELAYER_H
 
+#include "LayerInterface.h"
 #include <QtCore/QObject>
 
 #include "global.h"
@@ -33,13 +34,15 @@ class SunLocator;
 class TextureColorizer;
 class ViewportParams;
 
-class TextureLayer : public QObject
+class TextureLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 
  public:
     TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator );
     ~TextureLayer();
+
+    QStringList renderPosition() const;
 
     bool showSunShading() const;
     bool showCityLights() const;
@@ -63,9 +66,8 @@ class TextureLayer : public QObject
     int preferredRadiusFloor( int radius ) const;
 
  public Q_SLOTS:
-    void paintGlobe( GeoPainter *painter,
-                     const ViewportParams *viewport,
-                     const QRect& dirtyRect );
+    bool render( GeoPainter *painter, ViewportParams *viewport,
+                 const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
 
     void setShowSunShading( bool show );
 
