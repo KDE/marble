@@ -71,7 +71,7 @@ bool AtmosphereLayer::render( GeoPainter *painter,
 
 qreal AtmosphereLayer::zValue() const
 {
-    return -1.0;
+    return -100.0;
 }
 
 }

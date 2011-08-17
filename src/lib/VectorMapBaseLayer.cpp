@@ -40,7 +40,7 @@ bool VectorMapBaseLayer::render( GeoPainter *painter,
 
 qreal VectorMapBaseLayer::zValue() const
 {
-    return -100.0;
+    return -1.0;
 }
 
 }
