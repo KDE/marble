@@ -39,6 +39,12 @@ private:
      * @param z z coordinate in km
      */
     GeoDataCoordinates fromCartesian( double x, double y, double z );
+
+    /**
+     * @brief Return the time since m_satrec epoch in minutes
+     * @see m_satrec
+     */
+    double timeSinceEpoch();
 };
 
 }
