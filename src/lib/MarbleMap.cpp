@@ -78,6 +78,36 @@
 namespace Marble
 {
 
+
+class MarbleMap::CustomPaintLayer : public LayerInterface
+{
+ public:
+    CustomPaintLayer( MarbleMap *map )
+        : m_map( map )
+    {
+    }
+
+    virtual QStringList renderPosition() const { return QStringList() << "USER_TOOLS"; }
+
+    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
+                         const QString &renderPos, GeoSceneLayer *layer )
+    {
+        Q_UNUSED( viewport );
+        Q_UNUSED( renderPos );
+        Q_UNUSED( layer );
+
+        m_map->customPaint( painter );
+
+        return true;
+    }
+
+    virtual qreal zValue() const { return 1.0e6; }
+
+ private:
+    MarbleMap *const m_map;
+};
+
+
 class MarbleMapPrivate
 {
     friend class MarbleWidget;
@@ -104,6 +134,7 @@ class MarbleMapPrivate
 
     LayerManager     m_layerManager;
     MarbleSplashLayer m_marbleSplashLayer;
+    MarbleMap::CustomPaintLayer m_customPaintLayer;
     GeometryLayer           *m_geometryLayer;
     AtmosphereLayer          m_atmosphereLayer;
     FogLayer                 m_fogLayer;
@@ -125,6 +156,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_mapTheme( 0 ),
           m_texcolorizer( 0 ),
           m_layerManager( model, parent ),
+          m_customPaintLayer( parent ),
           m_vectorMapBaseLayer( &m_veccomposer ),
           m_vectorMapLayer( &m_veccomposer ),
           m_textureLayer( model->mapThemeManager(), model->downloadManager(), model->sunLocator() ),
@@ -138,6 +170,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
     m_layerManager.addLayer( &m_placemarkLayout );
     m_layerManager.addLayer( &m_fogLayer );
     m_layerManager.addLayer( &m_measureTool );
+    m_layerManager.addLayer( &m_customPaintLayer );
 }
 
 void MarbleMapPrivate::construct()
@@ -256,6 +289,7 @@ MarbleMap::~MarbleMap()
 {
     MarbleModel *model = d->m_modelIsOwned ? d->m_model : 0;
 
+    d->m_layerManager.removeLayer( &d->m_customPaintLayer );
     d->m_layerManager.removeLayer( &d->m_measureTool );
     d->m_layerManager.removeLayer( &d->m_fogLayer );
     d->m_layerManager.removeLayer( &d->m_placemarkLayout );
@@ -720,8 +754,6 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
 
     d->m_layerManager.renderLayers( &painter, d->m_viewParams.viewport() );
 
-    customPaint( &painter );
-
     if ( d->m_showFrameRate ) {
         FpsLayer fpsLayer( &t );
         fpsLayer.render( &painter, d->m_viewParams.viewport() );
@@ -734,10 +766,6 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
 void MarbleMap::customPaint( GeoPainter *painter )
 {
     Q_UNUSED( painter );
-
-    if ( !d->m_mapTheme ) {
-        return;
-    }
 }
 
 QString MarbleMap::mapThemeId() const

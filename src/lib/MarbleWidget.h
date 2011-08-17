@@ -1050,6 +1050,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
  private:
     Q_DISABLE_COPY( MarbleWidget )
     MarbleWidgetPrivate  * const d;
+    friend class MarbleWidgetPrivate;
+
+    class CustomPaintLayer;
+    friend class CustomPaintLayer;
 
     friend class DownloadRegionDialog;
     TextureLayer *textureLayer();
