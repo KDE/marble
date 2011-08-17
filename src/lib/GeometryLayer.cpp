@@ -128,61 +128,61 @@ void GeometryLayer::initializeDefaultValues()
     s_defaultZValues[GeoDataFeature::RailwayRail]         = s_defaultZValue - 1;
     
     
-    s_defaultMinZoomLevels[GeoDataFeature::Building]            = 14;
+    s_defaultMinZoomLevels[GeoDataFeature::Building]            = 15;
 
         // OpenStreetMap highways
-    s_defaultMinZoomLevels[GeoDataFeature::HighwaySteps]        = 14;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayUnknown]      = 12;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayPath]         = 12;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayTrack]        = 12;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayPedestrian]   = 13;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayService]      = 13;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayRoad]         = 12;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayTertiaryLink] = 9;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayTertiary]     = 9;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwaySecondaryLink]= 8;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwaySecondary]    = 8;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimaryLink]  = 7;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimary]      = 7; 
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayTrunkLink]    = 6;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayTrunk]        = 6;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorwayLink] = 5;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorway]     = 5;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwaySteps]        = 15;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayUnknown]      = 13;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayPath]         = 13;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayTrack]        = 13;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayPedestrian]   = 14;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayService]      = 14;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayRoad]         = 13;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayTertiaryLink] = 10;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayTertiary]     = 10;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwaySecondaryLink]= 9;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwaySecondary]    = 9;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimaryLink]  = 8;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimary]      = 8; 
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayTrunkLink]    = 7;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayTrunk]        = 7;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorwayLink] = 6;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorway]     = 6;
         
     //FIXME: Bad, better to expand this
     for(int i = GeoDataFeature::AccomodationCamping; i <= GeoDataFeature::ReligionSikh; i++)
-        s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorway] = 14;
+        s_defaultMinZoomLevels[i] = 15;
 
-    s_defaultMinZoomLevels[GeoDataFeature::LeisurePark]         = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseAllotments]   = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseBasin]        = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseCemetery]     = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseCommercial]   = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseConstruction] = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseFarmland]     = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseFarmyard]     = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseGarages]      = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseGrass]        = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseIndustrial]   = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseLandfill]     = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseMeadow]       = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseMilitary]     = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseQuarry]       = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseRailway]      = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseReservoir]    = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseResidential]  = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::LanduseRetail]       = 10;
+    s_defaultMinZoomLevels[GeoDataFeature::LeisurePark]         = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseAllotments]   = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseBasin]        = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseCemetery]     = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseCommercial]   = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseConstruction] = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseFarmland]     = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseFarmyard]     = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseGarages]      = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseGrass]        = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseIndustrial]   = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseLandfill]     = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseMeadow]       = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseMilitary]     = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseQuarry]       = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseRailway]      = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseReservoir]    = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseResidential]  = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseRetail]       = 11;
 
-    s_defaultMinZoomLevels[GeoDataFeature::RailwayRail]         = 5;
-    s_defaultMinZoomLevels[GeoDataFeature::RailwayTram]         = 12;
-    s_defaultMinZoomLevels[GeoDataFeature::RailwayLightRail]    = 11;
-    s_defaultMinZoomLevels[GeoDataFeature::RailwayAbandoned]    = 9;
-    s_defaultMinZoomLevels[GeoDataFeature::RailwaySubway]       = 12;
-    s_defaultMinZoomLevels[GeoDataFeature::RailwayPreserved]    = 12;
-    s_defaultMinZoomLevels[GeoDataFeature::RailwayMiniature]    = 12;
-    s_defaultMinZoomLevels[GeoDataFeature::RailwayConstruction] = 9;
-    s_defaultMinZoomLevels[GeoDataFeature::RailwayMonorail]     = 11;
-    s_defaultMinZoomLevels[GeoDataFeature::RailwayFunicular]    = 12;
+    s_defaultMinZoomLevels[GeoDataFeature::RailwayRail]         = 6;
+    s_defaultMinZoomLevels[GeoDataFeature::RailwayTram]         = 13;
+    s_defaultMinZoomLevels[GeoDataFeature::RailwayLightRail]    = 12;
+    s_defaultMinZoomLevels[GeoDataFeature::RailwayAbandoned]    = 10;
+    s_defaultMinZoomLevels[GeoDataFeature::RailwaySubway]       = 13;
+    s_defaultMinZoomLevels[GeoDataFeature::RailwayPreserved]    = 13;
+    s_defaultMinZoomLevels[GeoDataFeature::RailwayMiniature]    = 13;
+    s_defaultMinZoomLevels[GeoDataFeature::RailwayConstruction] = 10;
+    s_defaultMinZoomLevels[GeoDataFeature::RailwayMonorail]     = 12;
+    s_defaultMinZoomLevels[GeoDataFeature::RailwayFunicular]    = 13;
 
     s_defaultValuesInitialized = true;
 }
