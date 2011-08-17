@@ -9,6 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 // Copyright 2008, 2009, 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 // Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
+// Copyright 2010,2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "AtmosphereLayer.h"
@@ -21,7 +22,7 @@ namespace Marble
 
 QStringList AtmosphereLayer::renderPosition() const
 {
-    return QStringList() << "BEHIND_TARGET";
+    return QStringList() << "SURFACE";
 }
 
 bool AtmosphereLayer::render( GeoPainter *painter,
@@ -66,6 +67,11 @@ bool AtmosphereLayer::render( GeoPainter *painter,
                           (int) ( 2.1 * (qreal) ( viewParams->radius()) ) );
 
     return true;
+}
+
+qreal AtmosphereLayer::zValue() const
+{
+    return -1.0;
 }
 
 }
