@@ -293,6 +293,7 @@ MarbleMap::~MarbleMap()
     d->m_layerManager.removeLayer( &d->m_fogLayer );
     d->m_layerManager.removeLayer( &d->m_placemarkLayout );
     d->m_layerManager.removeLayer( &d->m_textureLayer );
+    d->m_layerManager.removeLayer( &d->m_atmosphereLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
     delete d;
@@ -755,10 +756,6 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
         d->m_layerManager.renderLayers( &painter, d->m_viewParams.viewport(), renderPositions );
     }
 
-    if ( d->m_viewParams.showAtmosphere() ) {
-        d->m_atmosphereLayer.render( &painter, d->m_viewParams.viewport() );
-    }
-
     renderPositions.clear();
     renderPositions << "SURFACE" << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
@@ -1046,6 +1043,11 @@ void MarbleMap::setShowCompass( bool visible )
 
 void MarbleMap::setShowAtmosphere( bool visible )
 {
+    d->m_layerManager.removeLayer( &d->m_atmosphereLayer );
+    if ( visible ) {
+        d->m_layerManager.addLayer( &d->m_atmosphereLayer );
+    }
+
     d->m_viewParams.setShowAtmosphere( visible );
 }
 
