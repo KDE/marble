@@ -19,9 +19,7 @@
 namespace Marble
 {
 
-class HttpDownloadManager;
-
-class GeoDataCoordinates;
+class PluginAboutDialog;
 
 /**
  * @brief This plugin displays satellites and their orbits.
@@ -45,11 +43,14 @@ public:
     QString description() const;
     QIcon icon() const;
 
+    QDialog *aboutDialog();
+
     void initialize();
     bool isInitialized() const;
 
 private:
     bool m_isInitialized;
+    PluginAboutDialog *m_aboutDialog;
 };
 
 }

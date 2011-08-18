@@ -10,9 +10,7 @@
 
 #include "SatellitesPlugin.h"
 
-#include "MarbleDebug.h"
-#include "MarbleDirs.h"
-#include "MarbleModel.h"
+#include "PluginAboutDialog.h"
 
 #include "SatellitesModel.h"
 
@@ -23,6 +21,7 @@ namespace Marble
 
 SatellitesPlugin::SatellitesPlugin()
     : AbstractDataPlugin(),
+     m_aboutDialog(0),
      m_isInitialized(false)
 {
 }
@@ -65,6 +64,26 @@ QString SatellitesPlugin::description() const
 QIcon SatellitesPlugin::icon() const
 {
     return QIcon();
+}
+
+QDialog *SatellitesPlugin::aboutDialog()
+{
+    if ( !m_aboutDialog ) {
+        m_aboutDialog = new PluginAboutDialog();
+        m_aboutDialog->setName( "Satellites Plugin" );
+        m_aboutDialog->setVersion( "0.1" );
+        m_aboutDialog->setAboutText( tr( "<br />(c) 2011 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
+        QList<Author> authors;
+        Author gmartres;
+        gmartres.name = "Guillaume Martres";
+        gmartres.task = tr( "Developer" );
+        gmartres.email = "smarter@ubuntu.com";
+        authors.append( gmartres );
+        m_aboutDialog->setAuthors( authors );
+        m_aboutDialog->setDataText( tr( "Satellites orbital elements from <a href=\"http://www.celestrak.com\">http://www.celestrak.com</a>" ) );
+        m_aboutDialog->setPixmap( icon().pixmap( 62, 53 ) );
+    }
+    return m_aboutDialog;
 }
 
 void SatellitesPlugin::initialize()
