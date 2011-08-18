@@ -106,7 +106,7 @@ void SatellitesItem::paint( GeoPainter *painter, ViewportParams *viewport, const
     painter->setBrush( oxygenSkyBlue4 );
     painter->drawRect( 0, 0, 15, 15 );
 
-    painter->setPen( Qt::black );
+    painter->setPen( Qt::white );
     painter->drawText( 0, 0, id() );
 
     painter->restore();
