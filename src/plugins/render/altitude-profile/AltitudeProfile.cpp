@@ -23,6 +23,7 @@
 #include <MarbleModel.h>
 #include <GeoDataParser.h>
 #include <QFile>
+#include <GeoDataPlacemark.h>
 
 #include "MarbleGraphicsGridLayout.h"
 #include "WidgetGraphicsItem.h"
