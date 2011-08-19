@@ -206,9 +206,13 @@ bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )
 
 void NavigationFloatItem::setZoomSliderValue( int level )
 {
-    if( !( m_profiles & MarbleGlobal::SmallScreen ) ) {
-        m_navigationWidget->zoomSlider->setValue( level );
-    }
+    if( ( m_profiles & MarbleGlobal::SmallScreen ) )
+        return;
+
+    if ( m_navigationWidget->zoomSlider->isSliderDown() )
+        return;
+
+    m_navigationWidget->zoomSlider->setValue( level );
 }
 
 void NavigationFloatItem::setMarbleZoomValue( int level )
