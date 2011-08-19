@@ -20,7 +20,7 @@
 ;    3. This notice may not be removed or altered from any source distribution.
 
 !ifndef setup
-!define setup "marble-setup-1.2rc2.exe"
+!define setup "marble-setup-1.2.0.exe"
 !endif
  
 ; change this to wherever the files to be packaged reside
