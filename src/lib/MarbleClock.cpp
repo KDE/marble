@@ -19,6 +19,7 @@ using namespace Marble;
 MarbleClock::MarbleClock()
     : QObject(),
       m_speed( 1 ),
+      m_datetime( QDateTime::currentDateTime().toUTC() ),
       m_lastmin( -1 ),
       m_timezoneInSec( 0 )
 {

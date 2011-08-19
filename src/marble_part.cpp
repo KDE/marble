@@ -521,8 +521,7 @@ void MarblePart::readSettings()
     // Time
     if( MarbleSettings::systemTime() == true  )
     {
-        m_controlView->marbleModel()->setClockDateTime( QDateTime::currentDateTime().toUTC() );
-        m_controlView->marbleModel()->setClockSpeed( 1 );
+        /* nothing to do */
     }
     else if( MarbleSettings::lastSessionTime() == true )
     {

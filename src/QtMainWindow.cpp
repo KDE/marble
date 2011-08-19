@@ -958,8 +958,7 @@ void MainWindow::readSettings()
      settings.beginGroup( "Time" );
         if( settings.value( "systemTime", "true" ).toBool() == true  )
         {
-            m_controlView->marbleModel()->setClockDateTime( QDateTime::currentDateTime().toUTC() );
-            m_controlView->marbleModel()->setClockSpeed( 1 );
+            /* nothing to do */
         }
         else if( settings.value( "lastSessionTime", "true" ).toBool() == true )
         {
