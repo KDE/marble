@@ -133,6 +133,9 @@ bool NavigationFloatItem::isInitialized() const
 void NavigationFloatItem::changeViewport( ViewportParams *viewport )
 {
     if ( viewport->radius() != m_oldViewportRadius ) {
+        const qreal zoomValue = (200.0 * log( viewport->radius() ) ); // copied from MarbleWidgetPrivate::zoom()
+        setZoomSliderValue( zoomValue );
+
         m_oldViewportRadius = viewport->radius();
         // The slider depends on the map state (zoom factor)
         update();
