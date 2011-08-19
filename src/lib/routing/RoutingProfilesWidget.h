@@ -28,7 +28,6 @@ namespace Marble
 class RoutingProfilesModel;
 class RunnerPlugin;
 class MarbleWidget;
-class RoutingProfileSettingsDialog;
 
 class MARBLE_EXPORT RoutingProfilesWidget : public QWidget
 {
@@ -51,7 +50,7 @@ class MARBLE_EXPORT RoutingProfilesWidget : public QWidget
     Ui_RoutingSettingsWidget *m_ui;
     RoutingProfilesModel *m_profilesModel;
 
-    RoutingProfileSettingsDialog *m_profileDialog;
+    void *const dummy;
 };
 
 }
