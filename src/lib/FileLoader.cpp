@@ -338,7 +338,6 @@ void FileLoaderPrivate::loadOsmFile( const QString& fileName )
 
     m_document = static_cast<GeoDataDocument*>( document );
     m_document->setFileName( m_filepath );
-    //setupStyle( m_document, m_document );
     
     osm::OsmNodeFactory::cleanUp();
     osm::OsmGlobals::cleanUpDummyPlacemarks();

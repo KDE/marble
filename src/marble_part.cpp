@@ -214,7 +214,7 @@ bool MarblePart::openUrl( const KUrl &url )
 bool MarblePart::openFile()
 {
     QStringList fileNames = KFileDialog::getOpenFileNames( KUrl(),
-                                    i18n("*.gpx *.kml|All Supported Files\n*.gpx|GPS Data\n*.kml|Google Earth KML"),
+                                    i18n("*.gpx *.kml *.osm|All Supported Files\n*.gpx|GPS Data\n*.kml|Google Earth KML\n*.osm|OpenStreetMap data"),
                                             widget(), i18n("Open File")
                                            );
     foreach( const QString &fileName, fileNames ) {

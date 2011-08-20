@@ -19,7 +19,6 @@ QMap<quint64, GeoDataPoint *> OsmNodeFactory::m_points;
 
 void OsmNodeFactory::appendPoint( quint64 id, GeoDataPoint* p )
 {
-    //FIXME: fix possible memory leaks.
     m_points[id] = p;
 }
 
