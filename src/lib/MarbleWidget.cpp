@@ -906,8 +906,6 @@ void MarbleWidget::setMapThemeId( const QString& mapThemeId )
         qreal  lon = sunLocator->getLon();
         qreal  lat = sunLocator->getLat();
         centerOn( lon, lat );
-
-        setInputEnabled( false );
     }
 
     update();
