@@ -199,13 +199,19 @@ void MarbleMapPrivate::construct()
     QObject::connect ( &m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        m_parent,        SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
 
-    m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
-                       m_parent,              SLOT( centerOn( qreal, qreal ) ) );
-
     m_parent->connect( &m_textureLayer, SIGNAL( tileLevelChanged( int ) ),
                        m_parent, SIGNAL( tileLevelChanged( int ) ) );
     m_parent->connect( &m_textureLayer, SIGNAL( repaintNeeded( QRegion ) ),
                        m_parent, SIGNAL( repaintNeeded( QRegion ) ) );
+
+    QList<RenderPlugin *> pluginList = m_layerManager.renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
+        if ( (*i)->nameId() == "sun" ) {
+            (*i)->setVisible( false );
+        }
+    }
 }
 
 void MarbleMapPrivate::updateProperty( const QString &name, bool show )
@@ -572,7 +578,18 @@ bool MarbleMap::showCityLights() const
 
 bool MarbleMap::showSunInZenith() const
 {
-    return d->m_model->sunLocator()->getCentered();
+    bool visible = false;
+
+    QList<RenderPlugin *> pluginList = renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
+        if ( (*i)->nameId() == "sun" ) {
+            visible = (*i)->visible();
+        }
+    }
+
+    return visible;
 }
 
 bool MarbleMap::showAtmosphere() const
@@ -1059,7 +1076,26 @@ void MarbleMap::setShowCityLights( bool visible )
 
 void MarbleMap::setShowSunInZenith( bool visible )
 {
-    d->m_model->sunLocator()->setCentered( visible );
+    disconnect( d->m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
+                this,                     SLOT( centerOn( qreal, qreal ) ) );
+
+    QList<RenderPlugin *> pluginList = renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
+        if ( (*i)->nameId() == "sun" ) {
+            (*i)->setVisible( visible );
+        }
+    }
+
+    if ( showSunInZenith() ) {
+        connect( d->m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
+                 this,                     SLOT( centerOn( qreal, qreal ) ) );
+
+        centerOn( d->m_model->sunLocator()->getLon(), d->m_model->sunLocator()->getLat() );
+    } else if ( visible ) {
+        mDebug() << "Ignoring centering on sun, since the sun plugin is not loaded.";
+    }
 }
 
 void MarbleMap::setShowTileId( bool visible )

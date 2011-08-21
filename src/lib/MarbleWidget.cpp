@@ -243,9 +243,6 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SLOT( creatingTilesStart( TileCreator*, const QString&,
                                                            const QString& ) ) );
 
-    m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
-                       m_widget, SLOT( centerOn( qreal, qreal ) ) );
-
     // Repaint timer
     m_repaintTimer.setSingleShot( true );
     m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
@@ -957,9 +954,17 @@ void MarbleWidget::setShowCityLights( bool visible )
 
 void MarbleWidget::setShowSunInZenith( bool visible )
 {
+    disconnect( d->m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
+                this,                     SLOT( centerOn( qreal, qreal ) ) );
+
     if ( d->m_map->showSunInZenith() != visible ) { // Toggling input modifies event filters, so avoid that if not needed
         d->m_map->setShowSunInZenith( visible );
         setInputEnabled( !d->m_map->showSunInZenith() );
+    }
+
+    if ( d->m_map->showSunInZenith() ) {
+        connect( d->m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
+                 this,                     SLOT( centerOn( qreal, qreal ) ) );
     }
 }
 

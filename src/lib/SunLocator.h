@@ -42,10 +42,8 @@ class MARBLE_EXPORT SunLocator : public QObject
     void  shadePixel(QRgb& pixcol, qreal shade) const;
     void  shadePixelComposite(QRgb& pixcol, const QRgb& dpixcol, qreal shade) const;
 
-    void  setCentered(bool show);
     void  setPlanet( const Planet *planet );
 
-    bool getCentered() const;
     qreal getLon() const;
     qreal getLat() const;
 

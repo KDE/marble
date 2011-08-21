@@ -84,7 +84,7 @@ bool SunPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    if( marbleModel()->sunLocator()->getCentered() == true )
+    if( visible() )
     {
         const qreal lon = marbleModel()->sunLocator()->getLon();
         const qreal lat = marbleModel()->sunLocator()->getLat();
