@@ -42,7 +42,7 @@
 using namespace Marble;
 
 MergedLayerDecorator::MergedLayerDecorator( TileLoader * const tileLoader,
-                                            SunLocator* sunLocator )
+                                            const SunLocator* sunLocator )
     : m_tileLoader( tileLoader ),
       m_sunLocator( sunLocator ),
       m_themeId(),

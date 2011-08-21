@@ -35,7 +35,7 @@ class TileLoader;
 class MergedLayerDecorator
 {
  public:
-    MergedLayerDecorator( TileLoader * const tileLoader, SunLocator* sunLocator );
+    MergedLayerDecorator( TileLoader * const tileLoader, const SunLocator* sunLocator );
     virtual ~MergedLayerDecorator();
 
     QImage merge( const TileId id, const QVector<QSharedPointer<TextureTile> > &tiles );
@@ -61,7 +61,7 @@ class MergedLayerDecorator
  protected:
     Q_DISABLE_COPY( MergedLayerDecorator )
     TileLoader * const m_tileLoader;
-    SunLocator* m_sunLocator;
+    const SunLocator* m_sunLocator;
     QString m_themeId;
     int m_levelZeroColumns;
     int m_levelZeroRows;

@@ -38,7 +38,7 @@ namespace Marble
 class TextureLayer::Private
 {
 public:
-    Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator, TextureLayer *parent );
+    Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator, TextureLayer *parent );
 
     void mapChanged();
     void updateTextureLayers();
@@ -46,7 +46,7 @@ public:
 
 public:
     TextureLayer  *const m_parent;
-    SunLocator *const m_sunLocator;
+    const SunLocator *const m_sunLocator;
     TileLoader m_loader;
     StackedTileLoader    m_tileLoader;
     QCache<TileId, QPixmap> m_pixmapCache;
@@ -56,7 +56,7 @@ public:
     GeoSceneGroup *m_textureLayerSettings;
 };
 
-TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator, TextureLayer *parent )
+TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator, TextureLayer *parent )
     : m_parent( parent )
     , m_sunLocator( sunLocator )
     , m_loader( downloadManager, mapThemeManager )
@@ -108,7 +108,7 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
 
 
 
-TextureLayer::TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator )
+TextureLayer::TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator )
     : QObject()
     , d( new Private( mapThemeManager, downloadManager, sunLocator, this ) )
 {

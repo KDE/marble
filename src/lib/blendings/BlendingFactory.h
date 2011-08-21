@@ -28,7 +28,7 @@ class SunLocator;
 class BlendingFactory
 {
  public:
-    BlendingFactory( SunLocator *sunLocator );
+    BlendingFactory( const SunLocator *sunLocator );
     ~BlendingFactory();
 
     void setLevelZeroLayout( int levelZeroColumns, int levelZeroRows );

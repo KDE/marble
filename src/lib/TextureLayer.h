@@ -39,7 +39,7 @@ class TextureLayer : public QObject, public LayerInterface
     Q_OBJECT
 
  public:
-    TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator );
+    TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator );
     ~TextureLayer();
 
     QStringList renderPosition() const;

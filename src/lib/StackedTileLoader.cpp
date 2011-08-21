@@ -47,7 +47,7 @@ class StackedTileLoaderPrivate
 {
 public:
     StackedTileLoaderPrivate( TileLoader *tileLoader,
-                              SunLocator * const sunLocator )
+                              const SunLocator * const sunLocator )
         : m_tileLoader( tileLoader ),
           m_blendingFactory( sunLocator ),
           m_layerDecorator( m_tileLoader, sunLocator ),
@@ -71,7 +71,7 @@ public:
 };
 
 StackedTileLoader::StackedTileLoader( TileLoader *tileLoader,
-                                      SunLocator * const sunLocator )
+                                      const SunLocator * const sunLocator )
     : d( new StackedTileLoaderPrivate( tileLoader, sunLocator ) )
 {
 }

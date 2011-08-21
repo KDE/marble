@@ -69,7 +69,7 @@ class StackedTileLoader : public QObject
          *                        the tiles from a remote resource.
          */
         StackedTileLoader( TileLoader *tileLoader,
-                           SunLocator * const sunLocator );
+                           const SunLocator * const sunLocator );
         virtual ~StackedTileLoader();
 
         void setTextureLayers( QVector<GeoSceneTexture const *> & );

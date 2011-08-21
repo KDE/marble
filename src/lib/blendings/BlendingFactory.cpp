@@ -35,7 +35,7 @@ Blending const * BlendingFactory::findBlending( QString const & name ) const
     return result;
 }
 
-BlendingFactory::BlendingFactory( SunLocator *sunLocator )
+BlendingFactory::BlendingFactory( const SunLocator *sunLocator )
     : m_sunLightBlending( new SunLightBlending( sunLocator ) )
 {
     // Neutral blendings
