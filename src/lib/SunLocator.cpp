@@ -51,7 +51,7 @@ const int update_interval = 60000;
 class SunLocatorPrivate
 {
 public:
-    SunLocatorPrivate( const MarbleClock *clock, Planet *planet )
+    SunLocatorPrivate( const MarbleClock *clock, const Planet *planet )
         : m_lon( 0.0 ),
           m_lat( 0.0 ),
           m_clock( clock ),
@@ -65,11 +65,11 @@ public:
 
     const MarbleClock *const m_clock;
     bool m_centered;
-    Planet* m_planet;
+    const Planet *m_planet;
 };
 
 
-SunLocator::SunLocator( const MarbleClock *clock, Planet *planet )
+SunLocator::SunLocator( const MarbleClock *clock, const Planet *planet )
   : QObject(),
     d( new SunLocatorPrivate( clock, planet ))
 {
@@ -256,7 +256,7 @@ void SunLocator::setCentered(bool centered)
     }
 }
 
-void SunLocator::setPlanet(Planet *planet)
+void SunLocator::setPlanet( const Planet *planet )
 {
     /*
     // This won't work as expected if the same pointer 
@@ -266,7 +266,7 @@ void SunLocator::setPlanet(Planet *planet)
     }
     */
 
-    Planet* previousPlanet = d->m_planet;
+    const Planet *previousPlanet = d->m_planet;
 
     mDebug() << "SunLocator::setPlanet(Planet*)";
     d->m_planet = planet;
@@ -293,11 +293,6 @@ qreal SunLocator::getLon() const
 qreal SunLocator::getLat() const
 {
     return d->m_lat * RAD2DEG;
-}
-
-Planet* SunLocator::planet() const
-{
-    return d->m_planet;
 }
 
 }

@@ -35,7 +35,7 @@ class MARBLE_EXPORT SunLocator : public QObject
     Q_OBJECT
 
  public:
-    SunLocator( const MarbleClock *clock, Planet *planet );
+    SunLocator( const MarbleClock *clock, const Planet *planet );
     virtual ~SunLocator();
 
     qreal shading(qreal lon, qreal a, qreal c) const;
@@ -43,13 +43,11 @@ class MARBLE_EXPORT SunLocator : public QObject
     void  shadePixelComposite(QRgb& pixcol, const QRgb& dpixcol, qreal shade) const;
 
     void  setCentered(bool show);
-    void  setPlanet(Planet *planet);
+    void  setPlanet( const Planet *planet );
 
     bool getCentered() const;
     qreal getLon() const;
     qreal getLat() const;
-
-    Planet* planet() const;
 
  public Q_SLOTS:
     void update();
