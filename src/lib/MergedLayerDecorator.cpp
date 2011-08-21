@@ -103,7 +103,6 @@ void MergedLayerDecorator::setThemeId( const QString &themeId )
 void MergedLayerDecorator::setShowSunShading( bool show )
 {
     m_showSunShading = show;
-    m_sunLocator->update();
 }
 
 void MergedLayerDecorator::setLevelZeroLayout( int levelZeroColumns, int levelZeroRows )

@@ -1049,14 +1049,12 @@ void MarbleMap::setShowClouds( bool visible )
 void MarbleMap::setShowSunShading( bool visible )
 {
     d->m_textureLayer.setShowSunShading( visible );
-    d->m_model->sunLocator()->update();
 }
 
 void MarbleMap::setShowCityLights( bool visible )
 {
     d->m_textureLayer.setShowCityLights( visible );
     setPropertyValue( "citylights", visible );
-    d->m_model->sunLocator()->update();
 }
 
 void MarbleMap::setShowSunInZenith( bool visible )

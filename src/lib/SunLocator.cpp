@@ -251,7 +251,6 @@ void SunLocator::setCentered(bool centered)
     mDebug() << "sunLocator =" << this;
     d->m_centered = centered;
     if ( d->m_centered ) {
-        updatePosition();
         emit centerSun( getLon(), getLat() );
     }
 }

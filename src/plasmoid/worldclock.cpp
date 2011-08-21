@@ -101,8 +101,6 @@ void WorldClock::init()
     m_map->setShowCityLights(true);
     m_map->setShowSunInZenith(cg.readEntry("centersun", false ));
 
-    m_map->model()->sunLocator()->update();
-
     m_customTz = cg.readEntry("customtz", false );
     m_locationkey = KSystemTimeZones::local().name();
     if(m_customTz) {
@@ -203,7 +201,6 @@ void WorldClock::dataUpdated(const QString &source,
     m_time = KSystemTimeZones::local().convert(m_locations.value(m_locationkey),
                                                m_localtime );
     //kDebug() << "Adjusted Time = " << m_time;
-    m_map->model()->sunLocator()->update();
     update();
 }
 
