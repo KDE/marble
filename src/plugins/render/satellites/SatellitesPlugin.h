@@ -16,6 +16,13 @@
 #include "AbstractDataPlugin.h"
 #include "sgp4/sgp4unit.h"
 
+class QCheckBox;
+
+namespace Ui
+{
+    class SatellitesConfigDialog;
+}
+
 namespace Marble
 {
 
@@ -39,18 +46,32 @@ public:
     QStringList renderPosition() const;
     QString name() const;
     QString guiString() const;
-    QString nameId() const;
     QString description() const;
     QIcon icon() const;
-
-    QDialog *aboutDialog();
-
     void initialize();
     bool isInitialized() const;
 
+    QHash<QString, QVariant> settings() const;
+    void setSettings( QHash<QString, QVariant> settings );
+
+    QDialog *aboutDialog();
+    QDialog *configDialog();
+
+private Q_SLOTS:
+    void readSettings();
+    void writeSettings();
+    void updateSettings();
+
 private:
     bool m_isInitialized;
+    QHash<QString, QVariant> m_settings;
+    QHash<QString, QCheckBox *> m_boxHash;
+
     PluginAboutDialog *m_aboutDialog;
+    QDialog *m_configDialog;
+    Ui::SatellitesConfigDialog *ui_configWidget;
+
+    void populateBoxHash();
 };
 
 }

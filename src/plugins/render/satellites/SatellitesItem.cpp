@@ -69,7 +69,6 @@ void SatellitesItem::paintViewport( GeoPainter *painter, ViewportParams *viewpor
     int endTime = startTime + orbitalPeriod() / 60 + 1;
     for ( int i = startTime; i < endTime; i++ ) {
         sgp4( wgs84, m_satrec, i, r, v );
-        mDebug() << i;
         orbit << fromCartesian( r[0], r[1], r[2] );
     }
 
@@ -86,11 +85,8 @@ void SatellitesItem::paint( GeoPainter *painter, ViewportParams *viewport, const
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
 
-    mDebug() << "Painting " << id() << orbitalPeriod();
     double r[3], v[3];
     sgp4( wgs84, m_satrec, timeSinceEpoch(), r, v );
-    //mDebug() << "pos: " << r[0] << " " << r[1] << " " << r[2];
-    //mDebug() << "speed: " << v[0] << " " << v[1] << " " << v[2];
 
     //FIXME: this should be done in a function that is guaranteed to be called regularly
     setCoordinate( fromCartesian( r[0], r[1], r[2] ) );

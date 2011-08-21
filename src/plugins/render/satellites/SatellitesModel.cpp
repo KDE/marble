@@ -18,20 +18,31 @@
 
 #include "SatellitesItem.h"
 
+#include <QtCore/QStringList>
 #include <QtCore/QUrl>
 
 using namespace Marble;
 
 SatellitesModel::SatellitesModel( Marble::PluginManager* pluginManager, QObject* parent )
-    : AbstractDataPluginModel( "wikipedia", pluginManager, parent )
+    : AbstractDataPluginModel( "satellites", pluginManager, parent )
 {
-    downloadDescriptionFile( QUrl("http://www.celestrak.com/NORAD/elements/visual.txt") );
 }
 
 void SatellitesModel::getAdditionalItems( const Marble::GeoDataLatLonAltBox& box, const Marble::MarbleModel* model, qint32 number )
 {
+    // Nothing to do, the datasets are world wide
     return;
 }
+
+void SatellitesModel::refreshItems(const QStringList &tleList)
+{
+    clear();
+
+    foreach ( const QString &tle, tleList ) {
+        downloadDescriptionFile( QUrl( "http://www.celestrak.com/NORAD/elements/" + tle ) );
+    }
+}
+
 
 void SatellitesModel::parseFile( const QByteArray &file )
 {

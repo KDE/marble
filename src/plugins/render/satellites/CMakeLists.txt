@@ -7,13 +7,16 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( satellites_SRCS
- SatellitesPlugin.cpp
- SatellitesModel.cpp
- SatellitesItem.cpp )
 set( sgp4_SRCS
   sgp4/sgp4ext.cpp
   sgp4/sgp4unit.cpp
   sgp4/sgp4io.cpp )
+
+set( satellites_SRCS
+ SatellitesPlugin.cpp
+ SatellitesModel.cpp
+ SatellitesItem.cpp )
+
+qt4_wrap_ui( satellites_SRCS SatellitesConfigDialog.ui )
 
 marble_add_plugin( SatellitesPlugin ${satellites_SRCS} ${sgp4_SRCS} )
