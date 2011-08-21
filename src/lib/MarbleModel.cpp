@@ -429,10 +429,13 @@ QString MarbleModel::planetId() const
     return d->m_planet->id();
 }
 
-MarbleClock* MarbleModel::clock() const
+MarbleClock *MarbleModel::clock()
 {
-//    mDebug() << "In dateTime, model:" << this;
-//    mDebug() << d << ":" << d->m_clock;
+    return d->m_clock;
+}
+
+const MarbleClock *MarbleModel::clock() const
+{
     return d->m_clock;
 }
 
@@ -511,7 +514,7 @@ PluginManager* MarbleModel::pluginManager() const
     return d->m_pluginManager;
 }
 
-Planet* MarbleModel::planet() const
+const Planet *MarbleModel::planet() const
 {
     return d->m_planet;
 }
