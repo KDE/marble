@@ -64,9 +64,9 @@ void SatellitesItem::paintViewport( GeoPainter *painter, ViewportParams *viewpor
     painter->save();
 
     double r[3], v[3];
-    GeoDataLinearRing orbit;
+    GeoDataLineString orbit;
     int startTime = timeSinceEpoch();
-    int endTime = startTime + orbitalPeriod() / 60 + 1;
+    int endTime = startTime + orbitalPeriod() / 60 + 5;
     for ( int i = startTime; i < endTime; i++ ) {
         sgp4( wgs84, m_satrec, i, r, v );
         orbit << fromCartesian( r[0], r[1], r[2] );
@@ -74,7 +74,7 @@ void SatellitesItem::paintViewport( GeoPainter *painter, ViewportParams *viewpor
 
     painter->setPen( oxygenBrickRed4 );
     painter->setBrush( Qt::NoBrush );
-    painter->drawPolygon( orbit );
+    painter->drawPolyline( orbit );
 
     painter->restore();
 }
