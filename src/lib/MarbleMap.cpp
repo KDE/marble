@@ -986,16 +986,6 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 
     d->m_model->setMapTheme( mapTheme );
 
-    SunLocator  *sunLocator = d->m_model->sunLocator();
-
-    if ( sunLocator && sunLocator->getCentered() ) {
-        qreal  lon = sunLocator->getLon();
-        qreal  lat = sunLocator->getLat();
-        centerOn( lon, lat );
-
-        mDebug() << "Centering on Sun at " << lat << lon;
-    }
-
     d->m_layerManager.syncViewParamsAndPlugins( mapTheme );
 }
 

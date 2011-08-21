@@ -900,14 +900,6 @@ void MarbleWidget::setMapThemeId( const QString& mapThemeId )
     setAttribute( Qt::WA_NoSystemBackground,
                   false );
 
-    SunLocator  *sunLocator = d->m_model->sunLocator();
-
-    if ( sunLocator && sunLocator->getCentered() ) {
-        qreal  lon = sunLocator->getLon();
-        qreal  lat = sunLocator->getLat();
-        centerOn( lon, lat );
-    }
-
     update();
 }
 
