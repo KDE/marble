@@ -22,7 +22,6 @@ Page {
     id: searchActivityPage
     tools: ToolBarLayout {
         ToolIcon { iconId: "toolbar-back"; onClicked: { pageStack.pop() } }
-        ToolIcon { iconId: "toolbar-view-menu"; }
     }
 
     SearchBar {
