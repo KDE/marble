@@ -235,10 +235,7 @@ void SunLocator::update()
 
     if ( d->m_centered ) {
         emit centerSun( getLon(), getLat() );
-        return;
     }
-
-    emit updateStars();
 }
 
 void SunLocator::setCentered(bool centered)
