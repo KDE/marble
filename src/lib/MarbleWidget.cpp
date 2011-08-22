@@ -34,7 +34,6 @@
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataPlacemark.h"
 #include "GeoPainter.h"
-#include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
@@ -243,9 +242,6 @@ void MarbleWidgetPrivate::construct()
                                                             const QString& ) ),
                        m_widget, SLOT( creatingTilesStart( TileCreator*, const QString&,
                                                            const QString& ) ) );
-
-    m_widget->connect( m_model->clock(), SIGNAL( timeChanged() ),
-                       m_widget, SLOT( update() ) );
 
     m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
                        m_widget, SLOT( centerOn( qreal, qreal ) ) );

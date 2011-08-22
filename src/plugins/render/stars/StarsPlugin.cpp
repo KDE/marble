@@ -13,6 +13,9 @@
 #include <QtCore/QRectF>
 #include <QtCore/QSize>
 #include <QtCore/QDateTime>
+#include <QtGui/QRegion>
+
+#include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
@@ -24,7 +27,7 @@ namespace Marble
 {
 
 StarsPlugin::StarsPlugin()
-    : m_isInitialized( false ),
+    : m_renderStars( false ),
       m_starsLoaded( false )
 {
 }
@@ -73,12 +76,11 @@ QIcon StarsPlugin::icon () const
 
 void StarsPlugin::initialize ()
 {
-    m_isInitialized = true;
 }
 
 bool StarsPlugin::isInitialized () const
 {
-    return m_isInitialized;
+    return true;
 }
 
 void StarsPlugin::loadStars() {
@@ -155,7 +157,9 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         matrix       skyAxisMatrix;
         skyAxis.inverse().toMatrix( skyAxisMatrix );
 
-        if ( !viewport->globeCoversViewport() && viewport->projection() == Spherical )
+        const bool renderStars = !viewport->globeCoversViewport() && viewport->projection() == Spherical;
+
+        if ( renderStars )
         {
             // Delayed initialization:
             // Load the star database only if the sky is actually being painted...
@@ -214,6 +218,18 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             }
         }
 
+        if ( renderStars != m_renderStars ) {
+            if ( renderStars ) {
+                connect( marbleModel()->clock(), SIGNAL( timeChanged() ),
+                         this, SLOT( requestRepaint() ) );
+            } else {
+                disconnect( marbleModel()->clock(), SIGNAL( timeChanged() ),
+                            this, SLOT( requestRepaint() ) );
+            }
+
+            m_renderStars = renderStars;
+        }
+
         painter->restore();
 
     return true;
@@ -235,6 +251,11 @@ qreal StarsPlugin::siderealTime( const QDateTime& localDateTime )
 
     // Range (0..24) for gmst:
     return gmst - (int)( gmst / 24.0 ) * 24.0;
+}
+
+void StarsPlugin::requestRepaint()
+{
+    emit repaintNeeded( QRegion() );
 }
 
 }
