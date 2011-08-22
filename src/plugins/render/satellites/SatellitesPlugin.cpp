@@ -114,7 +114,7 @@ void SatellitesPlugin::readSettings()
     QStringList tleList = m_settings.value( "tleList" ).toStringList();
     foreach (const QString &tle, tleList) {
         mDebug() << "Checking " << tle;
-        m_boxHash[tle]->setChecked(true);
+        m_boxHash[tle]->setChecked( true );
     }
 }
 

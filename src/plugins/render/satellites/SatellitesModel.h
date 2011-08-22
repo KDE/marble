@@ -29,8 +29,8 @@ public:
     void refreshItems( const QStringList &tleList );
 
 protected:
-    void getAdditionalItems(const Marble::GeoDataLatLonAltBox& box, const Marble::MarbleModel* model, qint32 number = 10);
-    void parseFile(const QByteArray &file);
+    void getAdditionalItems( const GeoDataLatLonAltBox &box, const MarbleModel *model, qint32 number = 10) ;
+    void parseFile( const QByteArray &file );
 };
 
 }

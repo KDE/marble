@@ -20,24 +20,37 @@
 #include "sgp4/sgp4ext.h"
 
 #include <QtCore/QDateTime>
+#include <QtGui/QAction>
+#include <QtGui/QLabel>
+#include <QtGui/QVBoxLayout>
 
 #include <cmath>
+#include <QDialog>
+#include <QCheckBox>
 
 using namespace Marble;
 
 SatellitesItem::SatellitesItem( const QString &name, const elsetrec &satrec, QObject *parent )
-    : AbstractDataPluginItem( parent )
+    : AbstractDataPluginItem( parent ),
+      m_dialog( 0 )
 {
     setTarget( "earth" );
-    //setSize( QSizeF( 50, 50 ) );
+    setSize( QSizeF( 15, 15 ) );
     setId( name );
-    setToolTip( name );
-    m_satrec = satrec;
     setVisible( true );
+
+    m_satrec = satrec;
+    m_action = new QAction( id(), this );
+    connect( m_action, SIGNAL(triggered(bool)), SLOT(showInfoDialog()));
 
     double r[3], v[3];
     sgp4( wgs84, m_satrec, timeSinceEpoch(), r, v );
     setCoordinate( fromCartesian( r[0], r[1], r[2] ) );
+}
+
+SatellitesItem::~SatellitesItem()
+{
+    m_dialog->deleteLater();
 }
 
 bool SatellitesItem::initialized()
@@ -55,6 +68,33 @@ bool SatellitesItem::operator<( const Marble::AbstractDataPluginItem *other ) co
     return this->id() < other->id();
 }
 
+QAction* SatellitesItem::action()
+{
+    return m_action;
+}
+
+void SatellitesItem::showInfoDialog()
+{
+    if (m_dialog == 0) {
+        m_dialog = new QDialog();
+        m_dialog->setWindowTitle( id() );
+        QVBoxLayout *layout = new QVBoxLayout( m_dialog );
+        QLabel *label = new QLabel(
+            tr( "NORAD ID: \t\t%2\n"
+                "Perigee: \t\t%3 km\n"
+                "Apogee: \t\t%4 km\n"
+                "Inclination: \t\t%5 degrees\n"
+                "Period: \t\t%6 minutes\n"
+                "Semi-major axis: \t%7 km\n" )
+            .arg( id(), QString::number(m_satrec.satnum), QString::number( perigee() ),
+                  QString::number( apogee() ), QString::number( inclination() ),
+                  QString::number( orbitalPeriod() ), QString::number( semiMajorAxis() )),
+             m_dialog );
+        layout->addWidget( label );
+    }
+    m_dialog->show();
+}
+
 void SatellitesItem::paintViewport( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer )
 {
     Q_UNUSED( viewport );
@@ -66,7 +106,7 @@ void SatellitesItem::paintViewport( GeoPainter *painter, ViewportParams *viewpor
     double r[3], v[3];
     GeoDataLineString orbit;
     int startTime = timeSinceEpoch();
-    int endTime = startTime + orbitalPeriod() / 60 + 5;
+    int endTime = startTime + orbitalPeriod() + 1;
     for ( int i = startTime; i < endTime; i++ ) {
         sgp4( wgs84, m_satrec, i, r, v );
         orbit << fromCartesian( r[0], r[1], r[2] );
@@ -100,7 +140,7 @@ void SatellitesItem::paint( GeoPainter *painter, ViewportParams *viewport, const
 
     painter->setPen( oxygenSkyBlue4 );
     painter->setBrush( oxygenSkyBlue4 );
-    painter->drawRect( 0, 0, 15, 15 );
+    painter->drawRect( 0, 0, size().width(), size().height() );
 
     painter->setPen( Qt::white );
     painter->drawText( 0, 0, id() );
@@ -123,15 +163,39 @@ double SatellitesItem::timeSinceEpoch()
 
 double SatellitesItem::orbitalPeriod()
 {
-    double r[3], v[3];
-    sgp4( wgs84, m_satrec, timeSinceEpoch(), r, v );
     double radiusearthkm, tumin, xke, j2, j3, j4, j3oj2;
     double mu; // gravitational parameter (km^3 / s^2)
+    getgravconst( wgs84, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
+    double a = semiMajorAxis();
+    double period = 2 * M_PI * a * sqrt ( a / mu ); // in seconds
+    return period / 60.0;
+}
+
+double SatellitesItem::apogee()
+{
+    return (1 + m_satrec.ecco ) * semiMajorAxis();
+}
+
+double SatellitesItem::perigee()
+{
+    return (1 - m_satrec.ecco ) * semiMajorAxis();
+}
+
+double SatellitesItem::semiMajorAxis()
+{
+    double r[3], v[3];
+    sgp4( wgs84, m_satrec, timeSinceEpoch(), r, v );
+    double radiusearthkm, tumin, mu, xke, j2, j3, j4, j3oj2;
     getgravconst( wgs84, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
     double p, ecc, incl, omega, argp, nu, m, arglat, truelon, lonper;
     double a; // semi-major axis (km)
     rv2coe( r, v, mu, p, a, ecc, incl, omega, argp, nu, m, arglat, truelon, lonper);
-    return 2 * M_PI * a * sqrt ( a / mu );
+    return a;
+}
+
+double SatellitesItem::inclination()
+{
+    return m_satrec.inclo / M_PI * 180;
 }
 
 GeoDataCoordinates SatellitesItem::fromCartesian( double x, double y, double z )

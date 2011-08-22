@@ -15,6 +15,8 @@
 
 #include "sgp4/sgp4unit.h"
 
+class QDialog;
+
 namespace Marble {
 
 class SatellitesItem : public AbstractDataPluginItem
@@ -23,14 +25,22 @@ class SatellitesItem : public AbstractDataPluginItem
 
 public:
     SatellitesItem( const QString &name, const elsetrec &satrec, QObject *parent = 0 );
+    virtual ~SatellitesItem();
+
     void paintViewport( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = 0 );
     void paint( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = 0 );
     QString itemType() const;
     bool initialized();
     bool operator<(const Marble::AbstractDataPluginItem *other ) const;
+    QAction *action();
+
+private slots:
+    void showInfoDialog();
 
 private:
     elsetrec m_satrec;
+    QAction *m_action;
+    QDialog *m_dialog;
 
     /**
      * @brief Create a GeoDataCoordinates object from cartesian coordinates(GEI)
@@ -47,9 +57,27 @@ private:
     double timeSinceEpoch();
 
     /**
-     * @return The orbital period of the satellite in seconds
+     * @return The orbital period of the satellite in minutes
      */
     double orbitalPeriod();
+
+    /**
+     * @return The apogee of the satellite in km
+     */
+    double apogee();
+    /**
+     * @return The perigee of the satellite in km
+     */
+    double perigee();
+    /**
+     * @return The semi-major axis in km
+     */
+    double semiMajorAxis();
+
+    /**
+     * @return The inclination in degrees
+     */
+    double inclination();
 };
 
 }

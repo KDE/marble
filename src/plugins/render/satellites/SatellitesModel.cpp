@@ -34,7 +34,7 @@ void SatellitesModel::getAdditionalItems( const Marble::GeoDataLatLonAltBox& box
     return;
 }
 
-void SatellitesModel::refreshItems(const QStringList &tleList)
+void SatellitesModel::refreshItems( const QStringList &tleList )
 {
     clear();
 
@@ -43,11 +43,10 @@ void SatellitesModel::refreshItems(const QStringList &tleList)
     }
 }
 
-
 void SatellitesModel::parseFile( const QByteArray &file )
 {
     //FIXME: terrible hack because twoline2rv uses sscanf
-    setlocale(LC_NUMERIC, "C");
+    setlocale( LC_NUMERIC, "C" );
 
     QList<QByteArray> tleLines = file.split( '\n' );
     double startmfe, stopmfe, deltamin;
@@ -73,7 +72,7 @@ void SatellitesModel::parseFile( const QByteArray &file )
     }
 
     //Reset to environment
-    setlocale(LC_NUMERIC, "");
+    setlocale( LC_NUMERIC, "" );
 
     emit itemsUpdated();
 }
