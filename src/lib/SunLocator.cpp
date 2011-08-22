@@ -229,9 +229,7 @@ void SunLocator::update()
 {
     updatePosition();
 
-    emit updateSun();
-
-    emit centerSun( getLon(), getLat() );
+    emit positionChanged( getLon(), getLat() );
 }
 
 void SunLocator::setPlanet( const Planet *planet )
@@ -254,7 +252,7 @@ void SunLocator::setPlanet( const Planet *planet )
     // In that case we don't want an update.
     // Update the shading in all other cases.
     if ( !previousPlanet->id().isEmpty() ) {
-        emit updateSun();
+        emit positionChanged( getLon(), getLat() );
     }
 }
 

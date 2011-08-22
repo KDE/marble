@@ -954,7 +954,7 @@ void MarbleWidget::setShowCityLights( bool visible )
 
 void MarbleWidget::setShowSunInZenith( bool visible )
 {
-    disconnect( d->m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
+    disconnect( d->m_model->sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
                 this,                     SLOT( centerOn( qreal, qreal ) ) );
 
     if ( d->m_map->showSunInZenith() != visible ) { // Toggling input modifies event filters, so avoid that if not needed
@@ -963,7 +963,7 @@ void MarbleWidget::setShowSunInZenith( bool visible )
     }
 
     if ( d->m_map->showSunInZenith() ) {
-        connect( d->m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
+        connect( d->m_model->sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
                  this,                     SLOT( centerOn( qreal, qreal ) ) );
     }
 }

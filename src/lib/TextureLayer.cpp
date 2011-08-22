@@ -186,11 +186,11 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
 void TextureLayer::setShowSunShading( bool show )
 {
-    disconnect( d->m_sunLocator, SIGNAL( updateSun() ),
+    disconnect( d->m_sunLocator, SIGNAL( positionChanged( qreal, qreal ) ),
                 this, SLOT( update() ) );
 
     if ( show ) {
-        connect( d->m_sunLocator, SIGNAL( updateSun() ),
+        connect( d->m_sunLocator, SIGNAL( positionChanged( qreal, qreal ) ),
                  this,       SLOT( update() ) );
     }
 
