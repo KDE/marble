@@ -55,7 +55,9 @@ SatellitesItem::SatellitesItem( const QString &name, const elsetrec &satrec, QOb
 
 SatellitesItem::~SatellitesItem()
 {
-    m_dialog->deleteLater();
+    if (m_dialog != 0) {
+        m_dialog->deleteLater();
+    }
 }
 
 bool SatellitesItem::initialized()
