@@ -8,8 +8,6 @@
 // Copyright 2011      Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
 //
 
-#include "GPXElementDictionary.h"
-
 namespace Marble
 {
 namespace osm

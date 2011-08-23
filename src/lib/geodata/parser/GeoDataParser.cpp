@@ -35,9 +35,6 @@
 // TODO: GeoRSS support
 // #include "GeoRSSElementDictionary.h"
 
-// GPX support
-#include "GPXElementDictionary.h"
-
 // KML support
 #include "KmlElementDictionary.h"
 
@@ -57,11 +54,7 @@ bool GeoDataParser::isValidRootElement()
 {
     if (m_source == GeoData_UNKNOWN)
     {
-        if (GeoParser::isValidElement(gpx::gpxTag_gpx))
-        {
-            m_source = GeoData_GPX;
-        }
-        else if (GeoParser::isValidElement(kml::kmlTag_kml))
+        if (GeoParser::isValidElement(kml::kmlTag_kml))
         {
             m_source = GeoData_KML;
         }
@@ -77,8 +70,6 @@ bool GeoDataParser::isValidRootElement()
     }
     switch ((GeoDataSourceType) m_source) {
     // TODO: case GeoData_GeoRSS:
-    case GeoData_GPX:
-        return isValidElement(gpx::gpxTag_gpx);
     case GeoData_KML:
         return isValidElement(kml::kmlTag_kml);
     case GeoData_OSM:
@@ -94,9 +85,6 @@ void GeoDataParser::raiseRootElementError()
 {
     switch ((GeoDataSourceType) m_source) {
     // TODO: case GeoData_GeoRSS:
-    case GeoData_GPX:
-        raiseError(QObject::tr("The file is not a valid GPX 1.0 / 1.1 file"));
-        break;                
     case GeoData_KML:
         raiseError(QObject::tr("The file is not a valid KML 2.0 / 2.1 / 2.2 file"));
         break;
@@ -113,8 +101,6 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
 
     switch ((GeoDataSourceType) m_source) {
     // TODO: case GeoData_GeoRSS:
-    case GeoData_GPX:
-        return (namespaceUri() == gpx::gpxTag_nameSpace10 || namespaceUri() == gpx::gpxTag_nameSpace11);
     case GeoData_KML:
         return (namespaceUri() == kml::kmlTag_nameSpace20 || 
                 namespaceUri() == kml::kmlTag_nameSpace21 || 

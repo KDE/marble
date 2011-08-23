@@ -19,16 +19,6 @@ FILE( GLOB geodata_writers_kml_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata
 FILE( GLOB geodata_parser_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/parser/*.cpp )
 FILE( GLOB geodata_writer_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/writer/*.cpp )
 
-SET( geodata_handlers_gpx_SRCS
-        geodata/handlers/gpx/GPXElementDictionary.cpp
-        geodata/handlers/gpx/GPXgpxTagHandler.cpp
-        geodata/handlers/gpx/GPXnameTagHandler.cpp
-        geodata/handlers/gpx/GPXtrkTagHandler.cpp
-        geodata/handlers/gpx/GPXtrkptTagHandler.cpp
-        geodata/handlers/gpx/GPXtrksegTagHandler.cpp
-        geodata/handlers/gpx/GPXwptTagHandler.cpp
-   )
-
 SET( geodata_handlers_osmnamefinder_SRCS
         geodata/handlers/osm-namefinder/AttributeDictionary.cpp
         geodata/handlers/osm-namefinder/ElementDictionary.cpp
@@ -45,7 +35,6 @@ SET( geodata_SRCS
         ${geodata_scene_SRCS} 
         ${geodata_parser_SRCS}
         ${geodata_writer_SRCS}
-        ${geodata_handlers_gpx_SRCS}
         ${geodata_handlers_kml_SRCS}
         ${geodata_handlers_dgml_SRCS}
         ${geodata_handlers_osm_SRCS}

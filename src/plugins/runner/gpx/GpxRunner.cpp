@@ -10,7 +10,7 @@
 #include "GpxRunner.h"
 
 #include "GeoDataDocument.h"
-#include "GeoDataParser.h"
+#include "GpxParser.h"
 
 #include <QtCore/QFile>
 
@@ -42,7 +42,7 @@ void GpxRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     // Open file in right mode
     file.open( QIODevice::ReadOnly );
 
-    GeoDataParser parser( GeoData_GPX );
+    GpxParser parser;
 
     if ( !parser.read( &file ) ) {
         emit parsingFinished( 0 );

@@ -98,8 +98,6 @@ int main(int argc, char** argv)
         parser = new GeoSceneParser(GeoScene_DGML);
     else if (fileName.endsWith(".kml"))
         parser = new GeoDataParser(GeoData_KML);
-    else if (fileName.endsWith(".gpx"))
-        parser = new GeoDataParser(GeoData_GPX);
 
     if (!parser) {
         qWarning("Could not determine file format!");
