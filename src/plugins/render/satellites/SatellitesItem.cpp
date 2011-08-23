@@ -39,6 +39,11 @@ SatellitesItem::SatellitesItem( const QString &name, const elsetrec &satrec, QOb
     setId( name );
     setVisible( true );
 
+    double tumin, mu, xke, j2, j3, j4, j3oj2;
+    double radiusearthkm;
+    getgravconst( wgs84, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
+    m_earthRadius = radiusearthkm;
+
     m_satrec = satrec;
     m_action = new QAction( id(), this );
     connect( m_action, SIGNAL(triggered(bool)), SLOT(showInfoDialog()));
@@ -86,9 +91,9 @@ void SatellitesItem::showInfoDialog()
                 "Inclination: \t\t%5 degrees\n"
                 "Period: \t\t%6 minutes\n"
                 "Semi-major axis: \t%7 km\n" )
-            .arg( id(), QString::number(m_satrec.satnum), QString::number( perigee() ),
+            .arg( QString::number(m_satrec.satnum), QString::number( perigee() ),
                   QString::number( apogee() ), QString::number( inclination() ),
-                  QString::number( orbitalPeriod() ), QString::number( semiMajorAxis() )),
+                  QString::number( period() ), QString::number( semiMajorAxis() )),
              m_dialog );
         layout->addWidget( label );
     }
@@ -106,7 +111,7 @@ void SatellitesItem::paintViewport( GeoPainter *painter, ViewportParams *viewpor
     double r[3], v[3];
     GeoDataLineString orbit;
     int startTime = timeSinceEpoch();
-    int endTime = startTime + orbitalPeriod() + 1;
+    int endTime = startTime + period() + 1;
     for ( int i = startTime; i < endTime; i++ ) {
         sgp4( wgs84, m_satrec, i, r, v );
         orbit << fromCartesian( r[0], r[1], r[2] );
@@ -161,36 +166,27 @@ double SatellitesItem::timeSinceEpoch()
     return (double)( QDateTime::currentMSecsSinceEpoch() - time.toMSecsSinceEpoch() ) / ( 1000.0 * 60.0 );
 }
 
-double SatellitesItem::orbitalPeriod()
+double SatellitesItem::period()
 {
-    double radiusearthkm, tumin, xke, j2, j3, j4, j3oj2;
-    double mu; // gravitational parameter (km^3 / s^2)
-    getgravconst( wgs84, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
-    double a = semiMajorAxis();
-    double period = 2 * M_PI * a * sqrt ( a / mu ); // in seconds
-    return period / 60.0;
+    // no := mean motion (rad / min)
+    double T = 1 / m_satrec.no;
+    return T * 2 * M_PI;
 }
 
 double SatellitesItem::apogee()
 {
-    return (1 + m_satrec.ecco ) * semiMajorAxis();
+    return m_satrec.alta * m_earthRadius;
 }
 
 double SatellitesItem::perigee()
 {
-    return (1 - m_satrec.ecco ) * semiMajorAxis();
+    return m_satrec.altp * m_earthRadius;
 }
 
 double SatellitesItem::semiMajorAxis()
 {
-    double r[3], v[3];
-    sgp4( wgs84, m_satrec, timeSinceEpoch(), r, v );
-    double radiusearthkm, tumin, mu, xke, j2, j3, j4, j3oj2;
-    getgravconst( wgs84, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
-    double p, ecc, incl, omega, argp, nu, m, arglat, truelon, lonper;
-    double a; // semi-major axis (km)
-    rv2coe( r, v, mu, p, a, ecc, incl, omega, argp, nu, m, arglat, truelon, lonper);
-    return a;
+
+    return m_satrec.a * m_earthRadius;
 }
 
 double SatellitesItem::inclination()
@@ -203,7 +199,7 @@ GeoDataCoordinates SatellitesItem::fromCartesian( double x, double y, double z )
     double lat = atan2( y, x );
     double lon = atan2( z, sqrt( x*x + y*y ) );
     double alt = sqrt( x*x + y*y + z*z );
-    return GeoDataCoordinates( lat, lon, alt*1000 - EARTH_RADIUS );
+    return GeoDataCoordinates( lat, lon, alt*1000 - m_earthRadius*1000 );
 }
 
 #include "SatellitesItem.moc"

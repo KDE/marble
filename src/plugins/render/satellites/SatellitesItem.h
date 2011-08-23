@@ -38,6 +38,7 @@ private slots:
     void showInfoDialog();
 
 private:
+    double m_earthRadius; // in km
     elsetrec m_satrec;
     QAction *m_action;
     QDialog *m_dialog;
@@ -59,7 +60,7 @@ private:
     /**
      * @return The orbital period of the satellite in minutes
      */
-    double orbitalPeriod();
+    double period();
 
     /**
      * @return The apogee of the satellite in km
