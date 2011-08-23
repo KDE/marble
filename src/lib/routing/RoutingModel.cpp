@@ -17,7 +17,6 @@
 #include "GeoDataDocument.h"
 #include "GeoDataGeometry.h"
 #include "GeoDataFolder.h"
-#include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
 #include "RouteRequest.h"
 #include "PositionTracking.h"

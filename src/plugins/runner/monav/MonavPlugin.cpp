@@ -19,7 +19,6 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "GeoDataLatLonBox.h"
-#include "GeoDataParser.h"
 #include "GeoDataDocument.h"
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
