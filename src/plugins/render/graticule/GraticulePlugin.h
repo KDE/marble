@@ -86,7 +86,9 @@ class GraticulePlugin : public RenderPlugin
 
     bool isInitialized () const;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
+    virtual bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
+
+    virtual qreal zValue() const;
 
 //    QHash<QString,QVariant> settings() const;
 
