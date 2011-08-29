@@ -52,6 +52,7 @@ class AbstractDataPluginModelPrivate
 {
  public:
     AbstractDataPluginModelPrivate( const QString& name,
+                                    PluginManager *pluginManager,
                                     AbstractDataPluginModel * parent )
         : m_parent( parent ),
           m_name( name ),
@@ -60,10 +61,10 @@ class AbstractDataPluginModelPrivate
           m_lastNumber( 0 ),
           m_downloadedNumber( 0 ),
           m_lastMarbleModel( 0 ),
-          m_downloadTimer( new QTimer( m_parent ) ),
+          m_downloadTimer( m_parent ),
           m_descriptionFileNumber( 0 ),
           m_itemSettings(),
-          m_downloadManager( 0 )
+          m_downloadManager( new CacheStoragePolicy( MarbleDirs::localPath() + "/cache/" + m_name + '/' ), pluginManager )
     {
     }
     
@@ -80,8 +81,7 @@ class AbstractDataPluginModelPrivate
             (*hIt)->deleteLater();
         }
         
-        m_downloadManager->storagePolicy()->clearCache();
-        delete m_downloadManager;
+        m_downloadManager.storagePolicy()->clearCache();
     }
     
     AbstractDataPluginModel *m_parent;
@@ -95,31 +95,28 @@ class AbstractDataPluginModelPrivate
     QList<AbstractDataPluginItem*> m_itemSet;
     QHash<QString, AbstractDataPluginItem*> m_downloadingItems;
     QList<AbstractDataPluginItem*> m_displayedItems;
-    QTimer *m_downloadTimer;
+    QTimer m_downloadTimer;
     quint32 m_descriptionFileNumber;
     QHash<QString, QVariant> m_itemSettings;
 
-    HttpDownloadManager *m_downloadManager;
+    HttpDownloadManager m_downloadManager;
 };
 
 AbstractDataPluginModel::AbstractDataPluginModel( const QString& name,
                                                   PluginManager *pluginManager,
                                                   QObject *parent )
     : QObject(  parent ),
-      d( new AbstractDataPluginModelPrivate( name, this ) )
+      d( new AbstractDataPluginModelPrivate( name, pluginManager, this ) )
 {
     // Initializing file and download System
-    CacheStoragePolicy *storagePolicy = new CacheStoragePolicy( MarbleDirs::localPath()
-                                                                + "/cache/" + d->m_name + '/' );
-    d->m_downloadManager = new HttpDownloadManager( storagePolicy, pluginManager );
-    connect( d->m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
-             this,                 SLOT( processFinishedJob( QString , QString ) ) );
+    connect( &d->m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
+             this ,                 SLOT( processFinishedJob( QString , QString ) ) );
     
     // We want to download a new description file every timeBetweenDownloads ms
-    connect( d->m_downloadTimer, SIGNAL( timeout() ),
+    connect( &d->m_downloadTimer, SIGNAL( timeout() ),
              this,               SLOT( handleChangedViewport() ),
              Qt::QueuedConnection );
-    d->m_downloadTimer->start( timeBetweenDownloads );
+    d->m_downloadTimer.start( timeBetweenDownloads );
 }
 
 AbstractDataPluginModel::~AbstractDataPluginModel()
@@ -249,7 +246,7 @@ void AbstractDataPluginModel::downloadItemData( const QUrl& url,
 
     QString id = generateFilename( item->id(), type );
     
-    d->m_downloadManager->addJob( url, id, id, DownloadBrowse );
+    d->m_downloadManager.addJob( url, id, id, DownloadBrowse );
     d->m_downloadingItems.insert( id, item );
     
     connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
@@ -263,7 +260,7 @@ void AbstractDataPluginModel::downloadDescriptionFile( const QUrl& url )
         QString name( descriptionPrefix );
         name += QString::number( d->m_descriptionFileNumber );
         
-        d->m_downloadManager->addJob( url, name, name, DownloadBrowse );
+        d->m_downloadManager.addJob( url, name, name, DownloadBrowse );
         d->m_descriptionFileNumber++;
     }
 }
@@ -341,7 +338,7 @@ QString AbstractDataPluginModel::generateFilepath( const QString& id, const QStr
     
 bool AbstractDataPluginModel::fileExists( const QString& fileName ) const
 {
-    return d->m_downloadManager->storagePolicy()->fileExists( fileName );
+    return d->m_downloadManager.storagePolicy()->fileExists( fileName );
 }
 
 bool AbstractDataPluginModel::fileExists( const QString& id, const QString& type ) const
@@ -397,7 +394,7 @@ void AbstractDataPluginModel::handleChangedViewport()
     {
         // We will wait a little bit longer to start the the
         // next download as we will really download something now.
-        d->m_downloadTimer->setInterval( timeBetweenDownloads );
+        d->m_downloadTimer.setInterval( timeBetweenDownloads );
         
         // Save the download parameter
         d->m_downloadedBox = d->m_lastBox;
@@ -410,7 +407,7 @@ void AbstractDataPluginModel::handleChangedViewport()
     else {
         // Don't wait to long to start the next download as we decided not to download anything.
         // This will enhance response.
-        d->m_downloadTimer->setInterval( timeBetweenTriedDownloads );
+        d->m_downloadTimer.setInterval( timeBetweenTriedDownloads );
     }
 }
 
@@ -421,7 +418,7 @@ void AbstractDataPluginModel::processFinishedJob( const QString& relativeUrlStri
     
     if( id.startsWith( descriptionPrefix ) ) {
         CacheStoragePolicy *storagePolicy
-                = qobject_cast<CacheStoragePolicy*>( d->m_downloadManager->storagePolicy() );
+                = qobject_cast<CacheStoragePolicy*>( d->m_downloadManager.storagePolicy() );
         if ( storagePolicy ) {
             parseFile( storagePolicy->data( id ) );
         }
