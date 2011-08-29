@@ -10,7 +10,6 @@
 
 #include "SatellitesPlugin.h"
 
-#include "SatellitesModel.h"
 #include "MarbleDebug.h"
 #include "PluginAboutDialog.h"
 #include "GeoDataPlacemark.h"
