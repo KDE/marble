@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2010,2011  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "ProgressFloatItem.h"
@@ -140,9 +141,9 @@ void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
     painter->save();
     painter->setRenderHint( QPainter::Antialiasing, true );
 
-    int completed = 0;
+    qreal completed = 1.0;
     if ( m_totalJobs && m_completedJobs <= m_totalJobs ) {
-        completed = int ( 100.0 * m_completedJobs / m_totalJobs );
+        completed = (qreal) m_completedJobs / (qreal) m_totalJobs;
 
         if ( m_completedJobs == m_totalJobs ) {
             m_progressShowTimer.stop();
@@ -152,7 +153,7 @@ void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
 
     // Paint progress pie
     int startAngle =  90 * 16; // 12 o' clock
-    int spanAngle = -ceil ( 360 * 16 * ( m_completedJobs / qMax<qreal>( 1.0, m_totalJobs ) ) );
+    int spanAngle = -ceil ( 360 * 16 * completed );
     QRectF rect( contentRect() );
     rect.adjust( 1, 1, -1, -1 );
 
@@ -174,7 +175,7 @@ void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
 
     // Paint progress label
     myFont.setPointSize( m_fontSize );
-    QString done = QString::number( completed ) + "%";
+    QString done = QString::number( (int) ( completed * 100 ) ) + "%";
     int fontWidth = QFontMetrics( myFont ).boundingRect( done ).width();
     QPointF baseline( padding() + 0.5 * ( rect.width() - fontWidth ), 0.75 * rect.height() );
     QPainterPath path;
