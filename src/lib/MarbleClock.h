@@ -31,6 +31,10 @@ class MarbleClock : public QObject
     qreal dayFraction() const;
 
  Q_SIGNALS:
+    /**
+     * @brief the timeChanged signal will be triggered every minute
+     * or at most every 1s in case speed is more than 60.
+     **/
     void timeChanged();
 
 public:
@@ -77,7 +81,7 @@ public:
     int        m_speed;
     QTimer    *m_timer;
     QDateTime  m_datetime;        // stores the UTC time
-    int        m_lastmin;
+    QDateTime  m_lasttime;
     int        m_timezoneInSec;
 };
 
