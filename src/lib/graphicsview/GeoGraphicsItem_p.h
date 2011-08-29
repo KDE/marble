@@ -28,9 +28,9 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
           m_positions(),
           m_minLodPixels( 0 ),
           m_maxLodPixels( -1 ),
+          m_minZoomLevel( 0 ),
           m_latLonAltBox(),
-          m_style( 0 ),
-          m_minZoomLevel( 0 )
+          m_style( 0 )
     {
     }
     

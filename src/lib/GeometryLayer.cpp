@@ -211,8 +211,6 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
 void GeometryLayerPrivate::createGraphicsItems( GeoDataObject *object )
 {
-    GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
-
     if ( dynamic_cast<GeoDataPlacemark*>( object ) )
     {
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );

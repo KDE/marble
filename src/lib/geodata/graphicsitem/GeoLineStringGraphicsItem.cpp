@@ -40,7 +40,8 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* view
                                        const QString& renderPos, GeoSceneLayer* layer )
 {
     Q_UNUSED( renderPos );
-    
+    Q_UNUSED( layer );
+
     if ( !style() )
     {
         painter->save();
