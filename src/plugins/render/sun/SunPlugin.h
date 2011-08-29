@@ -14,7 +14,7 @@
 
 #include "RenderPlugin.h"
 
-#include <QtGui/QImage>
+#include <QtGui/QPixmap>
 
 namespace Marble
 {
@@ -55,7 +55,7 @@ class SunPlugin : public RenderPlugin
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 
 private:
-    QImage m_image;
+    QPixmap m_pixmap;
 };
 
 }
