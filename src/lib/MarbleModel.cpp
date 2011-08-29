@@ -82,7 +82,8 @@ class MarbleModelPrivate
           m_homePoint( -9.4, 54.8, 0.0, GeoDataCoordinates::Degree ),  // Some point that tackat defined. :-)
           m_homeZoom( 1050 ),
           m_mapTheme( 0 ),
-          m_downloadManager( new FileStoragePolicy( MarbleDirs::localPath() ), &m_pluginManager ),
+          m_storagePolicy( MarbleDirs::localPath() ),
+          m_downloadManager( &m_storagePolicy, &m_pluginManager ),
           m_fileManager( 0 ),
           m_fileviewmodel(),
           m_treemodel(),
@@ -124,6 +125,7 @@ class MarbleModelPrivate
     // View and paint stuff
     GeoSceneDocument        *m_mapTheme;
 
+    FileStoragePolicy        m_storagePolicy;
     HttpDownloadManager      m_downloadManager;
 
     // Cache related
@@ -174,10 +176,9 @@ MarbleModel::MarbleModel( QObject *parent )
     // Setting the theme to the current theme.
     d->m_storageWatcher->updateTheme( mapThemeId() );
     // connect the StoragePolicy used by the download manager to the FileStorageWatcher
-    StoragePolicy * const storagePolicy = d->m_downloadManager.storagePolicy();
-    connect( storagePolicy, SIGNAL( cleared() ),
+    connect( &d->m_storagePolicy, SIGNAL( cleared() ),
              d->m_storageWatcher, SLOT( resetCurrentSize() ) );
-    connect( storagePolicy, SIGNAL( sizeChanged( qint64 ) ),
+    connect( &d->m_storagePolicy, SIGNAL( sizeChanged( qint64 ) ),
              d->m_storageWatcher, SLOT( addToCurrentSize( qint64 ) ) );
 
     d->m_fileManager = new FileManager( this );
@@ -446,7 +447,7 @@ quint64 MarbleModel::persistentTileCacheLimit() const
 
 void MarbleModel::clearPersistentTileCache()
 {
-    downloadManager()->storagePolicy()->clearCache();
+    d->m_storagePolicy.clearCache();
 
     // Now create base tiles again if needed
     if ( d->m_mapTheme->map()->hasTextureLayers() ) {
