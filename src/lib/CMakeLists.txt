@@ -153,6 +153,9 @@ set(marblewidget_SRCS
     AbstractDataPluginItem.cpp
     AbstractWorkerThread.cpp
 
+    TrackerPlugin.cpp
+    TrackerPluginItem.cpp
+
     PluginInterface.cpp
     NetworkPluginInterface.cpp
     LayerInterface.cpp
