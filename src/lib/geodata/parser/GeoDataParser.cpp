@@ -58,10 +58,6 @@ bool GeoDataParser::isValidRootElement()
         {
             m_source = GeoData_KML;
         }
-        else if (GeoParser::isValidElement("osm"))
-        {
-            m_source = GeoData_OSM;
-        }
         else
         {
             Q_ASSERT(false);
@@ -72,9 +68,6 @@ bool GeoDataParser::isValidRootElement()
     // TODO: case GeoData_GeoRSS:
     case GeoData_KML:
         return isValidElement(kml::kmlTag_kml);
-    case GeoData_OSM:
-        //does not have a namespace
-        return isValidElement("osm");
     default:
         Q_ASSERT(false);
         return false;
@@ -106,9 +99,6 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
                 namespaceUri() == kml::kmlTag_nameSpace21 || 
                 namespaceUri() == kml::kmlTag_nameSpace22 ||
                 namespaceUri() == kml::kmlTag_nameSpaceOgc22);
-    case GeoData_OSM:
-        //always "valid" because there is no namespace
-        return true;
     default:
         break;
     }
