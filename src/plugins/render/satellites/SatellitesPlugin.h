@@ -13,7 +13,7 @@
 
 #include <QtCore/QObject>
 
-#include "AbstractDataPlugin.h"
+#include "TrackerPlugin.h"
 #include "sgp4/sgp4unit.h"
 
 class QCheckBox;
@@ -32,7 +32,7 @@ class PluginAboutDialog;
  * @brief This plugin displays satellites and their orbits.
  *
  */
-class SatellitesPlugin : public AbstractDataPlugin
+class SatellitesPlugin : public TrackerPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
@@ -45,6 +45,7 @@ public:
     QString renderPolicy() const;
     QStringList renderPosition() const;
     QString name() const;
+    QString nameId() const;
     QString guiString() const;
     QString description() const;
     QIcon icon() const;
@@ -53,6 +54,8 @@ public:
 
     QHash<QString, QVariant> settings() const;
     void setSettings( QHash<QString, QVariant> settings );
+
+    void parseFile( const QString &id, const QByteArray &file );
 
     QDialog *aboutDialog();
     QDialog *configDialog();

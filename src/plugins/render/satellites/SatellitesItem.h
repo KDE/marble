@@ -11,37 +11,28 @@
 #ifndef MARBLE_SATELLITESITEM_H
 #define MARBLE_SATELLITESITEM_H
 
-#include "AbstractDataPluginItem.h"
+#include "TrackerPluginItem.h"
+
+#include "GeoDataCoordinates.h"
 
 #include "sgp4/sgp4unit.h"
 
-class QDialog;
-
 namespace Marble {
 
-class SatellitesItem : public AbstractDataPluginItem
+class SatellitesItem : public TrackerPluginItem
 {
-    Q_OBJECT
-
 public:
-    SatellitesItem( const QString &name, const elsetrec &satrec, QObject *parent = 0 );
-    virtual ~SatellitesItem();
+    SatellitesItem( const QString &name, elsetrec satrec );
 
-    void paintViewport( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = 0 );
-    void paint( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = 0 );
-    QString itemType() const;
-    bool initialized();
-    bool operator<(const Marble::AbstractDataPluginItem *other ) const;
-    QAction *action();
+    void render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer );
 
-private slots:
-    void showInfoDialog();
+    void update();
 
 private:
     double m_earthRadius; // in km
     elsetrec m_satrec;
-    QAction *m_action;
-    QDialog *m_dialog;
+
+    void setDescription();
 
     /**
      * @brief Create a GeoDataCoordinates object from cartesian coordinates(GEI)

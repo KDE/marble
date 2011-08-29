@@ -13,23 +13,26 @@
 #include "SatellitesModel.h"
 #include "MarbleDebug.h"
 #include "PluginAboutDialog.h"
+#include "GeoDataPlacemark.h"
+#include "SatellitesItem.h"
+
+#include "sgp4/sgp4io.h"
 
 #include "ui_SatellitesConfigDialog.h"
 
+#include <QtCore/QUrl>
 #include <QtGui/QPushButton>
 
 namespace Marble
 {
 
 SatellitesPlugin::SatellitesPlugin()
-    : AbstractDataPlugin(),
+    : TrackerPlugin(),
      m_isInitialized( false ),
      m_aboutDialog( 0 ),
      m_configDialog( 0 ),
      ui_configWidget( 0 )
 {
-    setNameId( "satellites" );
-
     connect( this, SIGNAL(settingsChanged(QString)), SLOT(updateSettings()) );
 
     setSettings( QHash<QString, QVariant>() );
@@ -55,6 +58,11 @@ QString SatellitesPlugin::name() const
     return tr( "Satellites" );
 }
 
+QString SatellitesPlugin::nameId() const
+{
+    return "satellites";
+}
+
 QString SatellitesPlugin::guiString() const
 {
     return tr( "&Satellites" );
@@ -72,9 +80,9 @@ QIcon SatellitesPlugin::icon() const
 
 void SatellitesPlugin::initialize()
 {
-    setModel( new SatellitesModel( pluginManager(), this ) );
-    updateSettings();
+    TrackerPlugin::initialize();
     m_isInitialized = true;
+    updateSettings();
 }
 
 bool SatellitesPlugin::isInitialized() const
@@ -136,10 +144,53 @@ void SatellitesPlugin::writeSettings()
 
 void SatellitesPlugin::updateSettings()
 {
-    if( model() != 0 ) {
-        QStringList tleList = m_settings["tleList"].toStringList();
-        qobject_cast<SatellitesModel *>( model() )->refreshItems( tleList );
+    if (!isInitialized()) {
+        return;
     }
+    foreach ( const QString &tle, m_settings["tleList"].toStringList() ) {
+        mDebug() << tle;
+        downloadFile( QUrl( "http://www.celestrak.com/NORAD/elements/" + tle ), tle );
+    }
+}
+
+void SatellitesPlugin::parseFile( const QString &id, const QByteArray &file )
+{
+    Q_UNUSED( id );
+
+    beginUpdatePlacemarks();
+
+    //FIXME: terrible hack because twoline2rv uses sscanf
+    setlocale( LC_NUMERIC, "C" );
+
+    QList<QByteArray> tleLines = file.split( '\n' );
+    double startmfe, stopmfe, deltamin;
+    elsetrec satrec;
+    int i = 0;
+    // File format: One line of description, two lines of TLE, last line is empty
+    if ( tleLines.size() % 3 != 1 ) {
+        mDebug() << "Malformated satellite data file";
+    }
+    while ( i < tleLines.size() - 1 ) {
+        QString satelliteName( tleLines.at( i++ ) );
+        char line1[80];
+        char line2[80];
+        qstrcpy( line1, tleLines.at( i++ ).constData() );
+        qstrcpy( line2, tleLines.at( i++ ).constData() );
+        twoline2rv( line1, line2, 'c', 'd', 'i', wgs84,
+                    startmfe, stopmfe, deltamin, satrec );
+        if ( satrec.error != 0 ) {
+            mDebug() << "Error: " << satrec.error;
+            return;
+        }
+
+        SatellitesItem *item = new SatellitesItem( satelliteName.trimmed(), satrec );
+        addItem( item );
+    }
+
+    //Reset to environment
+    setlocale( LC_NUMERIC, "" );
+
+    endUpdatePlacemarks();
 }
 
 QDialog *SatellitesPlugin::aboutDialog()

@@ -16,6 +16,7 @@
 #include "GeoPainter.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLinearRing.h"
+#include "GeoDataPlacemark.h"
 
 #include "sgp4/sgp4ext.h"
 
@@ -30,79 +31,34 @@
 
 using namespace Marble;
 
-SatellitesItem::SatellitesItem( const QString &name, const elsetrec &satrec, QObject *parent )
-    : AbstractDataPluginItem( parent ),
-      m_dialog( 0 )
+SatellitesItem::SatellitesItem( const QString &name, elsetrec satrec )
+    : TrackerPluginItem( name ),
+      m_satrec( satrec )
 {
-    setTarget( "earth" );
-    setSize( QSizeF( 15, 15 ) );
-    setId( name );
-    setVisible( true );
-
     double tumin, mu, xke, j2, j3, j4, j3oj2;
     double radiusearthkm;
     getgravconst( wgs84, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
     m_earthRadius = radiusearthkm;
 
-    m_satrec = satrec;
-    m_action = new QAction( id(), this );
-    connect( m_action, SIGNAL(triggered(bool)), SLOT(showInfoDialog()));
-
-    double r[3], v[3];
-    sgp4( wgs84, m_satrec, timeSinceEpoch(), r, v );
-    setCoordinate( fromCartesian( r[0], r[1], r[2] ) );
+    setDescription();
 }
 
-SatellitesItem::~SatellitesItem()
+void SatellitesItem::setDescription()
 {
-    if (m_dialog != 0) {
-        m_dialog->deleteLater();
-    }
+    QString description =
+      QObject::tr( "NORAD ID: %2 <br />"
+                   "Perigee: %3 km <br />"
+                   "Apogee: %4 km <br />"
+                   "Inclination: %5 degrees <br />"
+                   "Period: %6 minutes <br />"
+                   "Semi-major axis: %7 km" )
+        .arg( QString::number(m_satrec.satnum), QString::number( perigee() ),
+              QString::number( apogee() ), QString::number( inclination() ),
+              QString::number( period() ), QString::number( semiMajorAxis() ) );
+     placemark()->setDescription( description );
 }
 
-bool SatellitesItem::initialized()
-{
-    return true;
-}
-
-QString SatellitesItem::itemType() const
-{
-    return "satellitesitem";
-}
-
-bool SatellitesItem::operator<( const Marble::AbstractDataPluginItem *other ) const
-{
-    return this->id() < other->id();
-}
-
-QAction* SatellitesItem::action()
-{
-    return m_action;
-}
-
-void SatellitesItem::showInfoDialog()
-{
-    if (m_dialog == 0) {
-        m_dialog = new QDialog();
-        m_dialog->setWindowTitle( id() );
-        QVBoxLayout *layout = new QVBoxLayout( m_dialog );
-        QLabel *label = new QLabel(
-            tr( "NORAD ID: \t\t%2\n"
-                "Perigee: \t\t%3 km\n"
-                "Apogee: \t\t%4 km\n"
-                "Inclination: \t\t%5 degrees\n"
-                "Period: \t\t%6 minutes\n"
-                "Semi-major axis: \t%7 km\n" )
-            .arg( QString::number(m_satrec.satnum), QString::number( perigee() ),
-                  QString::number( apogee() ), QString::number( inclination() ),
-                  QString::number( period() ), QString::number( semiMajorAxis() )),
-             m_dialog );
-        layout->addWidget( label );
-    }
-    m_dialog->show();
-}
-
-void SatellitesItem::paintViewport( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer )
+void SatellitesItem::render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer )
 {
     Q_UNUSED( viewport );
     Q_UNUSED( renderPos );
@@ -126,33 +82,17 @@ void SatellitesItem::paintViewport( GeoPainter *painter, ViewportParams *viewpor
     painter->restore();
 }
 
-void SatellitesItem::paint( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer )
+void SatellitesItem::update()
 {
-    Q_UNUSED( viewport );
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
-
     double r[3], v[3];
     sgp4( wgs84, m_satrec, timeSinceEpoch(), r, v );
-
-    //FIXME: this should be done in a function that is guaranteed to be called regularly
-    setCoordinate( fromCartesian( r[0], r[1], r[2] ) );
 
     if ( m_satrec.error != 0 ) {
         mDebug() << "Error: " << m_satrec.error;
         return;
     }
 
-    painter->save();
-
-    painter->setPen( oxygenSkyBlue4 );
-    painter->setBrush( oxygenSkyBlue4 );
-    painter->drawRect( 0, 0, size().width(), size().height() );
-
-    painter->setPen( Qt::white );
-    painter->drawText( 0, 0, id() );
-
-    painter->restore();
+    placemark()->setCoordinate( fromCartesian( r[0], r[1], r[2] ) );
 }
 
 // Hopefully this is correct enough
