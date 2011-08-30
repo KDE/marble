@@ -11,9 +11,11 @@
 #include "SatellitesPlugin.h"
 
 #include "MarbleDebug.h"
+#include "MarbleModel.h"
 #include "PluginAboutDialog.h"
 #include "GeoDataPlacemark.h"
 #include "SatellitesItem.h"
+#include "ViewportParams.h"
 
 #include "sgp4/sgp4io.h"
 
@@ -26,7 +28,8 @@ namespace Marble
 {
 
 SatellitesPlugin::SatellitesPlugin()
-    : TrackerPlugin(),
+    : RenderPlugin(),
+     m_model( 0 ),
      m_isInitialized( false ),
      m_aboutDialog( 0 ),
      m_configDialog( 0 ),
@@ -79,7 +82,9 @@ QIcon SatellitesPlugin::icon() const
 
 void SatellitesPlugin::initialize()
 {
-    TrackerPlugin::initialize();
+    //FIXME: remove the const_cast, it may be best to create a new type of plugins where
+    //marbleModel() is not const, since traditional RenderPlugins do not require that
+    m_model = new SatellitesModel( const_cast<MarbleModel *>(marbleModel())->treeModel(), marbleModel()->pluginManager() );
     m_isInitialized = true;
     updateSettings();
 }
@@ -87,6 +92,17 @@ void SatellitesPlugin::initialize()
 bool SatellitesPlugin::isInitialized() const
 {
     return m_isInitialized;
+}
+
+bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer )
+{
+    foreach( TrackerPluginItem *item, m_model->items() ) {
+        if ( viewport->viewLatLonAltBox().contains( item->placemark()->coordinate() ) ) {
+            item->render( painter, viewport, renderPos, layer );
+        }
+    }
+
+    return true;
 }
 
 QHash<QString, QVariant> SatellitesPlugin::settings() const
@@ -148,48 +164,8 @@ void SatellitesPlugin::updateSettings()
     }
     foreach ( const QString &tle, m_settings["tleList"].toStringList() ) {
         mDebug() << tle;
-        downloadFile( QUrl( "http://www.celestrak.com/NORAD/elements/" + tle ), tle );
+        m_model->downloadFile( QUrl( "http://www.celestrak.com/NORAD/elements/" + tle ), tle );
     }
-}
-
-void SatellitesPlugin::parseFile( const QString &id, const QByteArray &file )
-{
-    Q_UNUSED( id );
-
-    beginUpdatePlacemarks();
-
-    //FIXME: terrible hack because twoline2rv uses sscanf
-    setlocale( LC_NUMERIC, "C" );
-
-    QList<QByteArray> tleLines = file.split( '\n' );
-    double startmfe, stopmfe, deltamin;
-    elsetrec satrec;
-    int i = 0;
-    // File format: One line of description, two lines of TLE, last line is empty
-    if ( tleLines.size() % 3 != 1 ) {
-        mDebug() << "Malformated satellite data file";
-    }
-    while ( i < tleLines.size() - 1 ) {
-        QString satelliteName( tleLines.at( i++ ) );
-        char line1[80];
-        char line2[80];
-        qstrcpy( line1, tleLines.at( i++ ).constData() );
-        qstrcpy( line2, tleLines.at( i++ ).constData() );
-        twoline2rv( line1, line2, 'c', 'd', 'i', wgs84,
-                    startmfe, stopmfe, deltamin, satrec );
-        if ( satrec.error != 0 ) {
-            mDebug() << "Error: " << satrec.error;
-            return;
-        }
-
-        SatellitesItem *item = new SatellitesItem( satelliteName.trimmed(), satrec );
-        addItem( item );
-    }
-
-    //Reset to environment
-    setlocale( LC_NUMERIC, "" );
-
-    endUpdatePlacemarks();
 }
 
 QDialog *SatellitesPlugin::aboutDialog()

@@ -8,29 +8,28 @@
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
 //
 
-#ifndef MARBLE_TRACKERPLUGIN_H
-#define MARBLE_TRACKERPLUGIN_H
+#ifndef MARBLE_TRACKERPLUGINMODEL_H
+#define MARBLE_TRACKERPLUGINMODEL_H
 
-#include "RenderPlugin.h"
+#include "marble_export.h"
 
-namespace Marble {
+#include <QtCore/QObject>
 
-class GeoDataPlacemark;
+class QUrl;
+
+namespace Marble
+{
+
+class GeoDataTreeModel;
+class PluginManager;
 class TrackerPluginItem;
-class TrackerPluginPrivate;
+class TrackerPluginModelPrivate;
 
-/**
- * A RenderPlugin designed to track objects as placemarks
- */
-class MARBLE_EXPORT TrackerPlugin : public RenderPlugin
+class MARBLE_EXPORT TrackerPluginModel : public QObject
 {
     Q_OBJECT
 public:
-    TrackerPlugin();
-
-    virtual void initialize();
-
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer );
+    TrackerPluginModel( GeoDataTreeModel *treeModel, const PluginManager *pluginManager  );
 
     TrackerPluginItem *item( const QString &name );
     QList<TrackerPluginItem *> items();
@@ -43,14 +42,12 @@ public:
     void downloadFile( const QUrl &url, const QString &id );
     virtual void parseFile( const QString &id, const QByteArray &file );
 
-public Q_SLOTS:
-    virtual void update();
-
 private:
-    TrackerPluginPrivate *d;
+    TrackerPluginModelPrivate *d;
     Q_PRIVATE_SLOT( d, void downloaded( const QString &, const QString & ) );
+    Q_PRIVATE_SLOT( d, void update() );
 };
 
 }
 
-#endif // MARBLE_TRACKERPLUGIN_H
+#endif // MARBLE_TRACKERPLUGINMODEL_H

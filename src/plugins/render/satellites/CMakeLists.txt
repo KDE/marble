@@ -14,6 +14,7 @@ set( sgp4_SRCS
 
 set( satellites_SRCS
  SatellitesPlugin.cpp
+ SatellitesModel.cpp
  SatellitesItem.cpp )
 
 qt4_wrap_ui( satellites_SRCS SatellitesConfigDialog.ui )

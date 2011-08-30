@@ -11,10 +11,12 @@
 #ifndef MARBLE_SATELLITESPLUGIN_H
 #define MARBLE_SATELLITESPLUGIN_H
 
-#include <QtCore/QObject>
+#include "RenderPlugin.h"
+#include "SatellitesModel.h"
 
-#include "TrackerPlugin.h"
 #include "sgp4/sgp4unit.h"
+
+#include <QtCore/QObject>
 
 class QCheckBox;
 
@@ -32,7 +34,7 @@ class PluginAboutDialog;
  * @brief This plugin displays satellites and their orbits.
  *
  */
-class SatellitesPlugin : public TrackerPlugin
+class SatellitesPlugin : public RenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
@@ -52,10 +54,10 @@ public:
     void initialize();
     bool isInitialized() const;
 
+    bool render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer );
+
     QHash<QString, QVariant> settings() const;
     void setSettings( QHash<QString, QVariant> settings );
-
-    void parseFile( const QString &id, const QByteArray &file );
 
     QDialog *aboutDialog();
     QDialog *configDialog();
@@ -66,6 +68,8 @@ private Q_SLOTS:
     void updateSettings();
 
 private:
+    SatellitesModel *m_model;
+
     bool m_isInitialized;
     QHash<QString, QVariant> m_settings;
     QHash<QString, QCheckBox *> m_boxHash;
