@@ -32,6 +32,7 @@ public:
     TrackerPluginPrivate( TrackerPlugin *parent )
         : m_parent( parent ),
           m_document( new GeoDataDocument() ),
+          m_storagePolicy( MarbleDirs::localPath() + "/cache/" ),
           m_timer( new QTimer() )
     {
         m_document->setDocumentRole( TrackingDocument );
@@ -41,16 +42,13 @@ public:
     {
         Q_UNUSED( relativeUrlString );
 
-        CacheStoragePolicy *storagePolicy
-            = qobject_cast<CacheStoragePolicy*>( m_downloadManager->storagePolicy() );
-        if ( storagePolicy ) {
-            m_parent->parseFile( id, storagePolicy->data( id ) );
-        }
+        m_parent->parseFile( id, m_storagePolicy.data( id ) );
     }
 
     TrackerPlugin *m_parent;
     GeoDataDocument *m_document;
     QHash<QString, TrackerPluginItem *> m_itemHash;
+    CacheStoragePolicy m_storagePolicy;
     HttpDownloadManager *m_downloadManager;
     QTimer *m_timer;
 };
@@ -62,9 +60,7 @@ TrackerPlugin::TrackerPlugin()
 
 void TrackerPlugin::initialize()
 {
-    CacheStoragePolicy *storagePolicy = new CacheStoragePolicy( MarbleDirs::localPath()
-                                                                + "/cache/" );
-    d->m_downloadManager = new HttpDownloadManager( storagePolicy, marbleModel()->pluginManager() );
+    d->m_downloadManager = new HttpDownloadManager( &d->m_storagePolicy, marbleModel()->pluginManager() );
     connect( d->m_downloadManager, SIGNAL(downloadComplete(QString,QString)),
              this, SLOT(downloaded(QString,QString)) );
     d->m_timer->setInterval( 1000 );
