@@ -6,17 +6,23 @@
 // the source code.
 //
 // Copyright 2009      Eckhart Wörner <ewoerner@kde.org>
+// Copyright 2011      Bastian Holst <bastianholst@gmx.de>
 //
 
 #include "GpsdConnection.h"
 
 #include "MarbleDebug.h"
 
+#include <QtCore/QTime>
+
 #include <errno.h>
 #include <clocale>
 
 using namespace Marble;
 /* TRANSLATOR Marble::GpsdConnection */
+
+const int gpsUpdateInterval = 1000; // ms
+const int gpsWaitTimeout = 200; // ms
 
 GpsdConnection::GpsdConnection( QObject* parent )
     : QObject( parent ),
@@ -43,7 +49,7 @@ void GpsdConnection::initialize()
 #if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 3 ) && defined( WATCH_ENABLE )
         m_gpsd.stream( WATCH_ENABLE );
 #endif
-        m_timer.start( 1000 );
+        m_timer.start( gpsUpdateInterval );
     }
     else {
         // There is also gps_errstr() for libgps version >= 2.90,
@@ -81,15 +87,29 @@ void GpsdConnection::initialize()
 
 void GpsdConnection::update()
 {
-#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 3 ) && defined( PACKET_SET )
-    if ( m_gpsd.waiting() ) {
-        gps_data_t* data = m_gpsd.poll();
-        if ( data && data->set & PACKET_SET ) {
-            emit gpsdInfo( *data );
+#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 4 ) && defined( PACKET_SET )
+    gps_data_t *data = 0;
+
+    QTime watchdog;
+    watchdog.start();
+
+    while ( m_gpsd.waiting() && watchdog.elapsed() < gpsWaitTimeout ) {
+        gps_data_t *currentData = m_gpsd.poll();
+
+        if( currentData && currentData->set & PACKET_SET ) {
+            data = currentData;
         }
     }
+
+    if ( data ) {
+        emit gpsdInfo( *data );
+    }
+#else
+#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION == 3 ) && defined( PACKET_SET )
+    gps_data_t *data = m_gpsd.poll();
 #else
     gps_data_t* data = m_gpsd.query( "o" );
+#endif
 
     if ( data ) {
         emit gpsdInfo( *data );
