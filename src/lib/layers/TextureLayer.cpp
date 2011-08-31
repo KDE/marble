@@ -74,7 +74,7 @@ void TextureLayer::Private::mapChanged()
         m_texmapper->setRepaintNeeded();
     }
 
-    emit m_parent->repaintNeeded( QRegion() );
+    emit m_parent->repaintNeeded();
 }
 
 void TextureLayer::Private::updateTextureLayers()

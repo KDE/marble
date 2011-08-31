@@ -16,9 +16,9 @@
 #include <QtCore/QList>
 #include <QtCore/QObject>
 #include <QtCore/QString>
+#include <QtGui/QRegion>
 
 class QPoint;
-class QRegion;
 
 namespace Marble
 {
@@ -85,11 +85,6 @@ class LayerManager : public QObject
 
  Q_SIGNALS:
     /**
-     * @brief Signal that the number of floatItems has changed
-     */
-    void floatItemsChanged();
-    
-    /**
      * @brief Signal that a render item has been initialized
      */
     void renderPluginInitialized( RenderPlugin *renderPlugin );
@@ -104,7 +99,7 @@ class LayerManager : public QObject
      * If available with the @p dirtyRegion which is the region the view will change in.
      * If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
      */
-    void repaintNeeded( QRegion dirtyRegion );
+    void repaintNeeded( const QRegion & dirtyRegion = QRegion() );
 
  public Q_SLOTS:
     void setShowBackground( bool show );

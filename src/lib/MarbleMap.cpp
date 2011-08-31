@@ -187,10 +187,6 @@ void MarbleMapPrivate::construct()
     QObject::connect( m_model, SIGNAL( modelChanged() ),
                       &m_placemarkLayout, SLOT( setCacheData() ) );
 
-    // FIXME: more on the spot update names and API
-    QObject::connect ( &m_layerManager, SIGNAL( floatItemsChanged() ),
-                       m_parent,        SIGNAL( repaintNeeded() ) );
-
     QObject::connect ( &m_layerManager, SIGNAL( pluginSettingsChanged() ),
                        m_parent,        SIGNAL( pluginSettingsChanged() ) );
     QObject::connect ( &m_layerManager, SIGNAL( repaintNeeded( QRegion ) ),
@@ -203,8 +199,8 @@ void MarbleMapPrivate::construct()
 
     m_parent->connect( &m_textureLayer, SIGNAL( tileLevelChanged( int ) ),
                        m_parent, SIGNAL( tileLevelChanged( int ) ) );
-    m_parent->connect( &m_textureLayer, SIGNAL( repaintNeeded( QRegion ) ),
-                       m_parent, SIGNAL( repaintNeeded( QRegion ) ) );
+    m_parent->connect( &m_textureLayer, SIGNAL( repaintNeeded() ),
+                       m_parent, SIGNAL( repaintNeeded() ) );
 
     QList<RenderPlugin *> pluginList = m_layerManager.renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();

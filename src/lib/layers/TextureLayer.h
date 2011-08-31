@@ -97,7 +97,7 @@ class TextureLayer : public QObject, public LayerInterface
 
  Q_SIGNALS:
     void tileLevelChanged( int );
-    void repaintNeeded( const QRegion & );
+    void repaintNeeded();
 
  private:
     Q_PRIVATE_SLOT( d, void mapChanged() )
