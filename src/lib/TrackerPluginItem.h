@@ -23,16 +23,33 @@ class GeoSceneLayer;
 class TrackerPluginItemPrivate;
 class ViewportParams;
 
+/**
+ * Subclass this to represent items in your TrackerPluginModel.
+ */
 class MARBLE_EXPORT TrackerPluginItem
 {
 public:
+    /**
+     * Constructs an item and set the wrapped placemark name to @p name
+     */
     TrackerPluginItem( const QString &name );
+
+    /**
+     * Destroy the item.
+     */
     virtual ~TrackerPluginItem();
 
+    /**
+     * Returns the wrapped placemark which will be displayed if this item is in a TrackerPluginModel
+     */
     GeoDataPlacemark *placemark();
 
     virtual void render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer );
 
+    /**
+     * Reimplement this method to update the placemark, for example to change its coordinates.
+     * If this item is in a TrackerPluginModel, this method will be called regularly.
+     */
     virtual void update() = 0;
 
 private:

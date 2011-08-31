@@ -112,12 +112,12 @@ bool TrackerPluginModel::removeItem( const QString &name )
     return true;
 }
 
-void TrackerPluginModel::beginUpdatePlacemarks()
+void TrackerPluginModel::beginUpdateItems()
 {
     d->m_treeModel->removeDocument( d->m_document );
 }
 
-void TrackerPluginModel::endUpdatePlacemarks()
+void TrackerPluginModel::endUpdateItems()
 {
     d->m_treeModel->addDocument( d->m_document );
 }

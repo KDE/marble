@@ -32,7 +32,7 @@ void SatellitesModel::parseFile( const QString &id, const QByteArray &file )
         mDebug() << "Malformated satellite data file";
     }
 
-    beginUpdatePlacemarks();
+    beginUpdateItems();
 
     //FIXME: terrible hack because twoline2rv uses sscanf
     setlocale( LC_NUMERIC, "C" );
@@ -60,7 +60,7 @@ void SatellitesModel::parseFile( const QString &id, const QByteArray &file )
     //Reset to environment
     setlocale( LC_NUMERIC, "" );
 
-    endUpdatePlacemarks();
+    endUpdateItems();
 }
 
 #include "SatellitesModel.moc"
