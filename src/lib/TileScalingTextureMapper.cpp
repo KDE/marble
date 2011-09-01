@@ -18,15 +18,16 @@
 // Qt
 #include <QtCore/qmath.h>
 #include <QtGui/QImage>
-#include <QtGui/QPainter>
 
 // Marble
+#include "GeoPainter.h"
+#include "ScanlineTextureMapperContext.h"
 #include "StackedTileLoader.h"
-#include "ViewParams.h"
 #include "TextureColorizer.h"
 #include "TileLoaderHelper.h"
 #include "StackedTile.h"
 #include "MathHelper.h"
+#include "ViewportParams.h"
 
 using namespace Marble;
 
@@ -37,7 +38,7 @@ TileScalingTextureMapper::TileScalingTextureMapper( StackedTileLoader *tileLoade
       m_tileLoader( tileLoader ),
       m_cache( cache ),
       m_repaintNeeded( true ),
-      m_oldRadius( 0 )
+      m_radius( 0 )
 {
     connect( m_tileLoader, SIGNAL( tileUpdateAvailable( const TileId & ) ),
              this, SLOT( updateTile( const TileId & ) ) );
@@ -45,21 +46,41 @@ TileScalingTextureMapper::TileScalingTextureMapper( StackedTileLoader *tileLoade
              this, SLOT( updateTiles() ) );
 }
 
-void TileScalingTextureMapper::mapTexture( QPainter *painter,
-                                           ViewParams *viewParams,
+void TileScalingTextureMapper::mapTexture( GeoPainter *painter,
+                                           const ViewportParams *viewport,
                                            const QRect &dirtyRect,
                                            TextureColorizer *texColorizer )
 {
-    if ( texColorizer || m_oldRadius != viewParams->radius() ) {
-        if ( m_repaintNeeded ) {
-            mapTexture( painter, viewParams, texColorizer );
+    if ( viewport->radius() <= 0 )
+        return;
 
+    if ( texColorizer || m_radius != viewport->radius() ) {
+        if ( m_canvasImage.size() != viewport->size() || m_radius != viewport->radius() ) {
+            const QImage::Format optimalFormat = ScanlineTextureMapperContext::optimalCanvasImageFormat( viewport );
+
+            if ( m_canvasImage.size() != viewport->size() || m_canvasImage.format() != optimalFormat ) {
+                m_canvasImage = QImage( viewport->size(), optimalFormat );
+            }
+
+            if ( !viewport->mapCoversViewport() ) {
+                m_canvasImage.fill( 0 );
+            }
+
+            m_repaintNeeded = true;
+        }
+
+        if ( m_repaintNeeded ) {
+            mapTexture( painter, viewport, texColorizer );
+
+            m_radius = viewport->radius();
             m_repaintNeeded = false;
         }
 
-        painter->drawImage( dirtyRect, *viewParams->canvasImage(), dirtyRect );
+        painter->drawImage( dirtyRect, m_canvasImage, dirtyRect );
     } else {
-        mapTexture( painter, viewParams, texColorizer );
+        mapTexture( painter, viewport, texColorizer );
+
+        m_radius = viewport->radius();
     }
 }
 
@@ -68,18 +89,14 @@ void TileScalingTextureMapper::setRepaintNeeded()
     m_repaintNeeded = true;
 }
 
-void TileScalingTextureMapper::mapTexture( QPainter *painter, ViewParams *viewParams, TextureColorizer *texColorizer )
+void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportParams *viewport, TextureColorizer *texColorizer )
 {
-    if ( viewParams->radius() <= 0 )
-        return;
+    const int imageHeight = viewport->height();
+    const int imageWidth  = viewport->width();
+    const qint64  radius      = viewport->radius();
 
-    QSharedPointer<QImage> canvasImage = viewParams->canvasImagePtr();
-    const int imageHeight = canvasImage->height();
-    const int imageWidth  = canvasImage->width();
-    const qint64  radius      = viewParams->radius();
-
-    const bool highQuality  = ( viewParams->mapQuality() == HighQuality
-                || viewParams->mapQuality() == PrintQuality );
+    const bool highQuality  = ( painter->mapQuality() == HighQuality
+                             || painter->mapQuality() == PrintQuality );
 
     // Reset backend
     m_tileLoader->resetTilehash();
@@ -87,7 +104,7 @@ void TileScalingTextureMapper::mapTexture( QPainter *painter, ViewParams *viewPa
     // Calculate translation of center point
     qreal centerLon, centerLat;
 
-    viewParams->centerCoordinates( centerLon, centerLat );
+    viewport->centerCoordinates( centerLon, centerLat );
 
     const int numTilesX = m_tileLoader->tileRowCount( tileZoomLevel() );
     const int numTilesY = m_tileLoader->tileColumnCount( tileZoomLevel() );
@@ -104,10 +121,10 @@ void TileScalingTextureMapper::mapTexture( QPainter *painter, ViewParams *viewPa
     const int maxTileY = qMin( qreal( numTilesY * ( yNormalizedCenter + imageHeight/( 8.0 * radius ) ) ),
                                qreal( numTilesY - 1.0 ) );
 
-    if ( texColorizer || m_oldRadius != radius ) {
+    if ( texColorizer || m_radius != radius ) {
         m_cache->clear();
 
-        QPainter imagePainter( canvasImage.data() );
+        QPainter imagePainter( &m_canvasImage );
         imagePainter.setRenderHint( QPainter::SmoothPixmapTransform, highQuality );
 
         for ( int tileY = minTileY; tileY <= maxTileY; ++tileY ) {
@@ -136,7 +153,7 @@ void TileScalingTextureMapper::mapTexture( QPainter *painter, ViewParams *viewPa
         }
 
         if ( texColorizer ) {
-            texColorizer->colorize( viewParams );
+            texColorizer->colorize( &m_canvasImage, viewport, painter->mapQuality() );
         }
     } else {
         painter->save();
@@ -183,8 +200,6 @@ void TileScalingTextureMapper::mapTexture( QPainter *painter, ViewParams *viewPa
     }
 
     m_tileLoader->cleanupTilehash();
-
-    m_oldRadius = radius;
 }
 
 void TileScalingTextureMapper::updateTile( const TileId &stackedId )

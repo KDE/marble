@@ -5,27 +5,27 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>
-// Copyright 2008, 2009, 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
-// Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
+// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#ifndef MARBLE_ATMOSPHERELAYER_H
-#define MARBLE_ATMOSPHERELAYER_H
+#ifndef MARBLE_MARBLESPLASHLAYER_H
+#define MARBLE_MARBLESPLASHLAYER_H
 
 #include "LayerInterface.h"
+
 
 namespace Marble
 {
 
-class AtmosphereLayer : public LayerInterface
+class MarbleSplashLayer : public LayerInterface
 {
 public:
+    MarbleSplashLayer();
+
     virtual QStringList renderPosition() const;
 
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-       const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
+                         const QString &renderPos = "SURFACE", GeoSceneLayer *layer = 0 );
 };
 
 }

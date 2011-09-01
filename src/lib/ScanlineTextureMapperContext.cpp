@@ -398,19 +398,19 @@ bool ScanlineTextureMapperContext::isOutOfTileRange( const int itLon, const int 
 }
 
 
-int ScanlineTextureMapperContext::interpolationStep( ViewParams * const viewParams )
+int ScanlineTextureMapperContext::interpolationStep( const ViewportParams *viewport, MapQuality mapQuality )
 {
-    if ( viewParams->mapQuality() == PrintQuality ) {
+    if ( mapQuality == PrintQuality ) {
         return 1;    // Don't interpolate for print quality.
     }
 
-    if ( ! viewParams->viewport()->globeCoversViewport() ) {
+    if ( ! viewport->globeCoversViewport() ) {
         return 8;
     }
 
     // Find the optimal interpolation interval m_nBest for the 
     // current image canvas width
-    const int width = viewParams->canvasImage()->width();
+    const int width = viewport->width();
 
     int nBest = 2;
     int nEvalMin = width - 1;
@@ -423,6 +423,18 @@ int ScanlineTextureMapperContext::interpolationStep( ViewParams * const viewPara
     }
 
     return nBest;
+}
+
+
+QImage::Format ScanlineTextureMapperContext::optimalCanvasImageFormat( const ViewportParams *viewport )
+{
+    // If the globe covers fully the screen then we can use the faster
+    // RGB32 as there are no translucent areas involved.
+    QImage::Format imageFormat = ( viewport->mapCoversViewport() )
+                                 ? QImage::Format_RGB32
+                                 : QImage::Format_ARGB32_Premultiplied;
+
+    return imageFormat;
 }
 
 
@@ -446,11 +458,11 @@ void ScanlineTextureMapperContext::nextTile( int &posX, int &posY )
     // tileCol counts the tile columns left from the current tile.
     // tileRow counts the tile rows on the top from the current tile.
 
-    const int tileCol = lon / m_tileSize.width();
-    const int tileRow = lat / m_tileSize.height();
+    int tileCol = lon / m_tileSize.width();
+    int tileRow = lat / m_tileSize.height();
 
-    m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel, tileCol, tileRow ) );
-    m_deltaLevel = m_tileLevel - m_tile->id().zoomLevel();
+    m_deltaLevel = 0;
+    m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel - m_deltaLevel, tileCol >> m_deltaLevel, tileRow >> m_deltaLevel ) );
 
     // Update position variables:
     // m_tilePosX/Y stores the position of the tiles in 
@@ -488,11 +500,11 @@ void ScanlineTextureMapperContext::nextTile( qreal &posX, qreal &posY )
     // tileCol counts the tile columns left from the current tile.
     // tileRow counts the tile rows on the top from the current tile.
 
-    const int tileCol = lon / m_tileSize.width();
-    const int tileRow = lat / m_tileSize.height();
+    int tileCol = lon / m_tileSize.width();
+    int tileRow = lat / m_tileSize.height();
 
-    m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel, tileCol, tileRow ) );
-    m_deltaLevel = m_tileLevel - m_tile->id().zoomLevel();
+    m_deltaLevel = 0;
+    m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel - m_deltaLevel, tileCol >> m_deltaLevel, tileRow >> m_deltaLevel ) );
 
     // Update position variables:
     // m_tilePosX/Y stores the position of the tiles in 

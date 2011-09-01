@@ -124,7 +124,7 @@ void FileViewFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
           QPoint( padding(), padding() ), QRegion(),QWidget::RenderFlags(QWidget::DrawChildren));
 
     painter->begin( painter->device() );
-    m_fileView->repaint();
+    m_fileView->update();
 }
 
 bool FileViewFloatItem::eventFilter(QObject *object, QEvent *e)
@@ -203,7 +203,7 @@ void FileViewFloatItem::updateFileView()
         QRectF floatItemRect = QRectF(positivePosition(), size()).toRect();
         QRegion dirtyRegion(floatItemRect.toRect());
 
-        m_marbleWidget->repaint(dirtyRegion);
+        m_marbleWidget->update(dirtyRegion);
     }
 }
 

@@ -55,7 +55,36 @@
 namespace Marble
 {
 
-const int REPAINT_SCHEDULING_INTERVAL = 0;
+const int REPAINT_SCHEDULING_INTERVAL = 1000;
+
+
+class MarbleWidget::CustomPaintLayer : public LayerInterface
+{
+ public:
+    CustomPaintLayer( MarbleWidget *widget )
+        : m_widget( widget )
+    {
+    }
+
+    virtual QStringList renderPosition() const { return QStringList() << "USER_TOOLS"; }
+
+    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
+                         const QString &renderPos, GeoSceneLayer *layer )
+    {
+        Q_UNUSED( viewport );
+        Q_UNUSED( renderPos );
+        Q_UNUSED( layer );
+
+        m_widget->customPaint( painter );
+
+        return true;
+    }
+
+    virtual qreal zValue() const { return 1.0e7; }
+
+ private:
+    MarbleWidget *const m_widget;
+};
 
 
 class MarbleWidgetPrivate
@@ -72,6 +101,7 @@ class MarbleWidgetPrivate
           m_physics( new MarblePhysics( parent ) ),
           m_repaintTimer(),
           m_routingLayer( 0 ),
+          m_customPaintLayer( parent ),
           m_popupmenu( 0 ),
           m_showFrameRate( false ),
           m_viewAngle( 110.0 )
@@ -80,6 +110,7 @@ class MarbleWidgetPrivate
 
     ~MarbleWidgetPrivate()
     {
+        m_map->removeLayer( &m_customPaintLayer );
         delete m_map;
     }
 
@@ -123,6 +154,7 @@ class MarbleWidgetPrivate
     QTimer           m_repaintTimer;
 
     RoutingLayer     *m_routingLayer;
+    MarbleWidget::CustomPaintLayer m_customPaintLayer;
 
     MarbleWidgetPopupMenu *m_popupmenu;
 
@@ -193,6 +225,8 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SIGNAL( pluginSettingsChanged() ) );
     m_widget->connect( m_map,    SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
+    m_widget->connect( m_map,    SIGNAL( themeChanged( QString ) ),
+                       m_widget, SIGNAL( themeChanged( QString ) ) );
 
     // react to some signals of m_map
     m_widget->connect( m_map,    SIGNAL( repaintNeeded( QRegion ) ),
@@ -200,8 +234,6 @@ void MarbleWidgetPrivate::construct()
 
     // When some fundamental things change in the model, we got to
     // show this in the view, i.e. here.
-    m_widget->connect( m_model,  SIGNAL( themeChanged( QString ) ),
-		       m_widget, SIGNAL( themeChanged( QString ) ) );
     m_widget->connect( m_model, SIGNAL( modelChanged() ),
                        m_widget, SLOT( update() ) );
 
@@ -210,12 +242,6 @@ void MarbleWidgetPrivate::construct()
                                                             const QString& ) ),
                        m_widget, SLOT( creatingTilesStart( TileCreator*, const QString&,
                                                            const QString& ) ) );
-
-    m_widget->connect( m_model->sunLocator(), SIGNAL( updateStars() ),
-                       m_widget, SLOT( update() ) );
-
-    m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
-                       m_widget, SLOT( centerOn( qreal, qreal ) ) );
 
     // Repaint timer
     m_repaintTimer.setSingleShot( true );
@@ -238,6 +264,8 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( m_model->routingManager()->alternativeRoutesModel(),
                        SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
                        m_widget, SLOT( repaint() ) );
+
+    m_map->addLayer( &m_customPaintLayer );
 }
 
 void MarbleWidgetPrivate::moveByStep( int stepsRight, int stepsDown, FlyToMode mode )
@@ -255,7 +283,7 @@ void MarbleWidgetPrivate::repaint()
     m_widget->setAttribute( Qt::WA_NoSystemBackground,
                   m_widget->viewport()->mapCoversViewport() && !m_model->mapThemeId().isEmpty() );
 
-    m_widget->repaint();
+    m_widget->update();
 }
 
 // ----------------------------------------------------------------
@@ -802,9 +830,7 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
                         d->m_map->mapQuality(), doClip );
     QRect  dirtyRect = evt->rect();
 
-    // Draws the map like MarbleMap::paint does, but adds our customPaint in between
     d->m_map->paint( painter, dirtyRect );
-    customPaint( &painter );
 
     if ( !isEnabled() )
     {
@@ -868,17 +894,7 @@ void MarbleWidget::setMapThemeId( const QString& mapThemeId )
     setAttribute( Qt::WA_NoSystemBackground,
                   false );
 
-    SunLocator  *sunLocator = d->m_model->sunLocator();
-
-    if ( sunLocator && sunLocator->getCentered() ) {
-        qreal  lon = sunLocator->getLon();
-        qreal  lat = sunLocator->getLat();
-        centerOn( lon, lat );
-
-        setInputEnabled( false );
-    }
-
-    repaint();
+    update();
 }
 
 GeoSceneDocument *MarbleWidget::mapTheme() const
@@ -891,56 +907,64 @@ void MarbleWidget::setPropertyValue( const QString& name, bool value )
     mDebug() << "In MarbleWidget the property " << name << "was set to " << value;
     d->m_map->setPropertyValue( name, value );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowOverviewMap( bool visible )
 {
     d->m_map->setShowOverviewMap( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowScaleBar( bool visible )
 {
     d->m_map->setShowScaleBar( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowCompass( bool visible )
 {
     d->m_map->setShowCompass( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowClouds( bool visible )
 {
     d->m_map->setShowClouds( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowSunShading( bool visible )
 {
     d->m_map->setShowSunShading( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowCityLights( bool visible )
 {
     d->m_map->setShowCityLights( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowSunInZenith( bool visible )
 {
+    disconnect( d->m_model->sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
+                this,                     SLOT( centerOn( qreal, qreal ) ) );
+
     if ( d->m_map->showSunInZenith() != visible ) { // Toggling input modifies event filters, so avoid that if not needed
         d->m_map->setShowSunInZenith( visible );
         setInputEnabled( !d->m_map->showSunInZenith() );
+    }
+
+    if ( d->m_map->showSunInZenith() ) {
+        connect( d->m_model->sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
+                 this,                     SLOT( centerOn( qreal, qreal ) ) );
     }
 }
 
@@ -948,98 +972,98 @@ void MarbleWidget::setShowAtmosphere( bool visible )
 {
     d->m_map->setShowAtmosphere( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowCrosshairs( bool visible )
 {
     d->m_map->setShowCrosshairs( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowGrid( bool visible )
 {
     d->m_map->setShowGrid( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowPlaces( bool visible )
 {
     d->m_map->setShowPlaces( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowCities( bool visible )
 {
     d->m_map->setShowCities( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowTerrain( bool visible )
 {
     d->m_map->setShowTerrain( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowOtherPlaces( bool visible )
 {
     d->m_map->setShowOtherPlaces( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowRelief( bool visible )
 {
     d->m_map->setShowRelief( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowIceLayer( bool visible )
 {
     d->m_map->setShowIceLayer( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowBorders( bool visible )
 {
     d->m_map->setShowBorders( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowRivers( bool visible )
 {
     d->m_map->setShowRivers( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowLakes( bool visible )
 {
     d->m_map->setShowLakes( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowFrameRate( bool visible )
 {
     d->m_showFrameRate = visible;
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowBackground( bool visible )
 {
     d->m_map->setShowBackground( visible );
 
-    repaint();
+    update();
 }
 
 void MarbleWidget::setShowTileId( bool visible )

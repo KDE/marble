@@ -27,7 +27,6 @@
 #include <QtCore/QObject>
 #include <QtCore/QSize>
 #include <QtCore/QVector>
-#include <QtGui/QImage>
 
 #include "GeoSceneTexture.h"
 #include "TileId.h"
@@ -70,7 +69,7 @@ class StackedTileLoader : public QObject
          *                        the tiles from a remote resource.
          */
         StackedTileLoader( TileLoader *tileLoader,
-                           SunLocator * const sunLocator );
+                           const SunLocator * const sunLocator );
         virtual ~StackedTileLoader();
 
         void setTextureLayers( QVector<GeoSceneTexture const *> & );
@@ -145,8 +144,6 @@ class StackedTileLoader : public QObject
         /**
          */
         void updateTile( TileId const & tileId, QImage const &tileImage );
-
-        void update();
 
     Q_SIGNALS:
         /**

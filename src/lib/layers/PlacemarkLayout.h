@@ -23,6 +23,7 @@
 #include <QtCore/QModelIndex>
 #include <QtCore/QRect>
 #include <QtCore/QVector>
+#include <GeoDataFeature.h>
 
 class QAbstractItemModel;
 class QSortFilterProxyModel;
@@ -76,11 +77,6 @@ class PlacemarkLayout : public QObject, public LayerInterface
      */
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
                          const QString& renderPos = "HOVERS_ABOVE_SURFACE", GeoSceneLayer * layer = 0 );
-
-    /**
-     * @reimp
-     */
-    virtual qreal zValue() const;
 
     void setDefaultLabelColor( const QColor &color );
 
@@ -140,6 +136,7 @@ class PlacemarkLayout : public QObject, public LayerInterface
     QMap<TileId, QList<GeoDataPlacemark*> > m_placemarkCache;
 
     QVector< int > m_weightfilter;
+    QVector< GeoDataFeature::GeoDataVisualCategory > m_acceptedVisualCategories;
 
     // earth
     bool m_showPlaces;

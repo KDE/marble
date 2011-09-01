@@ -30,12 +30,12 @@ class GeoPainter;
 class PntMap;
 class ViewportParams;
 
-class VectorMap : public ScreenPolygon::Vector
+class VectorMap
 {
  public:
     VectorMap();
     ~VectorMap();
-    void createFromPntMap( const PntMap*, ViewportParams *viewport );
+    void createFromPntMap( const PntMap*, const ViewportParams *viewport );
 
     /**
      * @brief Paint the background, i.e. the water.
@@ -52,34 +52,30 @@ class VectorMap : public ScreenPolygon::Vector
     //	int nodeCount(){ return m_debugNodeCount; }
 
  private:
-    void sphericalCreateFromPntMap( const PntMap*, ViewportParams *viewport );
-    void rectangularCreateFromPntMap( const PntMap*, ViewportParams *viewport );
-    void mercatorCreateFromPntMap( const PntMap*, ViewportParams *viewport );
+    void sphericalCreateFromPntMap( const PntMap*, const ViewportParams *viewport );
+    void rectangularCreateFromPntMap( const PntMap*, const ViewportParams *viewport );
+    void mercatorCreateFromPntMap( const PntMap*, const ViewportParams *viewport );
 
-    void createPolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
-                         GeoDataCoordinates::Vector::ConstIterator const &, const int,
-			 ViewportParams *viewport );
     void sphericalCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
 				  GeoDataCoordinates::Vector::ConstIterator const &,
-				  const int detail, ViewportParams *viewport );
+                                  const int detail, const ViewportParams *viewport );
     void rectangularCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
 				    GeoDataCoordinates::Vector::ConstIterator const &,
-				    const int detail, ViewportParams *viewport );
+                                    const int detail, const ViewportParams *viewport, int offset );
     void mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
 				 GeoDataCoordinates::Vector::ConstIterator const &,
-				 const int detail, ViewportParams *viewport );
+                                 const int detail, const ViewportParams *viewport, int offset );
 
-    void           manageCrossHorizon(ViewportParams *viewport);
-    const QPointF  horizonPoint(ViewportParams *viewport);
-    void           createArc(ViewportParams *viewport);
+    QPointF  horizonPoint( const ViewportParams *viewport, const QPointF &currentPoint, int rLimit ) const;
+    void           createArc( const ViewportParams *viewport, const QPointF &horizona, const QPointF &horizonb, int rLimit );
 
     int            getDetailLevel( int radius ) const;
 
  private:
-    qreal            m_zlimit;
-    qreal            m_plimit;
-    qreal            m_zBoundingBoxLimit;	
-    qreal            m_zPointLimit;	
+    qreal            m_zBoundingBoxLimit;
+    qreal            m_zPointLimit;
+
+    ScreenPolygon::Vector m_polygons;
 
     //	Quaternion m_invRotAxis;
     matrix            m_rotMatrix;
@@ -87,26 +83,6 @@ class VectorMap : public ScreenPolygon::Vector
     //	int m_debugNodeCount;
 
     ScreenPolygon     m_polygon;
-
-    QPointF           m_currentPoint;
-    QPointF           m_lastPoint; 
-
-    // Dealing with the horizon for spherical projection.
-    bool              m_firsthorizon;
-    bool              m_lastvisible;
-    bool              m_currentlyvisible;
-    bool              m_horizonpair;
-    QPointF           m_firstHorizonPoint;
-    QPointF           m_horizona;
-    QPointF           m_horizonb;
-	
-    int               m_rlimit;
-
-    // Needed for repetition in the X direction for flat projection
-    int         m_lastSign;
-    int         m_offset;
-    qreal      m_lastLon;
-    qreal      m_lastLat;
 };
 
 }

@@ -56,6 +56,7 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
+#include "MarbleSplashLayer.h"
 #include "MeasureTool.h"
 #include "MergedLayerDecorator.h"
 #include "PlacemarkLayout.h"
@@ -77,6 +78,36 @@
 namespace Marble
 {
 
+
+class MarbleMap::CustomPaintLayer : public LayerInterface
+{
+ public:
+    CustomPaintLayer( MarbleMap *map )
+        : m_map( map )
+    {
+    }
+
+    virtual QStringList renderPosition() const { return QStringList() << "USER_TOOLS"; }
+
+    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
+                         const QString &renderPos, GeoSceneLayer *layer )
+    {
+        Q_UNUSED( viewport );
+        Q_UNUSED( renderPos );
+        Q_UNUSED( layer );
+
+        m_map->customPaint( painter );
+
+        return true;
+    }
+
+    virtual qreal zValue() const { return 1.0e6; }
+
+ private:
+    MarbleMap *const m_map;
+};
+
+
 class MarbleMapPrivate
 {
     friend class MarbleWidget;
@@ -85,8 +116,6 @@ class MarbleMapPrivate
     explicit MarbleMapPrivate( MarbleMap *parent, MarbleModel *model );
 
     void construct();
-
-    void paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect );
 
     void setBoundingBox();
 
@@ -98,13 +127,18 @@ class MarbleMapPrivate
     MarbleModel     *const m_model;
     bool             m_modelIsOwned;
 
-    GeoSceneDocument *m_mapTheme;
+    // Parameters for the maps appearance.
     ViewParams       m_viewParams;
-    bool             m_backgroundVisible;
+    bool             m_showFrameRate;
 
+    GeoSceneDocument *m_mapTheme;
+
+    VectorComposer   m_veccomposer;
     TextureColorizer *m_texcolorizer;
 
     LayerManager     m_layerManager;
+    MarbleSplashLayer m_marbleSplashLayer;
+    MarbleMap::CustomPaintLayer m_customPaintLayer;
     GeometryLayer           *m_geometryLayer;
     AtmosphereLayer          m_atmosphereLayer;
     FogLayer                 m_fogLayer;
@@ -112,34 +146,32 @@ class MarbleMapPrivate
     VectorMapLayer   m_vectorMapLayer;
     TextureLayer     m_textureLayer;
     PlacemarkLayout  m_placemarkLayout;
-    VectorComposer   m_veccomposer;
     MeasureTool      m_measureTool;
-
-    // Parameters for the maps appearance.
-
-    bool             m_showFrameRate;
 };
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
         : m_parent( parent ),
           m_model( model ),
+          m_viewParams(),
+          m_showFrameRate( false ),
           m_mapTheme( 0 ),
-          m_backgroundVisible( true ),
+          m_veccomposer(),
           m_texcolorizer( 0 ),
           m_layerManager( model, parent ),
+          m_customPaintLayer( parent ),
           m_vectorMapBaseLayer( &m_veccomposer ),
           m_vectorMapLayer( &m_veccomposer ),
           m_textureLayer( model->mapThemeManager(), model->downloadManager(), model->sunLocator() ),
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), parent ),
           m_measureTool( model )
 {
-    GeoDataDocument *document =  model->treeModel()->rootDocument();
-    m_geometryLayer = new GeometryLayer( document );
+    m_geometryLayer = new GeometryLayer( model->treeModel() );
     m_layerManager.addLayer( m_geometryLayer );
 
     m_layerManager.addLayer( &m_placemarkLayout );
     m_layerManager.addLayer( &m_fogLayer );
     m_layerManager.addLayer( &m_measureTool );
+    m_layerManager.addLayer( &m_customPaintLayer );
 }
 
 void MarbleMapPrivate::construct()
@@ -155,59 +187,29 @@ void MarbleMapPrivate::construct()
     QObject::connect( m_model, SIGNAL( modelChanged() ),
                       &m_placemarkLayout, SLOT( setCacheData() ) );
 
-    // FIXME: more on the spot update names and API
-    QObject::connect ( &m_layerManager, SIGNAL( floatItemsChanged() ),
-                       m_parent,        SIGNAL( repaintNeeded() ) );
-
     QObject::connect ( &m_layerManager, SIGNAL( pluginSettingsChanged() ),
                        m_parent,        SIGNAL( pluginSettingsChanged() ) );
     QObject::connect ( &m_layerManager, SIGNAL( repaintNeeded( QRegion ) ),
                        m_parent,        SIGNAL( repaintNeeded( QRegion ) ) );
     QObject::connect ( &m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        m_parent,        SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
-
-    // FloatItems
-    m_showFrameRate = false;
-
-
-    m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
-                       m_parent,              SLOT( centerOn( qreal, qreal ) ) );
+    
+    QObject::connect ( m_model,  SIGNAL( modelChanged() ),
+                       m_geometryLayer,  SLOT( invalidateScene() ) );
 
     m_parent->connect( &m_textureLayer, SIGNAL( tileLevelChanged( int ) ),
                        m_parent, SIGNAL( tileLevelChanged( int ) ) );
-    m_parent->connect( &m_textureLayer, SIGNAL( repaintNeeded( QRegion ) ),
-                       m_parent, SIGNAL( repaintNeeded( QRegion ) ) );
-}
+    m_parent->connect( &m_textureLayer, SIGNAL( repaintNeeded() ),
+                       m_parent, SIGNAL( repaintNeeded() ) );
 
-void  MarbleMapPrivate::paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect )
-{
-    Q_UNUSED( dirtyRect )
-
-    painter.save();
-
-    QPixmap logoPixmap( MarbleDirs::path( "svg/marble-logo-inverted-72dpi.png" ) );
-
-    if ( logoPixmap.width() > m_parent->width() * 0.7
-         || logoPixmap.height() > m_parent->height() * 0.7 )
-    {
-        logoPixmap = logoPixmap.scaled( QSize( m_parent->width(), m_parent->height() ) * 0.7,
-                                        Qt::KeepAspectRatio, Qt::SmoothTransformation );
+    QList<RenderPlugin *> pluginList = m_layerManager.renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
+        if ( (*i)->nameId() == "sun" ) {
+            (*i)->setVisible( false );
+        }
     }
-
-    QPoint logoPosition( ( m_parent->width()  - logoPixmap.width() ) / 2,
-                            ( m_parent->height() - logoPixmap.height() ) / 2 );
-    painter.drawPixmap( logoPosition, logoPixmap );
-
-    QString message; // "Please assign a map theme!";
-
-    painter.setPen( Qt::white );
-
-    int yTop = logoPosition.y() + logoPixmap.height() + 10;
-    QRect textRect( 0, yTop,
-                    m_parent->width(), m_parent->height() - yTop );
-    painter.drawText( textRect, Qt::AlignHCenter | Qt::AlignTop, message ); 
-
-    painter.restore();
 }
 
 void MarbleMapPrivate::updateProperty( const QString &name, bool show )
@@ -289,9 +291,12 @@ MarbleMap::~MarbleMap()
 {
     MarbleModel *model = d->m_modelIsOwned ? d->m_model : 0;
 
+    d->m_layerManager.removeLayer( &d->m_customPaintLayer );
     d->m_layerManager.removeLayer( &d->m_measureTool );
     d->m_layerManager.removeLayer( &d->m_fogLayer );
     d->m_layerManager.removeLayer( &d->m_placemarkLayout );
+    d->m_layerManager.removeLayer( &d->m_textureLayer );
+    d->m_layerManager.removeLayer( &d->m_atmosphereLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
     delete d;
@@ -571,7 +576,18 @@ bool MarbleMap::showCityLights() const
 
 bool MarbleMap::showSunInZenith() const
 {
-    return d->m_model->sunLocator()->getCentered();
+    bool visible = false;
+
+    QList<RenderPlugin *> pluginList = renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
+        if ( (*i)->nameId() == "sun" ) {
+            visible = (*i)->visible();
+        }
+    }
+
+    return visible;
 }
 
 bool MarbleMap::showAtmosphere() const
@@ -647,7 +663,7 @@ bool MarbleMap::showFrameRate() const
 
 bool MarbleMap::showBackground() const
 {
-    return d->m_backgroundVisible;
+    return d->m_layerManager.showBackground();
 }
 
 quint64 MarbleMap::volatileTileCacheLimit() const
@@ -738,36 +754,18 @@ bool MarbleMap::geoCoordinates( int x, int y,
 // Used to be paintEvent()
 void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
 {
-    QTime t;
-    t.start();
-    
+    Q_UNUSED( dirtyRect );
+
     if ( !d->m_mapTheme ) {
         mDebug() << "No theme yet!";
-        d->paintMarbleSplash( painter, dirtyRect );
+        d->m_marbleSplashLayer.render( &painter, d->m_viewParams.viewport() );
         return;
     }
 
-    QStringList renderPositions;
+    QTime t;
+    t.start();
 
-    if ( d->m_backgroundVisible ) {
-        renderPositions << "STARS" << "BEHIND_TARGET";
-        d->m_layerManager.renderLayers( &painter, d->m_viewParams.viewport(), renderPositions );
-    }
-
-    if ( d->m_viewParams.showAtmosphere() ) {
-        d->m_atmosphereLayer.render( &painter, d->m_viewParams.viewport() );
-    }
-
-    if ( d->m_model->mapTheme()->map()->hasTextureLayers() ) {
-        d->m_textureLayer.paintGlobe( &painter, &d->m_viewParams, dirtyRect );
-    }
-
-    renderPositions.clear();
-    renderPositions << "SURFACE" << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
-                    << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
-    d->m_layerManager.renderLayers( &painter, d->m_viewParams.viewport(), renderPositions );
-
-    customPaint( &painter );
+    d->m_layerManager.renderLayers( &painter, d->m_viewParams.viewport() );
 
     if ( d->m_showFrameRate ) {
         FpsLayer fpsLayer( &t );
@@ -781,10 +779,6 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
 void MarbleMap::customPaint( GeoPainter *painter )
 {
     Q_UNUSED( painter );
-
-    if ( !d->m_mapTheme ) {
-        return;
-    }
 }
 
 QString MarbleMap::mapThemeId() const
@@ -802,6 +796,7 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
                     this, SLOT( updateProperty( const QString &, bool ) ) );
     }
 
+    d->m_layerManager.removeLayer( &d->m_textureLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
 
@@ -982,6 +977,8 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
                 d->m_textureLayer.setTextureColorizer( d->m_texcolorizer );
             }
         }
+
+        d->m_layerManager.addLayer( &d->m_textureLayer );
     }
 
     // NOTE due to frequent regressions: 
@@ -1003,16 +1000,6 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     d->m_placemarkLayout.requestStyleReset();
 
     d->m_model->setMapTheme( mapTheme );
-
-    SunLocator  *sunLocator = d->m_model->sunLocator();
-
-    if ( sunLocator && sunLocator->getCentered() ) {
-        qreal  lon = sunLocator->getLon();
-        qreal  lat = sunLocator->getLat();
-        centerOn( lon, lat );
-
-        mDebug() << "Centering on Sun at " << lat << lon;
-    }
 
     d->m_layerManager.syncViewParamsAndPlugins( mapTheme );
 }
@@ -1046,6 +1033,11 @@ void MarbleMap::setShowCompass( bool visible )
 
 void MarbleMap::setShowAtmosphere( bool visible )
 {
+    d->m_layerManager.removeLayer( &d->m_atmosphereLayer );
+    if ( visible ) {
+        d->m_layerManager.addLayer( &d->m_atmosphereLayer );
+    }
+
     d->m_viewParams.setShowAtmosphere( visible );
 }
 
@@ -1072,18 +1064,36 @@ void MarbleMap::setShowClouds( bool visible )
 void MarbleMap::setShowSunShading( bool visible )
 {
     d->m_textureLayer.setShowSunShading( visible );
-    d->m_model->sunLocator()->update();
 }
 
 void MarbleMap::setShowCityLights( bool visible )
 {
     d->m_textureLayer.setShowCityLights( visible );
-    d->m_model->sunLocator()->update();
+    setPropertyValue( "citylights", visible );
 }
 
 void MarbleMap::setShowSunInZenith( bool visible )
 {
-    d->m_model->sunLocator()->setCentered( visible );
+    disconnect( d->m_model->sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
+                this,                     SLOT( centerOn( qreal, qreal ) ) );
+
+    QList<RenderPlugin *> pluginList = renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
+        if ( (*i)->nameId() == "sun" ) {
+            (*i)->setVisible( visible );
+        }
+    }
+
+    if ( showSunInZenith() ) {
+        connect( d->m_model->sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
+                 this,                     SLOT( centerOn( qreal, qreal ) ) );
+
+        centerOn( d->m_model->sunLocator()->getLon(), d->m_model->sunLocator()->getLat() );
+    } else if ( visible ) {
+        mDebug() << "Ignoring centering on sun, since the sun plugin is not loaded.";
+    }
 }
 
 void MarbleMap::setShowTileId( bool visible )
@@ -1154,7 +1164,7 @@ void MarbleMap::setShowFrameRate( bool visible )
 
 void MarbleMap::setShowBackground( bool visible )
 {
-    d->m_backgroundVisible = visible;
+    d->m_layerManager.setShowBackground( visible );
 }
 
 void MarbleMap::notifyMouseClick( int x, int y )

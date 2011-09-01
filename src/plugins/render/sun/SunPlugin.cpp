@@ -69,12 +69,12 @@ QIcon SunPlugin::icon () const
 
 void SunPlugin::initialize ()
 {
-    m_image = QImage( MarbleDirs::path( "svg/sunshine.png" ) ).scaled( QSize( 30, 30 ) );
+    m_pixmap = QPixmap( MarbleDirs::path( "svg/sunshine.png" ) ).scaled( QSize( 30, 30 ) );
 }
 
 bool SunPlugin::isInitialized () const
 {
-    return !m_image.isNull();
+    return !m_pixmap.isNull();
 }
 
 bool SunPlugin::render( GeoPainter *painter, ViewportParams *viewport,
@@ -84,12 +84,12 @@ bool SunPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    if( marbleModel()->sunLocator()->getCentered() == true )
+    if( visible() )
     {
         const qreal lon = marbleModel()->sunLocator()->getLon();
         const qreal lat = marbleModel()->sunLocator()->getLat();
         const GeoDataCoordinates coordinates( lon, lat, 0, GeoDataCoordinates::Degree );
-        painter->drawImage( coordinates, m_image );
+        painter->drawPixmap( coordinates, m_pixmap );
     }
 
     return true;

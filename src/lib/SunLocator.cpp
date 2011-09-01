@@ -51,11 +51,10 @@ const int update_interval = 60000;
 class SunLocatorPrivate
 {
 public:
-    SunLocatorPrivate(MarbleClock *clock, Planet *planet)
+    SunLocatorPrivate( const MarbleClock *clock, const Planet *planet )
         : m_lon( 0.0 ),
           m_lat( 0.0 ),
           m_clock( clock ),
-          m_centered( false ),
           m_planet( planet )
     {
     }
@@ -63,13 +62,12 @@ public:
     qreal m_lon;
     qreal m_lat;
 
-    MarbleClock* m_clock;
-    bool m_centered;
-    Planet* m_planet;
+    const MarbleClock *const m_clock;
+    const Planet *m_planet;
 };
 
 
-SunLocator::SunLocator(MarbleClock *clock, Planet *planet)
+SunLocator::SunLocator( const MarbleClock *clock, const Planet *planet )
   : QObject(),
     d( new SunLocatorPrivate( clock, planet ))
 {
@@ -231,32 +229,10 @@ void SunLocator::update()
 {
     updatePosition();
 
-    emit updateSun();
-
-    if ( d->m_centered ) {
-        emit centerSun( getLon(), getLat() );
-        return;
-    }
-
-    emit updateStars();
+    emit positionChanged( getLon(), getLat() );
 }
 
-void SunLocator::setCentered(bool centered)
-{
-    if ( centered == d->m_centered ) {
-        return;
-    }
-
-    mDebug() << "SunLocator::setCentered";
-    mDebug() << "sunLocator =" << this;
-    d->m_centered = centered;
-    if ( d->m_centered ) {
-        updatePosition();
-        emit centerSun( getLon(), getLat() );
-    }
-}
-
-void SunLocator::setPlanet(Planet *planet)
+void SunLocator::setPlanet( const Planet *planet )
 {
     /*
     // This won't work as expected if the same pointer 
@@ -266,7 +242,7 @@ void SunLocator::setPlanet(Planet *planet)
     }
     */
 
-    Planet* previousPlanet = d->m_planet;
+    const Planet *previousPlanet = d->m_planet;
 
     mDebug() << "SunLocator::setPlanet(Planet*)";
     d->m_planet = planet;
@@ -276,13 +252,8 @@ void SunLocator::setPlanet(Planet *planet)
     // In that case we don't want an update.
     // Update the shading in all other cases.
     if ( !previousPlanet->id().isEmpty() ) {
-        emit updateSun();
+        emit positionChanged( getLon(), getLat() );
     }
-}
-
-bool SunLocator::getCentered() const
-{
-    return d->m_centered;
 }
 
 qreal SunLocator::getLon() const
@@ -293,16 +264,6 @@ qreal SunLocator::getLon() const
 qreal SunLocator::getLat() const
 {
     return d->m_lat * RAD2DEG;
-}
-
-MarbleClock* SunLocator::clock() const
-{
-    return d->m_clock;
-}
-
-Planet* SunLocator::planet() const
-{
-    return d->m_planet;
 }
 
 }

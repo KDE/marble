@@ -19,14 +19,14 @@
 
 // Qt
 #include <QtCore/QRunnable>
-#include <QtGui/QPainter>
 
 // Marble
+#include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "ScanlineTextureMapperContext.h"
 #include "StackedTileLoader.h"
 #include "TextureColorizer.h"
-#include "ViewParams.h"
+#include "ViewportParams.h"
 #include "MathHelper.h"
 
 using namespace Marble;
@@ -34,24 +34,26 @@ using namespace Marble;
 class MercatorScanlineTextureMapper::RenderJob : public QRunnable
 {
 public:
-    RenderJob( StackedTileLoader *tileLoader, int tileLevel, ViewParams *viewParams, int yTop, int yBottom );
+    RenderJob( StackedTileLoader *tileLoader, int tileLevel, QImage *canvasImage, const ViewportParams *viewport, MapQuality mapQuality, int yTop, int yBottom );
 
     virtual void run();
 
 private:
     StackedTileLoader *const m_tileLoader;
     const int m_tileLevel;
-    QSharedPointer<QImage> m_canvasImage;
-    ViewParams *const m_viewParams;
+    QImage *const m_canvasImage;
+    const ViewportParams *const m_viewport;
+    const MapQuality m_mapQuality;
     const int m_yPaintedTop;
     const int m_yPaintedBottom;
 };
 
-MercatorScanlineTextureMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel, ViewParams *viewParams, int yTop, int yBottom )
+MercatorScanlineTextureMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel, QImage *canvasImage, const ViewportParams *viewport, MapQuality mapQuality, int yTop, int yBottom )
     : m_tileLoader( tileLoader ),
       m_tileLevel( tileLevel ),
-      m_canvasImage( viewParams->canvasImagePtr() ),
-      m_viewParams( viewParams ),
+      m_canvasImage( canvasImage ),
+      m_viewport( viewport ),
+      m_mapQuality( mapQuality ),
       m_yPaintedTop( yTop ),
       m_yPaintedBottom( yBottom )
 {
@@ -62,6 +64,7 @@ MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( StackedTileLoader 
     : TextureMapperInterface( parent ),
       m_tileLoader( tileLoader ),
       m_repaintNeeded( true ),
+      m_radius( 0 ),
       m_oldYPaintedTop( 0 )
 {
     connect( m_tileLoader, SIGNAL( tileUpdateAvailable( const TileId & ) ),
@@ -70,22 +73,37 @@ MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( StackedTileLoader 
              this, SIGNAL( tileUpdatesAvailable() ) );
 }
 
-void MercatorScanlineTextureMapper::mapTexture( QPainter *painter,
-                                                ViewParams *viewParams,
+void MercatorScanlineTextureMapper::mapTexture( GeoPainter *painter,
+                                                const ViewportParams *viewport,
                                                 const QRect &dirtyRect,
                                                 TextureColorizer *texColorizer )
 {
+    if ( m_canvasImage.size() != viewport->size() || m_radius != viewport->radius() ) {
+        const QImage::Format optimalFormat = ScanlineTextureMapperContext::optimalCanvasImageFormat( viewport );
+
+        if ( m_canvasImage.size() != viewport->size() || m_canvasImage.format() != optimalFormat ) {
+            m_canvasImage = QImage( viewport->size(), optimalFormat );
+        }
+
+        if ( !viewport->mapCoversViewport() ) {
+            m_canvasImage.fill( 0 );
+        }
+
+        m_radius = viewport->radius();
+        m_repaintNeeded = true;
+    }
+
     if ( m_repaintNeeded ) {
-        mapTexture( viewParams );
+        mapTexture( viewport, painter->mapQuality() );
 
         if ( texColorizer ) {
-            texColorizer->colorize( viewParams );
+            texColorizer->colorize( &m_canvasImage, viewport, painter->mapQuality() );
         }
 
         m_repaintNeeded = false;
     }
 
-    painter->drawImage( dirtyRect, *viewParams->canvasImage(), dirtyRect );
+    painter->drawImage( dirtyRect, m_canvasImage, dirtyRect );
 }
 
 void MercatorScanlineTextureMapper::setRepaintNeeded()
@@ -93,17 +111,15 @@ void MercatorScanlineTextureMapper::setRepaintNeeded()
     m_repaintNeeded = true;
 }
 
-void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
+void MercatorScanlineTextureMapper::mapTexture( const ViewportParams *viewport, MapQuality mapQuality )
 {
     // Reset backend
     m_tileLoader->resetTilehash();
 
-    QSharedPointer<QImage> canvasImage = viewParams->canvasImagePtr();
-
     // Initialize needed constants:
 
-    const int imageHeight = canvasImage->height();
-    const qint64  radius      = viewParams->radius();
+    const int imageHeight = m_canvasImage.height();
+    const qint64  radius      = viewport->radius();
     // Calculate how many degrees are being represented per pixel.
     const float rad2Pixel = (float)( 2 * radius ) / M_PI;
 
@@ -112,7 +128,7 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     // Calculate translation of center point
     qreal centerLon, centerLat;
-    viewParams->centerCoordinates( centerLon, centerLat );
+    viewport->centerCoordinates( centerLon, centerLat );
 
     const int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
 
@@ -132,7 +148,7 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     for ( int i = 0; i < numThreads; ++i ) {
         const int yStart = yPaintedTop +  i      * yStep;
         const int yEnd   = yPaintedTop + (i + 1) * yStep;
-        QRunnable *const job = new RenderJob( m_tileLoader, tileZoomLevel(), viewParams, yStart, yEnd );
+        QRunnable *const job = new RenderJob( m_tileLoader, tileZoomLevel(), &m_canvasImage, viewport, mapQuality, yStart, yEnd );
         m_threadPool.start( job );
     }
 
@@ -140,8 +156,8 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     const int clearStart = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? yPaintedBottom : 0;
     const int clearStop  = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? imageHeight  : yTop;
 
-    QRgb * const itClearBegin = (QRgb*)( canvasImage->scanLine( clearStart ) );
-    QRgb * const itClearEnd   = (QRgb*)( canvasImage->scanLine( clearStop ) );
+    QRgb * const itClearBegin = (QRgb*)( m_canvasImage.scanLine( clearStart ) );
+    QRgb * const itClearEnd   = (QRgb*)( m_canvasImage.scanLine( clearStop ) );
 
     for ( QRgb * it = itClearBegin; it < itClearEnd; ++it ) {
         *(it) = 0;
@@ -161,22 +177,22 @@ void MercatorScanlineTextureMapper::RenderJob::run()
 
     const int imageHeight = m_canvasImage->height();
     const int imageWidth  = m_canvasImage->width();
-    const qint64  radius  = m_viewParams->radius();
+    const qint64  radius  = m_viewport->radius();
     // Calculate how many degrees are being represented per pixel.
     const float rad2Pixel = (float)( 2 * radius ) / M_PI;
     const qreal pixel2Rad = 1.0/rad2Pixel;
 
-    const bool interlaced   = ( m_viewParams->mapQuality() == LowQuality );
-    const bool highQuality  = ( m_viewParams->mapQuality() == HighQuality
-                             || m_viewParams->mapQuality() == PrintQuality );
-    const bool printQuality = ( m_viewParams->mapQuality() == PrintQuality );
+    const bool interlaced   = ( m_mapQuality == LowQuality );
+    const bool highQuality  = ( m_mapQuality == HighQuality
+                             || m_mapQuality == PrintQuality );
+    const bool printQuality = ( m_mapQuality == PrintQuality );
 
     // Evaluate the degree of interpolation
-    const int n = ScanlineTextureMapperContext::interpolationStep( m_viewParams );
+    const int n = ScanlineTextureMapperContext::interpolationStep( m_viewport, m_mapQuality );
 
     // Calculate translation of center point
     qreal centerLon, centerLat;
-    m_viewParams->centerCoordinates( centerLon, centerLat );
+    m_viewport->centerCoordinates( centerLon, centerLat );
 
     const int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
 

@@ -696,6 +696,10 @@ class MARBLE_EXPORT MarbleMap : public QObject
  private:
     Q_DISABLE_COPY( MarbleMap )
     MarbleMapPrivate * const d;
+    friend class MarbleMapPrivate;
+
+    class CustomPaintLayer;
+    friend class CustomPaintLayer;
 
     TextureLayer *textureLayer();
 

@@ -67,7 +67,7 @@ class TileLoader: public QObject
 
  private:
     GeoSceneTexture const * findTextureLayer( TileId const & ) const;
-    QString tileFileName( TileId const & ) const;
+    static QString tileFileName( GeoSceneTexture const * textureLayer, TileId const & );
     void triggerDownload( TileId const &, DownloadUsage const );
     QImage scaledLowerLevelTile( TileId const & );
 

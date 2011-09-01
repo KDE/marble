@@ -20,7 +20,7 @@
 ;    3. This notice may not be removed or altered from any source distribution.
 
 !ifndef setup
-!define setup "marble-setup-0.10.3.exe"
+!define setup "marble-setup.exe"
 !endif
  
 ; change this to wherever the files to be packaged reside
@@ -31,7 +31,7 @@
 !define company "KDE"
  
 !ifndef prodname
-!define prodname "Marble 0.10.3"
+!define prodname "Marble"
 !endif
 
 !define exec "marble.exe"

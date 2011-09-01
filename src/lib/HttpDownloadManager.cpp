@@ -49,8 +49,8 @@ class HttpDownloadManager::Private
      * - a queue for retries of failed downloads */
     QList<QPair<DownloadPolicyKey, DownloadQueueSet *> > m_queueSets;
     QMap<DownloadUsage, DownloadQueueSet *> m_defaultQueueSets;
-    StoragePolicy *m_storagePolicy;
-    PluginManager *m_pluginManager;
+    StoragePolicy *const m_storagePolicy;
+    PluginManager *const m_pluginManager;
     NetworkPlugin *m_networkPlugin;
 
 };
@@ -78,7 +78,6 @@ HttpDownloadManager::Private::~Private()
     QMap<DownloadUsage, DownloadQueueSet *>::iterator const end = m_defaultQueueSets.end();
     for (; pos != end; ++pos )
         delete pos.value();
-    delete m_storagePolicy;
     delete m_networkPlugin;
 }
 
@@ -152,11 +151,6 @@ void HttpDownloadManager::addDownloadPolicy( const DownloadPolicy& policy )
     connectQueueSet( queueSet );
     d->m_queueSets.append( QPair<DownloadPolicyKey, DownloadQueueSet *>
                            ( queueSet->downloadPolicy().key(), queueSet ));
-}
-
-StoragePolicy* HttpDownloadManager::storagePolicy() const
-{
-    return d->m_storagePolicy;
 }
 
 void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFileName,

@@ -17,13 +17,17 @@
 #define MARBLE_TEXTURECOLORIZER_H
 
 #include <QtCore/QObject>
+
+#include "global.h"
+
 #include <QtCore/QString>
+#include <QtGui/QImage>
 
 namespace Marble
 {
 
 class VectorComposer;
-class ViewParams;
+class ViewportParams;
 
 class TextureColorizer : public QObject
 {
@@ -39,7 +43,7 @@ class TextureColorizer : public QObject
 
     void setShowRelief( bool show );
 
-    void colorize(ViewParams *viewParams);
+    void colorize( QImage *origimg, const ViewportParams *viewport, MapQuality mapQuality );
 
  Q_SIGNALS:
     void datasetLoaded();
@@ -48,6 +52,7 @@ class TextureColorizer : public QObject
     VectorComposer *const m_veccomposer;
     QString m_seafile;
     QString m_landfile;
+    QImage m_coastImage;
     uint texturepalette[16][512];
     bool m_showRelief;
 };

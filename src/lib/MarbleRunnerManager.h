@@ -7,6 +7,7 @@
 //
 // Copyright 2008 Henry de Valence <hdevalence@gmail.com>
 // Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2011 Thibaut Gridel <tgridel@free.fr>
 
 #ifndef MARBLE_MARBLERUNNERMANAGER_H
 #define MARBLE_MARBLERUNNERMANAGER_H
@@ -127,8 +128,6 @@ private:
     Q_PRIVATE_SLOT( d, void cleanupSearchTask( RunnerTask* task ) )
 
     Q_PRIVATE_SLOT( d, void cleanupRoutingTask( RunnerTask* task ) )
-
-    Q_PRIVATE_SLOT( d, void cleanupParsingTask( RunnerTask* task ) )
 
     friend class MarbleRunnerManagerPrivate;
 

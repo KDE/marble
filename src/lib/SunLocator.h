@@ -35,36 +35,23 @@ class MARBLE_EXPORT SunLocator : public QObject
     Q_OBJECT
 
  public:
-    /** At the moment Sunlocator does not take ownership of dateTime.
-	However in the destructor there is a delete commented out.
-	So strictly Q_DISABLE_COPY is not necessary in this class.
-	FIXME: clarify this issue.
-    */
-    SunLocator(MarbleClock *clock, Planet *planet);
+    SunLocator( const MarbleClock *clock, const Planet *planet );
     virtual ~SunLocator();
 
     qreal shading(qreal lon, qreal a, qreal c) const;
     void  shadePixel(QRgb& pixcol, qreal shade) const;
     void  shadePixelComposite(QRgb& pixcol, const QRgb& dpixcol, qreal shade) const;
 
-    void  setCentered(bool show);
-    void  setPlanet(Planet *planet);
+    void  setPlanet( const Planet *planet );
 
-    bool getCentered() const;
     qreal getLon() const;
     qreal getLat() const;
-
-    MarbleClock* clock() const;
-
-    Planet* planet() const;
 
  public Q_SLOTS:
     void update();
 
  Q_SIGNALS:
-    void updateStars();
-    void updateSun();
-    void centerSun( qreal lon, qreal lat );
+    void positionChanged( qreal lon, qreal lat );
 
  private:
     void updatePosition();

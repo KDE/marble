@@ -29,7 +29,7 @@ class GeoDataCoordinates;
 class GeoPainterPrivate
 {
  public:
-    GeoPainterPrivate( ViewportParams *viewport, MapQuality mapQuality );
+    GeoPainterPrivate( const ViewportParams *viewport, MapQuality mapQuality );
 
     ~GeoPainterPrivate();
 
@@ -51,9 +51,9 @@ class GeoPainterPrivate
     GeoDataLinearRing createLinearRingFromGeoRect( const GeoDataCoordinates & centerCoordinates,
                                                    qreal width, qreal height );
 
-    ViewportParams  *m_viewport;
-    MapQuality       m_mapQuality;
-    qreal             *m_x;
+    const ViewportParams *const m_viewport;
+    const MapQuality       m_mapQuality;
+    qreal             *const m_x;
 };
 
 } // namespace Marble

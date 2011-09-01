@@ -55,7 +55,7 @@ TileLoader::TileLoader( HttpDownloadManager * const downloadManager, MapThemeMan
 QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
 {
     GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
-    QString const fileName = tileFileName( tileId );
+    QString const fileName = tileFileName( textureLayer, tileId );
     QImage const image( fileName );
     if ( !image.isNull() ) {
         // file is there, so create and return a tile object in any case,
@@ -147,10 +147,9 @@ bool TileLoader::baseTilesAvailable( GeoSceneTexture const & texture )
     //
     for ( int column = 0; result && column < levelZeroColumns; ++column ) {
         for ( int row = 0; result && row < levelZeroRows; ++row ) {
-
-            const QString tilepath = MarbleDirs::path( texture.relativeTileFileName(
-                TileId( texture.sourceDir(), 0, column, row )));
-            result = QFile::exists( tilepath );
+            const TileId id( texture.sourceDir(), 0, column, row );
+            const QString tilepath = tileFileName( &texture, id );
+            result &= QFile::exists( tilepath );
         }
     }
 
@@ -232,9 +231,8 @@ inline GeoSceneTexture const * TileLoader::findTextureLayer( TileId const & id )
     return textureLayer;
 }
 
-QString TileLoader::tileFileName( TileId const & tileId ) const
+QString TileLoader::tileFileName( GeoSceneTexture const * textureLayer, TileId const & tileId )
 {
-    GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
     QString const fileName = textureLayer->relativeTileFileName( tileId );
     QFileInfo const dirInfo( fileName );
     return dirInfo.isAbsolute() ? fileName : MarbleDirs::path( fileName );
@@ -251,12 +249,13 @@ void TileLoader::triggerDownload( TileId const & id, DownloadUsage const usage )
 QImage TileLoader::scaledLowerLevelTile( TileId const & id )
 {
     mDebug() << "TileLoader::scaledLowerLevelTile" << id.toString();
+    GeoSceneTexture const * const textureLayer = findTextureLayer( id );
 
     for ( int level = qMax<int>( 0, id.zoomLevel() - 1 ); level >= 0; --level ) {
         int const deltaLevel = id.zoomLevel() - level;
         TileId const replacementTileId( id.mapThemeIdHash(), level,
                                         id.x() >> deltaLevel, id.y() >> deltaLevel );
-        QString const fileName = tileFileName( replacementTileId );
+        QString const fileName = tileFileName( textureLayer, replacementTileId );
         mDebug() << "TileLoader::scaledLowerLevelTile" << "trying" << fileName;
         QImage toScale( fileName );
 

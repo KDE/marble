@@ -14,9 +14,12 @@
 
 // Marble
 #include "LayerInterface.h"
+#include "GeoDataFeature.h"
 
 // Qt
+#include <QVector>
 
+class QAbstractItemModel;
 
 namespace Marble
 {
@@ -25,19 +28,32 @@ class GeoPainter;
 class ViewportParams;
 class GeometryLayerPrivate;
 
-class GeometryLayer : public LayerInterface
+class GeometryLayer : public QObject, public LayerInterface
 {
- public:
-    GeometryLayer( GeoDataDocument *document );
+    Q_OBJECT
+public:
+    GeometryLayer( QAbstractItemModel *model );
     ~GeometryLayer();
 
     virtual QStringList renderPosition() const;
 
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-       const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
+                         const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
+    
+    static int s_defaultZValues[GeoDataFeature::LastIndex];
+    static int s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
+    static bool s_defaultValuesInitialized;
+    static int s_defaultZValue;
 
- private:
+public Q_SLOTS:
+    void invalidateScene();
+
+private:
     GeometryLayerPrivate *d;
+    
+    static QVector< int > s_weightfilter;
+    
+    static void initializeDefaultValues();
 };
 
 } // namespace Marble

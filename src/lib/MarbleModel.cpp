@@ -74,17 +74,16 @@ class MarbleModelPrivate
  public:
     MarbleModelPrivate( MarbleModel *parent )
         : m_parent( parent ),
-          m_clock( new MarbleClock() ),
+          m_clock(),
           m_planet( new Planet( "earth" ) ),
-          m_sunLocator( new SunLocator( m_clock, m_planet ) ),
-          m_pluginManager( new PluginManager( parent ) ),
-          m_mapThemeManager( new MapThemeManager( parent )),
+          m_sunLocator( &m_clock, m_planet ),
+          m_pluginManager( parent ),
+          m_mapThemeManager( parent ),
           m_homePoint( -9.4, 54.8, 0.0, GeoDataCoordinates::Degree ),  // Some point that tackat defined. :-)
           m_homeZoom( 1050 ),
           m_mapTheme( 0 ),
-          m_downloadManager( new HttpDownloadManager( new FileStoragePolicy(
-                                                                   MarbleDirs::localPath() ),
-                                                      m_pluginManager ) ),
+          m_storagePolicy( MarbleDirs::localPath() ),
+          m_downloadManager( &m_storagePolicy, &m_pluginManager ),
           m_fileManager( 0 ),
           m_fileviewmodel(),
           m_treemodel(),
@@ -105,20 +104,17 @@ class MarbleModelPrivate
 
     ~MarbleModelPrivate()
     {
-        delete m_downloadManager;
     }
-
-    void notifyModelChanged();
 
     MarbleModel             *m_parent;
 
     // Misc stuff.
-    MarbleClock       *const m_clock;
+    MarbleClock              m_clock;
     Planet                  *m_planet;
-    SunLocator        *const m_sunLocator;
+    SunLocator               m_sunLocator;
 
-    PluginManager           *m_pluginManager;
-    MapThemeManager         *m_mapThemeManager;
+    PluginManager            m_pluginManager;
+    MapThemeManager          m_mapThemeManager;
 
     // The home position
     GeoDataCoordinates       m_homePoint;
@@ -127,7 +123,8 @@ class MarbleModelPrivate
     // View and paint stuff
     GeoSceneDocument        *m_mapTheme;
 
-    HttpDownloadManager     *m_downloadManager;
+    FileStoragePolicy        m_storagePolicy;
+    HttpDownloadManager      m_downloadManager;
 
     // Cache related
     FileStorageWatcher      *m_storageWatcher;
@@ -177,10 +174,9 @@ MarbleModel::MarbleModel( QObject *parent )
     // Setting the theme to the current theme.
     d->m_storageWatcher->updateTheme( mapThemeId() );
     // connect the StoragePolicy used by the download manager to the FileStorageWatcher
-    StoragePolicy * const storagePolicy = d->m_downloadManager->storagePolicy();
-    connect( storagePolicy, SIGNAL( cleared() ),
+    connect( &d->m_storagePolicy, SIGNAL( cleared() ),
              d->m_storageWatcher, SLOT( resetCurrentSize() ) );
-    connect( storagePolicy, SIGNAL( sizeChanged( qint64 ) ),
+    connect( &d->m_storagePolicy, SIGNAL( sizeChanged( qint64 ) ),
              d->m_storageWatcher, SLOT( addToCurrentSize( qint64 ) ) );
 
     d->m_fileManager = new FileManager( this );
@@ -194,8 +190,8 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_routingManager = new RoutingManager( d->m_parent, this );
 
-    connect(d->m_clock,   SIGNAL( timeChanged() ),
-            d->m_sunLocator, SLOT( update() ) );
+    connect(&d->m_clock,   SIGNAL( timeChanged() ),
+            &d->m_sunLocator, SLOT( update() ) );
      //Initializing Bookmark manager
     d->m_bookmarkManager = new BookmarkManager();
 }
@@ -209,9 +205,7 @@ MarbleModel::~MarbleModel()
 
     delete d->m_fileManager;
     delete d->m_mapTheme;
-    delete d->m_sunLocator;
     delete d->m_planet;
-    delete d->m_clock;
     delete d;
 
     mDebug() << "Model deleted:" << this;
@@ -355,12 +349,12 @@ void MarbleModel::setHome( const GeoDataCoordinates& homePoint, int zoom )
 
 MapThemeManager* MarbleModel::mapThemeManager() const
 {
-    return d->m_mapThemeManager;
+    return &d->m_mapThemeManager;
 }
 
 HttpDownloadManager* MarbleModel::downloadManager() const
 {
-    return d->m_downloadManager;
+    return &d->m_downloadManager;
 }
 
 
@@ -409,11 +403,6 @@ void MarbleModel::removePlacemarkKey( const QString& key )
     removeGeoData( key );
 }
 
-void MarbleModelPrivate::notifyModelChanged()
-{
-    emit m_parent->modelChanged();
-}
-
 qreal MarbleModel::planetRadius()   const
 {
     return d->m_planet->radius();
@@ -429,16 +418,19 @@ QString MarbleModel::planetId() const
     return d->m_planet->id();
 }
 
-MarbleClock* MarbleModel::clock() const
+MarbleClock *MarbleModel::clock()
 {
-//    mDebug() << "In dateTime, model:" << this;
-//    mDebug() << d << ":" << d->m_clock;
-    return d->m_clock;
+    return &d->m_clock;
+}
+
+const MarbleClock *MarbleModel::clock() const
+{
+    return &d->m_clock;
 }
 
 SunLocator* MarbleModel::sunLocator() const
 {
-    return d->m_sunLocator;
+    return &d->m_sunLocator;
 }
 
 quint64 MarbleModel::persistentTileCacheLimit() const
@@ -448,7 +440,7 @@ quint64 MarbleModel::persistentTileCacheLimit() const
 
 void MarbleModel::clearPersistentTileCache()
 {
-    downloadManager()->storagePolicy()->clearCache();
+    d->m_storagePolicy.clearCache();
 
     // Now create base tiles again if needed
     if ( d->m_mapTheme->map()->hasTextureLayers() ) {
@@ -508,10 +500,10 @@ void MarbleModel::setPersistentTileCacheLimit(quint64 kiloBytes)
 
 PluginManager* MarbleModel::pluginManager() const
 {
-    return d->m_pluginManager;
+    return &d->m_pluginManager;
 }
 
-Planet* MarbleModel::planet() const
+const Planet *MarbleModel::planet() const
 {
     return d->m_planet;
 }
@@ -538,7 +530,7 @@ void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
     QList<DownloadPolicy *>::const_iterator pos = policies.constBegin();
     QList<DownloadPolicy *>::const_iterator const end = policies.constEnd();
     for (; pos != end; ++pos ) {
-        d->m_downloadManager->addDownloadPolicy( **pos );
+        d->m_downloadManager.addDownloadPolicy( **pos );
     }
 }
 
@@ -549,32 +541,32 @@ RoutingManager* MarbleModel::routingManager()
 
 void MarbleModel::setClockDateTime( const QDateTime& datetime )
 {
-    d->m_clock->setDateTime( datetime );
+    d->m_clock.setDateTime( datetime );
 }
 
 QDateTime MarbleModel::clockDateTime() const
 {
-    return d->m_clock->dateTime();
+    return d->m_clock.dateTime();
 }
 
 int MarbleModel::clockSpeed() const
 {
-    return d->m_clock->speed();
+    return d->m_clock.speed();
 }
 
 void MarbleModel::setClockSpeed( int speed )
 {
-    d->m_clock->setSpeed( speed );
+    d->m_clock.setSpeed( speed );
 }
 
 void MarbleModel::setClockTimezone( int timeInSec )
 {
-    d->m_clock->setTimezone( timeInSec );
+    d->m_clock.setTimezone( timeInSec );
 }
 
 int MarbleModel::clockTimezone() const
 {
-    return d->m_clock->timezone();
+    return d->m_clock.timezone();
 }
 
 QTextDocument * MarbleModel::legend()

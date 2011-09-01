@@ -214,7 +214,7 @@ bool MarblePart::openUrl( const KUrl &url )
 bool MarblePart::openFile()
 {
     QStringList fileNames = KFileDialog::getOpenFileNames( KUrl(),
-                                    i18n("*.gpx *.kml|All Supported Files\n*.gpx|GPS Data\n*.kml|Google Earth KML"),
+                                    i18n("*.gpx *.kml *.osm|All Supported Files\n*.gpx|GPS Data\n*.kml|Google Earth KML\n*.osm|OpenStreetMap data"),
                                             widget(), i18n("Open File")
                                            );
     foreach( const QString &fileName, fileNames ) {
@@ -521,8 +521,7 @@ void MarblePart::readSettings()
     // Time
     if( MarbleSettings::systemTime() == true  )
     {
-        m_controlView->marbleModel()->setClockDateTime( QDateTime::currentDateTime().toUTC() );
-        m_controlView->marbleModel()->setClockSpeed( 1 );
+        /* nothing to do */
     }
     else if( MarbleSettings::lastSessionTime() == true )
     {
@@ -1085,7 +1084,7 @@ void MarblePart::setupStatusBar()
              this,                          SLOT( updateStatusBar() ) );
     connect( m_controlView->marbleWidget(), SIGNAL( tileLevelChanged( int )),
              SLOT( showZoomLevel( int )));
-    connect( m_controlView->marbleModel(), SIGNAL( themeChanged( QString )),
+    connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString )),
              this, SLOT( mapThemeChanged( QString )), Qt::QueuedConnection );
     connect( m_controlView->marbleModel()->clock(), SIGNAL( timeChanged() ),
              this,                          SLOT( showDateTime() ) );

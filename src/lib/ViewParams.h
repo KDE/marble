@@ -22,13 +22,9 @@
 #include <QtCore/QSharedPointer>
 #include <QtCore/QString>
 
-#include "marble_export.h"
-
 #include "Quaternion.h"
 #include "global.h"
 
-
-class QImage;
 
 namespace Marble
 {
@@ -42,7 +38,7 @@ class ViewParamsPrivate;
  *
  */
 
-class MARBLE_EXPORT ViewParams
+class ViewParams
 {
  public:
     ViewParams();
@@ -83,12 +79,6 @@ class MARBLE_EXPORT ViewParams
      * @param height new height of viewport
      */
     void setSize( int width, int height );
-
-    QSharedPointer<QImage> canvasImagePtr() const;
-    QImage * canvasImage() const;
-
-    QSharedPointer<QImage> coastImagePtr() const;
-    QImage * coastImage() const;
 
     bool showAtmosphere() const;
     void setShowAtmosphere( bool );

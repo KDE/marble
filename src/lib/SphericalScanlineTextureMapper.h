@@ -15,7 +15,10 @@
 
 #include "TextureMapperInterface.h"
 
+#include "global.h"
+
 #include <QtCore/QThreadPool>
+#include <QtGui/QImage>
 
 
 namespace Marble
@@ -38,20 +41,22 @@ class SphericalScanlineTextureMapper : public TextureMapperInterface
  public:
     explicit SphericalScanlineTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
 
-    virtual void mapTexture( QPainter *painter,
-                             ViewParams *viewParams,
+    virtual void mapTexture( GeoPainter *painter,
+                             const ViewportParams *viewport,
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer );
 
     virtual void setRepaintNeeded();
 
  private:
-    void mapTexture( ViewParams *viewParams );
+    void mapTexture( const ViewportParams *viewport, MapQuality mapQuality );
 
  private:
     class RenderJob;
     StackedTileLoader *const m_tileLoader;
     bool m_repaintNeeded;
+    int m_radius;
+    QImage m_canvasImage;
     QThreadPool m_threadPool;
 };
 

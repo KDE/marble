@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2006-2008 Torsten Rahn <tackat@kde.org>
+// Copyright 2011      Bernahrd Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_LAYERMANAGER_H
@@ -15,12 +16,9 @@
 #include <QtCore/QList>
 #include <QtCore/QObject>
 #include <QtCore/QString>
-
-// Local dir
-#include "marble_export.h"
+#include <QtGui/QRegion>
 
 class QPoint;
-class QRegion;
 
 namespace Marble
 {
@@ -42,7 +40,7 @@ class LayerInterface;
  *
  */
 
-class MARBLE_EXPORT LayerManager : public QObject
+class LayerManager : public QObject
 {
     Q_OBJECT
 
@@ -50,11 +48,10 @@ class MARBLE_EXPORT LayerManager : public QObject
     explicit LayerManager( MarbleModel *model, QObject *parent = 0);
     ~LayerManager();
 
-    void renderLayers( GeoPainter *painter, ViewportParams *viewport, const QStringList& renderPositions );
+    void renderLayers( GeoPainter *painter, ViewportParams *viewport );
 
-    void renderLayer( GeoPainter *painter, ViewportParams *viewport, const QString& renderPosition  );
+    bool showBackground() const;
 
-    
     /**
      * @brief Returns a list of all RenderPlugins on the layer, this includes float items
      * @return the list of RenderPlugins
@@ -88,11 +85,6 @@ class MARBLE_EXPORT LayerManager : public QObject
 
  Q_SIGNALS:
     /**
-     * @brief Signal that the number of floatItems has changed
-     */
-    void floatItemsChanged();
-    
-    /**
      * @brief Signal that a render item has been initialized
      */
     void renderPluginInitialized( RenderPlugin *renderPlugin );
@@ -107,15 +99,18 @@ class MARBLE_EXPORT LayerManager : public QObject
      * If available with the @p dirtyRegion which is the region the view will change in.
      * If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
      */
-    void repaintNeeded( QRegion dirtyRegion );
+    void repaintNeeded( const QRegion & dirtyRegion = QRegion() );
 
  public Q_SLOTS:
-    void loadLayers();
+    void setShowBackground( bool show );
 
     void syncViewParamsAndPlugins( GeoSceneDocument *mapTheme );
     void syncActionWithProperty( QString, bool );
     void syncPropertyWithAction( QString, bool );
- 
+
+ private:
+    void renderLayer( GeoPainter *painter, ViewportParams *viewport, const QString& renderPosition  );
+
  private:
     Q_DISABLE_COPY( LayerManager )
 

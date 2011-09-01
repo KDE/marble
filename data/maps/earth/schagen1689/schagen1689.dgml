@@ -39,6 +39,12 @@
                     <installmap> schagen1689.jpg </installmap>
                     <storageLayout maximumTileLevel="2"/>
                 </texture>
+                <texture name="citylights"><!-- type="texture"-->
+                    <sourcedir format="JPG"> earth/citylights </sourcedir>
+                    <installmap> citylights.jpg </installmap>
+                    <storageLayout maximumTileLevel="3"/>
+                    <blending name="SunLightBlending" />
+                </texture>
             </layer>
 
             <layer name="mwdbii" backend="vector" role="polyline">
@@ -133,6 +139,13 @@
                 <property name="rivers">
                     <available>false</available>
                     <value>false</value>
+                </property>
+            </group>
+
+            <group name="Texture Layers">
+                <property name="citylights">
+                    <value>false</value>
+                    <available>true</available>
                 </property>
             </group>
 

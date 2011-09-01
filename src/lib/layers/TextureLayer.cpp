@@ -30,7 +30,7 @@
 #include "SunLocator.h"
 #include "TextureColorizer.h"
 #include "TileLoader.h"
-#include "ViewParams.h"
+#include "ViewportParams.h"
 
 namespace Marble
 {
@@ -38,7 +38,7 @@ namespace Marble
 class TextureLayer::Private
 {
 public:
-    Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator, TextureLayer *parent );
+    Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator, TextureLayer *parent );
 
     void mapChanged();
     void updateTextureLayers();
@@ -46,7 +46,7 @@ public:
 
 public:
     TextureLayer  *const m_parent;
-    SunLocator *const m_sunLocator;
+    const SunLocator *const m_sunLocator;
     TileLoader m_loader;
     StackedTileLoader    m_tileLoader;
     QCache<TileId, QPixmap> m_pixmapCache;
@@ -56,7 +56,7 @@ public:
     GeoSceneGroup *m_textureLayerSettings;
 };
 
-TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator, TextureLayer *parent )
+TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator, TextureLayer *parent )
     : m_parent( parent )
     , m_sunLocator( sunLocator )
     , m_loader( downloadManager, mapThemeManager )
@@ -74,7 +74,7 @@ void TextureLayer::Private::mapChanged()
         m_texmapper->setRepaintNeeded();
     }
 
-    emit m_parent->repaintNeeded( QRegion() );
+    emit m_parent->repaintNeeded();
 }
 
 void TextureLayer::Private::updateTextureLayers()
@@ -108,7 +108,7 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
 
 
 
-TextureLayer::TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, SunLocator *sunLocator )
+TextureLayer::TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator )
     : QObject()
     , d( new Private( mapThemeManager, downloadManager, sunLocator, this ) )
 {
@@ -121,6 +121,11 @@ TextureLayer::~TextureLayer()
     delete d;
 }
 
+QStringList TextureLayer::renderPosition() const
+{
+    return QStringList() << "SURFACE";
+}
+
 bool TextureLayer::showSunShading() const
 {
     return d->m_tileLoader.showSunShading();
@@ -131,22 +136,24 @@ bool TextureLayer::showCityLights() const
     return d->m_tileLoader.showCityLights();
 }
 
-void TextureLayer::paintGlobe( GeoPainter *painter,
-                               ViewParams *viewParams,
-                               const QRect& dirtyRect )
+bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
+                           const QString &renderPos, GeoSceneLayer *layer )
 {
+    Q_UNUSED( renderPos );
+    Q_UNUSED( layer );
+
     if ( d->m_textures.isEmpty() )
-        return;
+        return false;
 
     if ( !d->m_texmapper )
-        return;
+        return false;
 
     // choose the smaller dimension for selecting the tile level, leading to higher-resolution results
     const int levelZeroWidth = d->m_tileLoader.tileSize().width() * d->m_tileLoader.tileColumnCount( 0 );
     const int levelZeroHight = d->m_tileLoader.tileSize().height() * d->m_tileLoader.tileRowCount( 0 );
     const int levelZeroMinDimension = ( levelZeroWidth < levelZeroHight ) ? levelZeroWidth : levelZeroHight;
 
-    qreal linearLevel = ( 4.0 * (qreal)( viewParams->radius() ) / (qreal)( levelZeroMinDimension ) );
+    qreal linearLevel = ( 4.0 * (qreal)( viewport->radius() ) / (qreal)( levelZeroMinDimension ) );
 
     if ( linearLevel < 1.0 )
         linearLevel = 1.0; // Dirty fix for invalid entry linearLevel
@@ -171,19 +178,19 @@ void TextureLayer::paintGlobe( GeoPainter *painter,
         emit tileLevelChanged( tileLevel );
     }
 
-    d->m_texmapper->mapTexture( painter, viewParams, dirtyRect, d->m_texcolorizer );
-    if ( viewParams->viewContext() == Marble::Still ) {
-        d->m_tileLoader.update();
-    }
+    const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
+    d->m_texmapper->mapTexture( painter, viewport, dirtyRect, d->m_texcolorizer );
+
+    return true;
 }
 
 void TextureLayer::setShowSunShading( bool show )
 {
-    disconnect( d->m_sunLocator, SIGNAL( updateSun() ),
+    disconnect( d->m_sunLocator, SIGNAL( positionChanged( qreal, qreal ) ),
                 this, SLOT( update() ) );
 
     if ( show ) {
-        connect( d->m_sunLocator, SIGNAL( updateSun() ),
+        connect( d->m_sunLocator, SIGNAL( positionChanged( qreal, qreal ) ),
                  this,       SLOT( update() ) );
     }
 

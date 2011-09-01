@@ -223,7 +223,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
     QString               planetName()     const;
     QString               planetId()       const;
 
-    MarbleClock*          clock()       const;
+    MarbleClock *clock();
+    const MarbleClock *clock() const;
     SunLocator*           sunLocator()     const;
 
     /**
@@ -244,7 +245,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief Returns the planet object for the current map.
      * @return the planet object for the current map
      */
-    Planet* planet() const;
+    const Planet *planet() const;
 
     RoutingManager* routingManager();
 
@@ -307,7 +308,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
  private:
     Q_DISABLE_COPY( MarbleModel )
-    Q_PRIVATE_SLOT( d, void notifyModelChanged() )
 
     void addDownloadPolicies( GeoSceneDocument *mapTheme );
     MarbleModelPrivate  * const d;

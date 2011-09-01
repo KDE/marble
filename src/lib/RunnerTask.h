@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
-//
+// Copyright 2011 Thibaut Gridel <tgridel@free.fr>
 
 #ifndef MARBLE_RUNNERTASK_H
 #define MARBLE_RUNNERTASK_H

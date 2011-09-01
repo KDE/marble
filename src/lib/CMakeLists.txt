@@ -20,11 +20,13 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/dgml
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/parser
  ${CMAKE_CURRENT_SOURCE_DIR}/graphicsview
+ ${CMAKE_CURRENT_SOURCE_DIR}/layers
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})
 INCLUDE(geodata/CMakeLists.txt)
 INCLUDE(graphicsview/CMakeLists.txt)
+INCLUDE(layers/CMakeLists.txt)
 
 set(GENERIC_LIB_VERSION "0.13.0")
 set(GENERIC_LIB_SOVERSION "13")
@@ -55,6 +57,7 @@ set(marblewidget_SRCS
     ${geodata_SRCS}
     ${graphicsview_SRCS}
     ${screengraphicsitem_SRCS}
+    ${layers_SRCS}
     blendings/Blending.cpp
     blendings/BlendingAlgorithms.cpp
     blendings/BlendingFactory.cpp
@@ -112,19 +115,10 @@ set(marblewidget_SRCS
     Projections/SphericalProjection.cpp
     Projections/EquirectProjection.cpp
     Projections/MercatorProjection.cpp
-    MeasureTool.cpp
     ImageLoadThread.cpp
     VisiblePlacemark.cpp
-    PlacemarkLayout.cpp
     PlacemarkPainter.cpp
     PlacemarkInfoDialog.cpp
-    AtmosphereLayer.cpp
-    FogLayer.cpp
-    FpsLayer.cpp
-    TextureLayer.cpp
-    VectorMapBaseLayer.cpp
-    VectorMapLayer.cpp
-    GeometryLayer.cpp
     Planet.cpp
     Quaternion.cpp
     TextureColorizer.cpp
@@ -222,6 +216,7 @@ set(marblewidget_SRCS
     GoToDialog.cpp
 
     MapWizard.cpp
+    GeoGraphicsScene.cpp
 )
 
 set (marblewidget_UI
@@ -348,7 +343,6 @@ else (APPLE AND QTONLY)
     GeoPainter.h
     TileCreatorDialog.h
     ViewportParams.h
-    ViewParams.h
     Projections/AbstractProjection.h
     Projections/SphericalProjection.h
     Projections/EquirectProjection.h
@@ -357,6 +351,7 @@ else (APPLE AND QTONLY)
     Quaternion.h
     SunLocator.h
     ClipPainter.h
+    GeoGraphicsScene.h
     geodata/data/GeoDataAbstractView.h
     geodata/data/GeoDataAccuracy.h
     geodata/data/GeoDataColorStyle.h

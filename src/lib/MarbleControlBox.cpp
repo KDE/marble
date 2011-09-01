@@ -38,7 +38,6 @@
 #include "MarbleModel.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
-#include "HttpDownloadManager.h"
 #include "MarbleDebug.h"
 
 

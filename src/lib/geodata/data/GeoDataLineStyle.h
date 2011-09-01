@@ -14,6 +14,7 @@
 
 
 #include <QtGui/QFont>
+#include <QtCore/QVector>
 
 #include "GeoDataColorStyle.h"
 
@@ -64,7 +65,66 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
      * @return the current width
      */
     float width() const;
+    
+    /**
+     * @brief Set the physical width of the line (in meters)
+     * @param  width  the new width
+     */
+    void setPhysicalWidth( const float &realWidth );
+    /**
+     * @brief Return the current physical width of the line
+     * @return the current width
+     */
+    float physicalWidth() const;
+    
+    /**
+     * @brief Set pen cap style
+     * @param  style cap style
+     */
+    void setCapStyle( Qt::PenCapStyle style );
+    
+    /**
+     * @brief Return the current pen cap style
+     * @return the current pen cap style
+     */
+    Qt::PenCapStyle capStyle() const;
+    
+    /**
+     * @brief Set pen cap style
+     * @param  style cap style
+     */
+    void setPenStyle( Qt::PenStyle style );
+    
+    /**
+     * @brief Return the current pen cap style
+     * @return the current pen cap style
+     */
+    Qt::PenStyle penStyle() const;
+    
+     /**
+     * @brief Set whether to draw the solid background
+     * @param bool
+     */
+    void setBackground( bool background );
+    
+    /**
+     * @brief Return true if background get drawn
+     * @return 
+     */
+    bool background() const;
 
+    /**
+     * @brief Sets the dash pattern
+     * @param pattern dash pattern
+     */
+    void setDashPattern( const QVector<qreal>& pattern );
+    
+    /**
+     * @brief Return the current dash pattern
+     * @return the current dash pattern
+     */
+    QVector<qreal> dashPattern() const;
+    
     /**
      * @brief  Serialize the style to a stream.
      * @param  stream  the stream

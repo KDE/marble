@@ -29,6 +29,10 @@
 #include "MarbleModel.h"
 #include "MarbleRunnerManager.h"
 
+//FIXME: Clean up nodes in other place?
+#include "osm/OsmNodeFactory.h"
+#include "osm/OsmGlobals.h"
+
 namespace Marble
 {
 
@@ -63,6 +67,7 @@ public:
 
     void importKml( const QString& filename );
     void importKmlFromData();
+    void loadOsmFile( const QString &fileName );
 
     void saveFile(const QString& filename );
     void savePlacemarks(QDataStream &out, const GeoDataContainer *container);
@@ -173,6 +178,9 @@ void FileLoader::run()
                         d->saveFile(defaultCacheName);
                     }
                     emit loaderFinished( this );
+                }
+                else if( suffix.compare( "osm", Qt::CaseInsensitive ) == 0 ) {
+                    d->loadOsmFile( d->m_filepath );
                 }
                 // use runners: pnt, gpx
                 else {
@@ -306,6 +314,39 @@ void FileLoaderPrivate::savePlacemarks(QDataStream &out, const GeoDataContainer 
     for (; cont != endcont; ++cont ) {
             savePlacemarks(out, *cont);
     }
+}
+
+void FileLoaderPrivate::loadOsmFile( const QString& fileName )
+{
+   GeoDataParser parser( GeoData_OSM );
+
+    QFile file( fileName );
+    if ( !file.exists() ) {
+        qWarning( "File does not exist!" );
+        return;
+    }
+
+    // Open file in right mode
+    file.open( QIODevice::ReadOnly );
+
+    if ( !parser.read( &file ) ) {
+        qWarning( "Could not parse file!" );
+        return;
+    }
+    GeoDocument* document = parser.releaseDocument();
+    Q_ASSERT( document );
+
+    m_document = static_cast<GeoDataDocument*>( document );
+    m_document->setFileName( m_filepath );
+    
+    osm::OsmNodeFactory::cleanUp();
+    osm::OsmGlobals::cleanUpDummyPlacemarks();
+
+    file.close();
+
+    mDebug() << "Osm file loaded: " << m_filepath;
+
+    emit q->newGeoDataDocumentAdded( m_document );
 }
 
 void FileLoaderPrivate::documentParsed( GeoDataDocument* doc )

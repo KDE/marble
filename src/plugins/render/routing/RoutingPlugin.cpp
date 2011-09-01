@@ -182,7 +182,7 @@ void RoutingPluginPrivate::forceRepaint()
         // Trigger a repaint of the float item. Otherwise button state updates are delayed
         m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground, false );
         m_parent->update();
-        m_marbleWidget->repaint();
+        m_marbleWidget->update();
         bool const mapCoversViewport = m_marbleWidget->viewport()->mapCoversViewport();
         m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground, mapCoversViewport );
     }

@@ -18,8 +18,6 @@
 #include "RenderPlugin.h"
 #include "AprsObject.h"
 #include "AprsGatherer.h"
-#include "../lib/HttpDownloadManager.h"
-#include "../lib/CacheStoragePolicy.h"
 #include "GeoDataLatLonAltBox.h"
 #include "PluginAboutDialog.h"
 

@@ -66,7 +66,8 @@ StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultIm
       m_tiles( tiles ),
       jumpTable8( jumpTableFromQImage8( m_resultTile ) ),
       jumpTable32( jumpTableFromQImage32( m_resultTile ) ),
-      m_byteCount( calcByteCount( resultImage, tiles ) )
+      m_byteCount( calcByteCount( resultImage, tiles ) ),
+      m_isUsed( false )
 {
 }
 
@@ -244,6 +245,16 @@ StackedTile::~StackedTile()
 TileId const& StackedTile::id() const
 {
     return d->m_id;
+}
+
+void StackedTile::setUsed( bool used )
+{
+    d->m_isUsed = used;
+}
+
+bool StackedTile::used() const
+{
+    return d->m_isUsed;
 }
 
 uint StackedTile::pixel( int x, int y ) const

@@ -826,7 +826,7 @@ void MainWindow::openFile()
 {
     QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Open File"),
                             QString(),
-                            tr("All Supported Files (*.gpx *.kml *.pnt);;GPS Data (*.gpx);;Google Earth KML (*.kml);; Micro World Database II (*.pnt)"));
+                            tr("All Supported Files (*.gpx *.kml *.pnt *.osm);;GPS Data (*.gpx);;Google Earth KML (*.kml);;Micro World Database II (*.pnt);;OpenStreet map file (*.osm)"));
 
     foreach( const QString &fileName, fileNames ) {
         m_controlView->marbleModel()->addGeoDataFile( fileName );
@@ -958,8 +958,7 @@ void MainWindow::readSettings()
      settings.beginGroup( "Time" );
         if( settings.value( "systemTime", "true" ).toBool() == true  )
         {
-            m_controlView->marbleModel()->setClockDateTime( QDateTime::currentDateTime().toUTC() );
-            m_controlView->marbleModel()->setClockSpeed( 1 );
+            /* nothing to do */
         }
         else if( settings.value( "lastSessionTime", "true" ).toBool() == true )
         {

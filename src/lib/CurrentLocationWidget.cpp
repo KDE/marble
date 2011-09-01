@@ -151,7 +151,7 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
     connect (d->m_currentLocationUi.showTrackCheckBox, SIGNAL( clicked(bool) ),
              d->m_widget->model()->positionTracking(), SLOT( setTrackVisible(bool) ));
     connect (d->m_currentLocationUi.showTrackCheckBox, SIGNAL( clicked(bool) ),
-             d->m_widget, SLOT(repaint()));
+             d->m_widget, SLOT(update()));
     if ( d->m_widget->model()->positionTracking()->trackVisible() ) {
         d->m_currentLocationUi.showTrackCheckBox->setCheckState(Qt::Checked);
     }
@@ -341,7 +341,7 @@ void CurrentLocationWidgetPrivate::openTrack()
 void CurrentLocationWidgetPrivate::clearTrack()
 {
     m_widget->model()->positionTracking()->clearTrack();
-    m_widget->repaint();
+    m_widget->update();
     m_currentLocationUi.saveTrackPushButton->setEnabled( false );
     m_currentLocationUi.clearTrackPushButton->setEnabled( false );
 }

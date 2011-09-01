@@ -9,8 +9,10 @@
 //
 
 #include "GeoLineStringGraphicsItem.h"
-
+#include "GeoDataLineStyle.h"
 #include "GeoPainter.h"
+#include "ViewportParams.h"
+#include "GeoDataStyle.h"
 
 namespace Marble
 {
@@ -20,23 +22,83 @@ GeoLineStringGraphicsItem::GeoLineStringGraphicsItem()
 {
 }
 
-void GeoLineStringGraphicsItem::setLineString(const GeoDataLineString& lineString )
+void GeoLineStringGraphicsItem::setLineString( const GeoDataLineString& lineString )
 {
     m_lineString = GeoDataLineString( lineString );
+    setCoordinate( lineString.latLonAltBox().center() );
+    setLatLonAltBox( lineString.latLonAltBox() );
 }
 
-void GeoLineStringGraphicsItem::append( const GeoDataCoordinates& coordinates)
+void GeoLineStringGraphicsItem::append( const GeoDataCoordinates& coordinates )
 {
     m_lineString.append( coordinates );
+    setCoordinate( m_lineString.latLonAltBox().center() );
+    setLatLonAltBox( m_lineString.latLonAltBox() );
 }
 
 void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
                                        const QString& renderPos, GeoSceneLayer* layer )
 {
-    Q_UNUSED(viewport);
-    Q_UNUSED(renderPos);
-    Q_UNUSED(layer);
+    Q_UNUSED( renderPos );
+    Q_UNUSED( layer );
+
+    if ( !style() )
+    {
+        painter->save();
+        painter->setPen( QPen() );
+        painter->drawPolyline( m_lineString );
+        painter->restore();
+        return;
+    }
+    
+    if(style()->lineStyle().color() == Qt::transparent)
+        return;
+
+    painter->save();
+    QPen currentPen = painter->pen();
+
+    if ( currentPen.color() != style()->lineStyle().color() ||
+            currentPen.widthF() != style()->lineStyle().width() ||
+            style()->lineStyle().physicalWidth() != 0.0 )
+    {
+        currentPen.setColor( style()->lineStyle().color() );
+        if ( float( viewport->radius() ) / EARTH_RADIUS * style()->lineStyle().physicalWidth() < style()->lineStyle().width() )
+            currentPen.setWidthF( style()->lineStyle().width() );
+        else
+            currentPen.setWidthF( float( viewport->radius() ) / EARTH_RADIUS * style()->lineStyle().physicalWidth() );
+    }
+
+    if ( currentPen.capStyle() != style()->lineStyle().capStyle() )
+        currentPen.setCapStyle( style()->lineStyle().capStyle() );
+
+    if ( currentPen.style() != style()->lineStyle().penStyle() )
+        currentPen.setStyle( style()->lineStyle().penStyle() );
+    
+    if ( style()->lineStyle().penStyle() == Qt::CustomDashLine )
+        currentPen.setDashPattern( style()->lineStyle().dashPattern() );
+
+    if ( painter->mapQuality() != Marble::HighQuality
+            && painter->mapQuality() != Marble::PrintQuality )
+    {
+        QColor penColor = currentPen.color();
+        penColor.setAlpha( 255 );
+        currentPen.setColor( penColor );
+    }
+
+    if ( painter->pen() != currentPen ) painter->setPen( currentPen );
+    if ( style()->lineStyle().background() )
+    {
+        painter->save();
+        QPen bgPen( painter->pen() );
+        bgPen.setColor( style()->polyStyle().color() );
+        bgPen.setStyle( Qt::SolidLine );
+        bgPen.setCapStyle( Qt::RoundCap );
+        painter->setPen( bgPen );
+        painter->drawPolyline( m_lineString );
+        painter->restore();
+    }
     painter->drawPolyline( m_lineString );
+    painter->restore();
 }
 
 }

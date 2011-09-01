@@ -7,6 +7,7 @@
 //
 // Copyright 2008 Torsten Rahn <tackat@kde.org>
 // Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2011 Bernahrd Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
@@ -56,13 +57,16 @@ class LayerManagerPrivate
     QList<AbstractFloatItem *> m_floatItems;
     QList<AbstractDataPlugin *> m_dataPlugins;
     QList<LayerInterface *> m_internalLayers;
+
+    bool m_showBackground;
 };
 
 LayerManagerPrivate::LayerManagerPrivate( MarbleModel* model )
     : m_mapTheme( 0 ),
       m_marbleModel( model ),
       m_pluginManager( model->pluginManager() ),
-      m_renderPlugins( m_pluginManager->createRenderPlugins() )
+      m_renderPlugins( m_pluginManager->createRenderPlugins() ),
+      m_showBackground( true )
 {
 }
 
@@ -107,6 +111,11 @@ LayerManager::~LayerManager()
     delete d;
 }
 
+bool LayerManager::showBackground() const
+{
+    return d->m_showBackground;
+}
+
 QList<RenderPlugin *> LayerManager::renderPlugins() const
 {
     return d->m_renderPlugins;
@@ -132,9 +141,17 @@ QList<AbstractDataPluginItem *> LayerManager::whichItemAt( const QPoint& curpos 
     return itemList;
 }
 
-void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport,
-                                 const QStringList& renderPositions )
-{    
+void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
+{
+    QStringList renderPositions;
+
+    if ( d->m_showBackground ) {
+        renderPositions << "STARS" << "BEHIND_TARGET";
+    }
+
+    renderPositions << "SURFACE" << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
+                    << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
+
     foreach( const QString& renderPosition, renderPositions ) {
         renderLayer( painter, viewport, renderPosition );
     }
@@ -175,8 +192,9 @@ void LayerManager::renderLayer( GeoPainter *painter, ViewportParams *viewport,
     }
 }
 
-void LayerManager::loadLayers()
+void LayerManager::setShowBackground( bool show )
 {
+    d->m_showBackground = show;
 }
 
 void LayerManager::syncViewParamsAndPlugins( GeoSceneDocument *mapTheme )
@@ -196,11 +214,11 @@ void LayerManager::syncViewParamsAndPlugins( GeoSceneDocument *mapTheme )
         }
 
         disconnect( renderPlugin->action(), SIGNAL( changed() ),
-                 this,                   SIGNAL( floatItemsChanged() ) );
+                 this,                   SIGNAL( repaintNeeded() ) );
         disconnect( renderPlugin, SIGNAL( visibilityChanged( QString, bool ) ),
                  this,         SLOT( syncPropertyWithAction( QString, bool ) ) );
         connect( renderPlugin->action(), SIGNAL( changed() ), 
-                 this,                   SIGNAL( floatItemsChanged() ) );
+                 this,                   SIGNAL( repaintNeeded() ) );
         connect( renderPlugin, SIGNAL( visibilityChanged( QString, bool ) ),
                  this,         SLOT( syncPropertyWithAction( QString, bool ) ) );
 

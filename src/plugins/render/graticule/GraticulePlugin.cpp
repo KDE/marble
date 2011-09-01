@@ -311,6 +311,11 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
+qreal GraticulePlugin::zValue() const
+{
+    return 1.0;
+}
+
 void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
                                   const QPen& equatorCirclePen,
                                   const QPen& tropicsCirclePen,

@@ -45,12 +45,6 @@ public:
     bool        m_showAtmosphere;
 
     bool        m_showClouds;
-
-    // Cached data that will make painting faster.
-    QSharedPointer<QImage>  m_canvasImage;     // Base image with space and atmosphere
-    QSharedPointer<QImage>  m_coastImage;      // A slightly higher level image.
-
-    void optimizeCanvasImageFormat();
 };
 
 ViewParamsPrivate::ViewParamsPrivate()
@@ -61,35 +55,12 @@ ViewParamsPrivate::ViewParamsPrivate()
       m_mapQuality( m_stillQuality ),
       // Show / don't show parameters
       m_showAtmosphere( true ),
-      m_showClouds( false ),
-      // Just to have something.  These will be resized anyway.
-      m_canvasImage( new QImage( 10, 10, QImage::Format_RGB32 )),
-      m_coastImage( new QImage( 10, 10, QImage::Format_RGB32 ))
+      m_showClouds( false )
 {
 }
 
 ViewParamsPrivate::~ViewParamsPrivate()
 {
-}
-
-void ViewParamsPrivate::optimizeCanvasImageFormat()
-{
-    // If the globe covers fully the screen then we can use the faster
-    // RGB32 as there are no translucent areas involved.
-    QImage::Format imageFormat = ( m_viewport.mapCoversViewport() )
-                                 ? QImage::Format_RGB32
-                                 : QImage::Format_ARGB32_Premultiplied;
-
-    // Recreate the canvas image with the new size.
-    m_canvasImage = QSharedPointer<QImage>( new QImage( m_viewport.size(), imageFormat ) );
-
-    // Repaint the background if necessary
-    if ( !m_viewport.currentProjection()->mapCoversViewport( &m_viewport ) ) {
-        m_canvasImage->fill(0); // Using Qt::transparent is wrong here (equals "18")!
-    }
-
-    // Recreate the coastline detection offscreen image
-    m_coastImage = QSharedPointer<QImage>( new QImage( m_viewport.size(), QImage::Format_RGB32 ) );
 }
 
 
@@ -164,11 +135,6 @@ const AbstractProjection *ViewParams::currentProjection() const
 void ViewParams::setProjection(Projection newProjection)
 {
     d->m_viewport.setProjection( newProjection );
-
-    // Repaint the background if necessary
-    if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
-        d->m_canvasImage->fill(0); // Using Qt::transparent is wrong here (equals "18")!
-    }
 }
 
 int ViewParams::radius() const
@@ -181,18 +147,7 @@ void ViewParams::setRadius(int newRadius)
     // Avoid expensive clearing of the canvas image if there is no change:
     if ( d->m_viewport.radius() == newRadius ) return;
 
-    bool mapDidCoverViewport = d->m_viewport.mapCoversViewport();
-
     d->m_viewport.setRadius( newRadius );
-
-    if ( mapDidCoverViewport != d->m_viewport.mapCoversViewport() ) {
-        d->optimizeCanvasImageFormat();
-        return;
-    }
-
-    if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
-        d->m_canvasImage->fill(0); // Using Qt::transparent is wrong here (equals "18")!
-    }
 }
 
 Quaternion ViewParams::planetAxis() const
@@ -212,38 +167,17 @@ void ViewParams::centerCoordinates( qreal &centerLon, qreal &centerLat )
 
 int ViewParams::width() const
 {
-    return d->m_canvasImage->width();
+    return d->m_viewport.width();
 }
 
 int ViewParams::height() const
 {
-    return d->m_canvasImage->height();
+    return d->m_viewport.height();
 }
 
 void ViewParams::setSize( int width, int height )
 {    
     d->m_viewport.setSize( QSize( width, height ) );
-    d->optimizeCanvasImageFormat();
-}
-
-QSharedPointer<QImage> ViewParams::canvasImagePtr() const
-{
-    return d->m_canvasImage;
-}
-
-QImage * ViewParams::canvasImage() const
-{
-    return d->m_canvasImage.data();
-}
-
-QSharedPointer<QImage> ViewParams::coastImagePtr() const
-{
-    return d->m_coastImage;
-}
-
-QImage * ViewParams::coastImage() const
-{
-    return d->m_coastImage.data();
 }
 
 bool ViewParams::showAtmosphere() const
