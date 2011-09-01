@@ -9,7 +9,6 @@ INCLUDE(${QT_USE_FILE})
 
 set( my_SRCS
   main.cpp
-  MainWindow.cpp
  )
 
 qt4_add_resources(my_SRCS meego.qrc)
