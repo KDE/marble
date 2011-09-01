@@ -12,8 +12,18 @@
     <Action name="file_quit"/>
   </Menu>
   <Menu name="edit" noMerge="1"><text>&amp;Edit</text>
+    <Action name="edit_copy"/>
+    <Action name="edit_copy_coordinates"/>
   </Menu>
   <Menu name="view" noMerge="1"><text>&amp;View</text>
+    <Merge name="StandardToolBarMenuHandler" />
+    <Action name="options_show_sidebar" group="show_merge"/>
+    <Separator/>
+    <Action name="show_clouds"/>
+    <Action name="show_atmosphere"/>
+    <Separator/>
+    <Action name="control_sun"/>
+    <Action name="control_time"/>
   </Menu>
   <Menu name="bookmarks" noMerge="1"><text>&amp;Bookmarks</text>
   </Menu>
