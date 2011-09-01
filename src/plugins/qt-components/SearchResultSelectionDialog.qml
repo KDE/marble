@@ -124,8 +124,8 @@ Rectangle {
     function showSearchResults() {
         resultView.model = main.getSearch().searchResultModel()
         noResultsRect.visible = loadRect.visible = false
-        console.log( "numResults: ", resultView.model.numResults )
-        if( resultView.model.numResults < 1 ) {
+        console.log( "numResults: ", resultView.model.count )
+        if( resultView.model.count < 1 ) {
             noResultsRect.visible = true
         }
     }

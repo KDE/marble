@@ -40,7 +40,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
 
     Q_OBJECT
 
-    Q_PROPERTY( int numResults READ rowCount )
+    Q_PROPERTY( int count READ rowCount )
 
  public:
     /**
