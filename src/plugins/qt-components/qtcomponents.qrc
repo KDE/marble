@@ -25,5 +25,7 @@
         <file>icons/activity-search.png</file>
         <file>icons/activity-virtualglobe.png</file>
         <file>icons/activity-weather.png</file>
+        <file>marker.svg</file>
+        <file>placemark.svg</file>
     </qresource>
 </RCC>
