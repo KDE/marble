@@ -29,22 +29,21 @@ public:
     void update();
 
 private:
-    double m_earthRadius; // in km
+    double m_earthSemiMajorAxis; // in km
     elsetrec m_satrec;
 
     void setDescription();
 
     /**
-     * @brief Create a GeoDataCoordinates object from cartesian coordinates(GEI)
-     * @param x x coordinate in km
-     * @param y y coordinate in km
-     * @param z z coordinate in km
+     * Create a GeoDataCoordinates object from the cartesian coordinates
+     * @p x, @p y and @p z in km in the Earth-centered inertial frame known
+     * as TEME (True equator, Mean equinox) with Greenwich Mean Sidereal Time
+     * @p gmst in radians at time of observation.
      */
-    GeoDataCoordinates fromCartesian( double x, double y, double z );
+    GeoDataCoordinates fromTEME( double x, double y, double z, double gmst );
 
     /**
-     * @return The time since m_satrec epoch in minutes
-     * @see m_satrec
+     * @return The time since the epoch in minutes
      */
     double timeSinceEpoch();
 
@@ -70,6 +69,17 @@ private:
      * @return The inclination in degrees
      */
     double inclination();
+
+    /**
+     * Returns The Greenwich Mean Sideral Time in radians, @p minutes
+     * after the epoch.
+     */
+    double gmst( double minutes );
+
+    /**
+     * @return The square of @p x
+     */
+    double square( double x );
 };
 
 }
