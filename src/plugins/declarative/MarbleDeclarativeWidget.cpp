@@ -84,7 +84,6 @@ QStringList MarbleWidget::activeRenderPlugins() const
 void MarbleWidget::setActiveRenderPlugins( const QStringList &items )
 {
     foreach( RenderPlugin * plugin, m_marbleWidget->renderPlugins() ) {
-        qDebug() << "Activating " << plugin->nameId() << "? " << items.contains( plugin->nameId() );
         plugin->setEnabled( items.contains( plugin->nameId() ) );
         plugin->setVisible( items.contains( plugin->nameId() ) );
     }
