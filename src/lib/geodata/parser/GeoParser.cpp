@@ -119,7 +119,7 @@ bool GeoParser::isValidElement( const QString& tagName ) const
     return name() == tagName;
 }
 
-GeoStackItem GeoParser::parentElement( unsigned int depth )
+GeoStackItem GeoParser::parentElement( unsigned int depth ) const
 {
     QStack<GeoStackItem>::const_iterator it = m_nodeStack.constEnd() - 1;
 

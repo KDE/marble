@@ -101,7 +101,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
     {
         GeoDataFeature::GeoDataVisualCategory category;
 
-        if ( category = OsmGlobals::visualCategories().value( key + "=" + value ) )
+        if ( ( category = OsmGlobals::visualCategories().value( key + "=" + value ) ) )
         {
             if( placemark->visualCategory() != GeoDataFeature::Default 
              && placemark->visualCategory() != GeoDataFeature::Building )
@@ -120,7 +120,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
                 placemark->setVisible( true );
             }
         }
-        else if ( category = OsmGlobals::visualCategories().value( key ) )
+        else if ( ( category = OsmGlobals::visualCategories().value( key ) ) )
         {
             if( placemark->visualCategory() != GeoDataFeature::Default )
             {

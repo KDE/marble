@@ -32,10 +32,6 @@ GeoNode* OsmNodeTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() );
 
-    GeoStackItem parentItem = parser.parentElement();
-
-    GeoDataDocument* doc = geoDataDoc( parser );
-
     qreal lon = parser.attribute( "lon" ).toDouble();
     qreal lat = parser.attribute( "lat" ).toDouble();
 

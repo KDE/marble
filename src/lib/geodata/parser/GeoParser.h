@@ -66,7 +66,7 @@ class GEODATA_EXPORT GeoParser : public QXmlStreamReader
     virtual bool isValidElement( const QString& tagName ) const;
 
     // Used by tag handlers, to access a parent element's associated GeoStackItem
-    GeoStackItem parentElement( unsigned int depth = 0 );
+    GeoStackItem parentElement( unsigned int depth = 0 ) const;
 
     // Used by tag handlers, to emit a warning while parsing
     void raiseWarning( const QString& );
