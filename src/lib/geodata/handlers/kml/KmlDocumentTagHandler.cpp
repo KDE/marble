@@ -39,7 +39,7 @@ GeoNode* KmlDocumentTagHandler::parse(GeoParser& parser) const
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Document));
 
     GeoStackItem parentItem = parser.parentElement();
-    if( !(parentItem.first.first.isNull() && parentItem.first.second.isNull()) ) {
+    if( !(parentItem.qualifiedName().first.isNull() && parentItem.qualifiedName().second.isNull()) ) {
         // this happens if there is a parent element to the Document tag. We can work around that and simply expect that
         // the new Document tag works like a Folder
         if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
@@ -52,7 +52,7 @@ GeoNode* KmlDocumentTagHandler::parse(GeoParser& parser) const
 #endif // DEBUG_TAGS
             return document;
         }
-        else if ( parentItem.first.first == kmlTag_kml)
+        else if ( parentItem.qualifiedName().first == kmlTag_kml)
         {
             GeoDataDocument* doc = geoDataDoc( parser );
 #ifdef DEBUG_TAGS

@@ -105,7 +105,7 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     } else if ( parentItem.represents( tag_nearestplaces )) {
         mDebug() << "added via parent nearestplaces, not implemented";
 
-    } else if ( parentItem.first.first.isEmpty() && !parentItem.second ) {
+    } else if ( parentItem.qualifiedName().first.isEmpty() && !parentItem.associatedNode() ) {
         // ok, it is the parentItem would be searchresults, but we
         // have here to work around the GeoParser bug
         GeoDocument * const document = parser.activeDocument();

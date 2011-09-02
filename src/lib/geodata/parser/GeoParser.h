@@ -98,44 +98,48 @@ private:
     QStack<GeoStackItem> m_nodeStack;
 };
 
-class GeoStackItem : public QPair<GeoTagHandler::QualifiedName, GeoNode*>
+class GeoStackItem
 {
  public:
     GeoStackItem()
-        : QPair<GeoTagHandler::QualifiedName, GeoNode*>()
+        : m_qualifiedName(),
+          m_node( 0 )
     {
     }
 
-    GeoStackItem( const GeoTagHandler::QualifiedName& qName, GeoNode* node )
-        : QPair<GeoTagHandler::QualifiedName, GeoNode*>( qName, node )
+    GeoStackItem( const GeoTagHandler::QualifiedName& qualifiedName, GeoNode* node )
+        : m_qualifiedName( qualifiedName ),
+          m_node( node )
     {
     }
 
     // Fast path for tag handlers
     bool represents( const char* tagName ) const
     {
-        return second && tagName == first.first;
+        return m_node && tagName == m_qualifiedName.first;
     }
 
     // Helper for tag handlers. Does NOT guard against miscasting. Use with care.
     template<class T>
     T* nodeAs()
     {
-        return static_cast<T*>(second);
+        return static_cast<T*>(m_node);
     }
     
     template<class T>
     bool is() const
     {
-        return 0 != dynamic_cast<T*>(second);
+        return 0 != dynamic_cast<T*>(m_node);
     }
 
-    GeoTagHandler::QualifiedName qualifiedName() const { return first; }
-    GeoNode* associatedNode() const { return second; }
+    GeoTagHandler::QualifiedName qualifiedName() const { return m_qualifiedName; }
+    GeoNode* associatedNode() const { return m_node; }
 
 private:
     friend class GeoParser;
-    void assignNode( GeoNode* node ) { second = node; }
+    void assignNode( GeoNode* node ) { m_node = node; }
+    GeoTagHandler::QualifiedName m_qualifiedName;
+    GeoNode* m_node;
 };
 
 }
