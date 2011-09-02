@@ -32,7 +32,7 @@ namespace OsmNamefinder
 {
 
 static GeoTagHandlerRegistrar
-nearestPlacesTagHandler( GeoTagHandler::QualifiedName( tag_nearestplaces, tag_namespace ),
+nearestPlacesTagHandler( GeoParser::QualifiedName( tag_nearestplaces, tag_namespace ),
            new NearestPlacesTagHandler );
 
 

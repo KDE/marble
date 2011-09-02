@@ -22,11 +22,11 @@
 #ifndef MARBLE_GEOPARSER_H
 #define MARBLE_GEOPARSER_H
 
+#include <QtCore/QPair>
 #include <QtCore/QStack>
 #include <QtXml/QXmlStreamReader>
 
 #include <geodata_export.h>
-#include "GeoTagHandler.h"
 
 namespace Marble
 {
@@ -34,11 +34,14 @@ namespace Marble
 typedef int GeoDataGenericSourceType;
 
 class GeoDocument;
+class GeoNode;
 class GeoStackItem;
 
 class GEODATA_EXPORT GeoParser : public QXmlStreamReader
 {
  public:
+    typedef QPair<QString, QString> QualifiedName; // Tag Name & Namespace pair
+
     explicit GeoParser( GeoDataGenericSourceType sourceType );
     virtual ~GeoParser();
 
@@ -102,7 +105,7 @@ class GeoStackItem
     {
     }
 
-    GeoStackItem( const GeoTagHandler::QualifiedName& qualifiedName, GeoNode* node )
+    GeoStackItem( const GeoParser::QualifiedName& qualifiedName, GeoNode* node )
         : m_qualifiedName( qualifiedName ),
           m_node( node )
     {
@@ -127,13 +130,13 @@ class GeoStackItem
         return 0 != dynamic_cast<T*>(m_node);
     }
 
-    GeoTagHandler::QualifiedName qualifiedName() const { return m_qualifiedName; }
+    GeoParser::QualifiedName qualifiedName() const { return m_qualifiedName; }
     GeoNode* associatedNode() const { return m_node; }
 
 private:
     friend class GeoParser;
     void assignNode( GeoNode* node ) { m_node = node; }
-    GeoTagHandler::QualifiedName m_qualifiedName;
+    GeoParser::QualifiedName m_qualifiedName;
     GeoNode* m_node;
 };
 

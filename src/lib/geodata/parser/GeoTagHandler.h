@@ -24,6 +24,7 @@
 
 #include <QtCore/QHash>
 #include "marble_export.h"
+#include "GeoParser.h"
 
 namespace Marble
 {
@@ -45,8 +46,6 @@ public:
     // API to be implemented by child handlers.
     virtual GeoNode* parse(GeoParser&) const = 0;
 
-    typedef QPair<QString, QString> QualifiedName; // Tag Name & Namespace pair
-
 protected: // This base class is not directly constructable nor is it copyable.
     GeoTagHandler();
     virtual ~GeoTagHandler();
@@ -57,14 +56,14 @@ private:
 
 private: // Only our registrar is allowed to register tag handlers.
     friend struct GeoTagHandlerRegistrar;
-    static void registerHandler(const QualifiedName&, const GeoTagHandler*);
+    static void registerHandler(const GeoParser::QualifiedName&, const GeoTagHandler*);
 
 private: // Only our parser is allowed to access tag handlers.
     friend class GeoParser;
-    static const GeoTagHandler* recognizes(const QualifiedName&);
+    static const GeoTagHandler* recognizes(const GeoParser::QualifiedName&);
 
 private:
-    typedef QHash<QualifiedName, const GeoTagHandler*> TagHash;
+    typedef QHash<GeoParser::QualifiedName, const GeoTagHandler*> TagHash;
 
     static TagHash* tagHandlerHash();
     static TagHash* s_tagHandlerHash;
@@ -74,7 +73,7 @@ private:
 struct GeoTagHandlerRegistrar
 {
 public:
-    GeoTagHandlerRegistrar(const GeoTagHandler::QualifiedName& name, const GeoTagHandler* handler)
+    GeoTagHandlerRegistrar(const GeoParser::QualifiedName& name, const GeoTagHandler* handler)
     {
         GeoTagHandler::registerHandler(name, handler);
     }
@@ -82,7 +81,7 @@ public:
 
 // Macros to ease registering new handlers
 #define GEODATA_DEFINE_TAG_HANDLER(Module, UpperCaseModule, Name, NameSpace) \
-    static GeoTagHandlerRegistrar s_handler##Name##NameSpace(GeoTagHandler::QualifiedName(Module##Tag_##Name, NameSpace), \
+    static GeoTagHandlerRegistrar s_handler##Name##NameSpace(GeoParser::QualifiedName(Module##Tag_##Name, NameSpace), \
                                                              new UpperCaseModule##Name##TagHandler());
 
 }

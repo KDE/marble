@@ -35,7 +35,7 @@ public:
 
     /**
      * @brief Object Name and Namespace Pair
-     * This type is intended to be used in a similar way to @see GeoTagHandler::QualifiedName
+     * This type is intended to be used in a similar way to @see GeoParser::QualifiedName
      * but in practice will act differently. The Namespace will not be an XML
      * namespace directly but instead it will refere to a Document Type so that
      * the GeoWriter will be able to identify what GeoTagWriter to use even in

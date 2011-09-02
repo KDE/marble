@@ -52,7 +52,7 @@ GeoTagHandler::TagHash* GeoTagHandler::tagHandlerHash()
     return s_tagHandlerHash;
 }
 
-void GeoTagHandler::registerHandler(const QualifiedName& qName, const GeoTagHandler* handler)
+void GeoTagHandler::registerHandler(const GeoParser::QualifiedName& qName, const GeoTagHandler* handler)
 {
     TagHash* hash = tagHandlerHash();
 
@@ -65,7 +65,7 @@ void GeoTagHandler::registerHandler(const QualifiedName& qName, const GeoTagHand
 #endif
 }
 
-const GeoTagHandler* GeoTagHandler::recognizes(const QualifiedName& qName)
+const GeoTagHandler* GeoTagHandler::recognizes(const GeoParser::QualifiedName& qName)
 {
     TagHash* hash = tagHandlerHash();
 

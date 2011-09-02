@@ -26,7 +26,7 @@ namespace Marble
 
 namespace osm
 {
-static GeoTagHandlerRegistrar osmTagTagHandler( GeoTagHandler::QualifiedName( osmTag_tag, "" ),
+static GeoTagHandlerRegistrar osmTagTagHandler( GeoParser::QualifiedName( osmTag_tag, "" ),
         new OsmTagTagHandler() );
 
 static QStringList tagBlackList = QStringList() << "created_by";

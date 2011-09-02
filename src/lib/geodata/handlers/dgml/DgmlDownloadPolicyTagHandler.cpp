@@ -26,7 +26,7 @@ namespace Marble
 {
 namespace dgml
 {
-static GeoTagHandlerRegistrar handler( GeoTagHandler::QualifiedName( dgmlTag_DownloadPolicy,
+static GeoTagHandlerRegistrar handler( GeoParser::QualifiedName( dgmlTag_DownloadPolicy,
                                                                      dgmlTag_nameSpace20 ),
                                        new DgmlDownloadPolicyTagHandler );
 

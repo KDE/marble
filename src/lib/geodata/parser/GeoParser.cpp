@@ -138,8 +138,7 @@ void GeoParser::parseDocument()
     }
 
     bool processChildren = true;
-    GeoTagHandler::QualifiedName qName( name().toString(),
-                                        namespaceUri().toString() );
+    QualifiedName qName( name().toString(), namespaceUri().toString() );
 
     if( tokenType() == QXmlStreamReader::Invalid )
         raiseWarning( QString( "%1: %2" ).arg( error() ).arg( errorString() ) );

@@ -25,7 +25,7 @@ namespace Marble
 {
 namespace dgml
 {
-static GeoTagHandlerRegistrar registrar( GeoTagHandler::QualifiedName( dgmlTag_Blending,
+static GeoTagHandlerRegistrar registrar( GeoParser::QualifiedName( dgmlTag_Blending,
                                                                        dgmlTag_nameSpace20 ),
                                          new DgmlBlendingTagHandler );
 
