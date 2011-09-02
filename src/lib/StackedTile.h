@@ -17,7 +17,6 @@
 #include <QtCore/QVector>
 #include <QtGui/QColor>
 
-#include "AbstractTile.h"
 #include "global.h"
 
 class QImage;
@@ -27,6 +26,7 @@ namespace Marble
 
 class StackedTilePrivate;
 class TextureTile;
+class TileId;
 
 /*!
     \class StackedTile
@@ -55,13 +55,22 @@ class TextureTile;
     the very same projection.
 */
 
-class StackedTile : public AbstractTile
+class StackedTile
 {
     friend class StackedTileLoader;
 
  public:
     explicit StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles );
     virtual ~StackedTile();
+
+/*!
+    \brief Returns a unique ID for the tile.
+    \return A TileId object that encodes zoom level, position and map theme.
+*/
+    TileId const& id() const;
+
+    void setUsed( bool used );
+    bool used() const;
 
     int depth() const;
     int numBytes() const;
@@ -101,7 +110,6 @@ class StackedTile : public AbstractTile
     uint pixelF( qreal x, qreal y, const QRgb& pixel ) const; 
 
  private:
-    Q_DECLARE_PRIVATE( StackedTile )
     Q_DISABLE_COPY( StackedTile )
 
     StackedTilePrivate *d;

@@ -19,7 +19,9 @@ namespace Marble
 class GeoDataLineStylePrivate
 {
   public:
-    GeoDataLineStylePrivate() : m_width( 1.0 )
+    GeoDataLineStylePrivate() 
+        : m_width( 1.0 ), m_physicalWidth( 0.0 ), m_capStyle( Qt::FlatCap ),
+          m_penStyle( Qt::SolidLine ), m_background( false )
     {
     }
 
@@ -30,6 +32,12 @@ class GeoDataLineStylePrivate
 
     /// The current width of the line
     float  m_width;
+    /// The current real width of the line
+    float  m_physicalWidth;
+    Qt::PenCapStyle m_capStyle;
+    Qt::PenStyle m_penStyle;
+    bool m_background;
+    QVector< qreal > m_pattern;
 };
 
 GeoDataLineStyle::GeoDataLineStyle()
@@ -75,11 +83,65 @@ float GeoDataLineStyle::width() const
     return d->m_width;
 }
 
+float GeoDataLineStyle::physicalWidth() const
+{
+    return d->m_physicalWidth;
+}
+
+void GeoDataLineStyle::setPhysicalWidth( const float& realWidth )
+{
+    d->m_physicalWidth = realWidth;
+}
+
+Qt::PenCapStyle GeoDataLineStyle::capStyle() const
+{
+    return d->m_capStyle;
+}
+
+void GeoDataLineStyle::setCapStyle( Qt::PenCapStyle style )
+{
+    d->m_capStyle = style;
+}
+
+Qt::PenStyle GeoDataLineStyle::penStyle() const
+{
+    return d->m_penStyle;
+}
+
+void GeoDataLineStyle::setPenStyle( Qt::PenStyle style )
+{
+   d->m_penStyle = style;
+}
+
+bool GeoDataLineStyle::background() const
+{
+    return d->m_background;
+}
+
+void GeoDataLineStyle::setBackground( bool background )
+{
+    d->m_background = background;
+}
+
+QVector< qreal > GeoDataLineStyle::dashPattern() const
+{
+    return d->m_pattern;
+}
+
+void GeoDataLineStyle::setDashPattern( const QVector< qreal >& pattern )
+{
+    d->m_pattern = pattern;
+}
+
 void GeoDataLineStyle::pack( QDataStream& stream ) const
 {
     GeoDataColorStyle::pack( stream );
     
     stream << d->m_width;
+    stream << d->m_physicalWidth;
+    stream << (int)d->m_penStyle;
+    stream << (int)d->m_capStyle;
+    stream << d->m_background;
 }
 
 void GeoDataLineStyle::unpack( QDataStream& stream )
@@ -87,6 +149,13 @@ void GeoDataLineStyle::unpack( QDataStream& stream )
     GeoDataColorStyle::unpack( stream );
     
     stream >> d->m_width;
+    stream >> d->m_physicalWidth;
+    int style;
+    stream >> style;
+    d->m_penStyle = ( Qt::PenStyle ) style;
+    stream >> style;
+    d->m_capStyle = ( Qt::PenCapStyle ) style;
+    stream >> d->m_background;
 }
 
 }

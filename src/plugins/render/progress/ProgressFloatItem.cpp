@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2010,2011  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "ProgressFloatItem.h"
@@ -28,7 +29,7 @@ namespace Marble
 
 ProgressFloatItem::ProgressFloatItem ( const QPointF &point, const QSizeF &size )
     : AbstractFloatItem( point, size ),
-      m_isInitialized( false ), m_marbleWidget( 0 ),
+      m_isInitialized( false ),
       m_totalJobs( 0 ), m_completedJobs ( 0 ),
       m_active( false ), m_fontSize( 0 )
 {
@@ -98,6 +99,11 @@ QIcon ProgressFloatItem::icon() const
 
 void ProgressFloatItem::initialize()
 {
+    HttpDownloadManager* manager = marbleModel()->downloadManager();
+    Q_ASSERT( manager );
+    connect( manager, SIGNAL( jobAdded() ), this, SLOT( addProgressItem() ), Qt::UniqueConnection );
+    connect( manager, SIGNAL( jobRemoved() ), this, SLOT( removeProgressItem() ), Qt::UniqueConnection );
+
     m_isInitialized = true;
 }
 
@@ -128,16 +134,16 @@ void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
     Q_UNUSED( layer )
     Q_UNUSED( renderPos )
 
-    if ( !active() || !m_marbleWidget ) {
+    if ( !active() ) {
         return;
     }
 
     painter->save();
     painter->setRenderHint( QPainter::Antialiasing, true );
 
-    int completed = 0;
+    qreal completed = 1.0;
     if ( m_totalJobs && m_completedJobs <= m_totalJobs ) {
-        completed = int ( 100.0 * m_completedJobs / m_totalJobs );
+        completed = (qreal) m_completedJobs / (qreal) m_totalJobs;
 
         if ( m_completedJobs == m_totalJobs ) {
             m_progressShowTimer.stop();
@@ -147,7 +153,7 @@ void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
 
     // Paint progress pie
     int startAngle =  90 * 16; // 12 o' clock
-    int spanAngle = -ceil ( 360 * 16 * ( m_completedJobs / qMax<qreal>( 1.0, m_totalJobs ) ) );
+    int spanAngle = -ceil ( 360 * 16 * completed );
     QRectF rect( contentRect() );
     rect.adjust( 1, 1, -1, -1 );
 
@@ -169,7 +175,7 @@ void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
 
     // Paint progress label
     myFont.setPointSize( m_fontSize );
-    QString done = QString::number( completed ) + "%";
+    QString done = QString::number( (int) ( completed * 100 ) ) + "%";
     int fontWidth = QFontMetrics( myFont ).boundingRect( done ).width();
     QPointF baseline( padding() + 0.5 * ( rect.width() - fontWidth ), 0.75 * rect.height() );
     QPainterPath path;
@@ -190,16 +196,6 @@ bool ProgressFloatItem::eventFilter(QObject *object, QEvent *e)
         return false;
     }
 
-    MarbleWidget *widget = dynamic_cast<MarbleWidget*> (object);
-    if ( !m_marbleWidget && widget ) {
-        HttpDownloadManager* manager = widget->model()->downloadManager();
-        if ( manager ) {
-            m_marbleWidget = widget;
-            connect( manager, SIGNAL( jobAdded() ), this, SLOT( addProgressItem() ) );
-            connect( manager, SIGNAL( jobRemoved() ), this, SLOT( removeProgressItem() ) );
-        }
-    }
-
     return AbstractFloatItem::eventFilter( object, e );
 }
 
@@ -215,10 +211,7 @@ void ProgressFloatItem::addProgressItem()
             m_progressResetTimer.stop();
         } else if ( active() ) {
             update();
-
-            /** @todo: Ideally not needed, but update() alone only works for some seconds */
-            Q_ASSERT( m_marbleWidget );
-            m_marbleWidget->update();
+            emit repaintNeeded(QRegion());
         }
     }
 }
@@ -235,10 +228,7 @@ void ProgressFloatItem::removeProgressItem()
             m_progressResetTimer.stop();
         } else if ( active() ) {
             update();
-
-            /** @todo: Ideally not needed, but update() alone only works for some seconds */
-            Q_ASSERT( m_marbleWidget );
-            m_marbleWidget->update();
+            emit repaintNeeded( QRegion() );
         }
     }
 }
@@ -252,8 +242,9 @@ void ProgressFloatItem::resetProgress()
 
     if ( enabled() ) {
         setActive( false );
-        Q_ASSERT( m_marbleWidget );
-        m_marbleWidget->update();
+
+        update();
+        emit repaintNeeded( QRegion() );
     }
 }
 
@@ -271,8 +262,9 @@ void ProgressFloatItem::setActive( bool active )
 void ProgressFloatItem::show()
 {
     setActive( true );
-    Q_ASSERT( m_marbleWidget );
-    m_marbleWidget->update();
+
+    update();
+    emit repaintNeeded( QRegion() );
 }
 
 }

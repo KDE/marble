@@ -31,7 +31,7 @@
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataMultiGeometry.h"
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 #include "global.h"
 
 namespace Marble

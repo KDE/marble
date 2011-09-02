@@ -52,6 +52,8 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     /**
      * Creates a new http download manager.
      *
+     * @note HttpDownloadManager doesn't take ownership of @p policy.
+     *
      * @param policy The storage policy for this manager.
      */
     explicit HttpDownloadManager( StoragePolicy *policy,
@@ -67,8 +69,6 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
      */
     void setDownloadEnabled( const bool enable );
     void addDownloadPolicy( const DownloadPolicy& );
-
-    StoragePolicy* storagePolicy() const;
 
  public Q_SLOTS:
 

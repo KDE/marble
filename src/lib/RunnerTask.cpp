@@ -1,3 +1,13 @@
+//
+// This file is part of the Marble Virtual Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2011 Thibaut Gridel <tgridel@free.fr>
+
 #include "RunnerTask.h"
 
 #include "MarbleAbstractRunner.h"
@@ -78,6 +88,19 @@ void RoutingTask::runTask( QEventLoop *localEventLoop )
     QObject::connect( runner(), SIGNAL( routeCalculated( GeoDataDocument*) ),
             localEventLoop, SLOT( quit() ) );
     runner()->retrieveRoute( m_routeRequest );
+}
+
+ParsingTask::ParsingTask( MarbleAbstractRunner* runner, const QString& fileName, DocumentRole role ) :
+        RunnerTask( runner ), m_fileName( fileName ), m_role( role )
+{
+    // nothing to do
+}
+
+void ParsingTask::runTask( QEventLoop *localEventLoop )
+{
+    QObject::connect( runner(), SIGNAL( parsingFinished(GeoDataDocument*) ),
+                      localEventLoop, SLOT( quit() ) );
+    runner()->parseFile( m_fileName, m_role );
 }
 
 }

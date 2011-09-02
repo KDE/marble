@@ -26,61 +26,114 @@
 #include "GeoDataTypes.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
+#include "MarbleModel.h"
+#include "MarbleRunnerManager.h"
+
+//FIXME: Clean up nodes in other place?
+#include "osm/OsmNodeFactory.h"
+#include "osm/OsmGlobals.h"
 
 namespace Marble
 {
 
-// distance of 180deg in arcminutes
-const qreal INT2RAD = M_PI / 10800.0;
+class FileLoaderPrivate
+{
+public:
+    FileLoaderPrivate( FileLoader* parent, MarbleModel *model,
+                       const QString& file, DocumentRole role )
+        : q( parent),
+          m_runner( new MarbleRunnerManager( model->pluginManager(), q ) ),
+          m_filepath ( file ),
+          m_documentRole ( role )
+    {
+        m_runner->setModel( model );
+    };
 
-FileLoader::FileLoader( QObject* parent, const QString& file, DocumentRole role = UnknownDocument )
+    FileLoaderPrivate( FileLoader* parent, MarbleModel *model,
+                       const QString& contents, const QString& file, DocumentRole role )
+        : q( parent ),
+          m_runner( new MarbleRunnerManager( model->pluginManager(), q ) ),
+          m_filepath ( file ),
+          m_contents ( contents ),
+          m_documentRole ( role )
+    {
+        m_runner->setModel( model );
+    };
+
+    ~FileLoaderPrivate()
+    {
+        delete m_runner;
+    }
+
+    void importKml( const QString& filename );
+    void importKmlFromData();
+    void loadOsmFile( const QString &fileName );
+
+    void saveFile(const QString& filename );
+    void savePlacemarks(QDataStream &out, const GeoDataContainer *container);
+
+    void createFilterProperties( GeoDataContainer *container );
+    int cityPopIdx( qint64 population ) const;
+    int spacePopIdx( qint64 population ) const;
+    int areaPopIdx( qreal area ) const;
+
+    void documentParsed( GeoDataDocument *);
+
+    FileLoader *q;
+    MarbleRunnerManager *m_runner;
+    QString m_filepath;
+    QString m_contents;
+    DocumentRole m_documentRole;
+    GeoDataDocument *m_document;
+
+};
+
+FileLoader::FileLoader( QObject* parent, MarbleModel *model,
+                       const QString& file, DocumentRole role = UnknownDocument )
     : QThread( parent ),
-      m_filepath( file ),
-      m_contents( QString() ),
-      m_documentRole( role ),
-      m_document( 0 )
+      d( new FileLoaderPrivate( this, model, file, role ) )
 {
 }
 
-FileLoader::FileLoader( QObject* parent, const QString& contents, const QString& file, DocumentRole role = UnknownDocument)
+FileLoader::FileLoader( QObject* parent, MarbleModel *model,
+                        const QString& contents, const QString& file, DocumentRole role = UnknownDocument)
     : QThread( parent ),
-      m_filepath( file ),
-      m_contents( contents ),
-      m_documentRole( role ),
-      m_document( 0 )
+      d( new FileLoaderPrivate( this, model, contents, file, role ) )
 {
 }
 
 FileLoader::~FileLoader()
 {
+    delete d;
 }
 
 QString FileLoader::path() const
 {
-    return m_filepath;
+    return d->m_filepath;
 }
 
 void FileLoader::run()
 {
-    if ( m_contents.isEmpty() ) {
+    if ( d->m_contents.isEmpty() ) {
         QString defaultCacheName;
         QString defaultSourceName;
 
-        mDebug() << "starting parser for" << m_filepath;
+        mDebug() << "starting parser for" << d->m_filepath;
 
-        QFileInfo fileinfo( m_filepath );
+        QFileInfo fileinfo( d->m_filepath );
         QString path = fileinfo.path();
         if ( path == "." ) path.clear();
         QString name = fileinfo.completeBaseName();
         QString suffix = fileinfo.suffix();
 
+        // determine source, cache names
         if ( fileinfo.isAbsolute() ) {
             // We got an _absolute_ path now: e.g. "/patrick.kml"
             // defaultCacheName = path + '/' + name + ".cache";
             defaultSourceName   = path + '/' + name + '.' + suffix;
         }
         else {
-            if ( m_filepath.contains( '/' ) ) {
+            if ( d->m_filepath.contains( '/' ) ) {
                 // _relative_ path: "maps/mars/viking/patrick.kml"
                 // defaultCacheName = MarbleDirs::path( path + '/' + name + ".cache" );
                 defaultSourceName   = MarbleDirs::path( path + '/' + name + '.' + suffix );
@@ -95,55 +148,63 @@ void FileLoader::run()
             }
         }
 
+        // if cache file more recent that source file, load cache file
         if ( QFile::exists( defaultCacheName ) ) {
             mDebug() << "Loading Cache File:" + defaultCacheName;
 
-            bool      cacheoutdated = false;
             QDateTime sourceLastModified;
             QDateTime cacheLastModified;
 
             if ( QFile::exists( defaultSourceName ) ) {
                 sourceLastModified = QFileInfo( defaultSourceName ).lastModified();
-                cacheLastModified  = QFileInfo( defaultCacheName ).lastModified();
-
-                if ( cacheLastModified < sourceLastModified )
-                    cacheoutdated = true;
             }
+            cacheLastModified  = QFileInfo( defaultCacheName ).lastModified();
 
-            if ( !cacheoutdated ) {
-                loadFile( defaultCacheName );
+            if ( sourceLastModified < cacheLastModified ) {
+                connect( d->m_runner, SIGNAL( parsingFinished(GeoDataDocument*) ),
+                        this, SLOT( documentParsed(GeoDataDocument*) ) );
+                d->m_runner->parseFile( defaultCacheName, d->m_documentRole );
             }
         }
+        // we load source file, multiple cases
         else {
-            if( suffix.compare( "pnt", Qt::CaseInsensitive ) == 0 ) {
-                loadPntFile( m_filepath );
-            }
-            else {
-                mDebug() << "No recent Default Placemark Cache File available!";
-                if ( QFile::exists( defaultSourceName ) ) {
+            mDebug() << "No recent Default Placemark Cache File available!";
+            if ( QFile::exists( defaultSourceName ) ) {
+                if( suffix.compare( "kml", Qt::CaseInsensitive ) == 0 ) {
                     // Read the KML file.
-                    importKml( defaultSourceName );
+                    d->importKml( defaultSourceName );
 
                     if (!defaultCacheName.isEmpty() ) {
-                        saveFile(defaultCacheName);
+                        d->saveFile(defaultCacheName);
                     }
+                    emit loaderFinished( this );
                 }
+                else if( suffix.compare( "osm", Qt::CaseInsensitive ) == 0 ) {
+                    d->loadOsmFile( d->m_filepath );
+                }
+                // use runners: pnt, gpx
                 else {
-                    mDebug() << "No Default Placemark Source File for " << name;
+                    connect( d->m_runner, SIGNAL( parsingFinished(GeoDataDocument*) ),
+                              this, SLOT( documentParsed(GeoDataDocument*) ) );
+                    d->m_runner->parseFile( d->m_filepath, d->m_documentRole );
                 }
             }
+            else {
+                mDebug() << "No Default Placemark Source File for " << name;
+            }
         }
+    // content is not empty, we load from data
     } else {
         // Read the KML Data
-        importKmlFromData();
+        d->importKmlFromData();
+        emit loaderFinished( this );
     }
 
-    emit loaderFinished( this );
 }
 
 const quint32 MarbleMagicNumber = 0x31415926;
 
-void FileLoader::importKml( const QString& filename )
+void FileLoaderPrivate::importKml( const QString& filename )
 {
     GeoDataParser parser( GeoData_UNKNOWN );
 
@@ -157,7 +218,7 @@ void FileLoader::importKml( const QString& filename )
     file.open( QIODevice::ReadOnly );
 
     if ( !parser.read( &file ) ) {
-        qWarning( "Could not parse file!" );
+        qWarning( "Could not import kml file!" );
         return;
     }
     GeoDocument* document = parser.releaseDocument();
@@ -166,16 +227,14 @@ void FileLoader::importKml( const QString& filename )
     m_document = static_cast<GeoDataDocument*>( document );
     m_document->setDocumentRole( m_documentRole );
     m_document->setFileName( m_filepath );
-    setupStyle( m_document, m_document );
-
     file.close();
-
+    createFilterProperties( m_document );
     mDebug() << "newGeoDataDocumentAdded" << m_filepath;
 
-    emit newGeoDataDocumentAdded( m_document );
+    emit q->newGeoDataDocumentAdded( m_document );
 }
 
-void FileLoader::importKmlFromData()
+void FileLoaderPrivate::importKmlFromData()
 {
     GeoDataParser parser( GeoData_KML );
 
@@ -184,7 +243,7 @@ void FileLoader::importKmlFromData()
     buffer.open( QIODevice::ReadOnly );
 
     if ( !parser.read( &buffer ) ) {
-        qWarning( "Could not parse buffer!" );
+        qWarning( "Could not import kml buffer!" );
         return;
     }
     GeoDocument* document = parser.releaseDocument();
@@ -193,93 +252,15 @@ void FileLoader::importKmlFromData()
     m_document = static_cast<GeoDataDocument*>( document );
     m_document->setDocumentRole( m_documentRole );
     m_document->setFileName( m_filepath );
-    setupStyle( m_document, m_document );
-
+    createFilterProperties( m_document );
     buffer.close();
 
     mDebug() << "newGeoDataDocumentAdded" << m_filepath;
 
-    emit newGeoDataDocumentAdded( m_document );
+    emit q->newGeoDataDocumentAdded( m_document );
 }
 
-void FileLoader::loadFile( const QString &filename )
-{
-    QFile file( filename );
-    file.open( QIODevice::ReadOnly );
-    QDataStream in( &file );
-
-    // Read and check the header
-    quint32 magic;
-    in >> magic;
-    if ( magic != MarbleMagicNumber ) {
-        qDebug( "Bad file format!" );
-        return;
-    }
-
-    // Read the version
-    qint32 version;
-    in >> version;
-    if ( version < 015 ) {
-        qDebug( "Bad file - too old!" );
-        return;
-    }
-    /*
-      if (version > 002) {
-      qDebug( "Bad file - too new!" );
-      return;
-      }
-    */
-    m_document = new GeoDataDocument();
-    m_document->setDocumentRole( m_documentRole );
-    m_document->setFileName( m_filepath );
-
-    in.setVersion( QDataStream::Qt_4_2 );
-
-    // Read the data itself
-    // Use double to provide a single cache file format across architectures
-    double   lon;
-    double   lat;
-    double   alt;
-    double   area;
-
-    QString  tmpstr;
-    qint64   tmpint64;
-    qint8    tmpint8;
-    qint16   tmpint16;
-
-    while ( !in.atEnd() ) {
-        GeoDataPlacemark *mark = new GeoDataPlacemark;
-        in >> tmpstr;
-        mark->setName( tmpstr );
-        in >> lon >> lat >> alt;
-        mark->setCoordinate( (qreal)(lon), (qreal)(lat), (qreal)(alt) );
-        in >> tmpstr;
-        mark->setRole( tmpstr );
-        in >> tmpstr;
-        mark->setDescription( tmpstr );
-        in >> tmpstr;
-        mark->setCountryCode( tmpstr );
-        in >> tmpstr;
-        mark->setState( tmpstr );
-        in >> area;
-        mark->setArea( (qreal)(area) );
-        in >> tmpint64;
-        mark->setPopulation( tmpint64 );
-        in >> tmpint16;
-        mark->extendedData().addValue( GeoDataData( "gmt", int( tmpint16 ) ) );
-        in >> tmpint8;
-        mark->extendedData().addValue( GeoDataData( "dst", int( tmpint8 ) ) );
-
-        m_document->append( mark );
-    }
-
-    m_document->setVisible( false );
-    setupStyle( m_document, m_document );
-    createFilterProperties( m_document );
-    emit newGeoDataDocumentAdded( m_document );
-}
-
-void FileLoader::saveFile( const QString& filename )
+void FileLoaderPrivate::saveFile( const QString& filename )
 {
 
     if ( !QDir( MarbleDirs::localPath() + "/placemarks/" ).exists() )
@@ -301,7 +282,7 @@ void FileLoader::saveFile( const QString& filename )
     savePlacemarks(out, m_document);
 }
 
-void FileLoader::savePlacemarks(QDataStream &out, const GeoDataContainer *container)
+void FileLoaderPrivate::savePlacemarks(QDataStream &out, const GeoDataContainer *container)
 {
 
     qreal lon;
@@ -335,88 +316,49 @@ void FileLoader::savePlacemarks(QDataStream &out, const GeoDataContainer *contai
     }
 }
 
-void FileLoader::loadPntFile( const QString &fileName )
+void FileLoaderPrivate::loadOsmFile( const QString& fileName )
 {
-    QFile  file( fileName );
+   GeoDataParser parser( GeoData_OSM );
 
-    file.open( QIODevice::ReadOnly );
-    QDataStream stream( &file );  // read the data serialized from the file
-    stream.setByteOrder( QDataStream::LittleEndian );
-
-    m_document = new GeoDataDocument();
-    m_document->setDocumentRole( m_documentRole );
-    m_document->setFileName( fileName );
-
-    short  header;
-    short  iLat;
-    short  iLon;
-
-    GeoDataPlacemark  *placemark = 0;
-    placemark = new GeoDataPlacemark;
-    m_document->append( placemark );
-    GeoDataMultiGeometry *geom = new GeoDataMultiGeometry;
-    placemark->setGeometry( geom );
-
-    while( !stream.atEnd() ){
-        stream >> header >> iLat >> iLon;
-        // Transforming Range of Coordinates to iLat [0,ARCMINUTE] , iLon [0,2 * ARCMINUTE]
-
-        if ( header > 5 ) {
-
-            // qDebug(QString("header: %1 iLat: %2 iLon: %3").arg(header).arg(iLat).arg(iLon).toLatin1());
-
-            // Find out whether the Polyline is a river or a closed polygon
-            if ( ( header >= 7000 && header < 8000 )
-                || ( header >= 9000 && header < 20000 ) ) {
-                GeoDataLineString *polyline = new GeoDataLineString;
-                geom->append( polyline );
-            }
-            else {
-                GeoDataLinearRing *polyline = new GeoDataLinearRing;
-                geom->append( polyline );
-            }
-        }
-        GeoDataLineString *polyline = static_cast<GeoDataLineString*>(geom->child(geom->size()-1));
-        polyline->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD,
-                                                  0.0, GeoDataCoordinates::Radian, 5 ) );
+    QFile file( fileName );
+    if ( !file.exists() ) {
+        qWarning( "File does not exist!" );
+        return;
     }
+
+    // Open file in right mode
+    file.open( QIODevice::ReadOnly );
+
+    if ( !parser.read( &file ) ) {
+        qWarning( "Could not parse file!" );
+        return;
+    }
+    GeoDocument* document = parser.releaseDocument();
+    Q_ASSERT( document );
+
+    m_document = static_cast<GeoDataDocument*>( document );
+    m_document->setFileName( m_filepath );
+    
+    osm::OsmNodeFactory::cleanUp();
+    osm::OsmGlobals::cleanUpDummyPlacemarks();
 
     file.close();
 
-    emit newGeoDataDocumentAdded( m_document );
+    mDebug() << "Osm file loaded: " << m_filepath;
 
+    emit q->newGeoDataDocumentAdded( m_document );
 }
 
-void FileLoader::setupStyle( GeoDataDocument *doc, GeoDataContainer *container )
+void FileLoaderPrivate::documentParsed( GeoDataDocument* doc )
 {
-    QVector<GeoDataFeature*>::Iterator i = container->begin();
-    QVector<GeoDataFeature*>::Iterator const end = container->end();
-    for (; i != end; ++i ) {
-        if ( (*i)->nodeType() == GeoDataTypes::GeoDataFolderType
-             || (*i)->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-            GeoDataContainer *child = static_cast<GeoDataContainer*>( *i );
-            setupStyle( doc, child );
-        } else {
-            GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>( *i );
-
-            QString styleUrl = placemark->styleUrl().remove('#');
-            if ( ! styleUrl.isEmpty() )
-            {
-                const GeoDataStyleMap& styleMap = doc->styleMap( styleUrl );
-                /// hard coded to use only the "normal" style
-                if( !styleMap.value( QString( "normal" ) ).isEmpty() ) {
-                    styleUrl = styleMap.value( QString( "normal" ) );
-                }
-                styleUrl.remove( '#' );
-                placemark->setStyle( &doc->style( styleUrl ) );
-            }
-        }
-    }
+    doc->setFileName( m_filepath );
+    createFilterProperties( doc );
+    emit q->newGeoDataDocumentAdded( doc );
+    emit q->loaderFinished( q );
 }
 
-void FileLoader::createFilterProperties( GeoDataContainer *container )
+void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
 {
-
     QVector<GeoDataFeature*>::Iterator i = container->begin();
     QVector<GeoDataFeature*>::Iterator const end = container->end();
     for (; i != end; ++i ) {
@@ -591,7 +533,7 @@ void FileLoader::createFilterProperties( GeoDataContainer *container )
     }
 }
 
-int FileLoader::cityPopIdx( qint64 population ) const
+int FileLoaderPrivate::cityPopIdx( qint64 population ) const
 {
     int popidx = 15;
 
@@ -613,7 +555,7 @@ int FileLoader::cityPopIdx( qint64 population ) const
     return popidx;
 }
 
-int FileLoader::spacePopIdx( qint64 population ) const
+int FileLoaderPrivate::spacePopIdx( qint64 population ) const
 {
     int popidx = 18;
 
@@ -636,7 +578,7 @@ int FileLoader::spacePopIdx( qint64 population ) const
     return popidx;
 }
 
-int FileLoader::areaPopIdx( qreal area ) const
+int FileLoaderPrivate::areaPopIdx( qreal area ) const
 {
     int popidx = 17;
     if      ( area <  200000  )      popidx=11;

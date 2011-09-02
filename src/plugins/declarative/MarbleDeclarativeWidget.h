@@ -12,6 +12,8 @@
 #define DECLARATIVE_MARBLE_WIDGET_H
 
 #include "Tracking.h"
+#include "Routing.h"
+#include "Search.h"
 #include "Coordinate.h"
 
 #include <QtGui/QGraphicsProxyWidget>
@@ -36,17 +38,34 @@ class MarbleWidget : public QGraphicsProxyWidget
 {
     Q_OBJECT
 
-    Q_PROPERTY( Marble::Declarative::Coordinate* center READ center WRITE setCenter NOTIFY centerChanged )
+    Q_PROPERTY( Marble::Declarative::Coordinate* center READ center WRITE setCenter )
+    Q_PROPERTY( int zoom READ zoom WRITE setZoom NOTIFY zoomChanged )
 
     Q_PROPERTY( QString mapThemeId READ mapThemeId WRITE setMapThemeId )
     Q_PROPERTY( QString projection READ projection WRITE setProjection )
     Q_PROPERTY( bool inputEnabled READ inputEnabled WRITE setInputEnabled )
+    Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
     Q_PROPERTY( QStringList activeFloatItems READ activeFloatItems WRITE setActiveFloatItems )
+    Q_PROPERTY( QStringList activeRenderPlugins READ activeRenderPlugins WRITE setActiveRenderPlugins )
     Q_PROPERTY( Marble::Declarative::Tracking* tracking READ tracking NOTIFY trackingChanged )
+    Q_PROPERTY( Marble::Declarative::Routing* routing READ routing NOTIFY routingChanged )
+    Q_PROPERTY( Marble::Declarative::Search* search READ search NOTIFY searchChanged )
 
 public:
     /** Constructor */
     explicit MarbleWidget( QGraphicsItem *parent = 0, Qt::WindowFlags flags = 0 );
+
+    bool workOffline() const;
+
+    void setWorkOffline( bool workOffline );
+
+    int zoom() const;
+
+    void setZoom( int zoom );
+
+    void setActiveRenderPlugins( const QStringList &items );
+
+    QStringList activeRenderPlugins() const;
 
 Q_SIGNALS:
     /** Forwarded from MarbleWidget. Zoom value and/or center position have changed */
@@ -54,7 +73,13 @@ Q_SIGNALS:
 
     void trackingChanged();
 
-    void centerChanged();
+    void routingChanged();
+
+    void searchChanged();
+
+    void workOfflineChanged();
+
+    void zoomChanged();
 
 public Q_SLOTS:
     Marble::Declarative::Coordinate* center();
@@ -117,6 +142,10 @@ public Q_SLOTS:
 
     Marble::Declarative::Tracking* tracking();
 
+    Marble::Declarative::Routing* routing();
+
+    Marble::Declarative::Search* search();
+
 private Q_SLOTS:
     void updateCenterPosition();
 
@@ -127,6 +156,10 @@ private:
     bool m_inputEnabled;
 
     Marble::Declarative::Tracking* m_tracking;
+
+    Marble::Declarative::Routing* m_routing;
+
+    Marble::Declarative::Search* m_search;
 
     Marble::Declarative::Coordinate m_center;
 };

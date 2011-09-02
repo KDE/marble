@@ -26,8 +26,6 @@ class QDateTime;
 namespace Marble
 {
 
-class MarbleWidget;
-
 class StarPoint
 {
  public:
@@ -98,12 +96,14 @@ class StarsPlugin : public RenderPlugin
     // sidereal time in hours:
     qreal siderealTime( const QDateTime& );
 
+ private Q_SLOTS:
+    void requestRepaint();
+
  private:
     void loadStars();
-    bool m_isInitialized;
+    bool m_renderStars;
     bool m_starsLoaded;
     QVector<StarPoint> m_stars;
-    MarbleWidget* m_marbleWidget;
 };
 
 }

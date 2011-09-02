@@ -241,10 +241,7 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
                                          qreal& lon, qreal& lat,
                                          GeoDataCoordinates::Unit unit ) const
 {
-    int           radius             = viewport->radius();
-    int           halfImageWidth     = viewport->width() / 2;
-    int           halfImageHeight    = viewport->height() / 2;
-    bool          noerr              = false;
+    const int radius = viewport->radius();
 
     // Calculate translation of center point
     qreal  centerLon;
@@ -253,40 +250,62 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
 
     // Calculate how many pixel are being represented per radians.
     const float rad2Pixel = (qreal)( 2 * radius )/M_PI;
+    const qreal pixel2Rad = M_PI / (2 * radius);
 
-    int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
-    int yTop          = halfImageHeight - 2 * radius + yCenterOffset;
-    int yBottom       = yTop + 4 * radius;
-
-    if ( y >= yTop && y < yBottom ) {
-        int    const  xPixels   = x - halfImageWidth;
-        qreal const  pixel2Rad = M_PI / (2 * radius);
-
-        lat = atan( sinh( ( ( halfImageHeight + yCenterOffset ) - y)
-                          * pixel2Rad ) );
+    {
+        const int halfImageWidth = viewport->width() / 2;
+        const int xPixels = x - halfImageWidth;
         lon = xPixels * pixel2Rad + centerLon;
 
         while ( lon > M_PI )  lon -= 2*M_PI;
         while ( lon < -M_PI ) lon += 2*M_PI;
 
-        noerr = true;
+        if ( unit == GeoDataCoordinates::Degree ) {
+            lon *= RAD2DEG;
+        }
     }
 
-    if ( unit == GeoDataCoordinates::Degree ) {
-        lon *= RAD2DEG;
-        lat *= RAD2DEG;
+    {
+        const int halfImageHeight    = viewport->height() / 2;
+        const int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
+        const int yTop          = halfImageHeight - 2 * radius + yCenterOffset;
+        const int yBottom       = yTop + 4 * radius;
+        if ( y >= yTop && y < yBottom ) {
+            lat = atan( sinh( ( ( halfImageHeight + yCenterOffset ) - y)
+                              * pixel2Rad ) );
+
+            if ( unit == GeoDataCoordinates::Degree ) {
+                lat *= RAD2DEG;
+            }
+
+            return true; // lat successfully calculated
+        }
     }
 
-    return noerr;
+    return false; // lat unchanged
 }
 
 
 GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
                                                       const ViewportParams *viewport ) const
 {
-    // For the case where the whole viewport gets covered there is a 
+    qreal west;
+    qreal north = 85*DEG2RAD;
+    geoCoordinates( screenRect.left(), screenRect.top(), viewport, west, north, GeoDataCoordinates::Radian );
+
+    qreal east;
+    qreal south = -85*DEG2RAD;
+    geoCoordinates( screenRect.right(), screenRect.bottom(), viewport, east, south, GeoDataCoordinates::Radian );
+
+    // For the case where the whole viewport gets covered there is a
     // pretty dirty and generic detection algorithm:
-    GeoDataLatLonAltBox latLonAltBox = AbstractProjection::latLonAltBox( screenRect, viewport );
+    GeoDataLatLonAltBox latLonAltBox;
+    latLonAltBox.setNorth( north, GeoDataCoordinates::Radian );
+    latLonAltBox.setSouth( south, GeoDataCoordinates::Radian );
+    latLonAltBox.setWest( west, GeoDataCoordinates::Radian );
+    latLonAltBox.setEast( east, GeoDataCoordinates::Radian );
+    latLonAltBox.setMinAltitude(      -100000000.0 );
+    latLonAltBox.setMaxAltitude( 100000000000000.0 );
 
     // The remaining algorithm should be pretty generic for all kinds of 
     // flat projections:

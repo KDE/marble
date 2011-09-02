@@ -42,6 +42,8 @@ public:
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
     ~GeoDataDocument ();
+//ig    DocumentRole            documentRole () const;
+//ig    void                    setDocumentRole (DocumentRole role);
 };
 // GeoDataDocument
 

@@ -11,6 +11,7 @@
 
 #include "NavigationFloatItem.h"
 
+#include <QtCore/qmath.h>
 #include <QtCore/QRect>
 #include <QtGui/QPixmap>
 #include <QtGui/QToolButton>
@@ -133,6 +134,9 @@ bool NavigationFloatItem::isInitialized() const
 void NavigationFloatItem::changeViewport( ViewportParams *viewport )
 {
     if ( viewport->radius() != m_oldViewportRadius ) {
+        const qreal zoomValue = (200.0 * qLn( viewport->radius() ) ); // copied from MarbleWidgetPrivate::zoom()
+        setZoomSliderValue( zoomValue );
+
         m_oldViewportRadius = viewport->radius();
         // The slider depends on the map state (zoom factor)
         update();
@@ -202,9 +206,13 @@ bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )
 
 void NavigationFloatItem::setZoomSliderValue( int level )
 {
-    if( !( m_profiles & MarbleGlobal::SmallScreen ) ) {
-        m_navigationWidget->zoomSlider->setValue( level );
-    }
+    if( ( m_profiles & MarbleGlobal::SmallScreen ) )
+        return;
+
+    if ( m_navigationWidget->zoomSlider->isSliderDown() )
+        return;
+
+    m_navigationWidget->zoomSlider->setValue( level );
 }
 
 void NavigationFloatItem::setMarbleZoomValue( int level )

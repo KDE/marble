@@ -29,6 +29,7 @@ namespace Marble
 class NavigationWidgetPrivate;
 
 class MarbleWidget;
+class GeoDataPlacemark;
 
 class MARBLE_EXPORT NavigationWidget : public QWidget
 {
@@ -43,11 +44,6 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
      * @param widget  the MarbleWidget to be set.
      */
     void setMarbleWidget( MarbleWidget *widget );
-
-    /**
-      * Toggle offline mode of download manager and runners.
-      */
-    void setWorkOffline(bool offline);
 
  Q_SIGNALS:
     /**
@@ -96,7 +92,7 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
      * them.
      * @see centerOn
      */
-    void setLocations( QAbstractItemModel* locations );
+    void setLocations( QVector<GeoDataPlacemark*> locations );
 
     void selectTheme( const QString & );
 

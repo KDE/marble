@@ -20,6 +20,8 @@
 #include "MarbleWidget.h"
 #include "MarbleRunnerManager.h"
 #include "MarblePlacemarkModel.h"
+#include "GeoDataDocument.h"
+#include "GeoDataTreeModel.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 
@@ -44,6 +46,16 @@ class NavigationWidgetPrivate
     QString                 m_searchTerm;
     MarbleRunnerManager    *m_runnerManager;
     QTimer                  m_deferSearch;
+    GeoDataTreeModel        m_treeModel;
+    GeoDataDocument        *m_document;
+
+    NavigationWidgetPrivate()
+        : m_document( new GeoDataDocument ) {
+    m_document->setDocumentRole( SearchResultDocument );
+    m_document->setName("Search Results");
+    m_treeModel.setRootDocument( m_document );
+    };
+
 };
 
 NavigationWidget::NavigationWidget( QWidget *parent, Qt::WindowFlags f )
@@ -104,18 +116,20 @@ NavigationWidget::~NavigationWidget()
 void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_runnerManager = new MarbleRunnerManager( widget->model()->pluginManager(), this );
-    connect( d->m_runnerManager, SIGNAL( searchResultChanged(  QAbstractItemModel* ) ),
-             this,               SLOT( setLocations( QAbstractItemModel* ) ) );
+    connect( d->m_runnerManager, SIGNAL( searchResultChanged( QVector<GeoDataPlacemark*> ) ),
+             this,               SLOT( setLocations( QVector<GeoDataPlacemark*> ) ) );
 
     d->m_widget = widget;
     d->m_runnerManager->setModel( widget->model() );
+    d->m_widget->model()->treeModel()->addDocument( d->m_document );
+
+    d->m_sortproxy->setSortLocaleAware( true );
+    d->m_sortproxy->setDynamicSortFilter( true );
 
     // Make us aware of all the Placemarks in the MarbleModel so that
     // we can search them.
-    setLocations( d->m_widget->model()->placemarkModel() );
-
-//    FIXME: Why does this fail: "selection model works on a different model than the view..." ?
-//    d->m_navigationUi.locationListView->setSelectionModel( d->m_widget->placemarkSelectionModel() );
+    d->m_sortproxy->setSourceModel( d->m_widget->model()->placemarkModel() );
+    d->m_sortproxy->sort( 0 );
 
     // Connect necessary signals.
     connect( this, SIGNAL( goHome() ),         d->m_widget, SLOT( goHome() ) );
@@ -159,8 +173,17 @@ void NavigationWidget::searchLineChanged( const QString &search )
 {
     d->m_searchTerm = search;
     // if search line is empty, restore original geonames
-    if ( d->m_searchTerm.isEmpty() )
-        setLocations( d->m_widget->model()->placemarkModel() );
+    if ( d->m_searchTerm.isEmpty() ) {
+        // set the proxy list to the placemarkModel
+        d->m_sortproxy->setSourceModel( d->m_widget->model()->placemarkModel() );
+        d->m_sortproxy->sort( 0 );
+        d->m_widget->model()->placemarkSelectionModel()->clear();
+
+        // clear the local document
+        d->m_widget->model()->treeModel()->removeDocument( d->m_document );
+        d->m_document->clear();
+        d->m_widget->model()->treeModel()->addDocument( d->m_document );
+    }
     d->m_deferSearch.start( 500 );
 }
 
@@ -181,15 +204,24 @@ void NavigationWidget::search()
         d->m_navigationUi.locationListView->activate();
 }
 
-void NavigationWidget::setLocations(QAbstractItemModel* locations)
+void NavigationWidget::setLocations( QVector<GeoDataPlacemark*> locations )
 {
     QTime t;
     t.start();
-    d->m_sortproxy->setSourceModel( locations );
-    d->m_sortproxy->setSortLocaleAware( true );
-    d->m_sortproxy->setDynamicSortFilter( true );
-    d->m_sortproxy->sort( 0 );
+
+    // fill the local document with results
     d->m_widget->model()->placemarkSelectionModel()->clear();
+    d->m_widget->model()->treeModel()->removeDocument( d->m_document );
+    d->m_document->clear();
+    foreach (GeoDataPlacemark *placemark, locations ) {
+        d->m_document->append( new GeoDataPlacemark( *placemark ) );
+    }
+    d->m_widget->model()->treeModel()->addDocument( d->m_document );
+    d->m_widget->centerOn( d->m_document->latLonAltBox() );
+
+    // set the proxy list to the list of results
+    d->m_sortproxy->setSourceModel( &d->m_treeModel );
+    d->m_sortproxy->sort( 0 );
     mDebug() << "NavigationWidget (sort): Time elapsed:"<< t.elapsed() << " ms";
 }
 
@@ -228,8 +260,8 @@ void NavigationWidget::mapCenterOnSignal( const QModelIndex &index )
             = qVariantValue<GeoDataObject*>( index.model()->data(index, MarblePlacemarkModel::ObjectPointerRole ) );
     if ( dynamic_cast<GeoDataPlacemark*>(object) )
     {
-        GeoDataCoordinates coord = ( dynamic_cast<GeoDataPlacemark*>( object ) )->coordinate();
-        d->m_widget->centerOn( coord, true );
+        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(object);
+        d->m_widget->centerOn( *placemark, true );
         d->m_widget->model()->placemarkSelectionModel()->select( d->m_sortproxy->mapToSource( index ), QItemSelectionModel::ClearAndSelect );
     }
 }
@@ -273,11 +305,6 @@ void NavigationWidget::resizeEvent ( QResizeEvent * )
             setUpdatesEnabled(true);
         }
     }
-}
-
-void NavigationWidget::setWorkOffline(bool offline)
-{
-    d->m_runnerManager->setWorkOffline( offline );
 }
 
 }

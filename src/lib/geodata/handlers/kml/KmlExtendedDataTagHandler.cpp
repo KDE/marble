@@ -16,7 +16,7 @@
 #include "GeoDataExtendedData.h"
 #include "GeoDataFeature.h"
 
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 
 namespace Marble
 {

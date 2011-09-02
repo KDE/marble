@@ -14,7 +14,7 @@
 
 #include "KmlElementDictionary.h"
 #include "GeoDataData.h"
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 
 #include <QtCore/QVariant>
 

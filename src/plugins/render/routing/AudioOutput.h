@@ -61,6 +61,8 @@ public:
       */
     void setSpeaker( const QString &speaker );
 
+    QString speaker() const;
+
     /**
       * Toggle whether sound output is used instead of a speaker. Overriden by setMuted(true).
       * @see setMuted

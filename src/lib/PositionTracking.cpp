@@ -61,10 +61,12 @@ void PositionTrackingPrivate::setStatus( PositionProviderStatus status )
 {
     if (status == PositionProviderStatusAvailable) {
         Q_ASSERT(m_document);
+        m_marbleModel->treeModel()->removeDocument( m_document );
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(m_document->child(m_document->size()-1));
         GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
         m_currentLineString = new GeoDataLineString;
         multiGeometry->append(m_currentLineString);
+        m_marbleModel->treeModel()->addDocument( m_document );
     }
 
     emit statusChanged( status );
@@ -112,10 +114,9 @@ PositionTracking::PositionTracking( MarbleModel *model )
     styleMap.insert("normal", QString("#").append(style.styleId()));
     d->m_document->addStyleMap(styleMap);
     d->m_document->addStyle(style);
+    d->m_document->append(placemark);
 
     placemark->setStyleUrl(QString("#").append(styleMap.styleId()));
-    placemark->setStyle( &d->m_document->style(style.styleId()));
-    d->m_document->append(placemark);
 
     d->m_marbleModel->treeModel()->addDocument(d->m_document);
 }
@@ -222,9 +223,10 @@ void PositionTracking::clearTrack()
     GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(d->m_document->child(d->m_document->size()-1));
     GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
     d->m_currentLineString = new GeoDataLineString;
+    d->m_marbleModel->treeModel()->removeDocument( d->m_document );
     multiGeometry->clear();
     multiGeometry->append(d->m_currentLineString);
-    d->m_marbleModel->treeModel()->update();
+    d->m_marbleModel->treeModel()->addDocument( d->m_document );
 }
 
 bool PositionTracking::isTrackEmpty() const

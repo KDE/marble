@@ -13,6 +13,7 @@
 #define MARBLE_SCANLINETEXTUREMAPPERCONTEXT_H
 
 #include <QtCore/QSize>
+#include <QtGui/QImage>
 
 #include "GeoSceneTexture.h"
 #include "MarbleMath.h"
@@ -23,7 +24,7 @@ namespace Marble
 
 class StackedTile;
 class StackedTileLoader;
-class ViewParams;
+class ViewportParams;
 
 
 class ScanlineTextureMapperContext
@@ -41,7 +42,9 @@ public:
     void pixelValueApprox( const qreal lon, const qreal lat,
                            QRgb *scanLine, const int n );
 
-    static int interpolationStep( ViewParams * const viewParams );
+    static int interpolationStep( const ViewportParams *viewport, MapQuality mapQuality );
+
+    static QImage::Format optimalCanvasImageFormat( const ViewportParams *viewport );
 
     int globalWidth() const;
     int globalHeight() const;
@@ -80,7 +83,8 @@ private:
     qreal const      m_normGlobalWidth;
     qreal const      m_normGlobalHeight;
 
-    StackedTile *m_tile;
+    const StackedTile *m_tile;
+    int m_deltaLevel;
 
     // Coordinate transformations:
 
@@ -88,6 +92,8 @@ private:
     // ( with origin in upper left corner, measured in pixel) 
     int          m_tilePosX;
     int          m_tilePosY;
+    int m_vTileStartX;
+    int m_vTileStartY;
 
     // Converts global texture coordinates 
     // ( with origin in center, measured in pixel) 

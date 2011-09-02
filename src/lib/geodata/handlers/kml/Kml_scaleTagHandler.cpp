@@ -30,7 +30,7 @@
 #include "KmlElementDictionary.h"
 #include "GeoDataIconStyle.h"
 #include "GeoDataLabelStyle.h"
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 
 namespace Marble
 {

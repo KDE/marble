@@ -58,8 +58,7 @@ namespace Marble
 
 WorldClock::WorldClock(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-    m_map(0),
-    m_sun(0)
+    m_map(0)
 {
     KGlobal::locale()->insertCatalog("marble");
     KGlobal::locale()->insertCatalog("marble_qt");
@@ -98,13 +97,9 @@ void WorldClock::init()
         item->setVisible( false );
 
     //Set up the Sun to draw night/day shadow
-    m_sun = m_map->model()->sunLocator();
-    m_sun->setShow(true);
-    m_sun->setCitylights(true);
-    if(cg.readEntry("centersun", false ))
-         m_sun->setCentered(true);
-
-    m_sun->update();
+    m_map->setShowSunShading(true);
+    m_map->setShowCityLights(true);
+    m_map->setShowSunInZenith(cg.readEntry("centersun", false ));
 
     m_customTz = cg.readEntry("customtz", false );
     m_locationkey = KSystemTimeZones::local().name();
@@ -206,7 +201,6 @@ void WorldClock::dataUpdated(const QString &source,
     m_time = KSystemTimeZones::local().convert(m_locations.value(m_locationkey),
                                                m_localtime );
     //kDebug() << "Adjusted Time = " << m_time;
-    m_sun->update();
     update();
 }
 
@@ -448,7 +442,7 @@ void WorldClock::configAccepted()
     KConfigGroup cg = config();
 
     if( ui.daylightButton->isChecked() )
-        m_sun->setCentered(true);
+        m_map->setShowSunInZenith(true);
     else {
         m_map->centerOn(ui.longitudeEdit->value(), 0);
         update();

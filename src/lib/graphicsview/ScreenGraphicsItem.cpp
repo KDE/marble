@@ -175,7 +175,7 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
                     dirtyRegion = dirtyRegion.united( newFloatItemRect );
 
                     widget->setAttribute( Qt::WA_NoSystemBackground,  false );
-                    widget->repaint(dirtyRegion);
+                    widget->update(dirtyRegion);
                     widget->setAttribute( Qt::WA_NoSystemBackground, widget->viewport()->mapCoversViewport() );
                     return true;
                 }

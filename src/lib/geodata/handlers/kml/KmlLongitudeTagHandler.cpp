@@ -14,7 +14,7 @@
 #include "KmlElementDictionary.h"
 
 #include "GeoDataLookAt.h"
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 #include "GeoDataCoordinates.h"
 #include "global.h"
 

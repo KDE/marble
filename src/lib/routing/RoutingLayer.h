@@ -73,14 +73,9 @@ public:
     void synchronizeAlternativeRoutesWith( QComboBox *view );
 
     /**
-      * Set the routing model to use. Implicitly removes the placemark model.
-      */
-    void setModel ( RoutingModel *model );
-
-    /**
       * Set the placemark model to use. Implicitly removes the routing model.
       */
-    void setModel ( MarblePlacemarkModel *model );
+    void setPlacemarkModel ( MarblePlacemarkModel *model );
 
     /**
       * When enabled, a cross hair cursor is shown in the map and each click
@@ -99,6 +94,11 @@ public:
       * Change the route request used for painting and dragging route points
       */
     void setRouteRequest( RouteRequest *request );
+
+    /**
+      * Set the view context to determine whether the map is used interactively
+      */
+    void setViewContext( ViewContext viewContext );
 
 Q_SIGNALS:
     /**

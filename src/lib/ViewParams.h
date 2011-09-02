@@ -22,13 +22,9 @@
 #include <QtCore/QSharedPointer>
 #include <QtCore/QString>
 
-#include "marble_export.h"
-
 #include "Quaternion.h"
 #include "global.h"
 
-
-class QImage;
 
 namespace Marble
 {
@@ -36,14 +32,13 @@ namespace Marble
 class AbstractProjection;
 class ViewportParams;
 class ViewParamsPrivate;
-class GeoSceneDocument;
 
 /** 
  * @short A public class that controls the painting of a MarbleWidget
  *
  */
 
-class MARBLE_EXPORT ViewParams
+class ViewParams
 {
  public:
     ViewParams();
@@ -51,16 +46,6 @@ class MARBLE_EXPORT ViewParams
 
     // Getters and setters
     ViewportParams  *viewport();
-
-/** 
- *  The actual parameters for the look get loaded 
- *  via setMapThemeID.
- *  mapTheme returns a pointer which then can get
- *  passed on to the MarbleModel and the MarbleLegendBrowser. 
- */
-    void setMapThemeId( const QString& );
-    //QString mapThemeId() const;
-    GeoSceneDocument *mapTheme();
 
     // Convenience methods:
 
@@ -74,30 +59,6 @@ class MARBLE_EXPORT ViewParams
 
     ViewContext viewContext() const;
     void setViewContext( ViewContext viewContext );
-
-    /**
-     * @brief  Set the value of a map theme property
-     * @param  name  the property name
-     * @param  value  the value of the property
-     * @return @c true  the property was found and changed accordingly
-     *         @c false the property couldn't be found here
-     */
-    void setPropertyValue( const QString &name, bool value );
-
-    /**
-     * @brief  Get the availability of a property across groups
-     * @param  name  the property name
-     * @param  available  availability of the property
-     * @return @c true  the property was registered in the settings
-     *         @c false the property wasn't registered in the settings
-     */
-    void propertyAvailable( const QString& name, bool& available  );
-
-    /**
-     * @brief  Get the value of a property across groups
-     * @param  name  the property name
-     */
-    void propertyValue( const QString& name, bool &value );
 
     int radius() const;
     void setRadius( int newRadius );
@@ -118,18 +79,6 @@ class MARBLE_EXPORT ViewParams
      * @param height new height of viewport
      */
     void setSize( int width, int height );
-
-    QSharedPointer<QImage> canvasImagePtr() const;
-    QImage * canvasImage() const;
-
-    QSharedPointer<QImage> coastImagePtr() const;
-    QImage * coastImage() const;
-
-    bool showGps() const;
-    void setShowGps( bool );
-
-    bool showElevationModel() const;
-    void setShowElevationModel( bool );
 
     bool showAtmosphere() const;
     void setShowAtmosphere( bool );

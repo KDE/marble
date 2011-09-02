@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
-//
+// Copyright 2011 Thibaut Gridel <tgridel@free.fr>
 
 #ifndef MARBLE_RUNNERPLUGIN_H
 #define MARBLE_RUNNERPLUGIN_H
@@ -36,7 +36,8 @@ public:
         None = 0x0, // The plugin is useless
         Search = 0x1, // The plugin can search for placemarks
         ReverseGeocoding = 0x2, // The plugin can do reverse geocoding
-        Routing = 0x4 // The plugin can calculate routes
+        Routing = 0x4, // The plugin can calculate routes
+        Parsing = 0x8 // The plugin can parse files
     };
 
     /** One plugin can support multiple tasks */

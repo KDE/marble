@@ -49,6 +49,11 @@ MarblePlacemarkModel::MarblePlacemarkModel( QObject *parent )
     : QAbstractListModel( parent ),
       d( new Private )
 {
+    QHash<int,QByteArray> roles = roleNames();
+    roles[DescriptionRole] = "description";
+    roles[LongitudeRole] = "longitude";
+    roles[LatitudeRole] = "latitude";
+    setRoleNames( roles );
 }
 
 MarblePlacemarkModel::~MarblePlacemarkModel()
@@ -121,6 +126,10 @@ QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
         return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->geometry() );
     } else if ( role == ObjectPointerRole ) {
         return qVariantFromValue( dynamic_cast<GeoDataObject*>( d->m_placemarkContainer->at( index.row() ) ) );
+    } else if ( role == LongitudeRole ) {
+        return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->coordinate().longitude( GeoDataCoordinates::Degree ) );
+    } else if ( role == LatitudeRole ) {
+        return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->coordinate().latitude( GeoDataCoordinates::Degree ) );
     } else
         return QVariant();
 }
@@ -184,13 +193,15 @@ void  MarblePlacemarkModel::removePlacemarks( const QString &containerName,
                                               int start,
                                               int length )
 {
-    QTime t;
-    t.start();
-    beginRemoveRows( QModelIndex(), start, start + length );
-    d->m_size -= length;
-    endRemoveRows();
-    emit layoutChanged();
-    mDebug() << "removePlacemarks(" << containerName << "): Time elapsed:" << t.elapsed() << "ms for" << length << "Placemarks.";
+    if ( length > 0 ) {
+        QTime t;
+        t.start();
+        beginRemoveRows( QModelIndex(), start, start + length );
+        d->m_size -= length;
+        endRemoveRows();
+        emit layoutChanged();
+        mDebug() << "removePlacemarks(" << containerName << "): Time elapsed:" << t.elapsed() << "ms for" << length << "Placemarks.";
+    }
 }
 
 #include "MarblePlacemarkModel.moc"

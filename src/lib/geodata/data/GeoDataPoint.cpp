@@ -23,6 +23,7 @@
 #include "global.h"
 
 #include "GeoDataTypes.h"
+#include "GeoDataLatLonAltBox.h"
 
 
 namespace Marble
@@ -67,6 +68,11 @@ GeoDataPoint::~GeoDataPoint()
 GeoDataPointPrivate* GeoDataPoint::p() const
 {
     return static_cast<GeoDataPointPrivate*>(GeoDataGeometry::d);
+}
+
+GeoDataLatLonAltBox GeoDataPoint::latLonAltBox() const
+{
+    return GeoDataLatLonAltBox(*this);
 }
 
 const char* GeoDataPoint::nodeType() const

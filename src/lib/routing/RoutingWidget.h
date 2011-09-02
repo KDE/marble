@@ -47,11 +47,6 @@ public:
     /** Destructor */
     ~RoutingWidget();
 
-    /**
-      * Toggle offline mode. In offline mode, new routes cannot be downloaded
-      */
-    void setWorkOffline( bool offline );
-
     /** Show or hide the "open file..." button. Default is false (not visible) */
     void setShowDirectionsButtonVisible( bool visible );
 

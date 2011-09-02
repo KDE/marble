@@ -22,6 +22,9 @@ using namespace Marble;
 
 static const uint **jumpTableFromQImage32( const QImage &img )
 {
+    if ( img.depth() != 48 && img.depth() != 32 )
+        return 0;
+
     const int  height = img.height();
     const int  bpl    = img.bytesPerLine() / 4;
     const uint  *data = reinterpret_cast<const QRgb*>(img.bits());
@@ -38,6 +41,9 @@ static const uint **jumpTableFromQImage32( const QImage &img )
 
 static const uchar **jumpTableFromQImage8( const QImage &img )
 {
+    if ( img.depth() != 8 && img.depth() != 1 )
+        return 0;
+
     const int  height = img.height();
     const int  bpl    = img.bytesPerLine();
     const uchar  *data = img.bits();
@@ -53,14 +59,15 @@ static const uchar **jumpTableFromQImage8( const QImage &img )
 
 
 StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles ) :
-      AbstractTilePrivate( id ), 
+      m_id( id ), 
       m_resultTile( resultImage ),
       m_depth( resultImage.depth() ),
       m_isGrayscale( resultImage.isGrayscale() ),
       m_tiles( tiles ),
-      jumpTable8( 0 ),
-      jumpTable32( 0 ),
-      m_byteCount( calcByteCount( resultImage, tiles ) )
+      jumpTable8( jumpTableFromQImage8( m_resultTile ) ),
+      jumpTable32( jumpTableFromQImage32( m_resultTile ) ),
+      m_byteCount( calcByteCount( resultImage, tiles ) ),
+      m_isUsed( false )
 {
 }
 
@@ -216,39 +223,38 @@ int StackedTilePrivate::calcByteCount( const QImage &resultImage, const QVector<
 
 
 StackedTile::StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles )
-    : AbstractTile( *new StackedTilePrivate( id, resultImage, tiles ), 0 ), d(0)
+    : d( new StackedTilePrivate( id, resultImage, tiles ) )
 {
     Q_ASSERT( !tiles.isEmpty() );
-
-    // The d-ptr is cached as a member to avoid having to use d_func()
-    // or the Q_D macro in the pixel() function. Otherwise it leads
-    // to measurable runtime overhead because pixel() is called frequently.
-    d = d_func();
 
     if ( d->m_resultTile.isNull() ) {
         qWarning() << "An essential tile is missing. Please rerun the application.";
         return;
     }
 
-    switch ( d->m_depth ) {
-        case 48:
-        case 32:
-            delete [] d->jumpTable32;
-            d->jumpTable32 = jumpTableFromQImage32( d->m_resultTile );
-            break;
-        case 8:
-        case 1:
-            delete [] d->jumpTable8;
-            d->jumpTable8 = jumpTableFromQImage8( d->m_resultTile );
-            break;
-        default:
-            qWarning() << "Color depth" << d->m_depth << " is not supported.";
-            return;
+    if ( d->jumpTable32 == 0 && d->jumpTable8 == 0 ) {
+        qWarning() << "Color depth" << d->m_depth << " is not supported.";
     }
 }
 
 StackedTile::~StackedTile()
 {
+    delete d;
+}
+
+TileId const& StackedTile::id() const
+{
+    return d->m_id;
+}
+
+void StackedTile::setUsed( bool used )
+{
+    d->m_isUsed = used;
+}
+
+bool StackedTile::used() const
+{
+    return d->m_isUsed;
 }
 
 uint StackedTile::pixel( int x, int y ) const

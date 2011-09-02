@@ -207,7 +207,7 @@ void ControlView::printMapScreenShot( QPointer<QPrintDialog> printDialog)
                 // Temporarily remove the black background and layers painting on it
                 m_marbleWidget->setShowBackground( false );
                 m_marbleWidget->setPalette( QPalette ( Qt::white ) );
-                m_marbleWidget->repaint();
+                m_marbleWidget->update();
             }
 
             if ( printOptions->printMap() ) {
@@ -237,7 +237,7 @@ void ControlView::printMapScreenShot( QPointer<QPrintDialog> printDialog)
             if ( hideBackground ) {
                 m_marbleWidget->setShowBackground( wasBackgroundVisible );
                 m_marbleWidget->setPalette( originalPalette );
-                m_marbleWidget->repaint();
+                m_marbleWidget->update();
             }
     }
 #endif
@@ -536,11 +536,6 @@ bool ControlView::setSideBarState( const QByteArray &state )
 void ControlView::addGeoDataFile( QString filename )
 {
     m_marbleWidget->model()->addGeoDataFile( filename );
-}
-
-SunLocator* ControlView::sunLocator()
-{
-    return m_marbleWidget->model()->sunLocator();
 }
 
 }

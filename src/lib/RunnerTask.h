@@ -6,12 +6,13 @@
 // the source code.
 //
 // Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
-//
+// Copyright 2011 Thibaut Gridel <tgridel@free.fr>
 
 #ifndef MARBLE_RUNNERTASK_H
 #define MARBLE_RUNNERTASK_H
 
 #include "GeoDataCoordinates.h"
+#include "GeoDataTypes.h"
 
 #include <QtCore/QRunnable>
 #include <QtCore/QString>
@@ -87,6 +88,19 @@ public:
 
 private:
   RouteRequest* m_routeRequest;
+};
+
+/** A RunnerTask that executes a file Parsing */
+class ParsingTask : public RunnerTask
+{
+public:
+    ParsingTask( MarbleAbstractRunner* runner, const QString& fileName, DocumentRole role );
+
+    virtual void runTask( QEventLoop *localEventLoop );
+
+private:
+  QString m_fileName;
+  DocumentRole m_role;
 };
 
 }

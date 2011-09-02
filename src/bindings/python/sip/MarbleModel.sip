@@ -50,7 +50,7 @@ public:
 //ig    Marble::GeoSceneDocument*  mapTheme () const;
 //ig    HttpDownloadManager*    downloadManager () const;
     void                    openGpxFile (const QString& filename);
-    QAbstractItemModel*     treeModel () const;
+//ig    Marble::GeoDataTreeModel*     treeModel () const;
     void                    home (qreal& lon, qreal& lat, int& zoom);
     void                    setHome (qreal lon, qreal lat, int zoom = 1050);
     void                    setHome (const Marble::GeoDataCoordinates& homePoint, int zoom = 1050);

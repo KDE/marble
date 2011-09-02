@@ -24,6 +24,7 @@ class QModelIndex;
 namespace Marble
 {
 
+class GeoDataPlacemark;
 class GoToDialogPrivate;
 class MarbleWidget;
 
@@ -44,9 +45,6 @@ public:
     /** Toggle whether routing items (source, destination and via points) are visible */
     void setShowRoutingItems( bool show );
 
-    /** Toggles whether to work offline, i.e. use search runners that use the network */
-    void setWorkOffline( bool workOffline );
-
     /** Toggle whether the dialog can be used to search for placemarks */
     void setSearchEnabled( bool enabled );
 
@@ -61,7 +59,7 @@ public:
 private Q_SLOTS:
     void startSearch();
 
-    void updateSearchResult( QAbstractItemModel* model );
+    void updateSearchResult( QVector<GeoDataPlacemark*> placemarks );
 
     void updateSearchMode();
 

@@ -45,6 +45,12 @@
                     <storageLayout maximumTileLevel="1"/>
                     <blending name="CloudsBlending" />
                 </texture>
+                <texture name="citylights"><!-- type="texture"-->
+                    <sourcedir format="JPG"> earth/citylights </sourcedir>
+                    <installmap> citylights.jpg </installmap>
+                    <storageLayout maximumTileLevel="3"/>
+                    <blending name="SunLightBlending" />
+                </texture>
             </layer>
                             
             <layer name="mwdbii" backend="vector" role="polyline">
@@ -153,6 +159,10 @@
             </group>
 
             <group name="Texture Layers">
+                <property name="citylights">
+                    <value>false</value>
+                    <available>true</available>
+                </property>
                 <property name="clouds_data">
                     <value>true</value>
                     <available>true</available>

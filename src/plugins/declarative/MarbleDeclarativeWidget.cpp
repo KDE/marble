@@ -16,8 +16,11 @@
 
 #include "GeoDataCoordinates.h"
 #include "MarbleWidget.h"
+#include "MarbleModel.h"
+#include "MarbleWidgetInputHandler.h"
 #include "MarbleMath.h"
 #include "AbstractFloatItem.h"
+#include "RenderPlugin.h"
 #include "MarbleMap.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
@@ -30,15 +33,22 @@ namespace Declarative
 
 MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     QGraphicsProxyWidget( parent, flags ), m_marbleWidget( new Marble::MarbleWidget ),
-    m_inputEnabled( true ), m_tracking( 0 )
+    m_inputEnabled( true ), m_tracking( 0 ), m_routing( 0 ), m_search( 0 )
 {
     m_marbleWidget->setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
     setWidget( m_marbleWidget );
 
     connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
              this, SIGNAL( visibleLatLonAltBoxChanged( ) ) );
+    connect( m_marbleWidget->model(), SIGNAL( workOfflineChanged() ),
+             this, SIGNAL( workOfflineChanged() ) );
+    connect( m_marbleWidget, SIGNAL( zoomChanged( int ) ),
+             this, SIGNAL( zoomChanged() ) );
     connect( &m_center, SIGNAL(latitudeChanged()), this, SLOT(updateCenterPosition()));
     connect( &m_center, SIGNAL(longitudeChanged()), this, SLOT(updateCenterPosition()));
+
+    m_marbleWidget->inputHandler()->setMouseButtonPopupEnabled( Qt::LeftButton, false );
+    m_marbleWidget->inputHandler()->setPanViaArrowsEnabled( false );
 }
 
 QStringList MarbleWidget::activeFloatItems() const
@@ -57,6 +67,25 @@ void MarbleWidget::setActiveFloatItems( const QStringList &items )
     foreach( AbstractFloatItem * floatItem, m_marbleWidget->floatItems() ) {
         floatItem->setEnabled( items.contains( floatItem->nameId() ) );
         floatItem->setVisible( items.contains( floatItem->nameId() ) );
+    }
+}
+
+QStringList MarbleWidget::activeRenderPlugins() const
+{
+    QStringList result;
+    foreach( RenderPlugin * plugin, m_marbleWidget->renderPlugins() ) {
+        if ( plugin->enabled() && plugin->visible() ) {
+            result << plugin->nameId();
+        }
+    }
+    return result;
+}
+
+void MarbleWidget::setActiveRenderPlugins( const QStringList &items )
+{
+    foreach( RenderPlugin * plugin, m_marbleWidget->renderPlugins() ) {
+        plugin->setEnabled( items.contains( plugin->nameId() ) );
+        plugin->setVisible( items.contains( plugin->nameId() ) );
     }
 }
 
@@ -151,23 +180,69 @@ Marble::Declarative::Tracking* MarbleWidget::tracking()
 
 Coordinate* MarbleWidget::center()
 {
+    m_center.blockSignals( true );
+    m_center.setLongitude( m_marbleWidget->centerLongitude() );
+    m_center.setLatitude( m_marbleWidget->centerLatitude() );
+    m_center.blockSignals( false );
     return &m_center;
 }
 
 void MarbleWidget::setCenter( Coordinate* center )
 {
     if ( center ) {
+        m_center.blockSignals( true );
         m_center.setLongitude( center->longitude() );
         m_center.setLatitude( center->latitude() );
         m_center.setAltitude( center->altitude() );
+        m_center.blockSignals( false );
         updateCenterPosition();
     }
 }
 
 void MarbleWidget::updateCenterPosition()
 {
-  m_marbleWidget->centerOn( m_center.longitude(), m_center.latitude() );
-  emit centerChanged();
+    m_marbleWidget->centerOn( m_center.longitude(), m_center.latitude() );
+}
+
+Marble::Declarative::Routing* MarbleWidget::routing()
+{
+    if ( !m_routing ) {
+        m_routing = new Routing( this );
+        m_routing->setMarbleWidget( m_marbleWidget );
+    }
+
+    return m_routing;
+}
+
+Marble::Declarative::Search* MarbleWidget::search()
+{
+    if ( !m_search ) {
+        m_search = new Search( this );
+        m_search->setMarbleWidget( m_marbleWidget );
+        m_search->setDelegateParent( this );
+    }
+
+    return m_search;
+}
+
+bool MarbleWidget::workOffline() const
+{
+    return m_marbleWidget->model()->workOffline();
+}
+
+void MarbleWidget::setWorkOffline( bool workOffline )
+{
+    m_marbleWidget->model()->setWorkOffline( workOffline );
+}
+
+int MarbleWidget::zoom() const
+{
+    return m_marbleWidget->zoom();
+}
+
+void MarbleWidget::setZoom( int zoom )
+{
+    m_marbleWidget->zoomView( zoom );
 }
 
 }

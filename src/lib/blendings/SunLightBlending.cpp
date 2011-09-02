@@ -15,11 +15,10 @@
 
 #include "SunLightBlending.h"
 
-#include "MarbleClock.h"
 #include "MarbleDebug.h"
-#include "Planet.h"
 #include "SunLocator.h"
 #include "TextureTile.h"
+#include "TileLoaderHelper.h"
 #include "global.h"
 
 #include <QtGui/QImage>
@@ -29,99 +28,100 @@
 namespace Marble
 {
 
-SunLightBlending::SunLightBlending()
+SunLightBlending::SunLightBlending( const SunLocator * sunLocator )
     : Blending(),
-      m_sunLocator( new SunLocator( new MarbleClock, new Planet( "earth" )))
+      m_sunLocator( sunLocator ),
+      m_levelZeroColumns( 0 ),
+      m_levelZeroRows( 0 )
 {
 }
 
 SunLightBlending::~SunLightBlending()
 {
-    delete m_sunLocator;
 }
 
-void SunLightBlending::blend( QImage * const bottom, TextureTile const * const top ) const
+void SunLightBlending::blend( QImage * const tileImage, TextureTile const * const top ) const
 {
-    QImage const * const topImage = top->image();
-    Q_ASSERT( topImage );
-    Q_ASSERT( bottom->size() == topImage->size() );
-    int const tileWidth = bottom->width();
-    int const tileHeight = bottom->height();
-    mDebug() << "SunLightBlending::blend, tile width/height:" << tileWidth << tileHeight;
+    if ( tileImage->depth() != 32 )
+        return;
 
-    // number of pixels in current zoom level
-    // TODO: fix calculation, take levelZero(Columns|Rows) into account
-    int const globalWidth = tileWidth << top->id().zoomLevel();
-    int const globalHeight = tileHeight << top->id().zoomLevel();
-    mDebug() << "SunLightBlending::blend, global width/height:" << globalWidth << globalHeight;
-
-    qreal const lonScale = 2.0 * M_PI / globalWidth;
-    qreal const latScale = -M_PI / globalHeight;
-
-    m_sunLocator->update();
-    qreal const sunZenithLon = m_sunLocator->getLon() * DEG2RAD;
-    qreal const sunZenithLat = m_sunLocator->getLat() * DEG2RAD;
-    mDebug() << "SunLightBlending::blend, sun zenith lon/lat:" << sunZenithLon << sunZenithLat;
+    // TODO add support for 8-bit maps?
+    // add sun shading
+    const TileId id = top->id();
+    const qreal  global_width  = tileImage->width()
+        * TileLoaderHelper::levelToColumn( m_levelZeroColumns, id.zoomLevel() );
+    const qreal  global_height = tileImage->height()
+        * TileLoaderHelper::levelToRow( m_levelZeroRows, id.zoomLevel() );
+    const qreal lon_scale = 2*M_PI / global_width;
+    const qreal lat_scale = -M_PI / global_height;
+    const int tileHeight = tileImage->height();
+    const int tileWidth = tileImage->width();
 
     // First we determine the supporting point interval for the interpolation.
-    int const n = maxDivisor( 30, tileWidth );
-    int const ipRight = n * (int)( tileWidth / n );
+    const int n = maxDivisor( 30, tileWidth );
+    const int ipRight = n * (int)( tileWidth / n );
 
-    for ( int y = 0; y < tileHeight; ++y ) {
+    const QImage *nighttile = top->image();
 
-        qreal const lat = latScale * ( top->id().y() * tileHeight + y ) - 0.5 * M_PI;
-        qreal const a = sin(( lat + sunZenithLat ) / 2.0 );
-        qreal const c = cos( lat ) * cos( -sunZenithLat );
+    for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
+        const qreal lat = lat_scale * ( id.y() * tileHeight + cur_y ) - 0.5*M_PI;
+        const qreal a = sin( ( lat+DEG2RAD * m_sunLocator->getLat() )/2.0 );
+        const qreal c = cos(lat)*cos( -DEG2RAD * m_sunLocator->getLat() );
 
-        QRgb * bottomScanline = (QRgb*) bottom->scanLine( y );
-        QRgb * topScanline = (QRgb*) topImage->scanLine( y );
+        QRgb* scanline  = (QRgb*)tileImage->scanLine( cur_y );
+        const QRgb* nscanline = (QRgb*)nighttile->scanLine( cur_y );
 
-        qreal shade = 0.0;
         qreal lastShade = -10.0;
 
-        int x = 0;
-        while ( x < tileWidth ) {
-            bool const interpolate = ( x != 0 && x < ipRight && x + n < tileWidth );
+        int cur_x = 0;
+
+        while ( cur_x < tileWidth ) {
+
+            const bool interpolate = ( cur_x != 0 && cur_x < ipRight && cur_x + n < tileWidth );
+
+            qreal shade = 0;
+
             if ( interpolate ) {
-                int const check = x + n;
-                qreal const checkLon = lonScale * ( top->id().x() * tileWidth + check );
-                shade = shading( checkLon - sunZenithLon, a, c );
+                const int check = cur_x + n;
+                const qreal checklon   = lon_scale * ( id.x() * tileWidth + check );
+                shade = m_sunLocator->shading( checklon, a, c );
 
                 // if the shading didn't change across the interpolation
                 // interval move on and don't change anything.
                 if ( shade == lastShade && shade == 1.0 ) {
-                    bottomScanline += n;
-                    topScanline += n;
-                    x += n;
+                    scanline += n;
+                    nscanline += n;
+                    cur_x += n;
                     continue;
                 }
                 if ( shade == lastShade && shade == 0.0 ) {
                     for ( int t = 0; t < n; ++t ) {
-                        shadePixelComposite( *bottomScanline, *topScanline, shade );
-                        ++bottomScanline;
-                        ++topScanline;
+                        m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
+                        ++scanline;
+                        ++nscanline;
                     }
-                    x += n;
+                    cur_x += n;
                     continue;
                 }
                 for ( int t = 0; t < n ; ++t ) {
-                    qreal const lon = lonScale * ( top->id().x() * tileWidth + x );
-                    shade = shading( lon - sunZenithLon, a, c );
-                    shadePixelComposite( *bottomScanline, *topScanline, shade );
-                    ++bottomScanline;
-                    ++topScanline;
-                    ++x;
+                    qreal lon   = lon_scale * ( id.x() * tileWidth + cur_x );
+                    shade = m_sunLocator->shading( lon, a, c );
+                    m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
+                    ++scanline;
+                    ++nscanline;
+                    ++cur_x;
                 }
             }
+
             else {
                 // Make sure we don't exceed the image memory
-                if ( x < tileWidth ) {
-                    qreal const lon = lonScale * ( top->id().x() * tileWidth + x );
-                    shade = shading( lon - sunZenithLon, a, c );
-                    shadePixelComposite( *bottomScanline, *topScanline, shade );
-                    ++bottomScanline;
-                    ++topScanline;
-                    ++x;
+                if ( cur_x < tileWidth ) {
+                    qreal lon   = lon_scale * ( id.x() * tileWidth + cur_x );
+                    shade = m_sunLocator->shading( lon, a, c );
+                    m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
+                    ++scanline;
+                    ++nscanline;
+                    ++cur_x;
                 }
             }
             lastShade = shade;
@@ -129,62 +129,14 @@ void SunLightBlending::blend( QImage * const bottom, TextureTile const * const t
     }
 }
 
-void SunLightBlending::shadePixelComposite( QRgb & bottom, QRgb const top, qreal const brightness ) const
+void SunLightBlending::setLevelZeroLayout( int levelZeroColumns, int levelZeroRows )
 {
-    if ( brightness > 0.99999 )
-        // daylight - no change
-        return;
-
-    if ( brightness < 0.00001 ) {
-        // night
-        bottom = top;
-    }
-    else {
-        // gradual shadowing
-        int const bottomRed = qRed( bottom );
-        int const bootomGreen = qGreen( bottom );
-        int const bottomBlue = qBlue( bottom );
-
-        int const topRed = qRed( top );
-        int const topGreen = qGreen( top );
-        int const topBlue = qBlue( top );
-
-        bottom = qRgb( (int)( brightness * bottomRed + ( 1.0 - brightness ) * topRed ),
-                       (int)( brightness * bootomGreen + ( 1.0 - brightness ) * topGreen ),
-                       (int)( brightness * bottomBlue + ( 1.0 - brightness ) * topBlue ));
-    }
-}
-
-// deltaLon = lon - sunLon
-qreal SunLightBlending::shading( qreal const deltaLon, qreal const a, qreal const c ) const
-{
-    // haversine formula
-    qreal const b = sin( deltaLon / 2.0 );
-    qreal const h = ( a * a ) + c * ( b * b );
-
-    /*
-      h = 0.0 // directly beneath sun
-      h = 0.5 // sunrise/sunset line
-      h = 1.0 // opposite side of earth to the sun
-      theta = 2*asin(sqrt(h))
-    */
-
-    // this equals 18 deg astronomical twilight and is correct for earth or venus
-    qreal const twilightZone = 0.1;
-
-    qreal brightness;
-    if ( h <= 0.5 - twilightZone / 2.0 )
-        brightness = 1.0;
-    else if ( h >= 0.5 + twilightZone / 2.0 )
-        brightness = 0.0;
-    else
-        brightness = ( 0.5 + twilightZone / 2.0 - h ) / twilightZone;
-
-    return brightness;
+    m_levelZeroColumns = levelZeroColumns;
+    m_levelZeroRows = levelZeroRows;
 }
 
 // TODO: This should likely go into a math class in the future ...
-int SunLightBlending::maxDivisor( int const maximum, int const fullLength ) const
+int SunLightBlending::maxDivisor( int maximum, int fullLength )
 {
     // Find the optimal interpolation interval n for the
     // current image canvas width

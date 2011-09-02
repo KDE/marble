@@ -292,6 +292,7 @@ class GEODATA_EXPORT GeoDataCoordinates
     QString latToString() const;
     
     virtual bool operator==( const GeoDataCoordinates& ) const;
+    virtual bool operator !=( const GeoDataCoordinates& ) const;
     GeoDataCoordinates& operator=( const GeoDataCoordinates &other );
 
     /** Serialize the contents of the feature to @p stream. */

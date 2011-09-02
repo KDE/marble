@@ -26,14 +26,14 @@ namespace Ui
 
 namespace Marble
 {
-class SunLocator;
+class MarbleWidget;
 
 class MARBLE_EXPORT SunControlWidget : public QDialog
 {
     Q_OBJECT
 	
  public:
-    explicit SunControlWidget( SunLocator* sunLocator, QWidget* parent = 0 );
+    explicit SunControlWidget( MarbleWidget *marbleWidget, QWidget* parent = 0 );
     virtual ~SunControlWidget();
     void setSunShading( bool );
 
@@ -50,7 +50,7 @@ class MARBLE_EXPORT SunControlWidget : public QDialog
     void showEvent(QShowEvent* event);
 
     Ui::SunControlWidget *m_uiWidget;
-    SunLocator           *m_sunLocator;
+    MarbleWidget         *const m_marbleWidget;
     QString               m_shadow;
 };
 

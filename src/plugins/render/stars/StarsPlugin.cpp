@@ -13,22 +13,22 @@
 #include <QtCore/QRectF>
 #include <QtCore/QSize>
 #include <QtCore/QDateTime>
+#include <QtGui/QRegion>
+
+#include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "GeoPainter.h"
-#include "SunLocator.h"
 #include "ViewportParams.h"
-#include "MarbleWidget.h"
 #include "MarbleModel.h"
 
 namespace Marble
 {
 
 StarsPlugin::StarsPlugin()
-    : m_isInitialized( false ),
-      m_starsLoaded( false ),
-      m_marbleWidget( 0 )
+    : m_renderStars( false ),
+      m_starsLoaded( false )
 {
 }
 
@@ -44,7 +44,7 @@ QString StarsPlugin::renderPolicy() const
 
 QStringList StarsPlugin::renderPosition() const
 {
-    QStringList layers = QStringList() << "STARS" << "ALWAYS_ON_TOP";
+    QStringList layers = QStringList() << "STARS";
     return layers;
 }
 
@@ -76,12 +76,11 @@ QIcon StarsPlugin::icon () const
 
 void StarsPlugin::initialize ()
 {
-    m_isInitialized = true;
 }
 
 bool StarsPlugin::isInitialized () const
 {
-    return m_isInitialized;
+    return true;
 }
 
 void StarsPlugin::loadStars() {
@@ -124,14 +123,9 @@ void StarsPlugin::loadStars() {
 bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                           const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    if ( !(renderPos == "STARS" || renderPos == "ALWAYS_ON_TOP") ) {
-        return true;
-    }
-
-    if( renderPos=="STARS" )
-    {
         QString target = marbleModel()->planetId();
 
         // So far this starry sky plugin only supports displaying stars on earth.
@@ -163,7 +157,9 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         matrix       skyAxisMatrix;
         skyAxis.inverse().toMatrix( skyAxisMatrix );
 
-        if ( !viewport->globeCoversViewport() && viewport->projection() == Spherical )
+        const bool renderStars = !viewport->globeCoversViewport() && viewport->projection() == Spherical;
+
+        if ( renderStars )
         {
             // Delayed initialization:
             // Load the star database only if the sky is actually being painted...
@@ -222,19 +218,19 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             }
         }
 
-        painter->restore();
-    }
+        if ( renderStars != m_renderStars ) {
+            if ( renderStars ) {
+                connect( marbleModel()->clock(), SIGNAL( timeChanged() ),
+                         this, SLOT( requestRepaint() ) );
+            } else {
+                disconnect( marbleModel()->clock(), SIGNAL( timeChanged() ),
+                            this, SLOT( requestRepaint() ) );
+            }
 
-    if( renderPos == "ALWAYS_ON_TOP" )
-    {
-        m_marbleWidget = dynamic_cast<MarbleWidget*>( painter->device() );
-        if( m_marbleWidget && m_marbleWidget->model()->sunLocator()->getCentered() == true )
-        {
-            GeoDataCoordinates point( m_marbleWidget->model()->sunLocator()->getLon(), m_marbleWidget->model()->sunLocator()->getLat(), 0, GeoDataCoordinates::Degree );
-            QImage image( MarbleDirs::path( "svg/sunshine.png" ) );
-            painter->drawImage( point, image.scaled( QSize( 30, 30 ) ) );
+            m_renderStars = renderStars;
         }
-    }
+
+        painter->restore();
 
     return true;
 }
@@ -255,6 +251,11 @@ qreal StarsPlugin::siderealTime( const QDateTime& localDateTime )
 
     // Range (0..24) for gmst:
     return gmst - (int)( gmst / 24.0 ) * 24.0;
+}
+
+void StarsPlugin::requestRepaint()
+{
+    emit repaintNeeded( QRegion() );
 }
 
 }

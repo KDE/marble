@@ -141,7 +141,32 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
         Folder,
         Bookmark,
+        
+        NaturalWater,
+        NaturalWood,
 
+        // OpenStreetMap highways
+        HighwaySteps,
+        HighwayUnknown,
+        HighwayPath,
+        HighwayTrack,
+        HighwayPedestrian,
+        HighwayService,
+        HighwayRoad,
+        HighwayTertiaryLink,
+        HighwayTertiary,
+        HighwaySecondaryLink,
+        HighwaySecondary,
+        HighwayPrimaryLink,
+        HighwayPrimary,
+        HighwayTrunkLink,
+        HighwayTrunk,
+        HighwayMotorwayLink,
+        HighwayMotorway,
+
+        //OSM building
+        Building,
+        
         // OpenStreetMap category Accomodation
         AccomodationCamping,
         AccomodationHostel,
@@ -204,6 +229,49 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         TransportTaxiRank,
         TransportTrainStation,
         TransportTramStop,
+
+        // OpenStreetMap category religion
+        ReligionPlaceOfWorship,
+        ReligionBahai,
+        ReligionBuddhist,
+        ReligionChristian,
+        ReligionHindu,
+        ReligionJain,
+        ReligionJewish,
+        ReligionShinto,
+        ReligionSikh,
+        // OpenStreetMap category Leisure
+        LeisurePark,
+
+        LanduseAllotments,
+        LanduseBasin,
+        LanduseCemetery,
+        LanduseCommercial,
+        LanduseConstruction,
+        LanduseFarmland,
+        LanduseFarmyard,
+        LanduseGarages,
+        LanduseGrass,
+        LanduseIndustrial,
+        LanduseLandfill,
+        LanduseMeadow,
+        LanduseMilitary,
+        LanduseQuarry,
+        LanduseRailway,
+        LanduseReservoir,
+        LanduseResidential,
+        LanduseRetail,
+
+        RailwayRail,
+        RailwayTram,
+        RailwayLightRail,
+        RailwayAbandoned,
+        RailwaySubway,
+        RailwayPreserved,
+        RailwayMiniature,
+        RailwayConstruction,
+        RailwayMonorail,
+        RailwayFunicular,
 
         // Important: Make sure that this is always the last 
         // item and just use it to specify the array size

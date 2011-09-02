@@ -40,7 +40,8 @@ class MarbleGraphicsItemPrivate
           m_parent( parent ),
           m_children( 0 ),
           m_layout( 0 ),
-          m_marbleGraphicsItem( marbleGraphicsItem )
+          m_marbleGraphicsItem( marbleGraphicsItem ),
+          m_zValue( 0 )
     {
         if ( m_parent ) {
             m_parent->p()->addChild( m_marbleGraphicsItem );
@@ -177,6 +178,8 @@ class MarbleGraphicsItemPrivate
     QString m_toolTip;
 
     MarbleGraphicsItem *m_marbleGraphicsItem;
+    
+    qreal m_zValue;
 };
 
 }

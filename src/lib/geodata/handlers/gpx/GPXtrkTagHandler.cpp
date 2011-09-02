@@ -22,7 +22,7 @@
 #include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
@@ -42,11 +42,11 @@ GeoNode* GPXtrkTagHandler::parse(GeoParser& parser) const
     {
         GeoDataDocument* doc = parentItem.nodeAs<GeoDataDocument>();
         GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        doc->append(placemark);
         GeoDataMultiGeometry *multigeometry = new GeoDataMultiGeometry;
         placemark->setGeometry(multigeometry);
         placemark->setStyleUrl("#map-track");
 
-        doc->append(placemark);
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << gpxTag_trk << "> trk: " << doc->size();
 #endif

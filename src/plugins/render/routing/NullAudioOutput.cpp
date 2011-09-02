@@ -54,6 +54,11 @@ void AudioOutput::setSpeaker( const QString & )
     // nothing to do
 }
 
+QString AudioOutput::speaker() const
+{
+    return QString();
+}
+
 QStringList AudioOutput::speakers() const
 {
     return QStringList();

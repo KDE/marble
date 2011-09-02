@@ -26,7 +26,7 @@
 #include "KmlElementDictionary.h"
 #include "GeoDataStyle.h"
 #include "GeoDataFeature.h"
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 #include "GeoDataDocument.h"
 
 namespace Marble
@@ -53,10 +53,11 @@ GeoNode* KmlStyleTagHandler::parse( GeoParser& parser ) const
 #endif // DEBUG_TAGS
         return &parentItem.nodeAs<GeoDataDocument>()->style( styleId );
     }
-    else if ( parentItem.is<GeoDataFeature>() ) {
-/*        style = new GeoDataStyle;
+    else if ( parentItem.represents( kmlTag_Placemark ) ) {
+        GeoDataStyle* style = new GeoDataStyle;
         style->setStyleId( parser.attribute( "id" ).trimmed() );
-        parentItem.nodeAs<GeoDataFeature>()->setStyle( style );*/
+        parentItem.nodeAs<GeoDataFeature>()->setStyle( style );
+        return parentItem.nodeAs<GeoDataFeature>()->style();
 #ifdef DEBUG_TAGS
     mDebug() << "Parsed <" << kmlTag_Style << ">" << " parentItem: Feature (ignoring styles outside of document tag)"
              << " parent item name: " << parentItem.qualifiedName().first;

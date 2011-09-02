@@ -71,8 +71,6 @@ void MarbleTest::gpsDemo()
     //
     m_marbleWidget->centerOn( -15.2325, 58.3723 );
     
-    m_marbleWidget->setShowGps( true );
-    
     //get the gpx file
     QString fileName = QFileDialog::getOpenFileName(m_marbleWidget,
             "Open File", QString(), 

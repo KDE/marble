@@ -107,6 +107,8 @@ public:
 
     AlternativeRoutesModel* m_alternativeRoutesModel;
 
+    ViewContext m_viewContext;
+
     bool m_viewportChanged;
 
     /** Constructor */
@@ -174,9 +176,9 @@ public:
 RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget ) :
         q( parent ), m_movingIndex( -1 ), m_marbleWidget( widget ),
         m_targetPixmap( ":/data/bitmaps/routing_pick.png" ), m_dragStopOverRightIndex( -1 ),
-        m_pointSelection( false ), m_routingModel( 0 ), m_placemarkModel( 0 ), m_selectionModel( 0 ),
-        m_routeDirty( false ), m_pixmapSize( 22, 22 ), m_routeRequest( 0 ), m_activeMenuIndex( -1 ),
-        m_alternativeRoutesView( 0 ),
+        m_pointSelection( false ), m_routingModel( widget->model()->routingManager()->routingModel() ),
+        m_placemarkModel( 0 ), m_selectionModel( 0 ), m_routeDirty( false ), m_pixmapSize( 22, 22 ),
+        m_routeRequest( 0 ), m_activeMenuIndex( -1 ), m_alternativeRoutesView( 0 ),
         m_alternativeRoutesModel( widget->model()->routingManager()->alternativeRoutesModel() ),
         m_viewportChanged( true )
 {
@@ -239,7 +241,7 @@ void RoutingLayerPrivate::renderPlacemarks( GeoPainter *painter )
 
 void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
 {
-    if ( m_viewportChanged ) {
+    if ( m_viewportChanged && m_viewContext == Still ) {
         m_alternativeRouteRegions.clear();
     }
 
@@ -253,7 +255,7 @@ void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
             GeoDataLineString* points = AlternativeRoutesModel::waypoints( route );
             if ( points ) {
                 painter->drawPolyline( *points );
-                if ( m_viewportChanged ) {
+                if ( m_viewportChanged && m_viewContext == Still ) {
                     QRegion region = painter->regionFromPolyline( *points, 8 );
                     m_alternativeRouteRegions.push_back( RequestRegion( i, region ) );
                 }
@@ -264,7 +266,6 @@ void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
 
 void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 {
-    m_instructionRegions.clear();
     GeoDataLineString waypoints = m_routingModel->route().path();
 
     QPen bluePen( alphaAdjusted( oxygenSkyBlue4, 200 ) );
@@ -275,7 +276,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
     painter->setPen( bluePen );
 
     painter->drawPolyline( waypoints );
-    if ( m_viewportChanged ) {
+    if ( m_viewportChanged && m_viewContext == Still ) {
         int const offset = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 24 : 8;
         m_routeRegion = painter->regionFromPolyline( waypoints, offset );
     }
@@ -318,14 +319,19 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         }
     }
 
+    if ( m_viewContext == Animation ) {
+        return;
+    }
+
+    m_instructionRegions.clear();
     for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
         QModelIndex index = m_routingModel->index( i, 0 );
         GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
 
-        if ( m_routingModel && m_selectionModel ) {
+        if ( m_routingModel ) {
 
             painter->setBrush( QBrush( alphaAdjusted( oxygenAluminumGray4, 200 ) ) );
-            if ( m_selectionModel->selection().contains( index ) ) {
+            if ( m_selectionModel && m_selectionModel->selection().contains( index ) ) {
                 for ( int j=0; j<m_routingModel->route().size(); ++j ) {
                     const RouteSegment & segment = m_routingModel->route().at( j );
                     if ( segment.maneuver().position() == pos ) {
@@ -453,7 +459,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
                 m_dropStopOver = e->pos();
                 storeDragPosition( e->pos() );
                 // annotation and old annotation are dirty, large region
-                m_marbleWidget->repaint();
+                m_marbleWidget->update();
                 return true;
             } else if ( e->button() == Qt::RightButton ) {
                 m_removeViaPointAction->setEnabled( false );
@@ -484,7 +490,11 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
 
     foreach( const RequestRegion &region, m_alternativeRouteRegions ) {
         if ( region.region.contains( e->pos() ) ) {
-            m_alternativeRoutesView->setCurrentIndex( region.index );
+            if ( m_alternativeRoutesView ) {
+                m_alternativeRoutesView->setCurrentIndex( region.index );
+            } else {
+                m_alternativeRoutesModel->setCurrentRoute( region.index );
+            }
             return true;
         }
     }
@@ -577,7 +587,7 @@ bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
                 m_dragStopOver = QPoint();
                 m_dropStopOver = QPoint();
             }
-            m_marbleWidget->repaint( dirty );
+            m_marbleWidget->update( dirty );
             m_marbleWidget->setCursor( Qt::ArrowCursor );
         } else if ( isInfoPoint( e->pos() ) ) {
             clearStopOver();
@@ -643,11 +653,11 @@ bool RoutingLayerPrivate::isInfoPoint( const QPoint &point )
 
 void RoutingLayerPrivate::paintStopOver( QRect dirty )
 {
-    m_marbleWidget->repaint( m_dirtyRect );
+    m_marbleWidget->update( m_dirtyRect );
     int dx = 1 + m_pixmapSize.width() / 2;
     int dy = 1 + m_pixmapSize.height() / 2;
     dirty.adjust( -dx, -dy, -dx, -dy );
-    m_marbleWidget->repaint( dirty );
+    m_marbleWidget->update( dirty );
     m_dirtyRect = dirty;
 }
 
@@ -655,7 +665,7 @@ void RoutingLayerPrivate::clearStopOver()
 {
     m_dropStopOver = QPoint();
     m_dragStopOver = QPoint();
-    m_marbleWidget->repaint( m_dirtyRect );
+    m_marbleWidget->update( m_dirtyRect );
 }
 
 RoutingLayer::RoutingLayer( MarbleWidget *widget, QWidget *parent ) :
@@ -715,7 +725,9 @@ bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
     }
 
     painter->restore();
-    d->m_viewportChanged = false;
+    if ( d->m_viewportChanged && d->m_viewContext == Still ) {
+        d->m_viewportChanged = false;
+    }
     return true;
 }
 
@@ -746,16 +758,8 @@ bool RoutingLayer::eventFilter( QObject *obj, QEvent *event )
     return false;
 }
 
-void RoutingLayer::setModel ( RoutingModel *model )
+void RoutingLayer::setPlacemarkModel ( MarblePlacemarkModel *model )
 {
-    d->m_placemarkModel = 0;
-    d->m_routingModel = model;
-    setViewportChanged();
-}
-
-void RoutingLayer::setModel ( MarblePlacemarkModel *model )
-{
-    d->m_routingModel = 0;
     d->m_placemarkModel = model;
     setViewportChanged();
 }
@@ -787,7 +791,7 @@ void RoutingLayer::setRouteDirty( bool dirty )
       * a partly repaint, otherwise we might end up repainting only parts of the route
       */
     // d->m_marbleWidget->repaint( d->m_routeRegion );
-    d->m_marbleWidget->repaint();
+    d->m_marbleWidget->update();
 }
 
 void RoutingLayer::setRouteRequest( RouteRequest *request )
@@ -808,7 +812,7 @@ void RoutingLayer::removeViaPoint()
 void RoutingLayer::showAlternativeRoutes()
 {
     setViewportChanged();
-    d->m_marbleWidget->repaint();
+    d->m_marbleWidget->update();
 }
 
 void RoutingLayer::exportRoute()
@@ -841,6 +845,11 @@ void RoutingLayer::updateRouteState( RoutingManager::State state, RouteRequest *
 void RoutingLayer::setViewportChanged()
 {
     d->m_viewportChanged = true;
+}
+
+void RoutingLayer::setViewContext( ViewContext viewContext )
+{
+    d->m_viewContext = viewContext;
 }
 
 } // namespace Marble

@@ -109,6 +109,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     Q_OBJECT
 
+    Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
+
  public:
     /**
      * @brief  Construct a new MarbleModel.
@@ -221,7 +223,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
     QString               planetName()     const;
     QString               planetId()       const;
 
-    MarbleClock*          clock()       const;
+    MarbleClock *clock();
+    const MarbleClock *clock() const;
     SunLocator*           sunLocator()     const;
 
     /**
@@ -242,7 +245,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief Returns the planet object for the current map.
      * @return the planet object for the current map
      */
-    Planet* planet() const;
+    const Planet *planet() const;
 
     RoutingManager* routingManager();
 
@@ -266,6 +269,10 @@ class MARBLE_EXPORT MarbleModel : public QObject
     QTextDocument * legend();
 
     void setLegend( QTextDocument * document );
+
+    bool workOffline() const;
+
+    void setWorkOffline( bool workOffline );
 
  public Q_SLOTS:
     void clearPersistentTileCache();
@@ -296,6 +303,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief Signal that the MarbleModel has changed in general
      */
     void modelChanged();
+
+    void workOfflineChanged();
 
  private:
     Q_DISABLE_COPY( MarbleModel )

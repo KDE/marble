@@ -145,7 +145,7 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
         setupActions( marbleWidget );
 
         connect(this, SIGNAL(redraw()),
-                marbleWidget, SLOT(repaint()) );
+                marbleWidget, SLOT(update()) );
 
         widgetInitalised = true;
     }
@@ -490,7 +490,7 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
             model.append(t);
 
             //FIXME only repaint the new placemark
-            ( ( MarbleWidget* ) watched)->repaint();
+            ( ( MarbleWidget* ) watched)->update();
             emit placemarkAdded();
 
             return true;
@@ -516,7 +516,7 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
             m_tmp_lineString->append(GeoDataCoordinates(lon, lat));
 
             //FIXME only repaint the line string so far
-            marbleWidget->repaint();
+            marbleWidget->update();
 
         }
         return true;

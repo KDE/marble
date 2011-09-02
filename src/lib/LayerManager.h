@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2006-2008 Torsten Rahn <tackat@kde.org>
+// Copyright 2011      Bernahrd Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_LAYERMANAGER_H
@@ -15,9 +16,6 @@
 #include <QtCore/QList>
 #include <QtCore/QObject>
 #include <QtCore/QString>
-
-// Local dir
-#include "marble_export.h"
 
 class QPoint;
 class QRegion;
@@ -30,7 +28,7 @@ class AbstractDataPluginItem;
 class LayerManagerPrivate;
 class GeoPainter;
 class GeoSceneDocument;
-class ViewParams;
+class ViewportParams;
 class RenderPlugin;
 class AbstractFloatItem;
 class AbstractDataPlugin;
@@ -42,7 +40,7 @@ class LayerInterface;
  *
  */
 
-class MARBLE_EXPORT LayerManager : public QObject
+class LayerManager : public QObject
 {
     Q_OBJECT
 
@@ -50,11 +48,10 @@ class MARBLE_EXPORT LayerManager : public QObject
     explicit LayerManager( MarbleModel *model, QObject *parent = 0);
     ~LayerManager();
 
-    void renderLayers( GeoPainter *painter, ViewParams *viewParams, const QStringList& renderPositions );
+    void renderLayers( GeoPainter *painter, ViewportParams *viewport );
 
-    void renderLayer( GeoPainter *painter, ViewParams *viewParams, const QString& renderPosition  );
+    bool showBackground() const;
 
-    
     /**
      * @brief Returns a list of all RenderPlugins on the layer, this includes float items
      * @return the list of RenderPlugins
@@ -110,12 +107,15 @@ class MARBLE_EXPORT LayerManager : public QObject
     void repaintNeeded( QRegion dirtyRegion );
 
  public Q_SLOTS:
-    void loadLayers();
+    void setShowBackground( bool show );
 
     void syncViewParamsAndPlugins( GeoSceneDocument *mapTheme );
     void syncActionWithProperty( QString, bool );
     void syncPropertyWithAction( QString, bool );
- 
+
+ private:
+    void renderLayer( GeoPainter *painter, ViewportParams *viewport, const QString& renderPosition  );
+
  private:
     Q_DISABLE_COPY( LayerManager )
 

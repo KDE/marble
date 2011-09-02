@@ -250,6 +250,24 @@ class MARBLE_EXPORT MarbleMap : public QObject
     bool showClouds() const;
 
     /**
+     * @brief  Return whether the night shadow is visible.
+     * @return visibility of night shadow
+     */
+    bool showSunShading() const;
+
+    /**
+     * @brief  Return whether the city lights are shown instead of the night shadow.
+     * @return visibility of city lights
+     */
+    bool showCityLights() const;
+
+    /**
+     * @brief  Return whether the sun is shown in the zenith.
+     * @return visibility of sun in the zenith
+     */
+    bool showSunInZenith() const;
+
+    /**
      * @brief  Return whether the atmospheric glow is visible.
      * @return The cloud cover visibility.
      */
@@ -298,12 +316,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     bool showRelief() const;
 
     /**
-     * @brief  Return whether the elevation model is visible.
-     * @return The elevation model visibility.
-     */
-    bool showElevationModel() const;
-
-    /**
      * @brief  Return whether the ice layer is visible.
      * @return The ice layer visibility.
      */
@@ -326,12 +338,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @return The lakes' visibility.
      */
     bool showLakes() const;
-
-    /**
-     * @brief Return whether Gps Data is visible.
-     * @return The Gps Data's visibility.
-     */
-    bool showGps() const;
 
     /**
      * @brief  Return whether the frame rate gets displayed.
@@ -499,6 +505,24 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void setShowClouds( bool visible );
 
     /**
+     * @brief  Set whether the night shadow is visible.
+     * @param  visibile visibility of shadow
+     */
+    void setShowSunShading( bool visible );
+
+    /**
+     * @brief  Set whether city lights instead of night shadow are visible.
+     * @param  visible visibility of city lights
+     */
+    void setShowCityLights( bool visible );
+
+    /**
+     * @brief Set whether the sun is visible in the zenith.
+     * @param visible  visibility of the sun in the zenith
+     */
+    void setShowSunInZenith( bool visible );
+
+    /**
      * @brief Set whether the is tile is visible
      * NOTE: This is part of the transitional debug API
      *       and might be subject to changes until Marble 0.8
@@ -555,12 +579,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void setShowRelief( bool visible );
 
     /**
-     * @brief  Set whether the elevation model is visible
-     * @param  visible  visibility of the elevation model
-     */
-    void setShowElevationModel( bool visible );
-
-    /**
      * @brief  Set whether the ice layer is visible
      * @param  visible  visibility of the ice layer
      */
@@ -583,12 +601,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param  visible  visibility of the lakes
      */
     void setShowLakes( bool visible );
-
-    /**
-     * @brief Set whether Gps Data is visible
-     * @param visible  visibility of the Gps Data
-     */
-    void setShowGps( bool visible );
 
     /**
      * @brief Set whether the frame rate gets shown
@@ -679,8 +691,15 @@ class MARBLE_EXPORT MarbleMap : public QObject
     virtual void customPaint( GeoPainter *painter );
 
  private:
+    Q_PRIVATE_SLOT( d, void updateProperty( const QString &, bool ) )
+
+ private:
     Q_DISABLE_COPY( MarbleMap )
     MarbleMapPrivate * const d;
+    friend class MarbleMapPrivate;
+
+    class CustomPaintLayer;
+    friend class CustomPaintLayer;
 
     TextureLayer *textureLayer();
 

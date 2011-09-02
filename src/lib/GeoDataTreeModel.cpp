@@ -22,7 +22,6 @@
 #include "GeoDataContainer.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataParser.h"
 #include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
 #include "FileManager.h"
@@ -470,6 +469,11 @@ void GeoDataTreeModel::setRootDocument( GeoDataDocument* document )
     d->m_ownsRootDocument = ( document == 0 );
     d->m_rootDocument = document ? document : new GeoDataDocument;
     endResetModel();
+}
+
+GeoDataDocument * GeoDataTreeModel::rootDocument()
+{
+    return d->m_rootDocument;
 }
 
 #include "GeoDataTreeModel.moc"

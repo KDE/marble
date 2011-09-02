@@ -31,18 +31,8 @@
 using namespace Marble;
 
 VectorMap::VectorMap()
-    : m_zlimit( 0.0 ),
-      m_plimit( 0.0 ),
-      m_zBoundingBoxLimit( 0.0 ),
-      m_zPointLimit( 0.0 ),
-      m_brush( QBrush( QColor( 0, 0, 0 ) ) ),
-      // Initialising booleans for horizoncrossing
-      m_firsthorizon( false ),
-      m_lastvisible( false ),
-      m_currentlyvisible( false ),
-      m_horizonpair( false ),
-
-      m_rlimit( 0 )
+    : m_zBoundingBoxLimit( 0.0 ),
+      m_zPointLimit( 0.0 )
       // m_debugNodeCount( 0 )
 {
 }
@@ -53,7 +43,7 @@ VectorMap::~VectorMap()
 
 
 void VectorMap::createFromPntMap( const PntMap* pntmap, 
-				  ViewportParams* viewport )
+                                  const ViewportParams* viewport )
 {
     switch( viewport->projection() ) {
         case Spherical:
@@ -69,9 +59,9 @@ void VectorMap::createFromPntMap( const PntMap* pntmap,
 }
 
 void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap, 
-					   ViewportParams* viewport )
+                                           const ViewportParams* viewport )
 {
-    clear();
+    m_polygons.clear();
 
     // We must use qreal or int64 for the calculations because we
     // square radius sometimes below, and it may cause an overflow. We
@@ -95,11 +85,6 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
                       || m_zPointLimit < 0.0 )
                      ? zlimit : m_zPointLimit;
 
-    m_rlimit = (int)( ( radius * radius )
-                      * (1.0 - m_zPointLimit * m_zPointLimit ) );
-
-    Quaternion  qbound;
-
     viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
     GeoPolygon::PtrVector::ConstIterator  itPolyLine = pntmap->constBegin();
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
@@ -115,7 +100,7 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
         if(boundary.size() < 5) continue;
 
         for ( int i = 0; i < 5; ++i ) {
-            qbound = boundary[i]->quaternion();
+            Quaternion qbound = boundary[i]->quaternion();
 
             qbound.rotateAroundAxis(m_rotMatrix); 
             if ( qbound.v[Q_Z] > m_zBoundingBoxLimit ) {
@@ -125,8 +110,8 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
                 m_polygon.setClosed( (*itPolyLine)->getClosed() );
 
                 // mDebug() << i << " Visible: YES";
-                createPolyLine( (*itPolyLine)->constBegin(),
-                                (*itPolyLine)->constEnd(), detail, viewport );
+                sphericalCreatePolyLine( (*itPolyLine)->constBegin(),
+                                         (*itPolyLine)->constEnd(), detail, viewport );
 
                 break; // abort foreach test of current boundary
             } 
@@ -137,9 +122,9 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
 }
 
 void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap, 
-					     ViewportParams* viewport )
+                                             const ViewportParams* viewport )
 {
-    clear();
+    m_polygons.clear();
     int  radius = viewport->radius();
 
     // Calculate translation of center point
@@ -162,7 +147,7 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
     for (; itPolyLine != itEndPolyLine; ++itPolyLine )
     {
         // This sorts out polygons by bounding box which aren't visible at all.
-        m_offset = 0;
+        int offset = 0;
 
         GeoDataCoordinates::PtrVector  boundary = (*itPolyLine)->getBoundary();
         boundingPolygon.clear();
@@ -182,11 +167,11 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 
         if ( boundingPolygon.at(0).x() < 0 || boundingPolygon.at(1).x() < 0 ) {
             boundingPolygon.translate( 4 * radius, 0 );
-            m_offset += 4 * radius;
+            offset += 4 * radius;
         }
 
         do {
-            m_offset -= 4 * radius;
+            offset -= 4 * radius;
             boundingPolygon.translate( -4 * radius, 0 );
 	    // FIXME: Get rid of this really fugly code once we have a
 	    //        proper LatLonBox check implemented and in place.
@@ -196,15 +181,15 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 		      && ( visibleArea.intersects( QRectF( boundingPolygon.at(1),
                                                            QPointF( (qreal)(viewport->width()) / 2.0
                                                                     - rad2Pixel * ( centerLon - M_PI )
-                                                                    + m_offset,
+                                                                    + offset,
                                                                     boundingPolygon.at(0).y() ) ) )
                            || visibleArea.intersects( QRectF( QPointF( (qreal)(viewport->width()) / 2.0
                                                                        - rad2Pixel * ( centerLon
                                                                                        + M_PI )
-                                                                       + m_offset,
+                                                                       + offset,
                                                                        boundingPolygon.at(1).y() ),
                                                               boundingPolygon.at(0) ) ) ) ) );
-        m_offset += 4 * radius;
+        offset += 4 * radius;
         boundingPolygon.translate( 4 * radius, 0 );
 
 	// FIXME: Get rid of this really fugly code once we will have
@@ -216,12 +201,12 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 			    QRectF( boundingPolygon.at(1),
 				    QPointF( (qreal)(viewport->width()) / 2.0
 					     - rad2Pixel * ( centerLon - M_PI )
-					     + m_offset, 
+                                             + offset,
 					     boundingPolygon.at(0).y() ) ) ) 
 			  || visibleArea.intersects(
 			         QRectF( QPointF( (qreal)(viewport->width()) / 2.0
 						  - rad2Pixel * ( centerLon + M_PI )
-						  + m_offset,
+                                                  + offset,
 						  boundingPolygon.at(1).y() ),
 					 boundingPolygon.at(0) ) ) ) )
 		) 
@@ -231,19 +216,19 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
             m_polygon.reserve( (*itPolyLine)->size() );
             m_polygon.setClosed( (*itPolyLine)->getClosed() );
 
-            createPolyLine( (*itPolyLine)->constBegin(),
-                            (*itPolyLine)->constEnd(), detail, viewport );
+            rectangularCreatePolyLine( (*itPolyLine)->constBegin(),
+                                       (*itPolyLine)->constEnd(), detail, viewport, offset );
 
-            m_offset += 4 * radius;
+            offset += 4 * radius;
             boundingPolygon.translate( 4 * radius, 0 );
         }
     }
 }
 
 void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
-                                          ViewportParams* viewport )
+                                          const ViewportParams* viewport )
 {
-    clear();
+    m_polygons.clear();
     int  radius = viewport->radius();
 
     // Calculate translation of center point
@@ -266,7 +251,7 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
     for (; itPolyLine != itEndPolyLine; ++itPolyLine )
     {
         // This sorts out polygons by bounding box which aren't visible at all.
-        m_offset = 0;
+        int offset = 0;
 
         GeoDataCoordinates::PtrVector boundary = (*itPolyLine)->getBoundary();
         boundingPolygon.clear();
@@ -288,11 +273,11 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
 
         if ( boundingPolygon.at(0).x() < 0 || boundingPolygon.at(1).x() < 0 ) {
             boundingPolygon.translate( 4 * radius, 0 );
-            m_offset += 4 * radius;
+            offset += 4 * radius;
         }
 
         do {
-            m_offset -= 4 * radius;
+            offset -= 4 * radius;
             boundingPolygon.translate( -4 * radius, 0 );
 	    // FIXME: Get rid of this really fugly code once we have a
 	    //        proper LatLonBox check implemented and in place.
@@ -303,15 +288,15 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
                                                            QPointF( (qreal)(viewport->width()) / 2.0
                                                                     - rad2Pixel * ( centerLon
                                                                                     - M_PI )
-                                                                    + m_offset,
+                                                                    + offset,
                                                                     boundingPolygon.at(0).y() ) ) )
                            || visibleArea.intersects( QRectF( QPointF( (qreal)(viewport->width()) / 2.0
                                                                        - rad2Pixel * ( centerLon
                                                                                        + M_PI )
-                                                                       + m_offset,
+                                                                       + offset,
                                                                        boundingPolygon.at(1).y() ),
                                                               boundingPolygon.at(0) ) ) ) ) );
-        m_offset += 4 * radius;
+        offset += 4 * radius;
         boundingPolygon.translate( 4 * radius, 0 );
 
 	// FIXME: Get rid of this really fugly code once we will have
@@ -323,12 +308,12 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
 			    QRectF( boundingPolygon.at(1),
 				    QPointF( (qreal)(viewport->width()) / 2.0
 					     - rad2Pixel * ( centerLon - M_PI )
-					     + m_offset, 
+                                             + offset,
 					     boundingPolygon.at(0).y() ) ) ) 
 			  || visibleArea.intersects(
 			         QRectF( QPointF( (qreal)(viewport->width()) / 2.0
 						  - rad2Pixel * ( centerLon + M_PI )
-						  + m_offset,
+                                                  + offset,
 						  boundingPolygon.at(1).y() ),
 					 boundingPolygon.at(0) ) ) ) )
 		)
@@ -337,49 +322,33 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
             m_polygon.reserve( (*itPolyLine)->size() );
             m_polygon.setClosed( (*itPolyLine)->getClosed() );
 
-            createPolyLine( (*itPolyLine)->constBegin(),
-                            (*itPolyLine)->constEnd(), detail, viewport );
+            mercatorCreatePolyLine( (*itPolyLine)->constBegin(),
+                                    (*itPolyLine)->constEnd(), detail, viewport, offset );
 
-            m_offset += 4 * radius;
+            offset += 4 * radius;
             boundingPolygon.translate( 4 * radius, 0 );
         }
     }
 }
 
-void VectorMap::createPolyLine( GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
-                                GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
-                                const int detail, ViewportParams *viewport )
+void VectorMap::sphericalCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
+                                         GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
+                                         const int detail, const ViewportParams *viewport )
 {
-    switch( viewport->projection() ) {
-       case Spherical:
-	   sphericalCreatePolyLine( itStartPoint, itEndPoint,
-				    detail, viewport );
-            break;
-        case Equirectangular:
-            rectangularCreatePolyLine( itStartPoint, itEndPoint, 
-				       detail, viewport );
-            break;
-        case Mercator:
-            mercatorCreatePolyLine( itStartPoint, itEndPoint, 
-				    detail, viewport );
-            break;
-    }
-}
+    const int radius = viewport->radius();
 
-void VectorMap::sphericalCreatePolyLine(
-GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
-GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
-const int detail, ViewportParams *viewport )
-{
-    int  radius = viewport->radius();
+    const int rLimit = (int)( ( radius * radius )
+                      * (1.0 - m_zPointLimit * m_zPointLimit ) );
 
-    Quaternion qpos;
-    //	int step = 1;
-    //	int remain = size();
+    QPointF lastPoint;
+    bool firsthorizon = false;
+    bool currentlyvisible = false;
+    bool horizonpair = false;
+    QPointF firstHorizonPoint;
+    QPointF horizona;
 
     GeoDataCoordinates::Vector::const_iterator itPoint = itStartPoint;
     for (; itPoint != itEndPoint; ++itPoint ) {
-        // remain -= step;
         if ( itPoint->detail() < detail )
             continue;
 
@@ -387,33 +356,56 @@ const int detail, ViewportParams *viewport )
 #ifdef VECMAP_DEBUG
 	++m_debugNodeCount;
 #endif
-	qpos = itPoint->quaternion();
-	qpos.rotateAroundAxis( m_rotMatrix );
-	m_currentPoint = QPointF( ( viewport->width()  / 2 ) + radius * qpos.v[Q_X] + 1.0,
-				  ( viewport->height() / 2 ) - radius * qpos.v[Q_Y] + 1.0 );
-			
+        Quaternion qpos = itPoint->quaternion();
+        qpos.rotateAroundAxis( m_rotMatrix );
+        const QPointF currentPoint( ( viewport->width()  / 2 ) + radius * qpos.v[Q_X] + 1.0,
+                                    ( viewport->height() / 2 ) - radius * qpos.v[Q_Y] + 1.0 );
+
 	// Take care of horizon crossings if horizon is visible
-	m_lastvisible = m_currentlyvisible;			
+        bool lastvisible = currentlyvisible;
 
 	// Less accurate:
 	// currentlyvisible = (qpos.v[Q_Z] >= m_zPointLimit) ? true : false;
-	m_currentlyvisible = ( qpos.v[Q_Z] >= 0 );
+        currentlyvisible = ( qpos.v[Q_Z] >= 0 );
 	if ( itPoint == itStartPoint ) {
 	    // qDebug("Initializing scheduled new PolyLine");
-	    m_lastvisible  = m_currentlyvisible;
-	    m_lastPoint    = QPointF( m_currentPoint.x() + 1.0, 
-				      m_currentPoint.y() + 1.0 );
-	    m_horizonpair  = false;
-	    m_firsthorizon = false;
-	}
-	if ( m_currentlyvisible != m_lastvisible )
-	    manageCrossHorizon( viewport );
+            lastvisible  = currentlyvisible;
+            lastPoint    = QPointF( currentPoint.x() + 1.0,
+                                      currentPoint.y() + 1.0 );
+        }
+
+        if ( currentlyvisible != lastvisible ) {
+            // qDebug("Crossing horizon line");
+            // if (!currentlyvisible) qDebug("Leaving visible hemisphere");
+            // else qDebug("Entering visible hemisphere");
+
+            if ( !horizonpair ) {
+                // qDebug("Point A");
+
+                if ( !currentlyvisible ) {
+                    horizona    = horizonPoint(viewport, currentPoint, rLimit);
+                    horizonpair = true;
+                }
+                else {
+                    // qDebug("Orphaned");
+                    firstHorizonPoint = horizonPoint(viewport, currentPoint, rLimit);
+                    firsthorizon      = true;
+                }
+            }
+            else {
+                // qDebug("Point B");
+                const QPointF horizonb = horizonPoint(viewport, currentPoint, rLimit);
+
+                createArc(viewport, horizona, horizonb, rLimit);
+                horizonpair = false;
+            }
+        }
 
 	// Take care of screencrossing crossings if horizon is visible.
 	// Filter Points which aren't on the visible Hemisphere.
-	if ( m_currentlyvisible && m_currentPoint != m_lastPoint ) {
+        if ( currentlyvisible && currentPoint != lastPoint ) {
 	    // most recent addition: currentPoint != lastPoint
-	    m_polygon << m_currentPoint;
+            m_polygon << currentPoint;
 	}
 #if 0
 	else {
@@ -425,45 +417,44 @@ const int detail, ViewportParams *viewport )
 	}
 #endif
 
-	m_lastPoint = m_currentPoint;
+        lastPoint = currentPoint;
     }
 
     // In case of horizon crossings, make sure that we always get a
     // polygon closed correctly.
-    if ( m_firsthorizon ) {
-        m_horizonb = m_firstHorizonPoint;
+    if ( firsthorizon ) {
+        const QPointF horizonb = firstHorizonPoint;
         if (m_polygon.closed())
-            createArc(viewport);
+            createArc(viewport, horizona, horizonb, rLimit);
 
-        m_firsthorizon = false;
+        firsthorizon = false;
     }
 
     // Avoid polygons degenerated to Points.
     if ( m_polygon.size() >= 2 ) {
-        append(m_polygon);
+        m_polygons.append(m_polygon);
     }
 }
 
 void VectorMap::rectangularCreatePolyLine(
     GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
     GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
-    const int detail, ViewportParams *viewport )
+    const int detail, const ViewportParams *viewport, int offset )
 {
-    Quaternion qpos;
-
     // Calculate translation of center point
     qreal  centerLon;
     qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
     // Other convenience variables
-    qreal  rad2Pixel = (float)( 2 * viewport->radius() ) / M_PI;
+    const qreal  rad2Pixel = (float)( 2 * viewport->radius() ) / M_PI;
 
     ScreenPolygon otherPolygon;
     otherPolygon.setClosed ( m_polygon.closed() );
     bool CrossedDateline = false;
     bool firstPoint = true;
-    qreal lon, lat;
+    int lastSign = 0;
+    qreal lastLon, lastLat;
 
     GeoDataCoordinates::Vector::const_iterator itPoint = itStartPoint;
     for (; itPoint != itEndPoint; ++itPoint ) {
@@ -476,28 +467,29 @@ void VectorMap::rectangularCreatePolyLine(
 	++m_debugNodeCount;
 #endif
 
-	itPoint->geoCoordinates( lon, lat);
-	qreal x = (qreal)(viewport->width())  / 2.0 - rad2Pixel * (centerLon - lon) + m_offset;
-	qreal y = (qreal)(viewport->height()) / 2.0 + rad2Pixel * (centerLat - lat);
-	int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
+        qreal lon, lat;
+        itPoint->geoCoordinates( lon, lat);
+        const qreal x = (qreal)(viewport->width())  / 2.0 - rad2Pixel * (centerLon - lon) + offset;
+        const qreal y = (qreal)(viewport->height()) / 2.0 + rad2Pixel * (centerLat - lat);
+        int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
 	if ( firstPoint ) {
 	    firstPoint = false;
-	    m_lastSign = currentSign;
+            lastSign = currentSign;
 	}
 
-	m_currentPoint = QPointF( x, y );
+        const QPointF currentPoint = QPointF( x, y );
 
-	// Correction of the Dateline
-	if ( m_lastSign != currentSign && fabs(m_lastLon) + fabs(lon) > M_PI ) {
+        // Correction of the Dateline
+        if ( lastSign != currentSign && fabs(lastLon) + fabs(lon) > M_PI ) {
 
 	    // X coordinate on the screen for the points on the
 	    // dateline on both sides of the flat map.
 	    qreal lastXAtDateLine = (qreal)(viewport->width()) / 2.0
-                + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
+                + rad2Pixel * ( lastSign * M_PI - centerLon ) + offset;
 	    qreal xAtDateLine = (qreal)(viewport->width()) / 2.0
-                + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
+                + rad2Pixel * ( -lastSign * M_PI - centerLon ) + offset;
 	    qreal lastYAtDateLine = (qreal)(viewport->height()) / 2.0
-                - ( m_lastLat - centerLat ) * rad2Pixel;
+                - ( lastLat - centerLat ) * rad2Pixel;
 	    qreal yAtSouthPole = (qreal)(viewport->height()) / 2.0
                 - ( -viewport->currentProjection()->maxLat() - centerLat ) * rad2Pixel;
 
@@ -536,22 +528,22 @@ void VectorMap::rectangularCreatePolyLine(
 	}
 
 	if ( CrossedDateline )
-	    otherPolygon << m_currentPoint;
+            otherPolygon << currentPoint;
 	else
-	    m_polygon << m_currentPoint;
+            m_polygon << currentPoint;
 
-	m_lastLon  = lon;
-	m_lastLat  = lat;
-	m_lastSign = currentSign;
+        lastLon  = lon;
+        lastLat  = lat;
+        lastSign = currentSign;
     }
 
     // Avoid polygons degenerated to Points.
     if ( m_polygon.size() >= 2 ) {
-        append(m_polygon);
+        m_polygons.append(m_polygon);
     }
 
     if ( otherPolygon.size() >= 2 ) {
-        append( otherPolygon );
+        m_polygons.append( otherPolygon );
     }
 }
 
@@ -559,25 +551,24 @@ void VectorMap::mercatorCreatePolyLine(
         GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
         GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
         const int detail,
-        ViewportParams *viewport )
+        const ViewportParams *viewport,
+        int offset )
 {
-    Quaternion qpos;
-
     // Calculate translation of center point
     qreal  centerLon;
     qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
     // Other convenience variables
-    qreal  rad2Pixel = (qreal)( 2 * viewport->radius() ) / M_PI;
+    const qreal  rad2Pixel = (qreal)( 2 * viewport->radius() ) / M_PI;
 
     ScreenPolygon  otherPolygon;
     otherPolygon.setClosed ( m_polygon.closed() );
 
     bool    CrossedDateline = false;
     bool    firstPoint      = true;
-    qreal  lon;
-    qreal  lat;
+    int lastSign = 0;
+    qreal lastLon, lastLat;
 
     GeoDataCoordinates::Vector::const_iterator itPoint = itStartPoint;
     for (; itPoint != itEndPoint; ++itPoint ) {
@@ -590,38 +581,39 @@ void VectorMap::mercatorCreatePolyLine(
 	++m_debugNodeCount;
 #endif
 
-	// FIXME: Call the projection.  Unfortunately there is no
-	//        screenCoordinates taking qreals.
-	itPoint->geoCoordinates( lon, lat );
+        // FIXME: Call the projection.  Unfortunately there is no
+        //        screenCoordinates taking qreals.
+        qreal lon, lat;
+        itPoint->geoCoordinates( lon, lat );
 
     // Removing all points beyond +/- 85 deg for Mercator:
     if ( fabs( lat ) > viewport->currentProjection()->maxLat() )
         continue;
 
-	qreal x = (qreal)(viewport->width())  / 2.0 + rad2Pixel * (lon - centerLon) + m_offset;
-	qreal y = (qreal)(viewport->height()) / 2.0
+        const qreal x = (qreal)(viewport->width())  / 2.0 + rad2Pixel * (lon - centerLon) + offset;
+        const qreal y = (qreal)(viewport->height()) / 2.0
             - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) );
-	int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
+        int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
 	if ( firstPoint ) {
 	    firstPoint = false;
-	    m_lastSign = currentSign;
+            lastSign = currentSign;
 	}
 
-	m_currentPoint = QPointF( x, y );
+        const QPointF currentPoint = QPointF( x, y );
 
 	//correction of the Dateline
 
-	if ( m_lastSign != currentSign && fabs(m_lastLon) + fabs(lon) > M_PI ) {
+        if ( lastSign != currentSign && fabs(lastLon) + fabs(lon) > M_PI ) {
 
 	    // x coordinate on the screen for the points on the dateline on both
 	    // sides of the flat map.
 	    // FIXME: mercator projection here too.
 	    qreal lastXAtDateLine = (qreal)(viewport->width()) / 2.0
-                + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
+                + rad2Pixel * ( lastSign * M_PI - centerLon ) + offset;
 	    qreal xAtDateLine = (qreal)(viewport->width()) / 2.0
-                + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
+                + rad2Pixel * ( -lastSign * M_PI - centerLon ) + offset;
         qreal lastYAtDateLine = (qreal)( viewport->height() / 2 - rad2Pixel
-                                         * ( atanh( sin( m_lastLat ) )
+                                         * ( atanh( sin( lastLat ) )
                                              - atanh( sin( centerLat ) ) ) );
         qreal yAtSouthPole = (qreal)( viewport->height() / 2
                                       - rad2Pixel * ( atanh( sin( -viewport->currentProjection()->
@@ -663,89 +655,48 @@ void VectorMap::mercatorCreatePolyLine(
 	}
 
 	if ( CrossedDateline )
-	    otherPolygon << m_currentPoint;
+            otherPolygon << currentPoint;
 	else
-	    m_polygon << m_currentPoint;
+            m_polygon << currentPoint;
 
-	m_lastLon  = lon;
-	m_lastLat  = lat;
-	m_lastSign = currentSign;
+        lastLon  = lon;
+        lastLat  = lat;
+        lastSign = currentSign;
     }
 
     // Avoid polygons degenerated to Points.
     if ( m_polygon.size() >= 2 ) {
-        append(m_polygon);
+        m_polygons.append(m_polygon);
     }
 
     if ( otherPolygon.size() >= 2 ) {
-        append( otherPolygon );
+        m_polygons.append( otherPolygon );
     }
 }
 
 
-// Paint the background of the ground, i.e. the water.
-//
-// FIXME: This is a strange thing to have in the vector code. 
-//        Move it somewhere better.
-//
-void VectorMap::paintBase( GeoPainter * painter, ViewportParams* viewport,
-			   bool antialiasing )
+void VectorMap::drawMap( GeoPainter *painter )
 {
-    painter->setRenderHint( QPainter::Antialiasing, antialiasing );
-    painter->setPen( m_pen );
-    painter->setBrush( m_brush );
-
-    painter->drawPath( viewport->currentProjection()->mapShape( viewport ) );
-}
-
-
-void VectorMap::drawMap( QPaintDevice *origimg, bool antialiasing,
-			 ViewportParams *viewport, MapQuality mapQuality )
-{
-    bool doClip = false; //assume false
-    switch( viewport->projection() ) {
-        case Spherical:
-            doClip = ( viewport->radius() > ( viewport->width()  / 2 )
-		       || viewport->radius() > ( viewport->height() / 2 ) );
-            break;
-        case Equirectangular:
-            doClip = true; // clipping should always be enabled
-            break;
-        case Mercator:
-            doClip = true; // clipping should always be enabled
-            break;
-    }
-
-    GeoPainter  painter( origimg, viewport, mapQuality, doClip );
-    painter.setRenderHint( QPainter::Antialiasing, antialiasing );
-    painter.setPen( m_pen );
-    painter.setBrush( m_brush );
-
-    ScreenPolygon::Vector::const_iterator  itEndPolygon = constEnd();
-    for ( ScreenPolygon::Vector::const_iterator itPolygon = constBegin();
+    ScreenPolygon::Vector::const_iterator  itEndPolygon = m_polygons.constEnd();
+    for ( ScreenPolygon::Vector::const_iterator itPolygon = m_polygons.constBegin();
           itPolygon != itEndPolygon; 
           ++itPolygon )
     {
         if ( itPolygon->closed() )  
-            painter.drawPolygon( *itPolygon );
+            painter->drawPolygon( *itPolygon );
         else
-            painter.drawPolyline( *itPolygon );
+            painter->drawPolyline( *itPolygon );
     }
 }
 
 
 // Paint the prepared vectors in screen coordinates.
 
-void VectorMap::paintMap(GeoPainter * painter, bool antialiasing)
+void VectorMap::paintMap(GeoPainter * painter)
 {
-    painter->setRenderHint( QPainter::Antialiasing, antialiasing );
+    ScreenPolygon::Vector::const_iterator  itEndPolygon = m_polygons.constEnd();
 
-    painter->setPen( m_pen );
-    painter->setBrush( m_brush );
-
-    ScreenPolygon::Vector::const_iterator  itEndPolygon = constEnd();
-
-    for ( ScreenPolygon::Vector::const_iterator itPolygon = constBegin();
+    for ( ScreenPolygon::Vector::const_iterator itPolygon = m_polygons.constBegin();
           itPolygon != itEndPolygon;
           ++itPolygon )
     {
@@ -757,70 +708,38 @@ void VectorMap::paintMap(GeoPainter * painter, bool antialiasing)
 }
 
 
-void VectorMap::manageCrossHorizon(ViewportParams *viewport)
-{
-    // qDebug("Crossing horizon line");
-    // if (!currentlyvisible) qDebug("Leaving visible hemisphere");
-    // else qDebug("Entering visible hemisphere");
-
-    if ( !m_horizonpair ) {
-        // qDebug("Point A");
-
-        if ( !m_currentlyvisible ) {
-            m_horizona    = horizonPoint(viewport);
-            m_horizonpair = true;
-        }
-        else {
-            // qDebug("Orphaned");
-            m_firstHorizonPoint = horizonPoint(viewport);
-            m_firsthorizon      = true;
-        }
-    }
-    else {
-        // qDebug("Point B");
-        m_horizonb = horizonPoint(viewport);
-
-        createArc(viewport);
-        m_horizonpair = false;
-    }
-}
-
-
-const QPointF VectorMap::horizonPoint(ViewportParams *viewport)
+QPointF VectorMap::horizonPoint( const ViewportParams *viewport, const QPointF &currentPoint, int rLimit ) const
 {
     // qDebug("Interpolating");
-    qreal  xa;
-    qreal  ya;
-
-    xa = m_currentPoint.x() - ( ( viewport->width()  / 2 ) + 1 );
+    const qreal xa = currentPoint.x() - ( ( viewport->width()  / 2 ) + 1 );
 
     // Move the currentPoint along the y-axis to match the horizon.
-    //	ya = sqrt( ((qreal)m_radius + 1) * ( (qreal)m_radius + 1) - xa*xa);
-    ya = ( m_rlimit > xa * xa )
-        ? sqrt( (qreal)(m_rlimit) - (qreal)( xa * xa ) ) : 0;
+    // ya = sqrt( ((qreal)m_radius + 1) * ( (qreal)m_radius + 1) - xa*xa);
+    qreal ya = ( rLimit > xa * xa )
+        ? sqrt( (qreal)(rLimit) - (qreal)( xa * xa ) ) : 0;
     // mDebug() << " m_rlimit" << m_rlimit << " xa*xa" << xa*xa << " ya: " << ya;
-    if ( ( m_currentPoint.y() - ( ( viewport->height() / 2 ) + 1 ) ) < 0 )
+    if ( ( currentPoint.y() - ( ( viewport->height() / 2 ) + 1 ) ) < 0 )
         ya = -ya; 
 
     return QPointF( ( viewport->width()  / 2 ) + xa + 1, ( viewport->height() / 2 ) + ya + 1 );
 }
 
 
-void VectorMap::createArc(ViewportParams *viewport)
+void VectorMap::createArc( const ViewportParams *viewport, const QPointF &horizona, const QPointF &horizonb, int rLimit )
 {
 
     qreal  beta  = (qreal)( RAD2DEG 
-			      * atan2( m_horizonb.y() - ( viewport->height() / 2 ) - 1,
-				       m_horizonb.x() - ( viewport->width()  / 2 ) - 1 ) );
+                              * atan2( horizonb.y() - ( viewport->height() / 2 ) - 1,
+                                       horizonb.x() - ( viewport->width()  / 2 ) - 1 ) );
     qreal  alpha = (qreal)( RAD2DEG
-			      * atan2( m_horizona.y() - ( viewport->height() / 2 ) - 1,
-				       m_horizona.x() - ( viewport->width()  / 2 ) - 1 ) );
+                              * atan2( horizona.y() - ( viewport->height() / 2 ) - 1,
+                                       horizona.x() - ( viewport->width()  / 2 ) - 1 ) );
 
     qreal diff = beta - alpha;
 
     if ( diff != 0.0 && diff != 180.0 && diff != -180.0 ) {
 
-        m_polygon.append( m_horizona );
+        m_polygon.append( horizona );
 
         qreal sgndiff = diff / fabs(diff);
 
@@ -836,7 +755,7 @@ void VectorMap::createArc(ViewportParams *viewport)
         int  itx;
         int  ity;
         // mDebug() << "r: " << (m_radius+1) << "rn: " << sqrt((qreal)(m_rlimit));
-        qreal  arcradius = sqrt( (qreal)( m_rlimit ) );
+        qreal  arcradius = sqrt( (qreal)( rLimit ) );
 
         for ( int it = 1; it < fabs(diff); ++it ) {
             qreal angle = DEG2RAD * (qreal)( alpha + (sgndiff * it) );
@@ -846,7 +765,7 @@ void VectorMap::createArc(ViewportParams *viewport)
             m_polygon.append( QPoint( itx, ity ) );		
         }
 
-        m_polygon.append( m_horizonb );
+        m_polygon.append( horizonb );
     }
 }
 

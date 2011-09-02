@@ -13,7 +13,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataRegion.h"
 

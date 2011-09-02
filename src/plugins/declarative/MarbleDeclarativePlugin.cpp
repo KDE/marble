@@ -13,9 +13,12 @@
 #include "Coordinate.h"
 #include "DeclarativeMapThemeManager.h"
 #include "MarbleDeclarativeWidget.h"
-#include "MarbleDeclarativeRunnerManager.h"
 #include "PositionSource.h"
 #include "Tracking.h"
+#include "Routing.h"
+#include "Search.h"
+#include "RouteRequestModel.h"
+#include "Settings.h"
 
 #include <QtDeclarative/qdeclarative.h>
 #include <QtDeclarative/QDeclarativeEngine>
@@ -32,9 +35,12 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
     qmlRegisterType<Marble::Declarative::Coordinate>( uri, 0, 11, "Coordinate" );
     qmlRegisterType<Marble::Declarative::PositionSource>( uri, 0, 11, "PositionSource" );
     qmlRegisterType<Marble::Declarative::Tracking>( uri, 0, 11, "Tracking" );
+    qmlRegisterType<Marble::Declarative::Routing>( uri, 0, 11, "Routing" );
+    qmlRegisterType<Marble::Declarative::Search>( uri, 0, 11, "Search" );
+    qmlRegisterType<Marble::Declarative::RouteRequestModel>( uri, 0, 11, "RouteRequestModel" );
+    qmlRegisterType<Marble::Declarative::Settings>( uri, 0, 11, "Settings" );
 
     qmlRegisterType<Marble::Declarative::MarbleWidget>( uri, 0, 11, "MarbleWidget" );
-    qmlRegisterType<Marble::Declarative::MarbleRunnerManager>( uri, 0, 11, "MarbleRunnerManager" );
     qmlRegisterType<Marble::Declarative::MapThemeManager>( uri, 0, 11, "MapThemeManager" );
 }
 

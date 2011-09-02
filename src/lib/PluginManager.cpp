@@ -113,7 +113,9 @@ QList<T*> createPlugins( PluginManagerPrivate* d, const QMap<QPluginLoader*, T*>
     typename QMap<QPluginLoader*, T*>::const_iterator i = loaders.constBegin();
     typename QMap<QPluginLoader*, T*>::const_iterator const end = loaders.constEnd();
     for (; i != end; ++i) {
-        result.append( (*i)->newInstance() );
+        T* instance = (*i)->newInstance();
+        Q_ASSERT( instance && "Plugin returned null when requesting a new instance." );
+        result.append( instance );
     }
     return result;
 }

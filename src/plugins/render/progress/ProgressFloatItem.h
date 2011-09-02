@@ -20,8 +20,6 @@
 namespace Marble
 {
 
-class MarbleWidget;
-
 /**
  * @brief A float item that shows a pie-chart progress
  * indicator when downloads are active
@@ -79,8 +77,6 @@ private Q_SLOTS:
     void setActive( bool active );
 
     bool m_isInitialized;
-
-    MarbleWidget *m_marbleWidget;
 
     int m_totalJobs;
 

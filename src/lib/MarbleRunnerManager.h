@@ -7,11 +7,13 @@
 //
 // Copyright 2008 Henry de Valence <hdevalence@gmail.com>
 // Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2011 Thibaut Gridel <tgridel@free.fr>
 
 #ifndef MARBLE_MARBLERUNNERMANAGER_H
 #define MARBLE_MARBLERUNNERMANAGER_H
 
 #include "GeoDataCoordinates.h"
+#include "GeoDataTypes.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QVector>
@@ -52,12 +54,6 @@ public:
     void setModel( MarbleModel * model );
 
     /**
-      * Toggle offline mode. In offline mode, runners shall not try to access
-      * the network (possibly not returning any results).
-      */
-    void setWorkOffline( bool offline );
-
-    /**
       * Search for placemarks matching the given search term. Results are returned
       * using the @see searchResultChanged and the @see searchFinished signals
       */
@@ -75,12 +71,19 @@ public:
       */
     void retrieveRoute( RouteRequest *request );
 
+    /**
+      * Parse the file using the runners for various formats
+      * The result is returned through the @see parsingFinished signal
+      */
+    void parseFile( const QString& fileName, DocumentRole role );
+
 signals:
     /**
       * Placemarks were added to or removed from the model
       * @todo FIXME: this sounds like a duplication of QAbstractItemModel signals
       */
     void searchResultChanged( QAbstractItemModel *model );
+    void searchResultChanged( QVector<GeoDataPlacemark*> result );
 
     /**
       * The search request for the given search term has finished, i.e. all
@@ -103,6 +106,11 @@ signals:
       */
     void routeRetrieved( GeoDataDocument* route );
 
+    /**
+      * The file was parsed successfully
+      */
+    void parsingFinished( GeoDataDocument* document );
+
     /** @todo: add signals that reverse geocoding and routing have finished
       * to be able to cope with misbehaving runners
       */
@@ -113,6 +121,8 @@ private slots:
     void addReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark );
 
     void addRoutingResult( GeoDataDocument* route );
+
+    void addParsingResult( GeoDataDocument* document );
 
 private:
     Q_PRIVATE_SLOT( d, void cleanupSearchTask( RunnerTask* task ) )

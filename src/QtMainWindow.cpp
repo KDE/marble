@@ -57,7 +57,6 @@
 #include "AbstractFloatItem.h"
 #include "MarbleModel.h"
 #include "MarbleClock.h"
-#include "SunLocator.h"
 #include "BookmarkManager.h"
 #include "NewBookmarkFolderDialog.h"
 #include "GeoDataPlacemark.h"
@@ -706,9 +705,6 @@ void MainWindow::workOffline( bool offline )
     m_controlView->marbleControl()->setWorkOffline( offline );
 
     m_workOfflineAct->setChecked( offline ); // Sync state with the GUI
-    if ( m_routingWidget ) {
-        m_routingWidget->setWorkOffline( offline );
-    }
 }
 
 void MainWindow::showAtmosphere( bool isChecked )
@@ -735,7 +731,7 @@ void MainWindow::lockPosition( bool isChecked )
 void MainWindow::controlSun()
 {
     if (!m_sunControlDialog) {
-        m_sunControlDialog = new SunControlWidget( m_controlView->sunLocator() );
+        m_sunControlDialog = new SunControlWidget( m_controlView->marbleWidget(), this );
         connect( m_sunControlDialog, SIGNAL( showSun( bool ) ),
                  this,               SLOT ( showSun( bool ) ) );
     }
@@ -760,7 +756,7 @@ void MainWindow::controlTime()
 
 void MainWindow::showSun( bool active )
 {
-    m_controlView->sunLocator()->setShow( active );
+    m_controlView->marbleWidget()->setShowSunShading( active );
 }
 
 void MainWindow::reload()
@@ -830,7 +826,7 @@ void MainWindow::openFile()
 {
     QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Open File"),
                             QString(),
-                            tr("All Supported Files (*.gpx *.kml *.pnt);;GPS Data (*.gpx);;Google Earth KML (*.kml);; Micro World Database II (*.pnt)"));
+                            tr("All Supported Files (*.gpx *.kml *.pnt *.osm);;GPS Data (*.gpx);;Google Earth KML (*.kml);;Micro World Database II (*.pnt);;OpenStreet map file (*.osm)"));
 
     foreach( const QString &fileName, fileNames ) {
         m_controlView->marbleModel()->addGeoDataFile( fileName );
@@ -954,16 +950,15 @@ void MainWindow::readSettings()
      settings.endGroup();
 
      settings.beginGroup( "Sun" );
-         m_controlView->sunLocator()->setShow( settings.value( "showSun", false ).toBool() );
-         m_controlView->sunLocator()->setCitylights( settings.value( "showCitylights", false ).toBool() );
-         m_controlView->sunLocator()->setCentered( settings.value( "centerOnSun", false ).toBool() );
+         m_controlView->marbleWidget()->setShowSunShading( settings.value( "showSun", false ).toBool() );
+         m_controlView->marbleWidget()->setShowCityLights( settings.value( "showCitylights", false ).toBool() );
+         m_controlView->marbleWidget()->setShowSunInZenith( settings.value( "centerOnSun", false ).toBool() );
      settings.endGroup();
 
      settings.beginGroup( "Time" );
         if( settings.value( "systemTime", "true" ).toBool() == true  )
         {
-            m_controlView->marbleModel()->setClockDateTime( QDateTime::currentDateTime().toUTC() );
-            m_controlView->marbleModel()->setClockSpeed( 1 );
+            /* nothing to do */
         }
         else if( settings.value( "lastSessionTime", "true" ).toBool() == true )
         {
@@ -1027,8 +1022,8 @@ void MainWindow::readSettings()
                 tracking->setPositionProviderPlugin( plugin );
                 break;
             }
-            qDeleteAll( plugins );
         }
+        qDeleteAll( plugins );
     }
     settings.endGroup();
 
@@ -1101,9 +1096,9 @@ void MainWindow::writeSettings()
      settings.endGroup();
 
      settings.beginGroup( "Sun" );
-         settings.setValue( "showSun",        m_controlView->sunLocator()->getShow() );
-         settings.setValue( "showCitylights", m_controlView->sunLocator()->getCitylights() );
-         settings.setValue( "centerOnSun",    m_controlView->sunLocator()->getCentered() );
+         settings.setValue( "showSun",        m_controlView->marbleWidget()->showSunShading() );
+         settings.setValue( "showCitylights", m_controlView->marbleWidget()->showCityLights() );
+         settings.setValue( "centerOnSun",    m_controlView->marbleWidget()->showSunInZenith() );
      settings.endGroup();
 
       settings.beginGroup( "Time" );
@@ -1318,7 +1313,6 @@ void MainWindow::showRoutingDialog()
         m_routingWindow->setWindowTitle( tr( "Routing - Marble" ) );
 
         m_routingWidget = new RoutingWidget( m_controlView->marbleWidget(), m_routingWindow );
-        m_routingWidget->setWorkOffline( m_workOfflineAct->isChecked() );
         m_routingWidget->setShowDirectionsButtonVisible( true );
 
         QScrollArea* scrollArea = new QScrollArea;
@@ -1417,6 +1411,8 @@ void MainWindow::showMapWizard()
         settings.setValue( "wmsServers", mapWizard->wmsServers() );
         settings.setValue( "staticUrlServers", mapWizard->staticUrlServers() );
     settings.endGroup();
+
+    mapWizard->deleteLater();
 }
 
 void MainWindow::showGoToDialog()
@@ -1426,7 +1422,6 @@ void MainWindow::showGoToDialog()
     }
 
     m_gotoDialog->show();
-    m_gotoDialog->setWorkOffline( m_workOfflineAct->isChecked() );
     if ( m_gotoDialog->exec() == QDialog::Accepted ) {
         GeoDataLookAt lookAt = m_gotoDialog->lookAt();
         m_controlView->marbleWidget()->flyTo( lookAt );

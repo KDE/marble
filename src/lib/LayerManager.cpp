@@ -7,6 +7,7 @@
 //
 // Copyright 2008 Torsten Rahn <tackat@kde.org>
 // Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2011 Bernahrd Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
@@ -27,7 +28,6 @@
 #include "MarbleModel.h"
 #include "PluginManager.h"
 #include "RenderPlugin.h"
-#include "ViewParams.h"
 #include "LayerInterface.h"
 
 namespace Marble
@@ -57,13 +57,16 @@ class LayerManagerPrivate
     QList<AbstractFloatItem *> m_floatItems;
     QList<AbstractDataPlugin *> m_dataPlugins;
     QList<LayerInterface *> m_internalLayers;
+
+    bool m_showBackground;
 };
 
 LayerManagerPrivate::LayerManagerPrivate( MarbleModel* model )
     : m_mapTheme( 0 ),
       m_marbleModel( model ),
       m_pluginManager( model->pluginManager() ),
-      m_renderPlugins( m_pluginManager->createRenderPlugins() )
+      m_renderPlugins( m_pluginManager->createRenderPlugins() ),
+      m_showBackground( true )
 {
 }
 
@@ -98,7 +101,6 @@ LayerManager::LayerManager( MarbleModel* model, QObject *parent )
             d->m_dataPlugins.append( dataPlugin );
     }
 
-    // Just for initial testing
     foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
         renderPlugin->setMarbleModel( d->m_marbleModel );
     }
@@ -107,6 +109,11 @@ LayerManager::LayerManager( MarbleModel* model, QObject *parent )
 LayerManager::~LayerManager()
 {
     delete d;
+}
+
+bool LayerManager::showBackground() const
+{
+    return d->m_showBackground;
 }
 
 QList<RenderPlugin *> LayerManager::renderPlugins() const
@@ -134,23 +141,29 @@ QList<AbstractDataPluginItem *> LayerManager::whichItemAt( const QPoint& curpos 
     return itemList;
 }
 
-void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams,
-                                 const QStringList& renderPositions )
-{    
+void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
+{
+    QStringList renderPositions;
+
+    if ( d->m_showBackground ) {
+        renderPositions << "STARS" << "BEHIND_TARGET";
+    }
+
+    renderPositions << "SURFACE" << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
+                    << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
+
     foreach( const QString& renderPosition, renderPositions ) {
-        renderLayer( painter, viewParams, renderPosition );
+        renderLayer( painter, viewport, renderPosition );
     }
 }
 
-void LayerManager::renderLayer( GeoPainter *painter, ViewParams *viewParams,
+void LayerManager::renderLayer( GeoPainter *painter, ViewportParams *viewport,
                                 const QString& renderPosition )
 {
-    if ( !viewParams || !viewParams->viewport() ) {
+    if ( !viewport ) {
         mDebug() << "LayerManager: No valid viewParams set!";
         return;
     }
-
-    ViewportParams* viewport = viewParams->viewport();
 
     QList<LayerInterface*> layers;
 
@@ -179,8 +192,9 @@ void LayerManager::renderLayer( GeoPainter *painter, ViewParams *viewParams,
     }
 }
 
-void LayerManager::loadLayers()
+void LayerManager::setShowBackground( bool show )
 {
+    d->m_showBackground = show;
 }
 
 void LayerManager::syncViewParamsAndPlugins( GeoSceneDocument *mapTheme )

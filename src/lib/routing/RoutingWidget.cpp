@@ -60,8 +60,6 @@ public:
 
     bool m_zoomRouteAfterDownload;
 
-    bool m_workOffline;
-
     QTimer m_progressTimer;
 
     QVector<QIcon> m_progressAnimation;
@@ -97,8 +95,7 @@ RoutingWidgetPrivate::RoutingWidgetPrivate() :
         m_widget( 0 ), m_routingManager( 0 ), m_routingLayer( 0 ),
         m_activeInput( 0 ), m_inputRequest( 0 ), m_routingModel( 0 ),
         m_routeRequest( 0 ), m_zoomRouteAfterDownload( false ),
-        m_workOffline( false ), m_currentFrame( 0 ),
-        m_iconSize( 16 )
+        m_currentFrame( 0 ), m_iconSize( 16 )
 {
     createProgressAnimation();
     m_progressTimer.setInterval( 100 );
@@ -144,7 +141,7 @@ void RoutingWidgetPrivate::setActiveInput( RoutingInputWidget *widget )
 
     m_activeInput = widget;
     m_ui.directionsListView->setModel( model );
-    m_routingLayer->setModel( model );
+    m_routingLayer->setPlacemarkModel( model );
     m_routingLayer->synchronizeWith( m_ui.directionsListView->selectionModel() );
 }
 
@@ -290,7 +287,7 @@ void RoutingWidget::retrieveRoute()
     d->m_activeInput = 0;
     if ( d->m_routeRequest->size() > 1 ) {
         d->m_zoomRouteAfterDownload = true;
-        d->m_routingLayer->setModel( d->m_routingManager->routingModel() );
+        d->m_routingLayer->setPlacemarkModel( 0 );
         d->m_routingManager->retrieveRoute( d->m_routeRequest );
         d->m_ui.directionsListView->setModel( d->m_routingModel );
         d->m_routingLayer->synchronizeWith( d->m_ui.directionsListView->selectionModel() );
@@ -378,7 +375,6 @@ void RoutingWidget::insertInputWidget( int index )
     if ( index >= 0 && index <= d->m_inputWidgets.size() ) {
         RoutingInputWidget *input = new RoutingInputWidget( d->m_widget, index, this );
         input->setProgressAnimation( d->m_progressAnimation );
-        input->setWorkOffline( d->m_workOffline );
         d->m_inputWidgets.insert( index, input );
         connect( input, SIGNAL( searchFinished( RoutingInputWidget* ) ),
                  this, SLOT( handleSearchResult( RoutingInputWidget* ) ) );
@@ -418,7 +414,7 @@ void RoutingWidget::removeInputWidget( int index )
         widget->deleteLater();
         if ( widget == d->m_activeInput ) {
             d->m_activeInput = 0;
-            d->m_routingLayer->setModel( d->m_routingManager->routingModel() );
+            d->m_routingLayer->setPlacemarkModel( 0 );
         }
         d->adjustInputWidgets();
     }
@@ -486,16 +482,6 @@ void RoutingWidget::configureProfile()
         dialog.editProfile( d->m_ui.routingProfileComboBox->currentIndex() );
         d->m_routeRequest->setRoutingProfile( d->m_routingManager->profilesModel()->profiles().at( index ) );
     }
-}
-
-void RoutingWidget::setWorkOffline( bool offline )
-{
-    foreach ( RoutingInputWidget *widget, d->m_inputWidgets ) {
-        widget->setWorkOffline( offline );
-    }
-
-    d->m_workOffline = offline;
-    d->m_routingManager->setWorkOffline( offline );
 }
 
 void RoutingWidget::updateProgress()

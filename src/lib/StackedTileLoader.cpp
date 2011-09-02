@@ -23,6 +23,7 @@
 
 #include "StackedTileLoader.h"
 
+#include "blendings/BlendingFactory.h"
 #include "GeoSceneTexture.h"
 #include "MarbleDebug.h"
 #include "MergedLayerDecorator.h"
@@ -45,11 +46,11 @@ namespace Marble
 class StackedTileLoaderPrivate
 {
 public:
-    StackedTileLoaderPrivate( HttpDownloadManager * const downloadManager,
-                              MapThemeManager *const mapThemeManager,
-                              SunLocator * const sunLocator )
-        : m_tileLoader( downloadManager, mapThemeManager ),
-          m_layerDecorator( &m_tileLoader, sunLocator ),
+    StackedTileLoaderPrivate( TileLoader *tileLoader,
+                              const SunLocator * const sunLocator )
+        : m_tileLoader( tileLoader ),
+          m_blendingFactory( sunLocator ),
+          m_layerDecorator( m_tileLoader, sunLocator ),
           m_maxTileLevel( 0 )
     {
         m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
@@ -59,7 +60,8 @@ public:
     QVector<GeoSceneTexture const *>
         findRelevantTextureLayers( TileId const & stackedTileId ) const;
 
-    TileLoader  m_tileLoader;
+    TileLoader *const m_tileLoader;
+    BlendingFactory m_blendingFactory;
     MergedLayerDecorator m_layerDecorator;
     int         m_maxTileLevel;
     QVector<GeoSceneTexture const *> m_textureLayers;
@@ -68,13 +70,10 @@ public:
     QReadWriteLock m_cacheLock;
 };
 
-StackedTileLoader::StackedTileLoader( HttpDownloadManager * const downloadManager,
-                                      MapThemeManager * const mapThemeManager,
-                                      SunLocator * const sunLocator )
-    : d( new StackedTileLoaderPrivate( downloadManager, mapThemeManager, sunLocator ) )
+StackedTileLoader::StackedTileLoader( TileLoader *tileLoader,
+                                      const SunLocator * const sunLocator )
+    : d( new StackedTileLoaderPrivate( tileLoader, sunLocator ) )
 {
-    connect( &d->m_tileLoader, SIGNAL( tileCompleted( TileId, const QImage & )),
-             SLOT( updateTile( TileId, const QImage & )));
 }
 
 StackedTileLoader::~StackedTileLoader()
@@ -89,11 +88,36 @@ void StackedTileLoader::setTextureLayers( QVector<GeoSceneTexture const *> & tex
 
     d->m_textureLayers = textureLayers;
 
-    d->m_tilesOnDisplay.clear();
-    d->m_tileCache.clear();
+    if ( !d->m_textureLayers.isEmpty() ) {
+        const GeoSceneTexture *const firstTexture = d->m_textureLayers.at( 0 );
+        d->m_blendingFactory.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
+        d->m_layerDecorator.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
+        d->m_layerDecorator.setThemeId( "maps/" + d->m_textureLayers.at( 0 )->sourceDir() );
+    }
+
+    clear();
 
     d->detectMaxTileLevel();
-    d->m_layerDecorator.setThemeId( "maps/" + d->m_textureLayers.at( 0 )->sourceDir() );
+}
+
+void StackedTileLoader::setShowSunShading( bool show )
+{
+    d->m_layerDecorator.setShowSunShading( show );
+}
+
+bool StackedTileLoader::showSunShading() const
+{
+    return d->m_layerDecorator.showSunShading();
+}
+
+void StackedTileLoader::setShowCityLights( bool show )
+{
+    d->m_layerDecorator.setShowCityLights( show );
+}
+
+bool StackedTileLoader::showCityLights() const
+{
+    return d->m_layerDecorator.showCityLights();
 }
 
 void StackedTileLoader::setShowTileId( bool show )
@@ -160,13 +184,14 @@ void StackedTileLoader::cleanupTilehash()
     }
 }
 
-StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
+const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 {
     // check if the tile is in the hash
     d->m_cacheLock.lockForRead();
     StackedTile * stackedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
     d->m_cacheLock.unlock();
     if ( stackedTile ) {
+        stackedTile->setUsed( true );
         return stackedTile;
     }
     // here ends the performance critical section of this method
@@ -175,7 +200,8 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 
     // has another thread loaded our tile due to a race condition?
     stackedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
-    if ( d->m_tilesOnDisplay.contains( stackedTileId ) ) {
+    if ( stackedTile ) {
+        stackedTile->setUsed( true );
         d->m_cacheLock.unlock();
         return stackedTile;
     }
@@ -185,6 +211,7 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
     // the tile was not in the hash so check if it is in the cache
     stackedTile = d->m_tileCache.take( stackedTileId );
     if ( stackedTile ) {
+        stackedTile->setUsed( true );
         d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
         d->m_cacheLock.unlock();
         return stackedTile;
@@ -205,14 +232,19 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
                              stackedTileId.x(), stackedTileId.y() );
         mDebug() << "StackedTileLoader::loadTile: tile" << textureLayer->sourceDir()
                  << tileId.toString() << textureLayer->tileSize();
-        const QImage tileImage = d->m_tileLoader.loadTile( tileId, DownloadBrowse );
-        QSharedPointer<TextureTile> tile( new TextureTile( tileId, tileImage, textureLayer->blending() ) ); 
+        const QImage tileImage = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
+        const Blending *blending = d->m_blendingFactory.findBlending( textureLayer->blending() );
+        if ( blending == 0 && !textureLayer->blending().isEmpty() ) {
+            mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
+        }
+        QSharedPointer<TextureTile> tile( new TextureTile( tileId, tileImage, blending ) );
         tiles.append( tile );
     }
     Q_ASSERT( !tiles.isEmpty() );
 
     const QImage resultImage = d->m_layerDecorator.merge( stackedTileId, tiles );
     stackedTile = new StackedTile( stackedTileId, resultImage, tiles );
+    stackedTile->setUsed( true );
 
     d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
     d->m_cacheLock.unlock();
@@ -228,7 +260,7 @@ void StackedTileLoader::downloadTile( TileId const & stackedTileId )
         GeoSceneTexture const * const textureLayer = *pos;
         TileId const tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
-        d->m_tileLoader.downloadTile( tileId );
+        d->m_tileLoader->downloadTile( tileId );
     }
 }
 
@@ -245,7 +277,7 @@ void StackedTileLoader::reloadVisibleTiles()
             // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
             // but since "reload" or "refresh" seems to be a common action of a browser and it
             // allows for more connections (in our model), use "DownloadBrowse"
-            d->m_tileLoader.reloadTile( tile->id(), DownloadBrowse );
+            d->m_tileLoader->reloadTile( tile->id(), DownloadBrowse );
         }
     }
 
@@ -276,11 +308,13 @@ void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 
 void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImage )
 {
+    Q_ASSERT( !tileImage.isNull() );
+
     d->detectMaxTileLevel();
 
     const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );
 
-    StackedTile * displayedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
+    StackedTile * displayedTile = d->m_tilesOnDisplay.take( stackedTileId );
     if ( displayedTile ) {
         Q_ASSERT( !d->m_tileCache.contains( stackedTileId ) );
 
@@ -300,10 +334,9 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
         d->m_tilesOnDisplay.insert( stackedTileId, displayedTile );
 
         emit tileUpdateAvailable( stackedTileId );
-        return;
+    } else {
+        d->m_tileCache.remove( stackedTileId );
     }
-
-    d->m_tileCache.remove( stackedTileId );
 }
 
 void StackedTileLoader::clear()
