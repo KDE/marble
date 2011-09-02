@@ -51,7 +51,7 @@ GeoNode* KmlPlacemarkTagHandler::parse( GeoParser& parser ) const
     if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
         parentItem.nodeAs<GeoDataContainer>()->append( placemark );
         return placemark;
-    } else if ( parentItem.first.first == kmlTag_kml ) {
+    } else if ( parentItem.qualifiedName().first == kmlTag_kml ) {
         GeoDataDocument* doc = geoDataDoc( parser );
         doc->append( placemark );
         return placemark;

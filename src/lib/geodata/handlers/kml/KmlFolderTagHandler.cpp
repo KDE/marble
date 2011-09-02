@@ -50,7 +50,7 @@ GeoNode* KmlFolderTagHandler::parse(GeoParser& parser) const
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
         return folder;
-    } else if ( parentItem.first.first == kmlTag_kml) {
+    } else if ( parentItem.qualifiedName().first == kmlTag_kml) {
         GeoDataDocument* doc = geoDataDoc( parser );
         doc->append( folder );
         return folder;

@@ -106,8 +106,6 @@ class MarbleModelPrivate
     {
     }
 
-    void notifyModelChanged();
-
     MarbleModel             *m_parent;
 
     // Misc stuff.
@@ -403,11 +401,6 @@ void MarbleModel::addPlacemarkData( const QString& data, const QString& key )
 void MarbleModel::removePlacemarkKey( const QString& key )
 {
     removeGeoData( key );
-}
-
-void MarbleModelPrivate::notifyModelChanged()
-{
-    emit m_parent->modelChanged();
 }
 
 qreal MarbleModel::planetRadius()   const

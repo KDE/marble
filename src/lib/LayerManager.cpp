@@ -214,11 +214,11 @@ void LayerManager::syncViewParamsAndPlugins( GeoSceneDocument *mapTheme )
         }
 
         disconnect( renderPlugin->action(), SIGNAL( changed() ),
-                 this,                   SIGNAL( floatItemsChanged() ) );
+                 this,                   SIGNAL( repaintNeeded() ) );
         disconnect( renderPlugin, SIGNAL( visibilityChanged( QString, bool ) ),
                  this,         SLOT( syncPropertyWithAction( QString, bool ) ) );
         connect( renderPlugin->action(), SIGNAL( changed() ), 
-                 this,                   SIGNAL( floatItemsChanged() ) );
+                 this,                   SIGNAL( repaintNeeded() ) );
         connect( renderPlugin, SIGNAL( visibilityChanged( QString, bool ) ),
                  this,         SLOT( syncPropertyWithAction( QString, bool ) ) );
 

@@ -1084,7 +1084,7 @@ void MarblePart::setupStatusBar()
              this,                          SLOT( updateStatusBar() ) );
     connect( m_controlView->marbleWidget(), SIGNAL( tileLevelChanged( int )),
              SLOT( showZoomLevel( int )));
-    connect( m_controlView->marbleModel(), SIGNAL( themeChanged( QString )),
+    connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString )),
              this, SLOT( mapThemeChanged( QString )), Qt::QueuedConnection );
     connect( m_controlView->marbleModel()->clock(), SIGNAL( timeChanged() ),
              this,                          SLOT( showDateTime() ) );
