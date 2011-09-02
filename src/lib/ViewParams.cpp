@@ -63,6 +63,7 @@ ViewParamsPrivate::~ViewParamsPrivate()
 {
 }
 
+
 ViewParams::ViewParams()
     : d( new ViewParamsPrivate )
 {

@@ -251,8 +251,6 @@ void MarbleWidgetPrivate::construct()
 
     m_popupmenu = new MarbleWidgetPopupMenu( m_widget, m_model );
 
-    m_popupmenu = new MarbleWidgetPopupMenu( m_widget, m_model );
-
     m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler( m_widget ) );
     m_widget->setMouseTracking( m_widget );
 
