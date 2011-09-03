@@ -2,7 +2,10 @@
 add_subdirectory( crosshairs )
 add_subdirectory( compass )
 add_subdirectory( earthquake )
-add_subdirectory( opencaching )
+
+# Disabled for now until legal issues wrt to the API
+# and terms of service of opencaching are cleared up.
+#add_subdirectory( opencaching )
 add_subdirectory( graticule )
 # add_subdirectory( satellites )
 add_subdirectory( overviewmap )
