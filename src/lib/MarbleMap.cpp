@@ -32,16 +32,19 @@
 #endif
 
 // Marble
+#include "layers/AtmosphereLayer.h"
+#include "layers/FogLayer.h"
+#include "layers/FpsLayer.h"
+#include "layers/GeometryLayer.h"
+#include "layers/MarbleSplashLayer.h"
+#include "layers/MeasureTool.h"
+#include "layers/PlacemarkLayout.h"
+#include "layers/TextureLayer.h"
+#include "layers/VectorMapBaseLayer.h"
+#include "layers/VectorMapLayer.h"
 #include "AbstractFloatItem.h"
 #include "AbstractProjection.h"
-#include "AtmosphereLayer.h"
-#include "FogLayer.h"
-#include "FpsLayer.h"
-#include "GeoDataDocument.h"
-#include "GeoDataFeature.h"
-#include "GeoDataLatLonAltBox.h"
 #include "GeoDataTreeModel.h"
-#include "GeometryLayer.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneFilter.h"
@@ -56,22 +59,14 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
-#include "MarbleSplashLayer.h"
-#include "MeasureTool.h"
-#include "MergedLayerDecorator.h"
-#include "PlacemarkLayout.h"
-#include "Planet.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
-#include "TextureLayer.h"
 #include "TileCoordsPyramid.h"
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
 #include "VectorComposer.h"
-#include "VectorMapBaseLayer.h"
-#include "VectorMapLayer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
@@ -117,8 +112,6 @@ class MarbleMapPrivate
 
     void construct();
 
-    void setBoundingBox();
-
     void updateProperty( const QString &, bool );
 
     MarbleMap       *m_parent;
@@ -139,7 +132,7 @@ class MarbleMapPrivate
     LayerManager     m_layerManager;
     MarbleSplashLayer m_marbleSplashLayer;
     MarbleMap::CustomPaintLayer m_customPaintLayer;
-    GeometryLayer           *m_geometryLayer;
+    GeometryLayer            m_geometryLayer;
     AtmosphereLayer          m_atmosphereLayer;
     FogLayer                 m_fogLayer;
     VectorMapBaseLayer       m_vectorMapBaseLayer;
@@ -159,18 +152,17 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_texcolorizer( 0 ),
           m_layerManager( model, parent ),
           m_customPaintLayer( parent ),
+          m_geometryLayer( model->treeModel() ),
           m_vectorMapBaseLayer( &m_veccomposer ),
           m_vectorMapLayer( &m_veccomposer ),
           m_textureLayer( model->mapThemeManager(), model->downloadManager(), model->sunLocator() ),
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), parent ),
           m_measureTool( model )
 {
-    m_geometryLayer = new GeometryLayer( model->treeModel() );
-    m_layerManager.addLayer( m_geometryLayer );
-
     m_layerManager.addLayer( &m_placemarkLayout );
     m_layerManager.addLayer( &m_fogLayer );
     m_layerManager.addLayer( &m_measureTool );
+    m_layerManager.addLayer( &m_geometryLayer );
     m_layerManager.addLayer( &m_customPaintLayer );
 }
 
@@ -195,7 +187,7 @@ void MarbleMapPrivate::construct()
                        m_parent,        SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
     
     QObject::connect ( m_model,  SIGNAL( modelChanged() ),
-                       m_geometryLayer,  SLOT( invalidateScene() ) );
+                       &m_geometryLayer,  SLOT( invalidateScene() ) );
 
     m_parent->connect( &m_textureLayer, SIGNAL( tileLevelChanged( int ) ),
                        m_parent, SIGNAL( tileLevelChanged( int ) ) );
@@ -292,6 +284,7 @@ MarbleMap::~MarbleMap()
     MarbleModel *model = d->m_modelIsOwned ? d->m_model : 0;
 
     d->m_layerManager.removeLayer( &d->m_customPaintLayer );
+    d->m_layerManager.removeLayer( &d->m_geometryLayer );
     d->m_layerManager.removeLayer( &d->m_measureTool );
     d->m_layerManager.removeLayer( &d->m_fogLayer );
     d->m_layerManager.removeLayer( &d->m_placemarkLayout );
