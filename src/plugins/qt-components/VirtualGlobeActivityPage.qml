@@ -18,7 +18,7 @@ Page {
     id: virtualGlobeActivityPage
     tools: ToolBarLayout {
         ToolIcon { iconId: "toolbar-back"; onClicked: { pageStack.pop() } }
-        ToolIcon { iconId: "toolbar-search"; onClicked: { pageStack.replace( main.activityModel.get( "Search", "path" ) ); main.changeActivity( "Geocaching", "Search" ) } }
+        ToolIcon { iconId: "toolbar-search"; onClicked: { pageStack.replace( main.activityModel.get( "Search", "path" ) ); main.changeActivity( "Virtual Globe", "Search" ) } }
         ToolIcon { iconId: "toolbar-view-menu"; }
     }
 
