@@ -19,6 +19,9 @@
 namespace Marble
 {
 
+/**
+ * Stores the description of a cache in a single language.
+ */
 class OpenCachingCacheDescription
 {
 public:    
@@ -49,17 +52,17 @@ public:
     const QDateTime& lastModifiedDate() const;
 
 private:
-    unsigned long long m_cacheId;
+    unsigned long long m_cacheId;     ///< Unique ID of the cache.
 
-    QString m_language;
+    QString m_language;               ///< Language of the description.
 
-    QString m_shortDescription;
+    QString m_shortDescription;       ///< Short description of the cache.
 
-    QString m_description;
+    QString m_description;            ///< Actual description of the cache.
 
-    QString m_hint;
+    QString m_hint;                   ///< Hint to find the cache.
 
-    QDateTime m_lastModifiedDate;
+    QDateTime m_lastModifiedDate;     ///< Date the description was last modified.
 };
 
 }

@@ -20,6 +20,10 @@
 namespace Marble
 {
 
+/**
+ * Contains all information about a cache, including logs and descriptions in all
+ * available languages.
+ */
 class OpenCachingCache
 {
 public:
@@ -92,37 +96,37 @@ public:
 private:
     void updateTooltip();
 
-    unsigned long long m_id;
+    unsigned long long m_id;             ///< Unique ID of the cache.
 
-    QDateTime m_dateHidden;
+    QDateTime m_dateHidden;              ///< Date the cache was hidden.
 
-    QDateTime m_dateCreated;
+    QDateTime m_dateCreated;             ///< Date the cache was created.
 
-    QDateTime m_dateLastModified;
+    QDateTime m_dateLastModified;        ///< Date the cache was last modified.
 
-    QString m_userName;
+    QString m_userName;                  ///< Name of the user that hid the cache.
 
-    QString m_cacheName;
+    QString m_cacheName;                 ///< Name of the cache.
 
-    QString m_cacheType;
+    QString m_cacheType;                 ///< Type of the cache. @todo Possible types?
 
-    QString m_status;
+    QString m_status;                    ///< Status of the cache. @todo Possible states?
 
-    QString m_country;
+    QString m_country;                   ///< Country in which the cache is located.
 
-    QString m_sizeString;
+    QString m_sizeString;                ///< Size of the cache as a string.
 
-    qreal m_difficulty;
+    qreal m_difficulty;                  ///< Difficulty of the cache from 1 to 5.
 
-    qreal m_terrain;
+    qreal m_terrain;                     ///< @todo ?
 
-    qreal m_longitude;
+    qreal m_longitude;                   ///< Longitude of the cache.
 
-    qreal m_latitude;
+    qreal m_latitude;                    ///< Latitude of the cache.
 
-    QHash<QString, OpenCachingCacheDescription> m_description;
+    QHash<QString, OpenCachingCacheDescription> m_description;  ///< Descriptions in all available languages. Languages are keys of the map.
 
-    OpenCachingCacheLog m_log;
+    OpenCachingCacheLog m_log;           ///< Log entries of the cache.
 };
 
 }
