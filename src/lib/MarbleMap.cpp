@@ -139,7 +139,7 @@ class MarbleMapPrivate
     LayerManager     m_layerManager;
     MarbleSplashLayer m_marbleSplashLayer;
     MarbleMap::CustomPaintLayer m_customPaintLayer;
-    GeometryLayer           *m_geometryLayer;
+    GeometryLayer            m_geometryLayer;
     AtmosphereLayer          m_atmosphereLayer;
     FogLayer                 m_fogLayer;
     VectorMapBaseLayer       m_vectorMapBaseLayer;
@@ -159,18 +159,17 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_texcolorizer( 0 ),
           m_layerManager( model, parent ),
           m_customPaintLayer( parent ),
+          m_geometryLayer( model->treeModel() ),
           m_vectorMapBaseLayer( &m_veccomposer ),
           m_vectorMapLayer( &m_veccomposer ),
           m_textureLayer( model->mapThemeManager(), model->downloadManager(), model->sunLocator() ),
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), parent ),
           m_measureTool( model )
 {
-    m_geometryLayer = new GeometryLayer( model->treeModel() );
-    m_layerManager.addLayer( m_geometryLayer );
-
     m_layerManager.addLayer( &m_placemarkLayout );
     m_layerManager.addLayer( &m_fogLayer );
     m_layerManager.addLayer( &m_measureTool );
+    m_layerManager.addLayer( &m_geometryLayer );
     m_layerManager.addLayer( &m_customPaintLayer );
 }
 
@@ -195,7 +194,7 @@ void MarbleMapPrivate::construct()
                        m_parent,        SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
     
     QObject::connect ( m_model,  SIGNAL( modelChanged() ),
-                       m_geometryLayer,  SLOT( invalidateScene() ) );
+                       &m_geometryLayer,  SLOT( invalidateScene() ) );
 
     m_parent->connect( &m_textureLayer, SIGNAL( tileLevelChanged( int ) ),
                        m_parent, SIGNAL( tileLevelChanged( int ) ) );
@@ -292,6 +291,7 @@ MarbleMap::~MarbleMap()
     MarbleModel *model = d->m_modelIsOwned ? d->m_model : 0;
 
     d->m_layerManager.removeLayer( &d->m_customPaintLayer );
+    d->m_layerManager.removeLayer( &d->m_geometryLayer );
     d->m_layerManager.removeLayer( &d->m_measureTool );
     d->m_layerManager.removeLayer( &d->m_fogLayer );
     d->m_layerManager.removeLayer( &d->m_placemarkLayout );
