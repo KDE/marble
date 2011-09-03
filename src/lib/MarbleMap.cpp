@@ -32,16 +32,19 @@
 #endif
 
 // Marble
+#include "layers/AtmosphereLayer.h"
+#include "layers/FogLayer.h"
+#include "layers/FpsLayer.h"
+#include "layers/GeometryLayer.h"
+#include "layers/MarbleSplashLayer.h"
+#include "layers/MeasureTool.h"
+#include "layers/PlacemarkLayout.h"
+#include "layers/TextureLayer.h"
+#include "layers/VectorMapBaseLayer.h"
+#include "layers/VectorMapLayer.h"
 #include "AbstractFloatItem.h"
 #include "AbstractProjection.h"
-#include "AtmosphereLayer.h"
-#include "FogLayer.h"
-#include "FpsLayer.h"
-#include "GeoDataDocument.h"
-#include "GeoDataFeature.h"
-#include "GeoDataLatLonAltBox.h"
 #include "GeoDataTreeModel.h"
-#include "GeometryLayer.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneFilter.h"
@@ -56,22 +59,14 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
-#include "MarbleSplashLayer.h"
-#include "MeasureTool.h"
-#include "MergedLayerDecorator.h"
-#include "PlacemarkLayout.h"
-#include "Planet.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
-#include "TextureLayer.h"
 #include "TileCoordsPyramid.h"
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
 #include "VectorComposer.h"
-#include "VectorMapBaseLayer.h"
-#include "VectorMapLayer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
@@ -116,8 +111,6 @@ class MarbleMapPrivate
     explicit MarbleMapPrivate( MarbleMap *parent, MarbleModel *model );
 
     void construct();
-
-    void setBoundingBox();
 
     void updateProperty( const QString &, bool );
 
