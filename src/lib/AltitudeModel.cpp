@@ -25,46 +25,73 @@
 
 namespace Marble {
 
+class AltitudeModelPrivate : public QObject
+{
+public:
+    AltitudeModelPrivate( AltitudeModel *_q, MarbleModel *const model )
+        : q( _q ), m_model( model )
+    {
+        m_cache.setMaxCost( 10 ); //keep 10 tiles in memory (~17MB)
+        m_tileLoader = new TileLoader( model->downloadManager(), model->mapThemeManager() );
+        updateTextureLayers();
+        connect( m_tileLoader, SIGNAL( tileCompleted( TileId, QImage ) ),
+                SLOT( tileCompleted( TileId, QImage ) ) );
+    }
+public Q_SLOTS:
+    void tileCompleted( const TileId & tileId, const QImage &image )
+    {
+        m_cache.insert( tileId, new QImage( image ) );
+        emit q->loadCompleted();
+    }
+
+public:
+    void updateTextureLayers()
+    {
+        m_textureLayer = 0;
+
+        const GeoSceneDocument *srtmTheme = MapThemeManager::loadMapTheme( "earth/srtm2/srtm2.dgml" );
+        Q_ASSERT( srtmTheme );
+
+        const GeoSceneHead *head = srtmTheme->head();
+        Q_ASSERT( head );
+
+        const GeoSceneMap *map = srtmTheme->map();
+        Q_ASSERT( map );
+
+        const GeoSceneLayer *sceneLayer = map->layer( head->theme() );
+        Q_ASSERT( sceneLayer );
+
+        m_textureLayer = dynamic_cast<GeoSceneTexture*>( sceneLayer->datasets().first() );
+        Q_ASSERT( m_textureLayer );
+    }
+
+
+public:
+    AltitudeModel *q;
+
+    TileLoader *m_tileLoader;
+    const MapThemeManager* m_mapThemeManager;
+    const GeoSceneTexture *m_textureLayer;
+    MarbleModel *m_model;
+    QCache<TileId, const QImage> m_cache;
+};
+
 AltitudeModel::AltitudeModel( MarbleModel *const model )
-    : QObject(0), m_model(model)
+    : QObject( 0 ), d( new AltitudeModelPrivate( this, model ) )
 {
-    m_cache.setMaxCost(10); //keep 10 tiles in memory (~17MB)
-    m_tileLoader = new TileLoader( model->downloadManager(), model->mapThemeManager() );
-    updateTextureLayers();
-    connect( m_tileLoader, SIGNAL( tileCompleted( TileId, QImage ) ),
-             SLOT( tileCompleted( TileId, QImage ) ) );
 }
 
-void AltitudeModel::updateTextureLayers()
-{
-    m_textureLayer = 0;
-
-    const GeoSceneDocument *srtmTheme = MapThemeManager::loadMapTheme( "earth/srtm2/srtm2.dgml" );
-    Q_ASSERT( srtmTheme );
-
-    const GeoSceneHead *head = srtmTheme->head();
-    Q_ASSERT( head );
-
-    const GeoSceneMap *map = srtmTheme->map();
-    Q_ASSERT( map );
-
-    const GeoSceneLayer *sceneLayer = map->layer( head->theme() );
-    Q_ASSERT( sceneLayer );
-
-    m_textureLayer = dynamic_cast<GeoSceneTexture*>( sceneLayer->datasets().first() );
-    Q_ASSERT( m_textureLayer );
-}
 
 qreal AltitudeModel::height( qreal lat, qreal lon )
 {
-    const int tileZoomLevel = m_tileLoader->maximumTileLevel( *m_textureLayer );
+    const int tileZoomLevel = d->m_tileLoader->maximumTileLevel( *( d->m_textureLayer ) );
     Q_ASSERT( tileZoomLevel == 9 );
 
-    const int width = m_textureLayer->tileSize().width();
-    const int height = m_textureLayer->tileSize().height();
+    const int width = d->m_textureLayer->tileSize().width();
+    const int height = d->m_textureLayer->tileSize().height();
 
-    const int numTilesX = TileLoaderHelper::levelToColumn( m_textureLayer->levelZeroColumns(), tileZoomLevel );
-    const int numTilesY = TileLoaderHelper::levelToRow( m_textureLayer->levelZeroRows(), tileZoomLevel );
+    const int numTilesX = TileLoaderHelper::levelToColumn( d->m_textureLayer->levelZeroColumns(), tileZoomLevel );
+    const int numTilesY = TileLoaderHelper::levelToRow( d->m_textureLayer->levelZeroRows(), tileZoomLevel );
     Q_ASSERT( numTilesX > 0 );
     Q_ASSERT( numTilesY > 0 );
 
@@ -88,10 +115,10 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
         const TileId id( "earth/srtm2", tileZoomLevel, ( x % ( numTilesX * width ) ) / width, ( y % ( numTilesY * height ) ) / height );
         //mDebug() << "LAT" << lat << "LON" << lon << "tile" << ( x % ( numTilesX * width ) ) / width << ( y % ( numTilesY * height ) ) / height;
 
-        const QImage *image = m_cache[id];
+        const QImage *image = d->m_cache[id];
         if ( image == 0 ) {
-            image = new QImage( m_tileLoader->loadTile( id, DownloadBrowse ) );
-            m_cache.insert( id, image );
+            image = new QImage( d->m_tileLoader->loadTile( id, DownloadBrowse ) );
+            d->m_cache.insert( id, image );
         }
         Q_ASSERT( image );
         Q_ASSERT( !image->isNull() );
@@ -134,9 +161,9 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
 
 QList<GeoDataCoordinates> AltitudeModel::heightProfile( qreal fromLat, qreal fromLon, qreal toLat, qreal toLon )
 {
-    const int tileZoomLevel = m_tileLoader->maximumTileLevel( *m_textureLayer );
-    const int width = m_textureLayer->tileSize().width();
-    const int numTilesX = TileLoaderHelper::levelToColumn( m_textureLayer->levelZeroColumns(), tileZoomLevel );
+    const int tileZoomLevel = d->m_tileLoader->maximumTileLevel( *( d->m_textureLayer ) );
+    const int width = d->m_textureLayer->tileSize().width();
+    const int numTilesX = TileLoaderHelper::levelToColumn( d->m_textureLayer->levelZeroColumns(), tileZoomLevel );
 
     qreal distPerPixel = (qreal)360 / ( width * numTilesX );
     //mDebug() << "heightProfile" << fromLat << fromLon << toLat << toLon << "distPerPixel" << distPerPixel;
@@ -168,12 +195,6 @@ QList<GeoDataCoordinates> AltitudeModel::heightProfile( qreal fromLat, qreal fro
     }
     //mDebug() << ret;
     return ret;
-}
-
-void AltitudeModel::tileCompleted( const TileId & tileId, const QImage &image )
-{
-    m_cache.insert( tileId, new QImage( image ) );
-    emit loadCompleted();
 }
 
 }

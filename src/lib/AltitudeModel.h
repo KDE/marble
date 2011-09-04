@@ -28,7 +28,7 @@ class GeoSceneGroup;
 class GeoSceneTexture;
 class MapThemeManager;
 class TileLoader;
-
+class AltitudeModelPrivate;
 
 class MARBLE_EXPORT AltitudeModel : public QObject
 {
@@ -46,18 +46,9 @@ Q_SIGNALS:
      **/
     void loadCompleted();
 
-private Q_SLOTS:
-    void tileCompleted( const TileId & tileId, const QImage &image );
-
 private:
-    void updateTextureLayers();
-
-private: //TODO d pointer
-    TileLoader *m_tileLoader;
-    const MapThemeManager* m_mapThemeManager;
-    const GeoSceneTexture *m_textureLayer;
-    MarbleModel *m_model;
-    QCache<TileId, const QImage> m_cache;
+    friend class AltitudeModelPrivate;
+    AltitudeModelPrivate *d;
 };
 
 }
