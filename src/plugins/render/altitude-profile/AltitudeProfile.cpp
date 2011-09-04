@@ -72,27 +72,6 @@ bool AltitudeProfile::renderOnMap( GeoPainter     *painter,
 {
     if ( renderPos == "HOVERS_ABOVE_SURFACE" )
     {
-/*
-        painter->save();
-        painter->autoMapQuality();
-
-        PlotPoint* hightlightedPoint = m_graph->highlightedPoint();
-        if ( hightlightedPoint ) {
-            QString text = QString::number( hightlightedPoint->coordinates().altitude() ) + "m";
-            QRect textRect = painter->fontMetrics().boundingRect( text );
-
-            painter->setBrush( QApplication::palette().toolTipBase() );
-            painter->drawRect( hightlightedPoint->coordinates(), textRect.width(), textRect.height(), false );
-            painter->viewport();
-            painter->setPen( QApplication::palette().toolTipText().color() );
-            painter->drawText( hightlightedPoint->coordinates(), text );
-
-            painter->setPen( QPen( Qt::red, 5, Qt::SolidLine, Qt::RoundCap ) );
-            painter->drawPoint( hightlightedPoint->coordinates() );
-
-        }
-        painter->restore();
-*/
         m_labelContainer.paintEvent( painter, viewport, renderPos, layer );
     }
     return true;
@@ -142,41 +121,6 @@ void AltitudeProfile::initialize()
     connect( marbleModel()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ), SLOT( currentRouteChanged( GeoDataDocument* ) ) );
 
     connect( marbleModel()->altitudeModel(), SIGNAL( loadCompleted() ), SLOT( altitudeDataLoadCompleted() ) );
-
-
-#if 0
-    GeoDataParser parser( GeoData_UNKNOWN );
-
-    QFile file( "/home/niko/tracks/2011-06-12-mattighofen.gpx" );
-    file.open( QIODevice::ReadOnly );
-    Q_ASSERT( parser.read( &file ) );
-    GeoDataDocument* document = static_cast<GeoDataDocument*>( parser.releaseDocument() );
-    Q_ASSERT( document );
-    file.close();
-    GeoDataPlacemark* routePlacemark = document->placemarkList().first();
-    qDebug() << routePlacemark->geometry()->geometryId();
-    Q_ASSERT(routePlacemark->geometry()->geometryId() ==  GeoDataMultiGeometryId);
-    GeoDataMultiGeometry* routeWaypoints = static_cast<GeoDataMultiGeometry*>(routePlacemark->geometry());
-    qDebug() << "size" << routeWaypoints->size(); // << "length" << routeWaypoints->length( EARTH_RADIUS );
-    for(int i=0; i < routeWaypoints->size(); ++i) {
-        GeoDataGeometry* route2 = routeWaypoints->child(i);
-        qDebug() << "route2.geometryId" << route2->geometryId();
-        Q_ASSERT(route2->geometryId() == GeoDataLineStringId);
-        GeoDataLineString* routeWaypoints2 = static_cast<GeoDataLineString*>(route2);
-        qDebug() << "size" << routeWaypoints2->size() << "length" << routeWaypoints2->length(EARTH_RADIUS);
-        qreal previousAlt = 0;
-        qreal totalIncrease = 0;
-        for(int j=0; j< routeWaypoints2->size(); ++j) {
-            GeoDataCoordinates coordinate = routeWaypoints2->at( j );
-            qDebug() << coordinate.latitude(Marble::GeoDataCoordinates::Degree) << coordinate.longitude(Marble::GeoDataCoordinates::Degree) << coordinate.altitude();
-            if (previousAlt && coordinate.altitude() > previousAlt) {
-                totalIncrease += coordinate.altitude() - previousAlt;
-            }
-            previousAlt = coordinate.altitude();
-        }
-        qDebug() << "totalIncrease" << totalIncrease << "vs. 254m von garmin gemessen";
-    }
-#endif
 }
 
 void AltitudeProfile::altitudeDataLoadCompleted()
@@ -195,14 +139,11 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
     qint32 minY = INT_MAX;
     qint32 maxY = 0;
     quint32 numDataPoints = 0;
-    qDebug() << "*************************";
 
     GeoDataPlacemark* routePlacemark = 0;
     Q_ASSERT(route->size());
     if ( !route->placemarkList().count() ) {
-        qDebug() << "no placemarks found?!";
         for(int i=0; i<route->size(); ++i) {
-            qDebug() << "nodeType" << i << route->child( i )->nodeType();
             if ( dynamic_cast<GeoDataFolder*>( route->child( i ) ) ) {
                 Q_ASSERT( static_cast<GeoDataFolder*>( route->child( i ) )->placemarkList().size() );
                 routePlacemark = static_cast<GeoDataFolder*>( route->child( i ) )->placemarkList().first();
@@ -214,7 +155,6 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
     Q_ASSERT(routePlacemark);
     Q_ASSERT(routePlacemark->geometry()->geometryId() ==  GeoDataLineStringId);
     GeoDataLineString* routeWaypoints = static_cast<GeoDataLineString*>(routePlacemark->geometry());
-    //qDebug() << routeWaypoints->length( EARTH_RADIUS );
     qreal totalIncrease = 0;
     qreal totalIncreaseAvg = 0;
     qreal totalDecreaseAvg = 0;
@@ -224,7 +164,6 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
     for(int i=1; i < routeWaypoints->size(); ++i) {
         GeoDataCoordinates coordinate = routeWaypoints->at( i );
         GeoDataCoordinates coordinatePrev = routeWaypoints->at( i - 1 );
-        //qreal altitude = marbleModel()->altitudeModel()->height(coordinate.latitude(Marble::GeoDataCoordinates::Degree), coordinate.longitude(Marble::GeoDataCoordinates::Degree));
         QList<GeoDataCoordinates> coordinatesList = marbleModel()->altitudeModel()->heightProfile(
             coordinatePrev.latitude(Marble::GeoDataCoordinates::Degree),
             coordinatePrev.longitude(Marble::GeoDataCoordinates::Degree),
@@ -232,8 +171,6 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
             coordinate.longitude(Marble::GeoDataCoordinates::Degree)
         );
         foreach(const GeoDataCoordinates &coord, coordinatesList) {
-            //qDebug() << "POINT" << numDataPoints << coordinate.longitude(Marble::GeoDataCoordinates::Degree) << coordinate.latitude(Marble::GeoDataCoordinates::Degree)
-            //        << "height" << altitude;
             allAltitudes << coord;
             if ( allAltitudes.count() >= 10 ) {
                 qreal avgAltitude = 0;
@@ -251,19 +188,15 @@ void AltitudeProfile::currentRouteChanged( GeoDataDocument* route )
             }
             if ( lastAltitude != -100000 && coord.altitude() > lastAltitude ) {
                 totalIncrease += coord.altitude() - lastAltitude;
-                //qDebug() << "INCREASE +=" << altitude - lastAltitude << "totalIncrease is now" << totalIncrease;
             }
 
             double value = coord.altitude();
-            //qDebug() << "value" << value;
             m_plot->addPoint(new PlotPoint( numDataPoints++, value, coord ));
             if (value > maxY) maxY = value;
             if (value < minY) minY = value;
             lastAltitude = coord.altitude();
         }
     }
-    //qDebug() << "TOTAL INCREASE" << totalIncrease;
-    //qDebug() << "TOTAL INCREASE AVG" << totalIncreaseAvg;
 
     m_graph->setLimits( 0, numDataPoints, minY - minY / 5, maxY + maxY / 5 );
 
