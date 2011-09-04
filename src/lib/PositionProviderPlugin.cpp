@@ -9,26 +9,50 @@
 //
 
 #include "PositionProviderPlugin.h"
-using namespace Marble;
 
+namespace Marble
+{
 
-Marble::PositionProviderPlugin::PositionProviderPlugin()
+class PositionProviderPluginPrivate
+{
+public:
+    PositionProviderPluginPrivate()
+        : m_marbleModel( 0 )
+    {
+    }
+
+    const MarbleModel *m_marbleModel;
+};
+
+PositionProviderPlugin::PositionProviderPlugin()
+    : d( new PositionProviderPluginPrivate() )
 {
 }
 
-Marble::PositionProviderPlugin::~PositionProviderPlugin()
+PositionProviderPlugin::~PositionProviderPlugin()
 {
 }
 
-qreal Marble::PositionProviderPlugin::speed() const
+const MarbleModel* PositionProviderPlugin::marbleModel() const
+{
+    return d->m_marbleModel;
+}
+
+void PositionProviderPlugin::setMarbleModel( const MarbleModel* marbleModel )
+{
+    d->m_marbleModel = marbleModel;
+}
+
+qreal PositionProviderPlugin::speed() const
 {
     return 0;
 }
 
-qreal Marble::PositionProviderPlugin::direction() const
+qreal PositionProviderPlugin::direction() const
 {
     return 0;
 }
 
+}
 
 #include "PositionProviderPlugin.moc"

@@ -235,6 +235,9 @@ void MarbleWidgetPrivate::construct()
 
     m_popupmenu = new MarbleWidgetPopupMenu( m_widget, &m_model );
 
+    m_widget->connect( m_popupmenu, SIGNAL( trackPlacemark( const GeoDataPlacemark* ) ),
+                       &m_model, SLOT( setTrackedPlacemark( const GeoDataPlacemark* ) ) );
+
     m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler( m_widget ) );
     m_widget->setMouseTracking( true );
 

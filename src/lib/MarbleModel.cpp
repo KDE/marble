@@ -91,6 +91,7 @@ class MarbleModelPrivate
           m_sortproxy(),
           m_placemarkselectionmodel( 0 ),
           m_positionTracking( &m_treemodel ),
+          m_trackedPlacemark( 0 ),
           m_bookmarkManager(),
           m_routingManager( 0 ),
           m_legend( 0 ),
@@ -140,6 +141,8 @@ class MarbleModelPrivate
 
     //Gps Stuff
     PositionTracking         m_positionTracking;
+
+    const GeoDataPlacemark  *m_trackedPlacemark;
 
     BookmarkManager          m_bookmarkManager;
     RoutingManager          *m_routingManager;
@@ -495,6 +498,17 @@ void MarbleModel::setPersistentTileCacheLimit(quint64 kiloBytes)
         d->m_storageWatcher.quit();
     }
     // TODO: trigger update
+}
+
+void MarbleModel::setTrackedPlacemark( const GeoDataPlacemark *placemark )
+{
+    d->m_trackedPlacemark = placemark;
+    emit trackedPlacemarkChanged( placemark );
+}
+
+const GeoDataPlacemark* MarbleModel::trackedPlacemark() const
+{
+    return d->m_trackedPlacemark;
 }
 
 const PluginManager* MarbleModel::pluginManager() const

@@ -50,15 +50,20 @@ class MarbleWidgetPopupMenu  : public QObject
       */
     void addAction( Qt::MouseButton button, QAction* action );
 
+Q_SIGNALS:
+    void trackPlacemark( const GeoDataPlacemark *placemark );
+
  public Q_SLOTS:
     void  showLmbMenu( int, int );
     void  showRmbMenu( int, int );
-    void  showFeatureInfo( QAction* );
 
  protected Q_SLOTS:
-    void  slotSetHomePoint();
-    void  slotCopyCoordinates();
-    void  slotAboutDialog();
+    void slotInfoDialog();
+    void slotShowOrbit();
+    void slotTrackPlacemark();
+    void slotSetHomePoint();
+    void slotCopyCoordinates();
+    void slotAboutDialog();
 
 private Q_SLOTS:
     void directionsFromHere();
@@ -87,6 +92,11 @@ private Q_SLOTS:
 
     QMenu    *const m_lmbMenu;
     QMenu    *const m_rmbMenu;
+    QMenu    *m_smallScreenMenu;
+
+    QAction *m_infoDialogAction;
+    QAction *m_showOrbitAction;
+    QAction *m_trackPlacemarkAction;
 
     QAction  *const m_planetAction;
     QAction  *const m_copyCoordinateAction;

@@ -44,6 +44,11 @@ class QTextDocument;
 namespace Marble
 {
 
+class AbstractDataPlugin;
+class AbstractDataPluginItem;
+class GeoDataPlacemark;
+class GeoPainter;
+class MeasureTool;
 class MapThemeManager;
 class FileViewModel;
 class PositionTracking;
@@ -271,6 +276,13 @@ class MARBLE_EXPORT MarbleModel : public QObject
     ElevationModel* elevationModel();
     const ElevationModel* elevationModel() const;
 
+    /**
+     * Returns the placemark being tracked by this model or 0 if no
+     * placemark is currently tracked.
+     * @see setTrackedPlacemark(), trackedPlacemarkChanged()
+     */
+    const GeoDataPlacemark *trackedPlacemark() const;
+
  public Q_SLOTS:
     void clearPersistentTileCache();
 
@@ -279,6 +291,12 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @param  bytes The limit in kilobytes, 0 means no limit.
      */
     void setPersistentTileCacheLimit( quint64 kiloBytes );
+
+    /**
+     * @brief Change the placemark tracked by this model
+     * @see trackedPlacemark(), trackedPlacemarkChanged()
+     */
+    void setTrackedPlacemark( const GeoDataPlacemark *placemark );
 
  Q_SIGNALS:
 
@@ -299,6 +317,12 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     void workOfflineChanged();
 
+    /**
+     * @brief Emitted when the placemark tracked by this model has changed
+     * @see setTrackedPlacemark(), trackedPlacemark()
+     */
+    void trackedPlacemarkChanged( const GeoDataPlacemark *placemark );
+ 
  private:
     Q_DISABLE_COPY( MarbleModel )
 

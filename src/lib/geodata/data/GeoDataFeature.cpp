@@ -410,7 +410,10 @@ void GeoDataFeature::initializeDefaultStyles()
 
     s_defaultStyle[Building]                 = GeoDataFeaturePrivate::createStyle( 1, 0, QColor( 0xBE, 0xAD, 0xAD ), QColor( 0xBE, 0xAD, 0xAD ).darker(), 
                                                                                    true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false );
-    
+
+    //TODO
+    s_defaultStyle[Satellite] = s_defaultStyle[Default];
+
     s_defaultStyleInitialized = true;
     s_defaultFont = QFont("Sans Serif");
 

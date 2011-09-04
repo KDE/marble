@@ -75,6 +75,8 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
     Q_PRIVATE_SLOT( d, void changePositionProvider( const QString &provider ) )
     Q_PRIVATE_SLOT( d, void centerOnCurrentLocation() )
 
+    Q_PRIVATE_SLOT( d, void trackPlacemark() )
+
     /**
      * @brief Slot for setting re-center combobox if re-centering is enabled other than from CurrentLocationWidget
      * @see RoutingPlugin

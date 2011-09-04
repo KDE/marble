@@ -31,6 +31,8 @@
 
 using namespace Marble;
 
+#include "GeoDataPoint.h"
+
 SatellitesItem::SatellitesItem( const QString &name, elsetrec satrec )
     : TrackerPluginItem( name ),
       m_satrec( satrec )
@@ -41,6 +43,8 @@ SatellitesItem::SatellitesItem( const QString &name, elsetrec satrec )
     m_earthSemiMajorAxis = radiusearthkm;
 
     setDescription();
+
+    placemark()->setVisualCategory( GeoDataFeature::Satellite );
 }
 
 void SatellitesItem::setDescription()

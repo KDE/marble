@@ -23,5 +23,7 @@ IF( BUILD_GPS_FILEREADER_PLUGIN )
     ADD_SUBDIRECTORY( filereader )
 ENDIF()
 
+ADD_SUBDIRECTORY( placemark )
+
 # experimental implementation
 # ADD_SUBDIRECTORY( geoclue )

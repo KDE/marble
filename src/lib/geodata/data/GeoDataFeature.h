@@ -273,6 +273,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         RailwayMonorail,
         RailwayFunicular,
 
+        Satellite,
+
         // Important: Make sure that this is always the last 
         // item and just use it to specify the array size
         LastIndex

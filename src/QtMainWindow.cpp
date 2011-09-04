@@ -1051,6 +1051,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
         foreach( PositionProviderPlugin* plugin, plugins ) {
             if ( plugin->nameId() == positionProvider ) {
                 plugins.removeOne( plugin );
+                plugin->setMarbleModel( m_controlView->marbleModel() );
                 tracking->setPositionProviderPlugin( plugin );
                 break;
             }

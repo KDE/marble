@@ -16,9 +16,11 @@
 
 // Marble
 #include "AdjustNavigation.h"
+#include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
+#include "MarbleWidgetPopupMenu.h"
 #include "GeoDataCoordinates.h"
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
@@ -53,6 +55,7 @@ class CurrentLocationWidgetPrivate
 
     void adjustPositionTrackingStatus( PositionProviderStatus status );
     void changePositionProvider( const QString &provider );
+    void trackPlacemark();
     void centerOnCurrentLocation();
     void updateRecenterComboBox( AdjustNavigation::CenterMode centerMode );
     void updateAutoZoomCheckBox( bool autoZoom );
@@ -127,6 +130,8 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
              this, SLOT( updateRecenterComboBox( AdjustNavigation::CenterMode ) ) );
     disconnect( d->m_adjustNavigation, SIGNAL( autoZoomToggled( bool ) ),
              this, SLOT( updateAutoZoomCheckBox( bool ) ) );
+    disconnect( d->m_widget->model(), SIGNAL( trackedPlacemarkChanged( const GeoDataPlacemark* ) ),
+             this, SLOT( trackPlacemark() ) );
 
     //connect CurrentLoctaion signals
     connect( d->m_widget->model()->positionTracking(),
@@ -161,6 +166,8 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
               this, SLOT(openTrack()));
     connect (d->m_currentLocationUi.clearTrackPushButton, SIGNAL( clicked(bool)),
              this, SLOT(clearTrack()));
+    connect( d->m_widget->model(), SIGNAL( trackedPlacemarkChanged( const GeoDataPlacemark* ) ),
+             this, SLOT( trackPlacemark() ) );
 }
 
 void CurrentLocationWidgetPrivate::adjustPositionTrackingStatus( PositionProviderStatus status )
@@ -280,6 +287,21 @@ void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provid
         m_currentLocationUi.locationLabel->setEnabled( false );
         m_widget->model()->positionTracking()->setPositionProviderPlugin( 0 );
         m_widget->update();
+    }
+}
+
+void CurrentLocationWidgetPrivate::trackPlacemark()
+{
+    foreach( PositionProviderPlugin* plugin, m_positionProviderPlugins ) {
+        if ( plugin->nameId() == "Placemark" ) {
+            PositionProviderPlugin *instance = plugin->newInstance();
+            instance->setMarbleModel( m_widget->model() );
+            PositionTracking *tracking = m_widget->model()->positionTracking();
+            tracking->setPositionProviderPlugin( instance );
+            m_adjustNavigation->setRecenter( AdjustNavigation::AlwaysRecenter );
+            m_widget->update();
+            return;
+        }
     }
 }
 
