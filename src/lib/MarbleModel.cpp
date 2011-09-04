@@ -185,7 +185,7 @@ MarbleModel::MarbleModel( QObject *parent )
     connect(&d->m_clock,   SIGNAL( timeChanged() ),
             &d->m_sunLocator, SLOT( update() ) );
 
-    d->m_altitudeModel = new AltitudeModel( d->m_mapThemeManager, d->m_downloadManager, this );
+    d->m_altitudeModel = new AltitudeModel( this );
 
 }
 

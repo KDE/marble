@@ -34,8 +34,7 @@ class MARBLE_EXPORT AltitudeModel : public QObject
 {
     Q_OBJECT
 public:
-    AltitudeModel( MapThemeManager const * const mapThemeManager,
-                        HttpDownloadManager * const downloadManager, MarbleModel * const model );
+    AltitudeModel( MarbleModel * const model );
 
     qreal height(qreal lat, qreal lon);
     QList<GeoDataCoordinates> heightProfile( qreal fromLat, qreal fromLon, qreal toLat, qreal toLon );

@@ -25,12 +25,11 @@
 
 namespace Marble {
 
-AltitudeModel::AltitudeModel(const MapThemeManager*const mapThemeManager, HttpDownloadManager*const downloadManager, MarbleModel*const model)
+AltitudeModel::AltitudeModel( MarbleModel *const model )
     : QObject(0), m_model(model)
 {
     m_cache.setMaxCost(10); //keep 10 tiles in memory (~17MB)
-    m_mapThemeManager = mapThemeManager;
-    m_tileLoader = new TileLoader( downloadManager, mapThemeManager );
+    m_tileLoader = new TileLoader( model->downloadManager(), model->mapThemeManager() );
     updateTextureLayers();
     connect( m_tileLoader, SIGNAL( tileCompleted( TileId, QImage ) ),
              SLOT( tileCompleted( TileId, QImage ) ) );
