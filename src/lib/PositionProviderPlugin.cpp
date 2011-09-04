@@ -31,6 +31,7 @@ PositionProviderPlugin::PositionProviderPlugin()
 
 PositionProviderPlugin::~PositionProviderPlugin()
 {
+    delete d;
 }
 
 const MarbleModel* PositionProviderPlugin::marbleModel() const
