@@ -82,11 +82,11 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
         const int x = static_cast<int>( textureX + ( i % 2 ) );
         const int y = static_cast<int>( textureY + ( i / 2 ) );
 
-        //qDebug() << "x" << x << ( x / width );
-        //qDebug() << "y" << y << ( y / height );
+        //mDebug() << "x" << x << ( x / width );
+        //mDebug() << "y" << y << ( y / height );
 
         const TileId id( "earth/srtm2", tileZoomLevel, ( x % ( numTilesX * width ) ) / width, ( y % ( numTilesY * height ) ) / height );
-        //qDebug() << "LAT" << lat << "LON" << lon << "tile" << ( x % ( numTilesX * width ) ) / width << ( y % ( numTilesY * height ) ) / height;
+        //mDebug() << "LAT" << lat << "LON" << lon << "tile" << ( x % ( numTilesX * width ) ) / width << ( y % ( numTilesY * height ) ) / height;
 
         const QImage *image = m_cache[id];
         if ( image == 0 ) {
@@ -101,20 +101,20 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
         const qreal dx = ( textureX > (qreal)x ) ? textureX - (qreal)x : (qreal)x - textureX;
         const qreal dy = ( textureY > (qreal)y ) ? textureY - (qreal)y : (qreal)y - textureY;
         if ( !( 0 <= dx && dx <= 1 ) || !( 0 <= dy && dy <= 1 ) ) {
-            qDebug() << "dx" << dx << "dy" << dy << "textureX" << textureX << "textureY" << textureY << "x" << x << "y" << y;
+            //mDebug() << "dx" << dx << "dy" << dy << "textureX" << textureX << "textureY" << textureY << "x" << x << "y" << y;
         }
         Q_ASSERT( 0 <= dx && dx <= 1 );
         Q_ASSERT( 0 <= dy && dy <= 1 );
         unsigned int pixel;
         pixel = image->pixel( x % width, y % height );
         pixel -= 0xFF000000; //fully opaque
-        //qDebug() << "(1-dx)" << (1-dx) << "(1-dy)" << (1-dy);
+        //mDebug() << "(1-dx)" << (1-dx) << "(1-dy)" << (1-dy);
         if (pixel != 32768) { //no data?
-            //qDebug() << "got at x" << x % width << "y" << y % height << "a height of" << pixel << "** RGB" << qRed(pixel) << qGreen(pixel) << qBlue(pixel);
+            //mDebug() << "got at x" << x % width << "y" << y % height << "a height of" << pixel << "** RGB" << qRed(pixel) << qGreen(pixel) << qBlue(pixel);
             ret += (qreal)pixel * (1-dx) * (1-dy);
             hasHeight = true;
         } else {
-            //qDebug() << "no data at" <<  x % width << "y" << y % height;
+            //mDebug() << "no data at" <<  x % width << "y" << y % height;
             noData += (1-dx) * (1-dy);
         }
     }
@@ -123,12 +123,12 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
         ret = 32768; //no data
     } else {
         if (noData) {
-            //qDebug() << "NO DATA" << noData;
+            //mDebug() << "NO DATA" << noData;
             ret += (ret / (1-noData))*noData;
         }
     }
 
-    //qDebug() << ">>>" << lat << lon << "returning an altitude of" << ret;
+    //mDebug() << ">>>" << lat << lon << "returning an altitude of" << ret;
     return ret;
 }
 
@@ -139,34 +139,34 @@ QList<GeoDataCoordinates> AltitudeModel::heightProfile( qreal fromLat, qreal fro
     const int numTilesX = TileLoaderHelper::levelToColumn( m_textureLayer->levelZeroColumns(), tileZoomLevel );
 
     qreal distPerPixel = (qreal)360 / ( width * numTilesX );
-    //qDebug() << "heightProfile" << fromLat << fromLon << toLat << toLon << "distPerPixel" << distPerPixel;
+    //mDebug() << "heightProfile" << fromLat << fromLon << toLat << toLon << "distPerPixel" << distPerPixel;
 
     qreal lat = fromLat;
     qreal lon = fromLon;
     char dirLat = fromLat < toLat ? 1 : -1;
     char dirLon = fromLon < toLon ? 1 : -1;
     qreal k = qAbs( ( fromLat - toLat ) / ( fromLon - toLon ) );
-    //qDebug() << "fromLon" << fromLon << "fromLat" << fromLat;
-    //qDebug() << "diff lon" << ( fromLon - toLon ) << "diff lat" << ( fromLat - toLat );
-    //qDebug() << "dirLon" << QString::number(dirLon) << "dirLat" << QString::number(dirLat) << "k" << k;
+    //mDebug() << "fromLon" << fromLon << "fromLat" << fromLat;
+    //mDebug() << "diff lon" << ( fromLon - toLon ) << "diff lat" << ( fromLat - toLat );
+    //mDebug() << "dirLon" << QString::number(dirLon) << "dirLat" << QString::number(dirLat) << "k" << k;
     QList<GeoDataCoordinates> ret;
     while ( lat*dirLat <= toLat*dirLat && lon*dirLon <= toLon*dirLon ) {
-        //qDebug() << lat << lon;
+        //mDebug() << lat << lon;
         qreal h = height( lat, lon );
         if (h < 32000) {
             ret << GeoDataCoordinates( lon, lat, h, GeoDataCoordinates::Degree );
         }
         if ( k < 0.5 ) {
-            //qDebug() << "lon(x) += distPerPixel";
+            //mDebug() << "lon(x) += distPerPixel";
             lat += distPerPixel * k * dirLat;
             lon += distPerPixel * dirLon;
         } else {
-            //qDebug() << "lat(y) += distPerPixel";
+            //mDebug() << "lat(y) += distPerPixel";
             lat += distPerPixel * dirLat;
             lon += distPerPixel / k * dirLon;
         }
     }
-    //qDebug() << ret;
+    //mDebug() << ret;
     return ret;
 }
 
