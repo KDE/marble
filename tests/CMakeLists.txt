@@ -69,9 +69,6 @@ endif( CMAKE_COMMAND AND CMAKE_CTEST_COMMAND )
 #
 #############################################################
 
-# MarbleWidget test
-marble_add_test( MarbleWidgetSpeedTest )
-
 # GeoPolygon test
 if (QTONLY)
   # ce: don't know why this is needed here - on win32 
@@ -98,12 +95,21 @@ endif (QTONLY)
 # include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/plugins/render/osmannotate )
 
 
+#################################################
+# FIXME turn into automated test or remove
+#################################################
+add_executable(geodatatest GeoDataTest.cpp)
+set_target_properties( geodatatest PROPERTIES COMPILE_FLAGS "-DKML_LAZY_IMP" )
+target_link_libraries (geodatatest marblewidget ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
+
+
 ############################
 # Drop in New Tests
 ############################
 qt4_add_resources(TestGeoDataCopy_SRCS TestGeoDataCopy.qrc)
 marble_add_test( TestGeoDataCopy ${TestGeoDataCopy_SRCS} )
 
+marble_add_test( MarbleWidgetSpeedTest )
 marble_add_test( GeoPolygonTest )
 marble_add_test( TestGeoDataParser )
 marble_add_test( TestGeoDataWriter )
