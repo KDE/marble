@@ -98,7 +98,7 @@ target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
                                            ${QT_QTMAIN_LIBRARY}
                                            ${${_target_name}_LIBS}
                                            marblewidget )
-install( TARGETS ${_target_name} DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH}/org/kde/edu/marble/${_install_path} )
+install( TARGETS ${_target_name} DESTINATION ${QT_IMPORTS_DIR}/org/kde/edu/marble/${_install_path} )
 
 set_target_properties( ${_target_name} PROPERTIES
                        INSTALL_RPATH_USE_LINK_PATH TRUE
