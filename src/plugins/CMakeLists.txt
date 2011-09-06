@@ -5,4 +5,7 @@ add_subdirectory( runner )
 add_subdirectory( network )
 add_subdirectory( templates )
 add_subdirectory( positionprovider )
-add_subdirectory( qt-components )
+
+if( QT_QTDECLARATIVE_FOUND )
+    add_subdirectory( qt-components )
+endif( QT_QTDECLARATIVE_FOUND )
