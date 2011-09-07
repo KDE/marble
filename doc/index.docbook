@@ -329,7 +329,7 @@
              Once you select and enable a routing backend on the left to include it in routing queries, you can modify its settings on the right side. The settings are specific to each backend.
          </para>
          <para>
-             Besides configuring the four default profiles, you can add new profiles and remove existing ones in the &marble; settings in the <guilabel>File</guilabel> menu.
+             Besides configuring the four default profiles, you can add new profiles and remove existing ones in the &marble; settings in the <guilabel>Routing</guilabel> page.
          </para>
          </sect1>
          <sect1 id="routing-route-adjustments">
