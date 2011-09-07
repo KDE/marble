@@ -246,7 +246,7 @@ bool ViewportParams::setPlanetAxis(const Quaternion &newAxis)
             centerLat = maxLat * centerLat / fabs( centerLat );
         }
         
-        d->m_planetAxis.createFromEuler( -centerLat, centerLon, newAxis.roll() );
+        d->m_planetAxis = Quaternion::fromEuler( -centerLat, centerLon, newAxis.roll() );
     }
     else {
         d->m_planetAxis = newAxis;

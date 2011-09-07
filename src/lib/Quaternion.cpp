@@ -81,7 +81,7 @@ Quaternion Quaternion::inverse() const
     return inverse;
 }
 
-void Quaternion::createFromEuler(qreal pitch, qreal yaw, qreal roll)
+Quaternion Quaternion::fromEuler(qreal pitch, qreal yaw, qreal roll)
 {
     qreal  cPhi, cThe, cPsi, sPhi, sThe, sPsi, 
             cThecPsi, sThesPsi, sThecPsi, cThesPsi;
@@ -103,10 +103,12 @@ void Quaternion::createFromEuler(qreal pitch, qreal yaw, qreal roll)
     sThecPsi = sThe * cPsi;
     cThesPsi = cThe * sPsi;
 
-    v[Q_W] = cPhi * cThecPsi + sPhi * sThesPsi;
-    v[Q_X] = sPhi * cThecPsi - cPhi * sThesPsi;
-    v[Q_Y] = cPhi * sThecPsi + sPhi * cThesPsi;
-    v[Q_Z] = cPhi * cThesPsi - sPhi * sThecPsi;
+    const qreal w = cPhi * cThecPsi + sPhi * sThesPsi;
+    const qreal x = sPhi * cThecPsi - cPhi * sThesPsi;
+    const qreal y = cPhi * sThecPsi + sPhi * cThesPsi;
+    const qreal z = cPhi * cThesPsi - sPhi * sThecPsi;
+
+    return Quaternion( w, x, y, z );
 }
 
 qreal Quaternion::pitch() const // "heading", phi

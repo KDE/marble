@@ -151,8 +151,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         qreal centerLon, centerLat;
         viewport->centerCoordinates( centerLon, centerLat );
 
-        Quaternion  skyAxis;
-        skyAxis.createFromEuler( -centerLat , centerLon + skyRotationAngle, 0.0 );
+        const Quaternion skyAxis = Quaternion::fromEuler( -centerLat , centerLon + skyRotationAngle, 0.0 );
 
         matrix       skyAxisMatrix;
         skyAxis.inverse().toMatrix( skyAxisMatrix );

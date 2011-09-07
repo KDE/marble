@@ -677,8 +677,7 @@ void MarbleMap::rotateBy( const qreal& deltaLon, const qreal& deltaLat )
 
 void MarbleMap::centerOn( const qreal lon, const qreal lat )
 {
-    Quaternion  quat;
-    quat.createFromEuler( -lat * DEG2RAD, lon * DEG2RAD, 0.0 );
+    const Quaternion quat = Quaternion::fromEuler( -lat * DEG2RAD, lon * DEG2RAD, 0.0 );
     d->m_viewport.setPlanetAxis( quat );
     d->m_textureLayer.setNeedsUpdate();
 
