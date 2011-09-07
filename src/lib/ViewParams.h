@@ -19,18 +19,14 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-#include <QtCore/QSharedPointer>
 #include <QtCore/QString>
 
-#include "Quaternion.h"
 #include "global.h"
 
 
 namespace Marble
 {
 
-class AbstractProjection;
-class ViewportParams;
 class ViewParamsPrivate;
 
 /** 
@@ -44,41 +40,12 @@ class ViewParams
     ViewParams();
     ~ViewParams();
 
-    // Getters and setters
-    ViewportParams  *viewport();
-
-    // Convenience methods:
-
-    Projection projection() const;
-    const AbstractProjection *currentProjection() const;
-    void setProjection(Projection newProjection);
-
     MapQuality mapQuality( ViewContext viewContext ) const;
     MapQuality mapQuality() const;
     void setMapQualityForViewContext( MapQuality quality, ViewContext viewContext );
 
     ViewContext viewContext() const;
     void setViewContext( ViewContext viewContext );
-
-    int radius() const;
-    void setRadius( int newRadius );
-
-    Quaternion planetAxis() const;
-    void setPlanetAxis( const Quaternion &newAxis );
-
-    void centerCoordinates( qreal &centerLon, qreal &centerLat );
-
-    int width() const;
-    int height() const;
-
-    /**
-     * @brief Sets the size of the viewport and the sizes of
-     * canvasImage and coastImage.
-     *
-     * @param width new width of viewport
-     * @param height new height of viewport
-     */
-    void setSize( int width, int height );
 
     bool showAtmosphere() const;
     void setShowAtmosphere( bool );

@@ -122,6 +122,7 @@ class MarbleMapPrivate
 
     // Parameters for the maps appearance.
     ViewParams       m_viewParams;
+    ViewportParams   m_viewport;
     bool             m_showFrameRate;
 
     GeoSceneDocument *m_mapTheme;
@@ -304,7 +305,7 @@ MarbleModel *MarbleMap::model() const
 
 ViewportParams *MarbleMap::viewport()
 {
-    return d->m_viewParams.viewport();
+    return &d->m_viewport;
 }
 
 
@@ -342,46 +343,46 @@ ViewContext MarbleMap::viewContext() const
 
 void MarbleMap::setSize( int width, int height )
 {
-    d->m_viewParams.setSize( width, height );
-    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
-
-    d->m_textureLayer.setNeedsUpdate();
+    setSize( QSize( width, height ) );
 }
 
 void MarbleMap::setSize( const QSize& size )
 {
-    setSize( size.width(), size.height() );
+    d->m_viewport.setSize( size );
+    d->m_textureLayer.setNeedsUpdate();
+
+    emit visibleLatLonAltBoxChanged( d->m_viewport.viewLatLonAltBox() );
 }
 
 QSize MarbleMap::size() const
 {
-    return QSize( d->m_viewParams.width(), d->m_viewParams.height() );
+    return QSize( d->m_viewport.width(), d->m_viewport.height() );
 }
 
 int  MarbleMap::width() const
 {
-    return d->m_viewParams.width();
+    return d->m_viewport.width();
 }
 
 int  MarbleMap::height() const
 {
-    return d->m_viewParams.height();
+    return d->m_viewport.height();
 }
 
 Quaternion MarbleMap::planetAxis() const
 {
-    return d->m_viewParams.planetAxis();
+    return d->m_viewport.planetAxis();
 }
 
 
 int MarbleMap::radius() const
 {
-    return d->m_viewParams.radius();
+    return d->m_viewport.radius();
 }
 
 void MarbleMap::setRadius( int radius )
 {
-    d->m_viewParams.setRadius( radius );
+    d->m_viewport.setRadius( radius );
 
     d->m_textureLayer.setNeedsUpdate();
 }
@@ -417,7 +418,7 @@ qreal MarbleMap::centerLatitude() const
     qreal  centerLon;
     qreal  centerLat;
 
-    d->m_viewParams.centerCoordinates( centerLon, centerLat );
+    d->m_viewport.centerCoordinates( centerLon, centerLat );
     return centerLat * RAD2DEG;
 }
 
@@ -427,7 +428,7 @@ qreal MarbleMap::centerLongitude() const
     qreal  centerLon;
     qreal  centerLat;
 
-    d->m_viewParams.centerCoordinates( centerLon, centerLat );
+    d->m_viewport.centerCoordinates( centerLon, centerLat );
     return centerLon * RAD2DEG;
 }
 
@@ -652,10 +653,10 @@ quint64 MarbleMap::volatileTileCacheLimit() const
 
 void MarbleMap::rotateBy( const Quaternion& incRot )
 {
-    d->m_viewParams.setPlanetAxis( incRot * d->m_viewParams.planetAxis() );
+    d->m_viewport.setPlanetAxis( incRot * d->m_viewport.planetAxis() );
     d->m_textureLayer.setNeedsUpdate();
 
-    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
+    emit visibleLatLonAltBoxChanged( d->m_viewport.viewLatLonAltBox() );
 }
 
 void MarbleMap::rotateBy( const qreal& deltaLon, const qreal& deltaLat )
@@ -663,14 +664,14 @@ void MarbleMap::rotateBy( const qreal& deltaLon, const qreal& deltaLat )
     Quaternion  rotPhi( 1.0, deltaLat / 180.0, 0.0, 0.0 );
     Quaternion  rotTheta( 1.0, 0.0, deltaLon / 180.0, 0.0 );
 
-    Quaternion  axis = d->m_viewParams.planetAxis();
+    Quaternion  axis = d->m_viewport.planetAxis();
     axis = rotTheta * axis;
     axis *= rotPhi;
     axis.normalize();
-    d->m_viewParams.setPlanetAxis( axis );
+    d->m_viewport.setPlanetAxis( axis );
     d->m_textureLayer.setNeedsUpdate();
 
-    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
+    emit visibleLatLonAltBoxChanged( d->m_viewport.viewLatLonAltBox() );
 }
 
 
@@ -678,10 +679,10 @@ void MarbleMap::centerOn( const qreal lon, const qreal lat )
 {
     Quaternion  quat;
     quat.createFromEuler( -lat * DEG2RAD, lon * DEG2RAD, 0.0 );
-    d->m_viewParams.setPlanetAxis( quat );
+    d->m_viewport.setPlanetAxis( quat );
     d->m_textureLayer.setNeedsUpdate();
 
-    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
+    emit visibleLatLonAltBoxChanged( d->m_viewport.viewLatLonAltBox() );
 }
 
 void MarbleMap::setCenterLatitude( qreal lat )
@@ -696,37 +697,35 @@ void MarbleMap::setCenterLongitude( qreal lon )
 
 Projection MarbleMap::projection() const
 {
-    return d->m_viewParams.projection();
+    return d->m_viewport.projection();
 }
 
 void MarbleMap::setProjection( Projection projection )
 {
     emit projectionChanged( projection );
 
-    d->m_viewParams.setProjection( projection );
+    d->m_viewport.setProjection( projection );
 
     d->m_textureLayer.setupTextureMapper( projection );
 
-    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
+    emit visibleLatLonAltBoxChanged( d->m_viewport.viewLatLonAltBox() );
 }
 
 
 bool MarbleMap::screenCoordinates( qreal lon, qreal lat,
                                    qreal& x, qreal& y ) const
 {
-    return d->m_viewParams.currentProjection()
+    return d->m_viewport.currentProjection()
         ->screenCoordinates( lon * DEG2RAD, lat * DEG2RAD,
-                             d->m_viewParams.viewport(),
-                             x, y );
+                             &d->m_viewport, x, y );
 }
 
 bool MarbleMap::geoCoordinates( int x, int y,
                                 qreal& lon, qreal& lat,
                                 GeoDataCoordinates::Unit unit ) const
 {
-    return d->m_viewParams.currentProjection()
-        ->geoCoordinates( x, y, d->m_viewParams.viewport(),
-                          lon, lat, unit );
+    return d->m_viewport.currentProjection()
+        ->geoCoordinates( x, y, &d->m_viewport, lon, lat, unit );
 }
 
 // Used to be paintEvent()
@@ -736,18 +735,18 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
 
     if ( !d->m_mapTheme ) {
         mDebug() << "No theme yet!";
-        d->m_marbleSplashLayer.render( &painter, d->m_viewParams.viewport() );
+        d->m_marbleSplashLayer.render( &painter, &d->m_viewport );
         return;
     }
 
     QTime t;
     t.start();
 
-    d->m_layerManager.renderLayers( &painter, d->m_viewParams.viewport() );
+    d->m_layerManager.renderLayers( &painter, &d->m_viewport );
 
     if ( d->m_showFrameRate ) {
         FpsLayer fpsLayer( &t );
-        fpsLayer.render( &painter, d->m_viewParams.viewport() );
+        fpsLayer.render( &painter, &d->m_viewport );
     }
 
     const qreal fps = 1000.0 / (qreal)( t.elapsed() );
@@ -927,7 +926,7 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 
         d->m_textureLayer.setMapTheme( textures, textureLayerSettings );
 
-        d->m_textureLayer.setupTextureMapper( d->m_viewParams.projection() );
+        d->m_textureLayer.setupTextureMapper( d->m_viewport.projection() );
 
         if( !mapTheme->map()->filters().isEmpty() ) {
             GeoSceneFilter *filter= mapTheme->map()->filters().first();
@@ -1172,7 +1171,7 @@ void MarbleMap::setVolatileTileCacheLimit( quint64 kilobytes )
 
 bool MarbleMap::mapCoversViewport()
 {
-    return d->m_viewParams.viewport()->mapCoversViewport();
+    return d->m_viewport.mapCoversViewport();
 }
 
 AngleUnit MarbleMap::defaultAngleUnit() const

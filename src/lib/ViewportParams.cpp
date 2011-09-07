@@ -297,6 +297,9 @@ void ViewportParams::setHeight(int newHeight)
 
 void ViewportParams::setSize(QSize newSize)
 {
+    if ( newSize == d->m_size )
+        return;
+
     d->m_dirtyBox = true;
     d->m_dirtyRegion = true;
 

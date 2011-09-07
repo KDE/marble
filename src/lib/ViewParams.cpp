@@ -12,12 +12,6 @@
 
 #include "ViewParams.h"
 
-#include <QtGui/QImage>
-
-#include "MarbleDebug.h"
-#include "AbstractProjection.h"
-#include "ViewportParams.h"
-
 namespace Marble
 {
 
@@ -26,8 +20,6 @@ class ViewParamsPrivate
 public:
     ViewParamsPrivate();
     ~ViewParamsPrivate();
-
-    ViewportParams  m_viewport;
 
     MapQuality      m_stillQuality;
     MapQuality      m_animationQuality;
@@ -48,8 +40,7 @@ public:
 };
 
 ViewParamsPrivate::ViewParamsPrivate()
-    : m_viewport(),
-      m_stillQuality( HighQuality ),
+    : m_stillQuality( HighQuality ),
       m_animationQuality( LowQuality ),
       m_viewContext( Still ),
       m_mapQuality( m_stillQuality ),
@@ -72,16 +63,6 @@ ViewParams::ViewParams()
 ViewParams::~ViewParams()
 {
     delete d;
-}
-
-ViewportParams *ViewParams::viewport()
-{
-    return &d->m_viewport;
-}
-
-Projection ViewParams::projection() const
-{
-    return d->m_viewport.projection();
 }
 
 MapQuality ViewParams::mapQuality( ViewContext viewContext ) const
@@ -125,59 +106,6 @@ void ViewParams::setViewContext( ViewContext viewContext )
         d->m_mapQuality = d->m_stillQuality;
     if ( viewContext == Animation )
         d->m_mapQuality = d->m_animationQuality;
-}
-
-const AbstractProjection *ViewParams::currentProjection() const
-{
-    return d->m_viewport.currentProjection();
-}
-
-void ViewParams::setProjection(Projection newProjection)
-{
-    d->m_viewport.setProjection( newProjection );
-}
-
-int ViewParams::radius() const
-{
-    return d->m_viewport.radius();
-}
-
-void ViewParams::setRadius(int newRadius)
-{
-    // Avoid expensive clearing of the canvas image if there is no change:
-    if ( d->m_viewport.radius() == newRadius ) return;
-
-    d->m_viewport.setRadius( newRadius );
-}
-
-Quaternion ViewParams::planetAxis() const
-{
-    return d->m_viewport.planetAxis();
-}
-
-void ViewParams::setPlanetAxis(const Quaternion &newAxis)
-{
-    d->m_viewport.setPlanetAxis( newAxis );
-}
-
-void ViewParams::centerCoordinates( qreal &centerLon, qreal &centerLat )
-{
-    d->m_viewport.centerCoordinates( centerLon, centerLat );
-}
-
-int ViewParams::width() const
-{
-    return d->m_viewport.width();
-}
-
-int ViewParams::height() const
-{
-    return d->m_viewport.height();
-}
-
-void ViewParams::setSize( int width, int height )
-{    
-    d->m_viewport.setSize( QSize( width, height ) );
 }
 
 bool ViewParams::showAtmosphere() const
