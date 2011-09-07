@@ -128,9 +128,8 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
     int  radius = viewport->radius();
 
     // Calculate translation of center point
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLon = viewport->centerLongitude();
+    const qreal centerLat = viewport->centerLatitude();
 
     qreal rad2Pixel = (float)( 2 * radius ) / M_PI;
     qreal lon, lat;
@@ -232,9 +231,8 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
     int  radius = viewport->radius();
 
     // Calculate translation of center point
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLon = viewport->centerLongitude();
+    const qreal centerLat = viewport->centerLatitude();
 
     qreal rad2Pixel = (float)( 2 * radius ) / M_PI;
     qreal lon, lat;
@@ -442,9 +440,8 @@ void VectorMap::rectangularCreatePolyLine(
     const int detail, const ViewportParams *viewport, int offset )
 {
     // Calculate translation of center point
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLon = viewport->centerLongitude();
+    const qreal centerLat = viewport->centerLatitude();
 
     // Other convenience variables
     const qreal  rad2Pixel = (float)( 2 * viewport->radius() ) / M_PI;
@@ -555,9 +552,8 @@ void VectorMap::mercatorCreatePolyLine(
         int offset )
 {
     // Calculate translation of center point
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLon = viewport->centerLongitude();
+    const qreal centerLat = viewport->centerLatitude();
 
     // Other convenience variables
     const qreal  rad2Pixel = (qreal)( 2 * viewport->radius() ) / M_PI;

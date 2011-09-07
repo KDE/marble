@@ -76,9 +76,8 @@ bool MercatorProjection::screenCoordinates( const qreal lon, const qreal _lat,
     qreal  rad2Pixel = 2 * radius / M_PI;
 
     // Calculate translation of center point
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLon = viewport->centerLongitude();
+    const qreal centerLat = viewport->centerLatitude();
 
     // Let (x, y) be the position on the screen of the placemark..
     x = ( width  / 2 + rad2Pixel * ( lon - centerLon ) );
@@ -123,10 +122,9 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
     qreal  rad2Pixel = 2 * radius / M_PI;
 
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
-    
+    const qreal centerLon = viewport->centerLongitude();
+    const qreal centerLat = viewport->centerLatitude();
+
     // Let (x, y) be the position on the screen of the placemark..
     x = ( width  / 2 + rad2Pixel * ( lon - centerLon ) );
     y = ( height / 2 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
@@ -177,9 +175,8 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
 
     qreal  rad2Pixel = 2.0 * radius / M_PI;
 
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLon = viewport->centerLongitude();
+    const qreal centerLat = viewport->centerLatitude();
 
     // Let (itX, y) be the first guess for one possible position on screen..
     qreal itX = ( width  / 2.0 + rad2Pixel * ( lon - centerLon ) );
@@ -244,9 +241,8 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
     const int radius = viewport->radius();
 
     // Calculate translation of center point
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLon = viewport->centerLongitude();
+    const qreal centerLat = viewport->centerLatitude();
 
     // Calculate how many pixel are being represented per radians.
     const float rad2Pixel = (qreal)( 2 * radius )/M_PI;
@@ -352,9 +348,7 @@ bool MercatorProjection::mapCoversViewport( const ViewportParams *viewport ) con
     int           height = viewport->height();
 
     // Calculate translation of center point
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLat = viewport->centerLatitude();
 
     // Calculate how many pixel are being represented per radians.
     const float rad2Pixel = (float)( 2 * radius )/M_PI;
@@ -375,11 +369,6 @@ QPainterPath MercatorProjection::mapShape( const ViewportParams *viewport ) cons
     //int  radius = viewport->radius();
     int  width  = viewport->width();
     int  height = viewport->height();
-
-    // Calculate translation of center point
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
 
     qreal  yTop;
     qreal  yBottom;

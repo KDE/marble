@@ -233,8 +233,8 @@ bool ViewportParams::setPlanetAxis(const Quaternion &newAxis)
 
     if ( !currentProjection()->traversablePoles() && fabs( newAxis.pitch() ) > maxLat ) {
 
-        qreal centerLon, centerLat;
-        centerCoordinates( centerLon, centerLat );
+        const qreal centerLon = centerLongitude();
+        qreal centerLat = centerLatitude();
 
         // Normalize latitude and longitude
         GeoDataPoint::normalizeLat( centerLat );
@@ -309,17 +309,28 @@ void ViewportParams::setSize(QSize newSize)
 // ================================================================
 //                        Other functions
 
-
-void ViewportParams::centerCoordinates( qreal &centerLon, qreal &centerLat ) const
+qreal ViewportParams::centerLongitude() const
 {
-    // Calculate translation of center point
-    centerLat = - d->m_planetAxis.pitch();
+    qreal centerLon = + d->m_planetAxis.yaw();
+    if ( centerLon > M_PI )
+        centerLon -= 2 * M_PI;
+
+    return centerLon;
+}
+
+qreal ViewportParams::centerLatitude() const
+{
+    qreal centerLat = - d->m_planetAxis.pitch();
     if ( centerLat > M_PI )
         centerLat -= 2 * M_PI;
 
-    centerLon = + d->m_planetAxis.yaw();
-    if ( centerLon > M_PI )
-        centerLon -= 2 * M_PI;
+    return centerLat;
+}
+
+void ViewportParams::centerCoordinates( qreal &centerLon, qreal &centerLat ) const
+{
+    centerLon = centerLongitude();
+    centerLat = centerLatitude();
 }
 
 GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const
@@ -400,8 +411,9 @@ GeoDataCoordinates ViewportParams::focusPoint() const
         return d->m_focusPoint;
     }
     else {
-       qreal lon, lat;
-       centerCoordinates(lon, lat);
+       const qreal lon = centerLongitude();
+       const qreal lat = centerLatitude();
+
        return GeoDataCoordinates(lon, lat, 0.0, GeoDataCoordinates::Radian);
     }
 

@@ -1350,11 +1350,9 @@ void MarbleWidget::downloadRegion( QString const & sourceDir, QVector<TileCoords
 GeoDataLookAt MarbleWidget::lookAt() const
 {
     GeoDataLookAt result;
-    qreal lon( 0.0 ), lat( 0.0 );
 
-    d->m_map->viewport()->centerCoordinates( lon, lat );
-    result.setLongitude( lon );
-    result.setLatitude( lat );
+    result.setLongitude( d->m_map->viewport()->centerLongitude() );
+    result.setLatitude( d->m_map->viewport()->centerLatitude() );
     result.setAltitude( 0.0 );
     result.setRange( distance() * KM2METER );
 

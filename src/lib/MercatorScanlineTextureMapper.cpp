@@ -127,8 +127,7 @@ void MercatorScanlineTextureMapper::mapTexture( const ViewportParams *viewport, 
     //mDebug() << "radius      : " << radius << endl;
 
     // Calculate translation of center point
-    qreal centerLon, centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLat = viewport->centerLatitude();
 
     const int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
 
@@ -191,8 +190,8 @@ void MercatorScanlineTextureMapper::RenderJob::run()
     const int n = ScanlineTextureMapperContext::interpolationStep( m_viewport, m_mapQuality );
 
     // Calculate translation of center point
-    qreal centerLon, centerLat;
-    m_viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLon = m_viewport->centerLongitude();
+    const qreal centerLat = m_viewport->centerLatitude();
 
     const int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
 

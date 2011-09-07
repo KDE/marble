@@ -102,9 +102,8 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
     m_tileLoader->resetTilehash();
 
     // Calculate translation of center point
-    qreal centerLon, centerLat;
-
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLon = viewport->centerLongitude();
+    const qreal centerLat = viewport->centerLatitude();
 
     const int numTilesX = m_tileLoader->tileRowCount( tileZoomLevel() );
     const int numTilesY = m_tileLoader->tileColumnCount( tileZoomLevel() );

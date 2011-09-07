@@ -135,8 +135,8 @@ bool OverviewMap::isInitialized () const
 void OverviewMap::changeViewport( ViewportParams *viewport )
 {
     GeoDataLatLonAltBox latLonAltBox = viewport->currentProjection()->latLonAltBox( QRect( QPoint( 0, 0 ), viewport->size() ), viewport );
-    qreal centerLon, centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLon = viewport->centerLongitude();
+    const qreal centerLat = viewport->centerLatitude();
     QString target = marbleModel()->planetId();
 
     if ( !( m_latLonAltBox == latLonAltBox
@@ -225,8 +225,8 @@ void OverviewMap::paintContent( GeoPainter *painter, ViewportParams *viewport,
     qreal xSouth = mapRect.height() / 2.0
                     - mapRect.height() / M_PI * m_latLonAltBox.south();
 
-    qreal lon, lat;
-    viewport->centerCoordinates( lon, lat );
+    qreal lon = viewport->centerLongitude();
+    qreal lat = viewport->centerLatitude();
     GeoDataPoint::normalizeLonLat( lon, lat );
     qreal x = mapRect.width() / 2.0 + mapRect.width() / ( 2.0 * M_PI ) * lon;
     qreal y = mapRect.height() / 2.0 - mapRect.height() / M_PI * lat;

@@ -148,8 +148,8 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         qreal gmst = siderealTime( currentDateTime );
         qreal skyRotationAngle = gmst / 12.0 * M_PI;
 
-        qreal centerLon, centerLat;
-        viewport->centerCoordinates( centerLon, centerLat );
+        const qreal centerLon = viewport->centerLongitude();
+        const qreal centerLat = viewport->centerLatitude();
 
         const Quaternion skyAxis = Quaternion::fromEuler( -centerLat , centerLon + skyRotationAngle, 0.0 );
 

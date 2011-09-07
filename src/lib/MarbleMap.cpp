@@ -415,20 +415,16 @@ int MarbleMap::tileZoomLevel() const
 qreal MarbleMap::centerLatitude() const
 {
     // Calculate translation of center point
-    qreal  centerLon;
-    qreal  centerLat;
+    const qreal centerLat = d->m_viewport.centerLatitude();
 
-    d->m_viewport.centerCoordinates( centerLon, centerLat );
     return centerLat * RAD2DEG;
 }
 
 qreal MarbleMap::centerLongitude() const
 {
     // Calculate translation of center point
-    qreal  centerLon;
-    qreal  centerLat;
+    const qreal centerLon = d->m_viewport.centerLongitude();
 
-    d->m_viewport.centerCoordinates( centerLon, centerLat );
     return centerLon * RAD2DEG;
 }
 

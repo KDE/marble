@@ -123,8 +123,7 @@ void EquirectScanlineTextureMapper::mapTexture( const ViewportParams *viewport, 
     const float rad2Pixel = (float)( 2 * radius ) / M_PI;
 
     // Calculate translation of center point
-    qreal centerLon, centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLat = viewport->centerLatitude();
 
     int yCenterOffset = (int)( centerLat * rad2Pixel );
 
@@ -186,8 +185,8 @@ void EquirectScanlineTextureMapper::RenderJob::run()
     const int n = ScanlineTextureMapperContext::interpolationStep( m_viewport, m_mapQuality );
 
     // Calculate translation of center point
-    qreal centerLon, centerLat;
-    m_viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLon = m_viewport->centerLongitude();
+    const qreal centerLat = m_viewport->centerLatitude();
 
     const int yCenterOffset = (int)( centerLat * rad2Pixel );
 

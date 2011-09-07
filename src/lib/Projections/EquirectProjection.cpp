@@ -58,9 +58,8 @@ bool EquirectProjection::screenCoordinates( const qreal lon, const qreal lat,
     qreal  height = (qreal)(viewport->height());
 
     // Calculate translation of center point
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLon = viewport->centerLongitude();
+    const qreal centerLat = viewport->centerLatitude();
 
     qreal  rad2Pixel = 2.0 * viewport->radius() / M_PI;
  
@@ -91,9 +90,8 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     qreal  lat;
     qreal  rad2Pixel = 2.0 * viewport->radius() / M_PI;
 
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLon = viewport->centerLongitude();
+    const qreal centerLat = viewport->centerLatitude();
 
     geopoint.geoCoordinates( lon, lat );
 
@@ -129,9 +127,8 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     qreal  lat;
     qreal  rad2Pixel = 2.0 * radius / M_PI;
 
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLon = viewport->centerLongitude();
+    const qreal centerLat = viewport->centerLatitude();
 
     geopoint.geoCoordinates( lon, lat );
 
@@ -199,9 +196,8 @@ bool EquirectProjection::geoCoordinates( const int x, const int y,
     const qreal pixel2Rad = M_PI / (2.0 * radius);
 
     // Get the Lat and Lon of the center point of the screen.
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLon = viewport->centerLongitude();
+    const qreal centerLat = viewport->centerLatitude();
 
     {
         const int halfImageWidth = viewport->width() / 2;
@@ -329,9 +325,7 @@ bool EquirectProjection::mapCoversViewport( const ViewportParams *viewport ) con
     int  halfImageHeight = viewport->height() / 2;
 
     // Get the Lat and Lon of the center point of the screen.
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLat = viewport->centerLatitude();
 
     // Calculate how many pixel are being represented per radians.
     const float rad2Pixel = (qreal)( 2 * radius )/M_PI;
@@ -355,9 +349,7 @@ QPainterPath EquirectProjection::mapShape( const ViewportParams *viewport ) cons
     int  height = viewport->height();
 
     // Calculate translation of center point
-    qreal  centerLon;
-    qreal  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
+    const qreal centerLat = viewport->centerLatitude();
 
     int yCenterOffset = (int)( centerLat * (qreal)( 2 * radius ) / M_PI );
     int yTop          = height / 2 - radius + yCenterOffset;

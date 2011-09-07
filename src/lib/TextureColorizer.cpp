@@ -228,9 +228,7 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
             || viewport->projection() == Mercator )
         {
             // Calculate translation of center point
-            qreal  centerLon;
-            qreal  centerLat;
-            viewport->centerCoordinates( centerLon, centerLat );
+            const qreal centerLat = viewport->centerLatitude();
 
             const float rad2Pixel = (qreal)( 2 * radius ) / M_PI;
             if ( viewport->projection() == Equirectangular ) {

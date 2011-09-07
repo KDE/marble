@@ -95,8 +95,9 @@ class MARBLE_EXPORT ViewportParams
     void setHeight(int newHeight);
     void setSize(QSize newSize);
 
-    // Other functions
-    void centerCoordinates( qreal &centerLon, qreal &centerLat ) const;
+    qreal centerLongitude() const;
+    qreal centerLatitude() const;
+    MARBLE_DEPRECATED( void centerCoordinates( qreal &centerLon, qreal &centerLat ) const );
 
     bool  mapCoversViewport() const;
 
