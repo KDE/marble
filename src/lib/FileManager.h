@@ -12,7 +12,7 @@
 #ifndef MARBLE_FILEMANAGER_H
 #define MARBLE_FILEMANAGER_H
 
-#include "GeoDataTypes.h"
+#include "GeoDataDocument.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -23,7 +23,6 @@ namespace Marble
 
 class MarbleModel;
 class FileManagerPrivate;
-class GeoDataDocument;
 class FileLoader;
 
 /**

@@ -13,7 +13,7 @@
 #define MARBLE_MARBLERUNNERMANAGER_H
 
 #include "GeoDataCoordinates.h"
-#include "GeoDataTypes.h"
+#include "GeoDataDocument.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QVector>
@@ -25,7 +25,6 @@ class QAbstractItemModel;
 namespace Marble
 {
 
-class GeoDataDocument;
 class GeoDataPlacemark;
 class MarbleModel;
 class PluginManager;

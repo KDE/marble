@@ -32,10 +32,19 @@
 
 #include "GeoDataContainer.h"
 #include "GeoDocument.h"
-#include "GeoDataTypes.h"
 
 namespace Marble
 {
+
+enum DocumentRole {
+    UnknownDocument,
+    MapDocument,
+    UserDocument,
+    TrackingDocument,
+    BookmarkDocument,
+    SearchResultDocument
+};
+
 
 class GeoDataStyle;
 class GeoDataStyleMap;

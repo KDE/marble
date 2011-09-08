@@ -12,7 +12,7 @@
 #define MARBLE_RUNNERTASK_H
 
 #include "GeoDataCoordinates.h"
-#include "GeoDataTypes.h"
+#include "GeoDataDocument.h"
 
 #include <QtCore/QRunnable>
 #include <QtCore/QString>

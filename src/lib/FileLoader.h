@@ -10,7 +10,7 @@
 #ifndef MARBLE_FILELOADER_H
 #define MARBLE_FILELOADER_H
 
-#include "GeoDataTypes.h"
+#include "GeoDataDocument.h"
 
 #include <QtCore/QThread>
 #include <QtCore/QString>
@@ -18,7 +18,6 @@
 namespace Marble
 {
 class GeoDataContainer;
-class GeoDataDocument;
 class FileLoaderPrivate;
 class MarbleModel;
 

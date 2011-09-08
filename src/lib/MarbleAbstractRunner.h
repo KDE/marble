@@ -15,7 +15,7 @@
 #include "marble_export.h"
 #include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataTypes.h"
+#include "GeoDataDocument.h"
 
 #include <QtCore/QThread>
 #include <QtCore/QVector>

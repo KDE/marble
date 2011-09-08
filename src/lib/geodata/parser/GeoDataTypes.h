@@ -23,15 +23,6 @@
 #ifndef MARBLE_GEODATATYPES_H
 #define MARBLE_GEODATATYPES_H
 
-enum DocumentRole {
-    UnknownDocument,
-    MapDocument,
-    UserDocument,
-    TrackingDocument,
-    BookmarkDocument,
-    SearchResultDocument
-};
-
 namespace Marble
 {
 
