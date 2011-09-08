@@ -37,10 +37,12 @@ void MarbleTest::timeDemo()
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveRight( Instant );
             QCoreApplication::flush();
+            m_marbleWidget->repaint();
         }
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveLeft( Instant );
             QCoreApplication::flush();
+            m_marbleWidget->repaint();
         }
 
     qDebug() << "Starting Performance Test";
@@ -52,10 +54,12 @@ void MarbleTest::timeDemo()
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveRight( Instant );
             QCoreApplication::flush();
+            m_marbleWidget->repaint();
         }
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveLeft( Instant );
             QCoreApplication::flush();
+            m_marbleWidget->repaint();
         }
     }
 
