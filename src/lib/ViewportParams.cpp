@@ -233,8 +233,8 @@ bool ViewportParams::setPlanetAxis(const Quaternion &newAxis)
 
     if ( !currentProjection()->traversablePoles() && fabs( newAxis.pitch() ) > maxLat ) {
 
-        const qreal centerLon = centerLongitude();
-        qreal centerLat = centerLatitude();
+        const qreal centerLon = newAxis.yaw();
+        qreal centerLat = - newAxis.pitch();
 
         // Normalize latitude and longitude
         GeoDataPoint::normalizeLat( centerLat );
