@@ -29,19 +29,19 @@ Quaternion::Quaternion()
 //    set( 1.0, 0.0, 0.0, 0.0 );
 }
 
-Quaternion::Quaternion(qreal w, qreal x, qreal y, qreal z) 
+Quaternion::Quaternion(qreal w, qreal x, qreal y, qreal z)
 {
-    set( w, x, y, z );
+    v[Q_W] = w;
+    v[Q_X] = x;
+    v[Q_Y] = y;
+    v[Q_Z] = z;
 }
 
-Quaternion::Quaternion(qreal lon, qreal lat)
+Quaternion Quaternion::fromSpherical(qreal lon, qreal lat)
 {
-    v[Q_W] = 0.0;
-
     const qreal  cosLat = cos(lat);
-    v[Q_X] = cosLat * sin(lon);
-    v[Q_Y] = sin(lat);
-    v[Q_Z] = cosLat * cos(lon);
+
+    return Quaternion( 0.0, cosLat * sin(lon), sin(lat), cosLat * cos(lon) );
 }
 
 void Quaternion::getSpherical(qreal &lon, qreal &lat) const 
@@ -145,7 +145,8 @@ Quaternion& Quaternion::operator*=(const Quaternion &q)
     y = v[Q_W] * q.v[Q_Y] - v[Q_X] * q.v[Q_Z] + v[Q_Y] * q.v[Q_W] + v[Q_Z] * q.v[Q_X];
     z = v[Q_W] * q.v[Q_Z] + v[Q_X] * q.v[Q_Y] - v[Q_Y] * q.v[Q_X] + v[Q_Z] * q.v[Q_W];
 
-    set( w, x, y, z );
+    (*this) = Quaternion( w, x, y, z );
+
     return *this;
 }
 

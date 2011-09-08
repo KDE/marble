@@ -162,7 +162,7 @@ void SphericalScanlineTextureMapper::RenderJob::run()
     const int n = ScanlineTextureMapperContext::interpolationStep( m_viewport, m_mapQuality );
 
     // Calculate north pole position to decrease pole distortion later on
-    Quaternion northPole( 0.0, (qreal)( M_PI * 0.5 ) );
+    Quaternion northPole = Quaternion::fromSpherical( 0.0, M_PI * 0.5 );
     northPole.rotateAroundAxis( m_viewport->planetAxis().inverse() );
     const int northPoleX = imageWidth / 2 + (int)( radius * northPole.v[Q_X] );
     const int northPoleY = imageHeight / 2 - (int)( radius * northPole.v[Q_Y] );

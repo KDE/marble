@@ -44,20 +44,19 @@ class MARBLE_EXPORT Quaternion
  public:
     Quaternion();
     Quaternion(qreal w, qreal x, qreal y, qreal z);
+
     /*!\brief used to generate Quaternion from longitude and latitude
      * 
      * \param lon longitude
      * \param lat latitude
      */
-    Quaternion(qreal lon, qreal lat);
+    static Quaternion   fromSpherical(qreal lon, qreal lat);
+    static Quaternion   fromEuler(qreal pitch, qreal yaw, qreal roll);
 
     // Operators
     Quaternion  operator*(const Quaternion &q) const;
     bool        operator==(const Quaternion &q) const;
     Quaternion& operator*=(const Quaternion &q);
-
-    void        set(qreal w, qreal x, qreal y, qreal z);
-    void        set(qreal lon, qreal lat);
 
     void        getSpherical(qreal &lon, qreal &lat) const;
 
@@ -65,7 +64,6 @@ class MARBLE_EXPORT Quaternion
 
     Quaternion  inverse() const;
 
-    static Quaternion   fromEuler(qreal pitch, qreal yaw, qreal roll);
     qreal       pitch() const;
     qreal       yaw() const;
     qreal       roll() const;
@@ -86,23 +84,6 @@ class MARBLE_EXPORT Quaternion
     // TODO: Better add accessors...
     xmmfloat    v;
 };
-
-inline void Quaternion::set( qreal w, qreal x, qreal y, qreal z )
-{
-    v[Q_W] = w;
-    v[Q_X] = x;
-    v[Q_Y] = y;
-    v[Q_Z] = z;
-}
-
-inline void Quaternion::set( qreal lon, qreal lat )
-{
-    v[Q_W] = 0.0;
-    const qreal cosLat = cos( lat );
-    v[Q_X] = cosLat * sin( lon );
-    v[Q_Y] = sin( lat );
-    v[Q_Z] = cosLat * cos( lon );
-}
 
 }
 

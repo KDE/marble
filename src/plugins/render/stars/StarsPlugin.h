@@ -38,7 +38,7 @@ class StarPoint
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
     StarPoint(qreal rect, qreal decl, qreal mag) {
-        m_q = Quaternion( rect, decl );
+        m_q = Quaternion::fromSpherical( rect, decl );
         m_mag = mag;
     }
 

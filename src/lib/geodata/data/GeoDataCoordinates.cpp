@@ -102,12 +102,12 @@ void GeoDataCoordinates::set( qreal _lon, qreal _lat, qreal _alt, GeoDataCoordin
     switch( unit ){
     default:
     case Radian:
-        d->m_q = Quaternion( _lon, _lat );
+        d->m_q = Quaternion::fromSpherical( _lon, _lat );
         d->m_lon = _lon;
         d->m_lat = _lat;
         break;
     case Degree:
-        d->m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
+        d->m_q = Quaternion::fromSpherical( _lon * DEG2RAD , _lat * DEG2RAD  );
         d->m_lon = _lon * DEG2RAD;
         d->m_lat = _lat * DEG2RAD;
         break;
@@ -123,11 +123,11 @@ void GeoDataCoordinates::setLongitude( qreal _lon, GeoDataCoordinates::Unit unit
     switch( unit ){
     default:
     case Radian:
-        d->m_q = Quaternion( _lon, d->m_lat );
+        d->m_q = Quaternion::fromSpherical( _lon, d->m_lat );
         d->m_lon = _lon;
         break;
     case Degree:
-        d->m_q = Quaternion( _lon * DEG2RAD , d->m_lat  );
+        d->m_q = Quaternion::fromSpherical( _lon * DEG2RAD , d->m_lat  );
         d->m_lon = _lon * DEG2RAD;
         break;
     }
@@ -142,11 +142,11 @@ void GeoDataCoordinates::setLatitude( qreal _lat, GeoDataCoordinates::Unit unit 
     detach();
     switch( unit ){
     case Radian:
-        d->m_q = Quaternion( d->m_lon, _lat );
+        d->m_q = Quaternion::fromSpherical( d->m_lon, _lat );
         d->m_lat = _lat;
         break;
     case Degree:
-        d->m_q = Quaternion( d->m_lon, _lat * DEG2RAD   );
+        d->m_q = Quaternion::fromSpherical( d->m_lon, _lat * DEG2RAD   );
         d->m_lat = _lat * DEG2RAD;
         break;
     }
@@ -829,7 +829,7 @@ void GeoDataCoordinates::unpack( QDataStream& stream )
     stream >> d->m_lat;
     stream >> d->m_altitude;
 
-    d->m_q.set( d->m_lon, d->m_lat );
+    d->m_q = Quaternion::fromSpherical( d->m_lon, d->m_lat );
 }
 
 }

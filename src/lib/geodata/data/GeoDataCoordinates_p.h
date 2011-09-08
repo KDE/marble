@@ -53,12 +53,12 @@ class GeoDataCoordinatesPrivate
         switch( unit ){
         default:
         case GeoDataCoordinates::Radian:
-            m_q = Quaternion( _lon, _lat );
+            m_q = Quaternion::fromSpherical( _lon, _lat );
             m_lon = _lon;
             m_lat = _lat;
             break;
         case GeoDataCoordinates::Degree:
-            m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
+            m_q = Quaternion::fromSpherical( _lon * DEG2RAD , _lat * DEG2RAD  );
             m_lon = _lon * DEG2RAD;
             m_lat = _lat * DEG2RAD;
             break;
@@ -70,13 +70,13 @@ class GeoDataCoordinatesPrivate
     * initialize the reference with the value of the other
     */
     GeoDataCoordinatesPrivate( const GeoDataCoordinatesPrivate &other )
-        : m_lon( other.m_lon ),
+        : m_q( Quaternion::fromSpherical( other.m_lon, other.m_lat ) ),
+          m_lon( other.m_lon ),
           m_lat( other.m_lat ),
           m_altitude( other.m_altitude ),
           m_detail( other.m_detail ),
           ref( 0 )
     {
-        m_q.set( m_lon, m_lat );
     }
 
     /*
@@ -88,7 +88,7 @@ class GeoDataCoordinatesPrivate
         m_lat = other.m_lat;
         m_altitude = other.m_altitude;
         m_detail = other.m_detail;
-        m_q.set( m_lon, m_lat );
+        m_q = other.m_q;
         ref = 0;
         return *this;
     }

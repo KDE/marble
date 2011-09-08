@@ -66,7 +66,7 @@ bool SphericalProjection::screenCoordinates( const qreal lon, const qreal lat,
                                              const ViewportParams *viewport,
                                              qreal& x, qreal& y ) const
 {
-    Quaternion  p( lon, lat );
+    Quaternion p = Quaternion::fromSpherical( lon, lat );
     p.rotateAroundAxis( viewport->planetAxis().inverse() );
  
     x = ( viewport->width()  / 2 + (qreal)( viewport->radius() ) * p.v[Q_X] );
