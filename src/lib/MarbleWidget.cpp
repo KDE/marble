@@ -332,12 +332,6 @@ MarbleWidgetInputHandler *MarbleWidget::inputHandler() const
   return d->m_inputhandler;
 }
 
-Quaternion MarbleWidget::planetAxis() const
-{
-    return viewport()->planetAxis();
-}
-
-
 int MarbleWidget::radius() const
 {
     return d->m_map->radius();
@@ -628,7 +622,7 @@ void MarbleWidget::rotateBy( const qreal deltaLon, const qreal deltaLat, FlyToMo
     Quaternion  rotPhi( 1.0, deltaLat / 180.0, 0.0, 0.0 );
     Quaternion  rotTheta( 1.0, 0.0, deltaLon / 180.0, 0.0 );
 
-    Quaternion  axis = planetAxis();
+    Quaternion  axis = d->m_map->viewport()->planetAxis();
     qreal lon( 0.0 ), lat( 0.0 );
     axis.getSpherical( lon, lat );
     axis = rotTheta * axis;

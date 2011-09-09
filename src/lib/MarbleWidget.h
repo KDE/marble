@@ -25,7 +25,6 @@
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataLookAt.h"
-#include "Quaternion.h"
 #include "global.h"             // types needed in all of marble.
 #include "marble_export.h"
 #include "GeoDataFolder.h"
@@ -49,6 +48,7 @@ class MarbleWidgetPopupMenu;
 class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
 class MeasureTool;
+class Quaternion;
 class RenderPlugin;
 class RoutingLayer;
 class TextureLayer;
@@ -374,12 +374,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return The move step.
      */
     qreal moveStep();
-
-    /**
-     * @brief  Return the quaternion that specifies the rotation of the globe.
-     * @return The quaternion that describes the rotation of the globe.
-     */
-    Quaternion planetAxis() const;
 
     /**
     * @brief Return the lookAt

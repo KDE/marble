@@ -30,7 +30,6 @@
 
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"       // In geodata/data/
-#include "Quaternion.h"
 
 // Qt
 class QAbstractItemModel;
@@ -49,6 +48,7 @@ class MarbleModel;
 class ViewportParams;
 class GeoPainter;
 class LayerInterface;
+class Quaternion;
 class RenderPlugin;
 class AbstractDataPlugin;
 class AbstractDataPluginItem;
@@ -207,12 +207,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     qreal centerLatitude() const;
 
     QVector<const GeoDataPlacemark*> whichFeatureAt( const QPoint& ) const;
-
-    /**
-     * @brief  Return the quaternion that specifies the rotation of the globe.
-     * @return The quaternion that describes the rotation of the globe.
-     */
-    Quaternion planetAxis() const;
 
     /**
      * @brief  Return the property value by name.

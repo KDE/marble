@@ -369,12 +369,6 @@ int  MarbleMap::height() const
     return d->m_viewport.height();
 }
 
-Quaternion MarbleMap::planetAxis() const
-{
-    return d->m_viewport.planetAxis();
-}
-
-
 int MarbleMap::radius() const
 {
     return d->m_viewport.radius();
