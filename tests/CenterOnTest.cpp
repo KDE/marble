@@ -47,6 +47,12 @@ class CenterOnTest : public QObject
 
     void testMercator_data();
     void testMercator();
+
+    void testMercatorMinLat_data();
+    void testMercatorMinLat();
+
+    void testMercatorMaxLat_data();
+    void testMercatorMaxLat();
 };
 
 void CenterOnTest::testSphericalEquirectangular_data()
@@ -132,48 +138,25 @@ void CenterOnTest::testMercator_data()
 {
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
-    QTest::addColumn<qreal>( "expectedLat" );
 
-    addRow() << 0.0 << 0.0 << 0.0;
+    addRow() << 0.0 << 0.0;
 
-    addRow() << -180.0 << 0.0 << 0.0;
-    addRow() <<  -90.0 << 0.0 << 0.0;
-    addRow() <<   90.0 << 0.0 << 0.0;
-    addRow() <<  180.0 << 0.0 << 0.0;
+    addRow() << -180.0 << 0.0;
+    addRow() <<  -90.0 << 0.0;
+    addRow() <<   90.0 << 0.0;
+    addRow() <<  180.0 << 0.0;
 
-    addRow() << -180.0 << -85.0511 << -85.0511;
-    addRow() << -180.0 <<  85.0511 <<  85.0511;
-    addRow() <<  -90.0 << -85.0511 << -85.0511;
-    addRow() <<  -90.0 <<  85.0511 <<  85.0511;
-    addRow() <<    0.0 << -85.0511 << -85.0511;
-    addRow() <<    0.0 <<  85.0511 <<  85.0511;
-    addRow() <<   90.0 << -85.0511 << -85.0511;
-    addRow() <<   90.0 <<  85.0511 <<  85.0511;
-    addRow() <<  180.0 << -85.0511 << -85.0511;
-    addRow() <<  180.0 <<  85.0511 <<  85.0511;
+    addRow() << -180.0 << -85.0511;
+    addRow() <<  -90.0 << -85.0511;
+    addRow() <<    0.0 << -85.0511;
+    addRow() <<   90.0 << -85.0511;
+    addRow() <<  180.0 << -85.0511;
 
-    // clip to maxLat/minLat respectively
-    addRow() << -180.0 << -87.0 << -85.0511;
-    addRow() << -180.0 <<  87.0 <<  85.0511;
-    addRow() <<  -90.0 << -87.0 << -85.0511;
-    addRow() <<  -90.0 <<  87.0 <<  85.0511;
-    addRow() <<    0.0 << -87.0 << -85.0511;
-    addRow() <<    0.0 <<  87.0 <<  85.0511;
-    addRow() <<   90.0 << -87.0 << -85.0511;
-    addRow() <<   90.0 <<  87.0 <<  85.0511;
-    addRow() <<  180.0 << -87.0 << -85.0511;
-    addRow() <<  180.0 <<  87.0 <<  85.0511;
-
-    addRow() << -180.0 << -90.0 << -85.0511;
-    addRow() << -180.0 <<  90.0 <<  85.0511;
-    addRow() <<  -90.0 << -90.0 << -85.0511;
-    addRow() <<  -90.0 <<  90.0 <<  85.0511;
-    addRow() <<    0.0 << -90.0 << -85.0511;
-    addRow() <<    0.0 <<  90.0 <<  85.0511;
-    addRow() <<   90.0 << -90.0 << -85.0511;
-    addRow() <<   90.0 <<  90.0 <<  85.0511;
-    addRow() <<  180.0 << -90.0 << -85.0511;
-    addRow() <<  180.0 <<  90.0 <<  85.0511;
+    addRow() << -180.0 << 85.0511;
+    addRow() <<  -90.0 << 85.0511;
+    addRow() <<    0.0 << 85.0511;
+    addRow() <<   90.0 << 85.0511;
+    addRow() <<  180.0 << 85.0511;
 }
 
 void CenterOnTest::testMercator()
@@ -184,11 +167,77 @@ void CenterOnTest::testMercator()
 
     QFETCH( qreal, lon );
     QFETCH( qreal, lat );
-    QFETCH( qreal, expectedLat );
 
     map.centerOn( lon, lat );
+
     QFUZZYCOMPARE( map.centerLongitude(), lon, 0.0001 );
-    QFUZZYCOMPARE( map.centerLatitude(), expectedLat, 0.0001 );
+    QFUZZYCOMPARE( map.centerLatitude(), lat, 0.0001 );
+}
+
+void CenterOnTest::testMercatorMinLat_data()
+{
+    QTest::addColumn<qreal>( "lon" );
+    QTest::addColumn<qreal>( "lat" );
+
+    addRow() << -180.0 << -87.0;
+    addRow() <<  -90.0 << -87.0;
+    addRow() <<    0.0 << -87.0;
+    addRow() <<   90.0 << -87.0;
+    addRow() <<  180.0 << -87.0;
+
+    addRow() << -180.0 << -90.0;
+    addRow() <<  -90.0 << -90.0;
+    addRow() <<    0.0 << -90.0;
+    addRow() <<   90.0 << -90.0;
+    addRow() <<  180.0 << -90.0;
+}
+
+void CenterOnTest::testMercatorMinLat()
+{
+    MarbleMap map;
+
+    map.setProjection( Mercator );
+
+    QFETCH( qreal, lon );
+    QFETCH( qreal, lat );
+
+    map.centerOn( lon, lat );
+
+    QFUZZYCOMPARE( map.centerLongitude(), lon, 0.0001 );
+    QFUZZYCOMPARE( map.centerLatitude(), -85.0511, 0.0001 ); // clip to minLat
+}
+
+void CenterOnTest::testMercatorMaxLat_data()
+{
+    QTest::addColumn<qreal>( "lon" );
+    QTest::addColumn<qreal>( "lat" );
+
+    addRow() << -180.0 << 87.0;
+    addRow() <<  -90.0 << 87.0;
+    addRow() <<    0.0 << 87.0;
+    addRow() <<   90.0 << 87.0;
+    addRow() <<  180.0 << 87.0;
+
+    addRow() << -180.0 << 90.0;
+    addRow() <<  -90.0 << 90.0;
+    addRow() <<    0.0 << 90.0;
+    addRow() <<   90.0 << 90.0;
+    addRow() <<  180.0 << 90.0;
+}
+
+void CenterOnTest::testMercatorMaxLat()
+{
+    MarbleMap map;
+
+    map.setProjection( Mercator );
+
+    QFETCH( qreal, lon );
+    QFETCH( qreal, lat );
+
+    map.centerOn( lon, lat );
+
+    QFUZZYCOMPARE( map.centerLongitude(), lon, 0.0001 );
+    QFUZZYCOMPARE( map.centerLatitude(), 85.0511, 0.0001 ); // clip to maxLat
 }
 
 }
