@@ -19,8 +19,13 @@ using namespace Marble;
 MarbleClock::MarbleClock()
     : QObject(),
       m_speed( 1 ),
+#if QT_VERSION < 0x040700	
+      m_datetime( QDateTime::currentDateTime().toUTC() ),
+      m_lasttime( QDateTime::currentDateTime().toUTC() ),
+#else      
       m_datetime( QDateTime::currentDateTimeUtc() ),
       m_lasttime( QDateTime::currentDateTimeUtc() ),
+#endif
       m_timezoneInSec( 0 )
 {
 
@@ -51,8 +56,13 @@ qreal MarbleClock::dayFraction() const
 void MarbleClock::timerTimeout()
 {
     // calculate real period elapsed since last call
+#if QT_VERSION < 0x040700	
+    QDateTime m_curenttime( QDateTime::currentDateTime().toUTC() );
+    int msecdelta = 1000 * m_lasttime.secsTo( m_curenttime );
+#else
     QDateTime m_curenttime( QDateTime::currentDateTimeUtc() );
     int msecdelta = m_lasttime.msecsTo( m_curenttime );
+#endif
     m_lasttime = m_curenttime;
 
     // update m_datetime at m_speed pace
