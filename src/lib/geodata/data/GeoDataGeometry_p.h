@@ -42,7 +42,7 @@ class GeoDataGeometryPrivate
     {
     }
 
-    void operator=( GeoDataGeometryPrivate &other )
+    void operator=( const GeoDataGeometryPrivate &other )
     {
         m_extrude = other.m_extrude;
         m_altitudeMode = other.m_altitudeMode;

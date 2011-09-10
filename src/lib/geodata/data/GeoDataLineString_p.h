@@ -39,6 +39,22 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     qDeleteAll(m_rangeCorrected);
     }
 
+    void operator=( const GeoDataLineStringPrivate &other)
+    {
+        GeoDataGeometryPrivate::operator=( other );
+        m_vector = other.m_vector;
+        qDeleteAll( m_rangeCorrected );
+        foreach( GeoDataLineString *lineString, other.m_rangeCorrected )
+        {
+            m_rangeCorrected.append( new GeoDataLineString( *lineString ) );
+        }
+        m_dirtyRange = other.m_dirtyRange;
+        m_latLonAltBox = other.m_latLonAltBox;
+        m_dirtyBox = other.m_dirtyBox;
+        m_tessellationFlags = other.m_tessellationFlags;
+    }
+
+
     virtual GeoDataGeometryPrivate* copy()
     { 
         GeoDataLineStringPrivate* copy = new GeoDataLineStringPrivate;

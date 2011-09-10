@@ -12,6 +12,7 @@
 #include <QtTest/QtTest>
 
 #include "GeoDataPoint.h"
+#include "GeoDataLinearRing.h"
 
 using namespace Marble;
 
@@ -22,6 +23,9 @@ class TestGeoDataGeometry : public QObject
 private slots:
     void downcastPointTest_data();
     void downcastPointTest();
+    void deleteAndDetachTest1();
+    void deleteAndDetachTest2();
+    void deleteAndDetachTest3();
 };
 
 void TestGeoDataGeometry::downcastPointTest_data()
@@ -42,10 +46,46 @@ void TestGeoDataGeometry::downcastPointTest()
 
     QVERIFY( ! point.toString().isEmpty() );
 
-    GeoDataGeometry tmpGeometry( point );
-    GeoDataPoint newPoint( tmpGeometry );
+    GeoDataCoordinates tmp( point );
+    GeoDataPoint newPoint( tmp );
 
     QCOMPARE( newPoint.toString() , point.toString());
+}
+
+/**
+ * Test passes if the program does not crash
+ */
+void TestGeoDataGeometry::deleteAndDetachTest1()
+{
+    GeoDataLineString line1;
+    line1 << GeoDataCoordinates();
+    line1.toRangeCorrected();
+    GeoDataLineString line2 = line1;
+    line2 << GeoDataCoordinates();
+}
+
+/**
+ * Test passes if the program does not crash
+ */
+void TestGeoDataGeometry::deleteAndDetachTest2()
+{
+    GeoDataLineString line1;
+    line1 << GeoDataCoordinates();
+    GeoDataLineString line2 = line1;
+    line1.toRangeCorrected();
+    line2 << GeoDataCoordinates();
+}
+
+/**
+ * Test passes if the program does not crash
+ */
+void TestGeoDataGeometry::deleteAndDetachTest3()
+{
+    GeoDataLineString line1;
+    line1 << GeoDataCoordinates();
+    GeoDataLineString line2 = line1;
+    line2.toRangeCorrected();
+    line2 << GeoDataCoordinates();
 }
 
 QTEST_MAIN( TestGeoDataGeometry )
