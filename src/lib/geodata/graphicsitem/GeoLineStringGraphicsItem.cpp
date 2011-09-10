@@ -17,23 +17,17 @@
 namespace Marble
 {
 
-GeoLineStringGraphicsItem::GeoLineStringGraphicsItem()
-        : GeoGraphicsItem()
+GeoLineStringGraphicsItem::GeoLineStringGraphicsItem( GeoDataLineString* lineString )
+        : GeoGraphicsItem(),
+          m_lineString( lineString )
 {
 }
 
-void GeoLineStringGraphicsItem::setLineString( const GeoDataLineString& lineString )
+void GeoLineStringGraphicsItem::setLineString( GeoDataLineString* lineString )
 {
-    m_lineString = GeoDataLineString( lineString );
-    setCoordinate( lineString.latLonAltBox().center() );
-    setLatLonAltBox( lineString.latLonAltBox() );
-}
-
-void GeoLineStringGraphicsItem::append( const GeoDataCoordinates& coordinates )
-{
-    m_lineString.append( coordinates );
-    setCoordinate( m_lineString.latLonAltBox().center() );
-    setLatLonAltBox( m_lineString.latLonAltBox() );
+    m_lineString = lineString;
+    setCoordinate( lineString->latLonAltBox().center() );
+    setLatLonAltBox( lineString->latLonAltBox() );
 }
 
 void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
@@ -46,7 +40,7 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* view
     {
         painter->save();
         painter->setPen( QPen() );
-        painter->drawPolyline( m_lineString );
+        painter->drawPolyline( *m_lineString );
         painter->restore();
         return;
     }
@@ -94,10 +88,10 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* view
         bgPen.setStyle( Qt::SolidLine );
         bgPen.setCapStyle( Qt::RoundCap );
         painter->setPen( bgPen );
-        painter->drawPolyline( m_lineString );
+        painter->drawPolyline( *m_lineString );
         painter->restore();
     }
-    painter->drawPolyline( m_lineString );
+    painter->drawPolyline( *m_lineString );
     painter->restore();
 }
 

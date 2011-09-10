@@ -173,12 +173,16 @@ qreal PositionTracking::direction() const
 
 bool PositionTracking::trackVisible() const
 {
-    return d->m_document->isVisible();
+    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(d->m_document->child(d->m_document->size()-1));
+    return placemark->isVisible();
 }
 
 void PositionTracking::setTrackVisible( bool visible )
 {
-    d->m_document->setVisible( visible );
+    d->m_marbleModel->treeModel()->removeDocument(d->m_document);
+    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(d->m_document->child(d->m_document->size()-1));
+    placemark->setVisible( visible );
+    d->m_marbleModel->treeModel()->addDocument(d->m_document);
 }
 
 bool PositionTracking::saveTrack(QString& fileName)

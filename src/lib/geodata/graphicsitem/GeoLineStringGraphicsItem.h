@@ -21,16 +21,15 @@ class GeoDataLineStyle;
 class MARBLE_EXPORT GeoLineStringGraphicsItem : public GeoGraphicsItem
 {
 public:
-    GeoLineStringGraphicsItem();
+    GeoLineStringGraphicsItem( GeoDataLineString *lineString );
 
-    void setLineString( const GeoDataLineString& lineString );
-    void append( const GeoDataCoordinates& coordinates );
+    void setLineString( GeoDataLineString* lineString );
 
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );
 
 protected:
-    GeoDataLineString m_lineString;
+    GeoDataLineString *m_lineString;
 };
 
 }

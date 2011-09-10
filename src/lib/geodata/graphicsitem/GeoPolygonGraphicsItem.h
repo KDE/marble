@@ -20,15 +20,15 @@ namespace Marble
 class MARBLE_EXPORT GeoPolygonGraphicsItem : public GeoGraphicsItem
 {
 public:
-    GeoPolygonGraphicsItem();
+    GeoPolygonGraphicsItem( GeoDataPolygon* polygon );
 
-    void setPolygon( const GeoDataPolygon& polygon );
+    void setPolygon( GeoDataPolygon* polygon );
 
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );
 
 protected:
-    GeoDataPolygon m_polygon;
+    GeoDataPolygon *m_polygon;
 };
 
 }

@@ -16,16 +16,17 @@
 namespace Marble
 {
 
-GeoPolygonGraphicsItem::GeoPolygonGraphicsItem()
-        : GeoGraphicsItem()
+GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( GeoDataPolygon* polygon )
+        : GeoGraphicsItem(),
+          m_polygon( polygon )
 {
 }
 
-void GeoPolygonGraphicsItem::setPolygon( const GeoDataPolygon& polygon )
+void GeoPolygonGraphicsItem::setPolygon( GeoDataPolygon* polygon )
 {
-    m_polygon = GeoDataPolygon( polygon );
-    setCoordinate( m_polygon.latLonAltBox().center() );
-    setLatLonAltBox( m_polygon.latLonAltBox() );
+    m_polygon = polygon;
+    setCoordinate( m_polygon->latLonAltBox().center() );
+    setLatLonAltBox( m_polygon->latLonAltBox() );
 }
 
 void GeoPolygonGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
@@ -39,7 +40,7 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewpor
     {
         painter->save();
         painter->setPen( QPen() );
-        painter->drawPolygon( m_polygon );
+        painter->drawPolygon( *m_polygon );
         painter->restore();
         return;
     }
@@ -89,7 +90,7 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewpor
         }
     }
 
-    painter->drawPolygon( m_polygon );
+    painter->drawPolygon( *m_polygon );
     painter->restore();
 }
 
