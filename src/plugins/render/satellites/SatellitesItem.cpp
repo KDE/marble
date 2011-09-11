@@ -111,7 +111,15 @@ double SatellitesItem::timeSinceEpoch()
     QDateTime time = QDateTime( QDate( year, month, day ),
                                 QTime( hours, minutes, (int)seconds, (int)( seconds / 1000.0 ) ),
                                 Qt::UTC );
-    return (double)( QDateTime::currentMSecsSinceEpoch() - time.toMSecsSinceEpoch() ) / ( 1000.0 * 60.0 );
+    //TODO: use MarbleClock
+    #if QT_VERSION < 0x040700
+    qint64 currentTimestamp = QDateTime::currentDateTime().toTime_t() * 1000;
+    qint64 epochTimestamp = time.toTime_t() * 1000;
+    #else
+    qint64 currentTimestamp = QDateTime::currentMSecsSinceEpoch();
+    qint64 epochTimestamp = time.toMSecsSinceEpoch();
+    #endif
+    return (double)( currentTimestamp - epochTimestamp ) / ( 1000.0 * 60.0 );
 }
 
 double SatellitesItem::period()
