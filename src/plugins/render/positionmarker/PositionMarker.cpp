@@ -48,15 +48,8 @@ PositionMarker::PositionMarker ()
       m_aboutDialog( 0 ),
       m_configDialog( 0 ),
       m_settings(),
-      m_visibleTrailPoints( 0 ),
       m_showTrail ( false )
 {
-    // Create list of rects for trail with increasing size.
-    // Last element is not drawn, it only stores the next position.
-    GeoDataCoordinates coordinates;
-    for( int i = 0; i < sm_numTrailPoints + 1; ++i ) {
-        m_trail.push_back( coordinates );
-    }
     connect( this, SIGNAL( settingsChanged( QString ) ),
              this, SLOT( updateSettings() ) );
 }
@@ -228,18 +221,9 @@ void PositionMarker::update()
             m_dirtyRegion += ( m_previousArrow.boundingRect().toRect() );
 
             // Check if position has changed.
-            if( !( m_currentPosition == m_trail[sm_numTrailPoints] ) ) {
-                // Move trail forward and add new point.
-                for( int i = 0;  i < sm_numTrailPoints; ++i ) {
-                    m_trail[i] = m_trail[i + 1];
-                }
-                m_trail[sm_numTrailPoints] = m_currentPosition;
-                if( m_visibleTrailPoints == 0 ) {
-                    m_trail[sm_numTrailPoints - 1] = m_trail[sm_numTrailPoints];
-                }
-                if( m_visibleTrailPoints < sm_numTrailPoints ) {
-                    ++m_visibleTrailPoints;
-                }
+            m_trail.push_front( m_currentPosition );
+            for( int i = sm_numTrailPoints + 1; i< m_trail.size(); ++i ) {
+                    m_trail.pop_back();
             }
         }
     }
@@ -284,10 +268,11 @@ bool PositionMarker::render( GeoPainter *painter,
             QRectF trailRect;
             QPointF trailPoint;
             float opacity = 1.0;
-            for( int i = sm_numTrailPoints - 1; i >= 0 && i >= sm_numTrailPoints - m_visibleTrailPoints; --i ) {
+            // we don't draw m_trail[0] which is current position
+            for( int i = 1; i < m_trail.size(); ++i ) {
                 // Get screen coordinates from coordinates on the map.
                 m_viewport->currentProjection()->screenCoordinates( m_trail[i], m_viewport, trailPoint );
-                int size = ( i + 1 ) * 5;
+                int size = ( sm_numTrailPoints - i ) * 3;
                 trailRect.setX( trailPoint.x() - size / 2.0 );
                 trailRect.setY( trailPoint.y() - size / 2.0 );
                 trailRect.setWidth( size );

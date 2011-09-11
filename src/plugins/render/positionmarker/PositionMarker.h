@@ -119,8 +119,7 @@ class PositionMarker  : public RenderPlugin
     QColor              m_trailColor;
     qreal               m_heading;
     QVector<GeoDataCoordinates> m_trail;
-    static const int    sm_numTrailPoints = 5;
-    int                 m_visibleTrailPoints;
+    static const int    sm_numTrailPoints = 6;
     bool                m_showTrail;
 
     static const int sm_defaultSizeStep;
