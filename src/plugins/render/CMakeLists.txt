@@ -28,6 +28,7 @@ add_subdirectory( navigation )
 # add_subdirectory( fileview )
 
 add_subdirectory( routing )
+add_subdirectory( gpsinfo )
 
 # FIXME: The inhibit-screensaver plugin stresses the term render plugin a bit far.
 # It should be moved to a new plugin type later.
