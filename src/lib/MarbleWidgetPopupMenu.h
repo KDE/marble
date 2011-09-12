@@ -59,7 +59,7 @@ Q_SIGNALS:
 
  protected Q_SLOTS:
     void slotInfoDialog();
-    void slotShowOrbit();
+    void slotShowOrbit( bool show );
     void slotTrackPlacemark();
     void slotSetHomePoint();
     void slotCopyCoordinates();

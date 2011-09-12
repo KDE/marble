@@ -127,6 +127,19 @@ class GEODATA_EXPORT GeoDataCoordinates
                                                                 const;
 
     /**
+    * @brief use this function to get the longitude, latitude and altitude
+    * with one call - use the unit parameter to switch between Radian and DMS
+    * @param lon longitude
+    * @param lat latitude
+    * @param alt altitude in meters
+    * @param unit units that lon and lat get measured in
+    * (default for Radian: north pole at pi/2, southpole at -pi/2)
+    */
+    void geoCoordinates( qreal& lon, qreal& lat, qreal& alt,
+                         GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian )
+                                                                const;
+
+    /**
     * @brief set the longitude in a GeoDataCoordinates object
     * @param _lon longitude
     * @param _unit units that lon and lat get measured in

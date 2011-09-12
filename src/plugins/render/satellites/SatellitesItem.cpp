@@ -17,6 +17,7 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataStyle.h"
 
 #include "sgp4/sgp4ext.h"
 
@@ -35,7 +36,9 @@ using namespace Marble;
 
 SatellitesItem::SatellitesItem( const QString &name, elsetrec satrec )
     : TrackerPluginItem( name ),
-      m_satrec( satrec )
+      m_showOrbit( false ),
+      m_satrec( satrec ),
+      m_orbit( new GeoDataLineString() )
 {
     double tumin, mu, xke, j2, j3, j4, j3oj2;
     double radiusearthkm;
@@ -45,6 +48,17 @@ SatellitesItem::SatellitesItem( const QString &name, elsetrec satrec )
     setDescription();
 
     placemark()->setVisualCategory( GeoDataFeature::Satellite );
+
+    m_point = new GeoDataPoint( *static_cast<GeoDataPoint *>( placemark()->geometry() ) );
+    GeoDataMultiGeometry *multiGeometry = new GeoDataMultiGeometry();
+    multiGeometry->append( m_point );
+    multiGeometry->append( m_orbit );
+    placemark()->setGeometry( multiGeometry );
+
+    GeoDataStyle *style = new GeoDataStyle( *placemark()->style() );
+    placemark()->setStyle( style );
+    placemark()->style()->lineStyle().setColor( oxygenBrickRed4 );
+    placemark()->style()->lineStyle().setPenStyle( Qt::NoPen );
 }
 
 void SatellitesItem::setDescription()
@@ -62,30 +76,6 @@ void SatellitesItem::setDescription()
      placemark()->setDescription( description );
 }
 
-void SatellitesItem::render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer )
-{
-    Q_UNUSED( viewport );
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
-
-    painter->save();
-
-    double r[3], v[3];
-    GeoDataLineString orbit;
-    double startTime = timeSinceEpoch();
-    double endTime = startTime + period() + 1;
-    for ( int i = startTime; i < endTime; i++ ) {
-        sgp4( wgs84, m_satrec, i, r, v );
-        orbit << fromTEME( r[0], r[1], r[2], gmst( i ) );
-    }
-
-    painter->setPen( oxygenBrickRed4 );
-    painter->setBrush( Qt::NoBrush );
-    painter->drawPolyline( orbit );
-
-    painter->restore();
-}
-
 void SatellitesItem::update()
 {
     double r[3], v[3];
@@ -97,7 +87,19 @@ void SatellitesItem::update()
         return;
     }
 
-    placemark()->setCoordinate( fromTEME( r[0], r[1], r[2], gmst( t ) ) );
+    double lon, lat, alt;
+    fromTEME( r[0], r[1], r[2], gmst( t ) ).geoCoordinates( lon, lat, alt );
+    m_point->set( lon, lat, alt );
+
+    if ( placemark()->style()->lineStyle().penStyle() != Qt::NoPen ) {
+        m_orbit->clear();
+        double startTime = timeSinceEpoch();
+        double endTime = startTime + period() + 1;
+        for ( int i = startTime; i < endTime; i++ ) {
+            sgp4( wgs84, m_satrec, i, r, v );
+            *m_orbit << fromTEME( r[0], r[1], r[2], gmst( i ) );
+        }
+    }
 }
 
 // Hopefully this is correct enough
@@ -166,7 +168,7 @@ GeoDataCoordinates SatellitesItem::fromTEME( double x, double y, double z, doubl
     double latp = lat;
     double C;
     for ( int i = 0; i < 3; i++ ) {
-        C = 1 / sqrt( 1 - square( m_satrec.ecco ) * square( sin( latp ) ) );
+        C = 1 / sqrt( 1 - square( m_satrec.ecco * sin( latp ) ) );
         lat = atan2( z + a * C * square( m_satrec.ecco ) * sin( latp ), R );
     }
 
@@ -182,7 +184,7 @@ double SatellitesItem::gmst( double minutesP )
     return fmod( m_satrec.gsto + rptim * minutesP, 2 * M_PI );
 }
 
-double SatellitesItem::square(double x)
+double SatellitesItem::square( double x )
 {
     return x * x;
 }

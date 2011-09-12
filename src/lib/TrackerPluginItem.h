@@ -44,8 +44,6 @@ public:
      */
     GeoDataPlacemark *placemark();
 
-    virtual void render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer );
-
     /**
      * Reimplement this method to update the placemark, for example to change its coordinates.
      * If this item is in a TrackerPluginModel, this method will be called regularly.

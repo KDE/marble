@@ -665,6 +665,13 @@ void GeoDataCoordinates::geoCoordinates( qreal& lon, qreal& lat,
     }
 }
 
+void GeoDataCoordinates::geoCoordinates( qreal& lon, qreal& lat, qreal& alt,
+                                         GeoDataCoordinates::Unit unit ) const
+{
+    geoCoordinates( lon, lat );
+    alt = d->m_altitude;
+}
+
 qreal GeoDataCoordinates::longitude( GeoDataCoordinates::Unit unit ) const
 {
     switch ( unit )

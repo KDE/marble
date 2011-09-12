@@ -39,12 +39,4 @@ GeoDataPlacemark* TrackerPluginItem::placemark()
     return d->m_placemark;
 }
 
-void TrackerPluginItem::render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer )
-{
-    Q_UNUSED( painter );
-    Q_UNUSED( viewport );
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
-}
-
 }

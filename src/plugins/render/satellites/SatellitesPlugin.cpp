@@ -96,11 +96,10 @@ bool SatellitesPlugin::isInitialized() const
 
 bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer )
 {
-    foreach( TrackerPluginItem *item, m_model->items() ) {
-        if ( viewport->viewLatLonAltBox().contains( item->placemark()->coordinate() ) ) {
-            item->render( painter, viewport, renderPos, layer );
-        }
-    }
+    Q_UNUSED( painter );
+    Q_UNUSED( viewport );
+    Q_UNUSED( renderPos );
+    Q_UNUSED( layer );
 
     return true;
 }

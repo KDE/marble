@@ -19,18 +19,26 @@
 
 namespace Marble {
 
+class GeoDataPoint;
+class GeoDataLineString;
+
 class SatellitesItem : public TrackerPluginItem
 {
+
 public:
     SatellitesItem( const QString &name, elsetrec satrec );
 
-    void render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer );
-
     void update();
 
+    void showOrbit( bool show );
+
 private:
+    bool m_showOrbit;
     double m_earthSemiMajorAxis; // in km
     elsetrec m_satrec;
+
+    GeoDataPoint *m_point;
+    GeoDataLineString *m_orbit;
 
     void setDescription();
 

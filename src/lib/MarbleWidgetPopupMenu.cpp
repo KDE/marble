@@ -63,7 +63,7 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
     m_showOrbitAction->setCheckable( true );
     m_showOrbitAction->setData( 0 );
 
-    m_trackPlacemarkAction = new QAction( tr( "Follow path" ), this );
+    m_trackPlacemarkAction = new QAction( tr( "Keep centered" ), this );
     m_trackPlacemarkAction->setData( 0 );
 
     //	Tool actions (Right mouse button)
@@ -107,7 +107,7 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
     connect( aboutDialogAction, SIGNAL( triggered() ), SLOT( slotAboutDialog() ) );
     connect( m_copyCoordinateAction, SIGNAL( triggered() ), SLOT( slotCopyCoordinates() ) );
     connect( m_infoDialogAction, SIGNAL( triggered() ), SLOT( slotInfoDialog() ) );
-    connect( m_showOrbitAction, SIGNAL( triggered(bool) ), SLOT( slotShowOrbit() ) );
+    connect( m_showOrbitAction, SIGNAL( triggered(bool) ), SLOT( slotShowOrbit(bool) ) );
     connect( m_trackPlacemarkAction, SIGNAL( triggered(bool) ), SLOT( slotTrackPlacemark() ) );
     connect( fullscreenAction, SIGNAL( triggered( bool ) ), this, SLOT( toggleFullscreen( bool ) ) );
 }
@@ -167,7 +167,8 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
             m_infoDialogAction->setText( tr( "Satellite informations" ) );
             subMenu->addAction( m_infoDialogAction );
 
-            m_showOrbitAction->setChecked( false );
+            m_showOrbitAction->setChecked( (*it)->style()->lineStyle().penStyle() != Qt::NoPen );
+            m_showOrbitAction->setData( actionidx );
             subMenu->addAction( m_showOrbitAction );
 
             m_trackPlacemarkAction->setData( actionidx );
@@ -244,9 +245,22 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
     }
 }
 
-void MarbleWidgetPopupMenu::slotShowOrbit()
+void MarbleWidgetPopupMenu::slotShowOrbit( bool show )
 {
-    //TODO
+    QAction *action = qobject_cast<QAction *>( sender() );
+    if ( action == 0 ) {
+        mDebug() << "Warning: slotShowOrbit should be called by a QAction signal";
+        return;
+    }
+
+    int actionidx = action->data().toInt();
+
+    if ( actionidx > 0 ) {
+        const GeoDataPlacemark *index = m_featurelist.at( actionidx -1 );
+
+        Qt::PenStyle penStyle = show ? Qt::SolidLine : Qt::NoPen;
+        index->style()->lineStyle().setPenStyle( penStyle );
+    }
 }
 
 void MarbleWidgetPopupMenu::slotTrackPlacemark()
