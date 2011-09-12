@@ -35,7 +35,6 @@ public Q_SLOTS:
     void setValue(qreal newvalue);
     void setDimension( Dimension dimension );
 Q_SIGNALS:
-    void dimensionChanged( Dimension dimension );
     void valueChanged( qreal value );
 private Q_SLOTS:
     // changes value based on combobox
