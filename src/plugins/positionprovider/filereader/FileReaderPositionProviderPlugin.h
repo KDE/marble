@@ -6,10 +6,11 @@
 // the source code.
 //
 // Copyright 2011      Konrad Enzensberger <e.konrad@mpegcode.com>
+// Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef GPS_SIMULATION_PLUGIN_H
-#define GPS_SIMULATION_PLUGIN_H
+#ifndef MARBLE_FILEREADERPOSITIONPROVIDERPLUGIN_H
+#define MARBLE_FILEREADERPOSITIONPROVIDERPLUGIN_H
 
 #include "PositionProviderPlugin.h"
 
@@ -18,16 +19,16 @@ class QTimer;
 namespace Marble
 {
 
-class GpsSimulationPluginPrivate;
+class FileReaderPositionProviderPluginPrivate;
 
-class GpsSimulationPlugin: public PositionProviderPlugin
+class FileReaderPositionProviderPlugin: public PositionProviderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
 public:
-    GpsSimulationPlugin();
-    virtual ~GpsSimulationPlugin();
+    FileReaderPositionProviderPlugin();
+    virtual ~FileReaderPositionProviderPlugin();
 
     // Implementing PluginInterface
     virtual QString name() const;
@@ -52,22 +53,10 @@ private Q_SLOTS:
     /** Regular (each second) position and status update */
     void update();
 
-public Q_SLOTS:
-	void positionProviderDisabled(bool);
-
-
 private:
-    GpsSimulationPluginPrivate* const d;
-	QTimer*			m_pUpdateTimer;
-
-	qreal m_lon;
-	qreal m_lat;
-
-	int   m_iPos;
-
+    FileReaderPositionProviderPluginPrivate* const d;
 };
 
 }
 
-#endif // QT_POSITION_PROVIDER_PLUGIN_H
-
+#endif // MARBLE_FILEREADERPOSITIONPROVIDERPLUGIN_H
