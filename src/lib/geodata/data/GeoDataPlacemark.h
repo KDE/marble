@@ -81,6 +81,17 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
 
     /**
      * Return the coordinate of the placemark as a GeoDataCoordinates
+     *
+     * The iconAtCoordinates boolean is set to true if an icon should be drawn to
+     * represent the placemark at these coordinates as described in
+     * https://code.google.com/apis/kml/documentation/kmlreference.html#placemark .
+     * It is set to false otherwise.
+     */
+    GeoDataCoordinates coordinate( bool *iconAtCoordinates ) const;
+
+    /**
+     * @overload
+     * Return the coordinate of the placemark as a GeoDataCoordinates
      */
     GeoDataCoordinates coordinate() const;
 

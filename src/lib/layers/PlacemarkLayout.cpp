@@ -361,14 +361,16 @@ void PlacemarkLayout::setCacheData()
         }
 
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
-        GeoDataGeometry *geometry = placemark->geometry();
-        if( qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() ) == m_acceptedVisualCategories.constEnd() &&
-            ( geometry->nodeType() != GeoDataTypes::GeoDataPointType ) ) {
+
+        bool ok;
+        GeoDataCoordinates coordinates = placemarkCoordinates( placemark, &ok );
+
+        if ( !ok ) {
             continue;
         }
 
         int popularity = (20 - placemark->popularityIndex())/2;
-        TileId key = placemarkToTileId( placemark->coordinate(), popularity );
+        TileId key = placemarkToTileId( coordinates, popularity );
         m_placemarkCache[key].append( placemark );
     }
 }
@@ -472,16 +474,16 @@ bool PlacemarkLayout::render( GeoPainter *painter,
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
         GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
-        GeoDataGeometry *geometry = placemark->geometry();
-        if( qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() ) == m_acceptedVisualCategories.constEnd() &&
-            !dynamic_cast<GeoDataPoint*>(geometry) ) {
+
+        bool ok;
+        GeoDataCoordinates coordinates = placemarkCoordinates( placemark, &ok );
+
+        if ( !ok ) {
             continue;
         }
 
-        GeoDataCoordinates geopoint = placemark->coordinate();
-
-        if ( !latLonAltBox.contains( geopoint ) ||
-             ! viewport->currentProjection()->screenCoordinates( geopoint, viewport, x, y ))
+        if ( !latLonAltBox.contains( coordinates ) ||
+             ! viewport->currentProjection()->screenCoordinates( coordinates, viewport, x, y ))
             {
                 delete m_visiblePlacemarks.take( placemark );
                 continue;
@@ -561,9 +563,10 @@ bool PlacemarkLayout::render( GeoPainter *painter,
     for ( int i = 0; i != rowCount; ++i )
     {
         GeoDataPlacemark *placemark = placemarkList.at(i);
-        GeoDataGeometry *geometry = placemark->geometry();
-        if( qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() ) == m_acceptedVisualCategories.constEnd() &&
-            !dynamic_cast<GeoDataPoint*>(geometry) ) {
+
+        bool ok;
+        GeoDataCoordinates coordinates = placemarkCoordinates( placemark, &ok );
+        if ( !ok ) {
             continue;
         }
 
@@ -579,10 +582,8 @@ bool PlacemarkLayout::render( GeoPainter *painter,
             break;
         }
 
-        GeoDataCoordinates geopoint = placemark->coordinate();
-
-        if ( !latLonAltBox.contains( geopoint ) ||
-             ! viewport->currentProjection()->screenCoordinates( geopoint, viewport, x, y ))
+        if ( !latLonAltBox.contains( coordinates ) ||
+             ! viewport->currentProjection()->screenCoordinates( coordinates, viewport, x, y ))
             {
                 delete m_visiblePlacemarks.take( placemark );
                 continue;
@@ -709,6 +710,17 @@ bool PlacemarkLayout::render( GeoPainter *painter,
                                         viewport );
 
     return true;
+}
+
+GeoDataCoordinates PlacemarkLayout::placemarkCoordinates( GeoDataPlacemark *placemark, bool *ok ) const
+{
+    GeoDataCoordinates coordinates = placemark->coordinate( ok );
+    if ( !*ok && qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() )
+                != m_acceptedVisualCategories.constEnd() ) {
+            *ok = true;
+    }
+
+    return coordinates;
 }
 
 QRect PlacemarkLayout::roomForLabel( GeoDataStyle * style,

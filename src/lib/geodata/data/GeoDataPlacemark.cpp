@@ -75,16 +75,39 @@ void GeoDataPlacemark::setLookAt( GeoDataLookAt *lookAt)
 }
 
 GeoDataCoordinates GeoDataPlacemark::coordinate() const
-{    
+{
+    bool throwaway;
+    return coordinate( &throwaway );
+}
+
+GeoDataCoordinates GeoDataPlacemark::coordinate( bool *iconAtCoordinates ) const
+{
+    *iconAtCoordinates = false;
+ 
     if( p()->m_geometry ) {
-        if ( p()->m_geometry->nodeType() != GeoDataTypes::GeoDataPointType ) {
+        // Beware: comparison between pointers, not strings.
+        if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataPointType ) {
+            *iconAtCoordinates = true;
+            return GeoDataCoordinates( *static_cast<GeoDataPoint *>( p()->m_geometry ) );
+        } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
+            GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry *>( p()->m_geometry );
+
+            QVector<GeoDataGeometry*>::ConstIterator it = multiGeometry->constBegin();
+            QVector<GeoDataGeometry*>::ConstIterator end = multiGeometry->constEnd();
+            for ( ; it != end; it++ ) {
+                if ( (*it)->nodeType() == GeoDataTypes::GeoDataPointType ) {
+                    *iconAtCoordinates = true;
+                    return GeoDataCoordinates( *static_cast<GeoDataPoint *>(*it) );
+                }
+            }
+
             return p()->m_geometry->latLonAltBox().center();
-        } else {
-            return GeoDataCoordinates( *static_cast<GeoDataPoint*>( p()->m_geometry ) );
         }
-    } else {
-        return GeoDataCoordinates();
+
+        return p()->m_geometry->latLonAltBox().center();
     }
+
+    return GeoDataCoordinates();
 }
 
 void GeoDataPlacemark::coordinate( qreal& lon, qreal& lat, qreal& alt ) const

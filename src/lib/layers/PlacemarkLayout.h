@@ -116,6 +116,12 @@ class PlacemarkLayout : public QObject, public LayerInterface
  private:
     void styleReset();
 
+    /**
+     * Returns the coordinates of @p placemark, @p ok is set to true if an icon for the placemark
+     * should be drawn at that point.
+     */
+    GeoDataCoordinates placemarkCoordinates( GeoDataPlacemark *placemark, bool *ok ) const;
+
     QRect  roomForLabel( GeoDataStyle * style,
                          const QVector<VisiblePlacemark*> &currentsec,
                          const int x, const int y,
