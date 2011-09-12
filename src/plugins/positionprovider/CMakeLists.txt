@@ -18,5 +18,10 @@ IF(QTLOCATION_FOUND)
      ADD_SUBDIRECTORY( qtmobility )
 ENDIF(QTLOCATION_FOUND)
 
+OPTION(BUILD_GPS_FILEREADER_PLUGIN "Build the kml file reader position provider")
+IF( BUILD_GPS_FILEREADER_PLUGIN )
+    ADD_SUBDIRECTORY( filereader )
+ENDIF()
+
 # experimental implementation
 # ADD_SUBDIRECTORY( geoclue )
