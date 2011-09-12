@@ -29,6 +29,7 @@ GpsInfo::GpsInfo( const QPointF &point, const QSizeF &size )
       m_marbleWidget( 0 ),
       m_widgetItem( 0 )
 {
+    setVisible( false );
     setCacheMode( NoCache );
 }
 

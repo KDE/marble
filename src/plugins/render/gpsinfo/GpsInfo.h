@@ -42,7 +42,7 @@ class GpsInfo : public AbstractFloatItem
     MARBLE_PLUGIN( GpsInfo )
     
  public:
-    explicit GpsInfo( const QPointF &point = QPointF( 10, 25 ),
+    explicit GpsInfo( const QPointF &point = QPointF( 10.5, 110 ),
                           const QSizeF &size = QSizeF( 135.0, 80.0 ) );
     ~GpsInfo();
 
