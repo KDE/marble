@@ -38,15 +38,13 @@ Q_SIGNALS:
     void valueChanged( qreal value );
 private Q_SLOTS:
     // changes value based on combobox
-    void signChanged();
+    void onSignChanged();
+    void checkSecOverflow();
+    void checkMinOverflow();
+    void checkDegOverflow();
+private:
     // recalculates m_value based on spinboxes
     void recalculate();
-    // recalculates spinboxes based on m_value
-    void reverseRecalculate();
-    // changes combobox based on value
-    void checkSign();
-    void secOverflow();
-    void minOverflow();
 private:
     LatLonEditPrivate * const d;
 };

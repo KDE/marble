@@ -46,26 +46,26 @@
     </widget>
    </item>
    <item>
-    <widget class="QSpinBox" name="m_sec" >
+    <widget class="QDoubleSpinBox" name="m_sec" >
      <property name="alignment" >
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
      <property name="suffix" >
       <string>″</string>
      </property>
-     <property name="minimum" >
-      <number>-1</number>
+     <property name="decimals">
+      <number>2</number>
+     </property>
+     <property name="minimum">
+      <double>-1.0</double>
      </property>
      <property name="maximum" >
-      <number>60</number>
+      <double>60.0</double>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QComboBox" name="m_sign" >
-     <property name="enabled" >
-      <bool>false</bool>
-     </property>
      <property name="sizePolicy" >
       <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
        <horstretch>0</horstretch>
