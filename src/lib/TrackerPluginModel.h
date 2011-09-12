@@ -40,6 +40,8 @@ public:
      */
     TrackerPluginModel( GeoDataTreeModel *treeModel, const PluginManager *pluginManager  );
 
+    virtual ~TrackerPluginModel();
+
     /**
      * Returns the item in the model such that item->placemark()->name() == @p name
      * or 0 if no such item exists.

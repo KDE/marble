@@ -42,6 +42,7 @@ class SatellitesPlugin : public RenderPlugin
 
 public:
     SatellitesPlugin();
+    virtual ~SatellitesPlugin();
     
     QStringList backendTypes() const;
     QString renderPolicy() const;

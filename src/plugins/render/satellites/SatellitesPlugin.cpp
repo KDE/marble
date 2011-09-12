@@ -40,6 +40,15 @@ SatellitesPlugin::SatellitesPlugin()
     setSettings( QHash<QString, QVariant>() );
 }
 
+SatellitesPlugin::~SatellitesPlugin()
+{
+    delete m_model;
+
+    delete m_aboutDialog;
+    delete m_configDialog;
+    delete ui_configWidget;
+}
+
 QStringList SatellitesPlugin::backendTypes() const
 {
     return QStringList( "satellites" );

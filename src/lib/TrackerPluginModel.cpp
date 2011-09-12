@@ -34,8 +34,16 @@ public:
           m_treeModel( treeModel ),
           m_document( new GeoDataDocument() ),
           m_storagePolicy( MarbleDirs::localPath() + "/cache/" ),
-          m_timer( new QTimer() )
+          m_timer( new QTimer( parent ) )
     {
+    }
+
+    ~TrackerPluginModelPrivate()
+    {
+        m_parent->beginUpdateItems();
+        delete m_document;
+        qDeleteAll( m_itemHash );
+        delete m_downloadManager;
     }
 
     void downloaded(const QString &relativeUrlString, const QString &id)
@@ -74,6 +82,11 @@ TrackerPluginModel::TrackerPluginModel( GeoDataTreeModel *treeModel, const Plugi
     d->m_downloadManager = new HttpDownloadManager( &d->m_storagePolicy, pluginManager );
     connect( d->m_downloadManager, SIGNAL(downloadComplete(QString,QString)),
              this, SLOT(downloaded(QString,QString)) );
+}
+
+TrackerPluginModel::~TrackerPluginModel()
+{
+    delete d;
 }
 
 TrackerPluginItem *TrackerPluginModel::item( const QString &name )

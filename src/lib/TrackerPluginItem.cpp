@@ -12,6 +12,8 @@
 
 #include "GeoDataPlacemark.h"
 
+#include "MarbleDebug.h"
+
 namespace Marble {
 
 class TrackerPluginItemPrivate
@@ -32,6 +34,7 @@ TrackerPluginItem::TrackerPluginItem( const QString &name )
 
 TrackerPluginItem::~TrackerPluginItem()
 {
+    delete d;
 }
 
 GeoDataPlacemark* TrackerPluginItem::placemark()
