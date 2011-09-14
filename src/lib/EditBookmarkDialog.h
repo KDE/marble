@@ -44,6 +44,8 @@ class MARBLE_EXPORT EditBookmarkDialog : public QDialog, private Ui::UiEditBookm
 
     QString description() const;
 
+    GeoDataCoordinates coordinates() const;
+
     void setName( const QString &name );
 
     void setLookAt( const GeoDataLookAt &lookAt );
@@ -60,6 +62,8 @@ class MARBLE_EXPORT EditBookmarkDialog : public QDialog, private Ui::UiEditBookm
     void retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark);
 
     QString append( const QString &bookmark, const QString &text);
+
+    void onCoordinatesEdited();
 
  private:
     Q_DISABLE_COPY( EditBookmarkDialog )

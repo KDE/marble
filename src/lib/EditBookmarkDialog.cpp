@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010 Gaurav Gupta <1989.gaurav@googlemail.com>
+// Copyright 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 //
 //
 
@@ -29,6 +30,7 @@ public:
     MarbleRunnerManager* m_manager;
     BookmarkManager* m_bookmarkManager;
     GeoDataLookAt m_bookmarkLookAt;
+    bool m_isCoordinatesEdited : 1;
 
     EditBookmarkDialogPrivate( EditBookmarkDialog* q, BookmarkManager *bookmarkManager );
 
@@ -43,7 +45,7 @@ private:
 };
 
 EditBookmarkDialogPrivate::EditBookmarkDialogPrivate( EditBookmarkDialog* q_, BookmarkManager *bookmarkManager ) :
-        m_widget( 0 ), m_manager( 0 ), m_bookmarkManager( bookmarkManager ), q( q_ )
+        m_widget( 0 ), m_manager( 0 ), m_bookmarkManager( bookmarkManager ), m_isCoordinatesEdited( false ), q( q_ )
 {
     // nothing to do
 }
@@ -51,9 +53,13 @@ EditBookmarkDialogPrivate::EditBookmarkDialogPrivate( EditBookmarkDialog* q_, Bo
 void EditBookmarkDialogPrivate::initialize()
 {
     q->setupUi( q );
+    q->m_longitude->setDimension( Longitude );
+    q->m_latitude->setDimension( Latitude );
     q->m_newFolderButton->setVisible( false );
     QObject::connect( q, SIGNAL( accepted() ), q, SLOT( addBookmark() ) );
     QObject::connect( q->m_newFolderButton, SIGNAL( clicked() ), q, SLOT( openNewFolderDialog() ) );
+    QObject::connect( q->m_longitude, SIGNAL( valueChanged(qreal) ), q, SLOT( onCoordinatesEdited() ) );
+    QObject::connect( q->m_latitude, SIGNAL( valueChanged(qreal) ), q, SLOT( onCoordinatesEdited() ) );
 
     initComboBox();
 }
@@ -92,10 +98,17 @@ EditBookmarkDialog::EditBookmarkDialog( BookmarkManager *bookmarkManager, QWidge
 void EditBookmarkDialog::setLookAt( const GeoDataLookAt &lookAt )
 {
     d->m_bookmarkLookAt = lookAt;
+    d->m_isCoordinatesEdited = false;
+
+    const GeoDataCoordinates coordinates = lookAt.coordinates();
+
     if ( m_name->text().isEmpty() ) {
-        m_name->setText( lookAt.coordinates().toString() );
+        m_name->setText( coordinates.toString() );
         m_name->selectAll();
     }
+
+    m_longitude->setValue( coordinates.longitude(GeoDataCoordinates::Degree) );
+    m_latitude->setValue( coordinates.latitude(GeoDataCoordinates::Degree) );
 }
 
 void EditBookmarkDialog::setName( const QString &text )
@@ -195,18 +208,26 @@ void EditBookmarkDialog::addBookmark()
     }
 }
 
+void EditBookmarkDialog::onCoordinatesEdited()
+{
+    d->m_isCoordinatesEdited = true;
+}
+
 GeoDataPlacemark EditBookmarkDialog::bookmark() const
 {
+    GeoDataLookAt *lookAt = new GeoDataLookAt( d->m_bookmarkLookAt );
+    lookAt->setCoordinates( coordinates() );
+
     //Create a bookmark object
     GeoDataPlacemark bookmark;
     bookmark.setName( name() );
     bookmark.setDescription( description() );
     //allow for HTML in the description
     bookmark.setDescriptionCDATA( true );
-    bookmark.setCoordinate( d->m_bookmarkLookAt.coordinates() );
+    bookmark.setCoordinate( lookAt->coordinates() );
 
     bookmark.extendedData().addValue( GeoDataData( "isBookmark", true ) );
-    bookmark.setLookAt( new GeoDataLookAt( d->m_bookmarkLookAt ) );
+    bookmark.setLookAt( lookAt );
 
     return bookmark;
 }
@@ -224,6 +245,20 @@ QString EditBookmarkDialog::folderName() const
 QString EditBookmarkDialog::description() const
 {
     return m_description->toPlainText();
+}
+
+GeoDataCoordinates EditBookmarkDialog::coordinates() const
+{
+    if ( d->m_isCoordinatesEdited ) {
+        const qreal longitude = m_longitude->value();
+        const qreal latitude = m_latitude->value();
+        // altitude not edited, take from old
+        const qreal altitude = d->m_bookmarkLookAt.coordinates().altitude();
+
+        return GeoDataCoordinates( longitude, latitude, altitude,
+                                   GeoDataCoordinates::Degree );
+    }
+    return d->m_bookmarkLookAt.coordinates();
 }
 
 }

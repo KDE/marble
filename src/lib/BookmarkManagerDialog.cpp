@@ -276,6 +276,7 @@ void BookmarkManagerDialogPrivate::editBookmark()
             }
             bookmark->setName( dialog->name() );
             bookmark->setDescription( dialog->description() );
+            bookmark->lookAt()->setCoordinates( dialog->coordinates() );
             m_treeModel->setRootDocument( bookmarkDocument );
             selectFolder( dialog->folderName() );
         }
