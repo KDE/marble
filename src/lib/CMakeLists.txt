@@ -115,7 +115,6 @@ set(marblewidget_SRCS
     Projections/SphericalProjection.cpp
     Projections/EquirectProjection.cpp
     Projections/MercatorProjection.cpp
-    ImageLoadThread.cpp
     VisiblePlacemark.cpp
     PlacemarkPainter.cpp
     PlacemarkInfoDialog.cpp

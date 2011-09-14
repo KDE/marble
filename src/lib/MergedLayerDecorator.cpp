@@ -70,12 +70,11 @@ QImage MergedLayerDecorator::merge( const TileId id, const QVector<QSharedPointe
     foreach ( const QSharedPointer<TextureTile> &tile, tiles ) {
             const Blending *const blending = tile->blending();
             if ( blending ) {
-                mDebug() << "StackedTile::initResultTile: blending";
+                mDebug() << Q_FUNC_INFO << "blending";
                 blending->blend( &resultImage, tile.data() );
             }
             else {
-                mDebug() << "StackedTile::initResultTile: "
-                    "no blending defined => copying top over bottom image";
+                mDebug() << Q_FUNC_INFO << "no blending defined => copying top over bottom image";
                 if ( withConversion ) {
                     resultImage = tile->image()->convertToFormat( QImage::Format_ARGB32_Premultiplied );
                 } else {
