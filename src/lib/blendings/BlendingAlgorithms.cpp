@@ -20,9 +20,23 @@
 #include <cmath>
 
 #include <QtGui/QImage>
+#include <QtGui/QPainter>
 
 namespace Marble
 {
+
+void OverpaintBlending::blend( QImage * const bottom, TextureTile const * const top ) const
+{
+    Q_ASSERT( bottom );
+    Q_ASSERT( top );
+    Q_ASSERT( top->image() );
+    Q_ASSERT( bottom->size() == top->image()->size() );
+    Q_ASSERT( bottom->format() == QImage::Format_ARGB32_Premultiplied );
+
+    QPainter painter( bottom );
+
+    painter.drawImage( 0, 0, *top->image() );
+}
 
 // pre-conditions:
 // - bottom and top image have the same size

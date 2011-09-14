@@ -23,6 +23,12 @@
 namespace Marble
 {
 
+class OverpaintBlending: public Blending
+{
+ public:
+    virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
+};
+
 class IndependentChannelBlending: public Blending
 {
  public:
