@@ -38,6 +38,7 @@ Blending const * BlendingFactory::findBlending( QString const & name ) const
 BlendingFactory::BlendingFactory( const SunLocator *sunLocator )
     : m_sunLightBlending( new SunLightBlending( sunLocator ) )
 {
+    m_blendings.insert( "OverpaintBlending", new OverpaintBlending );
     // Neutral blendings
     m_blendings.insert( "AllanonBlending", new AllanonBlending );
     m_blendings.insert( "ArcusTangentBlending", new ArcusTangentBlending );
