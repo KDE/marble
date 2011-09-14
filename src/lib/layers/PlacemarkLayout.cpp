@@ -284,8 +284,6 @@ QVector<const GeoDataPlacemark*> PlacemarkLayout::whichPlacemarkAt( const QPoint
 
 int PlacemarkLayout::maxLabelHeight() const
 {
-    mDebug() << "Detecting maxLabelHeight ...";
-
     int maxLabelHeight = 0;
 
     const QModelIndexList selectedIndexes = m_selectionModel->selection().indexes();
