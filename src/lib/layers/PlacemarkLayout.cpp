@@ -366,7 +366,7 @@ void PlacemarkLayout::setCacheData()
 
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
         GeoDataGeometry *geometry = placemark->geometry();
-        if( qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() ) == m_acceptedVisualCategories.end() &&
+        if( qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() ) == m_acceptedVisualCategories.constEnd() &&
             ( geometry->nodeType() != GeoDataTypes::GeoDataPointType ) ) {
             continue;
         }
@@ -477,7 +477,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         const QModelIndex index = selectedIndexes.at( i );
         GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
         GeoDataGeometry *geometry = placemark->geometry();
-        if( qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() ) == m_acceptedVisualCategories.end() &&
+        if( qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() ) == m_acceptedVisualCategories.constEnd() &&
             !dynamic_cast<GeoDataPoint*>(geometry) ) {
             continue;
         }
@@ -566,7 +566,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
     {
         GeoDataPlacemark *placemark = placemarkList.at(i);
         GeoDataGeometry *geometry = placemark->geometry();
-        if( qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() ) == m_acceptedVisualCategories.end() &&
+        if( qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() ) == m_acceptedVisualCategories.constEnd() &&
             !dynamic_cast<GeoDataPoint*>(geometry) ) {
             continue;
         }

@@ -266,7 +266,7 @@ void GeometryLayer::invalidateScene()
     QList<GeoGraphicsItem*> deletedItems;
     foreach( GeoGraphicsItem* item, items )
     {
-        if( qBinaryFind( deletedItems, item ) != deletedItems.end() )
+        if( qBinaryFind( deletedItems, item ) != deletedItems.constEnd() )
         {
             delete item;
             deletedItems.insert( qLowerBound( deletedItems.begin(), deletedItems.end(), item ), item );
