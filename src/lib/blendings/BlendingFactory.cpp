@@ -42,6 +42,7 @@ Blending const * BlendingFactory::findBlending( QString const & name ) const
 BlendingFactory::BlendingFactory()
 {
     m_blendings.insert( "OverpaintBlending", new OverpaintBlending );
+
     // Neutral blendings
     m_blendings.insert( "AllanonBlending", new AllanonBlending );
     m_blendings.insert( "ArcusTangentBlending", new ArcusTangentBlending );
@@ -53,7 +54,7 @@ BlendingFactory::BlendingFactory()
     //m_blendings.insert( "TextureBlending", new TextureBlending );
 
     // Darkening blendings
-    m_blendings.insert( "AlphaBlending", new AlphaBlending );
+    m_blendings.insert( "AlphaBlending", new OverpaintBlending ); // for backwards compatibility
     m_blendings.insert( "ColorBurnBlending", new ColorBurnBlending );
     m_blendings.insert( "DarkBlending", new DarkBlending );
     m_blendings.insert( "DarkenBlending", new DarkenBlending );
