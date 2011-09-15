@@ -22,7 +22,7 @@
 #ifndef MARBLE_GEODATAPARSER_H
 #define MARBLE_GEODATAPARSER_H
 
-#include <geodata_export.h>
+#include "geodata_export.h"
 #include "GeoParser.h"
 
 namespace Marble

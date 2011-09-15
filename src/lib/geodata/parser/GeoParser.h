@@ -26,7 +26,7 @@
 #include <QtCore/QStack>
 #include <QtXml/QXmlStreamReader>
 
-#include <geodata_export.h>
+#include "geodata_export.h"
 
 namespace Marble
 {
