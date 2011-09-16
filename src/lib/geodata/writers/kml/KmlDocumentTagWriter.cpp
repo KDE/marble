@@ -17,6 +17,7 @@
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
 #include "MarbleDebug.h"
+#include "GeoDataExtendedData.h"
 
 #include "GeoDataTypes.h"
 
@@ -37,6 +38,7 @@ bool KmlDocumentTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     // the document tag is excused
     if( (document->styles().count() == 0)
         && (document->styleMaps().count() == 0)
+        && (document->extendedData().isEmpty())
         && (document->featureList().count() == 1) ) {
         writeElement( document->featureList()[0], writer );
         return true;
@@ -59,6 +61,10 @@ bool KmlDocumentTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 
     for ( ; it != end; ++it ) {
         writeElement( &(**it), writer );
+    }
+
+    if( !document->extendedData().isEmpty() ){
+		writeElement( &document->extendedData(), writer );
     }
 
     //Write the actual important stuff!

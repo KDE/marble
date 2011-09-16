@@ -14,6 +14,7 @@
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 #include "MarbleDebug.h"
+#include "GeoDataExtendedData.h"
 
 #include "GeoDataTypes.h"
 
@@ -34,6 +35,10 @@ bool KmlFolderTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 
     //Writing folder name
     writer.writeOptionalElement( "name", folder->name() );
+
+    if( !folder->extendedData().isEmpty() ){
+		writeElement( &folder->extendedData(), writer );
+    }
 
     //Write all containing features
     QVector<GeoDataFeature*>::ConstIterator it =  folder->constBegin();
