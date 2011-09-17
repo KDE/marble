@@ -26,6 +26,9 @@ const int gpsWaitTimeout = 200; // ms
 
 GpsdConnection::GpsdConnection( QObject* parent )
     : QObject( parent ),
+#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 5 )
+      m_gpsd( "localhost", DEFAULT_GPSD_PORT ),
+#endif
       m_timer( 0 )
 {
     m_oldLocale = setlocale( LC_NUMERIC, NULL );
@@ -41,8 +44,14 @@ GpsdConnection::~GpsdConnection()
 void GpsdConnection::initialize()
 {
     m_timer.stop();
+    bool success = false;
+#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 5 )
+    success = true;
+#else
     gps_data_t* data = m_gpsd.open();
-    if ( data ) {
+    success = ( data != 0 );
+#endif
+    if ( success ) {
         m_status = PositionProviderStatusAcquiring;
         emit statusChanged( m_status );
 
@@ -93,8 +102,13 @@ void GpsdConnection::update()
     QTime watchdog;
     watchdog.start();
 
+#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 5 )
+    while ( m_gpsd.waiting( 0 ) && watchdog.elapsed() < gpsWaitTimeout ) {
+        gps_data_t *currentData = m_gpsd.read();
+#else
     while ( m_gpsd.waiting() && watchdog.elapsed() < gpsWaitTimeout ) {
         gps_data_t *currentData = m_gpsd.poll();
+#endif
 
         if( currentData && currentData->set & PACKET_SET ) {
             data = currentData;
