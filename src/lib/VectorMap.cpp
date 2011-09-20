@@ -131,38 +131,38 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
     const qreal centerLon = viewport->centerLongitude();
     const qreal centerLat = viewport->centerLatitude();
 
-    qreal rad2Pixel = (float)( 2 * radius ) / M_PI;
-    qreal lon, lat;
-    qreal x, y;
+    const qreal rad2Pixel = (float)( 2 * radius ) / M_PI;
 
     viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
     GeoPolygon::PtrVector::ConstIterator  itPolyLine = pntmap->constBegin();
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
-    ScreenPolygon  boundingPolygon;
-    QRectF         visibleArea ( 0, 0, viewport->width(), viewport->height() );
+    const QRectF visibleArea ( 0, 0, viewport->width(), viewport->height() );
     const int      detail = getDetailLevel( radius );
 
     for (; itPolyLine != itEndPolyLine; ++itPolyLine )
     {
-        // This sorts out polygons by bounding box which aren't visible at all.
-        int offset = 0;
-
-        GeoDataCoordinates::PtrVector  boundary = (*itPolyLine)->getBoundary();
-        boundingPolygon.clear();
+        const GeoDataCoordinates::PtrVector  boundary = (*itPolyLine)->getBoundary();
 
         // Let's just use the top left and the bottom right bounding
         // box point for this projection.
 
         // rather paint an invalid line then crashing here if the boundaries are not loaded yet
-        if(boundary.size() < 3) continue;
+        if ( boundary.size() < 3 )
+            continue;
+
+        ScreenPolygon  boundingPolygon;
 
         for ( int i = 1; i < 3; ++i ) {
+            qreal lon, lat;
             boundary[i]->geoCoordinates(lon, lat);
-            x = (qreal)(viewport->width())  / 2.0 - rad2Pixel * (centerLon - lon);
-            y = (qreal)(viewport->height()) / 2.0 + rad2Pixel * (centerLat - lat);
+            const qreal x = (qreal)(viewport->width())  / 2.0 - rad2Pixel * (centerLon - lon);
+            const qreal y = (qreal)(viewport->height()) / 2.0 + rad2Pixel * (centerLat - lat);
             boundingPolygon << QPointF( x, y );
         }
+
+        // This sorts out polygons by bounding box which aren't visible at all.
+        int offset = 0;
 
         if ( boundingPolygon.at(0).x() < 0 || boundingPolygon.at(1).x() < 0 ) {
             boundingPolygon.translate( 4 * radius, 0 );
@@ -234,40 +234,40 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
     const qreal centerLon = viewport->centerLongitude();
     const qreal centerLat = viewport->centerLatitude();
 
-    qreal rad2Pixel = (float)( 2 * radius ) / M_PI;
-    qreal lon, lat;
-    qreal x, y;
+    const qreal rad2Pixel = (float)( 2 * radius ) / M_PI;
 
     viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
     GeoPolygon::PtrVector::ConstIterator  itPolyLine = pntmap->constBegin();
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
-    ScreenPolygon  boundingPolygon;
-    QRectF         visibleArea ( 0, 0, viewport->width(), viewport->height() );
+    const QRectF visibleArea ( 0, 0, viewport->width(), viewport->height() );
     const int      detail = getDetailLevel( radius );
 
     for (; itPolyLine != itEndPolyLine; ++itPolyLine )
     {
-        // This sorts out polygons by bounding box which aren't visible at all.
-        int offset = 0;
-
-        GeoDataCoordinates::PtrVector boundary = (*itPolyLine)->getBoundary();
-        boundingPolygon.clear();
+        const GeoDataCoordinates::PtrVector boundary = (*itPolyLine)->getBoundary();
 
         // Let's just use the top left and the bottom right bounding box point for 
         // this projection
 
         // rather paint an invalid line then crashing here if the boundaries are not loaded yet
-        if(boundary.size() < 3) continue;
+        if ( boundary.size() < 3 )
+            continue;
+
+        ScreenPolygon  boundingPolygon;
 
         for ( int i = 1; i < 3; ++i ) {
+            qreal lon, lat;
             boundary[i]->geoCoordinates(lon, lat);
-            x = (qreal)(viewport->width())  / 2.0 + rad2Pixel * (lon - centerLon);
-            y = (qreal)(viewport->height()) / 2.0 - rad2Pixel * ( atanh( sin( lat ) )
-                                                           - atanh( sin( centerLat ) ) );
+            const qreal x = (qreal)(viewport->width())  / 2.0 + rad2Pixel * (lon - centerLon);
+            const qreal y = (qreal)(viewport->height()) / 2.0 - rad2Pixel * ( atanh( sin( lat ) )
+                                                                            - atanh( sin( centerLat ) ) );
 
             boundingPolygon << QPointF( x, y );
         }
+
+        // This sorts out polygons by bounding box which aren't visible at all.
+        int offset = 0;
 
         if ( boundingPolygon.at(0).x() < 0 || boundingPolygon.at(1).x() < 0 ) {
             boundingPolygon.translate( 4 * radius, 0 );
