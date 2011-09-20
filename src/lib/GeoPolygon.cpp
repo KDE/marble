@@ -154,8 +154,8 @@ PntMapLoader::PntMapLoader( PntMap* parent, const QString& filename )
 void PntMapLoader::run()
 {
 //    qDebug("PntMap::load trying to load: " + m_filename.toLocal8Bit());
-    QTime *timer = new QTime();
-    timer->restart();
+    QTime timer;
+    timer.restart();
 
 #ifdef Q_OS_UNIX
     // MMAP Start
@@ -389,8 +389,8 @@ void PntMapLoader::run()
             (*itPolyLine)->setBoundary( lonLeft, latTop, lonRight, latBottom );
         }
     }
-//    mDebug() << "Elapsed: " << timer->elapsed();
-    delete timer;
+
+    mDebug() << Q_FUNC_INFO << "Loaded" << m_filename << "in" << timer.elapsed() << "ms";
 
     emit pntMapLoaded( true );
 }
