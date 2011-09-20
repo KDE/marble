@@ -60,6 +60,7 @@ class GeoSceneDocument;
 class Planet;
 class RoutingManager;
 class BookmarkManager;
+class FileManager;
 
 /**
  * @short The data model (not based on QAbstractModel) for a MarbleWidget.
@@ -200,6 +201,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void addGeoDataFile( const QString& filename );
     void addGeoDataString( const QString& data, const QString& key = "data" );
     void removeGeoData( const QString& key );
+    FileManager       *fileManager() const;
 
     FileViewModel      *fileViewModel()   const;
     PositionTracking   *positionTracking() const;

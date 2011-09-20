@@ -31,6 +31,7 @@
 #include "AbstractProjection.h"
 #include "DataMigration.h"
 #include "FpsLayer.h"
+#include "FileManager.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataPlacemark.h"
 #include "GeoPainter.h"
@@ -236,6 +237,10 @@ void MarbleWidgetPrivate::construct()
     // show this in the view, i.e. here.
     m_widget->connect( m_model, SIGNAL( modelChanged() ),
                        m_widget, SLOT( update() ) );
+
+    m_widget->connect( m_model->fileManager(), SIGNAL( centeredDocument(GeoDataLatLonBox) ),
+                       m_widget, SLOT( centerOn(GeoDataLatLonBox) ) );
+
 
     // Show a progress dialog when the model calculates new map tiles.
     m_widget->connect( m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&,

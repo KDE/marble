@@ -33,6 +33,7 @@ class FileLoader : public QThread
 
         void run();
         QString path() const;
+        GeoDataDocument *document();
 
     Q_SIGNALS:
         void loaderFinished( FileLoader* );

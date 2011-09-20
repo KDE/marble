@@ -402,6 +402,11 @@ void MarbleModel::removePlacemarkKey( const QString& key )
     removeGeoData( key );
 }
 
+FileManager* MarbleModel::fileManager() const
+{
+    return d->m_fileManager;
+}
+
 qreal MarbleModel::planetRadius()   const
 {
     return d->m_planet->radius();
@@ -580,7 +585,7 @@ void MarbleModel::setLegend( QTextDocument * legend )
 
 void MarbleModel::addGeoDataFile( const QString& filename )
 {
-    d->m_fileManager->addFile( filename, UserDocument );
+    d->m_fileManager->addFile( filename, UserDocument, true );
 }
 
 void MarbleModel::addGeoDataString( const QString& data, const QString& key )

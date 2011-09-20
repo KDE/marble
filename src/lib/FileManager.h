@@ -24,6 +24,7 @@ namespace Marble
 class MarbleModel;
 class FileManagerPrivate;
 class FileLoader;
+class GeoDataLatLonBox;
 
 /**
  * This class is responsible for loading the
@@ -58,7 +59,7 @@ class FileManager : public QObject
     /**
      * Loads a new file into the manager.
      */
-    void addFile( const QString &fileName, DocumentRole role );
+    void addFile( const QString &fileName, DocumentRole role, bool recenter = false );
 
 
     /**
@@ -87,6 +88,7 @@ class FileManager : public QObject
  Q_SIGNALS:
     void fileAdded( int index );
     void fileRemoved( int index );
+    void centeredDocument( const GeoDataLatLonBox& );
 
  public Q_SLOTS:
     void addGeoDataDocument( GeoDataDocument *document );

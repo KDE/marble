@@ -40,7 +40,8 @@ public:
         : q( parent),
           m_runner( new MarbleRunnerManager( model->pluginManager(), q ) ),
           m_filepath ( file ),
-          m_documentRole ( role )
+          m_documentRole ( role ),
+          m_document( 0 )
     {
         m_runner->setModel( model );
     };
@@ -51,7 +52,8 @@ public:
           m_runner( new MarbleRunnerManager( model->pluginManager(), q ) ),
           m_filepath ( file ),
           m_contents ( contents ),
-          m_documentRole ( role )
+          m_documentRole ( role ),
+          m_document( 0 )
     {
         m_runner->setModel( model );
     };
@@ -105,6 +107,11 @@ FileLoader::~FileLoader()
 QString FileLoader::path() const
 {
     return d->m_filepath;
+}
+
+GeoDataDocument* FileLoader::document()
+{
+    return d->m_document;
 }
 
 void FileLoader::run()
@@ -310,6 +317,7 @@ void FileLoaderPrivate::savePlacemarks(QDataStream &out, const GeoDataContainer 
 
 void FileLoaderPrivate::documentParsed( GeoDataDocument* doc )
 {
+    m_document = doc;
     doc->setFileName( m_filepath );
     createFilterProperties( doc );
     emit q->newGeoDataDocumentAdded( doc );

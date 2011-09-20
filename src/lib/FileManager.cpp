@@ -21,6 +21,7 @@
 #include "GeoDataTreeModel.h"
 
 #include "GeoDataDocument.h"
+#include "GeoDataLatLonAltBox.h"
 
 
 using namespace Marble;
@@ -32,6 +33,7 @@ class FileManagerPrivate
 public:
     FileManagerPrivate( MarbleModel* model )
         : m_model( model ),
+          m_recenter( false ),
         m_t ( 0 )
     {
     };
@@ -49,6 +51,7 @@ public:
     QList<FileLoader*> m_loaderList;
     QStringList m_pathList;
     QList < GeoDataDocument* > m_fileItemList;
+    bool m_recenter;
     QTime *m_t;
 };
 }
@@ -74,7 +77,7 @@ QStringList FileManager::containers() const
     return retList + d->m_pathList;
 }
 
-void FileManager::addFile( const QString& filepath, DocumentRole role )
+void FileManager::addFile( const QString& filepath, DocumentRole role, bool recenter )
 {
     if ( !containers().contains( filepath ) ) {
         mDebug() << "adding container:" << filepath;
@@ -83,6 +86,7 @@ void FileManager::addFile( const QString& filepath, DocumentRole role )
             d->m_t = new QTime();
             d->m_t->start();
         }
+        d->m_recenter = recenter;
         FileLoader* loader = new FileLoader( this, d->m_model, filepath, role );
         appendLoader( loader );
         d->m_pathList.append( filepath );
@@ -169,8 +173,13 @@ void FileManager::addGeoDataDocument( GeoDataDocument* document )
 
 void FileManager::cleanupLoader( FileLoader* loader )
 {
+    GeoDataDocument *doc = loader->document();
     d->m_loaderList.removeAll( loader );
     if ( loader->isFinished() ) {
+        if ( doc && d->m_recenter ) {
+            emit centeredDocument( doc->latLonAltBox() );
+            d->m_recenter = false;
+        }
         d->m_pathList.removeAll( loader->path() );
         delete loader;
     }
