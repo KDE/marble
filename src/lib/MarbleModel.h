@@ -7,6 +7,7 @@
 //
 // Copyright 2005-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2010-2011 Bernhard Beschow  <bbeschow@cs.tu-berlin.de>
 //
 
 //
@@ -28,51 +29,35 @@
 
 #include "marble_export.h"
 
+#include <QtCore/QDateTime>
 #include <QtCore/QList>
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QVector>
-#include <QtGui/QRegion>
 
 #include "global.h"
 
 class QItemSelectionModel;
 class QAbstractItemModel;
-class QDateTime;
-class QPoint;
-class QRect;
 class QTextDocument;
 
 namespace Marble
 {
 
-class AbstractDataPlugin;
-class AbstractDataPluginItem;
-class GeoPainter;
-class MeasureTool;
 class MapThemeManager;
-class TileCoordsPyramid;
 class FileViewModel;
 class PositionTracking;
 class HttpDownloadManager;
 class MarbleModelPrivate;
-class PlacemarkLayout;
 class MarbleClock;
 class SunLocator;
-class TextureLayer;
 class TileCreator;
-class ViewParams;
-class StackedTile;
-class RenderPlugin;
 class PluginManager;
-class AbstractFloatItem;
 class GeoDataCoordinates;
 class GeoDataDocument;
 class GeoDataTreeModel;
 class GeoSceneDocument;
-class GeoSceneTexture;
 class Planet;
-class LayerInterface;
 class RoutingManager;
 class BookmarkManager;
 
