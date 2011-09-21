@@ -48,11 +48,6 @@ public:
      * tileLevel can be used to calculate the number of tiles in a row or column
      */
     virtual QImage tile( int n, int m, int tileLevel ) = 0;
-
-    /**
-     * The source image path, used to automatically detect the targetDir
-     */
-    virtual QString sourcePath() const = 0;
 };
 
 class MARBLE_EXPORT TileCreator : public QThread

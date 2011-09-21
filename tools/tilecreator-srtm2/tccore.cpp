@@ -29,11 +29,6 @@ public:
     {
     }
 
-    virtual QString sourcePath() const
-    {
-        return m_sourceDir;
-    }
-
     virtual QSize fullImageSize() const
     {
         return QSize( 512*c_defaultTileSize*2, 512*c_defaultTileSize ); //512: 2**9 (9 zoom levels)

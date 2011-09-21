@@ -71,28 +71,10 @@ class TileCreatorPrivate
 class TileCreatorSourceImage : public TileCreatorSource
 {
 public:
-    TileCreatorSourceImage(QString sourceDir, QString installMap)
+    TileCreatorSourceImage(QString sourcePath, QString installMap)
         : m_cachedRowNum(-1)
     {
-        mDebug() << "Prefix: " << sourceDir
-            << "installmap:" << installMap;
-
-        // If the sourceDir starts with a '/' assume an absolute path.
-        // Otherwise assume a relative marble data path
-        if ( QDir::isAbsolutePath( sourceDir ) ) {
-            m_sourcePath = sourceDir + '/' + installMap;
-            mDebug() << "Trying absolute path:" << m_sourcePath;
-        }
-        else {
-            m_sourcePath = MarbleDirs::path( "maps/" + sourceDir
-                                        + '/' + installMap );
-            mDebug() << "Trying relative path:"
-                    << "maps/" + sourceDir + '/' + installMap;
-        }
-
-        mDebug() << "Creating tiles from: " << m_sourcePath;
-
-        m_sourceImage = QImage( sourcePath() );
+        m_sourceImage = QImage( sourcePath );
     }
 
     virtual QSize fullImageSize() const
@@ -168,13 +150,7 @@ public:
         return tile;
     }
 
-    virtual QString sourcePath() const
-    {
-        return m_sourcePath;
-    }
-
 private:
-    QString m_sourcePath;
     QImage m_sourceImage;
 
     QImage m_rowCache;
@@ -185,8 +161,35 @@ private:
 TileCreator::TileCreator(const QString& sourceDir, const QString& installMap,
                          const QString& dem, const QString& targetDir)
     : QThread(0),
-      d( new TileCreatorPrivate( new TileCreatorSourceImage( sourceDir, installMap ), dem, targetDir ) )
+      d( new TileCreatorPrivate( 0, dem, targetDir ) )
+
 {
+    mDebug() << "Prefix: " << sourceDir
+        << "installmap:" << installMap;
+
+    QString sourcePath;
+
+    // If the sourceDir starts with a '/' assume an absolute path.
+    // Otherwise assume a relative marble data path
+    if ( QDir::isAbsolutePath( sourceDir ) ) {
+        sourcePath = sourceDir + '/' + installMap;
+        mDebug() << "Trying absolute path*:" << sourcePath;
+    }
+    else {
+        sourcePath = MarbleDirs::path( "maps/" + sourceDir
+                                    + '/' + installMap );
+        mDebug() << "Trying relative path*:"
+                << "maps/" + sourceDir + '/' + installMap;
+    }
+
+    mDebug() << "Creating tiles from*: " << sourcePath;
+
+    d->m_source = new TileCreatorSourceImage( sourcePath, installMap );
+
+    if ( d->m_targetDir.isNull() )
+        d->m_targetDir = MarbleDirs::localPath() + "/maps/"
+            + sourcePath.section( '/', -3, -2 ) + '/';
+
     setTerminationEnabled( true );
 }
 
@@ -214,9 +217,6 @@ void TileCreator::run()
         return;
     }
 
-    if ( d->m_targetDir.isNull() )
-        d->m_targetDir = MarbleDirs::localPath() + "/maps/"
-            + d->m_source->sourcePath().section( '/', -3, -2 ) + '/';
     if ( !d->m_targetDir.endsWith('/') )
         d->m_targetDir += '/';
 
