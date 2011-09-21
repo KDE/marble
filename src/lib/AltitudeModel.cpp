@@ -82,7 +82,7 @@ AltitudeModel::AltitudeModel( MarbleModel *const model )
 }
 
 
-qreal AltitudeModel::height( qreal lat, qreal lon )
+qreal AltitudeModel::height( qreal lat, qreal lon ) const
 {
     const int tileZoomLevel = d->m_tileLoader->maximumTileLevel( *( d->m_textureLayer ) );
     Q_ASSERT( tileZoomLevel == 9 );
@@ -157,7 +157,7 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
     return ret;
 }
 
-QList<GeoDataCoordinates> AltitudeModel::heightProfile( qreal fromLat, qreal fromLon, qreal toLat, qreal toLon )
+QList<GeoDataCoordinates> AltitudeModel::heightProfile( qreal fromLat, qreal fromLon, qreal toLat, qreal toLon ) const
 {
     const int tileZoomLevel = d->m_tileLoader->maximumTileLevel( *( d->m_textureLayer ) );
     const int width = d->m_textureLayer->tileSize().width();
