@@ -12,13 +12,13 @@
 #ifndef MARBLE_ALTITUDEMODEL_H
 #define MARBLE_ALTITUDEMODEL_H
 
-#include <QObject>
-#include <QCache>
-#include <QImage>
+#include <QtCore/QObject>
+#include <QtCore/QCache>
+#include <QtGui/QImage>
 
 #include "marble_export.h"
 #include "TileId.h"
-#include <GeoDataCoordinates.h>
+#include "GeoDataCoordinates.h"
 
 namespace Marble {
 

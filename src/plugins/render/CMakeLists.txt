@@ -38,4 +38,4 @@ if (NOT WIN32)
   add_subdirectory( aprs )
 endif (NOT WIN32)
 
-add_subdirectory(altitude-profile)
+add_subdirectory( elevationprofile )

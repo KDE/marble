@@ -8,20 +8,20 @@
 // Copyright 2011 Niko Sams <niko.sams@gmail.com>
 //
 
+#include <QtGui/QLabel>
+#include <QtCore/qmath.h>
 
 #include "AltitudeModel.h"
 #include "TileLoader.h"
 #include "MarbleDebug.h"
 #include "MapThemeManager.h"
-#include <GeoSceneHead.h>
-#include <GeoSceneMap.h>
-#include <GeoSceneDocument.h>
-#include <GeoSceneTexture.h>
+#include "GeoSceneHead.h"
+#include "GeoSceneMap.h"
+#include "GeoSceneDocument.h"
+#include "GeoSceneTexture.h"
 #include "TextureTile.h"
-#include <QLabel>
 #include "TileLoaderHelper.h"
 #include "MarbleModel.h"
-#include <qmath.h>
 
 namespace Marble {
 
