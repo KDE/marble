@@ -46,7 +46,6 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
       m_widget(widget),
       m_lmbMenu( new QMenu( m_widget ) ),
       m_rmbMenu( new QMenu( m_widget ) ),
-      m_smallScreenMenu( new QMenu( m_widget ) ),
       m_runnerManager( 0 )
 {
     connect( m_lmbMenu, SIGNAL( triggered( QAction* ) ),
@@ -71,11 +70,16 @@ void MarbleWidgetPopupMenu::createActions()
     QAction* fullscreenAction = new QAction( tr( "&Full Screen Mode" ), this );
     fullscreenAction->setCheckable( true );
 
-    m_aboutDialogAction = new QAction( tr( "&About" ), this );
+    QAction* aboutDialogAction = new QAction( tr( "&About" ), this );
 
     QMenu* infoBoxMenu = createInfoBoxMenu();
 
-    m_rmbExtensionPoint = m_rmbMenu->addSeparator();
+    const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+
+    if ( !smallScreen ) {
+        m_rmbExtensionPoint = m_rmbMenu->addSeparator();
+    }
+
     m_rmbMenu->addAction( fromHere );
     m_rmbMenu->addAction( toHere );
     m_rmbMenu->addSeparator();
@@ -83,23 +87,18 @@ void MarbleWidgetPopupMenu::createActions()
     m_rmbMenu->addAction( addBookmark );
     m_rmbMenu->addSeparator();
     m_rmbMenu->addMenu( infoBoxMenu );
-    m_rmbMenu->addAction( m_aboutDialogAction );
 
-    m_smallScreenMenu->addAction( fromHere );
-    m_smallScreenMenu->addAction( toHere );
-    m_smallScreenMenu->addSeparator();
-    m_smallScreenMenu->addAction( m_setHomePointAction );
-    m_smallScreenMenu->addAction( addBookmark );
-    m_smallScreenMenu->addSeparator();
-    m_smallScreenMenu->addMenu( infoBoxMenu );
-    m_smallScreenMenu->addAction( fullscreenAction );
-    m_smallScreenMenu->addSeparator();
+    if ( !smallScreen ) {
+        m_rmbMenu->addAction( aboutDialogAction );
+    } else {
+        m_rmbMenu->addAction( fullscreenAction );
+    }
 
     connect( fromHere, SIGNAL( triggered( ) ), SLOT( directionsFromHere() ) );
     connect( toHere, SIGNAL( triggered( ) ), SLOT( directionsToHere() ) );
     connect( m_setHomePointAction, SIGNAL( triggered() ), SLOT( slotSetHomePoint() ) );
     connect( addBookmark, SIGNAL( triggered( ) ), SLOT( addBookmark() ) );
-    connect( m_aboutDialogAction, SIGNAL( triggered() ), SLOT( slotAboutDialog() ) );
+    connect( aboutDialogAction, SIGNAL( triggered() ), SLOT( slotAboutDialog() ) );
     connect( m_copyCoordinateAction,SIGNAL( triggered() ), SLOT( slotCopyCoordinates() ) );
     connect( fullscreenAction, SIGNAL( triggered( bool ) ), this, SLOT( toggleFullscreen( bool ) ) );
 }
@@ -124,7 +123,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     m_setHomePointAction->setData( curpos );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
-        m_smallScreenMenu->popup( m_widget->mapToGlobal( curpos ) );
+        m_rmbMenu->popup( m_widget->mapToGlobal( curpos ) );
         return;
     }
 
