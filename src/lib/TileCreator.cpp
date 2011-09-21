@@ -109,25 +109,23 @@ public:
         int  mmax = TileLoaderHelper::levelToColumn( defaultLevelZeroColumns, maxTileLevel );
         int  nmax = TileLoaderHelper::levelToRow( defaultLevelZeroRows, maxTileLevel );
 
-        int maxRows = TileLoaderHelper::levelToRow( defaultLevelZeroRows, maxTileLevel );
-
         int imageHeight = m_sourceImage.height();
         int imageWidth = m_sourceImage.width();
 
         // If the image size of the image source does not match the expected
         // geometry we need to smooth-scale the image in advance to match
         // the required size
-        bool needsScaling = ( imageWidth != 2 * maxRows * (int)( c_defaultTileSize )
-                            ||  imageHeight != maxRows * (int)( c_defaultTileSize ) );
+        bool needsScaling = ( imageWidth != 2 * nmax * (int)( c_defaultTileSize )
+                            ||  imageHeight != nmax * (int)( c_defaultTileSize ) );
 
         if ( needsScaling )
             mDebug() << "Image Size doesn't match 2*n*TILEWIDTH x n*TILEHEIGHT geometry. Scaling ...";
 
-        int  stdImageWidth  = 2 * maxRows * c_defaultTileSize;
+        int  stdImageWidth  = 2 * nmax * c_defaultTileSize;
         if ( stdImageWidth == 0 )
             stdImageWidth = 2 * c_defaultTileSize;
 
-        int  stdImageHeight  = maxRows * c_defaultTileSize;
+        int  stdImageHeight  = nmax * c_defaultTileSize;
         if ( stdImageWidth != imageWidth ) {
             mDebug() <<
             QString( "TileCreator::createTiles() The size of the final image will measure  %1 x %2 pixels").arg(stdImageWidth).arg(stdImageHeight);
