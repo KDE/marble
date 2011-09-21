@@ -127,9 +127,7 @@ qreal AltitudeModel::height( qreal lat, qreal lon )
 
         const qreal dx = ( textureX > (qreal)x ) ? textureX - (qreal)x : (qreal)x - textureX;
         const qreal dy = ( textureY > (qreal)y ) ? textureY - (qreal)y : (qreal)y - textureY;
-        if ( !( 0 <= dx && dx <= 1 ) || !( 0 <= dy && dy <= 1 ) ) {
-            //mDebug() << "dx" << dx << "dy" << dy << "textureX" << textureX << "textureY" << textureY << "x" << x << "y" << y;
-        }
+
         Q_ASSERT( 0 <= dx && dx <= 1 );
         Q_ASSERT( 0 <= dy && dy <= 1 );
         unsigned int pixel;
