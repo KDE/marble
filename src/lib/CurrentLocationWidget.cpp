@@ -47,8 +47,6 @@ class CurrentLocationWidgetPrivate
     QList<PositionProviderPlugin*> m_positionProviderPlugins;
     GeoDataCoordinates             m_currentPosition;
 
-    MarbleLocale*                  m_locale;
-
     void adjustPositionTrackingStatus( PositionProviderStatus status );
     void changePositionProvider( const QString &provider );
     void centerOnCurrentLocation();
@@ -65,8 +63,6 @@ CurrentLocationWidget::CurrentLocationWidget( QWidget *parent, Qt::WindowFlags f
       d( new CurrentLocationWidgetPrivate() )
 {
     d->m_currentLocationUi.setupUi( this );
-
-    d->m_locale = MarbleGlobal::getInstance()->locale();
 
     connect( d->m_currentLocationUi.recenterComboBox, SIGNAL ( currentIndexChanged( int ) ),
             this, SLOT( setRecenterMode( int ) ) );
@@ -231,7 +227,7 @@ void CurrentLocationWidget::receiveGpsCoordinates( const GeoDataCoordinates &pos
     html += "</table>";
     html += "</body></html>";
 
-    switch ( d->m_locale->measureSystem() ) {
+    switch ( MarbleGlobal::getInstance()->locale()->measureSystem() ) {
         case Metric:
         //kilometers per hour
         unitString = tr("km/h");
