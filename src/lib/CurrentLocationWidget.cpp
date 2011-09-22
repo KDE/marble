@@ -48,6 +48,9 @@ class CurrentLocationWidgetPrivate
     QList<PositionProviderPlugin*> m_positionProviderPlugins;
     GeoDataCoordinates             m_currentPosition;
 
+    QString m_lastOpenPath;
+    QString m_lastSavePath;
+
     void adjustPositionTrackingStatus( PositionProviderStatus status );
     void changePositionProvider( const QString &provider );
     void centerOnCurrentLocation();
@@ -310,27 +313,25 @@ void CurrentLocationWidgetPrivate::centerOnCurrentLocation()
 
 void CurrentLocationWidgetPrivate::saveTrack()
 {
-    static QString s_dirName = QDir::homePath();
-    QString suggested = s_dirName;
+    QString suggested = m_lastSavePath;
     QString fileName = QFileDialog::getSaveFileName(m_widget, QObject::tr("Save Track"), // krazy:exclude=qclasses
                                                     suggested.append('/' + QDateTime::currentDateTime().toString("yyyy-MM-dd_hhmmss") + ".kml"),
                             QObject::tr("KML File (*.kml)"));
     if ( !fileName.isEmpty() ) {
         QFileInfo file( fileName );
-        s_dirName = file.absolutePath();
+        m_lastSavePath = file.absolutePath();
         m_widget->model()->positionTracking()->saveTrack( fileName );
     }
 }
 
 void CurrentLocationWidgetPrivate::openTrack()
 {
-    static QString s_dirOpen = QDir::homePath();
-    QString suggested = s_dirOpen;
+    QString suggested = m_lastOpenPath;
     QString fileName = QFileDialog::getOpenFileName( m_widget, QObject::tr("Open Track"), // krazy:exclude=qclasses
                                                     suggested, QObject::tr("KML File (*.kml)"));
     if ( !fileName.isEmpty() ) {
         QFileInfo file( fileName );
-        s_dirOpen = file.absolutePath();
+        m_lastOpenPath = file.absolutePath();
         m_widget->model()->addGeoDataFile( fileName );
     }
 }
@@ -366,10 +367,30 @@ bool CurrentLocationWidget::trackVisible() const
     return d->m_widget->model()->positionTracking()->trackVisible();
 }
 
+QString CurrentLocationWidget::lastOpenPath() const
+{
+    return d->m_lastOpenPath;
+}
+
+QString CurrentLocationWidget::lastSavePath() const
+{
+    return d->m_lastSavePath;
+}
+
 void CurrentLocationWidget::setTrackVisible( bool visible )
 {
     d->m_currentLocationUi.showTrackCheckBox->setChecked( visible );
     d->m_widget->model()->positionTracking()->setTrackVisible( visible );
+}
+
+void CurrentLocationWidget::setLastOpenPath( const QString &path )
+{
+    d->m_lastOpenPath = path;
+}
+
+void CurrentLocationWidget::setLastSavePath( const QString &path )
+{
+    d->m_lastSavePath = path;
 }
 
 }

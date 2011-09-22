@@ -47,6 +47,10 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
 
     bool trackVisible() const;
 
+    QString lastOpenPath() const;
+
+    QString lastSavePath() const;
+
  public Q_SLOTS:
     void receiveGpsCoordinates( const GeoDataCoordinates& in, qreal speed );
 
@@ -57,6 +61,10 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
     void setAutoZoom( bool activate );
 
     void setTrackVisible( bool visible );
+
+    void setLastOpenPath( const QString &path );
+
+    void setLastSavePath( const QString &path );
 
  private:
     Q_DISABLE_COPY( CurrentLocationWidget )

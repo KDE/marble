@@ -1040,6 +1040,8 @@ void MainWindow::readSettings()
         trackingWidget->setRecenterMode( settings.value( "recenterMode", 0 ).toInt() );
         trackingWidget->setAutoZoom( settings.value( "autoZoom", false ).toBool() );
         trackingWidget->setTrackVisible( settings.value( "trackVisible", true ).toBool() );
+        trackingWidget->setLastOpenPath( settings.value( "lastTrackOpenPath", QDir::homePath() ).toString() );
+        trackingWidget->setLastSavePath( settings.value( "lastTrackSavePath", QDir::homePath() ).toString() );
     }
     settings.endGroup();
 
@@ -1155,6 +1157,8 @@ void MainWindow::writeSettings()
          settings.setValue( "recenterMode", trackingWidget->recenterMode() );
          settings.setValue( "autoZoom", trackingWidget->autoZoom() );
          settings.setValue( "trackVisible", trackingWidget->trackVisible() );
+         settings.setValue( "lastTrackOpenPath", trackingWidget->lastOpenPath() );
+         settings.setValue( "lastTrackSavePath", trackingWidget->lastSavePath() );
      }
 
      settings.endGroup();
