@@ -33,6 +33,7 @@ using namespace Marble;
 
 #include <QtCore/QDateTime>
 #include <QtGui/QFileDialog>
+#include <QtGui/QMessageBox>
 
 namespace Marble
 {
@@ -336,10 +337,18 @@ void CurrentLocationWidgetPrivate::openTrack()
 
 void CurrentLocationWidgetPrivate::clearTrack()
 {
-    m_widget->model()->positionTracking()->clearTrack();
-    m_widget->update();
-    m_currentLocationUi.saveTrackPushButton->setEnabled( false );
-    m_currentLocationUi.clearTrackPushButton->setEnabled( false );
+    const int result = QMessageBox::question( m_widget,
+                                              QObject::tr( "Clear current track" ),
+                                              QObject::tr( "Are you sure you want to clear the current track?" ),
+                                              QMessageBox::Yes,
+                                              QMessageBox::No );
+
+    if ( result == QMessageBox::Yes ) {
+        m_widget->model()->positionTracking()->clearTrack();
+        m_widget->update();
+        m_currentLocationUi.saveTrackPushButton->setEnabled( false );
+        m_currentLocationUi.clearTrackPushButton->setEnabled( false );
+    }
 }
 
 AdjustNavigation::CenterMode CurrentLocationWidget::recenterMode() const
