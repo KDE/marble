@@ -312,15 +312,18 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler( MarbleWidget *
 
     // Connect the inputHandler and the measure tool to the popup menu
     d->m_addMeasurePointAction = new QAction( tr( "Add &Measure Point" ), this);
-    MarbleWidgetInputHandler::d->m_widget->popupMenu()->addAction( Qt::RightButton, d->m_addMeasurePointAction );
     d->m_removeLastMeasurePointAction = new QAction( tr( "Remove &Last Measure Point" ),
                                                   this);
     d->m_removeLastMeasurePointAction->setEnabled(false);
-    MarbleWidgetInputHandler::d->m_widget->popupMenu()->addAction( Qt::RightButton, d->m_removeLastMeasurePointAction );
     d->m_removeMeasurePointsAction = new QAction( tr( "&Remove Measure Points" ),
                                                 this);
     d->m_removeMeasurePointsAction->setEnabled(false);
-    MarbleWidgetInputHandler::d->m_widget->popupMenu()->addAction( Qt::RightButton, d->m_removeMeasurePointsAction );
+
+    if ( ! MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        MarbleWidgetInputHandler::d->m_widget->popupMenu()->addAction( Qt::RightButton, d->m_addMeasurePointAction );
+        MarbleWidgetInputHandler::d->m_widget->popupMenu()->addAction( Qt::RightButton, d->m_removeLastMeasurePointAction );
+        MarbleWidgetInputHandler::d->m_widget->popupMenu()->addAction( Qt::RightButton, d->m_removeMeasurePointsAction );
+    }
 
     connect( d->m_addMeasurePointAction, SIGNAL( triggered() ),
              SLOT( addMeasurePoint() ) );
