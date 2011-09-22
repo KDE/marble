@@ -83,8 +83,6 @@ protected:
      */
     virtual bool isValidRootElement() = 0;
 
-    virtual void raiseRootElementError();
-
     virtual GeoDocument* createDocument() const = 0;
 
 protected:

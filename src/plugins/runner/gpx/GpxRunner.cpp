@@ -45,7 +45,7 @@ void GpxRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     GpxParser parser;
 
     if ( !parser.read( &file ) ) {
-        emit parsingFinished( 0 );
+        emit parsingFinished( 0, parser.errorString() );
         return;
     }
     GeoDocument* document = parser.releaseDocument();

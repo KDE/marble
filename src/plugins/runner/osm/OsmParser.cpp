@@ -32,11 +32,6 @@ bool OsmParser::isValidRootElement()
     return isValidElement(osm::osmTag_osm);
 }
 
-void OsmParser::raiseRootElementError()
-{
-    raiseError(QObject::tr("The file is not a valid OSM file"));
-}
-
 bool OsmParser::isValidElement(const QString& tagName) const
 {
     if (!GeoParser::isValidElement(tagName))

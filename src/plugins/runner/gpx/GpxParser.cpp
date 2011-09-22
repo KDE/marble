@@ -27,11 +27,6 @@ bool GpxParser::isValidRootElement()
     return isValidElement(gpx::gpxTag_gpx);
 }
 
-void GpxParser::raiseRootElementError()
-{
-    raiseError(QObject::tr("The file is not a valid GPX 1.0 / 1.1 file"));
-}
-
 bool GpxParser::isValidElement(const QString& tagName) const
 {
     if (!GeoParser::isValidElement(tagName))

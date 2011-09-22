@@ -58,7 +58,7 @@ void MarbleAbstractRunner::retrieveRoute( RouteRequest* )
 void MarbleAbstractRunner::parseFile( const QString &, DocumentRole )
 {
     // dummy implementation
-    emit parsingFinished( 0 );
+    emit parsingFinished( 0, "Not Implemented" );
 }
 
 }

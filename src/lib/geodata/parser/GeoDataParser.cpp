@@ -74,19 +74,6 @@ bool GeoDataParser::isValidRootElement()
     }
 }
 
-void GeoDataParser::raiseRootElementError()
-{
-    switch ((GeoDataSourceType) m_source) {
-    // TODO: case GeoData_GeoRSS:
-    case GeoData_KML:
-        raiseError(QObject::tr("The file is not a valid KML 2.0 / 2.1 / 2.2 file"));
-        break;
-    default:
-        GeoParser::raiseRootElementError();
-        break;
-    }
-}
-
 bool GeoDataParser::isValidElement(const QString& tagName) const
 {
     if (!GeoParser::isValidElement(tagName))

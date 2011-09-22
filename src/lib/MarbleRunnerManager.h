@@ -106,9 +106,9 @@ signals:
     void routeRetrieved( GeoDataDocument* route );
 
     /**
-      * The file was parsed successfully
+      * The file was parsed and potential error message
       */
-    void parsingFinished( GeoDataDocument* document );
+    void parsingFinished( GeoDataDocument* document, const QString& error = QString() );
 
     /** @todo: add signals that reverse geocoding and routing have finished
       * to be able to cope with misbehaving runners
@@ -121,7 +121,7 @@ private slots:
 
     void addRoutingResult( GeoDataDocument* route );
 
-    void addParsingResult( GeoDataDocument* document );
+    void addParsingResult( GeoDataDocument* document, const QString& error = QString() );
 
 private:
     Q_PRIVATE_SLOT( d, void cleanupSearchTask( RunnerTask* task ) )

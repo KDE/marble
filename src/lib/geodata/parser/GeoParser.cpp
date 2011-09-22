@@ -95,16 +95,17 @@ bool GeoParser::read( QIODevice* device )
 
                 if ( !m_nodeStack.isEmpty() )
                     raiseError(
-                        QObject::tr("Parsing failed. Still %n unclosed tag(s) after document end.", "",
-                        m_nodeStack.size() ) + errorString());
+                        QObject::tr("Parsing failed line %1. Still %n unclosed tag(s) after document end. ", "",
+                                     m_nodeStack.size() ).arg( lineNumber() ) + errorString());
             } else
-                raiseRootElementError();
+                return false;
         }
     }
 
     if ( error() ) {
-        mDebug() << "[GeoParser::read] -> Error occurred:" << errorString() << " at line: " << lineNumber();
-
+        if ( lineNumber() == 1) {
+            raiseError("");
+        }
         // Defer the deletion to the dtor
         // This allows the BookmarkManager to recover the broken .kml files it produced in Marble 1.0 and 1.1
         /** @todo: Remove this workaround around Marble 1.4 */
@@ -187,11 +188,6 @@ void GeoParser::parseDocument()
         dumpParentStack( name().toString() + "-discarded", m_nodeStack.size(), true );
     }
 #endif
-}
-
-void GeoParser::raiseRootElementError()
-{
-    raiseError( QObject::tr( "File format unrecognized" ));
 }
 
 void GeoParser::raiseWarning( const QString& warning )

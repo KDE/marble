@@ -14,6 +14,7 @@
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
 #include <QtCore/QTime>
+#include <QtGui/QMessageBox>
 
 #include "FileLoader.h"
 #include "MarbleDebug.h"
@@ -179,6 +180,14 @@ void FileManager::cleanupLoader( FileLoader* loader )
         if ( doc && d->m_recenter ) {
             emit centeredDocument( doc->latLonAltBox() );
             d->m_recenter = false;
+        }
+        if ( !loader->error().isEmpty() ) {
+            QMessageBox errorBox;
+            errorBox.setWindowTitle( QObject::tr("File Parsing Error"));
+            errorBox.setText( loader->error() );
+            errorBox.setIcon( QMessageBox::Warning );
+            errorBox.exec();
+            qWarning() << "File Parsing error " << loader->error();
         }
         d->m_pathList.removeAll( loader->path() );
         delete loader;

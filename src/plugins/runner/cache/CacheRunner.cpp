@@ -43,7 +43,6 @@ void CacheRunner::parseFile( const QString &fileName, DocumentRole role = Unknow
     quint32 magic;
     in >> magic;
     if ( magic != MarbleMagicNumber ) {
-        qDebug( "Bad file format!" );
         emit parsingFinished( 0 );
         return;
     }
@@ -52,7 +51,7 @@ void CacheRunner::parseFile( const QString &fileName, DocumentRole role = Unknow
     qint32 version;
     in >> version;
     if ( version < 015 ) {
-        qDebug( "Bad file - too old!" );
+        qDebug( "Bad Cache file - too old!" );
         emit parsingFinished( 0 );
         return;
     }

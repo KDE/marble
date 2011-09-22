@@ -45,7 +45,7 @@ void OsmRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     OsmParser parser;
 
     if ( !parser.read( &file ) ) {
-        emit parsingFinished( 0 );
+        emit parsingFinished( 0, parser.errorString() );
         return;
     }
     GeoDocument* document = parser.releaseDocument();

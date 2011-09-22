@@ -272,17 +272,17 @@ void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role 
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Parsing );
     foreach( RunnerPlugin *plugin, plugins ) {
         MarbleAbstractRunner* runner = plugin->newRunner();
-        connect( runner, SIGNAL( parsingFinished(GeoDataDocument*) ),
-                 this, SLOT(addParsingResult(GeoDataDocument*)) );
+        connect( runner, SIGNAL( parsingFinished( GeoDataDocument*, QString ) ),
+                 this, SLOT( addParsingResult( GeoDataDocument*, QString )) );
         ParsingTask *task = new ParsingTask( runner, fileName, role );
         QThreadPool::globalInstance()->start( task );
     }
 }
 
-void MarbleRunnerManager::addParsingResult( GeoDataDocument *document )
+void MarbleRunnerManager::addParsingResult( GeoDataDocument *document, const QString& error )
 {
-    if ( document ) {
-        emit parsingFinished( document );
+    if ( document || !error.isEmpty() ) {
+        emit parsingFinished( document, error );
     }
 }
 

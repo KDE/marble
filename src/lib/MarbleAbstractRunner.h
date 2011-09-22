@@ -105,10 +105,10 @@ Q_SIGNALS:
 
     /**
       * File parsing is finished, result in the given document object.
-      * The signal should be emitted with null document in case of fault.
+      * The signal should be emitted with null document and error description in case of fault.
       * To be emitted by runners after a @see parseFile call.
       */
-    void parsingFinished( GeoDataDocument* document );
+    void parsingFinished( GeoDataDocument* document, const QString& error = QString() );
 
 protected:
     /**

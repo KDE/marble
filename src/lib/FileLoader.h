@@ -34,13 +34,14 @@ class FileLoader : public QThread
         void run();
         QString path() const;
         GeoDataDocument *document();
+        QString error() const;
 
     Q_SIGNALS:
         void loaderFinished( FileLoader* );
         void newGeoDataDocumentAdded( GeoDataDocument* );
 
 private:
-        Q_PRIVATE_SLOT ( d, void documentParsed( GeoDataDocument *) )
+        Q_PRIVATE_SLOT ( d, void documentParsed( GeoDataDocument *, QString) )
 
         friend class FileLoaderPrivate;
 

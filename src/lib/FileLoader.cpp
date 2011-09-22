@@ -74,7 +74,7 @@ public:
     int spacePopIdx( qint64 population ) const;
     int areaPopIdx( qreal area ) const;
 
-    void documentParsed( GeoDataDocument *);
+    void documentParsed( GeoDataDocument *doc, const QString& error);
 
     FileLoader *q;
     MarbleRunnerManager *m_runner;
@@ -82,6 +82,7 @@ public:
     QString m_contents;
     DocumentRole m_documentRole;
     GeoDataDocument *m_document;
+    QString m_error;
 
 };
 
@@ -112,6 +113,11 @@ QString FileLoader::path() const
 GeoDataDocument* FileLoader::document()
 {
     return d->m_document;
+}
+
+QString FileLoader::error() const
+{
+    return d->m_error;
 }
 
 void FileLoader::run()
@@ -163,8 +169,8 @@ void FileLoader::run()
             cacheLastModified  = QFileInfo( defaultCacheName ).lastModified();
 
             if ( sourceLastModified < cacheLastModified ) {
-                connect( d->m_runner, SIGNAL( parsingFinished(GeoDataDocument*) ),
-                        this, SLOT( documentParsed(GeoDataDocument*) ) );
+                connect( d->m_runner, SIGNAL( parsingFinished( GeoDataDocument*, QString ) ),
+                         this, SLOT( documentParsed( GeoDataDocument*, QString ) ) );
                 d->m_runner->parseFile( defaultCacheName, d->m_documentRole );
             }
         }
@@ -183,8 +189,8 @@ void FileLoader::run()
                 }
                 // use runners: pnt, gpx, osm
                 else {
-                    connect( d->m_runner, SIGNAL( parsingFinished(GeoDataDocument*) ),
-                              this, SLOT( documentParsed(GeoDataDocument*) ) );
+                    connect( d->m_runner, SIGNAL( parsingFinished(GeoDataDocument*,QString) ),
+                             this, SLOT( documentParsed( GeoDataDocument*, QString ) ) );
                     d->m_runner->parseFile( d->m_filepath, d->m_documentRole );
                 }
             }
@@ -217,7 +223,7 @@ void FileLoaderPrivate::importKml( const QString& filename )
     file.open( QIODevice::ReadOnly );
 
     if ( !parser.read( &file ) ) {
-        qWarning( "Could not import kml file!" );
+        m_error = parser.errorString();
         return;
     }
     GeoDocument* document = parser.releaseDocument();
@@ -228,8 +234,6 @@ void FileLoaderPrivate::importKml( const QString& filename )
     m_document->setFileName( m_filepath );
     file.close();
     createFilterProperties( m_document );
-    mDebug() << "newGeoDataDocumentAdded" << m_filepath;
-
     emit q->newGeoDataDocumentAdded( m_document );
 }
 
@@ -315,12 +319,15 @@ void FileLoaderPrivate::savePlacemarks(QDataStream &out, const GeoDataContainer 
     }
 }
 
-void FileLoaderPrivate::documentParsed( GeoDataDocument* doc )
+void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& error )
 {
-    m_document = doc;
-    doc->setFileName( m_filepath );
-    createFilterProperties( doc );
-    emit q->newGeoDataDocumentAdded( doc );
+    m_error = error;
+    if ( doc ) {
+        m_document = doc;
+        doc->setFileName( m_filepath );
+        createFilterProperties( doc );
+        emit q->newGeoDataDocumentAdded( m_document );
+    }
     emit q->loaderFinished( q );
 }
 
