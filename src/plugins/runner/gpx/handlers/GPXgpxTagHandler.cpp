@@ -29,6 +29,8 @@
 #include "GeoDataDocument.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+#include "GeoDataHotSpot.h"
+#include "MarbleDirs.h"
 #include "global.h"
 
 namespace Marble
@@ -54,6 +56,48 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
     doc->addStyleMap(styleMap);
     doc->addStyle(style);
 
+    // create a style for routes
+    GeoDataStyle routestyle;
+    GeoDataLineStyle routeLineStyle;
+    routeLineStyle.setColor( "blue" );
+    routeLineStyle.setWidth(3);
+    routestyle.setLineStyle(routeLineStyle);
+    routestyle.setStyleId("route");
+
+    GeoDataStyleMap routeStyleMap;
+    routeStyleMap.setStyleId("map-route");
+    routeStyleMap.insert("normal", QString("#").append(routestyle.styleId()));
+    doc->addStyleMap(routeStyleMap);
+    doc->addStyle(routestyle);
+    
+    // routepoint icon style
+    GeoDataStyle routepointStyle;
+    routepointStyle.setStyleId("routepoint");
+    GeoDataIconStyle routeIconStyle;
+    routeIconStyle.setIconPath(MarbleDirs::path("bitmaps/city_4_white.png"));
+    routeIconStyle.setHotSpot(QPointF(0.5,0.5), GeoDataHotSpot::Fraction, GeoDataHotSpot::Fraction);
+    routepointStyle.setIconStyle(routeIconStyle);
+
+    GeoDataStyleMap routepointStyleMap;
+    routepointStyleMap.setStyleId("map-routepoint");
+    routepointStyleMap.insert("normal", QString("#").append(routepointStyle.styleId()));
+    doc->addStyleMap(routepointStyleMap);
+    doc->addStyle(routepointStyle);
+    
+    // create a default style for waypoint icons
+    GeoDataStyle waypointStyle;
+    waypointStyle.setStyleId("waypoint");
+    GeoDataIconStyle iconStyle;
+    iconStyle.setIconPath(MarbleDirs::path("bitmaps/flag.png"));
+    iconStyle.setHotSpot(QPointF(0.12,0.03), GeoDataHotSpot::Fraction, GeoDataHotSpot::Fraction);
+    waypointStyle.setIconStyle(iconStyle);
+
+    GeoDataStyleMap wpStyleMap;
+    styleMap.setStyleId("map-waypoint");
+    styleMap.insert("normal", QString("#").append(waypointStyle.styleId()));
+    doc->addStyleMap(wpStyleMap);
+    doc->addStyle(waypointStyle);
+    
 #ifdef DEBUG_TAGS
     mDebug() << "Parsed <" << gpxTag_gpx << "> document: " << doc;
 #endif

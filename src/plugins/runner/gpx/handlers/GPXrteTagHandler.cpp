@@ -14,50 +14,52 @@
     You should have received a copy of the GNU Library General Public License
     along with this library. If not, see <http://www.gnu.org/licenses/>.
 
-    Copyright 2009 Thibaut GRIDEL <tgridel@free.fr>
+    Copyright 2011 Thibaut GRIDEL <tgridel@free.fr>
+    Copyright 2011 Anders Lund <anders@alweb.dk>
 */
 
-#include "GPXnameTagHandler.h"
+#include "GPXrteTagHandler.h"
 
 #include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"
 #include "GeoParser.h"
 #include "GeoDataDocument.h"
+#include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
-#include "GeoDataFolder.h"
 
 namespace Marble
 {
 namespace gpx
 {
-GPX_DEFINE_TAG_HANDLER(name)
+GPX_DEFINE_TAG_HANDLER(rte)
 
-GeoNode* GPXnameTagHandler::parse(GeoParser& parser) const
+GeoNode* GPXrteTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_name));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_rte));
 
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(gpxTag_wpt)
-        || parentItem.represents(gpxTag_trk)
-        || parentItem.represents(gpxTag_rtept))
+    if (parentItem.represents(gpxTag_gpx))
     {
-        GeoDataPlacemark* placemark = parentItem.nodeAs<GeoDataPlacemark>();
+        GeoDataDocument* doc = parentItem.nodeAs<GeoDataDocument>();
+        
+        // route is a folder, containing a linestring and individual routepoints
+        GeoDataFolder *folder = new GeoDataFolder;
+        doc->append(folder);
+        // placemark for the linestring
+        GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        folder->append(placemark);
+        GeoDataLineString *linestring = new GeoDataLineString;
+        placemark->setGeometry(linestring);
+        placemark->setStyleUrl("#map-route");
 
-        placemark->setName(parser.readElementText().trimmed());
 #ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_name << "> : " << placemark->name();
+        mDebug() << "Parsed <" << gpxTag_rte << "> rte: " << doc->size();
 #endif
+        return folder;
     }
-    else if (parentItem.represents(gpxTag_rte))
-    {
-        GeoDataFeature* route = parentItem.nodeAs<GeoDataFeature>();
-        route->setName(parser.readElementText().trimmed());
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_name << "> : " << route->name();
-#endif
-    }        
+    mDebug() << "rte parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 

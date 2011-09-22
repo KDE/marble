@@ -39,6 +39,8 @@ const char* gpxTag_trk = "trk";
 const char* gpxTag_trkpt = "trkpt";
 const char* gpxTag_trkseg = "trkseg";
 const char* gpxTag_wpt = "wpt";
+const char* gpxTag_rte = "rte";
+const char* gpxTag_rtept = "rtept";
 
 }
 }

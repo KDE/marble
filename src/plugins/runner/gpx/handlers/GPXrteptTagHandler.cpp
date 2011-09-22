@@ -17,31 +17,35 @@
     Copyright 2009 Thibaut GRIDEL <tgridel@free.fr>
 */
 
-#include "GPXwptTagHandler.h"
+#include "GPXrteptTagHandler.h"
 
 #include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"
 #include "GeoParser.h"
-#include "GeoDataDocument.h"
+#include "GeoDataLineString.h"
+#include "GeoDataCoordinates.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataPoint.h"
+#include "GeoDataFolder.h"
+#include "GeoDataStyle.h"
 
 namespace Marble
 {
 namespace gpx
 {
-GPX_DEFINE_TAG_HANDLER(wpt)
+GPX_DEFINE_TAG_HANDLER(rtept)
 
-GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
+GeoNode* GPXrteptTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_wpt));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_rtept));
 
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(gpxTag_gpx))
+    if (parentItem.represents(gpxTag_rte))
     {
-        GeoDataDocument* doc = parentItem.nodeAs<GeoDataDocument>();
-        GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        GeoDataFolder* route = parentItem.nodeAs<GeoDataFolder>();
+        GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>(route->child(0));
+        GeoDataLineString* linestring = static_cast<GeoDataLineString*>(placemark->geometry());
+        GeoDataCoordinates coord;
 
         QXmlStreamAttributes attributes = parser.attributes();
         QStringRef tmp;
@@ -57,17 +61,24 @@ GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
         {
             lon = tmp.toString().toFloat();
         }
-        placemark->setCoordinate( lon, lat, 0, GeoDataPoint::Degree );
+        coord.set(lon, lat, 0, GeoDataCoordinates::Degree);
+        linestring->append(coord);
         
-        placemark->setStyle(&doc->style("waypoint"));
+        // create a placemark too...
+        GeoDataPlacemark* routepoint = new GeoDataPlacemark;
+        routepoint->setCoordinate(coord);
+        route->append(routepoint);
+        routepoint->setStyleUrl("#map-routepoint");
+        mDebug()<<routepoint->style()->styleId();
         
-        doc->append(placemark);
+
 #ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_wpt << "> waypoint: " << doc->size();
+        mDebug() << "Parsed <" << gpxTag_rtept << "> waypoint: " << linestring->size()
+                << coord.toString(GeoDataCoordinates::Decimal);
 #endif
-        return placemark;
+        return static_cast<GeoDataPlacemark*>(routepoint);
     }
-    mDebug() << "wpt parsing with parentitem" << parentItem.qualifiedName();
+    mDebug() << "rtept parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 
