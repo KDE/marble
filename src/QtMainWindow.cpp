@@ -825,8 +825,13 @@ void MainWindow::updateStatusBar()
 void MainWindow::openFile()
 {
     QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Open File"),
-                            QString(),
+                            m_lastFileOpenPath,
                             tr("All Supported Files (*.gpx *.kml *.pnt *.osm);;GPS Data (*.gpx);;Google Earth KML (*.kml);;Micro World Database II (*.pnt);;OpenStreet map file (*.osm)"));
+
+    if ( !fileNames.isEmpty() ) {
+        const QString firstFile = fileNames.first();
+        m_lastFileOpenPath = QFileInfo( firstFile ).absolutePath();
+    }
 
     foreach( const QString &fileName, fileNames ) {
         m_controlView->marbleModel()->addGeoDataFile( fileName );
@@ -912,6 +917,7 @@ void MainWindow::readSettings()
          showClouds(settings.value("showClouds", true ).toBool());
          workOffline(settings.value("workOffline", false ).toBool());
          showAtmosphere(settings.value("showAtmosphere", true ).toBool());
+         m_lastFileOpenPath = settings.value("lastFileOpenDir", QDir::homePath()).toString();
      settings.endGroup();
 
      setUpdatesEnabled(false);
@@ -1067,6 +1073,7 @@ void MainWindow::writeSettings()
          settings.setValue( "showClouds", m_showCloudsAct->isChecked() );
          settings.setValue( "workOffline", m_workOfflineAct->isChecked() );
          settings.setValue( "showAtmosphere", m_showAtmosphereAct->isChecked() );
+         settings.setValue( "lastFileOpenDir", m_lastFileOpenPath );
      settings.endGroup();
 
      settings.beginGroup( "MarbleWidget" );

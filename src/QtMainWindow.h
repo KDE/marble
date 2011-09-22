@@ -210,6 +210,8 @@ private:
     GoToDialog *m_gotoDialog;
 
     RoutingWidget *m_routingWidget;
+
+    QString m_lastFileOpenPath;
 };
 
 } // namespace Marble

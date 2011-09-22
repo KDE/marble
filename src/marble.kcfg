@@ -6,6 +6,7 @@
  <kcfgfile name="marblerc" />
  <include>kglobalsettings.h</include>
  <include>"lib/global.h"</include>
+ <include>QtCore/QDir</include>
  <group name="MarbleWidget" >
   <entry key="homeLongitude" type="Double" >
    <default>9.4</default>
@@ -140,6 +141,10 @@
   <entry name="mapFont" type="Font">
    <label>The general font used on the map.</label>
    <default code="true">KGlobalSettings::generalFont()</default>
+  </entry>
+  <entry name="lastFileOpenDir" type="String">
+    <label>The last directory that was opened by File->Open.</label>
+    <default code="true">QDir::homePath()</default>
   </entry>
  </group>
  <group name="Sun" >

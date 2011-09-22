@@ -213,7 +213,7 @@ bool MarblePart::openUrl( const KUrl &url )
 
 bool MarblePart::openFile()
 {
-    QStringList fileNames = KFileDialog::getOpenFileNames( KUrl(),
+    QStringList fileNames = KFileDialog::getOpenFileNames( m_lastFileOpenPath,
                                     i18n("*.gpx *.kml *.osm *.pnt|All Supported Files\n"
                                          "*.gpx|GPS Data\n"
                                          "*.kml|Google Earth KML\n"
@@ -221,6 +221,12 @@ bool MarblePart::openFile()
                                          "*.pnt|Micro World Data Bank II"),
                                             widget(), i18n("Open File")
                                            );
+
+    if ( !fileNames.isEmpty() ) {
+        const QString firstFile = fileNames.first();
+        m_lastFileOpenPath = KUrl::fromLocalFile( QFileInfo( firstFile ).absolutePath() );
+    }
+
     foreach( const QString &fileName, fileNames ) {
         m_controlView->marbleModel()->addGeoDataFile( fileName );
     }
@@ -432,6 +438,8 @@ void MarblePart::readSettings()
     m_initialGraphicsSystem = (GraphicsSystem) MarbleSettings::graphicsSystem();
     m_previousGraphicsSystem = m_initialGraphicsSystem;
 
+    m_lastFileOpenPath = KUrl::fromLocalFile( MarbleSettings::lastFileOpenDir() );
+
     // Plugins
     QHash<QString, int> pluginEnabled;
     QHash<QString, int> pluginVisible;
@@ -614,6 +622,7 @@ void MarblePart::writeSettings()
     GraphicsSystem graphicsSystem = (GraphicsSystem) MarbleSettings::graphicsSystem();
     MarbleSettings::setGraphicsSystem( graphicsSystem );
 
+    MarbleSettings::setLastFileOpenDir( m_lastFileOpenPath.toLocalFile() );
 
     MarbleSettings::setDistanceUnit( MarbleGlobal::getInstance()->locale()->distanceUnit() );
     MarbleSettings::setAngleUnit( m_controlView->marbleWidget()->defaultAngleUnit() );

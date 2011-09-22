@@ -18,6 +18,7 @@
 #include <QtCore/QHash>
 #include <QtCore/QDateTime>
 #include <kmenu.h>
+#include <kurl.h>
 #include "global.h"
 
 class KAboutData;
@@ -243,6 +244,7 @@ class MarblePart: public KParts::ReadOnlyPart
     QString m_position;
     QString m_clock;
     QString m_tileZoomLevel;
+    KUrl m_lastFileOpenPath;
 
     // Items for the statusbar.
     QLabel       *m_positionLabel;
