@@ -12,9 +12,9 @@
 #define MARBLE_BOOKMARKINFODIALOG_H
 
 #include "ui_EditBookmarkDialog.h"
-#include "MarbleWidget.h"
 #include "marble_export.h"
-#include "MarbleRunnerManager.h"
+#include "GeoDataCoordinates.h"
+#include "GeoDataPlacemark.h"
 
 /** @todo FIXME after freeze: Rename to AddBookmarkDialog*/
 
@@ -23,6 +23,8 @@ namespace Marble
 
 class EditBookmarkDialogPrivate;
 class BookmarkManager;
+class GeoDataLookAt;
+class MarbleWidget;
 
 class MARBLE_EXPORT EditBookmarkDialog : public QDialog, private Ui::UiEditBookmarkDialog
 {

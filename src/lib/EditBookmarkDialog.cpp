@@ -18,6 +18,8 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataExtendedData.h"
 #include "MarbleModel.h"
+#include "MarbleRunnerManager.h"
+#include "MarbleWidget.h"
 #include "NewBookmarkFolderDialog.h"
 
 #include <QtCore/QPointer>
