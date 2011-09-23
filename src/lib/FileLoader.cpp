@@ -63,7 +63,6 @@ public:
         delete m_runner;
     }
 
-    void importKml( const QString& filename );
     void importKmlFromData();
 
     void saveFile(const QString& filename );
@@ -80,6 +79,7 @@ public:
     MarbleRunnerManager *m_runner;
     QString m_filepath;
     QString m_contents;
+    QString m_cacheFile;
     DocumentRole m_documentRole;
     GeoDataDocument *m_document;
     QString m_error;
@@ -123,7 +123,6 @@ QString FileLoader::error() const
 void FileLoader::run()
 {
     if ( d->m_contents.isEmpty() ) {
-        QString defaultCacheName;
         QString defaultSourceName;
 
         mDebug() << "starting parser for" << d->m_filepath;
@@ -137,28 +136,26 @@ void FileLoader::run()
         // determine source, cache names
         if ( fileinfo.isAbsolute() ) {
             // We got an _absolute_ path now: e.g. "/patrick.kml"
-            // defaultCacheName = path + '/' + name + ".cache";
             defaultSourceName   = path + '/' + name + '.' + suffix;
         }
         else {
             if ( d->m_filepath.contains( '/' ) ) {
                 // _relative_ path: "maps/mars/viking/patrick.kml"
-                // defaultCacheName = MarbleDirs::path( path + '/' + name + ".cache" );
                 defaultSourceName   = MarbleDirs::path( path + '/' + name + '.' + suffix );
             }
             else {
                 // _standard_ shared placemarks: "placemarks/patrick.kml"
-                defaultCacheName = MarbleDirs::path( "placemarks/" + path + name + ".cache" );
-		if (defaultCacheName.isEmpty()) {
-			defaultCacheName = MarbleDirs::localPath() + "/placemarks/" + path + name + ".cache";
+                d->m_cacheFile = MarbleDirs::path( "placemarks/" + path + name + ".cache" );
+                if ( d->m_cacheFile.isEmpty()) {
+                        d->m_cacheFile = MarbleDirs::localPath() + "/placemarks/" + path + name + ".cache";
 		}
 		defaultSourceName   = MarbleDirs::path( "placemarks/" + path + name + '.' + suffix );
             }
         }
 
         // if cache file more recent that source file, load cache file
-        if ( QFile::exists( defaultCacheName ) ) {
-            mDebug() << "Loading Cache File:" + defaultCacheName;
+        if ( QFile::exists( d->m_cacheFile ) ) {
+            mDebug() << "Loading Cache File:" + d->m_cacheFile;
 
             QDateTime sourceLastModified;
             QDateTime cacheLastModified;
@@ -166,35 +163,23 @@ void FileLoader::run()
             if ( QFile::exists( defaultSourceName ) ) {
                 sourceLastModified = QFileInfo( defaultSourceName ).lastModified();
             }
-            cacheLastModified  = QFileInfo( defaultCacheName ).lastModified();
+            cacheLastModified  = QFileInfo( d->m_cacheFile ).lastModified();
 
             if ( sourceLastModified < cacheLastModified ) {
                 connect( d->m_runner, SIGNAL( parsingFinished( GeoDataDocument*, QString ) ),
                          this, SLOT( documentParsed( GeoDataDocument*, QString ) ) );
-                d->m_runner->parseFile( defaultCacheName, d->m_documentRole );
+                d->m_runner->parseFile( d->m_cacheFile, d->m_documentRole );
             }
         }
         // we load source file, multiple cases
         else {
             mDebug() << "No recent Default Placemark Cache File available!";
             if ( QFile::exists( defaultSourceName ) ) {
-                if( suffix.compare( "kml", Qt::CaseInsensitive ) == 0 ) {
-                    // Read the KML file.
-                    d->importKml( defaultSourceName );
-
-                    if (!defaultCacheName.isEmpty() ) {
-                        d->saveFile(defaultCacheName);
-                    }
-                    emit loaderFinished( this );
-                }
                 // use runners: pnt, gpx, osm
-                else {
-                    connect( d->m_runner, SIGNAL( parsingFinished(GeoDataDocument*,QString) ),
-                             this, SLOT( documentParsed( GeoDataDocument*, QString ) ) );
-                    d->m_runner->parseFile( d->m_filepath, d->m_documentRole );
-                }
-            }
-            else {
+                connect( d->m_runner, SIGNAL( parsingFinished(GeoDataDocument*,QString) ),
+                        this, SLOT( documentParsed( GeoDataDocument*, QString ) ) );
+                d->m_runner->parseFile( d->m_filepath, d->m_documentRole );
+            } else {
                 mDebug() << "No Default Placemark Source File for " << name;
             }
         }
@@ -208,34 +193,6 @@ void FileLoader::run()
 }
 
 const quint32 MarbleMagicNumber = 0x31415926;
-
-void FileLoaderPrivate::importKml( const QString& filename )
-{
-    GeoDataParser parser( GeoData_UNKNOWN );
-
-    QFile file( filename );
-    if ( !file.exists() ) {
-        qWarning( "File does not exist!" );
-        return;
-    }
-
-    // Open file in right mode
-    file.open( QIODevice::ReadOnly );
-
-    if ( !parser.read( &file ) ) {
-        m_error = parser.errorString();
-        return;
-    }
-    GeoDocument* document = parser.releaseDocument();
-    Q_ASSERT( document );
-
-    m_document = static_cast<GeoDataDocument*>( document );
-    m_document->setDocumentRole( m_documentRole );
-    m_document->setFileName( m_filepath );
-    file.close();
-    createFilterProperties( m_document );
-    emit q->newGeoDataDocumentAdded( m_document );
-}
 
 void FileLoaderPrivate::importKmlFromData()
 {
@@ -327,6 +284,9 @@ void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& err
         doc->setFileName( m_filepath );
         createFilterProperties( doc );
         emit q->newGeoDataDocumentAdded( m_document );
+        if ( !m_cacheFile.isEmpty() ) {
+            saveFile( m_cacheFile );
+        }
     }
     emit q->loaderFinished( q );
 }
@@ -469,17 +429,17 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                    || placemark->role()=="PPLR"
                    || placemark->role()=="PPLS"
                    || placemark->role()=="PPLW" ) placemark->setVisualCategory(
-                        ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallCity )
-                                                                       + ( placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
+                        ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallCity
+                                                                       + ( placemark->popularityIndex() -1 ) / 4 * 4 ) );
             else if ( placemark->role() == "PPLA" ) placemark->setVisualCategory(
-                    ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallStateCapital )
-                                                                   + ( placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
+                    ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallStateCapital
+                                                                   + ( placemark->popularityIndex() -1 ) / 4 * 4 ) );
             else if ( placemark->role()=="PPLC" ) placemark->setVisualCategory(
-                    ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallNationCapital )
-                                                                   + ( placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
+                    ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallNationCapital
+                                                                   + ( placemark->popularityIndex() -1 ) / 4 * 4 ) );
             else if ( placemark->role()=="PPLA2" || placemark->role()=="PPLA3" ) placemark->setVisualCategory(
-                    ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallCountyCapital )
-                                                                   + ( placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
+                    ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallCountyCapital
+                                                                   + ( placemark->popularityIndex() -1 ) / 4 * 4 ) );
             else if ( placemark->role()==" " && !hasPopularity && placemark->visualCategory() == GeoDataPlacemark::Unknown ) {
                 placemark->setVisualCategory( GeoDataPlacemark::Unknown ); // default location
                 placemark->setPopularityIndex(0);

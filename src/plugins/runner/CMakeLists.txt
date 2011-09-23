@@ -13,6 +13,7 @@ add_subdirectory( routino )
 #Parsing
 add_subdirectory( cache )
 add_subdirectory( gpx )
+add_subdirectory( kml )
 add_subdirectory( osm )
 add_subdirectory( pnt )
 
