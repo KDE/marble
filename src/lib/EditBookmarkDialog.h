@@ -11,7 +11,8 @@
 #ifndef MARBLE_BOOKMARKINFODIALOG_H
 #define MARBLE_BOOKMARKINFODIALOG_H
 
-#include "ui_EditBookmarkDialog.h"
+#include <QtGui/QDialog>
+
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataPlacemark.h"
@@ -26,7 +27,7 @@ class BookmarkManager;
 class GeoDataLookAt;
 class MarbleWidget;
 
-class MARBLE_EXPORT EditBookmarkDialog : public QDialog, private Ui::UiEditBookmarkDialog
+class MARBLE_EXPORT EditBookmarkDialog : public QDialog
 {
     Q_OBJECT
 
