@@ -84,6 +84,7 @@ void WorldClock::init()
     m_map->setShowGrid       ( false );
     m_map->setShowPlaces     ( false );
     m_map->setShowCities     ( false );
+    m_map->setShowTerrain    ( false );
     m_map->setShowOtherPlaces( false );
     // set the date time of the marble model otherwise the sun will not show up correctly
     m_map->model()->setClockDateTime(QDateTime::currentDateTimeUtc());
