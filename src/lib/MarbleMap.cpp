@@ -952,15 +952,30 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     // at this point!
 
     // earth
-    d->m_placemarkLayout.setShowPlaces( showPlaces() );
-    d->m_placemarkLayout.setShowCities( showCities() );
-    d->m_placemarkLayout.setShowTerrain( showTerrain() );
-    d->m_placemarkLayout.setShowOtherPlaces( showOtherPlaces() );
+    bool value;
+    if ( d->m_mapTheme->settings()->propertyValue( "places", value ) ) {
+        d->m_placemarkLayout.setShowPlaces( value );
+    }
+    if ( d->m_mapTheme->settings()->propertyValue( "cities", value ) ) {
+        d->m_placemarkLayout.setShowCities( value );
+    }
+    if ( d->m_mapTheme->settings()->propertyValue( "terrain", value ) ) {
+        d->m_placemarkLayout.setShowTerrain( value );
+    }
+    if ( d->m_mapTheme->settings()->propertyValue( "otherplaces", value ) ) {
+        d->m_placemarkLayout.setShowOtherPlaces( value );
+    }
 
     // other planets
-    d->m_placemarkLayout.setShowLandingSites( propertyValue( "landingsites" ) );
-    d->m_placemarkLayout.setShowCraters( propertyValue( "craters") );
-    d->m_placemarkLayout.setShowMaria( propertyValue( "maria" ) );
+    if ( d->m_mapTheme->settings()->propertyValue( "landingsites", value ) ) {
+        d->m_placemarkLayout.setShowLandingSites( value );
+    }
+    if ( d->m_mapTheme->settings()->propertyValue( "craters", value ) ) {
+        d->m_placemarkLayout.setShowCraters( value );
+    }
+    if ( d->m_mapTheme->settings()->propertyValue( "maria", value ) ) {
+        d->m_placemarkLayout.setShowMaria( value );
+    }
 
     d->m_placemarkLayout.setDefaultLabelColor( mapTheme->map()->labelColor() );
     d->m_placemarkLayout.requestStyleReset();
