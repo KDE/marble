@@ -43,12 +43,6 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
     : QObject( parent ),
       m_selectionModel( selectionModel ),
       m_showPlaces( true ),
-      m_showCities( true ),
-      m_showTerrain( true ),
-      m_showOtherPlaces( true ),
-      m_showLandingSites( false ),
-      m_showCraters( false ),
-      m_showMaria( false ),
       m_maxLabelHeight( 0 ),
       m_styleResetRequested( true )
 {
