@@ -19,7 +19,7 @@
 #include "PluginAboutDialog.h"
 #include "MarbleWidget.h"
 #include "routing/RoutingModel.h"
-// #include "ElevationDataGenerator.h"
+#include <GeoGraphicsItem.h>
 
 
 namespace Ui
@@ -31,6 +31,7 @@ namespace Marble
 {
 
 class PluginAboutDialog;
+class LabelGraphicsItem;
 
 /**
  * @short The class that creates an interactive elvation profile.
@@ -47,29 +48,36 @@ class ElevationProfileFloatItem : public AbstractFloatItem
                                         const QSizeF &size = QSizeF( 0.0, 50.0 ) );
     ~ElevationProfileFloatItem();
 
-    QStringList backendTypes() const;
+    virtual QStringList backendTypes() const;
 
-    QString name() const;
+    virtual QStringList renderPosition() const;
 
-    QString guiString() const;
+    virtual qreal zValue() const; // Overriding LayerInterface to paint on top of the route
 
-    QString nameId() const;
+    virtual QString name() const;
 
-    QString description() const;
+    virtual QString guiString() const;
 
-    QIcon icon () const;
+    virtual QString nameId() const;
 
-    QDialog *aboutDialog();
+    virtual QString description() const;
+
+    virtual QIcon icon() const;
+
+    virtual QDialog *aboutDialog();
 
 
-    void initialize ();
+    virtual void initialize();
 
-    bool isInitialized () const;
+    virtual bool isInitialized() const;
 
-    void changeViewport( ViewportParams *viewport );
+    virtual void changeViewport( ViewportParams *viewport );
 
-    void paintContent( GeoPainter *painter, ViewportParams *viewport,
+    virtual void paintContent( GeoPainter *painter, ViewportParams *viewport,
                        const QString& renderPos, GeoSceneLayer * layer = 0 );
+
+    virtual bool renderOnMap( GeoPainter *painter, ViewportParams *viewport,
+                              const QString& renderPos, GeoSceneLayer * layer = 0 );
 
     QDialog *configDialog();
 
@@ -130,13 +138,13 @@ class ElevationProfileFloatItem : public AbstractFloatItem
     GeoDataLineString m_points;
     qreal             m_maxElevation;
 
+    GeoGraphicsItem   m_labelContainer;
+    LabelGraphicsItem *m_label;
 
     void calcScaleX( const qreal distance );
     void calcScaleY( const qreal distance );
     void calculateDistances();
     void calculateElevations();
-
-//     ElevationDataGenerator* const dg;
 };
 
 
