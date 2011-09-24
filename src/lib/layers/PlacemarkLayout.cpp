@@ -18,7 +18,6 @@
 #include <QtCore/QVectorIterator>
 #include <QtGui/QFont>
 #include <QtGui/QItemSelectionModel>
-#include <QtGui/QSortFilterProxyModel>
 
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
@@ -27,7 +26,6 @@
 
 #include "MarbleDebug.h"
 #include "global.h"
-#include "PlacemarkPainter.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleDirs.h"
 #include "ViewportParams.h"
@@ -43,9 +41,7 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
                                   QItemSelectionModel *selectionModel,
                                   QObject* parent )
     : QObject( parent ),
-      m_placemarkModel( new QSortFilterProxyModel ),
       m_selectionModel( selectionModel ),
-      m_placemarkPainter( 0 ),
       m_showPlaces( true ),
       m_showCities( true ),
       m_showTerrain( true ),
@@ -56,10 +52,10 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
       m_maxLabelHeight( 0 ),
       m_styleResetRequested( true )
 {
-    m_placemarkModel->setSourceModel( placemarkModel );
-    m_placemarkModel->setDynamicSortFilter( true );
-    m_placemarkModel->setSortRole( MarblePlacemarkModel::PopularityIndexRole );
-    m_placemarkModel->sort( 0, Qt::DescendingOrder );
+    m_placemarkModel.setSourceModel( placemarkModel );
+    m_placemarkModel.setDynamicSortFilter( true );
+    m_placemarkModel.setSortRole( MarblePlacemarkModel::PopularityIndexRole );
+    m_placemarkModel.sort( 0, Qt::DescendingOrder );
 
     connect( m_selectionModel,  SIGNAL( selectionChanged( QItemSelection,
                                                            QItemSelection) ),
@@ -203,7 +199,6 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
 
     qSort( m_acceptedVisualCategories.begin(), m_acceptedVisualCategories.end() );
 
-    m_placemarkPainter =  new PlacemarkPainter( this );
 }
 
 PlacemarkLayout::~PlacemarkLayout()
@@ -213,7 +208,7 @@ PlacemarkLayout::~PlacemarkLayout()
 
 void PlacemarkLayout::setDefaultLabelColor( const QColor &color )
 {
-    m_placemarkPainter->setDefaultLabelColor( color );
+    m_placemarkPainter.setDefaultLabelColor( color );
 }
 
 void PlacemarkLayout::setShowPlaces( bool show )
@@ -305,8 +300,8 @@ int PlacemarkLayout::maxLabelHeight() const
             maxLabelHeight = textHeight; 
     }
 
-    for ( int i = 0; i < m_placemarkModel->rowCount(); ++i ) {
-        QModelIndex index = m_placemarkModel->index( i, 0 );
+    for ( int i = 0; i < m_placemarkModel.rowCount(); ++i ) {
+        QModelIndex index = m_placemarkModel.index( i, 0 );
         GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
         if ( placemark ) {
             GeoDataStyle* style = placemark->style();
@@ -357,7 +352,7 @@ TileId PlacemarkLayout::placemarkToTileId( const GeoDataCoordinates& coords, int
 
 void PlacemarkLayout::setCacheData()
 {
-    const int rowCount = m_placemarkModel->rowCount();
+    const int rowCount = m_placemarkModel.rowCount();
 
     m_paintOrder.clear();
     qDeleteAll( m_visiblePlacemarks );
@@ -365,7 +360,7 @@ void PlacemarkLayout::setCacheData()
     m_placemarkCache.clear();
     for ( int i = 0; i != rowCount; ++i )
     {
-        const QModelIndex& index = m_placemarkModel->index( i, 0 );
+        const QModelIndex& index = m_placemarkModel.index( i, 0 );
         if( !index.isValid() ) {
             mDebug() << "invalid index!!!";
             continue;
@@ -401,7 +396,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
          !m_showLandingSites && !m_showCraters && !m_showMaria )
         return true;
 
-    if ( m_placemarkModel->rowCount() <= 0 )
+    if ( m_placemarkModel.rowCount() <= 0 )
         return true;
 
     // const int imgwidth  = viewport->width();
@@ -716,7 +711,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         m_paintOrder.append( mark );
     }
 
-    m_placemarkPainter->drawPlacemarks( painter, m_paintOrder, selection, 
+    m_placemarkPainter.drawPlacemarks( painter, m_paintOrder, selection,
                                         viewport );
 
     return true;

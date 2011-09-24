@@ -23,10 +23,12 @@
 #include <QtCore/QModelIndex>
 #include <QtCore/QRect>
 #include <QtCore/QVector>
-#include <GeoDataFeature.h>
+#include <QtGui/QSortFilterProxyModel>
+
+#include "GeoDataFeature.h"
+#include "PlacemarkPainter.h"
 
 class QAbstractItemModel;
-class QSortFilterProxyModel;
 class QItemSelectionModel;
 class QPoint;
 
@@ -39,7 +41,6 @@ class GeoDataPlacemark;
 class GeoDataStyle;
 class GeoPainter;
 class GeoSceneLayer;
-class PlacemarkPainter;
 class TileId;
 class VisiblePlacemark;
 class ViewportParams;
@@ -124,10 +125,10 @@ class PlacemarkLayout : public QObject, public LayerInterface
 
  private:
     Q_DISABLE_COPY( PlacemarkLayout )
-    QSortFilterProxyModel  *const m_placemarkModel;
+    QSortFilterProxyModel  m_placemarkModel;
     QItemSelectionModel *const m_selectionModel;
 
-    PlacemarkPainter *m_placemarkPainter;
+    PlacemarkPainter m_placemarkPainter;
 
     QVector<VisiblePlacemark*> m_paintOrder;
     QHash<GeoDataPlacemark*, VisiblePlacemark*> m_visiblePlacemarks;
