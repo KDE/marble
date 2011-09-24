@@ -582,9 +582,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                  && d->m_selectionRubber.isVisible() )
             {
                 qDebug("Marble: Leaving selection");
-                QRect r( MarbleWidgetInputHandler::d->m_widget->mapFromGlobal( d->m_selectionRubber.geometry().topLeft() ),
-                         MarbleWidgetInputHandler::d->m_widget->mapFromGlobal( d->m_selectionRubber.geometry().bottomRight() ));
-                MarbleWidgetInputHandler::d->m_widget->setSelection( r );
+                MarbleWidgetInputHandler::d->m_widget->setSelection( d->m_selectionRubber.geometry() );
                 d->m_selectionRubber.hide();
             }
 
