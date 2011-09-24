@@ -138,8 +138,10 @@ class ElevationProfileFloatItem : public AbstractFloatItem
     GeoDataLineString m_points;
     qreal             m_maxElevation;
 
-    GeoGraphicsItem   m_labelContainer;
-    LabelGraphicsItem *m_label;
+    GeoGraphicsItem   m_markerIconContainer;
+    GeoGraphicsItem   m_markerTextContainer;
+    LabelGraphicsItem *m_markerIcon;
+    LabelGraphicsItem *m_markerText;
 
     void calcScaleX( const qreal distance );
     void calcScaleY( const qreal distance );

@@ -12,5 +12,6 @@ set( elevationprofile_SRCS ElevationProfileFloatItem.cpp )
 set( elevationprofile_UI ElevationProfileConfigWidget.ui )
 
 qt4_wrap_ui(elevationprofile_SRCS ${elevationprofile_UI})
+qt4_add_resources(elevationprofile_SRCS elevationprofile.qrc)
 
 marble_add_plugin( ElevationProfileFloatItem ${elevationprofile_SRCS} )
