@@ -178,7 +178,7 @@ void FileLoader::run()
                 // use runners: pnt, gpx, osm
                 connect( d->m_runner, SIGNAL( parsingFinished(GeoDataDocument*,QString) ),
                         this, SLOT( documentParsed( GeoDataDocument*, QString ) ) );
-                d->m_runner->parseFile( d->m_filepath, d->m_documentRole );
+                d->m_runner->parseFile( defaultSourceName, d->m_documentRole );
             } else {
                 mDebug() << "No Default Placemark Source File for " << name;
             }
