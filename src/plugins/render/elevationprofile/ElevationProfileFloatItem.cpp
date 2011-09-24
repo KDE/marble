@@ -56,7 +56,7 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, cons
         m_routeAvailable( false ),
         m_firstVisiblePoint( 0 ),
         m_lastVisiblePoint( 0 ),
-        m_zoomToViewport( true )
+        m_zoomToViewport( false )
 
 {
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -204,9 +204,9 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     }
 
     qreal graphDistance = m_eleData.last().x();
-    qreal valueOffsetX = 0;
     qreal graphAltitude = m_maxElevation;
-    qreal valueOffsetY = 0;
+    int   valueOffsetX = 0;
+    int   valueOffsetY = 0;
     int start = 0;
     int end   = m_eleData.count() - 1;
     if ( m_zoomToViewport ) {
