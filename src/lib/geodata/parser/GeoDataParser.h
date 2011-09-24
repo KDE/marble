@@ -51,7 +51,7 @@ private:
 };
 
 // Global helper function for the tag handlers
-GeoDataDocument* geoDataDoc(GeoParser& parser) GEODATA_EXPORT;
+GEODATA_EXPORT GeoDataDocument* geoDataDoc(GeoParser& parser);
 
 }
 
