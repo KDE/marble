@@ -239,12 +239,6 @@ RoutingModel *RoutingManager::routingModel()
     return d->m_routingModel;
 }
 
-void RoutingManager::retrieveRoute( RouteRequest *route )
-{
-    d->m_routeRequest = route;
-    updateRoute();
-}
-
 RouteRequest* RoutingManager::routeRequest()
 {
     return d->m_routeRequest;

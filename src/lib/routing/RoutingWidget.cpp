@@ -288,7 +288,7 @@ void RoutingWidget::retrieveRoute()
     if ( d->m_routeRequest->size() > 1 ) {
         d->m_zoomRouteAfterDownload = true;
         d->m_routingLayer->setPlacemarkModel( 0 );
-        d->m_routingManager->retrieveRoute( d->m_routeRequest );
+        d->m_routingManager->updateRoute();
         d->m_ui.directionsListView->setModel( d->m_routingModel );
         d->m_routingLayer->synchronizeWith( d->m_ui.directionsListView->selectionModel() );
     }

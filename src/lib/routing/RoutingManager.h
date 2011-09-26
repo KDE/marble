@@ -68,16 +68,6 @@ public:
       */
     AlternativeRoutesModel* alternativeRoutesModel();
 
-    /**
-      * Forward the source and destination locations to the current routing
-      * provider to retrieve directions. If a route is retrieved, the direction
-      * model will be updated with the routing instructions.
-      * @param source Start location. Any string the routing provider supports as input.
-      * @param destination Destination location. Any string the routing provider supports as input.
-      * @see directionModel
-      */
-    void retrieveRoute( RouteRequest *route );
-
     // This is a temporary location for AdjustNavigation. The code would be refactored soon.
     void setAdjustNavigation( AdjustNavigation * adjustNavigation );
 
