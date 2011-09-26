@@ -42,11 +42,11 @@ class RoutingWidgetPrivate
 public:
     Ui::RoutingWidget m_ui;
 
-    MarbleWidget *m_widget;
+    MarbleWidget *const m_widget;
 
-    RoutingManager *m_routingManager;
+    RoutingManager *const m_routingManager;
 
-    RoutingLayer *m_routingLayer;
+    RoutingLayer *const m_routingLayer;
 
     RoutingInputWidget *m_activeInput;
 
@@ -54,9 +54,9 @@ public:
 
     RoutingInputWidget *m_inputRequest;
 
-    QAbstractItemModel *m_routingModel;
+    QAbstractItemModel *const m_routingModel;
 
-    RouteRequest *m_routeRequest;
+    RouteRequest *const m_routeRequest;
 
     bool m_zoomRouteAfterDownload;
 
@@ -69,7 +69,7 @@ public:
     int m_iconSize;
 
     /** Constructor */
-    RoutingWidgetPrivate();
+    RoutingWidgetPrivate( MarbleWidget *marbleWidget );
 
     /**
       * @brief Toggle between simple search view and route view
@@ -91,11 +91,17 @@ private:
     void createProgressAnimation();
 };
 
-RoutingWidgetPrivate::RoutingWidgetPrivate() :
-        m_widget( 0 ), m_routingManager( 0 ), m_routingLayer( 0 ),
-        m_activeInput( 0 ), m_inputRequest( 0 ), m_routingModel( 0 ),
-        m_routeRequest( 0 ), m_zoomRouteAfterDownload( false ),
-        m_currentFrame( 0 ), m_iconSize( 16 )
+RoutingWidgetPrivate::RoutingWidgetPrivate( MarbleWidget *marbleWidget ) :
+        m_widget( marbleWidget ),
+        m_routingManager( marbleWidget->model()->routingManager() ),
+        m_routingLayer( marbleWidget->routingLayer() ),
+        m_activeInput( 0 ),
+        m_inputRequest( 0 ),
+        m_routingModel( m_routingManager->routingModel() ),
+        m_routeRequest( marbleWidget->model()->routingManager()->routeRequest() ),
+        m_zoomRouteAfterDownload( false ),
+        m_currentFrame( 0 ),
+        m_iconSize( 16 )
 {
     createProgressAnimation();
     m_progressTimer.setInterval( 100 );
@@ -172,17 +178,12 @@ void RoutingWidgetPrivate::createProgressAnimation()
 }
 
 RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
-        QWidget( parent ), d( new RoutingWidgetPrivate )
+    QWidget( parent ), d( new RoutingWidgetPrivate( marbleWidget ) )
 {
     d->m_ui.setupUi( this );
     d->m_ui.routeComboBox->setVisible( false );
-    d->m_widget = marbleWidget;
-
-    d->m_routingManager = d->m_widget->model()->routingManager();
-    d->m_routeRequest = d->m_widget->model()->routingManager()->routeRequest();
     d->m_ui.routeComboBox->setModel( d->m_routingManager->alternativeRoutesModel() );
 
-    d->m_routingLayer = d->m_widget->routingLayer();
     d->m_routingLayer->synchronizeAlternativeRoutesWith( d->m_ui.routeComboBox );
 
     d->m_ui.routingProfileComboBox->setModel( d->m_routingManager->profilesModel() );
@@ -216,7 +217,6 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL( rowsInserted( QModelIndex, int, int ) ),
              this, SLOT( updateAlternativeRoutes() ) );
 
-    d->m_routingModel = d->m_routingManager->routingModel();
     d->m_ui.directionsListView->setModel( d->m_routingModel );
 
     QItemSelectionModel *selectionModel = d->m_ui.directionsListView->selectionModel();
