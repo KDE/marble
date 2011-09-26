@@ -40,12 +40,13 @@ void PositionTrackingPrivate::setPosition( GeoDataCoordinates position,
         PositionProviderStatusAvailable )
     {
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(m_document->child(m_document->size()-1));
-        //GeoDataMultiGeometry *geometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
-        m_currentLineString->append(position);
+
+        if ( accuracy.horizontal < 250 ) {
+            m_currentLineString->append(position);
+        }
 
         //if the position has moved then update the current position
-        if ( !( m_gpsCurrentPosition ==
-                position ) )
+        if ( !( m_gpsCurrentPosition == position ) )
         {
             placemark = static_cast<GeoDataPlacemark*>(m_document->child(0));
             placemark->setCoordinate(position);
