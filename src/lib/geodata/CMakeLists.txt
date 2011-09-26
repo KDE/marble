@@ -16,8 +16,21 @@ FILE( GLOB geodata_writers_dgml_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodat
 FILE( GLOB geodata_writers_kml_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/writers/kml/*.cpp )
 
 # writer and the parser sources 
-FILE( GLOB geodata_parser_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/parser/*.cpp )
-FILE( GLOB geodata_writer_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/writer/*.cpp )
+SET ( geodata_parser_SRCS
+        geodata/parser/GeoDataParser.cpp
+        geodata/parser/GeoDataTypes.cpp
+        geodata/parser/GeoDocument.cpp
+        geodata/parser/GeoOnfParser.cpp
+        geodata/parser/GeoParser.cpp
+        geodata/parser/GeoSceneParser.cpp
+        geodata/parser/GeoSceneTypes.cpp
+        geodata/parser/GeoTagHandler.cpp
+   )
+
+SET( geodata_writer_SRCS
+        geodata/writer/GeoTagWriter.cpp
+        geodata/writer/GeoWriter.cpp
+   )
 
 SET( geodata_handlers_osmnamefinder_SRCS
         geodata/handlers/osm-namefinder/AttributeDictionary.cpp
