@@ -251,9 +251,7 @@ int main ( int argc, char *argv[] )
     KCmdLineOptions  options;
     options.add( "debug-info", ki18n( "Enable debug output" ) );
     options.add( "timedemo", ki18n( "Make a time measurement to check performance" ) );
-    options.add( "gpsdemo", ki18n( "Check speed of gps drawing" ) );
     options.add( "fps", ki18n( "Show frame rate" ) );
-    options.add( "enableCurrentLocation", ki18n( "Enable tab to show the current location" ) );
     options.add( "enableFileView",
                  ki18n( "Enable tab to see gpxFileView" ) );
     options.add( "tile-id", ki18n( "Show tile IDs" ) );
@@ -316,22 +314,11 @@ int main ( int argc, char *argv[] )
         test.timeDemo();
         return 0;
     }
-    
-    if ( args->isSet( "gpsdemo" ) ) {
-        window->resize( 900, 640 );
-        MarbleTest test( window->marbleWidget() );
-        test.gpsDemo();
-        return 0;
-    }
-    
+
     if ( args->isSet( "fps" ) ) {
         window->marbleControl()->marbleWidget()->setShowFrameRate( true );
     }
 
-    if ( args->isSet( "enableCurrentLocation" ) ) {
-        window->marbleControl()->setCurrentLocationTabShown( true );
-    }
-    
     if ( args->isSet( "enableFileView" ) ) {
         window->marbleControl()->setFileViewTabShown( true );
     }

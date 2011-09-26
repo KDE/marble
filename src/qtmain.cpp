@@ -181,17 +181,8 @@ int main(int argc, char *argv[])
             marbleTest->timeDemo();
             return 0;
         }
-        else if( arg == "--gpsdemo" ) {
-            window->resize( 900, 640 );
-            marbleTest->gpsDemo();
-            return 0;
-        }
         else if( arg == "--fps" ) {
             window->marbleControl()->marbleWidget()->setShowFrameRate( true );
-        }
-        else if( arg == "--enableCurrentLocation" )
-        {
-            window->marbleControl()->setCurrentLocationTabShown(true);
         }
         else if( arg == "--enableFileView" )
         {
