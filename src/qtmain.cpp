@@ -106,6 +106,30 @@ int main(int argc, char *argv[])
 
     QStringList args = QApplication::arguments();
 
+    if ( args.contains( "-h" ) || args.contains( "--help" ) ) {
+        qWarning() << "Usage: marble [options] [files]";
+        qWarning();
+        qWarning() << "[files] can be zero, one or more .kml and/or .gpx files to load and show.";
+        qWarning();
+        qWarning() << "general options:";
+        qWarning() << "  --marbledatapath=<path> .... Overwrite the compile-time path to map themes and other data";
+        qWarning() << "  --enableFileView ........... Add a tab on the left showing detailed information about loaded files";
+        qWarning();
+        qWarning() << "debug options:";
+        qWarning() << "  --debug-info ............... write (more) debugging information to the console";
+        qWarning() << "  --fps ...................... Show the paint performance (paint rate) in the top left corner";
+        qWarning() << "  --tile-id................... Write the identifier of texture tiles on top of them";
+        qWarning() << "  --timedemo ................. Measure the paint performance while moving the map and quit";
+        qWarning();
+        qWarning() << "profile options (note that marble should automatically detect which profile to use. Override that with the options below):";
+        qWarning() << "  --smallscreen .............. Enforce the profile for devices with small screens (e.g. smartphones)";
+        qWarning() << "  --highresolution ........... Enforce the profile for devices with high resolution (e.g. desktop computers)";
+        qWarning() << "  --nosmallscreen ............ Deactivate the profile for devices with small screens (e.g. smartphones)";
+        qWarning() << "  --nohighresolution ......... Deactivate the profile for devices with high resolution (e.g. desktop computers)";
+
+        return 0;
+    }
+
     for ( int i = 1; i < args.count(); ++i ) {
         const QString arg = args.at(i);
 
