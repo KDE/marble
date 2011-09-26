@@ -137,10 +137,10 @@ Q_SIGNALS:
 
     void routeRetrieved( GeoDataDocument* route );
 
-private Q_SLOTS:
-    void retrieveRoute( GeoDataDocument* route );
+private:
+    Q_PRIVATE_SLOT( d, void addRoute( GeoDataDocument* route ) )
 
-    void recalculateRoute( bool deviated );
+    Q_PRIVATE_SLOT( d, void recalculateRoute( bool deviated ) )
 
 private:
     friend class RoutingManagerPrivate;

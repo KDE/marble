@@ -74,6 +74,10 @@ public:
     void saveRoute( const QString &filename );
 
     void loadRoute( const QString &filename );
+
+    void addRoute( GeoDataDocument* route );
+
+    void recalculateRoute( bool deviated );
 };
 
 RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager* manager, QObject *parent ) :
@@ -267,18 +271,18 @@ void RoutingManager::updateRoute()
     }
 }
 
-void RoutingManager::retrieveRoute( GeoDataDocument* route )
+void RoutingManagerPrivate::addRoute( GeoDataDocument* route )
 {
     if ( route ) {
-        d->m_alternativeRoutesModel.addRoute( route );
+        m_alternativeRoutesModel.addRoute( route );
     }
 
-    if ( !d->m_haveRoute ) {
-        d->m_haveRoute = route != 0;
-        emit stateChanged( Retrieved, &d->m_routeRequest );
+    if ( !m_haveRoute ) {
+        m_haveRoute = route != 0;
+        emit q->stateChanged( RoutingManager::Retrieved, &m_routeRequest );
     }
 
-    emit routeRetrieved( route );
+    emit q->routeRetrieved( route );
 }
 
 AlternativeRoutesModel* RoutingManager::alternativeRoutesModel()
@@ -365,21 +369,21 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
     adjustNavigation()->setRecenter( enabled ? AdjustNavigation::RecenterOnBorder : AdjustNavigation::DontRecenter );
 }
 
-void RoutingManager::recalculateRoute( bool deviated )
+void RoutingManagerPrivate::recalculateRoute( bool deviated )
 {
-    if ( d->m_guidanceModeEnabled && deviated ) {
-        for ( int i=d->m_routeRequest.size()-3; i>=0; --i ) {
-            if ( d->m_routeRequest.visited( i ) ) {
-                d->m_routeRequest.remove( i );
+    if ( m_guidanceModeEnabled && deviated ) {
+        for ( int i=m_routeRequest.size()-3; i>=0; --i ) {
+            if ( m_routeRequest.visited( i ) ) {
+                m_routeRequest.remove( i );
             }
         }
 
-        if ( d->m_routeRequest.size() == 2 && d->m_routeRequest.visited( 0 ) && !d->m_routeRequest.visited( 1 ) ) {
-            d->m_routeRequest.setPosition( 0, d->m_marbleModel->positionTracking()->currentLocation() );
-            updateRoute();
-        } else if ( d->m_routeRequest.size() != 0 && !d->m_routeRequest.visited( d->m_routeRequest.size()-1 ) ) {
-            d->m_routeRequest.insert( 0, d->m_marbleModel->positionTracking()->currentLocation() );
-            updateRoute();
+        if ( m_routeRequest.size() == 2 && m_routeRequest.visited( 0 ) && !m_routeRequest.visited( 1 ) ) {
+            m_routeRequest.setPosition( 0, m_marbleModel->positionTracking()->currentLocation() );
+            q->updateRoute();
+        } else if ( m_routeRequest.size() != 0 && !m_routeRequest.visited( m_routeRequest.size()-1 ) ) {
+            m_routeRequest.insert( 0, m_marbleModel->positionTracking()->currentLocation() );
+            q->updateRoute();
         }
     }
 }
