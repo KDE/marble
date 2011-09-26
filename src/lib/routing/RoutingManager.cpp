@@ -41,17 +41,17 @@ class RoutingManagerPrivate
 public:
     RoutingManager* q;
 
-    RouteRequest *m_routeRequest;
+    RouteRequest m_routeRequest;
 
-    RoutingModel *m_routingModel;
+    RoutingModel m_routingModel;
 
-    RoutingProfilesModel *m_profilesModel;
+    RoutingProfilesModel m_profilesModel;
 
-    MarbleModel *m_marbleModel;
+    MarbleModel *const m_marbleModel;
 
-    AlternativeRoutesModel* m_alternativeRoutesModel;
+    AlternativeRoutesModel m_alternativeRoutesModel;
 
-    MarbleRunnerManager* m_runnerManager;
+    MarbleRunnerManager m_runnerManager;
 
     bool m_haveRoute;
 
@@ -78,28 +78,29 @@ public:
 
 RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager* manager, QObject *parent ) :
         q( manager ),
-        m_routeRequest( new RouteRequest( manager ) ),
-        m_routingModel( new RoutingModel( m_routeRequest, model, manager ) ),
-        m_profilesModel( new RoutingProfilesModel( model->pluginManager() ) ),
+        m_routeRequest( manager ),
+        m_routingModel( &m_routeRequest, model, manager ),
+        m_profilesModel( model->pluginManager() ),
         m_marbleModel( model ),
-        m_alternativeRoutesModel(new AlternativeRoutesModel( model, parent ) ),
-        m_runnerManager( new MarbleRunnerManager( model->pluginManager(), q ) ),
-        m_haveRoute( false ), m_adjustNavigation( 0 ),
+        m_alternativeRoutesModel( model, parent ),
+        m_runnerManager( model->pluginManager(), q ),
+        m_haveRoute( false ),
+        m_adjustNavigation( 0 ),
         m_guidanceModeEnabled( false ),
         m_shutdownPositionTracking( false ),
         m_guidanceModeWarning( true )
 {
-    m_runnerManager->setModel( model );
+    m_runnerManager.setModel( model );
 }
 
 GeoDataFolder* RoutingManagerPrivate::routeRequest() const
 {
     GeoDataFolder* result = new GeoDataFolder;
     result->setName( "Route Request" );
-    for ( int i=0; i<m_routeRequest->size(); ++i ) {
+    for ( int i=0; i<m_routeRequest.size(); ++i ) {
         GeoDataPlacemark* placemark = new GeoDataPlacemark;
-        placemark->setName( m_routeRequest->name( i ) );
-        placemark->setCoordinate( GeoDataPoint( m_routeRequest->at( i ) ) );
+        placemark->setName( m_routeRequest.name( i ) );
+        placemark->setCoordinate( GeoDataPoint( m_routeRequest.at( i ) ) );
         result->append( placemark );
     }
 
@@ -143,7 +144,7 @@ void RoutingManagerPrivate::saveRoute(const QString &filename)
         container.append( request );
     }
 
-    GeoDataDocument *route = m_alternativeRoutesModel->currentRoute();
+    GeoDataDocument *route = m_alternativeRoutesModel.currentRoute();
     if ( route ) {
         container.append( new GeoDataDocument( *route ) );
     }
@@ -179,16 +180,16 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
             loaded = true;
             QVector<GeoDataPlacemark*> placemarks = viaPoints->placemarkList();
             for( int i=0; i<placemarks.size(); ++i ) {
-                if ( i < m_routeRequest->size() ) {
-                    m_routeRequest->setPosition( i, placemarks[i]->coordinate() );
+                if ( i < m_routeRequest.size() ) {
+                    m_routeRequest.setPosition( i, placemarks[i]->coordinate() );
                 } else {
-                    m_routeRequest->append( placemarks[i]->coordinate() );
+                    m_routeRequest.append( placemarks[i]->coordinate() );
                 }
-                m_routeRequest->setName( m_routeRequest->size()-1, placemarks[i]->name() );
+                m_routeRequest.setName( m_routeRequest.size()-1, placemarks[i]->name() );
             }
 
-            for ( int i=placemarks.size(); i<m_routeRequest->size(); ++i ) {
-                m_routeRequest->remove( i );
+            for ( int i=placemarks.size(); i<m_routeRequest.size(); ++i ) {
+                m_routeRequest.remove( i );
             }
         } else {
             mDebug() << "Expected a GeoDataDocument with at least one child, didn't get one though";
@@ -199,8 +200,8 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
         GeoDataDocument* route = dynamic_cast<GeoDataDocument*>(&container->last());
         if ( route ) {
             loaded = true;
-            m_alternativeRoutesModel->addRoute( route, AlternativeRoutesModel::Instant );
-            m_alternativeRoutesModel->setCurrentRoute( 0 );
+            m_alternativeRoutesModel.addRoute( route, AlternativeRoutesModel::Instant );
+            m_alternativeRoutesModel.setCurrentRoute( 0 );
         } else {
             mDebug() << "Expected a GeoDataDocument child, didn't get one though";
         }
@@ -216,11 +217,11 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
 RoutingManager::RoutingManager( MarbleModel *marbleModel, QObject *parent ) : QObject( parent ),
         d( new RoutingManagerPrivate( marbleModel, this, this ) )
 {
-    connect( d->m_runnerManager, SIGNAL( routeRetrieved( GeoDataDocument* ) ),
+    connect( &d->m_runnerManager, SIGNAL( routeRetrieved( GeoDataDocument* ) ),
              this, SLOT( retrieveRoute( GeoDataDocument* ) ) );
-    connect( d->m_alternativeRoutesModel, SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
-             d->m_routingModel, SLOT( setCurrentRoute( GeoDataDocument* ) ) );
-    connect( d->m_routingModel, SIGNAL( deviatedFromRoute( bool ) ),
+    connect( &d->m_alternativeRoutesModel, SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
+             &d->m_routingModel, SLOT( setCurrentRoute( GeoDataDocument* ) ) );
+    connect( &d->m_routingModel, SIGNAL( deviatedFromRoute( bool ) ),
              this, SLOT( recalculateRoute( bool ) ) );
 }
 
@@ -231,54 +232,50 @@ RoutingManager::~RoutingManager()
 
 RoutingProfilesModel *RoutingManager::profilesModel()
 {
-    return d->m_profilesModel;
+    return &d->m_profilesModel;
 }
 
 RoutingModel *RoutingManager::routingModel()
 {
-    return d->m_routingModel;
+    return &d->m_routingModel;
 }
 
 RouteRequest* RoutingManager::routeRequest()
 {
-    return d->m_routeRequest;
+    return &d->m_routeRequest;
 }
 
 void RoutingManager::updateRoute()
 {
-    if ( !d->m_routeRequest ) {
-        return;
-    }
-
     d->m_haveRoute = false;
 
     int realSize = 0;
-    for ( int i = 0; i < d->m_routeRequest->size(); ++i ) {
+    for ( int i = 0; i < d->m_routeRequest.size(); ++i ) {
         // Sort out dummy targets
-        if ( d->m_routeRequest->at( i ).longitude() != 0.0 && d->m_routeRequest->at( i ).latitude() != 0.0 ) {
+        if ( d->m_routeRequest.at( i ).longitude() != 0.0 && d->m_routeRequest.at( i ).latitude() != 0.0 ) {
             ++realSize;
         }
     }
 
-    d->m_alternativeRoutesModel->newRequest( d->m_routeRequest );
+    d->m_alternativeRoutesModel.newRequest( &d->m_routeRequest );
     if ( realSize > 1 ) {
-        emit stateChanged( RoutingManager::Downloading, d->m_routeRequest );
-        d->m_runnerManager->retrieveRoute( d->m_routeRequest );
+        emit stateChanged( RoutingManager::Downloading, &d->m_routeRequest );
+        d->m_runnerManager.retrieveRoute( &d->m_routeRequest );
     } else {
-        d->m_routingModel->clear();
-        emit stateChanged( RoutingManager::Retrieved, d->m_routeRequest );
+        d->m_routingModel.clear();
+        emit stateChanged( RoutingManager::Retrieved, &d->m_routeRequest );
     }
 }
 
 void RoutingManager::retrieveRoute( GeoDataDocument* route )
 {
     if ( route ) {
-        d->m_alternativeRoutesModel->addRoute( route );
+        d->m_alternativeRoutesModel.addRoute( route );
     }
 
     if ( !d->m_haveRoute ) {
         d->m_haveRoute = route != 0;
-        emit stateChanged( Retrieved, d->m_routeRequest );
+        emit stateChanged( Retrieved, &d->m_routeRequest );
     }
 
     emit routeRetrieved( route );
@@ -286,7 +283,7 @@ void RoutingManager::retrieveRoute( GeoDataDocument* route )
 
 AlternativeRoutesModel* RoutingManager::alternativeRoutesModel()
 {
-    return d->m_alternativeRoutesModel;
+    return &d->m_alternativeRoutesModel;
 }
 
 void RoutingManager::setAdjustNavigation( AdjustNavigation* adjustNavigation )
@@ -317,8 +314,8 @@ void RoutingManager::loadRoute( const QString &filename )
 void RoutingManager::readSettings()
 {
     d->loadRoute( d->stateFile() );
-    if ( d->m_routeRequest && d->m_profilesModel->rowCount() ) {
-        d->m_routeRequest->setRoutingProfile( d->m_profilesModel->profiles().at( 0 ) );
+    if ( d->m_profilesModel.rowCount() ) {
+        d->m_routeRequest.setRoutingProfile( d->m_profilesModel.profiles().at( 0 ) );
     }
 }
 
@@ -370,18 +367,18 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
 
 void RoutingManager::recalculateRoute( bool deviated )
 {
-    if ( d->m_guidanceModeEnabled && deviated && d->m_routeRequest ) {
-        for ( int i=d->m_routeRequest->size()-3; i>=0; --i ) {
-            if ( d->m_routeRequest->visited( i ) ) {
-                d->m_routeRequest->remove( i );
+    if ( d->m_guidanceModeEnabled && deviated ) {
+        for ( int i=d->m_routeRequest.size()-3; i>=0; --i ) {
+            if ( d->m_routeRequest.visited( i ) ) {
+                d->m_routeRequest.remove( i );
             }
         }
 
-        if ( d->m_routeRequest->size() == 2 && d->m_routeRequest->visited( 0 ) && !d->m_routeRequest->visited( 1 ) ) {
-            d->m_routeRequest->setPosition( 0, d->m_marbleModel->positionTracking()->currentLocation() );
+        if ( d->m_routeRequest.size() == 2 && d->m_routeRequest.visited( 0 ) && !d->m_routeRequest.visited( 1 ) ) {
+            d->m_routeRequest.setPosition( 0, d->m_marbleModel->positionTracking()->currentLocation() );
             updateRoute();
-        } else if ( d->m_routeRequest->size() != 0 && !d->m_routeRequest->visited( d->m_routeRequest->size()-1 ) ) {
-            d->m_routeRequest->insert( 0, d->m_marbleModel->positionTracking()->currentLocation() );
+        } else if ( d->m_routeRequest.size() != 0 && !d->m_routeRequest.visited( d->m_routeRequest.size()-1 ) ) {
+            d->m_routeRequest.insert( 0, d->m_marbleModel->positionTracking()->currentLocation() );
             updateRoute();
         }
     }
@@ -389,13 +386,13 @@ void RoutingManager::recalculateRoute( bool deviated )
 
 void RoutingManager::reverseRoute()
 {
-    d->m_routeRequest->reverse();
+    d->m_routeRequest.reverse();
     updateRoute();
 }
 
 void RoutingManager::clearRoute()
 {
-    d->m_routeRequest->clear();
+    d->m_routeRequest.clear();
     updateRoute();
 }
 

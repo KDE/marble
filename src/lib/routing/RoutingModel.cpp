@@ -54,7 +54,7 @@ public:
 
     RouteDeviation m_deviation;
     PositionTracking* m_positionTracking;
-    RouteRequest* m_request;
+    RouteRequest* const m_request;
     GeoDataCoordinates m_position;
 
     void importPlacemark( RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark );
