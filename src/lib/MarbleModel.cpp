@@ -71,13 +71,12 @@ namespace Marble
 class MarbleModelPrivate
 {
  public:
-    MarbleModelPrivate( MarbleModel *parent )
-        : m_parent( parent ),
-          m_clock(),
+    MarbleModelPrivate()
+        : m_clock(),
           m_planet( new Planet( "earth" ) ),
           m_sunLocator( &m_clock, m_planet ),
-          m_pluginManager( parent ),
-          m_mapThemeManager( parent ),
+          m_pluginManager(),
+          m_mapThemeManager(),
           m_homePoint( -9.4, 54.8, 0.0, GeoDataCoordinates::Degree ),  // Some point that tackat defined. :-)
           m_homeZoom( 1050 ),
           m_mapTheme( 0 ),
@@ -105,8 +104,6 @@ class MarbleModelPrivate
     ~MarbleModelPrivate()
     {
     }
-
-    MarbleModel             *m_parent;
 
     // Misc stuff.
     MarbleClock              m_clock;
@@ -152,11 +149,8 @@ class MarbleModelPrivate
 
 MarbleModel::MarbleModel( QObject *parent )
     : QObject( parent ),
-      d( new MarbleModelPrivate( this ) )
+      d( new MarbleModelPrivate() )
 {
-    QTime t;
-    t.start();
-
     connect(&d->m_treemodel, SIGNAL( dataChanged(QModelIndex,QModelIndex) ),
             this, SIGNAL( modelChanged() ) );
     connect(&d->m_treemodel, SIGNAL( layoutChanged() ),
@@ -166,12 +160,10 @@ MarbleModel::MarbleModel( QObject *parent )
     connect(&d->m_treemodel, SIGNAL( treeChanged() ),
             this, SIGNAL( modelChanged() ) );
 
-    // A new instance of FileStorageWatcher.
     // The thread will be started at setting persistent tile cache size.
     connect( this, SIGNAL( themeChanged( QString ) ),
              &d->m_storageWatcher, SLOT( updateTheme( QString ) ) );
-    // Setting the theme to the current theme.
-    d->m_storageWatcher.updateTheme( mapThemeId() );
+
     // connect the StoragePolicy used by the download manager to the FileStorageWatcher
     connect( &d->m_storagePolicy, SIGNAL( cleared() ),
              &d->m_storageWatcher, SLOT( resetCurrentSize() ) );
@@ -185,7 +177,7 @@ MarbleModel::MarbleModel( QObject *parent )
     connect( d->m_fileManager,    SIGNAL( fileRemoved(int)),
              &d->m_fileviewmodel, SLOT(remove(int)) );
 
-    d->m_routingManager = new RoutingManager( d->m_parent, this );
+    d->m_routingManager = new RoutingManager( this, this );
 
     connect(&d->m_clock,   SIGNAL( timeChanged() ),
             &d->m_sunLocator, SLOT( update() ) );
