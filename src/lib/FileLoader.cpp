@@ -79,7 +79,7 @@ public:
     MarbleRunnerManager *m_runner;
     QString m_filepath;
     QString m_contents;
-    QString m_cacheFile;
+    QString m_nonExistentLocalCacheFile;
     DocumentRole m_documentRole;
     GeoDataDocument *m_document;
     QString m_error;
@@ -132,6 +132,7 @@ void FileLoader::run()
         if ( path == "." ) path.clear();
         QString name = fileinfo.completeBaseName();
         QString suffix = fileinfo.suffix();
+        QString cacheFile;
 
         // determine source, cache names
         if ( fileinfo.isAbsolute() ) {
@@ -145,30 +146,33 @@ void FileLoader::run()
             }
             else {
                 // _standard_ shared placemarks: "placemarks/patrick.kml"
-                d->m_cacheFile = MarbleDirs::path( "placemarks/" + path + name + ".cache" );
-                if ( d->m_cacheFile.isEmpty()) {
-                        d->m_cacheFile = MarbleDirs::localPath() + "/placemarks/" + path + name + ".cache";
+                cacheFile = MarbleDirs::path( "placemarks/" + path + name + ".cache" );
+                if ( cacheFile.isEmpty()) {
+                    cacheFile = MarbleDirs::localPath() + "/placemarks/" + path + name + ".cache";
+                    if ( !QFileInfo( cacheFile ).exists() ) {
+                        d->m_nonExistentLocalCacheFile = cacheFile;
+                    }
 		}
 		defaultSourceName   = MarbleDirs::path( "placemarks/" + path + name + '.' + suffix );
             }
         }
 
         // if cache file more recent that source file, load cache file
-        if ( QFile::exists( d->m_cacheFile ) ) {
-            mDebug() << "Loading Cache File:" + d->m_cacheFile;
+        if ( QFile::exists( cacheFile ) ) {
+            mDebug() << "Loading Cache File:" + cacheFile;
 
             QDateTime sourceLastModified;
-            QDateTime cacheLastModified;
 
             if ( QFile::exists( defaultSourceName ) ) {
                 sourceLastModified = QFileInfo( defaultSourceName ).lastModified();
             }
-            cacheLastModified  = QFileInfo( d->m_cacheFile ).lastModified();
+
+            const QDateTime cacheLastModified  = QFileInfo( cacheFile ).lastModified();
 
             if ( sourceLastModified < cacheLastModified ) {
                 connect( d->m_runner, SIGNAL( parsingFinished( GeoDataDocument*, QString ) ),
                          this, SLOT( documentParsed( GeoDataDocument*, QString ) ) );
-                d->m_runner->parseFile( d->m_cacheFile, d->m_documentRole );
+                d->m_runner->parseFile( cacheFile, d->m_documentRole );
             }
         }
         // we load source file, multiple cases
@@ -229,7 +233,10 @@ void FileLoaderPrivate::saveFile( const QString& filename )
     mDebug() << "Creating cache at " << filename ;
 
     QFile file( filename );
-    file.open( QIODevice::WriteOnly );
+    if ( !file.open( QIODevice::WriteOnly ) ) {
+        mDebug() << Q_FUNC_INFO << "Can't open" << filename << "for writing";
+        return;
+    }
     QDataStream out( &file );
 
     // Write a header with a "magic number" and a version
@@ -284,8 +291,8 @@ void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& err
         doc->setFileName( m_filepath );
         createFilterProperties( doc );
         emit q->newGeoDataDocumentAdded( m_document );
-        if ( !m_cacheFile.isEmpty() ) {
-            saveFile( m_cacheFile );
+        if ( !m_nonExistentLocalCacheFile.isEmpty() ) {
+            saveFile( m_nonExistentLocalCacheFile );
         }
     }
     emit q->loaderFinished( q );
