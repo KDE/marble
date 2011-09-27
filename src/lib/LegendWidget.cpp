@@ -25,7 +25,6 @@ class LegendWidgetPrivate
 {
  public:
     Ui::LegendWidget    m_legendUi;
-    MarbleWidget       *m_widget;
 };
 
 LegendWidget::LegendWidget( QWidget *parent, Qt::WindowFlags f )
@@ -42,14 +41,12 @@ LegendWidget::~LegendWidget()
 
 void LegendWidget::setMarbleWidget( MarbleWidget *widget )
 {
-    d->m_widget = widget;
-
     // Initialize the MarbleLegendBrowser
-    d->m_legendUi.marbleLegendBrowser->setMarbleWidget( d->m_widget );
+    d->m_legendUi.marbleLegendBrowser->setMarbleWidget( widget );
 
     // connect signals for the Legend
     connect( d->m_legendUi.marbleLegendBrowser, SIGNAL( toggledShowProperty( QString, bool ) ),
-             d->m_widget,                       SLOT( setPropertyValue( QString, bool ) ) );
+             widget,                            SLOT( setPropertyValue( QString, bool ) ) );
 }
 
 }
