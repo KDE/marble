@@ -137,6 +137,8 @@ class ElevationProfileFloatItem : public AbstractFloatItem
     QList<QPointF>    m_eleData;
     GeoDataLineString m_points;
     qreal             m_maxElevation;
+    qreal             m_gain;
+    qreal             m_loss;
 
     GeoGraphicsItem   m_markerIconContainer;
     GeoGraphicsItem   m_markerTextContainer;

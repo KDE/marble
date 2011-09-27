@@ -159,7 +159,7 @@ void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
 {
     if ( !( viewport->width() == m_viewportWidth && m_isInitialized ) ) {
         m_fontHeight     = QFontMetrics( font() ).ascent();
-        setContentSize( QSizeF( viewport->width() / 3, m_eleGraphHeight + m_fontHeight + 3 ) );
+        setContentSize( QSizeF( viewport->width() / 3, m_eleGraphHeight + m_fontHeight * 2.5 + 3 ) );
         m_leftGraphMargin = QFontMetrics( font() ).width("0000");
         m_eleGraphWidth = contentSize().width() - m_leftGraphMargin;
         m_viewportWidth = viewport->width();
@@ -331,10 +331,19 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
             painter->drawLine(m_leftGraphMargin + j * m_pixelIntervalX, 0,
                               m_leftGraphMargin + j * m_pixelIntervalX, m_eleGraphHeight );
             painter->setPen( QColor( Qt::black ) );
-            painter->drawText( currentStringBegin, contentSize().height(), intervalStr );
+            painter->drawText( currentStringBegin, contentSize().height() - 1.5 * m_fontHeight, intervalStr );
             lastStringEnds = currentStringBegin + QFontMetrics( font() ).width( intervalStr );
         }
     }
+
+    // display altitude gain/loss data
+    // TODO: miles/feet...
+    painter->setPen( QColor( Qt::black ) );
+    intervalStr = tr( "Total altitude difference: ca. %1 m (Gain: ca. %2 m, Loss: ca. %3 m)" )
+                    .arg( QString::number( m_gain - m_loss, 'f', 0 ) )
+                    .arg( QString::number( m_gain, 'f', 0 ) )
+                    .arg( QString::number( m_loss, 'f', 0 ) );
+    painter->drawText( m_leftGraphMargin, contentSize().height() - padding(), intervalStr );
 
     // draw elevation profile
     painter->setPen( QColor( Qt::black ) );
@@ -391,7 +400,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         intervalStr += " " + m_unitX;
         currentStringBegin = m_leftGraphMargin + m_cursorPositionX
                              - QFontMetrics( font() ).width( intervalStr ) / 2;
-        painter->drawText( currentStringBegin, contentSize().height(), intervalStr );
+        painter->drawText( currentStringBegin, contentSize().height() - 1.5 * m_fontHeight, intervalStr );
 
         intervalStr.setNum( currentPoint.altitude(), 'f', 1 );
         if ( m_cursorPositionX + QFontMetrics( font() ).width( intervalStr ) + m_leftGraphMargin
@@ -784,11 +793,35 @@ void ElevationProfileFloatItem::calculateElevations()
         m_eleData[i].setY( ele );
     }
 
-    QPointF point;
+    qreal lastAverage = 0;
+    int averageOrder = 5;
     m_maxElevation = -1;
-    foreach ( point, m_eleData ) {
-        if ( point.y() > m_maxElevation ) {
-            m_maxElevation = point.y();
+    m_gain = 0;
+    m_loss = 0;
+    for ( int i = 0; i < m_eleData.size(); i++ ) {
+        if ( m_eleData.value(i).y() > m_maxElevation ) {
+            m_maxElevation = m_eleData.value(i).y();
+        }
+        // Low-pass filtering (moving average) of the elevation profile to calculate gain and loss values
+        // not always the best method, see for example
+        // http://www.ikg.uni-hannover.de/fileadmin/ikg/staff/thesis/finished/documents/StudArb_Schulze.pdf
+        // (German), chapter 4.2
+
+        qreal average = 0;
+        if ( i >= averageOrder ) {
+            for( int j = 0; j < averageOrder; j++ ) {
+                average += m_eleData.value(i-j).y();
+            }
+            average /= averageOrder;
+            if ( i == averageOrder ) {
+                lastAverage = average; // else the initial altitude would be counted as gain
+            }
+            if ( average > lastAverage ) {
+                m_gain += average - lastAverage;
+            } else {
+                m_loss += lastAverage - average;
+            }
+            lastAverage = average;
         }
     }
     emit dataUpdated();
