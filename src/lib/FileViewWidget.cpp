@@ -15,10 +15,9 @@
 #include <QtGui/QSortFilterProxyModel>
 
 // Marble
+#include "GeoDataContainer.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
-#include "MarbleModel.h"
-#include "MarbleWidget.h"
 #include "FileViewModel.h"
 
 using namespace Marble;
@@ -32,9 +31,8 @@ class FileViewWidgetPrivate
 {
  public:
     Ui::FileViewWidget  m_fileViewUi;
-    MarbleWidget       *m_widget;
 
-    QSortFilterProxyModel  *m_treeSortProxy;
+    QSortFilterProxyModel  m_treeSortProxy;
 };
 
 FileViewWidget::FileViewWidget( QWidget *parent, Qt::WindowFlags f )
@@ -49,26 +47,27 @@ FileViewWidget::~FileViewWidget()
     delete d;
 }
 
-void FileViewWidget::setMarbleWidget( MarbleWidget *widget )
+void FileViewWidget::setFileViewModel( FileViewModel *model )
 {
-    d->m_widget = widget;
     //set up everything for the FileModel
-    d->m_fileViewUi.m_fileView->setModel( widget->model()->fileViewModel() );
+    d->m_fileViewUi.m_fileView->setModel( model );
     delete d->m_fileViewUi.m_fileView->selectionModel();
-    d->m_fileViewUi.m_fileView->setSelectionModel( widget->model()->fileViewModel()->selectionModel() );
+    d->m_fileViewUi.m_fileView->setSelectionModel( model->selectionModel() );
     connect( d->m_fileViewUi.m_fileView->selectionModel(),
              SIGNAL( selectionChanged( QItemSelection, QItemSelection ) ),
              this,
              SLOT( enableFileViewActions() ) );
     connect( d->m_fileViewUi.m_saveButton,  SIGNAL( clicked() ) ,
-             widget->model()->fileViewModel(),       SLOT( saveFile() ) );
+             model,       SLOT( saveFile() ) );
     connect( d->m_fileViewUi.m_closeButton, SIGNAL( clicked() ) ,
-             widget->model()->fileViewModel(),    SLOT( closeFile() ) );
+             model,    SLOT( closeFile() ) );
+}
 
-    d->m_treeSortProxy = new QSortFilterProxyModel( this );
-    d->m_treeSortProxy->setSourceModel( widget->model()->treeModel() );
-    d->m_treeSortProxy->setDynamicSortFilter( true );
-    d->m_fileViewUi.m_treeView->setModel( d->m_treeSortProxy );
+void FileViewWidget::setTreeModel( GeoDataTreeModel *model )
+{
+    d->m_treeSortProxy.setSourceModel( model );
+    d->m_treeSortProxy.setDynamicSortFilter( true );
+    d->m_fileViewUi.m_treeView->setModel( &d->m_treeSortProxy );
     d->m_fileViewUi.m_treeView->setSortingEnabled( true );
     d->m_fileViewUi.m_treeView->sortByColumn( 0, Qt::AscendingOrder );
     d->m_fileViewUi.m_treeView->resizeColumnToContents( 0 );
@@ -90,15 +89,15 @@ void FileViewWidget::mapCenterOnTreeViewModel( const QModelIndex &index )
         return;
     }
     GeoDataObject *object
-        = static_cast<GeoDataObject*>( d->m_treeSortProxy->mapToSource(index).internalPointer() );
+        = static_cast<GeoDataObject*>( d->m_treeSortProxy.mapToSource(index).internalPointer() );
     if ( dynamic_cast<GeoDataPlacemark*>(object) )
     {
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(object);
-        d->m_widget->centerOn( *placemark, true );
+        emit centerOn( *placemark, true );
     }
     else if ( dynamic_cast<GeoDataContainer*>(object) ) {
         GeoDataLatLonAltBox box = dynamic_cast<GeoDataContainer*>( object )->latLonAltBox();
-        d->m_widget->centerOn( box, true );
+        emit centerOn( box, true );
     }
 }
 
