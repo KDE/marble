@@ -24,9 +24,9 @@ namespace Marble
 class GeoDataAccuracy;
 class GeoDataDocument;
 class GeoDataCoordinates;
+class GeoDataTreeModel;
 class PositionProviderPlugin;
 class PositionTrackingPrivate;
-class MarbleModel;
 
 class MARBLE_EXPORT PositionTracking : public QObject
 {
@@ -35,7 +35,7 @@ class MARBLE_EXPORT PositionTracking : public QObject
     Q_PROPERTY( PositionProviderPlugin* positionProviderPlugin READ positionProviderPlugin WRITE setPositionProviderPlugin NOTIFY positionProviderPluginChanged )
 
 public:
-    explicit PositionTracking( MarbleModel* model );
+    explicit PositionTracking( GeoDataTreeModel* model );
     ~PositionTracking();
 
     /**

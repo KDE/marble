@@ -31,10 +31,10 @@ class PositionTrackingPrivate : public QObject
 {
     Q_OBJECT
     public:
-    PositionTrackingPrivate( MarbleModel *model )
+    PositionTrackingPrivate( GeoDataTreeModel *model )
         : QObject( model ),
         m_document( 0 ),
-        m_marbleModel( model ),
+        m_treeModel( model ),
         m_positionProvider( 0 )
     {
     }
@@ -52,7 +52,7 @@ class PositionTrackingPrivate : public QObject
 
     public:
     GeoDataDocument     *m_document;
-    MarbleModel         *m_marbleModel;
+    GeoDataTreeModel    *m_treeModel;
 
     GeoDataCoordinates  m_gpsCurrentPosition;
     GeoDataCoordinates  m_gpsPreviousPosition;
