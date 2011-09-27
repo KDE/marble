@@ -75,7 +75,7 @@ public:
      * returns the instance of AdjustNavigation
      * This is a temporary location for AdjustNavigation. The code would be refactored soon.
      */
-    AdjustNavigation* adjustNavigation();
+    const AdjustNavigation* adjustNavigation() const;
 
     /**
       * Returns the current route request

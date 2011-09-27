@@ -295,7 +295,7 @@ void RoutingManager::setAdjustNavigation( AdjustNavigation* adjustNavigation )
     d->m_adjustNavigation = adjustNavigation;
 }
 
-AdjustNavigation* RoutingManager::adjustNavigation()
+const AdjustNavigation* RoutingManager::adjustNavigation() const
 {
     return d->m_adjustNavigation;
 }
@@ -365,8 +365,8 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
         tracking->setPositionProviderPlugin( 0 );
     }
 
-    adjustNavigation()->setAutoZoom( enabled );
-    adjustNavigation()->setRecenter( enabled ? AdjustNavigation::RecenterOnBorder : AdjustNavigation::DontRecenter );
+    d->m_adjustNavigation->setAutoZoom( enabled );
+    d->m_adjustNavigation->setRecenter( enabled ? AdjustNavigation::RecenterOnBorder : AdjustNavigation::DontRecenter );
 }
 
 void RoutingManagerPrivate::recalculateRoute( bool deviated )
