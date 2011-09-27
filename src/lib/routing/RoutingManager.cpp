@@ -86,7 +86,7 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager
         m_routingModel( &m_routeRequest, model, manager ),
         m_profilesModel( model->pluginManager() ),
         m_marbleModel( model ),
-        m_alternativeRoutesModel( model, parent ),
+        m_alternativeRoutesModel( parent ),
         m_runnerManager( model->pluginManager(), q ),
         m_haveRoute( false ),
         m_adjustNavigation( 0 ),

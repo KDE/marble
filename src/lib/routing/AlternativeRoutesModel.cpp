@@ -24,11 +24,9 @@ public:
     /** Counts the time between route request and first result */
     QTime m_responseTime;
 
-    MarbleModel* m_marbleModel;
-
     int m_currentIndex;
 
-    AlternativeRoutesModelPrivate( MarbleModel* marbleModel );
+    AlternativeRoutesModelPrivate();
 
     /**
       * Returns true if there exists a route with high similarity to the given one
@@ -90,8 +88,8 @@ public:
 };
 
 
-AlternativeRoutesModelPrivate::AlternativeRoutesModelPrivate( MarbleModel* marbleModel ) :
-        m_marbleModel( marbleModel ), m_currentIndex( -1 )
+AlternativeRoutesModelPrivate::AlternativeRoutesModelPrivate() :
+        m_currentIndex( -1 )
 {
     // nothing to do
 }
@@ -287,9 +285,9 @@ GeoDataLineString* AlternativeRoutesModelPrivate::waypoints( const GeoDataDocume
     return 0;
 }
 
-AlternativeRoutesModel::AlternativeRoutesModel( MarbleModel* model, QObject *parent ) :
+AlternativeRoutesModel::AlternativeRoutesModel( QObject *parent ) :
         QAbstractListModel( parent ),
-        d( new AlternativeRoutesModelPrivate( model ) )
+        d( new AlternativeRoutesModelPrivate() )
 {
     // nothing to do
 }
