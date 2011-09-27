@@ -222,7 +222,7 @@ RoutingManager::RoutingManager( MarbleModel *marbleModel, QObject *parent ) : QO
         d( new RoutingManagerPrivate( marbleModel, this, this ) )
 {
     connect( &d->m_runnerManager, SIGNAL( routeRetrieved( GeoDataDocument* ) ),
-             this, SLOT( retrieveRoute( GeoDataDocument* ) ) );
+             this, SLOT( addRoute( GeoDataDocument* ) ) );
     connect( &d->m_alternativeRoutesModel, SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
              &d->m_routingModel, SLOT( setCurrentRoute( GeoDataDocument* ) ) );
     connect( &d->m_routingModel, SIGNAL( deviatedFromRoute( bool ) ),
