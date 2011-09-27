@@ -83,14 +83,15 @@ class MarbleModelPrivate
           m_mapTheme( 0 ),
           m_storagePolicy( MarbleDirs::localPath() ),
           m_downloadManager( &m_storagePolicy, &m_pluginManager ),
+          m_storageWatcher( MarbleDirs::localPath() ),
           m_fileManager( 0 ),
           m_fileviewmodel(),
           m_treemodel(),
           m_descendantproxy(),
           m_sortproxy(),
           m_placemarkselectionmodel( 0 ),
-          m_positionTracking( 0 ),
-          m_bookmarkManager( 0 ),
+          m_positionTracking( &m_treemodel ),
+          m_bookmarkManager(),
           m_routingManager( 0 ),
           m_legend( 0 ),
           m_workOffline( false )
@@ -126,7 +127,7 @@ class MarbleModelPrivate
     HttpDownloadManager      m_downloadManager;
 
     // Cache related
-    FileStorageWatcher      *m_storageWatcher;
+    FileStorageWatcher       m_storageWatcher;
 
     // Places on the map
     FileManager             *m_fileManager;
@@ -140,9 +141,9 @@ class MarbleModelPrivate
     QItemSelectionModel      m_placemarkselectionmodel;
 
     //Gps Stuff
-    PositionTracking        *m_positionTracking;
+    PositionTracking         m_positionTracking;
 
-    BookmarkManager         *m_bookmarkManager; 
+    BookmarkManager          m_bookmarkManager;
     RoutingManager          *m_routingManager;
     QTextDocument           *m_legend;
 
@@ -167,16 +168,15 @@ MarbleModel::MarbleModel( QObject *parent )
 
     // A new instance of FileStorageWatcher.
     // The thread will be started at setting persistent tile cache size.
-    d->m_storageWatcher = new FileStorageWatcher( MarbleDirs::localPath(), this );
     connect( this, SIGNAL( themeChanged( QString ) ),
-             d->m_storageWatcher, SLOT( updateTheme( QString ) ) );
+             &d->m_storageWatcher, SLOT( updateTheme( QString ) ) );
     // Setting the theme to the current theme.
-    d->m_storageWatcher->updateTheme( mapThemeId() );
+    d->m_storageWatcher.updateTheme( mapThemeId() );
     // connect the StoragePolicy used by the download manager to the FileStorageWatcher
     connect( &d->m_storagePolicy, SIGNAL( cleared() ),
-             d->m_storageWatcher, SLOT( resetCurrentSize() ) );
+             &d->m_storageWatcher, SLOT( resetCurrentSize() ) );
     connect( &d->m_storagePolicy, SIGNAL( sizeChanged( qint64 ) ),
-             d->m_storageWatcher, SLOT( addToCurrentSize( qint64 ) ) );
+             &d->m_storageWatcher, SLOT( addToCurrentSize( qint64 ) ) );
 
     d->m_fileManager = new FileManager( this );
     d->m_fileviewmodel.setFileManager( d->m_fileManager );
@@ -185,23 +185,14 @@ MarbleModel::MarbleModel( QObject *parent )
     connect( d->m_fileManager,    SIGNAL( fileRemoved(int)),
              &d->m_fileviewmodel, SLOT(remove(int)) );
 
-    d->m_positionTracking = new PositionTracking( &d->m_treemodel );
-
     d->m_routingManager = new RoutingManager( d->m_parent, this );
 
     connect(&d->m_clock,   SIGNAL( timeChanged() ),
             &d->m_sunLocator, SLOT( update() ) );
-     //Initializing Bookmark manager
-    d->m_bookmarkManager = new BookmarkManager();
 }
 
 MarbleModel::~MarbleModel()
 {
-//    mDebug() << "MarbleModel::~MarbleModel";
-
-    delete d->m_positionTracking;
-    delete d->m_bookmarkManager;
-
     delete d->m_fileManager;
     delete d->m_mapTheme;
     delete d->m_planet;
@@ -212,7 +203,7 @@ MarbleModel::~MarbleModel()
 
 BookmarkManager * MarbleModel::bookmarkManager() const
 {
-    return d->m_bookmarkManager;
+    return &d->m_bookmarkManager;
 }
 
 QString MarbleModel::mapThemeId() const
@@ -374,7 +365,7 @@ QItemSelectionModel *MarbleModel::placemarkSelectionModel() const
 
 PositionTracking *MarbleModel::positionTracking() const
 {
-    return d->m_positionTracking;
+    return &d->m_positionTracking;
 }
 
 FileViewModel *MarbleModel::fileViewModel() const
@@ -439,7 +430,7 @@ SunLocator* MarbleModel::sunLocator() const
 
 quint64 MarbleModel::persistentTileCacheLimit() const
 {
-    return d->m_storageWatcher->cacheLimit() / 1024;
+    return d->m_storageWatcher.cacheLimit() / 1024;
 }
 
 void MarbleModel::clearPersistentTileCache()
@@ -488,16 +479,16 @@ void MarbleModel::clearPersistentTileCache()
 
 void MarbleModel::setPersistentTileCacheLimit(quint64 kiloBytes)
 {
-    d->m_storageWatcher->setCacheLimit( kiloBytes * 1024 );
+    d->m_storageWatcher.setCacheLimit( kiloBytes * 1024 );
 
     if( kiloBytes != 0 )
     {
-        if( !d->m_storageWatcher->isRunning() )
-            d->m_storageWatcher->start( QThread::IdlePriority );
+        if( !d->m_storageWatcher.isRunning() )
+            d->m_storageWatcher.start( QThread::IdlePriority );
     }
     else
     {
-        d->m_storageWatcher->quit();
+        d->m_storageWatcher.quit();
     }
     // TODO: trigger update
 }
