@@ -48,8 +48,6 @@ class MarbleLegendBrowserPrivate
     MarbleWidget        *m_marbleWidget;
     QMap<QString, bool>     m_checkBoxMap;
     QMap<QString, QPixmap>  m_symbolMap;
-    QString              m_html;
-    QString              m_loadedSectionsHtml;
     bool                 m_isLegendLoaded;
 };
 
@@ -135,6 +133,7 @@ void MarbleLegendBrowser::loadLegend()
     t.start();
 
     // Read the html string.
+    QString finalHtml;
 
     // Check for a theme specific legend.html first
     if ( d->m_marbleWidget != 0
@@ -147,21 +146,20 @@ void MarbleLegendBrowser::loadLegend()
         currentMapTheme->head()->target() + '/' + 
         currentMapTheme->head()->theme() + "/legend.html" ); 
         if ( !customLegendPath.isEmpty() )
-            d->m_html = readHtml( QUrl::fromLocalFile( customLegendPath  ) );
+            finalHtml = readHtml( QUrl::fromLocalFile( customLegendPath  ) );
         else
-            d->m_html.clear();
+            finalHtml.clear();
     }
 
-    if ( d->m_html.isEmpty() ) {
-        d->m_html = readHtml( QUrl::fromLocalFile( MarbleDirs::path( "legend.html" ) ) );
+    if ( finalHtml.isEmpty() ) {
+        finalHtml = readHtml( QUrl::fromLocalFile( MarbleDirs::path( "legend.html" ) ) );
     }
 
     // Generate some parts of the html from the MapTheme <Legend> tag. 
-    d->m_loadedSectionsHtml = generateSectionsHtml();
+    const QString sectionsHtml = generateSectionsHtml();
 
     // And then create the final html from these two parts.
-    QString  finalHtml = d->m_html;
-    finalHtml.replace( QString( "<!-- ##customLegendEntries:all## -->" ), d->m_loadedSectionsHtml );
+    finalHtml.replace( QString( "<!-- ##customLegendEntries:all## -->" ), sectionsHtml );
 
     translateHtml( finalHtml );
 
