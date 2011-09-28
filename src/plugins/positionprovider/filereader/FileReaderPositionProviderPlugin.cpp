@@ -79,7 +79,7 @@ void FileReaderPositionProviderPluginPrivate::importKmlFromData()
     GeoDocument* doc = parser.releaseDocument();
     if ( doc ) {
         GeoDataDocument* document = dynamic_cast<GeoDataDocument*>( doc );
-        if ( document ) {
+        if ( document && document->size() > 0 ) {
             document->setDocumentRole( UserDocument );
             document->setFileName( filename );
             createSimulationPlacemarks( dynamic_cast<GeoDataDocument*>( &document->last() ) );
@@ -90,7 +90,11 @@ void FileReaderPositionProviderPluginPrivate::importKmlFromData()
 }
 
 void FileReaderPositionProviderPluginPrivate::createSimulationPlacemarks( GeoDataContainer *container )
-{   
+{
+    if ( !container ) {
+        return;
+    }
+
     m_lineString.clear();
 
     QVector<GeoDataFolder*> folders = container->folderList();
