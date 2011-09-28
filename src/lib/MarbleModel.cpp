@@ -485,7 +485,7 @@ void MarbleModel::setPersistentTileCacheLimit(quint64 kiloBytes)
     // TODO: trigger update
 }
 
-PluginManager* MarbleModel::pluginManager() const
+const PluginManager* MarbleModel::pluginManager() const
 {
     return &d->m_pluginManager;
 }

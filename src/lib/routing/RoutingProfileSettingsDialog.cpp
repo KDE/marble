@@ -23,7 +23,7 @@
 namespace Marble {
 
 
-RoutingProfileSettingsDialog::RoutingProfileSettingsDialog( PluginManager *pluginManager, RoutingProfilesModel *profilesModel, QWidget* parent )
+RoutingProfileSettingsDialog::RoutingProfileSettingsDialog( const PluginManager *pluginManager, RoutingProfilesModel *profilesModel, QWidget* parent )
     : QDialog( parent ), m_pluginManager( pluginManager ), 
     m_profilesModel ( profilesModel ), m_dialog( 0 ), m_dialogLayout( 0 )
 {

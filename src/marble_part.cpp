@@ -514,7 +514,7 @@ void MarblePart::readSettings()
     QString positionProvider = MarbleSettings::activePositionTrackingPlugin();
     if ( !positionProvider.isEmpty() ) {
         PositionTracking* tracking = m_controlView->marbleModel()->positionTracking();
-        PluginManager* pluginManager = m_controlView->marbleModel()->pluginManager();
+        const PluginManager* pluginManager = m_controlView->marbleModel()->pluginManager();
         QList<PositionProviderPlugin*> plugins = pluginManager->createPositionProviderPlugins();
         foreach( PositionProviderPlugin* plugin, plugins ) {
             if ( plugin->nameId() == positionProvider ) {

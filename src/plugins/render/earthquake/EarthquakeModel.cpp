@@ -27,7 +27,7 @@
 
 namespace Marble {
 
-EarthquakeModel::EarthquakeModel( PluginManager *pluginManager, QObject *parent )
+EarthquakeModel::EarthquakeModel( const PluginManager *pluginManager, QObject *parent )
     : AbstractDataPluginModel( "earthquake", pluginManager, parent ),
       m_numResults( numberOfItemsOnScreen ),
       m_minMagnitude( 0.0 ),

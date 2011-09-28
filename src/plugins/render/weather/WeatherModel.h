@@ -29,7 +29,7 @@ class WeatherModel : public AbstractDataPluginModel
     Q_OBJECT
     
  public:
-    explicit WeatherModel( PluginManager *pluginManager,
+    explicit WeatherModel( const PluginManager *pluginManager,
                            QObject *parent );
     ~WeatherModel();
     

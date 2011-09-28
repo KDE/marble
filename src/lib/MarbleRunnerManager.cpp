@@ -46,9 +46,9 @@ public:
     QVector<GeoDataDocument*> m_routingResult;
     QList<GeoDataCoordinates> m_reverseGeocodingResults;
     RouteRequest* m_routeRequest;
-    PluginManager* m_pluginManager;
+    const PluginManager* m_pluginManager;
 
-    MarbleRunnerManagerPrivate( MarbleRunnerManager* parent, PluginManager* pluginManager );
+    MarbleRunnerManagerPrivate( MarbleRunnerManager* parent, const PluginManager* pluginManager );
 
     ~MarbleRunnerManagerPrivate();
 
@@ -62,7 +62,7 @@ public:
     void cleanupRoutingTask( RunnerTask* task );
 };
 
-MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( MarbleRunnerManager* parent, PluginManager* pluginManager ) :
+MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( MarbleRunnerManager* parent, const PluginManager* pluginManager ) :
         q( parent ),
         m_marbleModel( 0 ),
         m_model( new MarblePlacemarkModel( parent ) ),
@@ -127,7 +127,7 @@ void MarbleRunnerManagerPrivate::cleanupRoutingTask( RunnerTask* task )
 }
 
 
-MarbleRunnerManager::MarbleRunnerManager( PluginManager* pluginManager, QObject *parent )
+MarbleRunnerManager::MarbleRunnerManager( const PluginManager* pluginManager, QObject *parent )
     : QObject( parent ), d( new MarbleRunnerManagerPrivate( this, pluginManager ) )
 {
     if ( QThreadPool::globalInstance()->maxThreadCount() < 4 ) {

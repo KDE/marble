@@ -47,7 +47,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
  
  public:
     explicit AbstractDataPluginModel( const QString& name,
-                                      PluginManager *pluginManager,
+                                      const PluginManager *pluginManager,
                                       QObject *parent = 0 );
     virtual ~AbstractDataPluginModel();
         

@@ -31,7 +31,7 @@ class RoutingProfileSettingsDialog : public QDialog
 {
     Q_OBJECT
 public:
-    RoutingProfileSettingsDialog( PluginManager *pluginManager, RoutingProfilesModel *profilesModel, QWidget *parent = 0 );
+    RoutingProfileSettingsDialog( const PluginManager *pluginManager, RoutingProfilesModel *profilesModel, QWidget *parent = 0 );
     ~RoutingProfileSettingsDialog();
 
     void editProfile( int profileIndex );
@@ -42,7 +42,7 @@ private slots:
     void openConfigDialog();
 
 private:
-    PluginManager *m_pluginManager;
+    const PluginManager *const m_pluginManager;
     RoutingProfilesModel *m_profilesModel;
 
     QList<RunnerPlugin*> m_plugins;

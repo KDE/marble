@@ -23,7 +23,7 @@
 using namespace Marble;
  
  
-OpenDesktopModel::OpenDesktopModel (PluginManager *pluginManager, QObject *parent )
+OpenDesktopModel::OpenDesktopModel( const PluginManager *pluginManager, QObject *parent )
     : AbstractDataPluginModel( "opendesktop", pluginManager, parent )
 {
     // Nothing to do...

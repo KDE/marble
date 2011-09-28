@@ -92,7 +92,7 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
     d->m_adjustNavigation = new AdjustNavigation( d->m_widget, this );
     d->m_widget->model()->routingManager()->setAdjustNavigation( d->m_adjustNavigation );
 
-    PluginManager* pluginManager = d->m_widget->model()->pluginManager();
+    const PluginManager* pluginManager = d->m_widget->model()->pluginManager();
     d->m_positionProviderPlugins = pluginManager->createPositionProviderPlugins();
     foreach( const PositionProviderPlugin *plugin, d->m_positionProviderPlugins ) {
         d->m_currentLocationUi.positionTrackingComboBox->addItem( plugin->guiString() );

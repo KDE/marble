@@ -352,7 +352,7 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
     PositionTracking* tracking = d->m_marbleModel->positionTracking();
     PositionProviderPlugin* plugin = tracking->positionProviderPlugin();
     if ( !plugin && enabled ) {
-        PluginManager* pluginManager = d->m_marbleModel->pluginManager();
+        const PluginManager* pluginManager = d->m_marbleModel->pluginManager();
         QList<PositionProviderPlugin*> plugins = pluginManager->createPositionProviderPlugins();
         if ( plugins.size() > 0 ) {
             plugin = plugins.takeFirst();

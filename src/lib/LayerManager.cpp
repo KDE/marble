@@ -46,13 +46,13 @@ bool zValueLessThan( const LayerInterface * const one, const LayerInterface * co
 class LayerManagerPrivate
 {
  public:
-    LayerManagerPrivate( MarbleModel* model );
+    LayerManagerPrivate( const MarbleModel* model );
     ~LayerManagerPrivate();
 
     GeoSceneDocument *m_mapTheme;
 
     const MarbleModel *m_marbleModel;
-    PluginManager *m_pluginManager;
+    const PluginManager *m_pluginManager;
     QList<RenderPlugin *> m_renderPlugins;
     QList<AbstractFloatItem *> m_floatItems;
     QList<AbstractDataPlugin *> m_dataPlugins;
@@ -61,7 +61,7 @@ class LayerManagerPrivate
     bool m_showBackground;
 };
 
-LayerManagerPrivate::LayerManagerPrivate( MarbleModel* model )
+LayerManagerPrivate::LayerManagerPrivate( const MarbleModel* model )
     : m_mapTheme( 0 ),
       m_marbleModel( model ),
       m_pluginManager( model->pluginManager() ),
@@ -78,7 +78,7 @@ LayerManagerPrivate::~LayerManagerPrivate()
 }
 
 
-LayerManager::LayerManager( MarbleModel* model, QObject *parent )
+LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
     : QObject( parent ),
       d( new LayerManagerPrivate( model ) )
 {

@@ -20,7 +20,7 @@
 
 using namespace Marble;
 
-WeatherModel::WeatherModel( PluginManager *pluginManager,
+WeatherModel::WeatherModel( const PluginManager *pluginManager,
                             QObject *parent )
     : AbstractDataPluginModel( "weather", pluginManager, parent )
 {

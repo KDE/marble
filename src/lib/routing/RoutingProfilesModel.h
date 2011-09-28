@@ -26,7 +26,7 @@ class MARBLE_EXPORT RoutingProfilesModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    explicit RoutingProfilesModel( PluginManager *pluginManager, QObject *parent = 0  );
+    explicit RoutingProfilesModel( const PluginManager *pluginManager, QObject *parent = 0  );
 
     virtual QVariant data( const QModelIndex& index, int role = Qt::DisplayRole ) const;
     virtual int rowCount( const QModelIndex& parent = QModelIndex() ) const;
@@ -56,7 +56,7 @@ public:
 
 private:
     QList<RoutingProfile> m_profiles;
-    PluginManager* m_pluginManager;
+    const PluginManager* m_pluginManager;
 };
 
 }

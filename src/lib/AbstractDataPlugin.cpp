@@ -119,7 +119,7 @@ void AbstractDataPlugin::setModel( AbstractDataPluginModel* model )
     connect( d->m_model, SIGNAL( itemsUpdated() ), this, SLOT( requestRepaint() ) );
 }
 
-PluginManager* AbstractDataPlugin::pluginManager() const
+const PluginManager* AbstractDataPlugin::pluginManager() const
 {
     return marbleModel()->pluginManager();
 }

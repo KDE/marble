@@ -84,7 +84,7 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
      */
     void setModel( AbstractDataPluginModel* model );
     
-    PluginManager *pluginManager() const;
+    const PluginManager *pluginManager() const;
 
     /**
      * Set the name id of the plugin

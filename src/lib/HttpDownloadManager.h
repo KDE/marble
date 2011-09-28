@@ -57,7 +57,7 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
      * @param policy The storage policy for this manager.
      */
     explicit HttpDownloadManager( StoragePolicy *policy,
-                                  PluginManager *pluginManager );
+                                  const PluginManager *pluginManager );
 
     /**
      * Destroys the http download manager.

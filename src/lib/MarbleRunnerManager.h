@@ -42,7 +42,7 @@ public:
       * @param pluginManager The plugin manager that gives access to RunnerPlugins
       * @param parent Optional parent object
       */
-    explicit MarbleRunnerManager( PluginManager* pluginManager, QObject *parent = 0 );
+    explicit MarbleRunnerManager( const PluginManager* pluginManager, QObject *parent = 0 );
 
     /** Destructor */
     ~MarbleRunnerManager();

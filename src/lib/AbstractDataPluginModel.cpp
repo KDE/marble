@@ -52,7 +52,7 @@ class AbstractDataPluginModelPrivate
 {
  public:
     AbstractDataPluginModelPrivate( const QString& name,
-                                    PluginManager *pluginManager,
+                                    const PluginManager *pluginManager,
                                     AbstractDataPluginModel * parent )
         : m_parent( parent ),
           m_name( name ),
@@ -105,7 +105,7 @@ class AbstractDataPluginModelPrivate
 };
 
 AbstractDataPluginModel::AbstractDataPluginModel( const QString& name,
-                                                  PluginManager *pluginManager,
+                                                  const PluginManager *pluginManager,
                                                   QObject *parent )
     : QObject(  parent ),
       d( new AbstractDataPluginModelPrivate( name, pluginManager, this ) )

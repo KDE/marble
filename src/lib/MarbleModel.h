@@ -226,7 +226,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     quint64 volatileTileCacheLimit() const;
 
-    PluginManager* pluginManager() const;
+    const PluginManager* pluginManager() const;
 
     /**
      * @brief Returns the planet object for the current map.

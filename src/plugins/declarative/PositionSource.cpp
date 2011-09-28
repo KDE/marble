@@ -92,7 +92,7 @@ void PositionSource::start()
         return;
     }
 
-    PluginManager* pluginManager = m_marbleWidget->model()->pluginManager();
+    const PluginManager* pluginManager = m_marbleWidget->model()->pluginManager();
     QList<PositionProviderPlugin*> plugins = pluginManager->createPositionProviderPlugins();
     foreach( const PositionProviderPlugin *plugin, plugins ) {
         if ( m_source.isEmpty() || plugin->nameId() == m_source ) {

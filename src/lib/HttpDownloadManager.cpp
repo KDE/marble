@@ -33,7 +33,7 @@ class HttpDownloadManager::Private
 {
   public:
     explicit Private( StoragePolicy *policy,
-                      PluginManager *pluginManager );
+                      const PluginManager *pluginManager );
     ~Private();
 
     HttpJob *createJob( const QUrl& sourceUrl, const QString& destFileName,
@@ -50,13 +50,13 @@ class HttpDownloadManager::Private
     QList<QPair<DownloadPolicyKey, DownloadQueueSet *> > m_queueSets;
     QMap<DownloadUsage, DownloadQueueSet *> m_defaultQueueSets;
     StoragePolicy *const m_storagePolicy;
-    PluginManager *const m_pluginManager;
+    const PluginManager *const m_pluginManager;
     NetworkPlugin *m_networkPlugin;
 
 };
 
 HttpDownloadManager::Private::Private( StoragePolicy *policy,
-                                       PluginManager *pluginManager )
+                                       const PluginManager *pluginManager )
     : m_downloadEnabled( true ), //enabled for now
       m_requeueTimer( 0 ),
       m_storagePolicy( policy ),
@@ -124,7 +124,7 @@ DownloadQueueSet *HttpDownloadManager::Private::findQueues( const QString& hostN
 
 
 HttpDownloadManager::HttpDownloadManager( StoragePolicy *policy,
-                                          PluginManager *pluginManager )
+                                          const PluginManager *pluginManager )
     : d( new Private( policy, pluginManager ))
 {
     d->m_requeueTimer = new QTimer( this );

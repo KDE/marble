@@ -16,7 +16,7 @@
 namespace Marble
 {
 
-RoutingProfilesModel::RoutingProfilesModel( PluginManager* pluginManager, QObject *parent )
+RoutingProfilesModel::RoutingProfilesModel( const PluginManager* pluginManager, QObject *parent )
     : QAbstractListModel( parent ), m_pluginManager( pluginManager )
 {
 }
