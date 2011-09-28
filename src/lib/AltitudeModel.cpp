@@ -8,22 +8,23 @@
 // Copyright 2011 Niko Sams <niko.sams@gmail.com>
 //
 
-#include <QtGui/QLabel>
-#include <QtCore/qmath.h>
-
 #include "AltitudeModel.h"
-#include "TileLoader.h"
-#include "MarbleDebug.h"
-#include "MapThemeManager.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneTexture.h"
 #include "TextureTile.h"
+#include "TileLoader.h"
 #include "TileLoaderHelper.h"
 #include "MarbleModel.h"
+#include "MarbleDebug.h"
+#include "MapThemeManager.h"
 
-namespace Marble {
+#include <QtGui/QLabel>
+#include <QtCore/qmath.h>
+
+namespace Marble
+{
 
 class AltitudeModelPrivate : public QObject
 {
@@ -35,7 +36,7 @@ public:
         m_tileLoader = new TileLoader( model->downloadManager(), model->mapThemeManager() );
         updateTextureLayers();
         connect( m_tileLoader, SIGNAL( tileCompleted( TileId, QImage ) ),
-                SLOT( tileCompleted( TileId, QImage ) ) );
+                 SLOT( tileCompleted( TileId, QImage ) ) );
     }
 public Q_SLOTS:
     void tileCompleted( const TileId & tileId, const QImage &image )
@@ -125,8 +126,8 @@ qreal AltitudeModel::height( qreal lat, qreal lon ) const
         Q_ASSERT( width == image->width() );
         Q_ASSERT( height == image->height() );
 
-        const qreal dx = ( textureX > (qreal)x ) ? textureX - (qreal)x : (qreal)x - textureX;
-        const qreal dy = ( textureY > (qreal)y ) ? textureY - (qreal)y : (qreal)y - textureY;
+        const qreal dx = ( textureX > ( qreal )x ) ? textureX - ( qreal )x : ( qreal )x - textureX;
+        const qreal dy = ( textureY > ( qreal )y ) ? textureY - ( qreal )y : ( qreal )y - textureY;
 
         Q_ASSERT( 0 <= dx && dx <= 1 );
         Q_ASSERT( 0 <= dy && dy <= 1 );
@@ -134,22 +135,22 @@ qreal AltitudeModel::height( qreal lat, qreal lon ) const
         pixel = image->pixel( x % width, y % height );
         pixel -= 0xFF000000; //fully opaque
         //mDebug() << "(1-dx)" << (1-dx) << "(1-dy)" << (1-dy);
-        if (pixel != 32768) { //no data?
+        if ( pixel != 32768 ) { //no data?
             //mDebug() << "got at x" << x % width << "y" << y % height << "a height of" << pixel << "** RGB" << qRed(pixel) << qGreen(pixel) << qBlue(pixel);
-            ret += (qreal)pixel * (1-dx) * (1-dy);
+            ret += ( qreal )pixel * ( 1 - dx ) * ( 1 - dy );
             hasHeight = true;
         } else {
             //mDebug() << "no data at" <<  x % width << "y" << y % height;
-            noData += (1-dx) * (1-dy);
+            noData += ( 1 - dx ) * ( 1 - dy );
         }
     }
 
-    if (!hasHeight) {
+    if ( !hasHeight ) {
         ret = 32768; //no data
     } else {
-        if (noData) {
+        if ( noData ) {
             //mDebug() << "NO DATA" << noData;
-            ret += (ret / (1-noData))*noData;
+            ret += ( ret / ( 1 - noData ) ) * noData;
         }
     }
 
@@ -163,7 +164,7 @@ QList<GeoDataCoordinates> AltitudeModel::heightProfile( qreal fromLat, qreal fro
     const int width = d->m_textureLayer->tileSize().width();
     const int numTilesX = TileLoaderHelper::levelToColumn( d->m_textureLayer->levelZeroColumns(), tileZoomLevel );
 
-    qreal distPerPixel = (qreal)360 / ( width * numTilesX );
+    qreal distPerPixel = ( qreal )360 / ( width * numTilesX );
     //mDebug() << "heightProfile" << fromLat << fromLon << toLat << toLon << "distPerPixel" << distPerPixel;
 
     qreal lat = fromLat;
@@ -175,10 +176,10 @@ QList<GeoDataCoordinates> AltitudeModel::heightProfile( qreal fromLat, qreal fro
     //mDebug() << "diff lon" << ( fromLon - toLon ) << "diff lat" << ( fromLat - toLat );
     //mDebug() << "dirLon" << QString::number(dirLon) << "dirLat" << QString::number(dirLat) << "k" << k;
     QList<GeoDataCoordinates> ret;
-    while ( lat*dirLat <= toLat*dirLat && lon*dirLon <= toLon*dirLon ) {
+    while ( lat*dirLat <= toLat*dirLat && lon*dirLon <= toLon * dirLon ) {
         //mDebug() << lat << lon;
         qreal h = height( lat, lon );
-        if (h < 32000) {
+        if ( h < 32000 ) {
             ret << GeoDataCoordinates( lon, lat, h, GeoDataCoordinates::Degree );
         }
         if ( k < 0.5 ) {

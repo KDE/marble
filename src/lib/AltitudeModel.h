@@ -12,15 +12,16 @@
 #ifndef MARBLE_ALTITUDEMODEL_H
 #define MARBLE_ALTITUDEMODEL_H
 
+#include "GeoDataCoordinates.h"
+#include "marble_export.h"
+#include "TileId.h"
+
 #include <QtCore/QObject>
 #include <QtCore/QCache>
 #include <QtGui/QImage>
 
-#include "marble_export.h"
-#include "TileId.h"
-#include "GeoDataCoordinates.h"
-
-namespace Marble {
+namespace Marble
+{
 
 class MarbleModel;
 class HttpDownloadManager;
@@ -36,12 +37,12 @@ class MARBLE_EXPORT AltitudeModel : public QObject
 public:
     AltitudeModel( MarbleModel * const model );
 
-    qreal height(qreal lat, qreal lon) const;
+    qreal height( qreal lat, qreal lon ) const;
     QList<GeoDataCoordinates> heightProfile( qreal fromLat, qreal fromLon, qreal toLat, qreal toLon ) const;
 
 Q_SIGNALS:
     /**
-     * Altitude tiles loaded. You will get more acurate results when quering height
+     * Altitude tiles loaded. You will get more accurate results when querying height
      * for at least one that was queried before.
      **/
     void loadCompleted();
