@@ -99,7 +99,7 @@ QIcon ProgressFloatItem::icon() const
 
 void ProgressFloatItem::initialize()
 {
-    HttpDownloadManager* manager = marbleModel()->downloadManager();
+    const HttpDownloadManager* manager = marbleModel()->downloadManager();
     Q_ASSERT( manager );
     connect( manager, SIGNAL( jobAdded() ), this, SLOT( addProgressItem() ), Qt::UniqueConnection );
     connect( manager, SIGNAL( jobRemoved() ), this, SLOT( removeProgressItem() ), Qt::UniqueConnection );

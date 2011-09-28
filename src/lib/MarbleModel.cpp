@@ -193,7 +193,7 @@ MarbleModel::~MarbleModel()
     mDebug() << "Model deleted:" << this;
 }
 
-BookmarkManager * MarbleModel::bookmarkManager() const
+BookmarkManager *MarbleModel::bookmarkManager()
 {
     return &d->m_bookmarkManager;
 }
@@ -208,7 +208,12 @@ QString MarbleModel::mapThemeId() const
     return mapThemeId;
 }
 
-GeoSceneDocument* MarbleModel::mapTheme() const
+GeoSceneDocument *MarbleModel::mapTheme()
+{
+    return d->m_mapTheme;
+}
+
+const GeoSceneDocument *MarbleModel::mapTheme() const
 {
     return d->m_mapTheme;
 }
@@ -329,28 +334,33 @@ void MarbleModel::setHome( const GeoDataCoordinates& homePoint, int zoom )
     d->m_homeZoom = zoom;
 }
 
-MapThemeManager* MarbleModel::mapThemeManager() const
+MapThemeManager *MarbleModel::mapThemeManager()
 {
     return &d->m_mapThemeManager;
 }
 
-HttpDownloadManager* MarbleModel::downloadManager() const
+HttpDownloadManager *MarbleModel::downloadManager()
+{
+    return &d->m_downloadManager;
+}
+
+const HttpDownloadManager *MarbleModel::downloadManager() const
 {
     return &d->m_downloadManager;
 }
 
 
-GeoDataTreeModel *MarbleModel::treeModel() const
+GeoDataTreeModel *MarbleModel::treeModel()
 {
     return &d->m_treemodel;
 }
 
-QAbstractItemModel *MarbleModel::placemarkModel() const
+QAbstractItemModel *MarbleModel::placemarkModel()
 {
     return &d->m_sortproxy;
 }
 
-QItemSelectionModel *MarbleModel::placemarkSelectionModel() const
+QItemSelectionModel *MarbleModel::placemarkSelectionModel()
 {
     return &d->m_placemarkselectionmodel;
 }
@@ -360,7 +370,7 @@ PositionTracking *MarbleModel::positionTracking() const
     return &d->m_positionTracking;
 }
 
-FileViewModel *MarbleModel::fileViewModel() const
+FileViewModel *MarbleModel::fileViewModel()
 {
     return &d->m_fileviewmodel;
 }
@@ -385,7 +395,7 @@ void MarbleModel::removePlacemarkKey( const QString& key )
     removeGeoData( key );
 }
 
-FileManager* MarbleModel::fileManager() const
+FileManager *MarbleModel::fileManager()
 {
     return d->m_fileManager;
 }
@@ -415,7 +425,12 @@ const MarbleClock *MarbleModel::clock() const
     return &d->m_clock;
 }
 
-SunLocator* MarbleModel::sunLocator() const
+SunLocator *MarbleModel::sunLocator()
+{
+    return &d->m_sunLocator;
+}
+
+const SunLocator *MarbleModel::sunLocator() const
 {
     return &d->m_sunLocator;
 }

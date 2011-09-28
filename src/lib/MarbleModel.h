@@ -109,9 +109,9 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief Return the list of Placemarks as a QAbstractItemModel *
      * @return a list of all Placemarks in the MarbleModel.
      */
-    GeoDataTreeModel*  treeModel() const;
-    QAbstractItemModel*  placemarkModel() const;
-    QItemSelectionModel* placemarkSelectionModel() const;
+    GeoDataTreeModel *treeModel();
+    QAbstractItemModel *placemarkModel();
+    QItemSelectionModel *placemarkSelectionModel();
 
     /**
      * @brief Return the name of the current map theme.
@@ -125,7 +125,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     QString mapThemeId() const;
 
-    GeoSceneDocument *mapTheme() const;
+    GeoSceneDocument *mapTheme();
+    const GeoSceneDocument *mapTheme() const;
 
     /**
      * @brief Set a new map theme to use.
@@ -170,13 +171,14 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void setHome( const GeoDataCoordinates& homePoint, int zoom = 1050 );
 
-    MapThemeManager* mapThemeManager() const;
+    MapThemeManager *mapThemeManager();
 
     /**
      * @brief Return the downloadmanager to load missing tiles
      * @return the HttpDownloadManager instance.
      */
-    HttpDownloadManager* downloadManager() const;
+    HttpDownloadManager *downloadManager();
+    const HttpDownloadManager *downloadManager() const;
 
     /**
       * @deprecated Please use addGeoDataFile instead
@@ -201,9 +203,10 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void addGeoDataFile( const QString& filename );
     void addGeoDataString( const QString& data, const QString& key = "data" );
     void removeGeoData( const QString& key );
-    FileManager       *fileManager() const;
+    FileManager       *fileManager();
 
-    FileViewModel      *fileViewModel()   const;
+    FileViewModel      *fileViewModel();
+
     PositionTracking   *positionTracking() const;
 
     qreal                 planetRadius()   const;
@@ -212,7 +215,9 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     MarbleClock *clock();
     const MarbleClock *clock() const;
-    SunLocator*           sunLocator()     const;
+
+    SunLocator *sunLocator();
+    const SunLocator *sunLocator() const;
 
     /**
      * @brief  Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
@@ -251,7 +256,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     /**
      * return instance of BookmarkManager
     */
-    BookmarkManager *bookmarkManager() const;
+    BookmarkManager *bookmarkManager();
 
     QTextDocument * legend();
 
