@@ -110,11 +110,7 @@ class MarbleMapPrivate
  public:
     explicit MarbleMapPrivate( MarbleMap *parent, MarbleModel *model );
 
-    void construct();
-
     void updateProperty( const QString &, bool );
-
-    MarbleMap       *m_parent;
 
     // The model we are showing.
     MarbleModel     *const m_model;
@@ -144,8 +140,7 @@ class MarbleMapPrivate
 };
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
-        : m_parent( parent ),
-          m_model( model ),
+        : m_model( model ),
           m_viewParams(),
           m_showFrameRate( false ),
           m_mapTheme( 0 ),
@@ -165,35 +160,6 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
     m_layerManager.addLayer( &m_measureTool );
     m_layerManager.addLayer( &m_geometryLayer );
     m_layerManager.addLayer( &m_customPaintLayer );
-}
-
-void MarbleMapPrivate::construct()
-{
-    m_parent->connect( m_model, SIGNAL( themeChanged( QString ) ),
-                       m_parent, SIGNAL( themeChanged( QString ) ) );
-    m_parent->connect( m_model, SIGNAL( modelChanged() ),
-                       m_parent, SIGNAL( repaintNeeded() ) );
-
-    m_parent->connect( &m_veccomposer, SIGNAL( datasetLoaded() ),
-                       m_parent, SIGNAL( repaintNeeded() ));
-
-    QObject::connect( m_model, SIGNAL( modelChanged() ),
-                      &m_placemarkLayout, SLOT( setCacheData() ) );
-
-    QObject::connect ( &m_layerManager, SIGNAL( pluginSettingsChanged() ),
-                       m_parent,        SIGNAL( pluginSettingsChanged() ) );
-    QObject::connect ( &m_layerManager, SIGNAL( repaintNeeded( QRegion ) ),
-                       m_parent,        SIGNAL( repaintNeeded( QRegion ) ) );
-    QObject::connect ( &m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
-                       m_parent,        SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
-    
-    QObject::connect ( m_model,  SIGNAL( modelChanged() ),
-                       &m_geometryLayer,  SLOT( invalidateScene() ) );
-
-    m_parent->connect( &m_textureLayer, SIGNAL( tileLevelChanged( int ) ),
-                       m_parent, SIGNAL( tileLevelChanged( int ) ) );
-    m_parent->connect( &m_textureLayer, SIGNAL( repaintNeeded() ),
-                       m_parent, SIGNAL( repaintNeeded() ) );
 
     QList<RenderPlugin *> pluginList = m_layerManager.renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
@@ -203,6 +169,32 @@ void MarbleMapPrivate::construct()
             (*i)->setVisible( false );
         }
     }
+
+    QObject::connect( m_model, SIGNAL( themeChanged( QString ) ),
+                      parent, SIGNAL( themeChanged( QString ) ) );
+    QObject::connect( m_model, SIGNAL( modelChanged() ),
+                      parent, SIGNAL( repaintNeeded() ) );
+
+    QObject::connect( &m_veccomposer, SIGNAL( datasetLoaded() ),
+                      parent, SIGNAL( repaintNeeded() ));
+
+    QObject::connect( m_model, SIGNAL( modelChanged() ),
+                      &m_placemarkLayout, SLOT( setCacheData() ) );
+
+    QObject::connect ( &m_layerManager, SIGNAL( pluginSettingsChanged() ),
+                       parent,        SIGNAL( pluginSettingsChanged() ) );
+    QObject::connect ( &m_layerManager, SIGNAL( repaintNeeded( QRegion ) ),
+                       parent,        SIGNAL( repaintNeeded( QRegion ) ) );
+    QObject::connect ( &m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
+                       parent,        SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
+
+    QObject::connect ( m_model,  SIGNAL( modelChanged() ),
+                       &m_geometryLayer,  SLOT( invalidateScene() ) );
+
+    QObject::connect( &m_textureLayer, SIGNAL( tileLevelChanged( int ) ),
+                      parent, SIGNAL( tileLevelChanged( int ) ) );
+    QObject::connect( &m_textureLayer, SIGNAL( repaintNeeded() ),
+                      parent, SIGNAL( repaintNeeded() ) );
 }
 
 void MarbleMapPrivate::updateProperty( const QString &name, bool show )
@@ -260,24 +252,19 @@ MarbleMap::MarbleMap()
                                                   | QDBusConnection::ExportAllSignals
                                                   | QDBusConnection::ExportAllProperties );
 #endif
-    QTime t;
-    t.start();
-    
-    d->m_modelIsOwned = true;
-
-    d->construct();
-    qDebug("Model: Time elapsed: %d ms", t.elapsed());
 }
 
 MarbleMap::MarbleMap(MarbleModel *model)
     : d( new MarbleMapPrivate( this, model ) )
 {
-//     QDBusConnection::sessionBus().registerObject( "/marble", this,
-//                                                   QDBusConnection::ExportAllSlots );
+#ifdef MARBLE_DBUS
+    QDBusConnection::sessionBus().registerObject( "/MarbleMap", this,
+                                                  QDBusConnection::ExportAllSlots
+                                                  | QDBusConnection::ExportAllSignals
+                                                  | QDBusConnection::ExportAllProperties );
+#endif
 
     d->m_modelIsOwned = false;
-
-    d->construct();
 }
 
 MarbleMap::~MarbleMap()
