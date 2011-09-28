@@ -155,10 +155,10 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), parent ),
           m_measureTool( model )
 {
-    m_layerManager.addLayer( &m_placemarkLayout );
     m_layerManager.addLayer( &m_fogLayer );
     m_layerManager.addLayer( &m_measureTool );
     m_layerManager.addLayer( &m_geometryLayer );
+    m_layerManager.addLayer( &m_placemarkLayout );
     m_layerManager.addLayer( &m_customPaintLayer );
 
     QList<RenderPlugin *> pluginList = m_layerManager.renderPlugins();
