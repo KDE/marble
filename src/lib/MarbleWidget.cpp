@@ -257,7 +257,7 @@ void MarbleWidgetPrivate::construct()
     m_popupmenu = new MarbleWidgetPopupMenu( m_widget, m_model );
 
     m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler( m_widget ) );
-    m_widget->setMouseTracking( m_widget );
+    m_widget->setMouseTracking( true );
 
     m_routingLayer = new RoutingLayer( m_widget, m_widget );
     m_routingLayer->setRouteRequest( m_model->routingManager()->routeRequest() );
