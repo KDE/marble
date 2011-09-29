@@ -138,14 +138,7 @@ void Quaternion::display() const
 
 Quaternion& Quaternion::operator*=(const Quaternion &q)
 {
-    qreal x, y, z, w;
-
-    w = v[Q_W] * q.v[Q_W] - v[Q_X] * q.v[Q_X] - v[Q_Y] * q.v[Q_Y] - v[Q_Z] * q.v[Q_Z];
-    x = v[Q_W] * q.v[Q_X] + v[Q_X] * q.v[Q_W] + v[Q_Y] * q.v[Q_Z] - v[Q_Z] * q.v[Q_Y];
-    y = v[Q_W] * q.v[Q_Y] - v[Q_X] * q.v[Q_Z] + v[Q_Y] * q.v[Q_W] + v[Q_Z] * q.v[Q_X];
-    z = v[Q_W] * q.v[Q_Z] + v[Q_X] * q.v[Q_Y] - v[Q_Y] * q.v[Q_X] + v[Q_Z] * q.v[Q_W];
-
-    (*this) = Quaternion( w, x, y, z );
+    (*this) = (*this) * q;
 
     return *this;
 }
@@ -179,10 +172,7 @@ void Quaternion::rotateAroundAxis(const Quaternion &q)
     y = + v[Q_X] * q.v[Q_Z] + v[Q_Y] * q.v[Q_W] - v[Q_Z] * q.v[Q_X];
     z = - v[Q_X] * q.v[Q_Y] + v[Q_Y] * q.v[Q_X] + v[Q_Z] * q.v[Q_W];
 
-    v[Q_W] = q.v[Q_W] * w - q.v[Q_X] * x - q.v[Q_Y] * y - q.v[Q_Z] * z;
-    v[Q_X] = q.v[Q_W] * x + q.v[Q_X] * w + q.v[Q_Y] * z - q.v[Q_Z] * y;
-    v[Q_Y] = q.v[Q_W] * y - q.v[Q_X] * z + q.v[Q_Y] * w + q.v[Q_Z] * x;
-    v[Q_Z] = q.v[Q_W] * z + q.v[Q_X] * y - q.v[Q_Y] * x + q.v[Q_Z] * w;
+    (*this) = q * Quaternion( w, x, y, z );
 }
 
 void Quaternion::slerp( const Quaternion &q1, const Quaternion &q2, 
