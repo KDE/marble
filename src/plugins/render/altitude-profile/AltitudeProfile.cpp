@@ -120,7 +120,7 @@ void AltitudeProfile::initialize()
     currentRouteChanged( marbleModel()->routingManager()->alternativeRoutesModel()->currentRoute() );
     connect( marbleModel()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ), SLOT( currentRouteChanged( GeoDataDocument* ) ) );
 
-    connect( marbleModel()->altitudeModel(), SIGNAL( loadCompleted() ), SLOT( altitudeDataLoadCompleted() ) );
+    connect( marbleModel()->altitudeModel(), SIGNAL( updateAvailable() ), SLOT( altitudeDataLoadCompleted() ) );
 }
 
 void AltitudeProfile::altitudeDataLoadCompleted()

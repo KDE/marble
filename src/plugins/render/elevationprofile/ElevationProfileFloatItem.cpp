@@ -125,7 +125,7 @@ QIcon ElevationProfileFloatItem::icon () const
 
 void ElevationProfileFloatItem::initialize ()
 {
-    connect( marbleModel()->altitudeModel(), SIGNAL( loadCompleted() ), SLOT( updateData() ) );
+    connect( marbleModel()->altitudeModel(), SIGNAL( updateAvailable() ), SLOT( updateData() ) );
 }
 
 bool ElevationProfileFloatItem::isInitialized () const

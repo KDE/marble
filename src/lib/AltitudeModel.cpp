@@ -42,7 +42,7 @@ public Q_SLOTS:
     void tileCompleted( const TileId & tileId, const QImage &image )
     {
         m_cache.insert( tileId, new QImage( image ) );
-        emit q->loadCompleted();
+        emit q->updateAvailable();
     }
 
 public:

@@ -45,7 +45,7 @@ Q_SIGNALS:
      * Altitude tiles loaded. You will get more accurate results when querying height
      * for at least one that was queried before.
      **/
-    void loadCompleted();
+    void updateAvailable();
 
 private:
     friend class AltitudeModelPrivate;
