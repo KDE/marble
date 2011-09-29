@@ -234,19 +234,11 @@ bool ViewportParams::setPlanetAxis(const Quaternion &newAxis)
     if ( !currentProjection()->traversablePoles() && fabs( newAxis.pitch() ) > maxLat ) {
 
         const qreal centerLon = newAxis.yaw();
-        qreal centerLat = - newAxis.pitch();
+        const qreal centerLat = newAxis.pitch() > maxLat ? maxLat : currentProjection()->minLat();
 
-        // Normalize latitude and longitude
-        GeoDataPoint::normalizeLat( centerLat );
+        valid = false;
 
-        // Checking whether the latitude is valid:
-        if ( fabs( centerLat ) > maxLat )
-        {
-            valid = false;
-            centerLat = maxLat * centerLat / fabs( centerLat );
-        }
-        
-        d->m_planetAxis = Quaternion::fromEuler( -centerLat, centerLon, newAxis.roll() );
+        d->m_planetAxis = Quaternion::fromEuler( centerLat, centerLon, newAxis.roll() );
     }
     else {
         d->m_planetAxis = newAxis;
