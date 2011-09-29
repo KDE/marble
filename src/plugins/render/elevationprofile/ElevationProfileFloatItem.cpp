@@ -201,6 +201,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
             ( contentSize().height() + m_fontHeight ) / 2
         );
         painter->drawText( pos, text );
+        painter->restore();
         return;
     }
     qreal graphDistance = m_eleData.last().x();
