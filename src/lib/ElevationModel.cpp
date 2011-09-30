@@ -8,7 +8,7 @@
 // Copyright 2011 Niko Sams <niko.sams@gmail.com>
 //
 
-#include "AltitudeModel.h"
+#include "ElevationModel.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
 #include "GeoSceneDocument.h"
@@ -26,10 +26,10 @@
 namespace Marble
 {
 
-class AltitudeModelPrivate : public QObject
+class ElevationModelPrivate : public QObject
 {
 public:
-    AltitudeModelPrivate( AltitudeModel *_q, MarbleModel *const model )
+    ElevationModelPrivate( ElevationModel *_q, MarbleModel *const model )
         : q( _q ), m_model( model )
     {
         m_cache.setMaxCost( 10 ); //keep 10 tiles in memory (~17MB)
@@ -68,7 +68,7 @@ public:
 
 
 public:
-    AltitudeModel *q;
+    ElevationModel *q;
 
     TileLoader *m_tileLoader;
     const MapThemeManager* m_mapThemeManager;
@@ -77,13 +77,13 @@ public:
     QCache<TileId, const QImage> m_cache;
 };
 
-AltitudeModel::AltitudeModel( MarbleModel *const model )
-    : QObject( 0 ), d( new AltitudeModelPrivate( this, model ) )
+ElevationModel::ElevationModel( MarbleModel *const model )
+    : QObject( 0 ), d( new ElevationModelPrivate( this, model ) )
 {
 }
 
 
-qreal AltitudeModel::height( qreal lat, qreal lon ) const
+qreal ElevationModel::height( qreal lat, qreal lon ) const
 {
     const int tileZoomLevel = d->m_tileLoader->maximumTileLevel( *( d->m_textureLayer ) );
     Q_ASSERT( tileZoomLevel == 9 );
@@ -154,11 +154,11 @@ qreal AltitudeModel::height( qreal lat, qreal lon ) const
         }
     }
 
-    //mDebug() << ">>>" << lat << lon << "returning an altitude of" << ret;
+    //mDebug() << ">>>" << lat << lon << "returning an elevation of" << ret;
     return ret;
 }
 
-QList<GeoDataCoordinates> AltitudeModel::heightProfile( qreal fromLat, qreal fromLon, qreal toLat, qreal toLon ) const
+QList<GeoDataCoordinates> ElevationModel::heightProfile( qreal fromLat, qreal fromLon, qreal toLat, qreal toLon ) const
 {
     const int tileZoomLevel = d->m_tileLoader->maximumTileLevel( *( d->m_textureLayer ) );
     const int width = d->m_textureLayer->tileSize().width();
@@ -200,4 +200,4 @@ QList<GeoDataCoordinates> AltitudeModel::heightProfile( qreal fromLat, qreal fro
 
 
 
-#include "AltitudeModel.moc"
+#include "ElevationModel.moc"

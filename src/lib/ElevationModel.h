@@ -9,8 +9,8 @@
 //
 
 
-#ifndef MARBLE_ALTITUDEMODEL_H
-#define MARBLE_ALTITUDEMODEL_H
+#ifndef MARBLE_ELEVATIONMODEL_H
+#define MARBLE_ELEVATIONMODEL_H
 
 #include "GeoDataCoordinates.h"
 #include "marble_export.h"
@@ -29,29 +29,29 @@ class GeoSceneGroup;
 class GeoSceneTexture;
 class MapThemeManager;
 class TileLoader;
-class AltitudeModelPrivate;
+class ElevationModelPrivate;
 
-class MARBLE_EXPORT AltitudeModel : public QObject
+class MARBLE_EXPORT ElevationModel : public QObject
 {
     Q_OBJECT
 public:
-    AltitudeModel( MarbleModel * const model );
+    ElevationModel( MarbleModel * const model );
 
     qreal height( qreal lat, qreal lon ) const;
     QList<GeoDataCoordinates> heightProfile( qreal fromLat, qreal fromLon, qreal toLat, qreal toLon ) const;
 
 Q_SIGNALS:
     /**
-     * Altitude tiles loaded. You will get more accurate results when querying height
+     * Elevation tiles loaded. You will get more accurate results when querying height
      * for at least one that was queried before.
      **/
     void updateAvailable();
 
 private:
-    friend class AltitudeModelPrivate;
-    AltitudeModelPrivate *d;
+    friend class ElevationModelPrivate;
+    ElevationModelPrivate *d;
 };
 
 }
 
-#endif // MARBLE_ALTITUDEMODEL_H
+#endif // MARBLE_ELEVATIONMODEL_H

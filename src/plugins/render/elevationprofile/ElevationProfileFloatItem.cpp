@@ -24,7 +24,7 @@
 #include "ViewportParams.h"
 #include "routing/RoutingManager.h"
 #include "MarbleDirs.h"
-#include "AltitudeModel.h"
+#include "ElevationModel.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "LabelGraphicsItem.h"
 
@@ -126,7 +126,7 @@ QIcon ElevationProfileFloatItem::icon () const
 
 void ElevationProfileFloatItem::initialize ()
 {
-    connect( marbleModel()->altitudeModel(), SIGNAL( updateAvailable() ), SLOT( updateData() ) );
+    connect( marbleModel()->elevationModel(), SIGNAL( updateAvailable() ), SLOT( updateData() ) );
 }
 
 bool ElevationProfileFloatItem::isInitialized () const
@@ -205,7 +205,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         return;
     }
     qreal graphDistance = m_eleData.last().x();
-    qreal graphAltitude = m_maxElevation;
+    qreal graphElevation = m_maxElevation;
     int   valueOffsetX = 0;
     int   valueOffsetY = 0;
     int start = 0;
@@ -227,7 +227,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
                 valueOffsetY = m_eleData.value(i).y();
             }
         }
-        graphAltitude = localMax - valueOffsetY;
+        graphElevation = localMax - valueOffsetY;
     }
 
 
@@ -239,7 +239,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     }
 
     calcScaleX( graphDistance );
-    calcScaleY( graphAltitude );
+    calcScaleY( graphElevation );
 
     QString  intervalStr;
     int      lastStringEnds     = 0;
@@ -337,10 +337,10 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         }
     }
 
-    // display altitude gain/loss data
+    // display elevation gain/loss data
     // TODO: miles/feet...
     painter->setPen( QColor( Qt::black ) );
-    intervalStr = tr( "Altitude difference: ca. %1 m (Gain: %2 m, Loss: %3 m)" )
+    intervalStr = tr( "Elevation difference: ca. %1 m (Gain: %2 m, Loss: %3 m)" )
                     .arg( QString::number( m_gain - m_loss, 'f', 0 ) )
                     .arg( QString::number( m_gain, 'f', 0 ) )
                     .arg( QString::number( m_loss, 'f', 0 ) );
@@ -351,14 +351,14 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     QPoint oldPos (
         m_leftGraphMargin,
         m_eleGraphHeight - ( m_eleData.value(start).y() - valueOffsetY )
-        * m_eleGraphHeight / graphAltitude
+        * m_eleGraphHeight / graphElevation
     );
     for ( int i = start; i <= end; ++i ) {
         QPoint newPos (
             m_leftGraphMargin + ( m_eleData.value(i).x() - valueOffsetX )
             * m_eleGraphWidth / graphDistance,
             m_eleGraphHeight - ( m_eleData.value(i).y() - valueOffsetY )
-            * m_eleGraphHeight / graphAltitude
+            * m_eleGraphHeight / graphElevation
         );
         if ( newPos.x() != oldPos.x() ) {
             painter->drawLine(oldPos.x(), oldPos.y(), newPos.x(), newPos.y());
@@ -382,7 +382,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
                 break;
             }
         }
-        ypos = ( ( ypos - valueOffsetY ) / graphAltitude ) * m_eleGraphHeight;
+        ypos = ( ( ypos - valueOffsetY ) / graphElevation ) * m_eleGraphHeight;
         ypos = m_eleGraphHeight - ypos;
 
         painter->drawLine( m_leftGraphMargin + m_cursorPositionX - 5, ypos,
@@ -801,7 +801,7 @@ void ElevationProfileFloatItem::calculateElevations()
     for ( int i = 0; i < m_eleData.size(); i++ ) {
         qreal lat = m_points[i].latitude ( GeoDataCoordinates::Degree );
         qreal lon = m_points[i].longitude( GeoDataCoordinates::Degree );
-        ele = marbleModel()->altitudeModel()->height( lat, lon );
+        ele = marbleModel()->elevationModel()->height( lat, lon );
         if ( ele == 32768 ) { // no data
             ele = 0;
         }
@@ -829,7 +829,7 @@ void ElevationProfileFloatItem::calculateElevations()
             }
             average /= averageOrder;
             if ( i == averageOrder ) {
-                lastAverage = average; // else the initial altitude would be counted as gain
+                lastAverage = average; // else the initial elevation would be counted as gain
             }
             if ( average > lastAverage ) {
                 m_gain += average - lastAverage;

@@ -64,7 +64,7 @@
 #include "TileLoader.h"
 #include "routing/RoutingManager.h"
 #include "BookmarkManager.h"
-#include "AltitudeModel.h"
+#include "ElevationModel.h"
 
 namespace Marble
 {
@@ -147,7 +147,7 @@ class MarbleModelPrivate
 
     bool                     m_workOffline;
 
-    AltitudeModel           *m_altitudeModel;
+    ElevationModel           *m_elevationModel;
 };
 
 MarbleModel::MarbleModel( QObject *parent )
@@ -185,7 +185,7 @@ MarbleModel::MarbleModel( QObject *parent )
     connect(&d->m_clock,   SIGNAL( timeChanged() ),
             &d->m_sunLocator, SLOT( update() ) );
 
-    d->m_altitudeModel = new AltitudeModel( this );
+    d->m_elevationModel = new ElevationModel( this );
 
 }
 
@@ -621,14 +621,14 @@ void MarbleModel::setWorkOffline( bool workOffline )
     }
 }
 
-AltitudeModel* MarbleModel::altitudeModel()
+ElevationModel* MarbleModel::elevationModel()
 {
-    return d->m_altitudeModel;
+    return d->m_elevationModel;
 }
 
-const AltitudeModel* MarbleModel::altitudeModel() const
+const ElevationModel* MarbleModel::elevationModel() const
 {
-    return d->m_altitudeModel;
+    return d->m_elevationModel;
 }
 
 }

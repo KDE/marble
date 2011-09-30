@@ -61,7 +61,7 @@ class Planet;
 class RoutingManager;
 class BookmarkManager;
 class FileManager;
-class AltitudeModel;
+class ElevationModel;
 
 /**
  * @short The data model (not based on QAbstractModel) for a MarbleWidget.
@@ -268,8 +268,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     void setWorkOffline( bool workOffline );
 
-    AltitudeModel* altitudeModel();
-    const AltitudeModel* altitudeModel() const;
+    ElevationModel* elevationModel();
+    const ElevationModel* elevationModel() const;
 
  public Q_SLOTS:
     void clearPersistentTileCache();
