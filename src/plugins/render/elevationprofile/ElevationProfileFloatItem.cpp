@@ -56,7 +56,8 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, cons
         m_routeAvailable( false ),
         m_firstVisiblePoint( 0 ),
         m_lastVisiblePoint( 0 ),
-        m_zoomToViewport( false )
+        m_zoomToViewport( false ),
+        m_lastMarkerRegion( QRegion() )
 
 {
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -202,7 +203,6 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         painter->drawText( pos, text );
         return;
     }
-
     qreal graphDistance = m_eleData.last().x();
     qreal graphAltitude = m_maxElevation;
     int   valueOffsetX = 0;
@@ -339,11 +339,11 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     // display altitude gain/loss data
     // TODO: miles/feet...
     painter->setPen( QColor( Qt::black ) );
-    intervalStr = tr( "Total altitude difference: ca. %1 m (Gain: ca. %2 m, Loss: ca. %3 m)" )
+    intervalStr = tr( "Altitude difference: ca. %1 m (Gain: %2 m, Loss: %3 m)" )
                     .arg( QString::number( m_gain - m_loss, 'f', 0 ) )
                     .arg( QString::number( m_gain, 'f', 0 ) )
                     .arg( QString::number( m_loss, 'f', 0 ) );
-    painter->drawText( m_leftGraphMargin, contentSize().height() - padding(), intervalStr );
+    painter->drawText( padding(), contentSize().height() - padding(), intervalStr );
 
     // draw elevation profile
     painter->setPen( QColor( Qt::black ) );
@@ -416,35 +416,51 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         }
         painter->drawText( currentStringBegin, ypos + m_fontHeight / 2, intervalStr );
 
+
         // mark position on the map
         m_markerIconContainer.show();
         m_markerTextContainer.show();
+        QRegion newMarkerRegion;
         qreal x;
         qreal y;
         qreal lon;
         qreal lat;
         // move the icon by some pixels, so that the pole of the flag sits at the exact point
+        int dx = -4;
+        int dy = -6;
         m_marbleWidget->screenCoordinates( currentPoint.longitude( Marble::GeoDataCoordinates::Degree ),
                                            currentPoint.latitude ( Marble::GeoDataCoordinates::Degree ),
                                            x, y );
-        x -= 4;
-        y -= 6;
-        m_marbleWidget->geoCoordinates( x, y, lon, lat, Marble::GeoDataCoordinates::Degree );
+        m_marbleWidget->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Degree );
         m_markerIconContainer.setCoordinate( GeoDataCoordinates( lon, lat, currentPoint.altitude(),
                                                             Marble::GeoDataCoordinates::Degree ) );
         // move the text label, so that it sits right next to the flag
-        x += 10;
-        y -= 10;
-        m_marbleWidget->geoCoordinates( x, y, lon, lat, Marble::GeoDataCoordinates::Degree );
+        dx = 6;
+        dy = -16;
+        m_marbleWidget->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Degree );
         m_markerTextContainer.setCoordinate( GeoDataCoordinates( lon, lat, currentPoint.altitude(),
                                                             Marble::GeoDataCoordinates::Degree ) );
         m_markerText->setText( " " + intervalStr + " " + m_unitY );
+
+        // drawing area of flag
+        newMarkerRegion += QRect( QPoint( x - m_markerIconContainer.size().width() - 1,
+                                          y - m_markerIconContainer.size().height() - 1 ),
+                                  m_markerIconContainer.size().toSize() + QSize( 2, 2 ) );
+        // drawing area of text
+        newMarkerRegion += QRect( QPoint( x - 3,
+                                          y - m_markerText->contentSize().height() - 3 ),
+                                  m_markerText->contentSize().toSize() + QSize( 10, 6 ) );
+        // redraw
+        if ( newMarkerRegion != m_lastMarkerRegion ) {
+            repaintRegion( m_lastMarkerRegion + newMarkerRegion );
+        }
+        m_lastMarkerRegion = newMarkerRegion;
     } else {
-        m_markerIconContainer.hide();
-        m_markerTextContainer.hide();
-    }
-    if ( m_marbleWidget ) {
-        m_marbleWidget->update();
+        if( m_markerIconContainer.visible() || m_markerIconContainer.visible() ) {
+            m_markerIconContainer.hide();
+            m_markerTextContainer.hide();
+            repaintRegion( m_lastMarkerRegion );
+        }
     }
     painter->restore();
 }
@@ -686,10 +702,11 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
             // Cross hair cursor when moving above the float item
             // and mark the position on the graph
             widget->setCursor(QCursor(Qt::CrossCursor));
-            m_cursorPositionX = event->pos().x() - graphRect.left();
-            m_mouseInWidget = cursorAboveFloatItem;
-
-            forceRepaint();
+            if ( m_cursorPositionX != event->pos().x() - graphRect.left() ) {
+                m_cursorPositionX = event->pos().x() - graphRect.left();
+                m_mouseInWidget = cursorAboveFloatItem;
+                forceRepaint();
+            }
 
             return true;
         }
@@ -834,14 +851,18 @@ void ElevationProfileFloatItem::forceRepaint()
     // We add one pixel as antialiasing could result into painting on these pixels to.
     QRectF floatItemRect = QRectF( positivePosition() - QPoint( 1, 1 ),
                                    size() + QSize( 2, 2 ) );
+    repaintRegion( floatItemRect.toRect() );
+    update();
+}
 
-    QRegion dirtyRegion( floatItemRect.toRect() );
 
+
+void ElevationProfileFloatItem::repaintRegion( QRegion dirtyRegion )
+{
     m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground,  false );
     m_marbleWidget->update(dirtyRegion);
     m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground,
                                   m_marbleWidget->viewport()->mapCoversViewport() );
-    update();
 }
 
 

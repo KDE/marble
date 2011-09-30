@@ -144,11 +144,13 @@ class ElevationProfileFloatItem : public AbstractFloatItem
     GeoGraphicsItem   m_markerTextContainer;
     LabelGraphicsItem *m_markerIcon;
     LabelGraphicsItem *m_markerText;
+    QRegion           m_lastMarkerRegion;
 
     void calcScaleX( const qreal distance );
     void calcScaleY( const qreal distance );
     void calculateDistances();
     void calculateElevations();
+    void repaintRegion( QRegion dirtyRegion );
 };
 
 
