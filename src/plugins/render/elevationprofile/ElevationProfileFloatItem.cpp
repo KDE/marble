@@ -721,10 +721,7 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
 void ElevationProfileFloatItem::updateData()
 {
     m_routeAvailable = m_routingModel && m_routingModel->rowCount() > 0;
-    if ( ! ( m_routeAvailable ) ) {
-        return;
-    }
-    m_points = m_routingModel->route().path();
+    m_points = m_routeAvailable ? m_routingModel->route().path() : GeoDataLineString();
     calculateDistances();
     calculateElevations();
     updateVisiblePoints();
@@ -860,10 +857,12 @@ void ElevationProfileFloatItem::forceRepaint()
 
 void ElevationProfileFloatItem::repaintRegion( QRegion dirtyRegion )
 {
-    m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground,  false );
-    m_marbleWidget->update(dirtyRegion);
-    m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground,
-                                  m_marbleWidget->viewport()->mapCoversViewport() );
+    if ( m_marbleWidget ) {
+        m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground,  false );
+        m_marbleWidget->update(dirtyRegion);
+        m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground,
+                                      m_marbleWidget->viewport()->mapCoversViewport() );
+    }
 }
 
 
