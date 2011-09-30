@@ -283,6 +283,7 @@ void RoutingModel::clear()
 {
     d->m_route = Route();
     reset();
+    emit currentRouteChanged();
 }
 
 int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteRequest const *const route ) const
