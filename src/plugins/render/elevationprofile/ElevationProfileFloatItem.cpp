@@ -194,7 +194,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
 
     if ( ! ( m_routeAvailable && m_isInitialized && m_eleData.size() > 0 ) ) {
         painter->setPen( QColor( Qt::black ) );
-        QString text = tr( "No route available. Please create a route in the Routing Widget first." );
+        QString text = tr( "Create a route to view its elevation profile." );
 
         QPoint pos(
             ( contentSize().width() - QFontMetrics( font() ).boundingRect( text ).width() ) / 2,
