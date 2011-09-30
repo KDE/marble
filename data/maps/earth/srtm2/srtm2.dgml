@@ -6,9 +6,7 @@
             <target>earth</target>
             <theme>srtm2</theme>
 
-            <!-- describes whether the map theme item will be hidden (e.g.
-                for a clouds layer): -->
-            <!--<visible> false </visible>-->
+            <visible> false </visible>
 
             <zoom>
                 <minimum>   900  </minimum>
