@@ -826,7 +826,7 @@ void MainWindow::openFile()
 {
     QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Open File"),
                             m_lastFileOpenPath,
-                            tr("All Supported Files (*.gpx *.kml *.pnt *.osm);;GPS Data (*.gpx);;Google Earth KML (*.kml);;Micro World Database II (*.pnt);;OpenStreet map file (*.osm)"));
+                            tr("All Supported Files (*.gpx *.kml *.pnt *.osm);;GPS Data (*.gpx);;Google Earth KML (*.kml);;Micro World Database II (*.pnt);;OpenStreetMap Data (*.osm)"));
 
     if ( !fileNames.isEmpty() ) {
         const QString firstFile = fileNames.first();
