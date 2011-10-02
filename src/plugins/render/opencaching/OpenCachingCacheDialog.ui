@@ -40,7 +40,7 @@
        <item row="0" column="1">
         <widget class="QLabel" name="m_cacheName">
          <property name="text">
-          <string>TextLabel</string>
+          <string comment="KDE::DoNotExtract">TextLabel</string>
          </property>
         </widget>
        </item>
@@ -60,7 +60,7 @@
        <item row="1" column="1">
         <widget class="QLabel" name="m_userName">
          <property name="text">
-          <string>TextLabel</string>
+          <string comment="KDE::DoNotExtract">TextLabel</string>
          </property>
         </widget>
        </item>
@@ -80,7 +80,7 @@
        <item row="2" column="1">
         <widget class="QLabel" name="m_type">
          <property name="text">
-          <string>TextLabel</string>
+          <string comment="KDE::DoNotExtract">TextLabel</string>
          </property>
         </widget>
        </item>
@@ -100,7 +100,7 @@
        <item row="3" column="1">
         <widget class="QLabel" name="m_status">
          <property name="text">
-          <string>TextLabel</string>
+          <string comment="KDE::DoNotExtract">TextLabel</string>
          </property>
         </widget>
        </item>
@@ -120,7 +120,7 @@
        <item row="4" column="1">
         <widget class="QLabel" name="m_country">
          <property name="text">
-          <string>TextLabel</string>
+          <string comment="KDE::DoNotExtract">TextLabel</string>
          </property>
         </widget>
        </item>
@@ -140,7 +140,7 @@
        <item row="5" column="1">
         <widget class="QLabel" name="m_size">
          <property name="text">
-          <string>TextLabel</string>
+          <string comment="KDE::DoNotExtract">TextLabel</string>
          </property>
         </widget>
        </item>
@@ -160,7 +160,7 @@
        <item row="6" column="1">
         <widget class="QLabel" name="m_difficulty">
          <property name="text">
-          <string>TextLabel</string>
+          <string comment="KDE::DoNotExtract">TextLabel</string>
          </property>
         </widget>
        </item>
@@ -180,7 +180,7 @@
        <item row="7" column="1">
         <widget class="QLabel" name="m_terrain">
          <property name="text">
-          <string>TextLabel</string>
+          <string comment="KDE::DoNotExtract">TextLabel</string>
          </property>
         </widget>
        </item>
@@ -200,7 +200,7 @@
        <item row="8" column="1">
         <widget class="QLabel" name="m_longitude">
          <property name="text">
-          <string>TextLabel</string>
+          <string comment="KDE::DoNotExtract">TextLabel</string>
          </property>
         </widget>
        </item>
@@ -220,7 +220,7 @@
        <item row="9" column="1">
         <widget class="QLabel" name="m_latitude">
          <property name="text">
-          <string>TextLabel</string>
+          <string comment="KDE::DoNotExtract">TextLabel</string>
          </property>
         </widget>
        </item>
@@ -240,7 +240,7 @@
        <item row="10" column="1">
         <widget class="QLabel" name="m_dateHidden">
          <property name="text">
-          <string>TextLabel</string>
+          <string comment="KDE::DoNotExtract">TextLabel</string>
          </property>
         </widget>
        </item>
@@ -260,7 +260,7 @@
        <item row="11" column="1">
         <widget class="QLabel" name="m_dateCreated">
          <property name="text">
-          <string>TextLabel</string>
+          <string comment="KDE::DoNotExtract">TextLabel</string>
          </property>
         </widget>
        </item>
@@ -280,7 +280,7 @@
        <item row="12" column="1">
         <widget class="QLabel" name="m_dateLastModified">
          <property name="text">
-          <string>TextLabel</string>
+          <string comment="KDE::DoNotExtract">TextLabel</string>
          </property>
         </widget>
        </item>
