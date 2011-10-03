@@ -148,8 +148,8 @@ class ElevationProfileFloatItem : public AbstractFloatItem
 
     void calcScaleX( const qreal distance );
     void calcScaleY( const qreal distance );
-    void calculateDistances();
-    void calculateElevations();
+    QList<QPointF> calculateElevationData( const GeoDataLineString &lineString ) const;
+    void calculateStatistics( const QList<QPointF> &eleData );
     void repaintRegion( QRegion dirtyRegion );
 };
 

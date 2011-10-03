@@ -641,6 +641,7 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
         connect( m_routingModel, SIGNAL( currentRouteChanged() ), this, SLOT( updateData() ) );
         connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
                  this, SLOT( updateVisiblePoints() ) );
+        connect( this, SIGNAL( dataUpdated() ), this, SLOT( updateVisiblePoints() ) );
         updateData();
     }
 
@@ -722,9 +723,10 @@ void ElevationProfileFloatItem::updateData()
 {
     m_routeAvailable = m_routingModel && m_routingModel->rowCount() > 0;
     m_points = m_routeAvailable ? m_routingModel->route().path() : GeoDataLineString();
-    calculateDistances();
-    calculateElevations();
-    updateVisiblePoints();
+    m_eleData = calculateElevationData( m_points );
+    calculateStatistics( m_eleData );
+    emit dataUpdated();
+
     forceRepaint();
 }
 
@@ -781,51 +783,49 @@ void ElevationProfileFloatItem::updateVisiblePoints()
 
 
 
-void ElevationProfileFloatItem::calculateDistances()
+QList<QPointF> ElevationProfileFloatItem::calculateElevationData( const GeoDataLineString &lineString ) const
 {
     // TODO: Don't re-calculate the whole route if only a small part of it was changed
-    m_eleData.clear();
+    QList<QPointF> result;
 
     GeoDataLineString path;
-    for ( int i = 0; i < m_points.size(); i++ ) {
-        path.append(m_points[i]);
-        m_eleData.append( QPointF( path.length( EARTH_RADIUS ), m_points[i].altitude() ) );
+    for ( int i = 0; i < lineString.size(); i++ ) {
+        path.append( lineString[i] );
+
+        const qreal lat = lineString[i].latitude ( GeoDataCoordinates::Degree );
+        const qreal lon = lineString[i].longitude( GeoDataCoordinates::Degree );
+        qreal ele = marbleModel()->elevationModel()->height( lon, lat );
+        if ( ele == 32768 ) { // no data
+            ele = 0;
+        }
+        result.append( QPointF( path.length( EARTH_RADIUS ), ele ) );
     }
+
+    return result;
 }
 
 
 
-void ElevationProfileFloatItem::calculateElevations()
+void ElevationProfileFloatItem::calculateStatistics( const QList<QPointF> &eleData )
 {
-    qreal ele;
-    for ( int i = 0; i < m_eleData.size(); i++ ) {
-        qreal lat = m_points[i].latitude ( GeoDataCoordinates::Degree );
-        qreal lon = m_points[i].longitude( GeoDataCoordinates::Degree );
-        ele = marbleModel()->elevationModel()->height( lon, lat );
-        if ( ele == 32768 ) { // no data
-            ele = 0;
-        }
-        m_eleData[i].setY( ele );
-    }
+    const int averageOrder = 5;
 
     qreal lastAverage = 0;
-    int averageOrder = 5;
     m_maxElevation = -1;
     m_gain = 0;
     m_loss = 0;
-    for ( int i = 0; i < m_eleData.size(); i++ ) {
-        if ( m_eleData.value(i).y() > m_maxElevation ) {
-            m_maxElevation = m_eleData.value(i).y();
-        }
+    for ( int i = 0; i < eleData.size(); i++ ) {
+        m_maxElevation = qMax( m_maxElevation, eleData.value(i).y() );
+
         // Low-pass filtering (moving average) of the elevation profile to calculate gain and loss values
         // not always the best method, see for example
         // http://www.ikg.uni-hannover.de/fileadmin/ikg/staff/thesis/finished/documents/StudArb_Schulze.pdf
         // (German), chapter 4.2
 
-        qreal average = 0;
         if ( i >= averageOrder ) {
+            qreal average = 0;
             for( int j = 0; j < averageOrder; j++ ) {
-                average += m_eleData.value(i-j).y();
+                average += eleData.value(i-j).y();
             }
             average /= averageOrder;
             if ( i == averageOrder ) {
@@ -839,7 +839,6 @@ void ElevationProfileFloatItem::calculateElevations()
             lastAverage = average;
         }
     }
-    emit dataUpdated();
 }
 
 
