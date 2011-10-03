@@ -43,6 +43,9 @@ Q_SIGNALS:
     void updateAvailable();
 
 private:
+    Q_PRIVATE_SLOT( d, void tileCompleted( TileId, QImage ) )
+
+private:
     friend class ElevationModelPrivate;
     ElevationModelPrivate *d;
 };

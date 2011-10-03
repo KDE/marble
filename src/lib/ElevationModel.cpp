@@ -26,19 +26,17 @@
 namespace Marble
 {
 
-class ElevationModelPrivate : public QObject
+class ElevationModelPrivate
 {
 public:
     ElevationModelPrivate( ElevationModel *_q, MarbleModel *const model )
-        : q( _q ), m_model( model )
+        : q( _q ),
+          m_tileLoader( model->downloadManager(), model->mapThemeManager() )
     {
         m_cache.setMaxCost( 10 ); //keep 10 tiles in memory (~17MB)
-        m_tileLoader = new TileLoader( model->downloadManager(), model->mapThemeManager() );
         updateTextureLayers();
-        connect( m_tileLoader, SIGNAL( tileCompleted( TileId, QImage ) ),
-                 SLOT( tileCompleted( TileId, QImage ) ) );
     }
-public Q_SLOTS:
+
     void tileCompleted( const TileId & tileId, const QImage &image )
     {
         m_cache.insert( tileId, new QImage( image ) );
@@ -70,22 +68,24 @@ public:
 public:
     ElevationModel *q;
 
-    TileLoader *m_tileLoader;
+    TileLoader m_tileLoader;
     const MapThemeManager* m_mapThemeManager;
     const GeoSceneTexture *m_textureLayer;
-    MarbleModel *m_model;
     QCache<TileId, const QImage> m_cache;
 };
 
 ElevationModel::ElevationModel( MarbleModel *const model )
-    : QObject( 0 ), d( new ElevationModelPrivate( this, model ) )
+    : QObject( 0 ),
+      d( new ElevationModelPrivate( this, model ) )
 {
+    connect( &d->m_tileLoader, SIGNAL( tileCompleted( TileId, QImage ) ),
+             this, SLOT( tileCompleted( TileId, QImage ) ) );
 }
 
 
 qreal ElevationModel::height( qreal lon, qreal lat ) const
 {
-    const int tileZoomLevel = d->m_tileLoader->maximumTileLevel( *( d->m_textureLayer ) );
+    const int tileZoomLevel = d->m_tileLoader.maximumTileLevel( *( d->m_textureLayer ) );
     Q_ASSERT( tileZoomLevel == 9 );
 
     const int width = d->m_textureLayer->tileSize().width();
@@ -118,7 +118,7 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
 
         const QImage *image = d->m_cache[id];
         if ( image == 0 ) {
-            image = new QImage( d->m_tileLoader->loadTile( id, DownloadBrowse ) );
+            image = new QImage( d->m_tileLoader.loadTile( id, DownloadBrowse ) );
             d->m_cache.insert( id, image );
         }
         Q_ASSERT( image );
@@ -160,7 +160,7 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
 
 QList<GeoDataCoordinates> ElevationModel::heightProfile( qreal fromLon, qreal fromLat, qreal toLon, qreal toLat ) const
 {
-    const int tileZoomLevel = d->m_tileLoader->maximumTileLevel( *( d->m_textureLayer ) );
+    const int tileZoomLevel = d->m_tileLoader.maximumTileLevel( *( d->m_textureLayer ) );
     const int width = d->m_textureLayer->tileSize().width();
     const int numTilesX = TileLoaderHelper::levelToColumn( d->m_textureLayer->levelZeroColumns(), tileZoomLevel );
 
