@@ -83,7 +83,7 @@ ElevationModel::ElevationModel( MarbleModel *const model )
 }
 
 
-qreal ElevationModel::height( qreal lat, qreal lon ) const
+qreal ElevationModel::height( qreal lon, qreal lat ) const
 {
     const int tileZoomLevel = d->m_tileLoader->maximumTileLevel( *( d->m_textureLayer ) );
     Q_ASSERT( tileZoomLevel == 9 );
@@ -158,7 +158,7 @@ qreal ElevationModel::height( qreal lat, qreal lon ) const
     return ret;
 }
 
-QList<GeoDataCoordinates> ElevationModel::heightProfile( qreal fromLat, qreal fromLon, qreal toLat, qreal toLon ) const
+QList<GeoDataCoordinates> ElevationModel::heightProfile( qreal fromLon, qreal fromLat, qreal toLon, qreal toLat ) const
 {
     const int tileZoomLevel = d->m_tileLoader->maximumTileLevel( *( d->m_textureLayer ) );
     const int width = d->m_textureLayer->tileSize().width();
@@ -178,7 +178,7 @@ QList<GeoDataCoordinates> ElevationModel::heightProfile( qreal fromLat, qreal fr
     QList<GeoDataCoordinates> ret;
     while ( lat*dirLat <= toLat*dirLat && lon*dirLon <= toLon * dirLon ) {
         //mDebug() << lat << lon;
-        qreal h = height( lat, lon );
+        qreal h = height( lon, lat );
         if ( h < 32000 ) {
             ret << GeoDataCoordinates( lon, lat, h, GeoDataCoordinates::Degree );
         }

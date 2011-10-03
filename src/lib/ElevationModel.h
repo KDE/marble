@@ -24,11 +24,6 @@ namespace Marble
 {
 
 class MarbleModel;
-class HttpDownloadManager;
-class GeoSceneGroup;
-class GeoSceneTexture;
-class MapThemeManager;
-class TileLoader;
 class ElevationModelPrivate;
 
 class MARBLE_EXPORT ElevationModel : public QObject
@@ -37,8 +32,8 @@ class MARBLE_EXPORT ElevationModel : public QObject
 public:
     ElevationModel( MarbleModel * const model );
 
-    qreal height( qreal lat, qreal lon ) const;
-    QList<GeoDataCoordinates> heightProfile( qreal fromLat, qreal fromLon, qreal toLat, qreal toLon ) const;
+    qreal height( qreal lon, qreal lat ) const;
+    QList<GeoDataCoordinates> heightProfile( qreal fromLon, qreal fromLat, qreal toLon, qreal toLat ) const;
 
 Q_SIGNALS:
     /**

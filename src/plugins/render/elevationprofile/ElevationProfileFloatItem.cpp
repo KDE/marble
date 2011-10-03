@@ -801,7 +801,7 @@ void ElevationProfileFloatItem::calculateElevations()
     for ( int i = 0; i < m_eleData.size(); i++ ) {
         qreal lat = m_points[i].latitude ( GeoDataCoordinates::Degree );
         qreal lon = m_points[i].longitude( GeoDataCoordinates::Degree );
-        ele = marbleModel()->elevationModel()->height( lat, lon );
+        ele = marbleModel()->elevationModel()->height( lon, lat );
         if ( ele == 32768 ) { // no data
             ele = 0;
         }
