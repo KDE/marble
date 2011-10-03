@@ -264,7 +264,6 @@ void MarbleWidgetPrivate::construct()
     m_routingLayer = new RoutingLayer( m_widget, m_widget );
     m_routingLayer->setRouteRequest( m_model->routingManager()->routeRequest() );
     m_routingLayer->setPlacemarkModel( 0 );
-    m_map->addLayer( m_routingLayer );
 
     m_widget->connect( m_routingLayer, SIGNAL( routeDirty() ),
                        m_model->routingManager(), SLOT( updateRoute() ) );
@@ -888,8 +887,14 @@ void MarbleWidget::setMapThemeId( const QString& mapThemeId )
 {
     if ( !mapThemeId.isEmpty() && mapThemeId == d->m_model->mapThemeId() )
         return;
-    
+
+    d->m_map->removeLayer( d->m_routingLayer );
+
     d->m_map->setMapThemeId( mapThemeId );
+
+    if ( d->m_model->planetId() == "earth" ) {
+        d->m_map->addLayer( d->m_routingLayer );
+    }
 
     // Now we want a full repaint as the atmosphere might differ
     setAttribute( Qt::WA_NoSystemBackground,
