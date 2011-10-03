@@ -786,10 +786,10 @@ void ElevationProfileFloatItem::calculateDistances()
     // TODO: Don't re-calculate the whole route if only a small part of it was changed
     m_eleData.clear();
 
-    GeoDataLineString *path = new GeoDataLineString();
+    GeoDataLineString path;
     for ( int i = 0; i < m_points.size(); i++ ) {
-        path->append(m_points[i]);
-        m_eleData.append( QPointF( path->length(EARTH_RADIUS), m_points[i].altitude() ) );
+        path.append(m_points[i]);
+        m_eleData.append( QPointF( path.length( EARTH_RADIUS ), m_points[i].altitude() ) );
     }
 }
 
