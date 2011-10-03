@@ -71,10 +71,10 @@ class TileCreatorPrivate
 class TileCreatorSourceImage : public TileCreatorSource
 {
 public:
-    TileCreatorSourceImage(QString sourcePath, QString installMap)
-        : m_cachedRowNum(-1)
+    TileCreatorSourceImage( const QString &sourcePath )
+        : m_sourceImage( QImage( sourcePath ) ),
+          m_cachedRowNum( -1 )
     {
-        m_sourceImage = QImage( sourcePath );
     }
 
     virtual QSize fullImageSize() const
@@ -184,7 +184,7 @@ TileCreator::TileCreator(const QString& sourceDir, const QString& installMap,
 
     mDebug() << "Creating tiles from*: " << sourcePath;
 
-    d->m_source = new TileCreatorSourceImage( sourcePath, installMap );
+    d->m_source = new TileCreatorSourceImage( sourcePath );
 
     if ( d->m_targetDir.isNull() )
         d->m_targetDir = MarbleDirs::localPath() + "/maps/"
