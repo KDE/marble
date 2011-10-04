@@ -85,7 +85,7 @@ class MARBLE_EXPORT ViewportParams
 
     Quaternion planetAxis() const;
     bool setPlanetAxis(const Quaternion &newAxis);
-    matrix * planetAxisMatrix() const;
+    const matrix * planetAxisMatrix() const;
 
     int width()  const;
     int height() const;

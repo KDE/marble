@@ -250,7 +250,7 @@ bool ViewportParams::setPlanetAxis(const Quaternion &newAxis)
     return valid;
 }
 
-matrix * ViewportParams::planetAxisMatrix() const
+const matrix * ViewportParams::planetAxisMatrix() const
 {
     return &d->m_planetAxisMatrix;
 }
