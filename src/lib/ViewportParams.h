@@ -83,8 +83,9 @@ class MARBLE_EXPORT ViewportParams
 
     bool  globeCoversViewport() const;
 
+    void centerOn( qreal lon, qreal lat );
+
     Quaternion planetAxis() const;
-    bool setPlanetAxis(const Quaternion &newAxis);
     const matrix * planetAxisMatrix() const;
 
     int width()  const;

@@ -30,7 +30,9 @@ namespace Marble
 class ViewportParamsPrivate
 {
 public:
-     ViewportParamsPrivate();
+    ViewportParamsPrivate();
+
+    void setPlanetAxis( const Quaternion &newAxis );
 
     // These two go together.  m_currentProjection points to one of
     // the static Projection classes at the bottom.
@@ -63,7 +65,7 @@ public:
 ViewportParamsPrivate::ViewportParamsPrivate()
     : m_projection( Spherical ),
       m_currentProjection( &s_sphericalProjection ),
-      m_planetAxis(),
+      m_planetAxis( 1.0, 0.0, 0.0, 0.0 ), // Default view
       m_planetAxisMatrix(),
       m_radius( 2000 ),
       m_angularResolution( 0.25 * M_PI / fabs( (qreal)( m_radius ) ) ),
@@ -74,7 +76,8 @@ ViewportParamsPrivate::ViewportParamsPrivate()
       m_activeRegion(),
       m_hasFocusPoint(false)
 {
-} 
+    m_planetAxis.inverse().toMatrix( m_planetAxisMatrix );
+}
 
 
 const SphericalProjection  ViewportParamsPrivate::s_sphericalProjection;
@@ -85,8 +88,6 @@ const MercatorProjection   ViewportParamsPrivate::s_mercatorProjection;
 ViewportParams::ViewportParams()
     : d( new ViewportParamsPrivate )
 {
-    // Default view
-    setPlanetAxis( Quaternion( 1.0, 0.0, 0.0, 0.0 ) );
 }
 
 ViewportParams::~ViewportParams()
@@ -132,7 +133,7 @@ void ViewportParams::setProjection(Projection newProjection)
     // We now need to reset the planetAxis to make sure
     // that it's a valid axis orientation!
     // So this line is important (although it might look odd) ! :
-    setPlanetAxis( planetAxis() );
+    centerOn( centerLongitude(), centerLatitude() );
 }
 
 int ViewportParams::polarity() const
@@ -210,44 +211,33 @@ bool ViewportParams::globeCoversViewport() const
     return false;
 }
 
+void ViewportParams::centerOn( qreal lon, qreal lat )
+{
+    if ( !d->m_currentProjection->traversablePoles() ) {
+        if ( lat > d->m_currentProjection->maxLat() )
+            lat = d->m_currentProjection->maxLat();
+
+        if ( lat < d->m_currentProjection->minLat() )
+            lat = d->m_currentProjection->minLat();
+    }
+
+    Quaternion axis = Quaternion::fromEuler( -lat, lon, 0.0 );
+    axis.normalize();
+
+    d->setPlanetAxis( axis );
+}
+
 Quaternion ViewportParams::planetAxis() const
 {
     return d->m_planetAxis;
 }
 
-bool ViewportParams::setPlanetAxis(const Quaternion &newAxis)
+void ViewportParamsPrivate::setPlanetAxis(const Quaternion &newAxis)
 {
-    d->m_dirtyBox = true;
-    d->m_dirtyRegion = true;
-
-    bool valid = true;
-
-    qreal maxLat = currentProjection()->maxLat();
-
-    // Make sure that the planetAxis doesn't get invalid
-    // The planetAxis is invalid if lat exceeds
-    // the maximum latitude or longitude as specified by the 
-    // projection
-    // This is should not be done for projections where the
-    // maximum latitude is traversable (e.g. for a sphere).
-
-    if ( !currentProjection()->traversablePoles() && fabs( newAxis.pitch() ) > maxLat ) {
-
-        const qreal centerLon = newAxis.yaw();
-        const qreal centerLat = newAxis.pitch() > maxLat ? maxLat : currentProjection()->minLat();
-
-        valid = false;
-
-        d->m_planetAxis = Quaternion::fromEuler( centerLat, centerLon, newAxis.roll() );
-    }
-    else {
-        d->m_planetAxis = newAxis;
-    }
-
-    // creating matching planetAxis matrix
-    planetAxis().inverse().toMatrix( d->m_planetAxisMatrix );
-
-    return valid;
+    m_dirtyBox = true;
+    m_dirtyRegion = true;
+    m_planetAxis = newAxis;
+    m_planetAxis.inverse().toMatrix( m_planetAxisMatrix );
 }
 
 const matrix * ViewportParams::planetAxisMatrix() const
