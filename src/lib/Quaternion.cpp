@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "Quaternion.h"
@@ -83,25 +84,18 @@ Quaternion Quaternion::inverse() const
 
 Quaternion Quaternion::fromEuler(qreal pitch, qreal yaw, qreal roll)
 {
-    qreal  cPhi, cThe, cPsi, sPhi, sThe, sPsi, 
-            cThecPsi, sThesPsi, sThecPsi, cThesPsi;
+    const qreal cPhi = cos(0.5 * pitch); // also: "heading"
+    const qreal cThe = cos(0.5 * yaw);   // also: "attitude"
+    const qreal cPsi = cos(0.5 * roll);  // also: "bank"
 
-    pitch *= 0.5;
-    yaw   *= 0.5;
-    roll  *= 0.5;
+    const qreal sPhi = sin(0.5 * pitch);
+    const qreal sThe = sin(0.5 * yaw);
+    const qreal sPsi = sin(0.5 * roll);
 
-    cPhi = cos(pitch); // also: "heading"
-    cThe = cos(yaw);   // also: "attitude" 
-    cPsi = cos(roll);  // also: "bank"
-
-    sPhi = sin(pitch);
-    sThe = sin(yaw);
-    sPsi = sin(roll);
-
-    cThecPsi = cThe * cPsi;
-    sThesPsi = sThe * sPsi;
-    sThecPsi = sThe * cPsi;
-    cThesPsi = cThe * sPsi;
+    const qreal cThecPsi = cThe * cPsi;
+    const qreal sThesPsi = sThe * sPsi;
+    const qreal sThecPsi = sThe * cPsi;
+    const qreal cThesPsi = cThe * sPsi;
 
     const qreal w = cPhi * cThecPsi + sPhi * sThesPsi;
     const qreal x = sPhi * cThecPsi - cPhi * sThesPsi;
@@ -113,14 +107,14 @@ Quaternion Quaternion::fromEuler(qreal pitch, qreal yaw, qreal roll)
 
 qreal Quaternion::pitch() const // "heading", phi
 {
-    return atan2( 2.0*(v[Q_X]*v[Q_W]-v[Q_Y]*v[Q_Z]),
-                ( 1.0 - 2.0*(v[Q_X]*v[Q_X]+v[Q_Z]*v[Q_Z] ) ) );
+    return atan2(         2.0*(v[Q_X]*v[Q_W]-v[Q_Y]*v[Q_Z]),
+                  ( 1.0 - 2.0*(v[Q_X]*v[Q_X]+v[Q_Z]*v[Q_Z]) ) );
 }
 
 qreal Quaternion::yaw() const // "attitude", theta
 {
-    return atan2( 2.0*(v[Q_Y]*v[Q_W]-v[Q_X]*v[Q_Z]),
-                 (1.0 - 2.0*(v[Q_Y]*v[Q_Y]+v[Q_Z]*v[Q_Z] ) ) );
+    return atan2(         2.0*(v[Q_Y]*v[Q_W]-v[Q_X]*v[Q_Z]),
+                  ( 1.0 - 2.0*(v[Q_Y]*v[Q_Y]+v[Q_Z]*v[Q_Z]) ) );
 }
 
 qreal Quaternion::roll() const // "bank", psi 
@@ -154,23 +148,20 @@ bool Quaternion::operator==(const Quaternion &q) const
 
 Quaternion Quaternion::operator*(const Quaternion &q) const
 {
-    qreal  w, x, y, z;
+    const qreal w = v[Q_W] * q.v[Q_W] - v[Q_X] * q.v[Q_X] - v[Q_Y] * q.v[Q_Y] - v[Q_Z] * q.v[Q_Z];
+    const qreal x = v[Q_W] * q.v[Q_X] + v[Q_X] * q.v[Q_W] + v[Q_Y] * q.v[Q_Z] - v[Q_Z] * q.v[Q_Y];
+    const qreal y = v[Q_W] * q.v[Q_Y] - v[Q_X] * q.v[Q_Z] + v[Q_Y] * q.v[Q_W] + v[Q_Z] * q.v[Q_X];
+    const qreal z = v[Q_W] * q.v[Q_Z] + v[Q_X] * q.v[Q_Y] - v[Q_Y] * q.v[Q_X] + v[Q_Z] * q.v[Q_W];
 
-    w = v[Q_W] * q.v[Q_W] - v[Q_X] * q.v[Q_X] - v[Q_Y] * q.v[Q_Y] - v[Q_Z] * q.v[Q_Z];
-    x = v[Q_W] * q.v[Q_X] + v[Q_X] * q.v[Q_W] + v[Q_Y] * q.v[Q_Z] - v[Q_Z] * q.v[Q_Y];
-    y = v[Q_W] * q.v[Q_Y] - v[Q_X] * q.v[Q_Z] + v[Q_Y] * q.v[Q_W] + v[Q_Z] * q.v[Q_X];
-    z = v[Q_W] * q.v[Q_Z] + v[Q_X] * q.v[Q_Y] - v[Q_Y] * q.v[Q_X] + v[Q_Z] * q.v[Q_W];
     return Quaternion( w, x, y, z );
 }
 
 void Quaternion::rotateAroundAxis(const Quaternion &q)
 {
-    qreal w, x, y, z;
-
-    w = + v[Q_X] * q.v[Q_X] + v[Q_Y] * q.v[Q_Y] + v[Q_Z] * q.v[Q_Z];
-    x = + v[Q_X] * q.v[Q_W] - v[Q_Y] * q.v[Q_Z] + v[Q_Z] * q.v[Q_Y];
-    y = + v[Q_X] * q.v[Q_Z] + v[Q_Y] * q.v[Q_W] - v[Q_Z] * q.v[Q_X];
-    z = - v[Q_X] * q.v[Q_Y] + v[Q_Y] * q.v[Q_X] + v[Q_Z] * q.v[Q_W];
+    const qreal w = + v[Q_X] * q.v[Q_X] + v[Q_Y] * q.v[Q_Y] + v[Q_Z] * q.v[Q_Z];
+    const qreal x = + v[Q_X] * q.v[Q_W] - v[Q_Y] * q.v[Q_Z] + v[Q_Z] * q.v[Q_Y];
+    const qreal y = + v[Q_X] * q.v[Q_Z] + v[Q_Y] * q.v[Q_W] - v[Q_Z] * q.v[Q_X];
+    const qreal z = - v[Q_X] * q.v[Q_Y] + v[Q_Y] * q.v[Q_X] + v[Q_Z] * q.v[Q_W];
 
     (*this) = q * Quaternion( w, x, y, z );
 }
@@ -220,16 +211,18 @@ void Quaternion::nlerp( const Quaternion &q1, const Quaternion &q2,
 void Quaternion::toMatrix(matrix &m) const
 {
 
-    qreal xy = v[Q_X] * v[Q_Y], xz = v[Q_X] * v[Q_Z];
-    qreal yy = v[Q_Y] * v[Q_Y], yw = v[Q_Y] * v[Q_W];
-    qreal zw = v[Q_Z] * v[Q_W], zz = v[Q_Z] * v[Q_Z];
+    const qreal xy = v[Q_X] * v[Q_Y], xz = v[Q_X] * v[Q_Z];
+    const qreal yy = v[Q_Y] * v[Q_Y], yw = v[Q_Y] * v[Q_W];
+    const qreal zw = v[Q_Z] * v[Q_W], zz = v[Q_Z] * v[Q_Z];
 
     m[0][0] = 1.0 - 2.0 * (yy + zz);
     m[0][1] = 2.0 * (xy + zw);
     m[0][2] = 2.0 * (xz - yw);
     m[0][3] = 0.0;
 
-    qreal xx = v[Q_X] * v[Q_X], xw = v[Q_X] * v[Q_W], yz = v[Q_Y] * v[Q_Z];
+    const qreal xx = v[Q_X] * v[Q_X];
+    const qreal xw = v[Q_X] * v[Q_W];
+    const qreal yz = v[Q_Y] * v[Q_Z];
 
     m[1][0] = 2.0 * (xy - zw);
     m[1][1] = 1.0 - 2.0 * (xx + zz);
@@ -244,11 +237,12 @@ void Quaternion::toMatrix(matrix &m) const
 
 void Quaternion::rotateAroundAxis(const matrix &m)
 {
-    qreal x, y, z;
+    const qreal x =  m[0][0] * v[Q_X] + m[1][0] * v[Q_Y] + m[2][0] * v[Q_Z];
+    const qreal y =  m[0][1] * v[Q_X] + m[1][1] * v[Q_Y] + m[2][1] * v[Q_Z];
+    const qreal z =  m[0][2] * v[Q_X] + m[1][2] * v[Q_Y] + m[2][2] * v[Q_Z];
 
-    x =  m[0][0] * v[Q_X] + m[1][0] * v[Q_Y] + m[2][0] * v[Q_Z];
-    y =  m[0][1] * v[Q_X] + m[1][1] * v[Q_Y] + m[2][1] * v[Q_Z];
-    z =  m[0][2] * v[Q_X] + m[1][2] * v[Q_Y] + m[2][2] * v[Q_Z];
-
-    v[Q_W] = 1.0; v[Q_X] = x; v[Q_Y] = y; v[Q_Z] = z;
+    v[Q_W] = 1.0;
+    v[Q_X] = x;
+    v[Q_Y] = y;
+    v[Q_Z] = z;
 }
