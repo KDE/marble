@@ -399,12 +399,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void rotateBy( const qreal &deltaLon, const qreal &deltaLat );
 
     /**
-     * @brief  Rotate the view by the angle specified by a Quaternion.
-     * @param  incRot a quaternion specifying the rotation
-     */
-    void rotateBy( const Quaternion& incRot );
-
-    /**
      * @brief  Center the view on a geographical point
      * @param  lat  an angle parallel to the latitude lines
      *              +90(N) - -90(S)

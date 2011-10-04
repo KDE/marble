@@ -617,12 +617,6 @@ void MarbleWidget::zoomOut( FlyToMode mode )
     }
 }
 
-void MarbleWidget::rotateBy( const Quaternion& incRot )
-{
-    d->m_map->rotateBy( incRot );
-    d->repaint();
-}
-
 void MarbleWidget::rotateBy( const qreal deltaLon, const qreal deltaLat, FlyToMode mode )
 {
     Quaternion  rotPhi( 1.0, deltaLat / 180.0, 0.0, 0.0 );

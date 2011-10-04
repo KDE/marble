@@ -628,14 +628,6 @@ quint64 MarbleMap::volatileTileCacheLimit() const
 }
 
 
-void MarbleMap::rotateBy( const Quaternion& incRot )
-{
-    d->m_viewport.setPlanetAxis( incRot * d->m_viewport.planetAxis() );
-    d->m_textureLayer.setNeedsUpdate();
-
-    emit visibleLatLonAltBoxChanged( d->m_viewport.viewLatLonAltBox() );
-}
-
 void MarbleMap::rotateBy( const qreal& deltaLon, const qreal& deltaLat )
 {
     Quaternion  rotPhi( 1.0, deltaLat / 180.0, 0.0, 0.0 );

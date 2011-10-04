@@ -616,12 +616,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void rotateBy( const qreal deltaLon, const qreal deltaLat, FlyToMode mode = Instant );
 
-        /**
-     * @brief  Rotate the view by the angle specified by a Quaternion.
-     * @param  incRot a quaternion specifying the rotation
-     */
-    void rotateBy( const Quaternion& incRot );
-
     /**
      * @brief  Center the view on a geographical point
      * @param  lat  an angle in degrees parallel to the latitude lines
