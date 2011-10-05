@@ -16,10 +16,7 @@
 using namespace std;
 
 #include <QtCore/QString>
-#include "MarbleDebug.h"
-
-
-#define quatNorm (v[Q_W] * v[Q_W] + v[Q_X] * v[Q_X] + v[Q_Y] * v[Q_Y] + v[Q_Z] * v[Q_Z])
+#include <QtCore/QDebug>
 
 
 using namespace Marble;
@@ -63,7 +60,12 @@ void Quaternion::getSpherical(qreal &lon, qreal &lat) const
 
 void Quaternion::normalize() 
 {
-    scalar( 1.0 / sqrt(quatNorm) );
+    scalar( 1.0 / length() );
+}
+
+qreal Quaternion::length() const
+{
+    return sqrt(v[Q_W] * v[Q_W] + v[Q_X] * v[Q_X] + v[Q_Y] * v[Q_Y] + v[Q_Z] * v[Q_Z]);
 }
 
 void Quaternion::scalar(qreal mult)
@@ -122,13 +124,17 @@ qreal Quaternion::roll() const // "bank", psi
     return asin(2.0*(v[Q_X]*v[Q_Y]+v[Q_Z]*v[Q_W]));
 }
 
-void Quaternion::display() const
+#ifndef QT_NO_DEBUG_STREAM
+QDebug operator<<(QDebug debug, const Quaternion &q)
 {
     QString quatdisplay = QString("Quaternion: w= %1, x= %2, y= %3, z= %4, |q|= %5" )
-        .arg(v[Q_W]).arg(v[Q_X]).arg(v[Q_Y]).arg(v[Q_Z]).arg(quatNorm);
+        .arg(q.v[Q_W]).arg(q.v[Q_X]).arg(q.v[Q_Y]).arg(q.v[Q_Z]).arg(q.length());
 
-    mDebug() << quatdisplay;
+    debug << quatdisplay;
+
+    return debug;
 }
+#endif
 
 Quaternion& Quaternion::operator*=(const Quaternion &q)
 {

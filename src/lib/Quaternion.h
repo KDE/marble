@@ -63,14 +63,14 @@ class MARBLE_EXPORT Quaternion
 
     void        normalize();
 
+    qreal       length() const;
+
     Quaternion  inverse() const;
 
     qreal       pitch() const;
     qreal       yaw() const;
     qreal       roll() const;
 
-
-    void        display() const;
 
     void        rotateAroundAxis(const Quaternion &q);
 
@@ -87,5 +87,9 @@ class MARBLE_EXPORT Quaternion
 };
 
 }
+
+#ifndef QT_NO_DEBUG_STREAM
+MARBLE_EXPORT QDebug operator<<(QDebug, const Marble::Quaternion &);
+#endif
 
 #endif // MARBLE_QUATERNION_H
