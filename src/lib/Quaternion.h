@@ -58,6 +58,7 @@ class MARBLE_EXPORT Quaternion
     Quaternion  operator*(const Quaternion &q) const;
     bool        operator==(const Quaternion &q) const;
     Quaternion& operator*=(const Quaternion &q);
+    Quaternion& operator*=(qreal);
 
     void        getSpherical(qreal &lon, qreal &lat) const;
 
@@ -76,8 +77,6 @@ class MARBLE_EXPORT Quaternion
 
     void        slerp(const Quaternion &q1, const Quaternion &q2, qreal t);
     void        nlerp(const Quaternion &q1, const Quaternion &q2, qreal t);
-
-    void        scalar(qreal mult);
 
     void        toMatrix(matrix &m) const;
     void        rotateAroundAxis(const matrix &m);

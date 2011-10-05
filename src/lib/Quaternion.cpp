@@ -60,7 +60,7 @@ void Quaternion::getSpherical(qreal &lon, qreal &lat) const
 
 void Quaternion::normalize() 
 {
-    scalar( 1.0 / length() );
+    (*this) *= 1.0 / length();
 }
 
 qreal Quaternion::length() const
@@ -68,12 +68,14 @@ qreal Quaternion::length() const
     return sqrt(v[Q_W] * v[Q_W] + v[Q_X] * v[Q_X] + v[Q_Y] * v[Q_Y] + v[Q_Z] * v[Q_Z]);
 }
 
-void Quaternion::scalar(qreal mult)
+Quaternion& Quaternion::operator*=(qreal mult)
 {
     v[Q_W] *= mult;
     v[Q_X] *= mult;
     v[Q_Y] *= mult;
     v[Q_Z] *= mult;
+
+    return *this;
 }
 
 Quaternion Quaternion::inverse() const
