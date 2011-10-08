@@ -230,8 +230,6 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( showDirections() ) );
     connect( d->m_ui.configureButton, SIGNAL( clicked() ),
              this, SLOT( configureProfile() ) );
-    connect( d->m_ui.routeComboBox, SIGNAL( currentIndexChanged( int ) ),
-             this, SLOT( switchRoute( int ) ) );
 
     for( int i=0; i<d->m_routeRequest->size(); ++i ) {
         insertInputWidget( i );
