@@ -682,6 +682,8 @@ void MarblePart::writeSettings()
     QList<QString> const editors = m_externalEditorMapping.values();
     MarbleSettings::setExternalMapEditor( editors.indexOf( m_controlView->externalMapEditor() ) );
 
+    applyPluginState();
+
     MarbleSettings::self()->writeConfig();
 }
 
