@@ -58,6 +58,9 @@ class MarbleMapTest : public QObject
     void centerOnMercatorMaxLat_data();
     void centerOnMercatorMaxLat();
 
+    void rotateBySpherical_data();
+    void rotateBySpherical();
+
  private:
     MarbleModel m_model;
 };
@@ -290,6 +293,90 @@ void MarbleMapTest::centerOnMercatorMaxLat()
 
     QFUZZYCOMPARE( map.centerLongitude(), lon, 0.0001 );
     QFUZZYCOMPARE( map.centerLatitude(), 85.0511, 0.0001 ); // clip to maxLat
+}
+
+void MarbleMapTest::rotateBySpherical_data()
+{
+    QTest::addColumn<int>( "lon" );
+    QTest::addColumn<int>( "lat" );
+    QTest::addColumn<int>( "deltaLon" );
+    QTest::addColumn<int>( "deltaLat" );
+
+    addRow() << 0 << 0 << 0 << 0;
+
+    addRow() << 0 << 0 << -180 << 0;
+    addRow() << 0 << 0 <<  -90 << 0;
+    addRow() << 0 << 0 <<   -5 << 0;
+    addRow() << 0 << 0 <<    5 << 0;
+    addRow() << 0 << 0 <<   90 << 0;
+    addRow() << 0 << 0 <<  180 << 0;
+
+    addRow() << 0 << 0 << 0 << -180;
+    addRow() << 0 << 0 << 0 <<  -90;
+    addRow() << 0 << 0 << 0 <<   -5;
+    addRow() << 0 << 0 << 0 <<    5;
+    addRow() << 0 << 0 << 0 <<   90;
+    addRow() << 0 << 0 << 0 <<  180;
+
+    addRow() << 0 << 0 << -180 << -180;
+    addRow() << 0 << 0 <<  -90 <<  -90;
+    addRow() << 0 << 0 <<   -5 <<   -5;
+    addRow() << 0 << 0 <<    5 <<    5;
+    addRow() << 0 << 0 <<   90 <<   90;
+    addRow() << 0 << 0 <<  180 <<  180;
+
+    addRow() << 0 <<  160 << 0 << -20;
+    addRow() << 0 <<  160 << 0 <<  20;
+    addRow() << 0 <<   80 << 0 << -20;
+    addRow() << 0 <<   80 << 0 <<  20;
+    addRow() << 0 <<  -80 << 0 << -20;
+    addRow() << 0 <<  -80 << 0 <<  20;
+    addRow() << 0 << -160 << 0 << -20;
+    addRow() << 0 << -160 << 0 <<  20;
+
+    addRow() <<  150 << 0 << -30 << 0;
+    addRow() <<  150 << 0 <<  30 << 0;
+    addRow() <<   50 << 0 << -30 << 0;
+    addRow() <<   50 << 0 <<  30 << 0;
+    addRow() <<  -50 << 0 << -30 << 0;
+    addRow() <<  -50 << 0 <<  30 << 0;
+    addRow() << -150 << 0 << -30 << 0;
+    addRow() << -150 << 0 <<  30 << 0;
+
+    addRow() <<  150 <<  160 << -30 << -20;
+    addRow() <<  150 <<  160 <<  30 <<  20;
+    addRow() <<   50 <<   80 << -30 << -20;
+    addRow() <<   50 <<   80 <<  30 <<  20;
+    addRow() <<  -50 <<  -80 << -30 << -20;
+    addRow() <<  -50 <<  -80 <<  30 <<  20;
+    addRow() << -150 << -160 << -30 << -20;
+    addRow() << -150 << -160 <<  30 <<  20;
+}
+
+void MarbleMapTest::rotateBySpherical()
+{
+    MarbleMap map( &m_model );
+
+    map.setProjection( Spherical );
+
+    QFETCH( int, lon );
+    QFETCH( int, lat );
+
+    map.centerOn( lon, lat );
+
+    QFUZZYCOMPARE( map.centerLongitude(), lon, 0.0001 );
+    QFUZZYCOMPARE( map.centerLatitude(), lat, 0.0001 );
+
+    QFETCH( int, deltaLon );
+    QFETCH( int, deltaLat );
+
+    map.rotateBy( deltaLon, deltaLat );
+
+    const int expectedLon = lon + deltaLon;
+    const int expectedLat = lat + deltaLat;
+
+    QFUZZYCOMPARE( map.centerLongitude(), expectedLon, 0.0001 );
+    QFUZZYCOMPARE( map.centerLatitude(), expectedLat, 0.0001 );
 }
 
 }

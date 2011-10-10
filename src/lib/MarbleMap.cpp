@@ -640,23 +640,16 @@ quint64 MarbleMap::volatileTileCacheLimit() const
 
 void MarbleMap::rotateBy( const qreal& deltaLon, const qreal& deltaLat )
 {
-    Quaternion  rotPhi( 1.0, deltaLat / 180.0, 0.0, 0.0 );
-    Quaternion  rotTheta( 1.0, 0.0, deltaLon / 180.0, 0.0 );
-
-    Quaternion  axis = d->m_viewport.planetAxis();
-    axis = rotTheta * axis;
-    axis *= rotPhi;
-    axis.normalize();
-    d->m_viewport.setPlanetAxis( axis );
-    d->m_textureLayer.setNeedsUpdate();
-
-    emit visibleLatLonAltBoxChanged( d->m_viewport.viewLatLonAltBox() );
+    centerOn( d->m_viewport.centerLongitude() * RAD2DEG + deltaLon,
+              d->m_viewport.centerLatitude()  * RAD2DEG + deltaLat );
 }
 
 
 void MarbleMap::centerOn( const qreal lon, const qreal lat )
 {
-    const Quaternion quat = Quaternion::fromEuler( -lat * DEG2RAD, lon * DEG2RAD, 0.0 );
+    Quaternion quat = Quaternion::fromEuler( -lat * DEG2RAD, lon * DEG2RAD, 0.0 );
+    quat.normalize();
+
     d->m_viewport.setPlanetAxis( quat );
     d->m_textureLayer.setNeedsUpdate();
 
