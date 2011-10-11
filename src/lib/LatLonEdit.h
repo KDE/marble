@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2008 Henry de Valence <hdevalence@gmail.com>
+// Copyright 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
 #ifndef MARBLE_LATLONEDIT_H
 #define MARBLE_LATLONEDIT_H
@@ -26,22 +27,34 @@ class MARBLE_EXPORT  LatLonEdit : public QWidget
     //FIXME: make the dimension enum work
     //Q_PROPERTY( qreal value READ value WRITE setValue )
     //Q_PROPERTY( int dimension READ dimension WRITE setDimension )
+
 public:
-    explicit LatLonEdit(QWidget *parent = 0, Dimension dimension = Longitude );
+    /**
+     * @brief enum used to specify the notation / numerical system
+     */
+    enum Notation {
+        Decimal, ///< "Decimal" notation (base-10)
+        DMS,     ///< "Sexagesimal DMS" notation (base-60)
+        DM       ///< "Sexagesimal DM" notation (base-60)
+    };
+
+public:
+    explicit LatLonEdit(QWidget *parent = 0, Dimension dimension = Longitude, Notation notation = DMS);
     ~LatLonEdit();
     qreal value() const;
     Dimension dimension() const;
+    Notation notation() const;
 public Q_SLOTS:
     void setValue(qreal newvalue);
     void setDimension( Dimension dimension );
+    void setNotation(Notation notation);
 Q_SIGNALS:
     void valueChanged( qreal value );
 private Q_SLOTS:
-    // changes value based on combobox
+    void checkIntValueOverflow();
+    void checkUIntValueOverflow();
+    void checkFloatValueOverflow();
     void onSignChanged();
-    void checkSecOverflow();
-    void checkMinOverflow();
-    void checkDegOverflow();
 private:
     // recalculates m_value based on spinboxes
     void recalculate();

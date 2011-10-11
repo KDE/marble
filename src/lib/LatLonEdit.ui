@@ -20,7 +20,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QSpinBox" name="m_deg" >
+    <widget class="QSpinBox" name="m_intValueEditor" >
      <property name="alignment" >
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
@@ -30,7 +30,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QSpinBox" name="m_min" >
+    <widget class="QSpinBox" name="m_uintValueEditor" >
      <property name="alignment" >
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
@@ -46,7 +46,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QDoubleSpinBox" name="m_sec" >
+    <widget class="QDoubleSpinBox" name="m_floatValueEditor" >
      <property name="alignment" >
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
