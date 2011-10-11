@@ -135,6 +135,13 @@ void EditBookmarkDialog::setMarbleWidget( MarbleWidget* widget )
 {
     d->m_widget = widget;
     d->m_ui.m_newFolderButton->setVisible( true );
+    const AngleUnit defaultAngleUnit = d->m_widget->defaultAngleUnit();
+    const LatLonEdit::Notation notation =
+        (defaultAngleUnit == DecimalDegree) ? LatLonEdit::Decimal :
+        (defaultAngleUnit == DMSDegree) ?     LatLonEdit::DMS :
+        /* else, UTM */                       LatLonEdit::DMS;
+    d->m_ui.m_longitude->setNotation( notation );
+    d->m_ui.m_latitude->setNotation( notation );
 
     //reverse geocode the bookmark point for better user experience
     d->m_manager = new MarbleRunnerManager( d->m_widget->model()->pluginManager(), this );
