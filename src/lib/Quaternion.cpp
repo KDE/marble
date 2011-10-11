@@ -37,9 +37,12 @@ Quaternion::Quaternion(qreal w, qreal x, qreal y, qreal z)
 
 Quaternion Quaternion::fromSpherical(qreal lon, qreal lat)
 {
-    const qreal  cosLat = cos(lat);
+    const qreal w = 0.0;
+    const qreal x = cos(lat) * sin(lon);
+    const qreal y = sin(lat);
+    const qreal z = cos(lat) * cos(lon);
 
-    return Quaternion( 0.0, cosLat * sin(lon), sin(lat), cosLat * cos(lon) );
+    return Quaternion( w, x, y, z );
 }
 
 void Quaternion::getSpherical(qreal &lon, qreal &lat) const 
@@ -96,15 +99,10 @@ Quaternion Quaternion::fromEuler(qreal pitch, qreal yaw, qreal roll)
     const qreal sThe = sin(0.5 * yaw);
     const qreal sPsi = sin(0.5 * roll);
 
-    const qreal cThecPsi = cThe * cPsi;
-    const qreal sThesPsi = sThe * sPsi;
-    const qreal sThecPsi = sThe * cPsi;
-    const qreal cThesPsi = cThe * sPsi;
-
-    const qreal w = cPhi * cThecPsi + sPhi * sThesPsi;
-    const qreal x = sPhi * cThecPsi - cPhi * sThesPsi;
-    const qreal y = cPhi * sThecPsi + sPhi * cThesPsi;
-    const qreal z = cPhi * cThesPsi - sPhi * sThecPsi;
+    const qreal w = cPhi * cThe * cPsi + sPhi * sThe * sPsi;
+    const qreal x = sPhi * cThe * cPsi - cPhi * sThe * sPsi;
+    const qreal y = cPhi * sThe * cPsi + sPhi * cThe * sPsi;
+    const qreal z = cPhi * cThe * sPsi - sPhi * sThe * cPsi;
 
     return Quaternion( w, x, y, z );
 }
