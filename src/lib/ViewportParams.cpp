@@ -40,6 +40,8 @@ public:
     const AbstractProjection *m_currentProjection;
 
     // Parameters that determine the painting
+    qreal                m_centerLongitude;
+    qreal                m_centerLatitude;
     Quaternion           m_planetAxis;   // Position, coded in a quaternion
     mutable matrix       m_planetAxisMatrix;
     int                  m_radius;       // Zoom level (pixels / globe radius)
@@ -65,6 +67,8 @@ public:
 ViewportParamsPrivate::ViewportParamsPrivate()
     : m_projection( Spherical ),
       m_currentProjection( &s_sphericalProjection ),
+      m_centerLongitude( 0 ),
+      m_centerLatitude( 0 ),
       m_planetAxis( 1.0, 0.0, 0.0, 0.0 ), // Default view
       m_planetAxisMatrix(),
       m_radius( 2000 ),
@@ -133,7 +137,7 @@ void ViewportParams::setProjection(Projection newProjection)
     // We now need to reset the planetAxis to make sure
     // that it's a valid axis orientation!
     // So this line is important (although it might look odd) ! :
-    centerOn( centerLongitude(), centerLatitude() );
+    centerOn( d->m_centerLongitude, d->m_centerLatitude );
 }
 
 int ViewportParams::polarity() const
@@ -219,7 +223,20 @@ void ViewportParams::centerOn( qreal lon, qreal lat )
 
         if ( lat < d->m_currentProjection->minLat() )
             lat = d->m_currentProjection->minLat();
+    } else {
+        while ( lat > M_PI )
+            lat -= 2 * M_PI;
+        while ( lat < -M_PI )
+            lat += 2 * M_PI;
     }
+
+    while ( lon > M_PI )
+        lon -= 2 * M_PI;
+    while ( lon < -M_PI )
+        lon += 2 * M_PI;
+
+    d->m_centerLongitude = lon;
+    d->m_centerLatitude = lat;
 
     Quaternion axis = Quaternion::fromEuler( -lat, lon, 0.0 );
     axis.normalize();
@@ -293,26 +310,18 @@ void ViewportParams::setSize(QSize newSize)
 
 qreal ViewportParams::centerLongitude() const
 {
-    qreal centerLon = + d->m_planetAxis.yaw();
-    if ( centerLon > M_PI )
-        centerLon -= 2 * M_PI;
-
-    return centerLon;
+    return d->m_centerLongitude;
 }
 
 qreal ViewportParams::centerLatitude() const
 {
-    qreal centerLat = - d->m_planetAxis.pitch();
-    if ( centerLat > M_PI )
-        centerLat -= 2 * M_PI;
-
-    return centerLat;
+    return d->m_centerLatitude;
 }
 
 void ViewportParams::centerCoordinates( qreal &centerLon, qreal &centerLat ) const
 {
-    centerLon = centerLongitude();
-    centerLat = centerLatitude();
+    centerLon = d->m_centerLongitude;
+    centerLat = d->m_centerLatitude;
 }
 
 GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const
@@ -393,8 +402,8 @@ GeoDataCoordinates ViewportParams::focusPoint() const
         return d->m_focusPoint;
     }
     else {
-       const qreal lon = centerLongitude();
-       const qreal lat = centerLatitude();
+       const qreal lon = d->m_centerLongitude;
+       const qreal lat = d->m_centerLatitude;
 
        return GeoDataCoordinates(lon, lat, 0.0, GeoDataCoordinates::Radian);
     }

@@ -49,9 +49,6 @@ class MarbleMapTest : public QObject
     void centerOnMercator_data();
     void centerOnMercator();
 
-    void centerOnSphericalEquirectangularSingularities_data();
-    void centerOnSphericalEquirectangularSingularities();
-
     void centerOnMercatorMinLat_data();
     void centerOnMercatorMinLat();
 
@@ -77,17 +74,17 @@ void MarbleMapTest::centerOnSpherical_data()
     addRow() <<   90.0 << 0.0;
     addRow() <<  180.0 << 0.0;
 
-    addRow() << -180.0 << 89.0;
-    addRow() <<  -90.0 << 89.0;
-    addRow() <<    0.0 << 89.0;
-    addRow() <<   90.0 << 89.0;
-    addRow() <<  180.0 << 89.0;
+    addRow() << -180.0 << 90.0;
+    addRow() <<  -90.0 << 90.0;
+    addRow() <<    0.0 << 90.0;
+    addRow() <<   90.0 << 90.0;
+    addRow() <<  180.0 << 90.0;
 
-    addRow() << -180.0 << -89.0;
-    addRow() <<  -90.0 << -89.0;
-    addRow() <<    0.0 << -89.0;
-    addRow() <<   90.0 << -89.0;
-    addRow() <<  180.0 << -89.0;
+    addRow() << -180.0 << -90.0;
+    addRow() <<  -90.0 << -90.0;
+    addRow() <<    0.0 << -90.0;
+    addRow() <<   90.0 << -90.0;
+    addRow() <<  180.0 << -90.0;
 
     addRow() << -180.0 << 180.0;
     addRow() <<  -90.0 << 180.0;
@@ -127,17 +124,17 @@ void MarbleMapTest::centerOnEquirectangular_data()
     addRow() <<   90.0 << 0.0;
     addRow() <<  180.0 << 0.0;
 
-    addRow() << -180.0 << 89.0;
-    addRow() <<  -90.0 << 89.0;
-    addRow() <<    0.0 << 89.0;
-    addRow() <<   90.0 << 89.0;
-    addRow() <<  180.0 << 89.0;
+    addRow() << -180.0 << 90.0;
+    addRow() <<  -90.0 << 90.0;
+    addRow() <<    0.0 << 90.0;
+    addRow() <<   90.0 << 90.0;
+    addRow() <<  180.0 << 90.0;
 
-    addRow() << -180.0 << -89.0;
-    addRow() <<  -90.0 << -89.0;
-    addRow() <<    0.0 << -89.0;
-    addRow() <<   90.0 << -89.0;
-    addRow() <<  180.0 << -89.0;
+    addRow() << -180.0 << -90.0;
+    addRow() <<  -90.0 << -90.0;
+    addRow() <<    0.0 << -90.0;
+    addRow() <<   90.0 << -90.0;
+    addRow() <<  180.0 << -90.0;
 }
 
 void MarbleMapTest::centerOnEquirectangular()
@@ -191,42 +188,6 @@ void MarbleMapTest::centerOnMercator()
 
     QFUZZYCOMPARE( map.centerLongitude(), lon, 0.0001 );
     QFUZZYCOMPARE( map.centerLatitude(), lat, 0.0001 );
-}
-
-void MarbleMapTest::centerOnSphericalEquirectangularSingularities_data()
-{
-    QTest::addColumn<qreal>( "lon" );
-    QTest::addColumn<qreal>( "lat" );
-
-    addRow() << -180.0 << 90.0;
-    addRow() <<  -90.0 << 90.0;
-    addRow() <<    0.0 << 90.0;
-    addRow() <<   90.0 << 90.0;
-    addRow() <<  180.0 << 90.0;
-
-    addRow() << -180.0 << -90.0;
-    addRow() <<  -90.0 << -90.0;
-    addRow() <<    0.0 << -90.0;
-    addRow() <<   90.0 << -90.0;
-    addRow() <<  180.0 << -90.0;
-}
-
-void MarbleMapTest::centerOnSphericalEquirectangularSingularities()
-{
-    QFETCH( qreal, lon );
-    QFETCH( qreal, lat );
-
-    MarbleMap sphericalMap( &m_model );
-    sphericalMap.setProjection( Spherical );
-
-    sphericalMap.centerOn( lon, lat );
-    QFUZZYCOMPARE( sphericalMap.centerLatitude(), lat, 0.0001 );
-
-    MarbleMap equirectangularMap( &m_model );
-    equirectangularMap.setProjection( Equirectangular );
-
-    equirectangularMap.centerOn( lon, lat );
-    QFUZZYCOMPARE( equirectangularMap.centerLatitude(), lat, 0.0001 );
 }
 
 void MarbleMapTest::centerOnMercatorMinLat_data()
