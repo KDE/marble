@@ -126,7 +126,7 @@ AbstractDataPluginModel::~AbstractDataPluginModel()
     delete d;
 }
 
-QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *viewport,
+QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportParams *viewport,
                                                                const MarbleModel *model,
                                                                qint32 number )
 {

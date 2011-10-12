@@ -58,7 +58,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * 0 means no limit.
      * @return The list of item with most important item first.
      */
-    QList<AbstractDataPluginItem*> items( ViewportParams *viewport,
+    QList<AbstractDataPluginItem*> items( const ViewportParams *viewport,
                                           const MarbleModel *model,
                                           qint32 number = 10 );
     
