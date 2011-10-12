@@ -235,11 +235,6 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( m_map,    SIGNAL( repaintNeeded( QRegion ) ),
                        m_widget, SLOT( scheduleRepaint( QRegion ) ) );
 
-    // When some fundamental things change in the model, we got to
-    // show this in the view, i.e. here.
-    m_widget->connect( m_model, SIGNAL( modelChanged() ),
-                       m_widget, SLOT( update() ) );
-
     m_widget->connect( m_model->fileManager(), SIGNAL( centeredDocument(GeoDataLatLonBox) ),
                        m_widget, SLOT( centerOn(GeoDataLatLonBox) ) );
 

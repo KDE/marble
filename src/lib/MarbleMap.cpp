@@ -172,13 +172,17 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
 
     QObject::connect( m_model, SIGNAL( themeChanged( QString ) ),
                       parent, SIGNAL( themeChanged( QString ) ) );
-    QObject::connect( m_model, SIGNAL( modelChanged() ),
-                      parent, SIGNAL( repaintNeeded() ) );
 
     QObject::connect( &m_veccomposer, SIGNAL( datasetLoaded() ),
                       parent, SIGNAL( repaintNeeded() ));
 
-    QObject::connect( m_model, SIGNAL( modelChanged() ),
+    QObject::connect( model->treeModel(), SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
+                      &m_placemarkLayout, SLOT( setCacheData() ) );
+    QObject::connect( model->treeModel(), SIGNAL( layoutChanged() ),
+                      &m_placemarkLayout, SLOT( setCacheData() ) );
+    QObject::connect( model->treeModel(), SIGNAL( modelReset() ),
+                      &m_placemarkLayout, SLOT( setCacheData() ) );
+    QObject::connect( model->treeModel(), SIGNAL( treeChanged() ),
                       &m_placemarkLayout, SLOT( setCacheData() ) );
 
     QObject::connect ( &m_layerManager, SIGNAL( pluginSettingsChanged() ),
@@ -188,8 +192,14 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
     QObject::connect ( &m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        parent,        SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
 
-    QObject::connect ( m_model,  SIGNAL( modelChanged() ),
-                       &m_geometryLayer,  SLOT( invalidateScene() ) );
+    QObject::connect( model->treeModel(), SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
+                      &m_geometryLayer, SLOT( invalidateScene() ) );
+    QObject::connect( model->treeModel(), SIGNAL( layoutChanged() ),
+                      &m_geometryLayer, SLOT( invalidateScene() ) );
+    QObject::connect( model->treeModel(), SIGNAL( modelReset() ),
+                      &m_geometryLayer, SLOT( invalidateScene() ) );
+    QObject::connect( model->treeModel(), SIGNAL( treeChanged() ),
+                      &m_geometryLayer, SLOT( invalidateScene() ) );
 
     QObject::connect( &m_textureLayer, SIGNAL( tileLevelChanged( int ) ),
                       parent, SIGNAL( tileLevelChanged( int ) ) );

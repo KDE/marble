@@ -296,10 +296,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @see  setMapTheme
      */
     void themeChanged( QString mapTheme );
-    /**
-     * @brief Signal that the MarbleModel has changed in general
-     */
-    void modelChanged();
 
     void workOfflineChanged();
 

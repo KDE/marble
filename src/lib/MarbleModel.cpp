@@ -154,15 +154,6 @@ MarbleModel::MarbleModel( QObject *parent )
     : QObject( parent ),
       d( new MarbleModelPrivate() )
 {
-    connect(&d->m_treemodel, SIGNAL( dataChanged(QModelIndex,QModelIndex) ),
-            this, SIGNAL( modelChanged() ) );
-    connect(&d->m_treemodel, SIGNAL( layoutChanged() ),
-            this, SIGNAL( modelChanged() ) );
-    connect(&d->m_treemodel, SIGNAL( modelReset() ),
-            this, SIGNAL( modelChanged() ) );
-    connect(&d->m_treemodel, SIGNAL( treeChanged() ),
-            this, SIGNAL( modelChanged() ) );
-
     // The thread will be started at setting persistent tile cache size.
     connect( this, SIGNAL( themeChanged( QString ) ),
              &d->m_storageWatcher, SLOT( updateTheme( QString ) ) );
