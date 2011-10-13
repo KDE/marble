@@ -133,7 +133,7 @@ switchSign( QComboBox *sign )
 
 void DecimalInputHandler::setupUi()
 {
-    m_ui->m_floatValueEditor->setSuffix(LatLonEdit::tr("\xb0"));
+    m_ui->m_floatValueEditor->setSuffix(LatLonEdit::tr("°"));
     m_ui->m_floatValueEditor->setDecimals(5);
 
     m_ui->m_intValueEditor->hide();
