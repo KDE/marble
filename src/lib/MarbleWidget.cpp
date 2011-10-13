@@ -91,15 +91,15 @@ class MarbleWidget::CustomPaintLayer : public LayerInterface
 class MarbleWidgetPrivate
 {
  public:
-    MarbleWidgetPrivate( MarbleMap *map, MarbleWidget *parent )
+    MarbleWidgetPrivate( MarbleWidget *parent )
         : m_widget( parent ),
-          m_map( map ),
-          m_model( map->model() ),
+          m_model(),
+          m_map( &m_model ),
           m_animationsEnabled( false ),
           m_logzoom( 0 ),
           m_zoomStep( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 60 : 40 ),
           m_inputhandler( 0 ),
-          m_physics( new MarblePhysics( parent ) ),
+          m_physics( parent ),
           m_repaintTimer(),
           m_routingLayer( 0 ),
           m_customPaintLayer( parent ),
@@ -111,8 +111,7 @@ class MarbleWidgetPrivate
 
     ~MarbleWidgetPrivate()
     {
-        m_map->removeLayer( &m_customPaintLayer );
-        delete m_map;
+        m_map.removeLayer( &m_customPaintLayer );
     }
 
     void  construct();
@@ -136,10 +135,10 @@ class MarbleWidgetPrivate
       */
     void repaint();
 
-    MarbleWidget    *m_widget;
+    MarbleWidget    *const m_widget;
     // The model we are showing.
-    MarbleMap       *m_map;
-    MarbleModel     *m_model;   // Owned by m_map.  Don't delete.
+    MarbleModel     m_model;
+    MarbleMap       m_map;
 
     bool m_animationsEnabled;
 
@@ -149,7 +148,7 @@ class MarbleWidgetPrivate
 
     MarbleWidgetInputHandler  *m_inputhandler;
 
-    MarblePhysics    *m_physics;
+    MarblePhysics    m_physics;
 
     // For scheduling repaints
     QTimer           m_repaintTimer;
@@ -168,7 +167,7 @@ class MarbleWidgetPrivate
 
 MarbleWidget::MarbleWidget(QWidget *parent)
     : QWidget( parent ),
-      d( new MarbleWidgetPrivate( new MarbleMap(), this ) )
+      d( new MarbleWidgetPrivate( this ) )
 {
 //    setAttribute( Qt::WA_PaintOnScreen, true );
     d->construct();
@@ -212,36 +211,36 @@ void MarbleWidgetPrivate::construct()
     m_widget->setAutoFillBackground( true );
 
     // Initialize the map and forward some signals.
-    m_map->setSize( m_widget->width(), m_widget->height() );
-    m_map->setShowFrameRate( false );  // never let the map draw the frame rate,
+    m_map.setSize( m_widget->width(), m_widget->height() );
+    m_map.setShowFrameRate( false );  // never let the map draw the frame rate,
                                        // we do this differently here in the widget
 
     // forward some signals of m_map
-    m_widget->connect( m_map,    SIGNAL( projectionChanged( Projection ) ),
+    m_widget->connect( &m_map,   SIGNAL( projectionChanged( Projection ) ),
                        m_widget, SIGNAL( projectionChanged( Projection ) ) );
-    m_widget->connect( m_map,    SIGNAL( tileLevelChanged( int ) ),
+    m_widget->connect( &m_map,   SIGNAL( tileLevelChanged( int ) ),
                        m_widget, SIGNAL( tileLevelChanged( int ) ) );
-    m_widget->connect( m_map,    SIGNAL( framesPerSecond( qreal ) ),
+    m_widget->connect( &m_map,   SIGNAL( framesPerSecond( qreal ) ),
                        m_widget, SIGNAL( framesPerSecond( qreal ) ) );
 
-    m_widget->connect( m_map,    SIGNAL( pluginSettingsChanged() ),
+    m_widget->connect( &m_map,   SIGNAL( pluginSettingsChanged() ),
                        m_widget, SIGNAL( pluginSettingsChanged() ) );
-    m_widget->connect( m_map,    SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
+    m_widget->connect( &m_map,   SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
-    m_widget->connect( m_map,    SIGNAL( themeChanged( QString ) ),
+    m_widget->connect( &m_map,   SIGNAL( themeChanged( QString ) ),
                        m_widget, SIGNAL( themeChanged( QString ) ) );
 
     // react to some signals of m_map
-    m_widget->connect( m_map,    SIGNAL( repaintNeeded( QRegion ) ),
+    m_widget->connect( &m_map,   SIGNAL( repaintNeeded( QRegion ) ),
                        m_widget, SLOT( scheduleRepaint( QRegion ) ) );
 
-    m_widget->connect( m_model->fileManager(), SIGNAL( centeredDocument(GeoDataLatLonBox) ),
+    m_widget->connect( m_model.fileManager(), SIGNAL( centeredDocument(GeoDataLatLonBox) ),
                        m_widget, SLOT( centerOn(GeoDataLatLonBox) ) );
 
 
     // Show a progress dialog when the model calculates new map tiles.
-    m_widget->connect( m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&,
-                                                            const QString& ) ),
+    m_widget->connect( &m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&,
+                                                             const QString& ) ),
                        m_widget, SLOT( creatingTilesStart( TileCreator*, const QString&,
                                                            const QString& ) ) );
 
@@ -251,22 +250,22 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( &m_repaintTimer, SIGNAL( timeout() ),
                        m_widget, SLOT( update() ) );
 
-    m_popupmenu = new MarbleWidgetPopupMenu( m_widget, m_model );
+    m_popupmenu = new MarbleWidgetPopupMenu( m_widget, &m_model );
 
     m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler( m_widget ) );
     m_widget->setMouseTracking( true );
 
     m_routingLayer = new RoutingLayer( m_widget, m_widget );
-    m_routingLayer->setRouteRequest( m_model->routingManager()->routeRequest() );
+    m_routingLayer->setRouteRequest( m_model.routingManager()->routeRequest() );
     m_routingLayer->setPlacemarkModel( 0 );
 
     m_widget->connect( m_routingLayer, SIGNAL( routeDirty() ),
-                       m_model->routingManager(), SLOT( updateRoute() ) );
-    m_widget->connect( m_model->routingManager()->alternativeRoutesModel(),
+                       m_model.routingManager(), SLOT( updateRoute() ) );
+    m_widget->connect( m_model.routingManager()->alternativeRoutesModel(),
                        SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
                        m_widget, SLOT( repaint() ) );
 
-    m_map->addLayer( &m_customPaintLayer );
+    m_map.addLayer( &m_customPaintLayer );
 }
 
 void MarbleWidgetPrivate::moveByStep( int stepsRight, int stepsDown, FlyToMode mode )
@@ -282,7 +281,7 @@ void MarbleWidgetPrivate::repaint()
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
     m_widget->setAttribute( Qt::WA_NoSystemBackground,
-                  m_widget->viewport()->mapCoversViewport() && !m_model->mapThemeId().isEmpty() );
+                  m_widget->viewport()->mapCoversViewport() && !m_model.mapThemeId().isEmpty() );
 
     m_widget->update();
 }
@@ -292,18 +291,18 @@ void MarbleWidgetPrivate::repaint()
 
 MarbleModel *MarbleWidget::model() const
 {
-    return d->m_model;
+    return &d->m_model;
 }
 
 
 ViewportParams* MarbleWidget::viewport()
 {
-    return d->m_map->viewport();
+    return d->m_map.viewport();
 }
 
 const ViewportParams* MarbleWidget::viewport() const
 {
-    return d->m_map->viewport();
+    return d->m_map.viewport();
 }
 
 MarbleWidgetPopupMenu *MarbleWidget::popupMenu()
@@ -335,13 +334,13 @@ MarbleWidgetInputHandler *MarbleWidget::inputHandler() const
 
 int MarbleWidget::radius() const
 {
-    return d->m_map->radius();
+    return d->m_map.radius();
 }
 
 void MarbleWidget::setRadius( int radius )
 {
     Q_ASSERT( radius >= 0 );
-    if ( radius == d->m_map->radius() ) {
+    if ( radius == d->m_map.radius() ) {
         return;
     }
 
@@ -354,12 +353,12 @@ void MarbleWidget::setRadius( int radius )
         radius = d->radius( maximumZoom() );
     }
 
-    d->m_map->setRadius( radius );
+    d->m_map.setRadius( radius );
     d->m_logzoom = qRound( zoom );
 
     emit zoomChanged( d->m_logzoom );
     emit distanceChanged( distanceString() );
-    emit visibleLatLonAltBoxChanged( d->m_map->viewport()->viewLatLonAltBox() );
+    emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
 
     d->repaint();
 }
@@ -380,52 +379,52 @@ int MarbleWidget::zoom() const
 
 int MarbleWidget::tileZoomLevel() const
 {
-    return d->m_map->tileZoomLevel();
+    return d->m_map.tileZoomLevel();
 }
 
 int  MarbleWidget::minimumZoom() const
 {
-    return d->m_map->minimumZoom();
+    return d->m_map.minimumZoom();
 }
 
 int  MarbleWidget::maximumZoom() const
 {
-    return d->m_map->maximumZoom();
+    return d->m_map.maximumZoom();
 }
 
 QVector<const GeoDataPlacemark*> MarbleWidget::whichFeatureAt( const QPoint &curpos ) const
 {
-    return d->m_map->whichFeatureAt( curpos );
+    return d->m_map.whichFeatureAt( curpos );
 }
 
 QList<AbstractDataPluginItem*> MarbleWidget::whichItemAt( const QPoint &curpos ) const
 {
-    return d->m_map->whichItemAt( curpos );
+    return d->m_map.whichItemAt( curpos );
 }
 
 void MarbleWidget::addLayer( LayerInterface *layer )
 {
-    d->m_map->addLayer( layer );
+    d->m_map.addLayer( layer );
 }
 
 void MarbleWidget::removeLayer( LayerInterface *layer )
 {
-    d->m_map->removeLayer( layer );
+    d->m_map.removeLayer( layer );
 }
 
 TextureLayer *MarbleWidget::textureLayer()
 {
-    return d->m_map->textureLayer();
+    return d->m_map.textureLayer();
 }
 
 const Marble::TextureLayer* MarbleWidget::textureLayer() const
 {
-    return d->m_map->textureLayer();
+    return d->m_map.textureLayer();
 }
 
 MeasureTool *MarbleWidget::measureTool()
 {
-    return d->m_map->measureTool();
+    return d->m_map.measureTool();
 }
 
 QPixmap MarbleWidget::mapScreenShot()
@@ -435,97 +434,97 @@ QPixmap MarbleWidget::mapScreenShot()
 
 bool MarbleWidget::showOverviewMap() const
 {
-    return d->m_map->showOverviewMap();
+    return d->m_map.showOverviewMap();
 }
 
 bool MarbleWidget::showScaleBar() const
 {
-    return d->m_map->showScaleBar();
+    return d->m_map.showScaleBar();
 }
 
 bool MarbleWidget::showCompass() const
 {
-    return d->m_map->showCompass();
+    return d->m_map.showCompass();
 }
 
 bool MarbleWidget::showClouds() const
 {
-    return d->m_map->showClouds();
+    return d->m_map.showClouds();
 }
 
 bool MarbleWidget::showSunShading() const
 {
-    return d->m_map->showSunShading();
+    return d->m_map.showSunShading();
 }
 
 bool MarbleWidget::showCityLights() const
 {
-    return d->m_map->showCityLights();
+    return d->m_map.showCityLights();
 }
 
 bool MarbleWidget::showSunInZenith() const
 {
-    return d->m_map->showSunInZenith();
+    return d->m_map.showSunInZenith();
 }
 
 bool MarbleWidget::showAtmosphere() const
 {
-    return d->m_map->showAtmosphere();
+    return d->m_map.showAtmosphere();
 }
 
 bool MarbleWidget::showCrosshairs() const
 {
-    return d->m_map->showCrosshairs();
+    return d->m_map.showCrosshairs();
 }
 
 bool MarbleWidget::showGrid() const
 {
-    return d->m_map->showGrid();
+    return d->m_map.showGrid();
 }
 
 bool MarbleWidget::showPlaces() const
 {
-    return d->m_map->showPlaces();
+    return d->m_map.showPlaces();
 }
 
 bool MarbleWidget::showCities() const
 {
-    return d->m_map->showCities();
+    return d->m_map.showCities();
 }
 
 bool MarbleWidget::showTerrain() const
 {
-    return d->m_map->showTerrain();
+    return d->m_map.showTerrain();
 }
 
 bool MarbleWidget::showOtherPlaces() const
 {
-    return d->m_map->showOtherPlaces();
+    return d->m_map.showOtherPlaces();
 }
 
 bool MarbleWidget::showRelief() const
 {
-    return d->m_map->showRelief();
+    return d->m_map.showRelief();
 }
 
 bool MarbleWidget::showIceLayer() const
 {
-    return d->m_map->showIceLayer();
+    return d->m_map.showIceLayer();
 }
 
 bool MarbleWidget::showBorders() const
 {
-    return d->m_map->showBorders();
+    return d->m_map.showBorders();
 }
 
 bool MarbleWidget::showRivers() const
 {
-    return d->m_map->showRivers();
+    return d->m_map.showRivers();
 }
 
 bool MarbleWidget::showLakes() const
 {
-    return d->m_map->showLakes();
+    return d->m_map.showLakes();
 }
 
 bool MarbleWidget::showFrameRate() const
@@ -535,12 +534,12 @@ bool MarbleWidget::showFrameRate() const
 
 bool MarbleWidget::showBackground() const
 {
-    return d->m_map->showBackground();
+    return d->m_map.showBackground();
 }
 
 quint64 MarbleWidget::volatileTileCacheLimit() const
 {
-    return d->m_map->volatileTileCacheLimit();
+    return d->m_map.volatileTileCacheLimit();
 }
 
 
@@ -558,12 +557,12 @@ void MarbleWidget::zoomView( int newZoom, FlyToMode mode )
         if ( newZoom  == d->m_logzoom )
             return;
 
-        d->m_map->setRadius( d->radius( newZoom ) );
+        d->m_map.setRadius( d->radius( newZoom ) );
         d->m_logzoom = newZoom;
 
         emit zoomChanged( d->m_logzoom );
         emit distanceChanged( distanceString() );
-        emit visibleLatLonAltBoxChanged( d->m_map->viewport()->viewLatLonAltBox() );
+        emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
 
         d->repaint();
     }
@@ -584,10 +583,10 @@ void MarbleWidget::zoomViewBy( int zoomStep, FlyToMode mode )
 
 void MarbleWidget::zoomIn( FlyToMode mode )
 {
-    if ( d->m_map->tileZoomLevel() < 0 ) {
+    if ( d->m_map.tileZoomLevel() < 0 ) {
         zoomViewBy( d->m_zoomStep, mode );
     } else {
-        int radius = d->m_map->preferredRadiusCeil( d->m_map->radius() * 1.05 ) + 2;
+        int radius = d->m_map.preferredRadiusCeil( d->m_map.radius() * 1.05 ) + 2;
         radius = qMax<int>( d->radius( minimumZoom() ), qMin<int>( radius, d->radius( maximumZoom() ) ) );
 
         GeoDataLookAt target = lookAt();
@@ -599,10 +598,10 @@ void MarbleWidget::zoomIn( FlyToMode mode )
 
 void MarbleWidget::zoomOut( FlyToMode mode )
 {
-    if ( d->m_map->tileZoomLevel() < 0 ) {
+    if ( d->m_map.tileZoomLevel() < 0 ) {
         zoomViewBy( -d->m_zoomStep, mode );
     } else {
-        int radius = d->m_map->preferredRadiusFloor( d->m_map->radius() * 0.95 ) + 2;
+        int radius = d->m_map.preferredRadiusFloor( d->m_map.radius() * 0.95 ) + 2;
         radius = qMax<int>( d->radius( minimumZoom() ), qMin<int>( radius, d->radius( maximumZoom() ) ) );
 
         GeoDataLookAt target = lookAt();
@@ -617,7 +616,7 @@ void MarbleWidget::rotateBy( const qreal deltaLon, const qreal deltaLat, FlyToMo
     Quaternion  rotPhi( 1.0, deltaLat / 180.0, 0.0, 0.0 );
     Quaternion  rotTheta( 1.0, 0.0, deltaLon / 180.0, 0.0 );
 
-    Quaternion  axis = d->m_map->viewport()->planetAxis();
+    Quaternion  axis = d->m_map.viewport()->planetAxis();
     qreal lon( 0.0 ), lat( 0.0 );
     axis.getSpherical( lon, lat );
     axis = rotTheta * axis;
@@ -689,12 +688,12 @@ void MarbleWidget::setCenterLongitude( qreal lon, FlyToMode mode )
 
 Projection MarbleWidget::projection() const
 {
-    return d->m_map->projection();
+    return d->m_map.projection();
 }
 
 void MarbleWidget::setProjection( Projection projection )
 {
-    d->m_map->setProjection( projection );
+    d->m_map.setProjection( projection );
     d->repaint();
 }
 
@@ -732,7 +731,7 @@ void MarbleWidget::leaveEvent( QEvent* )
 void MarbleWidget::resizeEvent( QResizeEvent* )
 {
     setUpdatesEnabled( false );
-    d->m_map->setSize( width(), height() );
+    d->m_map.setSize( width(), height() );
     d->repaint();
     setUpdatesEnabled( true );
 }
@@ -756,24 +755,24 @@ void MarbleWidget::disconnectNotify( const char * signal )
 bool MarbleWidget::screenCoordinates( qreal lon, qreal lat,
                                       qreal& x, qreal& y )
 {
-    return d->m_map->screenCoordinates( lon, lat, x, y );
+    return d->m_map.screenCoordinates( lon, lat, x, y );
 }
 
 bool MarbleWidget::geoCoordinates( int x, int y,
                                    qreal& lon, qreal& lat,
                                    GeoDataCoordinates::Unit unit )
 {
-    return d->m_map->geoCoordinates( x, y, lon, lat, unit );
+    return d->m_map.geoCoordinates( x, y, lon, lat, unit );
 }
 
 qreal MarbleWidget::centerLatitude() const
 {
-    return d->m_map->centerLatitude();
+    return d->m_map.centerLatitude();
 }
 
 qreal MarbleWidget::centerLongitude() const
 {
-    return d->m_map->centerLongitude();
+    return d->m_map.centerLongitude();
 }
 
 QRegion MarbleWidget::activeRegion()
@@ -805,7 +804,7 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
     {
         // If the globe covers fully the screen then we can use the faster
         // RGB32 as there are no translucent areas involved.
-        QImage::Format imageFormat = ( d->m_map->mapCoversViewport() )
+        QImage::Format imageFormat = ( d->m_map.mapCoversViewport() )
                                      ? QImage::Format_RGB32
                                      : QImage::Format_ARGB32_Premultiplied;
         // Paint to an intermediate image
@@ -815,11 +814,11 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
     }
 
     // Create a painter that will do the painting.
-    GeoPainter painter( paintDevice, d->m_map->viewport(),
-                        d->m_map->mapQuality(), doClip );
+    GeoPainter painter( paintDevice, d->m_map.viewport(),
+                        d->m_map.mapQuality(), doClip );
     QRect  dirtyRect = evt->rect();
 
-    d->m_map->paint( painter, dirtyRect );
+    d->m_map.paint( painter, dirtyRect );
 
     if ( !isEnabled() )
     {
@@ -830,15 +829,15 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
             *pixel = qRgb( gray, gray, gray );
         }
 
-        GeoPainter widgetPainter( this, d->m_map->viewport(),
-                            d->m_map->mapQuality(), doClip );
+        GeoPainter widgetPainter( this, d->m_map.viewport(),
+                            d->m_map.mapQuality(), doClip );
         widgetPainter.drawImage( rect(), image );
     }
 
     if ( d->m_showFrameRate )
     {
         FpsLayer fpsLayer( &t );
-        fpsLayer.render( &painter, d->m_map->viewport() );
+        fpsLayer.render( &painter, d->m_map.viewport() );
 
         const qreal fps = 1000.0 / (qreal)( t.elapsed() + 1 );
         emit framesPerSecond( fps );
@@ -857,7 +856,7 @@ void MarbleWidget::goHome( FlyToMode mode )
     qreal  homeLon = 0;
     qreal  homeLat = 0;
     int homeZoom = 0;
-    d->m_model->home( homeLon, homeLat, homeZoom );
+    d->m_model.home( homeLon, homeLat, homeZoom );
 
     GeoDataLookAt target;
     target.setLongitude( homeLon, GeoDataCoordinates::Degree );
@@ -869,20 +868,20 @@ void MarbleWidget::goHome( FlyToMode mode )
 
 QString MarbleWidget::mapThemeId() const
 {
-    return d->m_model->mapThemeId();
+    return d->m_model.mapThemeId();
 }
 
 void MarbleWidget::setMapThemeId( const QString& mapThemeId )
 {
-    if ( !mapThemeId.isEmpty() && mapThemeId == d->m_model->mapThemeId() )
+    if ( !mapThemeId.isEmpty() && mapThemeId == d->m_model.mapThemeId() )
         return;
 
-    d->m_map->removeLayer( d->m_routingLayer );
+    d->m_map.removeLayer( d->m_routingLayer );
 
-    d->m_map->setMapThemeId( mapThemeId );
+    d->m_map.setMapThemeId( mapThemeId );
 
-    if ( d->m_model->planetId() == "earth" ) {
-        d->m_map->addLayer( d->m_routingLayer );
+    if ( d->m_model.planetId() == "earth" ) {
+        d->m_map.addLayer( d->m_routingLayer );
     }
 
     // Now we want a full repaint as the atmosphere might differ
@@ -894,155 +893,155 @@ void MarbleWidget::setMapThemeId( const QString& mapThemeId )
 
 GeoSceneDocument *MarbleWidget::mapTheme() const
 {
-    return d->m_model->mapTheme();
+    return d->m_model.mapTheme();
 }
 
 void MarbleWidget::setPropertyValue( const QString& name, bool value )
 {
     mDebug() << "In MarbleWidget the property " << name << "was set to " << value;
-    d->m_map->setPropertyValue( name, value );
+    d->m_map.setPropertyValue( name, value );
 
     update();
 }
 
 void MarbleWidget::setShowOverviewMap( bool visible )
 {
-    d->m_map->setShowOverviewMap( visible );
+    d->m_map.setShowOverviewMap( visible );
 
     update();
 }
 
 void MarbleWidget::setShowScaleBar( bool visible )
 {
-    d->m_map->setShowScaleBar( visible );
+    d->m_map.setShowScaleBar( visible );
 
     update();
 }
 
 void MarbleWidget::setShowCompass( bool visible )
 {
-    d->m_map->setShowCompass( visible );
+    d->m_map.setShowCompass( visible );
 
     update();
 }
 
 void MarbleWidget::setShowClouds( bool visible )
 {
-    d->m_map->setShowClouds( visible );
+    d->m_map.setShowClouds( visible );
 
     update();
 }
 
 void MarbleWidget::setShowSunShading( bool visible )
 {
-    d->m_map->setShowSunShading( visible );
+    d->m_map.setShowSunShading( visible );
 
     update();
 }
 
 void MarbleWidget::setShowCityLights( bool visible )
 {
-    d->m_map->setShowCityLights( visible );
+    d->m_map.setShowCityLights( visible );
 
     update();
 }
 
 void MarbleWidget::setShowSunInZenith( bool visible )
 {
-    disconnect( d->m_model->sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
-                this,                     SLOT( centerOn( qreal, qreal ) ) );
+    disconnect( d->m_model.sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
+                this,                    SLOT( centerOn( qreal, qreal ) ) );
 
-    if ( d->m_map->showSunInZenith() != visible ) { // Toggling input modifies event filters, so avoid that if not needed
-        d->m_map->setShowSunInZenith( visible );
-        setInputEnabled( !d->m_map->showSunInZenith() );
+    if ( d->m_map.showSunInZenith() != visible ) { // Toggling input modifies event filters, so avoid that if not needed
+        d->m_map.setShowSunInZenith( visible );
+        setInputEnabled( !d->m_map.showSunInZenith() );
     }
 
-    if ( d->m_map->showSunInZenith() ) {
-        connect( d->m_model->sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
-                 this,                     SLOT( centerOn( qreal, qreal ) ) );
+    if ( d->m_map.showSunInZenith() ) {
+        connect( d->m_model.sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
+                 this,                    SLOT( centerOn( qreal, qreal ) ) );
     }
 }
 
 void MarbleWidget::setShowAtmosphere( bool visible )
 {
-    d->m_map->setShowAtmosphere( visible );
+    d->m_map.setShowAtmosphere( visible );
 
     update();
 }
 
 void MarbleWidget::setShowCrosshairs( bool visible )
 {
-    d->m_map->setShowCrosshairs( visible );
+    d->m_map.setShowCrosshairs( visible );
 
     update();
 }
 
 void MarbleWidget::setShowGrid( bool visible )
 {
-    d->m_map->setShowGrid( visible );
+    d->m_map.setShowGrid( visible );
 
     update();
 }
 
 void MarbleWidget::setShowPlaces( bool visible )
 {
-    d->m_map->setShowPlaces( visible );
+    d->m_map.setShowPlaces( visible );
 
     update();
 }
 
 void MarbleWidget::setShowCities( bool visible )
 {
-    d->m_map->setShowCities( visible );
+    d->m_map.setShowCities( visible );
 
     update();
 }
 
 void MarbleWidget::setShowTerrain( bool visible )
 {
-    d->m_map->setShowTerrain( visible );
+    d->m_map.setShowTerrain( visible );
 
     update();
 }
 
 void MarbleWidget::setShowOtherPlaces( bool visible )
 {
-    d->m_map->setShowOtherPlaces( visible );
+    d->m_map.setShowOtherPlaces( visible );
 
     update();
 }
 
 void MarbleWidget::setShowRelief( bool visible )
 {
-    d->m_map->setShowRelief( visible );
+    d->m_map.setShowRelief( visible );
 
     update();
 }
 
 void MarbleWidget::setShowIceLayer( bool visible )
 {
-    d->m_map->setShowIceLayer( visible );
+    d->m_map.setShowIceLayer( visible );
 
     update();
 }
 
 void MarbleWidget::setShowBorders( bool visible )
 {
-    d->m_map->setShowBorders( visible );
+    d->m_map.setShowBorders( visible );
 
     update();
 }
 
 void MarbleWidget::setShowRivers( bool visible )
 {
-    d->m_map->setShowRivers( visible );
+    d->m_map.setShowRivers( visible );
 
     update();
 }
 
 void MarbleWidget::setShowLakes( bool visible )
 {
-    d->m_map->setShowLakes( visible );
+    d->m_map.setShowLakes( visible );
 
     update();
 }
@@ -1056,14 +1055,14 @@ void MarbleWidget::setShowFrameRate( bool visible )
 
 void MarbleWidget::setShowBackground( bool visible )
 {
-    d->m_map->setShowBackground( visible );
+    d->m_map.setShowBackground( visible );
 
     update();
 }
 
 void MarbleWidget::setShowTileId( bool visible )
 {
-    d->m_map->setShowTileId( visible );
+    d->m_map.setShowTileId( visible );
 }
 
 void MarbleWidget::notifyMouseClick( int x, int y)
@@ -1081,12 +1080,12 @@ void MarbleWidget::notifyMouseClick( int x, int y)
 void MarbleWidget::clearVolatileTileCache()
 {
     mDebug() << "About to clear VolatileTileCache";
-    d->m_map->clearVolatileTileCache();
+    d->m_map.clearVolatileTileCache();
 }
 
 void MarbleWidget::setVolatileTileCacheLimit( quint64 kiloBytes )
 {
-    d->m_map->setVolatileTileCacheLimit( kiloBytes );
+    d->m_map.setVolatileTileCacheLimit( kiloBytes );
 }
 
 // This slot will called when the Globe starts to create the tiles.
@@ -1110,32 +1109,32 @@ void MarbleWidget::scheduleRepaint( const QRegion& dirtyRegion )
 
 MapQuality MarbleWidget::mapQuality( ViewContext viewContext )
 {
-    return d->m_map->mapQuality( viewContext );
+    return d->m_map.mapQuality( viewContext );
 }
 
 void MarbleWidget::setMapQualityForViewContext( MapQuality quality, ViewContext viewContext )
 {
-    const MapQuality oldQuality = d->m_map->mapQuality();
+    const MapQuality oldQuality = d->m_map.mapQuality();
 
-    d->m_map->setMapQualityForViewContext( quality, viewContext );
+    d->m_map.setMapQualityForViewContext( quality, viewContext );
 
-    if ( d->m_map->mapQuality() != oldQuality )
+    if ( d->m_map.mapQuality() != oldQuality )
         d->repaint();
 }
 
 ViewContext MarbleWidget::viewContext() const
 {
-    return d->m_map->viewContext();
+    return d->m_map.viewContext();
 }
 
 void MarbleWidget::setViewContext( ViewContext viewContext )
 {
-    const MapQuality oldQuality = d->m_map->mapQuality();
+    const MapQuality oldQuality = d->m_map.mapQuality();
 
-    d->m_map->setViewContext( viewContext );
+    d->m_map.setViewContext( viewContext );
     d->m_routingLayer->setViewContext( viewContext );
 
-    if ( d->m_map->mapQuality() != oldQuality )
+    if ( d->m_map.mapQuality() != oldQuality )
         d->repaint();
 }
 
@@ -1151,22 +1150,22 @@ void MarbleWidget::setAnimationsEnabled( bool enabled )
 
 AngleUnit MarbleWidget::defaultAngleUnit() const
 {
-    return d->m_map->defaultAngleUnit();
+    return d->m_map.defaultAngleUnit();
 }
 
 void MarbleWidget::setDefaultAngleUnit( AngleUnit angleUnit )
 {
-    d->m_map->setDefaultAngleUnit( angleUnit );
+    d->m_map.setDefaultAngleUnit( angleUnit );
 }
 
 QFont MarbleWidget::defaultFont() const
 {
-    return d->m_map->defaultFont();
+    return d->m_map.defaultFont();
 }
 
 void MarbleWidget::setDefaultFont( const QFont& font )
 {
-    d->m_map->setDefaultFont( font );
+    d->m_map.setDefaultFont( font );
 }
 
 void MarbleWidget::setSelection( const QRect& region )
@@ -1250,7 +1249,7 @@ void MarbleWidget::setInputEnabled( bool enabled )
 
 QList<RenderPlugin *> MarbleWidget::renderPlugins() const
 {
-    return d->m_map->renderPlugins();
+    return d->m_map.renderPlugins();
 }
 
 void MarbleWidget::readPluginSettings( QSettings& settings )
@@ -1289,12 +1288,12 @@ void MarbleWidget::writePluginSettings( QSettings& settings ) const
 
 QList<AbstractFloatItem *> MarbleWidget::floatItems() const
 {
-    return d->m_map->floatItems();
+    return d->m_map.floatItems();
 }
 
 AbstractFloatItem * MarbleWidget::floatItem( const QString &nameId ) const
 {
-    return d->m_map->floatItem( nameId );
+    return d->m_map.floatItem( nameId );
 }
 
 void MarbleWidget::changeEvent( QEvent * event )
@@ -1314,40 +1313,40 @@ void MarbleWidget::flyTo( const GeoDataLookAt &newLookAt, FlyToMode mode )
         qreal const zoom = d->zoom( radius );
         // Prevent exceeding zoom range. Note: Bounding to range is not useful here
         if ( zoom >= minimumZoom() && zoom <= maximumZoom() ) {
-            d->m_map->setRadius( radius );
+            d->m_map.setRadius( radius );
             d->m_logzoom = qRound( d->zoom( radius ) );
 
             GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
-            d->m_map->centerOn( newLookAt.longitude( deg ), newLookAt.latitude( deg ) );
+            d->m_map.centerOn( newLookAt.longitude( deg ), newLookAt.latitude( deg ) );
 
             emit zoomChanged( d->m_logzoom );
             emit distanceChanged( distanceString() );
-            emit visibleLatLonAltBoxChanged( d->m_map->viewport()->viewLatLonAltBox() );
+            emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
 
             d->repaint();
         }
     }
     else {
-        d->m_physics->flyTo( newLookAt, mode );
+        d->m_physics.flyTo( newLookAt, mode );
     }
 }
 
 void MarbleWidget::reloadMap()
 {
-    d->m_map->reload();
+    d->m_map.reload();
 }
 
 void MarbleWidget::downloadRegion( QString const & sourceDir, QVector<TileCoordsPyramid> const & pyramid )
 {
-    d->m_map->downloadRegion( sourceDir, pyramid );
+    d->m_map.downloadRegion( sourceDir, pyramid );
 }
 
 GeoDataLookAt MarbleWidget::lookAt() const
 {
     GeoDataLookAt result;
 
-    result.setLongitude( d->m_map->viewport()->centerLongitude() );
-    result.setLatitude( d->m_map->viewport()->centerLatitude() );
+    result.setLongitude( d->m_map.viewport()->centerLongitude() );
+    result.setLatitude( d->m_map.viewport()->centerLatitude() );
     result.setAltitude( 0.0 );
     result.setRange( distance() * KM2METER );
 
