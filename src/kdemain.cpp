@@ -268,6 +268,7 @@ int main ( int argc, char *argv[] )
     else {
         options.add( "highresolution", ki18n( "Use the interface optimized for high resolutions" ) );
     }
+    options.add( "latlon <coordinates>", ki18n( "Show map at given lat lon coordinates" ) );
     options.add( "+[file]", ki18n( "One or more placemark files to be opened" ) );
 
     KCmdLineArgs::addCmdLineOptions( options );
@@ -325,6 +326,17 @@ int main ( int argc, char *argv[] )
 
     if ( args->isSet( "tile-id" ) ) {
 	window->marbleControl()->marbleWidget()->setShowTileId( true );
+    }
+
+    const QString coordinatesString = args->getOption( "latlon" );
+    if ( !coordinatesString.isEmpty() ) {
+        bool success = false;
+        const GeoDataCoordinates coordinates = GeoDataCoordinates::fromString(coordinatesString, success);
+        if ( success ) {
+            const qreal longitude = coordinates.longitude(GeoDataCoordinates::Degree);
+            const qreal latitude = coordinates.latitude(GeoDataCoordinates::Degree);
+            window->marbleWidget()->centerOn(longitude, latitude);
+        }
     }
 
     // Read the files that are given on the command line.

@@ -102,6 +102,7 @@ int main(int argc, char *argv[])
 
     QString marbleDataPath;
     int dataPathIndex=0;
+    QString coordinatesString;
     MarbleGlobal::Profiles profiles = MarbleGlobal::detectProfiles();
 
     QStringList args = QApplication::arguments();
@@ -114,6 +115,7 @@ int main(int argc, char *argv[])
         qWarning() << "general options:";
         qWarning() << "  --marbledatapath=<path> .... Overwrite the compile-time path to map themes and other data";
         qWarning() << "  --enableFileView ........... Add a tab on the left showing detailed information about loaded files";
+        qWarning() << "  --latlon=<coordinates> ..... Show map at given lat lon coordinates";
         qWarning();
         qWarning() << "debug options:";
         qWarning() << "  --debug-info ............... write (more) debugging information to the console";
@@ -158,6 +160,16 @@ int main(int argc, char *argv[])
         else if ( arg == "--nohighresolution" ) {
             profiles &= ~MarbleGlobal::HighResolution;
         }
+        else if ( arg.startsWith( "--latlot=", Qt::CaseInsensitive ) )
+        {
+            coordinatesString = arg.mid(9);
+        }
+        else if ( arg.compare( "--latlon", Qt::CaseInsensitive ) == 0 ) {
+            ++i;
+            // TODO: misses an error check if there is a value at all
+            // and error reporting to user (problem also exists with marbledatapath)
+            coordinatesString = args.value( i );
+        }
     }
     MarbleGlobal::getInstance()->setProfiles( profiles );
 
@@ -165,7 +177,19 @@ int main(int argc, char *argv[])
     Marble::MeasureSystem const marbleMeasurement = measurement == QLocale::ImperialSystem ? Marble::Imperial : Marble::Metric;
     MarbleGlobal::getInstance()->locale()->setMeasureSystem( marbleMeasurement );
 
-    MainWindow *window = new MainWindow( marbleDataPath );
+    QVariantMap cmdLineSettings;
+    if ( !coordinatesString.isEmpty() ) {
+        bool success = false;
+        const GeoDataCoordinates coordinates = GeoDataCoordinates::fromString(coordinatesString, success);
+        if ( success ) {
+            QVariantList lonLat;
+            lonLat << QVariant( coordinates.longitude(GeoDataCoordinates::Degree) )
+                   << QVariant( coordinates.latitude(GeoDataCoordinates::Degree) );
+            cmdLineSettings.insert( QLatin1String("lonlat"), QVariant(lonLat) );
+        }
+    }
+
+    MainWindow *window = new MainWindow( marbleDataPath, cmdLineSettings );
     window->setAttribute( Qt::WA_DeleteOnClose, true );
 
     MarbleTest *marbleTest = new MarbleTest( window->marbleWidget() );

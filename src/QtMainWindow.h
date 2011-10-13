@@ -16,6 +16,7 @@
 
 #include <QtGui/QMainWindow>
 #include <QtCore/QDateTime>
+#include <QtCore/QVariantMap>
 #include "ControlView.h"
 
 class QAction;
@@ -41,6 +42,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(const QString& marbleDataPath = QString(),
+                        const QVariantMap& cmdLineSettings = QVariantMap(),
                         QWidget *parent=0);
 
     ControlView* marbleControl() {
@@ -59,7 +61,7 @@ private:
     void  createStatusBar();
 
     QString  readMarbleDataPath();
-    void  readSettings();
+    void  readSettings(const QVariantMap& overrideSettings = QVariantMap());
     void  writeSettings();
 
 private Q_SLOTS:
@@ -67,7 +69,7 @@ private Q_SLOTS:
     void  showDistance( const QString& position);
     void  showDateTime();
 
-    void  initObject();
+    void  initObject(const QVariantMap& cmdLineSettings);
     void  editSettings();
     void  updateSettings();
 

@@ -88,7 +88,7 @@ namespace
 using namespace Marble;
 /* TRANSLATOR Marble::MainWindow */
 
-MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
+MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLineSettings, QWidget *parent) :
         QMainWindow(parent),
         m_sunControlDialog( 0 ),
         m_timeControlDialog( 0 ),
@@ -141,14 +141,16 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
     m_position = NOT_AVAILABLE;
     m_distance = marbleWidget()->distanceString();
     m_clock = QLocale().toString( m_controlView->marbleModel()->clockDateTime().addSecs( m_controlView->marbleModel()->clockTimezone() ), QLocale::ShortFormat );
-    QTimer::singleShot( 0, this, SLOT( initObject() ) );
+    QMetaObject::invokeMethod(this,
+                              "initObject", Qt::QueuedConnection,
+                              Q_ARG(QVariantMap, cmdLineSettings));
 }
 
-void MainWindow::initObject()
+void MainWindow::initObject(const QVariantMap& cmdLineSettings)
 {
     QCoreApplication::processEvents ();
     setupStatusBar();
-    readSettings();
+    readSettings(cmdLineSettings);
 }
 
 void MainWindow::createActions()
@@ -896,7 +898,7 @@ QString MainWindow::readMarbleDataPath()
      return marbleDataPath;
 }
 
-void MainWindow::readSettings()
+void MainWindow::readSettings(const QVariantMap& overrideSettings)
 {
      QSettings settings("kde.org", "Marble Desktop Globe");
 
@@ -932,22 +934,32 @@ void MainWindow::readSettings()
             (Projection)(settings.value("projection", defaultProjection ).toInt())
          );
 
-         // Last location on quit
-         if ( m_configDialog->onStartup() == Marble::LastLocationVisited ) {
-            m_controlView->marbleWidget()->centerOn(
-                settings.value("quitLongitude", 0.0).toDouble(),
-                settings.value("quitLatitude", 0.0).toDouble() );
-            m_controlView->marbleWidget()->zoomView( settings.value("quitZoom", 1000).toInt() );
-         }
-
          // Set home position
          m_controlView->marbleModel()->setHome(
             settings.value("homeLongitude", 9.4).toDouble(),
             settings.value("homeLatitude", 54.8).toDouble(),
             settings.value("homeZoom", 1050 ).toInt()
          );
-         if ( m_configDialog->onStartup() == Marble::ShowHomeLocation ) {
-            m_controlView->marbleWidget()->goHome();
+
+         // Center on
+         const QVariantMap::ConstIterator lonLatIt = overrideSettings.find(QLatin1String("lonlat"));
+         if ( lonLatIt != overrideSettings.constEnd() ) {
+            const QVariantList lonLat = lonLatIt.value().toList();
+            m_controlView->marbleWidget()->centerOn( lonLat.at(0).toDouble(), lonLat.at(1).toDouble() );
+         } else {
+            switch ( m_configDialog->onStartup() ) {
+            case Marble::LastLocationVisited:
+                m_controlView->marbleWidget()->centerOn(
+                    settings.value("quitLongitude", 0.0).toDouble(),
+                    settings.value("quitLatitude", 0.0).toDouble() );
+                m_controlView->marbleWidget()->zoomView( settings.value("quitZoom", 1000).toInt() );
+                break;
+            case Marble::ShowHomeLocation:
+                m_controlView->marbleWidget()->goHome();
+                break;
+            default:
+                break;
+            }
          }
 
          bool isLocked = settings.value( "lockFloatItemPositions", false ).toBool();
