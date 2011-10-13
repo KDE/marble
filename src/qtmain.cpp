@@ -102,6 +102,7 @@ int main(int argc, char *argv[])
 
     QString marbleDataPath;
     int dataPathIndex=0;
+    QString mapThemeId;
     QString coordinatesString;
     MarbleGlobal::Profiles profiles = MarbleGlobal::detectProfiles();
 
@@ -116,6 +117,7 @@ int main(int argc, char *argv[])
         qWarning() << "  --marbledatapath=<path> .... Overwrite the compile-time path to map themes and other data";
         qWarning() << "  --enableFileView ........... Add a tab on the left showing detailed information about loaded files";
         qWarning() << "  --latlon=<coordinates> ..... Show map at given lat lon coordinates";
+        qWarning() << "  --map=<id> ................. Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")";
         qWarning();
         qWarning() << "debug options:";
         qWarning() << "  --debug-info ............... write (more) debugging information to the console";
@@ -170,6 +172,16 @@ int main(int argc, char *argv[])
             // and error reporting to user (problem also exists with marbledatapath)
             coordinatesString = args.value( i );
         }
+        else if ( arg.startsWith( "--map=", Qt::CaseInsensitive ) )
+        {
+            mapThemeId = arg.mid(6);
+        }
+        else if ( arg.compare( "--map", Qt::CaseInsensitive ) == 0 ) {
+            ++i;
+            // TODO: misses an error check if there is a value at all
+            // and error reporting to user (problem also exists with marbledatapath)
+            mapThemeId = args.value( i );
+        }
     }
     MarbleGlobal::getInstance()->setProfiles( profiles );
 
@@ -178,6 +190,10 @@ int main(int argc, char *argv[])
     MarbleGlobal::getInstance()->locale()->setMeasureSystem( marbleMeasurement );
 
     QVariantMap cmdLineSettings;
+    if ( !mapThemeId.isEmpty() ) {
+        cmdLineSettings.insert( QLatin1String("mapTheme"), QVariant(mapThemeId) );
+    }
+
     if ( !coordinatesString.isEmpty() ) {
         bool success = false;
         const GeoDataCoordinates coordinates = GeoDataCoordinates::fromString(coordinatesString, success);

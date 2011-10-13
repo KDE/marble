@@ -925,7 +925,13 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
      setUpdatesEnabled(false);
 
      settings.beginGroup("MarbleWidget");
-         QString mapThemeId = settings.value("mapTheme", m_controlView->defaultMapThemeId() ).toString();
+         QString mapThemeId;
+         const QVariantMap::ConstIterator mapThemeIdIt = overrideSettings.find(QLatin1String("mapTheme"));
+         if ( mapThemeIdIt != overrideSettings.constEnd() ) {
+            mapThemeId = mapThemeIdIt.value().toString();
+         } else {
+            mapThemeId = settings.value("mapTheme", m_controlView->defaultMapThemeId() ).toString();
+         }
          qDebug() << "ReadSettings: mapThemeId: " << mapThemeId;
          m_controlView->marbleWidget()->setMapThemeId( mapThemeId );
          bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;

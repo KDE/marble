@@ -269,6 +269,7 @@ int main ( int argc, char *argv[] )
         options.add( "highresolution", ki18n( "Use the interface optimized for high resolutions" ) );
     }
     options.add( "latlon <coordinates>", ki18n( "Show map at given lat lon coordinates" ) );
+    options.add( "map <id>", ki18n( "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")" ) );
     options.add( "+[file]", ki18n( "One or more placemark files to be opened" ) );
 
     KCmdLineArgs::addCmdLineOptions( options );
@@ -326,6 +327,11 @@ int main ( int argc, char *argv[] )
 
     if ( args->isSet( "tile-id" ) ) {
 	window->marbleControl()->marbleWidget()->setShowTileId( true );
+    }
+
+    const QString map = args->getOption( "map" );
+    if ( !map.isEmpty() ) {
+        window->marbleWidget()->setMapThemeId(map);
     }
 
     const QString coordinatesString = args->getOption( "latlon" );
