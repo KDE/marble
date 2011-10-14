@@ -15,9 +15,11 @@
 // Qt
 #include <QtCore/QModelIndex>
 #include <QtCore/QFile>
+#include <QtCore/QList>
 #include <QtGui/QPixmap>
 
 // Marble
+#include "GeoDataObject.h"
 #include "GeoDataDocument.h"
 #include "GeoDataContainer.h"
 #include "GeoDataExtendedData.h"
@@ -428,29 +430,156 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
 }
 
 
+QModelIndex GeoDataTreeModel::index( GeoDataObject *object )
+{
+    //It first runs bottom-top, storing every ancestor of the object, and
+    //then goes top-down retrieving the QModelIndex of every ancestor until reaching the
+    //index of the requested object.
+    //The TreeModel contains: Documents, Folders, Placemarks, MultiGeometries
+    //and Geometries that are children of MultiGeometries
+    //You can not call this function with an element that does not belong to the tree
+
+    Q_ASSERT( ( object->nodeType() == GeoDataTypes::GeoDataFolderType )
+              || ( object->nodeType() == GeoDataTypes::GeoDataDocumentType )
+              || ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
+              || ( ( object->nodeType() == GeoDataTypes::GeoDataLineStringType )
+                   && ( object->parent()->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) )
+              || ( ( object->nodeType() == GeoDataTypes::GeoDataLinearRingType )
+                   && ( object->parent()->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) )
+              || ( ( object->nodeType() == GeoDataTypes::GeoDataPointType )
+                   && ( object->parent()->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) )
+              || ( ( object->nodeType() == GeoDataTypes::GeoDataPolygonType )
+                   && ( object->parent()->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) )
+              || ( object->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) );
+
+
+    QList< GeoDataObject* > ancestors;
+
+    GeoDataObject *itup = object; //Iterator to reach the top of the GeoDataDocument (bottom-up)
+
+    while ( itup && ( itup != d->m_rootDocument ) ) {//We reach up to the rootDocument
+
+        ancestors.append( itup );
+        itup = itup->parent() ;
+    }
+
+    QModelIndex itdown;
+    if ( !ancestors.isEmpty() ) {
+
+        itdown = index( d->m_rootDocument->childPosition( static_cast<GeoDataFeature*>( ancestors.last() ) ),0,QModelIndex());//Iterator to go top down
+
+        GeoDataObject *parent;
+
+        while ( ( ancestors.size() > 1 ) ) {
+
+            parent = static_cast<GeoDataObject*>( ancestors.last() );
+
+            if ( ( parent->nodeType() == GeoDataTypes::GeoDataFolderType )
+                || ( parent->nodeType() == GeoDataTypes::GeoDataDocumentType ) ) {
+
+                ancestors.removeLast();
+                itdown = index( static_cast<GeoDataContainer*>(parent)->childPosition( static_cast<GeoDataFeature*>( ancestors.last() ) ) , 0, itdown );
+            } else if ( ( parent->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) ) {
+                //The only child of the model is a Geometry or MultiGeometry object
+                //If it is a geometry object, we should be on the bottom of the list
+                ancestors.removeLast();
+                if( ancestors.last()->nodeType() == GeoDataTypes::GeoDataMultiGeometryType )
+                    itdown = index( 0 , 0, itdown );
+                else
+                    itdown = QModelIndex();
+
+            }  else if ( ( parent->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) ) {
+                //The child is one of the geometry children of MultiGeometry
+                ancestors.removeLast();
+                itdown = index( static_cast<GeoDataMultiGeometry*>(parent)->childPosition( static_cast<GeoDataGeometry*>(ancestors.last()) ) , 0, itdown );
+            }
+            else  {   //If the element is not found on the tree, it will be added under m_rootDocument
+                itdown = QModelIndex();
+                break;
+            }
+        }
+    }
+    return itdown;
+}
+
+int GeoDataTreeModel::addFeature( GeoDataContainer *parent, GeoDataFeature *feature )
+{
+    int row = -1;
+    if ( parent && feature ) {
+
+        QModelIndex modelindex = index( parent );
+            //index(GeoDataObject*) returns QModelIndex() if parent == m_rootDocument
+            //or if parent is not found on the tree.
+            //We must check that we are in top of the tree (then QModelIndex() is
+            //the right parent to insert the child object) or that we have a valid QModelIndex
+
+        if( ( parent == d->m_rootDocument ) || modelindex.isValid() )
+        {
+            row = parent->size();
+            beginInsertRows( modelindex , row , row );
+            parent->append( feature );
+            endInsertRows();
+            emit treeChanged();
+            emit added(feature);
+        }
+        else
+            mDebug() << "GeoDataTreeModel::addFeature (parent " << parent << " - feature" << feature << ") : parent not found on the TreeModel";
+    }
+    else
+        mDebug() << "Null pointer in call to GeoDataTreeModel::addFeature (parent " << parent << " - feature" << feature << ")";
+    return row; //-1 if it failed, the relative index otherwise.
+}
+
 int GeoDataTreeModel::addDocument( GeoDataDocument *document )
 {
-    beginInsertRows( QModelIndex(), d->m_rootDocument->size(), d->m_rootDocument->size() );
-    d->m_rootDocument->append( document ) ;
-    endInsertRows();
-    emit treeChanged();
-    return d->m_rootDocument->childPosition( document );
+    return addFeature( d->m_rootDocument, document );
+}
+
+bool GeoDataTreeModel::removeFeature( GeoDataContainer *parent, int row )
+{
+    if ( row<parent->size() ) {
+        beginRemoveRows( index( parent ), row , row );
+        parent->remove( row );
+        endRemoveRows();
+        emit treeChanged();
+        return true;
+    }
+    return false; //Tried to remove a row that is not contained in the parent.
+}
+
+bool GeoDataTreeModel::removeFeature( GeoDataFeature *feature )
+{
+    if ( feature && ( feature!=d->m_rootDocument ) )  {//We check to see we are not removing the
+                                                      //top level element m_rootDocument
+        GeoDataObject *parent = static_cast< GeoDataObject* >( feature->parent() );
+
+        if ( ( parent->nodeType() == GeoDataTypes::GeoDataFolderType )
+            || ( parent->nodeType() == GeoDataTypes::GeoDataDocumentType ) ) {
+
+            int row = static_cast< GeoDataContainer* >( feature->parent() )->childPosition( feature );
+            if ( row != -1 ) {
+                if ( removeFeature( static_cast< GeoDataContainer* >( feature->parent() ) , row ) ) {
+                    emit removed(feature);
+                    return true;
+                }
+                else
+                    return false;
+            }
+            else
+                return false; //The feature is not contained in the parent it points to
+        }
+    }
+    return false; //We can not remove the rootDocument
 }
 
 void GeoDataTreeModel::removeDocument( int index )
 {
-    beginRemoveRows( QModelIndex(), index, index);
-    d->m_rootDocument->remove( index );
-    endRemoveRows();
-    emit treeChanged();
+    removeFeature( d->m_rootDocument, index );
 }
 
 void GeoDataTreeModel::removeDocument( GeoDataDocument *document )
 {
-    int index = d->m_rootDocument->childPosition( document );
-    if ( index != -1 ) {
-        removeDocument( index );
-    }
+    removeFeature( document );
 }
 
 void GeoDataTreeModel::update()

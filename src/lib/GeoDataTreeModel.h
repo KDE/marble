@@ -16,7 +16,11 @@
 
 namespace Marble
 {
+class GeoDataObject;
 class GeoDataDocument;
+class GeoDataFeature;
+class GeoDataContainer;
+
 
 /**
  * @short The representation of GeoData in a model
@@ -55,6 +59,8 @@ class GeoDataTreeModel : public QAbstractItemModel
     QModelIndex index( int row, int column,
                        const QModelIndex &parent = QModelIndex() ) const;
 
+    QModelIndex index( GeoDataObject* object );
+
     QModelIndex parent( const QModelIndex &index ) const;
 
     int columnCount( const QModelIndex &parent = QModelIndex() ) const;
@@ -65,28 +71,37 @@ class GeoDataTreeModel : public QAbstractItemModel
 
     void reset() { QAbstractItemModel::reset(); }
 
+public Q_SLOTS:
+
     /**
       * Sets the root document to use. This replaces previously loaded data, if any.
       * @param document The new root document. Ownership retains with the caller,
       *   i.e. GeoDataTreeModel will not delete the passed document at its destruction.
       */
-    void setRootDocument( GeoDataDocument* document );
-    GeoDataDocument *rootDocument();
+    void setRootDocument( GeoDataDocument *document );
+    GeoDataDocument* rootDocument();
 
-    int addDocument( GeoDataDocument* document );
+    int addFeature( GeoDataContainer *parent, GeoDataFeature *feature );
+
+    bool removeFeature( GeoDataContainer *parent, int index );
+
+    bool removeFeature( GeoDataFeature *feature );
+
+    int addDocument( GeoDataDocument *document );
 
     void removeDocument( int index );
 
     void removeDocument( GeoDataDocument* document );
 
-public Q_SLOTS:
+
     void update();
-    
+
 signals:
     /// insert and remove row don't trigger any signal that proxies forward
     /// this signal will refresh geometry layer and placemark layout
     void treeChanged();
-
+    void removed( GeoDataObject *object );
+    void added( GeoDataObject *object );
  private:
     Q_DISABLE_COPY( GeoDataTreeModel )
     class Private;
