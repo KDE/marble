@@ -26,7 +26,8 @@ MarbleClock::MarbleClock()
       m_datetime( QDateTime::currentDateTimeUtc() ),
       m_lasttime( QDateTime::currentDateTimeUtc() ),
 #endif
-      m_timezoneInSec( 0 )
+      m_timezoneInSec( 0 ),
+      m_updateInterval( 60 )
 {
 
     m_timer = new QTimer( this );
@@ -56,14 +57,14 @@ qreal MarbleClock::dayFraction() const
 void MarbleClock::timerTimeout()
 {
     // calculate real period elapsed since last call
-#if QT_VERSION < 0x040700	
-    QDateTime m_curenttime( QDateTime::currentDateTime().toUTC() );
-    int msecdelta = 1000 * m_lasttime.secsTo( m_curenttime );
+#if QT_VERSION < 0x040700
+    QDateTime curenttime( QDateTime::currentDateTime().toUTC() );
+    int msecdelta = 1000 * m_lasttime.secsTo( curenttime );
 #else
-    QDateTime m_curenttime( QDateTime::currentDateTimeUtc() );
-    int msecdelta = m_lasttime.msecsTo( m_curenttime );
+    QDateTime curenttime( QDateTime::currentDateTimeUtc() );
+    int msecdelta = m_lasttime.msecsTo( curenttime );
 #endif
-    m_lasttime = m_curenttime;
+    m_lasttime = curenttime;
 
     // update m_datetime at m_speed pace
     m_datetime = m_datetime.addMSecs( msecdelta * m_speed );
@@ -72,14 +73,14 @@ void MarbleClock::timerTimeout()
     emit timeChanged();
 
     // sleeptime is the time to sleep until next round minute, at m_speed pace
-    int sleeptime = ( 60000 - (qreal)(m_datetime.time().msec() + m_datetime.time().second() * 1000 ) ) / m_speed;
+    int sleeptime = ( m_updateInterval * 1000 - (qreal)(m_datetime.time().msec() + m_datetime.time().second() * 1000 ) ) / m_speed;
     if ( sleeptime < 1000 ) {
         // don't trigger more often than 1s
         sleeptime = 1000;
     }
     m_timer->start( sleeptime );
-    mDebug() << "datetime" << m_curenttime.time().minute() << ":" << m_curenttime.time().second() << "." << m_curenttime.time().msec()
-             << "slept for " << msecdelta << " will sleep for " << sleeptime;
+
+    //mDebug() << "MarbleClock: will sleep for " << sleeptime;
 }
 
 void MarbleClock::setDateTime( const QDateTime& datetime )
@@ -91,6 +92,18 @@ void MarbleClock::setDateTime( const QDateTime& datetime )
 QDateTime MarbleClock::dateTime() const
 {
     return m_datetime;
+}
+
+void MarbleClock::setUpdateInterval( int seconds )
+{
+    m_updateInterval = seconds;
+
+    emit updateIntervalChanged( seconds );
+}
+
+int MarbleClock::updateInterval()
+{
+    return m_updateInterval;
 }
 
 int MarbleClock::speed() const

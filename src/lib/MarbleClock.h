@@ -32,10 +32,15 @@ class MarbleClock : public QObject
 
  Q_SIGNALS:
     /**
-     * @brief the timeChanged signal will be triggered every minute
-     * or at most every 1s in case speed is more than 60.
+     * @brief the timeChanged signal will be triggered at updateInterval() rate
+     * or at most every second.
      **/
     void timeChanged();
+
+    /**
+     * @brief Emitted when setUpdateInterval() is called.
+     */
+    void updateIntervalChanged( int seconds );
 
 public:
 
@@ -45,11 +50,25 @@ public:
      **/
     void setDateTime( const QDateTime& datetime );
 
-
     /**
      * @brief Returns the internal date and time
      **/
     QDateTime dateTime() const;
+
+    /**
+     * @brief Set the interval at which dateTime() is updated and timeChanged() is emitted.
+     * @param seconds The interval in seconds
+     * @see updateInterval
+     */
+    void setUpdateInterval( int seconds );
+
+    /**
+     * @brief Returns the interval at which dateTime() is updated and timeChanged() is emitted,
+     * The default is 60 seconds.
+     * @return The interval in seconds.
+     * @see setUpdateInterval
+     */
+    int updateInterval();
 
     /**
      * @brief Sets the speed of the timer which is how fast the marble clock can run relative to actual speed of time.
@@ -78,11 +97,13 @@ public:
 
  protected:
     Q_DISABLE_COPY( MarbleClock )
+
     int        m_speed;
     QTimer    *m_timer;
     QDateTime  m_datetime;        // stores the UTC time
     QDateTime  m_lasttime;
     int        m_timezoneInSec;
+    int        m_updateInterval;
 };
 
 }

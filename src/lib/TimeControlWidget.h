@@ -48,6 +48,11 @@ class MARBLE_EXPORT TimeControlWidget : public QDialog
     void nowClicked();
 
     /**
+     * @brief Set the refreshIntervalSpinBox value to @p seconds.
+     */
+    void updateRefreshRate( int seconds );
+
+    /**
     * @brief  set the text of speedLabel to @p speed
     */
     void speedChanged( int speed );
