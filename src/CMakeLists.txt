@@ -50,6 +50,7 @@ endif( QT_QTDECLARATIVE_FOUND )
 
 if( NOT QTONLY AND KDE4_PLASMA_LIBS )   # don't try to build this against kdelibs < 4.2
    add_subdirectory( plasmoid )
+   add_subdirectory( plasmarunner )
 endif( NOT QTONLY AND KDE4_PLASMA_LIBS )
 
 if(APPLE)
