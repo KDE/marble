@@ -60,6 +60,7 @@ TrackerPlugin::TrackerPlugin()
 
 void TrackerPlugin::initialize()
 {
+    endUpdatePlacemarks();
     d->m_downloadManager = new HttpDownloadManager( &d->m_storagePolicy, marbleModel()->pluginManager() );
     connect( d->m_downloadManager, SIGNAL(downloadComplete(QString,QString)),
              this, SLOT(downloaded(QString,QString)) );
@@ -126,12 +127,14 @@ void TrackerPlugin::update()
 
 void TrackerPlugin::beginUpdatePlacemarks()
 {
-    marbleModel()->treeModel()->removeDocument( d->m_document );
+    //FIXME: remove the const_cast, it may be best to create a new type of plugins where
+    //marbleModel() is not const, since traditional RenderPlugins do not require that
+    const_cast<MarbleModel *>(marbleModel())->treeModel()->removeDocument( d->m_document );
 }
 
 void TrackerPlugin::endUpdatePlacemarks()
 {
-    marbleModel()->treeModel()->addDocument( d->m_document );
+    const_cast<MarbleModel *>(marbleModel())->treeModel()->addDocument( d->m_document );
 }
 
 void TrackerPlugin::downloadFile(const QUrl &url, const QString &id)
