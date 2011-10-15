@@ -16,6 +16,7 @@
 
 
 #include <QtCore/QChar>
+#include <QtCore/QDateTime>
 #include <QtXml/QXmlStreamWriter>
 
 #include "GeoDataPoint.h"
@@ -80,20 +81,19 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     bool operator==( const GeoDataPlacemark& other ) const;
 
     /**
-     * Return the coordinate of the placemark as a GeoDataCoordinates
+     * Return the coordinates of the placemark at time @p dateTime as a GeoDataCoordinates
      *
-     * The iconAtCoordinates boolean is set to true if an icon should be drawn to
+     * The @p dateTime parameter should be used if the placemark geometry() is a
+     * GeoDataTrack and thus contains several coordinates associated with a date and time.
+     *
+     * The @p iconAtCoordinates boolean is set to true if an icon should be drawn to
      * represent the placemark at these coordinates as described in
-     * https://code.google.com/apis/kml/documentation/kmlreference.html#placemark .
-     * It is set to false otherwise.
+     * https://code.google.com/apis/kml/documentation/kmlreference.html#placemark,
+     * it is set to false otherwise.
+     *
+     * @see GeoDataTrack::GeoDataTrack
      */
-    GeoDataCoordinates coordinate( bool *iconAtCoordinates ) const;
-
-    /**
-     * @overload
-     * Return the coordinate of the placemark as a GeoDataCoordinates
-     */
-    GeoDataCoordinates coordinate() const;
+    GeoDataCoordinates coordinate( const QDateTime &dateTime = QDateTime(), bool *iconAtCoordinates = 0 ) const;
 
     /**
      * The geometry of the GeoDataPlacemark is to be rendered to the marble map
@@ -101,10 +101,10 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * @return a pointer to the current Geometry object
      */
     GeoDataGeometry* geometry() const;
-
+    
     /**
-     * Return the coordinate of the placemark as @p longitude
-     * and @p latitude.
+     * Return the coordinates of the placemark as @p longitude,
+     * @p latitude and @p altitude.
      */
     void coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const;
 

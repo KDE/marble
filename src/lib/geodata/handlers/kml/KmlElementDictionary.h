@@ -34,6 +34,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_nameSpace21;
     GEODATA_EXPORT extern const char* kmlTag_nameSpace22;
     GEODATA_EXPORT extern const char* kmlTag_nameSpaceOgc22;
+    GEODATA_EXPORT extern const char* kmlTag_nameSpaceGx22;
 
     GEODATA_EXPORT extern const char* kmlTag_address;
     GEODATA_EXPORT extern const char* kmlTag_AddressDetails;
@@ -179,6 +180,10 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_x;
     GEODATA_EXPORT extern const char* kmlTag_y;
     
+    // Google KML Extension Namespace (http://code.google.com/apis/kml/documentation/kmlreference.html#kmlextensions)
+    GEODATA_EXPORT extern const char* kmlTag_Track;
+    GEODATA_EXPORT extern const char* kmlTag_coord;
+
 #ifdef KML_LAZY_IMP
 // preliminary implementation for the extra defined Tags
     GEODATA_EXPORT extern const char* kmlTag_MarblePlacemark;
@@ -195,6 +200,7 @@ namespace kml
 #define KML_DEFINE_TAG_HANDLER_21(Name) GEODATA_DEFINE_TAG_HANDLER(kml, Kml, Name, kmlTag_nameSpace21)
 #define KML_DEFINE_TAG_HANDLER_22(Name) GEODATA_DEFINE_TAG_HANDLER(kml, Kml, Name, kmlTag_nameSpace22)
 #define KML_DEFINE_TAG_HANDLER_OGC22(Name) GEODATA_DEFINE_TAG_HANDLER(kml, Kml, Name, kmlTag_nameSpaceOgc22)
+#define KML_DEFINE_TAG_HANDLER_GX22(Name) GEODATA_DEFINE_TAG_HANDLER(kml, Kml, Name, kmlTag_nameSpaceGx22)
 
 #define KML_DEFINE_TAG_HANDLER(Name) \
 	KML_DEFINE_TAG_HANDLER_20(Name) \

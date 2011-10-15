@@ -85,7 +85,8 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
         return (namespaceUri() == kml::kmlTag_nameSpace20 || 
                 namespaceUri() == kml::kmlTag_nameSpace21 || 
                 namespaceUri() == kml::kmlTag_nameSpace22 ||
-                namespaceUri() == kml::kmlTag_nameSpaceOgc22);
+                namespaceUri() == kml::kmlTag_nameSpaceOgc22 ||
+                namespaceUri() == kml::kmlTag_nameSpaceGx22);
     default:
         break;
     }

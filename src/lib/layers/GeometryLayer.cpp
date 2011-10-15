@@ -21,6 +21,7 @@
 #include "GeoDataPolyStyle.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+#include "GeoDataTrack.h"
 #include "MarbleDebug.h"
 #include "GeoDataFeature.h"
 #include "GeoPainter.h"
@@ -29,6 +30,7 @@
 #include "GeoGraphicsItem.h"
 #include "GeoLineStringGraphicsItem.h"
 #include "GeoPolygonGraphicsItem.h"
+#include "GeoTrackGraphicsItem.h"
 #include "TileId.h"
 
 // Qt
@@ -250,6 +252,10 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( GeoDataGeometry* obje
         {
             createGraphicsItemFromGeometry( multigeo->child( row ), placemark );
         }
+    }
+    else if ( GeoDataTrack *track = dynamic_cast<GeoDataTrack*>( object ) )
+    {
+        item = new GeoTrackGraphicsItem( track );
     }
     if ( !item )
         return;

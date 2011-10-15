@@ -15,6 +15,7 @@
 
 #include "KmlElementDictionary.h"
 #include "GeoDataTimeStamp.h"
+#include "GeoDataTrack.h"
 #include "GeoParser.h"
 
 namespace Marble
@@ -29,15 +30,17 @@ GeoNode* KmlwhenTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.represents( kmlTag_TimeStamp ) ) {
-        QString whenString = parser.readElementText().trimmed();
+    QString whenString = parser.readElementText().trimmed();
 #ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_when << "> containing: " << whenString
-                 << " parent item name: " << parentItem.qualifiedName().first;
+    mDebug() << "Parsed <" << kmlTag_when << "> containing: " << whenString
+                << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
 	modify( whenString );
 	QDateTime when = QDateTime::fromString( whenString, Qt::ISODate );
+    if( parentItem.represents( kmlTag_TimeStamp ) ) {
         parentItem.nodeAs<GeoDataTimeStamp>()->setWhen( when );
+    } else if ( parentItem.represents( kmlTag_Track ) ) {
+        parentItem.nodeAs<GeoDataTrack>()->appendWhen( when );
     }
 
     return 0;

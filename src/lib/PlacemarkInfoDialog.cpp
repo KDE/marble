@@ -24,13 +24,16 @@
 #include "DeferredFlag.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataExtendedData.h"
+#include "MarbleClock.h"
 #include "MarbleDirs.h"
 
 using namespace Marble;
 /* TRANSLATOR Marble::PlacemarkInfoDialog */
 
-PlacemarkInfoDialog::PlacemarkInfoDialog(const GeoDataPlacemark *placemark, QWidget *parent)
-    : QDialog(parent), m_placemark(placemark)
+PlacemarkInfoDialog::PlacemarkInfoDialog(const GeoDataPlacemark *placemark, const MarbleClock *clock, QWidget *parent)
+    : QDialog(parent),
+      m_placemark(placemark),
+      m_clock(clock)
 {
     setupUi(this);
 
@@ -125,7 +128,10 @@ void PlacemarkInfoDialog::showContent()
         description_val_browser->setEnabled( true );
         description_val_browser->setHtml( description );
     }
-    coordinates_val_lbl->setText( m_placemark->coordinate().toString() );
+
+    GeoDataCoordinates coordinates = m_placemark->coordinate( m_clock->dateTime() );
+
+    coordinates_val_lbl->setText( coordinates.toString() );
     country_val_lbl->setText( m_placemark->countryCode() );
     QString gmt = QString( "%1" ).arg( m_placemark->extendedData().value("gmt").value().toInt()/( double ) 100, 0, 'f', 1 );
     QString dst = QString( "%1" ).arg( ( m_placemark->extendedData().value("gmt").value().toInt() + m_placemark->extendedData().value("dst").value().toInt() )/( double ) 100, 0, 'f', 1 );
@@ -134,7 +140,7 @@ void PlacemarkInfoDialog::showContent()
 
     const qint64 population = m_placemark->population();
     const qreal area = m_placemark->area();
-    const qreal altitude = m_placemark->coordinate().altitude();
+    const qreal altitude = coordinates.altitude();
 
     area_lbl->setText( tr("Area:") );
     if ( area < 10000000 )

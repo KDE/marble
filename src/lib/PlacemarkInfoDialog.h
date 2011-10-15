@@ -27,6 +27,7 @@ using namespace Marble;
 namespace Marble
 {
 class DeferredFlag;
+class MarbleClock;
 
 class PlacemarkInfoDialog : public QDialog, private Ui::PlacemarkInfoDialog
 {
@@ -34,7 +35,7 @@ class PlacemarkInfoDialog : public QDialog, private Ui::PlacemarkInfoDialog
     Q_OBJECT
 
  public:
-    explicit PlacemarkInfoDialog( const GeoDataPlacemark *placemark, QWidget *parent = 0 );
+    explicit PlacemarkInfoDialog( const GeoDataPlacemark *placemark, const MarbleClock *clock, QWidget *parent = 0 );
 
  Q_SIGNALS:
     void source( const QString& );
@@ -51,6 +52,7 @@ class PlacemarkInfoDialog : public QDialog, private Ui::PlacemarkInfoDialog
     Q_DISABLE_COPY( PlacemarkInfoDialog )
     DeferredFlag  *m_flagcreator;
     const GeoDataPlacemark *m_placemark;
+    const MarbleClock *m_clock;
 };
 
 }

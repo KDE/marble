@@ -34,6 +34,7 @@
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataPlacemark.h"
 #include "GeoPainter.h"
+#include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
@@ -658,7 +659,7 @@ void MarbleWidget::centerOn( const GeoDataPlacemark& placemark, bool animated )
     if ( lookAt ) {
         flyTo( *lookAt, animated ? Automatic : Instant );
     } else {
-        centerOn( placemark.geometry()->latLonAltBox(), animated );
+        centerOn( placemark.coordinate( d->m_model.clock()->dateTime() ), animated );
     }
 }
 

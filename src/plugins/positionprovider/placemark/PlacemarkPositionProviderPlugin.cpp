@@ -11,6 +11,7 @@
 #include "PlacemarkPositionProviderPlugin.h"
 
 #include "GeoDataPlacemark.h"
+#include "MarbleClock.h"
 #include "MarbleModel.h"
 
 #include <QtCore/QTimer>
@@ -100,7 +101,7 @@ void PlacemarkPositionProviderPlugin::updatePosition()
         return;
     }
 
-    emit positionChanged(m_placemark->coordinate(), m_accuracy);
+    emit positionChanged(m_placemark->coordinate( marbleModel()->clock()->dateTime() ), m_accuracy);
 }
 
 void PlacemarkPositionProviderPlugin::update()

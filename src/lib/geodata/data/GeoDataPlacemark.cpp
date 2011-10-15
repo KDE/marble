@@ -23,6 +23,7 @@
 // Qt
 #include <QtCore/QDataStream>
 #include "MarbleDebug.h"
+#include "GeoDataTrack.h"
 
 namespace Marble
 {
@@ -74,56 +75,48 @@ void GeoDataPlacemark::setLookAt( GeoDataLookAt *lookAt)
     p()->m_lookAt = lookAt;
 }
 
-GeoDataCoordinates GeoDataPlacemark::coordinate() const
+GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool *iconAtCoordinates ) const
 {
-    bool throwaway;
-    return coordinate( &throwaway );
-}
-
-GeoDataCoordinates GeoDataPlacemark::coordinate( bool *iconAtCoordinates ) const
-{
-    *iconAtCoordinates = false;
+    bool hasIcon = false;
+    GeoDataCoordinates coord;
  
     if( p()->m_geometry ) {
         // Beware: comparison between pointers, not strings.
         if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataPointType ) {
-            *iconAtCoordinates = true;
-            return GeoDataCoordinates( *static_cast<GeoDataPoint *>( p()->m_geometry ) );
+            hasIcon = true;
+            coord = GeoDataCoordinates( *static_cast<GeoDataPoint *>( p()->m_geometry ) );
         } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
             GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry *>( p()->m_geometry );
 
             QVector<GeoDataGeometry*>::ConstIterator it = multiGeometry->constBegin();
             QVector<GeoDataGeometry*>::ConstIterator end = multiGeometry->constEnd();
-            for ( ; it != end; it++ ) {
+            for ( ; it != end; ++it ) {
                 if ( (*it)->nodeType() == GeoDataTypes::GeoDataPointType ) {
-                    *iconAtCoordinates = true;
-                    return GeoDataCoordinates( *static_cast<GeoDataPoint *>(*it) );
+                    hasIcon = true;
+                    coord = GeoDataCoordinates( *static_cast<GeoDataPoint *>(*it) );
+                    break;
                 }
             }
 
-            return p()->m_geometry->latLonAltBox().center();
+            coord = p()->m_geometry->latLonAltBox().center();
+        } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataTrackType ) {
+            GeoDataTrack *track = static_cast<GeoDataTrack *>( p()->m_geometry );
+            hasIcon = track->size() != 0 && track->firstWhen() <= dateTime;
+            coord = track->coordinatesAt( dateTime );
+        } else {
+            coord = p()->m_geometry->latLonAltBox().center();
         }
-
-        return p()->m_geometry->latLonAltBox().center();
     }
 
-    return GeoDataCoordinates();
+    if ( iconAtCoordinates != 0 ) {
+        *iconAtCoordinates = hasIcon;
+    }
+    return coord;
 }
 
 void GeoDataPlacemark::coordinate( qreal& lon, qreal& lat, qreal& alt ) const
 {
-    if( dynamic_cast<GeoDataLineString*>( p()->m_geometry ) ) {
-        const GeoDataCoordinates coord = GeoDataLatLonAltBox::fromLineString( *p()->m_geometry ).center();
-        coord.geoCoordinates( lon, lat );
-        alt = coord.altitude();
-    } else if( dynamic_cast<GeoDataPolygon*>( p()->m_geometry ) ) {
-        const GeoDataCoordinates coord = GeoDataLatLonAltBox::fromLineString( static_cast<GeoDataPolygon*>(p()->m_geometry)->outerBoundary() ).center();
-        coord.geoCoordinates( lon, lat );
-        alt = coord.altitude();
-    } else {
-        static_cast<GeoDataPoint*>(p()->m_geometry)->geoCoordinates( lon, lat );
-        alt = static_cast<GeoDataPoint*>(p()->m_geometry)->altitude();
-    }
+    return coordinate().geoCoordinates( lon, lat, alt );
 }
 
 void GeoDataPlacemark::setCoordinate( qreal lon, qreal lat, qreal alt, GeoDataPoint::Unit _unit)

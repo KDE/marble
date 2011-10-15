@@ -26,6 +26,8 @@
 
 #include "MarbleDebug.h"
 #include "global.h"
+#include "PlacemarkPainter.h"
+#include "MarbleClock.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleDirs.h"
 #include "ViewportParams.h"
@@ -39,10 +41,13 @@ using namespace Marble;
 
 PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
                                   QItemSelectionModel *selectionModel,
+                                  MarbleClock *clock,
                                   QObject* parent )
     : QObject( parent ),
       m_selectionModel( selectionModel ),
       m_showPlaces( true ),
+      m_clock( clock ),
+      m_placemarkPainter( 0 ),
       m_maxLabelHeight( 0 ),
       m_styleResetRequested( true )
 {
@@ -363,7 +368,7 @@ void PlacemarkLayout::setCacheData()
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
 
         bool ok;
-        GeoDataCoordinates coordinates = placemarkCoordinates( placemark, &ok );
+        GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
 
         if ( !ok ) {
             continue;
@@ -476,7 +481,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
 
         bool ok;
-        GeoDataCoordinates coordinates = placemarkCoordinates( placemark, &ok );
+        GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
 
         if ( !ok ) {
             continue;
@@ -565,7 +570,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         GeoDataPlacemark *placemark = placemarkList.at(i);
 
         bool ok;
-        GeoDataCoordinates coordinates = placemarkCoordinates( placemark, &ok );
+        GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
         if ( !ok ) {
             continue;
         }
@@ -712,9 +717,9 @@ bool PlacemarkLayout::render( GeoPainter *painter,
     return true;
 }
 
-GeoDataCoordinates PlacemarkLayout::placemarkCoordinates( GeoDataPlacemark *placemark, bool *ok ) const
+GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( GeoDataPlacemark *placemark, bool *ok ) const
 {
-    GeoDataCoordinates coordinates = placemark->coordinate( ok );
+    GeoDataCoordinates coordinates = placemark->coordinate( m_clock->dateTime(), ok );
     if ( !*ok && qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() )
                 != m_acceptedVisualCategories.constEnd() ) {
             *ok = true;

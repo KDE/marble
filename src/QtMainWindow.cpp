@@ -469,9 +469,11 @@ void MainWindow::createBookmarksListMenu( QMenu *m_bookmarksListMenu, const GeoD
 
         GeoDataLookAt* lookAt = (*i)->lookAt();
         if ( !lookAt ) {
+            GeoDataCoordinates coordinates = (*i)->coordinate( m_controlView->marbleModel()->clockDateTime() );
             GeoDataLookAt coordinateToLookAt;
-            coordinateToLookAt.setCoordinates( (*i)->coordinate() );
-            coordinateToLookAt.setRange( (*i)->coordinate().altitude() );
+            coordinateToLookAt.setCoordinates( coordinates );
+            coordinateToLookAt.setRange( coordinates.altitude() );
+            var.setValue( coordinateToLookAt );
         } else {
             var.setValue( *lookAt );
         }

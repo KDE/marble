@@ -238,7 +238,7 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
     if ( actionidx > 0 ) {
         const GeoDataPlacemark *index = m_featurelist.at( actionidx -1 );
 
-        QPointer<PlacemarkInfoDialog> dialog = new PlacemarkInfoDialog( index, m_widget );
+        QPointer<PlacemarkInfoDialog> dialog = new PlacemarkInfoDialog( index, m_widget->model()->clock(),  m_widget );
         dialog->setWindowModality( Qt::WindowModal );
         dialog->exec();
         delete dialog;

@@ -29,6 +29,7 @@
 #include "GeoDataGeometry.h"
 #include "GeoDataPoint.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataTrack.h"
 
 #include "GeoParser.h"
 
@@ -68,6 +69,9 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
     }
     else if ( parentItem.is<GeoDataLatLonAltBox>() ) {
         parentItem.nodeAs<GeoDataLatLonAltBox>()->setAltitudeMode( mode );
+    }
+    else if ( parentItem.is<GeoDataTrack>() ) {
+        parentItem.nodeAs<GeoDataTrack>()->setAltitudeMode( mode );
     }
 
 #ifdef DEBUG_TAGS

@@ -48,6 +48,12 @@ public:
     void setDocumentType( const QString& documentType );
 
     /**
+     * @brief Convenience method to write <key>value</key> with key prefixed format
+     * @p namespaceUri
+     */
+    void writeElement( const QString &namespaceUri, const QString &key, const QString &value );
+
+    /**
      * @brief Convenience method to write <key>value</key>
      *
      **/

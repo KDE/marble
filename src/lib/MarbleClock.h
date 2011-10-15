@@ -12,6 +12,8 @@
 #ifndef MARBLE_MARBLECLOCK_H
 #define MARBLE_MARBLECLOCK_H
 
+#include "geodata_export.h"
+
 #include <QtCore/QObject>
 #include <QtCore/QDateTime>
 
@@ -20,7 +22,7 @@ class QTimer;
 namespace Marble
 {
 
-class MarbleClock : public QObject
+class GEODATA_EXPORT MarbleClock : public QObject
 {
     Q_OBJECT
 

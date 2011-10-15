@@ -42,6 +42,7 @@ extern const char* GeoDataExtendedDataType;
 extern const char* GeoDataFeatureType;
 extern const char* GeoDataFolderType;
 extern const char* GeoDataGeometryType;
+extern const char* GeoDataTrackType;
 extern const char* GeoDataHotspotType;
 extern const char* GeoDataIconStyleType;
 extern const char* GeoDataInnerBoundaryType;

@@ -24,6 +24,7 @@
 #include "GeoDataExtendedData.h"
 #include "GeoDataStyleMap.h"
 #include "GeoDataTypes.h"
+#include "MarbleClock.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
@@ -41,7 +42,8 @@ public:
           m_runner( new MarbleRunnerManager( model->pluginManager(), q ) ),
           m_filepath ( file ),
           m_documentRole ( role ),
-          m_document( 0 )
+          m_document( 0 ),
+          m_clock( model->clock() )
     {
         m_runner->setModel( model );
     };
@@ -53,7 +55,8 @@ public:
           m_filepath ( file ),
           m_contents ( contents ),
           m_documentRole ( role ),
-          m_document( 0 )
+          m_document( 0 ),
+          m_clock( model->clock() )
     {
         m_runner->setModel( model );
     };
@@ -84,6 +87,7 @@ public:
     GeoDataDocument *m_document;
     QString m_error;
 
+    const MarbleClock *m_clock;
 };
 
 FileLoader::FileLoader( QObject* parent, MarbleModel *model,
@@ -261,7 +265,7 @@ void FileLoaderPrivate::savePlacemarks(QDataStream &out, const GeoDataContainer 
     QVector<GeoDataPlacemark*>::const_iterator const end = placemarks.constEnd();
     for (; it != end; ++it ) {
         out << (*it)->name();
-        (*it)->coordinate( lon, lat, alt );
+        (*it)->coordinate( m_clock->dateTime() ).geoCoordinates( lon, lat, alt );
 
         // Use double to provide a single cache file format across architectures
         out << (double)(lon) << (double)(lat) << (double)(alt);
@@ -315,7 +319,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
             // Mountain (H), Volcano (V), Shipwreck (W)
             if ( placemark->role() == "H" || placemark->role() == "V" || placemark->role() == "W" )
             {
-                qreal altitude = placemark->coordinate().altitude();
+                qreal altitude = placemark->coordinate( m_clock->dateTime() ).altitude();
                 if ( altitude != 0.0 )
                 {
                     hasPopularity = true;

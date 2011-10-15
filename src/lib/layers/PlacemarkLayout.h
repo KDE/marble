@@ -41,6 +41,8 @@ class GeoDataPlacemark;
 class GeoDataStyle;
 class GeoPainter;
 class GeoSceneLayer;
+class MarbleClock;
+class PlacemarkPainter;
 class TileId;
 class VisiblePlacemark;
 class ViewportParams;
@@ -61,6 +63,7 @@ class PlacemarkLayout : public QObject, public LayerInterface
      */
     PlacemarkLayout( QAbstractItemModel  *placemarkModel,
                      QItemSelectionModel *selectionModel,
+                     MarbleClock *clock,
                      QObject *parent = 0 );
 
     /**
@@ -117,10 +120,11 @@ class PlacemarkLayout : public QObject, public LayerInterface
     void styleReset();
 
     /**
-     * Returns the coordinates of @p placemark, @p ok is set to true if an icon for the placemark
-     * should be drawn at that point.
+     * Returns the coordinates at which an icon should be drawn for the @p placemark.
+     * @p ok is set to true if the coordinates are valid and should be used for drawing,
+     * it it set to false otherwise.
      */
-    GeoDataCoordinates placemarkCoordinates( GeoDataPlacemark *placemark, bool *ok ) const;
+    GeoDataCoordinates placemarkIconCoordinates( GeoDataPlacemark *placemark, bool *ok ) const;
 
     QRect  roomForLabel( GeoDataStyle * style,
                          const QVector<VisiblePlacemark*> &currentsec,
@@ -133,6 +137,7 @@ class PlacemarkLayout : public QObject, public LayerInterface
     Q_DISABLE_COPY( PlacemarkLayout )
     QSortFilterProxyModel  m_placemarkModel;
     QItemSelectionModel *const m_selectionModel;
+    MarbleClock *const m_clock;
 
     PlacemarkPainter m_placemarkPainter;
 

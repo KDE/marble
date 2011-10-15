@@ -81,6 +81,13 @@ void GeoWriter::setDocumentType( const QString &documentType )
     m_documentType = documentType;
 }
 
+void GeoWriter::writeElement( const QString &namespaceUri, const QString &key, const QString &value )
+{
+    writeStartElement( namespaceUri, key );
+    writeCharacters( value );
+    writeEndElement();
+}
+
 void GeoWriter::writeElement( const QString &key, const QString &value )
 {
     writeStartElement( key );
