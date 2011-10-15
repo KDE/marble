@@ -16,12 +16,17 @@
 
 namespace Marble {
 
+class MarbleClock;
+
 class SatellitesModel : public TrackerPluginModel
 {
     Q_OBJECT
 public:
-    SatellitesModel( GeoDataTreeModel *treeModel, const PluginManager *pluginManager );
+    SatellitesModel( GeoDataTreeModel *treeModel, const PluginManager *pluginManager, const MarbleClock *clock );
     void parseFile( const QString &id, const QByteArray &file );
+
+private:
+    const MarbleClock *m_clock;
 };
 
 }

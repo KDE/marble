@@ -93,7 +93,8 @@ void SatellitesPlugin::initialize()
 {
     //FIXME: remove the const_cast, it may be best to create a new type of plugins where
     //marbleModel() is not const, since traditional RenderPlugins do not require that
-    m_model = new SatellitesModel( const_cast<MarbleModel *>(marbleModel())->treeModel(), marbleModel()->pluginManager() );
+    m_model = new SatellitesModel( const_cast<MarbleModel *>( marbleModel() )->treeModel(), marbleModel()->pluginManager(),
+                                   marbleModel()->clock() );
     m_isInitialized = true;
     updateSettings();
 }

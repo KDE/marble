@@ -11,13 +11,14 @@
 
 #include "SatellitesItem.h"
 
+#include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "global.h"
 #include "GeoPainter.h"
 #include "GeoDataCoordinates.h"
-#include "GeoDataLinearRing.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
+#include "GeoDataTrack.h"
 
 #include "sgp4/sgp4ext.h"
 
@@ -34,11 +35,12 @@ using namespace Marble;
 
 #include "GeoDataPoint.h"
 
-SatellitesItem::SatellitesItem( const QString &name, elsetrec satrec )
+SatellitesItem::SatellitesItem( const QString &name, elsetrec satrec, const MarbleClock *clock )
     : TrackerPluginItem( name ),
       m_showOrbit( false ),
       m_satrec( satrec ),
-      m_orbit( new GeoDataLineString() )
+      m_track( new GeoDataTrack() ),
+      m_clock( clock )
 {
     double tumin, mu, xke, j2, j3, j4, j3oj2;
     double radiusearthkm;
@@ -49,16 +51,14 @@ SatellitesItem::SatellitesItem( const QString &name, elsetrec satrec )
 
     placemark()->setVisualCategory( GeoDataFeature::Satellite );
 
-    m_point = new GeoDataPoint( *static_cast<GeoDataPoint *>( placemark()->geometry() ) );
-    GeoDataMultiGeometry *multiGeometry = new GeoDataMultiGeometry();
-    multiGeometry->append( m_point );
-    multiGeometry->append( m_orbit );
-    placemark()->setGeometry( multiGeometry );
+    placemark()->setGeometry( m_track );
 
     GeoDataStyle *style = new GeoDataStyle( *placemark()->style() );
     placemark()->setStyle( style );
     placemark()->style()->lineStyle().setColor( oxygenBrickRed4 );
     placemark()->style()->lineStyle().setPenStyle( Qt::NoPen );
+
+    update();
 }
 
 void SatellitesItem::setDescription()
@@ -72,63 +72,75 @@ void SatellitesItem::setDescription()
                    "Semi-major axis: %7 km" )
         .arg( QString::number( m_satrec.satnum ), QString::number( perigee() ),
               QString::number( apogee() ), QString::number( inclination() ),
-              QString::number( period() ), QString::number( semiMajorAxis() ) );
+              QString::number( period() / 60.0 ), QString::number( semiMajorAxis() ) );
      placemark()->setDescription( description );
 }
 
 void SatellitesItem::update()
 {
-    double r[3], v[3];
-    double t = timeSinceEpoch();
-    sgp4( wgs84, m_satrec, t, r, v );
+    QDateTime startTime = m_clock->dateTime().addSecs( - 2 * 60 );
 
-    if ( m_satrec.error != 0 ) {
-        mDebug() << "Error: " << m_satrec.error;
-        return;
-    }
-
-    double lon, lat, alt;
-    fromTEME( r[0], r[1], r[2], gmst( t ) ).geoCoordinates( lon, lat, alt );
-    m_point->set( lon, lat, alt );
-
+    int length; // in seconds
     if ( placemark()->style()->lineStyle().penStyle() != Qt::NoPen ) {
-        m_orbit->clear();
-        double startTime = timeSinceEpoch();
-        double endTime = startTime + period() + 1;
-        for ( int i = startTime; i < endTime; i++ ) {
-            sgp4( wgs84, m_satrec, i, r, v );
-            *m_orbit << fromTEME( r[0], r[1], r[2], gmst( i ) );
+        length = period();
+    } else {
+        length = 60;
+    }
+    QDateTime endTime = startTime.addSecs( length );
+
+    m_track->removeBefore( startTime );
+    m_track->removeAfter( endTime );
+
+    addPointAt( m_clock->dateTime() );
+
+    // time interval between each point in the track, in seconds
+    double step = period() / 100.0;
+
+    for ( double i = startTime.toTime_t(); i < endTime.toTime_t(); i += step ) {
+        // No need to add points in this interval
+        if ( i >= m_track->firstWhen().toTime_t() ) {
+            i = m_track->lastWhen().toTime_t() + step;
         }
+
+        addPointAt( QDateTime::fromTime_t( i ) );
     }
 }
 
-// Hopefully this is correct enough
-double SatellitesItem::timeSinceEpoch()
+void SatellitesItem::addPointAt( const QDateTime &dateTime )
+{
+    // in minutes
+    double timeSinceEpoch = (double)( dateTime.toTime_t() - timeAtEpoch().toTime_t() ) / 60.0;
+
+    double r[3], v[3];
+    sgp4( wgs84, m_satrec, timeSinceEpoch, r, v );
+
+    GeoDataCoordinates coordinates = fromTEME( r[0], r[1], r[2], gmst( timeSinceEpoch ) );
+    if ( m_satrec.error != 0 ) {
+        return;
+    }
+
+    m_track->addPoint( dateTime, coordinates);
+}
+
+QDateTime SatellitesItem::timeAtEpoch()
 {
     int year = m_satrec.epochyr + ( m_satrec.epochyr < 57 ? 2000 : 1900 );
 
     int month, day, hours, minutes;
     double seconds;
     days2mdhms( year, m_satrec.epochdays, month, day, hours , minutes, seconds );
-    QDateTime time = QDateTime( QDate( year, month, day ),
-                                QTime( hours, minutes, (int)seconds, (int)( seconds / 1000.0 ) ),
-                                Qt::UTC );
-    //TODO: use MarbleClock
-    #if QT_VERSION < 0x040700
-    qint64 currentTimestamp = QDateTime::currentDateTime().toTime_t() * 1000;
-    qint64 epochTimestamp = time.toTime_t() * 1000;
-    #else
-    qint64 currentTimestamp = QDateTime::currentMSecsSinceEpoch();
-    qint64 epochTimestamp = time.toMSecsSinceEpoch();
-    #endif
-    return (double)( currentTimestamp - epochTimestamp ) / ( 1000.0 * 60.0 );
+
+    int ms = fmod(seconds * 1000.0, 1000.0);
+
+    return QDateTime( QDate( year, month, day ),
+                      QTime( hours, minutes, (int)seconds, ms ),
+                      Qt::UTC );
 }
 
 double SatellitesItem::period()
 {
     // no := mean motion (rad / min)
-    double T = 1 / m_satrec.no;
-    return T * 2 * M_PI;
+    return 60 * (2 * M_PI / m_satrec.no);
 }
 
 double SatellitesItem::apogee()
@@ -160,7 +172,7 @@ GeoDataCoordinates SatellitesItem::fromTEME( double x, double y, double z, doubl
 
     double lat = atan2( z, sqrt( x*x + y*y ) );
 
-    //TODO: determine if the extra precision is worth it.
+    //TODO: determine if this is worth the extra precision
     // Algorithm from http://celestrak.com/columns/v02n03/
     //TODO: demonstrate it.
     double a = m_earthSemiMajorAxis;

@@ -17,8 +17,9 @@
 
 using namespace Marble;
 
-SatellitesModel::SatellitesModel( GeoDataTreeModel *treeModel, const PluginManager *pluginManager )
-    : TrackerPluginModel( treeModel, pluginManager )
+SatellitesModel::SatellitesModel( GeoDataTreeModel *treeModel, const PluginManager *pluginManager, const MarbleClock *clock )
+    : TrackerPluginModel( treeModel, pluginManager ),
+      m_clock( clock )
 {
 }
 
@@ -53,7 +54,7 @@ void SatellitesModel::parseFile( const QString &id, const QByteArray &file )
             return;
         }
 
-        SatellitesItem *item = new SatellitesItem( satelliteName, satrec );
+        SatellitesItem *item = new SatellitesItem( satelliteName, satrec, m_clock );
         addItem( item );
     }
 

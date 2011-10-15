@@ -14,19 +14,20 @@
 #include "TrackerPluginItem.h"
 
 #include "GeoDataCoordinates.h"
+#include "GeoDataTrack.h"
 
 #include "sgp4/sgp4unit.h"
 
 namespace Marble {
 
-class GeoDataPoint;
-class GeoDataLineString;
+class GeoDataTrack;
+class MarbleClock;
 
 class SatellitesItem : public TrackerPluginItem
 {
 
 public:
-    SatellitesItem( const QString &name, elsetrec satrec );
+    SatellitesItem( const QString &name, elsetrec satrec, const MarbleClock *clock );
 
     void update();
 
@@ -37,10 +38,17 @@ private:
     double m_earthSemiMajorAxis; // in km
     elsetrec m_satrec;
 
-    GeoDataPoint *m_point;
-    GeoDataLineString *m_orbit;
+    GeoDataTrack *m_track;
+
+    const MarbleClock *m_clock;
 
     void setDescription();
+
+    /**
+     * Add a point in the GeoDataTrack geometry of the placemark with time
+     * dateTime and coordinates of the satellite determined from m_satrec.
+     */
+    void addPointAt( const QDateTime &dateTime );
 
     /**
      * Create a GeoDataCoordinates object from the cartesian coordinates
@@ -51,12 +59,12 @@ private:
     GeoDataCoordinates fromTEME( double x, double y, double z, double gmst );
 
     /**
-     * @return The time since the epoch in minutes
+     * @return The time at the satellite epoch determined from m_satrec
      */
-    double timeSinceEpoch();
+    QDateTime timeAtEpoch();
 
     /**
-     * @return The orbital period of the satellite in minutes
+     * @return The orbital period of the satellite in seconds
      */
     double period();
 
@@ -79,7 +87,7 @@ private:
     double inclination();
 
     /**
-     * Returns The Greenwich Mean Sideral Time in radians, @p minutes
+     * Returns the Greenwich Mean Sideral Time in radians, @p minutes
      * after the epoch.
      */
     double gmst( double minutes );
