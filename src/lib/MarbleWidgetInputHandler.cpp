@@ -479,10 +479,11 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             }
         }
 
+        QPoint mousePosition( event->x(), event->y() );
 
-        if ( isMouseAboveMap || d->m_selectionRubber.isVisible() ) {
-
-            // Regarding mouse button presses:
+        if ( isMouseAboveMap || d->m_selectionRubber.isVisible()
+             || MarbleWidgetInputHandler::d->m_widget->whichFeatureAt( mousePosition ).size() != 0) {
+            
             if ( e->type() == QEvent::MouseButtonPress
                  && event->button() == Qt::LeftButton ) {
 
@@ -657,8 +658,6 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
         // Adjusting Cursor shape
 
-        QPoint mousePosition( event->x(), event->y() );
-        
         // Find out if there are data items and if one has defined an action
         QList<AbstractDataPluginItem *> dataItems
             = MarbleWidgetInputHandler::d->m_widget->whichItemAt( mousePosition );

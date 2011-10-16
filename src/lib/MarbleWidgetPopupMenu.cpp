@@ -21,6 +21,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "PlacemarkInfoDialog.h"
+#include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "Planet.h"
 #include "routing/RoutingManager.h"
@@ -202,14 +203,22 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 
     m_planetAction->setText( targetString );
 
-    qreal  lat;
-    qreal  lon;
+    m_copyCoordinateAction->setEnabled( true );
+    m_copyCoordinateAction->setText( tr("Copy Coordinates") );
 
-    m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoDataCoordinates::Radian );
+    GeoDataCoordinates coord;
 
-    m_copyCoordinateAction->setData( curpos );
+    if ( !m_featurelist.isEmpty() ) {
+        coord = m_featurelist.first()->coordinate( m_model->clock()->dateTime() );
+    } else {
+        m_copyCoordinateAction->setData( curpos );
 
-    QMenu *positionMenu = m_lmbMenu->addMenu( GeoDataCoordinates( lon, lat, GeoDataCoordinates::Radian ).toString() );
+        qreal lon, lat;
+        m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoDataCoordinates::Radian );
+        coord = GeoDataCoordinates( lon, lat, GeoDataCoordinates::Radian );
+    }
+
+    QMenu *positionMenu = m_lmbMenu->addMenu( coord.toString() );
     positionMenu->menuAction()->setFont( QFont( "Sans Serif", 7, 50, false ) );
     positionMenu->addAction( m_copyCoordinateAction );
     positionMenu->addAction( tr( "&Address Details" ), this, SLOT( startReverseGeocoding() ) );
@@ -391,12 +400,17 @@ bool MarbleWidgetPopupMenu::mouseCoordinates( GeoDataCoordinates* coordinates, Q
         return false;
     }
 
-    QPoint p = dataContainer->data().toPoint();
-    qreal lat( 0.0 ), lon( 0.0 );
-    bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
-    if ( valid )
-    {
-        *coordinates = GeoDataCoordinates( lon, lat );
+    bool valid = true;
+    if ( !m_featurelist.isEmpty() ) {
+        *coordinates = m_featurelist.first()->coordinate( m_model->clock()->dateTime() );
+    } else {
+        QPoint p = dataContainer->data().toPoint();
+        qreal lat( 0.0 ), lon( 0.0 );
+
+        valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
+        if ( valid ) {
+            *coordinates = GeoDataCoordinates( lon, lat );
+        }
     }
 
     return valid;
