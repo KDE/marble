@@ -17,6 +17,9 @@
 
 // Marble
 #include <GeoDataCoordinates.h>
+#include <GeoDataFolder.h>
+#include <GeoDataPlacemark.h>
+#include <BookmarkManager.h>
 // KDE
 #include <KProcess>
 #include <KIcon>
@@ -26,6 +29,9 @@
 namespace Marble
 {
 
+static const int minContainsMatchLength = 3;
+
+
 PlasmaRunner::PlasmaRunner(QObject *parent, const QVariantList &args)
   : AbstractRunner(parent, args)
 {
@@ -33,13 +39,18 @@ PlasmaRunner::PlasmaRunner(QObject *parent, const QVariantList &args)
                     Plasma::RunnerContext::FileSystem |
                     Plasma::RunnerContext::Help);
 
-    const Plasma::RunnerSyntax syntax(QLatin1String(":q:"),
-                                      i18n("Shows the coordinates :q: in OpenStreetMap with Marble."));
-    addSyntax(syntax);
+    QList<Plasma::RunnerSyntax> syntaxes;
+    syntaxes << Plasma::RunnerSyntax(QLatin1String(":q:"),
+                                     i18n("Shows the coordinates :q: in OpenStreetMap with Marble."));
+    syntaxes << Plasma::RunnerSyntax(QLatin1String(":q:"),
+                                     i18n("Shows the geo bookmark containing :q: in OpenStreetMap with Marble."));
+    setSyntaxes(syntaxes);
 }
 
 void PlasmaRunner::match(Plasma::RunnerContext &context)
 {
+    QList<Plasma::QueryMatch> matches;
+
     const QString query = context.query();
 
     bool success = false;
@@ -59,7 +70,71 @@ void PlasmaRunner::match(Plasma::RunnerContext &context)
         match.setRelevance(1.0);
         match.setType(Plasma::QueryMatch::ExactMatch);
 
-        context.addMatch(query, match);
+        matches << match;
+    }
+
+    // TODO: BookmarkManager does not yet listen to updates, also does not sync between processes :(
+    // So for now always load on demand, even if expensive possibly
+    BookmarkManager bookmarkManager;
+    bookmarkManager.loadFile( QLatin1String("bookmarks/bookmarks.kml") );
+
+    foreach (GeoDataFolder* folder, bookmarkManager.folders()) {
+        collectMatches(matches, query, folder);
+    }
+
+    if ( ! matches.isEmpty() ) {
+        context.addMatches(query, matches);
+    }
+}
+
+void PlasmaRunner::collectMatches(QList<Plasma::QueryMatch> &matches,
+                                  const QString &query, const GeoDataFolder *folder)
+{
+    const QString queryLower = query.toLower();
+
+    QVector<GeoDataFeature*>::const_iterator it = folder->constBegin();
+    QVector<GeoDataFeature*>::const_iterator end = folder->constEnd();
+
+    for (; it != end; ++it) {
+        GeoDataFolder *folder = dynamic_cast<GeoDataFolder*>(*it);
+        if ( folder ) {
+            collectMatches(matches, query, folder);
+            continue;
+        }
+
+        GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( *it );
+        if ( placemark ) {
+            // For short query strings only match exactly, to get a sane number of matches
+            if (query.length() < minContainsMatchLength) {
+                if ( placemark->name().toLower() != queryLower &&
+                     ( placemark->descriptionIsCDATA() || // TODO: support also with CDATA
+                       placemark->description().toLower() != queryLower ) ) {
+                    continue;
+                }
+            } else {
+                if ( ! placemark->name().toLower().contains(queryLower) &&
+                     ( placemark->descriptionIsCDATA() || // TODO: support also with CDATA
+                       ! placemark->description().toLower().contains(queryLower) ) ) {
+                    continue;
+                }
+            }
+
+            const GeoDataCoordinates coordinates = placemark->coordinate();
+            const qreal lon = coordinates.longitude(GeoDataCoordinates::Degree);
+            const qreal lat = coordinates.latitude(GeoDataCoordinates::Degree);
+            const QVariant coordinatesData = QVariantList() << QVariant(lon) << QVariant(lat);
+
+            Plasma::QueryMatch match(this);
+            match.setIcon(KIcon(QLatin1String("marble")));
+            match.setText(placemark->name());
+            match.setSubtext(i18n("Show in OpenStreetMap with Marble"));
+            match.setData(coordinatesData);
+            match.setId(placemark->name()+QString::number(lat)+QString::number(lon));
+            match.setRelevance(1.0);
+            match.setType(Plasma::QueryMatch::ExactMatch);
+
+            matches << match;
+        }
     }
 }
 

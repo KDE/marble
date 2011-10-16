@@ -23,6 +23,8 @@
 
 namespace Marble
 {
+class GeoDataFolder;
+
 
 class PlasmaRunner : public Plasma::AbstractRunner
 {
@@ -34,6 +36,10 @@ public:
 public: // Plasma::AbstractRunner API
     void match(Plasma::RunnerContext &context);
     void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
+
+private:
+    void collectMatches(QList<Plasma::QueryMatch> &matches,
+                        const QString &query, const GeoDataFolder *folder);
 };
 
 }
