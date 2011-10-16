@@ -39,14 +39,17 @@ class MarbleMapTest : public QObject
     Q_OBJECT
 
  private slots:
-    void centerOnSphericalEquirectangular_data();
-    void centerOnSphericalEquirectangular();
+    void centerOnSpherical_data();
+    void centerOnSpherical();
 
-    void centerOnSphericalEquirectangularSingularities_data();
-    void centerOnSphericalEquirectangularSingularities();
+    void centerOnEquirectangular_data();
+    void centerOnEquirectangular();
 
     void centerOnMercator_data();
     void centerOnMercator();
+
+    void centerOnSphericalEquirectangularSingularities_data();
+    void centerOnSphericalEquirectangularSingularities();
 
     void centerOnMercatorMinLat_data();
     void centerOnMercatorMinLat();
@@ -55,7 +58,7 @@ class MarbleMapTest : public QObject
     void centerOnMercatorMaxLat();
 };
 
-void MarbleMapTest::centerOnSphericalEquirectangular_data()
+void MarbleMapTest::centerOnSpherical_data()
 {
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
@@ -67,71 +70,80 @@ void MarbleMapTest::centerOnSphericalEquirectangular_data()
     addRow() <<   90.0 << 0.0;
     addRow() <<  180.0 << 0.0;
 
-    addRow() << -180.0 << -89.0;
     addRow() << -180.0 <<  89.0;
-    addRow() <<  -90.0 << -89.0;
     addRow() <<  -90.0 <<  89.0;
-    addRow() <<    0.0 << -89.0;
     addRow() <<    0.0 <<  89.0;
-    addRow() <<   90.0 << -89.0;
     addRow() <<   90.0 <<  89.0;
-    addRow() <<  180.0 << -89.0;
     addRow() <<  180.0 <<  89.0;
+
+    addRow() << -180.0 << -89.0;
+    addRow() <<  -90.0 << -89.0;
+    addRow() <<    0.0 << -89.0;
+    addRow() <<   90.0 << -89.0;
+    addRow() <<  180.0 << -89.0;
+
+    addRow() << -180.0 <<  180.0;
+    addRow() <<  -90.0 <<  180.0;
+    addRow() <<    0.0 <<  180.0;
+    addRow() <<   90.0 <<  180.0;
+    addRow() <<  180.0 <<  180.0;
+
+    addRow() << -180.0 << -180.0;
+    addRow() <<  -90.0 << -180.0;
+    addRow() <<    0.0 << -180.0;
+    addRow() <<   90.0 << -180.0;
+    addRow() <<  180.0 << -180.0;
 }
 
-void MarbleMapTest::centerOnSphericalEquirectangular()
+void MarbleMapTest::centerOnSpherical()
 {
     QFETCH( qreal, lon );
     QFETCH( qreal, lat );
 
-    MarbleMap sphericalMap;
-    sphericalMap.setProjection( Spherical );
+    MarbleMap map;
+    map.setProjection( Spherical );
 
-    sphericalMap.centerOn( lon, lat );
-    QFUZZYCOMPARE( sphericalMap.centerLongitude(), lon, 0.0001 );
-    QFUZZYCOMPARE( sphericalMap.centerLatitude(), lat, 0.0001 );
-
-    MarbleMap equirectangularMap;
-    equirectangularMap.setProjection( Equirectangular );
-
-    equirectangularMap.centerOn( lon, lat );
-    QFUZZYCOMPARE( equirectangularMap.centerLongitude(), lon, 0.0001 );
-    QFUZZYCOMPARE( equirectangularMap.centerLatitude(), lat, 0.0001 );
+    map.centerOn( lon, lat );
+    QFUZZYCOMPARE( map.centerLongitude(), lon, 0.0001 );
+    QFUZZYCOMPARE( map.centerLatitude(), lat, 0.0001 );
 }
 
-void MarbleMapTest::centerOnSphericalEquirectangularSingularities_data()
+void MarbleMapTest::centerOnEquirectangular_data()
 {
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
 
-    addRow() << -180.0 << -90.0;
-    addRow() << -180.0 <<  90.0;
-    addRow() <<  -90.0 << -90.0;
-    addRow() <<  -90.0 <<  90.0;
-    addRow() <<    0.0 << -90.0;
-    addRow() <<    0.0 <<  90.0;
-    addRow() <<   90.0 << -90.0;
-    addRow() <<   90.0 <<  90.0;
-    addRow() <<  180.0 << -90.0;
-    addRow() <<  180.0 <<  90.0;
+    addRow() << 0.0 << 0.0;
+
+    addRow() << -180.0 << 0.0;
+    addRow() <<  -90.0 << 0.0;
+    addRow() <<   90.0 << 0.0;
+    addRow() <<  180.0 << 0.0;
+
+    addRow() << -180.0 <<  89.0;
+    addRow() <<  -90.0 <<  89.0;
+    addRow() <<    0.0 <<  89.0;
+    addRow() <<   90.0 <<  89.0;
+    addRow() <<  180.0 <<  89.0;
+
+    addRow() << -180.0 << -89.0;
+    addRow() <<  -90.0 << -89.0;
+    addRow() <<    0.0 << -89.0;
+    addRow() <<   90.0 << -89.0;
+    addRow() <<  180.0 << -89.0;
 }
 
-void MarbleMapTest::centerOnSphericalEquirectangularSingularities()
+void MarbleMapTest::centerOnEquirectangular()
 {
     QFETCH( qreal, lon );
     QFETCH( qreal, lat );
 
-    MarbleMap sphericalMap;
-    sphericalMap.setProjection( Spherical );
+    MarbleMap map;
+    map.setProjection( Equirectangular );
 
-    sphericalMap.centerOn( lon, lat );
-    QFUZZYCOMPARE( sphericalMap.centerLatitude(), lat, 0.0001 );
-
-    MarbleMap equirectangularMap;
-    equirectangularMap.setProjection( Equirectangular );
-
-    equirectangularMap.centerOn( lon, lat );
-    QFUZZYCOMPARE( equirectangularMap.centerLatitude(), lat, 0.0001 );
+    map.centerOn( lon, lat );
+    QFUZZYCOMPARE( map.centerLongitude(), lon, 0.0001 );
+    QFUZZYCOMPARE( map.centerLatitude(), lat, 0.0001 );
 }
 
 void MarbleMapTest::centerOnMercator_data()
@@ -172,6 +184,42 @@ void MarbleMapTest::centerOnMercator()
 
     QFUZZYCOMPARE( map.centerLongitude(), lon, 0.0001 );
     QFUZZYCOMPARE( map.centerLatitude(), lat, 0.0001 );
+}
+
+void MarbleMapTest::centerOnSphericalEquirectangularSingularities_data()
+{
+    QTest::addColumn<qreal>( "lon" );
+    QTest::addColumn<qreal>( "lat" );
+
+    addRow() << -180.0 <<  90.0;
+    addRow() <<  -90.0 <<  90.0;
+    addRow() <<    0.0 <<  90.0;
+    addRow() <<   90.0 <<  90.0;
+    addRow() <<  180.0 <<  90.0;
+
+    addRow() << -180.0 << -90.0;
+    addRow() <<  -90.0 << -90.0;
+    addRow() <<    0.0 << -90.0;
+    addRow() <<   90.0 << -90.0;
+    addRow() <<  180.0 << -90.0;
+}
+
+void MarbleMapTest::centerOnSphericalEquirectangularSingularities()
+{
+    QFETCH( qreal, lon );
+    QFETCH( qreal, lat );
+
+    MarbleMap sphericalMap;
+    sphericalMap.setProjection( Spherical );
+
+    sphericalMap.centerOn( lon, lat );
+    QFUZZYCOMPARE( sphericalMap.centerLatitude(), lat, 0.0001 );
+
+    MarbleMap equirectangularMap;
+    equirectangularMap.setProjection( Equirectangular );
+
+    equirectangularMap.centerOn( lon, lat );
+    QFUZZYCOMPARE( equirectangularMap.centerLatitude(), lat, 0.0001 );
 }
 
 void MarbleMapTest::centerOnMercatorMinLat_data()
