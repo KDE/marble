@@ -10,6 +10,7 @@
 
 #include <QtTest/QtTest>
 #include "MarbleMap.h"
+#include "MarbleModel.h"
 
 namespace QTest
 {
@@ -56,6 +57,9 @@ class MarbleMapTest : public QObject
 
     void centerOnMercatorMaxLat_data();
     void centerOnMercatorMaxLat();
+
+ private:
+    MarbleModel m_model;
 };
 
 void MarbleMapTest::centerOnSpherical_data()
@@ -70,11 +74,11 @@ void MarbleMapTest::centerOnSpherical_data()
     addRow() <<   90.0 << 0.0;
     addRow() <<  180.0 << 0.0;
 
-    addRow() << -180.0 <<  89.0;
-    addRow() <<  -90.0 <<  89.0;
-    addRow() <<    0.0 <<  89.0;
-    addRow() <<   90.0 <<  89.0;
-    addRow() <<  180.0 <<  89.0;
+    addRow() << -180.0 << 89.0;
+    addRow() <<  -90.0 << 89.0;
+    addRow() <<    0.0 << 89.0;
+    addRow() <<   90.0 << 89.0;
+    addRow() <<  180.0 << 89.0;
 
     addRow() << -180.0 << -89.0;
     addRow() <<  -90.0 << -89.0;
@@ -82,11 +86,11 @@ void MarbleMapTest::centerOnSpherical_data()
     addRow() <<   90.0 << -89.0;
     addRow() <<  180.0 << -89.0;
 
-    addRow() << -180.0 <<  180.0;
-    addRow() <<  -90.0 <<  180.0;
-    addRow() <<    0.0 <<  180.0;
-    addRow() <<   90.0 <<  180.0;
-    addRow() <<  180.0 <<  180.0;
+    addRow() << -180.0 << 180.0;
+    addRow() <<  -90.0 << 180.0;
+    addRow() <<    0.0 << 180.0;
+    addRow() <<   90.0 << 180.0;
+    addRow() <<  180.0 << 180.0;
 
     addRow() << -180.0 << -180.0;
     addRow() <<  -90.0 << -180.0;
@@ -100,7 +104,7 @@ void MarbleMapTest::centerOnSpherical()
     QFETCH( qreal, lon );
     QFETCH( qreal, lat );
 
-    MarbleMap map;
+    MarbleMap map( &m_model );
     map.setProjection( Spherical );
 
     map.centerOn( lon, lat );
@@ -120,11 +124,11 @@ void MarbleMapTest::centerOnEquirectangular_data()
     addRow() <<   90.0 << 0.0;
     addRow() <<  180.0 << 0.0;
 
-    addRow() << -180.0 <<  89.0;
-    addRow() <<  -90.0 <<  89.0;
-    addRow() <<    0.0 <<  89.0;
-    addRow() <<   90.0 <<  89.0;
-    addRow() <<  180.0 <<  89.0;
+    addRow() << -180.0 << 89.0;
+    addRow() <<  -90.0 << 89.0;
+    addRow() <<    0.0 << 89.0;
+    addRow() <<   90.0 << 89.0;
+    addRow() <<  180.0 << 89.0;
 
     addRow() << -180.0 << -89.0;
     addRow() <<  -90.0 << -89.0;
@@ -138,7 +142,7 @@ void MarbleMapTest::centerOnEquirectangular()
     QFETCH( qreal, lon );
     QFETCH( qreal, lat );
 
-    MarbleMap map;
+    MarbleMap map( &m_model );
     map.setProjection( Equirectangular );
 
     map.centerOn( lon, lat );
@@ -173,7 +177,7 @@ void MarbleMapTest::centerOnMercator_data()
 
 void MarbleMapTest::centerOnMercator()
 {
-    MarbleMap map;
+    MarbleMap map( &m_model );
 
     map.setProjection( Mercator );
 
@@ -191,11 +195,11 @@ void MarbleMapTest::centerOnSphericalEquirectangularSingularities_data()
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
 
-    addRow() << -180.0 <<  90.0;
-    addRow() <<  -90.0 <<  90.0;
-    addRow() <<    0.0 <<  90.0;
-    addRow() <<   90.0 <<  90.0;
-    addRow() <<  180.0 <<  90.0;
+    addRow() << -180.0 << 90.0;
+    addRow() <<  -90.0 << 90.0;
+    addRow() <<    0.0 << 90.0;
+    addRow() <<   90.0 << 90.0;
+    addRow() <<  180.0 << 90.0;
 
     addRow() << -180.0 << -90.0;
     addRow() <<  -90.0 << -90.0;
@@ -209,13 +213,13 @@ void MarbleMapTest::centerOnSphericalEquirectangularSingularities()
     QFETCH( qreal, lon );
     QFETCH( qreal, lat );
 
-    MarbleMap sphericalMap;
+    MarbleMap sphericalMap( &m_model );
     sphericalMap.setProjection( Spherical );
 
     sphericalMap.centerOn( lon, lat );
     QFUZZYCOMPARE( sphericalMap.centerLatitude(), lat, 0.0001 );
 
-    MarbleMap equirectangularMap;
+    MarbleMap equirectangularMap( &m_model );
     equirectangularMap.setProjection( Equirectangular );
 
     equirectangularMap.centerOn( lon, lat );
@@ -242,7 +246,7 @@ void MarbleMapTest::centerOnMercatorMinLat_data()
 
 void MarbleMapTest::centerOnMercatorMinLat()
 {
-    MarbleMap map;
+    MarbleMap map( &m_model );
 
     map.setProjection( Mercator );
 
@@ -275,7 +279,7 @@ void MarbleMapTest::centerOnMercatorMaxLat_data()
 
 void MarbleMapTest::centerOnMercatorMaxLat()
 {
-    MarbleMap map;
+    MarbleMap map( &m_model );
 
     map.setProjection( Mercator );
 
