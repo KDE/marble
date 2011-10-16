@@ -60,6 +60,7 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, cons
         m_lastMarkerRegion( QRegion() )
 
 {
+    setVisible( false );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
         setPosition( QPointF( 220.0, 10.5 ) );
