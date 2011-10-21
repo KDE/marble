@@ -200,7 +200,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     \see GeoDataCoordinates
 */
     QRegion regionFromPoint ( const GeoDataCoordinates & position,
-                              qreal strokeWidth = 3);
+                              qreal strokeWidth = 3) const;
 
     
 /*!
@@ -225,7 +225,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     bigger than the width of the painter's pen.
 */
     QRegion regionFromPoint ( const GeoDataPoint & point,
-                              qreal strokeWidth = 3);
+                              qreal strokeWidth = 3) const;
     
     
 /*!
@@ -280,7 +280,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 */
     QRegion regionFromEllipse ( const GeoDataCoordinates & centerPosition,
                                 qreal width, qreal height, bool isGeoProjected = false,
-                                qreal strokeWidth = 3 );
+                                qreal strokeWidth = 3 ) const;
 
 
 /*!
@@ -341,7 +341,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     QRegion regionFromLine ( const GeoDataCoordinates & startPosition,
                              const GeoDataCoordinates & endPosition,
                              bool isGeoProjected = false,
-                             qreal strokeWidth = 3 );
+                             qreal strokeWidth = 3 ) const;
 
 
 /*!
@@ -375,7 +375,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     \see GeoDataLineString
 */
     QRegion regionFromPolyline ( const GeoDataLineString & lineString,
-                                 qreal strokeWidth = 3 );
+                                 qreal strokeWidth = 3 ) const;
 
 
 /*!
@@ -413,7 +413,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     \see GeoDataLinearRing
 */
     QRegion regionFromPolygon ( const GeoDataLinearRing & linearRing,
-                                Qt::FillRule fillRule, qreal strokeWidth = 3 );
+                                Qt::FillRule fillRule, qreal strokeWidth = 3 ) const;
 
 
 /*!
@@ -472,7 +472,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     QRegion regionFromRect ( const GeoDataCoordinates & centerPosition,
                              qreal width, qreal height,
                              bool isGeoProjected = false,
-                             qreal strokeWidth = 3 );
+                             qreal strokeWidth = 3 ) const;
 
    
 /*!

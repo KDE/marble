@@ -259,7 +259,7 @@ void GeoPainter::drawPoint (  const GeoDataCoordinates & position )
 
 
 QRegion GeoPainter::regionFromPoint ( const GeoDataCoordinates & position,
-                                      qreal width )
+                                      qreal width ) const
 {
     return regionFromRect( position, width, width, false, 3 );
 }
@@ -272,7 +272,7 @@ void GeoPainter::drawPoint( const GeoDataPoint & point )
 
 
 QRegion GeoPainter::regionFromPoint ( const GeoDataPoint & point,
-                                      qreal width )
+                                      qreal width ) const
 {
     return regionFromRect( GeoDataCoordinates( point ), width, width, false, 3 );
 }
@@ -404,7 +404,7 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPosition,
 QRegion GeoPainter::regionFromEllipse ( const GeoDataCoordinates & centerPosition,
                                         qreal width, qreal height,
                                         bool isGeoProjected,
-                                        qreal strokeWidth )
+                                        qreal strokeWidth ) const
 {
     int pointRepeatNum;
     qreal y;
@@ -543,7 +543,7 @@ void GeoPainter::drawLine (  const GeoDataCoordinates & startPoint,
 QRegion GeoPainter::regionFromLine (const GeoDataCoordinates & startPoint,
                                     const GeoDataCoordinates & endPoint,
                                     bool isGeoProjected,
-                                    qreal strokeWidth )
+                                    qreal strokeWidth ) const
 {
     GeoDataLineString line;
     line.setTessellate( isGeoProjected );
@@ -607,7 +607,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
 
 
 QRegion GeoPainter::regionFromPolyline ( const GeoDataLineString & lineString,
-                                         qreal strokeWidth )
+                                         qreal strokeWidth ) const
 {
     // Immediately leave this method now if:
     // - the object is not visible in the viewport or if
@@ -695,7 +695,7 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing,
 
 
 QRegion GeoPainter::regionFromPolygon ( const GeoDataLinearRing & linearRing,
-                                        Qt::FillRule fillRule, qreal strokeWidth )
+                                        Qt::FillRule fillRule, qreal strokeWidth ) const
 {
     // Immediately leave this method now if:
     // - the object is not visible in the viewport or if
@@ -811,7 +811,7 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates,
 QRegion GeoPainter::regionFromRect ( const GeoDataCoordinates & centerCoordinates,
                                      qreal width, qreal height,
                                      bool isGeoProjected,
-                                     qreal strokeWidth )
+                                     qreal strokeWidth ) const
 {
     int pointRepeatNum;
     qreal y;
