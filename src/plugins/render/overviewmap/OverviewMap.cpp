@@ -299,7 +299,9 @@ void OverviewMap::setSettings( QHash<QString,QVariant> settings )
     }
     foreach( const QString& planet, planets ) {
         if ( !settings.contains( "path_" + planet ) ) {
-            settings.insert( "path_" + planet, worldmap );
+            QString const planetMap = MarbleDirs::path( QString( "svg/%1map.svg" ).arg( planet ) );
+            QString const mapFile = planetMap.isEmpty() ? worldmap : planetMap;
+            settings.insert( "path_" + planet, mapFile );
         }
     }
 
