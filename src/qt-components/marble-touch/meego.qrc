@@ -1,5 +1,24 @@
 <RCC>
-    <qresource>
+    <qresource prefix="/">
         <file>main.qml</file>
+        <file>ActivitySelectionView.qml</file>
+        <file>ConfigurationActivityPage.qml</file>
+        <file>GeocachingActivityPage.qml</file>
+        <file>GuidanceActivityPage.qml</file>
+        <file>SearchActivityPage.qml</file>
+        <file>VirtualGlobeActivityPage.qml</file>
+        <file>WeatherActivityPage.qml</file>
+        <file>icons/activity-bookmarks.png</file>
+        <file>icons/activity-configure.png</file>
+        <file>icons/activity-default.png</file>
+        <file>icons/activity-download.png</file>
+        <file>icons/activity-friends.png</file>
+        <file>icons/activity-search.png</file>
+        <file>icons/activity-virtualglobe.png</file>
+        <file>icons/activity-weather.png</file>
+        <file>MapThemeSelectionPage.qml</file>
+        <file>NavigationSettingsPage.qml</file>
+        <file>ViewSettingsPage.qml</file>
+        <file>ConnectionSettingsPage.qml</file>
     </qresource>
 </RCC>
