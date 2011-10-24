@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "GoToDialog.h"
@@ -74,13 +75,13 @@ public:
 
     GeoDataLookAt m_lookAt;
 
-    TargetModel* m_targetModel;
+    TargetModel m_targetModel;
 
     MarbleRunnerManager* m_runnerManager;
 
-    GeoDataDocument *m_document;
+    GeoDataDocument *m_searchResult;
 
-    GeoDataTreeModel m_placemarkModel;
+    GeoDataTreeModel m_searchResultModel;
 
     QTimer m_progressTimer;
 
@@ -291,16 +292,16 @@ void GoToDialogPrivate::createProgressAnimation()
 }
 
 GoToDialogPrivate::GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWidget ) :
-    m_parent( parent), m_marbleWidget( marbleWidget ), m_targetModel( 0 ),
-    m_runnerManager( 0 ), m_document( new GeoDataDocument ), m_currentFrame( 0 )
+    m_parent( parent), m_marbleWidget( marbleWidget ), m_targetModel( marbleWidget ),
+    m_runnerManager( 0 ), m_searchResult( new GeoDataDocument ), m_currentFrame( 0 )
 {
     m_progressTimer.setInterval( 100 );
 }
 
 void GoToDialogPrivate::saveSelection( const QModelIndex &index )
 {
-    if ( m_parent->searchButton->isChecked() && m_document->size() ) {
-        QVariant coordinates = m_placemarkModel.data( index, MarblePlacemarkModel::CoordinateRole );
+    if ( m_parent->searchButton->isChecked() && m_searchResult->size() ) {
+        QVariant coordinates = m_searchResultModel.data( index, MarblePlacemarkModel::CoordinateRole );
         m_lookAt = GeoDataLookAt();
         m_lookAt.setCoordinates( qVariantValue<GeoDataCoordinates>( coordinates ) );
         // By happy coincidence this equals OpenStreetMap tile level 16
@@ -340,14 +341,14 @@ void GoToDialog::startSearch()
 
 void GoToDialog::updateSearchResult( QVector<GeoDataPlacemark*> placemarks )
 {
-    d->m_placemarkModel.setRootDocument( 0 );
-    d->m_document->clear();
+    d->m_searchResultModel.setRootDocument( 0 );
+    d->m_searchResult->clear();
     foreach (GeoDataPlacemark *placemark, placemarks) {
-        d->m_document->append( new GeoDataPlacemark( *placemark ) );
+        d->m_searchResult->append( new GeoDataPlacemark( *placemark ) );
     }
-    d->m_placemarkModel.setRootDocument( d->m_document );
-    bookmarkListView->setModel( &d->m_placemarkModel );
-    updateResultMessage( d->m_placemarkModel.rowCount() );
+    d->m_searchResultModel.setRootDocument( d->m_searchResult );
+    bookmarkListView->setModel( &d->m_searchResultModel );
+    updateResultMessage( d->m_searchResultModel.rowCount() );
 }
 
 GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::WindowFlags flags ) :
@@ -363,9 +364,8 @@ GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::Window
     searchLineEdit->setPlaceholderText( tr( "Address or search term" ) );
 #endif
 
-    d->m_targetModel = new TargetModel( marbleWidget, this );
-    d->m_placemarkModel.setRootDocument( d->m_document );
-    bookmarkListView->setModel( d->m_targetModel );
+    d->m_searchResultModel.setRootDocument( d->m_searchResult );
+    bookmarkListView->setModel( &d->m_targetModel );
     connect( bookmarkListView, SIGNAL( activated( QModelIndex ) ),
              this, SLOT( saveSelection ( QModelIndex ) ) );
     connect( searchLineEdit, SIGNAL( returnPressed() ),
@@ -395,7 +395,7 @@ GeoDataLookAt GoToDialog::lookAt() const
 
 void GoToDialog::setShowRoutingItems( bool show )
 {
-    d->m_targetModel->setShowRoutingItems( show );
+    d->m_targetModel.setShowRoutingItems( show );
 }
 
 void GoToDialog::setSearchEnabled( bool enabled )
@@ -415,9 +415,9 @@ void GoToDialog::updateSearchMode()
     descriptionLabel->setVisible( searchEnabled );
     progressButton->setVisible( searchEnabled && d->m_progressTimer.isActive() );
     if ( searchEnabled ) {
-        bookmarkListView->setModel( &d->m_placemarkModel );
+        bookmarkListView->setModel( &d->m_searchResultModel );
     } else {
-        bookmarkListView->setModel( d->m_targetModel );
+        bookmarkListView->setModel( &d->m_targetModel );
     }
 }
 
