@@ -15,9 +15,6 @@
 #include "GeoDataLookAt.h"
 
 #include <QtGui/QDialog>
-#include <QtGui/QRadioButton>
-
-#include "ui_GoToDialog.h"
 
 class QModelIndex;
 
@@ -33,7 +30,7 @@ class MarbleWidget;
   * route start, destination and via points and bookmarks. Clicking on a target
   * centers the map on the selected position
   */
-class MARBLE_EXPORT GoToDialog: public QDialog, private Ui::GoTo
+class MARBLE_EXPORT GoToDialog: public QDialog
 {
     Q_OBJECT
 
@@ -56,20 +53,17 @@ public:
 
     Q_PRIVATE_SLOT( d, void saveSelection( const QModelIndex &index ) )
 
-private Q_SLOTS:
-    void startSearch();
+    Q_PRIVATE_SLOT( d, void startSearch() )
 
-    void updateSearchResult( QVector<GeoDataPlacemark*> placemarks );
+    Q_PRIVATE_SLOT( d, void updateSearchResult( QVector<GeoDataPlacemark*> placemarks ) )
 
-    void updateSearchMode();
+    Q_PRIVATE_SLOT( d, void updateSearchMode() )
 
-    void updateProgress();
+    Q_PRIVATE_SLOT( d, void updateProgress() )
 
-    void stopProgressAnimation();
+    Q_PRIVATE_SLOT( d, void stopProgressAnimation() )
 
 private:
-    void updateResultMessage( int results );
-
     GoToDialogPrivate * const d;
     friend class GoToDialogPrivate;
 };

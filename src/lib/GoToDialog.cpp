@@ -10,6 +10,8 @@
 //
 
 #include "GoToDialog.h"
+#include "ui_GoToDialog.h"
+
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "MarbleRunnerManager.h"
@@ -66,7 +68,7 @@ private:
     bool m_showRoutingItems;
 };
 
-class GoToDialogPrivate
+class GoToDialogPrivate : public Ui::GoTo
 {
 public:
     GoToDialog* m_parent;
@@ -94,6 +96,18 @@ public:
     void saveSelection( const QModelIndex &index );
 
     void createProgressAnimation();
+
+    void startSearch();
+
+    void updateSearchResult( QVector<GeoDataPlacemark*> placemarks );
+
+    void updateSearchMode();
+
+    void updateProgress();
+
+    void stopProgressAnimation();
+
+    void updateResultMessage( int results );
 };
 
 TargetModel::TargetModel( MarbleWidget* marbleWidget, QObject * parent ) :
@@ -295,12 +309,14 @@ GoToDialogPrivate::GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWi
     m_parent( parent), m_marbleWidget( marbleWidget ), m_targetModel( marbleWidget ),
     m_runnerManager( 0 ), m_searchResult( new GeoDataDocument ), m_currentFrame( 0 )
 {
+    setupUi( parent );
+
     m_progressTimer.setInterval( 100 );
 }
 
 void GoToDialogPrivate::saveSelection( const QModelIndex &index )
 {
-    if ( m_parent->searchButton->isChecked() && m_searchResult->size() ) {
+    if ( searchButton->isChecked() && m_searchResult->size() ) {
         QVariant coordinates = m_searchResultModel.data( index, MarblePlacemarkModel::CoordinateRole );
         m_lookAt = GeoDataLookAt();
         m_lookAt.setCoordinates( qVariantValue<GeoDataCoordinates>( coordinates ) );
@@ -313,42 +329,42 @@ void GoToDialogPrivate::saveSelection( const QModelIndex &index )
     m_parent->accept();
 }
 
-void GoToDialog::startSearch()
+void GoToDialogPrivate::startSearch()
 {
     QString const searchTerm = searchLineEdit->text().trimmed();
     if ( searchTerm.isEmpty() ) {
         return;
     }
 
-    if ( !d->m_runnerManager ) {
-        d->m_runnerManager = new MarbleRunnerManager( d->m_marbleWidget->model()->pluginManager(), this );
-        d->m_runnerManager->setModel( d->m_marbleWidget->model() );
-        connect( d->m_runnerManager, SIGNAL( searchResultChanged( QVector<GeoDataPlacemark*> ) ),
-                 this, SLOT( updateSearchResult( QVector<GeoDataPlacemark*> ) ) );
-        connect( d->m_runnerManager, SIGNAL( searchFinished( QString ) ),
-                this, SLOT( stopProgressAnimation() ) );
+    if ( !m_runnerManager ) {
+        m_runnerManager = new MarbleRunnerManager( m_marbleWidget->model()->pluginManager(), m_parent );
+        m_runnerManager->setModel( m_marbleWidget->model() );
+        QObject::connect( m_runnerManager, SIGNAL( searchResultChanged( QVector<GeoDataPlacemark*> ) ),
+                          m_parent, SLOT( updateSearchResult( QVector<GeoDataPlacemark*> ) ) );
+        QObject::connect( m_runnerManager, SIGNAL( searchFinished( QString ) ),
+                          m_parent, SLOT( stopProgressAnimation() ) );
     }
 
-    d->m_runnerManager->findPlacemarks( searchTerm );
-    if ( d->m_progressAnimation.isEmpty() ) {
-        d->createProgressAnimation();
+    m_runnerManager->findPlacemarks( searchTerm );
+    if ( m_progressAnimation.isEmpty() ) {
+        createProgressAnimation();
     }
-    d->m_progressTimer.start();
+    m_progressTimer.start();
     progressButton->setVisible( true );
     searchLineEdit->setEnabled( false );
     updateResultMessage( 0 );
 }
 
-void GoToDialog::updateSearchResult( QVector<GeoDataPlacemark*> placemarks )
+void GoToDialogPrivate::updateSearchResult( QVector<GeoDataPlacemark*> placemarks )
 {
-    d->m_searchResultModel.setRootDocument( 0 );
-    d->m_searchResult->clear();
+    m_searchResultModel.setRootDocument( 0 );
+    m_searchResult->clear();
     foreach (GeoDataPlacemark *placemark, placemarks) {
-        d->m_searchResult->append( new GeoDataPlacemark( *placemark ) );
+        m_searchResult->append( new GeoDataPlacemark( *placemark ) );
     }
-    d->m_searchResultModel.setRootDocument( d->m_searchResult );
-    bookmarkListView->setModel( &d->m_searchResultModel );
-    updateResultMessage( d->m_searchResultModel.rowCount() );
+    m_searchResultModel.setRootDocument( m_searchResult );
+    bookmarkListView->setModel( &m_searchResultModel );
+    updateResultMessage( m_searchResultModel.rowCount() );
 }
 
 GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::WindowFlags flags ) :
@@ -358,29 +374,28 @@ GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::Window
         setAttribute( Qt::WA_Maemo5StackedWindow );
         setWindowFlags( Qt::Window );
 #endif // Q_WS_MAEMO_5
-    setupUi( this );
 
 #if QT_VERSION >= 0x40700
-    searchLineEdit->setPlaceholderText( tr( "Address or search term" ) );
+    d->searchLineEdit->setPlaceholderText( tr( "Address or search term" ) );
 #endif
 
     d->m_searchResultModel.setRootDocument( d->m_searchResult );
-    bookmarkListView->setModel( &d->m_targetModel );
-    connect( bookmarkListView, SIGNAL( activated( QModelIndex ) ),
+    d->bookmarkListView->setModel( &d->m_targetModel );
+    connect( d->bookmarkListView, SIGNAL( activated( QModelIndex ) ),
              this, SLOT( saveSelection ( QModelIndex ) ) );
-    connect( searchLineEdit, SIGNAL( returnPressed() ),
+    connect( d->searchLineEdit, SIGNAL( returnPressed() ),
              this, SLOT( startSearch() ) );
-    buttonBox->button( QDialogButtonBox::Close )->setAutoDefault( false );
-    connect( searchButton, SIGNAL( clicked( bool ) ),
+    d->buttonBox->button( QDialogButtonBox::Close )->setAutoDefault( false );
+    connect( d->searchButton, SIGNAL( clicked( bool ) ),
              this, SLOT( updateSearchMode() ) );
-    connect( browseButton, SIGNAL( clicked( bool ) ),
+    connect( d->browseButton, SIGNAL( clicked( bool ) ),
              this, SLOT( updateSearchMode() ) );
     connect( &d->m_progressTimer, SIGNAL( timeout() ),
              this, SLOT( updateProgress() ) );
-    connect( progressButton, SIGNAL( clicked( bool ) ),
+    connect( d->progressButton, SIGNAL( clicked( bool ) ),
              this, SLOT( stopProgressAnimation() ) );
-    updateSearchMode();
-    progressButton->setVisible( false );
+    d->updateSearchMode();
+    d->progressButton->setVisible( false );
 }
 
 GoToDialog::~GoToDialog()
@@ -400,47 +415,47 @@ void GoToDialog::setShowRoutingItems( bool show )
 
 void GoToDialog::setSearchEnabled( bool enabled )
 {
-    browseButton->setVisible( enabled );
-    searchButton->setVisible( enabled );
+    d->browseButton->setVisible( enabled );
+    d->searchButton->setVisible( enabled );
     if ( !enabled ) {
-        searchButton->setChecked( false );
-        updateSearchMode();
+        d->searchButton->setChecked( false );
+        d->updateSearchMode();
     }
 }
 
-void GoToDialog::updateSearchMode()
+void GoToDialogPrivate::updateSearchMode()
 {
     bool const searchEnabled = searchButton->isChecked();
     searchLineEdit->setVisible( searchEnabled );
     descriptionLabel->setVisible( searchEnabled );
-    progressButton->setVisible( searchEnabled && d->m_progressTimer.isActive() );
+    progressButton->setVisible( searchEnabled && m_progressTimer.isActive() );
     if ( searchEnabled ) {
-        bookmarkListView->setModel( &d->m_searchResultModel );
+        bookmarkListView->setModel( &m_searchResultModel );
     } else {
-        bookmarkListView->setModel( &d->m_targetModel );
+        bookmarkListView->setModel( &m_targetModel );
     }
 }
 
-void GoToDialog::updateProgress()
+void GoToDialogPrivate::updateProgress()
 {
-    if ( !d->m_progressAnimation.isEmpty() ) {
-        d->m_currentFrame = ( d->m_currentFrame + 1 ) % d->m_progressAnimation.size();
-        QIcon frame = d->m_progressAnimation[d->m_currentFrame];
+    if ( !m_progressAnimation.isEmpty() ) {
+        m_currentFrame = ( m_currentFrame + 1 ) % m_progressAnimation.size();
+        QIcon frame = m_progressAnimation[m_currentFrame];
         progressButton->setIcon( frame );
     }
 }
 
-void GoToDialog::stopProgressAnimation()
+void GoToDialogPrivate::stopProgressAnimation()
 {
     searchLineEdit->setEnabled( true );
-    d->m_progressTimer.stop();
+    m_progressTimer.stop();
     updateResultMessage( bookmarkListView->model()->rowCount() );
     progressButton->setVisible( false );
 }
 
-void GoToDialog::updateResultMessage( int results )
+void GoToDialogPrivate::updateResultMessage( int results )
 {
-    descriptionLabel->setText( tr( "%n results found.", "Number of search results", results ) );
+    descriptionLabel->setText( QObject::tr( "%n results found.", "Number of search results", results ) );
 }
 
 }
