@@ -148,7 +148,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @p dirtyRegion which is the region the view will change in. If dirtyRegion.isEmpty() returns
      * true, the whole viewport has to be repainted.
      */
-    void repaintNeeded( QRegion dirtyRegion );
+    void repaintNeeded( QRegion dirtyRegion = QRegion() );
 
  protected:
     bool eventFilter( QObject *, QEvent * );

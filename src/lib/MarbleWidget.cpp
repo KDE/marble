@@ -17,7 +17,6 @@
 #include <QtCore/QHash>
 #include <QtCore/QSettings>
 #include <QtCore/QTime>
-#include <QtCore/QTimer>
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QPaintEvent>
 #include <QtGui/QRegion>
@@ -55,9 +54,6 @@
 
 namespace Marble
 {
-
-const int REPAINT_SCHEDULING_INTERVAL = 1000;
-
 
 class MarbleWidget::CustomPaintLayer : public LayerInterface
 {
@@ -100,7 +96,6 @@ class MarbleWidgetPrivate
           m_zoomStep( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 60 : 40 ),
           m_inputhandler( 0 ),
           m_physics( parent ),
-          m_repaintTimer(),
           m_routingLayer( 0 ),
           m_customPaintLayer( parent ),
           m_popupmenu( 0 ),
@@ -149,9 +144,6 @@ class MarbleWidgetPrivate
     MarbleWidgetInputHandler  *m_inputhandler;
 
     MarblePhysics    m_physics;
-
-    // For scheduling repaints
-    QTimer           m_repaintTimer;
 
     RoutingLayer     *m_routingLayer;
     MarbleWidget::CustomPaintLayer m_customPaintLayer;
@@ -232,7 +224,7 @@ void MarbleWidgetPrivate::construct()
 
     // react to some signals of m_map
     m_widget->connect( &m_map,   SIGNAL( repaintNeeded( QRegion ) ),
-                       m_widget, SLOT( scheduleRepaint( QRegion ) ) );
+                       m_widget, SLOT( update() ) );
 
     m_widget->connect( m_model.fileManager(), SIGNAL( centeredDocument(GeoDataLatLonBox) ),
                        m_widget, SLOT( centerOn(GeoDataLatLonBox) ) );
@@ -243,12 +235,6 @@ void MarbleWidgetPrivate::construct()
                                                              const QString& ) ),
                        m_widget, SLOT( creatingTilesStart( TileCreator*, const QString&,
                                                            const QString& ) ) );
-
-    // Repaint timer
-    m_repaintTimer.setSingleShot( true );
-    m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
-    m_widget->connect( &m_repaintTimer, SIGNAL( timeout() ),
-                       m_widget, SLOT( update() ) );
 
     m_popupmenu = new MarbleWidgetPopupMenu( m_widget, &m_model );
 
@@ -787,8 +773,6 @@ QRegion MarbleWidget::mapRegion()
 
 void MarbleWidget::paintEvent( QPaintEvent *evt )
 {
-    // Stop repaint timer if it is already running
-    d->m_repaintTimer.stop();
     QTime t;
     t.start();
 
@@ -1097,14 +1081,6 @@ void MarbleWidget::creatingTilesStart( TileCreator *creator,
     TileCreatorDialog dlg( creator, this );
     dlg.setSummary( name, description );
     dlg.exec();
-}
-
-void MarbleWidget::scheduleRepaint( const QRegion& dirtyRegion )
-{
-    Q_UNUSED( dirtyRegion );
-    if ( !d->m_repaintTimer.isActive() ) {
-        d->m_repaintTimer.start();
-    }
 }
 
 MapQuality MarbleWidget::mapQuality( ViewContext viewContext )

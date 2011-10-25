@@ -930,16 +930,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     //@}
 
-    /// @name Display update slots
-    //@{
-
-    /**
-     * Schedule repaint
-     */
-    void scheduleRepaint( const QRegion& dirtyRegion );
-
-    //@}
-
     /// @name Miscellaneous slots
     //@{
 

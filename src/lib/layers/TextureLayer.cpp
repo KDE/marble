@@ -35,6 +35,8 @@
 namespace Marble
 {
 
+const int REPAINT_SCHEDULING_INTERVAL = 1000;
+
 class TextureLayer::Private
 {
 public:
@@ -54,6 +56,9 @@ public:
     QPointer<TextureColorizer> m_texcolorizer;
     QVector<const GeoSceneTexture *> m_textures;
     GeoSceneGroup *m_textureLayerSettings;
+
+    // For scheduling repaints
+    QTimer           m_repaintTimer;
 };
 
 TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator, TextureLayer *parent )
@@ -65,6 +70,7 @@ TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadMa
     , m_texmapper( 0 )
     , m_texcolorizer( 0 )
     , m_textureLayerSettings( 0 )
+    , m_repaintTimer()
 {
 }
 
@@ -74,7 +80,9 @@ void TextureLayer::Private::mapChanged()
         m_texmapper->setRepaintNeeded();
     }
 
-    emit m_parent->repaintNeeded();
+    if ( !m_repaintTimer.isActive() ) {
+        m_repaintTimer.start();
+    }
 }
 
 void TextureLayer::Private::updateTextureLayers()
@@ -114,6 +122,12 @@ TextureLayer::TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManage
 {
     connect( &d->m_loader, SIGNAL( tileCompleted( const TileId &, const QImage & ) ),
              this, SLOT( updateTile( const TileId &, const QImage & ) ) );
+
+    // Repaint timer
+    d->m_repaintTimer.setSingleShot( true );
+    d->m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
+    connect( &d->m_repaintTimer, SIGNAL( timeout() ),
+             this, SIGNAL( repaintNeeded() ) );
 }
 
 TextureLayer::~TextureLayer()
@@ -141,6 +155,9 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
 {
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
+
+    // Stop repaint timer if it is already running
+    d->m_repaintTimer.stop();
 
     if ( d->m_textures.isEmpty() )
         return false;

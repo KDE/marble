@@ -30,8 +30,13 @@ namespace Marble
 ProgressFloatItem::ProgressFloatItem ( const QPointF &point, const QSizeF &size )
     : AbstractFloatItem( point, size ),
       m_isInitialized( false ),
-      m_totalJobs( 0 ), m_completedJobs ( 0 ),
-      m_active( false ), m_fontSize( 0 )
+      m_totalJobs( 0 ),
+      m_completedJobs ( 0 ),
+      m_progressResetTimer(),
+      m_progressShowTimer(),
+      m_active( false ),
+      m_fontSize( 0 ),
+      m_repaintTimer()
 {
     // This timer is responsible to activate the automatic display with a small delay
     m_progressShowTimer.setInterval( 250 );
@@ -42,6 +47,11 @@ ProgressFloatItem::ProgressFloatItem ( const QPointF &point, const QSizeF &size 
     m_progressResetTimer.setInterval( 750 );
     m_progressResetTimer.setSingleShot( true );
     connect( &m_progressResetTimer, SIGNAL( timeout() ), this, SLOT( resetProgress() ) );
+
+    // Repaint timer
+    m_repaintTimer.setSingleShot( true );
+    m_repaintTimer.setInterval( 1000 );
+    connect( &m_repaintTimer, SIGNAL( timeout() ), this, SIGNAL( repaintNeeded() ) );
 
     // The icon resembles the pie chart
     QImage canvas( 16, 16, QImage::Format_ARGB32 );
@@ -134,6 +144,9 @@ void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
     Q_UNUSED( layer )
     Q_UNUSED( renderPos )
 
+    // Stop repaint timer if it is already running
+    m_repaintTimer.stop();
+
     if ( !active() ) {
         return;
     }
@@ -211,7 +224,7 @@ void ProgressFloatItem::addProgressItem()
             m_progressResetTimer.stop();
         } else if ( active() ) {
             update();
-            emit repaintNeeded(QRegion());
+            scheduleRepaint();
         }
     }
 }
@@ -228,7 +241,7 @@ void ProgressFloatItem::removeProgressItem()
             m_progressResetTimer.stop();
         } else if ( active() ) {
             update();
-            emit repaintNeeded( QRegion() );
+            scheduleRepaint();
         }
     }
 }
@@ -265,6 +278,13 @@ void ProgressFloatItem::show()
 
     update();
     emit repaintNeeded( QRegion() );
+}
+
+void ProgressFloatItem::scheduleRepaint()
+{
+    if ( !m_repaintTimer.isActive() ) {
+        m_repaintTimer.start();
+    }
 }
 
 }

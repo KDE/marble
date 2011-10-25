@@ -69,6 +69,8 @@ private Q_SLOTS:
 
     void show();
 
+    void scheduleRepaint();
+
  private:
     Q_DISABLE_COPY( ProgressFloatItem )
 
@@ -93,6 +95,8 @@ private Q_SLOTS:
     QIcon m_icon;
 
     int m_fontSize;
+
+    QTimer m_repaintTimer;
 };
 
 }
