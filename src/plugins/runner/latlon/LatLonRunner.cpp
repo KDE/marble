@@ -40,17 +40,17 @@ LatLonRunner::~LatLonRunner()
 
 void LatLonRunner::search( const QString &searchTerm )
 {
-    bool successful = false;
-    GeoDataCoordinates coord = GeoDataCoordinates::fromString( searchTerm, successful );
-
-    GeoDataPlacemark *placemark = new GeoDataPlacemark;
-    placemark->setName( searchTerm );
-    qreal lon, lat;
-    coord.geoCoordinates( lon, lat );
-    placemark->setCoordinate( lon, lat );
     QVector<GeoDataPlacemark*> vector;
 
+    bool successful = false;
+    const GeoDataCoordinates coord = GeoDataCoordinates::fromString( searchTerm, successful );
+
     if( successful ) {
+        GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        placemark->setName( searchTerm );
+        qreal lon, lat;
+        coord.geoCoordinates( lon, lat );
+        placemark->setCoordinate( lon, lat );
         placemark->setVisualCategory( category() );
         placemark->setPopularity( 1000000000 );
         placemark->setPopularityIndex( 18 );
