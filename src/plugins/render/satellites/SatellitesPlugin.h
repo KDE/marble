@@ -29,6 +29,7 @@ namespace Marble
 {
 
 class PluginAboutDialog;
+class SatellitesConfigModel;
 
 /**
  * @brief This plugin displays satellites and their orbits.
@@ -69,6 +70,8 @@ private Q_SLOTS:
     void updateSettings();
 
 private:
+    void setupConfigModel();
+
     SatellitesModel *m_model;
 
     bool m_isInitialized;
@@ -77,9 +80,8 @@ private:
 
     PluginAboutDialog *m_aboutDialog;
     QDialog *m_configDialog;
+    SatellitesConfigModel *m_configModel;
     Ui::SatellitesConfigDialog *ui_configWidget;
-
-    void populateBoxHash();
 };
 
 }

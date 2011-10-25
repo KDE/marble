@@ -15,67 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QTabWidget" name="tabWidget">
-     <property name="currentIndex">
-      <number>0</number>
-     </property>
-     <widget class="QWidget" name="specialTab">
-      <attribute name="title">
-       <string>Special-Interest</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QCheckBox" name="tle_newBox">
-         <property name="text">
-          <string>Last 30 Days' Launches</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="stationsBox">
-         <property name="text">
-          <string>International Space Station</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="visualBox">
-         <property name="text">
-          <string>100 (or so) Brightest</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="ressourcesTab">
-      <attribute name="title">
-       <string>Ressources</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
-        <widget class="QCheckBox" name="weatherBox">
-         <property name="text">
-          <string>Weather</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="noaaBox">
-         <property name="text">
-          <string>NOAA</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="goesBox">
-         <property name="text">
-          <string>GOES</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
+    <widget class="QTreeView" name="treeView"/>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -90,7 +30,6 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>tabWidget</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>
