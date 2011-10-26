@@ -86,10 +86,6 @@ public:
     QByteArray levelZero;
     QImage previewImage;
 
-    QString protocol;
-    QString host;
-    QString path;
-    QString query;
     QString format;
 
     QString wmsProjection;
@@ -981,24 +977,11 @@ void MapWizard::accept()
     else if ( d->mapProviderType == MapWizardPrivate::WmsMap )
     {
         Q_ASSERT( !d->wmsFetchedMaps.isEmpty() );
-
-        QUrl wmsUrl( d->uiWidget.lineEditWmsUrl->text() );
-        d->protocol = wmsUrl.toString().left( wmsUrl.toString().indexOf( ':' ) );
-        d->host =  QString( wmsUrl.encodedHost() );
-        d->path =  QString( wmsUrl.encodedPath() );
-        d->query = QString( "layers=%1&%2" ).arg( d->wmsFetchedMaps.key( d->uiWidget.listWidgetWmsMaps->currentItem()->text() ) )
-                      .arg( QString( wmsUrl.encodedQuery() ) );
-
         Q_ASSERT( !d->levelZero.isNull() );
         Q_ASSERT( !QImage::fromData( d->levelZero ).isNull() );
     }
-    else if ( d->mapProviderType == MapWizardPrivate::StaticImageMap )
+    else if ( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
     {
-        QUrl staticImageUrl( d->uiWidget.comboBoxStaticUrlServer->currentText() );
-        d->protocol = staticImageUrl.toString().left( staticImageUrl.toString().indexOf( ':' ) );
-        d->host =  QString( staticImageUrl.encodedHost() );
-        d->path =  QUrl::fromPercentEncoding( staticImageUrl.encodedPath() );
-
         Q_ASSERT( !d->levelZero.isNull() );
         Q_ASSERT( !QImage::fromData( d->levelZero ).isNull() );
     }
