@@ -49,7 +49,7 @@ void MarbleAbstractRunner::reverseGeocoding( const GeoDataCoordinates &coordinat
     emit reverseGeocodingFinished( coordinates, GeoDataPlacemark() );
 }
 
-void MarbleAbstractRunner::retrieveRoute( RouteRequest* )
+void MarbleAbstractRunner::retrieveRoute( const RouteRequest* )
 {
     // dummy implementation
     emit routeCalculated( 0 );

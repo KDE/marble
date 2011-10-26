@@ -35,7 +35,7 @@ public:
     GeoDataFeature::GeoDataVisualCategory category() const;
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( RouteRequest *request );
+    virtual void retrieveRoute( const RouteRequest *request );
 
 private Q_SLOTS:
     /** Route data was retrieved via http */

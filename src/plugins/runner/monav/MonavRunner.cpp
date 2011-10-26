@@ -36,11 +36,11 @@ public:
 
     MonavRunnerPrivate( const MonavPlugin* plugin );
 
-    bool retrieveData( RouteRequest *route, RoutingResult* result ) const;
+    bool retrieveData( const RouteRequest *route, RoutingResult* result ) const;
 
-    bool retrieveData( RouteRequest *route, const QString &mapDir, RoutingResult* result ) const;
+    bool retrieveData( const RouteRequest *route, const QString &mapDir, RoutingResult* result ) const;
 
-    GeoDataLineString* retrieveRoute( RouteRequest *route, QVector<GeoDataPlacemark*> *instructions ) const;
+    GeoDataLineString* retrieveRoute( const RouteRequest *route, QVector<GeoDataPlacemark*> *instructions ) const;
 
     GeoDataDocument* createDocument( GeoDataLineString* geometry, const QVector<GeoDataPlacemark*> &instructions  ) const;
 };
@@ -51,7 +51,7 @@ MonavRunnerPrivate::MonavRunnerPrivate( const MonavPlugin* plugin ) :
     // nothing to do
 }
 
-bool MonavRunnerPrivate::retrieveData( RouteRequest *route, RoutingResult* reply ) const
+bool MonavRunnerPrivate::retrieveData( const RouteRequest *route, RoutingResult* reply ) const
 {
     QString mapDir = m_plugin->mapDirectoryForRequest( route );
     if ( mapDir.isEmpty() ) {
@@ -76,7 +76,7 @@ bool MonavRunnerPrivate::retrieveData( RouteRequest *route, RoutingResult* reply
     return false;
 }
 
-bool MonavRunnerPrivate::retrieveData( RouteRequest *route, const QString &mapDir, RoutingResult* reply ) const
+bool MonavRunnerPrivate::retrieveData( const RouteRequest *route, const QString &mapDir, RoutingResult* reply ) const
 {
     QLocalSocket socket;
     socket.connectToServer( "MoNavD" );
@@ -136,7 +136,7 @@ bool MonavRunnerPrivate::retrieveData( RouteRequest *route, const QString &mapDi
     return false;
 }
 
-GeoDataLineString* MonavRunnerPrivate::retrieveRoute( RouteRequest *route, QVector<GeoDataPlacemark*> *instructions ) const
+GeoDataLineString* MonavRunnerPrivate::retrieveRoute( const RouteRequest *route, QVector<GeoDataPlacemark*> *instructions ) const
 {
     GeoDataLineString* geometry = new GeoDataLineString;
     RoutingResult reply;
@@ -239,7 +239,7 @@ GeoDataFeature::GeoDataVisualCategory MonavRunner::category() const
     return GeoDataFeature::OsmSite;
 }
 
-void MonavRunner::retrieveRoute( RouteRequest *route )
+void MonavRunner::retrieveRoute( const RouteRequest *route )
 {
     QVector<GeoDataPlacemark*> instructions;
     GeoDataLineString* waypoints = d->retrieveRoute( route, &instructions );

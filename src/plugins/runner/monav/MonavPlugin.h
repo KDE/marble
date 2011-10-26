@@ -45,9 +45,9 @@ public:
 
     virtual bool canWork( Capability capability ) const;
 
-    QString mapDirectoryForRequest( RouteRequest* request ) const;
+    QString mapDirectoryForRequest( const RouteRequest* request ) const;
 
-    QStringList mapDirectoriesForRequest( RouteRequest* request ) const;
+    QStringList mapDirectoriesForRequest( const RouteRequest* request ) const;
 
     MonavMapsModel* installedMapsModel();
 

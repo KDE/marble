@@ -65,7 +65,7 @@ public:
       * If implemented in a plugin, make sure to include Routing in the
       * plugin capabilities, otherwise MarbleRunnerManager will ignore the plugin
       */
-    virtual void retrieveRoute( RouteRequest *request );
+    virtual void retrieveRoute( const RouteRequest *request );
 
     /**
       * Start a placemark search. Called by MarbleRunnerManager, runners

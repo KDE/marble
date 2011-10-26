@@ -82,12 +82,12 @@ private:
 class RoutingTask : public RunnerTask
 {
 public:
-    RoutingTask( MarbleAbstractRunner* runner, RouteRequest* routeRequest );
+    RoutingTask( MarbleAbstractRunner* runner, const RouteRequest* routeRequest );
 
     virtual void runTask( QEventLoop *localEventLoop );
 
 private:
-  RouteRequest* m_routeRequest;
+    const RouteRequest *const m_routeRequest;
 };
 
 /** A RunnerTask that executes a file Parsing */

@@ -224,7 +224,7 @@ void MarbleRunnerManager::addReverseGeocodingResult( const GeoDataCoordinates &c
     }
 }
 
-void MarbleRunnerManager::retrieveRoute( RouteRequest *request )
+void MarbleRunnerManager::retrieveRoute( const RouteRequest *request )
 {
     RoutingProfile profile = request->routingProfile();
 

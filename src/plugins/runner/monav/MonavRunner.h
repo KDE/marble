@@ -34,7 +34,7 @@ public:
     GeoDataFeature::GeoDataVisualCategory category() const;
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( RouteRequest *request );
+    virtual void retrieveRoute( const RouteRequest *request );
 
     // Overriding MarbleAbstractRunner
     void reverseGeocoding( const GeoDataCoordinates &coordinates );

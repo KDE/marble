@@ -224,7 +224,7 @@ GeoDataFeature::GeoDataVisualCategory RoutinoRunner::category() const
     return GeoDataFeature::OsmSite;
 }
 
-void RoutinoRunner::retrieveRoute( RouteRequest *route )
+void RoutinoRunner::retrieveRoute( const RouteRequest *route )
 {
     mDebug();
 

@@ -252,7 +252,7 @@ MarbleAbstractRunner* MonavPlugin::newRunner() const
     return new MonavRunner( this );
 }
 
-QString MonavPlugin::mapDirectoryForRequest( RouteRequest* request ) const
+QString MonavPlugin::mapDirectoryForRequest( const RouteRequest* request ) const
 {
     d->initialize();
 
@@ -286,7 +286,7 @@ QString MonavPlugin::mapDirectoryForRequest( RouteRequest* request ) const
     return QString();
 }
 
-QStringList MonavPlugin::mapDirectoriesForRequest( RouteRequest* request ) const
+QStringList MonavPlugin::mapDirectoriesForRequest( const RouteRequest* request ) const
 {
     QStringList result;
     d->initialize();

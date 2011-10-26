@@ -77,7 +77,7 @@ void ReverseGeocodingTask::runTask( QEventLoop *localEventLoop )
     runner()->reverseGeocoding( m_coordinates );
 }
 
-RoutingTask::RoutingTask( MarbleAbstractRunner* runner, RouteRequest* routeRequest ) :
+RoutingTask::RoutingTask( MarbleAbstractRunner* runner, const RouteRequest* routeRequest ) :
         RunnerTask( runner ), m_routeRequest( routeRequest )
 {
     // nothing to do

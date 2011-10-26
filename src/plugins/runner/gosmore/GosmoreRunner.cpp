@@ -201,7 +201,7 @@ GeoDataFeature::GeoDataVisualCategory GosmoreRunner::category() const
     return GeoDataFeature::OsmSite;
 }
 
-void GosmoreRunner::retrieveRoute( RouteRequest *route )
+void GosmoreRunner::retrieveRoute( const RouteRequest *route )
 {
     if ( !d->m_gosmoreMapFile.exists() )
     {

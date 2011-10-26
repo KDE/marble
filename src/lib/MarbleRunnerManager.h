@@ -68,7 +68,7 @@ public:
       * Download routes traversing the stopover points in the given route request
       * Each route found is returned through the @see routeRetrieved signal
       */
-    void retrieveRoute( RouteRequest *request );
+    void retrieveRoute( const RouteRequest *request );
 
     /**
       * Parse the file using the runners for various formats
