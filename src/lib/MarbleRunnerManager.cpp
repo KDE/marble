@@ -45,7 +45,6 @@ public:
     QVector<GeoDataPlacemark*> m_placemarkContainer;
     QVector<GeoDataDocument*> m_routingResult;
     QList<GeoDataCoordinates> m_reverseGeocodingResults;
-    RouteRequest* m_routeRequest;
     const PluginManager* m_pluginManager;
 
     MarbleRunnerManagerPrivate( MarbleRunnerManager* parent, const PluginManager* pluginManager );
@@ -66,7 +65,6 @@ MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( MarbleRunnerManager* par
         q( parent ),
         m_marbleModel( 0 ),
         m_model( new MarblePlacemarkModel( parent ) ),
-        m_routeRequest( 0 ),
         m_pluginManager( pluginManager )
 {
     m_model->setPlacemarkContainer( &m_placemarkContainer );
@@ -233,7 +231,6 @@ void MarbleRunnerManager::retrieveRoute( RouteRequest *request )
     d->m_routingTasks.clear();
     d->m_routingResult.clear();
 
-    d->m_routeRequest = request;
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Routing );
     bool started = false;
     foreach( RunnerPlugin* plugin, plugins ) {
