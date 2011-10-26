@@ -114,7 +114,7 @@ QVariant ActivityModel::data( const QModelIndex &index, int role ) const
         return qVariantFromValue( d->m_activityContainer.at( index.row() )->disablePlugins() );
     } else if ( role == RelatedActivitiesRole ) {
         return qVariantFromValue( d->m_activityContainer.at( index.row() )->relatedActivities() );
-    } else if ( role == RelatedActivitiesRole ) {
+    } else if ( role == SettingsRole ) {
         return qVariantFromValue( d->m_activityContainer.at( index.row() )->settings() );
     } else
         return QVariant();
