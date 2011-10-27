@@ -431,6 +431,7 @@ void GoToDialogPrivate::updateSearchMode()
     progressButton->setVisible( searchEnabled && m_progressTimer.isActive() );
     if ( searchEnabled ) {
         bookmarkListView->setModel( &m_searchResultModel );
+        searchLineEdit->setFocus();
     } else {
         bookmarkListView->setModel( &m_targetModel );
     }
