@@ -40,9 +40,9 @@ public:
 
     ~TrackerPluginModelPrivate()
     {
-        m_parent->beginUpdateItems();
+        m_treeModel->removeDocument( m_document );
         delete m_document;
-        qDeleteAll( m_itemHash );
+        qDeleteAll( m_itemVector );
         delete m_downloadManager;
     }
 
@@ -55,7 +55,7 @@ public:
 
     void update()
     {
-        foreach( TrackerPluginItem *item, m_parent->items() ) {
+        foreach( TrackerPluginItem *item, m_itemVector ) {
             item->update();
         }
     }
@@ -63,10 +63,10 @@ public:
     TrackerPluginModel *m_parent;
     GeoDataTreeModel *m_treeModel;
     GeoDataDocument *m_document;
-    QHash<QString, TrackerPluginItem *> m_itemHash;
     CacheStoragePolicy m_storagePolicy;
     HttpDownloadManager *m_downloadManager;
     QTimer *m_timer;
+    QVector<TrackerPluginItem *> m_itemVector;
 };
 
 TrackerPluginModel::TrackerPluginModel( GeoDataTreeModel *treeModel, const PluginManager *pluginManager )
@@ -78,7 +78,7 @@ TrackerPluginModel::TrackerPluginModel( GeoDataTreeModel *treeModel, const Plugi
     connect( d->m_timer, SIGNAL(timeout()), this, SLOT(update()) );
     d->update();
     d->m_timer->start( 1000 );
-        
+
     d->m_downloadManager = new HttpDownloadManager( &d->m_storagePolicy, pluginManager );
     connect( d->m_downloadManager, SIGNAL(downloadComplete(QString,QString)),
              this, SLOT(downloaded(QString,QString)) );
@@ -89,40 +89,18 @@ TrackerPluginModel::~TrackerPluginModel()
     delete d;
 }
 
-TrackerPluginItem *TrackerPluginModel::item( const QString &name )
-{
-    if ( !d->m_itemHash.contains( name ) ) {
-        return 0;
-    }
-    return d->m_itemHash[ name ];
-}
-
-QList<TrackerPluginItem *> TrackerPluginModel::items()
-{
-    return d->m_itemHash.values();
-}
-
 void TrackerPluginModel::addItem( TrackerPluginItem *mark )
 {
-    if ( mark == 0 ) {
-        return;
-    }
-    if ( d->m_itemHash.contains( mark->placemark()->name() ) ) {
-        d->m_document->remove( d->m_document->childPosition( d->m_itemHash[ mark->placemark()->name() ]->placemark() ) );
-    }
-
     d->m_document->append( mark->placemark() );
-    d->m_itemHash[ mark->placemark()->name() ] = mark;
+    d->m_itemVector.append( mark );
 }
 
-bool TrackerPluginModel::removeItem( const QString &name )
+void TrackerPluginModel::clear()
 {
-    if ( !d->m_itemHash.contains( name ) ) {
-        return false;
-    }
-
-    d->m_document->remove( d->m_document->childPosition( d->m_itemHash[ name ]->placemark() ) );
-    return true;
+    d->m_itemVector.clear();
+    beginUpdateItems();
+    d->m_document->clear();
+    endUpdateItems();
 }
 
 void TrackerPluginModel::beginUpdateItems()

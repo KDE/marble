@@ -167,6 +167,8 @@ void SatellitesPlugin::updateSettings()
         return;
     }
 
+    m_model->clear();
+
     QStringList tleList = m_settings["tleList"].toStringList();
     foreach ( const QString &tle, tleList ) {
         mDebug() << tle;

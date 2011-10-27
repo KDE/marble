@@ -43,37 +43,23 @@ public:
     virtual ~TrackerPluginModel();
 
     /**
-     * Returns the item in the model such that item->placemark()->name() == @p name
-     * or 0 if no such item exists.
-     */
-    TrackerPluginItem *item( const QString &name );
-
-    /**
-     * Returns a list of all the items contained in the model.
-     */
-    QList<TrackerPluginItem *> items();
-
-    /**
-     * Add the item @p mark to the model if @p mark != 0, otherwise do nothing
+     * Add the item @p mark to the model.
      *
      * @see beginUpdateItems, endUpdateItems
      */
     void addItem( TrackerPluginItem *mark );
 
     /**
-     * Remove the item such that item->placemark()->name() == @p name
-     *
-     * @returns true if an item was removed, false if no such item exists
-     * @see beginUpdateItems, endUpdateItems
+     * Remove all items from the model.
      */
-    bool removeItem( const QString &name );
+    void clear();
 
     /**
      * Begin a series of add or remove items operations on the model.
      *
      * Always call this method before adding or removing items to the model
      * and call endUpdateItems() once you're done updating the model.
-     * @see endUpdateItems(), addItem(), removeItem()
+     * @see endUpdateItems(), addItem()
      */
     void beginUpdateItems();
 
