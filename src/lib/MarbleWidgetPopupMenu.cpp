@@ -165,7 +165,8 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
         } else {
             QMenu *subMenu = new QMenu( name, m_lmbMenu );
             subMenu->setIcon( icon );
-            m_infoDialogAction->setText( tr( "Satellite informations" ) );
+            m_infoDialogAction->setText( tr( "Satellite information" ) );
+            m_infoDialogAction->setIcon( QIcon() );
             subMenu->addAction( m_infoDialogAction );
 
             m_showOrbitAction->setChecked( (*it)->style()->lineStyle().penStyle() != Qt::NoPen );
