@@ -176,7 +176,7 @@ class MarbleWidgetDefaultInputHandler::Private
     int m_leftPressedY;
     // The mouse pointer y position when the middle mouse button has been pressed.
     int m_midPressedY;
-    int m_radiusWhenPressed;
+    int m_startingRadius;
     // The center longitude in radian when the left mouse button has been pressed.
     qreal m_leftPressedLon;
     // The center latitude in radian when the left mouse button has been pressed.
@@ -529,7 +529,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                  && event->button() == Qt::MidButton ) {
                 d->m_midPressed = true;
                 d->m_leftPressed = false;
-                d->m_radiusWhenPressed = MarbleWidgetInputHandler::d->m_widget->radius();
+                d->m_startingRadius = MarbleWidgetInputHandler::d->m_widget->radius();
                 d->m_midPressedY = event->y();
 
                 d->m_selectionRubber.hide();
@@ -607,7 +607,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( d->m_midPressed ) {
                 int eventy = event->y();
                 int dy = d->m_midPressedY - eventy;
-                MarbleWidgetInputHandler::d->m_widget->setRadius( d->m_radiusWhenPressed * pow( 1.005, dy ) );
+                MarbleWidgetInputHandler::d->m_widget->setRadius( d->m_startingRadius * pow( 1.005, dy ) );
             }
 
             if ( d->m_selectionRubber.isVisible() )
@@ -746,7 +746,10 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
                 MarbleWidget *marbleWidget = MarbleWidgetInputHandler::d->m_widget;
 
-                marbleWidget->setViewContext( Animation );
+                if ( pinch->state() == Qt::GestureStarted ) {
+                    marbleWidget->setViewContext( Animation );
+                    d->m_startingRadius = marbleWidget->radius();
+                }
 
                 bool isValid = marbleWidget->geoCoordinates(center.x(), center.y(),
                              destLon, destLat, GeoDataCoordinates::Radian );
@@ -755,8 +758,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                     marbleWidget->viewport()->setFocusPoint(GeoDataCoordinates(destLon, destLat));
                 }
 
-                //convert the scaleFactor to be 0: the same: < 0: smaller, > 0: bigger and make it bigger by multiplying for an arbitrary big value
-               marbleWidget->zoomViewBy( (scaleFactor-1)*200); 
+               marbleWidget->setRadius( d->m_startingRadius * scaleFactor );
                return true;
             }
         }
