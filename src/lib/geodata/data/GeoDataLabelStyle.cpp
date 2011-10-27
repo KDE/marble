@@ -30,14 +30,16 @@ class GeoDataLabelStylePrivate
     GeoDataLabelStylePrivate() 
         : m_scale( 1.0 ),
           m_alignment( GeoDataLabelStyle::Corner ),
-          m_font( QFont("Sans Serif").family(), defaultSize, 50, false )
+          m_font( QFont("Sans Serif").family(), defaultSize, 50, false ),
+          m_glow( false )
     {
     }
 
     explicit GeoDataLabelStylePrivate( const QFont &font )
         : m_scale( 1.0 ),
           m_alignment( GeoDataLabelStyle::Corner ),
-          m_font( font )
+          m_font( font ),
+          m_glow( false )
     {
     }
 
@@ -52,6 +54,8 @@ class GeoDataLabelStylePrivate
     GeoDataLabelStyle::Alignment m_alignment;
     /// The current font of the label
     QFont  m_font;   // Not a KML property
+    /// Whether or not the text should glow
+    bool m_glow; // Not a KML property
 };
 
 GeoDataLabelStyle::GeoDataLabelStyle()
@@ -118,6 +122,15 @@ QFont GeoDataLabelStyle::font() const
     return d->m_font;
 }
 
+bool GeoDataLabelStyle::glow() const
+{
+    return d->m_glow;
+}
+
+void GeoDataLabelStyle::setGlow(bool on)
+{
+    d->m_glow = on;
+}
 
 void GeoDataLabelStyle::pack( QDataStream& stream ) const
 {

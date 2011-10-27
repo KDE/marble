@@ -57,6 +57,7 @@ SatellitesItem::SatellitesItem( const QString &name, elsetrec satrec, const Marb
     placemark()->setStyle( style );
     placemark()->style()->lineStyle().setColor( oxygenBrickRed4 );
     placemark()->style()->lineStyle().setPenStyle( Qt::NoPen );
+    placemark()->style()->labelStyle().setGlow( true );
 
     update();
 }

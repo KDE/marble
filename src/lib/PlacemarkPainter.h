@@ -52,8 +52,13 @@ class PlacemarkPainter : public QObject
     void setDefaultLabelColor( const QColor& color );
 
  private:
+    enum LabelStyle {
+        Normal = 0,
+        Glow,
+        Selected
+    };
 
-    void drawLabelText( QPainter& textpainter, const QString &name, const QFont &labelFont );
+    void drawLabelText( QPainter &labelPainter, const QString &text, const QFont &labelFont, LabelStyle labelStyle );
     void drawLabelPixmap( VisiblePlacemark *mark, bool isSelected );
 
     bool testXBug();

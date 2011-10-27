@@ -45,9 +45,9 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
                                   QObject* parent )
     : QObject( parent ),
       m_selectionModel( selectionModel ),
-      m_showPlaces( true ),
       m_clock( clock ),
       m_placemarkPainter( 0 ),
+      m_showPlaces( true ),
       m_maxLabelHeight( 0 ),
       m_styleResetRequested( true )
 {
@@ -496,24 +496,11 @@ bool PlacemarkLayout::render( GeoPainter *painter,
 
         // ----------------------------------------------------------------
         // End of checks. Here the actual layouting starts.
-        int textWidth = 0;
 
         // Find the corresponding visible placemark
         VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
 
         GeoDataStyle* style = placemark->style();
-
-        // Specify font properties
-        if ( mark ) {
-            textWidth = mark->labelRect().width();
-        }
-        else {
-            QFont labelFont = style->labelStyle().font();
-            labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size; 
-
-            textWidth = ( QFontMetrics( labelFont ).width( placemark->name() )
-                  + (int)( 2 * s_labelOutlineWidth ) );
-        }
 
         // Choose Section
         const QVector<VisiblePlacemark*> currentsec = rowsection.at( y / m_maxLabelHeight );
@@ -521,7 +508,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         // Find out whether the area around the placemark is covered already.
         // If there's not enough space free don't add a VisiblePlacemark here.
 
-        QRect labelRect = roomForLabel( style, currentsec, x, y, textWidth );
+        QRect labelRect = roomForLabel( style, currentsec, x, y, placemark->name() );
         if ( labelRect.isNull() )
             continue;
 
@@ -653,20 +640,10 @@ bool PlacemarkLayout::render( GeoPainter *painter,
 
         // ----------------------------------------------------------------
         // End of checks. Here the actual layouting starts.
-        int textWidth = 0;
 
         // Find the corresponding visible placemark
         VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
         GeoDataStyle* style = placemark->style();
-
-        // Specify font properties
-        if ( mark ) {
-            textWidth = mark->labelRect().width();
-        }
-        else {
-            QFont labelFont = style->labelStyle().font();
-            textWidth = ( QFontMetrics( labelFont ).width( placemark->name() ) );
-        }
 
         // Choose Section
         const QVector<VisiblePlacemark*> currentsec = rowsection.at( y / m_maxLabelHeight );
@@ -674,7 +651,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
          // Find out whether the area around the placemark is covered already.
         // If there's not enough space free don't add a VisiblePlacemark here.
 
-        QRect labelRect = roomForLabel( style, currentsec, x, y, textWidth );
+        QRect labelRect = roomForLabel( style, currentsec, x, y, placemark->name() );
         if ( labelRect.isNull() )
             continue;
 
@@ -731,7 +708,7 @@ GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( GeoDataPlacemark *
 QRect PlacemarkLayout::roomForLabel( GeoDataStyle * style,
                                       const QVector<VisiblePlacemark*> &currentsec,
                                       const int x, const int y,
-                                      const int textWidth )
+                                      const QString &labelText )
 {
     bool  isRoom      = false;
 
@@ -740,6 +717,16 @@ QRect PlacemarkLayout::roomForLabel( GeoDataStyle * style,
     QFont labelFont = style->labelStyle().font();
     int textHeight = QFontMetrics( labelFont ).height();
 //    mDebug() << textHeight;
+
+    int textWidth;
+    if ( style->labelStyle().glow() ) {
+        labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size;
+        textWidth = ( QFontMetrics( labelFont ).width( labelText )
+            + (int)( 2 * s_labelOutlineWidth ) );
+    } else {
+        QFont labelFont = style->labelStyle().font();
+        textWidth = ( QFontMetrics( labelFont ).width( labelText ) );
+    }
 
     if ( style->labelStyle().alignment() == GeoDataLabelStyle::Corner ) {
         int  xpos = symbolwidth / 2 + x + 1;

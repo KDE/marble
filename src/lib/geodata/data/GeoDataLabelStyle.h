@@ -90,6 +90,21 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
     QFont font() const;
 
     /**
+     * @brief Return true if the text of the label should glow, false otherwise
+     * @see setGlow
+     */
+    bool glow() const;
+
+    /**
+     * @brief Enable or disable a glow effect around the text of the label.
+     *
+     * The default is false.
+     *
+     * Note that this is not a KML property.
+     */
+    void setGlow( bool on );
+
+    /**
      * @brief  Serialize the style to a stream.
      * @param  stream  the stream
      */

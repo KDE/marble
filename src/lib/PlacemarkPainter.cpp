@@ -23,6 +23,8 @@
 #include "MarblePlacemarkModel.h"
 #include "ViewportParams.h"
 #include "VisiblePlacemark.h"
+#include <QPalette>
+#include <QApplication>
 
 using namespace Marble;
 
@@ -114,28 +116,48 @@ void PlacemarkPainter::drawPlacemarks( QPainter* painter,
     }
 }
 
-inline void PlacemarkPainter::drawLabelText(QPainter& labelPainter,
-                                            const QString &name, const QFont &labelFont )
+inline void PlacemarkPainter::drawLabelText(QPainter &labelPainter, const QString &text,
+                                            const QFont &labelFont, LabelStyle labelStyle )
 {
     QFont font = labelFont;
-    font.setWeight( 75 );
+    QFontMetrics metrics = QFontMetrics( font );
+    int fontAscent = metrics.ascent();
 
-    QPen    outlinepen( Qt::white );
-    outlinepen.setWidthF( s_labelOutlineWidth );
-    QBrush  outlinebrush( Qt::black );
+    switch ( labelStyle ) {
+    case Selected: {
+        labelPainter.setFont( font );
+        QRect textRect( 0, 0, metrics.width( text ), metrics.height() );
+        labelPainter.fillRect( textRect, QApplication::palette().highlight() );
+        labelPainter.setPen( QPen( QApplication::palette().highlightedText(), 1 ) );
+        labelPainter.drawText( 0, fontAscent, text );
+        break;
+    }
+    case Glow: {
+        font.setWeight( 75 );
+        fontAscent = QFontMetrics( font ).ascent();
 
-    QPainterPath   outlinepath;
+        QPen outlinepen( Qt::white );
+        outlinepen.setWidthF( s_labelOutlineWidth );
+        QBrush  outlinebrush( Qt::black );
 
-    int fontascent = QFontMetrics( font ).ascent();
-    const QPointF  baseline( s_labelOutlineWidth / 2.0, fontascent );
-    outlinepath.addText( baseline, font, name );
-    labelPainter.setRenderHint( QPainter::Antialiasing, true );
-    labelPainter.setPen( outlinepen );
-    labelPainter.setBrush( outlinebrush );
-    labelPainter.drawPath( outlinepath );
-    labelPainter.setPen( Qt::NoPen );
-    labelPainter.drawPath( outlinepath );
-    labelPainter.setRenderHint( QPainter::Antialiasing, false );
+        QPainterPath outlinepath;
+
+        const QPointF  baseline( s_labelOutlineWidth / 2.0, fontAscent );
+        outlinepath.addText( baseline, font, text );
+        labelPainter.setRenderHint( QPainter::Antialiasing, true );
+        labelPainter.setPen( outlinepen );
+        labelPainter.setBrush( outlinebrush );
+        labelPainter.drawPath( outlinepath );
+        labelPainter.setPen( Qt::NoPen );
+        labelPainter.drawPath( outlinepath );
+        labelPainter.setRenderHint( QPainter::Antialiasing, false );
+        break;
+    }
+    default: {
+        labelPainter.setFont( font );
+        labelPainter.drawText( 0, fontAscent, text );
+    }
+    }
 }
 
 inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSelected )
@@ -162,6 +184,13 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSe
 	 && m_defaultLabelColor != Qt::black )
         labelColor = m_defaultLabelColor;
 
+    LabelStyle labelStyle = Normal;
+    if ( isSelected ) {
+        labelStyle = Selected;
+    } else if ( style->labelStyle().glow() ) {
+        labelStyle = Glow;
+    }
+
     // Due to some XOrg bug this requires a workaround via
     // QImage in some cases (at least with Qt 4.2).
     if ( !m_useXWorkaround ) {
@@ -170,15 +199,7 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSe
 
         labelPainter.begin( &labelPixmap );
 
-        if ( !isSelected ) {
-            labelPainter.setFont( labelFont );
-            labelPainter.setPen( labelColor );
-            int fontascent = QFontMetrics( labelFont ).ascent();
-            labelPainter.drawText( 0, fontascent, labelName );
-        }
-        else {
-            drawLabelText( labelPainter, labelName, labelFont  );
-        }
+        drawLabelText( labelPainter, labelName, labelFont, labelStyle );
 
         labelPainter.end();
     } else {
@@ -189,15 +210,7 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSe
 
         labelPainter.begin( &image );
 
-        if ( !isSelected ) {
-            labelPainter.setFont( labelFont );
-            labelPainter.setPen( labelColor );
-            int fontascent = QFontMetrics( labelFont ).ascent();
-            labelPainter.drawText( 0, fontascent, labelName );
-        }
-        else {
-            drawLabelText( labelPainter, labelName, labelFont );
-        }
+        drawLabelText( labelPainter, labelName, labelFont, labelStyle );
 
         labelPainter.end();
 

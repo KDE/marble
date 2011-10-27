@@ -129,7 +129,7 @@ class PlacemarkLayout : public QObject, public LayerInterface
     QRect  roomForLabel( GeoDataStyle * style,
                          const QVector<VisiblePlacemark*> &currentsec,
                          const int x, const int y,
-                         const int textWidth );
+                         const QString &labelText );
 
     int    placemarksOnScreenLimit() const;
 
