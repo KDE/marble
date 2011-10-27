@@ -415,6 +415,7 @@ void GoToDialog::updateSearchMode()
     progressButton->setVisible( searchEnabled && d->m_progressTimer.isActive() );
     if ( searchEnabled ) {
         bookmarkListView->setModel( d->m_placemarkModel );
+        searchLineEdit->setFocus();
     } else {
         bookmarkListView->setModel( d->m_targetModel );
     }
