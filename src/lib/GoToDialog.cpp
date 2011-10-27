@@ -32,11 +32,6 @@
 namespace Marble
 {
 
-namespace
-{
-int const GeoDataLookAtRole = Qt::UserRole + 1;
-}
-
 class TargetModel : public QAbstractListModel
 {
 public:
@@ -75,7 +70,7 @@ public:
 
     MarbleWidget* m_marbleWidget;
 
-    GeoDataLookAt m_lookAt;
+    GeoDataCoordinates m_coordinates;
 
     TargetModel m_targetModel;
 
@@ -171,12 +166,8 @@ QVariant TargetModel::currentLocationData ( int role ) const
         switch( role ) {
         case Qt::DisplayRole: return tr( "Current Location: %1" ).arg( currentLocation.toString() ) ;
         case Qt::DecorationRole: return QIcon( ":/icons/gps.png" );
-        case GeoDataLookAtRole: {
-            GeoDataLookAt result;
-            result.setCoordinates( currentLocation );
-            // By happy coincidence this equals OpenStreetMap tile level 15
-            result.setRange( 851.807 );
-            return qVariantFromValue( result );
+        case MarblePlacemarkModel::CoordinateRole: {
+            return qVariantFromValue( currentLocation );
         }
         }
     }
@@ -190,12 +181,9 @@ QVariant TargetModel::routeData ( const QVector<GeoDataPlacemark> &via, int inde
     switch( role ) {
     case Qt::DisplayRole: return via.at( index ).name();
     case Qt::DecorationRole: return QIcon( request->pixmap( index ) );
-    case GeoDataLookAtRole: {
-        GeoDataLookAt result;
-        result.setCoordinates( via.at( index ).coordinate() );
-        // By happy coincidence this equals OpenStreetMap tile level 16
-        result.setRange( 425.903 );
-        return qVariantFromValue( result );
+    case MarblePlacemarkModel::CoordinateRole: {
+        const GeoDataCoordinates coordinates = via.at( index ).coordinate();
+        return qVariantFromValue( coordinates );
     }
     }
 
@@ -207,15 +195,12 @@ QVariant TargetModel::homeData ( int role ) const
     switch( role ) {
     case Qt::DisplayRole: return tr( "Home" );
     case Qt::DecorationRole: return QIcon( ":/icons/go-home.png" );
-    case GeoDataLookAtRole: {
+    case MarblePlacemarkModel::CoordinateRole: {
         qreal lon( 0.0 ), lat( 0.0 );
         int zoom( 0 );
         m_marbleWidget->model()->home( lon, lat, zoom );
-        GeoDataLookAt result;
-        result.setLongitude( lon, GeoDataCoordinates::Degree );
-        result.setLatitude( lat, GeoDataCoordinates::Degree );
-        result.setRange( m_marbleWidget->distanceFromZoom( zoom ) * KM2METER );
-        return qVariantFromValue( result );
+        const GeoDataCoordinates coordinates = GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Degree );
+        return qVariantFromValue( coordinates );
     }
     }
 
@@ -233,7 +218,7 @@ QVariant TargetModel::bookmarkData ( int index, int role ) const
         }
     }
     case Qt::DecorationRole: return QIcon( ":/icons/bookmarks.png" );
-    case GeoDataLookAtRole: return qVariantFromValue( *m_bookmarks[index]->lookAt() );
+    case MarblePlacemarkModel::CoordinateRole: return qVariantFromValue( m_bookmarks[index]->lookAt()->coordinates() );
     }
 
     return QVariant();
@@ -318,13 +303,10 @@ void GoToDialogPrivate::saveSelection( const QModelIndex &index )
 {
     if ( searchButton->isChecked() && m_searchResult->size() ) {
         QVariant coordinates = m_searchResultModel.data( index, MarblePlacemarkModel::CoordinateRole );
-        m_lookAt = GeoDataLookAt();
-        m_lookAt.setCoordinates( qVariantValue<GeoDataCoordinates>( coordinates ) );
-        // By happy coincidence this equals OpenStreetMap tile level 16
-        m_lookAt.setRange( 425.903 );
+        m_coordinates = qVariantValue<GeoDataCoordinates>( coordinates );
     } else {
-        QVariant data = index.data( GeoDataLookAtRole );
-        m_lookAt = qVariantValue<GeoDataLookAt>( data );
+        QVariant coordinates = index.data( MarblePlacemarkModel::CoordinateRole );
+        m_coordinates = qVariantValue<GeoDataCoordinates>( coordinates );
     }
     m_parent->accept();
 }
@@ -403,9 +385,9 @@ GoToDialog::~GoToDialog()
     delete d;
 }
 
-GeoDataLookAt GoToDialog::lookAt() const
+GeoDataCoordinates GoToDialog::coordinates() const
 {
-    return d->m_lookAt;
+    return d->m_coordinates;
 }
 
 void GoToDialog::setShowRoutingItems( bool show )

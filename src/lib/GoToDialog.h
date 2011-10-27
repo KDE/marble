@@ -12,7 +12,7 @@
 #define MARBLE_GOTODIALOG_H
 
 #include "marble_export.h"
-#include "GeoDataLookAt.h"
+#include "GeoDataCoordinates.h"
 
 #include <QtGui/QDialog>
 
@@ -49,7 +49,7 @@ public:
       * Returns the position of the item selected by the user, or a default
       * constructed GeoDataLookAt if the dialog was cancelled by the user
       */
-    GeoDataLookAt lookAt() const;
+    GeoDataCoordinates coordinates() const;
 
     Q_PRIVATE_SLOT( d, void saveSelection( const QModelIndex &index ) )
 

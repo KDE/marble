@@ -1434,8 +1434,8 @@ void MainWindow::showGoToDialog()
 
     m_gotoDialog->show();
     if ( m_gotoDialog->exec() == QDialog::Accepted ) {
-        GeoDataLookAt lookAt = m_gotoDialog->lookAt();
-        m_controlView->marbleWidget()->flyTo( lookAt );
+        const GeoDataCoordinates coordinates = m_gotoDialog->coordinates();
+        m_controlView->marbleWidget()->centerOn( coordinates );
     }
 }
 

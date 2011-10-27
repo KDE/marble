@@ -472,8 +472,8 @@ void RoutingInputWidget::openTargetSelectionDialog()
     dialog->setShowRoutingItems( false );
     dialog->setSearchEnabled( false );
     if ( dialog->exec() == QDialog::Accepted ) {
-        GeoDataLookAt lookAt = dialog->lookAt();
-        setTargetPosition( lookAt.coordinates() );
+        const GeoDataCoordinates coordinates = dialog->coordinates();
+        setTargetPosition( coordinates );
     }
     delete dialog;
 }
