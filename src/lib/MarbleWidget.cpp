@@ -191,9 +191,6 @@ void MarbleWidgetPrivate::construct()
     m_widget->setMinimumSize( 200, 300 );
     m_widget->setFocusPolicy( Qt::WheelFocus );
     m_widget->setFocus( Qt::OtherFocusReason );
-#if QT_VERSION >= 0x40600
-    m_widget->grabGesture(Qt::PinchGesture);
-#endif
 
     // Set background: black.
     m_widget->setPalette( QPalette ( Qt::black ) );
