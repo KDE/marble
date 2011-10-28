@@ -269,6 +269,7 @@ int main ( int argc, char *argv[] )
         options.add( "highresolution", ki18n( "Use the interface optimized for high resolutions" ) );
     }
     options.add( "latlon <coordinates>", ki18n( "Show map at given lat lon coordinates" ) );
+    options.add( "distance <value>", ki18n( "Set the distance of the observer to the globe (in km)" ) );
     options.add( "map <id>", ki18n( "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")" ) );
     options.add( "+[file]", ki18n( "One or more placemark files to be opened" ) );
 
@@ -343,6 +344,14 @@ int main ( int argc, char *argv[] )
             const qreal latitude = coordinates.latitude(GeoDataCoordinates::Degree);
             window->marbleWidget()->centerOn(longitude, latitude);
         }
+    }
+
+    const QString distance = args->getOption( "distance" );
+    if ( !distance.isEmpty() ) {
+        bool success = false;
+        const qreal distanceValue = distance.toDouble(&success);
+        if ( success )
+            window->marbleWidget()->setDistance(distanceValue);
     }
 
     // Read the files that are given on the command line.

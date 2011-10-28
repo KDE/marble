@@ -104,6 +104,7 @@ int main(int argc, char *argv[])
     int dataPathIndex=0;
     QString mapThemeId;
     QString coordinatesString;
+    QString distanceString;
     MarbleGlobal::Profiles profiles = MarbleGlobal::detectProfiles();
 
     QStringList args = QApplication::arguments();
@@ -117,6 +118,7 @@ int main(int argc, char *argv[])
         qWarning() << "  --marbledatapath=<path> .... Overwrite the compile-time path to map themes and other data";
         qWarning() << "  --enableFileView ........... Add a tab on the left showing detailed information about loaded files";
         qWarning() << "  --latlon=<coordinates> ..... Show map at given lat lon coordinates";
+        qWarning() << "  --distance=<value> ......... Set the distance of the observer to the globe (in km)";
         qWarning() << "  --map=<id> ................. Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")";
         qWarning();
         qWarning() << "debug options:";
@@ -172,6 +174,16 @@ int main(int argc, char *argv[])
             // and error reporting to user (problem also exists with marbledatapath)
             coordinatesString = args.value( i );
         }
+        else if ( arg.startsWith( "--distance=", Qt::CaseInsensitive ) )
+        {
+            distanceString = arg.mid(11);
+        }
+        else if ( arg.compare( "--distance", Qt::CaseInsensitive ) == 0 ) {
+            ++i;
+            // TODO: misses an error check if there is a value at all
+            // and error reporting to user (problem also exists with marbledatapath)
+            distanceString = args.value( i );
+        }
         else if ( arg.startsWith( "--map=", Qt::CaseInsensitive ) )
         {
             mapThemeId = arg.mid(6);
@@ -202,6 +214,13 @@ int main(int argc, char *argv[])
             lonLat << QVariant( coordinates.longitude(GeoDataCoordinates::Degree) )
                    << QVariant( coordinates.latitude(GeoDataCoordinates::Degree) );
             cmdLineSettings.insert( QLatin1String("lonlat"), QVariant(lonLat) );
+        }
+    }
+    if ( !distanceString.isEmpty() ) {
+        bool success = false;
+        const qreal distance = distanceString.toDouble(&success);
+        if ( success ) {
+            cmdLineSettings.insert( QLatin1String("distance"), QVariant(distance) );
         }
     }
 

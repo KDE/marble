@@ -947,7 +947,10 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
             settings.value("homeZoom", 1050 ).toInt()
          );
 
-         // Center on
+         // Center on/Distance
+         const QVariantMap::ConstIterator distanceIt = overrideSettings.find(QLatin1String("distance"));
+         const bool isDistanceOverwritten = (distanceIt != overrideSettings.constEnd());
+
          const QVariantMap::ConstIterator lonLatIt = overrideSettings.find(QLatin1String("lonlat"));
          if ( lonLatIt != overrideSettings.constEnd() ) {
             const QVariantList lonLat = lonLatIt.value().toList();
@@ -958,7 +961,9 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
                 m_controlView->marbleWidget()->centerOn(
                     settings.value("quitLongitude", 0.0).toDouble(),
                     settings.value("quitLatitude", 0.0).toDouble() );
-                m_controlView->marbleWidget()->zoomView( settings.value("quitZoom", 1000).toInt() );
+                if (! isDistanceOverwritten) {
+                    m_controlView->marbleWidget()->zoomView( settings.value("quitZoom", 1000).toInt() );
+                }
                 break;
             case Marble::ShowHomeLocation:
                 m_controlView->marbleWidget()->goHome();
@@ -966,6 +971,9 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
             default:
                 break;
             }
+         }
+         if (isDistanceOverwritten) {
+             m_controlView->marbleWidget()->setDistance(distanceIt.value().toDouble());
          }
 
          bool isLocked = settings.value( "lockFloatItemPositions", false ).toBool();
