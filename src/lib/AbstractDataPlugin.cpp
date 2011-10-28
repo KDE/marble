@@ -85,7 +85,7 @@ bool AbstractDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     }
     
     if ( renderPos != "ALWAYS_ON_TOP" ) {
-        //return true;
+        return true;
     }
 
     QList<AbstractDataPluginItem*> items = d->m_model->items( viewport,

@@ -460,18 +460,7 @@ void AbstractDataPluginModel::removeItem( QObject *item )
         }
     }
 }
-
-//FIXME: is this safe?
-void AbstractDataPluginModel::clear()
-{
-    d->m_downloadingItems.clear();
-    d->m_displayedItems.clear();
-    qDeleteAll( d->m_itemSet );
-    for ( int i = 0; i < d->m_itemSet.size(); i++ ) {
-        d->m_itemSet.at( i )->deleteLater();
-    }
-    d->m_itemSet.clear();
-}
+    
 
 } // namespace Marble
 

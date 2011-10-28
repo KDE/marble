@@ -152,12 +152,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * Testing the existence of the item @p id in the list
      */
     bool itemExists( const QString& id ) const;
-
-    /**
-     * Removes every item currently in the model.
-     */
-    void clear();
-
+    
  private Q_SLOTS:
     /**
      * @brief Get new items with getAdditionalItems if it is reasonable.
