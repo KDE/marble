@@ -290,6 +290,10 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler( MarbleWidget *
     : MarbleWidgetInputHandler( widget ),
       d( new Private( widget ) )
 {
+#if QT_VERSION >= 0x40600
+    widget->grabGesture( Qt::PinchGesture );
+#endif
+
     d->m_selectionRubber.hide();
 
     d->m_toolTipTimer.setSingleShot( true );
@@ -733,11 +737,6 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
                 MarbleWidget *marbleWidget = MarbleWidgetInputHandler::d->m_widget;
 
-                if ( pinch->state() == Qt::GestureStarted ) {
-                    marbleWidget->setViewContext( Animation );
-                    d->m_startingRadius = marbleWidget->radius();
-                }
-
                 bool isValid = marbleWidget->geoCoordinates(center.x(), center.y(),
                              destLon, destLat, GeoDataCoordinates::Radian );
 
@@ -745,8 +744,28 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                     marbleWidget->viewport()->setFocusPoint(GeoDataCoordinates(destLon, destLat));
                 }
 
-               marbleWidget->setRadius( d->m_startingRadius * scaleFactor );
-               return true;
+                switch ( pinch->state() ) {
+                case Qt::NoGesture:
+                    break;
+                case Qt::GestureStarted:
+                    marbleWidget->setViewContext( Animation );
+                    d->m_startingRadius = marbleWidget->radius();
+                    break;
+                case Qt::GestureUpdated:
+                    marbleWidget->setRadius( marbleWidget->radius() * scaleFactor );
+                    break;
+                case Qt::GestureFinished:
+                    marbleWidget->viewport()->resetFocusPoint();
+                    marbleWidget->setViewContext( Still );
+                    break;
+                case Qt::GestureCanceled:
+                    marbleWidget->setRadius( d->m_startingRadius );
+                    marbleWidget->viewport()->resetFocusPoint();
+                    marbleWidget->setViewContext( Still );
+                    break;
+                }
+
+                return true;
             }
         }
         else
