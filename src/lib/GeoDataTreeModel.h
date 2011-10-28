@@ -11,6 +11,7 @@
 #ifndef MARBLE_GEODATATREEMODEL_H
 #define MARBLE_GEODATATREEMODEL_H
 
+#include "marble_export.h"
 
 #include <QtCore/QAbstractItemModel>
 
@@ -26,7 +27,7 @@ class GeoDataContainer;
  * @short The representation of GeoData in a model
  * This class represents all available data given by kml-data files.
  */
-class GeoDataTreeModel : public QAbstractItemModel
+class MARBLE_EXPORT GeoDataTreeModel : public QAbstractItemModel
 {
     Q_OBJECT
 

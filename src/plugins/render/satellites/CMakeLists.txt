@@ -13,6 +13,9 @@ set( sgp4_SRCS
   sgp4/sgp4io.cpp )
 
 set( satellites_SRCS
+ TrackerPluginModel.cpp
+ TrackerPluginItem.cpp
+
  SatellitesPlugin.cpp
  SatellitesModel.cpp
  SatellitesItem.cpp
