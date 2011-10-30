@@ -6,6 +6,7 @@
 // the source code.
 
 // Copyright 2010 Matias Kallio <matias.kallio@gmail.com>
+// Copyright 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
 #include <QtTest/QtTest>
 #include <QtGui/QApplication>
@@ -38,6 +39,12 @@ private slots:
     void testNotation();
     void testNormalize_data();
     void testNormalize();
+    void testFromStringDMS_data();
+    void testFromStringDMS();
+    void testFromStringDM_data();
+    void testFromStringDM();
+    void testFromStringD_data();
+    void testFromStringD();
     void testString_data();
     void testString();
     void testPack_data();
@@ -322,6 +329,423 @@ void TestGeoDataCoordinates::testNormalize()
         QCOMPARE(ceil(normalized_lat * 1000) / 1000, qreal(0.442));
      }
 }
+
+enum SignType {NoSign, PositiveSign, NegativeSign};
+enum SphereType {PosSphere, NegSphere};
+enum UnitsType {NoUnits, WithUnits};
+enum SpacesType {NoSpaces, WithSpaces};
+
+static QString
+createDegreeString(SignType signType,
+                   int degreeValue, int minutesValue, qreal secondsValue,
+                   UnitsType unitsType, SpacesType spacesType)
+{
+    QString string;
+
+    // add degree
+    if (signType != NoSign) string.append(QLatin1Char(signType==PositiveSign?'+':'-'));
+    string.append(QString::number(degreeValue));
+    if (unitsType == WithUnits) string.append(QChar(0xb0));
+
+    // add minutes
+    string.append(QLatin1Char(' ') + QString::number(minutesValue));
+    if (unitsType == WithUnits) string.append(QLatin1Char('\''));
+
+    // add seconds
+    string.append(QString::fromLatin1(" %L1").arg(secondsValue, 0, 'f', 10));
+    if (unitsType == WithUnits) string.append(QLatin1Char('"'));
+
+    if (spacesType == WithSpaces) string.append(QLatin1Char(' '));
+
+    return string;
+}
+
+static QString
+createDegreeString(SignType signType,
+                   int degreeValue, qreal minutesValue,
+                   UnitsType unitsType, SpacesType spacesType)
+{
+    QString string;
+
+    // add degree
+    if (signType != NoSign) string.append(QLatin1Char(signType==PositiveSign?'+':'-'));
+    string.append(QString::number(degreeValue));
+    if (unitsType == WithUnits) string.append(QChar(0xb0));
+
+    // add minutes
+    string.append(QString::fromLatin1(" %L1").arg(minutesValue, 0, 'f', 10));
+    if (unitsType == WithUnits) string.append(QLatin1Char('\''));
+
+    if (spacesType == WithSpaces) string.append(QLatin1Char(' '));
+
+    return string;
+}
+
+static QString
+createDegreeString(SignType signType,
+                   qreal degreeValue,
+                   UnitsType unitsType, SpacesType spacesType)
+{
+    QString string;
+
+    // add degree
+    if (signType != NoSign) string.append(QLatin1Char(signType==PositiveSign?'+':'-'));
+    string.append(QString::fromLatin1("%L1").arg(degreeValue, 0, 'f', 10));
+    if (unitsType == WithUnits) string.append(QChar(0xb0));
+
+    if (spacesType == WithSpaces) string.append(QLatin1Char(' '));
+
+    return string;
+}
+
+/*
+ * test data for testStringDMS()
+ */
+void TestGeoDataCoordinates::testFromStringDMS_data()
+{
+    QTest::addColumn<QString>("string");
+    QTest::addColumn<qreal>("lon");
+    QTest::addColumn<qreal>("lat");
+
+    const QVector<SignType> signTypes = QVector<SignType>()
+        << NoSign << PositiveSign << NegativeSign;
+    const QVector<SphereType> sphereTypes = QVector<SphereType>()
+        << PosSphere << NegSphere;
+    const QVector<UnitsType> unitsTypes = QVector<UnitsType>()
+        << NoUnits << WithUnits;
+    const QVector<SpacesType> spacesTypes = QVector<SpacesType>()
+        << NoSpaces << WithSpaces;
+
+    const QVector<uint> degreeSamples = QVector<uint>()
+        << 0 << 140 << 180;
+    const QVector<uint> minutesSamples = QVector<uint>()
+        << 0 << 23 << 59;
+    const QVector<qreal> secondsSamples = QVector<qreal>()
+        << 0.0 << 3.14159 << 59.9999999;
+
+    foreach(const UnitsType unitsType, unitsTypes) {
+    foreach(const SpacesType spacesType, spacesTypes) {
+    // lon
+    foreach(const SphereType lonSphere, sphereTypes) {
+    foreach(const SignType lonSignType, signTypes) {
+        const bool lonIsPositive =
+            (lonSphere==PosSphere && lonSignType!=NegativeSign) ||
+            (lonSphere==NegSphere && lonSignType==NegativeSign);
+    foreach(const uint lonDegree, degreeSamples) {
+    foreach(const uint lonMinutes, minutesSamples) {
+        if(lonDegree == 180 && lonMinutes != 0) continue;
+    foreach(const qreal lonSeconds, secondsSamples) {
+        if(lonDegree == 180 && lonSeconds != 0.0) continue;
+    // lat
+    foreach(const SphereType latSphere, sphereTypes) {
+    foreach(const SignType latSignType, signTypes) {
+        const bool latIsPositive =
+            (latSphere==PosSphere && latSignType!=NegativeSign) ||
+            (latSphere==NegSphere && latSignType==NegativeSign);
+    foreach(const uint latDegree, degreeSamples) {
+    foreach(const uint latMinutes, minutesSamples) {
+        if(latDegree == 180 && latMinutes != 0) continue;
+    foreach(const qreal latSeconds, secondsSamples) {
+        if(latDegree == 180 && latSeconds != 0.0) continue;
+
+    // actual construction
+        // Create lon & lat values
+        qreal lon = (qreal)lonDegree + lonMinutes*MIN2HOUR + lonSeconds*SEC2HOUR;
+        if( ! lonIsPositive )
+            lon *= -1;
+        qreal lat = (qreal)latDegree + latMinutes*MIN2HOUR + latSeconds*SEC2HOUR;
+        if( ! latIsPositive )
+            lat *= -1;
+
+        // Create string
+        QString string;
+        string.append(createDegreeString(latSignType,
+                                         latDegree, latMinutes, latSeconds,
+                                         unitsType, spacesType));
+        string.append(QLatin1Char(latSphere==PosSphere?'N':'S'));
+        string.append(QLatin1Char(' '));
+        string.append(createDegreeString(lonSignType,
+                                         lonDegree, lonMinutes, lonSeconds,
+                                         unitsType, spacesType));
+        string.append(QLatin1Char(lonSphere==PosSphere?'E':'W'));
+
+        // Create row title
+        QString rowTitle;
+        rowTitle.append(QLatin1String(spacesType==WithSpaces?"spaced dir":"unspaced dir"))
+                .append(QLatin1String(unitsType==WithUnits?"|units":"|no units"))
+                .append(QLatin1String("|lon:"))
+                .append(QLatin1Char(lonIsPositive?'+':'-'))
+                .append(QString::number(lonDegree)+QChar(0xb0))
+                .append(QString::number(lonMinutes)+QLatin1Char('\''))
+                .append(QString::fromLatin1("%L1").arg(lonSeconds, 0, 'f', 10)+QLatin1Char('"'))
+                .append(QLatin1Char(lonSphere==PosSphere?'P':'N'))
+                .append(QLatin1String("|lat:"))
+                .append(QLatin1Char(latIsPositive?'+':'-'))
+                .append(QString::number(latDegree)+QChar(0xb0))
+                .append(QString::number(latMinutes)+QLatin1Char('\''))
+                .append(QString::fromLatin1("%L1").arg(latSeconds, 0, 'f', 10)+QLatin1Char('"'))
+                .append(QLatin1Char(latSphere==PosSphere?'P':'N'))
+                .append(QLatin1Char('|')).append(string).append(QLatin1Char('|'));
+        QTest::newRow(rowTitle.toLatin1())
+            << string
+            << lon
+            << lat;
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+}
+
+/*
+ * test fromString() with DMS notation
+ */
+void TestGeoDataCoordinates::testFromStringDMS()
+{
+    QFETCH(QString, string);
+    QFETCH(qreal, lon);
+    QFETCH(qreal, lat);
+
+    bool succeeded = false;
+    const GeoDataCoordinates coords = GeoDataCoordinates::fromString(string, succeeded);
+
+    if(! succeeded)
+        qWarning() << "Could not parse"<<string <<"for"<<lon<<lat;
+
+    QVERIFY(succeeded);
+    QCOMPARE(coords.longitude(GeoDataCoordinates::Degree), lon);
+    QCOMPARE(coords.latitude(GeoDataCoordinates::Degree),  lat);
+}
+
+/*
+ * test data for testStringDM()
+ */
+void TestGeoDataCoordinates::testFromStringDM_data()
+{
+    QTest::addColumn<QString>("string");
+    QTest::addColumn<qreal>("lon");
+    QTest::addColumn<qreal>("lat");
+
+    const QVector<SignType> signTypes = QVector<SignType>()
+        << NoSign << PositiveSign << NegativeSign;
+    const QVector<SphereType> sphereTypes = QVector<SphereType>()
+        << PosSphere << NegSphere;
+    const QVector<UnitsType> unitsTypes = QVector<UnitsType>()
+        << NoUnits << WithUnits;
+    const QVector<SpacesType> spacesTypes = QVector<SpacesType>()
+        << NoSpaces << WithSpaces;
+
+    const QVector<uint> degreeSamples = QVector<uint>()
+        << 0 << 140 << 180;
+    const QVector<qreal> minutesSamples = QVector<qreal>()
+        << 0.0 << 3.14159 << 59.9999999;
+
+    foreach(const UnitsType unitsType, unitsTypes) {
+    foreach(const SpacesType spacesType, spacesTypes) {
+    // lon
+    foreach(const SphereType lonSphere, sphereTypes) {
+    foreach(const SignType lonSignType, signTypes) {
+        const bool lonIsPositive =
+            (lonSphere==PosSphere && lonSignType!=NegativeSign) ||
+            (lonSphere==NegSphere && lonSignType==NegativeSign);
+    foreach(const uint lonDegree, degreeSamples) {
+    foreach(const qreal lonMinutes, minutesSamples) {
+        if(lonDegree == 180 && lonMinutes != 0.0) continue;
+    // lat
+    foreach(const SphereType latSphere, sphereTypes) {
+    foreach(const SignType latSignType, signTypes) {
+        const bool latIsPositive =
+            (latSphere==PosSphere && latSignType!=NegativeSign) ||
+            (latSphere==NegSphere && latSignType==NegativeSign);
+    foreach(const uint latDegree, degreeSamples) {
+    foreach(const qreal latMinutes, minutesSamples) {
+        if(latDegree == 180 && latMinutes != 0.0) continue;
+
+    // actual construction
+        // Create lon & lat values
+        qreal lon = (qreal)lonDegree + lonMinutes*MIN2HOUR;
+        if( ! lonIsPositive )
+            lon *= -1;
+        qreal lat = (qreal)latDegree + latMinutes*MIN2HOUR;
+        if( ! latIsPositive )
+            lat *= -1;
+
+        // Create string
+        QString string;
+        string.append(createDegreeString(latSignType,
+                                         latDegree, latMinutes,
+                                         unitsType, spacesType));
+        string.append(QLatin1Char(latSphere==PosSphere?'N':'S'));
+        string.append(QLatin1Char(' '));
+        string.append(createDegreeString(lonSignType,
+                                         lonDegree, lonMinutes,
+                                         unitsType, spacesType));
+        string.append(QLatin1Char(lonSphere==PosSphere?'E':'W'));
+
+        // Create row title
+        QString rowTitle;
+        rowTitle.append(QLatin1String(spacesType==WithSpaces?"spaced dir":"unspaced dir"))
+                .append(QLatin1String(unitsType==WithUnits?"|units":"|no units"))
+                .append(QLatin1String("|lon:"))
+                .append(QLatin1Char(lonIsPositive?'+':'-'))
+                .append(QString::number(lonDegree)+QChar(0xb0))
+                .append(QString::fromLatin1("%L1").arg(lonMinutes, 0, 'f', 10)+QLatin1Char('\''))
+                .append(QLatin1Char(lonSphere==PosSphere?'P':'N'))
+                .append(QLatin1String("|lat:"))
+                .append(QLatin1Char(latIsPositive?'+':'-'))
+                .append(QString::number(latDegree)+QChar(0xb0))
+                .append(QString::fromLatin1("%L1").arg(latMinutes, 0, 'f', 10)+QLatin1Char('\''))
+                .append(QLatin1Char(latSphere==PosSphere?'P':'N'))
+                .append(QLatin1Char('|')).append(string).append(QLatin1Char('|'));
+        QTest::newRow(rowTitle.toLatin1())
+            << string
+            << lon
+            << lat;
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+}
+
+/*
+ * test fromString() with DM notation
+ */
+void TestGeoDataCoordinates::testFromStringDM()
+{
+    QFETCH(QString, string);
+    QFETCH(qreal, lon);
+    QFETCH(qreal, lat);
+
+    bool succeeded = false;
+    const GeoDataCoordinates coords = GeoDataCoordinates::fromString(string, succeeded);
+
+    if(! succeeded)
+        qWarning() << "Could not parse"<<string <<"for"<<lon<<lat;
+
+    QVERIFY(succeeded);
+    QCOMPARE(coords.longitude(GeoDataCoordinates::Degree), lon);
+    QCOMPARE(coords.latitude(GeoDataCoordinates::Degree),  lat);
+}
+
+/*
+ * test data for testStringDM()
+ */
+void TestGeoDataCoordinates::testFromStringD_data()
+{
+    QTest::addColumn<QString>("string");
+    QTest::addColumn<qreal>("lon");
+    QTest::addColumn<qreal>("lat");
+
+    const QVector<SignType> signTypes = QVector<SignType>()
+        << NoSign << PositiveSign << NegativeSign;
+    const QVector<SphereType> sphereTypes = QVector<SphereType>()
+        << PosSphere << NegSphere;
+    const QVector<UnitsType> unitsTypes = QVector<UnitsType>()
+        << NoUnits << WithUnits;
+    const QVector<SpacesType> spacesTypes = QVector<SpacesType>()
+        << NoSpaces << WithSpaces;
+
+    const QVector<qreal> degreeSamples = QVector<qreal>()
+        << 0.0 << 3.14159 << 180.0;
+
+    foreach(const UnitsType unitsType, unitsTypes) {
+    foreach(const SpacesType spacesType, spacesTypes) {
+    // lon
+    foreach(const SphereType lonSphere, sphereTypes) {
+    foreach(const SignType lonSignType, signTypes) {
+        const bool lonIsPositive =
+            (lonSphere==PosSphere && lonSignType!=NegativeSign) ||
+            (lonSphere==NegSphere && lonSignType==NegativeSign);
+    foreach(const qreal lonDegree, degreeSamples) {
+    // lat
+    foreach(const SphereType latSphere, sphereTypes) {
+    foreach(const SignType latSignType, signTypes) {
+        const bool latIsPositive =
+            (latSphere==PosSphere && latSignType!=NegativeSign) ||
+            (latSphere==NegSphere && latSignType==NegativeSign);
+    foreach(const qreal latDegree, degreeSamples) {
+
+    // actual construction
+        // Create lon & lat values
+        qreal lon = lonDegree;
+        if (! lonIsPositive)
+            lon *= -1;
+        qreal lat = latDegree;
+        if (! latIsPositive)
+            lat *= -1;
+
+        // Create string
+        QString string;
+        string.append(createDegreeString(latSignType,
+                                         latDegree,
+                                         unitsType, spacesType));
+        string.append(QLatin1Char(latSphere==PosSphere?'N':'S'));
+        string.append(QLatin1Char(' '));
+        string.append(createDegreeString(lonSignType,
+                                         lonDegree,
+                                         unitsType, spacesType));
+        string.append(QLatin1Char(lonSphere==PosSphere?'E':'W'));
+
+        // Create row title
+        QString rowTitle;
+        rowTitle.append(QLatin1String(spacesType==WithSpaces?"spaced dir":"unspaced dir"))
+                .append(QLatin1String(unitsType==WithUnits?"|units":"|no units"))
+                .append(QLatin1String("|lon:"))
+                .append(QLatin1Char(lonIsPositive?'+':'-'))
+                .append(QString::fromLatin1("%L1").arg(lonDegree, 0, 'f', 10)+QChar(0xb0))
+                .append(QLatin1Char(lonSphere==PosSphere?'P':'N'))
+                .append(QLatin1String("|lat:"))
+                .append(QLatin1Char(latIsPositive?'+':'-'))
+                .append(QString::fromLatin1("%L1").arg(latDegree, 0, 'f', 10)+QChar(0xb0))
+                .append(QLatin1Char(latSphere==PosSphere?'P':'N'))
+                .append(QLatin1Char('|')).append(string).append(QLatin1Char('|'));
+        QTest::newRow(rowTitle.toLatin1())
+            << string
+            << lon
+            << lat;
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+}
+
+/*
+ * test fromString() with DM notation
+ */
+void TestGeoDataCoordinates::testFromStringD()
+{
+    QFETCH(QString, string);
+    QFETCH(qreal, lon);
+    QFETCH(qreal, lat);
+
+    bool succeeded = false;
+    const GeoDataCoordinates coords = GeoDataCoordinates::fromString(string, succeeded);
+
+    if(! succeeded)
+        qWarning() << "Could not parse"<<string <<"for"<<lon<<lat;
+
+    QVERIFY(succeeded);
+    QCOMPARE(coords.longitude(GeoDataCoordinates::Degree), lon);
+    QCOMPARE(coords.latitude(GeoDataCoordinates::Degree),  lat);
+}
+
 /*
  * test data for testString()
  */
