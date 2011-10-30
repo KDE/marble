@@ -201,8 +201,8 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
         int xRepeatDistance = 4 * radius;
 
         // Finding the leftmost positive x value
-        if ( itX > xRepeatDistance ) {
-            int repeatNum = (int)( itX / xRepeatDistance );  
+        if ( itX + size.width() / 2.0 > xRepeatDistance ) {
+            const int repeatNum = (int)( ( itX + size.width() / 2.0 ) / xRepeatDistance );
             itX = itX - repeatNum * xRepeatDistance;
         }
         if ( itX + size.width() / 2.0 < 0 ) {
