@@ -609,7 +609,7 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
         }
 
         // Evaluate the string
-        lonString = QString("%1\xb0").arg(lonDeg, 3, 10, QChar(' ') );
+        lonString = QString::fromUtf8("%1\xc2\xb0").arg(lonDeg, 3, 10, QChar(' ') );
 
         if ( precision == 0 || lonDeg == lonDegF ) {
             return lonString + weString;
@@ -631,7 +631,7 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
     }
     else // notation = GeoDataCoordinates::Decimal
     {
-        lonString = QString("%L1\xb0").arg(lonDegF, 4 + precision, format, precision, QChar(' ') );
+        lonString = QString::fromUtf8("%L1\xc2\xb0").arg(lonDegF, 4 + precision, format, precision, QChar(' ') );
     }
 
     return lonString + weString;
@@ -683,7 +683,7 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
         }
 
         // Evaluate the string
-        latString = QString("%1\xb0").arg(latDeg, 3, 10, QChar(' ') );
+        latString = QString::fromUtf8("%1\xc2\xb0").arg(latDeg, 3, 10, QChar(' ') );
 
         if ( precision == 0 || latDeg == latDegF ) {
             return latString + nsString;
@@ -705,7 +705,7 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
     }
     else // notation = GeoDataCoordinates::Decimal
     {
-        latString = QString("%L1\xb0").arg(latDegF, 4 + precision, format, precision, QChar(' ') );
+        latString = QString::fromUtf8("%L1\xc2\xb0").arg(latDegF, 4 + precision, format, precision, QChar(' ') );
     }
     return latString + nsString;
 }
