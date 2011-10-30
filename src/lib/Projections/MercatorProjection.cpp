@@ -56,16 +56,15 @@ bool MercatorProjection::screenCoordinates( const qreal lon, const qreal _lat,
                                             const ViewportParams *viewport,
                                             qreal& x, qreal& y ) const
 {
-    bool retval = true;
+    const bool isLatValid = minLat() <= _lat && _lat <= maxLat();
+
     qreal lat = _lat;
     
     if ( lat > maxLat() ) {
         lat = maxLat();
-        retval = false;
     }
     if ( lat < minLat() ) {
         lat = minLat();
-        retval = false;
     }
 
     // Convenience variables
@@ -83,7 +82,7 @@ bool MercatorProjection::screenCoordinates( const qreal lon, const qreal _lat,
     x = ( width  / 2 + rad2Pixel * ( lon - centerLon ) );
     y = ( height / 2 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
 
-    return retval && ( ( 0 <= y && y < height )
+    return isLatValid && ( ( 0 <= y && y < height )
                   && ( ( 0 <= x && x < width )
                   || ( 0 <= x - 4 * radius && x - 4 * radius < width )
                   || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
@@ -99,20 +98,18 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
     geopoint.geoCoordinates( lon, lat );
 
-    bool retval = true;
+    const bool isLatValid = minLat() <= lat && lat <= maxLat();
 
     if ( lat > maxLat() ) {
         GeoDataCoordinates approxCoords( geopoint );
         approxCoords.setLatitude( maxLat() );
         approxCoords.geoCoordinates( lon, lat );
-        retval = false;
     }
 
     if ( lat < minLat() ) {
         GeoDataCoordinates approxCoords( geopoint );
         approxCoords.setLatitude( minLat() );
         approxCoords.geoCoordinates( lon, lat );
-        retval = false;
     }
 
     // Convenience variables
@@ -131,7 +128,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
     // Return true if the calculated point is inside the screen area,
     // otherwise return false.
-    return retval && ( ( 0 <= y && y < height )
+    return isLatValid && ( ( 0 <= y && y < height )
                   && ( ( 0 <= x && x < width )
                   || ( 0 <= x - 4 * radius && x - 4 * radius < width )
                   || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
@@ -152,20 +149,18 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
 
     coordinates.geoCoordinates( lon, lat );
 
-    bool retval = true;
+    const bool isLatValid= minLat() <= lat && lat <= maxLat();
 
     if ( lat > maxLat() ) {
         GeoDataCoordinates approxCoords( coordinates );
         approxCoords.setLatitude( maxLat() );
         approxCoords.geoCoordinates( lon, lat );
-        retval = false;
     }
 
     if ( lat < minLat() ) {
         GeoDataCoordinates approxCoords( coordinates );
         approxCoords.setLatitude( minLat() );
         approxCoords.geoCoordinates( lon, lat );
-        retval = false;
     }
 
     // Convenience variables
@@ -188,7 +183,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
         if ( !repeatX() ) {
             *x = itX;
             if ( 0 < itX + size.width() / 2.0  && itX < width + size.width() / 2.0 ) {
-                return retval && true;
+                return isLatValid;
             }
             else {
                 // the requested point is out of the visible x range:
@@ -225,7 +220,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
 
         pointRepeatNum = itNum;
 
-        return retval && true;
+        return isLatValid && true;
     }
 
     // the requested point is out of the visible y range:
