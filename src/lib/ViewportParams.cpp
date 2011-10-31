@@ -52,8 +52,6 @@ public:
 
     bool                 m_dirtyBox;
     GeoDataLatLonAltBox  m_viewLatLonAltBox;
-    bool                 m_dirtyRegion;
-    QRegion              m_activeRegion;
 
     static const SphericalProjection  s_sphericalProjection;
     static const EquirectProjection   s_equirectProjection;
@@ -76,8 +74,6 @@ ViewportParamsPrivate::ViewportParamsPrivate()
       m_size( 100, 100 ),
       m_dirtyBox( true ),
       m_viewLatLonAltBox(),
-      m_dirtyRegion( true ),
-      m_activeRegion(),
       m_hasFocusPoint(false)
 {
     m_planetAxis.inverse().toMatrix( m_planetAxisMatrix );
@@ -117,7 +113,6 @@ const AbstractProjection *ViewportParams::currentProjection() const
 void ViewportParams::setProjection(Projection newProjection)
 {
     d->m_dirtyBox = true;
-    d->m_dirtyRegion = true;
 
     d->m_projection = newProjection;
 
@@ -193,7 +188,6 @@ int ViewportParams::radius() const
 void ViewportParams::setRadius(int newRadius)
 {
     d->m_dirtyBox = true;
-    d->m_dirtyRegion = true;
 
     d->m_radius = newRadius;
     d->m_angularResolution = 0.25 * M_PI / fabs( (qreal)(d->m_radius) );
@@ -252,7 +246,6 @@ Quaternion ViewportParams::planetAxis() const
 void ViewportParamsPrivate::setPlanetAxis(const Quaternion &newAxis)
 {
     m_dirtyBox = true;
-    m_dirtyRegion = true;
     m_planetAxis = newAxis;
     m_planetAxis.inverse().toMatrix( m_planetAxisMatrix );
 }
@@ -281,7 +274,6 @@ QSize ViewportParams::size() const
 void ViewportParams::setWidth(int newWidth)
 {
     d->m_dirtyBox = true;
-    d->m_dirtyRegion = true;
 
     d->m_size.setWidth( newWidth );
 }
@@ -289,7 +281,6 @@ void ViewportParams::setWidth(int newWidth)
 void ViewportParams::setHeight(int newHeight)
 {
     d->m_dirtyBox = true;
-    d->m_dirtyRegion = true;
 
     d->m_size.setHeight( newHeight );
 }
@@ -300,7 +291,6 @@ void ViewportParams::setSize(QSize newSize)
         return;
 
     d->m_dirtyBox = true;
-    d->m_dirtyRegion = true;
 
     d->m_size = newSize;
 }
@@ -373,27 +363,6 @@ bool ViewportParams::resolves ( const GeoDataCoordinates &coord1,
 bool  ViewportParams::mapCoversViewport() const
 {
     return d->m_currentProjection->mapCoversViewport( this );
-}
-
-QRegion ViewportParams::activeRegion() const
-{
-    if (d->m_dirtyRegion) {
-        // Take the mapShape and subtract a stroke that is twice as wide as the
-        // navigation strip:
-        qreal navigationStrip = 25;
-
-        QPainterPath mapShape = d->m_currentProjection->mapShape( this );
-
-        QPainterPathStroker mapShapeStroke;
-        mapShapeStroke.setWidth( 2.0 * navigationStrip );
-        QPainterPath mapShapeStrokePath = mapShapeStroke.createStroke( mapShape );
-
-        QPainterPath activeShape = mapShape.subtracted( mapShapeStrokePath );
-        d->m_activeRegion = QRegion( activeShape.boundingRect().toRect() );
-        d->m_dirtyRegion = false;
-    }
-
-    return d->m_activeRegion;
 }
 
 GeoDataCoordinates ViewportParams::focusPoint() const

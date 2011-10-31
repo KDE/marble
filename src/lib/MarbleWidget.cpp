@@ -758,11 +758,6 @@ qreal MarbleWidget::centerLongitude() const
     return d->m_map.centerLongitude();
 }
 
-QRegion MarbleWidget::activeRegion()
-{
-    return viewport()->activeRegion();
-}
-
 QRegion MarbleWidget::mapRegion()
 {
     return viewport()->currentProjection()->mapRegion( viewport() );

@@ -274,11 +274,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     QString mapThemeId() const;
 
     /**
-     * @brief Return the active region in which it's possible to drag the view using the mouse.
-     */
-    QRegion activeRegion();
-
-    /**
      * @brief Return the projected region which describes the (shape of the) projected surface.
      */
     QRegion mapRegion();

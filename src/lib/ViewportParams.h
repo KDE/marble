@@ -102,8 +102,6 @@ class MARBLE_EXPORT ViewportParams
 
     bool  mapCoversViewport() const;
 
-    QRegion activeRegion() const;
-
     /**
       * @return The current point of focus, e.g. the point that is not moved
       * when changing the zoom level. If not set, it defaults to the
