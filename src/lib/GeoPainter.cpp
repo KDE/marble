@@ -332,12 +332,12 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPosition,
                                qreal width, qreal height,
                                bool isGeoProjected )
 {
-    int pointRepeatNum;
-    qreal y;
-    bool globeHidesPoint;
-    const AbstractProjection *projection = d->m_viewport->currentProjection();
-
     if ( !isGeoProjected ) {
+        int pointRepeatNum;
+        qreal y;
+        bool globeHidesPoint;
+        const AbstractProjection *projection = d->m_viewport->currentProjection();
+
         bool visible = projection->screenCoordinates( centerPosition, d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 
         if ( visible ) {
@@ -406,15 +406,15 @@ QRegion GeoPainter::regionFromEllipse ( const GeoDataCoordinates & centerPositio
                                         bool isGeoProjected,
                                         qreal strokeWidth ) const
 {
-    int pointRepeatNum;
-    qreal y;
-    bool globeHidesPoint;
-    const AbstractProjection *projection = d->m_viewport->currentProjection();
-
     if ( !isGeoProjected ) {
-        QRegion regions;
+        int pointRepeatNum;
+        qreal y;
+        bool globeHidesPoint;
+        const AbstractProjection *projection = d->m_viewport->currentProjection();
 
         bool visible = projection->screenCoordinates( centerPosition, d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
+
+        QRegion regions;
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -785,13 +785,13 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates,
                             qreal width, qreal height,
                             bool isGeoProjected )
 {
-    int pointRepeatNum;
-    qreal y;
-    bool globeHidesPoint;
-    const AbstractProjection *projection = d->m_viewport->currentProjection();
-
     if ( !isGeoProjected ) {
-        bool visible = projection->screenCoordinates( centerCoordinates, 
+        int pointRepeatNum;
+        qreal y;
+        bool globeHidesPoint;
+        const AbstractProjection *projection = d->m_viewport->currentProjection();
+
+        bool visible = projection->screenCoordinates( centerCoordinates,
                        d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 
         if ( visible ) {
@@ -813,18 +813,16 @@ QRegion GeoPainter::regionFromRect ( const GeoDataCoordinates & centerCoordinate
                                      bool isGeoProjected,
                                      qreal strokeWidth ) const
 {
-    int pointRepeatNum;
-    qreal y;
-    bool globeHidesPoint;
-    const AbstractProjection *projection = d->m_viewport->currentProjection();
-
-
     if ( !isGeoProjected ) {
-
-        QRegion regions;
+        int pointRepeatNum;
+        qreal y;
+        bool globeHidesPoint;
+        const AbstractProjection *projection = d->m_viewport->currentProjection();
 
         bool visible = projection->screenCoordinates( centerCoordinates,
                        d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
+
+        QRegion regions;
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -849,12 +847,12 @@ void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPosition,
                                  int xRnd, int yRnd,
                                  bool isGeoProjected )
 {
-    int pointRepeatNum;
-    qreal y;
-    bool globeHidesPoint;
-    const AbstractProjection *projection = d->m_viewport->currentProjection();
-
     if ( !isGeoProjected ) {
+        int pointRepeatNum;
+        qreal y;
+        bool globeHidesPoint;
+        const AbstractProjection *projection = d->m_viewport->currentProjection();
+
         // FIXME: Better visibility detection that takes the circle geometry into account
         bool visible = projection->screenCoordinates( centerPosition, d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 
