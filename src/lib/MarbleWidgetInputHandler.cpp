@@ -430,7 +430,6 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
          || e->type() == QEvent::MouseButtonRelease )
     {
         QMouseEvent *event = static_cast<QMouseEvent*>( e );
-        QRegion activeRegion = MarbleWidgetInputHandler::d->m_widget->activeRegion();
 
         int dirX = 0;
         int dirY = 0;
@@ -463,25 +462,25 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             }
         }
 
+        qreal mouseLon;
+        qreal mouseLat;
+        const bool isMouseAboveMap = MarbleWidgetInputHandler::d->m_widget->geoCoordinates( event->x(), event->y(),
+                                                 mouseLon, mouseLat,
+                                                 GeoDataCoordinates::Radian );
+
         // emit the position string only if the signal got attached
         if ( MarbleWidgetInputHandler::d->m_positionSignalConnected ) {
-            qreal lat;
-            qreal lon;
-            bool isValid = MarbleWidgetInputHandler::d->m_widget->geoCoordinates( event->x(), event->y(),
-                                                     lon, lat,
-                                                     GeoDataCoordinates::Radian );
-
-            if ( !isValid ) {
+            if ( !isMouseAboveMap ) {
                 emit mouseMoveGeoPosition( tr( NOT_AVAILABLE ) );
             }
             else {
-                QString position = GeoDataCoordinates( lon, lat ).toString();
+                QString position = GeoDataCoordinates( mouseLon, mouseLat ).toString();
                 emit mouseMoveGeoPosition( position );
             }
         }
 
 
-        if ( activeRegion.contains( event->pos() ) || d->m_selectionRubber.isVisible() ) {
+        if ( isMouseAboveMap || d->m_selectionRubber.isVisible() ) {
 
             // Regarding mouse button presses:
             if ( e->type() == QEvent::MouseButtonPress
