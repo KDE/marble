@@ -175,25 +175,6 @@ Item {
                     }
                 }
         }
-        
-        // Centers map on passed coordinates.
-        function centerOn( lon, lat ) {
-            map.center.longitude = lon
-            map.center.latitude = lat
-        }
-        
-        // Returns the grouped property to access routing functions.
-        /** @todo: Needed? Make a property? */
-        function getRouting() {
-            return map.routing
-        }
-        
-        // Returns the grouped property to access search functions.
-        /** @todo: Needed? Make a property? */
-        function getSearch() {
-            return map.search
-        }
-
     }
     
     // Delivers the current (gps) position.
@@ -267,12 +248,18 @@ Item {
     // Returns the grouped property to access routing functions.
     /** @todo: Needed? Make a property? */
     function getRouting() {
-        return map.getRouting()
+        return map.routing
     }
     
     // Returns the grouped property to access search functions.
     /** @todo: Needed? Make a property? */
     function getSearch() {
-        return map.getSearch()
+        return map.search
+    }
+
+    // Centers map on passed coordinates.
+    function centerOn( lon, lat ) {
+        map.center.longitude = lon
+        map.center.latitude = lat
     }
 }

@@ -85,16 +85,33 @@ Page {
                 visible: searchTerm != ""
                 property string searchTerm: ""
 
-                Text {
+                Label {
+                    height: 30
                     id: searchResultDescription
                     anchors.margins: 5
                     anchors.top: parent.top
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    height: 30
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 
-                    text: "<p>Search results for <b>" + searchResultView.searchTerm + "</b></p>"
+                    text: "<p><b>" + searchResultView.searchTerm + "</b></p>"
+                }
+
+                Image {
+                    id: closeImage
+                    width: 30
+                    anchors.top: searchResultView.top
+                    anchors.right: searchResultView.right
+                    anchors.margins: 5
+                    fillMode: Image.PreserveAspectFit
+                    smooth: true
+                    source: "image://theme/icon-m-toolbar-close"
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            searchResultView.visible = false
+                        }
+                    }
                 }
 
                 ListView {
@@ -111,6 +128,11 @@ Page {
                     highlight: Rectangle { color: "white"; radius: 5 }
                     focus: true
                 }
+
+                ScrollDecorator {
+                    flickableItem: searchResultListView
+                }
+
             }
         }
     }
@@ -120,7 +142,7 @@ Page {
 
         Item {
             width: parent.width
-            height: detailed ? 80 : 20
+            height: column.height + 5
             id: searchResultItem
             property bool detailed: ListView.isCurrentItem
 
@@ -128,24 +150,44 @@ Page {
             property bool isBookmark: false
 
             Column {
-                Image  {
-                    anchors.right: parent.right
-                    source: searchResultItem.isBookmark ? "qrc:/icons/bookmark.png" : "qrc:/icons/bookmark-disabled.png"
-                    visible: searchResultItem.detailed
-                    width: 16
-                    height: 16
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: searchResultItem.isBookmark = !searchResultItem.isBookmark
-                    }
-                }
-
-                Text {
-                    text: (index+1) + ". " + description
+                id: column
+                Label {
+                    id: searchResultText
+                    text: "<font size=\"-2\">" + (index+1) + ". " + description + "</font>"
                     width: searchResultItem.width
                     wrapMode: searchResultItem.detailed ? Text.WrapAtWordBoundaryOrAnywhere : Text.NoWrap
                     clip: true
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            searchResultListView.currentIndex = index
+                            marbleWidget.centerOn( longitude, latitude )
+                        }
+                    }
+                }
+
+                Row {
+                    spacing: 5
+
+                    Button {
+                        id: routeButton
+                        width: 120
+                        text: "Route"
+                        visible: searchResultItem.detailed
+                        onClicked: {
+                            /** @todo: Enable position tracking and set current position as first via point,
+                                switch to driving/cycle/walk activity. Ask user, configure routing accordingly */
+                            marbleWidget.getRouting().setVia( 1, longitude, latitude )
+                        }
+                    }
+
+                    Button  {
+                        width: 50
+                        iconSource: searchResultItem.isBookmark ? "qrc:/icons/bookmark.png" : "qrc:/icons/bookmark-disabled.png"
+                        visible: searchResultItem.detailed
+                        onClicked: searchResultItem.isBookmark = !searchResultItem.isBookmark
+                    }
                 }
             }
         }
