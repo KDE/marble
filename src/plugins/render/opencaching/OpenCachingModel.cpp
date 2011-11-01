@@ -93,7 +93,7 @@ QHash<QString, QVariant> OpenCachingModelPrivate::parseDescription( QXmlStreamRe
     return QHash<QString, QVariant>();
 }
 
-OpenCachingModel::OpenCachingModel( PluginManager *pluginManager, QObject *parent )
+OpenCachingModel::OpenCachingModel( const PluginManager *pluginManager, QObject *parent )
     : AbstractDataPluginModel( "opencaching", pluginManager, parent ),
       m_numResults( numberOfItemsOnScreen ),
       m_maxDistance( 20 ),

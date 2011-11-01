@@ -34,7 +34,7 @@ class OpenCachingModel : public AbstractDataPluginModel
     Q_OBJECT
 
 public:
-    explicit OpenCachingModel( PluginManager *pluginManager, QObject *parent = 0 );
+    explicit OpenCachingModel( const PluginManager *pluginManager, QObject *parent = 0 );
     ~OpenCachingModel();
 
     void setNumResults( int numResults );
