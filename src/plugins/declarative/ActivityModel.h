@@ -38,10 +38,7 @@ class ActivityModel : public QAbstractListModel
       NameRole = Qt::UserRole + 1,     ///< Name of the activity.
       ImagePathRole,                   ///< Path to image for activity.
       PathRole,                        ///< Path to QML file for activity.
-      EnablePluginsRole,               ///< Plugins to enable when switching to that activity.
-      DisablePluginsRole,              ///< Plugins to disable when switching to that activity.
-      RelatedActivitiesRole,           ///< Related activities and plugins to preserve when switching to them.
-      SettingsRole                     ///< Settings for activity.
+      PageRole                         ///< Activity page
     };
 
     explicit ActivityModel( QObject *parent = 0 );
@@ -63,16 +60,11 @@ class ActivityModel : public QAbstractListModel
      * @param name Name of the activity
      * @param imagePath Path to the image of the activity.
      * @param path Path to the QML file of the activity.
-     * @param enablePlugins Names of plugins to enable for this activity.
-     * @param disablePlugins Names of plugins to disable for this activity.
-     * @param relatedActivities Related activities with plugin states to preserve.
-     * @param settings Settings to apply for this activity.
      * 
      * @see Activity
      */
-    void addActivity( const QString& name, const QString& imagePath, const QString& path,
-                      const QStringList& enablePlugins, const QStringList& disablePlugins,
-                      const QVariant& relatedActivities, const QVariant& settings );
+    void addActivity( const QString& name, const QString& imagePath, QObject* page,
+                      const QString &path );
     /**
      * Remove activity with the passed name.
      *
@@ -111,6 +103,8 @@ class ActivityModel : public QAbstractListModel
      */
     int rowCount( const QModelIndex &parent = QModelIndex() ) const;
     int columnCount( const QModelIndex &parent = QModelIndex() ) const;
+
+    void load( QObject *parent, QObject* child );
     
  private:
     Q_DISABLE_COPY( ActivityModel )

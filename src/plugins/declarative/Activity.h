@@ -37,10 +37,7 @@ class Activity : public QObject
     Q_PROPERTY( QString name READ name WRITE setName )
     Q_PROPERTY( QString imagePath READ imagePath WRITE setImagePath )
     Q_PROPERTY( QString path READ path WRITE setPath )
-    Q_PROPERTY( QStringList enablePlugins READ enablePlugins WRITE setEnablePlugins )
-    Q_PROPERTY( QStringList disablePlugins READ disablePlugins WRITE setDisablePlugins )
-    Q_PROPERTY( QVariant relatedActivities READ relatedActivities WRITE setRelatedActivities )
-    Q_PROPERTY( QVariant settings READ settings WRITE setSettings )
+    Q_PROPERTY( QObject* page READ page WRITE setPage )
     
  public:
     /**
@@ -59,11 +56,7 @@ class Activity : public QObject
      * @param relatedActivities Related activities with plugin states to preserve.
      * @param settings Settings to apply for this activity.
      */
-    explicit Activity( const QString& name, const QString& imagePath, const QString& path,
-                       const QStringList& enablePlugins, const QStringList& disablePlugins,
-                       const QMap<QString, QVariant>& relatedActivities,
-                       const QMap<QString, QVariant>& settings
-                     );
+    explicit Activity( const QString& name, const QString& imagePath, QObject* page, const QString &path );
     
  public Q_SLOTS:
     /**
@@ -108,70 +101,16 @@ class Activity : public QObject
      */
     QString path() const;
     
-    /**
-     * Sets the names of the plugins to enable for the activity.
-     *
-     * @param name New names of the plugins to enable for the activity.
-     */
-    void setEnablePlugins( const QStringList& enablePlugins );
-    
-    /**
-     * Returns the names of the plugins to enable for the activity.
-     *
-     * @return Names of the plugins to enable for the activity.
-     */
-    QStringList enablePlugins() const;
-    
-    /**
-     * Sets the names of the plugins to disable for the activity.
-     *
-     * @param name New names of the plugins to disable for the activity.
-     */
-    void setDisablePlugins( const QStringList& disablePlugins );
-    
-    /**
-     * Returns the names of the plugins to disable for the activity.
-     *
-     * @return Names of the plugins to disable for the activity.
-     */
-    QStringList disablePlugins() const;
-    
-    /**
-     * Sets the related activities of the activity.
-     *
-     * @param name New related activities of the activity.
-     */
-    void setRelatedActivities( const QVariant& relatedActivities );
-    
-    /**
-     * Returns the related activities of the activity.
-     *
-     * @return Related activities of the activity.
-     */
-    QMap<QString, QVariant> relatedActivities() const;
-    
-    /**
-     * Sets the settings of the activity.
-     *
-     * @param name New settings of the activity.
-     */
-    void setSettings( const QVariant& settings );
-    
-    /**
-     * Returns the settings of the activity.
-     *
-     * @return Settings of the activity.
-     */
-    QMap<QString, QVariant> settings() const;
+    QObject* page();
+
+    void setPage( QObject* page );
 
  private:
     Q_DISABLE_COPY( Activity )
     QString m_name;                            ///< Name of the activity.
     QString m_imagePath;                       ///< Path to the image of the activity.
+    QObject* m_page;
     QString m_path;                            ///< Path to the QML file of the activity.
-    QStringList m_enablePlugins;               ///< Names of plugins to enable for the activity.
-    QStringList m_disablePlugins;              ///< Names of plugins to disable for the activity.
-    RelatedActivities m_relatedActivities;     ///< Related activities of the activity.
     QMap<QString, QVariant> m_settings;        ///< Settings of the activity.
 };
 

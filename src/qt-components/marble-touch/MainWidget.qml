@@ -13,9 +13,13 @@ import com.nokia.meego 1.0
 
 /*
  * Main widget containing the map, models for routing, search, etc.
+ *
+ * @todo: Rename MarbleWidget or similar
  */
-Rectangle {
+Item {
     id: screen
+    anchors.fill: parent
+    visible: false
 
     // The widget representing the map.
     MarbleWidget {
@@ -24,7 +28,10 @@ Rectangle {
 
         // Load settings.
         property bool autoCenter: settings.autoCenter
+
+        /** @todo: This property looks cumbersome... get rid of it */
         property bool initialized: false
+
         mapThemeId: settings.mapTheme
         zoom: settings.quitZoom
         projection: settings.projection
@@ -36,13 +43,8 @@ Rectangle {
         tracking {
             // Connect the position source from below with the map.
             positionSource: positionProvider
-            // Load settings.
             showPosition: settings.showPosition
             showTrack: settings.showTrack
-            // We have our own position marker, the image of a ghost.
-            // Marble will take care of positioning it correctly. It will
-            // be hidden when there is no current position or it is not
-            // visible on the screen
             positionMarker: marker
         }
         
@@ -67,10 +69,9 @@ Rectangle {
             }
         }
         
-        // The grouped property "search" provides access to search related
-        // properties.
         search {
             // Delegate of a search result.
+            /** @todo: Simplify this beast */
             placemarkDelegate: 
                 Image {
                     id: searchDelegate
@@ -182,11 +183,13 @@ Rectangle {
         }
         
         // Returns the grouped property to access routing functions.
+        /** @todo: Needed? Make a property? */
         function getRouting() {
             return map.routing
         }
         
         // Returns the grouped property to access search functions.
+        /** @todo: Needed? Make a property? */
         function getSearch() {
             return map.search
         }
@@ -250,23 +253,26 @@ Rectangle {
     }
     
     // Returns the model that contains routing instructions.
+    /** @todo: Needed? Make a property? */
     function routeRequestModel() {
         return map.routing.routeRequestModel()
     }
     
     // Returns the model that contains points on the route.
+    /** @todo: Needed? Make a property? */
     function waypointModel() {
         return map.routing.waypointModel()
     }
     
     // Returns the grouped property to access routing functions.
+    /** @todo: Needed? Make a property? */
     function getRouting() {
         return map.getRouting()
     }
     
     // Returns the grouped property to access search functions.
+    /** @todo: Needed? Make a property? */
     function getSearch() {
         return map.getSearch()
     }
-
 }

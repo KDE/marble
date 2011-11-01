@@ -12,24 +12,21 @@
 
 namespace Marble
 {
-    
+
 namespace Declarative
 {
 
-Activity::Activity()
+Activity::Activity() :
+    m_page( 0 )
 {
 }
 
-Activity::Activity( const QString& name, const QString& imagePath, const QString& path,
-                    const QStringList& enablePlugins, const QStringList& disablePlugins,
-                    const QMap<QString, QVariant>& relatedActivities,
-                    const QMap<QString, QVariant>& settings ) : m_name ( name ),
-                                                                m_imagePath( imagePath ),
-                                                                m_path( path ),
-                                                                m_enablePlugins( enablePlugins ),
-                                                                m_disablePlugins( disablePlugins ),
-                                                                m_relatedActivities( relatedActivities ),
-                                                                m_settings( settings )
+Activity::Activity( const QString& name, const QString& imagePath, QObject *page,
+                    const QString &path ) :
+    m_name ( name ),
+    m_imagePath( imagePath ),
+    m_page( page ),
+    m_path( path )
 {
 }
 
@@ -63,44 +60,14 @@ QString Activity::path() const
     return m_path;
 }
 
-void Activity::setEnablePlugins( const QStringList& enablePlugins )
+QObject *Activity::page()
 {
-    m_enablePlugins = enablePlugins;
+    return m_page;
 }
 
-QStringList Activity::enablePlugins() const
+void Activity::setPage(QObject *page)
 {
-    return m_enablePlugins;
-}
-
-void Activity::setDisablePlugins( const QStringList& disablePlugins )
-{
-    m_disablePlugins = disablePlugins;
-}
-
-QStringList Activity::disablePlugins() const
-{
-    return m_disablePlugins;
-}
-
-void Activity::setRelatedActivities( const QVariant& relatedActivities )
-{
-    m_relatedActivities.setRelatedActivities( relatedActivities.toMap() );
-}
-
-QMap<QString, QVariant> Activity::relatedActivities() const
-{
-    return m_relatedActivities.relatedActivities();
-}
-
-void Activity::setSettings( const QVariant& settings )
-{
-    m_settings = settings.toMap();
-}
-
-QMap<QString, QVariant> Activity::settings() const
-{
-    return m_settings;
+    m_page = page;
 }
 
 }

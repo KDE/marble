@@ -12,34 +12,89 @@ import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
 /*
- * Page for the search activity.
- * 
- * Displays a search bar on top of the map.
- * 
- * FIXME Text not visible on the desktop.
+ * Page for geocaching activity.
  */
 Page {
     id: searchActivityPage
+    anchors.fill: parent
+
     tools: ToolBarLayout {
-        ToolIcon { iconId: "toolbar-back"; onClicked: { pageStack.pop() } }
+        ToolIcon {
+            iconId: "toolbar-back";
+            onClicked: pageStack.pop()
+        }
+        ToolIcon {
+            iconId: "toolbar-search";
+            onClicked: { searchField.visible = !searchField.visible }
+        }
+        ToolIcon {
+            iconId: "toolbar-view-menu" }
     }
 
-    SearchBar {
-        id: searchBar
-        height: 35
-        anchors.left: parent.left
-        anchors.right: parent.right
-        Keys.onPressed: {
-            if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter ) {
-                mainWidget.find( text )
+
+    Column {
+        width: parent.width
+        height: parent.height
+
+        SearchField {
+            id: searchField
+            width: parent.width
+            onSearch: {
+                searchResultView.searchTerm = term
+                marbleWidget.find( term )
             }
         }
-    }
-    MainWidget {
-        id: mainWidget
-        anchors.top: searchBar.bottom
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
+
+        Item {
+            id: mapContainer
+            clip: true
+            width: parent.width
+            height: parent.height - searchField.height
+
+            Component.onCompleted: {
+                marbleWidget.parent = mapContainer
+                settings.projection = "Mercator"
+                settings.activeRenderPlugins = settings.defaultRenderPlugins
+                settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
+                settings.gpsTracking = false
+                settings.showPosition = false
+                settings.showTrack = false
+                marbleWidget.visible = true
+            }
+
+            Component.onDestruction: {
+                marbleWidget.parent = null
+                marbleWidget.visible = false
+            }
+
+            Rectangle {
+                id: searchResultView
+                anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.margins: 40
+                radius: 10
+                color: "lightsteelblue"
+                border.width: 1
+                border.color: "lightgray"
+                width: 200
+                height: parent.height
+                z: 10
+                opacity: 0.9
+                visible: searchTerm != ""
+                property string searchTerm: ""
+
+                Text {
+                    id: searchResultDescription
+                    anchors.margins: 5
+                    anchors.fill: parent
+                    wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+
+                    text: "<p>Search results for <b>" + searchResultView.searchTerm + "</b></p><p>TODO: Here is a nice place for a search result view, allowing the user to see all results, bookmark them immediately, jump to selected results etc.</p>"
+                }
+
+                /** @todo: Insert a result list / overview here */
+            }
+        }
     }
 }

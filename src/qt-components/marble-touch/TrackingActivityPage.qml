@@ -12,10 +12,10 @@ import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
 /*
- * Page for the weather activity.
+ * Page for geocaching activity.
  */
 Page {
-    id: weatherActivityPage
+    id: trackingActivityPage
     anchors.fill: parent
 
     tools: ToolBarLayout {
@@ -49,14 +49,12 @@ Page {
 
             Component.onCompleted: {
                 marbleWidget.parent = mapContainer
-                settings.projection = "Spherical"
-                var plugins = settings.defaultRenderPlugins
-                plugins.push( "weather" )
-                settings.activeRenderPlugins =  plugins
-                settings.mapTheme = "earth/bluemarble/bluemarble.dgml"
+                settings.projection = "Mercator"
+                settings.activeRenderPlugins = settings.defaultRenderPlugins
+                settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
                 settings.gpsTracking = true
                 settings.showPosition = true
-                settings.showTrack = false
+                settings.showTrack = true
                 marbleWidget.visible = true
             }
 

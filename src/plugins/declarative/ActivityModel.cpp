@@ -11,6 +11,9 @@
 #include "ActivityModel.h"
 #include "Activity.h"
 
+#include <QtDeclarative/QDeclarativeItem>
+#include <QtDeclarative/QDeclarativeProperty>
+
 namespace Marble
 {
     
@@ -45,10 +48,7 @@ ActivityModel::ActivityModel( QObject *parent )
     roles[NameRole] = "name";
     roles[ImagePathRole] = "imagePath";
     roles[PathRole] = "path";
-    roles[EnablePluginsRole] = "enablePlugins";
-    roles[DisablePluginsRole] = "disablePlugins";
-    roles[RelatedActivitiesRole] = "relatedActivities";
-    roles[SettingsRole] = "settings";
+    roles[PageRole] = "page";
     setRoleNames( roles );
 }
 
@@ -57,14 +57,10 @@ ActivityModel::~ActivityModel()
     delete d;
 }
 
-void ActivityModel::addActivity( const QString& name, const QString& imagePath, const QString& path,
-                                 const QStringList& enablePlugins, const QStringList& disablePlugins,
-                                 const QVariant& relatedActivities, const QVariant& settings )
+void ActivityModel::addActivity( const QString& name, const QString& imagePath, QObject* page,
+                                 const QString &path )
 {
-    d->m_activityContainer.push_back( new Activity( name, imagePath, path, enablePlugins, disablePlugins, 
-                                                    relatedActivities.value<QMap<QString, QVariant> >(),
-                                                    settings.value<QMap<QString, QVariant> >()
-                                                  ) );
+    d->m_activityContainer.push_back( new Activity( name, imagePath, page, path ) );
 }
 
 void ActivityModel::removeActivity( const QString& name )
@@ -91,6 +87,15 @@ int ActivityModel::columnCount( const QModelIndex &parent ) const
         return 0;
 }
 
+void ActivityModel::load( QObject *parent, QObject* child )
+{
+    /** @todo: Is doing this here in the model the best place? Rename the method for clarity at least */
+    QDeclarativeItem* parentItem = qobject_cast<QDeclarativeItem*>( parent );
+    if ( parentItem ) {
+        QDeclarativeProperty( parentItem, "marbleWidget" ).write( qVariantFromValue( child ) );
+    }
+}
+
 QVariant ActivityModel::data( const QModelIndex &index, int role ) const
 {
     // Check if passed index is valid.
@@ -108,14 +113,8 @@ QVariant ActivityModel::data( const QModelIndex &index, int role ) const
         return d->m_activityContainer.at( index.row() )->imagePath();
     } else if( role == PathRole ) {
         return d->m_activityContainer.at( index.row() )->path();
-    } else if ( role == EnablePluginsRole ) {
-        return qVariantFromValue( d->m_activityContainer.at( index.row() )->enablePlugins() );
-    } else if ( role == DisablePluginsRole ) {
-        return qVariantFromValue( d->m_activityContainer.at( index.row() )->disablePlugins() );
-    } else if ( role == RelatedActivitiesRole ) {
-        return qVariantFromValue( d->m_activityContainer.at( index.row() )->relatedActivities() );
-    } else if ( role == SettingsRole ) {
-        return qVariantFromValue( d->m_activityContainer.at( index.row() )->settings() );
+    } else if ( role == PageRole ) {
+        return qVariantFromValue( d->m_activityContainer.at( index.row() )->page() );
     } else
         return QVariant();
 }
@@ -135,14 +134,8 @@ QVariant ActivityModel::get( const int index, const QString& role ) const
         return d->m_activityContainer.at( index )->imagePath();
     } else if( role == roles[PathRole] ) {
         return d->m_activityContainer.at( index )->path();
-    } else if ( role == roles[EnablePluginsRole] ) {
-        return qVariantFromValue( d->m_activityContainer.at( index )->enablePlugins() );
-    } else if ( role == roles[DisablePluginsRole] ) {
-        return qVariantFromValue( d->m_activityContainer.at( index )->disablePlugins() );
-    } else if ( role == roles[RelatedActivitiesRole] ) {
-        return qVariantFromValue( d->m_activityContainer.at( index )->relatedActivities() );
-    } else if ( role == roles[SettingsRole] ) {
-        return qVariantFromValue( d->m_activityContainer.at( index )->settings() );
+    } else if ( role == roles[PageRole] ) {
+        return qVariantFromValue( d->m_activityContainer.at( index )->page() );
     } else
         return QVariant();
 }
@@ -171,14 +164,8 @@ QVariant ActivityModel::get( const QString& name, const QString& role ) const
             return activity->imagePath();
         } else if( role == roles[PathRole] ) {
             return activity->path();
-        } else if ( role == roles[EnablePluginsRole] ) {
-            return activity->enablePlugins();
-        } else if ( role == roles[DisablePluginsRole] ) {
-            return activity->disablePlugins();
-        } else if ( role == roles[RelatedActivitiesRole] ) {
-            return activity->relatedActivities();
-        } else if( role == roles[SettingsRole] ) {
-            return activity->settings();
+        } else if( role == roles[PageRole] ) {
+            return qVariantFromValue( activity->page() );
         } else
             return QVariant();
     }

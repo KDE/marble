@@ -16,15 +16,54 @@ import org.kde.edu.marble 0.11
  */
 Page {
     id: geocachingActivityPage
+    anchors.fill: parent
+
     tools: ToolBarLayout {
-        ToolIcon { iconId: "toolbar-back"; onClicked: { pageStack.pop() } }
-        ToolIcon { iconId: "toolbar-search"; onClicked: { pageStack.replace( main.activityModel.get( "Search", "path" ) ); main.changeActivity( "Geocaching", "Search" ) } }
-        ToolIcon { iconId: "telephony-content-sms-dimmed"; onClicked: { pageStack.replace( main.activityModel.get( "Guidance", "path" ) ); main.changeActivity( "Geocaching", "Guidance" ) } }
-        ToolIcon { iconId: "toolbar-view-menu" }
+        ToolIcon {
+            iconId: "toolbar-back";
+            onClicked: pageStack.pop()
+        }
+        ToolIcon {
+            iconId: "toolbar-search";
+            onClicked: { searchField.visible = !searchField.visible }
+        }
+        ToolIcon {
+            iconId: "toolbar-view-menu" }
     }
 
-    MainWidget {
-        id: mainWidget
-        anchors.fill: parent
+    Column {
+        width: parent.width
+        height: parent.height
+
+        SearchField {
+            id: searchField
+            width: parent.width
+            onSearch: marbleWidget.find( term )
+        }
+
+        Item {
+            clip: true
+            id: mapContainer
+            width: parent.width
+            height: parent.height - searchField.height
+
+            Component.onCompleted: {
+                marbleWidget.parent = mapContainer
+                settings.projection = "Mercator"
+                var plugins = settings.defaultRenderPlugins
+                plugins.push( "opencaching" )
+                settings.activeRenderPlugins =  plugins
+                settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
+                settings.gpsTracking = true
+                settings.showPosition = true
+                settings.showTrack = true
+                marbleWidget.visible = true
+            }
+
+            Component.onDestruction: {
+                marbleWidget.parent = null
+                marbleWidget.visible = false
+            }
+        }
     }
 }

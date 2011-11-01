@@ -24,6 +24,7 @@ PageStackWindow {
     platformStyle: defaultStyle
     initialPage: activitySelection
     property alias activityModel: activitySelection.model
+    property alias marbleWidget: mainWidget
     
     // System dependent style for the main window.
     PageStackWindowStyle {
@@ -51,6 +52,10 @@ PageStackWindow {
         }
     }
 
+    MainWidget {
+        id: mainWidget
+    }
+
     // Returns the model which contains routing instructions.
     function routeRequestModel() {
         return mainWidget.routeRequestModel()
@@ -70,86 +75,4 @@ PageStackWindow {
     function getSearch() {
         return mainWidget.getSearch()
     }
-    
-    // Applies all changes necessary to switch from "oldActivity" to "newActivity".
-    function changeActivity( oldActivity, newActivity ) {
-        console.log( "changeActivity: ", oldActivity, " - " , newActivity )
-        adjustPlugins( oldActivity, newActivity )
-        adjustSettings( newActivity )
-    }
-    
-    // Enables the plugin with the passed name.
-    function enablePlugin( name ) {
-        console.log( "trying to enable ", name )
-        var tmp = settings.activeRenderPlugins
-        // Only add plugin if it is not already enabled.
-        if( tmp.indexOf( name ) == -1 ) {
-            console.log( "- enabling: ", name )
-            tmp.push( name )
-            settings.activeRenderPlugins = tmp
-        }
-        else {
-            console.log( "- ", name, " is already enabled" )
-        }
-        console.log( "finished enablePlugin ", name )
-    }
-    
-    // Disables the plugin with the passed name.
-    function disablePlugin( name ) {
-        console.log( "trying to disable ", name )
-        var tmp = new Array()
-        // Add all enabled plugins, except the one with the passed name.
-        for( var i = 0; i < settings.activeRenderPlugins.length; i++ ) {
-            if( settings.activeRenderPlugins[i] != name ) {
-                tmp.push( settings.activeRenderPlugins[i] )
-            }
-            else {
-                console.log( "- disabled: ", name )
-            }
-        }
-        // Apply changes.
-        settings.activeRenderPlugins = tmp
-        console.log( "finished disablePlugin ", name )
-    }
-    
-    // Adjust plugins for switching from "oldActivity" to "newActivity".
-    function adjustPlugins( oldActivity, newActivity ) {
-        console.log( "adjustingPlugins ", oldActivity, newActivity )
-        var preserve = undefined
-        var enable = activitySelection.model.get( newActivity, "enablePlugins" )
-        var disable = activitySelection.model.get( newActivity, "disablePlugins" )
-        var oldRelated = activitySelection.model.get( oldActivity, "relatedActivities" )
-        // Preserve related plugins if "newActivity" is a related activity.
-        if( oldRelated != undefined ) {
-            preserve = oldRelated[newActivity]
-        }
-        // Enable plugins for "newActivity".
-        if( enable != undefined ) {
-            for( var i = 0; i < enable.length; i++ ) {
-                if( preserve == undefined || preserve.indexOf( enable[i] ) == -1 ) {
-                    enablePlugin( enable[i] )
-                }
-            }
-        }
-        // Disable plugins for "newActivity".
-        if( disable != undefined ) {
-            for( var i = 0; i < disable.length; i++ ) {
-                if( preserve == undefined || preserve.indexOf( disable[i] ) == -1 ) {
-                    disablePlugin( disable[i] )
-                }
-            }
-        }
-        console.log( "finished adjusting plugins" )
-    }
-
-    // Adjust settings for passed activity.
-    function adjustSettings( activity ) {
-        console.log( "adjustSettings: ", activity )
-        var changes = activitySelection.model.get( activity, "settings" )
-        for( var i in changes ) {
-            console.log( "- ", i, changes[i] )
-            settings[i] = changes[i]
-        }
-    }
-
 }

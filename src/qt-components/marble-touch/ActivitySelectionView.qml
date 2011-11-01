@@ -64,9 +64,6 @@ Page {
                     }
                     activityPage.activity = activityView.currentIndex = index
                     pageStack.push( path )
-                    activityChanged( activityModel.get( activityPage.previousActivity, "name" ), 
-                                     activityModel.get( activityPage.activity, "name" )
-                    )
                 }
             }
         }
@@ -78,15 +75,38 @@ Page {
         // Inserts activities into model, add more activities here.
         Component.onCompleted: {
             activityModel.addActivity(
-                "Virtual Globe",
-                "qrc:/icons/activity-virtualglobe.png",
-                "qrc:/VirtualGlobeActivityPage.qml",
-                [],
-                [],
-                {},
-                { "projection": "Spherical",
-                  "mapTheme": "earth/bluemarble/bluemarble.dgml" }
-            )
+                        "Virtual Globe",
+                        "qrc:/icons/activity-virtualglobe.png",
+                        marbleWidget,
+                        "qrc:/VirtualGlobeActivityPage.qml"
+                        )
+            activityModel.addActivity(
+                        "Weather",
+                        "qrc:/icons/activity-weather.png",
+                        marbleWidget,
+                        "qrc:/WeatherActivityPage.qml"
+                        )
+            activityModel.addActivity(
+                        "Search",
+                        "qrc:/icons/activity-search.png",
+                        marbleWidget,
+                        "qrc:/SearchActivityPage.qml"
+                        )
+            activityModel.addActivity(
+                        "Tracking",
+                        "qrc:/icons/activity-default.png",
+                        marbleWidget,
+                        "qrc:/TrackingActivityPage.qml"
+                        )
+            activityModel.addActivity(
+                        "Geocaching",
+                        "qrc:/icons/activity-default.png",
+                        marbleWidget,
+                        "qrc:/GeocachingActivityPage.qml"
+                        )
+
+            /** @todo: Implement missing stuff and re-enable the activities below */
+            /*
             activityModel.addActivity(
                 "Drive",
                 "qrc:/icons/activity-default.png",
@@ -125,15 +145,6 @@ Page {
                   "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
             )
             activityModel.addActivity(
-                "Search",
-                "qrc:/icons/activity-search.png",
-                "qrc:/SearchActivityPage.qml",
-                [],
-                [],
-                {},
-                {}
-            )
-            activityModel.addActivity(
                 "Bookmarks",
                 "qrc:/icons/activity-bookmarks.png",
                 "qrc:/BookmarksActivityPage.qml",
@@ -149,36 +160,6 @@ Page {
                 [],
                 [],
                 {},
-                { "projection": "Mercator",
-                  "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
-            )
-            activityModel.addActivity(
-                "Weather",
-                "qrc:/icons/activity-weather.png",
-                "qrc:/WeatherActivityPage.qml",
-                [ "weather" ],
-                [ "opencaching" ],
-                {},
-                { "projection": "Spherical",
-                  "mapTheme": "earth/bluemarble/bluemarble.dgml" }
-            )
-            activityModel.addActivity(
-                "Tracking",
-                "qrc:/icons/activity-default.png",
-                "qrc:/TrackingActivityPage.qml",
-                [],
-                [],
-                {},
-                { "projection": "Mercator",
-                  "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
-            )
-            activityModel.addActivity(
-                "Geocaching",
-                "qrc:/icons/activity-default.png",
-                "qrc:/GeocachingActivityPage.qml",
-                [ "opencaching" ],
-                [ "weather" ],
-                { "Guidance": [ "opencaching" ] },
                 { "projection": "Mercator",
                   "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
             )
@@ -209,6 +190,7 @@ Page {
                 {},
                 {}
             )
+*/
         }
     }
 

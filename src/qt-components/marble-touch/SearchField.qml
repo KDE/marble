@@ -4,30 +4,43 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
+// Copyright 2011 Dennis Nienhüser <earthwings@gentoo.org>
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 
 import QtQuick 1.0
 import com.nokia.meego 1.0
 
 /*
- * A textfield for searching locations.
- */
+     * A textfield for searching locations.
+     */
 TextField {
-    id: textField
+    signal search( string term )
+
+    id: searchField
+
+    /** @todo: What's the exact height of a text field? Should be defined somewhere, use it here */
+    height: visible ? 50 : 0
+
     placeholderText: "Search..."
     // Icon to clear text in the textfield.
     ToolIcon {
         id: clearButton
         iconId: "input-clear"
-        anchors.top: textField.top
-        anchors.right: textField.right
+        anchors.top: searchField.top
+        anchors.right: searchField.right
         anchors.rightMargin: 5
         height: parent.height - 2
         width: parent.height - 2
         // Reset text and clear search.
         onClicked: {
-            textField.text = ""
-            mainWidget.find( text )
+            searchField.text = ""
+            searchField.search( text )
+        }
+    }
+
+    Keys.onPressed: {
+        if( event.key === Qt.Key_Return || event.key === Qt.Key_Enter ) {
+            searchField.search( text )
         }
     }
 }

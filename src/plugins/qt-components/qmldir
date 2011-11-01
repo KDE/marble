@@ -1,5 +1,4 @@
 plugin QtComponentsPlugin
-MainWidget 0.12 MainWidget.qml
 SearchBar 0.12 SearchBar.qml
 RouteRequestView 0.12 RouteRequestView.qml
 WaypointView 0.12 WaypointView.qml

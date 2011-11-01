@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>MainWidget.qml</file>
         <file>SearchBar.qml</file>
         <file>RouteRequestView.qml</file>
         <file>WaypointView.qml</file>

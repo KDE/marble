@@ -16,14 +16,51 @@ import org.kde.edu.marble 0.11
  */
 Page {
     id: virtualGlobeActivityPage
+    anchors.fill: parent
+
     tools: ToolBarLayout {
-        ToolIcon { iconId: "toolbar-back"; onClicked: { pageStack.pop() } }
-        ToolIcon { iconId: "toolbar-search"; onClicked: { pageStack.replace( main.activityModel.get( "Search", "path" ) ); main.changeActivity( "Virtual Globe", "Search" ) } }
-        ToolIcon { iconId: "toolbar-view-menu"; }
+        ToolIcon {
+            iconId: "toolbar-back";
+            onClicked: pageStack.pop()
+        }
+        ToolIcon {
+            iconId: "toolbar-search";
+            onClicked: { searchField.visible = !searchField.visible }
+        }
+        ToolIcon {
+            iconId: "toolbar-view-menu" }
     }
 
-    MainWidget {
-        id: mainWidget
-        anchors.fill: parent
+    Column {
+        width: parent.width
+        height: parent.height
+
+        SearchField {
+            id: searchField
+            width: parent.width
+            onSearch: marbleWidget.find( term )
+        }
+
+        Item {
+            id: mapContainer
+            width: parent.width
+            height: parent.height - searchField.height
+
+            Component.onCompleted: {
+                marbleWidget.parent = mapContainer
+                settings.projection = "Spherical"
+                settings.activeRenderPlugins = settings.defaultRenderPlugins
+                settings.mapTheme = "earth/bluemarble/bluemarble.dgml"
+                settings.gpsTracking = false
+                settings.showPosition = false
+                settings.showTrack = false
+                marbleWidget.visible = true
+            }
+
+            Component.onDestruction: {
+                marbleWidget.parent = null
+                marbleWidget.visible = false
+            }
+        }
     }
 }
