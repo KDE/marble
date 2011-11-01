@@ -154,8 +154,9 @@ Rectangle {
                             fillMode: Image.PreserveAspectFit
                             smooth: true
                             source: "image://theme/icon-m-toolbar-close"
-                            anchors.bottom: parent.top
-                            anchors.left: parent.right
+                            anchors.top: parent.top
+                            anchors.right: parent.right
+                            anchors.margins: 5
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
