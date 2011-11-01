@@ -19,6 +19,8 @@
         <file>icons/activity-search.png</file>
         <file>icons/activity-virtualglobe.png</file>
         <file>icons/activity-weather.png</file>
+        <file>icons/bookmark.png</file>
+        <file>icons/bookmark-disabled.png</file>
         <file>MapThemeSelectionPage.qml</file>
         <file>NavigationSettingsPage.qml</file>
         <file>ViewSettingsPage.qml</file>

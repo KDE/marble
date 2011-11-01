@@ -42,6 +42,7 @@ Page {
             onSearch: {
                 searchResultView.searchTerm = term
                 marbleWidget.find( term )
+                searchResultListView.model = marbleWidget.getSearch().searchResultModel()
             }
         }
 
@@ -87,13 +88,65 @@ Page {
                 Text {
                     id: searchResultDescription
                     anchors.margins: 5
-                    anchors.fill: parent
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: 30
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 
-                    text: "<p>Search results for <b>" + searchResultView.searchTerm + "</b></p><p>TODO: Here is a nice place for a search result view, allowing the user to see all results, bookmark them immediately, jump to selected results etc.</p>"
+                    text: "<p>Search results for <b>" + searchResultView.searchTerm + "</b></p>"
                 }
 
-                /** @todo: Insert a result list / overview here */
+                ListView {
+                    id: searchResultListView
+                    anchors.top: searchResultDescription.bottom
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.bottom: parent.bottom
+                    anchors.margins: 5
+                    width: parent.width
+                    height: parent.height - searchResultDescription.height
+                    model: marbleWidget.getSearch().searchResultModel()
+                    delegate: searchResultDelegate
+                    highlight: Rectangle { color: "white"; radius: 5 }
+                    focus: true
+                }
+            }
+        }
+    }
+
+    Component {
+        id: searchResultDelegate
+
+        Item {
+            width: parent.width
+            height: detailed ? 80 : 20
+            id: searchResultItem
+            property bool detailed: ListView.isCurrentItem
+
+            /** @todo: Need access to bookmark manager here */
+            property bool isBookmark: false
+
+            Column {
+                Image  {
+                    anchors.right: parent.right
+                    source: searchResultItem.isBookmark ? "qrc:/icons/bookmark.png" : "qrc:/icons/bookmark-disabled.png"
+                    visible: searchResultItem.detailed
+                    width: 16
+                    height: 16
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: searchResultItem.isBookmark = !searchResultItem.isBookmark
+                    }
+                }
+
+                Text {
+                    text: (index+1) + ". " + description
+                    width: searchResultItem.width
+                    wrapMode: searchResultItem.detailed ? Text.WrapAtWordBoundaryOrAnywhere : Text.NoWrap
+                    clip: true
+                }
             }
         }
     }
