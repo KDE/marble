@@ -152,6 +152,25 @@ void QuaternionTest::testSpherical_data()
     addRow() <<    0.0 << 89.0;
     addRow() <<   90.0 << 89.0;
     addRow() <<  180.0 << 89.0;
+
+//
+// the following cases fail, which should be fixed
+//
+// related bugs:
+// bug 285570: animated zooming looks incorrect in globe projection when the earth is upside down
+//
+
+//    addRow() << -180.0 << -179.0;
+//    addRow() <<  -90.0 << -179.0;
+//    addRow() <<    0.0 << -179.0;
+//    addRow() <<   90.0 << -179.0;
+//    addRow() <<  180.0 << -179.0;
+
+//    addRow() << -180.0 << 179.0;
+//    addRow() <<  -90.0 << 179.0;
+//    addRow() <<    0.0 << 179.0;
+//    addRow() <<   90.0 << 179.0;
+//    addRow() <<  180.0 << 179.0;
 }
 
 void QuaternionTest::testSpherical()
