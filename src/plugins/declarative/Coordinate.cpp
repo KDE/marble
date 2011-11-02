@@ -75,6 +75,16 @@ qreal Coordinate::distance( qreal longitude, qreal latitude ) const
     return EARTH_RADIUS * distanceSphere( coordinates(), other );
 }
 
+bool Coordinate::operator == ( const Coordinate &other ) const
+{
+    return m_coordinate == other.m_coordinate;
+}
+
+bool Coordinate::operator != ( const Coordinate &other ) const
+{
+    return !operator == ( other );
+}
+
 }
 }
 

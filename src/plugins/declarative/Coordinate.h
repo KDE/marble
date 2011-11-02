@@ -65,6 +65,10 @@ public:
     /** Distance (in meter) to the given coordinate */
     Q_INVOKABLE qreal distance( qreal longitude, qreal latitude ) const;
 
+    bool operator == ( const Coordinate &other ) const;
+
+    bool operator != ( const Coordinate &other ) const;
+
 Q_SIGNALS:
     void longitudeChanged();
     void latitudeChanged();
