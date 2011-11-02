@@ -54,6 +54,9 @@ class MARBLE_EXPORT Quaternion
     static Quaternion   fromSpherical(qreal lon, qreal lat);
     static Quaternion   fromEuler(qreal pitch, qreal yaw, qreal roll);
 
+    static Quaternion slerp(const Quaternion &q1, const Quaternion &q2, qreal t);
+    static Quaternion nlerp(const Quaternion &q1, const Quaternion &q2, qreal t);
+
     // Operators
     Quaternion  operator*(const Quaternion &q) const;
     bool        operator==(const Quaternion &q) const;
@@ -74,9 +77,6 @@ class MARBLE_EXPORT Quaternion
 
 
     void        rotateAroundAxis(const Quaternion &q);
-
-    void        slerp(const Quaternion &q1, const Quaternion &q2, qreal t);
-    void        nlerp(const Quaternion &q1, const Quaternion &q2, qreal t);
 
     void        toMatrix(matrix &m) const;
     void        rotateAroundAxis(const matrix &m);

@@ -172,8 +172,7 @@ void Quaternion::rotateAroundAxis(const Quaternion &q)
     (*this) = q * Quaternion( w, x, y, z );
 }
 
-void Quaternion::slerp( const Quaternion &q1, const Quaternion &q2, 
-                        qreal t)
+Quaternion Quaternion::slerp(const Quaternion &q1, const Quaternion &q2, qreal t)
 {
     qreal  p1;
     qreal  p2;
@@ -195,23 +194,27 @@ void Quaternion::slerp( const Quaternion &q1, const Quaternion &q2,
         p2 = 0.0;
     }
 
-    v[Q_X] = p1 * q1.v[Q_X] + p2 * q2.v[Q_X];
-    v[Q_Y] = p1 * q1.v[Q_Y] + p2 * q2.v[Q_Y];
-    v[Q_Z] = p1 * q1.v[Q_Z] + p2 * q2.v[Q_Z];
-    v[Q_W] = p1 * q1.v[Q_W] + p2 * q2.v[Q_W];
+    const qreal w = p1 * q1.v[Q_W] + p2 * q2.v[Q_W];
+    const qreal x = p1 * q1.v[Q_X] + p2 * q2.v[Q_X];
+    const qreal y = p1 * q1.v[Q_Y] + p2 * q2.v[Q_Y];
+    const qreal z = p1 * q1.v[Q_Z] + p2 * q2.v[Q_Z];
+
+    return Quaternion( w, x, y, z );
 }
 
-void Quaternion::nlerp( const Quaternion &q1, const Quaternion &q2, 
-                        qreal t)
+Quaternion Quaternion::nlerp(const Quaternion &q1, const Quaternion &q2, qreal t)
 {
-    qreal  p1 = 1.0 - t;
- 
-    v[Q_X] = p1 * q1.v[Q_X] + t * q2.v[Q_X];
-    v[Q_Y] = p1 * q1.v[Q_Y] + t * q2.v[Q_Y];
-    v[Q_Z] = p1 * q1.v[Q_Z] + t * q2.v[Q_Z];
-    v[Q_W] = p1 * q1.v[Q_W] + t * q2.v[Q_W];
+    const qreal p1 = 1.0 - t;
 
-    normalize();
+    const qreal w = p1 * q1.v[Q_W] + t * q2.v[Q_W];
+    const qreal x = p1 * q1.v[Q_X] + t * q2.v[Q_X];
+    const qreal y = p1 * q1.v[Q_Y] + t * q2.v[Q_Y];
+    const qreal z = p1 * q1.v[Q_Z] + t * q2.v[Q_Z];
+
+    Quaternion result( w, x, y, z );
+    result.normalize();
+
+    return result;
 }
 
 void Quaternion::toMatrix(matrix &m) const

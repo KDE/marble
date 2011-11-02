@@ -49,13 +49,12 @@ public:
     {
         Q_ASSERT( 0 <= t && t <= 1.0 );
 
-        Quaternion  itpos;    
         GeoDataCoordinates sourcePosition(m_source.longitude(), m_source.latitude());
         GeoDataCoordinates targetPosition(m_target.longitude(), m_target.latitude());
 
         // Spherical interpolation for current position between source position
         // and target position. We can't use Nlerp here, as the "t-velocity" needs to be constant.
-        itpos.slerp( sourcePosition.quaternion(), targetPosition.quaternion(), t );
+        const Quaternion itpos = Quaternion::slerp( sourcePosition.quaternion(), targetPosition.quaternion(), t );
         itpos.getSpherical( lon, lat );
     }
 

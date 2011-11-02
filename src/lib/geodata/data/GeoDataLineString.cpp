@@ -101,11 +101,10 @@ GeoDataCoordinates GeoDataLineStringPrivate::findDateLine( const GeoDataCoordina
 
     qreal  lon = 0.0;
     qreal  lat = 0.0;
-    Quaternion  itpos;
 
     qreal altDiff = currentCoords.altitude() - previousCoords.altitude();
 
-    itpos.nlerp( previousCoords.quaternion(), currentCoords.quaternion(), 0.5 );
+    const Quaternion itpos = Quaternion::nlerp( previousCoords.quaternion(), currentCoords.quaternion(), 0.5 );
     itpos.getSpherical( lon, lat );
 
     qreal altitude = previousCoords.altitude() + 0.5 * altDiff;
