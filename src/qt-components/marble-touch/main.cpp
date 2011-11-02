@@ -26,7 +26,12 @@ int main( int argc, char *argv[] )
     // Window takes up full screen on arm (mobile) devices.
     view.showFullScreen();
 #else
-    view.resize( view.initialSize().width(), view.initialSize().height() );
+    if ( app.arguments().contains( "--portrait" ) ) {
+        view.resize( view.initialSize().height(), view.initialSize().width() );
+        view.setTransform( QTransform().rotate( 90 ) );
+    } else {
+        view.resize( view.initialSize().width(), view.initialSize().height() );
+    }
     view.show();
 #endif
 
