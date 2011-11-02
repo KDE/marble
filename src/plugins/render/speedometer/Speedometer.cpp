@@ -39,7 +39,7 @@ Speedometer::~Speedometer()
 
 QStringList Speedometer::backendTypes() const
 {
-    return QStringList( "Speedometer" );
+    return QStringList( "speedometer" );
 }
 
 QString Speedometer::name() const
@@ -54,7 +54,7 @@ QString Speedometer::guiString() const
 
 QString Speedometer::nameId() const
 {
-    return QString( "Speedometer" );
+    return QString( "speedometer" );
 }
 
 QString Speedometer::description() const
