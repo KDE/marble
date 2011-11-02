@@ -50,7 +50,9 @@ Page {
             Component.onCompleted: {
                 marbleWidget.parent = mapContainer
                 settings.projection = "Mercator"
-                settings.activeRenderPlugins = settings.defaultRenderPlugins
+                var plugins = settings.defaultRenderPlugins
+                plugins.push( "speedometer" )
+                settings.activeRenderPlugins =  plugins
                 settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
                 settings.gpsTracking = true
                 settings.showPosition = true
