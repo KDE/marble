@@ -240,7 +240,7 @@ QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThe
     QList<QStandardItem *> itemList;
 
     GeoSceneDocument *mapTheme = loadMapTheme( mapThemeID );
-    if ( !mapTheme ) {
+    if ( !mapTheme || !mapTheme->head()->visible() ) {
         return itemList;
     }
 
