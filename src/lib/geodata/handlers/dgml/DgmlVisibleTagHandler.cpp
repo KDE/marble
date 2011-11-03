@@ -41,7 +41,7 @@ GeoNode* DgmlVisibleTagHandler::parse(GeoParser& parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Head)) {
         QString parsedText = parser.readElementText().toLower().trimmed();
-        parentItem.nodeAs<GeoSceneHead>()->setVisible(parsedText == dgmlValue_true || dgmlValue_on);
+        parentItem.nodeAs<GeoSceneHead>()->setVisible(parsedText == dgmlValue_true || parsedText == dgmlValue_on);
     }
 
     return 0;
