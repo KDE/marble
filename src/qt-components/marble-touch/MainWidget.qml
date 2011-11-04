@@ -63,19 +63,12 @@ Item {
             initialized = true
         }
         
-        onZoomChanged: {
-            // Update settings to new zoom level.
+        Component.onDestruction: {
             settings.quitZoom = zoom
+            settings.quitLongitude = center.longitude
+            settings.quitLatitude = center.latitude
         }
-        
-        onVisibleLatLonAltBoxChanged: {
-            if( initialized ) {
-                // Update last center.
-                settings.quitLongitude = center.longitude
-                settings.quitLatitude = center.latitude
-            }
-        }
-        
+
         search {
             // Delegate of a search result.
             /** @todo: Simplify this beast */
