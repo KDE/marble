@@ -32,6 +32,8 @@ class Tracking : public QObject
     Q_PROPERTY( bool showTrack READ showTrack WRITE setShowTrack NOTIFY showTrackChanged )
     Q_PROPERTY( Marble::Declarative::PositionSource* positionSource READ positionSource WRITE setPositionSource NOTIFY positionSourceChanged )
     Q_PROPERTY( QObject* positionMarker READ positionMarker WRITE setPositionMarker NOTIFY positionMarkerChanged )
+    Q_PROPERTY( bool hasLastKnownPosition READ hasLastKnownPosition NOTIFY hasLastKnownPositionChanged )
+    Q_PROPERTY( Marble::Declarative::Coordinate* lastKnownPosition READ lastKnownPosition WRITE setLastKnownPosition NOTIFY lastKnownPositionChanged )
 
 public:
     explicit Tracking( QObject* parent = 0);
@@ -54,6 +56,12 @@ public:
 
     void setMarbleWidget( Marble::MarbleWidget* widget );
 
+    bool hasLastKnownPosition() const;
+
+    Coordinate *lastKnownPosition();
+
+    void setLastKnownPosition( Marble::Declarative::Coordinate* lastKnownPosition );
+
 Q_SIGNALS:
     void showPositionChanged();
 
@@ -63,8 +71,16 @@ Q_SIGNALS:
 
     void positionMarkerChanged();
 
+    void hasLastKnownPositionChanged();
+
+    void lastKnownPositionChanged();
+
 private Q_SLOTS:
     void updatePositionMarker();
+
+    void updateLastKnownPosition();
+
+    void setHasLastKnownPosition();
 
 private:
     void setShowPositionMarkerPlugin( bool visible );
@@ -78,6 +94,10 @@ private:
     QObject* m_positionMarker;
 
     Marble::MarbleWidget* m_marbleWidget;
+
+    bool m_hasLastKnownPosition;
+
+    Marble::Declarative::Coordinate m_lastKnownPosition;
 };
 
 }

@@ -25,9 +25,11 @@ Tracking::Tracking( QObject* parent) : QObject( parent ),
     m_showTrack( true ),
     m_positionSource( 0 ),
     m_positionMarker( 0 ),
-    m_marbleWidget( 0 )
+    m_marbleWidget( 0 ),
+    m_hasLastKnownPosition( false )
 {
-    // nothing to do
+    connect( &m_lastKnownPosition, SIGNAL( longitudeChanged() ), this, SLOT( setHasLastKnownPosition() ) );
+    connect( &m_lastKnownPosition, SIGNAL( latitudeChanged() ), this, SLOT( setHasLastKnownPosition() ) );
 }
 
 bool Tracking::showPosition() const
@@ -78,6 +80,8 @@ void Tracking::setPositionSource( PositionSource* source )
             source->setMarbleWidget( m_marbleWidget );
             connect( source, SIGNAL( positionChanged() ),
                     this, SLOT( updatePositionMarker() ) );
+            connect( source, SIGNAL( positionChanged() ),
+                    this, SLOT( updateLastKnownPosition() ) );
             connect( source, SIGNAL( hasPositionChanged() ),
                     this, SLOT( updatePositionMarker() ) );
             connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
@@ -137,6 +141,21 @@ void Tracking::updatePositionMarker()
     }
 }
 
+void Tracking::updateLastKnownPosition()
+{
+    if ( m_positionSource && m_positionSource->hasPosition() ) {
+        setLastKnownPosition( m_positionSource->position() );
+    }
+}
+
+void Tracking::setHasLastKnownPosition()
+{
+    if ( !m_hasLastKnownPosition ) {
+        m_hasLastKnownPosition = true;
+        emit hasLastKnownPositionChanged();
+    }
+}
+
 void Tracking::setShowPositionMarkerPlugin( bool visible )
 {
     if ( m_marbleWidget ) {
@@ -150,8 +169,25 @@ void Tracking::setShowPositionMarkerPlugin( bool visible )
     }
 }
 
+bool Tracking::hasLastKnownPosition() const
+{
+    return m_hasLastKnownPosition;
 }
 
+Marble::Declarative::Coordinate * Tracking::lastKnownPosition()
+{
+    return &m_lastKnownPosition;
+}
+
+void Tracking::setLastKnownPosition( Marble::Declarative::Coordinate* lastKnownPosition )
+{
+    if ( lastKnownPosition && *lastKnownPosition != m_lastKnownPosition ) {
+        m_lastKnownPosition.setCoordinates( lastKnownPosition->coordinates() );
+        emit lastKnownPositionChanged();
+    }
+}
+
+}
 }
 
 #include "Tracking.moc"
