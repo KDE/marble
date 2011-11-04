@@ -46,12 +46,19 @@ Item {
             showPosition: settings.showPosition
             showTrack: settings.showTrack
             positionMarker: marker
+
+            onLastKnownPositionChanged: {
+                settings.lastKnownLongitude = map.tracking.lastKnownPosition.longitude
+                settings.lastKnownLatitude = map.tracking.lastKnownPosition.latitude
+            }
         }
         
         Component.onCompleted: {
             // Load last center of the map.
             center.longitude = settings.quitLongitude
             center.latitude = settings.quitLatitude
+            tracking.lastKnownPosition.longitude = settings.lastKnownLongitude
+            tracking.lastKnownPosition.latitude = settings.lastKnownLatitude
             routing.clearRoute()
             initialized = true
         }
@@ -72,108 +79,108 @@ Item {
         search {
             // Delegate of a search result.
             /** @todo: Simplify this beast */
-            placemarkDelegate: 
+            placemarkDelegate:
                 Image {
-                    id: searchDelegate
-                    source: "qrc:/placemark.svg"
-                    width: 30
-                    fillMode: Image.PreserveAspectFit
-                    smooth: true
-                    Rectangle {
-                        id: routingOptions
-                        visible: false
-                        color: "white"
-                        width: 350
-                        height: nameLabel.height + routingButtons.height + 30
-                        border.width: 1
-                        border.color: "blue"
-                        radius: 10
-                        // Name of the search result.
-                        Label {
-                            id: nameLabel
-                            text: name
-                            width: 340
-                            anchors.top: parent.top
-                            anchors.left: parent.left
-                            anchors.topMargin: 10
-                            anchors.leftMargin: 10
-                            anchors.rightMargin: 10
-                            platformStyle: LabelStyle { fontPixelSize: 20 }
-                        }
-                        // Buttons "Directioins from here" and "Directions to here" for routing.
-                        Column {
-                            id: routingButtons
-                            anchors.bottom: parent.bottom
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            anchors.bottomMargin: 10
-                            spacing: 5
-                            Rectangle {
-                                color: "white"
-                                width: 230
-                                height: 35
-                                border.width: 1
-                                border.color: "blue"
-                                radius: 10
-                                Label {
-                                    text: "Directions from here"
-                                    anchors.centerIn: parent
-                                    platformStyle: LabelStyle { fontPixelSize: 20 }
-                                }
-                                MouseArea {
-                                    anchors.fill: parent
-                                    onClicked: {
-                                        routingOptions.visible = false
-                                        map.routing.setVia( 0, longitude, latitude )
-                                    }
-                                }
+                id: searchDelegate
+                source: "qrc:/placemark.svg"
+                width: 30
+                fillMode: Image.PreserveAspectFit
+                smooth: true
+                Rectangle {
+                    id: routingOptions
+                    visible: false
+                    color: "white"
+                    width: 350
+                    height: nameLabel.height + routingButtons.height + 30
+                    border.width: 1
+                    border.color: "blue"
+                    radius: 10
+                    // Name of the search result.
+                    Label {
+                        id: nameLabel
+                        text: name
+                        width: 340
+                        anchors.top: parent.top
+                        anchors.left: parent.left
+                        anchors.topMargin: 10
+                        anchors.leftMargin: 10
+                        anchors.rightMargin: 10
+                        platformStyle: LabelStyle { fontPixelSize: 20 }
+                    }
+                    // Buttons "Directioins from here" and "Directions to here" for routing.
+                    Column {
+                        id: routingButtons
+                        anchors.bottom: parent.bottom
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.bottomMargin: 10
+                        spacing: 5
+                        Rectangle {
+                            color: "white"
+                            width: 230
+                            height: 35
+                            border.width: 1
+                            border.color: "blue"
+                            radius: 10
+                            Label {
+                                text: "Directions from here"
+                                anchors.centerIn: parent
+                                platformStyle: LabelStyle { fontPixelSize: 20 }
                             }
-                            Rectangle {
-                                color: "white"
-                                width: 230
-                                height: 35
-                                border.width: 1
-                                border.color: "blue"
-                                radius: 10
-                                Label {
-                                    text: "Directions to here"
-                                    anchors.centerIn: parent
-                                    platformStyle: LabelStyle { fontPixelSize: 20 }
-                                }
-                                MouseArea {
-                                    anchors.fill: parent
-                                    onClicked: {
-                                        routingOptions.visible = false
-                                        map.routing.setVia( 1, longitude, latitude )
-                                    }
-                                }
-                            }
-                        }
-                        // Small cross that closes the search result info if its clicked.
-                        Image {
-                            id: closeImage
-                            width: 30
-                            fillMode: Image.PreserveAspectFit
-                            smooth: true
-                            source: "image://theme/icon-m-toolbar-close"
-                            anchors.top: parent.top
-                            anchors.right: parent.right
-                            anchors.margins: 5
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
                                     routingOptions.visible = false
+                                    map.routing.setVia( 0, longitude, latitude )
+                                }
+                            }
+                        }
+                        Rectangle {
+                            color: "white"
+                            width: 230
+                            height: 35
+                            border.width: 1
+                            border.color: "blue"
+                            radius: 10
+                            Label {
+                                text: "Directions to here"
+                                anchors.centerIn: parent
+                                platformStyle: LabelStyle { fontPixelSize: 20 }
+                            }
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: {
+                                    routingOptions.visible = false
+                                    map.routing.setVia( 1, longitude, latitude )
                                 }
                             }
                         }
                     }
-                    // Show search result info if the placemark is clicked.
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            routingOptions.visible = !routingOptions.visible
+                    // Small cross that closes the search result info if its clicked.
+                    Image {
+                        id: closeImage
+                        width: 30
+                        fillMode: Image.PreserveAspectFit
+                        smooth: true
+                        source: "image://theme/icon-m-toolbar-close"
+                        anchors.top: parent.top
+                        anchors.right: parent.right
+                        anchors.margins: 5
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                routingOptions.visible = false
+                            }
                         }
                     }
                 }
+                // Show search result info if the placemark is clicked.
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        routingOptions.visible = !routingOptions.visible
+                    }
+                }
+            }
         }
     }
     
@@ -227,6 +234,28 @@ Item {
             }
         }
     }
+
+    Image {
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: 10
+        z: 10
+
+        source: map.tracking.positionSource.hasPosition ? "qrc:/marker.svg" : "qrc:/marker-yellow.svg"
+        visible: settings.showPosition
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                if ( map.tracking.positionSource.hasPosition ) {
+                    centerOn( map.tracking.positionSource.position.longitude, map.tracking.positionSource.position.latitude )
+                } else {
+                    centerOn( map.tracking.lastKnownPosition.longitude, map.tracking.lastKnownPosition.latitude )
+                }
+            }
+        }
+    }
+
     
     // Starts a search for the passed term.
     function find( term ) {
