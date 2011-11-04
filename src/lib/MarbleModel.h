@@ -157,7 +157,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @param  lat  the latitude of the home point.
      * @param  zoom the default zoom level of the home point.
      */
-    void home( qreal &lon, qreal &lat, int& zoom );
+    void home( qreal &lon, qreal &lat, int& zoom ) const;
     /**
      * @brief  Set the home point
      * @param  lon  the longitude of the new home point.

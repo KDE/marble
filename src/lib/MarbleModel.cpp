@@ -313,7 +313,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme )
     emit themeChanged( mapTheme->head()->mapThemeId() );
 }
 
-void MarbleModel::home( qreal &lon, qreal &lat, int& zoom )
+void MarbleModel::home( qreal &lon, qreal &lat, int& zoom ) const
 {
     d->m_homePoint.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
     zoom = d->m_homeZoom;

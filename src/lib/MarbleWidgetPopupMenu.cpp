@@ -40,7 +40,7 @@ using namespace Marble;
 /* TRANSLATOR Marble::MarbleWidgetPopupMenu */
 
 MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget, 
-                                         MarbleModel *model)
+                                         const MarbleModel *model)
     : QObject(widget),
       m_model(model),
       m_widget(widget),

@@ -41,7 +41,7 @@ class MarbleWidgetPopupMenu  : public QObject
     Q_OBJECT
 
  public:
-    MarbleWidgetPopupMenu(MarbleWidget*, MarbleModel*);
+    MarbleWidgetPopupMenu(MarbleWidget*, const MarbleModel*);
     virtual ~MarbleWidgetPopupMenu(){}
 
     /**
@@ -80,7 +80,7 @@ private Q_SLOTS:
 
  private:
     Q_DISABLE_COPY( MarbleWidgetPopupMenu )
-    MarbleModel    *m_model;
+    const MarbleModel    *const m_model;
     MarbleWidget   *m_widget;
 
     QVector<const GeoDataPlacemark*>  m_featurelist;
