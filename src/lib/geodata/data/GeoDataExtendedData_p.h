@@ -15,6 +15,7 @@
 #include <QtCore/QHash>
 
 #include "GeoDataData.h"
+#include "GeoDataSimpleArrayData.h"
 
 #include "GeoDataTypes.h"
 
@@ -31,6 +32,7 @@ class GeoDataExtendedDataPrivate
     }
 
     QHash< QString, GeoDataData > hash;
+    QHash< QString, GeoDataSimpleArrayData > arrayHash;
 
 };
 

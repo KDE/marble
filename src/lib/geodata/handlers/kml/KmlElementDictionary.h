@@ -144,9 +144,11 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_Scale;
     GEODATA_EXPORT extern const char* kmlTag_scale;
     GEODATA_EXPORT extern const char* kmlTag_Schema;
+    GEODATA_EXPORT extern const char* kmlTag_SchemaData;
     GEODATA_EXPORT extern const char* kmlTag_SchemaField;
     GEODATA_EXPORT extern const char* kmlTag_ScreenOverlay;
     GEODATA_EXPORT extern const char* kmlTag_screenXY;
+    GEODATA_EXPORT extern const char* kmlTag_SimpleArrayData;
     GEODATA_EXPORT extern const char* kmlTag_SimpleArrayField;
     GEODATA_EXPORT extern const char* kmlTag_SimpleField;
     GEODATA_EXPORT extern const char* kmlTag_size;

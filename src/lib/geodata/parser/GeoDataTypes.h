@@ -61,6 +61,7 @@ extern const char* GeoDataPointType;
 extern const char* GeoDataPolygonType;
 extern const char* GeoDataPolyStyleType;
 extern const char* GeoDataRegionType;
+extern const char* GeoDataSimpleArrayDataType;
 extern const char* GeoDataStyleSelectorType;
 extern const char* GeoDataStyleType;
 extern const char* GeoDataStyleMapType;

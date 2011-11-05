@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010     Harshit Jain <hjain.itbhu@gmail.com>
+// Copyright 2011     Niko Sams <niko.sams@gmail.com>
 //
 
 #ifndef MARBLE_GEODATAEXTENDEDDATA_H
@@ -21,6 +22,8 @@
 
 namespace Marble
 {
+
+class GeoDataSimpleArrayData;
 
 class GeoDataExtendedDataPrivate;
 
@@ -85,7 +88,17 @@ class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
      * @brief return value of GeoDataExtendedData object associated with the given @p key as a modifiable reference
      */
     GeoDataData& valueRef( const QString& key ) const;
-    
+
+    /**
+     * @brief set SimpleArrayData for given @p key
+     */
+    void setSimpleArrayData( const QString& key, const GeoDataSimpleArrayData& values );
+
+    /**
+     * @brief return SimpleArrayData for given @p key as a modifiable reference
+     */
+    GeoDataSimpleArrayData& simpleArrayData( const QString& key );
+
 
     /**
      * @brief Serialize the ExtendedData to a stream

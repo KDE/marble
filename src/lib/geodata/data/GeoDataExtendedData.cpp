@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Harshit Jain <hjain.itbhu@gmail.com>
+// Copyright 2011      Niko Sams <niko.sams@gmail.com>
 //
 
 #include "GeoDataExtendedData.h"
@@ -82,6 +83,16 @@ bool GeoDataExtendedData::isEmpty( ) const
 bool GeoDataExtendedData::contains( const QString &key ) const
 {
     return d->hash.contains( key );
+}
+
+void GeoDataExtendedData::setSimpleArrayData( const QString& key, const GeoDataSimpleArrayData& values )
+{
+    d->arrayHash[ key ] = values;
+}
+
+GeoDataSimpleArrayData& GeoDataExtendedData::simpleArrayData( const QString& key )
+{
+    return d->arrayHash[ key ];
 }
 
 void GeoDataExtendedData::pack( QDataStream& stream ) const

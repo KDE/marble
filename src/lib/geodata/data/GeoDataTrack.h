@@ -20,6 +20,7 @@
 namespace Marble {
 
 class GeoDataTrackPrivate;
+class GeoDataExtendedData;
 
 /**
  * @class GeoDataTrack
@@ -148,6 +149,17 @@ public:
      * Return the GeoDataLineString representing the current track
      */
     GeoDataLineString *lineString() const;
+
+    /**
+     * Return the ExtendedData assigned to the feature.
+     */
+    GeoDataExtendedData& extendedData() const;
+
+    /**
+     * Sets the ExtendedData of the feature.
+     * @param  extendedData  the new ExtendedData to be used.
+     */
+    void setExtendedData( const GeoDataExtendedData& extendedData );
 
     virtual const char* nodeType() const;
     virtual EnumGeometryId geometryId() const;

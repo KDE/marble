@@ -15,6 +15,7 @@
 #include "KmlElementDictionary.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataFeature.h"
+#include "GeoDataTrack.h"
 
 #include "GeoParser.h"
 
@@ -38,6 +39,14 @@ GeoNode* KmlExtendedDataTagHandler::parse( GeoParser& parser ) const
 #endif // DEBUG_TAGS
         parentItem.nodeAs<GeoDataFeature>()->setExtendedData( extendedData );
         return static_cast<GeoDataExtendedData*>( &parentItem.nodeAs<GeoDataFeature>()->extendedData() );
+    } else if( parentItem.is<GeoDataTrack>() ) {
+        GeoDataExtendedData extendedData;
+#ifdef DEBUG_TAGS
+        mDebug() << "Parsed <" << kmlTag_ExtendedData << ">"
+                 << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
+        parentItem.nodeAs<GeoDataTrack>()->setExtendedData( extendedData );
+        return static_cast<GeoDataExtendedData*>( &parentItem.nodeAs<GeoDataTrack>()->extendedData() );
     } else {
         return 0;
     }

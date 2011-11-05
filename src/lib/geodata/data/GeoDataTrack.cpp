@@ -19,6 +19,7 @@
 
 #include <QtCore/QMap>
 #include <QtCore/QLinkedList>
+#include "GeoDataExtendedData.h"
 
 namespace Marble {
 
@@ -39,6 +40,7 @@ public:
 
     QLinkedList<QDateTime> m_whenStack;
     QLinkedList<GeoDataCoordinates> m_coordStack;
+    GeoDataExtendedData m_extendedData;
 
     bool m_interpolate;
 };
@@ -209,6 +211,16 @@ GeoDataLineString *GeoDataTrack::lineString() const
         d->m_lineStringNeedsUpdate = false;
     }
     return d->m_lineString;
+}
+
+GeoDataExtendedData& GeoDataTrack::extendedData() const
+{
+    return d->m_extendedData;
+}
+
+void GeoDataTrack::setExtendedData( const GeoDataExtendedData& extendedData )
+{
+    d->m_extendedData = extendedData;
 }
 
 const char* GeoDataTrack::nodeType() const
