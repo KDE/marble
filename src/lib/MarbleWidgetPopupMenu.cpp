@@ -47,16 +47,12 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
       m_widget(widget),
       m_lmbMenu( new QMenu( m_widget ) ),
       m_rmbMenu( new QMenu( m_widget ) ),
-      m_planetAction( new QAction( tr( "&Earth" ), this ) ),
       m_copyCoordinateAction( new QAction( tr("Copy Coordinates"), this ) ),
       m_setHomePointAction( new QAction( tr( "&Set Home Location" ), this ) ),
       m_rmbExtensionPoint( 0 ),
       m_runnerManager( 0 )
 {
     //	Property actions (Left mouse button)
-    //	m_planetAction = new QAction(QIcon("icon.png"), tr("&Earth"), this);
-    m_planetAction->setData( 0 );
-
     m_infoDialogAction = new QAction( this );
     m_infoDialogAction->setData( 0 );
 
@@ -188,20 +184,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
         m_lmbMenu->addAction( (*itW)->action() );
     }
 
-    // Not implemented yet ;-)
-    m_planetAction->setEnabled( false );
-
-    m_lmbMenu->addAction( m_planetAction );
     m_lmbMenu->addSeparator();
-
-    // Setting the proper planet name
-    QString targetString = m_model->planet()->name();
-    mDebug() << "targetString" << targetString;
-    // FIXME: this should be removed later on ...
-    if ( targetString == "Earth" ) 
-        targetString = tr( "&Earth" );
-
-    m_planetAction->setText( targetString );
 
     m_copyCoordinateAction->setEnabled( true );
     m_copyCoordinateAction->setText( tr("Copy Coordinates") );

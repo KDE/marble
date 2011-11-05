@@ -98,7 +98,6 @@ private Q_SLOTS:
     QAction *m_showOrbitAction;
     QAction *m_trackPlacemarkAction;
 
-    QAction  *const m_planetAction;
     QAction  *const m_copyCoordinateAction;
     QAction  *const m_setHomePointAction;
 
