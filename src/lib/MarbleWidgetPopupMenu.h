@@ -36,7 +36,7 @@ class GeoDataPlacemark;
 class MarbleRunnerManager;
 
 
-class MarbleWidgetPopupMenu  : public QObject 
+class MarbleWidgetPopupMenu  : public QObject
 {
     Q_OBJECT
 
@@ -75,7 +75,6 @@ private Q_SLOTS:
       * coordinates are valid, which will be true if the right button menu was opened at least once.
       */
     bool mouseCoordinates( GeoDataCoordinates* coordinates, QAction* dataContainer );
-    void createActions();
     QMenu* createInfoBoxMenu();
 
  private:
@@ -86,12 +85,12 @@ private Q_SLOTS:
     QVector<const GeoDataPlacemark*>  m_featurelist;
     QList<AbstractDataPluginItem *> m_itemList;
 
-    QMenu    *m_lmbMenu;
-    QMenu    *m_rmbMenu;
-    QAction  *m_planetAction;	
+    QMenu    *const m_lmbMenu;
+    QMenu    *const m_rmbMenu;
 
-    QAction  *m_copyCoordinateAction;
-    QAction  *m_setHomePointAction; 
+    QAction  *const m_planetAction;
+    QAction  *const m_copyCoordinateAction;
+    QAction  *const m_setHomePointAction;
 
     QAction  *m_rmbExtensionPoint;
 

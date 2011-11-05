@@ -46,25 +46,19 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
       m_widget(widget),
       m_lmbMenu( new QMenu( m_widget ) ),
       m_rmbMenu( new QMenu( m_widget ) ),
+      m_planetAction( new QAction( tr( "&Earth" ), this ) ),
+      m_copyCoordinateAction( new QAction( tr("Copy Coordinates"), this ) ),
+      m_setHomePointAction( new QAction( tr( "&Set Home Location" ), this ) ),
+      m_rmbExtensionPoint( 0 ),
       m_runnerManager( 0 )
-{
-    connect( m_lmbMenu, SIGNAL( triggered( QAction* ) ),
-             this,      SLOT( showFeatureInfo( QAction* ) ) );
-    createActions();
-}
-
-void MarbleWidgetPopupMenu::createActions()
 {
     //	Property actions (Left mouse button)
     //	m_planetAction = new QAction(QIcon("icon.png"), tr("&Earth"), this);
-    m_planetAction = new QAction( tr( "&Earth" ), this );
     m_planetAction->setData( 0 );
-    m_copyCoordinateAction = new QAction( tr( "0 N 0 W" ), this );
 
     //	Tool actions (Right mouse button)
     QAction* fromHere = new QAction( tr( "Directions &from here" ), this );
     QAction* toHere = new QAction( tr( "Directions &to here" ), this );
-    m_setHomePointAction  = new QAction( tr( "&Set Home Location" ), this);
     QAction* addBookmark = new QAction( QIcon(":/icons/bookmark-new.png"),
                                         tr( "Add &Bookmark" ), this );
     QAction* fullscreenAction = new QAction( tr( "&Full Screen Mode" ), this );
@@ -94,6 +88,8 @@ void MarbleWidgetPopupMenu::createActions()
         m_rmbMenu->addAction( fullscreenAction );
     }
 
+
+    connect( m_lmbMenu, SIGNAL( triggered( QAction* ) ), SLOT( showFeatureInfo( QAction* ) ) );
     connect( fromHere, SIGNAL( triggered( ) ), SLOT( directionsFromHere() ) );
     connect( toHere, SIGNAL( triggered( ) ), SLOT( directionsToHere() ) );
     connect( m_setHomePointAction, SIGNAL( triggered() ), SLOT( slotSetHomePoint() ) );
@@ -177,8 +173,6 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 
     m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoDataCoordinates::Radian );
 
-    m_copyCoordinateAction->setEnabled( true );
-    m_copyCoordinateAction->setText( tr("Copy Coordinates") );
     m_copyCoordinateAction->setData( curpos );
 
     QMenu *positionMenu = m_lmbMenu->addMenu( GeoDataCoordinates( lon, lat, GeoDataCoordinates::Radian ).toString() );
