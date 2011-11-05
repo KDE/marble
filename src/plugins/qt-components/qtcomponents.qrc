@@ -7,6 +7,7 @@
         <file>SearchResultSelectionDialog.qml</file>
         <file>marker.svg</file>
         <file>marker-yellow.svg</file>
+        <file>marker-direction.svg</file>
         <file>placemark.svg</file>
     </qresource>
 </RCC>

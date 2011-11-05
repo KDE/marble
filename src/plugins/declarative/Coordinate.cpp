@@ -75,6 +75,15 @@ qreal Coordinate::distance( qreal longitude, qreal latitude ) const
     return EARTH_RADIUS * distanceSphere( coordinates(), other );
 }
 
+qreal Coordinate::bearing( qreal longitude, qreal latitude ) const
+{
+    qreal deltaLon = longitude * DEG2RAD - m_coordinate.longitude();
+    qreal y = sin( deltaLon ) * cos( latitude * DEG2RAD );
+    qreal x = cos( m_coordinate.latitude() ) * sin( latitude * DEG2RAD ) -
+              sin( m_coordinate.latitude() ) * cos( latitude * DEG2RAD ) * cos( deltaLon );
+    return RAD2DEG * atan2( y, x );
+}
+
 bool Coordinate::operator == ( const Coordinate &other ) const
 {
     return m_coordinate == other.m_coordinate;

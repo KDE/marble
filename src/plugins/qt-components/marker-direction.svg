@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="marker-yellow.svg">
+   sodipodi:docname="marker-direction.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -170,7 +170,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="10.584505"
      inkscape:cx="1.3612632"
-     inkscape:cy="27.771909"
+     inkscape:cy="26.921609"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -192,7 +192,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -202,14 +202,10 @@
      id="layer1"
      transform="translate(-60.242086,-886.96983)">
     <path
-       sodipodi:type="arc"
-       style="fill:#e3ad00;fill-opacity:1;stroke:#555753;stroke-width:5.11612606000000003;stroke-miterlimit:4;stroke-dasharray:none"
-       id="path3018"
-       sodipodi:cx="28.814602"
-       sodipodi:cy="40.745274"
-       sodipodi:rx="14.495689"
-       sodipodi:ry="14.495689"
-       d="m 43.310291,40.745274 a 14.495689,14.495689 0 1 1 -28.991378,0 14.495689,14.495689 0 1 1 28.991378,0 z"
-       transform="matrix(0.58638121,0,0,0.58638121,59.345745,879.07757)" />
+       style="fill:#555753;fill-opacity:1;stroke:none"
+       d="m 76.242086,886.96983 -8.89542,11.52647 17.857646,0 z"
+       id="rect3779"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
   </g>
 </svg>

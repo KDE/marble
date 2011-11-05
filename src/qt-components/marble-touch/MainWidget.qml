@@ -229,26 +229,40 @@ Item {
     }
 
     Image {
+        id: positionFinderDirection
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins: 10
         z: 10
+        visible: settings.showPosition
+        smooth: true
+
+        source: "qrc:/marker-direction.svg"
+        rotation: 180 + map.tracking.lastKnownPosition.bearing( map.center.longitude, map.center.latitude )
+    }
+
+    Image {
+        id: positionFinder
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: 10
+        z: 10
+        visible: settings.showPosition
 
         source: map.tracking.positionSource.hasPosition ? "qrc:/marker.svg" : "qrc:/marker-yellow.svg"
-        visible: settings.showPosition
 
         MouseArea {
             anchors.fill: parent
-            onClicked: {
-                if ( map.tracking.positionSource.hasPosition ) {
-                    centerOn( map.tracking.positionSource.position.longitude, map.tracking.positionSource.position.latitude )
-                } else {
-                    centerOn( map.tracking.lastKnownPosition.longitude, map.tracking.lastKnownPosition.latitude )
-                }
-            }
+            onClicked: centerOn( map.tracking.lastKnownPosition.longitude, map.tracking.lastKnownPosition.latitude )
         }
     }
 
+    Text {
+        anchors.bottom: positionFinder.top
+        anchors.horizontalCenter: positionFinder.horizontalCenter
+        anchors.margins: 4
+        text: Math.round( map.tracking.lastKnownPosition.distance( map.center.longitude, map.center.latitude ) / 100 ) / 10 + " km"
+    }
     
     // Starts a search for the passed term.
     function find( term ) {

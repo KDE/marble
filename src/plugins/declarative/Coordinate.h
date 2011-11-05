@@ -65,6 +65,9 @@ public:
     /** Distance (in meter) to the given coordinate */
     Q_INVOKABLE qreal distance( qreal longitude, qreal latitude ) const;
 
+    /** Bearing (in degree) to the given coordinate */
+    Q_INVOKABLE qreal bearing( qreal longitude, qreal latitude ) const;
+
     bool operator == ( const Coordinate &other ) const;
 
     bool operator != ( const Coordinate &other ) const;

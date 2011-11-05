@@ -38,7 +38,7 @@ class MarbleWidget : public QGraphicsProxyWidget
 {
     Q_OBJECT
 
-    Q_PROPERTY( Marble::Declarative::Coordinate* center READ center WRITE setCenter )
+    Q_PROPERTY( Marble::Declarative::Coordinate* center READ center WRITE setCenter NOTIFY visibleLatLonAltBoxChanged )
     Q_PROPERTY( int zoom READ zoom WRITE setZoom NOTIFY zoomChanged )
 
     Q_PROPERTY( QString mapThemeId READ mapThemeId WRITE setMapThemeId )
