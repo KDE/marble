@@ -131,4 +131,5 @@ marble_add_test( KMLTest )
 marble_add_test( TestGeoDataGeometry )
 marble_add_test( unittest_geodatacoordinates )
 marble_add_test( unittest_geodatalatlonaltbox )
+marble_add_test( TestGeoDataTrack )
 
