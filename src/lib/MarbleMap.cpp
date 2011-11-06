@@ -305,6 +305,11 @@ ViewportParams *MarbleMap::viewport()
     return &d->m_viewport;
 }
 
+const ViewportParams *MarbleMap::viewport() const
+{
+    return &d->m_viewport;
+}
+
 
 void MarbleMap::setMapQualityForViewContext( MapQuality quality, ViewContext viewContext )
 {
@@ -697,7 +702,7 @@ bool MarbleMap::geoCoordinates( int x, int y,
 }
 
 // Used to be paintEvent()
-void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
+void MarbleMap::paint( GeoPainter &painter, const QRect &dirtyRect )
 {
     Q_UNUSED( dirtyRect );
 

@@ -125,6 +125,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     // Accessors to internal objects;
     ViewportParams *viewport();
+    const ViewportParams *viewport() const;
 
     void setMapQualityForViewContext( MapQuality qualityForViewContext, ViewContext viewContext );
     MapQuality mapQuality( ViewContext viewContext ) const;
@@ -383,7 +384,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param painter  The painter to use.
      * @param dirtyRect the rectangle that actually needs repainting.
      */
-    void paint( GeoPainter &painter, QRect &dirtyRect );
+    void paint( GeoPainter &painter, const QRect &dirtyRect );
 
     /**
      * @brief  Rotate the view by the two angles phi and theta.
