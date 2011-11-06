@@ -261,6 +261,7 @@ Item {
         anchors.bottom: positionFinder.top
         anchors.horizontalCenter: positionFinder.horizontalCenter
         anchors.margins: 4
+        visible: settings.showPosition
         text: Math.round( map.tracking.lastKnownPosition.distance( map.center.longitude, map.center.latitude ) / 100 ) / 10 + " km"
     }
     
