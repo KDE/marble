@@ -81,6 +81,8 @@ Q_SIGNALS:
 
     void zoomChanged();
 
+    void mouseClickGeoPosition( qreal longitude, qreal latitude );
+
 public Q_SLOTS:
     Marble::Declarative::Coordinate* center();
 
@@ -148,6 +150,8 @@ public Q_SLOTS:
 
 private Q_SLOTS:
     void updateCenterPosition();
+
+    void forwardMouseClick( qreal lon, qreal lat, GeoDataCoordinates::Unit );
 
 private:
     /** Wrapped MarbleWidget */

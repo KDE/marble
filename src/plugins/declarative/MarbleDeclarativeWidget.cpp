@@ -44,6 +44,8 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
              this, SIGNAL( workOfflineChanged() ) );
     connect( m_marbleWidget, SIGNAL( zoomChanged( int ) ),
              this, SIGNAL( zoomChanged() ) );
+    connect( m_marbleWidget, SIGNAL( mouseClickGeoPosition( qreal, qreal, GeoDataCoordinates::Unit ) ),
+             this, SLOT( forwardMouseClick( qreal, qreal, GeoDataCoordinates::Unit ) ) );
     connect( &m_center, SIGNAL(latitudeChanged()), this, SLOT(updateCenterPosition()));
     connect( &m_center, SIGNAL(longitudeChanged()), this, SLOT(updateCenterPosition()));
 
@@ -202,6 +204,12 @@ void MarbleWidget::setCenter( Coordinate* center )
 void MarbleWidget::updateCenterPosition()
 {
     m_marbleWidget->centerOn( m_center.longitude(), m_center.latitude() );
+}
+
+void MarbleWidget::forwardMouseClick(qreal lon, qreal lat, GeoDataCoordinates::Unit unit )
+{
+    GeoDataCoordinates position( lon, lat, unit );
+    emit mouseClickGeoPosition( position.longitude( GeoDataCoordinates::Degree ), position.latitude( GeoDataCoordinates::Degree ) );
 }
 
 Marble::Declarative::Routing* MarbleWidget::routing()
