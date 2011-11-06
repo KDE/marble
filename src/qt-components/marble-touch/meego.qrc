@@ -4,6 +4,7 @@
         <file>MainWidget.qml</file>
         <file>ActivitySelectionView.qml</file>
         <file>ConfigurationActivityPage.qml</file>
+        <file>FriendsActivityPage.qml</file>
         <file>GeocachingActivityPage.qml</file>
         <file>GuidanceActivityPage.qml</file>
         <file>SearchActivityPage.qml</file>

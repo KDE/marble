@@ -98,11 +98,18 @@ Page {
                         marbleWidget,
                         "qrc:/TrackingActivityPage.qml"
                         )
+// @todo: Terms of usage still not clear
+//            activityModel.addActivity(
+//                        "Geocaching",
+//                        "qrc:/icons/activity-default.png",
+//                        marbleWidget,
+//                        "qrc:/GeocachingActivityPage.qml"
+//                        )
             activityModel.addActivity(
-                        "Geocaching",
-                        "qrc:/icons/activity-default.png",
+                        "Friends",
+                        "qrc:/icons/activity-friends.png",
                         marbleWidget,
-                        "qrc:/GeocachingActivityPage.qml"
+                        "qrc:/FriendsActivityPage.qml"
                         )
 
             /** @todo: Implement missing stuff and re-enable the activities below */
@@ -162,15 +169,6 @@ Page {
                 {},
                 { "projection": "Mercator",
                   "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
-            )
-            activityModel.addActivity(
-                "Friends",
-                "qrc:/icons/activity-friends.png",
-                "qrc:/FriendsActivityPage.qml",
-                [],
-                [],
-                {},
-                {}
             )
             activityModel.addActivity(
                 "Download",
