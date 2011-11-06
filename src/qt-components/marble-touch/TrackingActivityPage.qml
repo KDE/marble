@@ -51,6 +51,7 @@ Page {
                 marbleWidget.parent = mapContainer
                 settings.projection = "Mercator"
                 var plugins = settings.defaultRenderPlugins
+                settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
                 plugins.push( "speedometer" )
                 settings.activeRenderPlugins =  plugins
                 settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"

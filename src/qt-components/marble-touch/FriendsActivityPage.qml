@@ -51,7 +51,10 @@ Page {
                 marbleWidget.parent = mapContainer
                 settings.projection = "Mercator"
                 var plugins = settings.defaultRenderPlugins
+                settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
+                console.log(plugins)
                 plugins.push( "opendesktop" )
+
                 settings.activeRenderPlugins =  plugins
                 settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
                 settings.gpsTracking = true

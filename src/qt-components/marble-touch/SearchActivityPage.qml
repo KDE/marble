@@ -92,7 +92,9 @@ Page {
             Component.onCompleted: {
                 marbleWidget.parent = mapContainer
                 settings.projection = "Mercator"
-                settings.activeRenderPlugins = settings.defaultRenderPlugins
+                var plugins = settings.defaultRenderPlugins
+                settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
+                settings.activeRenderPlugins = plugins
                 settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
                 settings.gpsTracking = false
                 settings.showPosition = false
