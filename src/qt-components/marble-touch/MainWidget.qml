@@ -77,9 +77,23 @@ Item {
                 id: searchDelegate
                 source: "qrc:/placemark.svg"
                 transformOrigin: Item.Bottom
-                width: 30
+                width: 32
                 fillMode: Image.PreserveAspectFit
                 smooth: true
+
+                Text {
+                    text: hit
+                    width: 32
+                    height: 32
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    color: "white"
+                    font.bold: true
+                    font.pixelSize: 20
+                }
+
                 Rectangle {
                     id: routingOptions
                     visible: false
