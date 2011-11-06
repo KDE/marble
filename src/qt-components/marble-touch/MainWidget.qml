@@ -21,6 +21,8 @@ Item {
     anchors.fill: parent
     visible: false
 
+    signal mouseClickGeoPosition(real longitude, real latitude)
+
     // The widget representing the map.
     MarbleWidget {
         id: map
@@ -54,6 +56,8 @@ Item {
         }
         
         Component.onCompleted: {
+            mouseClickGeoPosition.connect( screen.mouseClickGeoPosition )
+
             // Load last center of the map.
             center.longitude = settings.quitLongitude
             center.latitude = settings.quitLatitude
@@ -307,6 +311,12 @@ Item {
     /** @todo: Needed? Make a property? */
     function getSearch() {
         return map.search
+    }
+
+    // Returns the grouped property to access tracking functions.
+    /** @todo: Needed? Make a property? */
+    function getTracking() {
+        return map.tracking
     }
 
     // Centers map on passed coordinates.

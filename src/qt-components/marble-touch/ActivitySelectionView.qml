@@ -81,16 +81,16 @@ Page {
                         "qrc:/VirtualGlobeActivityPage.qml"
                         )
             activityModel.addActivity(
-                        "Weather",
-                        "qrc:/icons/activity-weather.png",
-                        marbleWidget,
-                        "qrc:/WeatherActivityPage.qml"
-                        )
-            activityModel.addActivity(
                         "Search",
                         "qrc:/icons/activity-search.png",
                         marbleWidget,
                         "qrc:/SearchActivityPage.qml"
+                        )
+            activityModel.addActivity(
+                        "Routing",
+                        "qrc:/icons/activity-default.png",
+                        marbleWidget,
+                        "qrc:/RoutingActivityPage.qml"
                         )
             activityModel.addActivity(
                         "Tracking",
@@ -98,13 +98,19 @@ Page {
                         marbleWidget,
                         "qrc:/TrackingActivityPage.qml"
                         )
-// @todo: Terms of usage still not clear
-//            activityModel.addActivity(
-//                        "Geocaching",
-//                        "qrc:/icons/activity-default.png",
-//                        marbleWidget,
-//                        "qrc:/GeocachingActivityPage.qml"
-//                        )
+            activityModel.addActivity(
+                        "Weather",
+                        "qrc:/icons/activity-weather.png",
+                        marbleWidget,
+                        "qrc:/WeatherActivityPage.qml"
+                        )
+            // @todo: Terms of usage still not clear
+            //            activityModel.addActivity(
+            //                        "Geocaching",
+            //                        "qrc:/icons/activity-default.png",
+            //                        marbleWidget,
+            //                        "qrc:/GeocachingActivityPage.qml"
+            //                        )
             activityModel.addActivity(
                         "Friends",
                         "qrc:/icons/activity-friends.png",

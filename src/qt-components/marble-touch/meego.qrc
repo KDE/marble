@@ -7,6 +7,7 @@
         <file>FriendsActivityPage.qml</file>
         <file>GeocachingActivityPage.qml</file>
         <file>GuidanceActivityPage.qml</file>
+        <file>RoutingActivityPage.qml</file>
         <file>SearchActivityPage.qml</file>
         <file>SearchField.qml</file>
         <file>TrackingActivityPage.qml</file>
@@ -22,6 +23,9 @@
         <file>icons/activity-weather.png</file>
         <file>icons/bookmark.png</file>
         <file>icons/bookmark-disabled.png</file>
+        <file>icons/routing-bike.svg</file>
+        <file>icons/routing-pedestrian.svg</file>
+        <file>icons/routing-motorcar.svg</file>
         <file>MapThemeSelectionPage.qml</file>
         <file>NavigationSettingsPage.qml</file>
         <file>ViewSettingsPage.qml</file>
