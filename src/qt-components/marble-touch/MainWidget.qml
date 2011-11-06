@@ -76,6 +76,7 @@ Item {
                 Image {
                 id: searchDelegate
                 source: "qrc:/placemark.svg"
+                transformOrigin: Item.Bottom
                 width: 30
                 fillMode: Image.PreserveAspectFit
                 smooth: true

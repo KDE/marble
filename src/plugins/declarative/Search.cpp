@@ -114,7 +114,42 @@ void Search::updatePlacemarks()
             if ( item ) {
                 item->setVisible( visible );
                 if ( visible ) {
-                    item->setPos( x - item->width() / 2.0, y - item->height() / 2.0 );
+                    int shiftX( 0 ), shiftY( 0 );
+                    switch( item->transformOrigin() ) {
+                    case QDeclarativeItem::TopLeft:
+                    case QDeclarativeItem::Top:
+                    case QDeclarativeItem::TopRight:
+                        break;
+                    case QDeclarativeItem::Left:
+                    case QDeclarativeItem::Center:
+                    case QDeclarativeItem::Right:
+                        shiftY = item->height() / 2;
+                        break;
+                    case QDeclarativeItem::BottomLeft:
+                    case QDeclarativeItem::Bottom:
+                    case QDeclarativeItem::BottomRight:
+                        shiftY = item->height();
+                        break;
+                    }
+
+                    switch( item->transformOrigin() ) {
+                    case QDeclarativeItem::TopLeft:
+                    case QDeclarativeItem::Left:
+                    case QDeclarativeItem::BottomLeft:
+                        break;
+                    case QDeclarativeItem::Top:
+                    case QDeclarativeItem::Center:
+                    case QDeclarativeItem::Bottom:
+                        shiftX = item->width() / 2;
+                        break;
+                    case QDeclarativeItem::TopRight:
+                    case QDeclarativeItem::Right:
+                    case QDeclarativeItem::BottomRight:
+                        shiftX = item->width();
+                        break;
+                    }
+
+                    item->setPos( x - shiftX, y - shiftY );
                 }
             }
             ++iter;
