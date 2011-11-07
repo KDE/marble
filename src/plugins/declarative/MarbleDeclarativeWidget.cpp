@@ -19,6 +19,7 @@
 #include "MarbleModel.h"
 #include "MarbleWidgetInputHandler.h"
 #include "MarbleMath.h"
+#include "MapThemeManager.h"
 #include "AbstractFloatItem.h"
 #include "RenderPlugin.h"
 #include "MarbleMap.h"
@@ -231,6 +232,11 @@ Marble::Declarative::Search* MarbleWidget::search()
     }
 
     return m_search;
+}
+
+QObject *MarbleWidget::mapThemeModel()
+{
+    return m_marbleWidget->model()->mapThemeManager()->mapThemeModel();
 }
 
 bool MarbleWidget::workOffline() const

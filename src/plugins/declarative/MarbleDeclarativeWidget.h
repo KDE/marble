@@ -23,6 +23,7 @@ namespace Marble
 {
 // Forward declaration
 class MarbleWidget;
+class MapThemeManager;
 
 namespace Declarative
 {
@@ -50,6 +51,7 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( Marble::Declarative::Tracking* tracking READ tracking NOTIFY trackingChanged )
     Q_PROPERTY( Marble::Declarative::Routing* routing READ routing NOTIFY routingChanged )
     Q_PROPERTY( Marble::Declarative::Search* search READ search NOTIFY searchChanged )
+    Q_PROPERTY( QObject* mapThemeModel READ mapThemeModel NOTIFY mapThemeModelChanged )
 
 public:
     /** Constructor */
@@ -82,6 +84,8 @@ Q_SIGNALS:
     void zoomChanged();
 
     void mouseClickGeoPosition( qreal longitude, qreal latitude );
+
+    void mapThemeModelChanged();
 
 public Q_SLOTS:
     Marble::Declarative::Coordinate* center();
@@ -147,6 +151,8 @@ public Q_SLOTS:
     Marble::Declarative::Routing* routing();
 
     Marble::Declarative::Search* search();
+
+    QObject* mapThemeModel();
 
 private Q_SLOTS:
     void updateCenterPosition();
