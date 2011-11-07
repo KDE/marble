@@ -40,7 +40,7 @@ PageStackWindow {
     ToolBarLayout {
         id: commonToolBar
         visible: false
-        ToolIcon { iconId: "toolbar-back"; onClicked: { pageStack.pop() } }
+        // ToolIcon { iconId: "toolbar-back"; onClicked: { pageStack.pop() } }
     }
     
     // Displays all available activities and starts them if the user clicks on them.
