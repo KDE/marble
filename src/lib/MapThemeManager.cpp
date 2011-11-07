@@ -40,21 +40,46 @@ namespace
 namespace Marble
 {
 
+// The sole purpose of the class is to expose the protected
+// setRoleNames method and use it later on
+class StandardItemModelWithRoleNames: public QStandardItemModel
+{
+public:
+    StandardItemModelWithRoleNames( int rows, int columns, QObject *parent = 0 );
+
+    void setRoleNames( const QHash<int, QByteArray> &roleNames );
+};
+
 class MapThemeManagerPrivate
 {
 public:
     MapThemeManagerPrivate();
     ~MapThemeManagerPrivate();
-    QStandardItemModel* m_mapThemeModel;
+    StandardItemModelWithRoleNames* m_mapThemeModel;
     QFileSystemWatcher* m_fileSystemWatcher;
     bool m_isInitialized;
 };
 
+StandardItemModelWithRoleNames::StandardItemModelWithRoleNames( int rows, int columns, QObject *parent ) :
+    QStandardItemModel( rows, columns, parent )
+{
+    // nothing to do
+}
+
+void StandardItemModelWithRoleNames::setRoleNames( const QHash<int, QByteArray> &roleNames )
+{
+    QStandardItemModel::setRoleNames( roleNames );
+}
+
 MapThemeManagerPrivate::MapThemeManagerPrivate()
-    : m_mapThemeModel( new QStandardItemModel( 0, 3 ) ),
+    : m_mapThemeModel( new StandardItemModelWithRoleNames( 0, 3 ) ),
       m_fileSystemWatcher( new QFileSystemWatcher ),
       m_isInitialized( false )
 {
+    QHash<int,QByteArray> roleNames = m_mapThemeModel->roleNames();
+    roleNames[ Qt::DecorationRole ] = "icon";
+    roleNames[ Qt::UserRole + 1 ] = "mapThemeId";
+    m_mapThemeModel->setRoleNames( roleNames );
 }
 
 MapThemeManagerPrivate::~MapThemeManagerPrivate()
@@ -279,6 +304,7 @@ QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThe
     item->setData( mapThemeIcon, Qt::DecorationRole );
     item->setData( QString( "<span style=\" max-width: 150 px;\"> "
                             + tr( description.toUtf8() ) + " </span>" ), Qt::ToolTipRole );
+    item->setData( mapThemeID, Qt::UserRole + 1 );
 
     itemList << item;
     itemList << new QStandardItem( mapTheme->head()->target() + '/'
