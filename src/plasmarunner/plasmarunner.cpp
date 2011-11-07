@@ -60,7 +60,8 @@ void PlasmaRunner::match(Plasma::RunnerContext &context)
     if (success) {
         const QVariant coordinatesData = QVariantList()
             << QVariant(coordinates.longitude(GeoDataCoordinates::Degree))
-            << QVariant(coordinates.latitude(GeoDataCoordinates::Degree));
+            << QVariant(coordinates.latitude(GeoDataCoordinates::Degree))
+            << QVariant(0.1); // TODO: make this distance value configurable
 
         Plasma::QueryMatch match(this);
         match.setIcon(KIcon(QLatin1String("marble")));
@@ -122,7 +123,10 @@ void PlasmaRunner::collectMatches(QList<Plasma::QueryMatch> &matches,
             const GeoDataCoordinates coordinates = placemark->coordinate();
             const qreal lon = coordinates.longitude(GeoDataCoordinates::Degree);
             const qreal lat = coordinates.latitude(GeoDataCoordinates::Degree);
-            const QVariant coordinatesData = QVariantList() << QVariant(lon) << QVariant(lat);
+            const QVariant coordinatesData = QVariantList()
+                << QVariant(lon)
+                << QVariant(lat)
+                << QVariant(placemark->lookAt()->range()*METER2KM);
 
             Plasma::QueryMatch match(this);
             match.setIcon(KIcon(QLatin1String("marble")));
@@ -148,9 +152,13 @@ void PlasmaRunner::run(const Plasma::RunnerContext &context, const Plasma::Query
         QString::fromUtf8("%L1").arg(data.at(1).toReal()) +
         QString::fromUtf8(" %L1").arg(data.at(0).toReal());
 
+    const QString distance = data.at(2).toString();
+
     const QStringList parameters = QStringList()
         << QLatin1String( "--latlon" )
         << latLon
+        << QLatin1String( "--distance" )
+        << distance
         << QLatin1String( "--map" )
         << QLatin1String( "earth/openstreetmap/openstreetmap.dgml" );
     KProcess::startDetached( QLatin1String("marble"), parameters );
