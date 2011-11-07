@@ -20,7 +20,7 @@ Maneuver::Maneuver() :
     m_direction( RoutingInstruction::Unknown ),
     m_hasWaypoint( false )
 {
-    m_turnTypePixmaps[RoutingInstruction::Unknown] = MarbleDirs::path( "bitmaps/routing_step.png" );
+    m_turnTypePixmaps[RoutingInstruction::Unknown] = ":/data/bitmaps/routing_step.png";
     m_turnTypePixmaps[RoutingInstruction::Straight] = ":/data/bitmaps/turn-continue.png";
     m_turnTypePixmaps[RoutingInstruction::SlightRight] = ":/data/bitmaps/turn-slight-right.png";
     m_turnTypePixmaps[RoutingInstruction::Right] = ":/data/bitmaps/turn-right.png";
