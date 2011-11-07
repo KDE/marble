@@ -8,6 +8,7 @@
 // Copyright 2004-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
 // Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
+// Copyright 2011      Friedrich W. H. Kossebau <kossebau@kde.org>
 //
 
 
@@ -30,6 +31,346 @@
 
 namespace Marble
 {
+
+// Helper class for GeoDataCoordinates::fromString(...)
+class LonLatParser
+{
+private:
+    static QString createDecimalPointExp();
+    static bool isDirection( const QString& input, const QString& direction);
+    static bool isOneOfDirections( const QString& input,
+                                   const QString& firstDirection,
+                                   const QString& secondDirection,
+                                   bool& isFirstDirection);
+
+    /**
+     * function template for the function calculating the degree value from
+     * the captured texts with the degree, the minutes, the seconds and the signedness
+     * (or less, depending on what the function actually expects)
+     * @param regex the regexp to take the texts from
+     * @param c the index in the list of captured texts of @p regex to start with
+     * @param isPosHemisphere if the texts of the degree value are relative to the pos hemisphere
+     * @return the calculated degree value
+     */
+    typedef qreal (&degreeValueFromXFunction)( const QRegExp& regex, int c, bool isPosHemisphere );
+    static qreal degreeValueFromDMS( const QRegExp& regex, int c, bool isPosHemisphere );
+    static qreal degreeValueFromDM( const QRegExp& regex, int c, bool isPosHemisphere );
+    static qreal degreeValueFromD( const QRegExp& regex, int c, bool isPosHemisphere );
+
+public:
+    LonLatParser();
+    /**
+     * @brief parses the complete @p input string and sets the lon and lat properties if successful.
+     * @param input the string to parse, must not have other content than the coordinates
+     * @return @c true on successful parsing, @c false otherwise.
+     */
+    bool parse( const QString& input );
+    /**
+    * @brief return the lon value from the last successful parsing
+    */
+    qreal lon() const { return m_lon; }
+    /**
+    * @brief return the lat value from the last successful parsing
+    */
+    qreal lat() const { return m_lat; }
+
+private:
+    /**
+     * @brief tries to parse the input with the given reg expression and get the lon and lat values
+     * @param expTemplate the regular expression to use for matching
+     * (should contain placeholders %1 and %2 for non-capturing decimalPoint expression
+     * and resp. the capturing direction expression)
+     * @param input the string to parse, must not have other content than the coordinates
+     * @param degreeValueFromX function pointer of the function to use for calculating
+     * the degree value from the captured texts
+     * @param c the index in the list of captured texts which has the direction text
+     * (assumes that the direction text is the last captured text per coordinate,
+     * and that for both coordinates the order and the number of the texts are the same)
+     * @return @c true on successful parsing, @c false otherwise.
+     */
+    bool tryMatch( const char* expTemplate, const QString& input,
+                   degreeValueFromXFunction degreeValueFromX, int c );
+
+    /**
+    * @brief initializes also all properties which only need to be lazily initialized
+    */
+    void initAll();
+    /**
+     * @brief checks if the both passed directions are correct, also returns more data about them
+     * @param dir1 first direction string
+     * @param dir1 second direction string
+     * @param isDir1LonDir is set to @c true if first direction string is a longitude direction,
+     *                     @c false otherwise
+     * @param isLonDirPosHemisphere is set to @c true if longitude direction is in positive hemisphere,
+     *                              @c false otherwise
+     * @param isLatDirPosHemisphere is set to @c true if latitude direction is in positive hemisphere,
+     *                              @c false otherwise
+     * @return @c true if @p dir1 and @p dir2 are correct, @c false otherwise.
+     */
+    bool isCorrectDirections( const QString& dir1, const QString& dir2,
+                              bool& isDir1LonDir,
+                              bool& isLonDirPosHemisphere, bool& isLatDirPosHemisphere ) const;
+    bool isLocaleLonDirection( const QString& input,
+                               bool& isDirPosHemisphere ) const;
+    bool isLocaleLatDirection( const QString& input,
+                               bool& isDirPosHemisphere ) const;
+    bool isLonDirection( const QString& input,
+                         bool& isDirPosHemisphere ) const;
+    bool isLatDirection( const QString& input,
+                         bool& isDirPosHemisphere ) const;
+
+private:
+    qreal m_lon;
+    qreal m_lat;
+
+private: // helper values
+    const QString m_north;
+    const QString m_east;
+    const QString m_south;
+    const QString m_west;
+
+    const QString m_northLocale;
+    const QString m_eastLocale;
+    const QString m_southLocale;
+    const QString m_westLocale;
+
+    const QString m_decimalPointExp;
+
+private: // helper value, lazily set, in initAll();
+    QString m_dirCapExp;
+};
+
+LonLatParser::LonLatParser()
+    : m_lon( 0.0 )
+    , m_lat( 0.0 )
+    , m_north( QLatin1String("north") )
+    , m_east(  QLatin1String("east") )
+    , m_south( QLatin1String("south") )
+    , m_west(  QLatin1String("west") )
+    , m_northLocale( GeoDataCoordinates::tr( "North", "The compass direction" ).toLower() )
+    , m_eastLocale(  GeoDataCoordinates::tr( "East",  "The compass direction" ).toLower() )
+    , m_southLocale( GeoDataCoordinates::tr( "South", "The compass direction" ).toLower() )
+    , m_westLocale(  GeoDataCoordinates::tr( "West",  "The compass direction" ).toLower() )
+    , m_decimalPointExp( createDecimalPointExp() )
+{
+}
+
+void LonLatParser::initAll()
+{
+    // already all initialized?
+    if (! m_dirCapExp.isEmpty() )
+        return;
+
+    const int maxLengthUntranslated = 5;
+    const int maxLength =
+        qMax( maxLengthUntranslated, qMax(
+              m_northLocale.length(), qMax(
+              m_eastLocale.length(), qMax(
+              m_southLocale.length(),
+              m_westLocale.length() ))));
+
+    m_dirCapExp = QLatin1String("(\\w{1,") + QString::number(maxLength) + QLatin1String("})");
+}
+
+bool LonLatParser::parse( const QString& string )
+{
+    QString input = string.toLower().trimmed();
+
+    // Used unicode regexp expressions:
+    // x00B0: ° DEGREE SIGN
+    // x2032: ′ PRIME (minutes)
+    // x2033: ″ DOUBLE PRIME (seconds)
+
+    // #1: Just two numbers, no directions, e.g. 74.2245 -32.2434 (assumes lat lon)
+    {
+        const QString numberCapExp = QString::fromLatin1(
+            "([-+]?\\d{1,3}%1?\\d*)(?:\\x00B0?)(?:,|\\s)\\s*"
+            "([-+]?\\d{1,3}%1?\\d*)(?:\\x00B0?)"
+            ).arg(m_decimalPointExp);
+
+        const QRegExp regex = QRegExp( numberCapExp );
+        if( regex.exactMatch(input) ) {
+            m_lon = regex.cap(2).toDouble();
+            m_lat = regex.cap(1).toDouble();
+
+            return true;
+        }
+    }
+
+    initAll();
+
+    // #2: Two numbers with directions, e.g. 74.2245 N 32.2434 W
+    const char lonLatDCapExp[] =
+        "([-+]?\\d{1,3}%1?\\d*)(?:\\x00B0?\\s*)%2(?:,|\\s)\\s*"
+        "([-+]?\\d{1,3}%1?\\d*)(?:\\x00B0?\\s*)%2";
+
+    if (tryMatch(lonLatDCapExp, input, degreeValueFromD, 2)) {
+        return true;
+    }
+
+    // #3: Sexagesimal
+    const char lonLatDMSCapExp[] =
+        "([-+]?)(\\d{1,3})(?:\\x00B0|\\s)\\s*(\\d{1,2})(?:'|\\x2032|\\s)\\s*"
+        "(\\d{1,2}%1?\\d*)(?:\"|\\x2033|'')?\\s*%2,?\\s*"
+        "([-+]?)(\\d{1,3})(?:\\x00B0|\\s)\\s*(\\d{1,2})(?:'|\\x2032|\\s)\\s*"
+        "(\\d{1,2}%1?\\d*)(?:\"|\\x2033|'')?\\s*%2";
+
+    if (tryMatch(lonLatDMSCapExp, input, degreeValueFromDMS, 5)) {
+        return true;
+    }
+
+    // #4: Sexagesimal with minute precision
+    const char lonLatDMCapExp[] =
+        "([-+]?)(\\d{1,3})(?:\\x00B0|\\s)\\s*(\\d{1,2}%1?\\d*)(?:'|\\x2032)?\\s*%2,?\\s*"
+        "([-+]?)(\\d{1,3})(?:\\x00B0|\\s)\\s*(\\d{1,2}%1?\\d*)(?:'|\\x2032)?\\s*%2";
+
+    if (tryMatch(lonLatDMCapExp, input, degreeValueFromDM, 4)) {
+        return true;
+    }
+
+    return false;
+}
+
+bool LonLatParser::tryMatch(const char* expTemplate, const QString& input,
+                            degreeValueFromXFunction degreeValueFromX, int c)
+{
+    bool successful = false;
+
+    const QString numberCapExp = QString::fromLatin1(expTemplate).arg(m_decimalPointExp, m_dirCapExp);
+    const QRegExp regex = QRegExp( numberCapExp );
+    if( regex.exactMatch(input) ) {
+        bool isDir1LonDir;
+        bool isLonDirPosHemisphere;
+        bool isLatDirPosHemisphere;
+        const QString dir1 = regex.cap( c );
+        const QString dir2 = regex.cap( 2*c );
+        if (isCorrectDirections(dir1, dir2, isDir1LonDir,
+                                isLonDirPosHemisphere, isLatDirPosHemisphere)) {
+            m_lon = degreeValueFromX(regex, isDir1LonDir ? 1 : c+1, isLonDirPosHemisphere);
+            m_lat = degreeValueFromX(regex, isDir1LonDir ? c+1 : 1, isLatDirPosHemisphere);
+
+            successful = true;
+        }
+    }
+
+    return successful;
+}
+
+QString LonLatParser::createDecimalPointExp()
+{
+    const QChar decimalPoint = QLocale::system().decimalPoint();
+
+    return (decimalPoint == QLatin1Char('.')) ? QString::fromLatin1("\\.") :
+        QLatin1String("[.") + decimalPoint + QLatin1Char(']');
+}
+
+bool LonLatParser::isDirection( const QString& input, const QString& direction)
+{
+    return ( input == direction.at(0) || input == direction );
+}
+
+bool LonLatParser::isOneOfDirections( const QString& input,
+                                      const QString& firstDirection,
+                                      const QString& secondDirection,
+                                      bool& isFirstDirection )
+{
+    isFirstDirection = isDirection(input, firstDirection);
+    return isFirstDirection || isDirection(input, secondDirection);
+}
+
+
+bool LonLatParser::isLocaleLonDirection( const QString& input,
+                                         bool& isDirPosHemisphere ) const
+{
+    return isOneOfDirections(input, m_eastLocale, m_westLocale, isDirPosHemisphere);
+}
+
+bool LonLatParser::isLocaleLatDirection( const QString& input,
+                                         bool& isDirPosHemisphere ) const
+{
+    return isOneOfDirections(input, m_northLocale, m_southLocale, isDirPosHemisphere);
+}
+
+bool LonLatParser::isLonDirection( const QString& input,
+                                   bool& isDirPosHemisphere ) const
+{
+    return isOneOfDirections(input, m_east, m_west, isDirPosHemisphere);
+}
+
+bool LonLatParser::isLatDirection( const QString& input,
+                                   bool& isDirPosHemisphere ) const
+{
+    return isOneOfDirections(input, m_north, m_south, isDirPosHemisphere);
+}
+
+
+qreal LonLatParser::degreeValueFromDMS( const QRegExp& regex, int c, bool isPosHemisphere )
+{
+    const bool isNegativeValue = (regex.cap( c++ ) == QLatin1String("-"));
+    const uint degree = regex.cap( c++ ).toUInt();
+    const uint minutes = regex.cap( c++ ).toUInt();
+    const qreal seconds = regex.cap( c ).toDouble();
+
+    qreal result = degree + (minutes*MIN2HOUR) + (seconds*SEC2HOUR);
+
+    if (isNegativeValue)
+        result *= -1;
+    if (! isPosHemisphere)
+        result *= -1;
+
+    return result;
+}
+
+qreal LonLatParser::degreeValueFromDM( const QRegExp& regex, int c, bool isPosHemisphere )
+{
+    const bool isNegativeValue = (regex.cap( c++ ) == QLatin1String("-"));
+    const uint degree = regex.cap( c++ ).toUInt();
+    const qreal minutes = regex.cap( c ).toDouble();
+
+    qreal result = degree + (minutes*MIN2HOUR);
+
+    if (isNegativeValue)
+        result *= -1;
+    if (! isPosHemisphere)
+        result *= -1;
+
+    return result;
+}
+
+qreal LonLatParser::degreeValueFromD( const QRegExp& regex, int c, bool isPosHemisphere )
+{
+    qreal result = regex.cap( c ).toDouble();
+
+    if (! isPosHemisphere)
+        result *= -1;
+
+    return result;
+}
+
+bool LonLatParser::isCorrectDirections(const QString& dir1, const QString& dir2,
+                                       bool& isDir1LonDir,
+                                       bool& isLonDirPosHemisphere,
+                                       bool& isLatDirPosHemisphere) const
+{
+    // first try localized names
+    isDir1LonDir = isLocaleLonDirection(dir1, isLonDirPosHemisphere);
+    const bool resultLocale = isDir1LonDir ?
+        isLocaleLatDirection(dir2, isLatDirPosHemisphere) :
+        (isLocaleLatDirection(dir1, isLatDirPosHemisphere) &&
+         isLocaleLonDirection(dir2, isLonDirPosHemisphere));
+
+    if (resultLocale)
+        return resultLocale;
+
+    // fallback to try english names as lingua franca
+    isDir1LonDir = isLonDirection(dir1, isLonDirPosHemisphere);
+    return isDir1LonDir ?
+        isLatDirection(dir2, isLatDirPosHemisphere) :
+        (isLatDirection(dir1, isLatDirPosHemisphere) &&
+         isLonDirection(dir2, isLonDirPosHemisphere));
+}
+
+
 
 GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates::DMS;
 
@@ -340,219 +681,15 @@ void GeoDataCoordinates::normalizeLonLat( qreal &lon, qreal &lat, GeoDataCoordin
     return;
 }
 
-//static
 GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& successful )
 {
-    QString input = string.toLower().trimmed();
-    mDebug() << "Creating GeoDataCoordinates from string " << input;
-    
-    qreal lat, lon;
-    
-    // c is for cardinal directions and is short which saves space in regexps
-    QStringList c; 
-    c << tr( "North", "The compass direction" ).toLower();
-    c << tr( "East",  "The compass direction" ).toLower();
-    c << tr( "South", "The compass direction" ).toLower();
-    c << tr( "West",  "The compass direction" ).toLower();
-    QRegExp regex; //the main regex we use
-    QString regexstr; // temp. string for constructing the regex
-    QString dec( QLocale::system().decimalPoint() ); //for regex construction
-    if( dec.contains(".") )
-        dec.prepend("\\");
-    
-    //BEGIN REGEX1
-    // #1: Just two numbers, no directions, eg 74.2245 -32.2434 etc
-    //firstletters is used for *negative* matching to ensure that this is not case #2
-    QString firstletters;
-    for(int i = 0; i < 4; ++i) { firstletters.append( c[i].at(0) ); }
-    // <frac> = fractional part; <sp> = whitespace
-    //            <first coord ><decimal  ><frac><sp/symbol but NOT a direction>
-    regexstr = "^(-?\\+?\\d{1,3}" + dec + "?\\d*)(?:\\s|[^\\d" + firstletters + dec + "]|"
-    //           ^----------cap(1)--------------^
-    //         <sp ><2nd coord     ><decimal ><frac>
-             + "\\s)+(-?\\+?\\d{1,3}" + dec + "?\\d*)\\s*$";
-    //               ^----------cap(2)--------------^
-    regex = QRegExp( regexstr );
-    if( input.contains( regex ) ) {
-        mDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
-        lat = regex.cap(1).toDouble();
-        lon = regex.cap(2).toDouble();
-        
-        mDebug() << "Created lat / lon " << lat << lon;
-        
-        GeoDataCoordinates coords( lon, lat, 0, GeoDataCoordinates::Degree );
-        successful = true;
-        return coords;
+    LonLatParser parser;
+    successful = parser.parse(string);
+    if (successful) {
+        return GeoDataCoordinates( parser.lon(), parser.lat(), 0, GeoDataCoordinates::Degree );
+    } else {
+        return GeoDataCoordinates();
     }
-    //END REGEX1
-
-
-    //BEGIN STUFF
-    //we put this after regex #1 since it is not used in that case so it will only make things slower.
-                      
-    //this is used to make regexps which determine which coord element comes first.
-    //if it doesn't match it is assumed that the longitude comes first.
-    //Note that it is "QString( c[0].at(0) )" because QChar doesn't work
-    //for adding things in a big long chain like this. TODO: investigate.
-    //becomes (?:(?:north|south)|[ns],?\\s).*(?:(?:east|west)|[ew]) in en
-    const QString latfirst = "(?:" + c[0] + '|' + c[2] + "|[" 
-                           + QString( c[0].at(0) ) + QString( c[2].at(0) ) + "],?\\s).*"
-                           + "(?:" + c[1] + '|' + c[3] + "|[" 
-                           + QString( c[1].at(0) ) + QString( c[3].at(0) ) + "])";
-                           
-    //this is a snippet which matches (AND CAPTURES!!) a direction.
-    //becomes  (north|east|south|west|[nsew]) in en.
-    //               <north   >   <east    >   <south   >   <west    >
-    QString dir = '(' + c[0] + '|' + c[1] + '|' + c[2] + '|' + c[3] + "|["
-                      + QString( c[0].at(0) ) + QString( c[2].at(0) ) // + <n> + <s>
-                      + QString( c[1].at(0) ) + QString( c[3].at(0) ) + "])"; // + <e> + <w>
-                      
-                      
-    //END STUFF
-    
-    //BEGIN REGEX2
-    // #2: Two numbers with directions, eg 74.2245 N 32.2434 W etc
-    regexstr = "^([\\-\\+]?\\d{1,3}" + dec + "?\\d*)(?:\\s|[^\\d" +dec+ "])+"
-             + dir + ",?\\s*(-?\\+?\\d{1,3}" +  dec + "?\\d*)"
-             + "(?:\\s|[^\\d" +dec+ "])+" + dir + "\\s*$";
-    regex = QRegExp( regexstr );
-    if( input.contains( regex ) ) {
-        mDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
-        QString latdeg, londeg, latdir, londir;
-        
-        if( input.contains( QRegExp( latfirst ) ) ) {
-            mDebug() << "latitude comes first";
-            latdeg = regex.cap( 1 );
-            latdir = regex.cap( 2 );
-            londeg = regex.cap( 3 );
-            londir = regex.cap( 4 );
-        } else { 
-            mDebug() << "longitude comes first";
-            londeg = regex.cap( 1 );
-            londir = regex.cap( 2 );
-            latdeg = regex.cap( 3 );
-            latdir = regex.cap( 4 );
-        }
-
-        //convert the string to a number
-        lat = latdeg.toDouble();
-        lon = londeg.toDouble();
-
-        //if south make the value negative
-        if( latdir == c[2].at(0) || latdir == c[2] ) 
-            lat *= -1.0;
-        //if west make the value negative
-        if( londir == c[3].at(0) || londir == c[3] ) 
-            lon *= -1.0;
-        
-        mDebug() << "Created lat / lon " << lat << lon;
-        
-        GeoDataCoordinates coords( lon, lat, 0, GeoDataCoordinates::Degree );
-        successful = true;
-        return coords;
-    }
-    //END REGEX2
-    
-    //BEGIN REGEX3
-    // #3: Sexagesimal
-    regexstr = "^(\\d{1,3})(?:\\s|[^\\d" +dec+ "])+(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+";
-    regexstr += "(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+" +   dir  + ",?\\s*";
-    regexstr += "(\\d{1,3})(?:\\s|[^\\d" +dec+ "])+(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+";
-    regexstr += "(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+"  +  dir + "\\s*$";
-    regex = QRegExp( regexstr );
-    if( input.contains( regex ) ) {
-        mDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
-        QString latdeg, londeg, latmin, lonmin, latsec, lonsec, latdir, londir;
-        
-        if( input.contains( QRegExp( latfirst ) ) ) {
-            mDebug() << "latitude comes first";
-            latdeg = regex.cap( 1 );
-            latmin = regex.cap( 2 );
-            latsec = regex.cap( 3 );
-            latdir = regex.cap( 4 );
-            londeg = regex.cap( 5 );
-            lonmin = regex.cap( 6 );
-            lonsec = regex.cap( 7 );
-            londir = regex.cap( 8 );
-        } else { 
-            mDebug() << "longitude comes first";
-            londeg = regex.cap( 1 );
-            lonmin = regex.cap( 2 );
-            lonsec = regex.cap( 3 );
-            londir = regex.cap( 4 );
-            latdeg = regex.cap( 5 );
-            latmin = regex.cap( 6 );
-            latsec = regex.cap( 7 );
-            latdir = regex.cap( 8 );
-        }
-
-        //Add the fractional parts to make the total
-        lat = latdeg.toDouble() + (latmin.toDouble()/60.0) + (latsec.toDouble()/3600.0);
-        lon = londeg.toDouble() + (lonmin.toDouble()/60.0) + (lonsec.toDouble()/3600.0);
-
-        //if the direction is south, make the value negative
-        if( latdir == c[2].at(0) || latdir == c[2] )
-            lat *= -1.0;
-        //if the direction is west, make the value negative
-        if( londir == c[3].at(0) || londir == c[3] )
-            lon *= -1.0;
-
-        mDebug() << "Created lat / lon " << lat << lon;
-        
-        GeoDataCoordinates coords( lon, lat, 0, GeoDataCoordinates::Degree );
-        successful = true;
-        return coords;
-    }
-    //END REGEX3
-    
-    //BEGIN REGEX4
-    // #4: Sexagesimal with minute precision
-    regexstr = "^(\\d{1,3})(?:\\s|[^\\d" +dec+ "])+(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+"
-             +   dir  + ",?\\s*"
-             +  "(\\d{1,3})(?:\\s|[^\\d" +dec+ "])+(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+"
-             +   dir + "\\s*$";
-    regex = QRegExp( regexstr );
-    if( input.contains( regex ) ) {
-        mDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
-        QString latdeg, londeg, latmin, lonmin, latdir, londir;
-        
-        if( input.contains( QRegExp( latfirst ) ) ) {
-            mDebug() << "latitude comes first";
-            latdeg = regex.cap( 1 );
-            latmin = regex.cap( 2 );
-            latdir = regex.cap( 3 );
-            londeg = regex.cap( 4 );
-            lonmin = regex.cap( 5 );
-            londir = regex.cap( 6 );
-        } else { 
-            mDebug() << "longitude comes first";
-            londeg = regex.cap( 1 );
-            lonmin = regex.cap( 2 );
-            londir = regex.cap( 3 );
-            latdeg = regex.cap( 4 );
-            latmin = regex.cap( 5 );
-            latdir = regex.cap( 6 );
-        }
-        lat = latdeg.toDouble() + (latmin.toDouble()/60.0);
-        lon = londeg.toDouble() + (lonmin.toDouble()/60.0);
-
-        if( latdir == c[2].at(0) || latdir == c[2] ) //south, so we invert
-            lat *= -1.0;
-
-        if( londir == c[3].at(0) || londir == c[3] ) //west, so we invert
-            lon *= -1.0;
-
-        mDebug() << "Created lat / lon " << lat << lon;
-        
-        GeoDataCoordinates coords( lon, lat, 0, GeoDataCoordinates::Degree );
-        successful = true;
-        return coords;
-    }
-    //END REGEX4
-
-    //we didn't match so leave "successful" as FALSE and return empty coords
-    successful = false;
-    return GeoDataCoordinates();
 }
 
 
