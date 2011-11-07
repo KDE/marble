@@ -22,47 +22,41 @@ Page {
         anchors.fill: parent
         anchors.margins: UiConstants.DefaultMargin
         highlightFollowsCurrentItem: true
-        model: themes.mapThemes()
-        currentIndex: themes.mapThemes().indexOf( settings.mapTheme )
-        
-        // Provides information about map themes.
-        MapThemeManager {
-            id: themes
-        }
+        model: marbleWidget.mapThemeModel
 
         // Delegate that displays a preview image and the name of the map theme.
         delegate:
             Rectangle {
-                id: themeItem
-                width: mapListView.width
-                height: mapImage.height + 20
-                // Highlight current map theme with a blue background.
-                color: model.modelData.id == settings.mapTheme ? "lightsteelblue" : "white"
-                Row {
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.left: parent.left
-                    anchors.leftMargin: 15
-                    // Preview image of the map theme.
-                    Image {
-                        id: mapImage
-                        source: "image://maptheme/" + model.modelData.id
-                    }
-                    // Label with the name of the map theme.
-                    Label {
-                        id: themeLabel
-                        text: model.modelData.name
-                        anchors.verticalCenter: parent.verticalCenter
-                    }
+            id: themeItem
+            width: mapListView.width
+            height: mapImage.height + 5
+            // Highlight current map theme with a blue background.
+            color: mapThemeId === settings.mapTheme ? "lightsteelblue" : "white"
+            Row {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 15
+                // Preview image of the map theme.
+                Image {
+                    id: mapImage
+                    source: "image://maptheme/" + mapThemeId
                 }
-                // If the user clicks on a theme, use it for the map.
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        mapListView.currentIndex = index
-                        settings.mapTheme = themes.mapThemes()[index].id
-                    }
+                // Label with the name of the map theme.
+                Label {
+                    id: themeLabel
+                    text: display
+                    anchors.verticalCenter: parent.verticalCenter
                 }
             }
-
+            // If the user clicks on a theme, use it for the map.
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    mapListView.currentIndex = index
+                    settings.mapTheme = mapThemeId
+                    //settings.mapTheme = themes.mapThemes()[index].id
+                }
+            }
+        }
     }
 }

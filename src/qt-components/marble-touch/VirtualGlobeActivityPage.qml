@@ -28,7 +28,21 @@ Page {
             onClicked: { searchField.visible = !searchField.visible }
         }
         ToolIcon {
-            iconId: "toolbar-view-menu" }
+            iconId: "toolbar-view-menu"
+            onClicked: pageMenu.open()
+        }
+    }
+
+    Menu {
+        id: pageMenu
+        content: MenuLayout {
+            MenuItem {
+                text: "Map Theme"
+                onClicked: {
+                    pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
+                }
+            }
+        }
     }
 
     Column {

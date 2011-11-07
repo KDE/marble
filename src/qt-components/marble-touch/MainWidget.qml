@@ -23,6 +23,8 @@ Item {
 
     signal mouseClickGeoPosition(real longitude, real latitude)
 
+    property alias mapThemeModel: map.mapThemeModel
+
     // The widget representing the map.
     MarbleWidget {
         id: map
