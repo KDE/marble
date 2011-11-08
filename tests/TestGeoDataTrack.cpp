@@ -32,6 +32,7 @@ private slots:
     void initTestCase();
     void simpleParseTest();
     void extendedDataParseTest();
+    void withoutTimeTest();
 };
 
 void TestGeoDataTrack::initTestCase()
@@ -209,6 +210,67 @@ void TestGeoDataTrack::extendedDataParseTest()
     GeoDataSimpleArrayData cadence = track->extendedData().simpleArrayData( "cadence" );
     QCOMPARE( cadence.size(), 7 );
     QCOMPARE( cadence.valueAt( 0 ), QVariant( "86" ) );
+
+    delete document;
+}
+
+void TestGeoDataTrack::withoutTimeTest()
+{
+    //"Simple Example" from kmlreference; when elements removed
+    QString content(
+"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+"<kml xmlns=\"http://www.opengis.net/kml/2.2\""
+" xmlns:gx=\"http://www.google.com/kml/ext/2.2\">"
+"<Folder>"
+"  <Placemark>"
+"    <gx:Track>"
+"      <gx:coord>-122.207881 37.371915 156.000000</gx:coord>"
+"      <gx:coord>-122.205712 37.373288 152.000000</gx:coord>"
+"      <gx:coord>-122.204678 37.373939 147.000000</gx:coord>"
+"      <gx:coord>-122.203572 37.374630 142.199997</gx:coord>"
+"      <gx:coord>-122.203451 37.374706 141.800003</gx:coord>"
+"      <gx:coord>-122.203329 37.374780 141.199997</gx:coord>"
+"      <gx:coord>-122.203207 37.374857 140.199997</gx:coord>"
+"    </gx:Track>"
+"  </Placemark>"
+"</Folder>"
+"</kml>" );
+
+    GeoDataParser parser( GeoData_KML );
+
+    QByteArray array( content.toUtf8() );
+    QBuffer buffer( &array );
+    buffer.open( QIODevice::ReadOnly );
+    qDebug() << "Buffer content:" << endl << buffer.buffer();
+    if ( !parser.read( &buffer ) ) {
+        qWarning( "Could not parse data!" );
+        QFAIL( "Could not parse data!" );
+        return;
+    }
+    GeoDocument* document = parser.releaseDocument();
+    QVERIFY( document );
+    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
+    GeoDataFolder *folder = dataDocument->folderList().at( 0 );
+    QCOMPARE( folder->placemarkList().size(), 1 );
+    GeoDataPlacemark* placemark = folder->placemarkList().at( 0 );
+    QCOMPARE( placemark->geometry()->geometryId(), GeoDataTrackId );
+    GeoDataTrack* track = static_cast<GeoDataTrack*>( placemark->geometry() );
+    QCOMPARE( track->size(), 7 );
+    {
+        GeoDataCoordinates coord = track->coordinatesList().at( 0 );
+        QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), -122.207881 );
+        QCOMPARE( coord.latitude( GeoDataCoordinates::Degree ), 37.371915 );
+        QCOMPARE( coord.altitude(), 156.000000 );
+    }
+
+    {
+    GeoDataLineString *lineString = track->lineString();
+        QCOMPARE( lineString->size(), 7 );
+        GeoDataCoordinates coord = lineString->at( 0 );
+        QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), -122.207881 );
+        QCOMPARE( coord.latitude( GeoDataCoordinates::Degree ), 37.371915 );
+        QCOMPARE( coord.altitude(), 156.000000 );
+    }
 
     delete document;
 }

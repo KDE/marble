@@ -111,6 +111,12 @@ public:
     GeoDataCoordinates coordinatesAt( const QDateTime &when ) const;
 
     /**
+     * Return coordinates at specified index. This is useful when the track contains
+     * coordinates without time information.
+     */
+    GeoDataCoordinates coordinatesAt( int index ) const;
+
+    /**
      * Add a new point with coordinates @p coord associated with the
      * time value @p when
      */

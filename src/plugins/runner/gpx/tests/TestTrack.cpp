@@ -94,18 +94,25 @@ void TestTrack::simpleParseTest()
     GeoDataTrack* track = static_cast<GeoDataTrack*>( &multiGeo->at( 0 ) );
     QCOMPARE( track->size(), 3 );
     {
-        QDateTime when = track->whenAt( 0 );
+        QDateTime when = track->whenList().at( 0 );
         QCOMPARE( when, QDateTime( QDate( 2011, 6, 24 ), QTime( 10, 33, 40 ), Qt::UTC ) );
     }
     {
         GeoDataCoordinates coord = track->coordinatesAt( 0 );
-        qDebug() << QString("%0").arg(coord.longitude( GeoDataCoordinates::Degree ), 0, 'g', 15);
         QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), 12.560534449 );
         QCOMPARE( coord.latitude( GeoDataCoordinates::Degree ), 47.231477033 );
         QCOMPARE( coord.altitude(), 1130.647705 );
     }
     {
         GeoDataCoordinates coord = track->coordinatesAt( QDateTime( QDate( 2011, 6, 24 ), QTime( 10, 33, 40 ), Qt::UTC ) );
+        QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), 12.560534449 );
+        QCOMPARE( coord.latitude( GeoDataCoordinates::Degree ), 47.231477033 );
+        QCOMPARE( coord.altitude(), 1130.647705 );
+    }
+    {
+        GeoDataLineString* lineString = track->lineString();
+        QCOMPARE( lineString->size(), 3 );
+        GeoDataCoordinates coord = lineString->at( 0 );
         QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), 12.560534449 );
         QCOMPARE( coord.latitude( GeoDataCoordinates::Degree ), 47.231477033 );
         QCOMPARE( coord.altitude(), 1130.647705 );
@@ -158,28 +165,26 @@ void TestTrack::withoutTimeTest()
     GeoDocument* document = parser.releaseDocument();
     QVERIFY( document );
     GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
-    GeoDataFolder *folder = dataDocument->folderList().at( 0 );
-    QCOMPARE( folder->placemarkList().size(), 1 );
-    GeoDataPlacemark* placemark = folder->placemarkList().at( 0 );
-    QCOMPARE( placemark->geometry()->geometryId(), GeoDataTrackId );
-    GeoDataTrack* track = static_cast<GeoDataTrack*>( placemark->geometry() );
-    QCOMPARE( track->size(), 7 );
-    {
-        QDateTime when = track->whenAt( 0 );
-        QCOMPARE( when, QDateTime( QDate( 2010, 5, 28 ), QTime( 2, 2, 9 ), Qt::UTC ) );
-    }
+    GeoDataPlacemark* placemark = dataDocument->placemarkList().at( 0 );
+    QCOMPARE( placemark->geometry()->geometryId(), GeoDataMultiGeometryId );
+    GeoDataMultiGeometry* multiGeo = static_cast<GeoDataMultiGeometry*>( placemark->geometry() );
+    GeoDataTrack* track = static_cast<GeoDataTrack*>( &multiGeo->at( 0 ) );
+    QCOMPARE( track->size(), 3 );
     {
         GeoDataCoordinates coord = track->coordinatesAt( 0 );
-        QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), -122.207881 );
-        QCOMPARE( coord.latitude( GeoDataCoordinates::Degree ), 37.371915 );
-        QCOMPARE( coord.altitude(), 156.000000 );
+        QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), 12.560534449 );
+        QCOMPARE( coord.latitude( GeoDataCoordinates::Degree ), 47.231477033 );
+        QCOMPARE( coord.altitude(), 1130.647705 );
     }
     {
-        GeoDataCoordinates coord = track->coordinatesAt( QDateTime( QDate( 2010, 5, 28 ), QTime( 2, 2, 9 ), Qt::UTC ) );
-        QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), -122.207881 );
-        QCOMPARE( coord.latitude( GeoDataCoordinates::Degree ), 37.371915 );
-        QCOMPARE( coord.altitude(), 156.000000 );
+        GeoDataLineString* lineString = track->lineString();
+        QCOMPARE( lineString->size(), 3 );
+        GeoDataCoordinates coord = lineString->at( 0 );
+        QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), 12.560534449 );
+        QCOMPARE( coord.latitude( GeoDataCoordinates::Degree ), 47.231477033 );
+        QCOMPARE( coord.altitude(), 1130.647705 );
     }
+
 
     delete document;
 }

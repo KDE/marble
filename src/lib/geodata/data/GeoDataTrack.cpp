@@ -39,7 +39,7 @@ public:
     QMap<QDateTime, GeoDataCoordinates> m_pointMap;
 
     QLinkedList<QDateTime> m_whenStack;
-    QLinkedList<GeoDataCoordinates> m_coordStack;
+    QList<GeoDataCoordinates> m_coordStack;
     GeoDataExtendedData m_extendedData;
 
     bool m_interpolate;
@@ -59,7 +59,7 @@ GeoDataTrack::GeoDataTrack( const GeoDataGeometry &other )
 
 int GeoDataTrack::size() const
 {
-    return d->m_pointMap.size();
+    return d->m_pointMap.size() + d->m_coordStack.size();
 }
 
 bool GeoDataTrack::interpolate() const
@@ -92,7 +92,7 @@ QDateTime GeoDataTrack::lastWhen() const
 
 QList<GeoDataCoordinates> GeoDataTrack::coordinatesList() const
 {
-    return d->m_pointMap.values();
+    return d->m_pointMap.values() + d->m_coordStack;
 }
 
 QList<QDateTime> GeoDataTrack::whenList() const
@@ -148,6 +148,15 @@ GeoDataCoordinates GeoDataTrack::coordinatesAt( const QDateTime &when ) const
     return coord;
 }
 
+GeoDataCoordinates GeoDataTrack::coordinatesAt( int index ) const
+{
+    if ( index < d->m_pointMap.count() ) {
+        return d->m_pointMap.values().at( index );
+    } else {
+        return d->m_coordStack.at( index - d->m_pointMap.count() );
+    }
+}
+
 void GeoDataTrack::addPoint( const QDateTime &when, const GeoDataCoordinates &coord )
 {
     d->m_lineStringNeedsUpdate = true;
@@ -158,10 +167,10 @@ void GeoDataTrack::appendCoordinates( const GeoDataCoordinates &coord )
 {
     if ( !d->m_whenStack.isEmpty() ) {
         d->m_pointMap.insert( d->m_whenStack.takeFirst(), coord );
-        d->m_lineStringNeedsUpdate = true;
     } else {
         d->m_coordStack.append( coord );
     }
+    d->m_lineStringNeedsUpdate = true;
 }
 
 void GeoDataTrack::appendAltitude( qreal altitude )
@@ -174,6 +183,7 @@ void GeoDataTrack::appendAltitude( qreal altitude )
         d->m_coordStack.removeLast();
         d->m_coordStack.append( coordinates );
     }
+    d->m_lineStringNeedsUpdate = true;
 }
 
 void GeoDataTrack::appendWhen( const QDateTime &when )
@@ -189,6 +199,8 @@ void GeoDataTrack::appendWhen( const QDateTime &when )
 void GeoDataTrack::clear()
 {
     d->m_pointMap.clear();
+    d->m_coordStack.clear();
+    d->m_whenStack.clear();
     d->m_lineStringNeedsUpdate = true;
 }
 
