@@ -32,10 +32,12 @@ namespace gpx
     extern const char* gpxTag_nameSpace10;
     extern const char* gpxTag_nameSpace11;
 
+    extern const char* gpxTag_ele;
     extern const char* gpxTag_gpx;
     extern const char* gpxTag_lat;
     extern const char* gpxTag_lon;
     extern const char* gpxTag_name;
+    extern const char* gpxTag_time;
     extern const char* gpxTag_trk;
     extern const char* gpxTag_trkpt;
     extern const char* gpxTag_trkseg;

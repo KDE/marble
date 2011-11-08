@@ -25,6 +25,7 @@
 #include "GeoParser.h"
 #include "GeoDataLineString.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataTrack.h"
 
 namespace Marble
 {
@@ -39,7 +40,7 @@ GeoNode* GPXtrkptTagHandler::parse(GeoParser& parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_trkseg))
     {
-        GeoDataLineString* linestring = parentItem.nodeAs<GeoDataLineString>();
+        GeoDataTrack* track = parentItem.nodeAs<GeoDataTrack>();
         GeoDataCoordinates coord;
 
         QXmlStreamAttributes attributes = parser.attributes();
@@ -49,21 +50,21 @@ GeoNode* GPXtrkptTagHandler::parse(GeoParser& parser) const
         tmp = attributes.value(gpxTag_lat);
         if ( !tmp.isEmpty() )
         {
-            lat = tmp.toString().toFloat();
+            lat = tmp.toString().toDouble();
         }
         tmp = attributes.value(gpxTag_lon);
         if ( !tmp.isEmpty() )
         {
-            lon = tmp.toString().toFloat();
+            lon = tmp.toString().toDouble();
         }
         coord.set(lon, lat, 0, GeoDataCoordinates::Degree);
-        linestring->append(coord);
+        track->appendCoordinates( coord );
 
 #ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_trkpt << "> waypoint: " << linestring->size()
+        mDebug() << "Parsed <" << gpxTag_trkpt << "> waypoint: " /*<< linestring->size()*/
                 << coord.toString(GeoDataCoordinates::Decimal);
 #endif
-        return static_cast<GeoDataLineString*>(linestring);
+        return track;
     }
     mDebug() << "trkpt parsing with parentitem" << parentItem.qualifiedName();
     return 0;

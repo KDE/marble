@@ -31,10 +31,12 @@ namespace gpx
 const char* gpxTag_nameSpace10 = "http://www.topografix.com/GPX/1/0";
 const char* gpxTag_nameSpace11 = "http://www.topografix.com/GPX/1/1";
 
+const char* gpxTag_ele = "ele";
 const char* gpxTag_gpx = "gpx";
 const char* gpxTag_lat = "lat";
 const char* gpxTag_lon = "lon";
 const char* gpxTag_name = "name";
+const char* gpxTag_time = "time";
 const char* gpxTag_trk = "trk";
 const char* gpxTag_trkpt = "trkpt";
 const char* gpxTag_trkseg = "trkseg";

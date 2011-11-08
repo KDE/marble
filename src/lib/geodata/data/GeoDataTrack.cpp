@@ -164,6 +164,18 @@ void GeoDataTrack::appendCoordinates( const GeoDataCoordinates &coord )
     }
 }
 
+void GeoDataTrack::appendAltitude( qreal altitude )
+{
+    if ( d->m_coordStack.isEmpty() ) {
+        Q_ASSERT(0);
+    } else {
+        GeoDataCoordinates coordinates = d->m_coordStack.last();
+        coordinates.setAltitude( altitude );
+        d->m_coordStack.removeLast();
+        d->m_coordStack.append( coordinates );
+    }
+}
+
 void GeoDataTrack::appendWhen( const QDateTime &when )
 {
     if ( !d->m_coordStack.isEmpty() ) {

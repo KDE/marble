@@ -14,10 +14,10 @@
     You should have received a copy of the GNU Library General Public License
     along with this library. If not, see <http://www.gnu.org/licenses/>.
 
-    Copyright 2010 Thibaut GRIDEL <tgridel@free.fr>
+    Copyright 2011 Niko Sams <niko.sams@gmail.com>
 */
 
-#include "GPXtrksegTagHandler.h"
+#include "GPXeleTagHandler.h"
 
 #include "MarbleDebug.h"
 
@@ -32,26 +32,23 @@ namespace Marble
 {
 namespace gpx
 {
-GPX_DEFINE_TAG_HANDLER(trkseg)
+GPX_DEFINE_TAG_HANDLER(ele)
 
-GeoNode* GPXtrksegTagHandler::parse(GeoParser& parser) const
+GeoNode* GPXeleTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_trkseg));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_ele));
 
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(gpxTag_trk))
+    if (parentItem.represents(gpxTag_trkpt))
     {
-        GeoDataPlacemark* placemark = parentItem.nodeAs<GeoDataPlacemark>();
-        GeoDataMultiGeometry *multigeometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
-        GeoDataTrack *track = new GeoDataTrack;
-
-        multigeometry->append( track );
+        GeoDataTrack* track = parentItem.nodeAs<GeoDataTrack>();
+        track->appendAltitude( parser.readElementText().trimmed().toDouble() );
 #ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_trkseg << "> trkseg: " << multigeometry->size();
+        mDebug() << "Parsed <" << gpxTag_ele << ">";
 #endif
         return track;
     }
-    mDebug() << "trkseg parsing with parentitem" << parentItem.qualifiedName();
+    mDebug() << "ele parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 

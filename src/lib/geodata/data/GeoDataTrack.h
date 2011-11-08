@@ -123,6 +123,8 @@ public:
      */
     void appendCoordinates( const GeoDataCoordinates &coord );
 
+    void appendAltitude( qreal altitude );
+
     /**
      * Add the time value part for a new point. See this class description
      * for more informations.

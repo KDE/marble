@@ -14,10 +14,10 @@
     You should have received a copy of the GNU Library General Public License
     along with this library. If not, see <http://www.gnu.org/licenses/>.
 
-    Copyright 2010 Thibaut GRIDEL <tgridel@free.fr>
+    Copyright 2011 Niko Sams <niko.sams@gmail.com>
 */
 
-#include "GPXtrksegTagHandler.h"
+#include "GPXtimeTagHandler.h"
 
 #include "MarbleDebug.h"
 
@@ -32,26 +32,24 @@ namespace Marble
 {
 namespace gpx
 {
-GPX_DEFINE_TAG_HANDLER(trkseg)
+GPX_DEFINE_TAG_HANDLER(time)
 
-GeoNode* GPXtrksegTagHandler::parse(GeoParser& parser) const
+GeoNode* GPXtimeTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_trkseg));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_time));
 
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(gpxTag_trk))
+    if (parentItem.represents(gpxTag_trkpt))
     {
-        GeoDataPlacemark* placemark = parentItem.nodeAs<GeoDataPlacemark>();
-        GeoDataMultiGeometry *multigeometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
-        GeoDataTrack *track = new GeoDataTrack;
+        GeoDataTrack* track = parentItem.nodeAs<GeoDataTrack>();
+        QDateTime dateTime = QDateTime::fromString( parser.readElementText().trimmed(), Qt::ISODate );
+        track->appendWhen( dateTime );
 
-        multigeometry->append( track );
 #ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_trkseg << "> trkseg: " << multigeometry->size();
+        mDebug() << "Parsed <" << gpxTag_time << ">" << dateTime;
 #endif
-        return track;
     }
-    mDebug() << "trkseg parsing with parentitem" << parentItem.qualifiedName();
+    mDebug() << "time parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 
