@@ -1,6 +1,14 @@
 [Desktop Entry]
 Name=OpenStreetMap with Marble
+Name[pt]=OpenStreetMap com o Marble
+Name[sv]=OpenStreetMap med Marble
+Name[uk]=OpenStreetMap за допомогою Marble
+Name[x-test]=xxOpenStreetMap with Marblexx
 Comment=Lookup places in OpenStreetMap with Marble
+Comment[pt]=Procurar locais no OpenStreetMap com o Marble
+Comment[sv]=Slå upp platser i OpenStreetMap med Marble
+Comment[uk]=Пошук місць на картах OpenStreetMap за допомогою Marble
+Comment[x-test]=xxLookup places in OpenStreetMap with Marblexx
 Icon=marble
 Type=Service
 X-KDE-ServiceTypes=Plasma/Runner
