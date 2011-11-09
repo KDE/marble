@@ -46,8 +46,17 @@ Page {
             height: 60
             onSearch: {
                 searchResultView.searchTerm = term
+                searchField.busy = true
                 marbleWidget.find( term )
                 searchResultListView.model = marbleWidget.getSearch().searchResultModel()
+            }
+
+            Component.onCompleted: {
+                marbleWidget.getSearch().searchFinished.connect( searchFinished )
+            }
+
+            function searchFinished() {
+                searchField.busy = false
             }
         }
 

@@ -15,6 +15,7 @@ import com.nokia.meego 1.0
      */
 TextField {
     signal search( string term )
+    property bool busy: false
 
     id: searchField
 
@@ -31,11 +32,20 @@ TextField {
         anchors.rightMargin: 5
         height: parent.height - 2
         width: parent.height - 2
+        visible: !parent.busy
         // Reset text and clear search.
         onClicked: {
             searchField.text = ""
             searchField.search( text )
         }
+    }
+
+    BusyIndicator {
+        anchors.verticalCenter: searchField.verticalCenter
+        anchors.right: searchField.right
+        anchors.rightMargin: 15
+        visible: searchField.busy
+        running: searchField.busy
     }
 
     Keys.onPressed: {
