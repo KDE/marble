@@ -15,7 +15,12 @@ import org.kde.edu.marble 0.11
  * Page to select map theme from a list.
  */
 Page {
-    tools: commonToolBar
+    tools: ToolBarLayout {
+        ToolIcon {
+            iconId: "toolbar-back";
+            onClicked: pageStack.pop()
+        }
+    }
 
     ListView {
         id: mapListView

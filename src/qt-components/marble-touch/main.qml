@@ -23,6 +23,7 @@ PageStackWindow {
     height: screen.displayHeight
     platformStyle: defaultStyle
     initialPage: activitySelection
+    showToolBar: pageStack.depth > 1
     property alias activityModel: activitySelection.model
     property alias marbleWidget: mainWidget
     
@@ -35,14 +36,7 @@ PageStackWindow {
     MarbleSettings {
         id: settings
     }
-    
-    // Default toolbar layout for pages if there is no other defined.
-    ToolBarLayout {
-        id: commonToolBar
-        visible: false
-        // ToolIcon { iconId: "toolbar-back"; onClicked: { pageStack.pop() } }
-    }
-    
+
     // Displays all available activities and starts them if the user clicks on them.
     ActivitySelectionView {
         id: activitySelection

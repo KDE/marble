@@ -17,10 +17,10 @@ import org.kde.edu.marble 0.11
  */
 Page {
     id: activityPage
+
     property int activity: -1
     property int previousActivity: -1
     property alias model: activityView.model
-    tools: commonToolBar
     // Signal that is emitted when the user changes activities.
     signal activityChanged( string oldActivity, string newActivity )
 
