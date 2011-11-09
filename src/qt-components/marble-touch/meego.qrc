@@ -3,10 +3,8 @@
         <file>main.qml</file>
         <file>MainWidget.qml</file>
         <file>ActivitySelectionView.qml</file>
-        <file>ConfigurationActivityPage.qml</file>
         <file>FriendsActivityPage.qml</file>
         <file>GeocachingActivityPage.qml</file>
-        <file>GuidanceActivityPage.qml</file>
         <file>RoutingActivityPage.qml</file>
         <file>SearchActivityPage.qml</file>
         <file>SearchField.qml</file>
@@ -27,8 +25,5 @@
         <file>icons/routing-pedestrian.svg</file>
         <file>icons/routing-motorcar.svg</file>
         <file>MapThemeSelectionPage.qml</file>
-        <file>NavigationSettingsPage.qml</file>
-        <file>ViewSettingsPage.qml</file>
-        <file>ConnectionSettingsPage.qml</file>
     </qresource>
 </RCC>

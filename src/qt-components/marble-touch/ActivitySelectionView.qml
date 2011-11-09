@@ -18,11 +18,7 @@ import org.kde.edu.marble 0.11
 Page {
     id: activityPage
 
-    property int activity: -1
-    property int previousActivity: -1
     property alias model: activityView.model
-    // Signal that is emitted when the user changes activities.
-    signal activityChanged( string oldActivity, string newActivity )
 
     // Grid view to display images and names of activities.
     GridView {
@@ -58,13 +54,7 @@ Page {
             }
             MouseArea {
                 anchors.fill: parent
-                onClicked: {
-                    if( activityPage.activity != -1 ) {
-                        activityPage.previousActivity = activityPage.activity
-                    }
-                    activityPage.activity = activityView.currentIndex = index
-                    pageStack.push( path )
-                }
+                onClicked: pageStack.push( path )
             }
         }
     }

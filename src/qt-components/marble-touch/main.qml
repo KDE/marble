@@ -24,7 +24,6 @@ PageStackWindow {
     platformStyle: defaultStyle
     initialPage: activitySelection
     showToolBar: pageStack.depth > 1
-    property alias activityModel: activitySelection.model
     property alias marbleWidget: mainWidget
     
     // System dependent style for the main window.
@@ -40,10 +39,6 @@ PageStackWindow {
     // Displays all available activities and starts them if the user clicks on them.
     ActivitySelectionView {
         id: activitySelection
-        onActivityChanged: {
-            console.log( "onActivityChanged", oldActivity, newActivity )
-            main.changeActivity( oldActivity, newActivity )
-        }
     }
 
     MainWidget {
