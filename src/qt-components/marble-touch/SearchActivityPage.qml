@@ -42,7 +42,10 @@ Page {
 
         SearchField {
             id: searchField
-            width: parent.width
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.margins: 10
             height: 60
             onSearch: {
                 searchResultView.searchTerm = term
@@ -141,9 +144,11 @@ Page {
         id: searchResultDelegate
 
         Item {
-            width: parent.width - 20
-            height: column.height + 5
             id: searchResultItem
+            width: parent.width - 20
+            height: column.height + 10
+            x: 10
+            y: 5
             property bool detailed: ListView.isCurrentItem
 
             /** @todo: Need access to bookmark manager here */
