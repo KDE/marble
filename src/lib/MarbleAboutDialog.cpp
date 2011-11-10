@@ -130,6 +130,11 @@ void MarbleAboutDialog::loadPageContents( int idx )
         tr("<b>Google Summer of Code</b>")+
         tr("<p> The Marble Team would like to thank its members who participated "
            "in the Google Summer of Code for their successful work on Marble:</p>")+
+        tr( "<p><b>2011</b></p>" ) +
+        tr( "<p>Konstantin Oblaukhov <a href=\"oblaukhov.konstantin@gmail.com\">oblaukhov.konstantin@gmail.com</a><br />"
+            "<i>Project: OpenStreetMap Vector Rendering</i></p>" ) +
+        tr( "<p>Daniel Marth <a href=\"danielmarth@gmx.at\">danielmarth@gmx.at</a><br />"
+            "<i>Project: Marble Touch on MeeGo</i></p>" ) +
         tr( "<p><b>2010</b></p>" ) +
         tr( "<p>Gaurav Gupta <a href=\"mailto:1989.gaurav@gmail.com\">1989.gaurav@gmail.com</a><br />"
             "<i>Project: Bookmarks</i></p>" ) +

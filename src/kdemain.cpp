@@ -115,6 +115,14 @@ int main ( int argc, char *argv[] )
                          "marble@hardakers.net" );
 
     // Google Summer of Code
+    aboutData.addAuthor( ki18n( "Konstantin Oblaukhov" ),
+                         ki18n( "Google Summer of Code 2011 Project:"
+                                " OpenStreetMap Vector Rendering" ),
+                         "oblaukhov.konstantin@gmail.com" );
+    aboutData.addAuthor( ki18n( "Daniel Marth" ),
+                         ki18n( "Google Summer of Code 2011 Project:"
+                                " Marble Touch on MeeGo" ),
+                         "danielmarth@gmx.at" );
     aboutData.addAuthor( ki18n( "Gaurav Gupta" ),
                          ki18n( "Google Summer of Code 2010 Project:"
                                 " Bookmarks" ),
