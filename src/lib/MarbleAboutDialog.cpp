@@ -89,34 +89,52 @@ void MarbleAboutDialog::loadPageContents( int idx )
         browser = d->uiWidget.m_pMarbleAuthorsBrowser;
         browser->setHtml( tr("<b>Active Development Team of Marble</b>")+
         tr("<p>Torsten Rahn <a href=\"mailto:rahn@kde.org\">rahn@kde.org</a><br />"
-           "<i>Core Developer and Original Author</i></p>")+
-        tr("<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</a><br />"
-           "<i>Core Developer: KML and Windows support</i></p>")+
-        tr("<p>Jens-Michael Hoffmann <a href=\"mailto:jensmh@gmx.de\">jensmh@gmx.de</a><br />"
-           "<i>Core Developer: OpenStreetMap support, Download Management</i></p>")+
-        tr("<p>Henry de Valence <a href=\"mailto:hdevalence@gmail.com\">hdevalence@gmail.com</a><br />"
-           "<i>Core Developer: Marble Runners, World-Clock Plasmoid</i></p>")+
-        tr("<p>Bastian Holst, <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx.de</a><br />"
-           "<i>Online Services support</i></p>")+
-        tr("<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail.com</a><br />"
-           "<i>Proxy support</i></p>")+
-        tr("<p>Pino Toscano <a href=\"mailto:pino@kde.org\">pino@kde.org</a><br />"
-           "<i>Network plugins</i></p>")+
-        tr("<p>Harshit Jain <a href=\"mailto:sonu.itbhu@googlemail.com\">sonu.itbhu@googlemail.com</a><br />"
-           "<i>Planet Filter, bugfixes</i></p>")+
-        tr("<p>M&eacute;d&eacute;ric Boquien <a href=\"mailto:mboquien@free.fr\">mboquien@free.fr</a><br />"
-           "<i>Astronomical Observatories</i></p>")+
-        tr("<p> Magnus Valle<br /><i>Historical Maps</i></p>")+
-        tr("<p>Eckhart W&ouml;rner <a href=\"mailto:kde@ewsoftware.de\">kde@ewsoftware.de</a><br />"
-           "<i>Bugfixes</i></p>")+
-        tr("<p>Wes Hardaker <a href=\"mailto:marble@hardakers.net\">marble@hardakers.net</a><br />"
-           "<i>APRS Plugin</i></p>")+
-        tr("<p>Dennis Nienh&uuml;ser <a href=\"mailto:earthwings@gentoo.org\">earthwings@gentoo.org</a><br />"
-           "<i>Routing</i></p>")+
+           "<i>Developer and Original Author</i></p>")+
+        tr("<p>Bernhard Beschow <a href=\"mailto:bbeschow@cs.tu-berlin.de\">bbeschow@cs.tu-berlin.de</a><br />"
+           "<i>WMS Support, Mobile, Performance</i></p>")+
         tr("<p>Thibaut Gridel <a href=\"mailto:tgridel@free.fr\">tgridel@free.fr</a><br />"
            "<i>Geodata</i></p>")+
-        tr("<p>Bernhard Beschow <a href=\"mailto:bbeschow@cs.tu-berlin.de\">bbeschow@cs.tu-berlin.de</a><br />"
-           "<i>WMS Support</i></p>")+
+        tr("<p>Jens-Michael Hoffmann <a href=\"mailto:jensmh@gmx.de\">jensmh@gmx.de</a><br />"
+           "<i>OpenStreetMap Support, Download Management</i></p>")+
+        tr("<p>Florian E&szlig;er <a href=\"mailto:f.esser@rwth-aachen.de\">f.esser@rwth-aachen.de</a><br />"
+           "<i>Elevation Profile</i></p>")+
+        tr("<p>Wes Hardaker <a href=\"mailto:marble@hardakers.net\">marble@hardakers.net</a><br />"
+           "<i>Amateur Radio Support</i></p>")+
+        tr("<p>Bastian Holst, <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx.de</a><br />"
+           "<i>Online Services Support</i></p>")+
+        tr("<p>Guillaume Martres, <a href=\"mailto:smarter@ubuntu.com\">smarter@ubuntu.com</a><br />"
+           "<i>Satellites</i></p>")+
+        tr("<p>Friedrich W. H. Kossebau, <a href=\"mailto:kossebau@kde.org\">kossebau@kde.org</a><br />"
+           "<i>Plasma Integration, Bugfixes</i></p>")+
+        tr("<p>Dennis Nienh&uuml;ser <a href=\"mailto:earthwings@gentoo.org\">earthwings@gentoo.org</a><br />"
+           "<i>Routing, Navigation, Mobile</i></p>")+
+        tr("<p>Niko Sams <a href=\"mailto:niko.sams@gmail.com\">niko.sams@gmail.com</a><br />"
+           "<i>Routing, Elevation Profile</i></p>")+
+        tr("<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</a><br />"
+           "<i>KML and Windows Support</i></p>")+
+        tr("<p>Eckhart W&ouml;rner <a href=\"mailto:kde@ewsoftware.de\">kde@ewsoftware.de</a><br />"
+           "<i>Bugfixes</i></p>")+
+        tr("<b>Developers</b>")+
+        tr("<p>M&eacute;d&eacute;ric Boquien <a href=\"mailto:mboquien@free.fr\">mboquien@free.fr</a><br />"
+           "<i>Astronomical Observatories</i></p>")+
+        tr("<p>Harshit Jain <a href=\"mailto:sonu.itbhu@googlemail.com\">sonu.itbhu@googlemail.com</a><br />"
+           "<i>Planet Filter, Bugfixes</i></p>")+
+        tr("<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail.com</a><br />"
+           "<i>Proxy Support</i></p>")+
+        tr("<p>Pino Toscano <a href=\"mailto:pino@kde.org\">pino@kde.org</a><br />"
+           "<i>Network plugins</i></p>")+
+        tr("<p>Henry de Valence <a href=\"mailto:hdevalence@gmail.com\">hdevalence@gmail.com</a><br />"
+           "<i>Marble Runners, World-Clock Plasmoid</i></p>")+
+        tr("<p>Magnus Valle<br /><i>Historical Maps</i></p>")+
+        tr("<p>Inge Wallin <a href=\"mailto:inge@lysator.liu.se\">inge@lysator.liu.se</a><br />"
+           "<i>Original Co-Maintainer</i></p>")+
+        tr("<p><i>Development &amp; Patches:</i> Simon Schmeisser, Claudiu Covaci, David Roberts, Nikolas Zimmermann, Jan Becker, "
+           "Stefan Asserh&auml;ll, Laurent Montel, Prashanth Udupa, Anne-Marie Mahfouf, Josef Spillner, Frerich Raabe, "
+           "Frederik Gladhorn, Fredrik H&ouml;glund, Albert Astals Cid, Thomas Zander, Joseph Wenninger, Kris Thomsen, "
+           "Daniel Molkentin  </p>")+
+        tr("<p><i>Platforms &amp; Distributions:</i> "
+           "Tim Sutton, Christian Ehrlicher, Ralf Habacker, Steffen Joeris, Marcus Czeslinski, Marcus D. Hanwell, Chitlesh Goorah, Sebastian Wiedenroth, Christophe Leske</p>")+
+        tr("<p><i>Artwork:</i> Nuno Pinheiro, Torsten Rahn</p>")+
         tr("<b>Join us</b>")+
         tr("<p>You can reach the developers of the Marble Project at <a href=\"mailto:marble-devel@kde.org\">marble-devel@kde.org</a></p>")+
         tr("<b>Google Code-in</b>")+
@@ -160,16 +178,6 @@ void MarbleAboutDialog::loadPageContents( int idx )
         tr("<p>Murad Tagirov <a href=\"mailto:tmurad@gmail.com\">tmurad@gmail.com</a><br />"
            "<i>Project: KML Support for Marble</i></p>")+
         tr("<p>... and of course we'd like to thank the people at Google Inc. for making these projects possible.</p>")+
-        tr("<b>Developers</b>")+
-        tr("<p>Inge Wallin <a href=\"mailto:inge@lysator.liu.se\">inge@lysator.liu.se</a><br />"
-           "<i>Core Developer and Co-Maintainer</i></p>")+
-        tr("<p><i>Development &amp; Patches:</i> Simon Schmeisser, Claudiu Covaci, David Roberts, Nikolas Zimmermann, Jan Becker, "
-           "Stefan Asserh&auml;ll, Laurent Montel, Prashanth Udupa, Anne-Marie Mahfouf, Josef Spillner, Frerich Raabe, "
-           "Frederik Gladhorn, Fredrik H&ouml;glund, Albert Astals Cid, Thomas Zander, Joseph Wenninger, Kris Thomsen, "
-           "Daniel Molkentin  </p>")+
-        tr("<p><i>Platforms &amp; Distributions:</i>"
-           "Tim Sutton, Christian Ehrlicher, Ralf Habacker, Steffen Joeris, Marcus Czeslinski, Marcus D. Hanwell, Chitlesh Goorah.</p>")+
-        tr("<p><i>Artwork:</i> Nuno Pinheiro, Torsten Rahn</p>")+
         tr("<b>Credits</b>")+
         tr("<p><i>Various Suggestions &amp; Testing:</i> Stefan Jordan, Robert Scott, Lubos Petrovic, Benoit Sigoure, "
            "Martin Konold, Matthias Welwarsky, Rainer Endres, Luis Silva, Ralf Gesellensetter, Tim Alder</p>")+
