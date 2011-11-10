@@ -122,8 +122,13 @@ GeoDataCoordinates GeoDataTrack::coordinatesAt( const QDateTime &when ) const
         QDateTime nextWhen = nextEntry.key();
         GeoDataCoordinates nextCoord = nextEntry.value();
 
+#if QT_VERSION < 0x040700	
+        int interval = 1000 * previousWhen.secsTo( nextWhen );
+        int position = 1000 * previousWhen.secsTo( when );
+#else	
         int interval = previousWhen.msecsTo( nextWhen );
         int position = previousWhen.msecsTo( when );
+#endif	
         qreal t = (qreal)position / (qreal)interval;
 
         Quaternion interpolated;
