@@ -34,7 +34,6 @@ const char* GeoDataExtendedDataType = "GeoDataExtendedData";
 const char* GeoDataFeatureType = "GeoDataFeature";
 const char* GeoDataFolderType = "GeoDataFolder";
 const char* GeoDataGeometryType = "GeoDataGeometry";
-const char* GeoDataTrackType = "GeoDataTrack";
 const char* GeoDataHotspotType = "GeoDataHotspot";
 const char* GeoDataIconStyleType = "GeoDataIconStyle";
 const char* GeoDataInnerBoundaryType = "GeoDataInnerBoundary";
@@ -60,6 +59,7 @@ const char* GeoDataStyleMapType = "GeoDataStyleMap";
 const char* GeoDataTimePrimitiveType = "GeoDataTimePrimitive";
 const char* GeoDataTimeSpanType = "GeoDataTimeSpan";
 const char* GeoDataTimeStampType = "GeoDataTimeStamp";
+const char* GeoDataTrackType = "GeoDataTrack";
 }
 
 }
