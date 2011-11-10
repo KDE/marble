@@ -45,6 +45,8 @@ private slots:
     void testFromStringDM();
     void testFromStringD_data();
     void testFromStringD();
+    void testFromLocaleString_data();
+    void testFromLocaleString();
     void testString_data();
     void testString();
     void testPack_data();
@@ -744,6 +746,547 @@ void TestGeoDataCoordinates::testFromStringD()
     QVERIFY(succeeded);
     QCOMPARE(coords.longitude(GeoDataCoordinates::Degree), lon);
     QCOMPARE(coords.latitude(GeoDataCoordinates::Degree),  lat);
+}
+
+class FromStringRegExpTranslator : public QTranslator
+{
+public:
+    FromStringRegExpTranslator(const QString& _degree, const QString& _minutes, const QString& _seconds,
+                               const QString& _north, const QString& _south,
+                               const QString& _east, const QString& _west)
+    : QTranslator((QObject*)0)
+    , degree( _degree )
+    , minutes( _minutes )
+    , seconds( _seconds )
+    , north( _north )
+    , south( _south )
+    , east( _east )
+    , west( _west )
+    {}
+
+public: // QTranslator API
+    virtual bool isEmpty() const { return false; }
+    virtual QString translate( const char* context, const char* sourceText,
+                               const char* disambiguation = 0 ) const;
+private:
+    const QString degree;
+    const QString minutes;
+    const QString seconds;
+    const QString north;
+    const QString south;
+    const QString east;
+    const QString west;
+};
+
+QString FromStringRegExpTranslator::translate( const char* context, const char* sourceText,
+                                               const char* disambiguation ) const
+{
+    if (qstrcmp(context, "GeoDataCoordinates") != 0 )
+        return QString();
+
+    if (qstrcmp(sourceText, "*") != 0 )
+        return QString();
+
+    if (qstrcmp(disambiguation, "North direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation") == 0 )
+        return north;
+    if (qstrcmp(disambiguation, "South direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation") == 0 )
+        return south;
+    if (qstrcmp(disambiguation, "East direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation") == 0 )
+        return east;
+    if (qstrcmp(disambiguation, "West direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation") == 0 )
+        return west;
+    if (qstrcmp(disambiguation, "Degree symbol terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation") == 0 )
+        return degree;
+    if (qstrcmp(disambiguation, "Minutes symbol terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation") == 0 )
+        return minutes;
+    if (qstrcmp(disambiguation, "Seconds symbol terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation") == 0 )
+        return seconds;
+
+    return QString();
+}
+
+class Sample
+{
+public:
+    Sample() {}
+    Sample(const char* _name, const char* _string, qreal _lon, qreal _lat)
+    : name(QString::fromUtf8(_name))
+    , string(QString::fromUtf8(_string))
+    , lon(_lon)
+    , lat(_lat)
+    {}
+    QString name;
+    QString string;
+    qreal lon;
+    qreal lat;
+};
+
+class Language {
+public:
+    Language() {}
+    Language(const char* _name,
+             const char* _degree, const char* _minutes, const char* _seconds,
+             const char* _north, const char* _south, const char* _east, const char* _west,
+             const QVector<Sample>& _samples)
+    : name(QString::fromUtf8(_name))
+    , degree(QString::fromUtf8(_degree))
+    , minutes(QString::fromUtf8(_minutes))
+    , seconds(QString::fromUtf8(_seconds))
+    , north(QString::fromUtf8(_north))
+    , south(QString::fromUtf8(_south))
+    , east(QString::fromUtf8(_east))
+    , west(QString::fromUtf8(_west))
+    , samples(_samples)
+    {}
+    QString name;
+    QString degree;
+    QString minutes;
+    QString seconds;
+    QString north;
+    QString south;
+    QString east;
+    QString west;
+    QVector<Sample> samples;
+};
+
+void TestGeoDataCoordinates::testFromLocaleString_data()
+{
+    QTest::addColumn<QString>("degree");
+    QTest::addColumn<QString>("minutes");
+    QTest::addColumn<QString>("seconds");
+    QTest::addColumn<QString>("north");
+    QTest::addColumn<QString>("south");
+    QTest::addColumn<QString>("east");
+    QTest::addColumn<QString>("west");
+
+    QTest::addColumn<QString>("string");
+    QTest::addColumn<qreal>("lon");
+    QTest::addColumn<qreal>("lat");
+
+    const QVector<Language> languages = QVector<Language>()
+        << Language(
+            "Japanese",
+            "度", // degree
+            "分", // minutes
+            "秒", // seconds
+            "北緯", // north
+            "南緯", // south
+            "東経", // east
+            "西経", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "北緯51度30分28秒 西経0度07分41秒",
+                    -0.12805555555555556135, 51.50777777777777544088)
+                << Sample(
+                    "Sydney",
+                    "南緯33度52分06秒 東経151度12分31秒",
+                    151.20861111111111085847, -33.86833333333333229120))
+        << Language(
+            "Korean",
+            "도", // degree
+            "분", // minutes
+            "초", // seconds
+            "북위", // north
+            "남위", // south
+            "동경", // east
+            "서경", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "북위 51도 30분 26초, 서경 0도 7분 39초",
+                    -0.12750000000000000222, 51.50722222222222512755)
+                << Sample(
+                    "Sydney",
+                    "남위 33도 31분 56초, 동경 151도 12분 40초",
+                    151.21111111111110858474, -33.53222222222222370647))
+
+        << Language(
+            "Galician",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "N", //north
+            "S", // south
+            "L|E", // east
+            "O|W", // west
+            QVector<Sample>()
+                << Sample(
+                    "Campamento",
+                    "36º10,67´N 5º24,29´W",
+                    -5.40483333333333337833, 36.17783333333333217752))
+
+        << Language(
+            "German",
+            "*", // degree
+            "*", // minutes
+            "*", // seconds
+            "N", //north
+            "S", // south
+            "O", // east
+            "W", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "51° 31′ N, 0° 7′ W",
+                    -0.11666666666666666852, 51.51666666666666571928))
+
+        << Language(
+            "Greek",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "Β", // north
+            "Ν", // south
+            "Α", // east
+            "Δ", // west
+            QVector<Sample>()
+                << Sample(
+                    "Χαλκίδα",
+                    "38° 28′ Β 23° 36′ Α",
+                    23.6, 38.46666666666666856))
+
+        << Language(
+            "Dutch",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "N|NB", // north
+            "Z|ZB", // south
+            "O|OL", // east
+            "W|WL", // west
+            QVector<Sample>()
+                << Sample(
+                    "Amersfoort",
+                    "N 52° 8′ 32.14″ , E 5° 24′ 56.09″",
+                    5.41558055555555561966, 52.14226111111111094942)
+                << Sample(
+                    "London",
+                    "51°30'00,55\" NB 0°07'34,45\" WL",
+                    -0.12623611111111110450, 51.50015277777777811252)
+                << Sample(
+                    "Amsterdam",
+                    "52°22'12,78\" NB 4°53'42,60\" OL",
+                    4.89516666666666644403, 52.37021666666666419587)
+                << Sample(
+                    "Capetown",
+                    "33°55'29,52\" ZB 18°25'26,60\" OL",
+                    18.42405555555555451974, -33.92486666666666650372))
+
+        << Language(
+            "Polish",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "Pn.|Pn", // north
+            "Płd.|Płd", // south
+            "Wschod.|Wschod|Wsch.|Wsch|Ws.|Ws", // east
+            "Zach.|Zach|Z", // west
+            QVector<Sample>()
+                << Sample(
+                    "Warsaw",
+                    "52°13′56″Pn. 21°00′30″Ws.",
+                    21.00833333333333285964, 52.23222222222221944321))
+
+        << Language(
+            "Esperanto",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "N", // north
+            "S", // south
+            "Or", // east
+            "Ok", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "52° 8′ 32,14″ N; 5° 24′ 56,09″ Or",
+                    5.41558055555555561966, 52.14226111111111094942))
+
+        << Language(
+            "Norwegian",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "N", // north
+            "S", // south
+            "Ø", // east
+            "V", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "51° 30′ 25” N 0° 7′ 39” V",
+                    -0.12750000000000000222, 51.50694444444444286546)
+                << Sample(
+                    "Ålgård",
+                    "58° 45′ 53.38″ N 5° 51′ 19.74″ Ø",
+                    5.85548333333333292927, 58.76482777777777499750))
+
+        << Language(
+            "Swedish",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "N", // north
+            "S", // south
+            "O", // east
+            "V", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "51°30′29″N 0°7′29″V",
+                    -0.12472222222222222043, 51.50805555555555770297)
+                << Sample(
+                    "Sydney",
+                    "33°31′56″S 151°12′40″O",
+                    151.21111111111110858474, -33.53222222222222370647))
+
+        << Language(
+            "Icelandic",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "N", //north
+            "S", // south
+            "A", // east
+            "V", // west
+//TODO:     "breidd 51°30'26\" N, lengd 0°7'39\" V" // London
+            QVector<Sample>()
+                << Sample(
+                    "Sydney",
+                    "33°31'56\" S, 151°12'40\" A",
+                    151.21111111111110858474, -33.53222222222222370647))
+
+        << Language(
+            "Turkish",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "K", // north
+            "G", // south
+            "D", // east
+            "B", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "51° 30′ 28″ K, 0° 7′ 41″ B",
+                    -0.12805555555555556135, 51.50777777777777544088))
+
+        << Language(
+            "Spanish", // (incl. Latin America)
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "N", // north
+            "S", // south
+            "E", // east
+            "O|W", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "51°30′25″N 00°07′39″O",
+                    -0.12750000000000000222, 51.50694444444444286546)
+                << Sample(
+                    "Else",
+                    "52° 8′ 32.14″ N, 5° 24′ 56.09″ W",
+                    -5.41558055555555561966, 52.14226111111111094942)
+                << Sample(
+                    "Bogotá",
+                    "4°35’53″N 74°4’33″O",
+                    -74.07583333333333541759, 4.59805555555555667269))
+
+        << Language(
+            "French",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "N", // north
+            "S", // south
+            "E", // east
+            "O", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "51° 30′ 18″ N 0° 04′ 43″ O",
+                    -0.07861111111111110383, 51.50500000000000255795))
+
+        << Language(
+            "Portuguese", // incl. Brazilian Portuguese
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "N", // north
+            "S", // south
+            "E|L", // east
+            "O", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "52° 8′ 32.14″ N, 5° 24′ 56.09″ E",
+                    5.41558055555555561966, 52.14226111111111094942))
+
+        << Language(
+            "Arabic",
+            "", // degree
+            "", // minutes
+            "", // seconds
+    "شمال", // north
+    "جنوب", // south
+    "شرق", // east
+    "غرب", // west
+            QVector<Sample>()
+                << Sample(
+                    "Warsaw",
+    "52°13′56″ شمال 21°00′30″ شرق",
+                    21.00833333333333285964, 52.23222222222221944321))
+
+        << Language(
+            "Russian",
+            "", //"град", "градусов" // degree
+            "", //"мин", "минут" // minutes
+            "", //"сек", "секунд" // seconds
+            "с. ш.", // north
+            "ю. ш.", // south
+            "в. д.", // east
+            "з. д.", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "51°30′26″ с. ш. 0°07′39″ з. д.",
+                    -0.12750000000000000222, 51.50722222222222512755))
+
+        << Language(
+            "Ukrainian",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "пн. ш.", // north
+            "пд. ш.", // south
+            "сх. д.", // east
+            "зх. д.", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "51°30' пн. ш. 0°07' сх. д.",
+                    0.11666666666666666852, 51.50000000000000000000)
+                << Sample(
+                    "Sydney",
+                    "33°52'10'' пд. ш. 151°12'30'' сх. д.",
+                    151.20833333333334280724, -33.86944444444444712872)
+                << Sample(
+                    "Rio de Janeiro",
+                    "22°54'30'' пд. ш. 43°11'47'' зх. д.",
+                    -43.19638888888889027839, -22.90833333333333499127))
+
+        << Language(
+            "Bulgarian",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "с. ш.", // north
+            "ю. ш.", // south
+            "и. д.", // east
+            "и. д.", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "51°30′26″ с. ш. 0°07′39″ и. д.",
+                    0.12750000000000000222, 51.50722222222222512755))
+
+        << Language(
+            "Czech",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "s. š.", // north
+            "j. š.", // south
+            "z. d.", // east
+            "v. d.", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "51°30′42″ s. š., 0°02′56″ z. d.",
+                    0.04888888888888889145, 51.51166666666666316132)
+                << Sample(
+                    "Sydney",
+                    "33° 52′ j. š., 151° 13′ v. d.",
+                    -151.21666666666669698316, -33.86666666666666714036))
+
+#if 0
+    // Hindi ???
+    "उ" // north
+    "द" // south
+    "पू" // east
+    "प" // west
+    "51°30′25″उ 00°07′39″प" // London
+
+    // Tamil ???
+    "வ" // north
+    "தெ" // south
+    "கி" // east
+    "மே" // west
+    "51°30′25″வ 00°07′39″மே" // London
+#endif
+        ;
+
+    foreach( const Language& language, languages ) {
+    foreach( const Sample& sample, language.samples ) {
+        const QString rowTitle =
+            language.name +
+            QLatin1String("|") + sample.name +
+            QLatin1String("|lon:") +
+            QString::fromLatin1("%L1").arg(sample.lon, 0, 'f', 10) +
+            QLatin1String("|lat:") +
+            QString::fromLatin1("%L1").arg(sample.lat, 0, 'f', 10);
+
+        QTest::newRow(rowTitle.toLatin1())
+            << language.degree
+            << language.minutes
+            << language.seconds
+            << language.north
+            << language.south
+            << language.east
+            << language.west
+            << sample.string
+            << sample.lon
+            << sample.lat;
+    }}
+}
+
+
+void TestGeoDataCoordinates::testFromLocaleString()
+{
+    QFETCH(QString, degree);
+    QFETCH(QString, minutes);
+    QFETCH(QString, seconds);
+    QFETCH(QString, north);
+    QFETCH(QString, south);
+    QFETCH(QString, east);
+    QFETCH(QString, west);
+
+    QFETCH(QString, string);
+    QFETCH(qreal, lon);
+    QFETCH(qreal, lat);
+
+    FromStringRegExpTranslator translator(degree, minutes, seconds, north, south, east, west);
+    QCoreApplication::installTranslator(&translator);
+
+    bool succeeded = false;
+    const GeoDataCoordinates coords = GeoDataCoordinates::fromString(string, succeeded);
+
+    if(! succeeded)
+        qWarning() << "Could not parse"<<string <<"for"<<lon<<lat;
+
+    QVERIFY(succeeded);
+
+// Uncomment to get the lon and lat values with more precision
+// qWarning() << "lon"<<QString::fromLatin1("%L1").arg(coords.longitude(GeoDataCoordinates::Degree), 0, 'f', 20)
+//            << "lat"<<QString::fromLatin1("%L1").arg(coords.latitude(GeoDataCoordinates::Degree), 0, 'f', 20);
+
+    QCOMPARE(coords.longitude(GeoDataCoordinates::Degree), lon);
+    QCOMPARE(coords.latitude(GeoDataCoordinates::Degree),  lat);
+
+    QCoreApplication::removeTranslator(&translator);
 }
 
 /*
