@@ -150,7 +150,7 @@ void GeoDataTrack::addPoint( const QDateTime &when, const GeoDataCoordinates &co
 void GeoDataTrack::appendCoordinates( const GeoDataCoordinates &coord )
 {
     if ( !d->m_whenStack.isEmpty() ) {
-        d->m_pointMap.insert( d->m_whenStack.takeLast(), coord );
+        d->m_pointMap.insert( d->m_whenStack.takeFirst(), coord );
         d->m_lineStringNeedsUpdate = true;
     } else {
         d->m_coordStack.append( coord );
@@ -160,7 +160,7 @@ void GeoDataTrack::appendCoordinates( const GeoDataCoordinates &coord )
 void GeoDataTrack::appendWhen( const QDateTime &when )
 {
     if ( !d->m_coordStack.isEmpty() ) {
-        d->m_pointMap.insert( when, d->m_coordStack.takeLast() );
+        d->m_pointMap.insert( when, d->m_coordStack.takeFirst() );
         d->m_lineStringNeedsUpdate = true;
     } else {
         d->m_whenStack.append( when );
