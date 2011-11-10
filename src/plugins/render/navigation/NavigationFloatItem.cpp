@@ -25,6 +25,7 @@
 #include "MarbleWidget.h"
 #include "WidgetGraphicsItem.h"
 #include "MarbleGraphicsGridLayout.h"
+#include "PluginAboutDialog.h"
 
 using namespace Marble;
 /* TRANSLATOR Marble::NavigationFloatItem */
@@ -39,7 +40,8 @@ NavigationFloatItem::NavigationFloatItem( const QPointF &point )
       m_navigationWidgetSmall( 0 ),
       m_navigationWidget( 0 ),
       m_profiles( MarbleGlobal::getInstance()->profiles() ),
-      m_oldViewportRadius( 0 )
+      m_oldViewportRadius( 0 ),
+      m_aboutDialog( 0 )
 {
     // Plugin is enabled by default
     setEnabled( true );
@@ -90,6 +92,35 @@ QString NavigationFloatItem::description() const
 QIcon NavigationFloatItem::icon() const
 {
     return QIcon(":/icons/navigation.png");
+}
+
+QDialog *NavigationFloatItem::aboutDialog()
+{
+    if ( !m_aboutDialog ) {
+        // Initializing about dialog
+        m_aboutDialog = new PluginAboutDialog();
+        m_aboutDialog->setName( "Navigation" );
+        m_aboutDialog->setVersion( "0.1" );
+        // FIXME: Can we store this string for all of Marble
+        m_aboutDialog->setAboutText( tr( "<br />(c) 2010 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
+        
+        QList<Author> authors;
+        
+        Author earthwings;
+        earthwings.name = QString::fromUtf8( "Dennis Nienhüser" );
+        earthwings.task = tr( "Developer" );
+        earthwings.email = "earthwings@gentoo.org";
+        authors.append( earthwings );
+        
+        Author bholst;
+        bholst.name = QString::fromUtf8( "Bastian Holst" );
+        bholst.task = tr( "Developer" );
+        bholst.email = "bastianholst@gmx.de";
+        authors.append( bholst );
+        
+        m_aboutDialog->setAuthors( authors );
+    }
+    return m_aboutDialog;
 }
 
 void NavigationFloatItem::initialize()

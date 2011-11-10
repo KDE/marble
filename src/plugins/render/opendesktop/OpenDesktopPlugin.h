@@ -17,6 +17,8 @@
 #include <QtGui/QIcon>
  
 namespace Marble {
+
+class PluginAboutDialog;
  
 class OpenDesktopPlugin : public AbstractDataPlugin {
 
@@ -40,9 +42,13 @@ class OpenDesktopPlugin : public AbstractDataPlugin {
     QString description() const;
     
     QIcon icon() const;
+
+    QDialog *aboutDialog();
  
  private:
     bool m_isInitialized;
+    
+    PluginAboutDialog *m_aboutDialog;
 };
  
 }
