@@ -63,26 +63,59 @@ int main ( int argc, char *argv[] )
                           ki18n( "Marble Virtual Globe" ),
                           ControlView::applicationVersion().toLatin1(),
                           ki18n( "A World Atlas." ),
-                          KAboutData::License_LGPL, ki18n( "(c) 2007-2011" ),
+                          KAboutData::License_LGPL, ki18n( "(c) 2007-2012" ),
                           KLocalizedString(),
                           "http://edu.kde.org/marble" );
 
     // Active Development Team of Marble
     aboutData.addAuthor( ki18n( "Torsten Rahn" ),
-                         ki18n( "Core Developer and Original Author" ),
+                         ki18n( "Developer and Original Author" ),
                          "rahn@kde.org" );
-    aboutData.addAuthor( ki18n( "Patrick Spendrin" ),
-                         ki18n( "Core Developer: KML and Windows support" ),
-                         "pspendrin@gmail.com" );
+    aboutData.addAuthor( ki18n( "Bernhard Beschow" ),
+                         ki18n( "WMS Support, Mobile, Performance" ),
+                         "bbeschow@cs.tu-berlin.de" );
+    aboutData.addAuthor( ki18n( "Thibaut Gridel" ),
+                         ki18n( "Geodata" ),
+                         "tgridel@free.fr" );
     aboutData.addAuthor( ki18n( "Jens-Michael Hoffmann" ),
                          ki18n( "OpenStreetMap Integration, OSM Namefinder, Download Management" ),
                          "jmho@c-xx.com", "http://www.c-xx.com" );
-    aboutData.addAuthor( ki18n( "Henry de Valence" ),
-                         ki18n( "Core Developer: Marble Runners, World-Clock Plasmoid" ),
-                         "hdevalence@gmail.com" );
+    aboutData.addAuthor( ki18n( "Florian E&szlig;er" ),
+                         ki18n( "Elevation Profile" ),
+                         "f.esser@rwth-aachen.de" );
+    aboutData.addAuthor( ki18n( "Wes Hardaker" ),
+                         ki18n( "APRS Plugin" ),
+                         "marble@hardakers.net" );
     aboutData.addAuthor( ki18n( "Bastian Holst" ),
                          ki18n( "Online Services support" ),
                          "bastianholst@gmx.de" );
+    aboutData.addAuthor( ki18n( "Guillaume Martres" ),
+                         ki18n( " Satellites" ),
+                         "smarter@ubuntu.com" );
+    aboutData.addAuthor( ki18n( "Friedrich W. H. Kossebau" ),
+                         ki18n( "Plasma Integration, Bugfixes" ),
+                         "kossebau@kde.org" );
+    aboutData.addAuthor( ki18n( "Dennis Nienhüser" ),
+                         ki18n( "Routing, Navigation, Mobile" ),
+                         "earthwings@gentoo.org" );
+    aboutData.addAuthor( ki18n( "Niko Sams" ),
+                         ki18n( "Routing, Elevation Profile" ),
+                         "niko.sams@gmail.com" );
+    aboutData.addAuthor( ki18n( "Patrick Spendrin" ),
+                         ki18n( "Core Developer: KML and Windows support" ),
+                         "pspendrin@gmail.com" );
+    aboutData.addAuthor( ki18n( "Eckhart Wörner" ),
+                         ki18n( "Bugfixes" ),
+                         "kde@ewsoftware.de" );
+    
+    // Developers:    
+    
+    aboutData.addAuthor( ki18n( "Inge Wallin" ),
+                         ki18n( "Core Developer and Co-Maintainer" ),
+                         "inge@lysator.liu.se" );
+    aboutData.addAuthor( ki18n( "Henry de Valence" ),
+                         ki18n( "Core Developer: Marble Runners, World-Clock Plasmoid" ),
+                         "hdevalence@gmail.com" );
     aboutData.addAuthor( ki18n( "Pino Toscano" ),
                          ki18n( "Network plugins" ),
                          "pino@kde.org" );
@@ -92,28 +125,19 @@ int main ( int argc, char *argv[] )
     aboutData.addAuthor( ki18n( "Simon Edwards" ),
                          ki18n( "Marble Python Bindings" ),
                          "simon@simonzone.com" );
-    aboutData.addAuthor( ki18n( "Dennis Nienhüser" ),
-                         ki18n( "Routing" ),
-                         "earthwings@gentoo.org" );
-    aboutData.addAuthor( ki18n( "Thibaut Gridel" ),
-                         ki18n( "Geodata" ),
-                         "tgridel@free.fr" );
-    aboutData.addAuthor( ki18n( "Bernhard Beschow" ),
-                         ki18n( "WMS Support" ),
-                         "bbeschow@cs.tu-berlin.de" );
     aboutData.addAuthor( ki18n( "Magnus Valle" ),
                          ki18n( "Historical Maps" ),
                          "" );
     aboutData.addAuthor( ki18n( "Médéric Boquien" ),
                          ki18n( "Astronomical Observatories" ),
                          "mboquien@free.fr" );
-    aboutData.addAuthor( ki18n( "Eckhart Wörner" ),
-                         ki18n( "Bugfixes" ),
-                         "kde@ewsoftware.de" );
-    aboutData.addAuthor( ki18n( "Wes Hardaker" ),
-                         ki18n( "APRS Plugin" ),
-                         "marble@hardakers.net" );
 
+    // ESA Summer of Code in Space
+    aboutData.addAuthor( ki18n( "Guillaume Martres" ),
+                         ki18n( "ESA Summer of Code in Space  2011 Project:"
+                                " Visualisation of Satellite Orbits" ),
+                         "smarter@ubuntu.com" );    
+    
     // Google Summer of Code
     aboutData.addAuthor( ki18n( "Konstantin Oblaukhov" ),
                          ki18n( "Google Summer of Code 2011 Project:"
@@ -165,9 +189,6 @@ int main ( int argc, char *argv[] )
                          "tmurad@gmail.com" );
 
     // Developers
-    aboutData.addAuthor( ki18n( "Inge Wallin" ),
-                         ki18n( "Core Developer and Co-Maintainer" ),
-                         "inge@lysator.liu.se" );
     aboutData.addAuthor( ki18n( "Simon Schmeisser" ),
                          ki18n( "Development & Patches" ));
     aboutData.addAuthor( ki18n( "Claudiu Covaci" ),
@@ -204,6 +225,10 @@ int main ( int argc, char *argv[] )
                          ki18n( "Development & Patches" ));
     aboutData.addAuthor( ki18n( "Daniel Molkentin" ),
                          ki18n( "Development & Patches" ));
+    aboutData.addAuthor( ki18n( "Christophe Leske" ),
+                         ki18n( "Platforms & Distributions" ));
+    aboutData.addAuthor( ki18n( "Sebastian Wiedenroth" ),
+                         ki18n( "Platforms & Distributions" ));
     aboutData.addAuthor( ki18n( "Tim Sutton" ),
                          ki18n( "Platforms & Distributions" ));
     aboutData.addAuthor( ki18n( "Christian Ehrlicher" ),
