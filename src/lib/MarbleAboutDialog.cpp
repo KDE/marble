@@ -137,6 +137,12 @@ void MarbleAboutDialog::loadPageContents( int idx )
         tr("<p><i>Artwork:</i> Nuno Pinheiro, Torsten Rahn</p>")+
         tr("<b>Join us</b>")+
         tr("<p>You can reach the developers of the Marble Project at <a href=\"mailto:marble-devel@kde.org\">marble-devel@kde.org</a></p>")+
+        tr("<b>ESA - Summer of Code in Space 2011</b>")+
+        tr("<p> The Marble Team would like to thank its members who participated "
+           "in ESA SoCiS for their successful work on Marble:</p>")+
+        tr("<p>Guillaume Martres, <a href=\"mailto:smarter@ubuntu.com\">smarter@ubuntu.com</a><br />"
+           "<i>Project: Visualisation of Satellite Orbits</i></p>")+
+
         tr("<b>Google Code-in</b>")+
         tr("<p> The Marble Team would like to thank its members who participated "
            "in the Google Code-in for their successful work on Marble:</p>")+
