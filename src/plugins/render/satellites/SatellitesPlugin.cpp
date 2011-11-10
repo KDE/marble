@@ -226,60 +226,61 @@ QDialog *SatellitesPlugin::configDialog()
 
 void SatellitesPlugin::setupConfigModel()
 {
-    SatellitesConfigNodeItem *node = new SatellitesConfigNodeItem( "Special-Interest Satellites" );
-    node->appendChild( new SatellitesConfigLeafItem( "Last 30 Days' Launches", "http://www.celestrak.com/NORAD/elements/tle-new.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Space Stations", "http://www.celestrak.com/NORAD/elements/stations.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "100 (or so) Brightest", "http://www.celestrak.com/NORAD/elements/visual.txt") );
-    node->appendChild( new SatellitesConfigLeafItem( "FENGYUN 1C Debris", "http://www.celestrak.com/NORAD/elements/1999-025.txt") );
-    node->appendChild( new SatellitesConfigLeafItem( "IRIDIUM 33 Debris", "http://www.celestrak.com/NORAD/elements/iridium-33-debris.txt") );
-    node->appendChild( new SatellitesConfigLeafItem( "COSMOS 2251 Debris", "http://www.celestrak.com/NORAD/elements/cosmos-2251-debris.txt") );
+    const char *desc = "A category of satellites to be displayed";
+    SatellitesConfigNodeItem *node = new SatellitesConfigNodeItem( tr("Special-Interest Satellites" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Last 30 Days' Launches", desc ), "http://www.celestrak.com/NORAD/elements/tle-new.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Space Stations", desc ), "http://www.celestrak.com/NORAD/elements/stations.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "100 (or so) Brightest", desc ), "http://www.celestrak.com/NORAD/elements/visual.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "FENGYUN 1C Debris", desc ), "http://www.celestrak.com/NORAD/elements/1999-025.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "IRIDIUM 33 Debris", desc ), "http://www.celestrak.com/NORAD/elements/iridium-33-debris.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "COSMOS 2251 Debris", desc ), "http://www.celestrak.com/NORAD/elements/cosmos-2251-debris.txt" ) );
     m_configModel->appendChild( node );
 
-    node = new SatellitesConfigNodeItem( "Weather & Earth Resources Satellites" );
-    node->appendChild( new SatellitesConfigLeafItem( "Weather", "http://www.celestrak.com/NORAD/elements/weather.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "NOAA", "http://www.celestrak.com/NORAD/elements/noaa.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "GOES", "http://www.celestrak.com/NORAD/elements/goes.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Earth Resources", "http://www.celestrak.com/NORAD/elements/resource.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Search & Rescue (SARSAT)", "http://www.celestrak.com/NORAD/elements/sarsat.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Disaster Monitoring", "http://www.celestrak.com/NORAD/elements/dmc.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Tracking and Data Relay Satellite System (TDRSS)", "http://www.celestrak.com/NORAD/elements/tdrss.txt" ) );
+    node = new SatellitesConfigNodeItem( tr( "Weather & Earth Resources Satellites" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Weather", desc ), "http://www.celestrak.com/NORAD/elements/weather.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "NOAA", desc ), "http://www.celestrak.com/NORAD/elements/noaa.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "GOES", desc ), "http://www.celestrak.com/NORAD/elements/goes.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Earth Resources", desc ), "http://www.celestrak.com/NORAD/elements/resource.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Search & Rescue (SARSAT)", desc ), "http://www.celestrak.com/NORAD/elements/sarsat.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Disaster Monitoring", desc ), "http://www.celestrak.com/NORAD/elements/dmc.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Tracking and Data Relay Satellite System (TDRSS)", desc ), "http://www.celestrak.com/NORAD/elements/tdrss.txt" ) );
     m_configModel->appendChild( node );
 
-    node = new SatellitesConfigNodeItem( "Communications Satellites" );
-    node->appendChild( new SatellitesConfigLeafItem( "Geostationary", "http://www.celestrak.com/NORAD/elements/geo.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Intelsat", "http://www.celestrak.com/NORAD/elements/intelsat.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Gorizont", "http://www.celestrak.com/NORAD/elements/gorizont.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Raduga", "http://www.celestrak.com/NORAD/elements/raduga.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Molniya", "http://www.celestrak.com/NORAD/elements/molniya.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Iridium", "http://www.celestrak.com/NORAD/elements/iridium.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Orbcomm", "http://www.celestrak.com/NORAD/elements/orbcomm.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Globalstar", "http://www.celestrak.com/NORAD/elements/globalstar.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Amateur radio", "http://www.celestrak.com/NORAD/elements/amateur.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Experimental", "http://www.celestrak.com/NORAD/elements/x-comm.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Other", "http://www.celestrak.com/NORAD/elements/other-comm.txt" ) );
+    node = new SatellitesConfigNodeItem( tr( "Communications Satellites" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Geostationary", desc ), "http://www.celestrak.com/NORAD/elements/geo.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Intelsat", desc ), "http://www.celestrak.com/NORAD/elements/intelsat.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Gorizont", desc ), "http://www.celestrak.com/NORAD/elements/gorizont.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Raduga", desc ), "http://www.celestrak.com/NORAD/elements/raduga.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Molniya", desc ), "http://www.celestrak.com/NORAD/elements/molniya.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Iridium", desc ), "http://www.celestrak.com/NORAD/elements/iridium.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Orbcomm", desc ), "http://www.celestrak.com/NORAD/elements/orbcomm.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Globalstar", desc ), "http://www.celestrak.com/NORAD/elements/globalstar.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Amateur radio", desc ), "http://www.celestrak.com/NORAD/elements/amateur.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Experimental",desc ), "http://www.celestrak.com/NORAD/elements/x-comm.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Other", desc ), "http://www.celestrak.com/NORAD/elements/other-comm.txt" ) );
     m_configModel->appendChild( node );
 
-    node = new SatellitesConfigNodeItem( "Navigation Satellites" );
-    node->appendChild( new SatellitesConfigLeafItem( "GPS Operational", "http://www.celestrak.com/NORAD/elements/gps-ops.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Glonass Operational", "http://www.celestrak.com/NORAD/elements/glo-ops.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Galileo", "http://www.celestrak.com/NORAD/elements/galileo.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)", "http://www.celestrak.com/NORAD/elements/sbas.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Navy Navigation Satellite System (NNSS)", "http://www.celestrak.com/NORAD/elements/nnss.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Russian LEO Navigation", "http://www.celestrak.com/NORAD/elements/musson.txt" ) );
+    node = new SatellitesConfigNodeItem( tr( "Navigation Satellites" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "GPS Operational", desc ), "http://www.celestrak.com/NORAD/elements/gps-ops.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Glonass Operational", desc ), "http://www.celestrak.com/NORAD/elements/glo-ops.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Galileo", desc ), "http://www.celestrak.com/NORAD/elements/galileo.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)", desc ), "http://www.celestrak.com/NORAD/elements/sbas.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Navy Navigation Satellite System (NNSS)", desc ), "http://www.celestrak.com/NORAD/elements/nnss.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Russian LEO Navigation", desc ), "http://www.celestrak.com/NORAD/elements/musson.txt" ) );
     m_configModel->appendChild( node );
 
-    node = new SatellitesConfigNodeItem( "Scientific Satellites" );
-    node->appendChild( new SatellitesConfigLeafItem( "Space & Earth Science", "http://www.celestrak.com/NORAD/elements/science.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Geodetic", "http://www.celestrak.com/NORAD/elements/geodetic.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Engineering", "http://www.celestrak.com/NORAD/elements/engineering.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Education", "http://www.celestrak.com/NORAD/elements/education.txt" ) );
+    node = new SatellitesConfigNodeItem( tr( "Scientific Satellites" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Space & Earth Science", desc ), "http://www.celestrak.com/NORAD/elements/science.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Geodetic", desc ), "http://www.celestrak.com/NORAD/elements/geodetic.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Engineering", desc ), "http://www.celestrak.com/NORAD/elements/engineering.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Education", desc ), "http://www.celestrak.com/NORAD/elements/education.txt" ) );
     m_configModel->appendChild( node );
 
-    node = new SatellitesConfigNodeItem( "Miscellaneous Satellites" );
-    node->appendChild( new SatellitesConfigLeafItem( "Miscellaneous Military", "http://www.celestrak.com/NORAD/elements/military.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Radar Calibration", "http://www.celestrak.com/NORAD/elements/radar.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "CubeSats", "http://www.celestrak.com/NORAD/elements/cubesat.txt" ) );
-    node->appendChild( new SatellitesConfigLeafItem( "Other", "http://www.celestrak.com/NORAD/elements/other.txt" ) );
+    node = new SatellitesConfigNodeItem( tr( "Miscellaneous Satellites" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Miscellaneous Military", desc ), "http://www.celestrak.com/NORAD/elements/military.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Radar Calibration", desc ), "http://www.celestrak.com/NORAD/elements/radar.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "CubeSats", desc ), "http://www.celestrak.com/NORAD/elements/cubesat.txt" ) );
+    node->appendChild( new SatellitesConfigLeafItem( tr( "Other", desc ), "http://www.celestrak.com/NORAD/elements/other.txt" ) );
     m_configModel->appendChild( node );
 }
 
