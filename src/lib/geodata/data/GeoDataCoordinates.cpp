@@ -668,7 +668,7 @@ void GeoDataCoordinates::geoCoordinates( qreal& lon, qreal& lat,
 void GeoDataCoordinates::geoCoordinates( qreal& lon, qreal& lat, qreal& alt,
                                          GeoDataCoordinates::Unit unit ) const
 {
-    geoCoordinates( lon, lat );
+    geoCoordinates( lon, lat, unit );
     alt = d->m_altitude;
 }
 
