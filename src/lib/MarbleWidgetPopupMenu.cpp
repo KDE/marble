@@ -100,7 +100,6 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
     }
 
 
-    connect( m_lmbMenu, SIGNAL( triggered( QAction* ) ), SLOT( showFeatureInfo( QAction* ) ) );
     connect( fromHere, SIGNAL( triggered( ) ), SLOT( directionsFromHere() ) );
     connect( toHere, SIGNAL( triggered( ) ), SLOT( directionsToHere() ) );
     connect( m_setHomePointAction, SIGNAL( triggered() ), SLOT( slotSetHomePoint() ) );
