@@ -184,12 +184,15 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSe
 	 && m_defaultLabelColor != Qt::black )
         labelColor = m_defaultLabelColor;
 
+    labelFont.setWeight(75);
+
     LabelStyle labelStyle = Normal;
     if ( isSelected ) {
         labelStyle = Selected;
     } else if ( style->labelStyle().glow() ) {
         labelStyle = Glow;
     }
+
 
     // Due to some XOrg bug this requires a workaround via
     // QImage in some cases (at least with Qt 4.2).
@@ -199,6 +202,7 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSe
 
         labelPainter.begin( &labelPixmap );
 
+        labelPainter.setPen( labelColor );
         drawLabelText( labelPainter, labelName, labelFont, labelStyle );
 
         labelPainter.end();
@@ -210,6 +214,7 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSe
 
         labelPainter.begin( &image );
 
+        labelPainter.setPen( labelColor );
         drawLabelText( labelPainter, labelName, labelFont, labelStyle );
 
         labelPainter.end();
