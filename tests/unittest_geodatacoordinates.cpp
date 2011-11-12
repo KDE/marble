@@ -865,6 +865,25 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
 
     const QVector<Language> languages = QVector<Language>()
         << Language(
+            "English",
+            "*", // degree
+            "*", // minutes
+            "*", // seconds
+            "*", // north
+            "*", // south
+            "*", // east
+            "*", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "N051 30.150′ W000 07.234′",
+                    -0.12056666666666666921, 51.50249999999999772626)
+                << Sample(
+                    "Ålgård",
+                    "N58.764828 E5.855483",
+                    5.85548300000000043752, 58.76482800000000139562))
+
+        << Language(
             "Japanese",
             "度", // degree
             "分", // minutes
