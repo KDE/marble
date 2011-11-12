@@ -50,6 +50,10 @@ class ElevationProfileFloatItem : public AbstractFloatItem
 
     virtual QStringList backendTypes() const;
 
+    virtual QStringList renderPosition() const;
+
+    virtual qreal zValue() const; // Overriding LayerInterface to paint on top of the route
+
     virtual QString name() const;
 
     virtual QString guiString() const;

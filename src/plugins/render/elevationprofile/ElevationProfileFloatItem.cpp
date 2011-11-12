@@ -90,6 +90,16 @@ QStringList ElevationProfileFloatItem::backendTypes() const
     return QStringList( "elevationprofile" );
 }
 
+QStringList ElevationProfileFloatItem::renderPosition() const
+{
+    return QStringList() << "FLOAT_ITEM" << "HOVERS_ABOVE_SURFACE";
+}
+
+qreal ElevationProfileFloatItem::zValue() const
+{
+    return 1.0;
+}
+
 QString ElevationProfileFloatItem::name() const
 {
     return tr("Elevation Profile");
