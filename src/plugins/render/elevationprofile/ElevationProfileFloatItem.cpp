@@ -77,8 +77,9 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, cons
     MarbleGraphicsGridLayout *topLayout2 = new MarbleGraphicsGridLayout( 1, 1 );
     m_markerTextContainer.setLayout( topLayout2 );
     m_markerText->setFrame( RoundedRectFrame );
+    m_markerText->setPadding( 1 );
     topLayout2->setAlignment( Qt::AlignCenter );
-    topLayout2->addItem( m_markerText, 0, 1 );
+    topLayout2->addItem( m_markerText, 0, 0 );
 }
 
 ElevationProfileFloatItem::~ElevationProfileFloatItem()
@@ -436,29 +437,30 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         m_marbleWidget->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Degree );
         m_markerIconContainer.setCoordinate( GeoDataCoordinates( lon, lat, currentPoint.altitude(),
                                                             Marble::GeoDataCoordinates::Degree ) );
-        // move the text label, so that it sits right next to the flag
-        dx = 6;
-        dy = -16;
+        // move the text label, so that it sits next to the flag with a small spacing
+        dx += m_markerIconContainer.size().width() / 2 + m_markerTextContainer.size().width() / 2 + 2;
         m_marbleWidget->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Degree );
         m_markerTextContainer.setCoordinate( GeoDataCoordinates( lon, lat, currentPoint.altitude(),
                                                             Marble::GeoDataCoordinates::Degree ) );
         m_markerText->setText( " " + intervalStr + " " + m_unitY );
 
         // drawing area of flag
-        newMarkerRegion += QRect( QPoint( x - m_markerIconContainer.size().width() - 1,
-                                          y - m_markerIconContainer.size().height() - 1 ),
-                                  m_markerIconContainer.size().toSize() + QSize( 2, 2 ) );
+        if ( !m_markerIconContainer.positions().isEmpty() ) {
+            newMarkerRegion += QRect( m_markerIconContainer.positions().first().toPoint(),
+                                      m_markerIconContainer.size().toSize() );
+        }
         // drawing area of text
-        newMarkerRegion += QRect( QPoint( x - 3,
-                                          y - m_markerText->contentSize().height() - 3 ),
-                                  m_markerText->contentSize().toSize() + QSize( 10, 6 ) );
+        if ( !m_markerTextContainer.positions().isEmpty() ) {
+            newMarkerRegion += QRect( m_markerTextContainer.positions().first().toPoint(),
+                                      m_markerTextContainer.size().toSize() );
+        }
         // redraw
         if ( newMarkerRegion != m_lastMarkerRegion ) {
             repaintRegion( m_lastMarkerRegion + newMarkerRegion );
         }
         m_lastMarkerRegion = newMarkerRegion;
     } else {
-        if( m_markerIconContainer.visible() || m_markerIconContainer.visible() ) {
+        if( m_markerIconContainer.visible() || m_markerTextContainer.visible() ) {
             m_markerIconContainer.hide();
             m_markerTextContainer.hide();
             repaintRegion( m_lastMarkerRegion );
