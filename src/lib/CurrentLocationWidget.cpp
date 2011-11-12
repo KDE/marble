@@ -277,6 +277,7 @@ void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provid
                 m_currentLocationUi.locationLabel->setEnabled( true );
                 PositionProviderPlugin* instance = plugin->newInstance();
                 PositionTracking *tracking = m_widget->model()->positionTracking();
+                instance->setMarbleModel( m_widget->model() );
                 tracking->setPositionProviderPlugin( instance );
                 m_widget->update();
                 return;
@@ -292,17 +293,8 @@ void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provid
 
 void CurrentLocationWidgetPrivate::trackPlacemark()
 {
-    foreach( PositionProviderPlugin* plugin, m_positionProviderPlugins ) {
-        if ( plugin->nameId() == "Placemark" ) {
-            PositionProviderPlugin *instance = plugin->newInstance();
-            instance->setMarbleModel( m_widget->model() );
-            PositionTracking *tracking = m_widget->model()->positionTracking();
-            tracking->setPositionProviderPlugin( instance );
-            m_adjustNavigation->setRecenter( AdjustNavigation::AlwaysRecenter );
-            m_widget->update();
-            return;
-        }
-    }
+    changePositionProvider( "Placemark" );
+    m_adjustNavigation->setRecenter( AdjustNavigation::AlwaysRecenter );
 }
 
 void CurrentLocationWidget::setRecenterMode( int mode )
