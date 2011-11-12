@@ -659,7 +659,13 @@ void MarbleWidget::centerOn( const GeoDataPlacemark& placemark, bool animated )
     if ( lookAt ) {
         flyTo( *lookAt, animated ? Automatic : Instant );
     } else {
-        centerOn( placemark.coordinate( d->m_model.clock()->dateTime() ), animated );
+        bool icon;
+        GeoDataCoordinates coords = placemark.coordinate( d->m_model.clock()->dateTime(), &icon );
+        if ( icon ) {
+            centerOn( coords, animated );
+        } else {
+            centerOn( placemark.geometry()->latLonAltBox(), animated );
+        }
     }
 }
 
