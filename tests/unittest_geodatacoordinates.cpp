@@ -1212,14 +1212,23 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "33° 52′ j. š., 151° 13′ v. d.",
                     -151.21666666666669698316, -33.86666666666666714036))
 
-#if 0
-    // Hindi ???
-    "उ" // north
-    "द" // south
-    "पू" // east
-    "प" // west
-    "51°30′25″उ 00°07′39″प" // London
 
+        << Language(
+            "Hindi",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "उ", // north
+            "द", // south
+            "पू", // east
+            "प", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "51°30′25″उ 00°07′39″पू",
+                    0.12750000000000000222, 51.50694444444444286546))
+
+#if 0
     // Tamil ???
     "வ" // north
     "தெ" // south
