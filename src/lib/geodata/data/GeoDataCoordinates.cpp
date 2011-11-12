@@ -281,8 +281,8 @@ bool LonLatParser::parse( const QString& string )
 
     // direction as prefix, e.g. N 74.2245 W 32.2434
     const char lonLatDCapExp2[] =
-        "(%2(?:\\s*)[-+]?\\d{1,3}%1?\\d*)(?:%3)?\\s*(?:,|;|\\s)\\s*"
-        "(%2(?:\\s*)[-+]?\\d{1,3}%1?\\d*)(?:%3)?";
+        "%2\\s*([-+]?\\d{1,3}%1?\\d*)(?:%3)?\\s*(?:,|;|\\s)\\s*"
+        "%2\\s*([-+]?\\d{1,3}%1?\\d*)(?:%3)?";
 
     if (tryMatch(lonLatDCapExp2, input, degreeValueFromD, 2, PrefixDir)) {
         return true;
