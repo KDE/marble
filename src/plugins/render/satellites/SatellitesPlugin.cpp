@@ -43,6 +43,7 @@ SatellitesPlugin::SatellitesPlugin()
     connect( this, SIGNAL(enabledChanged(bool)), SLOT(enableModel(bool)) );
     connect( this, SIGNAL(visibilityChanged(QString,bool)), SLOT(visibleModel(QString,bool)) );
 
+    setVisible( false );
     setSettings( QHash<QString, QVariant>() );
 }
 
@@ -93,6 +94,11 @@ QString SatellitesPlugin::description() const
 QIcon SatellitesPlugin::icon() const
 {
     return QIcon();
+}
+
+RenderPlugin::RenderType SatellitesPlugin::renderType() const
+{
+    return Online;
 }
 
 void SatellitesPlugin::initialize()

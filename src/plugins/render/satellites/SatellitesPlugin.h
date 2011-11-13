@@ -53,6 +53,7 @@ public:
     QString guiString() const;
     QString description() const;
     QIcon icon() const;
+    RenderType renderType() const;
     void initialize();
     bool isInitialized() const;
 
