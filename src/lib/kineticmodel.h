@@ -30,8 +30,8 @@
 #ifndef OFILABS_KINETICMODEL
 #define OFILABS_KINETICMODEL
 
-#include <QObject>
-#include <QScopedPointer>
+#include <QtCore/QObject>
+#include <QtCore/QScopedPointer>
 
 class KineticModelPrivate;
 
