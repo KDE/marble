@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=OpenStreetMap with Marble
 Name[de]=OpenStreetMap mit Marble
+Name[es]=OpenStreetMap con Marble
 Name[nl]=OpenStreetMap met Marble
 Name[pt]=OpenStreetMap com o Marble
 Name[pt_BR]=OpenStreetMap com o Marble
@@ -10,6 +11,7 @@ Name[x-test]=xxOpenStreetMap with Marblexx
 Name[zh_TW]=Marble 的 OpenStreetMap 支援
 Comment=Lookup places in OpenStreetMap with Marble
 Comment[de]=Orte in OpenStreetMap mit Marble nachschlagen
+Comment[es]=Buscar lugares en OpenStreetMap con Marble
 Comment[nl]=Plaatsen in OpenStreetMap met Marble opzoeken
 Comment[pt]=Procurar locais no OpenStreetMap com o Marble
 Comment[pt_BR]=Procurar locais no OpenStreetMap com o Marble
