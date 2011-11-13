@@ -715,16 +715,14 @@ QRect PlacemarkLayout::roomForLabel( GeoDataStyle * style,
     int symbolwidth = style->iconStyle().icon().width();
 
     QFont labelFont = style->labelStyle().font();
+    labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size;
     int textHeight = QFontMetrics( labelFont ).height();
-//    mDebug() << textHeight;
 
     int textWidth;
     if ( style->labelStyle().glow() ) {
-        labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size;
         textWidth = ( QFontMetrics( labelFont ).width( labelText )
             + (int)( 2 * s_labelOutlineWidth ) );
     } else {
-        QFont labelFont = style->labelStyle().font();
         textWidth = ( QFontMetrics( labelFont ).width( labelText ) );
     }
 
