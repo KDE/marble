@@ -556,8 +556,9 @@ void RoutingWidget::setShowDirectionsButtonVisible( bool visible )
 void RoutingWidget::openRoute()
 {
     QString const file = QFileDialog::getOpenFileName( this, tr( "Open Route" ),
-                            QString(), tr("KML Files (*.kml)") );
+                            d->m_routingManager->lastOpenPath(), tr("KML Files (*.kml)") );
     if ( !file.isEmpty() ) {
+        d->m_routingManager->setLastOpenPath( QFileInfo( file ).absolutePath() );
         d->m_routingManager->alternativeRoutesModel()->clear();
         d->m_routingManager->loadRoute( file );
         GeoDataDocument* route = d->m_routingManager->alternativeRoutesModel()->route( 0 );
@@ -594,10 +595,11 @@ void RoutingWidget::saveRoute()
 {
     QString const fileName = QFileDialog::getSaveFileName( this,
                        tr( "Save Route" ), // krazy:exclude=qclasses
-                       QDir::homePath(),
+                       d->m_routingManager->lastSavePath(),
                        tr( "KML files (*.kml)" ) );
 
     if ( !fileName.isEmpty() ) {
+        d->m_routingManager->setLastSavePath( QFileInfo( fileName ).absolutePath() );
         d->m_routingManager->saveRoute( fileName );
     }
 }
