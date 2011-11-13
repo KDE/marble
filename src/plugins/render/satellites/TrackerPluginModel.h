@@ -42,6 +42,8 @@ public:
 
     virtual ~TrackerPluginModel();
 
+    void enable( bool enabled );
+
     /**
      * Add the item @p mark to the model.
      *

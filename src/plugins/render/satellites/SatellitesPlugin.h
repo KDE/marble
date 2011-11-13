@@ -65,6 +65,7 @@ public:
     QDialog *configDialog();
 
 private Q_SLOTS:
+    void enableModel( bool enabled );
     void readSettings();
     void writeSettings();
     void updateSettings();

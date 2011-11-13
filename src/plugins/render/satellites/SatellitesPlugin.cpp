@@ -40,6 +40,7 @@ SatellitesPlugin::SatellitesPlugin()
      ui_configWidget( 0 )
 {
     connect( this, SIGNAL(settingsChanged(QString)), SLOT(updateSettings()) );
+    connect( this, SIGNAL(enabledChanged(bool)), SLOT(enableModel(bool)) );
 
     setSettings( QHash<QString, QVariant>() );
 }
@@ -101,6 +102,7 @@ void SatellitesPlugin::initialize()
                                    marbleModel()->clock() );
     m_isInitialized = true;
     updateSettings();
+    enableModel( enabled() );
 }
 
 bool SatellitesPlugin::isInitialized() const
@@ -222,6 +224,14 @@ QDialog *SatellitesPlugin::configDialog()
     }
 
     return m_configDialog;
+}
+
+void SatellitesPlugin::enableModel( bool enabled )
+{
+    if ( !m_isInitialized ) {
+        return;
+    }
+    m_model->enable( enabled );
 }
 
 void SatellitesPlugin::setupConfigModel()

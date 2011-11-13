@@ -31,6 +31,7 @@ class TrackerPluginModelPrivate
 public:
     TrackerPluginModelPrivate( TrackerPluginModel *parent, GeoDataTreeModel *treeModel )
         : m_parent( parent ),
+          m_enabled( false ),
           m_treeModel( treeModel ),
           m_document( new GeoDataDocument() ),
           m_storagePolicy( MarbleDirs::localPath() + "/cache/" ),
@@ -40,7 +41,6 @@ public:
 
     ~TrackerPluginModelPrivate()
     {
-        m_treeModel->removeDocument( m_document );
         delete m_document;
         qDeleteAll( m_itemVector );
         delete m_downloadManager;
@@ -61,6 +61,7 @@ public:
     }
 
     TrackerPluginModel *m_parent;
+    bool m_enabled;
     GeoDataTreeModel *m_treeModel;
     GeoDataDocument *m_document;
     CacheStoragePolicy m_storagePolicy;
@@ -73,7 +74,9 @@ TrackerPluginModel::TrackerPluginModel( GeoDataTreeModel *treeModel, const Plugi
     : d( new TrackerPluginModelPrivate( this, treeModel ) )
 {
     d->m_document->setDocumentRole( TrackingDocument );
-    d->m_treeModel->addDocument( d->m_document );
+    if( d->m_enabled ) {
+        d->m_treeModel->addDocument( d->m_document );
+    }
 
     connect( d->m_timer, SIGNAL(timeout()), this, SLOT(update()) );
     d->update();
@@ -86,7 +89,20 @@ TrackerPluginModel::TrackerPluginModel( GeoDataTreeModel *treeModel, const Plugi
 
 TrackerPluginModel::~TrackerPluginModel()
 {
+    if( d->m_enabled ) {
+        d->m_treeModel->removeDocument( d->m_document );
+    }
     delete d;
+}
+
+void TrackerPluginModel::enable( bool enabled )
+{
+    if( enabled ) {
+        d->m_treeModel->addDocument( d->m_document );
+    } else {
+        d->m_treeModel->removeDocument( d->m_document );
+    }
+    d->m_enabled = enabled;
 }
 
 void TrackerPluginModel::addItem( TrackerPluginItem *mark )
@@ -105,12 +121,16 @@ void TrackerPluginModel::clear()
 
 void TrackerPluginModel::beginUpdateItems()
 {
-    d->m_treeModel->removeDocument( d->m_document );
+    if( d->m_enabled ) {
+        d->m_treeModel->removeDocument( d->m_document );
+    }
 }
 
 void TrackerPluginModel::endUpdateItems()
 {
-    d->m_treeModel->addDocument( d->m_document );
+    if( d->m_enabled ) {
+        d->m_treeModel->addDocument( d->m_document );
+    }
 }
 
 void TrackerPluginModel::downloadFile(const QUrl &url, const QString &id)
