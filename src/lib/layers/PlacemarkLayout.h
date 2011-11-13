@@ -116,6 +116,9 @@ class PlacemarkLayout : public QObject, public LayerInterface
     void requestStyleReset();
     void setCacheData();
 
+ Q_SIGNALS:
+    void repaintNeeded();
+
  private:
     void styleReset();
 

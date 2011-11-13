@@ -282,6 +282,7 @@ void GeometryLayer::invalidateScene()
     GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
         d->createGraphicsItems( object->parent() );
+    emit repaintNeeded();
 }
 
 }

@@ -48,6 +48,9 @@ public:
 public Q_SLOTS:
     void invalidateScene();
 
+Q_SIGNALS:
+    void repaintNeeded();
+
 private:
     GeometryLayerPrivate *d;
     

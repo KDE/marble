@@ -378,6 +378,7 @@ void PlacemarkLayout::setCacheData()
         TileId key = placemarkToTileId( coordinates, popularity );
         m_placemarkCache[key].append( placemark );
     }
+    emit repaintNeeded();
 }
 
 QStringList PlacemarkLayout::renderPosition() const
