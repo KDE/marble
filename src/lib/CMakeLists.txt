@@ -217,6 +217,8 @@ set(marblewidget_SRCS
     MapWizard.cpp
     GeoGraphicsScene.cpp
     ElevationModel.cpp
+
+    kineticmodel.cpp
 )
 
 set (marblewidget_UI
