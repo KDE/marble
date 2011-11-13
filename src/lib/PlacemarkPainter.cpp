@@ -184,12 +184,11 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSe
 	 && m_defaultLabelColor != Qt::black )
         labelColor = m_defaultLabelColor;
 
-    labelFont.setWeight(75);
-
     LabelStyle labelStyle = Normal;
     if ( isSelected ) {
         labelStyle = Selected;
     } else if ( style->labelStyle().glow() ) {
+        labelFont.setWeight(75);
         labelStyle = Glow;
     }
 
