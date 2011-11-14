@@ -69,15 +69,15 @@ Page {
                     property real longitude: 0.0
                     property real latitude: 0.0
 
-                    function retrieveInput(longitude, latitude) {
-                        if ( destinationInputLabel.editing ) {
-                            destinationInputLabel.longitude = longitude
-                            destinationInputLabel.latitude = latitude
-                            destinationInputLabel.editing = false
+                    function retrieveInput( lon, lat ) {
+                        if ( editing ) {
+                            longitude = lon
+                            latitude = lat
+                            editing = false
 
                             marbleWidget.getRouting().clearRoute()
                             marbleWidget.getRouting().setVia( 0, marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
-                            marbleWidget.getRouting().setVia( 1, longitude, latitude )
+                            marbleWidget.getRouting().setVia( 1, lon, lat )
                         }
                     }
 
