@@ -41,12 +41,12 @@ public:
 
     bool released;
     int duration;
-    qreal position;
-    qreal velocity;
-    qreal deacceleration;
+    QPointF position;
+    QPointF velocity;
+    QPointF deacceleration;
 
     QTime timestamp;
-    qreal lastPosition;
+    QPointF lastPosition;
 
     KineticModelPrivate();
 };
@@ -54,10 +54,10 @@ public:
 KineticModelPrivate::KineticModelPrivate()
     : released(false)
     , duration(1403)
-    , position(0)
-    , velocity(0)
-    , deacceleration(0)
-    , lastPosition(0)
+    , position(0, 0)
+    , velocity(0, 0)
+    , deacceleration(0, 0)
+    , lastPosition(0, 0)
 {
 
 }
@@ -85,19 +85,25 @@ void KineticModel::setDuration(int ms)
     d_ptr->duration = ms;
 }
 
-qreal KineticModel::position() const
+QPointF KineticModel::position() const
 {
     return d_ptr->position;
 }
 
-void KineticModel::setPosition(qreal pos)
+void KineticModel::setPosition(QPointF position)
+{
+    setPosition( position.x(), position.y() );
+}
+
+void KineticModel::setPosition(qreal posX, qreal posY)
 {
     d_ptr->released = false;
 
-    qreal oldPos = d_ptr->position;
-    d_ptr->position = pos;
-    if (!qFuzzyCompare(pos, oldPos))
-        emit positionChanged(pos);
+    QPointF oldPos = d_ptr->position;
+    d_ptr->position.setX( posX );
+    d_ptr->position.setY( posY );
+    if (!qFuzzyCompare(posX, oldPos.x()) || !qFuzzyCompare(posY, oldPos.y()))
+        emit positionChanged();
 
     update();
     if (!d_ptr->ticker.isActive())
@@ -122,7 +128,7 @@ void KineticModel::resetSpeed()
     d->ticker.stop();
     d->lastPosition = d->position;
     d->timestamp.start();
-    d->velocity = 0;
+    d->velocity = QPointF(0, 0);
 }
 
 void KineticModel::release()
@@ -131,11 +137,15 @@ void KineticModel::release()
 
     d->released = true;
 
-    d->deacceleration = d->velocity * 1000 / (1 + d_ptr->duration);
-    if (d->deacceleration < 0)
-        d->deacceleration = -d->deacceleration;
+    d->deacceleration = d->velocity * 1000 / ( 1 + d_ptr->duration );
+    if (d->deacceleration.x() < 0) {
+        d->deacceleration.setX( -d->deacceleration.x() );
+    }
+    if (d->deacceleration.y() < 0) {
+        d->deacceleration.setY( -d->deacceleration.y() );
+    }
 
-    if (d->deacceleration > 0.5) {
+    if (d->deacceleration.x() > 0.5 || d->deacceleration.y() > 0.5) {
         if (!d->ticker.isActive())
             d->ticker.start();
         update();
@@ -157,21 +167,33 @@ void KineticModel::update()
     qreal delta = static_cast<qreal>(elapsed) / 1000.0;
 
     if (d->released) {
-        d->position += (d->velocity * delta);
-        qreal vstep = d->deacceleration * delta;
-        if (d->velocity < vstep && d->velocity >= -vstep) {
-            d->velocity = 0;
+        d->position += d->velocity * delta;
+        QPointF vstep = d->deacceleration * delta;
+        if (d->velocity.x() < vstep.x() && d->velocity.x() >= -vstep.x()) {
+            d->velocity.setX( 0 );
             d->ticker.stop();
         } else {
-            if (d->velocity > 0)
-                d->velocity -= vstep;
+            if (d->velocity.x() > 0)
+                d->velocity.setX( d->velocity.x() - vstep.x() );
             else
-                d->velocity += vstep;
+                d->velocity.setX( d->velocity.x() + vstep.x() );
         }
-        emit positionChanged(d->position);
+        if (d->velocity.y() < vstep.y() && d->velocity.y() >= -vstep.y()) {
+            d->velocity.setY( 0 );
+        } else {
+            if (d->velocity.y() > 0)
+                d->velocity.setY( d->velocity.y() - vstep.y() );
+            else
+                d->velocity.setY( d->velocity.y() + vstep.y() );
+        }
+        if (d->velocity.isNull()) {
+            d->ticker.stop();
+        }
+
+        emit positionChanged();
     } else {
-        qreal lastSpeed = d->velocity;
-        qreal currentSpeed = (d->position - d->lastPosition) / delta;
+        QPointF lastSpeed = d->velocity;
+        QPointF currentSpeed = ( d->position - d->lastPosition ) / delta;
         d->velocity = .2 * lastSpeed + .8 * currentSpeed;
         d->lastPosition = d->position;
     }

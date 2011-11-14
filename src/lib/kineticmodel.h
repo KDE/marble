@@ -32,6 +32,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QScopedPointer>
+#include <QtCore/QPointF>
 
 class KineticModelPrivate;
 
@@ -39,7 +40,7 @@ class KineticModel: public QObject
 {
     Q_OBJECT
     Q_PROPERTY(int duration READ duration WRITE setDuration)
-    Q_PROPERTY(qreal position READ position WRITE setPosition)
+    Q_PROPERTY(QPointF position READ position WRITE setPosition)
     Q_PROPERTY(int updateInterval READ updateInterval WRITE setUpdateInterval)
 
 public:
@@ -47,18 +48,19 @@ public:
     ~KineticModel();
 
     int duration() const;
-    qreal position() const;
+    QPointF position() const;
     int updateInterval() const;
 
 public slots:
     void setDuration(int ms);
-    void setPosition(qreal pos);
+    void setPosition(QPointF position);
+    void setPosition(qreal posX, qreal posY);
     void setUpdateInterval(int ms);
     void resetSpeed();
     void release();
 
 signals:
-    void positionChanged(qreal position);
+    void positionChanged();
 
 private slots:
     void update();
