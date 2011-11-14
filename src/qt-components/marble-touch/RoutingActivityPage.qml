@@ -76,6 +76,7 @@ Page {
                             editing = false
 
                             marbleWidget.getRouting().clearRoute()
+                            marbleWidget.getRouting().routingProfile = routingTypeOptions.routingType
                             marbleWidget.getRouting().setVia( 0, marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
                             marbleWidget.getRouting().setVia( 1, lon, lat )
                         }
@@ -109,19 +110,27 @@ Page {
                 width: parent.width
                 id: routingTypeOptions
                 checkedButton: routingMotorcarButton
+                property string routingType: checkedButton.routingType
+                onRoutingTypeChanged: {
+                    marbleWidget.getRouting().routingProfile = routingTypeOptions.routingType
+                    marbleWidget.getRouting().updateRoute()
+                }
                 Button {
                     id: routingMotorcarButton
                     iconSource: "qrc:/icons/routing-motorcar.svg"
+                    property string routingType: "Motorcar"
                 }
 
                 Button {
                     id: routingBikeButton
                     iconSource: "qrc:/icons/routing-bike.svg"
+                    property string routingType: "Bicycle"
                 }
 
                 Button {
                     id: routingPedestrianButton
                     iconSource: "qrc:/icons/routing-pedestrian.svg"
+                    property string routingType: "Pedestrian"
                 }
             }
 

@@ -24,14 +24,25 @@ class MarbleWidget;
 namespace Declarative
 {
 
+class RoutingPrivate;
+
 class Routing : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString routingProfile READ routingProfile WRITE setRoutingProfile NOTIFY routingProfileChanged)
 
 public:
+    enum RoutingProfile { Motorcar, Bicycle, Pedestrian };
+
     explicit Routing( QObject* parent = 0 );
 
+    ~Routing();
+
     void setMarbleWidget( Marble::MarbleWidget* widget );
+
+    QString routingProfile() const;
+
+    void setRoutingProfile( const QString & profile );
 
 public Q_SLOTS:
     void addVia( qreal lon, qreal lat );
@@ -42,14 +53,17 @@ public Q_SLOTS:
 
     void clearRoute();
 
+    void updateRoute();
+
     QObject* waypointModel();
 
     QObject* routeRequestModel();
 
-private:
-    Marble::MarbleWidget* m_marbleWidget;
+Q_SIGNALS:
+    void routingProfileChanged();
 
-    QAbstractItemModel* m_routeRequestModel;
+private:
+    RoutingPrivate* const d;
 };
 
 }
