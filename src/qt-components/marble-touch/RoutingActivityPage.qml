@@ -212,6 +212,7 @@ Page {
                 }
 
                 Label {
+                    anchors.verticalCenter: parent.verticalCenter
                     platformStyle: LabelStyle { fontPixelSize: 14 }
                     text: display;
                     width: parent.width - 48
@@ -223,7 +224,7 @@ Page {
                 x: 5
                 width: parent.width - 20
                 height: 1
-                color: "darkgray"
+                color: "white"
             }
         }
     }
