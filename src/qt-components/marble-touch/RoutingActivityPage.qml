@@ -28,9 +28,6 @@ Page {
 
     Rectangle {
         id: searchResultView
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
         radius: 10
         color: "lightsteelblue"
         border.width: 1
@@ -184,14 +181,14 @@ Page {
         states: [
             State { // Horizontal
                 when: (routingActivityPage.width / routingActivityPage.height) > 1.20
-                AnchorChanges { target: mapContainer; anchors.left: searchResultView.right; anchors.bottom: routingActivityPage.bottom }
-                PropertyChanges { target: mapContainer; width: routingActivityPage.width / 2; height: routingActivityPage.height }
-                AnchorChanges { target: searchResultView; anchors.right: mapContainer.left; anchors.top: routingActivityPage.top }
+                AnchorChanges { target: searchResultView; anchors.top: routingActivityPage.top }
                 PropertyChanges { target: searchResultView; width: routingActivityPage.width / 2; height: routingActivityPage.height }
+                AnchorChanges { target: mapContainer; anchors.left: searchResultView.right; anchors.bottom: routingActivityPage.bottom; anchors.top: routingActivityPage.top; }
+                PropertyChanges { target: mapContainer; width: routingActivityPage.width / 2; height: routingActivityPage.height }
             },
             State { // Vertical
                 when: (true)
-                AnchorChanges { target: mapContainer; anchors.left: routingActivityPage.left; anchors.top: routingActivityPage.top }
+                AnchorChanges { target: mapContainer; anchors.left: routingActivityPage.left; anchors.bottom: searchResultListView.top; anchors.top: routingActivityPage.top }
                 PropertyChanges { target: mapContainer; width: routingActivityPage.width; height: routingActivityPage.height / 2 }
                 AnchorChanges { target: searchResultView; anchors.right: routingActivityPage.right; anchors.top: mapContainer.bottom }
                 PropertyChanges { target: searchResultView; width: routingActivityPage.width; height: routingActivityPage.height / 2 }
