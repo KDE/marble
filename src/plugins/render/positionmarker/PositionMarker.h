@@ -21,6 +21,7 @@
 
 #include "RenderPlugin.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLatLonAltBox.h"
 #include "PluginAboutDialog.h"
 
 namespace Ui
@@ -67,7 +68,7 @@ class PositionMarker  : public RenderPlugin
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString& renderPos, GeoSceneLayer * layer = 0 );
 
-    void update();
+    void update( const ViewportParams *viewport );
 
     // Overriding LayerInterface to paint on top of the route
     virtual qreal zValue() const;
@@ -99,7 +100,7 @@ class PositionMarker  : public RenderPlugin
     bool           m_useCustomCursor;
     
     QString m_defaultCursorPath;
-    ViewportParams     *m_viewport;
+    GeoDataLatLonAltBox m_lastBoundingBox;
     GeoDataCoordinates  m_currentPosition;
     GeoDataCoordinates  m_previousPosition;
     
