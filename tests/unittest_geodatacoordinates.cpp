@@ -1247,14 +1247,20 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "51°30′25″उ 00°07′39″पू",
                     0.12750000000000000222, 51.50694444444444286546))
 
-#if 0
-    // Tamil ???
-    "வ" // north
-    "தெ" // south
-    "கி" // east
-    "மே" // west
-    "51°30′25″வ 00°07′39″மே" // London
-#endif
+        << Language(
+            "Tamil",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "வ", // north
+            "தெ", // south
+            "கி", // east
+            "மே", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "51°30′25″ வ 00°07′39″ கி",
+                    0.12750000000000000222, 51.50694444444444286546))
         ;
 
     foreach( const Language& language, languages ) {
