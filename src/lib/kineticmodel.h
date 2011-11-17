@@ -61,6 +61,7 @@ public slots:
 
 signals:
     void positionChanged();
+    void finished();
 
 private slots:
     void update();

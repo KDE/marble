@@ -161,8 +161,9 @@ void KineticModel::update()
     int elapsed = d->timestamp.elapsed();
 
     // too fast gives less accuracy
-    if (elapsed < d->ticker.interval() / 2)
+    if (elapsed < d->ticker.interval() / 2) {
         return;
+    }
 
     qreal delta = static_cast<qreal>(elapsed) / 1000.0;
 
@@ -186,11 +187,13 @@ void KineticModel::update()
             else
                 d->velocity.setY( d->velocity.y() + vstep.y() );
         }
-        if (d->velocity.isNull()) {
-            d->ticker.stop();
-        }
 
         emit positionChanged();
+
+        if (d->velocity.isNull()) {
+            emit finished();
+            d->ticker.stop();
+        }
     } else {
         QPointF lastSpeed = d->velocity;
         QPointF currentSpeed = ( d->position - d->lastPosition ) / delta;

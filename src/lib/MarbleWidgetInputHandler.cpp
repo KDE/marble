@@ -317,6 +317,7 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler( MarbleWidget *
 
     d->m_kineticModel.setUpdateInterval( 35 );
     connect( &d->m_kineticModel, SIGNAL( positionChanged() ), SLOT( adjustCenter() ) );
+    connect( &d->m_kineticModel, SIGNAL( finished() ), SLOT( restoreViewContext() ) );
 
     // The interface to the measure tool consists of a RMB popup menu
     // and some signals.
@@ -865,6 +866,7 @@ void MarbleWidgetDefaultInputHandler::setNumberOfMeasurePoints( int newNumber )
 
 void MarbleWidgetDefaultInputHandler::adjustCenter()
 {
+    MarbleWidgetInputHandler::d->m_widget->setViewContext( Animation );
     MarbleWidgetInputHandler::d->m_widget->centerOn( d->m_kineticModel.position().x(), d->m_kineticModel.position().y() );
 }
 
