@@ -20,6 +20,13 @@ Page {
 
     property alias model: activityView.model
 
+    tools: ToolBarLayout {
+        ToolButton {
+            text: "Info";
+            onClicked: pageStack.push( "qrc:/AboutMarblePage.qml" )
+        }
+    }
+
     // Grid view to display images and names of activities.
     GridView {
         id: activityView

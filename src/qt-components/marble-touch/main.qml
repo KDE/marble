@@ -23,7 +23,6 @@ PageStackWindow {
     height: screen.displayHeight
     platformStyle: defaultStyle
     initialPage: activitySelection
-    showToolBar: pageStack.depth > 1
     property alias marbleWidget: mainWidget
     
     // System dependent style for the main window.

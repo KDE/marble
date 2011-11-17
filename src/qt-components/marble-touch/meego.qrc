@@ -1,7 +1,9 @@
 <RCC>
     <qresource prefix="/">
+        <file>../../../data/svg/marble-logo.svg</file>
         <file>main.qml</file>
         <file>MainWidget.qml</file>
+        <file>AboutMarblePage.qml</file>
         <file>ActivitySelectionView.qml</file>
         <file>FriendsActivityPage.qml</file>
         <file>GeocachingActivityPage.qml</file>
