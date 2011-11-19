@@ -29,9 +29,6 @@ Page {
 
     Rectangle {
         id: searchResultView
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
         radius: 10
         color: "white"
         border.width: 1
@@ -125,14 +122,14 @@ Page {
         states: [
             State { // Horizontal
                 when: (searchActivityPage.width / searchActivityPage.height) > 1.20
-                AnchorChanges { target: mapContainer; anchors.left: searchResultView.right; anchors.bottom: searchActivityPage.bottom }
-                PropertyChanges { target: mapContainer; width: searchActivityPage.width / 2; height: searchActivityPage.height }
-                AnchorChanges { target: searchResultView; anchors.right: mapContainer.left; anchors.top: searchActivityPage.top }
+                AnchorChanges { target: searchResultView; anchors.top: searchActivityPage.top }
                 PropertyChanges { target: searchResultView; width: searchActivityPage.width / 2; height: searchActivityPage.height }
+                AnchorChanges { target: mapContainer; anchors.left: searchResultView.right; anchors.bottom: searchActivityPage.bottom; anchors.top: searchActivityPage.top }
+                PropertyChanges { target: mapContainer; width: searchActivityPage.width / 2; height: searchActivityPage.height }
             },
             State { // Vertical
                 when: (true)
-                AnchorChanges { target: mapContainer; anchors.left: searchActivityPage.left; anchors.top: searchActivityPage.top }
+                AnchorChanges { target: mapContainer; anchors.left: searchActivityPage.left; anchors.bottom: searchResultListView.top; anchors.top: searchActivityPage.top }
                 PropertyChanges { target: mapContainer; width: searchActivityPage.width; height: searchActivityPage.height / 2 }
                 AnchorChanges { target: searchResultView; anchors.right: searchActivityPage.right; anchors.top: mapContainer.bottom }
                 PropertyChanges { target: searchResultView; width: searchActivityPage.width; height: searchActivityPage.height / 2 }
