@@ -21,6 +21,7 @@ Page {
     property alias model: activityView.model
 
     tools: ToolBarLayout {
+        Item{}
         ToolButton {
             text: "Info";
             onClicked: pageStack.push( "qrc:/AboutMarblePage.qml" )
