@@ -35,8 +35,7 @@ Item {
     property bool autoCenter: settings.value( "MarbleWidget", "autoCenter", false )
     property string projection: settings.value( "MarbleWidget", "projection", "Spherical" )
     property variant defaultRenderPlugins: ["compass", "coordinate-grid", "progress",
-        "crosshairs", "positionMarker", "sun",
-        "stars", "scalebar"]
+        "crosshairs", "positionMarker", "stars", "scalebar"]
     property variant activeRenderPlugins: settings.value( "MarbleWidget", "activeRenderPlugins", defaultRenderPlugins )
     
     // Save settings to file.
