@@ -64,7 +64,7 @@ Page {
                 marbleWidget.parent = mapContainer
                 settings.projection = "Spherical"
                 settings.activeRenderPlugins = settings.defaultRenderPlugins
-                settings.mapTheme = "earth/bluemarble/bluemarble.dgml"
+                settings.mapTheme = "earth/srtm/srtm.dgml"
                 settings.gpsTracking = false
                 settings.showPosition = false
                 settings.showTrack = false
