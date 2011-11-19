@@ -154,6 +154,8 @@ public Q_SLOTS:
 
     QObject* mapThemeModel();
 
+    void setGeoSceneProperty( const QString &key, bool value );
+
 private Q_SLOTS:
     void updateCenterPosition();
 

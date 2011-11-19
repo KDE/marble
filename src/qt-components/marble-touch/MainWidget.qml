@@ -326,4 +326,8 @@ Item {
         map.center.longitude = lon
         map.center.latitude = lat
     }
+
+    function setGeoSceneProperty( key, value ) {
+        map.setGeoSceneProperty( key, value )
+    }
 }

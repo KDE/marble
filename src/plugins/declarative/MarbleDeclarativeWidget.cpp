@@ -239,6 +239,11 @@ QObject *MarbleWidget::mapThemeModel()
     return m_marbleWidget->model()->mapThemeManager()->mapThemeModel();
 }
 
+void MarbleWidget::setGeoSceneProperty(const QString &key, bool value)
+{
+    m_marbleWidget->setPropertyValue( key, value );
+}
+
 bool MarbleWidget::workOffline() const
 {
     return m_marbleWidget->model()->workOffline();
