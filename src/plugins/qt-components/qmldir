@@ -4,3 +4,4 @@ RouteRequestView 0.12 RouteRequestView.qml
 WaypointView 0.12 WaypointView.qml
 RoutingDialog 0.12 RoutingDialog.qml
 SearchResultSelectionDialog 0.12 SearchResultSelectionDialog.qml
+MenuItemSwitch 0.12 MenuItemSwitch.qml

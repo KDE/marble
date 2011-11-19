@@ -21,3 +21,4 @@ INSTALL( FILES RouteRequestView.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde
 INSTALL( FILES WaypointView.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )
 INSTALL( FILES RoutingDialog.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )
 INSTALL( FILES SearchResultSelectionDialog.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )
+INSTALL( FILES MenuItemSwitch.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )

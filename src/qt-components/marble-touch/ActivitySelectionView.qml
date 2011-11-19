@@ -115,6 +115,12 @@ Page {
                         marbleWidget,
                         "qrc:/FriendsActivityPage.qml"
                         )
+            activityModel.addActivity(
+                        "Space View",
+                        "qrc:/icons/activity-spaceview.png",
+                        marbleWidget,
+                        "qrc:/SpaceViewActivityPage.qml"
+                        )
 
             /** @todo: Implement missing stuff and re-enable the activities below */
             /*

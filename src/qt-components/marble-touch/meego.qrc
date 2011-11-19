@@ -10,6 +10,7 @@
         <file>RoutingActivityPage.qml</file>
         <file>SearchActivityPage.qml</file>
         <file>SearchField.qml</file>
+        <file>SpaceViewActivityPage.qml</file>
         <file>TrackingActivityPage.qml</file>
         <file>VirtualGlobeActivityPage.qml</file>
         <file>WeatherActivityPage.qml</file>
@@ -19,6 +20,7 @@
         <file>icons/activity-download.png</file>
         <file>icons/activity-friends.png</file>
         <file>icons/activity-search.png</file>
+        <file>icons/activity-spaceview.png</file>
         <file>icons/activity-virtualglobe.png</file>
         <file>icons/activity-weather.png</file>
         <file>icons/bookmark.png</file>
