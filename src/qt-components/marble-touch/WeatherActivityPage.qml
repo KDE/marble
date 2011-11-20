@@ -53,7 +53,7 @@ Page {
                 var plugins = settings.defaultRenderPlugins
                 plugins.push( "weather" )
                 settings.activeRenderPlugins =  plugins
-                settings.mapTheme = "earth/bluemarble/bluemarble.dgml"
+                settings.mapTheme = "earth/plain/plain.dgml"
                 settings.gpsTracking = true
                 settings.showPosition = true
                 settings.showTrack = false
