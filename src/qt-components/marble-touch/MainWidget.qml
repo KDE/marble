@@ -36,6 +36,7 @@ Item {
         /** @todo: This property looks cumbersome... get rid of it */
         property bool initialized: false
 
+        workOffline: settings.workOffline
         mapThemeId: settings.mapTheme
         zoom: settings.quitZoom
         projection: settings.projection

@@ -10,6 +10,7 @@
 import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
+import org.kde.edu.marble.qtcomponents 0.12
 
 /*
  * Page for the virtual globe activity.
@@ -23,9 +24,9 @@ Page {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
-        ToolIcon {
+        ToolIconCheckable {
+            id: searchButton
             iconId: "toolbar-search";
-            onClicked: { searchField.visible = !searchField.visible }
         }
         ToolIcon {
             iconId: "toolbar-view-menu"
@@ -52,6 +53,7 @@ Page {
         SearchField {
             id: searchField
             width: parent.width
+            visible: searchButton.checked
             onSearch: marbleWidget.find( term )
         }
 

@@ -10,6 +10,7 @@
 import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
+import org.kde.edu.marble.qtcomponents 0.12
 
 /*
  * Page for the weather activity.
@@ -23,12 +24,32 @@ Page {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
-        ToolIcon {
+        ToolIconCheckable {
+            id: searchButton
+            checked: true
             iconId: "toolbar-search";
-            onClicked: { searchField.visible = !searchField.visible }
         }
         ToolIcon {
-            iconId: "toolbar-view-menu" }
+            iconId: "toolbar-view-menu"
+            onClicked: pageMenu.open()
+        }
+    }
+
+    Menu {
+        id: pageMenu
+        content: MenuLayout {
+            MenuItem {
+                text: "Map Theme"
+                onClicked: {
+                    pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
+                }
+            }
+            MenuItemSwitch {
+                text: "Online"
+                checked: !settings.workOffline
+                onClicked: settings.workOffline = !settings.workOffline
+            }
+        }
     }
 
     Column {
@@ -38,6 +59,7 @@ Page {
         SearchField {
             id: searchField
             width: parent.width
+            visible: searchButton.checked
             onSearch: marbleWidget.find( term )
         }
 

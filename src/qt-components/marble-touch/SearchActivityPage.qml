@@ -10,6 +10,7 @@
 import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
+import org.kde.edu.marble.qtcomponents 0.12
 
 /*
  * Page for geocaching activity.
@@ -24,7 +25,26 @@ Page {
             onClicked: pageStack.pop()
         }
         ToolIcon {
-            iconId: "toolbar-view-menu" }
+            iconId: "toolbar-view-menu"
+            onClicked: pageMenu.open()
+        }
+    }
+
+    Menu {
+        id: pageMenu
+        content: MenuLayout {
+            MenuItem {
+                text: "Map Theme"
+                onClicked: {
+                    pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
+                }
+            }
+            MenuItemSwitch {
+                text: "Online"
+                checked: !settings.workOffline
+                onClicked: settings.workOffline = !settings.workOffline
+            }
+        }
     }
 
     Rectangle {
