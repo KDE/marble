@@ -24,6 +24,10 @@ Page {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
+        ToolIcon {
+            iconId: "toolbar-home"
+            onClicked: marbleWidget.centerOn( marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
+        }
         ToolIconCheckable {
             id: searchButton
             iconId: "toolbar-search";
