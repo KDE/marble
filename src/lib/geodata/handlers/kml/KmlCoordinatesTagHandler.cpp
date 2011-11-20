@@ -124,12 +124,13 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
                     // raise warning as coordinates out of valid parents found
                 }
             }
-        }
 #ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << ( isParentTrack ? kmlTag_coord : kmlTag_coordinates )
-                 << "> containing: " << coordinates
+        mDebug() << "Parsed <" << parser.name()
+                 << ">" << coordinatesLines
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
+
+        }
     }
 
     if( parentItem.represents( kmlTag_Track ) ) {
