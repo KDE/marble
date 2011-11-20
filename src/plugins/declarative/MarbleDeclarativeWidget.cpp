@@ -13,6 +13,7 @@
 #include "MapTheme.h"
 #include "Coordinate.h"
 #include "Tracking.h"
+#include "ZoomButtonInterceptor.h"
 
 #include "GeoDataCoordinates.h"
 #include "MarbleWidget.h"
@@ -34,7 +35,8 @@ namespace Declarative
 
 MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     QGraphicsProxyWidget( parent, flags ), m_marbleWidget( new Marble::MarbleWidget ),
-    m_inputEnabled( true ), m_tracking( 0 ), m_routing( 0 ), m_search( 0 )
+    m_inputEnabled( true ), m_tracking( 0 ), m_routing( 0 ), m_search( 0 ),
+    m_interceptor( new ZoomButtonInterceptor( m_marbleWidget, this ) )
 {
     m_marbleWidget->setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
     setWidget( m_marbleWidget );

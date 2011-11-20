@@ -28,6 +28,8 @@ class MapThemeManager;
 namespace Declarative
 {
 
+class ZoomButtonInterceptor;
+
 /**
   * Wraps a Marble::MarbleWidget, providing access to important properties and methods
   *
@@ -174,6 +176,8 @@ private:
     Marble::Declarative::Search* m_search;
 
     Marble::Declarative::Coordinate m_center;
+
+    Marble::Declarative::ZoomButtonInterceptor* m_interceptor;
 };
 
 } // namespace Declarative
