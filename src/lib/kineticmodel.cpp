@@ -145,7 +145,7 @@ void KineticModel::release()
         d->deacceleration.setY( -d->deacceleration.y() );
     }
 
-    if (d->deacceleration.x() > 0.5 || d->deacceleration.y() > 0.5) {
+    if (d->deacceleration.x() > 0.0005 || d->deacceleration.y() > 0.0005) {
         if (!d->ticker.isActive())
             d->ticker.start();
         update();
