@@ -327,27 +327,29 @@ int MarbleWidget::radius() const
 void MarbleWidget::setRadius( int radius )
 {
     Q_ASSERT( radius >= 0 );
-    if ( radius == d->m_map.radius() ) {
-        return;
-    }
+    bool adjustRadius = radius != d->m_map.radius();
 
     qreal const zoom = d->zoom( radius );
 
     // Prevent exceeding zoom range
     if ( zoom < minimumZoom() ) {
         radius = d->radius( minimumZoom() );
+        adjustRadius = true;
     } else if ( zoom > maximumZoom() ) {
         radius = d->radius( maximumZoom() );
+        adjustRadius = true;
     }
 
-    d->m_map.setRadius( radius );
-    d->m_logzoom = qRound( zoom );
+    if( adjustRadius) {
+        d->m_map.setRadius( radius );
+        d->m_logzoom = qRound( zoom );
 
-    emit zoomChanged( d->m_logzoom );
-    emit distanceChanged( distanceString() );
-    emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
+        emit zoomChanged( d->m_logzoom );
+        emit distanceChanged( distanceString() );
+        emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
 
-    d->repaint();
+        d->repaint();
+    }
 }
 
 qreal MarbleWidget::moveStep()
@@ -865,6 +867,7 @@ void MarbleWidget::setMapThemeId( const QString& mapThemeId )
     d->m_map.removeLayer( d->m_routingLayer );
 
     d->m_map.setMapThemeId( mapThemeId );
+    setRadius( radius() ); // Corrects zoom range, if needed
 
     if ( d->m_model.planetId() == "earth" ) {
         d->m_map.addLayer( d->m_routingLayer );
