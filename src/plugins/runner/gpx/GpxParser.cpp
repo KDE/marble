@@ -33,7 +33,8 @@ bool GpxParser::isValidElement(const QString& tagName) const
         return false;
 
     return (   namespaceUri() == gpx::gpxTag_nameSpace10
-            || namespaceUri() == gpx::gpxTag_nameSpace11);
+            || namespaceUri() == gpx::gpxTag_nameSpace11
+            || namespaceUri() == gpx::gpxTag_nameSpaceGarminTrackPointExt1);
 }
 
 GeoDocument* GpxParser::createDocument() const

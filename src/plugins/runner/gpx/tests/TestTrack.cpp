@@ -33,6 +33,7 @@ private slots:
     void initTestCase();
     void simpleParseTest();
     void withoutTimeTest();
+    void extendedDataHeartRateTest();
 
 };
 
@@ -185,6 +186,101 @@ void TestTrack::withoutTimeTest()
         QCOMPARE( coord.altitude(), 1130.647705 );
     }
 
+
+    delete document;
+}
+
+
+void TestTrack::extendedDataHeartRateTest()
+{
+    //example track recorded using a Garmin Oregon 450 and downloading using it's USB mass storare mode
+    QString content(
+"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>"
+"<gpx xmlns=\"http://www.topografix.com/GPX/1/1\" "
+"    xmlns:gpxx=\"http://www.garmin.com/xmlschemas/WaypointExtension/v1\" "
+"    xmlns:gpxtrx=\"http://www.garmin.com/xmlschemas/GpxExtensions/v3\" "
+"    xmlns:gpxtpx=\"http://www.garmin.com/xmlschemas/TrackPointExtension/v1\" "
+"    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+"    creator=\"Oregon 450\" "
+"    version=\"1.1\" "
+"    xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 "
+                         "http://www.topografix.com/GPX/1/1/gpx.xsd "
+                         "http://www.garmin.com/xmlschemas/WaypointExtension/v1 "
+                         "http://www8.garmin.com/xmlschemas/WaypointExtensionv1.xsd "
+                         "http://www.garmin.com/xmlschemas/TrackPointExtension/v1 "
+                         "http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd\" "
+"  >"
+"  <metadata>"
+"    <link href=\"http://www.garmin.com\">"
+"      <text>Garmin International</text>"
+"    </link>"
+"    <time>2011-10-29T15:29:19Z</time>"
+"  </metadata>"
+"  <trk>"
+"    <name>29-OKT-11 17:29:17</name>"
+"    <extensions>"
+"      <gpxtrx:TrackExtension>"
+"        <gpxtrx:DisplayColor>Black</gpxtrx:DisplayColor>"
+"      </gpxtrx:TrackExtension>"
+"    </extensions>"
+"    <trkseg>"
+"      <trkpt lat=\"47.951347\" lon=\"13.228035\">"
+"        <ele>571.16</ele>"
+"        <time>2011-10-29T08:35:31Z</time>"
+"        <extensions>"
+"          <gpxtpx:TrackPointExtension>"
+"            <gpxtpx:hr>108</gpxtpx:hr>"
+"          </gpxtpx:TrackPointExtension>"
+"        </extensions>"
+"      </trkpt>"
+"      <trkpt lat=\"47.951348\" lon=\"13.228035\">"
+"        <ele>573.56</ele>"
+"        <time>2011-10-29T08:35:37Z</time>"
+"        <extensions>"
+"          <gpxtpx:TrackPointExtension>"
+"            <gpxtpx:hr>109</gpxtpx:hr>"
+"          </gpxtpx:TrackPointExtension>"
+"        </extensions>"
+"      </trkpt>"
+"      <trkpt lat=\"47.951349\" lon=\"13.228036\">"
+"        <ele>572.12</ele>"
+"        <time>2011-10-29T08:35:43Z</time>"
+"        <extensions>"
+"          <gpxtpx:TrackPointExtension>"
+"            <gpxtpx:hr>110</gpxtpx:hr>"
+"          </gpxtpx:TrackPointExtension>"
+"        </extensions>"
+"      </trkpt>"
+"    </trkseg>"
+"  </trk>"
+"</gpx>"
+);
+
+    GpxParser parser;
+
+    QByteArray array( content.toUtf8() );
+    QBuffer buffer( &array );
+    buffer.open( QIODevice::ReadOnly );
+    qDebug() << "Buffer content:" << endl << buffer.buffer();
+    if ( !parser.read( &buffer ) ) {
+        QFAIL( "Could not parse data!" );
+        return;
+    }
+    GeoDocument* document = parser.releaseDocument();
+    QVERIFY( document );
+    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
+    GeoDataPlacemark* placemark = dataDocument->placemarkList().at( 0 );
+    QCOMPARE( placemark->geometry()->geometryId(), GeoDataMultiGeometryId );
+    GeoDataMultiGeometry* multiGeo = static_cast<GeoDataMultiGeometry*>( placemark->geometry() );
+    GeoDataTrack* track = static_cast<GeoDataTrack*>( &multiGeo->at( 0 ) );
+    QCOMPARE( track->size(), 3 );
+
+    {
+        GeoDataSimpleArrayData hr = track->extendedData().simpleArrayData( "heartrate" );
+        QCOMPARE( hr.size(), 3 );
+        QCOMPARE( hr.valueAt( 0 ), QVariant( "108" ) );
+        QCOMPARE( hr.valueAt( 2 ), QVariant( "110" ) );
+    }
 
     delete document;
 }

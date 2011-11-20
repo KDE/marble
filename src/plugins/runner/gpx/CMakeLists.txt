@@ -20,6 +20,9 @@ set( gpx_handlers_SRCS
         handlers/GPXwptTagHandler.cpp
         handlers/GPXtimeTagHandler.cpp
         handlers/GPXeleTagHandler.cpp
+        handlers/GPXextensionsTagHandler.cpp
+        handlers/GPXTrackPointExtensionTagHandler.cpp
+        handlers/GPXhrTagHandler.cpp
    )
 
 set( gpx_SRCS GpxParser.cpp GpxPlugin.cpp GpxRunner.cpp )
