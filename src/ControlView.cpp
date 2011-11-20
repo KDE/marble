@@ -73,7 +73,7 @@ ControlView::ControlView( QWidget *parent )
     m_splitter->setStretchFactor( m_splitter->indexOf( m_marbleWidget ), 1 );
     m_splitter->setSizes( QList<int>() << 180 << width() - 180 );
 
-    m_control->addMarbleWidget( m_marbleWidget );
+    m_control->setMarbleWidget( m_marbleWidget );
 
     connect( m_control, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
     connect( m_control, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );

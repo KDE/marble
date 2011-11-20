@@ -109,7 +109,7 @@ MarbleControlBox::~MarbleControlBox()
     delete d;
 }
 
-void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
+void MarbleControlBox::setMarbleWidget(MarbleWidget *widget)
 {
     d->m_widget = widget;
 
