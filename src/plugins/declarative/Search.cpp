@@ -54,6 +54,7 @@ void Search::find( const QString &searchTerm )
 {
     if ( !m_runnerManager && m_marbleWidget ) {
         m_runnerManager = new Marble::MarbleRunnerManager( m_marbleWidget->model()->pluginManager(), this );
+        m_runnerManager->setModel( m_marbleWidget->model() );
         connect( m_runnerManager, SIGNAL( searchFinished( QString ) ),
                  this, SIGNAL( searchFinished() ) );
         connect( m_runnerManager, SIGNAL( searchResultChanged( QAbstractItemModel* ) ),
