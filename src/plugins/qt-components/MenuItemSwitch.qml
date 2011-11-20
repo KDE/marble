@@ -80,7 +80,7 @@ Item {
             right: 22; bottom: 22 }
     }
 
-    Row {
+    Item {
         anchors.topMargin : root.platformStyle.topMargin
         anchors.bottomMargin : root.platformStyle.bottomMargin
         anchors.leftMargin : root.platformStyle.leftMargin
@@ -92,16 +92,9 @@ Item {
         anchors.right : root.right
         anchors.verticalCenter : root.platformStyle.centered ? parent.verticalCenter : undefined
 
-        spacing: 10
-
-        Switch {
-            id: switchItem
-            checked: true
-            anchors.verticalCenter: parent.verticalCenter
-        }
-
         Text {
             id: menuText
+            anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             text: parent.parent.text
             elide: Text.ElideRight
@@ -109,6 +102,13 @@ Item {
             font.pixelSize : root.platformStyle.fontPixelSize
             font.weight: root.platformStyle.fontWeight
             color: root.platformStyle.textColor
+        }
+
+        Switch {
+            id: switchItem
+            checked: true
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: parent.right
         }
     }
 
