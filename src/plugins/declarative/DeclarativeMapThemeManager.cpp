@@ -35,9 +35,9 @@ QPixmap MapThemeImageProvider::requestPixmap( const QString &id, QSize *size, co
         *size = resultSize;
     }
 
-    QStandardItemModel *model =  m_mapThemeManager.mapThemeModel();
+    QStandardItemModel *model = m_mapThemeManager.mapThemeModel();
     for( int i = 0; i < model->rowCount(); ++i ) {
-        if ( m_mapThemeManager.mapThemes().at( i )->head()->mapThemeId() == id ) {
+        if ( model->data( model->index( i, 0 ), Qt::UserRole + 1 ) == id ) {
             QIcon icon = qVariantValue<QIcon>( model->data( model->index( i, 0 ), Qt::DecorationRole ) );
             QPixmap result = icon.pixmap( resultSize );
             return result;
