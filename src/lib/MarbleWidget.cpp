@@ -1110,13 +1110,14 @@ ViewContext MarbleWidget::viewContext() const
 
 void MarbleWidget::setViewContext( ViewContext viewContext )
 {
-    const MapQuality oldQuality = d->m_map.mapQuality();
+    if ( d->m_map.viewContext() != viewContext ) {
+        const MapQuality oldQuality = d->m_map.mapQuality();
+        d->m_map.setViewContext( viewContext );
+        d->m_routingLayer->setViewContext( viewContext );
 
-    d->m_map.setViewContext( viewContext );
-    d->m_routingLayer->setViewContext( viewContext );
-
-    if ( d->m_map.mapQuality() != oldQuality )
-        d->repaint();
+        if ( d->m_map.mapQuality() != oldQuality )
+            d->repaint();
+    }
 }
 
 bool MarbleWidget::animationsEnabled() const
