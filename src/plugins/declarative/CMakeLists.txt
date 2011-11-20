@@ -37,7 +37,7 @@ IF( BUILD_HARMATTAN_ZOOMINTERCEPTOR )
   pkg_check_modules(libresourceqt1 libresourceqt1)
   ADD_DEFINITIONS( -DHARMATTAN_ZOOMINTERCEPTOR )
   INCLUDE_DIRECTORIES(${libresourceqt1_INCLUDEDIR})
-  target_link_libraries( MarbleDeclarativePlugin ${libresourceqt1_LIBS} )
+  target_link_libraries( MarbleDeclarativePlugin ${libresourceqt1_LIBRARIES} )
 ENDIF()
 INSTALL( FILES qmldir MarbleSettings.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble )
 
