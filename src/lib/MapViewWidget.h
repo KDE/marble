@@ -44,19 +44,18 @@ class MARBLE_EXPORT MapViewWidget : public QWidget
      */
     void setMarbleWidget( MarbleWidget *widget );
 
-    void updateCelestialModel();
-
  public Q_SLOTS:
     void setMapThemeId( const QString & );
 
     void setProjection( Projection projection );
 
-    void selectCurrentMapTheme( const QString& );
+ private:
+    Q_PRIVATE_SLOT( d, void selectCurrentMapTheme( const QString& ) )
 
     /// whenever a new map gets inserted, the following slot will adapt the ListView accordingly
-    void updateMapThemeView();
+    Q_PRIVATE_SLOT( d, void updateMapThemeView() )
 
-    void projectionSelected( int projectionIndex );
+    Q_PRIVATE_SLOT( d, void projectionSelected( int projectionIndex ) )
 
  Q_SIGNALS:
     void mapThemeIdChanged( const QString& );
@@ -67,6 +66,7 @@ class MARBLE_EXPORT MapViewWidget : public QWidget
  private:
     Q_DISABLE_COPY( MapViewWidget )
 
+    friend class MapViewWidgetPrivate;
     MapViewWidgetPrivate * const d;
 };
 

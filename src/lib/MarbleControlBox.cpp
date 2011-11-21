@@ -229,11 +229,6 @@ void MarbleControlBox::setWorkOffline(bool offline)
     d->m_widget->model()->setWorkOffline( offline );
 }
 
-void MarbleControlBox::updateMapThemeView()
-{
-    d->m_mapViewWidget->updateMapThemeView();
-}
-
 CurrentLocationWidget * MarbleControlBox::currentLocationWidget()
 {
     return d->m_currentLocationWidget;

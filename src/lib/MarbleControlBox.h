@@ -103,8 +103,6 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
  public Q_SLOTS:
     void selectTheme( const QString & );
 
-    void updateMapThemeView();
-
     /**
      * @brief Control whether the Navigation tab is shown.
      * @param show  boolean that controls if the Navigation tab is shown.
