@@ -56,71 +56,46 @@ Page {
         opacity: 0.9
         property string searchTerm: ""
 
+        function calculateRoute() {
+            marbleWidget.getRouting().clearRoute()
+            marbleWidget.getRouting().routingProfile = routingTypeOptions.routingType
+            if ( sourcePoint.isCurrentPosition ) {
+                marbleWidget.getRouting().setVia( 0, marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
+            } else {
+                marbleWidget.getRouting().setVia( 0, sourcePoint.longitude, sourcePoint.latitude )
+            }
+            if ( destinationPoint.isCurrentPosition ) {
+                marbleWidget.getRouting().setVia( 1, marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
+            } else {
+                marbleWidget.getRouting().setVia( 1, destinationPoint.longitude, destinationPoint.latitude )
+            }
+        }
+
         Column {
             anchors.fill: parent
             anchors.margins: 5
             spacing: 5
 
-            ToolBarLayout {
+            ViaPointEditor {
+                id: sourcePoint
                 width: parent.width
                 height: 40
+                isCurrentPosition: true
+                name: "From"
 
-                Label {
-                    text: "Source: Current Location"
-                }
-
-//                ToolIcon {
-//                    iconId: "toolbar-edit"
-//                }
+                Component.onCompleted: marbleWidget.mouseClickGeoPosition.connect(retrieveInput)
+                onPositionChanged: searchResultView.calculateRoute()
             }
 
-            ToolBarLayout {
+            ViaPointEditor {
+                id: destinationPoint
                 width: parent.width
                 height: 40
+                isCurrentPosition: false
+                name: "To"
 
-                Label {
-                    id: destinationInputLabel
-                    text: editing ? "Destination: Select a point" : "Destination: Point in map"
-
-                    property bool editing: false
-                    property real longitude: 0.0
-                    property real latitude: 0.0
-
-                    function retrieveInput( lon, lat ) {
-                        if ( editing ) {
-                            longitude = lon
-                            latitude = lat
-                            editing = false
-
-                            marbleWidget.getRouting().clearRoute()
-                            marbleWidget.getRouting().routingProfile = routingTypeOptions.routingType
-                            marbleWidget.getRouting().setVia( 0, marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
-                            marbleWidget.getRouting().setVia( 1, lon, lat )
-                        }
-                    }
-
-                    Component.onCompleted: marbleWidget.mouseClickGeoPosition.connect(retrieveInput)
-                }
-
-                ToolIcon {
-                    iconId: "toolbar-edit"
-                    onClicked: {
-                        inputSelectionDialog.open()
-                    }
-                }
-            }
-
-            SelectionDialog {
-                id: inputSelectionDialog
-                titleText: "Select via point"
-                model: ListModel {
-                    //ListElement { name: "Use current location" }
-                    ListElement { name: "Select in map" }
-                }
-
-                onAccepted: {
-                    destinationInputLabel.editing = true
-                }
+                Component.onCompleted: marbleWidget.mouseClickGeoPosition.connect(retrieveInput)
+                onPositionChanged: searchResultView.calculateRoute()
             }
 
             ButtonRow {
