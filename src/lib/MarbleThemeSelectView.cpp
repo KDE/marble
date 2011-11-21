@@ -155,7 +155,7 @@ void MarbleThemeSelectView::selectedMapTheme( QModelIndex index )
     QModelIndex  columnIndex = model->index( index.row(), 1, QModelIndex() );
     QString currentmaptheme = ( model->data( columnIndex )).toString();
     mDebug() << currentmaptheme;
-    emit selectMapTheme( currentmaptheme );
+    emit mapThemeIdChanged( currentmaptheme );
 }
 
 void MarbleThemeSelectView::mapWizard()

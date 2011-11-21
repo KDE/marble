@@ -50,7 +50,7 @@ class MARBLE_EXPORT MarbleThemeSelectView : public QListView
     void toggleFavorite();
 
  Q_SIGNALS:
-    void selectMapTheme( const QString& );
+    void mapThemeIdChanged( const QString& );
     void showMapWizard();
     void showUploadDialog();
     //void 

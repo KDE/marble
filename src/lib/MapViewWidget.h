@@ -47,9 +47,9 @@ class MARBLE_EXPORT MapViewWidget : public QWidget
     void updateCelestialModel();
 
  public Q_SLOTS:
-    void selectTheme( const QString & );
+    void setMapThemeId( const QString & );
 
-    void selectProjection( Projection projection );
+    void setProjection( Projection projection );
 
     void selectCurrentMapTheme( const QString& );
 
@@ -59,8 +59,8 @@ class MARBLE_EXPORT MapViewWidget : public QWidget
     void projectionSelected( int projectionIndex );
 
  Q_SIGNALS:
-    void selectMapTheme( const QString& );
-    void projectionSelected( Projection );
+    void mapThemeIdChanged( const QString& );
+    void projectionChanged( Projection );
     void showMapWizard();
     void showUploadDialog();
 

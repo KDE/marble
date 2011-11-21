@@ -92,8 +92,8 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
     d->m_mapSortProxy = new MapThemeSortFilterProxyModel( this );
     d->m_mapThemeModel = 0;
 
-    connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
-             this,                                 SIGNAL( selectMapTheme( const QString& ) ) );
+    connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( mapThemeIdChanged( const QString& ) ),
+             this,                                 SIGNAL( mapThemeIdChanged( const QString& ) ) );
     connect( d->m_mapViewUi.projectionComboBox,    SIGNAL( activated( int ) ),
              this,                                 SLOT( projectionSelected( int ) ) );
 
@@ -138,17 +138,17 @@ void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_widget = widget;
 
-    connect( this,        SIGNAL( projectionSelected( Projection ) ),
+    connect( this,        SIGNAL( projectionChanged( Projection ) ),
              d->m_widget, SLOT( setProjection( Projection ) ) );
 
     connect( d->m_widget, SIGNAL( themeChanged( QString ) ),
-             this,        SLOT( selectTheme( QString ) ) );
+             this,        SLOT( setMapThemeId( QString ) ) );
 
     connect( d->m_widget, SIGNAL( projectionChanged( Projection ) ),
-             this,        SLOT( selectProjection( Projection ) ) );
-    selectProjection( d->m_widget->projection() );
+             this,        SLOT( setProjection( Projection ) ) );
+    setProjection( d->m_widget->projection() );
 
-    connect( this,        SIGNAL( selectMapTheme( const QString& ) ),
+    connect( this,        SIGNAL( mapThemeIdChanged( const QString& ) ),
              d->m_widget, SLOT( setMapThemeId( const QString& ) ) );
 
     d->setMapThemeModel( widget->model()->mapThemeManager()->mapThemeModel() );
@@ -162,11 +162,11 @@ void MapViewWidget::updateMapThemeView()
     if ( d->m_widget ) {
         QString mapThemeId = d->m_widget->mapThemeId();
         if ( !mapThemeId.isEmpty() )
-            selectTheme( mapThemeId );
+            setMapThemeId( mapThemeId );
     }
 }
 
-void MapViewWidget::selectTheme( const QString &theme )
+void MapViewWidget::setMapThemeId( const QString &theme )
 {
     if ( !d->m_mapSortProxy || !d->m_widget )
         return;
@@ -212,7 +212,7 @@ void MapViewWidget::selectTheme( const QString &theme )
     }
 }
 
-void MapViewWidget::selectProjection( Projection projection )
+void MapViewWidget::setProjection( Projection projection )
 {
     if ( (int)projection != d->m_mapViewUi.projectionComboBox->currentIndex() )
         d->m_mapViewUi.projectionComboBox->setCurrentIndex( (int) projection );
@@ -251,7 +251,7 @@ void MapViewWidget::selectCurrentMapTheme( const QString& celestialBodyId )
 // Relay a signal and convert the parameter from an int to a Projection.
 void MapViewWidget::projectionSelected( int projectionIndex )
 {
-    emit projectionSelected( (Projection) projectionIndex );
+    emit projectionChanged( (Projection) projectionIndex );
 }
 
 }
