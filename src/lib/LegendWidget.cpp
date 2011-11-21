@@ -12,7 +12,7 @@
 #include "LegendWidget.h"
 
 // Marble
-#include "MarbleWidget.h"
+#include "MarbleModel.h"
 
 using namespace Marble;
 // Ui
@@ -39,14 +39,14 @@ LegendWidget::~LegendWidget()
     delete d;
 }
 
-void LegendWidget::setMarbleWidget( MarbleWidget *widget )
+void LegendWidget::setMarbleModel( MarbleModel *model )
 {
     // Initialize the MarbleLegendBrowser
-    d->m_legendUi.marbleLegendBrowser->setMarbleWidget( widget );
+    d->m_legendUi.marbleLegendBrowser->setMarbleModel( model );
 
     // connect signals for the Legend
     connect( d->m_legendUi.marbleLegendBrowser, SIGNAL( toggledShowProperty( QString, bool ) ),
-             widget,                            SLOT( setPropertyValue( QString, bool ) ) );
+             this,                            SIGNAL( propertyValueChanged( const QString &, bool ) ) );
 }
 
 }

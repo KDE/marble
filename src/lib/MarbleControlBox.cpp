@@ -121,7 +121,7 @@ void MarbleControlBox::setMarbleWidget(MarbleWidget *widget)
 
     d->m_fileViewWidget->setFileViewModel( widget->model()->fileViewModel() );
     d->m_fileViewWidget->setTreeModel( widget->model()->treeModel() );
-    d->m_legendWidget->setMarbleWidget( widget );
+    d->m_legendWidget->setMarbleModel( widget->model() );
     d->m_navigationWidget->setMarbleWidget( widget );
     d->m_mapViewWidget->setMarbleWidget( widget );
     d->m_currentLocationWidget->setMarbleWidget( widget );
@@ -130,6 +130,9 @@ void MarbleControlBox::setMarbleWidget(MarbleWidget *widget)
              widget, SLOT( centerOn( const GeoDataPlacemark &, bool ) ) );
     connect( d->m_fileViewWidget, SIGNAL( centerOn( const GeoDataLatLonBox &, bool ) ),
              widget, SLOT( centerOn( const GeoDataLatLonBox &, bool ) ) );
+
+    connect( d->m_legendWidget, SIGNAL( propertyValueChanged( const QString &, bool ) ),
+             widget,            SLOT( setPropertyValue( const QString &, bool ) ) );
 
     connect( d->m_widget, SIGNAL( themeChanged( QString ) ),
              this,        SLOT( selectTheme( QString ) ) );

@@ -33,7 +33,6 @@
 #include "GeoSceneItem.h"
 #include "GeoSceneProperty.h"
 #include "GeoSceneSettings.h"
-#include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
 
@@ -45,7 +44,7 @@ namespace Marble
 class MarbleLegendBrowserPrivate
 {
  public:
-    MarbleWidget        *m_marbleWidget;
+    MarbleModel        *m_marbleModel;
     QMap<QString, bool>     m_checkBoxMap;
     QMap<QString, QPixmap>  m_symbolMap;
     bool                 m_isLegendLoaded;
@@ -60,7 +59,7 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
       d( new MarbleLegendBrowserPrivate )
 {
     d->m_isLegendLoaded = false;
-    d->m_marbleWidget = 0;
+    d->m_marbleModel = 0;
     // Disable changing layout due to the ScrollBarPolicy:
     setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
 
@@ -79,13 +78,13 @@ MarbleLegendBrowser::~MarbleLegendBrowser()
     delete d;
 }
 
-void MarbleLegendBrowser::setMarbleWidget( MarbleWidget *marbleWidget )
+void MarbleLegendBrowser::setMarbleModel( MarbleModel *marbleModel )
 {
     // We need this to be able to get to the MapTheme.
-    d->m_marbleWidget = marbleWidget;
+    d->m_marbleModel = marbleModel;
 
-    if ( d->m_marbleWidget ) {
-        connect ( d->m_marbleWidget, SIGNAL( themeChanged( QString ) ),
+    if ( d->m_marbleModel ) {
+        connect ( d->m_marbleModel, SIGNAL( themeChanged( QString ) ),
                   this, SLOT( initTheme() ) );
     }
 }
@@ -95,11 +94,9 @@ void MarbleLegendBrowser::initTheme()
     mDebug() << "initTheme";
 
     // Check for a theme specific legend.html first
-    if ( d->m_marbleWidget != 0
-     && d->m_marbleWidget->model() != 0
-     && d->m_marbleWidget->model()->mapTheme() != 0 )
+    if ( d->m_marbleModel != 0 && d->m_marbleModel->mapTheme() != 0 )
     {
-        GeoSceneDocument *currentMapTheme = d->m_marbleWidget->model()->mapTheme();
+        GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
         QVector<GeoSceneProperty*> allProperties = currentMapTheme->settings()->allProperties();
 
@@ -136,11 +133,9 @@ void MarbleLegendBrowser::loadLegend()
     QString finalHtml;
 
     // Check for a theme specific legend.html first
-    if ( d->m_marbleWidget != 0
-	 && d->m_marbleWidget->model() != 0
-	 && d->m_marbleWidget->model()->mapTheme() != 0 )
+    if ( d->m_marbleModel != 0 && d->m_marbleModel->mapTheme() != 0 )
     {
-        GeoSceneDocument *currentMapTheme = d->m_marbleWidget->model()->mapTheme();
+        GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
         QString customLegendPath = MarbleDirs::path( "maps/" + 
         currentMapTheme->head()->target() + '/' + 
@@ -174,8 +169,8 @@ void MarbleLegendBrowser::loadLegend()
     d->m_isLegendLoaded = true;
     qDebug("loadLegend: Time elapsed: %d ms", t.elapsed());
 
-    if ( d->m_marbleWidget ) {
-        d->m_marbleWidget->model()->setLegend( document() );
+    if ( d->m_marbleModel ) {
+        d->m_marbleModel->setLegend( document() );
     }
 }
 
@@ -231,10 +226,10 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
     QString customLegendString;
 
-    if ( d->m_marbleWidget == 0 || d->m_marbleWidget->model() == 0 || d->m_marbleWidget->model()->mapTheme() == 0 )
+    if ( d->m_marbleModel == 0 || d->m_marbleModel->mapTheme() == 0 )
         return QString();
 
-    GeoSceneDocument *currentMapTheme = d->m_marbleWidget->model()->mapTheme();
+    GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
     QVector<GeoSceneSection*> sections = currentMapTheme->legend()->sections();
 
