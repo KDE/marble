@@ -18,7 +18,6 @@
 
 
 #include <QtCore/QModelIndex>
-#include <QtCore/QSettings>
 #include <QtGui/QListView>
 
 #include "marble_export.h"
@@ -41,25 +40,22 @@ class MARBLE_EXPORT MarbleThemeSelectView : public QListView
  protected:
     void resizeEvent( QResizeEvent *event );
 
- private Q_SLOTS:
-    void selectedMapTheme( QModelIndex index );
-    void uploadDialog();
-    void mapWizard();
-    void showContextMenu( const QPoint& pos );
-    void deleteMap();
-    void toggleFavorite();
+ private:
+    Q_PRIVATE_SLOT( d, void selectedMapTheme( QModelIndex index ) )
+    Q_PRIVATE_SLOT( d, void uploadDialog() )
+    Q_PRIVATE_SLOT( d, void mapWizard() )
+    Q_PRIVATE_SLOT( d, void showContextMenu( const QPoint& pos ) )
+    Q_PRIVATE_SLOT( d, void deleteMap() )
+    Q_PRIVATE_SLOT( d, void toggleFavorite() )
 
  Q_SIGNALS:
     void mapThemeIdChanged( const QString& );
     void showMapWizard();
     void showUploadDialog();
-    //void 
 
  private:
     Q_DISABLE_COPY( MarbleThemeSelectView )
-    void loadFavorites();
-    bool currentIsFavorite();
-    QSettings m_settings;
+    friend class Private;
     class Private;
     Private  *const d;
 };
