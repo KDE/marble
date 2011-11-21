@@ -34,9 +34,9 @@ using namespace Marble;
 namespace Marble
 {
 
-class MapViewWidgetPrivate {
+class MapViewWidget::Private {
  public:
-    MapViewWidgetPrivate( MapViewWidget *parent )
+    Private( MapViewWidget *parent )
         : m_parent( parent ),
           m_celestialList( 0 )
     {
@@ -83,7 +83,7 @@ class MapViewWidgetPrivate {
 
 MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
     : QWidget( parent, f ),
-      d( new MapViewWidgetPrivate( this ) )
+      d( new Private( this ) )
 {
     d->m_mapViewUi.setupUi( this );
 
@@ -125,7 +125,7 @@ MapViewWidget::~MapViewWidget()
     delete d;
 }
 
-void MapViewWidgetPrivate::updateCelestialModel()
+void MapViewWidget::Private::updateCelestialModel()
 {
     int row = m_mapThemeModel->rowCount();
 
@@ -164,7 +164,7 @@ void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
     d->updateMapThemeView();
 }
 
-void MapViewWidgetPrivate::updateMapThemeView()
+void MapViewWidget::Private::updateMapThemeView()
 {
     updateCelestialModel();
 
@@ -227,7 +227,7 @@ void MapViewWidget::setProjection( Projection projection )
         d->m_mapViewUi.projectionComboBox->setCurrentIndex( (int) projection );
 }
 
-void MapViewWidgetPrivate::selectCurrentMapTheme( const QString& celestialBodyId )
+void MapViewWidget::Private::selectCurrentMapTheme( const QString& celestialBodyId )
 {
     Q_UNUSED( celestialBodyId )
 
@@ -258,7 +258,7 @@ void MapViewWidgetPrivate::selectCurrentMapTheme( const QString& celestialBodyId
 }
 
 // Relay a signal and convert the parameter from an int to a Projection.
-void MapViewWidgetPrivate::projectionSelected( int projectionIndex )
+void MapViewWidget::Private::projectionSelected( int projectionIndex )
 {
     emit m_parent->projectionChanged( (Projection) projectionIndex );
 }

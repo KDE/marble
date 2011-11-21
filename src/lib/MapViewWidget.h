@@ -26,8 +26,6 @@ class QStandardItemModel;
 namespace Marble
 {
 
-class MapViewWidgetPrivate;
-
 class MarbleWidget;
 
 class MARBLE_EXPORT MapViewWidget : public QWidget
@@ -66,8 +64,9 @@ class MARBLE_EXPORT MapViewWidget : public QWidget
  private:
     Q_DISABLE_COPY( MapViewWidget )
 
-    friend class MapViewWidgetPrivate;
-    MapViewWidgetPrivate * const d;
+    friend class Private;
+    class Private;
+    Private * const d;
 };
 
 }
