@@ -126,7 +126,7 @@ void Routing::setVia( int index, qreal lon, qreal lat )
     RouteRequest* request = d->m_marbleWidget->model()->routingManager()->routeRequest();
     Q_ASSERT( request );
     if ( index < request->size() ) {
-        request->append( GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree ) );
+        request->setPosition( index, GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree ) );
     } else {
         for ( int i=request->size(); i<index; ++i ) {
             request->append( GeoDataCoordinates( 0.0, 0.0 ) );
