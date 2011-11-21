@@ -38,6 +38,9 @@ class MapViewWidget::Private {
  public:
     Private( MapViewWidget *parent )
         : m_parent( parent ),
+          m_widget( 0 ),
+          m_mapThemeModel( 0 ),
+          m_mapSortProxy( 0 ),
           m_celestialList( 0 )
     {
     }
