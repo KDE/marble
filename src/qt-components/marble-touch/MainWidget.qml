@@ -122,7 +122,7 @@ Item {
                         anchors.rightMargin: 10
                         platformStyle: LabelStyle { fontPixelSize: 20 }
                     }
-                    // Buttons "Directioins from here" and "Directions to here" for routing.
+                    // Buttons "Directions from here" and "Directions to here" for routing.
                     Column {
                         id: routingButtons
                         anchors.bottom: parent.bottom

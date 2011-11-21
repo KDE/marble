@@ -76,50 +76,50 @@ Page {
                         "Virtual Globe",
                         "qrc:/icons/activity-virtualglobe.png",
                         marbleWidget,
-                        "qrc:/VirtualGlobeActivityPage.qml"
+                        "qrc:/activities/VirtualGlobe.qml"
                         )
             activityModel.addActivity(
                         "Search",
                         "qrc:/icons/activity-search.png",
                         marbleWidget,
-                        "qrc:/SearchActivityPage.qml"
+                        "qrc:/activities/Search.qml"
                         )
             activityModel.addActivity(
                         "Routing",
                         "qrc:/icons/activity-default.png",
                         marbleWidget,
-                        "qrc:/RoutingActivityPage.qml"
+                        "qrc:/activities/Routing.qml"
                         )
             activityModel.addActivity(
                         "Tracking",
                         "qrc:/icons/activity-default.png",
                         marbleWidget,
-                        "qrc:/TrackingActivityPage.qml"
+                        "qrc:/activities/Tracking.qml"
                         )
             activityModel.addActivity(
                         "Weather",
                         "qrc:/icons/activity-weather.png",
                         marbleWidget,
-                        "qrc:/WeatherActivityPage.qml"
+                        "qrc:/activities/Weather.qml"
                         )
             // @todo: Terms of usage still not clear
             //            activityModel.addActivity(
             //                        "Geocaching",
             //                        "qrc:/icons/activity-default.png",
             //                        marbleWidget,
-            //                        "qrc:/GeocachingActivityPage.qml"
+            //                        "qrc:/activities/Geocaching.qml"
             //                        )
             activityModel.addActivity(
                         "Friends",
                         "qrc:/icons/activity-friends.png",
                         marbleWidget,
-                        "qrc:/FriendsActivityPage.qml"
+                        "qrc:/activities/Friends.qml"
                         )
             activityModel.addActivity(
                         "Space View",
                         "qrc:/icons/activity-spaceview.png",
                         marbleWidget,
-                        "qrc:/SpaceViewActivityPage.qml"
+                        "qrc:/activities/SpaceView.qml"
                         )
 
             /** @todo: Implement missing stuff and re-enable the activities below */
@@ -127,7 +127,7 @@ Page {
             activityModel.addActivity(
                 "Drive",
                 "qrc:/icons/activity-default.png",
-                "qrc:/DriveActivityPage.qml",
+                "qrc:/activities/Drive.qml",
                 [],
                 [],
                 {},
@@ -136,7 +136,7 @@ Page {
             activityModel.addActivity(
                 "Cycle",
                 "qrc:/icons/activity-default.png",
-                "qrc:/CycleActivityPage.qml",
+                "qrc:/activities/Cycle.qml",
                 [],
                 [],
                 {},
@@ -145,7 +145,7 @@ Page {
             activityModel.addActivity(
                 "Walk",
                 "qrc:/icons/activity-default.png",
-                "qrc:/WalkActivityPage.qml",
+                "qrc:/activities/Walk.qml",
                 [],
                 [],
                 {},
@@ -154,7 +154,7 @@ Page {
             activityModel.addActivity(
                 "Guidance",
                 "qrc:/icons/activity-default.png",
-                "qrc:/GuidanceActivityPage.qml",
+                "qrc:/activities/Guidance.qml",
                 [],
                 [ "opencaching" ],
                 {},
@@ -164,7 +164,7 @@ Page {
             activityModel.addActivity(
                 "Bookmarks",
                 "qrc:/icons/activity-bookmarks.png",
-                "qrc:/BookmarksActivityPage.qml",
+                "qrc:/activities/Bookmarks.qml",
                 [],
                 [],
                 {},
@@ -173,7 +173,7 @@ Page {
             activityModel.addActivity(
                 "Around Me",
                 "qrc:/icons/activity-default.png",
-                "qrc:/AroundMeActivityPage.qml",
+                "qrc:/activities/AroundMe.qml",
                 [],
                 [],
                 {},
@@ -183,7 +183,7 @@ Page {
             activityModel.addActivity(
                 "Download",
                 "qrc:/icons/activity-download.png",
-                "qrc:/DownloadActivityPage.qml",
+                "qrc:/activities/Download.qml",
                 [],
                 [],
                 {},
@@ -192,7 +192,7 @@ Page {
             activityModel.addActivity(
                 "Configuration",
                 "qrc:/icons/activity-configure.png",
-                "qrc:/ConfigurationActivityPage.qml",
+                "qrc:/activities/Configuration.qml",
                 [],
                 [],
                 {},
