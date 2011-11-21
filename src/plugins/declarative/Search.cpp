@@ -56,7 +56,7 @@ void Search::find( const QString &searchTerm )
         m_runnerManager = new Marble::MarbleRunnerManager( m_marbleWidget->model()->pluginManager(), this );
         m_runnerManager->setModel( m_marbleWidget->model() );
         connect( m_runnerManager, SIGNAL( searchFinished( QString ) ),
-                 this, SIGNAL( searchFinished() ) );
+                 this, SLOT( handleSearchResult() ) );
         connect( m_runnerManager, SIGNAL( searchResultChanged( QAbstractItemModel* ) ),
                  this, SLOT( updateSearchModel( QAbstractItemModel* ) ) );
     }
@@ -156,6 +156,26 @@ void Search::updatePlacemarks()
             ++iter;
         }
     }
+}
+
+void Search::handleSearchResult()
+{
+    Q_ASSERT( m_marbleWidget ); // search wouldn't be started without
+    Q_ASSERT( m_searchResult ); // search wouldn't be finished without
+
+    GeoDataLineString placemarks;
+    for ( int i = 0; i < m_searchResult->rowCount(); ++i ) {
+        QVariant data = m_searchResult->index( i, 0 ).data( MarblePlacemarkModel::CoordinateRole );
+        if ( !data.isNull() ) {
+            placemarks << qVariantValue<GeoDataCoordinates>( data );
+        }
+    }
+
+    if ( placemarks.size() > 1 ) {
+        m_marbleWidget->centerOn( GeoDataLatLonBox::fromLineString( placemarks ) );
+    }
+
+    emit searchFinished();
 }
 
 }
