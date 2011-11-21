@@ -95,8 +95,12 @@ void TextureLayer::Private::updateTextureLayers()
             const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
             enabled |= !propertyExists; // if property doesn't exist, enable texture nevertheless
         }
-        if ( enabled )
+        if ( enabled ) {
             result.append( candidate );
+            mDebug() << "enabling texture" << candidate->name();
+        } else {
+            mDebug() << "disabling texture" << candidate->name();
+        }
     }
 
     m_tileLoader.setTextureLayers( result );

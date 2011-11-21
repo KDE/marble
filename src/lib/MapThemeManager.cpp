@@ -142,29 +142,37 @@ GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID
     if ( mapThemeStringID.isEmpty() )
         return 0;
 
-    mDebug() << "loadMapTheme" << mapThemeStringID;
     const QString mapThemePath = mapDirName + '/' + mapThemeStringID;
     return loadMapThemeFile( mapThemePath );
 }
 
 GeoSceneDocument* MapThemeManager::loadMapThemeFile( const QString& mapThemePath )
 {
+    const QString dgmlPath = MarbleDirs::path( mapThemePath );
+
     // Check whether file exists
-    QFile file( MarbleDirs::path( mapThemePath ) );
+    QFile file( dgmlPath );
     if ( !file.exists() ) {
-        mDebug() << "File does not exist:" << MarbleDirs::path( mapThemePath );
+        qWarning() << "Map theme file does not exist:" << dgmlPath;
         return 0;
     }
 
     // Open file in right mode
-    file.open( QIODevice::ReadOnly );
+    const bool fileReadable = file.open( QIODevice::ReadOnly );
+
+    if ( !fileReadable ) {
+        qWarning() << "Map theme file not readable:" << dgmlPath;
+        return 0;
+    }
 
     GeoSceneParser parser( GeoScene_DGML );
 
     if ( !parser.read( &file )) {
-        qDebug("Could not parse file!");
+        qWarning() << "Map theme file not well-formed:" << dgmlPath;
         return 0;
     }
+
+    mDebug() << "Map theme file successfully loaded:" << dgmlPath;
 
     // Get result document
     GeoSceneDocument* document = static_cast<GeoSceneDocument*>( parser.releaseDocument() );

@@ -898,7 +898,7 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
                 if ( TileLoader::baseTilesAvailable( *texture ) ) {
                     textures.append( texture );
                 } else {
-                    mDebug() << " Skipping layer" << sourceDir;
+                    qWarning() << "Base tiles for" << sourceDir << "not available. Skipping.";
                 }
             }
         }
