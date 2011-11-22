@@ -47,6 +47,19 @@ Page {
                 checked: !settings.workOffline
                 onClicked: settings.workOffline = !settings.workOffline
             }
+            MenuItemSwitch {
+                text: "Elevation Profile"
+                checked: false
+                onCheckedChanged: {
+                    var plugins = settings.activeRenderPlugins
+                    if ( checked ) {
+                        plugins.push("elevationprofile")
+                    } else {
+                        settings.removeElementsFromArray(plugins, ["elevationprofile"])
+                    }
+                    settings.activeRenderPlugins = plugins
+                }
+            }
         }
     }
 
