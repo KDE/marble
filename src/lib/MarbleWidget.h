@@ -1021,6 +1021,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     virtual void customPaint( GeoPainter *painter );
 
  private:
+    Q_PRIVATE_SLOT( d, void updateMapTheme() )
+
+ private:
     Q_DISABLE_COPY( MarbleWidget )
     MarbleWidgetPrivate  * const d;
     friend class MarbleWidgetPrivate;

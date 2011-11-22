@@ -112,6 +112,8 @@ class MarbleWidgetPrivate
 
     void  construct();
 
+    void updateMapTheme();
+
     inline static qreal zoom( qreal radius ) { return (200.0 * log( radius ) ); }
     inline static qreal radius( qreal zoom ) { return pow( M_E, ( zoom / 200.0 ) ); }
 
@@ -217,10 +219,10 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SIGNAL( pluginSettingsChanged() ) );
     m_widget->connect( &m_map,   SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
-    m_widget->connect( &m_map,   SIGNAL( themeChanged( QString ) ),
-                       m_widget, SIGNAL( themeChanged( QString ) ) );
 
     // react to some signals of m_map
+    m_widget->connect( &m_map,   SIGNAL( themeChanged( QString ) ),
+                       m_widget, SLOT( updateMapTheme() ) );
     m_widget->connect( &m_map,   SIGNAL( repaintNeeded( QRegion ) ),
                        m_widget, SLOT( update() ) );
 
@@ -861,23 +863,25 @@ QString MarbleWidget::mapThemeId() const
 
 void MarbleWidget::setMapThemeId( const QString& mapThemeId )
 {
-    if ( !mapThemeId.isEmpty() && mapThemeId == d->m_model.mapThemeId() )
-        return;
-
-    d->m_map.removeLayer( d->m_routingLayer );
-
     d->m_map.setMapThemeId( mapThemeId );
-    setRadius( radius() ); // Corrects zoom range, if needed
+}
 
-    if ( d->m_model.planetId() == "earth" ) {
-        d->m_map.addLayer( d->m_routingLayer );
+void MarbleWidgetPrivate::updateMapTheme()
+{
+    m_map.removeLayer( m_routingLayer );
+
+    m_widget->setRadius( m_widget->radius() ); // Corrects zoom range, if needed
+
+    if ( m_model.planetId() == "earth" ) {
+        m_map.addLayer( m_routingLayer );
     }
 
-    // Now we want a full repaint as the atmosphere might differ
-    setAttribute( Qt::WA_NoSystemBackground,
-                  false );
+    emit m_widget->themeChanged( m_map.mapThemeId() );
 
-    update();
+    // Now we want a full repaint as the atmosphere might differ
+    m_widget->setAttribute( Qt::WA_NoSystemBackground, false );
+
+    m_widget->update();
 }
 
 GeoSceneDocument *MarbleWidget::mapTheme() const

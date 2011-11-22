@@ -313,11 +313,6 @@ void TextureLayer::downloadTile( const TileId &tileId )
 
 void TextureLayer::setMapTheme( const QVector<const GeoSceneTexture *> &textures, GeoSceneGroup *textureLayerSettings )
 {
-    if ( d->m_textureLayerSettings ) {
-        disconnect( d->m_textureLayerSettings, SIGNAL( valueChanged( QString, bool ) ),
-                    this,                      SLOT( updateTextureLayers() ) );
-    }
-
     d->m_textures = textures;
     d->m_textureLayerSettings = textureLayerSettings;
 

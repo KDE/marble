@@ -101,6 +101,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     Q_OBJECT
 
+    Q_PROPERTY( QString mapThemeId READ mapThemeId WRITE setMapThemeId NOTIFY themeChanged )
     Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
 
  public:
@@ -136,16 +137,12 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     /**
      * @brief Set a new map theme to use.
-     * @param selectedMap  the identifier of the selected map theme
-     * @param currentProjection  the current projection
+     * @param mapThemeId  the identifier of the new map theme
      *
      * This function sets the map theme, i.e. combination of tile set
      * and color scheme to use.  If the map theme is not previously
      * used, some basic tiles are created and a progress dialog is
      * shown.
-     *
-     * NOTE: The currentProjection parameters will
-     *       disappear soon.
      *
      * The ID of the new maptheme. To ensure that a unique
      * identifier is being used the theme does NOT get represented by its
@@ -154,7 +151,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * Example:
      *    maptheme = "earth/bluemarble/bluemarble.dgml"
      */
-    void setMapTheme( GeoSceneDocument* mapTheme );
+    void setMapThemeId( const QString &mapThemeId );
 
     /**
      * @brief  get the home point
