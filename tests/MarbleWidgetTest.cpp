@@ -14,19 +14,26 @@
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
 
+#define addRow() QTest::newRow( QString("line %1").arg( __LINE__ ).toAscii().data() )
+
 namespace Marble
 {
 
-class TestMarbleWidget: public QObject
+class MarbleWidgetTest: public QObject
 {
     Q_OBJECT
 
 private slots:
-    void testWidget();
+    void mouseMove();
 
+    void setMapTheme_data();
+    void setMapTheme();
+
+    void paintEvent_data();
+    void paintEvent();
 };
 
-void TestMarbleWidget::testWidget()
+void MarbleWidgetTest::mouseMove()
 {
     MarbleDirs::setMarbleDataPath( DATA_PATH );
     MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
@@ -34,10 +41,59 @@ void TestMarbleWidget::testWidget()
     widget.setMapThemeId("earth/srtm/srtm.dgml");
 
     QTest::mouseMove( &widget );
+
+    QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
+}
+
+void MarbleWidgetTest::setMapTheme_data()
+{
+    QTest::addColumn<QString>( "mapThemeId" );
+
+    addRow() << "earth/plain/plain.dgml";
+    addRow() << "earth/srtm/srtm.dgml";
+    addRow() << "earth/openstreetmap/openstreetmap.dgml";
+}
+
+void MarbleWidgetTest::setMapTheme()
+{
+    QFETCH( QString, mapThemeId );
+
+    MarbleWidget widget;
+
+    widget.setMapThemeId( mapThemeId );
+
+    QCOMPARE( widget.mapThemeId(), mapThemeId );
+
+    QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
+}
+
+void MarbleWidgetTest::paintEvent_data()
+{
+    QTest::addColumn<QString>( "mapThemeId" );
+
+    addRow() << "earth/plain/plain.dgml";
+    addRow() << "earth/srtm/srtm.dgml";
+    addRow() << "earth/openstreetmap/openstreetmap.dgml";
+}
+
+void MarbleWidgetTest::paintEvent()
+{
+    QFETCH( QString, mapThemeId );
+
+    MarbleWidget widget;
+
+    widget.setMapThemeId( mapThemeId );
+    widget.resize( 200, 200 );
+
+    QCOMPARE( widget.mapThemeId(), mapThemeId );
+
+    widget.repaint();
+
+    QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
 }
 
 }
 
-QTEST_MAIN( Marble::TestMarbleWidget )
+QTEST_MAIN( Marble::MarbleWidgetTest )
 
 #include "MarbleWidgetTest.moc"

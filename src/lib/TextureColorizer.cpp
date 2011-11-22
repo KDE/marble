@@ -146,7 +146,7 @@ TextureColorizer::TextureColorizer( const QString &seafile,
     m_seafile = seafile;
     m_landfile = landfile;
 
-    qDebug("TextureColorizer::setSeaFileLandFile: Time elapsed: %d ms", t.elapsed());
+    mDebug() << Q_FUNC_INFO << "Time elapsed:" << t.elapsed() << "ms";
 }
 
 void TextureColorizer::setShowRelief( bool show )
