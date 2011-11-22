@@ -34,7 +34,7 @@ Item {
     property bool showTrack: settings.value( "MarbleWidget", "showTrack", false )
     property string projection: settings.value( "MarbleWidget", "projection", "Spherical" )
     property variant defaultRenderPlugins: ["compass", "coordinate-grid", "progress",
-        "crosshairs", "positionMarker", "stars", "scalebar"]
+        "crosshairs", "stars", "scalebar"]
     property variant activeRenderPlugins: settings.value( "MarbleWidget", "activeRenderPlugins", defaultRenderPlugins )
     
     // Save settings to file.
