@@ -151,7 +151,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_geometryLayer( model->treeModel() ),
           m_vectorMapBaseLayer( &m_veccomposer ),
           m_vectorMapLayer( &m_veccomposer ),
-          m_textureLayer( model->mapThemeManager(), model->downloadManager(), model->sunLocator() ),
+          m_textureLayer( model->downloadManager(), model->sunLocator() ),
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), model->clock(), parent ),
           m_measureTool( model )
 {

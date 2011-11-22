@@ -40,8 +40,7 @@ const int REPAINT_SCHEDULING_INTERVAL = 1000;
 class TextureLayer::Private
 {
 public:
-    Private( const MapThemeManager *mapThemeManager,
-             HttpDownloadManager *downloadManager,
+    Private( HttpDownloadManager *downloadManager,
              const SunLocator *sunLocator,
              TextureLayer *parent );
 
@@ -64,13 +63,12 @@ public:
     QTimer           m_repaintTimer;
 };
 
-TextureLayer::Private::Private( const MapThemeManager *mapThemeManager,
-                                HttpDownloadManager *downloadManager,
+TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
                                 const SunLocator *sunLocator,
                                 TextureLayer *parent )
     : m_parent( parent )
     , m_sunLocator( sunLocator )
-    , m_loader( downloadManager, mapThemeManager )
+    , m_loader( downloadManager )
     , m_tileLoader( &m_loader, sunLocator )
     , m_pixmapCache( 100 )
     , m_texmapper( 0 )
@@ -110,6 +108,7 @@ void TextureLayer::Private::updateTextureLayers()
     }
 
     m_tileLoader.setTextureLayers( result );
+    m_loader.setTextureLayers( result );
     m_pixmapCache.clear();
 }
 
@@ -126,11 +125,10 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
 
 
 
-TextureLayer::TextureLayer( const MapThemeManager *mapThemeManager,
-                            HttpDownloadManager *downloadManager,
+TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
                             const SunLocator *sunLocator )
     : QObject()
-    , d( new Private( mapThemeManager, downloadManager, sunLocator, this ) )
+    , d( new Private( downloadManager, sunLocator, this ) )
 {
     connect( &d->m_loader, SIGNAL( tileCompleted( const TileId &, const QImage & ) ),
              this, SLOT( updateTile( const TileId &, const QImage & ) ) );

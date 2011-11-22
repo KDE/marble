@@ -31,22 +31,10 @@ class ElevationModelPrivate
 public:
     ElevationModelPrivate( ElevationModel *_q, MarbleModel *const model )
         : q( _q ),
-          m_tileLoader( model->downloadManager(), model->mapThemeManager() )
+          m_tileLoader( model->downloadManager() ),
+          m_textureLayer( 0 )
     {
         m_cache.setMaxCost( 10 ); //keep 10 tiles in memory (~17MB)
-        updateTextureLayers();
-    }
-
-    void tileCompleted( const TileId & tileId, const QImage &image )
-    {
-        m_cache.insert( tileId, new QImage( image ) );
-        emit q->updateAvailable();
-    }
-
-public:
-    void updateTextureLayers()
-    {
-        m_textureLayer = 0;
 
         const GeoSceneDocument *srtmTheme = MapThemeManager::loadMapTheme( "earth/srtm2/srtm2.dgml" );
         Q_ASSERT( srtmTheme );
@@ -62,14 +50,23 @@ public:
 
         m_textureLayer = dynamic_cast<GeoSceneTexture*>( sceneLayer->datasets().first() );
         Q_ASSERT( m_textureLayer );
+
+        QVector<const GeoSceneTexture*> textureLayers;
+        textureLayers << m_textureLayer;
+
+        m_tileLoader.setTextureLayers( textureLayers );
     }
 
+    void tileCompleted( const TileId & tileId, const QImage &image )
+    {
+        m_cache.insert( tileId, new QImage( image ) );
+        emit q->updateAvailable();
+    }
 
 public:
     ElevationModel *q;
 
     TileLoader m_tileLoader;
-    const MapThemeManager* m_mapThemeManager;
     const GeoSceneTexture *m_textureLayer;
     QCache<TileId, const QImage> m_cache;
 };
