@@ -24,6 +24,10 @@ Page {
             onClicked: pageStack.pop()
         }
         ToolIcon {
+            iconId: "toolbar-home"
+            onClicked: marbleWidget.centerOn( marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
+        }
+        ToolIcon {
             iconId: "toolbar-view-menu"
             onClicked: pageMenu.open()
         }
@@ -160,8 +164,8 @@ Page {
             settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
             settings.activeRenderPlugins = plugins
             settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
-            settings.gpsTracking = false
-            settings.showPosition = false
+            settings.gpsTracking = true
+            settings.showPosition = true
             settings.showTrack = false
             marbleWidget.visible = true
         }
