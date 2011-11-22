@@ -118,7 +118,7 @@ QString ElevationProfileFloatItem::nameId() const
 
 QString ElevationProfileFloatItem::description() const
 {
-    return tr("This is a float item that provides an route/track elevation profile.");
+    return tr("This is a float item that provides a route/track elevation profile.");
 }
 
 QIcon ElevationProfileFloatItem::icon () const
