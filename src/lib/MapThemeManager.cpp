@@ -50,11 +50,53 @@ public:
     void setRoleNames( const QHash<int, QByteArray> &roleNames );
 };
 
-class MapThemeManagerPrivate
+class MapThemeManager::Private
 {
 public:
-    MapThemeManagerPrivate();
-    ~MapThemeManagerPrivate();
+    Private( MapThemeManager *parent );
+    ~Private();
+
+    void directoryChanged( const QString& path );
+    void fileChanged( const QString & path );
+
+    /**
+     * @brief Updates the map theme model on request.
+     *
+     * This method should usually get invoked on startup or
+     * by a QFileSystemWatcher instance.
+     */
+    void updateMapThemeModel();
+
+    /**
+     * @brief Adds directory paths and .dgml file paths to the given QStringList.
+     */
+    static void addMapThemePaths( const QString& mapPathName, QStringList& result );
+
+    /**
+     * @brief Helper method for findMapThemes(). Searches for .dgml files below
+     *        given directory path.
+     */
+    static QStringList findMapThemes( const QString& basePath );
+
+    /**
+     * @brief Searches for .dgml files below local and system map directory.
+     */
+    static QStringList findMapThemes();
+
+    static GeoSceneDocument* loadMapThemeFile( const QString& mapThemeId );
+
+    /**
+     * @brief Returns all directory paths and .dgml file paths below local and
+     *        system map directory.
+     */
+    static QStringList pathsToWatch();
+
+    /**
+     * @brief Helper method for updateMapThemeModel().
+     */
+    QList<QStandardItem *> createMapThemeRow( const QString& mapThemeID );
+
+    MapThemeManager *const q;
     StandardItemModelWithRoleNames m_mapThemeModel;
     QFileSystemWatcher m_fileSystemWatcher;
     bool m_isInitialized;
@@ -71,8 +113,9 @@ void StandardItemModelWithRoleNames::setRoleNames( const QHash<int, QByteArray> 
     QStandardItemModel::setRoleNames( roleNames );
 }
 
-MapThemeManagerPrivate::MapThemeManagerPrivate()
-    : m_mapThemeModel( 0, 3 ),
+MapThemeManager::Private::Private( MapThemeManager *parent )
+    : q( parent ),
+      m_mapThemeModel( 0, 3 ),
       m_fileSystemWatcher(),
       m_isInitialized( false )
 {
@@ -82,16 +125,21 @@ MapThemeManagerPrivate::MapThemeManagerPrivate()
     m_mapThemeModel.setRoleNames( roleNames );
 }
 
-MapThemeManagerPrivate::~MapThemeManagerPrivate()
+MapThemeManager::Private::~Private()
 {
 }
 
 
 MapThemeManager::MapThemeManager( QObject *parent )
     : QObject( parent ),
-      d( new MapThemeManagerPrivate )
+      d( new Private( this ) )
 {
-    initFileSystemWatcher();
+    const QStringList paths = d->pathsToWatch();
+    d->m_fileSystemWatcher.addPaths( paths );
+    connect( &d->m_fileSystemWatcher, SIGNAL( directoryChanged( const QString& )),
+             this, SLOT( directoryChanged( const QString& )));
+    connect( &d->m_fileSystemWatcher, SIGNAL( fileChanged( const QString& )),
+             this, SLOT( fileChanged( const QString& )));
 }
 
 MapThemeManager::~MapThemeManager()
@@ -102,7 +150,7 @@ MapThemeManager::~MapThemeManager()
 QList<GeoSceneDocument const*> MapThemeManager::mapThemes() const
 {
     QList<GeoSceneDocument const*> result;
-    const QStringList mapThemes = findMapThemes();
+    const QStringList mapThemes = d->findMapThemes();
     QStringList::const_iterator pos = mapThemes.constBegin();
     QStringList::const_iterator const end = mapThemes.constEnd();
     for (; pos != end; ++pos ) {
@@ -114,38 +162,17 @@ QList<GeoSceneDocument const*> MapThemeManager::mapThemes() const
     return result;
 }
 
-void MapThemeManager::initialize()
-{
-    // Delayed model initialization
-    updateMapThemeModel();
-    d->m_isInitialized = true;
-}
-
-void MapThemeManager::initFileSystemWatcher()
-{
-    const QStringList paths = pathsToWatch();
-/*
-    foreach(const QString& path, paths)
-        mDebug() << "path to watch: " << path;
-*/
-    d->m_fileSystemWatcher.addPaths( paths );
-    connect( &d->m_fileSystemWatcher, SIGNAL( directoryChanged( const QString& )),
-             this, SLOT( directoryChanged( const QString& )));
-    connect( &d->m_fileSystemWatcher, SIGNAL( fileChanged( const QString& )),
-             this, SLOT( fileChanged( const QString& )));
-}
-
 GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID )
 {
     if ( mapThemeStringID.isEmpty() )
         return 0;
 
-    const QString mapThemePath = mapDirName + '/' + mapThemeStringID;
-    return loadMapThemeFile( mapThemePath );
+    return Private::loadMapThemeFile( mapThemeStringID );
 }
 
-GeoSceneDocument* MapThemeManager::loadMapThemeFile( const QString& mapThemePath )
+GeoSceneDocument* MapThemeManager::Private::loadMapThemeFile( const QString& mapThemeStringID )
 {
+    const QString mapThemePath = mapDirName + '/' + mapThemeStringID;
     const QString dgmlPath = MarbleDirs::path( mapThemePath );
 
     // Check whether file exists
@@ -178,7 +205,7 @@ GeoSceneDocument* MapThemeManager::loadMapThemeFile( const QString& mapThemePath
     return document;
 }
 
-QStringList MapThemeManager::pathsToWatch()
+QStringList MapThemeManager::Private::pathsToWatch()
 {
     QStringList result;
     const QString localMapPathName = MarbleDirs::localPath() + '/' + mapDirName;
@@ -195,7 +222,7 @@ QStringList MapThemeManager::pathsToWatch()
     return result;
 }
 
-QStringList MapThemeManager::findMapThemes( const QString& basePath )
+QStringList MapThemeManager::Private::findMapThemes( const QString& basePath )
 {
     const QString mapPathName = basePath + '/' + mapDirName;
 
@@ -239,7 +266,7 @@ QStringList MapThemeManager::findMapThemes( const QString& basePath )
     return mapFiles;
 }
 
-QStringList MapThemeManager::findMapThemes()
+QStringList MapThemeManager::Private::findMapThemes()
 {
     QStringList mapFilesLocal = findMapThemes( MarbleDirs::localPath() );
     QStringList mapFilesSystem = findMapThemes( MarbleDirs::systemPath() );
@@ -261,16 +288,17 @@ QStringList MapThemeManager::findMapThemes()
 QStandardItemModel* MapThemeManager::mapThemeModel()
 {
     if ( !d->m_isInitialized ) {
-        initialize();
+        d->updateMapThemeModel();
+        d->m_isInitialized = true;
     }
     return &d->m_mapThemeModel;
 }
 
-QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThemeID )
+QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow( QString const& mapThemeID )
 {
     QList<QStandardItem *> itemList;
 
-    GeoSceneDocument *mapTheme = loadMapTheme( mapThemeID );
+    GeoSceneDocument *mapTheme = loadMapThemeFile( mapThemeID );
     if ( !mapTheme || !mapTheme->head()->visible() ) {
         return itemList;
     }
@@ -306,31 +334,31 @@ QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThe
     QString description = mapTheme->head()->description();
 
     QStandardItem *item = new QStandardItem( name );
-    item->setData( tr( name.toUtf8() ), Qt::DisplayRole );
+    item->setData( QObject::tr( name.toUtf8() ), Qt::DisplayRole );
     item->setData( mapThemeIcon, Qt::DecorationRole );
     item->setData( QString( "<span style=\" max-width: 150 px;\"> "
-                            + tr( description.toUtf8() ) + " </span>" ), Qt::ToolTipRole );
+                            + QObject::tr( description.toUtf8() ) + " </span>" ), Qt::ToolTipRole );
     item->setData( mapThemeID, Qt::UserRole + 1 );
 
     itemList << item;
     itemList << new QStandardItem( mapTheme->head()->target() + '/'
                                    + mapTheme->head()->theme() + '/'
                                    + mapTheme->head()->theme() + ".dgml" );
-    itemList << new QStandardItem( tr( description.toUtf8() ) );
+    itemList << new QStandardItem( QObject::tr( description.toUtf8() ) );
 
     delete mapTheme;
 
     return itemList;
 }
 
-void MapThemeManager::updateMapThemeModel()
+void MapThemeManager::Private::updateMapThemeModel()
 {
     mDebug() << "updateMapThemeModel";
-    d->m_mapThemeModel.clear();
+    m_mapThemeModel.clear();
 
-    d->m_mapThemeModel.setHeaderData(0, Qt::Horizontal, tr("Name"));
-    d->m_mapThemeModel.setHeaderData(1, Qt::Horizontal, tr("Path"));
-    d->m_mapThemeModel.setHeaderData(2, Qt::Horizontal, tr("Description"));
+    m_mapThemeModel.setHeaderData(0, Qt::Horizontal, QObject::tr("Name"));
+    m_mapThemeModel.setHeaderData(1, Qt::Horizontal, QObject::tr("Path"));
+    m_mapThemeModel.setHeaderData(2, Qt::Horizontal, QObject::tr("Description"));
 
     QStringList stringlist = findMapThemes();
     QStringListIterator it( stringlist );
@@ -340,24 +368,24 @@ void MapThemeManager::updateMapThemeModel()
 
     	QList<QStandardItem *> itemList = createMapThemeRow( mapThemeID );
         if ( !itemList.empty() ) {
-            d->m_mapThemeModel.appendRow( itemList );
+            m_mapThemeModel.appendRow( itemList );
         }
     }
 }
 
-void MapThemeManager::directoryChanged( const QString& path )
+void MapThemeManager::Private::directoryChanged( const QString& path )
 {
     mDebug() << "directoryChanged:" << path;
 
-    QStringList paths = pathsToWatch();
-    d->m_fileSystemWatcher.addPaths( paths );
+    QStringList paths = Private::pathsToWatch();
+    m_fileSystemWatcher.addPaths( paths );
 
     mDebug() << "Emitting themesChanged()";
-    emit themesChanged();
+    emit q->themesChanged();
     updateMapThemeModel();
 }
 
-void MapThemeManager::fileChanged( const QString& path )
+void MapThemeManager::Private::fileChanged( const QString& path )
 {
     mDebug() << "fileChanged:" << path;
 
@@ -368,7 +396,7 @@ void MapThemeManager::fileChanged( const QString& path )
 
     QString mapThemeId = path.section( '/', -3 );
     mDebug() << "mapThemeId:" << mapThemeId;
-    QList<QStandardItem *> matchingItems = d->m_mapThemeModel.findItems( mapThemeId,
+    QList<QStandardItem *> matchingItems = m_mapThemeModel.findItems( mapThemeId,
                                                                           Qt::MatchFixedString
                                                                           | Qt::MatchCaseSensitive,
                                                                           columnRelativePath );
@@ -379,7 +407,7 @@ void MapThemeManager::fileChanged( const QString& path )
     if ( matchingItems.size() == 1 ) {
         const int row = matchingItems.front()->row();
 	insertAtRow = row;
-        QList<QStandardItem *> toBeDeleted = d->m_mapThemeModel.takeRow( row );
+        QList<QStandardItem *> toBeDeleted = m_mapThemeModel.takeRow( row );
 	while ( !toBeDeleted.isEmpty() ) {
             delete toBeDeleted.takeFirst();
         }
@@ -389,17 +417,17 @@ void MapThemeManager::fileChanged( const QString& path )
     if ( fileInfo.exists() ) {
         QList<QStandardItem *> newMapThemeRow = createMapThemeRow( mapThemeId );
         if ( !newMapThemeRow.empty() ) {
-            d->m_mapThemeModel.insertRow( insertAtRow, newMapThemeRow );
+            m_mapThemeModel.insertRow( insertAtRow, newMapThemeRow );
         }
     }
     
-    emit themesChanged();
+    emit q->themesChanged();
 }
 
 //
 // <mapPathName>/<orbDirName>/<themeDirName>
 //
-void MapThemeManager::addMapThemePaths( const QString& mapPathName, QStringList& result )
+void MapThemeManager::Private::addMapThemePaths( const QString& mapPathName, QStringList& result )
 {
     QDir mapPath( mapPathName );
     QStringList orbDirNames = mapPath.entryList( QStringList( "*" ),
