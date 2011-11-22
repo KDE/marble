@@ -40,7 +40,10 @@ const int REPAINT_SCHEDULING_INTERVAL = 1000;
 class TextureLayer::Private
 {
 public:
-    Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator, TextureLayer *parent );
+    Private( const MapThemeManager *mapThemeManager,
+             HttpDownloadManager *downloadManager,
+             const SunLocator *sunLocator,
+             TextureLayer *parent );
 
     void mapChanged();
     void updateTextureLayers();
@@ -61,7 +64,10 @@ public:
     QTimer           m_repaintTimer;
 };
 
-TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator, TextureLayer *parent )
+TextureLayer::Private::Private( const MapThemeManager *mapThemeManager,
+                                HttpDownloadManager *downloadManager,
+                                const SunLocator *sunLocator,
+                                TextureLayer *parent )
     : m_parent( parent )
     , m_sunLocator( sunLocator )
     , m_loader( downloadManager, mapThemeManager )
@@ -120,7 +126,9 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
 
 
 
-TextureLayer::TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator )
+TextureLayer::TextureLayer( const MapThemeManager *mapThemeManager,
+                            HttpDownloadManager *downloadManager,
+                            const SunLocator *sunLocator )
     : QObject()
     , d( new Private( mapThemeManager, downloadManager, sunLocator, this ) )
 {
