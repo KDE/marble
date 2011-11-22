@@ -14,6 +14,7 @@
 #include "MarbleModel.h"
 #include "PositionTracking.h"
 #include "RenderPlugin.h"
+#include "routing/AdjustNavigation.h"
 
 namespace Marble
 {
@@ -26,7 +27,8 @@ Tracking::Tracking( QObject* parent) : QObject( parent ),
     m_positionSource( 0 ),
     m_positionMarker( 0 ),
     m_marbleWidget( 0 ),
-    m_hasLastKnownPosition( false )
+    m_hasLastKnownPosition( false ),
+    m_autoNavigation( 0 )
 {
     connect( &m_lastKnownPosition, SIGNAL( longitudeChanged() ), this, SLOT( setHasLastKnownPosition() ) );
     connect( &m_lastKnownPosition, SIGNAL( latitudeChanged() ), this, SLOT( setHasLastKnownPosition() ) );
@@ -184,6 +186,54 @@ void Tracking::setLastKnownPosition( Marble::Declarative::Coordinate* lastKnownP
     if ( lastKnownPosition && *lastKnownPosition != m_lastKnownPosition ) {
         m_lastKnownPosition.setCoordinates( lastKnownPosition->coordinates() );
         emit lastKnownPositionChanged();
+    }
+}
+
+bool Tracking::autoCenter() const
+{
+    if ( m_autoNavigation ) {
+        return m_autoNavigation->recenterMode() != AdjustNavigation::DontRecenter;
+    }
+
+    return false;
+}
+
+void Tracking::setAutoCenter( bool enabled )
+{
+    if ( autoCenter() != enabled ) {
+        if ( enabled && !m_autoNavigation && m_marbleWidget ) {
+            m_autoNavigation = new AdjustNavigation( m_marbleWidget, this );
+        }
+
+        if ( m_autoNavigation ) {
+            m_autoNavigation->setRecenter( AdjustNavigation::RecenterOnBorder );
+        }
+
+        emit autoCenterChanged();
+    }
+}
+
+bool Tracking::autoZoom() const
+{
+    if ( m_autoNavigation ) {
+        return m_autoNavigation->autoZoom();
+    }
+
+    return false;
+}
+
+void Tracking::setAutoZoom( bool enabled )
+{
+    if ( autoZoom() != enabled ) {
+        if ( enabled && !m_autoNavigation && m_marbleWidget ) {
+            m_autoNavigation = new AdjustNavigation( m_marbleWidget, this );
+        }
+
+        if ( m_autoNavigation ) {
+            m_autoNavigation->setAutoZoom( enabled );
+        }
+
+        emit autoZoomChanged();
     }
 }
 

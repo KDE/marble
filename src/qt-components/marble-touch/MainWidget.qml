@@ -30,9 +30,6 @@ Item {
         id: map
         anchors.fill: parent
 
-        // Load settings.
-        property bool autoCenter: settings.autoCenter
-
         /** @todo: This property looks cumbersome... get rid of it */
         property bool initialized: false
 
@@ -215,9 +212,6 @@ Item {
         // Start a small grow/shrink animation of the marker to indicate position updates.
         onPositionChanged: {
             growAnimation.running = true
-            if ( map.autoCenter ) {
-                map.center = positionProvider.position
-            }
         }
     }
     

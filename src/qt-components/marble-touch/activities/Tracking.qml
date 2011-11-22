@@ -52,6 +52,20 @@ Page {
                 checked: !settings.workOffline
                 onClicked: settings.workOffline = !settings.workOffline
             }
+            MenuItemSwitch {
+                text: "Auto Center"
+                checked: false
+                onCheckedChanged: {
+                    marbleWidget.getTracking().autoCenter = checked
+                }
+            }
+            MenuItemSwitch {
+                text: "Auto Zoom"
+                checked: false
+                onCheckedChanged: {
+                    marbleWidget.getTracking().autoZoom = checked
+                }
+            }
         }
     }
 

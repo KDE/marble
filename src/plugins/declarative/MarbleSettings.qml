@@ -32,7 +32,6 @@ Item {
     property bool gpsTracking: settings.value( "MarbleWidget", "gpsTracking", false )
     property bool showPosition: settings.value( "MarbleWidget", "showPosition", false )
     property bool showTrack: settings.value( "MarbleWidget", "showTrack", false )
-    property bool autoCenter: settings.value( "MarbleWidget", "autoCenter", false )
     property string projection: settings.value( "MarbleWidget", "projection", "Spherical" )
     property variant defaultRenderPlugins: ["compass", "coordinate-grid", "progress",
         "crosshairs", "positionMarker", "stars", "scalebar"]
@@ -50,7 +49,6 @@ Item {
         settings.setValue( "MarbleWidget", "gpsTracking", root.gpsTracking )
         settings.setValue( "MarbleWidget", "showPosition", root.showPosition )
         settings.setValue( "MarbleWidget", "showTrack", root.showTrack )
-        settings.setValue( "MarbleWidget", "autoCenter", root.autoCenter )
         settings.setValue( "MarbleWidget", "projection", root.projection )
         settings.setValue( "MarbleWidget", "activeRenderPlugins", root.activeRenderPlugins )
     }

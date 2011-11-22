@@ -20,6 +20,7 @@ namespace Marble
 {
 
 class MarbleWidget;
+class AdjustNavigation;
 
 namespace Declarative
 {
@@ -30,6 +31,8 @@ class Tracking : public QObject
 
     Q_PROPERTY( bool showPosition READ showPosition WRITE setShowPosition NOTIFY showPositionChanged )
     Q_PROPERTY( bool showTrack READ showTrack WRITE setShowTrack NOTIFY showTrackChanged )
+    Q_PROPERTY( bool autoCenter READ autoCenter WRITE setAutoCenter NOTIFY autoCenterChanged )
+    Q_PROPERTY( bool autoZoom READ autoZoom WRITE setAutoZoom NOTIFY autoZoomChanged )
     Q_PROPERTY( Marble::Declarative::PositionSource* positionSource READ positionSource WRITE setPositionSource NOTIFY positionSourceChanged )
     Q_PROPERTY( QObject* positionMarker READ positionMarker WRITE setPositionMarker NOTIFY positionMarkerChanged )
     Q_PROPERTY( bool hasLastKnownPosition READ hasLastKnownPosition NOTIFY hasLastKnownPositionChanged )
@@ -62,6 +65,14 @@ public:
 
     void setLastKnownPosition( Marble::Declarative::Coordinate* lastKnownPosition );
 
+    bool autoCenter() const;
+
+    void setAutoCenter( bool enabled );
+
+    bool autoZoom() const;
+
+    void setAutoZoom( bool enabled );
+
 Q_SIGNALS:
     void showPositionChanged();
 
@@ -74,6 +85,10 @@ Q_SIGNALS:
     void hasLastKnownPositionChanged();
 
     void lastKnownPositionChanged();
+
+    void autoCenterChanged();
+
+    void autoZoomChanged();
 
 private Q_SLOTS:
     void updatePositionMarker();
@@ -98,6 +113,8 @@ private:
     bool m_hasLastKnownPosition;
 
     Marble::Declarative::Coordinate m_lastKnownPosition;
+
+    Marble::AdjustNavigation* m_autoNavigation;
 };
 
 }
