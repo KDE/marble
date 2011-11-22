@@ -147,18 +147,20 @@ MapThemeManager::~MapThemeManager()
     delete d;
 }
 
-QList<GeoSceneDocument const*> MapThemeManager::mapThemes() const
+QStringList MapThemeManager::mapThemeIds() const
 {
-    QList<GeoSceneDocument const*> result;
-    const QStringList mapThemes = d->findMapThemes();
-    QStringList::const_iterator pos = mapThemes.constBegin();
-    QStringList::const_iterator const end = mapThemes.constEnd();
-    for (; pos != end; ++pos ) {
-        GeoSceneDocument* document = loadMapTheme( *pos );
-        if ( document ) {
-            result.append( document );
-        }
+    QStringList result;
+
+    if ( !d->m_isInitialized ) {
+        d->updateMapThemeModel();
+        d->m_isInitialized = true;
     }
+
+    for( int i = 0; i < d->m_mapThemeModel.rowCount(); ++i ) {
+        const QString id = d->m_mapThemeModel.data( d->m_mapThemeModel.index( i, 0 ), Qt::UserRole + 1 ).toString();
+        result << id;
+    }
+
     return result;
 }
 

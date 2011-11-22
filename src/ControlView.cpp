@@ -163,11 +163,7 @@ QString ControlView::defaultMapThemeId() const
       fallBackThemes << "earth/openstreetmap/openstreetmap.dgml";
     }
 
-    QStringList installedThemes;
-    QList<GeoSceneDocument const*> themes = m_marbleWidget->model()->mapThemeManager()->mapThemes();
-    foreach(GeoSceneDocument const* theme, themes) {
-        installedThemes << theme->head()->mapThemeId();
-    }
+    const QStringList installedThemes = m_marbleWidget->model()->mapThemeManager()->mapThemeIds();
 
     foreach(const QString &fallback, fallBackThemes) {
         if (installedThemes.contains(fallback)) {

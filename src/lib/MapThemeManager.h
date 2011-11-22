@@ -13,7 +13,6 @@
 #ifndef MARBLE_MAPTHEMEMANAGER_H
 #define MARBLE_MAPTHEMEMANAGER_H
 
-#include <QtCore/QList>
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
 
@@ -55,9 +54,9 @@ class MARBLE_EXPORT MapThemeManager : public QObject
     ~MapThemeManager();
 
     /**
-     * @brief Returns a list of all locally available map themes
+     * @brief Returns a list of all locally available map theme IDs
      */
-    QList<GeoSceneDocument const*> mapThemes() const;
+    QStringList mapThemeIds() const;
 
     /**
      * @brief Provides a model of the locally existing themes. 
