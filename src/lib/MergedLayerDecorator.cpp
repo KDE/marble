@@ -58,7 +58,7 @@ MergedLayerDecorator::~MergedLayerDecorator()
 {
 }
 
-QImage MergedLayerDecorator::merge( const TileId id, const QVector<QSharedPointer<TextureTile> > &tiles )
+QImage MergedLayerDecorator::merge( const TileId id, const QVector<QSharedPointer<TextureTile> > &tiles ) const
 {
     Q_ASSERT( !tiles.isEmpty() );
 
