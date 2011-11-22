@@ -229,6 +229,14 @@ Page {
                     text: display;
                     width: parent.width - 48
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            searchResultListView.currentIndex = index
+                            marbleWidget.centerOn(longitude, latitude)
+                        }
+                    }
                 }
             }
 

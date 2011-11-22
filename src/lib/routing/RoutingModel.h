@@ -42,7 +42,9 @@ class MARBLE_EXPORT RoutingModel : public QAbstractListModel
 public:
     enum RoutingModelRoles {
         CoordinateRole = MarblePlacemarkModel::CoordinateRole,
-        TurnTypeIconRole
+        TurnTypeIconRole,
+        LongitudeRole,
+        LatitudeRole
     };
 
     /** Constructor */
