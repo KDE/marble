@@ -76,6 +76,11 @@ class MarbleMapTest : public QObject
 
     void switchMapThemes();
 
+    void setMapThemeIdTwoMaps_data();
+    void setMapThemeIdTwoMaps();
+
+    void switchMapThemesTwoMaps();
+
     void paint_data();
     void paint();
 
@@ -506,6 +511,56 @@ void MarbleMapTest::switchMapThemes()
 
     map.setMapThemeId( "earth/plain/plain.dgml" );
     QCOMPARE( map.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+
+    QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
+}
+
+void MarbleMapTest::setMapThemeIdTwoMaps_data()
+{
+    QTest::addColumn<QString>( "mapThemeId" );
+
+    addRow() << "earth/plain/plain.dgml";
+    addRow() << "earth/srtm/srtm.dgml";
+    addRow() << "earth/openstreetmap/openstreetmap.dgml";
+}
+
+void MarbleMapTest::setMapThemeIdTwoMaps()
+{
+    QFETCH( QString, mapThemeId );
+
+    MarbleModel model;
+    MarbleMap map1( &model );
+    MarbleMap map2( &model );
+
+    map1.setMapThemeId( mapThemeId );
+
+    QCOMPARE( map1.mapThemeId(), mapThemeId );
+    QCOMPARE( map2.mapThemeId(), mapThemeId );
+
+    QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
+}
+
+void MarbleMapTest::switchMapThemesTwoMaps()
+{
+    MarbleModel model;
+    MarbleMap map1( &model );
+    MarbleMap map2( &model );
+
+    map1.setMapThemeId( "earth/plain/plain.dgml" );
+    QCOMPARE( map1.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+    QCOMPARE( map2.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+
+    map2.setMapThemeId( "earth/srtm/srtm.dgml" );
+    QCOMPARE( map1.mapThemeId(), QString( "earth/srtm/srtm.dgml" ) );
+    QCOMPARE( map2.mapThemeId(), QString( "earth/srtm/srtm.dgml" ) );
+
+    map1.setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
+    QCOMPARE( map1.mapThemeId(), QString( "earth/openstreetmap/openstreetmap.dgml" ) );
+    QCOMPARE( map2.mapThemeId(), QString( "earth/openstreetmap/openstreetmap.dgml" ) );
+
+    map2.setMapThemeId( "earth/plain/plain.dgml" );
+    QCOMPARE( map1.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+    QCOMPARE( map2.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
 
     QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
 }
