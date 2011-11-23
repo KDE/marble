@@ -74,6 +74,8 @@ class MarbleMapTest : public QObject
     void setMapTheme_data();
     void setMapTheme();
 
+    void switchMapThemes();
+
     void paint_data();
     void paint();
 
@@ -485,6 +487,25 @@ void MarbleMapTest::setMapTheme()
     map.setMapThemeId( mapThemeId );
 
     QCOMPARE( map.mapThemeId(), mapThemeId );
+
+    QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
+}
+
+void MarbleMapTest::switchMapThemes()
+{
+    MarbleMap map;
+
+    map.setMapThemeId( "earth/plain/plain.dgml" );
+    QCOMPARE( map.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+
+    map.setMapThemeId( "earth/srtm/srtm.dgml" );
+    QCOMPARE( map.mapThemeId(), QString( "earth/srtm/srtm.dgml" ) );
+
+    map.setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
+    QCOMPARE( map.mapThemeId(), QString( "earth/openstreetmap/openstreetmap.dgml" ) );
+
+    map.setMapThemeId( "earth/plain/plain.dgml" );
+    QCOMPARE( map.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
 
     QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
 }

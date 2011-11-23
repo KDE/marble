@@ -29,6 +29,8 @@ private slots:
     void setMapTheme_data();
     void setMapTheme();
 
+    void switchMapThemes();
+
     void paintEvent_data();
     void paintEvent();
 };
@@ -63,6 +65,25 @@ void MarbleWidgetTest::setMapTheme()
     widget.setMapThemeId( mapThemeId );
 
     QCOMPARE( widget.mapThemeId(), mapThemeId );
+
+    QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
+}
+
+void MarbleWidgetTest::switchMapThemes()
+{
+    MarbleWidget widget;
+
+    widget.setMapThemeId( "earth/plain/plain.dgml" );
+    QCOMPARE( widget.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+
+    widget.setMapThemeId( "earth/srtm/srtm.dgml" );
+    QCOMPARE( widget.mapThemeId(), QString( "earth/srtm/srtm.dgml" ) );
+
+    widget.setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
+    QCOMPARE( widget.mapThemeId(), QString( "earth/openstreetmap/openstreetmap.dgml" ) );
+
+    widget.setMapThemeId( "earth/plain/plain.dgml" );
+    QCOMPARE( widget.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
 
     QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
 }
