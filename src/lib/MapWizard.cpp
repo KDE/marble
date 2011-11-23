@@ -793,7 +793,7 @@ GeoSceneDocument* MapWizard::createDocument()
     if( d->uiWidget.checkBoxCoord->checkState() == Qt::Checked )
     {
         GeoSceneProperty *coorGrid = new GeoSceneProperty( "coordinate-grid" );
-        coorGrid->setValue( true );
+        coorGrid->setDefaultValue( true );
         coorGrid->setAvailable( true );
         settings->addProperty( coorGrid );
         
@@ -808,7 +808,7 @@ GeoSceneDocument* MapWizard::createDocument()
     if( d->uiWidget.checkBoxInterest->checkState() == Qt::Checked )
     {
         GeoSceneProperty *poiProperty = new GeoSceneProperty( "otherplaces" );
-        poiProperty->setValue( true );
+        poiProperty->setDefaultValue( true );
         poiProperty->setAvailable( true );
         settings->addProperty( poiProperty );
         
@@ -854,7 +854,7 @@ GeoSceneDocument* MapWizard::createDocument()
     if( d->uiWidget.checkBoxTer->checkState() == Qt::Checked )
     {
         GeoSceneProperty *terrainProperty = new GeoSceneProperty( "terrain" );
-        terrainProperty->setValue( true );
+        terrainProperty->setDefaultValue( true );
         terrainProperty->setAvailable( true );
         settings->addProperty( terrainProperty );     
         
@@ -883,12 +883,12 @@ GeoSceneDocument* MapWizard::createDocument()
     if( d->uiWidget.checkBoxPop->checkState() == Qt::Checked )
     {
         GeoSceneProperty *placesProperty = new GeoSceneProperty( "places" );
-        placesProperty->setValue( true );
+        placesProperty->setDefaultValue( true );
         placesProperty->setAvailable( true );
         settings->addProperty( placesProperty );
         
         GeoSceneProperty *citiesProperty = new GeoSceneProperty( "cities" );
-        citiesProperty->setValue( true );
+        citiesProperty->setDefaultValue( true );
         citiesProperty->setAvailable( true );
         settings->addProperty( citiesProperty );
     }
@@ -914,17 +914,17 @@ GeoSceneDocument* MapWizard::createDocument()
         bordersSection->addItem( stateBoundary );
         
         GeoSceneProperty *bordersProperty = new GeoSceneProperty( "borders" );
-        bordersProperty->setValue( false );
+        bordersProperty->setDefaultValue( false );
         bordersProperty->setAvailable( true );
         settings->addProperty( bordersProperty );
         
         GeoSceneProperty *intBoundariesProperty = new GeoSceneProperty( "international-boundaries" );
-        intBoundariesProperty->setValue( false );
+        intBoundariesProperty->setDefaultValue( false );
         intBoundariesProperty->setAvailable( true );
         settings->addProperty( intBoundariesProperty );
         
         GeoSceneProperty *stateBounderiesProperty = new GeoSceneProperty( "state-boundaries" );
-        stateBounderiesProperty->setValue( false );
+        stateBounderiesProperty->setDefaultValue( false );
         stateBounderiesProperty->setAvailable( true );
         settings->addProperty( stateBounderiesProperty );
         
@@ -944,17 +944,17 @@ GeoSceneDocument* MapWizard::createDocument()
     }
     
     GeoSceneProperty *overviewmap = new GeoSceneProperty( "overviewmap" );
-    overviewmap->setValue( true );
+    overviewmap->setDefaultValue( true );
     overviewmap->setAvailable( true );
     settings->addProperty( overviewmap );
     
     GeoSceneProperty *compass = new GeoSceneProperty( "compass" );
-    compass->setValue( true );
+    compass->setDefaultValue( true );
     compass->setAvailable( true );
     settings->addProperty( compass );
     
     GeoSceneProperty *scalebar = new GeoSceneProperty( "scalebar" );
-    scalebar->setValue( true );
+    scalebar->setDefaultValue( true );
     scalebar->setAvailable( true );
     settings->addProperty( scalebar );
     
