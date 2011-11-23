@@ -22,3 +22,4 @@ INSTALL( FILES SearchResultSelectionDialog.qml DESTINATION ${MARBLE_QT_IMPORTS_D
 INSTALL( FILES MenuItemSwitch.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )
 INSTALL( FILES ToolIconCheckable.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )
 INSTALL( FILES ViaPointEditor.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )
+INSTALL( FILES FileSaveDialog.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )

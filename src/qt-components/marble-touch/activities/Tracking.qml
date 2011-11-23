@@ -47,6 +47,12 @@ Page {
                     pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
                 }
             }
+            MenuItem {
+                text: "Save Track"
+                onClicked: {
+                    pageStack.push( "qrc:/SaveTrackPage.qml" )
+                }
+            }
             MenuItemSwitch {
                 text: "Online"
                 checked: !settings.workOffline

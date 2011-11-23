@@ -73,6 +73,11 @@ public:
 
     void setAutoZoom( bool enabled );
 
+public Q_SLOTS:
+    void saveTrack( const QString &fileName );
+
+    void clearTrack();
+
 Q_SIGNALS:
     void showPositionChanged();
 
