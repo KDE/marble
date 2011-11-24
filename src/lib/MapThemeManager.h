@@ -73,7 +73,7 @@ class MARBLE_EXPORT MapThemeManager : public QObject
      * This helper method should only get used by MarbleModel to load the
      * current theme into memory or by the MapThemeManager.
      */
-    static GeoSceneDocument* loadMapTheme( const QString& mapThemeStringID );
+    GeoSceneDocument* loadMapTheme( const QString& mapThemeStringID ) const;
 
  Q_SIGNALS:
     /**

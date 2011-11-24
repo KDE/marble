@@ -36,7 +36,7 @@ public:
     {
         m_cache.setMaxCost( 10 ); //keep 10 tiles in memory (~17MB)
 
-        const GeoSceneDocument *srtmTheme = MapThemeManager::loadMapTheme( "earth/srtm2/srtm2.dgml" );
+        const GeoSceneDocument *srtmTheme = model->mapThemeManager()->loadMapTheme( "earth/srtm2/srtm2.dgml" );
         Q_ASSERT( srtmTheme );
 
         const GeoSceneHead *head = srtmTheme->head();

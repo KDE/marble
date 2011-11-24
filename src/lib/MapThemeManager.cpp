@@ -164,7 +164,7 @@ QStringList MapThemeManager::mapThemeIds() const
     return result;
 }
 
-GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID )
+GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID ) const
 {
     if ( mapThemeStringID.isEmpty() )
         return 0;
