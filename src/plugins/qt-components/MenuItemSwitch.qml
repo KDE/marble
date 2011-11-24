@@ -51,34 +51,12 @@ import Qt 4.7
 import QtQuick 1.1
 import com.nokia.meego 1.0
 
-Item {
+MenuItem {
     id: root
 
-    // Common API
-    property string text
-    signal clicked
-    property alias pressed: mouseArea.pressed
+    text: ""
+    property alias switchText: menuText.text
     property alias checked: switchItem.checked
-
-    // platformStyle API
-    property Style platformStyle: MenuItemStyle{}
-
-    width: parent ? parent.width: 0
-    height: ( root.platformStyle.height === 0 ) ?
-                root.platformStyle.topMargin + menuText.paintedHeight + root.platformStyle.bottomMargin :
-                root.platformStyle.topMargin + root.platformStyle.height + root.platformStyle.bottomMargin
-
-    BorderImage {
-        id: backgroundImage
-        // ToDo: remove hardcoded values
-        source:  root.parent.children.length === 1 ? (parent.pressed ? "image://theme/meegotouch-list-background-pressed" : "image://theme/meegotouch-list-background")
-                                                  : root.parent.children[0] === root ? (parent.pressed ? "image://theme/meegotouch-list-background-pressed-vertical-top" : "image://theme/meegotouch-list-background-vertical-top")
-                                                                                    : root.parent.children[root.parent.children.length-1] === root ? (parent.pressed ? "image://theme/meegotouch-list-background-pressed-vertical-bottom" : "image://theme/meegotouch-list-background-vertical-bottom")
-                                                                                                                                                  : (parent.pressed ? "image://theme/meegotouch-list-background-pressed-vertical-center" : "image://theme/meegotouch-list-background-vertical-center")
-        anchors.fill : root
-        border { left: 22; top: 22;
-            right: 22; bottom: 22 }
-    }
 
     Item {
         anchors.topMargin : root.platformStyle.topMargin
