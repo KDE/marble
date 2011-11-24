@@ -28,6 +28,5 @@
         <file>icons/routing-pedestrian.svg</file>
         <file>icons/routing-motorcar.svg</file>
         <file>MapThemeSelectionPage.qml</file>
-        <file>SaveTrackPage.qml</file>
     </qresource>
 </RCC>

@@ -10,7 +10,7 @@ import QtQuick 1.0
 import Qt.labs.folderlistmodel 1.0
 import com.nokia.meego 1.0
 
-Item {
+Sheet {
     id: root
 
     // Public API
@@ -18,110 +18,88 @@ Item {
     property string folder: "/" // Why can't I alias this as well?
     property alias nameFilters: directoryModel.nameFilters
 
-    signal accepted()
-    signal cancelled()
+    acceptButtonText: "Save"
+    rejectButtonText: "Cancel"
 
-    TextField {
-        id: filenameField
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
+    content: Item {
+        anchors.fill: parent
 
-        focus: true
-        text: "New file"
-    }
+        TextField {
+            id: filenameField
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: parent.top
 
-    Row {
-        id: folderRow
-        height: multiButton.height
-        anchors.top: filenameField.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-        ToolIcon {
-            id: multiButton;
-            anchors.verticalCenter: parent.verticalCenter
-            iconId: "icon-m-toolbar-up"
-            onClicked: directoryModel.folder = directoryModel.parentFolder
-        }
-        Label {
-            id: folderLabel;
-            anchors.verticalCenter: parent.verticalCenter
-            text: directoryModel.folder
-        }
-    }
-
-    ListView {
-        id: folderView
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: folderRow.bottom
-        anchors.bottom: buttonRow.top
-
-        clip: true
-
-        FolderListModel {
-            id: directoryModel
-            folder: root.folder
-            showOnlyReadable: true
+            text: "New file"
         }
 
-        Component {
-            id: fileDelegate
+        Row {
+            id: folderRow
+            height: multiButton.height
+            anchors.top: filenameField.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-            Item {
-                id: fileItem
-                property bool isFolder: directoryModel.isFolder(index)
-                width: contentRow.width
-                height: contentRow.height
-                Row {
-                    id: contentRow
-                    spacing: 5
-                    Image { anchors.verticalCenter: parent.verticalCenter; source: fileItem.isFolder ? "image://theme/icon-m-common-directory" : "image://theme/icon-m-content-document" }
-                    Label { anchors.verticalCenter: parent.verticalCenter; text: fileName }
-                }
+            ToolIcon {
+                id: multiButton;
+                anchors.verticalCenter: parent.verticalCenter
+                iconId: "icon-m-toolbar-up"
+                onClicked: directoryModel.folder = directoryModel.parentFolder
+            }
+            Label {
+                id: folderLabel;
+                anchors.verticalCenter: parent.verticalCenter
+                text: directoryModel.folder
+            }
+        }
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (fileItem.isFolder) {
-                            directoryModel.folder = directoryModel.folder + "/" + fileName
-                        } else {
-                            filenameField.text = fileName
+        ListView {
+            id: folderView
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: folderRow.bottom
+            anchors.bottom: parent.bottom
+
+            clip: true
+
+            FolderListModel {
+                id: directoryModel
+                folder: root.folder
+                showOnlyReadable: true
+            }
+
+            Component {
+                id: fileDelegate
+
+                Item {
+                    id: fileItem
+                    property bool isFolder: directoryModel.isFolder(index)
+                    width: contentRow.width
+                    height: contentRow.height
+                    Row {
+                        id: contentRow
+                        spacing: 5
+                        Image { anchors.verticalCenter: parent.verticalCenter; source: fileItem.isFolder ? "image://theme/icon-m-common-directory" : "image://theme/icon-m-content-document" }
+                        Label { anchors.verticalCenter: parent.verticalCenter; text: fileName }
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            if (fileItem.isFolder) {
+                                directoryModel.folder = directoryModel.folder + "/" + fileName
+                            } else {
+                                filenameField.text = fileName
+                            }
                         }
                     }
                 }
             }
-        }
 
-        model: directoryModel
-        delegate: fileDelegate
-    }
-
-    Row {
-        id: buttonRow
-        spacing: 5
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-
-        Button {
-            id: saveButton
-            width: parent.width / 2 - 5
-
-            text: "Save"
-            onClicked: {
-                root.folder = directoryModel.folder
-                root.accepted()
-            }
-        }
-
-        Button {
-            id: cancelButton
-            width: parent.width / 2 - 5
-
-            text: "Cancel"
-            onClicked: root.cancelled()
+            model: directoryModel
+            delegate: fileDelegate
         }
     }
+
+    onAccepted: root.folder = directoryModel.folder
 }

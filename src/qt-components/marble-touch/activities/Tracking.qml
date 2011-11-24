@@ -50,7 +50,8 @@ Page {
             MenuItem {
                 text: "Save Track"
                 onClicked: {
-                    pageStack.push( "qrc:/SaveTrackPage.qml" )
+                    saveTrackDialog.filename = Qt.formatDateTime(new Date(), "yyyy-MM-dd_hh.mm.ss") + ".kml"
+                    saveTrackDialog.open()
                 }
             }
             MenuItemSwitch {
@@ -111,5 +112,15 @@ Page {
                 marbleWidget.visible = false
             }
         }
+    }
+
+    FileSaveDialog {
+        id: saveTrackDialog
+        anchors.fill: parent
+        folder: "/home/user/MyDocs"
+        filename: ""
+        nameFilters: [ "*.kml" ]
+
+        onAccepted: { marbleWidget.getTracking().saveTrack( folder + "/" + filename ); }
     }
 }
