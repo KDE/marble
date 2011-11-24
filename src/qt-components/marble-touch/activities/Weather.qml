@@ -24,10 +24,12 @@ Page {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
-        ToolIconCheckable {
+        ToolButton {
             id: searchButton
+            checkable: true
             checked: true
-            iconId: "toolbar-search";
+            width: 60
+            iconSource: "image://theme/icon-m-toolbar-search";
         }
         ToolIcon {
             iconId: "toolbar-view-menu"

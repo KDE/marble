@@ -28,9 +28,11 @@ Page {
             iconId: "toolbar-home"
             onClicked: marbleWidget.centerOn( marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
         }
-        ToolIconCheckable {
+        ToolButton {
             id: searchButton
-            iconId: "toolbar-search";
+            checkable: true
+            width: 60
+            iconSource: "image://theme/icon-m-toolbar-search";
         }
         ToolIcon {
             iconId: "toolbar-view-menu"
