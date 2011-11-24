@@ -20,6 +20,10 @@ Page {
 
     property alias model: activityView.model
 
+    Loader {
+        id: lazyLoader
+    }
+
     tools: ToolBarLayout {
         Item{}
         ToolButton {
@@ -60,9 +64,17 @@ Page {
                     horizontalAlignment: "AlignHCenter"
                 }
             }
+
             MouseArea {
                 anchors.fill: parent
-                onClicked: pageStack.push( path )
+                onClicked: {
+                    if ( marbleWidget === null ) {
+                        lazyLoader.source = "qrc:/MainWidget.qml";
+                        marbleWidget = lazyLoader.item
+                    }
+
+                    pageStack.push( path )
+                }
             }
         }
     }
@@ -75,31 +87,26 @@ Page {
             activityModel.addActivity(
                         "Virtual Globe",
                         "qrc:/icons/activity-virtualglobe.png",
-                        marbleWidget,
                         "qrc:/activities/VirtualGlobe.qml"
                         )
             activityModel.addActivity(
                         "Search",
                         "qrc:/icons/activity-search.png",
-                        marbleWidget,
                         "qrc:/activities/Search.qml"
                         )
             activityModel.addActivity(
                         "Routing",
                         "qrc:/icons/activity-default.png",
-                        marbleWidget,
                         "qrc:/activities/Routing.qml"
                         )
             activityModel.addActivity(
                         "Tracking",
                         "qrc:/icons/activity-default.png",
-                        marbleWidget,
                         "qrc:/activities/Tracking.qml"
                         )
             activityModel.addActivity(
                         "Weather",
                         "qrc:/icons/activity-weather.png",
-                        marbleWidget,
                         "qrc:/activities/Weather.qml"
                         )
             // @todo: Terms of usage still not clear
@@ -112,13 +119,11 @@ Page {
             activityModel.addActivity(
                         "Friends",
                         "qrc:/icons/activity-friends.png",
-                        marbleWidget,
                         "qrc:/activities/Friends.qml"
                         )
             activityModel.addActivity(
                         "Space View",
                         "qrc:/icons/activity-spaceview.png",
-                        marbleWidget,
                         "qrc:/activities/SpaceView.qml"
                         )
 

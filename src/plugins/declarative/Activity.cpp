@@ -16,16 +16,10 @@ namespace Marble
 namespace Declarative
 {
 
-Activity::Activity() :
-    m_page( 0 )
-{
-}
-
-Activity::Activity( const QString& name, const QString& imagePath, QObject *page,
+Activity::Activity( const QString& name, const QString& imagePath,
                     const QString &path ) :
     m_name ( name ),
     m_imagePath( imagePath ),
-    m_page( page ),
     m_path( path )
 {
 }
@@ -58,16 +52,6 @@ void Activity::setPath( const QString& path )
 QString Activity::path() const
 {
     return m_path;
-}
-
-QObject *Activity::page()
-{
-    return m_page;
-}
-
-void Activity::setPage(QObject *page)
-{
-    m_page = page;
 }
 
 }

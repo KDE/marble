@@ -37,8 +37,7 @@ class ActivityModel : public QAbstractListModel
     {
       NameRole = Qt::UserRole + 1,     ///< Name of the activity.
       ImagePathRole,                   ///< Path to image for activity.
-      PathRole,                        ///< Path to QML file for activity.
-      PageRole                         ///< Activity page
+      PathRole                        ///< Path to QML file for activity.
     };
 
     explicit ActivityModel( QObject *parent = 0 );
@@ -63,8 +62,7 @@ class ActivityModel : public QAbstractListModel
      * 
      * @see Activity
      */
-    void addActivity( const QString& name, const QString& imagePath, QObject* page,
-                      const QString &path );
+    void addActivity( const QString& name, const QString& imagePath, const QString &path );
     /**
      * Remove activity with the passed name.
      *
@@ -104,8 +102,6 @@ class ActivityModel : public QAbstractListModel
     int rowCount( const QModelIndex &parent = QModelIndex() ) const;
     int columnCount( const QModelIndex &parent = QModelIndex() ) const;
 
-    void load( QObject *parent, QObject* child );
-    
  private:
     Q_DISABLE_COPY( ActivityModel )
     class Private;

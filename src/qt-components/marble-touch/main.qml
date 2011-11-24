@@ -23,8 +23,8 @@ PageStackWindow {
     height: screen.displayHeight
     platformStyle: defaultStyle
     initialPage: activitySelection
-    property alias marbleWidget: mainWidget
-    
+    property Item marbleWidget: null
+
     // System dependent style for the main window.
     PageStackWindowStyle {
         id: defaultStyle
@@ -38,10 +38,6 @@ PageStackWindow {
     // Displays all available activities and starts them if the user clicks on them.
     ActivitySelectionView {
         id: activitySelection
-    }
-
-    MainWidget {
-        id: mainWidget
     }
 
     // Returns the model which contains routing instructions.
