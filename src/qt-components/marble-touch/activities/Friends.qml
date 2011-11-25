@@ -75,7 +75,6 @@ Page {
                 settings.projection = "Mercator"
                 var plugins = settings.defaultRenderPlugins
                 settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
-                console.log(plugins)
                 plugins.push( "opendesktop" )
 
                 settings.activeRenderPlugins =  plugins
