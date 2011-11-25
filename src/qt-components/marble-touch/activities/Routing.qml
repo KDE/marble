@@ -42,6 +42,17 @@ Page {
                     pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
                 }
             }
+            MenuItem {
+                text: "Save Route"
+                onClicked: {
+                    saveRouteDialog.filename = "route-" + Qt.formatDateTime(new Date(), "yyyy-MM-dd_hh.mm.ss") + ".kml"
+                    saveRouteDialog.open()
+                }
+            }
+            MenuItem {
+                text: "Open Route"
+                onClicked: openRouteDialog.open()
+            }
             MenuItemSwitch {
                 text: "Online"
                 checked: !settings.workOffline
@@ -247,5 +258,24 @@ Page {
                 color: "white"
             }
         }
+    }
+
+    FileSaveDialog {
+        id: saveRouteDialog
+        anchors.fill: parent
+        folder: "/home/user/MyDocs"
+        filename: ""
+        nameFilters: [ "*.kml" ]
+
+        onAccepted: { marbleWidget.getRouting().saveRoute( folder + "/" + filename ); }
+    }
+
+    FileOpenDialog {
+        id: openRouteDialog
+        anchors.fill: parent
+        folder: "/home/user/MyDocs"
+        nameFilters: [ "*.kml", "*.gpx" ]
+
+        onAccepted: { marbleWidget.getRouting().openRoute( folder + "/" + filename ); }
     }
 }

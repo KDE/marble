@@ -55,6 +55,10 @@ public Q_SLOTS:
 
     void updateRoute();
 
+    void openRoute( const QString &filename );
+
+    void saveRoute( const QString &filename );
+
     QObject* waypointModel();
 
     QObject* routeRequestModel();

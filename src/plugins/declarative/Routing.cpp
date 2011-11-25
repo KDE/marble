@@ -163,6 +163,25 @@ void Routing::updateRoute()
     }
 }
 
+void Routing::openRoute( const QString &fileName )
+{
+    if ( d->m_marbleWidget ) {
+        /** @todo FIXME: replace the file:// prefix on QML side */
+        d->m_marbleWidget->model()->routingManager()->clearRoute();
+        QString target = fileName.startsWith( "file://" ) ? fileName.mid( 7 ) : fileName;
+        d->m_marbleWidget->model()->routingManager()->loadRoute( target );
+    }
+}
+
+void Routing::saveRoute( const QString &fileName )
+{
+    if ( d->m_marbleWidget ) {
+        /** @todo FIXME: replace the file:// prefix on QML side */
+        QString target = fileName.startsWith( "file://" ) ? fileName.mid( 7 ) : fileName;
+        d->m_marbleWidget->model()->routingManager()->saveRoute( target );
+    }
+}
+
 }
 }
 
