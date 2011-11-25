@@ -59,4 +59,20 @@ PageStackWindow {
     function getSearch() {
         return mainWidget.getSearch()
     }
+
+    function resetLastActivity() {
+        if ( marbleWidget !== null && pageStack.depth < 2 ) {
+            settings.lastActivity = ""
+        }
+    }
+
+    Component.onCompleted: {
+        if ( settings.lastActivity === "" ) {
+            activitySelection.initializeDelayed()
+        } else {
+            activitySelection.openActivity( settings.lastActivity )
+        }
+    }
+
+    Connections { target: pageStack; onDepthChanged: resetLastActivity() }
 }

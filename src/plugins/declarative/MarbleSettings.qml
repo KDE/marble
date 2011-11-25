@@ -36,6 +36,7 @@ Item {
     property variant defaultRenderPlugins: ["compass", "coordinate-grid", "progress",
         "crosshairs", "stars", "scalebar"]
     property variant activeRenderPlugins: settings.value( "MarbleWidget", "activeRenderPlugins", defaultRenderPlugins )
+    property string lastActivity: settings.value( "MarbleTouch", "lastActivity", "" )
     
     // Save settings to file.
     Component.onDestruction: {
@@ -51,6 +52,7 @@ Item {
         settings.setValue( "MarbleWidget", "showTrack", root.showTrack )
         settings.setValue( "MarbleWidget", "projection", root.projection )
         settings.setValue( "MarbleWidget", "activeRenderPlugins", root.activeRenderPlugins )
+        settings.setValue( "MarbleTouch", "lastActivity", root.lastActivity )
     }
 
     function removeElementsFromArray(array, elements) {
