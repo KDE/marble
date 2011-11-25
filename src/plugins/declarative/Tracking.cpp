@@ -246,6 +246,15 @@ void Tracking::saveTrack( const QString &fileName )
     }
 }
 
+void Tracking::openTrack(const QString &fileName)
+{
+    if ( m_marbleWidget ) {
+        /** @todo FIXME: replace the file:// prefix on QML side */
+        QString target = fileName.startsWith( "file://" ) ? fileName.mid( 7 ) : fileName;
+        m_marbleWidget->model()->addGeoDataFile( target );
+    }
+}
+
 void Tracking::clearTrack()
 {
     if ( m_marbleWidget ) {

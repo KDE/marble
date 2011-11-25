@@ -76,6 +76,8 @@ public:
 public Q_SLOTS:
     void saveTrack( const QString &fileName );
 
+    void openTrack( const QString &fileName );
+
     void clearTrack();
 
 Q_SIGNALS:

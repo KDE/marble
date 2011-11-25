@@ -12,6 +12,6 @@ import org.kde.edu.marble.qtcomponents 0.12
 
 FileDialog {
     id: root
-    acceptButtonText: "Save"
-    nameFilters: [ "/" ]
+    acceptButtonText: "Open"
+    filenameEditable: false
 }

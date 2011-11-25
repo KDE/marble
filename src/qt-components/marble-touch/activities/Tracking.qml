@@ -56,6 +56,10 @@ Page {
                     saveTrackDialog.open()
                 }
             }
+            MenuItem {
+                text: "Open Track"
+                onClicked: openTrackDialog.open()
+            }
             MenuItemSwitch {
                 text: "Online"
                 checked: !settings.workOffline
@@ -124,5 +128,14 @@ Page {
         nameFilters: [ "*.kml" ]
 
         onAccepted: { marbleWidget.getTracking().saveTrack( folder + "/" + filename ); }
+    }
+
+    FileOpenDialog {
+        id: openTrackDialog
+        anchors.fill: parent
+        folder: "/home/user/MyDocs"
+        nameFilters: [ "*.kml", "*.gpx" ]
+
+        onAccepted: { marbleWidget.getTracking().openTrack( folder + "/" + filename ); }
     }
 }
