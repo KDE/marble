@@ -1,10 +1,10 @@
 #!/bin/sh
 TAG=$1
 if [ "${TAG}" = "" ]; then
+	TAG=4.7.3
 	echo "Syntax: marble_i18n KDE-tag"
-	echo "E.g.:   marble_i18n 4.5.0"
+	echo "E.g.:   marble_i18n ${TAG}"
 	echo "-------------------------"
-	TAG=4.5.0
 	echo "Assuming ${TAG} as a KDE-tag version for now."
 fi
 
