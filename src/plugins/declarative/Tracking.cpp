@@ -43,7 +43,7 @@ void Tracking::setShowPosition( bool show )
 {
     if ( show != m_showPosition ) {
         if ( m_marbleWidget ) {
-            setShowPositionMarkerPlugin( show );
+            setShowPositionMarkerPlugin( show && !m_positionMarker );
         }
 
         m_showPosition = show;
