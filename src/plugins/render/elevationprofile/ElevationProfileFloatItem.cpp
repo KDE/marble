@@ -27,6 +27,7 @@
 #include "ElevationModel.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "LabelGraphicsItem.h"
+#include "MarbleMath.h"
 
 namespace Marble
 {
@@ -801,7 +802,16 @@ QList<QPointF> ElevationProfileFloatItem::calculateElevationData( const GeoDataL
         if ( ele == 32768 ) { // no data
             ele = 0;
         }
-        result.append( QPointF( path.length( EARTH_RADIUS ), ele ) );
+
+        // result.append( QPointF( path.length( EARTH_RADIUS ), ele ) );
+        // The code below does the same as the line above, but is much faster - O(n) instead of O(n^2)
+        if ( i ) {
+            Q_ASSERT( !result.isEmpty() ); // The else part below appended something in the first run
+            qreal const distance = EARTH_RADIUS * distanceSphere( lineString[i-1], lineString[i] );
+            result.append( QPointF( result.last().x() + distance, ele ) );
+        } else {
+            result.append( QPointF( 0, ele ) );
+        }
     }
 
     return result;
