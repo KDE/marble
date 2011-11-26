@@ -776,5 +776,6 @@ int VectorMap::getDetailLevel( int radius ) const
     else if ( radius >  600 ) detail = 3;
     else if ( radius >   50 ) detail = 4;
 
-    return detail;
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    return smallScreen ? qMin( 5, detail + 1 ) : detail;
 }
