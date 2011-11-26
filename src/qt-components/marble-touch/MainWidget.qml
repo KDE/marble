@@ -162,7 +162,11 @@ Item {
                                 anchors.fill: parent
                                 onClicked: {
                                     routingOptions.visible = false
+                                    settings.gpsTracking = true
+                                    map.routing.clearRoute()
+                                    map.routing.setVia( 0, map.tracking.lastKnownPosition.longitude, map.tracking.lastKnownPosition.latitude )
                                     map.routing.setVia( 1, longitude, latitude )
+                                    openActivity( "Routing" )
                                 }
                             }
                         }

@@ -203,9 +203,11 @@ Page {
                         text: "Route"
                         visible: searchResultItem.detailed
                         onClicked: {
-                            /** @todo: Enable position tracking and set current position as first via point,
-                                switch to driving/cycle/walk activity. Ask user, configure routing accordingly */
+                            settings.gpsTracking = true
+                            marbleWidget.getRouting().clearRoute()
+                            marbleWidget.getRouting().setVia( 0, marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
                             marbleWidget.getRouting().setVia( 1, longitude, latitude )
+                            openActivity( "Routing" )
                         }
                     }
 

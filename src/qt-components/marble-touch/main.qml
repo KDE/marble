@@ -66,6 +66,10 @@ PageStackWindow {
         }
     }
 
+    function openActivity( activity ) {
+        activitySelection.openActivity( activity )
+    }
+
     Component.onCompleted: {
         if ( settings.lastActivity === "" ) {
             activitySelection.initializeDelayed()
