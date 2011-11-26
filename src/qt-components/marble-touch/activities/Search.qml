@@ -176,7 +176,7 @@ Page {
 
                 Label {
                     id: searchResultText
-                    text: "<font size=\"-1\">" + (index+1) + ". " + description + "</font>"
+                    text: "<font size=\"-1\">" + (index+1) + ". " + display + "</font>"
                     width: searchResultItem.width
                     wrapMode: searchResultItem.detailed ? Text.WrapAtWordBoundaryOrAnywhere : Text.NoWrap
                     clip: true

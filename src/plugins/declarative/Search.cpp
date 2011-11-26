@@ -81,18 +81,19 @@ void Search::updateSearchModel( QAbstractItemModel *model )
         return;
     }
 
+    QHash<int,QByteArray> const roles = model->roleNames();
     for ( int i=0; i<m_searchResult->rowCount(); ++i ) {
         QDeclarativeContext *context = new QDeclarativeContext( qmlContext( m_placemarkDelegate ) );
+        QModelIndex const index = m_searchResult->index( i );
+        QHash<int,QByteArray>::const_iterator iter = roles.constBegin();
+        context->setContextProperty( "index", i );
+        for ( ; iter != roles.constEnd(); ++iter ) {
+            context->setContextProperty( iter.value(), m_searchResult->data( index, iter.key() ) );
+        }
         QObject* component = m_placemarkDelegate->create( context );
         QGraphicsItem* graphicsItem = qobject_cast<QGraphicsItem*>( component );
         QDeclarativeItem* item = qobject_cast<QDeclarativeItem*>( component );
         if ( graphicsItem && item ) {
-            QVariant position = m_searchResult->data( m_searchResult->index( i ), MarblePlacemarkModel::CoordinateRole );
-            GeoDataCoordinates const coordinates = qVariantValue<GeoDataCoordinates>( position );
-            context->setContextProperty( "longitude", QVariant( coordinates.longitude( GeoDataCoordinates::Degree ) ) );
-            context->setContextProperty( "latitude", QVariant( coordinates.latitude( GeoDataCoordinates::Degree ) ) );
-            context->setContextProperty( "hit", QVariant( QString::number( i+1 ) ) );
-            context->setContextProperty( "name", m_searchResult->data( m_searchResult->index( i ), Qt::DisplayRole ) );
             graphicsItem->setParentItem( m_delegateParent );
             m_placemarks[i] = item;
         } else {

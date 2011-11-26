@@ -86,7 +86,7 @@ Item {
                 smooth: true
 
                 Text {
-                    text: hit
+                    text: (index+1)
                     width: 32
                     height: 32
                     anchors.top: parent.top
@@ -110,7 +110,7 @@ Item {
                     // Name of the search result.
                     Label {
                         id: nameLabel
-                        text: name
+                        text: display
                         width: 340
                         anchors.top: parent.top
                         anchors.left: parent.left
