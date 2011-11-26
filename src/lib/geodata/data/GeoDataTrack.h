@@ -129,6 +129,9 @@ public:
      */
     void appendCoordinates( const GeoDataCoordinates &coord );
 
+    /**
+     * Add altitude information to the last appended coordinates
+     */
     void appendAltitude( qreal altitude );
 
     /**

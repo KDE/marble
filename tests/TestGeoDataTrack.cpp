@@ -231,7 +231,7 @@ void TestGeoDataTrack::extendedDataParseTest()
 
 void TestGeoDataTrack::withoutTimeTest()
 {
-    //"Simple Example" from kmlreference; when elements removed
+    //"Simple Example" from kmlreference; when elements emptied
     QString content(
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
 "<kml xmlns=\"http://www.opengis.net/kml/2.2\""
@@ -239,6 +239,13 @@ void TestGeoDataTrack::withoutTimeTest()
 "<Folder>"
 "  <Placemark>"
 "    <gx:Track>"
+"      <when></when>"
+"      <when></when>"
+"      <when></when>"
+"      <when></when>"
+"      <when></when>"
+"      <when></when>"
+"      <when></when>"
 "      <gx:coord>-122.207881 37.371915 156.000000</gx:coord>"
 "      <gx:coord>-122.205712 37.373288 152.000000</gx:coord>"
 "      <gx:coord>-122.204678 37.373939 147.000000</gx:coord>"

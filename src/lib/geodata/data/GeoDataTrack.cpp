@@ -36,10 +36,9 @@ public:
     GeoDataLineString *m_lineString;
     bool m_lineStringNeedsUpdate;
 
-    QMap<QDateTime, GeoDataCoordinates> m_pointMap;
+    QList<QDateTime> m_when;
+    QList<GeoDataCoordinates> m_coordinates;
 
-    QLinkedList<QDateTime> m_whenStack;
-    QList<GeoDataCoordinates> m_coordStack;
     GeoDataExtendedData m_extendedData;
 
     bool m_interpolate;
@@ -59,7 +58,7 @@ GeoDataTrack::GeoDataTrack( const GeoDataGeometry &other )
 
 int GeoDataTrack::size() const
 {
-    return d->m_pointMap.size() + d->m_coordStack.size();
+    return d->m_coordinates.size();
 }
 
 bool GeoDataTrack::interpolate() const
@@ -74,42 +73,61 @@ void GeoDataTrack::setInterpolate(bool on)
 
 QDateTime GeoDataTrack::firstWhen() const
 {
-    if ( d->m_pointMap.isEmpty() ) {
+    if ( d->m_when.isEmpty() ) {
         return QDateTime();
     }
 
-    return d->m_pointMap.constBegin().key();
+    return d->m_when.first();
 }
 
 QDateTime GeoDataTrack::lastWhen() const
 {
-    if ( d->m_pointMap.isEmpty() ) {
+    if ( d->m_when.isEmpty() ) {
         return QDateTime();
     }
 
-    return ( d->m_pointMap.constEnd() - 1).key();
+    return d->m_when.last();
 }
 
 QList<GeoDataCoordinates> GeoDataTrack::coordinatesList() const
 {
-    return d->m_pointMap.values() + d->m_coordStack;
+    return d->m_coordinates;
 }
 
 QList<QDateTime> GeoDataTrack::whenList() const
 {
-    return d->m_pointMap.keys();
+    return d->m_when;
 }
 
 GeoDataCoordinates GeoDataTrack::coordinatesAt( const QDateTime &when ) const
 {
-    if ( d->m_pointMap.isEmpty() ) {
+    if ( d->m_when.isEmpty() ) {
         return GeoDataCoordinates();
     }
 
-    QMap<QDateTime, GeoDataCoordinates>::const_iterator nextEntry = d->m_pointMap.upperBound( when );
+    if ( d->m_when.contains( when ) ) {
+        //exact match found
+        int index = d->m_when.indexOf( when );
+        if ( index < d->m_coordinates.size() ) {
+            return d->m_coordinates.at( index );
+        }
+    }
+
+    if ( !interpolate() ) {
+        return GeoDataCoordinates();
+    }
+
+    QMap<QDateTime, GeoDataCoordinates> pointMap;
+    for ( int i = 0; i < qMin( d->m_when.size(), d->m_coordinates.size() ); ++i) {
+        if ( d->m_when.at( i ).isValid() ) {
+            pointMap[ d->m_when.at( i ) ] = d->m_coordinates.at( i );
+        }
+    }
+
+    QMap<QDateTime, GeoDataCoordinates>::const_iterator nextEntry = pointMap.upperBound( when );
 
     // No tracked point happened before "when"
-    if ( nextEntry == d->m_pointMap.constBegin() ) {
+    if ( nextEntry == pointMap.constBegin() ) {
         mDebug() << "No tracked point before " << when;
         return GeoDataCoordinates();
     }
@@ -117,110 +135,99 @@ GeoDataCoordinates GeoDataTrack::coordinatesAt( const QDateTime &when ) const
     QMap<QDateTime, GeoDataCoordinates>::const_iterator previousEntry = nextEntry - 1;
     GeoDataCoordinates previousCoord = previousEntry.value();
 
-    GeoDataCoordinates coord;
-
-    if ( nextEntry != d->m_pointMap.constEnd() && interpolate() ) {
-        QDateTime previousWhen = previousEntry.key();
-        QDateTime nextWhen = nextEntry.key();
-        GeoDataCoordinates nextCoord = nextEntry.value();
+    QDateTime previousWhen = previousEntry.key();
+    QDateTime nextWhen = nextEntry.key();
+    GeoDataCoordinates nextCoord = nextEntry.value();
 
 #if QT_VERSION < 0x040700	
-        int interval = 1000 * previousWhen.secsTo( nextWhen );
-        int position = 1000 * previousWhen.secsTo( when );
+    int interval = 1000 * previousWhen.secsTo( nextWhen );
+    int position = 1000 * previousWhen.secsTo( when );
 #else	
-        int interval = previousWhen.msecsTo( nextWhen );
-        int position = previousWhen.msecsTo( when );
+    int interval = previousWhen.msecsTo( nextWhen );
+    int position = previousWhen.msecsTo( when );
 #endif	
-        qreal t = (qreal)position / (qreal)interval;
+    qreal t = (qreal)position / (qreal)interval;
 
-        Quaternion interpolated;
-        interpolated.slerp( previousCoord.quaternion(), nextCoord.quaternion(), t );
-        qreal lon, lat;
-        interpolated.getSpherical( lon, lat );
+    Quaternion interpolated;
+    interpolated.slerp( previousCoord.quaternion(), nextCoord.quaternion(), t );
+    qreal lon, lat;
+    interpolated.getSpherical( lon, lat );
 
-        qreal alt = previousCoord.altitude() + ( nextCoord.altitude() - previousCoord.altitude() ) * t;
+    qreal alt = previousCoord.altitude() + ( nextCoord.altitude() - previousCoord.altitude() ) * t;
 
-        coord = GeoDataCoordinates( lon, lat, alt );
-    } else {
-        coord = previousCoord;
-    }
-
-    return coord;
+    return GeoDataCoordinates( lon, lat, alt );
 }
 
 GeoDataCoordinates GeoDataTrack::coordinatesAt( int index ) const
 {
-    if ( index < d->m_pointMap.count() ) {
-        return d->m_pointMap.values().at( index );
-    } else {
-        return d->m_coordStack.at( index - d->m_pointMap.count() );
-    }
+    return d->m_coordinates.at( index );
 }
 
 void GeoDataTrack::addPoint( const QDateTime &when, const GeoDataCoordinates &coord )
 {
     d->m_lineStringNeedsUpdate = true;
-    d->m_pointMap.insert( when, coord );
+    while ( d->m_when.size() < d->m_coordinates.size() ) {
+        //fill coordinates without time information with null QDateTime
+        d->m_when.append( QDateTime() );
+    }
+    while ( d->m_when.size() > d->m_coordinates.size() ) {
+        //discard time finromation without coordinates
+        Q_ASSERT( false ); //this should not happen
+        d->m_when.removeLast();
+    }
+    d->m_when.append( when );
+    d->m_coordinates.append( coord );
 }
 
 void GeoDataTrack::appendCoordinates( const GeoDataCoordinates &coord )
 {
-    if ( !d->m_whenStack.isEmpty() ) {
-        d->m_pointMap.insert( d->m_whenStack.takeFirst(), coord );
-    } else {
-        d->m_coordStack.append( coord );
-    }
     d->m_lineStringNeedsUpdate = true;
+    d->m_coordinates.append( coord );
 }
 
 void GeoDataTrack::appendAltitude( qreal altitude )
 {
-    if ( d->m_coordStack.isEmpty() ) {
-        Q_ASSERT(0);
-    } else {
-        GeoDataCoordinates coordinates = d->m_coordStack.last();
-        coordinates.setAltitude( altitude );
-        d->m_coordStack.removeLast();
-        d->m_coordStack.append( coordinates );
-    }
     d->m_lineStringNeedsUpdate = true;
+    Q_ASSERT( !d->m_coordinates.isEmpty() );
+    if ( d->m_coordinates.isEmpty() ) return;
+    GeoDataCoordinates coordinates = d->m_coordinates.takeLast();
+    coordinates.setAltitude( altitude );
+    d->m_coordinates.append( coordinates );
 }
 
 void GeoDataTrack::appendWhen( const QDateTime &when )
 {
-    if ( !d->m_coordStack.isEmpty() ) {
-        d->m_pointMap.insert( when, d->m_coordStack.takeFirst() );
-        d->m_lineStringNeedsUpdate = true;
-    } else {
-        d->m_whenStack.append( when );
-    }
+    d->m_when.append( when );
 }
 
 void GeoDataTrack::clear()
 {
-    d->m_pointMap.clear();
-    d->m_coordStack.clear();
-    d->m_whenStack.clear();
+    d->m_when.clear();
+    d->m_coordinates.clear();
     d->m_lineStringNeedsUpdate = true;
 }
 
 void GeoDataTrack::removeBefore( const QDateTime &when )
 {
-    QMap<QDateTime, GeoDataCoordinates>::iterator end = d->m_pointMap.end();
-    QMap<QDateTime, GeoDataCoordinates>::iterator it = d->m_pointMap.begin();
-
-    while ( it != end && it.key() < when ) {
-        it = d->m_pointMap.erase( it );
+    for ( int i = 0; i < qMin( d->m_when.size(), d->m_coordinates.size() ); ++i ) {
+        if ( d->m_when.at( i ) < when ) {
+            d->m_when.removeAt( i );
+            if ( i < d->m_coordinates.size() ) {
+                d->m_coordinates.removeAt( i );
+            }
+        }
     }
 }
 
 void GeoDataTrack::removeAfter( const QDateTime &when )
 {
-    QMap<QDateTime, GeoDataCoordinates>::iterator end = d->m_pointMap.end();
-    QMap<QDateTime, GeoDataCoordinates>::iterator it = d->m_pointMap.upperBound( when );
-
-    while ( it != end ) {
-        it = d->m_pointMap.erase( it );
+    for ( int i = 0; i < d->m_when.size(); ++i ) {
+        if ( d->m_when.at( i ) > when ) {
+            d->m_when.removeAt( i );
+            if ( i < d->m_coordinates.size() ) {
+                d->m_coordinates.removeAt( i );
+            }
+        }
     }
 }
 
