@@ -804,7 +804,7 @@ QList<QPointF> ElevationProfileFloatItem::calculateElevationData( const GeoDataL
         }
 
         // result.append( QPointF( path.length( EARTH_RADIUS ), ele ) );
-        // The code below does the same as the line above, but is much faster - O(n) instead of O(n^2)
+        // The code below does the same as the line above, but is much faster - O(1) instead of O(n)
         if ( i ) {
             Q_ASSERT( !result.isEmpty() ); // The else part below appended something in the first run
             qreal const distance = EARTH_RADIUS * distanceSphere( lineString[i-1], lineString[i] );
