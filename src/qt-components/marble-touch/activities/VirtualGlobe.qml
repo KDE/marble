@@ -64,7 +64,7 @@ Page {
             width: parent.width
             height: parent.height - searchField.height
 
-            Component.onCompleted: {
+            function embedMarbleWidget() {
                 marbleWidget.parent = mapContainer
                 settings.projection = "Spherical"
                 settings.activeRenderPlugins = settings.defaultRenderPlugins
@@ -76,9 +76,17 @@ Page {
             }
 
             Component.onDestruction: {
-                marbleWidget.parent = null
-                marbleWidget.visible = false
+                if ( marbleWidget.parent === mapContainer ) {
+                    marbleWidget.parent = null
+                    marbleWidget.visible = false
+                }
             }
+        }
+    }
+
+    onStatusChanged: {
+        if ( status === PageStatus.Activating ) {
+            mapContainer.embedMarbleWidget()
         }
     }
 }

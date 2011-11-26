@@ -181,7 +181,7 @@ Page {
         width: parent.width
         height: parent.height
 
-        Component.onCompleted: {
+        function embedMarbleWidget() {
             marbleWidget.parent = mapContainer
             settings.projection = "Mercator"
             var plugins = settings.defaultRenderPlugins
@@ -195,8 +195,10 @@ Page {
         }
 
         Component.onDestruction: {
-            marbleWidget.parent = null
-            marbleWidget.visible = false
+            if ( marbleWidget.parent === mapContainer ) {
+                marbleWidget.parent = null
+                marbleWidget.visible = false
+            }
         }
     }
 
@@ -277,5 +279,11 @@ Page {
         nameFilters: [ "*.kml", "*.gpx" ]
 
         onAccepted: { marbleWidget.getRouting().openRoute( folder + "/" + filename ); }
+    }
+
+    onStatusChanged: {
+        if ( status === PageStatus.Activating ) {
+            mapContainer.embedMarbleWidget()
+        }
     }
 }

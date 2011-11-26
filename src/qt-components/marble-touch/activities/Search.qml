@@ -119,7 +119,7 @@ Page {
         width: parent.width
         height: parent.height - searchField.height
 
-        Component.onCompleted: {
+        function embedMarbleWidget() {
             marbleWidget.parent = mapContainer
             settings.projection = "Mercator"
             var plugins = settings.defaultRenderPlugins
@@ -133,8 +133,10 @@ Page {
         }
 
         Component.onDestruction: {
-            marbleWidget.parent = null
-            marbleWidget.visible = false
+            if ( marbleWidget.parent === mapContainer ) {
+                marbleWidget.parent = null
+                marbleWidget.visible = false
+            }
         }
     }
 
@@ -213,6 +215,12 @@ Page {
                     }
                 }
             }
+        }
+    }
+
+    onStatusChanged: {
+        if ( status === PageStatus.Activating ) {
+            mapContainer.embedMarbleWidget()
         }
     }
 }

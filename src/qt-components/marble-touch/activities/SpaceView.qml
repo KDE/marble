@@ -89,7 +89,7 @@ Page {
         id: mapContainer
         anchors.fill: parent
 
-        Component.onCompleted: {
+        function embedMarbleWidget() {
             marbleWidget.parent = mapContainer
             settings.projection = "Spherical"
             var plugins = settings.defaultRenderPlugins
@@ -103,8 +103,16 @@ Page {
         }
 
         Component.onDestruction: {
-            marbleWidget.parent = null
-            marbleWidget.visible = false
+            if ( marbleWidget.parent === mapContainer ) {
+                marbleWidget.parent = null
+                marbleWidget.visible = false
+            }
+        }
+    }
+
+    onStatusChanged: {
+        if ( status === PageStatus.Activating ) {
+            mapContainer.embedMarbleWidget()
         }
     }
 }
