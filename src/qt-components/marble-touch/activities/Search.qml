@@ -90,11 +90,13 @@ Page {
             anchors.margins: 10
 
             text: "<p>Example search terms<ul><li>London</li><li>Baker Street, London</li><li>Baker Street 221b, London</li><li>Restaurant, London</li></ul></p>"
-            visible: searchResultView.searchTerm === ""
+            visible: searchResultView.searchTerm === "" && searchResultListView.count === 0
         }
 
         ListView {
             id: searchResultListView
+            property int count: model === undefined ? 0 : model.count
+
             anchors.top: searchField.bottom
             anchors.left: parent.left
             anchors.right: parent.right
