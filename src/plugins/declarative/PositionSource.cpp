@@ -97,6 +97,7 @@ void PositionSource::start()
     foreach( const PositionProviderPlugin *plugin, plugins ) {
         if ( m_source.isEmpty() || plugin->nameId() == m_source ) {
             PositionProviderPlugin* instance = plugin->newInstance();
+            instance->setMarbleModel( m_marbleWidget->model() );
             PositionTracking *tracking = m_marbleWidget->model()->positionTracking();
             tracking->setPositionProviderPlugin( instance );
             break;
