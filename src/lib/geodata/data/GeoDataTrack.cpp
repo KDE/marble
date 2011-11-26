@@ -33,6 +33,19 @@ public:
     {
     }
 
+    void equalizeWhenSize()
+    {
+        while ( m_when.size() < m_coordinates.size() ) {
+            //fill coordinates without time information with null QDateTime
+            m_when.append( QDateTime() );
+        }
+        while ( m_when.size() > m_coordinates.size() ) {
+            //discard time finromation without coordinates
+            Q_ASSERT( false ); //this should not happen
+            m_when.removeLast();
+        }
+    }
+
     GeoDataLineString *m_lineString;
     bool m_lineStringNeedsUpdate;
 
@@ -165,22 +178,15 @@ GeoDataCoordinates GeoDataTrack::coordinatesAt( int index ) const
 
 void GeoDataTrack::addPoint( const QDateTime &when, const GeoDataCoordinates &coord )
 {
+    d->equalizeWhenSize();
     d->m_lineStringNeedsUpdate = true;
-    while ( d->m_when.size() < d->m_coordinates.size() ) {
-        //fill coordinates without time information with null QDateTime
-        d->m_when.append( QDateTime() );
-    }
-    while ( d->m_when.size() > d->m_coordinates.size() ) {
-        //discard time finromation without coordinates
-        Q_ASSERT( false ); //this should not happen
-        d->m_when.removeLast();
-    }
     d->m_when.append( when );
     d->m_coordinates.append( coord );
 }
 
 void GeoDataTrack::appendCoordinates( const GeoDataCoordinates &coord )
 {
+    d->equalizeWhenSize();
     d->m_lineStringNeedsUpdate = true;
     d->m_coordinates.append( coord );
 }

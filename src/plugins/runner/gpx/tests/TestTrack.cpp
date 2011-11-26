@@ -33,6 +33,7 @@ private slots:
     void initTestCase();
     void simpleParseTest();
     void withoutTimeTest();
+    void partialTimeTest();
     void extendedDataHeartRateTest();
 
 };
@@ -190,6 +191,100 @@ void TestTrack::withoutTimeTest()
     delete document;
 }
 
+void TestTrack::partialTimeTest()
+{
+    //example track recorded using a Garmin Vista HCx and downloaded using gpsbabel
+    //one time information removed
+    QString content(
+"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+"<gpx"
+"  version=\"1.0\""
+"  creator=\"GPSBabel - http://www.gpsbabel.org\""
+"  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+"  xmlns=\"http://www.topografix.com/GPX/1/0\""
+"  xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">"
+"<time>2011-07-03T14:19:57Z</time>"
+"<bounds minlat=\"47.231073193\" minlon=\"12.549449634\" maxlat=\"48.502999926\" maxlon=\"14.302069964\"/>"
+"<trk>"
+"  <name>test track</name>"
+"<number>1</number>"
+"<trkseg>"
+"<trkpt lat=\"47.231477033\" lon=\"12.560534449\">"
+"  <ele>1130.647705</ele>"
+"  <time>2011-06-24T10:33:40Z</time>"
+"</trkpt>"
+"<trkpt lat=\"47.231486840\" lon=\"12.560604354\">"
+"  <ele>1127.763672</ele>"
+"</trkpt>"
+"<trkpt lat=\"47.231497569\" lon=\"12.560612401\">"
+"  <ele>1121.995850</ele>"
+"  <time>2011-06-24T10:34:00Z</time>"
+"</trkpt>"
+"</trkseg>"
+"</trk>"
+"</gpx>"
+);
+
+    GpxParser parser;
+
+    QByteArray array( content.toUtf8() );
+    QBuffer buffer( &array );
+    buffer.open( QIODevice::ReadOnly );
+    qDebug() << "Buffer content:" << endl << buffer.buffer();
+    if ( !parser.read( &buffer ) ) {
+        QFAIL( "Could not parse data!" );
+        return;
+    }
+    GeoDocument* document = parser.releaseDocument();
+    QVERIFY( document );
+    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
+    GeoDataPlacemark* placemark = dataDocument->placemarkList().at( 0 );
+    QCOMPARE( placemark->geometry()->geometryId(), GeoDataMultiGeometryId );
+    GeoDataMultiGeometry* multiGeo = static_cast<GeoDataMultiGeometry*>( placemark->geometry() );
+    GeoDataTrack* track = static_cast<GeoDataTrack*>( &multiGeo->at( 0 ) );
+    QCOMPARE( track->whenList().size(), 3 );
+    {
+        QDateTime when = track->whenList().at( 0 );
+        QCOMPARE( when, QDateTime( QDate( 2011, 6, 24 ), QTime( 10, 33, 40 ), Qt::UTC ) );
+    }
+    {
+        QDateTime when = track->whenList().at( 1 );
+        QCOMPARE( when, QDateTime() );
+    }
+    {
+        QDateTime when = track->whenList().at( 2 );
+        QCOMPARE( when, QDateTime( QDate( 2011, 6, 24 ), QTime( 10, 34, 00 ), Qt::UTC ) );
+    }
+    QCOMPARE( track->size(), 3 );
+    {
+        GeoDataCoordinates coord = track->coordinatesAt( 0 );
+        QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), 12.560534449 );
+        QCOMPARE( coord.latitude( GeoDataCoordinates::Degree ), 47.231477033 );
+        QCOMPARE( coord.altitude(), 1130.647705 );
+    }
+    {
+        GeoDataCoordinates coord = track->coordinatesAt( QDateTime( QDate( 2011, 6, 24 ), QTime( 10, 33, 40 ), Qt::UTC ) );
+        QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), 12.560534449 );
+        QCOMPARE( coord.latitude( GeoDataCoordinates::Degree ), 47.231477033 );
+        QCOMPARE( coord.altitude(), 1130.647705 );
+    }
+    {
+        GeoDataCoordinates coord = track->coordinatesAt( QDateTime( QDate( 2011, 6, 24 ), QTime( 10, 34, 00 ), Qt::UTC ) );
+        QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), 12.560612401 );
+        QCOMPARE( coord.latitude( GeoDataCoordinates::Degree ), 47.231497569 );
+        QCOMPARE( coord.altitude(), 1121.995850 );
+    }
+    {
+        GeoDataLineString* lineString = track->lineString();
+        QCOMPARE( lineString->size(), 3 );
+        GeoDataCoordinates coord = lineString->at( 0 );
+        QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), 12.560534449 );
+        QCOMPARE( coord.latitude( GeoDataCoordinates::Degree ), 47.231477033 );
+        QCOMPARE( coord.altitude(), 1130.647705 );
+    }
+
+    delete document;
+}
 
 void TestTrack::extendedDataHeartRateTest()
 {
