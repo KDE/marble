@@ -102,24 +102,27 @@ Item {
                     id: routingOptions
                     visible: false
                     color: "white"
-                    width: 350
+                    width: 250
                     height: nameLabel.height + routingButtons.height + 30
                     border.width: 1
-                    border.color: "blue"
+                    border.color: "gray"
                     radius: 10
                     // Name of the search result.
                     Label {
                         id: nameLabel
                         text: display
-                        width: 340
                         anchors.top: parent.top
                         anchors.left: parent.left
-                        anchors.topMargin: 10
-                        anchors.leftMargin: 10
-                        anchors.rightMargin: 10
-                        platformStyle: LabelStyle { fontPixelSize: 20 }
+                        anchors.right: parent.right
+                        anchors.margins: 10
+                        platformStyle: LabelStyle { fontPixelSize: 18 }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: routingOptions.visible = false
+                        }
                     }
-                    // Buttons "Directions from here" and "Directions to here" for routing.
+                    // Route button
                     Column {
                         id: routingButtons
                         anchors.bottom: parent.bottom
@@ -131,32 +134,12 @@ Item {
                             width: 230
                             height: 35
                             border.width: 1
-                            border.color: "blue"
+                            border.color: "gray"
                             radius: 10
                             Label {
-                                text: "Directions from here"
+                                text: "Route"
                                 anchors.centerIn: parent
-                                platformStyle: LabelStyle { fontPixelSize: 20 }
-                            }
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: {
-                                    routingOptions.visible = false
-                                    map.routing.setVia( 0, longitude, latitude )
-                                }
-                            }
-                        }
-                        Rectangle {
-                            color: "white"
-                            width: 230
-                            height: 35
-                            border.width: 1
-                            border.color: "blue"
-                            radius: 10
-                            Label {
-                                text: "Directions to here"
-                                anchors.centerIn: parent
-                                platformStyle: LabelStyle { fontPixelSize: 20 }
+                                platformStyle: LabelStyle { fontPixelSize: 18 }
                             }
                             MouseArea {
                                 anchors.fill: parent
@@ -168,23 +151,6 @@ Item {
                                     map.routing.setVia( 1, longitude, latitude )
                                     openActivity( "Routing" )
                                 }
-                            }
-                        }
-                    }
-                    // Small cross that closes the search result info if its clicked.
-                    Image {
-                        id: closeImage
-                        width: 30
-                        fillMode: Image.PreserveAspectFit
-                        smooth: true
-                        source: "image://theme/icon-m-toolbar-close"
-                        anchors.top: parent.top
-                        anchors.right: parent.right
-                        anchors.margins: 5
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: {
-                                routingOptions.visible = false
                             }
                         }
                     }
