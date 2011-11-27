@@ -74,6 +74,7 @@ Page {
                         settings.removeElementsFromArray(plugins, ["elevationprofile"])
                     }
                     settings.activeRenderPlugins = plugins
+                    marbleWidget.setGeoSceneProperty( "hillshading", checked )
                 }
             }
         }
