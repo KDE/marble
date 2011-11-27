@@ -50,10 +50,9 @@ MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
       m_showRatioScale( false ),
       m_contextMenu( 0 )
 {
-    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-    if ( smallScreen ) {
+#ifdef Q_WS_MAEMO_5
         setPosition( QPointF( 220.0, 10.5 ) );
-    }
+#endif // Q_WS_MAEMO_5
 }
 
 MapScaleFloatItem::~MapScaleFloatItem()
