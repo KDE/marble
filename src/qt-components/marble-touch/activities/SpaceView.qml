@@ -28,12 +28,7 @@ Page {
             Button {
                 id: earthButton
                 text: "Earth"
-                onCheckedChanged: {
-                    if ( checked ) {
-                        settings.mapTheme = "earth/bluemarble/bluemarble.dgml"
-                        marbleWidget.setGeoSceneProperty( "clouds_data", cloudsSwitch.checked )
-                    }
-                }
+                onCheckedChanged: { if ( checked ) spaceViewActivityPage.setEarthSettings() }
             }
             Button {
                 text: "Moon"
@@ -60,26 +55,35 @@ Page {
         id: pageMenu
         content: MenuLayout {
             MenuItemSwitch {
+                id: satellitesSwitch
                 text: "Satellites"
                 checked: false
-                onCheckedChanged: {
-                    var plugins = settings.activeRenderPlugins
-                    if ( checked ) {
-                        plugins.push( "satellites" )
-                        settings.activeRenderPlugins = plugins
-                    } else {
-                        settings.removeElementsFromArray( plugins, ["satellites"] )
-                        settings.activeRenderPlugins = plugins
-                    }
-                }
+                onCheckedChanged: spaceViewActivityPage.setEarthSettings()
             }
 
             MenuItemSwitch {
                 id: cloudsSwitch
                 text: "Clouds"
                 checked: false
-                onCheckedChanged: {
-                    marbleWidget.setGeoSceneProperty( "clouds_data", checked )
+                onCheckedChanged: spaceViewActivityPage.setEarthSettings()
+            }
+
+            MenuItem {
+                id: dayNightMode
+                text: "Day/Night"
+                onClicked: dayNightInput.open()
+
+                SelectionDialog {
+                    id: dayNightInput
+                    titleText: "Select sun light view"
+                    selectedIndex: 0
+                    model: ListModel {
+                        ListElement { name: "Day" }
+                        ListElement { name: "Night" }
+                        ListElement { name: "Realistic" }
+                    }
+
+                    onAccepted: spaceViewActivityPage.setEarthSettings()
                 }
             }
         }
@@ -92,10 +96,8 @@ Page {
         function embedMarbleWidget() {
             marbleWidget.parent = mapContainer
             settings.projection = "Spherical"
-            var plugins = settings.defaultRenderPlugins
-            //plugins.push( "satellites" )
-            settings.activeRenderPlugins =  plugins
-            settings.mapTheme = "earth/bluemarble/bluemarble.dgml"
+            settings.activeRenderPlugins =  settings.defaultRenderPlugins
+            spaceViewActivityPage.setEarthSettings()
             settings.gpsTracking = false
             settings.showPosition = false
             settings.showTrack = false
@@ -114,5 +116,29 @@ Page {
         if ( status === PageStatus.Activating ) {
             mapContainer.embedMarbleWidget()
         }
+    }
+
+    function setEarthSettings() {
+        if (dayNightInput === null || dayNightInput.selectedIndex === 0) {
+            settings.mapTheme = "earth/bluemarble/bluemarble.dgml"
+            marbleWidget.setGeoSceneProperty( "citylights", false )
+            marbleWidget.setGeoSceneProperty( "clouds_data", cloudsSwitch === null || cloudsSwitch.checked )
+        } else if (dayNightInput.selectedIndex === 1) {
+            settings.mapTheme = "earth/citylights/citylights.dgml"
+            marbleWidget.setGeoSceneProperty( "citylights", false )
+            marbleWidget.setGeoSceneProperty( "clouds_data", cloudsSwitch.checked )
+        } else {
+            settings.mapTheme = "earth/bluemarble/bluemarble.dgml"
+            marbleWidget.setGeoSceneProperty( "citylights", true )
+            marbleWidget.setGeoSceneProperty( "clouds_data", cloudsSwitch.checked )
+        }
+
+        var plugins = settings.activeRenderPlugins
+        if ( satellitesSwitch.checked ) {
+            plugins.push( "satellites" )
+        } else {
+            settings.removeElementsFromArray( plugins, ["satellites"] )
+        }
+        settings.activeRenderPlugins = plugins
     }
 }
