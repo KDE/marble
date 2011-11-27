@@ -118,12 +118,23 @@ void FileManager::appendLoader( FileLoader *loader )
 
 void FileManager::removeFile( const QString& key )
 {
+    foreach ( FileLoader *loader, d->m_loaderList ) {
+        if ( loader->path() == key ) {
+            disconnect( loader, 0, this, 0 );
+            loader->wait();
+            d->m_loaderList.removeAll( loader );
+            delete loader->document();
+            return;
+        }
+    }
+
     for ( int i = 0; i < d->m_fileItemList.size(); ++i ) {
         if ( key == d->m_fileItemList.at(i)->fileName() ) {
             closeFile( i );
             return;
         }
     }
+
     mDebug() << "could not identify " << key;
 }
 
