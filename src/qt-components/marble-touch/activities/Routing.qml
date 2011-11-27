@@ -25,7 +25,12 @@ Page {
         }
         ToolIcon {
             iconId: "toolbar-home"
-            onClicked: marbleWidget.centerOn( marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
+            onClicked: {
+                marbleWidget.centerOn( marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
+                if (marbleWidget.zoom < 2000 ) {
+                    marbleWidget.zoom = 2773
+                }
+            }
         }
         ToolIcon {
             iconId: "toolbar-view-menu"

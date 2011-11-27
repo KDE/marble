@@ -24,6 +24,15 @@ Page {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
+        ToolIcon {
+            iconId: "toolbar-home"
+            onClicked: {
+                marbleWidget.centerOn( marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
+                if (marbleWidget.zoom < 1200 ) {
+                    marbleWidget.zoom = 2000
+                }
+            }
+        }
         ToolButton {
             id: searchButton
             checkable: true
