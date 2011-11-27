@@ -237,15 +237,16 @@ Page {
                 id: row
                 width: parent.width
                 Image {
-                    width: 32; height: 32
+                    id: turnIcon
+                    width: 64; height: 64
                     source: "qrc" + turnTypeIcon
                 }
 
                 Label {
                     anchors.verticalCenter: parent.verticalCenter
-                    platformStyle: LabelStyle { fontPixelSize: 14 }
+                    platformStyle: LabelStyle { fontPixelSize: 18 }
                     text: display;
-                    width: parent.width - 48
+                    width: parent.width - turnIcon.width - 20
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 
                     MouseArea {
