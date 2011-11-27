@@ -151,6 +151,7 @@ void KineticModel::release()
         update();
     } else {
         d->ticker.stop();
+        emit finished();
     }
 }
 

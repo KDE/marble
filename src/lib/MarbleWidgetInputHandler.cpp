@@ -584,8 +584,6 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 //as requested
                 emit mouseClickScreenPosition( d->m_leftPressedX, d->m_leftPressedY );
 
-                MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
-
                 d->m_leftPressed = false;
                 d->m_kineticModel.release();
             }
@@ -866,7 +864,6 @@ void MarbleWidgetDefaultInputHandler::setNumberOfMeasurePoints( int newNumber )
 
 void MarbleWidgetDefaultInputHandler::adjustCenter()
 {
-    MarbleWidgetInputHandler::d->m_widget->setViewContext( Animation );
     MarbleWidgetInputHandler::d->m_widget->centerOn( d->m_kineticModel.position().x(), d->m_kineticModel.position().y() );
 }
 
