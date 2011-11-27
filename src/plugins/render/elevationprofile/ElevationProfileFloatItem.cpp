@@ -64,8 +64,13 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, cons
     setVisible( false );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
-        setPosition( QPointF( 220.0, 10.5 ) );
+        setPosition( QPointF( 10.5, 10.5 ) );
     }
+    bool const highRes = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::HighResolution;
+    if ( highRes ) {
+        m_eleGraphHeight = 100;
+    }
+
     setPadding(1);
     m_markerIcon = new LabelGraphicsItem( &m_markerIconContainer );
     m_markerIcon->setImage( QImage( ":/flag-red-mirrored.png" ) );
@@ -163,11 +168,14 @@ void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
 {
     if ( !( viewport->width() == m_viewportWidth && m_isInitialized ) ) {
         m_fontHeight     = QFontMetrics( font() ).ascent();
-        setContentSize( QSizeF( viewport->width() / 3, m_eleGraphHeight + m_fontHeight * 2.5 + 3 ) );
-        m_leftGraphMargin = QFontMetrics( font() ).width("0000");
+        bool const highRes = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::HighResolution;
+        int const widthRatio = highRes ? 2 : 3;
+        setContentSize( QSizeF( viewport->width() / widthRatio, m_eleGraphHeight + m_fontHeight * 2.5 + 3 ) );
+        m_leftGraphMargin = QFontMetrics( font() ).width("0000 m");
         m_eleGraphWidth = contentSize().width() - m_leftGraphMargin;
         m_viewportWidth = viewport->width();
-        if ( !m_isInitialized ) {
+        bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+        if ( !m_isInitialized && !smallScreen ) {
             setPosition( QPointF( (viewport->width() - contentSize().width()) / 2 , 10.5 ) );
             connect( this, SIGNAL( dataUpdated() ), SLOT( forceRepaint() ) );
         }
@@ -351,6 +359,11 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         m_eleGraphHeight - ( m_eleData.value(start).y() - valueOffsetY )
         * m_eleGraphHeight / graphElevation
     );
+
+    bool const highRes = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::HighResolution;
+    QPen pen = painter->pen();
+    pen.setWidth( highRes ? 2 : 1 );
+    painter->setPen( pen );
     for ( int i = start; i <= end; ++i ) {
         QPoint newPos (
             m_leftGraphMargin + ( m_eleData.value(i).x() - valueOffsetX )
@@ -363,6 +376,8 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
             oldPos = newPos;
         }
     }
+    pen.setWidth( 1 );
+    painter->setPen( pen );
 
     // draw interactive cursor
     if ( m_mouseInWidget ) {
