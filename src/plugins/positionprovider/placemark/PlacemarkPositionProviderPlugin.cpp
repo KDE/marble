@@ -13,6 +13,7 @@
 #include "GeoDataPlacemark.h"
 #include "MarbleClock.h"
 #include "MarbleModel.h"
+#include "MarbleDebug.h"
 
 #include <QtCore/QTimer>
 
@@ -57,7 +58,11 @@ QIcon PlacemarkPositionProviderPlugin::icon() const
 
 void PlacemarkPositionProviderPlugin::initialize()
 {
-    setPlacemark( marbleModel()->trackedPlacemark() );
+    if ( marbleModel() ) {
+        setPlacemark( marbleModel()->trackedPlacemark() );
+    } else {
+        mDebug() << "PlacemarkPositionProviderPlugin: MarbleModel not set, cannot track placemarks.";
+    }
     m_isInitialized = true;
 }
 
@@ -101,6 +106,7 @@ void PlacemarkPositionProviderPlugin::updatePosition()
         return;
     }
 
+    Q_ASSERT( marbleModel() && "MarbleModel missing in PlacemarkPositionProviderPlugin" );
     emit positionChanged(m_placemark->coordinate( marbleModel()->clock()->dateTime() ), m_accuracy);
 }
 
