@@ -55,23 +55,29 @@ QVector< int > GeometryLayer::s_weightfilter = QVector<int>()
 class GeometryLayerPrivate
 {
 public:
-    void createGraphicsItems( GeoDataObject *object );
-    void createGraphicsItemFromGeometry( GeoDataGeometry *object, GeoDataPlacemark *placemark );
+    GeometryLayerPrivate( const QAbstractItemModel *model );
+
+    void createGraphicsItems( const GeoDataObject *object );
+    void createGraphicsItemFromGeometry( const GeoDataGeometry *object, const GeoDataPlacemark *placemark );
 
     QBrush m_currentBrush;
     QPen m_currentPen;
     GeoGraphicsScene m_scene;
-    QAbstractItemModel *m_model;
+    const QAbstractItemModel *const m_model;
 };
 
-GeometryLayer::GeometryLayer( QAbstractItemModel *model )
-        : d( new GeometryLayerPrivate() )
+GeometryLayerPrivate::GeometryLayerPrivate( const QAbstractItemModel *model )
+    : m_model( model )
+{
+}
+
+GeometryLayer::GeometryLayer( const QAbstractItemModel *model )
+        : d( new GeometryLayerPrivate( model ) )
 {
     if ( !s_defaultValuesInitialized )
         initializeDefaultValues();
 
-    d->m_model = model;
-    GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
+    const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
         d->createGraphicsItems( object->parent() );
 }
@@ -210,17 +216,15 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
-void GeometryLayerPrivate::createGraphicsItems( GeoDataObject *object )
+void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )
 {
-    if ( dynamic_cast<GeoDataPlacemark*>( object ) )
+    if ( const GeoDataPlacemark *placemark = dynamic_cast<const GeoDataPlacemark*>( object ) )
     {
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );
         createGraphicsItemFromGeometry( placemark->geometry(), placemark );
     }
 
     // parse all child objects of the container
-    GeoDataContainer *container = dynamic_cast<GeoDataContainer*>( object );
-    if ( container )
+    if ( const GeoDataContainer *container = dynamic_cast<const GeoDataContainer*>( object ) )
     {
         int rowCount = container->size();
         for ( int row = 0; row < rowCount; ++row )
@@ -230,30 +234,29 @@ void GeometryLayerPrivate::createGraphicsItems( GeoDataObject *object )
     }
 }
 
-void GeometryLayerPrivate::createGraphicsItemFromGeometry( GeoDataGeometry* object, GeoDataPlacemark *placemark )
+void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry* object, const GeoDataPlacemark *placemark )
 {
     GeoGraphicsItem *item = 0;
-    if ( dynamic_cast<GeoDataLinearRing*>( object ) )
+    if ( dynamic_cast<const GeoDataLinearRing*>( object ) )
     {
     }
-    else if ( GeoDataLineString* line = dynamic_cast<GeoDataLineString*>( object ) )
+    else if ( const GeoDataLineString* line = dynamic_cast<const GeoDataLineString*>( object ) )
     {
         item = new GeoLineStringGraphicsItem( line );
     }
-    else if ( GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon*>( object ) )
+    else if ( const GeoDataPolygon *poly = dynamic_cast<const GeoDataPolygon*>( object ) )
     {
         item = new GeoPolygonGraphicsItem( poly );
     }
-    else if ( dynamic_cast<GeoDataMultiGeometry*>( object ) )
+    else if ( const GeoDataMultiGeometry *multigeo = dynamic_cast<const GeoDataMultiGeometry*>( object ) )
     {
-        GeoDataMultiGeometry *multigeo = dynamic_cast<GeoDataMultiGeometry*>( object );
         int rowCount = multigeo->size();
         for ( int row = 0; row < rowCount; ++row )
         {
             createGraphicsItemFromGeometry( multigeo->child( row ), placemark );
         }
     }
-    else if ( GeoDataTrack *track = dynamic_cast<GeoDataTrack*>( object ) )
+    else if ( const GeoDataTrack *track = dynamic_cast<const GeoDataTrack*>( object ) )
     {
         item = new GeoTrackGraphicsItem( track );
     }
@@ -279,7 +282,7 @@ void GeometryLayer::invalidateScene()
         }
     }
     d->m_scene.clear();
-    GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
+    const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
         d->createGraphicsItems( object->parent() );
     emit repaintNeeded();

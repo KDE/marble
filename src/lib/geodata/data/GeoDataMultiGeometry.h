@@ -57,6 +57,11 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
     GeoDataGeometry* child( int );
 
     /**
+     * @brief  returns the requested child item
+     */
+    const GeoDataGeometry* child( int ) const;
+
+    /**
      * @brief returns the position of an item in the list
      */
     int childPosition( GeoDataGeometry *child);
