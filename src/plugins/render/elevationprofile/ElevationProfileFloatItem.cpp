@@ -208,7 +208,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         return;
     }
     qreal graphDistance = m_eleData.last().x();
-    qreal graphElevation = m_maxElevation;
+    qreal graphElevation = m_maxElevation * 1.2;
     int   valueOffsetX = 0;
     int   valueOffsetY = 0;
     int start = 0;
