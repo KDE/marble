@@ -124,21 +124,25 @@ QObject* Tracking::positionMarker()
 
 void Tracking::updatePositionMarker()
 {
-    if ( m_marbleWidget && m_positionMarker && m_positionSource && m_positionSource->hasPosition() ) {
-        Coordinate* position = m_positionSource->position();
+    if ( m_marbleWidget && m_positionMarker ) {
+        Coordinate* position = 0;
+        bool visible = true;
+        if ( m_positionSource && m_positionSource->hasPosition() ) {
+            position = m_positionSource->position();
+        } else if ( hasLastKnownPosition() ) {
+            position = lastKnownPosition();
+        } else {
+            visible = false;
+        }
+
         qreal x(0), y(0);
-        bool const visible = m_marbleWidget->screenCoordinates( position->longitude(), position->latitude(), x, y );
+        visible = visible && m_marbleWidget->screenCoordinates( position->longitude(), position->latitude(), x, y );
         QDeclarativeItem* item = qobject_cast<QDeclarativeItem*>( m_positionMarker );
         if ( item ) {
             item->setVisible( visible );
             if ( visible ) {
                 item->setPos( x - item->width() / 2.0, y - item->height() / 2.0 );
             }
-        }
-    } else if ( m_positionMarker && ( !m_positionSource || ( m_positionSource && !m_positionSource->hasPosition() ) ) ) {
-        QDeclarativeItem* item = qobject_cast<QDeclarativeItem*>( m_positionMarker );
-        if ( item ) {
-            item->setVisible( false );
         }
     }
 }

@@ -192,7 +192,7 @@ Item {
         width: 60
         fillMode: Image.PreserveAspectFit
         smooth: true
-        source: "qrc:/marker.svg"
+        source: positionProvider.hasPosition ? "qrc:/marker.svg" : "qrc:/marker-yellow.svg"
         visible: false
 
         // Animation that grows/shrinks the marker.
