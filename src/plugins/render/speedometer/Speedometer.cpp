@@ -10,6 +10,7 @@
 
 #include "Speedometer.h"
 
+#include "global.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
@@ -31,6 +32,11 @@ Speedometer::Speedometer( const QPointF &point, const QSizeF &size )
 {
     setVisible( false );
     setCacheMode( NoCache );
+
+    const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if ( smallScreen ) {
+        setPosition( QPointF( 10.5, 10.5 ) );
+    }
 }
 
 Speedometer::~Speedometer()
