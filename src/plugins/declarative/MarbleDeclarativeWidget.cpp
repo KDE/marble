@@ -157,12 +157,8 @@ QPoint MarbleWidget::pixel( qreal lon, qreal lat ) const
     qreal x( 0.0 );
     qreal y( 0.0 );
     ViewportParams *viewport = m_marbleWidget->viewport();
-    bool hidden = false;
-    QPoint result;
-    if ( viewport->currentProjection()->screenCoordinates( position, viewport, x, y, hidden ) && !hidden ) {
-        result = QPoint( x, y );
-    }
-    return result;
+    viewport->currentProjection()->screenCoordinates( position, viewport, x, y );
+    return QPoint( x, y );
 }
 
 Coordinate *MarbleWidget::coordinate( int x, int y )

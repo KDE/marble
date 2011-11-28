@@ -138,8 +138,8 @@ public Q_SLOTS:
     void zoomOut();
 
     /**
-      * Returns the screen position of the given coordinate,
-      * an invalid point if the coordinate is not visible
+      * Returns the screen position of the given coordinate
+      * (can be out of the screen borders)
       */
     QPoint pixel( qreal longitude, qreal latitude ) const;
 
