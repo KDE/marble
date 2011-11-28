@@ -64,6 +64,7 @@ Sheet {
             clip: true
 
             highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
+            highlightMoveDuration: 200
 
             FolderListModel {
                 id: directoryModel
