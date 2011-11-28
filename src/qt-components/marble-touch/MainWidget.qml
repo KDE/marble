@@ -74,6 +74,13 @@ Item {
             settings.quitLatitude = center.latitude
         }
 
+        onVisibleLatLonAltBoxChanged: {
+            if (positionFinderDirection.visible) {
+                var pos = map.pixel( tracking.lastKnownPosition.longitude, tracking.lastKnownPosition.latitude )
+                positionFinderDirection.rotation = 270 + 180.0 / Math.PI * Math.atan2 ( positionFinderDirection.y - pos.y, positionFinderDirection.x - pos.x )
+            }
+        }
+
         search {
             // Delegate of a search result.
             /** @todo: Simplify this beast */
@@ -225,7 +232,7 @@ Item {
         smooth: true
 
         source: "qrc:/marker-direction.svg"
-        rotation: 180 + map.tracking.lastKnownPosition.bearing( map.center.longitude, map.center.latitude )
+        //rotation: 180 + map.tracking.lastKnownPosition.bearing( map.center.longitude, map.center.latitude )
     }
 
     Image {
