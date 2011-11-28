@@ -13,6 +13,7 @@
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "MarbleDirs.h"
+#include "routing/AlternativeRoutesModel.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
 #include "routing/RouteRequest.h"
@@ -166,10 +167,18 @@ void Routing::updateRoute()
 void Routing::openRoute( const QString &fileName )
 {
     if ( d->m_marbleWidget ) {
+        RoutingManager * const routingManager = d->m_marbleWidget->model()->routingManager();
         /** @todo FIXME: replace the file:// prefix on QML side */
-        d->m_marbleWidget->model()->routingManager()->clearRoute();
+        routingManager->clearRoute();
         QString target = fileName.startsWith( "file://" ) ? fileName.mid( 7 ) : fileName;
-        d->m_marbleWidget->model()->routingManager()->loadRoute( target );
+        routingManager->loadRoute( target );
+        GeoDataDocument* route = routingManager->alternativeRoutesModel()->currentRoute();
+        if ( route ) {
+            GeoDataLineString* waypoints = routingManager->alternativeRoutesModel()->waypoints( route );
+            if ( waypoints ) {
+                d->m_marbleWidget->centerOn( waypoints->latLonAltBox() );
+            }
+        }
     }
 }
 
