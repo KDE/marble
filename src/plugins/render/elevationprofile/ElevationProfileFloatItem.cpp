@@ -26,7 +26,6 @@
 #include "MarbleDirs.h"
 #include "ElevationModel.h"
 #include "MarbleGraphicsGridLayout.h"
-#include "LabelGraphicsItem.h"
 #include "MarbleMath.h"
 
 namespace Marble
@@ -58,8 +57,11 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, cons
         m_firstVisiblePoint( 0 ),
         m_lastVisiblePoint( 0 ),
         m_zoomToViewport( false ),
+        m_markerIconContainer(),
+        m_markerTextContainer(),
+        m_markerIcon( &m_markerIconContainer ),
+        m_markerText( &m_markerTextContainer ),
         m_lastMarkerRegion( QRegion() )
-
 {
     setVisible( false );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -72,20 +74,18 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, cons
     }
 
     setPadding(1);
-    m_markerIcon = new LabelGraphicsItem( &m_markerIconContainer );
-    m_markerIcon->setImage( QImage( ":/flag-red-mirrored.png" ) );
-    m_markerText = new LabelGraphicsItem( &m_markerTextContainer );
+    m_markerIcon.setImage( QImage( ":/flag-red-mirrored.png" ) );
 
     MarbleGraphicsGridLayout *topLayout1 = new MarbleGraphicsGridLayout( 1, 1 );
     m_markerIconContainer.setLayout( topLayout1 );
-    topLayout1->addItem( m_markerIcon, 0, 0 );
+    topLayout1->addItem( &m_markerIcon, 0, 0 );
 
     MarbleGraphicsGridLayout *topLayout2 = new MarbleGraphicsGridLayout( 1, 1 );
     m_markerTextContainer.setLayout( topLayout2 );
-    m_markerText->setFrame( RoundedRectFrame );
-    m_markerText->setPadding( 1 );
+    m_markerText.setFrame( RoundedRectFrame );
+    m_markerText.setPadding( 1 );
     topLayout2->setAlignment( Qt::AlignCenter );
-    topLayout2->addItem( m_markerText, 0, 0 );
+    topLayout2->addItem( &m_markerText, 0, 0 );
 }
 
 ElevationProfileFloatItem::~ElevationProfileFloatItem()
@@ -453,7 +453,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         m_marbleWidget->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Degree );
         m_markerTextContainer.setCoordinate( GeoDataCoordinates( lon, lat, currentPoint.altitude(),
                                                             Marble::GeoDataCoordinates::Degree ) );
-        m_markerText->setText( " " + intervalStr + " " + m_unitY );
+        m_markerText.setText( " " + intervalStr + " " + m_unitY );
 
         // drawing area of flag
         if ( !m_markerIconContainer.positions().isEmpty() ) {
