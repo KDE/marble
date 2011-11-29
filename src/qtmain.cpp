@@ -164,7 +164,7 @@ int main(int argc, char *argv[])
         else if ( arg == "--nohighresolution" ) {
             profiles &= ~MarbleGlobal::HighResolution;
         }
-        else if ( arg.startsWith( "--latlot=", Qt::CaseInsensitive ) )
+        else if ( arg.startsWith( "--latlon=", Qt::CaseInsensitive ) )
         {
             coordinatesString = arg.mid(9);
         }
