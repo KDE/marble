@@ -62,15 +62,10 @@ class Speedometer : public AbstractFloatItem
 
     bool isInitialized () const;
 
-    bool eventFilter( QObject *object, QEvent *event );
-
-    void forceRepaint();
-
  private slots:
     void updateLocation( GeoDataCoordinates coordinates, qreal speed);
 
  private:
-    MarbleWidget* m_marbleWidget;
     MarbleLocale* m_locale;
     Ui::Speedometer m_widget;
     WidgetGraphicsItem* m_widgetItem;
