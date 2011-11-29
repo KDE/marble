@@ -38,7 +38,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
 
     // View Settings
     
-    Marble::DistanceUnit distanceUnit() const;
+    QLocale::MeasurementSystem measurementSystem() const;
     Marble::AngleUnit angleUnit() const;
     Marble::MapQuality stillQuality() const;
     Marble::MapQuality animationQuality() const;

@@ -105,15 +105,15 @@ void Speedometer::updateLocation( GeoDataCoordinates coordinates, qreal)
     QString speedUnit;
     QString distanceString;
 
-    switch ( m_locale->distanceUnit() ) {
-    case MilesFeet:
+    switch ( m_locale->measureSystem() ) {
+    case QLocale::ImperialSystem:
         //miles per hour
         speedUnit = tr("mph");
         speed *= KM2MI;
         distanceString = tr("ft");
         break;
 
-    case Meter:
+    case QLocale::MetricSystem:
         //kilometers per hour
         speedUnit = tr("km/h");
         distanceString = tr("m");

@@ -1199,13 +1199,13 @@ QString MarbleWidget::distanceString() const
     qreal dist = distance();
     QString distanceUnitString;
 
-    const DistanceUnit distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
+    const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measureSystem();
 
-    switch ( distanceUnit ) {
-    case Meter:
+    switch ( measurementSystem ) {
+    case QLocale::MetricSystem:
         distanceUnitString = tr("km");
         break;
-    case MilesFeet:
+    case QLocale::ImperialSystem:
         dist *= KM2MI;
         distanceUnitString = tr("mi");
         break;

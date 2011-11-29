@@ -1242,7 +1242,7 @@ void MainWindow::updateSettings()
     m_controlView->marbleWidget()->setMapQualityForViewContext( m_configDialog->animationQuality(), Marble::Animation );
 
     m_controlView->marbleWidget()->setDefaultAngleUnit( m_configDialog->angleUnit() );
-    MarbleGlobal::getInstance()->locale()->setDistanceUnit( m_configDialog->distanceUnit() );
+    MarbleGlobal::getInstance()->locale()->setMeasureSystem( m_configDialog->measurementSystem() );
 
     m_distance = m_controlView->marbleWidget()->distanceString();
     updateStatusBar();

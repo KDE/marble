@@ -625,7 +625,7 @@ void MarblePart::writeSettings()
 
     MarbleSettings::setLastFileOpenDir( m_lastFileOpenPath.toLocalFile() );
 
-    MarbleSettings::setDistanceUnit( MarbleGlobal::getInstance()->locale()->distanceUnit() );
+    MarbleSettings::setDistanceUnit( MarbleGlobal::getInstance()->locale()->measureSystem() );
     MarbleSettings::setAngleUnit( m_controlView->marbleWidget()->defaultAngleUnit() );
 
     // Sun
@@ -1448,7 +1448,7 @@ void MarblePart::updateSettings()
     m_controlView->marbleWidget()->
         setDefaultAngleUnit( (AngleUnit) MarbleSettings::angleUnit() );
     MarbleGlobal::getInstance()->locale()->
-        setDistanceUnit( (DistanceUnit) MarbleSettings::distanceUnit() );
+        setMeasureSystem( (QLocale::MeasurementSystem) MarbleSettings::distanceUnit() );
 
     updateStatusBar();
 

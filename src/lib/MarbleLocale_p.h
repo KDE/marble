@@ -22,7 +22,6 @@ class MarbleLocalePrivate
     MarbleLocalePrivate();
     virtual ~MarbleLocalePrivate();
 
-    DistanceUnit m_distanceUnit;
     QLocale::MeasurementSystem m_measureSystem;
 };
 

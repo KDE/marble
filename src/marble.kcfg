@@ -7,6 +7,7 @@
  <include>kglobalsettings.h</include>
  <include>"lib/global.h"</include>
  <include>QtCore/QDir</include>
+ <include>QtCore/QLocale</include>
  <group name="MarbleWidget" >
   <entry key="homeLongitude" type="Double" >
    <default>9.4</default>
@@ -83,11 +84,11 @@
  <group name="View" >
   <entry key="distanceUnit" type="Enum" >
    <label>The unit chosen to measure distances.</label>
-   <choices name="Marble::DistanceUnit">
-    <choice name="DistanceUnit::Meter"/>
-    <choice name="DistanceUnit::MilesFeet"/>
+   <choices name="QLocale::MeasurementSystem">
+    <choice name="QLocale::MetricSystem"/>
+    <choice name="QLocale::ImperialSystem"/>
    </choices>
-   <default>Marble::Meter</default>
+   <default>QLocale::MetricSystem</default>
   </entry>
   <entry key="angleUnit" type="Enum" >
    <label>The unit chosen to measure angles.</label>

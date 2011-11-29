@@ -101,8 +101,8 @@ void GpsInfo::updateLocation( GeoDataCoordinates coordinates, qreal)
     QString speedString;
     QString distanceString;
 
-    switch ( m_locale->distanceUnit() ) {
-    case MilesFeet:
+    switch ( m_locale->measureSystem() ) {
+    case QLocale::ImperialSystem:
         //miles per hour
         speedString = tr("mph");
         speed *= HOUR2SEC * METER2KM * KM2MI;
@@ -111,7 +111,7 @@ void GpsInfo::updateLocation( GeoDataCoordinates coordinates, qreal)
         precision *= M2FT;
         break;
 
-    case Meter:
+    case QLocale::MetricSystem:
         //kilometers per hour
         speedString = tr("km/h");
         speed *= HOUR2SEC * METER2KM;

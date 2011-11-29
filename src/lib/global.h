@@ -47,14 +47,6 @@ enum Projection {
 };
 
 /**
- * @brief This enum is used to choose the unit chosen to measure distances.
- */
-enum DistanceUnit {
-    Meter,                     ///< Metric unit
-    MilesFeet                  ///< Imperial unit
-};
-
-/**
  * @brief This enum is used to choose the dimension.
  */
 enum Dimension {

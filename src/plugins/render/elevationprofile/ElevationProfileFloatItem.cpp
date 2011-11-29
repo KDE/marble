@@ -237,10 +237,10 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     }
 
 
-    DistanceUnit distanceUnit;
-    distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
+    QLocale::MeasurementSystem measurementSystem;
+    measurementSystem = MarbleGlobal::getInstance()->locale()->measureSystem();
 
-    if ( distanceUnit == MilesFeet ) {
+    if ( measurementSystem == QLocale::ImperialSystem ) {
         graphDistance *= KM2MI;
     }
 
@@ -269,7 +269,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
 
     // draw Y grid and labels
     for ( int j = 0; j <= m_bestDivisorY; j ++ ) {
-        if ( distanceUnit == Meter ) {
+        if ( measurementSystem == QLocale::MetricSystem ) {
             if ( valueOffsetY + m_bestDivisorY * m_valueIntervalY > 10000 ) {
                 m_unitY = tr("km");
                 intervalStr.setNum( ( valueOffsetY + j * m_valueIntervalY ) / 1000 );
@@ -305,7 +305,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     // TODO: Nicer interval ticks when zoomed in, e.g. 42.5 instead of 42.444
     painter->setPen( QColor( Qt::black ) );
     for ( int j = 0; j <= m_bestDivisorX; j ++ ) {
-        if ( distanceUnit == Meter ) {
+        if ( measurementSystem == QLocale::MetricSystem ) {
             if ( valueOffsetX + m_bestDivisorX * m_valueIntervalX > 10000 ) {
                 m_unitX = tr("km");
                 intervalStr.setNum( ( valueOffsetX + j * m_valueIntervalX ) / 1000 );
@@ -400,7 +400,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
 
         painter->drawLine( m_leftGraphMargin + m_cursorPositionX - 5, ypos,
                            m_leftGraphMargin + m_cursorPositionX + 5, ypos );
-        if ( distanceUnit == Meter ) {
+        if ( measurementSystem == QLocale::MetricSystem ) {
             m_unitX = tr("m");
             if ( xpos > 10000 ) {
                 m_unitX = tr("km");

@@ -202,7 +202,7 @@ QString OsmDatabase::formatDistance( const GeoDataCoordinates &a, const GeoDataC
     int precision = 0;
     QString distanceUnit = "m";
 
-    if ( MarbleGlobal::getInstance()->locale()->distanceUnit() == Marble::MilesFeet ) {
+    if ( MarbleGlobal::getInstance()->locale()->measureSystem() == QLocale::ImperialSystem ) {
         precision = 1;
         distanceUnit = "mi";
         distance *= METER2KM;
