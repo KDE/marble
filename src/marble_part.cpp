@@ -134,10 +134,10 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     MarbleLocale *marbleLocale = MarbleGlobal::getInstance()->locale();
     KLocale *kLocale = KGlobal::locale();
     if ( kLocale->measureSystem() == KLocale::Metric ) {
-        marbleLocale->setMeasureSystem( Metric );
+        marbleLocale->setMeasureSystem( QLocale::MetricSystem );
     }
     else {
-        marbleLocale->setMeasureSystem( Imperial );
+        marbleLocale->setMeasureSystem( QLocale::ImperialSystem );
     }
 
     m_externalEditorMapping[0] = "";

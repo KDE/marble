@@ -20,7 +20,7 @@ namespace Marble
 
 MarbleLocalePrivate::MarbleLocalePrivate()
     : m_distanceUnit( Meter ),
-      m_measureSystem( Metric )
+      m_measureSystem( QLocale::MetricSystem )
 {
 }
 
@@ -48,12 +48,12 @@ void MarbleLocale::setDistanceUnit( DistanceUnit distanceUnit )
     d->m_distanceUnit = distanceUnit;
 }
 
-void MarbleLocale::setMeasureSystem( MeasureSystem measureSystem )
+void MarbleLocale::setMeasureSystem( QLocale::MeasurementSystem measureSystem )
 {
     d->m_measureSystem = measureSystem;
 }
 
-MeasureSystem MarbleLocale::measureSystem() const
+QLocale::MeasurementSystem MarbleLocale::measureSystem() const
 {
     return d->m_measureSystem;
 }

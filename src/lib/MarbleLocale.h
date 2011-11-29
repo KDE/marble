@@ -15,6 +15,8 @@
 #include "marble_export.h"
 #include "global.h"
 
+#include <QtCore/QLocale>
+
 
 namespace Marble
 {
@@ -36,8 +38,8 @@ class MARBLE_EXPORT MarbleLocale
     void setDistanceUnit( DistanceUnit distanceUnit );
     DistanceUnit distanceUnit() const;
 
-    void setMeasureSystem( MeasureSystem measureSystem );
-    MeasureSystem measureSystem() const;
+    void setMeasureSystem( QLocale::MeasurementSystem measureSystem );
+    QLocale::MeasurementSystem measureSystem() const;
 
     static QString languageCode();
 

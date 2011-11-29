@@ -239,7 +239,7 @@ void CurrentLocationWidget::receiveGpsCoordinates( const GeoDataCoordinates &pos
     html += "</body></html>";
 
     switch ( MarbleGlobal::getInstance()->locale()->measureSystem() ) {
-        case Metric:
+        case QLocale::MetricSystem:
         //kilometers per hour
         unitString = tr("km/h");
         unitSpeed = speed * HOUR2SEC * METER2KM;
@@ -247,7 +247,7 @@ void CurrentLocationWidget::receiveGpsCoordinates( const GeoDataCoordinates &pos
         distance = position.altitude();
         break;
 
-        case Imperial:
+        case QLocale::ImperialSystem:
         //miles per hour
         unitString = tr("m/h");
         unitSpeed = speed * HOUR2SEC * METER2KM * KM2MI;

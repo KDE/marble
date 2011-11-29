@@ -55,14 +55,6 @@ enum DistanceUnit {
 };
 
 /**
- * @brief This enum is used to choose the default for many units in marble.
- */
-enum MeasureSystem {
-    Metric,
-    Imperial
-};
-
-/**
  * @brief This enum is used to choose the dimension.
  */
 enum Dimension {

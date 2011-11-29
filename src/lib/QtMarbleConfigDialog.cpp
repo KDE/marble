@@ -519,9 +519,9 @@ Marble::DistanceUnit QtMarbleConfigDialog::distanceUnit() const
     MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
 
     switch ( locale->measureSystem() ) {
-    case Metric:
+    case QLocale::MetricSystem:
         return Marble::Meter;
-    case Imperial:
+    case QLocale::ImperialSystem:
         return Marble::MilesFeet;
     }
 
