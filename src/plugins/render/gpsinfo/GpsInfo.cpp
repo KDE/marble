@@ -142,7 +142,7 @@ void GpsInfo::updateLocation( GeoDataCoordinates coordinates, qreal)
         precision *= M2FT;
         break;
 
-    default:
+    case Meter:
         //kilometers per hour
         speedString = tr("km/h");
         speed *= HOUR2SEC * METER2KM;

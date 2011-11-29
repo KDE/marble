@@ -113,7 +113,7 @@ void Speedometer::updateLocation( GeoDataCoordinates coordinates, qreal)
         distanceString = tr("ft");
         break;
 
-    default:
+    case Meter:
         //kilometers per hour
         speedUnit = tr("km/h");
         distanceString = tr("m");

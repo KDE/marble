@@ -515,16 +515,17 @@ Marble::DistanceUnit QtMarbleConfigDialog::distanceUnit() const
     if( d->m_settings->contains( "View/distanceUnit" ) ) {
         return (Marble::DistanceUnit) d->m_settings->value( "View/distanceUnit" ).toInt();
     }
-    else {
-        MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
-        
-        if ( locale->measureSystem() == Marble::Metric ) {
-            return Marble::Meter;
-        }
-        else {
-            return Marble::MilesFeet;
-        }
+
+    MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
+
+    switch ( locale->measureSystem() ) {
+    case Metric:
+        return Marble::Meter;
+    case Imperial:
+        return Marble::MilesFeet;
     }
+
+    return locale->distanceUnit();
 }
 
 Marble::AngleUnit QtMarbleConfigDialog::angleUnit() const

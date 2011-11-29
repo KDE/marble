@@ -50,7 +50,6 @@ enum Projection {
  * @brief This enum is used to choose the unit chosen to measure distances.
  */
 enum DistanceUnit {
-    NoDistanceUnit = -1,
     Meter,                     ///< Metric unit
     MilesFeet                  ///< Imperial unit
 };

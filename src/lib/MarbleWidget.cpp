@@ -1201,12 +1201,14 @@ QString MarbleWidget::distanceString() const
 
     const DistanceUnit distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
 
-    if ( distanceUnit == Meter ) {
+    switch ( distanceUnit ) {
+    case Meter:
         distanceUnitString = tr("km");
-    }
-    else {
+        break;
+    case MilesFeet:
         dist *= KM2MI;
         distanceUnitString = tr("mi");
+        break;
     }
 
     return QString( "%L1 %2" ).arg( dist, 8, 'f', 1, QChar(' ') ).arg( distanceUnitString );
