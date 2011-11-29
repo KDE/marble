@@ -15,7 +15,6 @@
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
-#include "MarbleWidget.h"
 #include "PositionTracking.h"
 #include "WidgetGraphicsItem.h"
 #include "MarbleGraphicsGridLayout.h"
@@ -26,7 +25,6 @@ namespace Marble
 
 GpsInfo::GpsInfo( const QPointF &point, const QSizeF &size )
     : AbstractFloatItem( point, size ),
-      m_marbleWidget( 0 ),
       m_widgetItem( 0 )
 {
     setVisible( false );
@@ -93,35 +91,6 @@ bool GpsInfo::isInitialized () const
     return m_widgetItem;
 }
 
-bool GpsInfo::eventFilter( QObject *object, QEvent *e )
-{
-    if ( m_marbleWidget || !enabled() || !visible() ) {
-        return AbstractFloatItem::eventFilter( object, e );
-    }
-
-    MarbleWidget *widget = dynamic_cast<MarbleWidget*> ( object );
-
-    if ( widget ) {
-        m_marbleWidget = widget;
-    }
-
-    return AbstractFloatItem::eventFilter( object, e );
-}
-
-
-void GpsInfo::forceRepaint()
-{
-    m_widgetItem->update();
-    if ( m_marbleWidget ) {
-        // Trigger a repaint of the float item.
-        m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground, false );
-        update();
-        m_marbleWidget->repaint();
-        bool const mapCoversViewport = m_marbleWidget->viewport()->mapCoversViewport();
-        m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground, mapCoversViewport );
-    }
-}
-
 void GpsInfo::updateLocation( GeoDataCoordinates coordinates, qreal)
 {
     PositionTracking *tracking = marbleModel()->positionTracking();
@@ -162,7 +131,8 @@ void GpsInfo::updateLocation( GeoDataCoordinates coordinates, qreal)
     m_widget.PrecisionValue->setText( QString( " %1 %2" )
                                      .arg( QLocale().toString(precision, 'f', 1 ) )
                                      .arg( distanceString ) );
-    forceRepaint();
+    m_widgetItem->update();
+    emit repaintNeeded();
 }
 
 }

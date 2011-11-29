@@ -28,7 +28,6 @@ namespace Marble
 class GeoDataCoordinates;
 class WidgetGraphicsItem;
 class MarbleLocale;
-class MarbleWidget;
 
 /**
  * @short The class that displays Position Tracking info
