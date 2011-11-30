@@ -238,7 +238,7 @@ void CurrentLocationWidget::receiveGpsCoordinates( const GeoDataCoordinates &pos
     html += "</table>";
     html += "</body></html>";
 
-    switch ( MarbleGlobal::getInstance()->locale()->measureSystem() ) {
+    switch ( MarbleGlobal::getInstance()->locale()->measurementSystem() ) {
         case QLocale::MetricSystem:
         //kilometers per hour
         unitString = tr("km/h");

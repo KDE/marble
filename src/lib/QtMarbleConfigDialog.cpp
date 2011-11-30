@@ -518,7 +518,7 @@ QLocale::MeasurementSystem QtMarbleConfigDialog::measurementSystem() const
 
     MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
 
-    return locale->measureSystem();
+    return locale->measurementSystem();
 }
 
 Marble::AngleUnit QtMarbleConfigDialog::angleUnit() const

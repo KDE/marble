@@ -22,7 +22,7 @@ class MarbleLocalePrivate
     MarbleLocalePrivate();
     virtual ~MarbleLocalePrivate();
 
-    QLocale::MeasurementSystem m_measureSystem;
+    QLocale::MeasurementSystem m_measurementSystem;
 };
 
 }

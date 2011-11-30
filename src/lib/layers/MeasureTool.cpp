@@ -150,7 +150,7 @@ void MeasureTool::drawTotalDistanceLabel( GeoPainter *painter,
     QString  distanceString;
 
     QLocale::MeasurementSystem measurementSystem;
-    measurementSystem = MarbleGlobal::getInstance()->locale()->measureSystem();
+    measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
     if ( measurementSystem == QLocale::MetricSystem ) {
         if ( totalDistance >= 1000.0 ) {

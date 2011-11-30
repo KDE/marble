@@ -238,7 +238,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
 
 
     QLocale::MeasurementSystem measurementSystem;
-    measurementSystem = MarbleGlobal::getInstance()->locale()->measureSystem();
+    measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
     if ( measurementSystem == QLocale::ImperialSystem ) {
         graphDistance *= KM2MI;

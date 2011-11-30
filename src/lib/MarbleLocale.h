@@ -34,8 +34,8 @@ class MARBLE_EXPORT MarbleLocale
     MarbleLocale();
     ~MarbleLocale();
 
-    void setMeasureSystem( QLocale::MeasurementSystem measureSystem );
-    QLocale::MeasurementSystem measureSystem() const;
+    void setMeasurementSystem( QLocale::MeasurementSystem measurementSystem );
+    QLocale::MeasurementSystem measurementSystem() const;
 
     static QString languageCode();
 

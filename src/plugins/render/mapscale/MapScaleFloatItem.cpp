@@ -203,7 +203,7 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
 
     m_scaleBarDistance = (qreal)(m_scaleBarWidth) * pixel2Length;
 
-    const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measureSystem();
+    const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
     if ( measurementSystem == QLocale::ImperialSystem ) {
         m_scaleBarDistance *= KM2MI;
@@ -235,7 +235,7 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
                                m_scaleBarHeight );
 
             QLocale::MeasurementSystem distanceUnit;
-            distanceUnit = MarbleGlobal::getInstance()->locale()->measureSystem();
+            distanceUnit = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
             switch ( distanceUnit ) {
             case QLocale::MetricSystem:

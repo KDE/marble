@@ -1199,7 +1199,7 @@ QString MarbleWidget::distanceString() const
     qreal dist = distance();
     QString distanceUnitString;
 
-    const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measureSystem();
+    const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
     switch ( measurementSystem ) {
     case QLocale::MetricSystem:
