@@ -53,6 +53,7 @@ Item {
             onLastKnownPositionChanged: {
                 settings.lastKnownLongitude = map.tracking.lastKnownPosition.longitude
                 settings.lastKnownLatitude = map.tracking.lastKnownPosition.latitude
+                map.updatePositionIndicator()
             }
         }
         
@@ -74,12 +75,7 @@ Item {
             settings.quitLatitude = center.latitude
         }
 
-        onVisibleLatLonAltBoxChanged: {
-            if (positionFinderDirection.visible) {
-                var pos = map.pixel( tracking.lastKnownPosition.longitude, tracking.lastKnownPosition.latitude )
-                positionFinderDirection.rotation = 270 + 180.0 / Math.PI * Math.atan2 ( positionFinderDirection.y - pos.y, positionFinderDirection.x - pos.x )
-            }
-        }
+        onVisibleLatLonAltBoxChanged: updatePositionIndicator()
 
         search {
             // Delegate of a search result.
@@ -172,6 +168,15 @@ Item {
                 }
             }
         }
+
+        function updatePositionIndicator() {
+            if (positionFinderDirection.visible) {
+                var pos = map.pixel( tracking.lastKnownPosition.longitude, tracking.lastKnownPosition.latitude )
+                positionFinderDirection.rotation = 270 + 180.0 / Math.PI * Math.atan2 ( positionFinderDirection.y - pos.y, positionFinderDirection.x - pos.x )
+                var indicatorPosition = map.coordinate( positionFinderDirection.x, positionFinderDirection.y )
+                positionDistance.text = Math.round( tracking.lastKnownPosition.distance( indicatorPosition.longitude, indicatorPosition.latitude ) / 100 ) / 10 + " km"
+            }
+        }
     }
     
     // Delivers the current (gps) position.
@@ -252,11 +257,11 @@ Item {
     }
 
     Text {
+        id: positionDistance
         anchors.bottom: positionFinder.top
         anchors.horizontalCenter: positionFinder.horizontalCenter
         anchors.margins: 4
         visible: settings.showPosition
-        text: Math.round( map.tracking.lastKnownPosition.distance( map.center.longitude, map.center.latitude ) / 100 ) / 10 + " km"
     }
     
     // Starts a search for the passed term.
