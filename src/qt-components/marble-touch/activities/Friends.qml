@@ -33,12 +33,6 @@ Page {
                 }
             }
         }
-        ToolButton {
-            id: searchButton
-            checkable: true
-            width: 60
-            iconSource: "image://theme/icon-m-toolbar-search";
-        }
         ToolIcon {
             iconId: "toolbar-view-menu"
             onClicked: pageMenu.open()
@@ -62,43 +56,30 @@ Page {
         }
     }
 
-    Column {
-        width: parent.width
-        height: parent.height
+    Item {
+        clip: true
+        id: mapContainer
+        anchors.fill: parent
 
-        SearchField {
-            id: searchField
-            visible: searchButton.checked
-            width: parent.width
-            onSearch: marbleWidget.find( term )
+        function embedMarbleWidget() {
+            marbleWidget.parent = mapContainer
+            settings.projection = "Mercator"
+            var plugins = settings.defaultRenderPlugins
+            settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
+            plugins.push( "opendesktop" )
+
+            settings.activeRenderPlugins =  plugins
+            settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
+            settings.gpsTracking = true
+            settings.showPosition = true
+            settings.showTrack = false
+            marbleWidget.visible = true
         }
 
-        Item {
-            clip: true
-            id: mapContainer
-            width: parent.width
-            height: parent.height - searchField.height
-
-            function embedMarbleWidget() {
-                marbleWidget.parent = mapContainer
-                settings.projection = "Mercator"
-                var plugins = settings.defaultRenderPlugins
-                settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
-                plugins.push( "opendesktop" )
-
-                settings.activeRenderPlugins =  plugins
-                settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
-                settings.gpsTracking = true
-                settings.showPosition = true
-                settings.showTrack = false
-                marbleWidget.visible = true
-            }
-
-            Component.onDestruction: {
-                if ( marbleWidget.parent === mapContainer ) {
-                    marbleWidget.parent = null
-                    marbleWidget.visible = false
-                }
+        Component.onDestruction: {
+            if ( marbleWidget.parent === mapContainer ) {
+                marbleWidget.parent = null
+                marbleWidget.visible = false
             }
         }
     }
