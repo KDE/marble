@@ -106,6 +106,7 @@ void Tracking::setMarbleWidget( MarbleWidget* widget )
         }
 
         m_marbleWidget = widget;
+        connect( m_marbleWidget, SIGNAL( themeChanged( QString ) ), this, SLOT( updatePositionMarker() ) );
     }
 }
 
@@ -126,7 +127,7 @@ void Tracking::updatePositionMarker()
 {
     if ( m_marbleWidget && m_positionMarker ) {
         Coordinate* position = 0;
-        bool visible = true;
+        bool visible = m_marbleWidget->model()->planetId() == "earth";
         if ( m_positionSource && m_positionSource->hasPosition() ) {
             position = m_positionSource->position();
         } else if ( hasLastKnownPosition() ) {

@@ -32,6 +32,8 @@ void Search::setMarbleWidget( Marble::MarbleWidget* widget )
     m_marbleWidget = widget;
     connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
              this, SLOT( updatePlacemarks() ) );
+    connect( m_marbleWidget, SIGNAL( themeChanged( QString ) ),
+             this, SLOT( updatePlacemarks() ) );
 }
 
 QDeclarativeComponent* Search::placemarkDelegate()
@@ -106,12 +108,13 @@ void Search::updateSearchModel( QAbstractItemModel *model )
 void Search::updatePlacemarks()
 {
     if ( m_marbleWidget ) {
+        bool const onEarth = m_marbleWidget->model()->planetId() == "earth";
         QMap<int, QDeclarativeItem*>::const_iterator iter = m_placemarks.constBegin();
         while ( iter != m_placemarks.constEnd() ) {
             qreal x(0), y(0);
             QVariant position = m_searchResult->data( m_searchResult->index( iter.key() ), MarblePlacemarkModel::CoordinateRole );
             GeoDataCoordinates const coordinates = qVariantValue<GeoDataCoordinates>( position );
-            bool const visible = m_marbleWidget->screenCoordinates( coordinates.longitude( GeoDataCoordinates::Degree ), coordinates.latitude( GeoDataCoordinates::Degree ), x, y );
+            bool const visible = onEarth && m_marbleWidget->screenCoordinates( coordinates.longitude( GeoDataCoordinates::Degree ), coordinates.latitude( GeoDataCoordinates::Degree ), x, y );
             QDeclarativeItem* item = iter.value();
             if ( item ) {
                 item->setVisible( visible );
