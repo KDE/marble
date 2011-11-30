@@ -95,7 +95,18 @@ Page {
             id: searchField
             visible: searchButton.checked
             width: parent.width
-            onSearch: marbleWidget.find( term )
+            onSearch: {
+                searchField.busy = true
+                marbleWidget.find( term )
+            }
+
+            Component.onCompleted: {
+                marbleWidget.getSearch().searchFinished.connect( searchFinished )
+            }
+
+            function searchFinished() {
+                searchField.busy = false
+            }
         }
 
         Item {
