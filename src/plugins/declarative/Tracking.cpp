@@ -79,7 +79,7 @@ void Tracking::setPositionSource( PositionSource* source )
     if ( source != m_positionSource ) {
         m_positionSource = source;
         if ( source ) {
-            source->setMarbleWidget( m_marbleWidget );
+            source->setMarbleModel( m_marbleWidget->model() );
             connect( source, SIGNAL( positionChanged() ),
                     this, SLOT( updatePositionMarker() ) );
             connect( source, SIGNAL( positionChanged() ),
@@ -102,7 +102,7 @@ void Tracking::setMarbleWidget( MarbleWidget* widget )
         }
 
         if ( m_positionSource ) {
-            m_positionSource->setMarbleWidget( widget );
+            m_positionSource->setMarbleModel( widget->model() );
         }
 
         m_marbleWidget = widget;
