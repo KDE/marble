@@ -57,15 +57,14 @@ public:
      * current gps location with the map border
      * @param position current gps location
      */
-     void findIntersection( const GeoDataCoordinates &position );
+     GeoDataCoordinates findIntersection( qreal currentX, qreal currentY ) const;
 
     /**
      * @brief Adjust the zoom value of the map
      * @param currentPosition current location of the gps device
-     * @param destination geoCoordinates of the point on the screen border where the gps device
      * would reach if allowed to move in that direction
      */
-     void adjustZoom( const GeoDataCoordinates &currentPosition, const GeoDataCoordinates &destination );
+     void adjustZoom( const GeoDataCoordinates &currentPosition );
 
      /**
        * Center the widget on the given position unless recentering is currently inhibited
@@ -119,19 +118,8 @@ void AdjustNavigationPrivate::moveOnBorderToCenter( const GeoDataCoordinates &po
     }
 }
 
-void AdjustNavigationPrivate::findIntersection( const GeoDataCoordinates &position )
+GeoDataCoordinates AdjustNavigationPrivate::findIntersection( qreal currentX, qreal currentY ) const
 {
-    qreal lon = 0;
-    qreal lat = 0;
-    position.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
-
-    qreal currentX = 0;
-    qreal currentY = 0;
-
-    if( !m_widget->screenCoordinates( lon, lat, currentX, currentY ) ) {
-        return;
-    }
-
     qreal direction = m_gpsDirection;
 
     if ( direction >= 360 ) {
@@ -277,11 +265,24 @@ void AdjustNavigationPrivate::findIntersection( const GeoDataCoordinates &positi
     m_widget->geoCoordinates( destination.x(), destination.y(), destinationLon, destinationLat,
                               GeoDataCoordinates::Radian );
     GeoDataCoordinates destinationCoord( destinationLon, destinationLat, GeoDataCoordinates::Radian );
-    adjustZoom( position, destinationCoord );
+
+    return destinationCoord;
 }
 
-void AdjustNavigationPrivate::adjustZoom( const GeoDataCoordinates &currentPosition, const GeoDataCoordinates &destination )
+void AdjustNavigationPrivate::adjustZoom( const GeoDataCoordinates &currentPosition )
 {
+    const qreal lon = currentPosition.longitude( GeoDataCoordinates::Degree );
+    const qreal lat = currentPosition.latitude( GeoDataCoordinates::Degree );
+
+    qreal currentX = 0;
+    qreal currentY = 0;
+
+    if( !m_widget->screenCoordinates( lon, lat, currentX, currentY ) ) {
+        return;
+    }
+
+    const GeoDataCoordinates destination = findIntersection( currentX, currentY );
+
     qreal greatCircleDistance = distanceSphere( currentPosition, destination );
     qreal radius = m_widget->model()->planetRadius();
     qreal distance = greatCircleDistance *  radius;
@@ -373,7 +374,7 @@ void AdjustNavigation::adjust( const GeoDataCoordinates &position, qreal speed )
             break;
         case AlwaysRecenter:
         case RecenterOnBorder: // fallthrough
-            d->findIntersection( position );
+            d->adjustZoom( position );
             break;
         }
     }
