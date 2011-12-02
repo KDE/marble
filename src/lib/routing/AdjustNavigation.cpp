@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Siddharth Srivastava <akssps011@gmail.com>
+// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
@@ -16,7 +17,6 @@
 #include "PositionTracking.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
-#include "ViewportParams.h"
 #include "MarbleMath.h"
 #include "global.h"
 
@@ -121,12 +121,6 @@ void AdjustNavigationPrivate::moveOnBorderToCenter( const GeoDataCoordinates &po
 
 void AdjustNavigationPrivate::findIntersection( const GeoDataCoordinates &position )
 {
-    qreal track = m_gpsDirection;
-
-    if ( track >= 360 ) {
-        track = fmod( track,360.0 );
-    }
-
     qreal lon = 0;
     qreal lat = 0;
     position.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
@@ -136,154 +130,155 @@ void AdjustNavigationPrivate::findIntersection( const GeoDataCoordinates &positi
 
     if( !m_widget->screenCoordinates( lon, lat, currentX, currentY ) ) {
         centerOn( position );
+        return;
     }
-    else {
-        ViewportParams const * const viewparams = m_widget->viewport();
 
-        qreal width = viewparams->width();
-        qreal height = viewparams->height();
+    qreal direction = m_gpsDirection;
 
-        QPointF intercept;
-        QPointF destinationHorizontal;
-        QPointF destinationVertical;
-        QPointF destination;
-
-        qreal angle = 0.0;
-        bool crossHorizontal =  false;
-        bool crossVertical = false;
-
-        //calculation of intersection point
-        if( track > 0 && track < 90 ) {
-            angle = track;
-
-            //Intersection with line x = width
-            intercept.setX( width - currentX );
-            intercept.setY( intercept.x() / tan( angle ) );
-            destinationVertical.setX( width );
-            destinationVertical.setY( currentY-intercept.y() );
-
-            //Intersection with line y = 0
-            intercept.setY( currentY );
-            intercept.setX( intercept.y() * tan( angle ) );
-            destinationHorizontal.setX( currentX + intercept.x() );
-            destinationHorizontal.setY( 0 );
-
-            if ( destinationVertical.y() < 0 ) {
-                crossHorizontal = true;
-            }
-            else if( destinationHorizontal.x() > width ) {
-                crossVertical = true;
-            }
-
-        }
-        else if( track > 270 && track < 360 ) {
-            angle = track - 270;
-
-            //Intersection with line y = 0
-            intercept.setY( currentY );
-            intercept.setX( intercept.y() / tan( angle ) );
-            destinationHorizontal.setX( currentX - intercept.x() );
-            destinationHorizontal.setY( 0 );
-
-            //Intersection with line x = 0
-            intercept.setX( currentX );
-            intercept.setY( intercept.x() * tan( angle ) );
-            destinationVertical.setY( currentY - intercept.y() );
-            destinationVertical.setX( 0 );
-
-            if( destinationHorizontal.x() > width ) {
-                crossVertical = true;
-            }
-            else if( destinationVertical.y() < 0 ) {
-                crossHorizontal = true;
-            }
-
-        }
-        else if( track > 180 && track < 270  ) {
-            angle = track - 180;
-
-            //Intersection with line x = 0
-            intercept.setX( currentX );
-            intercept.setY( intercept.x() / tan( angle ) );
-            destinationVertical.setY( currentY + intercept.y() );
-            destinationVertical.setX( 0 );
-
-            //Intersection with line y = height
-            intercept.setY( currentY );
-            intercept.setX( intercept.y() * tan( angle ) );
-            destinationHorizontal.setX( currentX - intercept.x() );
-            destinationHorizontal.setY( height );
-
-            if ( destinationVertical.y() > height ) {
-                crossHorizontal = true;
-            }
-            else if ( destinationHorizontal.x() < 0 ) {
-                crossVertical = true;
-            }
-
-        }
-        else if( track > 90 && track < 180  ) {
-            angle = track - 90;
-
-            //Intersection with line y = height
-            intercept.setY( height - currentY );
-            intercept.setX( intercept.y() / tan( angle ) );
-            destinationHorizontal.setX( currentX + intercept.x() );
-            destinationHorizontal.setY( height );
-
-            //Intersection with line x = width
-            intercept.setX( width - currentX );
-            intercept.setY( intercept.x() * tan( angle ) );
-            destinationVertical.setX( width );
-            destinationVertical.setY( currentY + intercept.y() );
-
-            if ( destinationHorizontal.x() > width ) {
-                crossVertical = true;
-            }
-            else if( destinationVertical.y() > height ) {
-                crossHorizontal = true;
-            }
-
-        }
-        else {
-            if( track == 0 ) {
-                destinationHorizontal.setX( currentX );
-                destinationHorizontal.setY( 0 );
-                crossHorizontal = true;
-            }
-            else if( track == 90 ) {
-                destinationVertical.setX( width );
-                destinationVertical.setY( currentY );
-                crossVertical = true;
-            }
-            else if( track == 190 ) {
-                destinationHorizontal.setX( currentX );
-                destinationHorizontal.setY( height );
-                crossHorizontal = true;
-            }
-            else if( track == 270 ) {
-                destinationVertical.setX( 0 );
-                destinationVertical.setY( currentY );
-                crossVertical = true;
-            }
-        }
-
-        if ( crossHorizontal == true && crossVertical == false ) {
-            destination.setX( destinationHorizontal.x() );
-            destination.setY( destinationHorizontal.y() );
-        }
-        else if ( crossVertical == true && crossHorizontal == false ) {
-            destination.setX( destinationVertical.x() );
-            destination.setY( destinationVertical.y() );
-        }
-
-        qreal destinationLon = 0.0;
-        qreal destinationLat = 0.0;
-        m_widget->geoCoordinates( destination.x(), destination.y(), destinationLon, destinationLat,
-                                  GeoDataCoordinates::Radian );
-        GeoDataCoordinates destinationCoord( destinationLon, destinationLat, GeoDataCoordinates::Radian );
-        adjustZoom( position, destinationCoord );
+    if ( direction >= 360 ) {
+        direction = fmod( direction,360.0 );
     }
+
+    const qreal width = m_widget->width();
+    const qreal height = m_widget->height();
+
+    QPointF intercept;
+    QPointF destinationHorizontal;
+    QPointF destinationVertical;
+    QPointF destination;
+
+    bool crossHorizontal =  false;
+    bool crossVertical = false;
+
+    //calculation of intersection point
+    if( 0 < direction && direction < 90 ) {
+        const qreal angle = direction;
+
+        //Intersection with line x = width
+        intercept.setX( width - currentX );
+        intercept.setY( intercept.x() / tan( angle ) );
+        destinationVertical.setX( width );
+        destinationVertical.setY( currentY-intercept.y() );
+
+        //Intersection with line y = 0
+        intercept.setY( currentY );
+        intercept.setX( intercept.y() * tan( angle ) );
+        destinationHorizontal.setX( currentX + intercept.x() );
+        destinationHorizontal.setY( 0 );
+
+        if ( destinationVertical.y() < 0 ) {
+            crossHorizontal = true;
+        }
+        else if( destinationHorizontal.x() > width ) {
+            crossVertical = true;
+        }
+
+    }
+    else if( 270 < direction && direction < 360 ) {
+        const qreal angle = direction - 270;
+
+        //Intersection with line y = 0
+        intercept.setY( currentY );
+        intercept.setX( intercept.y() / tan( angle ) );
+        destinationHorizontal.setX( currentX - intercept.x() );
+        destinationHorizontal.setY( 0 );
+
+        //Intersection with line x = 0
+        intercept.setX( currentX );
+        intercept.setY( intercept.x() * tan( angle ) );
+        destinationVertical.setY( currentY - intercept.y() );
+        destinationVertical.setX( 0 );
+
+        if( destinationHorizontal.x() > width ) {
+            crossVertical = true;
+        }
+        else if( destinationVertical.y() < 0 ) {
+            crossHorizontal = true;
+        }
+
+    }
+    else if( 180 < direction && direction < 270  ) {
+        const qreal angle = direction - 180;
+
+        //Intersection with line x = 0
+        intercept.setX( currentX );
+        intercept.setY( intercept.x() / tan( angle ) );
+        destinationVertical.setY( currentY + intercept.y() );
+        destinationVertical.setX( 0 );
+
+        //Intersection with line y = height
+        intercept.setY( currentY );
+        intercept.setX( intercept.y() * tan( angle ) );
+        destinationHorizontal.setX( currentX - intercept.x() );
+        destinationHorizontal.setY( height );
+
+        if ( destinationVertical.y() > height ) {
+            crossHorizontal = true;
+        }
+        else if ( destinationHorizontal.x() < 0 ) {
+            crossVertical = true;
+        }
+
+    }
+    else if( 90 < direction && direction < 180  ) {
+        const qreal angle = direction - 90;
+
+        //Intersection with line y = height
+        intercept.setY( height - currentY );
+        intercept.setX( intercept.y() / tan( angle ) );
+        destinationHorizontal.setX( currentX + intercept.x() );
+        destinationHorizontal.setY( height );
+
+        //Intersection with line x = width
+        intercept.setX( width - currentX );
+        intercept.setY( intercept.x() * tan( angle ) );
+        destinationVertical.setX( width );
+        destinationVertical.setY( currentY + intercept.y() );
+
+        if ( destinationHorizontal.x() > width ) {
+            crossVertical = true;
+        }
+        else if( destinationVertical.y() > height ) {
+            crossHorizontal = true;
+        }
+
+    }
+    else if( direction == 0 ) {
+        destinationHorizontal.setX( currentX );
+        destinationHorizontal.setY( 0 );
+        crossHorizontal = true;
+    }
+    else if( direction == 90 ) {
+        destinationVertical.setX( width );
+        destinationVertical.setY( currentY );
+        crossVertical = true;
+    }
+    else if( direction == 190 ) {
+        destinationHorizontal.setX( currentX );
+        destinationHorizontal.setY( height );
+        crossHorizontal = true;
+    }
+    else if( direction == 270 ) {
+        destinationVertical.setX( 0 );
+        destinationVertical.setY( currentY );
+        crossVertical = true;
+    }
+
+    if ( crossHorizontal == true && crossVertical == false ) {
+        destination.setX( destinationHorizontal.x() );
+        destination.setY( destinationHorizontal.y() );
+    }
+    else if ( crossVertical == true && crossHorizontal == false ) {
+        destination.setX( destinationVertical.x() );
+        destination.setY( destinationVertical.y() );
+    }
+
+    qreal destinationLon = 0.0;
+    qreal destinationLat = 0.0;
+    m_widget->geoCoordinates( destination.x(), destination.y(), destinationLon, destinationLat,
+                              GeoDataCoordinates::Radian );
+    GeoDataCoordinates destinationCoord( destinationLon, destinationLat, GeoDataCoordinates::Radian );
+    adjustZoom( position, destinationCoord );
 }
 
 void AdjustNavigationPrivate::adjustZoom( const GeoDataCoordinates &currentPosition, const GeoDataCoordinates &destination )
