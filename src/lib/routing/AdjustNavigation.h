@@ -75,7 +75,7 @@ public Q_SLOTS:
      * @param position current gps location
      * @param speed of the gps device
      */
-     void adjust( GeoDataCoordinates position, qreal speed );
+     void adjust( const GeoDataCoordinates &position, qreal speed );
 
 Q_SIGNALS:
     /**

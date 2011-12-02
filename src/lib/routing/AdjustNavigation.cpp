@@ -50,14 +50,14 @@ public:
      * @param position current gps location
      * @param speed optional speed argument
      */
-     void moveOnBorderToCenter( GeoDataCoordinates position, qreal speed );
+     void moveOnBorderToCenter( const GeoDataCoordinates &position, qreal speed );
 
     /**
      * For calculating intersection point of projected LineString from
      * current gps location with the map border
      * @param position current gps location
      */
-     void findIntersection( GeoDataCoordinates position );
+     void findIntersection( const GeoDataCoordinates &position );
 
     /**
      * @brief Adjust the zoom value of the map
@@ -65,7 +65,7 @@ public:
      * @param destination geoCoordinates of the point on the screen border where the gps device
      * would reach if allowed to move in that direction
      */
-     void adjustZoom( GeoDataCoordinates currentPosition , GeoDataCoordinates destination );
+     void adjustZoom( const GeoDataCoordinates &currentPosition, const GeoDataCoordinates &destination );
 
      /**
        * Center the widget on the given position unless recentering is currently inhibited
@@ -85,7 +85,7 @@ AdjustNavigationPrivate::AdjustNavigationPrivate( MarbleWidget *widget ) :
     m_lastWidgetInteraction.start();
 }
 
-void AdjustNavigationPrivate::moveOnBorderToCenter( GeoDataCoordinates position, qreal )
+void AdjustNavigationPrivate::moveOnBorderToCenter( const GeoDataCoordinates &position, qreal )
 {
     qreal lon = 0.0;
     qreal lat = 0.0;
@@ -119,7 +119,7 @@ void AdjustNavigationPrivate::moveOnBorderToCenter( GeoDataCoordinates position,
     }
 }
 
-void AdjustNavigationPrivate::findIntersection( GeoDataCoordinates position )
+void AdjustNavigationPrivate::findIntersection( const GeoDataCoordinates &position )
 {
     qreal track = m_gpsDirection;
 
@@ -286,7 +286,7 @@ void AdjustNavigationPrivate::findIntersection( GeoDataCoordinates position )
     }
 }
 
-void AdjustNavigationPrivate::adjustZoom( GeoDataCoordinates currentPosition, GeoDataCoordinates destination )
+void AdjustNavigationPrivate::adjustZoom( const GeoDataCoordinates &currentPosition, const GeoDataCoordinates &destination )
 {
     qreal greatCircleDistance = distanceSphere( currentPosition, destination );
     qreal radius = m_widget->model()->planetRadius();
@@ -356,7 +356,7 @@ AdjustNavigation::~AdjustNavigation()
     delete d;
 }
 
-void AdjustNavigation::adjust( GeoDataCoordinates position, qreal speed )
+void AdjustNavigation::adjust( const GeoDataCoordinates &position, qreal speed )
 {
     if( !d->m_widget) {
         return;
