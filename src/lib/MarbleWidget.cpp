@@ -354,7 +354,7 @@ void MarbleWidget::setRadius( int radius )
     }
 }
 
-qreal MarbleWidget::moveStep()
+qreal MarbleWidget::moveStep() const
 {
     if ( radius() < qSqrt( (qreal)(width() * width() + height() * height()) ) )
         return 180.0 * 0.1;
@@ -750,14 +750,14 @@ void MarbleWidget::disconnectNotify( const char * signal )
 }
 
 bool MarbleWidget::screenCoordinates( qreal lon, qreal lat,
-                                      qreal& x, qreal& y )
+                                      qreal& x, qreal& y ) const
 {
     return d->m_map.screenCoordinates( lon, lat, x, y );
 }
 
 bool MarbleWidget::geoCoordinates( int x, int y,
                                    qreal& lon, qreal& lat,
-                                   GeoDataCoordinates::Unit unit )
+                                   GeoDataCoordinates::Unit unit ) const
 {
     return d->m_map.geoCoordinates( x, y, lon, lat, unit );
 }
@@ -772,7 +772,7 @@ qreal MarbleWidget::centerLongitude() const
     return d->m_map.centerLongitude();
 }
 
-QRegion MarbleWidget::mapRegion()
+QRegion MarbleWidget::mapRegion() const
 {
     return viewport()->currentProjection()->mapRegion( viewport() );
 }
@@ -1092,7 +1092,7 @@ void MarbleWidget::creatingTilesStart( TileCreator *creator,
     dlg.exec();
 }
 
-MapQuality MarbleWidget::mapQuality( ViewContext viewContext )
+MapQuality MarbleWidget::mapQuality( ViewContext viewContext ) const
 {
     return d->m_map.mapQuality( viewContext );
 }
