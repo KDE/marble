@@ -353,23 +353,29 @@ void AdjustNavigation::adjust( const GeoDataCoordinates &position, qreal speed )
 {
     d->m_gpsDirection = d->m_tracking->direction();
     d->m_gpsSpeed = speed;
-    if( d->m_recenterMode && d->m_adjustZoom ) {
-        if( d->m_recenterMode == AlwaysRecenter ) {
-            d->centerOn( position );
-        }
-        else if( d->m_recenterMode == RecenterOnBorder ) {
-            d->moveOnBorderToCenter( position, speed );
-        }
-        d->findIntersection( position );
-    }
-    else if( d->m_recenterMode == AlwaysRecenter ) {
+
+    switch( d->m_recenterMode ) {
+    case DontRecenter:
+        /* nothing to do */
+        break;
+    case AlwaysRecenter:
         d->centerOn( position );
-    }
-    else if( d->m_recenterMode == RecenterOnBorder ) {
+        break;
+    case RecenterOnBorder:
         d->moveOnBorderToCenter( position, speed );
+        break;
     }
-    else if( d->m_adjustZoom ) {
-        d->findIntersection( position );
+
+    if ( d->m_adjustZoom ) {
+        switch( d->m_recenterMode ) {
+        case DontRecenter:
+            /* nothing to do */
+            break;
+        case AlwaysRecenter:
+        case RecenterOnBorder: // fallthrough
+            d->findIntersection( position );
+            break;
+        }
     }
 }
 
