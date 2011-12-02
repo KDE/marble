@@ -129,7 +129,6 @@ void AdjustNavigationPrivate::findIntersection( const GeoDataCoordinates &positi
     qreal currentY = 0;
 
     if( !m_widget->screenCoordinates( lon, lat, currentX, currentY ) ) {
-        centerOn( position );
         return;
     }
 
