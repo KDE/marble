@@ -33,8 +33,8 @@ class AdjustNavigationPrivate
 {
 public:
 
-    MarbleWidget        *m_widget;
-    PositionTracking    *m_tracking;
+    MarbleWidget        *const m_widget;
+    const PositionTracking *const m_tracking;
     qreal                m_gpsSpeed;
     qreal                m_gpsDirection;
     AdjustNavigation::CenterMode m_recenterMode;
@@ -75,7 +75,7 @@ public:
 
 AdjustNavigationPrivate::AdjustNavigationPrivate( MarbleWidget *widget ) :
         m_widget( widget ),
-        m_tracking( 0 ),
+        m_tracking( widget->model()->positionTracking() ),
         m_gpsSpeed( 0 ),
         m_gpsDirection( 0 ),
         m_recenterMode( AdjustNavigation::DontRecenter ),
@@ -333,7 +333,7 @@ void AdjustNavigationPrivate::adjustZoom( const GeoDataCoordinates &currentPosit
 
 void AdjustNavigationPrivate::centerOn( const GeoDataCoordinates &position )
 {
-    if ( m_widget && m_lastWidgetInteraction.elapsed() > 10 * 1000 ) {
+    if ( m_lastWidgetInteraction.elapsed() > 10 * 1000 ) {
         m_selfInteraction = true;
         m_widget->centerOn( position, false );
         m_selfInteraction = false;
@@ -346,7 +346,6 @@ AdjustNavigation::AdjustNavigation( MarbleWidget *widget, QObject *parent )
     connect( widget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
              this, SLOT( inhibitAutoAdjustments() ) );
 
-    d->m_tracking = widget->model()->positionTracking();
     connect( d->m_tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
                 this, SLOT( adjust( GeoDataCoordinates, qreal ) ) );
 }
@@ -358,10 +357,6 @@ AdjustNavigation::~AdjustNavigation()
 
 void AdjustNavigation::adjust( const GeoDataCoordinates &position, qreal speed )
 {
-    if( !d->m_widget) {
-        return;
-    }
-
     d->m_gpsDirection = d->m_tracking->direction();
     d->m_gpsSpeed = speed;
     if( d->m_recenterMode && d->m_adjustZoom ) {
