@@ -809,7 +809,7 @@ QList<QPointF> ElevationProfileFloatItem::calculateElevationData( const GeoDataL
         const qreal lat = lineString[i].latitude ( GeoDataCoordinates::Degree );
         const qreal lon = lineString[i].longitude( GeoDataCoordinates::Degree );
         qreal ele = marbleModel()->elevationModel()->height( lon, lat );
-        if ( ele == 32768 ) { // no data
+        if ( ele == invalidElevationData ) { // no data
             ele = 0;
         }
 

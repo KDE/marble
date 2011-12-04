@@ -26,10 +26,6 @@
 namespace Marble
 {
 
-namespace {
-    unsigned int const invalidElevationData = 32768;
-}
-
 class ElevationModelPrivate
 {
 public:
