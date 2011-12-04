@@ -36,5 +36,9 @@ public:
     bool                    autoZoom () const;
     bool                    trackVisible () const;
     void                    setTrackVisible (bool visible);
+    QString                 lastOpenPath () const;
+    QString                 lastSavePath () const;
+    void                    setLastOpenPath (const QString& path);
+    void                    setLastSavePath (const QString& path);
 };
 };

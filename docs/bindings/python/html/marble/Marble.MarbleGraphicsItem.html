@@ -49,7 +49,7 @@
 <code>from PyKDE4.marble import *</code>
 <p>
 
-
+Subclasses: <a href="../marble/Marble.GeoGraphicsItem.html">Marble.GeoGraphicsItem</a>, <a href="../marble/Marble.ScreenGraphicsItem.html">Marble.ScreenGraphicsItem</a><br />
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 <dl class="abstract" compact><dt><b>Abstract class:</b></dt>
@@ -71,17 +71,20 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.AbstractMarbleGraphicsLayout.html">Marble.AbstractMarbleGraphicsLayout</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#layout">layout</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paint">paint</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, QString renderPos, <a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a> layer=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paintEvent">paintEvent</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, QString renderPos, <a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a> layer=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paintViewport">paintViewport</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, QString renderPos, <a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a> layer=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCacheMode">setCacheMode</a> (self, <a href="../marble/Marble.MarbleGraphicsItem.html#CacheMode">Marble.MarbleGraphicsItem.CacheMode</a> mode, QSize logicalCacheSize=QSize())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setContentSize">setContentSize</a> (self, QSizeF size)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setLayout">setLayout</a> (self, <a href="../marble/Marble.AbstractMarbleGraphicsLayout.html">Marble.AbstractMarbleGraphicsLayout</a> layout)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSize">setSize</a> (self, QSizeF size)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setToolTip">setToolTip</a> (self, QString toolTip)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setVisible">setVisible</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setZValue">setZValue</a> (self, float z)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#show">show</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QSizeF&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#size">size</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toolTip">toolTip</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#update">update</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#visible">visible</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#zValue">zValue</a> (self)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="MarbleGraphicsItem"></a>
 <div class="memitem">
@@ -364,6 +367,48 @@ This function will be called by paintEvent().
 </div>
 <div class="memdoc"><p>Paints the item on the screen in view coordinates.
 It is not safe to call this function from a thread other than the gui thread.
+</p></div></div><a class="anchor" name="paintViewport"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> paintViewport</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a>&nbsp;</td>
+<td class="paramname"><em>painter</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
+<td class="paramname"><em>viewport</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>renderPos</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a>&nbsp;</td>
+<td class="paramname"><em>layer=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Paints on the viewport
+This function wil be called by paintEvent().
 </p></div></div><a class="anchor" name="setCacheMode"></a>
 <div class="memitem">
 <div class="memproto">
@@ -509,6 +554,29 @@ items. The MarbleGraphicsItem takes ownership of the layout.
 </tr></table>
 </div>
 <div class="memdoc"><p>Makes the item visible or invisible, depending on <b>visible.</b>
+</p></div></div><a class="anchor" name="setZValue"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setZValue</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>z</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the z value of the item
 </p></div></div><a class="anchor" name="show"></a>
 <div class="memitem">
 <div class="memproto">
@@ -576,6 +644,19 @@ the cache.
 </table>
 </div>
 <div class="memdoc"><p>Returns if the item is visible.
+</p></div></div><a class="anchor" name="zValue"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">float zValue</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the z value of the item
 </p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="CacheMode"></a>
 <div class="memitem">
 <div class="memproto">

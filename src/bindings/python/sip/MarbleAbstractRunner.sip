@@ -30,7 +30,6 @@ public:
     void                    setModel (Marble::MarbleModel* model);
     virtual Marble::GeoDataFeature::GeoDataVisualCategory  category () const;
     virtual void            reverseGeocoding (const Marble::GeoDataCoordinates& coordinates);
-//ig    virtual void            retrieveRoute (RouteRequest* request);
     virtual void            search (const QString& searchTerm);
 signals:
 //ig    void                    searchFinished (QVector<Marble::GeoDataPlacemark*> result);
@@ -38,5 +37,10 @@ signals:
     void                    routeCalculated (Marble::GeoDataDocument* route);
 protected:
     Marble::MarbleModel*    model ();
+public:
+//ig    virtual void            retrieveRoute (const RouteRequest* request);
+    virtual void            parseFile (const QString& fileName, Marble::DocumentRole role);
+signals:
+    void                    parsingFinished (Marble::GeoDataDocument* document, const QString& error = QString());
 };
 };

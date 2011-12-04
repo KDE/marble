@@ -27,7 +27,6 @@ class MarbleWidget : QWidget
 public:
     explicit                MarbleWidget (QWidget* parent /TransferThis/ = 0);
     Marble::MarbleModel*    model () const;
-    const QRegion           activeRegion ();
     int                     radius () const;
     void                    setRadius (int radius);
     int                     zoom () const;
@@ -40,7 +39,6 @@ public:
     qreal                   centerLongitude () const;
     qreal                   centerLatitude () const;
     qreal                   moveStep ();
-    Marble::Quaternion      planetAxis () const;
     QPixmap                 mapScreenShot ();
     bool                    showOverviewMap () const;
     bool                    showScaleBar () const;
@@ -54,12 +52,10 @@ public:
     bool                    showTerrain () const;
     bool                    showOtherPlaces () const;
     bool                    showRelief () const;
-    bool                    showElevationModel () const;
     bool                    showIceLayer () const;
     bool                    showBorders () const;
     bool                    showRivers () const;
     bool                    showLakes () const;
-    bool                    showGps () const;
     bool                    showFrameRate () const;
     quint64                 volatileTileCacheLimit () const;
     QList<Marble::RenderPlugin*>  renderPlugins () const;
@@ -77,7 +73,6 @@ public:
     void                    zoomViewBy (int zoomStep, Marble::FlyToMode mode = Marble::Instant);
     void                    zoomIn (Marble::FlyToMode mode = Marble::Automatic);
     void                    zoomOut (Marble::FlyToMode mode = Marble::Automatic);
-    void                    rotateBy (const Marble::Quaternion& incRot);
     void                    centerOn (const Marble::GeoDataCoordinates& point, bool animated = 0);
     void                    setCenterLatitude (qreal lat, Marble::FlyToMode mode = Marble::Instant);
     void                    setCenterLongitude (qreal lon, Marble::FlyToMode mode = Marble::Instant);
@@ -102,12 +97,10 @@ public:
     void                    setShowTerrain (bool visible);
     void                    setShowOtherPlaces (bool visible);
     void                    setShowRelief (bool visible);
-    void                    setShowElevationModel (bool visible);
     void                    setShowIceLayer (bool visible);
     void                    setShowBorders (bool visible);
     void                    setShowRivers (bool visible);
     void                    setShowLakes (bool visible);
-    void                    setShowGps (bool visible);
     void                    setShowFrameRate (bool visible);
     void                    setShowTileId (bool visible);
     void                    notifyMouseClick (int x, int y);
@@ -158,7 +151,6 @@ public:
 //ig    RoutingLayer*           routingLayer ();
     void                    rotateBy (const qreal deltaLon, const qreal deltaLat, Marble::FlyToMode mode = Marble::Instant);
     void                    centerOn (const qreal lon, const qreal lat, bool animated = 0);
-    void                    scheduleRepaint (const QRegion& dirtyRegion);
     void                    flyTo (const Marble::GeoDataLookAt& lookAt, Marble::FlyToMode mode = Marble::Automatic);
     void                    reloadMap ();
 signals:
@@ -183,6 +175,14 @@ public:
     void                    setMapQualityForViewContext (Marble::MapQuality quality, Marble::ViewContext viewContext);
 //FIXME
 //ig    QVector<const Marble::GeoDataPlacemark*>  whichFeatureAt (const QPoint&) const;
+//ig    MarbleWidgetPopupMenu*  popupMenu ();
+    bool                    showSunShading () const;
+    bool                    showCityLights () const;
+    bool                    showSunInZenith () const;
+    void                    centerOn (const Marble::GeoDataPlacemark& placemark, bool animated = 0);
+    void                    setShowSunShading (bool visible);
+    void                    setShowCityLights (bool visible);
+    void                    setShowSunInZenith (bool visible);
 };
 // MarbleWidget
 

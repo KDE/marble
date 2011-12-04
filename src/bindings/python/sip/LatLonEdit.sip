@@ -26,7 +26,7 @@ class LatLonEdit : QWidget
 
 
 public:
-    explicit                LatLonEdit (QWidget* parent /TransferThis/ = 0, Marble::Dimension dimension = Marble::Longitude);
+    explicit                LatLonEdit (QWidget* parent /TransferThis/ = 0, Marble::Dimension dimension = Marble::Longitude, Marble::LatLonEdit::Notation notation = Marble::LatLonEdit::DMS);
     qreal                   value () const;
 
 //FIXME implementation is missing.
@@ -35,10 +35,17 @@ public:
     void                    setDimension (Marble::Dimension dimension);
 
 signals:
-    void                    dimensionChanged (Marble::Dimension dimension);
     void                    valueChanged (qreal value);
 public:
     ~LatLonEdit ();
+    enum Notation
+    {
+        Decimal,
+        DMS,
+        DM
+    };
+    Marble::LatLonEdit::Notation  notation () const;
+    void                    setNotation (Marble::LatLonEdit::Notation notation);
 };
 // LatLonEdit
 

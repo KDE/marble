@@ -45,6 +45,8 @@ public:
     virtual void            unpack (QDataStream& stream);
     ~GeoDataLabelStyle ();
     virtual const char*     nodeType () const;
+    bool                    glow () const;
+    void                    setGlow (bool on);
 };
 // GeoDataLabelStyle
 

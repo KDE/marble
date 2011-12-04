@@ -45,6 +45,6 @@ signals:
 public:
     bool                    isTrackEmpty () const;
     bool                    saveTrack (QString& fileName);
-    explicit                PositionTracking (Marble::MarbleModel* model);
+//ig    explicit                PositionTracking (GeoDataTreeModel* model);
 };
 };

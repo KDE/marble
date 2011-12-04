@@ -58,18 +58,18 @@ public:
     void                    drawRect (const QRect& rectangle);
     void                    drawRect (int x, int y, int width, int height);
 
-                            GeoPainter (QPaintDevice* paintDevice, Marble::ViewportParams* viewportParams, Marble::MapQuality mapQuality = Marble::NormalQuality, bool clip = 1);
     ~GeoPainter ();
-    QRegion                 regionFromPoint (const Marble::GeoDataCoordinates& position, qreal strokeWidth = 3);
     void                    drawPoint (const Marble::GeoDataPoint& point);
-    QRegion                 regionFromPoint (const Marble::GeoDataPoint& point, qreal strokeWidth = 3);
-    QRegion                 regionFromEllipse (const Marble::GeoDataCoordinates& centerPosition, qreal width, qreal height, bool isGeoProjected = 0, qreal strokeWidth = 3);
-    QRegion                 regionFromLine (const Marble::GeoDataCoordinates& startPosition, const Marble::GeoDataCoordinates& endPosition, bool isGeoProjected = 0, qreal strokeWidth = 3);
-    QRegion                 regionFromPolyline (const Marble::GeoDataLineString& lineString, qreal strokeWidth = 3);
-    QRegion                 regionFromPolygon (const Marble::GeoDataLinearRing& linearRing, Qt::FillRule fillRule, qreal strokeWidth = 3);
-    QRegion                 regionFromRect (const Marble::GeoDataCoordinates& centerPosition, qreal width, qreal height, bool isGeoProjected = 0, qreal strokeWidth = 3);
     void                    drawImage (const QRect& rect, const QImage& image);
     void                    drawImage (const QRectF& rect, const QImage& image);
+                            GeoPainter (QPaintDevice* paintDevice, const Marble::ViewportParams* viewportParams, Marble::MapQuality mapQuality = Marble::NormalQuality, bool clip = 1);
+    QRegion                 regionFromPoint (const Marble::GeoDataCoordinates& position, qreal strokeWidth = 3) const;
+    QRegion                 regionFromPoint (const Marble::GeoDataPoint& point, qreal strokeWidth = 3) const;
+    QRegion                 regionFromEllipse (const Marble::GeoDataCoordinates& centerPosition, qreal width, qreal height, bool isGeoProjected = 0, qreal strokeWidth = 3) const;
+    QRegion                 regionFromLine (const Marble::GeoDataCoordinates& startPosition, const Marble::GeoDataCoordinates& endPosition, bool isGeoProjected = 0, qreal strokeWidth = 3) const;
+    QRegion                 regionFromPolyline (const Marble::GeoDataLineString& lineString, qreal strokeWidth = 3) const;
+    QRegion                 regionFromPolygon (const Marble::GeoDataLinearRing& linearRing, Qt::FillRule fillRule, qreal strokeWidth = 3) const;
+    QRegion                 regionFromRect (const Marble::GeoDataCoordinates& centerPosition, qreal width, qreal height, bool isGeoProjected = 0, qreal strokeWidth = 3) const;
 };
 // GeoPainter
 

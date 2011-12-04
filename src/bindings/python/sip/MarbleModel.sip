@@ -25,33 +25,26 @@ class MarbleModel : QObject
 %End
 
 public:
-    explicit                MarbleModel (QObject* parent /TransferThis/);
-    QAbstractItemModel*     placemarkModel () const;
-    QItemSelectionModel*    placemarkSelectionModel () const;
     QString                 mapThemeId () const;
     void                    addPlacemarkFile (const QString& filename);
     void                    addPlacemarkData (const QString& data, const QString& key = "data");
     void                    removePlacemarkKey (const QString& key);
-//ig    FileViewModel*          fileViewModel () const;
     qreal                   planetRadius () const;
     QString                 planetName () const;
     Marble::SunLocator*     sunLocator () const;
 //ig    quint64                 volatileTileCacheLimit () const;
-    Marble::Planet*         planet () const;
+    const Marble::Planet*         planet () const;
     void                    clearPersistentTileCache ();
 
 signals:
     void                    creatingTilesStart (Marble::TileCreator*, const QString& name, const QString& description);
     void                    themeChanged (QString mapTheme);
-    void                    modelChanged ();
 
 public:
     virtual ~MarbleModel ();
 //ig    Marble::GeoSceneDocument*  mapTheme () const;
 //ig    HttpDownloadManager*    downloadManager () const;
     void                    openGpxFile (const QString& filename);
-//ig    Marble::GeoDataTreeModel*     treeModel () const;
-    void                    home (qreal& lon, qreal& lat, int& zoom);
     void                    setHome (qreal lon, qreal lat, int zoom = 1050);
     void                    setHome (const Marble::GeoDataCoordinates& homePoint, int zoom = 1050);
     void                    addGeoDataFile (const QString& filename);
@@ -68,13 +61,34 @@ public:
     void                    setClockSpeed (int speed);
     void                    setClockTimezone (int timeInSec);
     int                     clockTimezone () const;
-//ig    BookmarkManager*        bookmarkManager () const;
     QTextDocument*          legend ();
     void                    setLegend (QTextDocument* document);
     void                    setPersistentTileCacheLimit (quint64 kiloBytes);
 //ig    void                    setMapTheme (GeoSceneDocument* mapTheme);
-    Marble::MapThemeManager*  mapThemeManager () const;
     QString                 planetId () const;
+    explicit                MarbleModel (QObject* parent /TransferThis/ = 0);
+//ig    GeoDataTreeModel*       treeModel ();
+    QAbstractItemModel*     placemarkModel ();
+    QItemSelectionModel*    placemarkSelectionModel ();
+//ig    GeoSceneDocument*       mapTheme ();
+    void                    home (qreal& lon, qreal& lat, int& zoom) const;
+    Marble::MapThemeManager*  mapThemeManager ();
+//ig    HttpDownloadManager*    downloadManager ();
+//ig    FileManager*            fileManager ();
+//ig    FileViewModel*          fileViewModel ();
+//ig    MarbleClock*            clock ();
+//ig    Marble::SunLocator*     sunLocator ();
+//ig    const RoutingManager*   routingManager () const;
+    Marble::BookmarkManager*  bookmarkManager ();
+    bool                    workOffline () const;
+    void                    setWorkOffline (bool workOffline);
+//ig     Marble::ElevationModel*  elevationModel ();
+    const Marble::ElevationModel*  elevationModel () const;
+    const Marble::GeoDataPlacemark*  trackedPlacemark () const;
+    void                    setTrackedPlacemark (const Marble::GeoDataPlacemark* placemark);
+signals:
+    void                    workOfflineChanged ();
+    void                    trackedPlacemarkChanged (const Marble::GeoDataPlacemark* placemark);
 };
 // MarbleModel
 

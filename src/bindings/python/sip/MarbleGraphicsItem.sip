@@ -89,6 +89,10 @@ private:
             sipType = sipType_Marble_WidgetGraphicsItem;
         }
 %End
+public:
+    qreal                   zValue () const;
+    void                    setZValue (qreal z);
+    virtual void            paintViewport (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0);
 };
 // MarbleGraphicsItem
 

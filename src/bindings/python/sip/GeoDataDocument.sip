@@ -43,10 +43,19 @@ public:
     virtual void            unpack (QDataStream& stream);
     ~GeoDataDocument ();
 //ig    DocumentRole            documentRole () const;
-//ig    void                    setDocumentRole (DocumentRole role);
+    void                    setDocumentRole (Marble::DocumentRole role);
 };
 // GeoDataDocument
 
+enum DocumentRole
+{
+    UnknownDocument,
+    MapDocument,
+    UserDocument,
+    TrackingDocument,
+    BookmarkDocument,
+    SearchResultDocument
+};
 };
 // Marble
 

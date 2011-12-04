@@ -41,6 +41,7 @@
 %Include ClipPainter.sip
 %Include CurrentLocationWidget.sip
 %Include DownloadRegionDialog.sip
+%Include ElevationModel.sip
 %Include FileViewWidget.sip
 %Include FrameGraphicsItem.sip
 %Include GeoDataAbstractView.sip
@@ -74,6 +75,7 @@
 %Include GeoDataStyleSelector.sip
 %Include GeoDocument.sip
 %Include GeoGraphicsItem.sip
+%Include GeoGraphicsScene.sip
 %Include GeoPainter.sip
 %Include LabelGraphicsItem.sip
 %Include LatLonBoxWidget.sip
@@ -112,7 +114,7 @@
 %Include TileCreator.sip
 %Include TileLevelRangeWidget.sip
 %Include TinyWebBrowser.sip
-%Include ViewParams.sip
+//%Include ViewParams.sip
 %Include ViewportParams.sip
 %Include WidgetGraphicsItem.sip
 %Include global.sip
