@@ -328,11 +328,9 @@ void AdjustNavigationPrivate::adjustZoom( const GeoDataCoordinates &currentPosit
 
 void AdjustNavigationPrivate::centerOn( const GeoDataCoordinates &position )
 {
-    if ( m_lastWidgetInteraction.elapsed() > 10 * 1000 ) {
-        m_selfInteraction = true;
-        m_widget->centerOn( position, false );
-        m_selfInteraction = false;
-    }
+    m_selfInteraction = true;
+    m_widget->centerOn( position, false );
+    m_selfInteraction = false;
 }
 
 AdjustNavigation::AdjustNavigation( MarbleWidget *widget, QObject *parent )
@@ -354,6 +352,10 @@ void AdjustNavigation::adjust( const GeoDataCoordinates &position, qreal speed )
 {
     d->m_gpsDirection = d->m_tracking->direction();
     d->m_gpsSpeed = speed;
+
+    if ( d->m_lastWidgetInteraction.elapsed() <= 10 * 1000 ) {
+        return;
+    }
 
     switch( d->m_recenterMode ) {
     case DontRecenter:
