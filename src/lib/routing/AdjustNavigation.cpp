@@ -286,33 +286,18 @@ void AdjustNavigationPrivate::adjustZoom( const GeoDataCoordinates &currentPosit
         qreal  remainingTime = ( distance / speed ) * SEC2MIN;
 
         //tolerance time limits( in minutes ) before auto zooming
-        qreal thresholdVeryLow = 0.5;
-        qreal thresholdLow = 2.0 * thresholdVeryLow;
+        qreal thresholdLow = 1.0;
         qreal thresholdHigh = 12.0 * thresholdLow;
-        qreal thresholdVeryHigh = 3.0 * thresholdHigh;
-        qreal thresholdExtreme = 4.0 * thresholdVeryHigh;
 
         m_selfInteraction = true;
-        if ( remainingTime < thresholdVeryLow ) {
-            const int zoom = 3100;
-            m_widget->zoomView( zoom );
-        }
-        else if ( remainingTime < thresholdLow ) {
+        if ( remainingTime < thresholdLow ) {
             m_widget->zoomOut();
         }
         else if ( remainingTime < thresholdHigh ) {
             /* zoom level optimal, nothing to do */
         }
-        else if ( remainingTime < thresholdVeryHigh ) {
-            m_widget->zoomIn();
-        }
-        else if ( remainingTime < thresholdExtreme ) {
-            int zoomStep = 55;
-            m_widget->zoomViewBy( zoomStep );
-        }
         else {
-             const int zoom = 3000;
-             m_widget->zoomView( zoom );
+            m_widget->zoomIn();
         }
         m_selfInteraction = false;
     }
