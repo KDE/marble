@@ -26,6 +26,10 @@
 namespace Marble
 {
 
+namespace {
+    unsigned int const invalidElevationData = 32768;
+}
+
 class ElevationModelPrivate
 {
 public:
@@ -37,7 +41,10 @@ public:
         m_cache.setMaxCost( 10 ); //keep 10 tiles in memory (~17MB)
 
         const GeoSceneDocument *srtmTheme = model->mapThemeManager()->loadMapTheme( "earth/srtm2/srtm2.dgml" );
-        Q_ASSERT( srtmTheme );
+        if ( !srtmTheme ) {
+            mDebug() << "Failed to load map theme earth/srtm2/srtm2.dgml. Check your installation. No elevation will be returned.";
+            return;
+        }
 
         const GeoSceneHead *head = srtmTheme->head();
         Q_ASSERT( head );
@@ -82,6 +89,10 @@ ElevationModel::ElevationModel( MarbleModel *const model )
 
 qreal ElevationModel::height( qreal lon, qreal lat ) const
 {
+    if ( !d->m_textureLayer ) {
+        return invalidElevationData;
+    }
+
     const int tileZoomLevel = d->m_tileLoader.maximumTileLevel( *( d->m_textureLayer ) );
     Q_ASSERT( tileZoomLevel == 9 );
 
@@ -132,7 +143,7 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
         pixel = image->pixel( x % width, y % height );
         pixel -= 0xFF000000; //fully opaque
         //mDebug() << "(1-dx)" << (1-dx) << "(1-dy)" << (1-dy);
-        if ( pixel != 32768 ) { //no data?
+        if ( pixel != invalidElevationData ) { //no data?
             //mDebug() << "got at x" << x % width << "y" << y % height << "a height of" << pixel << "** RGB" << qRed(pixel) << qGreen(pixel) << qBlue(pixel);
             ret += ( qreal )pixel * ( 1 - dx ) * ( 1 - dy );
             hasHeight = true;
@@ -143,7 +154,7 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
     }
 
     if ( !hasHeight ) {
-        ret = 32768; //no data
+        ret = invalidElevationData; //no data
     } else {
         if ( noData ) {
             //mDebug() << "NO DATA" << noData;
@@ -157,6 +168,10 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
 
 QList<GeoDataCoordinates> ElevationModel::heightProfile( qreal fromLon, qreal fromLat, qreal toLon, qreal toLat ) const
 {
+    if ( !d->m_textureLayer ) {
+        return QList<GeoDataCoordinates>();
+    }
+
     const int tileZoomLevel = d->m_tileLoader.maximumTileLevel( *( d->m_textureLayer ) );
     const int width = d->m_textureLayer->tileSize().width();
     const int numTilesX = TileLoaderHelper::levelToColumn( d->m_textureLayer->levelZeroColumns(), tileZoomLevel );
