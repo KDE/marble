@@ -131,6 +131,12 @@ void GpsInfo::updateLocation( GeoDataCoordinates coordinates, qreal)
     m_widget.PrecisionValue->setText( QString( " %1 %2" )
                                      .arg( QLocale().toString(precision, 'f', 1 ) )
                                      .arg( distanceString ) );
+
+    int const minimumWidth = m_widgetItem->widget()->sizeHint().width();
+    if ( size().width() < minimumWidth ) {
+        m_widgetItem->setSize( QSizeF( minimumWidth, size().height() ) );
+    }
+
     m_widgetItem->update();
     emit repaintNeeded();
 }
