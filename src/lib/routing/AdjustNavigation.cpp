@@ -35,8 +35,6 @@ public:
 
     MarbleWidget        *const m_widget;
     const PositionTracking *const m_tracking;
-    qreal                m_gpsSpeed;
-    qreal                m_gpsDirection;
     AdjustNavigation::CenterMode m_recenterMode;
     bool                 m_adjustZoom;
     QTime                m_lastWidgetInteraction;
@@ -62,9 +60,8 @@ public:
     /**
      * @brief Adjust the zoom value of the map
      * @param currentPosition current location of the gps device
-     * would reach if allowed to move in that direction
      */
-     void adjustZoom( const GeoDataCoordinates &currentPosition );
+     void adjustZoom( const GeoDataCoordinates &currentPosition, qreal speed );
 
      /**
        * Center the widget on the given position unless recentering is currently inhibited
@@ -75,8 +72,6 @@ public:
 AdjustNavigationPrivate::AdjustNavigationPrivate( MarbleWidget *widget ) :
         m_widget( widget ),
         m_tracking( widget->model()->positionTracking() ),
-        m_gpsSpeed( 0 ),
-        m_gpsDirection( 0 ),
         m_recenterMode( AdjustNavigation::DontRecenter ),
         m_adjustZoom( 0 ),
         m_selfInteraction( false )
@@ -120,8 +115,7 @@ void AdjustNavigationPrivate::moveOnBorderToCenter( const GeoDataCoordinates &po
 
 GeoDataCoordinates AdjustNavigationPrivate::findIntersection( qreal currentX, qreal currentY ) const
 {
-    qreal direction = m_gpsDirection;
-
+    qreal direction = m_tracking->direction();
     if ( direction >= 360 ) {
         direction = fmod( direction,360.0 );
     }
@@ -269,7 +263,7 @@ GeoDataCoordinates AdjustNavigationPrivate::findIntersection( qreal currentX, qr
     return destinationCoord;
 }
 
-void AdjustNavigationPrivate::adjustZoom( const GeoDataCoordinates &currentPosition )
+void AdjustNavigationPrivate::adjustZoom( const GeoDataCoordinates &currentPosition, qreal speed )
 {
     const qreal lon = currentPosition.longitude( GeoDataCoordinates::Degree );
     const qreal lat = currentPosition.latitude( GeoDataCoordinates::Degree );
@@ -287,9 +281,9 @@ void AdjustNavigationPrivate::adjustZoom( const GeoDataCoordinates &currentPosit
     qreal radius = m_widget->model()->planetRadius();
     qreal distance = greatCircleDistance *  radius;
 
-    if( m_gpsSpeed != 0 ) {
+    if( speed != 0 ) {
         //time(in minutes) remaining to reach the border of the map
-        qreal  remainingTime = ( distance / m_gpsSpeed ) * SEC2MIN;
+        qreal  remainingTime = ( distance / speed ) * SEC2MIN;
 
         //tolerance time limits( in minutes ) before auto zooming
         qreal thresholdVeryLow = 0.5;
@@ -350,9 +344,6 @@ AdjustNavigation::~AdjustNavigation()
 
 void AdjustNavigation::adjust( const GeoDataCoordinates &position, qreal speed )
 {
-    d->m_gpsDirection = d->m_tracking->direction();
-    d->m_gpsSpeed = speed;
-
     if ( d->m_lastWidgetInteraction.elapsed() <= 10 * 1000 ) {
         return;
     }
@@ -376,7 +367,7 @@ void AdjustNavigation::adjust( const GeoDataCoordinates &position, qreal speed )
             break;
         case AlwaysRecenter:
         case RecenterOnBorder: // fallthrough
-            d->adjustZoom( position );
+            d->adjustZoom( position, speed );
             break;
         }
     }
