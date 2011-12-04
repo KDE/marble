@@ -53,8 +53,6 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
     QString lastSavePath() const;
 
  public Q_SLOTS:
-    void receiveGpsCoordinates( const GeoDataCoordinates& in, qreal speed );
-
      /// Slot that decides whether recentering should be done
     void setRecenterMode( int recenterMode );
 
@@ -72,6 +70,7 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
 
     CurrentLocationWidgetPrivate * const d;
 
+    Q_PRIVATE_SLOT( d, void receiveGpsCoordinates( const GeoDataCoordinates &in, qreal speed ) )
     Q_PRIVATE_SLOT( d, void adjustPositionTrackingStatus( PositionProviderStatus status ) )
     Q_PRIVATE_SLOT( d, void changePositionProvider( const QString &provider ) )
     Q_PRIVATE_SLOT( d, void centerOnCurrentLocation() )

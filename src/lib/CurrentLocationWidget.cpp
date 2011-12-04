@@ -55,6 +55,7 @@ class CurrentLocationWidgetPrivate
     QString m_lastOpenPath;
     QString m_lastSavePath;
 
+    void receiveGpsCoordinates( const GeoDataCoordinates &position, qreal speed );
     void adjustPositionTrackingStatus( PositionProviderStatus status );
     void changePositionProvider( const QString &provider );
     void trackPlacemark();
@@ -231,13 +232,11 @@ void CurrentLocationWidgetPrivate::updateActivePositionProvider( PositionProvide
 
 }
 
-void CurrentLocationWidget::receiveGpsCoordinates( const GeoDataCoordinates &position, qreal speed )
+void CurrentLocationWidgetPrivate::receiveGpsCoordinates( const GeoDataCoordinates &position, qreal speed )
 {
-    d->m_currentPosition = position;
+    m_currentPosition = position;
     QString unitString;
-    QString speedString;
     QString distanceUnitString;
-    QString distanceString;
     qreal unitSpeed = 0.0;
     qreal distance = 0.0;
 
@@ -253,30 +252,30 @@ void CurrentLocationWidget::receiveGpsCoordinates( const GeoDataCoordinates &pos
     switch ( MarbleGlobal::getInstance()->locale()->measurementSystem() ) {
         case QLocale::MetricSystem:
         //kilometers per hour
-        unitString = tr("km/h");
+        unitString = QObject::tr("km/h");
         unitSpeed = speed * HOUR2SEC * METER2KM;
-        distanceUnitString = tr("m");
+        distanceUnitString = QObject::tr("m");
         distance = position.altitude();
         break;
 
         case QLocale::ImperialSystem:
         //miles per hour
-        unitString = tr("m/h");
+        unitString = QObject::tr("m/h");
         unitSpeed = speed * HOUR2SEC * METER2KM * KM2MI;
-        distanceUnitString = tr("ft");
+        distanceUnitString = QObject::tr("ft");
         distance = position.altitude() * M2FT;
         break;
     }
     // TODO read this value from the incoming signal
-    speedString = QLocale::system().toString( unitSpeed, 'f', 1);
-    distanceString = QString( "%1 %2" ).arg( distance, 0, 'f', 1, QChar(' ') ).arg( distanceUnitString );
+    const QString speedString = QLocale::system().toString( unitSpeed, 'f', 1);
+    const QString distanceString = QString( "%1 %2" ).arg( distance, 0, 'f', 1, QChar(' ') ).arg( distanceUnitString );
 
     html = html.arg( position.lonToString() ).arg( position.latToString() );
     html = html.arg( distanceString ).arg( speedString + ' ' + unitString );
-    d->m_currentLocationUi.locationLabel->setText( html );
-    d->m_currentLocationUi.showTrackCheckBox->setEnabled( true );
-    d->m_currentLocationUi.saveTrackPushButton->setEnabled( true );
-    d->m_currentLocationUi.clearTrackPushButton->setEnabled( true );
+    m_currentLocationUi.locationLabel->setText( html );
+    m_currentLocationUi.showTrackCheckBox->setEnabled( true );
+    m_currentLocationUi.saveTrackPushButton->setEnabled( true );
+    m_currentLocationUi.clearTrackPushButton->setEnabled( true );
 }
 
 void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provider )
