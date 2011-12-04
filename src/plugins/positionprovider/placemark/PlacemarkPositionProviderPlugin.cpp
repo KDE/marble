@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Eckhart Wörner <ewoerner@kde.org>
+// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "PlacemarkPositionProviderPlugin.h"
@@ -15,19 +16,14 @@
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
 
-#include <QtCore/QTimer>
-
 using namespace Marble;
 
 PlacemarkPositionProviderPlugin::PlacemarkPositionProviderPlugin()
     : PositionProviderPlugin(),
-      m_updateTimer( new QTimer( this ) ),
       m_placemark( 0 ),
       m_status( PositionProviderStatusUnavailable ),
       m_isInitialized( false )
 {
-    m_updateTimer->setInterval( 1000 );
-    connect( m_updateTimer, SIGNAL(timeout()), this, SLOT(updatePosition()) );
     m_accuracy.level = GeoDataAccuracy::Detailed;
 }
 
@@ -96,7 +92,13 @@ GeoDataAccuracy PlacemarkPositionProviderPlugin::accuracy() const
 
 void PlacemarkPositionProviderPlugin::setPlacemark( const GeoDataPlacemark *placemark )
 {
+    disconnect( marbleModel()->clock(), SIGNAL( timeChanged() ), this, SLOT( updatePosition() ) );
+
     m_placemark = placemark;
+    if ( placemark ) {
+        connect( marbleModel()->clock(), SIGNAL( timeChanged() ), this, SLOT( updatePosition() ) );
+    }
+
     update();
 }
 
@@ -114,10 +116,8 @@ void PlacemarkPositionProviderPlugin::update()
 {
     if ( m_placemark != 0 ) {
         m_status = PositionProviderStatusAvailable;
-        m_updateTimer->start();
     } else {
         m_status = PositionProviderStatusUnavailable;
-        m_updateTimer->stop();
     }
     emit statusChanged( m_status );
 }

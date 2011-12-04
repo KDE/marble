@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Eckhart Wörner <ewoerner@kde.org>
+// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef PLACEMARKPOSITIONPROVIDERPLUGIN_H
@@ -44,7 +45,6 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     void setPlacemark( const GeoDataPlacemark *placemark );
 
  private:
-    QTimer *m_updateTimer;
     const GeoDataPlacemark *m_placemark;
 
     PositionProviderStatus m_status;
