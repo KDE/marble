@@ -291,13 +291,13 @@ void AdjustNavigationPrivate::adjustZoom( const GeoDataCoordinates &currentPosit
 
         m_selfInteraction = true;
         if ( remainingTime < thresholdLow ) {
-            m_widget->zoomOut();
+            m_widget->zoomOut( Instant );
         }
         else if ( remainingTime < thresholdHigh ) {
             /* zoom level optimal, nothing to do */
         }
         else {
-            m_widget->zoomIn();
+            m_widget->zoomIn( Instant );
         }
         m_selfInteraction = false;
     }
