@@ -178,7 +178,7 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     // choose the smaller dimension for selecting the tile level, leading to higher-resolution results
     const int levelZeroWidth = d->m_tileLoader.tileSize().width() * d->m_tileLoader.tileColumnCount( 0 );
     const int levelZeroHight = d->m_tileLoader.tileSize().height() * d->m_tileLoader.tileRowCount( 0 );
-    const int levelZeroMinDimension = ( levelZeroWidth < levelZeroHight ) ? levelZeroWidth : levelZeroHight;
+    const int levelZeroMinDimension = qMin( levelZeroWidth, levelZeroHight );
 
     qreal linearLevel = ( 4.0 * (qreal)( viewport->radius() ) / (qreal)( levelZeroMinDimension ) );
 
@@ -188,7 +188,7 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     // As our tile resolution doubles with each level we calculate
     // the tile level from tilesize and the globe radius via log(2)
 
-    qreal tileLevelF = log( linearLevel ) / log( 2.0 );
+    qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
     int tileLevel = (int)( tileLevelF );
 
 //    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
@@ -362,7 +362,7 @@ int TextureLayer::preferredRadiusCeil( int radius ) const
     const int tileWidth = d->m_tileLoader.tileSize().width();
     const int levelZeroColumns = d->m_tileLoader.tileColumnCount( 0 );
     const qreal linearLevel = 4.0 * (qreal)( radius ) / (qreal)( tileWidth * levelZeroColumns );
-    const qreal tileLevelF = log( linearLevel ) / log( 2.0 );
+    const qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
     const int tileLevel = qCeil( tileLevelF );
 
     if ( tileLevel < 0 )
@@ -376,7 +376,7 @@ int TextureLayer::preferredRadiusFloor( int radius ) const
     const int tileWidth = d->m_tileLoader.tileSize().width();
     const int levelZeroColumns = d->m_tileLoader.tileColumnCount( 0 );
     const qreal linearLevel = 4.0 * (qreal)( radius ) / (qreal)( tileWidth * levelZeroColumns );
-    const qreal tileLevelF = log( linearLevel ) / log( 2.0 );
+    const qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
     const int tileLevel = qFloor( tileLevelF );
 
     if ( tileLevel < 0 )
