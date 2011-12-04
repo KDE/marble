@@ -29,7 +29,6 @@ extern const char* GeoSceneItemType;
 extern const char* GeoSceneLayerType;
 extern const char* GeoSceneLegendType;
 extern const char* GeoSceneMapType;
-extern const char* GeoSceneMapThemeType;
 extern const char* GeoScenePaletteType;
 extern const char* GeoScenePropertyType;
 extern const char* GeoSceneSectionType;

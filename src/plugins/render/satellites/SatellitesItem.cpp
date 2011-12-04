@@ -169,7 +169,7 @@ GeoDataCoordinates SatellitesItem::fromTEME( double x, double y, double z, doubl
 {
     double lon = atan2( y, x );
     // Rotate the angle by gmst (the origin goes from the vernal equinox point to the Greenwich Meridian)
-    lon = fmod(lon - gmst, 2 * M_PI);
+    lon = GeoDataCoordinates::normalizeLon( fmod(lon - gmst, 2 * M_PI) );
 
     double lat = atan2( z, sqrt( x*x + y*y ) );
 
@@ -186,6 +186,8 @@ GeoDataCoordinates SatellitesItem::fromTEME( double x, double y, double z, doubl
     }
 
     double alt = R / cos( lat ) - a * C;
+
+    lat = GeoDataCoordinates::normalizeLat( lat );
 
     return GeoDataCoordinates( lon, lat, alt * 1000 );
 }

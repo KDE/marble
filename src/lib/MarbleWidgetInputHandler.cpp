@@ -29,6 +29,8 @@
   #include <QtGui/QPinchGesture>
 #endif
 
+#include "kineticmodel.h"
+
 #include "global.h"
 #include "MarbleDebug.h"
 #include "GeoDataCoordinates.h"
@@ -185,6 +187,9 @@ class MarbleWidgetDefaultInputHandler::Private
     int m_dragThreshold;
     QTimer m_lmbTimer;
 
+    // Models to handle the kinetic spinning.
+    KineticModel m_kineticModel;
+
     QPoint m_selectionOrigin;
     QRubberBand m_selectionRubber;
 
@@ -309,6 +314,10 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler( MarbleWidget *
     connect( &d->m_toolTipTimer, SIGNAL( timeout() ), this, SLOT( openItemToolTip() ) );
     d->m_lmbTimer.setSingleShot(true);
     connect( &d->m_lmbTimer, SIGNAL(timeout()), this, SLOT(lmbTimeout()));
+
+    d->m_kineticModel.setUpdateInterval( 35 );
+    connect( &d->m_kineticModel, SIGNAL( positionChanged() ), SLOT( adjustCenter() ) );
+    connect( &d->m_kineticModel, SIGNAL( finished() ), SLOT( restoreViewContext() ) );
 
     // The interface to the measure tool consists of a RMB popup menu
     // and some signals.
@@ -438,7 +447,11 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         if ( event->type() == QEvent::MouseMove
              && !( event->buttons() & Qt::LeftButton ) )
         {
-            d->m_leftPressed = false;
+            if ( d->m_leftPressed ) {
+                d->m_leftPressed = false;
+
+                d->m_kineticModel.release();
+            }
         }
         if ( event->type() == QEvent::MouseMove
              && !( event->buttons() & Qt::MidButton ) )
@@ -505,7 +518,11 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 d->m_leftPressedLon = MarbleWidgetInputHandler::d->m_widget->centerLongitude() * DEG2RAD;
                 d->m_leftPressedLat = MarbleWidgetInputHandler::d->m_widget->centerLatitude() * DEG2RAD;
 
+
                 d->m_leftPressedDirection = 1;
+
+                d->m_kineticModel.setPosition( RAD2DEG * ( qreal )( d->m_leftPressedLon ), RAD2DEG * ( qreal )( d->m_leftPressedLat ) );
+                d->m_kineticModel.resetSpeed();
 
                 // Choose spin direction by taking into account whether we
                 // drag above or below the visible pole.
@@ -536,6 +553,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 d->m_startingRadius = MarbleWidgetInputHandler::d->m_widget->radius();
                 d->m_midPressedY = event->y();
 
+                d->m_kineticModel.release();
+
                 d->m_selectionRubber.hide();
                 MarbleWidgetInputHandler::d->m_widget->setViewContext( Animation );
             }
@@ -565,9 +584,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 //as requested
                 emit mouseClickScreenPosition( d->m_leftPressedX, d->m_leftPressedY );
 
-                MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
-
                 d->m_leftPressed = false;
+                d->m_kineticModel.release();
             }
 
             if ( e->type() == QEvent::MouseButtonRelease
@@ -600,10 +618,10 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                      || abs( deltay ) > d->m_dragThreshold ) {
 
                     d->m_lmbTimer.stop();
-                    MarbleWidgetInputHandler::d->m_widget->centerOn( RAD2DEG * ( qreal )( d->m_leftPressedLon )
-                                                                     - 90.0 * d->m_leftPressedDirection * deltax / radius,
-                                                                     RAD2DEG * ( qreal )( d->m_leftPressedLat )
-                                                                     + 90.0 * deltay / radius );
+
+                    qreal posLon = RAD2DEG * ( qreal )( d->m_leftPressedLon ) - 90.0 * d->m_leftPressedDirection * deltax / radius;
+                    qreal posLat = RAD2DEG * ( qreal )( d->m_leftPressedLat ) + 90.0 * deltay / radius;
+                    d->m_kineticModel.setPosition( posLon, posLat );
                 }
             }
 
@@ -622,6 +640,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         }
         else {
             d->m_leftPressed = false;
+
+            d->m_kineticModel.release();
 
             QRect boundingRect = MarbleWidgetInputHandler::d->m_widget->mapRegion().boundingRect();
 
@@ -842,6 +862,12 @@ void MarbleWidgetDefaultInputHandler::setNumberOfMeasurePoints( int newNumber )
     d->m_removeLastMeasurePointAction->setEnabled(enableMeasureActions);
 }
 
+void MarbleWidgetDefaultInputHandler::adjustCenter()
+{
+    MarbleWidgetInputHandler::d->m_widget->centerOn( d->m_kineticModel.position().x(), d->m_kineticModel.position().y() );
+}
+
 }
 
 #include "MarbleWidgetInputHandler.moc"
+

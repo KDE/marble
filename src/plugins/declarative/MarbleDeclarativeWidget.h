@@ -28,6 +28,8 @@ class MapThemeManager;
 namespace Declarative
 {
 
+class ZoomButtonInterceptor;
+
 /**
   * Wraps a Marble::MarbleWidget, providing access to important properties and methods
   *
@@ -136,8 +138,8 @@ public Q_SLOTS:
     void zoomOut();
 
     /**
-      * Returns the screen position of the given coordinate,
-      * an invalid point if the coordinate is not visible
+      * Returns the screen position of the given coordinate
+      * (can be out of the screen borders)
       */
     QPoint pixel( qreal longitude, qreal latitude ) const;
 
@@ -153,6 +155,8 @@ public Q_SLOTS:
     Marble::Declarative::Search* search();
 
     QObject* mapThemeModel();
+
+    void setGeoSceneProperty( const QString &key, bool value );
 
 private Q_SLOTS:
     void updateCenterPosition();
@@ -172,6 +176,8 @@ private:
     Marble::Declarative::Search* m_search;
 
     Marble::Declarative::Coordinate m_center;
+
+    Marble::Declarative::ZoomButtonInterceptor* m_interceptor;
 };
 
 } // namespace Declarative

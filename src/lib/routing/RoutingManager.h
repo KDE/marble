@@ -115,6 +115,26 @@ public:
       */
     bool showGuidanceModeStartupWarning() const;
 
+    /**
+     * Set last directory the user opened a route from.
+     */
+    void setLastOpenPath( const QString &path );
+
+    /**
+     * Return last directory the user opened a route from.
+     */
+    QString lastOpenPath() const;
+
+    /**
+     * Set last directory the user saved a route to.
+     */
+    void setLastSavePath( const QString &path );
+
+    /**
+     * Return last directory the user saved a route to.
+     */
+    QString lastSavePath() const;
+
 public Q_SLOTS:
     /** Reverse the previously requested route, i.e. swap start and destination (and via points, if any) */
     void reverseRoute();

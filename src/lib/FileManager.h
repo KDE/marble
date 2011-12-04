@@ -51,12 +51,6 @@ class FileManager : public QObject
     ~FileManager();
 
     /**
-     * return a list containing all containers that have been queued for loading or that are
-     * loaded already
-     */
-    QStringList containers() const;
-
-    /**
      * Loads a new file into the manager.
      */
     void addFile( const QString &fileName, DocumentRole role, bool recenter = false );

@@ -15,7 +15,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/graphicsitem
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/scene
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers
- ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/gpx
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/kml
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/dgml
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/parser
@@ -217,6 +216,8 @@ set(marblewidget_SRCS
     MapWizard.cpp
     GeoGraphicsScene.cpp
     ElevationModel.cpp
+
+    kineticmodel.cpp
 )
 
 set (marblewidget_UI

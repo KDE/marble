@@ -42,6 +42,8 @@ public:
     // Implementing PositionProviderPluginInterface
     virtual PositionProviderStatus status() const;
     virtual GeoDataCoordinates position() const;
+    virtual qreal speed() const;
+    virtual qreal direction() const;
     virtual GeoDataAccuracy accuracy() const;
 
 private Q_SLOTS:

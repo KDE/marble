@@ -40,7 +40,10 @@ SatellitesPlugin::SatellitesPlugin()
      ui_configWidget( 0 )
 {
     connect( this, SIGNAL(settingsChanged(QString)), SLOT(updateSettings()) );
+    connect( this, SIGNAL(enabledChanged(bool)), SLOT(enableModel(bool)) );
+    connect( this, SIGNAL(visibilityChanged(QString,bool)), SLOT(visibleModel(QString,bool)) );
 
+    setVisible( false );
     setSettings( QHash<QString, QVariant>() );
 }
 
@@ -93,6 +96,11 @@ QIcon SatellitesPlugin::icon() const
     return QIcon();
 }
 
+RenderPlugin::RenderType SatellitesPlugin::renderType() const
+{
+    return Online;
+}
+
 void SatellitesPlugin::initialize()
 {
     //FIXME: remove the const_cast, it may be best to create a new type of plugins where
@@ -101,6 +109,7 @@ void SatellitesPlugin::initialize()
                                    marbleModel()->clock() );
     m_isInitialized = true;
     updateSettings();
+    enableModel( enabled() && visible() );
 }
 
 bool SatellitesPlugin::isInitialized() const
@@ -222,6 +231,22 @@ QDialog *SatellitesPlugin::configDialog()
     }
 
     return m_configDialog;
+}
+
+void SatellitesPlugin::enableModel( bool enabled )
+{
+    if ( !m_isInitialized ) {
+        return;
+    }
+    m_model->enable( enabled && visible() );
+}
+
+void SatellitesPlugin::visibleModel( QString, bool visible )
+{
+    if ( !m_isInitialized ) {
+        return;
+    }
+    m_model->enable( enabled() && visible );
 }
 
 void SatellitesPlugin::setupConfigModel()

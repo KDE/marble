@@ -1,22 +1,25 @@
 <RCC>
     <qresource prefix="/">
+        <file>../../../data/svg/marble-logo.svg</file>
         <file>main.qml</file>
         <file>MainWidget.qml</file>
+        <file>AboutMarblePage.qml</file>
         <file>ActivitySelectionView.qml</file>
-        <file>FriendsActivityPage.qml</file>
-        <file>GeocachingActivityPage.qml</file>
-        <file>RoutingActivityPage.qml</file>
-        <file>SearchActivityPage.qml</file>
-        <file>SearchField.qml</file>
-        <file>TrackingActivityPage.qml</file>
-        <file>VirtualGlobeActivityPage.qml</file>
-        <file>WeatherActivityPage.qml</file>
+        <file>activities/Friends.qml</file>
+        <file>activities/Geocaching.qml</file>
+        <file>activities/Routing.qml</file>
+        <file>activities/Search.qml</file>
+        <file>activities/SpaceView.qml</file>
+        <file>activities/Tracking.qml</file>
+        <file>activities/VirtualGlobe.qml</file>
+        <file>activities/Weather.qml</file>
         <file>icons/activity-bookmarks.png</file>
         <file>icons/activity-configure.png</file>
         <file>icons/activity-default.png</file>
         <file>icons/activity-download.png</file>
         <file>icons/activity-friends.png</file>
         <file>icons/activity-search.png</file>
+        <file>icons/activity-spaceview.png</file>
         <file>icons/activity-virtualglobe.png</file>
         <file>icons/activity-weather.png</file>
         <file>icons/bookmark.png</file>

@@ -15,13 +15,13 @@
 
 using namespace Marble;
 
-GeoTrackGraphicsItem::GeoTrackGraphicsItem( GeoDataTrack *track )
+GeoTrackGraphicsItem::GeoTrackGraphicsItem( const GeoDataTrack *track )
     : GeoLineStringGraphicsItem( new GeoDataLineString() )
 {
     setTrack( track );
 }
 
-void GeoTrackGraphicsItem::setTrack( GeoDataTrack* track )
+void GeoTrackGraphicsItem::setTrack( const GeoDataTrack* track )
 {
     m_track = track;
     update();

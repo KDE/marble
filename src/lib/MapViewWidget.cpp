@@ -34,10 +34,13 @@ using namespace Marble;
 namespace Marble
 {
 
-class MapViewWidgetPrivate {
+class MapViewWidget::Private {
  public:
-    MapViewWidgetPrivate( MapViewWidget *parent )
+    Private( MapViewWidget *parent )
         : m_parent( parent ),
+          m_widget( 0 ),
+          m_mapThemeModel( 0 ),
+          m_mapSortProxy( 0 ),
           m_celestialList( 0 )
     {
     }
@@ -61,6 +64,15 @@ class MapViewWidgetPrivate {
                           m_parent,              SLOT( updateMapThemeView() ) );
     }
 
+    void updateCelestialModel();
+
+    void selectCurrentMapTheme( const QString& );
+
+    /// whenever a new map gets inserted, the following slot will adapt the ListView accordingly
+    void updateMapThemeView();
+
+    void projectionSelected( int projectionIndex );
+
     MapViewWidget *m_parent;
 
     Ui::MapViewWidget  m_mapViewUi;
@@ -74,7 +86,7 @@ class MapViewWidgetPrivate {
 
 MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
     : QWidget( parent, f ),
-      d( new MapViewWidgetPrivate( this ) )
+      d( new Private( this ) )
 {
     d->m_mapViewUi.setupUi( this );
 
@@ -92,8 +104,8 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
     d->m_mapSortProxy = new MapThemeSortFilterProxyModel( this );
     d->m_mapThemeModel = 0;
 
-    connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
-             this,                                 SIGNAL( selectMapTheme( const QString& ) ) );
+    connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( mapThemeIdChanged( const QString& ) ),
+             this,                                 SIGNAL( mapThemeIdChanged( const QString& ) ) );
     connect( d->m_mapViewUi.projectionComboBox,    SIGNAL( activated( int ) ),
              this,                                 SLOT( projectionSelected( int ) ) );
 
@@ -116,18 +128,18 @@ MapViewWidget::~MapViewWidget()
     delete d;
 }
 
-void MapViewWidget::updateCelestialModel()
+void MapViewWidget::Private::updateCelestialModel()
 {
-    int row = d->m_mapThemeModel->rowCount();
+    int row = m_mapThemeModel->rowCount();
 
     for ( int i = 0; i < row; ++i )
     {
-        QString celestialBodyId = ( d->m_mapThemeModel->data( d->m_mapThemeModel->index( i, 1 ) ).toString() ).section( '/', 0, 0 );
+        QString celestialBodyId = ( m_mapThemeModel->data( m_mapThemeModel->index( i, 1 ) ).toString() ).section( '/', 0, 0 );
         QString celestialBodyName = Planet::name( celestialBodyId );
 
-        QList<QStandardItem*> matchingItems = d->m_celestialList->findItems ( celestialBodyId, Qt::MatchExactly, 1 );
+        QList<QStandardItem*> matchingItems = m_celestialList->findItems ( celestialBodyId, Qt::MatchExactly, 1 );
         if ( matchingItems.isEmpty() ) {
-            d->m_celestialList->appendRow( QList<QStandardItem*>()
+            m_celestialList->appendRow( QList<QStandardItem*>()
                                 << new QStandardItem( celestialBodyName )
                                 << new QStandardItem( celestialBodyId ) );
         }
@@ -138,35 +150,35 @@ void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_widget = widget;
 
-    connect( this,        SIGNAL( projectionSelected( Projection ) ),
+    connect( this,        SIGNAL( projectionChanged( Projection ) ),
              d->m_widget, SLOT( setProjection( Projection ) ) );
 
     connect( d->m_widget, SIGNAL( themeChanged( QString ) ),
-             this,        SLOT( selectTheme( QString ) ) );
+             this,        SLOT( setMapThemeId( QString ) ) );
 
     connect( d->m_widget, SIGNAL( projectionChanged( Projection ) ),
-             this,        SLOT( selectProjection( Projection ) ) );
-    selectProjection( d->m_widget->projection() );
+             this,        SLOT( setProjection( Projection ) ) );
+    setProjection( d->m_widget->projection() );
 
-    connect( this,        SIGNAL( selectMapTheme( const QString& ) ),
+    connect( this,        SIGNAL( mapThemeIdChanged( const QString& ) ),
              d->m_widget, SLOT( setMapThemeId( const QString& ) ) );
 
     d->setMapThemeModel( widget->model()->mapThemeManager()->mapThemeModel() );
-    updateMapThemeView();
+    d->updateMapThemeView();
 }
 
-void MapViewWidget::updateMapThemeView()
+void MapViewWidget::Private::updateMapThemeView()
 {
     updateCelestialModel();
 
-    if ( d->m_widget ) {
-        QString mapThemeId = d->m_widget->mapThemeId();
+    if ( m_widget ) {
+        QString mapThemeId = m_widget->mapThemeId();
         if ( !mapThemeId.isEmpty() )
-            selectTheme( mapThemeId );
+            m_parent->setMapThemeId( mapThemeId );
     }
 }
 
-void MapViewWidget::selectTheme( const QString &theme )
+void MapViewWidget::setMapThemeId( const QString &theme )
 {
     if ( !d->m_mapSortProxy || !d->m_widget )
         return;
@@ -212,28 +224,28 @@ void MapViewWidget::selectTheme( const QString &theme )
     }
 }
 
-void MapViewWidget::selectProjection( Projection projection )
+void MapViewWidget::setProjection( Projection projection )
 {
     if ( (int)projection != d->m_mapViewUi.projectionComboBox->currentIndex() )
         d->m_mapViewUi.projectionComboBox->setCurrentIndex( (int) projection );
 }
 
-void MapViewWidget::selectCurrentMapTheme( const QString& celestialBodyId )
+void MapViewWidget::Private::selectCurrentMapTheme( const QString& celestialBodyId )
 {
     Q_UNUSED( celestialBodyId )
 
-    d->setMapThemeModel( d->m_mapThemeModel );
+    setMapThemeModel( m_mapThemeModel );
 
     bool foundMapTheme = false;
 
-    QString currentMapThemeId = d->m_widget->mapThemeId();
+    QString currentMapThemeId = m_widget->mapThemeId();
 
-    int row = d->m_mapSortProxy->rowCount();
+    int row = m_mapSortProxy->rowCount();
 
     for ( int i = 0; i < row; ++i )
     {
-        QModelIndex index = d->m_mapSortProxy->index(i,1);
-        QString itMapThemeId = d->m_mapSortProxy->data(index).toString();
+        QModelIndex index = m_mapSortProxy->index(i,1);
+        QString itMapThemeId = m_mapSortProxy->data(index).toString();
         if ( currentMapThemeId == itMapThemeId )
         {
             foundMapTheme = true;
@@ -241,17 +253,17 @@ void MapViewWidget::selectCurrentMapTheme( const QString& celestialBodyId )
         }
     }
     if ( !foundMapTheme ) {
-        QModelIndex index = d->m_mapSortProxy->index(0,1);
-        d->m_widget->setMapThemeId( d->m_mapSortProxy->data(index).toString());
+        QModelIndex index = m_mapSortProxy->index(0,1);
+        m_widget->setMapThemeId( m_mapSortProxy->data(index).toString());
     }
 
     updateMapThemeView();
 }
 
 // Relay a signal and convert the parameter from an int to a Projection.
-void MapViewWidget::projectionSelected( int projectionIndex )
+void MapViewWidget::Private::projectionSelected( int projectionIndex )
 {
-    emit projectionSelected( (Projection) projectionIndex );
+    emit m_parent->projectionChanged( (Projection) projectionIndex );
 }
 
 }

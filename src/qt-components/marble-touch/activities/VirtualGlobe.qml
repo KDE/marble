@@ -10,6 +10,7 @@
 import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
+import org.kde.edu.marble.qtcomponents 0.12
 
 /*
  * Page for the virtual globe activity.
@@ -23,9 +24,11 @@ Page {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
-        ToolIcon {
-            iconId: "toolbar-search";
-            onClicked: { searchField.visible = !searchField.visible }
+        ToolButton {
+            id: searchButton
+            checkable: true
+            width: 60
+            iconSource: "image://theme/icon-m-toolbar-search";
         }
         ToolIcon {
             iconId: "toolbar-view-menu"
@@ -52,7 +55,19 @@ Page {
         SearchField {
             id: searchField
             width: parent.width
-            onSearch: marbleWidget.find( term )
+            visible: searchButton.checked
+            onSearch: {
+                searchField.busy = true
+                marbleWidget.find( term )
+            }
+
+            Component.onCompleted: {
+                marbleWidget.getSearch().searchFinished.connect( searchFinished )
+            }
+
+            function searchFinished() {
+                searchField.busy = false
+            }
         }
 
         Item {
@@ -60,11 +75,11 @@ Page {
             width: parent.width
             height: parent.height - searchField.height
 
-            Component.onCompleted: {
+            function embedMarbleWidget() {
                 marbleWidget.parent = mapContainer
                 settings.projection = "Spherical"
                 settings.activeRenderPlugins = settings.defaultRenderPlugins
-                settings.mapTheme = "earth/bluemarble/bluemarble.dgml"
+                settings.mapTheme = "earth/srtm/srtm.dgml"
                 settings.gpsTracking = false
                 settings.showPosition = false
                 settings.showTrack = false
@@ -72,9 +87,17 @@ Page {
             }
 
             Component.onDestruction: {
-                marbleWidget.parent = null
-                marbleWidget.visible = false
+                if ( marbleWidget.parent === mapContainer ) {
+                    marbleWidget.parent = null
+                    marbleWidget.visible = false
+                }
             }
+        }
+    }
+
+    onStatusChanged: {
+        if ( status === PageStatus.Activating ) {
+            mapContainer.embedMarbleWidget()
         }
     }
 }

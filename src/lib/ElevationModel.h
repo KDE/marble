@@ -23,6 +23,10 @@
 namespace Marble
 {
 
+namespace {
+    unsigned int const invalidElevationData = 32768;
+}
+
 class MarbleModel;
 class ElevationModelPrivate;
 

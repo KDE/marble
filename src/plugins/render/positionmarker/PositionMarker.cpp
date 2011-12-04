@@ -43,13 +43,16 @@ PositionMarker::PositionMarker ()
       m_isInitialized( false ),
       m_useCustomCursor( false ),
       m_defaultCursorPath( MarbleDirs::path( "svg/track_turtle.svg" ) ),
-      m_viewport( 0 ),
+      m_lastBoundingBox(),
       ui_configWidget( 0 ),
       m_aboutDialog( 0 ),
       m_configDialog( 0 ),
-      m_settings(),
+      m_cursorSize( 1.0 ),
+      m_heading( 0.0 ),
       m_showTrail ( false )
 {
+    setSettings( QHash<QString,QVariant>() );
+    updateSettings();
     connect( this, SIGNAL( settingsChanged( QString ) ),
              this, SLOT( updateSettings() ) );
 }
@@ -178,22 +181,19 @@ bool PositionMarker::isInitialized() const
     return m_isInitialized;
 }
 
-void PositionMarker::update()
+void PositionMarker::update( const ViewportParams *viewport )
 {
-    if ( !m_viewport ) {
-        return;
-    }
     if( ! ( m_currentPosition == m_previousPosition ) )
     {
         QPointF position;
         QPointF previousPosition;
 
-        m_viewport->currentProjection()->screenCoordinates( m_currentPosition,
-                                                            m_viewport,
-                                                            position );
-        m_viewport->currentProjection()->screenCoordinates( m_previousPosition,
-                                                            m_viewport,
-                                                            previousPosition );
+        viewport->currentProjection()->screenCoordinates( m_currentPosition,
+                                                          viewport,
+                                                          position );
+        viewport->currentProjection()->screenCoordinates( m_previousPosition,
+                                                          viewport,
+                                                          previousPosition );
 
         // calculate the arrow shape, oriented by the heading
         // and with constant size
@@ -238,10 +238,8 @@ bool PositionMarker::render( GeoPainter *painter,
     bool const gpsActive = marbleModel()->positionTracking()->positionProviderPlugin() != 0;
     if ( gpsActive && renderPosition().contains(renderPos) )
     {
-        if ( m_viewport != viewport ) {
-            m_viewport = viewport;
-        }
-        update();
+        m_lastBoundingBox = viewport->viewLatLonAltBox();
+        update( viewport );
         painter->save();
         painter->autoMapQuality();
 
@@ -271,7 +269,7 @@ bool PositionMarker::render( GeoPainter *painter,
             // we don't draw m_trail[0] which is current position
             for( int i = 1; i < m_trail.size(); ++i ) {
                 // Get screen coordinates from coordinates on the map.
-                m_viewport->currentProjection()->screenCoordinates( m_trail[i], m_viewport, trailPoint );
+                viewport->currentProjection()->screenCoordinates( m_trail[i], viewport, trailPoint );
                 int size = ( sm_numTrailPoints - i ) * 3;
                 trailRect.setX( trailPoint.x() - size / 2.0 );
                 trailRect.setY( trailPoint.y() - size / 2.0 );
@@ -414,7 +412,7 @@ void PositionMarker::setPosition( const GeoDataCoordinates &position )
 {
     m_previousPosition = m_currentPosition;
     m_currentPosition = position;
-    if ( m_viewport->viewLatLonAltBox().contains( m_currentPosition ) )
+    if ( m_lastBoundingBox.contains( m_currentPosition ) )
     {
         emit repaintNeeded( m_dirtyRegion );
     }

@@ -13,7 +13,6 @@
 #ifndef MARBLE_MAPTHEMEMANAGER_H
 #define MARBLE_MAPTHEMEMANAGER_H
 
-#include <QtCore/QList>
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
 
@@ -27,7 +26,6 @@ namespace Marble
 {
 
 class GeoSceneDocument;
-class MapThemeManagerPrivate;
 
 /**
  * @short The class that handles map themes that are locally available .
@@ -56,9 +54,9 @@ class MARBLE_EXPORT MapThemeManager : public QObject
     ~MapThemeManager();
 
     /**
-     * @brief Returns a list of all locally available map themes
+     * @brief Returns a list of all locally available map theme IDs
      */
-    QList<GeoSceneDocument const*> mapThemes() const;
+    QStringList mapThemeIds() const;
 
     /**
      * @brief Provides a model of the locally existing themes. 
@@ -75,20 +73,7 @@ class MARBLE_EXPORT MapThemeManager : public QObject
      * This helper method should only get used by MarbleModel to load the
      * current theme into memory or by the MapThemeManager.
      */
-    
-    static GeoSceneDocument* loadMapTheme( const QString& mapThemeStringID );
-
- public Q_SLOTS:
-    /**
-     * @brief Updates the map theme model on request. 
-     *
-     * This method should usually get invoked on startup or 
-     * by a QFileSystemWatcher instance.
-     */
-    void updateMapThemeModel();
-
-    void directoryChanged( const QString& path );
-    void fileChanged( const QString & path );
+    GeoSceneDocument* loadMapTheme( const QString& mapThemeStringID ) const;
 
  Q_SIGNALS:
     /**
@@ -97,48 +82,14 @@ class MARBLE_EXPORT MapThemeManager : public QObject
     void themesChanged();
 
  private:
+    Q_PRIVATE_SLOT( d, void directoryChanged( const QString& path ) )
+    Q_PRIVATE_SLOT( d, void fileChanged( const QString & path ) )
+
     Q_DISABLE_COPY( MapThemeManager )
 
-    /**
-     * @brief Adds directory paths and .dgml file paths to the given QStringList.
-     */
-    static void addMapThemePaths( const QString& mapPathName, QStringList& result );
-
-    /**
-     * @brief Helper method for findMapThemes(). Searches for .dgml files below
-     *        given directory path.
-     */
-    static QStringList findMapThemes( const QString& basePath );
-
-    /**
-     * @brief Searches for .dgml files below local and system map directory.
-     */
-    static QStringList findMapThemes();
-
-    static GeoSceneDocument* loadMapThemeFile( const QString& mapThemePath );
-
-    /**
-     * @brief Returns all directory paths and .dgml file paths below local and
-     *        system map directory.
-     */
-    static QStringList pathsToWatch();
-
-    /**
-     * @brief Helper method for updateMapThemeModel().
-     */
-    QList<QStandardItem *> createMapThemeRow( const QString& mapThemeID );
-
-    /**
-     * @brief Initialization.
-     *
-     * This method allows to provide a delayed initialization 
-     * once the model is requested.
-     */
-    void initialize();
-    
-    void initFileSystemWatcher();
-
-    MapThemeManagerPrivate * const d;
+    class Private;
+    friend class Private;
+    Private * const d;
 };
 
 }

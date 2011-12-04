@@ -24,6 +24,8 @@ public:
     LocationGPSDevice *m_device;
     PositionProviderStatus m_status;
     QTimer m_timer;
+    qreal m_speed;
+    qreal m_direction;
 
     MaemoPositionProviderPluginPrivate();
 
@@ -31,7 +33,8 @@ public:
 };
 
 MaemoPositionProviderPluginPrivate::MaemoPositionProviderPluginPrivate() :
-        m_control( 0 ), m_device( 0 ), m_status( PositionProviderStatusAcquiring )
+        m_control( 0 ), m_device( 0 ), m_status( PositionProviderStatusAcquiring ),
+    m_speed( 0 ), m_direction( 0 )
 {
     m_timer.setInterval( 1000 );
 }
@@ -85,6 +88,12 @@ GeoDataCoordinates MaemoPositionProviderPlugin::position() const
         if ( d->m_device->fix->fields & LOCATION_GPS_DEVICE_ALTITUDE_SET ) {
             alt = d->m_device->fix->altitude;
         }
+        if ( d->m_device->fix->fields & LOCATION_GPS_DEVICE_SPEED_SET ) {
+            d->m_speed = d->m_device->fix->speed;
+        }
+        if ( d->m_device->fix->fields & LOCATION_GPS_DEVICE_TRACK_SET ) {
+            d->m_direction = d->m_device->fix->track;
+        }
 
         return GeoDataCoordinates( d->m_device->fix->longitude,
                                    d->m_device->fix->latitude,
@@ -92,6 +101,16 @@ GeoDataCoordinates MaemoPositionProviderPlugin::position() const
     }
 
     return GeoDataCoordinates();
+}
+
+qreal MaemoPositionProviderPlugin::speed() const
+{
+    return d->m_speed * KM2METER / HOUR2SEC;
+}
+
+qreal MaemoPositionProviderPlugin::direction() const
+{
+    return d->m_direction;
 }
 
 GeoDataAccuracy MaemoPositionProviderPlugin::accuracy() const

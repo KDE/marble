@@ -110,6 +110,8 @@ class MARBLE_EXPORT MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputH
 
     void setNumberOfMeasurePoints( int number );
 
+    void adjustCenter();
+
  private:
     Q_DISABLE_COPY( MarbleWidgetDefaultInputHandler )
     class Private;

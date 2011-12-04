@@ -118,9 +118,7 @@ QStandardItem* RenderPlugin::item()
 
 void RenderPlugin::applyItemState()
 {
-    d->m_enabled = ( d->m_item->checkState() == Qt::Checked );
-
-    d->m_action->setVisible( d->m_enabled );
+    setEnabled( d->m_item->checkState() == Qt::Checked );
 }
 
 void RenderPlugin::retrieveItemState()
@@ -137,6 +135,8 @@ void RenderPlugin::setEnabled( bool enabled )
     d->m_action->setVisible( enabled );
 
     d->m_item->setCheckState( enabled ?  Qt::Checked : Qt::Unchecked  );
+
+    emit enabledChanged( enabled );
 }
 
 void RenderPlugin::setVisible( bool visible )

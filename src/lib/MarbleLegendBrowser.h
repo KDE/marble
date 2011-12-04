@@ -28,7 +28,7 @@ class QUrl;
 namespace Marble
 {
 
-class MarbleWidget;
+class MarbleModel;
 class MarbleLegendBrowserPrivate;
 
 class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
@@ -39,7 +39,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     explicit MarbleLegendBrowser( QWidget* parent );
     ~MarbleLegendBrowser();
 
-    void  setMarbleWidget( MarbleWidget *marbleWidget );
+    void  setMarbleModel( MarbleModel *marbleModel );
 
  public Q_SLOTS:
     void setCheckedProperty( const QString& name, bool checked );

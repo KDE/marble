@@ -54,17 +54,16 @@ void PlacemarkPainter::drawPlacemarks( QPainter* painter,
     QVector<VisiblePlacemark*>::const_iterator visit = visiblePlacemarks.constEnd();
     QVector<VisiblePlacemark*>::const_iterator itEnd = visiblePlacemarks.constBegin();
 
-    VisiblePlacemark *mark = 0;
     int imageWidth = viewport->width();
 
     while ( visit != itEnd ) {
 	--visit;
-	mark = *visit;
+        VisiblePlacemark *mark = *visit;
 
 	if ( mark->labelPixmap().isNull() ) {
             bool isSelected = false;
             foreach ( QModelIndex index, selection.indexes() ) {
-                GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+                const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
                 if (mark->placemark() == placemark ) {
                     isSelected = true;
                     break;
@@ -167,7 +166,7 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSe
     QPixmap labelPixmap;
 
     const GeoDataPlacemark *placemark = mark->placemark();
-    GeoDataStyle* style = placemark->style();
+    const GeoDataStyle* style = placemark->style();
 
     QString labelName = mark->name();
     QRect  labelRect  = mark->labelRect();
@@ -184,12 +183,11 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSe
 	 && m_defaultLabelColor != Qt::black )
         labelColor = m_defaultLabelColor;
 
-    labelFont.setWeight(75);
-
     LabelStyle labelStyle = Normal;
     if ( isSelected ) {
         labelStyle = Selected;
     } else if ( style->labelStyle().glow() ) {
+        labelFont.setWeight(75);
         labelStyle = Glow;
     }
 

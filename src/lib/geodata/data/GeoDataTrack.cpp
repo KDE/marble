@@ -35,7 +35,8 @@ public:
     GeoDataLineString *m_lineString;
     bool m_lineStringNeedsUpdate;
 
-    QMap<QDateTime, GeoDataCoordinates> m_pointMap;
+    typedef QMap<QDateTime, GeoDataCoordinates> PointMap;
+    PointMap m_pointMap;
 
     QLinkedList<QDateTime> m_whenStack;
     QLinkedList<GeoDataCoordinates> m_coordStack;
@@ -104,7 +105,8 @@ GeoDataCoordinates GeoDataTrack::coordinatesAt( const QDateTime &when ) const
         return GeoDataCoordinates();
     }
 
-    QMap<QDateTime, GeoDataCoordinates>::const_iterator nextEntry = d->m_pointMap.upperBound( when );
+    GeoDataTrackPrivate::PointMap::const_iterator nextEntry =
+        const_cast<const GeoDataTrackPrivate::PointMap &>(d->m_pointMap).upperBound( when );
 
     // No tracked point happened before "when"
     if ( nextEntry == d->m_pointMap.constBegin() ) {

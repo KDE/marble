@@ -227,10 +227,54 @@ const GeoSceneDocument *MarbleModel::mapTheme() const
 // FIXME: Get rid of 'currentProjection' here.  It's totally misplaced.
 //
 
-void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme )
+void MarbleModel::setMapThemeId( const QString &mapThemeId )
 {
-    GeoSceneDocument *oldTheme = d->m_mapTheme;
+    if ( !mapThemeId.isEmpty() && mapThemeId == this->mapThemeId() )
+        return;
+
+    GeoSceneDocument *mapTheme = d->m_mapThemeManager.loadMapTheme( mapThemeId );
+    if ( !mapTheme ) {
+        // Check whether the previous theme works
+        if ( d->m_mapTheme ){
+            qWarning() << "Selected theme doesn't work, so we stick to the previous one";
+            return;
+        }
+
+        // Fall back to default theme
+        QString defaultTheme = "earth/srtm/srtm.dgml";
+        qWarning() << "Falling back to default theme:" << defaultTheme;
+        mapTheme = d->m_mapThemeManager.loadMapTheme( defaultTheme );
+    }
+
+    // If this last resort doesn't work either shed a tear and exit
+    if ( !mapTheme ) {
+        qWarning() << "Couldn't find a valid DGML map.";
+        return;
+    }
+
+    // find the list of previous theme's geodata
+    QStringList loadedContainers;
+    if ( d->m_mapTheme ) {
+        foreach ( GeoSceneLayer *layer, d->m_mapTheme->map()->layers() ) {
+            if ( layer->backend() != dgml::dgmlValue_geodata )
+                continue;
+
+            if ( layer->datasets().count() <= 0 )
+                continue;
+
+            // look for documents
+            foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
+                if( dataset->fileFormat() == "KML" ) {
+                    QString containername = reinterpret_cast<GeoSceneXmlDataSource*>( dataset )->filename();
+                    loadedContainers <<  containername;
+                }
+            }
+        }
+    }
+
+    delete d->m_mapTheme;
     d->m_mapTheme = mapTheme;
+
     addDownloadPolicies( d->m_mapTheme );
 
     // Some output to show how to use this stuff ...
@@ -257,48 +301,19 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme )
         sunLocator()->setPlanet(d->m_planet);
     }
 
-    // find the list of previous theme's geodata
-    QStringList loadedContainers;
-    QVector<GeoSceneLayer*>::const_iterator it;
-    QVector<GeoSceneLayer*>::const_iterator end;
-    if (oldTheme) {
-        it = oldTheme->map()->layers().constBegin();
-        end = oldTheme->map()->layers().constEnd();
-        for (; it != end; ++it) {
-            GeoSceneLayer* layer = *it;
-            if ( layer->backend() == dgml::dgmlValue_geodata && layer->datasets().count() > 0 ) {
-                // look for documents
-                const QVector<GeoSceneAbstractDataset*> & datasets = layer->datasets();
-                QVector<GeoSceneAbstractDataset*>::const_iterator itds = datasets.constBegin();
-                QVector<GeoSceneAbstractDataset*>::const_iterator endds = datasets.constEnd();
-                for (; itds != endds; ++itds) {
-                    GeoSceneAbstractDataset* dataset = *itds;
-                    if( dataset->fileFormat() == "KML" ) {
-                        QString containername = reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename();
-                        loadedContainers <<  containername;
-                    }
-                }
-            }
-        }
-    }
     QStringList loadList;
-    const QVector<GeoSceneLayer*> & layers = d->m_mapTheme->map()->layers();
-    it = layers.constBegin();
-    end = layers.constEnd();
-    for (; it != end; ++it) {
-        GeoSceneLayer* layer = *it;
-        if ( layer->backend() == dgml::dgmlValue_geodata && layer->datasets().count() > 0 ) {
-            // look for documents
-            const QVector<GeoSceneAbstractDataset*> & datasets = layer->datasets();
-            QVector<GeoSceneAbstractDataset*>::const_iterator itds = datasets.constBegin();
-            QVector<GeoSceneAbstractDataset*>::const_iterator endds = datasets.constEnd();
-            for (; itds != endds; ++itds) {
-                GeoSceneAbstractDataset* dataset = *itds;
-                if( dataset->fileFormat() == "KML" ) {
-                    QString containername = reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename();
-                    if ( !loadedContainers.removeOne( containername ) ) {
-                        loadList << containername;
-                    }
+    foreach ( GeoSceneLayer *layer, d->m_mapTheme->map()->layers() ) {
+        if ( layer->backend() != dgml::dgmlValue_geodata )
+            continue;
+        if ( layer->datasets().count() <= 0 )
+            continue;
+
+        // look for documents
+        foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
+            if( dataset->fileFormat() == "KML" ) {
+                QString containername = reinterpret_cast<GeoSceneXmlDataSource*>( dataset )->filename();
+                if ( !loadedContainers.removeOne( containername ) ) {
+                    loadList << containername;
                 }
             }
         }

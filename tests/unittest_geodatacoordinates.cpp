@@ -865,6 +865,25 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
 
     const QVector<Language> languages = QVector<Language>()
         << Language(
+            "English",
+            "*", // degree
+            "*", // minutes
+            "*", // seconds
+            "*", // north
+            "*", // south
+            "*", // east
+            "*", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "N051 30.150′ W000 07.234′",
+                    -0.12056666666666666921, 51.50249999999999772626)
+                << Sample(
+                    "Ålgård",
+                    "N58.764828 E5.855483",
+                    5.85548300000000043752, 58.76482800000000139562))
+
+        << Language(
             "Japanese",
             "度", // degree
             "分", // minutes
@@ -1212,21 +1231,36 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "33° 52′ j. š., 151° 13′ v. d.",
                     -151.21666666666669698316, -33.86666666666666714036))
 
-#if 0
-    // Hindi ???
-    "उ" // north
-    "द" // south
-    "पू" // east
-    "प" // west
-    "51°30′25″उ 00°07′39″प" // London
 
-    // Tamil ???
-    "வ" // north
-    "தெ" // south
-    "கி" // east
-    "மே" // west
-    "51°30′25″வ 00°07′39″மே" // London
-#endif
+        << Language(
+            "Hindi",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "उ", // north
+            "द", // south
+            "पू", // east
+            "प", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "51°30′25″उ 00°07′39″पू",
+                    0.12750000000000000222, 51.50694444444444286546))
+
+        << Language(
+            "Tamil",
+            "", // degree
+            "", // minutes
+            "", // seconds
+            "வ", // north
+            "தெ", // south
+            "கி", // east
+            "மே", // west
+            QVector<Sample>()
+                << Sample(
+                    "London",
+                    "51°30′25″ வ 00°07′39″ கி",
+                    0.12750000000000000222, 51.50694444444444286546))
         ;
 
     foreach( const Language& language, languages ) {

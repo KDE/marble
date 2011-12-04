@@ -11,8 +11,6 @@
 #ifndef MARBLE_TRACKERPLUGINMODEL_H
 #define MARBLE_TRACKERPLUGINMODEL_H
 
-#include "marble_export.h"
-
 #include <QtCore/QObject>
 
 class QUrl;
@@ -28,7 +26,7 @@ class TrackerPluginModelPrivate;
 /**
  * A model used to download, store and update items
  */
-class MARBLE_EXPORT TrackerPluginModel : public QObject
+class TrackerPluginModel : public QObject
 {
     Q_OBJECT
 public:
@@ -41,6 +39,8 @@ public:
     TrackerPluginModel( GeoDataTreeModel *treeModel, const PluginManager *pluginManager  );
 
     virtual ~TrackerPluginModel();
+
+    void enable( bool enabled );
 
     /**
      * Add the item @p mark to the model.

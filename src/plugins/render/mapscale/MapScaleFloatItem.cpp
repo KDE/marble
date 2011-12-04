@@ -50,10 +50,9 @@ MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
       m_showRatioScale( false ),
       m_contextMenu( 0 )
 {
-    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-    if ( smallScreen ) {
+#ifdef Q_WS_MAEMO_5
         setPosition( QPointF( 220.0, 10.5 ) );
-    }
+#endif // Q_WS_MAEMO_5
 }
 
 MapScaleFloatItem::~MapScaleFloatItem()
@@ -204,10 +203,9 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
 
     m_scaleBarDistance = (qreal)(m_scaleBarWidth) * pixel2Length;
 
-    DistanceUnit distanceUnit;
-    distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
+    const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
-    if ( distanceUnit == MilesFeet ) {
+    if ( measurementSystem == QLocale::ImperialSystem ) {
         m_scaleBarDistance *= KM2MI;
     }
 
@@ -236,10 +234,11 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
                                fontHeight + 3, m_pixelInterval - 1,
                                m_scaleBarHeight );
 
-            DistanceUnit distanceUnit;
-            distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
+            QLocale::MeasurementSystem distanceUnit;
+            distanceUnit = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
-            if ( distanceUnit == Meter ) {
+            switch ( distanceUnit ) {
+            case QLocale::MetricSystem:
                 if ( m_bestDivisor * m_valueInterval > 10000 ) {
                     m_unit = tr("km");
                     intervalStr.setNum( j * m_valueInterval / 1000 );
@@ -248,8 +247,9 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
                     m_unit = tr("m");
                     intervalStr.setNum( j * m_valueInterval );
                 }
-            }
-            else {
+                break;
+
+            case QLocale::ImperialSystem:
                 m_unit = tr("mi");
                 intervalStr.setNum( j * m_valueInterval / 1000 );                
                 
@@ -258,7 +258,8 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
                 }
                 else {
                     intervalStr.setNum( qreal(j * m_valueInterval ) / 1000.0, 'f', 2 );
-                }                
+                }
+                break;
             }
 
         painter->setFont( font() );

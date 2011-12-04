@@ -40,7 +40,9 @@ const int REPAINT_SCHEDULING_INTERVAL = 1000;
 class TextureLayer::Private
 {
 public:
-    Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator, TextureLayer *parent );
+    Private( HttpDownloadManager *downloadManager,
+             const SunLocator *sunLocator,
+             TextureLayer *parent );
 
     void mapChanged();
     void updateTextureLayers();
@@ -61,10 +63,12 @@ public:
     QTimer           m_repaintTimer;
 };
 
-TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator, TextureLayer *parent )
+TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
+                                const SunLocator *sunLocator,
+                                TextureLayer *parent )
     : m_parent( parent )
     , m_sunLocator( sunLocator )
-    , m_loader( downloadManager, mapThemeManager )
+    , m_loader( downloadManager )
     , m_tileLoader( &m_loader, sunLocator )
     , m_pixmapCache( 100 )
     , m_texmapper( 0 )
@@ -95,11 +99,16 @@ void TextureLayer::Private::updateTextureLayers()
             const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
             enabled |= !propertyExists; // if property doesn't exist, enable texture nevertheless
         }
-        if ( enabled )
+        if ( enabled ) {
             result.append( candidate );
+            mDebug() << "enabling texture" << candidate->name();
+        } else {
+            mDebug() << "disabling texture" << candidate->name();
+        }
     }
 
     m_tileLoader.setTextureLayers( result );
+    m_loader.setTextureLayers( result );
     m_pixmapCache.clear();
 }
 
@@ -116,9 +125,10 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
 
 
 
-TextureLayer::TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator )
+TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
+                            const SunLocator *sunLocator )
     : QObject()
-    , d( new Private( mapThemeManager, downloadManager, sunLocator, this ) )
+    , d( new Private( downloadManager, sunLocator, this ) )
 {
     connect( &d->m_loader, SIGNAL( tileCompleted( const TileId &, const QImage & ) ),
              this, SLOT( updateTile( const TileId &, const QImage & ) ) );
@@ -303,11 +313,6 @@ void TextureLayer::downloadTile( const TileId &tileId )
 
 void TextureLayer::setMapTheme( const QVector<const GeoSceneTexture *> &textures, GeoSceneGroup *textureLayerSettings )
 {
-    if ( d->m_textureLayerSettings ) {
-        disconnect( d->m_textureLayerSettings, SIGNAL( valueChanged( QString, bool ) ),
-                    this,                      SLOT( updateTextureLayers() ) );
-    }
-
     d->m_textures = textures;
     d->m_textureLayerSettings = textureLayerSettings;
 

@@ -149,10 +149,10 @@ void MeasureTool::drawTotalDistanceLabel( GeoPainter *painter,
 {
     QString  distanceString;
 
-    DistanceUnit distanceUnit;
-    distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
+    QLocale::MeasurementSystem measurementSystem;
+    measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
-    if ( distanceUnit == Meter ) {
+    if ( measurementSystem == QLocale::MetricSystem ) {
         if ( totalDistance >= 1000.0 ) {
             distanceString = tr("Total Distance: %1 km").arg( totalDistance/1000.0 );
         }

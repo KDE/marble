@@ -11,8 +11,6 @@
 #ifndef MARBLE_TRACKERPLUGINITEM_H
 #define MARBLE_TRACKERPLUGINITEM_H
 
-#include "marble_export.h"
-
 class QString;
 
 namespace Marble {
@@ -26,7 +24,7 @@ class ViewportParams;
 /**
  * Subclass this to represent items in your TrackerPluginModel.
  */
-class MARBLE_EXPORT TrackerPluginItem
+class TrackerPluginItem
 {
 public:
     /**

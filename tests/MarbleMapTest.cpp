@@ -9,6 +9,7 @@
 //
 
 #include <QtTest/QtTest>
+#include "GeoPainter.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 
@@ -69,6 +70,19 @@ class MarbleMapTest : public QObject
 
     void rotateBySpherical_data();
     void rotateBySpherical();
+
+    void setMapTheme_data();
+    void setMapTheme();
+
+    void switchMapThemes();
+
+    void setMapThemeIdTwoMaps_data();
+    void setMapThemeIdTwoMaps();
+
+    void switchMapThemesTwoMaps();
+
+    void paint_data();
+    void paint();
 
  private:
     MarbleModel m_model;
@@ -458,6 +472,129 @@ void MarbleMapTest::rotateBySpherical()
 
     QFUZZYCOMPARE( map.centerLongitude(), expectedLon, 0.0001 );
     QFUZZYCOMPARE( map.centerLatitude(), expectedLat, 0.0001 );
+}
+
+void MarbleMapTest::setMapTheme_data()
+{
+    QTest::addColumn<QString>( "mapThemeId" );
+
+    addRow() << "earth/plain/plain.dgml";
+    addRow() << "earth/srtm/srtm.dgml";
+    addRow() << "earth/openstreetmap/openstreetmap.dgml";
+}
+
+void MarbleMapTest::setMapTheme()
+{
+    QFETCH( QString, mapThemeId );
+
+    MarbleMap map;
+
+    map.setMapThemeId( mapThemeId );
+
+    QCOMPARE( map.mapThemeId(), mapThemeId );
+
+    QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
+}
+
+void MarbleMapTest::switchMapThemes()
+{
+    MarbleMap map;
+
+    map.setMapThemeId( "earth/plain/plain.dgml" );
+    QCOMPARE( map.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+
+    map.setMapThemeId( "earth/srtm/srtm.dgml" );
+    QCOMPARE( map.mapThemeId(), QString( "earth/srtm/srtm.dgml" ) );
+
+    map.setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
+    QCOMPARE( map.mapThemeId(), QString( "earth/openstreetmap/openstreetmap.dgml" ) );
+
+    map.setMapThemeId( "earth/plain/plain.dgml" );
+    QCOMPARE( map.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+
+    QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
+}
+
+void MarbleMapTest::setMapThemeIdTwoMaps_data()
+{
+    QTest::addColumn<QString>( "mapThemeId" );
+
+    addRow() << "earth/plain/plain.dgml";
+    addRow() << "earth/srtm/srtm.dgml";
+    addRow() << "earth/openstreetmap/openstreetmap.dgml";
+}
+
+void MarbleMapTest::setMapThemeIdTwoMaps()
+{
+    QFETCH( QString, mapThemeId );
+
+    MarbleModel model;
+    MarbleMap map1( &model );
+    MarbleMap map2( &model );
+
+    map1.setMapThemeId( mapThemeId );
+
+    QCOMPARE( map1.mapThemeId(), mapThemeId );
+    QCOMPARE( map2.mapThemeId(), mapThemeId );
+
+    QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
+}
+
+void MarbleMapTest::switchMapThemesTwoMaps()
+{
+    MarbleModel model;
+    MarbleMap map1( &model );
+    MarbleMap map2( &model );
+
+    map1.setMapThemeId( "earth/plain/plain.dgml" );
+    QCOMPARE( map1.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+    QCOMPARE( map2.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+
+    map2.setMapThemeId( "earth/srtm/srtm.dgml" );
+    QCOMPARE( map1.mapThemeId(), QString( "earth/srtm/srtm.dgml" ) );
+    QCOMPARE( map2.mapThemeId(), QString( "earth/srtm/srtm.dgml" ) );
+
+    map1.setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
+    QCOMPARE( map1.mapThemeId(), QString( "earth/openstreetmap/openstreetmap.dgml" ) );
+    QCOMPARE( map2.mapThemeId(), QString( "earth/openstreetmap/openstreetmap.dgml" ) );
+
+    map2.setMapThemeId( "earth/plain/plain.dgml" );
+    QCOMPARE( map1.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+    QCOMPARE( map2.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+
+    QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
+}
+
+void MarbleMapTest::paint_data()
+{
+    QTest::addColumn<QString>( "mapThemeId" );
+
+    addRow() << "earth/plain/plain.dgml";
+    addRow() << "earth/srtm/srtm.dgml";
+    addRow() << "earth/openstreetmap/openstreetmap.dgml";
+}
+
+void MarbleMapTest::paint()
+{
+    QFETCH( QString, mapThemeId );
+
+    MarbleMap map;
+
+    map.setMapThemeId( mapThemeId );
+    map.setSize( 200, 200 );
+
+    QCOMPARE( map.mapThemeId(), mapThemeId );
+
+    QPixmap paintDevice( map.size() );
+
+    QVERIFY( map.projection() == Spherical );
+
+    const bool doClip = map.radius() > map.width() / 2 || map.radius() > map.height() / 2;
+
+    GeoPainter painter1( &paintDevice, map.viewport(), map.mapQuality(), doClip );
+    map.paint( painter1, QRect() );
+
+    QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
 }
 
 }

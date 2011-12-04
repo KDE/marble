@@ -9,6 +9,7 @@
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
 // Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
 // Copyright 2011      Friedrich W. H. Kossebau <kossebau@kde.org>
+// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
@@ -62,7 +63,6 @@ private:
      * @param isPosHemisphere if the texts of the degree value are relative to the pos hemisphere
      * @return the calculated degree value
      */
-    typedef qreal (&degreeValueFromXFunction)( const QRegExp& regex, int c, bool isPosHemisphere );
     static qreal degreeValueFromDMS( const QRegExp& regex, int c, bool isPosHemisphere );
     static qreal degreeValueFromDM( const QRegExp& regex, int c, bool isPosHemisphere );
     static qreal degreeValueFromD( const QRegExp& regex, int c, bool isPosHemisphere );
@@ -87,21 +87,13 @@ public:
 private:
     /**
      * @brief tries to parse the input with the given reg expression and get the lon and lat values
-     * @param expTemplate the regular expression to use for matching
-     * (should contain placeholders %1 and %2 for non-capturing decimalPoint expression
-     * and resp. the capturing direction expression)
      * @param input the string to parse, must not have other content than the coordinates
-     * @param degreeValueFromX function pointer of the function to use for calculating
-     * the degree value from the captured texts
-     * @param c the index in the list of captured texts which has the direction text
-     * (assumes that the direction text is the last captured text per coordinate,
-     * and that for both coordinates the order and the number of the texts are the same)
      * @param dirPosition position of the dir in the list of captured texts
      * @return @c true on successful parsing, @c false otherwise.
      */
-    bool tryMatch( const char* expTemplate, const QString& input,
-                   degreeValueFromXFunction degreeValueFromX,
-                   int c, DirPosition dirPosition );
+    bool tryMatchFromDms( const QString& input, DirPosition dirPosition );
+    bool tryMatchFromDm( const QString& input, DirPosition dirPosition );
+    bool tryMatchFromD( const QString& input, DirPosition dirPosition );
 
     /**
     * @brief initializes also all properties which only need to be lazily initialized
@@ -269,104 +261,167 @@ bool LonLatParser::parse( const QString& string )
 
     initAll();
 
-    // #2: Two numbers with directions
-    // direction as postfix, e.g. 74.2245 N 32.2434 W
-    const char lonLatDCapExp[] =
-        "([-+]?\\d{1,3}%1?\\d*)(?:%3)?(?:\\s*)%2(?:,|;|\\s)\\s*"
-        "([-+]?\\d{1,3}%1?\\d*)(?:%3)?(?:\\s*)%2";
-
-    if (tryMatch(lonLatDCapExp, input, degreeValueFromD, 2, PostfixDir)) {
+    if ( tryMatchFromD( input, PostfixDir ) ) {
         return true;
     }
 
-    // direction as prefix, e.g. N 74.2245 W 32.2434
-    const char lonLatDCapExp2[] =
-        "(%2(?:\\s*)[-+]?\\d{1,3}%1?\\d*)(?:%3)?\\s*(?:,|;|\\s)\\s*"
-        "(%2(?:\\s*)[-+]?\\d{1,3}%1?\\d*)(?:%3)?";
-
-    if (tryMatch(lonLatDCapExp2, input, degreeValueFromD, 2, PrefixDir)) {
+    if ( tryMatchFromD( input, PrefixDir ) ) {
         return true;
     }
 
-    // #3: Sexagesimal
-    // direction as postfix
-    const char lonLatDMSCapExp[] =
-        "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
-        "(\\d{1,2}%1?\\d*)(?:%5)?\\s*%2[,;]?\\s*"
-        "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
-        "(\\d{1,2}%1?\\d*)(?:%5)?\\s*%2";
-
-    if (tryMatch(lonLatDMSCapExp, input, degreeValueFromDMS, 5, PostfixDir)) {
+    if ( tryMatchFromDms( input, PostfixDir ) ) {
         return true;
     }
 
-    // direction as prefix
-    const char lonLatDMSCapExp2[] =
-        "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
-        "(\\d{1,2}%1?\\d*)(?:%5)?\\s*(?:,|;|\\s)\\s*"
-        "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
-        "(\\d{1,2}%1?\\d*)(?:%5)?";
-
-    if (tryMatch(lonLatDMSCapExp2, input, degreeValueFromDMS, 5, PrefixDir)) {
+    if ( tryMatchFromDms( input, PrefixDir ) ) {
         return true;
     }
 
-    // #4: Sexagesimal with minute precision
-    // direction as postfix
-    const char lonLatDMCapExp[] =
-        "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*%2[,;]?\\s*"
-        "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*%2";
-
-    if (tryMatch(lonLatDMCapExp, input, degreeValueFromDM, 4, PostfixDir)) {
+    if ( tryMatchFromDm( input, PostfixDir ) ) {
         return true;
     }
 
-    // direction as prefix
-    const char lonLatDMCapExp2[] =
-        "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*(?:,|;|\\s)\\s*"
-        "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?";
-
-    if (tryMatch(lonLatDMCapExp2, input, degreeValueFromDM, 4, PrefixDir)) {
+    if ( tryMatchFromDm( input, PrefixDir ) ) {
         return true;
     }
 
     return false;
 }
 
-bool LonLatParser::tryMatch(const char* expTemplate, const QString& input,
-                            degreeValueFromXFunction degreeValueFromX,
-                            int c, DirPosition dirPosition )
+// #3: Sexagesimal
+bool LonLatParser::tryMatchFromDms( const QString& input, DirPosition dirPosition )
 {
-    bool successful = false;
+    // direction as postfix
+    const char *postfixCapExp =
+        "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
+        "(\\d{1,2}%1?\\d*)(?:%5)?\\s*%2[,;]?\\s*"
+        "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
+        "(\\d{1,2}%1?\\d*)(?:%5)?\\s*%2";
+
+    // direction as prefix
+    const char *prefixCapExp =
+        "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
+        "(\\d{1,2}%1?\\d*)(?:%5)?\\s*(?:,|;|\\s)\\s*"
+        "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
+        "(\\d{1,2}%1?\\d*)(?:%5)?";
+
+    const char *expTemplate = ( dirPosition == PostfixDir ) ? postfixCapExp
+                                                            : prefixCapExp;
 
     const QString numberCapExp =
-        (c == 5) ? QString::fromLatin1(expTemplate).arg(m_decimalPointExp, m_dirCapExp,
-                                                        m_degreeExp, m_minutesExp, m_secondsExp) :
-        (c == 4) ? QString::fromLatin1(expTemplate).arg(m_decimalPointExp, m_dirCapExp,
-                                                        m_degreeExp, m_minutesExp) :
-        /* else */ QString::fromLatin1(expTemplate).arg(m_decimalPointExp, m_dirCapExp,
-                                                        m_degreeExp);
-    const QRegExp regex = QRegExp( numberCapExp );
-    if( regex.exactMatch(input) ) {
-        bool isDir1LonDir;
-        bool isLonDirPosHemisphere;
-        bool isLatDirPosHemisphere;
-        const QString dir1 = regex.cap( dirPosition == PostfixDir ? c : 1 );
-        const QString dir2 = regex.cap( dirPosition == PostfixDir ? 2*c : c+1 );
-        if (isCorrectDirections(dir1, dir2, isDir1LonDir,
-                                isLonDirPosHemisphere, isLatDirPosHemisphere)) {
-            const int valueStartIndex1 = (dirPosition == PostfixDir ? 1 : 2);
-            const int valueStartIndex2 = c + (dirPosition == PostfixDir ? 1 : 2);
-            m_lon = degreeValueFromX(regex, isDir1LonDir ? valueStartIndex1 : valueStartIndex2,
-                                     isLonDirPosHemisphere);
-            m_lat = degreeValueFromX(regex, isDir1LonDir ? valueStartIndex2 : valueStartIndex1,
-                                     isLatDirPosHemisphere);
+        QString::fromLatin1( expTemplate ).arg( m_decimalPointExp, m_dirCapExp,
+                                                m_degreeExp, m_minutesExp, m_secondsExp);
 
-            successful = true;
-        }
+    const QRegExp regex = QRegExp( numberCapExp );
+    if( !regex.exactMatch( input ) ) {
+        return false;
     }
 
-    return successful;
+    bool isDir1LonDir;
+    bool isLonDirPosHemisphere;
+    bool isLatDirPosHemisphere;
+    const QString dir1 = regex.cap( dirPosition == PostfixDir ? 5 : 1 );
+    const QString dir2 = regex.cap( dirPosition == PostfixDir ? 10 : 6 );
+    if ( !isCorrectDirections( dir1, dir2, isDir1LonDir,
+                               isLonDirPosHemisphere, isLatDirPosHemisphere ) ) {
+        return false;
+    }
+
+    const int valueStartIndex1 = (dirPosition == PostfixDir ? 1 : 2);
+    const int valueStartIndex2 = (dirPosition == PostfixDir ? 6 : 7);
+    m_lon = degreeValueFromDMS( regex, isDir1LonDir ? valueStartIndex1 : valueStartIndex2,
+                                isLonDirPosHemisphere );
+    m_lat = degreeValueFromDMS( regex, isDir1LonDir ? valueStartIndex2 : valueStartIndex1,
+                                isLatDirPosHemisphere );
+
+    return true;
+}
+
+// #4: Sexagesimal with minute precision
+bool LonLatParser::tryMatchFromDm( const QString& input, DirPosition dirPosition )
+{
+    // direction as postfix
+    const char *postfixCapExp =
+        "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*%2[,;]?\\s*"
+        "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*%2";
+
+    // direction as prefix
+    const char *prefixCapExp =
+        "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*(?:,|;|\\s)\\s*"
+        "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?";
+
+    const char *expTemplate = ( dirPosition == PostfixDir ) ? postfixCapExp
+                                                            : prefixCapExp;
+
+    const QString numberCapExp =
+        QString::fromLatin1( expTemplate ).arg( m_decimalPointExp, m_dirCapExp,
+                                                m_degreeExp, m_minutesExp );
+    const QRegExp regex = QRegExp( numberCapExp );
+    if( !regex.exactMatch(input) ) {
+        return false;
+    }
+
+    bool isDir1LonDir;
+    bool isLonDirPosHemisphere;
+    bool isLatDirPosHemisphere;
+    const QString dir1 = regex.cap( dirPosition == PostfixDir ? 4 : 1 );
+    const QString dir2 = regex.cap( dirPosition == PostfixDir ? 8 : 5 );
+    if ( !isCorrectDirections( dir1, dir2, isDir1LonDir,
+                               isLonDirPosHemisphere, isLatDirPosHemisphere ) ) {
+        return false;
+    }
+
+    const int valueStartIndex1 = ( dirPosition == PostfixDir ? 1 : 2 );
+    const int valueStartIndex2 = ( dirPosition == PostfixDir ? 5 : 6 );
+    m_lon = degreeValueFromDM( regex, isDir1LonDir ? valueStartIndex1 : valueStartIndex2,
+                               isLonDirPosHemisphere );
+    m_lat = degreeValueFromDM( regex, isDir1LonDir ? valueStartIndex2 : valueStartIndex1,
+                               isLatDirPosHemisphere );
+
+    return true;
+}
+
+// #2: Two numbers with directions
+bool LonLatParser::tryMatchFromD( const QString& input, DirPosition dirPosition )
+{
+    // direction as postfix, e.g. 74.2245 N 32.2434 W
+    const char *postfixCapExp =
+        "([-+]?\\d{1,3}%1?\\d*)(?:%3)?(?:\\s*)%2(?:,|;|\\s)\\s*"
+        "([-+]?\\d{1,3}%1?\\d*)(?:%3)?(?:\\s*)%2";
+
+    // direction as prefix, e.g. N 74.2245 W 32.2434
+    const char *prefixCapExp =
+        "%2\\s*([-+]?\\d{1,3}%1?\\d*)(?:%3)?\\s*(?:,|;|\\s)\\s*"
+        "%2\\s*([-+]?\\d{1,3}%1?\\d*)(?:%3)?";
+
+    const char *expTemplate = ( dirPosition == PostfixDir ) ? postfixCapExp
+                                                            : prefixCapExp;
+
+    const QString numberCapExp =
+        QString::fromLatin1( expTemplate ).arg( m_decimalPointExp, m_dirCapExp, m_degreeExp );
+    const QRegExp regex = QRegExp( numberCapExp );
+    if( !regex.exactMatch( input ) ) {
+        return false;
+    }
+
+    bool isDir1LonDir;
+    bool isLonDirPosHemisphere;
+    bool isLatDirPosHemisphere;
+    const QString dir1 = regex.cap( dirPosition == PostfixDir ? 2 : 1 );
+    const QString dir2 = regex.cap( dirPosition == PostfixDir ? 4 : 3 );
+    if ( !isCorrectDirections( dir1, dir2, isDir1LonDir,
+                               isLonDirPosHemisphere, isLatDirPosHemisphere ) ) {
+        return false;
+    }
+
+    const int valueStartIndex1 = ( dirPosition == PostfixDir ? 1 : 2 );
+    const int valueStartIndex2 = ( dirPosition == PostfixDir ? 3 : 4 );
+    m_lon = degreeValueFromD( regex, isDir1LonDir ? valueStartIndex1 : valueStartIndex2,
+                              isLonDirPosHemisphere );
+    m_lat = degreeValueFromD( regex, isDir1LonDir ? valueStartIndex2 : valueStartIndex1,
+                              isLatDirPosHemisphere );
+
+    return true;
 }
 
 QString LonLatParser::createDecimalPointExp()

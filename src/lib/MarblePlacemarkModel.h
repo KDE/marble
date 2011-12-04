@@ -40,7 +40,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
 
     Q_OBJECT
 
-    Q_PROPERTY( int count READ rowCount )
+    Q_PROPERTY( int count READ rowCount NOTIFY countChanged )
 
  public:
     /**
@@ -113,6 +113,9 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
     void removePlacemarks( const QString &containerName,
                            int start,
                            int length );
+
+Q_SIGNALS:
+    void countChanged();
 
  private:
 

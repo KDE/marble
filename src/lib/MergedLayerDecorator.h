@@ -38,7 +38,7 @@ class MergedLayerDecorator
     MergedLayerDecorator( TileLoader * const tileLoader, const SunLocator* sunLocator );
     virtual ~MergedLayerDecorator();
 
-    QImage merge( const TileId id, const QVector<QSharedPointer<TextureTile> > &tiles );
+    QImage merge( const TileId id, const QVector<QSharedPointer<TextureTile> > &tiles ) const;
 
     void setThemeId( const QString &themeId );
 

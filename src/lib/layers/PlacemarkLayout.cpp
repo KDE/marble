@@ -291,8 +291,8 @@ int PlacemarkLayout::maxLabelHeight() const
 
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
-        GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
-        GeoDataStyle* style = placemark->style();
+        const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+        const GeoDataStyle* style = placemark->style();
         QFont labelFont = style->labelStyle().font();
         int textHeight = QFontMetrics( labelFont ).height();
         if ( textHeight > maxLabelHeight )
@@ -301,9 +301,9 @@ int PlacemarkLayout::maxLabelHeight() const
 
     for ( int i = 0; i < m_placemarkModel.rowCount(); ++i ) {
         QModelIndex index = m_placemarkModel.index( i, 0 );
-        GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+        const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
         if ( placemark ) {
-            GeoDataStyle* style = placemark->style();
+            const GeoDataStyle* style = placemark->style();
             QFont labelFont = style->labelStyle().font();
             int textHeight = QFontMetrics( labelFont ).height();
             if ( textHeight > maxLabelHeight )
@@ -365,7 +365,7 @@ void PlacemarkLayout::setCacheData()
             continue;
         }
 
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+        const GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
 
         bool ok;
         GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
@@ -378,6 +378,7 @@ void PlacemarkLayout::setCacheData()
         TileId key = placemarkToTileId( coordinates, popularity );
         m_placemarkCache[key].append( placemark );
     }
+    emit repaintNeeded();
 }
 
 QStringList PlacemarkLayout::renderPosition() const
@@ -456,7 +457,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
     TileCoordsPyramid pyramid(0, popularity );
     pyramid.setBottomLevelCoords( rect );
 
-    QList<GeoDataPlacemark*> placemarkList;
+    QList<const GeoDataPlacemark*> placemarkList;
     for ( int level = pyramid.topLevel(); level <= pyramid.bottomLevel(); ++level ) {
         QRect const coords = pyramid.coords( level );
         int x1, y1, x2, y2;
@@ -478,7 +479,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
 
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
-        GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+        const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
 
         bool ok;
         GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
@@ -500,7 +501,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         // Find the corresponding visible placemark
         VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
 
-        GeoDataStyle* style = placemark->style();
+        const GeoDataStyle* style = placemark->style();
 
         // Choose Section
         const QVector<VisiblePlacemark*> currentsec = rowsection.at( y / m_maxLabelHeight );
@@ -554,7 +555,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
 
     for ( int i = 0; i != rowCount; ++i )
     {
-        GeoDataPlacemark *placemark = placemarkList.at(i);
+        const GeoDataPlacemark *placemark = placemarkList.at(i);
 
         bool ok;
         GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
@@ -629,7 +630,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
          */
         bool isSelected = false;
         foreach ( QModelIndex index, selection.indexes() ) {
-            GeoDataPlacemark *mark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+            const GeoDataPlacemark *mark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
             if (mark == placemark ) {
                 isSelected = true;
                 break;
@@ -643,7 +644,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
 
         // Find the corresponding visible placemark
         VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
-        GeoDataStyle* style = placemark->style();
+        const GeoDataStyle* style = placemark->style();
 
         // Choose Section
         const QVector<VisiblePlacemark*> currentsec = rowsection.at( y / m_maxLabelHeight );
@@ -694,7 +695,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
     return true;
 }
 
-GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( GeoDataPlacemark *placemark, bool *ok ) const
+GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( const GeoDataPlacemark *placemark, bool *ok ) const
 {
     GeoDataCoordinates coordinates = placemark->coordinate( m_clock->dateTime(), ok );
     if ( !*ok && qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() )
@@ -705,7 +706,7 @@ GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( GeoDataPlacemark *
     return coordinates;
 }
 
-QRect PlacemarkLayout::roomForLabel( GeoDataStyle * style,
+QRect PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
                                       const QVector<VisiblePlacemark*> &currentsec,
                                       const int x, const int y,
                                       const QString &labelText )
@@ -716,7 +717,6 @@ QRect PlacemarkLayout::roomForLabel( GeoDataStyle * style,
 
     QFont labelFont = style->labelStyle().font();
     int textHeight = QFontMetrics( labelFont ).height();
-//    mDebug() << textHeight;
 
     int textWidth;
     if ( style->labelStyle().glow() ) {
@@ -724,7 +724,6 @@ QRect PlacemarkLayout::roomForLabel( GeoDataStyle * style,
         textWidth = ( QFontMetrics( labelFont ).width( labelText )
             + (int)( 2 * s_labelOutlineWidth ) );
     } else {
-        QFont labelFont = style->labelStyle().font();
         textWidth = ( QFontMetrics( labelFont ).width( labelText ) );
     }
 

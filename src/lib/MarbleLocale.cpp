@@ -19,8 +19,7 @@ namespace Marble
 {
 
 MarbleLocalePrivate::MarbleLocalePrivate()
-    : m_distanceUnit( NoDistanceUnit ),
-      m_measureSystem( Metric )
+    : m_measurementSystem( QLocale::MetricSystem )
 {
 }
 
@@ -38,34 +37,14 @@ MarbleLocale::~MarbleLocale()
     delete d;
 }
 
-DistanceUnit MarbleLocale::distanceUnit() const
+void MarbleLocale::setMeasurementSystem( QLocale::MeasurementSystem measurementSystem )
 {
-    if( d->m_distanceUnit == NoDistanceUnit ) {
-        if ( d->m_measureSystem == Metric ) {
-            return Meter;
-        }
-        else {
-            return MilesFeet;
-        }
-    }
-    else {
-        return d->m_distanceUnit;
-    }
+    d->m_measurementSystem = measurementSystem;
 }
 
-void MarbleLocale::setDistanceUnit( DistanceUnit distanceUnit )
+QLocale::MeasurementSystem MarbleLocale::measurementSystem() const
 {
-    d->m_distanceUnit = distanceUnit;
-}
-
-void MarbleLocale::setMeasureSystem( MeasureSystem measureSystem )
-{
-    d->m_measureSystem = measureSystem;
-}
-
-MeasureSystem MarbleLocale::measureSystem() const
-{
-    return d->m_measureSystem;
+    return d->m_measurementSystem;
 }
 
 QString MarbleLocale::languageCode()

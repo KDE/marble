@@ -212,7 +212,8 @@ void PluginManagerPrivate::loadPlugins()
     }
 
     m_pluginsLoaded = true;
-    qDebug("Time elapsed: %d ms", t.elapsed());
+
+    mDebug() << Q_FUNC_INFO << "Time elapsed:" << t.elapsed() << "ms";
 }
 
 }

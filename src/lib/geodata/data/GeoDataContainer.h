@@ -92,7 +92,12 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      * @brief  returns the requested child item
      */
     GeoDataFeature* child( int );
-    
+
+    /**
+     * @brief  returns the requested child item
+     */
+    const GeoDataFeature* child( int ) const;
+
     /**
      * @brief returns the position of an item in the list
      */

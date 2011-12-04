@@ -26,7 +26,7 @@
 #include "MarbleDirs.h"
 #include "ElevationModel.h"
 #include "MarbleGraphicsGridLayout.h"
-#include "LabelGraphicsItem.h"
+#include "MarbleMath.h"
 
 namespace Marble
 {
@@ -57,28 +57,35 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, cons
         m_firstVisiblePoint( 0 ),
         m_lastVisiblePoint( 0 ),
         m_zoomToViewport( false ),
+        m_markerIconContainer(),
+        m_markerTextContainer(),
+        m_markerIcon( &m_markerIconContainer ),
+        m_markerText( &m_markerTextContainer ),
         m_lastMarkerRegion( QRegion() )
-
 {
     setVisible( false );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
-        setPosition( QPointF( 220.0, 10.5 ) );
+        setPosition( QPointF( 10.5, 10.5 ) );
     }
+    bool const highRes = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::HighResolution;
+    if ( highRes ) {
+        m_eleGraphHeight = 100;
+    }
+
     setPadding(1);
-    m_markerIcon = new LabelGraphicsItem( &m_markerIconContainer );
-    m_markerIcon->setImage( QImage( ":/flag-red-mirrored.png" ) );
-    m_markerText = new LabelGraphicsItem( &m_markerTextContainer );
+    m_markerIcon.setImage( QImage( ":/flag-red-mirrored.png" ) );
 
     MarbleGraphicsGridLayout *topLayout1 = new MarbleGraphicsGridLayout( 1, 1 );
     m_markerIconContainer.setLayout( topLayout1 );
-    topLayout1->addItem( m_markerIcon, 0, 0 );
+    topLayout1->addItem( &m_markerIcon, 0, 0 );
 
     MarbleGraphicsGridLayout *topLayout2 = new MarbleGraphicsGridLayout( 1, 1 );
     m_markerTextContainer.setLayout( topLayout2 );
-    m_markerText->setFrame( RoundedRectFrame );
+    m_markerText.setFrame( RoundedRectFrame );
+    m_markerText.setPadding( 1 );
     topLayout2->setAlignment( Qt::AlignCenter );
-    topLayout2->addItem( m_markerText, 0, 1 );
+    topLayout2->addItem( &m_markerText, 0, 0 );
 }
 
 ElevationProfileFloatItem::~ElevationProfileFloatItem()
@@ -88,6 +95,16 @@ ElevationProfileFloatItem::~ElevationProfileFloatItem()
 QStringList ElevationProfileFloatItem::backendTypes() const
 {
     return QStringList( "elevationprofile" );
+}
+
+QStringList ElevationProfileFloatItem::renderPosition() const
+{
+    return QStringList() << "FLOAT_ITEM" << "HOVERS_ABOVE_SURFACE";
+}
+
+qreal ElevationProfileFloatItem::zValue() const
+{
+    return 1.0;
 }
 
 QString ElevationProfileFloatItem::name() const
@@ -107,7 +124,7 @@ QString ElevationProfileFloatItem::nameId() const
 
 QString ElevationProfileFloatItem::description() const
 {
-    return tr("This is a float item that provides an route/track elevation profile.");
+    return tr("This is a float item that provides a route/track elevation profile.");
 }
 
 QIcon ElevationProfileFloatItem::icon () const
@@ -151,11 +168,14 @@ void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
 {
     if ( !( viewport->width() == m_viewportWidth && m_isInitialized ) ) {
         m_fontHeight     = QFontMetrics( font() ).ascent();
-        setContentSize( QSizeF( viewport->width() / 3, m_eleGraphHeight + m_fontHeight * 2.5 + 3 ) );
-        m_leftGraphMargin = QFontMetrics( font() ).width("0000");
+        bool const highRes = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::HighResolution;
+        int const widthRatio = highRes ? 2 : 3;
+        setContentSize( QSizeF( viewport->width() / widthRatio, m_eleGraphHeight + m_fontHeight * 2.5 + 3 ) );
+        m_leftGraphMargin = QFontMetrics( font() ).width("0000 m");
         m_eleGraphWidth = contentSize().width() - m_leftGraphMargin;
         m_viewportWidth = viewport->width();
-        if ( !m_isInitialized ) {
+        bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+        if ( !m_isInitialized && !smallScreen ) {
             setPosition( QPointF( (viewport->width() - contentSize().width()) / 2 , 10.5 ) );
             connect( this, SIGNAL( dataUpdated() ), SLOT( forceRepaint() ) );
         }
@@ -186,17 +206,12 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     if ( ! ( m_routeAvailable && m_isInitialized && m_eleData.size() > 0 ) ) {
         painter->setPen( QColor( Qt::black ) );
         QString text = tr( "Create a route to view its elevation profile." );
-
-        QPoint pos(
-            ( contentSize().width() - QFontMetrics( font() ).boundingRect( text ).width() ) / 2,
-            ( contentSize().height() + m_fontHeight ) / 2
-        );
-        painter->drawText( pos, text );
+        painter->drawText( contentRect().toRect(), Qt::TextWordWrap | Qt::AlignCenter, text );
         painter->restore();
         return;
     }
     qreal graphDistance = m_eleData.last().x();
-    qreal graphElevation = m_maxElevation;
+    qreal graphElevation = m_maxElevation * 1.2;
     int   valueOffsetX = 0;
     int   valueOffsetY = 0;
     int start = 0;
@@ -222,10 +237,10 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     }
 
 
-    DistanceUnit distanceUnit;
-    distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
+    QLocale::MeasurementSystem measurementSystem;
+    measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
-    if ( distanceUnit == MilesFeet ) {
+    if ( measurementSystem == QLocale::ImperialSystem ) {
         graphDistance *= KM2MI;
     }
 
@@ -254,7 +269,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
 
     // draw Y grid and labels
     for ( int j = 0; j <= m_bestDivisorY; j ++ ) {
-        if ( distanceUnit == Meter ) {
+        if ( measurementSystem == QLocale::MetricSystem ) {
             if ( valueOffsetY + m_bestDivisorY * m_valueIntervalY > 10000 ) {
                 m_unitY = tr("km");
                 intervalStr.setNum( ( valueOffsetY + j * m_valueIntervalY ) / 1000 );
@@ -290,7 +305,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     // TODO: Nicer interval ticks when zoomed in, e.g. 42.5 instead of 42.444
     painter->setPen( QColor( Qt::black ) );
     for ( int j = 0; j <= m_bestDivisorX; j ++ ) {
-        if ( distanceUnit == Meter ) {
+        if ( measurementSystem == QLocale::MetricSystem ) {
             if ( valueOffsetX + m_bestDivisorX * m_valueIntervalX > 10000 ) {
                 m_unitX = tr("km");
                 intervalStr.setNum( ( valueOffsetX + j * m_valueIntervalX ) / 1000 );
@@ -344,6 +359,11 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         m_eleGraphHeight - ( m_eleData.value(start).y() - valueOffsetY )
         * m_eleGraphHeight / graphElevation
     );
+
+    bool const highRes = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::HighResolution;
+    QPen pen = painter->pen();
+    pen.setWidth( highRes ? 2 : 1 );
+    painter->setPen( pen );
     for ( int i = start; i <= end; ++i ) {
         QPoint newPos (
             m_leftGraphMargin + ( m_eleData.value(i).x() - valueOffsetX )
@@ -356,6 +376,8 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
             oldPos = newPos;
         }
     }
+    pen.setWidth( 1 );
+    painter->setPen( pen );
 
     // draw interactive cursor
     if ( m_mouseInWidget ) {
@@ -378,7 +400,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
 
         painter->drawLine( m_leftGraphMargin + m_cursorPositionX - 5, ypos,
                            m_leftGraphMargin + m_cursorPositionX + 5, ypos );
-        if ( distanceUnit == Meter ) {
+        if ( measurementSystem == QLocale::MetricSystem ) {
             m_unitX = tr("m");
             if ( xpos > 10000 ) {
                 m_unitX = tr("km");
@@ -426,29 +448,30 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         m_marbleWidget->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Degree );
         m_markerIconContainer.setCoordinate( GeoDataCoordinates( lon, lat, currentPoint.altitude(),
                                                             Marble::GeoDataCoordinates::Degree ) );
-        // move the text label, so that it sits right next to the flag
-        dx = 6;
-        dy = -16;
+        // move the text label, so that it sits next to the flag with a small spacing
+        dx += m_markerIconContainer.size().width() / 2 + m_markerTextContainer.size().width() / 2 + 2;
         m_marbleWidget->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Degree );
         m_markerTextContainer.setCoordinate( GeoDataCoordinates( lon, lat, currentPoint.altitude(),
                                                             Marble::GeoDataCoordinates::Degree ) );
-        m_markerText->setText( " " + intervalStr + " " + m_unitY );
+        m_markerText.setText( " " + intervalStr + " " + m_unitY );
 
         // drawing area of flag
-        newMarkerRegion += QRect( QPoint( x - m_markerIconContainer.size().width() - 1,
-                                          y - m_markerIconContainer.size().height() - 1 ),
-                                  m_markerIconContainer.size().toSize() + QSize( 2, 2 ) );
+        if ( !m_markerIconContainer.positions().isEmpty() ) {
+            newMarkerRegion += QRect( m_markerIconContainer.positions().first().toPoint(),
+                                      m_markerIconContainer.size().toSize() );
+        }
         // drawing area of text
-        newMarkerRegion += QRect( QPoint( x - 3,
-                                          y - m_markerText->contentSize().height() - 3 ),
-                                  m_markerText->contentSize().toSize() + QSize( 10, 6 ) );
+        if ( !m_markerTextContainer.positions().isEmpty() ) {
+            newMarkerRegion += QRect( m_markerTextContainer.positions().first().toPoint(),
+                                      m_markerTextContainer.size().toSize() );
+        }
         // redraw
         if ( newMarkerRegion != m_lastMarkerRegion ) {
             repaintRegion( m_lastMarkerRegion + newMarkerRegion );
         }
         m_lastMarkerRegion = newMarkerRegion;
     } else {
-        if( m_markerIconContainer.visible() || m_markerIconContainer.visible() ) {
+        if( m_markerIconContainer.visible() || m_markerTextContainer.visible() ) {
             m_markerIconContainer.hide();
             m_markerTextContainer.hide();
             repaintRegion( m_lastMarkerRegion );
@@ -786,10 +809,19 @@ QList<QPointF> ElevationProfileFloatItem::calculateElevationData( const GeoDataL
         const qreal lat = lineString[i].latitude ( GeoDataCoordinates::Degree );
         const qreal lon = lineString[i].longitude( GeoDataCoordinates::Degree );
         qreal ele = marbleModel()->elevationModel()->height( lon, lat );
-        if ( ele == 32768 ) { // no data
+        if ( ele == invalidElevationData ) { // no data
             ele = 0;
         }
-        result.append( QPointF( path.length( EARTH_RADIUS ), ele ) );
+
+        // result.append( QPointF( path.length( EARTH_RADIUS ), ele ) );
+        // The code below does the same as the line above, but is much faster - O(1) instead of O(n)
+        if ( i ) {
+            Q_ASSERT( !result.isEmpty() ); // The else part below appended something in the first run
+            qreal const distance = EARTH_RADIUS * distanceSphere( lineString[i-1], lineString[i] );
+            result.append( QPointF( result.last().x() + distance, ele ) );
+        } else {
+            result.append( QPointF( 0, ele ) );
+        }
     }
 
     return result;

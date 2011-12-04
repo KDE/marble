@@ -19,7 +19,7 @@
 namespace Marble
 {
 
-class MarbleWidget;
+class MarbleModel;
 
 namespace Declarative
 {
@@ -48,7 +48,7 @@ public:
 
     Marble::Declarative::Coordinate* position();
 
-    void setMarbleWidget( MarbleWidget* widget );
+    void setMarbleModel( MarbleModel* model );
 
 Q_SIGNALS:
     void activeChanged();
@@ -73,7 +73,7 @@ private:
 
     Marble::Declarative::Coordinate m_position;
 
-    MarbleWidget* m_marbleWidget;
+    MarbleModel* m_marbleModel;
 };
 
 }

@@ -665,12 +665,15 @@ void AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &aCoord
     )
     {
 #endif
-        int tessellatedNodes = (int)( distance / tessellationPrecision );
+        bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+        int const finalTessellationPrecision = smallScreen ? 3 * tessellationPrecision : tessellationPrecision;
+
+        int tessellatedNodes = (int)( distance / finalTessellationPrecision );
 
         // Let the line segment follow the spherical surface
         // if the distance between the previous point and the current point
         // on screen is too big
-        if ( distance > tessellationPrecision ) {
+        if ( distance > finalTessellationPrecision ) {
 
             *polygon << d->processTessellation( aCoords, bCoords,
                                         tessellatedNodes, viewport,

@@ -180,7 +180,7 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
         m_placemarkModel( 0 ), m_selectionModel( 0 ), m_routeDirty( false ), m_pixmapSize( 22, 22 ),
         m_routeRequest( 0 ), m_activeMenuIndex( -1 ), m_alternativeRoutesView( 0 ),
         m_alternativeRoutesModel( widget->model()->routingManager()->alternativeRoutesModel() ),
-        m_viewportChanged( true )
+        m_viewContext( Still ), m_viewportChanged( true )
 {
     m_contextMenu = new MarbleWidgetPopupMenu( m_marbleWidget, m_marbleWidget->model() );
     m_removeViaPointAction = new QAction( QObject::tr( "&Remove this destination" ), q );

@@ -29,7 +29,6 @@ namespace Marble
 class GeoPainter;
 class GeoSceneGroup;
 class HttpDownloadManager;
-class MapThemeManager;
 class SunLocator;
 class TextureColorizer;
 class ViewportParams;
@@ -39,7 +38,9 @@ class TextureLayer : public QObject, public LayerInterface
     Q_OBJECT
 
  public:
-    TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator );
+    TextureLayer( HttpDownloadManager *downloadManager,
+                  const SunLocator *sunLocator );
+
     ~TextureLayer();
 
     QStringList renderPosition() const;

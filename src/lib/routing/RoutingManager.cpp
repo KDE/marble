@@ -65,6 +65,10 @@ public:
 
     bool m_guidanceModeWarning;
 
+    QString m_lastOpenPath;
+
+    QString m_lastSavePath;
+
     RoutingManagerPrivate( MarbleModel *marbleModel, RoutingManager* manager, QObject *parent );
 
     GeoDataFolder* routeRequest() const;
@@ -408,6 +412,26 @@ void RoutingManager::setShowGuidanceModeStartupWarning( bool show )
 bool RoutingManager::showGuidanceModeStartupWarning() const
 {
     return d->m_guidanceModeWarning;
+}
+
+void RoutingManager::setLastOpenPath( const QString &path )
+{
+    d->m_lastOpenPath = path;
+}
+
+QString RoutingManager::lastOpenPath() const
+{
+    return d->m_lastOpenPath;
+}
+
+void RoutingManager::setLastSavePath( const QString &path )
+{
+    d->m_lastSavePath = path;
+}
+
+QString RoutingManager::lastSavePath() const
+{
+    return d->m_lastSavePath;
 }
 
 } // namespace Marble

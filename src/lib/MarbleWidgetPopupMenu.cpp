@@ -47,16 +47,11 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
       m_widget(widget),
       m_lmbMenu( new QMenu( m_widget ) ),
       m_rmbMenu( new QMenu( m_widget ) ),
-      m_planetAction( new QAction( tr( "&Earth" ), this ) ),
       m_copyCoordinateAction( new QAction( tr("Copy Coordinates"), this ) ),
-      m_setHomePointAction( new QAction( tr( "&Set Home Location" ), this ) ),
       m_rmbExtensionPoint( 0 ),
       m_runnerManager( 0 )
 {
     //	Property actions (Left mouse button)
-    //	m_planetAction = new QAction(QIcon("icon.png"), tr("&Earth"), this);
-    m_planetAction->setData( 0 );
-
     m_infoDialogAction = new QAction( this );
     m_infoDialogAction->setData( 0 );
 
@@ -88,8 +83,13 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
     m_rmbMenu->addAction( fromHere );
     m_rmbMenu->addAction( toHere );
     m_rmbMenu->addSeparator();
-    m_rmbMenu->addAction( m_setHomePointAction );
-    m_rmbMenu->addAction( addBookmark );
+    m_rmbMenu->addAction( tr( "&Address Details" ), this, SLOT( startReverseGeocoding() ) );
+    if ( smallScreen ) {
+        m_rmbMenu->addAction( addBookmark );
+    }
+    else {
+        m_rmbMenu->addAction( m_copyCoordinateAction );
+    }
     m_rmbMenu->addSeparator();
     m_rmbMenu->addMenu( infoBoxMenu );
 
@@ -99,10 +99,8 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
         m_rmbMenu->addAction( fullscreenAction );
     }
 
-
     connect( fromHere, SIGNAL( triggered( ) ), SLOT( directionsFromHere() ) );
     connect( toHere, SIGNAL( triggered( ) ), SLOT( directionsToHere() ) );
-    connect( m_setHomePointAction, SIGNAL( triggered() ), SLOT( slotSetHomePoint() ) );
     connect( addBookmark, SIGNAL( triggered( ) ), SLOT( addBookmark() ) );
     connect( aboutDialogAction, SIGNAL( triggered() ), SLOT( slotAboutDialog() ) );
     connect( m_copyCoordinateAction, SIGNAL( triggered() ), SLOT( slotCopyCoordinates() ) );
@@ -128,11 +126,9 @@ QMenu* MarbleWidgetPopupMenu::createInfoBoxMenu()
 
 void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 {
-    QPoint  curpos = QPoint( xpos, ypos ); 
-    m_setHomePointAction->setData( curpos );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
-        m_rmbMenu->popup( m_widget->mapToGlobal( curpos ) );
+        showRmbMenu( xpos, ypos );
         return;
     }
 
@@ -143,6 +139,8 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
             child->deleteLater();
         }
     }
+
+    const QPoint curpos = QPoint( xpos, ypos );
     m_featurelist = m_widget->whichFeatureAt( curpos );
 
     int  actionidx = 1;
@@ -179,7 +177,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
         }
         actionidx++;
     }
-    
+
     m_itemList = m_widget->whichItemAt( curpos );
     QList<AbstractDataPluginItem *>::const_iterator itW = m_itemList.constBegin();
     QList<AbstractDataPluginItem *>::const_iterator const itWEnd = m_itemList.constEnd();
@@ -188,49 +186,22 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
         m_lmbMenu->addAction( (*itW)->action() );
     }
 
-    // Not implemented yet ;-)
-    m_planetAction->setEnabled( false );
-
-    m_lmbMenu->addAction( m_planetAction );
-    m_lmbMenu->addSeparator();
-
-    // Setting the proper planet name
-    QString targetString = m_model->planet()->name();
-    mDebug() << "targetString" << targetString;
-    // FIXME: this should be removed later on ...
-    if ( targetString == "Earth" ) 
-        targetString = tr( "&Earth" );
-
-    m_planetAction->setText( targetString );
-
-    m_copyCoordinateAction->setEnabled( true );
-    m_copyCoordinateAction->setText( tr("Copy Coordinates") );
-
-    GeoDataCoordinates coord;
-
-    if ( !m_featurelist.isEmpty() ) {
-        coord = m_featurelist.first()->coordinate( m_model->clock()->dateTime() );
-    } else {
-        m_copyCoordinateAction->setData( curpos );
-
-        qreal lon, lat;
-        m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoDataCoordinates::Radian );
-        coord = GeoDataCoordinates( lon, lat, GeoDataCoordinates::Radian );
+    if ( !m_lmbMenu->isEmpty() ) {
+        m_lmbMenu->popup( m_widget->mapToGlobal( curpos ) );
     }
-
-    QMenu *positionMenu = m_lmbMenu->addMenu( coord.toString() );
-    positionMenu->menuAction()->setFont( QFont( "Sans Serif", 7, 50, false ) );
-    positionMenu->addAction( m_copyCoordinateAction );
-    positionMenu->addAction( tr( "&Address Details" ), this, SLOT( startReverseGeocoding() ) );
-
-    m_lmbMenu->popup( m_widget->mapToGlobal( curpos ) );
 }
 
 
 void MarbleWidgetPopupMenu::showRmbMenu( int xpos, int ypos )
 {
+    qreal lon, lat;
+    const bool visible = m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoDataCoordinates::Radian );
+    if ( !visible )
+        return;
+
     QPoint curpos = QPoint( xpos, ypos );
-    m_setHomePointAction->setData( curpos );
+    m_copyCoordinateAction->setData( curpos );
+
     m_rmbMenu->popup( m_widget->mapToGlobal( curpos ) );
 }
 
@@ -289,18 +260,10 @@ void MarbleWidgetPopupMenu::slotTrackPlacemark()
     }
 }
 
-void MarbleWidgetPopupMenu::slotSetHomePoint()
-{
-    GeoDataCoordinates coordinates;
-    if ( mouseCoordinates( &coordinates, m_setHomePointAction ) ) {
-        m_widget->model()->setHome( coordinates, m_widget->zoom() );
-    }
-}
-
 void MarbleWidgetPopupMenu::slotCopyCoordinates()
 {
     GeoDataCoordinates coordinates;
-    if ( mouseCoordinates( &coordinates, m_setHomePointAction ) ) {
+    if ( mouseCoordinates( &coordinates, m_copyCoordinateAction ) ) {
 	const qreal longitude_degrees = coordinates.longitude(GeoDataCoordinates::Degree);
 	const qreal latitude_degrees = coordinates.latitude(GeoDataCoordinates::Degree);
 
@@ -365,7 +328,7 @@ void MarbleWidgetPopupMenu::directionsFromHere()
     if ( request )
     {
         GeoDataCoordinates coordinates;
-        if ( mouseCoordinates( &coordinates, m_setHomePointAction ) ) {
+        if ( mouseCoordinates( &coordinates, m_copyCoordinateAction ) ) {
             if ( request->size() > 0 ) {
                 request->setPosition( 0, coordinates );
             } else {
@@ -382,7 +345,7 @@ void MarbleWidgetPopupMenu::directionsToHere()
     if ( request )
     {
         GeoDataCoordinates coordinates;
-        if ( mouseCoordinates( &coordinates, m_setHomePointAction ) ) {
+        if ( mouseCoordinates( &coordinates, m_copyCoordinateAction ) ) {
             if ( request->size() > 1 ) {
                 request->setPosition( request->size()-1, coordinates );
             } else {
@@ -441,7 +404,7 @@ void MarbleWidgetPopupMenu::showAddressInformation(const GeoDataCoordinates &, c
 void MarbleWidgetPopupMenu::addBookmark()
 {
     GeoDataCoordinates coordinates;
-    if ( mouseCoordinates( &coordinates, m_setHomePointAction ) ) {
+    if ( mouseCoordinates( &coordinates, m_copyCoordinateAction ) ) {
         QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( m_widget->model()->bookmarkManager(), m_widget );
         GeoDataLookAt lookat = m_widget->lookAt();
         lookat.setCoordinates( coordinates );

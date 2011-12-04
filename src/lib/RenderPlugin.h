@@ -132,6 +132,8 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      */
     void visibilityChanged( QString nameId, bool visible );
     
+    void enabledChanged( bool enable );
+
     /**
      * This signal is emitted if the settings of the RenderPlugin changed.
      */

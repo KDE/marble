@@ -10,12 +10,13 @@
 import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
+import org.kde.edu.marble.qtcomponents 0.12
 
 /*
  * Page for geocaching activity.
  */
 Page {
-    id: trackingActivityPage
+    id: geocachingActivityPage
     anchors.fill: parent
 
     tools: ToolBarLayout {
@@ -23,12 +24,33 @@ Page {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
-        ToolIcon {
-            iconId: "toolbar-search";
-            onClicked: { searchField.visible = !searchField.visible }
+        ToolButton {
+            id: searchButton
+            checkable: true
+            width: 60
+            iconSource: "image://theme/icon-m-toolbar-search";
         }
         ToolIcon {
-            iconId: "toolbar-view-menu" }
+            iconId: "toolbar-view-menu"
+            onClicked: pageMenu.open()
+        }
+    }
+
+    Menu {
+        id: pageMenu
+        content: MenuLayout {
+            MenuItem {
+                text: "Map Theme"
+                onClicked: {
+                    pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
+                }
+            }
+            MenuItemSwitch {
+                text: "Online"
+                checked: !settings.workOffline
+                onClicked: settings.workOffline = !settings.workOffline
+            }
+        }
     }
 
     Column {
@@ -37,22 +59,34 @@ Page {
 
         SearchField {
             id: searchField
+            visible: searchButton.checked
             width: parent.width
-            onSearch: marbleWidget.find( term )
+            onSearch: {
+                searchField.busy = true
+                marbleWidget.find( term )
+            }
+
+            Component.onCompleted: {
+                marbleWidget.getSearch().searchFinished.connect( searchFinished )
+            }
+
+            function searchFinished() {
+                searchField.busy = false
+            }
         }
 
         Item {
+            clip: true
             id: mapContainer
             width: parent.width
             height: parent.height - searchField.height
-            clip: true
 
-            Component.onCompleted: {
+            function embedMarbleWidget() {
                 marbleWidget.parent = mapContainer
                 settings.projection = "Mercator"
                 var plugins = settings.defaultRenderPlugins
                 settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
-                plugins.push( "speedometer" )
+                plugins.push( "opencaching" )
                 settings.activeRenderPlugins =  plugins
                 settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
                 settings.gpsTracking = true
@@ -62,9 +96,17 @@ Page {
             }
 
             Component.onDestruction: {
-                marbleWidget.parent = null
-                marbleWidget.visible = false
+                if ( marbleWidget.parent === mapContainer ) {
+                    marbleWidget.parent = null
+                    marbleWidget.visible = false
+                }
             }
+        }
+    }
+
+    onStatusChanged: {
+        if ( status === PageStatus.Activating ) {
+            mapContainer.embedMarbleWidget()
         }
     }
 }

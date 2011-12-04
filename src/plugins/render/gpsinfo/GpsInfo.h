@@ -28,7 +28,6 @@ namespace Marble
 class GeoDataCoordinates;
 class WidgetGraphicsItem;
 class MarbleLocale;
-class MarbleWidget;
 
 /**
  * @short The class that displays Position Tracking info
@@ -62,15 +61,12 @@ class GpsInfo : public AbstractFloatItem
 
     bool isInitialized () const;
 
-    bool eventFilter( QObject *object, QEvent *event );
-
     void forceRepaint();
 
  private slots:
     void updateLocation( GeoDataCoordinates coordinates, qreal speed);
 
  private:
-    MarbleWidget* m_marbleWidget;
     MarbleLocale* m_locale;
     Ui::GpsInfoPlugin m_widget;
     WidgetGraphicsItem* m_widgetItem;

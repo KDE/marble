@@ -32,7 +32,7 @@ class GeometryLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 public:
-    GeometryLayer( QAbstractItemModel *model );
+    GeometryLayer( const QAbstractItemModel *model );
     ~GeometryLayer();
 
     virtual QStringList renderPosition() const;
@@ -47,6 +47,9 @@ public:
 
 public Q_SLOTS:
     void invalidateScene();
+
+Q_SIGNALS:
+    void repaintNeeded();
 
 private:
     GeometryLayerPrivate *d;

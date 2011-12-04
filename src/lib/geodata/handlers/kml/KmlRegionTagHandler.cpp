@@ -35,7 +35,7 @@ GeoNode* KmlRegionTagHandler::parse( GeoParser& parser ) const
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif
 
-    if( parentItem.represents( kmlTag_Region ) || parentItem.represents( kmlTag_Region ) ) {
+    if( parentItem.is<GeoDataFeature>() ) {
         parentItem.nodeAs<GeoDataFeature>()->setRegion( region );
         return &parentItem.nodeAs<GeoDataFeature>()->region();
     } else {

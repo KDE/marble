@@ -73,7 +73,7 @@ ControlView::ControlView( QWidget *parent )
     m_splitter->setStretchFactor( m_splitter->indexOf( m_marbleWidget ), 1 );
     m_splitter->setSizes( QList<int>() << 180 << width() - 180 );
 
-    m_control->addMarbleWidget( m_marbleWidget );
+    m_control->setMarbleWidget( m_marbleWidget );
 
     connect( m_control, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
     connect( m_control, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
@@ -86,7 +86,7 @@ ControlView::~ControlView()
 
 QString ControlView::applicationVersion()
 {
-    return "PRE 1.3 GIT";
+    return "1.2.85 (1.3 Beta 2)";
 }
 
 void ControlView::zoomIn()
@@ -163,11 +163,7 @@ QString ControlView::defaultMapThemeId() const
       fallBackThemes << "earth/openstreetmap/openstreetmap.dgml";
     }
 
-    QStringList installedThemes;
-    QList<GeoSceneDocument const*> themes = m_marbleWidget->model()->mapThemeManager()->mapThemes();
-    foreach(GeoSceneDocument const* theme, themes) {
-        installedThemes << theme->head()->mapThemeId();
-    }
+    const QStringList installedThemes = m_marbleWidget->model()->mapThemeManager()->mapThemeIds();
 
     foreach(const QString &fallback, fallBackThemes) {
         if (installedThemes.contains(fallback)) {

@@ -13,7 +13,8 @@
 #define MARBLE_MARBLELOCALE_H
 
 #include "marble_export.h"
-#include "global.h"
+
+#include <QtCore/QLocale>
 
 
 namespace Marble
@@ -24,7 +25,7 @@ class MarbleLocalePrivate;
 /**
  * @short A class that contains all localization stuff for Marble.
  *
- * The class stores properties like the Distance Unit.
+ * The class stores properties like the measurement system.
  */
 
 class MARBLE_EXPORT MarbleLocale
@@ -33,11 +34,8 @@ class MARBLE_EXPORT MarbleLocale
     MarbleLocale();
     ~MarbleLocale();
 
-    void setDistanceUnit( DistanceUnit distanceUnit );
-    DistanceUnit distanceUnit() const;
-
-    void setMeasureSystem( MeasureSystem measureSystem );
-    MeasureSystem measureSystem() const;
+    void setMeasurementSystem( QLocale::MeasurementSystem measurementSystem );
+    QLocale::MeasurementSystem measurementSystem() const;
 
     static QString languageCode();
 

@@ -1,10 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>SearchBar.qml</file>
-        <file>RouteRequestView.qml</file>
-        <file>WaypointView.qml</file>
-        <file>RoutingDialog.qml</file>
-        <file>SearchResultSelectionDialog.qml</file>
         <file>marker.svg</file>
         <file>marker-yellow.svg</file>
         <file>marker-direction.svg</file>

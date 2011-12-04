@@ -17,13 +17,13 @@
 namespace Marble
 {
 
-GeoLineStringGraphicsItem::GeoLineStringGraphicsItem( GeoDataLineString* lineString )
+GeoLineStringGraphicsItem::GeoLineStringGraphicsItem( const GeoDataLineString* lineString )
         : GeoGraphicsItem(),
           m_lineString( lineString )
 {
 }
 
-void GeoLineStringGraphicsItem::setLineString( GeoDataLineString* lineString )
+void GeoLineStringGraphicsItem::setLineString( const GeoDataLineString* lineString )
 {
     m_lineString = lineString;
     setCoordinate( lineString->latLonAltBox().center() );

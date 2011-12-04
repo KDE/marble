@@ -112,6 +112,8 @@ class MarbleWidgetPrivate
 
     void  construct();
 
+    void updateMapTheme();
+
     inline static qreal zoom( qreal radius ) { return (200.0 * log( radius ) ); }
     inline static qreal radius( qreal zoom ) { return pow( M_E, ( zoom / 200.0 ) ); }
 
@@ -217,10 +219,10 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SIGNAL( pluginSettingsChanged() ) );
     m_widget->connect( &m_map,   SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
-    m_widget->connect( &m_map,   SIGNAL( themeChanged( QString ) ),
-                       m_widget, SIGNAL( themeChanged( QString ) ) );
 
     // react to some signals of m_map
+    m_widget->connect( &m_map,   SIGNAL( themeChanged( QString ) ),
+                       m_widget, SLOT( updateMapTheme() ) );
     m_widget->connect( &m_map,   SIGNAL( repaintNeeded( QRegion ) ),
                        m_widget, SLOT( update() ) );
 
@@ -327,30 +329,32 @@ int MarbleWidget::radius() const
 void MarbleWidget::setRadius( int radius )
 {
     Q_ASSERT( radius >= 0 );
-    if ( radius == d->m_map.radius() ) {
-        return;
-    }
+    bool adjustRadius = radius != d->m_map.radius();
 
     qreal const zoom = d->zoom( radius );
 
     // Prevent exceeding zoom range
     if ( zoom < minimumZoom() ) {
         radius = d->radius( minimumZoom() );
+        adjustRadius = true;
     } else if ( zoom > maximumZoom() ) {
         radius = d->radius( maximumZoom() );
+        adjustRadius = true;
     }
 
-    d->m_map.setRadius( radius );
-    d->m_logzoom = qRound( zoom );
+    if( adjustRadius) {
+        d->m_map.setRadius( radius );
+        d->m_logzoom = qRound( zoom );
 
-    emit zoomChanged( d->m_logzoom );
-    emit distanceChanged( distanceString() );
-    emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
+        emit zoomChanged( d->m_logzoom );
+        emit distanceChanged( distanceString() );
+        emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
 
-    d->repaint();
+        d->repaint();
+    }
 }
 
-qreal MarbleWidget::moveStep()
+qreal MarbleWidget::moveStep() const
 {
     if ( radius() < qSqrt( (qreal)(width() * width() + height() * height()) ) )
         return 180.0 * 0.1;
@@ -659,7 +663,13 @@ void MarbleWidget::centerOn( const GeoDataPlacemark& placemark, bool animated )
     if ( lookAt ) {
         flyTo( *lookAt, animated ? Automatic : Instant );
     } else {
-        centerOn( placemark.coordinate( d->m_model.clock()->dateTime() ), animated );
+        bool icon;
+        GeoDataCoordinates coords = placemark.coordinate( d->m_model.clock()->dateTime(), &icon );
+        if ( icon ) {
+            centerOn( coords, animated );
+        } else {
+            centerOn( placemark.geometry()->latLonAltBox(), animated );
+        }
     }
 }
 
@@ -740,14 +750,14 @@ void MarbleWidget::disconnectNotify( const char * signal )
 }
 
 bool MarbleWidget::screenCoordinates( qreal lon, qreal lat,
-                                      qreal& x, qreal& y )
+                                      qreal& x, qreal& y ) const
 {
     return d->m_map.screenCoordinates( lon, lat, x, y );
 }
 
 bool MarbleWidget::geoCoordinates( int x, int y,
                                    qreal& lon, qreal& lat,
-                                   GeoDataCoordinates::Unit unit )
+                                   GeoDataCoordinates::Unit unit ) const
 {
     return d->m_map.geoCoordinates( x, y, lon, lat, unit );
 }
@@ -762,7 +772,7 @@ qreal MarbleWidget::centerLongitude() const
     return d->m_map.centerLongitude();
 }
 
-QRegion MarbleWidget::mapRegion()
+QRegion MarbleWidget::mapRegion() const
 {
     return viewport()->currentProjection()->mapRegion( viewport() );
 }
@@ -853,22 +863,25 @@ QString MarbleWidget::mapThemeId() const
 
 void MarbleWidget::setMapThemeId( const QString& mapThemeId )
 {
-    if ( !mapThemeId.isEmpty() && mapThemeId == d->m_model.mapThemeId() )
-        return;
-
-    d->m_map.removeLayer( d->m_routingLayer );
-
     d->m_map.setMapThemeId( mapThemeId );
+}
 
-    if ( d->m_model.planetId() == "earth" ) {
-        d->m_map.addLayer( d->m_routingLayer );
+void MarbleWidgetPrivate::updateMapTheme()
+{
+    m_map.removeLayer( m_routingLayer );
+
+    m_widget->setRadius( m_widget->radius() ); // Corrects zoom range, if needed
+
+    if ( m_model.planetId() == "earth" ) {
+        m_map.addLayer( m_routingLayer );
     }
 
-    // Now we want a full repaint as the atmosphere might differ
-    setAttribute( Qt::WA_NoSystemBackground,
-                  false );
+    emit m_widget->themeChanged( m_map.mapThemeId() );
 
-    update();
+    // Now we want a full repaint as the atmosphere might differ
+    m_widget->setAttribute( Qt::WA_NoSystemBackground, false );
+
+    m_widget->update();
 }
 
 GeoSceneDocument *MarbleWidget::mapTheme() const
@@ -1079,7 +1092,7 @@ void MarbleWidget::creatingTilesStart( TileCreator *creator,
     dlg.exec();
 }
 
-MapQuality MarbleWidget::mapQuality( ViewContext viewContext )
+MapQuality MarbleWidget::mapQuality( ViewContext viewContext ) const
 {
     return d->m_map.mapQuality( viewContext );
 }
@@ -1101,13 +1114,14 @@ ViewContext MarbleWidget::viewContext() const
 
 void MarbleWidget::setViewContext( ViewContext viewContext )
 {
-    const MapQuality oldQuality = d->m_map.mapQuality();
+    if ( d->m_map.viewContext() != viewContext ) {
+        const MapQuality oldQuality = d->m_map.mapQuality();
+        d->m_map.setViewContext( viewContext );
+        d->m_routingLayer->setViewContext( viewContext );
 
-    d->m_map.setViewContext( viewContext );
-    d->m_routingLayer->setViewContext( viewContext );
-
-    if ( d->m_map.mapQuality() != oldQuality )
-        d->repaint();
+        if ( d->m_map.mapQuality() != oldQuality )
+            d->repaint();
+    }
 }
 
 bool MarbleWidget::animationsEnabled() const
@@ -1185,14 +1199,16 @@ QString MarbleWidget::distanceString() const
     qreal dist = distance();
     QString distanceUnitString;
 
-    const DistanceUnit distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
+    const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
-    if ( distanceUnit == Meter ) {
+    switch ( measurementSystem ) {
+    case QLocale::MetricSystem:
         distanceUnitString = tr("km");
-    }
-    else {
+        break;
+    case QLocale::ImperialSystem:
         dist *= KM2MI;
         distanceUnitString = tr("mi");
+        break;
     }
 
     return QString( "%L1 %2" ).arg( dist, 8, 'f', 1, QChar(' ') ).arg( distanceUnitString );

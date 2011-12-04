@@ -1005,9 +1005,14 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
 
      // Load previous route settings
      settings.beginGroup( "Routing" );
-     m_controlView->marbleModel()->routingManager()->readSettings();
-     bool const startupWarning = settings.value( "showGuidanceModeStartupWarning", QVariant( true ) ).toBool();
-     m_controlView->marbleModel()->routingManager()->setShowGuidanceModeStartupWarning( startupWarning );
+     {
+         RoutingManager *const routingManager = m_controlView->marbleModel()->routingManager();
+         routingManager->readSettings();
+         bool const startupWarning = settings.value( "showGuidanceModeStartupWarning", QVariant( true ) ).toBool();
+         routingManager->setShowGuidanceModeStartupWarning( startupWarning );
+         routingManager->setLastOpenPath( settings.value( "lastRouteOpenPath", QDir::homePath() ).toString() );
+         routingManager->setLastSavePath( settings.value( "lastRouteSavePath", QDir::homePath() ).toString() );
+     }
      settings.endGroup();
 
 
@@ -1204,9 +1209,13 @@ void MainWindow::writeSettings()
 
      // Store current route settings
      settings.beginGroup( "Routing" );
-     m_controlView->marbleModel()->routingManager()->writeSettings();
-     bool const startupWarning = m_controlView->marbleModel()->routingManager()->showGuidanceModeStartupWarning();
-     settings.setValue( "showGuidanceModeStartupWarning", startupWarning );
+     {
+         RoutingManager *const routingManager = m_controlView->marbleModel()->routingManager();
+         routingManager->writeSettings();
+         settings.setValue( "showGuidanceModeStartupWarning", routingManager->showGuidanceModeStartupWarning() );
+         settings.setValue( "lastRouteOpenPath", routingManager->lastOpenPath() );
+         settings.setValue( "lastRouteSavePath", routingManager->lastSavePath() );
+     }
      settings.endGroup();
 
      settings.beginGroup( "Navigation");
@@ -1233,7 +1242,7 @@ void MainWindow::updateSettings()
     m_controlView->marbleWidget()->setMapQualityForViewContext( m_configDialog->animationQuality(), Marble::Animation );
 
     m_controlView->marbleWidget()->setDefaultAngleUnit( m_configDialog->angleUnit() );
-    MarbleGlobal::getInstance()->locale()->setDistanceUnit( m_configDialog->distanceUnit() );
+    MarbleGlobal::getInstance()->locale()->setMeasurementSystem( m_configDialog->measurementSystem() );
 
     m_distance = m_controlView->marbleWidget()->distanceString();
     updateStatusBar();

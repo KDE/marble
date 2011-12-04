@@ -10,6 +10,7 @@
 import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
+import org.kde.edu.marble.qtcomponents 0.12
 
 /*
  * Page for geocaching activity.
@@ -24,14 +25,30 @@ Page {
             onClicked: pageStack.pop()
         }
         ToolIcon {
-            iconId: "toolbar-view-menu" }
+            iconId: "toolbar-view-menu"
+            onClicked: pageMenu.open()
+        }
+    }
+
+    Menu {
+        id: pageMenu
+        content: MenuLayout {
+            MenuItem {
+                text: "Map Theme"
+                onClicked: {
+                    pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
+                }
+            }
+            MenuItemSwitch {
+                text: "Online"
+                checked: !settings.workOffline
+                onClicked: settings.workOffline = !settings.workOffline
+            }
+        }
     }
 
     Rectangle {
         id: searchResultView
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
         radius: 10
         color: "white"
         border.width: 1
@@ -73,11 +90,13 @@ Page {
             anchors.margins: 10
 
             text: "<p>Example search terms<ul><li>London</li><li>Baker Street, London</li><li>Baker Street 221b, London</li><li>Restaurant, London</li></ul></p>"
-            visible: searchResultView.searchTerm === ""
+            visible: searchResultView.searchTerm === "" && searchResultListView.count === 0
         }
 
         ListView {
             id: searchResultListView
+            property int count: model === undefined ? 0 : model.count
+
             anchors.top: searchField.bottom
             anchors.left: parent.left
             anchors.right: parent.right
@@ -102,7 +121,7 @@ Page {
         width: parent.width
         height: parent.height - searchField.height
 
-        Component.onCompleted: {
+        function embedMarbleWidget() {
             marbleWidget.parent = mapContainer
             settings.projection = "Mercator"
             var plugins = settings.defaultRenderPlugins
@@ -116,8 +135,10 @@ Page {
         }
 
         Component.onDestruction: {
-            marbleWidget.parent = null
-            marbleWidget.visible = false
+            if ( marbleWidget.parent === mapContainer ) {
+                marbleWidget.parent = null
+                marbleWidget.visible = false
+            }
         }
     }
 
@@ -125,14 +146,14 @@ Page {
         states: [
             State { // Horizontal
                 when: (searchActivityPage.width / searchActivityPage.height) > 1.20
-                AnchorChanges { target: mapContainer; anchors.left: searchResultView.right; anchors.bottom: searchActivityPage.bottom }
-                PropertyChanges { target: mapContainer; width: searchActivityPage.width / 2; height: searchActivityPage.height }
-                AnchorChanges { target: searchResultView; anchors.right: mapContainer.left; anchors.top: searchActivityPage.top }
+                AnchorChanges { target: searchResultView; anchors.top: searchActivityPage.top }
                 PropertyChanges { target: searchResultView; width: searchActivityPage.width / 2; height: searchActivityPage.height }
+                AnchorChanges { target: mapContainer; anchors.left: searchResultView.right; anchors.bottom: searchActivityPage.bottom; anchors.top: searchActivityPage.top }
+                PropertyChanges { target: mapContainer; width: searchActivityPage.width / 2; height: searchActivityPage.height }
             },
             State { // Vertical
                 when: (true)
-                AnchorChanges { target: mapContainer; anchors.left: searchActivityPage.left; anchors.top: searchActivityPage.top }
+                AnchorChanges { target: mapContainer; anchors.left: searchActivityPage.left; anchors.bottom: searchResultListView.top; anchors.top: searchActivityPage.top }
                 PropertyChanges { target: mapContainer; width: searchActivityPage.width; height: searchActivityPage.height / 2 }
                 AnchorChanges { target: searchResultView; anchors.right: searchActivityPage.right; anchors.top: mapContainer.bottom }
                 PropertyChanges { target: searchResultView; width: searchActivityPage.width; height: searchActivityPage.height / 2 }
@@ -159,7 +180,7 @@ Page {
 
                 Label {
                     id: searchResultText
-                    text: "<font size=\"-1\">" + (index+1) + ". " + description + "</font>"
+                    text: "<font size=\"-1\">" + (index+1) + ". " + display + "</font>"
                     width: searchResultItem.width
                     wrapMode: searchResultItem.detailed ? Text.WrapAtWordBoundaryOrAnywhere : Text.NoWrap
                     clip: true
@@ -182,9 +203,11 @@ Page {
                         text: "Route"
                         visible: searchResultItem.detailed
                         onClicked: {
-                            /** @todo: Enable position tracking and set current position as first via point,
-                                switch to driving/cycle/walk activity. Ask user, configure routing accordingly */
+                            settings.gpsTracking = true
+                            marbleWidget.getRouting().clearRoute()
+                            marbleWidget.getRouting().setVia( 0, marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
                             marbleWidget.getRouting().setVia( 1, longitude, latitude )
+                            openActivity( "Routing" )
                         }
                     }
 
@@ -196,6 +219,12 @@ Page {
                     }
                 }
             }
+        }
+    }
+
+    onStatusChanged: {
+        if ( status === PageStatus.Activating ) {
+            mapContainer.embedMarbleWidget()
         }
     }
 }

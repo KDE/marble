@@ -53,6 +53,7 @@ public:
     QString guiString() const;
     QString description() const;
     QIcon icon() const;
+    RenderType renderType() const;
     void initialize();
     bool isInitialized() const;
 
@@ -65,6 +66,8 @@ public:
     QDialog *configDialog();
 
 private Q_SLOTS:
+    void enableModel( bool enabled );
+    void visibleModel( QString, bool visible );
     void readSettings();
     void writeSettings();
     void updateSettings();

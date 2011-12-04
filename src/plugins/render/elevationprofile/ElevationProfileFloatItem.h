@@ -17,6 +17,7 @@
 
 #include "AbstractFloatItem.h"
 #include "PluginAboutDialog.h"
+#include "LabelGraphicsItem.h"
 #include "MarbleWidget.h"
 #include "routing/RoutingModel.h"
 #include <GeoGraphicsItem.h>
@@ -31,7 +32,6 @@ namespace Marble
 {
 
 class PluginAboutDialog;
-class LabelGraphicsItem;
 
 /**
  * @short The class that creates an interactive elvation profile.
@@ -49,6 +49,10 @@ class ElevationProfileFloatItem : public AbstractFloatItem
     ~ElevationProfileFloatItem();
 
     virtual QStringList backendTypes() const;
+
+    virtual QStringList renderPosition() const;
+
+    virtual qreal zValue() const; // Overriding LayerInterface to paint on top of the route
 
     virtual QString name() const;
 
@@ -138,8 +142,8 @@ class ElevationProfileFloatItem : public AbstractFloatItem
 
     GeoGraphicsItem   m_markerIconContainer;
     GeoGraphicsItem   m_markerTextContainer;
-    LabelGraphicsItem *m_markerIcon;
-    LabelGraphicsItem *m_markerText;
+    LabelGraphicsItem m_markerIcon;
+    LabelGraphicsItem m_markerText;
     QRegion           m_lastMarkerRegion;
 
     void calcScaleX( const qreal distance );

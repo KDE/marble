@@ -37,14 +37,8 @@ class Activity : public QObject
     Q_PROPERTY( QString name READ name WRITE setName )
     Q_PROPERTY( QString imagePath READ imagePath WRITE setImagePath )
     Q_PROPERTY( QString path READ path WRITE setPath )
-    Q_PROPERTY( QObject* page READ page WRITE setPage )
     
  public:
-    /**
-     * Empty default constructor for model.
-     */
-    explicit Activity();
-
     /**
      * Creates a new activity from passed parameters.
      *
@@ -56,7 +50,7 @@ class Activity : public QObject
      * @param relatedActivities Related activities with plugin states to preserve.
      * @param settings Settings to apply for this activity.
      */
-    explicit Activity( const QString& name, const QString& imagePath, QObject* page, const QString &path );
+    explicit Activity( const QString& name = QString(), const QString& imagePath = QString(), const QString &path = QString() );
     
  public Q_SLOTS:
     /**
@@ -100,16 +94,11 @@ class Activity : public QObject
      * @return Path of the QML file of the activity.
      */
     QString path() const;
-    
-    QObject* page();
-
-    void setPage( QObject* page );
 
  private:
     Q_DISABLE_COPY( Activity )
     QString m_name;                            ///< Name of the activity.
     QString m_imagePath;                       ///< Path to the image of the activity.
-    QObject* m_page;
     QString m_path;                            ///< Path to the QML file of the activity.
     QMap<QString, QVariant> m_settings;        ///< Settings of the activity.
 };
