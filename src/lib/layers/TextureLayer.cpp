@@ -189,7 +189,9 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     // the tile level from tilesize and the globe radius via log(2)
 
     qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
-    int tileLevel = (int)( tileLevelF );
+    int tileLevel = (int)( tileLevelF * 1.00001 ); // snap to the sharper tile level a tiny bit earlier
+                                                   // to work around rounding errors when the radius
+                                                   // roughly equals the global texture width
 
 //    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
 
