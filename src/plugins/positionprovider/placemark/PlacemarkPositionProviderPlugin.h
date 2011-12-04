@@ -14,6 +14,10 @@
 
 #include "PositionProviderPlugin.h"
 
+#include "GeoDataCoordinates.h"
+
+#include <QtCore/QDateTime>
+
 namespace Marble
 {
 
@@ -41,11 +45,15 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     virtual PositionProviderStatus status() const;
     virtual GeoDataCoordinates position() const;
     virtual GeoDataAccuracy accuracy() const;
+    virtual qreal speed() const;
 
     void setPlacemark( const GeoDataPlacemark *placemark );
 
  private:
     const GeoDataPlacemark *m_placemark;
+    GeoDataCoordinates m_coordinates;
+    QDateTime m_timestamp;
+    qreal m_speed;
 
     PositionProviderStatus m_status;
     GeoDataAccuracy m_accuracy;

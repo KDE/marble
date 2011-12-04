@@ -13,6 +13,7 @@
 
 #include "GeoDataPlacemark.h"
 #include "MarbleClock.h"
+#include "MarbleMath.h"
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
 
@@ -21,6 +22,7 @@ using namespace Marble;
 PlacemarkPositionProviderPlugin::PlacemarkPositionProviderPlugin()
     : PositionProviderPlugin(),
       m_placemark( 0 ),
+      m_speed( 0 ),
       m_status( PositionProviderStatusUnavailable ),
       m_isInitialized( false )
 {
@@ -90,9 +92,16 @@ GeoDataAccuracy PlacemarkPositionProviderPlugin::accuracy() const
     return m_accuracy;
 }
 
+qreal PlacemarkPositionProviderPlugin::speed() const
+{
+    return m_speed;
+}
+
 void PlacemarkPositionProviderPlugin::setPlacemark( const GeoDataPlacemark *placemark )
 {
     disconnect( marbleModel()->clock(), SIGNAL( timeChanged() ), this, SLOT( updatePosition() ) );
+    m_coordinates = GeoDataCoordinates();
+    m_timestamp = QDateTime();
 
     m_placemark = placemark;
     if ( placemark ) {
@@ -109,7 +118,23 @@ void PlacemarkPositionProviderPlugin::updatePosition()
     }
 
     Q_ASSERT( marbleModel() && "MarbleModel missing in PlacemarkPositionProviderPlugin" );
-    emit positionChanged(m_placemark->coordinate( marbleModel()->clock()->dateTime() ), m_accuracy);
+
+    const GeoDataCoordinates previousCoordinates = m_coordinates;
+    m_coordinates = m_placemark->coordinate( marbleModel()->clock()->dateTime() );
+
+    if ( m_timestamp.isValid() ) {
+        const qreal averageAltitude = ( m_coordinates.altitude() + m_coordinates.altitude() ) / 2.0 + marbleModel()->planetRadius();
+        const qreal distance = distanceSphere( previousCoordinates, m_coordinates ) * averageAltitude;
+        const qreal seconds = m_timestamp.msecsTo( marbleModel()->clockDateTime() ) / 1000.0;
+        m_speed = ( seconds > 0 ) ? ( distance / seconds ) : 0;
+    }
+    else {
+        m_speed = 0;
+    }
+
+    m_timestamp = marbleModel()->clockDateTime();
+
+    emit positionChanged( m_coordinates, m_accuracy );
 }
 
 void PlacemarkPositionProviderPlugin::update()
