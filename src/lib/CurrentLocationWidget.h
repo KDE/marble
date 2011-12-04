@@ -13,7 +13,7 @@
 
 // Marble
 #include "marble_export.h"
-#include "PositionProviderPlugin.h"
+#include "PositionProviderPluginInterface.h"
 #include "routing/AdjustNavigation.h"
 
 // Qt
@@ -26,6 +26,7 @@ class CurrentLocationWidgetPrivate;
 
 class GeoDataCoordinates;
 class MarbleWidget;
+class PositionProviderPlugin;
 
 class MARBLE_EXPORT CurrentLocationWidget : public QWidget
 {

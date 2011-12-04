@@ -43,6 +43,8 @@ namespace Marble
 class CurrentLocationWidgetPrivate
 {
  public:
+    CurrentLocationWidgetPrivate();
+
     Ui::CurrentLocationWidget      m_currentLocationUi;
     MarbleWidget                  *m_widget;
     AdjustNavigation *m_adjustNavigation;
@@ -64,6 +66,16 @@ class CurrentLocationWidgetPrivate
     void openTrack();
     void clearTrack();
 };
+
+CurrentLocationWidgetPrivate::CurrentLocationWidgetPrivate()
+    : m_widget( 0 ),
+      m_adjustNavigation( 0 ),
+      m_positionProviderPlugins(),
+      m_currentPosition(),
+      m_lastOpenPath(),
+      m_lastSavePath()
+{
+}
 
 CurrentLocationWidget::CurrentLocationWidget( QWidget *parent, Qt::WindowFlags f )
     : QWidget( parent, f ),
