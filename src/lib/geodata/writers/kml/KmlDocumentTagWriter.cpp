@@ -18,6 +18,7 @@
 #include "GeoDataStyleMap.h"
 #include "MarbleDebug.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataTimeStamp.h"
 
 #include "GeoDataTypes.h"
 
@@ -64,8 +65,12 @@ bool KmlDocumentTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     }
 
     if( !document->extendedData().isEmpty() ){
-		writeElement( &document->extendedData(), writer );
+        writeElement( &document->extendedData(), writer );
     }
+
+    if( document->timeStamp().when().isValid() )
+        writeElement( &document->timeStamp(), writer );
+
 
     //Write the actual important stuff!
     writer.writeEndElement();
