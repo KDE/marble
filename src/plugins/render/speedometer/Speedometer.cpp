@@ -101,7 +101,7 @@ void Speedometer::updateLocation( GeoDataCoordinates coordinates, qreal)
     Q_UNUSED( coordinates );
 
     const PositionTracking *tracking = marbleModel()->positionTracking();
-    qreal speed = tracking->speed();
+    qreal speed = tracking->speed() * METER2KM / SEC2HOUR;
     QString speedUnit;
     QString distanceString;
 
