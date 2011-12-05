@@ -52,7 +52,7 @@ public:
       * Append data of the given item, returns true if item's street
       * name matches instructions street name
       */
-    bool append( const RoutingWaypoint &item );
+    bool append( const RoutingWaypoint &item, int angle );
 
     /** Name of the road to turn into */
     QString roadName() const;

@@ -10,6 +10,8 @@
 
 #include "InstructionTransformation.h"
 
+#include <cmath>
+
 namespace Marble
 {
 
@@ -17,10 +19,19 @@ RoutingInstructions InstructionTransformation::process( const RoutingWaypoints &
 {
     RoutingInstructions result;
 
-    foreach( const RoutingWaypoint &item, model ) {
-        if ( result.isEmpty() || !result.last().append( item ) ) {
+    int lastAngle = 0;
+    for( int i = 0; i < model.size(); ++i ) {
+        const RoutingWaypoint &item = model[i];
+        int newAngle = 180 + lastAngle;
+        if ( i < model.size() - 1 ) {
+            newAngle = qRound( 180.0 / M_PI * item.point().bearing( model[i+1].point() ) );
+        }
+        int angle = ( newAngle - lastAngle + 540 ) % 360;
+        Q_ASSERT( angle >= 0 && angle <= 360 );
+        if ( result.isEmpty() || !result.last().append( item, angle ) ) {
             result.push_back( RoutingInstruction( item ) );
         }
+        lastAngle = newAngle;
     }
 
     for ( int i = 0; i < result.size(); ++i ) {
