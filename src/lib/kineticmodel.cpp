@@ -99,11 +99,8 @@ void KineticModel::setPosition(qreal posX, qreal posY)
 {
     d_ptr->released = false;
 
-    QPointF oldPos = d_ptr->position;
     d_ptr->position.setX( posX );
     d_ptr->position.setY( posY );
-    if (!qFuzzyCompare(posX, oldPos.x()) || !qFuzzyCompare(posY, oldPos.y()))
-        emit positionChanged();
 
     update();
     if (!d_ptr->ticker.isActive())

@@ -619,8 +619,9 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
                     d->m_lmbTimer.stop();
 
-                    qreal posLon = RAD2DEG * ( qreal )( d->m_leftPressedLon ) - 90.0 * d->m_leftPressedDirection * deltax / radius;
-                    qreal posLat = RAD2DEG * ( qreal )( d->m_leftPressedLat ) + 90.0 * deltay / radius;
+                    const qreal posLon = RAD2DEG * ( qreal )( d->m_leftPressedLon ) - 90.0 * d->m_leftPressedDirection * deltax / radius;
+                    const qreal posLat = RAD2DEG * ( qreal )( d->m_leftPressedLat ) + 90.0 * deltay / radius;
+                    MarbleWidgetInputHandler::d->m_widget->centerOn( posLon, posLat );
                     d->m_kineticModel.setPosition( posLon, posLat );
                 }
             }
