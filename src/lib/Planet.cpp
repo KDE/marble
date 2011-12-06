@@ -144,10 +144,16 @@ Planet::Planet( const QString& id )
         //FIXME: fill in with valid data
         d->setup( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1738000.0,
                 name( id ), id );
+      } else if ( id == "sky" ) {
+          mDebug() << "WARNING:";
+          mDebug() << "creating \"sky\" which has invalid orbital elements";
+          //FIXME: fill in with valid data
+          d->setup( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10000000.0,
+                  name( id ), id );
     } else {
         mDebug() << "WARNING:";
         mDebug() << "creating planet" << id << "without enough info";
-        d->setup( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        d->setup( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10000000.0,
                 name( QString() ), QString("unknown") );
     }
 }
@@ -335,11 +341,13 @@ QString Planet::name( const QString& id )
     // dwarf planets ... (everybody likes pluto)
     } else if ( id == "pluto" ) {
         return QObject::tr("Pluto", "the planet");
-    // sun and moon
+    // sun, moon and sky
     } else if ( id == "sun" ) {
         return QObject::tr("Sun", "the earth's star");
     } else if ( id == "moon" ) {
         return QObject::tr("Moon", "the earth's moon");
+    } else if ( id == "sky" ) {
+          return "Sky"; // FIXME: Make translatable
     } else if ( id.isEmpty() ) {
         mDebug() << "Warning: empty id";
         return QObject::tr("Unknown Planet", "a planet without data");
@@ -363,8 +371,9 @@ QStringList Planet::planetList()
 	<< "neptune"
 	<< "pluto"
 	<< "sun"
-	<< "moon";
-	
+  << "moon"
+  << "sky";
+
 	return planets;
 }
 	
