@@ -96,27 +96,23 @@ bool Speedometer::isInitialized () const
     return m_widgetItem;
 }
 
-void Speedometer::updateLocation( GeoDataCoordinates coordinates, qreal)
+void Speedometer::updateLocation( GeoDataCoordinates coordinates, qreal speed )
 {
     Q_UNUSED( coordinates );
 
-    const PositionTracking *tracking = marbleModel()->positionTracking();
-    qreal speed = tracking->speed() * METER2KM / SEC2HOUR;
+    speed *= METER2KM / SEC2HOUR;
     QString speedUnit;
-    QString distanceString;
 
     switch ( m_locale->measurementSystem() ) {
     case QLocale::ImperialSystem:
         //miles per hour
         speedUnit = tr("mph");
         speed *= KM2MI;
-        distanceString = tr("ft");
         break;
 
     case QLocale::MetricSystem:
         //kilometers per hour
         speedUnit = tr("km/h");
-        distanceString = tr("m");
         break;
     }
 

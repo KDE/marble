@@ -62,7 +62,7 @@ class Speedometer : public AbstractFloatItem
     bool isInitialized () const;
 
  private slots:
-    void updateLocation( GeoDataCoordinates coordinates, qreal speed);
+    void updateLocation( GeoDataCoordinates coordinates, qreal speed );
 
  private:
     MarbleLocale* m_locale;
