@@ -103,8 +103,6 @@ void KineticModel::setPosition(qreal posX, qreal posY)
     d_ptr->position.setY( posY );
 
     update();
-    if (!d_ptr->ticker.isActive())
-        d_ptr->ticker.start();
 }
 
 int KineticModel::updateInterval() const
