@@ -24,9 +24,9 @@ RouteRequestModel::RouteRequestModel( Marble::RouteRequest* request, QObject *pa
         connect( m_request, SIGNAL( positionChanged( int, GeoDataCoordinates ) ),
                  this, SLOT( updateData( int ) ) );
         connect( m_request, SIGNAL( positionAdded( int ) ),
-                 this, SLOT( updateAfterRemoval( int ) ) );
-        connect( m_request, SIGNAL( positionRemoved( int) ),
                  this, SLOT( updateAfterAddition( int ) ) );
+        connect( m_request, SIGNAL( positionRemoved( int) ),
+                 this, SLOT( updateAfterRemoval( int ) ) );
     }
 }
 
