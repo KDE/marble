@@ -12,37 +12,66 @@ import com.nokia.meego 1.0
 Item {
     id: root
 
-    property real longitude: 0.0
-    property real latitude: 0.0
-
-    property string name
-    property bool isCurrentPosition: true
+    property string name: "Point in map" /** @todo: Reverse geocoding */
+    property bool isCurrentPosition: false
 
     signal positionChanged()
 
+    property bool _editing: false
+
     function retrieveInput( lon, lat ) {
-        if ( destinationInputLabel.editing ) {
-            longitude = lon
-            latitude = lat
-            destinationInputLabel.editing = false
+        if ( root._editing ) {
+            ListView.view.model.setPosition(index, lon, lat)
+            root._editing = false
             root.positionChanged()
         }
     }
 
-    ToolBarLayout {
+    Item {
         width: parent.width
         height: 40
 
+        Rectangle {
+            id: waypointIcon
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 5
+            width: 32
+            height: 32
+            radius: 16
+            color: "#37A42C"
+            border.width: 1
+            border.color: "black"
+
+            Text {
+                anchors.centerIn: parent
+                text: String.fromCharCode(65+index)
+                font.pixelSize: 24
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: marbleWidget.centerOn(longitude, latitude)
+            }
+        }
+
         Label {
             id: destinationInputLabel
-
-            property bool editing: false
-
-            text: editing ? name + ": Select a point" : ( root.isCurrentPosition ? name + ": Current position" : name + ": Point in map" )
+            anchors.left: waypointIcon.right
+            anchors.right: editIcon.left
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.margins: 10
+            text: root._editing ? "Select a point" : ( root.isCurrentPosition ? "Current position" : name )
         }
 
         ToolIcon {
+            id: editIcon
             iconId: "toolbar-edit"
+            anchors.right: parent.right
+            anchors.margins: 5
+            anchors.verticalCenter: parent.verticalCenter
             onClicked: {
                 inputSelectionDialog.open()
             }
@@ -52,7 +81,7 @@ Item {
     SelectionDialog {
         id: inputSelectionDialog
         titleText: "Select via point"
-        selectedIndex: 0
+        selectedIndex: 1
         model: ListModel {
             ListElement { name: "Current Position" }
             ListElement { name: "Select in map" }
@@ -61,10 +90,11 @@ Item {
         onAccepted: {
             if ( selectedIndex === 0 ) {
                 root.isCurrentPosition = true
+                root.ListView.view.model.setPosition(index, marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude)
                 root.positionChanged()
             } else {
                 root.isCurrentPosition = false
-                destinationInputLabel.editing = true
+                root._editing = true
             }
         }
     }

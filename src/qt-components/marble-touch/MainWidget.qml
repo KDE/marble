@@ -308,4 +308,8 @@ Item {
     function setGeoSceneProperty( key, value ) {
         map.setGeoSceneProperty( key, value )
     }
+
+    function getCenter() {
+        return map.center
+    }
 }

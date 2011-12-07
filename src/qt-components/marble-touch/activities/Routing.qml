@@ -80,111 +80,46 @@ Page {
         }
     }
 
-    Rectangle {
+    Flickable {
         id: searchResultView
-        radius: 10
-        color: "lightsteelblue"
-        border.width: 1
-        border.color: "lightgray"
-        z: 10
-        opacity: 0.9
-        property string searchTerm: ""
+        width: parent.width / 2
+        height: parent.height
+        contentWidth: width
+        contentHeight: routeEditor.height + waypointListView.height
+        anchors.margins: 5
 
-        function calculateRoute() {
-            marbleWidget.getRouting().clearRoute()
-            marbleWidget.getRouting().routingProfile = routingTypeOptions.routingType
-            if ( sourcePoint.isCurrentPosition ) {
-                marbleWidget.getRouting().setVia( 0, marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
-            } else {
-                marbleWidget.getRouting().setVia( 0, sourcePoint.longitude, sourcePoint.latitude )
-            }
-            if ( destinationPoint.isCurrentPosition ) {
-                marbleWidget.getRouting().setVia( 1, marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
-            } else {
-                marbleWidget.getRouting().setVia( 1, destinationPoint.longitude, destinationPoint.latitude )
-            }
+        RouteEditor {
+            id: routeEditor
+            anchors.top: parent.top
+            width: parent.width
         }
 
-        Column {
-            anchors.fill: parent
-            anchors.margins: 5
-            spacing: 5
+        ListView {
+            id: waypointListView
+            anchors.top: routeEditor.bottom
+            anchors.margins: 10
+            width: parent.width
+            height: 74 * count
 
-            ViaPointEditor {
-                id: sourcePoint
-                width: parent.width
-                height: 40
-                isCurrentPosition: true
-                name: "From"
-
-                Component.onCompleted: marbleWidget.mouseClickGeoPosition.connect(retrieveInput)
-                onPositionChanged: searchResultView.calculateRoute()
-            }
-
-            ViaPointEditor {
-                id: destinationPoint
-                width: parent.width
-                height: 40
-                isCurrentPosition: false
-                name: "To"
-
-                Component.onCompleted: marbleWidget.mouseClickGeoPosition.connect(retrieveInput)
-                onPositionChanged: searchResultView.calculateRoute()
-            }
-
-            ButtonRow {
-                width: parent.width
-                id: routingTypeOptions
-                checkedButton: routingMotorcarButton
-                property string routingType: checkedButton.routingType
-                onRoutingTypeChanged: {
-                    marbleWidget.getRouting().routingProfile = routingTypeOptions.routingType
-                    marbleWidget.getRouting().updateRoute()
-                }
-                Button {
-                    id: routingMotorcarButton
-                    iconSource: "qrc:/icons/routing-motorcar.svg"
-                    property string routingType: "Motorcar"
-                }
-
-                Button {
-                    id: routingBikeButton
-                    iconSource: "qrc:/icons/routing-bike.svg"
-                    property string routingType: "Bicycle"
-                }
-
-                Button {
-                    id: routingPedestrianButton
-                    iconSource: "qrc:/icons/routing-pedestrian.svg"
-                    property string routingType: "Pedestrian"
-                }
-            }
-
-            ListView {
-                id: searchResultListView
-                anchors.top: routingTypeOptions.bottom
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.margins: 5
-                model: marbleWidget.waypointModel()
-                delegate: turnTypeDelegate
-                highlight: Rectangle { color: "white"; radius: 5 }
-                focus: true
-                spacing: 4
-                clip: true
-            }
-
-            ScrollDecorator {
-                flickableItem: searchResultListView
-            }
+            model: marbleWidget.waypointModel()
+            delegate: turnTypeDelegate
+            highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
+            highlightMoveDuration: 200
+            focus: true
+            interactive: false
+            spacing: 4
+            clip: true
         }
+    }
+
+    ScrollDecorator {
+        flickableItem: searchResultView
     }
 
     Item {
         id: mapContainer
         clip: true
-        width: parent.width
+        width: parent.width / 2
         height: parent.height
 
         function embedMarbleWidget() {
@@ -227,6 +162,25 @@ Page {
         ]
     }
 
+    FileSaveDialog {
+        id: saveRouteDialog
+        anchors.fill: parent
+        folder: "/home/user/MyDocs"
+        filename: ""
+        nameFilters: [ "*.kml" ]
+
+        onAccepted: { marbleWidget.getRouting().saveRoute( folder + "/" + filename ); }
+    }
+
+    FileOpenDialog {
+        id: openRouteDialog
+        anchors.fill: parent
+        folder: "/home/user/MyDocs"
+        nameFilters: [ "*.kml", "*.gpx" ]
+
+        onAccepted: { marbleWidget.getRouting().openRoute( folder + "/" + filename ); }
+    }
+
     Component {
         id: turnTypeDelegate
 
@@ -253,7 +207,7 @@ Page {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            searchResultListView.currentIndex = index
+                            waypointListView.currentIndex = index
                             marbleWidget.centerOn(longitude, latitude)
                         }
                     }
@@ -267,25 +221,6 @@ Page {
                 color: "white"
             }
         }
-    }
-
-    FileSaveDialog {
-        id: saveRouteDialog
-        anchors.fill: parent
-        folder: "/home/user/MyDocs"
-        filename: ""
-        nameFilters: [ "*.kml" ]
-
-        onAccepted: { marbleWidget.getRouting().saveRoute( folder + "/" + filename ); }
-    }
-
-    FileOpenDialog {
-        id: openRouteDialog
-        anchors.fill: parent
-        folder: "/home/user/MyDocs"
-        nameFilters: [ "*.kml", "*.gpx" ]
-
-        onAccepted: { marbleWidget.getRouting().openRoute( folder + "/" + filename ); }
     }
 
     onStatusChanged: {
