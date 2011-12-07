@@ -316,7 +316,8 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler( MarbleWidget *
     connect( &d->m_lmbTimer, SIGNAL(timeout()), this, SLOT(lmbTimeout()));
 
     d->m_kineticModel.setUpdateInterval( 35 );
-    connect( &d->m_kineticModel, SIGNAL( positionChanged() ), SLOT( adjustCenter() ) );
+    connect( &d->m_kineticModel, SIGNAL( positionChanged( qreal, qreal ) ),
+             MarbleWidgetInputHandler::d->m_widget, SLOT( centerOn( qreal, qreal ) ) );
     connect( &d->m_kineticModel, SIGNAL( finished() ), SLOT( restoreViewContext() ) );
 
     // The interface to the measure tool consists of a RMB popup menu
@@ -861,11 +862,6 @@ void MarbleWidgetDefaultInputHandler::setNumberOfMeasurePoints( int newNumber )
     const bool enableMeasureActions = ( newNumber > 0 );
     d->m_removeMeasurePointsAction->setEnabled(enableMeasureActions);
     d->m_removeLastMeasurePointAction->setEnabled(enableMeasureActions);
-}
-
-void MarbleWidgetDefaultInputHandler::adjustCenter()
-{
-    MarbleWidgetInputHandler::d->m_widget->centerOn( d->m_kineticModel.position().x(), d->m_kineticModel.position().y() );
 }
 
 }

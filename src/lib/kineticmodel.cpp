@@ -185,7 +185,7 @@ void KineticModel::update()
                 d->velocity.setY( d->velocity.y() + vstep.y() );
         }
 
-        emit positionChanged();
+        emit positionChanged( d->position.x(), d->position.y() );
 
         if (d->velocity.isNull()) {
             emit finished();

@@ -40,7 +40,7 @@ class KineticModel: public QObject
 {
     Q_OBJECT
     Q_PROPERTY(int duration READ duration WRITE setDuration)
-    Q_PROPERTY(QPointF position READ position WRITE setPosition)
+    Q_PROPERTY(QPointF position READ position NOTIFY positionChanged)
     Q_PROPERTY(int updateInterval READ updateInterval WRITE setUpdateInterval)
 
 public:
@@ -60,7 +60,7 @@ public slots:
     void release();
 
 signals:
-    void positionChanged();
+    void positionChanged( qreal lon, qreal lat );
     void finished();
 
 private slots:
