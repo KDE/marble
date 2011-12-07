@@ -39,7 +39,6 @@ class KineticModelPrivate
 public:
     QTimer ticker;
 
-    bool released;
     int duration;
     QPointF position;
     QPointF velocity;
@@ -52,8 +51,7 @@ public:
 };
 
 KineticModelPrivate::KineticModelPrivate()
-    : released(false)
-    , duration(1403)
+    : duration(1403)
     , position(0, 0)
     , velocity(0, 0)
     , deacceleration(0, 0)
@@ -97,12 +95,24 @@ void KineticModel::setPosition(QPointF position)
 
 void KineticModel::setPosition(qreal posX, qreal posY)
 {
-    d_ptr->released = false;
-
     d_ptr->position.setX( posX );
     d_ptr->position.setY( posY );
 
-    update();
+    int elapsed = d_ptr->timestamp.elapsed();
+
+    // too fast gives less accuracy
+    if (elapsed < d_ptr->ticker.interval() / 2) {
+        return;
+    }
+
+    qreal delta = static_cast<qreal>( elapsed ) / 1000.0;
+
+    QPointF lastSpeed = d_ptr->velocity;
+    QPointF currentSpeed = ( d_ptr->position - d_ptr->lastPosition ) / delta;
+    d_ptr->velocity = 0.2 * lastSpeed + 0.8 * currentSpeed;
+    d_ptr->lastPosition = d_ptr->position;
+
+    d_ptr->timestamp.start();
 }
 
 int KineticModel::updateInterval() const
@@ -119,7 +129,6 @@ void KineticModel::resetSpeed()
 {
     Q_D(KineticModel);
 
-    d->released = false;
     d->ticker.stop();
     d->lastPosition = d->position;
     d->timestamp.start();
@@ -129,8 +138,6 @@ void KineticModel::resetSpeed()
 void KineticModel::release()
 {
     Q_D(KineticModel);
-
-    d->released = true;
 
     d->deacceleration = d->velocity * 1000 / ( 1 + d_ptr->duration );
     if (d->deacceleration.x() < 0) {
@@ -155,47 +162,34 @@ void KineticModel::update()
     Q_D(KineticModel);
 
     int elapsed = d->timestamp.elapsed();
-
-    // too fast gives less accuracy
-    if (elapsed < d->ticker.interval() / 2) {
-        return;
-    }
-
     qreal delta = static_cast<qreal>(elapsed) / 1000.0;
 
-    if (d->released) {
-        d->position += d->velocity * delta;
-        QPointF vstep = d->deacceleration * delta;
+    d->position += d->velocity * delta;
+    QPointF vstep = d->deacceleration * delta;
 
-        if (d->velocity.x() < vstep.x() && d->velocity.x() >= -vstep.x()) {
-            d->velocity.setX( 0 );
-        } else {
-            if (d->velocity.x() > 0)
-                d->velocity.setX( d->velocity.x() - vstep.x() );
-            else
-                d->velocity.setX( d->velocity.x() + vstep.x() );
-        }
-
-        if (d->velocity.y() < vstep.y() && d->velocity.y() >= -vstep.y()) {
-            d->velocity.setY( 0 );
-        } else {
-            if (d->velocity.y() > 0)
-                d->velocity.setY( d->velocity.y() - vstep.y() );
-            else
-                d->velocity.setY( d->velocity.y() + vstep.y() );
-        }
-
-        emit positionChanged( d->position.x(), d->position.y() );
-
-        if (d->velocity.isNull()) {
-            emit finished();
-            d->ticker.stop();
-        }
+    if (d->velocity.x() < vstep.x() && d->velocity.x() >= -vstep.x()) {
+        d->velocity.setX( 0 );
     } else {
-        QPointF lastSpeed = d->velocity;
-        QPointF currentSpeed = ( d->position - d->lastPosition ) / delta;
-        d->velocity = .2 * lastSpeed + .8 * currentSpeed;
-        d->lastPosition = d->position;
+        if (d->velocity.x() > 0)
+            d->velocity.setX( d->velocity.x() - vstep.x() );
+        else
+            d->velocity.setX( d->velocity.x() + vstep.x() );
+    }
+
+    if (d->velocity.y() < vstep.y() && d->velocity.y() >= -vstep.y()) {
+        d->velocity.setY( 0 );
+    } else {
+        if (d->velocity.y() > 0)
+            d->velocity.setY( d->velocity.y() - vstep.y() );
+        else
+            d->velocity.setY( d->velocity.y() + vstep.y() );
+    }
+
+    emit positionChanged( d->position.x(), d->position.y() );
+
+    if (d->velocity.isNull()) {
+        emit finished();
+        d->ticker.stop();
     }
 
     d->timestamp.start();
