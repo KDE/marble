@@ -1518,6 +1518,21 @@ void MarblePart::updateSettings()
         m_controlView->marbleModel()->setClockTimezone( m_timezone.value( MarbleSettings::chosenTimezone() ) );
     }
 
+    // Route rendering colors and alpha values
+    QColor tempColor;
+    tempColor = MarbleSettings::routeColorStandard();
+    tempColor.setAlpha( MarbleSettings::routeAlphaStandard() );
+    m_controlView->marbleModel()->routingManager()->setRouteColorStandard( tempColor );
+
+    tempColor = MarbleSettings::routeColorHighlighted();
+    tempColor.setAlpha( MarbleSettings::routeAlphaHighlighted() );
+    m_controlView->marbleModel()->routingManager()->setRouteColorHighlighted( tempColor );
+
+    tempColor = MarbleSettings::routeColorAlternative();
+    tempColor.setAlpha( MarbleSettings::routeAlphaAlternative() );
+    m_controlView->marbleModel()->routingManager()->setRouteColorAlternative( tempColor );
+
+    // External map editor
     m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
 }
 

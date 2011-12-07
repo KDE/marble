@@ -1012,6 +1012,19 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          routingManager->setShowGuidanceModeStartupWarning( startupWarning );
          routingManager->setLastOpenPath( settings.value( "lastRouteOpenPath", QDir::homePath() ).toString() );
          routingManager->setLastSavePath( settings.value( "lastRouteSavePath", QDir::homePath() ).toString() );
+
+         QColor tempColor;
+         tempColor = QColor( settings.value( "routeColorStandard", oxygenSkyBlue4.name() ).toString() );
+         tempColor.setAlpha( settings.value( "routeAlphaStandard", 200 ).toInt() );
+         routingManager->setRouteColorStandard( tempColor );
+
+         tempColor = QColor( settings.value( "routeColorHighlighted", oxygenSeaBlue2.name() ).toString() );
+         tempColor.setAlpha( settings.value( "routeAlphaHighlighted", 200 ).toInt() );
+         routingManager->setRouteColorHighlighted( tempColor );
+
+         tempColor = QColor( settings.value( "routeColorAlternative", oxygenAluminumGray4.name() ).toString() );
+         tempColor.setAlpha( settings.value( "routeAlphaAlternative", 200 ).toInt() );
+         routingManager->setRouteColorAlternative( tempColor );
      }
      settings.endGroup();
 
@@ -1215,6 +1228,12 @@ void MainWindow::writeSettings()
          settings.setValue( "showGuidanceModeStartupWarning", routingManager->showGuidanceModeStartupWarning() );
          settings.setValue( "lastRouteOpenPath", routingManager->lastOpenPath() );
          settings.setValue( "lastRouteSavePath", routingManager->lastSavePath() );
+         settings.setValue( "routeColorStandard", routingManager->routeColorStandard().name() );
+         settings.setValue( "routeAlphaStandard", routingManager->routeColorStandard().alpha() );
+         settings.setValue( "routeColorHighlighted", routingManager->routeColorHighlighted().name() );
+         settings.setValue( "routeAlphaHighlighted", routingManager->routeColorHighlighted().alpha() );
+         settings.setValue( "routeColorAlternative", routingManager->routeColorAlternative().name() );
+         settings.setValue( "routeAlphaAlternative", routingManager->routeColorAlternative().alpha() );
      }
      settings.endGroup();
 

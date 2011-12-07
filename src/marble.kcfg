@@ -279,6 +279,24 @@
   </entry>
   <entry key="currentRoutingProfile" type="Int" >
    <default>0</default>
- </entry>
+  </entry>
+  <entry key="routeColorStandard" type="Color" >
+   <default code="true">Marble::oxygenSkyBlue4</default>
+  </entry>
+  <entry key="routeAlphaStandard" type="Int" >
+   <default>200</default>
+  </entry>
+  <entry key="routeColorHighlighted" type="Color" >
+   <default code="true">Marble::oxygenSeaBlue2</default>
+  </entry>
+  <entry key="routeAlphaHighlighted" type="Int" >
+   <default>200</default>
+  </entry>
+  <entry key="routeColorAlternative" type="Color" >
+   <default code="true">Marble::oxygenAluminumGray4</default>
+  </entry>
+  <entry key="routeAlphaAlternative" type="Int" >
+   <default>200</default>
+  </entry>
  </group>
 </kcfg>
