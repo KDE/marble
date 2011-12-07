@@ -166,15 +166,16 @@ void KineticModel::update()
     if (d->released) {
         d->position += d->velocity * delta;
         QPointF vstep = d->deacceleration * delta;
+
         if (d->velocity.x() < vstep.x() && d->velocity.x() >= -vstep.x()) {
             d->velocity.setX( 0 );
-            d->ticker.stop();
         } else {
             if (d->velocity.x() > 0)
                 d->velocity.setX( d->velocity.x() - vstep.x() );
             else
                 d->velocity.setX( d->velocity.x() + vstep.x() );
         }
+
         if (d->velocity.y() < vstep.y() && d->velocity.y() >= -vstep.y()) {
             d->velocity.setY( 0 );
         } else {
