@@ -150,6 +150,13 @@ void Routing::removeVia( int index )
     }
 }
 
+void Routing::reverseRoute()
+{
+    if ( d->m_marbleWidget ) {
+        d->m_marbleWidget->model()->routingManager()->reverseRoute();
+    }
+}
+
 void Routing::clearRoute()
 {
     if ( d->m_marbleWidget ) {

@@ -51,6 +51,8 @@ public Q_SLOTS:
 
     void removeVia( int index );
 
+    void reverseRoute();
+
     void clearRoute();
 
     void updateRoute();
