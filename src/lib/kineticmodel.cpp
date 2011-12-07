@@ -139,6 +139,14 @@ void KineticModel::release()
 {
     Q_D(KineticModel);
 
+    // prevent kinetic spinning if last mouse move is too long ago
+    const int elapsed = d->timestamp.elapsed();
+    if ( elapsed > 2 * d->ticker.interval() ) {
+        d->ticker.stop();
+        emit finished();
+        return;
+    }
+
     d->deacceleration = d->velocity * 1000 / ( 1 + d_ptr->duration );
     if (d->deacceleration.x() < 0) {
         d->deacceleration.setX( -d->deacceleration.x() );
@@ -147,14 +155,8 @@ void KineticModel::release()
         d->deacceleration.setY( -d->deacceleration.y() );
     }
 
-    if (d->deacceleration.x() > 0.0005 || d->deacceleration.y() > 0.0005) {
-        if (!d->ticker.isActive())
-            d->ticker.start();
-        update();
-    } else {
-        d->ticker.stop();
-        emit finished();
-    }
+    if (!d->ticker.isActive())
+        d->ticker.start();
 }
 
 void KineticModel::update()
