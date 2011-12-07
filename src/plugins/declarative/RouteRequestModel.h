@@ -27,7 +27,8 @@ class RouteRequestModel : public QAbstractListModel
 
 public:
     enum RouteRequestModelRoles {
-        WaypointIconRole
+        LongitudeRole = Qt::UserRole+1,
+        LatitudeRole = Qt::UserRole+2
     };
 
     /** Constructor */
@@ -47,7 +48,8 @@ public:
     /** Overload of QAbstractListModel */
     QVariant data ( const QModelIndex &index, int role = Qt::DisplayRole ) const;
 
-    // Model data filling
+public Q_SLOTS:
+    void setPosition ( int index, qreal longitude, qreal latitude );
 
 private Q_SLOTS:
     void updateData( int index );

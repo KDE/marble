@@ -28,6 +28,11 @@ RouteRequestModel::RouteRequestModel( Marble::RouteRequest* request, QObject *pa
         connect( m_request, SIGNAL( positionRemoved( int) ),
                  this, SLOT( updateAfterRemoval( int ) ) );
     }
+
+    QHash<int,QByteArray> roles = roleNames();
+    roles[LongitudeRole] = "longitude";
+    roles[LatitudeRole] = "latitude";
+    setRoleNames( roles );
 }
 
 RouteRequestModel::~RouteRequestModel()
@@ -55,29 +60,42 @@ QVariant RouteRequestModel::headerData ( int section, Qt::Orientation orientatio
 
 QVariant RouteRequestModel::data ( const QModelIndex &index, int role ) const
 {
-    if ( index.isValid() && role == Qt::DisplayRole && m_request ) {
-        return m_request->name( index.row() );
+    if ( index.isValid() && m_request && index.row() >= 0 && index.row() < m_request->size() ) {
+        switch ( role ) {
+        case Qt::DisplayRole: return m_request->name( index.row() );
+        case LongitudeRole: return m_request->at( index.row() ).longitude( GeoDataCoordinates::Degree );
+        case LatitudeRole: return m_request->at( index.row() ).latitude( GeoDataCoordinates::Degree );
+        }
     }
 
     return QVariant();
 }
 
-void RouteRequestModel::updateData( int )
+void RouteRequestModel::updateData( int idx )
 {
-    /** @todo: do that properly */
-    reset();
+    QModelIndex affected = index( idx );
+    emit dataChanged( affected, affected );
 }
 
-void RouteRequestModel::updateAfterRemoval( int )
+void RouteRequestModel::updateAfterRemoval( int idx )
 {
-    /** @todo: do that properly */
-    reset();
+    beginRemoveRows( QModelIndex(), idx, idx );
+    removeRow( idx );
+    endRemoveRows();
 }
 
-void RouteRequestModel::updateAfterAddition( int )
+void RouteRequestModel::updateAfterAddition( int idx )
 {
-    /** @todo: do that properly */
-    reset();
+    beginInsertRows( QModelIndex(), idx, idx );
+    insertRow( idx );
+    endInsertRows();
+}
+
+void RouteRequestModel::setPosition ( int index, qreal longitude, qreal latitude )
+{
+    if ( index >= 0 && index < m_request->size() ) {
+        m_request->setPosition( index, GeoDataCoordinates( longitude, latitude, 0.0, GeoDataCoordinates::Degree ) );
+    }
 }
 
 }
