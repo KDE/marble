@@ -11,6 +11,7 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 import org.kde.edu.marble.qtcomponents 0.12
+import QtMobility.systeminfo 1.1
 
 /*
  * Page for geocaching activity.
@@ -157,9 +158,16 @@ Page {
         onAccepted: { marbleWidget.getTracking().openTrack( folder + "/" + filename ); }
     }
 
+    ScreenSaver {
+        id: saver
+    }
+
     onStatusChanged: {
         if ( status === PageStatus.Activating ) {
             mapContainer.embedMarbleWidget()
+            saver.screenSaverDelayed = true
+        } else if ( status === PageStatus.Deactivating ) {
+            saver.screenSaverDelayed = false
         }
     }
 }
