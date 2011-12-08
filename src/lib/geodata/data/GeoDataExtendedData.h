@@ -95,7 +95,7 @@ class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
     void setSimpleArrayData( const QString& key, GeoDataSimpleArrayData* values );
 
     /**
-     * @brief return SimpleArrayData for given @p key as a modifiable reference
+     * @brief return SimpleArrayData for given @p key, 0 pointer if none is set
      */
     GeoDataSimpleArrayData* simpleArrayData( const QString& key ) const;
 

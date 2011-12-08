@@ -41,7 +41,7 @@ GeoNode* GPXhrTagHandler::parse(GeoParser& parser) const
 
     if ( parentItem.is<GeoDataTrack>() )
     {
-        GeoDataSimpleArrayData* arrayData = &parentItem.nodeAs<GeoDataTrack>()
+        GeoDataSimpleArrayData* arrayData = parentItem.nodeAs<GeoDataTrack>()
                         ->extendedData().simpleArrayData( "heartrate" );
         QVariant value( parser.readElementText().toInt() );
         arrayData->append( value );

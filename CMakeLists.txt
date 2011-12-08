@@ -312,7 +312,7 @@ if(WIN32)
   SET(CMAKE_DEBUG_POSTFIX "d")
 endif(WIN32)
 # reenable this if you want to debug kml tags
-#add_definitions("-DDEBUG_TAGS")
+add_definitions("-DDEBUG_TAGS")
 ####################################################
 # add cmake macros
 include( MarbleMacros )

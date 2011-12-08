@@ -109,6 +109,7 @@ QList<QDateTime> GeoDataTrack::whenList() const
 
 GeoDataCoordinates GeoDataTrack::coordinatesAt( const QDateTime &when ) const
 {
+		qDebug() << "GeoDataTrack::coordinatesAt" << when;
     if ( d->m_when.isEmpty() ) {
         return GeoDataCoordinates();
     }

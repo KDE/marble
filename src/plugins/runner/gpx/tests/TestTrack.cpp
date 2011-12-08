@@ -371,10 +371,10 @@ void TestTrack::extendedDataHeartRateTest()
     QCOMPARE( track->size(), 3 );
 
     {
-        GeoDataSimpleArrayData hr = track->extendedData().simpleArrayData( "heartrate" );
-        QCOMPARE( hr.size(), 3 );
-        QCOMPARE( hr.valueAt( 0 ), QVariant( "108" ) );
-        QCOMPARE( hr.valueAt( 2 ), QVariant( "110" ) );
+        GeoDataSimpleArrayData* hr = track->extendedData().simpleArrayData( "heartrate" );
+        QCOMPARE( hr->size(), 3 );
+        QCOMPARE( hr->valueAt( 0 ), QVariant( "108" ) );
+        QCOMPARE( hr->valueAt( 2 ), QVariant( "110" ) );
     }
 
     delete document;
