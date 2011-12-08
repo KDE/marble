@@ -31,6 +31,8 @@ class TestGeoDataTrack : public QObject
 private slots:
     void initTestCase();
     void simpleParseTest();
+    void removeBeforeTest();
+    void removeAfterTest();
     void extendedDataParseTest();
     void withoutTimeTest();
 };
@@ -40,10 +42,24 @@ void TestGeoDataTrack::initTestCase()
     MarbleDebug::enable = true;
 }
 
-void TestGeoDataTrack::simpleParseTest()
+GeoDataDocument *parseKml(const QString &content)
 {
+    GeoDataParser parser( GeoData_KML );
+
+    QByteArray array( content.toUtf8() );
+    QBuffer buffer( &array );
+    buffer.open( QIODevice::ReadOnly );
+    qDebug() << "Buffer content:" << endl << buffer.buffer();
+    if ( !parser.read( &buffer ) ) {
+        qFatal( "Could not parse data!" );
+    }
+    GeoDocument* document = parser.releaseDocument();
+    Q_ASSERT( document );
+    return static_cast<GeoDataDocument*>( document );
+}
+
     //"Simple Example" from kmlreference
-    QString content(
+    QString simpleExampleContent(
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
 "<kml xmlns=\"http://www.opengis.net/kml/2.2\""
 " xmlns:gx=\"http://www.google.com/kml/ext/2.2\">"
@@ -69,20 +85,9 @@ void TestGeoDataTrack::simpleParseTest()
 "</Folder>"
 "</kml>" );
 
-    GeoDataParser parser( GeoData_KML );
-
-    QByteArray array( content.toUtf8() );
-    QBuffer buffer( &array );
-    buffer.open( QIODevice::ReadOnly );
-    qDebug() << "Buffer content:" << endl << buffer.buffer();
-    if ( !parser.read( &buffer ) ) {
-        qWarning( "Could not parse data!" );
-        QFAIL( "Could not parse data!" );
-        return;
-    }
-    GeoDocument* document = parser.releaseDocument();
-    QVERIFY( document );
-    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
+void TestGeoDataTrack::simpleParseTest()
+{
+    GeoDataDocument* dataDocument = parseKml( simpleExampleContent );
     GeoDataFolder *folder = dataDocument->folderList().at( 0 );
     QCOMPARE( folder->placemarkList().size(), 1 );
     GeoDataPlacemark* placemark = folder->placemarkList().at( 0 );
@@ -106,7 +111,65 @@ void TestGeoDataTrack::simpleParseTest()
         QCOMPARE( coord.altitude(), 156.000000 );
     }
 
-    delete document;
+    delete dataDocument;
+}
+
+void TestGeoDataTrack::removeBeforeTest()
+{
+    GeoDataDocument* dataDocument = parseKml( simpleExampleContent );
+    GeoDataFolder *folder = dataDocument->folderList().at( 0 );
+    QCOMPARE( folder->placemarkList().size(), 1 );
+    GeoDataPlacemark* placemark = folder->placemarkList().at( 0 );
+    QCOMPARE( placemark->geometry()->geometryId(), GeoDataTrackId );
+    GeoDataTrack* track = static_cast<GeoDataTrack*>( placemark->geometry() );
+    QCOMPARE( track->size(), 7 );
+    track->removeBefore( QDateTime( QDate( 2010, 5, 28 ), QTime( 2, 2, 54 ), Qt::UTC ) );
+    QCOMPARE( track->size(), 3 );
+    {
+        QDateTime when = track->whenList().at( 0 );
+        QCOMPARE( when, QDateTime( QDate( 2010, 5, 28 ), QTime( 2, 2, 54 ), Qt::UTC ) );
+    }
+    {
+        QDateTime when = track->whenList().at( 2 );
+        QCOMPARE( when, QDateTime( QDate( 2010, 5, 28 ), QTime( 2, 2, 56 ), Qt::UTC ) );
+    }
+    {
+        GeoDataCoordinates coord = track->coordinatesList().at( 0 );
+        QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), -122.203451 );
+        QCOMPARE( coord.latitude( GeoDataCoordinates::Degree ), 37.374706 );
+        QCOMPARE( coord.altitude(), 141.800003 );
+    }
+
+    delete dataDocument;
+}
+
+void TestGeoDataTrack::removeAfterTest()
+{
+    GeoDataDocument* dataDocument = parseKml( simpleExampleContent );
+    GeoDataFolder *folder = dataDocument->folderList().at( 0 );
+    QCOMPARE( folder->placemarkList().size(), 1 );
+    GeoDataPlacemark* placemark = folder->placemarkList().at( 0 );
+    QCOMPARE( placemark->geometry()->geometryId(), GeoDataTrackId );
+    GeoDataTrack* track = static_cast<GeoDataTrack*>( placemark->geometry() );
+    QCOMPARE( track->size(), 7 );
+    track->removeAfter( QDateTime( QDate( 2010, 5, 28 ), QTime( 2, 2, 54 ), Qt::UTC ) );
+    QCOMPARE( track->size(), 5 );
+    {
+        QDateTime when = track->whenList().at( 0 );
+        QCOMPARE( when, QDateTime( QDate( 2010, 5, 28 ), QTime( 2, 2, 9 ), Qt::UTC ) );
+    }
+    {
+        QDateTime when = track->whenList().at( 4 );
+        QCOMPARE( when, QDateTime( QDate( 2010, 5, 28 ), QTime( 2, 2, 54 ), Qt::UTC ) );
+    }
+    {
+        GeoDataCoordinates coord = track->coordinatesList().at( 0 );
+        QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), -122.207881 );
+        QCOMPARE( coord.latitude( GeoDataCoordinates::Degree ), 37.371915 );
+        QCOMPARE( coord.altitude(), 156.000000 );
+    }
+
+    delete dataDocument;
 }
 
 void TestGeoDataTrack::extendedDataParseTest()
@@ -186,20 +249,7 @@ void TestGeoDataTrack::extendedDataParseTest()
 "  </Document>"
 "</kml>" );
 
-    GeoDataParser parser( GeoData_KML );
-
-    QByteArray array( content.toUtf8() );
-    QBuffer buffer( &array );
-    buffer.open( QIODevice::ReadOnly );
-    qDebug() << "Buffer content:" << endl << buffer.buffer();
-    if ( !parser.read( &buffer ) ) {
-        qWarning( "Could not parse data!" );
-        QFAIL( "Could not parse data!" );
-        return;
-    }
-    GeoDocument* document = parser.releaseDocument();
-    QVERIFY( document );
-    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
+    GeoDataDocument* dataDocument = parseKml( content );
     GeoDataFolder *folder = dataDocument->folderList().at( 0 );
     QCOMPARE( folder->placemarkList().size(), 1 );
     GeoDataPlacemark* placemark = folder->placemarkList().at( 0 );
@@ -226,7 +276,7 @@ void TestGeoDataTrack::extendedDataParseTest()
         QCOMPARE( power.valueAt( 6 ), QVariant( "183.0" ) );
     }
 
-    delete document;
+    delete dataDocument;
 }
 
 void TestGeoDataTrack::withoutTimeTest()
@@ -258,20 +308,7 @@ void TestGeoDataTrack::withoutTimeTest()
 "</Folder>"
 "</kml>" );
 
-    GeoDataParser parser( GeoData_KML );
-
-    QByteArray array( content.toUtf8() );
-    QBuffer buffer( &array );
-    buffer.open( QIODevice::ReadOnly );
-    qDebug() << "Buffer content:" << endl << buffer.buffer();
-    if ( !parser.read( &buffer ) ) {
-        qWarning( "Could not parse data!" );
-        QFAIL( "Could not parse data!" );
-        return;
-    }
-    GeoDocument* document = parser.releaseDocument();
-    QVERIFY( document );
-    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
+    GeoDataDocument* dataDocument = parseKml( content );
     GeoDataFolder *folder = dataDocument->folderList().at( 0 );
     QCOMPARE( folder->placemarkList().size(), 1 );
     GeoDataPlacemark* placemark = folder->placemarkList().at( 0 );
@@ -294,7 +331,7 @@ void TestGeoDataTrack::withoutTimeTest()
         QCOMPARE( coord.altitude(), 156.000000 );
     }
 
-    delete document;
+    delete dataDocument;
 }
 
 QTEST_MAIN( TestGeoDataTrack )

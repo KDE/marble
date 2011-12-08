@@ -221,6 +221,7 @@ void GeoDataTrack::removeBefore( const QDateTime &when )
             if ( i < d->m_coordinates.size() ) {
                 d->m_coordinates.removeAt( i );
             }
+            i--;
         }
     }
 }
@@ -233,6 +234,7 @@ void GeoDataTrack::removeAfter( const QDateTime &when )
             if ( i < d->m_coordinates.size() ) {
                 d->m_coordinates.removeAt( i );
             }
+            i--;
         }
     }
 }
