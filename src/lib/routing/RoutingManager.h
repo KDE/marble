@@ -31,7 +31,7 @@ class RoutingProfilesModel;
 
 /**
   * Delegates data retrieval and model updates to the appropriate
-  * routing provider -- always openrouteservice.org for now.
+  * routing provider.
   */
 class MARBLE_EXPORT RoutingManager : public QObject
 {
@@ -134,6 +134,36 @@ public:
      * Return last directory the user saved a route to.
      */
     QString lastSavePath() const;
+
+    /**
+     * Set color for standard route rendering
+     */
+    void setRouteColorStandard( QColor color );
+
+    /**
+     * Get color for standard route rendering
+     */
+    QColor routeColorStandard();
+
+    /**
+     * Set color for highlighted route rendering
+     */
+    void setRouteColorHighlighted( QColor color );
+
+    /**
+     * Get color for highlighted route rendering
+     */
+    QColor routeColorHighlighted();
+
+    /**
+     * Set color for alternative route rendering
+     */
+    void setRouteColorAlternative( QColor color );
+
+    /**
+     * Get color for alternative route rendering
+     */
+    QColor routeColorAlternative();
 
 public Q_SLOTS:
     /** Reverse the previously requested route, i.e. swap start and destination (and via points, if any) */

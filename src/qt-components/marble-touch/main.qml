@@ -23,8 +23,8 @@ PageStackWindow {
     height: screen.displayHeight
     platformStyle: defaultStyle
     initialPage: activitySelection
-    property alias marbleWidget: mainWidget
-    
+    property Item marbleWidget: null
+
     // System dependent style for the main window.
     PageStackWindowStyle {
         id: defaultStyle
@@ -38,10 +38,6 @@ PageStackWindow {
     // Displays all available activities and starts them if the user clicks on them.
     ActivitySelectionView {
         id: activitySelection
-    }
-
-    MainWidget {
-        id: mainWidget
     }
 
     // Returns the model which contains routing instructions.
@@ -63,4 +59,24 @@ PageStackWindow {
     function getSearch() {
         return mainWidget.getSearch()
     }
+
+    function resetLastActivity() {
+        if ( marbleWidget !== null && pageStack.depth < 2 ) {
+            settings.lastActivity = ""
+        }
+    }
+
+    function openActivity( activity ) {
+        activitySelection.openActivity( activity )
+    }
+
+    Component.onCompleted: {
+        if ( settings.lastActivity === "" ) {
+            activitySelection.initializeDelayed()
+        } else {
+            activitySelection.openActivity( settings.lastActivity )
+        }
+    }
+
+    Connections { target: pageStack; onDepthChanged: resetLastActivity() }
 }

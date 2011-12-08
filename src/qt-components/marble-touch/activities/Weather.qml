@@ -13,10 +13,10 @@ import org.kde.edu.marble 0.11
 import org.kde.edu.marble.qtcomponents 0.12
 
 /*
- * Page for geocaching activity.
+ * Page for the weather activity.
  */
 Page {
-    id: trackingActivityPage
+    id: weatherActivityPage
     anchors.fill: parent
 
     tools: ToolBarLayout {
@@ -24,9 +24,21 @@ Page {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
-        ToolIconCheckable {
+        ToolIcon {
+            iconId: "toolbar-home"
+            onClicked: {
+                marbleWidget.centerOn( marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
+                if (marbleWidget.zoom < 1200 ) {
+                    marbleWidget.zoom = 2000
+                }
+            }
+        }
+        ToolButton {
             id: searchButton
-            iconId: "toolbar-search";
+            checkable: true
+            checked: true
+            width: 60
+            iconSource: "image://theme/icon-m-toolbar-search";
         }
         ToolIcon {
             iconId: "toolbar-view-menu"
@@ -57,9 +69,20 @@ Page {
 
         SearchField {
             id: searchField
-            visible: searchButton.checked
             width: parent.width
-            onSearch: marbleWidget.find( term )
+            visible: searchButton.checked
+            onSearch: {
+                searchField.busy = true
+                marbleWidget.find( term )
+            }
+
+            Component.onCompleted: {
+                marbleWidget.getSearch().searchFinished.connect( searchFinished )
+            }
+
+            function searchFinished() {
+                searchField.busy = false
+            }
         }
 
         Item {
@@ -68,24 +91,31 @@ Page {
             height: parent.height - searchField.height
             clip: true
 
-            Component.onCompleted: {
+            function embedMarbleWidget() {
                 marbleWidget.parent = mapContainer
-                settings.projection = "Mercator"
+                settings.projection = "Spherical"
                 var plugins = settings.defaultRenderPlugins
-                settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
-                plugins.push( "speedometer" )
+                plugins.push( "weather" )
                 settings.activeRenderPlugins =  plugins
-                settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
+                settings.mapTheme = "earth/plain/plain.dgml"
                 settings.gpsTracking = true
                 settings.showPosition = true
-                settings.showTrack = true
+                settings.showTrack = false
                 marbleWidget.visible = true
             }
 
             Component.onDestruction: {
-                marbleWidget.parent = null
-                marbleWidget.visible = false
+                if ( marbleWidget.parent === mapContainer ) {
+                    marbleWidget.parent = null
+                    marbleWidget.visible = false
+                }
             }
+        }
+    }
+
+    onStatusChanged: {
+        if ( status === PageStatus.Activating ) {
+            mapContainer.embedMarbleWidget()
         }
     }
 }

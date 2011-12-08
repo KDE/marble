@@ -37,7 +37,7 @@ public:
           m_recenter( false ),
         m_t ( 0 )
     {
-    };
+    }
 
     ~FileManagerPrivate()
     {
@@ -46,11 +46,10 @@ public:
                 loader->wait();
             }
         }
-    };
+    }
 
     MarbleModel* const m_model;
     QList<FileLoader*> m_loaderList;
-    QStringList m_pathList;
     QList < GeoDataDocument* > m_fileItemList;
     bool m_recenter;
     QTime *m_t;
@@ -69,29 +68,27 @@ FileManager::~FileManager()
     delete d;
 }
 
-QStringList FileManager::containers() const
-{
-    QStringList retList;
-    for ( int line = 0; line < d->m_fileItemList.count(); ++line ) {
-        retList << d->m_fileItemList.at( line )->fileName();
-    }
-    return retList + d->m_pathList;
-}
-
 void FileManager::addFile( const QString& filepath, DocumentRole role, bool recenter )
 {
-    if ( !containers().contains( filepath ) ) {
-        mDebug() << "adding container:" << filepath;
-        if (d->m_t == 0) {
-            mDebug() << "Starting placemark loading timer";
-            d->m_t = new QTime();
-            d->m_t->start();
-        }
-        d->m_recenter = recenter;
-        FileLoader* loader = new FileLoader( this, d->m_model, filepath, role );
-        appendLoader( loader );
-        d->m_pathList.append( filepath );
+    foreach ( const GeoDataDocument *document, d->m_fileItemList ) {
+        if ( document->fileName() == filepath )
+            return;  // already loaded
     }
+
+    foreach ( const FileLoader *loader, d->m_loaderList ) {
+        if ( loader->path() == filepath )
+            return;  // currently loading
+    }
+
+    mDebug() << "adding container:" << filepath;
+    if (d->m_t == 0) {
+        mDebug() << "Starting placemark loading timer";
+        d->m_t = new QTime();
+        d->m_t->start();
+    }
+    d->m_recenter = recenter;
+    FileLoader* loader = new FileLoader( this, d->m_model, filepath, role );
+    appendLoader( loader );
 }
 
 void FileManager::addFile( const QStringList& filepaths, DocumentRole role )
@@ -121,12 +118,23 @@ void FileManager::appendLoader( FileLoader *loader )
 
 void FileManager::removeFile( const QString& key )
 {
+    foreach ( FileLoader *loader, d->m_loaderList ) {
+        if ( loader->path() == key ) {
+            disconnect( loader, 0, this, 0 );
+            loader->wait();
+            d->m_loaderList.removeAll( loader );
+            delete loader->document();
+            return;
+        }
+    }
+
     for ( int i = 0; i < d->m_fileItemList.size(); ++i ) {
         if ( key == d->m_fileItemList.at(i)->fileName() ) {
             closeFile( i );
             return;
         }
     }
+
     mDebug() << "could not identify " << key;
 }
 
@@ -189,7 +197,6 @@ void FileManager::cleanupLoader( FileLoader* loader )
             errorBox.exec();
             qWarning() << "File Parsing error " << loader->error();
         }
-        d->m_pathList.removeAll( loader->path() );
         delete loader;
     }
     if ( d->m_loaderList.isEmpty()  )

@@ -58,7 +58,6 @@ signals:
     void                    visibilityChanged (QString nameId, bool visible);
     void                    settingsChanged (QString nameId);
     void                    actionGroupsChanged ();
-    void                    repaintNeeded (QRegion dirtyRegion);
 public:
     enum RenderType
     {
@@ -72,6 +71,8 @@ public:
     virtual QDialog*        aboutDialog ();
     virtual QDialog*        configDialog ();
     void                    restoreDefaultSettings ();
+signals:
+    void                    repaintNeeded (QRegion dirtyRegion = QRegion());
 };
 // RenderPlugin
 

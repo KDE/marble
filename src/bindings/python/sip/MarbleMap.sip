@@ -38,8 +38,6 @@ public:
     int                     maximumZoom () const;
     qreal                   centerLongitude () const;
     qreal                   centerLatitude () const;
-    Marble::Quaternion      planetAxis () const;
-    QPixmap                 mapScreenShot ();
     bool                    propertyValue (const QString& name) const;
     bool                    showOverviewMap () const;
     bool                    showScaleBar () const;
@@ -53,19 +51,15 @@ public:
     bool                    showTerrain () const;
     bool                    showOtherPlaces () const;
     bool                    showRelief () const;
-    bool                    showElevationModel () const;
     bool                    showIceLayer () const;
     bool                    showBorders () const;
     bool                    showRivers () const;
     bool                    showLakes () const;
-    bool                    showGps () const;
     bool                    showFrameRate () const;
     quint64                 volatileTileCacheLimit () const;
     QList<Marble::RenderPlugin*>  renderPlugins () const;
     QList<Marble::AbstractFloatItem*>  floatItems () const;
-    void                    paint (Marble::GeoPainter& painter, QRect& dirtyRect);
     void                    rotateBy (const qreal& deltaLon /in/, const qreal& deltaLat /in/);
-    void                    rotateBy (const Marble::Quaternion& incRot);
     void                    setCenterLatitude (qreal lat);
     void                    setCenterLongitude (qreal lon);
     Marble::Projection      projection () const;
@@ -86,12 +80,10 @@ public:
     void                    setShowTerrain (bool visible);
     void                    setShowOtherPlaces (bool visible);
     void                    setShowRelief (bool visible);
-    void                    setShowElevationModel (bool visible);
     void                    setShowIceLayer (bool visible);
     void                    setShowBorders (bool visible);
     void                    setShowRivers (bool visible);
     void                    setShowLakes (bool visible);
-    void                    setShowGps (bool visible);
     void                    setShowFrameRate (bool visible);
     void                    notifyMouseClick (int x, int y);
     void                    clearVolatileTileCache ();
@@ -147,6 +139,14 @@ public:
     int                     preferredRadiusFloor (int radius);
 //FIXME
 //ig    QVector<const Marble::GeoDataPlacemark*>  whichFeatureAt (const QPoint&) const;
+//ig    const Marble::ViewportParams*  viewport () const;
+    bool                    showSunShading () const;
+    bool                    showCityLights () const;
+    bool                    showSunInZenith () const;
+    void                    paint (Marble::GeoPainter& painter, const QRect& dirtyRect);
+    void                    setShowSunShading (bool visible);
+    void                    setShowCityLights (bool visible);
+    void                    setShowSunInZenith (bool visible);
 };
 // MarbleMap
 

@@ -25,34 +25,14 @@ class ViewParams
 %End
 
 public:
-                            ViewParams ();
-    Marble::ViewportParams*  viewport ();
-    void                    setMapThemeId (const QString&);
-    Marble::Projection      projection () const;
+//ig                            ViewParams ();
 //ig    Marble::AbstractProjection*  currentProjection () const;
-    void                    setProjection (Marble::Projection newProjection);
-    void                    setPropertyValue (const QString& name, bool value);
-    void                    propertyAvailable (const QString& name, bool& available /out/);
-    void                    propertyValue (const QString& name, bool& value /out/);
-    int                     radius () const;
-    void                    setRadius (int newRadius);
-    Marble::Quaternion      planetAxis () const;
-    void                    setPlanetAxis (const Marble::Quaternion& newAxis);
-    void                    centerCoordinates (qreal& centerLon /out/, qreal& centerLat /out/);
-    QImage*                 canvasImage () const;
-    QImage*                 coastImage () const;
 
-// FIXME const here causes trouble
-//    void                    setCoastImage (QImage *const);
+//FIXME implementation is missing.
+//ig    bool                    showAtmosphere () const;
+//ig    void                    setShowAtmosphere (bool);
 
-    bool                    showGps () const;
-    void                    setShowGps (bool);
-    bool                    showElevationModel () const;
-    void                    setShowElevationModel (bool);
-    bool                    showAtmosphere () const;
-    void                    setShowAtmosphere (bool);
-
-    ~ViewParams ();
+//ig    ~ViewParams ();
 //FIXME implementation is missing.
 //ig    Marble::GeoSceneDocument*  mapTheme ();
 private:
@@ -60,16 +40,13 @@ private:
                             ViewParams (const Marble::ViewParams&);
 //end
 public:
-    Marble::MapQuality      mapQuality () const;
-    int                     width () const;
-    int                     height () const;
-    bool                    showClouds () const;
-    void                    setShowClouds (const bool);
-    void                    setSize (int width, int height);
-    Marble::MapQuality      mapQuality (Marble::ViewContext viewContext) const;
-    void                    setMapQualityForViewContext (Marble::MapQuality quality, Marble::ViewContext viewContext);
-    Marble::ViewContext     viewContext () const;
-    void                    setViewContext (Marble::ViewContext viewContext);
+//ig    Marble::MapQuality      mapQuality () const;
+//ig    bool                    showClouds () const;
+//ig    void                    setShowClouds (const bool);
+//ig    Marble::MapQuality      mapQuality (Marble::ViewContext viewContext) const;
+//ig    void                    setMapQualityForViewContext (Marble::MapQuality quality, Marble::ViewContext viewContext);
+//ig    Marble::ViewContext     viewContext () const;
+//ig    void                    setViewContext (Marble::ViewContext viewContext);
 //FIXME
 //ig    QSharedPointer<QImage>  canvasImagePtr () const;
 //ig    QSharedPointer<QImage>  coastImagePtr () const;

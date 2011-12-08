@@ -22,7 +22,7 @@ namespace Marble
 
 class LegendWidgetPrivate;
 
-class MarbleWidget;
+class MarbleModel;
 
 class MARBLE_EXPORT LegendWidget : public QWidget
 {
@@ -36,7 +36,10 @@ class MARBLE_EXPORT LegendWidget : public QWidget
      * @brief Set a MarbleWidget associated to this widget.
      * @param widget  the MarbleWidget to be set.
      */
-    void setMarbleWidget( MarbleWidget *widget );
+    void setMarbleModel( MarbleModel *model );
+
+ Q_SIGNALS:
+    void propertyValueChanged( const QString &propertyName, bool value );
 
  private:
     Q_DISABLE_COPY( LegendWidget )

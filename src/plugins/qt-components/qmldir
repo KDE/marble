@@ -1,8 +1,10 @@
 plugin QtComponentsPlugin
-SearchBar 0.12 SearchBar.qml
-RouteRequestView 0.12 RouteRequestView.qml
-WaypointView 0.12 WaypointView.qml
+SearchField 0.12 SearchField.qml
 RoutingDialog 0.12 RoutingDialog.qml
+RouteEditor 0.12 RouteEditor.qml
 SearchResultSelectionDialog 0.12 SearchResultSelectionDialog.qml
 MenuItemSwitch 0.12 MenuItemSwitch.qml
-ToolIconCheckable 0.12 ToolIconCheckable.qml
+ViaPointEditor 0.12 ViaPointEditor.qml
+FileDialog 0.12 FileDialog.qml
+FileOpenDialog 0.12 FileOpenDialog.qml
+FileSaveDialog 0.12 FileSaveDialog.qml

@@ -40,7 +40,9 @@ const int REPAINT_SCHEDULING_INTERVAL = 1000;
 class TextureLayer::Private
 {
 public:
-    Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator, TextureLayer *parent );
+    Private( HttpDownloadManager *downloadManager,
+             const SunLocator *sunLocator,
+             TextureLayer *parent );
 
     void mapChanged();
     void updateTextureLayers();
@@ -61,10 +63,12 @@ public:
     QTimer           m_repaintTimer;
 };
 
-TextureLayer::Private::Private( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator, TextureLayer *parent )
+TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
+                                const SunLocator *sunLocator,
+                                TextureLayer *parent )
     : m_parent( parent )
     , m_sunLocator( sunLocator )
-    , m_loader( downloadManager, mapThemeManager )
+    , m_loader( downloadManager )
     , m_tileLoader( &m_loader, sunLocator )
     , m_pixmapCache( 100 )
     , m_texmapper( 0 )
@@ -95,11 +99,16 @@ void TextureLayer::Private::updateTextureLayers()
             const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
             enabled |= !propertyExists; // if property doesn't exist, enable texture nevertheless
         }
-        if ( enabled )
+        if ( enabled ) {
             result.append( candidate );
+            mDebug() << "enabling texture" << candidate->name();
+        } else {
+            mDebug() << "disabling texture" << candidate->name();
+        }
     }
 
     m_tileLoader.setTextureLayers( result );
+    m_loader.setTextureLayers( result );
     m_pixmapCache.clear();
 }
 
@@ -116,9 +125,10 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
 
 
 
-TextureLayer::TextureLayer( MapThemeManager *mapThemeManager, HttpDownloadManager *downloadManager, const SunLocator *sunLocator )
+TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
+                            const SunLocator *sunLocator )
     : QObject()
-    , d( new Private( mapThemeManager, downloadManager, sunLocator, this ) )
+    , d( new Private( downloadManager, sunLocator, this ) )
 {
     connect( &d->m_loader, SIGNAL( tileCompleted( const TileId &, const QImage & ) ),
              this, SLOT( updateTile( const TileId &, const QImage & ) ) );
@@ -168,7 +178,7 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     // choose the smaller dimension for selecting the tile level, leading to higher-resolution results
     const int levelZeroWidth = d->m_tileLoader.tileSize().width() * d->m_tileLoader.tileColumnCount( 0 );
     const int levelZeroHight = d->m_tileLoader.tileSize().height() * d->m_tileLoader.tileRowCount( 0 );
-    const int levelZeroMinDimension = ( levelZeroWidth < levelZeroHight ) ? levelZeroWidth : levelZeroHight;
+    const int levelZeroMinDimension = qMin( levelZeroWidth, levelZeroHight );
 
     qreal linearLevel = ( 4.0 * (qreal)( viewport->radius() ) / (qreal)( levelZeroMinDimension ) );
 
@@ -178,8 +188,10 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     // As our tile resolution doubles with each level we calculate
     // the tile level from tilesize and the globe radius via log(2)
 
-    qreal tileLevelF = log( linearLevel ) / log( 2.0 );
-    int tileLevel = (int)( tileLevelF );
+    qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
+    int tileLevel = (int)( tileLevelF * 1.00001 ); // snap to the sharper tile level a tiny bit earlier
+                                                   // to work around rounding errors when the radius
+                                                   // roughly equals the global texture width
 
 //    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
 
@@ -303,11 +315,6 @@ void TextureLayer::downloadTile( const TileId &tileId )
 
 void TextureLayer::setMapTheme( const QVector<const GeoSceneTexture *> &textures, GeoSceneGroup *textureLayerSettings )
 {
-    if ( d->m_textureLayerSettings ) {
-        disconnect( d->m_textureLayerSettings, SIGNAL( valueChanged( QString, bool ) ),
-                    this,                      SLOT( updateTextureLayers() ) );
-    }
-
     d->m_textures = textures;
     d->m_textureLayerSettings = textureLayerSettings;
 
@@ -357,7 +364,7 @@ int TextureLayer::preferredRadiusCeil( int radius ) const
     const int tileWidth = d->m_tileLoader.tileSize().width();
     const int levelZeroColumns = d->m_tileLoader.tileColumnCount( 0 );
     const qreal linearLevel = 4.0 * (qreal)( radius ) / (qreal)( tileWidth * levelZeroColumns );
-    const qreal tileLevelF = log( linearLevel ) / log( 2.0 );
+    const qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
     const int tileLevel = qCeil( tileLevelF );
 
     if ( tileLevel < 0 )
@@ -371,7 +378,7 @@ int TextureLayer::preferredRadiusFloor( int radius ) const
     const int tileWidth = d->m_tileLoader.tileSize().width();
     const int levelZeroColumns = d->m_tileLoader.tileColumnCount( 0 );
     const qreal linearLevel = 4.0 * (qreal)( radius ) / (qreal)( tileWidth * levelZeroColumns );
-    const qreal tileLevelF = log( linearLevel ) / log( 2.0 );
+    const qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
     const int tileLevel = qFloor( tileLevelF );
 
     if ( tileLevel < 0 )

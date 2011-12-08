@@ -47,23 +47,6 @@ enum Projection {
 };
 
 /**
- * @brief This enum is used to choose the unit chosen to measure distances.
- */
-enum DistanceUnit {
-    NoDistanceUnit = -1,
-    Meter,                     ///< Metric unit
-    MilesFeet                  ///< Imperial unit
-};
-
-/**
- * @brief This enum is used to choose the default for many units in marble.
- */
-enum MeasureSystem {
-    Metric,
-    Imperial
-};
-
-/**
  * @brief This enum is used to choose the dimension.
  */
 enum Dimension {
@@ -240,7 +223,7 @@ QColor const oxygenForestGreen4 = QColor::fromRgb( 55, 164, 44 );
 
 // String for about dialog and http user agent
 // FIXME: check if blanks are allowed in user agent version numbers
-const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.12.80 (0.13 Beta 1)" );
+const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.12.85 (0.13 Beta 2)" );
 
 // API Version id:
 // form : 0xMMmmpp

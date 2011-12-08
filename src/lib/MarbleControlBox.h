@@ -82,15 +82,15 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
     ~MarbleControlBox();
 
     /**
-     * @brief Add a MarbleWidget to be controlled by this widget.
-     * @param widget  the MarbleWidget to be added.
+     * @brief Set the MarbleWidget to be controlled by this widget.
+     * @param widget  the MarbleWidget to be controlled.
      *
-     *  Add a MarbleWidget so that it will be controlled by this
+     *  Sets a MarbleWidget so that it will be controlled by this
      *  widget.  This call create all the connections of signals and
      *  slots that are necessary to have full control of the
      *  MarbleWidget, and thereby frees the programmer from doing it.
      */
-    void addMarbleWidget( MarbleWidget *widget );
+    void setMarbleWidget( MarbleWidget *widget );
 
     /**
       * Toggle offline mode of download manager and runners.
@@ -102,8 +102,6 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
 
  public Q_SLOTS:
     void selectTheme( const QString & );
-
-    void updateMapThemeView();
 
     /**
      * @brief Control whether the Navigation tab is shown.

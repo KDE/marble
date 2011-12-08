@@ -151,6 +151,8 @@ RoutingModel::RoutingModel( RouteRequest* request, MarbleModel *model, QObject *
 
    QHash<int, QByteArray> roles = roleNames();
    roles.insert( RoutingModel::TurnTypeIconRole, "turnTypeIcon" );
+   roles.insert( RoutingModel::LongitudeRole, "longitude" );
+   roles.insert( RoutingModel::LatitudeRole, "latitude" );
    setRoleNames( roles );
 }
 
@@ -200,6 +202,12 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
             break;
         case RoutingModel::CoordinateRole:
             return QVariant::fromValue( segment.maneuver().position() );
+            break;
+        case RoutingModel::LongitudeRole:
+            return QVariant::fromValue( segment.maneuver().position().longitude( GeoDataCoordinates::Degree ) );
+            break;
+        case RoutingModel::LatitudeRole:
+            return QVariant::fromValue( segment.maneuver().position().latitude( GeoDataCoordinates::Degree ) );
             break;
         case RoutingModel::TurnTypeIconRole:
             return segment.maneuver().directionPixmap();

@@ -76,7 +76,7 @@ not provided in a KML file.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataPlacemark">__init__</a> (self, <a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a> placemark)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataPlacemark">__init__</a> (self, QString name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#area">area</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#coordinate">coordinate</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#coordinate">coordinate</a> (self, QDateTime dateTime=QDateTime(), bool iconAtCoordinates=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#countryCode">countryCode</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#geometry">geometry</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataLookAt.html">Marble.GeoDataLookAt</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#lookAt">lookAt</a> (self)</td></tr>
@@ -179,14 +179,30 @@ inherited from GeoDataPlacemark (or GeoDataFeature).
 <table class="memname"><tr>
 <td class="memname"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinate</td>
 <td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QDateTime&nbsp;</td>
+<td class="paramname"><em>dateTime=QDateTime()</em>, </td>
 </tr>
-</table>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>iconAtCoordinates=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
 </div>
-<div class="memdoc"><p>Return the coordinate of the placemark as <b>longitude</b>
-and <b>latitude.</b>
+<div class="memdoc"><p>Return the coordinates of the placemark as <b>longitude,</b>
+<b>latitude</b> and <b>altitude.</b>
 </p></div></div><a class="anchor" name="countryCode"></a>
 <div class="memitem">
 <div class="memproto">

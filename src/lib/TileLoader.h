@@ -33,14 +33,15 @@ namespace Marble
 {
 class HttpDownloadManager;
 class GeoSceneTexture;
-class MapThemeManager;
 
 class TileLoader: public QObject
 {
     Q_OBJECT
 
  public:
-    TileLoader( HttpDownloadManager * const, MapThemeManager const * mapThemeManager );
+    explicit TileLoader( HttpDownloadManager * const );
+
+    void setTextureLayers( const QVector<GeoSceneTexture const *> &textureLayers );
 
     QImage loadTile( TileId const & tileId, DownloadUsage const );
     void reloadTile( TileId const &tileId, DownloadUsage const );
@@ -57,8 +58,6 @@ class TileLoader: public QObject
  public Q_SLOTS:
     void updateTile( QByteArray const & imageData, QString const & tileId );
 
-    void updateTextureLayers();
-
  Q_SIGNALS:
     void downloadTile( QUrl const & sourceUrl, QString const & destinationFileName,
                        QString const & id, DownloadUsage );
@@ -70,8 +69,6 @@ class TileLoader: public QObject
     static QString tileFileName( GeoSceneTexture const * textureLayer, TileId const & );
     void triggerDownload( TileId const &, DownloadUsage const );
     QImage scaledLowerLevelTile( TileId const & );
-
-    MapThemeManager const * const m_mapThemeManager;
 
     // TODO: comment about uint hash key
     QHash<uint, GeoSceneTexture const *> m_textureLayers;

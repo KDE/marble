@@ -15,6 +15,7 @@
 #include "KmlElementDictionary.h"
 #include "MarbleDebug.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataTimeStamp.h"
 
 #include "GeoDataTypes.h"
 
@@ -37,7 +38,7 @@ bool KmlFolderTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     writer.writeOptionalElement( "name", folder->name() );
 
     if( !folder->extendedData().isEmpty() ){
-		writeElement( &folder->extendedData(), writer );
+        writeElement( &folder->extendedData(), writer );
     }
 
     //Write all containing features
@@ -47,6 +48,9 @@ bool KmlFolderTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     for ( ; it != end; ++it ) {
         writeElement( *it, writer );
     }
+
+    if( folder->timeStamp().when().isValid() )
+        writeElement( &folder->timeStamp(), writer );
 
     //close folder tag
     writer.writeEndElement();

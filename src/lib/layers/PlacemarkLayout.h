@@ -127,9 +127,9 @@ class PlacemarkLayout : public QObject, public LayerInterface
      * @p ok is set to true if the coordinates are valid and should be used for drawing,
      * it it set to false otherwise.
      */
-    GeoDataCoordinates placemarkIconCoordinates( GeoDataPlacemark *placemark, bool *ok ) const;
+    GeoDataCoordinates placemarkIconCoordinates( const GeoDataPlacemark *placemark, bool *ok ) const;
 
-    QRect  roomForLabel( GeoDataStyle * style,
+    QRect  roomForLabel( const GeoDataStyle * style,
                          const QVector<VisiblePlacemark*> &currentsec,
                          const int x, const int y,
                          const QString &labelText );
@@ -145,10 +145,10 @@ class PlacemarkLayout : public QObject, public LayerInterface
     PlacemarkPainter m_placemarkPainter;
 
     QVector<VisiblePlacemark*> m_paintOrder;
-    QHash<GeoDataPlacemark*, VisiblePlacemark*> m_visiblePlacemarks;
+    QHash<const GeoDataPlacemark*, VisiblePlacemark*> m_visiblePlacemarks;
 
     /// map providing the list of placemark belonging in TileId as key
-    QMap<TileId, QList<GeoDataPlacemark*> > m_placemarkCache;
+    QMap<TileId, QList<const GeoDataPlacemark*> > m_placemarkCache;
 
     QVector< int > m_weightfilter;
     QVector< GeoDataFeature::GeoDataVisualCategory > m_acceptedVisualCategories;

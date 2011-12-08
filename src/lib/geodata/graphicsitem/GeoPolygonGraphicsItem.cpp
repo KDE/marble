@@ -16,13 +16,13 @@
 namespace Marble
 {
 
-GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( GeoDataPolygon* polygon )
+GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataPolygon* polygon )
         : GeoGraphicsItem(),
           m_polygon( polygon )
 {
 }
 
-void GeoPolygonGraphicsItem::setPolygon( GeoDataPolygon* polygon )
+void GeoPolygonGraphicsItem::setPolygon( const GeoDataPolygon* polygon )
 {
     m_polygon = polygon;
     setCoordinate( m_polygon->latLonAltBox().center() );

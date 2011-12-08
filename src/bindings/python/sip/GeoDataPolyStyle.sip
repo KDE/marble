@@ -37,6 +37,8 @@ public:
     virtual void            unpack (QDataStream& stream);
     ~GeoDataPolyStyle ();
     virtual const char*     nodeType () const;
+    void                    setBrushStyle (const Qt::BrushStyle style);
+    Qt::BrushStyle          brushStyle () const;
 };
 // GeoDataPolyStyle
 

@@ -64,6 +64,10 @@ MarbleGlobal::Profiles MarbleGlobal::detectProfiles() {
     profile |= MarbleGlobal::SmallScreen;
     profile |= MarbleGlobal::HighResolution;
 #endif
+#ifdef MEEGO_EDITION_HARMATTAN
+    profile |= MarbleGlobal::SmallScreen;
+    profile |= MarbleGlobal::HighResolution;
+#endif
 
     return profile;
 }

@@ -47,9 +47,12 @@ PositionMarker::PositionMarker ()
       ui_configWidget( 0 ),
       m_aboutDialog( 0 ),
       m_configDialog( 0 ),
-      m_settings(),
+      m_cursorSize( 1.0 ),
+      m_heading( 0.0 ),
       m_showTrail ( false )
 {
+    setSettings( QHash<QString,QVariant>() );
+    updateSettings();
     connect( this, SIGNAL( settingsChanged( QString ) ),
              this, SLOT( updateSettings() ) );
 }

@@ -61,7 +61,6 @@ Q_SIGNALS:
     void slotInfoDialog();
     void slotShowOrbit( bool show );
     void slotTrackPlacemark();
-    void slotSetHomePoint();
     void slotCopyCoordinates();
     void slotAboutDialog();
 
@@ -92,15 +91,12 @@ private Q_SLOTS:
 
     QMenu    *const m_lmbMenu;
     QMenu    *const m_rmbMenu;
-    QMenu    *m_smallScreenMenu;
 
     QAction *m_infoDialogAction;
     QAction *m_showOrbitAction;
     QAction *m_trackPlacemarkAction;
 
-    QAction  *const m_planetAction;
     QAction  *const m_copyCoordinateAction;
-    QAction  *const m_setHomePointAction;
 
     QAction  *m_rmbExtensionPoint;
 

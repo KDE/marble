@@ -25,7 +25,6 @@ const char* GeoSceneItemType = "GeoSceneItem";
 const char* GeoSceneLayerType = "GeoSceneLayer";
 const char* GeoSceneLegendType = "GeoSceneLegend";
 const char* GeoSceneMapType = "GoeSceneMap";
-const char* GeoSceneMapThemeType = "GeoSceneMapTheme";
 const char* GeoScenePaletteType = "GeoScenePalette";
 const char* GeoScenePropertyType = "GeoSceneProperty";
 const char* GeoSceneSectionType = "GeoSceneSection";

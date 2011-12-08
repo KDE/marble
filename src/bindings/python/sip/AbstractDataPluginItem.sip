@@ -29,7 +29,9 @@
 #include <BookmarkManager.h>
 #include <CurrentLocationWidget.h>
 #include <DownloadRegionDialog.h>
+#include <ElevationModel.h>
 #include <FileViewWidget.h>
+#include <GeoGraphicsScene.h>
 #include <LatLonBoxWidget.h>
 #include <LatLonEdit.h>
 #include <LegendWidget.h>
@@ -93,6 +95,10 @@ public:
         sipType = sipType_Marble_AbstractDataPluginModel;
     else if (dynamic_cast<Marble::BookmarkManager*>(sipCpp))
         sipType = sipType_Marble_BookmarkManager;
+    else if (dynamic_cast<Marble::ElevationModel*>(sipCpp))
+        sipType = sipType_Marble_ElevationModel;
+    else if (dynamic_cast<Marble::GeoGraphicsScene*>(sipCpp))
+        sipType = sipType_Marble_GeoGraphicsScene;
     else if (dynamic_cast<Marble::MapThemeManager*>(sipCpp))
         sipType = sipType_Marble_MapThemeManager;
     else if (dynamic_cast<Marble::MarbleAbstractRunner*>(sipCpp))

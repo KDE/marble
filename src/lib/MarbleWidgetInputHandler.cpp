@@ -316,7 +316,8 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler( MarbleWidget *
     connect( &d->m_lmbTimer, SIGNAL(timeout()), this, SLOT(lmbTimeout()));
 
     d->m_kineticModel.setUpdateInterval( 35 );
-    connect( &d->m_kineticModel, SIGNAL( positionChanged() ), SLOT( adjustCenter() ) );
+    connect( &d->m_kineticModel, SIGNAL( positionChanged( qreal, qreal ) ),
+             MarbleWidgetInputHandler::d->m_widget, SLOT( centerOn( qreal, qreal ) ) );
     connect( &d->m_kineticModel, SIGNAL( finished() ), SLOT( restoreViewContext() ) );
 
     // The interface to the measure tool consists of a RMB popup menu
@@ -584,8 +585,6 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 //as requested
                 emit mouseClickScreenPosition( d->m_leftPressedX, d->m_leftPressedY );
 
-                MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
-
                 d->m_leftPressed = false;
                 d->m_kineticModel.release();
             }
@@ -621,8 +620,9 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
                     d->m_lmbTimer.stop();
 
-                    qreal posLon = RAD2DEG * ( qreal )( d->m_leftPressedLon ) - 90.0 * d->m_leftPressedDirection * deltax / radius;
-                    qreal posLat = RAD2DEG * ( qreal )( d->m_leftPressedLat ) + 90.0 * deltay / radius;
+                    const qreal posLon = RAD2DEG * ( qreal )( d->m_leftPressedLon ) - 90.0 * d->m_leftPressedDirection * deltax / radius;
+                    const qreal posLat = RAD2DEG * ( qreal )( d->m_leftPressedLat ) + 90.0 * deltay / radius;
+                    MarbleWidgetInputHandler::d->m_widget->centerOn( posLon, posLat );
                     d->m_kineticModel.setPosition( posLon, posLat );
                 }
             }
@@ -862,12 +862,6 @@ void MarbleWidgetDefaultInputHandler::setNumberOfMeasurePoints( int newNumber )
     const bool enableMeasureActions = ( newNumber > 0 );
     d->m_removeMeasurePointsAction->setEnabled(enableMeasureActions);
     d->m_removeLastMeasurePointAction->setEnabled(enableMeasureActions);
-}
-
-void MarbleWidgetDefaultInputHandler::adjustCenter()
-{
-    MarbleWidgetInputHandler::d->m_widget->setViewContext( Animation );
-    MarbleWidgetInputHandler::d->m_widget->centerOn( d->m_kineticModel.position().x(), d->m_kineticModel.position().y() );
 }
 
 }

@@ -57,6 +57,10 @@ public:
     Marble::GeoDataLatLonAltBox  latLonAltBox () const;
     void                    setLatLonAltBox (const Marble::GeoDataLatLonAltBox& latLonAltBox);
     QList<QPointF>          positions () const;
+    int                     minZoomLevel () const;
+    void                    setMinZoomLevel (int zoomLevel);
+    Marble::GeoDataStyle*   style () const;
+    void                    setStyle (Marble::GeoDataStyle* style);
 };
 // GeoGraphicsItem
 

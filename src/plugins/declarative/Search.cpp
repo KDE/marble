@@ -32,6 +32,8 @@ void Search::setMarbleWidget( Marble::MarbleWidget* widget )
     m_marbleWidget = widget;
     connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
              this, SLOT( updatePlacemarks() ) );
+    connect( m_marbleWidget, SIGNAL( themeChanged( QString ) ),
+             this, SLOT( updatePlacemarks() ) );
 }
 
 QDeclarativeComponent* Search::placemarkDelegate()
@@ -56,7 +58,7 @@ void Search::find( const QString &searchTerm )
         m_runnerManager = new Marble::MarbleRunnerManager( m_marbleWidget->model()->pluginManager(), this );
         m_runnerManager->setModel( m_marbleWidget->model() );
         connect( m_runnerManager, SIGNAL( searchFinished( QString ) ),
-                 this, SIGNAL( searchFinished() ) );
+                 this, SLOT( handleSearchResult() ) );
         connect( m_runnerManager, SIGNAL( searchResultChanged( QAbstractItemModel* ) ),
                  this, SLOT( updateSearchModel( QAbstractItemModel* ) ) );
     }
@@ -81,18 +83,19 @@ void Search::updateSearchModel( QAbstractItemModel *model )
         return;
     }
 
+    QHash<int,QByteArray> const roles = model->roleNames();
     for ( int i=0; i<m_searchResult->rowCount(); ++i ) {
         QDeclarativeContext *context = new QDeclarativeContext( qmlContext( m_placemarkDelegate ) );
+        QModelIndex const index = m_searchResult->index( i );
+        QHash<int,QByteArray>::const_iterator iter = roles.constBegin();
+        context->setContextProperty( "index", i );
+        for ( ; iter != roles.constEnd(); ++iter ) {
+            context->setContextProperty( iter.value(), m_searchResult->data( index, iter.key() ) );
+        }
         QObject* component = m_placemarkDelegate->create( context );
         QGraphicsItem* graphicsItem = qobject_cast<QGraphicsItem*>( component );
         QDeclarativeItem* item = qobject_cast<QDeclarativeItem*>( component );
         if ( graphicsItem && item ) {
-            QVariant position = m_searchResult->data( m_searchResult->index( i ), MarblePlacemarkModel::CoordinateRole );
-            GeoDataCoordinates const coordinates = qVariantValue<GeoDataCoordinates>( position );
-            context->setContextProperty( "longitude", QVariant( coordinates.longitude( GeoDataCoordinates::Degree ) ) );
-            context->setContextProperty( "latitude", QVariant( coordinates.latitude( GeoDataCoordinates::Degree ) ) );
-            context->setContextProperty( "hit", QVariant( QString::number( i+1 ) ) );
-            context->setContextProperty( "name", m_searchResult->data( m_searchResult->index( i ), Qt::DisplayRole ) );
             graphicsItem->setParentItem( m_delegateParent );
             m_placemarks[i] = item;
         } else {
@@ -105,12 +108,13 @@ void Search::updateSearchModel( QAbstractItemModel *model )
 void Search::updatePlacemarks()
 {
     if ( m_marbleWidget ) {
+        bool const onEarth = m_marbleWidget->model()->planetId() == "earth";
         QMap<int, QDeclarativeItem*>::const_iterator iter = m_placemarks.constBegin();
         while ( iter != m_placemarks.constEnd() ) {
             qreal x(0), y(0);
             QVariant position = m_searchResult->data( m_searchResult->index( iter.key() ), MarblePlacemarkModel::CoordinateRole );
             GeoDataCoordinates const coordinates = qVariantValue<GeoDataCoordinates>( position );
-            bool const visible = m_marbleWidget->screenCoordinates( coordinates.longitude( GeoDataCoordinates::Degree ), coordinates.latitude( GeoDataCoordinates::Degree ), x, y );
+            bool const visible = onEarth && m_marbleWidget->screenCoordinates( coordinates.longitude( GeoDataCoordinates::Degree ), coordinates.latitude( GeoDataCoordinates::Degree ), x, y );
             QDeclarativeItem* item = iter.value();
             if ( item ) {
                 item->setVisible( visible );
@@ -156,6 +160,26 @@ void Search::updatePlacemarks()
             ++iter;
         }
     }
+}
+
+void Search::handleSearchResult()
+{
+    Q_ASSERT( m_marbleWidget ); // search wouldn't be started without
+    Q_ASSERT( m_searchResult ); // search wouldn't be finished without
+
+    GeoDataLineString placemarks;
+    for ( int i = 0; i < m_searchResult->rowCount(); ++i ) {
+        QVariant data = m_searchResult->index( i, 0 ).data( MarblePlacemarkModel::CoordinateRole );
+        if ( !data.isNull() ) {
+            placemarks << qVariantValue<GeoDataCoordinates>( data );
+        }
+    }
+
+    if ( placemarks.size() > 1 ) {
+        m_marbleWidget->centerOn( GeoDataLatLonBox::fromLineString( placemarks ) );
+    }
+
+    emit searchFinished();
 }
 
 }

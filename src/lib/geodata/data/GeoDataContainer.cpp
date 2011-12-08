@@ -125,6 +125,11 @@ GeoDataFeature* GeoDataContainer::child( int i )
     return p()->m_vector.at(i);
 }
 
+const GeoDataFeature* GeoDataContainer::child( int i ) const
+{
+    return p()->m_vector.at(i);
+}
+
 /**
  * @brief returns the position of an item in the list
  */

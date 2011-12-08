@@ -38,20 +38,17 @@ public:
     void                    setRadius (int newRadius);
     bool                    globeCoversViewport () const;
     Marble::Quaternion      planetAxis () const;
-    bool                    setPlanetAxis (const Marble::Quaternion& newAxis);
     int                     width () const;
     int                     height () const;
     QSize                   size () const;
     void                    setWidth (int newWidth);
     void                    setHeight (int newHeight);
     void                    setSize (QSize newSize);
-    void                    centerCoordinates (qreal& centerLon /out/, qreal& centerLat /out/) const;
     bool                    mapCoversViewport () const;
 
     ~ViewportParams ();
     bool                    resolves (const Marble::GeoDataLatLonAltBox& latLonAltBox) const;
 //ig    Marble::matrix*         planetAxisMatrix () const;
-    QRegion                 activeRegion () const;
 private:
 //force
                             ViewportParams (const Marble::ViewportParams&);
@@ -60,6 +57,9 @@ public:
     Marble::GeoDataCoordinates  focusPoint () const;
     void                    setFocusPoint (const Marble::GeoDataCoordinates& focusPoint);
     void                    resetFocusPoint ();
+    void                    centerOn (qreal lon, qreal lat);
+    qreal                   centerLongitude () const;
+    qreal                   centerLatitude () const;
 };
 // ViewportParams
 

@@ -20,6 +20,10 @@ Page {
 
     property alias model: activityView.model
 
+    Loader {
+        id: lazyLoader
+    }
+
     tools: ToolBarLayout {
         Item{}
         ToolButton {
@@ -60,146 +64,142 @@ Page {
                     horizontalAlignment: "AlignHCenter"
                 }
             }
+
             MouseArea {
                 anchors.fill: parent
-                onClicked: pageStack.push( path )
+                onClicked: activityPage.openActivity( name, path )
             }
         }
     }
 
     // Model that stores information about activities.
-    ActivityModel {
-        id: activityModel
-        // Inserts activities into model, add more activities here.
-        Component.onCompleted: {
-            activityModel.addActivity(
-                        "Virtual Globe",
-                        "qrc:/icons/activity-virtualglobe.png",
-                        marbleWidget,
-                        "qrc:/VirtualGlobeActivityPage.qml"
-                        )
-            activityModel.addActivity(
-                        "Search",
-                        "qrc:/icons/activity-search.png",
-                        marbleWidget,
-                        "qrc:/SearchActivityPage.qml"
-                        )
-            activityModel.addActivity(
-                        "Routing",
-                        "qrc:/icons/activity-default.png",
-                        marbleWidget,
-                        "qrc:/RoutingActivityPage.qml"
-                        )
-            activityModel.addActivity(
-                        "Tracking",
-                        "qrc:/icons/activity-default.png",
-                        marbleWidget,
-                        "qrc:/TrackingActivityPage.qml"
-                        )
-            activityModel.addActivity(
-                        "Weather",
-                        "qrc:/icons/activity-weather.png",
-                        marbleWidget,
-                        "qrc:/WeatherActivityPage.qml"
-                        )
-            // @todo: Terms of usage still not clear
-            //            activityModel.addActivity(
-            //                        "Geocaching",
-            //                        "qrc:/icons/activity-default.png",
-            //                        marbleWidget,
-            //                        "qrc:/GeocachingActivityPage.qml"
-            //                        )
-            activityModel.addActivity(
-                        "Friends",
-                        "qrc:/icons/activity-friends.png",
-                        marbleWidget,
-                        "qrc:/FriendsActivityPage.qml"
-                        )
-            activityModel.addActivity(
-                        "Space View",
-                        "qrc:/icons/activity-spaceview.png",
-                        marbleWidget,
-                        "qrc:/SpaceViewActivityPage.qml"
-                        )
+    ActivityModel { id: activityModel }
 
-            /** @todo: Implement missing stuff and re-enable the activities below */
-            /*
+    function openActivity( name ) {
+        for ( var i=0; i<activityModel.rowCount(); i++ ) {
+            if ( activityModel.get( i, "name" ) === name ) {
+                switchTo( name, activityModel.get( i, "path" ) )
+                return
+            }
+        }
+    }
+
+    function switchTo( name, path ) {
+        if ( marbleWidget === null ) {
+            lazyLoader.source = "qrc:/MainWidget.qml";
+            marbleWidget = lazyLoader.item
+        }
+
+        settings.lastActivity = name
+        pageStack.push( path )
+    }
+
+    Timer {
+        id: loadTimer
+        interval: 50; running: false; repeat: false
+        onTriggered: activityPage.initialize()
+    }
+
+    function initializeDelayed() {
+        if ( marbleWidget === null ) {
+            loadTimer.running = true
+        }
+    }
+
+    function initialize() {
+        if ( marbleWidget === null ) {
+            lazyLoader.source = "qrc:/MainWidget.qml";
+            marbleWidget = lazyLoader.item
+        }
+    }
+
+    Component.onCompleted: {
+        // Inserts activities into model, add more activities here.
+        activityModel.addActivity(
+                    "Virtual Globe",
+                    "qrc:/icons/activity-virtualglobe.png",
+                    "qrc:/activities/VirtualGlobe.qml"
+                    )
+        activityModel.addActivity(
+                    "Search",
+                    "qrc:/icons/activity-search.png",
+                    "qrc:/activities/Search.qml"
+                    )
+        activityModel.addActivity(
+                    "Routing",
+                    "qrc:/icons/activity-default.png",
+                    "qrc:/activities/Routing.qml"
+                    )
+        activityModel.addActivity(
+                    "Tracking",
+                    "qrc:/icons/activity-default.png",
+                    "qrc:/activities/Tracking.qml"
+                    )
+        activityModel.addActivity(
+                    "Weather",
+                    "qrc:/icons/activity-weather.png",
+                    "qrc:/activities/Weather.qml"
+                    )
+        activityModel.addActivity(
+                    "Friends",
+                    "qrc:/icons/activity-friends.png",
+                    "qrc:/activities/Friends.qml"
+                    )
+        activityModel.addActivity(
+                    "Space View",
+                    "qrc:/icons/activity-spaceview.png",
+                    "qrc:/activities/SpaceView.qml"
+                    )
+
+        // @todo: Terms of usage still not clear
+        //            activityModel.addActivity(
+        //                        "Geocaching",
+        //                        "qrc:/icons/activity-default.png",
+        //                        marbleWidget,
+        //                        "qrc:/activities/Geocaching.qml"
+        //                        )
+        /** @todo: Implement missing stuff and re-enable the activities below */
+        /*
             activityModel.addActivity(
                 "Drive",
                 "qrc:/icons/activity-default.png",
-                "qrc:/DriveActivityPage.qml",
-                [],
-                [],
-                {},
-                { "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
+                "qrc:/activities/Drive.qml",
             )
             activityModel.addActivity(
                 "Cycle",
                 "qrc:/icons/activity-default.png",
-                "qrc:/CycleActivityPage.qml",
-                [],
-                [],
-                {},
-                { "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
+                "qrc:/activities/Cycle.qml",
             )
             activityModel.addActivity(
                 "Walk",
                 "qrc:/icons/activity-default.png",
-                "qrc:/WalkActivityPage.qml",
-                [],
-                [],
-                {},
-                { "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
+                "qrc:/activities/Walk.qml",
             )
             activityModel.addActivity(
                 "Guidance",
                 "qrc:/icons/activity-default.png",
-                "qrc:/GuidanceActivityPage.qml",
-                [],
-                [ "opencaching" ],
-                {},
-                { "projection": "Mercator",
-                  "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
+                "qrc:/activities/Guidance.qml",
             )
             activityModel.addActivity(
                 "Bookmarks",
                 "qrc:/icons/activity-bookmarks.png",
-                "qrc:/BookmarksActivityPage.qml",
-                [],
-                [],
-                {},
-                {}
+                "qrc:/activities/Bookmarks.qml",
             )
             activityModel.addActivity(
                 "Around Me",
                 "qrc:/icons/activity-default.png",
-                "qrc:/AroundMeActivityPage.qml",
-                [],
-                [],
-                {},
-                { "projection": "Mercator",
-                  "mapTheme": "earth/openstreetmap/openstreetmap.dgml" }
+                "qrc:/activities/AroundMe.qml",
             )
             activityModel.addActivity(
                 "Download",
                 "qrc:/icons/activity-download.png",
-                "qrc:/DownloadActivityPage.qml",
-                [],
-                [],
-                {},
-                {}
+                "qrc:/activities/Download.qml",
             )
             activityModel.addActivity(
                 "Configuration",
                 "qrc:/icons/activity-configure.png",
-                "qrc:/ConfigurationActivityPage.qml",
-                [],
-                [],
-                {},
-                {}
+                "qrc:/activities/Configuration.qml",
             )
 */
-        }
     }
-
 }

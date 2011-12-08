@@ -27,7 +27,7 @@ RoutingInstruction::RoutingInstruction( const RoutingWaypoint &item ) :
     m_points.append( item );
 }
 
-bool RoutingInstruction::append( const RoutingWaypoint &item )
+bool RoutingInstruction::append( const RoutingWaypoint &item, int angle )
 {
     if ( m_points.size() && m_points.last().roadType() != "roundabout" && item.roadType() == "roundabout" ) {
         // Entering a roundabout. Merge with previous segment to avoid 'Enter the roundabout' instructions
@@ -49,7 +49,15 @@ bool RoutingInstruction::append( const RoutingWaypoint &item )
         return true;
     }
 
-    return item.roadType() == "roundabout" || item.roadName() == roadName();
+    if ( item.roadName().isEmpty() ) {
+        if ( item.junctionType() == RoutingWaypoint::None ) {
+            return true;
+        }
+
+        return angle >= 150 && angle <= 210;
+    } else {
+        return item.roadType() == "roundabout" || item.roadName() == roadName();
+    }
 }
 
 QString RoutingInstruction::roadName() const

@@ -31,7 +31,8 @@ public:
         None,
         Search,
         ReverseGeocoding,
-        Routing
+        Routing,
+        Parsing
     };
     typedef QFlags<Marble::RunnerPlugin::Capability> Capabilities;
     virtual Marble::MarbleAbstractRunner*  newRunner () const=0;

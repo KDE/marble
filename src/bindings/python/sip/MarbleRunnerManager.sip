@@ -26,17 +26,22 @@ class MarbleRunnerManager : QObject /NoDefaultCtors/
 %End
 
 public:
-//ig    explicit                MarbleRunnerManager (PluginManager* pluginManager, QObject* parent /TransferThis/ = 0);
     ~MarbleRunnerManager ();
     void                    setModel (Marble::MarbleModel* model);
-    void                    setWorkOffline (bool offline);
     void                    findPlacemarks (const QString& searchTerm);
     void                    reverseGeocoding (const Marble::GeoDataCoordinates& coordinates);
-//ig    void                    retrieveRoute (RouteRequest* request);
 signals:
     void                    searchResultChanged (QAbstractItemModel* model);
     void                    searchFinished (const QString& searchTerm);
     void                    reverseGeocodingFinished (const Marble::GeoDataCoordinates& coordinates, const Marble::GeoDataPlacemark& placemark);
     void                    routeRetrieved (Marble::GeoDataDocument* route);
+public:
+//ig     explicit                MarbleRunnerManager (const PluginManager* pluginManager, QObject* parent /TransferThis/ = 0);
+//ig    void                    retrieveRoute (const RouteRequest* request);
+    void                    parseFile (const QString& fileName, Marble::DocumentRole role);
+signals:
+//FIXME add QVector<GeoDataPlacemark*> support
+//ig    void                    searchResultChanged (QVector<Marble::GeoDataPlacemark*> result);
+    void                    parsingFinished (Marble::GeoDataDocument* document, const QString& error = QString());
 };
 };

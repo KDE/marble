@@ -49,7 +49,7 @@
 <code>from PyKDE4.marble import *</code>
 <p>
 Inherits: <a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> &#x2192; <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> &#x2192; <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a><br />
-
+Subclasses: <a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a>, <a href="../marble/Marble.GeoDataFolder.html">Marble.GeoDataFolder</a><br />
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
@@ -81,6 +81,7 @@ other Features.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clear">clear</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#first">first</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#last">last</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#latLonAltBox">latLonAltBox</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pack">pack</a> (self, QDataStream stream)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#remove">remove</a> (self, int index)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#size">size</a> (self)</td></tr>
@@ -250,6 +251,25 @@ other Features.
 </table>
 </div>
 <div class="memdoc"><p>return the reference of the last element for convenience
+</p></div></div><a class="anchor" name="latLonAltBox"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a> latLonAltBox</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>A convenience function that returns the LatLonAltBox of all
+placemarks in this container.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The GeoDataLatLonAltBox
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataLatLonAltBox
+</dd></dl>
 </p></div></div><a class="anchor" name="pack"></a>
 <div class="memitem">
 <div class="memproto">

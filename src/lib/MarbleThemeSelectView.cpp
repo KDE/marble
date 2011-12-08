@@ -22,6 +22,7 @@
 #include <QtCore/QDir>
 #include <QtCore/QDateTime>
 #include <QtCore/QModelIndex>
+#include <QtCore/QSettings>
 #include <QtGui/QResizeEvent>
 #include <QtGui/QMenu>
 #include <QtGui/QMessageBox>
@@ -36,14 +37,26 @@ public:
     void deleteDirectory( const QString& path );
     void deleteDataDirectories( const QString& path );
     void deletePreview( const QString& path );
-    QString currentThemeName();
-    QString currentThemePath();
+    void loadFavorites();
+    bool currentIsFavorite();
+
+    void selectedMapTheme( QModelIndex index );
+    void uploadDialog();
+    void mapWizard();
+    void showContextMenu( const QPoint& pos );
+    void deleteMap();
+    void toggleFavorite();
+
+    QString currentThemeName() const;
+    QString currentThemePath() const;
 private:
     MarbleThemeSelectView *m_parent;
+    QSettings m_settings;
 };
 
 MarbleThemeSelectView::Private::Private( MarbleThemeSelectView * const parent ) 
-    : m_parent( parent )
+    : m_parent( parent ),
+      m_settings( "kde.org", "Marble Desktop Globe" )
 {
 
 }
@@ -80,7 +93,7 @@ void MarbleThemeSelectView::Private::deletePreview( const QString& path )
         QFile( path + "/" + filename ).remove();
 }
 
-QString MarbleThemeSelectView::Private::currentThemeName()
+QString MarbleThemeSelectView::Private::currentThemeName() const
 {
     QModelIndex index = m_parent->currentIndex();
     const QAbstractItemModel *model = index.model();
@@ -89,9 +102,9 @@ QString MarbleThemeSelectView::Private::currentThemeName()
     return ( model->data( columnIndex )).toString();
 }
 
-QString MarbleThemeSelectView::Private::currentThemePath()
+QString MarbleThemeSelectView::Private::currentThemePath() const
 {
-    QModelIndex index = m_parent-> currentIndex();
+    QModelIndex index = m_parent->currentIndex();
     const QAbstractItemModel  *model = index.model();
 
     QModelIndex columnIndex = model->index( index.row(), 1, QModelIndex() );
@@ -100,7 +113,6 @@ QString MarbleThemeSelectView::Private::currentThemePath()
 
 MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
     : QListView( parent ),
-      m_settings( "kde.org", "Marble Desktop Globe" ),
       d( new Private( this ) )
 {
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -119,7 +131,7 @@ MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
     setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     setEditTriggers( QAbstractItemView::NoEditTriggers );
     setSelectionMode( QAbstractItemView::SingleSelection );
-    loadFavorites();
+    d->loadFavorites();
 
 #ifdef Q_WS_MAEMO_5
     // The pressed signal on Maemo interfers with touch-based
@@ -148,63 +160,63 @@ void MarbleThemeSelectView::resizeEvent( QResizeEvent *event )
     setGridSize(size);
 }
 
-void MarbleThemeSelectView::selectedMapTheme( QModelIndex index )
+void MarbleThemeSelectView::Private::selectedMapTheme( QModelIndex index )
 {
     const QAbstractItemModel *model = index.model();
 
     QModelIndex  columnIndex = model->index( index.row(), 1, QModelIndex() );
     QString currentmaptheme = ( model->data( columnIndex )).toString();
     mDebug() << currentmaptheme;
-    emit selectMapTheme( currentmaptheme );
+    emit m_parent->mapThemeIdChanged( currentmaptheme );
 }
 
-void MarbleThemeSelectView::mapWizard()
+void MarbleThemeSelectView::Private::mapWizard()
 {
-    emit showMapWizard();
+    emit m_parent->showMapWizard();
 }
 
-void MarbleThemeSelectView::uploadDialog()
+void MarbleThemeSelectView::Private::uploadDialog()
 {
-    emit showUploadDialog();
+    emit m_parent->showUploadDialog();
 }
 
-void MarbleThemeSelectView::showContextMenu( const QPoint& pos )
+void MarbleThemeSelectView::Private::showContextMenu( const QPoint& pos )
 {
     QMenu menu;
-    menu.addAction( "&Create a New Map...", this, SLOT( mapWizard() ) );
-    if( QFileInfo( MarbleDirs::localPath() + "/maps/" + d->currentThemePath() ).exists() )
-        menu.addAction( tr( "&Delete Map Theme" ), this, SLOT( deleteMap() ) );
-    menu.addAction( tr( "&Upload Map..." ), this, SLOT( uploadDialog() ) );
-    QAction *favAction = menu.addAction( tr( "&Favorite" ), this, SLOT( toggleFavorite() ) );
+    menu.addAction( "&Create a New Map...", m_parent, SLOT( mapWizard() ) );
+    if( QFileInfo( MarbleDirs::localPath() + "/maps/" + currentThemePath() ).exists() )
+        menu.addAction( tr( "&Delete Map Theme" ), m_parent, SLOT( deleteMap() ) );
+    menu.addAction( tr( "&Upload Map..." ), m_parent, SLOT( uploadDialog() ) );
+    QAction *favAction = menu.addAction( tr( "&Favorite" ), m_parent, SLOT( toggleFavorite() ) );
     favAction->setCheckable( true );
     if( currentIsFavorite() )
         favAction->setChecked( true );
     else
         favAction->setChecked( false );
-    menu.exec( mapToGlobal( pos ) );
+    menu.exec( m_parent->mapToGlobal( pos ) );
 }
 
-void MarbleThemeSelectView::deleteMap()
+void MarbleThemeSelectView::Private::deleteMap()
 {
-    if(QMessageBox::warning( this, 
+    if(QMessageBox::warning( m_parent,
                              tr( "Marble" ), 
-                             tr( "Are you sure that you want to delete \"%1\"?" ).arg( d->currentThemeName() ),
+                             tr( "Are you sure that you want to delete \"%1\"?" ).arg( currentThemeName() ),
                              QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes )
     {
-        QDir mapthemedir( QFileInfo( MarbleDirs::localPath() + "/maps/" + d->currentThemePath()).path());
-        d->deleteDirectory( mapthemedir.path() + "/legend/" );
-        d->deleteDataDirectories( mapthemedir.path() + "/" );
-	d->deletePreview( mapthemedir.path() + "/" );
-        QFile( MarbleDirs::localPath() + "/maps/" + d->currentThemePath()).remove();
+        QDir mapthemedir( QFileInfo( MarbleDirs::localPath() + "/maps/" + currentThemePath()).path());
+        deleteDirectory( mapthemedir.path() + "/legend/" );
+        deleteDataDirectories( mapthemedir.path() + "/" );
+        deletePreview( mapthemedir.path() + "/" );
+        QFile( MarbleDirs::localPath() + "/maps/" + currentThemePath()).remove();
         QFile( mapthemedir.path() + "/legend.html" ).remove();
         QDir().rmdir( mapthemedir.path() );
     }
 }
 
-void MarbleThemeSelectView::toggleFavorite()
+void MarbleThemeSelectView::Private::toggleFavorite()
 {
-    QModelIndex index = currentIndex();
-    QAbstractItemModel *model = this->model();
+    QModelIndex index = m_parent->currentIndex();
+    QAbstractItemModel *model = m_parent->model();
     QModelIndex columnIndex = model->index( index.row(), 0 );
 
     if( currentIsFavorite() )
@@ -221,7 +233,7 @@ void MarbleThemeSelectView::toggleFavorite()
     model->sort( 0 );
 }
 
-void MarbleThemeSelectView::loadFavorites()
+void MarbleThemeSelectView::Private::loadFavorites()
 {
     m_settings.beginGroup( "Favorites" );
     if( !m_settings.contains( "initialized" ) ) {
@@ -234,9 +246,9 @@ void MarbleThemeSelectView::loadFavorites()
     m_settings.endGroup();
 }
 
-bool MarbleThemeSelectView::currentIsFavorite()
+bool MarbleThemeSelectView::Private::currentIsFavorite()
 {
-    QModelIndex index = currentIndex();
+    QModelIndex index = m_parent->currentIndex();
     const QAbstractItemModel  *model = index.model();
     QModelIndex nameIndex = model->index( index.row(), 0, QModelIndex() );
     m_settings.beginGroup( "Favorites" );

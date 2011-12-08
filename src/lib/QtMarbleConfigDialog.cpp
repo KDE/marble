@@ -270,7 +270,7 @@ void QtMarbleConfigDialog::readSettings()
     syncSettings();
     
     // View
-    d->ui_viewSettings.kcfg_distanceUnit->setCurrentIndex( distanceUnit() );
+    d->ui_viewSettings.kcfg_distanceUnit->setCurrentIndex( measurementSystem() );
     d->ui_viewSettings.kcfg_angleUnit->setCurrentIndex( angleUnit() );
     d->ui_viewSettings.kcfg_stillQuality->setCurrentIndex( stillQuality() );
     d->ui_viewSettings.kcfg_animationQuality->setCurrentIndex( animationQuality() );
@@ -510,21 +510,15 @@ void QtMarbleConfigDialog::applyPluginState()
     }
 }
 
-Marble::DistanceUnit QtMarbleConfigDialog::distanceUnit() const
+QLocale::MeasurementSystem QtMarbleConfigDialog::measurementSystem() const
 {
     if( d->m_settings->contains( "View/distanceUnit" ) ) {
-        return (Marble::DistanceUnit) d->m_settings->value( "View/distanceUnit" ).toInt();
+        return (QLocale::MeasurementSystem) d->m_settings->value( "View/distanceUnit" ).toInt();
     }
-    else {
-        MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
-        
-        if ( locale->measureSystem() == Marble::Metric ) {
-            return Marble::Meter;
-        }
-        else {
-            return Marble::MilesFeet;
-        }
-    }
+
+    MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
+
+    return locale->measurementSystem();
 }
 
 Marble::AngleUnit QtMarbleConfigDialog::angleUnit() const

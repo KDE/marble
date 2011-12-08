@@ -24,14 +24,12 @@ Item {
     signal mouseClickGeoPosition(real longitude, real latitude)
 
     property alias mapThemeModel: map.mapThemeModel
+    property alias zoom: map.zoom
 
     // The widget representing the map.
     MarbleWidget {
         id: map
         anchors.fill: parent
-
-        // Load settings.
-        property bool autoCenter: settings.autoCenter
 
         /** @todo: This property looks cumbersome... get rid of it */
         property bool initialized: false
@@ -55,6 +53,7 @@ Item {
             onLastKnownPositionChanged: {
                 settings.lastKnownLongitude = map.tracking.lastKnownPosition.longitude
                 settings.lastKnownLatitude = map.tracking.lastKnownPosition.latitude
+                map.updatePositionIndicator()
             }
         }
         
@@ -76,6 +75,8 @@ Item {
             settings.quitLatitude = center.latitude
         }
 
+        onVisibleLatLonAltBoxChanged: updatePositionIndicator()
+
         search {
             // Delegate of a search result.
             /** @todo: Simplify this beast */
@@ -89,7 +90,7 @@ Item {
                 smooth: true
 
                 Text {
-                    text: hit
+                    text: (index+1)
                     width: 32
                     height: 32
                     anchors.top: parent.top
@@ -105,24 +106,27 @@ Item {
                     id: routingOptions
                     visible: false
                     color: "white"
-                    width: 350
+                    width: 250
                     height: nameLabel.height + routingButtons.height + 30
                     border.width: 1
-                    border.color: "blue"
+                    border.color: "gray"
                     radius: 10
                     // Name of the search result.
                     Label {
                         id: nameLabel
-                        text: name
-                        width: 340
+                        text: display
                         anchors.top: parent.top
                         anchors.left: parent.left
-                        anchors.topMargin: 10
-                        anchors.leftMargin: 10
-                        anchors.rightMargin: 10
-                        platformStyle: LabelStyle { fontPixelSize: 20 }
+                        anchors.right: parent.right
+                        anchors.margins: 10
+                        platformStyle: LabelStyle { fontPixelSize: 18 }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: routingOptions.visible = false
+                        }
                     }
-                    // Buttons "Directioins from here" and "Directions to here" for routing.
+                    // Route button
                     Column {
                         id: routingButtons
                         anchors.bottom: parent.bottom
@@ -134,56 +138,23 @@ Item {
                             width: 230
                             height: 35
                             border.width: 1
-                            border.color: "blue"
+                            border.color: "gray"
                             radius: 10
                             Label {
-                                text: "Directions from here"
+                                text: "Route"
                                 anchors.centerIn: parent
-                                platformStyle: LabelStyle { fontPixelSize: 20 }
+                                platformStyle: LabelStyle { fontPixelSize: 18 }
                             }
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
                                     routingOptions.visible = false
-                                    map.routing.setVia( 0, longitude, latitude )
-                                }
-                            }
-                        }
-                        Rectangle {
-                            color: "white"
-                            width: 230
-                            height: 35
-                            border.width: 1
-                            border.color: "blue"
-                            radius: 10
-                            Label {
-                                text: "Directions to here"
-                                anchors.centerIn: parent
-                                platformStyle: LabelStyle { fontPixelSize: 20 }
-                            }
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: {
-                                    routingOptions.visible = false
+                                    settings.gpsTracking = true
+                                    map.routing.clearRoute()
+                                    map.routing.setVia( 0, map.tracking.lastKnownPosition.longitude, map.tracking.lastKnownPosition.latitude )
                                     map.routing.setVia( 1, longitude, latitude )
+                                    openActivity( "Routing" )
                                 }
-                            }
-                        }
-                    }
-                    // Small cross that closes the search result info if its clicked.
-                    Image {
-                        id: closeImage
-                        width: 30
-                        fillMode: Image.PreserveAspectFit
-                        smooth: true
-                        source: "image://theme/icon-m-toolbar-close"
-                        anchors.top: parent.top
-                        anchors.right: parent.right
-                        anchors.margins: 5
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: {
-                                routingOptions.visible = false
                             }
                         }
                     }
@@ -195,6 +166,15 @@ Item {
                         routingOptions.visible = !routingOptions.visible
                     }
                 }
+            }
+        }
+
+        function updatePositionIndicator() {
+            if (positionFinderDirection.visible) {
+                var pos = map.pixel( tracking.lastKnownPosition.longitude, tracking.lastKnownPosition.latitude )
+                positionFinderDirection.rotation = 270 + 180.0 / Math.PI * Math.atan2 ( positionFinderDirection.y - pos.y, positionFinderDirection.x - pos.x )
+                var indicatorPosition = map.coordinate( positionFinderDirection.x, positionFinderDirection.y )
+                positionDistance.text = Math.round( tracking.lastKnownPosition.distance( indicatorPosition.longitude, indicatorPosition.latitude ) / 100 ) / 10 + " km"
             }
         }
     }
@@ -215,9 +195,6 @@ Item {
         // Start a small grow/shrink animation of the marker to indicate position updates.
         onPositionChanged: {
             growAnimation.running = true
-            if ( map.autoCenter ) {
-                map.center = positionProvider.position
-            }
         }
     }
     
@@ -227,7 +204,7 @@ Item {
         width: 60
         fillMode: Image.PreserveAspectFit
         smooth: true
-        source: "qrc:/marker.svg"
+        source: positionProvider.hasPosition ? "qrc:/marker.svg" : "qrc:/marker-yellow.svg"
         visible: false
 
         // Animation that grows/shrinks the marker.
@@ -260,7 +237,7 @@ Item {
         smooth: true
 
         source: "qrc:/marker-direction.svg"
-        rotation: 180 + map.tracking.lastKnownPosition.bearing( map.center.longitude, map.center.latitude )
+        //rotation: 180 + map.tracking.lastKnownPosition.bearing( map.center.longitude, map.center.latitude )
     }
 
     Image {
@@ -280,11 +257,11 @@ Item {
     }
 
     Text {
+        id: positionDistance
         anchors.bottom: positionFinder.top
         anchors.horizontalCenter: positionFinder.horizontalCenter
         anchors.margins: 4
         visible: settings.showPosition
-        text: Math.round( map.tracking.lastKnownPosition.distance( map.center.longitude, map.center.latitude ) / 100 ) / 10 + " km"
     }
     
     // Starts a search for the passed term.
@@ -330,5 +307,9 @@ Item {
 
     function setGeoSceneProperty( key, value ) {
         map.setGeoSceneProperty( key, value )
+    }
+
+    function getCenter() {
+        return map.center
     }
 }

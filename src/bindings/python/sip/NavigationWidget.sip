@@ -29,7 +29,6 @@ public:
                             NavigationWidget (QWidget* parent /TransferThis/ = 0, Qt::WindowFlags f = 0);
     ~NavigationWidget ();
     void                    setMarbleWidget (Marble::MarbleWidget* widget);
-    void                    setWorkOffline (bool offline);
 signals:
     void                    goHome ();
     void                    zoomIn ();
@@ -45,6 +44,7 @@ public:
 protected:
     void                    resizeEvent (QResizeEvent*);
 public:
-    void                    setLocations (QAbstractItemModel* locations);
+//FIXME
+//ig    void                    setLocations (QVector<Marble::GeoDataPlacemark*> locations);
 };
 };

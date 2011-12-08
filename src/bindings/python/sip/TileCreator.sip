@@ -36,9 +36,29 @@ signals:
 
 public:
     virtual ~TileCreator ();
+                            TileCreator (Marble::TileCreatorSource* source, const QString& dem, const QString& targetDir);
+    void                    setTileFormat (const QString& format);
+    void                    setTileQuality (int quality);
+    void                    setResume (bool resume);
+    void                    setVerifyExactResult (bool verify);
+    QString                 tileFormat () const;
+    int                     tileQuality () const;
+    bool                    resume () const;
+    bool                    verifyExactResult () const;
 };
 // TileCreator
 
+class TileCreatorSource
+{
+%TypeHeaderCode
+#include <TileCreator.h>
+%End
+
+public:
+    virtual ~TileCreatorSource ();
+    virtual QSize           fullImageSize () const=0;
+    virtual QImage          tile (int n, int m, int tileLevel)=0;
+};
 };
 // Marble
 

@@ -29,7 +29,8 @@ public:
     enum JunctionType
     {
       Roundabout,
-      Other
+      Other,
+      None
     };
 
     /** Constructor */

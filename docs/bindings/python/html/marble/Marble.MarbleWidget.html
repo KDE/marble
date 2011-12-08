@@ -123,7 +123,6 @@ cross.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#zoomChanged">zoomChanged</a> (int zoom)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#MarbleWidget">__init__</a> (self, QWidget parent=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QRegion&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#activeRegion">activeRegion</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addLayer">addLayer</a> (self, <a href="../marble/Marble.LayerInterface.html">Marble.LayerInterface</a> layer)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#animationsEnabled">animationsEnabled</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#centerLatitude">centerLatitude</a> (self)</td></tr>
@@ -131,6 +130,7 @@ cross.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#centerOn">centerOn</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> point, bool animated=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#centerOn">centerOn</a> (self, <a href="../marble/Marble.GeoDataLatLonBox.html">Marble.GeoDataLatLonBox</a> box, bool animated=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#centerOn">centerOn</a> (self, float lon, float lat, bool animated=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#centerOn">centerOn</a> (self, <a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a> placemark, bool animated=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changeEvent">changeEvent</a> (self, QEvent event)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearVolatileTileCache">clearVolatileTileCache</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#connectNotify">connectNotify</a> (self, QString signal)</td></tr>
@@ -165,7 +165,6 @@ cross.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#moveUp">moveUp</a> (self, <a href="../marble/Marble.html#FlyToMode">Marble.FlyToMode</a> mode=Marble.Automatic)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#notifyMouseClick">notifyMouseClick</a> (self, int x, int y)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paintEvent">paintEvent</a> (self, QPaintEvent event)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.Quaternion.html">Marble.Quaternion</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#planetAxis">planetAxis</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.html#Projection">Marble.Projection</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#projection">projection</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#radius">radius</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#radiusFromDistance">radiusFromDistance</a> (self, float distance)</td></tr>
@@ -174,9 +173,7 @@ cross.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeLayer">removeLayer</a> (self, <a href="../marble/Marble.LayerInterface.html">Marble.LayerInterface</a> layer)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPlugins">renderPlugins</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resizeEvent">resizeEvent</a> (self, QResizeEvent a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rotateBy">rotateBy</a> (self, <a href="../marble/Marble.Quaternion.html">Marble.Quaternion</a> incRot)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rotateBy">rotateBy</a> (self, float deltaLon, float deltaLat, <a href="../marble/Marble.html#FlyToMode">Marble.FlyToMode</a> mode=Marble.Instant)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#scheduleRepaint">scheduleRepaint</a> (self, QRegion dirtyRegion)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#screenCoordinates">screenCoordinates</a> (self, float lon, float lat, float x, float y)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAnimationsEnabled">setAnimationsEnabled</a> (self, bool enabled)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCenterLatitude">setCenterLatitude</a> (self, float lat, <a href="../marble/Marble.html#FlyToMode">Marble.FlyToMode</a> mode=Marble.Instant)</td></tr>
@@ -196,12 +193,11 @@ cross.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowBackground">setShowBackground</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowBorders">setShowBorders</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowCities">setShowCities</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowCityLights">setShowCityLights</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowClouds">setShowClouds</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowCompass">setShowCompass</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowCrosshairs">setShowCrosshairs</a> (self, bool visible)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowElevationModel">setShowElevationModel</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowFrameRate">setShowFrameRate</a> (self, bool visible)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowGps">setShowGps</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowGrid">setShowGrid</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowIceLayer">setShowIceLayer</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowLakes">setShowLakes</a> (self, bool visible)</td></tr>
@@ -211,6 +207,8 @@ cross.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowRelief">setShowRelief</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowRivers">setShowRivers</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowScaleBar">setShowScaleBar</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowSunInZenith">setShowSunInZenith</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowSunShading">setShowSunShading</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowTerrain">setShowTerrain</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowTileId">setShowTileId</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setViewContext">setViewContext</a> (self, <a href="../marble/Marble.html#ViewContext">Marble.ViewContext</a> viewContext)</td></tr>
@@ -219,12 +217,11 @@ cross.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showBackground">showBackground</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showBorders">showBorders</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showCities">showCities</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showCityLights">showCityLights</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showClouds">showClouds</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showCompass">showCompass</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showCrosshairs">showCrosshairs</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showElevationModel">showElevationModel</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showFrameRate">showFrameRate</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showGps">showGps</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showGrid">showGrid</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showIceLayer">showIceLayer</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showLakes">showLakes</a> (self)</td></tr>
@@ -234,6 +231,8 @@ cross.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showRelief">showRelief</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showRivers">showRivers</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showScaleBar">showScaleBar</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showSunInZenith">showSunInZenith</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showSunShading">showSunShading</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showTerrain">showTerrain</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#tileZoomLevel">tileZoomLevel</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.html#ViewContext">Marble.ViewContext</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#viewContext">viewContext</a> (self)</td></tr>
@@ -491,19 +490,6 @@ when the user moves the map around or zooms.
 <p> This constructor should be used when you will only use one
 MarbleWidget. The widget will create its own MarbleModel when
 created.
-</p></div></div><a class="anchor" name="activeRegion"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QRegion activeRegion</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Return the active region in which it's possible to drag the view using the mouse.
 </p></div></div><a class="anchor" name="addLayer"></a>
 <div class="memitem">
 <div class="memproto">
@@ -598,13 +584,12 @@ created.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Center the view on a bounding box so that it completely fills the viewport
-This method not only centers on the center of the GeoDataLatLon box but it also
-adjusts the zoom of the marble widget so that the LatLon box provided fills
-the viewport.
+<div class="memdoc"><p>Center the view on a placemark according to the following logic:
+- if the placemark has a lookAt, zoom and center on that lookAt
+- otherwise use the placemark geometry's latLonAltBox
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>box</em>&nbsp;</td><td> The GeoDataLatLonBox to zoom and move the MarbleWidget to.
+<tr><td></td><td valign="top"><em>box</em>&nbsp;</td><td> The GeoDataPlacemark to zoom and move the MarbleWidget to.
 </td></tr>
 </table></dl>
 <p>
@@ -636,13 +621,12 @@ the viewport.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Center the view on a bounding box so that it completely fills the viewport
-This method not only centers on the center of the GeoDataLatLon box but it also
-adjusts the zoom of the marble widget so that the LatLon box provided fills
-the viewport.
+<div class="memdoc"><p>Center the view on a placemark according to the following logic:
+- if the placemark has a lookAt, zoom and center on that lookAt
+- otherwise use the placemark geometry's latLonAltBox
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>box</em>&nbsp;</td><td> The GeoDataLatLonBox to zoom and move the MarbleWidget to.
+<tr><td></td><td valign="top"><em>box</em>&nbsp;</td><td> The GeoDataPlacemark to zoom and move the MarbleWidget to.
 </td></tr>
 </table></dl>
 <p>
@@ -680,13 +664,49 @@ the viewport.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Center the view on a bounding box so that it completely fills the viewport
-This method not only centers on the center of the GeoDataLatLon box but it also
-adjusts the zoom of the marble widget so that the LatLon box provided fills
-the viewport.
+<div class="memdoc"><p>Center the view on a placemark according to the following logic:
+- if the placemark has a lookAt, zoom and center on that lookAt
+- otherwise use the placemark geometry's latLonAltBox
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>box</em>&nbsp;</td><td> The GeoDataLatLonBox to zoom and move the MarbleWidget to.
+<tr><td></td><td valign="top"><em>box</em>&nbsp;</td><td> The GeoDataPlacemark to zoom and move the MarbleWidget to.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="centerOn"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> centerOn</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a>&nbsp;</td>
+<td class="paramname"><em>placemark</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>animated=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Center the view on a placemark according to the following logic:
+- if the placemark has a lookAt, zoom and center on that lookAt
+- otherwise use the placemark geometry's latLonAltBox
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>box</em>&nbsp;</td><td> The GeoDataPlacemark to zoom and move the MarbleWidget to.
 </td></tr>
 </table></dl>
 <p>
@@ -1454,21 +1474,6 @@ mapThemeId = "earth/bluemarble/bluemarble.dgml"
 </tr></table>
 </div>
 <div class="memdoc"><p>Reimplementation of the paintEvent() function in QWidget.
-</p></div></div><a class="anchor" name="planetAxis"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.Quaternion.html">Marble.Quaternion</a> planetAxis</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Return the quaternion that specifies the rotation of the globe.
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> The quaternion that describes the rotation of the globe.
-</dd></dl>
 </p></div></div><a class="anchor" name="projection"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1638,35 +1643,6 @@ use MarblePart which is handling this automatically.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.Quaternion.html">Marble.Quaternion</a>&nbsp;</td>
-<td class="paramname"><em>incRot</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Rotate the view by the angle specified by a Quaternion.
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> incRot a quaternion specifying the rotation
-</td></tr>
-</table></dl>
-<p>
-</p></div></div><a class="anchor" name="rotateBy"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> rotateBy</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
 <td class="paramtype">float&nbsp;</td>
 <td class="paramname"><em>deltaLon</em>, </td>
 </tr>
@@ -1690,36 +1666,19 @@ use MarblePart which is handling this automatically.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Rotate the view by the angle specified by a Quaternion.
+<div class="memdoc"><p>Rotate the view by the two angles phi and theta.
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> incRot a quaternion specifying the rotation
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> deltaLon an angle that specifies the change in terms of longitude
+
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> deltaLat an angle that specifies the change in terms of latitude
 </td></tr>
 </table></dl>
-<p>
-</p></div></div><a class="anchor" name="scheduleRepaint"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> scheduleRepaint</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QRegion&nbsp;</td>
-<td class="paramname"><em>dirtyRegion</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Schedule repaint
+<p> This function rotates the view by two angles,
+deltaLon ("theta") and deltaLat ("phi").
+If we start at (0, 0), the result will be the exact equivalent
+of (lon, lat), otherwise the resulting angle will be the sum of
+the previous position and the two offsets.
 </p></div></div><a class="anchor" name="screenCoordinates"></a>
 <div class="memitem">
 <div class="memproto">
@@ -2290,6 +2249,35 @@ if needed.
 </td></tr>
 </table></dl>
 <p>
+</p></div></div><a class="anchor" name="setShowCityLights"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowCityLights</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether city lights instead of night shadow are visible.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of city lights
+</td></tr>
+</table></dl>
+<p>
 </p></div></div><a class="anchor" name="setShowClouds"></a>
 <div class="memitem">
 <div class="memproto">
@@ -2377,35 +2365,6 @@ if needed.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="setShowElevationModel"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setShowElevationModel</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">bool&nbsp;</td>
-<td class="paramname"><em>visible</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Set whether the elevation model is visible
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the elevation model
-</td></tr>
-</table></dl>
-<p>
 </p></div></div><a class="anchor" name="setShowFrameRate"></a>
 <div class="memitem">
 <div class="memproto">
@@ -2432,35 +2391,6 @@ if needed.
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>visible</em>&nbsp;</td><td> visibility of the frame rate
-</td></tr>
-</table></dl>
-<p>
-</p></div></div><a class="anchor" name="setShowGps"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setShowGps</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">bool&nbsp;</td>
-<td class="paramname"><em>visible</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Set whether Gps Data is visible
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>visible</em>&nbsp;</td><td> visibility of the Gps Data
 </td></tr>
 </table></dl>
 <p>
@@ -2725,6 +2655,64 @@ if needed.
 </td></tr>
 </table></dl>
 <p>
+</p></div></div><a class="anchor" name="setShowSunInZenith"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowSunInZenith</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the sun is visible in the zenith.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>visible</em>&nbsp;</td><td> visibility of the sun in the zenith
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setShowSunShading"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowSunShading</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the night shadow is visible.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visibile visibility of shadow
+</td></tr>
+</table></dl>
+<p>
 </p></div></div><a class="anchor" name="setShowTerrain"></a>
 <div class="memitem">
 <div class="memproto">
@@ -2894,6 +2882,21 @@ and might be subject to changes until Marble 0.8
 <div class="memdoc"><p>Return whether the city place marks are visible.
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> The city place mark visibility.
 </dd></dl>
+</p></div></div><a class="anchor" name="showCityLights"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showCityLights</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the city lights are shown instead of the night shadow.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> visibility of city lights
+</dd></dl>
 </p></div></div><a class="anchor" name="showClouds"></a>
 <div class="memitem">
 <div class="memproto">
@@ -2939,21 +2942,6 @@ and might be subject to changes until Marble 0.8
 <div class="memdoc"><p>Return whether the crosshairs are visible.
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> The crosshairs' visibility.
 </dd></dl>
-</p></div></div><a class="anchor" name="showElevationModel"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool showElevationModel</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Return whether the elevation model is visible.
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> The elevation model visibility.
-</dd></dl>
 </p></div></div><a class="anchor" name="showFrameRate"></a>
 <div class="memitem">
 <div class="memproto">
@@ -2968,21 +2956,6 @@ and might be subject to changes until Marble 0.8
 </div>
 <div class="memdoc"><p>Return whether the frame rate gets displayed.
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> the frame rates visibility
-</dd></dl>
-</p></div></div><a class="anchor" name="showGps"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool showGps</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Return whether Gps Data is visible.
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> The Gps Data's visibility.
 </dd></dl>
 </p></div></div><a class="anchor" name="showGrid"></a>
 <div class="memitem">
@@ -3118,6 +3091,36 @@ and might be subject to changes until Marble 0.8
 </div>
 <div class="memdoc"><p>Return whether the scale bar is visible.
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> The scale bar visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="showSunInZenith"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showSunInZenith</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the sun is shown in the zenith.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> visibility of sun in the zenith
+</dd></dl>
+</p></div></div><a class="anchor" name="showSunShading"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showSunShading</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the night shadow is visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> visibility of night shadow
 </dd></dl>
 </p></div></div><a class="anchor" name="showTerrain"></a>
 <div class="memitem">

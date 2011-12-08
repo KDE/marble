@@ -10,10 +10,10 @@
 
 #include "Speedometer.h"
 
+#include "global.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
-#include "MarbleWidget.h"
 #include "PositionTracking.h"
 #include "WidgetGraphicsItem.h"
 #include "MarbleGraphicsGridLayout.h"
@@ -26,11 +26,15 @@ namespace Marble
 
 Speedometer::Speedometer( const QPointF &point, const QSizeF &size )
     : AbstractFloatItem( point, size ),
-      m_marbleWidget( 0 ),
       m_widgetItem( 0 )
 {
     setVisible( false );
     setCacheMode( NoCache );
+
+    const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if ( smallScreen ) {
+        setPosition( QPointF( 10.5, 10.5 ) );
+    }
 }
 
 Speedometer::~Speedometer()
@@ -92,60 +96,30 @@ bool Speedometer::isInitialized () const
     return m_widgetItem;
 }
 
-bool Speedometer::eventFilter( QObject *object, QEvent *e )
+void Speedometer::updateLocation( GeoDataCoordinates coordinates, qreal speed )
 {
-    if ( m_marbleWidget || !enabled() || !visible() ) {
-        return AbstractFloatItem::eventFilter( object, e );
-    }
+    Q_UNUSED( coordinates );
 
-    MarbleWidget *widget = qobject_cast<MarbleWidget*>( object );
-
-    if ( widget ) {
-        m_marbleWidget = widget;
-    }
-
-    return AbstractFloatItem::eventFilter( object, e );
-}
-
-
-void Speedometer::forceRepaint()
-{
-    m_widgetItem->update();
-    if ( m_marbleWidget ) {
-        // Trigger a repaint of the float item.
-        m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground, false );
-        update();
-        m_marbleWidget->repaint();
-        bool const mapCoversViewport = m_marbleWidget->viewport()->mapCoversViewport();
-        m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground, mapCoversViewport );
-    }
-}
-
-void Speedometer::updateLocation( GeoDataCoordinates coordinates, qreal)
-{
-    PositionTracking *tracking = marbleModel()->positionTracking();
-    qreal speed = tracking->speed();
+    speed *= METER2KM / SEC2HOUR;
     QString speedUnit;
-    QString distanceString;
 
-    switch ( m_locale->distanceUnit() ) {
-    case MilesFeet:
+    switch ( m_locale->measurementSystem() ) {
+    case QLocale::ImperialSystem:
         //miles per hour
         speedUnit = tr("mph");
         speed *= KM2MI;
-        distanceString = tr("ft");
         break;
 
-    default:
+    case QLocale::MetricSystem:
         //kilometers per hour
         speedUnit = tr("km/h");
-        distanceString = tr("m");
         break;
     }
 
     m_widget.speed->display( speed );
     m_widget.speedUnit->setText( speedUnit );
-    forceRepaint();
+    m_widgetItem->update();
+    emit repaintNeeded();
 }
 
 }

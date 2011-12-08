@@ -6,12 +6,17 @@
 // the source code.
 //
 // Copyright 2009      Eckhart Wörner <ewoerner@kde.org>
+// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef PLACEMARKPOSITIONPROVIDERPLUGIN_H
 #define PLACEMARKPOSITIONPROVIDERPLUGIN_H
 
 #include "PositionProviderPlugin.h"
+
+#include "GeoDataCoordinates.h"
+
+#include <QtCore/QDateTime>
 
 namespace Marble
 {
@@ -40,12 +45,15 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     virtual PositionProviderStatus status() const;
     virtual GeoDataCoordinates position() const;
     virtual GeoDataAccuracy accuracy() const;
+    virtual qreal speed() const;
 
     void setPlacemark( const GeoDataPlacemark *placemark );
 
  private:
-    QTimer *m_updateTimer;
     const GeoDataPlacemark *m_placemark;
+    GeoDataCoordinates m_coordinates;
+    QDateTime m_timestamp;
+    qreal m_speed;
 
     PositionProviderStatus m_status;
     GeoDataAccuracy m_accuracy;

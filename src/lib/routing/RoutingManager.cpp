@@ -69,6 +69,12 @@ public:
 
     QString m_lastSavePath;
 
+    QColor m_routeColorStandard;
+
+    QColor m_routeColorHighlighted;
+
+    QColor m_routeColorAlternative;
+
     RoutingManagerPrivate( MarbleModel *marbleModel, RoutingManager* manager, QObject *parent );
 
     GeoDataFolder* routeRequest() const;
@@ -96,9 +102,15 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager
         m_adjustNavigation( 0 ),
         m_guidanceModeEnabled( false ),
         m_shutdownPositionTracking( false ),
-        m_guidanceModeWarning( true )
+        m_guidanceModeWarning( true ),
+        m_routeColorStandard   ( oxygenSkyBlue4 ),
+        m_routeColorHighlighted( oxygenSeaBlue2 ),
+        m_routeColorAlternative( oxygenAluminumGray4 )
 {
     m_runnerManager.setModel( model );
+    m_routeColorStandard.setAlpha( 200 );
+    m_routeColorHighlighted.setAlpha( 200 );
+    m_routeColorAlternative.setAlpha( 200 );
 }
 
 GeoDataFolder* RoutingManagerPrivate::routeRequest() const
@@ -432,6 +444,36 @@ void RoutingManager::setLastSavePath( const QString &path )
 QString RoutingManager::lastSavePath() const
 {
     return d->m_lastSavePath;
+}
+
+void RoutingManager::setRouteColorStandard( QColor color )
+{
+    d->m_routeColorStandard = color;
+}
+
+QColor RoutingManager::routeColorStandard()
+{
+    return d->m_routeColorStandard;
+}
+
+void RoutingManager::setRouteColorHighlighted( QColor color )
+{
+    d->m_routeColorHighlighted = color;
+}
+
+QColor RoutingManager::routeColorHighlighted()
+{
+    return d->m_routeColorHighlighted;
+}
+
+void RoutingManager::setRouteColorAlternative( QColor color )
+{
+    d->m_routeColorAlternative = color;
+}
+
+QColor RoutingManager::routeColorAlternative()
+{
+    return d->m_routeColorAlternative;
 }
 
 } // namespace Marble

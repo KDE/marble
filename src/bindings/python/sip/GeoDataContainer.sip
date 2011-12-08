@@ -56,6 +56,7 @@ public:
     int                     childPosition (Marble::GeoDataFeature* child);
     void                    append (Marble::GeoDataFeature* other);
     void                    remove (int index);
+    Marble::GeoDataLatLonAltBox  latLonAltBox () const;
 };
 // GeoDataContainer
 

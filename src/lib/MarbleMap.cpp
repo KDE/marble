@@ -110,7 +110,11 @@ class MarbleMapPrivate
  public:
     explicit MarbleMapPrivate( MarbleMap *parent, MarbleModel *model );
 
+    void updateMapTheme();
+
     void updateProperty( const QString &, bool );
+
+    MarbleMap *const q;
 
     // The model we are showing.
     MarbleModel     *const m_model;
@@ -120,8 +124,6 @@ class MarbleMapPrivate
     ViewParams       m_viewParams;
     ViewportParams   m_viewport;
     bool             m_showFrameRate;
-
-    GeoSceneDocument *m_mapTheme;
 
     VectorComposer   m_veccomposer;
     TextureColorizer *m_texcolorizer;
@@ -140,10 +142,10 @@ class MarbleMapPrivate
 };
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
-        : m_model( model ),
+        : q( parent ),
+          m_model( model ),
           m_viewParams(),
           m_showFrameRate( false ),
-          m_mapTheme( 0 ),
           m_veccomposer(),
           m_texcolorizer( 0 ),
           m_layerManager( model, parent ),
@@ -151,7 +153,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_geometryLayer( model->treeModel() ),
           m_vectorMapBaseLayer( &m_veccomposer ),
           m_vectorMapLayer( &m_veccomposer ),
-          m_textureLayer( model->mapThemeManager(), model->downloadManager(), model->sunLocator() ),
+          m_textureLayer( model->downloadManager(), model->sunLocator() ),
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), model->clock(), parent ),
           m_measureTool( model )
 {
@@ -171,7 +173,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
     }
 
     QObject::connect( m_model, SIGNAL( themeChanged( QString ) ),
-                      parent, SIGNAL( themeChanged( QString ) ) );
+                      parent, SLOT( updateMapTheme() ) );
 
     QObject::connect( &m_veccomposer, SIGNAL( datasetLoaded() ),
                       parent, SIGNAL( repaintNeeded() ));
@@ -432,16 +434,16 @@ qreal MarbleMap::centerLongitude() const
 
 int  MarbleMap::minimumZoom() const
 {
-    if ( d->m_mapTheme )
-        return d->m_mapTheme->head()->zoom()->minimum();
+    if ( d->m_model->mapTheme() )
+        return d->m_model->mapTheme()->head()->zoom()->minimum();
 
     return 950;
 }
 
 int  MarbleMap::maximumZoom() const
 {
-    if ( d->m_mapTheme )
-        return d->m_mapTheme->head()->zoom()->maximum();
+    if ( d->m_model->mapTheme() )
+        return d->m_model->mapTheme()->head()->zoom()->maximum();
 
     return 2100;
 }
@@ -506,8 +508,8 @@ void MarbleMap::downloadRegion( const QString& sourceDir, QVector<TileCoordsPyra
 bool MarbleMap::propertyValue( const QString& name ) const
 {
     bool value;
-    if ( d->m_mapTheme ) {
-        d->m_mapTheme->settings()->propertyValue( name, value );
+    if ( d->m_model->mapTheme() ) {
+        d->m_model->mapTheme()->settings()->propertyValue( name, value );
     }
     else {
         value = false;
@@ -712,7 +714,7 @@ void MarbleMap::paint( GeoPainter &painter, const QRect &dirtyRect )
 {
     Q_UNUSED( dirtyRect );
 
-    if ( !d->m_mapTheme ) {
+    if ( !d->m_model->mapTheme() ) {
         mDebug() << "No theme yet!";
         d->m_marbleSplashLayer.render( &painter, &d->m_viewport );
         return;
@@ -744,105 +746,78 @@ QString MarbleMap::mapThemeId() const
 
 void MarbleMap::setMapThemeId( const QString& mapThemeId )
 {
-    if ( !mapThemeId.isEmpty() && mapThemeId == d->m_model->mapThemeId() )
-        return;
+    d->m_model->setMapThemeId( mapThemeId );
+}
 
-    if ( d->m_model->mapTheme() ) {
-        disconnect( d->m_model->mapTheme()->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
-                    this, SLOT( updateProperty( const QString &, bool ) ) );
-    }
+void MarbleMapPrivate::updateMapTheme()
+{
+    m_layerManager.removeLayer( &m_textureLayer );
+    m_layerManager.removeLayer( &m_vectorMapLayer );
+    m_layerManager.removeLayer( &m_vectorMapBaseLayer );
 
-    d->m_layerManager.removeLayer( &d->m_textureLayer );
-    d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
-    d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
+    m_textureLayer.setTextureColorizer( 0 );
+    delete m_texcolorizer;
+    m_texcolorizer = 0;
 
-    d->m_textureLayer.setTextureColorizer( 0 );
-    delete d->m_texcolorizer;
-    d->m_texcolorizer = 0;
+    QObject::connect( m_model->mapTheme()->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
+                      q, SLOT( updateProperty( const QString &, bool ) ) );
 
-    GeoSceneDocument* mapTheme = MapThemeManager::loadMapTheme( mapThemeId );
-    if ( !mapTheme ) {
-        // Check whether the previous theme works
-        if ( d->m_mapTheme ){
-            qWarning() << "Selected theme doesn't work, so we stick to the previous one";
-            mapTheme = d->m_mapTheme;
-        }
-    }
-
-    if ( !mapTheme ) {
-        // Fall back to default theme
-        QString defaultTheme = "earth/srtm/srtm.dgml";
-        qWarning() << "Falling back to default theme " << defaultTheme;
-        mapTheme = MapThemeManager::loadMapTheme(defaultTheme);
-    }
-
-    // If this last resort doesn't work either shed a tear and exit
-    if ( !mapTheme ) {
-        qWarning() << "Couldn't find a valid DGML map.";
-        return;
-    }
-
-    d->m_mapTheme = mapTheme;
-
-    connect( mapTheme->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
-             this, SLOT( updateProperty( const QString &, bool ) ) );
-
-    setPropertyValue( "clouds_data", d->m_viewParams.showClouds() );
+    q->setPropertyValue( "clouds_data", m_viewParams.showClouds() );
 
     // NOTE due to frequent regressions: 
     // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
     // at this point. Some themes do NOT have either vector or texture data!
     
     // Check whether there is a vector layer available:
-    if ( mapTheme->map()->hasVectorLayers() ) {
-        d->m_veccomposer.setShowWaterBodies( propertyValue( "waterbodies" ) );
-        d->m_veccomposer.setShowLakes( propertyValue( "lakes" ) );
-        d->m_veccomposer.setShowIce( propertyValue( "ice" ) );
-        d->m_veccomposer.setShowCoastLines( propertyValue( "coastlines" ) );
-        d->m_veccomposer.setShowRivers( propertyValue( "rivers" ) );
-        d->m_veccomposer.setShowBorders( propertyValue( "borders" ) );
+    if ( m_model->mapTheme()->map()->hasVectorLayers() ) {
+        m_veccomposer.setShowWaterBodies( q->propertyValue( "waterbodies" ) );
+        m_veccomposer.setShowLakes( q->propertyValue( "lakes" ) );
+        m_veccomposer.setShowIce( q->propertyValue( "ice" ) );
+        m_veccomposer.setShowCoastLines( q->propertyValue( "coastlines" ) );
+        m_veccomposer.setShowRivers( q->propertyValue( "rivers" ) );
+        m_veccomposer.setShowBorders( q->propertyValue( "borders" ) );
 
 	// Set all the colors for the vector layers
-        d->m_veccomposer.setOceanColor( mapTheme->map()->backgroundColor() );
+        m_veccomposer.setOceanColor( m_model->mapTheme()->map()->backgroundColor() );
 
         // Just as with textures, this is a workaround for DGML2 to
         // emulate the old behaviour.
 
-        GeoSceneLayer *layer = mapTheme->map()->layer( "mwdbii" );
+        GeoSceneLayer *layer = m_model->mapTheme()->map()->layer( "mwdbii" );
         if ( layer ) {
             GeoSceneVector *vector = 0;
 
             vector = static_cast<GeoSceneVector*>( layer->dataset("pdiffborder") );
             if ( vector )
-                d->m_veccomposer.setCountryBorderColor( vector->pen().color() );
+                m_veccomposer.setCountryBorderColor( vector->pen().color() );
 
             vector = static_cast<GeoSceneVector*>( layer->dataset("rivers") );
             if ( vector )
-                d->m_veccomposer.setRiverColor( vector->pen().color() );
+                m_veccomposer.setRiverColor( vector->pen().color() );
 
             vector = static_cast<GeoSceneVector*>( layer->dataset("pusa48") );
             if ( vector )
-                d->m_veccomposer.setStateBorderColor( vector->pen().color() );
+                m_veccomposer.setStateBorderColor( vector->pen().color() );
 
             vector = static_cast<GeoSceneVector*>( layer->dataset("plake") );
             if ( vector )
-                d->m_veccomposer.setLakeColor( vector->pen().color() );
+                m_veccomposer.setLakeColor( vector->pen().color() );
 
             vector = static_cast<GeoSceneVector*>( layer->dataset("pcoast") );
             if ( vector )
             {
-                d->m_veccomposer.setLandColor( vector->brush().color() );
-                d->m_veccomposer.setCoastColor( vector->pen().color() );
+                m_veccomposer.setLandColor( vector->brush().color() );
+                m_veccomposer.setCoastColor( vector->pen().color() );
             }
         }
     }
 
-    if ( mapTheme->map()->hasVectorLayers() ) {
-        if ( !mapTheme->map()->hasTextureLayers() ) {
-            d->m_layerManager.addLayer( &d->m_vectorMapBaseLayer );
+    if ( m_model->mapTheme()->map()->hasVectorLayers() ) {
+        if ( !m_model->mapTheme()->map()->hasTextureLayers() ) {
+            m_layerManager.addLayer( &m_vectorMapBaseLayer );
         }
 
-        d->m_layerManager.addLayer( &d->m_vectorMapLayer );
+        m_layerManager.addLayer( &m_vectorMapLayer );
     }
 
     // NOTE due to frequent regressions: 
@@ -850,12 +825,12 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     // at this point.
 
     // Check whether there is a texture layer available:
-    if ( mapTheme->map()->hasTextureLayers() ) {
-        GeoSceneSettings *const settings = mapTheme->settings();
+    if ( m_model->mapTheme()->map()->hasTextureLayers() ) {
+        GeoSceneSettings *const settings = m_model->mapTheme()->settings();
         GeoSceneGroup *const textureLayerSettings = settings ? settings->group( "Texture Layers" ) : 0;
 
-        const GeoSceneHead *const head = mapTheme->head();
-        const GeoSceneMap *const map = mapTheme->map();
+        const GeoSceneHead *const head = m_model->mapTheme()->head();
+        const GeoSceneMap *const map = m_model->mapTheme()->map();
         const GeoSceneLayer *const sceneLayer = ( head && map ) ? map->layer( head->theme() ) : 0;
 
         QVector<const GeoSceneTexture *> textures;
@@ -883,8 +858,8 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
                                              (role == "dem") ? "true" : "false" );
 
                     QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
-                    tileCreatorDlg->setSummary( mapTheme->head()->name(),
-                                                mapTheme->head()->description() );
+                    tileCreatorDlg->setSummary( m_model->mapTheme()->head()->name(),
+                                                m_model->mapTheme()->head()->description() );
                     tileCreatorDlg->exec();
                     if ( TileLoader::baseTilesAvailable( *texture ) ) {
                         qDebug() << "Base tiles for" << sourceDir << "successfully created.";
@@ -898,17 +873,17 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
                 if ( TileLoader::baseTilesAvailable( *texture ) ) {
                     textures.append( texture );
                 } else {
-                    mDebug() << " Skipping layer" << sourceDir;
+                    qWarning() << "Base tiles for" << sourceDir << "not available. Skipping.";
                 }
             }
         }
 
-        d->m_textureLayer.setMapTheme( textures, textureLayerSettings );
+        m_textureLayer.setMapTheme( textures, textureLayerSettings );
 
-        d->m_textureLayer.setupTextureMapper( d->m_viewport.projection() );
+        m_textureLayer.setupTextureMapper( m_viewport.projection() );
 
-        if( !mapTheme->map()->filters().isEmpty() ) {
-            GeoSceneFilter *filter= mapTheme->map()->filters().first();
+        if( !m_model->mapTheme()->map()->filters().isEmpty() ) {
+            GeoSceneFilter *filter= m_model->mapTheme()->map()->filters().first();
 
             if( filter->type() == "colorize" ) {
                  //no need to look up with MarbleDirs twice so they are left null for now
@@ -927,14 +902,14 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
                 if( landfile.isEmpty() )
                     landfile = MarbleDirs::path( "landcolors.leg" );
 
-                d->m_texcolorizer = new TextureColorizer( seafile, landfile, &d->m_veccomposer, this );
-                d->m_texcolorizer->setShowRelief( showRelief() );
+                m_texcolorizer = new TextureColorizer( seafile, landfile, &m_veccomposer, q );
+                m_texcolorizer->setShowRelief( q->showRelief() );
 
-                d->m_textureLayer.setTextureColorizer( d->m_texcolorizer );
+                m_textureLayer.setTextureColorizer( m_texcolorizer );
             }
         }
 
-        d->m_layerManager.addLayer( &d->m_textureLayer );
+        m_layerManager.addLayer( &m_textureLayer );
     }
 
     // NOTE due to frequent regressions: 
@@ -943,30 +918,30 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 
     // earth
     bool value;
-    if ( d->m_mapTheme->settings()->propertyValue( "places", value ) ) {
-        d->m_placemarkLayout.setShowPlaces( value );
+    if ( m_model->mapTheme()->settings()->propertyValue( "places", value ) ) {
+        m_placemarkLayout.setShowPlaces( value );
     }
 
-    d->m_placemarkLayout.setShowCities( showCities() );
-    d->m_placemarkLayout.setShowTerrain( showTerrain() );
-    d->m_placemarkLayout.setShowOtherPlaces( showOtherPlaces() );
-    d->m_placemarkLayout.setShowLandingSites( propertyValue("landingsites") );
-    d->m_placemarkLayout.setShowCraters( propertyValue("craters") );
-    d->m_placemarkLayout.setShowMaria( propertyValue("maria") );
+    m_placemarkLayout.setShowCities( q->showCities() );
+    m_placemarkLayout.setShowTerrain( q->showTerrain() );
+    m_placemarkLayout.setShowOtherPlaces( q->showOtherPlaces() );
+    m_placemarkLayout.setShowLandingSites( q->propertyValue("landingsites") );
+    m_placemarkLayout.setShowCraters( q->propertyValue("craters") );
+    m_placemarkLayout.setShowMaria( q->propertyValue("maria") );
 
-    d->m_placemarkLayout.setDefaultLabelColor( mapTheme->map()->labelColor() );
-    d->m_placemarkLayout.requestStyleReset();
+    m_placemarkLayout.setDefaultLabelColor( m_model->mapTheme()->map()->labelColor() );
+    m_placemarkLayout.requestStyleReset();
 
-    d->m_model->setMapTheme( mapTheme );
+    m_layerManager.syncViewParamsAndPlugins( m_model->mapTheme() );
 
-    d->m_layerManager.syncViewParamsAndPlugins( mapTheme );
+    emit q->themeChanged( m_model->mapTheme()->head()->mapThemeId() );
 }
 
 void MarbleMap::setPropertyValue( const QString& name, bool value )
 {
     mDebug() << "In MarbleMap the property " << name << "was set to " << value;
-    if ( d->m_mapTheme ) {
-        d->m_mapTheme->settings()->setPropertyValue( name, value );
+    if ( d->m_model->mapTheme() ) {
+        d->m_model->mapTheme()->settings()->setPropertyValue( name, value );
     }
     else {
         mDebug() << "WARNING: Failed to access a map theme! Property: " << name;

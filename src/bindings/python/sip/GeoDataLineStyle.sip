@@ -34,6 +34,16 @@ public:
     virtual void            unpack (QDataStream& stream);
     ~GeoDataLineStyle ();
     virtual const char*     nodeType () const;
+    void                    setPhysicalWidth (const float& realWidth);
+    float                   physicalWidth () const;
+    void                    setCapStyle (Qt::PenCapStyle style);
+    Qt::PenCapStyle         capStyle () const;
+    void                    setPenStyle (Qt::PenStyle style);
+    Qt::PenStyle            penStyle () const;
+    void                    setBackground (bool background);
+    bool                    background () const;
+    void                    setDashPattern (const QVector<qreal>& pattern);
+    QVector<qreal>          dashPattern () const;
 };
 // GeoDataLineStyle
 

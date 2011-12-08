@@ -13,6 +13,7 @@
 #include "KmlElementDictionary.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataTimeStamp.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 
@@ -48,7 +49,7 @@ bool KmlPlacemarkTagWriter::write( const GeoNode *node,
     }
 
     if( !placemark->extendedData().isEmpty() ){
-		writeElement( &placemark->extendedData(), writer );
+        writeElement( &placemark->extendedData(), writer );
     }
 
     if( placemark->geometry() ) {
@@ -58,6 +59,9 @@ bool KmlPlacemarkTagWriter::write( const GeoNode *node,
     if( placemark->lookAt() ){
         writeElement( placemark->lookAt(), writer );
     }
+
+    if( placemark->timeStamp().when().isValid() )
+        writeElement( &placemark->timeStamp(), writer );
 
     writer.writeEndElement();
     return true;

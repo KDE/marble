@@ -211,10 +211,19 @@ bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             mapPainter.setViewport( QRect( QPoint( 0, 0 ), viewport->size() ) );
         }
 
-        qreal centerx = 0.0;
-        qreal centery = 0.0;
-        viewport->currentProjection()->screenCoordinates(viewport->focusPoint(), viewport, centerx, centery);
-        painter->drawPixmap( QPoint ( centerx - width / 2, centery - height / 2 ), m_crosshairs );
+        GeoDataCoordinates const focusPoint = viewport->focusPoint();
+        GeoDataCoordinates const centerPoint = GeoDataCoordinates( viewport->centerLongitude(), viewport->centerLatitude() );
+        if ( focusPoint == centerPoint ) {
+            // Focus point is in the middle of the screen. Special casing this avoids jittering.
+            int centerX = viewport->size().width() / 2;
+            int centerY = viewport->size().height() / 2;
+            painter->drawPixmap( QPoint ( centerX - width / 2, centerY - height / 2 ), m_crosshairs );
+        } else {
+            qreal centerX = 0.0;
+            qreal centerY = 0.0;
+            viewport->currentProjection()->screenCoordinates( focusPoint, viewport, centerX, centerY );
+            painter->drawPixmap( QPoint ( centerX - width / 2, centerY - height / 2 ), m_crosshairs );
+        }
     }
 
     return true;

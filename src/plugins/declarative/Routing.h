@@ -51,9 +51,15 @@ public Q_SLOTS:
 
     void removeVia( int index );
 
+    void reverseRoute();
+
     void clearRoute();
 
     void updateRoute();
+
+    void openRoute( const QString &filename );
+
+    void saveRoute( const QString &filename );
 
     QObject* waypointModel();
 

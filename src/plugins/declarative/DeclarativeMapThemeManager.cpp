@@ -35,9 +35,9 @@ QPixmap MapThemeImageProvider::requestPixmap( const QString &id, QSize *size, co
         *size = resultSize;
     }
 
-    QStandardItemModel *model =  m_mapThemeManager.mapThemeModel();
+    QStandardItemModel *model = m_mapThemeManager.mapThemeModel();
     for( int i = 0; i < model->rowCount(); ++i ) {
-        if ( m_mapThemeManager.mapThemes().at( i )->head()->mapThemeId() == id ) {
+        if ( model->data( model->index( i, 0 ), Qt::UserRole + 1 ) == id ) {
             QIcon icon = qVariantValue<QIcon>( model->data( model->index( i, 0 ), Qt::DecorationRole ) );
             QPixmap result = icon.pixmap( resultSize );
             return result;
@@ -56,13 +56,7 @@ MapThemeManager::MapThemeManager( QObject *parent ) : QObject( parent )
 
 QStringList MapThemeManager::mapThemeIds() const
 {
-    QStringList result;
-    QList<GeoSceneDocument const*> mapThemes = m_mapThemeManager.mapThemes();
-    foreach( GeoSceneDocument const * document, mapThemes ) {
-        result << document->head()->mapThemeId();
-    }
-
-    return result;
+    return m_mapThemeManager.mapThemeIds();
 }
 
 QList<QObject*> MapThemeManager::mapThemes()
@@ -71,8 +65,8 @@ QList<QObject*> MapThemeManager::mapThemes()
 
     QStandardItemModel *model =  m_mapThemeManager.mapThemeModel();
     for( int i = 0; i < model->rowCount(); ++i ) {
-        QString name = model->data( model->index( i, 0 ) ).toString();
-        QString id = m_mapThemeManager.mapThemes().at( i )->head()->mapThemeId();
+        QString name = model->data( model->index( i, 0 ), Qt::DisplayRole  ).toString();
+        QString id   = model->data( model->index( i, 0 ), Qt::UserRole + 1 ).toString();
         dataList.append( new MapTheme( id, name ) );
     }
 

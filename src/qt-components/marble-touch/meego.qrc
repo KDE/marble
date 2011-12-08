@@ -5,15 +5,14 @@
         <file>MainWidget.qml</file>
         <file>AboutMarblePage.qml</file>
         <file>ActivitySelectionView.qml</file>
-        <file>FriendsActivityPage.qml</file>
-        <file>GeocachingActivityPage.qml</file>
-        <file>RoutingActivityPage.qml</file>
-        <file>SearchActivityPage.qml</file>
-        <file>SearchField.qml</file>
-        <file>SpaceViewActivityPage.qml</file>
-        <file>TrackingActivityPage.qml</file>
-        <file>VirtualGlobeActivityPage.qml</file>
-        <file>WeatherActivityPage.qml</file>
+        <file>activities/Friends.qml</file>
+        <file>activities/Geocaching.qml</file>
+        <file>activities/Routing.qml</file>
+        <file>activities/Search.qml</file>
+        <file>activities/SpaceView.qml</file>
+        <file>activities/Tracking.qml</file>
+        <file>activities/VirtualGlobe.qml</file>
+        <file>activities/Weather.qml</file>
         <file>icons/activity-bookmarks.png</file>
         <file>icons/activity-configure.png</file>
         <file>icons/activity-default.png</file>

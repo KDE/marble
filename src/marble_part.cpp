@@ -134,10 +134,10 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     MarbleLocale *marbleLocale = MarbleGlobal::getInstance()->locale();
     KLocale *kLocale = KGlobal::locale();
     if ( kLocale->measureSystem() == KLocale::Metric ) {
-        marbleLocale->setMeasureSystem( Metric );
+        marbleLocale->setMeasurementSystem( QLocale::MetricSystem );
     }
     else {
-        marbleLocale->setMeasureSystem( Imperial );
+        marbleLocale->setMeasurementSystem( QLocale::ImperialSystem );
     }
 
     m_externalEditorMapping[0] = "";
@@ -625,7 +625,7 @@ void MarblePart::writeSettings()
 
     MarbleSettings::setLastFileOpenDir( m_lastFileOpenPath.toLocalFile() );
 
-    MarbleSettings::setDistanceUnit( MarbleGlobal::getInstance()->locale()->distanceUnit() );
+    MarbleSettings::setDistanceUnit( MarbleGlobal::getInstance()->locale()->measurementSystem() );
     MarbleSettings::setAngleUnit( m_controlView->marbleWidget()->defaultAngleUnit() );
 
     // Sun
@@ -1448,7 +1448,7 @@ void MarblePart::updateSettings()
     m_controlView->marbleWidget()->
         setDefaultAngleUnit( (AngleUnit) MarbleSettings::angleUnit() );
     MarbleGlobal::getInstance()->locale()->
-        setDistanceUnit( (DistanceUnit) MarbleSettings::distanceUnit() );
+        setMeasurementSystem( (QLocale::MeasurementSystem) MarbleSettings::distanceUnit() );
 
     updateStatusBar();
 
@@ -1518,6 +1518,21 @@ void MarblePart::updateSettings()
         m_controlView->marbleModel()->setClockTimezone( m_timezone.value( MarbleSettings::chosenTimezone() ) );
     }
 
+    // Route rendering colors and alpha values
+    QColor tempColor;
+    tempColor = MarbleSettings::routeColorStandard();
+    tempColor.setAlpha( MarbleSettings::routeAlphaStandard() );
+    m_controlView->marbleModel()->routingManager()->setRouteColorStandard( tempColor );
+
+    tempColor = MarbleSettings::routeColorHighlighted();
+    tempColor.setAlpha( MarbleSettings::routeAlphaHighlighted() );
+    m_controlView->marbleModel()->routingManager()->setRouteColorHighlighted( tempColor );
+
+    tempColor = MarbleSettings::routeColorAlternative();
+    tempColor.setAlpha( MarbleSettings::routeAlphaAlternative() );
+    m_controlView->marbleModel()->routingManager()->setRouteColorAlternative( tempColor );
+
+    // External map editor
     m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
 }
 

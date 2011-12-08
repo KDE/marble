@@ -245,9 +245,9 @@ void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
         m_alternativeRouteRegions.clear();
     }
 
-    QPen grayPen( alphaAdjusted( oxygenAluminumGray4, 200 ) );
-    grayPen.setWidth( 5 );
-    painter->setPen( grayPen );
+    QPen alternativeRoutePen( m_marbleWidget->model()->routingManager()->routeColorAlternative() );
+    alternativeRoutePen.setWidth( 5 );
+    painter->setPen( alternativeRoutePen );
 
     for ( int i=0; i<m_alternativeRoutesModel->rowCount(); ++i ) {
         GeoDataDocument* route = m_alternativeRoutesModel->route( i );
@@ -268,12 +268,12 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 {
     GeoDataLineString waypoints = m_routingModel->route().path();
 
-    QPen bluePen( alphaAdjusted( oxygenSkyBlue4, 200 ) );
-    bluePen.setWidth( 5 );
+    QPen standardRoutePen( m_marbleWidget->model()->routingManager()->routeColorStandard() );
+    standardRoutePen.setWidth( 5 );
     if ( m_routeDirty ) {
-        bluePen.setStyle( Qt::DotLine );
+        standardRoutePen.setStyle( Qt::DotLine );
     }
-    painter->setPen( bluePen );
+    painter->setPen( standardRoutePen );
 
     painter->drawPolyline( waypoints );
     if ( m_viewportChanged && m_viewContext == Still ) {
@@ -282,14 +282,14 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
     }
 
 
-    bluePen.setWidth( 2 );
-    painter->setPen( bluePen );
+    standardRoutePen.setWidth( 2 );
+    painter->setPen( standardRoutePen );
 
     // Map matched position
     //painter->setBrush( QBrush( oxygenBrickRed4) );
     //painter->drawEllipse( m_routingModel->route().positionOnRoute(), 8, 8 );
 
-    painter->setBrush( QBrush( alphaAdjusted( oxygenAluminumGray4, 200 ) ) );
+    painter->setBrush( QBrush( m_marbleWidget->model()->routingManager()->routeColorAlternative() ) );
 
     if ( !m_dropStopOver.isNull() ) {
         int dx = 1 + m_pixmapSize.width() / 2;
@@ -304,16 +304,16 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
                 if ( m_marbleWidget->geoCoordinates( m_dropStopOver.x(), m_dropStopOver.y(),
                                                      lon, lat, GeoDataCoordinates::Radian ) ) {
                     GeoDataCoordinates drag( lon, lat );
-                    bluePen.setStyle( Qt::DotLine );
-                    painter->setPen( bluePen );
+                    standardRoutePen.setStyle( Qt::DotLine );
+                    painter->setPen( standardRoutePen );
                     if ( m_dragStopOverRightIndex > 0 ) {
                         painter->drawLine( drag, m_routeRequest->at( m_dragStopOverRightIndex-1 ) );
                     }
                     if ( m_dragStopOverRightIndex < m_routeRequest->size() ) {
                         painter->drawLine( drag, m_routeRequest->at( m_dragStopOverRightIndex ) );
                     }
-                    bluePen.setStyle( Qt::SolidLine );
-                    painter->setPen( bluePen );
+                    standardRoutePen.setStyle( Qt::SolidLine );
+                    painter->setPen( standardRoutePen );
                 }
             }
         }
@@ -330,23 +330,23 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
         if ( m_routingModel ) {
 
-            painter->setBrush( QBrush( alphaAdjusted( oxygenAluminumGray4, 200 ) ) );
+            painter->setBrush( QBrush( m_marbleWidget->model()->routingManager()->routeColorAlternative() ) );
             if ( m_selectionModel && m_selectionModel->selection().contains( index ) ) {
                 for ( int j=0; j<m_routingModel->route().size(); ++j ) {
                     const RouteSegment & segment = m_routingModel->route().at( j );
                     if ( segment.maneuver().position() == pos ) {
                         GeoDataLineString currentRoutePoints = segment.path();
 
-                        QPen brightBluePen( alphaAdjusted( oxygenSeaBlue2, 200 ) );
+                        QPen activeRouteSegmentPen( m_marbleWidget->model()->routingManager()->routeColorHighlighted() );
 
-                        brightBluePen.setWidth( 6 );
+                        activeRouteSegmentPen.setWidth( 6 );
                         if ( m_routeDirty ) {
-                            brightBluePen.setStyle( Qt::DotLine );
+                            activeRouteSegmentPen.setStyle( Qt::DotLine );
                         }
-                        painter->setPen( brightBluePen );
+                        painter->setPen( activeRouteSegmentPen );
                         painter->drawPolyline( currentRoutePoints );
 
-                        painter->setPen( bluePen );
+                        painter->setPen( standardRoutePen );
                         painter->setBrush( QBrush( alphaAdjusted( oxygenHotOrange4, 200 ) ) );
                     }
                 }

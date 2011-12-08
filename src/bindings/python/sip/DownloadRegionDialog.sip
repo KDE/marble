@@ -52,5 +52,6 @@ public:
 //force
                             DownloadRegionDialog (Marble::MarbleWidget* widget, QWidget* parent = 0, const Qt::WindowFlags f = 0);
 //end
+//ig    explicit                DownloadRegionDialog (MarbleWidget*const widget, QWidget*const parent = 0, const Qt::WindowFlags f = 0);
 };
 };

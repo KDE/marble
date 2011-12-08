@@ -49,7 +49,7 @@
 <code>from PyKDE4.marble import *</code>
 <p>
 
-
+Subclasses: <a href="../marble/Marble.GeoDataPoint.html">Marble.GeoDataPoint</a><br />
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
@@ -81,6 +81,7 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#latitude">latitude</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> unit=Marble.GeoDataCoordinates.Radian)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#lonToString">lonToString</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#longitude">longitude</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> unit=Marble.GeoDataCoordinates.Radian)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator !=">operator !=</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator ==">operator ==</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pack">pack</a> (self, QDataStream stream)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.Quaternion.html">Marble.Quaternion</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#quaternion">quaternion</a> (self)</td></tr>
@@ -189,7 +190,7 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 
 <tr><td></td><td valign="top"><em>_lat</em>&nbsp;</td><td> latitude
 
-<tr><td></td><td valign="top"><em>alt</em>&nbsp;</td><td> altitude (default: 0)
+<tr><td></td><td valign="top"><em>alt</em>&nbsp;</td><td> altitude in meters (default: 0)
 
 <tr><td></td><td valign="top"><em>_unit</em>&nbsp;</td><td> units that lon and lat get measured in
 (default for Radian: north pole at pi/2, southpole at -pi/2)
@@ -210,7 +211,7 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>return the altitude of the Point
+<div class="memdoc"><p>return the altitude of the Point in meters
 </p></div></div><a class="anchor" name="detach"></a>
 <div class="memitem">
 <div class="memproto">
@@ -270,13 +271,15 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>use this function to get the longitude and latitude with one
-call - use the unit parameter to switch between Radian and DMS
+<div class="memdoc"><p>use this function to get the longitude, latitude and altitude
+with one call - use the unit parameter to switch between Radian and DMS
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>lon</em>&nbsp;</td><td> longitude
 
 <tr><td></td><td valign="top"><em>lat</em>&nbsp;</td><td> latitude
+
+<tr><td></td><td valign="top"><em>alt</em>&nbsp;</td><td> altitude in meters
 
 <tr><td></td><td valign="top"><em>unit</em>&nbsp;</td><td> units that lon and lat get measured in
 (default for Radian: north pole at pi/2, southpole at -pi/2)
@@ -406,7 +409,29 @@ use the unit parameter to switch between Radian and DMS
 </td></tr> </table></dl>
 <p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> longitude
 </dd></dl>
-</p></div></div><a class="anchor" name="operator =="></a>
+</p></div></div><a class="anchor" name="operator !="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator !=</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="operator =="></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -511,7 +536,7 @@ use the unit parameter to switch between Radian and DMS
 
 <tr><td></td><td valign="top"><em>_lat</em>&nbsp;</td><td> latitude
 
-<tr><td></td><td valign="top"><em>alt</em>&nbsp;</td><td> altitude (default: 0)
+<tr><td></td><td valign="top"><em>alt</em>&nbsp;</td><td> altitude in meters (default: 0)
 
 <tr><td></td><td valign="top"><em>_unit</em>&nbsp;</td><td> units that lon and lat get measured in
 (default for Radian: north pole at pi/2, southpole at -pi/2)
@@ -540,7 +565,7 @@ use the unit parameter to switch between Radian and DMS
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>set the altitude of the Point
+<div class="memdoc"><p>set the altitude of the Point in meters
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>altitude</em>&nbsp;</td><td> altitude

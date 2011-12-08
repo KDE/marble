@@ -13,6 +13,7 @@
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "MarbleDirs.h"
+#include "routing/AlternativeRoutesModel.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
 #include "routing/RouteRequest.h"
@@ -126,7 +127,7 @@ void Routing::setVia( int index, qreal lon, qreal lat )
     RouteRequest* request = d->m_marbleWidget->model()->routingManager()->routeRequest();
     Q_ASSERT( request );
     if ( index < request->size() ) {
-        request->append( GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree ) );
+        request->setPosition( index, GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree ) );
     } else {
         for ( int i=request->size(); i<index; ++i ) {
             request->append( GeoDataCoordinates( 0.0, 0.0 ) );
@@ -149,6 +150,13 @@ void Routing::removeVia( int index )
     }
 }
 
+void Routing::reverseRoute()
+{
+    if ( d->m_marbleWidget ) {
+        d->m_marbleWidget->model()->routingManager()->reverseRoute();
+    }
+}
+
 void Routing::clearRoute()
 {
     if ( d->m_marbleWidget ) {
@@ -160,6 +168,33 @@ void Routing::updateRoute()
 {
     if ( d->m_marbleWidget ) {
         d->m_marbleWidget->model()->routingManager()->updateRoute();
+    }
+}
+
+void Routing::openRoute( const QString &fileName )
+{
+    if ( d->m_marbleWidget ) {
+        RoutingManager * const routingManager = d->m_marbleWidget->model()->routingManager();
+        /** @todo FIXME: replace the file:// prefix on QML side */
+        routingManager->clearRoute();
+        QString target = fileName.startsWith( "file://" ) ? fileName.mid( 7 ) : fileName;
+        routingManager->loadRoute( target );
+        GeoDataDocument* route = routingManager->alternativeRoutesModel()->currentRoute();
+        if ( route ) {
+            GeoDataLineString* waypoints = routingManager->alternativeRoutesModel()->waypoints( route );
+            if ( waypoints ) {
+                d->m_marbleWidget->centerOn( waypoints->latLonAltBox() );
+            }
+        }
+    }
+}
+
+void Routing::saveRoute( const QString &fileName )
+{
+    if ( d->m_marbleWidget ) {
+        /** @todo FIXME: replace the file:// prefix on QML side */
+        QString target = fileName.startsWith( "file://" ) ? fileName.mid( 7 ) : fileName;
+        d->m_marbleWidget->model()->routingManager()->saveRoute( target );
     }
 }
 

@@ -25,6 +25,7 @@
 #include <QtGui/QTextFrame>
 
 // Marble
+#include "global.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"

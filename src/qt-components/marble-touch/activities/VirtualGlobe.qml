@@ -13,10 +13,10 @@ import org.kde.edu.marble 0.11
 import org.kde.edu.marble.qtcomponents 0.12
 
 /*
- * Page for the weather activity.
+ * Page for the virtual globe activity.
  */
 Page {
-    id: weatherActivityPage
+    id: virtualGlobeActivityPage
     anchors.fill: parent
 
     tools: ToolBarLayout {
@@ -24,10 +24,11 @@ Page {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
-        ToolIconCheckable {
+        ToolButton {
             id: searchButton
-            checked: true
-            iconId: "toolbar-search";
+            checkable: true
+            width: 60
+            iconSource: "image://theme/icon-m-toolbar-search";
         }
         ToolIcon {
             iconId: "toolbar-view-menu"
@@ -44,11 +45,6 @@ Page {
                     pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
                 }
             }
-            MenuItemSwitch {
-                text: "Online"
-                checked: !settings.workOffline
-                onClicked: settings.workOffline = !settings.workOffline
-            }
         }
     }
 
@@ -60,32 +56,48 @@ Page {
             id: searchField
             width: parent.width
             visible: searchButton.checked
-            onSearch: marbleWidget.find( term )
+            onSearch: {
+                searchField.busy = true
+                marbleWidget.find( term )
+            }
+
+            Component.onCompleted: {
+                marbleWidget.getSearch().searchFinished.connect( searchFinished )
+            }
+
+            function searchFinished() {
+                searchField.busy = false
+            }
         }
 
         Item {
             id: mapContainer
             width: parent.width
             height: parent.height - searchField.height
-            clip: true
 
-            Component.onCompleted: {
+            function embedMarbleWidget() {
                 marbleWidget.parent = mapContainer
                 settings.projection = "Spherical"
-                var plugins = settings.defaultRenderPlugins
-                plugins.push( "weather" )
-                settings.activeRenderPlugins =  plugins
-                settings.mapTheme = "earth/plain/plain.dgml"
-                settings.gpsTracking = true
-                settings.showPosition = true
+                settings.activeRenderPlugins = settings.defaultRenderPlugins
+                settings.mapTheme = "earth/srtm/srtm.dgml"
+                settings.gpsTracking = false
+                settings.showPosition = false
                 settings.showTrack = false
                 marbleWidget.visible = true
             }
 
             Component.onDestruction: {
-                marbleWidget.parent = null
-                marbleWidget.visible = false
+                if ( marbleWidget.parent === mapContainer ) {
+                    marbleWidget.parent = null
+                    marbleWidget.visible = false
+                }
             }
+        }
+    }
+
+    onStatusChanged: {
+        if ( status === PageStatus.Activating ) {
+            mapContainer.embedMarbleWidget()
         }
     }
 }

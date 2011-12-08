@@ -64,6 +64,8 @@ private Q_SLOTS:
 
     void updatePlacemarks();
 
+    void handleSearchResult();
+
 private:
     Marble::MarbleWidget* m_marbleWidget;
 

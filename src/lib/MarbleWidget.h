@@ -276,7 +276,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Return the projected region which describes the (shape of the) projected surface.
      */
-    QRegion mapRegion();
+    QRegion mapRegion() const;
 
     /**
      * @brief  Return the radius of the globe in pixels.
@@ -337,7 +337,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *         @c false if the geographical coordinates are not visible on the screen
      */
     bool screenCoordinates( qreal lon, qreal lat,
-                            qreal& x, qreal& y );
+                            qreal& x, qreal& y ) const;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the widget.
@@ -350,7 +350,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     bool geoCoordinates( int x, int y,
                          qreal& lon, qreal& lat,
-                         GeoDataCoordinates::Unit = GeoDataCoordinates::Degree );
+                         GeoDataCoordinates::Unit = GeoDataCoordinates::Degree ) const;
 
     /**
      * @brief Return the longitude of the center point.
@@ -368,7 +368,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Return how much the map will move if one of the move slots are called.
      * @return The move step.
      */
-    qreal moveStep();
+    qreal moveStep() const;
 
     /**
     * @brief Return the lookAt
@@ -532,7 +532,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Retrieve the map quality depending on the view context
      */
-    MapQuality mapQuality( ViewContext = Still );
+    MapQuality mapQuality( ViewContext = Still ) const;
 
     /**
      * @brief Retrieve whether travels to a point should get animated
@@ -1019,6 +1019,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @deprecated implement LayerInterface and add it using @p addLayer()
      */
     virtual void customPaint( GeoPainter *painter );
+
+ private:
+    Q_PRIVATE_SLOT( d, void updateMapTheme() )
 
  private:
     Q_DISABLE_COPY( MarbleWidget )
