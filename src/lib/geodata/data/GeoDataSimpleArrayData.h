@@ -27,6 +27,7 @@ class GEODATA_EXPORT GeoDataSimpleArrayData : public GeoDataGeometry
 public:
     GeoDataSimpleArrayData();
     GeoDataSimpleArrayData( const GeoDataGeometry &other );
+    ~GeoDataSimpleArrayData();
 
     /**
      * Returns the number of value in the array

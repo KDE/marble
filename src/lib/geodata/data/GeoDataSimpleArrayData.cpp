@@ -42,6 +42,11 @@ GeoDataSimpleArrayData::GeoDataSimpleArrayData( const GeoDataGeometry &other )
 {
 }
 
+GeoDataSimpleArrayData::~GeoDataSimpleArrayData()
+{
+    delete d;
+}
+
 int GeoDataSimpleArrayData::size() const
 {
     return d->m_values.size();
