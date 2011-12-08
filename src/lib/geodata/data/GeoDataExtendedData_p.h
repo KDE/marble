@@ -32,7 +32,7 @@ class GeoDataExtendedDataPrivate
     }
 
     QHash< QString, GeoDataData > hash;
-    QHash< QString, GeoDataSimpleArrayData > arrayHash;
+    QHash< QString, GeoDataSimpleArrayData* > arrayHash;
 
 };
 

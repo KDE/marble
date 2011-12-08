@@ -258,22 +258,22 @@ void TestGeoDataTrack::extendedDataParseTest()
     QCOMPARE( track->size(), 7 );
 
     {
-        GeoDataSimpleArrayData cadence = track->extendedData().simpleArrayData( "cadence" );
-        QCOMPARE( cadence.size(), 7 );
-        QCOMPARE( cadence.valueAt( 0 ), QVariant( "86" ) );
-        QCOMPARE( cadence.valueAt( 6 ), QVariant( "113" ) );
+        GeoDataSimpleArrayData *cadence = track->extendedData().simpleArrayData( "cadence" );
+        QCOMPARE( cadence->size(), 7 );
+        QCOMPARE( cadence->valueAt( 0 ), QVariant( "86" ) );
+        QCOMPARE( cadence->valueAt( 6 ), QVariant( "113" ) );
     }
     {
-        GeoDataSimpleArrayData hr = track->extendedData().simpleArrayData( "heartrate" );
-        QCOMPARE( hr.size(), 7 );
-        QCOMPARE( hr.valueAt( 0 ), QVariant( "181" ) );
-        QCOMPARE( hr.valueAt( 6 ), QVariant( "173" ) );
+        GeoDataSimpleArrayData *hr = track->extendedData().simpleArrayData( "heartrate" );
+        QCOMPARE( hr->size(), 7 );
+        QCOMPARE( hr->valueAt( 0 ), QVariant( "181" ) );
+        QCOMPARE( hr->valueAt( 6 ), QVariant( "173" ) );
     }
     {
-        GeoDataSimpleArrayData power = track->extendedData().simpleArrayData( "power" );
-        QCOMPARE( power.size(), 7 );
-        QCOMPARE( power.valueAt( 0 ), QVariant( "327.0" ) );
-        QCOMPARE( power.valueAt( 6 ), QVariant( "183.0" ) );
+        GeoDataSimpleArrayData *power = track->extendedData().simpleArrayData( "power" );
+        QCOMPARE( power->size(), 7 );
+        QCOMPARE( power->valueAt( 0 ), QVariant( "327.0" ) );
+        QCOMPARE( power->valueAt( 6 ), QVariant( "183.0" ) );
     }
 
     delete dataDocument;

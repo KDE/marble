@@ -92,12 +92,12 @@ class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
     /**
      * @brief set SimpleArrayData for given @p key
      */
-    void setSimpleArrayData( const QString& key, const GeoDataSimpleArrayData& values );
+    void setSimpleArrayData( const QString& key, GeoDataSimpleArrayData* values );
 
     /**
      * @brief return SimpleArrayData for given @p key as a modifiable reference
      */
-    GeoDataSimpleArrayData& simpleArrayData( const QString& key );
+    GeoDataSimpleArrayData* simpleArrayData( const QString& key ) const;
 
 
     /**

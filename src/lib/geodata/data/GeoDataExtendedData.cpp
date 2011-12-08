@@ -85,13 +85,14 @@ bool GeoDataExtendedData::contains( const QString &key ) const
     return d->hash.contains( key );
 }
 
-void GeoDataExtendedData::setSimpleArrayData( const QString& key, const GeoDataSimpleArrayData& values )
+void GeoDataExtendedData::setSimpleArrayData( const QString& key, GeoDataSimpleArrayData *values )
 {
     d->arrayHash[ key ] = values;
 }
 
-GeoDataSimpleArrayData& GeoDataExtendedData::simpleArrayData( const QString& key )
+GeoDataSimpleArrayData* GeoDataExtendedData::simpleArrayData( const QString& key ) const
 {
+    if ( !d->arrayHash.contains( key ) ) return 0;
     return d->arrayHash[ key ];
 }
 
