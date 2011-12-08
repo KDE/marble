@@ -39,11 +39,6 @@ public:
             //fill coordinates without time information with null QDateTime
             m_when.append( QDateTime() );
         }
-        while ( m_when.size() > m_coordinates.size() ) {
-            //discard time finromation without coordinates
-            Q_ASSERT( false ); //this should not happen
-            m_when.removeLast();
-        }
     }
 
     GeoDataLineString *m_lineString;
