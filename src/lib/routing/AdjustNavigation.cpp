@@ -29,7 +29,7 @@
 
 namespace Marble {
 
-class AdjustNavigationPrivate
+class AdjustNavigation::Private
 {
 public:
 
@@ -41,7 +41,7 @@ public:
     bool                 m_selfInteraction;
 
     /** Constructor */
-    AdjustNavigationPrivate( MarbleWidget *widget );
+    Private( MarbleWidget *widget );
 
     /**
      * @brief To center on when reaching custom defined border
@@ -69,7 +69,7 @@ public:
      void centerOn( const GeoDataCoordinates &position );
 };
 
-AdjustNavigationPrivate::AdjustNavigationPrivate( MarbleWidget *widget ) :
+AdjustNavigation::Private::Private( MarbleWidget *widget ) :
         m_widget( widget ),
         m_tracking( widget->model()->positionTracking() ),
         m_recenterMode( AdjustNavigation::DontRecenter ),
@@ -80,7 +80,7 @@ AdjustNavigationPrivate::AdjustNavigationPrivate( MarbleWidget *widget ) :
     m_lastWidgetInteraction.setSingleShot( true );
 }
 
-void AdjustNavigationPrivate::moveOnBorderToCenter( const GeoDataCoordinates &position, qreal )
+void AdjustNavigation::Private::moveOnBorderToCenter( const GeoDataCoordinates &position, qreal )
 {
     qreal lon = 0.0;
     qreal lat = 0.0;
@@ -114,7 +114,7 @@ void AdjustNavigationPrivate::moveOnBorderToCenter( const GeoDataCoordinates &po
     }
 }
 
-GeoDataCoordinates AdjustNavigationPrivate::findIntersection( qreal currentX, qreal currentY ) const
+GeoDataCoordinates AdjustNavigation::Private::findIntersection( qreal currentX, qreal currentY ) const
 {
     qreal direction = m_tracking->direction();
     if ( direction >= 360 ) {
@@ -264,7 +264,7 @@ GeoDataCoordinates AdjustNavigationPrivate::findIntersection( qreal currentX, qr
     return destinationCoord;
 }
 
-void AdjustNavigationPrivate::adjustZoom( const GeoDataCoordinates &currentPosition, qreal speed )
+void AdjustNavigation::Private::adjustZoom( const GeoDataCoordinates &currentPosition, qreal speed )
 {
     const qreal lon = currentPosition.longitude( GeoDataCoordinates::Degree );
     const qreal lat = currentPosition.latitude( GeoDataCoordinates::Degree );
@@ -304,7 +304,7 @@ void AdjustNavigationPrivate::adjustZoom( const GeoDataCoordinates &currentPosit
     }
 }
 
-void AdjustNavigationPrivate::centerOn( const GeoDataCoordinates &position )
+void AdjustNavigation::Private::centerOn( const GeoDataCoordinates &position )
 {
     m_selfInteraction = true;
     m_widget->centerOn( position, false );
@@ -312,7 +312,7 @@ void AdjustNavigationPrivate::centerOn( const GeoDataCoordinates &position )
 }
 
 AdjustNavigation::AdjustNavigation( MarbleWidget *widget, QObject *parent )
-    :QObject( parent ), d( new AdjustNavigationPrivate( widget ) )
+    :QObject( parent ), d( new AdjustNavigation::Private( widget ) )
 {
     connect( widget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
              this, SLOT( inhibitAutoAdjustments() ) );

@@ -23,7 +23,6 @@ namespace Marble
 class GeoDataCoordinates;
 class MarbleWidget;
 class PositionTracking;
-class AdjustNavigationPrivate;
 
 class MARBLE_EXPORT AdjustNavigation : public QObject
 {
@@ -97,7 +96,8 @@ Q_SIGNALS:
      void inhibitAutoAdjustments();
 
 private:
-    AdjustNavigationPrivate * const d;
+    class Private;
+    Private * const d;
 };
 } //namespace marble
 
