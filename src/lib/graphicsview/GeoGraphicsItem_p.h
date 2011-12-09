@@ -16,6 +16,7 @@
 #include "MarbleGraphicsItem_p.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataStyle.h"
+#include "ViewportParams.h"
 
 namespace Marble
 {
@@ -43,8 +44,7 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         return m_positions;
     }
 
-    void setProjection( const AbstractProjection *projection,
-                        ViewportParams *viewport,
+    void setProjection( ViewportParams *viewport,
                         GeoPainter *painter )
     {
         m_positions.clear();
@@ -56,6 +56,7 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         qreal x[100], y;
         int pointRepeatNumber;
         bool globeHidesPoint;
+        const AbstractProjection *projection = viewport->currentProjection();
 
         if( projection->screenCoordinates( m_coordinate,
                                            viewport,
