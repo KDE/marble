@@ -1341,6 +1341,21 @@ GeoDataLookAt MarbleWidget::lookAt() const
     return result;
 }
 
+GeoDataCoordinates MarbleWidget::focusPoint() const
+{
+    return d->m_map.viewport()->focusPoint();
+}
+
+void MarbleWidget::setFocusPoint( const GeoDataCoordinates &focusPoint )
+{
+    d->m_map.viewport()->setFocusPoint( focusPoint );
+}
+
+void MarbleWidget::resetFocusPoint()
+{
+    d->m_map.viewport()->resetFocusPoint();
+}
+
 qreal MarbleWidget::radiusFromDistance( qreal distance ) const
 {
     return  model()->planet()->radius() /

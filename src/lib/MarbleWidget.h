@@ -376,6 +376,27 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     GeoDataLookAt lookAt() const;
 
     /**
+     * @return The current point of focus, e.g. the point that is not moved
+     * when changing the zoom level. If not set, it defaults to the
+     * center point.
+     * @see centerLongitude centerLatitude setFocusPoint resetFocusPoint
+     */
+    GeoDataCoordinates focusPoint() const;
+
+    /**
+     * @brief Change the point of focus, overridding any previously set focus point.
+     * @param focusPoint New focus point
+     * @see focusPoint resetFocusPoint
+     */
+    void setFocusPoint( const GeoDataCoordinates &focusPoint );
+
+    /**
+     * @brief Invalidate any focus point set with @ref setFocusPoint.
+     * @see focusPoint setFocusPoint
+     */
+    void resetFocusPoint();
+
+    /**
       * @brief Return the globe radius (pixel) for the given distance (km)
       */
     qreal radiusFromDistance( qreal distance ) const;

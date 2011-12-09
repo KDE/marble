@@ -275,7 +275,7 @@ void MarbleWidgetDefaultInputHandler::Private::ZoomAt(MarbleWidget* marbleWidget
     lookAt.setAltitude( 0.0 );
     lookAt.setRange( newDistance * KM2METER );
 
-    marbleWidget->viewport()->setFocusPoint( GeoDataCoordinates( destLon, destLat ) );
+    marbleWidget->setFocusPoint( GeoDataCoordinates( destLon, destLat ) );
     marbleWidget->flyTo( lookAt, Linear );
 }
 
@@ -373,7 +373,7 @@ void MarbleWidgetInputHandler::restoreViewContext()
 
     // Redraw the map with the quality set for Still (if necessary).
     d->m_widget->setViewContext( Still );
-    d->m_widget->viewport()->resetFocusPoint();
+    d->m_widget->resetFocusPoint();
     d->m_wheelZoomTargetDistance = 0.0;
 }
 
@@ -774,7 +774,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                              destLon, destLat, GeoDataCoordinates::Radian );
 
                 if (isValid) {
-                    marbleWidget->viewport()->setFocusPoint(GeoDataCoordinates(destLon, destLat));
+                    marbleWidget->setFocusPoint(GeoDataCoordinates(destLon, destLat));
                 }
 
                 switch ( pinch->state() ) {
@@ -788,12 +788,12 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                     marbleWidget->setRadius( marbleWidget->radius() * scaleFactor );
                     break;
                 case Qt::GestureFinished:
-                    marbleWidget->viewport()->resetFocusPoint();
+                    marbleWidget->resetFocusPoint();
                     marbleWidget->setViewContext( Still );
                     break;
                 case Qt::GestureCanceled:
                     marbleWidget->setRadius( d->m_startingRadius );
-                    marbleWidget->viewport()->resetFocusPoint();
+                    marbleWidget->resetFocusPoint();
                     marbleWidget->setViewContext( Still );
                     break;
                 }
