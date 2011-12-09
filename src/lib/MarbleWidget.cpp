@@ -27,7 +27,6 @@
 #include <QtDBus/QDBusConnection>
 #endif
 
-#include "AbstractProjection.h"
 #include "DataMigration.h"
 #include "FpsLayer.h"
 #include "FileManager.h"
@@ -774,7 +773,7 @@ qreal MarbleWidget::centerLongitude() const
 
 QRegion MarbleWidget::mapRegion() const
 {
-    return viewport()->currentProjection()->mapRegion( viewport() );
+    return viewport()->mapRegion();
 }
 
 void MarbleWidget::paintEvent( QPaintEvent *evt )
@@ -1161,8 +1160,7 @@ void MarbleWidget::setSelection( const QRect& region )
     mDebug() << "Selection region: (" << tl.x() << ", " <<  tl.y() << ") (" 
              << br.x() << ", " << br.y() << ")" << endl;
 
-    const AbstractProjection *proj = viewport()->currentProjection();
-    GeoDataLatLonAltBox box  = proj->latLonAltBox( region, viewport() );
+    GeoDataLatLonAltBox box  = viewport()->latLonAltBox( region );
 
     // NOTE: coordinates as lon1, lat1, lon2, lat2 (or West, North, East, South)
     // as left/top, right/bottom rectangle.

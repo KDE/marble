@@ -219,7 +219,7 @@ class MARBLE_EXPORT AbstractProjection
                                     int& x, int& y ) const;
 
     /* DEPRECATED */
-    bool screenCoordinates( const GeoDataCoordinates &geopoint, 
+    bool screenCoordinates( const GeoDataCoordinates &geopoint,
                                     const ViewportParams *viewport,
                                     int &x, int &y, bool &globeHidesPoint ) const;
 

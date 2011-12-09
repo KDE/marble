@@ -26,7 +26,6 @@
 #include "MarbleMap.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
-#include "AbstractProjection.h"
 
 namespace Marble
 {
@@ -157,7 +156,7 @@ QPoint MarbleWidget::pixel( qreal lon, qreal lat ) const
     qreal x( 0.0 );
     qreal y( 0.0 );
     ViewportParams *viewport = m_marbleWidget->viewport();
-    viewport->currentProjection()->screenCoordinates( position, viewport, x, y );
+    viewport->screenCoordinates( position, x, y );
     return QPoint( x, y );
 }
 

@@ -12,7 +12,6 @@
 #include "CrosshairsPlugin.h"
 #include "ui_CrosshairsConfigWidget.h"
 
-#include "AbstractProjection.h"
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
@@ -221,7 +220,7 @@ bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         } else {
             qreal centerX = 0.0;
             qreal centerY = 0.0;
-            viewport->currentProjection()->screenCoordinates( focusPoint, viewport, centerX, centerY );
+            viewport->screenCoordinates( focusPoint, centerX, centerY );
             painter->drawPixmap( QPoint ( centerX - width / 2, centerY - height / 2 ), m_crosshairs );
         }
     }

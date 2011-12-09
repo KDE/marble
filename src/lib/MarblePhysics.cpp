@@ -15,7 +15,6 @@
 #include "MarbleDebug.h"
 #include "GeoDataLineString.h"
 #include "ViewportParams.h"
-#include "AbstractProjection.h"
 
 #include <QtCore/QTimeLine>
 
@@ -131,9 +130,7 @@ void MarblePhysics::flyTo( const GeoDataLookAt &target, FlyToMode mode )
     FlyToMode effectiveMode = mode;
     qreal x(0), y(0);
     bool globeHidesPoint(false);
-    bool onScreen = viewport->currentProjection()->screenCoordinates( target.coordinates(),
-                                                                      viewport,
-                                                                      x, y,
+    bool onScreen = viewport->screenCoordinates( target.coordinates(), x, y,
                                                                       globeHidesPoint );
     bool invisible = globeHidesPoint || !onScreen;
 

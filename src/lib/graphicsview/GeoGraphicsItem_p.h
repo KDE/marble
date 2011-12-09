@@ -56,14 +56,12 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         qreal x[100], y;
         int pointRepeatNumber;
         bool globeHidesPoint;
-        const AbstractProjection *projection = viewport->currentProjection();
 
-        if( projection->screenCoordinates( m_coordinate,
-                                           viewport,
-                                           x, y,
-                                           pointRepeatNumber,
-                                           m_size,
-                                           globeHidesPoint ) )
+        if( viewport->screenCoordinates( m_coordinate,
+                                         x, y,
+                                         pointRepeatNumber,
+                                         m_size,
+                                         globeHidesPoint ) )
         {
             for( int i = 0; i < pointRepeatNumber; ++i ) {
                 qint32 leftX = x[i] - ( m_size.width() / 2 );

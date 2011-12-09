@@ -43,7 +43,6 @@
 #include "layers/VectorMapBaseLayer.h"
 #include "layers/VectorMapLayer.h"
 #include "AbstractFloatItem.h"
-#include "AbstractProjection.h"
 #include "GeoDataTreeModel.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
@@ -696,17 +695,14 @@ void MarbleMap::setProjection( Projection projection )
 bool MarbleMap::screenCoordinates( qreal lon, qreal lat,
                                    qreal& x, qreal& y ) const
 {
-    return d->m_viewport.currentProjection()
-        ->screenCoordinates( lon * DEG2RAD, lat * DEG2RAD,
-                             &d->m_viewport, x, y );
+    return d->m_viewport.screenCoordinates( lon * DEG2RAD, lat * DEG2RAD, x, y );
 }
 
 bool MarbleMap::geoCoordinates( int x, int y,
                                 qreal& lon, qreal& lat,
                                 GeoDataCoordinates::Unit unit ) const
 {
-    return d->m_viewport.currentProjection()
-        ->geoCoordinates( x, y, &d->m_viewport, lon, lat, unit );
+    return d->m_viewport.geoCoordinates( x, y, lon, lat, unit );
 }
 
 // Used to be paintEvent()

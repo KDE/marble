@@ -24,7 +24,6 @@
 #include <cmath>
 
 #include "ui_PositionMarkerConfigWidget.h"
-#include "AbstractProjection.h"
 #include "MarbleModel.h"
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
@@ -188,12 +187,8 @@ void PositionMarker::update( const ViewportParams *viewport )
         QPointF position;
         QPointF previousPosition;
 
-        viewport->currentProjection()->screenCoordinates( m_currentPosition,
-                                                          viewport,
-                                                          position );
-        viewport->currentProjection()->screenCoordinates( m_previousPosition,
-                                                          viewport,
-                                                          previousPosition );
+        viewport->screenCoordinates( m_currentPosition, position );
+        viewport->screenCoordinates( m_previousPosition, previousPosition );
 
         // calculate the arrow shape, oriented by the heading
         // and with constant size
@@ -269,7 +264,7 @@ bool PositionMarker::render( GeoPainter *painter,
             // we don't draw m_trail[0] which is current position
             for( int i = 1; i < m_trail.size(); ++i ) {
                 // Get screen coordinates from coordinates on the map.
-                viewport->currentProjection()->screenCoordinates( m_trail[i], viewport, trailPoint );
+                viewport->screenCoordinates( m_trail[i], trailPoint );
                 int size = ( sm_numTrailPoints - i ) * 3;
                 trailRect.setX( trailPoint.x() - size / 2.0 );
                 trailRect.setY( trailPoint.y() - size / 2.0 );

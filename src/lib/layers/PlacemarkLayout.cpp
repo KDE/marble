@@ -33,7 +33,6 @@
 #include "ViewportParams.h"
 #include "TileId.h"
 #include "TileCoordsPyramid.h"
-#include "AbstractProjection.h"
 #include "VisiblePlacemark.h"
 #include "MathHelper.h"
 
@@ -506,7 +505,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         }
 
         if ( !latLonAltBox.contains( coordinates ) ||
-             ! viewport->currentProjection()->screenCoordinates( coordinates, viewport, x, y ))
+             ! viewport->screenCoordinates( coordinates, x, y ))
             {
                 delete m_visiblePlacemarks.take( placemark );
                 continue;
@@ -593,7 +592,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         }
 
         if ( !latLonAltBox.contains( coordinates ) ||
-             ! viewport->currentProjection()->screenCoordinates( coordinates, viewport, x, y ))
+             ! viewport->screenCoordinates( coordinates, x, y ))
             {
                 delete m_visiblePlacemarks.take( placemark );
                 continue;
