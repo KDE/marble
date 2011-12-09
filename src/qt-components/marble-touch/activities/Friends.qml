@@ -42,12 +42,6 @@ Page {
     Menu {
         id: pageMenu
         content: MenuLayout {
-            MenuItem {
-                text: "Map Theme"
-                onClicked: {
-                    pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
-                }
-            }
             MenuItemSwitch {
                 text: "Online"
                 checked: !settings.workOffline
@@ -69,7 +63,7 @@ Page {
             plugins.push( "opendesktop" )
 
             settings.activeRenderPlugins =  plugins
-            settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
+            settings.mapTheme = settings.streetMapTheme
             settings.gpsTracking = true
             settings.showPosition = true
             settings.showTrack = false

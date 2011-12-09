@@ -50,12 +50,6 @@ Page {
         id: pageMenu
         content: MenuLayout {
             MenuItem {
-                text: "Map Theme"
-                onClicked: {
-                    pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
-                }
-            }
-            MenuItem {
                 text: "Save Track"
                 onClicked: {
                     saveTrackDialog.filename = Qt.formatDateTime(new Date(), "yyyy-MM-dd_hh.mm.ss") + ".kml"
@@ -123,7 +117,7 @@ Page {
                 settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
                 plugins.push( "speedometer" )
                 settings.activeRenderPlugins =  plugins
-                settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
+                settings.mapTheme = settings.streetMapTheme
                 settings.gpsTracking = true
                 settings.showPosition = true
                 settings.showTrack = true
@@ -165,7 +159,7 @@ Page {
     onStatusChanged: {
         if ( status === PageStatus.Activating ) {
             mapContainer.embedMarbleWidget()
-            saver.screenSaverDelayed = true
+            saver.screenSaverDelayed = settings.inhibitScreensaver
         } else if ( status === PageStatus.Deactivating ) {
             saver.screenSaverDelayed = false
         }

@@ -49,12 +49,6 @@ Page {
     Menu {
         id: pageMenu
         content: MenuLayout {
-            MenuItem {
-                text: "Map Theme"
-                onClicked: {
-                    pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
-                }
-            }
             MenuItemSwitch {
                 text: "Online"
                 checked: !settings.workOffline

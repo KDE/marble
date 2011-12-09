@@ -30,22 +30,6 @@ Page {
             width: 60
             iconSource: "image://theme/icon-m-toolbar-search";
         }
-        ToolIcon {
-            iconId: "toolbar-view-menu"
-            onClicked: pageMenu.open()
-        }
-    }
-
-    Menu {
-        id: pageMenu
-        content: MenuLayout {
-            MenuItem {
-                text: "Map Theme"
-                onClicked: {
-                    pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
-                }
-            }
-        }
     }
 
     Column {
