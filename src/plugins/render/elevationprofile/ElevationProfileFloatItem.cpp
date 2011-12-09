@@ -148,7 +148,7 @@ QDialog *ElevationProfileFloatItem::aboutDialog()
         // Initializing about dialog
         m_aboutDialog = new PluginAboutDialog();
         m_aboutDialog->setName( "Elevation Profile Plugin" );
-        m_aboutDialog->setVersion( "0.1" );
+        m_aboutDialog->setVersion( "0.2" );
         // FIXME: Can we store this string for all of Marble
         m_aboutDialog->setAboutText( tr( "<br />(c) 2009, 2010, 2011 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
         QList<Author> authors;
@@ -346,6 +346,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     // display elevation gain/loss data
     // TODO: miles/feet...
     painter->setPen( QColor( Qt::black ) );
+    // TODO (after string freeze is over): shorten this for smallScreen / marble-touch
     intervalStr = tr( "Elevation difference: ca. %1 m (Gain: %2 m, Loss: %3 m)" )
                     .arg( QString::number( m_gain - m_loss, 'f', 0 ) )
                     .arg( QString::number( m_gain, 'f', 0 ) )
@@ -364,6 +365,20 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     QPen pen = painter->pen();
     pen.setWidth( highRes ? 2 : 1 );
     painter->setPen( pen );
+
+    QLinearGradient fillGradient( 0, 0, 0, m_eleGraphHeight );
+    QColor startColor = oxygenForestGreen4;
+    QColor endColor = oxygenBrownOrange4;
+    startColor.setAlpha( 200 );
+    endColor.setAlpha( 32 );
+    fillGradient.setColorAt( 0.0, startColor );
+    fillGradient.setColorAt( 1.0, endColor );
+    QBrush brush = QBrush( fillGradient );
+    painter->setBrush( brush );
+
+    QPainterPath path;
+    path.moveTo( oldPos.x(), m_eleGraphHeight );
+    path.lineTo( oldPos.x(), oldPos.y() );
     for ( int i = start; i <= end; ++i ) {
         QPoint newPos (
             m_leftGraphMargin + ( m_eleData.value(i).x() - valueOffsetX )
@@ -372,10 +387,24 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
             * m_eleGraphHeight / graphElevation
         );
         if ( newPos.x() != oldPos.x() ) {
-            painter->drawLine(oldPos.x(), oldPos.y(), newPos.x(), newPos.y());
+            path.lineTo( newPos.x(), newPos.y() );
             oldPos = newPos;
         }
     }
+    path.lineTo( oldPos.x(), m_eleGraphHeight );
+    // fill
+    painter->setPen( QPen( Qt::NoPen ) );
+    painter->drawPath( path );
+    // contour
+    // "remove" the first and last path element first, they are only used to fill down to the bottom
+    painter->setBrush( QBrush( Qt::NoBrush ) );
+    path.setElementPositionAt( 0, path.elementAt( 1 ).x,  path.elementAt( 1 ).y );
+    path.setElementPositionAt( path.elementCount()-1,
+                               path.elementAt( path.elementCount()-2 ).x,
+                               path.elementAt( path.elementCount()-2 ).y );
+    painter->setPen( pen );
+    painter->drawPath( path );
+
     pen.setWidth( 1 );
     painter->setPen( pen );
 
@@ -494,6 +523,7 @@ bool ElevationProfileFloatItem::renderOnMap(GeoPainter* painter, ViewportParams*
 
 
 // see MapScaleFloatItem::calcScaleBar()
+// TODO: unite calcScaleX() and calcScaleY() to one single generic calcScale()
 void ElevationProfileFloatItem::calcScaleX( const qreal distance )
 {
     qreal magnitude = 1;
