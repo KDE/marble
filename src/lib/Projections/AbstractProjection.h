@@ -220,30 +220,6 @@ class MARBLE_EXPORT AbstractProjection
                                     const ViewportParams *viewport,
                                     int &x, int &y, bool &globeHidesPoint ) const );
 
- protected:
-    bool lineStringToPolygon( const GeoDataLineString &lineString,
-                                    const ViewportParams *viewport,
-                                    QVector<QPolygonF*> &polygons ) const;
-
-    virtual void horizonToPolygon( const ViewportParams *viewport,
-                           const GeoDataCoordinates & disappearCoords,
-                           const GeoDataCoordinates & reappearCoords,
-                           QPolygonF* ) const;
-
-    // This method tessellates a line segment in a way that the line segment
-    // follows great circles. The count parameter specifies the
-    // number of nodes generated for the polygon. If the
-    // clampToGround flag is added the polygon contains count + 2
-    // nodes as the clamped down start and end node get added.
-
-    void tessellateLineSegment(     const GeoDataCoordinates &aCoords,
-                                    qreal ax, qreal ay,
-                                    const GeoDataCoordinates &bCoords,
-                                    qreal bx, qreal by,
-                                    QPolygonF * polygon,
-                                    const ViewportParams *viewport,
-                                    TessellationFlags f = 0 ) const;
-
  private:
     Q_DISABLE_COPY( AbstractProjection )
     AbstractProjectionPrivate * const d;
