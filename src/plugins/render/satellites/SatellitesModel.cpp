@@ -12,6 +12,7 @@
 
 #include "MarbleDebug.h"
 #include "SatellitesItem.h"
+#include "MarbleClock.h"
 
 #include "sgp4/sgp4io.h"
 
@@ -21,6 +22,8 @@ SatellitesModel::SatellitesModel( GeoDataTreeModel *treeModel, const PluginManag
     : TrackerPluginModel( treeModel, pluginManager ),
       m_clock( clock )
 {
+    connect(m_clock, SIGNAL(timeChanged()),
+            this, SLOT(update()));
 }
 
 void SatellitesModel::parseFile( const QString &id, const QByteArray &file )
