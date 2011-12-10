@@ -207,7 +207,16 @@ void Tracking::setAutoCenter( bool enabled )
 {
     if ( autoCenter() != enabled ) {
         if ( enabled && !m_autoNavigation && m_marbleWidget ) {
-            m_autoNavigation = new AdjustNavigation( m_marbleWidget, this );
+            m_autoNavigation = new AdjustNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
+            connect( m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
+                     m_marbleWidget, SLOT( zoomIn( FlyToMode ) ) );
+            connect( m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),
+                     m_marbleWidget, SLOT( zoomOut( FlyToMode ) ) );
+            connect( m_autoNavigation, SIGNAL( centerOn( const GeoDataCoordinates &, bool ) ),
+                     m_marbleWidget, SLOT( centerOn( const GeoDataCoordinates &, bool ) ) );
+
+            connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
+                     m_autoNavigation, SLOT( inhibitAutoAdjustments() ) );
         }
 
         if ( m_autoNavigation ) {
@@ -231,7 +240,16 @@ void Tracking::setAutoZoom( bool enabled )
 {
     if ( autoZoom() != enabled ) {
         if ( enabled && !m_autoNavigation && m_marbleWidget ) {
-            m_autoNavigation = new AdjustNavigation( m_marbleWidget, this );
+            m_autoNavigation = new AdjustNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
+            connect( m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
+                     m_marbleWidget, SLOT( zoomIn( FlyToMode ) ) );
+            connect( m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),
+                     m_marbleWidget, SLOT( zoomOut( FlyToMode ) ) );
+            connect( m_autoNavigation, SIGNAL( centerOn( const GeoDataCoordinates &, bool ) ),
+                     m_marbleWidget, SLOT( centerOn( const GeoDataCoordinates &, bool ) ) );
+
+            connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
+                     m_autoNavigation, SLOT( inhibitAutoAdjustments() ) );
         }
 
         if ( m_autoNavigation ) {

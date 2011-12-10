@@ -12,12 +12,12 @@
 
 #include "AdjustNavigation.h"
 
-#include "MarbleWidget.h"
 #include "GeoDataCoordinates.h"
 #include "PositionTracking.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "MarbleMath.h"
+#include "ViewportParams.h"
 #include "global.h"
 
 #include <QtGui/QPixmap>
@@ -33,7 +33,9 @@ class AdjustNavigation::Private
 {
 public:
 
-    MarbleWidget        *const m_widget;
+    AdjustNavigation *const m_parent;
+    const MarbleModel *const m_model;
+    const ViewportParams *const m_viewport;
     const PositionTracking *const m_tracking;
     AdjustNavigation::CenterMode m_recenterMode;
     bool                 m_adjustZoom;
@@ -41,7 +43,7 @@ public:
     bool                 m_selfInteraction;
 
     /** Constructor */
-    Private( MarbleWidget *widget );
+    Private( MarbleModel *model, const ViewportParams *viewport, AdjustNavigation *parent );
 
     /**
      * @brief To center on when reaching custom defined border
@@ -69,9 +71,11 @@ public:
      void centerOn( const GeoDataCoordinates &position );
 };
 
-AdjustNavigation::Private::Private( MarbleWidget *widget ) :
-        m_widget( widget ),
-        m_tracking( widget->model()->positionTracking() ),
+AdjustNavigation::Private::Private( MarbleModel *model, const ViewportParams *viewport, AdjustNavigation *parent ) :
+        m_parent( parent ),
+        m_model( model ),
+        m_viewport( viewport ),
+        m_tracking( model->positionTracking() ),
         m_recenterMode( AdjustNavigation::DontRecenter ),
         m_adjustZoom( 0 ),
         m_selfInteraction( false )
@@ -90,16 +94,16 @@ void AdjustNavigation::Private::moveOnBorderToCenter( const GeoDataCoordinates &
     qreal x = 0.0;
     qreal y = 0.0;
     //recenter if initially the gps location is not visible on the screen
-    if(!( m_widget->screenCoordinates( lon, lat, x, y ) ) ) {
+    if(!( m_viewport->screenCoordinates( lon, lat, x, y ) ) ) {
          centerOn( position );
     }
-    qreal centerLon = m_widget->centerLongitude();
-    qreal centerLat = m_widget->centerLatitude();
+    qreal centerLon = m_viewport->centerLongitude();
+    qreal centerLat = m_viewport->centerLatitude();
 
     qreal centerX = 0.0;
     qreal centerY = 0.0;
 
-    m_widget->screenCoordinates( centerLon, centerLat, centerX, centerY );
+    m_viewport->screenCoordinates( centerLon, centerLat, centerX, centerY );
 
     const qreal borderRatio = 0.25;
     //defining the default border distance from map center
@@ -121,8 +125,8 @@ GeoDataCoordinates AdjustNavigation::Private::findIntersection( qreal currentX, 
         direction = fmod( direction,360.0 );
     }
 
-    const qreal width = m_widget->width();
-    const qreal height = m_widget->height();
+    const qreal width = m_viewport->width();
+    const qreal height = m_viewport->height();
 
     QPointF intercept;
     QPointF destinationHorizontal;
@@ -257,7 +261,7 @@ GeoDataCoordinates AdjustNavigation::Private::findIntersection( qreal currentX, 
 
     qreal destinationLon = 0.0;
     qreal destinationLat = 0.0;
-    m_widget->geoCoordinates( destination.x(), destination.y(), destinationLon, destinationLat,
+    m_viewport->geoCoordinates( destination.x(), destination.y(), destinationLon, destinationLat,
                               GeoDataCoordinates::Radian );
     GeoDataCoordinates destinationCoord( destinationLon, destinationLat, GeoDataCoordinates::Radian );
 
@@ -272,14 +276,14 @@ void AdjustNavigation::Private::adjustZoom( const GeoDataCoordinates &currentPos
     qreal currentX = 0;
     qreal currentY = 0;
 
-    if( !m_widget->screenCoordinates( lon, lat, currentX, currentY ) ) {
+    if( !m_viewport->screenCoordinates( lon, lat, currentX, currentY ) ) {
         return;
     }
 
     const GeoDataCoordinates destination = findIntersection( currentX, currentY );
 
     qreal greatCircleDistance = distanceSphere( currentPosition, destination );
-    qreal radius = m_widget->model()->planetRadius();
+    qreal radius = m_model->planetRadius();
     qreal distance = greatCircleDistance *  radius;
 
     if( speed != 0 ) {
@@ -292,13 +296,13 @@ void AdjustNavigation::Private::adjustZoom( const GeoDataCoordinates &currentPos
 
         m_selfInteraction = true;
         if ( remainingTime < thresholdLow ) {
-            m_widget->zoomOut( Instant );
+            emit m_parent->zoomOut( Instant );
         }
         else if ( remainingTime < thresholdHigh ) {
             /* zoom level optimal, nothing to do */
         }
         else {
-            m_widget->zoomIn( Instant );
+            emit m_parent->zoomIn( Instant );
         }
         m_selfInteraction = false;
     }
@@ -307,16 +311,14 @@ void AdjustNavigation::Private::adjustZoom( const GeoDataCoordinates &currentPos
 void AdjustNavigation::Private::centerOn( const GeoDataCoordinates &position )
 {
     m_selfInteraction = true;
-    m_widget->centerOn( position, false );
+    emit m_parent->centerOn( position, false );
     m_selfInteraction = false;
 }
 
-AdjustNavigation::AdjustNavigation( MarbleWidget *widget, QObject *parent )
-    :QObject( parent ), d( new AdjustNavigation::Private( widget ) )
+AdjustNavigation::AdjustNavigation( MarbleModel *model, const ViewportParams *viewport, QObject *parent ) :
+    QObject( parent ),
+    d( new AdjustNavigation::Private( model, viewport, this ) )
 {
-    connect( widget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
-             this, SLOT( inhibitAutoAdjustments() ) );
-
     connect( d->m_tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
                 this, SLOT( adjust( GeoDataCoordinates, qreal ) ) );
 }
