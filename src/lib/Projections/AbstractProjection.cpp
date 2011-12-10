@@ -953,10 +953,13 @@ bool AbstractProjection::screenCoordinates( qreal lon, qreal lat,
                                     const ViewportParams *viewport,
                                     int &x, int &y ) const
 {
-    GeoDataCoordinates geopoint( lon, lat );
+    qreal rx = 0.0;
+    qreal ry = 0.0;
 
-    bool globeHidesPoint;
-    bool isVisible = screenCoordinates( geopoint, viewport, x, y, globeHidesPoint );
+    bool isVisible = screenCoordinates( lon, lat, viewport, rx, ry );
+
+    x = (int)(rx);
+    y = (int)(ry);
 
     return isVisible;
 }
