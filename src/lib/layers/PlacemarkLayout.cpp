@@ -385,6 +385,11 @@ QStringList PlacemarkLayout::renderPosition() const
     return QStringList() << "HOVERS_ABOVE_SURFACE";
 }
 
+qreal PlacemarkLayout::zValue() const
+{
+    return 2.0;
+}
+
 bool PlacemarkLayout::render( GeoPainter *painter,
                               ViewportParams *viewport,
                               const QString &renderPos,

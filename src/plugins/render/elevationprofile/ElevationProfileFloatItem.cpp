@@ -104,7 +104,7 @@ QStringList ElevationProfileFloatItem::renderPosition() const
 
 qreal ElevationProfileFloatItem::zValue() const
 {
-    return 1.0;
+    return 3.0;
 }
 
 QString ElevationProfileFloatItem::name() const

@@ -686,6 +686,11 @@ QStringList RoutingLayer::renderPosition() const
     return QStringList() << "HOVERS_ABOVE_SURFACE";
 }
 
+qreal RoutingLayer::zValue() const
+{
+    return 1.0;
+}
+
 bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
                            const QString& renderPos, GeoSceneLayer *layer )
 {
