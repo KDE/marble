@@ -54,6 +54,7 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( Marble::Declarative::Routing* routing READ routing NOTIFY routingChanged )
     Q_PROPERTY( Marble::Declarative::Search* search READ search NOTIFY searchChanged )
     Q_PROPERTY( QObject* mapThemeModel READ mapThemeModel NOTIFY mapThemeModelChanged )
+    Q_PROPERTY( QObject* streetMapThemeModel READ streetMapThemeModel NOTIFY streetMapThemeModelChanged )
 
 public:
     /** Constructor */
@@ -88,6 +89,8 @@ Q_SIGNALS:
     void mouseClickGeoPosition( qreal longitude, qreal latitude );
 
     void mapThemeModelChanged();
+
+    void streetMapThemeModelChanged();
 
 public Q_SLOTS:
     Marble::Declarative::Coordinate* center();
@@ -156,6 +159,8 @@ public Q_SLOTS:
 
     QObject* mapThemeModel();
 
+    QObject* streetMapThemeModel();
+
     void setGeoSceneProperty( const QString &key, bool value );
 
 private Q_SLOTS:
@@ -178,6 +183,8 @@ private:
     Marble::Declarative::Coordinate m_center;
 
     Marble::Declarative::ZoomButtonInterceptor* m_interceptor;
+
+    QObject* m_streetMapThemeModel;
 };
 
 } // namespace Declarative

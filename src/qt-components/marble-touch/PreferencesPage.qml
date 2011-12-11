@@ -65,7 +65,7 @@ Page {
             id: mapListView
             width: preferencesPage.width - screenSaverLabel.width
             height: preferencesPage.height - screenSaverLabel.height
-            model: marbleWidget.mapThemeModel
+            model: marbleWidget.streetMapThemeModel
             clip: true
 
             delegate:
