@@ -187,7 +187,8 @@ Page {
                 anchors.left: parent.left
                 anchors.bottom: parent.bottom
                 color: "gray"
-                text: "Select the map to use in the Search, Routing, Tracking and Friends activities."
+                text: "Select the map to use in the Search, Routing, Tracking and Friends activities. <a href=\"http://edu.kde.org/marble/maps.php\">Download additional map themes</a>."
+                onLinkActivated: Qt.openUrlExternally(link)
                 font.pixelSize: 16
             }
         }
