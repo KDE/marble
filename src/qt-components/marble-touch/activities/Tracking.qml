@@ -61,11 +61,6 @@ Page {
                 onClicked: openTrackDialog.open()
             }
             MenuItemSwitch {
-                text: "Online"
-                checked: !settings.workOffline
-                onClicked: settings.workOffline = !settings.workOffline
-            }
-            MenuItemSwitch {
                 text: "Auto Center"
                 checked: false
                 onCheckedChanged: {

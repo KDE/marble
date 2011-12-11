@@ -33,21 +33,6 @@ Page {
                 }
             }
         }
-        ToolIcon {
-            iconId: "toolbar-view-menu"
-            onClicked: pageMenu.open()
-        }
-    }
-
-    Menu {
-        id: pageMenu
-        content: MenuLayout {
-            MenuItemSwitch {
-                text: "Online"
-                checked: !settings.workOffline
-                onClicked: settings.workOffline = !settings.workOffline
-            }
-        }
     }
 
     Item {

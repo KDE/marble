@@ -53,11 +53,6 @@ Page {
                 onClicked: openRouteDialog.open()
             }
             MenuItemSwitch {
-                text: "Online"
-                checked: !settings.workOffline
-                onClicked: settings.workOffline = !settings.workOffline
-            }
-            MenuItemSwitch {
                 text: "Elevation Profile"
                 checked: false
                 onCheckedChanged: {

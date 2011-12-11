@@ -27,6 +27,8 @@ Page {
     Grid {
         id: pageGrid
         anchors.fill: parent
+        anchors.margins: 5
+
         columns: 2
         rows: 3
         spacing: 10

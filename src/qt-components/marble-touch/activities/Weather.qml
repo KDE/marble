@@ -40,21 +40,6 @@ Page {
             width: 60
             iconSource: "image://theme/icon-m-toolbar-search";
         }
-        ToolIcon {
-            iconId: "toolbar-view-menu"
-            onClicked: pageMenu.open()
-        }
-    }
-
-    Menu {
-        id: pageMenu
-        content: MenuLayout {
-            MenuItemSwitch {
-                text: "Online"
-                checked: !settings.workOffline
-                onClicked: settings.workOffline = !settings.workOffline
-            }
-        }
     }
 
     Column {
