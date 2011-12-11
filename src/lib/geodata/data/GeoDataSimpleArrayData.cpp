@@ -10,15 +10,11 @@
 
 #include "GeoDataSimpleArrayData.h"
 
-#include "GeoDataLatLonAltBox.h"
 #include "GeoDataTypes.h"
 #include "MarbleDebug.h"
 
-#include "GeoDataLineString.h"
-
 #include <QtCore/QMap>
 #include <QtCore/QLinkedList>
-#include "GeoDataExtendedData.h"
 
 namespace Marble {
 
@@ -37,8 +33,8 @@ GeoDataSimpleArrayData::GeoDataSimpleArrayData()
 {
 }
 
-GeoDataSimpleArrayData::GeoDataSimpleArrayData( const GeoDataGeometry &other )
-    : GeoDataGeometry( other )
+GeoDataSimpleArrayData::GeoDataSimpleArrayData( const GeoDataSimpleArrayData& other )
+    : GeoDataObject( other ), d( new GeoDataSimpleArrayDataPrivate( *other.d ) )
 {
 }
 
@@ -78,19 +74,14 @@ EnumGeometryId GeoDataSimpleArrayData::geometryId() const
     return GeoDataSimpleArrayDataId;
 }
 
-GeoDataLatLonAltBox GeoDataSimpleArrayData::latLonAltBox() const
-{
-    return GeoDataLatLonAltBox();
-}
-
 void GeoDataSimpleArrayData::pack( QDataStream& stream ) const
 {
-    GeoDataGeometry::pack( stream );
+    GeoDataObject::pack( stream );
 }
 
 void GeoDataSimpleArrayData::unpack( QDataStream& stream )
 {
-    GeoDataGeometry::unpack( stream );
+    GeoDataObject::unpack( stream );
 }
 
 

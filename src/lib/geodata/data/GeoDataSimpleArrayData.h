@@ -11,22 +11,20 @@
 #ifndef MARBLE_GEODATASIMPLEARRAYDATA_H
 #define MARBLE_GEODATASIMPLEARRAYDATA_H
 
-#include "GeoDataCoordinates.h"
-#include "GeoDataGeometry.h"
+#include "GeoDataObject.h"
 
-#include <QtCore/QDateTime>
-#include <QtCore/QPair>
+#include <QtCore/QVariant>
 
 namespace Marble {
 
 class GeoDataSimpleArrayDataPrivate;
 
-class GEODATA_EXPORT GeoDataSimpleArrayData : public GeoDataGeometry
+class GEODATA_EXPORT GeoDataSimpleArrayData : public GeoDataObject
 {
 
 public:
     GeoDataSimpleArrayData();
-    GeoDataSimpleArrayData( const GeoDataGeometry &other );
+    GeoDataSimpleArrayData( const GeoDataSimpleArrayData& other );
     ~GeoDataSimpleArrayData();
 
     /**
@@ -51,7 +49,6 @@ public:
 
     virtual const char* nodeType() const;
     virtual EnumGeometryId geometryId() const;
-    virtual GeoDataLatLonAltBox latLonAltBox() const;
     virtual void pack( QDataStream& stream ) const;
     virtual void unpack( QDataStream& stream );
 
