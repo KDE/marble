@@ -16,7 +16,6 @@
 
 #include <QtGui/QColor>
 
-#include "AbstractProjection.h"
 #include "MarbleDebug.h"
 #include "GeoPolygon.h"
 #include "GeoPainter.h"

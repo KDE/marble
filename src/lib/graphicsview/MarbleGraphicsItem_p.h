@@ -12,7 +12,6 @@
 #define MARBLE_MARBLEGRAPHICSITEMPRIVATE_H
 
 // Marble
-#include "AbstractProjection.h"
 #include "AbstractMarbleGraphicsLayout.h"
 #include "GeoPainter.h"
 #include "MarbleGraphicsItem.h"
