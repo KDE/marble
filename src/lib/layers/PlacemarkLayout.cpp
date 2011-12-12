@@ -256,6 +256,7 @@ void PlacemarkLayout::styleReset()
     qDeleteAll( m_visiblePlacemarks );
     m_visiblePlacemarks.clear();
     m_maxLabelHeight = maxLabelHeight();
+    m_styleResetRequested = false;
 }
 
 QVector<const GeoDataPlacemark*> PlacemarkLayout::whichPlacemarkAt( const QPoint& curpos )
@@ -409,7 +410,6 @@ bool PlacemarkLayout::render( GeoPainter *painter,
     const int imgheight = viewport->height();
 
     if ( m_styleResetRequested ) {
-        m_styleResetRequested = false;
         styleReset();
     }
 
