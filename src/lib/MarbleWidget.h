@@ -284,12 +284,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     int radius() const;
 
     /**
-     * @brief  Set the radius of the globe in pixels.
-     * @param  radius  The new globe radius value in pixels.
-     */
-    void setRadius( int radius );
-
-    /**
      * @brief Return the current zoom amount.
      */
     int zoom() const;
@@ -300,12 +294,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Return the current distance.
      */
     qreal distance() const;
-
-    /**
-     * @brief  Set the distance of the observer to the globe in km.
-     * @param  distance  The new distance in km.
-     */
-    void setDistance( qreal distance );
 
     /**
      * @brief Return the current distance string.
@@ -595,6 +583,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     //@{
 
     /**
+     * @brief  Set the radius of the globe in pixels.
+     * @param  radius  The new globe radius value in pixels.
+     */
+    void setRadius( int radius );
+
+    /**
      * @brief  Zoom the view to a certain zoomlevel
      * @param  zoom  the new zoom level.
      *
@@ -618,6 +612,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Zoom out by the amount zoomStep.
      */
     void zoomOut( FlyToMode mode = Automatic );
+
+    /**
+     * @brief  Set the distance of the observer to the globe in km.
+     * @param  distance  The new distance in km.
+     */
+    void setDistance( qreal distance );
 
     /**
      * @brief  Rotate the view by the two angles phi and theta.
