@@ -24,7 +24,7 @@
 #include <QtGui/QWidget>
 #include <QtCore/QRect>
 #include <QtCore/QPointF>
-#include <QtCore/QTime>
+#include <QtCore/QTimer>
 #include <math.h>
 
 namespace Marble {
@@ -37,7 +37,7 @@ public:
     const PositionTracking *const m_tracking;
     AdjustNavigation::CenterMode m_recenterMode;
     bool                 m_adjustZoom;
-    QTime                m_lastWidgetInteraction;
+    QTimer               m_lastWidgetInteraction;
     bool                 m_selfInteraction;
 
     /** Constructor */
@@ -76,7 +76,8 @@ AdjustNavigationPrivate::AdjustNavigationPrivate( MarbleWidget *widget ) :
         m_adjustZoom( 0 ),
         m_selfInteraction( false )
 {
-    m_lastWidgetInteraction.start();
+    m_lastWidgetInteraction.setInterval( 10 * 1000 );
+    m_lastWidgetInteraction.setSingleShot( true );
 }
 
 void AdjustNavigationPrivate::moveOnBorderToCenter( const GeoDataCoordinates &position, qreal )
@@ -327,7 +328,7 @@ AdjustNavigation::~AdjustNavigation()
 
 void AdjustNavigation::adjust( const GeoDataCoordinates &position, qreal speed )
 {
-    if ( d->m_lastWidgetInteraction.elapsed() <= 10 * 1000 ) {
+    if ( d->m_lastWidgetInteraction.isActive() ) {
         return;
     }
 
@@ -371,7 +372,7 @@ void AdjustNavigation::setRecenter( CenterMode recenterMode )
 void AdjustNavigation::inhibitAutoAdjustments()
 {
     if ( !d->m_selfInteraction ) {
-        d->m_lastWidgetInteraction.restart();
+        d->m_lastWidgetInteraction.start();
     }
 }
 
