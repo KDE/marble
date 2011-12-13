@@ -59,8 +59,8 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
     // create a style for routes
     GeoDataStyle routestyle;
     GeoDataLineStyle routeLineStyle;
-    routeLineStyle.setColor( "blue" );
-    routeLineStyle.setWidth(3);
+    routeLineStyle.setColor( oxygenSkyBlue4 );
+    routeLineStyle.setWidth(2);
     routestyle.setLineStyle(routeLineStyle);
     routestyle.setStyleId("route");
 
@@ -69,21 +69,26 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
     routeStyleMap.insert("normal", QString("#").append(routestyle.styleId()));
     doc->addStyleMap(routeStyleMap);
     doc->addStyle(routestyle);
-    
-    // routepoint icon style
+
+    // routepoint style
     GeoDataStyle routepointStyle;
     routepointStyle.setStyleId("routepoint");
-    GeoDataIconStyle routeIconStyle;
-    routeIconStyle.setIconPath(MarbleDirs::path("bitmaps/city_4_white.png"));
-    routeIconStyle.setHotSpot(QPointF(0.5,0.5), GeoDataHotSpot::Fraction, GeoDataHotSpot::Fraction);
-    routepointStyle.setIconStyle(routeIconStyle);
+
+    GeoDataIconStyle routepointIconStyle;
+    routepointIconStyle.setIconPath(MarbleDirs::path("bitmaps/city_4_white.png"));
+    routepointIconStyle.setHotSpot(QPointF(0.5,0.5), GeoDataHotSpot::Fraction, GeoDataHotSpot::Fraction);
+    routepointStyle.setIconStyle(routepointIconStyle);
+
+    GeoDataLabelStyle routepointLabelStyle;
+    routepointLabelStyle.setAlignment(GeoDataLabelStyle::Corner);
+    routepointStyle.setLabelStyle(routepointLabelStyle);
 
     GeoDataStyleMap routepointStyleMap;
     routepointStyleMap.setStyleId("map-routepoint");
     routepointStyleMap.insert("normal", QString("#").append(routepointStyle.styleId()));
     doc->addStyleMap(routepointStyleMap);
     doc->addStyle(routepointStyle);
-    
+
     // create a default style for waypoint icons
     GeoDataStyle waypointStyle;
     waypointStyle.setStyleId("waypoint");
@@ -92,12 +97,16 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
     iconStyle.setHotSpot(QPointF(0.12,0.03), GeoDataHotSpot::Fraction, GeoDataHotSpot::Fraction);
     waypointStyle.setIconStyle(iconStyle);
 
-    GeoDataStyleMap wpStyleMap;
-    styleMap.setStyleId("map-waypoint");
-    styleMap.insert("normal", QString("#").append(waypointStyle.styleId()));
-    doc->addStyleMap(wpStyleMap);
+    GeoDataLabelStyle waypointLabelStyle;
+    waypointLabelStyle.setAlignment(GeoDataLabelStyle::Corner);
+    waypointStyle.setLabelStyle(waypointLabelStyle);
+
+    GeoDataStyleMap waypointStyleMap;
+    waypointStyleMap.setStyleId("map-waypoint");
+    waypointStyleMap.insert("normal", QString("#").append(waypointStyle.styleId()));
+    doc->addStyleMap(waypointStyleMap);
     doc->addStyle(waypointStyle);
-    
+
 #ifdef DEBUG_TAGS
     mDebug() << "Parsed <" << gpxTag_gpx << "> document: " << doc;
 #endif
