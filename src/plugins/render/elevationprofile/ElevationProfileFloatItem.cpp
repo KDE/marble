@@ -167,10 +167,11 @@ QDialog *ElevationProfileFloatItem::aboutDialog()
 void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
 {
     if ( !( viewport->width() == m_viewportWidth && m_isInitialized ) ) {
-        m_fontHeight     = QFontMetrics( font() ).ascent();
+        m_fontHeight = QFontMetrics( font() ).ascent() + 1;
         bool const highRes = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::HighResolution;
         int const widthRatio = highRes ? 2 : 3;
-        setContentSize( QSizeF( viewport->width() / widthRatio, m_eleGraphHeight + m_fontHeight * 2.5 + 3 ) );
+        setContentSize( QSizeF( viewport->width() / widthRatio,
+                                m_eleGraphHeight + m_fontHeight * 2.5 + padding() ) );
         m_leftGraphMargin = QFontMetrics( font() ).width("0000 m");
         m_eleGraphWidth = contentSize().width() - m_leftGraphMargin;
         m_viewportWidth = viewport->width();
@@ -201,7 +202,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     painter->setRenderHint( QPainter::Antialiasing, true );
     painter->setFont( font() );
 
-    m_fontHeight     = QFontMetrics( font() ).ascent();
+    m_fontHeight = QFontMetrics( font() ).ascent() + 1;
 
     if ( ! ( m_routeAvailable && m_isInitialized && m_eleData.size() > 0 ) ) {
         painter->setPen( QColor( Qt::black ) );
@@ -271,15 +272,15 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     for ( int j = 0; j <= m_bestDivisorY; j ++ ) {
         if ( measurementSystem == QLocale::MetricSystem ) {
             if ( valueOffsetY + m_bestDivisorY * m_valueIntervalY > 10000 ) {
-                m_unitY = tr("km");
+                m_unitY = tr( "km" );
                 intervalStr.setNum( ( valueOffsetY + j * m_valueIntervalY ) / 1000 );
             } else {
-                m_unitY = tr("m");
+                m_unitY = tr( "m" );
                 intervalStr.setNum( valueOffsetY + j * m_valueIntervalY );
             }
         } else {
             // TODO: ft instead of mi for the elevation?
-            m_unitY = tr("mi");
+            m_unitY = tr( "mi" );
             if ( m_bestDivisorY * m_valueIntervalY > 3800 ) {
                 intervalStr.setNum( ( valueOffsetY + j * m_valueIntervalY ) / 1000 );
             } else {
@@ -287,18 +288,22 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
             }
         }
 
-        currentStringBegin = m_eleGraphHeight - j * m_pixelIntervalY + m_fontHeight / 2;
-        if ( j == m_bestDivisorY ) {
-            intervalStr += " " + m_unitY;
-            if ( currentStringBegin < m_fontHeight + 1 ) {
-                currentStringBegin  = m_fontHeight + 1;
-            }
-        }
-        painter->setPen(   QColor( Qt::darkGray ) );
+        painter->setPen( QColor( Qt::darkGray ) );
         painter->drawLine( m_leftGraphMargin, m_eleGraphHeight - j * m_pixelIntervalY,
                            contentSize().width(), m_eleGraphHeight - j * m_pixelIntervalY );
-        painter->setPen(   QColor( Qt::black ) );
-        painter->drawText( 0, currentStringBegin, intervalStr );
+        painter->setPen( QColor( Qt::black ) );
+        currentStringBegin = m_eleGraphHeight - j * m_pixelIntervalY - m_fontHeight / 2;
+        if ( j == m_bestDivisorY ) {
+            // last one at the top: don't draw outside the visible area
+            if ( currentStringBegin < padding() ) {
+                currentStringBegin  = padding();
+            }
+            QRect rect( m_leftGraphMargin - padding(), currentStringBegin,
+                        m_fontHeight * 2, m_fontHeight );
+            painter->drawText( rect, Qt::AlignLeft, " " + m_unitY );
+        }
+        QRect rect( 0, currentStringBegin, m_leftGraphMargin, m_fontHeight );
+        painter->drawText( rect, Qt::AlignRight, intervalStr );
     }
 
     // draw X grid and labels
@@ -307,14 +312,14 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     for ( int j = 0; j <= m_bestDivisorX; j ++ ) {
         if ( measurementSystem == QLocale::MetricSystem ) {
             if ( valueOffsetX + m_bestDivisorX * m_valueIntervalX > 10000 ) {
-                m_unitX = tr("km");
+                m_unitX = tr( "km" );
                 intervalStr.setNum( ( valueOffsetX + j * m_valueIntervalX ) / 1000 );
             } else {
-                m_unitX = tr("m");
+                m_unitX = tr( "m" );
                 intervalStr.setNum( valueOffsetX + j * m_valueIntervalX );
             }
         } else {
-            m_unitX = tr("mi");
+            m_unitX = tr( "mi" );
             if ( m_bestDivisorX * m_valueIntervalX > 3800 ) {
                 intervalStr.setNum( ( valueOffsetX +  j * m_valueIntervalX ) / 1000 );
             } else {
@@ -322,14 +327,16 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
             }
         }
 
-        if ( j == m_bestDivisorX ) {
+        if ( j == 0 ) {
+            currentStringBegin = m_leftGraphMargin;
+        } else if ( j == m_bestDivisorX ) {
             if ( valueOffsetX == 0) {
                 intervalStr += " " + m_unitX;
             }
-            currentStringBegin = (m_leftGraphMargin + m_eleGraphWidth
-                                  - QFontMetrics( font() ).width( intervalStr ) * 1.5);
+            currentStringBegin = ( m_leftGraphMargin + m_eleGraphWidth
+                                  - QFontMetrics( font() ).width( intervalStr ) * 1.5 );
         } else {
-            currentStringBegin = (m_leftGraphMargin + j * m_pixelIntervalX
+            currentStringBegin = ( m_leftGraphMargin + j * m_pixelIntervalX
                                   - QFontMetrics( font() ).width( intervalStr ) / 2 );
         }
 
@@ -430,13 +437,13 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         painter->drawLine( m_leftGraphMargin + m_cursorPositionX - 5, ypos,
                            m_leftGraphMargin + m_cursorPositionX + 5, ypos );
         if ( measurementSystem == QLocale::MetricSystem ) {
-            m_unitX = tr("m");
+            m_unitX = tr( "m" );
             if ( xpos > 10000 ) {
-                m_unitX = tr("km");
+                m_unitX = tr( "km" );
                 xpos /= 1000;
             }
         } else { // miles
-            m_unitX = tr("mi");
+            m_unitX = tr( "mi" );
             xpos /= 1000;
         }
         intervalStr.setNum( xpos, 'f', 2 );
@@ -590,7 +597,7 @@ void ElevationProfileFloatItem::calcScaleY( const qreal distance )
     }
 
     const int minDivisor = 4;
-    const int maxDivisor = m_eleGraphHeight / ( m_fontHeight * 1.5 );
+    const int maxDivisor = m_eleGraphHeight / ( m_fontHeight * 1.2 );
 
     m_bestDivisorY = minDivisor;
     int  bestMagValue = 1;
