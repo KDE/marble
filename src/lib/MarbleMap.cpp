@@ -162,15 +162,6 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
     m_layerManager.addLayer( &m_placemarkLayout );
     m_layerManager.addLayer( &m_customPaintLayer );
 
-    QList<RenderPlugin *> pluginList = m_layerManager.renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        if ( (*i)->nameId() == "sun" ) {
-            (*i)->setVisible( false );
-        }
-    }
-
     QObject::connect( m_model, SIGNAL( themeChanged( QString ) ),
                       parent, SLOT( updateMapTheme() ) );
 

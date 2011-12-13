@@ -23,6 +23,7 @@ namespace Marble
 
 SunPlugin::SunPlugin()
 {
+    setVisible( false );
 }
 
 QStringList SunPlugin::backendTypes() const
