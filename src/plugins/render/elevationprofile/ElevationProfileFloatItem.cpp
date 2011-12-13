@@ -288,7 +288,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
             }
         }
 
-        painter->setPen( QColor( Qt::darkGray ) );
+        painter->setPen( oxygenAluminumGray4 );
         painter->drawLine( m_leftGraphMargin, m_eleGraphHeight - j * m_pixelIntervalY,
                            contentSize().width(), m_eleGraphHeight - j * m_pixelIntervalY );
         painter->setPen( QColor( Qt::black ) );
@@ -341,7 +341,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         }
 
         if ( lastStringEnds < currentStringBegin ) {
-            painter->setPen( QColor( Qt::darkGray ) );
+            painter->setPen( oxygenAluminumGray4 );
             painter->drawLine(m_leftGraphMargin + j * m_pixelIntervalX, 0,
                               m_leftGraphMargin + j * m_pixelIntervalX, m_eleGraphHeight );
             painter->setPen( QColor( Qt::black ) );
