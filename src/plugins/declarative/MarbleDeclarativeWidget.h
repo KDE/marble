@@ -22,8 +22,8 @@
 namespace Marble
 {
 // Forward declaration
+class MarbleModel;
 class MarbleWidget;
-class MapThemeManager;
 
 namespace Declarative
 {
@@ -59,6 +59,8 @@ class MarbleWidget : public QGraphicsProxyWidget
 public:
     /** Constructor */
     explicit MarbleWidget( QGraphicsItem *parent = 0, Qt::WindowFlags flags = 0 );
+
+    Marble::MarbleModel *model();
 
     bool workOffline() const;
 
@@ -96,6 +98,8 @@ public Q_SLOTS:
     Marble::Declarative::Coordinate* center();
 
     void setCenter( Marble::Declarative::Coordinate* center );
+
+    void centerOn( const Marble::GeoDataLatLonAltBox &bbox );
 
     /** Returns a list of active (!) float items */
     QStringList activeFloatItems() const;

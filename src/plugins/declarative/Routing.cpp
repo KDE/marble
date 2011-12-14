@@ -10,7 +10,7 @@
 
 #include "Routing.h"
 
-#include "MarbleWidget.h"
+#include "MarbleDeclarativeWidget.h"
 #include "MarbleModel.h"
 #include "MarbleDirs.h"
 #include "routing/AlternativeRoutesModel.h"
@@ -29,7 +29,7 @@ class RoutingPrivate
 public:
     RoutingPrivate();
 
-    Marble::MarbleWidget* m_marbleWidget;
+    Marble::Declarative::MarbleWidget* m_marbleWidget;
 
     QAbstractItemModel* m_routeRequestModel;
 
@@ -70,7 +70,7 @@ QObject* Routing::waypointModel()
     return d->m_marbleWidget ? d->m_marbleWidget->model()->routingManager()->routingModel() : 0;
 }
 
-void Routing::setMarbleWidget( Marble::MarbleWidget* widget )
+void Routing::setMarbleWidget( Marble::Declarative::MarbleWidget* widget )
 {
     d->m_marbleWidget = widget;
 

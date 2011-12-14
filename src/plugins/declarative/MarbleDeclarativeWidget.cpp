@@ -102,6 +102,11 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     m_marbleWidget->inputHandler()->setPanViaArrowsEnabled( false );
 }
 
+Marble::MarbleModel *MarbleWidget::model()
+{
+    return m_marbleWidget->model();
+}
+
 QStringList MarbleWidget::activeFloatItems() const
 {
     QStringList result;
@@ -246,6 +251,11 @@ void MarbleWidget::setCenter( Coordinate* center )
     }
 }
 
+void MarbleWidget::centerOn( const Marble::GeoDataLatLonAltBox &bbox )
+{
+    m_marbleWidget->centerOn( bbox );
+}
+
 void MarbleWidget::updateCenterPosition()
 {
     m_marbleWidget->centerOn( m_center.longitude(), m_center.latitude() );
@@ -261,7 +271,7 @@ Marble::Declarative::Routing* MarbleWidget::routing()
 {
     if ( !m_routing ) {
         m_routing = new Routing( this );
-        m_routing->setMarbleWidget( m_marbleWidget );
+        m_routing->setMarbleWidget( this );
     }
 
     return m_routing;
