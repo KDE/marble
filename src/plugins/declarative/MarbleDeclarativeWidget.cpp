@@ -114,6 +114,11 @@ const Marble::ViewportParams *MarbleWidget::viewport() const
     return m_marbleWidget->viewport();
 }
 
+QList<RenderPlugin *> MarbleWidget::renderPlugins() const
+{
+    return m_marbleWidget->renderPlugins();
+}
+
 QStringList MarbleWidget::activeFloatItems() const
 {
     QStringList result;
@@ -230,7 +235,7 @@ Marble::Declarative::Tracking* MarbleWidget::tracking()
 {
     if ( !m_tracking ) {
         m_tracking = new Tracking( this );
-        m_tracking->setMarbleWidget( m_marbleWidget );
+        m_tracking->setMarbleWidget( this );
         emit trackingChanged();
     }
 

@@ -17,6 +17,7 @@
 #include "Coordinate.h"
 
 #include <QtGui/QGraphicsProxyWidget>
+#include <QtCore/QList>
 #include <QtCore/QPoint>
 
 namespace Marble
@@ -24,6 +25,7 @@ namespace Marble
 // Forward declaration
 class MarbleModel;
 class MarbleWidget;
+class RenderPlugin;
 class ViewportParams;
 
 namespace Declarative
@@ -64,6 +66,8 @@ public:
     Marble::MarbleModel *model();
 
     const Marble::ViewportParams *viewport() const;
+
+    QList<RenderPlugin *> renderPlugins() const;
 
     bool workOffline() const;
 

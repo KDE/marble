@@ -19,11 +19,12 @@
 namespace Marble
 {
 
-class MarbleWidget;
 class AdjustNavigation;
 
 namespace Declarative
 {
+
+class MarbleWidget;
 
 class Tracking : public QObject
 {
@@ -57,7 +58,7 @@ public:
 
     void setPositionMarker( QObject* marker );
 
-    void setMarbleWidget( Marble::MarbleWidget* widget );
+    void setMarbleWidget( Marble::Declarative::MarbleWidget* widget );
 
     bool hasLastKnownPosition() const;
 
@@ -115,7 +116,7 @@ private:
 
     QObject* m_positionMarker;
 
-    Marble::MarbleWidget* m_marbleWidget;
+    Marble::Declarative::MarbleWidget* m_marbleWidget;
 
     bool m_hasLastKnownPosition;
 
