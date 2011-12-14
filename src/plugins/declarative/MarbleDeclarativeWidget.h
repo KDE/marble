@@ -24,6 +24,7 @@ namespace Marble
 // Forward declaration
 class MarbleModel;
 class MarbleWidget;
+class ViewportParams;
 
 namespace Declarative
 {
@@ -44,7 +45,7 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( Marble::Declarative::Coordinate* center READ center WRITE setCenter NOTIFY visibleLatLonAltBoxChanged )
     Q_PROPERTY( int zoom READ zoom WRITE setZoom NOTIFY zoomChanged )
 
-    Q_PROPERTY( QString mapThemeId READ mapThemeId WRITE setMapThemeId )
+    Q_PROPERTY( QString mapThemeId READ mapThemeId WRITE setMapThemeId NOTIFY mapThemeChanged )
     Q_PROPERTY( QString projection READ projection WRITE setProjection )
     Q_PROPERTY( bool inputEnabled READ inputEnabled WRITE setInputEnabled )
     Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
@@ -61,6 +62,8 @@ public:
     explicit MarbleWidget( QGraphicsItem *parent = 0, Qt::WindowFlags flags = 0 );
 
     Marble::MarbleModel *model();
+
+    const Marble::ViewportParams *viewport() const;
 
     bool workOffline() const;
 
@@ -93,6 +96,8 @@ Q_SIGNALS:
     void mapThemeModelChanged();
 
     void streetMapThemeModelChanged();
+
+    void mapThemeChanged();
 
 public Q_SLOTS:
     Marble::Declarative::Coordinate* center();

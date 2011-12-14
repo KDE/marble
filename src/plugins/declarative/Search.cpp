@@ -10,9 +10,10 @@
 
 #include "Search.h"
 
-#include "MarbleWidget.h"
+#include "MarbleDeclarativeWidget.h"
 #include "MarbleModel.h"
 #include "MarblePlacemarkModel.h"
+#include "ViewportParams.h"
 
 namespace Marble
 {
@@ -27,12 +28,12 @@ Search::Search( QObject* parent ) : QObject( parent ),
     // nothing to do
 }
 
-void Search::setMarbleWidget( Marble::MarbleWidget* widget )
+void Search::setMarbleWidget( Marble::Declarative::MarbleWidget* widget )
 {
     m_marbleWidget = widget;
-    connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
+    connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ),
              this, SLOT( updatePlacemarks() ) );
-    connect( m_marbleWidget, SIGNAL( themeChanged( QString ) ),
+    connect( m_marbleWidget, SIGNAL( mapThemeChanged() ),
              this, SLOT( updatePlacemarks() ) );
 }
 
@@ -114,7 +115,7 @@ void Search::updatePlacemarks()
             qreal x(0), y(0);
             QVariant position = m_searchResult->data( m_searchResult->index( iter.key() ), MarblePlacemarkModel::CoordinateRole );
             GeoDataCoordinates const coordinates = qVariantValue<GeoDataCoordinates>( position );
-            bool const visible = onEarth && m_marbleWidget->screenCoordinates( coordinates.longitude( GeoDataCoordinates::Degree ), coordinates.latitude( GeoDataCoordinates::Degree ), x, y );
+            bool const visible = onEarth && m_marbleWidget->viewport()->screenCoordinates( coordinates.longitude( GeoDataCoordinates::Degree ), coordinates.latitude( GeoDataCoordinates::Degree ), x, y );
             QDeclarativeItem* item = iter.value();
             if ( item ) {
                 item->setVisible( visible );

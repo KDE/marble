@@ -93,6 +93,8 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
              this, SIGNAL( workOfflineChanged() ) );
     connect( m_marbleWidget, SIGNAL( zoomChanged( int ) ),
              this, SIGNAL( zoomChanged() ) );
+    connect( m_marbleWidget, SIGNAL( themeChanged( const QString & ) ),
+             this, SIGNAL( mapThemeChanged() ) );
     connect( m_marbleWidget, SIGNAL( mouseClickGeoPosition( qreal, qreal, GeoDataCoordinates::Unit ) ),
              this, SLOT( forwardMouseClick( qreal, qreal, GeoDataCoordinates::Unit ) ) );
     connect( &m_center, SIGNAL(latitudeChanged()), this, SLOT(updateCenterPosition()));
@@ -105,6 +107,11 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
 Marble::MarbleModel *MarbleWidget::model()
 {
     return m_marbleWidget->model();
+}
+
+const Marble::ViewportParams *MarbleWidget::viewport() const
+{
+    return m_marbleWidget->viewport();
 }
 
 QStringList MarbleWidget::activeFloatItems() const
@@ -281,7 +288,7 @@ Marble::Declarative::Search* MarbleWidget::search()
 {
     if ( !m_search ) {
         m_search = new Search( this );
-        m_search->setMarbleWidget( m_marbleWidget );
+        m_search->setMarbleWidget( this );
         m_search->setDelegateParent( this );
     }
 

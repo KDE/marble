@@ -21,11 +21,12 @@ class QAbstractItemModel;
 namespace Marble
 {
 
-class MarbleWidget;
 class MarblePlacemarkModel;
 
 namespace Declarative
 {
+
+class MarbleWidget;
 
 class Search : public QObject
 {
@@ -36,7 +37,7 @@ class Search : public QObject
 public:
     explicit Search( QObject* parent = 0 );
 
-    void setMarbleWidget( Marble::MarbleWidget* widget );
+    void setMarbleWidget( Marble::Declarative::MarbleWidget* widget );
 
     void setDelegateParent( QGraphicsItem* parent );
 
@@ -67,7 +68,7 @@ private Q_SLOTS:
     void handleSearchResult();
 
 private:
-    Marble::MarbleWidget* m_marbleWidget;
+    Marble::Declarative::MarbleWidget* m_marbleWidget;
 
     /** Wrapped Marble runner manager */
     Marble::MarbleRunnerManager *m_runnerManager;
