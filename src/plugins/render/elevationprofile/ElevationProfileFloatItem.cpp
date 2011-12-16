@@ -720,29 +720,9 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
                 if ( i >= points.size() ) {
                     i = points.size() - 1;
                 }
-                /*
                 qreal lon = points[i].longitude( GeoDataCoordinates::Degree );
                 qreal lat = points[i].latitude ( GeoDataCoordinates::Degree );
                 widget->centerOn( lon, lat, true );
-                */
-                // The above would be more easy, but then Marble zooms in on every double click.
-                // (see MarbleWidgetDefaultInputHandler::eventFilter)
-                // This is not very convenient if you are "browsing" your route via the elevation
-                // profile.
-                // So, instead we use the following code and undo marble's zooming:
-
-                qreal lon = points[i].longitude();
-                qreal lat = points[i].latitude ();
-                GeoDataLookAt lookAt;
-                lookAt.setLongitude( lon );
-                lookAt.setLatitude( lat );
-                lookAt.setAltitude( 0.0 );
-                // see MarbleWidgetDefaultInputHandler::eventFilter's MouseButtonDblClick routine
-                // for the "magic" 0.67 to undo zooming
-                lookAt.setRange( widget->distance() * 1/0.67 * KM2METER );
-
-                widget->flyTo( lookAt );
-
                 return true;
             }
         }
