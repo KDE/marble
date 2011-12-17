@@ -353,10 +353,8 @@ void PlacemarkLayout::setCacheData()
 {
     const int rowCount = m_placemarkModel.rowCount();
 
-    m_paintOrder.clear();
-    qDeleteAll( m_visiblePlacemarks );
-    m_visiblePlacemarks.clear();
     m_placemarkCache.clear();
+    requestStyleReset();
     for ( int i = 0; i != rowCount; ++i )
     {
         const QModelIndex& index = m_placemarkModel.index( i, 0 );
@@ -663,15 +661,13 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         // ----------------------------------------------------------------
         // End of checks. Here the actual layouting starts.
 
-        // Find the corresponding visible placemark
-        VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
-        const GeoDataStyle* style = placemark->style();
 
         // Choose Section
         const QVector<VisiblePlacemark*> currentsec = rowsection.at( y / m_maxLabelHeight );
 
          // Find out whether the area around the placemark is covered already.
         // If there's not enough space free don't add a VisiblePlacemark here.
+        const GeoDataStyle* style = placemark->style();
 
         QRect labelRect = roomForLabel( style, currentsec, x, y, placemark->name() );
         if ( labelRect.isNull() )
@@ -684,6 +680,8 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         if ( labelnum >= placemarksOnScreenLimit() )
             break;
 
+        // Find the corresponding visible placemark
+        VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
         if ( !mark ) {
             // If there is no visible placemark yet for this index,
             // create a new one...
