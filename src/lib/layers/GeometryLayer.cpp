@@ -237,12 +237,13 @@ void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )
 void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry* object, const GeoDataPlacemark *placemark )
 {
     GeoGraphicsItem *item = 0;
-    if ( dynamic_cast<const GeoDataLinearRing*>( object ) )
-    {
-    }
-    else if ( const GeoDataLineString* line = dynamic_cast<const GeoDataLineString*>( object ) )
+    if ( const GeoDataLineString* line = dynamic_cast<const GeoDataLineString*>( object ) )
     {
         item = new GeoLineStringGraphicsItem( line );
+    }
+    else if ( const GeoDataLinearRing *ring = dynamic_cast<const GeoDataLinearRing*>( object ) )
+    {
+        item = new GeoPolygonGraphicsItem( ring );
     }
     else if ( const GeoDataPolygon *poly = dynamic_cast<const GeoDataPolygon*>( object ) )
     {

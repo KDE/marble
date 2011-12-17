@@ -21,14 +21,17 @@ class MARBLE_EXPORT GeoPolygonGraphicsItem : public GeoGraphicsItem
 {
 public:
     GeoPolygonGraphicsItem( const GeoDataPolygon* polygon );
+    GeoPolygonGraphicsItem( const GeoDataLinearRing* ring );
 
     void setPolygon( const GeoDataPolygon* polygon );
+    void setLinearRing( const GeoDataLinearRing* ring );
 
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );
 
 protected:
     const GeoDataPolygon *m_polygon;
+    const GeoDataLinearRing *m_ring;
 };
 
 }
