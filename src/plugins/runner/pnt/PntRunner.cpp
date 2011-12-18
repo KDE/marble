@@ -57,12 +57,7 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
 
     GeoDataDocument *document = new GeoDataDocument();
     document->setDocumentRole( role );
-
     GeoDataPlacemark  *placemark = 0;
-    placemark = new GeoDataPlacemark;
-    document->append( placemark );
-    GeoDataMultiGeometry *geom = new GeoDataMultiGeometry;
-    placemark->setGeometry( geom );
 
     int count = 0;
     bool error = false;
@@ -85,8 +80,8 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
             error = true;
         }
 
-        if ( header >= 1000 && geom->size() > 0 ) {
-            GeoDataLineString *const polyline = static_cast<GeoDataLineString*>( geom->child( geom->size() - 1 ) );
+        if ( header >= 1000 && document->size() > 0 ) {
+            GeoDataLineString *const polyline = static_cast<GeoDataLineString*>( placemark->geometry() );
             if ( polyline->size() == 1 ) {
                 mDebug() << Q_FUNC_INFO << fileName << "contains single-point polygon at" << count << ". Aborting.";
                 error = true;
@@ -112,35 +107,51 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
         }
         else if ( header < 2000 ) {
             /* header represents start of coastline */
-            geom->append( new GeoDataLineString );
+            placemark = new GeoDataPlacemark;
+            document->append( placemark );
+            placemark->setGeometry( new GeoDataLineString );
         }
         else if ( header < 4000 ) {
             /* header represents start of country border */
-            geom->append( new GeoDataLineString );
+            placemark = new GeoDataPlacemark;
+            document->append( placemark );
+            placemark->setGeometry( new GeoDataLineString );
         }
         else if ( header < 5000 ) {
             /* header represents start of internal political border */
-            geom->append( new GeoDataLineString );
+            placemark = new GeoDataPlacemark;
+            document->append( placemark );
+            placemark->setGeometry( new GeoDataLineString );
         }
         else if ( header < 6000 ) {
             /* header represents start of island */
-            geom->append( new GeoDataLinearRing );
+            placemark = new GeoDataPlacemark;
+            document->append( placemark );
+            placemark->setGeometry( new GeoDataLinearRing );
         }
         else if ( header < 7000 ) {
             /* header represents start of lake */
-            geom->append( new GeoDataLinearRing );
+            placemark = new GeoDataPlacemark;
+            document->append( placemark );
+            placemark->setGeometry( new GeoDataLinearRing );
         }
         else if ( header < 8000 ) {
             /* header represents start of river */
-            geom->append( new GeoDataLineString );
+            placemark = new GeoDataPlacemark;
+            document->append( placemark );
+            placemark->setGeometry( new GeoDataLineString );
         }
         else if ( header < 9000 ) {
             /* custom header represents start of glaciers, lakes or islands */
-            geom->append( new GeoDataLinearRing );
+            placemark = new GeoDataPlacemark;
+            document->append( placemark );
+            placemark->setGeometry( new GeoDataLinearRing );
         }
         else if ( header < 10000 ) {
             /* custom header represents start of political borders */
-            geom->append( new GeoDataLineString );
+            placemark = new GeoDataPlacemark;
+            document->append( placemark );
+            placemark->setGeometry( new GeoDataLineString );
         }
         else if ( header < 14000 ) {
             /* invalid header */
@@ -150,7 +161,9 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
         }
         else if ( header < 15000 ) {
             /* custom header represents start of political borders */
-            geom->append( new GeoDataLineString );
+            placemark = new GeoDataPlacemark;
+            document->append( placemark );
+            placemark->setGeometry( new GeoDataLineString );
         }
         else if ( header < 19000 ) {
             /* invalid header */
@@ -160,7 +173,9 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
         }
         else if ( header < 20000 ) {
             /* custom header represents start of dateline */
-            geom->append( new GeoDataLineString );
+            placemark = new GeoDataPlacemark;
+            document->append( placemark );
+            placemark->setGeometry( new GeoDataLineString );
         }
         else {
             /* invalid header */
@@ -169,7 +184,7 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
             break;
         }
 
-        GeoDataLineString *polyline = static_cast<GeoDataLineString*>(geom->child(geom->size()-1));
+        GeoDataLineString *polyline = static_cast<GeoDataLineString*>( placemark->geometry() );
 
         // Transforming Range of Coordinates to iLat [0,ARCMINUTE] , iLon [0,2 * ARCMINUTE]
         polyline->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD,
@@ -181,7 +196,7 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     }
 
     file.close();
-    if ( geom->size() == 0 || error ) {
+    if ( document->size() == 0 || error ) {
         delete document;
         document = 0;
     }
