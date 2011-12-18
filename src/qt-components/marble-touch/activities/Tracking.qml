@@ -29,8 +29,8 @@ Page {
             iconId: "toolbar-home"
             onClicked: {
                 marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
-                if (marbleWidget.zoom < 2000 ) {
-                    marbleWidget.zoom = 3050
+                if (marbleWidget.zoom < 22026 ) {
+                    marbleWidget.zoom = 4197500
                 }
             }
         }

@@ -24,7 +24,7 @@ Item {
     signal mouseClickGeoPosition(real longitude, real latitude)
 
     property alias mapThemeModel: map.mapThemeModel
-    property alias zoom: map.zoom
+    property alias radius: map.radius
 
     property alias routing: map.routing
     property alias search: map.search
@@ -41,7 +41,7 @@ Item {
 
         workOffline: settings.workOffline
         mapThemeId: settings.mapTheme
-        zoom: settings.quitZoom
+        radius: settings.quitRadius
         projection: settings.projection
         activeFloatItems: [ "compass", "scalebar", "progress" ]
         activeRenderPlugins: settings.activeRenderPlugins
@@ -79,7 +79,7 @@ Item {
         }
         
         Component.onDestruction: {
-            settings.quitZoom = zoom
+            settings.quitRadius = radius
             settings.quitLongitude = center.longitude
             settings.quitLatitude = center.latitude
         }
