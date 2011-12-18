@@ -68,7 +68,7 @@ Rectangle {
       Component.onCompleted: {
           map.center.longitude = settings.quitLongitude
           map.center.latitude = settings.quitLatitude
-          map.zoom = settings.quitZoom
+          map.radius = settings.quitRadius
       }
     }
 

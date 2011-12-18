@@ -25,7 +25,7 @@ Item {
 
     property alias mapThemeModel: map.mapThemeModel
     property alias streetMapThemeModel: map.streetMapThemeModel
-    property alias zoom: map.zoom
+    property alias radius: map.radius
 
     // The widget representing the map.
     MarbleWidget {
@@ -37,7 +37,7 @@ Item {
 
         workOffline: settings.workOffline
         mapThemeId: settings.mapTheme
-        zoom: settings.quitZoom
+        radius: settings.quitRadius
         projection: settings.projection
         activeFloatItems: [ "compass", "scalebar", "progress" ]
         activeRenderPlugins: settings.activeRenderPlugins
@@ -71,7 +71,7 @@ Item {
         }
         
         Component.onDestruction: {
-            settings.quitZoom = zoom
+            settings.quitRadius = radius
             settings.quitLongitude = center.longitude
             settings.quitLatitude = center.latitude
         }

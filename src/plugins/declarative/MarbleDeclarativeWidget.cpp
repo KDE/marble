@@ -92,7 +92,7 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     connect( m_marbleWidget->model(), SIGNAL( workOfflineChanged() ),
              this, SIGNAL( workOfflineChanged() ) );
     connect( m_marbleWidget, SIGNAL( zoomChanged( int ) ),
-             this, SIGNAL( zoomChanged() ) );
+             this, SIGNAL( radiusChanged() ) );
     connect( m_marbleWidget, SIGNAL( themeChanged( const QString & ) ),
              this, SIGNAL( mapThemeChanged() ) );
     connect( m_marbleWidget, SIGNAL( mouseClickGeoPosition( qreal, qreal, GeoDataCoordinates::Unit ) ),
@@ -337,14 +337,14 @@ void MarbleWidget::setWorkOffline( bool workOffline )
     m_marbleWidget->model()->setWorkOffline( workOffline );
 }
 
-int MarbleWidget::zoom() const
+int MarbleWidget::radius() const
 {
-    return m_marbleWidget->zoom();
+    return m_marbleWidget->radius();
 }
 
-void MarbleWidget::setZoom( int zoom )
+void MarbleWidget::setRadius( int radius )
 {
-    m_marbleWidget->zoomView( zoom );
+    m_marbleWidget->setRadius( radius );
 }
 
 }

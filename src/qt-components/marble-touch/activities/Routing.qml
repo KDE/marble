@@ -27,8 +27,8 @@ Page {
             iconId: "toolbar-home"
             onClicked: {
                 marbleWidget.centerOn( marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
-                if (marbleWidget.zoom < 2000 ) {
-                    marbleWidget.zoom = 2773
+                if (marbleWidget.radius < 22026 ) {
+                    marbleWidget.radius = 86250
                 }
             }
         }

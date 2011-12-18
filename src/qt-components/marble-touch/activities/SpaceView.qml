@@ -98,8 +98,8 @@ Page {
             settings.projection = "Spherical"
             settings.activeRenderPlugins =  settings.defaultRenderPlugins
             spaceViewActivityPage.setEarthSettings()
-            if (marbleWidget.zoom > 1300 ) {
-                marbleWidget.zoom = 1027
+            if (marbleWidget.radius > 655 ) {
+                marbleWidget.radius = 170
             }
             settings.gpsTracking = false
             settings.showPosition = false
