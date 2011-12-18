@@ -85,8 +85,8 @@
   <entry key="distanceUnit" type="Enum" >
    <label>The unit chosen to measure distances.</label>
    <choices name="QLocale::MeasurementSystem">
-    <choice name="QLocale::MetricSystem"/>
-    <choice name="QLocale::ImperialSystem"/>
+    <choice name="MeasurementSystem::MetricSystem"/>
+    <choice name="MeasurementSystem::ImperialSystem"/>
    </choices>
    <default>QLocale::MetricSystem</default>
   </entry>
