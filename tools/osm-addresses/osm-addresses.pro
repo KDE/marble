@@ -1,5 +1,4 @@
-QT       += core xml sql
-QT       -= gui
+QT       += core xml sql gui
 
 TARGET = osm-addresses
 CONFIG   += console

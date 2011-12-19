@@ -2,6 +2,9 @@
 
 #define INTERNAL_SUPPRESS_PROTOBUF_FIELD_DEPRECATION
 #include "osmformat.pb.h"
+
+#include <algorithm>
+
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -67,8 +70,6 @@ struct StaticDescriptorInitializer_osmformat_2eproto {
 
 // ===================================================================
 
-const ::std::string HeaderBlock::_default_writingprogram_;
-const ::std::string HeaderBlock::_default_source_;
 #ifndef _MSC_VER
 const int HeaderBlock::kBboxFieldNumber;
 const int HeaderBlock::kRequiredFeaturesFieldNumber;
@@ -95,8 +96,8 @@ HeaderBlock::HeaderBlock(const HeaderBlock& from)
 void HeaderBlock::SharedCtor() {
   _cached_size_ = 0;
   bbox_ = NULL;
-  writingprogram_ = const_cast< ::std::string*>(&_default_writingprogram_);
-  source_ = const_cast< ::std::string*>(&_default_source_);
+  writingprogram_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  source_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -105,10 +106,10 @@ HeaderBlock::~HeaderBlock() {
 }
 
 void HeaderBlock::SharedDtor() {
-  if (writingprogram_ != &_default_writingprogram_) {
+  if (writingprogram_ != &::google::protobuf::internal::kEmptyString) {
     delete writingprogram_;
   }
-  if (source_ != &_default_source_) {
+  if (source_ != &::google::protobuf::internal::kEmptyString) {
     delete source_;
   }
   if (this != default_instance_) {
@@ -133,16 +134,16 @@ HeaderBlock* HeaderBlock::New() const {
 
 void HeaderBlock::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (_has_bit(0)) {
+    if (has_bbox()) {
       if (bbox_ != NULL) bbox_->::OSMPBF::HeaderBBox::Clear();
     }
-    if (_has_bit(3)) {
-      if (writingprogram_ != &_default_writingprogram_) {
+    if (has_writingprogram()) {
+      if (writingprogram_ != &::google::protobuf::internal::kEmptyString) {
         writingprogram_->clear();
       }
     }
-    if (_has_bit(4)) {
-      if (source_ != &_default_source_) {
+    if (has_source()) {
+      if (source_ != &::google::protobuf::internal::kEmptyString) {
         source_->clear();
       }
     }
@@ -247,7 +248,7 @@ bool HeaderBlock::MergePartialFromCodedStream(
 void HeaderBlock::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // optional .OSMPBF.HeaderBBox bbox = 1;
-  if (_has_bit(0)) {
+  if (has_bbox()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       1, this->bbox(), output);
   }
@@ -265,13 +266,13 @@ void HeaderBlock::SerializeWithCachedSizes(
   }
   
   // optional string writingprogram = 16;
-  if (_has_bit(3)) {
+  if (has_writingprogram()) {
     ::google::protobuf::internal::WireFormatLite::WriteString(
       16, this->writingprogram(), output);
   }
   
   // optional string source = 17;
-  if (_has_bit(4)) {
+  if (has_source()) {
     ::google::protobuf::internal::WireFormatLite::WriteString(
       17, this->source(), output);
   }
@@ -334,13 +335,13 @@ void HeaderBlock::MergeFrom(const HeaderBlock& from) {
   required_features_.MergeFrom(from.required_features_);
   optional_features_.MergeFrom(from.optional_features_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from._has_bit(0)) {
+    if (from.has_bbox()) {
       mutable_bbox()->::OSMPBF::HeaderBBox::MergeFrom(from.bbox());
     }
-    if (from._has_bit(3)) {
+    if (from.has_writingprogram()) {
       set_writingprogram(from.writingprogram());
     }
-    if (from._has_bit(4)) {
+    if (from.has_source()) {
       set_source(from.source());
     }
   }
@@ -456,7 +457,7 @@ bool HeaderBBox::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_SINT64>(
                  input, &left_)));
-          _set_bit(0);
+          set_has_left();
         } else {
           goto handle_uninterpreted;
         }
@@ -472,7 +473,7 @@ bool HeaderBBox::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_SINT64>(
                  input, &right_)));
-          _set_bit(1);
+          set_has_right();
         } else {
           goto handle_uninterpreted;
         }
@@ -488,7 +489,7 @@ bool HeaderBBox::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_SINT64>(
                  input, &top_)));
-          _set_bit(2);
+          set_has_top();
         } else {
           goto handle_uninterpreted;
         }
@@ -504,7 +505,7 @@ bool HeaderBBox::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_SINT64>(
                  input, &bottom_)));
-          _set_bit(3);
+          set_has_bottom();
         } else {
           goto handle_uninterpreted;
         }
@@ -530,22 +531,22 @@ bool HeaderBBox::MergePartialFromCodedStream(
 void HeaderBBox::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required sint64 left = 1;
-  if (_has_bit(0)) {
+  if (has_left()) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt64(1, this->left(), output);
   }
   
   // required sint64 right = 2;
-  if (_has_bit(1)) {
+  if (has_right()) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt64(2, this->right(), output);
   }
   
   // required sint64 top = 3;
-  if (_has_bit(2)) {
+  if (has_top()) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt64(3, this->top(), output);
   }
   
   // required sint64 bottom = 4;
-  if (_has_bit(3)) {
+  if (has_bottom()) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt64(4, this->bottom(), output);
   }
   
@@ -598,16 +599,16 @@ void HeaderBBox::CheckTypeAndMergeFrom(
 void HeaderBBox::MergeFrom(const HeaderBBox& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from._has_bit(0)) {
+    if (from.has_left()) {
       set_left(from.left());
     }
-    if (from._has_bit(1)) {
+    if (from.has_right()) {
       set_right(from.right());
     }
-    if (from._has_bit(2)) {
+    if (from.has_top()) {
       set_top(from.top());
     }
-    if (from._has_bit(3)) {
+    if (from.has_bottom()) {
       set_bottom(from.bottom());
     }
   }
@@ -704,7 +705,7 @@ PrimitiveBlock* PrimitiveBlock::New() const {
 
 void PrimitiveBlock::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (_has_bit(0)) {
+    if (has_stringtable()) {
       if (stringtable_ != NULL) stringtable_->::OSMPBF::StringTable::Clear();
     }
     granularity_ = 100;
@@ -758,7 +759,7 @@ bool PrimitiveBlock::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &granularity_)));
-          _set_bit(2);
+          set_has_granularity();
         } else {
           goto handle_uninterpreted;
         }
@@ -774,7 +775,7 @@ bool PrimitiveBlock::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &date_granularity_)));
-          _set_bit(5);
+          set_has_date_granularity();
         } else {
           goto handle_uninterpreted;
         }
@@ -790,7 +791,7 @@ bool PrimitiveBlock::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &lat_offset_)));
-          _set_bit(3);
+          set_has_lat_offset();
         } else {
           goto handle_uninterpreted;
         }
@@ -806,7 +807,7 @@ bool PrimitiveBlock::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &lon_offset_)));
-          _set_bit(4);
+          set_has_lon_offset();
         } else {
           goto handle_uninterpreted;
         }
@@ -832,7 +833,7 @@ bool PrimitiveBlock::MergePartialFromCodedStream(
 void PrimitiveBlock::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required .OSMPBF.StringTable stringtable = 1;
-  if (_has_bit(0)) {
+  if (has_stringtable()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       1, this->stringtable(), output);
   }
@@ -844,22 +845,22 @@ void PrimitiveBlock::SerializeWithCachedSizes(
   }
   
   // optional int32 granularity = 17 [default = 100];
-  if (_has_bit(2)) {
+  if (has_granularity()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(17, this->granularity(), output);
   }
   
   // optional int32 date_granularity = 18 [default = 1000];
-  if (_has_bit(5)) {
+  if (has_date_granularity()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(18, this->date_granularity(), output);
   }
   
   // optional int64 lat_offset = 19 [default = 0];
-  if (_has_bit(3)) {
+  if (has_lat_offset()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(19, this->lat_offset(), output);
   }
   
   // optional int64 lon_offset = 20 [default = 0];
-  if (_has_bit(4)) {
+  if (has_lon_offset()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(20, this->lon_offset(), output);
   }
   
@@ -928,19 +929,19 @@ void PrimitiveBlock::MergeFrom(const PrimitiveBlock& from) {
   GOOGLE_CHECK_NE(&from, this);
   primitivegroup_.MergeFrom(from.primitivegroup_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from._has_bit(0)) {
+    if (from.has_stringtable()) {
       mutable_stringtable()->::OSMPBF::StringTable::MergeFrom(from.stringtable());
     }
-    if (from._has_bit(2)) {
+    if (from.has_granularity()) {
       set_granularity(from.granularity());
     }
-    if (from._has_bit(3)) {
+    if (from.has_lat_offset()) {
       set_lat_offset(from.lat_offset());
     }
-    if (from._has_bit(4)) {
+    if (from.has_lon_offset()) {
       set_lon_offset(from.lon_offset());
     }
-    if (from._has_bit(5)) {
+    if (from.has_date_granularity()) {
       set_date_granularity(from.date_granularity());
     }
   }
@@ -1037,7 +1038,7 @@ PrimitiveGroup* PrimitiveGroup::New() const {
 
 void PrimitiveGroup::Clear() {
   if (_has_bits_[1 / 32] & (0xffu << (1 % 32))) {
-    if (_has_bit(1)) {
+    if (has_dense()) {
       if (dense_ != NULL) dense_->::OSMPBF::DenseNodes::Clear();
     }
   }
@@ -1152,7 +1153,7 @@ void PrimitiveGroup::SerializeWithCachedSizes(
   }
   
   // optional .OSMPBF.DenseNodes dense = 2;
-  if (_has_bit(1)) {
+  if (has_dense()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       2, this->dense(), output);
   }
@@ -1239,7 +1240,7 @@ void PrimitiveGroup::MergeFrom(const PrimitiveGroup& from) {
   relations_.MergeFrom(from.relations_);
   changesets_.MergeFrom(from.changesets_);
   if (from._has_bits_[1 / 32] & (0xffu << (1 % 32))) {
-    if (from._has_bit(1)) {
+    if (from.has_dense()) {
       mutable_dense()->::OSMPBF::DenseNodes::MergeFrom(from.dense());
     }
   }
@@ -1517,7 +1518,7 @@ bool Info::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &version_)));
-          _set_bit(0);
+          set_has_version();
         } else {
           goto handle_uninterpreted;
         }
@@ -1533,7 +1534,7 @@ bool Info::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &timestamp_)));
-          _set_bit(1);
+          set_has_timestamp();
         } else {
           goto handle_uninterpreted;
         }
@@ -1549,7 +1550,7 @@ bool Info::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &changeset_)));
-          _set_bit(2);
+          set_has_changeset();
         } else {
           goto handle_uninterpreted;
         }
@@ -1565,7 +1566,7 @@ bool Info::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &uid_)));
-          _set_bit(3);
+          set_has_uid();
         } else {
           goto handle_uninterpreted;
         }
@@ -1581,7 +1582,7 @@ bool Info::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &user_sid_)));
-          _set_bit(4);
+          set_has_user_sid();
         } else {
           goto handle_uninterpreted;
         }
@@ -1607,27 +1608,27 @@ bool Info::MergePartialFromCodedStream(
 void Info::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // optional int32 version = 1 [default = -1];
-  if (_has_bit(0)) {
+  if (has_version()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->version(), output);
   }
   
   // optional int64 timestamp = 2;
-  if (_has_bit(1)) {
+  if (has_timestamp()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->timestamp(), output);
   }
   
   // optional int64 changeset = 3;
-  if (_has_bit(2)) {
+  if (has_changeset()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(3, this->changeset(), output);
   }
   
   // optional int32 uid = 4;
-  if (_has_bit(3)) {
+  if (has_uid()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->uid(), output);
   }
   
   // optional uint32 user_sid = 5;
-  if (_has_bit(4)) {
+  if (has_user_sid()) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(5, this->user_sid(), output);
   }
   
@@ -1687,19 +1688,19 @@ void Info::CheckTypeAndMergeFrom(
 void Info::MergeFrom(const Info& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from._has_bit(0)) {
+    if (from.has_version()) {
       set_version(from.version());
     }
-    if (from._has_bit(1)) {
+    if (from.has_timestamp()) {
       set_timestamp(from.timestamp());
     }
-    if (from._has_bit(2)) {
+    if (from.has_changeset()) {
       set_changeset(from.changeset());
     }
-    if (from._has_bit(3)) {
+    if (from.has_uid()) {
       set_uid(from.uid());
     }
-    if (from._has_bit(4)) {
+    if (from.has_user_sid()) {
       set_user_sid(from.user_sid());
     }
   }
@@ -2170,7 +2171,7 @@ bool ChangeSet::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &id_)));
-          _set_bit(0);
+          set_has_id();
         } else {
           goto handle_uninterpreted;
         }
@@ -2196,7 +2197,7 @@ bool ChangeSet::MergePartialFromCodedStream(
 void ChangeSet::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required int64 id = 1;
-  if (_has_bit(0)) {
+  if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->id(), output);
   }
   
@@ -2228,7 +2229,7 @@ void ChangeSet::CheckTypeAndMergeFrom(
 void ChangeSet::MergeFrom(const ChangeSet& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from._has_bit(0)) {
+    if (from.has_id()) {
       set_id(from.id());
     }
   }
@@ -2322,7 +2323,7 @@ Node* Node::New() const {
 void Node::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     id_ = GOOGLE_LONGLONG(0);
-    if (_has_bit(3)) {
+    if (has_info()) {
       if (info_ != NULL) info_->::OSMPBF::Info::Clear();
     }
     lat_ = GOOGLE_LONGLONG(0);
@@ -2346,7 +2347,7 @@ bool Node::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_SINT64>(
                  input, &id_)));
-          _set_bit(0);
+          set_has_id();
         } else {
           goto handle_uninterpreted;
         }
@@ -2418,7 +2419,7 @@ bool Node::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_SINT64>(
                  input, &lat_)));
-          _set_bit(4);
+          set_has_lat();
         } else {
           goto handle_uninterpreted;
         }
@@ -2434,7 +2435,7 @@ bool Node::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_SINT64>(
                  input, &lon_)));
-          _set_bit(5);
+          set_has_lon();
         } else {
           goto handle_uninterpreted;
         }
@@ -2460,7 +2461,7 @@ bool Node::MergePartialFromCodedStream(
 void Node::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required sint64 id = 1;
-  if (_has_bit(0)) {
+  if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt64(1, this->id(), output);
   }
   
@@ -2485,18 +2486,18 @@ void Node::SerializeWithCachedSizes(
   }
   
   // optional .OSMPBF.Info info = 4;
-  if (_has_bit(3)) {
+  if (has_info()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       4, this->info(), output);
   }
   
   // required sint64 lat = 8;
-  if (_has_bit(4)) {
+  if (has_lat()) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt64(8, this->lat(), output);
   }
   
   // required sint64 lon = 9;
-  if (_has_bit(5)) {
+  if (has_lon()) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt64(9, this->lon(), output);
   }
   
@@ -2581,16 +2582,16 @@ void Node::MergeFrom(const Node& from) {
   keys_.MergeFrom(from.keys_);
   vals_.MergeFrom(from.vals_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from._has_bit(0)) {
+    if (from.has_id()) {
       set_id(from.id());
     }
-    if (from._has_bit(3)) {
+    if (from.has_info()) {
       mutable_info()->::OSMPBF::Info::MergeFrom(from.info());
     }
-    if (from._has_bit(4)) {
+    if (from.has_lat()) {
       set_lat(from.lat());
     }
-    if (from._has_bit(5)) {
+    if (from.has_lon()) {
       set_lon(from.lon());
     }
   }
@@ -2684,7 +2685,7 @@ DenseNodes* DenseNodes::New() const {
 
 void DenseNodes::Clear() {
   if (_has_bits_[1 / 32] & (0xffu << (1 % 32))) {
-    if (_has_bit(1)) {
+    if (has_denseinfo()) {
       if (denseinfo_ != NULL) denseinfo_->::OSMPBF::DenseInfo::Clear();
     }
   }
@@ -2826,7 +2827,7 @@ void DenseNodes::SerializeWithCachedSizes(
   }
   
   // optional .OSMPBF.DenseInfo denseinfo = 5;
-  if (_has_bit(1)) {
+  if (has_denseinfo()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       5, this->denseinfo(), output);
   }
@@ -2953,7 +2954,7 @@ void DenseNodes::MergeFrom(const DenseNodes& from) {
   lon_.MergeFrom(from.lon_);
   keys_vals_.MergeFrom(from.keys_vals_);
   if (from._has_bits_[1 / 32] & (0xffu << (1 % 32))) {
-    if (from._has_bit(1)) {
+    if (from.has_denseinfo()) {
       mutable_denseinfo()->::OSMPBF::DenseInfo::MergeFrom(from.denseinfo());
     }
   }
@@ -3047,7 +3048,7 @@ Way* Way::New() const {
 void Way::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     id_ = GOOGLE_LONGLONG(0);
-    if (_has_bit(3)) {
+    if (has_info()) {
       if (info_ != NULL) info_->::OSMPBF::Info::Clear();
     }
   }
@@ -3070,7 +3071,7 @@ bool Way::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &id_)));
-          _set_bit(0);
+          set_has_id();
         } else {
           goto handle_uninterpreted;
         }
@@ -3173,7 +3174,7 @@ bool Way::MergePartialFromCodedStream(
 void Way::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required int64 id = 1;
-  if (_has_bit(0)) {
+  if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->id(), output);
   }
   
@@ -3198,7 +3199,7 @@ void Way::SerializeWithCachedSizes(
   }
   
   // optional .OSMPBF.Info info = 4;
-  if (_has_bit(3)) {
+  if (has_info()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       4, this->info(), output);
   }
@@ -3296,10 +3297,10 @@ void Way::MergeFrom(const Way& from) {
   vals_.MergeFrom(from.vals_);
   refs_.MergeFrom(from.refs_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from._has_bit(0)) {
+    if (from.has_id()) {
       set_id(from.id());
     }
-    if (from._has_bit(3)) {
+    if (from.has_info()) {
       mutable_info()->::OSMPBF::Info::MergeFrom(from.info());
     }
   }
@@ -3415,7 +3416,7 @@ Relation* Relation::New() const {
 void Relation::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     id_ = GOOGLE_LONGLONG(0);
-    if (_has_bit(3)) {
+    if (has_info()) {
       if (info_ != NULL) info_->::OSMPBF::Info::Clear();
     }
   }
@@ -3440,7 +3441,7 @@ bool Relation::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &id_)));
-          _set_bit(0);
+          set_has_id();
         } else {
           goto handle_uninterpreted;
         }
@@ -3599,7 +3600,7 @@ bool Relation::MergePartialFromCodedStream(
 void Relation::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required int64 id = 1;
-  if (_has_bit(0)) {
+  if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->id(), output);
   }
   
@@ -3624,7 +3625,7 @@ void Relation::SerializeWithCachedSizes(
   }
   
   // optional .OSMPBF.Info info = 4;
-  if (_has_bit(3)) {
+  if (has_info()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       4, this->info(), output);
   }
@@ -3777,10 +3778,10 @@ void Relation::MergeFrom(const Relation& from) {
   memids_.MergeFrom(from.memids_);
   types_.MergeFrom(from.types_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from._has_bit(0)) {
+    if (from.has_id()) {
       set_id(from.id());
     }
-    if (from._has_bit(3)) {
+    if (from.has_info()) {
       mutable_info()->::OSMPBF::Info::MergeFrom(from.info());
     }
   }
