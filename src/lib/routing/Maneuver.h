@@ -11,8 +11,10 @@
 #ifndef MARBLE_MANEUVER_H
 #define MARBLE_MANEUVER_H
 
+#include <QtCore/QString>
+#include <QtCore/QMap>
+
 #include "GeoDataCoordinates.h"
-#include "routing/instructions/RoutingInstruction.h"
 
 namespace Marble
 {
@@ -21,11 +23,27 @@ class MARBLE_EXPORT Maneuver
 {
 
 public:
+    enum Direction {
+        Unknown = 0,
+        Straight,
+        SlightRight,
+        Right,
+        SharpRight,
+        TurnAround,
+        SharpLeft,
+        Left,
+        SlightLeft,
+        RoundaboutFirstExit,
+        RoundaboutSecondExit,
+        RoundaboutThirdExit,
+        RoundaboutExit
+    };
+
     Maneuver();
 
-    RoutingInstruction::TurnType direction() const;
+    Direction direction() const;
 
-    void setDirection( RoutingInstruction::TurnType direction );
+    void setDirection( Direction direction );
 
     GeoDataCoordinates position() const;
 
@@ -44,7 +62,7 @@ public:
     QString directionPixmap() const;
 
 private:
-    RoutingInstruction::TurnType m_direction;
+    Direction m_direction;
 
     GeoDataCoordinates m_position;
 
@@ -54,7 +72,7 @@ private:
 
     QString m_instructionText;
 
-    static QMap<RoutingInstruction::TurnType,QString> m_turnTypePixmaps;
+    static QMap<Direction,QString> m_turnTypePixmaps;
 };
 
 }

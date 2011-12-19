@@ -15,7 +15,6 @@
 #include "GeoDataLineString.h"
 #include "MarblePlacemarkModel.h"
 #include "Route.h"
-#include "routing/instructions/RoutingInstruction.h"
 
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QTime>
