@@ -401,6 +401,7 @@ else (APPLE AND QTONLY)
     MapWizard.h
     ElevationModel.h
 
+    routing/AlternativeRoutesModel.h
     routing/Route.h
     routing/Maneuver.h
     routing/RouteRequest.h
