@@ -13,7 +13,6 @@
 
 #include "marble_export.h"
 #include "GeoDataLineString.h"
-#include "MarblePlacemarkModel.h"
 #include "Route.h"
 
 #include <QtCore/QAbstractListModel>
@@ -40,7 +39,7 @@ class MARBLE_EXPORT RoutingModel : public QAbstractListModel
 
 public:
     enum RoutingModelRoles {
-        CoordinateRole = MarblePlacemarkModel::CoordinateRole,
+        CoordinateRole = Qt::UserRole + 3,
         TurnTypeIconRole,
         LongitudeRole,
         LatitudeRole
