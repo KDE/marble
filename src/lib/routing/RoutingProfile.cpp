@@ -15,7 +15,7 @@ namespace Marble
 {
 
 RoutingProfile::RoutingProfile( const QString &name ) :
-        m_name( name )
+    m_name( name ), m_transportType( Motorcar )
 {
     // nothing to do
 }
@@ -38,6 +38,16 @@ const QHash<QString, QHash<QString, QVariant> >& RoutingProfile::pluginSettings(
 QHash<QString, QHash<QString, QVariant> >& RoutingProfile::pluginSettings()
 {
     return m_pluginSettings;
+}
+
+void RoutingProfile::setTransportType( RoutingProfile::TransportType transportType )
+{
+    m_transportType = transportType;
+}
+
+RoutingProfile::TransportType RoutingProfile::transportType() const
+{
+    return m_transportType;
 }
 
 bool RoutingProfile::operator==( const RoutingProfile &other ) const

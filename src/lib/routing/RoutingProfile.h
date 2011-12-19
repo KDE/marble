@@ -22,7 +22,16 @@ namespace Marble
 {
 
 class MARBLE_EXPORT RoutingProfile {
+    Q_PROPERTY(QString name READ name WRITE setName)
+    Q_PROPERTY(TransportType transportType READ transportType WRITE setTransportType)
+
 public:
+    enum TransportType {
+        Motorcar,
+        Bicycle,
+        Pedestrian
+    };
+
     explicit RoutingProfile( const QString &name = QString() );
 
     QString name() const;
@@ -33,12 +42,18 @@ public:
 
     QHash<QString, QHash<QString, QVariant> >& pluginSettings();
 
+    void setTransportType( TransportType transportType );
+
+    TransportType transportType() const;
+
     bool operator==( const RoutingProfile &other ) const;
 
 private:
     QString m_name;
     //icon
     QHash<QString, QHash<QString, QVariant> > m_pluginSettings;
+
+    TransportType m_transportType;
 };
 
 }
