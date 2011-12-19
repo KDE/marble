@@ -13,6 +13,7 @@
 
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"
+#include "RoutingProfile.h"
 
 #include <QtCore/QAbstractItemModel>
 
@@ -102,6 +103,11 @@ public:
       * Opens the given filename (kml format) and loads the route contained in it
       */
     void loadRoute( const QString &filename );
+
+    /**
+      * Generates a routing profile with default settings for the given transport type
+      */
+    RoutingProfile defaultProfile( RoutingProfile::TransportType transportType ) const;
 
     /**
       * Set whether a warning message should be shown to the user before

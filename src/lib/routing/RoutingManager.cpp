@@ -17,6 +17,7 @@
 #include "RoutingModel.h"
 #include "RoutingProfilesModel.h"
 #include "MarbleRunnerManager.h"
+#include "RunnerPlugin.h"
 #include "AdjustNavigation.h"
 #include "GeoWriter.h"
 #include "GeoDataDocument.h"
@@ -329,6 +330,42 @@ void RoutingManager::saveRoute( const QString &filename ) const
 void RoutingManager::loadRoute( const QString &filename )
 {
     d->loadRoute( filename );
+}
+
+RoutingProfile RoutingManager::defaultProfile( RoutingProfile::TransportType transportType ) const
+{
+    RoutingProfile profile;
+    RoutingProfilesModel::ProfileTemplate tpl = RoutingProfilesModel::CarFastestTemplate;
+    switch ( transportType ) {
+    case RoutingProfile::Motorcar:
+        tpl = RoutingProfilesModel::CarFastestTemplate;
+        profile.setName( "Motorcar" );
+        profile.setTransportType( RoutingProfile::Motorcar );
+        break;
+    case RoutingProfile::Bicycle:
+        tpl = RoutingProfilesModel::BicycleTemplate;
+        profile.setName( "Bicycle" );
+        profile.setTransportType( RoutingProfile::Bicycle );
+        break;
+    case RoutingProfile::Pedestrian:
+        tpl = RoutingProfilesModel::PedestrianTemplate;
+        profile.setName( "Pedestrian" );
+        profile.setTransportType( RoutingProfile::Pedestrian );
+        break;
+    }
+
+    const PluginManager* pluginManager = d->m_marbleModel->pluginManager();
+    foreach( RunnerPlugin* plugin, pluginManager->runnerPlugins() ) {
+        if ( !plugin->supports( RunnerPlugin::Routing ) ) {
+            continue;
+        }
+
+        if ( plugin->supportsTemplate( tpl ) ) {
+            profile.pluginSettings()[plugin->nameId()] = plugin->templateSettings( tpl );
+        }
+    }
+
+    return profile;
 }
 
 void RoutingManager::readSettings()

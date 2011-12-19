@@ -18,6 +18,7 @@
 #include "routing/RoutingModel.h"
 #include "routing/RouteRequest.h"
 #include "RouteRequestModel.h"
+#include "routing/RoutingProfilesModel.h"
 
 namespace Marble
 {
