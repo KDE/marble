@@ -400,6 +400,15 @@ else (APPLE AND QTONLY)
     LatLonEdit.h
     MapWizard.h
     ElevationModel.h
+
+    routing/Route.h
+    routing/Maneuver.h
+    routing/RouteRequest.h
+    routing/RouteSegment.h
+    routing/RoutingManager.h
+    routing/RoutingModel.h
+    routing/RoutingProfile.h
+
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )
 endif (APPLE AND QTONLY)
