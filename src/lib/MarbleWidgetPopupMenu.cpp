@@ -334,7 +334,7 @@ void MarbleWidgetPopupMenu::directionsFromHere()
             } else {
                 request->append( coordinates );
             }
-            m_widget->model()->routingManager()->updateRoute();
+            m_widget->model()->routingManager()->retrieveRoute();
         }
     }
 }
@@ -351,7 +351,7 @@ void MarbleWidgetPopupMenu::directionsToHere()
             } else {
                 request->append( coordinates );
             }
-            m_widget->model()->routingManager()->updateRoute();
+            m_widget->model()->routingManager()->retrieveRoute();
         }
     }
 }

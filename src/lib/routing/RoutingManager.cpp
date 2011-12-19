@@ -266,7 +266,7 @@ RouteRequest* RoutingManager::routeRequest()
     return &d->m_routeRequest;
 }
 
-void RoutingManager::updateRoute()
+void RoutingManager::retrieveRoute()
 {
     d->m_haveRoute = false;
 
@@ -433,10 +433,10 @@ void RoutingManagerPrivate::recalculateRoute( bool deviated )
 
         if ( m_routeRequest.size() == 2 && m_routeRequest.visited( 0 ) && !m_routeRequest.visited( 1 ) ) {
             m_routeRequest.setPosition( 0, m_marbleModel->positionTracking()->currentLocation() );
-            q->updateRoute();
+            q->retrieveRoute();
         } else if ( m_routeRequest.size() != 0 && !m_routeRequest.visited( m_routeRequest.size()-1 ) ) {
             m_routeRequest.insert( 0, m_marbleModel->positionTracking()->currentLocation() );
-            q->updateRoute();
+            q->retrieveRoute();
         }
     }
 }
@@ -444,13 +444,13 @@ void RoutingManagerPrivate::recalculateRoute( bool deviated )
 void RoutingManager::reverseRoute()
 {
     d->m_routeRequest.reverse();
-    updateRoute();
+    retrieveRoute();
 }
 
 void RoutingManager::clearRoute()
 {
     d->m_routeRequest.clear();
-    updateRoute();
+    retrieveRoute();
 }
 
 void RoutingManager::setShowGuidanceModeStartupWarning( bool show )

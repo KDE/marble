@@ -168,7 +168,7 @@ void Routing::clearRoute()
 void Routing::updateRoute()
 {
     if ( d->m_marbleWidget ) {
-        d->m_marbleWidget->model()->routingManager()->updateRoute();
+        d->m_marbleWidget->model()->routingManager()->retrieveRoute();
     }
 }
 

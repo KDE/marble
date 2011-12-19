@@ -248,7 +248,7 @@ void MarbleWidgetPrivate::construct()
     m_routingLayer->setPlacemarkModel( 0 );
 
     m_widget->connect( m_routingLayer, SIGNAL( routeDirty() ),
-                       m_model.routingManager(), SLOT( updateRoute() ) );
+                       m_model.routingManager(), SLOT( retrieveRoute() ) );
     m_widget->connect( m_model.routingManager()->alternativeRoutesModel(),
                        SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
                        m_widget, SLOT( repaint() ) );

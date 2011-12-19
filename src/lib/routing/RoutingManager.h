@@ -175,8 +175,8 @@ public Q_SLOTS:
     /** Reverse the previously requested route, i.e. swap start and destination (and via points, if any) */
     void reverseRoute();
 
-    /** Update the route */
-    void updateRoute();
+    /** Retrieve a route suiting the routeRequest */
+    void retrieveRoute();
 
     /** Clear all via points */
     void clearRoute();
