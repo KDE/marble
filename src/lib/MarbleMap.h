@@ -634,6 +634,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void projectionChanged( Projection );
 
+    void radiusChanged( int radius );
+
     void mouseMoveGeoPosition( const QString& );
 
     void mouseClickGeoPosition( qreal lon, qreal lat, GeoDataCoordinates::Unit );

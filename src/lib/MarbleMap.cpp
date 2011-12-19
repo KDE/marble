@@ -376,9 +376,15 @@ int MarbleMap::radius() const
 
 void MarbleMap::setRadius( int radius )
 {
+    const int oldRadius = d->m_viewport.radius();
+
     d->m_viewport.setRadius( radius );
 
     d->m_textureLayer.setNeedsUpdate();
+
+    if ( oldRadius != d->m_viewport.radius() ) {
+        emit radiusChanged( radius );
+    }
 }
 
 
