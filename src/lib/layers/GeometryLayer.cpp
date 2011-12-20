@@ -22,6 +22,7 @@
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
 #include "GeoDataTrack.h"
+#include "GeoDataTypes.h"
 #include "MarbleDebug.h"
 #include "GeoDataFeature.h"
 #include "GeoPainter.h"
@@ -237,28 +238,33 @@ void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )
 void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry* object, const GeoDataPlacemark *placemark )
 {
     GeoGraphicsItem *item = 0;
-    if ( const GeoDataLineString* line = dynamic_cast<const GeoDataLineString*>( object ) )
+    if ( object->nodeType() == GeoDataTypes::GeoDataLineStringType )
     {
+        const GeoDataLineString* line = static_cast<const GeoDataLineString*>( object );
         item = new GeoLineStringGraphicsItem( line );
     }
-    else if ( const GeoDataLinearRing *ring = dynamic_cast<const GeoDataLinearRing*>( object ) )
+    else if ( object->nodeType() == GeoDataTypes::GeoDataLinearRingType )
     {
+        const GeoDataLinearRing *ring = static_cast<const GeoDataLinearRing*>( object );
         item = new GeoPolygonGraphicsItem( ring );
     }
-    else if ( const GeoDataPolygon *poly = dynamic_cast<const GeoDataPolygon*>( object ) )
+    else if ( object->nodeType() == GeoDataTypes::GeoDataPolygonType )
     {
+        const GeoDataPolygon *poly = static_cast<const GeoDataPolygon*>( object );
         item = new GeoPolygonGraphicsItem( poly );
     }
-    else if ( const GeoDataMultiGeometry *multigeo = dynamic_cast<const GeoDataMultiGeometry*>( object ) )
+    else if ( object->nodeType() == GeoDataTypes::GeoDataMultiGeometryType  )
     {
+        const GeoDataMultiGeometry *multigeo = static_cast<const GeoDataMultiGeometry*>( object );
         int rowCount = multigeo->size();
         for ( int row = 0; row < rowCount; ++row )
         {
             createGraphicsItemFromGeometry( multigeo->child( row ), placemark );
         }
     }
-    else if ( const GeoDataTrack *track = dynamic_cast<const GeoDataTrack*>( object ) )
+    else if ( object->nodeType() == GeoDataTypes::GeoDataTrackType )
     {
+        const GeoDataTrack *track = static_cast<const GeoDataTrack*>( object );
         item = new GeoTrackGraphicsItem( track );
     }
     if ( !item )
