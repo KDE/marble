@@ -14,7 +14,6 @@
 
 #include "GeoDataCoordinates.h"
 #include "marble_export.h"
-#include "TileId.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QCache>
@@ -27,6 +26,7 @@ namespace {
     unsigned int const invalidElevationData = 32768;
 }
 
+class TileId;
 class MarbleModel;
 class ElevationModelPrivate;
 
