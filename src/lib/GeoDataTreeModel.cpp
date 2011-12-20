@@ -519,7 +519,6 @@ int GeoDataTreeModel::addFeature( GeoDataContainer *parent, GeoDataFeature *feat
             beginInsertRows( modelindex , row , row );
             parent->append( feature );
             endInsertRows();
-            emit treeChanged();
             emit added(feature);
         }
         else
@@ -541,7 +540,6 @@ bool GeoDataTreeModel::removeFeature( GeoDataContainer *parent, int row )
         beginRemoveRows( index( parent ), row , row );
         parent->remove( row );
         endRemoveRows();
-        emit treeChanged();
         return true;
     }
     return false; //Tried to remove a row that is not contained in the parent.

@@ -100,7 +100,6 @@ public Q_SLOTS:
 signals:
     /// insert and remove row don't trigger any signal that proxies forward
     /// this signal will refresh geometry layer and placemark layout
-    void treeChanged();
     void removed( GeoDataObject *object );
     void added( GeoDataObject *object );
  private:

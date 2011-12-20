@@ -168,15 +168,6 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
     QObject::connect( &m_veccomposer, SIGNAL( datasetLoaded() ),
                       parent, SIGNAL( repaintNeeded() ));
 
-    QObject::connect( model->treeModel(), SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
-                      &m_placemarkLayout, SLOT( setCacheData() ) );
-    QObject::connect( model->treeModel(), SIGNAL( layoutChanged() ),
-                      &m_placemarkLayout, SLOT( setCacheData() ) );
-    QObject::connect( model->treeModel(), SIGNAL( modelReset() ),
-                      &m_placemarkLayout, SLOT( setCacheData() ) );
-    QObject::connect( model->treeModel(), SIGNAL( treeChanged() ),
-                      &m_placemarkLayout, SLOT( setCacheData() ) );
-
     QObject::connect( &m_placemarkLayout, SIGNAL( repaintNeeded()),
                       parent, SIGNAL( repaintNeeded() ));
 
@@ -186,15 +177,6 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
                        parent,        SIGNAL( repaintNeeded( QRegion ) ) );
     QObject::connect ( &m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        parent,        SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
-
-    QObject::connect( model->treeModel(), SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
-                      &m_geometryLayer, SLOT( invalidateScene() ) );
-    QObject::connect( model->treeModel(), SIGNAL( layoutChanged() ),
-                      &m_geometryLayer, SLOT( invalidateScene() ) );
-    QObject::connect( model->treeModel(), SIGNAL( modelReset() ),
-                      &m_geometryLayer, SLOT( invalidateScene() ) );
-    QObject::connect( model->treeModel(), SIGNAL( treeChanged() ),
-                      &m_geometryLayer, SLOT( invalidateScene() ) );
 
     QObject::connect( &m_geometryLayer, SIGNAL( repaintNeeded()),
                       parent, SIGNAL( repaintNeeded() ));

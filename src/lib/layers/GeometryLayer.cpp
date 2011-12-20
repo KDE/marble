@@ -81,6 +81,15 @@ GeometryLayer::GeometryLayer( const QAbstractItemModel *model )
     const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
         d->createGraphicsItems( object->parent() );
+
+    connect( model, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
+             this, SLOT( invalidateScene() ) );
+    connect( model, SIGNAL( rowsInserted(const QModelIndex&, int, int) ),
+             this, SLOT( invalidateScene() ) );
+    connect( model, SIGNAL( rowsRemoved(const QModelIndex&, int, int) ),
+             this, SLOT( invalidateScene() ) );
+    connect( model, SIGNAL( modelReset() ),
+             this, SLOT( invalidateScene() ) );
 }
 
 GeometryLayer::~GeometryLayer()

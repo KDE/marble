@@ -59,6 +59,15 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
                                                            QItemSelection) ),
              this,               SLOT( requestStyleReset() ) );
 
+    connect( &m_placemarkModel, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
+             this, SLOT( setCacheData() ) );
+    connect( &m_placemarkModel, SIGNAL( rowsInserted(const QModelIndex&, int, int) ),
+             this, SLOT( setCacheData() ) );
+    connect( &m_placemarkModel, SIGNAL( rowsRemoved(const QModelIndex&, int, int) ),
+             this, SLOT( setCacheData() ) );
+    connect( &m_placemarkModel, SIGNAL( modelReset() ),
+             this, SLOT( setCacheData() ) );
+
 //  Old weightfilter array. Still here
 // to be able to compare performance
 /*
