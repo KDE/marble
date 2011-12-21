@@ -44,6 +44,7 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
     QPixmap icon() const;
 
     void setIconPath( const QString& filename );
+    QString iconPath() const;
 
     void setHotSpot( const QPointF& hotSpot, GeoDataHotSpot::Units xunits, GeoDataHotSpot::Units yunits );
     const QPointF& hotSpot() const;

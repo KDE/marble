@@ -89,6 +89,11 @@ void GeoDataIconStyle::setIconPath( const QString& filename )
     d->m_iconPath = filename;
 }
 
+QString GeoDataIconStyle::iconPath() const
+{
+    return d->m_iconPath;
+}
+
 QPixmap GeoDataIconStyle::icon() const
 {
     if(!d->m_icon.isNull())
