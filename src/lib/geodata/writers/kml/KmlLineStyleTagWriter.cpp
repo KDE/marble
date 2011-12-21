@@ -23,23 +23,16 @@ static GeoTagWriterRegistrar s_writerLineStyle(
                                  kml::kmlTag_nameSpace22 ),
     new KmlLineStyleTagWriter );
 
-bool KmlLineStyleTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
+KmlLineStyleTagWriter::KmlLineStyleTagWriter() : KmlColorStyleTagWriter( kml::kmlTag_LineStyle )
+{
+    // nothing to do
+}
+
+bool KmlLineStyleTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataLineStyle *style = static_cast<const GeoDataLineStyle*>( node );
 
-    writer.writeStartElement( kml::kmlTag_LineStyle );
-
-    QColor color = style->color();
-    QChar fill = QChar( '0' );
-    QString colorString = QString( "%1%2%3%4" )
-                             .arg( color.alpha(), 2, 16, fill )
-                             .arg( color.blue(), 2, 16, fill )
-                             .arg( color.green(), 2, 16, fill )
-                             .arg( color.red(), 2, 16, fill );
-    writer.writeElement( "color", colorString );
     writer.writeElement( "width", QString::number( style->width() ) );
-
-    writer.writeEndElement();
 
     return true;
 }

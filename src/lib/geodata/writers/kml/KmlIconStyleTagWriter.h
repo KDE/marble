@@ -8,21 +8,26 @@
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef MARBLE_KMLLINESTYLETAGWRITER_H
-#define MARBLE_KMLLINESTYLETAGWRITER_H
+#ifndef MARBLE_KMLICONSTYLETAGWRITER_H
+#define MARBLE_KMLICONSTYLETAGWRITER_H
 
+#include "GeoTagWriter.h"
+#include "GeoDataHotSpot.h"
 #include "KmlColorStyleTagWriter.h"
 
 namespace Marble
 {
 
-class KmlLineStyleTagWriter : public KmlColorStyleTagWriter
+class KmlIconStyleTagWriter : public KmlColorStyleTagWriter
 {
 public:
-    KmlLineStyleTagWriter();
+    KmlIconStyleTagWriter();
 
 protected:
     virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
+
+private:
+    QString unitString( GeoDataHotSpot::Units unit ) const;
 };
 
 }
