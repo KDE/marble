@@ -114,16 +114,15 @@ signals:
       * to be able to cope with misbehaving runners
       */
 
-private slots:
-    void addSearchResult( QVector<GeoDataPlacemark*> result );
-
-    void addReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark );
-
-    void addRoutingResult( GeoDataDocument* route );
-
-    void addParsingResult( GeoDataDocument* document, const QString& error = QString() );
-
 private:
+    Q_PRIVATE_SLOT( d, void addSearchResult( QVector<GeoDataPlacemark*> result ) )
+
+    Q_PRIVATE_SLOT( d, void addReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark ) )
+
+    Q_PRIVATE_SLOT( d, void addRoutingResult( GeoDataDocument* route ) )
+
+    Q_PRIVATE_SLOT( d, void addParsingResult( GeoDataDocument* document, const QString& error = QString() ) )
+
     Q_PRIVATE_SLOT( d, void cleanupSearchTask( RunnerTask* task ) )
 
     Q_PRIVATE_SLOT( d, void cleanupRoutingTask( RunnerTask* task ) )
