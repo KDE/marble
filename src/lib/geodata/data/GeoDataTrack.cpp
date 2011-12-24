@@ -175,8 +175,15 @@ void GeoDataTrack::addPoint( const QDateTime &when, const GeoDataCoordinates &co
 {
     d->equalizeWhenSize();
     d->m_lineStringNeedsUpdate = true;
-    d->m_when.append( when );
-    d->m_coordinates.append( coord );
+    int i=0;
+    while ( i < d->m_when.size() ) {
+        if ( d->m_when.at( i ) > when ) {
+            break;
+        }
+        ++i;
+    }
+    d->m_when.insert(i, when );
+    d->m_coordinates.insert(i, coord );
 }
 
 void GeoDataTrack::appendCoordinates( const GeoDataCoordinates &coord )
@@ -210,27 +217,29 @@ void GeoDataTrack::clear()
 
 void GeoDataTrack::removeBefore( const QDateTime &when )
 {
-    for ( int i = 0; i < qMin( d->m_when.size(), d->m_coordinates.size() ); ++i ) {
-        if ( d->m_when.at( i ).isValid() && d->m_when.at( i ) < when ) {
-            d->m_when.removeAt( i );
-            if ( i < d->m_coordinates.size() ) {
-                d->m_coordinates.removeAt( i );
-            }
-            i--;
-        }
+    Q_ASSERT( d->m_coordinates.size() == d->m_when.size() );
+    if ( d->m_when.isEmpty() ) {
+        return;
+    }
+    d->equalizeWhenSize();
+
+    while ( !d->m_when.isEmpty() && d->m_when.first() < when ) {
+        d->m_when.takeFirst();
+        d->m_coordinates.takeFirst();
     }
 }
 
 void GeoDataTrack::removeAfter( const QDateTime &when )
 {
-    for ( int i = 0; i < d->m_when.size(); ++i ) {
-        if ( d->m_when.at( i ).isValid() && d->m_when.at( i ) > when ) {
-            d->m_when.removeAt( i );
-            if ( i < d->m_coordinates.size() ) {
-                d->m_coordinates.removeAt( i );
-            }
-            i--;
-        }
+    Q_ASSERT( d->m_coordinates.size() == d->m_when.size() );
+    if ( d->m_when.isEmpty() ) {
+        return;
+    }
+    d->equalizeWhenSize();
+    while ( !d->m_when.isEmpty() && d->m_when.last() > when ) {
+        d->m_when.takeLast();
+        d->m_coordinates.takeLast();
+
     }
 }
 
