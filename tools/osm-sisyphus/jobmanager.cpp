@@ -84,13 +84,22 @@ void JobManager::setRegionsFile(const QString &filename)
     }
 }
 
+void JobManager::setResumeId(const QString &resumeId)
+{
+    m_resumeId = resumeId;
+}
+
 void JobManager::update()
 {
+    bool resume = m_resumeId.isEmpty();
     foreach(const Region &region, m_regions) {
-        addJob(region);
+        resume = resume || region.id() == m_resumeId;
+        if (resume) {
+            addJob(region);
+        }
     }
 
-    QTimer::singleShot(1000*60*60*1, this, SLOT(update()));
+    QTimer::singleShot(1000*60*60*24, this, SLOT(update()));
 }
 
 void JobManager::addJob(const Region &region)

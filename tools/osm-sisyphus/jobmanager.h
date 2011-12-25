@@ -28,6 +28,8 @@ public:
 
     void setRegionsFile(const QString &filename);
 
+    void setResumeId(const QString &resumeId);
+
 private Q_SLOTS:
     void update();
 
@@ -41,6 +43,8 @@ private:
     QFileInfo m_monavSettings;
 
     QVector<Region> m_regions;
+
+    QString m_resumeId;
 };
 
 #endif // JOBMANAGER_H

@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     QCoreApplication app(argc, argv);
 
     if (app.arguments().size() < 3) {
-        qDebug() << "Usage: " << app.arguments().at(0) << "regions.xml" << "log.sqlite";
+        qDebug() << "Usage: " << app.arguments().at(0) << "regions.xml" << "log.sqlite" << "[resume-id]";
         return 1;
     }
 
@@ -27,6 +27,9 @@ int main(int argc, char *argv[])
 
     JobManager manager;
     manager.setRegionsFile(app.arguments().at(1));
+    if (app.arguments().size() == 4) {
+        manager.setResumeId(app.arguments().at(3));
+    }
     manager.run();
     
     return app.exec();
