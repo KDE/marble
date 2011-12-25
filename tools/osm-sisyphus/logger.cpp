@@ -33,7 +33,7 @@ LoggerPrivate::LoggerPrivate()
 
 void LoggerPrivate::initializeDatabase()
 {
-    QSqlQuery createJobsTable( "CREATE TABLE IF NOT EXISTS jobs (id VARCHAR(255) PRIMARY KEY, name TEXT, status TEXT, description TEXT);" );
+    QSqlQuery createJobsTable( "CREATE TABLE IF NOT EXISTS jobs (id VARCHAR(255) PRIMARY KEY, name TEXT, status TEXT, description TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP);" );
     if ( createJobsTable.lastError().isValid() ) {
         qDebug() << "Error when executing query" << createJobsTable.lastQuery();
         qDebug() << "Sql reports" << createJobsTable.lastError();
