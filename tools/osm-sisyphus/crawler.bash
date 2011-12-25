@@ -19,11 +19,11 @@ BASE="http://download.geofabrik.de/osm/"
 
 function descend()
 {
-  wget -q "${1}" -O - | grep href | sed -e 's/^.*a href=\"//g' -e 's/\">.*<\/a>.*$//g' | grep -v http | grep -v html | grep -v .shp.zip | grep -v .osm.bz2 | sort | uniq | while read item
+  wget "${1}" -O - | grep href | sed -e 's/^.*a href=\"//g' -e 's/\">.*<\/a>.*$//g' | grep -v http | grep -v html | grep -v .shp.zip | grep -v .osm.bz2 | sort | uniq | while read item
   do
-    if [[ "${item}" == */ ]]
+    if [[ "${item}" == */ && "${item}" != /* ]]
     then
-      sleep 1.5 # Avoid being punished by geofabrik.de server
+      sleep 3.0 # Avoid being punished by geofabrik.de server
       descend "${1}${item}"
     elif [[ "${item}" == *.osm.pbf ]]
     then

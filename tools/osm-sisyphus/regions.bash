@@ -38,6 +38,7 @@ do
 
     name="${file/.osm.pbf/}"
     name="${name//-/ }"
+    name="${name//_/ }"
     name=( $name )
     name="${name[@]^}"
 
