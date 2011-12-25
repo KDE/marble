@@ -10,6 +10,7 @@
 
 #include "job.h"
 #include "logger.h"
+#include "upload.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QDateTime>
@@ -195,7 +196,7 @@ bool Job::search()
     QStringList arguments;
     arguments << "--name" << m_region.name();
     arguments << "--version" << "0.3";
-    arguments << "--date" << QDateTime::currentDateTime().toString("yyyy/dd/MM");
+    arguments << "--date" << QDateTime::currentDateTime().toString("MM/dd/yy");
     arguments << "--transport" << m_transport;
     arguments << "--payload" << targetFile().fileName();
     arguments << osmFile().absoluteFilePath();
@@ -237,10 +238,13 @@ bool Job::package()
 bool Job::upload()
 {
     changeStatus(Uploading, "Uploading file");
+    if (targetFile().exists()) {
+        Upload::instance().uploadAndDelete(m_region, targetFile());
+        return true;
+    }
 
-    /** @todo: Implement */
-
-    return true;
+    changeStatus(Error, "Target file does not exist.");
+    return false;
 }
 
 bool Job::cleanup()
@@ -257,10 +261,6 @@ bool Job::cleanup()
     }
 
     QFile::remove(searchFile().absoluteFilePath());
-
-    /** @todo: enable deleting packaged file in the final version */
-    // QFile::remove(targetFile().absoluteFilePath());
-
     return true;
 }
 

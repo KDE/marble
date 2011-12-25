@@ -79,10 +79,7 @@ void JobManager::setRegionsFile(const QString &filename)
         }
 
         if (!region.continent().isEmpty() && !region.name().isEmpty()) {
-            /** @todo: remove the hard coded filter here */
-            if (region.continent() == "North America" && region.name() != "Florida") {
-                m_regions << region;
-            }
+            m_regions << region;
         }
     }
 }

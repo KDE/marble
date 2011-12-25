@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     jobmanager.cpp \
     jobparameters.cpp \
     region.cpp \
-    logger.cpp
+    logger.cpp \
+    upload.cpp
 
 HEADERS += \
     jobqueue.h \
@@ -29,7 +30,8 @@ HEADERS += \
     jobmanager.h \
     jobparameters.h \
     region.h \
-    logger.h
+    logger.h \
+    upload.h
 
 
 
