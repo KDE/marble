@@ -120,9 +120,11 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
     const int maxTileY = qMin( qreal( numTilesY * ( yNormalizedCenter + imageHeight/( 8.0 * radius ) ) ),
                                qreal( numTilesY - 1.0 ) );
 
-    if ( texColorizer || m_radius != radius ) {
+    if ( m_radius != radius ) {
         m_cache->clear();
+    }
 
+    if ( texColorizer || m_radius != radius ) {
         QPainter imagePainter( &m_canvasImage );
         imagePainter.setRenderHint( QPainter::SmoothPixmapTransform, highQuality );
 
