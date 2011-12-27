@@ -30,7 +30,7 @@ class TileScalingTextureMapper : public TextureMapperInterface
 
  public:
     TileScalingTextureMapper( StackedTileLoader *tileLoader,
-                              QCache<TileId, QPixmap> *cache,
+                              QCache<TileId, const QPixmap> *cache,
                               QObject *parent = 0 );
 
     virtual void mapTexture( GeoPainter *painter,
@@ -51,7 +51,7 @@ class TileScalingTextureMapper : public TextureMapperInterface
 
  private:
     StackedTileLoader *const m_tileLoader;
-    QCache<TileId, QPixmap> *const m_cache;
+    QCache<TileId, const QPixmap> *const m_cache;
     bool   m_repaintNeeded;
     QImage m_canvasImage;
     int    m_radius;
