@@ -11,8 +11,9 @@
 #ifndef REGION_H
 #define REGION_H
 
-#include <QString>
-#include <QObject>
+#include <QtCore/QString>
+#include <QtCore/QObject>
+#include <QtCore/QFileInfo>
 
 class Region
 {
@@ -51,6 +52,8 @@ public:
     void setPath(const QString &path);
 
     bool operator==(const Region &other) const;
+
+    static QString fileSize(const QFileInfo &file);
 
 public slots:
 

@@ -10,10 +10,23 @@
 class Upload : public QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY(bool cacheDownloads READ cacheDownloads WRITE setCacheDownloads)
+    Q_PROPERTY(bool uploadFiles READ uploadFiles WRITE setUploadFiles)
+
 public:
     static Upload& instance();
 
     void uploadAndDelete(const Region &region, const QFileInfo &file);
+
+    bool cacheDownloads() const;
+
+    bool uploadFiles() const;
+
+public Q_SLOTS:
+    void setCacheDownloads(bool arg);
+
+    void setUploadFiles(bool arg);
 
 private:
     struct Package {
@@ -27,11 +40,13 @@ private:
 
     void processQueue();
 
-    void upload(const Package &package);
+    bool upload(const Package &package);
 
     void deleteFile(const QFileInfo &file);
 
     QList<Package> m_queue;
+    bool m_cacheDownloads;
+    bool m_uploadFiles;
 };
 
 #endif // UPLOAD_H

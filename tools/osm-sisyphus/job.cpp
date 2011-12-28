@@ -60,7 +60,7 @@ bool Job::operator ==(const Job &other) const
 void Job::run()
 {
     if (download() && monav() && search() && package() && upload()) {
-        changeStatus(Finished, "Everything done.");
+        // Nothing to do.
     }
 
     cleanup();
@@ -145,7 +145,8 @@ bool Job::download()
 
 bool Job::monav()
 {
-    changeStatus(Routing, "Generating offline routing map.");
+    QString const status = QString("Generating offline routing map from %1 (%2).").arg(osmFile().fileName()).arg(Region::fileSize(osmFile()));
+    changeStatus(Routing, status);
     QStringList arguments;
     arguments << "-s=" + m_monavSettings;
     arguments << "-i=" + osmFile().absoluteFilePath();
@@ -192,7 +193,8 @@ bool Job::monav()
 
 bool Job::search()
 {
-    changeStatus(Search, "Generating search database.");
+    QString const status = QString("Generating offline search database from %1 (%2).").arg(osmFile().fileName()).arg(Region::fileSize(osmFile()));
+    changeStatus(Search, status);
     QStringList arguments;
     arguments << "--name" << m_region.name();
     arguments << "--version" << "0.3";
@@ -206,7 +208,12 @@ bool Job::search()
     osmAddresses.start("osm-addresses", arguments);
     osmAddresses.waitForFinished(1000 * 60 * 30); // wait up to 12 hours for osm-addresses to convert the data
     if (osmAddresses.exitStatus() == QProcess::NormalExit && osmAddresses.exitCode() == 0) {
-        qDebug() << "Processed .sqlite file for marble";
+        searchFile().refresh();
+        if (!searchFile().exists()) {
+            qDebug() << "osm-addresses did not create the .sqlite file";
+            changeStatus(Error, "Unknown error when creating the search database");
+            return false;
+        }
         return true;
     } else {
         qDebug() << "osm-addresses exiting with status " << osmAddresses.exitCode();

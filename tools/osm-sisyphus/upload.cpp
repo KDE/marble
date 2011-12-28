@@ -1,11 +1,13 @@
 #include "upload.h"
 
+#include "logger.h"
+
 #include <QtCore/QDebug>
 #include <QtCore/QProcess>
 #include <QtCore/QDateTime>
 
 Upload::Upload(QObject *parent) :
-    QObject(parent)
+    QObject(parent), m_cacheDownloads(false), m_uploadFiles(true)
 {
     // nothing to do
 }
@@ -17,13 +19,21 @@ void Upload::processQueue()
     }
 
     Package const package = m_queue.takeFirst();
-    upload(package);
+
+    if (upload(package)) {
+        QString const message = QString("File %1 (%2) successfully created and uploaded").arg(package.file.fileName()).arg(Region::fileSize(package.file));
+        Logger::instance().setStatus(package.region.id(), package.region.name(), "finished", message);
+    }
     deleteFile(package.file);
     processQueue();
 }
 
-void Upload::upload(const Package &package)
+bool Upload::upload(const Package &package)
 {
+    if (!m_uploadFiles) {
+        return true;
+    }
+
     QProcess ssh;
     QStringList arguments;
     QString const auth = "marble@files.kde.org";
@@ -37,6 +47,7 @@ void Upload::upload(const Package &package)
     ssh.waitForFinished(1000 * 60 * 10); // wait up to 10 minutes for mkdir to complete
     if (ssh.exitStatus() != QProcess::NormalExit || ssh.exitCode() != 0) {
         qDebug() << "Failed to create remote directory " << targetDir;
+        Logger::instance().setStatus(package.region.id(), package.region.name(), "error", "Failed to create remote directory: " + ssh.readAllStandardError());
     }
 
     QProcess scp;
@@ -48,14 +59,18 @@ void Upload::upload(const Package &package)
     scp.waitForFinished(1000 * 60 * 60 * 12); // wait up to 12 hours for upload to complete
     if (scp.exitStatus() != QProcess::NormalExit || scp.exitCode() != 0) {
         qDebug() << "Failed to upload " << target;
+        Logger::instance().setStatus(package.region.id(), package.region.name(), "error", "Failed to upload file: " + scp.readAllStandardError());
     }
 
     /** @todo: Adjust monav-maps.xml*/
+    return true;
 }
 
 void Upload::deleteFile(const QFileInfo &file)
 {
-    QFile::remove(file.absoluteFilePath());
+    if (!m_cacheDownloads) {
+        QFile::remove(file.absoluteFilePath());
+    }
 }
 
 void Upload::uploadAndDelete(const Region &region, const QFileInfo &file)
@@ -78,4 +93,24 @@ Upload &Upload::instance()
 {
     static Upload m_instance;
     return m_instance;
+}
+
+bool Upload::cacheDownloads() const
+{
+    return m_cacheDownloads;
+}
+
+bool Upload::uploadFiles() const
+{
+    return m_uploadFiles;
+}
+
+void Upload::setCacheDownloads(bool arg)
+{
+    m_cacheDownloads = arg;
+}
+
+void Upload::setUploadFiles(bool arg)
+{
+    m_uploadFiles = arg;
 }

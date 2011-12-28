@@ -10,6 +10,8 @@
 
 #include "region.h"
 
+#include <QtCore/QFileInfo>
+
 Region::Region()
 {
     // nothing to do
@@ -82,5 +84,35 @@ bool Region::operator ==(const Region &other) const
            m_name == other.m_name &&
            m_id == other.m_id &&
            m_path == other.m_path &&
-           m_pbfFile == other.m_pbfFile;
+            m_pbfFile == other.m_pbfFile;
+}
+
+QString Region::fileSize(const QFileInfo &file)
+{
+    qint64 size = file.size();
+    if (size < 1000) {
+        return QString("% Byte").arg(size);
+    }
+
+    int dec = 0;
+    double value = size / 1000.0;
+    while (value >= 1000.0 && dec<7) {
+        value /= 1000.0;
+        ++dec;
+    }
+
+    QString unit = "kB";
+    switch (dec) {
+    case 0: unit = "kB"; break;
+    case 1: unit = "MB"; break;
+    case 2: unit = "GB"; break;
+    case 3: unit = "TB"; break;
+    case 4: unit = "PB"; break;
+    case 5: unit = "EB"; break;
+    case 6: unit = "ZB"; break;
+    case 7: unit = "YB"; break;
+    default: Q_ASSERT(false);
+    }
+
+    return QString("%1 %2").arg(value, 0, 'f', 1).arg(unit);
 }
