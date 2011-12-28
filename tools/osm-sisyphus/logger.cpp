@@ -80,7 +80,7 @@ void Logger::setStatus(const QString &id, const QString &name, const QString &st
                 qDebug() << "Sql reports" << createStatus.lastError();
             }
         } else {
-            QSqlQuery createStatus( QString("UPDATE jobs SET status='%2', description='%3' WHERE id='%1';").arg(id).arg(status).arg(message) );
+            QSqlQuery createStatus( QString("UPDATE jobs SET status='%2', description='%3', timestamp='CURRENT_TIMESTAMP' WHERE id='%1';").arg(id).arg(status).arg(message) );
             if ( createStatus.lastError().isValid() ) {
                 qDebug() << "Error when executing query" << createStatus.lastQuery();
                 qDebug() << "Sql reports" << createStatus.lastError();
