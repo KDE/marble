@@ -68,23 +68,15 @@ void Logger::setFilename(const QString &filename)
 
 void Logger::setStatus(const QString &id, const QString &name, const QString &status, const QString &message)
 {
-    QSqlQuery createJobsTable( QString("SELECT id FROM jobs WHERE id='%1';").arg(id) );
-    if ( createJobsTable.lastError().isValid() ) {
-        qDebug() << "Error when executing query" << createJobsTable.lastQuery();
-        qDebug() << "Sql reports" << createJobsTable.lastError();
+    QSqlQuery deleteJob( QString("DELETE FROM jobs WHERE id='%1';").arg(id) );
+    if ( deleteJob.lastError().isValid() ) {
+        qDebug() << "Error when executing query" << deleteJob.lastQuery();
+        qDebug() << "Sql reports" << deleteJob.lastError();
     } else {
-        if (!createJobsTable.next()) {
-            QSqlQuery createStatus( QString("INSERT INTO jobs (id, name, status, description) VALUES ('%1', '%2', '%3', '%4');").arg(id).arg(name).arg(status).arg(message) );
-            if ( createStatus.lastError().isValid() ) {
-                qDebug() << "Error when executing query" << createStatus.lastQuery();
-                qDebug() << "Sql reports" << createStatus.lastError();
-            }
-        } else {
-            QSqlQuery createStatus( QString("UPDATE jobs SET status='%2', description='%3', timestamp='CURRENT_TIMESTAMP' WHERE id='%1';").arg(id).arg(status).arg(message) );
-            if ( createStatus.lastError().isValid() ) {
-                qDebug() << "Error when executing query" << createStatus.lastQuery();
-                qDebug() << "Sql reports" << createStatus.lastError();
-            }
+        QSqlQuery createStatus( QString("INSERT INTO jobs (id, name, status, description) VALUES ('%1', '%2', '%3', '%4');").arg(id).arg(name).arg(status).arg(message) );
+        if ( createStatus.lastError().isValid() ) {
+            qDebug() << "Error when executing query" << createStatus.lastQuery();
+            qDebug() << "Sql reports" << createStatus.lastError();
         }
     }
 }
