@@ -33,6 +33,32 @@
 namespace Marble
 {
 
+MeasureToolPlugin::MeasureToolPlugin()
+    : m_measureLineString( GeoDataLineString( Tessellate ) ),
+#ifdef Q_OS_MACX
+      m_font_regular( QFont( "Sans Serif", 10, 50, false ) ),
+#else
+      m_font_regular( QFont( "Sans Serif",  8, 50, false ) ),
+#endif
+      m_fontascent( QFontMetrics( m_font_regular ).ascent() ),
+      m_pen( Qt::red ),
+      m_marbleWidget( 0 ),
+      m_configDialog( 0 ),
+      m_uiConfigWidget( 0 ),
+      m_showSegmentLabels( false )
+{
+    m_pen.setWidthF( 2.0 );
+
+    setVersion( "0.1" );
+    setCopyrightYears( QList<int>() << 2006 << 2007 << 2008 << 2011 );
+    addAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+    addAuthor( "Torsten Rahn", "tackat@kde.org" );
+    addAuthor( "Inge Wallin", "ingwa@kde.org" );
+    addAuthor( "Carlos Licea", "carlos.licea@kdemail.net" );
+    addAuthor( "Michael Henning", "mikehenning@eclipse.net" );
+    addAuthor( "Valery Kharitonov", "kharvd@gmail.com" );
+}
+
 QStringList MeasureToolPlugin::backendTypes() const
 {
     return QStringList( "measuretool" );
@@ -71,23 +97,6 @@ QString MeasureToolPlugin::description() const
 QIcon MeasureToolPlugin::icon () const
 {
     return QIcon();
-}
-
-MeasureToolPlugin::MeasureToolPlugin()
-    : m_measureLineString( GeoDataLineString( Tessellate ) ),
-#ifdef Q_OS_MACX
-      m_font_regular( QFont( "Sans Serif", 10, 50, false ) ),
-#else
-      m_font_regular( QFont( "Sans Serif",  8, 50, false ) ),
-#endif
-      m_fontascent( QFontMetrics( m_font_regular ).ascent() ),
-      m_pen( Qt::red ),
-      m_marbleWidget( 0 ),
-      m_configDialog( 0 ),
-      m_uiConfigWidget( 0 ),
-      m_showSegmentLabels( false )
-{
-    m_pen.setWidthF( 2.0 );
 }
 
 void MeasureToolPlugin::initialize ()

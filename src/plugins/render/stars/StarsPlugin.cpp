@@ -30,6 +30,9 @@ StarsPlugin::StarsPlugin()
     : m_renderStars( false ),
       m_starsLoaded( false )
 {
+    setVersion( "0.1" );
+    setCopyrightYear( 2008 );
+    addAuthor( "Torsten Rahn", "tackat@kde.org" );
 }
 
 QStringList StarsPlugin::backendTypes() const

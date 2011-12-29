@@ -48,6 +48,10 @@ OverviewMap::OverviewMap( const QPointF &point, const QSizeF &size )
     setCacheMode( NoCache );
     connect( this, SIGNAL( settingsChanged( QString ) ),
              this, SLOT( updateSettings() ) );
+
+    setVersion( "0.1" );
+    setCopyrightYear( 2008 );
+    addAuthor( "Torsten Rahn", "tackat@kde.org" );
 }
 
 OverviewMap::~OverviewMap()

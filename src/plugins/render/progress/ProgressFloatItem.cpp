@@ -70,6 +70,11 @@ ProgressFloatItem::ProgressFloatItem ( const QPointF &point, const QSizeF &size 
 
     // Plugin is visible by default on devices with small screens only
     setVisible( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen );    
+
+    setVersion( "0.1" );
+    setCopyrightYears( QList<int>() << 2010 << 2011 );
+    addAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+    addAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 
 ProgressFloatItem::~ProgressFloatItem ()
