@@ -9,9 +9,11 @@
 // Copyright 2007-2008 Inge Wallin      <ingwa@kde.org>
 // Copyright 2007-2008 Carlos Licea     <carlos.licea@kdemail.net>
 // Copyright 2011      Michael Henning  <mikehenning@eclipse.net>
+// Copyright 2011      Valery Kharitonov  <kharvd@gmail.com>
 //
 
 #include "MeasureToolPlugin.h"
+#include "ui_MeasureConfigWidget.h"
 
 #include "AbstractProjection.h"
 #include "GeoPainter.h"
@@ -25,6 +27,8 @@
 #include <QtGui/QColor>
 #include <QtGui/QPixmap>
 #include <QtGui/QRadialGradient>
+#include <QtGui/QPushButton>
+#include <QtGui/QCheckBox>
 
 namespace Marble
 {
@@ -69,7 +73,6 @@ QIcon MeasureToolPlugin::icon () const
     return QIcon();
 }
 
-
 MeasureToolPlugin::MeasureToolPlugin()
     : m_measureLineString( GeoDataLineString( Tessellate ) ),
 #ifdef Q_OS_MACX
@@ -79,19 +82,71 @@ MeasureToolPlugin::MeasureToolPlugin()
 #endif
       m_fontascent( QFontMetrics( m_font_regular ).ascent() ),
       m_pen( Qt::red ),
-      m_marbleWidget( 0 )
+      m_marbleWidget( 0 ),
+      m_configDialog( 0 ),
+      m_uiConfigWidget( 0 ),
+      m_showSegmentLabels( false )
 {
     m_pen.setWidthF( 2.0 );
 }
 
-
 void MeasureToolPlugin::initialize ()
 {
+    readSettings();
 }
 
 bool MeasureToolPlugin::isInitialized () const
 {
     return true;
+}
+
+QDialog *MeasureToolPlugin::configDialog()
+{
+    if ( !m_configDialog ) {
+        m_configDialog = new QDialog();
+        m_uiConfigWidget = new Ui::MeasureConfigWidget;
+        m_uiConfigWidget->setupUi( m_configDialog );
+        readSettings();
+        connect( m_uiConfigWidget->m_buttonBox, SIGNAL( accepted() ),
+                SLOT( writeSettings() ) );
+        connect( m_uiConfigWidget->m_buttonBox, SIGNAL( rejected() ),
+                SLOT( readSettings() ) );
+        QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button( QDialogButtonBox::Apply );
+        connect( applyButton, SIGNAL( clicked() ),
+                 this,        SLOT( writeSettings() ) );
+    }
+
+    return m_configDialog;
+}
+
+QHash<QString,QVariant> MeasureToolPlugin::settings() const
+{
+    return m_settings;
+}
+
+void MeasureToolPlugin::setSettings( QHash<QString,QVariant> settings )
+{
+    m_settings = settings;
+    readSettings();
+}
+
+void MeasureToolPlugin::readSettings()
+{
+    m_showSegmentLabels = m_settings.value( "showSegmentLabels", 0 ).toBool();
+    if ( m_uiConfigWidget ) {
+        m_uiConfigWidget->m_showSegLabelsCheckBox->setChecked( m_showSegmentLabels );
+    }
+}
+
+void MeasureToolPlugin::writeSettings()
+{
+    if ( m_uiConfigWidget ) {
+        m_settings["showSegmentLabels"] = m_uiConfigWidget->m_showSegLabelsCheckBox->isChecked();
+    }
+
+    readSettings();
+    emit settingsChanged( nameId() );
+    emit repaintNeeded();
 }
 
 bool MeasureToolPlugin::render( GeoPainter *painter, 
@@ -113,18 +168,56 @@ bool MeasureToolPlugin::render( GeoPainter *painter,
     painter->autoMapQuality();
     painter->setPen( m_pen );
 
-    painter->drawPolyline( m_measureLineString );
+    if ( m_showSegmentLabels ) {
+        drawSegments( painter );
+    } else {
+        painter->drawPolyline( m_measureLineString );
+    }
 
     // Paint the nodes of the paths.
     drawMeasurePoints( painter, viewport );
 
     // Paint the total distance in the upper left corner.
-    qreal  totalDistance = m_measureLineString.length( marbleModel()->planet()->radius() );
+    qreal totalDistance = m_measureLineString.length( marbleModel()->planet()->radius() );
 
     if ( m_measureLineString.size() > 1 )
         drawTotalDistanceLabel( painter, totalDistance );
 
     return true;
+}
+
+void MeasureToolPlugin::drawSegments( GeoPainter* painter )
+{
+    // Temporary container for each segment of the line string
+    GeoDataLineString segment( Tessellate );
+
+    for ( int i = 0; i < m_measureLineString.size() - 1; i++ ) {
+        segment << m_measureLineString[i] ;
+        segment << m_measureLineString[i + 1];
+
+        qreal segmentLength = segment.length( marbleModel()->planet()->radius() );
+
+        QString distanceString;
+
+        QLocale::MeasurementSystem measurementSystem;
+        measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
+
+        if ( measurementSystem == QLocale::MetricSystem ) {
+            if ( segmentLength >= 1000.0 ) {
+                distanceString = tr("%1 km").arg( segmentLength / 1000.0, 0, 'f', 2 );
+            }
+            else {
+                distanceString = tr("%1 m").arg( segmentLength, 0, 'f', 2 );
+            }
+        }
+        else {
+            distanceString = QString("%1 mi").arg( segmentLength / 1000.0 * KM2MI, 0, 'f', 2 );
+        }
+
+        painter->drawPolyline( segment, distanceString, LineCenter );
+
+        segment.clear();
+    }
 }
 
 void MeasureToolPlugin::drawMeasurePoints( GeoPainter *painter,
@@ -304,3 +397,4 @@ bool MeasureToolPlugin::eventFilter( QObject *object, QEvent *e )
 Q_EXPORT_PLUGIN2( MeasureToolPlugin, Marble::MeasureToolPlugin )
 
 #include "MeasureToolPlugin.moc"
+

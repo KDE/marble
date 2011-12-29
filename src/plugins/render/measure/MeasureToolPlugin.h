@@ -27,6 +27,10 @@
 #include <QtGui/QPen>
 #include <QtGui/QAction>
 
+namespace Ui {
+    class MeasureConfigWidget;
+}
+
 namespace Marble
 {
 
@@ -52,8 +56,11 @@ class MeasureToolPlugin : public RenderPlugin
 
     bool isInitialized () const;
 
-
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
+
+    QDialog *configDialog();
+    QHash<QString,QVariant> settings() const;
+    void setSettings( QHash<QString,QVariant> settings );
 
  Q_SIGNALS:
     void  numberOfMeasurePointsChanged( int newNumber );
@@ -66,6 +73,7 @@ class MeasureToolPlugin : public RenderPlugin
     void  drawMark( GeoPainter* painter, int x, int y );
     void  drawTotalDistanceLabel( GeoPainter *painter,
                                   qreal totalDistance );
+    void  drawSegments( GeoPainter *painter );
     void  addContextItems();
     void  removeContextItems();
 
@@ -76,6 +84,9 @@ class MeasureToolPlugin : public RenderPlugin
     void  addMeasurePoint( qreal lon, qreal lat );
     void  removeLastMeasurePoint();
     void  removeMeasurePoints();
+
+    void readSettings();
+    void writeSettings();
 
  private:
     Q_DISABLE_COPY( MeasureToolPlugin )
@@ -94,6 +105,11 @@ class MeasureToolPlugin : public RenderPlugin
     QAction *m_separator;
 
     MarbleWidget* m_marbleWidget;
+
+    QHash<QString,QVariant> m_settings;
+    QDialog * m_configDialog;
+    Ui::MeasureConfigWidget * m_uiConfigWidget;
+    bool m_showSegmentLabels;
 };
 
 }
