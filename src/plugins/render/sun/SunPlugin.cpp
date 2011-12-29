@@ -118,6 +118,11 @@ QDialog *SunPlugin::aboutDialog()
         bernhard.task = tr( "Developer" );
         bernhard.email = "bbeschow@cs.tu-berlin.de";
         authors.append( bernhard );
+        Author harshit;
+        harshit.name = QString::fromUtf8( "Harshit Jain" );
+        harshit.task = tr( "Developer" );
+        harshit.email = "hjain.itbhu@gmail.com";
+        authors.append( harshit );
         m_aboutDialog->setAuthors( authors );
     }
     return m_aboutDialog;
