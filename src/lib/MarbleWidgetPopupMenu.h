@@ -16,6 +16,7 @@
 #ifndef MARBLE_MARBLEWIDGETPOPUPMENU_H
 #define MARBLE_MARBLEWIDGETPOPUPMENU_H
 
+#include "marble_export.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QModelIndex>
@@ -36,7 +37,7 @@ class GeoDataPlacemark;
 class MarbleRunnerManager;
 
 
-class MarbleWidgetPopupMenu  : public QObject
+class MARBLE_EXPORT MarbleWidgetPopupMenu  : public QObject
 {
     Q_OBJECT
 
