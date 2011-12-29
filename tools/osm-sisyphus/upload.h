@@ -6,6 +6,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QList>
 #include <QtCore/QFileInfo>
+#include <QtXml/QDomDocument>
 
 class Upload : public QObject
 {
@@ -17,7 +18,7 @@ class Upload : public QObject
 public:
     static Upload& instance();
 
-    void uploadAndDelete(const Region &region, const QFileInfo &file);
+    void uploadAndDelete(const Region &region, const QFileInfo &file, const QString &transport);
 
     bool cacheDownloads() const;
 
@@ -32,6 +33,7 @@ private:
     struct Package {
         Region region;
         QFileInfo file;
+        QString transport;
 
         bool operator==(const Package &other) const;
     };
@@ -44,9 +46,20 @@ private:
 
     void deleteFile(const QFileInfo &file);
 
+    bool adjustNewstuffFile(const Package &package);
+
+    bool uploadNewstuff();
+
+    bool deleteRemoteFile(const QString &filename);
+
+    QString targetDir() const;
+
+    QString releaseDate() const;
+
     QList<Package> m_queue;
     bool m_cacheDownloads;
     bool m_uploadFiles;
+    QDomDocument m_xml;
 };
 
 #endif // UPLOAD_H

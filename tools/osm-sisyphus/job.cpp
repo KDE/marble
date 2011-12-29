@@ -246,7 +246,7 @@ bool Job::upload()
 {
     changeStatus(Uploading, "Uploading file");
     if (targetFile().exists()) {
-        Upload::instance().uploadAndDelete(m_region, targetFile());
+        Upload::instance().uploadAndDelete(m_region, targetFile(), m_transport);
         return true;
     }
 
