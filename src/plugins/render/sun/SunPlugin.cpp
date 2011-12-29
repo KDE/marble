@@ -17,11 +17,12 @@
 #include "GeoPainter.h"
 #include "SunLocator.h"
 #include "MarbleModel.h"
+#include "PluginAboutDialog.h"
 
 namespace Marble
 {
 
-SunPlugin::SunPlugin()
+SunPlugin::SunPlugin() : m_aboutDialog( 0 )
 {
     setVisible( false );
 }
@@ -94,6 +95,32 @@ bool SunPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     }
 
     return true;
+}
+
+QDialog *SunPlugin::aboutDialog()
+{
+    if ( !m_aboutDialog ) {
+        // Initializing about dialog
+        m_aboutDialog = new PluginAboutDialog();
+        m_aboutDialog->setName( "Sun Plugin" );
+        m_aboutDialog->setVersion( "0.1" );
+        // FIXME: Can we store this string for all of Marble
+        m_aboutDialog->setAboutText( tr( "<br/>(c) 2011 The Marble Project<br /><br/><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
+
+        QList<Author> authors;
+        Author tackat;
+        tackat.name = QString::fromUtf8( "Torsten Rahn" );
+        tackat.task = tr( "Developer" );
+        tackat.email = "tackat@kde.org";
+        authors.append( tackat );
+        Author bernhard;
+        bernhard.name = QString::fromUtf8( "Bernhard Beschow" );
+        bernhard.task = tr( "Developer" );
+        bernhard.email = "bbeschow@cs.tu-berlin.de";
+        authors.append( bernhard );
+        m_aboutDialog->setAuthors( authors );
+    }
+    return m_aboutDialog;
 }
 
 }
