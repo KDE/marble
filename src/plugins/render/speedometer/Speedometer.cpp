@@ -18,6 +18,7 @@
 #include "WidgetGraphicsItem.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "ViewportParams.h"
+#include "PluginAboutDialog.h"
 
 #include <QtGui/QLCDNumber>
 
@@ -26,7 +27,7 @@ namespace Marble
 
 Speedometer::Speedometer( const QPointF &point, const QSizeF &size )
     : AbstractFloatItem( point, size ),
-      m_widgetItem( 0 )
+      m_widgetItem( 0 ), m_aboutDialog( 0 )
 {
     setVisible( false );
     setCacheMode( NoCache );
@@ -63,7 +64,7 @@ QString Speedometer::nameId() const
 
 QString Speedometer::description() const
 {
-    return tr( "A float item showing current travelling speed." );
+    return tr( "Display the current cruising speed." );
 }
 
 QIcon Speedometer::icon () const
@@ -120,6 +121,27 @@ void Speedometer::updateLocation( GeoDataCoordinates coordinates, qreal speed )
     m_widget.speedUnit->setText( speedUnit );
     m_widgetItem->update();
     emit repaintNeeded();
+}
+
+QDialog *Speedometer::aboutDialog()
+{
+    if ( !m_aboutDialog ) {
+        // Initializing about dialog
+        m_aboutDialog = new PluginAboutDialog();
+        m_aboutDialog->setName( "Speedometer Plugin" );
+        m_aboutDialog->setVersion( "0.1" );
+        // FIXME: Can we store this string for all of Marble
+        m_aboutDialog->setAboutText( tr( "<br/>(c) 2011 The Marble Project<br /><br/><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
+
+        QList<Author> authors;
+        Author bernhard;
+        bernhard.name = QString::fromUtf8( "Bernhard Beschow" );
+        bernhard.task = tr( "Developer" );
+        bernhard.email = "bbeschow@cs.tu-berlin.de";
+        authors.append( bernhard );
+        m_aboutDialog->setAuthors( authors );
+    }
+    return m_aboutDialog;
 }
 
 }
