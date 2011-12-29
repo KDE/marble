@@ -140,6 +140,9 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
         }
     }
 
+    m_mousePosition.setX(xpos);
+    m_mousePosition.setY(ypos);
+
     const QPoint curpos = QPoint( xpos, ypos );
     m_featurelist = m_widget->whichFeatureAt( curpos );
 
@@ -198,6 +201,9 @@ void MarbleWidgetPopupMenu::showRmbMenu( int xpos, int ypos )
     const bool visible = m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoDataCoordinates::Radian );
     if ( !visible )
         return;
+
+    m_mousePosition.setX(xpos);
+    m_mousePosition.setY(ypos);
 
     QPoint curpos = QPoint( xpos, ypos );
     m_copyCoordinateAction->setData( curpos );
@@ -427,6 +433,11 @@ void MarbleWidgetPopupMenu::toggleFullscreen( bool enabled )
     } else {
         parent->setWindowState( parent->windowState() & ~Qt::WindowFullScreen );
     }
+}
+
+QPoint MarbleWidgetPopupMenu::mousePosition() const
+{
+    return m_mousePosition;
 }
 
 #include "MarbleWidgetPopupMenu.moc"

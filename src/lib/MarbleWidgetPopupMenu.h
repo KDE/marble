@@ -20,7 +20,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QModelIndex>
 #include <QtCore/QVector>
-
+#include <QtCore/QPoint>
 
 class QAction;
 class QMenu;
@@ -49,6 +49,8 @@ class MarbleWidgetPopupMenu  : public QObject
       * mouse button
       */
     void addAction( Qt::MouseButton button, QAction* action );
+
+    QPoint mousePosition() const;
 
 Q_SIGNALS:
     void trackPlacemark( const GeoDataPlacemark *placemark );
@@ -101,6 +103,8 @@ private Q_SLOTS:
     QAction  *m_rmbExtensionPoint;
 
     MarbleRunnerManager* m_runnerManager;
+
+    QPoint m_mousePosition;
 };
 
 }
