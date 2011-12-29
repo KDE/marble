@@ -45,7 +45,7 @@ NavigationFloatItem::NavigationFloatItem( const QPointF &point )
     setEnabled( true );
     setVisible( false );
 
-    setVersion( "0.1" );
+    setVersion( "1.0" );
     setCopyrightYears( QList<int>() << 2008 << 2010 );
     addAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
     addAuthor( "Bastian Holst", "bastianholst@gmx.de" );

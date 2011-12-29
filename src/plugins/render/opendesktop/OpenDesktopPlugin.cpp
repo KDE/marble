@@ -27,7 +27,7 @@ OpenDesktopPlugin::OpenDesktopPlugin()
     setEnabled( true ); // Plugin is enabled by default
     setVisible( false ); // Plugin is invisible by default
 
-    setVersion( "0.1" );
+    setVersion( "1.0" );
     setCopyrightYear( 2010 );
     addAuthor( QString::fromUtf8( "Utku Aydin" ), "utkuaydin34@gmail.com" );
 }

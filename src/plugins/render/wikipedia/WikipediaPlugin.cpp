@@ -34,7 +34,7 @@ WikipediaPlugin::WikipediaPlugin()
       m_settings()
 {
     setNameId( "wikipedia" );
-    setVersion( "0.1" );
+    setVersion( "1.0" );
     setCopyrightYear( 2009 );
     addAuthor( "Bastian Holst", "bastianholst@gmx.de" );
     setDataText( tr( "Geo positions by geonames.org\nTexts by wikipedia.org" ) );

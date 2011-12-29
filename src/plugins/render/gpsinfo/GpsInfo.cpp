@@ -30,7 +30,7 @@ GpsInfo::GpsInfo( const QPointF &point, const QSizeF &size )
     setVisible( false );
     setCacheMode( NoCache );
 
-    setVersion( "0.1" );
+    setVersion( "1.0" );
     setCopyrightYear( 2011 );
     addAuthor( "Thibaut Gridel", "tgridel@free.fr" );
 }

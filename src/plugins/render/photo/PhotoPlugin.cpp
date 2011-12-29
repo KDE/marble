@@ -29,7 +29,7 @@ PhotoPlugin::PhotoPlugin()
     // Plugin is not visible by default
     setVisible( false );
 
-    setVersion( "0.1" );
+    setVersion( "1.0" );
     setCopyrightYear( 2009 );
     addAuthor( "Bastian Holst", "bastianholst@gmx.de" );
 }

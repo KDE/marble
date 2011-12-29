@@ -35,7 +35,7 @@ CompassFloatItem::CompassFloatItem ( const QPointF &point, const QSizeF &size )
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )
 {
-    setVersion( "0.1" );
+    setVersion( "1.0" );
     setCopyrightYears( QList<int>() << 2009 << 2010 );
     addAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
     addAuthor( "Torsten Rahn", "tackat@kde.org" );

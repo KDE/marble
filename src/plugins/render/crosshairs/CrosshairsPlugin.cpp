@@ -33,7 +33,7 @@ CrosshairsPlugin::CrosshairsPlugin ( )
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )
 {
-    setVersion( "0.1" );
+    setVersion( "1.0" );
     setCopyrightYears( QList<int>() << 2009 << 2010 );
     addAuthor( "Cezar Mocan", "cezarmocan@gmail.com" );
     addAuthor( "Torsten Rahn", "tackat@kde.org" );

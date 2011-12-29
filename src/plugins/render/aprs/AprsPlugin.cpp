@@ -46,7 +46,7 @@ AprsPlugin::AprsPlugin()
       m_configDialog( 0 ),
       ui_configWidget( 0 )
 {
-    setVersion( "0.1" );
+    setVersion( "1.0" );
     setCopyrightYears( QList<int>() << 2009 << 2010 );
     addAuthor( "Wes Hardaker", "hardaker@users.sourceforge.net" );
 

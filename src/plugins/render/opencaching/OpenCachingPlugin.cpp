@@ -21,7 +21,7 @@ OpenCachingPlugin::OpenCachingPlugin()
       m_configDialog( 0 )
 {
     setNameId( "opencaching" );
-    setVersion( "0.1" );
+    setVersion( "1.0" );
     setCopyrightYear( 2011 );
     addAuthor( "Daniel Marth", "danielmarth@gmx.at" );
     setDataText( tr( "Cache positions by opencaching.de." ) );

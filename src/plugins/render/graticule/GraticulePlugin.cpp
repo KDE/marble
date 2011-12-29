@@ -43,7 +43,7 @@ GraticulePlugin::GraticulePlugin()
       ui_configWidget( 0 ),
       m_configDialog( 0 )
 {
-    setVersion( "0.1" );
+    setVersion( "1.0" );
     setCopyrightYear( 2009 );
     addAuthor( "Torsten Rahn", "tackat@kde.org" );
 

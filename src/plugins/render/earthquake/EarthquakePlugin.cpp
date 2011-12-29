@@ -22,7 +22,7 @@ EarthquakePlugin::EarthquakePlugin()
       m_configDialog( 0 )
 {
     setNameId( "earthquake" );
-    setVersion( "0.1" );
+    setVersion( "1.0" );
     setCopyrightYears( QList<int>() << 2010 << 2011 );
     addAuthor( QString::fromUtf8( "Utku Aydın" ), "utkuaydin34@gmail.com" );
     addAuthor( "Daniel Marth", "danielmarth@gmx.at" );

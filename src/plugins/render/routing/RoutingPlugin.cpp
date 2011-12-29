@@ -445,7 +445,7 @@ RoutingPlugin::RoutingPlugin( const QPointF &position ) :
     setBorderWidth( 1 );
     setBackground( QBrush( QColor( "white" ) ) );
 
-    setVersion( "0.1" );
+    setVersion( "1.0" );
     setCopyrightYear( 2010 );
     addAuthor( "Siddharth Srivastava", "akssps011@gmail.com" );
     addAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );

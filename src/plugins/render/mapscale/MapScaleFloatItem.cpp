@@ -53,7 +53,7 @@ MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
         setPosition( QPointF( 220.0, 10.5 ) );
 #endif // Q_WS_MAEMO_5
 
-        setVersion( "0.2" );
+        setVersion( "1.1" );
         setCopyrightYears( QList<int>() << 2008 << 2010 );
         addAuthor( "Torsten Rahn", "tackat@kde.org", tr( "Original Developer" ) );
         addAuthor( "Khanh-Nhan Nguyen", "khanh.nhan@wpi.edu" );

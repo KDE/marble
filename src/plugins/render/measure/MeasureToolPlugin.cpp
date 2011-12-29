@@ -49,7 +49,7 @@ MeasureToolPlugin::MeasureToolPlugin()
 {
     m_pen.setWidthF( 2.0 );
 
-    setVersion( "0.1" );
+    setVersion( "1.0" );
     setCopyrightYears( QList<int>() << 2006 << 2007 << 2008 << 2011 );
     addAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
     addAuthor( "Torsten Rahn", "tackat@kde.org" );

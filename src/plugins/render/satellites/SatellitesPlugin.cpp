@@ -37,7 +37,7 @@ SatellitesPlugin::SatellitesPlugin()
      m_configModel( 0 ),
      ui_configWidget( 0 )
 {
-    setVersion( "0.1" );
+    setVersion( "1.0" );
     setCopyrightYear( 2011 );
     addAuthor( "Guillaume Martres", "smarter@ubuntu.com" );
     setDataText( tr( "Satellites orbital elements from <a href=\"http://www.celestrak.com\">http://www.celestrak.com</a>" ) );

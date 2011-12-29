@@ -50,7 +50,7 @@ PositionMarker::PositionMarker ()
       m_showTrail ( false )
 {
 
-    setVersion( "0.1" );
+    setVersion( "1.0" );
     setCopyrightYears( QList<int>() << 2009 << 2010 );
     addAuthor( "Andrew Manson", "g.real.ate@gmail.com" );
     addAuthor( "Eckhart Woerner", "ewoerner@kde.org" );

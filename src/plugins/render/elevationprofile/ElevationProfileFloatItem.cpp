@@ -62,7 +62,7 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, cons
         m_markerText( &m_markerTextContainer ),
         m_lastMarkerRegion( QRegion() )
 {
-    setVersion( "0.2" );
+    setVersion( "1.1" );
     setCopyrightYear( 2011 );
     addAuthor( QString::fromUtf8 ( "Florian Eßer" ), "f.esser@rwth-aachen.de" );
 
