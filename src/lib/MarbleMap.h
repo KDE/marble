@@ -53,7 +53,6 @@ class RenderPlugin;
 class AbstractDataPlugin;
 class AbstractDataPluginItem;
 class AbstractFloatItem;
-class MeasureTool;
 class TextureLayer;
 class TileCoordsPyramid;
 
@@ -689,8 +688,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     friend class CustomPaintLayer;
 
     TextureLayer *textureLayer();
-
-    MeasureTool *measureTool();
 };
 
 }

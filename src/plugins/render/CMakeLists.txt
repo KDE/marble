@@ -28,6 +28,7 @@ add_subdirectory( navigation )
 
 # add_subdirectory( fileview )
 
+add_subdirectory( measure )
 add_subdirectory( routing )
 add_subdirectory( gpsinfo )
 

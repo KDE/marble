@@ -106,10 +106,6 @@ class MARBLE_EXPORT MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputH
 
     void lmbTimeout();
 
-    void addMeasurePoint();
-
-    void setNumberOfMeasurePoints( int number );
-
  private:
     Q_DISABLE_COPY( MarbleWidgetDefaultInputHandler )
     class Private;

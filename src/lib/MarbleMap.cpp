@@ -37,7 +37,6 @@
 #include "layers/FpsLayer.h"
 #include "layers/GeometryLayer.h"
 #include "layers/MarbleSplashLayer.h"
-#include "layers/MeasureTool.h"
 #include "layers/PlacemarkLayout.h"
 #include "layers/TextureLayer.h"
 #include "layers/VectorMapBaseLayer.h"
@@ -137,7 +136,6 @@ class MarbleMapPrivate
     VectorMapLayer   m_vectorMapLayer;
     TextureLayer     m_textureLayer;
     PlacemarkLayout  m_placemarkLayout;
-    MeasureTool      m_measureTool;
 };
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
@@ -153,11 +151,9 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_vectorMapBaseLayer( &m_veccomposer ),
           m_vectorMapLayer( &m_veccomposer ),
           m_textureLayer( model->downloadManager(), model->sunLocator() ),
-          m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), model->clock(), parent ),
-          m_measureTool( model )
+          m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), model->clock(), parent )
 {
     m_layerManager.addLayer( &m_fogLayer );
-    m_layerManager.addLayer( &m_measureTool );
     m_layerManager.addLayer( &m_geometryLayer );
     m_layerManager.addLayer( &m_placemarkLayout );
     m_layerManager.addLayer( &m_customPaintLayer );
@@ -263,7 +259,6 @@ MarbleMap::~MarbleMap()
 
     d->m_layerManager.removeLayer( &d->m_customPaintLayer );
     d->m_layerManager.removeLayer( &d->m_geometryLayer );
-    d->m_layerManager.removeLayer( &d->m_measureTool );
     d->m_layerManager.removeLayer( &d->m_fogLayer );
     d->m_layerManager.removeLayer( &d->m_placemarkLayout );
     d->m_layerManager.removeLayer( &d->m_textureLayer );
@@ -1174,11 +1169,6 @@ void MarbleMap::addLayer( LayerInterface *layer )
 void MarbleMap::removeLayer( LayerInterface *layer )
 {
     d->m_layerManager.removeLayer(layer);
-}
-
-MeasureTool *MarbleMap::measureTool()
-{
-    return &d->m_measureTool;
 }
 
 // this method will only temporarily "pollute" the MarbleModel class

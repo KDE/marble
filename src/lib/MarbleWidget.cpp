@@ -42,7 +42,6 @@
 #include "MarblePhysics.h"
 #include "MarbleWidgetInputHandler.h"
 #include "MarbleWidgetPopupMenu.h"
-#include "MeasureTool.h"
 #include "Planet.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
@@ -410,11 +409,6 @@ TextureLayer *MarbleWidget::textureLayer()
 const Marble::TextureLayer* MarbleWidget::textureLayer() const
 {
     return d->m_map.textureLayer();
-}
-
-MeasureTool *MarbleWidget::measureTool()
-{
-    return d->m_map.measureTool();
 }
 
 QPixmap MarbleWidget::mapScreenShot()

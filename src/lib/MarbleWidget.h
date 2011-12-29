@@ -47,7 +47,6 @@ class MarbleModel;
 class MarbleWidgetPopupMenu;
 class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
-class MeasureTool;
 class Quaternion;
 class RenderPlugin;
 class RoutingLayer;
@@ -94,13 +93,6 @@ class ViewportParams;
  * some information about the placemark and also try to connect to
  * Wikipedia to retrieve an article about it. If there is such an
  * article, you will get a mini-browser window with the article in a tab.
- *
- * The right mouse button controls a distance tool.  The distance tool
- * is implemented as a menu where you can choose to either create or
- * remove so called Measure Points. Marble will keep track of the
- * Measure Points and show the total distance in the upper left of the
- * widget.  Measure Points are shown on the map as a little white
- * cross.
  *
  * @see MarbleControlBox
  * @see MarbleMap
@@ -1057,7 +1049,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     const TextureLayer *textureLayer() const;
 
     friend class MarbleWidgetDefaultInputHandler;
-    MeasureTool *measureTool();
 };
 
 }
