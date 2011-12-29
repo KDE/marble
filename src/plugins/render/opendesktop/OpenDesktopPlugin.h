@@ -15,8 +15,14 @@
 #include "RenderPlugin.h"
 #include "RenderPluginInterface.h"
 #include <QtGui/QIcon>
+
+namespace Ui {
+    class OpenDesktopConfigWidget;
+}
  
 namespace Marble {
+
+const int defaultItemsOnScreen = 15;
 
 class PluginAboutDialog;
  
@@ -44,11 +50,28 @@ class OpenDesktopPlugin : public AbstractDataPlugin {
     QIcon icon() const;
 
     QDialog *aboutDialog();
+
+    QDialog *configDialog();
+
+    QHash<QString,QVariant> settings() const;
+
+    void setSettings( QHash<QString,QVariant> settings );
+
+private Q_SLOTS:
+    void readSettings();
+
+    void writeSettings();
  
  private:
     bool m_isInitialized;
-    
+
     PluginAboutDialog *m_aboutDialog;
+
+    int m_itemsOnScreen;
+
+    QHash<QString,QVariant> m_settings;
+    QDialog * m_configDialog;
+    Ui::OpenDesktopConfigWidget * m_uiConfigWidget;
 };
  
 }
