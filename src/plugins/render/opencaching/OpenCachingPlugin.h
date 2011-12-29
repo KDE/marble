@@ -15,8 +15,6 @@
 #include "RenderPlugin.h"
 #include "RenderPluginInterface.h"
 
-#include "PluginAboutDialog.h"
-
 #include <QtCore/QHash>
 #include <QtGui/QIcon>
 #include <QtGui/QAbstractButton>
@@ -55,8 +53,6 @@ public:
 
     QIcon icon() const;
 
-    QDialog *aboutDialog();
-
     QDialog *configDialog();
 
     /**
@@ -76,7 +72,6 @@ public slots:
 
 private:
     bool m_isInitialized;
-    PluginAboutDialog *m_aboutDialog;
     Ui::OpenCachingConfigWidget *m_ui;
     QDialog *m_configDialog;
     QHash<QString,QVariant> m_settings;

@@ -28,7 +28,6 @@ namespace Marble
 
 class MarbleWidget;
 class WidgetGraphicsItem;
-class PluginAboutDialog;
 
 /**
  * @short Provides a float item with zoom and move controls
@@ -63,8 +62,6 @@ MARBLE_PLUGIN( NavigationFloatItem )
     bool isInitialized () const;
 
     void changeViewport( ViewportParams *viewport );
-
-    QDialog *aboutDialog();
 
  protected:
     bool eventFilter( QObject *object, QEvent *e );
@@ -103,10 +100,7 @@ MARBLE_PLUGIN( NavigationFloatItem )
     MarbleGlobal::Profiles m_profiles;
 
     /** Radius of the viewport last time */
-    int m_oldViewportRadius;
-    
-    /** About dialog */
-    PluginAboutDialog *m_aboutDialog;
+    int m_oldViewportRadius;    
 };
 
 }

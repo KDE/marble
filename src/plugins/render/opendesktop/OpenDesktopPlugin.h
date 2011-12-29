@@ -23,8 +23,6 @@ namespace Ui {
 namespace Marble {
 
 const int defaultItemsOnScreen = 15;
-
-class PluginAboutDialog;
  
 class OpenDesktopPlugin : public AbstractDataPlugin {
 
@@ -49,8 +47,6 @@ class OpenDesktopPlugin : public AbstractDataPlugin {
     
     QIcon icon() const;
 
-    QDialog *aboutDialog();
-
     QDialog *configDialog();
 
     QHash<QString,QVariant> settings() const;
@@ -64,8 +60,6 @@ private Q_SLOTS:
  
  private:
     bool m_isInitialized;
-
-    PluginAboutDialog *m_aboutDialog;
 
     int m_itemsOnScreen;
 

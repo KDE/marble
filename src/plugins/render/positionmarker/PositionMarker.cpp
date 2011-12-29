@@ -44,12 +44,19 @@ PositionMarker::PositionMarker ()
       m_defaultCursorPath( MarbleDirs::path( "svg/track_turtle.svg" ) ),
       m_lastBoundingBox(),
       ui_configWidget( 0 ),
-      m_aboutDialog( 0 ),
       m_configDialog( 0 ),
       m_cursorSize( 1.0 ),
       m_heading( 0.0 ),
       m_showTrail ( false )
 {
+
+    setVersion( "0.1" );
+    setCopyrightYears( QList<int>() << 2009 << 2010 );
+    addAuthor( "Andrew Manson", "g.real.ate@gmail.com" );
+    addAuthor( "Eckhart Woerner", "ewoerner@kde.org" );
+    addAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+    addAuthor( "Daniel Marth", "danielmarth@gmx.at" );
+
     setSettings( QHash<QString,QVariant>() );
     updateSettings();
     connect( this, SIGNAL( settingsChanged( QString ) ),
@@ -58,7 +65,6 @@ PositionMarker::PositionMarker ()
 
 PositionMarker::~PositionMarker ()
 {
-    delete m_aboutDialog;
     delete ui_configWidget;
     delete m_configDialog;
 }
@@ -101,38 +107,6 @@ QString PositionMarker::description() const
 QIcon PositionMarker::icon() const
 {
     return QIcon();
-}
-
-QDialog *PositionMarker::aboutDialog()
-{
-    if ( !m_aboutDialog ) {
-        // Initializing about dialog
-        m_aboutDialog = new PluginAboutDialog();
-        m_aboutDialog->setName( "Position Marker Plugin" );
-        m_aboutDialog->setVersion( "0.1" );
-        // FIXME: Can we store this string for all of Marble
-        m_aboutDialog->setAboutText( tr( "<br />(c) 2009, 2010 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
-        QList<Author> authors;
-        Author amanson, ewoerner, tgridel, dmarth;
-        amanson.name = "Andrew Manson";
-        amanson.task = tr( "Developer" );
-        amanson.email = "g.real.ate@gmail.com";
-        ewoerner.name = "Eckhart Woerner";
-        ewoerner.task = tr( "Developer" );
-        ewoerner.email = "ewoerner@kde.org";
-        tgridel.name = "Thibaut Gridel";
-        tgridel.task = tr( "Developer" );
-        tgridel.email = "tgridel@free.fr";
-        dmarth.name = "Daniel Marth";
-        dmarth.task = tr( "Developer" );
-        dmarth.email = "danielmarth@gmx.at";
-        authors.append( amanson );
-        authors.append( ewoerner );
-        authors.append( tgridel );
-        authors.append( dmarth );
-        m_aboutDialog->setAuthors( authors );
-    }
-    return m_aboutDialog;
 }
 
 QDialog *PositionMarker::configDialog()

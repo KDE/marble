@@ -18,10 +18,14 @@ namespace Marble {
 
 OpenCachingPlugin::OpenCachingPlugin()
     : m_isInitialized( false ),
-      m_aboutDialog( 0 ),
       m_configDialog( 0 )
 {
     setNameId( "opencaching" );
+    setVersion( "0.1" );
+    setCopyrightYear( 2011 );
+    addAuthor( "Daniel Marth", "danielmarth@gmx.at" );
+    setDataText( tr( "Cache positions by opencaching.de." ) );
+
     setEnabled( true );  // Plugin is enabled by default
     setVisible( false ); // Plugin is invisible by default
     connect( this, SIGNAL( settingsChanged( QString ) ),
@@ -60,31 +64,6 @@ QString OpenCachingPlugin::description() const
 QIcon OpenCachingPlugin::icon() const
 {
     return QIcon();
-}
-
-QDialog* OpenCachingPlugin::aboutDialog()
-{
-    if ( !m_aboutDialog )
-    {
-        // Initializing about dialog
-        m_aboutDialog = new PluginAboutDialog();
-        m_aboutDialog->setName( "OpenCaching Plugin" );
-        m_aboutDialog->setVersion( "0.1" );
-        // FIXME: Can we store this string for all of Marble
-        m_aboutDialog->setAboutText( tr( "<br />(c) 2009, 2010, 2011 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
-        QList<Author> authors;
-        Author daniel;
-
-        daniel.name = QString::fromUtf8( "Daniel Marth" );
-        daniel.task = tr( "Developer" );
-        daniel.email= tr( "danielmarth@gmx.at" );
-        authors.append( daniel );
-        m_aboutDialog->setAuthors( authors );
-        m_aboutDialog->setDataText( tr( "Cache positions by opencaching.de." ) );
-
-        m_aboutDialog->setLicense( PluginAboutDialog::License_LGPL_V2 );
-    }
-    return m_aboutDialog;
 }
 
 QDialog *OpenCachingPlugin::configDialog()

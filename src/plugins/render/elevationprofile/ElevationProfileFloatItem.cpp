@@ -33,7 +33,6 @@ namespace Marble
 
 ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, const QSizeF &size )
         : AbstractFloatItem( point, size ),
-        m_aboutDialog( 0 ),
         m_configDialog( 0 ),
         m_target( QString() ),
         m_leftGraphMargin( 0 ),
@@ -63,6 +62,10 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, cons
         m_markerText( &m_markerTextContainer ),
         m_lastMarkerRegion( QRegion() )
 {
+    setVersion( "0.2" );
+    setCopyrightYear( 2011 );
+    addAuthor( QString::fromUtf8 ( "Florian Eßer" ), "f.esser@rwth-aachen.de" );
+
     setVisible( false );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
@@ -141,28 +144,6 @@ bool ElevationProfileFloatItem::isInitialized () const
 {
     return m_isInitialized;
 }
-
-QDialog *ElevationProfileFloatItem::aboutDialog()
-{
-    if ( !m_aboutDialog ) {
-        // Initializing about dialog
-        m_aboutDialog = new PluginAboutDialog();
-        m_aboutDialog->setName( "Elevation Profile Plugin" );
-        m_aboutDialog->setVersion( "0.2" );
-        // FIXME: Can we store this string for all of Marble
-        m_aboutDialog->setAboutText( tr( "<br />(c) 2009, 2010, 2011 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
-        QList<Author> authors;
-        Author esser;
-        esser.name = QString::fromUtf8 ( "Florian Eßer" );
-        esser.task = tr( "Developer" );
-        esser.email = "f.esser@rwth-aachen.de";
-        authors.append( esser );
-        m_aboutDialog->setAuthors( authors );
-    }
-    return m_aboutDialog;
-}
-
-
 
 void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
 {

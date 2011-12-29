@@ -26,8 +26,6 @@ namespace Ui
 namespace Marble
 {
 
-class PluginAboutDialog;
-
 class WikipediaPlugin : public AbstractDataPlugin
 {
     Q_OBJECT
@@ -49,8 +47,6 @@ class WikipediaPlugin : public AbstractDataPlugin
     QString description() const;
     
     QIcon icon() const;
-
-    QDialog *aboutDialog();
 
     QDialog *configDialog();
 
@@ -75,7 +71,6 @@ class WikipediaPlugin : public AbstractDataPlugin
     bool m_isInitialized;
 
     QIcon m_icon;
-    PluginAboutDialog *m_aboutDialog;
     Ui::WikipediaConfigWidget *ui_configWidget;
     QDialog *m_configDialog;
     QHash<QString,QVariant> m_settings;

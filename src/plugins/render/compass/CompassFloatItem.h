@@ -14,7 +14,6 @@
 #include <QtCore/QObject>
 
 #include "AbstractFloatItem.h"
-#include "PluginAboutDialog.h"
 
 class QSvgRenderer;
 
@@ -51,8 +50,6 @@ class CompassFloatItem  : public AbstractFloatItem
     QString description() const;
 
     QIcon icon () const;
-
-    QDialog *aboutDialog();
     
     void initialize ();
 
@@ -81,7 +78,6 @@ private Q_SLOTS:
 
     bool           m_isInitialized;
 
-    PluginAboutDialog *m_aboutDialog;
     QSvgRenderer  *m_svgobj;
     QPixmap        m_compass;
 

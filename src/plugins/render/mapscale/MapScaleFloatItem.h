@@ -14,7 +14,6 @@
 #include <QtCore/QObject>
 
 #include "AbstractFloatItem.h"
-#include "PluginAboutDialog.h"
 
 namespace Ui
 {
@@ -23,8 +22,6 @@ namespace Ui
 
 namespace Marble
 {
-
-class PluginAboutDialog;
 
 /**
  * @short The class that creates a map scale.
@@ -53,9 +50,6 @@ class MapScaleFloatItem : public AbstractFloatItem
 
     QIcon icon () const;
 
-    QDialog *aboutDialog();
-
-
     void initialize ();
 
     bool isInitialized () const;
@@ -81,7 +75,6 @@ class MapScaleFloatItem : public AbstractFloatItem
     int   invScale() const            { return m_invScale; }
     void  setInvScale( int invScale ) { m_invScale = invScale; }
 
-    PluginAboutDialog *m_aboutDialog;
     QDialog *m_configDialog;
     Ui::MapScaleConfigWidget *ui_configWidget;
 

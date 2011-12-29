@@ -19,18 +19,20 @@
 #include "WidgetGraphicsItem.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "ViewportParams.h"
-#include "PluginAboutDialog.h"
 
 namespace Marble
 {
 
 GpsInfo::GpsInfo( const QPointF &point, const QSizeF &size )
     : AbstractFloatItem( point, size ),
-      m_widgetItem( 0 ),
-      m_aboutDialog( 0 )
+      m_widgetItem( 0 )
 {
     setVisible( false );
     setCacheMode( NoCache );
+
+    setVersion( "0.1" );
+    setCopyrightYear( 2011 );
+    addAuthor( "Thibaut Gridel", "tgridel@free.fr" );
 }
 
 GpsInfo::~GpsInfo()
@@ -141,27 +143,6 @@ void GpsInfo::updateLocation( GeoDataCoordinates coordinates, qreal)
 
     m_widgetItem->update();
     emit repaintNeeded();
-}
-
-QDialog *GpsInfo::aboutDialog()
-{
-    if ( !m_aboutDialog ) {
-        // Initializing about dialog
-        m_aboutDialog = new PluginAboutDialog();
-        m_aboutDialog->setName( "GpsInfo Plugin" );
-        m_aboutDialog->setVersion( "0.1" );
-        // FIXME: Can we store this string for all of Marble
-        m_aboutDialog->setAboutText( tr( "<br />(c) 2011 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
-
-        QList<Author> authors;
-        Author thibaut;
-        thibaut.name = QString::fromUtf8( "Thibaut Gridel" );
-        thibaut.task = tr( "Developer" );
-        thibaut.email = "tgridel@free.fr";
-        authors.append( thibaut );
-        m_aboutDialog->setAuthors( authors );
-    }
-    return m_aboutDialog;
 }
 
 }

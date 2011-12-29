@@ -19,8 +19,6 @@
 namespace Marble
 {
 
-class PluginAboutDialog;
-
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
  *
@@ -56,11 +54,8 @@ class SunPlugin : public RenderPlugin
 
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 
-    QDialog *aboutDialog();
-
 private:
     QPixmap m_pixmap;
-    PluginAboutDialog *m_aboutDialog;
 };
 
 }

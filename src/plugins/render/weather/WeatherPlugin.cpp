@@ -15,7 +15,6 @@
 #include "ui_WeatherConfigWidget.h"
 #include "WeatherData.h"
 #include "WeatherModel.h"
-#include "PluginAboutDialog.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
 #include "global.h"
@@ -35,14 +34,17 @@ const quint32 numberOfStationsPerFetch = 20;
 
 WeatherPlugin::WeatherPlugin()
     : m_isInitialized( false ),
-      m_icon(),
-      m_aboutDialog( 0 ),
       m_configDialog( 0 ),
       ui_configWidget( 0 ),
       m_settings()
 {
+    m_icon.addFile( MarbleDirs::path( "weather/weather-clear.png" ) );
     setNameId( "weather" );
-        
+    setVersion( "0.1" );
+    setCopyrightYear( 2009 );
+    addAuthor( "Bastian Holst", "bastianholst@gmx.de" );
+    setDataText( tr( "Supported by backstage.bbc.co.uk.\nWeather data from UK MET Office" ) );
+
     // Plugin is enabled by default
     setEnabled( true );
     // Plugin is not visible by default
@@ -56,7 +58,6 @@ WeatherPlugin::WeatherPlugin()
 
 WeatherPlugin::~WeatherPlugin()
 {
-    delete m_aboutDialog;
     delete m_configDialog;
     delete ui_configWidget;
 }
@@ -93,28 +94,6 @@ QString WeatherPlugin::description() const
 QIcon WeatherPlugin::icon() const
 {
     return m_icon;
-}
-
-QDialog *WeatherPlugin::aboutDialog()
-{
-    if ( !m_aboutDialog ) {
-        m_aboutDialog = new PluginAboutDialog();
-        m_aboutDialog->setName( "Weather Plugin" );
-        m_aboutDialog->setVersion( "0.1" );
-        // FIXME: Can we store this string for all of Marble
-        m_aboutDialog->setAboutText( tr( "<br />(c) 2009 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
-        QList<Author> authors;
-        Author bholst;
-        bholst.name = "Bastian Holst";
-        bholst.task = tr( "Developer" );
-        bholst.email = "bastianholst@gmx.de";
-        authors.append( bholst );
-        m_aboutDialog->setAuthors( authors );
-        m_aboutDialog->setDataText( tr( "Supported by backstage.bbc.co.uk.\nWeather data from UK MET Office" ) );
-        m_icon.addFile( MarbleDirs::path( "weather/weather-clear.png" ) );
-        m_aboutDialog->setPixmap( m_icon.pixmap( 62, 62 ) );
-    }
-    return m_aboutDialog;
 }
 
 QDialog *WeatherPlugin::configDialog()

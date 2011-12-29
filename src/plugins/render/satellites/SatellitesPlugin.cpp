@@ -12,7 +12,6 @@
 
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
-#include "PluginAboutDialog.h"
 #include "GeoDataPlacemark.h"
 #include "SatellitesItem.h"
 #include "SatellitesConfigLeafItem.h"
@@ -34,11 +33,15 @@ SatellitesPlugin::SatellitesPlugin()
     : RenderPlugin(),
      m_model( 0 ),
      m_isInitialized( false ),
-     m_aboutDialog( 0 ),
      m_configDialog( 0 ),
      m_configModel( 0 ),
      ui_configWidget( 0 )
 {
+    setVersion( "0.1" );
+    setCopyrightYear( 2011 );
+    addAuthor( "Guillaume Martres", "smarter@ubuntu.com" );
+    setDataText( tr( "Satellites orbital elements from <a href=\"http://www.celestrak.com\">http://www.celestrak.com</a>" ) );
+
     connect( this, SIGNAL(settingsChanged(QString)), SLOT(updateSettings()) );
     connect( this, SIGNAL(enabledChanged(bool)), SLOT(enableModel(bool)) );
     connect( this, SIGNAL(visibilityChanged(QString,bool)), SLOT(visibleModel(QString,bool)) );
@@ -51,7 +54,6 @@ SatellitesPlugin::~SatellitesPlugin()
 {
     delete m_model;
 
-    delete m_aboutDialog;
     delete m_configDialog;
     delete ui_configWidget;
 }
@@ -183,26 +185,6 @@ void SatellitesPlugin::updateSettings()
         mDebug() << tle;
         m_model->downloadFile( QUrl( tle ), tle.mid( tle.lastIndexOf( '/' ) + 1 ) );
     }
-}
-
-QDialog *SatellitesPlugin::aboutDialog()
-{
-    if ( !m_aboutDialog ) {
-        m_aboutDialog = new PluginAboutDialog();
-        m_aboutDialog->setName( "Satellites Plugin" );
-        m_aboutDialog->setVersion( "0.1" );
-        m_aboutDialog->setAboutText( tr( "<br />(c) 2011 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
-        QList<Author> authors;
-        Author gmartres;
-        gmartres.name = "Guillaume Martres";
-        gmartres.task = tr( "Developer" );
-        gmartres.email = "smarter@ubuntu.com";
-        authors.append( gmartres );
-        m_aboutDialog->setAuthors( authors );
-        m_aboutDialog->setDataText( tr( "Satellites orbital elements from <a href=\"http://www.celestrak.com\">http://www.celestrak.com</a>" ) );
-        m_aboutDialog->setPixmap( icon().pixmap( 62, 53 ) );
-    }
-    return m_aboutDialog;
 }
 
 QDialog *SatellitesPlugin::configDialog()

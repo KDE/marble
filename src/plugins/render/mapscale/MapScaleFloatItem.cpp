@@ -31,7 +31,6 @@ namespace Marble
 
 MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
     : AbstractFloatItem( point, size ),
-      m_aboutDialog(0),
       m_configDialog(0),
       m_radius(0),
       m_invScale(0.0),
@@ -53,6 +52,11 @@ MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
 #ifdef Q_WS_MAEMO_5
         setPosition( QPointF( 220.0, 10.5 ) );
 #endif // Q_WS_MAEMO_5
+
+        setVersion( "0.2" );
+        setCopyrightYears( QList<int>() << 2008 << 2010 );
+        addAuthor( "Torsten Rahn", "tackat@kde.org", tr( "Original Developer" ) );
+        addAuthor( "Khanh-Nhan Nguyen", "khanh.nhan@wpi.edu" );
 }
 
 MapScaleFloatItem::~MapScaleFloatItem()
@@ -97,34 +101,6 @@ bool MapScaleFloatItem::isInitialized () const
 {
     return true;
 }
-
-QDialog *MapScaleFloatItem::aboutDialog()
-{
-    if ( !m_aboutDialog ) {
-        // Initializing about dialog
-        m_aboutDialog = new PluginAboutDialog();
-        m_aboutDialog->setName( "Scale Bar Plugin" );
-        m_aboutDialog->setVersion( "0.2" );
-        // FIXME: Can we store this string for all of Marble
-        m_aboutDialog->setAboutText( tr( "<br />(c) 2009, 2010 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
-        QList<Author> authors;
-        Author rahn;
-        rahn.name = "Torsten Rahn";
-        rahn.task = tr( "Original Developer" );
-        rahn.email = "tackat@kde.org";
-        authors.append( rahn );
-        Author nhan;
-        nhan.name = "Khanh-Nhan Nguyen";
-        nhan.task = tr( "Developer" );
-        nhan.email = "khanh.nhan@wpi.edu";
-        authors.append( nhan );
-        m_aboutDialog->setAuthors( authors );
-        //TODO: add data text
-//        m_aboutDialog->setPixmap( m_icon.pixmap( 62, 53 ) );
-    }
-    return m_aboutDialog;
-}
-
 
 void MapScaleFloatItem::changeViewport( ViewportParams *viewport )
 {
