@@ -28,6 +28,7 @@ namespace Marble
 class GeoDataCoordinates;
 class WidgetGraphicsItem;
 class MarbleLocale;
+class PluginAboutDialog;
 
 /**
  * @short The class that displays Position Tracking info
@@ -63,6 +64,8 @@ class GpsInfo : public AbstractFloatItem
 
     void forceRepaint();
 
+    QDialog *aboutDialog();
+
  private slots:
     void updateLocation( GeoDataCoordinates coordinates, qreal speed);
 
@@ -70,8 +73,7 @@ class GpsInfo : public AbstractFloatItem
     MarbleLocale* m_locale;
     Ui::GpsInfoPlugin m_widget;
     WidgetGraphicsItem* m_widgetItem;
-
-
+    PluginAboutDialog *m_aboutDialog;
 };
 
 }
