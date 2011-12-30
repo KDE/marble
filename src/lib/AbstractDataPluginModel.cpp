@@ -64,6 +64,7 @@ class AbstractDataPluginModelPrivate
           m_downloadTimer( m_parent ),
           m_descriptionFileNumber( 0 ),
           m_itemSettings(),
+          m_favoriteItemsOnly( false ),
           m_storagePolicy( MarbleDirs::localPath() + "/cache/" + m_name + '/' ),
           m_downloadManager( &m_storagePolicy, pluginManager )
     {
