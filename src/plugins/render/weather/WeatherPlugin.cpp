@@ -42,9 +42,10 @@ WeatherPlugin::WeatherPlugin()
 {
     m_icon.addFile( MarbleDirs::path( "weather/weather-clear.png" ) );
     setNameId( "weather" );
-    setVersion( "1.0" );
-    setCopyrightYear( 2009 );
+    setVersion( "1.1" );
+    setCopyrightYears( QList<int>() << 2009 << 2011 );
     addAuthor( "Bastian Holst", "bastianholst@gmx.de" );
+    addAuthor( "Valery Kharitonov", "kharvd@gmail.com" );
     setDataText( tr( "Supported by backstage.bbc.co.uk.\nWeather data from UK MET Office" ) );
 
     // Plugin is enabled by default
