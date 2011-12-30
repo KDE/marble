@@ -36,6 +36,12 @@ GeoDataFeature::GeoDataVisualCategory CacheRunner::category() const
 void CacheRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
 {
     QFile file( fileName );
+    if ( !file.exists() ) {
+        qWarning( "File does not exist!" );
+        emit parsingFinished( 0 );
+        return;
+    }
+
     file.open( QIODevice::ReadOnly );
     QDataStream in( &file );
 

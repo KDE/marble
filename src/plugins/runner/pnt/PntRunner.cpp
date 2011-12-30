@@ -43,6 +43,11 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     }
 
     QFile  file( fileName );
+    if ( !file.exists() ) {
+        qWarning( "File does not exist!" );
+        emit parsingFinished( 0 );
+        return;
+    }
 
     file.open( QIODevice::ReadOnly );
     QDataStream stream( &file );  // read the data serialized from the file

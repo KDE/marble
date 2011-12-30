@@ -120,6 +120,7 @@ set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 marble_add_test( QuaternionTest )
 marble_add_test( PluginManagerTest )
+marble_add_test( MarbleRunnerManagerTest )
 marble_add_test( MercatorProjectionTest )
 marble_add_test( MarbleMapTest )
 marble_add_test( MarbleWidgetTest )

@@ -36,6 +36,7 @@ void OsmRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     QFile  file( fileName );
     if ( !file.exists() ) {
         qWarning( "File does not exist!" );
+        emit parsingFinished( 0 );
         return;
     }
 
