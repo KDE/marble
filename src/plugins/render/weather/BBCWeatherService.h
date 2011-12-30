@@ -13,6 +13,7 @@
 
 #include "AbstractWeatherService.h"
 
+#include <QtCore/QStringList>
 
 namespace Marble
 {
@@ -29,19 +30,24 @@ class BBCWeatherService : public AbstractWeatherService
  public:
     BBCWeatherService( QObject *parent );
     ~BBCWeatherService();
+
+    void setFavoriteItems( const QStringList& favorite );
+    void setFavoriteItemsOnly( bool favoriteOnly );
     
  public Q_SLOTS:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
                              const MarbleModel *model,
                              qint32 number = 10 );
- 
+
  private Q_SLOTS:
     void fetchStationList();
     void createItem( BBCStation station );
 
  private:
     void setupList();
+    QList<BBCStation> filterStationsList( const QStringList& favorites );
 
+    QList<BBCStation> m_stationList;
     bool m_parsingStarted;
     StationListParser *m_parser;
     BBCItemGetter *m_itemGetter;

@@ -19,6 +19,7 @@
 #include "FrameGraphicsItem.h"
 #include "LabelGraphicsItem.h"
 #include "MarbleGraphicsGridLayout.h"
+#include "WidgetGraphicsItem.h"
 #include "TinyWebBrowser.h"
 #include "MarbleDebug.h"
 
@@ -30,7 +31,9 @@
 #include <QtCore/QString>
 #include <QtGui/QAction>
 #include <QtGui/QBrush>
+#include <QtGui/QIcon>
 #include <QtGui/QFontMetrics>
+#include <QtGui/QPushButton>
 #include <QtSvg/QSvgRenderer>
 
 namespace Marble
@@ -49,25 +52,36 @@ class WeatherItemPrivate
  public:
     WeatherItemPrivate( WeatherItem *parent )
         : m_priority( 0 ),
-          m_action( new QAction( tr( "Weather" ), parent ) ),
+          m_browserAction( new QAction( tr( "Weather" ), parent ) ),
+          m_favoriteAction( new QAction( parent ) ),
           m_browser( 0 ),
           m_parent( parent ),
           m_frameItem( new FrameGraphicsItem( m_parent ) ),
           m_conditionLabel( new LabelGraphicsItem( m_frameItem ) ),
           m_temperatureLabel( new LabelGraphicsItem( m_frameItem ) ),
           m_windDirectionLabel( new LabelGraphicsItem( m_frameItem ) ),
-          m_windSpeedLabel( new LabelGraphicsItem( m_frameItem ) )
+          m_windSpeedLabel( new LabelGraphicsItem( m_frameItem ) ),
+          m_favoriteButton( new WidgetGraphicsItem( m_frameItem ) )
     {
         // Setting minimum sizes
         m_temperatureLabel->setMinimumSize( QSizeF( 0, imageSize.height() ) );
         m_windSpeedLabel->setMinimumSize( QSizeF( 0, imageSize.height() ) );
+
+        QPushButton *button = new QPushButton();
+        button->setStyleSheet( "border-style: outset;" );
+        button->setIcon( QIcon( ":/icons/bookmarks.png" ) );
+        button->setFixedSize( 22, 22 );
+        button->setFlat( true );
+        button->setCheckable( true );
+
+        m_favoriteButton->setWidget( button );
 
         // Layouting the item
         MarbleGraphicsGridLayout *topLayout = new MarbleGraphicsGridLayout( 1, 1 );
         parent->setLayout( topLayout );
         topLayout->addItem( m_frameItem, 0, 0 );
 
-        MarbleGraphicsGridLayout *gridLayout = new MarbleGraphicsGridLayout( 2, 2 );
+        MarbleGraphicsGridLayout *gridLayout = new MarbleGraphicsGridLayout( 2, 3 );
         gridLayout->setAlignment( Qt::AlignCenter );
         gridLayout->setSpacing( 4 );
         m_frameItem->setLayout( gridLayout );
@@ -79,6 +93,7 @@ class WeatherItemPrivate
         gridLayout->addItem( m_windDirectionLabel, 1, 0 );
         gridLayout->addItem( m_windSpeedLabel, 1, 1 );
         gridLayout->setAlignment( m_windSpeedLabel, Qt::AlignRight | Qt::AlignVCenter );
+        gridLayout->addItem( m_favoriteButton, 0, 2 );
 
         updateLabels();
     }
@@ -197,6 +212,23 @@ class WeatherItemPrivate
 
         m_parent->update();
     }
+
+    void updateFavorite()
+    {
+        QStringList items = m_settings.value( "favoriteItems" ).toString()
+                                        .split(",", QString::SkipEmptyParts);
+        bool favorite = items.contains( m_parent->id() );
+
+        m_favoriteButton->setVisible( favorite );
+        m_favoriteAction->setText( favorite ? tr( "Remove from Favorites" )
+                                            : tr( "Add to Favorites" ) );
+
+        if ( m_parent->isFavorite() != favorite ) {
+            m_parent->setFavorite( favorite );
+        }
+
+        m_parent->update();
+    }
     
     bool isConditionShown()
     {
@@ -257,12 +289,13 @@ class WeatherItemPrivate
         return (WeatherData::PressureUnit) m_settings.value( "pressureUnit",
                                                              WeatherData::HectoPascal ).toInt();
     }
-    
+
     WeatherData m_currentWeather;
     QMap<QDate, WeatherData> m_forecastWeather;
 
     int m_priority;
-    QAction *m_action;
+    QAction *m_browserAction;
+    QAction *m_favoriteAction;
     TinyWebBrowser *m_browser;
     WeatherItem *m_parent;
     QString m_stationName;
@@ -272,11 +305,12 @@ class WeatherItemPrivate
 
     // Labels and Layout
     // We are not the owner of these items.
-    FrameGraphicsItem *m_frameItem;
-    LabelGraphicsItem *m_conditionLabel;
-    LabelGraphicsItem *m_temperatureLabel;
-    LabelGraphicsItem *m_windDirectionLabel;
-    LabelGraphicsItem *m_windSpeedLabel;
+    FrameGraphicsItem  *m_frameItem;
+    LabelGraphicsItem  *m_conditionLabel;
+    LabelGraphicsItem  *m_temperatureLabel;
+    LabelGraphicsItem  *m_windDirectionLabel;
+    LabelGraphicsItem  *m_windSpeedLabel;
+    WidgetGraphicsItem *m_favoriteButton;
 };
 
 // FIXME: Fonts to be defined globally
@@ -300,11 +334,11 @@ WeatherItem::~WeatherItem()
 
 QAction *WeatherItem::action()
 {
-    disconnect( d->m_action, SIGNAL( triggered() ),
+    disconnect( d->m_browserAction, SIGNAL( triggered() ),
                 this,        SLOT( openBrowser() ) );
-    connect(    d->m_action, SIGNAL( triggered() ),
+    connect(    d->m_browserAction, SIGNAL( triggered() ),
                 this,        SLOT( openBrowser() ) );
-    return d->m_action;
+    return d->m_browserAction;
 }
 
 QString WeatherItem::itemType() const
@@ -315,7 +349,7 @@ QString WeatherItem::itemType() const
 bool WeatherItem::request( const QString& type )
 {
     Q_UNUSED( type )
-    return false;
+    return true;
 }
  
 bool WeatherItem::initialized()
@@ -331,7 +365,7 @@ bool WeatherItem::operator<( const AbstractDataPluginItem *other ) const
 {
     const WeatherItem *weatherItem = qobject_cast<const WeatherItem *>(other);
     if( weatherItem ) {
-        return ( priority() > ( (WeatherItem *) other )->priority() );
+        return ( priority() > weatherItem->priority() );
     }
     else {
         return false;
@@ -345,7 +379,7 @@ QString WeatherItem::stationName() const
 
 void WeatherItem::setStationName( const QString& name )
 {
-    d->m_action->setText( name );
+    d->m_browserAction->setText( name );
     d->m_stationName = name;
     d->updateToolTip();
     d->updateLabels();
@@ -428,10 +462,12 @@ void WeatherItem::setSettings( const QHash<QString, QVariant>& settings )
     if ( d->m_settings == settings ) {
         return;
     }
+
     d->m_settings = settings;
 
     d->updateToolTip();
     d->updateLabels();
+    d->updateFavorite();
 }
 
 void WeatherItem::openBrowser()
@@ -471,6 +507,21 @@ void WeatherItem::openBrowser()
 
     d->m_browser->setHtml( html );
     d->m_browser->show();
+}
+
+QList<QAction*> WeatherItem::actions()
+{
+    QList<QAction*> result;
+    result << d->m_browserAction;
+
+    disconnect( d->m_favoriteAction, SIGNAL( triggered() ),
+                this,        SLOT( toggleFavorite() ) );
+    connect(    d->m_favoriteAction, SIGNAL( triggered() ),
+                this,        SLOT( toggleFavorite() ) );
+
+    result << d->m_favoriteAction;
+
+    return result;
 }
 
 } // namespace Marble

@@ -59,13 +59,17 @@ class WeatherPlugin : public AbstractDataPlugin
     void readSettings();
     void writeSettings();
     void updateItemSettings();
+    void favoriteItemsChanged( const QStringList& favoriteItems );
     
  Q_SIGNALS:
     void changedSettings();
 
  private:
+    void updateSettings();
+
     bool m_isInitialized;
 
+    quint32 m_updateInterval;
     QIcon m_icon;
     QDialog * m_configDialog;
     Ui::WeatherConfigWidget * ui_configWidget;

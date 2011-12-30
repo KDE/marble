@@ -32,7 +32,9 @@
 
 using namespace Marble;
 
-BBCWeatherService::BBCWeatherService( QObject *parent ) 
+const quint32 maxDisplayedFavoritesNumber = 100;
+
+BBCWeatherService::BBCWeatherService( QObject *parent )
     : AbstractWeatherService( parent ),
       m_parsingStarted( false ),
       m_parser( 0 ),
@@ -44,7 +46,46 @@ BBCWeatherService::BBCWeatherService( QObject *parent )
 BBCWeatherService::~BBCWeatherService()
 {
 }
-    
+
+QList<BBCStation> BBCWeatherService::filterStationsList( const QStringList& favorites )
+{
+    QList<BBCStation> favoriteStations;
+
+    foreach ( const QString& id, favorites ) {
+        foreach ( const BBCStation& station, m_stationList ) {
+            if ( station.bbcId() == id.mid( 3 ).toUInt() ) {
+                favoriteStations.append( station );
+            }
+        }
+    }
+
+    return favoriteStations;
+}
+
+void BBCWeatherService::setFavoriteItems( const QStringList& favorite )
+{
+    if ( favoriteItems() != favorite ) {
+        m_parsingStarted = false;
+
+        delete m_itemGetter;
+        m_itemGetter = new BBCItemGetter( this );
+
+        AbstractWeatherService::setFavoriteItems( favorite );
+    }
+}
+
+void BBCWeatherService::setFavoriteItemsOnly( bool favoriteOnly )
+{
+    if ( isFavoriteItemsOnly() != favoriteOnly ) {
+        m_parsingStarted = false;
+
+        delete m_itemGetter;
+        m_itemGetter = new BBCItemGetter( this );
+
+        AbstractWeatherService::setFavoriteItemsOnly( favoriteOnly );
+    }
+}
+
 void BBCWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
                                             const MarbleModel *model,
                                             qint32 number )
@@ -58,11 +99,23 @@ void BBCWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
 
 void BBCWeatherService::fetchStationList()
 {
+    if ( !m_parser ) {
+        return;
+    }
+
     connect( m_itemGetter,
              SIGNAL( foundStation( BBCStation ) ),
              this,
              SLOT( createItem( BBCStation ) ) );
-    m_itemGetter->setStationList( m_parser->stationList() );
+
+    m_stationList = m_parser->stationList();
+
+    if ( isFavoriteItemsOnly() ) {
+        m_itemGetter->setStationList( filterStationsList( favoriteItems() ) );
+    } else {
+        m_itemGetter->setStationList( m_stationList );
+    }
+
     delete m_parser;
     m_parser = 0;
 }
@@ -75,6 +128,7 @@ void BBCWeatherService::createItem( BBCStation station )
     item->setPriority( station.priority() );
     item->setStationName( station.name() );
     item->setTarget( "earth" );
+
     emit requestedDownload( item->observationUrl(), "bbcobservation", item );
     emit requestedDownload( item->forecastUrl(),    "bbcforecast",    item );
 }

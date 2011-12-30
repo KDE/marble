@@ -15,12 +15,40 @@ namespace Marble
 {
 
 AbstractWeatherService::AbstractWeatherService( QObject *parent )
-    : QObject( parent )
+    : QObject( parent ),
+      m_favoriteItemsOnly( false )
 {
 }
 
 AbstractWeatherService::~AbstractWeatherService()
 {
+}
+
+void AbstractWeatherService::setFavoriteItems( const QStringList& favorite )
+{
+    if ( m_favoriteItems != favorite) {
+        m_favoriteItems = favorite;
+    }
+}
+
+QStringList AbstractWeatherService::favoriteItems() const
+{
+    return m_favoriteItems;
+}
+
+void AbstractWeatherService::setFavoriteItemsOnly( bool favoriteOnly )
+{
+    m_favoriteItemsOnly = favoriteOnly;
+}
+
+bool AbstractWeatherService::isFavoriteItemsOnly() const
+{
+    return m_favoriteItemsOnly;
+}
+
+void AbstractWeatherService::parseFile( const QByteArray& file )
+{
+    Q_UNUSED( file );
 }
 
 } // namespace Marble

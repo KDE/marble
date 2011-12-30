@@ -80,6 +80,8 @@ class WeatherItem : public AbstractDataPluginItem
     virtual QString creditHtml() const;
 
     void setSettings( const QHash<QString, QVariant>& settings );
+
+    virtual QList<QAction*> actions();
     
  public Q_SLOTS:
     void openBrowser();

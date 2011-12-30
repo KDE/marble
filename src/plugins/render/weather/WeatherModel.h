@@ -14,8 +14,12 @@
 #include "AbstractDataPluginModel.h"
 
 #include "WeatherData.h"
+#include "GeoDataLatLonAltBox.h"
+
+#include <QtCore/QStringList>
 
 class QByteArray;
+class QTimer;
 
 namespace Marble
 {
@@ -29,9 +33,13 @@ class WeatherModel : public AbstractDataPluginModel
     Q_OBJECT
     
  public:
-    explicit WeatherModel( const PluginManager *pluginManager,
-                           QObject *parent );
+    explicit WeatherModel( const PluginManager *pluginManager, QObject *parent );
     ~WeatherModel();
+
+    void setUpdateInterval( quint32 hours );
+
+    void setFavoriteItems( const QStringList& list );
+    void setFavoriteItemsOnly( bool favoriteOnly );
     
  public Q_SLOTS:
     /**
@@ -46,20 +54,35 @@ class WeatherModel : public AbstractDataPluginModel
      * Adds the @p item to the list of initialized items.
      */
     void addItemToList( AbstractDataPluginItem *item );
-    
+
+    void downloadDescriptionFileRequested( const QUrl& url );
+
  Q_SIGNALS:
     void additionalItemsRequested( const GeoDataLatLonAltBox &,
                                    const MarbleModel *,
                                    qint32 number );
-    
+    void favoriteItemChanged( const QString& id, bool isFavorite );
+    void parseFileRequested( const QByteArray& file );
+
+ private Q_SLOTS:
+    void updateItems();
+
  protected:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
                              const MarbleModel *marbleModel,
-                                   qint32 number = 10 );
+                             qint32 number = 10 );
     void parseFile( const QByteArray& file );
- 
+
  private:
+    void createServices();
     void addService( AbstractWeatherService *service );
+
+    bool m_initialized;
+    QList<AbstractWeatherService*> m_services;
+    QTimer *m_timer;
+    GeoDataLatLonAltBox m_lastBox;
+    const MarbleModel *m_lastModel;
+    qint32 m_lastNumber;
 };
 
 } // namespace Marble

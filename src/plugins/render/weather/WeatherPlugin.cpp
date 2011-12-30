@@ -34,6 +34,8 @@ const quint32 numberOfStationsPerFetch = 20;
 
 WeatherPlugin::WeatherPlugin()
     : m_isInitialized( false ),
+      m_updateInterval( 0 ),
+      m_icon(),
       m_configDialog( 0 ),
       ui_configWidget( 0 ),
       m_settings()
@@ -49,7 +51,7 @@ WeatherPlugin::WeatherPlugin()
     setEnabled( true );
     // Plugin is not visible by default
     setVisible( false );
-    
+
     connect( this, SIGNAL( settingsChanged( QString ) ),
              this, SLOT( updateItemSettings() ) );
 
@@ -64,10 +66,14 @@ WeatherPlugin::~WeatherPlugin()
 
 void WeatherPlugin::initialize()
 {
+    readSettings();
+
     WeatherModel *model = new WeatherModel( pluginManager(), this );
+
     setModel( model );
+    updateSettings();
     updateItemSettings();
-    setNumberOfItems( numberOfStationsPerFetch );
+
     m_isInitialized = true;
 }
 
@@ -122,7 +128,6 @@ QHash<QString,QVariant> WeatherPlugin::settings() const
 
 void WeatherPlugin::setSettings( QHash<QString,QVariant> settings )
 {
-    
     // Check if all fields are filled and fill them with default values.
     // Information
     if ( !settings.contains( "showCondition" ) ) {
@@ -179,7 +184,9 @@ void WeatherPlugin::setSettings( QHash<QString,QVariant> settings )
     
     m_settings = settings;
     readSettings();
+
     emit settingsChanged( nameId() );
+    updateSettings();
 }
 
 void WeatherPlugin::readSettings()
@@ -209,6 +216,11 @@ void WeatherPlugin::readSettings()
     else
         ui_configWidget->m_windSpeedBox->setCheckState( Qt::Unchecked );
 
+    if ( m_settings.value( "onlyFavorites" ).toBool() )
+        ui_configWidget->m_onlyFavoritesBox->setCheckState( Qt::Checked );
+    else
+        ui_configWidget->m_onlyFavoritesBox->setCheckState( Qt::Unchecked );
+
     // Units
     ui_configWidget->m_temperatureComboBox
         ->setCurrentIndex( m_settings.value( "temperatureUnit" ).toInt() );
@@ -218,6 +230,10 @@ void WeatherPlugin::readSettings()
 
     ui_configWidget->m_pressureComboBox
         ->setCurrentIndex( m_settings.value( "pressureUnit" ).toInt() );
+
+    // Misc
+    ui_configWidget->m_updateIntervalBox
+        ->setValue( m_settings.value( "updateInterval", 3 ).toInt() );
 }
 
 void WeatherPlugin::writeSettings()
@@ -237,7 +253,28 @@ void WeatherPlugin::writeSettings()
     m_settings.insert( "windSpeedUnit", ui_configWidget->m_windSpeedComboBox->currentIndex() );
     m_settings.insert( "pressureUnit", ui_configWidget->m_pressureComboBox->currentIndex() );
 
+    // Misc
+    bool onlyFavorites = ( ui_configWidget->m_onlyFavoritesBox->checkState() == Qt::Checked );
+    m_settings.insert( "onlyFavorites", onlyFavorites );
+
+    m_updateInterval = ui_configWidget->m_updateIntervalBox->value();
+    m_settings.insert( "updateInterval", m_updateInterval );
+
     emit settingsChanged( nameId() );
+    updateSettings();
+}
+
+void WeatherPlugin::updateSettings()
+{
+    if ( model() ) {
+        bool favoritesOnly = m_settings.value( "onlyFavorites", false ).toBool();
+        QList<QString> favoriteItems = m_settings.value( "favoriteItems" ).toString()
+                .split(",", QString::SkipEmptyParts);
+
+        model()->setFavoriteItems( favoriteItems );
+        setNumberOfItems( favoritesOnly ? favoriteItems.size() : numberOfStationsPerFetch );
+        model()->setFavoriteItemsOnly( favoritesOnly );
+    }
 }
 
 void WeatherPlugin::updateItemSettings()
@@ -246,6 +283,13 @@ void WeatherPlugin::updateItemSettings()
     if( abstractModel != 0 ) {
         abstractModel->setItemSettings( m_settings );
     }
+}
+
+void WeatherPlugin::favoriteItemsChanged( const QStringList& favoriteItems )
+{
+    m_settings["favoriteItems"] = favoriteItems.join( "," );
+    emit settingsChanged( nameId() );
+    updateSettings();
 }
 
 Q_EXPORT_PLUGIN2(WeatherPlugin, Marble::WeatherPlugin)
