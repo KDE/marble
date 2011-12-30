@@ -82,6 +82,7 @@ namespace
 {
     const char* POSITION_STRING = "Position:";
     const char* DISTANCE_STRING = "Altitude:";
+    const char* ZOOM_STRING = "Zoom:";
     const char* DATETIME_STRING = "Time:";
 }
 
@@ -95,6 +96,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_downloadRegionDialog( 0 ),
         m_downloadRegionAction( 0 ),
         m_osmEditAction( 0 ),
+        m_zoomLabel( 0 ),
         m_mapViewWindow( 0 ),
         m_routingWindow( 0 ),
         m_trackingWindow( 0 ),
@@ -140,6 +142,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
 
     m_position = NOT_AVAILABLE;
     m_distance = marbleWidget()->distanceString();
+    m_zoom = QString::number( marbleWidget()->tileZoomLevel() );
+
     m_clock = QLocale().toString( m_controlView->marbleModel()->clockDateTime().addSecs( m_controlView->marbleModel()->clockTimezone() ), QLocale::ShortFormat );
     QMetaObject::invokeMethod(this,
                               "initObject", Qt::QueuedConnection,
@@ -805,6 +809,12 @@ void MainWindow::showDistance( const QString& distance )
     updateStatusBar();
 }
 
+void MainWindow::showZoom( int zoom )
+{
+    m_zoom = QString::number( zoom );
+    updateStatusBar();
+}
+
 void MainWindow::showDateTime()
 {
     m_clock = QLocale().toString( m_controlView->marbleModel()->clockDateTime().addSecs( m_controlView->marbleModel()->clockTimezone() ), QLocale::ShortFormat );
@@ -820,6 +830,10 @@ void MainWindow::updateStatusBar()
     if ( m_distanceLabel )
         m_distanceLabel->setText( QString( "%1 %2" )
         .arg( tr( DISTANCE_STRING ) ).arg( m_distance ) );
+
+    if ( m_zoomLabel )
+        m_zoomLabel->setText( QString( "%1 %2" )
+        .arg( tr( ZOOM_STRING ) ).arg( m_zoom ) );
 
     if ( m_clockLabel )
         m_clockLabel->setText( QString( "%1 %2" )
@@ -845,6 +859,14 @@ void MainWindow::openFile()
 void MainWindow::setupStatusBar()
 {
     statusBar()->setSizeGripEnabled( true );
+    statusBar()->setContextMenuPolicy( Qt::ActionsContextMenu );
+
+    QAction* toggleTileLevelAction = new QAction( "Show zoom level", statusBar() );
+    toggleTileLevelAction->setCheckable( true );
+    toggleTileLevelAction->setChecked( false );
+    connect( toggleTileLevelAction, SIGNAL( triggered( bool ) ),
+             this, SLOT( showZoomLevel( bool ) ) );
+    statusBar()->addAction( toggleTileLevelAction );
 
     m_positionLabel = new QLabel( );
     m_positionLabel->setIndent( 5 );
@@ -864,6 +886,15 @@ void MainWindow::setupStatusBar()
     m_distanceLabel->setFixedWidth( maxDistanceWidth );
     statusBar()->addPermanentWidget ( m_distanceLabel );
 
+    m_zoomLabel = new QLabel( );
+    m_zoomLabel->setIndent( 5 );
+    QString templateZoomString =
+        QString( "%1 00" ).arg(ZOOM_STRING);
+    int maxZoomWidth = fontMetrics().boundingRect(templateZoomString).width()
+                            + 2 * m_zoomLabel->margin() + 2 * m_zoomLabel->indent();
+    m_zoomLabel->setFixedWidth( maxZoomWidth );
+    // Not added here, but activated by the user with the context menu
+
     m_clockLabel = new QLabel( );
     m_clockLabel->setIndent( 5 );
     QString templateDateTimeString = QString( "%1 %2" ).arg( DATETIME_STRING , QLocale().toString( QDateTime::fromString ( "01:01:1000", "dd:mm:yyyy"), QLocale::ShortFormat ) );
@@ -876,6 +907,8 @@ void MainWindow::setupStatusBar()
               this, SLOT( showPosition( QString ) ) );
     connect( marbleWidget(), SIGNAL( distanceChanged( QString ) ),
               this, SLOT( showDistance( QString ) ) );
+    connect( marbleWidget(), SIGNAL( tileLevelChanged( int ) ),
+            this, SLOT( showZoom( int ) ) );
     connect( m_controlView->marbleModel()->clock(), SIGNAL( timeChanged() ),
               this, SLOT( showDateTime() ) );
 
@@ -1493,6 +1526,16 @@ void MainWindow::showGoToDialog()
     if ( m_gotoDialog->exec() == QDialog::Accepted ) {
         const GeoDataCoordinates coordinates = m_gotoDialog->coordinates();
         m_controlView->marbleWidget()->centerOn( coordinates );
+    }
+}
+
+void MainWindow::showZoomLevel(bool show)
+{
+    if ( show ) {
+        m_zoomLabel->show();
+        statusBar()->insertPermanentWidget( 2, m_zoomLabel );
+    } else {
+        statusBar()->removeWidget( m_zoomLabel );
     }
 }
 

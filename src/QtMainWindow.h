@@ -67,6 +67,7 @@ private:
 private Q_SLOTS:
     void  showPosition( const QString& position);
     void  showDistance( const QString& position);
+    void  showZoom( int );
     void  showDateTime();
 
     void  initObject(const QVariantMap& cmdLineSettings);
@@ -130,6 +131,8 @@ private Q_SLOTS:
     void showTrackingDialog();
     void showGoToDialog();
 
+    void showZoomLevel( bool show );
+
 private:
     void setupZoomButtons();
     void initializeTrackingWidget();
@@ -190,9 +193,11 @@ private:
     // Status Bar
     QString     m_position;
     QString     m_distance;
+    QString     m_zoom;
     QString     m_clock;
     QLabel      *m_positionLabel;
     QLabel      *m_distanceLabel;
+    QLabel      *m_zoomLabel;
     QLabel      *m_clockLabel;
     void updateStatusBar();
 
