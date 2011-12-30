@@ -22,6 +22,7 @@ add_subdirectory( opendesktop )
 add_subdirectory( wikipedia )
 add_subdirectory( weather )
 # add_subdirectory( osmannotate )
+add_subdirectory( postalcode )
 
 add_subdirectory( navigation )
 # add_subdirectory ( FITemplate )
