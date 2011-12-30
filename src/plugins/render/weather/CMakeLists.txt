@@ -19,7 +19,9 @@ set( weather_SRCS WeatherData.cpp
                   BBCWeatherItem.cpp
                   FakeWeatherService.cpp 
                   FakeWeatherItem.cpp
-                  StationListParser.cpp )
+                  StationListParser.cpp
+                  GeoNamesWeatherService.cpp
+                  GeoNamesWeatherItem.cpp )
 set( weather_UI WeatherConfigWidget.ui )
 
 qt4_wrap_ui( weather_SRCS ${weather_UI} )

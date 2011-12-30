@@ -18,6 +18,7 @@
 // Marble
 #include "BBCWeatherService.h"
 #include "FakeWeatherService.h"
+#include "GeoNamesWeatherService.h"
 #include "AbstractDataPluginItem.h"
 #include "WeatherItem.h"
 #include "MarbleDebug.h"
@@ -144,6 +145,9 @@ void WeatherModel::createServices()
     // addService( new FakeWeatherService( this ) );
     BBCWeatherService* bbcService = new BBCWeatherService( this );
     addService( bbcService );
+
+    GeoNamesWeatherService* geonamesService = new GeoNamesWeatherService( this );
+    addService( geonamesService );
 }
 
 void WeatherModel::downloadDescriptionFileRequested( const QUrl& url )
