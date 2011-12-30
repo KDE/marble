@@ -74,7 +74,13 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * changed settings.
      */
     void setItemSettings( QHash<QString,QVariant> itemSettings );
-       
+
+    virtual void setFavoriteItems( const QStringList& list );
+    QStringList favoriteItems() const;
+
+    virtual void setFavoriteItemsOnly( bool favoriteOnly );
+    bool isFavoriteItemsOnly() const;
+
  protected:
     /**
      * Managing to get @p number additional items in @p box. This includes generating a url and
@@ -152,6 +158,11 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * Testing the existence of the item @p id in the list
      */
     bool itemExists( const QString& id ) const;
+
+    /**
+     * Removes all items
+     */
+    void clear();
     
  private Q_SLOTS:
     /**
@@ -172,8 +183,11 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      */
     void removeItem( QObject *item );
 
+    void favoriteItemChanged( const QString& id, bool isFavorite );
+
  Q_SIGNALS:
     void itemsUpdated();
+    void favoriteItemsChanged( const QStringList& favoriteItems );
     
  private:
     AbstractDataPluginModelPrivate * const d;

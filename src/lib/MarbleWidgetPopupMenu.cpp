@@ -186,7 +186,9 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     QList<AbstractDataPluginItem *>::const_iterator const itWEnd = m_itemList.constEnd();
     for (; itW != itWEnd; ++itW )
     {
-        m_lmbMenu->addAction( (*itW)->action() );
+        foreach ( QAction* action, (*itW)->actions() ) {
+            m_lmbMenu->addAction( action );
+        }
     }
 
     if ( !m_lmbMenu->isEmpty() ) {
