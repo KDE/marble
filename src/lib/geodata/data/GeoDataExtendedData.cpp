@@ -30,6 +30,7 @@ GeoDataExtendedData::GeoDataExtendedData( const GeoDataExtendedData& other )
 
 GeoDataExtendedData::~GeoDataExtendedData()
 {
+    qDeleteAll( d->arrayHash );
     delete d;
 }
 
@@ -62,12 +63,12 @@ void GeoDataExtendedData::addValue( const GeoDataData& data )
 
 QHash< QString, GeoDataData >::const_iterator GeoDataExtendedData::constBegin( ) const
 {
-	return d->hash.constBegin();
+    return d->hash.constBegin();
 }
 
 QHash< QString, GeoDataData >::const_iterator GeoDataExtendedData::constEnd( ) const
 {
-	return d->hash.constEnd();
+    return d->hash.constEnd();
 }
 
 int GeoDataExtendedData::size() const

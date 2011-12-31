@@ -91,6 +91,8 @@ class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
 
     /**
      * @brief set SimpleArrayData for given @p key
+     *
+     * ExtendedData takes ownership of SimpleArrayData
      */
     void setSimpleArrayData( const QString& key, GeoDataSimpleArrayData* values );
 
