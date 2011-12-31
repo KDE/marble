@@ -26,6 +26,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
+#include "GeoDataFolder.h"
 
 namespace Marble
 {
@@ -39,7 +40,8 @@ GeoNode* GPXnameTagHandler::parse(GeoParser& parser) const
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_wpt)
-        || parentItem.represents(gpxTag_trk))
+        || parentItem.represents(gpxTag_trk)
+        || parentItem.represents(gpxTag_rtept))
     {
         GeoDataPlacemark* placemark = parentItem.nodeAs<GeoDataPlacemark>();
 
@@ -48,6 +50,14 @@ GeoNode* GPXnameTagHandler::parse(GeoParser& parser) const
         mDebug() << "Parsed <" << gpxTag_name << "> : " << placemark->name();
 #endif
     }
+    else if (parentItem.represents(gpxTag_rte))
+    {
+        GeoDataFeature* route = parentItem.nodeAs<GeoDataFeature>();
+        route->setName(parser.readElementText().trimmed());
+#ifdef DEBUG_TAGS
+        mDebug() << "Parsed <" << gpxTag_name << "> : " << route->name();
+#endif
+    }        
     return 0;
 }
 

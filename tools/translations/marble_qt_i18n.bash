@@ -12,7 +12,8 @@
 
 set -e
 
-test -x ./merge_ts_po || { echo "./merge_ts_po is not there. Please compile it: g++ -o merge_ts_po merge_ts_po.cpp -I /usr/include/qt4 -lQtCore."; exit 1; }
+MERGE_TOOL="$(dirname ${0})/merge_ts_po"
+test -x "${MERGE_TOOL}" || { echo "./merge_ts_po is not there. Please compile it: g++ -o merge_ts_po merge_ts_po.cpp -I /usr/include/qt4 -lQtCore."; exit 1; }
 
 workdir="$(mktemp -d)"
 
@@ -37,7 +38,7 @@ do
             echo >> "${workdir}/marble_qt.po"
             cat "${workdir}/marble.po" >> "${workdir}/marble_qt.po"
             # Convert to binary .qm file format
-            ./merge_ts_po "${workdir}/template.ts" "${workdir}/marble_qt.po" > "${workdir}/marble_qt.ts"
+            "${MERGE_TOOL}" "${workdir}/template.ts" "${workdir}/marble_qt.po" > "${workdir}/marble_qt.ts"
             sed -i 's@DownloadRegionDialog::Private@DownloadRegionDialog@' "${workdir}/marble_qt.ts"
             lconvert "${workdir}/marble_qt.ts" -o "marble_qt_${i}.qm"
 
@@ -48,7 +49,7 @@ do
             #cp "${workdir}/marble_qt.po" "marble_qt_${i}.po"
             #cp "${workdir}/marble.po" "marble_${i}.po"
 
-            mv "marble_qt_${i}.qm" "marble-${i}"
+            mv "marble_qt_${i}.qm" "${1:=.}/marble-${i}"
           fi
         fi
 done

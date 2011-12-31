@@ -2,6 +2,9 @@
 
 #define INTERNAL_SUPPRESS_PROTOBUF_FIELD_DEPRECATION
 #include "fileformat.pb.h"
+
+#include <algorithm>
+
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -37,10 +40,6 @@ struct StaticDescriptorInitializer_fileformat_2eproto {
 
 // ===================================================================
 
-const ::std::string Blob::_default_raw_;
-const ::std::string Blob::_default_zlib_data_;
-const ::std::string Blob::_default_lzma_data_;
-const ::std::string Blob::_default_obsolete_bzip2_data_;
 #ifndef _MSC_VER
 const int Blob::kRawFieldNumber;
 const int Blob::kRawSizeFieldNumber;
@@ -65,11 +64,11 @@ Blob::Blob(const Blob& from)
 
 void Blob::SharedCtor() {
   _cached_size_ = 0;
-  raw_ = const_cast< ::std::string*>(&_default_raw_);
+  raw_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   raw_size_ = 0;
-  zlib_data_ = const_cast< ::std::string*>(&_default_zlib_data_);
-  lzma_data_ = const_cast< ::std::string*>(&_default_lzma_data_);
-  obsolete_bzip2_data_ = const_cast< ::std::string*>(&_default_obsolete_bzip2_data_);
+  zlib_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  lzma_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  obsolete_bzip2_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -78,16 +77,16 @@ Blob::~Blob() {
 }
 
 void Blob::SharedDtor() {
-  if (raw_ != &_default_raw_) {
+  if (raw_ != &::google::protobuf::internal::kEmptyString) {
     delete raw_;
   }
-  if (zlib_data_ != &_default_zlib_data_) {
+  if (zlib_data_ != &::google::protobuf::internal::kEmptyString) {
     delete zlib_data_;
   }
-  if (lzma_data_ != &_default_lzma_data_) {
+  if (lzma_data_ != &::google::protobuf::internal::kEmptyString) {
     delete lzma_data_;
   }
-  if (obsolete_bzip2_data_ != &_default_obsolete_bzip2_data_) {
+  if (obsolete_bzip2_data_ != &::google::protobuf::internal::kEmptyString) {
     delete obsolete_bzip2_data_;
   }
   if (this != default_instance_) {
@@ -111,24 +110,24 @@ Blob* Blob::New() const {
 
 void Blob::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (_has_bit(0)) {
-      if (raw_ != &_default_raw_) {
+    if (has_raw()) {
+      if (raw_ != &::google::protobuf::internal::kEmptyString) {
         raw_->clear();
       }
     }
     raw_size_ = 0;
-    if (_has_bit(2)) {
-      if (zlib_data_ != &_default_zlib_data_) {
+    if (has_zlib_data()) {
+      if (zlib_data_ != &::google::protobuf::internal::kEmptyString) {
         zlib_data_->clear();
       }
     }
-    if (_has_bit(3)) {
-      if (lzma_data_ != &_default_lzma_data_) {
+    if (has_lzma_data()) {
+      if (lzma_data_ != &::google::protobuf::internal::kEmptyString) {
         lzma_data_->clear();
       }
     }
-    if (_has_bit(4)) {
-      if (obsolete_bzip2_data_ != &_default_obsolete_bzip2_data_) {
+    if (has_obsolete_bzip2_data()) {
+      if (obsolete_bzip2_data_ != &::google::protobuf::internal::kEmptyString) {
         obsolete_bzip2_data_->clear();
       }
     }
@@ -163,7 +162,7 @@ bool Blob::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &raw_size_)));
-          _set_bit(1);
+          set_has_raw_size();
         } else {
           goto handle_uninterpreted;
         }
@@ -231,30 +230,30 @@ bool Blob::MergePartialFromCodedStream(
 void Blob::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // optional bytes raw = 1;
-  if (_has_bit(0)) {
+  if (has_raw()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
       1, this->raw(), output);
   }
   
   // optional int32 raw_size = 2;
-  if (_has_bit(1)) {
+  if (has_raw_size()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->raw_size(), output);
   }
   
   // optional bytes zlib_data = 3;
-  if (_has_bit(2)) {
+  if (has_zlib_data()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
       3, this->zlib_data(), output);
   }
   
   // optional bytes lzma_data = 4;
-  if (_has_bit(3)) {
+  if (has_lzma_data()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
       4, this->lzma_data(), output);
   }
   
   // optional bytes OBSOLETE_bzip2_data = 5 [deprecated = true];
-  if (_has_bit(4)) {
+  if (has_obsolete_bzip2_data()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
       5, this->obsolete_bzip2_data(), output);
   }
@@ -315,19 +314,19 @@ void Blob::CheckTypeAndMergeFrom(
 void Blob::MergeFrom(const Blob& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from._has_bit(0)) {
+    if (from.has_raw()) {
       set_raw(from.raw());
     }
-    if (from._has_bit(1)) {
+    if (from.has_raw_size()) {
       set_raw_size(from.raw_size());
     }
-    if (from._has_bit(2)) {
+    if (from.has_zlib_data()) {
       set_zlib_data(from.zlib_data());
     }
-    if (from._has_bit(3)) {
+    if (from.has_lzma_data()) {
       set_lzma_data(from.lzma_data());
     }
-    if (from._has_bit(4)) {
+    if (from.has_obsolete_bzip2_data()) {
       set_obsolete_bzip2_data(from.obsolete_bzip2_data());
     }
   }
@@ -363,8 +362,6 @@ void Blob::Swap(Blob* other) {
 
 // ===================================================================
 
-const ::std::string BlobHeader::_default_type_;
-const ::std::string BlobHeader::_default_indexdata_;
 #ifndef _MSC_VER
 const int BlobHeader::kTypeFieldNumber;
 const int BlobHeader::kIndexdataFieldNumber;
@@ -387,8 +384,8 @@ BlobHeader::BlobHeader(const BlobHeader& from)
 
 void BlobHeader::SharedCtor() {
   _cached_size_ = 0;
-  type_ = const_cast< ::std::string*>(&_default_type_);
-  indexdata_ = const_cast< ::std::string*>(&_default_indexdata_);
+  type_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  indexdata_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   datasize_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -398,10 +395,10 @@ BlobHeader::~BlobHeader() {
 }
 
 void BlobHeader::SharedDtor() {
-  if (type_ != &_default_type_) {
+  if (type_ != &::google::protobuf::internal::kEmptyString) {
     delete type_;
   }
-  if (indexdata_ != &_default_indexdata_) {
+  if (indexdata_ != &::google::protobuf::internal::kEmptyString) {
     delete indexdata_;
   }
   if (this != default_instance_) {
@@ -425,13 +422,13 @@ BlobHeader* BlobHeader::New() const {
 
 void BlobHeader::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (_has_bit(0)) {
-      if (type_ != &_default_type_) {
+    if (has_type()) {
+      if (type_ != &::google::protobuf::internal::kEmptyString) {
         type_->clear();
       }
     }
-    if (_has_bit(1)) {
-      if (indexdata_ != &_default_indexdata_) {
+    if (has_indexdata()) {
+      if (indexdata_ != &::google::protobuf::internal::kEmptyString) {
         indexdata_->clear();
       }
     }
@@ -481,7 +478,7 @@ bool BlobHeader::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &datasize_)));
-          _set_bit(2);
+          set_has_datasize();
         } else {
           goto handle_uninterpreted;
         }
@@ -507,19 +504,19 @@ bool BlobHeader::MergePartialFromCodedStream(
 void BlobHeader::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required string type = 1;
-  if (_has_bit(0)) {
+  if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteString(
       1, this->type(), output);
   }
   
   // optional bytes indexdata = 2;
-  if (_has_bit(1)) {
+  if (has_indexdata()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
       2, this->indexdata(), output);
   }
   
   // required int32 datasize = 3;
-  if (_has_bit(2)) {
+  if (has_datasize()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->datasize(), output);
   }
   
@@ -565,13 +562,13 @@ void BlobHeader::CheckTypeAndMergeFrom(
 void BlobHeader::MergeFrom(const BlobHeader& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from._has_bit(0)) {
+    if (from.has_type()) {
       set_type(from.type());
     }
-    if (from._has_bit(1)) {
+    if (from.has_indexdata()) {
       set_indexdata(from.indexdata());
     }
-    if (from._has_bit(2)) {
+    if (from.has_datasize()) {
       set_datasize(from.datasize());
     }
   }

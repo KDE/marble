@@ -197,6 +197,46 @@
     </widget>
    </item>
    <item>
+    <widget class="QGroupBox" name="m_miscGroupBox">
+     <property name="title">
+      <string>Miscellaneous</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QCheckBox" name="m_onlyFavoritesBox">
+        <property name="text">
+         <string>Show only favorite items</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,0">
+        <item>
+         <widget class="QLabel" name="m_updateIntervalLabel">
+          <property name="text">
+           <string>Weather update interval</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="m_updateIntervalBox">
+          <property name="suffix">
+           <string> hours</string>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>24</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>

@@ -326,6 +326,11 @@ GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const
     return d->m_viewLatLonAltBox;
 }
 
+GeoDataLatLonAltBox ViewportParams::latLonAltBox( const QRect &screenRect ) const
+{
+    return d->m_currentProjection->latLonAltBox( screenRect, this );
+}
+
 qreal ViewportParams::angularResolution() const
 {
     // We essentially divide the diameter by 180 deg and
@@ -360,9 +365,74 @@ bool ViewportParams::resolves ( const GeoDataCoordinates &coord1,
     return ( fabs( lon2 - lon1 ) + fabs( lat2 - lat1 ) < angularResolution() );
 }
 
+
+bool ViewportParams::screenCoordinates( const qreal lon, const qreal lat,
+                        qreal &x, qreal &y ) const
+{
+    return d->m_currentProjection->screenCoordinates( lon, lat, this, x, y );
+}
+
+bool ViewportParams::screenCoordinates( const GeoDataCoordinates &geopoint,
+                        qreal &x, qreal &y,
+                        bool &globeHidesPoint ) const
+{
+    return d->m_currentProjection->screenCoordinates( geopoint, this, x, y, globeHidesPoint );
+}
+
+bool ViewportParams::screenCoordinates( const GeoDataCoordinates &geopoint,
+                        qreal &x, qreal &y ) const
+{
+    return d->m_currentProjection->screenCoordinates( geopoint, this, x, y );
+}
+
+bool ViewportParams::screenCoordinates( const GeoDataCoordinates &geopoint,
+                        QPointF &screenpoint ) const
+{
+    return d->m_currentProjection->screenCoordinates( geopoint, this, screenpoint );
+}
+
+bool ViewportParams::screenCoordinates( const GeoDataCoordinates &coordinates,
+                        qreal *x, qreal &y, int &pointRepeatNum,
+                        bool &globeHidesPoint ) const
+{
+    return d->m_currentProjection->screenCoordinates( coordinates, this, x, y, pointRepeatNum, globeHidesPoint );
+}
+
+bool ViewportParams::screenCoordinates( const GeoDataCoordinates &coordinates,
+                        qreal *x, qreal &y, int &pointRepeatNum,
+                        const QSizeF& size,
+                        bool &globeHidesPoint ) const
+{
+    return d->m_currentProjection->screenCoordinates( coordinates, this, x, y, pointRepeatNum, size, globeHidesPoint );
+}
+
+
+bool ViewportParams::screenCoordinates( const GeoDataLineString &lineString,
+                        QVector<QPolygonF*> &polygons ) const
+{
+    return d->m_currentProjection->screenCoordinates( lineString, this, polygons );
+}
+
+bool ViewportParams::geoCoordinates( const int x, const int y,
+                     qreal &lon, qreal &lat,
+                     GeoDataCoordinates::Unit unit ) const
+{
+    return d->m_currentProjection->geoCoordinates( x, y, this, lon, lat, unit );
+}
+
 bool  ViewportParams::mapCoversViewport() const
 {
     return d->m_currentProjection->mapCoversViewport( this );
+}
+
+QPainterPath ViewportParams::mapShape() const
+{
+    return d->m_currentProjection->mapShape( this );
+}
+
+QRegion ViewportParams::mapRegion() const
+{
+    return d->m_currentProjection->mapRegion( this );
 }
 
 GeoDataCoordinates ViewportParams::focusPoint() const

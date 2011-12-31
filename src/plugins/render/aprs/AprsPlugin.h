@@ -19,7 +19,6 @@
 #include "AprsObject.h"
 #include "AprsGatherer.h"
 #include "GeoDataLatLonAltBox.h"
-#include "PluginAboutDialog.h"
 
 #include "ui_AprsConfigWidget.h"
 
@@ -52,7 +51,6 @@ namespace Marble
         QString nameId() const;
         QString description() const;
         QIcon icon () const;
-        QDialog *aboutDialog();
 
         void initialize ();
         bool isInitialized () const;
@@ -86,7 +84,6 @@ namespace Marble
         QString                        m_filter;
         QAction                       *m_action;
 
-        PluginAboutDialog     *m_aboutDialog;
         QDialog               *m_configDialog;
         Ui::AprsConfigWidget  *ui_configWidget;
         QHash<QString,QVariant>        m_settings;

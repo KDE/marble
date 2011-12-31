@@ -30,6 +30,11 @@ Page {
             text: "Info";
             onClicked: pageStack.push( "qrc:/AboutMarblePage.qml" )
         }
+        ToolButton {
+            text: "Preferences";
+            onClicked: pageStack.push( "qrc:/PreferencesPage.qml" )
+        }
+        Item{}
     }
 
     // Grid view to display images and names of activities.

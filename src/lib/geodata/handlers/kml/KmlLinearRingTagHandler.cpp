@@ -25,6 +25,7 @@
 
 #include "KmlElementDictionary.h"
 
+#include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataMultiGeometry.h"
 
@@ -56,6 +57,12 @@ GeoNode* KmlLinearRingTagHandler::parse( GeoParser& parser ) const
         GeoDataLinearRing linearRing;
         parentItem.nodeAs<GeoDataPolygon>()->appendInnerBoundary( linearRing );
         return &parentItem.nodeAs<GeoDataPolygon>()->innerBoundaries().last();
+
+    } else if( parentItem.represents( kmlTag_Placemark ) ) {
+        GeoDataLinearRing *linearRing = new GeoDataLinearRing;
+        GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
+        placemark->setGeometry( linearRing );
+        return placemark->geometry();
 
     } else if( parentItem.is<GeoDataMultiGeometry>() ) {
         GeoDataLinearRing *linearRing = new GeoDataLinearRing;

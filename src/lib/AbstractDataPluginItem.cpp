@@ -12,7 +12,6 @@
 #include "AbstractDataPluginItem.h"
 
 // Marble
-#include "AbstractProjection.h"
 #include "GeoDataCoordinates.h"
 #include "ViewportParams.h"
 #include "MarbleDebug.h"
@@ -29,13 +28,15 @@ class AbstractDataPluginItemPrivate
 {
  public:
     AbstractDataPluginItemPrivate()
-        : m_addedAngularResolution( 0 )
+        : m_favorite( false ),
+          m_addedAngularResolution( 0 )
     {
-    };
+    }
     
     QString m_id;
     GeoDataCoordinates m_coordinates;
     QString m_target;
+    bool m_favorite;
     qreal m_addedAngularResolution;
     QHash<QString, QVariant> m_settings;
 };
@@ -72,6 +73,24 @@ void AbstractDataPluginItem::setId( const QString& id )
     d->m_id = id;
 }
 
+bool AbstractDataPluginItem::isFavorite() const
+{
+    return d->m_favorite;
+}
+
+void AbstractDataPluginItem::setFavorite( bool favorite )
+{
+    if ( isFavorite() != favorite ) {
+        d->m_favorite = favorite;
+        emit favoriteChanged( id(), favorite );
+    }
+}
+
+void AbstractDataPluginItem::toggleFavorite()
+{
+    setFavorite( !isFavorite() );
+}
+
 qreal AbstractDataPluginItem::addedAngularResolution() const
 {
     return d->m_addedAngularResolution;
@@ -101,6 +120,18 @@ void AbstractDataPluginItem::addDownloadedFile( const QString& url, const QStrin
 {
     Q_UNUSED( url )
     Q_UNUSED( type )
+}
+
+QList<QAction*> AbstractDataPluginItem::actions()
+{
+    QList<QAction*> result;
+    QAction* pluginAction = action();
+
+    if ( pluginAction ) {
+        result << pluginAction;
+    }
+
+    return result;
 }
 
 } // Marble namespace

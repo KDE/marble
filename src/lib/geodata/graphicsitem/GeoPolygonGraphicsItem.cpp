@@ -18,15 +18,32 @@ namespace Marble
 
 GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataPolygon* polygon )
         : GeoGraphicsItem(),
-          m_polygon( polygon )
+          m_polygon( polygon ),
+          m_ring( 0 )
+{
+}
+
+GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataLinearRing* ring )
+        : GeoGraphicsItem(),
+          m_polygon( 0 ),
+          m_ring( ring )
 {
 }
 
 void GeoPolygonGraphicsItem::setPolygon( const GeoDataPolygon* polygon )
 {
     m_polygon = polygon;
+    m_ring = 0;
     setCoordinate( m_polygon->latLonAltBox().center() );
     setLatLonAltBox( m_polygon->latLonAltBox() );
+}
+
+void GeoPolygonGraphicsItem::setLinearRing( const GeoDataLinearRing* ring )
+{
+    m_polygon = 0;
+    m_ring = ring;
+    setCoordinate( m_ring->latLonAltBox().center() );
+    setLatLonAltBox( m_ring->latLonAltBox() );
 }
 
 void GeoPolygonGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
@@ -90,7 +107,11 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewpor
         }
     }
 
-    painter->drawPolygon( *m_polygon );
+    if ( m_polygon ) {
+        painter->drawPolygon( *m_polygon );
+    } else if ( m_ring ) {
+        painter->drawPolygon( *m_ring );
+    }
     painter->restore();
 }
 

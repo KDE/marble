@@ -37,13 +37,11 @@
 #include "layers/FpsLayer.h"
 #include "layers/GeometryLayer.h"
 #include "layers/MarbleSplashLayer.h"
-#include "layers/MeasureTool.h"
 #include "layers/PlacemarkLayout.h"
 #include "layers/TextureLayer.h"
 #include "layers/VectorMapBaseLayer.h"
 #include "layers/VectorMapLayer.h"
 #include "AbstractFloatItem.h"
-#include "AbstractProjection.h"
 #include "GeoDataTreeModel.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
@@ -138,7 +136,6 @@ class MarbleMapPrivate
     VectorMapLayer   m_vectorMapLayer;
     TextureLayer     m_textureLayer;
     PlacemarkLayout  m_placemarkLayout;
-    MeasureTool      m_measureTool;
 };
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
@@ -154,38 +151,18 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_vectorMapBaseLayer( &m_veccomposer ),
           m_vectorMapLayer( &m_veccomposer ),
           m_textureLayer( model->downloadManager(), model->sunLocator() ),
-          m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), model->clock(), parent ),
-          m_measureTool( model )
+          m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), model->clock(), parent )
 {
     m_layerManager.addLayer( &m_fogLayer );
-    m_layerManager.addLayer( &m_measureTool );
     m_layerManager.addLayer( &m_geometryLayer );
     m_layerManager.addLayer( &m_placemarkLayout );
     m_layerManager.addLayer( &m_customPaintLayer );
-
-    QList<RenderPlugin *> pluginList = m_layerManager.renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        if ( (*i)->nameId() == "sun" ) {
-            (*i)->setVisible( false );
-        }
-    }
 
     QObject::connect( m_model, SIGNAL( themeChanged( QString ) ),
                       parent, SLOT( updateMapTheme() ) );
 
     QObject::connect( &m_veccomposer, SIGNAL( datasetLoaded() ),
                       parent, SIGNAL( repaintNeeded() ));
-
-    QObject::connect( model->treeModel(), SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
-                      &m_placemarkLayout, SLOT( setCacheData() ) );
-    QObject::connect( model->treeModel(), SIGNAL( layoutChanged() ),
-                      &m_placemarkLayout, SLOT( setCacheData() ) );
-    QObject::connect( model->treeModel(), SIGNAL( modelReset() ),
-                      &m_placemarkLayout, SLOT( setCacheData() ) );
-    QObject::connect( model->treeModel(), SIGNAL( treeChanged() ),
-                      &m_placemarkLayout, SLOT( setCacheData() ) );
 
     QObject::connect( &m_placemarkLayout, SIGNAL( repaintNeeded()),
                       parent, SIGNAL( repaintNeeded() ));
@@ -196,15 +173,6 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
                        parent,        SIGNAL( repaintNeeded( QRegion ) ) );
     QObject::connect ( &m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        parent,        SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
-
-    QObject::connect( model->treeModel(), SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
-                      &m_geometryLayer, SLOT( invalidateScene() ) );
-    QObject::connect( model->treeModel(), SIGNAL( layoutChanged() ),
-                      &m_geometryLayer, SLOT( invalidateScene() ) );
-    QObject::connect( model->treeModel(), SIGNAL( modelReset() ),
-                      &m_geometryLayer, SLOT( invalidateScene() ) );
-    QObject::connect( model->treeModel(), SIGNAL( treeChanged() ),
-                      &m_geometryLayer, SLOT( invalidateScene() ) );
 
     QObject::connect( &m_geometryLayer, SIGNAL( repaintNeeded()),
                       parent, SIGNAL( repaintNeeded() ));
@@ -291,7 +259,6 @@ MarbleMap::~MarbleMap()
 
     d->m_layerManager.removeLayer( &d->m_customPaintLayer );
     d->m_layerManager.removeLayer( &d->m_geometryLayer );
-    d->m_layerManager.removeLayer( &d->m_measureTool );
     d->m_layerManager.removeLayer( &d->m_fogLayer );
     d->m_layerManager.removeLayer( &d->m_placemarkLayout );
     d->m_layerManager.removeLayer( &d->m_textureLayer );
@@ -386,9 +353,15 @@ int MarbleMap::radius() const
 
 void MarbleMap::setRadius( int radius )
 {
+    const int oldRadius = d->m_viewport.radius();
+
     d->m_viewport.setRadius( radius );
 
     d->m_textureLayer.setNeedsUpdate();
+
+    if ( oldRadius != d->m_viewport.radius() ) {
+        emit radiusChanged( radius );
+    }
 }
 
 
@@ -696,17 +669,14 @@ void MarbleMap::setProjection( Projection projection )
 bool MarbleMap::screenCoordinates( qreal lon, qreal lat,
                                    qreal& x, qreal& y ) const
 {
-    return d->m_viewport.currentProjection()
-        ->screenCoordinates( lon * DEG2RAD, lat * DEG2RAD,
-                             &d->m_viewport, x, y );
+    return d->m_viewport.screenCoordinates( lon * DEG2RAD, lat * DEG2RAD, x, y );
 }
 
 bool MarbleMap::geoCoordinates( int x, int y,
                                 qreal& lon, qreal& lat,
                                 GeoDataCoordinates::Unit unit ) const
 {
-    return d->m_viewport.currentProjection()
-        ->geoCoordinates( x, y, &d->m_viewport, lon, lat, unit );
+    return d->m_viewport.geoCoordinates( x, y, lon, lat, unit );
 }
 
 // Used to be paintEvent()
@@ -1199,11 +1169,6 @@ void MarbleMap::addLayer( LayerInterface *layer )
 void MarbleMap::removeLayer( LayerInterface *layer )
 {
     d->m_layerManager.removeLayer(layer);
-}
-
-MeasureTool *MarbleMap::measureTool()
-{
-    return &d->m_measureTool;
 }
 
 // this method will only temporarily "pollute" the MarbleModel class

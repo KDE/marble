@@ -4,7 +4,6 @@ set( layers_HDRS
     FpsLayer.h
     GeometryLayer.h
     MarbleSplashLayer.h
-    MeasureTool.h
     PlacemarkLayout.h
     TextureLayer.h
     VectorMapBaseLayer.h
@@ -17,7 +16,6 @@ set( layers_SRCS
     layers/FpsLayer.cpp
     layers/GeometryLayer.cpp
     layers/MarbleSplashLayer.cpp
-    layers/MeasureTool.cpp
     layers/PlacemarkLayout.cpp
     layers/TextureLayer.cpp
     layers/VectorMapBaseLayer.cpp

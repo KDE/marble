@@ -12,7 +12,6 @@
 #define ADJUSTNAVIGATION_H
 
 #include "marble_export.h"
-#include "MarbleWidget.h"
 #include "GeoDataCoordinates.h"
 
 #include <QtGui/QWidget>
@@ -21,9 +20,9 @@ namespace Marble
 {
 
 class GeoDataCoordinates;
-class MarbleWidget;
+class MarbleModel;
 class PositionTracking;
-class AdjustNavigationPrivate;
+class ViewportParams;
 
 class MARBLE_EXPORT AdjustNavigation : public QObject
 {
@@ -36,7 +35,7 @@ public:
      * @param widget the marble widget. It cannot be null.
      * @param parent optional parent object
      */
-    explicit AdjustNavigation( MarbleWidget *widget, QObject *parent = 0 );
+    explicit AdjustNavigation( MarbleModel *model, const ViewportParams *viewport, QObject *parent = 0 );
 
     /** Destructor */
     ~AdjustNavigation();
@@ -77,6 +76,11 @@ public Q_SLOTS:
      */
      void adjust( const GeoDataCoordinates &position, qreal speed );
 
+    /**
+     * Temporarily inhibits auto-centering and auto-zooming
+     */
+    void inhibitAutoAdjustments();
+
 Q_SIGNALS:
     /**
      * signal emitted when auto center is turned on (Always re-center, re-center when required ) or off(Disabled)
@@ -89,15 +93,15 @@ Q_SIGNALS:
      */
      void autoZoomToggled( bool enabled );
 
- private Q_SLOTS:
+    void zoomIn( FlyToMode );
 
-     /**
-       * Temporarily inhibits auto-centering and auto-zooming
-       */
-     void inhibitAutoAdjustments();
+    void zoomOut( FlyToMode );
+
+    void centerOn( const GeoDataCoordinates &position, bool animated );
 
 private:
-    AdjustNavigationPrivate * const d;
+    class Private;
+    Private * const d;
 };
 } //namespace marble
 

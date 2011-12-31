@@ -16,7 +16,6 @@
 
 #include <QtGui/QColor>
 
-#include "AbstractProjection.h"
 #include "MarbleDebug.h"
 #include "GeoPolygon.h"
 #include "GeoPainter.h"
@@ -243,7 +242,7 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
     // Paint the background of it all, i.e. the water.
     painter->setPen( m_oceanPen );
     painter->setBrush( m_oceanBrush );
-    painter->drawPath( viewport->currentProjection()->mapShape( viewport ) );
+    painter->drawPath( viewport->mapShape() );
 
     // Coastlines
     m_vectorMap->setzBoundingBoxLimit( 0.4 ); 

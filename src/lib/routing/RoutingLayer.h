@@ -53,6 +53,9 @@ public:
     /** Reimplemented from LayerInterface. We'll hover above the surface */
     QStringList renderPosition() const;
 
+    /** Reimplemented from LayerInterface. */
+    qreal zValue() const;
+
     /** Reimplemented from LayerInterface. Paints route items and placemarks */
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );

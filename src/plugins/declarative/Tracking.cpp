@@ -10,10 +10,11 @@
 
 #include "Tracking.h"
 
-#include "MarbleWidget.h"
+#include "MarbleDeclarativeWidget.h"
 #include "MarbleModel.h"
 #include "PositionTracking.h"
 #include "RenderPlugin.h"
+#include "ViewportParams.h"
 #include "routing/AdjustNavigation.h"
 
 namespace Marble
@@ -86,7 +87,7 @@ void Tracking::setPositionSource( PositionSource* source )
                     this, SLOT( updateLastKnownPosition() ) );
             connect( source, SIGNAL( hasPositionChanged() ),
                     this, SLOT( updatePositionMarker() ) );
-            connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
+            connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ),
                     this, SLOT( updatePositionMarker() ) );
         }
         emit positionSourceChanged();
@@ -106,7 +107,7 @@ void Tracking::setMarbleWidget( MarbleWidget* widget )
         }
 
         m_marbleWidget = widget;
-        connect( m_marbleWidget, SIGNAL( themeChanged( QString ) ), this, SLOT( updatePositionMarker() ) );
+        connect( m_marbleWidget, SIGNAL( mapThemeChanged() ), this, SLOT( updatePositionMarker() ) );
     }
 }
 
@@ -137,7 +138,7 @@ void Tracking::updatePositionMarker()
         }
 
         qreal x(0), y(0);
-        visible = visible && m_marbleWidget->screenCoordinates( position->longitude(), position->latitude(), x, y );
+        visible = visible && m_marbleWidget->viewport()->screenCoordinates( position->longitude(), position->latitude(), x, y );
         QDeclarativeItem* item = qobject_cast<QDeclarativeItem*>( m_positionMarker );
         if ( item ) {
             item->setVisible( visible );
@@ -207,7 +208,16 @@ void Tracking::setAutoCenter( bool enabled )
 {
     if ( autoCenter() != enabled ) {
         if ( enabled && !m_autoNavigation && m_marbleWidget ) {
-            m_autoNavigation = new AdjustNavigation( m_marbleWidget, this );
+            m_autoNavigation = new AdjustNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
+            connect( m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
+                     m_marbleWidget, SLOT( zoomIn( FlyToMode ) ) );
+            connect( m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),
+                     m_marbleWidget, SLOT( zoomOut( FlyToMode ) ) );
+            connect( m_autoNavigation, SIGNAL( centerOn( const GeoDataCoordinates &, bool ) ),
+                     m_marbleWidget, SLOT( centerOn( const GeoDataCoordinates &, bool ) ) );
+
+            connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ),
+                     m_autoNavigation, SLOT( inhibitAutoAdjustments() ) );
         }
 
         if ( m_autoNavigation ) {
@@ -231,7 +241,16 @@ void Tracking::setAutoZoom( bool enabled )
 {
     if ( autoZoom() != enabled ) {
         if ( enabled && !m_autoNavigation && m_marbleWidget ) {
-            m_autoNavigation = new AdjustNavigation( m_marbleWidget, this );
+            m_autoNavigation = new AdjustNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
+            connect( m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
+                     m_marbleWidget, SLOT( zoomIn( FlyToMode ) ) );
+            connect( m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),
+                     m_marbleWidget, SLOT( zoomOut( FlyToMode ) ) );
+            connect( m_autoNavigation, SIGNAL( centerOn( const GeoDataCoordinates &, bool ) ),
+                     m_marbleWidget, SLOT( centerOn( const GeoDataCoordinates &, bool ) ) );
+
+            connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ),
+                     m_autoNavigation, SLOT( inhibitAutoAdjustments() ) );
         }
 
         if ( m_autoNavigation ) {

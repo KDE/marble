@@ -33,7 +33,6 @@ namespace Marble
 
 ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, const QSizeF &size )
         : AbstractFloatItem( point, size ),
-        m_aboutDialog( 0 ),
         m_configDialog( 0 ),
         m_target( QString() ),
         m_leftGraphMargin( 0 ),
@@ -63,6 +62,10 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, cons
         m_markerText( &m_markerTextContainer ),
         m_lastMarkerRegion( QRegion() )
 {
+    setVersion( "1.1" );
+    setCopyrightYear( 2011 );
+    addAuthor( QString::fromUtf8 ( "Florian Eßer" ), "f.esser@rwth-aachen.de" );
+
     setVisible( false );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
@@ -104,7 +107,7 @@ QStringList ElevationProfileFloatItem::renderPosition() const
 
 qreal ElevationProfileFloatItem::zValue() const
 {
-    return 1.0;
+    return 3.0;
 }
 
 QString ElevationProfileFloatItem::name() const
@@ -142,35 +145,14 @@ bool ElevationProfileFloatItem::isInitialized () const
     return m_isInitialized;
 }
 
-QDialog *ElevationProfileFloatItem::aboutDialog()
-{
-    if ( !m_aboutDialog ) {
-        // Initializing about dialog
-        m_aboutDialog = new PluginAboutDialog();
-        m_aboutDialog->setName( "Elevation Profile Plugin" );
-        m_aboutDialog->setVersion( "0.1" );
-        // FIXME: Can we store this string for all of Marble
-        m_aboutDialog->setAboutText( tr( "<br />(c) 2009, 2010, 2011 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
-        QList<Author> authors;
-        Author esser;
-        esser.name = QString::fromUtf8 ( "Florian Eßer" );
-        esser.task = tr( "Developer" );
-        esser.email = "f.esser@rwth-aachen.de";
-        authors.append( esser );
-        m_aboutDialog->setAuthors( authors );
-    }
-    return m_aboutDialog;
-}
-
-
-
 void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
 {
     if ( !( viewport->width() == m_viewportWidth && m_isInitialized ) ) {
-        m_fontHeight     = QFontMetrics( font() ).ascent();
+        m_fontHeight = QFontMetrics( font() ).ascent() + 1;
         bool const highRes = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::HighResolution;
         int const widthRatio = highRes ? 2 : 3;
-        setContentSize( QSizeF( viewport->width() / widthRatio, m_eleGraphHeight + m_fontHeight * 2.5 + 3 ) );
+        setContentSize( QSizeF( viewport->width() / widthRatio,
+                                m_eleGraphHeight + m_fontHeight * 2.5 + padding() ) );
         m_leftGraphMargin = QFontMetrics( font() ).width("0000 m");
         m_eleGraphWidth = contentSize().width() - m_leftGraphMargin;
         m_viewportWidth = viewport->width();
@@ -201,7 +183,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     painter->setRenderHint( QPainter::Antialiasing, true );
     painter->setFont( font() );
 
-    m_fontHeight     = QFontMetrics( font() ).ascent();
+    m_fontHeight = QFontMetrics( font() ).ascent() + 1;
 
     if ( ! ( m_routeAvailable && m_isInitialized && m_eleData.size() > 0 ) ) {
         painter->setPen( QColor( Qt::black ) );
@@ -271,15 +253,15 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     for ( int j = 0; j <= m_bestDivisorY; j ++ ) {
         if ( measurementSystem == QLocale::MetricSystem ) {
             if ( valueOffsetY + m_bestDivisorY * m_valueIntervalY > 10000 ) {
-                m_unitY = tr("km");
+                m_unitY = tr( "km" );
                 intervalStr.setNum( ( valueOffsetY + j * m_valueIntervalY ) / 1000 );
             } else {
-                m_unitY = tr("m");
+                m_unitY = tr( "m" );
                 intervalStr.setNum( valueOffsetY + j * m_valueIntervalY );
             }
         } else {
             // TODO: ft instead of mi for the elevation?
-            m_unitY = tr("mi");
+            m_unitY = tr( "mi" );
             if ( m_bestDivisorY * m_valueIntervalY > 3800 ) {
                 intervalStr.setNum( ( valueOffsetY + j * m_valueIntervalY ) / 1000 );
             } else {
@@ -287,18 +269,22 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
             }
         }
 
-        currentStringBegin = m_eleGraphHeight - j * m_pixelIntervalY + m_fontHeight / 2;
-        if ( j == m_bestDivisorY ) {
-            intervalStr += " " + m_unitY;
-            if ( currentStringBegin < m_fontHeight + 1 ) {
-                currentStringBegin  = m_fontHeight + 1;
-            }
-        }
-        painter->setPen(   QColor( Qt::darkGray ) );
+        painter->setPen( oxygenAluminumGray4 );
         painter->drawLine( m_leftGraphMargin, m_eleGraphHeight - j * m_pixelIntervalY,
                            contentSize().width(), m_eleGraphHeight - j * m_pixelIntervalY );
-        painter->setPen(   QColor( Qt::black ) );
-        painter->drawText( 0, currentStringBegin, intervalStr );
+        painter->setPen( QColor( Qt::black ) );
+        currentStringBegin = m_eleGraphHeight - j * m_pixelIntervalY - m_fontHeight / 2;
+        if ( j == m_bestDivisorY ) {
+            // last one at the top: don't draw outside the visible area
+            if ( currentStringBegin < padding() ) {
+                currentStringBegin  = padding();
+            }
+            QRect rect( m_leftGraphMargin - padding(), currentStringBegin,
+                        m_fontHeight * 2, m_fontHeight );
+            painter->drawText( rect, Qt::AlignLeft, " " + m_unitY );
+        }
+        QRect rect( 0, currentStringBegin, m_leftGraphMargin, m_fontHeight );
+        painter->drawText( rect, Qt::AlignRight, intervalStr );
     }
 
     // draw X grid and labels
@@ -307,14 +293,14 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     for ( int j = 0; j <= m_bestDivisorX; j ++ ) {
         if ( measurementSystem == QLocale::MetricSystem ) {
             if ( valueOffsetX + m_bestDivisorX * m_valueIntervalX > 10000 ) {
-                m_unitX = tr("km");
+                m_unitX = tr( "km" );
                 intervalStr.setNum( ( valueOffsetX + j * m_valueIntervalX ) / 1000 );
             } else {
-                m_unitX = tr("m");
+                m_unitX = tr( "m" );
                 intervalStr.setNum( valueOffsetX + j * m_valueIntervalX );
             }
         } else {
-            m_unitX = tr("mi");
+            m_unitX = tr( "mi" );
             if ( m_bestDivisorX * m_valueIntervalX > 3800 ) {
                 intervalStr.setNum( ( valueOffsetX +  j * m_valueIntervalX ) / 1000 );
             } else {
@@ -322,19 +308,21 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
             }
         }
 
-        if ( j == m_bestDivisorX ) {
+        if ( j == 0 ) {
+            currentStringBegin = m_leftGraphMargin;
+        } else if ( j == m_bestDivisorX ) {
             if ( valueOffsetX == 0) {
                 intervalStr += " " + m_unitX;
             }
-            currentStringBegin = (m_leftGraphMargin + m_eleGraphWidth
-                                  - QFontMetrics( font() ).width( intervalStr ) * 1.5);
+            currentStringBegin = ( m_leftGraphMargin + m_eleGraphWidth
+                                  - QFontMetrics( font() ).width( intervalStr ) * 1.5 );
         } else {
-            currentStringBegin = (m_leftGraphMargin + j * m_pixelIntervalX
+            currentStringBegin = ( m_leftGraphMargin + j * m_pixelIntervalX
                                   - QFontMetrics( font() ).width( intervalStr ) / 2 );
         }
 
         if ( lastStringEnds < currentStringBegin ) {
-            painter->setPen( QColor( Qt::darkGray ) );
+            painter->setPen( oxygenAluminumGray4 );
             painter->drawLine(m_leftGraphMargin + j * m_pixelIntervalX, 0,
                               m_leftGraphMargin + j * m_pixelIntervalX, m_eleGraphHeight );
             painter->setPen( QColor( Qt::black ) );
@@ -346,6 +334,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     // display elevation gain/loss data
     // TODO: miles/feet...
     painter->setPen( QColor( Qt::black ) );
+    // TODO (after string freeze is over): shorten this for smallScreen / marble-touch
     intervalStr = tr( "Elevation difference: ca. %1 m (Gain: %2 m, Loss: %3 m)" )
                     .arg( QString::number( m_gain - m_loss, 'f', 0 ) )
                     .arg( QString::number( m_gain, 'f', 0 ) )
@@ -364,6 +353,20 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     QPen pen = painter->pen();
     pen.setWidth( highRes ? 2 : 1 );
     painter->setPen( pen );
+
+    QLinearGradient fillGradient( 0, 0, 0, m_eleGraphHeight );
+    QColor startColor = oxygenForestGreen4;
+    QColor endColor = oxygenBrownOrange4;
+    startColor.setAlpha( 200 );
+    endColor.setAlpha( 32 );
+    fillGradient.setColorAt( 0.0, startColor );
+    fillGradient.setColorAt( 1.0, endColor );
+    QBrush brush = QBrush( fillGradient );
+    painter->setBrush( brush );
+
+    QPainterPath path;
+    path.moveTo( oldPos.x(), m_eleGraphHeight );
+    path.lineTo( oldPos.x(), oldPos.y() );
     for ( int i = start; i <= end; ++i ) {
         QPoint newPos (
             m_leftGraphMargin + ( m_eleData.value(i).x() - valueOffsetX )
@@ -372,10 +375,24 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
             * m_eleGraphHeight / graphElevation
         );
         if ( newPos.x() != oldPos.x() ) {
-            painter->drawLine(oldPos.x(), oldPos.y(), newPos.x(), newPos.y());
+            path.lineTo( newPos.x(), newPos.y() );
             oldPos = newPos;
         }
     }
+    path.lineTo( oldPos.x(), m_eleGraphHeight );
+    // fill
+    painter->setPen( QPen( Qt::NoPen ) );
+    painter->drawPath( path );
+    // contour
+    // "remove" the first and last path element first, they are only used to fill down to the bottom
+    painter->setBrush( QBrush( Qt::NoBrush ) );
+    path.setElementPositionAt( 0, path.elementAt( 1 ).x,  path.elementAt( 1 ).y );
+    path.setElementPositionAt( path.elementCount()-1,
+                               path.elementAt( path.elementCount()-2 ).x,
+                               path.elementAt( path.elementCount()-2 ).y );
+    painter->setPen( pen );
+    painter->drawPath( path );
+
     pen.setWidth( 1 );
     painter->setPen( pen );
 
@@ -401,13 +418,13 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         painter->drawLine( m_leftGraphMargin + m_cursorPositionX - 5, ypos,
                            m_leftGraphMargin + m_cursorPositionX + 5, ypos );
         if ( measurementSystem == QLocale::MetricSystem ) {
-            m_unitX = tr("m");
+            m_unitX = tr( "m" );
             if ( xpos > 10000 ) {
-                m_unitX = tr("km");
+                m_unitX = tr( "km" );
                 xpos /= 1000;
             }
         } else { // miles
-            m_unitX = tr("mi");
+            m_unitX = tr( "mi" );
             xpos /= 1000;
         }
         intervalStr.setNum( xpos, 'f', 2 );
@@ -494,6 +511,7 @@ bool ElevationProfileFloatItem::renderOnMap(GeoPainter* painter, ViewportParams*
 
 
 // see MapScaleFloatItem::calcScaleBar()
+// TODO: unite calcScaleX() and calcScaleY() to one single generic calcScale()
 void ElevationProfileFloatItem::calcScaleX( const qreal distance )
 {
     qreal magnitude = 1;
@@ -560,7 +578,7 @@ void ElevationProfileFloatItem::calcScaleY( const qreal distance )
     }
 
     const int minDivisor = 4;
-    const int maxDivisor = m_eleGraphHeight / ( m_fontHeight * 1.5 );
+    const int maxDivisor = m_eleGraphHeight / ( m_fontHeight * 1.2 );
 
     m_bestDivisorY = minDivisor;
     int  bestMagValue = 1;
@@ -683,29 +701,9 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
                 if ( i >= points.size() ) {
                     i = points.size() - 1;
                 }
-                /*
                 qreal lon = points[i].longitude( GeoDataCoordinates::Degree );
                 qreal lat = points[i].latitude ( GeoDataCoordinates::Degree );
                 widget->centerOn( lon, lat, true );
-                */
-                // The above would be more easy, but then Marble zooms in on every double click.
-                // (see MarbleWidgetDefaultInputHandler::eventFilter)
-                // This is not very convenient if you are "browsing" your route via the elevation
-                // profile.
-                // So, instead we use the following code and undo marble's zooming:
-
-                qreal lon = points[i].longitude();
-                qreal lat = points[i].latitude ();
-                GeoDataLookAt lookAt;
-                lookAt.setLongitude( lon );
-                lookAt.setLatitude( lat );
-                lookAt.setAltitude( 0.0 );
-                // see MarbleWidgetDefaultInputHandler::eventFilter's MouseButtonDblClick routine
-                // for the "magic" 0.67 to undo zooming
-                lookAt.setRange( widget->distance() * 1/0.67 * KM2METER );
-
-                widget->flyTo( lookAt );
-
                 return true;
             }
         }

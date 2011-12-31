@@ -19,7 +19,6 @@
 #include "GeoDataTreeModel.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
-#include "AbstractProjection.h"
 #include "FileManager.h"
 #include "MarbleMath.h"
 #include "MarbleDebug.h"

@@ -368,13 +368,10 @@ QPainterPath MercatorProjection::mapShape( const ViewportParams *viewport ) cons
     qreal  yTop;
     qreal  yBottom;
     qreal  xDummy;
-    const AbstractProjection *proj = viewport->currentProjection();
 
     // Get the top and bottom y coordinates of the projected map.
-    proj->screenCoordinates( 0.0, proj->maxLat(), viewport,
-                 xDummy, yTop );
-    proj->screenCoordinates( 0.0, proj->minLat(), viewport,
-                 xDummy, yBottom );
+    screenCoordinates( 0.0, maxLat(), viewport, xDummy, yTop );
+    screenCoordinates( 0.0, minLat(), viewport, xDummy, yBottom );
 
     if ( yTop < 0 )
         yTop = 0;

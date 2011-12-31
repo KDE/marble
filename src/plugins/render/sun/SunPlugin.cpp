@@ -23,6 +23,13 @@ namespace Marble
 
 SunPlugin::SunPlugin()
 {
+    setVisible( false );
+
+    setVersion( "1.0" );
+    setCopyrightYear( 2011 );
+    addAuthor( "Torsten Rahn", "tackat@kde.org" );
+    addAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de");
+    addAuthor( "Harshit Jain", "hjain.itbhu@gmail.com" );
 }
 
 QStringList SunPlugin::backendTypes() const

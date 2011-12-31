@@ -43,10 +43,13 @@ AprsPlugin::AprsPlugin()
       m_ttyGatherer( 0 ),
       m_fileGatherer( 0 ),
       m_action( 0 ),
-      m_aboutDialog( 0 ),
       m_configDialog( 0 ),
       ui_configWidget( 0 )
 {
+    setVersion( "1.0" );
+    setCopyrightYears( QList<int>() << 2009 << 2010 );
+    addAuthor( "Wes Hardaker", "hardaker@users.sourceforge.net" );
+
     setEnabled( false );
     setVisible( true );
     
@@ -132,30 +135,6 @@ QString AprsPlugin::description() const
 QIcon AprsPlugin::icon () const
 {
     return QIcon();
-}
-
-QDialog* AprsPlugin::aboutDialog()
-{
-    if ( !m_aboutDialog )
-    {
-        // Initializing about dialog
-        m_aboutDialog = new PluginAboutDialog();
-        m_aboutDialog->setName( "APRS Plugin" );
-        m_aboutDialog->setVersion( "0.1" );
-        // FIXME: Can we store this string for all of Marble
-        m_aboutDialog->setAboutText( tr( "<br />(c) 2009, 2010 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
-        QList<Author> authors;
-        Author hardaker;
-        
-        hardaker.name = QString::fromUtf8( "Wes Hardaker" );
-        hardaker.task = tr( "Developer" );
-        hardaker.email = "hardaker@users.sourceforge.net";
-        authors.append( hardaker );
-        m_aboutDialog->setAuthors( authors );
-        
-        m_aboutDialog->setLicense( PluginAboutDialog::License_LGPL_V2 );
-    }
-    return m_aboutDialog;
 }
 
 void AprsPlugin::stopGatherers()

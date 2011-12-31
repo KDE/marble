@@ -53,7 +53,7 @@ public:
     const SunLocator *const m_sunLocator;
     TileLoader m_loader;
     StackedTileLoader    m_tileLoader;
-    QCache<TileId, QPixmap> m_pixmapCache;
+    QCache<TileId, const QPixmap> m_pixmapCache;
     TextureMapperInterface *m_texmapper;
     QPointer<TextureColorizer> m_texcolorizer;
     QVector<const GeoSceneTexture *> m_textures;

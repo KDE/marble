@@ -57,6 +57,7 @@ private:
 private: // Only our registrar is allowed to register tag handlers.
     friend struct GeoTagHandlerRegistrar;
     static void registerHandler(const GeoParser::QualifiedName&, const GeoTagHandler*);
+    static void unregisterHandler(const GeoParser::QualifiedName&);
 
 private: // Only our parser is allowed to access tag handlers.
     friend class GeoParser;
@@ -74,9 +75,18 @@ struct GeoTagHandlerRegistrar
 {
 public:
     GeoTagHandlerRegistrar(const GeoParser::QualifiedName& name, const GeoTagHandler* handler)
+        :m_name( name )
     {
         GeoTagHandler::registerHandler(name, handler);
     }
+
+    ~GeoTagHandlerRegistrar()
+    {
+        GeoTagHandler::unregisterHandler(m_name);
+    }
+
+private:
+    GeoParser::QualifiedName m_name;
 };
 
 // Macros to ease registering new handlers

@@ -53,7 +53,6 @@ class RenderPlugin;
 class AbstractDataPlugin;
 class AbstractDataPluginItem;
 class AbstractFloatItem;
-class MeasureTool;
 class TextureLayer;
 class TileCoordsPyramid;
 
@@ -148,12 +147,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief  Return the radius of the globe in pixels.
      */
     int radius() const;
-
-    /**
-     * @brief  Set the radius of the globe in pixels.
-     * @param  radius  The new globe radius value in pixels.
-     */
-    void setRadius( int radius );
 
     int preferredRadiusCeil( int radius );
     int preferredRadiusFloor( int radius );
@@ -385,6 +378,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param dirtyRect the rectangle that actually needs repainting.
      */
     void paint( GeoPainter &painter, const QRect &dirtyRect );
+
+    /**
+     * @brief  Set the radius of the globe in pixels.
+     * @param  radius  The new globe radius value in pixels.
+     */
+    void setRadius( int radius );
 
     /**
      * @brief  Rotate the view by the two angles phi and theta.
@@ -634,6 +633,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void projectionChanged( Projection );
 
+    void radiusChanged( int radius );
+
     void mouseMoveGeoPosition( const QString& );
 
     void mouseClickGeoPosition( qreal lon, qreal lat, GeoDataCoordinates::Unit );
@@ -687,8 +688,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     friend class CustomPaintLayer;
 
     TextureLayer *textureLayer();
-
-    MeasureTool *measureTool();
 };
 
 }

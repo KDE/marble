@@ -204,15 +204,9 @@ class GEODATA_EXPORT GeoDataCoordinates
     const Quaternion &quaternion() const;
 
     /**
-    * @brief return whether our coordinates are located at one of the poles
+    * @brief return whether our coordinates represent a pole
     * This method can be used to check whether the coordinate equals one of 
     * the poles. 
-    * NOTE: As the poles might not be visible in the projection at all 
-    *       you should check whether
-    *
-    * bool AbstractProjection::exceedsLatitudeRange() const
-    *
-    * isn't what you're looking for ...
     */
     bool isPole( Pole = AnyPole ) const;
 

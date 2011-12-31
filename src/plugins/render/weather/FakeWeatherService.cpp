@@ -20,7 +20,7 @@
 
 using namespace Marble;
 
-FakeWeatherService::FakeWeatherService( QObject *parent ) 
+FakeWeatherService::FakeWeatherService( QObject *parent )
     : AbstractWeatherService( parent )
 {
 }

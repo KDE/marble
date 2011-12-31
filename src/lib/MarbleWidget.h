@@ -47,7 +47,6 @@ class MarbleModel;
 class MarbleWidgetPopupMenu;
 class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
-class MeasureTool;
 class Quaternion;
 class RenderPlugin;
 class RoutingLayer;
@@ -94,13 +93,6 @@ class ViewportParams;
  * some information about the placemark and also try to connect to
  * Wikipedia to retrieve an article about it. If there is such an
  * article, you will get a mini-browser window with the article in a tab.
- *
- * The right mouse button controls a distance tool.  The distance tool
- * is implemented as a menu where you can choose to either create or
- * remove so called Measure Points. Marble will keep track of the
- * Measure Points and show the total distance in the upper left of the
- * widget.  Measure Points are shown on the map as a little white
- * cross.
  *
  * @see MarbleControlBox
  * @see MarbleMap
@@ -284,12 +276,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     int radius() const;
 
     /**
-     * @brief  Set the radius of the globe in pixels.
-     * @param  radius  The new globe radius value in pixels.
-     */
-    void setRadius( int radius );
-
-    /**
      * @brief Return the current zoom amount.
      */
     int zoom() const;
@@ -300,12 +286,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Return the current distance.
      */
     qreal distance() const;
-
-    /**
-     * @brief  Set the distance of the observer to the globe in km.
-     * @param  distance  The new distance in km.
-     */
-    void setDistance( qreal distance );
 
     /**
      * @brief Return the current distance string.
@@ -374,6 +354,27 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     * @brief Return the lookAt
     */
     GeoDataLookAt lookAt() const;
+
+    /**
+     * @return The current point of focus, e.g. the point that is not moved
+     * when changing the zoom level. If not set, it defaults to the
+     * center point.
+     * @see centerLongitude centerLatitude setFocusPoint resetFocusPoint
+     */
+    GeoDataCoordinates focusPoint() const;
+
+    /**
+     * @brief Change the point of focus, overridding any previously set focus point.
+     * @param focusPoint New focus point
+     * @see focusPoint resetFocusPoint
+     */
+    void setFocusPoint( const GeoDataCoordinates &focusPoint );
+
+    /**
+     * @brief Invalidate any focus point set with @ref setFocusPoint.
+     * @see focusPoint setFocusPoint
+     */
+    void resetFocusPoint();
 
     /**
       * @brief Return the globe radius (pixel) for the given distance (km)
@@ -574,6 +575,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     //@{
 
     /**
+     * @brief  Set the radius of the globe in pixels.
+     * @param  radius  The new globe radius value in pixels.
+     */
+    void setRadius( int radius );
+
+    /**
      * @brief  Zoom the view to a certain zoomlevel
      * @param  zoom  the new zoom level.
      *
@@ -597,6 +604,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Zoom out by the amount zoomStep.
      */
     void zoomOut( FlyToMode mode = Automatic );
+
+    /**
+     * @brief  Set the distance of the observer to the globe in km.
+     * @param  distance  The new distance in km.
+     */
+    void setDistance( qreal distance );
 
     /**
      * @brief  Rotate the view by the two angles phi and theta.
@@ -1036,7 +1049,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     const TextureLayer *textureLayer() const;
 
     friend class MarbleWidgetDefaultInputHandler;
-    MeasureTool *measureTool();
 };
 
 }

@@ -22,7 +22,6 @@
 #include "RenderPlugin.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
-#include "PluginAboutDialog.h"
 
 namespace Ui
 {
@@ -56,8 +55,6 @@ class PositionMarker  : public RenderPlugin
     QString description() const;
 
     QIcon icon () const;
-
-    QDialog *aboutDialog();
 
     QDialog *configDialog();
 
@@ -105,7 +102,6 @@ class PositionMarker  : public RenderPlugin
     GeoDataCoordinates  m_previousPosition;
     
     Ui::PositionMarkerConfigWidget *ui_configWidget;
-    PluginAboutDialog *m_aboutDialog;
     QDialog *m_configDialog;
     QString m_cursorPath;
 

@@ -33,7 +33,6 @@
 #include "ViewportParams.h"
 #include "TileId.h"
 #include "TileCoordsPyramid.h"
-#include "AbstractProjection.h"
 #include "VisiblePlacemark.h"
 #include "MathHelper.h"
 
@@ -59,6 +58,15 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
     connect( m_selectionModel,  SIGNAL( selectionChanged( QItemSelection,
                                                            QItemSelection) ),
              this,               SLOT( requestStyleReset() ) );
+
+    connect( &m_placemarkModel, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
+             this, SLOT( setCacheData() ) );
+    connect( &m_placemarkModel, SIGNAL( rowsInserted(const QModelIndex&, int, int) ),
+             this, SLOT( setCacheData() ) );
+    connect( &m_placemarkModel, SIGNAL( rowsRemoved(const QModelIndex&, int, int) ),
+             this, SLOT( setCacheData() ) );
+    connect( &m_placemarkModel, SIGNAL( modelReset() ),
+             this, SLOT( setCacheData() ) );
 
 //  Old weightfilter array. Still here
 // to be able to compare performance
@@ -257,6 +265,7 @@ void PlacemarkLayout::styleReset()
     qDeleteAll( m_visiblePlacemarks );
     m_visiblePlacemarks.clear();
     m_maxLabelHeight = maxLabelHeight();
+    m_styleResetRequested = false;
 }
 
 QVector<const GeoDataPlacemark*> PlacemarkLayout::whichPlacemarkAt( const QPoint& curpos )
@@ -353,10 +362,8 @@ void PlacemarkLayout::setCacheData()
 {
     const int rowCount = m_placemarkModel.rowCount();
 
-    m_paintOrder.clear();
-    qDeleteAll( m_visiblePlacemarks );
-    m_visiblePlacemarks.clear();
     m_placemarkCache.clear();
+    requestStyleReset();
     for ( int i = 0; i != rowCount; ++i )
     {
         const QModelIndex& index = m_placemarkModel.index( i, 0 );
@@ -386,6 +393,11 @@ QStringList PlacemarkLayout::renderPosition() const
     return QStringList() << "HOVERS_ABOVE_SURFACE";
 }
 
+qreal PlacemarkLayout::zValue() const
+{
+    return 2.0;
+}
+
 bool PlacemarkLayout::render( GeoPainter *painter,
                               ViewportParams *viewport,
                               const QString &renderPos,
@@ -405,7 +417,6 @@ bool PlacemarkLayout::render( GeoPainter *painter,
     const int imgheight = viewport->height();
 
     if ( m_styleResetRequested ) {
-        m_styleResetRequested = false;
         styleReset();
     }
 
@@ -506,7 +517,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         }
 
         if ( !latLonAltBox.contains( coordinates ) ||
-             ! viewport->currentProjection()->screenCoordinates( coordinates, viewport, x, y ))
+             ! viewport->screenCoordinates( coordinates, x, y ))
             {
                 delete m_visiblePlacemarks.take( placemark );
                 continue;
@@ -593,7 +604,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         }
 
         if ( !latLonAltBox.contains( coordinates ) ||
-             ! viewport->currentProjection()->screenCoordinates( coordinates, viewport, x, y ))
+             ! viewport->screenCoordinates( coordinates, x, y ))
             {
                 delete m_visiblePlacemarks.take( placemark );
                 continue;
@@ -659,15 +670,13 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         // ----------------------------------------------------------------
         // End of checks. Here the actual layouting starts.
 
-        // Find the corresponding visible placemark
-        VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
-        const GeoDataStyle* style = placemark->style();
 
         // Choose Section
         const QVector<VisiblePlacemark*> currentsec = rowsection.at( y / m_maxLabelHeight );
 
          // Find out whether the area around the placemark is covered already.
         // If there's not enough space free don't add a VisiblePlacemark here.
+        const GeoDataStyle* style = placemark->style();
 
         QRect labelRect = roomForLabel( style, currentsec, x, y, placemark->name() );
         if ( labelRect.isNull() )
@@ -680,6 +689,8 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         if ( labelnum >= placemarksOnScreenLimit() )
             break;
 
+        // Find the corresponding visible placemark
+        VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
         if ( !mark ) {
             // If there is no visible placemark yet for this index,
             // create a new one...

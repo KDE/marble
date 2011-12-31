@@ -23,6 +23,7 @@ Item {
 
     // Load settings from file.
     property string mapTheme: settings.value( "MarbleWidget", "mapTheme", "earth/openstreetmap/openstreetmap.dgml" )
+    property string streetMapTheme: settings.value( "MarbleTouch", "streetMapTheme", "earth/openstreetmap/openstreetmap.dgml" )
     property bool workOffline: settings.value( "MainWindow", "workOffline", false )
     property real quitLongitude: settings.value( "MarbleWidget", "quitLongitude", 0.0 )
     property real quitLatitude: settings.value( "MarbleWidget", "quitLatitude", 0.0 )
@@ -37,6 +38,7 @@ Item {
         "crosshairs", "stars", "scalebar"]
     property variant activeRenderPlugins: settings.value( "MarbleWidget", "activeRenderPlugins", defaultRenderPlugins )
     property string lastActivity: settings.value( "MarbleTouch", "lastActivity", "" )
+    property bool inhibitScreensaver: settings.value( "MarbleTouch", "inhibitScreensaver", true )
     
     // Save settings to file.
     Component.onDestruction: {
@@ -53,6 +55,8 @@ Item {
         settings.setValue( "MarbleWidget", "projection", root.projection )
         settings.setValue( "MarbleWidget", "activeRenderPlugins", root.activeRenderPlugins )
         settings.setValue( "MarbleTouch", "lastActivity", root.lastActivity )
+        settings.setValue( "MarbleTouch", "streetMapTheme", root.streetMapTheme )
+        settings.setValue( "MarbleTouch", "inhibitScreensaver", root.inhibitScreensaver )
     }
 
     function removeElementsFromArray(array, elements) {

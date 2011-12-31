@@ -17,6 +17,7 @@
 #include "RoutingModel.h"
 #include "RoutingProfilesModel.h"
 #include "MarbleRunnerManager.h"
+#include "RunnerPlugin.h"
 #include "AdjustNavigation.h"
 #include "GeoWriter.h"
 #include "GeoDataDocument.h"
@@ -265,7 +266,7 @@ RouteRequest* RoutingManager::routeRequest()
     return &d->m_routeRequest;
 }
 
-void RoutingManager::updateRoute()
+void RoutingManager::retrieveRoute()
 {
     d->m_haveRoute = false;
 
@@ -329,6 +330,42 @@ void RoutingManager::saveRoute( const QString &filename ) const
 void RoutingManager::loadRoute( const QString &filename )
 {
     d->loadRoute( filename );
+}
+
+RoutingProfile RoutingManager::defaultProfile( RoutingProfile::TransportType transportType ) const
+{
+    RoutingProfile profile;
+    RoutingProfilesModel::ProfileTemplate tpl = RoutingProfilesModel::CarFastestTemplate;
+    switch ( transportType ) {
+    case RoutingProfile::Motorcar:
+        tpl = RoutingProfilesModel::CarFastestTemplate;
+        profile.setName( "Motorcar" );
+        profile.setTransportType( RoutingProfile::Motorcar );
+        break;
+    case RoutingProfile::Bicycle:
+        tpl = RoutingProfilesModel::BicycleTemplate;
+        profile.setName( "Bicycle" );
+        profile.setTransportType( RoutingProfile::Bicycle );
+        break;
+    case RoutingProfile::Pedestrian:
+        tpl = RoutingProfilesModel::PedestrianTemplate;
+        profile.setName( "Pedestrian" );
+        profile.setTransportType( RoutingProfile::Pedestrian );
+        break;
+    }
+
+    const PluginManager* pluginManager = d->m_marbleModel->pluginManager();
+    foreach( RunnerPlugin* plugin, pluginManager->runnerPlugins() ) {
+        if ( !plugin->supports( RunnerPlugin::Routing ) ) {
+            continue;
+        }
+
+        if ( plugin->supportsTemplate( tpl ) ) {
+            profile.pluginSettings()[plugin->nameId()] = plugin->templateSettings( tpl );
+        }
+    }
+
+    return profile;
 }
 
 void RoutingManager::readSettings()
@@ -396,10 +433,10 @@ void RoutingManagerPrivate::recalculateRoute( bool deviated )
 
         if ( m_routeRequest.size() == 2 && m_routeRequest.visited( 0 ) && !m_routeRequest.visited( 1 ) ) {
             m_routeRequest.setPosition( 0, m_marbleModel->positionTracking()->currentLocation() );
-            q->updateRoute();
+            q->retrieveRoute();
         } else if ( m_routeRequest.size() != 0 && !m_routeRequest.visited( m_routeRequest.size()-1 ) ) {
             m_routeRequest.insert( 0, m_marbleModel->positionTracking()->currentLocation() );
-            q->updateRoute();
+            q->retrieveRoute();
         }
     }
 }
@@ -407,13 +444,13 @@ void RoutingManagerPrivate::recalculateRoute( bool deviated )
 void RoutingManager::reverseRoute()
 {
     d->m_routeRequest.reverse();
-    updateRoute();
+    retrieveRoute();
 }
 
 void RoutingManager::clearRoute()
 {
     d->m_routeRequest.clear();
-    updateRoute();
+    retrieveRoute();
 }
 
 void RoutingManager::setShowGuidanceModeStartupWarning( bool show )

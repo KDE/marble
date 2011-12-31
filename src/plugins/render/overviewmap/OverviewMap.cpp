@@ -20,7 +20,6 @@
 #include <QtSvg/QSvgRenderer>
 #include <QtGui/QColorDialog>
 
-#include "AbstractProjection.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
@@ -49,6 +48,10 @@ OverviewMap::OverviewMap( const QPointF &point, const QSizeF &size )
     setCacheMode( NoCache );
     connect( this, SIGNAL( settingsChanged( QString ) ),
              this, SLOT( updateSettings() ) );
+
+    setVersion( "1.0" );
+    setCopyrightYear( 2008 );
+    addAuthor( "Torsten Rahn", "tackat@kde.org" );
 }
 
 OverviewMap::~OverviewMap()
@@ -134,7 +137,7 @@ bool OverviewMap::isInitialized () const
 
 void OverviewMap::changeViewport( ViewportParams *viewport )
 {
-    GeoDataLatLonAltBox latLonAltBox = viewport->currentProjection()->latLonAltBox( QRect( QPoint( 0, 0 ), viewport->size() ), viewport );
+    GeoDataLatLonAltBox latLonAltBox = viewport->latLonAltBox( QRect( QPoint( 0, 0 ), viewport->size() ) );
     const qreal centerLon = viewport->centerLongitude();
     const qreal centerLat = viewport->centerLatitude();
     QString target = marbleModel()->planetId();

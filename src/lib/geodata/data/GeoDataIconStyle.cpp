@@ -89,6 +89,11 @@ void GeoDataIconStyle::setIconPath( const QString& filename )
     d->m_iconPath = filename;
 }
 
+QString GeoDataIconStyle::iconPath() const
+{
+    return d->m_iconPath;
+}
+
 QPixmap GeoDataIconStyle::icon() const
 {
     if(!d->m_icon.isNull())
@@ -106,6 +111,11 @@ void GeoDataIconStyle::setHotSpot( const QPointF& hotSpot,
                                    GeoDataHotSpot::Units yunits )
 {
     d->m_hotSpot.setHotSpot( hotSpot, xunits, yunits );
+}
+
+QPointF GeoDataIconStyle::hotSpot( GeoDataHotSpot::Units &xunits, GeoDataHotSpot::Units &yunits ) const
+{
+    return d->m_hotSpot.hotSpot( xunits, yunits );
 }
 
 const QPointF& GeoDataIconStyle::hotSpot() const // always in pixels, Origin upper left

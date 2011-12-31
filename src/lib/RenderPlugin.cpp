@@ -15,6 +15,7 @@
 // Marble
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
+#include "PluginAboutDialog.h"
 
 // Qt
 #include <QtGui/QAction>
@@ -32,12 +33,14 @@ class RenderPluginPrivate
           m_action(0),
           m_item(0),
           m_enabled(true),
-          m_visible(true)
+          m_visible(true),
+          m_aboutDialog( 0 )
     {
     }
 
     ~RenderPluginPrivate()
     {
+        delete m_aboutDialog;
     }
 
     // const: RenderPlugins should only read the model, not modify it
@@ -47,6 +50,14 @@ class RenderPluginPrivate
 
     bool                m_enabled;
     bool                m_visible;
+
+    // About dialog information
+    QList<Author>       m_authors;
+    QString             m_version;
+    QList<int>          m_years;
+    QString             m_dataText;
+
+    PluginAboutDialog*  m_aboutDialog;
 };
 
 
@@ -162,7 +173,28 @@ bool RenderPlugin::visible() const
 
 QDialog *RenderPlugin::aboutDialog()
 {
-    return 0;
+    if ( !d->m_aboutDialog && !d->m_authors.isEmpty() && !d->m_years.isEmpty() && !d->m_version.isEmpty() ) {
+        Q_ASSERT( !d->m_aboutDialog );
+        d->m_aboutDialog = new PluginAboutDialog();
+        d->m_aboutDialog->setName( name() );
+        d->m_aboutDialog->setVersion( d->m_version );
+        if ( !d->m_dataText.isEmpty() ) {
+            d->m_aboutDialog->setDataText( d->m_dataText );
+        }
+        QIcon pluginIcon = icon();
+        if ( !pluginIcon.isNull() ) {
+            d->m_aboutDialog->setPixmap( pluginIcon.pixmap( 64, 64 ) );
+        }
+        QString const copyrightText = tr( "<br/>(c) %1 The Marble Project<br /><br/><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" );
+        QString years = QString::number( d->m_years.first() );
+        for ( int i=1; i<d->m_years.size(); ++i ) {
+            years += ", " + QString::number( d->m_years.at( i ) );
+        }
+        d->m_aboutDialog->setAboutText( copyrightText.arg( years ) );
+        d->m_aboutDialog->setAuthors( d->m_authors );
+    }
+
+    return d->m_aboutDialog;
 }
 
 QDialog *RenderPlugin::configDialog()
@@ -190,9 +222,38 @@ bool RenderPlugin::eventFilter( QObject *, QEvent * )
     return false;
 }
 
+void RenderPlugin::setCopyrightYear( int year )
+{
+    d->m_years = QList<int>() << year;
+}
+
+void RenderPlugin::setCopyrightYears( const QList<int> years )
+{
+    d->m_years = years;
+}
+
+void RenderPlugin::setVersion( const QString &version )
+{
+    d->m_version = version;
+}
+
+void RenderPlugin::setDataText(const QString &text)
+{
+    d->m_dataText = text;
+}
+
 void RenderPlugin::restoreDefaultSettings()
 {
     setSettings( QHash<QString,QVariant>() );
+}
+
+void RenderPlugin::addAuthor( const QString &name, const QString &email, const QString &task )
+{
+    Author author;
+    author.name = name;
+    author.email = email;
+    author.task = task;
+    d->m_authors << author;
 }
 
 } // namespace Marble

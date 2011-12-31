@@ -8,10 +8,6 @@
 // Copyright 2008 Torsten Rahn <tackat@kde.org>
 //
 
-//
-// This class is a test plugin.
-//
-
 #ifndef MARBLEOVERVIEWMAP_H
 #define MARBLEOVERVIEWMAP_H
 

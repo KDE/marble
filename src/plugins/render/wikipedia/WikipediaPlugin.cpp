@@ -14,7 +14,6 @@
 // Marble
 #include "ui_WikipediaConfigWidget.h"
 #include "WikipediaModel.h"
-#include "PluginAboutDialog.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 
@@ -30,13 +29,16 @@ const quint32 maximumNumberOfItems = 99;
 WikipediaPlugin::WikipediaPlugin()
     : m_isInitialized( false ),
       m_icon(),
-      m_aboutDialog( 0 ),
       ui_configWidget( 0 ),
       m_configDialog( 0 ),
       m_settings()
 {
     setNameId( "wikipedia" );
-    
+    setVersion( "1.0" );
+    setCopyrightYear( 2009 );
+    addAuthor( "Bastian Holst", "bastianholst@gmx.de" );
+    setDataText( tr( "Geo positions by geonames.org\nTexts by wikipedia.org" ) );
+
     // Plugin is enabled by default
     setEnabled( true );
     // Plugin is not visible by default
@@ -54,7 +56,6 @@ WikipediaPlugin::WikipediaPlugin()
 
 WikipediaPlugin::~WikipediaPlugin()
 {
-    delete m_aboutDialog;
     delete ui_configWidget;
     delete m_configDialog;
 }
@@ -91,28 +92,6 @@ QString WikipediaPlugin::description() const
 QIcon WikipediaPlugin::icon() const
 {
     return m_icon;
-}
-
-QDialog *WikipediaPlugin::aboutDialog()
-{
-    if ( !m_aboutDialog ) {
-        // Initializing about dialog
-        m_aboutDialog = new PluginAboutDialog();
-        m_aboutDialog->setName( "Wikipedia Plugin" );
-        m_aboutDialog->setVersion( "0.1" );
-        // FIXME: Can we store this string for all of Marble
-        m_aboutDialog->setAboutText( tr( "<br />(c) 2009 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
-        QList<Author> authors;
-        Author bholst;
-        bholst.name = "Bastian Holst";
-        bholst.task = tr( "Developer" );
-        bholst.email = "bastianholst@gmx.de";
-        authors.append( bholst );
-        m_aboutDialog->setAuthors( authors );
-        m_aboutDialog->setDataText( tr( "Geo positions by geonames.org\nTexts by wikipedia.org" ) );
-        m_aboutDialog->setPixmap( m_icon.pixmap( 62, 53 ) );
-    }
-    return m_aboutDialog;
 }
 
 QDialog *WikipediaPlugin::configDialog()

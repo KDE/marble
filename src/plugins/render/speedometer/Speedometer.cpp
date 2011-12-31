@@ -31,6 +31,10 @@ Speedometer::Speedometer( const QPointF &point, const QSizeF &size )
     setVisible( false );
     setCacheMode( NoCache );
 
+    setVersion( "1.0" );
+    setCopyrightYear( 2011 );
+    addAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
+
     const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
         setPosition( QPointF( 10.5, 10.5 ) );
@@ -63,7 +67,7 @@ QString Speedometer::nameId() const
 
 QString Speedometer::description() const
 {
-    return tr( "A float item showing current travelling speed." );
+    return tr( "Display the current cruising speed." );
 }
 
 QIcon Speedometer::icon () const

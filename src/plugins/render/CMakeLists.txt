@@ -22,12 +22,14 @@ add_subdirectory( opendesktop )
 add_subdirectory( wikipedia )
 add_subdirectory( weather )
 # add_subdirectory( osmannotate )
+add_subdirectory( postalcode )
 
 add_subdirectory( navigation )
 # add_subdirectory ( FITemplate )
 
 # add_subdirectory( fileview )
 
+add_subdirectory( measure )
 add_subdirectory( routing )
 add_subdirectory( gpsinfo )
 

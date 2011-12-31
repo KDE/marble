@@ -16,11 +16,12 @@
 #ifndef MARBLE_MARBLEWIDGETPOPUPMENU_H
 #define MARBLE_MARBLEWIDGETPOPUPMENU_H
 
+#include "marble_export.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QModelIndex>
 #include <QtCore/QVector>
-
+#include <QtCore/QPoint>
 
 class QAction;
 class QMenu;
@@ -36,7 +37,7 @@ class GeoDataPlacemark;
 class MarbleRunnerManager;
 
 
-class MarbleWidgetPopupMenu  : public QObject
+class MARBLE_EXPORT MarbleWidgetPopupMenu  : public QObject
 {
     Q_OBJECT
 
@@ -49,6 +50,8 @@ class MarbleWidgetPopupMenu  : public QObject
       * mouse button
       */
     void addAction( Qt::MouseButton button, QAction* action );
+
+    QPoint mousePosition() const;
 
 Q_SIGNALS:
     void trackPlacemark( const GeoDataPlacemark *placemark );
@@ -101,6 +104,8 @@ private Q_SLOTS:
     QAction  *m_rmbExtensionPoint;
 
     MarbleRunnerManager* m_runnerManager;
+
+    QPoint m_mousePosition;
 };
 
 }

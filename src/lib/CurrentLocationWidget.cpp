@@ -105,7 +105,7 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_widget = widget;
 
-    d->m_adjustNavigation = new AdjustNavigation( d->m_widget, this );
+    d->m_adjustNavigation = new AdjustNavigation( widget->model(), widget->viewport(), this );
     d->m_widget->model()->routingManager()->setAdjustNavigation( d->m_adjustNavigation );
 
     const PluginManager* pluginManager = d->m_widget->model()->pluginManager();
@@ -166,6 +166,16 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
              this, SLOT( updateRecenterComboBox( AdjustNavigation::CenterMode ) ) );
     connect( d->m_adjustNavigation, SIGNAL( autoZoomToggled( bool ) ),
              this, SLOT( updateAutoZoomCheckBox( bool ) ) );
+    connect( d->m_adjustNavigation, SIGNAL( zoomIn( FlyToMode ) ),
+             d->m_widget, SLOT( zoomIn( FlyToMode ) ) );
+    connect( d->m_adjustNavigation, SIGNAL( zoomOut( FlyToMode ) ),
+             d->m_widget, SLOT( zoomOut( FlyToMode ) ) );
+    connect( d->m_adjustNavigation, SIGNAL( centerOn( const GeoDataCoordinates &, bool ) ),
+             d->m_widget, SLOT( centerOn( const GeoDataCoordinates &, bool ) ) );
+
+    connect( d->m_widget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
+             d->m_adjustNavigation, SLOT( inhibitAutoAdjustments() ) );
+
     connect (d->m_currentLocationUi.showTrackCheckBox, SIGNAL( clicked(bool) ),
              d->m_widget->model()->positionTracking(), SLOT( setTrackVisible(bool) ));
     connect (d->m_currentLocationUi.showTrackCheckBox, SIGNAL( clicked(bool) ),

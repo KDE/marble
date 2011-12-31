@@ -154,18 +154,18 @@ bool AbstractProjection::screenCoordinates( const GeoDataLineString &lineString,
         foreach ( GeoDataLineString * itLineString, lineStrings ) {
             QVector<QPolygonF *> subPolygons;
 
-            lineStringToPolygon( *itLineString, viewport, subPolygons );
+            d->lineStringToPolygon( *itLineString, viewport, subPolygons );
             polygons << subPolygons;
         }
     }
     else {
-        lineStringToPolygon( lineString, viewport, polygons );
+        d->lineStringToPolygon( lineString, viewport, polygons );
     }
 
     return polygons.isEmpty();
 }
 
-bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineString,
+bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &lineString,
                                               const ViewportParams *viewport,
                                               QVector<QPolygonF *> &polygons ) const
 {
@@ -237,7 +237,7 @@ bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineStrin
             previousCoords = *itPreviousCoords;
             currentCoords  = *itCoords;
 
-            screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
+            q->screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
 
             // Initializing variables that store the values of the previous iteration
             if ( !processingLastNode && itCoords == itBegin ) {
@@ -253,7 +253,7 @@ bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineStrin
      
             if ( isAtHorizon ) {
                 // Handle the "horizon case"
-                horizonCoords = d->findHorizon( previousCoords, currentCoords, viewport, f );
+                horizonCoords = findHorizon( previousCoords, currentCoords, viewport, f );
 
                 if ( lineString.isClosed() ) {
                     if ( horizonPair ) {
@@ -261,13 +261,13 @@ bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineStrin
                         horizonPair = false;
                     }
                     else {
-                        d->manageHorizonCrossing( globeHidesPoint, horizonCoords,
-                                                  horizonPair, horizonDisappearCoords,
-                                                  horizonOrphan, horizonOrphanCoords );
+                        manageHorizonCrossing( globeHidesPoint, horizonCoords,
+                                               horizonPair, horizonDisappearCoords,
+                                               horizonOrphan, horizonOrphanCoords );
                     }
                 }
 
-                screenCoordinates( horizonCoords, viewport, horizonX, horizonY );
+                q->screenCoordinates( horizonCoords, viewport, horizonX, horizonY );
 
                 // If the line appears on the visible half we need
                 // to add an interpolated point at the horizon as the previous point.
@@ -360,7 +360,7 @@ bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineStrin
         delete polygon; // Clean up "unused" empty polygon instances
     }
 
-    d->repeatPolygons( viewport, polygons );
+    repeatPolygons( viewport, polygons );
 
     return polygons.isEmpty();
 }
@@ -475,7 +475,7 @@ void AbstractProjectionPrivate::manageHorizonCrossing( bool globeHidesPoint,
     }
 }
 
-void AbstractProjection::horizonToPolygon( const ViewportParams *viewport,
+void AbstractProjectionPrivate::horizonToPolygon( const ViewportParams *viewport,
                                            const GeoDataCoordinates & disappearCoords,
                                            const GeoDataCoordinates & reappearCoords,
                                            QPolygonF * polygon ) const
@@ -486,11 +486,11 @@ void AbstractProjection::horizonToPolygon( const ViewportParams *viewport,
     const qreal imageHalfHeight = viewport->height() / 2;
 
     // Calculate the angle of the position vectors of both coordinates
-    screenCoordinates( disappearCoords, viewport, x, y );
+    q->screenCoordinates( disappearCoords, viewport, x, y );
     qreal alpha = atan2( y - imageHalfHeight,
                          x - imageHalfWidth );
 
-    screenCoordinates( reappearCoords, viewport, x, y );
+    q->screenCoordinates( reappearCoords, viewport, x, y );
     qreal beta =  atan2( y - imageHalfHeight,
                          x - imageHalfWidth );
 
@@ -499,15 +499,14 @@ void AbstractProjection::horizonToPolygon( const ViewportParams *viewport,
 
     qreal sgndiff = diff < 0 ? -1 : 1;
 
-    qreal itx, ity;
     const qreal arcradius = viewport->radius();
     const int itEnd = fabs(diff * RAD2DEG);
 
     // Create a polygon that resembles an arc between the two position vectors
     for ( int it = 0; it <= itEnd; ++it ) {
-        qreal angle = alpha + DEG2RAD * sgndiff * it;
-        itx = imageHalfWidth  +  arcradius * cos( angle );
-        ity = imageHalfHeight +  arcradius * sin( angle );
+        const qreal angle = alpha + DEG2RAD * sgndiff * it;
+        const qreal itx = imageHalfWidth  +  arcradius * cos( angle );
+        const qreal ity = imageHalfHeight +  arcradius * sin( angle );
         *polygon << QPointF( itx, ity );
     }
 }
@@ -637,7 +636,7 @@ QRegion AbstractProjection::mapRegion( const ViewportParams *viewport ) const
 }
 
 
-void AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &aCoords,
+void AbstractProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates &aCoords,
                                                 qreal ax, qreal ay,
                                                 const GeoDataCoordinates &bCoords,
                                                 qreal bx, qreal by,
@@ -675,7 +674,7 @@ void AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &aCoord
         // on screen is too big
         if ( distance > finalTessellationPrecision ) {
 
-            *polygon << d->processTessellation( aCoords, bCoords,
+            *polygon << processTessellation( aCoords, bCoords,
                                         tessellatedNodes, viewport,
                                         f );
         }
@@ -685,11 +684,11 @@ void AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &aCoord
             qreal y = 0.0;
             bool globeHidesPoint = false;
 
-            screenCoordinates( aCoords, viewport, x, y, globeHidesPoint );
+            q->screenCoordinates( aCoords, viewport, x, y, globeHidesPoint );
             if ( !globeHidesPoint ) {
                 path << QPointF( x, y );
             }
-            screenCoordinates( bCoords, viewport, x, y, globeHidesPoint );
+            q->screenCoordinates( bCoords, viewport, x, y, globeHidesPoint );
             if ( !globeHidesPoint ) {
                 path << QPointF( x, y );
             }
@@ -953,10 +952,13 @@ bool AbstractProjection::screenCoordinates( qreal lon, qreal lat,
                                     const ViewportParams *viewport,
                                     int &x, int &y ) const
 {
-    GeoDataCoordinates geopoint( lon, lat );
+    qreal rx = 0.0;
+    qreal ry = 0.0;
 
-    bool globeHidesPoint;
-    bool isVisible = screenCoordinates( geopoint, viewport, x, y, globeHidesPoint );
+    bool isVisible = screenCoordinates( lon, lat, viewport, rx, ry );
+
+    x = (int)(rx);
+    y = (int)(ry);
 
     return isVisible;
 }

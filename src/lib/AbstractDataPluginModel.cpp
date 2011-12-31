@@ -64,6 +64,7 @@ class AbstractDataPluginModelPrivate
           m_downloadTimer( m_parent ),
           m_descriptionFileNumber( 0 ),
           m_itemSettings(),
+          m_favoriteItemsOnly( false ),
           m_storagePolicy( MarbleDirs::localPath() + "/cache/" + m_name + '/' ),
           m_downloadManager( &m_storagePolicy, pluginManager )
     {
@@ -99,6 +100,8 @@ class AbstractDataPluginModelPrivate
     QTimer m_downloadTimer;
     quint32 m_descriptionFileNumber;
     QHash<QString, QVariant> m_itemSettings;
+    QStringList m_favoriteItems;
+    bool m_favoriteItemsOnly;
 
     CacheStoragePolicy m_storagePolicy;
     HttpDownloadManager m_downloadManager;
@@ -307,6 +310,8 @@ void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item )
     
     connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
     connect( item, SIGNAL( updated() ), this, SIGNAL( itemsUpdated() ) );
+    connect( item, SIGNAL( favoriteChanged( const QString&, bool ) ), this,
+             SLOT( favoriteItemChanged( const QString&, bool ) ) );
 
     if ( item->initialized() ) {
         emit itemsUpdated();
@@ -321,6 +326,45 @@ QString AbstractDataPluginModel::name() const
 void AbstractDataPluginModel::setName( const QString& name )
 {
     d->m_name = name;
+}
+
+void AbstractDataPluginModel::setFavoriteItems( const QStringList& list )
+{
+    if ( d->m_favoriteItems != list) {
+        d->m_favoriteItems = list;
+        emit favoriteItemsChanged( d->m_favoriteItems );
+    }
+}
+
+QStringList AbstractDataPluginModel::favoriteItems() const
+{
+    return d->m_favoriteItems;
+}
+
+void AbstractDataPluginModel::setFavoriteItemsOnly( bool favoriteOnly )
+{
+    if ( isFavoriteItemsOnly() != favoriteOnly ) {
+        d->m_favoriteItemsOnly = favoriteOnly;
+    }
+}
+
+bool AbstractDataPluginModel::isFavoriteItemsOnly() const
+{
+    return d->m_favoriteItemsOnly;
+}
+
+void AbstractDataPluginModel::favoriteItemChanged( const QString& id, bool isFavorite )
+{
+    QStringList favorites = d->m_favoriteItems;
+
+    if ( isFavorite ) {
+        if ( !favorites.contains(id) )
+            favorites.append( id );
+    } else {
+        favorites.removeOne( id );
+    }
+
+    setFavoriteItems( favorites );
 }
 
 QString AbstractDataPluginModel::generateFilename( const QString& id, const QString& type ) const
@@ -459,6 +503,18 @@ void AbstractDataPluginModel::removeItem( QObject *item )
             i = d->m_downloadingItems.erase( i );
         }
     }
+}
+
+void AbstractDataPluginModel::clear()
+{
+    d->m_displayedItems.clear();
+    QList<AbstractDataPluginItem*>::iterator iter = d->m_itemSet.begin();
+    QList<AbstractDataPluginItem*>::iterator const end = d->m_itemSet.end();
+    for (; iter != end; ++iter ) {
+        (*iter)->deleteLater();
+    }
+    d->m_itemSet.clear();
+    emit itemsUpdated();
 }
     
 

@@ -11,6 +11,7 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 import org.kde.edu.marble.qtcomponents 0.12
+import QtMobility.systeminfo 1.1
 
 /*
  * Page for geocaching activity.
@@ -49,12 +50,6 @@ Page {
         id: pageMenu
         content: MenuLayout {
             MenuItem {
-                text: "Map Theme"
-                onClicked: {
-                    pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
-                }
-            }
-            MenuItem {
                 text: "Save Track"
                 onClicked: {
                     saveTrackDialog.filename = Qt.formatDateTime(new Date(), "yyyy-MM-dd_hh.mm.ss") + ".kml"
@@ -64,11 +59,6 @@ Page {
             MenuItem {
                 text: "Open Track"
                 onClicked: openTrackDialog.open()
-            }
-            MenuItemSwitch {
-                text: "Online"
-                checked: !settings.workOffline
-                onClicked: settings.workOffline = !settings.workOffline
             }
             MenuItemSwitch {
                 text: "Auto Center"
@@ -122,7 +112,7 @@ Page {
                 settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
                 plugins.push( "speedometer" )
                 settings.activeRenderPlugins =  plugins
-                settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
+                settings.mapTheme = settings.streetMapTheme
                 settings.gpsTracking = true
                 settings.showPosition = true
                 settings.showTrack = true
@@ -157,9 +147,16 @@ Page {
         onAccepted: { marbleWidget.getTracking().openTrack( folder + "/" + filename ); }
     }
 
+    ScreenSaver {
+        id: saver
+    }
+
     onStatusChanged: {
         if ( status === PageStatus.Activating ) {
             mapContainer.embedMarbleWidget()
+            saver.screenSaverDelayed = settings.inhibitScreensaver
+        } else if ( status === PageStatus.Deactivating ) {
+            saver.screenSaverDelayed = false
         }
     }
 }

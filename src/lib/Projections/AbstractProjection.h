@@ -197,55 +197,28 @@ class MARBLE_EXPORT AbstractProjection
     virtual GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
                                               const ViewportParams *viewport ) const;
 
-    bool exceedsLatitudeRange( const GeoDataCoordinates& coords ) const;
-
-    bool exceedsLatitudeRange( const GeoDataLineString& lineString ) const;
-
-
     virtual bool mapCoversViewport( const ViewportParams *viewport ) const = 0;
 
     virtual QPainterPath mapShape( const ViewportParams *viewport ) const = 0;
 
     QRegion mapRegion( const ViewportParams *viewport ) const;
 
-    // The usage of the following methods is DEPRECATED!
+    // these methods will be removed in Marble 1.4:
+    MARBLE_DEPRECATED( bool exceedsLatitudeRange( const GeoDataCoordinates& coords ) const );
+
+    MARBLE_DEPRECATED( bool exceedsLatitudeRange( const GeoDataLineString& lineString ) const );
 
     /**
      * @deprecated
      * use @see screenCoordinates(qreal,qreal,const ViewportParams*,qreal&,qreal&)
      */
-    bool screenCoordinates( qreal lon, qreal lat,
+    MARBLE_DEPRECATED( bool screenCoordinates( qreal lon, qreal lat,
                                     const ViewportParams *viewport,
-                                    int& x, int& y ) const;
+                                    int& x, int& y ) const );
 
-    /* DEPRECATED */
-    bool screenCoordinates( const GeoDataCoordinates &geopoint, 
+    MARBLE_DEPRECATED( bool screenCoordinates( const GeoDataCoordinates &geopoint,
                                     const ViewportParams *viewport,
-                                    int &x, int &y, bool &globeHidesPoint ) const;
-
- protected:
-    bool lineStringToPolygon( const GeoDataLineString &lineString,
-                                    const ViewportParams *viewport,
-                                    QVector<QPolygonF*> &polygons ) const;
-
-    virtual void horizonToPolygon( const ViewportParams *viewport,
-                           const GeoDataCoordinates & disappearCoords,
-                           const GeoDataCoordinates & reappearCoords,
-                           QPolygonF* ) const;
-
-    // This method tessellates a line segment in a way that the line segment
-    // follows great circles. The count parameter specifies the
-    // number of nodes generated for the polygon. If the
-    // clampToGround flag is added the polygon contains count + 2
-    // nodes as the clamped down start and end node get added.
-
-    void tessellateLineSegment(     const GeoDataCoordinates &aCoords,
-                                    qreal ax, qreal ay,
-                                    const GeoDataCoordinates &bCoords,
-                                    qreal bx, qreal by,
-                                    QPolygonF * polygon,
-                                    const ViewportParams *viewport,
-                                    TessellationFlags f = 0 ) const;
+                                    int &x, int &y, bool &globeHidesPoint ) const );
 
  private:
     Q_DISABLE_COPY( AbstractProjection )

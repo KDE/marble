@@ -241,10 +241,6 @@ void RoutingLayerPrivate::renderPlacemarks( GeoPainter *painter )
 
 void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
 {
-    if ( m_viewportChanged && m_viewContext == Still ) {
-        m_alternativeRouteRegions.clear();
-    }
-
     QPen alternativeRoutePen( m_marbleWidget->model()->routingManager()->routeColorAlternative() );
     alternativeRoutePen.setWidth( 5 );
     painter->setPen( alternativeRoutePen );
@@ -690,6 +686,11 @@ QStringList RoutingLayer::renderPosition() const
     return QStringList() << "HOVERS_ABOVE_SURFACE";
 }
 
+qreal RoutingLayer::zValue() const
+{
+    return 1.0;
+}
+
 bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
                            const QString& renderPos, GeoSceneLayer *layer )
 {
@@ -841,6 +842,9 @@ void RoutingLayer::updateRouteState( RoutingManager::State state, RouteRequest *
 void RoutingLayer::setViewportChanged()
 {
     d->m_viewportChanged = true;
+    d->m_routeRegion = QRegion();
+    d->m_instructionRegions.clear();
+    d->m_alternativeRouteRegions.clear();
 }
 
 void RoutingLayer::setViewContext( ViewContext viewContext )

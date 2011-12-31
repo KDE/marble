@@ -140,6 +140,9 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
         }
     }
 
+    m_mousePosition.setX(xpos);
+    m_mousePosition.setY(ypos);
+
     const QPoint curpos = QPoint( xpos, ypos );
     m_featurelist = m_widget->whichFeatureAt( curpos );
 
@@ -183,7 +186,9 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     QList<AbstractDataPluginItem *>::const_iterator const itWEnd = m_itemList.constEnd();
     for (; itW != itWEnd; ++itW )
     {
-        m_lmbMenu->addAction( (*itW)->action() );
+        foreach ( QAction* action, (*itW)->actions() ) {
+            m_lmbMenu->addAction( action );
+        }
     }
 
     if ( !m_lmbMenu->isEmpty() ) {
@@ -198,6 +203,9 @@ void MarbleWidgetPopupMenu::showRmbMenu( int xpos, int ypos )
     const bool visible = m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoDataCoordinates::Radian );
     if ( !visible )
         return;
+
+    m_mousePosition.setX(xpos);
+    m_mousePosition.setY(ypos);
 
     QPoint curpos = QPoint( xpos, ypos );
     m_copyCoordinateAction->setData( curpos );
@@ -334,7 +342,7 @@ void MarbleWidgetPopupMenu::directionsFromHere()
             } else {
                 request->append( coordinates );
             }
-            m_widget->model()->routingManager()->updateRoute();
+            m_widget->model()->routingManager()->retrieveRoute();
         }
     }
 }
@@ -351,7 +359,7 @@ void MarbleWidgetPopupMenu::directionsToHere()
             } else {
                 request->append( coordinates );
             }
-            m_widget->model()->routingManager()->updateRoute();
+            m_widget->model()->routingManager()->retrieveRoute();
         }
     }
 }
@@ -427,6 +435,11 @@ void MarbleWidgetPopupMenu::toggleFullscreen( bool enabled )
     } else {
         parent->setWindowState( parent->windowState() & ~Qt::WindowFullScreen );
     }
+}
+
+QPoint MarbleWidgetPopupMenu::mousePosition() const
+{
+    return m_mousePosition;
 }
 
 #include "MarbleWidgetPopupMenu.moc"

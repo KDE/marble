@@ -50,7 +50,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
 
     p()->updateLabelPositions();
 
-    p()->setProjection( viewport->currentProjection(), viewport, painter );
+    p()->setProjection( viewport, painter );
     
     // Remove the pixmap if it has been requested. This prevents QPixmapCache from being used
     // outside the ui thread.

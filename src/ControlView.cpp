@@ -86,7 +86,7 @@ ControlView::~ControlView()
 
 QString ControlView::applicationVersion()
 {
-    return "1.2.85 (1.3 Beta 2)";
+    return "1.2.95 (1.3 Release Candidate 1)";
 }
 
 void ControlView::zoomIn()
@@ -380,7 +380,7 @@ void ControlView::printDrivingInstructions( QTextDocument &document, QString &te
     text += "<tr><th>No.</th><th>Distance</th><th>Instruction</th></tr>";
     for ( int i=0; i<routingModel->rowCount(); ++i ) {
         QModelIndex index = routingModel->index(i, 0);
-        GeoDataCoordinates coordinates = qVariantValue<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
+        GeoDataCoordinates coordinates = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
         GeoDataLineString accumulator;
         for (int k=0; k<total.size(); ++k) {
             accumulator << total.at(k);

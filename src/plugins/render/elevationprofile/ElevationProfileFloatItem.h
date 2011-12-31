@@ -31,8 +31,6 @@ namespace Ui
 namespace Marble
 {
 
-class PluginAboutDialog;
-
 /**
  * @short The class that creates an interactive elvation profile.
  *
@@ -64,9 +62,6 @@ class ElevationProfileFloatItem : public AbstractFloatItem
 
     virtual QIcon icon() const;
 
-    virtual QDialog *aboutDialog();
-
-
     virtual void initialize();
 
     virtual bool isInitialized() const;
@@ -97,7 +92,6 @@ class ElevationProfileFloatItem : public AbstractFloatItem
     void dataUpdated();
 
  private:
-    PluginAboutDialog *m_aboutDialog;
     QDialog *m_configDialog;
     Ui::ElevationProfileConfigWidget *ui_configWidget;
 

@@ -40,9 +40,7 @@
 #include "ViewportParams.h"
 #include "AbstractFloatItem.h"
 #include "AbstractDataPluginItem.h"
-#include "MeasureTool.h"
 #include "MarbleWidgetPopupMenu.h"
-#include "AbstractProjection.h"
 #include "Planet.h"
 
 namespace Marble {
@@ -196,10 +194,6 @@ class MarbleWidgetDefaultInputHandler::Private
     QPointer<AbstractDataPluginItem> m_lastToolTipItem;
     QTimer m_toolTipTimer;
     QPoint m_toolTipPosition;
-
-    QAction  *m_addMeasurePointAction;
-    QAction  *m_removeLastMeasurePointAction;
-    QAction  *m_removeMeasurePointsAction;
 };
 
 MarbleWidgetDefaultInputHandler::Private::Private( MarbleWidget *widget )
@@ -246,7 +240,7 @@ void MarbleWidgetDefaultInputHandler::Private::ZoomAt(MarbleWidget* marbleWidget
     ViewportParams* now = marbleWidget->viewport();
 
     qreal x(0), y(0);
-    if (!now->currentProjection()->screenCoordinates(destLon, destLat, now, x, y)) {
+    if (!now->screenCoordinates(destLon, destLat, x, y)) {
         return;
     }
 
@@ -259,7 +253,7 @@ void MarbleWidgetDefaultInputHandler::Private::ZoomAt(MarbleWidget* marbleWidget
     soon.setRadius( newRadius );
 
     qreal mouseLon, mouseLat;
-    if (!soon.currentProjection()->geoCoordinates(int(x), int(y), &soon, mouseLon, mouseLat, GeoDataCoordinates::Radian )) {
+    if (!soon.geoCoordinates(int(x), int(y), mouseLon, mouseLat, GeoDataCoordinates::Radian )) {
         return;
     }
 
@@ -275,7 +269,7 @@ void MarbleWidgetDefaultInputHandler::Private::ZoomAt(MarbleWidget* marbleWidget
     lookAt.setAltitude( 0.0 );
     lookAt.setRange( newDistance * KM2METER );
 
-    marbleWidget->viewport()->setFocusPoint( GeoDataCoordinates( destLon, destLat ) );
+    marbleWidget->setFocusPoint( GeoDataCoordinates( destLon, destLat ) );
     marbleWidget->flyTo( lookAt, Linear );
 }
 
@@ -320,36 +314,10 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler( MarbleWidget *
              MarbleWidgetInputHandler::d->m_widget, SLOT( centerOn( qreal, qreal ) ) );
     connect( &d->m_kineticModel, SIGNAL( finished() ), SLOT( restoreViewContext() ) );
 
-    // The interface to the measure tool consists of a RMB popup menu
-    // and some signals.
-    MeasureTool *measureTool = MarbleWidgetInputHandler::d->m_widget->measureTool();
 
-    // Connect the inputHandler and the measure tool to the popup menu
-    d->m_addMeasurePointAction = new QAction( tr( "Add &Measure Point" ), this);
-    d->m_removeLastMeasurePointAction = new QAction( tr( "Remove &Last Measure Point" ),
-                                                  this);
-    d->m_removeLastMeasurePointAction->setEnabled(false);
-    d->m_removeMeasurePointsAction = new QAction( tr( "&Remove Measure Points" ),
-                                                this);
-    d->m_removeMeasurePointsAction->setEnabled(false);
-
-    if ( ! MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
-        MarbleWidgetInputHandler::d->m_widget->popupMenu()->addAction( Qt::RightButton, d->m_addMeasurePointAction );
-        MarbleWidgetInputHandler::d->m_widget->popupMenu()->addAction( Qt::RightButton, d->m_removeLastMeasurePointAction );
-        MarbleWidgetInputHandler::d->m_widget->popupMenu()->addAction( Qt::RightButton, d->m_removeMeasurePointsAction );
-    }
-
-    connect( d->m_addMeasurePointAction, SIGNAL( triggered() ),
-             SLOT( addMeasurePoint() ) );
-    connect( d->m_removeLastMeasurePointAction, SIGNAL(triggered() ),
-             measureTool, SLOT( removeLastMeasurePoint() ) );
-    connect( d->m_removeMeasurePointsAction, SIGNAL( triggered() ),
-             measureTool, SLOT( removeMeasurePoints() ) );
-
+    // Left and right mouse button signals.
     connect( this, SIGNAL( rmbRequest( int, int ) ),
              this, SLOT( showRmbMenu( int, int ) ) );
-    connect( measureTool, SIGNAL( numberOfMeasurePointsChanged( int ) ),
-             this, SLOT( setNumberOfMeasurePoints( int ) ) );
     connect( this, SIGNAL( lmbRequest( int, int ) ),
              this, SLOT( showLmbMenu( int, int ) ) );
 }
@@ -373,7 +341,7 @@ void MarbleWidgetInputHandler::restoreViewContext()
 
     // Redraw the map with the quality set for Still (if necessary).
     d->m_widget->setViewContext( Still );
-    d->m_widget->viewport()->resetFocusPoint();
+    d->m_widget->resetFocusPoint();
     d->m_wheelZoomTargetDistance = 0.0;
 }
 
@@ -393,7 +361,6 @@ void MarbleWidgetDefaultInputHandler::showLmbMenu( int x, int y )
 void MarbleWidgetDefaultInputHandler::showRmbMenu( int x, int y )
 {
     if ( isMouseButtonPopupEnabled( Qt::RightButton ) ) {
-        d->m_addMeasurePointAction->setData( QPoint( x, y ) );
         MarbleWidgetInputHandler::d->m_widget->popupMenu()->showRmbMenu( x, y );
     }
 }
@@ -774,7 +741,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                              destLon, destLat, GeoDataCoordinates::Radian );
 
                 if (isValid) {
-                    marbleWidget->viewport()->setFocusPoint(GeoDataCoordinates(destLon, destLat));
+                    marbleWidget->setFocusPoint(GeoDataCoordinates(destLon, destLat));
                 }
 
                 switch ( pinch->state() ) {
@@ -788,12 +755,12 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                     marbleWidget->setRadius( marbleWidget->radius() * scaleFactor );
                     break;
                 case Qt::GestureFinished:
-                    marbleWidget->viewport()->resetFocusPoint();
+                    marbleWidget->resetFocusPoint();
                     marbleWidget->setViewContext( Still );
                     break;
                 case Qt::GestureCanceled:
                     marbleWidget->setRadius( d->m_startingRadius );
-                    marbleWidget->viewport()->resetFocusPoint();
+                    marbleWidget->resetFocusPoint();
                     marbleWidget->setViewContext( Still );
                     break;
                 }
@@ -843,25 +810,6 @@ bool MarbleWidgetDefaultInputHandler::keyEvent( MarbleWidget * widget, QEvent* e
     }
 
     return false;
-}
-
-void MarbleWidgetDefaultInputHandler::addMeasurePoint()
-{
-    QPoint  p = d->m_addMeasurePointAction->data().toPoint();
-
-    qreal  lat;
-    qreal  lon;
-
-    MarbleWidgetInputHandler::d->m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
-    MeasureTool *measureTool = MarbleWidgetInputHandler::d->m_widget->measureTool();
-    measureTool->addMeasurePoint( lon, lat );
-}
-
-void MarbleWidgetDefaultInputHandler::setNumberOfMeasurePoints( int newNumber )
-{
-    const bool enableMeasureActions = ( newNumber > 0 );
-    d->m_removeMeasurePointsAction->setEnabled(enableMeasureActions);
-    d->m_removeLastMeasurePointAction->setEnabled(enableMeasureActions);
 }
 
 }

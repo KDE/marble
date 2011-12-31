@@ -68,8 +68,6 @@ class Speedometer : public AbstractFloatItem
     MarbleLocale* m_locale;
     Ui::Speedometer m_widget;
     WidgetGraphicsItem* m_widgetItem;
-
-
 };
 
 }

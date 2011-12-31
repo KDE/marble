@@ -56,6 +56,12 @@ class QtMarbleConfigDialogPrivate
         delete m_settings;
     }
 
+    static bool renderPluginGuiStringLessThan( RenderPlugin* one, RenderPlugin* two )
+    {
+        // Sort by gui string ignoring keyboard accelerators
+        return one->guiString().replace( "&", "" ) < two->guiString().replace( "&", "" );
+    }
+
     void initSettings()
     {
         m_settings = new QSettings("kde.org", "Marble Desktop Globe");
@@ -151,6 +157,7 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     QStandardItem  *parentItem = d->m_pluginModel->invisibleRootItem();
 
     QList<RenderPlugin *>  pluginList = d->m_marbleWidget->renderPlugins();
+    qSort( pluginList.begin(), pluginList.end(), QtMarbleConfigDialogPrivate::renderPluginGuiStringLessThan );
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
     for (; i != end; ++i ) {

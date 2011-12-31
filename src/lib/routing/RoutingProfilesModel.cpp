@@ -150,6 +150,24 @@ void RoutingProfilesModel::loadDefaultProfiles()
                 profile.pluginSettings()[plugin->nameId()] = plugin->templateSettings( tpl );
             }
         }
+
+        switch ( tpl ) {
+        case CarFastestTemplate:
+        case CarShortestTemplate:
+        case CarEcologicalTemplate:
+            profile.setTransportType( RoutingProfile::Motorcar );
+            break;
+        case BicycleTemplate:
+            profile.setTransportType( RoutingProfile::Bicycle );
+            break;
+        case PedestrianTemplate:
+            profile.setTransportType( RoutingProfile::Pedestrian );
+            break;
+        case LastTemplate:
+            Q_ASSERT( false && "LastTemplate is an internal enum not to be used as a profile template" );
+            break;
+        }
+
         m_profiles << profile;
     }
     endInsertRows();

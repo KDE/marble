@@ -30,27 +30,6 @@ Page {
             width: 60
             iconSource: "image://theme/icon-m-toolbar-search";
         }
-        ToolIcon {
-            iconId: "toolbar-view-menu"
-            onClicked: pageMenu.open()
-        }
-    }
-
-    Menu {
-        id: pageMenu
-        content: MenuLayout {
-            MenuItem {
-                text: "Map Theme"
-                onClicked: {
-                    pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
-                }
-            }
-            MenuItemSwitch {
-                text: "Online"
-                checked: !settings.workOffline
-                onClicked: settings.workOffline = !settings.workOffline
-            }
-        }
     }
 
     Column {
@@ -88,7 +67,7 @@ Page {
                 settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
                 plugins.push( "opencaching" )
                 settings.activeRenderPlugins =  plugins
-                settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
+                settings.mapTheme = settings.streetMapTheme
                 settings.gpsTracking = true
                 settings.showPosition = true
                 settings.showTrack = true

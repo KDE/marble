@@ -81,13 +81,7 @@ void SatellitesItem::update()
 {
     QDateTime startTime = m_clock->dateTime().addSecs( - 2 * 60 );
 
-    int length; // in seconds
-    if ( placemark()->style()->lineStyle().penStyle() != Qt::NoPen ) {
-        length = period();
-    } else {
-        length = 60;
-    }
-    QDateTime endTime = startTime.addSecs( length );
+    QDateTime endTime = startTime.addSecs( period() );
 
     m_track->removeBefore( startTime );
     m_track->removeAfter( endTime );

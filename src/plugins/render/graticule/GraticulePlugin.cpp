@@ -40,10 +40,13 @@ namespace Marble
 GraticulePlugin::GraticulePlugin()
     : m_isInitialized( false ),
       m_settings(),
-      m_aboutDialog( 0 ),
       ui_configWidget( 0 ),
       m_configDialog( 0 )
 {
+    setVersion( "1.0" );
+    setCopyrightYear( 2009 );
+    addAuthor( "Torsten Rahn", "tackat@kde.org" );
+
     connect( this, SIGNAL( settingsChanged( QString ) ),
              this, SLOT( updateSettings() ) );
     setSettings( QHash<QString,QVariant>() );             
@@ -245,27 +248,6 @@ void GraticulePlugin::updateSettings()
     m_equatorCirclePen = QPen( m_equatorColor );
     m_tropicsCirclePen = QPen( m_tropicsColor );   
     m_gridCirclePen = QPen( m_gridColor );    
-}
-
-QDialog *GraticulePlugin::aboutDialog()
-{
-    if ( !m_aboutDialog ) {
-        // Initializing about dialog
-        m_aboutDialog = new PluginAboutDialog();
-        m_aboutDialog->setName( "Coordinates Grid Plugin" );
-        m_aboutDialog->setVersion( "0.1" );
-        // FIXME: Can we store this string for all of Marble
-        m_aboutDialog->setAboutText( tr( "<br />(c) 2009 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
-        QList<Author> authors;
-        Author tackat;
-        tackat.name = "Torsten Rahn";
-        tackat.task = tr( "Developer" );
-        tackat.email = "tackat@kde.org";
-        authors.append( tackat );
-        m_aboutDialog->setAuthors( authors );
-        m_aboutDialog->setPixmap( m_icon.pixmap( 62, 53 ) );
-    }
-    return m_aboutDialog;
 }
 
 bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,

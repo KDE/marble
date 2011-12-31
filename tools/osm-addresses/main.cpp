@@ -53,8 +53,25 @@ void debugOutput( QtMsgType type, const char *msg )
     }
 }
 
+void usage()
+{
+    qDebug() << "Usage: [options] osm-addresses [options] input.osm.pbf|input.osm output.sqlite output.kml";
+    qDebug() << "\tOptions affect verbosity and store additional metadata in output.kml:";
+    qDebug() << "\t-q quiet";
+    qDebug() << "\t-v debug output";
+    qDebug() << "\t--version aVersion";
+    qDebug() << "\t--name aName";
+    qDebug() << "\t--date aDate";
+    qDebug() << "\t--payload aFilename";
+}
+
 int main( int argc, char *argv[] )
 {
+    if ( argc < 4 ) {
+        usage();
+        return 1;
+    }
+
     QCoreApplication app( argc, argv );
 
     QStringList allArguments = app.arguments();
@@ -69,13 +86,34 @@ int main( int argc, char *argv[] )
         }
     }
 
-    if ( arguments.size() != 4 ) {
-        qDebug() << "Usage: " << argv[0] << " /path/to/input.(osm|pbf) AreaName /path/to/output.sqlite";
-        return 1;
+    QString inputFile = argv[argc-3];
+    QString outputSqlite = argv[argc-2];
+    QString outputKml = argv[argc-1];
+    QString name;
+    QString version;
+    QString date;
+    QString transport;
+    QString payload;
+    for ( int i=1; i<argc-3; ++i ) {
+        QString arg( argv[i] );
+        if ( arg == "--name" ) {
+            name = argv[++i];
+        } else if ( arg == "--version" ) {
+            version = argv[++i];
+        } else if ( arg == "--date" ) {
+            date = argv[++i];
+        } else if ( arg == "--transport" ) {
+            transport = argv[++i];
+        } else if ( arg == "--payload" ) {
+            payload = argv[++i];
+        } else {
+            usage();
+            return 1;
+        }
     }
 
     qInstallMsgHandler( debugOutput );
-    QFileInfo file( arguments.at( 1 ) );
+    QFileInfo file( inputFile );
     if ( !file.exists() ) {
         qDebug() << "File " << file.absoluteFilePath() << " does not exist. Exiting.";
         return 2;
@@ -92,7 +130,8 @@ int main( int argc, char *argv[] )
     }
 
     Q_ASSERT( parser );
-    SqlWriter sql( arguments.at( 3 ) );
+    SqlWriter sql( outputSqlite );
     parser->addWriter( &sql );
-    parser->read( file, arguments.at( 2 ) );
+    parser->read( file, name );
+    parser->writeKml( name, version, date, transport, payload, outputKml );
 }

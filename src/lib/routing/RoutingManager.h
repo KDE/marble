@@ -13,6 +13,7 @@
 
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"
+#include "RoutingProfile.h"
 
 #include <QtCore/QAbstractItemModel>
 
@@ -104,6 +105,11 @@ public:
     void loadRoute( const QString &filename );
 
     /**
+      * Generates a routing profile with default settings for the given transport type
+      */
+    RoutingProfile defaultProfile( RoutingProfile::TransportType transportType ) const;
+
+    /**
       * Set whether a warning message should be shown to the user before
       * starting guidance mode.
       */
@@ -169,8 +175,8 @@ public Q_SLOTS:
     /** Reverse the previously requested route, i.e. swap start and destination (and via points, if any) */
     void reverseRoute();
 
-    /** Update the route */
-    void updateRoute();
+    /** Retrieve a route suiting the routeRequest */
+    void retrieveRoute();
 
     /** Clear all via points */
     void clearRoute();

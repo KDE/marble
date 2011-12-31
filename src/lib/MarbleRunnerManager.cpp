@@ -56,6 +56,14 @@ public:
     QList<RunnerTask*> m_searchTasks;
     QList<RunnerTask*> m_routingTasks;
 
+    void addSearchResult( QVector<GeoDataPlacemark*> result );
+
+    void addReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark );
+
+    void addRoutingResult( GeoDataDocument* route );
+
+    void addParsingResult( GeoDataDocument* document, const QString& error = QString() );
+
     void cleanupSearchTask( RunnerTask* task );
 
     void cleanupRoutingTask( RunnerTask* task );
@@ -195,19 +203,19 @@ void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
     }
 }
 
-void MarbleRunnerManager::addSearchResult( QVector<GeoDataPlacemark*> result )
+void MarbleRunnerManagerPrivate::addSearchResult( QVector<GeoDataPlacemark*> result )
 {
     mDebug() << "Runner reports" << result.size() << " search results";
     if( result.isEmpty() )
         return;
 
-    d->m_modelMutex.lock();
-    int start = d->m_placemarkContainer.size();
-    d->m_placemarkContainer << result;
-    d->m_model->addPlacemarks( start, result.size() );
-    d->m_modelMutex.unlock();
-    emit searchResultChanged( d->m_model );
-    emit searchResultChanged( d->m_placemarkContainer );
+    m_modelMutex.lock();
+    int start = m_placemarkContainer.size();
+    m_placemarkContainer << result;
+    m_model->addPlacemarks( start, result.size() );
+    m_modelMutex.unlock();
+    emit q->searchResultChanged( m_model );
+    emit q->searchResultChanged( m_placemarkContainer );
 }
 
 void MarbleRunnerManager::setModel( MarbleModel * model )
@@ -216,11 +224,11 @@ void MarbleRunnerManager::setModel( MarbleModel * model )
     d->m_marbleModel = model;
 }
 
-void MarbleRunnerManager::addReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark )
+void MarbleRunnerManagerPrivate::addReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark )
 {
-    if ( !d->m_reverseGeocodingResults.contains( coordinates ) && !placemark.address().isEmpty() ) {
-        d->m_reverseGeocodingResults.push_back( coordinates );
-        emit reverseGeocodingFinished( coordinates, placemark );
+    if ( !m_reverseGeocodingResults.contains( coordinates ) && !placemark.address().isEmpty() ) {
+        m_reverseGeocodingResults.push_back( coordinates );
+        emit q->reverseGeocodingFinished( coordinates, placemark );
     }
 }
 
@@ -256,11 +264,11 @@ void MarbleRunnerManager::retrieveRoute( const RouteRequest *request )
     }
 }
 
-void MarbleRunnerManager::addRoutingResult( GeoDataDocument* route )
+void MarbleRunnerManagerPrivate::addRoutingResult( GeoDataDocument* route )
 {
     if ( route ) {
-        d->m_routingResult.push_back( route );
-        emit routeRetrieved( route );
+        m_routingResult.push_back( route );
+        emit q->routeRetrieved( route );
     }
 }
 
@@ -276,10 +284,10 @@ void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role 
     }
 }
 
-void MarbleRunnerManager::addParsingResult( GeoDataDocument *document, const QString& error )
+void MarbleRunnerManagerPrivate::addParsingResult( GeoDataDocument *document, const QString& error )
 {
     if ( document || !error.isEmpty() ) {
-        emit parsingFinished( document, error );
+        emit q->parsingFinished( document, error );
     }
 }
 

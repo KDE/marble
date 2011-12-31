@@ -14,28 +14,28 @@
 namespace Marble
 {
 
-QMap<RoutingInstruction::TurnType,QString> Maneuver::m_turnTypePixmaps;
+QMap<Maneuver::Direction,QString> Maneuver::m_turnTypePixmaps;
 
 Maneuver::Maneuver() :
-    m_direction( RoutingInstruction::Unknown ),
+    m_direction( Unknown ),
     m_hasWaypoint( false )
 {
-    m_turnTypePixmaps[RoutingInstruction::Unknown] = ":/data/bitmaps/routing_step.png";
-    m_turnTypePixmaps[RoutingInstruction::Straight] = ":/data/bitmaps/turn-continue.png";
-    m_turnTypePixmaps[RoutingInstruction::SlightRight] = ":/data/bitmaps/turn-slight-right.png";
-    m_turnTypePixmaps[RoutingInstruction::Right] = ":/data/bitmaps/turn-right.png";
-    m_turnTypePixmaps[RoutingInstruction::SharpRight] = ":/data/bitmaps/turn-sharp-right.png";
-    m_turnTypePixmaps[RoutingInstruction::TurnAround] = ":/data/bitmaps/turn-around.png";
-    m_turnTypePixmaps[RoutingInstruction::SharpLeft] = ":/data/bitmaps/turn-sharp-left.png";
-    m_turnTypePixmaps[RoutingInstruction::Left] = ":/data/bitmaps/turn-left.png";
-    m_turnTypePixmaps[RoutingInstruction::SlightLeft] = ":/data/bitmaps/turn-slight-left.png";
-    m_turnTypePixmaps[RoutingInstruction::RoundaboutFirstExit] = ":/data/bitmaps/turn-roundabout-first.png";
-    m_turnTypePixmaps[RoutingInstruction::RoundaboutSecondExit] = ":/data/bitmaps/turn-roundabout-second.png";
-    m_turnTypePixmaps[RoutingInstruction::RoundaboutThirdExit] = ":/data/bitmaps/turn-roundabout-third.png";
-    m_turnTypePixmaps[RoutingInstruction::RoundaboutExit] = ":/data/bitmaps/turn-roundabout-far.png";
+    m_turnTypePixmaps[Unknown] = ":/data/bitmaps/routing_step.png";
+    m_turnTypePixmaps[Straight] = ":/data/bitmaps/turn-continue.png";
+    m_turnTypePixmaps[SlightRight] = ":/data/bitmaps/turn-slight-right.png";
+    m_turnTypePixmaps[Right] = ":/data/bitmaps/turn-right.png";
+    m_turnTypePixmaps[SharpRight] = ":/data/bitmaps/turn-sharp-right.png";
+    m_turnTypePixmaps[TurnAround] = ":/data/bitmaps/turn-around.png";
+    m_turnTypePixmaps[SharpLeft] = ":/data/bitmaps/turn-sharp-left.png";
+    m_turnTypePixmaps[Left] = ":/data/bitmaps/turn-left.png";
+    m_turnTypePixmaps[SlightLeft] = ":/data/bitmaps/turn-slight-left.png";
+    m_turnTypePixmaps[RoundaboutFirstExit] = ":/data/bitmaps/turn-roundabout-first.png";
+    m_turnTypePixmaps[RoundaboutSecondExit] = ":/data/bitmaps/turn-roundabout-second.png";
+    m_turnTypePixmaps[RoundaboutThirdExit] = ":/data/bitmaps/turn-roundabout-third.png";
+    m_turnTypePixmaps[RoundaboutExit] = ":/data/bitmaps/turn-roundabout-far.png";
 }
 
-RoutingInstruction::TurnType Maneuver::direction() const
+Maneuver::Direction Maneuver::direction() const
 {
     return m_direction;
 }
@@ -45,7 +45,7 @@ QString Maneuver::directionPixmap() const
     return m_turnTypePixmaps[ direction() ];
 }
 
-void Maneuver::setDirection( RoutingInstruction::TurnType direction )
+void Maneuver::setDirection( Direction direction )
 {
     m_direction = direction;
 }

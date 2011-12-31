@@ -95,7 +95,7 @@ void MercatorProjectionTest::screenCoordinatesValidLat()
         qreal x;
         qreal y;
 
-        const bool retval = viewport.currentProjection()->screenCoordinates( lon * DEG2RAD, lat * DEG2RAD, &viewport, x, y );
+        const bool retval = viewport.screenCoordinates( lon * DEG2RAD, lat * DEG2RAD, x, y );
 
         QVERIFY( retval == validLat );
     }
@@ -105,7 +105,7 @@ void MercatorProjectionTest::screenCoordinatesValidLat()
         qreal y;
         bool globeHidesPoint = true;
 
-        const bool retval = viewport.currentProjection()->screenCoordinates( coordinates, &viewport, x, y, globeHidesPoint );
+        const bool retval = viewport.screenCoordinates( coordinates, x, y, globeHidesPoint );
 
         QVERIFY( retval == validLat );
         QVERIFY( !globeHidesPoint );
@@ -119,7 +119,7 @@ void MercatorProjectionTest::screenCoordinatesValidLat()
         int pointRepeatNum = 1000;
         bool globeHidesPoint = true;
 
-        const bool retval = viewport.currentProjection()->screenCoordinates( coordinates, &viewport, x, y, pointRepeatNum, QSizeF( 0, 0 ), globeHidesPoint );
+        const bool retval = viewport.screenCoordinates( coordinates, x, y, pointRepeatNum, QSizeF( 0, 0 ), globeHidesPoint );
 
         QVERIFY( retval == validLat );
         QCOMPARE( pointRepeatNum, 1 );
@@ -179,7 +179,7 @@ void MercatorProjectionTest::screenCoordinatesOfCenter()
         qreal x;
         qreal y;
 
-        const bool retval = viewport.currentProjection()->screenCoordinates( lon * DEG2RAD, lat * DEG2RAD, &viewport, x, y );
+        const bool retval = viewport.screenCoordinates( lon * DEG2RAD, lat * DEG2RAD, x, y );
 
         QVERIFY( retval ); // FIXME: this should fail for lon < -180 || 180 < lon
         QCOMPARE( x, lon - viewport.centerLongitude() * RAD2DEG + 1.0 );
@@ -191,7 +191,7 @@ void MercatorProjectionTest::screenCoordinatesOfCenter()
         qreal y;
         bool globeHidesPoint = true;
 
-        const bool retval = viewport.currentProjection()->screenCoordinates( coordinates, &viewport, x, y, globeHidesPoint );
+        const bool retval = viewport.screenCoordinates( coordinates, x, y, globeHidesPoint );
 
         QVERIFY( retval ); // FIXME: this should fail for lon < -180 || 180 < lon
         QVERIFY( !globeHidesPoint );
@@ -207,7 +207,7 @@ void MercatorProjectionTest::screenCoordinatesOfCenter()
         int pointRepeatNum = 1000;
         bool globeHidesPoint = true;
 
-        const bool retval = viewport.currentProjection()->screenCoordinates( coordinates, &viewport, x, y, pointRepeatNum, QSizeF( 0, 0 ), globeHidesPoint );
+        const bool retval = viewport.screenCoordinates( coordinates, x, y, pointRepeatNum, QSizeF( 0, 0 ), globeHidesPoint );
 
         QVERIFY( retval );
         QCOMPARE( pointRepeatNum, 1 );

@@ -19,10 +19,14 @@ namespace Marble {
 
 EarthquakePlugin::EarthquakePlugin()
     : m_isInitialized( false ),
-      m_aboutDialog( 0 ),
       m_configDialog( 0 )
 {
     setNameId( "earthquake" );
+    setVersion( "1.0" );
+    setCopyrightYears( QList<int>() << 2010 << 2011 );
+    addAuthor( QString::fromUtf8( "Utku Aydın" ), "utkuaydin34@gmail.com" );
+    addAuthor( "Daniel Marth", "danielmarth@gmx.at" );
+
     setEnabled( true ); // Plugin is enabled by default
     setVisible( false ); // Plugin is invisible by default
     connect( this, SIGNAL( settingsChanged( QString ) ),
@@ -61,34 +65,6 @@ QString EarthquakePlugin::description() const
 QIcon EarthquakePlugin::icon() const
 {
     return QIcon();
-}
-
-QDialog* EarthquakePlugin::aboutDialog()
-{
-    if ( !m_aboutDialog )
-    {
-        // Initializing about dialog
-        m_aboutDialog = new PluginAboutDialog();
-        m_aboutDialog->setName( "Earthquake Plugin" );
-        m_aboutDialog->setVersion( "0.1" );
-        // FIXME: Can we store this string for all of Marble
-        m_aboutDialog->setAboutText( tr( "<br />(c) 2009, 2010 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
-        QList<Author> authors;
-        Author utku, daniel;
-        
-        utku.name = QString::fromUtf8( "Utku Aydın" );
-        utku.task = tr( "Developer" );
-        utku.email = "utkuaydin34@gmail.com";
-        authors.append( utku );
-        
-        daniel.name = QString::fromUtf8( "Daniel Marth" );
-        daniel.task = tr( "Configuration Plugin" );
-        authors.append( daniel );
-        m_aboutDialog->setAuthors( authors );
-        
-        m_aboutDialog->setLicense( PluginAboutDialog::License_LGPL_V2 );
-    }
-    return m_aboutDialog;
 }
 
 QDialog *EarthquakePlugin::configDialog()

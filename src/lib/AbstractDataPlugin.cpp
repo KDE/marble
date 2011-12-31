@@ -117,6 +117,8 @@ void AbstractDataPlugin::setModel( AbstractDataPluginModel* model )
     d->m_model = model;
 
     connect( d->m_model, SIGNAL( itemsUpdated() ), this, SLOT( requestRepaint() ) );
+    connect( d->m_model, SIGNAL( favoriteItemsChanged( const QStringList& ) ), this,
+             SLOT( favoriteItemsChanged( const QStringList& ) ) );
 }
 
 const PluginManager* AbstractDataPlugin::pluginManager() const
@@ -133,7 +135,6 @@ void AbstractDataPlugin::setNameId( const QString& name )
 {
     d->m_name = name;
 }
-
 
 quint32 AbstractDataPlugin::numberOfItems() const
 {
@@ -167,6 +168,11 @@ RenderPlugin::RenderType AbstractDataPlugin::renderType() const
 void AbstractDataPlugin::requestRepaint()
 {
     emit repaintNeeded( QRegion() );
+}
+
+void AbstractDataPlugin::favoriteItemsChanged( const QStringList& favoriteItems )
+{
+    Q_UNUSED( favoriteItems )
 }
 
 } // namespace Marble

@@ -11,7 +11,6 @@
 #ifndef MARBLE_AUDIOOUTPUT_H
 #define MARBLE_AUDIOOUTPUT_H
 
-#include "routing/instructions/RoutingInstruction.h"
 #include "routing/Route.h"
 
 namespace Marble

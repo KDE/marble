@@ -51,8 +51,6 @@ class GeoDataLatLonAltBox;
  * on the degree system. 
  */
 
-class PluginAboutDialog;
-
 class GraticulePlugin : public RenderPlugin
 {
     Q_OBJECT
@@ -79,8 +77,6 @@ class GraticulePlugin : public RenderPlugin
     QIcon icon () const;
 
     QDialog *configDialog();
-
-    QDialog *aboutDialog();
 
     void initialize ();
 
@@ -203,7 +199,6 @@ class GraticulePlugin : public RenderPlugin
     QHash<QString,QVariant> m_settings;
 
     QIcon m_icon;
-    PluginAboutDialog *m_aboutDialog;
         
     Ui::GraticuleConfigWidget *ui_configWidget;
     QDialog *m_configDialog;

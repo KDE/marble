@@ -19,6 +19,7 @@
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
 #include "MapThemeManager.h"
+#include "TileId.h"
 
 #include <QtGui/QLabel>
 #include <QtCore/qmath.h>

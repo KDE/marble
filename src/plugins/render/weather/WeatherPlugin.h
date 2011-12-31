@@ -26,8 +26,6 @@ namespace Ui
 namespace Marble
 {
 
-class PluginAboutDialog;
-
 class WeatherPlugin : public AbstractDataPlugin
 {
     Q_OBJECT
@@ -51,8 +49,6 @@ class WeatherPlugin : public AbstractDataPlugin
     
     QIcon icon() const;
 
-    QDialog *aboutDialog();
-
     QDialog *configDialog();
 
     QHash<QString,QVariant> settings() const;
@@ -63,15 +59,18 @@ class WeatherPlugin : public AbstractDataPlugin
     void readSettings();
     void writeSettings();
     void updateItemSettings();
+    void favoriteItemsChanged( const QStringList& favoriteItems );
     
  Q_SIGNALS:
     void changedSettings();
 
  private:
+    void updateSettings();
+
     bool m_isInitialized;
 
+    quint32 m_updateInterval;
     QIcon m_icon;
-    PluginAboutDialog *m_aboutDialog;
     QDialog * m_configDialog;
     Ui::WeatherConfigWidget * ui_configWidget;
 

@@ -124,6 +124,7 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
     
  private Q_SLOTS:
     void requestRepaint();
+    virtual void favoriteItemsChanged( const QStringList& favoriteItems );
 
  Q_SIGNALS:
     void changedNumberOfItems( quint32 number );

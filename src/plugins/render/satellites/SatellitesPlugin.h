@@ -28,7 +28,6 @@ namespace Ui
 namespace Marble
 {
 
-class PluginAboutDialog;
 class SatellitesConfigModel;
 
 /**
@@ -62,7 +61,6 @@ public:
     QHash<QString, QVariant> settings() const;
     void setSettings( QHash<QString, QVariant> settings );
 
-    QDialog *aboutDialog();
     QDialog *configDialog();
 
 private Q_SLOTS:
@@ -81,7 +79,6 @@ private:
     QHash<QString, QVariant> m_settings;
     QHash<QString, QCheckBox *> m_boxHash;
 
-    PluginAboutDialog *m_aboutDialog;
     QDialog *m_configDialog;
     SatellitesConfigModel *m_configModel;
     Ui::SatellitesConfigDialog *ui_configWidget;

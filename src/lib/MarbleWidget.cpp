@@ -27,7 +27,6 @@
 #include <QtDBus/QDBusConnection>
 #endif
 
-#include "AbstractProjection.h"
 #include "DataMigration.h"
 #include "FpsLayer.h"
 #include "FileManager.h"
@@ -43,7 +42,6 @@
 #include "MarblePhysics.h"
 #include "MarbleWidgetInputHandler.h"
 #include "MarbleWidgetPopupMenu.h"
-#include "MeasureTool.h"
 #include "Planet.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
@@ -249,7 +247,7 @@ void MarbleWidgetPrivate::construct()
     m_routingLayer->setPlacemarkModel( 0 );
 
     m_widget->connect( m_routingLayer, SIGNAL( routeDirty() ),
-                       m_model.routingManager(), SLOT( updateRoute() ) );
+                       m_model.routingManager(), SLOT( retrieveRoute() ) );
     m_widget->connect( m_model.routingManager()->alternativeRoutesModel(),
                        SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
                        m_widget, SLOT( repaint() ) );
@@ -411,11 +409,6 @@ TextureLayer *MarbleWidget::textureLayer()
 const Marble::TextureLayer* MarbleWidget::textureLayer() const
 {
     return d->m_map.textureLayer();
-}
-
-MeasureTool *MarbleWidget::measureTool()
-{
-    return d->m_map.measureTool();
 }
 
 QPixmap MarbleWidget::mapScreenShot()
@@ -774,7 +767,7 @@ qreal MarbleWidget::centerLongitude() const
 
 QRegion MarbleWidget::mapRegion() const
 {
-    return viewport()->currentProjection()->mapRegion( viewport() );
+    return viewport()->mapRegion();
 }
 
 void MarbleWidget::paintEvent( QPaintEvent *evt )
@@ -1161,8 +1154,7 @@ void MarbleWidget::setSelection( const QRect& region )
     mDebug() << "Selection region: (" << tl.x() << ", " <<  tl.y() << ") (" 
              << br.x() << ", " << br.y() << ")" << endl;
 
-    const AbstractProjection *proj = viewport()->currentProjection();
-    GeoDataLatLonAltBox box  = proj->latLonAltBox( region, viewport() );
+    GeoDataLatLonAltBox box  = viewport()->latLonAltBox( region );
 
     // NOTE: coordinates as lon1, lat1, lon2, lat2 (or West, North, East, South)
     // as left/top, right/bottom rectangle.
@@ -1339,6 +1331,21 @@ GeoDataLookAt MarbleWidget::lookAt() const
     result.setRange( distance() * KM2METER );
 
     return result;
+}
+
+GeoDataCoordinates MarbleWidget::focusPoint() const
+{
+    return d->m_map.viewport()->focusPoint();
+}
+
+void MarbleWidget::setFocusPoint( const GeoDataCoordinates &focusPoint )
+{
+    d->m_map.viewport()->setFocusPoint( focusPoint );
+}
+
+void MarbleWidget::resetFocusPoint()
+{
+    d->m_map.viewport()->resetFocusPoint();
 }
 
 qreal MarbleWidget::radiusFromDistance( qreal distance ) const

@@ -70,8 +70,6 @@ class GpsInfo : public AbstractFloatItem
     MarbleLocale* m_locale;
     Ui::GpsInfoPlugin m_widget;
     WidgetGraphicsItem* m_widgetItem;
-
-
 };
 
 }

@@ -15,7 +15,6 @@
 #include "ui_WeatherConfigWidget.h"
 #include "WeatherData.h"
 #include "WeatherModel.h"
-#include "PluginAboutDialog.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
 #include "global.h"
@@ -35,19 +34,25 @@ const quint32 numberOfStationsPerFetch = 20;
 
 WeatherPlugin::WeatherPlugin()
     : m_isInitialized( false ),
+      m_updateInterval( 0 ),
       m_icon(),
-      m_aboutDialog( 0 ),
       m_configDialog( 0 ),
       ui_configWidget( 0 ),
       m_settings()
 {
+    m_icon.addFile( MarbleDirs::path( "weather/weather-clear.png" ) );
     setNameId( "weather" );
-        
+    setVersion( "1.1" );
+    setCopyrightYears( QList<int>() << 2009 << 2011 );
+    addAuthor( "Bastian Holst", "bastianholst@gmx.de" );
+    addAuthor( "Valery Kharitonov", "kharvd@gmail.com" );
+    setDataText( tr( "Supported by backstage.bbc.co.uk.\nWeather data from UK MET Office" ) );
+
     // Plugin is enabled by default
     setEnabled( true );
     // Plugin is not visible by default
     setVisible( false );
-    
+
     connect( this, SIGNAL( settingsChanged( QString ) ),
              this, SLOT( updateItemSettings() ) );
 
@@ -56,17 +61,20 @@ WeatherPlugin::WeatherPlugin()
 
 WeatherPlugin::~WeatherPlugin()
 {
-    delete m_aboutDialog;
     delete m_configDialog;
     delete ui_configWidget;
 }
 
 void WeatherPlugin::initialize()
 {
+    readSettings();
+
     WeatherModel *model = new WeatherModel( pluginManager(), this );
+
     setModel( model );
+    updateSettings();
     updateItemSettings();
-    setNumberOfItems( numberOfStationsPerFetch );
+
     m_isInitialized = true;
 }
 
@@ -95,28 +103,6 @@ QIcon WeatherPlugin::icon() const
     return m_icon;
 }
 
-QDialog *WeatherPlugin::aboutDialog()
-{
-    if ( !m_aboutDialog ) {
-        m_aboutDialog = new PluginAboutDialog();
-        m_aboutDialog->setName( "Weather Plugin" );
-        m_aboutDialog->setVersion( "0.1" );
-        // FIXME: Can we store this string for all of Marble
-        m_aboutDialog->setAboutText( tr( "<br />(c) 2009 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
-        QList<Author> authors;
-        Author bholst;
-        bholst.name = "Bastian Holst";
-        bholst.task = tr( "Developer" );
-        bholst.email = "bastianholst@gmx.de";
-        authors.append( bholst );
-        m_aboutDialog->setAuthors( authors );
-        m_aboutDialog->setDataText( tr( "Supported by backstage.bbc.co.uk.\nWeather data from UK MET Office" ) );
-        m_icon.addFile( MarbleDirs::path( "weather/weather-clear.png" ) );
-        m_aboutDialog->setPixmap( m_icon.pixmap( 62, 62 ) );
-    }
-    return m_aboutDialog;
-}
-
 QDialog *WeatherPlugin::configDialog()
 {
     if ( !m_configDialog ) {
@@ -143,7 +129,6 @@ QHash<QString,QVariant> WeatherPlugin::settings() const
 
 void WeatherPlugin::setSettings( QHash<QString,QVariant> settings )
 {
-    
     // Check if all fields are filled and fill them with default values.
     // Information
     if ( !settings.contains( "showCondition" ) ) {
@@ -200,7 +185,9 @@ void WeatherPlugin::setSettings( QHash<QString,QVariant> settings )
     
     m_settings = settings;
     readSettings();
+
     emit settingsChanged( nameId() );
+    updateSettings();
 }
 
 void WeatherPlugin::readSettings()
@@ -230,6 +217,11 @@ void WeatherPlugin::readSettings()
     else
         ui_configWidget->m_windSpeedBox->setCheckState( Qt::Unchecked );
 
+    if ( m_settings.value( "onlyFavorites" ).toBool() )
+        ui_configWidget->m_onlyFavoritesBox->setCheckState( Qt::Checked );
+    else
+        ui_configWidget->m_onlyFavoritesBox->setCheckState( Qt::Unchecked );
+
     // Units
     ui_configWidget->m_temperatureComboBox
         ->setCurrentIndex( m_settings.value( "temperatureUnit" ).toInt() );
@@ -239,6 +231,10 @@ void WeatherPlugin::readSettings()
 
     ui_configWidget->m_pressureComboBox
         ->setCurrentIndex( m_settings.value( "pressureUnit" ).toInt() );
+
+    // Misc
+    ui_configWidget->m_updateIntervalBox
+        ->setValue( m_settings.value( "updateInterval", 3 ).toInt() );
 }
 
 void WeatherPlugin::writeSettings()
@@ -258,7 +254,28 @@ void WeatherPlugin::writeSettings()
     m_settings.insert( "windSpeedUnit", ui_configWidget->m_windSpeedComboBox->currentIndex() );
     m_settings.insert( "pressureUnit", ui_configWidget->m_pressureComboBox->currentIndex() );
 
+    // Misc
+    bool onlyFavorites = ( ui_configWidget->m_onlyFavoritesBox->checkState() == Qt::Checked );
+    m_settings.insert( "onlyFavorites", onlyFavorites );
+
+    m_updateInterval = ui_configWidget->m_updateIntervalBox->value();
+    m_settings.insert( "updateInterval", m_updateInterval );
+
     emit settingsChanged( nameId() );
+    updateSettings();
+}
+
+void WeatherPlugin::updateSettings()
+{
+    if ( model() ) {
+        bool favoritesOnly = m_settings.value( "onlyFavorites", false ).toBool();
+        QList<QString> favoriteItems = m_settings.value( "favoriteItems" ).toString()
+                .split(",", QString::SkipEmptyParts);
+
+        model()->setFavoriteItems( favoriteItems );
+        setNumberOfItems( favoritesOnly ? favoriteItems.size() : numberOfStationsPerFetch );
+        model()->setFavoriteItemsOnly( favoritesOnly );
+    }
 }
 
 void WeatherPlugin::updateItemSettings()
@@ -267,6 +284,13 @@ void WeatherPlugin::updateItemSettings()
     if( abstractModel != 0 ) {
         abstractModel->setItemSettings( m_settings );
     }
+}
+
+void WeatherPlugin::favoriteItemsChanged( const QStringList& favoriteItems )
+{
+    m_settings["favoriteItems"] = favoriteItems.join( "," );
+    emit settingsChanged( nameId() );
+    updateSettings();
 }
 
 Q_EXPORT_PLUGIN2(WeatherPlugin, Marble::WeatherPlugin)

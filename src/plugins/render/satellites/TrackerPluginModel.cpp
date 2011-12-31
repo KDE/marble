@@ -34,8 +34,7 @@ public:
           m_enabled( false ),
           m_treeModel( treeModel ),
           m_document( new GeoDataDocument() ),
-          m_storagePolicy( MarbleDirs::localPath() + "/cache/" ),
-          m_timer( new QTimer( parent ) )
+          m_storagePolicy( MarbleDirs::localPath() + "/cache/" )
     {
     }
 
@@ -66,7 +65,6 @@ public:
     GeoDataDocument *m_document;
     CacheStoragePolicy m_storagePolicy;
     HttpDownloadManager *m_downloadManager;
-    QTimer *m_timer;
     QVector<TrackerPluginItem *> m_itemVector;
 };
 
@@ -78,10 +76,6 @@ TrackerPluginModel::TrackerPluginModel( GeoDataTreeModel *treeModel, const Plugi
     if( d->m_enabled ) {
         d->m_treeModel->addDocument( d->m_document );
     }
-
-    connect( d->m_timer, SIGNAL(timeout()), this, SLOT(update()) );
-    d->update();
-    d->m_timer->start( 1000 );
 
     d->m_downloadManager = new HttpDownloadManager( &d->m_storagePolicy, pluginManager );
     connect( d->m_downloadManager, SIGNAL(downloadComplete(QString,QString)),

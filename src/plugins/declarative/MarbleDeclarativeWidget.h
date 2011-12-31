@@ -17,13 +17,16 @@
 #include "Coordinate.h"
 
 #include <QtGui/QGraphicsProxyWidget>
+#include <QtCore/QList>
 #include <QtCore/QPoint>
 
 namespace Marble
 {
 // Forward declaration
+class MarbleModel;
 class MarbleWidget;
-class MapThemeManager;
+class RenderPlugin;
+class ViewportParams;
 
 namespace Declarative
 {
@@ -44,7 +47,7 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( Marble::Declarative::Coordinate* center READ center WRITE setCenter NOTIFY visibleLatLonAltBoxChanged )
     Q_PROPERTY( int zoom READ zoom WRITE setZoom NOTIFY zoomChanged )
 
-    Q_PROPERTY( QString mapThemeId READ mapThemeId WRITE setMapThemeId )
+    Q_PROPERTY( QString mapThemeId READ mapThemeId WRITE setMapThemeId NOTIFY mapThemeChanged )
     Q_PROPERTY( QString projection READ projection WRITE setProjection )
     Q_PROPERTY( bool inputEnabled READ inputEnabled WRITE setInputEnabled )
     Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
@@ -54,10 +57,17 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( Marble::Declarative::Routing* routing READ routing NOTIFY routingChanged )
     Q_PROPERTY( Marble::Declarative::Search* search READ search NOTIFY searchChanged )
     Q_PROPERTY( QObject* mapThemeModel READ mapThemeModel NOTIFY mapThemeModelChanged )
+    Q_PROPERTY( QObject* streetMapThemeModel READ streetMapThemeModel NOTIFY streetMapThemeModelChanged )
 
 public:
     /** Constructor */
     explicit MarbleWidget( QGraphicsItem *parent = 0, Qt::WindowFlags flags = 0 );
+
+    Marble::MarbleModel *model();
+
+    const Marble::ViewportParams *viewport() const;
+
+    QList<RenderPlugin *> renderPlugins() const;
 
     bool workOffline() const;
 
@@ -89,10 +99,16 @@ Q_SIGNALS:
 
     void mapThemeModelChanged();
 
+    void streetMapThemeModelChanged();
+
+    void mapThemeChanged();
+
 public Q_SLOTS:
     Marble::Declarative::Coordinate* center();
 
     void setCenter( Marble::Declarative::Coordinate* center );
+
+    void centerOn( const Marble::GeoDataLatLonAltBox &bbox );
 
     /** Returns a list of active (!) float items */
     QStringList activeFloatItems() const;
@@ -156,6 +172,8 @@ public Q_SLOTS:
 
     QObject* mapThemeModel();
 
+    QObject* streetMapThemeModel();
+
     void setGeoSceneProperty( const QString &key, bool value );
 
 private Q_SLOTS:
@@ -178,6 +196,8 @@ private:
     Marble::Declarative::Coordinate m_center;
 
     Marble::Declarative::ZoomButtonInterceptor* m_interceptor;
+
+    QObject* m_streetMapThemeModel;
 };
 
 } // namespace Declarative

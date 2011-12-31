@@ -378,6 +378,7 @@ else (APPLE AND QTONLY)
     geodata/data/Serializable.h
     geodata/geodata_export.h
     geodata/parser/GeoDocument.h
+    geodata/writer/GeoWriter.h
     routing/RoutingWidget.h
     routing/RoutingManager.h
     TileCreator.h
@@ -400,6 +401,16 @@ else (APPLE AND QTONLY)
     LatLonEdit.h
     MapWizard.h
     ElevationModel.h
+
+    routing/AlternativeRoutesModel.h
+    routing/Route.h
+    routing/Maneuver.h
+    routing/RouteRequest.h
+    routing/RouteSegment.h
+    routing/RoutingManager.h
+    routing/RoutingModel.h
+    routing/RoutingProfile.h
+
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )
 endif (APPLE AND QTONLY)

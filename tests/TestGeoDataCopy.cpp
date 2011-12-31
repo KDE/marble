@@ -97,6 +97,7 @@ void TestGeoDataCopy::testCoordinate( GeoDataCoordinates coord, qreal alt, int d
 
 void TestGeoDataCopy::initTestCase()
 {
+    QLocale::setDefault(QLocale::German);
     MarbleDirs::setMarbleDataPath( DATA_PATH );
     MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
 

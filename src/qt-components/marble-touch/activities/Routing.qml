@@ -42,12 +42,6 @@ Page {
         id: pageMenu
         content: MenuLayout {
             MenuItem {
-                text: "Map Theme"
-                onClicked: {
-                    pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
-                }
-            }
-            MenuItem {
                 text: "Save Route"
                 onClicked: {
                     saveRouteDialog.filename = "route-" + Qt.formatDateTime(new Date(), "yyyy-MM-dd_hh.mm.ss") + ".kml"
@@ -57,11 +51,6 @@ Page {
             MenuItem {
                 text: "Open Route"
                 onClicked: openRouteDialog.open()
-            }
-            MenuItemSwitch {
-                text: "Online"
-                checked: !settings.workOffline
-                onClicked: settings.workOffline = !settings.workOffline
             }
             MenuItemSwitch {
                 text: "Elevation Profile"
@@ -128,7 +117,7 @@ Page {
             var plugins = settings.defaultRenderPlugins
             settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
             settings.activeRenderPlugins = plugins
-            settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
+            settings.mapTheme = settings.streetMapTheme
             settings.gpsTracking = true
             settings.showPosition = true
             settings.showTrack = false

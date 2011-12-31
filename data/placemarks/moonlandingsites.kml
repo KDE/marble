@@ -1,258 +1,510 @@
-<?xml version="1.0" encoding="UTF-8"?> 
-<kml xmlns="http://earth.google.com/kml/2.1"> 
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.1">
 <Document>
     <!--- Poles -->
-    <Placemark> 
-        <name>North Pole</name> 
-        <description><![CDATA[Selenographic North Pole]]></description> 
-        <role>P</role> 
+    <Placemark>
+        <name>North Pole</name>
+        <description><![CDATA[Selenographic North Pole]]></description>
+        <role>P</role>
         <Point>
-            <coordinates>0.0,90.00</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>South Pole</name> 
-        <description><![CDATA[Selenographic South Pole]]></description> 
-        <role>P</role> 
+            <coordinates>0.0,90.00</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>South Pole</name>
+        <description><![CDATA[Selenographic South Pole]]></description>
+        <role>P</role>
         <Point>
-            <coordinates>0.0,-90.00</coordinates> 
-        </Point> 
-    </Placemark> 
- 
+            <coordinates>0.0,-90.00</coordinates>
+        </Point>
+    </Placemark>
+
     <!--- Apollo Moon Missions -->
-    <Placemark> 
-        <name>Apollo 11</name> 
+    <Placemark>
+        <name>Apollo 11</name>
         <description><![CDATA[<p><i>21.7.1969:</i> <b>First manned lunar landing mission</b></p>
                      <p>Neil A. Armstrong (commander), Michael Collins (CM pilot), Edwin E. (Buzz) Aldrin Jr. (LM pilot)</p>
-]]></description> 
-        <role>h</role> 
+]]></description>
+        <role>h</role>
         <Point>
-            <coordinates>23.63,0.71</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Apollo 12</name> 
+            <coordinates>23.63,0.71</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Apollo 12</name>
         <description><![CDATA[<p><i>19.11.1969:</i> <b>Second manned lunar landing mission. Retrieves Surveyor 3</b></p>
                      <p>Charles Conrad Jr. (commander), Richard F. Gordon Jr. (CM pilot), Alan L. Bean (LM pilot)</p>
-]]></description> 
-        <role>h</role> 
+]]></description>
+        <role>h</role>
         <Point>
-            <coordinates>-23.42,-3.01</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Apollo 14</name> 
+            <coordinates>-23.42,-3.01</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Apollo 14</name>
         <description><![CDATA[<p><i>5.2.1971:</i> <b>Third manned lunar landing mission. ALSEP and other instruments deployed.</b></p>
                      <p>Alan B. Shepard Jr. (commander), Stuart A. Roosa (CM pilot), Edgar D. Mitchell (LM pilot)
-]]></description> 
-        <role>h</role> 
+]]></description>
+        <role>h</role>
         <Point>
-            <coordinates>-17.48,-3.65</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Apollo 15</name> 
+            <coordinates>-17.48,-3.65</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Apollo 15</name>
         <description><![CDATA[<p><i>31.7.1971:</i> <b>Fourth manned lunar landing mission. Lunar Roving Vehicle, electric-powered, 4-wheel drive car, traversed total 27.9 km.</b></p>
                      <p>David R. Scott (commander), Alfred M. Worden (CM pilot), James B. Irwin (LM pilot)
-]]></description> 
-        <role>h</role> 
+]]></description>
+        <role>h</role>
         <Point>
-            <coordinates>3.66,26.08</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Apollo 16</name> 
+            <coordinates>3.66,26.08</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Apollo 16</name>
         <description><![CDATA[<p><i>21.4.1972:</i> <b>Fifth manned lunar landing mission. First study of highlands area.</b></p>
                      <p>John W. Young (commander), Thomas K. Mattingly II (CM pilot), Charles M. Duke Jr. (LM pilot)
-]]></description> 
-        <role>h</role> 
+]]></description>
+        <role>h</role>
         <Point>
-            <coordinates>15.51,-8.97</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Apollo 17</name> 
+            <coordinates>15.51,-8.97</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Apollo 17</name>
         <description><![CDATA[<p><i>11.12.1972:</i> <b>Last manned lunar landing mission. First scientist-astronaut to land on Moon: Schmitt.</b></p>
                      <p>Eugene A. Cernan (commander), Ronald E. Evans (CM pilot), Harrison H. Schmitt (LM pilot)
-]]></description> 
-        <role>h</role> 
+]]></description>
+        <role>h</role>
         <Point>
-            <coordinates>30.77,20.16</coordinates> 
-        </Point> 
-    </Placemark> 
+            <coordinates>30.77,20.16</coordinates>
+        </Point>
+    </Placemark>
 
     <!--- Sovjet Hard Moon Landings -->
-    <Placemark> 
-        <name>Luna 2</name> 
-        <description><![CDATA[<p><i>12.9.1959:</i> <b>First spacecraft to reach the surface of the Moon. The successful impact was the highlight of this Sovjet mission.</b></p>
-]]></description> 
-        <role>i</role> 
+    <Placemark>
+        <name>Luna 2</name>
+        <description><![CDATA[<p><i>13.9.1959:</i> <b>First spacecraft to reach the surface of the Moon. The successful impact was the highlight of this Sovjet mission.</b></p>
+]]></description>
+        <role>i</role>
         <Point>
-            <coordinates>0.0,29.1</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Luna 9</name> 
-        <description><![CDATA[<p><i>31.1.1966:</i> <b>First unmanned Sovjet moon landing. Several photos.</b></p>
-]]></description> 
-        <role>u</role> 
+            <coordinates>0.0,29.1</coordinates>
+        </Point>
+    </Placemark>
+        <Placemark>
+        <name>Luna 5</name>
+        <description><![CDATA[<p><i>12.5.1965:</i> <b>It was an unmanned space mission of the Luna program. It was designed to continue investigations of a lunar soft landing. The retrorocket system failed, and the spacecraft impacted the lunar surface.</b></p>
+]]></description>
+        <role>i</role>
         <Point>
-            <coordinates>-64.37,7.13</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Luna 13</name> 
+            <coordinates>-8.0,-31.0</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Luna 7</name>
+        <description><![CDATA[<p><i>7.8.1965:</i> <b>It was an unmanned space mission of the Soviet Luna program. The Luna 7 spacecraft was intended to achieve a soft landing on the Moon. Due to premature retrofire and cutoff of the retrorockets, the spacecraft impacted the lunar surface.</b></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>-47.8,9.8</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Luna 8</name>
+        <description><![CDATA[<p><i>6.12.1965:</i> <b>It was a lunar space probe of the Luna program. It was launched with the objective of achieving a soft landing on the Moon. However, its retrorocket firing occurred too late, and suffered a hard impact on the lunar surface.</b></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>-62.0,9.6</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Luna 13</name>
         <description><![CDATA[<p><i>24.12.1966:</i> <b>Second unmanned Sovjet moon landing. Several photos.</b></p>
-]]></description> 
-        <role>u</role> 
+]]></description>
+        <role>i</role>
         <Point>
-            <coordinates>-62.05,18.87</coordinates> 
-        </Point> 
-    </Placemark> 
+            <coordinates>-62.05,18.87</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Luna 15</name>
+        <description><![CDATA[<p><i>21.7.1969:</i> <b>It was the third Soviet attempt to return lunar soil back to Earth. The Russian craft crashed on the moon.</b></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>60.0,17.0</coordinates>
+        </Point>
+    </Placemark>
+
+    <Placemark>
+        <name>Luna 18</name>
+        <description><![CDATA[<p><i>11.9.1971:</i> <b>After two mid-course corrections on 4 September and 6 September 1971, Luna 18 entered a circular orbit around the Moon on 7 September at 100 kilometers altitude with an inclination of 35°. After several more orbital corrections, on 11 September, the vehicle began its descent to the lunar surface.</b></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>56.3,3.34</coordinates>
+        </Point>
+    </Placemark>
 
     <!--- Sovjet Soft Moon Landings -->
-    <Placemark> 
-        <name>Luna 16</name> 
+    <Placemark>
+        <name>Luna 9</name>
+        <description><![CDATA[<p><i>31.1.1966:</i> <b>First unmanned Sovjet moon landing. Several photos.</b></p>
+]]></description>
+        <role>u</role>
+        <Point>
+            <coordinates>-64.37,7.13</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Luna 16</name>
         <description><![CDATA[<p><i>20.11.1970:</i> <b>Third unmanned Sovjet moon landing. Sample return mission: returned 100g moon dust back to Earth.</b></p>
-]]></description> 
-        <role>u</role> 
+]]></description>
+        <role>u</role>
         <Point>
-            <coordinates>56.3,-0.683</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Luna 17</name> 
+            <coordinates>56.3,-0.683</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Luna 17</name>
         <description><![CDATA[<p><i>10.11.1970:</i> <b>Unmanned Sovjet moon landing: First lunar rover Lunokhod-1 drove 10.5 km across the moon's surface.</b></p>
-]]></description> 
-        <role>r</role> 
+]]></description>
+        <role>r</role>
         <Point>
-            <coordinates>-35,38.28</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Luna 20</name> 
+            <coordinates>-35,38.28</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Luna 20</name>
         <description><![CDATA[<p><i>25.2.1972:</i> <b>Unmanned Sovjet moon landing. Sample return mission: returned 50g moon dust back to Earth</b></p>
-]]></description> 
-        <role>u</role> 
+]]></description>
+        <role>u</role>
         <Point>
-            <coordinates>56.50,3.57</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Luna 21</name> 
+            <coordinates>56.50,3.57</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Luna 21</name>
         <description><![CDATA[<p><i>15.1.1973:</i> <b>Unmanned Sovjet moon landing: Second lunar rover Lunokhod-2 drove 37 km across the moon's surface.</b></p>
-]]></description> 
-        <role>r</role> 
+]]></description>
+        <role>r</role>
         <Point>
-            <coordinates>30.45,25.85</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Luna 24</name> 
+            <coordinates>30.45,25.85</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Luna 24</name>
         <description><![CDATA[<p><i>18.8.1976:</i> <b>Unmanned Sovjet moon landing: Sample return mission: returned 170g moon dust back to Earth</b></p>
-]]></description> 
-        <role>u</role> 
+]]></description>
+        <role>u</role>
         <Point>
-            <coordinates>62.20,12.25</coordinates> 
-        </Point> 
-    </Placemark> 
+            <coordinates>62.20,12.25</coordinates>
+        </Point>
+    </Placemark>
 
 
     <!--- American Hard Moon Landings -->
-    <Placemark> 
-        <name>Ranger 7</name> 
-        <description><![CDATA[<p><i>31.7.1964:</i> <b>First successful impact of an American lunar spacecraft.</b></p>
-]]></description> 
-        <role>i</role> 
+    <Placemark>
+        <name>Ranger 4</name>
+        <description><![CDATA[<p><i>26.4.1962:</i> <b>the spacecraft crashed on the far side of the Moon without returning any scientific data.</b></p>
+]]></description>
+        <role>i</role>
         <Point>
-            <coordinates>-20.6,-10.63</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Ranger 8</name> 
+            <coordinates>229.3,-15.5</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Ranger 6</name>
+        <description><![CDATA[<p><i>2.2.1964:</i> <b>First partial successful impact of an American lunar spacecraft.</b></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>21.5,9.4</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Ranger 7</name>
+        <description><![CDATA[<p><i>31.7.1964:</i> <b>First fully successful impact of an American lunar spacecraft.</b></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>-20.6,-10.63</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Ranger 8</name>
         <description><![CDATA[<p><i>20.2.1965:</i> <b>Second successful impact of an American lunar spacecraft.</b></p>
-]]></description> 
-        <role>i</role> 
+]]></description>
+        <role>i</role>
         <Point>
-            <coordinates>24.61,2.72</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Ranger 9</name> 
+            <coordinates>24.61,2.72</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Ranger 9</name>
         <description><![CDATA[<p><i>24.3.1965:</i> <b>Third successful impact of an American lunar spacecraft.</b></p>
-]]></description> 
-        <role>i</role> 
+]]></description>
+        <role>i</role>
         <Point>
-            <coordinates>-2.37,12.83</coordinates> 
-        </Point> 
-    </Placemark> 
+            <coordinates>-2.37,-12.83</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Surveyor 2</name>
+        <description><![CDATA[<p><i>23.9.1966:</i> <b>It was to be the second lunar lander in the unmanned American Surveyor program to explore the Moon. A mid-course correction failure resulted in the spacecraft losing control.</b></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>-11.0,-4.0</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Surveyor 4</name>
+        <description><![CDATA[<p><i>17.7.1967:</i> <b>After a flawless flight to the moon, radio signals from the spacecraft ceased during the terminal-descent phase, approximately 2.5 min. before touchdown. Contact with the spacecraft was never reestablished, and the mission was unsuccessful. The solid fuel retro rocket may have exploded near the end of its scheduled burn.</b></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>-1.39,0.45</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Lunar Orbiter 1</name>
+        <description><![CDATA[<p><i>29.10.1966:</i> <b>The Lunar Orbiters were all eventually commanded to crash on the Moon before their attitude control fuel ran out so they would not present navigational or communications hazards to later Apollo flights. </b></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>162.0,6.7</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Lunar Orbiter 2</name>
+        <description><![CDATA[<p><i>11.10.1967:</i> <b>The spacecraft was used for tracking purposes until it impacted upon the lunar surface on command.</b></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>119.1,3.0</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Lunar Orbiter 3</name>
+        <description><![CDATA[<p><i>9.10.1967:</i> <b>The spacecraft was used for tracking purposes until it struck the lunar surface on command.</b></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>-97.7,14.3</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Lunar Orbiter 5</name>
+        <description><![CDATA[<p><i>31.1.1968:</i> <b>The spacecraft was tracked until it struck the lunar surface on command.</b></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>-93.1,-2.79</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Apollo 12 LM ascent stage</name>
+        <description><![CDATA[<p><i>1967:</i></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>-21.20,-3.94</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Apollo 13 S-IVB</name>
+        <description><![CDATA[<p><i>1970:</i></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>-27.86,-2.75</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Apollo 14 S-IVB</name>
+        <description><![CDATA[<p><i>1971:</i></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>-26.02,-8.09</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Apollo 14 LM-8 ascent stage</name>
+        <description><![CDATA[<p><i>1971:</i></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>-19.67,-3.42</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Apollo 15 S-IVB</name>
+        <description><![CDATA[<p><i>1971:</i></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>-11.81,-1.51</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Apollo 16 S-IVB</name>
+        <description><![CDATA[<p><i>1972:</i></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>-23.8,1.3</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Apollo 17 S-IVB</name>
+        <description><![CDATA[<p><i>1972:</i></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>-12.31,-4.21</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Apollo 17 LM-12 (Challenger) ascent stage</name>
+        <description><![CDATA[<p><i>1972:</i></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>30.5,19.96</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Lunar Prospector</name>
+        <description><![CDATA[<p><i>31.7.1999:</i> <b>Lunar Prospector was deliberately targeted to impact in a permanently shadowed area of the Shoemaker crater near the lunar south pole. It was hoped that the impact would liberate water vapor from the suspected ice deposits in the crater and that the plume would be detectable from Earth; however, no such plume was observed.</b></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>-93.1,-2.79</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>LCROSS Shepherding Spacecraft</name>
+        <description><![CDATA[<p><i>9.10.2009:</i> <b>It was a robotic spacecraft operated by NASA. The mission was conceived as a low-cost means of determining the nature of hydrogen detected at the polar regions of the moon.</b></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>310.64,-84.729</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>LCROSS Centaur</name>
+        <description><![CDATA[<p><i>9.10.2009:</i> <b>Centaur is a rocket stage designed for use as the upper stage of space launch vehicles.</b></p>
+]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>311.275,-84.675</coordinates>
+        </Point>
+    </Placemark>
 
     <!--- American Soft Moon Landings -->
-    <Placemark> 
-        <name>Surveyor 1</name> 
+    <Placemark>
+        <name>Surveyor 1</name>
         <description><![CDATA[<p><i>2.6.1966:</i> <b>First unmanned American moon landing. Transmitted more than 11,000 images.</b></p>
-]]></description> 
-        <role>u</role> 
+]]></description>
+        <role>u</role>
         <Point>
-            <coordinates>-43.22,-2.45</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Surveyor 3</name> 
+            <coordinates>-43.22,-2.45</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Surveyor 3</name>
         <description><![CDATA[<p><i>20.4.1967:</i> <b>Second unmanned American moon landing. Transmitted more than 6,000 images.</b></p>
-]]></description> 
-        <role>u</role> 
+]]></description>
+        <role>u</role>
         <Point>
-            <coordinates>-23.34,-2.94</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Surveyor 5</name> 
+            <coordinates>-23.34,-2.94</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Surveyor 5</name>
         <description><![CDATA[<p><i>11.9.1967:</i> <b>Third unmanned American moon landing. Transmitted more than 19,000 images. Alpha-scattering surface analyzer.</b></p>
-]]></description> 
-        <role>u</role> 
+]]></description>
+        <role>u</role>
         <Point>
-            <coordinates>23.18,1.41</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Surveyor 6</name> 
+            <coordinates>23.18,1.41</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Surveyor 6</name>
         <description><![CDATA[<p><i>10.11.1967:</i> <b>Unmanned American moon landing. Transmitted more than 30,000 images. Robot arm and alpha scatter science.</b></p>
-]]></description> 
-        <role>u</role> 
+]]></description>
+        <role>u</role>
         <Point>
-            <coordinates>-1.37,0.46</coordinates> 
-        </Point> 
-    </Placemark> 
-    <Placemark> 
-        <name>Surveyor 7</name> 
+            <coordinates>-1.37,0.46</coordinates>
+        </Point>
+    </Placemark>
+    <Placemark>
+        <name>Surveyor 7</name>
         <description><![CDATA[<p><i>7.1.1968:</i> <b>Unmanned American moon landing. Transmitted more than 21,000 images. Robot arm and alpha scatter science.</b></p>
-]]></description> 
-        <role>u</role> 
+]]></description>
+        <role>u</role>
         <Point>
-            <coordinates>-11.41,-41.01</coordinates> 
-        </Point> 
-    </Placemark> 
+            <coordinates>-11.41,-41.01</coordinates>
+        </Point>
+    </Placemark>
 
     <!--- Indian Moon Missions -->
-    <Placemark> 
-        <name>Chandrayaan-1</name> 
-        <description><![CDATA[14.11.2008: Moon Impact Probe (MIP): First successful impact of an Indian lunar spacecraft.]]></description> 
-        <role>i</role> 
+    <Placemark>
+        <name>Chandrayaan-1</name>
+        <description><![CDATA[14.11.2008: <b>Moon Impact Probe (MIP): First successful impact of an Indian lunar spacecraft.</b>]]></description>
+        <role>i</role>
         <Point>
-            <coordinates>16.3,-89.00</coordinates> 
-        </Point> 
-    </Placemark> 
+            <coordinates>-30,-89.00</coordinates>
+        </Point>
+    </Placemark>
 
     <!--- European Moon Missions -->
-    <Placemark> 
-        <name>SMART-1</name> 
-        <description><![CDATA[3.9.2006: SMART-1: Scheduled crash .]]></description> 
-        <role>i</role> 
+    <Placemark>
+        <name>SMART-1</name>
+        <description><![CDATA[3.9.2006: SMART-1: Scheduled crash .]]></description>
+        <role>i</role>
         <Point>
-            <coordinates>-46.2,-34.4</coordinates> 
-        </Point> 
-    </Placemark> 
+            <coordinates>-46.2,-34.4</coordinates>
+        </Point>
+    </Placemark>
 
+	<!--- Japanese Hard Moon Landings -->
+	<Placemark>
+        <name>Hiten</name>
+        <description><![CDATA[<i>10.4.1993:</i> <b>It was Japan's first lunar probe, the first robotic lunar probe since the Soviet Union's Luna 24 in 1976, and the first lunar probe launched by a country other than Soviet Union or the United States. It was placed into a permanent lunar orbit, where it remained until it was deliberately crashed into the lunar surface.</b>]]></description>
+        <role>i</role>
+        <Point>
+            <coordinates>55.6,-34.3</coordinates>
+        </Point>
+    </Placemark>
+	<Placemark>
+        <name>SELENE (Kaguya)</name>
+        <description><![CDATA[<i></i>10.6.2009:</i> <b>The main scientific objectives of the mission were to study the origins of the Moon and its geologic evolution, obtain information about the lunar surface environment and perform radio science, especially precise measurement of the moon's gravity field, it impacted with controll.</b>]]> </description>
+        <role>i</role>
+        <Point>
+            <coordinates>80.5,-65.5</coordinates>
+        </Point>
+    </Placemark>
+	<Placemark>
+        <name>SELENE Rstar (Okina)</name>
+        <description><![CDATA[<i></i>10.6.2009:</i> <b>The main scientific objectives of the mission were to study the origins of the Moon and its geologic evolution, obtain information about the lunar surface environment and perform radio science, especially precise measurement of the moon's gravity field, it impacted with controll.</b>]]> </description>
+        <role>i</role>
+        <Point>
+            <coordinates>200.967,28.213</coordinates>
+        </Point>
+    </Placemark>
+
+	<!--- Chinese Hard Moon Landings -->
+	<Placemark>
+        <name>Chang'e 1</name>
+        <description><![CDATA[<i></i>1.3.2009:</i> <b>It was taken out of orbit and it impacted the surface of the Moon.</b>]]> </description>
+        <role>i</role>
+        <Point>
+            <coordinates>52.36,-1.5</coordinates>
+        </Point>
+    </Placemark>
 </Document>
-</kml> 
+</kml>

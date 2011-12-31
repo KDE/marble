@@ -19,7 +19,6 @@
 #include <QtCore/QObject>
 
 #include "AbstractFloatItem.h"
-#include "PluginAboutDialog.h"
 
 #include "RenderPlugin.h"
 
@@ -65,8 +64,6 @@ class CrosshairsPlugin : public RenderPlugin
 
     QIcon icon () const;
 
-    QDialog *aboutDialog();
-
     void initialize ();
 
     bool isInitialized () const;
@@ -88,8 +85,6 @@ private Q_SLOTS:
     Q_DISABLE_COPY( CrosshairsPlugin )
 
     bool m_isInitialized;
-
-    PluginAboutDialog *m_aboutDialog;
 
     QSvgRenderer *m_svgobj;
     QPixmap m_crosshairs;

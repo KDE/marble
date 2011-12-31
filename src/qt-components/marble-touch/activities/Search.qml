@@ -24,27 +24,6 @@ Page {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
-        ToolIcon {
-            iconId: "toolbar-view-menu"
-            onClicked: pageMenu.open()
-        }
-    }
-
-    Menu {
-        id: pageMenu
-        content: MenuLayout {
-            MenuItem {
-                text: "Map Theme"
-                onClicked: {
-                    pageStack.push( "qrc:/MapThemeSelectionPage.qml" )
-                }
-            }
-            MenuItemSwitch {
-                text: "Online"
-                checked: !settings.workOffline
-                onClicked: settings.workOffline = !settings.workOffline
-            }
-        }
     }
 
     Rectangle {
@@ -127,7 +106,7 @@ Page {
             var plugins = settings.defaultRenderPlugins
             settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
             settings.activeRenderPlugins = plugins
-            settings.mapTheme = "earth/openstreetmap/openstreetmap.dgml"
+            settings.mapTheme = settings.streetMapTheme
             settings.gpsTracking = false
             settings.showPosition = false
             settings.showTrack = false

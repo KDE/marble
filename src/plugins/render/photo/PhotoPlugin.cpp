@@ -28,6 +28,10 @@ PhotoPlugin::PhotoPlugin()
     setEnabled( true );
     // Plugin is not visible by default
     setVisible( false );
+
+    setVersion( "1.0" );
+    setCopyrightYear( 2009 );
+    addAuthor( "Bastian Holst", "bastianholst@gmx.de" );
 }
      
 void PhotoPlugin::initialize()

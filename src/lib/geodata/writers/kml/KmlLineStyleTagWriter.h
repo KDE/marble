@@ -11,15 +11,18 @@
 #ifndef MARBLE_KMLLINESTYLETAGWRITER_H
 #define MARBLE_KMLLINESTYLETAGWRITER_H
 
-#include "GeoTagWriter.h"
+#include "KmlColorStyleTagWriter.h"
 
 namespace Marble
 {
 
-class KmlLineStyleTagWriter : public GeoTagWriter
+class KmlLineStyleTagWriter : public KmlColorStyleTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+    KmlLineStyleTagWriter();
+
+protected:
+    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
 };
 
 }
