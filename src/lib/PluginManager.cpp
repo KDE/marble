@@ -43,36 +43,25 @@ class PluginManagerPrivate
     void loadPlugins();
 
     bool m_pluginsLoaded;
-    QMap<QPluginLoader*, RenderPlugin *> m_renderPluginTemplates;
-    QMap<QPluginLoader*, NetworkPlugin *> m_networkPluginTemplates;
-    QMap<QPluginLoader*, PositionProviderPlugin *> m_positionProviderPluginTemplates;
-    QMap<QPluginLoader*, RunnerPlugin *> m_runnerPlugins;
-
-private:
-    bool cleanup( const QList<QPluginLoader*> loaders );
+    QList<RenderPlugin *> m_renderPluginTemplates;
+    QList<NetworkPlugin *> m_networkPluginTemplates;
+    QList<PositionProviderPlugin *> m_positionProviderPluginTemplates;
+    QList<RunnerPlugin *> m_runnerPlugins;
 };
 
 PluginManagerPrivate::~PluginManagerPrivate()
 {
-    bool allUnloaded = cleanup( m_renderPluginTemplates.keys() );
-    allUnloaded = allUnloaded && cleanup( m_networkPluginTemplates.keys() );
-    allUnloaded = allUnloaded && cleanup( m_positionProviderPluginTemplates.keys() );
-    allUnloaded = allUnloaded && cleanup( m_runnerPlugins.keys() );
+    qDeleteAll( m_renderPluginTemplates );
+    m_renderPluginTemplates.clear();
 
-    if ( allUnloaded ) {
-        mDebug() << "All plugins unloaded. Plugin instances still alive will crash now.";
-    }
-}
+    qDeleteAll( m_networkPluginTemplates );
+    m_networkPluginTemplates.clear();
 
-bool PluginManagerPrivate::cleanup( const QList<QPluginLoader*> loaders )
-{
-    bool allUnloaded = true;
-    foreach( QPluginLoader* loader, loaders ) {
-        allUnloaded = allUnloaded && loader->unload();
-        delete loader;
-    }
+    qDeleteAll( m_positionProviderPluginTemplates );
+    m_positionProviderPluginTemplates.clear();
 
-    return allUnloaded;
+    qDeleteAll( m_runnerPlugins );
+    m_runnerPlugins.clear();
 }
 
 PluginManager::PluginManager( QObject *parent )
@@ -92,8 +81,8 @@ QList<AbstractFloatItem *> PluginManager::createFloatItems() const
 
     d->loadPlugins();
 
-    QMap<QPluginLoader*, RenderPlugin *>::const_iterator i = d->m_renderPluginTemplates.constBegin();
-    QMap<QPluginLoader*, RenderPlugin *>::const_iterator const end = d->m_renderPluginTemplates.constEnd();
+    QList<RenderPlugin *>::const_iterator i = d->m_renderPluginTemplates.constBegin();
+    QList<RenderPlugin *>::const_iterator const end = d->m_renderPluginTemplates.constEnd();
     for (; i != end; ++i) {
         AbstractFloatItem * const floatItem = qobject_cast<AbstractFloatItem *>(*i);
         if ( floatItem ) {
@@ -106,12 +95,12 @@ QList<AbstractFloatItem *> PluginManager::createFloatItems() const
 }
 
 template<class T>
-QList<T*> createPlugins( PluginManagerPrivate* d, const QMap<QPluginLoader*, T*> &loaders )
+QList<T*> createPlugins( PluginManagerPrivate* d, const QList<T*> &loaders )
 {
     QList<T*> result;
     d->loadPlugins();
-    typename QMap<QPluginLoader*, T*>::const_iterator i = loaders.constBegin();
-    typename QMap<QPluginLoader*, T*>::const_iterator const end = loaders.constEnd();
+    typename QList<T*>::const_iterator i = loaders.constBegin();
+    typename QList<T*>::const_iterator const end = loaders.constEnd();
     for (; i != end; ++i) {
         T* instance = (*i)->newInstance();
         Q_ASSERT( instance && "Plugin returned null when requesting a new instance." );
@@ -138,12 +127,12 @@ QList<PositionProviderPlugin *> PluginManager::createPositionProviderPlugins() c
 QList<RunnerPlugin *> PluginManager::runnerPlugins() const
 {
     d->loadPlugins();
-    return d->m_runnerPlugins.values();
+    return d->m_runnerPlugins;
 }
 
 /** Append obj to the given plugins list if it inherits both T and U */
 template<class T, class U>
-bool appendPlugin( QObject * obj, QPluginLoader* &loader, QMap<QPluginLoader*,T*> &plugins )
+bool appendPlugin( QObject * obj, QPluginLoader* &loader, QList<T*> &plugins )
 {
     if ( qobject_cast<T*>( obj ) && qobject_cast<U*>( obj ) ) {
         Q_ASSERT( obj->metaObject()->superClass() ); // all our plugins have a super class
@@ -151,7 +140,7 @@ bool appendPlugin( QObject * obj, QPluginLoader* &loader, QMap<QPluginLoader*,T*
                 << "plugin loaded from" << loader->fileName();
         T* plugin = qobject_cast<T*>( obj );
         Q_ASSERT( plugin ); // checked above
-        plugins[loader] = plugin;
+        plugins << plugin;
         return true;
     }
 
