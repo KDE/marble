@@ -48,7 +48,6 @@ public:
     void append( const QVariant& value );
 
     virtual const char* nodeType() const;
-    virtual EnumGeometryId geometryId() const;
     virtual void pack( QDataStream& stream ) const;
     virtual void unpack( QDataStream& stream );
 

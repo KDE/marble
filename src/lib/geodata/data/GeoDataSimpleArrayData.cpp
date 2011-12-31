@@ -69,11 +69,6 @@ const char* GeoDataSimpleArrayData::nodeType() const
     return GeoDataTypes::GeoDataSimpleArrayDataType;
 }
 
-EnumGeometryId GeoDataSimpleArrayData::geometryId() const
-{
-    return GeoDataSimpleArrayDataId;
-}
-
 void GeoDataSimpleArrayData::pack( QDataStream& stream ) const
 {
     GeoDataObject::pack( stream );
