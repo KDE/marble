@@ -34,6 +34,11 @@ GeoNode* GPXhrTagHandler::parse(GeoParser& parser) const
     {
         GeoDataSimpleArrayData* arrayData = parentItem.nodeAs<GeoDataTrack>()
                         ->extendedData().simpleArrayData( "heartrate" );
+        if (!arrayData) {
+            arrayData = new GeoDataSimpleArrayData();
+            QString name = parser.attribute( "name" ).trimmed();
+            parentItem.nodeAs<GeoDataTrack>()->extendedData().setSimpleArrayData( "heartrate", arrayData );
+        }
         QVariant value( parser.readElementText().toInt() );
         arrayData->append( value );
 #ifdef DEBUG_TAGS
