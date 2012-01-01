@@ -600,16 +600,15 @@ GeoDataStyle* GeoDataFeature::style() const
         if ( s_defaultStyleInitialized == false )
             initializeDefaultStyles();
 
-        if ( d->m_visualCategory != None )
+        if ( d->m_visualCategory != None
+             && s_defaultStyle[ d->m_visualCategory] )
         {
             return s_defaultStyle[ d->m_visualCategory ];
         }
         else
         {
-            // This should not happen
-            mDebug() << "No Style got assigned!";
-            return new GeoDataStyle( QPixmap(), 
-                                     QFont( "Sans Serif",  8, 50, false ), QColor( Qt::black ) );
+            qWarning() << "No Style got assigned for " << d->m_visualCategory << ", using default! ";
+            return s_defaultStyle[ GeoDataFeature::Default];
         }
     }
 }
