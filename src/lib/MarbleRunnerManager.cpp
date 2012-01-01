@@ -292,7 +292,7 @@ void MarbleRunnerManagerPrivate::addReverseGeocodingResult( const GeoDataCoordin
     }
 }
 
-QString &MarbleRunnerManager::searchReverseGeocoding( const GeoDataCoordinates &coordinates ) {
+QString MarbleRunnerManager::searchReverseGeocoding( const GeoDataCoordinates &coordinates ) {
     QEventLoop localEventLoop;
     QTimer watchdog;
     watchdog.setSingleShot(true);
