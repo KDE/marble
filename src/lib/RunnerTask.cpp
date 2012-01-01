@@ -39,7 +39,7 @@ void RunnerTask::run()
     if( watchdog.isActive() ) {
         watchdog.stop(); // completed within timeout
     } else {
-        qWarning() << "Timeout reached while waiting for result. Killing the runner.";
+        mDebug() << "Timeout reached while waiting for result. Killing the runner.";
     }
 
     runner()->deleteLater();
