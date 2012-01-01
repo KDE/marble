@@ -85,7 +85,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
     }
     else if ( parentItem.represents( osmTag_node ) ) //POI
     {
-        GeoDataFeature::GeoDataVisualCategory poiCategory = OsmGlobals::visualCategories().value( key + "=" + value );
+        GeoDataFeature::GeoDataVisualCategory poiCategory = GeoDataFeature::OsmVisualCategory( key + "=" + value );
 
         //Placemark is an accepted POI
         if ( poiCategory )
@@ -101,7 +101,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
     {
         GeoDataFeature::GeoDataVisualCategory category;
 
-        if ( ( category = OsmGlobals::visualCategories().value( key + "=" + value ) ) )
+        if ( ( category = GeoDataFeature::OsmVisualCategory( key + "=" + value ) ) )
         {
             if( placemark->visualCategory() != GeoDataFeature::Default 
              && placemark->visualCategory() != GeoDataFeature::Building )
@@ -120,7 +120,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
                 placemark->setVisible( true );
             }
         }
-        else if ( ( category = OsmGlobals::visualCategories().value( key ) ) )
+        else if ( ( category = GeoDataFeature::OsmVisualCategory( key ) ) )
         {
             if( placemark->visualCategory() != GeoDataFeature::Default )
             {

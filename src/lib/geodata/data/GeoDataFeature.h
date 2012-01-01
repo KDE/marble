@@ -281,6 +281,11 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     };
 
     /**
+     * @brief  Convenience categorization of placemarks for Osm key=value pairs
+     */
+    static GeoDataVisualCategory OsmVisualCategory(const QString &keyValue );
+
+    /**
      * @brief The name of the feature
      *
      * The name of the feature should be a short string. It is often
@@ -491,6 +496,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     virtual void detach();
  private:
     static void initializeDefaultStyles();
+    static void initializeOsmVisualCategories();
 
  protected:
     // the d-pointer needs to be protected to be accessible from derived classes
@@ -505,6 +511,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
     static GeoDataStyle* s_defaultStyle[GeoDataFeature::LastIndex];
     static bool          s_defaultStyleInitialized;
+
+    static QMap<QString, GeoDataVisualCategory> s_visualCategories;
 };
 
 }

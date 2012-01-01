@@ -36,7 +36,7 @@ QFont GeoDataFeature::s_defaultFont = QFont("Sans Serif");
 
 bool GeoDataFeature::s_defaultStyleInitialized = false;
 GeoDataStyle* GeoDataFeature::s_defaultStyle[GeoDataFeature::LastIndex];
-
+QMap<QString, GeoDataFeature::GeoDataVisualCategory> GeoDataFeature::s_visualCategories;
 
 GeoDataFeature::GeoDataFeature()
     :d( new GeoDataFeaturePrivate() )
@@ -761,6 +761,158 @@ void GeoDataFeature::unpack( QDataStream& stream )
     stream >> d->m_role;
     stream >> d->m_popularity;
     stream >> d->m_popularityIndex;
+}
+
+GeoDataFeature::GeoDataVisualCategory GeoDataFeature::OsmVisualCategory(const QString &keyValue )
+{
+    if( s_visualCategories.isEmpty() ) {
+        initializeOsmVisualCategories();
+    }
+    return s_visualCategories.value( keyValue );
+}
+
+void GeoDataFeature::initializeOsmVisualCategories()
+{
+    s_visualCategories["amenity=restaurant"]         = GeoDataFeature::FoodRestaurant;
+    s_visualCategories["amenity=fast_food"]          = GeoDataFeature::FoodFastFood;
+    s_visualCategories["amenity=pub"]                = GeoDataFeature::FoodPub;
+    s_visualCategories["amenity=bar"]                = GeoDataFeature::FoodBar;
+    s_visualCategories["amenity=cafe"]               = GeoDataFeature::FoodCafe;
+    s_visualCategories["amenity=biergarten"]         = GeoDataFeature::FoodBiergarten;
+    s_visualCategories["amenity=school"]             = GeoDataFeature::EducationSchool;
+    s_visualCategories["amenity=college"]            = GeoDataFeature::EducationCollege;
+    s_visualCategories["amenity=library"]            = GeoDataFeature::AmenityLibrary;
+    s_visualCategories["amenity=university"]         = GeoDataFeature::EducationUniversity;
+    s_visualCategories["amenity=bus_station"]        = GeoDataFeature::TransportBusStation;
+    s_visualCategories["amenity=car_sharing"]        = GeoDataFeature::TransportCarShare;
+    s_visualCategories["amenity=fuel"]               = GeoDataFeature::TransportFuel;
+    s_visualCategories["amenity=parking"]            = GeoDataFeature::TransportParking;
+    s_visualCategories["amenity=bank"]               = GeoDataFeature::MoneyBank;
+    s_visualCategories["amenity=pharmacy"]           = GeoDataFeature::HealthPharmacy;
+    s_visualCategories["amenity=hospital"]           = GeoDataFeature::HealthHospital;
+    s_visualCategories["amenity=doctors"]            = GeoDataFeature::HealthDoctors;
+    s_visualCategories["amenity=cinema"]             = GeoDataFeature::TouristCinema;
+    s_visualCategories["amenity=theatre"]            = GeoDataFeature::TouristTheatre;
+    s_visualCategories["amenity=place_of_worship"]   = GeoDataFeature::ReligionPlaceOfWorship;
+
+    //FIXME: alcohol != beverages
+    s_visualCategories["shop=alcohol"]               = GeoDataFeature::ShoppingBeverages;
+    s_visualCategories["shop=hifi"]                  = GeoDataFeature::ShoppingHifi;
+    s_visualCategories["shop=supermarket"]           = GeoDataFeature::ShoppingSupermarket;
+
+    s_visualCategories["religion"]                   = GeoDataFeature::ReligionPlaceOfWorship;
+    s_visualCategories["religion=bahai"]             = GeoDataFeature::ReligionBahai;
+    s_visualCategories["religion=buddhist"]          = GeoDataFeature::ReligionBuddhist;
+    s_visualCategories["religion=christian"]         = GeoDataFeature::ReligionChristian;
+    s_visualCategories["religion=hindu"]             = GeoDataFeature::ReligionHindu;
+    s_visualCategories["religion=jain"]              = GeoDataFeature::ReligionJain;
+    s_visualCategories["religion=jewish"]            = GeoDataFeature::ReligionJewish;
+    s_visualCategories["religion=shinto"]            = GeoDataFeature::ReligionShinto;
+    s_visualCategories["religion=sikh"]              = GeoDataFeature::ReligionSikh;
+
+    s_visualCategories["tourism=attraction"]         = GeoDataFeature::TouristAttraction;
+    s_visualCategories["tourism=camp_site"]          = GeoDataFeature::AccomodationCamping;
+    s_visualCategories["tourism=hostel"]             = GeoDataFeature::AccomodationHostel;
+    s_visualCategories["tourism=hotel"]              = GeoDataFeature::AccomodationHotel;
+    s_visualCategories["tourism=motel"]              = GeoDataFeature::AccomodationMotel;
+    s_visualCategories["tourism=museum"]             = GeoDataFeature::TouristMuseum;
+    s_visualCategories["tourism=theme_park"]         = GeoDataFeature::TouristThemePark;
+    s_visualCategories["tourism=viewpoint"]          = GeoDataFeature::TouristViewPoint;
+    s_visualCategories["tourism=zoo"]                = GeoDataFeature::TouristZoo;
+
+    s_visualCategories["historic=castle"]            = GeoDataFeature::TouristCastle;
+    s_visualCategories["historic=fort"]              = GeoDataFeature::TouristCastle;
+    s_visualCategories["historic=monument"]          = GeoDataFeature::TouristMonument;
+    s_visualCategories["historic=ruins"]             = GeoDataFeature::TouristRuin;
+
+
+    s_visualCategories["highway"]                    = GeoDataFeature::HighwayUnknown;
+    s_visualCategories["highway=steps"]              = GeoDataFeature::HighwaySteps;
+    s_visualCategories["highway=footway"]            = GeoDataFeature::HighwayPedestrian;
+    s_visualCategories["highway=path"]               = GeoDataFeature::HighwayPath;
+    s_visualCategories["highway=track"]              = GeoDataFeature::HighwayTrack;
+    s_visualCategories["highway=pedestrian"]         = GeoDataFeature::HighwayPedestrian;
+    s_visualCategories["highway=service"]            = GeoDataFeature::HighwayService;
+    s_visualCategories["highway=living_street"]      = GeoDataFeature::HighwayRoad;
+    s_visualCategories["highway=unclassified"]       = GeoDataFeature::HighwayRoad;
+    s_visualCategories["highway=residential"]        = GeoDataFeature::HighwayRoad;
+    s_visualCategories["highway=tertiary_link"]      = GeoDataFeature::HighwayTertiaryLink;
+    s_visualCategories["highway=tertiary"]           = GeoDataFeature::HighwayTertiary;
+    s_visualCategories["highway=secondary_link"]     = GeoDataFeature::HighwaySecondaryLink;
+    s_visualCategories["highway=secondary"]          = GeoDataFeature::HighwaySecondary;
+    s_visualCategories["highway=primary_link"]       = GeoDataFeature::HighwayPrimaryLink;
+    s_visualCategories["highway=primary"]            = GeoDataFeature::HighwayPrimary;
+    s_visualCategories["highway=trunk_link"]         = GeoDataFeature::HighwayTrunkLink;
+    s_visualCategories["highway=trunk"]              = GeoDataFeature::HighwayTrunk;
+    s_visualCategories["highway=motorway_link"]      = GeoDataFeature::HighwayMotorwayLink;
+    s_visualCategories["highway=motorway"]           = GeoDataFeature::HighwayMotorway;
+    s_visualCategories["highway=bus_stop"]           = GeoDataFeature::TransportBusStop;
+
+
+
+    s_visualCategories["waterway=stream"]            = GeoDataFeature::NaturalWater;
+    s_visualCategories["waterway=river"]             = GeoDataFeature::NaturalWater;
+    s_visualCategories["waterway=riverbank"]         = GeoDataFeature::NaturalWater;
+    s_visualCategories["waterway=canal"]             = GeoDataFeature::NaturalWater;
+
+    s_visualCategories["natural=wood"]               = GeoDataFeature::NaturalWood;
+
+    s_visualCategories["landuse=forest"]             = GeoDataFeature::NaturalWood;
+    s_visualCategories["landuse=allotments"]         = GeoDataFeature::LanduseAllotments;
+    s_visualCategories["landuse=basin"]              = GeoDataFeature::LanduseBasin;
+    s_visualCategories["landuse=brownfield"]         = GeoDataFeature::LanduseConstruction;
+    s_visualCategories["landuse=cemetery"]           = GeoDataFeature::LanduseCemetery;
+    s_visualCategories["landuse=commercial"]         = GeoDataFeature::LanduseCommercial;
+    s_visualCategories["landuse=construction"]       = GeoDataFeature::LanduseConstruction;
+    s_visualCategories["landuse=farm"]               = GeoDataFeature::LanduseFarmland;
+    s_visualCategories["landuse=farmland"]           = GeoDataFeature::LanduseFarmland;
+    s_visualCategories["landuse=farmyard"]           = GeoDataFeature::LanduseFarmyard;
+    s_visualCategories["landuse=garages"]            = GeoDataFeature::LanduseGarages;
+    s_visualCategories["landuse=greenfield"]         = GeoDataFeature::LanduseConstruction;
+    s_visualCategories["landuse=industrial"]         = GeoDataFeature::LanduseIndustrial;
+    s_visualCategories["landuse=landfill"]           = GeoDataFeature::LanduseLandfill;
+    s_visualCategories["landuse=meadow"]             = GeoDataFeature::LanduseMeadow;
+    s_visualCategories["landuse=military"]           = GeoDataFeature::LanduseMilitary;
+    s_visualCategories["landuse=orchard"]            = GeoDataFeature::LanduseFarmland;
+    s_visualCategories["landuse=quarry"]             = GeoDataFeature::LanduseQuarry;
+    s_visualCategories["landuse=railway"]            = GeoDataFeature::LanduseRailway;
+    s_visualCategories["landuse=reservoir"]          = GeoDataFeature::LanduseReservoir;
+    s_visualCategories["landuse=residential"]        = GeoDataFeature::LanduseResidential;
+    s_visualCategories["landuse=retail"]             = GeoDataFeature::LanduseRetail;
+
+    s_visualCategories["leisure=park"]               = GeoDataFeature::LeisurePark;
+
+    s_visualCategories["railway=rail"]               = GeoDataFeature::RailwayRail;
+    s_visualCategories["railway=tram"]               = GeoDataFeature::RailwayTram;
+    s_visualCategories["railway=light_rail"]         = GeoDataFeature::RailwayLightRail;
+    s_visualCategories["railway=abandoned"]          = GeoDataFeature::RailwayAbandoned;
+    s_visualCategories["railway=disused"]            = GeoDataFeature::RailwayAbandoned;
+    s_visualCategories["railway=subway"]             = GeoDataFeature::RailwaySubway;
+    s_visualCategories["railway=miniature"]          = GeoDataFeature::RailwayMiniature;
+    s_visualCategories["railway=construction"]       = GeoDataFeature::RailwayConstruction;
+    s_visualCategories["railway=monorail"]           = GeoDataFeature::RailwayMonorail;
+    s_visualCategories["railway=funicular"]          = GeoDataFeature::RailwayFunicular;
+    s_visualCategories["railway=station"]            = GeoDataFeature::TransportTrainStation;
+
+    s_visualCategories["transport=aerodrome"]        = GeoDataFeature::TransportAerodrome;
+    s_visualCategories["transport=airpor_terminal"]  = GeoDataFeature::TransportAirportTerminal;
+    s_visualCategories["transport=bus_station"]      = GeoDataFeature::TransportBusStation;
+    s_visualCategories["transport=bus_stop"]         = GeoDataFeature::TransportBusStop;
+    s_visualCategories["transport=car_share"]        = GeoDataFeature::TransportCarShare;
+    s_visualCategories["transport=fuel"]             = GeoDataFeature::TransportFuel;
+    s_visualCategories["transport=parking"]          = GeoDataFeature::TransportParking;
+    s_visualCategories["transport=rental_bicycle"]   = GeoDataFeature::TransportRentalBicycle;
+    s_visualCategories["transport=rental_car"]       = GeoDataFeature::TransportRentalCar;
+    s_visualCategories["transport=taxi_rank"]        = GeoDataFeature::TransportTaxiRank;
+    s_visualCategories["transport=train_station"]    = GeoDataFeature::TransportTrainStation;
+    s_visualCategories["transport=tram_stop"]        = GeoDataFeature::TransportTramStop;
+
+    s_visualCategories["place=city"]                = GeoDataFeature::LargeCity;
+    s_visualCategories["place=hamlet"]              = GeoDataFeature::SmallCity;
+    s_visualCategories["place=locality"]            = GeoDataFeature::SmallCity;
+    s_visualCategories["place=town"]                = GeoDataFeature::BigCity;
+    s_visualCategories["place=village"]             = GeoDataFeature::MediumCity;
+
 }
 
 }

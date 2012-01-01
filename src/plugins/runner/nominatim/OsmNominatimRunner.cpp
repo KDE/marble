@@ -200,6 +200,8 @@ void OsmNominatimRunner::handleSearchResult( QNetworkReply* reply )
             placemark->setName( placemarkName );
             placemark->setDescription(description);
             placemark->setCoordinate(lon.toDouble(), lat.toDouble(), 0, GeoDataPoint::Degree );
+            GeoDataFeature::GeoDataVisualCategory category = GeoDataFeature::OsmVisualCategory( key + "=" + value );
+            placemark->setVisualCategory( category );
             placemarks << placemark;
         }
     }
