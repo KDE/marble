@@ -51,19 +51,14 @@ void PlacemarkPainter::drawPlacemarks( QPainter* painter,
                                        const QItemSelection &selection, 
                                        ViewportParams *viewport )
 {
-    QVector<VisiblePlacemark*>::const_iterator visit = visiblePlacemarks.constEnd();
-    QVector<VisiblePlacemark*>::const_iterator itEnd = visiblePlacemarks.constBegin();
-
     int imageWidth = viewport->width();
 
-    while ( visit != itEnd ) {
-	--visit;
-        VisiblePlacemark *mark = *visit;
-
+    foreach( VisiblePlacemark *mark, visiblePlacemarks ) {
 	if ( mark->labelPixmap().isNull() ) {
             bool isSelected = false;
             foreach ( QModelIndex index, selection.indexes() ) {
                 const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+                Q_ASSERT(placemark);
                 if (mark->placemark() == placemark ) {
                     isSelected = true;
                     break;
@@ -166,6 +161,7 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSe
     QPixmap labelPixmap;
 
     const GeoDataPlacemark *placemark = mark->placemark();
+    Q_ASSERT(placemark);
     const GeoDataStyle* style = placemark->style();
 
     QString labelName = mark->name();

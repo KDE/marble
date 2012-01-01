@@ -267,13 +267,7 @@ QVector<const GeoDataPlacemark*> PlacemarkLayout::whichPlacemarkAt( const QPoint
 
     QVector<const GeoDataPlacemark*> ret;
 
-    QVector<VisiblePlacemark*>::ConstIterator  it;
-    QVector<VisiblePlacemark*>::ConstIterator  itEnd = m_paintOrder.constEnd();
-    for ( it = m_paintOrder.constBegin();
-          it != itEnd; ++it )
-    {
-        const VisiblePlacemark  *mark = *it; // no cast
-
+    foreach( VisiblePlacemark* mark, m_paintOrder ) {
         if ( mark->labelRect().contains( curpos )
              || QRect( mark->symbolPosition(), mark->symbolPixmap().size() ).contains( curpos ) ) {
             ret.append( mark->placemark() );
@@ -499,7 +493,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
         const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
-
+        Q_ASSERT(placemark);
         bool ok;
         GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
 
@@ -517,16 +511,13 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         // ----------------------------------------------------------------
         // End of checks. Here the actual layouting starts.
 
-        // Find the corresponding visible placemark
-        VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
-
-        const GeoDataStyle* style = placemark->style();
 
         // Choose Section
         const QVector<VisiblePlacemark*> currentsec = rowsection.at( y / m_maxLabelHeight );
 
         // Find out whether the area around the placemark is covered already.
         // If there's not enough space free don't add a VisiblePlacemark here.
+        const GeoDataStyle* style = placemark->style();
 
         QRect labelRect = roomForLabel( style, currentsec, x, y, placemark->name() );
         if ( labelRect.isNull() )
@@ -538,11 +529,13 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         ++labelnum;
         if ( labelnum >= placemarksOnScreenLimit() )
             break;
+
+        // Find the corresponding visible placemark
+        VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
         if ( !mark ) {
             // If there is no visible placemark yet for this index,
             // create a new one...
             mark = new VisiblePlacemark( placemark );
-
             m_visiblePlacemarks.insert( placemark, mark );
         }
 
@@ -603,7 +596,6 @@ bool PlacemarkLayout::render( GeoPainter *painter,
 
         if ( !placemark->isVisible() )
         {
-            delete m_visiblePlacemarks.take( placemark );
             continue;
         }
 
