@@ -59,8 +59,7 @@ void OsmNominatimRunner::returnNoReverseGeocodingResult()
 void OsmNominatimRunner::search( const QString &searchTerm )
 {    
     QString base = "http://nominatim.openstreetmap.org/search?";
-    // @todo: Alternative URI with addressdetails=1 could be used for shorther placemark name
-    QString query = "q=%1&format=xml&addressdetails=0&accept-language=%2";
+    QString query = "q=%1&format=xml&addressdetails=1&accept-language=%2";
     QString url = QString(base + query).arg(searchTerm).arg(MarbleLocale::languageCode());
 
     m_searchRequest.setUrl(QUrl(url));
@@ -125,17 +124,82 @@ void OsmNominatimRunner::handleSearchResult( QNetworkReply* reply )
     QDomElement root = xml.documentElement();
     QDomNodeList places = root.elementsByTagName("place");
     for (int i=0; i<places.size(); ++i) {
-        QDomNamedNodeMap attributes = places.at(i).attributes();
+        QDomNode place = places.at(i);
+        QDomNamedNodeMap attributes = place.attributes();
         QString lon = attributes.namedItem("lon").nodeValue();
         QString lat = attributes.namedItem("lat").nodeValue();
         QString desc = attributes.namedItem("display_name").nodeValue();
+        QString key = attributes.namedItem("class").nodeValue();
+        QString value = attributes.namedItem("type").nodeValue();
+
+        QString name = place.firstChildElement(value).text();
+        QString road = place.firstChildElement("road").text();
+
+        QString city = place.firstChildElement("city").text();
+        if( city.isEmpty() ) {
+            city = place.firstChildElement("town").text();
+            if( city.isEmpty() ) {
+                city = place.firstChildElement("village").text();
+            } if( city.isEmpty() ) {
+                city = place.firstChildElement("hamlet").text();
+            }
+        }
+
+        QString administrative = place.firstChildElement("county").text();
+        if( administrative.isEmpty() ) {
+            administrative = place.firstChildElement("region").text();
+            if( administrative.isEmpty() ) {
+                administrative = place.firstChildElement("state").text();
+            }
+        }
+
+        QString country = place.firstChildElement("country").text();
+        qDebug() << "place " << name << ", " << road << ", " << city << ", " << administrative << ", " << country;
+
+        QString description;
+        for (int i=0; i<place.childNodes().size(); ++i) {
+            QDomElement item = place.childNodes().at(i).toElement();
+            description += item.nodeName() + ": " + item.text() + "\n";
+        }
+        description += "Category: " + key + "/" + value;
 
         if (!lon.isEmpty() && !lat.isEmpty() && !desc.isEmpty()) {
+            QString placemarkName;
             GeoDataPlacemark* placemark = new GeoDataPlacemark;
-            placemark->setName(desc);
-            placemark->setDescription(desc);
-            placemark->setCoordinate(lon.toDouble() * DEG2RAD, lat.toDouble() * DEG2RAD);
-            placemark->setVisualCategory( category() );
+            // try to provide 2 fields
+            if (!name.isEmpty()) {
+                placemarkName = name;
+            }
+            if (!road.isEmpty() && road != placemarkName ) {
+                if( !placemarkName.isEmpty() ) {
+                    placemarkName += ", ";
+                }
+                placemarkName += road;
+            }
+            if (!city.isEmpty() && !placemarkName.contains(",") && city != placemarkName) {
+                if( !placemarkName.isEmpty() ) {
+                    placemarkName += ", ";
+                }
+                placemarkName += city;
+            }
+            if (!administrative.isEmpty()&& !placemarkName.contains(",") && administrative != placemarkName) {
+                if( !placemarkName.isEmpty() ) {
+                    placemarkName += ", ";
+                }
+                placemarkName += administrative;
+            }
+            if (!country.isEmpty()&& !placemarkName.contains(",") && country != placemarkName) {
+                if( !placemarkName.isEmpty() ) {
+                    placemarkName += ", ";
+                }
+                placemarkName += country;
+            }
+            if (placemarkName.isEmpty()) {
+                placemarkName = desc;
+            }
+            placemark->setName( placemarkName );
+            placemark->setDescription(description);
+            placemark->setCoordinate(lon.toDouble(), lat.toDouble(), 0, GeoDataPoint::Degree );
             placemarks << placemark;
         }
     }
