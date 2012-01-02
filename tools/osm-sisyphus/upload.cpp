@@ -165,7 +165,7 @@ bool Upload::adjustNewstuffFile(const Package &package)
     QDomNode licenseNode = stuff.appendChild(m_xml.createElement("license"));
     licenseNode.appendChild(m_xml.createTextNode("Creative Commons by-SA 2.0"));
 
-    QDomNode summaryNode = stuff.appendChild(m_xml.createElement("license"));
+    QDomNode summaryNode = stuff.appendChild(m_xml.createElement("summary"));
     QString summary = "Requires KDE >= 4.6: Offline Routing in %1, %2";
     summary = summary.arg(package.region.name()).arg(package.region.continent());
     summaryNode.appendChild(m_xml.createTextNode(summary));
