@@ -127,6 +127,8 @@ class PlacemarkLayout : public QObject, public LayerInterface
  private:
     void styleReset();
 
+    QList<const GeoDataPlacemark*> visiblePlacemarks( ViewportParams *viewport );
+
     /**
      * Returns the coordinates at which an icon should be drawn for the @p placemark.
      * @p ok is set to true if the coordinates are valid and should be used for drawing,
