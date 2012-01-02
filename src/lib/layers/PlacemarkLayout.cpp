@@ -392,47 +392,8 @@ qreal PlacemarkLayout::zValue() const
     return 2.0;
 }
 
-bool PlacemarkLayout::render( GeoPainter *painter,
-                              ViewportParams *viewport,
-                              const QString &renderPos,
-                              GeoSceneLayer *layer )
+QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( ViewportParams *viewport )
 {
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
-
-    if ( !m_showPlaces && !m_showCities && !m_showTerrain && !m_showOtherPlaces &&
-         !m_showLandingSites && !m_showCraters && !m_showMaria )
-        return true;
-
-    if ( m_placemarkModel.rowCount() <= 0 )
-        return true;
-
-    // const int imgwidth  = viewport->width();
-    const int imgheight = viewport->height();
-
-    if ( m_styleResetRequested ) {
-        styleReset();
-    }
-
-    if ( m_maxLabelHeight == 0 ) {
-        return true;
-    }
-    const int   secnumber         = imgheight / m_maxLabelHeight + 1;
-
-    //Quaternion  inversePlanetAxis = viewParams->m_planetAxis.inverse();
-
-    QVector< QVector< VisiblePlacemark* > >  rowsection;
-    for ( int i = 0; i < secnumber; i++)
-        rowsection.append( QVector<VisiblePlacemark*>( ) );
-
-    m_paintOrder.clear();
-
-    int labelnum = 0;
-    qreal x = 0;
-    qreal y = 0;
-
-    GeoDataLatLonAltBox latLonAltBox = viewport->viewLatLonAltBox();
-
     int popularity = 0;
     while ( m_weightfilter.at( popularity ) > viewport->radius() ) {
         ++popularity;
@@ -448,7 +409,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
 
     QRect rect;
     qreal north, south, east, west;
-    latLonAltBox.boundaries(north, south, east, west);
+    viewport->viewLatLonAltBox().boundaries(north, south, east, west);
     TileId key;
 
     key = placemarkToTileId( GeoDataCoordinates(west, north, 0), popularity);
@@ -491,7 +452,49 @@ bool PlacemarkLayout::render( GeoPainter *painter,
             }
         }
     }
+    return placemarkList;
+}
 
+bool PlacemarkLayout::render( GeoPainter *painter,
+                              ViewportParams *viewport,
+                              const QString &renderPos,
+                              GeoSceneLayer *layer )
+{
+    Q_UNUSED( renderPos );
+    Q_UNUSED( layer );
+
+    if ( !m_showPlaces && !m_showCities && !m_showTerrain && !m_showOtherPlaces &&
+         !m_showLandingSites && !m_showCraters && !m_showMaria )
+        return true;
+
+    if ( m_placemarkModel.rowCount() <= 0 )
+        return true;
+
+    // const int imgwidth  = viewport->width();
+    const int imgheight = viewport->height();
+
+    if ( m_styleResetRequested ) {
+        styleReset();
+    }
+
+    if ( m_maxLabelHeight == 0 ) {
+        return true;
+    }
+    const int   secnumber         = imgheight / m_maxLabelHeight + 1;
+
+    //Quaternion  inversePlanetAxis = viewParams->m_planetAxis.inverse();
+
+    QVector< QVector< VisiblePlacemark* > >  rowsection;
+    for ( int i = 0; i < secnumber; i++)
+        rowsection.append( QVector<VisiblePlacemark*>( ) );
+
+    m_paintOrder.clear();
+
+    int labelnum = 0;
+    qreal x = 0;
+    qreal y = 0;
+
+    QList<const GeoDataPlacemark*> placemarkList = visiblePlacemarks( viewport );
 
     /**
      * First handle the selected placemarks, as they have the highest priority.
@@ -510,7 +513,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
             continue;
         }
 
-        if ( !latLonAltBox.contains( coordinates ) ||
+        if ( !viewport->viewLatLonAltBox().contains( coordinates ) ||
              ! viewport->screenCoordinates( coordinates, x, y ))
             {
                 delete m_visiblePlacemarks.take( placemark );
@@ -596,7 +599,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
             break;
         }
 
-        if ( !latLonAltBox.contains( coordinates ) ||
+        if ( !viewport->viewLatLonAltBox().contains( coordinates ) ||
              ! viewport->screenCoordinates( coordinates, x, y ))
             {
                 delete m_visiblePlacemarks.take( placemark );
