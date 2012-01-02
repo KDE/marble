@@ -125,14 +125,15 @@ GeoDataCoordinates GeoDataTrack::coordinatesAt( const QDateTime &when ) const
         return GeoDataCoordinates();
     }
 
-    QMap<QDateTime, GeoDataCoordinates> pointMap;
+    typedef QMap<QDateTime, GeoDataCoordinates> PointMap;
+    PointMap pointMap;
     for ( int i = 0; i < qMin( d->m_when.size(), d->m_coordinates.size() ); ++i) {
         if ( d->m_when.at( i ).isValid() ) {
             pointMap[ d->m_when.at( i ) ] = d->m_coordinates.at( i );
         }
     }
 
-    QMap<QDateTime, GeoDataCoordinates>::const_iterator nextEntry = pointMap.upperBound( when );
+    QMap<QDateTime, GeoDataCoordinates>::const_iterator nextEntry = const_cast<const PointMap&>(pointMap).upperBound( when );
 
     // No tracked point happened before "when"
     if ( nextEntry == pointMap.constBegin() ) {
