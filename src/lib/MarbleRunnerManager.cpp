@@ -124,7 +124,7 @@ QList<RunnerPlugin*> MarbleRunnerManagerPrivate::plugins( RunnerPlugin::Capabili
 void MarbleRunnerManagerPrivate::cleanupSearchTask( RunnerTask* task )
 {
     m_searchTasks.removeAll( task );
-    mDebug() << "removing task " << m_searchTasks.size() << " " << (int)task;
+    mDebug() << "removing task " << m_searchTasks.size() << " " << (long)task;
     if ( m_searchTasks.isEmpty() ) {
         emit q->searchFinished( m_lastSearchTerm );
         emit q->placemarkSearchFinished();
@@ -134,7 +134,7 @@ void MarbleRunnerManagerPrivate::cleanupSearchTask( RunnerTask* task )
 void MarbleRunnerManagerPrivate::cleanupReverseGeocodingTask( RunnerTask* task )
 {
     m_reverseTasks.removeAll( task );
-    mDebug() << "removing task " << m_reverseTasks.size() << " " << (int)task;
+    mDebug() << "removing task " << m_reverseTasks.size() << " " << (long)task;
     if ( m_reverseTasks.isEmpty() ) {
         emit q->reverseGeocodingFinished();
     }
@@ -143,7 +143,7 @@ void MarbleRunnerManagerPrivate::cleanupReverseGeocodingTask( RunnerTask* task )
 void MarbleRunnerManagerPrivate::cleanupRoutingTask( RunnerTask* task )
 {
     m_routingTasks.removeAll( task );
-    mDebug() << "removing task " << m_routingTasks.size() << " " << (int)task;
+    mDebug() << "removing task " << m_routingTasks.size() << " " << (long)task;
     if ( m_routingTasks.isEmpty() ) {
         if ( m_routingResult.isEmpty() ) {
             emit q->routeRetrieved( 0 );
@@ -156,7 +156,7 @@ void MarbleRunnerManagerPrivate::cleanupRoutingTask( RunnerTask* task )
 void MarbleRunnerManagerPrivate::cleanupParsingTask( RunnerTask* task )
 {
     m_parsingTasks.removeAll( task );
-    mDebug() << "removing task " << m_parsingTasks.size() << " " << (int)task;
+    mDebug() << "removing task " << m_parsingTasks.size() << " " << (long)task;
 
     if ( m_parsingTasks.isEmpty() ) {
         emit q->parsingFinished();
@@ -213,7 +213,7 @@ void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
         SearchTask* task = new SearchTask( runner, searchTerm );
         connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupSearchTask( RunnerTask* ) ) );
         d->m_searchTasks << task;
-        mDebug() << "search task " << plugin->nameId() << " " << (int)task;
+        mDebug() << "search task " << plugin->nameId() << " " << (long)task;
         QThreadPool::globalInstance()->start( task );
     }
 
@@ -272,7 +272,7 @@ void MarbleRunnerManager::reverseGeocoding( const GeoDataCoordinates &coordinate
         runner->setModel( d->m_marbleModel );
         ReverseGeocodingTask* task = new ReverseGeocodingTask( runner, coordinates );
         connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupReverseGeocodingTask(RunnerTask*) ) );
-        mDebug() << "reverse task " << plugin->nameId() << " " << (int)task;
+        mDebug() << "reverse task " << plugin->nameId() << " " << (long)task;
         d->m_reverseTasks << task;
         QThreadPool::globalInstance()->start( task );
     }
@@ -327,7 +327,7 @@ void MarbleRunnerManager::retrieveRoute( const RouteRequest *request )
         runner->setModel( d->m_marbleModel );
         RoutingTask* task = new RoutingTask( runner, request );
         connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupRoutingTask( RunnerTask* ) ) );
-        mDebug() << "route task " << plugin->nameId() << " " << (int)task;
+        mDebug() << "route task " << plugin->nameId() << " " << (long)task;
         d->m_routingTasks << task;
         QThreadPool::globalInstance()->start( task );
     }
@@ -371,7 +371,7 @@ void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role 
                  this, SLOT( addParsingResult( GeoDataDocument*, QString )) );
         ParsingTask *task = new ParsingTask( runner, fileName, role );
         connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupParsingTask(RunnerTask*) ) );
-        mDebug() << "parse task " << plugin->nameId() << " " << (int)task;
+        mDebug() << "parse task " << plugin->nameId() << " " << (long)task;
         d->m_parsingTasks << task;
         QThreadPool::globalInstance()->start( task );
     }
