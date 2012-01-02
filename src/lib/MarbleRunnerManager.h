@@ -70,7 +70,7 @@ public:
       * @see reverseGeocodingFinished signal indicates all runners are finished.
       */
     void reverseGeocoding( const GeoDataCoordinates &coordinates );
-    QString &searchReverseGeocoding( const GeoDataCoordinates &coordinates );
+    QString searchReverseGeocoding( const GeoDataCoordinates &coordinates );
 
     /**
       * Download routes traversing the stopover points in the given route request
