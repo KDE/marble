@@ -179,7 +179,7 @@ bool Upload::adjustNewstuffFile(const Package &package)
     QDomNode previewNode = stuff.appendChild(m_xml.createElement("preview"));
     QString preview = "http://files.kde.org/marble/monav/previews/%1-preview.png";
     preview = preview.arg(package.region.id());
-    previewNode.appendChild(m_xml.createTextNode(summary));
+    previewNode.appendChild(m_xml.createTextNode(preview));
 
     QDomNode payloadNode = stuff.appendChild(m_xml.createElement("payload"));
     payloadNode.toElement().setAttribute("lang", "en");
