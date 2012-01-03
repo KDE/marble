@@ -203,7 +203,8 @@ bool Job::search()
     arguments << "--payload" << targetFile().fileName();
     arguments << osmFile().absoluteFilePath();
     arguments << searchFile().absoluteFilePath();
-    arguments << monavDir().absoluteFilePath() + "/marble.kml";
+    QFileInfo kmlFile(monavDir().absoluteFilePath() + "/marble.kml");
+    arguments << kmlFile.absoluteFilePath();
     QProcess osmAddresses;
     osmAddresses.start("osm-addresses", arguments);
     osmAddresses.waitForFinished(1000 * 60 * 30); // wait up to 12 hours for osm-addresses to convert the data
@@ -213,7 +214,19 @@ bool Job::search()
             qDebug() << "osm-addresses did not create the .sqlite file";
             changeStatus(Error, "Unknown error when creating the search database");
             return false;
+        } else if (searchFile().size() < 8000) {
+            qDebug() << "The .sqlite database has a suspiciously small size.";
+            changeStatus(Error, "Search database is too small. Too little memory?");
+            return false;
         }
+
+        kmlFile.refresh();
+        if (!kmlFile.exists()) {
+            qDebug() << "File marble.kml has not been generated.";
+            changeStatus(Error, "Failed to generate marble.kml. Too little memory?");
+            return false;
+        }
+
         return true;
     } else {
         qDebug() << "osm-addresses exiting with status " << osmAddresses.exitCode();
