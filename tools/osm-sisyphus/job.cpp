@@ -307,7 +307,7 @@ QFileInfo Job::targetFile()
 
 QFileInfo Job::searchFile()
 {
-    QString const subdir = "data/" + m_region.id() + "/earth/placemarks/" + m_region.path();
+    QString const subdir = "data/" + m_region.id() + "/earth/placemarks/" + QFileInfo(m_region.path()).path();
     m_parameters.base().mkpath(subdir);
     QFileInfo result(m_parameters.base(), subdir + "/" + m_region.id() + ".sqlite");
     return result;
