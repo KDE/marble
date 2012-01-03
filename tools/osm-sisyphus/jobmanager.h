@@ -30,6 +30,8 @@ public:
 
     void setResumeId(const QString &resumeId);
 
+    void setJobParameters(const JobParameters &parameters);
+
 private Q_SLOTS:
     void update();
 
@@ -38,7 +40,7 @@ private:
 
     JobQueue m_queue;
 
-    JobParameters m_parameters;
+    JobParameters m_jobParameters;
 
     QFileInfo m_monavSettings;
 

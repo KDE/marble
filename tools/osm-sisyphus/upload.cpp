@@ -11,7 +11,7 @@
 #include <QtXml/QDomDocument>
 
 Upload::Upload(QObject *parent) :
-    QObject(parent), m_cacheDownloads(false), m_uploadFiles(true)
+    QObject(parent), m_uploadFiles(true)
 {
     // nothing to do
 }
@@ -71,7 +71,7 @@ bool Upload::upload(const Package &package)
 
 void Upload::deleteFile(const QFileInfo &file)
 {
-    if (!m_cacheDownloads) {
+    if (!m_jobParameters.cacheData()) {
         QFile::remove(file.absoluteFilePath());
     }
 }
@@ -258,19 +258,14 @@ Upload &Upload::instance()
     return m_instance;
 }
 
-bool Upload::cacheDownloads() const
-{
-    return m_cacheDownloads;
-}
-
 bool Upload::uploadFiles() const
 {
     return m_uploadFiles;
 }
 
-void Upload::setCacheDownloads(bool arg)
+void Upload::setJobParameters(const JobParameters &parameters)
 {
-    m_cacheDownloads = arg;
+    m_jobParameters = parameters;
 }
 
 void Upload::setUploadFiles(bool arg)

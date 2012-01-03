@@ -21,7 +21,6 @@ JobManager::JobManager(QObject *parent) :
     QObject(parent)
 {   
     QDir temp = QDir(QDir::tempPath());
-    QFileInfo tempDir = QFileInfo(temp, "osm-sisyphus");
 
     m_monavSettings = QFileInfo(temp, "monav_settings.ini");
     QFile settingsFile(m_monavSettings.absoluteFilePath());
@@ -34,8 +33,6 @@ JobManager::JobManager(QObject *parent) :
     settingsStream << "[OSM%20Importer]\nlanguages=name\nspeedProfile=:/speed profiles/motorcar.spp\n\n";
     settingsStream << "[ContractionHierarchies]\nblockSize=12\n";
     settingsFile.close();
-
-    m_parameters.setBase(QDir(tempDir.absoluteFilePath()));
 }
 
 void JobManager::run()
@@ -89,6 +86,11 @@ void JobManager::setResumeId(const QString &resumeId)
     m_resumeId = resumeId;
 }
 
+void JobManager::setJobParameters(const JobParameters &parameters)
+{
+    m_jobParameters = parameters;
+}
+
 void JobManager::update()
 {
     bool resume = m_resumeId.isEmpty();
@@ -104,7 +106,7 @@ void JobManager::update()
 
 void JobManager::addJob(const Region &region)
 {
-    Job* countryJob = new Job(region, m_parameters);
+    Job* countryJob = new Job(region, m_jobParameters);
     /** @todo: Support other transport types */
     countryJob->setTransport("Motorcar");
     countryJob->setProfile("motorcar");

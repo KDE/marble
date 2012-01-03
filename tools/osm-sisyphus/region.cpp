@@ -91,7 +91,7 @@ QString Region::fileSize(const QFileInfo &file)
 {
     qint64 size = file.size();
     if (size < 1000) {
-        return QString("% Byte").arg(size);
+        return QString("%1 Byte").arg(size);
     }
 
     int dec = 0;

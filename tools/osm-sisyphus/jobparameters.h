@@ -22,8 +22,14 @@ public:
 
     void setBase(const QDir &dir);
 
+    bool cacheData() const;
+
+    void setCacheData(bool cache);
+
 private:
     QDir m_base;
+
+    bool m_cacheData;
 };
 
 #endif // JOBPARAMETERS_H

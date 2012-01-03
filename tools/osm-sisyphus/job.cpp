@@ -238,8 +238,6 @@ bool Job::package()
         changeStatus(Error, "Packaging failed: " + tar.readAllStandardError());
         return false;
     }
-
-    /** @todo: cleanup cached files */
 }
 
 bool Job::upload()
@@ -256,8 +254,9 @@ bool Job::upload()
 
 bool Job::cleanup()
 {
-    /** @todo: enable deleting downloaded file in the final version */
-    // QFile::remove(osmFile().absoluteFilePath());
+    if (!m_parameters.cacheData()) {
+        QFile::remove(osmFile().absoluteFilePath());
+    }
 
     QFileInfo subdir = QFileInfo(monavDir().absoluteFilePath());
     if (subdir.exists() && subdir.isDir()) {

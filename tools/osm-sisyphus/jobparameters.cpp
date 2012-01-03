@@ -10,7 +10,7 @@
 
 #include "jobparameters.h"
 
-JobParameters::JobParameters()
+JobParameters::JobParameters() : m_cacheData(false)
 {
     // nothing to do
 }
@@ -23,4 +23,14 @@ QDir JobParameters::base()
 void JobParameters::setBase(const QDir &dir)
 {
     m_base = dir;
+}
+
+bool JobParameters::cacheData() const
+{
+    return m_cacheData;
+}
+
+void JobParameters::setCacheData(bool cache)
+{
+    m_cacheData = cache;
 }
