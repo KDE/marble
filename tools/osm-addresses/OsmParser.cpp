@@ -264,8 +264,10 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
     for ( int i = 0; i < m_osmOsmRegions.size(); ++i ) {
         GeoDataLinearRing const & ring = m_osmOsmRegions[i].region.geometry().outerBoundary();
         OsmOsmRegion* parent = 0;
+        qDebug() << "Examining admin region " << i << " of " << m_osmOsmRegions.count();
         for ( int level=m_osmOsmRegions[i].region.adminLevel()-1; level >= 0 && parent == 0; --level ) {
             QList<int> candidates = sortedRegions.values( level );
+            qDebug() << "Examining " << candidates.count() << "admin regions on level" << level;
             foreach( int j, candidates ) {
                 GeoDataLinearRing const & outer = m_osmOsmRegions[j].region.geometry().outerBoundary();
                 if ( contains<GeoDataLinearRing, GeoDataLinearRing>( outer, ring ) ) {
