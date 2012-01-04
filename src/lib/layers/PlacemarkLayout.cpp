@@ -461,9 +461,6 @@ bool PlacemarkLayout::render( GeoPainter *painter,
     if ( m_placemarkModel.rowCount() <= 0 )
         return true;
 
-    // const int imgwidth  = viewport->width();
-    const int imgheight = viewport->height();
-
     if ( m_styleResetRequested ) {
         styleReset();
     }
@@ -471,21 +468,16 @@ bool PlacemarkLayout::render( GeoPainter *painter,
     if ( m_maxLabelHeight == 0 ) {
         return true;
     }
-    const int   secnumber         = imgheight / m_maxLabelHeight + 1;
 
-    //Quaternion  inversePlanetAxis = viewParams->m_planetAxis.inverse();
-
-    QVector< QVector< VisiblePlacemark* > >  rowsection;
-    for ( int i = 0; i < secnumber; i++)
-        rowsection.append( QVector<VisiblePlacemark*>( ) );
+    const int secnumber = viewport->height() / m_maxLabelHeight + 1;
+    m_rowsection.clear();
+    m_rowsection.resize(secnumber);
 
     m_paintOrder.clear();
 
     int labelnum = 0;
     qreal x = 0;
     qreal y = 0;
-
-    QList<const GeoDataPlacemark*> placemarkList = visiblePlacemarks( viewport );
 
     /**
      * First handle the selected placemarks, as they have the highest priority.
@@ -511,54 +503,14 @@ bool PlacemarkLayout::render( GeoPainter *painter,
                 continue;
             }
 
-        // ----------------------------------------------------------------
-        // End of checks. Here the actual layouting starts.
-
-
-        // Choose Section
-        const QVector<VisiblePlacemark*> currentsec = rowsection.at( y / m_maxLabelHeight );
-
-        // Find out whether the area around the placemark is covered already.
-        // If there's not enough space free don't add a VisiblePlacemark here.
-        const GeoDataStyle* style = placemark->style();
-
-        QRect labelRect = roomForLabel( style, currentsec, x, y, placemark->name() );
-        if ( labelRect.isNull() )
-            continue;
-
-        // Make sure not to draw more placemarks on the screen than 
-        // specified by placemarksOnScreenLimit().
-
-        ++labelnum;
-        if ( labelnum >= placemarksOnScreenLimit() )
-            break;
-
-        // Find the corresponding visible placemark
-        VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
-        if ( !mark ) {
-            // If there is no visible placemark yet for this index,
-            // create a new one...
-            mark = new VisiblePlacemark( placemark );
-            m_visiblePlacemarks.insert( placemark, mark );
+        if( layoutPlacemark( placemark, x, y) ) {
+            // Make sure not to draw more placemarks on the screen than
+            // specified by placemarksOnScreenLimit().
+            ++labelnum;
+            if ( labelnum >= placemarksOnScreenLimit() )
+                break;
         }
 
-        // Finally save the label position on the map.
-        QPointF hotSpot = style->iconStyle().hotSpot();
-
-        mark->setSymbolPosition( QPoint( x - (int)( hotSpot.x() ),
-                                         y - (int)( hotSpot.y() ) ) );
-        mark->setLabelRect( labelRect );
-
-        // Add the current placemark to the matching row and its
-        // direct neighbors.
-        int idx = y / m_maxLabelHeight;
-        if ( idx - 1 >= 0 )
-            rowsection[ idx - 1 ].append( mark );
-        rowsection[ idx ].append( mark );
-        if ( idx + 1 < secnumber )
-            rowsection[ idx + 1 ].append( mark );
-
-        m_paintOrder.append( mark );
     }
 
     /**
@@ -566,6 +518,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
      */
     const QItemSelection selection = m_selectionModel->selection();
 
+    QList<const GeoDataPlacemark*> placemarkList = visiblePlacemarks( viewport );
     const int rowCount = placemarkList.count();
 
     for ( int i = 0; i != rowCount; ++i )
@@ -579,8 +532,6 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         }
 
         int popularityIndex = placemark->popularityIndex();
-
-        
         if ( popularityIndex < 1 ) {
             break;
         }
@@ -591,14 +542,12 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         }
 
         if ( !viewport->viewLatLonAltBox().contains( coordinates ) ||
-             ! viewport->screenCoordinates( coordinates, x, y ))
-            {
+             ! viewport->screenCoordinates( coordinates, x, y )) {
                 delete m_visiblePlacemarks.take( placemark );
                 continue;
             }
 
-        if ( !placemark->isVisible() )
-        {
+        if ( !placemark->isVisible() ) {
             continue;
         }
 
@@ -653,59 +602,61 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         if ( isSelected )
             continue;
 
-        // ----------------------------------------------------------------
-        // End of checks. Here the actual layouting starts.
-
-
-        // Choose Section
-        const QVector<VisiblePlacemark*> currentsec = rowsection.at( y / m_maxLabelHeight );
-
-         // Find out whether the area around the placemark is covered already.
-        // If there's not enough space free don't add a VisiblePlacemark here.
-        const GeoDataStyle* style = placemark->style();
-
-        QRect labelRect = roomForLabel( style, currentsec, x, y, placemark->name() );
-        if ( labelRect.isNull() )
-            continue;
-
-        // Make sure not to draw more placemarks on the screen than 
-        // specified by placemarksOnScreenLimit().
-
-        ++labelnum;
-        if ( labelnum >= placemarksOnScreenLimit() )
-            break;
-
-        // Find the corresponding visible placemark
-        VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
-        if ( !mark ) {
-            // If there is no visible placemark yet for this index,
-            // create a new one...
-            mark = new VisiblePlacemark( placemark );
-            m_visiblePlacemarks.insert( placemark, mark );
+        if( layoutPlacemark( placemark, x, y) ) {
+            // Make sure not to draw more placemarks on the screen than
+            // specified by placemarksOnScreenLimit().
+            ++labelnum;
+            if ( labelnum >= placemarksOnScreenLimit() )
+                break;
         }
-
-        // Finally save the label position on the map.
-        QPointF hotSpot = style->iconStyle().hotSpot();
-
-        mark->setSymbolPosition( QPoint( x - (int)( hotSpot.x() ),
-                                         y - (int)( hotSpot.y() ) ) );
-        mark->setLabelRect( labelRect );
-
-        // Add the current placemark to the matching row and it's
-        // direct neighbors.
-        int idx = y / m_maxLabelHeight;
-        if ( idx - 1 >= 0 )
-            rowsection[ idx - 1 ].append( mark );
-        rowsection[ idx ].append( mark );
-        if ( idx + 1 < secnumber )
-            rowsection[ idx + 1 ].append( mark );
-
-        m_paintOrder.append( mark );
     }
 
     m_placemarkPainter.drawPlacemarks( painter, m_paintOrder, selection,
                                         viewport );
 
+    return true;
+}
+
+
+bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, int x, int y )
+{
+    // Choose Section
+    const QVector<VisiblePlacemark*> currentsec = m_rowsection.at( y / m_maxLabelHeight );
+
+    // Find out whether the area around the placemark is covered already.
+    // If there's not enough space free don't add a VisiblePlacemark here.
+    const GeoDataStyle* style = placemark->style();
+
+    QRect labelRect = roomForLabel( style, currentsec, x, y, placemark->name() );
+    if ( labelRect.isNull() )
+        return false;
+
+    // Find the corresponding visible placemark
+    VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
+    if ( !mark ) {
+        // If there is no visible placemark yet for this index,
+        // create a new one...
+        mark = new VisiblePlacemark( placemark );
+        m_visiblePlacemarks.insert( placemark, mark );
+    }
+
+    // Finally save the label position on the map.
+    QPointF hotSpot = style->iconStyle().hotSpot();
+
+    mark->setSymbolPosition( QPoint( x - (int)( hotSpot.x() ),
+                                     y - (int)( hotSpot.y() ) ) );
+    mark->setLabelRect( labelRect );
+
+    // Add the current placemark to the matching row and its
+    // direct neighbors.
+    int idx = y / m_maxLabelHeight;
+    if ( idx - 1 >= 0 )
+        m_rowsection[ idx - 1 ].append( mark );
+    m_rowsection[ idx ].append( mark );
+    if ( idx + 1 < m_rowsection.size() )
+        m_rowsection[ idx + 1 ].append( mark );
+
+    m_paintOrder.append( mark );
     return true;
 }
 
