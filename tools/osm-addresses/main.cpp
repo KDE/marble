@@ -74,18 +74,6 @@ int main( int argc, char *argv[] )
 
     QCoreApplication app( argc, argv );
 
-    QStringList allArguments = app.arguments();
-    QStringList arguments;
-    foreach( const QString & arg, allArguments ) {
-        if ( arg == "-v" ) {
-            debugLevel = Debug;
-        } else if ( arg == "-q" ) {
-            debugLevel = Mute;
-        } else {
-            arguments << arg;
-        }
-    }
-
     QString inputFile = argv[argc-3];
     QString outputSqlite = argv[argc-2];
     QString outputKml = argv[argc-1];
@@ -96,7 +84,11 @@ int main( int argc, char *argv[] )
     QString payload;
     for ( int i=1; i<argc-3; ++i ) {
         QString arg( argv[i] );
-        if ( arg == "--name" ) {
+        if ( arg == "-v" ) {
+            debugLevel = Debug;
+        } else if ( arg == "-q" ) {
+            debugLevel = Mute;
+        } else if ( arg == "--name" ) {
             name = argv[++i];
         } else if ( arg == "--version" ) {
             version = argv[++i];
