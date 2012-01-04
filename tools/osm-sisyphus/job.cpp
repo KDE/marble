@@ -207,7 +207,7 @@ bool Job::search()
     arguments << kmlFile.absoluteFilePath();
     QProcess osmAddresses;
     osmAddresses.start("osm-addresses", arguments);
-    osmAddresses.waitForFinished(1000 * 60 * 30); // wait up to 12 hours for osm-addresses to convert the data
+    osmAddresses.waitForFinished(1000 * 60 * 60 * 12); // wait up to 12 hours for osm-addresses to convert the data
     if (osmAddresses.exitStatus() == QProcess::NormalExit && osmAddresses.exitCode() == 0) {
         searchFile().refresh();
         if (!searchFile().exists()) {
