@@ -128,6 +128,7 @@ class PlacemarkLayout : public QObject, public LayerInterface
     void styleReset();
 
     QList<const GeoDataPlacemark*> visiblePlacemarks( ViewportParams *viewport );
+    bool layoutPlacemark( const GeoDataPlacemark *placemark, int x, int y );
 
     /**
      * Returns the coordinates at which an icon should be drawn for the @p placemark.
@@ -153,6 +154,7 @@ class PlacemarkLayout : public QObject, public LayerInterface
 
     QVector<VisiblePlacemark*> m_paintOrder;
     QHash<const GeoDataPlacemark*, VisiblePlacemark*> m_visiblePlacemarks;
+    QVector< QVector< VisiblePlacemark* > >  m_rowsection;
 
     /// map providing the list of placemark belonging in TileId as key
     QMap<TileId, QList<const GeoDataPlacemark*> > m_placemarkCache;
