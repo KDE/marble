@@ -16,10 +16,10 @@
 namespace Marble
 {
 
-class MarbleWidget;
-
 namespace Declarative
 {
+
+class MarbleWidget;
 
 class ZoomButtonInterceptorPrivate;
 
@@ -28,7 +28,7 @@ class ZoomButtonInterceptor : public QObject
     Q_OBJECT
 
 public:
-    explicit ZoomButtonInterceptor( Marble::MarbleWidget* widget, QObject* parent );
+    explicit ZoomButtonInterceptor( Marble::Declarative::MarbleWidget* widget, QObject* parent );
 
     ~ZoomButtonInterceptor();
 

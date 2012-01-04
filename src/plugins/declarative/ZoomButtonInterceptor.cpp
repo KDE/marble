@@ -18,7 +18,7 @@
 #include <policy/resource-set.h>
 #endif // HARMATTAN_ZOOMINTERCEPTOR
 
-#include "MarbleWidget.h"
+#include "MarbleDeclarativeWidget.h"
 
 namespace Marble
 {
@@ -28,11 +28,11 @@ namespace Declarative
 class ZoomButtonInterceptorPrivate
 {
 public:
-    ZoomButtonInterceptorPrivate( Marble::MarbleWidget* widget );
+    ZoomButtonInterceptorPrivate( Marble::Declarative::MarbleWidget* widget );
 
     ~ZoomButtonInterceptorPrivate();
 
-    Marble::MarbleWidget* m_widget;
+    Marble::Declarative::MarbleWidget* m_widget;
 
 #ifdef HARMATTAN_ZOOMINTERCEPTOR
     ResourcePolicy::ResourceSet* m_resourceSet;
@@ -86,7 +86,7 @@ bool ZoomButtonInterceptor::eventFilter(QObject *, QEvent *event)
     return false;
 }
 
-ZoomButtonInterceptor::ZoomButtonInterceptor( Marble::MarbleWidget *widget, QObject *parent )
+ZoomButtonInterceptor::ZoomButtonInterceptor( Marble::Declarative::MarbleWidget *widget, QObject *parent )
     : QObject( parent ),
     d( new ZoomButtonInterceptorPrivate( widget ) )
 {
