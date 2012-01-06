@@ -78,6 +78,7 @@ void RoutingProfileSettingsDialog::updateConfigWidget( )
 
     if ( !current.isValid() ) {
         m_ui->settingsStack->setEnabled( false );
+        return;
     }
 
     RunnerPlugin *plugin = m_plugins.at( current.row() );
