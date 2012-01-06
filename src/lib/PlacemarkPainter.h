@@ -45,7 +45,6 @@ class PlacemarkPainter : public QObject
 
     void drawPlacemarks( QPainter* painter, 
                          QVector<VisiblePlacemark*> visiblePlacemarks,
-                         const QItemSelection &selection, 
                          ViewportParams *viewport );
 
     // FIXME: To be removed after MapTheme / KML refactoring
@@ -59,7 +58,7 @@ class PlacemarkPainter : public QObject
     };
 
     void drawLabelText( QPainter &labelPainter, const QString &text, const QFont &labelFont, LabelStyle labelStyle );
-    void drawLabelPixmap( VisiblePlacemark *mark, bool isSelected );
+    void drawLabelPixmap( VisiblePlacemark *mark );
 
     bool testXBug();
 

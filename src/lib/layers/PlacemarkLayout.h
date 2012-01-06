@@ -128,7 +128,7 @@ class PlacemarkLayout : public QObject, public LayerInterface
     void styleReset();
 
     QList<const GeoDataPlacemark*> visiblePlacemarks( ViewportParams *viewport );
-    bool layoutPlacemark( const GeoDataPlacemark *placemark, int x, int y );
+    bool layoutPlacemark( const GeoDataPlacemark *placemark, int x, int y, bool selected );
 
     /**
      * Returns the coordinates at which an icon should be drawn for the @p placemark.

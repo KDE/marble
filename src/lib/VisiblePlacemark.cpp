@@ -46,6 +46,16 @@ const QPixmap& VisiblePlacemark::symbolPixmap() const
     return  m_symbolPixmap;
 }
 
+bool VisiblePlacemark::selected() const
+{
+    return m_selected;
+}
+
+void VisiblePlacemark::setSelected( bool selected )
+{
+    m_selected = selected;
+}
+
 const QPoint& VisiblePlacemark::symbolPosition() const
 {
     return m_symbolPosition;

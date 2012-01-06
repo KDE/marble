@@ -13,7 +13,6 @@
 
 #include <QtCore/QModelIndex>
 #include <QtCore/QPoint>
-#include <QtGui/QItemSelectionModel>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 
@@ -48,23 +47,13 @@ void PlacemarkPainter::setDefaultLabelColor( const QColor& color )
 
 void PlacemarkPainter::drawPlacemarks( QPainter* painter, 
                                        QVector<VisiblePlacemark*> visiblePlacemarks,
-                                       const QItemSelection &selection, 
                                        ViewportParams *viewport )
 {
     int imageWidth = viewport->width();
 
     foreach( VisiblePlacemark *mark, visiblePlacemarks ) {
 	if ( mark->labelPixmap().isNull() ) {
-            bool isSelected = false;
-            foreach ( QModelIndex index, selection.indexes() ) {
-                const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
-                Q_ASSERT(placemark);
-                if (mark->placemark() == placemark ) {
-                    isSelected = true;
-                    break;
-                }
-            }
-            drawLabelPixmap( mark, isSelected );
+            drawLabelPixmap( mark );
 	}
 
 	painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
@@ -154,7 +143,7 @@ inline void PlacemarkPainter::drawLabelText(QPainter &labelPainter, const QStrin
     }
 }
 
-inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSelected )
+inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark )
 {
 
     QPainter labelPainter;
@@ -180,7 +169,7 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSe
         labelColor = m_defaultLabelColor;
 
     LabelStyle labelStyle = Normal;
-    if ( isSelected ) {
+    if ( mark->selected() ) {
         labelStyle = Selected;
     } else if ( style->labelStyle().glow() ) {
         labelFont.setWeight(75);
