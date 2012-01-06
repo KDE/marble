@@ -512,7 +512,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
                 continue;
             }
 
-        if( layoutPlacemark( placemark, x, y) ) {
+        if( layoutPlacemark( placemark, x, y, true) ) {
             // Make sure not to draw more placemarks on the screen than
             // specified by placemarksOnScreenLimit().
             ++labelnum;
@@ -611,7 +611,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         if ( isSelected )
             continue;
 
-        if( layoutPlacemark( placemark, x, y) ) {
+        if( layoutPlacemark( placemark, x, y, isSelected ) ) {
             // Make sure not to draw more placemarks on the screen than
             // specified by placemarksOnScreenLimit().
             ++labelnum;
@@ -620,14 +620,13 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         }
     }
 
-    m_placemarkPainter.drawPlacemarks( painter, m_paintOrder, selection,
-                                        viewport );
+    m_placemarkPainter.drawPlacemarks( painter, m_paintOrder, viewport );
 
     return true;
 }
 
 
-bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, int x, int y )
+bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, int x, int y, bool selected )
 {
     // Choose Section
     const QVector<VisiblePlacemark*> currentsec = m_rowsection.at( y / m_maxLabelHeight );
@@ -652,6 +651,7 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, int x,
     // Finally save the label position on the map.
     QPointF hotSpot = style->iconStyle().hotSpot();
 
+    mark->setSelected( selected );
     mark->setSymbolPosition( QPoint( x - (int)( hotSpot.x() ),
                                      y - (int)( hotSpot.y() ) ) );
     mark->setLabelRect( labelRect );

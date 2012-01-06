@@ -54,6 +54,16 @@ class VisiblePlacemark
     const QPixmap& symbolPixmap() const;
 
     /**
+     * Returns the state of the place mark.
+     */
+    bool selected() const;
+
+    /**
+     * Sets the state of the place mark.
+     */
+    void setSelected( bool selected );
+
+    /**
      * Returns the position of the place mark symbol on the map.
      */
     const QPoint& symbolPosition() const;
@@ -88,6 +98,7 @@ class VisiblePlacemark
 
     // View stuff
     QPoint      m_symbolPosition; // position of the placemark's symbol
+    bool        m_selected;       // state of the placemark
     QPixmap     m_labelPixmap;    // the text label (most often name)
     QRect       m_labelRect;      // bounding box of label
 
