@@ -86,6 +86,7 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
     // of marble you need permission from the openrouteservice.org team.
     QUrl url = QUrl( "http://openls.geog.uni-heidelberg.de/osm/eu/routing" );
     m_request = QNetworkRequest( url );
+    m_request.setHeader( QNetworkRequest::ContentTypeHeader, "application/xml" );
     m_requestData = request.toLatin1();
 
     QEventLoop eventLoop;
