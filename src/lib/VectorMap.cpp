@@ -451,7 +451,8 @@ void VectorMap::rectangularCreatePolyLine(
     bool CrossedDateline = false;
     bool firstPoint = true;
     int lastSign = 0;
-    qreal lastLon, lastLat;
+    qreal lastLon = 0.0;
+    qreal lastLat = 0.0;
 
     GeoDataCoordinates::Vector::const_iterator itPoint = itStartPoint;
     for (; itPoint != itEndPoint; ++itPoint ) {
@@ -564,7 +565,8 @@ void VectorMap::mercatorCreatePolyLine(
     bool    CrossedDateline = false;
     bool    firstPoint      = true;
     int lastSign = 0;
-    qreal lastLon, lastLat;
+    qreal lastLon = 0.0;
+    qreal lastLat = 0.0;
 
     GeoDataCoordinates::Vector::const_iterator itPoint = itStartPoint;
     for (; itPoint != itEndPoint; ++itPoint ) {

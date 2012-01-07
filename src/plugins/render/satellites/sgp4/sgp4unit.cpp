@@ -50,7 +50,7 @@
 
 const char help = 'n';
 FILE *dbgfile;
-
+#define UNUSED(arg) (void)arg;
 
 /* ----------- local functions - only ever used internally by sgp4 ---------- */
 static void dpper
@@ -215,6 +215,7 @@ static void dpper
        char opsmode
      )
 {
+    UNUSED( inclo );
      /* --------------------- local variables ------------------------ */
      const double twopi = 2.0 * pi;
      double alfdp, betdp, cosip, cosop, dalf, dbet, dls,
@@ -304,8 +305,9 @@ static void dpper
            nodep  = fmod(nodep, twopi);
            //  sgp4fix for afspc written intrinsic functions
            // nodep used without a trigonometric function ahead
-           if ((nodep < 0.0) && (opsmode == 'a'))
+           if ((nodep < 0.0) && (opsmode == 'a')) {
                nodep = nodep + twopi;
+           }
            xls    = mp + argpp + cosip * nodep;
            dls    = pl + pgh - pinc * nodep * sinip;
            xls    = xls + dls;
@@ -313,13 +315,17 @@ static void dpper
            nodep  = atan2(alfdp, betdp);
            //  sgp4fix for afspc written intrinsic functions
            // nodep used without a trigonometric function ahead
-           if ((nodep < 0.0) && (opsmode == 'a'))
+           if ((nodep < 0.0) && (opsmode == 'a')) {
                nodep = nodep + twopi;
-           if (fabs(xnoh - nodep) > pi)
-             if (nodep < xnoh)
+           }
+           if (fabs(xnoh - nodep) > pi) {
+             if (nodep < xnoh) {
                 nodep = nodep + twopi;
-               else
+             }
+             else {
                 nodep = nodep - twopi;
+             }
+           }
            mp    = mp + pl;
            argpp = xls - mp - cosip * nodep;
          }
@@ -1184,13 +1190,14 @@ static void initl
        char opsmode
      )
 {
+     UNUSED( satn );
      /* --------------------- local variables ------------------------ */
      double ak, d1, del, adel, po, x2o3, j2, xke,
             tumin, mu, radiusearthkm, j3, j4, j3oj2;
 
      // sgp4fix use old way of finding gst
      double ds70;
-     double ts70, tfrac, c1, thgr70, fk5r, c1p2p, thgr, thgro;
+     double ts70, tfrac, c1, thgr70, fk5r, c1p2p;
      const double twopi = 2.0 * pi;
 
      /* ----------------------- earth constants ---------------------- */

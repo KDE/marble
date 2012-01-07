@@ -85,7 +85,7 @@ void twoline2rv
            starthr, stophr, startmin, stopmin;
        int cardnumb, numb, j;
        long revnum = 0, elnum = 0;
-       char classification, intldesg[11], tmpstr[80];
+       char classification, intldesg[11];
        int year = 0;
        int mon, day, hr, minute, nexp, ibexp;
 
@@ -217,9 +217,9 @@ void twoline2rv
            if (typeinput == 'd')
              {
                printf("input start year dayofyr \n");
-               scanf( "%li %lf",&startyear, &startdayofyr );
+               scanf( "%i %lf",&startyear, &startdayofyr );
                printf("input stop year dayofyr \n");
-               scanf( "%li %lf",&stopyear, &stopdayofyr );
+               scanf( "%i %lf",&stopyear, &stopdayofyr );
 
                days2mdhms ( startyear,startdayofyr, mon,day,hr,minute,sec );
                jday( startyear,mon,day,hr,minute,sec, jdstart );

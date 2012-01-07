@@ -50,6 +50,7 @@ void SatellitesConfigAbstractItem::setParent( SatellitesConfigAbstractItem *pare
 
 void SatellitesConfigAbstractItem::loadSettings( QHash<QString, QVariant> settings )
 {
+    Q_UNUSED( settings );
 }
 
 QVariant SatellitesConfigAbstractItem::data( int column, int role ) const
@@ -68,5 +69,8 @@ QVariant SatellitesConfigAbstractItem::data( int column, int role ) const
 
 bool SatellitesConfigAbstractItem::setData( int column, int role, const QVariant &data )
 {
+    Q_UNUSED( column );
+    Q_UNUSED( role );
+    Q_UNUSED( data );
     return false;
 }
