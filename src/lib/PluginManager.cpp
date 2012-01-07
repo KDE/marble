@@ -75,25 +75,6 @@ PluginManager::~PluginManager()
     delete d;
 }
 
-QList<AbstractFloatItem *> PluginManager::createFloatItems() const
-{
-    QList<AbstractFloatItem *> floatItemList;
-
-    d->loadPlugins();
-
-    QList<RenderPlugin *>::const_iterator i = d->m_renderPluginTemplates.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = d->m_renderPluginTemplates.constEnd();
-    for (; i != end; ++i) {
-        AbstractFloatItem * const floatItem = qobject_cast<AbstractFloatItem *>(*i);
-        if ( floatItem ) {
-            floatItemList.append( qobject_cast<AbstractFloatItem *>( floatItem->
-                                                                     newInstance() ));
-        }
-    }
-
-    return floatItemList;
-}
-
 template<class T>
 QList<T*> createPlugins( PluginManagerPrivate* d, const QList<T*> &loaders )
 {

@@ -52,12 +52,6 @@ class MARBLE_EXPORT PluginManager : public QObject
      * This methods creates a new set of plugins and transfers ownership
      * of them to the client.
      */
-    QList<AbstractFloatItem *> createFloatItems() const;
-
-    /**
-     * This methods creates a new set of plugins and transfers ownership
-     * of them to the client.
-     */
     QList<RenderPlugin *> createRenderPlugins() const;
 
     /**
