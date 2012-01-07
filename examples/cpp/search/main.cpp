@@ -11,8 +11,7 @@ using namespace Marble;
 int main(int argc, char** argv)
 {
     QApplication app(argc,argv);
-    MarbleWidget *mapWidget = new MarbleWidget;
-    MarbleModel *model = mapWidget->model();
+    MarbleModel *model = new MarbleModel;
 
     MarbleRunnerManager* manager = new MarbleRunnerManager( model->pluginManager() );
     manager->setModel( model );
