@@ -15,6 +15,7 @@
 #include "GeoDataPlacemark.h"
 
 #include <QtCore/QString>
+#include <QtCore/QTimer>
 #include <QtCore/QVector>
 #include <QtCore/QUrl>
 #include <QtNetwork/QNetworkAccessManager>
@@ -24,9 +25,11 @@ namespace Marble
 {
 
 HostipRunner::HostipRunner( QObject *parent ) :
-        MarbleAbstractRunner( parent )
+        MarbleAbstractRunner( parent ),
+        m_networkAccessManager( new QNetworkAccessManager( this ) )
 {
-    // nothing to do
+    connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply* ) ),
+            this, SLOT( slotRequestFinished( QNetworkReply* ) ), Qt::DirectConnection );
 }
 
 HostipRunner::~HostipRunner()
@@ -62,16 +65,20 @@ void HostipRunner::slotLookupFinished(const QHostInfo &info)
         m_hostInfo = info;
         QString hostAddress = info.addresses().first().toString();
         QString query = QString( "http://api.hostip.info/get_html.php?ip=%1&position=true" ).arg( hostAddress );
+        m_request.setUrl( QUrl( query ) );
 
-        QNetworkAccessManager *manager = new QNetworkAccessManager( this );
-        connect(manager, SIGNAL( finished( QNetworkReply* ) ),
-                this, SLOT( slotRequestFinished( QNetworkReply* ) ), Qt::DirectConnection );
-        QNetworkReply *reply = manager->get( QNetworkRequest(QUrl( query) ) );
-        connect(reply, SIGNAL( error( QNetworkReply::NetworkError) ),
-                this, SLOT( slotNoResults() ), Qt::DirectConnection );
+        // @todo FIXME Must currently be done in the main thread, see bug 257376
+        QTimer::singleShot( 0, this, SLOT( get() ) );
     }
     else
       slotNoResults();
+}
+
+void HostipRunner::get()
+{
+    QNetworkReply *reply = m_networkAccessManager->get( m_request );
+    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
+             this, SLOT( slotNoResults() ), Qt::DirectConnection );
 }
 
 void HostipRunner::slotRequestFinished( QNetworkReply* reply )
