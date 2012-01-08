@@ -116,9 +116,7 @@ public:
 
     void selectFolder( const QString &name = QString() );
 
-    GeoDataDocument* openDocument( const QString &file ) const;
 
-    void insertBookmark( GeoDataDocument* document, const QString &folderName, GeoDataPlacemark* placemark ) const;
 };
 
 BranchFilterModel::BranchFilterModel( QObject *parent ) :
@@ -179,12 +177,9 @@ void BookmarkManagerDialogPrivate::addNewFolder()
 {
     QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( m_parent );
     if ( dialog->exec() == QDialog::Accepted && !dialog->folderName().isEmpty() ) {
-        GeoDataFolder* folder = new GeoDataFolder;
-        folder->setName( dialog->folderName() );
-        GeoDataDocument* current = m_parent->bookmarkDocument();
-        current->append( folder );
+        m_manager->addNewBookmarkFolder( dialog->folderName() );
         m_treeModel->update();
-        selectFolder( folder->name() );
+        selectFolder( dialog->folderName() );
     }
     delete dialog;
 }
@@ -203,7 +198,7 @@ void BookmarkManagerDialogPrivate::renameFolder()
         QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( m_parent );
         dialog->setFolderName( folder->name() );
         if ( dialog->exec() == QDialog::Accepted ) {
-            folder->setName( dialog->folderName() );
+            m_manager->renameBookmarkFolder( folder, dialog->folderName() );
             m_treeModel->update();
         }
         delete dialog;
@@ -228,8 +223,7 @@ void BookmarkManagerDialogPrivate::deleteFolder()
             }
 
             m_treeModel->setRootDocument( 0 );
-            bookmarkDocument->remove( treeIndex.row() );
-            delete folder;
+            m_manager->removeBookmarkFolder( folder );
             m_treeModel->setRootDocument( bookmarkDocument );
             selectFolder();
             return;
@@ -264,19 +258,13 @@ void BookmarkManagerDialogPrivate::editBookmark()
         if ( dialog->exec() == QDialog::Accepted ) {
             m_treeModel->setRootDocument( 0 );
             GeoDataDocument* bookmarkDocument = m_parent->bookmarkDocument();
-            if ( dialog->folderName() != folder->name() ) {
-                // Folder was changed
-                foreach( GeoDataFolder* existingFolder, bookmarkDocument->folderList() ) {
-                    if ( existingFolder->name() == dialog->folderName() ) {
-                        folder->remove( treeIndex.row() );
-                        existingFolder->append( bookmark );
-                        break;
-                    }
-                }
-            }
-            bookmark->setName( dialog->name() );
-            bookmark->setDescription( dialog->description() );
-            bookmark->lookAt()->setCoordinates( dialog->coordinates() );
+            GeoDataPlacemark newBookmark( *bookmark );
+            m_manager->removeBookmark( bookmark );
+
+            newBookmark.setName( dialog->name() );
+            newBookmark.setDescription( dialog->description() );
+            newBookmark.lookAt()->setCoordinates( dialog->coordinates() );
+            m_manager->addBookmark( newBookmark, dialog->folderName());
             m_treeModel->setRootDocument( bookmarkDocument );
             selectFolder( dialog->folderName() );
         }
@@ -302,8 +290,7 @@ void BookmarkManagerDialogPrivate::deleteBookmark()
             if ( bookmark ) {
                 Q_ASSERT( bookmark->name() == treeModelIndex.data().toString() );
                 m_treeModel->setRootDocument( 0 );
-                folder->remove( treeModelIndex.row() );
-                delete bookmark;
+                m_manager->removeBookmark( bookmark );
                 m_treeModel->setRootDocument( bookmarkDocument );
                 selectFolder( folder->name() );
             }
@@ -409,23 +396,6 @@ void BookmarkManagerDialogPrivate::initializeBookmarksView( GeoDataTreeModel* tr
                        m_parent, SLOT( deleteBookmark() ) );
 }
 
-void BookmarkManagerDialogPrivate::insertBookmark( GeoDataDocument *document, const QString &folderName, GeoDataPlacemark *placemark ) const
-{
-    foreach( GeoDataFolder* existingFolder, document->folderList() ) {
-        if ( existingFolder->name() == folderName ) {
-            mDebug() << "Using existing folder " << existingFolder->name() << " to host new bookmark " << placemark->name();
-            existingFolder->append( placemark );
-            return;
-        }
-    }
-
-    mDebug() << "Creating new folder " << folderName << " to host " << placemark->name();
-    GeoDataFolder* folder = new GeoDataFolder;
-    folder->setName( folderName );
-    folder->append( placemark );
-    document->append( folder );
-}
-
 BookmarkManagerDialog::BookmarkManagerDialog( MarbleModel* model, QWidget *parent )
     : QDialog( parent ),
       d( new BookmarkManagerDialogPrivate( this, model->bookmarkManager() ) )
@@ -480,34 +450,6 @@ void BookmarkManagerDialog::exportBookmarks()
     }
 }
 
-GeoDataDocument* BookmarkManagerDialogPrivate::openDocument( const QString &fileName ) const
-{
-    GeoDataParser parser( GeoData_KML );
-    QFile file( fileName );
-
-    if ( !file.exists() ) {
-        return 0;
-    }
-
-    if ( !file.open( QIODevice::ReadOnly ) || !parser.read( &file ) ) {
-        mDebug() << "Could not open/parse file" << fileName;
-        return 0;
-    }
-
-    GeoDataDocument *result = dynamic_cast<GeoDataDocument*>( parser.releaseDocument() );
-    if ( !result ) {
-        return 0;
-    }
-
-    foreach( GeoDataFolder* folder, result->folderList() ) {
-        foreach( GeoDataPlacemark* placemark, folder->placemarkList() ) {
-            placemark->setVisualCategory( GeoDataFeature::Bookmark );
-        }
-    }
-
-    return result;
-}
-
 void BookmarkManagerDialog::importBookmarks()
 {
     QString const file = QFileDialog::getOpenFileName( this, tr( "Import Bookmarks - Marble" ),
@@ -516,7 +458,7 @@ void BookmarkManagerDialog::importBookmarks()
         return;
     }
 
-    GeoDataDocument* import = d->openDocument( file );
+    GeoDataDocument *import = d->m_manager->openFile( file );
     if ( !import ) {
         QString const text = tr( "The file %1 cannot be opened as a KML file." ).arg( file );
         QMessageBox::warning( this, tr( "Bookmark Import - Marble" ), text );
@@ -583,11 +525,10 @@ void BookmarkManagerDialog::importBookmarks()
                         }
 
                         if ( messageBox.clickedButton() == replaceButton || replaceAll ) {
-                            existingFolder->remove( i );
-                            d->insertBookmark( current, newFolder->name(), newPlacemark );
+                            d->m_manager->removeBookmark( existingPlacemark );
+                            d->m_manager->addBookmark( *newPlacemark, newFolder->name() );
                             mDebug() << "Placemark " << newPlacemark->name() << " replaces " << existingPlacemark->name();
                             added = true;
-                            delete existingPlacemark;
                             break;
                         }
                     }
@@ -595,7 +536,7 @@ void BookmarkManagerDialog::importBookmarks()
             }
 
             if ( !added ) {
-                d->insertBookmark( current, newFolder->name(), newPlacemark );
+                d->m_manager->addBookmark( *newPlacemark, newFolder->name() );
             }
         }
     }

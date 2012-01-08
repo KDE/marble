@@ -17,6 +17,8 @@ namespace Marble
 {
 
 class GeoDataDocument;
+class GeoDataTreeModel;
+
 class BookmarkManagerPrivate
 {
 public:
@@ -26,14 +28,13 @@ public:
 
     GeoDataDocument* bookmarkDocument();
 
-    void resetBookmarks();
+    void resetBookmarkDocument();
+
+    GeoDataTreeModel *m_treeModel;
 
     GeoDataDocument *m_bookmarkDocument;
 
     QString m_bookmarkFileRelativePath;
-
-private:
-    GeoDataDocument* createEmptyBookmarkDocument();
 };
 
 }
