@@ -65,9 +65,7 @@ private:
 
     QNetworkAccessManager* m_manager;
 
-    QNetworkRequest m_reverseGeocodingRequest;
-
-    QNetworkRequest m_searchRequest;
+    QNetworkRequest m_request;
 
     GeoDataCoordinates m_coordinates;
 };

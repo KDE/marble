@@ -62,8 +62,8 @@ void OsmNominatimRunner::search( const QString &searchTerm )
     QString query = "q=%1&format=xml&addressdetails=1&accept-language=%2";
     QString url = QString(base + query).arg(searchTerm).arg(MarbleLocale::languageCode());
 
-    m_searchRequest.setUrl(QUrl(url));
-    m_searchRequest.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
+    m_request.setUrl(QUrl(url));
+    m_request.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
     QTimer::singleShot( 0, this, SLOT( startSearch() ) );
@@ -79,8 +79,8 @@ void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates
     double lat = coordinates.latitude( GeoDataCoordinates::Degree );
     QString url = QString( base + query ).arg( lon ).arg( lat ).arg( MarbleLocale::languageCode() );
 
-    m_reverseGeocodingRequest.setUrl(QUrl(url));
-    m_reverseGeocodingRequest.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
+    m_request.setUrl(QUrl(url));
+    m_request.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
     QTimer::singleShot( 0, this, SLOT( startReverseGeocoding() ) );
@@ -88,14 +88,14 @@ void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates
 
 void OsmNominatimRunner::startSearch()
 {
-    QNetworkReply *reply = m_manager->get(m_searchRequest);
+    QNetworkReply *reply = m_manager->get( m_request );
     connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
             this, SLOT(returnNoResults()));
 }
 
 void OsmNominatimRunner::startReverseGeocoding()
 {
-    QNetworkReply *reply = m_manager->get( m_reverseGeocodingRequest );
+    QNetworkReply *reply = m_manager->get( m_request );
     connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
             this, SLOT(returnNoReverseGeocodingResult()));
 }
