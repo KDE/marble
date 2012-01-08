@@ -15,7 +15,7 @@
 #include "PositionTracking.h"
 #include "RenderPlugin.h"
 #include "ViewportParams.h"
-#include "routing/AdjustNavigation.h"
+#include "AutoNavigation.h"
 
 Tracking::Tracking( QObject* parent) : QObject( parent ),
     m_showTrack( true ),
@@ -184,7 +184,7 @@ void Tracking::setLastKnownPosition( Coordinate* lastKnownPosition )
 bool Tracking::autoCenter() const
 {
     if ( m_autoNavigation ) {
-        return m_autoNavigation->recenterMode() != Marble::AdjustNavigation::DontRecenter;
+        return m_autoNavigation->recenterMode() != Marble::AutoNavigation::DontRecenter;
     }
 
     return false;
@@ -194,7 +194,7 @@ void Tracking::setAutoCenter( bool enabled )
 {
     if ( autoCenter() != enabled ) {
         if ( enabled && !m_autoNavigation && m_marbleWidget ) {
-            m_autoNavigation = new Marble::AdjustNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
+            m_autoNavigation = new Marble::AutoNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
             connect( m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
                      m_marbleWidget, SLOT( zoomIn() ) );
             connect( m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),
@@ -207,7 +207,7 @@ void Tracking::setAutoCenter( bool enabled )
         }
 
         if ( m_autoNavigation ) {
-            m_autoNavigation->setRecenter( Marble::AdjustNavigation::RecenterOnBorder );
+            m_autoNavigation->setRecenter( Marble::AutoNavigation::RecenterOnBorder );
         }
 
         emit autoCenterChanged();
@@ -227,7 +227,7 @@ void Tracking::setAutoZoom( bool enabled )
 {
     if ( autoZoom() != enabled ) {
         if ( enabled && !m_autoNavigation && m_marbleWidget ) {
-            m_autoNavigation = new Marble::AdjustNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
+            m_autoNavigation = new Marble::AutoNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
             connect( m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
                      m_marbleWidget, SLOT( zoomIn() ) );
             connect( m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),

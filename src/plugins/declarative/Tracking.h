@@ -19,7 +19,7 @@
 class MarbleWidget;
 
 namespace Marble {
-class AdjustNavigation;
+class AutoNavigation;
 }
 
 class Tracking : public QObject
@@ -123,7 +123,7 @@ private:
 
     Coordinate m_lastKnownPosition;
 
-    Marble::AdjustNavigation* m_autoNavigation;
+    Marble::AutoNavigation* m_autoNavigation;
 
     PositionMarkerType m_positionMarkerType;
 };

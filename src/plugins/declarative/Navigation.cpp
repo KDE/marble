@@ -16,7 +16,7 @@
 #include "routing/RoutingModel.h"
 #include "PositionTracking.h"
 #include "MarbleMath.h"
-#include "routing/AdjustNavigation.h"
+#include "AutoNavigation.h"
 #include "routing/VoiceNavigationModel.h"
 
 class NavigationPrivate
@@ -30,7 +30,7 @@ public:
 
     Marble::RouteSegment m_currentSegment;
 
-    Marble::AdjustNavigation* m_autoNavigation;
+    Marble::AutoNavigation* m_autoNavigation;
 
     Marble::VoiceNavigationModel m_voiceNavigation;
 
@@ -112,7 +112,7 @@ void Navigation::setMarbleWidget( MarbleWidget* widget )
         connect( d->m_marbleWidget->model()->routingManager()->routingModel(),
                 SIGNAL( positionChanged() ), this, SLOT( update() ) );
 
-        d->m_autoNavigation = new Marble::AdjustNavigation( d->m_marbleWidget->model(), d->m_marbleWidget->viewport(), this );
+        d->m_autoNavigation = new Marble::AutoNavigation( d->m_marbleWidget->model(), d->m_marbleWidget->viewport(), this );
         connect( d->m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
                  d->m_marbleWidget, SLOT( zoomIn() ) );
         connect( d->m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),
@@ -123,7 +123,7 @@ void Navigation::setMarbleWidget( MarbleWidget* widget )
         connect( d->m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ),
                  d->m_autoNavigation, SLOT( inhibitAutoAdjustments() ) );
 
-        d->m_marbleWidget->model()->routingManager()->setAdjustNavigation( d->m_autoNavigation );
+        d->m_marbleWidget->model()->routingManager()->setAutoNavigation( d->m_autoNavigation );
     }
 }
 

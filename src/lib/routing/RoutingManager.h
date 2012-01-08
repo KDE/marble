@@ -27,7 +27,7 @@ class MarbleModel;
 class GeoDataDocument;
 class GeoDataFolder;
 class AlternativeRoutesModel;
-class AdjustNavigation;
+class AutoNavigation;
 class RoutingProfilesModel;
 
 /**
@@ -69,14 +69,14 @@ public:
       */
     AlternativeRoutesModel* alternativeRoutesModel();
 
-    // This is a temporary location for AdjustNavigation. The code would be refactored soon.
-    void setAdjustNavigation( AdjustNavigation * adjustNavigation );
+    // This is a temporary location for AutoNavigation. The code would be refactored soon.
+    void setAutoNavigation( AutoNavigation * adjustNavigation );
 
     /**
-     * returns the instance of AdjustNavigation
-     * This is a temporary location for AdjustNavigation. The code would be refactored soon.
+     * returns the instance of AutoNavigation
+     * This is a temporary location for AutoNavigation. The code would be refactored soon.
      */
-    const AdjustNavigation* adjustNavigation() const;
+    const AutoNavigation* adjustNavigation() const;
 
     /**
       * Returns the current route request

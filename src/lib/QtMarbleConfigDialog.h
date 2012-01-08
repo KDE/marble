@@ -12,14 +12,10 @@
 #define MARBLE_QTMARBLECONFIGDIALOG_H
 
 #include <QtGui/QDialog>
+#include <QtCore/QLocale>
 
 #include "marble_export.h"
-#include <global.h>
-
-#include "ui_MarbleViewSettingsWidget.h"
-#include "ui_MarbleNavigationSettingsWidget.h"
-#include "ui_MarbleTimeSettingsWidget.h"
-
+#include "global.h"
 
 namespace Marble
 {

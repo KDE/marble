@@ -200,7 +200,7 @@ set(marblewidget_SRCS
 
     MarbleRunnerManager.cpp
 
-    routing/AdjustNavigation.cpp
+    AutoNavigation.cpp
 
     RunnerPlugin.cpp
     MarbleAbstractRunner.cpp
@@ -314,6 +314,7 @@ if (APPLE AND QTONLY)
 else (APPLE AND QTONLY)
   install( FILES
     ${graphicsview_HDRS}
+    AutoNavigation.h
     BookmarkManager.h
     DownloadRegionDialog.h
     LatLonBoxWidget.h
@@ -385,6 +386,7 @@ else (APPLE AND QTONLY)
     routing/RoutingManager.h
     TileCreator.h
     PluginInterface.h
+    PositionProviderPluginInterface.h
     RenderPlugin.h
     RenderPluginInterface.h
     MarbleRunnerManager.h

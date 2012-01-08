@@ -18,7 +18,7 @@
 #include "RoutingProfilesModel.h"
 #include "MarbleRunnerManager.h"
 #include "RunnerPlugin.h"
-#include "AdjustNavigation.h"
+#include "AutoNavigation.h"
 #include "GeoWriter.h"
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
@@ -56,7 +56,7 @@ public:
 
     bool m_haveRoute;
 
-    AdjustNavigation *m_adjustNavigation;
+    AutoNavigation *m_adjustNavigation;
 
     bool m_guidanceModeEnabled;
 
@@ -307,12 +307,12 @@ AlternativeRoutesModel* RoutingManager::alternativeRoutesModel()
     return &d->m_alternativeRoutesModel;
 }
 
-void RoutingManager::setAdjustNavigation( AdjustNavigation* adjustNavigation )
+void RoutingManager::setAutoNavigation( AutoNavigation* adjustNavigation )
 {
     d->m_adjustNavigation = adjustNavigation;
 }
 
-const AdjustNavigation* RoutingManager::adjustNavigation() const
+const AutoNavigation* RoutingManager::adjustNavigation() const
 {
     return d->m_adjustNavigation;
 }
@@ -420,7 +420,7 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
 
     if ( d->m_adjustNavigation ) {
         d->m_adjustNavigation->setAutoZoom( enabled );
-        d->m_adjustNavigation->setRecenter( enabled ? AdjustNavigation::RecenterOnBorder : AdjustNavigation::DontRecenter );
+        d->m_adjustNavigation->setRecenter( enabled ? AutoNavigation::RecenterOnBorder : AutoNavigation::DontRecenter );
     }
 }
 
