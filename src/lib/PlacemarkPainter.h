@@ -57,7 +57,7 @@ class PlacemarkPainter : public QObject
         Selected
     };
 
-    void drawLabelText( QPainter &labelPainter, const QString &text, const QFont &labelFont, LabelStyle labelStyle );
+    void drawLabelText( QPainter &labelPainter, const QString &text, const QFont &labelFont, LabelStyle labelStyle, const QColor &color );
     void drawLabelPixmap( VisiblePlacemark *mark );
 
     bool testXBug();
