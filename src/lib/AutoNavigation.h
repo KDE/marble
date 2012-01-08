@@ -24,7 +24,7 @@ class MarbleModel;
 class PositionTracking;
 class ViewportParams;
 
-class MARBLE_EXPORT AdjustNavigation : public QObject
+class MARBLE_EXPORT AutoNavigation : public QObject
 {
     Q_OBJECT
 
@@ -35,10 +35,10 @@ public:
      * @param widget the marble widget. It cannot be null.
      * @param parent optional parent object
      */
-    explicit AdjustNavigation( MarbleModel *model, const ViewportParams *viewport, QObject *parent = 0 );
+    explicit AutoNavigation( MarbleModel *model, const ViewportParams *viewport, QObject *parent = 0 );
 
     /** Destructor */
-    ~AdjustNavigation();
+    ~AutoNavigation();
 
     /**
     * An enum type
@@ -63,7 +63,7 @@ public:
      */
      void setAutoZoom( bool activate );
 
-     AdjustNavigation::CenterMode recenterMode() const;
+     AutoNavigation::CenterMode recenterMode() const;
 
      bool autoZoom() const;
 
@@ -86,7 +86,7 @@ Q_SIGNALS:
      * signal emitted when auto center is turned on (Always re-center, re-center when required ) or off(Disabled)
      * @param recenterMode the mode for re-centering selected
      */
-     void recenterModeChanged( AdjustNavigation::CenterMode mode );
+     void recenterModeChanged( AutoNavigation::CenterMode mode );
 
     /**
      * signal emitted when auto zoom is toggled

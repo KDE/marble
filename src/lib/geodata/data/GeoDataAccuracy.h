@@ -12,7 +12,7 @@
 #ifndef MARBLE_GEODATAACCURACY_H
 #define MARBLE_GEODATAACCURACY_H
 
-#include <marble_export.h>
+#include "marble_export.h"
 
 #include <QtCore/QObject>
 

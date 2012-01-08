@@ -15,7 +15,7 @@
 #include "CurrentLocationWidget.h"
 
 // Marble
-#include "AdjustNavigation.h"
+#include "AutoNavigation.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
@@ -47,7 +47,7 @@ class CurrentLocationWidgetPrivate
 
     Ui::CurrentLocationWidget      m_currentLocationUi;
     MarbleWidget                  *m_widget;
-    AdjustNavigation *m_adjustNavigation;
+    AutoNavigation *m_adjustNavigation;
 
     QList<PositionProviderPlugin*> m_positionProviderPlugins;
     GeoDataCoordinates             m_currentPosition;
@@ -60,7 +60,7 @@ class CurrentLocationWidgetPrivate
     void changePositionProvider( const QString &provider );
     void trackPlacemark();
     void centerOnCurrentLocation();
-    void updateRecenterComboBox( AdjustNavigation::CenterMode centerMode );
+    void updateRecenterComboBox( AutoNavigation::CenterMode centerMode );
     void updateAutoZoomCheckBox( bool autoZoom );
     void updateActivePositionProvider( PositionProviderPlugin* );
     void saveTrack();
@@ -105,8 +105,8 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_widget = widget;
 
-    d->m_adjustNavigation = new AdjustNavigation( widget->model(), widget->viewport(), this );
-    d->m_widget->model()->routingManager()->setAdjustNavigation( d->m_adjustNavigation );
+    d->m_adjustNavigation = new AutoNavigation( widget->model(), widget->viewport(), this );
+    d->m_widget->model()->routingManager()->setAutoNavigation( d->m_adjustNavigation );
 
     const PluginManager* pluginManager = d->m_widget->model()->pluginManager();
     d->m_positionProviderPlugins = pluginManager->createPositionProviderPlugins();
@@ -139,8 +139,8 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
              SIGNAL( statusChanged( PositionProviderStatus) ),this,
              SLOT( adjustPositionTrackingStatus( PositionProviderStatus) ) );
 
-    disconnect( d->m_adjustNavigation, SIGNAL( recenterModeChanged( AdjustNavigation::CenterMode ) ),
-             this, SLOT( updateRecenterComboBox( AdjustNavigation::CenterMode ) ) );
+    disconnect( d->m_adjustNavigation, SIGNAL( recenterModeChanged( AutoNavigation::CenterMode ) ),
+             this, SLOT( updateRecenterComboBox( AutoNavigation::CenterMode ) ) );
     disconnect( d->m_adjustNavigation, SIGNAL( autoZoomToggled( bool ) ),
              this, SLOT( updateAutoZoomCheckBox( bool ) ) );
     disconnect( d->m_widget->model(), SIGNAL( trackedPlacemarkChanged( const GeoDataPlacemark* ) ),
@@ -162,8 +162,8 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
              SIGNAL( statusChanged( PositionProviderStatus) ), this,
              SLOT( adjustPositionTrackingStatus( PositionProviderStatus) ) );
 
-    connect( d->m_adjustNavigation, SIGNAL( recenterModeChanged( AdjustNavigation::CenterMode ) ),
-             this, SLOT( updateRecenterComboBox( AdjustNavigation::CenterMode ) ) );
+    connect( d->m_adjustNavigation, SIGNAL( recenterModeChanged( AutoNavigation::CenterMode ) ),
+             this, SLOT( updateRecenterComboBox( AutoNavigation::CenterMode ) ) );
     connect( d->m_adjustNavigation, SIGNAL( autoZoomToggled( bool ) ),
              this, SLOT( updateAutoZoomCheckBox( bool ) ) );
     connect( d->m_adjustNavigation, SIGNAL( zoomIn( FlyToMode ) ),
@@ -315,13 +315,13 @@ void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provid
 void CurrentLocationWidgetPrivate::trackPlacemark()
 {
     changePositionProvider( "Placemark" );
-    m_adjustNavigation->setRecenter( AdjustNavigation::AlwaysRecenter );
+    m_adjustNavigation->setRecenter( AutoNavigation::AlwaysRecenter );
 }
 
 void CurrentLocationWidget::setRecenterMode( int mode )
 {
-    if ( mode >= 0 && mode <= AdjustNavigation::RecenterOnBorder ) {
-        AdjustNavigation::CenterMode centerMode = ( AdjustNavigation::CenterMode ) mode;
+    if ( mode >= 0 && mode <= AutoNavigation::RecenterOnBorder ) {
+        AutoNavigation::CenterMode centerMode = ( AutoNavigation::CenterMode ) mode;
         d->m_adjustNavigation->setRecenter( centerMode );
     }
 }
@@ -336,7 +336,7 @@ void CurrentLocationWidgetPrivate::updateAutoZoomCheckBox( bool autoZoom )
     m_currentLocationUi.autoZoomCheckBox->setChecked( autoZoom );
 }
 
-void CurrentLocationWidgetPrivate::updateRecenterComboBox( AdjustNavigation::CenterMode centerMode )
+void CurrentLocationWidgetPrivate::updateRecenterComboBox( AutoNavigation::CenterMode centerMode )
 {
     m_currentLocationUi.recenterComboBox->setCurrentIndex( centerMode );
 }
@@ -387,7 +387,7 @@ void CurrentLocationWidgetPrivate::clearTrack()
     }
 }
 
-AdjustNavigation::CenterMode CurrentLocationWidget::recenterMode() const
+AutoNavigation::CenterMode CurrentLocationWidget::recenterMode() const
 {
     return d->m_adjustNavigation->recenterMode();
 }

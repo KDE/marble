@@ -37,7 +37,7 @@ namespace Marble
 
 class MarbleWidget;
 class MarbleControlBoxPrivate;
-class AdjustNavigation;
+class AutoNavigation;
 class CurrentLocationWidget;
 
 /**

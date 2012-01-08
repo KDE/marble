@@ -15,7 +15,7 @@
 #include "PositionTracking.h"
 #include "RenderPlugin.h"
 #include "ViewportParams.h"
-#include "routing/AdjustNavigation.h"
+#include "AutoNavigation.h"
 
 namespace Marble
 {
@@ -198,7 +198,7 @@ void Tracking::setLastKnownPosition( Marble::Declarative::Coordinate* lastKnownP
 bool Tracking::autoCenter() const
 {
     if ( m_autoNavigation ) {
-        return m_autoNavigation->recenterMode() != AdjustNavigation::DontRecenter;
+        return m_autoNavigation->recenterMode() != AutoNavigation::DontRecenter;
     }
 
     return false;
@@ -208,7 +208,7 @@ void Tracking::setAutoCenter( bool enabled )
 {
     if ( autoCenter() != enabled ) {
         if ( enabled && !m_autoNavigation && m_marbleWidget ) {
-            m_autoNavigation = new AdjustNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
+            m_autoNavigation = new AutoNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
             connect( m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
                      m_marbleWidget, SLOT( zoomIn( FlyToMode ) ) );
             connect( m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),
@@ -221,7 +221,7 @@ void Tracking::setAutoCenter( bool enabled )
         }
 
         if ( m_autoNavigation ) {
-            m_autoNavigation->setRecenter( AdjustNavigation::RecenterOnBorder );
+            m_autoNavigation->setRecenter( AutoNavigation::RecenterOnBorder );
         }
 
         emit autoCenterChanged();
@@ -241,7 +241,7 @@ void Tracking::setAutoZoom( bool enabled )
 {
     if ( autoZoom() != enabled ) {
         if ( enabled && !m_autoNavigation && m_marbleWidget ) {
-            m_autoNavigation = new AdjustNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
+            m_autoNavigation = new AutoNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
             connect( m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
                      m_marbleWidget, SLOT( zoomIn( FlyToMode ) ) );
             connect( m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),

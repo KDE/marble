@@ -11,6 +11,10 @@
 // Own
 #include "QtMarbleConfigDialog.h"
 
+#include "ui_MarbleViewSettingsWidget.h"
+#include "ui_MarbleNavigationSettingsWidget.h"
+#include "ui_MarbleTimeSettingsWidget.h"
+
 // Qt
 #include <QtCore/QList>
 #include <QtCore/QSettings>

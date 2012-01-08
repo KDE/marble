@@ -19,7 +19,7 @@
 namespace Marble
 {
 
-class AdjustNavigation;
+class AutoNavigation;
 
 namespace Declarative
 {
@@ -122,7 +122,7 @@ private:
 
     Marble::Declarative::Coordinate m_lastKnownPosition;
 
-    Marble::AdjustNavigation* m_autoNavigation;
+    Marble::AutoNavigation* m_autoNavigation;
 };
 
 }

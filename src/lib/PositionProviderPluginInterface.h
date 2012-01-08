@@ -14,8 +14,8 @@
 #include <QtCore/QtPlugin>
 
 #include "PluginInterface.h"
-#include "geodata/data/GeoDataCoordinates.h"
-#include "geodata/data/GeoDataAccuracy.h"
+#include "GeoDataCoordinates.h"
+#include "GeoDataAccuracy.h"
 
 
 

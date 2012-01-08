@@ -10,7 +10,7 @@
 //
 
 
-#include "AdjustNavigation.h"
+#include "AutoNavigation.h"
 
 #include "GeoDataCoordinates.h"
 #include "PositionTracking.h"
@@ -29,21 +29,21 @@
 
 namespace Marble {
 
-class AdjustNavigation::Private
+class AutoNavigation::Private
 {
 public:
 
-    AdjustNavigation *const m_parent;
+    AutoNavigation *const m_parent;
     const MarbleModel *const m_model;
     const ViewportParams *const m_viewport;
     const PositionTracking *const m_tracking;
-    AdjustNavigation::CenterMode m_recenterMode;
+    AutoNavigation::CenterMode m_recenterMode;
     bool                 m_adjustZoom;
     QTimer               m_lastWidgetInteraction;
     bool                 m_selfInteraction;
 
     /** Constructor */
-    Private( MarbleModel *model, const ViewportParams *viewport, AdjustNavigation *parent );
+    Private( MarbleModel *model, const ViewportParams *viewport, AutoNavigation *parent );
 
     /**
      * @brief To center on when reaching custom defined border
@@ -71,12 +71,12 @@ public:
      void centerOn( const GeoDataCoordinates &position );
 };
 
-AdjustNavigation::Private::Private( MarbleModel *model, const ViewportParams *viewport, AdjustNavigation *parent ) :
+AutoNavigation::Private::Private( MarbleModel *model, const ViewportParams *viewport, AutoNavigation *parent ) :
         m_parent( parent ),
         m_model( model ),
         m_viewport( viewport ),
         m_tracking( model->positionTracking() ),
-        m_recenterMode( AdjustNavigation::DontRecenter ),
+        m_recenterMode( AutoNavigation::DontRecenter ),
         m_adjustZoom( 0 ),
         m_selfInteraction( false )
 {
@@ -84,7 +84,7 @@ AdjustNavigation::Private::Private( MarbleModel *model, const ViewportParams *vi
     m_lastWidgetInteraction.setSingleShot( true );
 }
 
-void AdjustNavigation::Private::moveOnBorderToCenter( const GeoDataCoordinates &position, qreal )
+void AutoNavigation::Private::moveOnBorderToCenter( const GeoDataCoordinates &position, qreal )
 {
     qreal lon = 0.0;
     qreal lat = 0.0;
@@ -118,7 +118,7 @@ void AdjustNavigation::Private::moveOnBorderToCenter( const GeoDataCoordinates &
     }
 }
 
-GeoDataCoordinates AdjustNavigation::Private::findIntersection( qreal currentX, qreal currentY ) const
+GeoDataCoordinates AutoNavigation::Private::findIntersection( qreal currentX, qreal currentY ) const
 {
     qreal direction = m_tracking->direction();
     if ( direction >= 360 ) {
@@ -268,7 +268,7 @@ GeoDataCoordinates AdjustNavigation::Private::findIntersection( qreal currentX, 
     return destinationCoord;
 }
 
-void AdjustNavigation::Private::adjustZoom( const GeoDataCoordinates &currentPosition, qreal speed )
+void AutoNavigation::Private::adjustZoom( const GeoDataCoordinates &currentPosition, qreal speed )
 {
     const qreal lon = currentPosition.longitude( GeoDataCoordinates::Degree );
     const qreal lat = currentPosition.latitude( GeoDataCoordinates::Degree );
@@ -308,27 +308,27 @@ void AdjustNavigation::Private::adjustZoom( const GeoDataCoordinates &currentPos
     }
 }
 
-void AdjustNavigation::Private::centerOn( const GeoDataCoordinates &position )
+void AutoNavigation::Private::centerOn( const GeoDataCoordinates &position )
 {
     m_selfInteraction = true;
     emit m_parent->centerOn( position, false );
     m_selfInteraction = false;
 }
 
-AdjustNavigation::AdjustNavigation( MarbleModel *model, const ViewportParams *viewport, QObject *parent ) :
+AutoNavigation::AutoNavigation( MarbleModel *model, const ViewportParams *viewport, QObject *parent ) :
     QObject( parent ),
-    d( new AdjustNavigation::Private( model, viewport, this ) )
+    d( new AutoNavigation::Private( model, viewport, this ) )
 {
     connect( d->m_tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
                 this, SLOT( adjust( GeoDataCoordinates, qreal ) ) );
 }
 
-AdjustNavigation::~AdjustNavigation()
+AutoNavigation::~AutoNavigation()
 {
     delete d;
 }
 
-void AdjustNavigation::adjust( const GeoDataCoordinates &position, qreal speed )
+void AutoNavigation::adjust( const GeoDataCoordinates &position, qreal speed )
 {
     if ( d->m_lastWidgetInteraction.isActive() ) {
         return;
@@ -359,35 +359,35 @@ void AdjustNavigation::adjust( const GeoDataCoordinates &position, qreal speed )
     }
 }
 
-void AdjustNavigation::setAutoZoom( bool autoZoom )
+void AutoNavigation::setAutoZoom( bool autoZoom )
 {
     d->m_adjustZoom = autoZoom;
     emit autoZoomToggled( autoZoom );
 }
 
-void AdjustNavigation::setRecenter( CenterMode recenterMode )
+void AutoNavigation::setRecenter( CenterMode recenterMode )
 {
     d->m_recenterMode = recenterMode;
     emit recenterModeChanged( recenterMode );
 }
 
-void AdjustNavigation::inhibitAutoAdjustments()
+void AutoNavigation::inhibitAutoAdjustments()
 {
     if ( !d->m_selfInteraction ) {
         d->m_lastWidgetInteraction.start();
     }
 }
 
-AdjustNavigation::CenterMode AdjustNavigation::recenterMode() const
+AutoNavigation::CenterMode AutoNavigation::recenterMode() const
 {
     return d->m_recenterMode;
 }
 
-bool AdjustNavigation::autoZoom() const
+bool AutoNavigation::autoZoom() const
 {
     return d->m_adjustZoom;
 }
 
 } // namespace Marble
 
-#include "AdjustNavigation.moc"
+#include "AutoNavigation.moc"
