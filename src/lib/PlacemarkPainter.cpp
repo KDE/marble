@@ -56,46 +56,28 @@ void PlacemarkPainter::drawPlacemarks( QPainter* painter,
             drawLabelPixmap( mark );
 	}
 
-	painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
-	painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
+        int symbolX = mark->symbolPosition().x();
+        int textX =   mark->labelRect().x();
+        QRect labelRect( mark->labelRect() );
+        QPoint symbolPos( mark->symbolPosition() );
 
-	if ( ! viewport->currentProjection()->repeatX() )
-	    continue;
+        // when the map is such zoomed out that a given place
+        // appears many times, we draw one placemark at each
+        if (viewport->currentProjection()->repeatX() ) {
+            for ( int i = symbolX % (4 * viewport->radius());
+                 i <= imageWidth;
+                 i += 4 * viewport->radius() )
+            {
+                labelRect.moveLeft(i - symbolX + textX );
+                symbolPos.setX( i );
 
-	int tempSymbol = mark->symbolPosition().x();
-	int tempText =   mark->labelRect().x();
-
-	for ( int i = tempSymbol - 4 * viewport->radius();
-	      i >= 0;
-	      i -= 4 * viewport->radius() )
-	{
-	    QRect labelRect( mark->labelRect() );
-	    labelRect.moveLeft(i - tempSymbol + tempText );
-	    mark->setLabelRect( labelRect );
-
-	    QPoint symbolPos( mark->symbolPosition() );
-	    symbolPos.setX( i );
-	    mark->setSymbolPosition( symbolPos );
-
-	    painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
-	    painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
-	}
-
-	for ( int i = tempSymbol;
-	      i <= imageWidth;
-	      i += 4 * viewport->radius() )
-        {
-	    QRect labelRect( mark->labelRect() );
-	    labelRect.moveLeft(i - tempSymbol + tempText );
-	    mark->setLabelRect( labelRect );
-
-	    QPoint symbolPos( mark->symbolPosition() );
-	    symbolPos.setX( i );
-	    mark->setSymbolPosition( symbolPos );
-
-	    painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
-	    painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
-	}
+                painter->drawPixmap( symbolPos, mark->symbolPixmap() );
+                painter->drawPixmap( labelRect, mark->labelPixmap() );
+            }
+        } else { // simple case, one draw per placemark
+            painter->drawPixmap( symbolPos, mark->symbolPixmap() );
+            painter->drawPixmap( labelRect, mark->labelPixmap() );
+        }
     }
 }
 
