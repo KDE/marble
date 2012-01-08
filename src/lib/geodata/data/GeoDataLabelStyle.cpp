@@ -31,7 +31,7 @@ class GeoDataLabelStylePrivate
         : m_scale( 1.0 ),
           m_alignment( GeoDataLabelStyle::Corner ),
           m_font( QFont("Sans Serif").family(), defaultSize, 50, false ),
-          m_glow( false )
+          m_glow( true )
     {
     }
 
@@ -39,7 +39,7 @@ class GeoDataLabelStylePrivate
         : m_scale( 1.0 ),
           m_alignment( GeoDataLabelStyle::Corner ),
           m_font( font ),
-          m_glow( false )
+          m_glow( true )
     {
     }
 
