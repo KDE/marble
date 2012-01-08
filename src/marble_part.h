@@ -171,6 +171,7 @@ class MarblePart: public KParts::ReadOnlyPart
 
     //Bookmark Menu
     void  openEditBookmarkDialog();
+    void  setHome();
     void  openManageBookmarksDialog();
     void  createBookmarksListMenu( QMenu *, const GeoDataFolder& );
     void  lookAtBookmark( QAction * );
@@ -223,6 +224,7 @@ class MarblePart: public KParts::ReadOnlyPart
 
     //Bookmark Menu
     KAction *m_addBookmarkAction;
+    KAction *m_setHomeAction;
     KAction *m_manageBookmarksAction;
     // Actions for the status bar
     KAction      *m_showPositionAction;

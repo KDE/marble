@@ -892,6 +892,13 @@ void MarblePart::setupActions()
     connect( m_addBookmarkAction, SIGNAL( triggered( ) ),
              this,                SLOT( openEditBookmarkDialog() ) );
 
+    m_setHomeAction = new KAction( this );
+    actionCollection()->addAction( "set_home", m_setHomeAction );
+    m_setHomeAction->setText( tr( "&Set Home Location" ) );
+    m_setHomeAction->setIcon( KIcon( "go-home" ) );
+    connect( m_setHomeAction, SIGNAL( triggered( ) ),
+             this,                SLOT( setHome() ) );
+
     m_manageBookmarksAction = new KAction( this );
     actionCollection()->addAction( "manage_bookmarks", m_manageBookmarksAction );
     m_manageBookmarksAction->setText( i18nc( "Manage Bookmarks", "&Manage Bookmarks" ) );
@@ -1652,6 +1659,12 @@ void MarblePart::openEditBookmarkDialog()
     dialog->setMarbleWidget( widget );
     dialog->exec();
     delete dialog;
+}
+
+void MarblePart::setHome()
+{
+    MarbleWidget *widget = m_controlView->marbleWidget();
+    widget->model()->setHome( widget->centerLongitude(), widget->centerLatitude(), widget->zoom() );
 }
 
 void MarblePart::openManageBookmarksDialog()
