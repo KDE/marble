@@ -286,6 +286,10 @@ void MainWindow::createActions()
      m_addBookmarkAct->setStatusTip(tr("Add Bookmark"));
      connect( m_addBookmarkAct, SIGNAL( triggered() ), this, SLOT( openEditBookmarkDialog() ) );
 
+     m_setHomeAct = new QAction( QIcon(":/icons/go-home.png"), tr( "&Set Home Location" ),this);
+     m_setHomeAct->setStatusTip( tr( "&Set Home Location" ) );
+     connect( m_setHomeAct, SIGNAL( triggered() ), this, SLOT( setHome() ) );
+
      m_manageBookmarksAct = new QAction( QIcon( ":/icons/bookmarks-organize.png" ), tr( "&Manage Bookmarks" ), this);
      m_manageBookmarksAct->setStatusTip( tr( "Manage Bookmarks" ) );
      connect( m_manageBookmarksAct, SIGNAL( triggered() ), this, SLOT( manageBookmarks() ) );
@@ -491,6 +495,7 @@ void MainWindow::createBookmarkMenu()
 {
     m_bookmarkMenu->clear();
     m_bookmarkMenu->addAction( m_addBookmarkAct );
+    m_bookmarkMenu->addAction( m_setHomeAct );
     m_bookmarkMenu->addAction( m_manageBookmarksAct );
 
     m_bookmarkMenu->addSeparator();
@@ -550,6 +555,12 @@ void MainWindow::manageBookmarks()
 #endif // Q_WS_MAEMO_5
     dialog->exec();
     delete dialog;
+}
+
+void MainWindow::setHome()
+{
+    MarbleWidget *widget = m_controlView->marbleWidget();
+    widget->model()->setHome( widget->centerLongitude(), widget->centerLatitude(), widget->zoom() );
 }
 
 void MainWindow::openEditBookmarkDialog()
