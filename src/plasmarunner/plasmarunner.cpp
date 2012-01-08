@@ -20,6 +20,8 @@
 #include <GeoDataFolder.h>
 #include <GeoDataPlacemark.h>
 #include <BookmarkManager.h>
+#include <GeoDataTreeModel.h>
+
 // KDE
 #include <KProcess>
 #include <KIcon>
@@ -76,7 +78,7 @@ void PlasmaRunner::match(Plasma::RunnerContext &context)
 
     // TODO: BookmarkManager does not yet listen to updates, also does not sync between processes :(
     // So for now always load on demand, even if expensive possibly
-    BookmarkManager bookmarkManager;
+    BookmarkManager bookmarkManager(new GeoDataTreeModel);
     bookmarkManager.loadFile( QLatin1String("bookmarks/bookmarks.kml") );
 
     foreach (GeoDataFolder* folder, bookmarkManager.folders()) {
