@@ -102,7 +102,7 @@ inline void PlacemarkPainter::drawLabelText(QPainter &labelPainter, const QStrin
         font.setWeight( 75 );
         fontAscent = QFontMetrics( font ).ascent();
 
-        QPen outlinepen( Qt::white );
+        QPen outlinepen( color == QColor( Qt::white ) ? Qt::black : Qt::white );
         outlinepen.setWidthF( s_labelOutlineWidth );
         QBrush  outlinebrush( color );
 
