@@ -184,7 +184,6 @@ set(marblewidget_SRCS
     routing/RoutingProfile.cpp
     routing/RoutingManager.cpp
     routing/RoutingLayer.cpp
-    routing/RoutingLineEdit.cpp
     routing/RoutingInputWidget.cpp
     routing/RoutingWidget.cpp
     routing/RoutingProfilesWidget.cpp
@@ -216,7 +215,8 @@ set(marblewidget_SRCS
     MapWizard.cpp
     GeoGraphicsScene.cpp
     ElevationModel.cpp
-
+    MarbleLineEdit.cpp
+    SearchInputWidget.cpp
     kineticmodel.cpp
 )
 

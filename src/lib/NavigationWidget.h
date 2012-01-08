@@ -45,6 +45,8 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
      */
     void setMarbleWidget( MarbleWidget *widget );
 
+    void search( const QString &searchTerm );
+
  Q_SIGNALS:
     /**
      * @brief Signal emitted when the Home button has been pressed.
@@ -81,6 +83,7 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
      */
     void moveDown();
 
+    void searchFinished();
 
  public Q_SLOTS:
     /**
@@ -108,15 +111,6 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
     void changeZoom( int zoom );
 
  private Q_SLOTS:
-    /// called whenever the user types something new in the search box
-    void searchLineChanged( const QString &search );
-
-    /// called the Return or Enter key is pressed in the search box.
-    void searchReturnPressed();
-
-    /// called by the singleShot to initiate a search based on the searchLine
-    void search();
-
     void updateButtons( int );
 
     void mapCenterOnSignal( const QModelIndex & );

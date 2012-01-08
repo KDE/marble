@@ -9,7 +9,7 @@
 // as included in KDE 4.5. See there for its authors:
 // http://api.kde.org/4.x-api/kdelibs-apidocs/kdeui/html/klineedit_8cpp.html
 //
-// Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2010,2012      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
 #ifndef MARBLE_ROUTINGLINEEDIT_H
@@ -20,27 +20,33 @@
 namespace Marble
 {
 
-class RoutingLineEditPrivate;
+class MarbleLineEditPrivate;
 
 /**
   * A QLineEdit with an embedded clear button. The clear button removes any input
   * in the line edit when clicked with the left mouse button. It replaces the line
   * edit input with the current clipboard content on a middle mouse button click.
   */
-class RoutingLineEdit : public QLineEdit
+class MarbleLineEdit : public QLineEdit
 {
     Q_OBJECT
 
 public:
     /** Constructor */
-    RoutingLineEdit( QWidget *parent = 0 );
+    MarbleLineEdit( QWidget *parent = 0 );
 
     /** Destructor */
-    ~RoutingLineEdit();
+    ~MarbleLineEdit();
+
+    void setDecorator( const QPixmap &decorator );
+
+    void setBusy( bool busy );
 
 Q_SIGNALS:
     /** The clear button was clicked with the left mouse button */
     void clearButtonClicked();
+
+    void decoratorButtonClicked();
 
 protected:
     virtual void mouseReleaseEvent( QMouseEvent* event );
@@ -52,8 +58,10 @@ private Q_SLOTS:
 
     void updateClearButton();
 
+    void updateProgress();
+
 private:
-    RoutingLineEditPrivate* const d;
+    MarbleLineEditPrivate* const d;
 };
 
 } // namespace Marble

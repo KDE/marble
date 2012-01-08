@@ -21,7 +21,7 @@
 #include "routing/RoutingManager.h"
 #include "GeoDataFolder.h"
 #include "PositionTracking.h"
-#include "RoutingLineEdit.h"
+#include "MarbleLineEdit.h"
 #include "GoToDialog.h"
 
 #include <QtCore/QTimer>
@@ -40,10 +40,10 @@ namespace Marble
 {
 
 /**
-  * A RoutingLineEdit that swallows enter/return pressed
+  * A MarbleLineEdit that swallows enter/return pressed
   * key events
   */
-class RoutingInputLineEdit : public RoutingLineEdit
+class RoutingInputLineEdit : public MarbleLineEdit
 {
 public:
     RoutingInputLineEdit( QWidget *parent = 0 );
@@ -104,7 +104,7 @@ public:
     void setProgressAnimationEnabled( bool enabled );
 };
 
-RoutingInputLineEdit::RoutingInputLineEdit( QWidget *parent ) : RoutingLineEdit( parent )
+RoutingInputLineEdit::RoutingInputLineEdit( QWidget *parent ) : MarbleLineEdit( parent )
 {
 #if QT_VERSION >= 0x40700
     setPlaceholderText( QObject::tr( "Address or search term..." ) );
@@ -113,7 +113,7 @@ RoutingInputLineEdit::RoutingInputLineEdit( QWidget *parent ) : RoutingLineEdit(
 
 void RoutingInputLineEdit::keyPressEvent(QKeyEvent *event)
 {
-    RoutingLineEdit::keyPressEvent( event );
+    MarbleLineEdit::keyPressEvent( event );
     bool const returnPressed = event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter;
     if ( returnPressed ) {
         event->accept();

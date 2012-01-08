@@ -100,6 +100,11 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
     /** Provides access to the current location widget for session restoring */
     CurrentLocationWidget * currentLocationWidget();
 
+    /**
+      * Brings the navigation tab to the front and initiates a search for the given term
+      */
+    void search( const QString &searchTerm );
+
  public Q_SLOTS:
     void selectTheme( const QString & );
 
@@ -138,6 +143,7 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
 Q_SIGNALS:
     void showMapWizard();
     void showUploadDialog();
+    void searchFinished();
 
  private:
     void setWidgetTabShown( QWidget * widget, int insertIndex,

@@ -37,13 +37,13 @@
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QScrollArea>
 #include <QtGui/QClipboard>
-
+#include <QtGui/QShortcut>
 #include <QtNetwork/QNetworkProxy>
 
+#include "SearchInputWidget.h"
 #include "EditBookmarkDialog.h"
 #include "BookmarkManagerDialog.h"
 #include "CurrentLocationWidget.h"
-//#include "EditBookmarkDialog.h"
 #include "MapViewWidget.h"
 #include "MarbleDirs.h"
 #include "MarbleAboutDialog.h"
@@ -101,7 +101,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_routingWindow( 0 ),
         m_trackingWindow( 0 ),
         m_gotoDialog( 0 ),
-        m_routingWidget( 0 )
+        m_routingWidget( 0 ),
+        m_searchField( 0 )
 {
 #ifdef Q_WS_MAEMO_5
     setAttribute( Qt::WA_Maemo5StackedWindow );
@@ -130,6 +131,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     // Load bookmark file. If it does not exist, a default one will be used.
     m_controlView->marbleModel()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
 
+    createToolBar();
     createActions();
     createMenus();
     createStatusBar();
@@ -930,6 +932,21 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     writeSettings();
     event->accept();
+}
+
+void MainWindow::createToolBar()
+{
+    QToolBar* toolBar = addToolBar( tr( "Main ToolBar" ) );
+    m_searchField = new SearchInputWidget( this );
+    m_searchField->setMarbleWidget( m_controlView->marbleWidget() );
+    m_searchField->setMaximumWidth( 400 );
+    connect( m_searchField, SIGNAL( search( QString ) ), m_controlView, SLOT( search( QString ) ) );
+    connect( m_controlView, SIGNAL( searchFinished() ), m_searchField, SLOT( disableSearchAnimation() ) );
+
+    QKeySequence searchShortcut( Qt::CTRL + Qt::Key_F );
+    m_searchField->setToolTip( QString( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchShortcut.toString() ) );
+    new QShortcut( searchShortcut, m_searchField, SLOT( setFocus() ) );
+    toolBar->addWidget( m_searchField );
 }
 
 QString MainWindow::readMarbleDataPath()

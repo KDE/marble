@@ -77,6 +77,7 @@ ControlView::ControlView( QWidget *parent )
 
     connect( m_control, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
     connect( m_control, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
+    connect( m_control, SIGNAL( searchFinished() ), this, SIGNAL( searchFinished() ) );
 }
 
 ControlView::~ControlView()
@@ -512,6 +513,11 @@ void ControlView::synchronizeWithExternalMapEditor( const QString &application, 
 void ControlView::setExternalMapEditor( const QString &editor )
 {
     m_externalEditor = editor;
+}
+
+void ControlView::search(const QString &searchTerm)
+{
+    m_control->search( searchTerm );
 }
 
 QString ControlView::externalMapEditor() const

@@ -45,18 +45,20 @@ class NavigationWidgetPrivate
     QSortFilterProxyModel  *m_sortproxy;
     QString                 m_searchTerm;
     MarbleRunnerManager    *m_runnerManager;
-    QTimer                  m_deferSearch;
     GeoDataTreeModel        m_treeModel;
     GeoDataDocument        *m_document;
 
-    NavigationWidgetPrivate()
-        : m_document( new GeoDataDocument ) {
-    m_document->setDocumentRole( SearchResultDocument );
-    m_document->setName("Search Results");
-    m_treeModel.setRootDocument( m_document );
-    };
-
+    NavigationWidgetPrivate();
 };
+
+NavigationWidgetPrivate::NavigationWidgetPrivate()
+    : m_widget( 0 ), m_sortproxy( 0 ), m_runnerManager( 0 ),
+      m_document( new GeoDataDocument ) {
+    m_document->setDocumentRole( SearchResultDocument );
+    m_document->setName( "Search Results" );
+    m_treeModel.setRootDocument( m_document );
+}
+
 
 NavigationWidget::NavigationWidget( QWidget *parent, Qt::WindowFlags f )
     : QWidget( parent, f ),
@@ -66,12 +68,12 @@ NavigationWidget::NavigationWidget( QWidget *parent, Qt::WindowFlags f )
     d->m_widget = 0;
 
     d->m_navigationUi.setupUi( this );
+    d->m_navigationUi.m_splitter->setStretchFactor( 0, 1 );
+    d->m_navigationUi.m_splitter->setStretchFactor( 1, 2 );
+    d->m_navigationUi.locationListView->setVisible( false );
 
     d->m_sortproxy = new QSortFilterProxyModel( this );
     d->m_navigationUi.locationListView->setModel( d->m_sortproxy );
-    d->m_deferSearch.setSingleShot( true );
-    connect ( &d->m_deferSearch, SIGNAL( timeout() ),
-              this, SLOT( search()) );
 
     connect( d->m_navigationUi.goHomeButton,     SIGNAL( clicked() ),
              this,                               SIGNAL( goHome() ) );
@@ -97,11 +99,6 @@ NavigationWidget::NavigationWidget( QWidget *parent, Qt::WindowFlags f )
     connect( d->m_navigationUi.locationListView, SIGNAL( activated( const QModelIndex& ) ),
              this,                               SLOT( mapCenterOnSignal( const QModelIndex& ) ) );
 
-    connect( d->m_navigationUi.searchLineEdit,   SIGNAL( textChanged( const QString& ) ),
-             this,                               SLOT( searchLineChanged( const QString& ) ) );
-    connect( d->m_navigationUi.searchLineEdit,   SIGNAL( returnPressed() ),
-             this,                               SLOT( searchReturnPressed() ) );
-
     connect( d->m_navigationUi.zoomSlider,       SIGNAL( sliderPressed() ),
              this,                               SLOT( adjustForAnimation() ) );
     connect( d->m_navigationUi.zoomSlider,       SIGNAL( sliderReleased() ),
@@ -118,6 +115,7 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
     d->m_runnerManager = new MarbleRunnerManager( widget->model()->pluginManager(), this );
     connect( d->m_runnerManager, SIGNAL( searchResultChanged( QVector<GeoDataPlacemark*> ) ),
              this,               SLOT( setLocations( QVector<GeoDataPlacemark*> ) ) );
+    connect( d->m_runnerManager, SIGNAL( searchFinished( QString ) ), this, SIGNAL( searchFinished() ) );
 
     d->m_widget = widget;
     d->m_runnerManager->setModel( widget->model() );
@@ -125,11 +123,7 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
 
     d->m_sortproxy->setSortLocaleAware( true );
     d->m_sortproxy->setDynamicSortFilter( true );
-
-    // Make us aware of all the Placemarks in the MarbleModel so that
-    // we can search them.
-    d->m_sortproxy->setSourceModel( d->m_widget->model()->placemarkModel() );
-    d->m_sortproxy->sort( 0 );
+    d->m_sortproxy->setSourceModel( &d->m_treeModel );
 
     // Connect necessary signals.
     connect( this, SIGNAL( goHome() ),         d->m_widget, SLOT( goHome() ) );
@@ -147,6 +141,23 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
 
     connect( d->m_widget, SIGNAL( themeChanged( QString ) ),
              this,        SLOT( selectTheme( QString ) ) );
+}
+
+void NavigationWidget::search(const QString &searchTerm)
+{
+    d->m_searchTerm = searchTerm;
+    d->m_navigationUi.locationListView->setVisible( !searchTerm.isEmpty() );
+
+    if ( !searchTerm.isEmpty() ) {
+        d->m_runnerManager->findPlacemarks( d->m_searchTerm );
+    } else {
+        d->m_widget->model()->placemarkSelectionModel()->clear();
+
+        // clear the local document
+        d->m_widget->model()->treeModel()->removeDocument( d->m_document );
+        d->m_document->clear();
+        d->m_widget->model()->treeModel()->addDocument( d->m_document );
+    }
 }
 
 void NavigationWidget::changeZoom( int zoom )
@@ -169,41 +180,6 @@ void NavigationWidget::changeZoom( int zoom )
     d->m_navigationUi.zoomSlider->blockSignals( false );
 }
 
-void NavigationWidget::searchLineChanged( const QString &search )
-{
-    d->m_searchTerm = search;
-    // if search line is empty, restore original geonames
-    if ( d->m_searchTerm.isEmpty() ) {
-        // set the proxy list to the placemarkModel
-        d->m_sortproxy->setSourceModel( d->m_widget->model()->placemarkModel() );
-        d->m_sortproxy->sort( 0 );
-        d->m_widget->model()->placemarkSelectionModel()->clear();
-
-        // clear the local document
-        d->m_widget->model()->treeModel()->removeDocument( d->m_document );
-        d->m_document->clear();
-        d->m_widget->model()->treeModel()->addDocument( d->m_document );
-    }
-    d->m_deferSearch.start( 500 );
-}
-
-void NavigationWidget::searchReturnPressed()
-{
-    // do nothing if search term empty
-    if ( !d->m_searchTerm.isEmpty() ) {
-        d->m_runnerManager->findPlacemarks( d->m_searchTerm );
-    }
-}
-
-void NavigationWidget::search()
-{
-    d->m_deferSearch.stop();
-    int  currentSelected = d->m_navigationUi.locationListView->currentIndex().row();
-    d->m_navigationUi.locationListView->selectItem( d->m_searchTerm );
-    if ( currentSelected != d->m_navigationUi.locationListView->currentIndex().row() )
-        d->m_navigationUi.locationListView->activate();
-}
-
 void NavigationWidget::setLocations( QVector<GeoDataPlacemark*> locations )
 {
     QTime t;
@@ -219,8 +195,7 @@ void NavigationWidget::setLocations( QVector<GeoDataPlacemark*> locations )
     d->m_widget->model()->treeModel()->addDocument( d->m_document );
     d->m_widget->centerOn( d->m_document->latLonAltBox() );
 
-    // set the proxy list to the list of results
-    d->m_sortproxy->setSourceModel( &d->m_treeModel );
+    d->m_treeModel.reset();
     d->m_sortproxy->sort( 0 );
     mDebug() << "NavigationWidget (sort): Time elapsed:"<< t.elapsed() << " ms";
 }
@@ -229,20 +204,19 @@ void NavigationWidget::selectTheme( const QString &theme )
 {
     Q_UNUSED( theme )
 
-    if( !d->m_widget )
-        return;
-
-    d->m_navigationUi.zoomSlider->setMinimum( d->m_widget->minimumZoom() );
-    d->m_navigationUi.zoomSlider->setMaximum( d->m_widget->maximumZoom() );
-    updateButtons( d->m_navigationUi.zoomSlider->value() );
+    if( d->m_widget ) {
+        d->m_navigationUi.zoomSlider->setMinimum( d->m_widget->minimumZoom() );
+        d->m_navigationUi.zoomSlider->setMaximum( d->m_widget->maximumZoom() );
+        updateButtons( d->m_navigationUi.zoomSlider->value() );
+    }
 }
 
-void NavigationWidget::updateButtons( int value )
+void NavigationWidget::updateButtons( int zoom )
 {
-    if ( value <= d->m_navigationUi.zoomSlider->minimum() ) {
+    if ( zoom <= d->m_navigationUi.zoomSlider->minimum() ) {
         d->m_navigationUi.zoomInButton->setEnabled( true );
         d->m_navigationUi.zoomOutButton->setEnabled( false );
-    } else if ( value >= d->m_navigationUi.zoomSlider->maximum() ) {
+    } else if ( zoom >= d->m_navigationUi.zoomSlider->maximum() ) {
         d->m_navigationUi.zoomInButton->setEnabled( false );
         d->m_navigationUi.zoomOutButton->setEnabled( true );
     } else {
@@ -258,9 +232,8 @@ void NavigationWidget::mapCenterOnSignal( const QModelIndex &index )
     }
     GeoDataObject *object
             = qVariantValue<GeoDataObject*>( index.model()->data(index, MarblePlacemarkModel::ObjectPointerRole ) );
-    if ( dynamic_cast<GeoDataPlacemark*>(object) )
-    {
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(object);
+    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( object );
+    if ( placemark ) {
         d->m_widget->centerOn( *placemark, true );
         d->m_widget->model()->placemarkSelectionModel()->select( d->m_sortproxy->mapToSource( index ), QItemSelectionModel::ClearAndSelect );
     }
@@ -269,24 +242,22 @@ void NavigationWidget::mapCenterOnSignal( const QModelIndex &index )
 void NavigationWidget::adjustForAnimation()
 {
     // TODO: use signals here as well
-    if ( !d->m_widget )
-        return;
-
-    d->m_widget->setViewContext( Animation );
+    if ( d->m_widget ) {
+        d->m_widget->setViewContext( Animation );
+    }
 }
 
 void NavigationWidget::adjustForStill()
 {
     // TODO: use signals here as well
-    if ( !d->m_widget )
-        return;
-
-    d->m_widget->setViewContext( Still );
+    if ( d->m_widget ) {
+        d->m_widget->setViewContext( Still );
+    }
 }
 
 void NavigationWidget::resizeEvent ( QResizeEvent * )
 {
-    bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
 
     if ( smallScreen || height() < 390 ) {
         if ( !d->m_navigationUi.zoomSlider->isHidden() ) {

@@ -103,10 +103,17 @@ class ControlView : public QWidget
       * Start the configured external map editor (or update it if it is already running)
       */
     void launchExternalMapEditor();
-    
+
+    /**
+      * Search for the given term and display the results in the search result lists,
+      * which is brought to the front
+      */
+    void search( const QString &searchTerm );
+
  signals:
      void showMapWizard();
      void showUploadDialog();
+     void searchFinished();
     
  private:
     /**
