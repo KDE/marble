@@ -20,8 +20,10 @@ namespace Marble
 {
 
     class BookmarkManagerPrivate;
+    class GeoDataDocument;
     class GeoDataPlacemark;
     class GeoDataFolder;
+    class GeoDataTreeModel;
 /**
  * This class is responsible for loading the
  * book mark objects from the files and various 
@@ -34,7 +36,7 @@ class MARBLE_EXPORT BookmarkManager : public QObject
 
  public:
 
-    explicit BookmarkManager( QObject *parent = 0 );
+    explicit BookmarkManager( GeoDataTreeModel *treeModel, QObject *parent = 0 );
 
     ~BookmarkManager();
     
@@ -57,6 +59,8 @@ class MARBLE_EXPORT BookmarkManager : public QObject
       */
     void addBookmark( const GeoDataPlacemark &bookmark, const QString &folderName ) ;
 
+    void removeBookmark( GeoDataPlacemark *bookmark );
+
     /**
       * @brief return Vector of folders
       */
@@ -67,6 +71,10 @@ class MARBLE_EXPORT BookmarkManager : public QObject
       * @param folder name of folder to be created
       */
     void addNewBookmarkFolder( const QString &folder );
+
+    void renameBookmarkFolder( GeoDataFolder *folder, const QString &name );
+
+    void removeBookmarkFolder( GeoDataFolder *folder );
     
     /**
       * @brief remove all folders and bookmarks except default folder
@@ -84,6 +92,8 @@ Q_SIGNALS:
     * @brief updates bookmark file and return true if updated successfully
     */ 
     bool updateBookmarkFile();
+
+    GeoDataDocument* openFile( const QString& fileName ) const;
 
     BookmarkManagerPrivate *d;
 

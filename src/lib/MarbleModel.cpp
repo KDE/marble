@@ -92,7 +92,7 @@ class MarbleModelPrivate
           m_placemarkselectionmodel( 0 ),
           m_positionTracking( &m_treemodel ),
           m_trackedPlacemark( 0 ),
-          m_bookmarkManager(),
+          m_bookmarkManager( &m_treemodel ),
           m_routingManager( 0 ),
           m_legend( 0 ),
           m_workOffline( false )
