@@ -153,7 +153,7 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark )
     Q_ASSERT(placemark);
     const GeoDataStyle* style = placemark->style();
 
-    QString labelName = mark->name();
+    QString labelName = placemark->name();
     QRect  labelRect  = mark->labelRect();
     if ( !labelRect.isValid() ) {
         mark->setLabelPixmap( QPixmap() );

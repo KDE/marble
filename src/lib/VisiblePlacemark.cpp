@@ -27,14 +27,6 @@ const GeoDataPlacemark* VisiblePlacemark::placemark() const
     return m_placemark;
 }
 
-const QString VisiblePlacemark::name() const
-{
-    if ( m_name.isEmpty() )
-        m_name = m_placemark->name();
-
-    return m_name;
-}
-
 const QPixmap& VisiblePlacemark::symbolPixmap() const
 {    
     GeoDataStyle* style = m_placemark->style();

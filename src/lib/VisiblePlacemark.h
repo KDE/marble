@@ -44,11 +44,6 @@ class VisiblePlacemark
     const GeoDataPlacemark* placemark() const;
 
     /**
-     * Returns the name of the place mark.
-     */
-    const QString name() const;
-
-    /**
      * Returns the pixmap of the place mark symbol.
      */
     const QPixmap& symbolPixmap() const;
@@ -102,7 +97,6 @@ class VisiblePlacemark
     QPixmap     m_labelPixmap;    // the text label (most often name)
     QRect       m_labelRect;      // bounding box of label
 
-    mutable QString     m_name;         // cached value
     mutable QPixmap     m_symbolPixmap; // cached value
 };
 
