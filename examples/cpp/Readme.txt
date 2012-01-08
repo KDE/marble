@@ -16,8 +16,8 @@ You can also use a local Marble version like this:
 
 cd hello-marble
 cmake -DCMAKE_MODULE_PATH=~/marble/export/share/marble/cmake \
-      -DMARBLE_INCLUDE_DIR=~/marble/export/include \
-      -DMARBLE_LIBRARIES=~/marble/export/lib/libmarblewidget.so \
+      -DCMAKE_INCLUDE_PATH=~/marble/export/include \
+      -DCMAKE_LIBRARY_PATH=~/marble/export/lib \
       .
 make
 ./hello-world
