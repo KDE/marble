@@ -290,6 +290,10 @@ void MarbleRunnerManagerPrivate::addReverseGeocodingResult( const GeoDataCoordin
         m_reverseGeocodingResult = placemark.address();
         emit q->reverseGeocodingFinished( coordinates, placemark );
     }
+
+    if ( m_reverseTasks.isEmpty() ) {
+        emit q->reverseGeocodingFinished();
+    }
 }
 
 QString MarbleRunnerManager::searchReverseGeocoding( const GeoDataCoordinates &coordinates ) {
