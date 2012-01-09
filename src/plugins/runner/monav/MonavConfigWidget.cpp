@@ -563,7 +563,7 @@ void MonavConfigWidget::showEvent ( QShowEvent * event )
         d->m_networkAccessManager = new QNetworkAccessManager( this );
         connect( d->m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
                      this, SLOT( retrieveMapList( QNetworkReply * ) ) );
-        QUrl url = QUrl( "http://edu.kde.org/marble/newstuff/maps-monav.xml" );
+        QUrl url = QUrl( "http://files.kde.org/marble/newstuff/maps-monav.xml" );
         d->m_networkAccessManager->get( QNetworkRequest( url ) );
     }
 }
