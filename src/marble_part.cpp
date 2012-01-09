@@ -26,6 +26,7 @@
 #include <QtGui/QPrintDialog>
 #include <QtGui/QProgressBar>
 #include <QtGui/QStandardItemModel>
+#include <QtGui/QShortcut>
 #include <QtNetwork/QNetworkProxy>
 
 // KDE
@@ -52,6 +53,7 @@
 #include <knewstuff3/uploaddialog.h>
 #include <KStandardDirs>
 #include <kdeprintdialog.h>
+#include <KToolBar>
 
 // Marble library classes
 #include "AbstractFloatItem.h"
@@ -86,6 +88,7 @@
 #include "PositionTracking.h"
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
+#include "SearchInputWidget.h"
 
 // Marble non-library classes
 #include "ControlView.h"
@@ -1737,6 +1740,20 @@ void MarblePart::updateMapEditButtonVisibility( const QString &mapTheme )
 {
     Q_ASSERT( m_externalMapEditorAction );
     m_externalMapEditorAction->setVisible( mapTheme == "earth/openstreetmap/openstreetmap.dgml" );
+}
+
+void MarblePart::setupToolBar( KToolBar *toolBar )
+{
+    m_searchField = new SearchInputWidget( toolBar );
+    m_searchField->setMarbleWidget( m_controlView->marbleWidget() );
+    m_searchField->setMaximumWidth( 400 );
+    connect( m_searchField, SIGNAL( search( QString ) ), m_controlView, SLOT( search( QString ) ) );
+    connect( m_controlView, SIGNAL( searchFinished() ), m_searchField, SLOT( disableSearchAnimation() ) );
+
+    QKeySequence searchShortcut( Qt::CTRL + Qt::Key_F );
+    m_searchField->setToolTip( QString( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchShortcut.toString() ) );
+    new QShortcut( searchShortcut, m_searchField, SLOT( setFocus() ) );
+    toolBar->addWidget( m_searchField );
 }
 
 }

@@ -25,6 +25,7 @@ class KAboutData;
 class KAction;
 class KToggleAction;
 class KConfigDialog;
+class KToolBar;
 
 class QLabel;
 class QPrinter;
@@ -45,6 +46,7 @@ class RoutingProfilesWidget;
 class SunControlWidget;
 class TimeControlWidget;
 class GeoDataFolder;
+class SearchInputWidget;
 
 class MarblePart: public KParts::ReadOnlyPart
 {
@@ -59,6 +61,7 @@ class MarblePart: public KParts::ReadOnlyPart
     static KAboutData* createAboutData();
     void createInfoBoxesMenu();
     void createOnlineServicesMenu();
+    void setupToolBar( KToolBar* toolBar );
 
     void initializeCustomTimezone();
 
@@ -200,6 +203,7 @@ class MarblePart: public KParts::ReadOnlyPart
     SunControlWidget  *m_sunControlDialog;
     TimeControlWidget *m_timeControlDialog;
     DownloadRegionDialog *m_downloadRegionDialog;
+    SearchInputWidget* m_searchField;
 
     // Actions for the GUI.
     KAction      *m_exportMapAction;

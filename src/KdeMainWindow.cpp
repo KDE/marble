@@ -14,6 +14,7 @@
 
 // Qt
 #include <QtGui/QProgressBar>
+#include <QtGui/QToolBar>
 
 // KDE
 #include <kaction.h>
@@ -48,6 +49,7 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
     setStandardToolBarMenuEnabled( true );
 
     createGUI( 0 );
+    m_part->setupToolBar( toolBars().first() );
 
     // Creating the plugin menus
     m_part->createInfoBoxesMenu();
@@ -57,7 +59,7 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
     setAutoSaveSettings();
 
     connect( marbleWidget(), SIGNAL( themeChanged( QString ) ), 
-	     this, SLOT( setMapTitle() ) );
+            this, SLOT( setMapTitle() ) );
 }
 
 MainWindow::~MainWindow()

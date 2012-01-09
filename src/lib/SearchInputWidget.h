@@ -16,12 +16,13 @@
 #include "GeoDataTreeModel.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleLineEdit.h"
+#include "marble_export.h"
 
 namespace Marble {
 
 class MarbleWidget;
 
-class SearchInputWidget : public MarbleLineEdit
+class MARBLE_EXPORT SearchInputWidget : public MarbleLineEdit
 {
     Q_OBJECT
 
