@@ -123,6 +123,7 @@ QImage NasaWorldWindToOpenStreetMapConverter::calcOsmTile( int const tileX, int 
 
     QSize const tileSize( m_osmTileEdgeLengthPixel, m_osmTileEdgeLengthPixel );
     QImage tile( tileSize, QImage::Format_ARGB32 );
+    bool notEmpty = false;
 
     for ( int y = 0; y < m_osmTileEdgeLengthPixel; ++y ) {
         int const pixelY = basePixelY + y;
@@ -133,14 +134,13 @@ QImage NasaWorldWindToOpenStreetMapConverter::calcOsmTile( int const tileX, int 
             double const lonRad = osmPixelXtoLonRad( pixelX );
             QRgb const color = nwwPixel( lonRad, latRad );
 
-            // for testing purposes only save complete tiles
-            if ( color == m_emptyPixel )
-                return QImage();
+            if ( color != m_emptyPixel )
+                notEmpty = true;
 
             tile.setPixel( x, y, color );
         }
     }
-    return tile;
+    return notEmpty ? tile : QImage();
 }
 
 QDir NasaWorldWindToOpenStreetMapConverter::checkAndCreateDirectory( int const tileX ) const
