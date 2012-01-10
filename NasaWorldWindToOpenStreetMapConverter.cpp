@@ -227,7 +227,7 @@ QPair<QImage, bool> NasaWorldWindToOpenStreetMapConverter::nwwTile( int const ti
     // first check cache
     QImage * const cachedTile = m_nwwTileCache.object( tileId );
     if ( cachedTile )
-        return QPair<QImage, bool>( QImage( *cachedTile ), true );
+        return QPair<QImage, bool>( *cachedTile, true );
 
     // fast check if tile is missing, perhaps move into caller
     if ( m_nwwTileMissing.contains( tileId ))
