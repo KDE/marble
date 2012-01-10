@@ -15,11 +15,9 @@ NasaWorldWindToOpenStreetMapConverter::NasaWorldWindToOpenStreetMapConverter( QO
       m_nwwMapHeightTiles(),
       m_nwwMapWidthPixel(),
       m_nwwMapHeightPixel(),
-      //m_nwwRadiant2Pixel(),
       m_osmTileLevel(),
       m_osmMapEdgeLengthTiles(),
       m_osmMapEdgeLengthPixel()
-      //m_osmPixel2Radiant()
 {
 }
 
