@@ -54,12 +54,10 @@ private:
     int m_nwwMapHeightTiles;
     int m_nwwMapWidthPixel;
     int m_nwwMapHeightPixel;
-    //double m_nwwRadiant2Pixel;
 
     int m_osmTileLevel;
     int m_osmMapEdgeLengthTiles;
     int m_osmMapEdgeLengthPixel;
-    //double m_osmPixel2Radiant;
 
     QSet<int> m_nwwTileMissing;
     QCache<int, QImage> m_nwwTileCache;
