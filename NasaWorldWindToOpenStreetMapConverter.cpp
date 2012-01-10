@@ -17,7 +17,8 @@ NasaWorldWindToOpenStreetMapConverter::NasaWorldWindToOpenStreetMapConverter( QO
       m_nwwMapHeightPixel(),
       m_osmTileLevel(),
       m_osmMapEdgeLengthTiles(),
-      m_osmMapEdgeLengthPixel()
+      m_osmMapEdgeLengthPixel(),
+      m_nwwTileCache( 100 * 1024 * 1024 ) // 100 MB cache
 {
 }
 
@@ -243,7 +244,7 @@ QPair<QImage, bool> NasaWorldWindToOpenStreetMapConverter::nwwTile( int const ti
         m_nwwTileMissing.insert( tileId );
         //qDebug() << "Tile" << filename << "not found";
     } else {
-        m_nwwTileCache.insert( tileId, new QImage( tile ));
+        m_nwwTileCache.insert( tileId, new QImage( tile ), tile.byteCount() );
         qDebug() << "Tile" << filename << "loaded and inserted in cache";
     }
     return QPair<QImage, bool>( tile, loaded );
