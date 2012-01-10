@@ -64,7 +64,7 @@ void NasaWorldWindToOpenStreetMapConverter::setOsmTileLevel( int const level )
 
 void NasaWorldWindToOpenStreetMapConverter::start()
 {
-    int const tileX1 = 0; // 11:1114 12:1125;
+    int const tileX1 = 0;
     int const tileX2 = m_osmMapEdgeLengthTiles;
     int const tileY1 = 0;
     int const tileY2 = m_osmMapEdgeLengthTiles;
