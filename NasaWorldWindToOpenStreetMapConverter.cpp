@@ -260,14 +260,8 @@ inline double NasaWorldWindToOpenStreetMapConverter::osmPixelYtoLatRad( int cons
 {
     double const pixelYd = static_cast<double>( pixelY );
     double const osmMapEdgeLengthPixeld = static_cast<double>( m_osmMapEdgeLengthPixel );
-
-//    double const latRad1 = 180.0 / M_PI
-//            * ( 2.0 * atan( exp( pixelYd / osmMapEdgeLengthPixeld * M_PI / 180.0 ))
-//                - 0.5 * M_PI );
-
-    double const latRad2 = atan( sinh(( pixelYd - 0.5 * osmMapEdgeLengthPixeld ) * 4.0 * M_PI / osmMapEdgeLengthPixeld ));
-
-    return latRad2;
+    double const latRad = -atan( sinh(( pixelYd - 0.5 * osmMapEdgeLengthPixeld ) * 2.0 * M_PI / osmMapEdgeLengthPixeld ));
+    return latRad;
 }
 
 inline double NasaWorldWindToOpenStreetMapConverter::lonRadToNwwPixelX( double const lonRad ) const
