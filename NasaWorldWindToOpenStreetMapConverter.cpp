@@ -118,7 +118,7 @@ void NasaWorldWindToOpenStreetMapConverter::renderOsmTileCluster( int const clus
 
 QImage NasaWorldWindToOpenStreetMapConverter::renderOsmTile( int const tileX, int const tileY )
 {
-    qDebug() << "calcOsmTile( tileX=" << tileX << ", tileY=" << tileY << " )";
+    qDebug() << "renderOsmTile tileX:" << tileX << ", tileY:" << tileY;
     int const basePixelX = tileX * m_osmTileEdgeLengthPixel;
     int const basePixelY = tileY * m_osmTileEdgeLengthPixel;
 
