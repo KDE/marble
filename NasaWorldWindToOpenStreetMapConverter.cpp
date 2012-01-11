@@ -94,6 +94,8 @@ void NasaWorldWindToOpenStreetMapConverter::testReprojection()
 void NasaWorldWindToOpenStreetMapConverter::renderOsmTileCluster( int const clusterX, int const clusterY,
                                                                   int const clusterEdgeLengthTiles )
 {
+    qDebug() << "renderOsmTileCluster clusterX:" << clusterX << ", clusterY:" << clusterY
+             << ", clusterEdgeLengthTiles:" << clusterEdgeLengthTiles;
     int const tileX1 = clusterX * clusterEdgeLengthTiles;
     int const tileX2 = tileX1 + clusterEdgeLengthTiles;
     int const tileY1 = clusterY * clusterEdgeLengthTiles;
