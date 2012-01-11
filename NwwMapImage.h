@@ -14,9 +14,12 @@ public:
     NwwMapImage();
     NwwMapImage( QDir const & baseDirectory, int const tileLevel );
 
+    enum InterpolationMethod { NearestNeighborInterpolation, BilinearInterpolation };
+
     QRgb pixel( double const lonRad, double const latRad );
     QRgb pixel( int const x, int const y );
     void setBaseDirectory( QDir const & baseDirectory );
+    void setInterpolationMethod( InterpolationMethod const method );
     void setTileLevel( int const level );
 
 private:
@@ -27,6 +30,7 @@ private:
 
     // Interpolation methods
     QRgb nearestNeighbor( double const x, double const y );
+    QRgb bilinearInterpolation( double const x, double const y );
 
     int const m_tileEdgeLengthPixel;
     QRgb const m_emptyPixel;
@@ -38,7 +42,7 @@ private:
     int m_mapWidthPixel;
     int m_mapHeightPixel;
 
-    enum InterpolationMethod { NearestNeighborInterpolation };
+
     InterpolationMethod m_interpolationMethod;
 
     QSet<int> m_tileMissing;

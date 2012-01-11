@@ -6,7 +6,7 @@
 NwwMapImage::NwwMapImage()
     : m_tileEdgeLengthPixel( 512 ),
       m_emptyPixel( qRgba( 0, 0, 0, 255 )),
-      m_interpolationMethod( NearestNeighborInterpolation ),
+      m_interpolationMethod( BilinearInterpolation ),
       m_tileCache( 100 * 1024 * 1024 ) // 100 MB cache
 {
 }
@@ -20,7 +20,7 @@ NwwMapImage::NwwMapImage( QDir const & baseDirectory, int const tileLevel )
       m_mapHeightTiles( 5 * pow( 2, m_tileLevel )),
       m_mapWidthPixel( m_mapWidthTiles * m_tileEdgeLengthPixel ),
       m_mapHeightPixel( m_mapHeightTiles * m_tileEdgeLengthPixel ),
-      m_interpolationMethod( NearestNeighborInterpolation ),
+      m_interpolationMethod( BilinearInterpolation ),
       m_tileCache( 100 * 1024 * 1024 ) // 100 MB cache
 {
     if ( !m_baseDirectory.exists() )
@@ -41,6 +41,8 @@ QRgb NwwMapImage::pixel( double const lonRad, double const latRad )
     switch ( m_interpolationMethod ) {
     case NearestNeighborInterpolation:
         return nearestNeighbor( x, y );
+    case BilinearInterpolation:
+        return bilinearInterpolation( x, y );
     default:
         return nearestNeighbor( x, y );
     }
@@ -61,6 +63,11 @@ QRgb NwwMapImage::pixel( int const x, int const y )
 void NwwMapImage::setBaseDirectory( QDir const & baseDirectory )
 {
     m_baseDirectory = baseDirectory;
+}
+
+void NwwMapImage::setInterpolationMethod( InterpolationMethod const method )
+{
+    m_interpolationMethod = method;
 }
 
 void NwwMapImage::setTileLevel( int const tileLevel )
@@ -123,4 +130,56 @@ QRgb NwwMapImage::nearestNeighbor( double const x, double const y )
     int const xr = round( x );
     int const yr = round( y );
     return pixel( xr, yr );
+}
+
+QRgb NwwMapImage::bilinearInterpolation( double const x, double const y )
+{
+    int const x1 = x;
+    int const x2 = x1 + 1;
+    int const y1 = y;
+    int const y2 = y1 + 1;
+
+    QRgb const lowerLeftPixel = pixel( x1, y1 );
+    QRgb const lowerRightPixel = pixel( x2, y1 );
+    QRgb const upperLeftPixel = pixel( x1, y2 );
+    QRgb const upperRightPixel = pixel( x2, y2 );
+
+    // interpolate horizontically
+    //
+    // x2 - x    x2 - x
+    // ------- = ------ = x1 + 1 - x = 1 - fractionX
+    // x2 - x1      1
+    //
+    // x - x1    x - x1
+    // ------- = ------ = fractionX
+    // x2 - x1     1
+
+    double const fractionX = x - x1;
+    double const lowerMidRed   = ( 1.0 - fractionX ) * qRed( lowerLeftPixel )   + fractionX * qRed( lowerRightPixel );
+    double const lowerMidGreen = ( 1.0 - fractionX ) * qGreen( lowerLeftPixel ) + fractionX * qGreen( lowerRightPixel );
+    double const lowerMidBlue  = ( 1.0 - fractionX ) * qBlue( lowerLeftPixel )  + fractionX * qBlue( lowerRightPixel );
+    double const lowerMidAlpha = ( 1.0 - fractionX ) * qAlpha( lowerLeftPixel ) + fractionX * qAlpha( lowerRightPixel );
+
+    double const upperMidRed   = ( 1.0 - fractionX ) * qRed( upperLeftPixel )   + fractionX * qRed( upperRightPixel );
+    double const upperMidGreen = ( 1.0 - fractionX ) * qGreen( upperLeftPixel ) + fractionX * qGreen( upperRightPixel );
+    double const upperMidBlue  = ( 1.0 - fractionX ) * qBlue( upperLeftPixel )  + fractionX * qBlue( upperRightPixel );
+    double const upperMidAlpha = ( 1.0 - fractionX ) * qAlpha( upperLeftPixel ) + fractionX * qAlpha( upperRightPixel );
+
+    // interpolate vertically
+    //
+    // y2 - y    y2 - y
+    // ------- = ------ = y1 + 1 - y = 1 - fractionY
+    // y2 - y1      1
+    //
+    // y - y1    y - y1
+    // ------- = ------ = fractionY
+    // y2 - y1     1
+
+    double const fractionY = y - y1;
+    double const red   = ( 1.0 - fractionY ) * lowerMidRed   + fractionY * upperMidRed;
+    double const green = ( 1.0 - fractionY ) * lowerMidGreen + fractionY * upperMidGreen;
+    double const blue  = ( 1.0 - fractionY ) * lowerMidBlue  + fractionY * upperMidBlue;
+    double const alpha = ( 1.0 - fractionY ) * lowerMidAlpha + fractionY * upperMidAlpha;
+
+    return qRgba( round( red ), round( green ), round( blue ), round( alpha ));
 }
