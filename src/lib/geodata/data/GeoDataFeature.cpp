@@ -607,7 +607,6 @@ GeoDataStyle* GeoDataFeature::style() const
         }
         else
         {
-            qWarning() << "No Style got assigned for " << d->m_visualCategory << ", using default! ";
             return s_defaultStyle[ GeoDataFeature::Default];
         }
     }
