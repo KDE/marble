@@ -16,10 +16,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    NasaWorldWindToOpenStreetMapConverter.cpp
+    NasaWorldWindToOpenStreetMapConverter.cpp \
+    NwwMapImage.cpp
 
 HEADERS += \
-    NasaWorldWindToOpenStreetMapConverter.h
+    NasaWorldWindToOpenStreetMapConverter.h \
+    NwwMapImage.h
 
 unix|win32: LIBS += -lQtGui
 

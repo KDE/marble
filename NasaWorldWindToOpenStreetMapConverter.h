@@ -1,6 +1,8 @@
 #ifndef NASAWORLDWINDTOOPENSTREETMAPCONVERTER_H
 #define NASAWORLDWINDTOOPENSTREETMAPCONVERTER_H
 
+#include "NwwMapImage.h"
+
 #include <QtCore/QCache>
 #include <QtCore/QDir>
 #include <QtCore/QObject>
@@ -35,32 +37,18 @@ public slots:
 private:
     QImage calcOsmTile( int const tileX, int const tileY );
     QDir checkAndCreateDirectory( int const tileX ) const;
-    QRgb nwwPixel( double const lonRad, double const latRad );
-    QRgb nwwPixel( int const pixelX, int const pixelY );
-    QPair<QImage, bool> nwwTile( int const tileX, int const tileY );
     double osmPixelXtoLonRad( int const pixelX ) const;
     double osmPixelYtoLatRad( int const pixelY ) const;
-    double lonRadToNwwPixelX( double const lonRad ) const;
-    double latRadToNwwPixelY( double const latRad ) const;
 
     int const m_osmTileEdgeLengthPixel;
-    int const m_nwwTileEdgeLengthPixel;
     QRgb const m_emptyPixel;
-    QDir m_sourceBaseDirectory;
-    QDir m_destinationBaseDirectory;
 
-    int m_nwwTileLevel;
-    int m_nwwMapWidthTiles;
-    int m_nwwMapHeightTiles;
-    int m_nwwMapWidthPixel;
-    int m_nwwMapHeightPixel;
+    NwwMapImage m_nwwMapImage;
+    QDir m_destinationBaseDirectory;
 
     int m_osmTileLevel;
     int m_osmMapEdgeLengthTiles;
     int m_osmMapEdgeLengthPixel;
-
-    QSet<int> m_nwwTileMissing;
-    QCache<int, QImage> m_nwwTileCache;
 };
 
 #endif
