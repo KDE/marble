@@ -47,26 +47,18 @@ void NasaWorldWindToOpenStreetMapConverter::setOsmTileLevel( int const level )
 
 void NasaWorldWindToOpenStreetMapConverter::start()
 {
-    int const tileX1 = 0;
-    int const tileX2 = m_osmMapEdgeLengthTiles;
-    int const tileY1 = 0;
-    int const tileY2 = m_osmMapEdgeLengthTiles;
+    // render Osm tiles using quadratic clusters of tiles instead of stripes
+    // to increase Nww tile cache usage
 
-    for ( int tileX = tileX1; tileX < tileX2; ++tileX ) {
-        QDir const tileDirectory = checkAndCreateDirectory( tileX );
-        for ( int tileY = tileY1; tileY < tileY2; ++tileY ) {
-            QImage const osmTile = calcOsmTile( tileX, tileY );
+    int const osmTileClusterEdgeLengthTiles = 64;
+    int const osmMapEdgeLengthClusters = m_osmMapEdgeLengthTiles / osmTileClusterEdgeLengthTiles;
+    if ( m_osmMapEdgeLengthTiles % osmTileClusterEdgeLengthTiles != 0 )
+        qFatal("Bad tile cluster size");
 
-            // hack
-            if ( osmTile.isNull() )
-                continue;
+    for ( int clusterX = 0; clusterX < osmMapEdgeLengthClusters; ++clusterX )
+        for ( int clusterY = 0; clusterY < osmMapEdgeLengthClusters; ++clusterY )
+            renderOsmTileCluster( clusterX, clusterY, osmTileClusterEdgeLengthTiles );
 
-            QString const filename = tileDirectory.path() + QString( "/%1.png" ).arg( tileY );
-            bool const saved = osmTile.save( filename );
-            if ( !saved )
-                qFatal("Unable to save tile '%s'.", filename.toStdString().c_str() );
-        }
-    }
     emit finished();
 }
 
@@ -97,6 +89,31 @@ void NasaWorldWindToOpenStreetMapConverter::testReprojection()
 //    qDebug() <<  M_PI / 2.0 << "->" << latRadToNwwPixelY(  M_PI / 2.0 );
 //    qDebug() <<           0 << "->" << latRadToNwwPixelY(     0 );
 //    qDebug() << -M_PI / 2.0 << "->" << latRadToNwwPixelY( -M_PI / 2.0 );
+}
+
+void NasaWorldWindToOpenStreetMapConverter::renderOsmTileCluster( int const clusterX, int const clusterY,
+                                                                  int const clusterEdgeLengthTiles )
+{
+    int const tileX1 = clusterX * clusterEdgeLengthTiles;
+    int const tileX2 = tileX1 + clusterEdgeLengthTiles;
+    int const tileY1 = clusterY * clusterEdgeLengthTiles;
+    int const tileY2 = tileY1 + clusterEdgeLengthTiles;
+
+    for ( int tileX = tileX1; tileX < tileX2; ++tileX ) {
+        QDir const tileDirectory = checkAndCreateDirectory( tileX );
+        for ( int tileY = tileY1; tileY < tileY2; ++tileY ) {
+            QImage const osmTile = calcOsmTile( tileX, tileY );
+
+            // hack
+            if ( osmTile.isNull() )
+                continue;
+
+            QString const filename = tileDirectory.path() + QString( "/%1.png" ).arg( tileY );
+            bool const saved = osmTile.save( filename );
+            if ( !saved )
+                qFatal("Unable to save tile '%s'.", filename.toStdString().c_str() );
+        }
+    }
 }
 
 QImage NasaWorldWindToOpenStreetMapConverter::calcOsmTile( int const tileX, int const tileY )
@@ -151,4 +168,3 @@ inline double NasaWorldWindToOpenStreetMapConverter::osmPixelYtoLatRad( int cons
     double const osmMapEdgeLengthPixeld = static_cast<double>( m_osmMapEdgeLengthPixel );
     return -atan( sinh(( pixelYd - 0.5 * osmMapEdgeLengthPixeld ) * 2.0 * M_PI / osmMapEdgeLengthPixeld ));
 }
-

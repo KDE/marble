@@ -35,6 +35,7 @@ signals:
 public slots:
     
 private:
+    void renderOsmTileCluster( int const clusterX, int const clusterY, int const clusterEdgeLengthTiles );
     QImage calcOsmTile( int const tileX, int const tileY );
     QDir checkAndCreateDirectory( int const tileX ) const;
     double osmPixelXtoLonRad( int const pixelX ) const;
