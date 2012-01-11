@@ -1745,9 +1745,11 @@ void MarblePart::updateMapEditButtonVisibility( const QString &mapTheme )
 void MarblePart::setupToolBar( KToolBar *toolBar )
 {
     m_searchField = new SearchInputWidget( toolBar );
-    m_searchField->setMarbleWidget( m_controlView->marbleWidget() );
+    m_searchField->setCompletionModel( m_controlView->marbleModel()->placemarkModel() );
     m_searchField->setMaximumWidth( 400 );
     connect( m_searchField, SIGNAL( search( QString ) ), m_controlView, SLOT( search( QString ) ) );
+    connect( m_searchField, SIGNAL( centerOn( const GeoDataCoordinates & ) ),
+             m_controlView->marbleWidget(), SLOT( centerOn( const GeoDataCoordinates &) ) );
     connect( m_controlView, SIGNAL( searchFinished() ), m_searchField, SLOT( disableSearchAnimation() ) );
 
     QKeySequence searchShortcut( Qt::CTRL + Qt::Key_F );

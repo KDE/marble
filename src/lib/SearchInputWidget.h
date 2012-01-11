@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2012       Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_SEARCHINPUTWIDGET_H
@@ -13,14 +14,15 @@
 
 #include <QtCore/QModelIndex>
 
-#include "GeoDataTreeModel.h"
-#include "MarblePlacemarkModel.h"
 #include "MarbleLineEdit.h"
 #include "marble_export.h"
 
+class QAbstractItemModel;
+class QCompleter;
+
 namespace Marble {
 
-class MarbleWidget;
+class GeoDataCoordinates;
 
 class MARBLE_EXPORT SearchInputWidget : public MarbleLineEdit
 {
@@ -29,7 +31,7 @@ class MARBLE_EXPORT SearchInputWidget : public MarbleLineEdit
 public:
     SearchInputWidget( QWidget* parent = 0 );
 
-    void setMarbleWidget( MarbleWidget* marbleWidget );
+    void setCompletionModel( QAbstractItemModel *completionModel );
 
 public Q_SLOTS:
     void disableSearchAnimation();
@@ -37,13 +39,15 @@ public Q_SLOTS:
 Q_SIGNALS:
     void search( const QString &searchTerm );
 
+    void centerOn( const GeoDataCoordinates &coordinates );
+
 private Q_SLOTS:
     void search();
 
     void centerOnSearchSuggestion( const QModelIndex &suggestionIndex );
 
 private:
-    MarbleWidget* m_marbleWidget;
+    QCompleter *const m_completer;
 };
 
 }

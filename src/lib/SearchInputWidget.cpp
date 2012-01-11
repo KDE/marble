@@ -6,12 +6,11 @@
 // the source code.
 //
 // Copyright 2012       Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "SearchInputWidget.h"
 
-#include "MarbleWidget.h"
-#include "MarbleModel.h"
 #include "MarblePlacemarkModel.h"
 
 #include <QtGui/QCompleter>
@@ -19,10 +18,9 @@
 namespace Marble {
 
 SearchInputWidget::SearchInputWidget( QWidget *parent ) :
-    MarbleLineEdit( parent ), m_marbleWidget( 0 )
+    MarbleLineEdit( parent ),
+    m_completer( new QCompleter( this ) )
 {
-    // nothing to do
-
     setPlaceholderText( tr( "Search" ) );
     QPixmap const decorator = QPixmap( ":/icons/16x16/edit-find.png" );
     Q_ASSERT( !decorator.isNull() );
@@ -31,17 +29,15 @@ SearchInputWidget::SearchInputWidget( QWidget *parent ) :
     connect( this, SIGNAL( clearButtonClicked() ), this, SLOT( search() ) );
     connect( this, SIGNAL( returnPressed() ), this, SLOT( search() ) );
     connect( this, SIGNAL( decoratorButtonClicked() ), this, SLOT( search() ) );
+
+    m_completer->setCompletionRole( Qt::DisplayRole );
+    setCompleter( m_completer );
+    connect( m_completer, SIGNAL( activated( QModelIndex ) ), this, SLOT( centerOnSearchSuggestion( QModelIndex ) ) );
 }
 
-void SearchInputWidget::setMarbleWidget(MarbleWidget *marbleWidget)
+void SearchInputWidget::setCompletionModel( QAbstractItemModel *completionModel )
 {
-    m_marbleWidget = marbleWidget;
-    if ( m_marbleWidget ) {
-        QCompleter* completer = new QCompleter( m_marbleWidget->model()->placemarkModel(), this );
-        completer->setCompletionRole( Qt::DisplayRole );
-        setCompleter(completer);
-        connect( completer, SIGNAL( activated( QModelIndex ) ), this, SLOT( centerOnSearchSuggestion( QModelIndex ) ) );
-    }
+    m_completer->setModel( completionModel );
 }
 
 void SearchInputWidget::search()
@@ -60,12 +56,10 @@ void SearchInputWidget::disableSearchAnimation()
 
 void SearchInputWidget::centerOnSearchSuggestion(const QModelIndex &index )
 {
-    if ( m_marbleWidget ) {
-        QAbstractItemModel const * model = completer()->completionModel();
-        QVariant const value = model->data( index, MarblePlacemarkModel::CoordinateRole );
-        GeoDataCoordinates const coordinates = qVariantValue<GeoDataCoordinates>( value );
-        m_marbleWidget->centerOn( coordinates );
-    }
+    QAbstractItemModel const * model = completer()->completionModel();
+    QVariant const value = model->data( index, MarblePlacemarkModel::CoordinateRole );
+    GeoDataCoordinates const coordinates = qVariantValue<GeoDataCoordinates>( value );
+    emit centerOn( coordinates );
 }
 
 }
