@@ -25,6 +25,8 @@ private:
     double lonRadToPixelX( double const lonRad ) const;
     double latRadToPixelY( double const latRad ) const;
 
+    // Interpolation methods
+    QRgb nearestNeighbor( double const x, double const y );
 
     int const m_tileEdgeLengthPixel;
     QRgb const m_emptyPixel;
@@ -35,6 +37,9 @@ private:
     int m_mapHeightTiles;
     int m_mapWidthPixel;
     int m_mapHeightPixel;
+
+    enum InterpolationMethod { NearestNeighborInterpolation };
+    InterpolationMethod m_interpolationMethod;
 
     QSet<int> m_tileMissing;
     QCache<int, QImage> m_tileCache;

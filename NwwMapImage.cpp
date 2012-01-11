@@ -6,6 +6,7 @@
 NwwMapImage::NwwMapImage()
     : m_tileEdgeLengthPixel( 512 ),
       m_emptyPixel( qRgba( 0, 0, 0, 255 )),
+      m_interpolationMethod( NearestNeighborInterpolation ),
       m_tileCache( 100 * 1024 * 1024 ) // 100 MB cache
 {
 }
@@ -19,6 +20,7 @@ NwwMapImage::NwwMapImage( QDir const & baseDirectory, int const tileLevel )
       m_mapHeightTiles( 5 * pow( 2, m_tileLevel )),
       m_mapWidthPixel( m_mapWidthTiles * m_tileEdgeLengthPixel ),
       m_mapHeightPixel( m_mapHeightTiles * m_tileEdgeLengthPixel ),
+      m_interpolationMethod( NearestNeighborInterpolation ),
       m_tileCache( 100 * 1024 * 1024 ) // 100 MB cache
 {
     if ( !m_baseDirectory.exists() )
@@ -36,36 +38,12 @@ QRgb NwwMapImage::pixel( double const lonRad, double const latRad )
     double const x = lonRadToPixelX( lonRad );
     double const y = latRadToPixelY( latRad );
 
-    // for now, just round
-    int const xr = round( x );
-    int const yr = round( y );
-    return pixel( xr, yr );
-
-
-    int const x1 = x;
-    int const x2 = x1 + 1;
-    int const y1 = y;
-    int const y2 = y1 + 1;
-
-    QRgb const topLeftPixel = pixel( x1, y2 );
-    QRgb const topRightPixel = pixel( x2, y2 );
-    QRgb const bottomLeftPixel = pixel( x1, y1 );
-    QRgb const bottomRightPixel = pixel( x2, y1 );
-
-    // cheap hack to see if osm tiles look somehow ok
-    if ( topLeftPixel != m_emptyPixel )
-        return topLeftPixel;
-    else if ( topRightPixel != m_emptyPixel )
-        return topRightPixel;
-    else if ( bottomLeftPixel != m_emptyPixel )
-        return bottomLeftPixel;
-    else if ( bottomRightPixel != m_emptyPixel )
-        return bottomRightPixel;
-    else
-        return m_emptyPixel;
-
-    //double const fractionalX = x - x1;
-    //double const fractionalY = y - y1;
+    switch ( m_interpolationMethod ) {
+    case NearestNeighborInterpolation:
+        return nearestNeighbor( x, y );
+    default:
+        return nearestNeighbor( x, y );
+    }
 }
 
 QRgb NwwMapImage::pixel( int const x, int const y )
@@ -138,4 +116,11 @@ inline double NwwMapImage::latRadToPixelY( double const latRad ) const
 {
     return static_cast<double>( m_mapHeightPixel ) / M_PI * latRad
             + 0.5 * static_cast<double>( m_mapHeightPixel );
+}
+
+QRgb NwwMapImage::nearestNeighbor( double const x, double const y )
+{
+    int const xr = round( x );
+    int const yr = round( y );
+    return pixel( xr, yr );
 }
