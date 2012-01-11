@@ -102,7 +102,7 @@ void NasaWorldWindToOpenStreetMapConverter::renderOsmTileCluster( int const clus
     for ( int tileX = tileX1; tileX < tileX2; ++tileX ) {
         QDir const tileDirectory = checkAndCreateDirectory( tileX );
         for ( int tileY = tileY1; tileY < tileY2; ++tileY ) {
-            QImage const osmTile = calcOsmTile( tileX, tileY );
+            QImage const osmTile = renderOsmTile( tileX, tileY );
 
             // hack
             if ( osmTile.isNull() )
@@ -116,7 +116,7 @@ void NasaWorldWindToOpenStreetMapConverter::renderOsmTileCluster( int const clus
     }
 }
 
-QImage NasaWorldWindToOpenStreetMapConverter::calcOsmTile( int const tileX, int const tileY )
+QImage NasaWorldWindToOpenStreetMapConverter::renderOsmTile( int const tileX, int const tileY )
 {
     qDebug() << "calcOsmTile( tileX=" << tileX << ", tileY=" << tileY << " )";
     int const basePixelX = tileX * m_osmTileEdgeLengthPixel;
