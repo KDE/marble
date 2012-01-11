@@ -81,7 +81,9 @@ QString BookmarkManager::bookmarkFile() const
 bool BookmarkManager::loadFile( const QString &relativeFilePath )
 {
     d->m_bookmarkFileRelativePath = relativeFilePath;
-    QString absoluteFilePath = MarbleDirs::path( d->m_bookmarkFileRelativePath );
+    QString absoluteFilePath = bookmarkFile();
+    if (absoluteFilePath.isEmpty())
+        return false;
 
     mDebug() << "Loading Bookmark File : " << absoluteFilePath;
     if ( ! relativeFilePath.isNull() ) {
@@ -98,7 +100,6 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
         d->m_treeModel->removeDocument( d->m_bookmarkDocument );
         delete d->m_bookmarkDocument;
         d->m_bookmarkDocument = document;
-        Q_ASSERT( d->m_bookmarkDocument );
 
         d->m_treeModel->addDocument( d->m_bookmarkDocument );
 
