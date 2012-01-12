@@ -27,15 +27,13 @@ class MapThemeManager : QObject
 public:
     explicit                MapThemeManager (QObject* parent /TransferThis/ = 0);
     QStandardItemModel*     mapThemeModel ();
-    void                    updateMapThemeModel ();
-    void                    directoryChanged (const QString& path);
-    void                    fileChanged (const QString& path);
 
     ~MapThemeManager ();
-//ig    static Marble::GeoSceneDocument*  loadMapTheme (const QString& mapThemeStringID);
-//ig    QList<const GeoSceneDocument*>  mapThemes () const;
 signals:
     void                    themesChanged ();
+public:
+    QStringList             mapThemeIds () const;
+//ig    GeoSceneDocument*       loadMapTheme (const QString& mapThemeStringID) const;
 };
 // MapThemeManager
 

@@ -26,6 +26,7 @@
 #include <AbstractDataPluginModel.h>
 #include <AbstractFloatItem.h>
 #include <AbstractWorkerThread.h>
+#include <routing/AlternativeRoutesModel.h>
 #include <BookmarkManager.h>
 #include <CurrentLocationWidget.h>
 #include <DownloadRegionDialog.h>
@@ -51,6 +52,8 @@
 #include <PositionTracking.h>
 #include <QtMarbleConfigDialog.h>
 #include <RenderPlugin.h>
+#include <routing/RouteRequest.h>
+#include <routing/RoutingModel.h>
 #include <RunnerPlugin.h>
 #include <SunLocator.h>
 #include <TileCreator.h>
@@ -119,10 +122,16 @@ public:
         else if (dynamic_cast<Marble::AbstractFloatItem*>(sipCpp))
             sipType = sipType_Marble_AbstractFloatItem;
         }
+    else if (dynamic_cast<Marble::RouteRequest*>(sipCpp))
+        sipType = sipType_Marble_RouteRequest;
     else if (dynamic_cast<Marble::RunnerPlugin*>(sipCpp))
         sipType = sipType_Marble_RunnerPlugin;
     else if (dynamic_cast<Marble::SunLocator*>(sipCpp))
         sipType = sipType_Marble_SunLocator;
+    else if (dynamic_cast<Marble::AlternativeRoutesModel*>(sipCpp))
+        sipType = sipType_Marble_AlternativeRoutesModel;
+    else if (dynamic_cast<Marble::RoutingModel*>(sipCpp))
+        sipType = sipType_Marble_RoutingModel;
     else if (dynamic_cast<Marble::AbstractWorkerThread*>(sipCpp))
         sipType = sipType_Marble_AbstractWorkerThread;
     else if (dynamic_cast<Marble::TileCreator*>(sipCpp))

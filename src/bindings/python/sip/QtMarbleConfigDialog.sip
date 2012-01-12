@@ -28,7 +28,6 @@ class QtMarbleConfigDialog : QDialog
 public:
     explicit                QtMarbleConfigDialog (Marble::MarbleWidget* marbleWidget, QWidget* parent /TransferThis/ = 0);
     ~QtMarbleConfigDialog ();
-    Marble::DistanceUnit    distanceUnit () const;
     Marble::AngleUnit       angleUnit () const;
     Marble::MapQuality      stillQuality () const;
     Marble::MapQuality      animationQuality () const;
@@ -61,5 +60,6 @@ public:
     bool                    customTimezone () const;
     int                     chosenTimezone () const;
     void                    initializeCustomTimezone ();
+    QLocale::MeasurementSystem  measurementSystem () const;
 };
 };

@@ -33,7 +33,7 @@ public:
     QString                 planetName () const;
     Marble::SunLocator*     sunLocator () const;
 //ig    quint64                 volatileTileCacheLimit () const;
-    const Marble::Planet*         planet () const;
+    const Marble::Planet*   planet () const;
     void                    clearPersistentTileCache ();
 
 signals:
@@ -64,7 +64,6 @@ public:
     QTextDocument*          legend ();
     void                    setLegend (QTextDocument* document);
     void                    setPersistentTileCacheLimit (quint64 kiloBytes);
-//ig    void                    setMapTheme (GeoSceneDocument* mapTheme);
     QString                 planetId () const;
     explicit                MarbleModel (QObject* parent /TransferThis/ = 0);
 //ig    GeoDataTreeModel*       treeModel ();
@@ -82,13 +81,15 @@ public:
     Marble::BookmarkManager*  bookmarkManager ();
     bool                    workOffline () const;
     void                    setWorkOffline (bool workOffline);
-//ig     Marble::ElevationModel*  elevationModel ();
+//ig    Marble::ElevationModel*  elevationModel ();
     const Marble::ElevationModel*  elevationModel () const;
     const Marble::GeoDataPlacemark*  trackedPlacemark () const;
     void                    setTrackedPlacemark (const Marble::GeoDataPlacemark* placemark);
 signals:
     void                    workOfflineChanged ();
     void                    trackedPlacemarkChanged (const Marble::GeoDataPlacemark* placemark);
+public:
+    void                    setMapThemeId (const QString& mapThemeId);
 };
 // MarbleModel
 

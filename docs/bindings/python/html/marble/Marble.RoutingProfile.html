@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
-  <title>Marble.GeoDataStyleSelector</title>
+  <title>Marble.RoutingProfile</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
@@ -45,49 +45,26 @@
 <div id="main">
 <div class="clearer">&nbsp;</div>
 
-<h1>GeoDataStyleSelector Class Reference</h1>
+<h1>RoutingProfile Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> &#x2192; <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a><br />
+
 
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
-<p>a base class for the style classes
-</p>
-<p>
-A GeoDataStyleSelector is a base class for the style classes Style
-and StyleMap classes. The StyleMap class selects a style based on
-the current mode of a Placemark (highlighted or normal). An element
-derived from StyleSelector is uniquely identified by its id and its
-url.
-</p>
-<p>
-@See GeoDataStyle
-@See GeoDataStyleMap
-</p>
-<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataStyleSelector">__init__</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataStyleSelector">__init__</a> (self, <a href="../marble/Marble.GeoDataStyleSelector.html">Marble.GeoDataStyleSelector</a> other)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nodeType">nodeType</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pack">pack</a> (self, QDataStream stream)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setStyleId">setStyleId</a> (self, QString value)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#styleId">styleId</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#unpack">unpack</a> (self, QDataStream stream)</td></tr>
+
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#TransportType">TransportType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Motorcar, Bicycle, Pedestrian&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#RoutingProfile">__init__</a> (self, QString name=QString())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#name">name</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator ==">operator ==</a> (self, <a href="../marble/Marble.RoutingProfile.html">Marble.RoutingProfile</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setName">setName</a> (self, QString name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setTransportType">setTransportType</a> (self, <a href="../marble/Marble.RoutingProfile.html#TransportType">Marble.RoutingProfile.TransportType</a> transportType)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.RoutingProfile.html#TransportType">Marble.RoutingProfile.TransportType</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#transportType">transportType</a> (self)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="GeoDataStyleSelector"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">__init__</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="GeoDataStyleSelector"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="RoutingProfile"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -98,7 +75,41 @@ url.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataStyleSelector.html">Marble.GeoDataStyleSelector</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>name=QString()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="name"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString name</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="operator =="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator ==</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.RoutingProfile.html">Marble.RoutingProfile</a>&nbsp;</td>
 <td class="paramname"><em>other</em></td>
 </tr>
 <tr>
@@ -109,52 +120,11 @@ url.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="nodeType"></a>
+<div class="memdoc"></div></div><a class="anchor" name="setName"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">QString nodeType</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="pack"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> pack</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QDataStream&nbsp;</td>
-<td class="paramname"><em>stream</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Serialize the styleselector to a stream
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> stream the stream
-</td></tr>
-</table></dl>
-<p>
-</p></div></div><a class="anchor" name="setStyleId"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setStyleId</td>
+<td class="memname"> setName</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
@@ -162,7 +132,7 @@ url.
 <td class="memname"></td>
 <td></td>
 <td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>value</em></td>
+<td class="paramname"><em>name</em></td>
 </tr>
 <tr>
 <td></td>
@@ -172,18 +142,33 @@ url.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Set a new style id.
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> value the new id
-</td></tr>
-</table></dl>
-<p>
-</p></div></div><a class="anchor" name="styleId"></a>
+<div class="memdoc"></div></div><a class="anchor" name="setTransportType"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">QString styleId</td>
+<td class="memname"> setTransportType</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.RoutingProfile.html#TransportType">Marble.RoutingProfile.TransportType</a>&nbsp;</td>
+<td class="paramname"><em>transportType</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="transportType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.RoutingProfile.html#TransportType">Marble.RoutingProfile.TransportType</a> transportType</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -191,39 +176,18 @@ url.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Return the style id.
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> the style id
-</dd></dl>
-</p></div></div><a class="anchor" name="unpack"></a>
+<div class="memdoc"></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="TransportType"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> unpack</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QDataStream&nbsp;</td>
-<td class="paramname"><em>stream</em></td>
+<table class="memname">
+<tr><td class="memname">TransportType</td>
 </tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
+</table>
 </div>
-<div class="memdoc"><p>Unserialize the styleselector from a stream
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> stream the stream
-</td></tr>
-</table></dl>
-<p>
-</p></div></div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Motorcar</em>&nbsp;</td><td><tr><td valign="top"><em>Bicycle</em>&nbsp;</td><td><tr><td valign="top"><em>Pedestrian</em>&nbsp;</td><td></table>
+</dl>
+</div></div><p>
 </div>
 </div>
 </div>
