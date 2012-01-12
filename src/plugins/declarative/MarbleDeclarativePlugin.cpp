@@ -16,6 +16,7 @@
 #include "PositionSource.h"
 #include "Tracking.h"
 #include "Routing.h"
+#include "Navigation.h"
 #include "Search.h"
 #include "RouteRequestModel.h"
 #include "ActivityModel.h"
@@ -40,6 +41,7 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
     qmlRegisterType<Marble::Declarative::PositionSource>( uri, 0, 11, "PositionSource" );
     qmlRegisterType<Marble::Declarative::Tracking>( uri, 0, 11, "Tracking" );
     qmlRegisterType<Marble::Declarative::Routing>( uri, 0, 11, "Routing" );
+    qmlRegisterType<Marble::Declarative::Navigation>( uri, 0, 11, "Navigation" );
     qmlRegisterType<Marble::Declarative::Search>( uri, 0, 11, "Search" );
     qmlRegisterType<Marble::Declarative::RouteRequestModel>( uri, 0, 11, "RouteRequestModel" );
     qmlRegisterType<Marble::Declarative::ActivityModel>( uri, 0, 11, "ActivityModel" );

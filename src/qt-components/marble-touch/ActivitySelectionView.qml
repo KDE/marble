@@ -141,6 +141,11 @@ Page {
                     "qrc:/activities/Tracking.qml"
                     )
         activityModel.addActivity(
+                    "Navigation",
+                    "qrc:/icons/activity-default.png",
+                    "qrc:/activities/Navigation.qml"
+                    )
+        activityModel.addActivity(
                     "Weather",
                     "qrc:/icons/activity-weather.png",
                     "qrc:/activities/Weather.qml"

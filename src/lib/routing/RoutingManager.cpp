@@ -515,6 +515,11 @@ QColor RoutingManager::routeColorAlternative()
     return d->m_routeColorAlternative;
 }
 
+bool RoutingManager::guidanceModeEnabled() const
+{
+    return d->m_guidanceModeEnabled;
+}
+
 } // namespace Marble
 
 #include "RoutingManager.moc"
