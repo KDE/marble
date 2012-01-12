@@ -57,6 +57,7 @@ public:
     void                    append (Marble::GeoDataFeature* other);
     void                    remove (int index);
     Marble::GeoDataLatLonAltBox  latLonAltBox () const;
+//ig    const Marble::GeoDataFeature*  child (int) const;
 };
 // GeoDataContainer
 

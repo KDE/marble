@@ -44,12 +44,6 @@ enum Projection
 };
 
 
-enum DistanceUnit
-{
-    NoDistanceUnit,
-    Meter,
-    MilesFeet
-};
 
 
 enum Dimension
@@ -172,11 +166,6 @@ public:
 };
 // MarbleGlobal
 
-enum MeasureSystem
-{
-    Metric,
-    Imperial
-};
 enum ProxyType
 {
     HttpProxy,

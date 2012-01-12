@@ -26,7 +26,6 @@ class MarbleControlBox : QWidget
 
 public:
     explicit                MarbleControlBox (QWidget* parent /TransferThis/ = 0);
-    void                    addMarbleWidget (Marble::MarbleWidget* widget);
 
 
     void                    selectTheme (const QString&);
@@ -36,7 +35,6 @@ public:
     void                    setMapViewTabShown (bool show);
     void                    setCurrentLocationTabShown (bool show);
     void                    setFileViewTabShown (bool show);
-    void                    updateMapThemeView ();
 
 
     ~MarbleControlBox ();
@@ -47,6 +45,7 @@ signals:
     void                    showUploadDialog ();
 public:
     Marble::CurrentLocationWidget*  currentLocationWidget ();
+    void                    setMarbleWidget (Marble::MarbleWidget* widget);
 };
 // MarbleControlBox
 

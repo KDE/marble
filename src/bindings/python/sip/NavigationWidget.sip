@@ -43,8 +43,8 @@ public:
     void                    changeZoom (int zoom);
 protected:
     void                    resizeEvent (QResizeEvent*);
-public:
 //FIXME
+public:
 //ig    void                    setLocations (QVector<Marble::GeoDataPlacemark*> locations);
 };
 };

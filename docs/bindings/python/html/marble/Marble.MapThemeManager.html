@@ -78,10 +78,8 @@ object.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#themesChanged">themesChanged</a> ()</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#MapThemeManager">__init__</a> (self, QObject parent=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#directoryChanged">directoryChanged</a> (self, QString path)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fileChanged">fileChanged</a> (self, QString path)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QStringList&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapThemeIds">mapThemeIds</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QStandardItemModel&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapThemeModel">mapThemeModel</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#updateMapThemeModel">updateMapThemeModel</a> (self)</td></tr>
 </table>
 <hr><h2>Signal Documentation</h2><a class="anchor" name="themesChanged"></a>
 <div class="memitem">
@@ -118,51 +116,20 @@ object.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="directoryChanged"></a>
+<div class="memdoc"></div></div><a class="anchor" name="mapThemeIds"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> directoryChanged</td>
+<td class="memname">QStringList mapThemeIds</td>
 <td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>path</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
 <td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="fileChanged"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> fileChanged</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>path</em></td>
 </tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
+</table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="mapThemeModel"></a>
+<div class="memdoc"><p>Returns a list of all locally available map theme IDs
+</p></div></div><a class="anchor" name="mapThemeModel"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -179,23 +146,6 @@ object.
 <p>
 This method provides a QStandardItemModel of all themes
 that are available via MarbleDirs.
-</p></div></div><a class="anchor" name="updateMapThemeModel"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> updateMapThemeModel</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Updates the map theme model on request.
-</p>
-<p>
-This method should usually get invoked on startup or
-by a QFileSystemWatcher instance.
 </p></div></div>
 </div>
 </div>

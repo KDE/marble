@@ -75,9 +75,5 @@ public:
     virtual Marble::GeoDataLatLonAltBox  latLonAltBox (const QRect& screenRect, const Marble::ViewportParams* viewport) const;
 //ig    bool                    screenCoordinates (qreal lon, qreal lat, const Marble::ViewportParams* viewport, int& x, int& y) const;
 //ig    bool                    screenCoordinates (const Marble::GeoDataCoordinates& geopoint, const Marble::ViewportParams* viewport, int& x, int& y, bool& globeHidesPoint) const;
-protected:
-//ig    bool                    lineStringToPolygon (const Marble::GeoDataLineString& lineString, const Marble::ViewportParams* viewport, QVector<QPolygonF*>& polygons) const;
-    virtual void            horizonToPolygon (const Marble::ViewportParams* viewport, const Marble::GeoDataCoordinates& disappearCoords, const Marble::GeoDataCoordinates& reappearCoords, QPolygonF*) const;
-    void                    tessellateLineSegment (const Marble::GeoDataCoordinates& aCoords, qreal ax, qreal ay, const Marble::GeoDataCoordinates& bCoords, qreal bx, qreal by, QPolygonF* polygon, const Marble::ViewportParams* viewport, Marble::TessellationFlags f = 0) const;
 };
 };

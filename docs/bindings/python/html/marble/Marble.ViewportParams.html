@@ -59,13 +59,18 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ViewportParams">__init__</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ViewportParams">__init__</a> (self, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#angularResolution">angularResolution</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#centerCoordinates">centerCoordinates</a> (self, float centerLon, float centerLat)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#centerLatitude">centerLatitude</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#centerLongitude">centerLongitude</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#centerOn">centerOn</a> (self, float lon, float lat)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#focusPoint">focusPoint</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#geoCoordinates">geoCoordinates</a> (self, int x, int y, float lon, float lat, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> unit=Marble.GeoDataCoordinates.Degree)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#globeCoversViewport">globeCoversViewport</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#height">height</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#latLonAltBox">latLonAltBox</a> (self, QRect screenRect)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapCoversViewport">mapCoversViewport</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QRegion&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapRegion">mapRegion</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QPainterPath&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapShape">mapShape</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.Quaternion.html">Marble.Quaternion</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#planetAxis">planetAxis</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#polarity">polarity</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.html#Projection">Marble.Projection</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#projection">projection</a> (self)</td></tr>
@@ -74,6 +79,13 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resolves">resolves</a> (self, <a href="../marble/Marble.GeoDataLatLonBox.html">Marble.GeoDataLatLonBox</a> latLonBox)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resolves">resolves</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coord1, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coord2)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resolves">resolves</a> (self, <a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a> latLonAltBox)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#screenCoordinates">screenCoordinates</a> (self, float lon, float lat, float x, float y)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#screenCoordinates">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> geopoint, float x, float y, bool globeHidesPoint)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#screenCoordinates">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> geopoint, QPointF screenpoint)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#screenCoordinates">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> geopoint, float x, float y)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#screenCoordinates">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinates, float x, float y, int pointRepeatNum, bool globeHidesPoint)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#screenCoordinates">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinates, float x, float y, int pointRepeatNum, QSizeF size, bool globeHidesPoint)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#screenCoordinates">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a> lineString, QVector<QPolygonF> polygons)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setFocusPoint">setFocusPoint</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> focusPoint)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setHeight">setHeight</a> (self, int newHeight)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setProjection">setProjection</a> (self, <a href="../marble/Marble.html#Projection">Marble.Projection</a> newProjection)</td></tr>
@@ -129,6 +141,34 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <td width="100%"> </td>
 </tr>
 </table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="centerCoordinates"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> centerCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>centerLon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>centerLat</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
 </div>
 <div class="memdoc"></div></div><a class="anchor" name="centerLatitude"></a>
 <div class="memitem">
@@ -197,8 +237,69 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> The current point of focus, e.g. the point that is not moved
 when changing the zoom level. If not set, it defaults to the
 center point.
-</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> centerCoordinates setFocusPoint resetFocusPoint focusPointIsCenter
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> centerCoordinates setFocusPoint resetFocusPoint
 </dd></dl>
+</p></div></div><a class="anchor" name="geoCoordinates"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool geoCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>x</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>y</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a>&nbsp;</td>
+<td class="paramname"><em>unit=Marble.GeoDataCoordinates.Degree</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Get the earth coordinates corresponding to a pixel in the map.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinate of the pixel
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel
+
+<tr><td></td><td valign="top"><em>lon</em>&nbsp;</td><td> the longitude angle is returned through this parameter
+
+<tr><td></td><td valign="top"><em>lat</em>&nbsp;</td><td> the latitude angle is returned through this parameter
+
+<tr><td></td><td valign="top"><em>unit</em>&nbsp;</td><td> the unit of the angles for lon and lat.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the pixel (x, y) is within the globe
+</dd></dl> false if the pixel (x, y) is outside the globe, i.e. in space.
 </p></div></div><a class="anchor" name="globeCoversViewport"></a>
 <div class="memitem">
 <div class="memproto">
@@ -223,11 +324,57 @@ center point.
 </tr>
 </table>
 </div>
+<div class="memdoc"></div></div><a class="anchor" name="latLonAltBox"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a> latLonAltBox</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QRect&nbsp;</td>
+<td class="paramname"><em>screenRect</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
 <div class="memdoc"></div></div><a class="anchor" name="mapCoversViewport"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
 <td class="memname">bool mapCoversViewport</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="mapRegion"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QRegion mapRegion</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="mapShape"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QPainterPath mapShape</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -296,7 +443,7 @@ center point.
 </table>
 </div>
 <div class="memdoc"><p>Invalidate any focus point set with setFocusPoint.
-<dl class="see" compact><dt><b>See also:</b></dt><dd> focusPoint setFocusPoint focusPointIsCenter
+<dl class="see" compact><dt><b>See also:</b></dt><dd> focusPoint setFocusPoint
 </dd></dl>
 </p></div></div><a class="anchor" name="resolves"></a>
 <div class="memitem">
@@ -370,7 +517,436 @@ center point.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="setFocusPoint"></a>
+<div class="memdoc"></div></div><a class="anchor" name="screenCoordinates"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool screenCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>x</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>y</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Get the coordinates of screen points for geographical coordinates in the map.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>coordinates</em>&nbsp;</td><td> the point on earth, including altitude, that we want the coordinates for.
+
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinates of the pixels are returned through this parameter
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel is returned through this parameter
+
+<tr><td></td><td valign="top"><em>pointRepeatNum</em>&nbsp;</td><td> the amount of times that a single geographical
+point gets represented on the map
+
+<tr><td></td><td valign="top"><em>globeHidesPoint</em>&nbsp;</td><td> whether the point gets hidden on the far side of the earth
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the geographical coordinates are visible on the screen
+</dd></dl> false if the geographical coordinates are not visible on the screen
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> ViewportParams
+</dd></dl>
+</p></div></div><a class="anchor" name="screenCoordinates"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool screenCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>geopoint</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>x</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>y</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>globeHidesPoint</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Get the coordinates of screen points for geographical coordinates in the map.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>coordinates</em>&nbsp;</td><td> the point on earth, including altitude, that we want the coordinates for.
+
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinates of the pixels are returned through this parameter
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel is returned through this parameter
+
+<tr><td></td><td valign="top"><em>pointRepeatNum</em>&nbsp;</td><td> the amount of times that a single geographical
+point gets represented on the map
+
+<tr><td></td><td valign="top"><em>globeHidesPoint</em>&nbsp;</td><td> whether the point gets hidden on the far side of the earth
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the geographical coordinates are visible on the screen
+</dd></dl> false if the geographical coordinates are not visible on the screen
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> ViewportParams
+</dd></dl>
+</p></div></div><a class="anchor" name="screenCoordinates"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool screenCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>geopoint</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QPointF&nbsp;</td>
+<td class="paramname"><em>screenpoint</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Get the coordinates of screen points for geographical coordinates in the map.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>coordinates</em>&nbsp;</td><td> the point on earth, including altitude, that we want the coordinates for.
+
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinates of the pixels are returned through this parameter
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel is returned through this parameter
+
+<tr><td></td><td valign="top"><em>pointRepeatNum</em>&nbsp;</td><td> the amount of times that a single geographical
+point gets represented on the map
+
+<tr><td></td><td valign="top"><em>globeHidesPoint</em>&nbsp;</td><td> whether the point gets hidden on the far side of the earth
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the geographical coordinates are visible on the screen
+</dd></dl> false if the geographical coordinates are not visible on the screen
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> ViewportParams
+</dd></dl>
+</p></div></div><a class="anchor" name="screenCoordinates"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool screenCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>geopoint</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>x</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>y</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Get the coordinates of screen points for geographical coordinates in the map.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>coordinates</em>&nbsp;</td><td> the point on earth, including altitude, that we want the coordinates for.
+
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinates of the pixels are returned through this parameter
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel is returned through this parameter
+
+<tr><td></td><td valign="top"><em>pointRepeatNum</em>&nbsp;</td><td> the amount of times that a single geographical
+point gets represented on the map
+
+<tr><td></td><td valign="top"><em>globeHidesPoint</em>&nbsp;</td><td> whether the point gets hidden on the far side of the earth
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the geographical coordinates are visible on the screen
+</dd></dl> false if the geographical coordinates are not visible on the screen
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> ViewportParams
+</dd></dl>
+</p></div></div><a class="anchor" name="screenCoordinates"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool screenCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>coordinates</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>x</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>y</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>pointRepeatNum</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>globeHidesPoint</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Get the coordinates of screen points for geographical coordinates in the map.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>coordinates</em>&nbsp;</td><td> the point on earth, including altitude, that we want the coordinates for.
+
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinates of the pixels are returned through this parameter
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel is returned through this parameter
+
+<tr><td></td><td valign="top"><em>pointRepeatNum</em>&nbsp;</td><td> the amount of times that a single geographical
+point gets represented on the map
+
+<tr><td></td><td valign="top"><em>globeHidesPoint</em>&nbsp;</td><td> whether the point gets hidden on the far side of the earth
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the geographical coordinates are visible on the screen
+</dd></dl> false if the geographical coordinates are not visible on the screen
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> ViewportParams
+</dd></dl>
+</p></div></div><a class="anchor" name="screenCoordinates"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool screenCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>coordinates</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>x</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>y</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>pointRepeatNum</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QSizeF&nbsp;</td>
+<td class="paramname"><em>size</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>globeHidesPoint</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Get the coordinates of screen points for geographical coordinates in the map.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>coordinates</em>&nbsp;</td><td> the point on earth, including altitude, that we want the coordinates for.
+
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinates of the pixels are returned through this parameter
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel is returned through this parameter
+
+<tr><td></td><td valign="top"><em>pointRepeatNum</em>&nbsp;</td><td> the amount of times that a single geographical
+point gets represented on the map
+
+<tr><td></td><td valign="top"><em>globeHidesPoint</em>&nbsp;</td><td> whether the point gets hidden on the far side of the earth
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the geographical coordinates are visible on the screen
+</dd></dl> false if the geographical coordinates are not visible on the screen
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> ViewportParams
+</dd></dl>
+</p></div></div><a class="anchor" name="screenCoordinates"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool screenCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a>&nbsp;</td>
+<td class="paramname"><em>lineString</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QVector<QPolygonF>&nbsp;</td>
+<td class="paramname"><em>polygons</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Get the coordinates of screen points for geographical coordinates in the map.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>coordinates</em>&nbsp;</td><td> the point on earth, including altitude, that we want the coordinates for.
+
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinates of the pixels are returned through this parameter
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel is returned through this parameter
+
+<tr><td></td><td valign="top"><em>pointRepeatNum</em>&nbsp;</td><td> the amount of times that a single geographical
+point gets represented on the map
+
+<tr><td></td><td valign="top"><em>globeHidesPoint</em>&nbsp;</td><td> whether the point gets hidden on the far side of the earth
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the geographical coordinates are visible on the screen
+</dd></dl> false if the geographical coordinates are not visible on the screen
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> ViewportParams
+</dd></dl>
+</p></div></div><a class="anchor" name="setFocusPoint"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -397,7 +973,7 @@ center point.
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>focusPoint</em>&nbsp;</td><td> New focus point
 </td></tr> </table></dl>
-<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> focusPoint resetFocusPoint focusPointIsCenter
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> focusPoint resetFocusPoint
 </dd></dl>
 </p></div></div><a class="anchor" name="setHeight"></a>
 <div class="memitem">

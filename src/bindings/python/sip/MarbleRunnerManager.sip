@@ -36,12 +36,13 @@ signals:
     void                    reverseGeocodingFinished (const Marble::GeoDataCoordinates& coordinates, const Marble::GeoDataPlacemark& placemark);
     void                    routeRetrieved (Marble::GeoDataDocument* route);
 public:
-//ig     explicit                MarbleRunnerManager (const PluginManager* pluginManager, QObject* parent /TransferThis/ = 0);
-//ig    void                    retrieveRoute (const RouteRequest* request);
+//ig    explicit                MarbleRunnerManager (const PluginManager* pluginManager, QObject* parent /TransferThis/ = 0);
     void                    parseFile (const QString& fileName, Marble::DocumentRole role);
-signals:
 //FIXME add QVector<GeoDataPlacemark*> support
+signals:
 //ig    void                    searchResultChanged (QVector<Marble::GeoDataPlacemark*> result);
     void                    parsingFinished (Marble::GeoDataDocument* document, const QString& error = QString());
+public:
+    void                    retrieveRoute (const Marble::RouteRequest* request);
 };
 };

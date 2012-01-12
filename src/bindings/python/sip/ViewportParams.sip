@@ -60,6 +60,18 @@ public:
     void                    centerOn (qreal lon, qreal lat);
     qreal                   centerLongitude () const;
     qreal                   centerLatitude () const;
+    Marble::GeoDataLatLonAltBox  latLonAltBox (const QRect& screenRect) const;
+    void                    centerCoordinates (qreal& centerLon, qreal& centerLat) const;
+    bool                    screenCoordinates (const qreal lon, const qreal lat, qreal& x, qreal& y) const;
+    bool                    screenCoordinates (const Marble::GeoDataCoordinates& geopoint, qreal& x, qreal& y, bool& globeHidesPoint) const;
+//    bool                    screenCoordinates (const Marble::GeoDataCoordinates& geopoint, qreal& x, qreal& y) const;
+    bool                    screenCoordinates (const Marble::GeoDataCoordinates& geopoint, QPointF& screenpoint) const;
+//    bool                    screenCoordinates (const Marble::GeoDataCoordinates& coordinates, qreal* x, qreal& y, int& pointRepeatNum, bool& globeHidesPoint) const;
+//    bool                    screenCoordinates (const Marble::GeoDataCoordinates& coordinates, qreal* x, qreal& y, int& pointRepeatNum, const QSizeF& size, bool& globeHidesPoint) const;
+//    bool                    screenCoordinates (const Marble::GeoDataLineString& lineString, QVector<QPolygonF*>& polygons) const;
+    bool                    geoCoordinates (const int x, const int y, qreal& lon, qreal& lat, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Degree) const;
+    QPainterPath            mapShape () const;
+    QRegion                 mapRegion () const;
 };
 // ViewportParams
 

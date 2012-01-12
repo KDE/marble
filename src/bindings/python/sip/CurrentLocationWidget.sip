@@ -29,7 +29,6 @@ public:
                             CurrentLocationWidget (QWidget* parent /TransferThis/ = 0, Qt::WindowFlags f = 0);
     ~CurrentLocationWidget ();
     void                    setMarbleWidget (Marble::MarbleWidget* widget);
-    void                    receiveGpsCoordinates (const Marble::GeoDataCoordinates& in, qreal speed);
     void                    setRecenterMode (int recenterMode);
     void                    setAutoZoom (bool activate);
 //ig    Marble::AdjustNavigation::CenterMode  recenterMode () const;

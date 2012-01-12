@@ -28,6 +28,8 @@ class LegendWidget : QWidget
 public:
                             LegendWidget (QWidget* parent /TransferThis/ = 0, Qt::WindowFlags f = 0);
     ~LegendWidget ();
-    void                    setMarbleWidget (Marble::MarbleWidget* widget);
+    void                    setMarbleModel (Marble::MarbleModel* model);
+signals:
+    void                    propertyValueChanged (const QString& propertyName, bool value);
 };
 };

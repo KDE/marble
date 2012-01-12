@@ -147,6 +147,8 @@ public:
     void                    setShowSunShading (bool visible);
     void                    setShowCityLights (bool visible);
     void                    setShowSunInZenith (bool visible);
+signals:
+    void                    radiusChanged (int radius);
 };
 // MarbleMap
 

@@ -63,6 +63,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findPlacemarks">findPlacemarks</a> (self, QString searchTerm)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parseFile">parseFile</a> (self, QString fileName, <a href="../marble/Marble.html#DocumentRole">Marble.DocumentRole</a> role)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#retrieveRoute">retrieveRoute</a> (self, <a href="../marble/Marble.RouteRequest.html">Marble.RouteRequest</a> request)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#reverseGeocoding">reverseGeocoding</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinates)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setModel">setModel</a> (self, <a href="../marble/Marble.MarbleModel.html">Marble.MarbleModel</a> model)</td></tr>
 </table>
@@ -231,6 +232,31 @@ using the <dl class="see" compact><dt><b>See also:</b></dt><dd> searchResultChan
 </div>
 <div class="memdoc"><p>Parse the file using the runners for various formats
 The result is returned through the <dl class="see" compact><dt><b>See also:</b></dt><dd> parsingFinished signal
+</dd></dl>
+</p></div></div><a class="anchor" name="retrieveRoute"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> retrieveRoute</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.RouteRequest.html">Marble.RouteRequest</a>&nbsp;</td>
+<td class="paramname"><em>request</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Download routes traversing the stopover points in the given route request
+Each route found is returned through the <dl class="see" compact><dt><b>See also:</b></dt><dd> routeRetrieved signal
 </dd></dl>
 </p></div></div><a class="anchor" name="reverseGeocoding"></a>
 <div class="memitem">
