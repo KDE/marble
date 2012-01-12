@@ -418,8 +418,10 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
         tracking->setPositionProviderPlugin( 0 );
     }
 
-    d->m_adjustNavigation->setAutoZoom( enabled );
-    d->m_adjustNavigation->setRecenter( enabled ? AdjustNavigation::RecenterOnBorder : AdjustNavigation::DontRecenter );
+    if ( d->m_adjustNavigation ) {
+        d->m_adjustNavigation->setAutoZoom( enabled );
+        d->m_adjustNavigation->setRecenter( enabled ? AdjustNavigation::RecenterOnBorder : AdjustNavigation::DontRecenter );
+    }
 }
 
 void RoutingManagerPrivate::recalculateRoute( bool deviated )
