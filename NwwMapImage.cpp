@@ -52,6 +52,12 @@ QRgb NwwMapImage::pixel( int const x, int const y )
 {
     int const tileX = x / m_tileEdgeLengthPixel;
     int const tileY = y / m_tileEdgeLengthPixel;
+
+    // fast check if tile is missing
+    int const tileKey = tileId( tileX, tileY );
+    if ( m_tileMissing.contains( tileKey ))
+        return m_emptyPixel;
+
     QPair<QImage, bool> potentialTile = tile( tileX, tileY );
     if ( !potentialTile.second )
         return m_emptyPixel;
@@ -92,10 +98,6 @@ QPair<QImage, bool> NwwMapImage::tile( int const tileX, int const tileY )
     QImage * const cachedTile = m_tileCache.object( tileKey );
     if ( cachedTile )
         return QPair<QImage, bool>( *cachedTile, true );
-
-    // fast check if tile is missing, perhaps move into caller
-    if ( m_tileMissing.contains( tileKey ))
-        return QPair<QImage, bool>( QImage(), false );
 
     QString const filename = QString("%1/%2/%2_%3.jpg")
             .arg( m_baseDirectory.path() )
