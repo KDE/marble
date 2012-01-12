@@ -171,6 +171,8 @@ public:
      */
     QColor routeColorAlternative();
 
+    bool guidanceModeEnabled() const;
+
 public Q_SLOTS:
     /** Reverse the previously requested route, i.e. swap start and destination (and via points, if any) */
     void reverseRoute();

@@ -80,7 +80,7 @@ bool StreetMapThemeModel::filterAcceptsRow(int sourceRow, const QModelIndex &sou
 
 MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     QGraphicsProxyWidget( parent, flags ), m_marbleWidget( new Marble::MarbleWidget ),
-    m_inputEnabled( true ), m_tracking( 0 ), m_routing( 0 ), m_search( 0 ),
+    m_inputEnabled( true ), m_tracking( 0 ), m_routing( 0 ), m_navigation( 0 ), m_search( 0 ),
     m_interceptor( new ZoomButtonInterceptor( this, this ) ),
     m_streetMapThemeModel( 0 )
 {
@@ -292,6 +292,16 @@ Marble::Declarative::Routing* MarbleWidget::routing()
     }
 
     return m_routing;
+}
+
+Navigation *MarbleWidget::navigation()
+{
+    if ( !m_navigation ) {
+        m_navigation = new Navigation( this );
+        m_navigation->setMarbleWidget( this );
+    }
+
+    return m_navigation;
 }
 
 Marble::Declarative::Search* MarbleWidget::search()

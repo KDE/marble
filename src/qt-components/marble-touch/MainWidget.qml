@@ -300,6 +300,12 @@ Item {
         return map.tracking
     }
 
+    // Returns the grouped property to access tracking functions.
+    /** @todo: Needed? Make a property? */
+    function getNavigation() {
+        return map.navigation
+    }
+
     // Centers map on passed coordinates.
     function centerOn( lon, lat ) {
         map.center.longitude = lon

@@ -13,6 +13,7 @@
 
 #include "Tracking.h"
 #include "Routing.h"
+#include "Navigation.h"
 #include "Search.h"
 #include "Coordinate.h"
 
@@ -55,6 +56,7 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( QStringList activeRenderPlugins READ activeRenderPlugins WRITE setActiveRenderPlugins )
     Q_PROPERTY( Marble::Declarative::Tracking* tracking READ tracking NOTIFY trackingChanged )
     Q_PROPERTY( Marble::Declarative::Routing* routing READ routing NOTIFY routingChanged )
+    Q_PROPERTY( Marble::Declarative::Navigation* navigation READ navigation NOTIFY navigationChanged )
     Q_PROPERTY( Marble::Declarative::Search* search READ search NOTIFY searchChanged )
     Q_PROPERTY( QObject* mapThemeModel READ mapThemeModel NOTIFY mapThemeModelChanged )
     Q_PROPERTY( QObject* streetMapThemeModel READ streetMapThemeModel NOTIFY streetMapThemeModelChanged )
@@ -88,6 +90,8 @@ Q_SIGNALS:
     void trackingChanged();
 
     void routingChanged();
+
+    void navigationChanged();
 
     void searchChanged();
 
@@ -170,6 +174,8 @@ public Q_SLOTS:
 
     Marble::Declarative::Routing* routing();
 
+    Marble::Declarative::Navigation* navigation();
+
     Marble::Declarative::Search* search();
 
     QObject* mapThemeModel();
@@ -192,6 +198,8 @@ private:
     Marble::Declarative::Tracking* m_tracking;
 
     Marble::Declarative::Routing* m_routing;
+
+    Marble::Declarative::Navigation* m_navigation;
 
     Marble::Declarative::Search* m_search;
 
