@@ -1,8 +1,6 @@
 #ifndef NASAWORLDWINDTOOPENSTREETMAPCONVERTER_H
 #define NASAWORLDWINDTOOPENSTREETMAPCONVERTER_H
 
-#include "NwwMapImage.h"
-
 #include <QtCore/QDir>
 #include <QtCore/QObject>
 #include <QtCore/QPair>
