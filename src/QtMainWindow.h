@@ -112,6 +112,7 @@ private Q_SLOTS:
 
     //Bookmark Menu
     void  openEditBookmarkDialog();
+    void  setHome();
     void  createBookmarksListMenu(QMenu *m_bookmarksListMenu, const GeoDataFolder &folder);
     void  lookAtBookmark( QAction * action );
     void  manageBookmarks();
@@ -198,6 +199,7 @@ private:
 
     //Bookmark Menu
     QAction *m_addBookmarkAct;
+    QAction *m_setHomeAct;
     QAction *m_manageBookmarksAct;
 
     // Small screen devices
