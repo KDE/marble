@@ -37,6 +37,7 @@
 %Include AbstractMarbleGraphicsLayout.sip
 %Include AbstractProjection.sip
 %Include AbstractWorkerThread.sip
+%Include AlternativeRoutesModel.sip
 %Include BookmarkManager.sip
 %Include ClipPainter.sip
 %Include CurrentLocationWidget.sip
@@ -82,6 +83,7 @@
 %Include LatLonEdit.sip
 %Include LayerInterface.sip
 %Include LegendWidget.sip
+%Include Maneuver.sip
 %Include MapThemeManager.sip
 %Include MapViewWidget.sip
 %Include MapWizard.sip
@@ -106,6 +108,11 @@
 %Include Quaternion.sip
 %Include RenderPlugin.sip
 %Include RenderPluginInterface.sip
+%Include Route.sip
+%Include RouteRequest.sip
+%Include RouteSegment.sip
+%Include RoutingModel.sip
+%Include RoutingProfile.sip
 %Include RunnerPlugin.sip
 %Include ScreenGraphicsItem.sip
 %Include Serializable.sip
@@ -114,7 +121,6 @@
 %Include TileCreator.sip
 %Include TileLevelRangeWidget.sip
 %Include TinyWebBrowser.sip
-//%Include ViewParams.sip
 %Include ViewportParams.sip
 %Include WidgetGraphicsItem.sip
 %Include global.sip

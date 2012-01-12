@@ -46,5 +46,6 @@ public:
     void                    autoFillDetails ();
     void                    downloadLevelZero ();
     void                    createLevelZero (QNetworkReply* reply = 0);
+    void                    showPreview ();
 };
 };

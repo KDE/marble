@@ -66,7 +66,6 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.html#MapQuality">Marble.MapQuality</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#animationQuality">animationQuality</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#chosenTimezone">chosenTimezone</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#customTimezone">customTimezone</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.html#DistanceUnit">Marble.DistanceUnit</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#distanceUnit">distanceUnit</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dragLocation">dragLocation</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#externalMapEditor">externalMapEditor</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.html#GraphicsSystem">Marble.GraphicsSystem</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#graphicsSystem">graphicsSystem</a> (self)</td></tr>
@@ -74,6 +73,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#labelLocalization">labelLocalization</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#lastSessionTime">lastSessionTime</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QFont&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapFont">mapFont</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QLocale::MeasurementSystem&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#measurementSystem">measurementSystem</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#onStartup">onStartup</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#persistentTileCacheLimit">persistentTileCacheLimit</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#proxyAuth">proxyAuth</a> (self)</td></tr>
@@ -232,19 +232,7 @@ Either by the user or by loading them initially from disk.
 </table>
 </div>
 <div class="memdoc"><p>Read the value of 'Time/customTimezone' key from settings
-</p></div></div><a class="anchor" name="distanceUnit"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.html#DistanceUnit">Marble.DistanceUnit</a> distanceUnit</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="dragLocation"></a>
+</p></div></div><a class="anchor" name="dragLocation"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -322,6 +310,18 @@ Either by the user or by loading them initially from disk.
 <div class="memproto">
 <table class="memname"><tr>
 <td class="memname">QFont mapFont</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="measurementSystem"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QLocale::MeasurementSystem measurementSystem</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>

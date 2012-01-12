@@ -29,16 +29,14 @@ public:
                             MapViewWidget (QWidget* parent /TransferThis/ = 0, Qt::WindowFlags f = 0);
     ~MapViewWidget ();
     void                    setMarbleWidget (Marble::MarbleWidget* widget);
-    void                    updateCelestialModel ();
-    void                    selectTheme (const QString&);
-    void                    selectProjection (Marble::Projection projection);
-    void                    selectCurrentMapTheme (const QString&);
-    void                    updateMapThemeView ();
-//ig    void                    projectionSelected (int projectionIndex);
 signals:
-    void                    selectMapTheme (const QString&);
-    void                    projectionSelected (Marble::Projection);
     void                    showMapWizard ();
     void                    showUploadDialog ();
+public:
+    void                    setMapThemeId (const QString&);
+    void                    setProjection (Marble::Projection projection);
+signals:
+    void                    mapThemeIdChanged (const QString&);
+    void                    projectionChanged (Marble::Projection);
 };
 };

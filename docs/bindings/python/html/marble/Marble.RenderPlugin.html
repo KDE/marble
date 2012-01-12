@@ -49,7 +49,7 @@
 <code>from PyKDE4.marble import *</code>
 <p>
 Inherits: QObject,<a href="../marble/Marble.RenderPluginInterface.html">Marble.RenderPluginInterface</a> &#x2192; <a href="../marble/Marble.PluginInterface.html">Marble.PluginInterface</a><br />
-Subclasses: <a href="../marble/Marble.AbstractDataPlugin.html">Marble.AbstractDataPlugin</a>, <a href="../marble/Marble.AbstractFloatItem.html">Marble.AbstractFloatItem</a><br />
+
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 <dl class="abstract" compact><dt><b>Abstract class:</b></dt>
@@ -61,6 +61,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#RenderType">RenderType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Unknown, Online&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actionGroupsChanged">actionGroupsChanged</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#enabledChanged">enabledChanged</a> (bool enable)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#repaintNeeded">repaintNeeded</a> (QRegion dirtyRegion=QRegion())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#settingsChanged">settingsChanged</a> (QString nameId)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#visibilityChanged">visibilityChanged</a> (QString nameId, bool visible)</td></tr>
@@ -100,7 +101,24 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </div>
 <div class="memdoc"><p>This signal is emitted if the actions that the plugin supports change in
 any way
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("actionGroupsChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="repaintNeeded"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("actionGroupsChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="enabledChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> enabledChanged</td>
+<td>(</td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>enable</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("enabledChanged(bool)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="repaintNeeded"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

@@ -91,17 +91,16 @@ Night view, and a Satellite view.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showUploadDialog">showUploadDialog</a> ()</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#MarbleControlBox">__init__</a> (self, QWidget parent=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addMarbleWidget">addMarbleWidget</a> (self, <a href="../marble/Marble.MarbleWidget.html">Marble.MarbleWidget</a> widget)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.CurrentLocationWidget.html">Marble.CurrentLocationWidget</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#currentLocationWidget">currentLocationWidget</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#selectTheme">selectTheme</a> (self, QString a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCurrentLocationTabShown">setCurrentLocationTabShown</a> (self, bool show)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setFileViewTabShown">setFileViewTabShown</a> (self, bool show)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setLegendTabShown">setLegendTabShown</a> (self, bool show)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMapViewTabShown">setMapViewTabShown</a> (self, bool show)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMarbleWidget">setMarbleWidget</a> (self, <a href="../marble/Marble.MarbleWidget.html">Marble.MarbleWidget</a> widget)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setNavigationTabShown">setNavigationTabShown</a> (self, bool show)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRoutingTabShown">setRoutingTabShown</a> (self, bool show)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setWorkOffline">setWorkOffline</a> (self, bool offline)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#updateMapThemeView">updateMapThemeView</a> (self)</td></tr>
 </table>
 <hr><h2>Signal Documentation</h2><a class="anchor" name="showMapWizard"></a>
 <div class="memitem">
@@ -156,38 +155,6 @@ Night view, and a Satellite view.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="addMarbleWidget"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> addMarbleWidget</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.MarbleWidget.html">Marble.MarbleWidget</a>&nbsp;</td>
-<td class="paramname"><em>widget</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Add a MarbleWidget to be controlled by this widget.
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>widget</em>&nbsp;</td><td> the MarbleWidget to be added.
-</td></tr>
-</table></dl>
-<p> Add a MarbleWidget so that it will be controlled by this
-widget. This call create all the connections of signals and
-slots that are necessary to have full control of the
-MarbleWidget, and thereby frees the programmer from doing it.
 </p></div></div><a class="anchor" name="currentLocationWidget"></a>
 <div class="memitem">
 <div class="memproto">
@@ -339,6 +306,38 @@ MarbleWidget, and thereby frees the programmer from doing it.
 </td></tr>
 </table></dl>
 <p>
+</p></div></div><a class="anchor" name="setMarbleWidget"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setMarbleWidget</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.MarbleWidget.html">Marble.MarbleWidget</a>&nbsp;</td>
+<td class="paramname"><em>widget</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the MarbleWidget to be controlled by this widget.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>widget</em>&nbsp;</td><td> the MarbleWidget to be controlled.
+</td></tr>
+</table></dl>
+<p> Sets a MarbleWidget so that it will be controlled by this
+widget. This call create all the connections of signals and
+slots that are necessary to have full control of the
+MarbleWidget, and thereby frees the programmer from doing it.
 </p></div></div><a class="anchor" name="setNavigationTabShown"></a>
 <div class="memitem">
 <div class="memproto">
@@ -420,19 +419,7 @@ MarbleWidget, and thereby frees the programmer from doing it.
 </tr></table>
 </div>
 <div class="memdoc"><p>Toggle offline mode of download manager and runners.
-</p></div></div><a class="anchor" name="updateMapThemeView"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> updateMapThemeView</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div>
+</p></div></div>
 </div>
 </div>
 </div>

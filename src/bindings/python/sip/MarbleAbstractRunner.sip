@@ -38,9 +38,10 @@ signals:
 protected:
     Marble::MarbleModel*    model ();
 public:
-//ig    virtual void            retrieveRoute (const RouteRequest* request);
     virtual void            parseFile (const QString& fileName, Marble::DocumentRole role);
 signals:
     void                    parsingFinished (Marble::GeoDataDocument* document, const QString& error = QString());
+public:
+    virtual void            retrieveRoute (const Marble::RouteRequest* request);
 };
 };

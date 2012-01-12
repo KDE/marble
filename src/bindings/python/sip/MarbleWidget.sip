@@ -35,10 +35,8 @@ public:
     QString                 distanceString () const;
     int                     minimumZoom () const;
     int                     maximumZoom () const;
-    bool                    geoCoordinates (int x, int y, qreal& lon /out/, qreal& lat /out/, Marble::GeoDataCoordinates::Unit = Marble::GeoDataCoordinates::Degree);
     qreal                   centerLongitude () const;
     qreal                   centerLatitude () const;
-    qreal                   moveStep ();
     QPixmap                 mapScreenShot ();
     bool                    showOverviewMap () const;
     bool                    showScaleBar () const;
@@ -62,7 +60,6 @@ public:
     QList<Marble::AbstractFloatItem*>  floatItems () const;
     Marble::Projection      projection () const;
     QString                 mapThemeId () const;
-    Marble::MapQuality      mapQuality (Marble::ViewContext = Marble::Still);
     Marble::ViewContext     viewContext () const;
     bool                    animationsEnabled () const;
     Marble::AngleUnit       defaultAngleUnit () const;
@@ -130,8 +127,6 @@ public:
     virtual ~MarbleWidget ();
 //ig    MarbleWidgetInputHandler*  inputHandler () const;
 //ig    void                    setInputHandler (MarbleWidgetInputHandler* handler);
-    const QRegion           mapRegion ();
-    bool                    screenCoordinates (qreal lon, qreal lat, qreal& x, qreal& y);
     void                    readPluginSettings (QSettings& settings);
     void                    writePluginSettings (QSettings& settings) const;
 //ig    Marble::GeoSceneDocument*  mapTheme () const;
@@ -183,6 +178,14 @@ public:
     void                    setShowSunShading (bool visible);
     void                    setShowCityLights (bool visible);
     void                    setShowSunInZenith (bool visible);
+    QRegion                 mapRegion () const;
+    bool                    screenCoordinates (qreal lon, qreal lat, qreal& x, qreal& y) const;
+    bool                    geoCoordinates (int x, int y, qreal& lon, qreal& lat, Marble::GeoDataCoordinates::Unit = Marble::GeoDataCoordinates::Degree) const;
+    qreal                   moveStep () const;
+    Marble::GeoDataCoordinates  focusPoint () const;
+    void                    setFocusPoint (const Marble::GeoDataCoordinates& focusPoint);
+    void                    resetFocusPoint ();
+    Marble::MapQuality      mapQuality (Marble::ViewContext = Marble::Still) const;
 };
 // MarbleWidget
 

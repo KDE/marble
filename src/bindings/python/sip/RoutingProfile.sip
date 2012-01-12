@@ -19,21 +19,26 @@
 
 namespace Marble
 {
-class ElevationModel : QObject
+class RoutingProfile
 {
 %TypeHeaderCode
-#include <ElevationModel.h>
+#include <routing/RoutingProfile.h>
 %End
 
 public:
-//force
-                            ElevationModel (Marble::MarbleModel* model);
-//end
-    qreal                   height (qreal lon, qreal lat) const;
-    QList<Marble::GeoDataCoordinates>  heightProfile (qreal fromLon, qreal fromLat, qreal toLon, qreal toLat) const;
-signals:
-    void                    updateAvailable ();
-public:
-//ig                            ElevationModel (MarbleModel*const model);
+    enum TransportType
+    {
+        Motorcar,
+        Bicycle,
+        Pedestrian
+    };
+    explicit                RoutingProfile (const QString& name = QString());
+    QString                 name () const;
+    void                    setName (const QString& name);
+//ig    const QHash<QString,QHash<QString,QVariant>>&  pluginSettings () const;
+//ig    QHash<QString,QHash<QString,QVariant>>&  pluginSettings ();
+    void                    setTransportType (Marble::RoutingProfile::TransportType transportType);
+    Marble::RoutingProfile::TransportType  transportType () const;
+    bool                    operator == (const Marble::RoutingProfile& other) const;
 };
 };

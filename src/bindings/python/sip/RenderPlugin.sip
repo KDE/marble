@@ -73,6 +73,7 @@ public:
     void                    restoreDefaultSettings ();
 signals:
     void                    repaintNeeded (QRegion dirtyRegion = QRegion());
+    void                    enabledChanged (bool enable);
 };
 // RenderPlugin
 
