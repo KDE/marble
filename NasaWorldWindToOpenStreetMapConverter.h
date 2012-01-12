@@ -3,12 +3,13 @@
 
 #include "NwwMapImage.h"
 
-#include <QtCore/QCache>
 #include <QtCore/QDir>
 #include <QtCore/QObject>
 #include <QtCore/QPair>
-#include <QtCore/QSet>
-#include <QtGui/QImage>
+#include <QtCore/QVector>
+
+class OsmTileClusterRenderer;
+class Thread;
 
 // Abbreviations used:
 //   Nww, nww: NASA WorldWind
@@ -20,36 +21,36 @@
 class NasaWorldWindToOpenStreetMapConverter: public QObject
 {
     Q_OBJECT
+
 public:
     explicit NasaWorldWindToOpenStreetMapConverter( QObject * const parent = NULL );
-    void setSourcePath( QDir const & sourcePath );
-    void setDestinationPath( QDir const & destinationPath );
+
+    void setNwwBaseDirectory( QDir const & osmBaseDirectory );
     void setNwwTileLevel( int const level );
+    void setOsmBaseDirectory( QDir const & nwwBaseDirectory );
     void setOsmTileLevel( int const level );
-    void start();
+
+    QVector<QPair<Thread*, OsmTileClusterRenderer*> > start();
+
     void testReprojection();
 
 signals:
-    void finished() const;
+    void finished();
 
 public slots:
-    
+    void assignNextCluster( OsmTileClusterRenderer * );
+
 private:
-    void renderOsmTileCluster( int const clusterX, int const clusterY, int const clusterEdgeLengthTiles );
-    QImage renderOsmTile( int const tileX, int const tileY );
-    QDir checkAndCreateDirectory( int const tileX ) const;
-    double osmPixelXtoLonRad( int const pixelX ) const;
-    double osmPixelYtoLatRad( int const pixelY ) const;
+    void incNextCluster();
 
-    int const m_osmTileEdgeLengthPixel;
-    QRgb const m_emptyPixel;
-
-    NwwMapImage m_nwwMapImage;
-    QDir m_destinationBaseDirectory;
-
+    QDir m_nwwBaseDirectory;
+    int m_nwwTileLevel;
+    QDir m_osmBaseDirectory;
     int m_osmTileLevel;
-    int m_osmMapEdgeLengthTiles;
-    int m_osmMapEdgeLengthPixel;
+
+    int m_osmMapEdgeLengthClusters;
+    int m_nextClusterX;
+    int m_nextClusterY;
 };
 
 #endif

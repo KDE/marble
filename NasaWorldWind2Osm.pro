@@ -17,11 +17,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     NasaWorldWindToOpenStreetMapConverter.cpp \
-    NwwMapImage.cpp
+    NwwMapImage.cpp \
+    OsmTileClusterRenderer.cpp \
+    Thread.cpp
 
 HEADERS += \
     NasaWorldWindToOpenStreetMapConverter.h \
-    NwwMapImage.h
+    NwwMapImage.h \
+    OsmTileClusterRenderer.h \
+    Thread.h
 
 unix|win32: LIBS += -lQtGui
 
