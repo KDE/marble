@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Gaurav Gupta <1989.gaurav@googlemail.com>     
+// Copyright 2012      Thibaut Gridel <tgridel@free.fr>
 //
 
 #ifndef MARBLE_NEWBOOKMARKFOLDERINFODIALOG_H
@@ -17,8 +18,6 @@
 namespace Marble
 {
 
-class BookmarkManager;
-
 class MARBLE_EXPORT NewBookmarkFolderDialog : public QDialog, private Ui::UiNewBookmarkFolderDialog
 {
 
@@ -29,19 +28,13 @@ class MARBLE_EXPORT NewBookmarkFolderDialog : public QDialog, private Ui::UiNewB
 
     ~NewBookmarkFolderDialog();
 
-    void setBookmarkManager( BookmarkManager* manager );
-
     void setFolderName( const QString &name );
 
     QString folderName() const;
 
- public Q_SLOTS:
-   void addNewBookmarkFolder();
-
  private:
     Q_DISABLE_COPY( NewBookmarkFolderDialog )
 
-    BookmarkManager *m_manager;
 };
 
 }

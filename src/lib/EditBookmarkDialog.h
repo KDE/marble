@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Gaurav Gupta <1989.gaurav@googlemail.com>     
+// Copyright 2012      Thibaut Gridel <tgridel@free.fr>
 //
 
 #ifndef MARBLE_BOOKMARKINFODIALOG_H
@@ -43,7 +44,7 @@ class MARBLE_EXPORT EditBookmarkDialog : public QDialog
 
     QString name() const;
 
-    QString folderName() const;
+    GeoDataFolder* folder() const;
 
     QString description() const;
 

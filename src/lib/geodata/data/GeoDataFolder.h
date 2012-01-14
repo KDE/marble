@@ -60,4 +60,6 @@ class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer
 
 }
 
+Q_DECLARE_METATYPE(Marble::GeoDataFolder*)
+
 #endif

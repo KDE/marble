@@ -6,11 +6,13 @@
 // the source code.
 //
 // Copyright 2010      Gaurav Gupta <1989.gaurav@googlemail.com>
+// Copyright 2012      Thibaut Gridel <tgridel@free.fr>
 //
 
 #include "BookmarkManager.h"
 #include "BookmarkManager_p.h"
 #include "GeoDataParser.h"
+#include "GeoDataContainer.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
@@ -61,6 +63,15 @@ GeoDataDocument* BookmarkManagerPrivate::bookmarkDocument()
     return m_bookmarkDocument;
 }
 
+void BookmarkManagerPrivate::setVisualCategory( GeoDataContainer *container ) {
+    foreach( GeoDataFolder* folder, container->folderList() ) {
+        setVisualCategory( folder );
+    }
+    foreach( GeoDataPlacemark* placemark, container->placemarkList() ) {
+        placemark->setVisualCategory( GeoDataFeature::Bookmark );
+    }
+
+}
 
 BookmarkManager::BookmarkManager( GeoDataTreeModel *treeModel, QObject *parent )
         : QObject( parent ), d( new BookmarkManagerPrivate() )
@@ -115,31 +126,11 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
 }
 
 
-void BookmarkManager::addBookmark( const GeoDataPlacemark &placemark, const QString &folderName )
+void BookmarkManager::addBookmark( GeoDataContainer *container, const GeoDataPlacemark &placemark )
 {
-    QVector<GeoDataFolder*> bookmarkFolders = folders();
-    QVector<GeoDataFolder*>::const_iterator i = bookmarkFolders.constBegin();
-    QVector<GeoDataFolder*>::const_iterator end = bookmarkFolders.constEnd();
-
-    GeoDataFolder* folder = 0;
-    for ( ; i != end; ++i ) {
-        //Folder found where bookmark should be inserted
-        if ( folderName == ( *i )->name() ) {
-            folder = *i;
-            break;
-        }
-    }
-
-    if ( !folder ) {
-        mDebug() << "Creating new folder " << folderName << " to host " << placemark.name();
-        GeoDataFolder* folder = new GeoDataFolder;
-        folder->setName( folderName );
-        d->m_treeModel->addFeature( d->m_bookmarkDocument, folder );
-    }
-
     GeoDataPlacemark *bookmark = new GeoDataPlacemark( placemark );
     bookmark->setVisualCategory( GeoDataDocument::Bookmark );
-    d->m_treeModel->addFeature( folder, bookmark );
+    d->m_treeModel->addFeature( container, bookmark );
 
     updateBookmarkFile();
 }
@@ -150,35 +141,40 @@ void BookmarkManager::removeBookmark( GeoDataPlacemark *bookmark )
     delete bookmark;
 }
 
+GeoDataDocument * BookmarkManager::document() const
+{
+    return d->m_bookmarkDocument;
+}
+
 QVector<GeoDataFolder*> BookmarkManager::folders() const
 {
     return d->bookmarkDocument()->folderList();
 }
 
-void BookmarkManager::addNewBookmarkFolder( const QString &folder )
+void BookmarkManager::addNewBookmarkFolder( GeoDataContainer *container, const QString &name )
 {
     //If name is empty string
-    if ( folder.isEmpty() ) {
+    if ( name.isEmpty() ) {
         mDebug() << "Folder with empty name is not acceptable, please give it another name" ;
         return;
     }
 
     //If folder with same name already exist
-    QVector<GeoDataFolder*> folderList = folders();
+    QVector<GeoDataFolder*> folderList = container->folderList();
 
     QVector<GeoDataFolder*>::const_iterator i = folderList.constBegin();
     QVector<GeoDataFolder*>::const_iterator end = folderList.constEnd();
     for ( ; i != end; ++i ) {
-        if ( folder == ( *i )->name() ) {
+        if ( name == ( *i )->name() ) {
             mDebug() << "Folder with same name already exist, please give it another name";
             return;
         }
     }
 
     GeoDataFolder *bookmarkFolder = new GeoDataFolder();
-    bookmarkFolder->setName( folder );
+    bookmarkFolder->setName( name );
 
-    d->m_treeModel->addFeature( d->m_bookmarkDocument, bookmarkFolder );
+    d->m_treeModel->addFeature( container, bookmarkFolder );
     updateBookmarkFile();
 }
 
@@ -257,9 +253,7 @@ GeoDataDocument* BookmarkManager::openFile( const QString &fileName ) const
 
     result->setDocumentRole( BookmarkDocument );
     foreach( GeoDataFolder* folder, result->folderList() ) {
-        foreach( GeoDataPlacemark* placemark, folder->placemarkList() ) {
-            placemark->setVisualCategory( GeoDataFeature::Bookmark );
-        }
+        d->setVisualCategory( folder );
     }
 
     return result;

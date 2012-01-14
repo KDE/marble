@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010    Gaurav Gupta <1989.gaurav@googlemail.com> 
+// Copyright 2012    Thibaut Gridel <tgridel@free.fr>
 //
 
 #ifndef MARBLE_BOOKMARKMANAGER_H
@@ -20,6 +21,7 @@ namespace Marble
 {
 
     class BookmarkManagerPrivate;
+    class GeoDataContainer;
     class GeoDataDocument;
     class GeoDataPlacemark;
     class GeoDataFolder;
@@ -57,9 +59,11 @@ class MARBLE_EXPORT BookmarkManager : public QObject
       * @param bookmark bookmark to be added
       * @param folderName folder name in which bookmark to be added
       */
-    void addBookmark( const GeoDataPlacemark &bookmark, const QString &folderName ) ;
+    void addBookmark( GeoDataContainer *folder, const GeoDataPlacemark &bookmark ) ;
 
     void removeBookmark( GeoDataPlacemark *bookmark );
+
+    GeoDataDocument * document() const;
 
     /**
       * @brief return Vector of folders
@@ -70,7 +74,7 @@ class MARBLE_EXPORT BookmarkManager : public QObject
       * @brief add a folder
       * @param folder name of folder to be created
       */
-    void addNewBookmarkFolder( const QString &folder );
+    void addNewBookmarkFolder( GeoDataContainer *folder, const QString &name );
 
     void renameBookmarkFolder( GeoDataFolder *folder, const QString &name );
 
