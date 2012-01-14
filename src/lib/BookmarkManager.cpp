@@ -146,6 +146,17 @@ GeoDataDocument * BookmarkManager::document() const
     return d->m_bookmarkDocument;
 }
 
+bool BookmarkManager::showBookmarks()
+{
+    return d->m_bookmarkDocument->isVisible();
+}
+
+void BookmarkManager::setShowBookmarks( bool visible )
+{
+    d->m_bookmarkDocument->setVisible( visible );
+    d->m_treeModel->updateFeature( d->m_bookmarkDocument );
+}
+
 QVector<GeoDataFolder*> BookmarkManager::folders() const
 {
     return d->bookmarkDocument()->folderList();

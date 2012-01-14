@@ -200,6 +200,7 @@ private:
     //Bookmark Menu
     QAction *m_addBookmarkAct;
     QAction *m_setHomeAct;
+    QAction *m_toggleBookmarkDisplayAct;
     QAction *m_manageBookmarksAct;
 
     // Small screen devices

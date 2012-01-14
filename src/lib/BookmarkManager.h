@@ -65,6 +65,8 @@ class MARBLE_EXPORT BookmarkManager : public QObject
 
     GeoDataDocument * document() const;
 
+    bool showBookmarks();
+
     /**
       * @brief return Vector of folders
       */
@@ -85,6 +87,9 @@ class MARBLE_EXPORT BookmarkManager : public QObject
       */
     void removeAllBookmarks();
     
+public slots:
+    void setShowBookmarks( bool visible );
+
 Q_SIGNALS:
     /** One or more bookmarks were added or removed */
     void bookmarksChanged();
