@@ -229,6 +229,12 @@ void FileReaderPositionProviderPlugin::update()
             QTimer::singleShot( 1000, this, SLOT( update() ) );
         }
     }
+
+    if ( !d->m_lineString.isEmpty() && d->m_currentIndex >= d->m_lineString.size() ) {
+        // Repeat from start
+        d->m_currentIndex = 0;
+        update();
+    }
 }
 
 } // namespace Marble
