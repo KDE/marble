@@ -30,14 +30,20 @@ SearchInputWidget::SearchInputWidget( QWidget *parent ) :
     connect( this, SIGNAL( returnPressed() ), this, SLOT( search() ) );
     connect( this, SIGNAL( decoratorButtonClicked() ), this, SLOT( search() ) );
 
+    m_sortFilter.setSortRole( MarblePlacemarkModel::PopularityIndexRole );
+    m_sortFilter.sort( 0, Qt::DescendingOrder );
+    m_sortFilter.setDynamicSortFilter( true );
+
     m_completer->setCompletionRole( Qt::DisplayRole );
+    m_completer->setCaseSensitivity( Qt::CaseInsensitive );
+    m_completer->setModel( &m_sortFilter );
     setCompleter( m_completer );
     connect( m_completer, SIGNAL( activated( QModelIndex ) ), this, SLOT( centerOnSearchSuggestion( QModelIndex ) ) );
 }
 
 void SearchInputWidget::setCompletionModel( QAbstractItemModel *completionModel )
 {
-    m_completer->setModel( completionModel );
+    m_sortFilter.setSourceModel( completionModel );
 }
 
 void SearchInputWidget::search()

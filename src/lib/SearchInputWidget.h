@@ -13,6 +13,7 @@
 #define MARBLE_SEARCHINPUTWIDGET_H
 
 #include <QtCore/QModelIndex>
+#include <QtGui/QSortFilterProxyModel>
 
 #include "MarbleLineEdit.h"
 #include "marble_export.h"
@@ -47,6 +48,7 @@ private Q_SLOTS:
     void centerOnSearchSuggestion( const QModelIndex &suggestionIndex );
 
 private:
+    QSortFilterProxyModel m_sortFilter;
     QCompleter *const m_completer;
 };
 
