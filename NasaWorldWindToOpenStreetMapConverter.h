@@ -26,7 +26,9 @@ public:
     void setNwwBaseDirectory( QDir const & osmBaseDirectory );
     void setNwwTileLevel( int const level );
     void setOsmBaseDirectory( QDir const & nwwBaseDirectory );
+    void setOsmTileClusterEdgeLengthTiles( int const clusterEdgeLengthTiles );
     void setOsmTileLevel( int const level );
+    void setThreadCount( int const threadCount );
 
     QVector<QPair<Thread*, OsmTileClusterRenderer*> > start();
 
@@ -41,11 +43,14 @@ public slots:
 private:
     void incNextCluster();
 
+    int m_threadCount;
+
     QDir m_nwwBaseDirectory;
     int m_nwwTileLevel;
     QDir m_osmBaseDirectory;
     int m_osmTileLevel;
 
+    int m_osmTileClusterEdgeLengthTiles;
     int m_osmMapEdgeLengthClusters;
     int m_nextClusterX;
     int m_nextClusterY;

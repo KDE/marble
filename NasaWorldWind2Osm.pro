@@ -30,3 +30,5 @@ HEADERS += \
 unix|win32: LIBS += -lQtGui
 
 QMAKE_CXXFLAGS += -march=native
+
+unix:!macx:!symbian: LIBS += -lboost_program_options

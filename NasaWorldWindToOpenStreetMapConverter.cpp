@@ -12,8 +12,10 @@
 
 NasaWorldWindToOpenStreetMapConverter::NasaWorldWindToOpenStreetMapConverter( QObject * const parent )
     : QObject( parent ),
+      m_threadCount(),
       m_nwwTileLevel(),
       m_osmTileLevel(),
+      m_osmTileClusterEdgeLengthTiles(),
       m_osmMapEdgeLengthClusters(),
       m_nextClusterX(),
       m_nextClusterY()
@@ -39,9 +41,19 @@ void NasaWorldWindToOpenStreetMapConverter::setOsmBaseDirectory( QDir const & os
     m_osmBaseDirectory = osmBaseDirectory;
 }
 
+void NasaWorldWindToOpenStreetMapConverter::setOsmTileClusterEdgeLengthTiles( int const clusterEdgeLengthTiles )
+{
+    m_osmTileClusterEdgeLengthTiles = clusterEdgeLengthTiles;
+}
+
 void NasaWorldWindToOpenStreetMapConverter::setOsmTileLevel( int const level )
 {
     m_osmTileLevel = level;
+}
+
+void NasaWorldWindToOpenStreetMapConverter::setThreadCount(const int threadCount)
+{
+    m_threadCount = threadCount;
 }
 
 QVector<QPair<Thread*, OsmTileClusterRenderer*> > NasaWorldWindToOpenStreetMapConverter::start()
@@ -49,23 +61,16 @@ QVector<QPair<Thread*, OsmTileClusterRenderer*> > NasaWorldWindToOpenStreetMapCo
     // render Osm tiles using quadratic clusters of tiles instead of stripes
     // to increase Nww tile cache usage
     int const osmMapEdgeLengthTiles = pow( 2, m_osmTileLevel );
-    int const osmTileClusterEdgeLengthTiles = 64;
-    m_osmMapEdgeLengthClusters = osmMapEdgeLengthTiles / osmTileClusterEdgeLengthTiles;
-    if ( osmMapEdgeLengthTiles % osmTileClusterEdgeLengthTiles != 0 )
+    m_osmMapEdgeLengthClusters = osmMapEdgeLengthTiles / m_osmTileClusterEdgeLengthTiles;
+    if ( osmMapEdgeLengthTiles % m_osmTileClusterEdgeLengthTiles != 0 )
         qFatal("Bad tile cluster size");
-
-    int threadCount = QThread::idealThreadCount();
-    if ( threadCount == -1 ) {
-        qWarning() << "Unable to detect number of cpu cores, using one thread.";
-        threadCount = 1;
-    }
 
     QVector<QPair<Thread*, OsmTileClusterRenderer*> > renderThreads;
 
-    for ( int i = 0; i < threadCount; ++i ) {
+    for ( int i = 0; i < m_threadCount; ++i ) {
         OsmTileClusterRenderer * const renderer = new OsmTileClusterRenderer;
         renderer->setObjectName( QString("Renderer %1").arg( i ));
-        renderer->setClusterEdgeLengthTiles( osmTileClusterEdgeLengthTiles );
+        renderer->setClusterEdgeLengthTiles( m_osmTileClusterEdgeLengthTiles );
         renderer->setNwwBaseDirectory( m_nwwBaseDirectory );
         renderer->setNwwTileLevel( m_nwwTileLevel );
         renderer->setOsmBaseDirectory( m_osmBaseDirectory );
