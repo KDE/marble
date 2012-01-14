@@ -88,12 +88,13 @@ public Q_SLOTS:
 
     bool removeFeature( GeoDataFeature *feature );
 
+    void updateFeature( GeoDataFeature *feature );
+
     int addDocument( GeoDataDocument *document );
 
     void removeDocument( int index );
 
     void removeDocument( GeoDataDocument* document );
-
 
     void update();
 

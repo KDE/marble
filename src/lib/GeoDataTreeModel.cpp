@@ -572,6 +572,14 @@ bool GeoDataTreeModel::removeFeature( GeoDataFeature *feature )
     return false; //We can not remove the rootDocument
 }
 
+void GeoDataTreeModel::updateFeature( GeoDataFeature *feature )
+{
+    QModelIndex featureIndex = index( feature );
+    if ( featureIndex.isValid() ) {
+        emit dataChanged( featureIndex, featureIndex );
+    }
+}
+
 void GeoDataTreeModel::removeDocument( int index )
 {
     removeFeature( d->m_rootDocument, index );
