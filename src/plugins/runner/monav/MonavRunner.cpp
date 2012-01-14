@@ -177,6 +177,10 @@ GeoDataLineString* MonavRunnerPrivate::retrieveRoute( const RouteRequest *route,
             turnType.setName( "turnType" );
             turnType.setValue( qVariantFromValue<int>( int( directions[i].turnType() ) ) );
             extendedData.addValue( turnType );
+            GeoDataData roadName;
+            roadName.setName( "roadName" );
+            roadName.setValue( directions[i].roadName() );
+            extendedData.addValue( roadName );
             placemark->setExtendedData( extendedData );
             Q_ASSERT( !directions[i].points().isEmpty() );
             GeoDataLineString* geometry = new GeoDataLineString;
