@@ -25,7 +25,8 @@ HEADERS += \
     NasaWorldWindToOpenStreetMapConverter.h \
     NwwMapImage.h \
     OsmTileClusterRenderer.h \
-    Thread.h
+    Thread.h \
+    mapreproject.h
 
 unix|win32: LIBS += -lQtGui
 

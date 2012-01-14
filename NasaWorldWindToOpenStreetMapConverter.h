@@ -1,6 +1,8 @@
 #ifndef NASAWORLDWINDTOOPENSTREETMAPCONVERTER_H
 #define NASAWORLDWINDTOOPENSTREETMAPCONVERTER_H
 
+#include "mapreproject.h"
+
 #include <QtCore/QDir>
 #include <QtCore/QObject>
 #include <QtCore/QPair>
@@ -24,6 +26,7 @@ public:
     explicit NasaWorldWindToOpenStreetMapConverter( QObject * const parent = NULL );
 
     void setNwwBaseDirectory( QDir const & osmBaseDirectory );
+    void setNwwInterpolationMethod( InterpolationMethod const interpolationMethod );
     void setNwwTileLevel( int const level );
     void setOsmBaseDirectory( QDir const & nwwBaseDirectory );
     void setOsmTileClusterEdgeLengthTiles( int const clusterEdgeLengthTiles );
@@ -47,6 +50,8 @@ private:
 
     QDir m_nwwBaseDirectory;
     int m_nwwTileLevel;
+    InterpolationMethod m_nwwInterpolationMethod;
+
     QDir m_osmBaseDirectory;
     int m_osmTileLevel;
 

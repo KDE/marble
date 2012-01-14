@@ -1,6 +1,8 @@
 #ifndef NWWIMAGE_H
 #define NWWIMAGE_H
 
+#include "mapreproject.h"
+
 #include <QtCore/QCache>
 #include <QtCore/QDir>
 #include <QtCore/QPair>
@@ -13,8 +15,6 @@ class NwwMapImage
 public:
     NwwMapImage();
     NwwMapImage( QDir const & baseDirectory, int const tileLevel );
-
-    enum InterpolationMethod { NearestNeighborInterpolation, BilinearInterpolation };
 
     QRgb pixel( double const lonRad, double const latRad );
     QRgb pixel( int const x, int const y );

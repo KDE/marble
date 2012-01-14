@@ -16,6 +16,7 @@ public:
 
     void setClusterEdgeLengthTiles( int const clusterEdgeLengthTiles );
     void setNwwBaseDirectory( QDir const & nwwBaseDirectory );
+    void setNwwInterpolationMethod( InterpolationMethod const interpolationMethod );
     void setNwwTileLevel( int const level );
     void setOsmBaseDirectory( QDir const & osmBaseDirectory );
     void setOsmTileLevel( int const level );

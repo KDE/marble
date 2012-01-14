@@ -1,6 +1,7 @@
 #include "NasaWorldWindToOpenStreetMapConverter.h"
 #include "OsmTileClusterRenderer.h"
 #include "Thread.h"
+#include "mapreproject.h"
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
@@ -28,6 +29,7 @@ int main( int argc, char *argv[] )
 
     int threadCount = 0; // threads count 0 makes no sense
     int clusterSize = 0; // cluster size 0 makes no sense
+    InterpolationMethod interpolationMethod = UnknownInterpolation;
 
     int opt;
     po::options_description desc("Allowed options");
@@ -42,7 +44,8 @@ int main( int argc, char *argv[] )
              "number of threads, use to override default of one thread per cpu core")
             ("cluster-size", po::value<int>( &opt )->default_value( 64 ),
              "edge length of tile clusters in tiles")
-            ("interpolation-method", "method used for interpolating between pixels");
+            ("interpolation-method", po::value<std::string>(),
+             "method used for interpolating between pixels");
 
     po::variables_map variables;
     po::store( po::parse_command_line( argc, argv, desc ), variables );
@@ -79,15 +82,27 @@ int main( int argc, char *argv[] )
         clusterSize = variables["cluster-size"].as<int>();
     if ( variables.count("jobs"))
         threadCount = variables["jobs"].as<int>();
+    if ( variables.count("interpolation-method")) {
+        if ( variables["interpolation-method"].as<std::string>() == "NearestNeighbor" )
+            interpolationMethod = NearestNeighborInterpolation;
+        else if ( variables["interpolation-method"].as<std::string>() == "Bilinear" )
+            interpolationMethod = BilinearInterpolation;
+        else
+            qFatal("Unknown interpolation method '%s'", variables["interpolation-method"].as<std::string>().c_str());
+    }
 
     qDebug() << "input directory:" << inputDirectory
              << "\ninput tile level:" << inputTileLevel
              << "\noutput directory:" << outputDirectory
-             << "\noutput tile level:" << outputTileLevel;
+             << "\noutput tile level:" << outputTileLevel
+             << "\ncluster size:" << clusterSize
+             << "\nthreads:" << threadCount
+             << "\ninterpolation method:" << interpolationMethod;
 
     NasaWorldWindToOpenStreetMapConverter converter;
     converter.setNwwBaseDirectory( QDir( inputDirectory ));
     converter.setNwwTileLevel( inputTileLevel );
+    converter.setNwwInterpolationMethod( interpolationMethod );
     converter.setOsmBaseDirectory( QDir( outputDirectory ));
     converter.setOsmTileLevel( outputTileLevel );
     converter.setOsmTileClusterEdgeLengthTiles( clusterSize );

@@ -21,6 +21,11 @@ void OsmTileClusterRenderer::setNwwBaseDirectory( QDir const & nwwBaseDirectory 
     m_nwwMapImage.setBaseDirectory( nwwBaseDirectory );
 }
 
+void OsmTileClusterRenderer::setNwwInterpolationMethod( InterpolationMethod const interpolationMethod )
+{
+    m_nwwMapImage.setInterpolationMethod( interpolationMethod );
+}
+
 void OsmTileClusterRenderer::setNwwTileLevel( int const level )
 {
     m_nwwMapImage.setTileLevel( level );
