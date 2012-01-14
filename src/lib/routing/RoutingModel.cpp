@@ -123,6 +123,11 @@ void RoutingModelPrivate::importPlacemark( RouteSegment &outline, QVector<RouteS
                 maneuver.setDirection( Maneuver::Direction( qVariantValue<int>( turnType ) ) );
             }
 
+            if ( placemark->extendedData().contains( "roadName" ) ) {
+                QVariant roadName = placemark->extendedData().value( "roadName" ).value();
+                maneuver.setRoadName( roadName.toString() );
+            }
+
             segment.setManeuver( maneuver );
             isOutline = false;
         }

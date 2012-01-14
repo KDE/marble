@@ -59,6 +59,10 @@ public:
 
     void setInstructionText( const QString &text );
 
+    QString roadName() const;
+
+    void setRoadName( const QString &roadName );
+
     QString directionPixmap() const;
 
     bool operator==( const Maneuver &other ) const;
@@ -75,6 +79,8 @@ private:
     bool m_hasWaypoint;
 
     QString m_instructionText;
+
+    QString m_roadName;
 
     static QMap<Direction,QString> m_turnTypePixmaps;
 };
