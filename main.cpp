@@ -35,7 +35,8 @@ int main( int argc, char *argv[] )
             ("help", "produce help message")
             ("input-directory", po::value<std::string>(), "input base directory")
             ("input-tile-level", po::value<int>(), "tile level of input map")
-            ("output-directory", "output base directory, where the resulting tiles will be stored")
+            ("output-directory", po::value<std::string>(),
+             "output base directory, where the resulting tiles will be stored")
             ("output-tile-level", po::value<int>(), "tile level of resulting map")
             ("jobs", po::value<int>( &opt )->default_value( QThread::idealThreadCount() ),
              "number of threads, use to override default of one thread per cpu core")
