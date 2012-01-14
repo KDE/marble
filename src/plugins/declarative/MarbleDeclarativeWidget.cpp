@@ -24,11 +24,14 @@
 #include "AbstractFloatItem.h"
 #include "RenderPlugin.h"
 #include "MarbleMap.h"
+#include "MarbleDirs.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneZoom.h"
+#include "routing/RoutingManager.h"
+#include "routing/RoutingProfilesModel.h"
 
 #include <QtGui/QSortFilterProxyModel>
 
@@ -85,6 +88,8 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     m_streetMapThemeModel( 0 )
 {
     m_marbleWidget->setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
+    m_marbleWidget->model()->routingManager()->profilesModel()->loadDefaultProfiles();
+    m_marbleWidget->model()->routingManager()->readSettings();
     setWidget( m_marbleWidget );
 
     connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),

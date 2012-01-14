@@ -66,7 +66,6 @@ Item {
             center.latitude = settings.quitLatitude
             tracking.lastKnownPosition.longitude = settings.lastKnownLongitude
             tracking.lastKnownPosition.latitude = settings.lastKnownLatitude
-            routing.clearRoute()
             initialized = true
         }
         

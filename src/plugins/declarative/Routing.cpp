@@ -76,12 +76,6 @@ void Routing::setMarbleWidget( Marble::Declarative::MarbleWidget* widget )
     d->m_marbleWidget = widget;
 
     if ( d->m_marbleWidget ) {
-        QString const routeFile = MarbleDirs::path( "routing/route.kml" );
-        if ( !routeFile.isEmpty() ) {
-            d->m_marbleWidget->model()->routingManager()->loadRoute( routeFile );
-        }
-
-        d->m_marbleWidget->model()->routingManager()->profilesModel()->loadDefaultProfiles();
         QList<Marble::RoutingProfile> profiles = d->m_marbleWidget->model()->routingManager()->profilesModel()->profiles();
         if ( profiles.size() == 4 ) {
             /** @todo FIXME: Restrictive assumptions on available plugins and certain profile loading implementation */
