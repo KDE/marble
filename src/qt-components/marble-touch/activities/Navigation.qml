@@ -8,6 +8,7 @@
 
 import QtQuick 1.0
 import com.nokia.meego 1.0
+import QtMobility.systeminfo 1.1
 import org.kde.edu.marble 0.11
 import org.kde.edu.marble.qtcomponents 0.12
 
@@ -225,9 +226,16 @@ Page {
         }
     }
 
+    ScreenSaver {
+        id: saver
+    }
+
     onStatusChanged: {
         if ( status === PageStatus.Activating ) {
             mapContainer.embedMarbleWidget()
+            saver.screenSaverDelayed = settings.inhibitScreensaver
+        } else if ( status === PageStatus.Deactivating ) {
+            saver.screenSaverDelayed = false
         }
     }
 }
