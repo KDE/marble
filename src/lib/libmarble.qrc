@@ -24,5 +24,17 @@
     <file>../../data/bitmaps/turn-sharp-right.png</file>
     <file>../../data/bitmaps/turn-slight-left.png</file>
     <file>../../data/bitmaps/turn-slight-right.png</file>
+    <file alias="marble/turn-around.svg">../../data/svg/turn-around.svg</file>
+    <file alias="marble/turn-continue.svg">../../data/svg/turn-continue.svg</file>
+    <file alias="marble/turn-left.svg">../../data/svg/turn-left.svg</file>
+    <file alias="marble/turn-right.svg">../../data/svg/turn-right.svg</file>
+    <file alias="marble/turn-roundabout-far.svg">../../data/svg/turn-roundabout-far.svg</file>
+    <file alias="marble/turn-roundabout-first.svg">../../data/svg/turn-roundabout-first.svg</file>
+    <file alias="marble/turn-roundabout-second.svg">../../data/svg/turn-roundabout-second.svg</file>
+    <file alias="marble/turn-roundabout-third.svg">../../data/svg/turn-roundabout-third.svg</file>
+    <file alias="marble/turn-sharp-left.svg">../../data/svg/turn-sharp-left.svg</file>
+    <file alias="marble/turn-sharp-right.svg">../../data/svg/turn-sharp-right.svg</file>
+    <file alias="marble/turn-slight-left.svg">../../data/svg/turn-slight-left.svg</file>
+    <file alias="marble/turn-slight-right.svg">../../data/svg/turn-slight-right.svg</file>
   </qresource>
 </RCC>

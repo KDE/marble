@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64"
+   height="64"
+   id="svg4076"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="turn-roundabout-second.svg">
+  <defs
+     id="defs4078">
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter5136"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-0.25"
+       y="-0.25">
+      <feGaussianBlur
+         id="feGaussianBlur5138"
+         in="SourceAlpha"
+         stdDeviation="0.500000"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix5140"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.500000 0 " />
+      <feOffset
+         id="feOffset5142"
+         in="bluralpha"
+         dx="1.000000"
+         dy="1.000000"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge5144">
+        <feMergeNode
+           id="feMergeNode5146"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode5148"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter6019"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-0.25"
+       y="-0.25">
+      <feGaussianBlur
+         id="feGaussianBlur6021"
+         in="SourceAlpha"
+         stdDeviation="1,000000"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix6023"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0,500000 0 " />
+      <feOffset
+         id="feOffset6025"
+         in="bluralpha"
+         dx="1,500000"
+         dy="1,500000"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge6027">
+        <feMergeNode
+           id="feMergeNode6029"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode6031"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.21875"
+     inkscape:cx="16"
+     inkscape:cy="16"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="714"
+     inkscape:window-height="570"
+     inkscape:window-x="397"
+     inkscape:window-y="154"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata4081">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-988.3622)">
+    <g
+       transform="matrix(2,0,0,2,-127.86983,561.70265)"
+       id="g4624"
+       style="filter:url(#filter5136)">
+      <g
+         transform="translate(4.3002915,0.79088)"
+         style="filter:url(#filter6019)"
+         id="g5936">
+        <path
+           inkscape:connector-curvature="0"
+           style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#eeeeec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+           d="m 68.398046,219.64653 4,0 0,1.78125 4.96875,0 0,-1.78125 4,0 -6.46875,-4.90625 c 0,0 -4.28224,3.32612 -6.5,4.90625 z"
+           id="path5696-8"
+           sodipodi:nodetypes="cccccccc" />
+        <path
+           inkscape:connector-curvature="0"
+           style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#eeeeec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+           d="m 72.398046,238.08751 c 7e-6,1.4167 0,2.83364 0,4.25 l 4.96875,0 0,-4.25 -4.96875,0 z"
+           id="rect5009-6-6-4" />
+        <path
+           inkscape:connector-curvature="0"
+           style="fill:none;stroke:#eeeeec;stroke-width:4.35362482;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           d="m 69.367485,233.76717 c -0.822715,-1.12717 -1.308252,-2.5161 -1.308252,-4.01844 0,-3.76834 3.054845,-6.82318 6.823188,-6.82318 3.768342,0 6.823187,3.05484 6.823187,6.82318 l 0,0 c 0,3.76835 -3.054845,6.82319 -6.823187,6.82319 -0.967091,0 -1.88719,-0.2012 -2.720721,-0.56402"
+           id="path5873" />
+        <path
+           inkscape:connector-curvature="0"
+           style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#eeeeec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+           d="m 81.136824,232.23311 c 1.4167,0 2.83364,0 4.25,0 l 0,-4.96875 -4.25,0 0,4.96875 z"
+           id="rect5009-6-6-4-7" />
+      </g>
+      <path
+         inkscape:connector-curvature="0"
+         transform="translate(14.987215,1.4563891)"
+         id="path4602"
+         d="m 61.759188,239.64321 0,-1.98021 -0.485736,-0.14553 -0.485736,-0.14554 0.746512,-1.98377 0.746513,-1.98378 0.582973,0.18097 c 0.381053,0.1183 0.936028,0.16421 1.60229,0.13256 0.832084,-0.0395 1.167827,-0.12153 1.827822,-0.44644 2.543335,-1.25208 3.37208,-4.48275 1.759758,-6.86 -0.516699,-0.76183 -1.029023,-1.1782 -2.014963,-1.63758 -0.608866,-0.28368 -0.886511,-0.33424 -1.841933,-0.33538 -1.00538,-0.001 -1.21406,0.0408 -1.962589,0.39484 -1.028859,0.48664 -1.819429,1.25647 -2.295589,2.23535 -0.323558,0.66517 -0.361339,0.87199 -0.363931,1.99222 -0.0027,1.16649 0.02436,1.30376 0.405036,2.05458 0.22436,0.44251 0.364985,0.84212 0.3125,0.88802 -0.05249,0.0459 -0.848021,0.54726 -1.767857,1.11413 -1.315873,0.81093 -1.69775,0.9947 -1.791199,0.86197 -0.300152,-0.42633 -1.086457,-2.23707 -1.240292,-2.8562 -0.100399,-0.40407 -0.167031,-1.30588 -0.161625,-2.1875 0.0077,-1.25595 0.06091,-1.65591 0.327037,-2.45833 0.870728,-2.62537 2.814708,-4.7284 5.257259,-5.68739 l 0.84375,-0.33127 0,-0.79276 0,-0.79275 -1.894821,0 -1.89482,0 1.98857,-1.47391 c 1.093714,-0.81065 2.496278,-1.87019 3.11681,-2.35454 l 1.128239,-0.88063 3.10598,2.35454 3.105979,2.35454 -1.890469,0 -1.890468,0 0,0.79275 0,0.79276 0.866221,0.33985 c 2.226549,0.87355 4.337427,3.05166 5.085671,5.24763 l 0.196608,0.57701 0.92575,0 0.92575,0 0,2.4375 0,2.4375 -0.90625,0.002 -0.90625,0.002 -0.348927,0.86209 c -0.683235,1.68806 -1.844118,3.12836 -3.311358,4.10837 -0.707064,0.47228 -2.114799,1.15146 -2.386596,1.15146 -0.0983,0 -0.140619,0.6019 -0.140619,2 l 0,2 -2.4375,0 -2.4375,0 0,-1.98021 z"
+         style="fill:#0057ae;fill-opacity:1;stroke:#0057ae;stroke-width:0.625;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    </g>
+  </g>
+</svg>
