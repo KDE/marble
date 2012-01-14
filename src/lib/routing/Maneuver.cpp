@@ -100,4 +100,14 @@ void Maneuver::setInstructionText( const QString &text )
     m_instructionText = text;
 }
 
+QString Maneuver::roadName() const
+{
+    return m_roadName;
+}
+
+void Maneuver::setRoadName(const QString &roadName)
+{
+    m_roadName = roadName;
+}
+
 }
