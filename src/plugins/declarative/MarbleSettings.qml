@@ -39,6 +39,7 @@ Item {
     property variant activeRenderPlugins: settings.value( "MarbleWidget", "activeRenderPlugins", defaultRenderPlugins )
     property string lastActivity: settings.value( "MarbleTouch", "lastActivity", "" )
     property bool inhibitScreensaver: settings.value( "MarbleTouch", "inhibitScreensaver", true )
+    property bool voiceNavigationMuted: settings.value( "MarbleTouch", "voiceNavigationMuted", false)
     
     // Save settings to file.
     Component.onDestruction: {
@@ -57,6 +58,7 @@ Item {
         settings.setValue( "MarbleTouch", "lastActivity", root.lastActivity )
         settings.setValue( "MarbleTouch", "streetMapTheme", root.streetMapTheme )
         settings.setValue( "MarbleTouch", "inhibitScreensaver", root.inhibitScreensaver )
+        settings.setValue( "MarbleTouch", "voiceNavigationMuted", root.voiceNavigationMuted )
     }
 
     function removeElementsFromArray(array, elements) {
