@@ -25,7 +25,8 @@ PositionSource::PositionSource( QObject* parent) : QObject( parent ),
     m_active( false ),
     m_hasPosition( false ),
     m_position( 0 ),
-    m_marbleModel( 0 )
+    m_marbleModel( 0 ),
+    m_speed( 0.0 )
 {
   // nothing to do
 }
@@ -123,6 +124,11 @@ void PositionSource::setMarbleModel( MarbleModel* model )
     }
 }
 
+qreal PositionSource::speed() const
+{
+    return m_speed;
+}
+
 void PositionSource::updatePosition()
 {
     if ( m_marbleModel ) {
@@ -134,6 +140,9 @@ void PositionSource::updatePosition()
             m_position.setLatitude( position.latitude( GeoDataCoordinates::Degree ) );
             m_position.setAltitude( position.altitude() );
         }
+
+        m_speed = m_marbleModel->positionTracking()->speed() * METER2KM / SEC2HOUR;
+        emit speedChanged();
 
         if ( hasPosition != m_hasPosition ) {
             m_hasPosition = hasPosition;
