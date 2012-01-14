@@ -292,6 +292,13 @@ void MainWindow::createActions()
      m_setHomeAct->setStatusTip( tr( "&Set Home Location" ) );
      connect( m_setHomeAct, SIGNAL( triggered() ), this, SLOT( setHome() ) );
 
+     m_toggleBookmarkDisplayAct = new QAction(tr( "Show &Bookmarks" ), this);
+     m_toggleBookmarkDisplayAct->setStatusTip( tr( "Toggle display of Bookmarks" ) );
+     m_toggleBookmarkDisplayAct->setCheckable( true );
+     m_toggleBookmarkDisplayAct->setChecked( m_controlView->marbleModel()->bookmarkManager()->showBookmarks());
+     connect( m_toggleBookmarkDisplayAct, SIGNAL( toggled(bool) ),
+              m_controlView->marbleModel()->bookmarkManager(), SLOT(setShowBookmarks(bool)) );
+
      m_manageBookmarksAct = new QAction( QIcon( ":/icons/bookmarks-organize.png" ), tr( "&Manage Bookmarks" ), this);
      m_manageBookmarksAct->setStatusTip( tr( "Manage Bookmarks" ) );
      connect( m_manageBookmarksAct, SIGNAL( triggered() ), this, SLOT( manageBookmarks() ) );
@@ -497,6 +504,7 @@ void MainWindow::createBookmarkMenu()
 {
     m_bookmarkMenu->clear();
     m_bookmarkMenu->addAction( m_addBookmarkAct );
+    m_bookmarkMenu->addAction( m_toggleBookmarkDisplayAct );
     m_bookmarkMenu->addAction( m_setHomeAct );
     m_bookmarkMenu->addAction( m_manageBookmarksAct );
 
