@@ -61,6 +61,10 @@ public:
 
     QString directionPixmap() const;
 
+    bool operator==( const Maneuver &other ) const;
+
+    bool operator!=( const Maneuver &other ) const;
+
 private:
     Direction m_direction;
 

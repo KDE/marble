@@ -51,6 +51,10 @@ public:
 
     qreal minimalDistanceTo( const GeoDataCoordinates &point ) const;
 
+    bool operator==( const RouteSegment &other ) const;
+
+    bool operator!=( const RouteSegment &other ) const;
+
 private:
     qreal distancePointToLine(const GeoDataCoordinates &p, const GeoDataCoordinates &a, const GeoDataCoordinates &b) const;
 

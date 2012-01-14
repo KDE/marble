@@ -45,6 +45,20 @@ QString Maneuver::directionPixmap() const
     return m_turnTypePixmaps[ direction() ];
 }
 
+bool Maneuver::operator ==(const Maneuver &other) const
+{
+    return  m_direction == other.m_direction &&
+            m_hasWaypoint == other.m_hasWaypoint &&
+            m_position == other.m_position &&
+            m_waypoint == other.m_waypoint &&
+            m_instructionText == other.m_instructionText;
+}
+
+bool Maneuver::operator !=(const Maneuver &other) const
+{
+    return !(other == *this);
+}
+
 void Maneuver::setDirection( Direction direction )
 {
     m_direction = direction;

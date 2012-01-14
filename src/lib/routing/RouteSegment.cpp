@@ -194,4 +194,19 @@ qreal RouteSegment::minimalDistanceTo( const GeoDataCoordinates &point ) const
     return qMin( qMin( distNorth, distEast ), qMin( distWest, distSouth ) );
 }
 
+bool RouteSegment::operator ==(const RouteSegment &other) const
+{
+    return  m_valid == other.m_valid &&
+            m_distance == other.m_distance &&
+            m_maneuver == other.m_maneuver &&
+            m_travelTime == other.m_travelTime &&
+            m_bounds == other.m_bounds &&
+            m_nextRouteSegment == other.m_nextRouteSegment;
+}
+
+bool RouteSegment::operator !=(const RouteSegment &other) const
+{
+    return !(other == *this);
+}
+
 }
