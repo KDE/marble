@@ -32,6 +32,7 @@ class PositionSource : public QObject
     Q_PROPERTY( QString source READ source WRITE setSource NOTIFY sourceChanged )
     Q_PROPERTY( bool hasPosition READ hasPosition NOTIFY hasPositionChanged )
     Q_PROPERTY( Marble::Declarative::Coordinate* position READ position NOTIFY positionChanged )
+    Q_PROPERTY( qreal speed READ speed NOTIFY speedChanged )
 
 public:
     explicit PositionSource( QObject* parent = 0);
@@ -50,6 +51,8 @@ public:
 
     void setMarbleModel( MarbleModel* model );
 
+    qreal speed() const;
+
 Q_SIGNALS:
     void activeChanged();
 
@@ -58,6 +61,8 @@ Q_SIGNALS:
     void hasPositionChanged();
 
     void positionChanged();
+
+    void speedChanged();
 
 private Q_SLOTS:
     void updatePosition();
@@ -74,6 +79,8 @@ private:
     Marble::Declarative::Coordinate m_position;
 
     MarbleModel* m_marbleModel;
+
+    qreal m_speed;
 };
 
 }
