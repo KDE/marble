@@ -42,6 +42,11 @@ Page {
         id: pageMenu
         content: MenuLayout {
             MenuItem {
+                text: "Start Navigation"
+                onClicked: openActivity( "Navigation" )
+            }
+
+            MenuItem {
                 text: "Save Route"
                 onClicked: {
                     saveRouteDialog.filename = "route-" + Qt.formatDateTime(new Date(), "yyyy-MM-dd_hh.mm.ss") + ".kml"
