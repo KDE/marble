@@ -16,6 +16,7 @@
 namespace Marble
 {
 
+class GeoDataContainer;
 class GeoDataDocument;
 class GeoDataTreeModel;
 
@@ -29,6 +30,8 @@ public:
     GeoDataDocument* bookmarkDocument();
 
     void resetBookmarkDocument();
+
+    void setVisualCategory( GeoDataContainer *container );
 
     GeoDataTreeModel *m_treeModel;
 

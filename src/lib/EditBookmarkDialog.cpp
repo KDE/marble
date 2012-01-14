@@ -7,7 +7,7 @@
 //
 // Copyright 2010 Gaurav Gupta <1989.gaurav@googlemail.com>
 // Copyright 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
-//
+// Copyright 2012 Thibaut Gridel <tgridel@free.fr>
 //
 
 #include "EditBookmarkDialog.h"
@@ -39,7 +39,7 @@ public:
 
     EditBookmarkDialogPrivate( EditBookmarkDialog* q, BookmarkManager *bookmarkManager );
 
-    void initComboBox();
+    void initComboBox( const GeoDataContainer* const container );
 
     void initialize();
 
@@ -66,22 +66,20 @@ void EditBookmarkDialogPrivate::initialize()
     QObject::connect( m_ui.m_longitude, SIGNAL( valueChanged(qreal) ), q, SLOT( onCoordinatesEdited() ) );
     QObject::connect( m_ui.m_latitude, SIGNAL( valueChanged(qreal) ), q, SLOT( onCoordinatesEdited() ) );
 
-    initComboBox();
+    m_ui.m_folders->clear();
+    initComboBox( m_bookmarkManager->document() );
 }
 
-void EditBookmarkDialogPrivate::initComboBox()
+void EditBookmarkDialogPrivate::initComboBox( const GeoDataContainer* const container )
 {
-    m_ui.m_folders->clear();
-    QVector<GeoDataFolder*> folders =  m_bookmarkManager->folders();
-    QVector<GeoDataFolder*>::const_iterator i = folders.constBegin();
-    QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
-
-    QList<QString> folderNames;
-    for (; i != end; ++i ) {
-        folderNames.append( (*i)->name() );
+    foreach( GeoDataFolder *folder, container->folderList() ) {
+        QVariant folderVariant;
+        folderVariant.setValue(folder);
+        m_ui.m_folders->addItem( folder->name(), folderVariant );
+        if( !folder->folderList().isEmpty() ) {
+            initComboBox( folder );
+        }
     }
-
-    m_ui.m_folders->insertItems( 0, folderNames );
 }
 
 void EditBookmarkDialogPrivate::setFolderName( const QString &name )
@@ -203,11 +201,9 @@ QString EditBookmarkDialog::append( const QString &bookmark, const QString &text
 void EditBookmarkDialog::openNewFolderDialog()
 {
     QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( this );
-    if ( d->m_widget ) {
-        dialog->setBookmarkManager( d->m_widget->model()->bookmarkManager() );
-    }
     if ( dialog->exec() == QDialog::Accepted ) {
-        d->initComboBox();
+        d->m_bookmarkManager->addNewBookmarkFolder( folder(), dialog->folderName() );
+        d->initComboBox( d->m_bookmarkManager->document() );
         d->setFolderName( dialog->folderName() );
     }
     delete dialog;
@@ -216,7 +212,7 @@ void EditBookmarkDialog::openNewFolderDialog()
 void EditBookmarkDialog::addBookmark()
 {
     if ( d->m_widget ) {
-        d->m_widget->model()->bookmarkManager()->addBookmark( bookmark(), folderName() );
+        d->m_bookmarkManager->addBookmark( folder(), bookmark() );
     }
 }
 
@@ -249,9 +245,9 @@ QString EditBookmarkDialog::name() const
     return d->m_ui.m_name->text();
 }
 
-QString EditBookmarkDialog::folderName() const
+GeoDataFolder *EditBookmarkDialog::folder() const
 {
-    return d->m_ui.m_folders->currentText();
+    return qvariant_cast<GeoDataFolder*>(d->m_ui.m_folders->itemData(d->m_ui.m_folders->currentIndex()));
 }
 
 QString EditBookmarkDialog::description() const
