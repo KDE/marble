@@ -110,8 +110,6 @@ void CacheRunner::parseFile( const QString &fileName, DocumentRole role = Unknow
         document->append( mark );
     }
 
-    document->setVisible( false );
-
     file.close();
     emit parsingFinished( document );
 }

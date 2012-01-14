@@ -560,7 +560,11 @@ void GeoDataFeature::setStyleUrl( const QString &value)
 
 bool GeoDataFeature::isVisible() const
 {
-    return d->m_visible;
+    if ( parent() == 0 ) {
+        return d->m_visible;
+    }
+    GeoDataContainer *container = static_cast<GeoDataContainer*>( parent() );
+    return d->m_visible && container->isVisible();
 }
 
 void GeoDataFeature::setVisible( bool value )

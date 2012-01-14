@@ -230,6 +230,7 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
                  || type == GeoDataTypes::GeoDataPolygonType
                  || type == GeoDataTypes::GeoDataLinearRingType
                  || type == GeoDataTypes::GeoDataMultiGeometryType
+                 || type == GeoDataTypes::GeoDataTrackType
                  ) {
                 if ( feature->isVisible() ) {
                     return QVariant( Qt::Checked );
@@ -237,6 +238,15 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
                 else {
                     return QVariant( Qt::Unchecked );
                 }
+            }
+        } else if ( object->nodeType() == GeoDataTypes::GeoDataFolderType
+                    || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+            GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
+            if ( feature->isVisible() ) {
+                return QVariant( Qt::Checked );
+            }
+            else {
+                return QVariant( Qt::Unchecked );
             }
         }
     }
