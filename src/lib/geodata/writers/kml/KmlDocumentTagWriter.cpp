@@ -55,6 +55,7 @@ bool KmlDocumentTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     }
 
     writer.writeOptionalElement( "name", document->name() );
+    writer.writeElement( kml::kmlTag_visibility, QString::number( document->isVisible() ) );
     writer.writeOptionalElement( "address", document->address() );
 
     QVector<GeoDataFeature*>::ConstIterator it =  document->constBegin();

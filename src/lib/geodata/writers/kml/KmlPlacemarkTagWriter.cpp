@@ -36,6 +36,7 @@ bool KmlPlacemarkTagWriter::write( const GeoNode *node,
     writer.writeStartElement( kml::kmlTag_Placemark );
 
     writer.writeOptionalElement( "name", placemark->name() );
+    writer.writeElement( kml::kmlTag_visibility, QString::number( placemark->isVisible() ) );
     writer.writeOptionalElement( kml::kmlTag_styleUrl, placemark->styleUrl() );
 
     if( !placemark->description().isEmpty() ) {
@@ -47,6 +48,7 @@ bool KmlPlacemarkTagWriter::write( const GeoNode *node,
         }
         writer.writeEndElement();
     }
+
 
     if( !placemark->extendedData().isEmpty() ){
         writeElement( &placemark->extendedData(), writer );

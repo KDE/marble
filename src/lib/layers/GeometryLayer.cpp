@@ -279,7 +279,7 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry
     if ( !item )
         return;
     item->setStyle( placemark->style() );
-    item->setVisible( placemark->isVisible() );
+    item->setVisible( placemark->isGloballyVisible() );
     item->setZValue( GeometryLayer::s_defaultZValues[placemark->visualCategory()] );
     item->setMinZoomLevel( GeometryLayer::s_defaultMinZoomLevels[placemark->visualCategory()] );
     m_scene.addIdem( item );

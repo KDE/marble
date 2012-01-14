@@ -556,7 +556,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
                 continue;
             }
 
-        if ( !placemark->isVisible() ) {
+        if ( !placemark->isGloballyVisible() ) {
             continue;
         }
 

@@ -37,7 +37,9 @@ bool KmlFolderTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     //Writing folder name
     writer.writeOptionalElement( "name", folder->name() );
 
-    if( !folder->extendedData().isEmpty() ){
+    writer.writeElement( kml::kmlTag_visibility, QString::number( folder->isVisible() ) );
+
+            if( !folder->extendedData().isEmpty() ){
         writeElement( &folder->extendedData(), writer );
     }
 

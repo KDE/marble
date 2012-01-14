@@ -340,6 +340,10 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
     /// Return whether this feature is visible or not
     bool isVisible() const;
+
+    /// Return whether this feature is visible or not in the context of its parenting
+    bool isGloballyVisible() const;
+
     /**
      * @brief Set a new value for visibility
      * @param value  new value for the visibility

@@ -232,20 +232,22 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
                  || type == GeoDataTypes::GeoDataMultiGeometryType
                  || type == GeoDataTypes::GeoDataTrackType
                  ) {
-                if ( feature->isVisible() ) {
+                if ( feature->isGloballyVisible() ) {
                     return QVariant( Qt::Checked );
-                }
-                else {
+                } else if ( feature->isVisible() ) {
+                    return QVariant( Qt::PartiallyChecked );
+                } else {
                     return QVariant( Qt::Unchecked );
                 }
             }
         } else if ( object->nodeType() == GeoDataTypes::GeoDataFolderType
                     || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
             GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
-            if ( feature->isVisible() ) {
+            if ( feature->isGloballyVisible() ) {
                 return QVariant( Qt::Checked );
-            }
-            else {
+            } else if ( feature->isVisible() ) {
+                return QVariant( Qt::PartiallyChecked );
+            } else {
                 return QVariant( Qt::Unchecked );
             }
         }

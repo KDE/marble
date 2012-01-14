@@ -560,11 +560,7 @@ void GeoDataFeature::setStyleUrl( const QString &value)
 
 bool GeoDataFeature::isVisible() const
 {
-    if ( parent() == 0 ) {
         return d->m_visible;
-    }
-    GeoDataContainer *container = static_cast<GeoDataContainer*>( parent() );
-    return d->m_visible && container->isVisible();
 }
 
 void GeoDataFeature::setVisible( bool value )
@@ -572,6 +568,16 @@ void GeoDataFeature::setVisible( bool value )
     detach();
     d->m_visible = value;
 }
+
+bool GeoDataFeature::isGloballyVisible() const
+{
+    if ( parent() == 0 ) {
+        return d->m_visible;
+    }
+    GeoDataContainer *container = static_cast<GeoDataContainer*>( parent() );
+    return d->m_visible && container->isGloballyVisible();
+}
+
 
 GeoDataTimeSpan& GeoDataFeature::timeSpan() const
 {
