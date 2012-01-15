@@ -273,6 +273,11 @@ void MarbleWidget::centerOn( const Marble::GeoDataLatLonAltBox &bbox )
     m_marbleWidget->centerOn( bbox );
 }
 
+void MarbleWidget::centerOn( const GeoDataCoordinates &coordinates )
+{
+    m_marbleWidget->centerOn( coordinates );
+}
+
 void MarbleWidget::updateCenterPosition()
 {
     m_marbleWidget->centerOn( m_center.longitude(), m_center.latitude() );

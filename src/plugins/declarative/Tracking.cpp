@@ -210,11 +210,11 @@ void Tracking::setAutoCenter( bool enabled )
         if ( enabled && !m_autoNavigation && m_marbleWidget ) {
             m_autoNavigation = new AdjustNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
             connect( m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
-                     m_marbleWidget, SLOT( zoomIn( FlyToMode ) ) );
+                     m_marbleWidget, SLOT( zoomIn() ) );
             connect( m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),
-                     m_marbleWidget, SLOT( zoomOut( FlyToMode ) ) );
+                     m_marbleWidget, SLOT( zoomOut() ) );
             connect( m_autoNavigation, SIGNAL( centerOn( const GeoDataCoordinates &, bool ) ),
-                     m_marbleWidget, SLOT( centerOn( const GeoDataCoordinates &, bool ) ) );
+                     m_marbleWidget, SLOT( centerOn( const GeoDataCoordinates & ) ) );
 
             connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ),
                      m_autoNavigation, SLOT( inhibitAutoAdjustments() ) );
@@ -243,11 +243,11 @@ void Tracking::setAutoZoom( bool enabled )
         if ( enabled && !m_autoNavigation && m_marbleWidget ) {
             m_autoNavigation = new AdjustNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
             connect( m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
-                     m_marbleWidget, SLOT( zoomIn( FlyToMode ) ) );
+                     m_marbleWidget, SLOT( zoomIn() ) );
             connect( m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),
-                     m_marbleWidget, SLOT( zoomOut( FlyToMode ) ) );
+                     m_marbleWidget, SLOT( zoomOut() ) );
             connect( m_autoNavigation, SIGNAL( centerOn( const GeoDataCoordinates &, bool ) ),
-                     m_marbleWidget, SLOT( centerOn( const GeoDataCoordinates &, bool ) ) );
+                     m_marbleWidget, SLOT( centerOn( const GeoDataCoordinates & ) ) );
 
             connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ),
                      m_autoNavigation, SLOT( inhibitAutoAdjustments() ) );
