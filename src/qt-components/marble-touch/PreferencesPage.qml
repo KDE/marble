@@ -8,6 +8,7 @@
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 
 import QtQuick 1.0
+import QtMultimediaKit 1.1
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
@@ -136,13 +137,13 @@ Page {
             ButtonRow {
                 id: speakersSwitch
                 width: parent.width
-                checkedButton: b2
                 Button {
                     id: b1
                     text: "Disabled"
                     onCheckedChanged: {
-                        settings.voiceNavigationMuted = checked
                         if (checked) {
+                            settings.voiceNavigationMuted = true
+                            settings.voiceNavigationSoundEnabled = false
                             speakerHelp.text = "Turn instructions are not announced by sound/voice."
                         }
                     }
@@ -153,6 +154,8 @@ Page {
                     text: "Sound"
                     onCheckedChanged: {
                         if (checked) {
+                            settings.voiceNavigationMuted = false
+                            settings.voiceNavigationSoundEnabled = true
                             speakerHelp.text = "A sound is played when approaching turn points during Navigation."
                         }
                     }
@@ -163,6 +166,8 @@ Page {
                     text: "Speaker"
                     onCheckedChanged: {
                         if (checked) {
+                            settings.voiceNavigationMuted = false
+                            settings.voiceNavigationSoundEnabled = false
                             speakerHelp.text = "Turn instructions are spoken when approaching them."
                         }
                     }
@@ -172,7 +177,7 @@ Page {
 
                     SelectionDialog {
                         id: speakerDialog
-                        titleText: "Choose Voice Navigation Speaker"
+                        titleText: "Voice Navigation Speaker"
                         selectedIndex: speakers.indexOf(settings.voiceNavigationSpeaker)
                         model: speakers
                         onAccepted: settings.voiceNavigationSpeaker = speakers.path(selectedIndex)
@@ -180,9 +185,9 @@ Page {
                 }
 
                 Component.onCompleted: {
-                    if (settings.voiceNavigationMuted) {
+                    if (settings.voiceNavigationMuted === true) {
                         checkedButton = b1
-                    } else if ( settings.voiceNavigationSoundEnabled ) {
+                    } else if (settings.voiceNavigationSoundEnabled === true) {
                         checkedButton = b2
                     } else {
                         checkedButton = b3
@@ -190,15 +195,47 @@ Page {
                 }
             }
 
-            Label {
-                id: speakerHelp
+            Item {
+                anchors.right: parent.right
+                anchors.left: parent.left
                 anchors.top: speakersSwitch.bottom
-                //anchors.left: speakersSwitch.left
-                //anchors.right: parent.right
                 anchors.topMargin: 5
 
-                color: "gray"
-                font.pixelSize: 16
+                Label {
+                    anchors.left: parent.left
+                    anchors.right: voiceNavigationPreviewButton.left
+                    id: speakerHelp
+                    color: "gray"
+                    font.pixelSize: 16
+                }
+
+                ToolButton {
+                    id: voiceNavigationPreviewButton
+                    anchors.right: parent.right
+                    anchors.margins: 5
+                    visible: !settings.voiceNavigationMuted
+                    iconSource: "image://theme/icon-m-toolbar-mediacontrol-play";
+                    checkable: true
+                    checked: false
+                    width: 60
+
+                    VoiceNavigation {
+                        id: voiceNavigationPreview
+                        speaker: settings.voiceNavigationSpeaker
+                        isSpeakerEnabled: !settings.voiceNavigationSoundEnabled
+                    }
+
+                    Audio {
+                        id: voiceNavigationPreviewPlayer
+                        source: "file://" + voiceNavigationPreview.preview
+                        playing: voiceNavigationPreviewButton.checked
+                        onStatusChanged: {
+                            if ( status == Audio.EndOfMedia ) {
+                                voiceNavigationPreviewButton.checked = false
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -218,7 +255,7 @@ Page {
 
                 SelectionDialog {
                     id: themeDialog
-                    titleText: "Choose Street Map Theme"
+                    titleText: "Street Map Theme"
                     selectedIndex: marbleWidget.streetMapThemeModel.indexOf(settings.streetMapTheme)
                     model: marbleWidget.streetMapThemeModel
                     delegate:

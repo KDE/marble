@@ -52,6 +52,8 @@ public:
     void updateInstruction( qreal distance, Maneuver::Direction turnType );
 
     void updateInstruction( const QString &name );
+
+    void initializeMaps();
 };
 
 VoiceNavigationModelPrivate::VoiceNavigationModelPrivate( VoiceNavigationModel* parent ) :
@@ -61,7 +63,7 @@ VoiceNavigationModelPrivate::VoiceNavigationModelPrivate( VoiceNavigationModel* 
     m_lastDistance( 0.0 ),
     m_lastTurnType( Maneuver::Unknown )
 {
-    // nothing to do
+    initializeMaps();
 }
 
 void VoiceNavigationModelPrivate::reset()
@@ -133,7 +135,7 @@ void VoiceNavigationModelPrivate::updateInstruction( qreal distance, Maneuver::D
     //QString distanceAudio = distanceAudioFile( distance );
     QString turnTypeAudio = turnTypeAudioFile( turnType, distance );
     if ( turnTypeAudio.isEmpty() ) {
-        mDebug() << "Missing audio file for turn type " << turnType;
+        mDebug() << "Missing audio file for turn type " << turnType << " and speaker " << m_speaker;
         return;
     }
 
@@ -152,6 +154,62 @@ void VoiceNavigationModelPrivate::updateInstruction( const QString &name )
     m_queue.clear();
     m_queue << audioFile( name );
     emit m_parent->instructionChanged();
+}
+
+void VoiceNavigationModelPrivate::initializeMaps()
+{
+    m_turnTypeMap.clear();
+    m_announceMap.clear();
+
+    if ( m_speakerEnabled ) {
+        m_announceMap[Maneuver::Straight] = "";
+        m_announceMap[Maneuver::SlightRight] = "AhKeepRight";
+        m_announceMap[Maneuver::Right] = "AhRightTurn";
+        m_announceMap[Maneuver::SharpRight] = "AhRightTurn";
+        m_announceMap[Maneuver::TurnAround] = "AhUTurn";
+        m_announceMap[Maneuver::SharpLeft] = "AhLeftTurn";
+        m_announceMap[Maneuver::Left] = "AhLeftTurn";
+        m_announceMap[Maneuver::SlightLeft] = "AhKeepLeft";
+        m_announceMap[Maneuver::RoundaboutFirstExit] = "RbExit1";
+        m_announceMap[Maneuver::RoundaboutSecondExit] = "RbExit2";
+        m_announceMap[Maneuver::RoundaboutThirdExit] = "RbExit3";
+
+        m_turnTypeMap[Maneuver::Straight] = "Straight";
+        m_turnTypeMap[Maneuver::SlightRight] = "BearRight";
+        m_turnTypeMap[Maneuver::Right] = "TurnRight";
+        m_turnTypeMap[Maneuver::SharpRight] = "SharpRight";
+        m_turnTypeMap[Maneuver::TurnAround] = "UTurn";
+        m_turnTypeMap[Maneuver::SharpLeft] = "SharpLeft";
+        m_turnTypeMap[Maneuver::Left] = "TurnLeft";
+        m_turnTypeMap[Maneuver::SlightLeft] = "BearLeft";
+        m_turnTypeMap[Maneuver::RoundaboutFirstExit] = "";
+        m_turnTypeMap[Maneuver::RoundaboutSecondExit] = "";
+        m_turnTypeMap[Maneuver::RoundaboutThirdExit] = "";
+    } else {
+        m_announceMap[Maneuver::Straight] = "KDE-Sys-List-End";
+        m_announceMap[Maneuver::SlightRight] = "KDE-Sys-List-End";
+        m_announceMap[Maneuver::Right] = "KDE-Sys-List-End";
+        m_announceMap[Maneuver::SharpRight] = "KDE-Sys-List-End";
+        m_announceMap[Maneuver::TurnAround] = "KDE-Sys-List-End";
+        m_announceMap[Maneuver::SharpLeft] = "KDE-Sys-List-End";
+        m_announceMap[Maneuver::Left] = "KDE-Sys-List-End";
+        m_announceMap[Maneuver::SlightLeft] = "KDE-Sys-List-End";
+        m_announceMap[Maneuver::RoundaboutFirstExit] = "KDE-Sys-List-End";
+        m_announceMap[Maneuver::RoundaboutSecondExit] = "KDE-Sys-List-End";
+        m_announceMap[Maneuver::RoundaboutThirdExit] = "KDE-Sys-List-End";
+
+        m_turnTypeMap[Maneuver::Straight] = "KDE-Sys-App-Positive";
+        m_turnTypeMap[Maneuver::SlightRight] = "KDE-Sys-App-Positive";
+        m_turnTypeMap[Maneuver::Right] = "KDE-Sys-App-Positive";
+        m_turnTypeMap[Maneuver::SharpRight] = "KDE-Sys-App-Positive";
+        m_turnTypeMap[Maneuver::TurnAround] = "KDE-Sys-App-Positive";
+        m_turnTypeMap[Maneuver::SharpLeft] = "KDE-Sys-App-Positive";
+        m_turnTypeMap[Maneuver::Left] = "KDE-Sys-App-Positive";
+        m_turnTypeMap[Maneuver::SlightLeft] = "KDE-Sys-App-Positive";
+        m_turnTypeMap[Maneuver::RoundaboutFirstExit] = "KDE-Sys-App-Positive";
+        m_turnTypeMap[Maneuver::RoundaboutSecondExit] = "KDE-Sys-App-Positive";
+        m_turnTypeMap[Maneuver::RoundaboutThirdExit] = "KDE-Sys-App-Positive";
+    }
 }
 
 VoiceNavigationModel::VoiceNavigationModel( QObject *parent ) :
@@ -181,6 +239,7 @@ void VoiceNavigationModel::setSpeaker(const QString &speaker)
         }
 
         emit speakerChanged();
+        emit previewChanged();
     }
 }
 
@@ -193,59 +252,9 @@ void VoiceNavigationModel::setSpeakerEnabled( bool enabled )
 {
     if ( enabled != d->m_speakerEnabled ) {
         d->m_speakerEnabled = enabled;
-
-        d->m_turnTypeMap.clear();
-        d->m_announceMap.clear();
-
-        if ( enabled ) {
-            d->m_announceMap[Maneuver::Straight] = "";
-            d->m_announceMap[Maneuver::SlightRight] = "AhKeepRight";
-            d->m_announceMap[Maneuver::Right] = "AhRightTurn";
-            d->m_announceMap[Maneuver::SharpRight] = "AhRightTurn";
-            d->m_announceMap[Maneuver::TurnAround] = "AhUTurn";
-            d->m_announceMap[Maneuver::SharpLeft] = "AhLeftTurn";
-            d->m_announceMap[Maneuver::Left] = "AhLeftTurn";
-            d->m_announceMap[Maneuver::SlightLeft] = "AhKeepLeft";
-            d->m_announceMap[Maneuver::RoundaboutFirstExit] = "RbExit1";
-            d->m_announceMap[Maneuver::RoundaboutSecondExit] = "RbExit2";
-            d->m_announceMap[Maneuver::RoundaboutThirdExit] = "RbExit3";
-
-            d->m_turnTypeMap[Maneuver::Straight] = "Straight";
-            d->m_turnTypeMap[Maneuver::SlightRight] = "BearRight";
-            d->m_turnTypeMap[Maneuver::Right] = "TurnRight";
-            d->m_turnTypeMap[Maneuver::SharpRight] = "SharpRight";
-            d->m_turnTypeMap[Maneuver::TurnAround] = "UTurn";
-            d->m_turnTypeMap[Maneuver::SharpLeft] = "SharpLeft";
-            d->m_turnTypeMap[Maneuver::Left] = "TurnLeft";
-            d->m_turnTypeMap[Maneuver::SlightLeft] = "BearLeft";
-            d->m_turnTypeMap[Maneuver::RoundaboutFirstExit] = "";
-            d->m_turnTypeMap[Maneuver::RoundaboutSecondExit] = "";
-            d->m_turnTypeMap[Maneuver::RoundaboutThirdExit] = "";
-        } else {
-            d->m_announceMap[Maneuver::Straight] = "KDE-Sys-List-End";
-            d->m_announceMap[Maneuver::SlightRight] = "KDE-Sys-List-End";
-            d->m_announceMap[Maneuver::Right] = "KDE-Sys-List-End";
-            d->m_announceMap[Maneuver::SharpRight] = "KDE-Sys-List-End";
-            d->m_announceMap[Maneuver::TurnAround] = "KDE-Sys-List-End";
-            d->m_announceMap[Maneuver::SharpLeft] = "KDE-Sys-List-End";
-            d->m_announceMap[Maneuver::Left] = "KDE-Sys-List-End";
-            d->m_announceMap[Maneuver::SlightLeft] = "KDE-Sys-List-End";
-            d->m_announceMap[Maneuver::RoundaboutFirstExit] = "KDE-Sys-List-End";
-            d->m_announceMap[Maneuver::RoundaboutSecondExit] = "KDE-Sys-List-End";
-            d->m_announceMap[Maneuver::RoundaboutThirdExit] = "KDE-Sys-List-End";
-
-            d->m_turnTypeMap[Maneuver::Straight] = "KDE-Sys-App-Positive";
-            d->m_turnTypeMap[Maneuver::SlightRight] = "KDE-Sys-App-Positive";
-            d->m_turnTypeMap[Maneuver::Right] = "KDE-Sys-App-Positive";
-            d->m_turnTypeMap[Maneuver::SharpRight] = "KDE-Sys-App-Positive";
-            d->m_turnTypeMap[Maneuver::TurnAround] = "KDE-Sys-App-Positive";
-            d->m_turnTypeMap[Maneuver::SharpLeft] = "KDE-Sys-App-Positive";
-            d->m_turnTypeMap[Maneuver::Left] = "KDE-Sys-App-Positive";
-            d->m_turnTypeMap[Maneuver::SlightLeft] = "KDE-Sys-App-Positive";
-            d->m_turnTypeMap[Maneuver::RoundaboutFirstExit] = "KDE-Sys-App-Positive";
-            d->m_turnTypeMap[Maneuver::RoundaboutSecondExit] = "KDE-Sys-App-Positive";
-            d->m_turnTypeMap[Maneuver::RoundaboutThirdExit] = "KDE-Sys-App-Positive";
-        }
+        d->initializeMaps();
+        emit isSpeakerEnabledChanged();
+        emit previewChanged();
     }
 }
 
@@ -288,7 +297,7 @@ void VoiceNavigationModel::setDestinationReached()
 
 QString VoiceNavigationModel::preview() const
 {
-    return d->audioFile( "Marble" );
+    return d->audioFile( d->m_speakerEnabled ? "Marble" : "KDE-Sys-App-Positive" );
 }
 
 QString VoiceNavigationModel::instruction() const
