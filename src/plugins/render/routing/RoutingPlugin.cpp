@@ -29,6 +29,7 @@
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
 #include "routing/RouteRequest.h"
+#include "routing/SpeakersModel.h"
 #include "ViewportParams.h"
 #include "WidgetGraphicsItem.h"
 
@@ -66,6 +67,7 @@ public:
     QDialog *m_configDialog;
     Ui::RoutingConfigDialog m_configUi;
     bool m_routeCompleted;
+    SpeakersModel* m_speakersModel;
 
     RoutingPluginPrivate( RoutingPlugin* parent );
 
@@ -112,6 +114,7 @@ RoutingPluginPrivate::RoutingPluginPrivate( RoutingPlugin *parent ) :
     m_audio( new AudioOutput( parent ) ),
     m_configDialog( 0 ),
     m_routeCompleted( false ),
+    m_speakersModel( 0 ),
     m_parent( parent )
 
 {
@@ -371,15 +374,11 @@ void RoutingPluginPrivate::readSettings()
     m_audio->setSpeaker( speaker );
 
     if ( m_configDialog ) {
-        QStringList const speakerPaths = m_audio->speakers();
-        QStringList speakers;
-        foreach( const QString &speaker, speakerPaths ) {
-            speakers << QFileInfo( speaker ).fileName();
+        if ( !m_speakersModel ) {
+            m_speakersModel = new SpeakersModel( m_parent );
         }
-
-        int const index = speakerPaths.indexOf( speaker );
-        m_configUi.speakerComboBox->clear();
-        m_configUi.speakerComboBox->addItems( speakers );
+        int const index = m_speakersModel->indexOf( speaker );
+        m_configUi.speakerComboBox->setModel( m_speakersModel );
         m_configUi.speakerComboBox->setCurrentIndex( index );
         m_configUi.voiceNavigationCheckBox->setChecked( !muted );
         m_configUi.soundRadioButton->setChecked( sound );
@@ -422,10 +421,9 @@ qreal RoutingPluginPrivate::remainingDistance() const
 void RoutingPlugin::writeSettings()
 {
     Q_ASSERT( d->m_configDialog );
-    QStringList const speakerPaths = d->m_audio->speakers();
     int const index = d->m_configUi.speakerComboBox->currentIndex();
-    if ( index >= 0 && index < speakerPaths.size() ) {
-        d->m_settings["speaker"] = speakerPaths.at( index );
+    if ( index >= 0 ) {
+        d->m_settings["speaker"] = d->m_speakersModel->data( d->m_speakersModel->index( index ), Qt::UserRole+1 );
     }
     d->m_settings["muted"] = !d->m_configUi.voiceNavigationCheckBox->isChecked();
     d->m_settings["sound"] = d->m_configUi.soundRadioButton->isChecked();
