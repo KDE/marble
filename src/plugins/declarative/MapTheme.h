@@ -13,10 +13,6 @@
 
 #include <QtCore/QObject>
 
-namespace Marble
-{
-namespace Declarative
-{
 
 /**
   * Important properties of map themes: Identifier, name, preview image.
@@ -55,8 +51,5 @@ private:
 
     QString m_name;
 };
-
-}
-}
 
 #endif // MARBLE_DECLARATIVE_MAPTHEME_H

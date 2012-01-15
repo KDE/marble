@@ -15,12 +15,6 @@
 #include <QtCore/QMap>
 #include <QtCore/QVariant>
 
-namespace Marble
-{
-    
-namespace Declarative
-{
-
 /**
  * Stores related activities and plugin states for an activity.
  */
@@ -62,9 +56,5 @@ class RelatedActivities : public QObject
     Q_DISABLE_COPY( RelatedActivities )
     QMap<QString, QVariant> m_relatedActivities;   ///< Map with activity names as key and lists of plugin names as values.
 };
-
-}
-
-}
 
 #endif

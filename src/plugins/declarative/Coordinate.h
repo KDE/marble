@@ -16,11 +16,6 @@
 #include <QtCore/QObject>
 #include <QtDeclarative/QtDeclarative>
 
-namespace Marble
-{
-namespace Declarative
-{
-
 /**
   * Represents a coordinate with the properties of a name and coordinates
   *
@@ -57,10 +52,10 @@ public:
     void setAltitude( qreal alt );
 
     /** Change the altitude of the coordinate */
-    GeoDataCoordinates coordinates() const;
+    Marble::GeoDataCoordinates coordinates() const;
 
     /** Change all coordinates at once */
-    void setCoordinates( const GeoDataCoordinates &coordinates );
+    void setCoordinates( const Marble::GeoDataCoordinates &coordinates );
 
     /** Distance (in meter) to the given coordinate */
     Q_INVOKABLE qreal distance( qreal longitude, qreal latitude ) const;
@@ -78,12 +73,9 @@ Q_SIGNALS:
     void altitudeChanged();
 
 private:
-    GeoDataCoordinates m_coordinate;
+    Marble::GeoDataCoordinates m_coordinate;
 };
 
-}
-}
-
-QML_DECLARE_TYPE( Marble::Declarative::Coordinate )
+QML_DECLARE_TYPE( Coordinate )
 
 #endif // MARBLE_DECLARATIVE_COORDINATE_H

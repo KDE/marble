@@ -20,11 +20,6 @@
 
 #include "MarbleWidget.h"
 
-namespace Marble
-{
-namespace Declarative
-{
-
 class ZoomButtonInterceptorPrivate
 {
 public:
@@ -39,7 +34,7 @@ public:
 #endif //HARMATTAN_ZOOMINTERCEPTOR
 };
 
-ZoomButtonInterceptorPrivate::ZoomButtonInterceptorPrivate(MarbleWidget *widget)
+ZoomButtonInterceptorPrivate::ZoomButtonInterceptorPrivate(Marble::MarbleWidget *widget)
     : m_widget( widget )
 #ifdef HARMATTAN_ZOOMINTERCEPTOR
      , m_resourceSet( new ResourcePolicy::ResourceSet( "player" ) )
@@ -96,9 +91,6 @@ ZoomButtonInterceptor::ZoomButtonInterceptor( Marble::MarbleWidget *widget, QObj
 ZoomButtonInterceptor::~ZoomButtonInterceptor()
 {
     delete d;
-}
-
-}
 }
 
 #include "ZoomButtonInterceptor.moc"

@@ -19,31 +19,26 @@
 #include "routing/AdjustNavigation.h"
 #include "routing/VoiceNavigationModel.h"
 
-namespace Marble
-{
-namespace Declarative
-{
-
 class NavigationPrivate
 {
 public:
     NavigationPrivate();
 
-    Marble::Declarative::MarbleWidget* m_marbleWidget;
+    MarbleWidget* m_marbleWidget;
 
     bool m_muted;
 
-    RouteSegment m_currentSegment;
+    Marble::RouteSegment m_currentSegment;
 
-    AdjustNavigation* m_autoNavigation;
+    Marble::AdjustNavigation* m_autoNavigation;
 
-    VoiceNavigationModel m_voiceNavigation;
+    Marble::VoiceNavigationModel m_voiceNavigation;
 
     qreal m_nextInstructionDistance;
 
-    RouteSegment nextRouteSegment();
+    Marble::RouteSegment nextRouteSegment();
 
-    void updateNextInstructionDistance( const RoutingModel *model );
+    void updateNextInstructionDistance( const Marble::RoutingModel *model );
 };
 
 NavigationPrivate::NavigationPrivate() :
@@ -52,30 +47,30 @@ NavigationPrivate::NavigationPrivate() :
     // nothing to do
 }
 
-void NavigationPrivate::updateNextInstructionDistance( const RoutingModel *model )
+void NavigationPrivate::updateNextInstructionDistance( const Marble::RoutingModel *model )
 {
-    GeoDataCoordinates position = model->route().position();
-    GeoDataCoordinates interpolated = model->route().positionOnRoute();
-    GeoDataCoordinates onRoute = model->route().currentWaypoint();
-    qreal distance = EARTH_RADIUS * ( distanceSphere( position, interpolated ) + distanceSphere( interpolated, onRoute ) );
-    const RouteSegment &segment = model->route().currentSegment();
+    Marble::GeoDataCoordinates position = model->route().position();
+    Marble::GeoDataCoordinates interpolated = model->route().positionOnRoute();
+    Marble::GeoDataCoordinates onRoute = model->route().currentWaypoint();
+    qreal distance = Marble::EARTH_RADIUS * ( distanceSphere( position, interpolated ) + distanceSphere( interpolated, onRoute ) );
+    const Marble::RouteSegment &segment = model->route().currentSegment();
     for (int i=0; i<segment.path().size(); ++i) {
         if (segment.path()[i] == onRoute) {
-            m_nextInstructionDistance = distance + segment.path().length( EARTH_RADIUS, i );
+            m_nextInstructionDistance = distance + segment.path().length( Marble::EARTH_RADIUS, i );
         }
     }
 
     m_nextInstructionDistance = distance;
 }
 
-RouteSegment NavigationPrivate::nextRouteSegment()
+Marble::RouteSegment NavigationPrivate::nextRouteSegment()
 {
     if ( m_marbleWidget ) {
         // Not using m_currentSegment on purpose
         return m_marbleWidget->model()->routingManager()->routingModel()->route().currentSegment().nextRouteSegment();
     }
 
-    return RouteSegment();
+    return Marble::RouteSegment();
 }
 
 Navigation::Navigation( QObject* parent) :
@@ -89,7 +84,7 @@ Navigation::~Navigation()
     delete d;
 }
 
-void Navigation::setMarbleWidget( Marble::Declarative::MarbleWidget* widget )
+void Navigation::setMarbleWidget( MarbleWidget* widget )
 {
     d->m_marbleWidget = widget;
     if ( d->m_marbleWidget ) {
@@ -98,7 +93,7 @@ void Navigation::setMarbleWidget( Marble::Declarative::MarbleWidget* widget )
         connect( d->m_marbleWidget->model()->routingManager()->routingModel(),
                 SIGNAL( positionChanged() ), this, SLOT( update() ) );
 
-        d->m_autoNavigation = new AdjustNavigation( d->m_marbleWidget->model(), d->m_marbleWidget->viewport(), this );
+        d->m_autoNavigation = new Marble::AdjustNavigation( d->m_marbleWidget->model(), d->m_marbleWidget->viewport(), this );
         connect( d->m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
                  d->m_marbleWidget, SLOT( zoomIn() ) );
         connect( d->m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),
@@ -152,19 +147,19 @@ QString Navigation::nextRoad() const
 QString Navigation::nextInstructionImage() const
 {
     switch ( d->nextRouteSegment().maneuver().direction() ) {
-    case Maneuver::Unknown: return "";
-    case Maneuver::Straight: return "qrc:/marble/turn-continue.svg";
-    case Maneuver::SlightRight: return "qrc:/marble/turn-slight-right.svg";
-    case Maneuver::Right: return "qrc:/marble/turn-right.svg";
-    case Maneuver::SharpRight: return "qrc:/marble/turn-sharp-right.svg";
-    case Maneuver::TurnAround: return "qrc:/marble/turn-around.svg";
-    case Maneuver::SharpLeft: return "qrc:/marble/turn-sharp-left.svg";
-    case Maneuver::Left: return "qrc:/marble/turn-left.svg";
-    case Maneuver::SlightLeft: return "qrc:/marble/turn-slight-left.svg";
-    case Maneuver::RoundaboutFirstExit: return "qrc:/marble/turn-roundabout-first.svg";
-    case Maneuver::RoundaboutSecondExit: return "qrc:/marble/turn-roundabout-second.svg";
-    case Maneuver::RoundaboutThirdExit: return "qrc:/marble/turn-roundabout-third.svg";
-    case Maneuver::RoundaboutExit: return "qrc:/marble/turn-roundabout-far.svg";
+    case Marble::Maneuver::Unknown: return "";
+    case Marble::Maneuver::Straight: return "qrc:/marble/turn-continue.svg";
+    case Marble::Maneuver::SlightRight: return "qrc:/marble/turn-slight-right.svg";
+    case Marble::Maneuver::Right: return "qrc:/marble/turn-right.svg";
+    case Marble::Maneuver::SharpRight: return "qrc:/marble/turn-sharp-right.svg";
+    case Marble::Maneuver::TurnAround: return "qrc:/marble/turn-around.svg";
+    case Marble::Maneuver::SharpLeft: return "qrc:/marble/turn-sharp-left.svg";
+    case Marble::Maneuver::Left: return "qrc:/marble/turn-left.svg";
+    case Marble::Maneuver::SlightLeft: return "qrc:/marble/turn-slight-left.svg";
+    case Marble::Maneuver::RoundaboutFirstExit: return "qrc:/marble/turn-roundabout-first.svg";
+    case Marble::Maneuver::RoundaboutSecondExit: return "qrc:/marble/turn-roundabout-second.svg";
+    case Marble::Maneuver::RoundaboutThirdExit: return "qrc:/marble/turn-roundabout-third.svg";
+    case Marble::Maneuver::RoundaboutExit: return "qrc:/marble/turn-roundabout-far.svg";
     }
 
     return "";
@@ -202,10 +197,10 @@ void Navigation::setSoundEnabled( bool soundEnabled )
 
 void Navigation::update()
 {
-    RoutingModel const * model = d->m_marbleWidget->model()->routingManager()->routingModel();
+    Marble::RoutingModel const * model = d->m_marbleWidget->model()->routingManager()->routingModel();
     d->updateNextInstructionDistance( model );
     emit nextInstructionDistanceChanged();
-    RouteSegment segment = model->route().currentSegment();
+    Marble::RouteSegment segment = model->route().currentSegment();
     if ( !d->m_muted ) {
         d->m_voiceNavigation.update( model->route(), d->m_nextInstructionDistance );
     }
@@ -215,9 +210,6 @@ void Navigation::update()
         emit nextInstructionImageChanged();
         emit nextRoadChanged();
     }
-}
-
-}
 }
 
 #include "Navigation.moc"

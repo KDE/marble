@@ -10,11 +10,6 @@
 
 #include "Settings.h"
 
-namespace Marble
-{
-namespace Declarative
-{
-
 Settings::Settings() :
     m_organizationName( "kde.org" ), m_applicationName( "Marble Desktop Globe" )
 {
@@ -54,9 +49,6 @@ void Settings::setValue( const QString &group, const QString &key, const QVarian
     settings.beginGroup( group );
     settings.setValue( key, value );
     settings.endGroup();
-}
-
-}
 }
 
 #include "Settings.moc"

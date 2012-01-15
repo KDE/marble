@@ -13,13 +13,7 @@
 
 #include <QtCore/QObject>
 
-namespace Marble
-{
-
-class MarbleWidget;
-
-namespace Declarative
-{
+namespace Marble { class MarbleWidget; }
 
 class ZoomButtonInterceptorPrivate;
 
@@ -38,8 +32,5 @@ protected:
 private:
     ZoomButtonInterceptorPrivate* const d;
 };
-
-}
-}
 
 #endif // MARBLE_DECLARATIVE_ZOOMBUTTONINTERCEPTOR_H

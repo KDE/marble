@@ -13,12 +13,6 @@
 
 #include <QtDeclarative/QDeclarativeExtensionPlugin>
 
-namespace Marble
-{
-
-namespace Declarative
-{
-
 /**
  * Dummy class to export plugin.
  */
@@ -29,9 +23,5 @@ public:
     /** Overriding QDeclarativeExtensionPlugin to register types */
     virtual void registerTypes( const char *uri );
 };
-
-} // namespace Declarative
-
-} // namespace Marble
 
 #endif

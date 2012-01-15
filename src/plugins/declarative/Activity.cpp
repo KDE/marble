@@ -10,12 +10,6 @@
 
 #include "Activity.h"
 
-namespace Marble
-{
-
-namespace Declarative
-{
-
 Activity::Activity( const QString& name, const QString& imagePath,
                     const QString &path ) :
     m_name ( name ),
@@ -52,10 +46,6 @@ void Activity::setPath( const QString& path )
 QString Activity::path() const
 {
     return m_path;
-}
-
-}
-
 }
 
 #include "Activity.moc"

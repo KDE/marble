@@ -17,11 +17,6 @@
 #include "ViewportParams.h"
 #include "routing/AdjustNavigation.h"
 
-namespace Marble
-{
-namespace Declarative
-{
-
 Tracking::Tracking( QObject* parent) : QObject( parent ),
     m_showPosition( true ),
     m_showTrack( true ),
@@ -167,8 +162,8 @@ void Tracking::setHasLastKnownPosition()
 void Tracking::setShowPositionMarkerPlugin( bool visible )
 {
     if ( m_marbleWidget ) {
-        QList<RenderPlugin *> const renderPlugins = m_marbleWidget->renderPlugins();
-        foreach( RenderPlugin* renderPlugin, renderPlugins ) {
+        QList<Marble::RenderPlugin *> const renderPlugins = m_marbleWidget->renderPlugins();
+        foreach( Marble::RenderPlugin* renderPlugin, renderPlugins ) {
             if ( renderPlugin->nameId() == "positionMarker" ) {
                 renderPlugin->setEnabled( visible );
                 renderPlugin->setVisible( visible );
@@ -182,12 +177,12 @@ bool Tracking::hasLastKnownPosition() const
     return m_hasLastKnownPosition;
 }
 
-Marble::Declarative::Coordinate * Tracking::lastKnownPosition()
+Coordinate * Tracking::lastKnownPosition()
 {
     return &m_lastKnownPosition;
 }
 
-void Tracking::setLastKnownPosition( Marble::Declarative::Coordinate* lastKnownPosition )
+void Tracking::setLastKnownPosition( Coordinate* lastKnownPosition )
 {
     if ( lastKnownPosition && *lastKnownPosition != m_lastKnownPosition ) {
         m_lastKnownPosition.setCoordinates( lastKnownPosition->coordinates() );
@@ -198,7 +193,7 @@ void Tracking::setLastKnownPosition( Marble::Declarative::Coordinate* lastKnownP
 bool Tracking::autoCenter() const
 {
     if ( m_autoNavigation ) {
-        return m_autoNavigation->recenterMode() != AdjustNavigation::DontRecenter;
+        return m_autoNavigation->recenterMode() != Marble::AdjustNavigation::DontRecenter;
     }
 
     return false;
@@ -208,7 +203,7 @@ void Tracking::setAutoCenter( bool enabled )
 {
     if ( autoCenter() != enabled ) {
         if ( enabled && !m_autoNavigation && m_marbleWidget ) {
-            m_autoNavigation = new AdjustNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
+            m_autoNavigation = new Marble::AdjustNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
             connect( m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
                      m_marbleWidget, SLOT( zoomIn() ) );
             connect( m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),
@@ -221,7 +216,7 @@ void Tracking::setAutoCenter( bool enabled )
         }
 
         if ( m_autoNavigation ) {
-            m_autoNavigation->setRecenter( AdjustNavigation::RecenterOnBorder );
+            m_autoNavigation->setRecenter( Marble::AdjustNavigation::RecenterOnBorder );
         }
 
         emit autoCenterChanged();
@@ -241,7 +236,7 @@ void Tracking::setAutoZoom( bool enabled )
 {
     if ( autoZoom() != enabled ) {
         if ( enabled && !m_autoNavigation && m_marbleWidget ) {
-            m_autoNavigation = new AdjustNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
+            m_autoNavigation = new Marble::AdjustNavigation( m_marbleWidget->model(), m_marbleWidget->viewport(), this );
             connect( m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
                      m_marbleWidget, SLOT( zoomIn() ) );
             connect( m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),
@@ -284,9 +279,6 @@ void Tracking::clearTrack()
     if ( m_marbleWidget ) {
         m_marbleWidget->model()->positionTracking()->clearTrack();
     }
-}
-
-}
 }
 
 #include "Tracking.moc"

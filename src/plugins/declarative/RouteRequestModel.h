@@ -13,13 +13,7 @@
 
 #include <QtCore/QAbstractListModel>
 
-namespace Marble
-{
-
-class RouteRequest;
-
-namespace Declarative
-{
+namespace Marble { class RouteRequest; }
 
 class RouteRequestModel : public QAbstractListModel
 {
@@ -61,8 +55,5 @@ private Q_SLOTS:
 private:
     Marble::RouteRequest* m_request;
 };
-
-}
-}
 
 #endif // MARBLE_ROUTEREQUESTMODEL_H

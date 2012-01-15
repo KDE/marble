@@ -20,21 +20,16 @@
 #include "RouteRequestModel.h"
 #include "routing/RoutingProfilesModel.h"
 
-namespace Marble
-{
-namespace Declarative
-{
-
 class RoutingPrivate
 {
 public:
     RoutingPrivate();
 
-    Marble::Declarative::MarbleWidget* m_marbleWidget;
+    MarbleWidget* m_marbleWidget;
 
     QAbstractItemModel* m_routeRequestModel;
 
-    QMap<QString, RoutingProfile> m_profiles;
+    QMap<QString, Marble::RoutingProfile> m_profiles;
 
     QString m_routingProfile;
 };
@@ -59,7 +54,7 @@ Routing::~Routing()
 QObject* Routing::routeRequestModel()
 {
     if ( !d->m_routeRequestModel && d->m_marbleWidget ) {
-        RouteRequest* request = d->m_marbleWidget->model()->routingManager()->routeRequest();
+        Marble::RouteRequest* request = d->m_marbleWidget->model()->routingManager()->routeRequest();
         d->m_routeRequestModel = new RouteRequestModel( request, this );
     }
 
@@ -71,7 +66,7 @@ QObject* Routing::waypointModel()
     return d->m_marbleWidget ? d->m_marbleWidget->model()->routingManager()->routingModel() : 0;
 }
 
-void Routing::setMarbleWidget( Marble::Declarative::MarbleWidget* widget )
+void Routing::setMarbleWidget( MarbleWidget* widget )
 {
     d->m_marbleWidget = widget;
 
@@ -107,8 +102,8 @@ void Routing::setRoutingProfile( const QString & profile )
 void Routing::addVia( qreal lon, qreal lat )
 {
     if ( d->m_marbleWidget ) {
-        RouteRequest* request = d->m_marbleWidget->model()->routingManager()->routeRequest();
-        request->append( GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree ) );
+        Marble::RouteRequest* request = d->m_marbleWidget->model()->routingManager()->routeRequest();
+        request->append( Marble::GeoDataCoordinates( lon, lat, 0.0, Marble::GeoDataCoordinates::Degree ) );
         updateRoute();
     }
 }
@@ -119,15 +114,15 @@ void Routing::setVia( int index, qreal lon, qreal lat )
         return;
     }
 
-    RouteRequest* request = d->m_marbleWidget->model()->routingManager()->routeRequest();
+    Marble::RouteRequest* request = d->m_marbleWidget->model()->routingManager()->routeRequest();
     Q_ASSERT( request );
     if ( index < request->size() ) {
-        request->setPosition( index, GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree ) );
+        request->setPosition( index, Marble::GeoDataCoordinates( lon, lat, 0.0, Marble::GeoDataCoordinates::Degree ) );
     } else {
         for ( int i=request->size(); i<index; ++i ) {
-            request->append( GeoDataCoordinates( 0.0, 0.0 ) );
+            request->append( Marble::GeoDataCoordinates( 0.0, 0.0 ) );
         }
-        request->append( GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree ) );
+        request->append( Marble::GeoDataCoordinates( lon, lat, 0.0, Marble::GeoDataCoordinates::Degree ) );
     }
 
     updateRoute();
@@ -139,7 +134,7 @@ void Routing::removeVia( int index )
         return;
     }
 
-    RouteRequest* request = d->m_marbleWidget->model()->routingManager()->routeRequest();
+    Marble::RouteRequest* request = d->m_marbleWidget->model()->routingManager()->routeRequest();
     if ( index < request->size() ) {
         d->m_marbleWidget->model()->routingManager()->routeRequest()->remove( index );
     }
@@ -169,14 +164,14 @@ void Routing::updateRoute()
 void Routing::openRoute( const QString &fileName )
 {
     if ( d->m_marbleWidget ) {
-        RoutingManager * const routingManager = d->m_marbleWidget->model()->routingManager();
+        Marble::RoutingManager * const routingManager = d->m_marbleWidget->model()->routingManager();
         /** @todo FIXME: replace the file:// prefix on QML side */
         routingManager->clearRoute();
         QString target = fileName.startsWith( "file://" ) ? fileName.mid( 7 ) : fileName;
         routingManager->loadRoute( target );
-        GeoDataDocument* route = routingManager->alternativeRoutesModel()->currentRoute();
+        Marble::GeoDataDocument* route = routingManager->alternativeRoutesModel()->currentRoute();
         if ( route ) {
-            GeoDataLineString* waypoints = routingManager->alternativeRoutesModel()->waypoints( route );
+            Marble::GeoDataLineString* waypoints = routingManager->alternativeRoutesModel()->waypoints( route );
             if ( waypoints ) {
                 d->m_marbleWidget->centerOn( waypoints->latLonAltBox() );
             }
@@ -191,9 +186,6 @@ void Routing::saveRoute( const QString &fileName )
         QString target = fileName.startsWith( "file://" ) ? fileName.mid( 7 ) : fileName;
         d->m_marbleWidget->model()->routingManager()->saveRoute( target );
     }
-}
-
-}
 }
 
 #include "Routing.moc"

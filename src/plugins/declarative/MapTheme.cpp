@@ -10,11 +10,6 @@
 
 #include "MapTheme.h"
 
-namespace Marble
-{
-namespace Declarative
-{
-
 MapTheme::MapTheme( const QString &id, const QString &name, QObject *parent ) :
     QObject( parent ), m_id( id ), m_name( name )
 {
@@ -41,9 +36,6 @@ void MapTheme::setName( const QString &name )
 {
     m_name = name;
     emit nameChanged();
-}
-
-}
 }
 
 #include "MapTheme.moc"

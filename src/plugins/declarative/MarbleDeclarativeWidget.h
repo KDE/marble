@@ -21,6 +21,8 @@
 #include <QtCore/QList>
 #include <QtCore/QPoint>
 
+using Marble::GeoDataCoordinates; // Ouch. For signal/slot connection across different namespaces
+
 namespace Marble
 {
 // Forward declaration
@@ -28,9 +30,7 @@ class MarbleModel;
 class MarbleWidget;
 class RenderPlugin;
 class ViewportParams;
-
-namespace Declarative
-{
+}
 
 class ZoomButtonInterceptor;
 class StreetMapThemeModel;
@@ -46,7 +46,7 @@ class MarbleWidget : public QGraphicsProxyWidget
 {
     Q_OBJECT
 
-    Q_PROPERTY( Marble::Declarative::Coordinate* center READ center WRITE setCenter NOTIFY visibleLatLonAltBoxChanged )
+    Q_PROPERTY( Coordinate* center READ center WRITE setCenter NOTIFY visibleLatLonAltBoxChanged )
     Q_PROPERTY( int zoom READ zoom WRITE setZoom NOTIFY zoomChanged )
 
     Q_PROPERTY( QString mapThemeId READ mapThemeId WRITE setMapThemeId NOTIFY mapThemeChanged )
@@ -55,12 +55,12 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
     Q_PROPERTY( QStringList activeFloatItems READ activeFloatItems WRITE setActiveFloatItems )
     Q_PROPERTY( QStringList activeRenderPlugins READ activeRenderPlugins WRITE setActiveRenderPlugins )
-    Q_PROPERTY( Marble::Declarative::Tracking* tracking READ tracking NOTIFY trackingChanged )
-    Q_PROPERTY( Marble::Declarative::Routing* routing READ routing NOTIFY routingChanged )
-    Q_PROPERTY( Marble::Declarative::Navigation* navigation READ navigation NOTIFY navigationChanged )
-    Q_PROPERTY( Marble::Declarative::Search* search READ search NOTIFY searchChanged )
+    Q_PROPERTY( Tracking* tracking READ tracking NOTIFY trackingChanged )
+    Q_PROPERTY( Routing* routing READ routing NOTIFY routingChanged )
+    Q_PROPERTY( Navigation* navigation READ navigation NOTIFY navigationChanged )
+    Q_PROPERTY( Search* search READ search NOTIFY searchChanged )
     Q_PROPERTY( QObject* mapThemeModel READ mapThemeModel NOTIFY mapThemeModelChanged )
-    Q_PROPERTY( Marble::Declarative::StreetMapThemeModel* streetMapThemeModel READ streetMapThemeModel NOTIFY streetMapThemeModelChanged )
+    Q_PROPERTY( StreetMapThemeModel* streetMapThemeModel READ streetMapThemeModel NOTIFY streetMapThemeModelChanged )
 
 public:
     /** Constructor */
@@ -70,7 +70,7 @@ public:
 
     const Marble::ViewportParams *viewport() const;
 
-    QList<RenderPlugin *> renderPlugins() const;
+    QList<Marble::RenderPlugin *> renderPlugins() const;
 
     bool workOffline() const;
 
@@ -109,9 +109,9 @@ Q_SIGNALS:
     void mapThemeChanged();
 
 public Q_SLOTS:
-    Marble::Declarative::Coordinate* center();
+    Coordinate* center();
 
-    void setCenter( Marble::Declarative::Coordinate* center );
+    void setCenter( Coordinate* center );
 
     void centerOn( const Marble::GeoDataLatLonAltBox &bbox );
 
@@ -169,19 +169,19 @@ public Q_SLOTS:
     /**
       * Returns the coordinate at the given screen position
       */
-    Marble::Declarative::Coordinate *coordinate( int x, int y );
+    Coordinate *coordinate( int x, int y );
 
-    Marble::Declarative::Tracking* tracking();
+    Tracking* tracking();
 
-    Marble::Declarative::Routing* routing();
+    Routing* routing();
 
-    Marble::Declarative::Navigation* navigation();
+    Navigation* navigation();
 
-    Marble::Declarative::Search* search();
+    Search* search();
 
     QObject* mapThemeModel();
 
-    Marble::Declarative::StreetMapThemeModel* streetMapThemeModel();
+    StreetMapThemeModel* streetMapThemeModel();
 
     void setGeoSceneProperty( const QString &key, bool value );
 
@@ -196,22 +196,19 @@ private:
 
     bool m_inputEnabled;
 
-    Marble::Declarative::Tracking* m_tracking;
+    Tracking* m_tracking;
 
-    Marble::Declarative::Routing* m_routing;
+    Routing* m_routing;
 
-    Marble::Declarative::Navigation* m_navigation;
+    Navigation* m_navigation;
 
-    Marble::Declarative::Search* m_search;
+    Search* m_search;
 
-    Marble::Declarative::Coordinate m_center;
+    Coordinate m_center;
 
-    Marble::Declarative::ZoomButtonInterceptor* m_interceptor;
+    ZoomButtonInterceptor* m_interceptor;
 
     StreetMapThemeModel* m_streetMapThemeModel;
 };
-
-} // namespace Declarative
-} // namespace Marble
 
 #endif

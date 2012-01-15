@@ -15,12 +15,6 @@
 #include <QtCore/QModelIndex>
 #include <QtCore/QVariant>
 
-namespace Marble
-{
-    
-namespace Declarative
-{
-
 /**
  * Model to access activities from QML.
  */
@@ -107,9 +101,5 @@ class ActivityModel : public QAbstractListModel
     class Private;
     Private* const d;
 };
-
-}
-
-}
 
 #endif

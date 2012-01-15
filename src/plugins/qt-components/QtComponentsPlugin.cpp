@@ -10,20 +10,10 @@
 
 #include "QtComponentsPlugin.h"
 
-namespace Marble
-{
-
-namespace Declarative
-{
-
 void QtComponentsPlugin::registerTypes( const char * )
 {
 }
 
-}
-
-}
-
 #include "QtComponentsPlugin.moc"
 
-Q_EXPORT_PLUGIN2( QtComponentsPlugin, Marble::Declarative::QtComponentsPlugin )
+Q_EXPORT_PLUGIN2( QtComponentsPlugin, QtComponentsPlugin )

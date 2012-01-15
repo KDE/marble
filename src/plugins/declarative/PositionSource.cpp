@@ -16,11 +16,6 @@
 #include "PositionTracking.h"
 #include "PositionProviderPlugin.h"
 
-namespace Marble
-{
-namespace Declarative
-{
-
 PositionSource::PositionSource( QObject* parent) : QObject( parent ),
     m_active( false ),
     m_hasPosition( false ),
@@ -42,7 +37,7 @@ void PositionSource::setActive( bool active )
         if ( active ) {
             start();
         } else if ( m_marbleModel ) {
-            PositionTracking *tracking = m_marbleModel->positionTracking();
+            Marble::PositionTracking *tracking = m_marbleModel->positionTracking();
             tracking->setPositionProviderPlugin( 0 );
         }
 
@@ -93,20 +88,20 @@ void PositionSource::start()
         return;
     }
 
-    const PluginManager* pluginManager = m_marbleModel->pluginManager();
-    QList<PositionProviderPlugin*> plugins = pluginManager->createPositionProviderPlugins();
-    foreach( const PositionProviderPlugin *plugin, plugins ) {
+    const Marble::PluginManager* pluginManager = m_marbleModel->pluginManager();
+    QList<Marble::PositionProviderPlugin*> plugins = pluginManager->createPositionProviderPlugins();
+    foreach( const Marble::PositionProviderPlugin *plugin, plugins ) {
         if ( m_source.isEmpty() || plugin->nameId() == m_source ) {
-            PositionProviderPlugin* instance = plugin->newInstance();
+            Marble::PositionProviderPlugin* instance = plugin->newInstance();
             instance->setMarbleModel( m_marbleModel );
-            PositionTracking *tracking = m_marbleModel->positionTracking();
+            Marble::PositionTracking *tracking = m_marbleModel->positionTracking();
             tracking->setPositionProviderPlugin( instance );
             break;
         }
     }
 }
 
-void PositionSource::setMarbleModel( MarbleModel* model )
+void PositionSource::setMarbleModel( Marble::MarbleModel* model )
 {
     if ( model != m_marbleModel ) {
         m_marbleModel = model;
@@ -132,16 +127,16 @@ qreal PositionSource::speed() const
 void PositionSource::updatePosition()
 {
     if ( m_marbleModel ) {
-        bool const hasPosition = m_marbleModel->positionTracking()->status() == PositionProviderStatusAvailable;
+        bool const hasPosition = m_marbleModel->positionTracking()->status() == Marble::PositionProviderStatusAvailable;
 
         if ( hasPosition ) {
-            GeoDataCoordinates position = m_marbleModel->positionTracking()->currentLocation();
-            m_position.setLongitude( position.longitude( GeoDataCoordinates::Degree ) );
-            m_position.setLatitude( position.latitude( GeoDataCoordinates::Degree ) );
+            Marble::GeoDataCoordinates position = m_marbleModel->positionTracking()->currentLocation();
+            m_position.setLongitude( position.longitude( Marble::GeoDataCoordinates::Degree ) );
+            m_position.setLatitude( position.latitude( Marble::GeoDataCoordinates::Degree ) );
             m_position.setAltitude( position.altitude() );
         }
 
-        m_speed = m_marbleModel->positionTracking()->speed() * METER2KM / SEC2HOUR;
+        m_speed = m_marbleModel->positionTracking()->speed() * Marble::METER2KM / Marble::SEC2HOUR;
         emit speedChanged();
 
         if ( hasPosition != m_hasPosition ) {
@@ -153,10 +148,6 @@ void PositionSource::updatePosition()
             emit positionChanged();
         }
     }
-}
-
-}
-
 }
 
 #include "PositionSource.moc"
