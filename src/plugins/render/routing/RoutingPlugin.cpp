@@ -274,7 +274,6 @@ void RoutingPluginPrivate::toggleGuidanceMode( bool enabled )
 
     if ( enabled ) {
         m_routeCompleted = false;
-        m_audio->announceStart();
     }
 
     forceRepaint();

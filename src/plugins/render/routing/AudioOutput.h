@@ -43,8 +43,6 @@ public:
       */
     void update( const Route &route, qreal distance );
 
-    void announceStart();
-
     void announceDestination();
 
     /** Toggle muting (neither sound nor voice output) */
@@ -70,6 +68,8 @@ public:
 
 private:
     Q_PRIVATE_SLOT( d, void audioOutputFinished() )
+
+    Q_PRIVATE_SLOT( d, void playInstructions() )
 
     AudioOutputPrivate * const d;
 };
