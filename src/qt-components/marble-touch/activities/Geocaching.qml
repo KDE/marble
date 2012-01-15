@@ -46,7 +46,7 @@ Page {
             }
 
             Component.onCompleted: {
-                marbleWidget.getSearch().searchFinished.connect( searchFinished )
+                marbleWidget.search.searchFinished.connect( searchFinished )
             }
 
             function searchFinished() {

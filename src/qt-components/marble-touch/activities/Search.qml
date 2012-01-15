@@ -47,11 +47,11 @@ Page {
                 searchResultView.searchTerm = term
                 searchField.busy = true
                 marbleWidget.find( term )
-                searchResultListView.model = marbleWidget.getSearch().searchResultModel()
+                searchResultListView.model = marbleWidget.search.searchResultModel()
             }
 
             Component.onCompleted: {
-                marbleWidget.getSearch().searchFinished.connect( searchFinished )
+                marbleWidget.search.searchFinished.connect( searchFinished )
             }
 
             function searchFinished() {
@@ -81,7 +81,7 @@ Page {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.margins: 10
-            model: marbleWidget.getSearch().searchResultModel()
+            model: marbleWidget.search.searchResultModel()
             delegate: searchResultDelegate
             highlight: Rectangle { color: "lightgray"; radius: 5 }
             focus: true
@@ -183,9 +183,9 @@ Page {
                         visible: searchResultItem.detailed
                         onClicked: {
                             settings.gpsTracking = true
-                            marbleWidget.getRouting().clearRoute()
-                            marbleWidget.getRouting().setVia( 0, marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
-                            marbleWidget.getRouting().setVia( 1, longitude, latitude )
+                            marbleWidget.routing.clearRoute()
+                            marbleWidget.routing.setVia( 0, marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
+                            marbleWidget.routing.setVia( 1, longitude, latitude )
                             openActivity( "Routing" )
                         }
                     }

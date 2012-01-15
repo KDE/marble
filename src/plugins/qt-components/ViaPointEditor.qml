@@ -90,7 +90,7 @@ Item {
         onAccepted: {
             if ( selectedIndex === 0 ) {
                 root.isCurrentPosition = true
-                root.ListView.view.model.setPosition(index, marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude)
+                root.ListView.view.model.setPosition(index, marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude)
                 root.positionChanged()
             } else {
                 root.isCurrentPosition = false

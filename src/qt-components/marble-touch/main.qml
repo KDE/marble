@@ -40,26 +40,6 @@ PageStackWindow {
         id: activitySelection
     }
 
-    // Returns the model which contains routing instructions.
-    function routeRequestModel() {
-        return mainWidget.routeRequestModel()
-    }
-    
-    // Returns the model which contains points on the route.
-    function waypointModel() {
-        return mainWidget.waypointModel()
-    }
-    
-    // Returns object to define and clear route.
-    function getRouting() {
-        return mainWidget.getRouting()
-    }
-
-    // Returns object to define and clear searches.
-    function getSearch() {
-        return mainWidget.getSearch()
-    }
-
     function resetLastActivity() {
         if ( marbleWidget !== null && pageStack.depth < 2 ) {
             settings.lastActivity = ""

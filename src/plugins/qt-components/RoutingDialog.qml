@@ -40,7 +40,7 @@ Rectangle {
                             routingModel.get( index ).destinationText = text
                             if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter ) {
                                 if( text.trim() != "" ) {
-                                    main.getSearch().find( text )
+                                    main.search.find( text )
                                     resultSelectionDialog.searchIndex = index
                                     resultSelectionDialog.load()
                                 }
@@ -101,7 +101,7 @@ Rectangle {
             resultSelectionDialog.selected.connect( setRoutingPoint )
         }
         function setRoutingPoint( index, text, lon, lat ) {
-            main.getSearch().find( "" )
+            main.search.find( "" )
             console.log( "setRoutingPoint: ", index, text, lon, lat )
             routingModel.get( index ).display = text
             routingModel.get( index ).longitude = lon
@@ -112,11 +112,11 @@ Rectangle {
     // Calculates the route for the entered points.
     function calculateRoute() {
         console.log( "routing started..." )
-        main.getRouting().clearRoute()
+        main.routing.clearRoute()
         for( var i = 0; i < routingView.count; i++ ) {
             console.log( "search: ", i, routingView.model.get( i ).destinationText, routingView.model.get( i ).longitude, routingView.model.get( i ).latitude
             )
-            main.getRouting().setVia( i, routingView.model.get( i ).longitude, routingView.model.get( i ).latitude )
+            main.routing.setVia( i, routingView.model.get( i ).longitude, routingView.model.get( i ).latitude )
         }
     }
     
