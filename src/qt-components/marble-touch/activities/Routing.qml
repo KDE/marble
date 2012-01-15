@@ -85,17 +85,20 @@ Page {
         RouteEditor {
             id: routeEditor
             anchors.top: parent.top
-            width: parent.width
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.margins: 5
         }
 
         ListView {
             id: waypointListView
             anchors.top: routeEditor.bottom
-            anchors.margins: 10
-            width: parent.width
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.margins: 5
             height: 74 * count
 
-            model: marbleWidget.waypointModel
+            model: marbleWidget.routing.waypointModel()
             delegate: turnTypeDelegate
             highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
             highlightMoveDuration: 200
@@ -148,7 +151,7 @@ Page {
             },
             State { // Vertical
                 when: (true)
-                AnchorChanges { target: mapContainer; anchors.left: routingActivityPage.left; anchors.bottom: searchResultListView.top; anchors.top: routingActivityPage.top }
+                AnchorChanges { target: mapContainer; anchors.left: routingActivityPage.left; anchors.top: routingActivityPage.top }
                 PropertyChanges { target: mapContainer; width: routingActivityPage.width; height: routingActivityPage.height / 2 }
                 AnchorChanges { target: searchResultView; anchors.right: routingActivityPage.right; anchors.top: mapContainer.bottom }
                 PropertyChanges { target: searchResultView; width: routingActivityPage.width; height: routingActivityPage.height / 2 }
