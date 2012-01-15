@@ -58,7 +58,7 @@ private:
 
     Q_PRIVATE_SLOT( d, void deleteBookmark() )
 
-    Q_PRIVATE_SLOT( d, void filterBookmarksByFolder( const QModelIndex &index ) )
+    Q_PRIVATE_SLOT( d, void handleFolderSelection( const QModelIndex &index ) )
 
     Q_PRIVATE_SLOT( d, void discardChanges() )
 
