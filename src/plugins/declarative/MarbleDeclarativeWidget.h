@@ -110,6 +110,8 @@ public Q_SLOTS:
 
     void centerOn( const Marble::GeoDataLatLonAltBox &bbox );
 
+    void centerOn( const GeoDataCoordinates &coordinates );
+
     /** Returns a list of active (!) float items */
     QStringList activeFloatItems() const;
 
