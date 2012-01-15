@@ -238,4 +238,10 @@ Page {
             saver.screenSaverDelayed = false
         }
     }
+
+    Connections { target: marbleWidget.getNavigation(); onVoiceNavigationAnnouncementChanged: voiceAnnouncement() }
+
+    function voiceAnnouncement() {
+        console.log("announce" + marbleWidget.getNavigation().voiceNavigationAnnouncement )
+    }
 }

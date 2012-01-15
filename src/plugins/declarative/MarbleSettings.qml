@@ -40,6 +40,7 @@ Item {
     property string lastActivity: settings.value( "MarbleTouch", "lastActivity", "" )
     property bool inhibitScreensaver: settings.value( "MarbleTouch", "inhibitScreensaver", true )
     property bool voiceNavigationMuted: settings.value( "MarbleTouch", "voiceNavigationMuted", false)
+    property bool voiceNavigationSoundEnabled: settings.value( "MarbleTouch", "voiceNavigationSoundEnabled", false)
     property string voiceNavigationSpeaker: settings.value( "MarbleTouch", "voiceNavigationSpeaker", "English - Bugsbane")
 
     // Save settings to file.
@@ -60,6 +61,7 @@ Item {
         settings.setValue( "MarbleTouch", "streetMapTheme", root.streetMapTheme )
         settings.setValue( "MarbleTouch", "inhibitScreensaver", root.inhibitScreensaver )
         settings.setValue( "MarbleTouch", "voiceNavigationMuted", root.voiceNavigationMuted )
+        settings.setValue( "MarbleTouch", "voiceNavigationSoundEnabled", root.voiceNavigationSoundEnabled )
         settings.setValue( "MarbleTouch", "voiceNavigationSpeaker", root.voiceNavigationSpeaker )
     }
 

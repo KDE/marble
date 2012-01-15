@@ -17,6 +17,7 @@
 #include "PositionTracking.h"
 #include "MarbleMath.h"
 #include "routing/AdjustNavigation.h"
+#include "routing/VoiceNavigationModel.h"
 
 namespace Marble
 {
@@ -36,13 +37,35 @@ public:
 
     AdjustNavigation* m_autoNavigation;
 
+    VoiceNavigationModel m_voiceNavigation;
+
+    qreal m_nextInstructionDistance;
+
     RouteSegment nextRouteSegment();
+
+    void updateNextInstructionDistance( const RoutingModel *model );
 };
 
 NavigationPrivate::NavigationPrivate() :
-    m_marbleWidget( 0 ), m_muted( false ), m_autoNavigation( 0 )
+    m_marbleWidget( 0 ), m_muted( false ), m_autoNavigation( 0 ), m_nextInstructionDistance( 0.0 )
 {
     // nothing to do
+}
+
+void NavigationPrivate::updateNextInstructionDistance( const RoutingModel *model )
+{
+    GeoDataCoordinates position = model->route().position();
+    GeoDataCoordinates interpolated = model->route().positionOnRoute();
+    GeoDataCoordinates onRoute = model->route().currentWaypoint();
+    qreal distance = EARTH_RADIUS * ( distanceSphere( position, interpolated ) + distanceSphere( interpolated, onRoute ) );
+    const RouteSegment &segment = model->route().currentSegment();
+    for (int i=0; i<segment.path().size(); ++i) {
+        if (segment.path()[i] == onRoute) {
+            m_nextInstructionDistance = distance + segment.path().length( EARTH_RADIUS, i );
+        }
+    }
+
+    m_nextInstructionDistance = distance;
 }
 
 RouteSegment NavigationPrivate::nextRouteSegment()
@@ -58,7 +81,7 @@ RouteSegment NavigationPrivate::nextRouteSegment()
 Navigation::Navigation( QObject* parent) :
     QObject( parent ), d( new NavigationPrivate )
 {
-    // nothing to do
+    connect( &d->m_voiceNavigation, SIGNAL( instructionChanged() ), this, SIGNAL( voiceNavigationAnnouncementChanged() ) );
 }
 
 Navigation::~Navigation()
@@ -149,20 +172,43 @@ QString Navigation::nextInstructionImage() const
 
 qreal Navigation::nextInstructionDistance() const
 {
-    if ( !d->m_marbleWidget || !d->nextRouteSegment().isValid() ) {
-        return 0.0;
-    }
+    return d->m_nextInstructionDistance;
+}
 
-    GeoDataCoordinates const position = d->m_marbleWidget->model()->positionTracking()->currentLocation();
-    GeoDataCoordinates closest, interpolated;
-    return d->nextRouteSegment().distanceTo( position, closest, interpolated );
+QString Navigation::voiceNavigationAnnouncement() const
+{
+    return d->m_voiceNavigation.instruction();
+}
+
+QString Navigation::speaker() const
+{
+    return d->m_voiceNavigation.speaker();
+}
+
+void Navigation::setSpeaker( const QString &speaker )
+{
+    d->m_voiceNavigation.setSpeaker( speaker );
+}
+
+bool Navigation::soundEnabled() const
+{
+    return !d->m_voiceNavigation.isSpeakerEnabled();
+}
+
+void Navigation::setSoundEnabled( bool soundEnabled )
+{
+    d->m_voiceNavigation.setSpeakerEnabled( !soundEnabled );
 }
 
 void Navigation::update()
 {
-    emit nextInstructionDistanceChanged();
     RoutingModel const * model = d->m_marbleWidget->model()->routingManager()->routingModel();
+    d->updateNextInstructionDistance( model );
+    emit nextInstructionDistanceChanged();
     RouteSegment segment = model->route().currentSegment();
+    if ( !d->m_muted ) {
+        d->m_voiceNavigation.update( model->route(), d->m_nextInstructionDistance );
+    }
     if ( segment != d->m_currentSegment ) {
         d->m_currentSegment = segment;
         emit nextInstructionTextChanged();

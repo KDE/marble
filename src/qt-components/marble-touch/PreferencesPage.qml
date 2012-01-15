@@ -182,6 +182,8 @@ Page {
                 Component.onCompleted: {
                     if (settings.voiceNavigationMuted) {
                         checkedButton = b1
+                    } else if ( settings.voiceNavigationSoundEnabled ) {
+                        checkedButton = b2
                     } else {
                         checkedButton = b3
                     }

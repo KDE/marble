@@ -66,6 +66,9 @@ Item {
             center.latitude = settings.quitLatitude
             tracking.lastKnownPosition.longitude = settings.lastKnownLongitude
             tracking.lastKnownPosition.latitude = settings.lastKnownLatitude
+            navigation.muted = settings.voiceNavigationMuted
+            navigation.speaker = settings.voiceNavigationSpeaker
+            navigation.soundEnabled = settings.voiceNavigationSoundEnabled
             initialized = true
         }
         
