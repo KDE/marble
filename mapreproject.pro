@@ -8,7 +8,7 @@ QT       += core
 
 QT       -= gui
 
-TARGET = NasaWorldWind2Osm
+TARGET = mapreproject
 CONFIG   += console
 CONFIG   -= app_bundle
 
