@@ -65,15 +65,6 @@ void NasaWorldWindToOpenStreetMapConverter::setThreadCount(const int threadCount
 QVector<QPair<Thread*, OsmTileClusterRenderer*> > NasaWorldWindToOpenStreetMapConverter::start()
 {
     // create directory for osm tile level if necessary
-    QDir const levelDirectory( m_osmBaseDirectory.path() + QString("/%1").arg( m_osmTileLevel ));
-    if ( !levelDirectory.exists() ) {
-        bool const created = levelDirectory.mkpath( levelDirectory.path() );
-        if ( !created ) {
-            // maybe it was created in the meantime by something else
-            if ( !levelDirectory.exists() )
-                qFatal("Unable to create directory '%s'.", levelDirectory.path().toStdString().c_str() );
-        }
-    }
 
     // render Osm tiles using quadratic clusters of tiles instead of stripes
     // to increase Nww tile cache usage
@@ -143,6 +134,19 @@ void NasaWorldWindToOpenStreetMapConverter::assignNextCluster( OsmTileClusterRen
     QMetaObject::invokeMethod( renderer, "renderOsmTileCluster", Qt::QueuedConnection,
                                Q_ARG( int, m_nextClusterX ), Q_ARG( int, m_nextClusterY ));
     incNextCluster();
+}
+
+void NasaWorldWindToOpenStreetMapConverter::checkAndCreateLevelDirectory() const
+{
+    QDir const levelDirectory( m_osmBaseDirectory.path() + QString("/%1").arg( m_osmTileLevel ));
+    if ( !levelDirectory.exists() ) {
+        bool const created = levelDirectory.mkpath( levelDirectory.path() );
+        if ( !created ) {
+            // maybe it was created in the meantime by something else
+            if ( !levelDirectory.exists() )
+                qFatal("Unable to create directory '%s'.", levelDirectory.path().toStdString().c_str());
+        }
+    }
 }
 
 void NasaWorldWindToOpenStreetMapConverter::incNextCluster()

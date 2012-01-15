@@ -44,6 +44,7 @@ public slots:
     void assignNextCluster( OsmTileClusterRenderer * );
 
 private:
+    void checkAndCreateLevelDirectory() const;
     void incNextCluster();
 
     int m_threadCount;
