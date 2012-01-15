@@ -244,23 +244,6 @@ QString AudioOutput::speaker() const
     return d->m_speaker;
 }
 
-QStringList AudioOutput::speakers() const
-{
-    QStringList result;
-    QStringList const baseDirs = QStringList() << MarbleDirs::systemPath() << MarbleDirs::localPath();
-    foreach ( const QString &baseDir, baseDirs ) {
-        QString base = baseDir + "/audio/speakers/";
-
-        QDir::Filters filter = QDir::Readable | QDir::Dirs | QDir::NoDotAndDotDot;
-        QFileInfoList const speakers = QDir( base ).entryInfoList( filter, QDir::Name );
-        foreach( const QFileInfo &speaker, speakers ) {
-            result << speaker.absoluteFilePath();
-        }
-    }
-
-    return result;
-}
-
 void AudioOutput::setSoundEnabled( bool enabled )
 {
     d->m_soundEnabled = enabled;

@@ -68,11 +68,6 @@ public:
       */
     void setSoundEnabled( bool enabled );
 
-    /**
-      * Returns a list of available speakers
-      */
-    QStringList speakers() const;
-
 private:
     Q_PRIVATE_SLOT( d, void audioOutputFinished() )
 

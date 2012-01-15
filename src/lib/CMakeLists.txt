@@ -189,6 +189,7 @@ set(marblewidget_SRCS
     routing/RoutingProfilesWidget.cpp
     routing/RoutingProfilesModel.cpp
     routing/RoutingProfileSettingsDialog.cpp
+    routing/SpeakersModel.cpp
     routing/instructions/InstructionTransformation.cpp
     routing/instructions/RoutingInstruction.cpp
     routing/instructions/RoutingPoint.cpp
