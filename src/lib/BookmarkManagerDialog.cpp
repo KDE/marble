@@ -89,7 +89,7 @@ public:
 
     void initializeBookmarksView( GeoDataTreeModel* treeModel );
 
-    void filterBookmarksByFolder( const QModelIndex &index );
+    void handleFolderSelection( const QModelIndex &index );
 
     void updateButtonState();
 
@@ -119,13 +119,18 @@ BranchFilterModel::BranchFilterModel( QObject *parent ) :
     // nothing to do
 }
 
+/// sets the folder index for which we want to see bookmarks
 void BranchFilterModel::setBranchIndex( GeoDataTreeModel* treeModel, const QModelIndex &index )
 {
+    Q_ASSERT( index.isValid() );
+    Q_ASSERT( index.model() == treeModel );
     m_treeModel = treeModel;
     m_branchIndex = index;
     invalidateFilter();
 }
 
+/// determines if such row should be filtered.
+/// Beware, all parents of our folder must be accepted as well
 bool BranchFilterModel::filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const
 {
     if ( !m_treeModel || !m_branchIndex.isValid() ) {
@@ -133,6 +138,9 @@ bool BranchFilterModel::filterAcceptsRow( int sourceRow, const QModelIndex &sour
     }
 
     Q_ASSERT( m_treeModel == sourceModel() );
+    if ( sourceParent.isValid() ) {
+        Q_ASSERT( sourceParent.model() == m_treeModel );
+    }
     QModelIndex rowIndex = sourceModel()->index( sourceRow, 0, sourceParent );
     Q_ASSERT( rowIndex.isValid() );
 
@@ -160,12 +168,17 @@ BookmarkManagerDialogPrivate::BookmarkManagerDialogPrivate( BookmarkManagerDialo
     // nothing to do
 }
 
-void BookmarkManagerDialogPrivate::filterBookmarksByFolder( const QModelIndex &index )
+/// react to clicking on the folder index (of folderfiltermodel fame)
+/// consequence is selecting this folder, or unselecting it and going to root folder
+void BookmarkManagerDialogPrivate::handleFolderSelection( const QModelIndex &index )
 {
+    Q_ASSERT( index.isValid() );
+    Q_ASSERT( index.model() == m_folderFilterModel );
     if( m_selectedFolder.isValid() &&
         m_parent->foldersTreeView->selectionModel()->selectedIndexes().contains( m_selectedFolder ) ) {
         m_selectedFolder = QModelIndex();
         m_parent->foldersTreeView->selectionModel()->clear();
+        selectFolder();
     } else {
         m_selectedFolder = index;
         m_branchFilterModel->setBranchIndex( m_treeModel, folderTreeIndex( index ) );
@@ -202,10 +215,11 @@ void BookmarkManagerDialogPrivate::renameFolder()
     if ( folder ) {
         QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( m_parent );
         dialog->setFolderName( folder->name() );
+        QPersistentModelIndex parentIndex = m_selectedFolder.parent();
         if ( dialog->exec() == QDialog::Accepted ) {
             m_manager->renameBookmarkFolder( folder, dialog->folderName() );
         }
-        selectFolder( dialog->folderName(), m_selectedFolder );
+        selectFolder( dialog->folderName(), parentIndex );
         delete dialog;
     }
 }
@@ -214,8 +228,6 @@ void BookmarkManagerDialogPrivate::deleteFolder()
 {
     GeoDataFolder *folder = dynamic_cast<GeoDataFolder*>(selectedFolder());
     if ( folder ) {
-        QPersistentModelIndex parentIndex = m_selectedFolder.parent();
-        QString parent = static_cast<GeoDataContainer*>(folder->parent())->name();
         if ( folder->size() > 0 ) {
             QString const text = m_parent->tr( "The folder %1 is not empty. Removing it will delete all bookmarks it contains. Are you sure you want to delete the folder?" ).arg( folder->name() );
             if ( QMessageBox::question( m_parent, m_parent->tr("Remove Folder - Marble"), text, QMessageBox::Yes, QMessageBox::No ) != QMessageBox::Yes) {
@@ -223,8 +235,11 @@ void BookmarkManagerDialogPrivate::deleteFolder()
             }
         }
 
+        // take note of the parentIndex before removing the folder
+        QString parent = static_cast<GeoDataContainer*>(folder->parent())->name();
+        QPersistentModelIndex greatParentIndex = m_selectedFolder.parent().parent();
         m_manager->removeBookmarkFolder( folder );
-        selectFolder( parent, parentIndex);
+        selectFolder( parent, greatParentIndex);
     }
 }
 
@@ -262,9 +277,9 @@ void BookmarkManagerDialogPrivate::editBookmark()
 
             newBookmark.setName( dialog->name() );
             newBookmark.setDescription( dialog->description() );
+            newBookmark.setCoordinate( dialog->coordinates() );
             newBookmark.lookAt()->setCoordinates( dialog->coordinates() );
             m_manager->addBookmark( dialog->folder(), newBookmark );
-            selectFolder( dialog->folder()->name(), m_selectedFolder );
         }
         delete dialog;
     }
@@ -280,7 +295,6 @@ void BookmarkManagerDialogPrivate::deleteBookmark()
             GeoDataPlacemark* bookmark = dynamic_cast<GeoDataPlacemark*>( folder->child( bookmarkIndex.row() ) );
             if ( bookmark ) {
                 m_manager->removeBookmark( bookmark );
-                selectFolder( folder->name() );
             }
         }
     }
@@ -291,6 +305,7 @@ void BookmarkManagerDialogPrivate::discardChanges()
     m_manager->loadFile( "bookmarks/bookmarks.kml" );
 }
 
+/// selects the folder name from its parent (of folder filter fame)
 void BookmarkManagerDialogPrivate::selectFolder( const QString &name, const QModelIndex &parent )
 {
     if ( parent.isValid() ) {
@@ -298,8 +313,12 @@ void BookmarkManagerDialogPrivate::selectFolder( const QString &name, const QMod
     }
 
     if ( name.isEmpty() ) {
-        m_parent->foldersTreeView->setCurrentIndex( m_folderFilterModel->index( 0, 0 ) );
-        filterBookmarksByFolder( m_folderFilterModel->index( 0, 0 ) );
+        QModelIndex documentTreeIndex = m_treeModel->index( m_parent->bookmarkDocument() );
+        QModelIndex folderFilterIndex = m_folderFilterModel->mapFromSource( documentTreeIndex );
+        Q_ASSERT( folderFilterIndex.isValid() );
+        qDebug() << "selecting " << folderFilterIndex.data().toString();
+        m_parent->foldersTreeView->setCurrentIndex( folderFilterIndex );
+        handleFolderSelection( folderFilterIndex );
         return;
     }
 
@@ -308,7 +327,7 @@ void BookmarkManagerDialogPrivate::selectFolder( const QString &name, const QMod
         if ( childIndex.data().toString() == name
             && m_selectedFolder != childIndex ) {
             m_parent->foldersTreeView->setCurrentIndex( childIndex );
-            filterBookmarksByFolder( childIndex );
+            handleFolderSelection( childIndex );
             return;
         }
         if ( m_folderFilterModel->hasChildren( childIndex ) ) {
@@ -320,8 +339,10 @@ void BookmarkManagerDialogPrivate::selectFolder( const QString &name, const QMod
 QModelIndex BookmarkManagerDialogPrivate::folderTreeIndex( const QModelIndex &index ) const
 {
     Q_ASSERT( index.isValid() );
+    Q_ASSERT( index.model() == m_folderFilterModel );
     QModelIndex const treeModelIndex = m_folderFilterModel->mapToSource( index );
     Q_ASSERT( treeModelIndex.isValid() );
+    Q_ASSERT( treeModelIndex.model() == m_treeModel );
     return treeModelIndex;
 }
 
@@ -330,9 +351,9 @@ GeoDataContainer *BookmarkManagerDialogPrivate::selectedFolder()
     if( m_selectedFolder.isValid() ) {
         GeoDataObject* object = qvariant_cast<GeoDataObject*>( m_selectedFolder.data( MarblePlacemarkModel::ObjectPointerRole ) );
         Q_ASSERT( object );
-        GeoDataContainer* folder = dynamic_cast<GeoDataFolder*>( object );
-        Q_ASSERT( folder );
-        return folder;
+        GeoDataContainer* container = dynamic_cast<GeoDataContainer*>( object );
+        Q_ASSERT( container );
+        return container;
     } else {
         return m_parent->bookmarkDocument();
     }
@@ -359,7 +380,7 @@ void BookmarkManagerDialogPrivate::initializeFoldersView( GeoDataTreeModel* tree
 
     m_parent->connect( m_parent->foldersTreeView,
             SIGNAL( clicked( QModelIndex ) ),
-            m_parent, SLOT( filterBookmarksByFolder( QModelIndex ) ) );
+            m_parent, SLOT( handleFolderSelection( QModelIndex ) ) );
     m_parent->connect( m_parent->foldersTreeView->selectionModel(),
                       SIGNAL( selectionChanged( QItemSelection, QItemSelection ) ),
                       m_parent, SLOT( updateButtonState() ) );
