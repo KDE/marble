@@ -16,6 +16,7 @@
 #include "routing/RoutingModel.h"
 #include "PositionTracking.h"
 #include "MarbleMath.h"
+#include "routing/AdjustNavigation.h"
 
 namespace Marble
 {
@@ -33,11 +34,13 @@ public:
 
     RouteSegment m_currentSegment;
 
+    AdjustNavigation* m_autoNavigation;
+
     RouteSegment nextRouteSegment();
 };
 
 NavigationPrivate::NavigationPrivate() :
-    m_marbleWidget( 0 ), m_muted( false )
+    m_marbleWidget( 0 ), m_muted( false ), m_autoNavigation( 0 )
 {
     // nothing to do
 }
@@ -71,6 +74,19 @@ void Navigation::setMarbleWidget( Marble::Declarative::MarbleWidget* widget )
         d->m_marbleWidget->model()->routingManager()->setShowGuidanceModeStartupWarning( false );
         connect( d->m_marbleWidget->model()->routingManager()->routingModel(),
                 SIGNAL( positionChanged() ), this, SLOT( update() ) );
+
+        d->m_autoNavigation = new AdjustNavigation( d->m_marbleWidget->model(), d->m_marbleWidget->viewport(), this );
+        connect( d->m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
+                 d->m_marbleWidget, SLOT( zoomIn() ) );
+        connect( d->m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),
+                 d->m_marbleWidget, SLOT( zoomOut() ) );
+        connect( d->m_autoNavigation, SIGNAL( centerOn( const GeoDataCoordinates &, bool ) ),
+                 d->m_marbleWidget, SLOT( centerOn( const GeoDataCoordinates & ) ) );
+
+        connect( d->m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ),
+                 d->m_autoNavigation, SLOT( inhibitAutoAdjustments() ) );
+
+        d->m_marbleWidget->model()->routingManager()->setAdjustNavigation( d->m_autoNavigation );
     }
 }
 
