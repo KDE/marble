@@ -54,11 +54,24 @@ QVariant SpeakersModel::data ( const QModelIndex &index, int role ) const
 int SpeakersModel::indexOf( const QString &name )
 {
     for( int i=0; i<m_speakers.size(); ++i ) {
-        if ( m_speakers[i].absoluteFilePath() == name ) {
+        if ( m_speakers[i].absoluteFilePath() == name || m_speakers[i].fileName() == name ) {
             return i;
         }
     }
     return -1;
+}
+
+QString SpeakersModel::path( int index )
+{
+    if ( index >= 0 && index <= m_speakers.size() ) {
+        return m_speakers[index].absoluteFilePath();
+    }
+    return QString();
+}
+
+int SpeakersModel::count()
+{
+    return rowCount();
 }
 
 void SpeakersModel::fillModel()

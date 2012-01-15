@@ -14,6 +14,7 @@
 #include "Coordinate.h"
 #include "Tracking.h"
 #include "ZoomButtonInterceptor.h"
+#include "StreetMapThemeModel.h"
 
 #include "GeoDataCoordinates.h"
 #include "MarbleWidget.h"
@@ -27,59 +28,13 @@
 #include "MarbleDirs.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
-#include "GeoSceneDocument.h"
-#include "GeoSceneHead.h"
-#include "GeoSceneZoom.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
-
-#include <QtGui/QSortFilterProxyModel>
 
 namespace Marble
 {
 namespace Declarative
 {
-
-class StreetMapThemeModel : public QSortFilterProxyModel
-{
-public:
-    StreetMapThemeModel( MapThemeManager* themeManager );
-
-protected:
-    virtual bool filterAcceptsRow(int sourceRow,
-             const QModelIndex &sourceParent) const;
-
-private:
-    QList<QString> m_streetMapThemeIds;
-};
-
-StreetMapThemeModel::StreetMapThemeModel( MapThemeManager *themeManager )
-{
-    /** @todo Extend .dgml spec by categories to simplify this
-      * The map theme model items should specify the planet and a set of
-      * categories/tags (arbitrary strings) to simplify filtering for specific
-      * map theme properties.
-      * E.g. the item for earth/openstreetmap/openstreetmap.dgml should have
-      * the planet set to earth and categories/tags like "OpenStreetMap, street map"
-      */
-
-    QStringList const themes = themeManager->mapThemeIds();
-    foreach( const QString &theme, themes ) {
-        if ( theme.startsWith( "earth/" ) ) {
-            GeoSceneDocument* document = themeManager->loadMapTheme( theme );
-            if ( document && document->head()->zoom()->maximum() > 3000 ) {
-                m_streetMapThemeIds << document->head()->mapThemeId();
-                delete document;
-            }
-        }
-    }
-}
-
-bool StreetMapThemeModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
-{
-     QModelIndex const index = sourceModel()->index( sourceRow, 0, sourceParent );
-     return m_streetMapThemeIds.contains( index.data( Qt::UserRole + 1 ).toString() );
-}
 
 MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     QGraphicsProxyWidget( parent, flags ), m_marbleWidget( new Marble::MarbleWidget ),
@@ -325,16 +280,14 @@ QObject *MarbleWidget::mapThemeModel()
     return m_marbleWidget->model()->mapThemeManager()->mapThemeModel();
 }
 
-QObject* MarbleWidget::streetMapThemeModel()
+StreetMapThemeModel* MarbleWidget::streetMapThemeModel()
 {
     if ( m_marbleWidget && !m_streetMapThemeModel ) {
-        StreetMapThemeModel* model = new StreetMapThemeModel( m_marbleWidget->model()->mapThemeManager() );
-        model->setSourceModel( m_marbleWidget->model()->mapThemeManager()->mapThemeModel() );
-        m_streetMapThemeModel = model;
-        return m_streetMapThemeModel;
+        m_streetMapThemeModel = new StreetMapThemeModel( m_marbleWidget->model()->mapThemeManager() );
+        m_streetMapThemeModel->setSourceModel( m_marbleWidget->model()->mapThemeManager()->mapThemeModel() );
     }
 
-    return 0;
+    return m_streetMapThemeModel;
 }
 
 void MarbleWidget::setGeoSceneProperty(const QString &key, bool value)

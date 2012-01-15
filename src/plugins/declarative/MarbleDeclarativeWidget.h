@@ -33,6 +33,7 @@ namespace Declarative
 {
 
 class ZoomButtonInterceptor;
+class StreetMapThemeModel;
 
 /**
   * Wraps a Marble::MarbleWidget, providing access to important properties and methods
@@ -59,7 +60,7 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( Marble::Declarative::Navigation* navigation READ navigation NOTIFY navigationChanged )
     Q_PROPERTY( Marble::Declarative::Search* search READ search NOTIFY searchChanged )
     Q_PROPERTY( QObject* mapThemeModel READ mapThemeModel NOTIFY mapThemeModelChanged )
-    Q_PROPERTY( QObject* streetMapThemeModel READ streetMapThemeModel NOTIFY streetMapThemeModelChanged )
+    Q_PROPERTY( Marble::Declarative::StreetMapThemeModel* streetMapThemeModel READ streetMapThemeModel NOTIFY streetMapThemeModelChanged )
 
 public:
     /** Constructor */
@@ -180,7 +181,7 @@ public Q_SLOTS:
 
     QObject* mapThemeModel();
 
-    QObject* streetMapThemeModel();
+    Marble::Declarative::StreetMapThemeModel* streetMapThemeModel();
 
     void setGeoSceneProperty( const QString &key, bool value );
 
@@ -207,7 +208,7 @@ private:
 
     Marble::Declarative::ZoomButtonInterceptor* m_interceptor;
 
-    QObject* m_streetMapThemeModel;
+    StreetMapThemeModel* m_streetMapThemeModel;
 };
 
 } // namespace Declarative

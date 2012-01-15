@@ -23,6 +23,8 @@
 #include "Activity.h"
 #include "RelatedActivities.h"
 #include "Settings.h"
+#include "StreetMapThemeModel.h"
+#include "routing/SpeakersModel.h"
 
 #include <QtDeclarative/qdeclarative.h>
 #include <QtDeclarative/QDeclarativeEngine>
@@ -51,6 +53,9 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
 
     qmlRegisterType<Marble::Declarative::MarbleWidget>( uri, 0, 11, "MarbleWidget" );
     qmlRegisterType<Marble::Declarative::MapThemeManager>( uri, 0, 11, "MapThemeManager" );
+    qmlRegisterType<Marble::SpeakersModel>( uri, 0, 11, "SpeakersModel" );
+
+    qmlRegisterUncreatableType<Marble::Declarative::StreetMapThemeModel>( uri, 0, 11, "StreetMapThemeModel", "Available from MarbleWidget only" );
 }
 
 void MarbleDeclarativePlugin::initializeEngine( QDeclarativeEngine *engine, const char *)

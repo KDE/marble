@@ -22,6 +22,7 @@ Navigation.cpp
 Search.cpp
 RouteRequestModel.cpp
 Settings.cpp
+StreetMapThemeModel.cpp
 Activity.cpp
 ActivityModel.cpp
 RelatedActivities.cpp
