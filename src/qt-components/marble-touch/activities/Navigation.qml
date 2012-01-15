@@ -145,7 +145,7 @@ Page {
             marbleWidget.parent = mapContainer
             settings.projection = "Mercator"
             var plugins = settings.defaultRenderPlugins
-            settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
+            settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass", "crosshairs"])
             plugins.push("positionMarker")
             settings.activeRenderPlugins = plugins
             settings.mapTheme = settings.streetMapTheme
