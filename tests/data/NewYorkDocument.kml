@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2">
 <Document>
+  <visibility>1</visibility>
   <Placemark>
     <name>New York City</name>
+    <visibility>1</visibility>
     <description>New York City</description>
     <Point>
       <coordinates>-74.0063930000,40.7141720000</coordinates>
@@ -10,6 +12,7 @@
   </Placemark>
   <Placemark>
     <name>New York City 2</name>
+    <visibility>0</visibility>
     <description>New York City</description>
     <Point>
       <coordinates>-74.0060000000,40.7140000000</coordinates>

@@ -2,6 +2,7 @@
 <kml xmlns="http://earth.google.com/kml/2.2">
 <Placemark>
   <name>New York City</name>
+  <visibility>1</visibility>
   <description>New York City</description>
   <Point>
     <coordinates>-74.0063930000,40.7141720000</coordinates>
