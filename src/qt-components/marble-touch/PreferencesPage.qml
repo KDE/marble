@@ -29,12 +29,12 @@ Page {
         anchors.fill: parent
         anchors.margins: 5
 
-        columns: 2
-        rows: 3
+        columns: inPortrait ? 1 : 2
+        rows: 8 / columns
         spacing: 10
 
-        property int leftRowWidth: 250
-        property int rightRowWidth: width - leftRowWidth - spacing
+        property int leftRowWidth: inPortrait ? parent.width : 250
+        property int rightRowWidth: inPortrait ? parent.width : width - leftRowWidth - spacing
 
         Label {
             id: offlineLabel
@@ -45,7 +45,6 @@ Page {
         Item {
             id: onlineSettings
             width: pageGrid.rightRowWidth
-            anchors.right: parent.right
             height: onlineHelp.height + onlineSwitch.height
 
             Switch {
@@ -84,13 +83,13 @@ Page {
 
         Label {
             width: pageGrid.leftRowWidth
-            text: "Navigation"
+            text: "Screensaver"
         }
 
         Item {
             id: screensaverSettings
             width: pageGrid.rightRowWidth
-            height: screensaverHelp.height + screensaverSwitch.height
+            height: screensaverHelp.height + Math.max(screensaverSwitch.height, screensaverLabel.height)
 
             Switch {
                 id: screensaverSwitch
@@ -126,66 +125,140 @@ Page {
 
         Label {
             width: pageGrid.leftRowWidth
+            text: "Voice Navigation"
+        }
+
+        Item {
+            id: speakerSettings
+            width: pageGrid.rightRowWidth
+            height: speakerHelp.height + speakersSwitch.height
+
+            ButtonRow {
+                id: speakersSwitch
+                width: parent.width
+                checkedButton: b2
+                Button {
+                    id: b1
+                    text: "Disabled"
+                    onCheckedChanged: {
+                        settings.voiceNavigationMuted = checked
+                        if (checked) {
+                            speakerHelp.text = "Turn instructions are not announced by sound/voice."
+                        }
+                    }
+                }
+
+                Button {
+                    id: b2
+                    text: "Sound"
+                    onCheckedChanged: {
+                        if (checked) {
+                            speakerHelp.text = "A sound is played when approaching turn points during Navigation."
+                        }
+                    }
+                }
+
+                Button {
+                    id: b3
+                    text: "Speaker"
+                    onCheckedChanged: {
+                        if (checked) {
+                            speakerHelp.text = "Turn instructions are spoken when approaching them."
+                        }
+                    }
+                    onClicked: speakerDialog.open()
+
+                    SpeakersModel{ id: speakers }
+
+                    SelectionDialog {
+                        id: speakerDialog
+                        titleText: "Choose Voice Navigation Speaker"
+                        selectedIndex: speakers.indexOf(settings.voiceNavigationSpeaker)
+                        model: speakers
+                        onAccepted: settings.voiceNavigationSpeaker = speakers.path(selectedIndex)
+                    }
+                }
+
+                Component.onCompleted: {
+                    if (settings.voiceNavigationMuted) {
+                        checkedButton = b1
+                    } else {
+                        checkedButton = b3
+                    }
+                }
+            }
+
+            Label {
+                id: speakerHelp
+                anchors.top: speakersSwitch.bottom
+                //anchors.left: speakersSwitch.left
+                //anchors.right: parent.right
+                anchors.topMargin: 5
+
+                color: "gray"
+                font.pixelSize: 16
+            }
+        }
+
+        Label {
+            width: pageGrid.leftRowWidth
             text: "Street Map Theme"
         }
 
         Item {
             width: pageGrid.rightRowWidth
-            //anchors.bottom: parent.bottom
-            height: pageGrid.height - screensaverSettings.height - pageGrid.spacing - onlineSettings.height - pageGrid.spacing
+            height: themeSelectionButton.height + mapThemeLabel.height
 
-            ListView {
-                id: mapListView
-                anchors.right: parent.right
-                anchors.left: parent.left
-                anchors.top: parent.top
-                anchors.bottom: mapThemeLabel.top
-                model: marbleWidget.streetMapThemeModel
-                clip: true
+            Button {
+                id: themeSelectionButton
+                text: marbleWidget.streetMapThemeModel.name(settings.streetMapTheme)
+                onClicked: themeDialog.open()
 
-                delegate:
-                    Rectangle {
-                    width: mapListView.width
-                    height: mapImage.height
+                SelectionDialog {
+                    id: themeDialog
+                    titleText: "Choose Street Map Theme"
+                    selectedIndex: marbleWidget.streetMapThemeModel.indexOf(settings.streetMapTheme)
+                    model: marbleWidget.streetMapThemeModel
+                    delegate:
+                        Rectangle {
+                        id: delegate
+                        width: root.width
+                        height: mapImage.height
 
-                    /** @todo FIXME Find a way to make this the current index on startup, and use a highlight */
-                    color: mapThemeId === settings.streetMapTheme ? "lightsteelblue" : "#00000000"
+                        color: index === themeDialog.selectedIndex ? root.platformStyle.itemSelectedBackgroundColor : root.platformStyle.itemBackgroundColor
 
-                    Row {
-                        anchors.verticalCenter: parent.verticalCenter
-                        Image {
-                            id: mapImage
-                            source: "image://maptheme/" + mapThemeId
-                            smooth: true
-                            width: 68
-                            height: 68
-                        }
-                        Label {
-                            id: themeLabel
-                            text: display
+                        Row {
                             anchors.verticalCenter: parent.verticalCenter
+                            Image {
+                                id: mapImage
+                                source: "image://maptheme/" + mapThemeId
+                                smooth: true
+                                width: 68
+                                height: 68
+                            }
+                            Label {
+                                id: themeLabel
+                                text: display
+                                color: delegate.index === themeDialog.selectedIndex ? root.platformStyle.itemSelectedTextColor : root.platformStyle.itemTextColor
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                themeDialog.selectedIndex = index
+                                settings.streetMapTheme = mapThemeId
+                            }
                         }
                     }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            mapListView.currentIndex = index
-                            settings.streetMapTheme = mapThemeId
-                        }
-                    }
-                }
-
-                ScrollDecorator {
-                    flickableItem: mapListView
                 }
             }
 
             Label {
                 id: mapThemeLabel
-                anchors.right: parent.right
-                anchors.left: parent.left
-                anchors.bottom: parent.bottom
+                anchors.top: themeSelectionButton.bottom
+                width: pageGrid.rightRowWidth
                 color: "gray"
                 text: "Select the map to use in the Search, Routing, Tracking and Friends activities. <a href=\"http://edu.kde.org/marble/maps.php\">Download additional map themes</a>."
                 onLinkActivated: Qt.openUrlExternally(link)
