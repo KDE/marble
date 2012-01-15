@@ -33,6 +33,14 @@ Page {
             width: 60
             flat: true
         }
+        ToolButton {
+            iconSource: "image://theme/icon-m-common-no-internet-connection";
+            checkable: true
+            checked: settings.workOffline
+            onCheckedChanged: settings.workOffline = checked
+            width: 60
+            flat: true
+        }
         ToolIcon {
             iconId: "toolbar-view-menu"
             onClicked: pageMenu.open()
@@ -86,10 +94,12 @@ Page {
             Label {
                 id: instructionDistance
                 anchors.left: instructionImage.right
-                anchors.verticalCenter: instructionImage.verticalCenter
+                anchors.bottom: instructionImage.bottom
+                anchors.leftMargin: 10
                 width: parent.width
                 color: Qt.rgba(0, 87/255, 174/255, 1)
                 text: formatDistance( marbleWidget.navigation.nextInstructionDistance )
+                font.pixelSize: 32
 
                 function formatDistance(distance)
                 {
@@ -107,6 +117,7 @@ Page {
                 width: parent.width
                 color: Qt.rgba(0, 87/255, 174/255, 1)
                 text: marbleWidget.navigation.nextRoad
+                font.pixelSize: 40
             }
 
             ParallelAnimation {
@@ -132,6 +143,7 @@ Page {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.margins: 10
+            font.pixelSize: 40
             text: Math.round( marbleWidget.tracking.positionSource.speed ) + " km/h"
         }
     }
