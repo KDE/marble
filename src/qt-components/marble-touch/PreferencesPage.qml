@@ -137,13 +137,14 @@ Page {
             ButtonRow {
                 id: speakersSwitch
                 width: parent.width
+                checkedButton: settings.voiceNavigationMuted ? b1 : ( settings.voiceNavigationSoundEnabled ? b2 : b3 )
+
                 Button {
                     id: b1
                     text: "Disabled"
                     onCheckedChanged: {
                         if (checked) {
                             settings.voiceNavigationMuted = true
-                            settings.voiceNavigationSoundEnabled = false
                             speakerHelp.text = "Turn instructions are not announced by sound/voice."
                         }
                     }
@@ -181,16 +182,6 @@ Page {
                         selectedIndex: speakers.indexOf(settings.voiceNavigationSpeaker)
                         model: speakers
                         onAccepted: settings.voiceNavigationSpeaker = speakers.path(selectedIndex)
-                    }
-                }
-
-                Component.onCompleted: {
-                    if (settings.voiceNavigationMuted === true) {
-                        checkedButton = b1
-                    } else if (settings.voiceNavigationSoundEnabled === true) {
-                        checkedButton = b2
-                    } else {
-                        checkedButton = b3
                     }
                 }
             }
