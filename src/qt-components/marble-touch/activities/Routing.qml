@@ -26,9 +26,9 @@ Page {
         ToolIcon {
             iconId: "toolbar-home"
             onClicked: {
-                marbleWidget.centerOn( marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
-                if (marbleWidget.radius < 22026 ) {
-                    marbleWidget.radius = 86250
+                marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
+                if (marbleWidget.zoom < 22026 ) {
+                    marbleWidget.zoom = 86250
                 }
             }
         }
@@ -95,7 +95,7 @@ Page {
             width: parent.width
             height: 74 * count
 
-            model: marbleWidget.waypointModel()
+            model: marbleWidget.waypointModel
             delegate: turnTypeDelegate
             highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
             highlightMoveDuration: 200
@@ -163,7 +163,7 @@ Page {
         filename: ""
         nameFilters: [ "*.kml" ]
 
-        onAccepted: { marbleWidget.getRouting().saveRoute( folder + "/" + filename ); }
+        onAccepted: { marbleWidget.routing.saveRoute( folder + "/" + filename ); }
     }
 
     FileOpenDialog {
@@ -172,7 +172,7 @@ Page {
         folder: "/home/user/MyDocs"
         nameFilters: [ "*.kml", "*.gpx" ]
 
-        onAccepted: { marbleWidget.getRouting().openRoute( folder + "/" + filename ); }
+        onAccepted: { marbleWidget.routing.openRoute( folder + "/" + filename ); }
     }
 
     Component {

@@ -17,8 +17,8 @@ Item {
     property string searchTerm: ""
 
     function calculateRoute() {
-        marbleWidget.getRouting().routingProfile = routingTypeOptions.routingType
-        marbleWidget.getRouting().updateRoute()
+        marbleWidget.routing.routingProfile = routingTypeOptions.routingType
+        marbleWidget.routing.updateRoute()
     }
 
     Column {
@@ -33,7 +33,7 @@ Item {
             width: parent.width
             height: 40 * count
             interactive: false
-            model: marbleWidget.routeRequestModel()
+            model: marbleWidget.routeRequestModel
             delegate: ViaPointEditor {
                 id: sourcePoint
                 width: content.width
@@ -51,19 +51,19 @@ Item {
                 text: "Add"
                 width: parent.width / 3 - 5
                 /** @todo: Ask user instead to click on a point? */
-                onClicked: marbleWidget.getRouting().addVia(marbleWidget.getCenter().longitude, marbleWidget.getCenter().latitude)
+                onClicked: marbleWidget.routing.addVia(marbleWidget.getCenter().longitude, marbleWidget.getCenter().latitude)
             }
 
             Button {
                 text: "Reverse"
                 width: parent.width / 3 - 5
-                onClicked: marbleWidget.getRouting().reverseRoute()
+                onClicked: marbleWidget.routing.reverseRoute()
             }
 
             Button {
                 text: "Clear"
                 width: parent.width / 3 - 5
-                onClicked: marbleWidget.getRouting().clearRoute()
+                onClicked: marbleWidget.routing.clearRoute()
             }
         }
 
@@ -95,6 +95,6 @@ Item {
     Connections { target: routingTypeOptions; onRoutingTypeChanged: root.calculateRoute() }
 
     Component.onCompleted: {
-        marbleWidget.getRouting().addVia(marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude)
+        marbleWidget.routing.addVia(marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude)
     }
 }

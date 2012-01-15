@@ -27,9 +27,9 @@ Page {
         ToolIcon {
             iconId: "toolbar-home"
             onClicked: {
-                marbleWidget.centerOn( marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
-                if (marbleWidget.radius < 403 ) {
-                    marbleWidget.radius = 22026
+                marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
+                if (marbleWidget.zoom < 403 ) {
+                    marbleWidget.zoom = 22026
                 }
             }
         }
@@ -56,7 +56,7 @@ Page {
             }
 
             Component.onCompleted: {
-                marbleWidget.getSearch().searchFinished.connect( searchFinished )
+                marbleWidget.search.searchFinished.connect( searchFinished )
             }
 
             function searchFinished() {

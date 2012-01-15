@@ -76,7 +76,7 @@ Page {
                 width: 64
                 height: 64
                 smooth: true
-                source: marbleWidget.getNavigation().nextInstructionImage
+                source: marbleWidget.navigation.nextInstructionImage
                 onSourceChanged: {
                     fadeAnimation.running = true
                 }
@@ -88,7 +88,7 @@ Page {
                 anchors.verticalCenter: instructionImage.verticalCenter
                 width: parent.width
                 color: Qt.rgba(0, 87/255, 174/255, 1)
-                text: formatDistance( marbleWidget.getNavigation().nextInstructionDistance )
+                text: formatDistance( marbleWidget.navigation.nextInstructionDistance )
 
                 function formatDistance(distance)
                 {
@@ -105,7 +105,7 @@ Page {
                 anchors.top: instructionImage.bottom
                 width: parent.width
                 color: Qt.rgba(0, 87/255, 174/255, 1)
-                text: marbleWidget.getNavigation().nextRoad
+                text: marbleWidget.navigation.nextRoad
             }
 
             ParallelAnimation {
@@ -131,7 +131,7 @@ Page {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.margins: 10
-            text: Math.round( marbleWidget.getTracking().positionSource.speed ) + " km/h"
+            text: Math.round( marbleWidget.tracking.positionSource.speed ) + " km/h"
         }
     }
 
@@ -152,7 +152,7 @@ Page {
             settings.gpsTracking = true
             settings.showPosition = true
             settings.showTrack = true
-            marbleWidget.getNavigation().guidanceModeEnabled = true
+            marbleWidget.navigation.guidanceModeEnabled = true
             marbleWidget.visible = true
         }
 
@@ -239,9 +239,9 @@ Page {
         }
     }
 
-    Connections { target: marbleWidget.getNavigation(); onVoiceNavigationAnnouncementChanged: voiceAnnouncement() }
+    Connections { target: marbleWidget.navigation; onVoiceNavigationAnnouncementChanged: voiceAnnouncement() }
 
     function voiceAnnouncement() {
-        console.log("announce" + marbleWidget.getNavigation().voiceNavigationAnnouncement )
+        console.log("announce" + marbleWidget.navigation.voiceNavigationAnnouncement )
     }
 }

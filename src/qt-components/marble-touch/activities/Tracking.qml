@@ -28,9 +28,9 @@ Page {
         ToolIcon {
             iconId: "toolbar-home"
             onClicked: {
-                marbleWidget.centerOn( marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
-                if (marbleWidget.radius < 22026 ) {
-                    marbleWidget.radius = 4197500
+                marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
+                if (marbleWidget.zoom < 22026 ) {
+                    marbleWidget.zoom = 4197500
                 }
             }
         }
@@ -64,14 +64,14 @@ Page {
                 text: "Auto Center"
                 checked: false
                 onCheckedChanged: {
-                    marbleWidget.getTracking().autoCenter = checked
+                    marbleWidget.tracking.autoCenter = checked
                 }
             }
             MenuItemSwitch {
                 text: "Auto Zoom"
                 checked: false
                 onCheckedChanged: {
-                    marbleWidget.getTracking().autoZoom = checked
+                    marbleWidget.tracking.autoZoom = checked
                 }
             }
         }
@@ -91,7 +91,7 @@ Page {
             }
 
             Component.onCompleted: {
-                marbleWidget.getSearch().searchFinished.connect( searchFinished )
+                marbleWidget.search.searchFinished.connect( searchFinished )
             }
 
             function searchFinished() {
@@ -135,7 +135,7 @@ Page {
         filename: ""
         nameFilters: [ "*.kml" ]
 
-        onAccepted: { marbleWidget.getTracking().saveTrack( folder + "/" + filename ); }
+        onAccepted: { marbleWidget.tracking.saveTrack( folder + "/" + filename ); }
     }
 
     FileOpenDialog {
@@ -144,7 +144,7 @@ Page {
         folder: "/home/user/MyDocs"
         nameFilters: [ "*.kml", "*.gpx" ]
 
-        onAccepted: { marbleWidget.getTracking().openTrack( folder + "/" + filename ); }
+        onAccepted: { marbleWidget.tracking.openTrack( folder + "/" + filename ); }
     }
 
     ScreenSaver {

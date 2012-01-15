@@ -27,6 +27,11 @@ Item {
     property alias streetMapThemeModel: map.streetMapThemeModel
     property alias radius: map.radius
 
+    property alias routing: map.routing
+    property alias search: map.search
+    property alias tracking: map.tracking
+    property alias navigation: map.navigation
+
     // The widget representing the map.
     MarbleWidget {
         id: map
@@ -272,42 +277,6 @@ Item {
         map.search.find( term )
     }
     
-    // Returns the model that contains routing instructions.
-    /** @todo: Needed? Make a property? */
-    function routeRequestModel() {
-        return map.routing.routeRequestModel()
-    }
-    
-    // Returns the model that contains points on the route.
-    /** @todo: Needed? Make a property? */
-    function waypointModel() {
-        return map.routing.waypointModel()
-    }
-    
-    // Returns the grouped property to access routing functions.
-    /** @todo: Needed? Make a property? */
-    function getRouting() {
-        return map.routing
-    }
-    
-    // Returns the grouped property to access search functions.
-    /** @todo: Needed? Make a property? */
-    function getSearch() {
-        return map.search
-    }
-
-    // Returns the grouped property to access tracking functions.
-    /** @todo: Needed? Make a property? */
-    function getTracking() {
-        return map.tracking
-    }
-
-    // Returns the grouped property to access tracking functions.
-    /** @todo: Needed? Make a property? */
-    function getNavigation() {
-        return map.navigation
-    }
-
     // Centers map on passed coordinates.
     function centerOn( lon, lat ) {
         map.center.longitude = lon

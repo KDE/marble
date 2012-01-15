@@ -27,9 +27,9 @@ Page {
         ToolIcon {
             iconId: "toolbar-home"
             onClicked: {
-                marbleWidget.centerOn( marbleWidget.getTracking().lastKnownPosition.longitude, marbleWidget.getTracking().lastKnownPosition.latitude )
-                if (marbleWidget.radius < 22026 ) {
-                    marbleWidget.radius = 86250
+                marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
+                if (marbleWidget.zoom < 22026 ) {
+                    marbleWidget.zoom = 86250
                 }
             }
         }

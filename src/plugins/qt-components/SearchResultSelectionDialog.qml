@@ -25,7 +25,7 @@ Rectangle {
         id: resultView
         anchors.fill: parent
         anchors.margins: UiConstants.DefaultMargin
-        model: main.getSearch().searchResultModel()
+        model: main.search.searchResultModel()
         spacing: 10
 
         // Displays search result information in a white box with blue
@@ -113,7 +113,7 @@ Rectangle {
     }
     // Show search result in view.
     Component.onCompleted: {
-        main.getSearch().searchFinished.connect( showSearchResults )
+        main.search.searchFinished.connect( showSearchResults )
     }
     // Show load animation.
     function load() {
@@ -122,7 +122,7 @@ Rectangle {
     }
     // Update model and view and show results.
     function showSearchResults() {
-        resultView.model = main.getSearch().searchResultModel()
+        resultView.model = main.search.searchResultModel()
         noResultsRect.visible = loadRect.visible = false
         console.log( "numResults: ", resultView.model.count )
         if( resultView.model.count < 1 ) {
