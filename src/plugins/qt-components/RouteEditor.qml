@@ -33,7 +33,7 @@ Item {
             width: parent.width
             height: 40 * count
             interactive: false
-            model: marbleWidget.routeRequestModel
+            model: marbleWidget.routing.routeRequestModel()
             delegate: ViaPointEditor {
                 id: sourcePoint
                 width: content.width
