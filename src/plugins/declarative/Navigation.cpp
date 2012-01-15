@@ -57,6 +57,7 @@ void NavigationPrivate::updateNextInstructionDistance( const Marble::RoutingMode
     for (int i=0; i<segment.path().size(); ++i) {
         if (segment.path()[i] == onRoute) {
             m_nextInstructionDistance = distance + segment.path().length( Marble::EARTH_RADIUS, i );
+            return;
         }
     }
 

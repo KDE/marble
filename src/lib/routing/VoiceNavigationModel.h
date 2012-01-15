@@ -30,6 +30,7 @@ class VoiceNavigationModel : public QObject
     Q_PROPERTY(QString speaker READ speaker WRITE setSpeaker NOTIFY speakerChanged)
     Q_PROPERTY(bool isSpeakerEnabled READ isSpeakerEnabled WRITE setSpeakerEnabled NOTIFY isSpeakerEnabledChanged )
     Q_PROPERTY(QString instruction READ instruction NOTIFY instructionChanged)
+    Q_PROPERTY(QString preview READ preview NOTIFY previewChanged)
 
 public:
     /** Constructor */
@@ -68,6 +69,8 @@ Q_SIGNALS:
     void isSpeakerEnabledChanged();
 
     void instructionChanged();
+
+    void previewChanged();
 
 private:
     VoiceNavigationModelPrivate* const d;
