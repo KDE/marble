@@ -316,7 +316,6 @@ void BookmarkManagerDialogPrivate::selectFolder( const QString &name, const QMod
         QModelIndex documentTreeIndex = m_treeModel->index( m_parent->bookmarkDocument() );
         QModelIndex folderFilterIndex = m_folderFilterModel->mapFromSource( documentTreeIndex );
         Q_ASSERT( folderFilterIndex.isValid() );
-        qDebug() << "selecting " << folderFilterIndex.data().toString();
         m_parent->foldersTreeView->setCurrentIndex( folderFilterIndex );
         handleFolderSelection( folderFilterIndex );
         return;
