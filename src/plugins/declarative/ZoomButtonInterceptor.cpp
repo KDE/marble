@@ -10,7 +10,6 @@
 
 #include "ZoomButtonInterceptor.h"
 
-#include <QtCore/QDebug>
 #include <QtGui/QKeyEvent>
 #include <QtGui/QApplication>
 
@@ -59,7 +58,6 @@ bool ZoomButtonInterceptor::eventFilter(QObject *, QEvent *event)
 #ifdef HARMATTAN_ZOOMINTERCEPTOR
     if ( event->type() == QEvent::KeyPress ) {
         QKeyEvent* keyEvent = static_cast<QKeyEvent*>( event );
-        qDebug() << "evaluating key " << keyEvent->key();
         if ( keyEvent->key() == Qt::Key_VolumeDown ) {
             d->m_widget->zoomOut();
             return true;
