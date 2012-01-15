@@ -30,10 +30,13 @@ class Navigation : public QObject
     Q_OBJECT
     Q_PROPERTY(bool guidanceModeEnabled READ guidanceModeEnabled WRITE setGuidanceModeEnabled NOTIFY guidanceModeEnabledChanged)
     Q_PROPERTY(bool muted READ muted WRITE setMuted NOTIFY mutedChanged)
+    Q_PROPERTY(bool soundEnabled READ soundEnabled WRITE setSoundEnabled NOTIFY soundEnabledChanged)
+    Q_PROPERTY(QString speaker READ speaker WRITE setSpeaker NOTIFY speakerChanged)
     Q_PROPERTY(QString nextInstructionText READ nextInstructionText NOTIFY nextInstructionTextChanged)
     Q_PROPERTY(QString nextRoad READ nextRoad NOTIFY nextRoadChanged)
     Q_PROPERTY(QString nextInstructionImage READ nextInstructionImage NOTIFY nextInstructionImageChanged)
     Q_PROPERTY(qreal nextInstructionDistance READ nextInstructionDistance NOTIFY nextInstructionDistanceChanged)
+    Q_PROPERTY(QString voiceNavigationAnnouncement READ voiceNavigationAnnouncement NOTIFY voiceNavigationAnnouncementChanged)
 
 public:
     explicit Navigation( QObject* parent = 0 );
@@ -58,6 +61,16 @@ public:
 
     qreal nextInstructionDistance() const;
 
+    QString voiceNavigationAnnouncement() const;
+
+    QString speaker() const;
+
+    void setSpeaker( const QString &speaker );
+
+    bool soundEnabled() const;
+
+    void setSoundEnabled( bool soundEnabled );
+
 Q_SIGNALS:
     void guidanceModeEnabledChanged();
 
@@ -70,6 +83,12 @@ Q_SIGNALS:
     void nextInstructionDistanceChanged();
 
     void nextRoadChanged();
+
+    void voiceNavigationAnnouncementChanged();
+
+    void soundEnabledChanged();
+
+    void speakerChanged();
 
 private Q_SLOTS:
     void update();
