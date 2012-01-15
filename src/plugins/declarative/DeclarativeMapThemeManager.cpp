@@ -17,11 +17,6 @@
 #include <QtGui/QStandardItemModel>
 #include <QtCore/QDebug>
 
-namespace Marble
-{
-namespace Declarative
-{
-
 MapThemeImageProvider::MapThemeImageProvider() :
         QDeclarativeImageProvider( QDeclarativeImageProvider::Pixmap )
 {
@@ -71,9 +66,6 @@ QList<QObject*> MapThemeManager::mapThemes()
     }
 
     return dataList;
-}
-
-}
 }
 
 #include "DeclarativeMapThemeManager.moc"

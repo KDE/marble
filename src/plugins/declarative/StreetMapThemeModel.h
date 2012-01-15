@@ -13,13 +13,7 @@
 
 #include <QtGui/QSortFilterProxyModel>
 
-namespace Marble
-{
-
-class MapThemeManager;
-
-namespace Declarative
-{
+namespace Marble { class MapThemeManager; }
 
 class StreetMapThemeModel : public QSortFilterProxyModel
 {
@@ -28,7 +22,7 @@ class StreetMapThemeModel : public QSortFilterProxyModel
     Q_PROPERTY( int count READ count NOTIFY countChanged )
 
 public:
-    StreetMapThemeModel( MapThemeManager* themeManager );
+    StreetMapThemeModel( Marble::MapThemeManager* themeManager );
 
     /** @todo FIXME https://bugreports.qt.nokia.com/browse/QTCOMPONENTS-1206 */
     int count();
@@ -48,8 +42,5 @@ protected:
 private:
     QList<QString> m_streetMapThemeIds;
 };
-
-}
-}
 
 #endif

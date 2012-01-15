@@ -16,11 +16,6 @@
 
 #include <QtDeclarative/QDeclarativeImageProvider>
 
-namespace Marble
-{
-namespace Declarative
-{
-
 class MapThemeImageProvider : public QDeclarativeImageProvider
 {
 public:
@@ -63,8 +58,5 @@ private:
     /** Marble map theme manager doing the real work */
     Marble::MapThemeManager m_mapThemeManager;
 };
-
-} // namespace Declarative
-} // namespace Marble
 
 #endif // DECLARATIVE_MAPTHEMEMANAGER_H

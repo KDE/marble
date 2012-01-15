@@ -12,10 +12,9 @@
 
 #include "MarbleMath.h"
 
-namespace Marble
-{
-namespace Declarative
-{
+using Marble::GeoDataCoordinates;
+using Marble::EARTH_RADIUS;
+using Marble::DEG2RAD;
 
 Coordinate::Coordinate( qreal lon, qreal lat, qreal alt, QObject *parent ) :
     QObject( parent )
@@ -81,7 +80,7 @@ qreal Coordinate::bearing( qreal longitude, qreal latitude ) const
     qreal y = sin( deltaLon ) * cos( latitude * DEG2RAD );
     qreal x = cos( m_coordinate.latitude() ) * sin( latitude * DEG2RAD ) -
               sin( m_coordinate.latitude() ) * cos( latitude * DEG2RAD ) * cos( deltaLon );
-    return RAD2DEG * atan2( y, x );
+    return Marble::RAD2DEG * atan2( y, x );
 }
 
 bool Coordinate::operator == ( const Coordinate &other ) const
@@ -92,9 +91,6 @@ bool Coordinate::operator == ( const Coordinate &other ) const
 bool Coordinate::operator != ( const Coordinate &other ) const
 {
     return !operator == ( other );
-}
-
-}
 }
 
 #include "Coordinate.moc"

@@ -31,11 +31,6 @@
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
 
-namespace Marble
-{
-namespace Declarative
-{
-
 MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     QGraphicsProxyWidget( parent, flags ), m_marbleWidget( new Marble::MarbleWidget ),
     m_inputEnabled( true ), m_tracking( 0 ), m_routing( 0 ), m_navigation( 0 ), m_search( 0 ),
@@ -74,7 +69,7 @@ const Marble::ViewportParams *MarbleWidget::viewport() const
     return m_marbleWidget->viewport();
 }
 
-QList<RenderPlugin *> MarbleWidget::renderPlugins() const
+QList<Marble::RenderPlugin *> MarbleWidget::renderPlugins() const
 {
     return m_marbleWidget->renderPlugins();
 }
@@ -82,7 +77,7 @@ QList<RenderPlugin *> MarbleWidget::renderPlugins() const
 QStringList MarbleWidget::activeFloatItems() const
 {
     QStringList result;
-    foreach( AbstractFloatItem * floatItem, m_marbleWidget->floatItems() ) {
+    foreach( Marble::AbstractFloatItem * floatItem, m_marbleWidget->floatItems() ) {
         if ( floatItem->enabled() && floatItem->visible() ) {
             result << floatItem->nameId();
         }
@@ -92,7 +87,7 @@ QStringList MarbleWidget::activeFloatItems() const
 
 void MarbleWidget::setActiveFloatItems( const QStringList &items )
 {
-    foreach( AbstractFloatItem * floatItem, m_marbleWidget->floatItems() ) {
+    foreach( Marble::AbstractFloatItem * floatItem, m_marbleWidget->floatItems() ) {
         floatItem->setEnabled( items.contains( floatItem->nameId() ) );
         floatItem->setVisible( items.contains( floatItem->nameId() ) );
     }
@@ -101,7 +96,7 @@ void MarbleWidget::setActiveFloatItems( const QStringList &items )
 QStringList MarbleWidget::activeRenderPlugins() const
 {
     QStringList result;
-    foreach( RenderPlugin * plugin, m_marbleWidget->renderPlugins() ) {
+    foreach( Marble::RenderPlugin * plugin, m_marbleWidget->renderPlugins() ) {
         if ( plugin->enabled() && plugin->visible() ) {
             result << plugin->nameId();
         }
@@ -111,7 +106,7 @@ QStringList MarbleWidget::activeRenderPlugins() const
 
 void MarbleWidget::setActiveRenderPlugins( const QStringList &items )
 {
-    foreach( RenderPlugin * plugin, m_marbleWidget->renderPlugins() ) {
+    foreach( Marble::RenderPlugin * plugin, m_marbleWidget->renderPlugins() ) {
         plugin->setEnabled( items.contains( plugin->nameId() ) );
         plugin->setVisible( items.contains( plugin->nameId() ) );
     }
@@ -141,11 +136,11 @@ void MarbleWidget::setMapThemeId( const QString &mapThemeId )
 QString MarbleWidget::projection( ) const
 {
     switch ( m_marbleWidget->projection() ) {
-    case Equirectangular:
+    case Marble::Equirectangular:
         return "Equirectangular";
-    case Mercator:
+    case Marble::Mercator:
         return "Mercator";
-    case Spherical:
+    case Marble::Spherical:
         return "Spherical";
     }
 
@@ -156,11 +151,11 @@ QString MarbleWidget::projection( ) const
 void MarbleWidget::setProjection( const QString &projection )
 {
     if ( projection.compare( "Equirectangular", Qt::CaseInsensitive ) == 0 ) {
-        m_marbleWidget->setProjection( Equirectangular );
+        m_marbleWidget->setProjection( Marble::Equirectangular );
     } else if ( projection.compare( "Mercator", Qt::CaseInsensitive ) == 0 ) {
-        m_marbleWidget->setProjection( Mercator );
+        m_marbleWidget->setProjection( Marble::Mercator );
     } else {
-        m_marbleWidget->setProjection( Spherical );
+        m_marbleWidget->setProjection( Marble::Spherical );
     }
 }
 
@@ -176,10 +171,10 @@ void MarbleWidget::zoomOut()
 
 QPoint MarbleWidget::pixel( qreal lon, qreal lat ) const
 {
-    GeoDataCoordinates position( lon, lat, 0, GeoDataCoordinates::Degree );
+    Marble::GeoDataCoordinates position( lon, lat, 0, Marble::GeoDataCoordinates::Degree );
     qreal x( 0.0 );
     qreal y( 0.0 );
-    ViewportParams *viewport = m_marbleWidget->viewport();
+    Marble::ViewportParams *viewport = m_marbleWidget->viewport();
     viewport->screenCoordinates( position, x, y );
     return QPoint( x, y );
 }
@@ -191,7 +186,7 @@ Coordinate *MarbleWidget::coordinate( int x, int y )
     return new Coordinate( lon, lat, 0.0, this );
 }
 
-Marble::Declarative::Tracking* MarbleWidget::tracking()
+Tracking* MarbleWidget::tracking()
 {
     if ( !m_tracking ) {
         m_tracking = new Tracking( this );
@@ -228,7 +223,7 @@ void MarbleWidget::centerOn( const Marble::GeoDataLatLonAltBox &bbox )
     m_marbleWidget->centerOn( bbox );
 }
 
-void MarbleWidget::centerOn( const GeoDataCoordinates &coordinates )
+void MarbleWidget::centerOn( const Marble::GeoDataCoordinates &coordinates )
 {
     m_marbleWidget->centerOn( coordinates );
 }
@@ -238,13 +233,14 @@ void MarbleWidget::updateCenterPosition()
     m_marbleWidget->centerOn( m_center.longitude(), m_center.latitude() );
 }
 
-void MarbleWidget::forwardMouseClick(qreal lon, qreal lat, GeoDataCoordinates::Unit unit )
+void MarbleWidget::forwardMouseClick(qreal lon, qreal lat, Marble::GeoDataCoordinates::Unit unit )
 {
-    GeoDataCoordinates position( lon, lat, unit );
-    emit mouseClickGeoPosition( position.longitude( GeoDataCoordinates::Degree ), position.latitude( GeoDataCoordinates::Degree ) );
+    Marble::GeoDataCoordinates position( lon, lat, unit );
+    emit mouseClickGeoPosition( position.longitude( Marble::GeoDataCoordinates::Degree ),
+                                position.latitude( Marble::GeoDataCoordinates::Degree ) );
 }
 
-Marble::Declarative::Routing* MarbleWidget::routing()
+Routing* MarbleWidget::routing()
 {
     if ( !m_routing ) {
         m_routing = new Routing( this );
@@ -264,7 +260,7 @@ Navigation *MarbleWidget::navigation()
     return m_navigation;
 }
 
-Marble::Declarative::Search* MarbleWidget::search()
+Search* MarbleWidget::search()
 {
     if ( !m_search ) {
         m_search = new Search( this );
@@ -313,9 +309,6 @@ int MarbleWidget::radius() const
 void MarbleWidget::setRadius( int radius )
 {
     m_marbleWidget->setRadius( radius );
-}
-
-}
 }
 
 #include "MarbleDeclarativeWidget.moc"

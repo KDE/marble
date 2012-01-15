@@ -17,12 +17,6 @@
 
 #include "RelatedActivities.h"
 
-namespace Marble
-{
-    
-namespace Declarative
-{
-
 /**
  * This class represents an activity.
  * 
@@ -102,9 +96,5 @@ class Activity : public QObject
     QString m_path;                            ///< Path to the QML file of the activity.
     QMap<QString, QVariant> m_settings;        ///< Settings of the activity.
 };
-
-}
-
-}
 
 #endif

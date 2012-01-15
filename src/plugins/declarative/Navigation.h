@@ -16,12 +16,6 @@
 
 class QAbstractItemModel;
 
-namespace Marble
-{
-
-namespace Declarative
-{
-
 class MarbleWidget;
 class NavigationPrivate;
 
@@ -43,7 +37,7 @@ public:
 
     ~Navigation();
 
-    void setMarbleWidget( Marble::Declarative::MarbleWidget* widget );
+    void setMarbleWidget( MarbleWidget* widget );
 
     bool guidanceModeEnabled() const;
 
@@ -96,9 +90,5 @@ private Q_SLOTS:
 private:
     NavigationPrivate* const d;
 };
-
-}
-
-}
 
 #endif

@@ -16,12 +16,6 @@
 
 class QAbstractItemModel;
 
-namespace Marble
-{
-
-namespace Declarative
-{
-
 class MarbleWidget;
 class RoutingPrivate;
 
@@ -37,7 +31,7 @@ public:
 
     ~Routing();
 
-    void setMarbleWidget( Marble::Declarative::MarbleWidget* widget );
+    void setMarbleWidget( MarbleWidget* widget );
 
     QString routingProfile() const;
 
@@ -70,9 +64,5 @@ Q_SIGNALS:
 private:
     RoutingPrivate* const d;
 };
-
-}
-
-}
 
 #endif

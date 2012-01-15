@@ -15,11 +15,6 @@
 #include "MarblePlacemarkModel.h"
 #include "ViewportParams.h"
 
-namespace Marble
-{
-namespace Declarative
-{
-
 Search::Search( QObject* parent ) : QObject( parent ),
     m_marbleWidget( 0 ), m_runnerManager( 0 ),
     m_searchResult( 0 ), m_placemarkDelegate( 0 ),
@@ -28,7 +23,7 @@ Search::Search( QObject* parent ) : QObject( parent ),
     // nothing to do
 }
 
-void Search::setMarbleWidget( Marble::Declarative::MarbleWidget* widget )
+void Search::setMarbleWidget( MarbleWidget* widget )
 {
     m_marbleWidget = widget;
     connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ),
@@ -76,7 +71,7 @@ QObject* Search::searchResultModel()
 
 void Search::updateSearchModel( QAbstractItemModel *model )
 {
-    m_searchResult = static_cast<MarblePlacemarkModel*>( model );
+    m_searchResult = static_cast<Marble::MarblePlacemarkModel*>( model );
     qDeleteAll( m_placemarks.values() );
     m_placemarks.clear();
 
@@ -113,9 +108,10 @@ void Search::updatePlacemarks()
         QMap<int, QDeclarativeItem*>::const_iterator iter = m_placemarks.constBegin();
         while ( iter != m_placemarks.constEnd() ) {
             qreal x(0), y(0);
-            QVariant position = m_searchResult->data( m_searchResult->index( iter.key() ), MarblePlacemarkModel::CoordinateRole );
-            GeoDataCoordinates const coordinates = qVariantValue<GeoDataCoordinates>( position );
-            bool const visible = onEarth && m_marbleWidget->viewport()->screenCoordinates( coordinates.longitude( GeoDataCoordinates::Degree ), coordinates.latitude( GeoDataCoordinates::Degree ), x, y );
+            QVariant position = m_searchResult->data( m_searchResult->index( iter.key() ), Marble::MarblePlacemarkModel::CoordinateRole );
+            Marble::GeoDataCoordinates const coordinates = qVariantValue<Marble::GeoDataCoordinates>( position );
+            bool const visible = onEarth && m_marbleWidget->viewport()->screenCoordinates( coordinates.longitude( Marble::GeoDataCoordinates::Degree ),
+                                                                                           coordinates.latitude( Marble::GeoDataCoordinates::Degree ), x, y );
             QDeclarativeItem* item = iter.value();
             if ( item ) {
                 item->setVisible( visible );
@@ -168,22 +164,19 @@ void Search::handleSearchResult()
     Q_ASSERT( m_marbleWidget ); // search wouldn't be started without
     Q_ASSERT( m_searchResult ); // search wouldn't be finished without
 
-    GeoDataLineString placemarks;
+    Marble::GeoDataLineString placemarks;
     for ( int i = 0; i < m_searchResult->rowCount(); ++i ) {
-        QVariant data = m_searchResult->index( i, 0 ).data( MarblePlacemarkModel::CoordinateRole );
+        QVariant data = m_searchResult->index( i, 0 ).data( Marble::MarblePlacemarkModel::CoordinateRole );
         if ( !data.isNull() ) {
-            placemarks << qVariantValue<GeoDataCoordinates>( data );
+            placemarks << qVariantValue<Marble::GeoDataCoordinates>( data );
         }
     }
 
     if ( placemarks.size() > 1 ) {
-        m_marbleWidget->centerOn( GeoDataLatLonBox::fromLineString( placemarks ) );
+        m_marbleWidget->centerOn( Marble::GeoDataLatLonBox::fromLineString( placemarks ) );
     }
 
     emit searchFinished();
-}
-
-}
 }
 
 #include "Search.moc"

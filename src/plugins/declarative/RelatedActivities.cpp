@@ -10,12 +10,6 @@
 
 #include "RelatedActivities.h"
 
-namespace Marble
-{
-    
-namespace Declarative
-{
-
 RelatedActivities::RelatedActivities()
 {
 }
@@ -37,10 +31,6 @@ void RelatedActivities::setRelatedActivities( const QMap<QString, QVariant>& rel
 QMap<QString, QVariant> RelatedActivities::relatedActivities() const
 {
     return m_relatedActivities;
-}
-
-}
-
 }
 
 #include "RelatedActivities.moc"

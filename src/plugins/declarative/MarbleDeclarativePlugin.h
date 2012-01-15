@@ -13,11 +13,6 @@
 
 #include <QtDeclarative/QDeclarativeExtensionPlugin>
 
-namespace Marble
-{
-namespace Declarative
-{
-
 /**
   * Registers MarbleWidget, MarbleRunnerManager and MarbleThemeManager
   * as QDeclarative extensions for use in QML.
@@ -32,8 +27,5 @@ public:
     /** Overriding QDeclarativeExtensionPlugin to register image provider */
     void initializeEngine( QDeclarativeEngine *engine, const char *);
 };
-
-} // namespace Declarative
-} // namespace Marble
 
 #endif

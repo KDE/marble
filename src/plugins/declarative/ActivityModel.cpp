@@ -14,12 +14,6 @@
 #include <QtDeclarative/QDeclarativeItem>
 #include <QtDeclarative/QDeclarativeProperty>
 
-namespace Marble
-{
-    
-namespace Declarative
-{
-
 class ActivityModel::Private
 {
 
@@ -155,10 +149,6 @@ QVariant ActivityModel::get( const QString& name, const QString& role ) const
     }
     else
         return QVariant();
-}
-
-}
-
 }
 
 #include "ActivityModel.moc"

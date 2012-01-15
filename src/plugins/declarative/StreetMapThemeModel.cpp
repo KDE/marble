@@ -17,12 +17,7 @@
 
 #include <QtCore/QModelIndex>
 
-namespace Marble
-{
-namespace Declarative
-{
-
-StreetMapThemeModel::StreetMapThemeModel( MapThemeManager *themeManager )
+StreetMapThemeModel::StreetMapThemeModel( Marble::MapThemeManager *themeManager )
 {
     /** @todo Extend .dgml spec by categories to simplify this
       * The map theme model items should specify the planet and a set of
@@ -35,7 +30,7 @@ StreetMapThemeModel::StreetMapThemeModel( MapThemeManager *themeManager )
     QStringList const themes = themeManager->mapThemeIds();
     foreach( const QString &theme, themes ) {
         if ( theme.startsWith( "earth/" ) ) {
-            GeoSceneDocument* document = themeManager->loadMapTheme( theme );
+            Marble::GeoSceneDocument* document = themeManager->loadMapTheme( theme );
             if ( document && document->head()->zoom()->maximum() > 3000 ) {
                 m_streetMapThemeIds << document->head()->mapThemeId();
                 delete document;
@@ -73,9 +68,6 @@ bool StreetMapThemeModel::filterAcceptsRow(int sourceRow, const QModelIndex &sou
 {
      QModelIndex const index = sourceModel()->index( sourceRow, 0, sourceParent );
      return m_streetMapThemeIds.contains( index.data( Qt::UserRole + 1 ).toString() );
-}
-
-}
 }
 
 #include "StreetMapThemeModel.moc"

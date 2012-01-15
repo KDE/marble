@@ -14,11 +14,6 @@
 #include <QtCore/QObject>
 #include <QtCore/QSettings>
 
-namespace Marble
-{
-namespace Declarative
-{
-
 class Settings : public QObject
 {
     Q_OBJECT
@@ -47,8 +42,5 @@ private:
 
     QString m_applicationName;
 };
-
-}
-}
 
 #endif // MARBLE_DECLARATIVE_SETTINGS_H

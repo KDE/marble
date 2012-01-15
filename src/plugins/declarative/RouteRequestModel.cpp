@@ -12,11 +12,6 @@
 
 #include "routing/RouteRequest.h"
 
-namespace Marble
-{
-namespace Declarative
-{
-
 RouteRequestModel::RouteRequestModel( Marble::RouteRequest* request, QObject *parent ) :
     QAbstractListModel( parent ), m_request( request )
 {
@@ -63,8 +58,8 @@ QVariant RouteRequestModel::data ( const QModelIndex &index, int role ) const
     if ( index.isValid() && m_request && index.row() >= 0 && index.row() < m_request->size() ) {
         switch ( role ) {
         case Qt::DisplayRole: return m_request->name( index.row() );
-        case LongitudeRole: return m_request->at( index.row() ).longitude( GeoDataCoordinates::Degree );
-        case LatitudeRole: return m_request->at( index.row() ).latitude( GeoDataCoordinates::Degree );
+        case LongitudeRole: return m_request->at( index.row() ).longitude( Marble::GeoDataCoordinates::Degree );
+        case LatitudeRole: return m_request->at( index.row() ).latitude( Marble::GeoDataCoordinates::Degree );
         }
     }
 
@@ -94,11 +89,8 @@ void RouteRequestModel::updateAfterAddition( int idx )
 void RouteRequestModel::setPosition ( int index, qreal longitude, qreal latitude )
 {
     if ( index >= 0 && index < m_request->size() ) {
-        m_request->setPosition( index, GeoDataCoordinates( longitude, latitude, 0.0, GeoDataCoordinates::Degree ) );
+        m_request->setPosition( index, Marble::GeoDataCoordinates( longitude, latitude, 0.0, Marble::GeoDataCoordinates::Degree ) );
     }
-}
-
-}
 }
 
 #include "RouteRequestModel.moc"
