@@ -89,8 +89,15 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
     m_request.setHeader( QNetworkRequest::ContentTypeHeader, "application/xml" );
     m_requestData = request.toLatin1();
 
+    QEventLoop eventLoop;
+
+    connect( this, SIGNAL( routeCalculated( GeoDataDocument* ) ),
+             &eventLoop, SLOT( quit() ) );
+
     // @todo FIXME Must currently be done in the main thread, see bug 257376
     QTimer::singleShot( 0, this, SLOT( get() ) );
+
+    eventLoop.exec();
 }
 
 void OpenRouteServiceRunner::get()

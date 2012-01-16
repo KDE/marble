@@ -65,8 +65,15 @@ void OsmNominatimRunner::search( const QString &searchTerm )
     m_request.setUrl(QUrl(url));
     m_request.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
 
+    QEventLoop eventLoop;
+
+    connect( this, SIGNAL( searchFinished( QVector<GeoDataPlacemark*> ) ),
+             &eventLoop, SLOT( quit() ) );
+
     // @todo FIXME Must currently be done in the main thread, see bug 257376
     QTimer::singleShot( 0, this, SLOT( startSearch() ) );
+
+    eventLoop.exec();
 }
 
 void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
@@ -82,8 +89,15 @@ void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates
     m_request.setUrl(QUrl(url));
     m_request.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
 
+    QEventLoop eventLoop;
+
+    connect( this, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
+             &eventLoop, SLOT( quit() ) );
+
     // @todo FIXME Must currently be done in the main thread, see bug 257376
     QTimer::singleShot( 0, this, SLOT( startReverseGeocoding() ) );
+
+    eventLoop.exec();
 }
 
 void OsmNominatimRunner::startSearch()

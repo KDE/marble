@@ -124,7 +124,7 @@ QList<RunnerPlugin*> MarbleRunnerManagerPrivate::plugins( RunnerPlugin::Capabili
 void MarbleRunnerManagerPrivate::cleanupSearchTask( RunnerTask* task )
 {
     m_searchTasks.removeAll( task );
-    mDebug() << "removing task " << m_searchTasks.size() << " " << (long)task;
+    mDebug() << "removing search task" << m_searchTasks.size() << (long)task;
     if ( m_searchTasks.isEmpty() ) {
         emit q->searchFinished( m_lastSearchTerm );
         emit q->placemarkSearchFinished();
@@ -205,12 +205,7 @@ void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
 
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Search );
     foreach( RunnerPlugin* plugin, plugins ) {
-        MarbleAbstractRunner* runner = plugin->newRunner();
-        runner->setParent( this );
-        connect( runner, SIGNAL( searchFinished( QVector<GeoDataPlacemark*> ) ),
-                 this, SLOT( addSearchResult( QVector<GeoDataPlacemark*> ) ) );
-        runner->setModel( d->m_marbleModel );
-        SearchTask* task = new SearchTask( runner, searchTerm );
+        SearchTask* task = new SearchTask( plugin, this, d->m_marbleModel, searchTerm );
         connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupSearchTask( RunnerTask* ) ) );
         d->m_searchTasks << task;
         mDebug() << "search task " << plugin->nameId() << " " << (long)task;
@@ -265,12 +260,7 @@ void MarbleRunnerManager::reverseGeocoding( const GeoDataCoordinates &coordinate
     d->m_reverseGeocodingResults.removeAll( coordinates );
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::ReverseGeocoding );
     foreach( RunnerPlugin* plugin, plugins ) {
-        MarbleAbstractRunner* runner = plugin->newRunner();
-        runner->setParent( this );
-        connect( runner, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
-                 this, SLOT( addReverseGeocodingResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
-        runner->setModel( d->m_marbleModel );
-        ReverseGeocodingTask* task = new ReverseGeocodingTask( runner, coordinates );
+        ReverseGeocodingTask* task = new ReverseGeocodingTask( plugin, this, d->m_marbleModel, coordinates );
         connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupReverseGeocodingTask(RunnerTask*) ) );
         mDebug() << "reverse task " << plugin->nameId() << " " << (long)task;
         d->m_reverseTasks << task;
@@ -324,12 +314,7 @@ void MarbleRunnerManager::retrieveRoute( const RouteRequest *request )
             continue;
         }
 
-        MarbleAbstractRunner* runner = plugin->newRunner();
-        runner->setParent( this );
-        connect( runner, SIGNAL( routeCalculated( GeoDataDocument* ) ),
-                 this, SLOT( addRoutingResult( GeoDataDocument* ) ) );
-        runner->setModel( d->m_marbleModel );
-        RoutingTask* task = new RoutingTask( runner, request );
+        RoutingTask* task = new RoutingTask( plugin, this, d->m_marbleModel, request );
         connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupRoutingTask( RunnerTask* ) ) );
         mDebug() << "route task " << plugin->nameId() << " " << (long)task;
         d->m_routingTasks << task;
@@ -370,10 +355,7 @@ void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role 
 {
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Parsing );
     foreach( RunnerPlugin *plugin, plugins ) {
-        MarbleAbstractRunner* runner = plugin->newRunner();
-        connect( runner, SIGNAL( parsingFinished( GeoDataDocument*, QString ) ),
-                 this, SLOT( addParsingResult( GeoDataDocument*, QString )) );
-        ParsingTask *task = new ParsingTask( runner, fileName, role );
+        ParsingTask *task = new ParsingTask( plugin, this, fileName, role );
         connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupParsingTask(RunnerTask*) ) );
         mDebug() << "parse task " << plugin->nameId() << " " << (long)task;
         d->m_parsingTasks << task;
