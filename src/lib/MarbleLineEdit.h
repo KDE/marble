@@ -15,6 +15,8 @@
 #ifndef MARBLE_ROUTINGLINEEDIT_H
 #define MARBLE_ROUTINGLINEEDIT_H
 
+#include "marble_export.h"
+
 #include <QtGui/QLineEdit>
 
 namespace Marble
@@ -27,7 +29,7 @@ class MarbleLineEditPrivate;
   * in the line edit when clicked with the left mouse button. It replaces the line
   * edit input with the current clipboard content on a middle mouse button click.
   */
-class MarbleLineEdit : public QLineEdit
+class MARBLE_EXPORT MarbleLineEdit : public QLineEdit
 {
     Q_OBJECT
 
