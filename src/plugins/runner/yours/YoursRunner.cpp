@@ -74,8 +74,16 @@ void YoursRunner::retrieveRoute( const RouteRequest *route )
     // mDebug() << "GET: " << request;
 
     m_request = QNetworkRequest( QUrl( request ) );
+
+    QEventLoop eventLoop;
+
+    connect( this, SIGNAL( routeCalculated( GeoDataDocument* ) ),
+             &eventLoop, SLOT( quit() ) );
+
     // @todo FIXME Must currently be done in the main thread, see bug 257376
     QTimer::singleShot( 0, this, SLOT( get() ) );
+
+    eventLoop.exec();
 }
 
 void YoursRunner::get()
