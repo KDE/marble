@@ -101,8 +101,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_routingWindow( 0 ),
         m_trackingWindow( 0 ),
         m_gotoDialog( 0 ),
-        m_routingWidget( 0 ),
-        m_searchField( 0 )
+        m_routingWidget( 0 )
 {
 #ifdef Q_WS_MAEMO_5
     setAttribute( Qt::WA_Maemo5StackedWindow );
@@ -131,7 +130,11 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     // Load bookmark file. If it does not exist, a default one will be used.
     m_controlView->marbleModel()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
 
-    createToolBar();
+    const bool smallscreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+
+    if ( !smallscreen ) {
+        createToolBar();
+    }
     createActions();
     createMenus();
     createStatusBar();
@@ -945,18 +948,18 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::createToolBar()
 {
     QToolBar* toolBar = addToolBar( tr( "Main ToolBar" ) );
-    m_searchField = new SearchInputWidget( this );
-    m_searchField->setCompletionModel( m_controlView->marbleModel()->placemarkModel() );
-    m_searchField->setMaximumWidth( 400 );
-    connect( m_searchField, SIGNAL( search( QString ) ), m_controlView, SLOT( search( QString ) ) );
-    connect( m_searchField, SIGNAL( centerOn( const GeoDataCoordinates &) ),
+    SearchInputWidget *searchField = new SearchInputWidget( this );
+    searchField->setCompletionModel( m_controlView->marbleModel()->placemarkModel() );
+    searchField->setMaximumWidth( 400 );
+    connect( searchField, SIGNAL( search( QString ) ), m_controlView, SLOT( search( QString ) ) );
+    connect( searchField, SIGNAL( centerOn( const GeoDataCoordinates &) ),
              m_controlView->marbleWidget(), SLOT( centerOn( const GeoDataCoordinates & ) ) );
-    connect( m_controlView, SIGNAL( searchFinished() ), m_searchField, SLOT( disableSearchAnimation() ) );
+    connect( m_controlView, SIGNAL( searchFinished() ), searchField, SLOT( disableSearchAnimation() ) );
 
     QKeySequence searchShortcut( Qt::CTRL + Qt::Key_F );
-    m_searchField->setToolTip( QString( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchShortcut.toString() ) );
-    new QShortcut( searchShortcut, m_searchField, SLOT( setFocus() ) );
-    toolBar->addWidget( m_searchField );
+    searchField->setToolTip( QString( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchShortcut.toString() ) );
+    new QShortcut( searchShortcut, searchField, SLOT( setFocus() ) );
+    toolBar->addWidget( searchField );
 }
 
 QString MainWindow::readMarbleDataPath()

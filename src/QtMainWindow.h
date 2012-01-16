@@ -35,7 +35,6 @@ class DownloadRegionDialog;
 class RoutingWidget;
 class StackableWindow;
 class GoToDialog;
-class SearchInputWidget;
 
 class MainWindow : public QMainWindow
 {
@@ -224,7 +223,6 @@ private:
     RoutingWidget *m_routingWidget;
 
     QString m_lastFileOpenPath;
-    SearchInputWidget* m_searchField;
 };
 
 } // namespace Marble
