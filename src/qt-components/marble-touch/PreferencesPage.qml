@@ -31,7 +31,7 @@ Page {
         anchors.margins: 5
 
         columns: inPortrait ? 1 : 2
-        rows: 8 / columns
+        rows: 10 / columns
         spacing: 10
 
         property int leftRowWidth: inPortrait ? parent.width : 250
@@ -294,6 +294,18 @@ Page {
                 onLinkActivated: Qt.openUrlExternally(link)
                 font.pixelSize: 16
             }
+        }
+
+        Label {
+            width: pageGrid.leftRowWidth
+            text: "Additional Map Themes"
+        }
+
+        Button {
+            id: manageThemeButton
+            text: "Manage"
+            onClicked: pageStack.push(themePage)
+            MapThemePage { id: themePage }
         }
     }
 }

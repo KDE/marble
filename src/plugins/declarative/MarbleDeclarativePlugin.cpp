@@ -24,6 +24,7 @@
 #include "RelatedActivities.h"
 #include "Settings.h"
 #include "StreetMapThemeModel.h"
+#include "NewstuffModel.h"
 #include "routing/SpeakersModel.h"
 #include "routing/VoiceNavigationModel.h"
 
@@ -51,6 +52,7 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
     qmlRegisterType<MapThemeManager>( uri, 0, 11, "MapThemeManager" );
     qmlRegisterType<Marble::SpeakersModel>( uri, 0, 11, "SpeakersModel" );
     qmlRegisterType<Marble::VoiceNavigationModel>( uri, 0, 11, "VoiceNavigation" );
+    qmlRegisterType<Marble::NewstuffModel>( uri, 0, 11, "NewstuffModel" );
 
     qmlRegisterUncreatableType<StreetMapThemeModel>( uri, 0, 11, "StreetMapThemeModel", "Available from MarbleWidget only" );
 }
