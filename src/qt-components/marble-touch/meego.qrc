@@ -29,6 +29,7 @@
         <file>icons/routing-pedestrian.svg</file>
         <file>icons/routing-motorcar.svg</file>
         <file>MapThemeSelectionPage.qml</file>
+        <file>MapThemePage.qml</file>
         <file>PreferencesPage.qml</file>
     </qresource>
 </RCC>

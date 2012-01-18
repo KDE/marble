@@ -220,6 +220,7 @@ set(marblewidget_SRCS
     ElevationModel.cpp
 
     kineticmodel.cpp
+    NewstuffModel.cpp
 )
 
 set (marblewidget_UI
