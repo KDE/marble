@@ -56,7 +56,7 @@ ZoomButtonInterceptorPrivate::~ZoomButtonInterceptorPrivate()
 bool ZoomButtonInterceptor::eventFilter(QObject *, QEvent *event)
 {
 #ifdef HARMATTAN_ZOOMINTERCEPTOR
-    if ( event->type() == QEvent::KeyPress ) {
+    if ( event->type() == QEvent::KeyPress && d->m_widget->isVisible() ) {
         QKeyEvent* keyEvent = static_cast<QKeyEvent*>( event );
         if ( keyEvent->key() == Qt::Key_VolumeDown ) {
             d->m_widget->zoomOut();
