@@ -51,13 +51,14 @@ void GpsdConnection::initialize()
     gps_data_t* data = m_gpsd.open();
     success = ( data != 0 );
 #endif
+#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 3 ) && defined( WATCH_ENABLE )
+    if ( success ) {
+        success = (m_gpsd.stream( WATCH_ENABLE ) != NULL);
+    }
+#endif
     if ( success ) {
         m_status = PositionProviderStatusAcquiring;
         emit statusChanged( m_status );
-
-#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 3 ) && defined( WATCH_ENABLE )
-        m_gpsd.stream( WATCH_ENABLE );
-#endif
         m_timer.start( gpsUpdateInterval );
     }
     else {
