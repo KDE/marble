@@ -126,6 +126,10 @@ void MarbleRunnerManagerPrivate::cleanupSearchTask( RunnerTask* task )
     m_searchTasks.removeAll( task );
     mDebug() << "removing search task" << m_searchTasks.size() << (long)task;
     if ( m_searchTasks.isEmpty() ) {
+        if( m_placemarkContainer.isEmpty() ) {
+            emit q->searchResultChanged( m_model );
+            emit q->searchResultChanged( m_placemarkContainer );
+        }
         emit q->searchFinished( m_lastSearchTerm );
         emit q->placemarkSearchFinished();
     }

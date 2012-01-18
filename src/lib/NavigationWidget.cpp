@@ -182,6 +182,10 @@ void NavigationWidget::changeZoom( int zoom )
 
 void NavigationWidget::setLocations( QVector<GeoDataPlacemark*> locations )
 {
+    if( locations.isEmpty() ) {
+        return;
+    }
+
     QTime t;
     t.start();
 
