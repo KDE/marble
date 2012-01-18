@@ -235,6 +235,8 @@ MonavPlugin::MonavPlugin( QObject *parent ) : RunnerPlugin( parent ), d( new Mon
     } else {
         setStatusMessage( tr ( "The monav routing daemon does not seem to be installed on your system." ) );
     }
+
+    connect( qApp, SIGNAL( aboutToQuit() ), this, SLOT( stopDaemon() ) );
 }
 
 MonavPlugin::~MonavPlugin()
