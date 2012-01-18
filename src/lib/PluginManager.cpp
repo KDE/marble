@@ -51,17 +51,7 @@ class PluginManagerPrivate
 
 PluginManagerPrivate::~PluginManagerPrivate()
 {
-    qDeleteAll( m_renderPluginTemplates );
-    m_renderPluginTemplates.clear();
-
-    qDeleteAll( m_networkPluginTemplates );
-    m_networkPluginTemplates.clear();
-
-    qDeleteAll( m_positionProviderPluginTemplates );
-    m_positionProviderPluginTemplates.clear();
-
-    qDeleteAll( m_runnerPlugins );
-    m_runnerPlugins.clear();
+    // nothing to do
 }
 
 PluginManager::PluginManager( QObject *parent )
@@ -143,16 +133,10 @@ void PluginManagerPrivate::loadPlugins()
 
     MarbleDirs::debug();
 
-    qDeleteAll( m_renderPluginTemplates );
-    m_renderPluginTemplates.clear();
-
-    qDeleteAll( m_networkPluginTemplates );
-    m_networkPluginTemplates.clear();
-
-    qDeleteAll( m_positionProviderPluginTemplates );
-    m_positionProviderPluginTemplates.clear();
-
-    // No need to delete runner plugins
+    Q_ASSERT( m_renderPluginTemplates.isEmpty() );
+    Q_ASSERT( m_networkPluginTemplates.isEmpty() );
+    Q_ASSERT( m_positionProviderPluginTemplates.isEmpty() );
+    Q_ASSERT( m_runnerPlugins.isEmpty() );
 
     foreach( const QString &fileName, pluginFileNameList ) {
         // mDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );

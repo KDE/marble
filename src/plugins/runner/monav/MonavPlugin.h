@@ -57,6 +57,8 @@ public:
 
 private:
     MonavPluginPrivate* const d;
+
+    Q_PRIVATE_SLOT( d, void stopDaemon() )
 };
 
 }
