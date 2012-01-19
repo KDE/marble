@@ -15,6 +15,7 @@
 #include "MarbleClock.h"
 
 #include "sgp4/sgp4io.h"
+#include <locale.h>
 
 using namespace Marble;
 
