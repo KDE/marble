@@ -304,7 +304,7 @@ void RoutingWidget::activateItem ( const QModelIndex &index )
     if ( d->m_activeInput && index.isValid() ) {
         QVariant data = index.data( MarblePlacemarkModel::CoordinateRole );
         if ( !data.isNull() ) {
-            d->m_activeInput->setTargetPosition( qVariantValue<GeoDataCoordinates>( data) );
+            d->m_activeInput->setTargetPosition( qVariantValue<GeoDataCoordinates>( data), index.data().toString() );
         }
     }
 }

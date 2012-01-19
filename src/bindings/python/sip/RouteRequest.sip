@@ -32,9 +32,9 @@ public:
     Marble::GeoDataCoordinates  destination () const;
     int                     size () const;
     Marble::GeoDataCoordinates  at (int index) const;
-    void                    append (const Marble::GeoDataCoordinates& coordinates);
-    void                    insert (int index, const Marble::GeoDataCoordinates& coordinates);
-    void                    setPosition (int index, const Marble::GeoDataCoordinates& position);
+    void                    append (const Marble::GeoDataCoordinates& coordinates, const QString& name);
+    void                    insert (int index, const Marble::GeoDataCoordinates& coordinates, const QString& name);
+    void                    setPosition (int index, const Marble::GeoDataCoordinates& position, const QString& name);
     void                    remove (int index);
     void                    clear ();
     void                    addVia (const Marble::GeoDataCoordinates& position);

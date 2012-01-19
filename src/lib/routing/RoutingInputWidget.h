@@ -97,7 +97,7 @@ public Q_SLOTS:
       * eliminating any previously set positions
       * @see selectPlacemark hasTargetPosition
       */
-    void setTargetPosition( const GeoDataCoordinates &position );
+    void setTargetPosition( const GeoDataCoordinates &position, const QString &name = QString() );
 
     /** Cancel a started input request from the map */
     void abortMapInputRequest();

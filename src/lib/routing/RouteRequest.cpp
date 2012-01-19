@@ -195,19 +195,21 @@ void RouteRequest::clear()
     }
 }
 
-void RouteRequest::insert( int index, const GeoDataCoordinates &coordinates )
+void RouteRequest::insert( int index, const GeoDataCoordinates &coordinates, const QString &name )
 {
     GeoDataPlacemark placemark;
     placemark.setCoordinate( GeoDataPoint( coordinates ) );
     d->m_route.insert( index, placemark );
+    setName( index, name );
     emit positionAdded( index );
 }
 
-void RouteRequest::append( const GeoDataCoordinates &coordinates )
+void RouteRequest::append( const GeoDataCoordinates &coordinates, const QString &name )
 {
     GeoDataPlacemark placemark;
     placemark.setCoordinate( GeoDataPoint( coordinates ) );
     d->m_route.append( placemark );
+    setName( d->m_route.size()-1, name );
     emit positionAdded( d->m_route.size()-1 );
 }
 
@@ -228,12 +230,13 @@ void RouteRequest::addVia( const GeoDataCoordinates &position )
     emit positionAdded( index );
 }
 
-void RouteRequest::setPosition( int index, const GeoDataCoordinates &position )
+void RouteRequest::setPosition( int index, const GeoDataCoordinates &position, const QString &name )
 {
     if ( index >= 0 && index < d->m_route.size() ) {
         GeoDataPlacemark placemark;
         placemark.setCoordinate( GeoDataPoint( position ) );
         d->m_route[index] = placemark;
+        setName( index, name );
         setVisited( index, false );
         emit positionChanged( index, position );
     }

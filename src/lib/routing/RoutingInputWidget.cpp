@@ -278,7 +278,13 @@ void RoutingInputWidget::reverseGeocoding()
         return;
     }
 
-    d->m_runnerManager->reverseGeocoding( targetPosition() );
+    QString const name = d->m_route->name( d->m_index );
+    if ( name.isEmpty() || name == tr( "Current Location" ) ) {
+        d->m_runnerManager->reverseGeocoding( targetPosition() );
+    } else {
+        d->m_lineEdit->setText( name );
+        d->m_lineEdit->setCursorPosition( 0 );
+    }
 }
 
 void RoutingInputWidget::setPlacemarkModel( QAbstractItemModel *model )
@@ -286,12 +292,16 @@ void RoutingInputWidget::setPlacemarkModel( QAbstractItemModel *model )
     d->m_placemarkModel = dynamic_cast<MarblePlacemarkModel*>(model);
 }
 
-void RoutingInputWidget::setTargetPosition( const GeoDataCoordinates &position )
+void RoutingInputWidget::setTargetPosition( const GeoDataCoordinates &position, const QString &name )
 {
     if ( d->m_mapInput ) {
         d->m_mapInput->setChecked( false );
     }
-    d->m_route->setPosition( d->m_index, position );
+    d->m_route->setPosition( d->m_index, position, name );
+    if ( !name.isEmpty() ) {
+        d->m_lineEdit->setText( name );
+        d->m_lineEdit->setCursorPosition( 0 );
+    }
     d->m_progressTimer.stop();
     emit targetValidityChanged( true );
 }

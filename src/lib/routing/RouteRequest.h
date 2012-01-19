@@ -53,13 +53,13 @@ public:
     GeoDataCoordinates at( int index ) const;
 
     /** Add the given element to the end */
-    void append( const GeoDataCoordinates &coordinates );
+    void append( const GeoDataCoordinates &coordinates, const QString &name = QString() );
 
     /** Add the given element at the given position */
-    void insert( int index, const GeoDataCoordinates &coordinates );
+    void insert( int index, const GeoDataCoordinates &coordinates, const QString &name = QString() );
 
     /** Change the value of the element at the given position */
-    void setPosition( int index, const GeoDataCoordinates &position );
+    void setPosition( int index, const GeoDataCoordinates &position, const QString &name = QString() );
 
     /** Remove the element at the given position */
     void remove( int index );

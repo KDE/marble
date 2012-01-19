@@ -201,12 +201,12 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
             loaded = true;
             QVector<GeoDataPlacemark*> placemarks = viaPoints->placemarkList();
             for( int i=0; i<placemarks.size(); ++i ) {
+                QString const name = placemarks[i]->name();
                 if ( i < m_routeRequest.size() ) {
-                    m_routeRequest.setPosition( i, placemarks[i]->coordinate() );
+                    m_routeRequest.setPosition( i, placemarks[i]->coordinate(), name );
                 } else {
-                    m_routeRequest.append( placemarks[i]->coordinate() );
+                    m_routeRequest.append( placemarks[i]->coordinate(), name );
                 }
-                m_routeRequest.setName( m_routeRequest.size()-1, placemarks[i]->name() );
             }
 
             for ( int i=placemarks.size(); i<m_routeRequest.size(); ++i ) {
@@ -434,10 +434,10 @@ void RoutingManagerPrivate::recalculateRoute( bool deviated )
         }
 
         if ( m_routeRequest.size() == 2 && m_routeRequest.visited( 0 ) && !m_routeRequest.visited( 1 ) ) {
-            m_routeRequest.setPosition( 0, m_marbleModel->positionTracking()->currentLocation() );
+            m_routeRequest.setPosition( 0, m_marbleModel->positionTracking()->currentLocation(), QObject::tr( "Current Location" ) );
             q->retrieveRoute();
         } else if ( m_routeRequest.size() != 0 && !m_routeRequest.visited( m_routeRequest.size()-1 ) ) {
-            m_routeRequest.insert( 0, m_marbleModel->positionTracking()->currentLocation() );
+            m_routeRequest.insert( 0, m_marbleModel->positionTracking()->currentLocation(), QObject::tr( "Current Location" ) );
             q->retrieveRoute();
         }
     }
