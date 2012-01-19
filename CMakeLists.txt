@@ -283,7 +283,7 @@ ADD_CUSTOM_TARGET(svnversion
 
 
 #############################################################
-if (NOT MSVC)
+if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_C_COMPILER MATCHES "icc")
     # Its good programming practice to build with no warnings...
     add_definitions( -Wall -Wextra -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Wno-long-long
                      -Wchar-subscripts -Wcast-align -Wpointer-arith -Wformat-security )
@@ -292,7 +292,7 @@ if (NOT MSVC)
     if (PEDANTIC)
         add_definitions( -Werror )
     endif (PEDANTIC)
-endif (NOT MSVC)
+endif (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_C_COMPILER MATCHES "icc")
 
 #############################################################
 # Add a compiler def so that we can conditionally compile
