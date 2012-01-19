@@ -19,14 +19,16 @@ SOURCES += main.cpp \
     NasaWorldWindToOpenStreetMapConverter.cpp \
     NwwMapImage.cpp \
     OsmTileClusterRenderer.cpp \
-    Thread.cpp
+    Thread.cpp \
+    ReadOnlyMapImage.cpp
 
 HEADERS += \
     NasaWorldWindToOpenStreetMapConverter.h \
     NwwMapImage.h \
     OsmTileClusterRenderer.h \
     Thread.h \
-    mapreproject.h
+    mapreproject.h \
+    ReadOnlyMapImage.h
 
 unix|win32: LIBS += -lQtGui
 

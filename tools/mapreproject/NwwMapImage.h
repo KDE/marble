@@ -2,6 +2,7 @@
 #define NWWIMAGE_H
 
 #include "mapreproject.h"
+#include "ReadOnlyMapImage.h"
 
 #include <QtCore/QCache>
 #include <QtCore/QDir>
@@ -10,13 +11,14 @@
 #include <QtGui/QColor>
 #include <QtGui/QImage>
 
-class NwwMapImage
+class NwwMapImage: public ReadOnlyMapImage
 {
 public:
     NwwMapImage();
     NwwMapImage( QDir const & baseDirectory, int const tileLevel );
 
-    QRgb pixel( double const lonRad, double const latRad );
+    virtual QRgb pixel( double const lonRad, double const latRad );
+
     QRgb pixel( int const x, int const y );
     void setBaseDirectory( QDir const & baseDirectory );
     void setInterpolationMethod( InterpolationMethod const method );
