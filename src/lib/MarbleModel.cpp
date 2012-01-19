@@ -25,6 +25,11 @@
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QSortFilterProxyModel>
 
+#if (QT_VERSION >= 0x040700 && QT_VERSION < 0x040800)
+// See comment below why this is needed
+#include <QtNetwork/QNetworkConfigurationManager>
+#endif
+
 #include "kdescendantsproxymodel.h"
 
 #include "MapThemeManager.h"
@@ -157,6 +162,17 @@ MarbleModel::MarbleModel( QObject *parent )
     : QObject( parent ),
       d( new MarbleModelPrivate() )
 {
+#if (QT_VERSION >= 0x040700 && QT_VERSION < 0x040800)
+    // KDE bug 288612, comment 12: Due to some bug in Qt 4.7 a segfault will occur
+    // if the first QNetworkConfigurationManager instance is created by a thread
+    // that is not the GUI thread. This leads to segfaults at startup when e.g.
+    // reverse geocoding is called very early. Therefore we create an instance here
+    // before any runners will work.
+    // QNetworkConfigurationManager was introduced in Qt 4.7, the segfault does not
+    // happen with 4.8, thus the Qt version check.
+    new QNetworkConfigurationManager( this );
+#endif
+
     // The thread will be started at setting persistent tile cache size.
     connect( this, SIGNAL( themeChanged( QString ) ),
              &d->m_storageWatcher, SLOT( updateTheme( QString ) ) );
