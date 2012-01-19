@@ -223,7 +223,7 @@ QColor const oxygenForestGreen4 = QColor::fromRgb( 55, 164, 44 );
 
 // String for about dialog and http user agent
 // FIXME: check if blanks are allowed in user agent version numbers
-const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.12.97 (0.13 Release Candidate 2)" );
+const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.13.0 (stable release)" );
 
 // API Version id:
 // form : 0xMMmmpp
