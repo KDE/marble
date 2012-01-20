@@ -85,26 +85,22 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
     // Please refrain from making this URI public. To use it outside the scope
     // of marble you need permission from the openrouteservice.org team.
     QUrl url = QUrl( "http://openls.geog.uni-heidelberg.de/osm/eu/routing" );
-    m_request = QNetworkRequest( url );
-    m_request.setHeader( QNetworkRequest::ContentTypeHeader, "application/xml" );
-    m_requestData = request.toLatin1();
+
+    QNetworkRequest networkRequest = QNetworkRequest( url );
+    networkRequest.setHeader( QNetworkRequest::ContentTypeHeader, "application/xml" );
+
+    QByteArray requestData = request.toLatin1();
+
+    QNetworkReply *reply = m_networkAccessManager->post( networkRequest, requestData );
+    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
+             this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
 
     QEventLoop eventLoop;
 
     connect( this, SIGNAL( routeCalculated( GeoDataDocument* ) ),
              &eventLoop, SLOT( quit() ) );
 
-    // @todo FIXME Must currently be done in the main thread, see bug 257376
-    QTimer::singleShot( 0, this, SLOT( get() ) );
-
     eventLoop.exec();
-}
-
-void OpenRouteServiceRunner::get()
-{
-    QNetworkReply *reply = m_networkAccessManager->post( m_request, m_requestData );
-    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
-             this, SLOT( handleError( QNetworkReply::NetworkError ) ), Qt::DirectConnection );
 }
 
 void OpenRouteServiceRunner::retrieveData( QNetworkReply *reply )

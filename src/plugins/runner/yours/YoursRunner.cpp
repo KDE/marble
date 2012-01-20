@@ -73,24 +73,18 @@ void YoursRunner::retrieveRoute( const RouteRequest *route )
     QString request = base + args + preferences;
     // mDebug() << "GET: " << request;
 
-    m_request = QNetworkRequest( QUrl( request ) );
+    QNetworkRequest networkRequest = QNetworkRequest( QUrl( request ) );
+
+    QNetworkReply *reply = m_networkAccessManager->get( networkRequest );
+    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
+             this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
 
     QEventLoop eventLoop;
 
     connect( this, SIGNAL( routeCalculated( GeoDataDocument* ) ),
              &eventLoop, SLOT( quit() ) );
 
-    // @todo FIXME Must currently be done in the main thread, see bug 257376
-    QTimer::singleShot( 0, this, SLOT( get() ) );
-
     eventLoop.exec();
-}
-
-void YoursRunner::get()
-{
-    QNetworkReply *reply = m_networkAccessManager->get( m_request );
-    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
-             this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
 }
 
 void YoursRunner::retrieveData( QNetworkReply *reply )

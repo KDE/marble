@@ -62,16 +62,18 @@ void OsmNominatimRunner::search( const QString &searchTerm )
     QString query = "q=%1&format=xml&addressdetails=1&accept-language=%2";
     QString url = QString(base + query).arg(searchTerm).arg(MarbleLocale::languageCode());
 
-    m_request.setUrl(QUrl(url));
-    m_request.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
+    QNetworkRequest networkRequest;
+    networkRequest.setUrl(QUrl(url));
+    networkRequest.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
+
+    QNetworkReply *reply = m_manager->get( networkRequest );
+    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
+             this, SLOT( returnNoResults() ) );
 
     QEventLoop eventLoop;
 
     connect( this, SIGNAL( searchFinished( QVector<GeoDataPlacemark*> ) ),
              &eventLoop, SLOT( quit() ) );
-
-    // @todo FIXME Must currently be done in the main thread, see bug 257376
-    QTimer::singleShot( 0, this, SLOT( startSearch() ) );
 
     eventLoop.exec();
 }
@@ -86,32 +88,20 @@ void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates
     double lat = coordinates.latitude( GeoDataCoordinates::Degree );
     QString url = QString( base + query ).arg( lon ).arg( lat ).arg( MarbleLocale::languageCode() );
 
-    m_request.setUrl(QUrl(url));
-    m_request.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
+    QNetworkRequest networkRequest;
+    networkRequest.setUrl(QUrl(url));
+    networkRequest.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
+
+    QNetworkReply *reply = m_manager->get( networkRequest );
+    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
+             this, SLOT( returnNoReverseGeocodingResult() ) );
 
     QEventLoop eventLoop;
 
     connect( this, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
              &eventLoop, SLOT( quit() ) );
 
-    // @todo FIXME Must currently be done in the main thread, see bug 257376
-    QTimer::singleShot( 0, this, SLOT( startReverseGeocoding() ) );
-
     eventLoop.exec();
-}
-
-void OsmNominatimRunner::startSearch()
-{
-    QNetworkReply *reply = m_manager->get( m_request );
-    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
-            this, SLOT(returnNoResults()));
-}
-
-void OsmNominatimRunner::startReverseGeocoding()
-{
-    QNetworkReply *reply = m_manager->get( m_request );
-    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
-            this, SLOT(returnNoReverseGeocodingResult()));
 }
 
 void OsmNominatimRunner::handleResult( QNetworkReply* reply )
