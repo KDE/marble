@@ -25,7 +25,7 @@ namespace Marble
 class TCCoreApplication : public QCoreApplication
 {
     public:
-        TCCoreApplication( int argc, char ** argv );
+        TCCoreApplication( int & argc, char ** argv );
         
     private:
         TileCreator *m_tilecreator;

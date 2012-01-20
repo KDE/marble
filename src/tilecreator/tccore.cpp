@@ -12,7 +12,7 @@
 
 using namespace Marble;
 
-TCCoreApplication::TCCoreApplication( int argc, char ** argv ) : QCoreApplication( argc, argv )
+TCCoreApplication::TCCoreApplication( int & argc, char ** argv ) : QCoreApplication( argc, argv )
 {
     
     if( !(argc < 5) )
