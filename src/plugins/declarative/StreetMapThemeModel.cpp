@@ -17,26 +17,11 @@
 
 #include <QtCore/QModelIndex>
 
-StreetMapThemeModel::StreetMapThemeModel( Marble::MapThemeManager *themeManager )
+StreetMapThemeModel::StreetMapThemeModel( Marble::MapThemeManager *themeManager ) :
+    m_themeManager( themeManager )
 {
-    /** @todo Extend .dgml spec by categories to simplify this
-      * The map theme model items should specify the planet and a set of
-      * categories/tags (arbitrary strings) to simplify filtering for specific
-      * map theme properties.
-      * E.g. the item for earth/openstreetmap/openstreetmap.dgml should have
-      * the planet set to earth and categories/tags like "OpenStreetMap, street map"
-      */
-
-    QStringList const themes = themeManager->mapThemeIds();
-    foreach( const QString &theme, themes ) {
-        if ( theme.startsWith( "earth/" ) ) {
-            Marble::GeoSceneDocument* document = themeManager->loadMapTheme( theme );
-            if ( document && document->head()->zoom()->maximum() > 3000 ) {
-                m_streetMapThemeIds << document->head()->mapThemeId();
-                delete document;
-            }
-        }
-    }
+    handleChangedThemes();
+    connect( themeManager, SIGNAL( themesChanged() ), this, SLOT( handleChangedThemes() ) );
 }
 
 int StreetMapThemeModel::count()
@@ -68,6 +53,31 @@ bool StreetMapThemeModel::filterAcceptsRow(int sourceRow, const QModelIndex &sou
 {
      QModelIndex const index = sourceModel()->index( sourceRow, 0, sourceParent );
      return m_streetMapThemeIds.contains( index.data( Qt::UserRole + 1 ).toString() );
+}
+
+void StreetMapThemeModel::handleChangedThemes()
+{
+    /** @todo Extend .dgml spec by categories to simplify this
+      * The map theme model items should specify the planet and a set of
+      * categories/tags (arbitrary strings) to simplify filtering for specific
+      * map theme properties.
+      * E.g. the item for earth/openstreetmap/openstreetmap.dgml should have
+      * the planet set to earth and categories/tags like "OpenStreetMap, street map"
+      */
+
+    m_streetMapThemeIds.clear();
+    QStringList const themes = m_themeManager->mapThemeIds();
+    foreach( const QString &theme, themes ) {
+        if ( theme.startsWith( "earth/" ) ) {
+            Marble::GeoSceneDocument* document = m_themeManager->loadMapTheme( theme );
+            if ( document && document->head()->zoom()->maximum() > 3000 ) {
+                m_streetMapThemeIds << document->head()->mapThemeId();
+                delete document;
+            }
+        }
+    }
+
+    reset();
 }
 
 #include "StreetMapThemeModel.moc"
