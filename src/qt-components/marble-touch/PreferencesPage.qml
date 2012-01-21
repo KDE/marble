@@ -181,7 +181,12 @@ Page {
                         titleText: "Voice Navigation Speaker"
                         selectedIndex: speakers.indexOf(settings.voiceNavigationSpeaker)
                         model: speakers
-                        onAccepted: settings.voiceNavigationSpeaker = speakers.path(selectedIndex)
+                        onAccepted: {
+                            if ( !speakers.isLocal(selectedIndex) ) {
+                                speakers.install(selectedIndex)
+                            }
+                            settings.voiceNavigationSpeaker = speakers.path(selectedIndex)
+                        }
                     }
                 }
             }

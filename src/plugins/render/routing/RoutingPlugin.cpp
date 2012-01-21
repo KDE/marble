@@ -422,7 +422,11 @@ void RoutingPlugin::writeSettings()
     Q_ASSERT( d->m_configDialog );
     int const index = d->m_configUi.speakerComboBox->currentIndex();
     if ( index >= 0 ) {
-        d->m_settings["speaker"] = d->m_speakersModel->data( d->m_speakersModel->index( index ), Qt::UserRole+1 );
+        QModelIndex const idx = d->m_speakersModel->index( index );
+        d->m_settings["speaker"] = d->m_speakersModel->data( idx, SpeakersModel::Path );
+        if ( !d->m_speakersModel->data( idx, SpeakersModel::IsLocal ).toBool() ) {
+            d->m_speakersModel->install( index );
+        }
     }
     d->m_settings["muted"] = !d->m_configUi.voiceNavigationCheckBox->isChecked();
     d->m_settings["sound"] = d->m_configUi.soundRadioButton->isChecked();

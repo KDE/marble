@@ -17,6 +17,8 @@
 namespace Marble
 {
 
+class SpeakersModelPrivate;
+
 class SpeakersModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -24,6 +26,13 @@ class SpeakersModel : public QAbstractListModel
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
+    enum SpeakersModelRoles {
+        Name = Qt::UserRole + 1,
+        Path,
+        IsLocal,
+        IsRemote
+    };
+
     /** Constructor */
     explicit SpeakersModel( QObject *parent = 0 );
 
@@ -44,13 +53,20 @@ public Q_SLOTS:
 
     QString path( int index );
 
+    void install( int index );
+
+    bool isLocal( int index ) const;
+
+    bool isRemote( int index ) const;
+
 Q_SIGNALS:
     void countChanged();
 
 private:
-    void fillModel();
+    SpeakersModelPrivate* const d;
+    friend class SpeakersModelPrivate;
 
-    QList<QFileInfo> m_speakers;
+    Q_PRIVATE_SLOT( d, void fillModel() )
 };
 
 }

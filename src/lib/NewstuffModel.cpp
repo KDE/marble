@@ -147,6 +147,14 @@ void NewstuffModelPrivate::readValue( const QDomNode &node, const QString &key, 
     QDomNodeList matches = node.toElement().elementsByTagName( key );
     if ( matches.size() == 1 ) {
         *target = matches.at( 0 ).toElement().text();
+    } else {
+        for ( int i=0; i<matches.size(); ++i ) {
+            if ( matches.at( i ).attributes().contains( "lang" ) &&
+                 matches.at( i ).attributes().namedItem( "lang").toAttr().value() == "en" ) {
+                *target = matches.at( i ).toElement().text();
+                return;
+            }
+        }
     }
 }
 
