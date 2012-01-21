@@ -39,7 +39,12 @@ protected:
     virtual bool filterAcceptsRow(int sourceRow,
                                   const QModelIndex &sourceParent) const;
 
+private Q_SLOTS:
+    void handleChangedThemes();
+
 private:
+    Marble::MapThemeManager* m_themeManager;
+
     QList<QString> m_streetMapThemeIds;
 };
 
