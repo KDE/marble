@@ -28,7 +28,7 @@ void Route::addRouteSegment( const RouteSegment &segment )
         m_bounds = m_bounds.united( segment.bounds() );
         m_distance += segment.distance();
         m_path << segment.path();
-        if ( segment.maneuver().position().longitude() != 0.0 && segment.maneuver().position().latitude() != 0.0 ) {
+        if ( segment.maneuver().position().longitude() != 0.0 || segment.maneuver().position().latitude() != 0.0 ) {
             m_turnPoints << segment.maneuver().position();
         }
         if ( segment.maneuver().hasWaypoint() ) {
