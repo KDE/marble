@@ -53,9 +53,18 @@ ZoomButtonInterceptorPrivate::~ZoomButtonInterceptorPrivate()
 #endif //HARMATTAN_ZOOMINTERCEPTOR
 }
 
-bool ZoomButtonInterceptor::eventFilter(QObject *, QEvent *event)
+bool ZoomButtonInterceptor::eventFilter(QObject *object, QEvent *event)
 {
 #ifdef HARMATTAN_ZOOMINTERCEPTOR
+    if ( object == d->m_widget ) {
+        if ( event->type() == QEvent::Show ) {
+            d->m_resourceSet->acquire();
+        } else if ( event->type() == QEvent::Hide ) {
+            d->m_resourceSet->release();
+        }
+        return false;
+    }
+
     if ( event->type() == QEvent::KeyPress && d->m_widget->isVisible() ) {
         QKeyEvent* keyEvent = static_cast<QKeyEvent*>( event );
         if ( keyEvent->key() == Qt::Key_VolumeDown ) {
@@ -73,6 +82,7 @@ bool ZoomButtonInterceptor::eventFilter(QObject *, QEvent *event)
         d->m_resourceSet->acquire();
     }
 #else
+    Q_UNUSED( object )
     Q_UNUSED( event )
 #endif // HARMATTAN_ZOOMINTERCEPTOR
 
@@ -84,6 +94,7 @@ ZoomButtonInterceptor::ZoomButtonInterceptor( MarbleWidget *widget, QObject *par
     d( new ZoomButtonInterceptorPrivate( widget ) )
 {
     QApplication::instance()->installEventFilter( this );
+    widget->installEventFilter( this );
 }
 
 ZoomButtonInterceptor::~ZoomButtonInterceptor()
