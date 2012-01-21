@@ -20,6 +20,7 @@ SpeakersModel::SpeakersModel( QObject *parent ) :
 {
     QHash<int,QByteArray> roles = roleNames();
     roles[Qt::UserRole+1] = "path";
+    roles[Qt::UserRole+2] = "name";
     setRoleNames( roles );
 
     fillModel();
@@ -45,6 +46,7 @@ QVariant SpeakersModel::data ( const QModelIndex &index, int role ) const
         switch ( role ) {
         case Qt::DisplayRole: return m_speakers.at( index.row() ).fileName();
         case Qt::UserRole+1: return m_speakers.at( index.row() ).absoluteFilePath();
+        case Qt::UserRole+2: return m_speakers.at( index.row() ).fileName();
         }
     }
 
