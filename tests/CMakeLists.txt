@@ -96,6 +96,7 @@ endif (QTONLY)
 
 
 #################################################
+# dumps a dgml or a kml file without testing anything
 # FIXME turn into automated test or remove
 #################################################
 add_executable(geodatatest GeoDataTest.cpp)
@@ -106,33 +107,33 @@ target_link_libraries (geodatatest marblewidget ${QT_QTCORE_LIBRARY} ${QT_QTGUI_
 ############################
 # Drop in New Tests
 ############################
-qt4_add_resources(TestGeoDataCopy_SRCS TestGeoDataCopy.qrc)
-marble_add_test( TestGeoDataCopy ${TestGeoDataCopy_SRCS} )
-
 marble_add_test( MarbleWidgetSpeedTest )
-marble_add_test( GeoPolygonTest )
-marble_add_test( TestGeoDataParser )
-marble_add_test( TestGeoDataWriter )
 add_definitions( -DDGML_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}/../data/maps/earth\\\"" )
 marble_add_test( TestGeoSceneWriter )
 
-set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
-
-marble_add_test( QuaternionTest )
-marble_add_test( PluginManagerTest )
-marble_add_test( MarbleRunnerManagerTest )
-marble_add_test( MercatorProjectionTest )
-marble_add_test( MarbleMapTest )
-marble_add_test( MarbleWidgetTest )
-marble_add_test( MapViewWidgetTest )
-marble_add_test( TestGeoPainter )
-marble_add_test( TestGeoData ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata/parser/GeoDataTypes.cpp )
-add_definitions( -DCITIES_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}/../data/placemarks/cityplacemarks.kml\\\"" )
-marble_add_test( KMLTest )
-
+marble_add_test( QuaternionTest )           # Check Quaternion arithmetic
+marble_add_test( PluginManagerTest )        # Check plugin loading
+marble_add_test( MarbleRunnerManagerTest )  # Check RunnerManager signals
+marble_add_test( MercatorProjectionTest )   # Check Screen coordinates
+marble_add_test( MarbleMapTest )            # Check map theme and centering
+marble_add_test( MarbleWidgetTest )         # Check map theme, mouse move, repaint and multiple widgets
+marble_add_test( MapViewWidgetTest )        # Check mapview signals
+marble_add_test( TestGeoPainter )           # no tests!
+marble_add_test( GeoPolygonTest )           # Loads an empty pnt file
 #marble_add_test( TestOsmAnnotation )
-marble_add_test( TestGeoDataGeometry )
-marble_add_test( unittest_geodatacoordinates )
-marble_add_test( unittest_geodatalatlonaltbox )
-marble_add_test( TestGeoDataTrack )
+
+## GeoData Classes tests
+marble_add_test( TestGeoData )                  # Check parent, nodetype
+marble_add_test( TestGeoDataCoordinates )       # Check coordinates specifics
+marble_add_test( TestGeoDataLatLonAltBox )      # Check boxen specifics
+marble_add_test( TestGeoDataGeometry )          # Check geometry specifics
+marble_add_test( TestGeoDataTrack )             # Check track specifics
+
+qt4_add_resources(TestGeoDataCopy_SRCS TestGeoDataCopy.qrc) # Check copy operations on CoW classes
+marble_add_test( TestGeoDataCopy ${TestGeoDataCopy_SRCS} )
+
+add_definitions( -DCITIES_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}/../data/placemarks/cityplacemarks.kml\\\"" )
+marble_add_test( TestGeoDataWriter )            # Check parsing, writing, reloading and comparing kml files
+marble_add_test( TestGeoDataPack )              # Check pack and unpack to file
+
 

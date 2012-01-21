@@ -18,20 +18,18 @@
 #include "MarbleDirs.h"
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
-#include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataPolygon.h"
-#include "GeoDataCoordinates.h"
+#include "GeoDataTypes.h"
+#include "GeoWriter.h"
 
 namespace Marble
 {
 
-class KMLTest : public QObject
+class TestGeoDataPack : public QObject
 {
     Q_OBJECT
     private slots:
         void initTestCase();
-        void loadKMLFromData();
         void saveKMLToCache();
         void loadKMLFromCache();
         void saveCitiesToCache();
@@ -41,15 +39,42 @@ class KMLTest : public QObject
         QString content;
 };
 
-void KMLTest::initTestCase()
+bool comparePlacemarks( GeoDataPlacemark *left, GeoDataPlacemark *right )
+{
+    bool equal = true;
+    equal &= ( left != 0 );
+    equal &= ( right != 0 );
+    equal &= ( left->name() == right->name() );
+    equal &= ( left->coordinate() == right->coordinate() );
+    equal &= ( left->geometry()->nodeType() == right->geometry()->nodeType() );
+    return equal;
+}
+
+bool compareDocuments( GeoDataDocument *left, GeoDataDocument *right )
+{
+    bool equal = true;
+    equal &= ( left->size() == right->size() );
+    for( int i=0; i< left->size(); ++i ) {
+        if ( left->at(i).nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+            equal &= comparePlacemarks( dynamic_cast<GeoDataPlacemark*>( left->featureList()[i] ),
+                                        dynamic_cast<GeoDataPlacemark*>( right->featureList()[i] ) );
+        }
+    }
+    return equal;
+}
+
+void TestGeoDataPack::initTestCase()
 {
     MarbleDirs::setMarbleDataPath( DATA_PATH );
     MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
 
     content = QString( 
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-"<kml xmlns=\"http://earth.google.com/kml/2.1\">\n"
+"<kml xmlns=\"http://earth.google.com/kml/2.2\">\n"
 "  <Document>\n"
+"    <Placemark>\n"
+"      <name>Empty</name>\n"
+"    </Placemark>\n"
 "    <Placemark>\n"
 "      <name>LinearRingTest.kml</name>\n"
 "      <Polygon>\n"
@@ -70,42 +95,13 @@ void KMLTest::initTestCase()
 "</kml>" );
 }
 
-void KMLTest::loadKMLFromData()
+void TestGeoDataPack::saveKMLToCache()
 {
     GeoDataParser parser( GeoData_KML );
     
     QByteArray array( content.toUtf8() );
     QBuffer buffer( &array );
     buffer.open( QIODevice::ReadOnly );
-    qDebug() << "Buffer content:" << endl << buffer.buffer();
-    if ( !parser.read( &buffer ) ) {
-        qWarning( "Could not parse data!" );
-        QFAIL( "Could not parse data!" );
-        return;
-    }
-    GeoDocument* document = parser.releaseDocument();
-    QVERIFY( document );
-    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
-    GeoDataFeature *feature = dataDocument->featureList().at( 0 );
-    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
-    GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark->geometry() );
-    qDebug() << placemark->name();
-
-    QVector<GeoDataCoordinates>::iterator iterator = polygon->outerBoundary().begin();
-    for( ; iterator != polygon->outerBoundary().end(); ++iterator ) {
-        qDebug() << (*iterator).toString();
-    }
-    delete document;
-}
-
-void KMLTest::saveKMLToCache()
-{
-    GeoDataParser parser( GeoData_KML );
-    
-    QByteArray array( content.toUtf8() );
-    QBuffer buffer( &array );
-    buffer.open( QIODevice::ReadOnly );
-    qDebug() << "Buffer content:" << endl << buffer.buffer();
     if ( !parser.read( &buffer ) ) {
         qWarning( "Could not parse data!" );
         QFAIL( "Could not parse data!" );
@@ -128,9 +124,9 @@ void KMLTest::saveKMLToCache()
     delete document;
 }
 
-void KMLTest::loadKMLFromCache()
+void TestGeoDataPack::loadKMLFromCache()
 {
-    GeoDataDocument *dataDocument = new GeoDataDocument();
+    GeoDataDocument *cacheDocument = new GeoDataDocument();
     QString path = QString( "%1/%2.cache" );
     path = path.arg( QCoreApplication::applicationDirPath() );
     path = path.arg( QString( "KMLTest" ) );
@@ -138,26 +134,31 @@ void KMLTest::loadKMLFromCache()
     QFile cacheFile( path );
     if ( cacheFile.open( QIODevice::ReadOnly ) ) {
         QDataStream stream ( &cacheFile );
-        dataDocument->unpack( stream );
+        cacheDocument->unpack( stream );
         cacheFile.close();
         qDebug( "Loaded kml document from cache: %s", path.toAscii().data() );
     }
-    QVERIFY( dataDocument );
+    QVERIFY( cacheDocument );
 
-    GeoDataFeature *feature = dataDocument->featureList().at( 0 );
-    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
-    GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>(placemark->geometry());
-    
-    qDebug() << placemark->name();
-    
-    QVector<GeoDataCoordinates>::iterator iterator = polygon->outerBoundary().begin();
-    for( ; iterator != polygon->outerBoundary().end(); ++iterator ) {
-        qDebug() << (*iterator).toString();
+    GeoDataParser parser( GeoData_KML );
+    QByteArray array( content.toUtf8() );
+    QBuffer buffer( &array );
+    buffer.open( QIODevice::ReadOnly );
+    if ( !parser.read( &buffer ) ) {
+        qWarning( "Could not parse data!" );
+        QFAIL( "Could not parse data!" );
+        return;
     }
-    delete dataDocument;
+    GeoDocument* document = parser.releaseDocument();
+    QVERIFY( document );
+    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
+    QVERIFY( compareDocuments( cacheDocument, dataDocument ) );
+
+    delete document;
+    delete cacheDocument;
 }
 
-void KMLTest::saveCitiesToCache()
+void TestGeoDataPack::saveCitiesToCache()
 {
     GeoDataParser parser( GeoData_KML );
     
@@ -182,12 +183,13 @@ void KMLTest::saveCitiesToCache()
         cacheFile.close();
         qDebug( "Saved kml document to cache: %s", path.toAscii().data() );
     }
+    QVERIFY( cacheFile.size() > 0 );
     delete document;
 }
 
-void KMLTest::loadCitiesFromCache()
+void TestGeoDataPack::loadCitiesFromCache()
 {
-    GeoDataDocument *dataDocument = new GeoDataDocument();
+    GeoDataDocument *cacheDocument = new GeoDataDocument();
     QString path = QString( "%1/%2.cache" );
     path = path.arg( QCoreApplication::applicationDirPath() );
     path = path.arg( QString( "CitiesTest" ) );
@@ -195,21 +197,31 @@ void KMLTest::loadCitiesFromCache()
     QFile cacheFile( path );
     if ( cacheFile.open( QIODevice::ReadOnly ) ) {
         QDataStream stream ( &cacheFile );
-        dataDocument->unpack( stream );
+        cacheDocument->unpack( stream );
         cacheFile.close();
         qDebug( "Loaded kml document from cache: %s", path.toAscii().data() );
     }
-    QVERIFY( dataDocument );
+    QVERIFY( cacheDocument );
 
-    qDebug() << dataDocument->featureList().size();
-    for( int i = 0; i < dataDocument->featureList().size(); i++ ) {
-        fprintf( stderr, "Debug: %s\n", dataDocument->featureList()[i]->name().toLocal8Bit().data() );
+    GeoDataParser parser( GeoData_KML );
+    QFile citiesFile( CITIES_PATH );
+    citiesFile.open( QIODevice::ReadOnly );
+    if ( !parser.read( &citiesFile ) ) {
+        qWarning( "Could not parse data!" );
+        QFAIL( "Could not parse data!" );
+        return;
     }
+    GeoDocument* document = parser.releaseDocument();
+    QVERIFY( document );
+    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
+    QVERIFY( compareDocuments( cacheDocument, dataDocument ) );
+
+    delete cacheDocument;
     delete dataDocument;
 }
 
 }
 
-QTEST_MAIN( Marble::KMLTest )
+QTEST_MAIN( Marble::TestGeoDataPack )
 
-#include "KMLTest.moc"
+#include "TestGeoDataPack.moc"
