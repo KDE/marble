@@ -22,7 +22,6 @@
 #include "GeoDataPoint.h"
 #include "GeoDataTreeModel.h"
 #include "GeoDataTypes.h"
-#include "GeoDataParser.h"
 #include "GeoWriter.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
