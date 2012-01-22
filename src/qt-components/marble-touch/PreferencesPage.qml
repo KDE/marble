@@ -182,10 +182,20 @@ Page {
                         selectedIndex: speakers.indexOf(settings.voiceNavigationSpeaker)
                         model: speakers
                         onAccepted: {
-                            if ( !speakers.isLocal(selectedIndex) ) {
+                            if ( speakers.isLocal(selectedIndex) ) {
+                                settings.voiceNavigationSpeaker = speakers.path(selectedIndex)
+                            } else {
+                                voiceNavigationPreviewButton.enabled = false
                                 speakers.install(selectedIndex)
                             }
-                            settings.voiceNavigationSpeaker = speakers.path(selectedIndex)
+                        }
+
+                        Connections {
+                            target: speakers
+                            onInstallationFinished: {
+                                settings.voiceNavigationSpeaker = speakers.path(speakerDialog.selectedIndex)
+                                voiceNavigationPreviewButton.enabled = true
+                            }
                         }
                     }
                 }

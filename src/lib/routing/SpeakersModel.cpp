@@ -40,6 +40,8 @@ public:
     SpeakersModelPrivate( SpeakersModel* parent );
 
     void fillModel();
+
+    void handleInstallation( int );
 };
 
 SpeakersModelItem::SpeakersModelItem() : m_newstuffIndex( -1 )
@@ -58,6 +60,7 @@ SpeakersModelPrivate::SpeakersModelPrivate( SpeakersModel* parent ) :
     m_newstuffModel.setTargetDirectory( QDir::home().filePath( ".local/share/marble/audio/speakers" ) );
     m_newstuffModel.setProvider( "http://edu.kde.org/marble/newstuff/speakers.xml" );
     QObject::connect( &m_newstuffModel, SIGNAL( modelReset() ), m_parent, SLOT( fillModel() ) );
+    QObject::connect( &m_newstuffModel, SIGNAL( installationFinished( int ) ), m_parent, SLOT( handleInstallation( int ) ) );
 }
 
 void SpeakersModelPrivate::fillModel()
@@ -100,6 +103,18 @@ void SpeakersModelPrivate::fillModel()
 
     qSort(m_speakers.begin(), m_speakers.end(), SpeakersModelItem::lessThan);
     m_parent->reset();
+}
+
+void SpeakersModelPrivate::handleInstallation( int row )
+{
+    for ( int j=0; j<m_speakers.size(); ++j ) {
+        if ( m_speakers[j].m_newstuffIndex == row ) {
+            m_speakers[j].m_file.refresh();
+            QModelIndex const affected = m_parent->index( j );
+            emit m_parent->dataChanged( affected, affected );
+            emit m_parent->installationFinished( j );
+        }
+    }
 }
 
 SpeakersModel::SpeakersModel( QObject *parent ) :
