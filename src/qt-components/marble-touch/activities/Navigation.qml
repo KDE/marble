@@ -67,8 +67,9 @@ Page {
         }
     }
 
-    Item {
+    Rectangle {
         id: instructionItem
+        color: Qt.rgba(0/255, 67/255, 138/255, 1)
 
         anchors.top: parent.top
         anchors.left: parent.left
@@ -97,7 +98,7 @@ Page {
             property real distance: isMeter ? Math.round( marbleWidget.navigation.nextInstructionDistance / 10 ) * 10 : Math.round( marbleWidget.navigation.nextInstructionDistance / 100 ) / 10
             property string distanceUnit: isMeter ? "m" : "km"
 
-            color: Qt.rgba(0, 87/255, 174/255, 1)
+            color: Qt.rgba(238/255, 238/255, 236/255, 1)
             text: "<font size=\"+2\">" + distance + "</font>" + "<font size=\"-1\"> " + distanceUnit + "</font>" + "<font size=\"+2\"> " + marbleWidget.navigation.nextRoad + "</font>"
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
         }
@@ -109,48 +110,54 @@ Page {
         }
     }
 
-    Grid {
+    Rectangle {
         id: searchResultView
         anchors.left: navigationActivityPage.left
         anchors.bottom: navigationActivityPage.bottom
         anchors.right: navigationActivityPage.right
-        anchors.margins: 10
-        height: 100
-        spacing: 20
-        property bool portrait: main.inPortrait
 
-        columns: portrait ? 4 : 1
-        rows: portrait ? 1 : 4
-
-        Rectangle {
-            id: speedSeparator
-            visible: !parent.portrait
-            width: parent.portrait ? 100 : parent.width - 20
-            height: 1
-            color: "black"
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: Qt.rgba(46/255, 52/255, 54/255, 1) }
+            GradientStop { position: 0.8; color: Qt.rgba(36/255, 42/255, 44/255, 1) }
+            GradientStop { position: 1.0; color: Qt.rgba(26/255, 32/255, 34/255, 1) }
         }
 
-        Label {
-            id: currentSpeed
-            width: parent.portrait ? 150 : parent.width - 20
-            text: "<font size=\"+2\">" + Math.round( marbleWidget.tracking.positionSource.speed ) + "</font><font size=\"-1\"> km/h</font>"
-        }
+        Grid {
+            anchors.fill: parent
+            anchors.margins: 5
+            spacing: 20
+            property bool portrait: main.inPortrait
 
-        Rectangle {
-            id: distanceSeparator
-            width: parent.portrait ? 1 : parent.width - 20
-            height: parent.portrait ? parent.height - 20 : 1
-            anchors.verticalCenter: parent.portrait ? parent.verticalCenter : undefined
-            color: "black"
-        }
+            columns: portrait ? 4 : 1
+            rows: portrait ? 1 : 4
 
-        Label {
-            id: destinationDistance
-            width: parent.portrait ? 150 : parent.width - 20
-            property bool isMeter: marbleWidget.navigation.destinationDistance < 1000
-            property real distance: isMeter ? Math.round( marbleWidget.navigation.destinationDistance / 10 ) * 10 : Math.round( marbleWidget.navigation.destinationDistance / 100 ) / 10
-            property string distanceUnit: isMeter ? "m" : "km"
-            text: "<img src=\"qrc:/marble/flag-green.svg\"> <font size=\"+2\">" + distance + "</font><font size=\"-1\"> " + distanceUnit + "</font>"
+            Label {
+                id: currentSpeed
+                width: parent.portrait ? parent.width / 2 : parent.width - 10
+                color: Qt.rgba(238/255, 238/255, 236/255, 1)
+                text: "<font size=\"+2\">" + Math.round( marbleWidget.tracking.positionSource.speed ) + "</font><font size=\"-1\"> km/h</font>"
+                horizontalAlignment: parent.portrait ? Text.AlignHCenter : Text.AlignRight
+            }
+
+            Rectangle {
+                id: distanceSeparator
+                visible: !parent.portrait
+                width: parent.portrait ? 1 : parent.width
+                height: parent.portrait ? parent.height - 20 : 1
+                anchors.verticalCenter: parent.portrait ? parent.verticalCenter : undefined
+                color: currentSpeed.color
+            }
+
+            Label {
+                id: destinationDistance
+                width: parent.portrait ? parent.width / 2 : parent.width - 10
+                color: currentSpeed.color
+                property bool isMeter: marbleWidget.navigation.destinationDistance < 1000
+                property real distance: isMeter ? Math.round( marbleWidget.navigation.destinationDistance / 10 ) * 10 : Math.round( marbleWidget.navigation.destinationDistance / 100 ) / 10
+                property string distanceUnit: isMeter ? "m" : "km"
+                text: "<img src=\"qrc:/marble/flag-green.svg\"> <font size=\"+2\">" + distance + "</font><font size=\"-1\"> " + distanceUnit + "</font>"
+                horizontalAlignment: parent.portrait ? Text.AlignHCenter : Text.AlignRight
+            }
         }
     }
 
@@ -198,7 +205,7 @@ Page {
                 when: (true)
                 AnchorChanges { target: searchResultView; anchors.top: undefined; anchors.right: navigationActivityPage.right }
                 AnchorChanges { target: mapContainer; anchors.left: navigationActivityPage.left; anchors.bottom: searchResultView.top; }
-                PropertyChanges { target: searchResultView; height: destinationDistance.height; width: navigationActivityPage.width }
+                PropertyChanges { target: searchResultView; height: destinationDistance.height+7; width: navigationActivityPage.width }
             }
         ]
     }
