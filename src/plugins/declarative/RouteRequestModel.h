@@ -19,6 +19,8 @@ class RouteRequestModel : public QAbstractListModel
 {
     Q_OBJECT
 
+    Q_PROPERTY( int count READ rowCount )
+
 public:
     enum RouteRequestModelRoles {
         LongitudeRole = Qt::UserRole+1,
