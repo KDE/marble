@@ -95,6 +95,8 @@ Item {
     Connections { target: routingTypeOptions; onRoutingTypeChanged: root.calculateRoute() }
 
     Component.onCompleted: {
-        marbleWidget.routing.addVia(marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude)
+        if (marbleWidget.routing.routeRequestModel().count === 0) {
+            marbleWidget.routing.addVia(marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude)
+        }
     }
 }
