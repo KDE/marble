@@ -32,7 +32,7 @@ Page {
 
         columns: inPortrait ? 1 : 2
         rows: 10 / columns
-        spacing: 10
+        spacing: inPortrait ? 20 : 5
 
         property int leftRowWidth: inPortrait ? parent.width : 250
         property int rightRowWidth: inPortrait ? parent.width : width - leftRowWidth - spacing
@@ -105,7 +105,7 @@ Page {
                 anchors.leftMargin: 5
                 anchors.right: parent.right
                 anchors.verticalCenter: screensaverSwitch.verticalCenter
-                text: "Disable screensaver while navigating"
+                text: "Navigation disables screensaver"
             }
 
             Label {
@@ -295,8 +295,7 @@ Page {
                 anchors.top: themeSelectionButton.bottom
                 width: pageGrid.rightRowWidth
                 color: "gray"
-                text: "Select the map to use in the Search, Routing, Tracking and Friends activities. <a href=\"http://edu.kde.org/marble/maps.php\">Download additional map themes</a>."
-                onLinkActivated: Qt.openUrlExternally(link)
+                text: "Select the map to use in the Search, Routing, Navigation, Tracking and Friends activities."
                 font.pixelSize: 16
             }
         }

@@ -36,13 +36,16 @@ public:
 
     qreal m_nextInstructionDistance;
 
+    qreal m_destinationDistance;
+
     Marble::RouteSegment nextRouteSegment();
 
     void updateNextInstructionDistance( const Marble::RoutingModel *model );
 };
 
 NavigationPrivate::NavigationPrivate() :
-    m_marbleWidget( 0 ), m_muted( false ), m_autoNavigation( 0 ), m_nextInstructionDistance( 0.0 )
+    m_marbleWidget( 0 ), m_muted( false ), m_autoNavigation( 0 ), m_nextInstructionDistance( 0.0 ),
+    m_destinationDistance( 0.0 )
 {
     // nothing to do
 }
@@ -53,15 +56,30 @@ void NavigationPrivate::updateNextInstructionDistance( const Marble::RoutingMode
     Marble::GeoDataCoordinates interpolated = model->route().positionOnRoute();
     Marble::GeoDataCoordinates onRoute = model->route().currentWaypoint();
     qreal distance = Marble::EARTH_RADIUS * ( distanceSphere( position, interpolated ) + distanceSphere( interpolated, onRoute ) );
+    qreal remaining = 0.0;
     const Marble::RouteSegment &segment = model->route().currentSegment();
-    for (int i=0; i<segment.path().size(); ++i) {
-        if (segment.path()[i] == onRoute) {
-            m_nextInstructionDistance = distance + segment.path().length( Marble::EARTH_RADIUS, i );
-            return;
+    for ( int i=0; i<segment.path().size(); ++i ) {
+        if ( segment.path()[i] == onRoute ) {
+            distance += segment.path().length( Marble::EARTH_RADIUS, i );
+            break;
+        }
+    }
+
+    bool upcoming = false;
+    for ( int i=0; i<model->route().size(); ++i ) {
+        const Marble::RouteSegment &segment = model->route().at( i );
+
+        if ( upcoming ) {
+            remaining += segment.path().length( Marble::EARTH_RADIUS );
+        }
+
+        if ( segment == model->route().currentSegment() ) {
+            upcoming = true;
         }
     }
 
     m_nextInstructionDistance = distance;
+    m_destinationDistance = distance + remaining;
 }
 
 Marble::RouteSegment NavigationPrivate::nextRouteSegment()
@@ -171,6 +189,11 @@ qreal Navigation::nextInstructionDistance() const
     return d->m_nextInstructionDistance;
 }
 
+qreal Navigation::destinationDistance() const
+{
+    return d->m_destinationDistance;
+}
+
 QString Navigation::voiceNavigationAnnouncement() const
 {
     return d->m_voiceNavigation.instruction();
@@ -201,6 +224,7 @@ void Navigation::update()
     Marble::RoutingModel const * model = d->m_marbleWidget->model()->routingManager()->routingModel();
     d->updateNextInstructionDistance( model );
     emit nextInstructionDistanceChanged();
+    emit destinationDistanceChanged();
     Marble::RouteSegment segment = model->route().currentSegment();
     if ( !d->m_muted ) {
         d->m_voiceNavigation.update( model->route(), d->m_nextInstructionDistance );
