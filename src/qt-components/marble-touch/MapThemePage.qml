@@ -31,7 +31,9 @@ Page {
         anchors.fill: parent
         model: themeInstallModel
         delegate: themeDelegate
-        highlight: Rectangle { color: "lightsteelblue" }
+        highlight: Rectangle { radius: 5; color: "lightsteelblue" }
+        highlightMoveDuration: 200
+        spacing: 10
     }
 
     ScrollDecorator {
@@ -52,26 +54,52 @@ Page {
             Row {
                 id: row
                 spacing: 10
-                Image {
-                    id: previewIcon
-                    source: preview
-                    width: 136
-                    height: 136
+
+                Item {
+                    width: previewIcon.width
+                    height: Math.max(previewIcon.height + (delegateRoot.selected ? versionLabel.height + 5 : 0), textItem.height)
+
+                    Image {
+                        id: previewIcon
+                        anchors.top: parent.top
+                        source: preview
+                        width: 136
+                        height: 136
+                    }
+
+                    Label {
+                        id: versionLabel
+                        width: parent.width
+                        anchors.top: previewIcon.bottom
+                        anchors.topMargin: 5
+                        visible: delegateRoot.selected
+                        text: "<p><font size=\"-1\">Version: " + version + "<br />" + releasedate + "</font></p>"
+                    }
                 }
 
                 Item {
+                    id: textItem
                     width: delegateRoot.width - row.spacing - previewIcon.width - 10
-                    height: previewIcon.height
+                    height: nameLabel.height + summaryLabel.height + (delegateRoot.selected ? installButton.height + 10 : 0)
 
                     Label {
+                        id: nameLabel
                         width: parent.width
                         text: display
+                    }
+
+                    Label {
+                        id: summaryLabel
+                        width: parent.width
+                        anchors.top: nameLabel.bottom
+                        property string details: "<p><font size=\"-1\">Author: " + author + "</font></p><p><font size=\"-1\">License: " + licence + "</font></p>"
+                        text: "<p><font size=\"-1\">" + summary + (delegateRoot.selected ? details : "") + "</font></p>"
                     }
 
                     ProgressBar {
                         id: progressBar
                         visible: delegateRoot.installing
-                        anchors.bottom: parent.bottom
+                        anchors.top: summaryLabel.bottom
                         anchors.left: parent.left
                         anchors.right: parent.right
                         anchors.margins: 5
@@ -100,14 +128,19 @@ Page {
                         }
                     }
 
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: delegateRoot.ListView.view.currentIndex = delegateRoot.idx
+                    }
+
                     Button {
                         id: installButton
                         text: "Install"
-                        anchors.bottom: parent.bottom
+                        anchors.top: summaryLabel.bottom
                         anchors.left: parent.left
                         anchors.margins: 5
                         width: parent.width / 2 - 5
-                        visible: !delegateRoot.installing
+                        visible: delegateRoot.selected && !delegateRoot.installing
                         onClicked: {
                             delegateRoot.installing = true
                             themeInstallModel.install(delegateRoot.idx)
@@ -116,12 +149,12 @@ Page {
 
                     Button {
                         text: "Remove"
-                        anchors.bottom: parent.bottom
+                        anchors.top: summaryLabel.bottom
                         anchors.right: parent.right
                         anchors.left: installButton.right
                         anchors.margins: 5
                         width: parent.width / 2 - 5
-                        visible: !delegateRoot.installing
+                        visible: delegateRoot.selected && !delegateRoot.installing
                         enabled: false
                         onClicked: {
                             /** @todo: Implement */
