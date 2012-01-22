@@ -36,5 +36,6 @@
     <file alias="marble/turn-sharp-right.svg">../../data/svg/turn-sharp-right.svg</file>
     <file alias="marble/turn-slight-left.svg">../../data/svg/turn-slight-left.svg</file>
     <file alias="marble/turn-slight-right.svg">../../data/svg/turn-slight-right.svg</file>
+    <file alias="marble/flag-green.svg">../../data/svg/flag-green.svg</file>
   </qresource>
 </RCC>

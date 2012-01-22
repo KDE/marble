@@ -30,6 +30,7 @@ class Navigation : public QObject
     Q_PROPERTY(QString nextRoad READ nextRoad NOTIFY nextRoadChanged)
     Q_PROPERTY(QString nextInstructionImage READ nextInstructionImage NOTIFY nextInstructionImageChanged)
     Q_PROPERTY(qreal nextInstructionDistance READ nextInstructionDistance NOTIFY nextInstructionDistanceChanged)
+    Q_PROPERTY(qreal destinationDistance READ destinationDistance NOTIFY destinationDistanceChanged)
     Q_PROPERTY(QString voiceNavigationAnnouncement READ voiceNavigationAnnouncement NOTIFY voiceNavigationAnnouncementChanged)
 
 public:
@@ -55,6 +56,8 @@ public:
 
     qreal nextInstructionDistance() const;
 
+    qreal destinationDistance() const;
+
     QString voiceNavigationAnnouncement() const;
 
     QString speaker() const;
@@ -75,6 +78,8 @@ Q_SIGNALS:
     void nextInstructionImageChanged();
 
     void nextInstructionDistanceChanged();
+
+    void destinationDistanceChanged();
 
     void nextRoadChanged();
 
