@@ -62,11 +62,15 @@ public Q_SLOTS:
 Q_SIGNALS:
     void countChanged();
 
+    void installationFinished( int index );
+
 private:
     SpeakersModelPrivate* const d;
     friend class SpeakersModelPrivate;
 
     Q_PRIVATE_SLOT( d, void fillModel() )
+
+    Q_PRIVATE_SLOT( d, void handleInstallation( int row ) )
 };
 
 }
