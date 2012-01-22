@@ -98,8 +98,8 @@
      showgrid="false"
      inkscape:window-width="714"
      inkscape:window-height="570"
-     inkscape:window-x="1185"
-     inkscape:window-y="331"
+     inkscape:window-x="450"
+     inkscape:window-y="175"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata4081">
@@ -121,7 +121,7 @@
     <path
        inkscape:connector-curvature="0"
        id="rect5009"
-       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#0057ae;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter6103);enable-background:accumulate;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#eeeeec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter6103);enable-background:accumulate;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
        d="m 29.091949,1013.9632 3.413142,3.455 1.712861,-1.5306 4.24264,4.2426 -1.12695,-10.8939 c 0,0 -8.18626,-0.6539 -10.871766,-1.1048 l 4.242639,4.2426 m -1.612576,1.5891 c -2.440261,2.0291 -3.552531,4.2972 -3.552531,5.7235 0,4.3018 0,8.6051 0,12.9063 l 4.968749,0 c 0,0 0.01053,-6.3021 0,-10.8205 -0.0071,-3.0467 1.997478,-4.3532 1.997478,-4.3532"
        sodipodi:nodetypes="ccccccccsccsc"
        transform="matrix(2,0,0,2,-32,-1020.3623)" />

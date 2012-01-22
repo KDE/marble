@@ -90,9 +90,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="11.21875"
-     inkscape:cx="16"
-     inkscape:cy="16"
+     inkscape:zoom="3.9664271"
+     inkscape:cx="-9.3890498"
+     inkscape:cy="2.7212163"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -121,7 +121,7 @@
     <path
        inkscape:connector-curvature="0"
        id="rect5009-00-3"
-       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#0057ae;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter6075);enable-background:accumulate;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#eeeeec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter6075);enable-background:accumulate;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
        d="m 6.9511953,1030.0404 4.2426407,4.2426 1.613087,-1.613 3.513437,3.5134 -1.613087,1.6131 4.242641,4.2426 -10.8717667,-1.1048 c 0,0 -0.676076,-8.2084 -1.126952,-10.8939 z m 9.3641697,6.1502 -3.57812,-3.4375 c 2.619792,-3.3021 4.005208,-5.5417 7.3125,-5.625 l -0.640625,0 c 5.11472,-0.031 5.59375,1.4937 5.625,5.5625 0.03304,4.3016 0,8.6051 0,12.9062 l -4.96875,0 0,-13.5 -0.01563,0 -3.734375,4.0938 z"
        transform="matrix(2,0,0,2,2.5555556e-7,-1052.3622)" />
   </g>
