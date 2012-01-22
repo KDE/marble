@@ -66,8 +66,6 @@ public:
         delete m_runner;
     }
 
-    void importKmlFromData();
-
     void saveFile(const QString& filename );
     void savePlacemarks(QDataStream &out, const GeoDataContainer *container);
 
@@ -156,8 +154,8 @@ void FileLoader::run()
                     if ( !QFileInfo( cacheFile ).exists() ) {
                         d->m_nonExistentLocalCacheFile = cacheFile;
                     }
-		}
-		defaultSourceName   = MarbleDirs::path( "placemarks/" + path + name + '.' + suffix );
+                }
+                defaultSourceName   = MarbleDirs::path( "placemarks/" + path + name + '.' + suffix );
             }
         }
 
@@ -194,39 +192,36 @@ void FileLoader::run()
     // content is not empty, we load from data
     } else {
         // Read the KML Data
-        d->importKmlFromData();
+        GeoDataParser parser( GeoData_KML );
+
+        QByteArray ba( d->m_contents.toUtf8() );
+        QBuffer buffer( &ba );
+        buffer.open( QIODevice::ReadOnly );
+
+        if ( !parser.read( &buffer ) ) {
+            qWarning( "Could not import kml buffer!" );
+            emit loaderFinished( this );
+            return;
+        }
+
+        GeoDocument* document = parser.releaseDocument();
+        Q_ASSERT( document );
+
+        d->m_document = static_cast<GeoDataDocument*>( document );
+        d->m_document->setDocumentRole( d->m_documentRole );
+        d->m_document->setFileName( d->m_filepath );
+        d->createFilterProperties( d->m_document );
+        buffer.close();
+
+        mDebug() << "newGeoDataDocumentAdded" << d->m_filepath;
+
+        emit newGeoDataDocumentAdded( d->m_document );
         emit loaderFinished( this );
     }
 
 }
 
 const quint32 MarbleMagicNumber = 0x31415926;
-
-void FileLoaderPrivate::importKmlFromData()
-{
-    GeoDataParser parser( GeoData_KML );
-
-    QByteArray ba( m_contents.toUtf8() );
-    QBuffer buffer( &ba );
-    buffer.open( QIODevice::ReadOnly );
-
-    if ( !parser.read( &buffer ) ) {
-        qWarning( "Could not import kml buffer!" );
-        return;
-    }
-    GeoDocument* document = parser.releaseDocument();
-    Q_ASSERT( document );
-
-    m_document = static_cast<GeoDataDocument*>( document );
-    m_document->setDocumentRole( m_documentRole );
-    m_document->setFileName( m_filepath );
-    createFilterProperties( m_document );
-    buffer.close();
-
-    mDebug() << "newGeoDataDocumentAdded" << m_filepath;
-
-    emit q->newGeoDataDocumentAdded( m_document );
-}
 
 void FileLoaderPrivate::saveFile( const QString& filename )
 {
