@@ -138,7 +138,6 @@ class PlacemarkLayout : public QObject, public LayerInterface
     GeoDataCoordinates placemarkIconCoordinates( const GeoDataPlacemark *placemark, bool *ok ) const;
 
     QRect  roomForLabel( const GeoDataStyle * style,
-                         const QVector<VisiblePlacemark*> &currentsec,
                          const int x, const int y,
                          const QString &labelText );
 
