@@ -141,21 +141,20 @@ void FileLoader::run()
             // We got an _absolute_ path now: e.g. "/patrick.kml"
             defaultSourceName   = path + '/' + name + '.' + suffix;
         }
+        else if ( d->m_filepath.contains( '/' ) ) {
+            // _relative_ path: "maps/mars/viking/patrick.kml"
+            defaultSourceName   = MarbleDirs::path( path + '/' + name + '.' + suffix );
+        }
         else {
-            if ( d->m_filepath.contains( '/' ) ) {
-                // _relative_ path: "maps/mars/viking/patrick.kml"
-                defaultSourceName   = MarbleDirs::path( path + '/' + name + '.' + suffix );
-            }
-            else {
-                // _standard_ shared placemarks: "placemarks/patrick.kml"
-                cacheFile = MarbleDirs::path( "placemarks/" + path + name + ".cache" );
-                if ( cacheFile.isEmpty()) {
-                    cacheFile = MarbleDirs::localPath() + "/placemarks/" + path + name + ".cache";
-                    if ( !QFileInfo( cacheFile ).exists() ) {
-                        d->m_nonExistentLocalCacheFile = cacheFile;
-                    }
+            // _standard_ shared placemarks: "placemarks/patrick.kml"
+            defaultSourceName   = MarbleDirs::path( "placemarks/" + path + name + '.' + suffix );
+
+            cacheFile = MarbleDirs::path( "placemarks/" + path + name + ".cache" );
+            if ( cacheFile.isEmpty()) {
+                cacheFile = MarbleDirs::localPath() + "/placemarks/" + path + name + ".cache";
+                if ( !QFileInfo( cacheFile ).exists() ) {
+                    d->m_nonExistentLocalCacheFile = cacheFile;
                 }
-                defaultSourceName   = MarbleDirs::path( "placemarks/" + path + name + '.' + suffix );
             }
         }
 
@@ -178,16 +177,16 @@ void FileLoader::run()
             }
         }
         // we load source file, multiple cases
-        else {
+        else if ( QFile::exists( defaultSourceName ) ) {
             mDebug() << "No recent Default Placemark Cache File available!";
-            if ( QFile::exists( defaultSourceName ) ) {
-                // use runners: pnt, gpx, osm
-                connect( d->m_runner, SIGNAL( parsingFinished(GeoDataDocument*,QString) ),
-                        this, SLOT( documentParsed( GeoDataDocument*, QString ) ) );
-                d->m_runner->parseFile( defaultSourceName, d->m_documentRole );
-            } else {
-                mDebug() << "No Default Placemark Source File for " << name;
-            }
+
+            // use runners: pnt, gpx, osm
+            connect( d->m_runner, SIGNAL( parsingFinished(GeoDataDocument*,QString) ),
+                    this, SLOT( documentParsed( GeoDataDocument*, QString ) ) );
+            d->m_runner->parseFile( defaultSourceName, d->m_documentRole );
+        }
+        else {
+            mDebug() << "No Default Placemark Source File for " << name;
         }
     // content is not empty, we load from data
     } else {
