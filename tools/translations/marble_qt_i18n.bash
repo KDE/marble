@@ -31,25 +31,32 @@ echo "Processing translations, please wait. This can take some time..."
 svn -q export "${prefix}/subdirs" "${workdir}/subdirs"
 for i in $(cat "${workdir}/subdirs")
 do
-	if svn -q export --force "${prefix}/${i}/messages/kdeedu/desktop_kdeedu_marble.po" "${workdir}/marble.po"
+	if svn -q export "${prefix}/${i}/messages/kdeedu/marble_qt.po" "${workdir}/marble_qt.po" 2>/dev/null
+        then
+          if svn -q export "${prefix}/${i}/messages/kdeedu/marble.po" "${workdir}/marble.po" 2>/dev/null
           then
+            echo >> "${workdir}/marble_qt.po"
+            cat "${workdir}/marble.po" >> "${workdir}/marble_qt.po"
             # Convert to binary .qm file format
-            "${MERGE_TOOL}" "${workdir}/template.ts" "${workdir}/marble.po" > "${workdir}/marble_qt.ts"
+            "${MERGE_TOOL}" "${workdir}/template.ts" "${workdir}/marble_qt.po" > "${workdir}/marble_qt.ts"
             sed -i 's@DownloadRegionDialog::Private@DownloadRegionDialog@' "${workdir}/marble_qt.ts"
-            lconvert "${workdir}/marble_qt.ts" -o "marble-${i}.qm"
+            lconvert "${workdir}/marble_qt.ts" -o "marble_qt_${i}.qm"
 
             # If you need the .ts file, uncomment below
             #cp "${workdir}/marble_qt.ts" "marble_qt_${i}.ts"
 
             # If you need the .po files, uncomment below
+            #cp "${workdir}/marble_qt.po" "marble_qt_${i}.po"
             #cp "${workdir}/marble.po" "marble_${i}.po"
 
-            mv "marble-${i}.qm" "marble-${i}"
+            mv "marble_qt_${i}.qm" "${1:=.}/marble-${i}"
+          fi
         fi
 done
 
 rm "${workdir}/template.ts"
 rm "${workdir}/marble.po"
+rm "${workdir}/marble_qt.po"
 rm "${workdir}/marble_qt.ts"
 rm "${workdir}/subdirs"
 rmdir "${workdir}"
