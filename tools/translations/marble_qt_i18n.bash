@@ -31,9 +31,9 @@ echo "Processing translations, please wait. This can take some time..."
 svn -q export "${prefix}/subdirs" "${workdir}/subdirs"
 for i in $(cat "${workdir}/subdirs")
 do
-	if svn -q export "${prefix}/${i}/messages/kdeedu/marble_qt.po" "${workdir}/marble_qt.po" 2>/dev/null
+	if svn -q export --force "${prefix}/${i}/messages/kdeedu/marble_qt.po" "${workdir}/marble_qt.po" 2>/dev/null
         then
-          if svn -q export "${prefix}/${i}/messages/kdeedu/marble.po" "${workdir}/marble.po" 2>/dev/null
+          if svn -q export --force "${prefix}/${i}/messages/kdeedu/marble.po" "${workdir}/marble.po" 2>/dev/null
           then
             echo >> "${workdir}/marble_qt.po"
             cat "${workdir}/marble.po" >> "${workdir}/marble_qt.po"
@@ -49,7 +49,8 @@ do
             #cp "${workdir}/marble_qt.po" "marble_qt_${i}.po"
             #cp "${workdir}/marble.po" "marble_${i}.po"
 
-            mv "marble_qt_${i}.qm" "${1:=.}/marble-${i}"
+            mv "marble_qt_${i}.qm" "marble-${i}"
+            echo "marble-${i}"
           fi
         fi
 done
