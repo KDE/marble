@@ -51,7 +51,15 @@ void PlacemarkPainter::drawPlacemarks( QPainter* painter,
 {
     int imageWidth = viewport->width();
 
-    foreach( VisiblePlacemark *mark, visiblePlacemarks ) {
+    // draw placemarks less important first
+    QVector<VisiblePlacemark*>::const_iterator visit = visiblePlacemarks.constEnd();
+    QVector<VisiblePlacemark*>::const_iterator itEnd = visiblePlacemarks.constBegin();
+    VisiblePlacemark *mark;
+
+    while ( visit != itEnd ) {
+        --visit;
+        mark = *visit;
+
 	if ( mark->labelPixmap().isNull() ) {
             drawLabelPixmap( mark );
 	}
