@@ -103,6 +103,7 @@ void SpeakersModelPrivate::fillModel()
 
     qSort(m_speakers.begin(), m_speakers.end(), SpeakersModelItem::lessThan);
     m_parent->reset();
+    emit m_parent->countChanged();
 }
 
 void SpeakersModelPrivate::handleInstallation( int row )
