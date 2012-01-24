@@ -28,6 +28,7 @@ class NewstuffModel : public QAbstractListModel
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(QString provider READ provider WRITE setProvider NOTIFY providerChanged)
     Q_PROPERTY(QString targetDirectory READ targetDirectory WRITE setTargetDirectory NOTIFY targetDirectoryChanged)
+    Q_PROPERTY(QString registryFile READ registryFile WRITE setRegistryFile NOTIFY registryFileChanged)
 
 public:
     enum NewstuffRoles {
@@ -38,7 +39,17 @@ public:
         Version,
         ReleaseDate,
         Preview,
-        Payload
+        Payload,
+        InstalledVersion,
+        InstalledReleaseDate,
+        IsInstalled,
+        IsUpgradable,
+        Category
+    };
+
+    enum IdTag {
+        PayloadTag,
+        NameTag
     };
 
     /** Constructor */
@@ -67,8 +78,14 @@ public:
 
     QString targetDirectory() const;
 
+    void setRegistryFile( const QString &registryFile, IdTag idTag = PayloadTag );
+
+    QString registryFile() const;
+
 public Q_SLOTS:
     void install( int index );
+
+    void uninstall( int index );
 
 Q_SIGNALS:
     void countChanged();
@@ -77,11 +94,15 @@ Q_SIGNALS:
 
     void targetDirectoryChanged();
 
+    void registryFileChanged();
+
     void installationProgressed( int index, qreal progress );
 
     void installationFinished( int index );
 
     void installationFailed( int index, const QString &error );
+
+    void uninstallationFinished( int index );
 
 private Q_SLOTS:
     void updateProgress( qint64 bytesReceived, qint64 bytesTotal );
@@ -89,6 +110,10 @@ private Q_SLOTS:
     void retrieveData();
 
     void mapInstalled( int exitStatus );
+
+    void mapUninstalled();
+
+    void contentsListed( int exitStatus );
 
 private:
     NewstuffModelPrivate* const d;
