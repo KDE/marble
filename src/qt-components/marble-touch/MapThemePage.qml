@@ -24,6 +24,7 @@ Page {
     NewstuffModel {
         id: themeInstallModel
         provider: "http://edu.kde.org/marble/newstuff/maps-4.5.xml"
+        registryFile: "~/.kde/share/apps/knewstuff3/marble.knsregistry"
     }
 
     ListView {
@@ -86,6 +87,7 @@ Page {
                         id: nameLabel
                         width: parent.width
                         text: display
+                        font.bold: upgradable
                     }
 
                     Label {
@@ -122,9 +124,8 @@ Page {
 
                         Connections {
                             target: themeInstallModel
-                            onInstallationFinished: {
-                                delegateRoot.installing = false
-                            }
+                            onInstallationFinished: delegateRoot.installing = false
+                            onUninstallationFinished: delegateRoot.installing = false
                         }
                     }
 
@@ -135,7 +136,8 @@ Page {
 
                     Button {
                         id: installButton
-                        text: "Install"
+                        text: installed && upgradable ? "Upgrade" : "Install"
+                        enabled: !installed
                         anchors.top: summaryLabel.bottom
                         anchors.left: parent.left
                         anchors.margins: 5
@@ -155,9 +157,8 @@ Page {
                         anchors.margins: 5
                         width: parent.width / 2 - 5
                         visible: delegateRoot.selected && !delegateRoot.installing
-                        enabled: false
+                        enabled: installed
                         onClicked: {
-                            /** @todo: Implement */
                             delegateRoot.installing = true
                             themeInstallModel.uninstall(delegateRoot.idx)
                         }
