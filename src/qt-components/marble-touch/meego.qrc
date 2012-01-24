@@ -31,5 +31,6 @@
         <file>MapThemeSelectionPage.qml</file>
         <file>MapThemePage.qml</file>
         <file>PreferencesPage.qml</file>
+        <file>OfflineDataPage.qml</file>
     </qresource>
 </RCC>

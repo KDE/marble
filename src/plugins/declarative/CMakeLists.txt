@@ -19,6 +19,7 @@ PositionSource.cpp
 Tracking.cpp
 Routing.cpp
 Navigation.cpp
+OfflineDataModel.cpp
 Search.cpp
 RouteRequestModel.cpp
 Settings.cpp
