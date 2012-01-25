@@ -111,8 +111,7 @@ Page {
                         id: progressBar
                         visible: delegateRoot.installing
                         anchors.top: versionLabel.bottom
-                        anchors.left: nameLabel.left
-                        anchors.right: parent.right
+                        width: parent.width - 50
                         anchors.margins: 20
                         minimumValue: 0.0
                         maximumValue: 1.0
@@ -131,6 +130,11 @@ Page {
                                     delegateRoot.installing = false
                                 }
                             }
+                            onInstallationFailed: {
+                                if (newstuffindex === delegateRoot.idx) {
+                                    delegateRoot.installing = false
+                                }
+                            }
                             onUninstallationFinished: {
                                 if (newstuffindex === delegateRoot.idx) {
                                     delegateRoot.installing = false
@@ -142,6 +146,20 @@ Page {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: delegateRoot.ListView.view.currentIndex = delegateRoot.idx
+                    }
+
+                    ToolButton {
+                        anchors.left: progressBar.right
+                        anchors.leftMargin: 5
+                        anchors.verticalCenter: progressBar.verticalCenter
+                        visible: delegateRoot.installing
+                        width: 40
+                        flat: true
+                        iconSource: "image://theme/icon-s-cancel"
+                        onClicked: {
+                            progressBar.indeterminate = true
+                            offlineDataModel.cancel(delegateRoot.idx)
+                        }
                     }
 
                     Button {

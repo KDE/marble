@@ -64,6 +64,8 @@ public:
         Uninstall
     };
 
+    typedef QPair<int, UserAction> Action;
+
     NewstuffModel* m_parent;
 
     QVector<NewstuffItem> m_items;
@@ -86,13 +88,11 @@ public:
 
     QDomElement m_root;
 
-    int m_currentIndex;
+    Action m_currentAction;
 
     QProcess* m_unpackProcess;
 
     QMutex m_mutex;
-
-    typedef QPair<int, UserAction> Action;
 
     QList<Action> m_actionQueue;
 
@@ -167,7 +167,7 @@ bool NewstuffItem::deeperThan(const QString &one, const QString &two)
 
 NewstuffModelPrivate::NewstuffModelPrivate( NewstuffModel* parent ) : m_parent( parent ),
     m_networkAccessManager( 0 ), m_currentReply( 0 ), m_currentFile( 0 ),
-    m_idTag( NewstuffModel::PayloadTag ), m_currentIndex( -1 ), m_unpackProcess( 0 )
+    m_idTag( NewstuffModel::PayloadTag ), m_currentAction( -1, Install ), m_unpackProcess( 0 )
 {
     m_targetDirectory = QDir::home().filePath( ".local/share/marble/maps" );
     // no default registry file
@@ -482,7 +482,7 @@ void NewstuffModel::install( int index )
     }
 
     NewstuffModelPrivate::Action action( index, NewstuffModelPrivate::Install );
-    {
+    { // <-- do not remove, mutex locker scope
         QMutexLocker locker( &d->m_mutex );
         if ( d->m_actionQueue.contains( action ) ) {
             return;
@@ -504,7 +504,7 @@ void NewstuffModel::uninstall( int idx )
     }
 
     NewstuffModelPrivate::Action action( idx, NewstuffModelPrivate::Uninstall );
-    {
+    { // <-- do not remove, mutex locker scope
         QMutexLocker locker( &d->m_mutex );
         if ( d->m_actionQueue.contains( action ) ) {
             return;
@@ -515,10 +515,58 @@ void NewstuffModel::uninstall( int idx )
     d->processQueue();
 }
 
+void NewstuffModel::cancel( int index )
+{
+    if ( !d->isTransitioning( index ) ) {
+        return;
+    }
+
+    { // <-- do not remove, mutex locker scope
+        QMutexLocker locker( &d->m_mutex );
+        if ( d->m_currentAction.first == index ) {
+            if ( d->m_currentAction.second == NewstuffModelPrivate::Install ) {
+                if ( d->m_currentReply ) {
+                    d->m_currentReply->abort();
+                    d->m_currentReply->deleteLater();
+                    d->m_currentReply = 0;
+                }
+
+                if ( d->m_unpackProcess ) {
+                    d->m_unpackProcess->terminate();
+                    d->m_unpackProcess->deleteLater();
+                    d->m_unpackProcess = 0;
+                }
+
+                if ( d->m_currentFile ) {
+                    d->m_currentFile->deleteLater();
+                    d->m_currentFile = 0;
+                }
+
+                emit installationFailed( d->m_currentAction.first, tr( "Installation aborted by user." ) );
+                d->m_currentAction = NewstuffModelPrivate::Action( -1, NewstuffModelPrivate::Install );
+            } else {
+                // Shall we interrupt this?
+            }
+        } else {
+            if ( d->m_currentAction.second == NewstuffModelPrivate::Install ) {
+                NewstuffModelPrivate::Action install( index, NewstuffModelPrivate::Install );
+                d->m_actionQueue.removeAll( install );
+                emit installationFailed( index, tr( "Installation aborted by user." ) );
+            } else {
+                NewstuffModelPrivate::Action uninstall( index, NewstuffModelPrivate::Uninstall );
+                d->m_actionQueue.removeAll( uninstall );
+                emit uninstallationFinished( index ); // do we need failed here?
+            }
+        }
+    }
+
+    d->processQueue();
+}
+
 void NewstuffModel::updateProgress( qint64 bytesReceived, qint64 bytesTotal )
 {
     qreal const progress = qBound<qreal>( 0.0, 0.9 * bytesReceived / qreal( bytesTotal ), 1.0 );
-    emit installationProgressed( d->m_currentIndex, progress );
+    emit installationProgressed( d->m_currentAction.first, progress );
 }
 
 void NewstuffModel::retrieveData()
@@ -536,54 +584,59 @@ void NewstuffModel::retrieveData()
 
 void NewstuffModel::mapInstalled( int exitStatus )
 {
-    d->m_unpackProcess->deleteLater();
-    d->m_unpackProcess = 0;
-    d->m_currentFile->deleteLater();
-    d->m_currentFile = 0;
+    if ( d->m_unpackProcess ) {
+        d->m_unpackProcess->deleteLater();
+        d->m_unpackProcess = 0;
+    }
 
-    emit installationProgressed( d->m_currentIndex, 1.0 );
+    if ( d->m_currentFile ) {
+        d->m_currentFile->deleteLater();
+        d->m_currentFile = 0;
+    }
+
+    emit installationProgressed( d->m_currentAction.first, 1.0 );
     if ( exitStatus == 0 ) {
-        emit installationFinished( d->m_currentIndex );
-        QModelIndex const affected = index( d->m_currentIndex );
+        emit installationFinished( d->m_currentAction.first );
+        QModelIndex const affected = index( d->m_currentAction.first );
         emit dataChanged( affected, affected );
     } else {
         mDebug() << "Process exit status " << exitStatus << " indicates an error.";
-        emit installationFailed( d->m_currentIndex , QString( "Unable to unpack file. Process exited with status code %1." ).arg( exitStatus ) );
+        emit installationFailed( d->m_currentAction.first , QString( "Unable to unpack file. Process exited with status code %1." ).arg( exitStatus ) );
     }
 
-    {
+    { // <-- do not remove, mutex locker scope
         QMutexLocker locker( &d->m_mutex );
-        d->m_currentIndex = -1;
+        d->m_currentAction = NewstuffModelPrivate::Action( -1, NewstuffModelPrivate::Install );
     }
     d->processQueue();
 }
 
 void NewstuffModel::mapUninstalled()
 {
-    QModelIndex const affected = index( d->m_currentIndex );
+    QModelIndex const affected = index( d->m_currentAction.first );
     emit dataChanged( affected, affected );
-    emit uninstallationFinished( d->m_currentIndex );
+    emit uninstallationFinished( d->m_currentAction.first );
 
-    {
+    { // <-- do not remove, mutex locker scope
         QMutexLocker locker( &d->m_mutex );
-        d->m_currentIndex = -1;
+        d->m_currentAction = NewstuffModelPrivate::Action( -1, NewstuffModelPrivate::Install );
     }
     d->processQueue();
 }
 
 void NewstuffModel::contentsListed( int exitStatus )
 {
-    emit installationProgressed( d->m_currentIndex, 0.92 );
+    emit installationProgressed( d->m_currentAction.first, 0.92 );
     if ( exitStatus == 0 ) {
         if ( !d->m_registryFile.isEmpty() ) {
-            NewstuffItem &item = d->m_items[d->m_currentIndex];
+            NewstuffItem &item = d->m_items[d->m_currentAction.first];
             QDomNode node = item.m_registryNode;
             NewstuffModelPrivate::NodeAction action = node.isNull() ? NewstuffModelPrivate::Append : NewstuffModelPrivate::Replace;
             if ( node.isNull() ) {
                 node = d->m_root.appendChild( d->m_registryDocument.createElement( "stuff" ) );
             }
 
-            node.toElement().setAttribute( "category", d->m_items[d->m_currentIndex].m_category );
+            node.toElement().setAttribute( "category", d->m_items[d->m_currentAction.first].m_category );
             d->changeNode( node, d->m_registryDocument, "name", item.m_name, action );
             d->changeNode( node, d->m_registryDocument, "providerid", d->m_provider, action );
             d->changeNode( node, d->m_registryDocument, "author", item.m_author, action );
@@ -599,7 +652,7 @@ void NewstuffModel::contentsListed( int exitStatus )
             d->changeNode( node, d->m_registryDocument, "previewBig", item.m_preview.toString(), action );
             d->changeNode( node, d->m_registryDocument, "payload", item.m_payload.toString(), action );
             d->changeNode( node, d->m_registryDocument, "status", "installed", action );
-            d->m_items[d->m_currentIndex].m_registryNode = node;
+            d->m_items[d->m_currentAction.first].m_registryNode = node;
 
             bool hasChildren = true;
             while ( hasChildren ) {
@@ -628,11 +681,11 @@ void NewstuffModel::contentsListed( int exitStatus )
         d->m_unpackProcess->start( "tar", arguments );
     } else {
         mDebug() << "Process exit status " << exitStatus << " indicates an error.";
-        emit installationFailed( d->m_currentIndex , QString( "Unable to list file contents. Process exited with status code %1." ).arg( exitStatus ) );
+        emit installationFailed( d->m_currentAction.first , QString( "Unable to list file contents. Process exited with status code %1." ).arg( exitStatus ) );
 
-        {
+        { // <-- do not remove, mutex locker scope
             QMutexLocker locker( &d->m_mutex );
-            d->m_currentIndex = -1;
+            d->m_currentAction = NewstuffModelPrivate::Action( -1, NewstuffModelPrivate::Install );
         }
         d->processQueue();
     }
@@ -640,24 +693,22 @@ void NewstuffModel::contentsListed( int exitStatus )
 
 void NewstuffModelPrivate::processQueue()
 {
-    if ( m_actionQueue.empty() || m_currentIndex >= 0 ) {
+    if ( m_actionQueue.empty() || m_currentAction.first >= 0 ) {
         return;
     }
 
-    Action nextAction;
-    {
+    { // <-- do not remove, mutex locker scope
         QMutexLocker locker( &m_mutex );
-        nextAction = m_actionQueue.takeFirst();
-        m_currentIndex = nextAction.first;
+        m_currentAction = m_actionQueue.takeFirst();
     }
-    if ( nextAction.second == Install ) {
+    if ( m_currentAction.second == Install ) {
         if ( !m_currentFile ) {
-            QFileInfo const file = m_items.at( m_currentIndex ).m_payload.path();
+            QFileInfo const file = m_items.at( m_currentAction.first ).m_payload.path();
             m_currentFile = new QTemporaryFile( QDir::tempPath() + "/marble-XXXXXX-" + file.fileName() );
         }
 
         if ( m_currentFile->open() ) {
-            QUrl const payload = m_items.at( m_currentIndex ).m_payload;
+            QUrl const payload = m_items.at( m_currentAction.first ).m_payload;
             m_currentReply = m_networkAccessManager->get( QNetworkRequest( payload ) );
             QObject::connect( m_currentReply, SIGNAL( readyRead() ), m_parent, SLOT( retrieveData() ) );
             QObject::connect( m_currentReply, SIGNAL( readChannelFinished() ), m_parent, SLOT( retrieveData() ) );
@@ -673,14 +724,14 @@ void NewstuffModelPrivate::processQueue()
         QObject::connect( watcher, SIGNAL( finished() ), m_parent, SLOT( mapUninstalled() ) );
         QObject::connect( watcher, SIGNAL( finished() ), watcher, SLOT( deleteLater() ) );
 
-        QFuture<void> future = QtConcurrent::run( this, &NewstuffModelPrivate::uninstall, m_currentIndex );
+        QFuture<void> future = QtConcurrent::run( this, &NewstuffModelPrivate::uninstall, m_currentAction.first );
         watcher->setFuture( future );
     }
 }
 
 bool NewstuffModelPrivate::isTransitioning( int index ) const
 {
-    if ( m_currentIndex == index ) {
+    if ( m_currentAction.first == index ) {
         return true;
     }
 
