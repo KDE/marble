@@ -614,7 +614,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
 }
 
 
-bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, int x, int y, bool selected )
+bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal x, qreal y, bool selected )
 {
     // Choose Section
 
@@ -622,7 +622,8 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, int x,
     // If there's not enough space free don't add a VisiblePlacemark here.
     const GeoDataStyle* style = placemark->style();
 
-    QRect labelRect = roomForLabel( style, x, y, placemark->name() );
+    QRectF labelRect = roomForLabel( style, x, y, placemark->name() );
+
     if ( labelRect.isNull() )
         return false;
 
@@ -639,8 +640,8 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, int x,
     QPointF hotSpot = style->iconStyle().hotSpot();
 
     mark->setSelected( selected );
-    mark->setSymbolPosition( QPoint( x - (int)( hotSpot.x() ),
-                                     y - (int)( hotSpot.y() ) ) );
+    mark->setSymbolPosition( QPoint( x - round( hotSpot.x() ),
+                                     y - round( hotSpot.y() ) ) );
     mark->setLabelRect( labelRect );
 
     // Add the current placemark to the matching row and its
@@ -667,8 +668,8 @@ GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( const GeoDataPlace
     return coordinates;
 }
 
-QRect PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
-                                      const int x, const int y,
+QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
+                                      const qreal x, const qreal y,
                                       const QString &labelText )
 {
     bool  isRoom      = false;
@@ -682,7 +683,7 @@ QRect PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
     if ( style->labelStyle().glow() ) {
         labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size;
         textWidth = ( QFontMetrics( labelFont ).width( labelText )
-            + (int)( 2 * s_labelOutlineWidth ) );
+            + round( 2 * s_labelOutlineWidth ) );
     } else {
         textWidth = ( QFontMetrics( labelFont ).width( labelText ) );
     }
@@ -690,12 +691,12 @@ QRect PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
     const QVector<VisiblePlacemark*> currentsec = m_rowsection.at( y / m_maxLabelHeight );
 
     if ( style->labelStyle().alignment() == GeoDataLabelStyle::Corner ) {
-        int  xpos = symbolwidth / 2 + x + 1;
-        int  ypos = 0;
+        qreal  xpos = x + symbolwidth / 2 + 1;
+        qreal  ypos = y;
 
         // Check the four possible positions by going through all of them
  
-        QRect  labelRect( xpos, ypos, textWidth, textHeight );
+        QRectF  labelRect( xpos, ypos, textWidth, textHeight );
 
         for( int i=0; i<4; ++i ) {
             if( i/2 == 1 ) {
@@ -729,7 +730,7 @@ QRect PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
     }
     else if ( style->labelStyle().alignment() == GeoDataLabelStyle::Center ) {
         isRoom = true;
-        QRect  labelRect( x - textWidth / 2, y - textHeight / 2, 
+        QRectF  labelRect( x - textWidth / 2, y - textHeight / 2,
                           textWidth, textHeight );
 
         // Check if there is another label or symbol that overlaps.

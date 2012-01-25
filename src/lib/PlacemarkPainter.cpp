@@ -66,7 +66,7 @@ void PlacemarkPainter::drawPlacemarks( QPainter* painter,
 
         int symbolX = mark->symbolPosition().x();
         int textX =   mark->labelRect().x();
-        QRect labelRect( mark->labelRect() );
+        QRect labelRect( mark->labelRect().toRect() );
         QPoint symbolPos( mark->symbolPosition() );
 
         // when the map is such zoomed out that a given place
@@ -146,7 +146,7 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark )
     const GeoDataStyle* style = placemark->style();
 
     QString labelName = placemark->name();
-    QRect  labelRect  = mark->labelRect();
+    QRect  labelRect  = mark->labelRect().toRect();
     if ( !labelRect.isValid() ) {
         mark->setLabelPixmap( QPixmap() );
         return;

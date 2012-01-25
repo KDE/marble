@@ -68,12 +68,12 @@ void VisiblePlacemark::setLabelPixmap( const QPixmap& labelPixmap )
     m_labelPixmap = labelPixmap;
 }
 
-const QRect& VisiblePlacemark::labelRect() const
+const QRectF& VisiblePlacemark::labelRect() const
 {
     return m_labelRect;
 }
 
-void VisiblePlacemark::setLabelRect( const QRect& labelRect )
+void VisiblePlacemark::setLabelRect( const QRectF& labelRect )
 {
     m_labelRect = labelRect;
 }

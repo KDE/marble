@@ -81,12 +81,12 @@ class VisiblePlacemark
     /**
      * Returns the area covered by the place mark name label on the map.
      */
-    const QRect& labelRect() const;
+    const QRectF& labelRect() const;
 
     /**
      * Sets the @p area covered by the place mark name label on the map.
      */
-    void setLabelRect( const QRect& area );
+    void setLabelRect( const QRectF& area );
 
  private:
     const GeoDataPlacemark *m_placemark;
@@ -95,7 +95,7 @@ class VisiblePlacemark
     QPoint      m_symbolPosition; // position of the placemark's symbol
     bool        m_selected;       // state of the placemark
     QPixmap     m_labelPixmap;    // the text label (most often name)
-    QRect       m_labelRect;      // bounding box of label
+    QRectF      m_labelRect;      // bounding box of label
 
     mutable QPixmap     m_symbolPixmap; // cached value
 };

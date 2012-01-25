@@ -128,7 +128,7 @@ class PlacemarkLayout : public QObject, public LayerInterface
     void styleReset();
 
     QList<const GeoDataPlacemark*> visiblePlacemarks( ViewportParams *viewport );
-    bool layoutPlacemark( const GeoDataPlacemark *placemark, int x, int y, bool selected );
+    bool layoutPlacemark( const GeoDataPlacemark *placemark, qreal x, qreal y, bool selected );
 
     /**
      * Returns the coordinates at which an icon should be drawn for the @p placemark.
@@ -137,8 +137,8 @@ class PlacemarkLayout : public QObject, public LayerInterface
      */
     GeoDataCoordinates placemarkIconCoordinates( const GeoDataPlacemark *placemark, bool *ok ) const;
 
-    QRect  roomForLabel( const GeoDataStyle * style,
-                         const int x, const int y,
+    QRectF  roomForLabel( const GeoDataStyle * style,
+                         const qreal x, const qreal y,
                          const QString &labelText );
 
     int    placemarksOnScreenLimit() const;
