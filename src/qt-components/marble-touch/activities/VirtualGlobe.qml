@@ -30,6 +30,58 @@ Page {
             width: 60
             iconSource: "image://theme/icon-m-toolbar-search";
         }
+        ToolButton {
+            id: themeButton
+            width: 60
+            iconSource: "image://theme/icon-m-toolbar-settings";
+            onClicked: themeDialog.open()
+
+            MapThemeModel {
+                id: mapThemeModel
+                mapThemeFilter: MapThemeModel.Extraterrestrial
+            }
+
+            SelectionDialog {
+                id: themeDialog
+                titleText: "Select Map Theme"
+                selectedIndex: mapThemeModel.indexOf(settings.streetMapTheme)
+                model: mapThemeModel
+                delegate:
+                    Rectangle {
+                    id: delegate
+                    width: root.width
+                    height: mapImage.height
+
+                    color: index === themeDialog.selectedIndex ? root.platformStyle.itemSelectedBackgroundColor : root.platformStyle.itemBackgroundColor
+
+                    Row {
+                        anchors.verticalCenter: parent.verticalCenter
+                        Image {
+                            id: mapImage
+                            source: "image://maptheme/" + mapThemeId
+                            smooth: true
+                            width: 68
+                            height: 68
+                        }
+                        Label {
+                            id: themeLabel
+                            text: display
+                            color: delegate.index === themeDialog.selectedIndex ? root.platformStyle.itemSelectedTextColor : root.platformStyle.itemTextColor
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            themeDialog.selectedIndex = index
+                            settings.mapTheme = mapThemeId
+                            themeDialog.accept()
+                        }
+                    }
+                }
+            }
+        }
     }
 
     Column {

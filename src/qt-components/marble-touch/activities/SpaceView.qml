@@ -35,12 +35,54 @@ Page {
                 onCheckedChanged: { if ( checked ) settings.mapTheme = "moon/clementine/clementine.dgml" }
             }
             Button {
-                text: "Mars"
-                onCheckedChanged: { if ( checked ) settings.mapTheme = "mars/viking/viking.dgml" }
-            }
-            Button {
-                text: "Venus"
-                onCheckedChanged: { if ( checked ) settings.mapTheme = "venus/magellan/magellan.dgml" }
+                text: "More"
+                onCheckedChanged: { if ( checked ) themeDialog.open() }
+
+                MapThemeModel {
+                    id: mapThemeModel
+                    mapThemeFilter: MapThemeModel.Terrestrial
+                }
+
+                SelectionDialog {
+                    id: themeDialog
+                    titleText: "Select Map Theme"
+                    selectedIndex: mapThemeModel.indexOf(settings.streetMapTheme)
+                    model: mapThemeModel
+                    delegate:
+                        Rectangle {
+                        id: delegate
+                        width: root.width
+                        height: mapImage.height
+
+                        color: index === themeDialog.selectedIndex ? root.platformStyle.itemSelectedBackgroundColor : root.platformStyle.itemBackgroundColor
+
+                        Row {
+                            anchors.verticalCenter: parent.verticalCenter
+                            Image {
+                                id: mapImage
+                                source: "image://maptheme/" + mapThemeId
+                                smooth: true
+                                width: 68
+                                height: 68
+                            }
+                            Label {
+                                id: themeLabel
+                                text: display
+                                color: delegate.index === themeDialog.selectedIndex ? root.platformStyle.itemSelectedTextColor : root.platformStyle.itemTextColor
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                themeDialog.selectedIndex = index
+                                settings.mapTheme = mapThemeId
+                                themeDialog.accept()
+                            }
+                        }
+                    }
+                }
             }
         }
 

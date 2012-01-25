@@ -15,14 +15,29 @@
 
 namespace Marble { class MapThemeManager; }
 
-class StreetMapThemeModel : public QSortFilterProxyModel
+class MapThemeModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 
     Q_PROPERTY( int count READ count NOTIFY countChanged )
 
 public:
-    StreetMapThemeModel( Marble::MapThemeManager* themeManager );
+    enum MapThemeFilter {
+        AnyTheme = 0x0,
+        Terrestrial = 0x1,
+        Extraterrestrial = 0x2,
+        LowZoom = 0x4,
+        HighZoom = 0x8
+    };
+
+    Q_DECLARE_FLAGS(MapThemeFilters, MapThemeFilter)
+
+    Q_FLAGS(MapThemeFilter MapThemeFilters)
+
+    Q_PROPERTY( MapThemeFilters mapThemeFilter READ mapThemeFilter WRITE setMapThemeFilter NOTIFY mapThemeFilterChanged )
+
+public:
+    MapThemeModel( QObject* parent = 0 );
 
     /** @todo FIXME https://bugreports.qt.nokia.com/browse/QTCOMPONENTS-1206 */
     int count();
@@ -32,8 +47,14 @@ public Q_SLOTS:
 
     int indexOf( const QString &id );
 
+    MapThemeFilters mapThemeFilter() const;
+
+    void setMapThemeFilter( MapThemeFilters filters );
+
 Q_SIGNALS:
     void countChanged();
+
+    void mapThemeFilterChanged();
 
 protected:
     virtual bool filterAcceptsRow(int sourceRow,
@@ -46,6 +67,8 @@ private:
     Marble::MapThemeManager* m_themeManager;
 
     QList<QString> m_streetMapThemeIds;
+
+    MapThemeFilters m_mapThemeFilters;
 };
 
 #endif

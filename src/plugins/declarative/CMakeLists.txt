@@ -23,7 +23,7 @@ OfflineDataModel.cpp
 Search.cpp
 RouteRequestModel.cpp
 Settings.cpp
-StreetMapThemeModel.cpp
+MapThemeModel.cpp
 Activity.cpp
 ActivityModel.cpp
 RelatedActivities.cpp

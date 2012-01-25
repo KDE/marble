@@ -33,8 +33,6 @@ class ViewportParams;
 }
 
 class ZoomButtonInterceptor;
-class StreetMapThemeModel;
-
 /**
   * Wraps a Marble::MarbleWidget, providing access to important properties and methods
   *
@@ -59,7 +57,6 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( Navigation* navigation READ navigation NOTIFY navigationChanged )
     Q_PROPERTY( Search* search READ search NOTIFY searchChanged )
     Q_PROPERTY( QObject* mapThemeModel READ mapThemeModel NOTIFY mapThemeModelChanged )
-    Q_PROPERTY( StreetMapThemeModel* streetMapThemeModel READ streetMapThemeModel NOTIFY streetMapThemeModelChanged )
 
 public:
     /** Constructor */
@@ -102,8 +99,6 @@ Q_SIGNALS:
     void mouseClickGeoPosition( qreal longitude, qreal latitude );
 
     void mapThemeModelChanged();
-
-    void streetMapThemeModelChanged();
 
     void mapThemeChanged();
 
@@ -180,8 +175,6 @@ public Q_SLOTS:
 
     QObject* mapThemeModel();
 
-    StreetMapThemeModel* streetMapThemeModel();
-
     void setGeoSceneProperty( const QString &key, bool value );
 
 private Q_SLOTS:
@@ -206,8 +199,6 @@ private:
     Coordinate m_center;
 
     ZoomButtonInterceptor* m_interceptor;
-
-    StreetMapThemeModel* m_streetMapThemeModel;
 };
 
 #endif
