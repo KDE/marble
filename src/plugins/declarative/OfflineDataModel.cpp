@@ -64,23 +64,29 @@ QVariant OfflineDataModel::data(const QModelIndex &index, int role) const
     return QSortFilterProxyModel::data( index, role );
 }
 
-void OfflineDataModel::install( int idx )
+void OfflineDataModel::install( int index )
 {
-    QModelIndex const proxy = index( idx, 0 );
-    QModelIndex const mapped = mapToSource( proxy );
-    m_newstuffModel.install( mapped.row() );
+    m_newstuffModel.install( toSource( index ) );
 }
 
-void OfflineDataModel::uninstall( int idx )
+void OfflineDataModel::uninstall( int index )
 {
-    QModelIndex const proxy = index( idx, 0 );
-    QModelIndex const mapped = mapToSource( proxy );
-    m_newstuffModel.uninstall( mapped.row() );
+    m_newstuffModel.uninstall( toSource( index ) );
 }
 
-int OfflineDataModel::fromSource( int idx ) const
+void OfflineDataModel::cancel( int index )
 {
-    return mapFromSource( m_newstuffModel.index( idx ) ).row();
+    m_newstuffModel.cancel( toSource( index ) );
+}
+
+int OfflineDataModel::fromSource( int index ) const
+{
+    return mapFromSource( m_newstuffModel.index( index ) ).row();
+}
+
+int OfflineDataModel::toSource(int idx) const
+{
+    return mapToSource( index( idx, 0 ) ).row();
 }
 
 void OfflineDataModel::handleInstallationProgress( int index, qreal progress )

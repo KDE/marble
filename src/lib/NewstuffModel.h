@@ -88,6 +88,8 @@ public Q_SLOTS:
 
     void uninstall( int index );
 
+    void cancel( int index );
+
 Q_SIGNALS:
     void countChanged();
 

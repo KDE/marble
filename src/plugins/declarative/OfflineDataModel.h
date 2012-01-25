@@ -34,6 +34,8 @@ public Q_SLOTS:
 
     void uninstall( int index );
 
+    void cancel( int index );
+
 Q_SIGNALS:
     void countChanged();
 
@@ -56,6 +58,8 @@ private Q_SLOTS:
 
 private:
     int fromSource( int idx ) const;
+
+    int toSource( int idx ) const;
 
     Marble::NewstuffModel m_newstuffModel;
 };
