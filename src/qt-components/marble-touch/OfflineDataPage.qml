@@ -28,6 +28,7 @@ Page {
     ListView {
         id: dataView
         anchors.fill: parent
+        anchors.margins: 5
         model: offlineDataModel
         delegate: dataDelegate
         highlight: Rectangle { radius: 5; color: "lightsteelblue" }
