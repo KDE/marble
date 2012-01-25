@@ -67,8 +67,9 @@ Page {
             id: delegateRoot
             width: parent.width
             height: row.height
-            property bool installing: false
+            property bool installing: transitioning
             property bool selected: ListView.view.currentIndex === idx
+            property bool showDetails: selected || installing
             property int idx: index
 
             Row {
@@ -87,7 +88,7 @@ Page {
                 Item {
                     id: textItem
                     width: delegateRoot.width - row.spacing - previewIcon.width - 10
-                    height: nameLabel.height + (delegateRoot.selected ? versionLabel.height + installButton.height + 15 : 0)
+                    height: nameLabel.height + (delegateRoot.showDetails ? versionLabel.height + installButton.height + 15 : 0)
 
                     Label {
                         id: nameLabel
@@ -101,7 +102,7 @@ Page {
                         width: parent.width
                         anchors.top: nameLabel.bottom
                         anchors.topMargin: 5
-                        visible: delegateRoot.selected
+                        visible: delegateRoot.showDetails
                         property string localVersion: "<font size=\"-1\">Version installed: " + installedreleasedate + "</font>"
                         text: "<font size=\"-1\">Version available: " + releasedate + "</font>" + (installed ? "<br />" + localVersion : "")
                     }
@@ -112,7 +113,7 @@ Page {
                         anchors.top: versionLabel.bottom
                         anchors.left: nameLabel.left
                         anchors.right: parent.right
-                        anchors.margins: 5
+                        anchors.margins: 20
                         minimumValue: 0.0
                         maximumValue: 1.0
                         indeterminate: true
@@ -120,20 +121,21 @@ Page {
                         Connections {
                             target: offlineDataModel
                             onInstallationProgressed: {
-                                if (index === delegateRoot.idx) {
+                                if (newstuffindex === delegateRoot.idx) {
                                     progressBar.indeterminate = false
                                     progressBar.value = progress
                                 }
                             }
                             onInstallationFinished: {
-                                delegateRoot.installing = false
+                                if (newstuffindex === delegateRoot.idx) {
+                                    delegateRoot.installing = false
+                                }
                             }
-                        }
-
-                        Connections {
-                            target: offlineDataModel
-                            onInstallationFinished: delegateRoot.installing = false
-                            onUninstallationFinished: delegateRoot.installing = false
+                            onUninstallationFinished: {
+                                if (newstuffindex === delegateRoot.idx) {
+                                    delegateRoot.installing = false
+                                }
+                            }
                         }
                     }
 
@@ -152,6 +154,7 @@ Page {
                         width: parent.width / 2 - 5
                         visible: delegateRoot.selected && !delegateRoot.installing
                         onClicked: {
+                            progressBar.indeterminate = true
                             delegateRoot.installing = true
                             offlineDataModel.install(delegateRoot.idx)
                         }
@@ -167,6 +170,7 @@ Page {
                         visible: delegateRoot.selected && !delegateRoot.installing
                         enabled: installed
                         onClicked: {
+                            progressBar.indeterminate = true
                             delegateRoot.installing = true
                             offlineDataModel.uninstall(delegateRoot.idx)
                         }

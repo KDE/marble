@@ -17,9 +17,11 @@
 #include <QtCore/QTemporaryFile>
 #include <QtCore/QDir>
 #include <QtCore/QFuture>
+#include <QtCore/QPair>
 #include <QtCore/QFutureWatcher>
 #include <QtCore/QtConcurrentRun>
 #include <QtCore/QProcessEnvironment>
+#include <QtCore/QMutexLocker>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtXml/QDomDocument>
@@ -57,6 +59,11 @@ public:
         Replace
     };
 
+    enum UserAction {
+        Install,
+        Uninstall
+    };
+
     NewstuffModel* m_parent;
 
     QVector<NewstuffItem> m_items;
@@ -83,6 +90,12 @@ public:
 
     QProcess* m_unpackProcess;
 
+    QMutex m_mutex;
+
+    typedef QPair<int, UserAction> Action;
+
+    QList<Action> m_actionQueue;
+
     NewstuffModelPrivate( NewstuffModel* parent );
 
     void handleProviderData( QNetworkReply* reply );
@@ -100,6 +113,10 @@ public:
     void changeNode( QDomNode &node, QDomDocument &domDocument, const QString &key, const QString &value, NodeAction action );
 
     void readInstalledFiles( QStringList* target, const QDomNode &node );
+
+    void processQueue();
+
+    bool isTransitioning( int index ) const;
 
     template<class T>
     void readValue( const QDomNode &node, const QString &key, T* target );
@@ -331,6 +348,7 @@ NewstuffModel::NewstuffModel( QObject *parent ) :
     roles[IsInstalled] = "installed";
     roles[IsUpgradable] = "upgradable";
     roles[Category] = "category";
+    roles[IsTransitioning] = "transitioning";
     setRoleNames( roles );
 }
 
@@ -366,6 +384,7 @@ QVariant NewstuffModel::data ( const QModelIndex &index, int role ) const
         case IsInstalled: return !d->m_items.at( index.row() ).m_registryNode.isNull();
         case IsUpgradable: return d->m_items.at( index.row() ).isUpgradable();
         case Category: return d->m_items.at( index.row() ).m_category;
+        case IsTransitioning: return d->isTransitioning( index.row() );
         }
     }
 
@@ -458,43 +477,42 @@ QString NewstuffModel::registryFile() const
 
 void NewstuffModel::install( int index )
 {
-    if ( index < 0 || index == d->m_currentIndex || index >= d->m_items.size() ) {
+    if ( index < 0 || index >= d->m_items.size() ) {
         return;
     }
 
-    d->m_currentIndex = index;
-    if ( !d->m_currentFile ) {
-        QFileInfo const file = d->m_items.at( index ).m_payload.path();
-        d->m_currentFile = new QTemporaryFile( QDir::tempPath() + "/marble-XXXXXX-" + file.fileName() );
+    NewstuffModelPrivate::Action action( index, NewstuffModelPrivate::Install );
+    {
+        QMutexLocker locker( &d->m_mutex );
+        if ( d->m_actionQueue.contains( action ) ) {
+            return;
+        }
+        d->m_actionQueue << action;
     }
 
-    if ( d->m_currentFile->open() ) {
-        QUrl const payload = d->m_items.at( index ).m_payload;
-        d->m_currentReply = d->m_networkAccessManager->get( QNetworkRequest( payload ) );
-        connect( d->m_currentReply, SIGNAL( readyRead() ), this, SLOT( retrieveData() ) );
-        connect( d->m_currentReply, SIGNAL( readChannelFinished() ), this, SLOT( retrieveData() ) );
-        connect( d->m_currentReply, SIGNAL( downloadProgress( qint64, qint64 ) ),
-                 this, SLOT( updateProgress( qint64, qint64 ) ) );
-        /** @todo: handle download errors */
-    } else {
-        mDebug() << "Failed to write to " << d->m_currentFile->fileName();
-    }
+    d->processQueue();
 }
 
 void NewstuffModel::uninstall( int idx )
 {
-    if ( idx < 0 || idx >= d->m_items.size() || d->m_items[idx].m_registryNode.isNull() ) {
+    if ( idx < 0 || idx >= d->m_items.size() ) {
         return;
     }
 
-    // Run in a separate thread to keep the ui responsive
-    d->m_currentIndex = idx;
-    QFutureWatcher<void>* watcher = new QFutureWatcher<void>( this );
-    connect( watcher, SIGNAL( finished() ), this, SLOT( mapUninstalled() ) );
-    connect( watcher, SIGNAL( finished() ), watcher, SLOT( deleteLater() ) );
+    if ( d->m_items[idx].m_registryNode.isNull() ) {
+        emit uninstallationFinished( idx );
+    }
 
-    QFuture<void> future = QtConcurrent::run( d, &NewstuffModelPrivate::uninstall, idx );
-    watcher->setFuture( future );
+    NewstuffModelPrivate::Action action( idx, NewstuffModelPrivate::Uninstall );
+    {
+        QMutexLocker locker( &d->m_mutex );
+        if ( d->m_actionQueue.contains( action ) ) {
+            return;
+        }
+        d->m_actionQueue << action;
+    }
+
+    d->processQueue();
 }
 
 void NewstuffModel::updateProgress( qint64 bytesReceived, qint64 bytesTotal )
@@ -533,7 +551,11 @@ void NewstuffModel::mapInstalled( int exitStatus )
         emit installationFailed( d->m_currentIndex , QString( "Unable to unpack file. Process exited with status code %1." ).arg( exitStatus ) );
     }
 
-    d->m_currentIndex = -1;
+    {
+        QMutexLocker locker( &d->m_mutex );
+        d->m_currentIndex = -1;
+    }
+    d->processQueue();
 }
 
 void NewstuffModel::mapUninstalled()
@@ -541,7 +563,12 @@ void NewstuffModel::mapUninstalled()
     QModelIndex const affected = index( d->m_currentIndex );
     emit dataChanged( affected, affected );
     emit uninstallationFinished( d->m_currentIndex );
-    d->m_currentIndex = -1;
+
+    {
+        QMutexLocker locker( &d->m_mutex );
+        d->m_currentIndex = -1;
+    }
+    d->processQueue();
 }
 
 void NewstuffModel::contentsListed( int exitStatus )
@@ -602,7 +629,68 @@ void NewstuffModel::contentsListed( int exitStatus )
     } else {
         mDebug() << "Process exit status " << exitStatus << " indicates an error.";
         emit installationFailed( d->m_currentIndex , QString( "Unable to list file contents. Process exited with status code %1." ).arg( exitStatus ) );
+
+        {
+            QMutexLocker locker( &d->m_mutex );
+            d->m_currentIndex = -1;
+        }
+        d->processQueue();
     }
+}
+
+void NewstuffModelPrivate::processQueue()
+{
+    if ( m_actionQueue.empty() || m_currentIndex >= 0 ) {
+        return;
+    }
+
+    Action nextAction;
+    {
+        QMutexLocker locker( &m_mutex );
+        nextAction = m_actionQueue.takeFirst();
+        m_currentIndex = nextAction.first;
+    }
+    if ( nextAction.second == Install ) {
+        if ( !m_currentFile ) {
+            QFileInfo const file = m_items.at( m_currentIndex ).m_payload.path();
+            m_currentFile = new QTemporaryFile( QDir::tempPath() + "/marble-XXXXXX-" + file.fileName() );
+        }
+
+        if ( m_currentFile->open() ) {
+            QUrl const payload = m_items.at( m_currentIndex ).m_payload;
+            m_currentReply = m_networkAccessManager->get( QNetworkRequest( payload ) );
+            QObject::connect( m_currentReply, SIGNAL( readyRead() ), m_parent, SLOT( retrieveData() ) );
+            QObject::connect( m_currentReply, SIGNAL( readChannelFinished() ), m_parent, SLOT( retrieveData() ) );
+            QObject::connect( m_currentReply, SIGNAL( downloadProgress( qint64, qint64 ) ),
+                     m_parent, SLOT( updateProgress( qint64, qint64 ) ) );
+            /** @todo: handle download errors */
+        } else {
+            mDebug() << "Failed to write to " << m_currentFile->fileName();
+        }
+    } else {
+        // Run in a separate thread to keep the ui responsive
+        QFutureWatcher<void>* watcher = new QFutureWatcher<void>( m_parent );
+        QObject::connect( watcher, SIGNAL( finished() ), m_parent, SLOT( mapUninstalled() ) );
+        QObject::connect( watcher, SIGNAL( finished() ), watcher, SLOT( deleteLater() ) );
+
+        QFuture<void> future = QtConcurrent::run( this, &NewstuffModelPrivate::uninstall, m_currentIndex );
+        watcher->setFuture( future );
+    }
+}
+
+bool NewstuffModelPrivate::isTransitioning( int index ) const
+{
+    if ( m_currentIndex == index ) {
+        return true;
+    }
+
+    foreach( const Action &action, m_actionQueue ) {
+        if ( action.first == index ) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 }
