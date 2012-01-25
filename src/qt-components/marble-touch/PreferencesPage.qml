@@ -37,8 +37,8 @@ Page {
             width: parent.width - 20
 
             columns: inPortrait ? 1 : 2
-            rows: 12 / columns
-            spacing: inPortrait ? 20 : 5
+            rows: 10 / columns
+            spacing: inPortrait ? 10 : 5
 
             property int leftRowWidth: inPortrait ? width : 250
             property int rightRowWidth: inPortrait ? width : width - leftRowWidth - spacing
@@ -138,7 +138,7 @@ Page {
             Item {
                 id: speakerSettings
                 width: pageGrid.rightRowWidth
-                height: speakerHelp.height + speakersSwitch.height
+                height: speakersSwitch.height + speakersItem.height
 
                 ButtonRow {
                     id: speakersSwitch
@@ -211,10 +211,12 @@ Page {
                 }
 
                 Item {
+                    id: speakersItem
                     anchors.right: parent.right
                     anchors.left: parent.left
                     anchors.top: speakersSwitch.bottom
                     anchors.topMargin: 5
+                    height: Math.max(speakerHelp.height, voiceNavigationPreviewButton.height)
 
                     Label {
                         anchors.left: parent.left
@@ -321,26 +323,30 @@ Page {
 
             Label {
                 width: pageGrid.leftRowWidth
-                text: "Additional Map Themes"
+                text: "Data Management"
             }
 
-            Button {
-                id: manageThemeButton
-                text: "Manage"
-                onClicked: pageStack.push(themePage)
-                MapThemePage { id: themePage }
-            }
+            Item {
+                width: pageGrid.rightRowWidth
+                height: manageThemeButton.height
 
-            Label {
-                width: pageGrid.leftRowWidth
-                text: "Offline Data"
-            }
+                Button {
+                    id: manageThemeButton
+                    width: pageGrid.rightRowWidth / 2 - 5
+                    text: "Map Themes"
+                    onClicked: pageStack.push(themePage)
+                    MapThemePage { id: themePage }
+                }
 
-            Button {
-                id: manageOfflineDataButton
-                text: "Manage"
-                onClicked: pageStack.push(offlineDataPage)
-                OfflineDataPage { id: offlineDataPage }
+                Button {
+                    id: manageOfflineDataButton
+                    anchors.left: manageThemeButton.right
+                    anchors.leftMargin: 5
+                    anchors.right: parent.right
+                    text: "Offline Data"
+                    onClicked: pageStack.push(offlineDataPage)
+                    OfflineDataPage { id: offlineDataPage }
+                }
             }
         }
     }
