@@ -267,14 +267,19 @@ Page {
 
                 Button {
                     id: themeSelectionButton
-                    text: marbleWidget.streetMapThemeModel.name(settings.streetMapTheme)
+                    text: mapThemeModel.name(settings.streetMapTheme)
                     onClicked: themeDialog.open()
+
+                    MapThemeModel {
+                        id: mapThemeModel
+                        mapThemeFilter: MapThemeModel.Extraterrestrial | MapThemeModel.LowZoom
+                    }
 
                     SelectionDialog {
                         id: themeDialog
                         titleText: "Street Map Theme"
-                        selectedIndex: marbleWidget.streetMapThemeModel.indexOf(settings.streetMapTheme)
-                        model: marbleWidget.streetMapThemeModel
+                        selectedIndex: mapThemeModel.indexOf(settings.streetMapTheme)
+                        model: mapThemeModel
                         delegate:
                             Rectangle {
                             id: delegate
@@ -305,6 +310,7 @@ Page {
                                 onClicked: {
                                     themeDialog.selectedIndex = index
                                     settings.streetMapTheme = mapThemeId
+                                    themeDialog.accept()
                                 }
                             }
                         }

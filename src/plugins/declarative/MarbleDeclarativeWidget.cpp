@@ -14,7 +14,6 @@
 #include "Coordinate.h"
 #include "Tracking.h"
 #include "ZoomButtonInterceptor.h"
-#include "StreetMapThemeModel.h"
 
 #include "GeoDataCoordinates.h"
 #include "MarbleWidget.h"
@@ -34,8 +33,7 @@
 MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     QGraphicsProxyWidget( parent, flags ), m_marbleWidget( new Marble::MarbleWidget ),
     m_inputEnabled( true ), m_tracking( 0 ), m_routing( 0 ), m_navigation( 0 ), m_search( 0 ),
-    m_interceptor( new ZoomButtonInterceptor( m_marbleWidget, this ) ),
-    m_streetMapThemeModel( 0 )
+    m_interceptor( new ZoomButtonInterceptor( m_marbleWidget, this ) )
 {
     m_marbleWidget->setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
     m_marbleWidget->model()->routingManager()->profilesModel()->loadDefaultProfiles();
@@ -274,16 +272,6 @@ Search* MarbleWidget::search()
 QObject *MarbleWidget::mapThemeModel()
 {
     return m_marbleWidget->model()->mapThemeManager()->mapThemeModel();
-}
-
-StreetMapThemeModel* MarbleWidget::streetMapThemeModel()
-{
-    if ( m_marbleWidget && !m_streetMapThemeModel ) {
-        m_streetMapThemeModel = new StreetMapThemeModel( m_marbleWidget->model()->mapThemeManager() );
-        m_streetMapThemeModel->setSourceModel( m_marbleWidget->model()->mapThemeManager()->mapThemeModel() );
-    }
-
-    return m_streetMapThemeModel;
 }
 
 void MarbleWidget::setGeoSceneProperty(const QString &key, bool value)

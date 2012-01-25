@@ -24,7 +24,6 @@ Item {
     signal mouseClickGeoPosition(real longitude, real latitude)
 
     property alias mapThemeModel: map.mapThemeModel
-    property alias streetMapThemeModel: map.streetMapThemeModel
     property alias zoom: map.zoom
 
     property alias routing: map.routing
