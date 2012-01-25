@@ -44,7 +44,8 @@ public:
         InstalledReleaseDate,
         IsInstalled,
         IsUpgradable,
-        Category
+        Category,
+        IsTransitioning
     };
 
     enum IdTag {
@@ -96,13 +97,13 @@ Q_SIGNALS:
 
     void registryFileChanged();
 
-    void installationProgressed( int index, qreal progress );
+    void installationProgressed( int newstuffindex, qreal progress );
 
-    void installationFinished( int index );
+    void installationFinished( int newstuffindex );
 
-    void installationFailed( int index, const QString &error );
+    void installationFailed( int newstuffindex, const QString &error );
 
-    void uninstallationFinished( int index );
+    void uninstallationFinished( int newstuffindex );
 
 private Q_SLOTS:
     void updateProgress( qint64 bytesReceived, qint64 bytesTotal );

@@ -37,13 +37,13 @@ public Q_SLOTS:
 Q_SIGNALS:
     void countChanged();
 
-    void installationProgressed( int index, qreal progress );
+    void installationProgressed( int newstuffindex, qreal progress );
 
-    void installationFinished( int index );
+    void installationFinished( int newstuffindex );
 
-    void installationFailed( int index, const QString &error );
+    void installationFailed( int newstuffindex, const QString &error );
 
-    void uninstallationFinished( int index );
+    void uninstallationFinished( int newstuffindex );
 
 private Q_SLOTS:
     void handleInstallationProgress( int index, qreal progress );

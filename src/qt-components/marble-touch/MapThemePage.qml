@@ -48,8 +48,9 @@ Page {
             id: delegateRoot
             width: parent.width
             height: row.height
-            property bool installing: false
+            property bool installing: transitioning
             property bool selected: ListView.view.currentIndex === idx
+            property bool showDetails: selected || installing
             property int idx: index
 
             Row {
@@ -58,7 +59,7 @@ Page {
 
                 Item {
                     width: previewIcon.width
-                    height: Math.max(previewIcon.height + (delegateRoot.selected ? versionLabel.height + 5 : 0), textItem.height)
+                    height: Math.max(previewIcon.height + (delegateRoot.showDetails ? versionLabel.height + 5 : 0), textItem.height)
 
                     Image {
                         id: previewIcon
@@ -73,7 +74,7 @@ Page {
                         width: parent.width
                         anchors.top: previewIcon.bottom
                         anchors.topMargin: 5
-                        visible: delegateRoot.selected
+                        visible: delegateRoot.showDetails
                         text: "<p><font size=\"-1\">Version: " + version + "<br />" + releasedate + "</font></p>"
                     }
                 }
@@ -81,7 +82,7 @@ Page {
                 Item {
                     id: textItem
                     width: delegateRoot.width - row.spacing - previewIcon.width - 10
-                    height: nameLabel.height + summaryLabel.height + (delegateRoot.selected ? installButton.height + 10 : 0)
+                    height: nameLabel.height + summaryLabel.height + (delegateRoot.showDetails ? installButton.height + 10 : 0)
 
                     Label {
                         id: nameLabel
@@ -95,7 +96,7 @@ Page {
                         width: parent.width
                         anchors.top: nameLabel.bottom
                         property string details: "<p><font size=\"-1\">Author: " + author + "</font></p><p><font size=\"-1\">License: " + licence + "</font></p>"
-                        text: "<p><font size=\"-1\">" + summary + (delegateRoot.selected ? details : "") + "</font></p>"
+                        text: "<p><font size=\"-1\">" + summary + (delegateRoot.showDetails ? details : "") + "</font></p>"
                     }
 
                     ProgressBar {
@@ -104,7 +105,7 @@ Page {
                         anchors.top: summaryLabel.bottom
                         anchors.left: parent.left
                         anchors.right: parent.right
-                        anchors.margins: 5
+                        anchors.margins: 20
                         minimumValue: 0.0
                         maximumValue: 1.0
                         indeterminate: true
@@ -112,20 +113,21 @@ Page {
                         Connections {
                             target: themeInstallModel
                             onInstallationProgressed: {
-                                if (index === delegateRoot.idx) {
+                                if (newstuffindex === delegateRoot.idx) {
                                     progressBar.indeterminate = false
                                     progressBar.value = progress
                                 }
                             }
                             onInstallationFinished: {
-                                delegateRoot.installing = false
+                                if (newstuffindex === delegateRoot.idx) {
+                                    delegateRoot.installing = false
+                                }
                             }
-                        }
-
-                        Connections {
-                            target: themeInstallModel
-                            onInstallationFinished: delegateRoot.installing = false
-                            onUninstallationFinished: delegateRoot.installing = false
+                            onUninstallationFinished: {
+                                if (newstuffindex === delegateRoot.idx) {
+                                    delegateRoot.installing = false
+                                }
+                            }
                         }
                     }
 
@@ -144,6 +146,7 @@ Page {
                         width: parent.width / 2 - 5
                         visible: delegateRoot.selected && !delegateRoot.installing
                         onClicked: {
+                            progressBar.indeterminate = true
                             delegateRoot.installing = true
                             themeInstallModel.install(delegateRoot.idx)
                         }
@@ -159,6 +162,7 @@ Page {
                         visible: delegateRoot.selected && !delegateRoot.installing
                         enabled: installed
                         onClicked: {
+                            progressBar.indeterminate = true
                             delegateRoot.installing = true
                             themeInstallModel.uninstall(delegateRoot.idx)
                         }
