@@ -116,10 +116,12 @@ public:
 
     void processQueue();
 
+    NewstuffItem importNode( const QDomNode &node ) const;
+
     bool isTransitioning( int index ) const;
 
     template<class T>
-    void readValue( const QDomNode &node, const QString &key, T* target );
+    void readValue( const QDomNode &node, const QString &key, T* target ) const;
 };
 
 QString NewstuffItem::installedVersion() const
@@ -186,18 +188,7 @@ void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
     QDomElement root = xml.documentElement();
     QDomNodeList items = root.elementsByTagName( "stuff" );
     for ( unsigned int i = 0; i < items.length(); ++i ) {
-        NewstuffItem item;
-        QDomNode node = items.item( i );
-        item.m_category = node.attributes().namedItem( "category" ).toAttr().value();
-        readValue<QString>( node, "name", &item.m_name );
-        readValue<QString>( node, "author", &item.m_author );
-        readValue<QString>( node, "licence", &item.m_licence );
-        readValue<QString>( node, "summary", &item.m_summary );
-        readValue<QString>( node, "version", &item.m_version );
-        readValue<QString>( node, "releasedate", &item.m_releaseDate );
-        readValue<QUrl>( node, "preview", &item.m_preview );
-        readValue<QUrl>( node, "payload", &item.m_payload );
-        m_items << item;
+        m_items << importNode( items.item( i ) );
     }
 
     updateModel();
@@ -257,6 +248,15 @@ void NewstuffModelPrivate::updateModel()
                     break;
                 }
             }
+
+            // Not found in newstuff or newstuff not there yet
+            NewstuffItem item = importNode( items.item( i ) );
+            if ( m_idTag == NewstuffModel::PayloadTag ) {
+                item.m_registryNode = items.item( i );
+            } else if ( m_idTag == NewstuffModel::NameTag ) {
+                item.m_registryNode = items.item( i );
+            }
+            m_items << item;
         }
     }
 
@@ -315,7 +315,7 @@ void NewstuffModelPrivate::changeNode( QDomNode &node, QDomDocument &domDocument
 }
 
 template<class T>
-void NewstuffModelPrivate::readValue( const QDomNode &node, const QString &key, T* target )
+void NewstuffModelPrivate::readValue( const QDomNode &node, const QString &key, T* target ) const
 {
     QDomNodeList matches = node.toElement().elementsByTagName( key );
     if ( matches.size() == 1 ) {
@@ -727,6 +727,21 @@ void NewstuffModelPrivate::processQueue()
         QFuture<void> future = QtConcurrent::run( this, &NewstuffModelPrivate::uninstall, m_currentAction.first );
         watcher->setFuture( future );
     }
+}
+
+NewstuffItem NewstuffModelPrivate::importNode(const QDomNode &node) const
+{
+    NewstuffItem item;
+    item.m_category = node.attributes().namedItem( "category" ).toAttr().value();
+    readValue<QString>( node, "name", &item.m_name );
+    readValue<QString>( node, "author", &item.m_author );
+    readValue<QString>( node, "licence", &item.m_licence );
+    readValue<QString>( node, "summary", &item.m_summary );
+    readValue<QString>( node, "version", &item.m_version );
+    readValue<QString>( node, "releasedate", &item.m_releaseDate );
+    readValue<QUrl>( node, "preview", &item.m_preview );
+    readValue<QUrl>( node, "payload", &item.m_payload );
+    return item;
 }
 
 bool NewstuffModelPrivate::isTransitioning( int index ) const
