@@ -7,7 +7,7 @@ NwwMapImage::NwwMapImage()
     : m_tileEdgeLengthPixel( 512 ),
       m_emptyPixel( qRgba( 0, 0, 0, 255 )),
       m_interpolationMethod( BilinearInterpolation ),
-      m_tileCache( 100 * 1024 * 1024 ) // 100 MB cache
+      m_tileCache( DefaultCacheSizeBytes )
 {
 }
 
@@ -21,7 +21,7 @@ NwwMapImage::NwwMapImage( QDir const & baseDirectory, int const tileLevel )
       m_mapWidthPixel( m_mapWidthTiles * m_tileEdgeLengthPixel ),
       m_mapHeightPixel( m_mapHeightTiles * m_tileEdgeLengthPixel ),
       m_interpolationMethod( BilinearInterpolation ),
-      m_tileCache( 100 * 1024 * 1024 ) // 100 MB cache
+      m_tileCache( DefaultCacheSizeBytes )
 {
     if ( !m_baseDirectory.exists() )
         qFatal("Base directory does not exist.");
