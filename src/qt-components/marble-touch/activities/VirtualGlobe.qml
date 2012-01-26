@@ -75,8 +75,8 @@ Page {
                         anchors.fill: parent
                         onClicked: {
                             themeDialog.selectedIndex = index
-                            settings.mapTheme = mapThemeId
                             themeDialog.accept()
+                            settings.mapTheme = mapThemeId
                         }
                     }
                 }

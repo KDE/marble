@@ -309,8 +309,8 @@ Page {
                                 anchors.fill: parent
                                 onClicked: {
                                     themeDialog.selectedIndex = index
-                                    settings.streetMapTheme = mapThemeId
                                     themeDialog.accept()
+                                    settings.streetMapTheme = mapThemeId
                                 }
                             }
                         }
