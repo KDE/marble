@@ -231,8 +231,8 @@ void MarbleAboutDialog::loadPageContents( int idx )
            "<i>License</i>: OpenStreetMap data can be used freely under the terms of the "
            "<a href=\"http://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">"
            "Creative Commons Attribution-ShareAlike 2.0 license</a>.</p>")+
-        tr( "<p><i>OpenStreetMap Icons</i><br />"
-            "Some placemark icons are taken from <a href=\"http://www.sjjb.co.uk/mapicons\">SJJB Management</a>. "
+        tr( "<p><i>Icons</i><br />"
+            "Some icons are taken from <a href=\"http://www.sjjb.co.uk/mapicons\">SJJB Management</a> and <a href=\"http://http://thenounproject.com\">NounProject</a>."
             "These icons can be used freely under the terms of the "
             "<a href=\"http://creativecommons.org/publicdomain/zero/1.0/\">CC0 1.0 Universal</a> license.</p>") +
         tr("<p><i>OpenRouteService</i><br />"
