@@ -91,11 +91,12 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     }
 
     file.close();
-    if ( geom->size() ) {
-        emit parsingFinished( document );
-    } else {
-        emit parsingFinished( 0 );
+    if ( geom->size() == 0 ) {
+        delete document;
+        document = 0;
     }
+
+    emit parsingFinished( document );
 }
 
 }
