@@ -64,9 +64,7 @@ Page {
                     Image {
                         id: previewIcon
                         anchors.top: parent.top
-                        source: preview
-                        width: 136
-                        height: 136
+                        source: settings.workOffline ? "qrc:/icons/activity-virtualglobe.png" : preview
                     }
 
                     Label {
