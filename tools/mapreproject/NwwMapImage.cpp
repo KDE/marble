@@ -71,6 +71,11 @@ void NwwMapImage::setBaseDirectory( QDir const & baseDirectory )
     m_baseDirectory = baseDirectory;
 }
 
+void NwwMapImage::setCacheSizeBytes(const int cacheSizeBytes)
+{
+    m_tileCache.setMaxCost( cacheSizeBytes );
+}
+
 void NwwMapImage::setInterpolationMethod( InterpolationMethod const method )
 {
     m_interpolationMethod = method;

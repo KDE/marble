@@ -21,6 +21,7 @@ public:
 
     QRgb pixel( int const x, int const y );
     void setBaseDirectory( QDir const & baseDirectory );
+    void setCacheSizeBytes( int const cacheSizeBytes );
     void setInterpolationMethod( InterpolationMethod const method );
     void setTileLevel( int const level );
 
