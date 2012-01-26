@@ -237,26 +237,29 @@ void NewstuffModelPrivate::updateModel()
         QDomNodeList matches = items.item( i ).toElement().elementsByTagName( key );
         if ( matches.size() == 1 ) {
             QString const value = matches.at( 0 ).toElement().text();
-            for ( int j=0; j<m_items.size(); ++j ) {
+            bool found = false;
+            for ( int j=0; j<m_items.size() && !found; ++j ) {
                 NewstuffItem &item = m_items[j];
                 if ( m_idTag == NewstuffModel::PayloadTag && item.m_payload == value ) {
                     item.m_registryNode = items.item( i );
-                    break;
+                    found = true;
                 }
                 if ( m_idTag == NewstuffModel::NameTag && item.m_name == value ) {
                     item.m_registryNode = items.item( i );
-                    break;
+                    found = true;
                 }
             }
 
-            // Not found in newstuff or newstuff not there yet
-            NewstuffItem item = importNode( items.item( i ) );
-            if ( m_idTag == NewstuffModel::PayloadTag ) {
-                item.m_registryNode = items.item( i );
-            } else if ( m_idTag == NewstuffModel::NameTag ) {
-                item.m_registryNode = items.item( i );
+            if ( !found ) {
+                // Not found in newstuff or newstuff not there yet
+                NewstuffItem item = importNode( items.item( i ) );
+                if ( m_idTag == NewstuffModel::PayloadTag ) {
+                    item.m_registryNode = items.item( i );
+                } else if ( m_idTag == NewstuffModel::NameTag ) {
+                    item.m_registryNode = items.item( i );
+                }
+                m_items << item;
             }
-            m_items << item;
         }
     }
 
