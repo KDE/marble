@@ -20,9 +20,9 @@ class Region
     Q_PROPERTY(QString continent READ continent WRITE setContinent)
     Q_PROPERTY(QString country READ country WRITE setCountry)
     Q_PROPERTY(QString name READ name WRITE setName)
-    Q_PROPERTY(QString pbfFile READ pbfFile WTITE setPbfFile)
-    Q_PROPERTY(QString id READ id WTITE setId)
-    Q_PROPERTY(QString path READ path WTITE setPath)
+    Q_PROPERTY(QString pbfFile READ pbfFile WRITE setPbfFile)
+    Q_PROPERTY(QString id READ id WRITE setId)
+    Q_PROPERTY(QString path READ path WRITE setPath)
 
 public:
     Region();

@@ -74,7 +74,7 @@ void Logger::setStatus(const QString &id, const QString &name, const QString &st
         qDebug() << "Sql reports" << deleteJob.lastError();
     } else {
         QSqlQuery createStatus;
-        createStatus.prepare("INSERT INTO jobs (id, name, status, description) VALUES (':job', ':name', ':status', ':description');");
+        createStatus.prepare("INSERT INTO jobs (id, name, status, description) VALUES (:job, :name, :status, :message);");
         createStatus.bindValue(":job", id);
         createStatus.bindValue(":name", name);
         createStatus.bindValue(":status", status);

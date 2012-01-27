@@ -43,6 +43,8 @@ public:
 
     void setTransport(const QString &transport);
 
+    QString transport() const;
+
     void setProfile(const QString &profile);
 
     void setMonavSettings(const QString &filename);

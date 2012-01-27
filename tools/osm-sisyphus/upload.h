@@ -37,6 +37,8 @@ private:
 
     explicit Upload(QObject *parent = 0);
 
+    void changeStatus( const Package &package, const QString &status, const QString &message );
+
     void processQueue();
 
     bool upload(const Package &package);

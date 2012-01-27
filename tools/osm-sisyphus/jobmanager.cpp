@@ -74,9 +74,28 @@ void JobManager::setRegionsFile(const QString &filename)
         if (!node.namedItem("pbf").isNull()) {
             region.setPbfFile(node.namedItem("pbf").toElement().text());
         }
-
-        if (!region.continent().isEmpty() && !region.name().isEmpty()) {
-            m_regions << region;
+        if (!node.namedItem("transport").isNull()) {
+            QStringList input = node.namedItem("transport").toElement().text().split(',', QString::SkipEmptyParts);
+            foreach( const QString &value, input ) {
+                if (!region.continent().isEmpty() && !region.name().isEmpty()) {
+                    PendingJob job;
+                    job.m_region = region;
+                    job.m_transport = value.trimmed();
+                    if (job.m_transport == "Motorcar") {
+                        job.m_profile = "motorcar";
+                        m_pendingJobs << job;
+                    } else if (job.m_transport == "Bicycle") {
+                        job.m_profile = "bicycle";
+                        m_pendingJobs << job;
+                    } else if (job.m_transport == "Pedestrian") {
+                        job.m_profile = "foot";
+                        m_pendingJobs << job;
+                    } else {
+                        qDebug() << "Invalid transport type " << job.m_transport
+                                 << " in .xml file, ignoring. Valid types are Motorcar, Bicycle and Pedestrian.";
+                    }
+                }
+            }
         }
     }
 }
@@ -94,22 +113,22 @@ void JobManager::setJobParameters(const JobParameters &parameters)
 void JobManager::update()
 {
     bool resume = m_resumeId.isEmpty();
-    foreach(const Region &region, m_regions) {
-        resume = resume || region.id() == m_resumeId;
+    foreach(const PendingJob &job, m_pendingJobs) {
+        resume = resume || job.m_region.id() == m_resumeId;
         if (resume) {
-            addJob(region);
+            addJob(job);
         }
     }
 
     QTimer::singleShot(1000*60*60*24, this, SLOT(update()));
 }
 
-void JobManager::addJob(const Region &region)
+void JobManager::addJob(const PendingJob &job)
 {
-    Job* countryJob = new Job(region, m_jobParameters);
+    Job* countryJob = new Job(job.m_region, m_jobParameters);
     /** @todo: Support other transport types */
-    countryJob->setTransport("Motorcar");
-    countryJob->setProfile("motorcar");
+    countryJob->setTransport(job.m_transport);
+    countryJob->setProfile(job.m_profile);
     countryJob->setMonavSettings(m_monavSettings.absoluteFilePath());
     m_queue.addJob(countryJob);
 }

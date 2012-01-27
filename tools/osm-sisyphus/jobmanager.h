@@ -18,6 +18,12 @@
 #include <QtCore/QStringList>
 #include <QtCore/QVector>
 
+struct PendingJob {
+    Region m_region;
+    QString m_transport;
+    QString m_profile;
+};
+
 class JobManager : public QObject
 {
     Q_OBJECT
@@ -36,7 +42,7 @@ private Q_SLOTS:
     void update();
 
 private:
-    void addJob(const Region &region);
+    void addJob(const PendingJob &region);
 
     JobQueue m_queue;
 
@@ -44,7 +50,7 @@ private:
 
     QFileInfo m_monavSettings;
 
-    QVector<Region> m_regions;
+    QVector<PendingJob> m_pendingJobs;
 
     QString m_resumeId;
 };

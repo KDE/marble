@@ -42,6 +42,11 @@ void Job::setTransport(const QString &transport)
     m_transport = transport;
 }
 
+QString Job::transport() const
+{
+    return m_transport;
+}
+
 void Job::setProfile(const QString &profile)
 {
     m_profile = profile;
@@ -54,7 +59,7 @@ void Job::setMonavSettings(const QString &filename)
 
 bool Job::operator ==(const Job &other) const
 {
-    return m_region == other.m_region;
+    return m_transport == other.m_transport && m_region == other.m_region;
 }
 
 void Job::run()
@@ -81,7 +86,7 @@ void Job::changeStatus(Job::Status status, const QString &message)
     case Error: statusType = "error"; break;
     }
 
-    Logger::instance().setStatus(m_region.id(), m_region.name(), statusType, message);
+    Logger::instance().setStatus(m_region.id() + "_" + m_transport, m_region.name(), statusType, message);
     m_statusMessage = message;
     m_status = status;
 }

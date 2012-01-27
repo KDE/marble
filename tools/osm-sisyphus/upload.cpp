@@ -16,6 +16,11 @@ Upload::Upload(QObject *parent) :
     // nothing to do
 }
 
+void Upload::changeStatus(const Package &package, const QString &status, const QString &message)
+{
+    Logger::instance().setStatus( package.region.id() + "_" + package.transport, package.region.name(), status, message);
+}
+
 void Upload::processQueue()
 {
     if (m_queue.isEmpty()) {
@@ -26,7 +31,7 @@ void Upload::processQueue()
 
     if (upload(package)) {
         QString const message = QString("File %1 (%2) successfully created and uploaded").arg(package.file.fileName()).arg(Region::fileSize(package.file));
-        Logger::instance().setStatus(package.region.id(), package.region.name(), "finished", message);
+        changeStatus( package, "finished", message);
     }
     deleteFile(package.file);
     processQueue();
@@ -49,7 +54,7 @@ bool Upload::upload(const Package &package)
     ssh.waitForFinished(1000 * 60 * 10); // wait up to 10 minutes for mkdir to complete
     if (ssh.exitStatus() != QProcess::NormalExit || ssh.exitCode() != 0) {
         qDebug() << "Failed to create remote directory " << remoteDir;
-        Logger::instance().setStatus(package.region.id(), package.region.name(), "error", "Failed to create remote directory: " + ssh.readAllStandardError());
+        changeStatus( package, "error", "Failed to create remote directory: " + ssh.readAllStandardError());
         return false;
     }
 
@@ -62,7 +67,7 @@ bool Upload::upload(const Package &package)
     scp.waitForFinished(1000 * 60 * 60 * 12); // wait up to 12 hours for upload to complete
     if (scp.exitStatus() != QProcess::NormalExit || scp.exitCode() != 0) {
         qDebug() << "Failed to upload " << target;
-        Logger::instance().setStatus(package.region.id(), package.region.name(), "error", "Failed to upload file: " + scp.readAllStandardError());
+        changeStatus( package, "error", "Failed to upload file: " + scp.readAllStandardError());
         return false;
     }
 
@@ -90,20 +95,20 @@ bool Upload::adjustNewstuffFile(const Package &package)
         wget.waitForFinished(1000 * 60 * 60 * 12); // wait up to 12 hours for download to complete
         if (wget.exitStatus() != QProcess::NormalExit || wget.exitCode() != 0) {
             qDebug() << "Failed to download newstuff file from files.kde.org";
-            Logger::instance().setStatus(package.region.id(), package.region.name(), "error", "Failed to sync newstuff file: " + wget.readAllStandardError());
+            changeStatus( package, "error", "Failed to sync newstuff file: " + wget.readAllStandardError());
             return false;
         }
 
         QFile file(monavFilename);
         if (!file.open(QFile::ReadOnly)) {
             qDebug() << "Failed to open newstuff file" << monavFilename;
-            Logger::instance().setStatus(package.region.id(), package.region.name(), "error", "Failed to open newstuff file.");
+            changeStatus( package, "error", "Failed to open newstuff file.");
             return false;
         }
 
         if ( !m_xml.setContent( &file ) ) {
             qDebug() << "Cannot parse newstuff xml file.";
-            Logger::instance().setStatus(package.region.id(), package.region.name(), "error", "Failed to parse newstuff .xml file.");
+            changeStatus( package, "error", "Failed to parse newstuff .xml file.");
             return false;
         }
 
