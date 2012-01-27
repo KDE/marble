@@ -157,7 +157,7 @@ bool Job::monav()
     arguments << "-dd" /*<< "-dc"*/;
     QProcess monav;
     monav.start("monav-preprocessor", arguments);
-    monav.waitForFinished(1000 * 60 * 60 * 2); // wait up to 2 hours for monav to convert the data
+    monav.waitForFinished(1000 * 60 * 60 * 6); // wait up to 6 hours for monav to convert the data
     if (monav.exitStatus() == QProcess::NormalExit && monav.exitCode() == 0) {
         qDebug() << "Processed osm file for monav";
     } else {
@@ -206,7 +206,7 @@ bool Job::search()
     arguments << kmlFile.absoluteFilePath();
     QProcess osmAddresses;
     osmAddresses.start("osm-addresses", arguments);
-    osmAddresses.waitForFinished(1000 * 60 * 60 * 12); // wait up to 12 hours for osm-addresses to convert the data
+    osmAddresses.waitForFinished(1000 * 60 * 60 * 18); // wait up to 18 hours for osm-addresses to convert the data
     if (osmAddresses.exitStatus() == QProcess::NormalExit && osmAddresses.exitCode() == 0) {
         searchFile().refresh();
         if (!searchFile().exists()) {
