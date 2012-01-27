@@ -3,6 +3,7 @@
 #include "ReadOnlyMapImage.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QTime>
 
 #include <cmath>
 
@@ -78,6 +79,8 @@ void OsmTileClusterRenderer::initMapSources()
 void OsmTileClusterRenderer::renderOsmTileCluster( int const clusterX, int const clusterY )
 {
     qDebug() << objectName() << "rendering clusterX:" << clusterX << ", clusterY:" << clusterY;
+    QTime t;
+    t.start();
     int const tileX1 = clusterX * m_clusterEdgeLengthTiles;
     int const tileX2 = tileX1 + m_clusterEdgeLengthTiles;
     int const tileY1 = clusterY * m_clusterEdgeLengthTiles;
@@ -100,8 +103,10 @@ void OsmTileClusterRenderer::renderOsmTileCluster( int const clusterX, int const
                 qFatal("Unable to save tile '%s'.", filename.toStdString().c_str() );
         }
     }
+    int const durationMs = t.elapsed();
     qDebug() << objectName() << "clusterX:" <<clusterX << ", clusterY:" << clusterY
-             << "rendered:" << m_tilesRenderedCount << "tiles";
+             << "rendered:" << m_tilesRenderedCount << "tiles in" << durationMs << "ms =>"
+             << static_cast<double>( m_tilesRenderedCount ) * 1000.0 / static_cast<double>( durationMs ) << "tiles/s";
     emit clusterRendered( this );
 }
 
