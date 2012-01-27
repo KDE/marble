@@ -73,8 +73,13 @@ void Logger::setStatus(const QString &id, const QString &name, const QString &st
         qDebug() << "Error when executing query" << deleteJob.lastQuery();
         qDebug() << "Sql reports" << deleteJob.lastError();
     } else {
-        QSqlQuery createStatus( QString("INSERT INTO jobs (id, name, status, description) VALUES ('%1', '%2', '%3', '%4');").arg(id).arg(name).arg(status).arg(message) );
-        if ( createStatus.lastError().isValid() ) {
+        QSqlQuery createStatus;
+        createStatus.prepare("INSERT INTO jobs (id, name, status, description) VALUES (':job', ':name', ':status', ':description');");
+        createStatus.bindValue(":job", id);
+        createStatus.bindValue(":name", name);
+        createStatus.bindValue(":status", status);
+        createStatus.bindValue(":message", message);
+        if ( !createStatus.exec() ) {
             qDebug() << "Error when executing query" << createStatus.lastQuery();
             qDebug() << "Sql reports" << createStatus.lastError();
         }
