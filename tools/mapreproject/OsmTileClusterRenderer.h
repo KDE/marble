@@ -48,7 +48,6 @@ private:
     QVector<ReadOnlyMapDefinition> m_mapSourceDefinitions;
     QVector<ReadOnlyMapImage*> m_mapSources;
     int m_mapSourceCount;
-    int m_tilesRenderedCount;
 };
 
 #endif

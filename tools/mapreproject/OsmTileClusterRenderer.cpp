@@ -18,8 +18,7 @@ OsmTileClusterRenderer::OsmTileClusterRenderer( QObject * const parent )
       m_clusterEdgeLengthTiles(),
       m_mapSourceDefinitions(),
       m_mapSources(),
-      m_mapSourceCount(),
-      m_tilesRenderedCount()
+      m_mapSourceCount()
 {
 }
 
@@ -79,6 +78,7 @@ void OsmTileClusterRenderer::initMapSources()
 void OsmTileClusterRenderer::renderOsmTileCluster( int const clusterX, int const clusterY )
 {
     qDebug() << objectName() << "rendering clusterX:" << clusterX << ", clusterY:" << clusterY;
+    int tilesRenderedCount = 0;
     QTime t;
     t.start();
     int const tileX1 = clusterX * m_clusterEdgeLengthTiles;
@@ -98,15 +98,15 @@ void OsmTileClusterRenderer::renderOsmTileCluster( int const clusterX, int const
             QString const filename = tileDirectory.path() + QString( "/%1.png" ).arg( tileY );
             bool const saved = osmTile.save( filename );
             if ( saved )
-                ++m_tilesRenderedCount;
+                ++tilesRenderedCount;
             else
                 qFatal("Unable to save tile '%s'.", filename.toStdString().c_str() );
         }
     }
     int const durationMs = t.elapsed();
     qDebug() << objectName() << "clusterX:" <<clusterX << ", clusterY:" << clusterY
-             << "rendered:" << m_tilesRenderedCount << "tiles in" << durationMs << "ms =>"
-             << static_cast<double>( m_tilesRenderedCount ) * 1000.0 / static_cast<double>( durationMs ) << "tiles/s";
+             << "rendered:" << tilesRenderedCount << "tiles in" << durationMs << "ms =>"
+             << static_cast<double>( tilesRenderedCount ) * 1000.0 / static_cast<double>( durationMs ) << "tiles/s";
     emit clusterRendered( this );
 }
 
