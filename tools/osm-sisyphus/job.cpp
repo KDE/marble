@@ -103,8 +103,7 @@ bool Job::download()
 
     QProcess wget;
     QStringList arguments;
-    QString url = "http://download.geofabrik.de/osm/";
-    url += m_region.pbfFile();
+    QString url = m_region.pbfFile();
     arguments << "-O" << osmFile().absoluteFilePath() << url;
     qDebug() << "Downloading " << url;
     wget.start("wget", arguments);
