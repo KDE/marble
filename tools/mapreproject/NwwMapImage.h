@@ -14,7 +14,6 @@
 class NwwMapImage: public ReadOnlyMapImage
 {
 public:
-    NwwMapImage();
     NwwMapImage( QDir const & baseDirectory, int const tileLevel );
 
     virtual QRgb pixel( double const lonRad, double const latRad );

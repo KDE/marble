@@ -3,14 +3,6 @@
 #include <QtCore/QDebug>
 #include <cmath>
 
-NwwMapImage::NwwMapImage()
-    : m_tileEdgeLengthPixel( 512 ),
-      m_emptyPixel( qRgba( 0, 0, 0, 255 )),
-      m_interpolationMethod( BilinearInterpolation ),
-      m_tileCache( DefaultCacheSizeBytes )
-{
-}
-
 NwwMapImage::NwwMapImage( QDir const & baseDirectory, int const tileLevel )
     : m_tileEdgeLengthPixel( 512 ),
       m_emptyPixel( qRgba( 0, 0, 0, 255 )),
