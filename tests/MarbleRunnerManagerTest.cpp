@@ -293,6 +293,16 @@ void MarbleRunnerManagerTest::testAsyncParsing_data()
     QTest::addColumn<QString>( "fileName" );
 
     addRow() << MarbleDirs::path( "placemarks/otherplacemarks.cache" );
+
+    addRow() << MarbleDirs::path( "mwdbii/DATELINE.PNT" );
+    addRow() << MarbleDirs::path( "mwdbii/PCOAST.PNT" );
+    addRow() << MarbleDirs::path( "mwdbii/PGLACIER.PNT" );
+    addRow() << MarbleDirs::path( "mwdbii/PLAKEISLAND.PNT" );
+    addRow() << MarbleDirs::path( "mwdbii/PDIFFBORDER.PNT" );
+    addRow() << MarbleDirs::path( "mwdbii/PISLAND.PNT" );
+    addRow() << MarbleDirs::path( "mwdbii/PLAKE.PNT" );
+    addRow() << MarbleDirs::path( "mwdbii/PUSA48.DIFF.PNT" );
+    addRow() << MarbleDirs::path( "mwdbii/RIVER.PNT" );
 }
 
 void MarbleRunnerManagerTest::testAsyncParsing()
