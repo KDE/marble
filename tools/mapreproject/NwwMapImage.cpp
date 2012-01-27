@@ -24,7 +24,7 @@ NwwMapImage::NwwMapImage( QDir const & baseDirectory, int const tileLevel )
       m_tileCache( DefaultCacheSizeBytes )
 {
     if ( !m_baseDirectory.exists() )
-        qFatal("Base directory does not exist.");
+        qFatal( "Base directory '%s' does not exist.", m_baseDirectory.path().toStdString().c_str() );
 
     qDebug() << "tileLevel:" << m_tileLevel
              << "\nmapWidthTiles:" << m_mapWidthTiles
