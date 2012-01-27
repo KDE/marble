@@ -17,7 +17,8 @@ OsmTileClusterRenderer::OsmTileClusterRenderer( QObject * const parent )
       m_clusterEdgeLengthTiles(),
       m_mapSourceDefinitions(),
       m_mapSources(),
-      m_mapSourceCount()
+      m_mapSourceCount(),
+      m_tilesRenderedCount()
 {
 }
 
@@ -93,11 +94,14 @@ void OsmTileClusterRenderer::renderOsmTileCluster( int const clusterX, int const
 
             QString const filename = tileDirectory.path() + QString( "/%1.png" ).arg( tileY );
             bool const saved = osmTile.save( filename );
-            if ( !saved )
+            if ( saved )
+                ++m_tilesRenderedCount;
+            else
                 qFatal("Unable to save tile '%s'.", filename.toStdString().c_str() );
         }
     }
-    qDebug() << objectName() << "clusterX:" <<clusterX << ", clusterY:" << clusterY << "rendered";
+    qDebug() << objectName() << "clusterX:" <<clusterX << ", clusterY:" << clusterY
+             << "rendered:" << m_tilesRenderedCount << "tiles";
     emit clusterRendered( this );
 }
 
