@@ -62,7 +62,6 @@ void Thread::launchWorker( QObject * const worker )
 {
     m_worker = worker;
     start();
-    int i = 0;
     m_worker->moveToThread( this );
     m_shutDownHelper->moveToThread( this );
     connect( m_shutDownHelper, SIGNAL(mapped(int)), this, SLOT(stopExecutor()), Qt::DirectConnection );
