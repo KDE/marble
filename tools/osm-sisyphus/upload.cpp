@@ -18,7 +18,8 @@ Upload::Upload(QObject *parent) :
 
 void Upload::changeStatus(const Package &package, const QString &status, const QString &message)
 {
-    Logger::instance().setStatus( package.region.id() + "_" + package.transport, package.region.name(), status, message);
+    Logger::instance().setStatus( package.region.id() + "_" + package.transport,
+                                  package.region.name() + " (" + package.transport + ")", status, message);
 }
 
 void Upload::processQueue()

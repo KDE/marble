@@ -35,7 +35,7 @@ void JobQueue::addJob(Job *newJob)
     if (m_runningJobs.size()<m_maxConcurrentJobs) {
         startJob(newJob);
     } else {
-        Logger::instance().setStatus(newJob->region().id() + "_" + newJob->transport(), newJob->region().name(), "waiting", "Queued.");
+        Logger::instance().setStatus(newJob->region().id() + "_" + newJob->transport(), newJob->region().name() + " (" + newJob->transport() + ")", "waiting", "Queued.");
         m_jobs << newJob;
     }
 }

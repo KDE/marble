@@ -86,7 +86,8 @@ void Job::changeStatus(Job::Status status, const QString &message)
     case Error: statusType = "error"; break;
     }
 
-    Logger::instance().setStatus(m_region.id() + "_" + m_transport, m_region.name(), statusType, message);
+    Logger::instance().setStatus(m_region.id() + "_" + m_transport,
+                                 m_region.name() + " (" + m_transport + ")", statusType, message);
     m_statusMessage = message;
     m_status = status;
 }
