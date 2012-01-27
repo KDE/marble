@@ -1,5 +1,7 @@
 #include "OsmTileClusterRenderer.h"
 
+#include "ReadOnlyMapImage.h"
+
 #include <QtCore/QDebug>
 
 #include <cmath>
@@ -7,7 +9,15 @@
 OsmTileClusterRenderer::OsmTileClusterRenderer( QObject * const parent )
     : QObject( parent ),
       m_osmTileEdgeLengthPixel( 256 ),
-      m_emptyPixel( qRgba( 0, 0, 0, 255 ))
+      m_emptyPixel( qRgba( 0, 0, 0, 255 )),
+      m_osmBaseDirectory(),
+      m_osmTileLevel(),
+      m_osmMapEdgeLengthTiles(),
+      m_osmMapEdgeLengthPixel(),
+      m_clusterEdgeLengthTiles(),
+      m_mapSourceDefinitions(),
+      m_mapSources(),
+      m_mapSourceCount()
 {
 }
 
@@ -16,19 +26,9 @@ void OsmTileClusterRenderer::setClusterEdgeLengthTiles( int const clusterEdgeLen
     m_clusterEdgeLengthTiles = clusterEdgeLengthTiles;
 }
 
-void OsmTileClusterRenderer::setNwwBaseDirectory( QDir const & nwwBaseDirectory )
+void OsmTileClusterRenderer::setMapSources( QVector<ReadOnlyMapDefinition> const & mapSourceDefinitions )
 {
-    m_nwwMapImage.setBaseDirectory( nwwBaseDirectory );
-}
-
-void OsmTileClusterRenderer::setNwwInterpolationMethod( InterpolationMethod const interpolationMethod )
-{
-    m_nwwMapImage.setInterpolationMethod( interpolationMethod );
-}
-
-void OsmTileClusterRenderer::setNwwTileLevel( int const level )
-{
-    m_nwwMapImage.setTileLevel( level );
+    m_mapSourceDefinitions = mapSourceDefinitions;
 }
 
 void OsmTileClusterRenderer::setOsmBaseDirectory( QDir const & osmBaseDirectory )
@@ -58,6 +58,20 @@ QDir OsmTileClusterRenderer::checkAndCreateDirectory( int const tileX ) const
         }
     }
     return tileDirectory;
+}
+
+void OsmTileClusterRenderer::initMapSources()
+{
+    QVector<ReadOnlyMapDefinition>::const_iterator pos = m_mapSourceDefinitions.begin();
+    QVector<ReadOnlyMapDefinition>::const_iterator const end = m_mapSourceDefinitions.end();
+    for (; pos != end; ++pos )
+    {
+        ReadOnlyMapImage * const mapImage = (*pos).createReadOnlyMap();
+        if ( !mapImage )
+            qFatal("Invalid map source definition.");
+        m_mapSources.push_back( mapImage );
+    }
+    m_mapSourceCount = m_mapSources.count();
 }
 
 void OsmTileClusterRenderer::renderOsmTileCluster( int const clusterX, int const clusterY )
@@ -104,10 +118,16 @@ QImage OsmTileClusterRenderer::renderOsmTile( int const tileX, int const tileY )
         for ( int x = 0; x < m_osmTileEdgeLengthPixel; ++x ) {
             int const pixelX = basePixelX + x;
             double const lonRad = osmPixelXtoLonRad( pixelX );
-            QRgb const color = m_nwwMapImage.pixel( lonRad, latRad );
 
-            if ( color != m_emptyPixel )
-                tileEmpty = false;
+            QRgb color = m_emptyPixel;
+            for (int i = 0; i < m_mapSourceCount; ++i)
+            {
+               color = m_mapSources[i]->pixel( lonRad, latRad );
+               if ( color != m_emptyPixel ) {
+                   tileEmpty = false;
+                   break;
+               }
+            }
 
             tile.setPixel( x, y, color );
         }

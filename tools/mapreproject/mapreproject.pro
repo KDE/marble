@@ -20,7 +20,8 @@ SOURCES += main.cpp \
     NwwMapImage.cpp \
     OsmTileClusterRenderer.cpp \
     Thread.cpp \
-    ReadOnlyMapImage.cpp
+    ReadOnlyMapImage.cpp \
+    ReadOnlyMapDefinition.cpp
 
 HEADERS += \
     NasaWorldWindToOpenStreetMapConverter.h \
@@ -28,10 +29,9 @@ HEADERS += \
     OsmTileClusterRenderer.h \
     Thread.h \
     mapreproject.h \
-    ReadOnlyMapImage.h
+    ReadOnlyMapImage.h \
+    ReadOnlyMapDefinition.h
 
 unix|win32: LIBS += -lQtGui
 
 QMAKE_CXXFLAGS += -march=native
-
-unix:!macx:!symbian: LIBS += -lboost_program_options

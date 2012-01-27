@@ -1,11 +1,15 @@
 #ifndef RENDEROSMTILECLUSTERTHREAD_H
 #define RENDEROSMTILECLUSTERTHREAD_H
 
-#include "NwwMapImage.h"
+#include "mapreproject.h"
+#include "ReadOnlyMapDefinition.h"
 
 #include <QtCore/QDir>
 #include <QtCore/QObject>
+#include <QtCore/QVector>
 #include <QtGui/QImage>
+
+class ReadOnlyMapImage;
 
 class OsmTileClusterRenderer: public QObject
 {
@@ -15,9 +19,7 @@ public:
     explicit OsmTileClusterRenderer( QObject * const parent = NULL );
 
     void setClusterEdgeLengthTiles( int const clusterEdgeLengthTiles );
-    void setNwwBaseDirectory( QDir const & nwwBaseDirectory );
-    void setNwwInterpolationMethod( InterpolationMethod const interpolationMethod );
-    void setNwwTileLevel( int const level );
+    void setMapSources( QVector<ReadOnlyMapDefinition> const & mapSources );
     void setOsmBaseDirectory( QDir const & osmBaseDirectory );
     void setOsmTileLevel( int const level );
 
@@ -25,6 +27,7 @@ signals:
     void clusterRendered( OsmTileClusterRenderer * );
 
 public slots:
+    void initMapSources();
     void renderOsmTileCluster( int const clusterX, int const clusterY );
 
 private:
@@ -40,9 +43,11 @@ private:
     int m_osmTileLevel;
     int m_osmMapEdgeLengthTiles;
     int m_osmMapEdgeLengthPixel;
-
-    NwwMapImage m_nwwMapImage;
     int m_clusterEdgeLengthTiles;
+
+    QVector<ReadOnlyMapDefinition> m_mapSourceDefinitions;
+    QVector<ReadOnlyMapImage*> m_mapSources;
+    int m_mapSourceCount;
 };
 
 #endif

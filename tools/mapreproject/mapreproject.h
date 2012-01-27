@@ -5,4 +5,8 @@ enum InterpolationMethod { UnknownInterpolation,
                            NearestNeighborInterpolation,
                            BilinearInterpolation };
 
+enum MapSourceType { UnknownMapSource,
+                     NasaWorldWindMap,
+                     BathymetryMap };
+
 #endif

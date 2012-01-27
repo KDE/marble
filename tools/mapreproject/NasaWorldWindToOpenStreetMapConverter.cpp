@@ -13,8 +13,6 @@
 NasaWorldWindToOpenStreetMapConverter::NasaWorldWindToOpenStreetMapConverter( QObject * const parent )
     : QObject( parent ),
       m_threadCount(),
-      m_nwwTileLevel(),
-      m_nwwInterpolationMethod(),
       m_osmTileLevel(),
       m_osmTileClusterEdgeLengthTiles(),
       m_osmMapEdgeLengthClusters(),
@@ -23,19 +21,9 @@ NasaWorldWindToOpenStreetMapConverter::NasaWorldWindToOpenStreetMapConverter( QO
 {
 }
 
-void NasaWorldWindToOpenStreetMapConverter::setNwwBaseDirectory( QDir const & nwwBaseDirectory )
+void NasaWorldWindToOpenStreetMapConverter::setMapSources( QVector<ReadOnlyMapDefinition> const & mapSources )
 {
-    m_nwwBaseDirectory = nwwBaseDirectory;
-}
-
-void NasaWorldWindToOpenStreetMapConverter::setNwwInterpolationMethod( InterpolationMethod const interpolationMethod )
-{
-    m_nwwInterpolationMethod = interpolationMethod;
-}
-
-void NasaWorldWindToOpenStreetMapConverter::setNwwTileLevel( int const level )
-{
-    m_nwwTileLevel = level;
+    m_mapSources = mapSources;
 }
 
 void NasaWorldWindToOpenStreetMapConverter::setOsmBaseDirectory( QDir const & osmBaseDirectory )
@@ -79,9 +67,7 @@ QVector<QPair<Thread*, OsmTileClusterRenderer*> > NasaWorldWindToOpenStreetMapCo
         OsmTileClusterRenderer * const renderer = new OsmTileClusterRenderer;
         renderer->setObjectName( QString("Renderer %1").arg( i ));
         renderer->setClusterEdgeLengthTiles( m_osmTileClusterEdgeLengthTiles );
-        renderer->setNwwBaseDirectory( m_nwwBaseDirectory );
-        renderer->setNwwInterpolationMethod( m_nwwInterpolationMethod );
-        renderer->setNwwTileLevel( m_nwwTileLevel );
+        renderer->setMapSources( m_mapSources );
         renderer->setOsmBaseDirectory( m_osmBaseDirectory );
         renderer->setOsmTileLevel( m_osmTileLevel );
         QObject::connect( renderer, SIGNAL(clusterRendered(OsmTileClusterRenderer*)),
@@ -89,6 +75,7 @@ QVector<QPair<Thread*, OsmTileClusterRenderer*> > NasaWorldWindToOpenStreetMapCo
 
         Thread * const thread = new Thread;
         thread->launchWorker( renderer );
+        QMetaObject::invokeMethod( renderer, "initMapSources", Qt::QueuedConnection );
         QMetaObject::invokeMethod( renderer, "renderOsmTileCluster", Qt::QueuedConnection,
                                    Q_ARG( int, m_nextClusterX ), Q_ARG( int, m_nextClusterY ));
         incNextCluster();

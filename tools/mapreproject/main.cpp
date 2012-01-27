@@ -1,5 +1,6 @@
 #include "NasaWorldWindToOpenStreetMapConverter.h"
 #include "OsmTileClusterRenderer.h"
+#include "ReadOnlyMapDefinition.h"
 #include "Thread.h"
 #include "mapreproject.h"
 
@@ -9,11 +10,133 @@
 #include <QtCore/QPair>
 #include <QtCore/QVector>
 
-#include <boost/program_options.hpp>
+#include <getopt.h>
+
+#include <cstdlib>
 #include <iostream>
 #include <string>
+#include <vector>
 
-namespace po = boost::program_options;
+/* example usage
+mapreproject --simulate --output-directory=/home/jmho --jobs 7 --cluster-size 64 --output-tile-level=10 \
+    --input=type=NasaWW,base-directory=/home,tile-level=8,interpolation-method=Bilinear,cache-size=200000000 \
+    --input type=Bathymetry,file=BLAH.tiff
+*/
+
+
+MapSourceType parseType( char const * const value )
+{
+    MapSourceType result = UnknownMapSource;
+    if ( !value )
+        qFatal("Suboption 'type' does not have a value.");
+    if ( strcmp( value, "NasaWW") == 0 )
+        result = NasaWorldWindMap;
+    else if ( strcmp( value, "Bathymetry" ) == 0 )
+        result = BathymetryMap;
+    else
+        qFatal("Suboption 'type': Unrecognized value '%s'.", value );
+    return result;
+}
+
+QString parseString( char const * const value )
+{
+    QString result;
+    if ( !value )
+        qFatal("Suboption does not have a value.");
+    result = value;
+    return result;
+}
+
+int parseInt( char const * const value )
+{
+    if ( !value )
+        qFatal("Suboption does not have a value.");
+    QString str( value );
+    bool ok;
+    int const result = str.toInt( &ok );
+    if ( !ok )
+        qFatal("Suboption does not have an integer value.");
+    return result;
+}
+
+InterpolationMethod parseInterpolationMethod( char const * const value )
+{
+    InterpolationMethod result = UnknownInterpolation;
+    if ( !value )
+        qFatal("Suboption 'interpolation-method' does not have a value.");
+    if ( strcmp( value, "NearestNeighbor") == 0 )
+        result = NearestNeighborInterpolation;
+    else if ( strcmp( value, "Bilinear" ) == 0 )
+        result = BilinearInterpolation;
+    else
+        qFatal("Suboption 'interpolation-method': Unrecognized value '%s'.", value );
+    return result;
+}
+
+ReadOnlyMapDefinition parseInput( char * subopts )
+{
+    if ( !subopts )
+        qFatal("Missing argument for '--input'");
+
+    enum
+    {
+        TypeOption = 0,
+        BaseDirectoryOption,
+        FileOption,
+        TileLevelOption,
+        InterpolationOption,
+        CacheSizeOption,
+        TheEnd
+    };
+
+    char * const input_opts[] =
+    {
+        "type",
+        "base-directory",
+        "file",
+        "tile-level",
+        "interpolation-method",
+        "cache-size",
+        NULL
+    };
+
+    ReadOnlyMapDefinition mapDefinition;
+
+    char * value;
+    while ( *subopts != '\0' ) {
+        switch ( getsubopt( &subopts, input_opts, &value )) {
+
+        case TypeOption:
+            mapDefinition.setMapType( parseType( value ));
+            break;
+
+        case BaseDirectoryOption:
+            mapDefinition.setBaseDirectory( parseString( value ));
+            break;
+
+        case FileOption:
+            mapDefinition.setFileName( parseString( value ));
+            break;
+
+        case TileLevelOption:
+            mapDefinition.setTileLevel( parseInt( value ));
+            break;
+
+        case InterpolationOption:
+            mapDefinition.setInterpolationMethod( parseInterpolationMethod( value ));
+            break;
+
+        case CacheSizeOption:
+            mapDefinition.setCacheSizeBytes( parseInt( value ));
+            break;
+
+        default:
+            qFatal("Unrecognized input suboption.");
+        }
+    }
+    return mapDefinition;
+}
+
 
 int main( int argc, char *argv[] )
 {
@@ -21,88 +144,90 @@ int main( int argc, char *argv[] )
 
     // --interpolation-method=NearestNeighbor|Bilinear
 
-    QString inputDirectory;
-    int inputTileLevel = -1; // tile level -1 makes no sense
-
     QString outputDirectory;
     int outputTileLevel = -1;
 
     int threadCount = 0; // threads count 0 makes no sense
     int clusterSize = 0; // cluster size 0 makes no sense
-    InterpolationMethod interpolationMethod = UnknownInterpolation;
+    bool onlySimulate = false;
 
-    int opt;
-    po::options_description desc("Allowed options");
-    desc.add_options()
-            ("help", "produce help message")
-            ("input-directory", po::value<std::string>(), "input base directory")
-            ("input-tile-level", po::value<int>(), "tile level of input map")
-            ("output-directory", po::value<std::string>(),
-             "output base directory, where the resulting tiles will be stored")
-            ("output-tile-level", po::value<int>(), "tile level of resulting map")
-            ("jobs", po::value<int>( &opt )->default_value( QThread::idealThreadCount() ),
-             "number of threads, use to override default of one thread per cpu core")
-            ("cluster-size", po::value<int>( &opt )->default_value( 64 ),
-             "edge length of tile clusters in tiles")
-            ("interpolation-method", po::value<std::string>(),
-             "method used for interpolating between pixels");
+    QVector<ReadOnlyMapDefinition> mapSources;
 
-    po::variables_map variables;
-    po::store( po::parse_command_line( argc, argv, desc ), variables );
-    po::notify( variables );
+    // input: type, tile-level, base-dir|file
+    // --input,type=NasaWW,tile-level=8,base-directory=<dir>,interpolation-method=Bilinear
+    // --input,type=Image,file=<file>
 
-    if ( variables.count("help")) {
-        std::cout << desc << "\n";
-        return 1;
+    enum { HelpOption = 1,
+           InputOption,
+           OutputDirectoryOption,
+           OutputTileLevelOption,
+           JobsOption,
+           ClusterSizeOption,
+           SimulateOption };
+
+    static struct option long_options[] = {
+        {"help",              no_argument,       NULL, HelpOption },
+        {"input",             required_argument, NULL, InputOption },
+        {"output-directory",  required_argument, NULL, OutputDirectoryOption },
+        {"output-tile-level", required_argument, NULL, OutputTileLevelOption },
+        {"jobs",              required_argument, NULL, JobsOption },
+        {"cluster-size",      required_argument, NULL, ClusterSizeOption },
+        {"simulate",          no_argument,       NULL, SimulateOption },
+        {0, 0, 0, 0 }
+    };
+
+    while ( true ) {
+        int option_index = 0;
+
+        int const opt = getopt_long( argc, argv, "", long_options, &option_index );
+        if ( opt == -1 )
+            break;
+
+        switch ( opt ) {
+
+        case HelpOption:
+            break;
+
+        case InputOption:
+            mapSources.push_back( parseInput( optarg ));
+            break;
+
+        case OutputDirectoryOption:
+            outputDirectory = parseString( optarg );
+            break;
+
+        case OutputTileLevelOption:
+            outputTileLevel = parseInt( optarg );
+            break;
+
+        case JobsOption:
+            threadCount = parseInt( optarg );
+            break;
+
+        case ClusterSizeOption:
+            clusterSize = parseInt( optarg );
+            break;
+
+        case SimulateOption:
+            onlySimulate = true;
+            break;
+
+        case '?':
+            break;
+        }
     }
 
-    // mandatory arguments
-    if ( variables.count("input-directory"))
-        inputDirectory = variables["input-directory"].as<std::string>().c_str();
-    else
-        qFatal("Mandatory argument '--input-directory' missing");
-
-    if ( variables.count("input-tile-level"))
-        inputTileLevel = variables["input-tile-level"].as<int>();
-    else
-        qFatal("Mandatory argument '--input-tile-level' missing");
-
-    if ( variables.count("output-directory"))
-        outputDirectory = variables["output-directory"].as<std::string>().c_str();
-    else
-        qFatal("Mandatory argument '--output-directory' missing");
-
-    if ( variables.count("output-tile-level"))
-        outputTileLevel = variables["output-tile-level"].as<int>();
-    else
-        qFatal("Mandatory argument '--output-tile-level' missing");
-
-    // optional arguments
-    if ( variables.count("cluster-size"))
-        clusterSize = variables["cluster-size"].as<int>();
-    if ( variables.count("jobs"))
-        threadCount = variables["jobs"].as<int>();
-    if ( variables.count("interpolation-method")) {
-        if ( variables["interpolation-method"].as<std::string>() == "NearestNeighbor" )
-            interpolationMethod = NearestNeighborInterpolation;
-        else if ( variables["interpolation-method"].as<std::string>() == "Bilinear" )
-            interpolationMethod = BilinearInterpolation;
-        else
-            qFatal("Unknown interpolation method '%s'", variables["interpolation-method"].as<std::string>().c_str());
-    }
-
-    qDebug() << "input directory:" << inputDirectory
-             << "\ninput tile level:" << inputTileLevel
-             << "\noutput directory:" << outputDirectory
+    qDebug() << "\noutput directory:" << outputDirectory
              << "\noutput tile level:" << outputTileLevel
              << "\ncluster size:" << clusterSize
              << "\nthreads:" << threadCount
-             << "\ninterpolation method:" << interpolationMethod;
+             << "\ninputs:" << mapSources;
+
+    if (onlySimulate)
+        return 0;
 
     NasaWorldWindToOpenStreetMapConverter converter;
-    converter.setNwwBaseDirectory( QDir( inputDirectory ));
-    converter.setNwwTileLevel( inputTileLevel );
-    converter.setNwwInterpolationMethod( interpolationMethod );
+    converter.setMapSources( mapSources );
     converter.setOsmBaseDirectory( QDir( outputDirectory ));
     converter.setOsmTileLevel( outputTileLevel );
     converter.setOsmTileClusterEdgeLengthTiles( clusterSize );
