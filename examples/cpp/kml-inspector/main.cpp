@@ -20,19 +20,21 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    MarbleModel *model = new MarbleModel;
-    MarbleRunnerManager* manager = new MarbleRunnerManager( model->pluginManager() );
+    MarbleModel model;
+    MarbleRunnerManager manager( model.pluginManager() );
 
-    GeoDataDocument* document = manager->openFile( inputFile.absoluteFilePath() );
-    if ( document ) {
-        GeoDataTreeModel* treeModel = new GeoDataTreeModel;
-        treeModel->addDocument( document );
-        QTreeView* treeView = new QTreeView;
-        treeView->setModel( treeModel );
-        treeView->show();
-    } else {
+    GeoDataDocument* document = manager.openFile( inputFile.absoluteFilePath() );
+    if ( !document ) {
         qDebug() << "Unable to open " << inputFile.absoluteFilePath();
+        return 2;
     }
+
+    GeoDataTreeModel treeModel;
+    treeModel.addDocument( document );
+
+    QTreeView treeView;
+    treeView.setModel( &treeModel );
+    treeView.show();
 
     return app.exec();
 }

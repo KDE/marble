@@ -10,12 +10,12 @@ using namespace Marble;
 
 int main(int argc, char** argv)
 {
-    QApplication app(argc,argv);
+    QApplication app( argc, argv );
 
-    MarbleModel *model = new MarbleModel;
-    MarbleRunnerManager* manager = new MarbleRunnerManager( model->pluginManager() );
-    manager->setModel( model );
+    MarbleModel model;
+    MarbleRunnerManager manager( model.pluginManager() );
+    manager.setModel( &model );
 
     GeoDataCoordinates position( -0.15845,  51.52380, 0.0, GeoDataCoordinates::Degree );
-    qDebug() << position.toString() << "is" << manager->searchReverseGeocoding( position );
+    qDebug() << position.toString() << "is" << manager.searchReverseGeocoding( position );
 }

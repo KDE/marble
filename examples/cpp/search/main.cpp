@@ -10,14 +10,16 @@ using namespace Marble;
 
 int main(int argc, char** argv)
 {
-    QApplication app(argc,argv);
-    MarbleModel *model = new MarbleModel;
+    QApplication app( argc, argv );
 
-    MarbleRunnerManager* manager = new MarbleRunnerManager( model->pluginManager() );
-    manager->setModel( model );
+    MarbleModel model;
+    MarbleRunnerManager manager( model.pluginManager() );
+    manager.setModel( &model );
 
-    QVector<GeoDataPlacemark*> searchResult = manager->searchPlacemarks( "Karlsruhe" );
-    foreach( GeoDataPlacemark* placemark, searchResult ) {
-        qDebug() << "Found " << placemark->name() << "at" << placemark->coordinate().toString();
+    QVector<GeoDataPlacemark*> searchResult = manager.searchPlacemarks( "Karlsruhe" );
+    foreach( const GeoDataPlacemark* placemark, searchResult ) {
+        qDebug() << "Found" << placemark->name() << "at" << placemark->coordinate().toString();
     }
+
+    qDeleteAll( searchResult );
 }
