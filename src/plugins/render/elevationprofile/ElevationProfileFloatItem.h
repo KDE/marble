@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2011 Florian Eßer <f.esser@rwth-aachen.de>
+// Copyright 2011-2012 Florian Eßer <f.esser@rwth-aachen.de>
 //
 
 #ifndef ELEVATIONPROFILEFLOATITEM_H
@@ -15,6 +15,7 @@
 #include <QProcess>
 #include <QThread>
 
+#include "ElevationProfilePlotAxis.h"
 #include "AbstractFloatItem.h"
 #include "PluginAboutDialog.h"
 #include "LabelGraphicsItem.h"
@@ -39,8 +40,11 @@ namespace Marble
 class ElevationProfileFloatItem : public AbstractFloatItem
 {
     Q_OBJECT
+
     Q_INTERFACES( Marble::RenderPluginInterface )
+
     MARBLE_PLUGIN( ElevationProfileFloatItem )
+
  public:
     explicit ElevationProfileFloatItem( const QPointF &point = QPointF( 220, 10.5 ),
                                         const QSizeF &size = QSizeF( 0.0, 50.0 ) );
@@ -95,24 +99,16 @@ class ElevationProfileFloatItem : public AbstractFloatItem
     QDialog *m_configDialog;
     Ui::ElevationProfileConfigWidget *ui_configWidget;
 
-    QString  m_target;
-
     int      m_leftGraphMargin;
     int      m_eleGraphWidth;
     qreal    m_viewportWidth;
     qreal    m_eleGraphHeight;
+    qreal    m_shrinkFactorY;
 
     int      m_fontHeight;
-    int      m_bestDivisorX;
-    qreal    m_pixelIntervalX;
-    qreal    m_valueIntervalX;
 
-    int      m_bestDivisorY;
-    int      m_pixelIntervalY;
-    qreal    m_valueIntervalY;
-
-    QString  m_unitX;
-    QString  m_unitY;
+    ElevationProfilePlotAxis m_axisX;
+    ElevationProfilePlotAxis m_axisY;
 
     bool     m_mouseInWidget;
     qreal    m_cursorPositionX;
@@ -125,11 +121,13 @@ class ElevationProfileFloatItem : public AbstractFloatItem
     RoutingModel*     m_routingModel;
     RoutingLayer*     m_routingLayer;
     bool              m_routeAvailable;
+
     int               m_firstVisiblePoint;
     int               m_lastVisiblePoint;
     bool              m_zoomToViewport;
     QList<QPointF>    m_eleData;
     GeoDataLineString m_points;
+    qreal             m_minElevation;
     qreal             m_maxElevation;
     qreal             m_gain;
     qreal             m_loss;
@@ -140,8 +138,6 @@ class ElevationProfileFloatItem : public AbstractFloatItem
     LabelGraphicsItem m_markerText;
     QRegion           m_lastMarkerRegion;
 
-    void calcScaleX( const qreal distance );
-    void calcScaleY( const qreal distance );
     QList<QPointF> calculateElevationData( const GeoDataLineString &lineString ) const;
     void calculateStatistics( const QList<QPointF> &eleData );
     void repaintRegion( QRegion dirtyRegion );

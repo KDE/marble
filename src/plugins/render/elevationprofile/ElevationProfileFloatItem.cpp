@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2011 Florian Eßer <f.esser@rwth-aachen.de>
+// Copyright 2011-2012 Florian Eßer <f.esser@rwth-aachen.de>
 //
 
 #include "ElevationProfileFloatItem.h"
@@ -17,7 +17,6 @@
 #include <QtGui/QMenu>
 
 #include "ui_ElevationProfileConfigWidget.h"
-#include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
 #include "GeoPainter.h"
@@ -34,19 +33,10 @@ namespace Marble
 ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, const QSizeF &size )
         : AbstractFloatItem( point, size ),
         m_configDialog( 0 ),
-        m_target( QString() ),
         m_leftGraphMargin( 0 ),
         m_eleGraphWidth( 0 ),
         m_viewportWidth( 0 ),
-        m_eleGraphHeight( 50 ),
-        m_bestDivisorX( 0 ),
-        m_pixelIntervalX( 0 ),
-        m_valueIntervalX( 0 ),
-        m_bestDivisorY( 0 ),
-        m_pixelIntervalY( 0 ),
-        m_valueIntervalY( 0 ),
-        m_unitX( tr( "km" ) ),
-        m_unitY( tr( "m") ),
+        m_shrinkFactorY( 1.2 ),
         m_isInitialized( false ),
         m_contextMenu( 0 ),
         m_marbleWidget( 0 ),
@@ -62,8 +52,8 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, cons
         m_markerText( &m_markerTextContainer ),
         m_lastMarkerRegion( QRegion() )
 {
-    setVersion( "1.1" );
-    setCopyrightYear( 2011 );
+    setVersion( "1.2" );
+    setCopyrightYears( QList<int>() << 2011 << 2012 );
     addAuthor( QString::fromUtf8 ( "Florian Eßer" ), "f.esser@rwth-aachen.de" );
 
     setVisible( false );
@@ -72,11 +62,9 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, cons
         setPosition( QPointF( 10.5, 10.5 ) );
     }
     bool const highRes = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::HighResolution;
-    if ( highRes ) {
-        m_eleGraphHeight = 100;
-    }
+    m_eleGraphHeight = highRes ? 100 : 50;
 
-    setPadding(1);
+    setPadding( 1 );
     m_markerIcon.setImage( QImage( ":/flag-red-mirrored.png" ) );
 
     MarbleGraphicsGridLayout *topLayout1 = new MarbleGraphicsGridLayout( 1, 1 );
@@ -148,13 +136,17 @@ bool ElevationProfileFloatItem::isInitialized () const
 void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
 {
     if ( !( viewport->width() == m_viewportWidth && m_isInitialized ) ) {
-        m_fontHeight = QFontMetrics( font() ).ascent() + 1;
+        m_fontHeight = QFontMetricsF( font() ).ascent() + 1;
         bool const highRes = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::HighResolution;
         int const widthRatio = highRes ? 2 : 3;
         setContentSize( QSizeF( viewport->width() / widthRatio,
-                                m_eleGraphHeight + m_fontHeight * 2.5 + padding() ) );
-        m_leftGraphMargin = QFontMetrics( font() ).width("0000 m");
+                                m_eleGraphHeight + m_fontHeight * 2.5 ) );
+        m_leftGraphMargin = QFontMetricsF( font() ).width( "0000 m" ); // TODO make this dynamic according to actual need
         m_eleGraphWidth = contentSize().width() - m_leftGraphMargin;
+        m_axisX.setLength( m_eleGraphWidth );
+        m_axisY.setLength( m_eleGraphHeight );
+        m_axisX.setTickCount( 3, m_eleGraphWidth / ( m_leftGraphMargin * 1.5 ) );
+        m_axisY.setTickCount( 2, m_eleGraphHeight / m_fontHeight );
         m_viewportWidth = viewport->width();
         bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
         if ( !m_isInitialized && !smallScreen ) {
@@ -167,14 +159,11 @@ void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
     update();
 }
 
-
-
 void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         ViewportParams *viewport,
         const QString& renderPos,
         GeoSceneLayer * layer )
 {
-    // TODO: Cleanup, reduce redundant variables etc.
     Q_UNUSED( viewport )
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
@@ -183,7 +172,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     painter->setRenderHint( QPainter::Antialiasing, true );
     painter->setFont( font() );
 
-    m_fontHeight = QFontMetrics( font() ).ascent() + 1;
+    m_fontHeight = QFontMetricsF( font() ).ascent() + 1;
 
     if ( ! ( m_routeAvailable && m_isInitialized && m_eleData.size() > 0 ) ) {
         painter->setPen( QColor( Qt::black ) );
@@ -192,163 +181,102 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         painter->restore();
         return;
     }
-    qreal graphDistance = m_eleData.last().x();
-    qreal graphElevation = m_maxElevation * 1.2;
-    int   valueOffsetX = 0;
-    int   valueOffsetY = 0;
-    int start = 0;
-    int end   = m_eleData.count() - 1;
-    if ( m_zoomToViewport ) {
-        start = m_firstVisiblePoint;
-        end   = m_lastVisiblePoint;
-        valueOffsetX = (int) m_eleData.value(m_firstVisiblePoint).x();
-        graphDistance = m_eleData.value(m_lastVisiblePoint).x()
-                        - m_eleData.value(m_firstVisiblePoint).x();
-
-        qreal localMax = 0.0;
-        valueOffsetY = m_maxElevation;
-        for ( int i = start; i <= end; i++ ) {
-            if ( m_eleData.value(i).y() > localMax ) {
-                localMax = m_eleData.value(i).y();
-            }
-            if ( m_eleData.value(i).y() < valueOffsetY ) {
-                valueOffsetY = m_eleData.value(i).y();
-            }
-        }
-        graphElevation = localMax - valueOffsetY;
+    if ( m_zoomToViewport && ( m_lastVisiblePoint - m_firstVisiblePoint < 5 ) ) {
+        painter->setPen( QColor( Qt::black ) );
+        QString text = tr( "Not enough points in the current viewport.\nTry to disable 'Zoom to viewport'." );
+        painter->drawText( contentRect().toRect(), Qt::TextWordWrap | Qt::AlignCenter, text );
+        painter->restore();
+        return;
     }
 
-
-    QLocale::MeasurementSystem measurementSystem;
-    measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
-
-    if ( measurementSystem == QLocale::ImperialSystem ) {
-        graphDistance *= KM2MI;
-    }
-
-    calcScaleX( graphDistance );
-    calcScaleY( graphElevation );
-
-    QString  intervalStr;
-    int      lastStringEnds     = 0;
-    int      currentStringBegin = 0;
+    QString intervalStr;
+    int lastStringEnds;
 
     // draw viewport bounds
-    if ( ! m_zoomToViewport
-            && ( m_firstVisiblePoint > 0 || m_lastVisiblePoint < m_eleData.size() - 1 ) ) {
+    if ( ! m_zoomToViewport && ( m_firstVisiblePoint > 0 || m_lastVisiblePoint < m_eleData.size() - 1 ) ) {
         QColor color( Qt::black );
         color.setAlpha( 64 );
-        painter->fillRect(
-            m_leftGraphMargin
-            + m_eleData.value(m_firstVisiblePoint).x() * m_eleGraphWidth / graphDistance,
-            0,
-            ( m_eleData.value(m_lastVisiblePoint).x()
-              - m_eleData.value(m_firstVisiblePoint).x() ) * m_eleGraphWidth / graphDistance,
-            m_eleGraphHeight,
-            color
-        );
+        QRect rect;
+        rect.setLeft( m_leftGraphMargin + m_eleData.value( m_firstVisiblePoint ).x() * m_eleGraphWidth / m_axisX.range() );
+        rect.setTop( 0 );
+        rect.setWidth( ( m_eleData.value( m_lastVisiblePoint ).x() - m_eleData.value( m_firstVisiblePoint ).x() ) * m_eleGraphWidth / m_axisX.range() );
+        rect.setHeight( m_eleGraphHeight );
+        painter->fillRect( rect, color );
     }
 
-    // draw Y grid and labels
-    for ( int j = 0; j <= m_bestDivisorY; j ++ ) {
-        if ( measurementSystem == QLocale::MetricSystem ) {
-            if ( valueOffsetY + m_bestDivisorY * m_valueIntervalY > 10000 ) {
-                m_unitY = tr( "km" );
-                intervalStr.setNum( ( valueOffsetY + j * m_valueIntervalY ) / 1000 );
-            } else {
-                m_unitY = tr( "m" );
-                intervalStr.setNum( valueOffsetY + j * m_valueIntervalY );
-            }
-        } else {
-            // TODO: ft instead of mi for the elevation?
-            m_unitY = tr( "mi" );
-            if ( m_bestDivisorY * m_valueIntervalY > 3800 ) {
-                intervalStr.setNum( ( valueOffsetY + j * m_valueIntervalY ) / 1000 );
-            } else {
-                intervalStr.setNum( ( valueOffsetY + j * m_valueIntervalY ) / 1000.0, 'f', 2 );
-            }
-        }
+    // draw X and Y axis
+    painter->setPen( oxygenAluminumGray4 );
+    painter->drawLine( m_leftGraphMargin, m_eleGraphHeight, contentSize().width(), m_eleGraphHeight );
+    painter->drawLine( m_leftGraphMargin, m_eleGraphHeight, m_leftGraphMargin, 0 );
 
-        painter->setPen( oxygenAluminumGray4 );
-        painter->drawLine( m_leftGraphMargin, m_eleGraphHeight - j * m_pixelIntervalY,
-                           contentSize().width(), m_eleGraphHeight - j * m_pixelIntervalY );
-        painter->setPen( QColor( Qt::black ) );
-        currentStringBegin = m_eleGraphHeight - j * m_pixelIntervalY - m_fontHeight / 2;
-        if ( j == m_bestDivisorY ) {
-            // last one at the top: don't draw outside the visible area
-            if ( currentStringBegin < padding() ) {
-                currentStringBegin  = padding();
-            }
-            QRect rect( m_leftGraphMargin - padding(), currentStringBegin,
-                        m_fontHeight * 2, m_fontHeight );
-            painter->drawText( rect, Qt::AlignLeft, " " + m_unitY );
+    // draw Y grid and labels
+    painter->setPen( QColor( Qt::black ) );
+    QPen dashedPen( Qt::DashLine );
+    dashedPen.setColor( oxygenAluminumGray4 );
+    QRect labelRect( 0, 0, m_leftGraphMargin - 1, m_fontHeight + 2 );
+    lastStringEnds = m_eleGraphHeight + m_fontHeight;
+//     painter->drawText( m_leftGraphMargin + 1, m_fontHeight, "[" + m_axisY.unit() + "]" );
+    foreach ( const AxisTick tick, m_axisY.ticks() ) {
+        const int posY = m_eleGraphHeight - tick.position;
+        painter->setPen( dashedPen );
+        painter->drawLine( m_leftGraphMargin, posY, contentSize().width(), posY );
+
+        labelRect.moveCenter( QPoint( labelRect.center().x(), posY ) );
+        if ( labelRect.top() < 0 ) {
+            // don't cut off uppermost label
+            labelRect.moveTop( 0 );
         }
-        QRect rect( 0, currentStringBegin, m_leftGraphMargin, m_fontHeight );
-        painter->drawText( rect, Qt::AlignRight, intervalStr );
+        if ( labelRect.bottom() >= lastStringEnds ) {
+            // Don't print overlapping labels
+            continue;
+        }
+        lastStringEnds = labelRect.top();
+        painter->setPen( QColor( Qt::black ) );
+        intervalStr.setNum( tick.value * m_axisY.scale() );
+        painter->drawText( labelRect, Qt::AlignRight, intervalStr );
     }
 
     // draw X grid and labels
-    // TODO: Nicer interval ticks when zoomed in, e.g. 42.5 instead of 42.444
     painter->setPen( QColor( Qt::black ) );
-    for ( int j = 0; j <= m_bestDivisorX; j ++ ) {
-        if ( measurementSystem == QLocale::MetricSystem ) {
-            if ( valueOffsetX + m_bestDivisorX * m_valueIntervalX > 10000 ) {
-                m_unitX = tr( "km" );
-                intervalStr.setNum( ( valueOffsetX + j * m_valueIntervalX ) / 1000 );
-            } else {
-                m_unitX = tr( "m" );
-                intervalStr.setNum( valueOffsetX + j * m_valueIntervalX );
-            }
-        } else {
-            m_unitX = tr( "mi" );
-            if ( m_bestDivisorX * m_valueIntervalX > 3800 ) {
-                intervalStr.setNum( ( valueOffsetX +  j * m_valueIntervalX ) / 1000 );
-            } else {
-                intervalStr.setNum( ( valueOffsetX + j * m_valueIntervalX ) / 1000.0, 'f', 2 );
-            }
-        }
+    labelRect.moveTop( m_eleGraphHeight + 1 );
+    lastStringEnds = 0;
+    foreach ( const AxisTick tick, m_axisX.ticks() ) {
+        const int posX = m_leftGraphMargin + tick.position;
+        painter->setPen( dashedPen );
+        painter->drawLine( posX, 0, posX, m_eleGraphHeight );
 
-        if ( j == 0 ) {
-            currentStringBegin = m_leftGraphMargin;
-        } else if ( j == m_bestDivisorX ) {
-            if ( valueOffsetX == 0) {
-                intervalStr += " " + m_unitX;
-            }
-            currentStringBegin = ( m_leftGraphMargin + m_eleGraphWidth
-                                  - QFontMetrics( font() ).width( intervalStr ) * 1.5 );
-        } else {
-            currentStringBegin = ( m_leftGraphMargin + j * m_pixelIntervalX
-                                  - QFontMetrics( font() ).width( intervalStr ) / 2 );
+        intervalStr.setNum( tick.value * m_axisX.scale() );
+        if ( tick.position == m_axisX.ticks().last().position ) {
+            intervalStr += " " + m_axisX.unit();
         }
-
-        if ( lastStringEnds < currentStringBegin ) {
-            painter->setPen( oxygenAluminumGray4 );
-            painter->drawLine(m_leftGraphMargin + j * m_pixelIntervalX, 0,
-                              m_leftGraphMargin + j * m_pixelIntervalX, m_eleGraphHeight );
-            painter->setPen( QColor( Qt::black ) );
-            painter->drawText( currentStringBegin, contentSize().height() - 1.5 * m_fontHeight, intervalStr );
-            lastStringEnds = currentStringBegin + QFontMetrics( font() ).width( intervalStr );
+        labelRect.setWidth( QFontMetricsF( font() ).width( intervalStr ) * 1.5 );
+        labelRect.moveCenter( QPoint( posX, labelRect.center().y() ) );
+        if ( labelRect.right() > m_leftGraphMargin + m_eleGraphWidth ) {
+            // don't cut off rightmost label
+            labelRect.moveRight( m_leftGraphMargin + m_eleGraphWidth );
         }
+        if ( labelRect.left() <= lastStringEnds ) {
+            // Don't print overlapping labels
+            continue;
+        }
+        lastStringEnds = labelRect.right();
+        painter->setPen( QColor( Qt::black ) );
+        painter->drawText( labelRect, Qt::AlignCenter, intervalStr );
     }
 
     // display elevation gain/loss data
-    // TODO: miles/feet...
     painter->setPen( QColor( Qt::black ) );
-    // TODO (after string freeze is over): shorten this for smallScreen / marble-touch
-    intervalStr = tr( "Elevation difference: ca. %1 m (Gain: %2 m, Loss: %3 m)" )
-                    .arg( QString::number( m_gain - m_loss, 'f', 0 ) )
-                    .arg( QString::number( m_gain, 'f', 0 ) )
-                    .arg( QString::number( m_loss, 'f', 0 ) );
-    painter->drawText( padding(), contentSize().height() - padding(), intervalStr );
+    intervalStr = tr( "Difference: %1 %2" )
+                   .arg( QString::number( m_gain - m_loss, 'f', 0 ) )
+                   .arg( m_axisY.unit() );
+    intervalStr += QString::fromUtf8( "  (↗ %1 %3  ↘ %2 %3)" )
+                   .arg( QString::number( m_gain, 'f', 0 ) )
+                   .arg( QString::number( m_loss, 'f', 0 ) )
+                   .arg( m_axisY.unit() );
+    painter->drawText( contentRect().toRect(), Qt::AlignBottom | Qt::AlignCenter, intervalStr );
 
     // draw elevation profile
     painter->setPen( QColor( Qt::black ) );
-    QPoint oldPos (
-        m_leftGraphMargin,
-        m_eleGraphHeight - ( m_eleData.value(start).y() - valueOffsetY )
-        * m_eleGraphHeight / graphElevation
-    );
-
     bool const highRes = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::HighResolution;
     QPen pen = painter->pen();
     pen.setWidth( highRes ? 2 : 1 );
@@ -364,17 +292,30 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     QBrush brush = QBrush( fillGradient );
     painter->setBrush( brush );
 
+    QPoint oldPos;
+    oldPos.setX( m_leftGraphMargin );
+    oldPos.setY( ( m_axisY.minValue() - m_axisY.minValue() )
+                 * m_eleGraphHeight / ( m_axisY.range() / m_shrinkFactorY ) );
+    oldPos.setY( m_eleGraphHeight - oldPos.y() );
     QPainterPath path;
     path.moveTo( oldPos.x(), m_eleGraphHeight );
     path.lineTo( oldPos.x(), oldPos.y() );
+
+    const int start = m_zoomToViewport ? m_firstVisiblePoint : 0;
+    const int end = m_zoomToViewport ? m_lastVisiblePoint : m_eleData.size() - 1;
     for ( int i = start; i <= end; ++i ) {
-        QPoint newPos (
-            m_leftGraphMargin + ( m_eleData.value(i).x() - valueOffsetX )
-            * m_eleGraphWidth / graphDistance,
-            m_eleGraphHeight - ( m_eleData.value(i).y() - valueOffsetY )
-            * m_eleGraphHeight / graphElevation
-        );
-        if ( newPos.x() != oldPos.x() ) {
+        QPoint newPos;
+        if ( i == start ) {
+            // make sure the plot always starts at the y-axis
+            newPos.setX( 0 );
+        } else {
+            newPos.setX( ( m_eleData.value(i).x() - m_axisX.minValue() ) * m_eleGraphWidth / m_axisX.range() );
+        }
+        newPos.rx() += m_leftGraphMargin;
+        if ( newPos.x() != oldPos.x() || newPos.y() != oldPos.y()  ) {
+            newPos.setY( ( m_eleData.value(i).y() - m_axisY.minValue() )
+                         * m_eleGraphHeight / ( m_axisY.range() * m_shrinkFactorY ) );
+            newPos.setY( m_eleGraphHeight - newPos.y() );
             path.lineTo( newPos.x(), newPos.y() );
             oldPos = newPos;
         }
@@ -401,7 +342,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         painter->setPen( QColor( Qt::white ) );
         painter->drawLine( m_leftGraphMargin + m_cursorPositionX, 0,
                            m_leftGraphMargin + m_cursorPositionX, m_eleGraphHeight );
-        qreal xpos = valueOffsetX + ( m_cursorPositionX / m_eleGraphWidth ) * graphDistance;
+        qreal xpos = m_axisX.minValue() + ( m_cursorPositionX / m_eleGraphWidth ) * m_axisX.range();
         qreal ypos = 0;
         GeoDataCoordinates currentPoint;
         for ( int i = start; i < end; ++i) {
@@ -412,41 +353,31 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
                 break;
             }
         }
-        ypos = ( ( ypos - valueOffsetY ) / graphElevation ) * m_eleGraphHeight;
+        ypos = ( ( ypos - m_axisY.minValue() ) / ( m_axisY.range() * m_shrinkFactorY ) ) * m_eleGraphHeight;
         ypos = m_eleGraphHeight - ypos;
 
         painter->drawLine( m_leftGraphMargin + m_cursorPositionX - 5, ypos,
                            m_leftGraphMargin + m_cursorPositionX + 5, ypos );
-        if ( measurementSystem == QLocale::MetricSystem ) {
-            m_unitX = tr( "m" );
-            if ( xpos > 10000 ) {
-                m_unitX = tr( "km" );
-                xpos /= 1000;
-            }
-        } else { // miles
-            m_unitX = tr( "mi" );
-            xpos /= 1000;
-        }
-        intervalStr.setNum( xpos, 'f', 2 );
-        intervalStr += " " + m_unitX;
-        currentStringBegin = m_leftGraphMargin + m_cursorPositionX
-                             - QFontMetrics( font() ).width( intervalStr ) / 2;
+        intervalStr.setNum( xpos * m_axisX.scale(), 'f', 2 );
+        intervalStr += " " + m_axisX.unit();
+        int currentStringBegin = m_leftGraphMargin + m_cursorPositionX
+                             - QFontMetricsF( font() ).width( intervalStr ) / 2;
         painter->drawText( currentStringBegin, contentSize().height() - 1.5 * m_fontHeight, intervalStr );
 
         intervalStr.setNum( currentPoint.altitude(), 'f', 1 );
-        if ( m_cursorPositionX + QFontMetrics( font() ).width( intervalStr ) + m_leftGraphMargin
+        intervalStr += " " + m_axisY.unit();
+        if ( m_cursorPositionX + QFontMetricsF( font() ).width( intervalStr ) + m_leftGraphMargin
                 < m_eleGraphWidth ) {
             currentStringBegin = ( m_leftGraphMargin + m_cursorPositionX + 5 + 2 );
         } else {
             currentStringBegin = m_leftGraphMargin + m_cursorPositionX - 5
-                                 - QFontMetrics( font() ).width( intervalStr ) * 1.5;
+                                 - QFontMetricsF( font() ).width( intervalStr ) * 1.5;
         }
         // Make sure the text still fits into the window
         while ( ypos < m_fontHeight ) {
             ypos++;
         }
         painter->drawText( currentStringBegin, ypos + m_fontHeight / 2, intervalStr );
-
 
         // mark position on the map
         m_markerIconContainer.show();
@@ -470,7 +401,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         m_marbleWidget->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Degree );
         m_markerTextContainer.setCoordinate( GeoDataCoordinates( lon, lat, currentPoint.altitude(),
                                                             Marble::GeoDataCoordinates::Degree ) );
-        m_markerText.setText( " " + intervalStr + " " + m_unitY );
+        m_markerText.setText( intervalStr );
 
         // drawing area of flag
         if ( !m_markerIconContainer.positions().isEmpty() ) {
@@ -497,8 +428,6 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     painter->restore();
 }
 
-
-
 bool ElevationProfileFloatItem::renderOnMap(GeoPainter* painter, ViewportParams* viewport, const QString& renderPos, GeoSceneLayer* layer)
 {
     if ( renderPos == "HOVERS_ABOVE_SURFACE" ) {
@@ -508,110 +437,7 @@ bool ElevationProfileFloatItem::renderOnMap(GeoPainter* painter, ViewportParams*
     return true;
 }
 
-
-
-// see MapScaleFloatItem::calcScaleBar()
-// TODO: unite calcScaleX() and calcScaleY() to one single generic calcScale()
-void ElevationProfileFloatItem::calcScaleX( const qreal distance )
-{
-    qreal magnitude = 1;
-
-    // First we calculate the exact length of the whole area that is possibly
-    // available to the scalebar in kilometers
-    int  magValue = (int)( distance );
-
-    // We calculate the two most significant digits of the km-scalebar-length
-    // and store them in magValue.
-    while ( magValue >= 100 ) {
-        magValue  /= 10;
-        magnitude *= 10;
-    }
-
-    const int minDivisor = 4;
-    const int maxDivisor = 8;
-
-    m_bestDivisorX = 4;
-    int  bestMagValue = 1;
-
-    for ( int i = 0; i < magValue; i++ ) {
-        // We try to find the lowest divisor between minDivisor and maxDivisor that
-        // divides magValue without remainder.
-        for ( int j = minDivisor; j < maxDivisor + 1; j++ ) {
-            if ( ( magValue - i ) % j == 0 ) {
-                // We store the very first result we find and store
-                // m_bestDivisor and bestMagValue as a final result.
-                m_bestDivisorX = j;
-                bestMagValue  = magValue - i;
-
-                // Stop all for loops and end search
-                i = magValue;
-                j = maxDivisor + 1;
-            }
-        }
-
-        // If magValue doesn't divide through values between minDivisor and maxDivisor
-        // (e.g. because it's a prime number) try again with magValue
-        // decreased by i.
-    }
-
-    m_pixelIntervalX = (int)( m_eleGraphWidth * (qreal)( bestMagValue )
-                              / (qreal)( magValue ) / m_bestDivisorX );
-    m_valueIntervalX = (int)( bestMagValue * magnitude / m_bestDivisorX );
-}
-
-
-
-// see MapScaleFloatItem::calcScaleBar()
-void ElevationProfileFloatItem::calcScaleY( const qreal distance )
-{
-    qreal magnitude = 1;
-
-    // First we calculate the exact length of the whole area that is possibly
-    // available to the scalebar in kilometers
-    int  magValue = (int)( distance );
-
-    // We calculate the two most significant digits of the km-scalebar-length
-    // and store them in magValue.
-    while ( magValue >= 100 ) {
-        magValue  /= 10;
-        magnitude *= 10;
-    }
-
-    const int minDivisor = 4;
-    const int maxDivisor = m_eleGraphHeight / ( m_fontHeight * 1.2 );
-
-    m_bestDivisorY = minDivisor;
-    int  bestMagValue = 1;
-
-    for ( int i = 0; i < magValue; i++ ) {
-        // We try to find the lowest divisor between minDivisor and maxDivisor that
-        // divides magValue without remainder.
-        for ( int j = minDivisor; j <= maxDivisor; j++ ) {
-            if ( ( magValue - i ) % j == 0 ) {
-                // We store the very first result we find and store
-                // m_bestDivisor and bestMagValue as a final result.
-                m_bestDivisorY = j;
-                bestMagValue  = magValue - i;
-
-                // Stop all for loops and end search
-                i = magValue;
-                j = maxDivisor + 1;
-            }
-        }
-
-        // If magValue doesn't divide through values between minDivisor and maxDivisor
-        // (e.g. because it's a prime number) try again with magValue
-        // decreased by i.
-    }
-
-    m_pixelIntervalY = (int)( m_eleGraphHeight * (qreal)( bestMagValue )
-                              / (qreal)( magValue ) / m_bestDivisorY );
-    m_valueIntervalY = (int)( bestMagValue * magnitude / m_bestDivisorY );
-}
-
-
-
-QDialog *ElevationProfileFloatItem::configDialog() //TODO
+QDialog *ElevationProfileFloatItem::configDialog() //FIXME TODO Make a config dialog?
 {
     if ( !m_configDialog ) {
         // Initializing configuration dialog
@@ -628,8 +454,6 @@ QDialog *ElevationProfileFloatItem::configDialog() //TODO
     }
     return m_configDialog;
 }
-
-
 
 void ElevationProfileFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
 {
@@ -653,8 +477,6 @@ void ElevationProfileFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent 
     m_contextMenu->exec( w->mapToGlobal( e->pos() ) );
 }
 
-
-
 bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
 {
     if ( !enabled() || !visible() ) {
@@ -677,33 +499,33 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
         updateData();
     }
 
-    bool cursorAboveFloatItem(false);
+    bool cursorAboveFloatItem( false );
     if ( e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove ) {
-        QMouseEvent *event = static_cast<QMouseEvent*>(e);
-        QRectF graphRect = QRectF (m_leftGraphMargin, 0, m_eleGraphWidth, contentSize().height());
-        graphRect.translate(positivePosition());
-        graphRect.translate(padding(), padding());
+        QMouseEvent *event = static_cast<QMouseEvent*>( e  );
+        QRectF plotRect = QRectF ( m_leftGraphMargin, 0, m_eleGraphWidth, contentSize().height() );
+        plotRect.translate( positivePosition() );
+        plotRect.translate( padding(), padding() );
 
         // for antialiasing: increase size by 1 px to each side
-        graphRect.translate(-1, -1);
-        graphRect.setSize(graphRect.size() + QSize(2, 2) );
+        plotRect.translate(-1, -1);
+        plotRect.setSize(plotRect.size() + QSize(2, 2) );
 
-        if ( graphRect.contains(event->pos()) ) {
+        if ( plotRect.contains(event->pos()) ) {
             cursorAboveFloatItem = true;
 
             // Double click triggers recentering the map at the specified position
-            if ( e->type() == QEvent::MouseButtonDblClick && !m_zoomToViewport ) {
-                // TODO: do the math for m_zoomToViewport == true
-                QRectF mapRect( contentRect() );
-                QPointF pos = event->pos() - graphRect.topLeft();
-                GeoDataLineString points = m_routingModel->route().path();
-                int i = pos.x() / m_eleGraphWidth * ( points.size() - 1 );
-                if ( i >= points.size() ) {
-                    i = points.size() - 1;
+            if ( e->type() == QEvent::MouseButtonDblClick ) {
+                const QPointF mousePosition = event->pos() - plotRect.topLeft();
+                const int xPos = mousePosition.x();
+                const int start = m_zoomToViewport ? m_firstVisiblePoint : 0;
+                const int end = m_zoomToViewport ? m_lastVisiblePoint : m_eleData.size();
+                for ( int i = start; i < end; ++i) {
+                    const int plotPos = ( m_eleData.value(i).x() - m_axisX.minValue() ) * m_eleGraphWidth / m_axisX.range();
+                    if ( plotPos >= xPos ) {
+                        widget->centerOn( m_points[i], true );
+                        break;
+                    }
                 }
-                qreal lon = points[i].longitude( GeoDataCoordinates::Degree );
-                qreal lat = points[i].latitude ( GeoDataCoordinates::Degree );
-                widget->centerOn( lon, lat, true );
                 return true;
             }
         }
@@ -716,8 +538,8 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
             // Cross hair cursor when moving above the float item
             // and mark the position on the graph
             widget->setCursor(QCursor(Qt::CrossCursor));
-            if ( m_cursorPositionX != event->pos().x() - graphRect.left() ) {
-                m_cursorPositionX = event->pos().x() - graphRect.left();
+            if ( m_cursorPositionX != event->pos().x() - plotRect.left() ) {
+                m_cursorPositionX = event->pos().x() - plotRect.left();
                 m_mouseInWidget = cursorAboveFloatItem;
                 forceRepaint();
             }
@@ -729,20 +551,21 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
     return AbstractFloatItem::eventFilter(object,e);
 }
 
-
-
 void ElevationProfileFloatItem::updateData()
 {
     m_routeAvailable = m_routingModel && m_routingModel->rowCount() > 0;
     m_points = m_routeAvailable ? m_routingModel->route().path() : GeoDataLineString();
     m_eleData = calculateElevationData( m_points );
+
     calculateStatistics( m_eleData );
+    if ( m_eleData.length() >= 2 ) {
+        m_axisX.setRange( m_eleData.first().x(), m_eleData.last().x() );
+        m_axisY.setRange( qMin( m_minElevation, qreal( 0.0 ) ), m_maxElevation );
+    }
     emit dataUpdated();
 
     forceRepaint();
 }
-
-
 
 void ElevationProfileFloatItem::updateVisiblePoints()
 {
@@ -774,7 +597,7 @@ void ElevationProfileFloatItem::updateVisiblePoints()
             }
         }
     }
-    routeSegments.append( currentRouteSegment ); // in case the route ends pn screen
+    routeSegments.append( currentRouteSegment ); // in case the route ends on screen
 
     int maxLenght = 0;
     foreach ( currentRouteSegment, routeSegments ) {
@@ -790,10 +613,16 @@ void ElevationProfileFloatItem::updateVisiblePoints()
     if ( m_lastVisiblePoint < 0 || m_lastVisiblePoint >= m_eleData.count() ) {
         m_lastVisiblePoint = m_eleData.count() - 1;
     }
+
+    if ( m_zoomToViewport ) {
+        calculateStatistics( m_eleData );
+        m_axisX.setRange( m_eleData.value( m_firstVisiblePoint ).x(),
+                          m_eleData.value( m_lastVisiblePoint  ).x() );
+        m_axisY.setRange( m_minElevation, m_maxElevation );
+    }
+
     return;
 }
-
-
 
 QList<QPointF> ElevationProfileFloatItem::calculateElevationData( const GeoDataLineString &lineString ) const
 {
@@ -825,18 +654,20 @@ QList<QPointF> ElevationProfileFloatItem::calculateElevationData( const GeoDataL
     return result;
 }
 
-
-
 void ElevationProfileFloatItem::calculateStatistics( const QList<QPointF> &eleData )
 {
     const int averageOrder = 5;
 
     qreal lastAverage = 0;
-    m_maxElevation = -1;
+    m_maxElevation = 0.0;
+    m_minElevation = invalidElevationData;
     m_gain = 0;
     m_loss = 0;
-    for ( int i = 0; i < eleData.size(); i++ ) {
-        m_maxElevation = qMax( m_maxElevation, eleData.value(i).y() );
+    const int start = m_zoomToViewport ? m_firstVisiblePoint : 0;
+    const int end = m_zoomToViewport ? m_lastVisiblePoint : eleData.size();
+    for ( int i = start; i < end; ++i ) {
+        m_maxElevation = qMax( m_maxElevation, eleData.value( i ).y() );
+        m_minElevation = qMin( m_minElevation, eleData.value( i ).y() );
 
         // Low-pass filtering (moving average) of the elevation profile to calculate gain and loss values
         // not always the best method, see for example
@@ -846,7 +677,7 @@ void ElevationProfileFloatItem::calculateStatistics( const QList<QPointF> &eleDa
         if ( i >= averageOrder ) {
             qreal average = 0;
             for( int j = 0; j < averageOrder; j++ ) {
-                average += eleData.value(i-j).y();
+                average += eleData.value( i-j ).y();
             }
             average /= averageOrder;
             if ( i == averageOrder ) {
@@ -862,8 +693,6 @@ void ElevationProfileFloatItem::calculateStatistics( const QList<QPointF> &eleDa
     }
 }
 
-
-
 void ElevationProfileFloatItem::forceRepaint()
 {
     // We add one pixel as antialiasing could result into painting on these pixels to.
@@ -872,8 +701,6 @@ void ElevationProfileFloatItem::forceRepaint()
     repaintRegion( floatItemRect.toRect() );
     update();
 }
-
-
 
 void ElevationProfileFloatItem::repaintRegion( QRegion dirtyRegion )
 {
@@ -884,8 +711,6 @@ void ElevationProfileFloatItem::repaintRegion( QRegion dirtyRegion )
                                       m_marbleWidget->viewport()->mapCoversViewport() );
     }
 }
-
-
 
 void ElevationProfileFloatItem::readSettings()
 {
@@ -913,7 +738,13 @@ void ElevationProfileFloatItem::writeSettings()
 
 void ElevationProfileFloatItem::toggleZoomToViewport()
 {
-    m_zoomToViewport = !m_zoomToViewport;
+    m_zoomToViewport = ! m_zoomToViewport;
+    calculateStatistics( m_eleData );
+    updateVisiblePoints();
+    if ( ! m_zoomToViewport ) {
+        m_axisX.setRange( m_eleData.first().x(), m_eleData.last().x() );
+        m_axisY.setRange( qMin( m_minElevation, qreal( 0.0 ) ), m_maxElevation );
+    }
     readSettings();
     emit settingsChanged( nameId() );
 }
