@@ -35,6 +35,7 @@ Page {
         highlight: Rectangle { radius: 5; color: "lightsteelblue" }
         highlightMoveDuration: 200
         spacing: 10
+        currentIndex: -1
     }
 
     ScrollDecorator {
