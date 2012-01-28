@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     OsmTileClusterRenderer.cpp \
     Thread.cpp \
     ReadOnlyMapImage.cpp \
-    ReadOnlyMapDefinition.cpp
+    ReadOnlyMapDefinition.cpp \
+    SimpleMapImage.cpp
 
 HEADERS += \
     NasaWorldWindToOpenStreetMapConverter.h \
@@ -30,7 +31,8 @@ HEADERS += \
     Thread.h \
     mapreproject.h \
     ReadOnlyMapImage.h \
-    ReadOnlyMapDefinition.h
+    ReadOnlyMapDefinition.h \
+    SimpleMapImage.h
 
 unix|win32: LIBS += -lQtGui
 
