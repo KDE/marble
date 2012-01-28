@@ -8,6 +8,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QPair>
+#include <QtCore/QThread>
 #include <QtCore/QVector>
 
 #include <getopt.h>
@@ -147,7 +148,7 @@ int main( int argc, char *argv[] )
     QString outputDirectory;
     int outputTileLevel = -1;
 
-    int threadCount = 0; // threads count 0 makes no sense
+    int threadCount = QThread::idealThreadCount();
     int clusterSize = 0; // cluster size 0 makes no sense
     bool onlySimulate = false;
 
