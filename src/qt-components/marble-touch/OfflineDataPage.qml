@@ -36,6 +36,7 @@ Page {
         spacing: 10
         section.property: "continent"
         section.delegate: sectionDelegate
+        currentIndex: -1
     }
 
     ScrollDecorator {

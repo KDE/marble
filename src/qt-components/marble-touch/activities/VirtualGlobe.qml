@@ -44,7 +44,7 @@ Page {
             SelectionDialog {
                 id: themeDialog
                 titleText: "Select Map Theme"
-                selectedIndex: mapThemeModel.indexOf(settings.streetMapTheme)
+                selectedIndex: mapThemeModel.indexOf(settings.mapTheme)
                 model: mapThemeModel
                 delegate:
                     Rectangle {
