@@ -145,7 +145,8 @@ Page {
                 marbleWidget.radius = 170
             }
             settings.gpsTracking = false
-            settings.showPosition = false
+            settings.showPositionIndicator = false
+            marbleWidget.tracking.positionMarkerType = Tracking.Circle
             settings.showTrack = false
             marbleWidget.visible = true
         }
