@@ -78,7 +78,8 @@ Page {
                             onClicked: {
                                 themeDialog.selectedIndex = index
                                 themeDialog.accept()
-                                settings.mapTheme = mapThemeId
+                                delayedMapThemeSwitch.theme = mapThemeId
+                                delayedMapThemeSwitch.start()
                             }
                         }
                     }
@@ -155,6 +156,13 @@ Page {
                 marbleWidget.visible = false
             }
         }
+    }
+
+    Timer {
+        id: delayedMapThemeSwitch
+        property string theme: "earth/bluemarble/bluemarble.dgml"
+        interval: 10; running: false; repeat: false
+        onTriggered: settings.mapTheme = theme
     }
 
     onStatusChanged: {

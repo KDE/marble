@@ -76,7 +76,8 @@ Page {
                         onClicked: {
                             themeDialog.selectedIndex = index
                             themeDialog.accept()
-                            settings.mapTheme = mapThemeId
+                            delayedMapThemeSwitch.theme = mapThemeId
+                            delayedMapThemeSwitch.start()
                         }
                     }
                 }
@@ -129,6 +130,13 @@ Page {
                 }
             }
         }
+    }
+
+    Timer {
+        id: delayedMapThemeSwitch
+        property string theme: "earth/srtm/srtm.dgml"
+        interval: 10; running: false; repeat: false
+        onTriggered: settings.mapTheme = theme
     }
 
     onStatusChanged: {
