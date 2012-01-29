@@ -127,7 +127,8 @@ Page {
             settings.activeRenderPlugins = plugins
             settings.mapTheme = settings.streetMapTheme
             settings.gpsTracking = true
-            settings.showPosition = true
+            settings.showPositionIndicator = true
+            marbleWidget.tracking.positionMarkerType = Tracking.Circle
             settings.showTrack = false
             marbleWidget.visible = true
         }

@@ -31,7 +31,7 @@ Item {
     property real lastKnownLatitude: settings.value( "MarbleWidget", "lastKnownLatitude", 0.0 )
     property real quitZoom: settings.value( "MarbleWidget", "quitZoom", 1000.0 )
     property bool gpsTracking: settings.value( "MarbleWidget", "gpsTracking", false )
-    property bool showPosition: settings.value( "MarbleWidget", "showPosition", false )
+    property bool showPositionIndicator: settings.value( "MarbleWidget", "showPositionIndicator", false )
     property bool showTrack: settings.value( "MarbleWidget", "showTrack", false )
     property string projection: settings.value( "MarbleWidget", "projection", "Spherical" )
     property variant defaultRenderPlugins: ["compass", "coordinate-grid", "progress",
@@ -53,7 +53,7 @@ Item {
         settings.setValue( "MarbleWidget", "lastKnownLatitude", root.lastKnownLatitude )
         settings.setValue( "MarbleWidget", "quitZoom", root.quitZoom )
         settings.setValue( "MarbleWidget", "gpsTracking", root.gpsTracking )
-        settings.setValue( "MarbleWidget", "showPosition", root.showPosition )
+        settings.setValue( "MarbleWidget", "showPositionIndicator", root.showPositionIndicator )
         settings.setValue( "MarbleWidget", "showTrack", root.showTrack )
         settings.setValue( "MarbleWidget", "projection", root.projection )
         settings.setValue( "MarbleWidget", "activeRenderPlugins", root.activeRenderPlugins )

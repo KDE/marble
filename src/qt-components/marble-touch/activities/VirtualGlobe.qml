@@ -118,7 +118,8 @@ Page {
                 settings.activeRenderPlugins = settings.defaultRenderPlugins
                 settings.mapTheme = "earth/srtm/srtm.dgml"
                 settings.gpsTracking = false
-                settings.showPosition = false
+                settings.showPositionIndicator = false
+                marbleWidget.tracking.positionMarkerType = Tracking.Circle
                 settings.showTrack = false
                 marbleWidget.visible = true
             }

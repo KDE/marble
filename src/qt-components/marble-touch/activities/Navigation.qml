@@ -174,12 +174,12 @@ Page {
             settings.projection = "Mercator"
             var plugins = settings.defaultRenderPlugins
             settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass", "crosshairs"])
-            plugins.push("positionMarker")
             settings.activeRenderPlugins = plugins
             settings.mapTheme = settings.streetMapTheme
             settings.gpsTracking = true
-            settings.showPosition = true
+            settings.showPositionIndicator = true
             settings.showTrack = true
+            marbleWidget.tracking.positionMarkerType = Tracking.Arrow
             marbleWidget.navigation.guidanceModeEnabled = true
             marbleWidget.visible = true
         }

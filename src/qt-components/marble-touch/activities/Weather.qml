@@ -78,8 +78,9 @@ Page {
                 settings.activeRenderPlugins =  plugins
                 settings.mapTheme = "earth/plain/plain.dgml"
                 settings.gpsTracking = true
-                settings.showPosition = true
+                settings.showPositionIndicator = false
                 settings.showTrack = false
+                marbleWidget.tracking.positionMarkerType = Tracking.Circle
                 marbleWidget.visible = true
             }
 

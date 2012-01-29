@@ -145,7 +145,8 @@ Page {
                 marbleWidget.zoom = 1027
             }
             settings.gpsTracking = false
-            settings.showPosition = false
+            settings.showPositionIndicator = false
+            marbleWidget.tracking.positionMarkerType = Tracking.Circle
             settings.showTrack = false
             marbleWidget.visible = true
         }

@@ -18,33 +18,16 @@
 #include "routing/AdjustNavigation.h"
 
 Tracking::Tracking( QObject* parent) : QObject( parent ),
-    m_showPosition( true ),
     m_showTrack( true ),
     m_positionSource( 0 ),
     m_positionMarker( 0 ),
     m_marbleWidget( 0 ),
     m_hasLastKnownPosition( false ),
-    m_autoNavigation( 0 )
+    m_autoNavigation( 0 ),
+    m_positionMarkerType( None )
 {
     connect( &m_lastKnownPosition, SIGNAL( longitudeChanged() ), this, SLOT( setHasLastKnownPosition() ) );
     connect( &m_lastKnownPosition, SIGNAL( latitudeChanged() ), this, SLOT( setHasLastKnownPosition() ) );
-}
-
-bool Tracking::showPosition() const
-{
-    return m_showPosition;
-}
-
-void Tracking::setShowPosition( bool show )
-{
-    if ( show != m_showPosition ) {
-        if ( m_marbleWidget ) {
-            setShowPositionMarkerPlugin( show && !m_positionMarker );
-        }
-
-        m_showPosition = show;
-        emit showPositionChanged();
-    }
 }
 
 bool Tracking::showTrack() const
@@ -94,7 +77,7 @@ void Tracking::setMarbleWidget( MarbleWidget* widget )
     if ( widget != m_marbleWidget ) {
         if ( widget ) {
             widget->model()->positionTracking()->setTrackVisible( showTrack() );
-            setShowPositionMarkerPlugin( showPosition() );
+            setShowPositionMarkerPlugin( m_positionMarkerType == Arrow );
         }
 
         if ( m_positionSource ) {
@@ -121,7 +104,7 @@ QObject* Tracking::positionMarker()
 
 void Tracking::updatePositionMarker()
 {
-    if ( m_marbleWidget && m_positionMarker ) {
+    if ( m_marbleWidget && m_positionMarker && m_positionMarkerType == Circle ) {
         Coordinate* position = 0;
         bool visible = m_marbleWidget->model()->planetId() == "earth";
         if ( m_positionSource && m_positionSource->hasPosition() ) {
@@ -133,13 +116,21 @@ void Tracking::updatePositionMarker()
         }
 
         qreal x(0), y(0);
-        visible = visible && m_marbleWidget->viewport()->screenCoordinates( position->longitude(), position->latitude(), x, y );
+        if ( position ) {
+            Marble::GeoDataCoordinates const pos( position->longitude(), position->latitude(), 0.0, GeoDataCoordinates::Degree );
+            visible = visible && m_marbleWidget->viewport()->screenCoordinates( pos.longitude(), pos.latitude(), x, y );
+            QDeclarativeItem* item = qobject_cast<QDeclarativeItem*>( m_positionMarker );
+            if ( item ) {
+                item->setVisible( visible );
+                if ( visible ) {
+                    item->setPos( x - item->width() / 2.0, y - item->height() / 2.0 );
+                }
+            }
+        }
+    } else if ( m_positionMarkerType != Circle ) {
         QDeclarativeItem* item = qobject_cast<QDeclarativeItem*>( m_positionMarker );
         if ( item ) {
-            item->setVisible( visible );
-            if ( visible ) {
-                item->setPos( x - item->width() / 2.0, y - item->height() / 2.0 );
-            }
+            item->setVisible( false );
         }
     }
 }
@@ -165,11 +156,11 @@ void Tracking::setShowPositionMarkerPlugin( bool visible )
         QList<Marble::RenderPlugin *> const renderPlugins = m_marbleWidget->renderPlugins();
         foreach( Marble::RenderPlugin* renderPlugin, renderPlugins ) {
             if ( renderPlugin->nameId() == "positionMarker" ) {
-                renderPlugin->setEnabled( visible );
+                renderPlugin->setEnabled( true );
                 renderPlugin->setVisible( visible );
             }
         }
-    }
+   }
 }
 
 bool Tracking::hasLastKnownPosition() const
@@ -253,6 +244,20 @@ void Tracking::setAutoZoom( bool enabled )
         }
 
         emit autoZoomChanged();
+    }
+}
+
+Tracking::PositionMarkerType Tracking::positionMarkerType() const
+{
+    return m_positionMarkerType;
+}
+
+void Tracking::setPositionMarkerType( Tracking::PositionMarkerType type )
+{
+    setShowPositionMarkerPlugin( type == Arrow );
+    if ( type != m_positionMarkerType ) {
+        m_positionMarkerType = type;
+        emit positionMarkerTypeChanged();
     }
 }
 

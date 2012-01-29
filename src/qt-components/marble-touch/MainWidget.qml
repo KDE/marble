@@ -51,7 +51,6 @@ Item {
         tracking {
             // Connect the position source from below with the map.
             positionSource: positionProvider
-            showPosition: settings.showPosition
             showTrack: settings.showTrack
             positionMarker: marker
 
@@ -243,7 +242,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.margins: 10
         z: 10
-        visible: settings.showPosition
+        visible: settings.showPositionIndicator
         smooth: true
 
         source: "qrc:/marker-direction.svg"
@@ -256,7 +255,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.margins: 10
         z: 10
-        visible: settings.showPosition
+        visible: settings.showPositionIndicator
 
         source: map.tracking.positionSource.hasPosition ? "qrc:/marker.svg" : "qrc:/marker-yellow.svg"
 
@@ -271,7 +270,7 @@ Item {
         anchors.bottom: positionFinder.top
         anchors.horizontalCenter: positionFinder.horizontalCenter
         anchors.margins: 4
-        visible: settings.showPosition
+        visible: settings.showPositionIndicator
     }
     
     // Starts a search for the passed term.
