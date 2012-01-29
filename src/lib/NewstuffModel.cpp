@@ -172,8 +172,7 @@ NewstuffModelPrivate::NewstuffModelPrivate( NewstuffModel* parent ) : m_parent( 
     m_networkAccessManager( 0 ), m_currentReply( 0 ), m_currentFile( 0 ),
     m_idTag( NewstuffModel::PayloadTag ), m_currentAction( -1, Install ), m_unpackProcess( 0 )
 {
-    m_targetDirectory = MarbleDirs::localPath() + "/maps";
-    // no default registry file
+    // nothing to do
 }
 
 void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
@@ -338,6 +337,9 @@ void NewstuffModelPrivate::readValue( const QDomNode &node, const QString &key, 
 NewstuffModel::NewstuffModel( QObject *parent ) :
     QAbstractListModel( parent ), d( new NewstuffModelPrivate( this ) )
 {
+    setTargetDirectory( MarbleDirs::localPath() + "/maps" );
+    // no default registry file
+
     QHash<int,QByteArray> roles = roleNames();
     roles[Name] = "name";
     roles[Author] = "author";
@@ -425,6 +427,13 @@ QString NewstuffModel::provider() const
 void NewstuffModel::setTargetDirectory( const QString &targetDirectory )
 {
     if ( targetDirectory != d->m_targetDirectory ) {
+        QFileInfo targetDir( targetDirectory );
+        if ( !targetDir.exists() ) {
+            if ( !QDir::root().mkpath( targetDir.absoluteFilePath() ) ) {
+                qDebug() << "Failed to create directory " << targetDirectory << ", newstuff installation might fail.";
+            }
+        }
+
         d->m_targetDirectory = targetDirectory;
         emit targetDirectoryChanged();
     }
