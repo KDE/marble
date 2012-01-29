@@ -11,6 +11,7 @@
 #include "NewstuffModel.h"
 
 #include "MarbleDebug.h"
+#include "MarbleDirs.h"
 
 #include <QtCore/QUrl>
 #include <QtCore/QVector>
@@ -171,7 +172,7 @@ NewstuffModelPrivate::NewstuffModelPrivate( NewstuffModel* parent ) : m_parent( 
     m_networkAccessManager( 0 ), m_currentReply( 0 ), m_currentFile( 0 ),
     m_idTag( NewstuffModel::PayloadTag ), m_currentAction( -1, Install ), m_unpackProcess( 0 )
 {
-    m_targetDirectory = QDir::home().filePath( ".local/share/marble/maps" );
+    m_targetDirectory = MarbleDirs::localPath() + "/maps";
     // no default registry file
 }
 

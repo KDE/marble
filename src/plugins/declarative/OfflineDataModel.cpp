@@ -9,13 +9,14 @@
 //
 
 #include "OfflineDataModel.h"
+#include "MarbleDirs.h"
 
 #include <QtCore/QModelIndex>
 #include <QtCore/QDir>
 
 OfflineDataModel::OfflineDataModel( QObject *parent ) : QSortFilterProxyModel( parent )
 {
-    m_newstuffModel.setTargetDirectory( QDir::home().filePath( ".local/share/marble/maps" ) );
+    m_newstuffModel.setTargetDirectory( Marble::MarbleDirs::localPath() + "/maps" );
     m_newstuffModel.setRegistryFile( QDir::homePath() + "/.kde/share/apps/knewstuff3/marble-offline-data.knsregistry" );
     m_newstuffModel.setProvider( "http://files.kde.org/marble/newstuff/maps-monav.xml" );
 

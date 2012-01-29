@@ -57,7 +57,7 @@ bool SpeakersModelItem::lessThan( const SpeakersModelItem& one, const SpeakersMo
 SpeakersModelPrivate::SpeakersModelPrivate( SpeakersModel* parent ) :
     m_parent( parent )
 {
-    m_newstuffModel.setTargetDirectory( QDir::home().filePath( ".local/share/marble/audio/speakers" ) );
+    m_newstuffModel.setTargetDirectory( MarbleDirs::localPath() + "/audio/speakers" );
     m_newstuffModel.setProvider( "http://edu.kde.org/marble/newstuff/speakers.xml" );
     QObject::connect( &m_newstuffModel, SIGNAL( modelReset() ), m_parent, SLOT( fillModel() ) );
     QObject::connect( &m_newstuffModel, SIGNAL( installationFinished( int ) ), m_parent, SLOT( handleInstallation( int ) ) );
