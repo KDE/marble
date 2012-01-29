@@ -57,6 +57,11 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     m_marbleWidget->inputHandler()->setPanViaArrowsEnabled( false );
 }
 
+MarbleWidget::~MarbleWidget()
+{
+    m_marbleWidget->model()->routingManager()->writeSettings();
+}
+
 Marble::MarbleModel *MarbleWidget::model()
 {
     return m_marbleWidget->model();
