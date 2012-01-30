@@ -7,12 +7,16 @@
 #include <QtGui/QColor>
 #include <QtGui/QImage>
 
-class SimpleMapImage : public ReadOnlyMapImage
+class InterpolationMethod;
+
+class SimpleMapImage: public ReadOnlyMapImage
 {
 public:
     explicit SimpleMapImage( QString const & fileName );
 
     virtual QRgb pixel( double const lonRad, double const latRad );
+    virtual QRgb pixel( int const x, int const y );
+    virtual void setInterpolationMethod( InterpolationMethod * const interpolationMethod );
 
 private:
     double lonRadToPixelX( double const lonRad ) const;
@@ -21,6 +25,7 @@ private:
     QImage m_image;
     int m_mapWidthPixel;
     int m_mapHeightPixel;
+    InterpolationMethod * m_interpolationMethod;
 };
 
 #endif

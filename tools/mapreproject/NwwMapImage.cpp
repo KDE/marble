@@ -1,5 +1,7 @@
 #include "NwwMapImage.h"
 
+#include "InterpolationMethod.h"
+
 #include <QtCore/QDebug>
 #include <cmath>
 
@@ -12,7 +14,7 @@ NwwMapImage::NwwMapImage( QDir const & baseDirectory, int const tileLevel )
       m_mapHeightTiles( 5 * pow( 2, m_tileLevel )),
       m_mapWidthPixel( m_mapWidthTiles * m_tileEdgeLengthPixel ),
       m_mapHeightPixel( m_mapHeightTiles * m_tileEdgeLengthPixel ),
-      m_interpolationMethod( BilinearInterpolation ),
+      m_interpolationMethod(),
       m_tileCache( DefaultCacheSizeBytes )
 {
     if ( !m_baseDirectory.exists() )
@@ -29,15 +31,7 @@ QRgb NwwMapImage::pixel( double const lonRad, double const latRad )
 {
     double const x = lonRadToPixelX( lonRad );
     double const y = latRadToPixelY( latRad );
-
-    switch ( m_interpolationMethod ) {
-    case NearestNeighborInterpolation:
-        return nearestNeighbor( x, y );
-    case BilinearInterpolation:
-        return bilinearInterpolation( x, y );
-    default:
-        return nearestNeighbor( x, y );
-    }
+    return m_interpolationMethod->interpolate( x, y );
 }
 
 QRgb NwwMapImage::pixel( int const x, int const y )
@@ -68,9 +62,10 @@ void NwwMapImage::setCacheSizeBytes(const int cacheSizeBytes)
     m_tileCache.setMaxCost( cacheSizeBytes );
 }
 
-void NwwMapImage::setInterpolationMethod( InterpolationMethod const method )
+void NwwMapImage::setInterpolationMethod( InterpolationMethod * const method )
 {
     m_interpolationMethod = method;
+    m_interpolationMethod->setMapImage( this );
 }
 
 void NwwMapImage::setTileLevel( int const tileLevel )

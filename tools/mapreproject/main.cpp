@@ -1,4 +1,6 @@
+#include "BilinearInterpolation.h"
 #include "NasaWorldWindToOpenStreetMapConverter.h"
+#include "NearestNeighborInterpolation.h"
 #include "OsmTileClusterRenderer.h"
 #include "ReadOnlyMapDefinition.h"
 #include "Thread.h"
@@ -20,7 +22,7 @@
 
 /* example usage
 mapreproject --simulate --output-directory=/home/jmho --jobs 7 --cluster-size 64 --output-tile-level=10 \
-    --input=type=NasaWW,base-directory=/home,tile-level=8,interpolation-method=Bilinear,cache-size=200000000 \
+    --input=type=NasaWW,base-directory=/home,tile-level=8,interpolation-method=bilinear,cache-size=200000000 \
     --input type=Bathymetry,file=BLAH.tiff
 */
 
@@ -60,15 +62,19 @@ int parseInt( char const * const value )
     return result;
 }
 
-InterpolationMethod parseInterpolationMethod( char const * const value )
+EInterpolationMethod parseInterpolationMethod( char const * const value )
 {
-    InterpolationMethod result = UnknownInterpolation;
+    EInterpolationMethod result = UnknownInterpolationMethod;
     if ( !value )
         qFatal("Suboption 'interpolation-method' does not have a value.");
-    if ( strcmp( value, "NearestNeighbor") == 0 )
-        result = NearestNeighborInterpolation;
-    else if ( strcmp( value, "Bilinear" ) == 0 )
-        result = BilinearInterpolation;
+    if ( strcmp( value, "integer") == 0 )
+        result = IntegerInterpolationMethod;
+    if ( strcmp( value, "nearest-neighbor") == 0 )
+        result = NearestNeighborInterpolationMethod;
+    if ( strcmp( value, "average") == 0 )
+        result = AverageInterpolationMethod;
+    else if ( strcmp( value, "bilinear" ) == 0 )
+        result =  BilinearInterpolationMethod;
     else
         qFatal("Suboption 'interpolation-method': Unrecognized value '%s'.", value );
     return result;

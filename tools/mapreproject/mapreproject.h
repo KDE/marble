@@ -1,9 +1,11 @@
 #ifndef MAPREPROJECT_H
 #define MAPREPROJECT_H
 
-enum InterpolationMethod { UnknownInterpolation,
-                           NearestNeighborInterpolation,
-                           BilinearInterpolation };
+enum EInterpolationMethod { UnknownInterpolationMethod,
+                            IntegerInterpolationMethod,
+                            NearestNeighborInterpolationMethod,
+                            AverageInterpolationMethod,
+                            BilinearInterpolationMethod };
 
 enum MapSourceType { UnknownMapSource,
                      NasaWorldWindMap,

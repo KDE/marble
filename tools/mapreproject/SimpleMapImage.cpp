@@ -1,5 +1,7 @@
 #include "SimpleMapImage.h"
 
+#include "InterpolationMethod.h"
+
 #include <cmath>
 
 SimpleMapImage::SimpleMapImage( QString const & fileName )
@@ -15,7 +17,18 @@ QRgb SimpleMapImage::pixel( double const lonRad,  double const latRad )
 {
     double const x = lonRadToPixelX( lonRad );
     double const y = latRadToPixelY( latRad );
-    return m_image.pixel( round( x ), m_mapHeightPixel - round( y ));
+    return m_interpolationMethod->interpolate( x, y );
+}
+
+QRgb SimpleMapImage::pixel( int const x, int const y )
+{
+    return m_image.pixel( x, m_mapHeightPixel - y );
+}
+
+void SimpleMapImage::setInterpolationMethod( InterpolationMethod * const interpolationMethod )
+{
+    m_interpolationMethod = interpolationMethod;
+    m_interpolationMethod->setMapImage( this );
 }
 
 inline double SimpleMapImage::lonRadToPixelX( double const lonRad ) const

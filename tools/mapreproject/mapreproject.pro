@@ -22,7 +22,10 @@ SOURCES += main.cpp \
     Thread.cpp \
     ReadOnlyMapImage.cpp \
     ReadOnlyMapDefinition.cpp \
-    SimpleMapImage.cpp
+    SimpleMapImage.cpp \
+    InterpolationMethod.cpp \
+    BilinearInterpolation.cpp \
+    NearestNeighborInterpolation.cpp
 
 HEADERS += \
     NasaWorldWindToOpenStreetMapConverter.h \
@@ -32,7 +35,10 @@ HEADERS += \
     mapreproject.h \
     ReadOnlyMapImage.h \
     ReadOnlyMapDefinition.h \
-    SimpleMapImage.h
+    SimpleMapImage.h \
+    InterpolationMethod.h \
+    BilinearInterpolation.h \
+    NearestNeighborInterpolation.h
 
 unix|win32: LIBS += -lQtGui
 

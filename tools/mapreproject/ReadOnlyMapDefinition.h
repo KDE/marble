@@ -6,6 +6,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QString>
 
+class InterpolationMethod;
 class ReadOnlyMapImage;
 
 class ReadOnlyMapDefinition
@@ -19,14 +20,16 @@ public:
 
     void setBaseDirectory( QString const & baseDirectory );
     void setCacheSizeBytes( int const cacheSizeBytes );
-    void setInterpolationMethod( InterpolationMethod const interpolationMethod );
+    void setInterpolationMethod( EInterpolationMethod const interpolationMethod );
     void setFileName( QString const & fileName );
     void setMapType( MapSourceType const mapType );
     void setTileLevel( int const tileLevel );
 
 private:
+    InterpolationMethod * createInterpolationMethod() const;
+
     MapSourceType m_mapType;
-    InterpolationMethod m_interpolationMethod;
+    EInterpolationMethod m_interpolationMethod;
 
     // relevant for tiled maps
     QString m_baseDirectory;
@@ -52,7 +55,7 @@ inline void ReadOnlyMapDefinition::setCacheSizeBytes( int const cacheSizeBytes )
     m_cacheSizeBytes = cacheSizeBytes;
 }
 
-inline void ReadOnlyMapDefinition::setInterpolationMethod( InterpolationMethod const interpolationMethod )
+inline void ReadOnlyMapDefinition::setInterpolationMethod( EInterpolationMethod const interpolationMethod )
 {
     m_interpolationMethod = interpolationMethod;
 }
@@ -71,6 +74,7 @@ inline void ReadOnlyMapDefinition::setTileLevel( int const tileLevel )
 {
     m_tileLevel = tileLevel;
 }
+
 
 inline QDebug operator<<( QDebug dbg, ReadOnlyMapDefinition const & r)
 {

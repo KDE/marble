@@ -11,17 +11,19 @@
 #include <QtGui/QColor>
 #include <QtGui/QImage>
 
+class InterpolationMethod;
+
 class NwwMapImage: public ReadOnlyMapImage
 {
 public:
     NwwMapImage( QDir const & baseDirectory, int const tileLevel );
 
     virtual QRgb pixel( double const lonRad, double const latRad );
+    virtual QRgb pixel( int const x, int const y );
 
-    QRgb pixel( int const x, int const y );
     void setBaseDirectory( QDir const & baseDirectory );
     void setCacheSizeBytes( int const cacheSizeBytes );
-    void setInterpolationMethod( InterpolationMethod const method );
+    void setInterpolationMethod( InterpolationMethod * const method );
     void setTileLevel( int const level );
 
 private:
@@ -47,7 +49,7 @@ private:
     int m_mapHeightPixel;
 
 
-    InterpolationMethod m_interpolationMethod;
+    InterpolationMethod * m_interpolationMethod;
 
     QSet<int> m_tileMissing;
     QCache<int, QImage> m_tileCache;
