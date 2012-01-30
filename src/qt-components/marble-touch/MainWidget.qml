@@ -183,7 +183,7 @@ Item {
                 var pos = map.pixel( tracking.lastKnownPosition.longitude, tracking.lastKnownPosition.latitude )
                 positionFinderDirection.rotation = 270 + 180.0 / Math.PI * Math.atan2 ( positionFinderDirection.y - pos.y, positionFinderDirection.x - pos.x )
                 var indicatorPosition = map.coordinate( positionFinderDirection.x, positionFinderDirection.y )
-                positionDistance.text = Math.round( tracking.lastKnownPosition.distance( indicatorPosition.longitude, indicatorPosition.latitude ) / 100 ) / 10 + " km"
+                positionDistanceText.text = (tracking.lastKnownPosition.distance( indicatorPosition.longitude, indicatorPosition.latitude ) / 1000).toFixed(1) + " km"
             }
         }
     }
@@ -265,14 +265,23 @@ Item {
         }
     }
 
-    Text {
+    Rectangle {
         id: positionDistance
         anchors.bottom: positionFinder.top
-        anchors.horizontalCenter: positionFinder.horizontalCenter
+        width: positionDistanceText.width + 6
+        height: positionDistanceText.height + 4
+        anchors.right: parent.right
         anchors.margins: 4
+        radius: 5
+        color: Qt.rgba(192/255, 192/255, 192/255, 192/255)
         visible: settings.showPositionIndicator
+
+        Text {
+            id: positionDistanceText
+            anchors.centerIn: parent
+        }
     }
-    
+
     // Starts a search for the passed term.
     function find( term ) {
         map.search.find( term )
