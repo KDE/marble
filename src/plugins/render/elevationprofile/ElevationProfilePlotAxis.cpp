@@ -13,6 +13,8 @@
 #include "MarbleLocale.h"
 #include "MarbleMath.h"
 
+#include <QtCore/qmath.h>
+
 namespace Marble
 {
 
@@ -94,7 +96,7 @@ void ElevationProfilePlotAxis::updateTicks()
     niceIntervals << 10 << 20 << 25 << 30 << 50;
 
     const int exponent = round( log10( range() ) );
-    const qreal factor = pow10( 2 - exponent );
+    const qreal factor = qPow( 10, 2 - exponent );
     const qreal tickRange = range() * factor;
 
     qreal stepWidth = niceIntervals.last();
