@@ -34,6 +34,8 @@ InterpolationMethod * ReadOnlyMapDefinition::createInterpolationMethod() const
 ReadOnlyMapImage * ReadOnlyMapDefinition::createReadOnlyMap() const
 {
     InterpolationMethod * const interpolationMethod = createInterpolationMethod();
+    if ( !interpolationMethod )
+        qFatal( "Unsupported interpolation method: '%i'", m_interpolationMethod );
 
     if ( m_mapType == NasaWorldWindMap ) {
         NwwMapImage * const mapImage = new NwwMapImage( m_baseDirectory, m_tileLevel );
