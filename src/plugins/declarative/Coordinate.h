@@ -31,25 +31,25 @@ class Coordinate : public QObject
 
 public:
     /** Constructor */
-    Coordinate( qreal lon = 0.0, qreal lat = 0.0, qreal altitude = 0.0, QObject *parent = 0 );
+    Q_INVOKABLE Coordinate( qreal lon = 0.0, qreal lat = 0.0, qreal altitude = 0.0, QObject *parent = 0 );
 
     /** Provides access to the longitude (degree) of the coordinate */
-    qreal longitude() const;
+    Q_INVOKABLE qreal longitude() const;
 
     /** Change the longitude of the coordinate */
-    void setLongitude( qreal lon );
+    Q_INVOKABLE void setLongitude( qreal lon );
 
     /** Provides access to the latitude (degree) of the coordinate */
-    qreal latitude() const;
+    Q_INVOKABLE qreal latitude() const;
 
     /** Change the latitude of the coordinate */
-    void setLatitude( qreal lat );
+    Q_INVOKABLE void setLatitude( qreal lat );
 
     /** Provides access to the altitude (meters) of the coordinate */
-    qreal altitude() const;
+    Q_INVOKABLE qreal altitude() const;
 
     /** Change the altitude of the coordinate */
-    void setAltitude( qreal alt );
+    Q_INVOKABLE void setAltitude( qreal alt );
 
     /** Change the altitude of the coordinate */
     Marble::GeoDataCoordinates coordinates() const;
