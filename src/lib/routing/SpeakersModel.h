@@ -11,6 +11,8 @@
 #ifndef MARBLE_SPEAKERSMODEL_H
 #define MARBLE_SPEAKERSMODEL_H
 
+#include "marble_export.h"
+
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QFileInfo>
 
@@ -19,7 +21,7 @@ namespace Marble
 
 class SpeakersModelPrivate;
 
-class SpeakersModel : public QAbstractListModel
+class MARBLE_EXPORT SpeakersModel : public QAbstractListModel
 {
     Q_OBJECT
 

@@ -11,19 +11,20 @@
 #ifndef MARBLE_VOICENAVIGATIONMODEL_H
 #define MARBLE_VOICENAVIGATIONMODEL_H
 
-#include <QtCore/QAbstractListModel>
-#include <QtCore/QFileInfo>
-
+#include "marble_export.h"
 #include "Route.h"
 #include "Maneuver.h"
 #include "PositionTracking.h"
+
+#include <QtCore/QAbstractListModel>
+#include <QtCore/QFileInfo>
 
 namespace Marble
 {
 
 class VoiceNavigationModelPrivate;
 
-class VoiceNavigationModel : public QObject
+class MARBLE_EXPORT VoiceNavigationModel : public QObject
 {
     Q_OBJECT
 
