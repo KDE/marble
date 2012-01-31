@@ -22,7 +22,7 @@ QRgb SimpleMapImage::pixel( double const lonRad,  double const latRad )
 
 QRgb SimpleMapImage::pixel( int const x, int const y )
 {
-    return m_image.pixel( x, m_mapHeightPixel - y );
+    return m_image.pixel( x, m_mapHeightPixel - y - 1 );
 }
 
 void SimpleMapImage::setInterpolationMethod( InterpolationMethod * const interpolationMethod )
