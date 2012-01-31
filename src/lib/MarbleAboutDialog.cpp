@@ -236,11 +236,18 @@ void MarbleAboutDialog::loadPageContents( int idx )
             "These icons can be used freely under the terms of the "
             "<a href=\"http://creativecommons.org/publicdomain/zero/1.0/\">CC0 1.0 Universal</a> license.</p>") +
         tr("<p><i>OpenRouteService</i><br />"
-           "The routes used in Marble via download are provided by the <a href=\""
+           "Some of the routes used in Marble via download are provided by the <a href=\""
            "http://www.openrouteservice.org\">OpenRouteService</a> Project (\"ORS\"). <br />"
            "<i>License</i>: OpenRouteService data can be used freely under the terms of the "
            "<a href=\"http://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">"
            "Creative Commons Attribution-ShareAlike 2.0 license</a>.</p>")+
+        tr("<p><i>MapQuest</i><br />"
+           "Some of the routes used in Marble via download are provided by <a href=\""
+           "http://www.mapquest.com/\">MapQuest</a> and their Open Data Map APIs and Web Services.<br />"
+           "Directions courtesy of MapQuest working on OpenStreetMap data that can be used freely under the terms of the "
+           "<a href=\"http://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">"
+           "Creative Commons Attribution-ShareAlike 2.0 license</a>. Usage of the MapQuest routing "
+           "service is subject to the <a href=\"http://info.mapquest.com/terms-of-use/\">MapQuest terms of use</a>.</p>")+
         tr("<b>Cities and Locations</b>")+
         tr("<p><i>World Gazetteer</i><br />Stefan Helders "
            "<a href=\"http://www.world-gazetteer.com\">http://www.world-gazetteer.com</a></p>")+
