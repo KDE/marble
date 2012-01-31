@@ -11,6 +11,8 @@
 #ifndef MARBLE_NEWSTUFFMODEL_H
 #define MARBLE_NEWSTUFFMODEL_H
 
+#include "marble_export.h"
+
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QFileInfo>
 
@@ -21,7 +23,7 @@ namespace Marble
 
 class NewstuffModelPrivate;
 
-class NewstuffModel : public QAbstractListModel
+class MARBLE_EXPORT NewstuffModel : public QAbstractListModel
 {
     Q_OBJECT
 
