@@ -231,7 +231,7 @@ double atan20 (double y, double x)
 
 /*******************************************************************/
 
-at3::Mat3 (double x)
+Mat3::Mat3 (double x)
  {
   int i, j;
 
@@ -239,7 +239,7 @@ at3::Mat3 (double x)
    for (j=0; j<3; j++) m[i][j] = x;
  }
 
-at3::Mat3 (const Mat3& c)
+Mat3::Mat3 (const Mat3& c)
  {
   int i, j;
 
@@ -285,7 +285,7 @@ double Mat3::GetMij (int i, int j)
  }
 
 
-at3& Mat3::operator = (const Mat3& c)
+Mat3& Mat3::operator = (const Mat3& c)
  {
   int i, j;
 
@@ -295,7 +295,7 @@ at3& Mat3::operator = (const Mat3& c)
   return (*this);
  }
 
-at3& Mat3::operator += (const Mat3& c)
+Mat3& Mat3::operator += (const Mat3& c)
  {
   int i, j;
 
@@ -304,7 +304,7 @@ at3& Mat3::operator += (const Mat3& c)
   return *this;
  }
 
-at3& Mat3::operator -= (const Mat3& c)
+Mat3& Mat3::operator -= (const Mat3& c)
  {
   int i, j;
 
@@ -313,7 +313,7 @@ at3& Mat3::operator -= (const Mat3& c)
   return *this;
  }
 
-at3& Mat3::operator *= (const Mat3& c)
+Mat3& Mat3::operator *= (const Mat3& c)
  {
   int i, j, k;
   double r;
@@ -333,7 +333,7 @@ at3& Mat3::operator *= (const Mat3& c)
    return *this;
  }
 
-at3& Mat3::operator *= (double r)
+Mat3& Mat3::operator *= (double r)
  {
   int i, j;
 
@@ -342,7 +342,7 @@ at3& Mat3::operator *= (double r)
   return *this;
  }
 
-at3& Mat3::operator /= (double r)
+Mat3& Mat3::operator /= (double r)
  {
   int i, j;
   double q;
@@ -355,7 +355,7 @@ at3& Mat3::operator /= (double r)
   return *this;
  }
 
-at3 mxcon (double r)  // constant matrix with all elements of value r
+Mat3 mxcon (double r)  // constant matrix with all elements of value r
  {
   Mat3 result;
   int i, j;
@@ -366,7 +366,7 @@ at3 mxcon (double r)  // constant matrix with all elements of value r
   return result;
  }
 
-at3 mxidn ()          // identity matrix
+Mat3 mxidn ()          // identity matrix
  {
   Mat3 result;
   int i;
@@ -377,7 +377,7 @@ at3 mxidn ()          // identity matrix
   return result;
  }
 
-at3 mxtrn (const Mat3& m1)  // returns transposed of matrix m1
+Mat3 mxtrn (const Mat3& m1)  // returns transposed of matrix m1
  {
   Mat3 result;
   int i, j;
@@ -399,7 +399,7 @@ double mxdet (const Mat3& c) // returns determinant of matrix m1
   return result;
  }
 
-at3 operator + (const Mat3& c1, const Mat3& c2)
+Mat3 operator + (const Mat3& c1, const Mat3& c2)
  {
   Mat3 result;
   int i, j;
@@ -409,7 +409,7 @@ at3 operator + (const Mat3& c1, const Mat3& c2)
   return result;
  }
 
-at3 operator - (const Mat3& c1, const Mat3& c2)
+Mat3 operator - (const Mat3& c1, const Mat3& c2)
  {
   Mat3 result;
   int i, j;
@@ -419,7 +419,7 @@ at3 operator - (const Mat3& c1, const Mat3& c2)
   return result;
  }
 
-at3 operator * (double r, const Mat3& c1)
+Mat3 operator * (double r, const Mat3& c1)
  {
   Mat3 result;
   int i, j;
@@ -430,7 +430,7 @@ at3 operator * (double r, const Mat3& c1)
  }
 
 
-at3 operator * (const Mat3& c1, double r)
+Mat3 operator * (const Mat3& c1, double r)
  {
   int i, j;
   Mat3 result;
@@ -440,7 +440,7 @@ at3 operator * (const Mat3& c1, double r)
   return result;
  }
 
-at3 operator * (const Mat3& c1, const Mat3& c2)
+Mat3 operator * (const Mat3& c1, const Mat3& c2)
  {
   int i, j, k;
   double r;
@@ -457,7 +457,7 @@ at3 operator * (const Mat3& c1, const Mat3& c2)
   return result;
  }
 
-at3 operator / (const Mat3& c1, double r)
+Mat3 operator / (const Mat3& c1, double r)
  {
   Mat3 result;
   int i, j;
@@ -486,7 +486,7 @@ Vec3 mxvct (const Mat3& m1, Vec3& v1)
   return result;
  }
 
-at3 xrot (double a)
+Mat3 xrot (double a)
  {
   //	 Rotation matrix around x-axis with angle a (in radians).
   double c, s;
@@ -507,7 +507,7 @@ at3 xrot (double a)
   return m1;
  }
 
-at3 yrot (double a)
+Mat3 yrot (double a)
  {
   //	 Rotation matrix around y-axis with angle a (in radians).
   double c, s;
@@ -528,7 +528,7 @@ at3 yrot (double a)
   return m1;
  }
 
-at3 zrot (double a)
+Mat3 zrot (double a)
  {
   //  Rotation matrix around z-axis with angle a (in radians).
   double c, s;
@@ -549,7 +549,7 @@ at3 zrot (double a)
   return m1;
  }
 
-at3 csmx (double p, double y, double r)
+Mat3 csmx (double p, double y, double r)
  {
   // Form cosine matrix m from pitch p, yaw y and roll r angles.
   //	  The angles are to be given in radians.
@@ -629,7 +629,7 @@ void mxevc (const Mat3& m, double& a, Vec3& v)
   a = 2.0 * acos (q4);
  }
 
-at3 mxrox (double& a, Vec3& v)
+Mat3 mxrox (double& a, Vec3& v)
  {
   // Convert eigenvalue a (eigen angle in radians) and eigenvector v
   // into a corresponding cosine rotation matrix m.
