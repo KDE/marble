@@ -95,7 +95,7 @@ void ElevationProfilePlotAxis::updateTicks()
     QList<int> niceIntervals;
     niceIntervals << 10 << 20 << 25 << 30 << 50;
 
-    const int exponent = round( log10( range() ) );
+    const int exponent = qRound( log10( range() ) );
     const qreal factor = qPow( 10, 2 - exponent );
     const qreal tickRange = range() * factor;
 
@@ -106,7 +106,7 @@ void ElevationProfilePlotAxis::updateTicks()
         if ( numTicks < m_minTickCount || numTicks > m_maxTickCount ) {
             continue;
         }
-        const qreal newError = qAbs( numTicks - round( numTicks ) );
+        const qreal newError = qAbs( numTicks - qRound( numTicks ) );
         if ( newError < error ) {
             error = newError;
             stepWidth = i;

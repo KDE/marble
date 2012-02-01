@@ -640,8 +640,8 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
     QPointF hotSpot = style->iconStyle().hotSpot();
 
     mark->setSelected( selected );
-    mark->setSymbolPosition( QPoint( x - round( hotSpot.x() ),
-                                     y - round( hotSpot.y() ) ) );
+    mark->setSymbolPosition( QPoint( x - qRound( hotSpot.x() ),
+                                     y - qRound( hotSpot.y() ) ) );
     mark->setLabelRect( labelRect );
 
     // Add the current placemark to the matching row and its
@@ -683,7 +683,7 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
     if ( style->labelStyle().glow() ) {
         labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size;
         textWidth = ( QFontMetrics( labelFont ).width( labelText )
-            + round( 2 * s_labelOutlineWidth ) );
+            + qRound( 2 * s_labelOutlineWidth ) );
     } else {
         textWidth = ( QFontMetrics( labelFont ).width( labelText ) );
     }
