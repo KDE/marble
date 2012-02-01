@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012 Gerhard HOLTKAMP 
+// Copyright 2012 Gerhard HOLTKAMP
 //
 
 // Prototype of Solar Eclipse Marble Widget
@@ -38,7 +38,7 @@ public:
     virtual void customPaint(GeoPainter* painter);
 
 };
- 
+
 void MyMarbleWidget::customPaint(GeoPainter* painter)
 {
     int np, kp, j;
@@ -51,7 +51,7 @@ void MyMarbleWidget::customPaint(GeoPainter* painter)
     kp = np;
 
     GeoDataLineString  centralLine ( Tessellate );
-    centralLine << GeoDataCoordinates (lng1, lat1, 0.0, GeoDataCoordinates::Degree);
+    centralLine << GeoDataCoordinates ( GeoDataCoordinates::normalizeLon( lng1, GeoDataCoordinates::Degree ), lat1, 0.0, GeoDataCoordinates::Degree);
 
     if (np > 3)  // we have a central eclipse
     {
@@ -60,7 +60,7 @@ void MyMarbleWidget::customPaint(GeoPainter* painter)
             np = ecps.eclPltCentral(false, lat1, lng1);
             if (np > 3)
             {
-               centralLine << GeoDataCoordinates (lng1, lat1, 0.0, GeoDataCoordinates::Degree);
+               centralLine << GeoDataCoordinates ( GeoDataCoordinates::normalizeLon( lng1, GeoDataCoordinates::Degree ), lat1, 0.0, GeoDataCoordinates::Degree);
             };
         };
     }
@@ -76,16 +76,16 @@ void MyMarbleWidget::customPaint(GeoPainter* painter)
         np = ecps.centralBound(true, lat1, lng1, lat2, lng2);
 
         GeoDataLinearRing  lowerUmbra ( Tessellate );
-        lowerUmbra << GeoDataCoordinates (lng1, lat1, 0.0, GeoDataCoordinates::Degree);
+        lowerUmbra << GeoDataCoordinates ( GeoDataCoordinates::normalizeLon( lng1, GeoDataCoordinates::Degree ), lat1, 0.0, GeoDataCoordinates::Degree);
         GeoDataLinearRing  upperUmbra ( Tessellate );
-        upperUmbra << GeoDataCoordinates (lng2, lat2, 0.0, GeoDataCoordinates::Degree);
+        upperUmbra << GeoDataCoordinates ( GeoDataCoordinates::normalizeLon( lng2, GeoDataCoordinates::Degree ), lat2, 0.0, GeoDataCoordinates::Degree);
 
         while (np > 0)
         {
             np = ecps.centralBound(false, lat1, lng1, lat2, lng2);
 
-            if (lat1 <= 90.0) lowerUmbra << GeoDataCoordinates(lng1, lat1, 0.0, GeoDataCoordinates::Degree);
-            if (lat2 <= 90.0) upperUmbra << GeoDataCoordinates(lng2, lat2, 0.0, GeoDataCoordinates::Degree);
+            if (lat1 <= 90.0) lowerUmbra << GeoDataCoordinates( GeoDataCoordinates::normalizeLon( lng1, GeoDataCoordinates::Degree ), lat1, 0.0, GeoDataCoordinates::Degree);
+            if (lat2 <= 90.0) upperUmbra << GeoDataCoordinates( GeoDataCoordinates::normalizeLon( lng2, GeoDataCoordinates::Degree ), lat2, 0.0, GeoDataCoordinates::Degree);
         };
 
         // Invert upperUmbra linear ring
@@ -112,18 +112,18 @@ void MyMarbleWidget::customPaint(GeoPainter* painter)
         painter->drawPolygon( umbra );
 
     }
-    
+
        //  draw shadow cones at maximum eclipse time
 
         ecps.getMaxPos(lat1, lng1);
         ecps.setLocalPos(lat1, lng1,0);
         ecps.getLocalMax(lat2, lat3, lat4);
-       
+
         ecps.getShadowCone(lat2, true, 40, ltf, lnf);  // umbra
         for (j=0; j<40; j++)
         {
          if(ltf[j] < 100.0)
-             painter->drawEllipse(GeoDataCoordinates(lnf[j], ltf[j], 0.0, GeoDataCoordinates::Degree),2,2);
+             painter->drawEllipse(GeoDataCoordinates(GeoDataCoordinates::normalizeLon( lnf[j], GeoDataCoordinates::Degree ), ltf[j], 0.0, GeoDataCoordinates::Degree),2,2);
         }
 
         ecps.setPenumbraAngle(1.0, 0);  // full penumbra
@@ -132,7 +132,7 @@ void MyMarbleWidget::customPaint(GeoPainter* painter)
         for (j=0; j<60; j++)
         {
             if(ltf[j] < 100.0)
-             painter->drawEllipse(GeoDataCoordinates(lnf[j], ltf[j], 0.0, GeoDataCoordinates::Degree),2,2);
+             painter->drawEllipse(GeoDataCoordinates(GeoDataCoordinates::normalizeLon( lnf[j], GeoDataCoordinates::Degree ), ltf[j], 0.0, GeoDataCoordinates::Degree),2,2);
         }
 
         ecps.setPenumbraAngle(0.6, 1);  // 60% magnitude penumbra
@@ -141,15 +141,15 @@ void MyMarbleWidget::customPaint(GeoPainter* painter)
         for (j=0; j<60; j++)
         {
          if(ltf[j] < 100.0)
-             painter->drawEllipse(GeoDataCoordinates(lnf[j], ltf[j], 0.0, GeoDataCoordinates::Degree),3,3);
+             painter->drawEllipse(GeoDataCoordinates(GeoDataCoordinates::normalizeLon( lnf[j], GeoDataCoordinates::Degree ), ltf[j], 0.0, GeoDataCoordinates::Degree),3,3);
         }
         ecps.setPenumbraAngle(1.0, 0);
-   
+
 
     // mark point of maximum eclipse
     ecps.getMaxPos(lat1, lng1);
 
-    GeoDataCoordinates home2(lng1, lat1, 0.0, GeoDataCoordinates::Degree);
+    GeoDataCoordinates home2(GeoDataCoordinates::normalizeLon( lng1, GeoDataCoordinates::Degree ), lat1, 0.0, GeoDataCoordinates::Degree);
     painter->setPen(Qt::white);
     QColor sunBoundingBrush ( Qt::white );
     sunBoundingBrush.setAlpha( 128 );
@@ -172,7 +172,7 @@ void MyMarbleWidget::customPaint(GeoPainter* painter)
     while (np > 0)
     {
         np = ecps.GNSBound(false, true, lat1, lng1);
-        if ((np > 0) && (lat1 <= 90.0)) southernPenUmbra  << GeoDataCoordinates (lng1, lat1, 0.0, GeoDataCoordinates::Degree);
+        if ((np > 0) && (lat1 <= 90.0)) southernPenUmbra  << GeoDataCoordinates (GeoDataCoordinates::normalizeLon( lng1, GeoDataCoordinates::Degree ), lat1, 0.0, GeoDataCoordinates::Degree);
     };
 
     painter->setPen(oxygenBrickRed4);
@@ -185,7 +185,7 @@ void MyMarbleWidget::customPaint(GeoPainter* painter)
     while (np > 0)
     {
         np = ecps.GNSBound(false, false, lat1, lng1);
-        if ((np > 0) && (lat1 <= 90.0)) northernPenUmbra  << GeoDataCoordinates (lng1, lat1, 0.0, GeoDataCoordinates::Degree);
+        if ((np > 0) && (lat1 <= 90.0)) northernPenUmbra  << GeoDataCoordinates (GeoDataCoordinates::normalizeLon( lng1, GeoDataCoordinates::Degree ), lat1, 0.0, GeoDataCoordinates::Degree);
     };
 
     painter->setPen(oxygenBrickRed4);
@@ -198,10 +198,10 @@ void MyMarbleWidget::customPaint(GeoPainter* painter)
     np = ecps.GRSBound(true, lat1, lng1, lat3, lng3);
     GeoDataLinearRing * lowerBoundary = new GeoDataLinearRing( Tessellate );
 
-    *lowerBoundary << GeoDataCoordinates (lng1, lat1, 0.0, GeoDataCoordinates::Degree);
+    *lowerBoundary << GeoDataCoordinates (GeoDataCoordinates::normalizeLon( lng1, GeoDataCoordinates::Degree ), lat1, 0.0, GeoDataCoordinates::Degree);
 
     GeoDataLinearRing * upperBoundary = new GeoDataLinearRing( Tessellate );
-    *upperBoundary << GeoDataCoordinates (lng3, lat3, 0.0, GeoDataCoordinates::Degree);
+    *upperBoundary << GeoDataCoordinates (GeoDataCoordinates::normalizeLon( lng3, GeoDataCoordinates::Degree ), lat3, 0.0, GeoDataCoordinates::Degree);
 
     while (np > 0)
     {
@@ -214,7 +214,7 @@ void MyMarbleWidget::customPaint(GeoPainter* painter)
             lowerBoundary = new GeoDataLinearRing( Tessellate );
         }
         if ((np > 0) && (lat2 <= 90.0) && (lat1 <= 90.0)) {
-            *lowerBoundary << GeoDataCoordinates(lng2, lat2, 0.0, GeoDataCoordinates::Degree);
+            *lowerBoundary << GeoDataCoordinates(GeoDataCoordinates::normalizeLon( lng2, GeoDataCoordinates::Degree ), lat2, 0.0, GeoDataCoordinates::Degree);
         }
         pline = fabs(lng3 - lng4) < 10.0; // during partial eclipses, the Rise/Set lines switch at one stage.
                                           // This will prevent an ugly line between the switch points.
@@ -224,7 +224,7 @@ void MyMarbleWidget::customPaint(GeoPainter* painter)
             upperBoundary = new GeoDataLinearRing( Tessellate );
         }
         if (pline && (np > 0) && (lat4 <= 90.0) && (lat3 <= 90.0)) {
-            *upperBoundary << GeoDataCoordinates(lng4, lat4, 0.0, GeoDataCoordinates::Degree);
+            *upperBoundary << GeoDataCoordinates(GeoDataCoordinates::normalizeLon( lng4, GeoDataCoordinates::Degree ), lat4, 0.0, GeoDataCoordinates::Degree);
         }
 
         lng1 = lng2;
@@ -325,10 +325,10 @@ int main(int argc, char** argv)
   double lat, lng;
   bool ok;
   char wbuf[700];
-  
+
     QApplication app(argc,argv);
     QWidget *window = new QWidget;
- 
+
     // initialize the solar eclipse class and get the year of the eclipse
 
     ecps.setLunarEcl(false);  // only solar eclipses
@@ -347,12 +347,12 @@ int main(int argc, char** argv)
 
     // Create a Marble QWidget without a parent
     MarbleWidget *mapWidget = new MyMarbleWidget();
- 
+
     hc = 0;
     hc = QInputDialog::getInt(0, "MapTheme",
              "Set Map Theme\n 0: Plain \n 1: openstreetmap \n 2: clouds",
                0, 0, 2, 1,&ok);
-			      
+
     if (hc == 1) mapWidget->setMapThemeId("earth/openstreetmap/openstreetmap.dgml");
     else
     {
@@ -376,9 +376,9 @@ int main(int argc, char** argv)
     QSlider * zoomSlider = new QSlider(Qt::Horizontal);
     zoomSlider->setMinimum( 1000 );
     zoomSlider->setMaximum( 3200 );
- 
+
     mapWidget->zoomView( zoomSlider->value() );
- 
+
     // Create a label to show the geodetic position
     QLabel * positionLabel = new QLabel();
     positionLabel->setSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed );
@@ -391,13 +391,13 @@ int main(int argc, char** argv)
 
     // Center the map onto position of maximum eclipse
     ecps.getMaxPos(lat, lng);
-    GeoDataCoordinates home(lng, lat, 0.0, GeoDataCoordinates::Degree);
+    GeoDataCoordinates home(GeoDataCoordinates::normalizeLon( lng, GeoDataCoordinates::Degree ), lat, 0.0, GeoDataCoordinates::Degree);
     mapWidget->centerOn(home);
- 
+
     // Connect the map widget to the position label.
     QObject::connect( mapWidget, SIGNAL( mouseMoveGeoPosition( QString ) ),
                       positionLabel, SLOT( setText( QString ) ) );
- 
+
     // Connect the zoom slider to the map widget and vice versa.
     QObject::connect( zoomSlider, SIGNAL( valueChanged(int) ),
                       mapWidget, SLOT( zoomView(int) ) );
