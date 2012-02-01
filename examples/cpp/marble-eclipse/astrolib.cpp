@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012 Gerhard HOLTKAMP 
+// Copyright 2012 Gerhard HOLTKAMP
 //
 
 /* =========================================================================
@@ -15,6 +15,9 @@
   as well as from the "Explanatory Supplement to the Astronomical Almanac"
   University Science Books, Mill Valley, California, 1992
   and modified correspondingly.
+
+  Linux C++ version
+  Copyright : Gerhard HOLTKAMP          11-JAN-2012
   ========================================================================= */
 
 #include <cmath>
