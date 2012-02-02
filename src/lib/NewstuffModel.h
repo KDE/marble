@@ -47,7 +47,8 @@ public:
         IsInstalled,
         IsUpgradable,
         Category,
-        IsTransitioning
+        IsTransitioning,
+        PayloadSize
     };
 
     enum IdTag {
