@@ -17,20 +17,18 @@
 #ifndef MARBLE_HTTPDOWNLOADMANAGER_H
 #define MARBLE_HTTPDOWNLOADMANAGER_H
 
-#include <QtCore/QString>
-#include <QtCore/QUrl>
+#include <QtCore/QObject>
 
 #include "global.h"
 #include "marble_export.h"
 
-class QTimer;
+class QUrl;
 
 namespace Marble
 {
 
 class DownloadPolicy;
 class DownloadQueueSet;
-class HttpJob;
 class PluginManager;
 class StoragePolicy;
 
