@@ -262,6 +262,7 @@ void PlacemarkLayout::requestStyleReset()
 void PlacemarkLayout::styleReset()
 {
     m_paintOrder.clear();
+    m_labelArea = 0;
     qDeleteAll( m_visiblePlacemarks );
     m_visiblePlacemarks.clear();
     m_maxLabelHeight = maxLabelHeight();
@@ -306,7 +307,7 @@ int PlacemarkLayout::maxLabelHeight() const
     return maxLabelHeight;
 }
 
-// Calculate a "TileId" from a Placemark containing coordinates and popularity
+/// Calculate a "TileId" from a Placemark containing coordinates and popularity
 // The popularity will lead to a tile level, i.e. popularity 1 (most popular)
 // goes to topmost tile level.
 // Then for a given popularity, calculate which tile matches the coordinates
@@ -340,6 +341,7 @@ TileId PlacemarkLayout::placemarkToTileId( const GeoDataCoordinates& coords, int
     return TileId("Placemark", popularity, x, y);
 }
 
+/// feed an internal QMap of placemarks with TileId as key when model changes
 void PlacemarkLayout::setCacheData()
 {
     const int rowCount = m_placemarkModel.rowCount();
@@ -380,6 +382,7 @@ qreal PlacemarkLayout::zValue() const
     return 2.0;
 }
 
+/// determine the set of placemarks that fit the viewport based on a pyramid of TileIds
 QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( ViewportParams *viewport )
 {
     int popularity = 0;
@@ -471,8 +474,11 @@ bool PlacemarkLayout::render( GeoPainter *painter,
     m_rowsection.resize(secnumber);
 
     m_paintOrder.clear();
+    m_labelArea = 0;
 
     int labelnum = 0;
+    int outsideBox = 0;
+    int missedRendering = 0;
     qreal x = 0;
     qreal y = 0;
 
@@ -504,8 +510,10 @@ bool PlacemarkLayout::render( GeoPainter *painter,
             // Make sure not to draw more placemarks on the screen than
             // specified by placemarksOnScreenLimit().
             ++labelnum;
-            if ( labelnum >= placemarksOnScreenLimit() )
+            if ( placemarksOnScreenLimit( viewport->size() ) )
                 break;
+        } else {
+            ++missedRendering;
         }
 
     }
@@ -517,8 +525,8 @@ bool PlacemarkLayout::render( GeoPainter *painter,
 
     QList<const GeoDataPlacemark*> placemarkList = visiblePlacemarks( viewport );
     const int rowCount = placemarkList.count();
-
-    for ( int i = 0; i != rowCount; ++i )
+    int i;
+    for ( i = 0; i != rowCount; ++i )
     {
         const GeoDataPlacemark *placemark = placemarkList.at(i);
 
@@ -540,6 +548,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
 
         if ( !viewport->viewLatLonAltBox().contains( coordinates ) ||
              ! viewport->screenCoordinates( coordinates, x, y )) {
+                ++outsideBox;
                 delete m_visiblePlacemarks.take( placemark );
                 continue;
             }
@@ -603,8 +612,10 @@ bool PlacemarkLayout::render( GeoPainter *painter,
             // Make sure not to draw more placemarks on the screen than
             // specified by placemarksOnScreenLimit().
             ++labelnum;
-            if ( labelnum >= placemarksOnScreenLimit() )
+            if ( placemarksOnScreenLimit( viewport->size() ) )
                 break;
+        } else {
+            ++missedRendering;
         }
     }
 
@@ -654,6 +665,7 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
         m_rowsection[ idx + 1 ].append( mark );
 
     m_paintOrder.append( mark );
+    m_labelArea += labelRect.width() * labelRect.height();
     return true;
 }
 
@@ -754,13 +766,10 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
                     // for the rectangle anymore.
 }
 
-int PlacemarkLayout::placemarksOnScreenLimit() const
+bool PlacemarkLayout::placemarksOnScreenLimit( const QSize &screenSize ) const
 {
-    // For now we just return 100.
-    // Later on once we focus on decent high dpi print quality
-    // we should replace this static value by a dynamic value
-    // that takes the area that gets displayed into account.
-    return 100;
+    int ratio = ( m_labelArea * 100 ) / ( screenSize.width() * screenSize.height() );
+    return ratio >= 40;
 }
 
 #include "PlacemarkLayout.moc"

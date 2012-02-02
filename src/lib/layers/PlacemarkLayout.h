@@ -141,7 +141,7 @@ class PlacemarkLayout : public QObject, public LayerInterface
                          const qreal x, const qreal y,
                          const QString &labelText );
 
-    int    placemarksOnScreenLimit() const;
+    bool    placemarksOnScreenLimit( const QSize &screenSize ) const;
 
  private:
     Q_DISABLE_COPY( PlacemarkLayout )
@@ -152,6 +152,7 @@ class PlacemarkLayout : public QObject, public LayerInterface
     PlacemarkPainter m_placemarkPainter;
 
     QVector<VisiblePlacemark*> m_paintOrder;
+    int m_labelArea;
     QHash<const GeoDataPlacemark*, VisiblePlacemark*> m_visiblePlacemarks;
     QVector< QVector< VisiblePlacemark* > >  m_rowsection;
 
