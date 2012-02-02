@@ -406,7 +406,6 @@ void TileCreator::run()
                                             .arg( 2*m, tileDigits, 10, QChar('0') ) )
                                             .arg( d->m_tileFormat );
                     QImage  img_topleft( tileName );
-                    Q_ASSERT( img_topleft.size() == QSize( c_defaultTileSize, c_defaultTileSize ) );
 
                     tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.%4")
                                             .arg( tileLevel + 1 )
@@ -414,7 +413,6 @@ void TileCreator::run()
                                             .arg( 2*m+1, tileDigits, 10, QChar('0') ) )
                                             .arg( d->m_tileFormat );
                     QImage  img_topright( tileName );
-                    Q_ASSERT( img_topright.size() == QSize( c_defaultTileSize, c_defaultTileSize ) );
 
                     tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.%4")
                                             .arg( tileLevel + 1 )
@@ -422,7 +420,6 @@ void TileCreator::run()
                                             .arg( 2*m, tileDigits, 10, QChar('0') ) )
                                             .arg( d->m_tileFormat );
                     QImage  img_bottomleft( tileName );
-                    Q_ASSERT( img_bottomleft.size() == QSize( c_defaultTileSize, c_defaultTileSize ) );
 
                     tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.%4")
                                             .arg( tileLevel + 1 )
@@ -430,8 +427,16 @@ void TileCreator::run()
                                             .arg( 2*m+1, tileDigits, 10, QChar('0') ) )
                                             .arg( d->m_tileFormat );
                     QImage  img_bottomright( tileName );
-                    Q_ASSERT( img_bottomright.size() == QSize( c_defaultTileSize, c_defaultTileSize ) );
 
+                    QSize const expectedSize( c_defaultTileSize, c_defaultTileSize );
+                    if ( img_topleft.size() != expectedSize ||
+                         img_topright.size() != expectedSize ||
+                         img_bottomleft.size() != expectedSize ||
+                         img_bottomright.size() != expectedSize ) {
+                        mDebug() << "Tile write failure. Missing write permissions?";
+                        emit progress( 100 );
+                        return;
+                    }
                     QImage  tile = img_topleft;
 
                     if ( d->m_dem == "true" ) {

@@ -826,6 +826,7 @@ void MarbleMapPrivate::updateMapTheme()
         const GeoSceneMap *const map = m_model->mapTheme()->map();
         const GeoSceneLayer *const sceneLayer = ( head && map ) ? map->layer( head->theme() ) : 0;
 
+        bool textureLayersOk = true;
         QVector<const GeoSceneTexture *> textures;
         if ( sceneLayer ) {
             foreach ( const GeoSceneAbstractDataset *pos, sceneLayer->datasets() ) {
@@ -866,7 +867,8 @@ void MarbleMapPrivate::updateMapTheme()
                 if ( TileLoader::baseTilesAvailable( *texture ) ) {
                     textures.append( texture );
                 } else {
-                    qWarning() << "Base tiles for" << sourceDir << "not available. Skipping.";
+                    qWarning() << "Base tiles for" << sourceDir << "not available. Skipping all texture layers.";
+                    textureLayersOk = false;
                 }
             }
         }
@@ -902,7 +904,9 @@ void MarbleMapPrivate::updateMapTheme()
             }
         }
 
-        m_layerManager.addLayer( &m_textureLayer );
+        if ( textureLayersOk ) {
+            m_layerManager.addLayer( &m_textureLayer );
+        }
     }
 
     // NOTE due to frequent regressions: 
