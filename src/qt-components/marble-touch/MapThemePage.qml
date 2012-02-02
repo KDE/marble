@@ -168,7 +168,7 @@ Page {
                     Button {
                         id: installButton
                         text: installed && upgradable ? "Upgrade" : "Install"
-                        enabled: !installed
+                        enabled: !installed || upgradable
                         anchors.top: summaryLabel.bottom
                         anchors.left: parent.left
                         anchors.margins: 5
