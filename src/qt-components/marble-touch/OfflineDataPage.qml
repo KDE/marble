@@ -105,7 +105,34 @@ Page {
                         anchors.topMargin: 5
                         visible: delegateRoot.showDetails
                         property string localVersion: "<font size=\"-1\">Version installed: " + installedreleasedate + "</font>"
-                        text: "<font size=\"-1\">Version available: " + releasedate + "</font>" + (installed ? "<br />" + localVersion : "")
+                        property string displaySize: delegateRoot.showDetails && !settings.workOffline ? " (" + formatSize() + ")" : ""
+                        text: "<font size=\"-1\">Version available: " + releasedate + displaySize + "</font>" + (installed ? "<br />" + localVersion : "")
+
+                        function formatSize() {
+                            var length = size
+
+                            if (length<0) {
+                                return ""
+                            }
+
+                            var unit = 0
+                            for (var i=0; i<9 && length >= 1000; ++i) {
+                                length /= 1000.0
+                                ++unit
+                            }
+
+                            switch (unit) {
+                            case 0: return length.toFixed(1) + " byte"
+                            case 1: return length.toFixed(1) + " kB"
+                            case 2: return length.toFixed(1) + " MB"
+                            case 3: return length.toFixed(1) + " GB"
+                            case 4: return length.toFixed(1) + " TB"
+                            case 5: return length.toFixed(1) + " PB"
+                            case 6: return length.toFixed(1) + " EB"
+                            case 7: return length.toFixed(1) + " ZB"
+                            case 8: return length.toFixed(1) + " YB"
+                            }
+                        }
                     }
 
                     ProgressBar {

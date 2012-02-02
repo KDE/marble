@@ -43,6 +43,9 @@ public:
     QUrl m_preview;
     QUrl m_payload;
     QDomNode m_registryNode;
+    qint64 m_payloadSize;
+
+    NewstuffItem();
 
     QString installedVersion() const;
     QString installedReleaseDate() const;
@@ -125,6 +128,11 @@ public:
     void readValue( const QDomNode &node, const QString &key, T* target ) const;
 };
 
+NewstuffItem::NewstuffItem() : m_payloadSize( -2 )
+{
+    // nothing to do
+}
+
 QString NewstuffItem::installedVersion() const
 {
     QDomNodeList const nodes = m_registryNode.toElement().elementsByTagName( "version" );
@@ -177,6 +185,22 @@ NewstuffModelPrivate::NewstuffModelPrivate( NewstuffModel* parent ) : m_parent( 
 
 void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
 {
+    if ( reply->operation() == QNetworkAccessManager::HeadOperation ) {
+        QVariant const size = reply->header( QNetworkRequest::ContentLengthHeader );
+        if ( size.isValid() ) {
+            qint64 length = size.toLongLong();
+            for ( int i=0; i<m_items.size(); ++i ) {
+                NewstuffItem &item = m_items[i];
+                if ( item.m_payload == reply->url() ) {
+                    item.m_payloadSize = length;
+                    QModelIndex const affected = m_parent->index( i );
+                    emit m_parent->dataChanged( affected, affected );
+                }
+            }
+        }
+        return;
+    }
+
     QDomDocument xml;
     if ( !xml.setContent( reply->readAll() ) ) {
         mDebug() << "Cannot parse newstuff xml data ";
@@ -216,7 +240,7 @@ void NewstuffModelPrivate::installMap()
     } else if ( m_currentFile->fileName().endsWith( "tar.gz" ) && canExecute( "tar" ) ) {
         m_unpackProcess = new QProcess;
         QObject::connect( m_unpackProcess, SIGNAL( finished( int ) ),
-                 m_parent, SLOT( contentsListed( int ) ) );
+                          m_parent, SLOT( contentsListed( int ) ) );
         QStringList arguments = QStringList() << "-t" << "-z" << "-f" << m_currentFile->fileName();
         m_unpackProcess->setWorkingDirectory( m_targetDirectory );
         m_unpackProcess->start( "tar", arguments );
@@ -355,6 +379,7 @@ NewstuffModel::NewstuffModel( QObject *parent ) :
     roles[IsUpgradable] = "upgradable";
     roles[Category] = "category";
     roles[IsTransitioning] = "transitioning";
+    roles[PayloadSize] = "size";
     setRoleNames( roles );
 }
 
@@ -391,6 +416,16 @@ QVariant NewstuffModel::data ( const QModelIndex &index, int role ) const
         case IsUpgradable: return d->m_items.at( index.row() ).isUpgradable();
         case Category: return d->m_items.at( index.row() ).m_category;
         case IsTransitioning: return d->isTransitioning( index.row() );
+        case PayloadSize: {
+            qint64 const size = d->m_items.at( index.row() ).m_payloadSize;
+            QUrl const url = d->m_items.at( index.row() ).m_payload;
+            if ( size < -1 && !url.isEmpty() ) {
+                d->m_items[index.row()].m_payloadSize = -1; // prevent several head requests for the same item
+                d->m_networkAccessManager->head( QNetworkRequest( url ) );
+            }
+
+            return qMax<qint64>( -1, size );
+        }
         }
     }
 
@@ -687,9 +722,9 @@ void NewstuffModel::contentsListed( int exitStatus )
         }
 
         QObject::disconnect( d->m_unpackProcess, SIGNAL( finished( int ) ),
-                 this, SLOT( contentsListed( int ) ) );
+                             this, SLOT( contentsListed( int ) ) );
         QObject::connect( d->m_unpackProcess, SIGNAL( finished( int ) ),
-                 this, SLOT( mapInstalled( int ) ) );
+                          this, SLOT( mapInstalled( int ) ) );
         QStringList arguments = QStringList() << "-x" << "-z" << "-f" << d->m_currentFile->fileName();
         d->m_unpackProcess->start( "tar", arguments );
     } else {
@@ -726,7 +761,7 @@ void NewstuffModelPrivate::processQueue()
             QObject::connect( m_currentReply, SIGNAL( readyRead() ), m_parent, SLOT( retrieveData() ) );
             QObject::connect( m_currentReply, SIGNAL( readChannelFinished() ), m_parent, SLOT( retrieveData() ) );
             QObject::connect( m_currentReply, SIGNAL( downloadProgress( qint64, qint64 ) ),
-                     m_parent, SLOT( updateProgress( qint64, qint64 ) ) );
+                              m_parent, SLOT( updateProgress( qint64, qint64 ) ) );
             /** @todo: handle download errors */
         } else {
             mDebug() << "Failed to write to " << m_currentFile->fileName();
