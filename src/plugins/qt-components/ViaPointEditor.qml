@@ -50,11 +50,6 @@ Item {
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
             }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: marbleWidget.centerOn(longitude, latitude)
-            }
         }
 
         Label {
@@ -64,6 +59,11 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             anchors.margins: 10
             text: root._editing ? "Select a point" : ( root.isCurrentPosition ? "Current position" : name )
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: marbleWidget.centerOn(longitude, latitude)
         }
 
         ToolIcon {
