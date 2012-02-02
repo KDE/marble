@@ -49,7 +49,7 @@ Page {
             }
 
             Label {
-                text: "<p>This is Marble Touch <b>version 1.3.0 (experimental release)</b>. Marble is a Virtual Globe and World Atlas. It is part of the KDE Software Compilation and distributed under the terms of the LGPL, Version 2. Marble is Open Source; we create free source code and endorse free maps and free data. Please visit the <a href=\"http://edu.kde.org/marble\">Marble website</a> for further information.</p>"
+                text: "<p>This is Marble Touch <b>version 1.3.2 (experimental release)</b>. Marble is a Virtual Globe and World Atlas. It is part of the KDE Software Compilation and distributed under the terms of the LGPL, Version 2. Marble is Open Source; we create free source code and endorse free maps and free data. Please visit the <a href=\"http://edu.kde.org/marble\">Marble website</a> for further information.</p>"
                 platformStyle: LabelStyle { fontPixelSize: 16 }
                 width: parent.width
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
