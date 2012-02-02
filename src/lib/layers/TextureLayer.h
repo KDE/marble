@@ -90,7 +90,7 @@ class TextureLayer : public QObject, public LayerInterface
 
     void setVolatileCacheLimit( quint64 kilobytes );
 
-    void update();
+    void reset();
 
     void reload();
 

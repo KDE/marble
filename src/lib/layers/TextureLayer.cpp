@@ -216,30 +216,30 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
 void TextureLayer::setShowSunShading( bool show )
 {
     disconnect( d->m_sunLocator, SIGNAL( positionChanged( qreal, qreal ) ),
-                this, SLOT( update() ) );
+                this, SLOT( reset() ) );
 
     if ( show ) {
         connect( d->m_sunLocator, SIGNAL( positionChanged( qreal, qreal ) ),
-                 this,       SLOT( update() ) );
+                 this,       SLOT( reset() ) );
     }
 
     d->m_tileLoader.setShowSunShading( show );
 
-    update();
+    reset();
 }
 
 void TextureLayer::setShowCityLights( bool show )
 {
     d->m_tileLoader.setShowCityLights( show );
 
-    update();
+    reset();
 }
 
 void TextureLayer::setShowTileId( bool show )
 {
     d->m_tileLoader.setShowTileId( show );
 
-    update();
+    reset();
 }
 
 void TextureLayer::setTextureColorizer( TextureColorizer *texcolorizer )
@@ -296,9 +296,10 @@ void TextureLayer::setVolatileCacheLimit( quint64 kilobytes )
     d->m_tileLoader.setVolatileCacheLimit( kilobytes );
 }
 
-void TextureLayer::update()
+void TextureLayer::reset()
 {
-    mDebug() << "TextureLayer::update()";
+    mDebug() << Q_FUNC_INFO;
+
     d->m_tileLoader.clear();
     d->mapChanged();
 }

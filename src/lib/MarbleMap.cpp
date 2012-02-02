@@ -1088,7 +1088,7 @@ void MarbleMap::notifyMouseClick( int x, int y )
 
 void MarbleMap::clearVolatileTileCache()
 {
-    d->m_textureLayer.update();
+    d->m_textureLayer.reset();
     mDebug() << "Cleared Volatile Cache!";
 }
 
