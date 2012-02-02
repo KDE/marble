@@ -65,7 +65,19 @@ Page {
                     Image {
                         id: previewIcon
                         anchors.top: parent.top
-                        source: settings.workOffline ? "qrc:/icons/activity-virtualglobe.png" : preview
+                        source: settings.workOffline ? "" : preview
+                        width: 136
+                        height: 136
+
+                        Image {
+                            id: fallbackIcon
+                            anchors.centerIn: parent
+                            source: "qrc:/icons/activity-virtualglobe.png"
+                            width: 128
+                            height: 128
+                            opacity: (previewIcon.status == Image.Loading || settings.workOffline) ? 1.0 : 0.0
+                            Behavior on opacity { NumberAnimation {} }
+                        }
                     }
 
                     Label {
