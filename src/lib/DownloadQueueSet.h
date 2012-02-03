@@ -87,6 +87,7 @@ class DownloadQueueSet: public QObject
 
     void activateJobs();
     void retryJobs();
+    void purgeJobs();
 
  Q_SIGNALS:
     void jobAdded();

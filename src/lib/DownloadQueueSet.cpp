@@ -101,6 +101,24 @@ void DownloadQueueSet::retryJobs()
     }
 }
 
+void DownloadQueueSet::purgeJobs()
+{
+    // purge all waiting jobs
+    while( !m_jobs.isEmpty() ) {
+        HttpJob * const job = m_jobs.pop();
+        job->deleteLater();
+    }
+
+    // purge all retry jobs
+    qDeleteAll( m_retryQueue );
+    m_retryQueue.clear();
+
+    // cancel all current jobs
+    while( !m_activeJobs.isEmpty() ) {
+        deactivateJob( m_activeJobs.first() );
+    }
+}
+
 void DownloadQueueSet::finishJob( HttpJob * job, const QByteArray& data )
 {
     mDebug() << "finishJob: " << job->sourceUrl() << job->destinationFileName();

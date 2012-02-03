@@ -72,10 +72,6 @@ class TileLoader: public QObject
 
     // TODO: comment about uint hash key
     QHash<uint, GeoSceneTexture const *> m_textureLayers;
-
-    // contains tiles, for which a download has been triggered
-    // because the tile was not there at all or is expired.
-    QSet<TileId> m_waitingForUpdate;
 };
 
 }

@@ -69,7 +69,6 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
             mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateUptodate";
         } else {
             mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateExpired";
-            m_waitingForUpdate.insert( tileId );
             triggerDownload( tileId, usage );
         }
 
@@ -81,7 +80,6 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
     QImage replacementTile = scaledLowerLevelTile( tileId );
     Q_ASSERT( !replacementTile.isNull() );
 
-    m_waitingForUpdate.insert( tileId );
     triggerDownload( tileId, usage );
 
     return replacementTile;
@@ -92,13 +90,9 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
 // that should be reloaded is currently loaded in memory.
 //
 // post condition
-//     - download is triggered, but only if not in progress (indicated by
-//       m_waitingForUpdate)
+//     - download is triggered
 void TileLoader::reloadTile( TileId const &tileId, DownloadUsage const usage )
 {
-    if ( m_waitingForUpdate.contains( tileId ) )
-        return;
-    m_waitingForUpdate.insert( tileId );
     triggerDownload( tileId, usage );
 }
 
@@ -159,13 +153,6 @@ bool TileLoader::baseTilesAvailable( GeoSceneTexture const & texture )
 void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
 {
     TileId const id = TileId::fromString( tileId );
-
-    // preliminary fix for reload map crash
-    // TODO: fix properly
-    if ( !m_waitingForUpdate.contains( id ) )
-        return;
-
-    m_waitingForUpdate.remove( id );
 
     QImage const tileImage = QImage::fromData( data );
     if ( tileImage.isNull() )
