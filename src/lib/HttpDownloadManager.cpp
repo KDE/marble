@@ -141,6 +141,12 @@ HttpDownloadManager::~HttpDownloadManager()
 void HttpDownloadManager::setDownloadEnabled( const bool enable )
 {
     d->m_downloadEnabled = enable;
+    QList<QPair<DownloadPolicyKey, DownloadQueueSet *> >::iterator pos = d->m_queueSets.begin();
+    QList<QPair<DownloadPolicyKey, DownloadQueueSet *> >::iterator const end = d->m_queueSets.end();
+    for (; pos != end; ++pos ) {
+        pos->second->purgeJobs();
+    }
+
 }
 
 void HttpDownloadManager::addDownloadPolicy( const DownloadPolicy& policy )
