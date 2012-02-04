@@ -16,6 +16,15 @@ FOREACH(file ${files})
     ELSE("${rm_retval}" STREQUAL 0)
       MESSAGE(FATAL_ERROR "Problem when removing \"$ENV{DESTDIR}${file}\"")
     ENDIF("${rm_retval}" STREQUAL 0)
+  ELSEIF(IS_SYMLINK "${file}")
+    EXEC_PROGRAM(
+      "@CMAKE_COMMAND@" ARGS "-E remove \"${file}\""
+      OUTPUT_VARIABLE rm_out
+      RETURN_VALUE rm_retval
+      )
+    IF(NOT "${rm_retval}" STREQUAL 0)
+      MESSAGE(FATAL_ERROR "Problem when removing \"${file}\"")
+    ENDIF()
   ELSE(EXISTS "$ENV{DESTDIR}${file}")
     MESSAGE(STATUS "File \"$ENV{DESTDIR}${file}\" does not exist.")
   ENDIF(EXISTS "$ENV{DESTDIR}${file}")
