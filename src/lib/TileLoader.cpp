@@ -56,23 +56,23 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
 {
     GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
     QString const fileName = tileFileName( textureLayer, tileId );
-    QImage const image( fileName );
-    if ( !image.isNull() ) {
-        // file is there, so create and return a tile object in any case,
-        // but check if an update should be triggered
+    TileStatus status = tileStatus( tileId );
+    if ( status != Missing ) {
+        // check if an update should be triggered
 
-        const QDateTime lastModified = QFileInfo( fileName ).lastModified();
-        const int expireSecs = textureLayer->expire();
-        const bool isExpired = lastModified.secsTo( QDateTime::currentDateTime() ) >= expireSecs;
-
-        if ( !isExpired ) {
+        if ( status == Available ) {
             mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateUptodate";
         } else {
+            Q_ASSERT( status == Expired );
             mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateExpired";
             triggerDownload( tileId, usage );
         }
 
-        return image;
+        QImage const image( fileName );
+        if ( !image.isNull() ) {
+            // file is there, so create and return a tile object in any case
+            return image;
+        }
     }
 
     // tile was not locally available => trigger download and look for tiles in other levels
@@ -148,6 +148,21 @@ bool TileLoader::baseTilesAvailable( GeoSceneTexture const & texture )
     }
 
     return result;
+}
+
+TileLoader::TileStatus TileLoader::tileStatus( const TileId &tileId )
+{
+    GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
+    QString const fileName = tileFileName( textureLayer, tileId );
+    QFileInfo fileInfo( fileName );
+    if ( !fileInfo.exists() ) {
+        return Missing;
+    }
+
+    const QDateTime lastModified = fileInfo.lastModified();
+    const int expireSecs = textureLayer->expire();
+    const bool isExpired = lastModified.secsTo( QDateTime::currentDateTime() ) >= expireSecs;
+    return isExpired ? Expired : Available;
 }
 
 void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
