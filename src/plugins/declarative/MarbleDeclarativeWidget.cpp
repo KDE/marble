@@ -27,6 +27,7 @@
 #include "MarbleDirs.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
+#include "DownloadRegion.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
 
@@ -282,6 +283,17 @@ QObject *MarbleWidget::mapThemeModel()
 void MarbleWidget::setGeoSceneProperty(const QString &key, bool value)
 {
     m_marbleWidget->setPropertyValue( key, value );
+}
+
+void MarbleWidget::downloadRoute( qreal offset, int topTileLevel, int bottomTileLevel )
+{
+    Marble::DownloadRegion region;
+    region.setMarbleWidget( m_marbleWidget );
+    region.setVisibleTileLevel( m_marbleWidget->tileZoomLevel() );
+    region.setTileLevelRange( topTileLevel, bottomTileLevel );
+    QString const mapThemeId = m_marbleWidget->mapThemeId();
+    QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ) );
+    m_marbleWidget->downloadRegion( sourceDir, region.routeRegion( offset ) );
 }
 
 bool MarbleWidget::workOffline() const
