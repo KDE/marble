@@ -228,6 +228,9 @@ void MarbleControlBox::selectTheme( const QString &theme )
 void MarbleControlBox::setWorkOffline(bool offline)
 {
     d->m_widget->model()->setWorkOffline( offline );
+    if ( !offline ) {
+        d->m_widget->clearVolatileTileCache();
+    }
 }
 
 CurrentLocationWidget * MarbleControlBox::currentLocationWidget()
