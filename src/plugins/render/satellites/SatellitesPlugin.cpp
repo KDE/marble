@@ -109,7 +109,7 @@ void SatellitesPlugin::initialize()
                                    marbleModel()->clock() );
     m_isInitialized = true;
     updateSettings();
-    enableModel( enabled() && visible() );
+    enableModel( enabled() );
 }
 
 bool SatellitesPlugin::isInitialized() const
@@ -123,6 +123,12 @@ bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     Q_UNUSED( viewport );
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
+
+    if( marbleModel()->planetId() == "earth" ) {
+        enableModel( enabled() );
+    } else {
+        enableModel( false );
+    }
 
     return true;
 }

@@ -92,6 +92,9 @@ TrackerPluginModel::~TrackerPluginModel()
 
 void TrackerPluginModel::enable( bool enabled )
 {
+    if( enabled == d->m_enabled ) {
+        return;
+    }
     if( enabled ) {
         d->m_treeModel->addDocument( d->m_document );
     } else {
