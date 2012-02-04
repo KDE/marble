@@ -297,6 +297,10 @@ Item {
         map.setGeoSceneProperty( key, value )
     }
 
+    function downloadRoute( offset, from, to ) {
+        map.downloadRoute( offset, from, to )
+    }
+
     function getCenter() {
         return map.center
     }

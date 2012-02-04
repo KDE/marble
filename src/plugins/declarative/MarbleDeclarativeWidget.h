@@ -179,6 +179,8 @@ public Q_SLOTS:
 
     void setGeoSceneProperty( const QString &key, bool value );
 
+    void downloadRoute( qreal offset, int topTileLevel, int bottomTileLevel );
+
 private Q_SLOTS:
     void updateCenterPosition();
 

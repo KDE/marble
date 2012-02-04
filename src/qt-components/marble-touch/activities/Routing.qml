@@ -47,6 +47,11 @@ Page {
             }
 
             MenuItem {
+                text: "Prepare Offline Usage"
+                onClicked: downloadSheet.open()
+            }
+
+            MenuItem {
                 text: "Save Route"
                 onClicked: {
                     saveRouteDialog.filename = "route-" + Qt.formatDateTime(new Date(), "yyyy-MM-dd_hh.mm.ss") + ".kml"
@@ -225,5 +230,72 @@ Page {
         if ( status === PageStatus.Activating ) {
             mapContainer.embedMarbleWidget()
         }
+    }
+
+    Sheet {
+        id: downloadSheet
+
+        acceptButtonText: "Download"
+        rejectButtonText: "Cancel"
+
+        content {
+            Column {
+                anchors.fill: parent
+                anchors.margins: 10
+                spacing: 10
+
+                Label {
+                    text: "<font size=\"-1\">Select the map images to download for offline usage. Note that routing data and voice navigation speakers must be downloaded in the Preferences.</font>"
+                    color: "gray"
+                    width: parent.width
+                }
+
+                Label { text: "Level of detail" }
+
+                Slider {
+                    id: tileSlider
+                    stepSize: 1
+                    valueIndicatorVisible: true
+                    minimumValue: 11
+                    maximumValue: 16
+                    value: 14
+                    valueIndicatorText: "tile level " + value
+                    width: parent.width
+                }
+
+                Label {
+                    anchors.left: tileSlider.left
+                    anchors.right: tileSlider.right
+                    anchors.margins: 30
+                    color: "gray"
+                    text: humanValue()
+                    function humanValue() {
+                        switch (tileSlider.value) {
+                        case 11: return "Very coarse"
+                        case 12: return "Cities with names"
+                        case 13: return "Villages and suburbs with names"
+                        case 14: return "Important streets with names"
+                        case 15: return "Many streets with names"
+                        case 16: return "Most streets with names"
+                        }
+                    }
+                }
+
+                Label { text: "Side margin" }
+
+                Slider {
+                    id: offsetSlider
+                    stepSize: 50
+                    valueIndicatorVisible: true
+                    valueIndicatorText: value + " meter"
+                    minimumValue: 100
+                    value: 500
+                    maximumValue: 2500
+                    width: parent.width
+                }
+            }
+        }
+
+        onAccepted: marbleWidget.downloadRoute( offsetSlider.value, 0, tileSlider.value )
     }
 }
