@@ -468,7 +468,10 @@ void MarbleMap::downloadRegion( const QString& sourceDir, QVector<TileCoordsPyra
          }
          QSetIterator<TileId> i( tileIdSet );
          while( i.hasNext() ) {
-              textureLayer()->downloadTile( i.next() );
+             TileId const tileId = i.next();
+             if ( !textureLayer()->isTileAvailable( tileId ) ) {
+                textureLayer()->downloadTile( tileId );
+             }
          }
          tilesCount += tileIdSet.count();
      }

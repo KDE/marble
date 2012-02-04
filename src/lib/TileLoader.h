@@ -39,6 +39,12 @@ class TileLoader: public QObject
     Q_OBJECT
 
  public:
+    enum TileStatus {
+        Missing,
+        Expired,
+        Available
+    };
+
     explicit TileLoader( HttpDownloadManager * const );
 
     void setTextureLayers( const QVector<GeoSceneTexture const *> &textureLayers );
@@ -54,6 +60,14 @@ class TileLoader: public QObject
      * the given @p texture layer.
      */
     static bool baseTilesAvailable( GeoSceneTexture const & texture );
+
+    /**
+      * Returns the status of the downloaded tile file:
+      * - Missing when it has not been downloaded
+      * - Expired when it has been downloaded, but is too old (as per .dgml expiration time)
+      * - Available when it has been downloaded and is not expired
+      */
+    TileStatus tileStatus( const TileId &tileId );
 
  public Q_SLOTS:
     void updateTile( QByteArray const & imageData, QString const & tileId );
