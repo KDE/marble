@@ -78,6 +78,7 @@ void DownloadQueueSet::addJob( HttpJob * const job )
     m_jobs.push( job );
     mDebug() << "addJob: new job queue size:" << m_jobs.count();
     emit jobAdded();
+    emit progressChanged( m_activeJobs.size(), m_jobs.count() );
     activateJobs();
 }
 
@@ -117,6 +118,8 @@ void DownloadQueueSet::purgeJobs()
     while( !m_activeJobs.isEmpty() ) {
         deactivateJob( m_activeJobs.first() );
     }
+
+    emit progressChanged( m_activeJobs.size(), m_jobs.count() );
 }
 
 void DownloadQueueSet::finishJob( HttpJob * job, const QByteArray& data )
@@ -173,6 +176,7 @@ void DownloadQueueSet::retryOrBlacklistJob( HttpJob * job, const int errorCode )
 void DownloadQueueSet::activateJob( HttpJob * const job )
 {
     m_activeJobs.push_back( job );
+    emit progressChanged( m_activeJobs.size(), m_jobs.count() );
 
     connect( job, SIGNAL( jobDone( HttpJob *, int )),
              SLOT( retryOrBlacklistJob( HttpJob *, int )));
@@ -199,6 +203,7 @@ void DownloadQueueSet::deactivateJob( HttpJob * const job )
     const bool removed = m_activeJobs.removeOne( job );
     Q_ASSERT( removed );
     Q_UNUSED( removed ); // for Q_ASSERT in release mode
+    emit progressChanged( m_activeJobs.size(), m_jobs.count() );
 }
 
 bool DownloadQueueSet::jobIsActive( QString const & destinationFileName ) const
