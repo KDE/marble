@@ -61,6 +61,7 @@ set(marblewidget_SRCS
     blendings/BlendingAlgorithms.cpp
     blendings/BlendingFactory.cpp
     blendings/SunLightBlending.cpp
+    DownloadRegion.cpp
     DownloadRegionDialog.cpp
     LatLonBoxWidget.cpp
     MarbleWidget.cpp
@@ -316,6 +317,7 @@ else (APPLE AND QTONLY)
     ${graphicsview_HDRS}
     AutoNavigation.h
     BookmarkManager.h
+    DownloadRegion.h
     DownloadRegionDialog.h
     LatLonBoxWidget.h
     MarbleWidget.h

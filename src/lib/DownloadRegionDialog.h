@@ -45,11 +45,6 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
 
     QVector<TileCoordsPyramid> region() const;
 
-    /**
-      * @brief calculates the region to be downloaded around a route
-      */
-    QVector<TileCoordsPyramid> routeRegion() const;
-
  public Q_SLOTS:
     void setSpecifiedLatLonAltBox( GeoDataLatLonAltBox const & );
     void setVisibleLatLonAltBox( GeoDataLatLonAltBox const & );
