@@ -42,6 +42,7 @@
 #include "routing/RoutingModel.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
+#include "DownloadRegion.h"
 
 namespace Marble
 {
@@ -59,8 +60,6 @@ public:
     QLayout * createTilesCounter();
     QWidget * createOkCancelButtonBox();
 
-    int rad2PixelX( qreal const lon ) const;
-    int rad2PixelY( qreal const lat ) const;
     bool hasRoute() const;
     QDialog * m_dialog;
     QRadioButton * m_visibleRegionMethodButton;
@@ -81,6 +80,7 @@ public:
     SelectionMethod m_selectionMethod;
     GeoDataLatLonBox m_visibleRegion;
     RoutingModel *m_routingModel;
+    DownloadRegion m_downloadRegion;
 };
 
 DownloadRegionDialog::Private::Private( MarbleWidget * const widget,
@@ -108,6 +108,7 @@ DownloadRegionDialog::Private::Private( MarbleWidget * const widget,
     m_latLonBoxWidget->setEnabled( false );
     m_latLonBoxWidget->setLatLonBox( m_visibleRegion );
     m_tileLevelRangeWidget->setDefaultLevel( m_visibleTileLevel );
+    m_downloadRegion.setMarbleWidget( widget );
 }
 
 QWidget * DownloadRegionDialog::Private::createSelectionMethodBox()
@@ -206,36 +207,6 @@ QWidget * DownloadRegionDialog::Private::createOkCancelButtonBox()
     return buttonBox;
 }
 
-// copied from AbstractScanlineTextureMapper and slightly adjusted
-int DownloadRegionDialog::Private::rad2PixelX( qreal const lon ) const
-{
-    qreal const globalWidth = m_textureLayer->tileSize().width()
-        * m_textureLayer->tileColumnCount( m_visibleTileLevel );
-    return static_cast<int>( globalWidth * 0.5 + lon * ( globalWidth / ( 2.0 * M_PI ) ) );
-}
-
-// copied from AbstractScanlineTextureMapper and slightly adjusted
-int DownloadRegionDialog::Private::rad2PixelY( qreal const lat ) const
-{
-    qreal const globalHeight = m_textureLayer->tileSize().height()
-        * m_textureLayer->tileRowCount( m_visibleTileLevel );
-    qreal const normGlobalHeight = globalHeight / M_PI;
-    switch ( m_textureLayer->tileProjection() ) {
-    case GeoSceneTexture::Equirectangular:
-        return static_cast<int>( globalHeight * 0.5 - lat * normGlobalHeight );
-    case GeoSceneTexture::Mercator:
-        if ( fabs( lat ) < 1.4835 )
-            return static_cast<int>( globalHeight * 0.5 - gdInv( lat ) * 0.5 * normGlobalHeight );
-        if ( lat >= +1.4835 )
-            return static_cast<int>( globalHeight * 0.5 - 3.1309587 * 0.5 * normGlobalHeight );
-        if ( lat <= -1.4835 )
-            return static_cast<int>( globalHeight * 0.5 + 3.1309587 * 0.5 * normGlobalHeight );
-    }
-
-    // Dummy value to avoid a warning.
-    return 0;
-}
-
 bool DownloadRegionDialog::Private::hasRoute() const
 {
     return !m_routingModel->route().path().isEmpty();
@@ -292,6 +263,7 @@ void DownloadRegionDialog::setVisibleTileLevel( int const tileLevel )
 {
     d->m_visibleTileLevel = tileLevel;
     d->m_tileLevelRangeWidget->setDefaultLevel( tileLevel );
+    d->m_downloadRegion.setVisibleTileLevel( tileLevel );
 }
 
 void DownloadRegionDialog::setSelectionMethod( SelectionMethod const selectionMethod )
@@ -333,7 +305,9 @@ void DownloadRegionDialog::setSelectionMethod( SelectionMethod const selectionMe
 
 QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
 {
-
+    d->m_downloadRegion.setTileLevelRange( d->m_tileLevelRangeWidget->topLevel(),
+                                           d->m_tileLevelRangeWidget->bottomLevel() );
+    d->m_downloadRegion.setVisibleTileLevel( d->m_visibleTileLevel );
     // check whether "visible region" or "lat/lon region" is selection method
     GeoDataLatLonBox downloadRegion;
     switch ( d->m_selectionMethod ) {
@@ -344,81 +318,15 @@ QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
         downloadRegion = d->m_latLonBoxWidget->latLonBox();
         break;
    case RouteDownloadMethod:
-        QVector<TileCoordsPyramid> pyramid;
-        pyramid =  routeRegion();
-        if( !pyramid.isEmpty() ) {
-            return pyramid;
+        qreal offset = d->m_routeOffsetSpinBox->value();
+        if( d->m_routeOffsetSpinBox->suffix() == " km") {
+            offset *= KM2METER;
         }
+        return d->m_downloadRegion.routeRegion( offset );
         break;
     }
 
-    int const westX = d->rad2PixelX( downloadRegion.west() );
-    int const northY = d->rad2PixelY( downloadRegion.north() );
-    int const eastX = d->rad2PixelX( downloadRegion.east() );
-    int const southY = d->rad2PixelY( downloadRegion.south() );
-
-    // FIXME: remove this stuff
-    mDebug() << "DownloadRegionDialog downloadRegion:"
-             << "north:" << downloadRegion.north()
-             << "south:" << downloadRegion.south()
-             << "east:" << downloadRegion.east()
-             << "west:" << downloadRegion.west();
-    mDebug() << "north/west (x/y):" << westX << northY;
-    mDebug() << "south/east (x/y):" << eastX << southY;
-
-    int const tileWidth = d->m_textureLayer->tileSize().width();
-    int const tileHeight = d->m_textureLayer->tileSize().height();
-    mDebug() << "DownloadRegionDialog downloadRegion: tileSize:" << tileWidth << tileHeight;
-
-    int const visibleLevelX1 = qMin( westX, eastX );
-    int const visibleLevelY1 = qMin( northY, southY );
-    int const visibleLevelX2 = qMax( westX, eastX );
-    int const visibleLevelY2 = qMax( northY, southY );
-
-    mDebug() << "visible level pixel coords (level/x1/y1/x2/y2):" << d->m_visibleTileLevel
-             << visibleLevelX1 << visibleLevelY1 << visibleLevelX2 << visibleLevelY2;
-
-    int bottomLevelX1, bottomLevelY1, bottomLevelX2, bottomLevelY2;
-    // the pixel coords calculated above are referring to the visible tile level,
-    // if the bottom level is a different level, we have to take it into account
-    if ( d->m_visibleTileLevel > d->m_tileLevelRangeWidget->bottomLevel() ) {
-        int const deltaLevel = d->m_visibleTileLevel - d->m_tileLevelRangeWidget->bottomLevel();
-        bottomLevelX1 = visibleLevelX1 >> deltaLevel;
-        bottomLevelY1 = visibleLevelY1 >> deltaLevel;
-        bottomLevelX2 = visibleLevelX2 >> deltaLevel;
-        bottomLevelY2 = visibleLevelY2 >> deltaLevel;
-    }
-    else if ( d->m_visibleTileLevel < d->m_tileLevelRangeWidget->bottomLevel() ) {
-        int const deltaLevel = d->m_tileLevelRangeWidget->bottomLevel() - d->m_visibleTileLevel;
-        bottomLevelX1 = visibleLevelX1 << deltaLevel;
-        bottomLevelY1 = visibleLevelY1 << deltaLevel;
-        bottomLevelX2 = visibleLevelX2 << deltaLevel;
-        bottomLevelY2 = visibleLevelY2 << deltaLevel;
-    }
-    else {
-        bottomLevelX1 = visibleLevelX1;
-        bottomLevelY1 = visibleLevelY1;
-        bottomLevelX2 = visibleLevelX2;
-        bottomLevelY2 = visibleLevelY2;
-    }
-    mDebug() << "bottom level pixel coords (level/x1/y1/x2/y2):"
-             << d->m_tileLevelRangeWidget->bottomLevel()
-             << bottomLevelX1 << bottomLevelY1 << bottomLevelX2 << bottomLevelY2;
-
-    TileCoordsPyramid coordsPyramid( d->m_tileLevelRangeWidget->topLevel(),
-                                     d->m_tileLevelRangeWidget->bottomLevel() );
-    QRect bottomLevelTileCoords;
-    bottomLevelTileCoords.setCoords
-        ( bottomLevelX1 / tileWidth,
-          bottomLevelY1 / tileHeight,
-          bottomLevelX2 / tileWidth + ( bottomLevelX2 % tileWidth > 0 ? 1 : 0 ),
-          bottomLevelY2 / tileHeight + ( bottomLevelY2 % tileHeight > 0 ? 1 : 0 ));
-    mDebug() << "bottom level tile coords: (x1/y1/size):" << bottomLevelTileCoords;
-    coordsPyramid.setBottomLevelCoords( bottomLevelTileCoords );
-    mDebug() << "tiles count:" << coordsPyramid.tilesCount( );
-    QVector<TileCoordsPyramid> pyramid;
-    pyramid << coordsPyramid;
-    return pyramid;
+    return d->m_downloadRegion.region( downloadRegion );
 }
 
 void DownloadRegionDialog::setSpecifiedLatLonAltBox( GeoDataLatLonAltBox const & region )
@@ -440,7 +348,6 @@ void DownloadRegionDialog::setVisibleLatLonAltBox( GeoDataLatLonAltBox const & r
 void DownloadRegionDialog::updateTextureLayer()
 {
     mDebug() << "DownloadRegionDialog::updateTextureLayer";
-    d->m_textureLayer = d->m_widget->textureLayer();
     updateTilesCount();
 }
 
@@ -493,32 +400,27 @@ void DownloadRegionDialog::updateTilesCount()
 {
     qint64 tilesCount = 0;
     QString themeId( d->m_model->mapThemeId() );
-    if ( d->m_textureLayer ) {
-        QVector<TileCoordsPyramid> const pyramid = region();
-        Q_ASSERT( !pyramid.isEmpty() );
-        if( pyramid.size() == 1 ) {
-            tilesCount = pyramid[0].tilesCount();
-        }
-        else {
-            for( int level = pyramid[0].bottomLevel(); level>= pyramid[0].topLevel(); --level ) {
-                QSet<TileId> tileIdSet;
-                for( int i = 0; i < pyramid.size(); ++i ) {
-                    QRect const coords = pyramid[i].coords( level );
-                    int x1, y1, x2, y2;
-                    coords.getCoords( &x1, &y1, &x2, &y2 );
-                    for ( int x = x1; x <= x2; ++x ) {
-                        for ( int y = y1; y <= y2; ++y ) {
-                            TileId const tileId( themeId, level, x, y );
-                            tileIdSet.insert( tileId );
-                        }
-                    }
-                }
-                tilesCount += tileIdSet.count();
-            }
-        }
+    QVector<TileCoordsPyramid> const pyramid = region();
+    Q_ASSERT( !pyramid.isEmpty() );
+    if( pyramid.size() == 1 ) {
+        tilesCount = pyramid[0].tilesCount();
     }
     else {
-        tilesCount = 0;
+        for( int level = pyramid[0].bottomLevel(); level>= pyramid[0].topLevel(); --level ) {
+            QSet<TileId> tileIdSet;
+            for( int i = 0; i < pyramid.size(); ++i ) {
+                QRect const coords = pyramid[i].coords( level );
+                int x1, y1, x2, y2;
+                coords.getCoords( &x1, &y1, &x2, &y2 );
+                for ( int x = x1; x <= x2; ++x ) {
+                    for ( int y = y1; y <= y2; ++y ) {
+                        TileId const tileId( themeId, level, x, y );
+                        tileIdSet.insert( tileId );
+                    }
+                }
+            }
+            tilesCount += tileIdSet.count();
+        }
     }
 
     if ( tilesCount > maxTilesCount ) {
@@ -549,88 +451,6 @@ void DownloadRegionDialog::updateTilesCount()
     d->m_okButton->setEnabled( tilesCountWithinLimits );
     d->m_applyButton->setEnabled( tilesCountWithinLimits );
 }
-
-QVector<TileCoordsPyramid> DownloadRegionDialog::routeRegion() const
-{
-    if( d->m_routingModel->rowCount() == 0 ) {
-         return QVector<TileCoordsPyramid>();
-    }
-    GeoDataLineString waypoints = d->m_routingModel->route().path();
-    int const topLevel = d->m_tileLevelRangeWidget->topLevel();
-    int const bottomLevel = d->m_tileLevelRangeWidget->bottomLevel();
-    TileCoordsPyramid coordsPyramid( topLevel, bottomLevel );
-
-    int const tileWidth = d->m_textureLayer->tileSize().width();
-    int const tileHeight = d->m_textureLayer->tileSize().height();
-
-    qreal offset = d->m_routeOffsetSpinBox->value();
-    if( d->m_routeOffsetSpinBox->suffix() == " km") {
-        offset *= KM2METER;
-    }
-    qreal radius = d->m_model->planetRadius();
-    QVector<TileCoordsPyramid> pyramid;
-    qreal radianOffset = offset / radius;
-
-    for( int i = 1; i < waypoints.size(); ++i ) {
-        GeoDataCoordinates position = waypoints[i];
-        qreal lonCenter = position.longitude();
-        qreal latCenter = position.latitude();
-
-        // coordinates of the of the vertices of the square(topleft and bottomright) at an offset distance from the waypoint
-        qreal latNorth = asin( sin( latCenter ) *  cos( radianOffset ) +  cos( latCenter ) * sin( radianOffset )  * cos( 7*M_PI/4 ) );
-        qreal dlonWest = atan2( sin( 7*M_PI/4 ) * sin( radianOffset ) * cos( latCenter ),  cos( radianOffset ) -  sin( latCenter ) * sin( latNorth ) );
-        qreal lonWest  = fmod( lonCenter - dlonWest + M_PI, 2*M_PI ) - M_PI;
-        qreal latSouth = asin( sin( latCenter ) * cos( radianOffset ) + cos( latCenter ) * sin( radianOffset ) * cos( 3*M_PI/4 ) );
-        qreal dlonEast =  atan2( sin( 3*M_PI/4 ) * sin( radianOffset ) * cos( latCenter ),  cos( radianOffset ) -  sin( latCenter ) * sin( latSouth ) );
-        qreal lonEast  = fmod( lonCenter - dlonEast+M_PI, 2*M_PI ) - M_PI;
-
-        int const northY = d->rad2PixelY( latNorth );
-        int const southY = d->rad2PixelY( latSouth );
-        int const eastX =  d->rad2PixelX( lonEast );
-        int const westX =  d->rad2PixelX( lonWest );
-
-        int const west  = qMin( westX, eastX );
-        int const north = qMin( northY, southY );
-        int const east  = qMax( westX, eastX );
-        int const south = qMax( northY, southY );
-
-        int bottomLevelTileX1 = 0;
-        int bottomLevelTileY1 = 0;
-        int bottomLevelTileX2 = 0;
-        int bottomLevelTileY2 = 0;
-
-        if ( d->m_visibleTileLevel > d->m_tileLevelRangeWidget->bottomLevel() ) {
-            int const deltaLevel = d->m_visibleTileLevel - d->m_tileLevelRangeWidget->bottomLevel();
-            bottomLevelTileX1 = west  >> deltaLevel;
-            bottomLevelTileY1 = north >> deltaLevel;
-            bottomLevelTileX2 = east  >> deltaLevel;
-            bottomLevelTileY2 = south >> deltaLevel;
-        }
-        else if ( d->m_visibleTileLevel < bottomLevel ) {
-            int const deltaLevel = bottomLevel - d->m_visibleTileLevel;
-            bottomLevelTileX1 = west  << deltaLevel;
-            bottomLevelTileY1 = north << deltaLevel;
-            bottomLevelTileX2 = east  << deltaLevel;
-            bottomLevelTileY2 = south << deltaLevel;
-        }
-        else {
-            bottomLevelTileX1 = west;
-            bottomLevelTileY1 = north;
-            bottomLevelTileX2 = east;
-            bottomLevelTileY2 = south;
-        }
-
-        QRect waypointRegion;
-        //square region around the waypoint
-        waypointRegion.setCoords( bottomLevelTileX1/tileWidth, bottomLevelTileY1/tileHeight,
-                                  bottomLevelTileX2/tileWidth, bottomLevelTileY2/tileHeight );
-        coordsPyramid.setBottomLevelCoords( waypointRegion );
-        pyramid << coordsPyramid;
-        }
-
-        return pyramid;
-}
-
 
 void DownloadRegionDialog::updateRouteDialog()
 {

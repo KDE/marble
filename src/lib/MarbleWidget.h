@@ -1053,6 +1053,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     friend class CustomPaintLayer;
 
     friend class DownloadRegionDialog;
+    friend class DownloadRegionPrivate;
     TextureLayer *textureLayer();
     const TextureLayer *textureLayer() const;
 
