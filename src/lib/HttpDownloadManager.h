@@ -100,6 +100,10 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
      */
     void jobRemoved();
 
+    /**
+      * A job was queued, activated or removed (finished, failed)
+      */
+    void progressChanged( int active, int queued );
 
  private Q_SLOTS:
     void finishJob( const QByteArray& data, const QString& destinationFileName,

@@ -226,6 +226,7 @@ void HttpDownloadManager::connectQueueSet( DownloadQueueSet * queueSet )
     // relay jobAdded/jobRemoved signals (interesting for progress bar)
     connect( queueSet, SIGNAL( jobAdded() ), SIGNAL( jobAdded() ));
     connect( queueSet, SIGNAL( jobRemoved() ), SIGNAL( jobRemoved() ));
+    connect( queueSet, SIGNAL( progressChanged( int, int ) ), SIGNAL( progressChanged( int, int ) ) );
 }
 
 bool HttpDownloadManager::hasDownloadPolicy( const DownloadPolicy& policy ) const

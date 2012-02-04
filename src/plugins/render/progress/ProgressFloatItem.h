@@ -61,11 +61,11 @@ class ProgressFloatItem  : public AbstractFloatItem
     bool eventFilter(QObject *object, QEvent *e);
 
 private Q_SLOTS:
-    void addProgressItem();
-
     void removeProgressItem();
 
-    void resetProgress();
+    void handleProgress( int active, int queued );
+
+    void hideProgress();
 
     void show();
 
@@ -84,7 +84,7 @@ private Q_SLOTS:
 
     int m_completedJobs;
 
-    QTimer m_progressResetTimer;
+    QTimer m_progressHideTimer;
 
     QTimer m_progressShowTimer;
 

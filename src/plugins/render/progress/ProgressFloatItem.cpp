@@ -32,7 +32,7 @@ ProgressFloatItem::ProgressFloatItem ( const QPointF &point, const QSizeF &size 
       m_isInitialized( false ),
       m_totalJobs( 0 ),
       m_completedJobs ( 0 ),
-      m_progressResetTimer(),
+      m_progressHideTimer(),
       m_progressShowTimer(),
       m_active( false ),
       m_fontSize( 0 ),
@@ -44,9 +44,9 @@ ProgressFloatItem::ProgressFloatItem ( const QPointF &point, const QSizeF &size 
     connect( &m_progressShowTimer, SIGNAL( timeout() ), this, SLOT( show() ) );
 
     // This timer is responsible to hide the automatic display when downloads are finished
-    m_progressResetTimer.setInterval( 750 );
-    m_progressResetTimer.setSingleShot( true );
-    connect( &m_progressResetTimer, SIGNAL( timeout() ), this, SLOT( resetProgress() ) );
+    m_progressHideTimer.setInterval( 750 );
+    m_progressHideTimer.setSingleShot( true );
+    connect( &m_progressHideTimer, SIGNAL( timeout() ), this, SLOT( hideProgress() ) );
 
     // Repaint timer
     m_repaintTimer.setSingleShot( true );
@@ -111,7 +111,7 @@ void ProgressFloatItem::initialize()
 {
     const HttpDownloadManager* manager = marbleModel()->downloadManager();
     Q_ASSERT( manager );
-    connect( manager, SIGNAL( jobAdded() ), this, SLOT( addProgressItem() ), Qt::UniqueConnection );
+    connect( manager, SIGNAL( progressChanged( int, int ) ), this, SLOT( handleProgress( int, int ) ) , Qt::UniqueConnection );
     connect( manager, SIGNAL( jobRemoved() ), this, SLOT( removeProgressItem() ), Qt::UniqueConnection );
 
     m_isInitialized = true;
@@ -160,7 +160,7 @@ void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
 
         if ( m_completedJobs == m_totalJobs ) {
             m_progressShowTimer.stop();
-            m_progressResetTimer.start();
+            m_progressHideTimer.start();
         }
     }
 
@@ -212,23 +212,6 @@ bool ProgressFloatItem::eventFilter(QObject *object, QEvent *e)
     return AbstractFloatItem::eventFilter( object, e );
 }
 
-void ProgressFloatItem::addProgressItem()
-{
-    m_jobMutex.lock();
-    ++m_totalJobs;
-    m_jobMutex.unlock();
-
-    if ( enabled() ) {
-        if ( !active() && !m_progressShowTimer.isActive() ) {
-            m_progressShowTimer.start();
-            m_progressResetTimer.stop();
-        } else if ( active() ) {
-            update();
-            scheduleRepaint();
-        }
-    }
-}
-
 void ProgressFloatItem::removeProgressItem()
 {
     m_jobMutex.lock();
@@ -238,7 +221,7 @@ void ProgressFloatItem::removeProgressItem()
     if ( enabled() ) {
         if ( !active() && !m_progressShowTimer.isActive() ) {
             m_progressShowTimer.start();
-            m_progressResetTimer.stop();
+            m_progressHideTimer.stop();
         } else if ( active() ) {
             update();
             scheduleRepaint();
@@ -246,13 +229,33 @@ void ProgressFloatItem::removeProgressItem()
     }
 }
 
-void ProgressFloatItem::resetProgress()
+void ProgressFloatItem::handleProgress( int current, int queued )
 {
     m_jobMutex.lock();
-    m_totalJobs = 0;
-    m_completedJobs = 0;
+    if ( current < 1 ) {
+        m_totalJobs = 0;
+        m_completedJobs = 0;
+    } else {
+        m_totalJobs = qMax<int>( m_totalJobs, queued + current );
+    }
     m_jobMutex.unlock();
 
+    if ( enabled() ) {
+        if ( !active() && !m_progressShowTimer.isActive() && m_totalJobs > 0 ) {
+            m_progressShowTimer.start();
+            m_progressHideTimer.stop();
+        } else if ( active() ) {
+            if ( m_totalJobs < 1 ) {
+                m_progressHideTimer.start();
+            }
+            update();
+            scheduleRepaint();
+        }
+    }
+}
+
+void ProgressFloatItem::hideProgress()
+{
     if ( enabled() ) {
         setActive( false );
 
