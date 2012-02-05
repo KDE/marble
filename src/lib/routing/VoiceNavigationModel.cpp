@@ -39,6 +39,8 @@ public:
 
     QStringList m_queue;
 
+    bool m_destinationReached;
+
     VoiceNavigationModelPrivate( VoiceNavigationModel* parent );
 
     void reset();
@@ -61,7 +63,8 @@ VoiceNavigationModelPrivate::VoiceNavigationModelPrivate( VoiceNavigationModel* 
     m_speakerEnabled( true ),
     m_gpsStatus( PositionProviderStatusUnavailable ),
     m_lastDistance( 0.0 ),
-    m_lastTurnType( Maneuver::Unknown )
+    m_lastTurnType( Maneuver::Unknown ),
+    m_destinationReached( false )
 {
     initializeMaps();
 }
@@ -272,27 +275,36 @@ void VoiceNavigationModel::handleTrackingStatusChange( PositionProviderStatus st
     d->m_gpsStatus = status;
 }
 
-void VoiceNavigationModel::update(const Route &route, qreal distance)
+void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qreal distanceTarget )
 {
+    if ( d->m_destinationReached && distanceTarget < 250 ) {
+        return;
+    }
+
+    if ( !d->m_destinationReached && distanceTarget < 50 ) {
+        d->m_destinationReached = true;
+        d->updateInstruction( d->m_speakerEnabled ? "Arrive" : "KDE-Sys-App-Positive" );
+        return;
+    }
+
+    if ( distanceTarget > 150 ) {
+        d->m_destinationReached = false;
+    }
+
     Maneuver::Direction turnType = route.currentSegment().nextRouteSegment().maneuver().direction();
     if ( !( d->m_lastTurnPoint == route.currentSegment().nextRouteSegment().maneuver().position() ) || turnType != d->m_lastTurnType ) {
         d->m_lastTurnPoint = route.currentSegment().nextRouteSegment().maneuver().position();
         d->reset();
     }
 
-    bool const announcement = ( d->m_lastDistance == 0 || d->m_lastDistance > 850 ) && distance <= 850;
-    bool const turn = ( d->m_lastDistance == 0 || d->m_lastDistance > 75 ) && distance <= 75;
+    bool const announcement = ( d->m_lastDistance == 0 || d->m_lastDistance > 850 ) && distanceManuever <= 850;
+    bool const turn = ( d->m_lastDistance == 0 || d->m_lastDistance > 75 ) && distanceManuever <= 75;
     if ( announcement || turn ) {
-        d->updateInstruction( distance, turnType );
+        d->updateInstruction( distanceManuever, turnType );
     }
 
     d->m_lastTurnType = turnType;
-    d->m_lastDistance = distance;
-}
-
-void VoiceNavigationModel::setDestinationReached()
-{
-    d->updateInstruction( d->m_speakerEnabled ? "Arrive" : "KDE-Sys-App-Positive" );
+    d->m_lastDistance = distanceManuever;
 }
 
 QString VoiceNavigationModel::preview() const

@@ -227,7 +227,7 @@ void Navigation::update()
     emit destinationDistanceChanged();
     Marble::RouteSegment segment = model->route().currentSegment();
     if ( !d->m_muted ) {
-        d->m_voiceNavigation.update( model->route(), d->m_nextInstructionDistance );
+        d->m_voiceNavigation.update( model->route(), d->m_nextInstructionDistance, d->m_destinationDistance );
     }
     if ( segment != d->m_currentSegment ) {
         d->m_currentSegment = segment;
