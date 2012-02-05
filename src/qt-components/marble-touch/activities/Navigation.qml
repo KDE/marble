@@ -218,6 +218,9 @@ Page {
         if ( status === PageStatus.Activating ) {
             mapContainer.embedMarbleWidget()
             saver.screenSaverDelayed = settings.inhibitScreensaver
+            if (!settings.navigationStartupWarningEverShown || settings.navigationStartupWarning) {
+                safetyWarningDialog.open()
+            }
         } else if ( status === PageStatus.Deactivating ) {
             saver.screenSaverDelayed = false
         }
@@ -225,6 +228,41 @@ Page {
 
     Audio {
         id: playback
+    }
+
+    Dialog {
+        id: safetyWarningDialog
+
+        content: Column {
+            width: parent.width
+            spacing: 10
+
+            Label {
+            id: text
+            width: parent.width
+            color: "white"
+            text: "<p>Caution: Driving instructions may be incomplete or wrong. Road construction, weather and other unforeseen variables can result in the suggested route not to be the most expedient or safest route to your destination. Please use common sense while navigating.</p><p>The Marble development team wishes you a pleasant and safe journey.</p>"
+            }
+
+            Row {
+                CheckBox {
+                    checked: settings.navigationStartupWarning
+                    onCheckedChanged: settings.navigationStartupWarning = checked
+                }
+                Label {
+                    text: "Show again";
+                    color: "white"
+                }
+            }
+        }
+
+        buttons: ButtonRow {
+            style: ButtonStyle { }
+            anchors.horizontalCenter: parent.horizontalCenter
+            Button { text: "OK"; onClicked: safetyWarningDialog.accept() }
+        }
+
+        onAccepted: settings.navigationStartupWarningEverShown = true
     }
 
     Connections { target: marbleWidget.navigation; onVoiceNavigationAnnouncementChanged: voiceAnnouncement() }
