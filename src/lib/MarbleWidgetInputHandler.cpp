@@ -233,14 +233,14 @@ void MarbleWidgetDefaultInputHandler::Private::ZoomAt(MarbleWidget* marbleWidget
     qreal  destLat;
     qreal  destLon;
     if (!marbleWidget->geoCoordinates(pos.x(), pos.y(), 
-          destLon, destLat, GeoDataCoordinates::Radian )) {
+          destLon, destLat, GeoDataCoordinates::Degree )) {
         return;
     }
 
     ViewportParams* now = marbleWidget->viewport();
 
     qreal x(0), y(0);
-    if (!now->screenCoordinates(destLon, destLat, x, y)) {
+    if (!now->screenCoordinates(destLon * DEG2RAD, destLat * DEG2RAD, x, y)) {
         return;
     }
 
@@ -253,15 +253,12 @@ void MarbleWidgetDefaultInputHandler::Private::ZoomAt(MarbleWidget* marbleWidget
     soon.setRadius( newRadius );
 
     qreal mouseLon, mouseLat;
-    if (!soon.geoCoordinates(int(x), int(y), mouseLon, mouseLat, GeoDataCoordinates::Radian )) {
+    if (!soon.geoCoordinates(int(x), int(y), mouseLon, mouseLat, GeoDataCoordinates::Degree )) {
         return;
     }
 
-    qreal centerLat = DEG2RAD * marbleWidget->centerLatitude();
-    qreal centerLon = DEG2RAD * marbleWidget->centerLongitude();
-
-    qreal lon = destLon - ( mouseLon - centerLon );
-    qreal lat = destLat - ( mouseLat - centerLat );
+    const qreal lon = destLon - ( mouseLon - marbleWidget->centerLatitude() );
+    const qreal lat = destLat - ( mouseLat - marbleWidget->centerLongitude() );
 
     GeoDataLookAt lookAt;
     lookAt.setLongitude( lon );
@@ -269,7 +266,7 @@ void MarbleWidgetDefaultInputHandler::Private::ZoomAt(MarbleWidget* marbleWidget
     lookAt.setAltitude( 0.0 );
     lookAt.setRange( newDistance * KM2METER );
 
-    marbleWidget->setFocusPoint( GeoDataCoordinates( destLon, destLat ) );
+    marbleWidget->setFocusPoint( GeoDataCoordinates( destLon, destLat, 0, GeoDataCoordinates::Degree ) );
     marbleWidget->flyTo( lookAt, Linear );
 }
 
@@ -483,13 +480,13 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 d->m_leftPressedY = event->y();
 
                 // Calculate translation of center point
-                d->m_leftPressedLon = MarbleWidgetInputHandler::d->m_widget->centerLongitude() * DEG2RAD;
-                d->m_leftPressedLat = MarbleWidgetInputHandler::d->m_widget->centerLatitude() * DEG2RAD;
+                d->m_leftPressedLon = MarbleWidgetInputHandler::d->m_widget->centerLongitude();
+                d->m_leftPressedLat = MarbleWidgetInputHandler::d->m_widget->centerLatitude();
 
 
                 d->m_leftPressedDirection = 1;
 
-                d->m_kineticModel.setPosition( RAD2DEG * ( qreal )( d->m_leftPressedLon ), RAD2DEG * ( qreal )( d->m_leftPressedLat ) );
+                d->m_kineticModel.setPosition( d->m_leftPressedLon, d->m_leftPressedLat );
                 d->m_kineticModel.resetSpeed();
 
                 // Choose spin direction by taking into account whether we
@@ -587,8 +584,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
                     d->m_lmbTimer.stop();
 
-                    const qreal posLon = RAD2DEG * ( qreal )( d->m_leftPressedLon ) - 90.0 * d->m_leftPressedDirection * deltax / radius;
-                    const qreal posLat = RAD2DEG * ( qreal )( d->m_leftPressedLat ) + 90.0 * deltay / radius;
+                    const qreal posLon = d->m_leftPressedLon - 90.0 * d->m_leftPressedDirection * deltax / radius;
+                    const qreal posLat = d->m_leftPressedLat + 90.0 * deltay / radius;
                     MarbleWidgetInputHandler::d->m_widget->centerOn( posLon, posLat );
                     d->m_kineticModel.setPosition( posLon, posLat );
                 }
