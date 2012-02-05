@@ -26,18 +26,18 @@ Page {
             onClicked: pageStack.pop()
         }
         ToolButton {
-            iconSource: "image://theme/icon-m-toolbar-volume-off";
+            iconSource: "image://theme/icon-m-toolbar-volume";
             checkable: true
-            checked: settings.voiceNavigationMuted
-            onCheckedChanged: settings.voiceNavigationMuted = checked
+            checked: !settings.voiceNavigationMuted
+            onCheckedChanged: settings.voiceNavigationMuted = !checked
             width: 60
             flat: true
         }
         ToolButton {
-            iconSource: "image://theme/icon-m-common-no-internet-connection";
+            iconSource: "qrc:/marble/wireless.svg";
             checkable: true
-            checked: settings.workOffline
-            onCheckedChanged: settings.workOffline = checked
+            checked: !settings.workOffline
+            onCheckedChanged: settings.workOffline = !checked
             width: 60
             flat: true
         }

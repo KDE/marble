@@ -25,7 +25,7 @@ Page {
             onClicked: pageStack.pop()
         }
         ToolIcon {
-            iconId: "toolbar-home"
+            iconId: "common-location"
             onClicked: {
                 marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
                 if (marbleWidget.zoom < 403 ) {
