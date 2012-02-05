@@ -122,6 +122,8 @@ void Navigation::setMarbleWidget( MarbleWidget* widget )
 
         connect( d->m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ),
                  d->m_autoNavigation, SLOT( inhibitAutoAdjustments() ) );
+        connect( d->m_marbleWidget->model()->positionTracking(), SIGNAL( statusChanged( PositionProviderStatus ) ),
+                 &d->m_voiceNavigation, SLOT( handleTrackingStatusChange( PositionProviderStatus ) ) );
 
         d->m_marbleWidget->model()->routingManager()->setAutoNavigation( d->m_autoNavigation );
     }

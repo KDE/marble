@@ -272,7 +272,11 @@ void VoiceNavigationModel::reset()
 void VoiceNavigationModel::handleTrackingStatusChange( PositionProviderStatus status )
 {
     if ( status != PositionProviderStatusAvailable && d->m_gpsStatus == PositionProviderStatusAvailable ) {
-        /** @todo: Announce gps connect lost here */
+        d->updateInstruction( d->m_speakerEnabled ? "GpsLost" : "KDE-Sys-List-End" );
+    }
+
+    if ( status == PositionProviderStatusAvailable && d->m_gpsStatus != PositionProviderStatusAvailable ) {
+        d->updateInstruction( d->m_speakerEnabled ? "GpsFound" : "KDE-Sys-App-Positive" );
     }
 
     d->m_gpsStatus = status;
