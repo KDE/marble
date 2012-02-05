@@ -28,6 +28,7 @@
         <file>icons/routing-bike.svg</file>
         <file>icons/routing-pedestrian.svg</file>
         <file>icons/routing-motorcar.svg</file>
+        <file alias="marble/wireless.svg">icons/wireless.svg</file>
         <file>MapThemeSelectionPage.qml</file>
         <file>MapThemePage.qml</file>
         <file>PreferencesPage.qml</file>
