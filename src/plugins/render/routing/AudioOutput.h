@@ -41,9 +41,7 @@ public:
       * @param distance The distance in meters to the next turn point
       * @param turnType The turn type to execute at the next turn point
       */
-    void update( const Route &route, qreal distance );
-
-    void announceDestination();
+    void update( const Route &route, qreal distanceManeuver, qreal distanceTarget );
 
     /** Toggle muting (neither sound nor voice output) */
     void setMuted( bool muted );

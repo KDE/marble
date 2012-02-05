@@ -99,9 +99,9 @@ AudioOutput::~AudioOutput()
     delete d;
 }
 
-void AudioOutput::update(const Route &route, qreal distance)
+void AudioOutput::update(const Route &route, qreal distanceManeuver, qreal distanceTarget)
 {
-    d->m_voiceNavigation.update( route, distance );
+    d->m_voiceNavigation.update( route, distanceManeuver, distanceTarget );
 }
 
 void AudioOutput::setMuted( bool muted )
@@ -122,16 +122,6 @@ QString AudioOutput::speaker() const
 void AudioOutput::setSoundEnabled( bool enabled )
 {
     d->m_voiceNavigation.setSpeakerEnabled( !enabled );
-}
-
-void AudioOutput::announceDestination()
-{
-    if ( d->m_muted ) {
-        return;
-    }
-
-    d->setupAudio();
-    d->m_voiceNavigation.setDestinationReached();
 }
 
 }

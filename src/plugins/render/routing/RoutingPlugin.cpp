@@ -284,7 +284,7 @@ void RoutingPluginPrivate::updateDestinationInformation()
     if ( m_routingModel->route().currentSegment().isValid() ) {
         qreal remaining = remainingDistance();
         qreal distanceLeft = nextInstructionDistance();
-        m_audio->update( m_routingModel->route(), distanceLeft );
+        m_audio->update( m_routingModel->route(), distanceLeft, remaining );
 
         m_nearNextInstruction = distanceLeft < thresholdDistance;
 
@@ -324,7 +324,6 @@ void RoutingPluginPrivate::updateDestinationInformation()
                 m_routeCompleted = false;
             } else {
                 if ( !m_routeCompleted ) {
-                    m_audio->announceDestination();
                     QString content = QObject::tr( "Arrived at destination. <a href=\"#reverse\">Calculate the way back.</a>" );
                     m_widget.instructionLabel->setText( richText( "%1" ).arg( content ) );
                 }
