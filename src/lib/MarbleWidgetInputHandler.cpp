@@ -257,12 +257,12 @@ void MarbleWidgetDefaultInputHandler::Private::ZoomAt(MarbleWidget* marbleWidget
         return;
     }
 
-    const qreal lon = destLon - ( mouseLon - marbleWidget->centerLatitude() );
-    const qreal lat = destLat - ( mouseLat - marbleWidget->centerLongitude() );
+    const qreal lon = destLon - ( mouseLon - marbleWidget->centerLongitude() );
+    const qreal lat = destLat - ( mouseLat - marbleWidget->centerLatitude() );
 
     GeoDataLookAt lookAt;
-    lookAt.setLongitude( lon );
-    lookAt.setLatitude( lat );
+    lookAt.setLongitude( lon, GeoDataCoordinates::Degree );
+    lookAt.setLatitude( lat, GeoDataCoordinates::Degree );
     lookAt.setAltitude( 0.0 );
     lookAt.setRange( newDistance * KM2METER );
 
