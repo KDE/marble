@@ -219,6 +219,16 @@ void Navigation::setSoundEnabled( bool soundEnabled )
     d->m_voiceNavigation.setSpeakerEnabled( !soundEnabled );
 }
 
+bool Navigation::deviated() const
+{
+    if ( d->m_marbleWidget ) {
+        Marble::RoutingModel const * model = d->m_marbleWidget->model()->routingManager()->routingModel();
+        return model->deviatedFromRoute();
+    }
+
+    return true;
+}
+
 void Navigation::update()
 {
     Marble::RoutingModel const * model = d->m_marbleWidget->model()->routingManager()->routingModel();
@@ -227,7 +237,7 @@ void Navigation::update()
     emit destinationDistanceChanged();
     Marble::RouteSegment segment = model->route().currentSegment();
     if ( !d->m_muted ) {
-        d->m_voiceNavigation.update( model->route(), d->m_nextInstructionDistance, d->m_destinationDistance );
+        d->m_voiceNavigation.update( model->route(), d->m_nextInstructionDistance, d->m_destinationDistance, model->deviatedFromRoute() );
     }
     if ( segment != d->m_currentSegment ) {
         d->m_currentSegment = segment;

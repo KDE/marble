@@ -69,7 +69,7 @@ Page {
 
     Rectangle {
         id: instructionItem
-        color: Qt.rgba(0/255, 67/255, 138/255, 1)
+        color: marbleWidget.navigation.deviated ? Qt.rgba(156/255, 15/255, 15/255, 1) : Qt.rgba(0/255, 67/255, 138/255, 1)
 
         anchors.top: parent.top
         anchors.left: parent.left

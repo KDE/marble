@@ -99,9 +99,9 @@ AudioOutput::~AudioOutput()
     delete d;
 }
 
-void AudioOutput::update(const Route &route, qreal distanceManeuver, qreal distanceTarget)
+void AudioOutput::update(const Route &route, qreal distanceManeuver, qreal distanceTarget, bool deviated )
 {
-    d->m_voiceNavigation.update( route, distanceManeuver, distanceTarget );
+    d->m_voiceNavigation.update( route, distanceManeuver, distanceTarget, deviated );
 }
 
 void AudioOutput::setMuted( bool muted )
