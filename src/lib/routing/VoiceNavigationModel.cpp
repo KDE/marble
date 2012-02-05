@@ -41,6 +41,8 @@ public:
 
     bool m_destinationReached;
 
+    bool m_deviated;
+
     VoiceNavigationModelPrivate( VoiceNavigationModel* parent );
 
     void reset();
@@ -64,7 +66,8 @@ VoiceNavigationModelPrivate::VoiceNavigationModelPrivate( VoiceNavigationModel* 
     m_gpsStatus( PositionProviderStatusUnavailable ),
     m_lastDistance( 0.0 ),
     m_lastTurnType( Maneuver::Unknown ),
-    m_destinationReached( false )
+    m_destinationReached( false ),
+    m_deviated( false )
 {
     initializeMaps();
 }
@@ -275,7 +278,7 @@ void VoiceNavigationModel::handleTrackingStatusChange( PositionProviderStatus st
     d->m_gpsStatus = status;
 }
 
-void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qreal distanceTarget )
+void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qreal distanceTarget, bool deviated )
 {
     if ( d->m_destinationReached && distanceTarget < 250 ) {
         return;
@@ -289,6 +292,14 @@ void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qr
 
     if ( distanceTarget > 150 ) {
         d->m_destinationReached = false;
+    }
+
+    if ( deviated && !d->m_deviated ) {
+        d->updateInstruction( d->m_speakerEnabled ? "RouteDeviated" : "KDE-Sys-List-End" );
+    }
+    d->m_deviated = deviated;
+    if ( deviated ) {
+        return;
     }
 
     Maneuver::Direction turnType = route.currentSegment().nextRouteSegment().maneuver().direction();

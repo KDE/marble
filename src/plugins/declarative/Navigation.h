@@ -32,6 +32,7 @@ class Navigation : public QObject
     Q_PROPERTY(qreal nextInstructionDistance READ nextInstructionDistance NOTIFY nextInstructionDistanceChanged)
     Q_PROPERTY(qreal destinationDistance READ destinationDistance NOTIFY destinationDistanceChanged)
     Q_PROPERTY(QString voiceNavigationAnnouncement READ voiceNavigationAnnouncement NOTIFY voiceNavigationAnnouncementChanged)
+    Q_PROPERTY(bool deviated READ deviated NOTIFY deviationChanged)
 
 public:
     explicit Navigation( QObject* parent = 0 );
@@ -68,6 +69,8 @@ public:
 
     void setSoundEnabled( bool soundEnabled );
 
+    bool deviated() const;
+
 Q_SIGNALS:
     void guidanceModeEnabledChanged();
 
@@ -88,6 +91,8 @@ Q_SIGNALS:
     void soundEnabledChanged();
 
     void speakerChanged();
+
+    void deviationChanged();
 
 private Q_SLOTS:
     void update();

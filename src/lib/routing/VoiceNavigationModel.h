@@ -55,7 +55,7 @@ public Q_SLOTS:
 // Continuous updates
     void handleTrackingStatusChange( PositionProviderStatus status );
 
-    void update( const Route &route, qreal distanceManuever, qreal distanceTarget );
+    void update( const Route &route, qreal distanceManuever, qreal distanceTarget, bool deviated );
 
 // Turn instructions
     QString preview() const;

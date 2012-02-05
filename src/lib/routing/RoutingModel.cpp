@@ -379,7 +379,7 @@ void RoutingModel::updatePosition( GeoDataCoordinates location, qreal /*speed*/ 
 
 bool RoutingModel::deviatedFromRoute() const
 {
-    return d->m_deviation != RoutingModelPrivate::OnRoute;
+    return d->m_deviation == RoutingModelPrivate::OffRoute;
 }
 
 const Route & RoutingModel::route() const

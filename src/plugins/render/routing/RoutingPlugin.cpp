@@ -284,7 +284,7 @@ void RoutingPluginPrivate::updateDestinationInformation()
     if ( m_routingModel->route().currentSegment().isValid() ) {
         qreal remaining = remainingDistance();
         qreal distanceLeft = nextInstructionDistance();
-        m_audio->update( m_routingModel->route(), distanceLeft, remaining );
+        m_audio->update( m_routingModel->route(), distanceLeft, remaining, m_routingModel->deviatedFromRoute() );
 
         m_nearNextInstruction = distanceLeft < thresholdDistance;
 
