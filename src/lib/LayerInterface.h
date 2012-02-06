@@ -51,10 +51,14 @@ public:
 
     /**
      * @brief Renders the content provided by the layer on the viewport.
+     * @param painter  painter object allowing to paint on the map
+     * @param viewport  metadata, such as current projection, screen dimension, etc.
+     * @param renderPos  current render position
+     * @param layer  deprecated, always zero (NULL)
      * @return @c true  Returns whether the rendering has been successful
      */
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-       const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 ) = 0;
+       const QString &renderPos, GeoSceneLayer *layer ) = 0;
 
     /**
       * @brief Returns the z value of the layer (default: 0.0). If two layers are painted

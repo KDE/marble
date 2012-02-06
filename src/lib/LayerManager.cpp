@@ -188,7 +188,7 @@ void LayerManager::renderLayer( GeoPainter *painter, ViewportParams *viewport,
 
     qSort( layers.begin(), layers.end(), zValueLessThan );
     foreach( LayerInterface *layer, layers ) {
-        layer->render( painter, viewport, renderPosition );
+        layer->render( painter, viewport, renderPosition, 0 );
     }
 }
 
