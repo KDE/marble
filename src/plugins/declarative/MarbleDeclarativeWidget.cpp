@@ -56,6 +56,8 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
 
     m_marbleWidget->inputHandler()->setMouseButtonPopupEnabled( Qt::LeftButton, false );
     m_marbleWidget->inputHandler()->setPanViaArrowsEnabled( false );
+    grabGesture( Qt::PinchGesture, Qt::ReceivePartialGestures | Qt::IgnoredGesturesPropagateToParent );
+    setAcceptTouchEvents(true);
 }
 
 MarbleWidget::~MarbleWidget()
@@ -314,6 +316,25 @@ int MarbleWidget::radius() const
 void MarbleWidget::setRadius( int radius )
 {
     m_marbleWidget->setRadius( radius );
+}
+
+bool MarbleWidget::event ( QEvent * event )
+{
+    if ( m_marbleWidget && event && event->type() == QEvent::Gesture ) {
+        return QApplication::sendEvent( m_marbleWidget, event );
+    }
+
+    return QGraphicsProxyWidget::event( event );
+}
+
+bool MarbleWidget::sceneEvent( QEvent *event )
+{
+    if ( event->type() == QEvent::TouchBegin ) {
+        event->accept();
+        return true;
+    }
+
+    return QGraphicsProxyWidget::sceneEvent( event );
 }
 
 #include "MarbleDeclarativeWidget.moc"
