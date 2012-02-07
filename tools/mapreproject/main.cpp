@@ -26,6 +26,16 @@ mapreproject --simulate --output-directory=/home/jmho --jobs 7 --cluster-size 64
     --input type=Bathymetry,file=BLAH.tiff
 */
 
+void printUsage()
+{
+    std::cout << "Usage: mapreproject [OPTIONS] [INPUT] ...\n"
+                 "      --help                display this help and exit\n"
+                 "      --output-directory    output base directory, where the resulting tiles will be stored\n"
+                 "      --output-tile-level   tile level of resulting map\n"
+                 "      --cluster-size        edge length of tile clusters in tiles\n"
+                 "      --jobs                number of threads, use to override default of one thread per cpu core\n"
+                 "      --simulate            \n";
+}
 
 MapSourceType parseType( char const * const value )
 {
@@ -193,7 +203,8 @@ int main( int argc, char *argv[] )
         switch ( opt ) {
 
         case HelpOption:
-            break;
+            printUsage();
+            exit( EXIT_SUCCESS );
 
         case InputOption:
             mapSources.push_back( parseInput( optarg ));
