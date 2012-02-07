@@ -5,7 +5,7 @@
 
 class ReadOnlyMapImage;
 
-class NearestNeighborInterpolation : public InterpolationMethod
+class NearestNeighborInterpolation: public InterpolationMethod
 {
 public:
     explicit NearestNeighborInterpolation( ReadOnlyMapImage * const mapImage = NULL );

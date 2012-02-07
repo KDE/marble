@@ -5,7 +5,7 @@
 
 class ReadOnlyMapImage;
 
-class BilinearInterpolation : public InterpolationMethod
+class BilinearInterpolation: public InterpolationMethod
 {
 public:
     explicit BilinearInterpolation( ReadOnlyMapImage * const mapImage = NULL );
