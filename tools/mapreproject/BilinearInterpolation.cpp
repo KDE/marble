@@ -5,7 +5,7 @@
 #include <cmath>
 
 BilinearInterpolation::BilinearInterpolation( ReadOnlyMapImage * const mapImage )
-    : m_mapImage( mapImage )
+    : InterpolationMethod( mapImage )
 {
 }
 
@@ -59,9 +59,4 @@ QRgb BilinearInterpolation::interpolate( double const x, double const y )
     double const alpha = ( 1.0 - fractionY ) * lowerMidAlpha + fractionY * upperMidAlpha;
 
     return qRgba( round( red ), round( green ), round( blue ), round( alpha ));
-}
-
-void BilinearInterpolation::setMapImage( ReadOnlyMapImage * const mapImage )
-{
-    m_mapImage = mapImage;
 }
