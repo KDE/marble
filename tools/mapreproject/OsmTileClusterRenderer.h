@@ -41,7 +41,6 @@ private:
 
     QDir m_osmBaseDirectory;
     int m_osmTileLevel;
-    int m_osmMapEdgeLengthTiles;
     int m_osmMapEdgeLengthPixel;
     int m_clusterEdgeLengthTiles;
 

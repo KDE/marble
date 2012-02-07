@@ -13,7 +13,6 @@ OsmTileClusterRenderer::OsmTileClusterRenderer( QObject * const parent )
       m_emptyPixel( qRgba( 0, 0, 0, 255 )),
       m_osmBaseDirectory(),
       m_osmTileLevel(),
-      m_osmMapEdgeLengthTiles(),
       m_osmMapEdgeLengthPixel(),
       m_clusterEdgeLengthTiles(),
       m_mapSourceDefinitions(),
@@ -40,10 +39,10 @@ void OsmTileClusterRenderer::setOsmBaseDirectory( QDir const & osmBaseDirectory 
 void OsmTileClusterRenderer::setOsmTileLevel( int const level )
 {
     m_osmTileLevel = level;
-    m_osmMapEdgeLengthTiles = pow( 2, m_osmTileLevel );
-    m_osmMapEdgeLengthPixel = m_osmMapEdgeLengthTiles * m_osmTileEdgeLengthPixel;
+    int const osmMapEdgeLengthTiles = pow( 2, m_osmTileLevel );
+    m_osmMapEdgeLengthPixel = osmMapEdgeLengthTiles * m_osmTileEdgeLengthPixel;
     qDebug() << "osmTileLevel:" << m_osmTileLevel
-             << "\nosmMapEdgeLengthTiles:" << m_osmMapEdgeLengthTiles
+             << "\nosmMapEdgeLengthTiles:" << osmMapEdgeLengthTiles
              << "\nosmMapEdgeLengthPixel:" << m_osmMapEdgeLengthPixel;
 }
 
