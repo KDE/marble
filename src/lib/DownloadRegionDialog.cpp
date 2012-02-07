@@ -108,7 +108,7 @@ DownloadRegionDialog::Private::Private( MarbleWidget * const widget,
     m_latLonBoxWidget->setEnabled( false );
     m_latLonBoxWidget->setLatLonBox( m_visibleRegion );
     m_tileLevelRangeWidget->setDefaultLevel( m_visibleTileLevel );
-    m_downloadRegion.setMarbleWidget( widget );
+    m_downloadRegion.setMarbleModel( widget->model() );
 }
 
 QWidget * DownloadRegionDialog::Private::createSelectionMethodBox()
@@ -322,11 +322,11 @@ QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
         if( d->m_routeOffsetSpinBox->suffix() == " km") {
             offset *= KM2METER;
         }
-        return d->m_downloadRegion.routeRegion( offset );
+        return d->m_downloadRegion.routeRegion( d->m_widget->textureLayer(), offset );
         break;
     }
 
-    return d->m_downloadRegion.region( downloadRegion );
+    return d->m_downloadRegion.region( d->m_widget->textureLayer(), downloadRegion );
 }
 
 void DownloadRegionDialog::setSpecifiedLatLonAltBox( GeoDataLatLonAltBox const & region )
