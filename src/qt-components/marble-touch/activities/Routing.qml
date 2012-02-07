@@ -34,13 +34,21 @@ Page {
             flat: true
         }
         ToolIcon {
-            iconId: "common-location"
+            iconSource: "image://theme/icon-s-common-location"
             onClicked: {
                 marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
                 if (marbleWidget.zoom < 22026 ) {
                     marbleWidget.zoom = 86250
                 }
             }
+        }
+        ToolButton {
+            iconSource: "qrc:/marble/wireless.svg";
+            checkable: true
+            checked: !settings.workOffline
+            onCheckedChanged: settings.workOffline = !checked
+            width: 60
+            flat: true
         }
         ToolIcon {
             iconId: "toolbar-view-menu"
