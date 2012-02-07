@@ -34,7 +34,14 @@ void printUsage()
                  "      --output-tile-level   tile level of resulting map\n"
                  "      --cluster-size        edge length of tile clusters in tiles\n"
                  "      --jobs                number of threads, use to override default of one thread per cpu core\n"
-                 "      --simulate            \n";
+                 "      --simulate            \n"
+                 "      --input INPUT_OPTS    INPUT_OPTS can be a combination of the following options, separated by comma:\n"
+                 "          type              \n"
+                 "          base-directory    \n"
+                 "          tile-level        \n"
+                 "          cache-size        \n"
+                 "          file              \n"
+                 "          interpolation-method  one of \"integer\", \"nearest-neighbor\" (default), \"average\" or \"bilinear\"\n";
 }
 
 MapSourceType parseType( char const * const value )
