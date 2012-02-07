@@ -30,6 +30,7 @@ Page {
     ListView {
         id: themeView
         anchors.fill: parent
+        anchors.margins: 5
         model: themeInstallModel
         delegate: themeDelegate
         highlight: Rectangle { radius: 5; color: "lightsteelblue" }

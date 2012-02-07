@@ -103,10 +103,13 @@ Page {
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
         }
 
-        ParallelAnimation {
-            id: fadeAnimation
-            PropertyAnimation { target: instructionItem; property: "scale"; from: 0.75; to: 1.0; duration: 200 }
-            PropertyAnimation { target: instructionItem; property: "opacity"; from: 0.2; to: 1.0; duration: 200 }
+        PropertyAnimation {
+            id: fadeAnimation;
+            target: instructionItem;
+            property: "opacity";
+            from: 0.2;
+            to: 1.0;
+            duration: 200
         }
     }
 
@@ -137,6 +140,11 @@ Page {
                 color: Qt.rgba(238/255, 238/255, 236/255, 1)
                 text: "<font size=\"+2\">" + Math.round( marbleWidget.tracking.positionSource.speed ) + "</font><font size=\"-1\"> km/h</font>"
                 horizontalAlignment: parent.portrait ? Text.AlignHCenter : Text.AlignRight
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
+                }
             }
 
             Rectangle {
@@ -253,6 +261,10 @@ Page {
                     text: "Show again";
                     color: "white"
                 }
+            }
+
+            Item {
+                height: 5; width: 1
             }
         }
 

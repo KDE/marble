@@ -25,7 +25,7 @@ Page {
             onClicked: pageStack.pop()
         }
         ToolIcon {
-            iconId: "common-location"
+            iconSource: "image://theme/icon-s-common-location"
             onClicked: {
                 marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
                 if (marbleWidget.zoom < 403 ) {
@@ -76,7 +76,7 @@ Page {
                 var plugins = settings.defaultRenderPlugins
                 plugins.push( "weather" )
                 settings.activeRenderPlugins =  plugins
-                settings.mapTheme = "earth/plain/plain.dgml"
+                settings.mapTheme = settings.streetMapTheme
                 settings.gpsTracking = true
                 settings.showPositionIndicator = false
                 settings.showTrack = false
