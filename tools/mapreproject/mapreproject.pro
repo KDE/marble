@@ -25,7 +25,8 @@ SOURCES += main.cpp \
     SimpleMapImage.cpp \
     InterpolationMethod.cpp \
     BilinearInterpolation.cpp \
-    NearestNeighborInterpolation.cpp
+    NearestNeighborInterpolation.cpp \
+    IntegerInterpolation.cpp
 
 HEADERS += \
     NasaWorldWindToOpenStreetMapConverter.h \
@@ -38,7 +39,8 @@ HEADERS += \
     SimpleMapImage.h \
     InterpolationMethod.h \
     BilinearInterpolation.h \
-    NearestNeighborInterpolation.h
+    NearestNeighborInterpolation.h \
+    IntegerInterpolation.h
 
 unix|win32: LIBS += -lQtGui
 

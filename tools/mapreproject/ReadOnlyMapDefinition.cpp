@@ -1,6 +1,7 @@
 #include "ReadOnlyMapDefinition.h"
 
 #include "BilinearInterpolation.h"
+#include "IntegerInterpolation.h"
 #include "NearestNeighborInterpolation.h"
 #include "NwwMapImage.h"
 #include "SimpleMapImage.h"
@@ -19,7 +20,7 @@ InterpolationMethod * ReadOnlyMapDefinition::createInterpolationMethod() const
 {
     switch ( m_interpolationMethod ) {
     case IntegerInterpolationMethod:
-        return NULL;
+        return new IntegerInterpolation;
     case NearestNeighborInterpolationMethod:
         return new NearestNeighborInterpolation;
     case AverageInterpolationMethod:
