@@ -781,6 +781,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                     break;
                 case Qt::GestureStarted:
                     marbleWidget->setViewContext( Animation );
+                    d->m_midPressed = false;
+                    d->m_leftPressed = false;
                     d->m_startingRadius = marbleWidget->radius();
                     break;
                 case Qt::GestureUpdated:
