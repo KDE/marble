@@ -249,7 +249,7 @@ int main( int argc, char *argv[] )
              << "\ninputs:" << mapSources;
 
     if (onlySimulate)
-        return 0;
+        exit( EXIT_SUCCESS );
 
     NasaWorldWindToOpenStreetMapConverter converter;
     converter.setMapSources( mapSources );
@@ -271,5 +271,5 @@ int main( int argc, char *argv[] )
         delete (*pos).second;
     }
 
-    return 0;
+    return EXIT_SUCCESS;
 }
