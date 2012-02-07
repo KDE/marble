@@ -21,8 +21,9 @@ namespace Marble
 {
 class DownloadRegionPrivate;
 class GeoDataLatLonAltBox;
-class MarbleWidget;
+class MarbleModel;
 class ViewportParams;
+class TextureLayer;
 
 class MARBLE_EXPORT DownloadRegion : public QObject
 {
@@ -31,20 +32,20 @@ class MARBLE_EXPORT DownloadRegion : public QObject
  public:
     DownloadRegion( QObject* parent=0 );
 
-    void setMarbleWidget( MarbleWidget* map );
+    void setMarbleModel( MarbleModel *model );
 
     ~DownloadRegion();
 
     void setTileLevelRange( int const minimumTileLevel, int const maximumTileLevel );
 
-    QVector<TileCoordsPyramid> region( const GeoDataLatLonAltBox &region ) const;
+    QVector<TileCoordsPyramid> region( const TextureLayer *textureLayer, const GeoDataLatLonAltBox &region ) const;
 
     void setVisibleTileLevel( int const tileLevel );
 
     /**
       * @brief calculates the region to be downloaded around a route
       */
-    QVector<TileCoordsPyramid> routeRegion( qreal offset ) const;
+    QVector<TileCoordsPyramid> routeRegion( const TextureLayer *textureLayer, qreal offset ) const;
 
   private:
     DownloadRegionPrivate* const d;

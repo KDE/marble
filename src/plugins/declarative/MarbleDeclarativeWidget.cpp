@@ -290,12 +290,15 @@ void MarbleWidget::setGeoSceneProperty(const QString &key, bool value)
 void MarbleWidget::downloadRoute( qreal offset, int topTileLevel, int bottomTileLevel )
 {
     Marble::DownloadRegion region;
-    region.setMarbleWidget( m_marbleWidget );
+    region.setMarbleModel( m_marbleWidget->model() );
     region.setVisibleTileLevel( m_marbleWidget->tileZoomLevel() );
     region.setTileLevelRange( topTileLevel, bottomTileLevel );
     QString const mapThemeId = m_marbleWidget->mapThemeId();
     QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ) );
-    m_marbleWidget->downloadRegion( sourceDir, region.routeRegion( offset ) );
+    QVector<Marble::TileCoordsPyramid> const pyramid = region.routeRegion( m_marbleWidget->textureLayer(), offset );
+    if ( !pyramid.isEmpty() ) {
+        m_marbleWidget->downloadRegion( sourceDir, pyramid );
+    }
 }
 
 bool MarbleWidget::workOffline() const
