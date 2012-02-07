@@ -958,6 +958,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     void setInputEnabled( bool );
 
+    const TextureLayer *textureLayer() const;
+
     //@}
 
  Q_SIGNALS:
@@ -1051,11 +1053,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     class CustomPaintLayer;
     friend class CustomPaintLayer;
-
-    friend class DownloadRegionDialog;
-    friend class DownloadRegionPrivate;
-    TextureLayer *textureLayer();
-    const TextureLayer *textureLayer() const;
 
     friend class MarbleWidgetDefaultInputHandler;
     MeasureTool *measureTool();
