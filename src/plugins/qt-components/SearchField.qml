@@ -18,6 +18,7 @@ TextField {
     property bool busy: false
 
     id: searchField
+    height: visible ? undefined : 0
 
     placeholderText: "Search..."
     // Icon to clear text in the textfield.
