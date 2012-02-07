@@ -19,9 +19,6 @@ TextField {
 
     id: searchField
 
-    /** @todo: What's the exact height of a text field? Should be defined somewhere, use it here */
-    height: visible ? 50 : 0
-
     placeholderText: "Search..."
     // Icon to clear text in the textfield.
     ToolIcon {
