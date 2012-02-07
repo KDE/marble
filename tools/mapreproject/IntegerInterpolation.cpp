@@ -2,8 +2,6 @@
 
 #include "ReadOnlyMapImage.h"
 
-#include <cmath>
-
 IntegerInterpolation::IntegerInterpolation( ReadOnlyMapImage * const mapImage )
     : InterpolationMethod( mapImage )
 {
