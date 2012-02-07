@@ -23,6 +23,8 @@ Page {
         }
     }
 
+    MarbleTouch { id: project }
+
     Flickable {
         id: pageContent
         anchors.fill: parent
@@ -49,7 +51,7 @@ Page {
             }
 
             Label {
-                text: "<p>This is Marble Touch <b>version 1.3.2 (experimental release)</b>. Marble is a Virtual Globe and World Atlas. It is part of the KDE Software Compilation and distributed under the terms of the LGPL, Version 2. Marble is Open Source; we create free source code and endorse free maps and free data. Please visit the <a href=\"http://edu.kde.org/marble\">Marble website</a> for further information.</p>"
+                text: "<p>This is Marble Touch <b>version " + project.version + " (" + project.status + ")</b>. Marble is a Virtual Globe and World Atlas. It is part of the KDE Software Compilation and distributed under the terms of the LGPL, Version 2. Marble is Open Source; we create free source code and endorse free maps and free data. Please visit the <a href=\"http://edu.kde.org/marble\">Marble website</a> for further information.</p>"
                 platformStyle: LabelStyle { fontPixelSize: 16 }
                 width: parent.width
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
@@ -64,6 +66,34 @@ Page {
                 horizontalAlignment: Text.AlignJustify
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 onLinkActivated: Qt.openUrlExternally(link)
+            }
+
+            Label {
+                text: "Changelog"
+                platformStyle: LabelStyle { fontPixelSize: 20 }
+                width: parent.width
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            Column {
+                spacing: 5
+                Repeater {
+                    model: project.changelog
+                    Row {
+                        id: changelogRow
+                        spacing: 10
+                        Label {
+                            id: versionLabel
+                            platformStyle: LabelStyle { fontPixelSize: 16 }
+                            text: "Version " + version
+                        }
+                        Label {
+                            platformStyle: LabelStyle { fontPixelSize: 16 }
+                            text: summary;
+                            width: contentColumn.width - versionLabel.width - changelogRow.spacing
+                        }
+                    }
+                }
             }
 
             Label {
@@ -187,5 +217,9 @@ Page {
 
     ScrollDecorator {
         flickableItem: pageContent
+    }
+
+    Component.onCompleted: {
+        settings.changelogShown = project.version
     }
 }

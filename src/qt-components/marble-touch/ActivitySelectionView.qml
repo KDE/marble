@@ -77,6 +77,22 @@ Page {
         }
     }
 
+    Label {
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: 5
+        platformStyle: LabelStyle { fontPixelSize: 16 }
+        width: parent.width
+        visible: settings.changelogShown !== project.version
+        text: "New in version " + project.changelog.get(0).version + ": " + project.changelog.get(0).summary
+        MarbleTouch { id: project }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: pageStack.push( "qrc:/AboutMarblePage.qml" )
+        }
+    }
+
     // Model that stores information about activities.
     ActivityModel { id: activityModel }
 

@@ -33,5 +33,6 @@
         <file>MapThemePage.qml</file>
         <file>PreferencesPage.qml</file>
         <file>OfflineDataPage.qml</file>
+        <file>MarbleTouch.qml</file>
     </qresource>
 </RCC>
