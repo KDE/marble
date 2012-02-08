@@ -469,8 +469,8 @@ void MarbleMap::downloadRegion( const QString& sourceDir, QVector<TileCoordsPyra
          QSetIterator<TileId> i( tileIdSet );
          while( i.hasNext() ) {
              TileId const tileId = i.next();
-             if ( !textureLayer()->isTileAvailable( tileId ) ) {
-                textureLayer()->downloadTile( tileId );
+             if ( !d->m_textureLayer.isTileAvailable( tileId ) ) {
+                d->m_textureLayer.downloadTile( tileId );
              }
          }
          tilesCount += tileIdSet.count();
@@ -1179,7 +1179,7 @@ void MarbleMap::removeLayer( LayerInterface *layer )
 }
 
 // this method will only temporarily "pollute" the MarbleModel class
-TextureLayer* MarbleMap::textureLayer()
+const TextureLayer *MarbleMap::textureLayer() const
 {
     return &d->m_textureLayer;
 }

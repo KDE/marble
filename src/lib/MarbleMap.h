@@ -612,7 +612,9 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     QFont defaultFont() const;
     void setDefaultFont( const QFont& font );
-    
+
+    const TextureLayer *textureLayer() const;
+
     /**
      * @brief Reload the currently displayed map by reloading texture tiles
      *        from the Internet. In the future this should be extended to all
@@ -686,8 +688,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     class CustomPaintLayer;
     friend class CustomPaintLayer;
-
-    TextureLayer *textureLayer();
 };
 
 }
