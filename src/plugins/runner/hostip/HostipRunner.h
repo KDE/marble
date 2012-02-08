@@ -14,6 +14,7 @@
 
 #include <QtCore/QString>
 #include <QtNetwork/QHostInfo>
+#include <QtNetwork/QNetworkRequest>
 
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -33,6 +34,8 @@ public:
     GeoDataFeature::GeoDataVisualCategory category() const;
 
 private Q_SLOTS:
+    void get();
+
     // Http request with hostip.info done
     void slotRequestFinished( QNetworkReply* );
 
@@ -48,6 +51,8 @@ private:
     QHostInfo m_hostInfo;
 
     QNetworkAccessManager *const m_networkAccessManager;
+
+    QNetworkRequest m_request;
 };
 
 }

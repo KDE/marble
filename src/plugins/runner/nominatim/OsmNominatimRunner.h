@@ -56,10 +56,16 @@ private Q_SLOTS:
 
     void returnNoReverseGeocodingResult();
 
+    void startSearch();
+
+    void startReverseGeocoding();
+
 private:
     void addData( const QDomNodeList &node, const QString &key, GeoDataExtendedData *extendedData );
 
     QNetworkAccessManager* m_manager;
+
+    QNetworkRequest m_request;
 
     GeoDataCoordinates m_coordinates;
 };

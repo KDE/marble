@@ -17,6 +17,7 @@
 
 #include <QtCore/QString>
 #include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QHostInfo>
 
 class QNetworkAccessManager;
 
@@ -51,6 +52,8 @@ private Q_SLOTS:
     /** A network error occurred */
     void handleError( QNetworkReply::NetworkError );
 
+    void get();
+
 private:
     /** Builds the xml request header. */
     QString xmlHeader() const;
@@ -70,6 +73,10 @@ private:
     GeoDataDocument* parse( const QByteArray &input ) const;
 
     QNetworkAccessManager *m_networkAccessManager;
+
+    QNetworkRequest m_request;
+
+    QByteArray m_requestData;
 };
 
 }
