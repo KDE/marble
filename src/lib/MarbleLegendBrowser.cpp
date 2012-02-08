@@ -130,25 +130,23 @@ void MarbleLegendBrowser::loadLegend()
     t.start();
 
     // Read the html string.
-    QString finalHtml;
+    QString legendPath;
 
     // Check for a theme specific legend.html first
     if ( d->m_marbleModel != 0 && d->m_marbleModel->mapTheme() != 0 )
     {
         GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
-        QString customLegendPath = MarbleDirs::path( "maps/" + 
+        legendPath = MarbleDirs::path( "maps/" + 
         currentMapTheme->head()->target() + '/' + 
         currentMapTheme->head()->theme() + "/legend.html" ); 
-        if ( !customLegendPath.isEmpty() )
-            finalHtml = readHtml( QUrl::fromLocalFile( customLegendPath  ) );
-        else
-            finalHtml.clear();
+    }
+    if ( legendPath.isEmpty() ) {
+	legendPath = MarbleDirs::path( "legend.html" ); 
     }
 
-    if ( finalHtml.isEmpty() ) {
-        finalHtml = readHtml( QUrl::fromLocalFile( MarbleDirs::path( "legend.html" ) ) );
-    }
+    QString finalHtml = readHtml( QUrl::fromLocalFile( legendPath ) );
+    finalHtml.replace( QString( "./" ), legendPath.section( '/', 0, -2 ) + '/' );
 
     // Generate some parts of the html from the MapTheme <Legend> tag. 
     const QString sectionsHtml = generateSectionsHtml();
