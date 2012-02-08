@@ -176,7 +176,7 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
         m_coastImage = QImage( viewport->size(), QImage::Format_RGB32 );
 
     // update coast image
-    m_coastImage.fill( QColor( 0, 0, 255, 0) );
+    m_coastImage.fill( QColor( 0, 0, 255, 0).rgb() );
 
     bool doClip = false; //assume false
     switch( viewport->projection() ) {
