@@ -367,7 +367,7 @@ void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role 
     }
 
     if ( plugins.isEmpty() ) {
-        emit parsingFinished( 0, "No plugin found");
+        emit parsingFinished( 0 );
         d->cleanupParsingTask( 0 );
     }
 }
