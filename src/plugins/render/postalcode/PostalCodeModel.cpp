@@ -69,7 +69,7 @@ void PostalCodeModel::parseFile( const QByteArray& file )
     QScriptEngine engine;
 
     // Qt requires parentheses around json code
-    data = engine.evaluate( "(" + QString( file ) + ")" );
+    data = engine.evaluate( "(" + QString::fromUtf8( file ) + ")" );
 
     // Parse if any result exists
     if ( data.property( "postalCodes" ).isArray() ) {
@@ -79,14 +79,10 @@ void PostalCodeModel::parseFile( const QByteArray& file )
         while ( iterator.hasNext() ) {
             iterator.next();
 
-            QString const placeName = QString::fromUtf8(
-                        iterator.value().property( "placeName" ).toString().toStdString().c_str());
-            QString const adminName1 = QString::fromUtf8(
-                        iterator.value().property( "adminName1" ).toString().toStdString().c_str());
-            QString const adminName2 = QString::fromUtf8(
-                        iterator.value().property( "adminName2" ).toString().toStdString().c_str());
-            QString const adminName3 = QString::fromUtf8(
-                        iterator.value().property( "adminName3" ).toString().toStdString().c_str());
+            QString const placeName = iterator.value().property( "placeName" ).toString();
+            QString const adminName1 = iterator.value().property( "adminName1" ).toString();
+            QString const adminName2 = iterator.value().property( "adminName2" ).toString();
+            QString const adminName3 = iterator.value().property( "adminName3" ).toString();
             QString const postalCode = iterator.value().property( "postalCode" ).toString();
             QString const countryCode = iterator.value().property( "countryCode" ).toString();
             double const longitude = iterator.value().property( "lng" ).toNumber();
