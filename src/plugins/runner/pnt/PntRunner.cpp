@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011 Thibaut Gridel <tgridel@free.fr>
+// Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
 #include "PntRunner.h"
 
@@ -73,15 +74,13 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
         stream >> header >> iLat >> iLon;
 
         // make sure iLat is within valid range
-        // FIXME remove iLat != -16396 once our *DIFF*.PNT files are fixed
-        if ( !( -5400 <= iLat && iLat <= 5400 ) && iLat != -16396 ) {
+        if ( !( -5400 <= iLat && iLat <= 5400 ) ) {
             mDebug() << Q_FUNC_INFO << "invalid iLat =" << iLat << "(" << ( iLat * INT2RAD ) * RAD2DEG << ") in dataset" << count << "of file" << fileName;
             error = true;
         }
 
         // make sure iLon is within valid range
-        // FIXME remove iLon != 16555 once our *DIFF*.PNT files are fixed
-        if ( !( -10800 <= iLon && iLon <= 10800 ) && iLon != 16555 ) {
+        if ( !( -10800 <= iLon && iLon <= 10800 ) ) {
             mDebug() << Q_FUNC_INFO << "invalid iLon =" << iLon << "(" << ( iLon * INT2RAD ) * RAD2DEG << ") in dataset" << count << "of file" << fileName;
             error = true;
         }
