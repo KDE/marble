@@ -195,15 +195,8 @@ Page {
                                     settings.voiceNavigationSpeaker = speakers.path(selectedIndex)
                                 } else {
                                     voiceNavigationPreviewButton.enabled = false
+                                    progressBar.installing = true
                                     speakers.install(selectedIndex)
-                                }
-                            }
-
-                            Connections {
-                                target: speakers
-                                onInstallationFinished: {
-                                    settings.voiceNavigationSpeaker = speakers.path(speakerDialog.selectedIndex)
-                                    voiceNavigationPreviewButton.enabled = true
                                 }
                             }
                         }
@@ -219,11 +212,36 @@ Page {
                     height: Math.max(speakerHelp.height, voiceNavigationPreviewButton.height)
 
                     Label {
+                        id: speakerHelp
+                        visible: !progressBar.visible
                         anchors.left: parent.left
                         anchors.right: voiceNavigationPreviewButton.left
-                        id: speakerHelp
                         color: "gray"
                         font.pixelSize: 16
+                    }
+
+                    ProgressBar {
+                        id: progressBar
+                        property bool installing: false
+                        visible: installing
+                        anchors.left: parent.left
+                        anchors.right: voiceNavigationPreviewButton.left
+                        minimumValue: 0.0
+                        maximumValue: 1.0
+                        indeterminate: true
+
+                        Connections {
+                            target: speakers
+                            onInstallationProgressed: {
+                                progressBar.indeterminate = false
+                                progressBar.value = progress
+                            }
+                            onInstallationFinished: {
+                                progressBar.installing = false
+                                settings.voiceNavigationSpeaker = speakers.path(speakerDialog.selectedIndex)
+                                voiceNavigationPreviewButton.enabled = true
+                            }
+                        }
                     }
 
                     ToolButton {
