@@ -175,6 +175,11 @@ Item {
                         routingOptions.visible = !routingOptions.visible
                     }
                 }
+
+                Connections {
+                    target: map
+                    onMouseClickGeoPosition: routingOptions.visible = false
+                }
             }
         }
 
