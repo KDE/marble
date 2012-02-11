@@ -168,7 +168,7 @@ void OsmNominatimRunner::handleSearchResult( QNetworkReply* reply )
         }
 
         QString country = place.firstChildElement("country").text();
-        qDebug() << "place " << name << ", " << road << ", " << city << ", " << administrative << ", " << country;
+        //qDebug() << "place " << name << ", " << road << ", " << city << ", " << administrative << ", " << country;
 
         QString description;
         for (int i=0; i<place.childNodes().size(); ++i) {
