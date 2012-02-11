@@ -28,6 +28,7 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "DownloadRegion.h"
+#include "BookmarkManager.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
 
@@ -39,6 +40,7 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     m_marbleWidget->setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
     m_marbleWidget->model()->routingManager()->profilesModel()->loadDefaultProfiles();
     m_marbleWidget->model()->routingManager()->readSettings();
+    m_marbleWidget->model()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
     setWidget( m_marbleWidget );
 
     connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
