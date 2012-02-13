@@ -144,7 +144,7 @@ void BookmarkManager::removeBookmark( GeoDataPlacemark *bookmark )
 
 GeoDataDocument * BookmarkManager::document() const
 {
-    return d->m_bookmarkDocument;
+    return d->bookmarkDocument();
 }
 
 bool BookmarkManager::showBookmarks()
