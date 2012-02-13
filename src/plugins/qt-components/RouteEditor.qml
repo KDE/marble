@@ -24,23 +24,23 @@ Item {
     Column {
         id: content
         width: parent.width
-        height: routingTypeOptions.height + routeActions.height + listView.height + 10
         anchors.margins: 5
         spacing: 5
 
-        ListView {
+        Repeater {
             id: listView
             width: parent.width
-            height: 40 * count
-            interactive: false
             model: marbleWidget.routing.routeRequestModel()
-            delegate: ViaPointEditor {
+
+            ViaPointEditor {
                 id: sourcePoint
                 width: content.width
-                height: 40
 
                 Component.onCompleted: marbleWidget.mouseClickGeoPosition.connect(retrieveInput)
-                onPositionChanged: root.calculateRoute()
+                onPositionChanged: {
+                    marbleWidget.routing.routeRequestModel().setPosition(index, lon, lat)
+                    root.calculateRoute()
+                }
             }
         }
 

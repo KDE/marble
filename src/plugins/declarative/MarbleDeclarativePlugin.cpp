@@ -58,6 +58,8 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
     qmlRegisterType<Marble::NewstuffModel>( uri, 0, 11, "NewstuffModel" );
     qmlRegisterType<OfflineDataModel>( uri, 0, 11, "OfflineDataModel" );
     qmlRegisterType<MapThemeModel>( uri, 0, 11, "MapThemeModel" );
+
+    qmlRegisterUncreatableType<BookmarksModel>( uri, 0, 11, "BookmarksModel", "Do not create" );
 }
 
 void MarbleDeclarativePlugin::initializeEngine( QDeclarativeEngine *engine, const char *)

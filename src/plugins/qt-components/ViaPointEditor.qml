@@ -11,25 +11,26 @@ import com.nokia.meego 1.0
 
 Item {
     id: root
+    height: row.height
 
-    property string name: "Point in map" /** @todo: Reverse geocoding */
+    property string text: "Point in map" /** @todo: Reverse geocoding */
     property bool isCurrentPosition: false
 
-    signal positionChanged()
+    signal positionChanged(int index, real lon, real lat)
 
     property bool _editing: false
 
     function retrieveInput( lon, lat ) {
         if ( root._editing ) {
-            ListView.view.model.setPosition(index, lon, lat)
             root._editing = false
-            root.positionChanged()
+            root.positionChanged(index, lon, lat)
         }
     }
 
     Item {
+        id: row
         width: parent.width
-        height: 40
+        height: Math.max(waypointIcon.height, destinationInputLabel.height)
 
         Rectangle {
             id: waypointIcon
@@ -58,7 +59,7 @@ Item {
             anchors.right: editIcon.left
             anchors.verticalCenter: parent.verticalCenter
             anchors.margins: 10
-            text: root._editing ? "Select a point" : ( root.isCurrentPosition ? "Current position" : name )
+            text: root._editing ? "Select a point" : ( root.isCurrentPosition ? "Current position" : root.text )
         }
 
         MouseArea {
@@ -81,21 +82,33 @@ Item {
     SelectionDialog {
         id: inputSelectionDialog
         titleText: "Select via point"
-        selectedIndex: 1
+        selectedIndex: -1
         model: ListModel {
             ListElement { name: "Current Position" }
-            ListElement { name: "Select in map" }
+            ListElement { name: "Choose Bookmark" }
+            ListElement { name: "Select from map" }
         }
 
         onAccepted: {
             if ( selectedIndex === 0 ) {
                 root.isCurrentPosition = true
-                root.ListView.view.model.setPosition(index, marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude)
-                root.positionChanged()
+                root.positionChanged(index, marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude)
+            } else if ( selectedIndex === 1 ) {
+                bookmarkSelectionDialog.open()
             } else {
                 root.isCurrentPosition = false
                 root._editing = true
             }
+        }
+    }
+
+    SelectionDialog {
+        id: bookmarkSelectionDialog
+        titleText: "Select Bookmark"
+        model: marbleWidget.bookmarks.model
+        onAccepted: {
+            root.text = marbleWidget.bookmarks.model.name(selectedIndex)
+            root.positionChanged(index, marbleWidget.bookmarks.model.longitude(selectedIndex), marbleWidget.bookmarks.model.latitude(selectedIndex))
         }
     }
 
