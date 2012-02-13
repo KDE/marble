@@ -14,6 +14,7 @@
 #include "DeclarativeMapThemeManager.h"
 #include "MarbleDeclarativeWidget.h"
 #include "PositionSource.h"
+#include "Bookmarks.h"
 #include "Tracking.h"
 #include "Routing.h"
 #include "Navigation.h"
@@ -39,6 +40,7 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
     //@uri org.kde.edu.marble
     qmlRegisterType<Coordinate>( uri, 0, 11, "Coordinate" );
     qmlRegisterType<PositionSource>( uri, 0, 11, "PositionSource" );
+    qmlRegisterType<Bookmarks>( uri, 0, 11, "Bookmarks" );
     qmlRegisterType<Tracking>( uri, 0, 11, "Tracking" );
     qmlRegisterType<Routing>( uri, 0, 11, "Routing" );
     qmlRegisterType<Navigation>( uri, 0, 11, "Navigation" );

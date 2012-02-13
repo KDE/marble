@@ -10,6 +10,7 @@ INCLUDE_DIRECTORIES(
 INCLUDE( ${QT_USE_FILE} )
 
 set( marbleplugin_SRCS
+Bookmarks.cpp
 Coordinate.cpp
 DeclarativeMapThemeManager.cpp
 MapTheme.cpp

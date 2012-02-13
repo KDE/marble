@@ -11,6 +11,7 @@
 #ifndef DECLARATIVE_MARBLE_WIDGET_H
 #define DECLARATIVE_MARBLE_WIDGET_H
 
+#include "Bookmarks.h"
 #include "Tracking.h"
 #include "Routing.h"
 #include "Navigation.h"
@@ -52,6 +53,7 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
     Q_PROPERTY( QStringList activeFloatItems READ activeFloatItems WRITE setActiveFloatItems )
     Q_PROPERTY( QStringList activeRenderPlugins READ activeRenderPlugins WRITE setActiveRenderPlugins )
+    Q_PROPERTY( Bookmarks* bookmarks READ bookmarks NOTIFY bookmarksChanged )
     Q_PROPERTY( Tracking* tracking READ tracking NOTIFY trackingChanged )
     Q_PROPERTY( Routing* routing READ routing NOTIFY routingChanged )
     Q_PROPERTY( Navigation* navigation READ navigation NOTIFY navigationChanged )
@@ -85,6 +87,8 @@ public:
 Q_SIGNALS:
     /** Forwarded from MarbleWidget. Zoom value and/or center position have changed */
     void visibleLatLonAltBoxChanged();
+
+    void bookmarksChanged();
 
     void trackingChanged();
 
@@ -167,6 +171,8 @@ public Q_SLOTS:
       */
     Coordinate *coordinate( int x, int y );
 
+    Bookmarks* bookmarks();
+
     Tracking* tracking();
 
     Routing* routing();
@@ -196,6 +202,8 @@ private:
     Marble::MarbleWidget* m_marbleWidget;
 
     bool m_inputEnabled;
+
+    Bookmarks* m_bookmarks;
 
     Tracking* m_tracking;
 
