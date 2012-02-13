@@ -131,7 +131,6 @@ BookmarksModel *Bookmarks::model()
         m_proxyModel->setFilterFixedString( GeoDataTypes::GeoDataPlacemarkType );
         m_proxyModel->setFilterKeyColumn( 1 );
         m_proxyModel->setSourceModel( flattener );
-
     }
 
     return m_proxyModel;
@@ -139,6 +138,11 @@ BookmarksModel *Bookmarks::model()
 
 BookmarksModel::BookmarksModel( QObject *parent ) : QSortFilterProxyModel( parent )
 {
+    // Workaround for https://bugreports.qt-project.org/browse/QTCOMPONENTS-1206
+    QHash<int,QByteArray> roles = roleNames();
+    roles[Qt::DisplayRole] = "name";
+    setRoleNames( roles );
+
     connect( this, SIGNAL( layoutChanged() ), this, SIGNAL( countChanged() ) );
     connect( this, SIGNAL( modelReset() ), this, SIGNAL( countChanged() ) );
     connect( this, SIGNAL( rowsInserted( QModelIndex, int, int ) ), this, SIGNAL( countChanged() ) );
