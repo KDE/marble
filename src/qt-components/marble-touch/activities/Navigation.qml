@@ -254,12 +254,14 @@ Page {
 
             Row {
                 CheckBox {
+                    id: startupCheckbox
                     checked: settings.navigationStartupWarning
                     onCheckedChanged: settings.navigationStartupWarning = checked
                 }
                 Label {
                     text: "Show again";
                     color: "white"
+                    anchors.verticalCenter: startupCheckbox.verticalCenter
                 }
             }
 
