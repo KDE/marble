@@ -26,6 +26,7 @@ Item {
     property alias mapThemeModel: map.mapThemeModel
     property alias radius: map.radius
 
+    property alias bookmarks: map.bookmarks
     property alias routing: map.routing
     property alias search: map.search
     property alias tracking: map.tracking

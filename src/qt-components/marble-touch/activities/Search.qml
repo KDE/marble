@@ -152,9 +152,6 @@ Page {
             y: 5
             property bool detailed: ListView.isCurrentItem
 
-            /** @todo: Need access to bookmark manager here */
-            property bool isBookmark: false
-
             Column {
                 id: column
 
@@ -193,9 +190,17 @@ Page {
 
                     Button  {
                         width: 50
-                        iconSource: searchResultItem.isBookmark ? "qrc:/icons/bookmark.png" : "qrc:/icons/bookmark-disabled.png"
-                        visible: false // searchResultItem.detailed
-                        onClicked: searchResultItem.isBookmark = !searchResultItem.isBookmark
+                        property bool isBookmark: marbleWidget.bookmarks.isBookmark(longitude,latitude)
+                        iconSource: isBookmark ? "qrc:/icons/bookmark.png" : "qrc:/icons/bookmark-disabled.png"
+                        visible: searchResultItem.detailed
+                        onClicked: {
+                            if ( isBookmark ) {
+                                marbleWidget.bookmarks.removeBookmark(longitude,latitude)
+                            } else {
+                                marbleWidget.bookmarks.addBookmark(longitude,latitude, display, "Default")
+                            }
+                            isBookmark = marbleWidget.bookmarks.isBookmark(longitude,latitude)
+                        }
                     }
                 }
             }

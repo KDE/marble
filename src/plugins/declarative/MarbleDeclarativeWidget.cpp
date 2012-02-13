@@ -34,8 +34,8 @@
 
 MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     QGraphicsProxyWidget( parent, flags ), m_marbleWidget( new Marble::MarbleWidget ),
-    m_inputEnabled( true ), m_tracking( 0 ), m_routing( 0 ), m_navigation( 0 ), m_search( 0 ),
-    m_interceptor( new ZoomButtonInterceptor( this, this ) )
+    m_inputEnabled( true ), m_bookmarks( 0), m_tracking( 0 ), m_routing( 0 ),
+    m_navigation( 0 ), m_search( 0 ), m_interceptor( new ZoomButtonInterceptor( this, this ) )
 {
     m_marbleWidget->setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
     m_marbleWidget->model()->routingManager()->profilesModel()->loadDefaultProfiles();
@@ -192,6 +192,17 @@ Coordinate *MarbleWidget::coordinate( int x, int y )
     qreal lat( 0.0 ), lon( 0.0 );
     m_marbleWidget->geoCoordinates( x, y, lon, lat );
     return new Coordinate( lon, lat, 0.0, this );
+}
+
+Bookmarks *MarbleWidget::bookmarks()
+{
+    if ( !m_bookmarks ) {
+        m_bookmarks = new Bookmarks( this );
+        m_bookmarks->setMarbleWidget( this );
+        emit bookmarksChanged();
+    }
+
+    return m_bookmarks;
 }
 
 Tracking* MarbleWidget::tracking()
