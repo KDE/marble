@@ -103,15 +103,15 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
         }
         else if ( header < 2000 ) {
             /* header represents start of coastline */
-            geom->append( new GeoDataLinearRing );
+            geom->append( new GeoDataLineString );
         }
         else if ( header < 4000 ) {
             /* header represents start of country border */
-            geom->append( new GeoDataLinearRing );
+            geom->append( new GeoDataLineString );
         }
         else if ( header < 5000 ) {
             /* header represents start of internal political border */
-            geom->append( new GeoDataLinearRing );
+            geom->append( new GeoDataLineString );
         }
         else if ( header < 6000 ) {
             /* header represents start of island */
@@ -119,11 +119,11 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
         }
         else if ( header < 7000 ) {
             /* header represents start of lake */
-            geom->append( new GeoDataLineString );
+            geom->append( new GeoDataLinearRing );
         }
         else if ( header < 8000 ) {
             /* header represents start of river */
-            geom->append( new GeoDataLinearRing );
+            geom->append( new GeoDataLineString );
         }
         else if ( header < 9000 ) {
             /* custom header represents start of glaciers, lakes or islands */
@@ -131,7 +131,7 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
         }
         else if ( header < 10000 ) {
             /* custom header represents start of political borders */
-            geom->append( new GeoDataLinearRing );
+            geom->append( new GeoDataLineString );
         }
         else if ( header < 14000 ) {
             /* invalid header */
@@ -141,7 +141,7 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
         }
         else if ( header < 15000 ) {
             /* custom header represents start of political borders */
-            geom->append( new GeoDataLinearRing );
+            geom->append( new GeoDataLineString );
         }
         else if ( header < 19000 ) {
             /* invalid header */
