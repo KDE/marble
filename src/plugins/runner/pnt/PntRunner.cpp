@@ -85,6 +85,15 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
             error = true;
         }
 
+        if ( header >= 1000 && geom->size() > 0 ) {
+            GeoDataLineString *const polyline = static_cast<GeoDataLineString*>( geom->child( geom->size() - 1 ) );
+            if ( polyline->size() == 1 ) {
+                mDebug() << Q_FUNC_INFO << fileName << "contains single-point polygon at" << count << ". Aborting.";
+                error = true;
+                break;
+            }
+        }
+
         if ( header < 1 ) {
             /* invalid header */
             mDebug() << Q_FUNC_INFO << "invalid header:" << header << "in" << fileName << "at" << count;
