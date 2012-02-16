@@ -73,6 +73,8 @@ class AbstractProjectionPrivate
                               const ViewportParams *viewport,
                               QVector<QPolygonF*> &polygons ) const;
 
+    qreal mirrorPoint( const ViewportParams *viewport ) const;
+
     void repeatPolygons( const ViewportParams *viewport,
                          QVector<QPolygonF *> &polygons ) const;
 

@@ -212,6 +212,7 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
 
     GeoDataCoordinates previousCoords;
     GeoDataCoordinates currentCoords;
+    int previousSign, currentSign;
 
     GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
     GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
@@ -236,6 +237,8 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
 
             previousCoords = *itPreviousCoords;
             currentCoords  = *itCoords;
+            previousSign = ( previousCoords.longitude() < 0.0 ) ? -1 : +1 ;
+            currentSign = ( currentCoords.longitude() < 0.0 ) ? -1 : +1 ;
 
             q->screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
 
@@ -243,6 +246,7 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
             if ( !processingLastNode && itCoords == itBegin ) {
                 previousGlobeHidesPoint = globeHidesPoint;
                 itPreviousCoords = itCoords;
+                previousSign = currentSign;
                 previousX = x;
                 previousY = y;
             }
@@ -309,7 +313,27 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
             }
             else {
                 if ( !globeHidesPoint ) {
+                    // special case for polys which cross dateline but have no Tesselation Flag
+                    // the expected rendering is a screen coordinates straight line between
+                    // points, but in projections with repeatX things are not smooth
+                    // we need to split polygons and use both sides of the repeated point
+                    if( currentSign != previousSign && fabs(previousCoords.longitude()) + fabs(currentCoords.longitude()) > M_PI && !lineString.tessellate() &&
+                            q->repeatX() ) {
+                        qreal delta = mirrorPoint( viewport );
+
+                        if ( previousSign > currentSign ) {
+                            // going eastwards ->
+                            polygon->append( QPointF( x +  delta, y ) );
+                        } else {
+                            // going westwards <-
+                            polygon->append( QPointF( x -  delta, y ) );
+                        }
+                        polygons.append( polygon );
+                        polygon = new QPolygonF;
+                    }
+
                     polygon->append( QPointF( x, y ) );
+
                 }
                 else {
                     if ( !previousGlobeHidesPoint && isAtHorizon ) {
@@ -329,6 +353,7 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
 
             previousGlobeHidesPoint = globeHidesPoint;
             itPreviousCoords = itCoords;
+            previousSign = currentSign;
             previousX = x;
             previousY = y;
         }
@@ -365,6 +390,19 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
     return polygons.isEmpty();
 }
 
+qreal AbstractProjectionPrivate::mirrorPoint( const ViewportParams *viewport ) const
+{
+    // Choose a latitude that is inside the viewport.
+    qreal centerLatitude = viewport->viewLatLonAltBox().center().latitude();
+
+    GeoDataCoordinates westCoords( -M_PI, centerLatitude );
+    GeoDataCoordinates eastCoords( +M_PI, centerLatitude );
+    qreal xWest, xEast, dummyY;
+    q->screenCoordinates( westCoords, viewport, xWest, dummyY );
+    q->screenCoordinates( eastCoords, viewport, xEast, dummyY );
+
+    return   xEast - xWest;
+}
 
 void AbstractProjectionPrivate::repeatPolygons( const ViewportParams *viewport,
                                                 QVector<QPolygonF *> &polygons ) const

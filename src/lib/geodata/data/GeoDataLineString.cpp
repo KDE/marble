@@ -327,18 +327,20 @@ QVector<GeoDataLineString*> GeoDataLineString::toRangeCorrected() const
     if ( p()->m_dirtyRange ) {
 
         qDeleteAll( p()->m_rangeCorrected ); // This shouldn't be needed
+        p()->m_rangeCorrected.clear();
 
         GeoDataLineString poleCorrected;
 
-        if ( latLonAltBox().crossesDateLine() )
+        if ( latLonAltBox().crossesDateLine() && tessellate() )
         {
             GeoDataLineString normalizedLineString = toNormalized();
             poleCorrected = normalizedLineString.toPoleCorrected();
+            p()->m_rangeCorrected = poleCorrected.toDateLineCorrected();
         }
         else {
             poleCorrected = toPoleCorrected();
+            p()->m_rangeCorrected.append( new GeoDataLineString( poleCorrected ));
         }
-        p()->m_rangeCorrected = poleCorrected.toDateLineCorrected();
     }
 
     return p()->m_rangeCorrected;
