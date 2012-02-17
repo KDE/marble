@@ -37,6 +37,7 @@ class TestGeoDataPack : public QObject
 
     private:
         QString content;
+        QTime timer;
 };
 
 bool comparePlacemarks( GeoDataPlacemark *left, GeoDataPlacemark *right )
@@ -67,6 +68,7 @@ void TestGeoDataPack::initTestCase()
 {
     MarbleDirs::setMarbleDataPath( DATA_PATH );
     MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
+    timer.start();
 
     content = QString( 
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -109,6 +111,7 @@ void TestGeoDataPack::saveKMLToCache()
     }
     GeoDocument* document = parser.releaseDocument();
     QVERIFY( document );
+    qDebug() << " parse Timer " << timer.elapsed();
     GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
     QString path = QString( "%1/%2.cache" );
     path = path.arg( QCoreApplication::applicationDirPath() );
@@ -121,6 +124,7 @@ void TestGeoDataPack::saveKMLToCache()
         cacheFile.close();
         qDebug( "Saved kml document to cache: %s", path.toAscii().data() );
     }
+    qDebug() << "write Timer " << timer.elapsed();
     delete document;
 }
 
@@ -139,6 +143,7 @@ void TestGeoDataPack::loadKMLFromCache()
         qDebug( "Loaded kml document from cache: %s", path.toAscii().data() );
     }
     QVERIFY( cacheDocument );
+    qDebug() << "read Timer " << timer.elapsed();
 
     GeoDataParser parser( GeoData_KML );
     QByteArray array( content.toUtf8() );
@@ -151,8 +156,10 @@ void TestGeoDataPack::loadKMLFromCache()
     }
     GeoDocument* document = parser.releaseDocument();
     QVERIFY( document );
+    qDebug() << "parse Timer " << timer.elapsed();
     GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
     QVERIFY( compareDocuments( cacheDocument, dataDocument ) );
+    qDebug() << "compare Timer " << timer.elapsed();
 
     delete document;
     delete cacheDocument;
@@ -171,6 +178,7 @@ void TestGeoDataPack::saveCitiesToCache()
     }
     GeoDocument* document = parser.releaseDocument();
     QVERIFY( document );
+    qDebug() << "read Timer " << timer.elapsed();
     GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
     QString path = QString( "%1/%2.cache" );
     path = path.arg( QCoreApplication::applicationDirPath() );
@@ -184,6 +192,7 @@ void TestGeoDataPack::saveCitiesToCache()
         qDebug( "Saved kml document to cache: %s", path.toAscii().data() );
     }
     QVERIFY( cacheFile.size() > 0 );
+    qDebug() << "write Timer " << timer.elapsed();
     delete document;
 }
 
@@ -202,6 +211,7 @@ void TestGeoDataPack::loadCitiesFromCache()
         qDebug( "Loaded kml document from cache: %s", path.toAscii().data() );
     }
     QVERIFY( cacheDocument );
+    qDebug() << "read Timer " << timer.elapsed();
 
     GeoDataParser parser( GeoData_KML );
     QFile citiesFile( CITIES_PATH );
@@ -213,8 +223,10 @@ void TestGeoDataPack::loadCitiesFromCache()
     }
     GeoDocument* document = parser.releaseDocument();
     QVERIFY( document );
+    qDebug() << "parse Timer " << timer.elapsed();
     GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
     QVERIFY( compareDocuments( cacheDocument, dataDocument ) );
+    qDebug() << "compare Timer " << timer.elapsed();
 
     delete cacheDocument;
     delete dataDocument;
