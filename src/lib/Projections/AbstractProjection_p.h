@@ -60,14 +60,16 @@ class AbstractProjectionPrivate
                                 qreal ax, qreal ay,
                                 const GeoDataCoordinates &bCoords,
                                 qreal bx, qreal by,
-                                QPolygonF * polygon,
+                                QVector<QPolygonF*> &polygons,
                                 const ViewportParams *viewport,
                                 TessellationFlags f = 0 ) const;
 
-    QPolygonF processTessellation(  const GeoDataCoordinates &previousCoords,
-                                    const GeoDataCoordinates &currentCoords,
-                                    int count, const ViewportParams *viewport,
-                                    TessellationFlags f = 0 ) const;
+    void processTessellation(  const GeoDataCoordinates &previousCoords,
+                               const GeoDataCoordinates &currentCoords,
+                               int count,
+                               QVector<QPolygonF*> &polygons,
+                               const ViewportParams *viewport,
+                               TessellationFlags f = 0 ) const;
 
     bool lineStringToPolygon( const GeoDataLineString &lineString,
                               const ViewportParams *viewport,

@@ -184,6 +184,7 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
     bool isAtHorizon = false;
 
     QPolygonF * polygon = new QPolygonF;
+    polygons.append( polygon );
 
     GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
     GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
@@ -290,7 +291,7 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
 
                     tessellateLineSegment( previousCoords, previousX, previousY,
                                            currentCoords, x, y,
-                                           polygon, viewport,
+                                           polygons, viewport,
                                            f );
 
                 }
@@ -300,13 +301,13 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
                     if ( previousGlobeHidesPoint ) {
                         tessellateLineSegment( horizonCoords, horizonX, horizonY,
                                                currentCoords, x, y,
-                                               polygon, viewport,
+                                               polygons, viewport,
                                                f );
                     }
                     else {
                         tessellateLineSegment( previousCoords, previousX, previousY,
                                                horizonCoords, horizonX, horizonY,
-                                               polygon, viewport,
+                                               polygons, viewport,
                                                f );
                     }
                 }
@@ -328,8 +329,8 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
                             // going westwards <-
                             polygon->append( QPointF( x -  delta, y ) );
                         }
-                        polygons.append( polygon );
                         polygon = new QPolygonF;
+                        polygons.append( polygon );
                     }
 
                     polygon->append( QPointF( x, y ) );
@@ -346,8 +347,8 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
                 if (   !previousGlobeHidesPoint
                     && !lineString.isClosed()
                     ) {
-                    polygons.append( polygon );
                     polygon = new QPolygonF;
+                    polygons.append( polygon );
                 }
             }
 
@@ -378,11 +379,8 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
         horizonToPolygon( viewport, horizonCoords, horizonOrphanCoords, polygon );
     }
 
-    if ( polygon->size() > 1 ){
-        polygons.append( polygon );
-    }
-    else {
-        delete polygon; // Clean up "unused" empty polygon instances
+    if ( polygon->size() <= 1 ){
+        polygons.pop_back(); // Clean up "unused" empty polygon instances
     }
 
     repeatPolygons( viewport, polygons );
@@ -678,14 +676,13 @@ void AbstractProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates 
                                                 qreal ax, qreal ay,
                                                 const GeoDataCoordinates &bCoords,
                                                 qreal bx, qreal by,
-                                                QPolygonF * polygon,
+                                                QVector<QPolygonF*> &polygons,
                                                 const ViewportParams *viewport,
                                                 TessellationFlags f ) const
 {
     // We take the manhattan length as a distance approximation
     // that can be too big by a factor of sqrt(2)
     qreal distance = fabs((bx - ax)) + fabs((by - ay));
-
 #ifdef SAFE_DISTANCE
     // Interpolate additional nodes if the line segment that connects the
     // current or previous nodes might cross the viewport.
@@ -712,11 +709,14 @@ void AbstractProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates 
         // on screen is too big
         if ( distance > finalTessellationPrecision ) {
 
-            *polygon << processTessellation( aCoords, bCoords,
-                                        tessellatedNodes, viewport,
-                                        f );
+            processTessellation( aCoords, bCoords,
+                                 tessellatedNodes,
+                                 polygons,
+                                 viewport,
+                                 f );
         }
         else {
+            QPolygonF *polygon = polygons.last();
             QPolygonF path;
             qreal x = 0.0;
             qreal y = 0.0;
@@ -738,13 +738,14 @@ void AbstractProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates 
 }
 
 
-QPolygonF AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &previousCoords,
+void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &previousCoords,
                                                     const GeoDataCoordinates &currentCoords,
                                                     int tessellatedNodes,
+                                                    QVector<QPolygonF*> &polygons,
                                                     const ViewportParams *viewport,
                                                     TessellationFlags f ) const
 {
-    QPolygonF   path;
+    QPolygonF   *path = polygons.last();
 
     const bool clampToGround = f.testFlag( FollowGround );
     bool followLatitudeCircle = false;     
@@ -773,7 +774,7 @@ QPolygonF AbstractProjectionPrivate::processTessellation(  const GeoDataCoordina
             // FIXME: Take dateline into account
             lonDiff = currentLongitude - previousLongitude;
             if ( fabs( lonDiff ) == 2 * M_PI ) {
-                return path;
+                return;
             }
         }
         else {
@@ -796,7 +797,7 @@ QPolygonF AbstractProjectionPrivate::processTessellation(  const GeoDataCoordina
     if ( clampToGround && previousAltitude != 0.0 ) {
           q->screenCoordinates( previousCoords, viewport, x, y, globeHidesPoint );
           if ( !globeHidesPoint ) {
-            path << QPointF( x, y );
+            *path << QPointF( x, y );
           }
     }
 
@@ -806,7 +807,7 @@ QPolygonF AbstractProjectionPrivate::processTessellation(  const GeoDataCoordina
     }
     q->screenCoordinates( previousModifiedCoords, viewport, x, y, globeHidesPoint );
     if ( !globeHidesPoint ) {
-        path << QPointF( x, y );
+        *path << QPointF( x, y );
     }
 
     qreal  lon = 0.0;
@@ -841,7 +842,7 @@ QPolygonF AbstractProjectionPrivate::processTessellation(  const GeoDataCoordina
 
         // No "else" here, as this would not add the current point that is required.
         if ( !globeHidesPoint ) {
-            path << QPointF( x, y );
+            *path << QPointF( x, y );
         }
     }
 
@@ -852,18 +853,18 @@ QPolygonF AbstractProjectionPrivate::processTessellation(  const GeoDataCoordina
     }
     q->screenCoordinates( currentModifiedCoords, viewport, x, y, globeHidesPoint );
     if ( !globeHidesPoint ) {
-        path << QPointF( x, y );
+        *path << QPointF( x, y );
     }
 
     // For the clampToGround case add the "current" coordinate after adding all other nodes. 
     if ( clampToGround && currentCoords.altitude() != 0.0 ) {
           q->screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
           if ( !globeHidesPoint ) {
-            path << QPointF( x, y );
+            *path << QPointF( x, y );
           }
     }
 
-    return path; 
+    return;
 }
 
 
