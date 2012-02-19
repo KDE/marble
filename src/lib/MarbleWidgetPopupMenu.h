@@ -71,6 +71,7 @@ private Q_SLOTS:
     void showAddressInformation( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark );
     void addBookmark();
     void toggleFullscreen( bool enabled );
+    void setHomePosition();
 
  private:
     /**
@@ -101,6 +102,9 @@ private Q_SLOTS:
     QAction  *m_rmbExtensionPoint;
 
     MarbleRunnerManager* m_runnerManager;
+
+    /** @todo FIXME static for ABI compatibility only */
+    static QAction* m_setHomePointAction;
 };
 
 }

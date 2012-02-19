@@ -40,6 +40,8 @@
 using namespace Marble;
 /* TRANSLATOR Marble::MarbleWidgetPopupMenu */
 
+QAction* MarbleWidgetPopupMenu::m_setHomePointAction = new QAction( tr( "&Set Home Location" ), 0 );
+
 MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget, 
                                          const MarbleModel *model)
     : QObject(widget),
@@ -83,11 +85,12 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
     m_rmbMenu->addAction( fromHere );
     m_rmbMenu->addAction( toHere );
     m_rmbMenu->addSeparator();
-    m_rmbMenu->addAction( tr( "&Address Details" ), this, SLOT( startReverseGeocoding() ) );
     if ( smallScreen ) {
+        m_rmbMenu->addAction( m_setHomePointAction );
         m_rmbMenu->addAction( addBookmark );
     }
     else {
+        m_rmbMenu->addAction( tr( "&Address Details" ), this, SLOT( startReverseGeocoding() ) );
         m_rmbMenu->addAction( m_copyCoordinateAction );
     }
     m_rmbMenu->addSeparator();
@@ -101,6 +104,7 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
 
     connect( fromHere, SIGNAL( triggered( ) ), SLOT( directionsFromHere() ) );
     connect( toHere, SIGNAL( triggered( ) ), SLOT( directionsToHere() ) );
+    connect( m_setHomePointAction, SIGNAL( triggered() ), SLOT( setHomePosition() ) );
     connect( addBookmark, SIGNAL( triggered( ) ), SLOT( addBookmark() ) );
     connect( aboutDialogAction, SIGNAL( triggered() ), SLOT( slotAboutDialog() ) );
     connect( m_copyCoordinateAction, SIGNAL( triggered() ), SLOT( slotCopyCoordinates() ) );
@@ -126,6 +130,8 @@ QMenu* MarbleWidgetPopupMenu::createInfoBoxMenu()
 
 void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 {
+    const QPoint curpos = QPoint( xpos, ypos );
+    m_setHomePointAction->setData( curpos );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
         showRmbMenu( xpos, ypos );
@@ -140,7 +146,6 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
         }
     }
 
-    const QPoint curpos = QPoint( xpos, ypos );
     m_featurelist = m_widget->whichFeatureAt( curpos );
 
     int  actionidx = 1;
@@ -201,6 +206,7 @@ void MarbleWidgetPopupMenu::showRmbMenu( int xpos, int ypos )
 
     QPoint curpos = QPoint( xpos, ypos );
     m_copyCoordinateAction->setData( curpos );
+    m_setHomePointAction->setData( curpos );
 
     m_rmbMenu->popup( m_widget->mapToGlobal( curpos ) );
 }
@@ -426,6 +432,14 @@ void MarbleWidgetPopupMenu::toggleFullscreen( bool enabled )
         parent->setWindowState( parent->windowState() | Qt::WindowFullScreen );
     } else {
         parent->setWindowState( parent->windowState() & ~Qt::WindowFullScreen );
+    }
+}
+
+void MarbleWidgetPopupMenu::setHomePosition()
+{
+    GeoDataCoordinates coordinates;
+    if ( mouseCoordinates( &coordinates, m_setHomePointAction ) ) {
+        m_widget->model()->setHome( coordinates, m_widget->zoom() );
     }
 }
 
