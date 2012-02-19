@@ -56,8 +56,7 @@ do
             #cp "${workdir}/marble_qt.po" "marble_qt_${i}.po"
             #cp "${workdir}/marble.po" "marble_${i}.po"
 
-            mv "marble_qt_${i}.qm" "marble-${i}"
-            echo "marble-${i}"
+            mv "marble_qt_${i}.qm" "${1:=.}/marble-${i}"
           fi
         fi
 done
