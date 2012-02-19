@@ -13,7 +13,14 @@
 set -e
 
 MERGE_TOOL="$(dirname ${0})/merge_ts_po"
-test -x "${MERGE_TOOL}" || { echo "./merge_ts_po is not there. Please compile it: g++ -o merge_ts_po merge_ts_po.cpp -I /usr/include/qt4 -lQtCore."; exit 1; }
+test -x "${MERGE_TOOL}" || {
+  MERGE_TOOL="$(mktemp)"
+  g++ -o ${MERGE_TOOL} "$(dirname ${0})/merge_ts_po.cpp" -I /usr/include/qt4 -lQtCore
+}
+
+test -x "${MERGE_TOOL}" || { 
+  echo "./merge_ts_po is not there. Please compile it: g++ -o merge_ts_po merge_ts_po.cpp -I /usr/include/qt4 -lQtCore."; exit 1; 
+}
 
 workdir="$(mktemp -d)"
 
@@ -24,7 +31,7 @@ workdir="$(mktemp -d)"
 prefix="svn://anonsvn.kde.org/home/kde/trunk/l10n-kde4"
 
 echo "Generating translation template"
-lupdate $(find ../../ -name "*.cpp" -o -name "*.h" -o -name "*.ui" | xargs echo) -ts "${workdir}/template.ts"
+lupdate $(find "$(dirname ${0})"/../../ -name "*.cpp" -o -name "*.h" -o -name "*.ui" | xargs echo) -ts "${workdir}/template.ts"
 
 echo "Processing translations, please wait. This can take some time..."
 
