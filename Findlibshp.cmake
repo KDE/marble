@@ -6,7 +6,7 @@ if(LIBSHP_INCLUDE_DIR AND LIBSHP_LIBRARIES)
   set(LIBSHP_FOUND TRUE)
 else(LIBSHP_INCLUDE_DIR AND LIBSHP_LIBRARIES)
 
-  find_path(LIBSHP_INCLUDE_DIR NAMES shapefil.h)
+  find_path(LIBSHP_INCLUDE_DIR NAMES shapefil.h PATH_SUFFIXES libshp)
   find_library(LIBSHP_LIBRARIES NAMES shp)
 
   include(FindPackageHandleStandardArgs)
