@@ -56,8 +56,8 @@ public slots:
     void setPosition(QPointF position);
     void setPosition(qreal posX, qreal posY);
     void setUpdateInterval(int ms);
-    void resetSpeed();
-    void release();
+    void stop();
+    void start();
 
 signals:
     void positionChanged( qreal lon, qreal lat );

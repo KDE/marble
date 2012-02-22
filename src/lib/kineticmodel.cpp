@@ -125,7 +125,7 @@ void KineticModel::setUpdateInterval(int ms)
     d_ptr->ticker.setInterval(ms);
 }
 
-void KineticModel::resetSpeed()
+void KineticModel::stop()
 {
     Q_D(KineticModel);
 
@@ -135,7 +135,7 @@ void KineticModel::resetSpeed()
     d->velocity = QPointF(0, 0);
 }
 
-void KineticModel::release()
+void KineticModel::start()
 {
     Q_D(KineticModel);
 
