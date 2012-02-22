@@ -301,6 +301,7 @@ void TextureLayer::reset()
     mDebug() << Q_FUNC_INFO;
 
     d->m_tileLoader.clear();
+    d->m_pixmapCache.clear();
     d->mapChanged();
 }
 
