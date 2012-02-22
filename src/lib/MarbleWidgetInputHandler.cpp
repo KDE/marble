@@ -483,10 +483,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 d->m_leftPressedLon = MarbleWidgetInputHandler::d->m_widget->centerLongitude();
                 d->m_leftPressedLat = MarbleWidgetInputHandler::d->m_widget->centerLatitude();
 
-
                 d->m_leftPressedDirection = 1;
 
-                d->m_kineticSpinning.setPosition( d->m_leftPressedLon, d->m_leftPressedLat );
                 d->m_kineticSpinning.stop();
 
                 // Choose spin direction by taking into account whether we

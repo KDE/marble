@@ -130,7 +130,6 @@ void KineticModel::stop()
     Q_D(KineticModel);
 
     d->ticker.stop();
-    d->lastPosition = d->position;
     d->timestamp.start();
     d->velocity = QPointF(0, 0);
 }
