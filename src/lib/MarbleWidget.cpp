@@ -807,8 +807,7 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
             *pixel = qRgb( gray, gray, gray );
         }
 
-        GeoPainter widgetPainter( this, d->m_map.viewport(),
-                            d->m_map.mapQuality(), doClip );
+        QPainter widgetPainter( this );
         widgetPainter.drawImage( rect(), image );
     }
 
