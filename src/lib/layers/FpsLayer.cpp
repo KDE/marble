@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2006-2009 Torsten Rahn <tackat@kde.org>
-// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2011,2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
@@ -15,10 +15,7 @@
 #include <QtCore/QPoint>
 #include <QtCore/QTime>
 #include <QtGui/QFont>
-
-#include <limits>
-
-#include <GeoPainter.h>
+#include <QtGui/QPainter>
 
 namespace Marble
 {
@@ -28,20 +25,8 @@ FpsLayer::FpsLayer( QTime *time )
 {
 }
 
-QStringList FpsLayer::renderPosition() const
+void FpsLayer::paint( QPainter *painter )
 {
-    return QStringList() << "USER_TOOLS";
-}
-
-bool FpsLayer::render( GeoPainter *painter,
-                       ViewportParams *viewport,
-                       const QString &renderPos,
-                       GeoSceneLayer *layer )
-{
-    Q_UNUSED( viewport );
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
-
     const qreal fps = 1000.0 / (qreal)( m_time->elapsed() );
     const QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
 
@@ -56,13 +41,6 @@ bool FpsLayer::render( GeoPainter *painter,
     painter->setPen( Qt::white );
     painter->setBrush( Qt::white );
     painter->drawText( fpsLabelPos.x() - 1, fpsLabelPos.y() - 1, fpsString );
-
-    return true;
-}
-
-qreal FpsLayer::zValue() const
-{
-    return std::numeric_limits<qreal>::max();
 }
 
 }

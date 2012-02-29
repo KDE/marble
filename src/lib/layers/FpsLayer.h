@@ -5,39 +5,24 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2011,2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_FPSLAYER_H
 #define MARBLE_FPSLAYER_H
 
-#include "LayerInterface.h"
-
+class QPainter;
 class QTime;
 
 namespace Marble
 {
 
-class FpsLayer : public LayerInterface
+class FpsLayer
 {
 public:
     explicit FpsLayer( QTime *time );
 
-    /**
-     * @reimp
-     */
-    virtual QStringList renderPosition() const;
-
-    /**
-     * @reimp
-     */
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-       const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
-
-    /**
-      * @reimp
-      */
-    virtual qreal zValue() const;
+    void paint( QPainter *painter );
 
 private:
     QTime *const m_time;

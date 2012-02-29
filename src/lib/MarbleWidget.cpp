@@ -7,7 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
-// Copyright 2010-2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "MarbleWidget.h"
@@ -770,12 +770,6 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
     QTime t;
     t.start();
 
-    // FIXME: Better way to get the GeoPainter
-    bool  doClip = true;
-    if ( projection() == Spherical )
-        doClip = ( radius() > width() / 2
-                   || radius() > height() / 2 );
-
     QPaintDevice *paintDevice = this;
     QImage image;
     if (!isEnabled())
@@ -791,12 +785,19 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
         paintDevice = &image;
     }
 
-    // Create a painter that will do the painting.
-    GeoPainter painter( paintDevice, d->m_map.viewport(),
-                        d->m_map.mapQuality(), doClip );
-    QRect  dirtyRect = evt->rect();
+    {
+        // FIXME: Better way to get the GeoPainter
+        bool  doClip = true;
+        if ( projection() == Spherical )
+            doClip = ( radius() > width() / 2
+                       || radius() > height() / 2 );
 
-    d->m_map.paint( painter, dirtyRect );
+        // Create a painter that will do the painting.
+        GeoPainter geoPainter( paintDevice, d->m_map.viewport(),
+                               d->m_map.mapQuality(), doClip );
+
+        d->m_map.paint( geoPainter, evt->rect() );
+    }
 
     if ( !isEnabled() )
     {
@@ -813,8 +814,9 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
 
     if ( d->m_showFrameRate )
     {
-        FpsLayer fpsLayer( &t );
-        fpsLayer.render( &painter, d->m_map.viewport() );
+        QPainter painter( this );
+        FpsLayer fpsPainter( &t );
+        fpsPainter.paint( &painter );
 
         const qreal fps = 1000.0 / (qreal)( t.elapsed() + 1 );
         emit framesPerSecond( fps );

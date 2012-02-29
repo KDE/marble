@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 // Copyright 2008      Carlos Licea <carlos.licea@kdemail.net>
 // Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
-// Copyright 2010-2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
@@ -699,8 +699,8 @@ void MarbleMap::paint( GeoPainter &painter, const QRect &dirtyRect )
     d->m_layerManager.renderLayers( &painter, &d->m_viewport );
 
     if ( d->m_showFrameRate ) {
-        FpsLayer fpsLayer( &t );
-        fpsLayer.render( &painter, &d->m_viewport );
+        FpsLayer fpsPainter( &t );
+        fpsPainter.paint( &painter );
     }
 
     const qreal fps = 1000.0 / (qreal)( t.elapsed() );
