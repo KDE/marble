@@ -55,7 +55,6 @@ endif (QTONLY)
 set(marblewidget_SRCS
     ${geodata_SRCS}
     ${graphicsview_SRCS}
-    ${screengraphicsitem_SRCS}
     ${layers_SRCS}
     blendings/Blending.cpp
     blendings/BlendingAlgorithms.cpp
