@@ -199,10 +199,9 @@ MarbleGraphicsItem::CacheMode MarbleGraphicsItem::cacheMode() const
     return p()->m_cacheMode;
 }
 
-void MarbleGraphicsItem::setCacheMode( CacheMode mode, const QSize & logicalCacheSize )
+void MarbleGraphicsItem::setCacheMode( CacheMode mode )
 {
     p()->m_cacheMode = mode;
-    p()->m_logicalCacheSize = logicalCacheSize;
     if ( p()->m_cacheMode == NoCache ) {
         p()->m_removeCachedPixmap = true;
     }

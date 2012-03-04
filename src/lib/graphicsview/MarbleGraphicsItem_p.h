@@ -150,7 +150,6 @@ class MarbleGraphicsItemPrivate
     }
 
     QSizeF m_size;
-    QSize m_logicalCacheSize;
 
     bool m_removeCachedPixmap;
 

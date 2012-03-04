@@ -88,7 +88,7 @@ class MARBLE_EXPORT MarbleGraphicsItem
     /**
      * Set the cache mode of the item
      */
-    void setCacheMode( CacheMode mode, const QSize & logicalCacheSize = QSize() );
+    void setCacheMode( CacheMode mode );
 
     /**
      * Schedules an painting update for the Item. As long it is not added to an GraphicsScene
