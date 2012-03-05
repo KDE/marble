@@ -16,15 +16,31 @@ namespace Marble
 ShpPlugin::ShpPlugin( QObject *parent ) : RunnerPlugin( parent )
 {
     setCapabilities( Parsing );
-    setName( tr( "Shp File Parser" ) );
-    setNameId( "Shp" );
-    setDescription( tr( "Create GeoDataDocument from Shp Files" ) );
-    setGuiString( tr( "Shp Parser" ) );
+}
+
+QString ShpPlugin::name() const
+{
+    return tr( "Shp File Parser" );
+}
+
+QString ShpPlugin::guiString() const
+{
+    return tr( "Shp Parser" );
+}
+
+QString ShpPlugin::nameId() const
+{
+    return "Shp";
 }
 
 QString ShpPlugin::version() const
 {
     return "1.0";
+}
+
+QString ShpPlugin::description() const
+{
+    return tr( "Create GeoDataDocument from Shp Files" );
 }
 
 QString ShpPlugin::copyrightYears() const

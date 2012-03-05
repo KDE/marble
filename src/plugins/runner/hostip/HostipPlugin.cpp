@@ -21,15 +21,31 @@ HostipPlugin::HostipPlugin( QObject *parent ) : RunnerPlugin( parent )
     setCapabilities( smallScreen ? None : Search );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
-    setName( tr( "Hostip.info" ) );
-    setNameId( "hostip" );
-    setDescription( tr( "Host name and IP geolocation search using the hostip.info service" ) );
-    setGuiString( tr( "Hostip.info Search")  );
+}
+
+QString HostipPlugin::name() const
+{
+    return tr( "Hostip.info" );
+}
+
+QString HostipPlugin::guiString() const
+{
+    return tr( "Hostip.info Search" );
+}
+
+QString HostipPlugin::nameId() const
+{
+    return "hostip";
 }
 
 QString HostipPlugin::version() const
 {
     return "1.0";
+}
+
+QString HostipPlugin::description() const
+{
+    return tr( "Host name and IP geolocation search using the hostip.info service" );
 }
 
 QString HostipPlugin::copyrightYears() const

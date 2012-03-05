@@ -22,15 +22,31 @@ RoutinoPlugin::RoutinoPlugin( QObject *parent ) : RunnerPlugin( parent )
     setCapabilities( Routing );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( true );
-    setName( tr( "Routino" ) );
-    setNameId( "routino" );
-    setDescription( tr( "Retrieves routes from routino" ) );
-    setGuiString( tr( "Routino Routing" ) );
+}
+
+QString RoutinoPlugin::name() const
+{
+    return tr( "Routino" );
+}
+
+QString RoutinoPlugin::guiString() const
+{
+    return tr( "Routino Routing" );
+}
+
+QString RoutinoPlugin::nameId() const
+{
+    return "routino";
 }
 
 QString RoutinoPlugin::version() const
 {
     return "1.0";
+}
+
+QString RoutinoPlugin::description() const
+{
+    return tr( "Retrieves routes from routino" );
 }
 
 QString RoutinoPlugin::copyrightYears() const

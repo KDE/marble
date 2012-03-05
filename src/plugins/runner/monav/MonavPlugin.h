@@ -33,7 +33,15 @@ public:
 
     explicit MonavPlugin( QObject *parent = 0 );
 
+    QString name() const;
+
+    QString guiString() const;
+
+    QString nameId() const;
+
     QString version() const;
+
+    QString description() const;
 
     QString copyrightYears() const;
 

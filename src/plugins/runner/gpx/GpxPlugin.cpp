@@ -16,15 +16,31 @@ namespace Marble
 GpxPlugin::GpxPlugin( QObject *parent ) : RunnerPlugin( parent )
 {
     setCapabilities( Parsing );
-    setName( tr( "Gpx File Parser" ) );
-    setNameId( "Gpx" );
-    setDescription( tr( "Create GeoDataDocument from Gpx Files" ) );
-    setGuiString( tr( "Gpx Parser" ) );
+}
+
+QString GpxPlugin::name() const
+{
+    return tr( "Gpx File Parser" );
+}
+
+QString GpxPlugin::guiString() const
+{
+    return tr( "Gpx Parser" );
+}
+
+QString GpxPlugin::nameId() const
+{
+    return "Gpx";
 }
 
 QString GpxPlugin::version() const
 {
     return "1.0";
+}
+
+QString GpxPlugin::description() const
+{
+    return tr( "Create GeoDataDocument from Gpx Files" );
 }
 
 QString GpxPlugin::copyrightYears() const

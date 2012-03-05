@@ -221,10 +221,6 @@ MonavPlugin::MonavPlugin( QObject *parent ) : RunnerPlugin( parent ), d( new Mon
 {
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( true );
-    setName( tr( "Monav" ) );
-    setNameId( "monav" );
-    setDescription( tr( "Offline routing using the monav daemon" ) );
-    setGuiString( tr( "Monav Routing" ) );
     setCapabilities( Routing /*| ReverseGeocoding */ );
 
     if ( d->isDaemonInstalled() ) {
@@ -244,9 +240,29 @@ MonavPlugin::~MonavPlugin()
     delete d;
 }
 
+QString MonavPlugin::name() const
+{
+    return tr( "Monav" );
+}
+
+QString MonavPlugin::guiString() const
+{
+    return tr( "Monav Routing" );
+}
+
+QString MonavPlugin::nameId() const
+{
+    return "monav";
+}
+
 QString MonavPlugin::version() const
 {
     return "1.0";
+}
+
+QString MonavPlugin::description() const
+{
+    return tr( "Offline routing using the monav daemon" );
 }
 
 QString MonavPlugin::copyrightYears() const

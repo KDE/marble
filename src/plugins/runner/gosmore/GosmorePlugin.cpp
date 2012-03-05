@@ -23,15 +23,31 @@ GosmorePlugin::GosmorePlugin( QObject *parent ) : RunnerPlugin( parent )
     setCapabilities( ReverseGeocoding | Routing );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( true );
-    setName( tr( "Gosmore" ) );
-    setNameId( "gosmore" );
-    setDescription( tr( "Retrieves routes from gosmore" ) );
-    setGuiString( tr( "Gosmore Routing" ) );
+}
+
+QString GosmorePlugin::name() const
+{
+    return tr( "Gosmore" );
+}
+
+QString GosmorePlugin::guiString() const
+{
+    return tr( "Gosmore Routing" );
+}
+
+QString GosmorePlugin::nameId() const
+{
+    return "gosmore";
 }
 
 QString GosmorePlugin::version() const
 {
     return "1.0";
+}
+
+QString GosmorePlugin::description() const
+{
+    return tr( "Retrieves routes from gosmore" );
 }
 
 QString GosmorePlugin::copyrightYears() const

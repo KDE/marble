@@ -75,14 +75,6 @@ public:
 
     // Overridden methods with default implementations
 
-    virtual QString name() const;
-
-    virtual QString guiString() const;
-
-    virtual QString nameId() const;
-
-    virtual QString description() const;
-
     virtual QIcon icon() const;
 
     virtual void initialize();
@@ -118,16 +110,6 @@ protected:
     void setSupportedCelestialBodies( const QStringList &celestialBodies );
 
     void setCanWorkOffline( bool canWorkOffline );
-
-    void setName( const QString &name );
-
-    void setGuiString( const QString &guiString );
-
-    void setNameId( const QString &nameId );
-
-    void setDescription( const QString &description );
-
-    void setIcon( const QIcon &icon );
 
     void setStatusMessage( const QString &message );
 

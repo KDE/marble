@@ -16,15 +16,31 @@ namespace Marble
 CachePlugin::CachePlugin( QObject *parent ) : RunnerPlugin( parent )
 {
     setCapabilities( Parsing );
-    setName( tr( "Cache File Parser" ) );
-    setNameId( "Cache" );
-    setDescription( tr( "Create GeoDataDocument from Cache Files" ) );
-    setGuiString( tr( "Cache Parser" ) );
+}
+
+QString CachePlugin::name() const
+{
+    return tr( "Cache File Parser" );
+}
+
+QString CachePlugin::guiString() const
+{
+    return tr( "Cache Parser" );
+}
+
+QString CachePlugin::nameId() const
+{
+    return "Cache";
 }
 
 QString CachePlugin::version() const
 {
     return "1.0";
+}
+
+QString CachePlugin::description() const
+{
+    return tr( "Create GeoDataDocument from Cache Files" );
 }
 
 QString CachePlugin::copyrightYears() const

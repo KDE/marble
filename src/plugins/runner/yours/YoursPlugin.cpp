@@ -19,16 +19,32 @@ YoursPlugin::YoursPlugin( QObject *parent ) : RunnerPlugin( parent )
     setCapabilities( Routing );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
-    setName( tr( "Yours" ) );
-    setNameId( "yours" );
-    setDescription( tr( "Worldwide routing using a YOURS server" ) );
     setStatusMessage( tr ( "This service requires an Internet connection." ) );
-    setGuiString( tr( "Yours Routing" ) );
+}
+
+QString YoursPlugin::name() const
+{
+    return tr( "Yours" );
+}
+
+QString YoursPlugin::guiString() const
+{
+    return tr( "Yours Routing" );
+}
+
+QString YoursPlugin::nameId() const
+{
+    return "yours";
 }
 
 QString YoursPlugin::version() const
 {
     return "1.0";
+}
+
+QString YoursPlugin::description() const
+{
+    return tr( "Worldwide routing using a YOURS server" );
 }
 
 QString YoursPlugin::copyrightYears() const

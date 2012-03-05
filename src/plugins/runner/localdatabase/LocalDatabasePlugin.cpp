@@ -17,15 +17,31 @@ namespace Marble
 LocalDatabasePlugin::LocalDatabasePlugin( QObject *parent ) : RunnerPlugin( parent )
 {
     setCapabilities( Search );
-    setName( tr( "Local Database" ) );
-    setNameId( "localdatabase" );
-    setDescription( tr( "Searches the internal Marble database for placemarks" ) );
-    setGuiString( tr( "Local Database Search" ) );
+}
+
+QString LocalDatabasePlugin::name() const
+{
+    return tr( "Local Database" );
+}
+
+QString LocalDatabasePlugin::guiString() const
+{
+    return tr( "Local Database Search" );
+}
+
+QString LocalDatabasePlugin::nameId() const
+{
+    return "localdatabase";
 }
 
 QString LocalDatabasePlugin::version() const
 {
     return "1.0";
+}
+
+QString LocalDatabasePlugin::description() const
+{
+    return tr( "Searches the internal Marble database for placemarks" );
 }
 
 QString LocalDatabasePlugin::copyrightYears() const

@@ -16,15 +16,31 @@ namespace Marble
 KmlPlugin::KmlPlugin( QObject *parent ) : RunnerPlugin( parent )
 {
     setCapabilities( Parsing );
-    setName( tr( "Kml File Parser" ) );
-    setNameId( "Kml" );
-    setDescription( tr( "Create GeoDataDocument from Kml Files" ) );
-    setGuiString( tr( "Kml Parser" ) );
+}
+
+QString KmlPlugin::name() const
+{
+    return tr( "Kml File Parser" );
+}
+
+QString KmlPlugin::guiString() const
+{
+    return tr( "Kml Parser" );
+}
+
+QString KmlPlugin::nameId() const
+{
+    return "Kml";
 }
 
 QString KmlPlugin::version() const
 {
     return "1.0";
+}
+
+QString KmlPlugin::description() const
+{
+    return tr( "Create GeoDataDocument from Kml Files" );
 }
 
 QString KmlPlugin::copyrightYears() const

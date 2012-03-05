@@ -25,7 +25,15 @@ class LatLonPlugin : public RunnerPlugin
 public:
     explicit LatLonPlugin( QObject *parent = 0 );
 
+    QString name() const;
+
+    QString guiString() const;
+
+    QString nameId() const;
+
     QString version() const;
+
+    QString description() const;
 
     QString copyrightYears() const;
 

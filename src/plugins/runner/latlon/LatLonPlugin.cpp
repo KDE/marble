@@ -17,15 +17,31 @@ namespace Marble
 LatLonPlugin::LatLonPlugin( QObject *parent ) : RunnerPlugin( parent )
 {
     setCapabilities( Search );
-    setName( tr( "Geographic Coordinates" ) );
-    setNameId( "latlon" );
-    setDescription( tr( "Direct input of geographic coordinates" ) );
-    setGuiString( tr( "Geographic Coordinates" ) );
+}
+
+QString LatLonPlugin::name() const
+{
+    return tr( "Geographic Coordinates" );
+}
+
+QString LatLonPlugin::guiString() const
+{
+    return tr( "Geographic Coordinates" );
+}
+
+QString LatLonPlugin::nameId() const
+{
+    return "latlon";
 }
 
 QString LatLonPlugin::version() const
 {
     return "1.0";
+}
+
+QString LatLonPlugin::description() const
+{
+    return tr( "Direct input of geographic coordinates" );
 }
 
 QString LatLonPlugin::copyrightYears() const

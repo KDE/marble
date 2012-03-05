@@ -16,15 +16,31 @@ namespace Marble
 PntPlugin::PntPlugin( QObject *parent ) : RunnerPlugin( parent )
 {
     setCapabilities( Parsing );
-    setName( tr( "Pnt File Parser" ) );
-    setNameId( "Pnt" );
-    setDescription( tr( "Create GeoDataDocument from Pnt Files" ) );
-    setGuiString( tr( "Pnt Parser" ) );
+}
+
+QString PntPlugin::name() const
+{
+    return tr( "Pnt File Parser" );
+}
+
+QString PntPlugin::guiString() const
+{
+    return tr( "Pnt Parser" );
+}
+
+QString PntPlugin::nameId() const
+{
+    return "Pnt";
 }
 
 QString PntPlugin::version() const
 {
     return "1.0";
+}
+
+QString PntPlugin::description() const
+{
+    return tr( "Create GeoDataDocument from Pnt Files" );
 }
 
 QString PntPlugin::copyrightYears() const

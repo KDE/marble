@@ -19,15 +19,31 @@ NominatimPlugin::NominatimPlugin( QObject *parent ) : RunnerPlugin( parent )
     setCapabilities( Search | ReverseGeocoding );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
-    setName( tr( "OSM Nominatim" ) );
-    setNameId( "nominatim" );
-    setDescription( tr( "Searches for placemarks using the OpenStreetMap Nominatim service" ) );
-    setGuiString( tr( "OpenStreetMap Nominatim Search" ) );
+}
+
+QString NominatimPlugin::name() const
+{
+    return tr( "OSM Nominatim" );
+}
+
+QString NominatimPlugin::guiString() const
+{
+    return tr( "OpenStreetMap Nominatim Search" );
+}
+
+QString NominatimPlugin::nameId() const
+{
+    return "nominatim";
 }
 
 QString NominatimPlugin::version() const
 {
     return "1.0";
+}
+
+QString NominatimPlugin::description() const
+{
+    return tr( "Searches for placemarks using the OpenStreetMap Nominatim service" );
 }
 
 QString NominatimPlugin::copyrightYears() const

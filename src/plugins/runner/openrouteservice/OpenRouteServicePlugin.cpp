@@ -21,16 +21,32 @@ OpenRouteServicePlugin::OpenRouteServicePlugin( QObject *parent ) : RunnerPlugin
     setCapabilities( Routing );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
-    setName( tr( "OpenRouteService" ) );
-    setNameId( "openrouteservice" );
-    setDescription( tr( "Routing in Europe using openrouteservice.org" ) );
     setStatusMessage( tr ( "This service requires an Internet connection." ) );
-    setGuiString( tr( "OpenRouteService Routing" ) );
+}
+
+QString OpenRouteServicePlugin::name() const
+{
+    return tr( "OpenRouteService" );
+}
+
+QString OpenRouteServicePlugin::guiString() const
+{
+    return tr( "OpenRouteService Routing" );
+}
+
+QString OpenRouteServicePlugin::nameId() const
+{
+    return "openrouteservice";
 }
 
 QString OpenRouteServicePlugin::version() const
 {
     return "1.0";
+}
+
+QString OpenRouteServicePlugin::description() const
+{
+    return tr( "Routing in Europe using openrouteservice.org" );
 }
 
 QString OpenRouteServicePlugin::copyrightYears() const

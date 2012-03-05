@@ -21,16 +21,32 @@ MapQuestPlugin::MapQuestPlugin( QObject *parent ) : RunnerPlugin( parent )
     setCapabilities( Routing );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
-    setName( tr( "MapQuest" ) );
-    setNameId( "mapquest" );
-    setDescription( tr( "Worldwide routing using mapquest.org" ) );
     setStatusMessage( tr ( "This service requires an Internet connection." ) );
-    setGuiString( tr( "MapQuest Routing" ) );
+}
+
+QString MapQuestPlugin::name() const
+{
+    return tr( "MapQuest" );
+}
+
+QString MapQuestPlugin::guiString() const
+{
+    return tr( "MapQuest Routing" );
+}
+
+QString MapQuestPlugin::nameId() const
+{
+    return "mapquest";
 }
 
 QString MapQuestPlugin::version() const
 {
     return "1.0";
+}
+
+QString MapQuestPlugin::description() const
+{
+    return tr( "Worldwide routing using mapquest.org" );
 }
 
 QString MapQuestPlugin::copyrightYears() const

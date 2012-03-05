@@ -16,15 +16,31 @@ namespace Marble
 OsmPlugin::OsmPlugin( QObject *parent ) : RunnerPlugin( parent )
 {
     setCapabilities( Parsing );
-    setName( tr( "Osm File Parser" ) );
-    setNameId( "Osm" );
-    setDescription( tr( "Create GeoDataDocument from Osm Files" ) );
-    setGuiString( tr( "Osm Parser" ) );
+}
+
+QString OsmPlugin::name() const
+{
+    return tr( "Osm File Parser" );
+}
+
+QString OsmPlugin::guiString() const
+{
+    return tr( "Osm Parser" );
+}
+
+QString OsmPlugin::nameId() const
+{
+    return "Osm";
 }
 
 QString OsmPlugin::version() const
 {
     return "1.0";
+}
+
+QString OsmPlugin::description() const
+{
+    return tr( "Create GeoDataDocument from Osm Files" );
 }
 
 QString OsmPlugin::copyrightYears() const

@@ -24,19 +24,35 @@ LocalOsmSearchPlugin::LocalOsmSearchPlugin( QObject *parent ) :
     setCapabilities( Search );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( true );
-    setName( tr( "Local OSM Search" ) );
-    setNameId( "local-osm-search" );
-    setDescription( tr( "Searches for addresses and points of interest in offline maps." ) );
-    setGuiString( tr( "Offline OpenStreetMap Search")  );
 
     m_watcher.addPath( MarbleDirs::localPath() + "/maps/earth/placemarks/" );
     connect( &m_watcher, SIGNAL( directoryChanged( QString ) ), this, SLOT( updateDirectory( QString ) ) );
     connect( &m_watcher, SIGNAL( fileChanged( QString ) ), this, SLOT( updateFile( QString ) ) );
 }
 
+QString LocalOsmSearchPlugin::name() const
+{
+    return tr( "Local OSM Search" );
+}
+
+QString LocalOsmSearchPlugin::guiString() const
+{
+    return tr( "Offline OpenStreetMap Search" );
+}
+
+QString LocalOsmSearchPlugin::nameId() const
+{
+    return "local-osm-search";
+}
+
 QString LocalOsmSearchPlugin::version() const
 {
     return "1.0";
+}
+
+QString LocalOsmSearchPlugin::description() const
+{
+    return tr( "Searches for addresses and points of interest in offline maps." );
 }
 
 QString LocalOsmSearchPlugin::copyrightYears() const
