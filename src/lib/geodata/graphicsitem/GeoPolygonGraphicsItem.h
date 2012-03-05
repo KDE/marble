@@ -26,6 +26,11 @@ public:
     void setPolygon( const GeoDataPolygon* polygon );
     void setLinearRing( const GeoDataLinearRing* ring );
 
+    virtual GeoDataCoordinates coordinate() const;
+    virtual void coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const;
+
+    virtual GeoDataLatLonAltBox latLonAltBox() const;
+
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );
 

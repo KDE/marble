@@ -34,16 +34,43 @@ void GeoPolygonGraphicsItem::setPolygon( const GeoDataPolygon* polygon )
 {
     m_polygon = polygon;
     m_ring = 0;
-    setCoordinate( m_polygon->latLonAltBox().center() );
-    setLatLonAltBox( m_polygon->latLonAltBox() );
 }
 
 void GeoPolygonGraphicsItem::setLinearRing( const GeoDataLinearRing* ring )
 {
     m_polygon = 0;
     m_ring = ring;
-    setCoordinate( m_ring->latLonAltBox().center() );
-    setLatLonAltBox( m_ring->latLonAltBox() );
+}
+
+GeoDataCoordinates GeoPolygonGraphicsItem::coordinate() const
+{
+    if( m_polygon ) {
+        return m_polygon->latLonAltBox().center();
+    } else {
+        return m_ring->latLonAltBox().center();
+    }
+}
+
+void GeoPolygonGraphicsItem::coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const
+{
+    GeoDataCoordinates coords;
+    if( m_polygon ) {
+        coords = m_polygon->latLonAltBox().center();
+    } else {
+        coords = m_ring->latLonAltBox().center();
+    }
+    longitude = coords.longitude();
+    latitude = coords.latitude();
+    altitude = coords.altitude();
+}
+
+GeoDataLatLonAltBox GeoPolygonGraphicsItem::latLonAltBox() const
+{
+    if( m_polygon ) {
+        return m_polygon->latLonAltBox();
+    } else {
+        return m_ring->latLonAltBox();
+    }
 }
 
 void GeoPolygonGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,

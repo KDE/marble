@@ -49,13 +49,13 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     /**
      * Return the coordinate of the item as a GeoDataCoordinates
      */
-    GeoDataCoordinates coordinate() const;
+    virtual GeoDataCoordinates coordinate() const;
 
     /**
      * Return the coordinate of the item as @p longitude
      * and @p latitude.
      */
-    void coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const;
+    virtual void coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const;
 
     /**
      * Set the coordinate of the item in @p longitude and
@@ -138,7 +138,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     /**
      * Returns the box that is used to determine if an item is active or inactive.
      */
-    GeoDataLatLonAltBox latLonAltBox() const;
+    virtual GeoDataLatLonAltBox latLonAltBox() const;
 
     /**
      * Set the box used to determine if an item is active or inactive. If an empty box is passed
