@@ -33,10 +33,6 @@ CrosshairsPlugin::CrosshairsPlugin ( )
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )
 {
-    setVersion( "1.0" );
-    setCopyrightYears( QList<int>() << 2009 << 2010 );
-    addAuthor( "Cezar Mocan", "cezarmocan@gmail.com" );
-    addAuthor( "Torsten Rahn", "tackat@kde.org" );
 }
 
 CrosshairsPlugin::~CrosshairsPlugin ()
@@ -75,9 +71,26 @@ QString CrosshairsPlugin::nameId() const
     return QString( "crosshairs" );
 }
 
+QString CrosshairsPlugin::version() const
+{
+    return "1.0";
+}
+
 QString CrosshairsPlugin::description() const
 {
     return tr( "A plugin that shows crosshairs." );
+}
+
+QString CrosshairsPlugin::copyrightYears() const
+{
+    return "2009, 2010";
+}
+
+QList<PluginAuthor> CrosshairsPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Cezar Mocan", "cezarmocan@gmail.com" )
+            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" );
 }
 
 QIcon CrosshairsPlugin::icon () const

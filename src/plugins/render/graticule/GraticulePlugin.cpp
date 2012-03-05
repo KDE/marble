@@ -43,10 +43,6 @@ GraticulePlugin::GraticulePlugin()
       ui_configWidget( 0 ),
       m_configDialog( 0 )
 {
-    setVersion( "1.0" );
-    setCopyrightYear( 2009 );
-    addAuthor( "Torsten Rahn", "tackat@kde.org" );
-
     connect( this, SIGNAL( settingsChanged( QString ) ),
              this, SLOT( updateSettings() ) );
     setSettings( QHash<QString,QVariant>() );             
@@ -82,9 +78,25 @@ QString GraticulePlugin::nameId() const
     return QString( "coordinate-grid" );
 }
 
+QString GraticulePlugin::version() const
+{
+    return "1.0";
+}
+
 QString GraticulePlugin::description() const
 {
     return tr( "A plugin that shows a coordinate grid." );
+}
+
+QString GraticulePlugin::copyrightYears() const
+{
+    return "2009";
+}
+
+QList<PluginAuthor> GraticulePlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" );
 }
 
 QIcon GraticulePlugin::icon () const

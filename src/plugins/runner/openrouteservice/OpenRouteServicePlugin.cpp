@@ -28,6 +28,22 @@ OpenRouteServicePlugin::OpenRouteServicePlugin( QObject *parent ) : RunnerPlugin
     setGuiString( tr( "OpenRouteService Routing" ) );
 }
 
+QString OpenRouteServicePlugin::version() const
+{
+    return "1.0";
+}
+
+QString OpenRouteServicePlugin::copyrightYears() const
+{
+    return "2010";
+}
+
+QList<PluginAuthor> OpenRouteServicePlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+}
+
 MarbleAbstractRunner* OpenRouteServicePlugin::newRunner() const
 {
     return new OpenRouteServiceRunner;

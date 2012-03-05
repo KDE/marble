@@ -41,6 +41,6 @@ class NetworkPluginInterface: public PluginInterface
 
 }
 
-Q_DECLARE_INTERFACE( Marble::NetworkPluginInterface, "org.kde.Marble.NetworkPluginInterface/1.00" )
+Q_DECLARE_INTERFACE( Marble::NetworkPluginInterface, "org.kde.Marble.NetworkPluginInterface/1.01" )
 
 #endif

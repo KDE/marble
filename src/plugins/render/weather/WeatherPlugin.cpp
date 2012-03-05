@@ -42,10 +42,6 @@ WeatherPlugin::WeatherPlugin()
 {
     m_icon.addFile( MarbleDirs::path( "weather/weather-clear.png" ) );
     setNameId( "weather" );
-    setVersion( "1.1" );
-    setCopyrightYears( QList<int>() << 2009 << 2011 );
-    addAuthor( "Bastian Holst", "bastianholst@gmx.de" );
-    addAuthor( "Valery Kharitonov", "kharvd@gmail.com" );
     setDataText( tr( "Supported by backstage.bbc.co.uk.\nWeather data from UK MET Office" ) );
 
     // Plugin is enabled by default
@@ -93,9 +89,26 @@ QString WeatherPlugin::guiString() const
     return tr( "&Weather" );
 }
 
+QString WeatherPlugin::version() const
+{
+    return "1.1";
+}
+
 QString WeatherPlugin::description() const
 {
     return tr( "Download weather information from many weather stations all around the world" );
+}
+
+QString WeatherPlugin::copyrightYears() const
+{
+    return "2009, 2011";
+}
+
+QList<PluginAuthor> WeatherPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" )
+            << PluginAuthor( "Valery Kharitonov", "kharvd@gmail.com" );
 }
 
 QIcon WeatherPlugin::icon() const

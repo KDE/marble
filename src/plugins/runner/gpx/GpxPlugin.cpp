@@ -22,6 +22,22 @@ GpxPlugin::GpxPlugin( QObject *parent ) : RunnerPlugin( parent )
     setGuiString( tr( "Gpx Parser" ) );
 }
 
+QString GpxPlugin::version() const
+{
+    return "1.0";
+}
+
+QString GpxPlugin::copyrightYears() const
+{
+    return "2011";
+}
+
+QList<PluginAuthor> GpxPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+}
+
 MarbleAbstractRunner* GpxPlugin::newRunner() const
 {
     return new GpxRunner;

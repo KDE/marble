@@ -155,20 +155,8 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
  protected:
     bool eventFilter( QObject *, QEvent * );
 
-    /** Copyright years to use in the default about dialog */
-    void setCopyrightYears( const QList<int> years );
-
-    /** Convenience method to set one copyright year */
-    void setCopyrightYear( int year );
-
-    /** Version information to use in the default about dialog */
-    void setVersion( const QString &version );
-
     /** Data text for the default about dialog */
     void setDataText( const QString &text );
-
-    /** Add an author to be displayed in the default about dialog */
-    void addAuthor( const QString &name, const QString &email, const QString &task = tr( "Developer" ) );
 
  private:
     Q_DISABLE_COPY( RenderPlugin )

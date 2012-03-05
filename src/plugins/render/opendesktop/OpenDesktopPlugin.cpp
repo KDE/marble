@@ -26,10 +26,6 @@ OpenDesktopPlugin::OpenDesktopPlugin()
     setNameId( "opendesktop" );
     setEnabled( true ); // Plugin is enabled by default
     setVisible( false ); // Plugin is invisible by default
-
-    setVersion( "1.0" );
-    setCopyrightYear( 2010 );
-    addAuthor( QString::fromUtf8( "Utku Aydin" ), "utkuaydin34@gmail.com" );
 }
 
 void OpenDesktopPlugin::initialize()
@@ -55,9 +51,25 @@ QString OpenDesktopPlugin::guiString() const
     return tr( "&OpenDesktop Community" );
 }
 
+QString OpenDesktopPlugin::version() const
+{
+    return "1.0";
+}
+
 QString OpenDesktopPlugin::description() const
 {
     return tr( "Shows OpenDesktop users' avatars and some extra information about them on the map." );
+}
+
+QString OpenDesktopPlugin::copyrightYears() const
+{
+    return "2010";
+}
+
+QList<PluginAuthor> OpenDesktopPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Utku Aydin" ), "utkuaydin34@gmail.com" );
 }
 
 QIcon OpenDesktopPlugin::icon() const

@@ -73,9 +73,25 @@ QString QtMobilityPositionProviderPlugin::guiString() const
     return "Qt Mobility Location"; /** @todo FIXME I18N ... */
 }
 
+QString QtMobilityPositionProviderPlugin::version() const
+{
+    return "1.0";
+}
+
 QString QtMobilityPositionProviderPlugin::description() const
 {
     return "Reports the GPS position of a QtMobility compatible device."; /** @todo FIXME I18N ... */
+}
+
+QString QtMobilityPositionProviderPlugin::copyrightYears() const
+{
+    return "2011";
+}
+
+QList<PluginAuthor> QtMobilityPositionProviderPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Daniel Marth", "danielmarth@gmx.at" );
 }
 
 QIcon QtMobilityPositionProviderPlugin::icon() const

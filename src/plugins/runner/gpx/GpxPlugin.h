@@ -22,6 +22,12 @@ class GpxPlugin : public RunnerPlugin
 public:
     explicit GpxPlugin( QObject *parent = 0 );
 
+    QString version() const;
+
+    QString copyrightYears() const;
+
+    QList<PluginAuthor> pluginAuthors() const;
+
     virtual MarbleAbstractRunner* newRunner() const;
 };
 

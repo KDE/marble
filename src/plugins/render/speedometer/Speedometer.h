@@ -53,7 +53,13 @@ class Speedometer : public AbstractFloatItem
 
     QString nameId() const;
 
+    QString version() const;
+
     QString description() const;
+
+    QList<PluginAuthor> pluginAuthors() const;
+
+    QString copyrightYears() const;
 
     QIcon icon () const;
 

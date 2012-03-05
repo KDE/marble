@@ -244,6 +244,22 @@ MonavPlugin::~MonavPlugin()
     delete d;
 }
 
+QString MonavPlugin::version() const
+{
+    return "1.0";
+}
+
+QString MonavPlugin::copyrightYears() const
+{
+    return "2010";
+}
+
+QList<PluginAuthor> MonavPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+}
+
 MarbleAbstractRunner* MonavPlugin::newRunner() const
 {
     d->initialize();

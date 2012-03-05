@@ -27,6 +27,22 @@ HostipPlugin::HostipPlugin( QObject *parent ) : RunnerPlugin( parent )
     setGuiString( tr( "Hostip.info Search")  );
 }
 
+QString HostipPlugin::version() const
+{
+    return "1.0";
+}
+
+QString HostipPlugin::copyrightYears() const
+{
+    return "2010";
+}
+
+QList<PluginAuthor> HostipPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+}
+
 MarbleAbstractRunner* HostipPlugin::newRunner() const
 {
     return new HostipRunner;

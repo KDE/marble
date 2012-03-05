@@ -48,10 +48,6 @@ OverviewMap::OverviewMap( const QPointF &point, const QSizeF &size )
     setCacheMode( NoCache );
     connect( this, SIGNAL( settingsChanged( QString ) ),
              this, SLOT( updateSettings() ) );
-
-    setVersion( "1.0" );
-    setCopyrightYear( 2008 );
-    addAuthor( "Torsten Rahn", "tackat@kde.org" );
 }
 
 OverviewMap::~OverviewMap()
@@ -78,9 +74,25 @@ QString OverviewMap::nameId() const
     return QString( "overviewmap" );
 }
 
+QString OverviewMap::version() const
+{
+    return "1.0";
+}
+
 QString OverviewMap::description() const
 {
     return tr("This is a float item that provides an overview map.");
+}
+
+QString OverviewMap::copyrightYears() const
+{
+    return "2008";
+}
+
+QList<PluginAuthor> OverviewMap::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" );
 }
 
 QIcon OverviewMap::icon () const

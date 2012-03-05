@@ -28,10 +28,6 @@ PhotoPlugin::PhotoPlugin()
     setEnabled( true );
     // Plugin is not visible by default
     setVisible( false );
-
-    setVersion( "1.0" );
-    setCopyrightYear( 2009 );
-    addAuthor( "Bastian Holst", "bastianholst@gmx.de" );
 }
      
 void PhotoPlugin::initialize()
@@ -56,12 +52,28 @@ QString PhotoPlugin::guiString() const
 {
     return tr( "&Photos" );
 }
-   
+
+QString PhotoPlugin::version() const
+{
+    return "1.0";
+}
+
 QString PhotoPlugin::description() const
 {
     return tr( "Automatically downloads images from around the world in preference to their popularity" );
 }
-    
+
+QString PhotoPlugin::copyrightYears() const
+{
+    return "2009";
+}
+
+QList<PluginAuthor> PhotoPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" );
+}
+
 QIcon PhotoPlugin::icon() const
 {
     return QIcon();

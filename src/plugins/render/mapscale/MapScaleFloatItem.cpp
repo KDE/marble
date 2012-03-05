@@ -52,11 +52,6 @@ MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
 #ifdef Q_WS_MAEMO_5
         setPosition( QPointF( 220.0, 10.5 ) );
 #endif // Q_WS_MAEMO_5
-
-        setVersion( "1.1" );
-        setCopyrightYears( QList<int>() << 2008 << 2010 );
-        addAuthor( "Torsten Rahn", "tackat@kde.org", tr( "Original Developer" ) );
-        addAuthor( "Khanh-Nhan Nguyen", "khanh.nhan@wpi.edu" );
 }
 
 MapScaleFloatItem::~MapScaleFloatItem()
@@ -83,9 +78,27 @@ QString MapScaleFloatItem::nameId() const
     return QString( "scalebar" );
 }
 
+QString MapScaleFloatItem::version() const
+{
+    return "1.1";
+}
+
 QString MapScaleFloatItem::description() const
 {
-    return tr("This is a float item that provides a map scale.");}
+    return tr("This is a float item that provides a map scale.");
+}
+
+QString MapScaleFloatItem::copyrightYears() const
+{
+    return "2008, 2010";
+}
+
+QList<PluginAuthor> MapScaleFloatItem::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Torsten Rahn", "tackat@kde.org", tr( "Original Developer" ) )
+            << PluginAuthor( "Khanh-Nhan Nguyen", "khanh.nhan@wpi.edu" );
+}
 
 QIcon MapScaleFloatItem::icon () const
 {

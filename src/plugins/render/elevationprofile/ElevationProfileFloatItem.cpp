@@ -52,10 +52,6 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, cons
         m_markerText( &m_markerTextContainer ),
         m_lastMarkerRegion( QRegion() )
 {
-    setVersion( "1.2" );
-    setCopyrightYears( QList<int>() << 2011 << 2012 );
-    addAuthor( QString::fromUtf8 ( "Florian Eßer" ), "f.esser@rwth-aachen.de" );
-
     setVisible( false );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
@@ -113,9 +109,25 @@ QString ElevationProfileFloatItem::nameId() const
     return QString( "elevationprofile" );
 }
 
+QString ElevationProfileFloatItem::version() const
+{
+    return "1.2";
+}
+
 QString ElevationProfileFloatItem::description() const
 {
     return tr("This is a float item that provides a route/track elevation profile.");
+}
+
+QString ElevationProfileFloatItem::copyrightYears() const
+{
+    return "2011, 2012";
+}
+
+QList<PluginAuthor> ElevationProfileFloatItem::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8 ( "Florian Eßer" ), "f.esser@rwth-aachen.de" );
 }
 
 QIcon ElevationProfileFloatItem::icon () const

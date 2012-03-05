@@ -18,10 +18,6 @@ PostalCodePlugin::PostalCodePlugin()
 {
     setNameId( "postalCode" );
 
-    setVersion( "1.0" );
-    setCopyrightYear( 2011 );
-    addAuthor( "Valery Kharitonov", "kharvd@gmail.com" );
-
     setEnabled( true );
     setVisible( false );
 }
@@ -47,6 +43,22 @@ QString PostalCodePlugin::name() const
 QString PostalCodePlugin::guiString() const
 {
     return tr( "Postal Codes" );
+}
+
+QString PostalCodePlugin::version() const
+{
+    return "1.0";
+}
+
+QString PostalCodePlugin::copyrightYears() const
+{
+    return "2011";
+}
+
+QList<PluginAuthor> PostalCodePlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Valery Kharitonov", "kharvd@gmail.com" );
 }
 
 QString PostalCodePlugin::description() const

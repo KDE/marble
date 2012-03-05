@@ -44,10 +44,26 @@ QString QNamNetworkPlugin::guiString() const
     return tr( "QNetworkAccessManager based Network Plugin" );
 }
 
+QString QNamNetworkPlugin::version() const
+{
+    return "1.0";
+}
+
 QString QNamNetworkPlugin::description() const
 {
     return tr( "A network plugin which keeps connected to the hosts used "
                "to deliver a better user experience." );
+}
+
+QString QNamNetworkPlugin::copyrightYears() const
+{
+    return "2009";
+}
+
+QList<PluginAuthor> QNamNetworkPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Jens-Michael Hoffmann", "jensmh@gmx.de" );
 }
 
 QIcon QNamNetworkPlugin::icon() const

@@ -29,6 +29,22 @@ GosmorePlugin::GosmorePlugin( QObject *parent ) : RunnerPlugin( parent )
     setGuiString( tr( "Gosmore Routing" ) );
 }
 
+QString GosmorePlugin::version() const
+{
+    return "1.0";
+}
+
+QString GosmorePlugin::copyrightYears() const
+{
+    return "2010";
+}
+
+QList<PluginAuthor> GosmorePlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+}
+
 MarbleAbstractRunner* GosmorePlugin::newRunner() const
 {
     return new GosmoreRunner;

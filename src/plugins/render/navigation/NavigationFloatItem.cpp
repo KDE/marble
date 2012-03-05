@@ -45,11 +45,6 @@ NavigationFloatItem::NavigationFloatItem( const QPointF &point )
     setEnabled( true );
     setVisible( false );
 
-    setVersion( "1.0" );
-    setCopyrightYears( QList<int>() << 2008 << 2010 );
-    addAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
-    addAuthor( "Bastian Holst", "bastianholst@gmx.de" );
-
     if( m_profiles & MarbleGlobal::SmallScreen ) {
         setFrame( FrameGraphicsItem::RectFrame );
     }
@@ -87,9 +82,26 @@ QString NavigationFloatItem::nameId() const
     return QString("navigation");
 }
 
+QString NavigationFloatItem::version() const
+{
+    return "1.0";
+}
+
 QString NavigationFloatItem::description() const
 {
     return tr("A mouse control to zoom and move the map");
+}
+
+QString NavigationFloatItem::copyrightYears() const
+{
+    return "2008, 2010";
+}
+
+QList<PluginAuthor> NavigationFloatItem::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" )
+            << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" );
 }
 
 QIcon NavigationFloatItem::icon() const

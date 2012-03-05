@@ -34,9 +34,6 @@ WikipediaPlugin::WikipediaPlugin()
       m_settings()
 {
     setNameId( "wikipedia" );
-    setVersion( "1.0" );
-    setCopyrightYear( 2009 );
-    addAuthor( "Bastian Holst", "bastianholst@gmx.de" );
     setDataText( tr( "Geo positions by geonames.org\nTexts by wikipedia.org" ) );
 
     // Plugin is enabled by default
@@ -83,12 +80,28 @@ QString WikipediaPlugin::guiString() const
 {
     return tr( "&Wikipedia" );
 }
-   
+
+QString WikipediaPlugin::version() const
+{
+    return "1.0";
+}
+
 QString WikipediaPlugin::description() const
 {
     return tr( "Automatically downloads Wikipedia articles and shows them on the right position on the map" );
 }
-    
+
+QString WikipediaPlugin::copyrightYears() const
+{
+    return "2009";
+}
+
+QList<PluginAuthor> WikipediaPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" );
+}
+
 QIcon WikipediaPlugin::icon() const
 {
     return m_icon;

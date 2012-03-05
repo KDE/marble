@@ -22,6 +22,22 @@ PntPlugin::PntPlugin( QObject *parent ) : RunnerPlugin( parent )
     setGuiString( tr( "Pnt Parser" ) );
 }
 
+QString PntPlugin::version() const
+{
+    return "1.0";
+}
+
+QString PntPlugin::copyrightYears() const
+{
+    return "2011";
+}
+
+QList<PluginAuthor> PntPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+}
+
 MarbleAbstractRunner* PntPlugin::newRunner() const
 {
     return new PntRunner;

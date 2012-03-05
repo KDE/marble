@@ -35,10 +35,6 @@ CompassFloatItem::CompassFloatItem ( const QPointF &point, const QSizeF &size )
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )
 {
-    setVersion( "1.0" );
-    setCopyrightYears( QList<int>() << 2009 << 2010 );
-    addAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
-    addAuthor( "Torsten Rahn", "tackat@kde.org" );
 }
 
 CompassFloatItem::~CompassFloatItem ()
@@ -66,9 +62,26 @@ QString CompassFloatItem::nameId() const
     return QString( "compass" );
 }
 
+QString CompassFloatItem::version() const
+{
+    return "1.0";
+}
+
 QString CompassFloatItem::description() const
 {
     return tr( "This is a float item that provides a compass." );
+}
+
+QString CompassFloatItem::copyrightYears() const
+{
+    return "2009, 2010";
+}
+
+QList<PluginAuthor> CompassFloatItem::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" )
+            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" );
 }
 
 QIcon CompassFloatItem::icon() const

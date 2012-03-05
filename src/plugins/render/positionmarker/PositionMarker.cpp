@@ -49,14 +49,6 @@ PositionMarker::PositionMarker ()
       m_heading( 0.0 ),
       m_showTrail ( false )
 {
-
-    setVersion( "1.0" );
-    setCopyrightYears( QList<int>() << 2009 << 2010 );
-    addAuthor( "Andrew Manson", "g.real.ate@gmail.com" );
-    addAuthor( "Eckhart Woerner", "ewoerner@kde.org" );
-    addAuthor( "Thibaut Gridel", "tgridel@free.fr" );
-    addAuthor( "Daniel Marth", "danielmarth@gmx.at" );
-
     setSettings( QHash<QString,QVariant>() );
     updateSettings();
     connect( this, SIGNAL( settingsChanged( QString ) ),
@@ -99,9 +91,28 @@ QString PositionMarker::nameId() const
     return QString( "positionMarker" );
 }
 
+QString PositionMarker::version() const
+{
+    return "1.0";
+}
+
 QString PositionMarker::description() const
 {
     return tr( "draws a marker at the current position" );
+}
+
+QString PositionMarker::copyrightYears() const
+{
+    return "2009, 2010";
+}
+
+QList<PluginAuthor> PositionMarker::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Andrew Manson", "g.real.ate@gmail.com" )
+            << PluginAuthor( "Eckhart Woerner", "ewoerner@kde.org" )
+            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" )
+            << PluginAuthor( "Daniel Marth", "danielmarth@gmx.at" );
 }
 
 QIcon PositionMarker::icon() const

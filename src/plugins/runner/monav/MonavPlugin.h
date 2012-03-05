@@ -33,6 +33,12 @@ public:
 
     explicit MonavPlugin( QObject *parent = 0 );
 
+    QString version() const;
+
+    QString copyrightYears() const;
+
+    QList<PluginAuthor> pluginAuthors() const;
+
     ~MonavPlugin();
 
     virtual MarbleAbstractRunner* newRunner() const;

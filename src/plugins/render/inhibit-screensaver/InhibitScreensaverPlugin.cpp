@@ -89,9 +89,25 @@ QString InhibitScreensaverPlugin::nameId() const
     return QString("inhibit-screensaver");
 }
 
+QString InhibitScreensaverPlugin::version() const
+{
+    return "1.0";
+}
+
 QString InhibitScreensaverPlugin::description() const
 {
     return tr( "Inhibits the screensaver during turn-by-turn navigation" );
+}
+
+QString InhibitScreensaverPlugin::copyrightYears() const
+{
+    return "2010";
+}
+
+QList<PluginAuthor> InhibitScreensaverPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
 QIcon InhibitScreensaverPlugin::icon() const

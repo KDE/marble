@@ -33,7 +33,13 @@ class PostalCodePlugin : public AbstractDataPlugin {
 
     QString guiString() const;
 
+    QString version() const;
+
     QString description() const;
+
+    QString copyrightYears() const;
+
+    QList<PluginAuthor> pluginAuthors() const;
 
     QIcon icon() const;
 

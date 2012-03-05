@@ -29,10 +29,6 @@ GpsInfo::GpsInfo( const QPointF &point, const QSizeF &size )
 {
     setVisible( false );
     setCacheMode( NoCache );
-
-    setVersion( "1.0" );
-    setCopyrightYear( 2011 );
-    addAuthor( "Thibaut Gridel", "tgridel@free.fr" );
 }
 
 GpsInfo::~GpsInfo()
@@ -59,9 +55,25 @@ QString GpsInfo::nameId() const
     return QString( "GpsInfo" );
 }
 
+QString GpsInfo::version() const
+{
+    return "1.0";
+}
+
 QString GpsInfo::description() const
 {
     return tr("This is a float item that provides Gps Information.");
+}
+
+QString GpsInfo::copyrightYears() const
+{
+    return "2011";
+}
+
+QList<PluginAuthor> GpsInfo::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
 }
 
 QIcon GpsInfo::icon () const

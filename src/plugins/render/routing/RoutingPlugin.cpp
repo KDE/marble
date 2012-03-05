@@ -444,11 +444,6 @@ RoutingPlugin::RoutingPlugin( const QPointF &position ) :
     setPadding( 0.5 );
     setBorderWidth( 1 );
     setBackground( QBrush( QColor( "white" ) ) );
-
-    setVersion( "1.0" );
-    setCopyrightYear( 2010 );
-    addAuthor( "Siddharth Srivastava", "akssps011@gmail.com" );
-    addAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
 RoutingPlugin::~RoutingPlugin()
@@ -476,9 +471,26 @@ QString RoutingPlugin::nameId() const
     return QString( "routing" );
 }
 
+QString RoutingPlugin::version() const
+{
+    return "1.0";
+}
+
 QString RoutingPlugin::description() const
 {
     return tr( "Routing information and navigation controls" );
+}
+
+QString RoutingPlugin::copyrightYears() const
+{
+    return "2010";
+}
+
+QList<PluginAuthor> RoutingPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Siddharth Srivastava", "akssps011@gmail.com" )
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
 QIcon RoutingPlugin::icon() const

@@ -25,6 +25,22 @@ NominatimPlugin::NominatimPlugin( QObject *parent ) : RunnerPlugin( parent )
     setGuiString( tr( "OpenStreetMap Nominatim Search" ) );
 }
 
+QString NominatimPlugin::version() const
+{
+    return "1.0";
+}
+
+QString NominatimPlugin::copyrightYears() const
+{
+    return "2010";
+}
+
+QList<PluginAuthor> NominatimPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+}
+
 MarbleAbstractRunner* NominatimPlugin::newRunner() const
 {
     return new OsmNominatimRunner;

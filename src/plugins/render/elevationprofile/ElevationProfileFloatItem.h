@@ -62,7 +62,13 @@ class ElevationProfileFloatItem : public AbstractFloatItem
 
     virtual QString nameId() const;
 
+    virtual QString version() const;
+
     virtual QString description() const;
+
+    virtual QString copyrightYears() const;
+
+    virtual QList<PluginAuthor> pluginAuthors() const;
 
     virtual QIcon icon() const;
 

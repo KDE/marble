@@ -44,9 +44,26 @@ QString PlacemarkPositionProviderPlugin::guiString() const
     return tr( "Placemark" );
 }
 
+QString PlacemarkPositionProviderPlugin::version() const
+{
+    return "1.0";
+}
+
 QString PlacemarkPositionProviderPlugin::description() const
 {
     return tr( "Reports the position of a placemark" );
+}
+
+QString PlacemarkPositionProviderPlugin::copyrightYears() const
+{
+    return "2009, 2011";
+}
+
+QList<PluginAuthor> PlacemarkPositionProviderPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Eckhart Wörner" ), "ewoerner@kde.org" )
+            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 
 QIcon PlacemarkPositionProviderPlugin::icon() const

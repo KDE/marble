@@ -75,10 +75,10 @@ void PluginAboutDialog::setAboutText( const QString& about )
     d->u_dialog.m_pMarbleAboutBrowser->setText( about );
 }
 
-void PluginAboutDialog::setAuthors( const QList<Author>& authors )
+void PluginAboutDialog::setAuthors( const QList<PluginAuthor>& authors )
 {
     QString string;
-    foreach ( const Author& author, authors ) {
+    foreach ( const PluginAuthor& author, authors ) {
         string += author.name;
         string += "\n    ";
         string += author.email;

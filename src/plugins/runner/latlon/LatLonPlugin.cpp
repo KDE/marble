@@ -23,6 +23,22 @@ LatLonPlugin::LatLonPlugin( QObject *parent ) : RunnerPlugin( parent )
     setGuiString( tr( "Geographic Coordinates" ) );
 }
 
+QString LatLonPlugin::version() const
+{
+    return "1.0";
+}
+
+QString LatLonPlugin::copyrightYears() const
+{
+    return "2010";
+}
+
+QList<PluginAuthor> LatLonPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+}
+
 MarbleAbstractRunner* LatLonPlugin::newRunner() const
 {
     return new LatLonRunner;

@@ -134,9 +134,26 @@ QString FileReaderPositionProviderPlugin::guiString() const
     return tr( "GPS Position Simulation (File Reader)" );
 }
 
+QString FileReaderPositionProviderPlugin::version() const
+{
+    return "1.0";
+}
+
 QString FileReaderPositionProviderPlugin::description() const
 {
     return tr( "Reports the GPS position from a previously calculated route." );
+}
+
+QString FileReaderPositionProviderPlugin::copyrightYears() const
+{
+    return "2011";
+}
+
+QList<PluginAuthor> FileReaderPositionProviderPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Konrad Enzensberger", "e.konrad@mpegcode.com" )
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
 QIcon FileReaderPositionProviderPlugin::icon() const

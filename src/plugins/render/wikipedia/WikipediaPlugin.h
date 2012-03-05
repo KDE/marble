@@ -44,8 +44,14 @@ class WikipediaPlugin : public AbstractDataPlugin
     
     QString guiString() const;
     
+    QString version() const;
+
+    QString copyrightYears() const;
+
     QString description() const;
-    
+
+    QList<PluginAuthor> pluginAuthors() const;
+
     QIcon icon() const;
 
     QDialog *configDialog();

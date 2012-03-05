@@ -28,6 +28,22 @@ RoutinoPlugin::RoutinoPlugin( QObject *parent ) : RunnerPlugin( parent )
     setGuiString( tr( "Routino Routing" ) );
 }
 
+QString RoutinoPlugin::version() const
+{
+    return "1.0";
+}
+
+QString RoutinoPlugin::copyrightYears() const
+{
+    return "2010";
+}
+
+QList<PluginAuthor> RoutinoPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+}
+
 MarbleAbstractRunner* RoutinoPlugin::newRunner() const
 {
     return new RoutinoRunner;

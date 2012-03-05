@@ -22,6 +22,22 @@ OsmPlugin::OsmPlugin( QObject *parent ) : RunnerPlugin( parent )
     setGuiString( tr( "Osm Parser" ) );
 }
 
+QString OsmPlugin::version() const
+{
+    return "1.0";
+}
+
+QString OsmPlugin::copyrightYears() const
+{
+    return "2011";
+}
+
+QList<PluginAuthor> OsmPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+}
+
 MarbleAbstractRunner* OsmPlugin::newRunner() const
 {
     return new OsmRunner;

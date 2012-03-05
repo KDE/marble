@@ -139,6 +139,6 @@ private:
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Marble::RunnerPlugin::Capabilities)
 
-Q_DECLARE_INTERFACE( Marble::RunnerPlugin, "org.kde.Marble.RunnerPlugin/1.02" )
+Q_DECLARE_INTERFACE( Marble::RunnerPlugin, "org.kde.Marble.RunnerPlugin/1.03" )
 
 #endif // MARBLE_RUNNERPLUGIN_H

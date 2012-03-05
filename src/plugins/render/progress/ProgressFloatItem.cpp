@@ -70,11 +70,6 @@ ProgressFloatItem::ProgressFloatItem ( const QPointF &point, const QSizeF &size 
 
     // Plugin is visible by default on devices with small screens only
     setVisible( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen );    
-
-    setVersion( "1.0" );
-    setCopyrightYears( QList<int>() << 2010 << 2011 );
-    addAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
-    addAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 
 ProgressFloatItem::~ProgressFloatItem ()
@@ -102,9 +97,26 @@ QString ProgressFloatItem::nameId() const
     return QString( "progress" );
 }
 
+QString ProgressFloatItem::version() const
+{
+    return "1.0";
+}
+
 QString ProgressFloatItem::description() const
 {
     return tr( "Shows a pie chart download progress indicator" );
+}
+
+QString ProgressFloatItem::copyrightYears() const
+{
+    return "2010, 2011";
+}
+
+QList<PluginAuthor> ProgressFloatItem::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" )
+            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 
 QIcon ProgressFloatItem::icon() const

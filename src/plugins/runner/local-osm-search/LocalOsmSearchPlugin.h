@@ -28,6 +28,12 @@ class LocalOsmSearchPlugin : public RunnerPlugin
 public:
     explicit LocalOsmSearchPlugin( QObject *parent = 0 );
 
+    QString version() const;
+
+    QString copyrightYears() const;
+
+    QList<PluginAuthor> pluginAuthors() const;
+
     virtual MarbleAbstractRunner* newRunner() const;
 
 private Q_SLOTS:

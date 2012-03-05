@@ -34,6 +34,22 @@ LocalOsmSearchPlugin::LocalOsmSearchPlugin( QObject *parent ) :
     connect( &m_watcher, SIGNAL( fileChanged( QString ) ), this, SLOT( updateFile( QString ) ) );
 }
 
+QString LocalOsmSearchPlugin::version() const
+{
+    return "1.0";
+}
+
+QString LocalOsmSearchPlugin::copyrightYears() const
+{
+    return "2011";
+}
+
+QList<PluginAuthor> LocalOsmSearchPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+}
+
 MarbleAbstractRunner* LocalOsmSearchPlugin::newRunner() const
 {
     if ( !m_databaseLoaded ) {

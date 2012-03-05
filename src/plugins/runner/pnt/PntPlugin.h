@@ -22,6 +22,12 @@ class PntPlugin : public RunnerPlugin
 public:
     explicit PntPlugin( QObject *parent = 0 );
 
+    QString version() const;
+
+    QString copyrightYears() const;
+
+    QList<PluginAuthor> pluginAuthors() const;
+
     virtual MarbleAbstractRunner* newRunner() const;
 };
 

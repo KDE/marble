@@ -60,9 +60,25 @@ QString MaemoPositionProviderPlugin::guiString() const
     return tr( "Maemo" );
 }
 
+QString MaemoPositionProviderPlugin::version() const
+{
+    return "1.0";
+}
+
 QString MaemoPositionProviderPlugin::description() const
 {
     return tr( "Reports the GPS position of a Maemo device (e.g. Nokia N900)." );
+}
+
+QString MaemoPositionProviderPlugin::copyrightYears() const
+{
+    return "2010";
+}
+
+QList<PluginAuthor> MaemoPositionProviderPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
 QIcon MaemoPositionProviderPlugin::icon() const

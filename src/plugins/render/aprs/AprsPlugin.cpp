@@ -46,10 +46,6 @@ AprsPlugin::AprsPlugin()
       m_configDialog( 0 ),
       ui_configWidget( 0 )
 {
-    setVersion( "1.0" );
-    setCopyrightYears( QList<int>() << 2009 << 2010 );
-    addAuthor( "Wes Hardaker", "hardaker@users.sourceforge.net" );
-
     setEnabled( false );
     setVisible( true );
     
@@ -127,9 +123,25 @@ QString AprsPlugin::nameId() const
     return QString( "aprs-plugin" );
 }
 
+QString AprsPlugin::version() const
+{
+    return "1.0";
+}
+
 QString AprsPlugin::description() const
 {
     return tr( "This plugin displays APRS data gleaned from the Internet.  APRS is an Amateur Radio protocol for broadcasting location and other information." );
+}
+
+QString AprsPlugin::copyrightYears() const
+{
+    return "2009, 2010";
+}
+
+QList<PluginAuthor> AprsPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Wes Hardaker", "hardaker@users.sourceforge.net" );
 }
 
 QIcon AprsPlugin::icon () const

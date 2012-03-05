@@ -24,12 +24,6 @@ namespace Marble
 SunPlugin::SunPlugin()
 {
     setVisible( false );
-
-    setVersion( "1.0" );
-    setCopyrightYear( 2011 );
-    addAuthor( "Torsten Rahn", "tackat@kde.org" );
-    addAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de");
-    addAuthor( "Harshit Jain", "hjain.itbhu@gmail.com" );
 }
 
 QStringList SunPlugin::backendTypes() const
@@ -63,9 +57,27 @@ QString SunPlugin::nameId() const
     return QString( "sun" );
 }
 
+QString SunPlugin::version() const
+{
+    return "1.0";
+}
+
 QString SunPlugin::description() const
 {
     return tr( "A plugin that shows the Sun." );
+}
+
+QString SunPlugin::copyrightYears() const
+{
+    return "2011";
+}
+
+QList<PluginAuthor> SunPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" )
+            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de")
+            << PluginAuthor( "Harshit Jain", "hjain.itbhu@gmail.com" );
 }
 
 QIcon SunPlugin::icon () const

@@ -23,6 +23,22 @@ LocalDatabasePlugin::LocalDatabasePlugin( QObject *parent ) : RunnerPlugin( pare
     setGuiString( tr( "Local Database Search" ) );
 }
 
+QString LocalDatabasePlugin::version() const
+{
+    return "1.0";
+}
+
+QString LocalDatabasePlugin::copyrightYears() const
+{
+    return "2010";
+}
+
+QList<PluginAuthor> LocalDatabasePlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+}
+
 MarbleAbstractRunner* LocalDatabasePlugin::newRunner() const
 {
     return new LocalDatabaseRunner;

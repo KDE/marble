@@ -16,18 +16,12 @@
 
 // Marble
 #include "marble_export.h"
+#include "PluginInterface.h"
 
 namespace Marble
 {
 
 class PluginAboutDialogPrivate;
-
-struct Author
-{
-    QString name;
-    QString task;
-    QString email;
-};
 
 class MARBLE_EXPORT PluginAboutDialog : public QDialog
 {
@@ -74,7 +68,7 @@ class MARBLE_EXPORT PluginAboutDialog : public QDialog
     /**
      * Sets the authors working on this plugin.
      */
-    void setAuthors( const QList<Author>& authors );
+    void setAuthors( const QList<PluginAuthor>& authors );
 
     /**
      * Sets the text displayed in the "Authors" tab of the dialog.

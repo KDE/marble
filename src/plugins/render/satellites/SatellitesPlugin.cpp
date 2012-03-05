@@ -37,9 +37,6 @@ SatellitesPlugin::SatellitesPlugin()
      m_configModel( 0 ),
      ui_configWidget( 0 )
 {
-    setVersion( "1.0" );
-    setCopyrightYear( 2011 );
-    addAuthor( "Guillaume Martres", "smarter@ubuntu.com" );
     setDataText( tr( "Satellites orbital elements from <a href=\"http://www.celestrak.com\">http://www.celestrak.com</a>" ) );
 
     connect( this, SIGNAL(settingsChanged(QString)), SLOT(updateSettings()) );
@@ -88,9 +85,25 @@ QString SatellitesPlugin::guiString() const
     return tr( "&Satellites" );
 }
 
+QString SatellitesPlugin::version() const
+{
+    return "1.0";
+}
+
 QString SatellitesPlugin::description() const
 {
     return tr( "This plugin displays satellites and their orbits." );
+}
+
+QString SatellitesPlugin::copyrightYears() const
+{
+    return "2011";
+}
+
+QList<PluginAuthor> SatellitesPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Guillaume Martres", "smarter@ubuntu.com" );
 }
 
 QIcon SatellitesPlugin::icon() const

@@ -35,7 +35,10 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     virtual QString name() const;
     virtual QString nameId() const;
     virtual QString guiString() const;
+    virtual QString version() const;
     virtual QString description() const;
+    virtual QString copyrightYears() const;
+    virtual QList<PluginAuthor> pluginAuthors() const;
     virtual QIcon icon() const;
     virtual void initialize();
     virtual bool isInitialized() const;

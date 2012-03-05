@@ -48,15 +48,6 @@ MeasureToolPlugin::MeasureToolPlugin()
       m_showSegmentLabels( false )
 {
     m_pen.setWidthF( 2.0 );
-
-    setVersion( "1.0" );
-    setCopyrightYears( QList<int>() << 2006 << 2007 << 2008 << 2011 );
-    addAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
-    addAuthor( "Torsten Rahn", "tackat@kde.org" );
-    addAuthor( "Inge Wallin", "ingwa@kde.org" );
-    addAuthor( "Carlos Licea", "carlos.licea@kdemail.net" );
-    addAuthor( "Michael Henning", "mikehenning@eclipse.net" );
-    addAuthor( "Valery Kharitonov", "kharvd@gmail.com" );
 }
 
 QStringList MeasureToolPlugin::backendTypes() const
@@ -89,9 +80,30 @@ QString MeasureToolPlugin::nameId() const
     return QString( "measure-tool" );
 }
 
+QString MeasureToolPlugin::version() const
+{
+    return "1.0";
+}
+
 QString MeasureToolPlugin::description() const
 {
     return tr( "Measure distances between two or more points." );
+}
+
+QString MeasureToolPlugin::copyrightYears() const
+{
+    return "2006-2008, 2011";
+}
+
+QList<PluginAuthor> MeasureToolPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" )
+            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" )
+            << PluginAuthor( "Inge Wallin", "ingwa@kde.org" )
+            << PluginAuthor( "Carlos Licea", "carlos.licea@kdemail.net" )
+            << PluginAuthor( "Michael Henning", "mikehenning@eclipse.net" )
+            << PluginAuthor( "Valery Kharitonov", "kharvd@gmail.com" );
 }
 
 QIcon MeasureToolPlugin::icon () const

@@ -22,10 +22,6 @@ EarthquakePlugin::EarthquakePlugin()
       m_configDialog( 0 )
 {
     setNameId( "earthquake" );
-    setVersion( "1.0" );
-    setCopyrightYears( QList<int>() << 2010 << 2011 );
-    addAuthor( QString::fromUtf8( "Utku Aydın" ), "utkuaydin34@gmail.com" );
-    addAuthor( "Daniel Marth", "danielmarth@gmx.at" );
 
     setEnabled( true ); // Plugin is enabled by default
     setVisible( false ); // Plugin is invisible by default
@@ -57,9 +53,26 @@ QString EarthquakePlugin::guiString() const
     return tr( "&Earthquakes" );
 }
 
+QString EarthquakePlugin::version() const
+{
+    return "1.0";
+}
+
 QString EarthquakePlugin::description() const
 {
     return tr( "Shows earthquakes on the map." );
+}
+
+QString EarthquakePlugin::copyrightYears() const
+{
+    return "2010, 2011";
+}
+
+QList<PluginAuthor> EarthquakePlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Utku Aydın" ), "utkuaydin34@gmail.com" )
+            << PluginAuthor( QString::fromUtf8( "Daniel Marth" ), "danielmarth@gmx.at" );
 }
 
 QIcon EarthquakePlugin::icon() const

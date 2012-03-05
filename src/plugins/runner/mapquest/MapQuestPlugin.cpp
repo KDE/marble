@@ -28,6 +28,22 @@ MapQuestPlugin::MapQuestPlugin( QObject *parent ) : RunnerPlugin( parent )
     setGuiString( tr( "MapQuest Routing" ) );
 }
 
+QString MapQuestPlugin::version() const
+{
+    return "1.0";
+}
+
+QString MapQuestPlugin::copyrightYears() const
+{
+    return "2012";
+}
+
+QList<PluginAuthor> MapQuestPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+}
+
 MarbleAbstractRunner* MapQuestPlugin::newRunner() const
 {
     return new MapQuestRunner;

@@ -22,6 +22,22 @@ CachePlugin::CachePlugin( QObject *parent ) : RunnerPlugin( parent )
     setGuiString( tr( "Cache Parser" ) );
 }
 
+QString CachePlugin::version() const
+{
+    return "1.0";
+}
+
+QString CachePlugin::copyrightYears() const
+{
+    return "2011";
+}
+
+QList<PluginAuthor> CachePlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+}
+
 MarbleAbstractRunner* CachePlugin::newRunner() const
 {
     return new CacheRunner;

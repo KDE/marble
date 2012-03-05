@@ -22,6 +22,22 @@ KmlPlugin::KmlPlugin( QObject *parent ) : RunnerPlugin( parent )
     setGuiString( tr( "Kml Parser" ) );
 }
 
+QString KmlPlugin::version() const
+{
+    return "1.0";
+}
+
+QString KmlPlugin::copyrightYears() const
+{
+    return "2011";
+}
+
+QList<PluginAuthor> KmlPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+}
+
 MarbleAbstractRunner* KmlPlugin::newRunner() const
 {
     return new KmlRunner;

@@ -22,6 +22,22 @@ ShpPlugin::ShpPlugin( QObject *parent ) : RunnerPlugin( parent )
     setGuiString( tr( "Shp Parser" ) );
 }
 
+QString ShpPlugin::version() const
+{
+    return "1.0";
+}
+
+QString ShpPlugin::copyrightYears() const
+{
+    return "2011";
+}
+
+QList<PluginAuthor> ShpPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+}
+
 MarbleAbstractRunner* ShpPlugin::newRunner() const
 {
     return new ShpRunner;

@@ -34,9 +34,26 @@ QString GpsdPositionProviderPlugin::guiString() const
     return tr( "gpsd" );
 }
 
+QString GpsdPositionProviderPlugin::version() const
+{
+    return "1.0";
+}
+
 QString GpsdPositionProviderPlugin::description() const
 {
     return tr( "Reports the position of a GPS device." );
+}
+
+QString GpsdPositionProviderPlugin::copyrightYears() const
+{
+    return "2009";
+}
+
+QList<PluginAuthor> GpsdPositionProviderPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( QString::fromUtf8( "Eckhart Wörner" ), "ewoerner@kde.org" );
+
 }
 
 QIcon GpsdPositionProviderPlugin::icon() const

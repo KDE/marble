@@ -30,9 +30,6 @@ StarsPlugin::StarsPlugin()
     : m_renderStars( false ),
       m_starsLoaded( false )
 {
-    setVersion( "1.0" );
-    setCopyrightYear( 2008 );
-    addAuthor( "Torsten Rahn", "tackat@kde.org" );
 }
 
 QStringList StarsPlugin::backendTypes() const
@@ -66,9 +63,25 @@ QString StarsPlugin::nameId() const
     return QString( "stars" );
 }
 
+QString StarsPlugin::version() const
+{
+    return "1.0";
+}
+
 QString StarsPlugin::description() const
 {
     return tr( "A plugin that shows the Starry Sky." );
+}
+
+QString StarsPlugin::copyrightYears() const
+{
+    return "2008";
+}
+
+QList<PluginAuthor> StarsPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" );
 }
 
 QIcon StarsPlugin::icon () const
