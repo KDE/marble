@@ -21,6 +21,7 @@ add_subdirectory( gpx )
 add_subdirectory( kml )
 add_subdirectory( osm )
 add_subdirectory( pnt )
+add_subdirectory( log )
 
 find_package( libshp )
 if( LIBSHP_FOUND )
