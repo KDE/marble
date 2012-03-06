@@ -103,10 +103,13 @@ Q_SIGNALS:
     /**
      * @brief emits positionProviderPluginChanged(0) when provider is disabled
      */
-
     void positionProviderPluginChanged( PositionProviderPlugin *activePlugin );
 
  private:
+    Q_PRIVATE_SLOT( d, void setPosition( GeoDataCoordinates position, GeoDataAccuracy accuracy ) )
+    Q_PRIVATE_SLOT( d, void setStatus( PositionProviderStatus status ) )
+
+    friend class PositionTrackingPrivate;
     PositionTrackingPrivate* const d;
 };
 

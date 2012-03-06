@@ -11,7 +11,6 @@
 //
 
 #include "PositionTracking.h"
-#include "PositionTracking_p.h"
 
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
@@ -28,7 +27,37 @@
 
 #include <QtCore/QFile>
 
-using namespace Marble;
+namespace Marble
+{
+
+class PositionTrackingPrivate
+{
+ public:
+    PositionTrackingPrivate( GeoDataTreeModel *model, PositionTracking *parent ) :
+        q( parent ),
+        m_document( 0 ),
+        m_treeModel( model ),
+        m_positionProvider( 0 )
+    {
+    }
+
+    void setPosition( GeoDataCoordinates position, GeoDataAccuracy accuracy );
+
+    void setStatus( PositionProviderStatus status );
+
+    PositionTracking *const q;
+
+    GeoDataDocument     *m_document;
+    GeoDataTreeModel    *m_treeModel;
+
+    GeoDataCoordinates  m_gpsCurrentPosition;
+    GeoDataCoordinates  m_gpsPreviousPosition;
+    GeoDataLineString  *m_currentLineString;
+
+    PositionProviderPlugin* m_positionProvider;
+
+    GeoDataAccuracy m_accuracy;
+};
 
 void PositionTrackingPrivate::setPosition( GeoDataCoordinates position,
                                            GeoDataAccuracy accuracy )
@@ -50,7 +79,7 @@ void PositionTrackingPrivate::setPosition( GeoDataCoordinates position,
             placemark->setCoordinate(position);
             m_gpsCurrentPosition = position;
             qreal speed = m_positionProvider->speed();
-            emit gpsLocation( position, speed );
+            emit q->gpsLocation( position, speed );
         }
     }
 }
@@ -68,17 +97,13 @@ void PositionTrackingPrivate::setStatus( PositionProviderStatus status )
         m_treeModel->addDocument( m_document );
     }
 
-    emit statusChanged( status );
+    emit q->statusChanged( status );
 }
 
 PositionTracking::PositionTracking( GeoDataTreeModel *model )
-     : QObject( model ), d (new PositionTrackingPrivate( model ))
+     : QObject( model ),
+       d( new PositionTrackingPrivate( model, this ) )
 {
-
-    connect( d, SIGNAL( gpsLocation(GeoDataCoordinates,qreal) ),
-             this, SIGNAL( gpsLocation(GeoDataCoordinates,qreal) ));
-    connect( d, SIGNAL( statusChanged(PositionProviderStatus)),
-             this, SIGNAL( statusChanged(PositionProviderStatus) ) );
 
     d->m_document     = new GeoDataDocument();
     d->m_document->setDocumentRole( TrackingDocument );
@@ -138,9 +163,9 @@ void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin
         d->m_positionProvider->setParent( this );
         mDebug() << "Initializing position provider:" << d->m_positionProvider->name();
         connect( d->m_positionProvider, SIGNAL( statusChanged( PositionProviderStatus ) ),
-                d, SLOT( setStatus(PositionProviderStatus) ) );
+                this, SLOT( setStatus( PositionProviderStatus ) ) );
         connect( d->m_positionProvider, SIGNAL( positionChanged( GeoDataCoordinates,GeoDataAccuracy ) ),
-                 d, SLOT( setPosition( GeoDataCoordinates,GeoDataAccuracy ) ) );
+                 this, SLOT( setPosition( GeoDataCoordinates,GeoDataAccuracy ) ) );
 
         d->m_positionProvider->initialize();
     }
@@ -262,5 +287,6 @@ PositionProviderStatus PositionTracking::status() const
     return d->m_positionProvider ? d->m_positionProvider->status() : PositionProviderStatusUnavailable;
 }
 
+}
+
 #include "PositionTracking.moc"
-#include "PositionTracking_p.moc"
