@@ -68,7 +68,7 @@ void PositionTrackingPrivate::setPosition( GeoDataCoordinates position,
     {
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(m_document->child(m_document->size()-1));
 
-        if ( accuracy.horizontal < 250 ) {
+        if ( accuracy.level == GeoDataAccuracy::Detailed ) {
             m_currentLineString->append(position);
         }
 
