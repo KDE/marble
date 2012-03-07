@@ -42,18 +42,6 @@ class MARBLE_EXPORT PositionProviderPlugin : public QObject, public PositionProv
      */
     virtual PositionProviderPlugin * newInstance() const = 0;
 
-    /**
-      * Returns the speed of the gps device in metres per second
-      */
-    virtual qreal speed() const;
-
-    /**
-      * Returns the direction in which the gps device is moving.
-      * The direction is an angle(in degrees) clockwise from geographical north
-      */
-    virtual qreal direction() const;
-
-
  Q_SIGNALS:
     void statusChanged( PositionProviderStatus status ) const;
     void positionChanged( GeoDataCoordinates position,

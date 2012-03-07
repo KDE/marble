@@ -44,16 +44,6 @@ void PositionProviderPlugin::setMarbleModel( const MarbleModel* marbleModel )
     d->m_marbleModel = marbleModel;
 }
 
-qreal PositionProviderPlugin::speed() const
-{
-    return 0;
-}
-
-qreal PositionProviderPlugin::direction() const
-{
-    return 0;
-}
-
 }
 
 #include "PositionProviderPlugin.moc"

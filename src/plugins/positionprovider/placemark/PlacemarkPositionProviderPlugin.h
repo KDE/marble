@@ -49,6 +49,7 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     virtual GeoDataCoordinates position() const;
     virtual GeoDataAccuracy accuracy() const;
     virtual qreal speed() const;
+    virtual qreal direction() const;
 
     void setPlacemark( const GeoDataPlacemark *placemark );
 

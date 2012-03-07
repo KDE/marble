@@ -114,6 +114,11 @@ qreal PlacemarkPositionProviderPlugin::speed() const
     return m_speed;
 }
 
+qreal PlacemarkPositionProviderPlugin::direction() const
+{
+    return 0.0;
+}
+
 void PlacemarkPositionProviderPlugin::setPlacemark( const GeoDataPlacemark *placemark )
 {
     disconnect( marbleModel()->clock(), SIGNAL( timeChanged() ), this, SLOT( updatePosition() ) );

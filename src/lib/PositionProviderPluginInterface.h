@@ -43,6 +43,17 @@ class MARBLE_EXPORT PositionProviderPluginInterface: public PluginInterface
     virtual GeoDataAccuracy accuracy() const = 0;
 
     /**
+     * Returns the speed of the gps device in meters per second
+     */
+    virtual qreal speed() const = 0;
+
+    /**
+     * Returns the direction in which the gps device is moving.
+     * The direction is an angle (in degrees) clockwise from geographical north
+     */
+    virtual qreal direction() const = 0;
+
+    /**
       * Returns an error string to be presented to the user
       * if the status is PositionProviderStatusError. For other
       * states, the result value is undefined.
