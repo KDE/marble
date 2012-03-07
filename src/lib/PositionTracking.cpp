@@ -44,9 +44,9 @@ class PositionTrackingPrivate
     {
     }
 
-    void setPosition( GeoDataCoordinates position, GeoDataAccuracy accuracy );
+    void updatePosition();
 
-    void setStatus( PositionProviderStatus status );
+    void updateStatus();
 
     PositionTracking *const q;
 
@@ -63,12 +63,14 @@ class PositionTrackingPrivate
     PositionProviderPlugin* m_positionProvider;
 };
 
-void PositionTrackingPrivate::setPosition( GeoDataCoordinates position,
-                                           GeoDataAccuracy accuracy )
+void PositionTrackingPrivate::updatePosition()
 {
-    if ( m_positionProvider && m_positionProvider->status() ==
-        PositionProviderStatusAvailable )
-    {
+    Q_ASSERT( m_positionProvider != 0 );
+
+    const GeoDataAccuracy accuracy = m_positionProvider->accuracy();
+    const GeoDataCoordinates position = m_positionProvider->position();
+
+    if ( m_positionProvider->status() == PositionProviderStatusAvailable ) {
         if ( accuracy.horizontal < 250 ) {
             m_currentLineString->append(position);
         }
@@ -76,7 +78,7 @@ void PositionTrackingPrivate::setPosition( GeoDataCoordinates position,
         //if the position has moved then update the current position
         if ( m_gpsPreviousPosition != position ) {
             m_currentPositionPlacemark->setCoordinate( position );
-            m_gpsPreviousPosition = position;
+
             qreal speed = m_positionProvider->speed();
             emit q->gpsLocation( position, speed );
         }
@@ -84,8 +86,12 @@ void PositionTrackingPrivate::setPosition( GeoDataCoordinates position,
 }
 
 
-void PositionTrackingPrivate::setStatus( PositionProviderStatus status )
+void PositionTrackingPrivate::updateStatus()
 {
+    Q_ASSERT( m_positionProvider != 0 );
+
+    const PositionProviderStatus status = m_positionProvider->status();
+
     if (status == PositionProviderStatusAvailable) {
         m_treeModel->removeDocument( &m_document );
         m_currentLineString = new GeoDataLineString;
@@ -157,9 +163,9 @@ void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin
         d->m_positionProvider->setParent( this );
         mDebug() << "Initializing position provider:" << d->m_positionProvider->name();
         connect( d->m_positionProvider, SIGNAL( statusChanged( PositionProviderStatus ) ),
-                this, SLOT( setStatus( PositionProviderStatus ) ) );
+                this, SLOT( updateStatus() ) );
         connect( d->m_positionProvider, SIGNAL( positionChanged( GeoDataCoordinates,GeoDataAccuracy ) ),
-                 this, SLOT( setPosition( GeoDataCoordinates,GeoDataAccuracy ) ) );
+                 this, SLOT( updatePosition() ) );
 
         d->m_positionProvider->initialize();
     }

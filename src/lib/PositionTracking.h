@@ -106,8 +106,8 @@ Q_SIGNALS:
     void positionProviderPluginChanged( PositionProviderPlugin *activePlugin );
 
  private:
-    Q_PRIVATE_SLOT( d, void setPosition( GeoDataCoordinates position, GeoDataAccuracy accuracy ) )
-    Q_PRIVATE_SLOT( d, void setStatus( PositionProviderStatus status ) )
+    Q_PRIVATE_SLOT( d, void updatePosition() )
+    Q_PRIVATE_SLOT( d, void updateStatus() )
 
     friend class PositionTrackingPrivate;
     PositionTrackingPrivate* const d;
