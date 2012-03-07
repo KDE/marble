@@ -150,6 +150,8 @@ PositionTracking::~PositionTracking()
 
 void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin )
 {
+    const PositionProviderStatus oldStatus = status();
+
     if ( d->m_positionProvider ) {
         d->m_positionProvider->deleteLater();
     }
@@ -166,7 +168,12 @@ void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin
 
         d->m_positionProvider->initialize();
     }
+
     emit positionProviderPluginChanged( plugin );
+
+    if ( oldStatus != status() ) {
+        emit statusChanged( status() );
+    }
 }
 
 PositionProviderPlugin* PositionTracking::positionProviderPlugin()
