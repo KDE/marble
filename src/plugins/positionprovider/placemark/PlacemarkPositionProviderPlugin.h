@@ -50,6 +50,7 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     virtual GeoDataAccuracy accuracy() const;
     virtual qreal speed() const;
     virtual qreal direction() const;
+    virtual QDateTime timestamp() const;
 
     void setPlacemark( const GeoDataPlacemark *placemark );
 

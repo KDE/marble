@@ -50,6 +50,7 @@ class GpsdPositionProviderPlugin: public PositionProviderPlugin
     virtual QString error() const;
     virtual qreal speed() const;
     virtual qreal direction() const;
+    virtual QDateTime timestamp() const;
 
  private:
     GpsdThread* m_thread;
@@ -58,6 +59,7 @@ class GpsdPositionProviderPlugin: public PositionProviderPlugin
     GeoDataAccuracy m_accuracy;
     qreal m_speed;
     qreal m_track;
+    QDateTime m_timestamp;
 
  private slots:
     void update(gps_data_t data);

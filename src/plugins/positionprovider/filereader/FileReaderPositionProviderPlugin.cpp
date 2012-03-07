@@ -226,6 +226,11 @@ qreal FileReaderPositionProviderPlugin::direction() const
     return 0.0;
 }
 
+QDateTime FileReaderPositionProviderPlugin::timestamp() const
+{
+    return QDateTime::currentDateTime();
+}
+
 void FileReaderPositionProviderPlugin::update()
 {
     PositionProviderStatus newStatus = PositionProviderStatusAvailable;

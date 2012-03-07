@@ -111,6 +111,11 @@ void GpsdPositionProviderPlugin::update( gps_data_t data )
         {
             m_track = data.fix.track;
         }
+
+        if ( !isnan( data.fix.time ) )
+        {
+            m_timestamp = QDateTime::fromMSecsSinceEpoch( data.fix.time * 1000 );
+        }
     }
     if (m_status != oldStatus)
         emit statusChanged( m_status );
@@ -172,6 +177,11 @@ qreal GpsdPositionProviderPlugin::speed() const
 qreal GpsdPositionProviderPlugin::direction() const
 {
     return m_track;
+}
+
+QDateTime GpsdPositionProviderPlugin::timestamp() const
+{
+    return m_timestamp;
 }
 
 

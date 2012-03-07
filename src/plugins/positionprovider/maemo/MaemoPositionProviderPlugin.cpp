@@ -26,6 +26,7 @@ public:
     QTimer m_timer;
     qreal m_speed;
     qreal m_direction;
+    QDateTime m_timestamp;
 
     MaemoPositionProviderPluginPrivate();
 
@@ -110,6 +111,9 @@ GeoDataCoordinates MaemoPositionProviderPlugin::position() const
         if ( d->m_device->fix->fields & LOCATION_GPS_DEVICE_TRACK_SET ) {
             d->m_direction = d->m_device->fix->track;
         }
+        if ( d->m_device->fix->fields & LOCATION_GPS_DEVICE_TIME_SET ) {
+            d->m_timestamp = QDateTime::fromMSecsSinceEpoch( d->m_device->fix->time * 1000 );
+        }
 
         return GeoDataCoordinates( d->m_device->fix->longitude,
                                    d->m_device->fix->latitude,
@@ -145,6 +149,11 @@ GeoDataAccuracy MaemoPositionProviderPlugin::accuracy() const
     }
 
     return result;
+}
+
+QDateTime MaemoPositionProviderPlugin::timestamp() const
+{
+    d->m_timestamp;
 }
 
 MaemoPositionProviderPlugin::MaemoPositionProviderPlugin() :

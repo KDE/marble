@@ -48,6 +48,7 @@ public:
     virtual qreal speed() const;
     virtual qreal direction() const;
     virtual GeoDataAccuracy accuracy() const;
+    virtual QDateTime timestamp() const;
 
 private Q_SLOTS:
     /** Regular (each second) position and status update */

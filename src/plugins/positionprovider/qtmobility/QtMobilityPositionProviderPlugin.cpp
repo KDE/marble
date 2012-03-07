@@ -179,6 +179,11 @@ qreal QtMobilityPositionProviderPlugin::direction() const
     return 0.0;
 }
 
+QDateTime QtMobilityPositionProviderPlugin::timestamp() const
+{
+    return d->source()->lastKnownPosition().timestamp();
+}
+
 void QtMobilityPositionProviderPlugin::update()
 {
     PositionProviderStatus newStatus = PositionProviderStatusAcquiring;

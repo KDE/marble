@@ -119,6 +119,11 @@ qreal PlacemarkPositionProviderPlugin::direction() const
     return 0.0;
 }
 
+QDateTime PlacemarkPositionProviderPlugin::timestamp() const
+{
+    return marbleModel()->clockDateTime();
+}
+
 void PlacemarkPositionProviderPlugin::setPlacemark( const GeoDataPlacemark *placemark )
 {
     disconnect( marbleModel()->clock(), SIGNAL( timeChanged() ), this, SLOT( updatePosition() ) );

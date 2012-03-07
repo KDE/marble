@@ -40,6 +40,7 @@ public:
     virtual bool isInitialized() const;
     virtual qreal speed() const;
     virtual qreal direction() const;
+    virtual QDateTime timestamp() const;
 
     // Implementing PositionProviderPlugin
     virtual PositionProviderPlugin * newInstance() const;

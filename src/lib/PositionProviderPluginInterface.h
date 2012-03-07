@@ -11,6 +11,7 @@
 #ifndef MARBLE_POSITIONPROVIDERPLUGININTERFACE_H
 #define MARBLE_POSITIONPROVIDERPLUGININTERFACE_H
 
+#include <QtCore/QDateTime>
 #include <QtCore/QtPlugin>
 
 #include "PluginInterface.h"
@@ -52,6 +53,8 @@ class MARBLE_EXPORT PositionProviderPluginInterface: public PluginInterface
      * The direction is an angle (in degrees) clockwise from geographical north
      */
     virtual qreal direction() const = 0;
+
+    virtual QDateTime timestamp() const = 0;
 
     /**
       * Returns an error string to be presented to the user
