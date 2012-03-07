@@ -28,15 +28,17 @@ GeoNode* KmleastTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 
+    qreal const east = parser.readElementText().trimmed().toDouble();
     if( parentItem.represents( kmlTag_LatLonAltBox ) ) {
-        float east = parser.readElementText().trimmed().toFloat();
-
         parentItem.nodeAs<GeoDataLatLonAltBox>()->setEast( east, GeoDataCoordinates::Degree );
+    } else if( parentItem.represents( kmlTag_LatLonBox ) ) {
+        parentItem.nodeAs<GeoDataLatLonBox>()->setEast( east, GeoDataCoordinates::Degree );
+    }
+
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << kmlTag_east << "> containing: " << east
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
-    }
 
     return 0;
 }

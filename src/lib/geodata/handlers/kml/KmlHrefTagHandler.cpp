@@ -26,6 +26,7 @@
 #include "MarbleDebug.h"
 #include "KmlElementDictionary.h"
 #include "GeoDataIconStyle.h"
+#include "GeoDataGroundOverlay.h"
 #include "GeoParser.h"
 
 namespace Marble
@@ -43,7 +44,12 @@ GeoNode* KmlhrefTagHandler::parse( GeoParser& parser ) const
     if ( parentItem.represents( kmlTag_Icon ) ) {
         // we need a more elaborate version of this part
         QString content = parser.readElementText().trimmed();
-        parentItem.nodeAs<GeoDataIconStyle>()->setIconPath( content );
+
+        if ( parentItem.is<GeoDataIconStyle>() ) {
+            parentItem.nodeAs<GeoDataIconStyle>()->setIconPath( content );
+        } else if ( parentItem.is<GeoDataGroundOverlay>() ) {
+            parentItem.nodeAs<GeoDataGroundOverlay>()->setIconPath( content );
+        }
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << kmlTag_href << "> containing: " << content
                  << " parent item name: " << parentItem.qualifiedName().first;

@@ -362,6 +362,7 @@ else (APPLE AND QTONLY)
     geodata/data/GeoDataFeature.h
     geodata/data/GeoDataFolder.h
     geodata/data/GeoDataGeometry.h
+    geodata/data/GeoDataGroundOverlay.h
     geodata/data/GeoDataHotSpot.h
     geodata/data/GeoDataIconStyle.h
     geodata/data/GeoDataLabelStyle.h
@@ -372,6 +373,7 @@ else (APPLE AND QTONLY)
     geodata/data/GeoDataLineStyle.h
     geodata/data/GeoDataLod.h
     geodata/data/GeoDataLookAt.h
+    geodata/data/GeoDataOverlay.h
     geodata/data/GeoDataMultiGeometry.h
     geodata/data/GeoDataObject.h
     geodata/data/GeoDataPlacemark.h

@@ -34,6 +34,7 @@ const char* GeoDataExtendedDataType = "GeoDataExtendedData";
 const char* GeoDataFeatureType = "GeoDataFeature";
 const char* GeoDataFolderType = "GeoDataFolder";
 const char* GeoDataGeometryType = "GeoDataGeometry";
+const char* GeoDataGroundOverlayType = "GeoDataGroundOverlay";
 const char* GeoDataHotspotType = "GeoDataHotspot";
 const char* GeoDataIconStyleType = "GeoDataIconStyle";
 const char* GeoDataInnerBoundaryType = "GeoDataInnerBoundary";
