@@ -32,6 +32,8 @@
 #include "GeoLineStringGraphicsItem.h"
 #include "GeoPolygonGraphicsItem.h"
 #include "GeoTrackGraphicsItem.h"
+#include "GeoDataGroundOverlay.h"
+#include "GeoImageGraphicsItem.h"
 #include "TileId.h"
 
 // Qt
@@ -231,6 +233,14 @@ void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )
     if ( const GeoDataPlacemark *placemark = dynamic_cast<const GeoDataPlacemark*>( object ) )
     {
         createGraphicsItemFromGeometry( placemark->geometry(), placemark );
+    } else if ( object->nodeType() == GeoDataTypes::GeoDataGroundOverlayType ) {
+        GeoDataGroundOverlay const * groundOverlay = static_cast<const GeoDataGroundOverlay*>( object );
+        GeoImageGraphicsItem *item = new GeoImageGraphicsItem;
+        item->setStyle( groundOverlay->style() );
+        item->setVisible( groundOverlay->isGloballyVisible() );
+        item->setLatLonBox( groundOverlay->latLonBox() );
+        item->setImage( groundOverlay->icon() );
+        m_scene.addIdem( item );
     }
 
     // parse all child objects of the container
