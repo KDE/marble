@@ -98,10 +98,7 @@ PositionProviderStatus PlacemarkPositionProviderPlugin::status() const
 
 GeoDataCoordinates PlacemarkPositionProviderPlugin::position() const
 {
-    if ( m_placemark == 0 ) {
-        return GeoDataCoordinates();
-    }
-    return m_placemark->coordinate();
+    return m_coordinates;
 }
 
 GeoDataAccuracy PlacemarkPositionProviderPlugin::accuracy() const
