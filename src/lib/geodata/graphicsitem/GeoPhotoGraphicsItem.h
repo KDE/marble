@@ -8,10 +8,10 @@
 // Copyright 2012      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef MARBLE_GEOIMAGEGRAPHICSITEM_H
-#define MARBLE_GEOIMAGEGRAPHICSITEM_H
+#ifndef MARBLE_GEOPHOTOGRAPHICSITEM_H
+#define MARBLE_GEOPHOTOGRAPHICSITEM_H
 
-#include "GeoDataLatLonBox.h"
+#include "GeoDataPoint.h"
 #include "GeoGraphicsItem.h"
 #include "marble_export.h"
 
@@ -20,29 +20,29 @@
 namespace Marble
 {
 
-class MARBLE_EXPORT GeoImageGraphicsItem : public GeoGraphicsItem
+class MARBLE_EXPORT GeoPhotoGraphicsItem : public GeoGraphicsItem
 {
 public:
-    void setLatLonBox( const GeoDataLatLonBox& box );
+    void setPoint( const GeoDataPoint& point );
 
-    GeoDataLatLonBox latLonBox() const;
+    GeoDataPoint point() const;
 
-    void setImage( const QImage &image );
+    void setPhoto( const QImage &photo );
 
-    QImage image() const;
+    QImage photo() const;
 
-    void setImageFile( const QString &filename );
+    void setPhotoFile( const QString &filename );
 
-    QString imageFile() const;
+    QString photoPath() const;
 
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );
 protected:
-    GeoDataLatLonBox m_latLonBox;
+    GeoDataPoint m_point;
 
-    QImage m_image;
+    QImage m_photo;
 
-    QString m_imageFile;
+    QString m_photoPath;
 };
 
 }

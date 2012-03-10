@@ -33,7 +33,9 @@
 #include "GeoPolygonGraphicsItem.h"
 #include "GeoTrackGraphicsItem.h"
 #include "GeoDataGroundOverlay.h"
+#include "GeoDataPhotoOverlay.h"
 #include "GeoImageGraphicsItem.h"
+#include "GeoPhotoGraphicsItem.h"
 #include "TileId.h"
 
 // Qt
@@ -62,6 +64,7 @@ public:
 
     void createGraphicsItems( const GeoDataObject *object );
     void createGraphicsItemFromGeometry( const GeoDataGeometry *object, const GeoDataPlacemark *placemark );
+    void createGraphicsItemFromOverlay( const GeoDataOverlay *overlay );
 
     QBrush m_currentBrush;
     QPen m_currentPen;
@@ -233,14 +236,8 @@ void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )
     if ( const GeoDataPlacemark *placemark = dynamic_cast<const GeoDataPlacemark*>( object ) )
     {
         createGraphicsItemFromGeometry( placemark->geometry(), placemark );
-    } else if ( object->nodeType() == GeoDataTypes::GeoDataGroundOverlayType ) {
-        GeoDataGroundOverlay const * groundOverlay = static_cast<const GeoDataGroundOverlay*>( object );
-        GeoImageGraphicsItem *item = new GeoImageGraphicsItem;
-        item->setStyle( groundOverlay->style() );
-        item->setVisible( groundOverlay->isGloballyVisible() );
-        item->setLatLonBox( groundOverlay->latLonBox() );
-        item->setImage( groundOverlay->icon() );
-        m_scene.addIdem( item );
+    } else if ( const GeoDataOverlay* overlay = dynamic_cast<const GeoDataOverlay*>( object ) ) {
+        createGraphicsItemFromOverlay( overlay );
     }
 
     // parse all child objects of the container
@@ -293,6 +290,30 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry
     item->setZValue( GeometryLayer::s_defaultZValues[placemark->visualCategory()] );
     item->setMinZoomLevel( GeometryLayer::s_defaultMinZoomLevels[placemark->visualCategory()] );
     m_scene.addIdem( item );
+}
+
+void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *overlay )
+{
+    GeoGraphicsItem* item = 0;
+    if ( overlay->nodeType() == GeoDataTypes::GeoDataGroundOverlayType ) {
+        GeoDataGroundOverlay const * groundOverlay = static_cast<GeoDataGroundOverlay const *>( overlay );
+        GeoImageGraphicsItem *imageItem = new GeoImageGraphicsItem;
+        imageItem->setImageFile( groundOverlay->absoluteIconFile() );
+        imageItem->setLatLonBox( groundOverlay->latLonBox() );
+        item = imageItem;
+    } else if ( overlay->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType ) {
+        GeoDataPhotoOverlay const * photoOverlay = static_cast<GeoDataPhotoOverlay const *>( overlay );
+        GeoPhotoGraphicsItem *photoItem = new GeoPhotoGraphicsItem;
+        photoItem->setPhotoFile( photoOverlay->absoluteIconFile() );
+        photoItem->setPoint( photoOverlay->point() );
+        item = photoItem;
+    }
+
+    if ( item ) {
+        item->setStyle( overlay->style() );
+        item->setVisible( overlay->isGloballyVisible() );
+        m_scene.addIdem( item );
+    }
 }
 
 void GeometryLayer::invalidateScene()
