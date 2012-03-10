@@ -2,24 +2,48 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document>
   <name>Overlay.kml</name>
-  <GroundOverlay>
-    <name>Checkerboard Overlay</name>
-    <drawOrder>1</drawOrder>
-    <Icon>
-      <href>checkerboard.png</href>
-    </Icon>
-    <LatLonBox>
-      <north>49.02317</north>
-      <south>49.02274</south>
-      <east>8.43243</east>
-      <west>8.43137</west>
-    </LatLonBox>
-  </GroundOverlay>
-  <Placemark>
-    <name>Top left corner of the checkerboard</name>
-    <Point>
-      <coordinates>8.43137,49.02317,0</coordinates>
-    </Point>
-  </Placemark>
+  <Folder>
+    <name>Ground Overlay Example</name>
+    <GroundOverlay>
+      <name>Checkerboard Overlay</name>
+      <drawOrder>1</drawOrder>
+      <Icon>
+        <href>checkerboard.png</href>
+      </Icon>
+      <LatLonBox>
+        <north>49.02317</north>
+        <south>49.02274</south>
+        <east>8.43243</east>
+        <west>8.43137</west>
+      </LatLonBox>
+    </GroundOverlay>
+    <Placemark>
+      <name>Checkerboard as ground overlay</name>
+      <description>The checkerboard is placed in a rectangular area</description>
+      <Point>
+        <coordinates>8.43137,49.02317,0</coordinates>
+      </Point>
+    </Placemark>
+  </Folder>
+  <Folder>
+    <name>Photo Overlay Example</name>
+    <PhotoOverlay>
+      <name>Checkerboard Overlay</name>
+      <drawOrder>1</drawOrder>
+      <Icon>
+        <href>checkerboard.png</href>
+      </Icon>
+      <Point>
+        <coordinates>8.43727,49.02207,150</coordinates>
+      </Point>
+    </PhotoOverlay>
+    <Placemark>
+      <name>Checkerboard as photo overlay</name>
+      <description>The checkerboard is placed at a certain position</description>
+      <Point>
+        <coordinates>8.43727,49.02207,150</coordinates>
+      </Point>
+    </Placemark>
+  </Folder>
 </Document>
 </kml>
