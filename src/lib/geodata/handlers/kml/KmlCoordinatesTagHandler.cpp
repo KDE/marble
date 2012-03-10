@@ -32,6 +32,7 @@
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataMultiGeometry.h"
+#include "GeoDataPhotoOverlay.h"
 #include "GeoParser.h"
 #include "global.h"
 
@@ -116,10 +117,10 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
                     }
                     parentItem.nodeAs<GeoDataMultiGeometry>()->append( point );
                 } else if ( parentItem.represents( kmlTag_Point ) ) {
-/*                  mDebug() << "found a free Point!";
+                    // photo overlay
                     qreal lon, lat;
                     coord.geoCoordinates(lon, lat);
-                    parentItem.nodeAs<GeoDataPoint>()->set(lon, lat, coord.altitude());*/
+                    parentItem.nodeAs<GeoDataPoint>()->set(lon, lat, coord.altitude());
                 } else {
                     // raise warning as coordinates out of valid parents found
                 }

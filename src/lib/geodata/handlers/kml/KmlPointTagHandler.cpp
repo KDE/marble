@@ -26,6 +26,7 @@
 #include "KmlElementDictionary.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataMultiGeometry.h"
+#include "GeoDataPhotoOverlay.h"
 #include "GeoParser.h"
 
 namespace Marble
@@ -55,6 +56,12 @@ GeoNode* KmlPointTagHandler::parse( GeoParser& parser ) const
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
         return point;
+    } else if( parentItem.represents( kmlTag_PhotoOverlay ) ) {
+#ifdef DEBUG_TAGS
+        mDebug() << "Parsed <" << kmlTag_Point << "> returning: " << parentItem.nodeAs<GeoDataPhotoOverlay>()
+                 << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
+        return &parentItem.nodeAs<GeoDataPhotoOverlay>()->point();
     }
     return 0;
 }

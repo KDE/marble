@@ -127,6 +127,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_overlayXY;
     GEODATA_EXPORT extern const char* kmlTag_Pair;
     GEODATA_EXPORT extern const char* kmlTag_phoneNumber;
+    GEODATA_EXPORT extern const char* kmlTag_PhotoOverlay;
     GEODATA_EXPORT extern const char* kmlTag_Placemark;
     GEODATA_EXPORT extern const char* kmlTag_Point;
     GEODATA_EXPORT extern const char* kmlTag_Polygon;

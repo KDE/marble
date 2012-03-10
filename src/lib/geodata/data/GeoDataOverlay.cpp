@@ -9,6 +9,10 @@
 //
 
 #include "GeoDataOverlay.h"
+#include "GeoDataDocument.h"
+
+#include <QtCore/QFileInfo>
+#include <QtCore/QDir>
 
 namespace Marble {
 
@@ -24,11 +28,30 @@ public:
     QString m_iconPath;
 
     GeoDataOverlayPrivate();
+
+    QString resolve( const GeoDataObject *object, const QString &filename ) const;
 };
 
 GeoDataOverlayPrivate::GeoDataOverlayPrivate() : m_drawOrder( 0 )
 {
     // nothing to do
+}
+
+QString GeoDataOverlayPrivate::resolve( const GeoDataObject* object, const QString &filename ) const
+{
+    QFileInfo fileInfo( filename );
+    if ( fileInfo.isRelative() ) {
+        GeoDataDocument const * document = dynamic_cast<GeoDataDocument const*>( object );
+        if ( document ) {
+            QFileInfo documentFile = document->fileName();
+            QFileInfo absoluteImage( documentFile.absolutePath() + "/" + filename );
+            return absoluteImage.absoluteFilePath();
+        } else {
+            return resolve( object->parent(), filename );
+        }
+    }
+
+    return filename;
 }
 
 GeoDataOverlay::GeoDataOverlay() : d( new GeoDataOverlayPrivate )
@@ -86,14 +109,19 @@ void GeoDataOverlay::setIcon( const QImage &icon )
     d->m_image = icon;
 }
 
-void GeoDataOverlay::setIconPath( const QString &path )
+void GeoDataOverlay::setIconFile( const QString &path )
 {
     d->m_iconPath = path;
 }
 
-QString GeoDataOverlay::iconPath() const
+QString GeoDataOverlay::iconFile() const
 {
     return d->m_iconPath;
+}
+
+QString GeoDataOverlay::absoluteIconFile() const
+{
+    return d->resolve( this, d->m_iconPath );
 }
 
 }

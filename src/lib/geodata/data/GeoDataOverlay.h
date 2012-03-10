@@ -48,9 +48,16 @@ class GEODATA_EXPORT GeoDataOverlay: public GeoDataFeature
 
     void setIcon( const QImage &icon );
 
-    void setIconPath( const QString &path );
+    void setIconFile( const QString &path );
 
-    QString iconPath() const;
+    QString iconFile() const;
+
+    /**
+      * Returns the #iconFile as an absolute filename. Relative files are
+      * resolved relative to the directory of the GeoDataDocument this overlay
+      * is part of (see #fileName of #GeoDataDocument)
+      */
+    QString absoluteIconFile() const;
 
 private:
     GeoDataOverlayPrivate * const d;

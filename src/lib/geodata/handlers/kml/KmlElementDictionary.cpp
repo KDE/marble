@@ -125,6 +125,7 @@ const char* kmlTag_Overlay = "Overlay";
 const char* kmlTag_overlayXY = "overlayXY";
 const char* kmlTag_Pair = "Pair";
 const char* kmlTag_phoneNumber = "phoneNumber";
+const char* kmlTag_PhotoOverlay = "PhotoOverlay";
 const char* kmlTag_Placemark = "Placemark";
 const char* kmlTag_Point = "Point";
 const char* kmlTag_Polygon = "Polygon";

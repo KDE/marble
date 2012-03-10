@@ -26,6 +26,7 @@
 #include "KmlElementDictionary.h"
 #include "GeoDataIconStyle.h"
 #include "GeoDataGroundOverlay.h"
+#include "GeoDataPhotoOverlay.h"
 #include "GeoParser.h"
 
 namespace Marble
@@ -48,6 +49,8 @@ GeoNode* KmlIconTagHandler::parse( GeoParser& parser ) const
         return parentItem.nodeAs<GeoDataIconStyle>();
     } else if ( parentItem.represents( kmlTag_GroundOverlay ) ) {
         return parentItem.nodeAs<GeoDataGroundOverlay>();
+    }  else if ( parentItem.represents( kmlTag_PhotoOverlay ) ) {
+        return parentItem.nodeAs<GeoDataPhotoOverlay>();
     }
     return 0;
 }

@@ -57,6 +57,7 @@ extern const char* GeoDataLookAtType;
 extern const char* GeoDataMultiGeometryType;
 extern const char* GeoDataObjectType;
 extern const char* GeoDataOuterBoundaryType;
+extern const char* GeoDataPhotoOverlayType;
 extern const char* GeoDataPlacemarkType;
 extern const char* GeoDataPointType;
 extern const char* GeoDataPolygonType;

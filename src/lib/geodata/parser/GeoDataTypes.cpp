@@ -49,6 +49,7 @@ const char* GeoDataLookAtType = "GeoDataLoookAt";
 const char* GeoDataMultiGeometryType = "GeoDataMultyGeometry";
 const char* GeoDataObjectType = "GeoDataObject";
 const char* GeoDataOuterBoundaryType = "GeoDataOuterBoundary";
+const char* GeoDataPhotoOverlayType = "GeoDataPhotoOverlay";
 const char* GeoDataPlacemarkType = "GeoDataPlacemark";
 const char* GeoDataPointType = "GeoDataPoint";
 const char* GeoDataPolygonType = "GeoDataPolygon";
