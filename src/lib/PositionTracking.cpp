@@ -35,8 +35,11 @@ class PositionTrackingPrivate
  public:
     PositionTrackingPrivate( GeoDataTreeModel *model, PositionTracking *parent ) :
         q( parent ),
-        m_document( 0 ),
         m_treeModel( model ),
+        m_currentPositionPlacemark( new GeoDataPlacemark ),
+        m_currentTrackPlacemark( new GeoDataPlacemark ),
+        m_trackSegments( new GeoDataMultiGeometry ),
+        m_document(),
         m_positionProvider( 0 )
     {
     }
@@ -47,8 +50,12 @@ class PositionTrackingPrivate
 
     PositionTracking *const q;
 
-    GeoDataDocument     *m_document;
-    GeoDataTreeModel    *m_treeModel;
+    GeoDataTreeModel *const m_treeModel;
+
+    GeoDataPlacemark *const m_currentPositionPlacemark;
+    GeoDataPlacemark *const m_currentTrackPlacemark;
+    GeoDataMultiGeometry *const m_trackSegments;
+    GeoDataDocument m_document;
 
     GeoDataCoordinates  m_gpsCurrentPosition;
     GeoDataCoordinates  m_gpsPreviousPosition;
@@ -66,8 +73,6 @@ void PositionTrackingPrivate::setPosition( GeoDataCoordinates position,
     if ( m_positionProvider && m_positionProvider->status() ==
         PositionProviderStatusAvailable )
     {
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(m_document->child(m_document->size()-1));
-
         if ( accuracy.horizontal < 250 ) {
             m_currentLineString->append(position);
         }
@@ -75,8 +80,7 @@ void PositionTrackingPrivate::setPosition( GeoDataCoordinates position,
         //if the position has moved then update the current position
         if ( m_gpsCurrentPosition != position )
         {
-            placemark = static_cast<GeoDataPlacemark*>(m_document->child(0));
-            placemark->setCoordinate(position);
+            m_currentPositionPlacemark->setCoordinate( position );
             m_gpsCurrentPosition = position;
             qreal speed = m_positionProvider->speed();
             emit q->gpsLocation( position, speed );
@@ -88,13 +92,10 @@ void PositionTrackingPrivate::setPosition( GeoDataCoordinates position,
 void PositionTrackingPrivate::setStatus( PositionProviderStatus status )
 {
     if (status == PositionProviderStatusAvailable) {
-        Q_ASSERT(m_document);
-        m_treeModel->removeDocument( m_document );
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(m_document->child(m_document->size()-1));
-        GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
+        m_treeModel->removeDocument( &m_document );
         m_currentLineString = new GeoDataLineString;
-        multiGeometry->append(m_currentLineString);
-        m_treeModel->addDocument( m_document );
+        m_trackSegments->append( m_currentLineString );
+        m_treeModel->addDocument( &m_document );
     }
 
     emit q->statusChanged( status );
@@ -104,25 +105,20 @@ PositionTracking::PositionTracking( GeoDataTreeModel *model )
      : QObject( model ),
        d( new PositionTrackingPrivate( model, this ) )
 {
-
-    d->m_document     = new GeoDataDocument();
-    d->m_document->setDocumentRole( TrackingDocument );
-    d->m_document->setName("Position Tracking");
+    d->m_document.setDocumentRole( TrackingDocument );
+    d->m_document.setName("Position Tracking");
 
     // First point is current position
-    GeoDataPlacemark *placemark = new GeoDataPlacemark;
-    placemark->setName("Current Position");
-    placemark->setVisible(false);
-    d->m_document->append(placemark);
+    d->m_currentPositionPlacemark->setName("Current Position");
+    d->m_currentPositionPlacemark->setVisible(false);
+    d->m_document.append(d->m_currentPositionPlacemark);
 
     // Second point is position track
-    placemark = new GeoDataPlacemark;
-    GeoDataMultiGeometry *multiGeometry = new GeoDataMultiGeometry;
     d->m_currentLineString = new GeoDataLineString;
+    d->m_trackSegments->append(d->m_currentLineString);
 
-    multiGeometry->append(d->m_currentLineString);
-    placemark->setGeometry(multiGeometry);
-    placemark->setName("Current Track");
+    d->m_currentTrackPlacemark->setGeometry(d->m_trackSegments);
+    d->m_currentTrackPlacemark->setName("Current Track");
 
     GeoDataStyle style;
     GeoDataLineStyle lineStyle;
@@ -136,18 +132,19 @@ PositionTracking::PositionTracking( GeoDataTreeModel *model )
     GeoDataStyleMap styleMap;
     styleMap.setStyleId("map-track");
     styleMap.insert("normal", QString("#").append(style.styleId()));
-    d->m_document->addStyleMap(styleMap);
-    d->m_document->addStyle(style);
-    d->m_document->append(placemark);
+    d->m_document.addStyleMap(styleMap);
+    d->m_document.addStyle(style);
+    d->m_document.append(d->m_currentTrackPlacemark);
 
-    placemark->setStyleUrl(QString("#").append(styleMap.styleId()));
+    d->m_currentTrackPlacemark->setStyleUrl(QString("#").append(styleMap.styleId()));
 
-    d->m_treeModel->addDocument(d->m_document);
+    d->m_treeModel->addDocument( &d->m_document );
 }
 
 
 PositionTracking::~PositionTracking()
 {
+    d->m_treeModel->removeDocument( &d->m_document );
     delete d;
 }
 
@@ -197,16 +194,14 @@ qreal PositionTracking::direction() const
 
 bool PositionTracking::trackVisible() const
 {
-    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(d->m_document->child(d->m_document->size()-1));
-    return placemark->isVisible();
+    return d->m_currentTrackPlacemark->isVisible();
 }
 
 void PositionTracking::setTrackVisible( bool visible )
 {
-    d->m_treeModel->removeDocument(d->m_document);
-    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(d->m_document->child(d->m_document->size()-1));
-    placemark->setVisible( visible );
-    d->m_treeModel->addDocument(d->m_document);
+    d->m_treeModel->removeDocument( &d->m_document );
+    d->m_currentTrackPlacemark->setVisible( visible );
+    d->m_treeModel->addDocument( &d->m_document );
 }
 
 bool PositionTracking::saveTrack(QString& fileName)
@@ -227,13 +222,13 @@ bool PositionTracking::saveTrack(QString& fileName)
         QFileInfo fileInfo( fileName );
         QString name = fileInfo.baseName();
         document->setName( name );
-        foreach( const GeoDataStyle &style, d->m_document->styles() ) {
+        foreach( const GeoDataStyle &style, d->m_document.styles() ) {
             document->addStyle( style );
         }
-        foreach( const GeoDataStyleMap &map, d->m_document->styleMaps() ) {
+        foreach( const GeoDataStyleMap &map, d->m_document.styleMaps() ) {
             document->addStyleMap( map );
         }
-        GeoDataFeature *track = new GeoDataFeature(d->m_document->last());
+        GeoDataFeature *track = new GeoDataFeature(d->m_document.last());
         track->setName( "Track " + name );
         document->append( track );
 
@@ -248,24 +243,20 @@ bool PositionTracking::saveTrack(QString& fileName)
 
 void PositionTracking::clearTrack()
 {
-    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(d->m_document->child(d->m_document->size()-1));
-    GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
     d->m_currentLineString = new GeoDataLineString;
-    d->m_treeModel->removeDocument( d->m_document );
-    multiGeometry->clear();
-    multiGeometry->append(d->m_currentLineString);
-    d->m_treeModel->addDocument( d->m_document );
+    d->m_treeModel->removeDocument( &d->m_document );
+    d->m_trackSegments->clear();
+    d->m_trackSegments->append( d->m_currentLineString );
+    d->m_treeModel->addDocument( &d->m_document );
 }
 
 bool PositionTracking::isTrackEmpty() const
 {
-    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(d->m_document->child(d->m_document->size()-1));
-    GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
-    if ( multiGeometry->size() < 1 ) {
+    if ( d->m_trackSegments->size() < 1 ) {
         return true;
     }
 
-    if ( multiGeometry->size() == 1 ) {
+    if ( d->m_trackSegments->size() == 1 ) {
         return d->m_currentLineString->isEmpty();
     }
 
