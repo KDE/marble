@@ -21,7 +21,19 @@ class OfflineDataModel : public QSortFilterProxyModel
 
     Q_PROPERTY( int count READ count NOTIFY countChanged )
 
+    Q_FLAGS(VehicleType VehicleTypes)
+
 public:
+    enum VehicleType {
+        None = 0x0,
+        Motorcar = 0x1,
+        Bicycle = 0x2,
+        Pedestrian = 0x4,
+        Any = Motorcar | Bicycle | Pedestrian
+    };
+
+    Q_DECLARE_FLAGS(VehicleTypes, VehicleType)
+
     OfflineDataModel( QObject* parent = 0 );
 
     /** @todo FIXME https://bugreports.qt.nokia.com/browse/QTCOMPONENTS-1206 */
@@ -30,6 +42,8 @@ public:
     virtual QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const;
 
 public Q_SLOTS:
+    void setVehicleTypeFilter( VehicleTypes filter );
+
     void install( int index );
 
     void uninstall( int index );
@@ -47,6 +61,9 @@ Q_SIGNALS:
 
     void uninstallationFinished( int newstuffindex );
 
+protected:
+    virtual bool filterAcceptsRow( int source_row, const QModelIndex &source_parent ) const;
+
 private Q_SLOTS:
     void handleInstallationProgress( int index, qreal progress );
 
@@ -62,6 +79,8 @@ private:
     int toSource( int idx ) const;
 
     Marble::NewstuffModel m_newstuffModel;
+
+    VehicleTypes m_vehicleTypeFilter;
 };
 
 #endif

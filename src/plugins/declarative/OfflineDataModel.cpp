@@ -14,7 +14,8 @@
 #include <QtCore/QModelIndex>
 #include <QtCore/QDir>
 
-OfflineDataModel::OfflineDataModel( QObject *parent ) : QSortFilterProxyModel( parent )
+OfflineDataModel::OfflineDataModel( QObject *parent ) : QSortFilterProxyModel( parent ),
+    m_vehicleTypeFilter( Any )
 {
     m_newstuffModel.setTargetDirectory( Marble::MarbleDirs::localPath() + "/maps" );
     m_newstuffModel.setRegistryFile( QDir::homePath() + "/.kde/share/apps/knewstuff3/marble-offline-data.knsregistry", Marble::NewstuffModel::NameTag );
@@ -65,6 +66,12 @@ QVariant OfflineDataModel::data(const QModelIndex &index, int role) const
     return QSortFilterProxyModel::data( index, role );
 }
 
+void OfflineDataModel::setVehicleTypeFilter( VehicleTypes filter )
+{
+    m_vehicleTypeFilter = filter;
+    reset();
+}
+
 void OfflineDataModel::install( int index )
 {
     m_newstuffModel.install( toSource( index ) );
@@ -108,6 +115,24 @@ void OfflineDataModel::handleInstallationFailed( int index, const QString &error
 void OfflineDataModel::handleUninstallationFinished( int index )
 {
     emit uninstallationFinished( fromSource( index ) );
+}
+
+bool OfflineDataModel::filterAcceptsRow( int source_row, const QModelIndex &source_parent ) const
+{
+    if ( m_vehicleTypeFilter != Any ) {
+        QModelIndex const index = sourceModel()->index( source_row, 0, source_parent );
+        QString const data = sourceModel()->data( index, Qt::DisplayRole ).toString();
+        if ( ( m_vehicleTypeFilter & Motorcar ) && data.contains( "(Motorcar)" ) ) {
+            return true;
+        } else if ( ( m_vehicleTypeFilter & Bicycle ) && data.contains( "(Bicycle)" ) ) {
+            return true;
+        } else if ( ( m_vehicleTypeFilter & Pedestrian ) && data.contains( "(Pedestrian)" ) ) {
+            return true;
+        }
+        return false;
+    }
+
+    return QSortFilterProxyModel::filterAcceptsRow( source_row, source_parent );
 }
 
 #include "OfflineDataModel.moc"
