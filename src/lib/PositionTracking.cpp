@@ -11,6 +11,7 @@
 //
 
 #include "PositionTracking.h"
+#include "PositionTracking_p.h"
 
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
@@ -24,8 +25,6 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "PositionProviderPlugin.h"
-
-#include "PositionTracking_p.h"
 
 #include <QtCore/QFile>
 

@@ -8,12 +8,13 @@
 // Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
+#include "OsmDatabase.h"
+
 #include "DatabaseQuery.h"
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
-#include "OsmDatabase.h"
 #include "PositionTracking.h"
 
 #include <QtCore/QFile>

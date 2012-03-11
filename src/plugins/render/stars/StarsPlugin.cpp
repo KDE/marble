@@ -21,7 +21,6 @@
 #include "MarbleModel.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
-#include "MarbleModel.h"
 
 namespace Marble
 {

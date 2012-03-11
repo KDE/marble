@@ -8,11 +8,11 @@
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
 //
 
-#include "MarbleDebug.h"
-
 #include "SatellitesConfigModel.h"
+
 #include "SatellitesConfigNodeItem.h"
 #include "SatellitesConfigLeafItem.h"
+#include "MarbleDebug.h"
 
 using namespace Marble;
 

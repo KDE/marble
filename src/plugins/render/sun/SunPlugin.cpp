@@ -16,7 +16,6 @@
 #include "MarbleModel.h"
 #include "GeoPainter.h"
 #include "SunLocator.h"
-#include "MarbleModel.h"
 
 namespace Marble
 {
