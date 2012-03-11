@@ -165,7 +165,7 @@ qreal GammaDarkBlending::blendChannel( qreal const bottomColorIntensity,
 qreal LinearBurnBlending::blendChannel( qreal const bottomColorIntensity,
                                         qreal const topColorIntensity ) const
 {
-    return qMax( 0.0, bottomColorIntensity + topColorIntensity - 1.0 );
+    return qMax( qreal(0.0), bottomColorIntensity + topColorIntensity - 1.0 );
 }
 
 qreal MultiplyBlending::blendChannel( qreal const bottomColorIntensity,
