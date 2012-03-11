@@ -19,6 +19,45 @@ Page {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
+
+        ToolButton {
+            id: motorcarFilter
+            iconSource: "qrc:/icons/routing-motorcar.svg";
+            checkable: true
+            checked: true
+            width: 120
+            flat: true
+            onCheckedChanged: parent.adjustFilter()
+        }
+
+        ToolButton {
+            id: bikeFilter
+            iconSource: "qrc:/icons/routing-bike.svg";
+            checkable: true
+            checked: true
+            width: 80
+            flat: true
+            onCheckedChanged: parent.adjustFilter()
+        }
+
+        ToolButton {
+            id: pedestrianFilter
+            iconSource: "qrc:/icons/routing-pedestrian.svg";
+            checkable: true
+            checked: true
+            width: 60
+            flat: true
+            onCheckedChanged: parent.adjustFilter()
+        }
+
+        Item {}
+
+        function adjustFilter() {
+            offlineDataModel.setVehicleTypeFilter(
+                        (motorcarFilter.checked ? OfflineDataModel.Motorcar : OfflineDataModel.None) |
+                        (bikeFilter.checked ? OfflineDataModel.Bicycle : OfflineDataModel.None) |
+                        (pedestrianFilter.checked ? OfflineDataModel.Pedestrian : OfflineDataModel.None) )
+        }
     }
 
     OfflineDataModel {
