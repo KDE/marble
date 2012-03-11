@@ -10,6 +10,7 @@ import QtQuick 1.0
 import QtMultimediaKit 1.1
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
+import org.kde.edu.marble.qtcomponents 0.12
 
 Page {
     id: offlineDataPage
@@ -64,11 +65,22 @@ Page {
         id: offlineDataModel
     }
 
+    SearchField {
+        id: search
+        width: parent.width
+        onSearch: {
+            offlineDataModel.setFilterFixedString(term)
+        }
+    }
+
     ListView {
         id: dataView
-        anchors.fill: parent
-        anchors.margins: 5
         model: offlineDataModel
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: search.bottom
+        anchors.bottom: parent.bottom
+        anchors.margins: 5
         delegate: dataDelegate
         highlight: Rectangle { radius: 5; color: "lightsteelblue" }
         highlightMoveDuration: 200
@@ -76,6 +88,7 @@ Page {
         section.property: "continent"
         section.delegate: sectionDelegate
         currentIndex: -1
+        clip: true
     }
 
     ScrollDecorator {

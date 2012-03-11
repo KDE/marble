@@ -119,7 +119,7 @@ void OfflineDataModel::handleUninstallationFinished( int index )
 
 bool OfflineDataModel::filterAcceptsRow( int source_row, const QModelIndex &source_parent ) const
 {
-    if ( m_vehicleTypeFilter != Any ) {
+    if ( QSortFilterProxyModel::filterAcceptsRow( source_row, source_parent ) ) {
         QModelIndex const index = sourceModel()->index( source_row, 0, source_parent );
         QString const data = sourceModel()->data( index, Qt::DisplayRole ).toString();
         if ( ( m_vehicleTypeFilter & Motorcar ) && data.contains( "(Motorcar)" ) ) {
@@ -129,10 +129,9 @@ bool OfflineDataModel::filterAcceptsRow( int source_row, const QModelIndex &sour
         } else if ( ( m_vehicleTypeFilter & Pedestrian ) && data.contains( "(Pedestrian)" ) ) {
             return true;
         }
-        return false;
     }
 
-    return QSortFilterProxyModel::filterAcceptsRow( source_row, source_parent );
+    return false;
 }
 
 #include "OfflineDataModel.moc"
