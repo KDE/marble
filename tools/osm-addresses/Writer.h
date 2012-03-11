@@ -21,6 +21,8 @@ namespace Marble
 
 class Writer : public QObject
 {
+    Q_OBJECT
+
 public:
     explicit Writer( QObject* parent = 0 );
 
