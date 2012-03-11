@@ -73,8 +73,8 @@ GeoGraphicsScene::~GeoGraphicsScene()
 QList< GeoGraphicsItem* > GeoGraphicsScene::items() const
 {
     QList< GeoGraphicsItem* > result;
-    for( QMap< TileId, QList< GeoGraphicsItem* > >::const_iterator i = d->m_items.constBegin(); 
-         i != d->m_items.constEnd(); i++ )
+    for( QMap< TileId, QList< GeoGraphicsItem* > >::const_iterator i = d->m_items.constBegin();
+         i != d->m_items.constEnd(); ++i )
     {
         const QList< GeoGraphicsItem* > &objects = *i;
         QList< GeoGraphicsItem* >::iterator before = result.begin();
