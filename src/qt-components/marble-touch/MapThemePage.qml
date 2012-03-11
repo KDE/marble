@@ -136,7 +136,7 @@ Page {
                         id: summaryLabel
                         width: parent.width
                         anchors.top: nameLabel.bottom
-                        property string details: "<p><font size=\"-1\">Author: " + author + "</font></p><p><font size=\"-1\">License: " + licence + "</font></p>"
+                        property string details: "<p><font size=\"-1\">Author: " + author + "</font></p><p><font size=\"-1\">License: " + license + "</font></p>"
                         text: "<p><font size=\"-1\">" + summary + (delegateRoot.showDetails ? details : "") + "</font></p>"
                     }
 
