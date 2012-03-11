@@ -25,7 +25,7 @@ class PostalCodeModel : public AbstractDataPluginModel
     Q_OBJECT
 
  public:
-    PostalCodeModel( const PluginManager *pluginManager,
+    explicit PostalCodeModel( const PluginManager *pluginManager,
                    QObject *parent = 0 );
     ~PostalCodeModel();
 

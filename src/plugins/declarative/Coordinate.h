@@ -31,7 +31,7 @@ class Coordinate : public QObject
 
 public:
     /** Constructor */
-    Coordinate( qreal lon = 0.0, qreal lat = 0.0, qreal altitude = 0.0, QObject *parent = 0 );
+    explicit Coordinate( qreal lon = 0.0, qreal lat = 0.0, qreal altitude = 0.0, QObject *parent = 0 );
 
     /** Provides access to the longitude (degree) of the coordinate */
     qreal longitude() const;

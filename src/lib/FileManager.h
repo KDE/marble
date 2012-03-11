@@ -43,7 +43,7 @@ class FileManager : public QObject
      *
      * @param parent The parent object.
      */
-    FileManager( MarbleModel *model,  QObject *parent = 0 );
+    explicit FileManager( MarbleModel *model,  QObject *parent = 0 );
 
     /**
      * Destroys the file manager.

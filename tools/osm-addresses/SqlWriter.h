@@ -23,7 +23,7 @@ namespace Marble
 class SqlWriter : public Writer
 {
 public:
-    SqlWriter( const QString &filename, QObject* parent = 0 );
+    explicit SqlWriter( const QString &filename, QObject* parent = 0 );
 
     ~SqlWriter();
 

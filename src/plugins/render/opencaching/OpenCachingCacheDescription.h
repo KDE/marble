@@ -25,7 +25,7 @@ namespace Marble
 class OpenCachingCacheDescription
 {
 public:    
-    OpenCachingCacheDescription( const QHash<QString, QVariant>& properties = QHash<QString, QVariant>() );
+    explicit OpenCachingCacheDescription( const QHash<QString, QVariant>& properties = QHash<QString, QVariant>() );
 
     void setCacheId( unsigned long long cacheId );
 

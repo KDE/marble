@@ -31,7 +31,7 @@ public:
       * set as well such that this window will appear as a child stackable
       * window.
       */
-    StackableWindow( QWidget* parent = 0, Qt::WindowFlags flags = 0 );
+    explicit StackableWindow( QWidget* parent = 0, Qt::WindowFlags flags = 0 );
 
 Q_SIGNALS:
     /** Emitted prior to the window being closed (hidden) */
