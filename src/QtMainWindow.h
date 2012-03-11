@@ -120,6 +120,7 @@ private Q_SLOTS:
     void  manageBookmarks();
     void  createBookmarkMenu();
     void  createFolderList();
+    void  showBookmarks( bool show );
 
     // Download region dialog
     void  connectDownloadRegionDialog();

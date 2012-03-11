@@ -298,9 +298,7 @@ void MainWindow::createActions()
      m_toggleBookmarkDisplayAct = new QAction(tr( "Show &Bookmarks" ), this);
      m_toggleBookmarkDisplayAct->setStatusTip( tr( "Toggle display of Bookmarks" ) );
      m_toggleBookmarkDisplayAct->setCheckable( true );
-     m_toggleBookmarkDisplayAct->setChecked( m_controlView->marbleModel()->bookmarkManager()->showBookmarks());
-     connect( m_toggleBookmarkDisplayAct, SIGNAL( toggled(bool) ),
-              m_controlView->marbleModel()->bookmarkManager(), SLOT(setShowBookmarks(bool)) );
+     connect( m_toggleBookmarkDisplayAct, SIGNAL( triggered( bool ) ), this, SLOT( showBookmarks( bool ) ) );
 
      m_manageBookmarksAct = new QAction( QIcon( ":/icons/bookmarks-organize.png" ), tr( "&Manage Bookmarks" ), this);
      m_manageBookmarksAct->setStatusTip( tr( "Manage Bookmarks" ) );
@@ -732,6 +730,13 @@ void MainWindow::showClouds( bool isChecked )
     m_showCloudsAct->setChecked( isChecked ); // Sync state with the GUI
 }
 
+void MainWindow::showBookmarks( bool show )
+{
+    m_controlView->marbleModel()->bookmarkManager()->setShowBookmarks( show );
+
+    m_toggleBookmarkDisplayAct->setChecked( show ); // Sync state with the GUI
+}
+
 void MainWindow::workOffline( bool offline )
 {
     m_controlView->marbleControl()->setWorkOffline( offline );
@@ -996,6 +1001,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          workOffline(settings.value("workOffline", false ).toBool());
          showAtmosphere(settings.value("showAtmosphere", true ).toBool());
          m_lastFileOpenPath = settings.value("lastFileOpenDir", QDir::homePath()).toString();
+         showBookmarks( settings.value( "showBookmarks", true ).toBool() );
      settings.endGroup();
 
      setUpdatesEnabled(false);
@@ -1195,6 +1201,7 @@ void MainWindow::writeSettings()
          settings.setValue( "workOffline", m_workOfflineAct->isChecked() );
          settings.setValue( "showAtmosphere", m_showAtmosphereAct->isChecked() );
          settings.setValue( "lastFileOpenDir", m_lastFileOpenPath );
+         settings.setValue( "showBookmarks", m_toggleBookmarkDisplayAct->isChecked() );
      settings.endGroup();
 
      settings.beginGroup( "MarbleWidget" );
