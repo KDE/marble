@@ -36,7 +36,7 @@ public:
     enum NewstuffRoles {
         Name = Qt::UserRole + 1,
         Author,
-        Licence,
+        License,
         Summary,
         Version,
         ReleaseDate,

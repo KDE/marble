@@ -36,7 +36,7 @@ public:
     QString m_category;
     QString m_name;
     QString m_author;
-    QString m_licence;
+    QString m_license;
     QString m_summary;
     QString m_version;
     QString m_releaseDate;
@@ -367,7 +367,7 @@ NewstuffModel::NewstuffModel( QObject *parent ) :
     QHash<int,QByteArray> roles = roleNames();
     roles[Name] = "name";
     roles[Author] = "author";
-    roles[Licence] = "licence";
+    roles[License] = "license";
     roles[Summary] = "summary";
     roles[Version] = "version";
     roles[ReleaseDate] = "releasedate";
@@ -404,7 +404,7 @@ QVariant NewstuffModel::data ( const QModelIndex &index, int role ) const
         case Qt::DisplayRole: return d->m_items.at( index.row() ).m_name;
         case Name: return d->m_items.at( index.row() ).m_name;
         case Author: return d->m_items.at( index.row() ).m_author;
-        case Licence: return d->m_items.at( index.row() ).m_licence;
+        case License: return d->m_items.at( index.row() ).m_license;
         case Summary: return d->m_items.at( index.row() ).m_summary;
         case Version: return d->m_items.at( index.row() ).m_version;
         case ReleaseDate: return d->m_items.at( index.row() ).m_releaseDate;
@@ -689,7 +689,7 @@ void NewstuffModel::contentsListed( int exitStatus )
             d->changeNode( node, d->m_registryDocument, "providerid", d->m_provider, action );
             d->changeNode( node, d->m_registryDocument, "author", item.m_author, action );
             d->changeNode( node, d->m_registryDocument, "homepage", QString(), action );
-            d->changeNode( node, d->m_registryDocument, "licence", item.m_licence, action );
+            d->changeNode( node, d->m_registryDocument, "licence", item.m_license, action );
             d->changeNode( node, d->m_registryDocument, "version", item.m_version, action );
             QString const itemId = d->m_idTag == PayloadTag ? item.m_payload.toString() : item.m_name;
             d->changeNode( node, d->m_registryDocument, "id", itemId, action );
@@ -783,7 +783,7 @@ NewstuffItem NewstuffModelPrivate::importNode(const QDomNode &node) const
     item.m_category = node.attributes().namedItem( "category" ).toAttr().value();
     readValue<QString>( node, "name", &item.m_name );
     readValue<QString>( node, "author", &item.m_author );
-    readValue<QString>( node, "licence", &item.m_licence );
+    readValue<QString>( node, "licence", &item.m_license );
     readValue<QString>( node, "summary", &item.m_summary );
     readValue<QString>( node, "version", &item.m_version );
     readValue<QString>( node, "releasedate", &item.m_releaseDate );
