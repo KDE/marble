@@ -51,6 +51,9 @@
   <entry key="marbleDataPath" type="Path" >
    <default></default>
   </entry>
+  <entry key="showBookmarks" type="Bool" >
+   <default>true</default>
+  </entry>
  </group>
  <group name="Time" >
   <entry key="dateTime" type="DateTime" >

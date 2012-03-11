@@ -264,7 +264,12 @@ void MarblePart::exportMapScreenShot()
     }
 }
 
+void MarblePart::setShowBookmarks( bool show )
+{
+    m_controlView->marbleModel()->bookmarkManager()->setShowBookmarks( show );
 
+    m_toggleBookmarkDisplayAction->setChecked( show ); // Sync state with the GUI
+}
 
 void MarblePart::setShowClouds( bool isChecked )
 {
@@ -430,6 +435,8 @@ void MarblePart::readSettings()
     m_showAtmosphereAction->setChecked( MarbleSettings::showAtmosphere() );
     m_lockFloatItemsAct->setChecked(MarbleSettings::lockFloatItemPositions());
     lockFloatItemPosition(MarbleSettings::lockFloatItemPositions());
+
+    setShowBookmarks( MarbleSettings::showBookmarks() );
 
     // Sun
     m_controlView->marbleWidget()->setShowSunShading( MarbleSettings::showSun() );
@@ -622,6 +629,8 @@ void MarblePart::writeSettings()
     MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Still ) );
     MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->
                                          mapQuality( Animation ) );
+
+    MarbleSettings::setShowBookmarks( m_controlView->marbleModel()->bookmarkManager()->showBookmarks() );
 
     // FIXME: Hopefully Qt will have a getter for this one in the future ...
     GraphicsSystem graphicsSystem = (GraphicsSystem) MarbleSettings::graphicsSystem();

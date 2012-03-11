@@ -83,6 +83,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  setShowClouds( bool );
     void  setShowAtmosphere( bool );
     void  setShowCurrentLocation( bool );
+    void  setShowBookmarks( bool isChecked );
     void  showFullScreen( bool );
     void  showSideBar( bool );
     void  showStatusBar( bool );
