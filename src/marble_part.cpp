@@ -896,6 +896,15 @@ void MarblePart::setupActions()
     connect( m_addBookmarkAction, SIGNAL( triggered( ) ),
              this,                SLOT( openEditBookmarkDialog() ) );
 
+    m_toggleBookmarkDisplayAction = new KAction( this );
+    actionCollection()->addAction( "show_bookmarks", m_toggleBookmarkDisplayAction );
+    m_toggleBookmarkDisplayAction->setText( i18nc( "Show Bookmarks", "Show &Bookmarks" ) );
+    m_toggleBookmarkDisplayAction->setStatusTip( tr( "Show or hide bookmarks in the map" ) );
+    m_toggleBookmarkDisplayAction->setCheckable( true );
+    m_toggleBookmarkDisplayAction->setChecked( m_controlView->marbleModel()->bookmarkManager()->showBookmarks() );
+    connect( m_toggleBookmarkDisplayAction, SIGNAL( toggled( bool ) ),
+                  m_controlView->marbleModel()->bookmarkManager(), SLOT( setShowBookmarks( bool ) ) );
+
     m_setHomeAction = new KAction( this );
     actionCollection()->addAction( "set_home", m_setHomeAction );
     m_setHomeAction->setText( tr( "&Set Home Location" ) );

@@ -228,6 +228,7 @@ class MarblePart: public KParts::ReadOnlyPart
 
     //Bookmark Menu
     KAction *m_addBookmarkAction;
+    KAction *m_toggleBookmarkDisplayAction;
     KAction *m_setHomeAction;
     KAction *m_manageBookmarksAction;
     // Actions for the status bar
