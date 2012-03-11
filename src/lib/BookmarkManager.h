@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010    Gaurav Gupta <1989.gaurav@googlemail.com> 
+// Copyright 2010    Gaurav Gupta <1989.gaurav@googlemail.com>
 // Copyright 2012    Thibaut Gridel <tgridel@free.fr>
 //
 
@@ -28,7 +28,7 @@ namespace Marble
     class GeoDataTreeModel;
 /**
  * This class is responsible for loading the
- * book mark objects from the files and various 
+ * book mark objects from the files and various
  * book mark operations
  */
 
@@ -41,7 +41,7 @@ class MARBLE_EXPORT BookmarkManager : public QObject
     explicit BookmarkManager( GeoDataTreeModel *treeModel, QObject *parent = 0 );
 
     ~BookmarkManager();
-    
+
     /**
       * @brief load bookmark file as GeoDataDocument and return true
       * if loaded successfully else false
@@ -81,13 +81,13 @@ class MARBLE_EXPORT BookmarkManager : public QObject
     void renameBookmarkFolder( GeoDataFolder *folder, const QString &name );
 
     void removeBookmarkFolder( GeoDataFolder *folder );
-    
+
     /**
       * @brief remove all folders and bookmarks except default folder
       */
     void removeAllBookmarks();
-    
-public slots:
+
+public Q_SLOTS:
     void setShowBookmarks( bool visible );
 
 Q_SIGNALS:
@@ -99,7 +99,7 @@ Q_SIGNALS:
 
    /**
     * @brief updates bookmark file and return true if updated successfully
-    */ 
+    */
     bool updateBookmarkFile();
 
     GeoDataDocument* openFile( const QString& fileName ) const;

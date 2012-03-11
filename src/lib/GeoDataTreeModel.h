@@ -98,7 +98,7 @@ public Q_SLOTS:
 
     void update();
 
-signals:
+Q_SIGNALS:
     /// insert and remove row don't trigger any signal that proxies forward
     /// this signal will refresh geometry layer and placemark layout
     void removed( GeoDataObject *object );

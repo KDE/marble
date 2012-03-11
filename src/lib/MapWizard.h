@@ -52,7 +52,7 @@ public:
     virtual bool validateCurrentPage();
     virtual int nextId() const;
 
-public slots:
+public Q_SLOTS:
     // WMS protocol
     void queryServerCapabilities();
     void parseServerCapabilities( QNetworkReply* reply );

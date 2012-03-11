@@ -92,7 +92,7 @@ public:
     void parseFile( const QString& fileName, DocumentRole role = UserDocument );
     GeoDataDocument* openFile( const QString& fileName, DocumentRole role = UserDocument );
 
-signals:
+Q_SIGNALS:
     /**
       * Placemarks were added to or removed from the model
       * @todo FIXME: this sounds like a duplication of QAbstractItemModel signals

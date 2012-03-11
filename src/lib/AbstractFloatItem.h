@@ -70,7 +70,7 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
 
     bool positionLocked();
 
- public slots:
+ public Q_SLOTS:
     void setPositionLocked( bool lock );
     void show();
     void hide();
