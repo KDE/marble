@@ -107,7 +107,7 @@ Q_SIGNALS:
     void positionProviderPluginChanged( PositionProviderPlugin *activePlugin );
 
  private:
-    PositionTrackingPrivate *d;
+    PositionTrackingPrivate* const d;
 };
 
 }

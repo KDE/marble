@@ -104,7 +104,7 @@ Q_SIGNALS:
 
     GeoDataDocument* openFile( const QString& fileName ) const;
 
-    BookmarkManagerPrivate *d;
+    BookmarkManagerPrivate* const d;
 
 };
 
