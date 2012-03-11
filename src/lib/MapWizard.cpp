@@ -621,7 +621,7 @@ QString MapWizard::createArchive( QWidget *parent, QString mapId )
         QMessageBox::critical( parent, tr( "Archiving failed" ), tr( "Archiving process crashed." ) );
         break;
     case 0:
-        mDebug() << "Archived the theme sucessfully.";
+        mDebug() << "Archived the theme successfully.";
         break;
     }
     archiver.waitForFinished();

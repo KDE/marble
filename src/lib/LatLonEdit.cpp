@@ -28,7 +28,7 @@ namespace Marble
 // for DMS, just the UI elements for DMS are created and modified as needed,
 // if another notation is selected. This involves showing and hiding them and
 // setting the proper suffix and min/max values.
-// The logic per notation is moved into specialised subclasses of a class 
+// The logic per notation is moved into specialized subclasses of a class 
 // AbstractInputHandler.
 // TODO: simply remove the LatLonEdit.ui file and embed code directly here?
 

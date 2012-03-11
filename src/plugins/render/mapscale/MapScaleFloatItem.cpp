@@ -179,7 +179,7 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
     qreal ratio = pixel2Length / (displayMMPerPixel * MM2M);
 
     //round ratio to 3 most significant digits, assume that ratio >= 1, otherwise it may display "1 : 0"
-    //i made this assumption because as the primary use case we dont need to zoom in that much
+    //i made this assumption because as the primary use case we do not need to zoom in that much
     qreal power = 1;
     int iRatio = (int)(ratio + 0.5); //round ratio to the nearest integer
     while (iRatio >= 1000) {

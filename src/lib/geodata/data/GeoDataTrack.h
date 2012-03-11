@@ -124,7 +124,7 @@ public:
 
     /**
      * Add the coordinates part for a new point. See this class description
-     * for more informations.
+     * for more information.
      * @see appendWhen
      */
     void appendCoordinates( const GeoDataCoordinates &coord );
@@ -136,7 +136,7 @@ public:
 
     /**
      * Add the time value part for a new point. See this class description
-     * for more informations.
+     * for more information.
      * @see appendCoordinates
      */
     void appendWhen( const QDateTime &when );

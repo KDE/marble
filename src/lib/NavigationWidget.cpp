@@ -174,7 +174,7 @@ void NavigationWidget::changeZoom( int zoom )
     d->m_navigationUi.zoomSlider->blockSignals( true );
 
     d->m_navigationUi.zoomSlider->setValue( zoom );
-    // As we have disabled all zoomSlider Signals, we have to update our buttons seperately.
+    // As we have disabled all zoomSlider Signals, we have to update our buttons separately.
     updateButtons( zoom );
 
     d->m_navigationUi.zoomSlider->blockSignals( false );

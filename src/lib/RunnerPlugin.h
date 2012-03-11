@@ -68,7 +68,7 @@ public:
 
     /** Returns true if the plugin can execute a task for the given capability
       * The default implementation returns true iff the plugin supports
-      * the given capability. This method can be overriden for example to
+      * the given capability. This method can be overridden for example to
       * indicate an incomplete installation.
       */
     virtual bool canWork( Capability capability ) const;
