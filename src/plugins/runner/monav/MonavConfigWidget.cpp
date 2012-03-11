@@ -405,7 +405,7 @@ void MonavConfigWidget::retrieveData()
             d->m_currentReply = 0;
             d->m_currentFile.close();
             d->installMap();
-            d->m_currentDownload = QString();
+            d->m_currentDownload.clear();
         }
     }
 }
@@ -457,7 +457,7 @@ void MonavConfigWidget::cancelOperation()
         d->m_currentReply->abort();
         d->m_currentReply->deleteLater();
         d->m_currentReply = 0;
-        d->m_currentDownload = QString();
+        d->m_currentDownload.clear();
         d->setBusy( false );
         d->m_currentFile.close();
     }

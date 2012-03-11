@@ -81,7 +81,7 @@ int main( int argc, char** argv )
     QTextStream tsStream( &tsFile );
     tsStream.setCodec( "UTF-8" );
     tsStream.setAutoDetectUnicode( true );
-    source = QString();
+    source.clear();
     while( !tsStream.atEnd() ) {
         QString line = tsStream.readLine().trimmed();
         if ( line.startsWith( "<source>" ) ) {

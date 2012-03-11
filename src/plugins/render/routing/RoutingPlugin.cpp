@@ -120,7 +120,7 @@ RoutingPluginPrivate::RoutingPluginPrivate( RoutingPlugin *parent ) :
 {
     m_settings["muted"] = false;
     m_settings["sound"] = true;
-    m_settings["speaker"] = QString();
+    m_settings["speaker"].clear();
 }
 
 QString RoutingPluginPrivate::richText( const QString &source ) const

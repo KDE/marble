@@ -338,7 +338,7 @@ int main ( int argc, char *argv[] )
 
     QString marbleDataPath = args->getOption( "marbledatapath" );
     if( marbleDataPath.isEmpty() ) {
-        marbleDataPath = QString();
+        marbleDataPath.clear(); /** @todo: why is this done? */
     }
     MainWindow *window = new MainWindow( marbleDataPath );
     window->setAttribute( Qt::WA_DeleteOnClose, true );

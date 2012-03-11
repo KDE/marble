@@ -424,7 +424,7 @@ void DownloadRegionDialog::updateTilesCount()
     }
 
     if ( tilesCount > maxTilesCount ) {
-        d->m_tileSizeInfo->setToolTip( QString::null  );
+        d->m_tileSizeInfo->setToolTip( QString() );
         d->m_tileSizeInfo->setText( tr( "There is a limit of %n tiles to download.", "",
                                                maxTilesCount ) );
     } else if ( themeId == "earth/openstreetmap/openstreetmap.dgml" ) {
@@ -442,7 +442,7 @@ void DownloadRegionDialog::updateTilesCount()
 
     }
     else {
-        d->m_tileSizeInfo->setToolTip( QString::null );
+        d->m_tileSizeInfo->setToolTip( QString() );
         d->m_tileSizeInfo->clear();
     }
 

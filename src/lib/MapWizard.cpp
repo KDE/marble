@@ -1082,7 +1082,7 @@ void MapWizard::accept()
         d->uiWidget.textEditDesc->clear();
         d->uiWidget.labelPreview->clear();
         d->uiWidget.lineEditSource->clear();
-        d->dgmlOutput = QString();
+        d->dgmlOutput.clear();
         QTimer::singleShot( 0, this, SLOT( restart() ) );
     }
 
