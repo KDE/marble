@@ -79,5 +79,4 @@ void GeoDataSimpleArrayData::unpack( QDataStream& stream )
     GeoDataObject::unpack( stream );
 }
 
-
 }
