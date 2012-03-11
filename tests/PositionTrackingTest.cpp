@@ -105,6 +105,8 @@ class PositionTrackingTest : public QObject
     void statusChanged();
 
     void setPositionProviderPlugin();
+
+    void clearTrack();
 };
 
 PositionTrackingTest::PositionTrackingTest()
@@ -171,6 +173,35 @@ void PositionTrackingTest::setPositionProviderPlugin()
     QCOMPARE( tracking.direction(), direction );
     QCOMPARE( tracking.timestamp(), timestamp );
     QCOMPARE( gpsLocationSpy.count(), 1 );
+}
+
+void PositionTrackingTest::clearTrack()
+{
+    const GeoDataCoordinates position( 2.1, 0.8 );
+    const GeoDataAccuracy accuracy( GeoDataAccuracy::Detailed, 10.0, 22.0 );
+    const qreal speed = 32.8;
+    const qreal direction = 49.7;
+    const QDateTime timestamp( QDate( 1, 3, 1994 ) );
+
+    GeoDataTreeModel treeModel;
+    PositionTracking tracking( &treeModel );
+
+    FakeProvider provider;
+    tracking.setPositionProviderPlugin( &provider );
+
+    tracking.clearTrack();
+
+    QVERIFY( tracking.isTrackEmpty() );
+
+    provider.setStatus( PositionProviderStatusAvailable );
+
+    provider.setPosition( position, accuracy, speed, direction, timestamp );
+
+    QVERIFY( !tracking.isTrackEmpty() );
+
+    tracking.clearTrack();
+
+    QVERIFY( tracking.isTrackEmpty() );
 }
 
 }
