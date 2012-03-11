@@ -129,7 +129,7 @@ private:
 
         QStringList dirs;
         dirs << "Africa" << "Australia" << "Eurasia" << "Silands" << "North_America" << "South_America";
-        foreach( QString dir, dirs) {
+        foreach( const QString &dir, dirs) {
             QString fileName = m_sourceDir + "/" + dir + "/";
             if ( lat < 0 ) lat *= -1;
             fileName += QString( "%1%2%3%4.hgt" ).arg( NS ).arg( lat<0 ? lat*-1 : lat, 2, 10, QLatin1Char('0') )

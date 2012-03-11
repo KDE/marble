@@ -598,7 +598,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
          * we check for the selected state after all other filters
          */
         bool isSelected = false;
-        foreach ( QModelIndex index, selection.indexes() ) {
+        foreach ( const QModelIndex &index, selection.indexes() ) {
             const GeoDataPlacemark *mark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
             if (mark == placemark ) {
                 isSelected = true;

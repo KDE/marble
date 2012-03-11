@@ -228,7 +228,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     QRect labelRect( 0, 0, m_leftGraphMargin - 1, m_fontHeight + 2 );
     lastStringEnds = m_eleGraphHeight + m_fontHeight;
 //     painter->drawText( m_leftGraphMargin + 1, m_fontHeight, "[" + m_axisY.unit() + "]" );
-    foreach ( const AxisTick tick, m_axisY.ticks() ) {
+    foreach ( const AxisTick &tick, m_axisY.ticks() ) {
         const int posY = m_eleGraphHeight - tick.position;
         painter->setPen( dashedPen );
         painter->drawLine( m_leftGraphMargin, posY, contentSize().width(), posY );
@@ -252,7 +252,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     painter->setPen( QColor( Qt::black ) );
     labelRect.moveTop( m_eleGraphHeight + 1 );
     lastStringEnds = 0;
-    foreach ( const AxisTick tick, m_axisX.ticks() ) {
+    foreach ( const AxisTick &tick, m_axisX.ticks() ) {
         const int posX = m_leftGraphMargin + tick.position;
         painter->setPen( dashedPen );
         painter->drawLine( posX, 0, posX, m_eleGraphHeight );

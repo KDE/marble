@@ -64,7 +64,7 @@ MarbleThemeSelectView::Private::Private( MarbleThemeSelectView * const parent )
 void MarbleThemeSelectView::Private::deleteDirectory( const QString& path )
 {
     QDir directory( path );
-    foreach( QString filename, directory.entryList( QDir::Files | QDir::NoDotAndDotDot ) )
+    foreach( const QString &filename, directory.entryList( QDir::Files | QDir::NoDotAndDotDot ) )
         QFile( path + filename ).remove();
     QDir().rmdir( path );
 }
@@ -72,7 +72,7 @@ void MarbleThemeSelectView::Private::deleteDirectory( const QString& path )
 void MarbleThemeSelectView::Private::deleteDataDirectories( const QString& path )
 {
     QDir directoryv( path );
-    foreach( QString filename, directoryv.entryList( QDir::AllEntries | QDir::NoDotAndDotDot ) )
+    foreach( const QString &filename, directoryv.entryList( QDir::AllEntries | QDir::NoDotAndDotDot ) )
     {
         QString filepath = path + "/" + filename;
         QFile file( filepath );
@@ -89,7 +89,7 @@ void MarbleThemeSelectView::Private::deleteDataDirectories( const QString& path 
 void MarbleThemeSelectView::Private::deletePreview( const QString& path )
 {
     QDir directoryv( path, "preview.*" );
-    foreach( QString filename, directoryv.entryList() )
+    foreach( const QString &filename, directoryv.entryList() )
         QFile( path + "/" + filename ).remove();
 }
 

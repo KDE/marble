@@ -202,10 +202,10 @@ bool PositionTracking::saveTrack(QString& fileName)
         QFileInfo fileInfo( fileName );
         QString name = fileInfo.baseName();
         document->setName( name );
-        foreach( GeoDataStyle style, d->m_document->styles() ) {
+        foreach( const GeoDataStyle &style, d->m_document->styles() ) {
             document->addStyle( style );
         }
-        foreach( GeoDataStyleMap map, d->m_document->styleMaps() ) {
+        foreach( const GeoDataStyleMap &map, d->m_document->styleMaps() ) {
             document->addStyleMap( map );
         }
         GeoDataFeature *track = new GeoDataFeature(d->m_document->last());

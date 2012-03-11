@@ -36,7 +36,7 @@ const QVector<OsmRegionTree> & OsmRegionTree::children() const
 
 void OsmRegionTree::append( QList<OsmRegion> &regions )
 {
-    foreach( const OsmRegion candidate, regions ) {
+    foreach( const OsmRegion &candidate, regions ) {
         if ( candidate.parentIdentifier() == m_node.identifier() ) {
             m_children << OsmRegionTree( candidate );
         }
