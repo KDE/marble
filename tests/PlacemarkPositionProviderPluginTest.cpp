@@ -33,6 +33,12 @@ class PlacemarkPositionProviderPluginTest : public QObject
     static PositionProviderPlugin *createInitializedPlugin( const MarbleModel *model );
 
  private slots:
+    void initialize_data();
+    void initialize();
+
+    void setTrackedPlacemark_afterInitialize_data();
+    void setTrackedPlacemark_afterInitialize();
+
     void setClockDateTime();
 
  private:
@@ -88,6 +94,84 @@ PositionProviderPlugin *PlacemarkPositionProviderPluginTest::createInitializedPl
     plugin->initialize();
 
     return plugin;
+}
+
+void PlacemarkPositionProviderPluginTest::initialize_data()
+{
+    QTest::addColumn<GeoDataPlacemark *>( "placemark" );
+
+    GeoDataPlacemark *const nullPlacemark = 0;
+
+    addRow() << nullPlacemark;
+    addRow() << &m_placemark1;
+}
+
+void PlacemarkPositionProviderPluginTest::initialize()
+{
+    QFETCH( GeoDataPlacemark *, placemark );
+    const PositionProviderStatus expectedStatus = placemark ? PositionProviderStatusAvailable : PositionProviderStatusUnavailable;
+    const int expectedStatusCount = placemark ? 1 : 0;
+
+    MarbleModel model;
+    model.setClockDateTime( m_minTime ); // FIXME crashes when this line is removed
+
+    model.setTrackedPlacemark( placemark );
+    QVERIFY( model.trackedPlacemark() == placemark );
+
+    PositionProviderPlugin *const plugin = createUninitializedPlugin( model.pluginManager() );
+    QVERIFY2( plugin != 0, "Need a PlacemarkPositionProviderPlugin!" );
+
+    QCOMPARE( plugin->status(), PositionProviderStatusUnavailable );
+
+    QSignalSpy statusChangedSpy( plugin, SIGNAL( statusChanged( PositionProviderStatus ) ) );
+
+    plugin->setMarbleModel( &model );
+    plugin->initialize();
+
+    QCOMPARE( plugin->status(), expectedStatus );
+    QCOMPARE( statusChangedSpy.count(), expectedStatusCount );
+
+    delete plugin;
+}
+
+void PlacemarkPositionProviderPluginTest::setTrackedPlacemark_afterInitialize_data()
+{
+    QTest::addColumn<GeoDataPlacemark *>( "initialPlacemark" );
+    QTest::addColumn<GeoDataPlacemark *>( "newPlacemark" );
+    QTest::addColumn<int>( "expectedStatusCount" );
+
+    GeoDataPlacemark *const nullPlacemark = 0;
+
+    addRow() << nullPlacemark << nullPlacemark << 0;
+    addRow() << nullPlacemark << &m_placemark1 << 1;
+    addRow() << &m_placemark1 << nullPlacemark << 1;
+    addRow() << &m_placemark1 << &m_placemark2 << 2;
+}
+
+void PlacemarkPositionProviderPluginTest::setTrackedPlacemark_afterInitialize()
+{
+    QFETCH( GeoDataPlacemark *, initialPlacemark );
+    QFETCH( GeoDataPlacemark *, newPlacemark );
+    QFETCH( int, expectedStatusCount );
+    const PositionProviderStatus expectedStatus = newPlacemark ? PositionProviderStatusAvailable : PositionProviderStatusUnavailable;
+
+    MarbleModel model;
+    model.setClockDateTime( m_minTime ); // FIXME crashes when this line is removed
+
+    model.setTrackedPlacemark( initialPlacemark );
+    QVERIFY( model.trackedPlacemark() == initialPlacemark );
+
+    PositionProviderPlugin *const plugin = createInitializedPlugin( &model );
+    QVERIFY2( plugin != 0, "Need a PlacemarkPositionProviderPlugin!" );
+
+    QSignalSpy statusChangedSpy( plugin, SIGNAL( statusChanged( PositionProviderStatus ) ) );
+
+    model.setTrackedPlacemark( newPlacemark );
+
+    QCOMPARE( plugin->status(), expectedStatus );
+    QCOMPARE( statusChangedSpy.count(), expectedStatusCount );
+
+    delete plugin;
 }
 
 void PlacemarkPositionProviderPluginTest::setClockDateTime()

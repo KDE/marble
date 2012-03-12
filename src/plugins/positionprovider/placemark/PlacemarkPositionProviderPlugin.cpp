@@ -75,6 +75,8 @@ void PlacemarkPositionProviderPlugin::initialize()
 {
     if ( marbleModel() ) {
         setPlacemark( marbleModel()->trackedPlacemark() );
+        connect( marbleModel(), SIGNAL( trackedPlacemarkChanged( const GeoDataPlacemark* ) ),
+                 this, SLOT( setPlacemark( const GeoDataPlacemark * ) ) );
     } else {
         mDebug() << "PlacemarkPositionProviderPlugin: MarbleModel not set, cannot track placemarks.";
     }
@@ -83,7 +85,7 @@ void PlacemarkPositionProviderPlugin::initialize()
 
 bool PlacemarkPositionProviderPlugin::isInitialized() const
 {
-    return true;
+    return m_isInitialized;
 }
 
 PositionProviderPlugin* PlacemarkPositionProviderPlugin::newInstance() const
@@ -123,16 +125,26 @@ QDateTime PlacemarkPositionProviderPlugin::timestamp() const
 
 void PlacemarkPositionProviderPlugin::setPlacemark( const GeoDataPlacemark *placemark )
 {
-    disconnect( marbleModel()->clock(), SIGNAL( timeChanged() ), this, SLOT( updatePosition() ) );
-    m_coordinates = GeoDataCoordinates();
-    m_timestamp = QDateTime();
+    const GeoDataPlacemark *const oldPlacemark = m_placemark;
 
-    m_placemark = placemark;
+    if ( oldPlacemark != 0 ) {
+        emit statusChanged( PositionProviderStatusUnavailable );
+    }
+
+    m_placemark   = placemark;
+    m_timestamp   = placemark ? marbleModel()->clockDateTime() : QDateTime();
+    m_coordinates = placemark ? placemark->coordinate( m_timestamp ) : GeoDataCoordinates();
+    m_status      = placemark ? PositionProviderStatusAvailable : PositionProviderStatusUnavailable;
+    m_speed       = 0.0;
+
+    disconnect( marbleModel()->clock(), SIGNAL( timeChanged() ), this, SLOT( updatePosition() ) );
     if ( placemark ) {
         connect( marbleModel()->clock(), SIGNAL( timeChanged() ), this, SLOT( updatePosition() ) );
     }
 
-    update();
+    if ( oldPlacemark != m_placemark && m_placemark != 0 ) {
+        emit statusChanged( m_status );
+    }
 }
 
 void PlacemarkPositionProviderPlugin::updatePosition()
@@ -150,9 +162,9 @@ void PlacemarkPositionProviderPlugin::updatePosition()
         const qreal averageAltitude = ( m_coordinates.altitude() + m_coordinates.altitude() ) / 2.0 + marbleModel()->planetRadius();
         const qreal distance = distanceSphere( previousCoordinates, m_coordinates ) * averageAltitude;
 #if QT_VERSION >= 0x40700
-	const qreal seconds = m_timestamp.msecsTo( marbleModel()->clockDateTime() ) / 1000.0;
+        const qreal seconds = m_timestamp.msecsTo( marbleModel()->clockDateTime() ) / 1000.0;
 #else
-	const qreal seconds = m_timestamp.secsTo( marbleModel()->clockDateTime() );
+        const qreal seconds = m_timestamp.secsTo( marbleModel()->clockDateTime() );
 #endif
         m_speed = ( seconds > 0 ) ? ( distance / seconds ) : 0;
     }
@@ -163,16 +175,6 @@ void PlacemarkPositionProviderPlugin::updatePosition()
     m_timestamp = marbleModel()->clockDateTime();
 
     emit positionChanged( m_coordinates, m_accuracy );
-}
-
-void PlacemarkPositionProviderPlugin::update()
-{
-    if ( m_placemark != 0 ) {
-        m_status = PositionProviderStatusAvailable;
-    } else {
-        m_status = PositionProviderStatusUnavailable;
-    }
-    emit statusChanged( m_status );
 }
 
 Q_EXPORT_PLUGIN2( PlacemarkPositionProviderPlugin, Marble::PlacemarkPositionProviderPlugin )

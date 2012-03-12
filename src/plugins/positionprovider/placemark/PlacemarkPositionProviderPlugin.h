@@ -52,8 +52,6 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     virtual qreal direction() const;
     virtual QDateTime timestamp() const;
 
-    void setPlacemark( const GeoDataPlacemark *placemark );
-
  private:
     const GeoDataPlacemark *m_placemark;
     GeoDataCoordinates m_coordinates;
@@ -64,9 +62,9 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     GeoDataAccuracy m_accuracy;
     bool m_isInitialized;
 
-    void update();
+ private Q_SLOTS:
+    void setPlacemark( const GeoDataPlacemark *placemark );
 
- private slots:
     void updatePosition();
 };
 
