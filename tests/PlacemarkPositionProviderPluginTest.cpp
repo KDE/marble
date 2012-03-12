@@ -111,6 +111,7 @@ void PlacemarkPositionProviderPluginTest::initialize()
     QFETCH( GeoDataPlacemark *, placemark );
     const PositionProviderStatus expectedStatus = placemark ? PositionProviderStatusAvailable : PositionProviderStatusUnavailable;
     const int expectedStatusCount = placemark ? 1 : 0;
+    const int expectedPositionCount = placemark ? 1 : 0;
 
     MarbleModel model;
     model.setClockDateTime( m_minTime ); // FIXME crashes when this line is removed
@@ -124,12 +125,14 @@ void PlacemarkPositionProviderPluginTest::initialize()
     QCOMPARE( plugin->status(), PositionProviderStatusUnavailable );
 
     QSignalSpy statusChangedSpy( plugin, SIGNAL( statusChanged( PositionProviderStatus ) ) );
+    QSignalSpy positionChangedSpy( plugin, SIGNAL( positionChanged( GeoDataCoordinates, GeoDataAccuracy ) ) );
 
     plugin->setMarbleModel( &model );
     plugin->initialize();
 
     QCOMPARE( plugin->status(), expectedStatus );
     QCOMPARE( statusChangedSpy.count(), expectedStatusCount );
+    QCOMPARE( positionChangedSpy.count(), expectedPositionCount );
 
     delete plugin;
 }
@@ -154,6 +157,7 @@ void PlacemarkPositionProviderPluginTest::setTrackedPlacemark_afterInitialize()
     QFETCH( GeoDataPlacemark *, newPlacemark );
     QFETCH( int, expectedStatusCount );
     const PositionProviderStatus expectedStatus = newPlacemark ? PositionProviderStatusAvailable : PositionProviderStatusUnavailable;
+    const int expectedPositionCount = newPlacemark ? 1 : 0;
 
     MarbleModel model;
     model.setClockDateTime( m_minTime ); // FIXME crashes when this line is removed
@@ -165,11 +169,13 @@ void PlacemarkPositionProviderPluginTest::setTrackedPlacemark_afterInitialize()
     QVERIFY2( plugin != 0, "Need a PlacemarkPositionProviderPlugin!" );
 
     QSignalSpy statusChangedSpy( plugin, SIGNAL( statusChanged( PositionProviderStatus ) ) );
+    QSignalSpy positionChangedSpy( plugin, SIGNAL( positionChanged( GeoDataCoordinates, GeoDataAccuracy ) ) );
 
     model.setTrackedPlacemark( newPlacemark );
 
     QCOMPARE( plugin->status(), expectedStatus );
     QCOMPARE( statusChangedSpy.count(), expectedStatusCount );
+    QCOMPARE( positionChangedSpy.count(), expectedPositionCount );
 
     delete plugin;
 }

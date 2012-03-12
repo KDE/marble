@@ -145,6 +145,10 @@ void PlacemarkPositionProviderPlugin::setPlacemark( const GeoDataPlacemark *plac
     if ( oldPlacemark != m_placemark && m_placemark != 0 ) {
         emit statusChanged( m_status );
     }
+
+    if ( m_status == PositionProviderStatusAvailable ) {
+        emit positionChanged( m_coordinates, m_accuracy );
+    }
 }
 
 void PlacemarkPositionProviderPlugin::updatePosition()
