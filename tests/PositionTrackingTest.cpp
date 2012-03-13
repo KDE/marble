@@ -20,7 +20,10 @@ class FakeProvider : public Marble::PositionProviderPlugin
 {
 public:
     FakeProvider() :
-        m_status( Marble::PositionProviderStatusUnavailable )
+        m_status( Marble::PositionProviderStatusUnavailable ),
+        m_position(),
+        m_accuracy(),
+        m_speed( 0.0 )
     {}
 
     QString name() const           { return "fake plugin"; }
@@ -35,18 +38,24 @@ public:
     bool isInitialized() const     { return true; }
 
     Marble::PositionProviderStatus status() const { return m_status; }
-    Marble::GeoDataCoordinates position() const { return Marble::GeoDataCoordinates(); }
-    Marble::GeoDataAccuracy accuracy() const { return Marble::GeoDataAccuracy(); }
-    qreal speed() const { return 0.0; }
+    Marble::GeoDataCoordinates position() const { return m_position; }
+    Marble::GeoDataAccuracy accuracy() const { return m_accuracy; }
+    qreal speed() const { return m_speed; }
     qreal direction() const { return 0.0; }
     QDateTime timestamp() const { return QDateTime(); }
 
     Marble::PositionProviderPlugin *newInstance() const { return 0; }
 
     void setStatus( Marble::PositionProviderStatus status );
+    void setPosition( const Marble::GeoDataCoordinates &coordinates );
+    void setAccuracy( const Marble::GeoDataAccuracy &accuracy );
+    void setSpeed( qreal speed );
 
 private:
     Marble::PositionProviderStatus m_status;
+    Marble::GeoDataCoordinates m_position;
+    Marble::GeoDataAccuracy m_accuracy;
+    qreal m_speed;
 };
 
 void FakeProvider::setStatus( Marble::PositionProviderStatus status )
@@ -58,6 +67,21 @@ void FakeProvider::setStatus( Marble::PositionProviderStatus status )
     if ( oldStatus != m_status ) {
         emit statusChanged( m_status );
     }
+}
+
+void FakeProvider::setPosition( const Marble::GeoDataCoordinates &position )
+{
+    m_position = position;
+}
+
+void FakeProvider::setAccuracy( const Marble::GeoDataAccuracy &accuracy )
+{
+    m_accuracy = accuracy;
+}
+
+void FakeProvider::setSpeed( qreal speed )
+{
+    m_speed = speed;
 }
 
 namespace Marble
@@ -73,10 +97,13 @@ class PositionTrackingTest : public QObject
  private Q_SLOTS:
     void statusChanged_data();
     void statusChanged();
+
+    void positionChanged();
 };
 
 PositionTrackingTest::PositionTrackingTest()
 {
+    qRegisterMetaType<GeoDataCoordinates>( "GeoDataCoordinates" );
     qRegisterMetaType<PositionProviderStatus>( "PositionProviderStatus" );
 }
 
@@ -109,6 +136,35 @@ void PositionTrackingTest::statusChanged()
 
     QCOMPARE( tracking.status(), finalStatus );
     QCOMPARE( statusChangedSpy.count(), expectedStatusChangedCount );
+}
+
+void PositionTrackingTest::positionChanged()
+{
+    const GeoDataCoordinates coordinates( 1.2, 0.9 );
+    const GeoDataAccuracy accuracy( GeoDataAccuracy::Detailed, 10.0, 22.0 );
+    const qreal speed = 32.8;
+
+    GeoDataTreeModel treeModel;
+    PositionTracking tracking( &treeModel );
+
+    QCOMPARE( tracking.status(), PositionProviderStatusUnavailable );
+
+    QSignalSpy gpsLocationSpy( &tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ) );
+
+    FakeProvider provider;
+    provider.setStatus( PositionProviderStatusAvailable );
+    provider.setPosition( coordinates );
+    provider.setAccuracy( accuracy );
+    provider.setSpeed( speed );
+
+    tracking.setPositionProviderPlugin( &provider );
+
+    QCOMPARE( tracking.currentLocation(), coordinates );
+    QCOMPARE( tracking.accuracy().level, accuracy.level );
+    QCOMPARE( tracking.accuracy().horizontal, accuracy.horizontal );
+    QCOMPARE( tracking.accuracy().vertical, accuracy.vertical );
+    QCOMPARE( tracking.speed(), speed );
+    QCOMPARE( gpsLocationSpy.count(), 1 );
 }
 
 }

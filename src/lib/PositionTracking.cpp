@@ -57,19 +57,15 @@ class PositionTrackingPrivate
     GeoDataMultiGeometry *const m_trackSegments;
     GeoDataDocument m_document;
 
-    GeoDataCoordinates  m_gpsCurrentPosition;
     GeoDataCoordinates  m_gpsPreviousPosition;
     GeoDataLineString  *m_currentLineString;
 
     PositionProviderPlugin* m_positionProvider;
-
-    GeoDataAccuracy m_accuracy;
 };
 
 void PositionTrackingPrivate::setPosition( GeoDataCoordinates position,
                                            GeoDataAccuracy accuracy )
 {
-    m_accuracy = accuracy;
     if ( m_positionProvider && m_positionProvider->status() ==
         PositionProviderStatusAvailable )
     {
@@ -78,10 +74,9 @@ void PositionTrackingPrivate::setPosition( GeoDataCoordinates position,
         }
 
         //if the position has moved then update the current position
-        if ( m_gpsCurrentPosition != position )
-        {
+        if ( m_gpsPreviousPosition != position ) {
             m_currentPositionPlacemark->setCoordinate( position );
-            m_gpsCurrentPosition = position;
+            m_gpsPreviousPosition = position;
             qreal speed = m_positionProvider->speed();
             emit q->gpsLocation( position, speed );
         }
@@ -173,6 +168,10 @@ void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin
 
     if ( oldStatus != status() ) {
         emit statusChanged( status() );
+    }
+
+    if ( status() == PositionProviderStatusAvailable ) {
+        emit gpsLocation( d->m_positionProvider->position(), d->m_positionProvider->speed() );
     }
 }
 
@@ -272,12 +271,12 @@ bool PositionTracking::isTrackEmpty() const
 
 GeoDataAccuracy PositionTracking::accuracy() const
 {
-    return d->m_accuracy;
+    return d->m_positionProvider ? d->m_positionProvider->accuracy() : GeoDataAccuracy();
 }
 
 GeoDataCoordinates PositionTracking::currentLocation() const
 {
-    return d->m_gpsCurrentPosition;
+    return d->m_positionProvider ? d->m_positionProvider->position() : GeoDataCoordinates();
 }
 
 PositionProviderStatus PositionTracking::status() const

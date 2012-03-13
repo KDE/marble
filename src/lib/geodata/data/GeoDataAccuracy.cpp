@@ -12,8 +12,10 @@
 
 namespace Marble {
 
-GeoDataAccuracy::GeoDataAccuracy()
-    : level( none ), horizontal( 0 ), vertical( 0 )
+GeoDataAccuracy::GeoDataAccuracy( Level level, qreal horizontal, qreal _vertical )
+    : level( level ),
+      horizontal( horizontal ),
+      vertical( _vertical )
 {
        // nothing to do
 }

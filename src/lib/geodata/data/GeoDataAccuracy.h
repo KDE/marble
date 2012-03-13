@@ -22,9 +22,6 @@ namespace Marble
 class MARBLE_EXPORT GeoDataAccuracy
 {
  public:
-    /**
-     * @brief Approximate descriptive accuracy.
-     */
     enum Level {
         none = 0,
         Country,
@@ -33,7 +30,14 @@ class MARBLE_EXPORT GeoDataAccuracy
         PostalCode,
         Street,
         Detailed
-    } level;
+    };
+
+    GeoDataAccuracy( Level level = none, qreal horizontal = 0.0, qreal vertical = 0.0 );
+
+    /**
+     * @brief Approximate descriptive accuracy.
+     */
+    Level level;
 
     /**
      * @brief Horizontal accuracy in meters.
@@ -44,8 +48,6 @@ class MARBLE_EXPORT GeoDataAccuracy
      * @brief Vertical accuracy in meters.
      */
     qreal vertical;
-
-    GeoDataAccuracy();
 };
 
 }
