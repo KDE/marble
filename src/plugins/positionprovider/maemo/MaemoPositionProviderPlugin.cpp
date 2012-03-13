@@ -153,7 +153,7 @@ GeoDataAccuracy MaemoPositionProviderPlugin::accuracy() const
 
 QDateTime MaemoPositionProviderPlugin::timestamp() const
 {
-    d->m_timestamp;
+    return d->m_timestamp;
 }
 
 MaemoPositionProviderPlugin::MaemoPositionProviderPlugin() :
