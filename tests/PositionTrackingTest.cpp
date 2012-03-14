@@ -23,7 +23,9 @@ public:
         m_status( Marble::PositionProviderStatusUnavailable ),
         m_position(),
         m_accuracy(),
-        m_speed( 0.0 )
+        m_speed( 0.0 ),
+        m_direction( 0.0 ),
+        m_timestamp()
     {}
 
     QString name() const           { return "fake plugin"; }
@@ -41,21 +43,25 @@ public:
     Marble::GeoDataCoordinates position() const { return m_position; }
     Marble::GeoDataAccuracy accuracy() const { return m_accuracy; }
     qreal speed() const { return m_speed; }
-    qreal direction() const { return 0.0; }
-    QDateTime timestamp() const { return QDateTime(); }
+    qreal direction() const { return m_direction; }
+    QDateTime timestamp() const { return m_timestamp; }
 
     Marble::PositionProviderPlugin *newInstance() const { return 0; }
 
     void setStatus( Marble::PositionProviderStatus status );
-    void setPosition( const Marble::GeoDataCoordinates &coordinates );
-    void setAccuracy( const Marble::GeoDataAccuracy &accuracy );
-    void setSpeed( qreal speed );
+    void setPosition( const Marble::GeoDataCoordinates &position,
+                      const Marble::GeoDataAccuracy &accuracy,
+                      qreal speed,
+                      qreal direction,
+                      const QDateTime &timestamp );
 
 private:
     Marble::PositionProviderStatus m_status;
     Marble::GeoDataCoordinates m_position;
     Marble::GeoDataAccuracy m_accuracy;
     qreal m_speed;
+    qreal m_direction;
+    QDateTime m_timestamp;
 };
 
 void FakeProvider::setStatus( Marble::PositionProviderStatus status )
@@ -69,19 +75,19 @@ void FakeProvider::setStatus( Marble::PositionProviderStatus status )
     }
 }
 
-void FakeProvider::setPosition( const Marble::GeoDataCoordinates &position )
+void FakeProvider::setPosition( const Marble::GeoDataCoordinates &position,
+                                const Marble::GeoDataAccuracy &accuracy,
+                                qreal speed,
+                                qreal direction,
+                                const QDateTime &timestamp )
 {
     m_position = position;
-}
-
-void FakeProvider::setAccuracy( const Marble::GeoDataAccuracy &accuracy )
-{
     m_accuracy = accuracy;
-}
-
-void FakeProvider::setSpeed( qreal speed )
-{
     m_speed = speed;
+    m_direction = direction;
+    m_timestamp = timestamp;
+
+    emit positionChanged( m_position, m_accuracy );
 }
 
 namespace Marble
@@ -98,7 +104,7 @@ class PositionTrackingTest : public QObject
     void statusChanged_data();
     void statusChanged();
 
-    void positionChanged();
+    void setPositionProviderPlugin();
 };
 
 PositionTrackingTest::PositionTrackingTest()
@@ -138,11 +144,13 @@ void PositionTrackingTest::statusChanged()
     QCOMPARE( statusChangedSpy.count(), expectedStatusChangedCount );
 }
 
-void PositionTrackingTest::positionChanged()
+void PositionTrackingTest::setPositionProviderPlugin()
 {
     const GeoDataCoordinates coordinates( 1.2, 0.9 );
     const GeoDataAccuracy accuracy( GeoDataAccuracy::Detailed, 10.0, 22.0 );
     const qreal speed = 32.8;
+    const qreal direction = 49.7;
+    const QDateTime timestamp( QDate( 1, 3, 1994 ) );
 
     GeoDataTreeModel treeModel;
     PositionTracking tracking( &treeModel );
@@ -153,17 +161,15 @@ void PositionTrackingTest::positionChanged()
 
     FakeProvider provider;
     provider.setStatus( PositionProviderStatusAvailable );
-    provider.setPosition( coordinates );
-    provider.setAccuracy( accuracy );
-    provider.setSpeed( speed );
+    provider.setPosition( coordinates, accuracy, speed, direction, timestamp );
 
     tracking.setPositionProviderPlugin( &provider );
 
     QCOMPARE( tracking.currentLocation(), coordinates );
-    QCOMPARE( tracking.accuracy().level, accuracy.level );
-    QCOMPARE( tracking.accuracy().horizontal, accuracy.horizontal );
-    QCOMPARE( tracking.accuracy().vertical, accuracy.vertical );
+    QCOMPARE( tracking.accuracy(), accuracy );
     QCOMPARE( tracking.speed(), speed );
+    QCOMPARE( tracking.direction(), direction );
+    QCOMPARE( tracking.timestamp(), timestamp );
     QCOMPARE( gpsLocationSpy.count(), 1 );
 }
 

@@ -62,6 +62,11 @@ public:
      */
     qreal direction() const;
 
+    /**
+     * @brief Returns the timestamp of last recent tracking point.
+     */
+    QDateTime timestamp() const;
+
     /** @brief Returns the estimated accuracy of the current position */
     GeoDataAccuracy accuracy() const;
 

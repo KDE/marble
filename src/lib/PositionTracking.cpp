@@ -204,6 +204,11 @@ qreal PositionTracking::direction() const
     return d->m_positionProvider ? d->m_positionProvider->direction() : 0 ;
 }
 
+QDateTime PositionTracking::timestamp() const
+{
+    return d->m_positionProvider ? d->m_positionProvider->timestamp() : QDateTime();
+}
+
 bool PositionTracking::trackVisible() const
 {
     return d->m_currentTrackPlacemark->isVisible();

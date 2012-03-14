@@ -20,4 +20,9 @@ GeoDataAccuracy::GeoDataAccuracy( Level level, qreal horizontal, qreal _vertical
        // nothing to do
 }
 
+bool GeoDataAccuracy::operator==( const GeoDataAccuracy &other ) const
+{
+    return ( level == other.level ) && ( horizontal == other.horizontal ) && ( vertical == other.vertical );
+}
+
 }
