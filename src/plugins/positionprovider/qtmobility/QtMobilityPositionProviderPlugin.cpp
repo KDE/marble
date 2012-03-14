@@ -22,40 +22,15 @@ class QtMobilityPositionProviderPluginPrivate
 {
 public:
     QtMobilityPositionProviderPluginPrivate();
-    ~QtMobilityPositionProviderPluginPrivate();
-    QGeoPositionInfoSource *source();
-    const PositionProviderStatus& status() const;
-    void setStatus( const PositionProviderStatus& newStatus );
 
-private:
-    QGeoPositionInfoSource *m_source;
+    QGeoPositionInfoSource *const m_source;
     PositionProviderStatus m_status;
 };
 
 QtMobilityPositionProviderPluginPrivate::QtMobilityPositionProviderPluginPrivate() :
-        m_source( 0 ), m_status( PositionProviderStatusAcquiring )
+    m_source( QGeoPositionInfoSource::createDefaultSource( 0 ) ),
+    m_status( PositionProviderStatusAcquiring )
 {
-    m_source = QGeoPositionInfoSource::createDefaultSource( 0 );
-}
-
-QtMobilityPositionProviderPluginPrivate::~QtMobilityPositionProviderPluginPrivate()
-{
-}
-
-QGeoPositionInfoSource *QtMobilityPositionProviderPluginPrivate::source()
-{
-    return m_source;
-}
-
-
-const PositionProviderStatus& QtMobilityPositionProviderPluginPrivate::status() const
-{
-    return m_status;
-}
-
-void QtMobilityPositionProviderPluginPrivate::setStatus( const PositionProviderStatus& newStatus )
-{
-    m_status = newStatus;
 }
 
 QString QtMobilityPositionProviderPlugin::name() const
@@ -106,12 +81,12 @@ PositionProviderPlugin* QtMobilityPositionProviderPlugin::newInstance() const
 
 PositionProviderStatus QtMobilityPositionProviderPlugin::status() const
 {
-    return d->status();
+    return d->m_status;
 }
 
 GeoDataCoordinates QtMobilityPositionProviderPlugin::position() const
 {
-    QGeoCoordinate p = d->source()->lastKnownPosition().coordinate();
+    QGeoCoordinate p = d->m_source->lastKnownPosition().coordinate();
     if( p.isValid() ) {
         return GeoDataCoordinates( p.longitude(), p.latitude(),
                                    p.altitude(), GeoDataCoordinates::Degree );
@@ -122,7 +97,7 @@ GeoDataCoordinates QtMobilityPositionProviderPlugin::position() const
 GeoDataAccuracy QtMobilityPositionProviderPlugin::accuracy() const
 {
     GeoDataAccuracy result;
-    QGeoPositionInfo info = d->source()->lastKnownPosition();
+    QGeoPositionInfo info = d->m_source->lastKnownPosition();
 
     if( info.hasAttribute( QGeoPositionInfo::HorizontalAccuracy ) &&
         info.hasAttribute( QGeoPositionInfo::VerticalAccuracy ) ) {
@@ -151,44 +126,44 @@ QtMobilityPositionProviderPlugin::~QtMobilityPositionProviderPlugin()
 
 void QtMobilityPositionProviderPlugin::initialize()
 {
-    if( d->source() ) {
-        connect( d->source(), SIGNAL( positionUpdated ( const QGeoPositionInfo& ) ), this, SLOT( update() ) );
-        d->source()->setUpdateInterval( 1000 );
-        d->source()->startUpdates();
+    if( d->m_source ) {
+        connect( d->m_source, SIGNAL( positionUpdated ( const QGeoPositionInfo& ) ), this, SLOT( update() ) );
+        d->m_source->setUpdateInterval( 1000 );
+        d->m_source->startUpdates();
     }
 }
 
 bool QtMobilityPositionProviderPlugin::isInitialized() const
 {
-    return d->source() != 0;
+    return d->m_source != 0;
 }
 
 qreal QtMobilityPositionProviderPlugin::speed() const
 {
-    if( d->source()->lastKnownPosition().hasAttribute( QGeoPositionInfo::GroundSpeed ) ) {
-        return d->source()->lastKnownPosition().attribute( QGeoPositionInfo::GroundSpeed );
+    if( d->m_source->lastKnownPosition().hasAttribute( QGeoPositionInfo::GroundSpeed ) ) {
+        return d->m_source->lastKnownPosition().attribute( QGeoPositionInfo::GroundSpeed );
     }
     return 0.0;
 }
 
 qreal QtMobilityPositionProviderPlugin::direction() const
 {
-    if( d->source()->lastKnownPosition().hasAttribute( QGeoPositionInfo::Direction ) ) {
-        return d->source()->lastKnownPosition().attribute( QGeoPositionInfo::Direction );
+    if( d->m_source->lastKnownPosition().hasAttribute( QGeoPositionInfo::Direction ) ) {
+        return d->m_source->lastKnownPosition().attribute( QGeoPositionInfo::Direction );
     }
     return 0.0;
 }
 
 QDateTime QtMobilityPositionProviderPlugin::timestamp() const
 {
-    return d->source()->lastKnownPosition().timestamp();
+    return d->m_source->lastKnownPosition().timestamp();
 }
 
 void QtMobilityPositionProviderPlugin::update()
 {
     PositionProviderStatus newStatus = PositionProviderStatusAcquiring;
-    if ( d->source() ) {
-        if ( d->source()->lastKnownPosition().isValid() ) {
+    if ( d->m_source ) {
+        if ( d->m_source->lastKnownPosition().isValid() ) {
             newStatus = PositionProviderStatusAvailable;
         }
         else {
@@ -196,8 +171,8 @@ void QtMobilityPositionProviderPlugin::update()
         }
     }
 
-    if ( newStatus != d->status() ) {
-        d->setStatus( newStatus );
+    if ( newStatus != d->m_status ) {
+        d->m_status = newStatus;
         emit statusChanged( newStatus );
     }
 
