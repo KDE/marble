@@ -161,11 +161,11 @@ void PositionTrackingTest::setPositionProviderPlugin()
 
     QSignalSpy gpsLocationSpy( &tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ) );
 
-    FakeProvider provider;
-    provider.setStatus( PositionProviderStatusAvailable );
-    provider.setPosition( coordinates, accuracy, speed, direction, timestamp );
+    QPointer<FakeProvider> provider( new FakeProvider );
+    provider->setStatus( PositionProviderStatusAvailable );
+    provider->setPosition( coordinates, accuracy, speed, direction, timestamp );
 
-    tracking.setPositionProviderPlugin( &provider );
+    tracking.setPositionProviderPlugin( provider );
 
     QCOMPARE( tracking.currentLocation(), coordinates );
     QCOMPARE( tracking.accuracy(), accuracy );
@@ -173,6 +173,10 @@ void PositionTrackingTest::setPositionProviderPlugin()
     QCOMPARE( tracking.direction(), direction );
     QCOMPARE( tracking.timestamp(), timestamp );
     QCOMPARE( gpsLocationSpy.count(), 1 );
+
+    tracking.setPositionProviderPlugin( 0 );
+
+    QVERIFY( provider.isNull() );
 }
 
 void PositionTrackingTest::clearTrack()

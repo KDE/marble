@@ -154,7 +154,7 @@ void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin
     const PositionProviderStatus oldStatus = status();
 
     if ( d->m_positionProvider ) {
-        d->m_positionProvider->deleteLater();
+        delete d->m_positionProvider;
     }
 
     d->m_positionProvider = plugin;
