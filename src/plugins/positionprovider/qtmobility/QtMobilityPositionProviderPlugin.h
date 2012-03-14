@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011      Daniel Marth <danielmarth@gmx.at>
+// Copyright 2012        Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef QT_MOBILITY_POSITION_PROVIDER_PLUGIN_H

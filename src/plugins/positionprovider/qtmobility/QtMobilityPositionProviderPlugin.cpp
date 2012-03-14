@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011        Daniel Marth <danielmarth@gmx.at>
+// Copyright 2012        Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "QtMobilityPositionProviderPlugin.h"
@@ -86,32 +87,36 @@ PositionProviderStatus QtMobilityPositionProviderPlugin::status() const
 
 GeoDataCoordinates QtMobilityPositionProviderPlugin::position() const
 {
-    QGeoCoordinate p = d->m_source->lastKnownPosition().coordinate();
-    if( p.isValid() ) {
-        return GeoDataCoordinates( p.longitude(), p.latitude(),
-                                   p.altitude(), GeoDataCoordinates::Degree );
+    if ( d->m_source == 0 ) {
+        return GeoDataCoordinates();
     }
-    return GeoDataCoordinates();
+
+    const QGeoCoordinate p = d->m_source->lastKnownPosition().coordinate();
+    if( !p.isValid() ) {
+        return GeoDataCoordinates();
+    }
+
+    return GeoDataCoordinates( p.longitude(), p.latitude(),
+                               p.altitude(), GeoDataCoordinates::Degree );
 }
 
 GeoDataAccuracy QtMobilityPositionProviderPlugin::accuracy() const
 {
-    GeoDataAccuracy result;
-    QGeoPositionInfo info = d->m_source->lastKnownPosition();
-
-    if( info.hasAttribute( QGeoPositionInfo::HorizontalAccuracy ) &&
-        info.hasAttribute( QGeoPositionInfo::VerticalAccuracy ) ) {
-        result.level = GeoDataAccuracy::Detailed;
-        result.horizontal = info.attribute( QGeoPositionInfo::HorizontalAccuracy );
-        result.vertical = info.attribute( QGeoPositionInfo::VerticalAccuracy );
-    }
-    else {
-        result.level = GeoDataAccuracy::none;
-        result.horizontal = 0;
-        result.vertical = 0;
+    if ( d->m_source == 0 ) {
+        return GeoDataAccuracy();
     }
 
-    return result;
+    const QGeoPositionInfo info = d->m_source->lastKnownPosition();
+
+    if( !info.hasAttribute( QGeoPositionInfo::HorizontalAccuracy ) ||
+        !info.hasAttribute( QGeoPositionInfo::VerticalAccuracy ) ) {
+        return GeoDataAccuracy();
+    }
+
+    const qreal horizontal = info.attribute( QGeoPositionInfo::HorizontalAccuracy );
+    const qreal vertical = info.attribute( QGeoPositionInfo::VerticalAccuracy );
+
+    return GeoDataAccuracy( GeoDataAccuracy::Detailed, horizontal, vertical );
 }
 
 QtMobilityPositionProviderPlugin::QtMobilityPositionProviderPlugin() :
@@ -140,22 +145,36 @@ bool QtMobilityPositionProviderPlugin::isInitialized() const
 
 qreal QtMobilityPositionProviderPlugin::speed() const
 {
-    if( d->m_source->lastKnownPosition().hasAttribute( QGeoPositionInfo::GroundSpeed ) ) {
-        return d->m_source->lastKnownPosition().attribute( QGeoPositionInfo::GroundSpeed );
+    if ( d->m_source == 0 ) {
+        return 0.0;
     }
-    return 0.0;
+
+    if( !d->m_source->lastKnownPosition().hasAttribute( QGeoPositionInfo::GroundSpeed ) ) {
+        return 0.0;
+    }
+
+    return d->m_source->lastKnownPosition().attribute( QGeoPositionInfo::GroundSpeed );
 }
 
 qreal QtMobilityPositionProviderPlugin::direction() const
 {
-    if( d->m_source->lastKnownPosition().hasAttribute( QGeoPositionInfo::Direction ) ) {
-        return d->m_source->lastKnownPosition().attribute( QGeoPositionInfo::Direction );
+    if ( d->m_source == 0 ) {
+        return 0.0;
     }
-    return 0.0;
+
+    if( !d->m_source->lastKnownPosition().hasAttribute( QGeoPositionInfo::Direction ) ) {
+        return 0.0;
+    }
+
+    return d->m_source->lastKnownPosition().attribute( QGeoPositionInfo::Direction );
 }
 
 QDateTime QtMobilityPositionProviderPlugin::timestamp() const
 {
+    if ( d->m_source == 0 ) {
+        return QDateTime();
+    }
+
     return d->m_source->lastKnownPosition().timestamp();
 }
 
