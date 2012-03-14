@@ -60,7 +60,7 @@ void QtMobilityPositionProviderPluginPrivate::setStatus( const PositionProviderS
 
 QString QtMobilityPositionProviderPlugin::name() const
 {
-    return "Qt Mobility Position Provider Plugin"; /** @todo FIXME I18N ... */
+    return tr( "Qt Mobility Position Provider Plugin" );
 }
 
 QString QtMobilityPositionProviderPlugin::nameId() const
@@ -70,7 +70,7 @@ QString QtMobilityPositionProviderPlugin::nameId() const
 
 QString QtMobilityPositionProviderPlugin::guiString() const
 {
-    return "Qt Mobility Location"; /** @todo FIXME I18N ... */
+    return tr( "Qt Mobility Location" );
 }
 
 QString QtMobilityPositionProviderPlugin::version() const
@@ -80,7 +80,7 @@ QString QtMobilityPositionProviderPlugin::version() const
 
 QString QtMobilityPositionProviderPlugin::description() const
 {
-    return "Reports the GPS position of a QtMobility compatible device."; /** @todo FIXME I18N ... */
+    return tr( "Reports the GPS position of a QtMobility compatible device." );
 }
 
 QString QtMobilityPositionProviderPlugin::copyrightYears() const
