@@ -157,24 +157,25 @@ QHash<QString,QVariant> GraticulePlugin::settings() const
     return m_settings;
 }
 
-void GraticulePlugin::setSettings( QHash<QString,QVariant> settings )
-{       
-    if ( !settings.contains( "gridColor" ) ) {
-        settings.insert( "gridColor", QColor( Qt::white ) );
+void GraticulePlugin::setSettings( const QHash<QString,QVariant> &settings )
+{
+    m_settings = settings;
+
+    if ( !m_settings.contains( "gridColor" ) ) {
+        m_settings.insert( "gridColor", QColor( Qt::white ) );
         m_gridCirclePen = QPen( QColor ( Qt::white ) );
     }
     
-    if ( !settings.contains( "tropicsColor" ) ) {
-        settings.insert( "tropicsColor", QColor( Qt::yellow ) );
+    if ( !m_settings.contains( "tropicsColor" ) ) {
+        m_settings.insert( "tropicsColor", QColor( Qt::yellow ) );
         m_tropicsCirclePen = QPen( QColor ( Qt::yellow ) );        
     }
 
-    if ( !settings.contains( "equatorColor" ) ) {
-        settings.insert( "equatorColor", QColor( Qt::yellow ) );
+    if ( !m_settings.contains( "equatorColor" ) ) {
+        m_settings.insert( "equatorColor", QColor( Qt::yellow ) );
         m_equatorCirclePen = QPen( QColor ( Qt::yellow ) );                
     }    
 
-    m_settings = settings;
     readSettings();
     emit settingsChanged( nameId() );
 }

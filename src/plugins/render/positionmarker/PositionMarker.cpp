@@ -294,31 +294,32 @@ QHash<QString,QVariant> PositionMarker::settings() const
     return m_settings;
 }
 
-void PositionMarker::setSettings( QHash<QString,QVariant> settings )
+void PositionMarker::setSettings( const QHash<QString, QVariant> &settings )
 {
-    if ( !settings.contains( "useCustomCursor" ) ) {
-        settings.insert( "useCustomCursor", false );
+    m_settings = settings;
+
+    if ( !m_settings.contains( "useCustomCursor" ) ) {
+        m_settings.insert( "useCustomCursor", false );
     }
-    if ( !settings.contains( "cursorPath" ) ) {
-        settings.insert( "cursorPath", m_defaultCursorPath );
+    if ( !m_settings.contains( "cursorPath" ) ) {
+        m_settings.insert( "cursorPath", m_defaultCursorPath );
     }
-    if ( !settings.contains( "cursorSize" ) ) {
-        settings.insert( "cursorSize", 1.0 );
+    if ( !m_settings.contains( "cursorSize" ) ) {
+        m_settings.insert( "cursorSize", 1.0 );
     }
-    if( !settings.contains( "acColor" ) ) {
+    if( !m_settings.contains( "acColor" ) ) {
         QColor defaultColor = oxygenBrickRed4;
         bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
         defaultColor.setAlpha( smallScreen ? 80 : 40 );
-        settings.insert( "acColor", defaultColor );
+        m_settings.insert( "acColor", defaultColor );
     }
-    if( !settings.contains( "trailColor" ) ) {
-        settings.insert( "trailColor", QColor( 0, 0, 255 ) );
+    if( !m_settings.contains( "trailColor" ) ) {
+        m_settings.insert( "trailColor", QColor( 0, 0, 255 ) );
     }
-    if( !settings.contains( "showTrail" ) ) {
-        settings.insert( "showTrail", false );
+    if( !m_settings.contains( "showTrail" ) ) {
+        m_settings.insert( "showTrail", false );
     }
 
-    m_settings = settings;
     readSettings();
     emit settingsChanged( nameId() );
 }

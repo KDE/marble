@@ -64,7 +64,7 @@ class WikipediaPlugin : public AbstractDataPlugin
     /**
      * Set the settings of the item.
      */
-    virtual void setSettings( QHash<QString,QVariant> settings );
+    virtual void setSettings( const QHash<QString,QVariant> &settings );
 
  private Q_SLOTS:
     void readSettings();

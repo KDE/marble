@@ -153,21 +153,22 @@ QHash<QString, QVariant> SatellitesPlugin::settings() const
     return m_settings;
 }
 
-void SatellitesPlugin::setSettings( QHash<QString, QVariant> settings )
+void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
 {
-    if ( !settings.contains( "tleList" ) ) {
+    m_settings = settings;
+
+    if ( !m_settings.contains( "tleList" ) ) {
         QStringList tleList;
         tleList << "http://www.celestrak.com/NORAD/elements/visual.txt";
-        settings.insert( "tleList", tleList );
-    } else if ( settings.value( "tleList" ).type() == QVariant::String ) {
+        m_settings.insert( "tleList", tleList );
+    } else if ( m_settings.value( "tleList" ).type() == QVariant::String ) {
         //HACK: KConfig can't guess the type of the settings, when we use KConfigGroup::readEntry()
         // in marble_part it returns a QString which is then wrapped into a QVariant when added
         // to the settings hash. QVariant can handle the conversion for some types, like toDateTime()
         // but when calling toStringList() on a QVariant::String, it will return a one element list
-        settings.insert( "tleList", settings.value( "tleList" ).toString().split( "," ) );
+        m_settings.insert( "tleList", m_settings.value( "tleList" ).toString().split( "," ) );
     }
 
-    m_settings = settings;
     readSettings();
     emit settingsChanged( nameId() );
 }

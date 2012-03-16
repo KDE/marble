@@ -62,7 +62,7 @@ public:
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer );
 
     QHash<QString, QVariant> settings() const;
-    void setSettings( QHash<QString, QVariant> settings );
+    void setSettings( const QHash<QString, QVariant> &settings );
 
     QDialog *configDialog();
 

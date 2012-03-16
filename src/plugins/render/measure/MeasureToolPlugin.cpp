@@ -145,7 +145,7 @@ QHash<QString,QVariant> MeasureToolPlugin::settings() const
     return m_settings;
 }
 
-void MeasureToolPlugin::setSettings( QHash<QString,QVariant> settings )
+void MeasureToolPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     m_settings = settings;
     readSettings();

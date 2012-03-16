@@ -140,30 +140,32 @@ QHash<QString,QVariant> WeatherPlugin::settings() const
     return m_settings;
 }
 
-void WeatherPlugin::setSettings( QHash<QString,QVariant> settings )
+void WeatherPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
+    m_settings = settings;
+
     // Check if all fields are filled and fill them with default values.
     // Information
-    if ( !settings.contains( "showCondition" ) ) {
-        settings.insert( "showCondition", showConditionDefault );
+    if ( !m_settings.contains( "showCondition" ) ) {
+        m_settings.insert( "showCondition", showConditionDefault );
     }
     
-    if ( !settings.contains( "showTemperature" ) ) {
-        settings.insert( "showTemperature", showTemperatureDefault );
+    if ( !m_settings.contains( "showTemperature" ) ) {
+        m_settings.insert( "showTemperature", showTemperatureDefault );
     }
     
-    if ( !settings.contains( "showWindDirection" ) ) {
-        settings.insert( "showWindDirection", showWindDirectionDefault );
+    if ( !m_settings.contains( "showWindDirection" ) ) {
+        m_settings.insert( "showWindDirection", showWindDirectionDefault );
     }
     
-    if ( !settings.contains( "showWindSpeed" ) ) {
-        settings.insert( "showWindSpeed", showWindSpeedDefault );
+    if ( !m_settings.contains( "showWindSpeed" ) ) {
+        m_settings.insert( "showWindSpeed", showWindSpeedDefault );
     }
     
     // Units
     // The default units depend on the global measure system.
     MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
-    if ( !settings.contains( "temperatureUnit" ) ) {
+    if ( !m_settings.contains( "temperatureUnit" ) ) {
         int temperatureUnit;
         if ( locale->measurementSystem() == QLocale::MetricSystem ) {
             temperatureUnit = WeatherData::Celsius;
@@ -171,10 +173,10 @@ void WeatherPlugin::setSettings( QHash<QString,QVariant> settings )
         else {
             temperatureUnit = WeatherData::Fahrenheit;
         }
-        settings.insert( "temperatureUnit", temperatureUnit );
+        m_settings.insert( "temperatureUnit", temperatureUnit );
     }
     
-    if ( !settings.contains( "windSpeedUnit" ) ) {
+    if ( !m_settings.contains( "windSpeedUnit" ) ) {
         int windSpeedUnit;
         if ( locale->measurementSystem() == QLocale::MetricSystem ) {
             windSpeedUnit = WeatherData::kph;
@@ -182,10 +184,10 @@ void WeatherPlugin::setSettings( QHash<QString,QVariant> settings )
         else {
             windSpeedUnit = WeatherData::mph;
         }
-        settings.insert( "windSpeedUnit", windSpeedUnit );
+        m_settings.insert( "windSpeedUnit", windSpeedUnit );
     }
     
-    if ( !settings.contains( "pressureUnit" ) ) {
+    if ( !m_settings.contains( "pressureUnit" ) ) {
         int pressureUnit;
         if ( locale->measurementSystem() == QLocale::MetricSystem ) {
             pressureUnit = WeatherData::HectoPascal;
@@ -193,10 +195,9 @@ void WeatherPlugin::setSettings( QHash<QString,QVariant> settings )
         else {
             pressureUnit = WeatherData::inchHg;
         }
-        settings.insert( "pressureUnit", pressureUnit );
+        m_settings.insert( "pressureUnit", pressureUnit );
     }
     
-    m_settings = settings;
     readSettings();
 
     emit settingsChanged( nameId() );

@@ -133,7 +133,7 @@ QHash<QString,QVariant> CrosshairsPlugin::settings() const
     return m_settings;
 }
 
-void CrosshairsPlugin::setSettings( QHash<QString,QVariant> settings )
+void CrosshairsPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     m_settings = settings;
     readSettings();

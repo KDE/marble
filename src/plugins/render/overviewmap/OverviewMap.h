@@ -82,7 +82,7 @@ class OverviewMap : public AbstractFloatItem
     /**
      * Set the settings of the item.
      */
-    virtual void setSettings( QHash<QString,QVariant> settings );
+    virtual void setSettings( const QHash<QString,QVariant> &settings );
 
  public slots:
     void readSettings();

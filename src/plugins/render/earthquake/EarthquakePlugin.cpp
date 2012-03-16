@@ -109,22 +109,23 @@ QHash<QString,QVariant> EarthquakePlugin::settings() const
     return m_settings;
 }
 
-void EarthquakePlugin::setSettings( QHash<QString,QVariant> settings )
+void EarthquakePlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
-    if ( !settings.contains( "numResults" ) ) {
-        settings.insert( "numResults", numberOfItemsOnScreen );
+    m_settings = settings;
+
+    if ( !m_settings.contains( "numResults" ) ) {
+        m_settings.insert( "numResults", numberOfItemsOnScreen );
     }
-    if ( !settings.contains( "minMagnitude" ) ) {
-        settings.insert( "minMagnitude", 0.0 );
+    if ( !m_settings.contains( "minMagnitude" ) ) {
+        m_settings.insert( "minMagnitude", 0.0 );
     }
-    if ( !settings.contains( "startDate" ) ) {
-        settings.insert( "startDate", QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) );
+    if ( !m_settings.contains( "startDate" ) ) {
+        m_settings.insert( "startDate", QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) );
     }
-    if ( !settings.contains( "endDate" ) ) {
-        settings.insert( "endDate", QDateTime::currentDateTime() );
+    if ( !m_settings.contains( "endDate" ) ) {
+        m_settings.insert( "endDate", QDateTime::currentDateTime() );
     }
 
-    m_settings = settings;
     readSettings();
     emit settingsChanged( nameId() );
 }

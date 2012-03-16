@@ -58,7 +58,7 @@ public:
 
     virtual QHash<QString,QVariant> settings() const;
 
-    virtual void setSettings( QHash<QString,QVariant> settings );
+    virtual void setSettings( const QHash<QString,QVariant> &settings );
 
     QDialog *configDialog();
 

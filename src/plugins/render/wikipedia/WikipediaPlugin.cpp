@@ -132,20 +132,21 @@ QHash<QString,QVariant> WikipediaPlugin::settings() const
     return m_settings;
 }
 
-void WikipediaPlugin::setSettings( QHash<QString,QVariant> settings )
+void WikipediaPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
-    if ( !settings.contains( "numberOfItems" ) ) {
-        settings.insert( "numberOfItems", 15 );
-    }
-    else if ( settings.value( "numberOfItems" ).toUInt() > maximumNumberOfItems ) {
-        settings.insert( "numberOfItems", maximumNumberOfItems );
-    }
-    
-    if ( !settings.contains( "showThumbnails" ) ) {
-        settings.insert( "showThumbnails", true );
-    }
-    
     m_settings = settings;
+
+    if ( !m_settings.contains( "numberOfItems" ) ) {
+        m_settings.insert( "numberOfItems", 15 );
+    }
+    else if ( m_settings.value( "numberOfItems" ).toUInt() > maximumNumberOfItems ) {
+        m_settings.insert( "numberOfItems", maximumNumberOfItems );
+    }
+    
+    if ( !m_settings.contains( "showThumbnails" ) ) {
+        m_settings.insert( "showThumbnails", true );
+    }
+    
     readSettings();
     emit settingsChanged( nameId() );
 }

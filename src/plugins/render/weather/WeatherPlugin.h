@@ -59,7 +59,7 @@ class WeatherPlugin : public AbstractDataPlugin
 
     QHash<QString,QVariant> settings() const;
 
-    void setSettings( QHash<QString,QVariant> settings );
+    void setSettings( const QHash<QString,QVariant> &settings );
 
  private Q_SLOTS:
     void readSettings();

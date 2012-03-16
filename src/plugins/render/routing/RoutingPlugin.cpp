@@ -573,7 +573,7 @@ QHash<QString,QVariant> RoutingPlugin::settings() const
     return d->m_settings;
 }
 
-void RoutingPlugin::setSettings( QHash<QString,QVariant> settings )
+void RoutingPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     d->m_settings = settings;
     if (!d->m_settings.contains("muted")) {

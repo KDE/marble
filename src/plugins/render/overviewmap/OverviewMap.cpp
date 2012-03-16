@@ -296,35 +296,36 @@ QHash<QString,QVariant> OverviewMap::settings() const
     return m_settings;
 }
 
-void OverviewMap::setSettings( QHash<QString,QVariant> settings )
+void OverviewMap::setSettings( const QHash<QString,QVariant> &settings )
 {
-    if( !settings.contains( "width" ) ) {
-        settings.insert( "width", m_defaultSize.toSize().width() );
+    m_settings = settings;
+
+    if( !m_settings.contains( "width" ) ) {
+        m_settings.insert( "width", m_defaultSize.toSize().width() );
     }
-    if( !settings.contains( "height" ) ) {
-        settings.insert( "height", m_defaultSize.toSize().height() );
+    if( !m_settings.contains( "height" ) ) {
+        m_settings.insert( "height", m_defaultSize.toSize().height() );
     }
     QString const worldmap = MarbleDirs::path( "svg/worldmap.svg" );
     QStringList const planets = Planet::planetList();
-    if ( !settings.contains( "path_" + m_planetID[2] ) ) {
-        settings.insert( "path_" + m_planetID[2], worldmap );
+    if ( !m_settings.contains( "path_" + m_planetID[2] ) ) {
+        m_settings.insert( "path_" + m_planetID[2], worldmap );
     }
-    if ( !settings.contains( "path_" + m_planetID[10] ) ) {
-        settings.insert( "path_" + m_planetID[10], MarbleDirs::path( "svg/lunarmap.svg" ) );
+    if ( !m_settings.contains( "path_" + m_planetID[10] ) ) {
+        m_settings.insert( "path_" + m_planetID[10], MarbleDirs::path( "svg/lunarmap.svg" ) );
     }
     foreach( const QString& planet, planets ) {
-        if ( !settings.contains( "path_" + planet ) ) {
+        if ( !m_settings.contains( "path_" + planet ) ) {
             QString const planetMap = MarbleDirs::path( QString( "svg/%1map.svg" ).arg( planet ) );
             QString const mapFile = planetMap.isEmpty() ? worldmap : planetMap;
-            settings.insert( "path_" + planet, mapFile );
+            m_settings.insert( "path_" + planet, mapFile );
         }
     }
 
-    if( !settings.contains( "posColor" ) ) {
-        settings.insert( "posColor", QColor( Qt::white ).name() );
+    if( !m_settings.contains( "posColor" ) ) {
+        m_settings.insert( "posColor", QColor( Qt::white ).name() );
     }
 
-    m_settings = settings;
     readSettings();
     emit settingsChanged( nameId() );
 }

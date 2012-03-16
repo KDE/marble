@@ -342,43 +342,44 @@ QHash<QString,QVariant> AprsPlugin::settings() const
     return m_settings;
 }
 
-void AprsPlugin::setSettings( QHash<QString,QVariant> settings )
+void AprsPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
+    m_settings = settings;
+
     // Check if all fields are filled and fill them with default values.
     // Information
-    if ( !settings.contains( "useInternet" ) ) {
-        settings.insert( "useInternet", true );
+    if ( !m_settings.contains( "useInternet" ) ) {
+        m_settings.insert( "useInternet", true );
     }
-    if ( !settings.contains( "useTTY" ) ) {
-        settings.insert( "useTTY", false );
-    }
-
-    if ( !settings.contains( "APRSHost" ) ) {
-        settings.insert( "APRSHost", "rotate.aprs.net" );
-    }
-    if ( !settings.contains( "APRSPort" ) ) {
-        settings.insert( "APRSPort", "10253" );
-    }
-    if ( !settings.contains( "TNCTTY" ) ) {
-        settings.insert( "TNCTTY", "/dev/ttyUSB0" );
+    if ( !m_settings.contains( "useTTY" ) ) {
+        m_settings.insert( "useTTY", false );
     }
 
-    if ( !settings.contains( "TCPIPDump" ) ) {
-        settings.insert( "TCPIPDump", false );
+    if ( !m_settings.contains( "APRSHost" ) ) {
+        m_settings.insert( "APRSHost", "rotate.aprs.net" );
     }
-    if ( !settings.contains( "TTYDump" ) ) {
-        settings.insert( "TTYDump", false );
+    if ( !m_settings.contains( "APRSPort" ) ) {
+        m_settings.insert( "APRSPort", "10253" );
     }
-
-    if ( !settings.contains( "fadeTime" ) ) {
-        settings.insert( "fadeTime", 10 );
-    }
-
-    if ( !settings.contains( "hideTime" ) ) {
-        settings.insert( "hideTime", 45 );
+    if ( !m_settings.contains( "TNCTTY" ) ) {
+        m_settings.insert( "TNCTTY", "/dev/ttyUSB0" );
     }
 
-    m_settings = settings;
+    if ( !m_settings.contains( "TCPIPDump" ) ) {
+        m_settings.insert( "TCPIPDump", false );
+    }
+    if ( !m_settings.contains( "TTYDump" ) ) {
+        m_settings.insert( "TTYDump", false );
+    }
+
+    if ( !m_settings.contains( "fadeTime" ) ) {
+        m_settings.insert( "fadeTime", 10 );
+    }
+
+    if ( !m_settings.contains( "hideTime" ) ) {
+        m_settings.insert( "hideTime", 45 );
+    }
+
     readSettings();
     emit settingsChanged( nameId() );
 }

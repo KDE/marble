@@ -111,7 +111,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     /**
      * Set the settings of the item.
      */
-    virtual void setSettings( QHash<QString,QVariant> settings );
+    virtual void setSettings( const QHash<QString,QVariant> &settings );
 
     /**
      * Function for returning the type of plugin this is for.

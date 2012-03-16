@@ -200,7 +200,7 @@ QHash<QString,QVariant> RenderPlugin::settings() const
     return QHash<QString,QVariant>();
 }
 
-void RenderPlugin::setSettings( QHash<QString,QVariant> settings )
+void RenderPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     Q_UNUSED( settings );
 }
