@@ -15,6 +15,7 @@
 
 #include "MarbleDebug.h"
 #include <QtCore/QRect>
+#include <QtCore/qmath.h>
 #include <QtGui/QFileDialog>
 #include <QtGui/QMessageBox>
 #include <QtGui/QPushButton>
@@ -167,34 +168,32 @@ bool PositionMarker::isInitialized() const
 
 void PositionMarker::update( const ViewportParams *viewport )
 {
-    if( ! ( m_currentPosition == m_previousPosition ) )
+    if( m_currentPosition != m_previousPosition )
     {
-        QPointF position;
-        QPointF previousPosition;
+        QPointF screenPosition;
+        QPointF previousScreenPosition;
 
-        viewport->screenCoordinates( m_currentPosition, position );
-        viewport->screenCoordinates( m_previousPosition, previousPosition );
+        viewport->screenCoordinates( m_currentPosition, screenPosition );
+        viewport->screenCoordinates( m_previousPosition, previousScreenPosition );
 
         // calculate the arrow shape, oriented by the heading
         // and with constant size
-        QPointF unitVector = position - previousPosition;
+        const QPointF vector = screenPosition - previousScreenPosition;
+        const qreal magnitude = qSqrt( ( vector.x() * vector.x() ) + ( vector.y() * vector.y() ) );
         // check that some screen progress was made
-        if( unitVector.x() || unitVector.y() ) {
-            // magnitude should be >0
-            qreal magnitude = sqrt( ( unitVector.x() * unitVector.x() )
-                                    + ( unitVector.y() * unitVector.y() ) );
-            m_heading = atan( unitVector.y() / unitVector.x() ) + M_PI / 2.0;
-            unitVector = unitVector / magnitude;
-            QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x() );
-            QPointF relativeLeft = - ( unitVector * 9   ) + ( unitVector2 * 9 );
-            QPointF relativeRight = - ( unitVector * 9 ) - ( unitVector2 * 9 );
-            QPointF relativeTip =  unitVector * 19.0 ;
+        if( magnitude > 0 && ( qAbs( vector.x() ) - 0.00000001 ) > 0 ) {
+            m_heading = qAtan( vector.y() / vector.x() ) + M_PI / 2.0;
+            const QPointF unitVector = vector / magnitude;
+            const QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x() );
+            const QPointF relativeLeft = - ( unitVector * 9   ) + ( unitVector2 * 9 );
+            const QPointF relativeRight = - ( unitVector * 9 ) - ( unitVector2 * 9 );
+            const QPointF relativeTip =  unitVector * 19.0 ;
 
             m_arrow.clear();
-            m_arrow << position
-                    << position + ( relativeLeft * m_cursorSize )
-                    << position + ( relativeTip * m_cursorSize )
-                    << position + ( relativeRight * m_cursorSize );
+            m_arrow << screenPosition
+                    << screenPosition + ( relativeLeft * m_cursorSize )
+                    << screenPosition + ( relativeTip * m_cursorSize )
+                    << screenPosition + ( relativeRight * m_cursorSize );
 
             m_dirtyRegion = QRegion();
             m_dirtyRegion += ( m_arrow.boundingRect().toRect() );
