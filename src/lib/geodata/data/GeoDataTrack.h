@@ -159,7 +159,7 @@ public:
     /**
      * Return the GeoDataLineString representing the current track
      */
-    GeoDataLineString *lineString() const;
+    const GeoDataLineString *lineString() const;
 
     /**
      * Return the ExtendedData assigned to the feature.

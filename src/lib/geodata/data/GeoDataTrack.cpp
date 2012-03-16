@@ -244,7 +244,7 @@ void GeoDataTrack::removeAfter( const QDateTime &when )
     }
 }
 
-GeoDataLineString *GeoDataTrack::lineString() const
+const GeoDataLineString *GeoDataTrack::lineString() const
 {
     if ( d->m_lineStringNeedsUpdate ) {
         delete d->m_lineString;

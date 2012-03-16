@@ -112,7 +112,7 @@ void TestTrack::simpleParseTest()
         QCOMPARE( coord.altitude(), 1130.647705 );
     }
     {
-        GeoDataLineString* lineString = track->lineString();
+        const GeoDataLineString* lineString = track->lineString();
         QCOMPARE( lineString->size(), 3 );
         GeoDataCoordinates coord = lineString->at( 0 );
         QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), 12.560534449 );
@@ -179,7 +179,7 @@ void TestTrack::withoutTimeTest()
         QCOMPARE( coord.altitude(), 1130.647705 );
     }
     {
-        GeoDataLineString* lineString = track->lineString();
+        const GeoDataLineString* lineString = track->lineString();
         QCOMPARE( lineString->size(), 3 );
         GeoDataCoordinates coord = lineString->at( 0 );
         QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), 12.560534449 );
@@ -275,7 +275,7 @@ void TestTrack::partialTimeTest()
         QCOMPARE( coord.altitude(), 1121.995850 );
     }
     {
-        GeoDataLineString* lineString = track->lineString();
+        const GeoDataLineString* lineString = track->lineString();
         QCOMPARE( lineString->size(), 3 );
         GeoDataCoordinates coord = lineString->at( 0 );
         QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), 12.560534449 );

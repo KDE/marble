@@ -323,7 +323,7 @@ void TestGeoDataTrack::withoutTimeTest()
     }
 
     {
-    GeoDataLineString *lineString = track->lineString();
+        const GeoDataLineString *lineString = track->lineString();
         QCOMPARE( lineString->size(), 7 );
         GeoDataCoordinates coord = lineString->at( 0 );
         QCOMPARE( coord.longitude( GeoDataCoordinates::Degree ), -122.207881 );
