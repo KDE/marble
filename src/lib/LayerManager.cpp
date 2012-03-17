@@ -87,6 +87,8 @@ LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
     foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
         connect( renderPlugin, SIGNAL( settingsChanged( QString ) ),
                  this, SIGNAL( pluginSettingsChanged() ) );
+        connect( renderPlugin, SIGNAL( settingsChanged( QString ) ),
+                 this, SIGNAL( repaintNeeded() ) );
         connect( renderPlugin, SIGNAL( repaintNeeded( QRegion ) ),
                  this, SIGNAL( repaintNeeded( QRegion ) ) );
 
