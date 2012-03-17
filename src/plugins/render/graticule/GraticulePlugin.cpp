@@ -39,13 +39,9 @@ namespace Marble
 
 GraticulePlugin::GraticulePlugin()
     : m_isInitialized( false ),
-      m_settings(),
       ui_configWidget( 0 ),
       m_configDialog( 0 )
 {
-    connect( this, SIGNAL( settingsChanged( QString ) ),
-             this, SLOT( updateSettings() ) );
-    setSettings( QHash<QString,QVariant>() );             
 }
 
 QStringList GraticulePlugin::backendTypes() const
@@ -110,8 +106,7 @@ void GraticulePlugin::initialize ()
     
     initLineMaps( GeoDataCoordinates::defaultNotation() );                
     m_shadowPen = QPen( Qt::NoPen );
-    
-    readSettings();
+
     m_isInitialized = true;
 }
 
@@ -127,8 +122,6 @@ QDialog *GraticulePlugin::configDialog()
         ui_configWidget = new Ui::GraticuleConfigWidget;
         ui_configWidget->setupUi( m_configDialog );
 
-        readSettings();
-
         connect( ui_configWidget->gridPushButton, SIGNAL( clicked() ), this,
                 SLOT( gridGetColor() ) );
         connect( ui_configWidget->tropicsPushButton, SIGNAL( clicked() ), this,
@@ -139,8 +132,6 @@ QDialog *GraticulePlugin::configDialog()
 
         connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ), this, 
                 SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ), this, 
-                SLOT( readSettings() ) );
         connect( ui_configWidget->m_buttonBox->button( QDialogButtonBox::Reset ), SIGNAL( clicked () ),
                  SLOT( restoreDefaultSettings() ) );
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
@@ -148,36 +139,34 @@ QDialog *GraticulePlugin::configDialog()
                  this,        SLOT( writeSettings() ) );
     }
 
+    readSettings();
+
     return m_configDialog;
 }
 
 
 QHash<QString,QVariant> GraticulePlugin::settings() const
 {
-    return m_settings;
+    QHash<QString, QVariant> settings;
+
+    settings.insert( "gridColor", m_gridCirclePen.color().name() );
+    settings.insert( "tropicsColor", m_tropicsCirclePen.color().name() );
+    settings.insert( "equatorColor", m_equatorCirclePen.color().name() );
+
+    return settings;
 }
 
 void GraticulePlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
-    m_settings = settings;
+    const QColor gridColor = settings.value( "gridColor", QColor( Qt::white ) ).value<QColor>();
+    const QColor tropicsColor = settings.value( "tropicsColor", QColor( Qt::yellow ) ).value<QColor>();
+    const QColor equatorColor = settings.value( "equatorColor", QColor( Qt::yellow ) ).value<QColor>();
 
-    if ( !m_settings.contains( "gridColor" ) ) {
-        m_settings.insert( "gridColor", QColor( Qt::white ) );
-        m_gridCirclePen = QPen( QColor ( Qt::white ) );
-    }
-    
-    if ( !m_settings.contains( "tropicsColor" ) ) {
-        m_settings.insert( "tropicsColor", QColor( Qt::yellow ) );
-        m_tropicsCirclePen = QPen( QColor ( Qt::yellow ) );        
-    }
-
-    if ( !m_settings.contains( "equatorColor" ) ) {
-        m_settings.insert( "equatorColor", QColor( Qt::yellow ) );
-        m_equatorCirclePen = QPen( QColor ( Qt::yellow ) );                
-    }    
+    m_gridCirclePen = QPen( gridColor );
+    m_tropicsCirclePen = QPen( tropicsColor );
+    m_equatorCirclePen = QPen( equatorColor );
 
     readSettings();
-    emit settingsChanged( nameId() );
 }
 
 
@@ -185,82 +174,61 @@ void GraticulePlugin::readSettings()
 {
     if ( !m_configDialog )
         return;
-        
-    QColor gridColor = QColor( m_settings.value( "gridColor" ).value<QColor>() );
+
     QPalette gridPalette;
-    gridPalette.setColor( QPalette::Button, QColor( gridColor ) );
+    gridPalette.setColor( QPalette::Button, m_gridCirclePen.color() );
     ui_configWidget->gridPushButton->setPalette( gridPalette );
 
-    QColor tropicsColor = QColor( m_settings.value( "tropicsColor" ).value<QColor>() );
     QPalette tropicsPalette;
-    tropicsPalette.setColor( QPalette::Button, QColor( tropicsColor ) );
+    tropicsPalette.setColor( QPalette::Button, m_tropicsCirclePen.color() );
     ui_configWidget->tropicsPushButton->setPalette( tropicsPalette );
 
 
-    QColor equatorColor = QColor( m_settings.value( "equatorColor" ).value<QColor>() );
     QPalette equatorPalette;
-    equatorPalette.setColor( QPalette::Button, QColor( equatorColor ) );
+    equatorPalette.setColor( QPalette::Button, m_equatorCirclePen.color() );
     ui_configWidget->equatorPushButton->setPalette( equatorPalette );
 }
 
 void GraticulePlugin::gridGetColor()
 {
-    QColor c = QColorDialog::getColor( m_gridColor, 0, tr("Please choose the color for the coordinate grid.") );
+    const QColor c = QColorDialog::getColor( m_gridCirclePen.color(), 0, tr("Please choose the color for the coordinate grid.") );
 
     if ( c.isValid() ) {
-        m_gridColor = c;
         QPalette palette = ui_configWidget->gridPushButton->palette();
-        palette.setColor( QPalette::Button, QColor( m_gridColor ) );
+        palette.setColor( QPalette::Button, c );
         ui_configWidget->gridPushButton->setPalette( palette );
     }
 }
 
 void GraticulePlugin::tropicsGetColor()
 {
-    QColor c = QColorDialog::getColor( m_tropicsColor, 0, tr("Please choose the color for the tropic circles.") );
+    const QColor c = QColorDialog::getColor( m_tropicsCirclePen.color(), 0, tr("Please choose the color for the tropic circles.") );
 
     if ( c.isValid() ) {
-        m_tropicsColor = c;
         QPalette palette = ui_configWidget->tropicsPushButton->palette();
-        palette.setColor( QPalette::Button, QColor( m_tropicsColor ) );
+        palette.setColor( QPalette::Button, c );
         ui_configWidget->tropicsPushButton->setPalette( palette );
     }
 }
 
 void GraticulePlugin::equatorGetColor()
 {
-    QColor c = QColorDialog::getColor( m_equatorColor, 0, tr("Please choose the color for the equator.") );
+    const QColor c = QColorDialog::getColor( m_equatorCirclePen.color(), 0, tr("Please choose the color for the equator.") );
 
     if ( c.isValid() ) {
-        m_equatorColor = c;
         QPalette palette = ui_configWidget->equatorPushButton->palette();
-        palette.setColor( QPalette::Button, QColor( m_equatorColor ) );
+        palette.setColor( QPalette::Button, c );
         ui_configWidget->equatorPushButton->setPalette( palette );
     }
 }
 
 void GraticulePlugin::writeSettings()
-{    
-   
-    m_settings.insert( "gridColor", m_gridColor.name() );        
-    m_settings.insert( "tropicsColor", m_tropicsColor.name() );    
-    m_settings.insert( "equatorColor", m_equatorColor.name() );   
-    
-    readSettings();
+{
+    m_equatorCirclePen = QPen( ui_configWidget->equatorPushButton->palette().color( QPalette::Button ) );
+    m_tropicsCirclePen = QPen( ui_configWidget->tropicsPushButton->palette().color( QPalette::Button ) );
+    m_gridCirclePen = QPen( ui_configWidget->gridPushButton->palette().color( QPalette::Button) );
 
     emit settingsChanged( nameId() );
-}
-
-void GraticulePlugin::updateSettings() 
-{
-    m_gridColor = m_settings.value( "gridColor" ).value<QColor>();
-    
-    m_tropicsColor = m_settings.value( "tropicsColor" ).value<QColor>();
-    m_equatorColor = m_settings.value( "equatorColor" ).value<QColor>();    
-    
-    m_equatorCirclePen = QPen( m_equatorColor );
-    m_tropicsCirclePen = QPen( m_tropicsColor );   
-    m_gridCirclePen = QPen( m_gridColor );    
 }
 
 bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,

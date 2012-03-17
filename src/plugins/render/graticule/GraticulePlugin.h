@@ -101,12 +101,10 @@ class GraticulePlugin : public RenderPlugin
  public Q_SLOTS:
     void readSettings();
     void writeSettings();
-    
+
     void gridGetColor();
     void tropicsGetColor();
     void equatorGetColor();
-    
-    void updateSettings();
 
 
  private:
@@ -193,15 +191,11 @@ class GraticulePlugin : public RenderPlugin
     QPen m_tropicsCirclePen;
     QPen m_gridCirclePen;
     QPen m_shadowPen;
-    
-    QColor m_gridColor, m_tropicsColor, m_equatorColor;
 
     bool m_isInitialized;
 
-    QHash<QString,QVariant> m_settings;
-
     QIcon m_icon;
-        
+
     Ui::GraticuleConfigWidget *ui_configWidget;
     QDialog *m_configDialog;
 };
