@@ -90,7 +90,7 @@ class PositionMarker  : public RenderPlugin
  public slots:
     void readSettings();
     void writeSettings();
-    void updateSettings();
+
     void setPosition( const GeoDataCoordinates &position );
     void chooseCustomCursor();
     void chooseColor();
@@ -116,9 +116,8 @@ class PositionMarker  : public RenderPlugin
     QRegion             m_dirtyRegion;
     QPixmap             m_customCursor;
     QPixmap             m_defaultCursor;
-    QHash<QString,QVariant> m_settings;
     float               m_cursorSize;
-    QColor              m_acColor;
+    QColor              m_accuracyColor;
     QColor              m_trailColor;
     qreal               m_heading;
     QVector<GeoDataCoordinates> m_trail;
