@@ -93,7 +93,6 @@ class MeasureToolPlugin : public RenderPlugin
     void  removeLastMeasurePoint();
     void  removeMeasurePoints();
 
-    void readSettings();
     void writeSettings();
 
  private:
@@ -114,7 +113,6 @@ class MeasureToolPlugin : public RenderPlugin
 
     MarbleWidget* m_marbleWidget;
 
-    QHash<QString,QVariant> m_settings;
     QDialog * m_configDialog;
     Ui::MeasureConfigWidget * m_uiConfigWidget;
     bool m_showSegmentLabels;

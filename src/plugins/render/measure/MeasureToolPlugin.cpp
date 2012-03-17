@@ -113,7 +113,6 @@ QIcon MeasureToolPlugin::icon () const
 
 void MeasureToolPlugin::initialize ()
 {
-    readSettings();
 }
 
 bool MeasureToolPlugin::isInitialized () const
@@ -127,45 +126,36 @@ QDialog *MeasureToolPlugin::configDialog()
         m_configDialog = new QDialog();
         m_uiConfigWidget = new Ui::MeasureConfigWidget;
         m_uiConfigWidget->setupUi( m_configDialog );
-        readSettings();
         connect( m_uiConfigWidget->m_buttonBox, SIGNAL( accepted() ),
                 SLOT( writeSettings() ) );
-        connect( m_uiConfigWidget->m_buttonBox, SIGNAL( rejected() ),
-                SLOT( readSettings() ) );
         QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button( QDialogButtonBox::Apply );
         connect( applyButton, SIGNAL( clicked() ),
                  this,        SLOT( writeSettings() ) );
     }
+
+    m_uiConfigWidget->m_showSegLabelsCheckBox->setChecked( m_showSegmentLabels );
 
     return m_configDialog;
 }
 
 QHash<QString,QVariant> MeasureToolPlugin::settings() const
 {
-    return m_settings;
+    QHash<QString, QVariant> settings;
+
+    settings.insert( "showSegmentLabels", m_showSegmentLabels );
+
+    return settings;
 }
 
 void MeasureToolPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
-    m_settings = settings;
-    readSettings();
-}
-
-void MeasureToolPlugin::readSettings()
-{
-    m_showSegmentLabels = m_settings.value( "showSegmentLabels", 0 ).toBool();
-    if ( m_uiConfigWidget ) {
-        m_uiConfigWidget->m_showSegLabelsCheckBox->setChecked( m_showSegmentLabels );
-    }
+    m_showSegmentLabels = settings.value( "showSegmentLabels", 0 ).toBool();
 }
 
 void MeasureToolPlugin::writeSettings()
 {
-    if ( m_uiConfigWidget ) {
-        m_settings["showSegmentLabels"] = m_uiConfigWidget->m_showSegLabelsCheckBox->isChecked();
-    }
+    m_showSegmentLabels = m_uiConfigWidget->m_showSegLabelsCheckBox->isChecked();
 
-    readSettings();
     emit settingsChanged( nameId() );
     emit repaintNeeded();
 }
