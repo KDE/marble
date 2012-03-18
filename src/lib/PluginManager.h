@@ -13,7 +13,6 @@
 #define MARBLE_PLUGINMANAGER_H
 
 #include <QtCore/QList>
-#include <QtCore/QObject>
 #include "marble_export.h"
 
 
@@ -40,12 +39,11 @@ class RunnerPlugin;
  *
  */
 
-class MARBLE_EXPORT PluginManager : public QObject
+class MARBLE_EXPORT PluginManager
 {
-    Q_OBJECT
-
  public:
-    explicit PluginManager( QObject *parent = 0 );
+    explicit PluginManager();
+
     ~PluginManager();
 
     /**

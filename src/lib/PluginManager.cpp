@@ -54,9 +54,8 @@ PluginManagerPrivate::~PluginManagerPrivate()
     // nothing to do
 }
 
-PluginManager::PluginManager( QObject *parent )
-    : QObject(parent),
-      d( new PluginManagerPrivate() )
+PluginManager::PluginManager()
+    : d( new PluginManagerPrivate() )
 {
 }
 
@@ -171,5 +170,3 @@ void PluginManagerPrivate::loadPlugins()
 }
 
 }
-
-#include "PluginManager.moc"
