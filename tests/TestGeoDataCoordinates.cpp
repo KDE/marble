@@ -33,6 +33,7 @@ private slots:
     void testSetLatitude_Degree();
     void testSetLatitude_Radian();
     void testAltitude();
+    void testOperatorAssignment();
     void testDetail();
     void testIsPole_data();
     void testIsPole();
@@ -208,6 +209,20 @@ void TestGeoDataCoordinates::testAltitude()
     coordinates1.setAltitude(alt);
 
     QCOMPARE(coordinates1, GeoDataCoordinates(0, 0, alt));
+}
+
+void TestGeoDataCoordinates::testOperatorAssignment()
+{
+    const qreal lon = 123.4;
+    const qreal lat = 56.7;
+    const qreal alt = 890.1;
+
+    const GeoDataCoordinates coordinates1(lon, lat, alt, GeoDataCoordinates::Degree);
+
+    GeoDataCoordinates coordinates2;
+    coordinates2 = coordinates1;
+
+    QCOMPARE(coordinates2, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
 }
 
 /*
