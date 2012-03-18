@@ -82,13 +82,11 @@ void TestGeoDataCoordinates::testConstruction()
     GeoDataCoordinates coordinates2(coordinates1);
     QCOMPARE(coordinates1, coordinates2);
 
-    GeoDataCoordinates* coordinates3 = new GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree);
-    GeoDataCoordinates* coordinates4(coordinates3);
-    QCOMPARE(coordinates3->longitude(GeoDataCoordinates::Degree), coordinates4->longitude(GeoDataCoordinates::Degree));
-    QCOMPARE(coordinates3->latitude(GeoDataCoordinates::Degree), coordinates4->latitude(GeoDataCoordinates::Degree));
-    QCOMPARE(coordinates3->altitude(), coordinates4->altitude());
-
-    delete coordinates3;
+    GeoDataCoordinates coordinates3(lon, lat, alt, GeoDataCoordinates::Degree);
+    GeoDataCoordinates coordinates4(coordinates3);
+    QCOMPARE(coordinates4.longitude(GeoDataCoordinates::Degree), coordinates3.longitude(GeoDataCoordinates::Degree));
+    QCOMPARE(coordinates4.latitude(GeoDataCoordinates::Degree), coordinates3.latitude(GeoDataCoordinates::Degree));
+    QCOMPARE(coordinates4.altitude(), coordinates3.altitude());
 }
 
 /*
