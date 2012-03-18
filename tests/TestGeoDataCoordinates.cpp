@@ -128,7 +128,11 @@ void TestGeoDataCoordinates::testSet_Degree()
     GeoDataCoordinates coordinates1;
     coordinates1.set(lon, lat, alt, GeoDataCoordinates::Degree);
 
+    GeoDataCoordinates coordinates2(coordinates1);
+    coordinates2.set(0, 0, 0, GeoDataCoordinates::Degree);
+
     QCOMPARE(coordinates1, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
+    QCOMPARE(coordinates2, GeoDataCoordinates(0, 0, 0, GeoDataCoordinates::Degree));
 }
 
 /*
@@ -143,7 +147,11 @@ void TestGeoDataCoordinates::testSet_Radian()
     GeoDataCoordinates coordinates1;
     coordinates1.set(lon, lat, alt, GeoDataCoordinates::Radian);
 
+    GeoDataCoordinates coordinates2(coordinates1);
+    coordinates2.set(0, 0, 0, GeoDataCoordinates::Radian);
+
     QCOMPARE(coordinates1, GeoDataCoordinates(lon, lat, alt));
+    QCOMPARE(coordinates2, GeoDataCoordinates(0, 0, 0));
 }
 
 /*
@@ -156,7 +164,11 @@ void TestGeoDataCoordinates::testSetLongitude_Degree()
     GeoDataCoordinates coordinates1;
     coordinates1.setLongitude(lon, GeoDataCoordinates::Degree);
 
+    GeoDataCoordinates coordinates2(coordinates1);
+    coordinates2.setLongitude(0, GeoDataCoordinates::Degree);
+
     QCOMPARE(coordinates1, GeoDataCoordinates(lon, 0, 0, GeoDataCoordinates::Degree));
+    QCOMPARE(coordinates2, GeoDataCoordinates(0, 0, 0, GeoDataCoordinates::Degree));
 }
 
 /*
@@ -169,7 +181,11 @@ void TestGeoDataCoordinates::testSetLongitude_Radian()
     GeoDataCoordinates coordinates1;
     coordinates1.setLongitude(lon);
 
+    GeoDataCoordinates coordinates2(coordinates1);
+    coordinates2.setLongitude(0);
+
     QCOMPARE(coordinates1, GeoDataCoordinates(lon, 0));
+    QCOMPARE(coordinates2, GeoDataCoordinates(0, 0));
 }
 
 /*
@@ -182,7 +198,11 @@ void TestGeoDataCoordinates::testSetLatitude_Degree()
     GeoDataCoordinates coordinates1;
     coordinates1.setLatitude(lat, GeoDataCoordinates::Degree);
 
+    GeoDataCoordinates coordinates2(coordinates1);
+    coordinates2.setLatitude(0, GeoDataCoordinates::Degree);
+
     QCOMPARE(coordinates1, GeoDataCoordinates(0, lat, 0, GeoDataCoordinates::Degree));
+    QCOMPARE(coordinates2, GeoDataCoordinates(0, 0, 0, GeoDataCoordinates::Degree));
 }
 
 /*
@@ -195,7 +215,11 @@ void TestGeoDataCoordinates::testSetLatitude_Radian()
     GeoDataCoordinates coordinates1;
     coordinates1.setLatitude(lat);
 
+    GeoDataCoordinates coordinates2(coordinates1);
+    coordinates2.setLatitude(0);
+
     QCOMPARE(coordinates1, GeoDataCoordinates(0, lat));
+    QCOMPARE(coordinates2, GeoDataCoordinates(0, 0));
 }
 
 /*
@@ -208,7 +232,11 @@ void TestGeoDataCoordinates::testAltitude()
     GeoDataCoordinates coordinates1;
     coordinates1.setAltitude(alt);
 
+    GeoDataCoordinates coordinates2(coordinates1);
+    coordinates2.setAltitude(0);
+
     QCOMPARE(coordinates1, GeoDataCoordinates(0, 0, alt));
+    QCOMPARE(coordinates2, GeoDataCoordinates(0, 0, 0));
 }
 
 void TestGeoDataCoordinates::testOperatorAssignment()
@@ -218,11 +246,14 @@ void TestGeoDataCoordinates::testOperatorAssignment()
     const qreal alt = 890.1;
 
     const GeoDataCoordinates coordinates1(lon, lat, alt, GeoDataCoordinates::Degree);
+    const GeoDataCoordinates coordinates2(0, 0, 0);
 
-    GeoDataCoordinates coordinates2;
-    coordinates2 = coordinates1;
+    GeoDataCoordinates coordinates3(coordinates1);
+    coordinates3 = coordinates2;
 
-    QCOMPARE(coordinates2, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
+    QCOMPARE(coordinates1, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
+    QCOMPARE(coordinates2, GeoDataCoordinates(0, 0, 0));
+    QCOMPARE(coordinates3, coordinates2);
 }
 
 /*
@@ -230,9 +261,14 @@ void TestGeoDataCoordinates::testOperatorAssignment()
  */
 void TestGeoDataCoordinates::testDetail()
 {
-    int detailnumber = 15;
+    const int detailnumber = 15;
+
     GeoDataCoordinates coordinates1;
     coordinates1.setDetail(detailnumber);
+
+    GeoDataCoordinates coordinates2(coordinates1);
+    coordinates2.setDetail(0);
+
     QCOMPARE(coordinates1.detail(), detailnumber);
 }
 
