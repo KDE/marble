@@ -12,6 +12,7 @@
 #define WIKIPEDIAPLUGIN_H
 
 #include "AbstractDataPlugin.h"
+#include "DialogConfigurationInterface.h"
 #include "RenderPlugin.h"
 #include "RenderPluginInterface.h"
 
@@ -26,10 +27,11 @@ namespace Ui
 namespace Marble
 {
 
-class WikipediaPlugin : public AbstractDataPlugin
+class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( WikipediaPlugin )
     
  public:

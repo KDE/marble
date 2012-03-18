@@ -20,6 +20,7 @@
 
 #include "GeoDataLatLonAltBox.h"
 #include "AbstractFloatItem.h"
+#include "DialogConfigurationInterface.h"
 
 namespace Ui
 {
@@ -34,10 +35,11 @@ namespace Marble
  *
  */
 
-class OverviewMap : public AbstractFloatItem
+class OverviewMap : public AbstractFloatItem, public DialogConfigurationInterface
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( OverviewMap )
     
  public:

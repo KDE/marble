@@ -13,17 +13,19 @@
 #define MARBLE_ROUTINGPLUGIN_H
 
 #include "AbstractFloatItem.h"
+#include "DialogConfigurationInterface.h"
 
 namespace Marble
 {
 class RoutingPluginPrivate;
 class PositionProviderPlugin;
 
-class RoutingPlugin : public AbstractFloatItem
+class RoutingPlugin : public AbstractFloatItem, public DialogConfigurationInterface
 {
     Q_OBJECT
 
     Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES( Marble::DialogConfigurationInterface )
 
     MARBLE_PLUGIN( RoutingPlugin )
 

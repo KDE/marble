@@ -25,7 +25,7 @@
 #include <QtGui/QAbstractButton>
 
 
-#include "AbstractDataPlugin.h"
+#include "DialogConfigurationInterface.h"
 #include "RenderPlugin.h"
 #include "RenderPluginInterface.h"
 
@@ -51,10 +51,11 @@ class GeoDataLatLonAltBox;
  * on the degree system. 
  */
 
-class GraticulePlugin : public RenderPlugin
+class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( GraticulePlugin )
 
  public:

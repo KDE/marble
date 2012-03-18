@@ -17,6 +17,7 @@
 #include <QtGui/QDialog>
 
 // Marble
+#include "DialogConfigurationInterface.h"
 #include "MarbleDebug.h"
 
 namespace Marble
@@ -225,7 +226,8 @@ QMenu* AbstractFloatItem::contextMenu()
         connect( lockAction, SIGNAL( triggered( bool ) ), this, SLOT( setPositionLocked( bool ) ) );
         QAction *hideAction = d->m_contextMenu->addAction( tr( "&Hide" ) );
         connect( hideAction, SIGNAL( triggered() ), this, SLOT( hide() ) );
-        QDialog *dialog = configDialog();
+        DialogConfigurationInterface *configInterface = qobject_cast<DialogConfigurationInterface *>( this );
+        QDialog *dialog = configInterface ? configInterface->configDialog() : 0;
         if( dialog )
         {
             d->m_contextMenu->addSeparator();

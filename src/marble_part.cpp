@@ -61,6 +61,7 @@
 #include "EditBookmarkDialog.h"
 #include "BookmarkManager.h"
 #include "BookmarkManagerDialog.h"
+#include "DialogConfigurationInterface.h"
 #include "DownloadRegionDialog.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataFolder.h"
@@ -1585,7 +1586,8 @@ void MarblePart::showPluginConfigDialog( const QString& nameId )
 
     foreach ( RenderPlugin *renderItem, renderItemList ) {
         if( renderItem->nameId() == nameId ) {
-            QDialog *configDialog = renderItem->configDialog();
+            DialogConfigurationInterface *configInterface = qobject_cast<DialogConfigurationInterface *>( renderItem );
+            QDialog *configDialog = configInterface ? configInterface->configDialog() : 0;
             if ( configDialog ) {
                 configDialog->show();
             }

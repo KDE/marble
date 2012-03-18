@@ -17,6 +17,7 @@
 #ifndef MARBLE_MEASURETOOLPLUGIN_H
 #define MARBLE_MEASURETOOLPLUGIN_H
 
+#include "DialogConfigurationInterface.h"
 #include "GeoDataLineString.h"
 #include "RenderPlugin.h"
 #include "MarbleWidget.h"
@@ -34,10 +35,11 @@ namespace Ui {
 namespace Marble
 {
 
-class MeasureToolPlugin : public RenderPlugin
+class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( MeasureToolPlugin )
 
  public:

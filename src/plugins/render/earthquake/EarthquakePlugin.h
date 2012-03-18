@@ -12,7 +12,7 @@
 #define EARTHQUAKEPLUGIN_H
 
 #include "AbstractDataPlugin.h"
-#include "RenderPlugin.h"
+#include "DialogConfigurationInterface.h"
 #include "RenderPluginInterface.h"
 
 #include <QtCore/QHash>
@@ -27,11 +27,12 @@ namespace Ui
 namespace Marble
 {
 
-class EarthquakePlugin : public AbstractDataPlugin
+class EarthquakePlugin : public AbstractDataPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
 
     Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES( Marble::DialogConfigurationInterface )
 
     MARBLE_PLUGIN( EarthquakePlugin )
 

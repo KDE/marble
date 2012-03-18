@@ -19,6 +19,7 @@
 #include <QtGui/QColor>
 #include <QtGui/QAbstractButton>
 
+#include "DialogConfigurationInterface.h"
 #include "RenderPlugin.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
@@ -31,10 +32,11 @@ namespace Ui
 namespace Marble
 {
 
-class PositionMarker  : public RenderPlugin
+class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( PositionMarker )
  public:
     PositionMarker ();

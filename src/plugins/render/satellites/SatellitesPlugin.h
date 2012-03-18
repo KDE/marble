@@ -12,6 +12,7 @@
 #define MARBLE_SATELLITESPLUGIN_H
 
 #include "RenderPlugin.h"
+#include "DialogConfigurationInterface.h"
 #include "SatellitesModel.h"
 
 #include "sgp4/sgp4unit.h"
@@ -34,10 +35,11 @@ class SatellitesConfigModel;
  * @brief This plugin displays satellites and their orbits.
  *
  */
-class SatellitesPlugin : public RenderPlugin
+class SatellitesPlugin : public RenderPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( SatellitesPlugin )
 
 public:

@@ -17,6 +17,7 @@
 
 #include "ElevationProfilePlotAxis.h"
 #include "AbstractFloatItem.h"
+#include "DialogConfigurationInterface.h"
 #include "PluginAboutDialog.h"
 #include "LabelGraphicsItem.h"
 #include "MarbleWidget.h"
@@ -37,11 +38,12 @@ namespace Marble
  *
  */
 
-class ElevationProfileFloatItem : public AbstractFloatItem
+class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigurationInterface
 {
     Q_OBJECT
 
     Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES( Marble::DialogConfigurationInterface )
 
     MARBLE_PLUGIN( ElevationProfileFloatItem )
 

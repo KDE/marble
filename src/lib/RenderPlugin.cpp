@@ -13,6 +13,7 @@
 #include "RenderPlugin.h"
 
 // Marble
+#include "DialogConfigurationInterface.h"
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
 #include "PluginAboutDialog.h"
@@ -118,7 +119,7 @@ QStandardItem* RenderPlugin::item()
     // Custom data
     d->m_item->setData( nameId(), RenderPlugin::NameId );
     d->m_item->setData( (bool) aboutDialog(), RenderPlugin::AboutDialogAvailable );
-    d->m_item->setData( (bool) configDialog(), RenderPlugin::ConfigurationDialogAvailable );
+    d->m_item->setData( (bool) qobject_cast<DialogConfigurationInterface *>( this ), RenderPlugin::ConfigurationDialogAvailable );
     d->m_item->setData( backendTypes(), RenderPlugin::BackendTypes );
 
     return d->m_item;
@@ -188,11 +189,6 @@ QDialog *RenderPlugin::aboutDialog()
     }
 
     return d->m_aboutDialog;
-}
-
-QDialog *RenderPlugin::configDialog()
-{
-    return 0;
 }
 
 QHash<QString,QVariant> RenderPlugin::settings() const

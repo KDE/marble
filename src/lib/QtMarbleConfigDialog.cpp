@@ -30,6 +30,7 @@
 
 // Marble
 #include "global.h"
+#include "DialogConfigurationInterface.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleCacheSettingsWidget.h"
@@ -259,7 +260,8 @@ void QtMarbleConfigDialog::showPluginConfigDialog( QString nameId )
 
     foreach ( RenderPlugin *renderItem, renderItemList ) {
         if( renderItem->nameId() == nameId ) {
-            QDialog *configDialog = renderItem->configDialog();
+            DialogConfigurationInterface *configInterface = qobject_cast<DialogConfigurationInterface *>( renderItem );
+            QDialog *configDialog = configInterface ? configInterface->configDialog() : 0;
             if ( configDialog ) {
                 configDialog->show();
             }

@@ -12,6 +12,7 @@
 #define OPENDESKTOPPLUGIN_H
 
 #include "AbstractDataPlugin.h"
+#include "DialogConfigurationInterface.h"
 #include "RenderPlugin.h"
 #include "RenderPluginInterface.h"
 #include <QtGui/QIcon>
@@ -24,11 +25,13 @@ namespace Marble {
 
 const int defaultItemsOnScreen = 15;
  
-class OpenDesktopPlugin : public AbstractDataPlugin {
+class OpenDesktopPlugin : public AbstractDataPlugin, public DialogConfigurationInterface
+{
 
     Q_OBJECT
 
     Q_INTERFACES(Marble::RenderPluginInterface)
+    Q_INTERFACES(Marble::DialogConfigurationInterface)
 
     MARBLE_PLUGIN(OpenDesktopPlugin)
  

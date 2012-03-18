@@ -16,6 +16,7 @@
 #include <QtGui/QDialog>
 
 #include "RenderPlugin.h"
+#include "DialogConfigurationInterface.h"
 #include "AprsObject.h"
 #include "AprsGatherer.h"
 #include "GeoDataLatLonAltBox.h"
@@ -34,11 +35,12 @@ namespace Marble
  * \brief This class displays a layer of aprs (which aprs TBD).
  *
  */
-    class AprsPlugin : public RenderPlugin
+    class AprsPlugin : public RenderPlugin, public DialogConfigurationInterface
     {
         Q_OBJECT
-            Q_INTERFACES( Marble::RenderPluginInterface )
-            MARBLE_PLUGIN( AprsPlugin )
+        Q_INTERFACES( Marble::RenderPluginInterface )
+        Q_INTERFACES( Marble::DialogConfigurationInterface )
+        MARBLE_PLUGIN( AprsPlugin )
 
             public:
         AprsPlugin();

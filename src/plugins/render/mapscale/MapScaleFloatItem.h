@@ -14,6 +14,7 @@
 #include <QtCore/QObject>
 
 #include "AbstractFloatItem.h"
+#include "DialogConfigurationInterface.h"
 
 namespace Ui
 {
@@ -28,10 +29,11 @@ namespace Marble
  *
  */
 
-class MapScaleFloatItem : public AbstractFloatItem
+class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationInterface
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( MapScaleFloatItem )
  public:
     explicit MapScaleFloatItem( const QPointF &point = QPointF( 10.5, -10.5 ),

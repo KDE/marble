@@ -101,12 +101,6 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @return: The about dialog or, if no about dialog exists, 0.
      */
     virtual QDialog *aboutDialog();
-    /**
-     * Function for getting a pointer to the configuration dialog of the plugin.
-     *
-     * @return: The configuration dialog or, if no configuration dialog exists, 0.
-     */
-    virtual QDialog *configDialog();
 
     /**
      * @return: The settings of the item.

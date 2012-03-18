@@ -154,6 +154,7 @@ set(marblewidget_SRCS
 
     PluginInterface.cpp
     NetworkPluginInterface.cpp
+    DialogConfigurationInterface.cpp
     LayerInterface.cpp
     RenderPlugin.cpp
     RenderPluginInterface.cpp
@@ -391,6 +392,7 @@ else (APPLE AND QTONLY)
     routing/RoutingManager.h
     TileCreator.h
     PluginInterface.h
+    DialogConfigurationInterface.h
     PositionProviderPluginInterface.h
     RenderPlugin.h
     RenderPluginInterface.h

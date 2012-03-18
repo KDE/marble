@@ -14,6 +14,7 @@
 #include <QtCore/QObject>
 
 #include "AbstractFloatItem.h"
+#include "DialogConfigurationInterface.h"
 
 class QSvgRenderer;
 
@@ -29,10 +30,11 @@ namespace Marble
  *
  */
 
-class CompassFloatItem  : public AbstractFloatItem
+class CompassFloatItem  : public AbstractFloatItem, public DialogConfigurationInterface
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( CompassFloatItem )
  public:
     explicit CompassFloatItem ( const QPointF &point = QPointF( -1.0, 10.0 ),

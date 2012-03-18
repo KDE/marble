@@ -12,6 +12,7 @@
 #define WEATHERPLUGIN_H
 
 #include "AbstractDataPlugin.h"
+#include "DialogConfigurationInterface.h"
 
 // Qt
 #include <QtCore/QHash>
@@ -26,10 +27,11 @@ namespace Ui
 namespace Marble
 {
 
-class WeatherPlugin : public AbstractDataPlugin
+class WeatherPlugin : public AbstractDataPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( WeatherPlugin )
     
  public:
