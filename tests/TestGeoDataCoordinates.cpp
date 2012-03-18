@@ -7,6 +7,7 @@
 
 // Copyright 2010 Matias Kallio <matias.kallio@gmail.com>
 // Copyright 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+// Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
 #include <QtTest/QtTest>
 #include <QtGui/QApplication>
@@ -24,14 +25,13 @@ class TestGeoDataCoordinates : public QObject
     Q_OBJECT
 
 private slots:
-    void testConstruction_data();
     void testConstruction();
-    void testSet_data();
-    void testSet();
-    void testLongitude_data();
-    void testLongitude();
-    void testLatitude_data();
-    void testLatitude();
+    void testSet_Degree();
+    void testSet_Radian();
+    void testSetLongitude_Degree();
+    void testSetLongitude_Radian();
+    void testSetLatitude_Degree();
+    void testSetLatitude_Radian();
     void testAltitude();
     void testDetail();
     void testIsPole_data();
@@ -58,169 +58,156 @@ private slots:
 };
 
 /*
- * test data for testConstruction()
- */
-void TestGeoDataCoordinates::testConstruction_data()
-{
-    QTest::addColumn<qreal>("lon");
-    QTest::addColumn<qreal>("lat");
-    QTest::addColumn<qreal>("alt");
-
-    QTest::newRow("coords1") << 180.0 << 90.0 << 400.0;
-}
-
-/*
- * test constructions
+ * test constructors
  */
 void TestGeoDataCoordinates::testConstruction()
 {
-    QFETCH(qreal, lon);
-    QFETCH(qreal, lat);
-    QFETCH(qreal, alt);
-
     GeoDataCoordinates coordinates1;
     GeoDataCoordinates coordinates2(coordinates1);
+
     QCOMPARE(coordinates1, coordinates2);
 
+    const qreal lon = 164.77;
+    const qreal lat = 55.9;
+    const qreal alt = 400.003;
+
     GeoDataCoordinates coordinates3(lon, lat, alt, GeoDataCoordinates::Degree);
-    GeoDataCoordinates coordinates4(coordinates3);
-    QCOMPARE(coordinates4.longitude(GeoDataCoordinates::Degree), coordinates3.longitude(GeoDataCoordinates::Degree));
-    QCOMPARE(coordinates4.latitude(GeoDataCoordinates::Degree), coordinates3.latitude(GeoDataCoordinates::Degree));
-    QCOMPARE(coordinates4.altitude(), coordinates3.altitude());
-}
 
-/*
- * test data for testSet()
- */
-void TestGeoDataCoordinates::testSet_data()
-{
-    QTest::addColumn<qreal>("lon");
-    QTest::addColumn<qreal>("lat");
-    QTest::addColumn<qreal>("alt");
-    QTest::addColumn<QString>("unit");
+    QVERIFY(coordinates1 != coordinates3);
+    QCOMPARE(coordinates3.longitude(GeoDataCoordinates::Degree), lon);
+    QCOMPARE(coordinates3.longitude(), lon*DEG2RAD);
+    QEXPECT_FAIL("", "This should fail", Continue);
+    QCOMPARE(coordinates3.longitude(), lon);
+    QEXPECT_FAIL("", "This should fail", Continue);
+    QCOMPARE(coordinates1.longitude(GeoDataCoordinates::Degree), lon*DEG2RAD);
 
-    QTest::newRow("deg") << 180.0 << 90.0 << 400.0 << "degree";
-    QTest::newRow("rad") << 3.1 << 1.5 << 250.0 << "radian";
-}
+    QCOMPARE(coordinates3.latitude(GeoDataCoordinates::Degree), lat);
+    QCOMPARE(coordinates3.latitude(), lat*DEG2RAD);
+    QEXPECT_FAIL("", "This should fail", Continue);
+    QCOMPARE(coordinates1.latitude(), lat);
+    QEXPECT_FAIL("", "This should fail", Continue);
+    QCOMPARE(coordinates1.latitude(GeoDataCoordinates::Degree), lat*DEG2RAD);
 
-/*
- * test setting coordinates
- */
-void TestGeoDataCoordinates::testSet()
-{
-    QFETCH(qreal, lon);
-    QFETCH(qreal, lat);
-    QFETCH(qreal, alt);
-    QFETCH(QString, unit);
-
-    GeoDataCoordinates coordinates1;
-    if(unit == "degree") {
-        coordinates1.set(lon, lat, alt, GeoDataCoordinates::Degree );
-        QCOMPARE(coordinates1.longitude(GeoDataCoordinates::Degree), lon);
-        QCOMPARE(coordinates1.latitude(GeoDataCoordinates::Degree), lat);
-        QCOMPARE(coordinates1.altitude(), alt);
-    } else if(unit == "radian") {
-        coordinates1.set(lon, lat, alt, GeoDataCoordinates::Radian);
-        QCOMPARE(coordinates1.longitude(GeoDataCoordinates::Radian), lon);
-        QCOMPARE(coordinates1.latitude(GeoDataCoordinates::Radian), lat);
-        QCOMPARE(coordinates1.altitude(), alt);
-    }
+    QCOMPARE(coordinates3.altitude(), alt);
 
     qreal myLongitude = 0;
     qreal myLatitude = 0;
 
-    if(unit == "degree") {
-        coordinates1.set(lon, lat, alt, GeoDataCoordinates::Degree);
-        coordinates1.geoCoordinates(myLongitude, myLatitude, GeoDataCoordinates::Degree);
-        QCOMPARE(myLongitude, lon);
-        QCOMPARE(myLatitude, lat);
-    }
+    coordinates3.geoCoordinates(myLongitude, myLatitude, GeoDataCoordinates::Degree);
+
+    QCOMPARE(myLongitude, lon);
+    QCOMPARE(myLatitude, lat);
+
+    myLongitude = 0;
+    myLatitude = 0;
+
+    coordinates3.geoCoordinates(myLongitude, myLatitude);
+
+    QCOMPARE(myLongitude, lon*DEG2RAD);
+    QCOMPARE(myLatitude, lat*DEG2RAD);
+
+    GeoDataCoordinates coordinates4(lon*DEG2RAD, lat*DEG2RAD, alt);
+
+    QCOMPARE(coordinates4, coordinates3);
+
+    GeoDataCoordinates coordinates5(coordinates3);
+
+    QCOMPARE(coordinates5, coordinates3);
 }
 
 /*
- * test data for testLongitude()
+ * test setting coordinates in degree
  */
-void TestGeoDataCoordinates::testLongitude_data()
+void TestGeoDataCoordinates::testSet_Degree()
 {
-    QTest::addColumn<qreal>("lon");
-    QTest::addColumn<QString>("unit");
-
-    QTest::newRow("deg") << 150.0 << "degree";
-    QTest::newRow("rad") << 2.5 << "radian";
-}
-
-/*
- * test setLongitude() and longitude()
- */
-void TestGeoDataCoordinates::testLongitude()
-{
-    QFETCH(qreal, lon);
-    QFETCH(QString, unit);
+    const qreal lon = 345.8;
+    const qreal lat = 70.3;
+    const qreal alt = 1000.9;
 
     GeoDataCoordinates coordinates1;
+    coordinates1.set(lon, lat, alt, GeoDataCoordinates::Degree);
 
-    if(unit == "radian") {
-        coordinates1.setLongitude(lon);
-        QCOMPARE(coordinates1.longitude(), lon);
-    } else if(unit == "degree") {
-        coordinates1.setLongitude(lon, GeoDataCoordinates::Degree);
-        QCOMPARE(coordinates1.longitude(GeoDataCoordinates::Degree), lon);
-    }
-
-    if(unit == "radian"){
-        coordinates1.setLongitude(lon);
-        QEXPECT_FAIL("", "This should fail", Continue);
-        QCOMPARE(coordinates1.longitude(GeoDataCoordinates::Degree), lon);
-        QCOMPARE(coordinates1.longitude(GeoDataCoordinates::Radian), lon);
-    }
+    QCOMPARE(coordinates1, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
 }
 
 /*
- * test data for testLatitude()
+ * test setting coordinates in radian
  */
-void TestGeoDataCoordinates::testLatitude_data()
+void TestGeoDataCoordinates::testSet_Radian()
 {
-    QTest::addColumn<qreal>("lat");
-    QTest::addColumn<QString>("unit");
-
-    QTest::newRow("deg") << 75.0 << "degree";
-    QTest::newRow("rad") << 1.2 << "radian";
-}
-
-/*
- * test setLatitude() and latitude()
- */
-void TestGeoDataCoordinates::testLatitude()
-{
-    QFETCH(qreal, lat);
-    QFETCH(QString, unit);
+    const qreal lon = 1.3;
+    const qreal lat = 0.7;
+    const qreal alt = 6886.44;
 
     GeoDataCoordinates coordinates1;
-    if(unit == "radian") {
-        coordinates1.setLatitude(lat);
-        QCOMPARE(coordinates1.latitude(), lat);
-    } else if(unit == "degree") {
-        coordinates1.setLatitude(lat, GeoDataCoordinates::Degree);
-        QCOMPARE(coordinates1.latitude(GeoDataCoordinates::Degree), lat);
-    }
+    coordinates1.set(lon, lat, alt, GeoDataCoordinates::Radian);
 
-    if(unit == "radian"){
-        coordinates1.setLatitude(lat);
-        QEXPECT_FAIL("", "This should fail", Continue);
-        QCOMPARE(coordinates1.latitude(GeoDataCoordinates::Degree), lat);
-        QCOMPARE(coordinates1.latitude(GeoDataCoordinates::Radian), lat);
-    }
+    QCOMPARE(coordinates1, GeoDataCoordinates(lon, lat, alt));
 }
 
 /*
- * test setAltitude() and altitude()
+ * test setLongitude() in degree
+ */
+void TestGeoDataCoordinates::testSetLongitude_Degree()
+{
+    const qreal lon = 143.8;
+
+    GeoDataCoordinates coordinates1;
+    coordinates1.setLongitude(lon, GeoDataCoordinates::Degree);
+
+    QCOMPARE(coordinates1, GeoDataCoordinates(lon, 0, 0, GeoDataCoordinates::Degree));
+}
+
+/*
+ * test setLongitude() in radian
+ */
+void TestGeoDataCoordinates::testSetLongitude_Radian()
+{
+    const qreal lon = 2.5;
+
+    GeoDataCoordinates coordinates1;
+    coordinates1.setLongitude(lon);
+
+    QCOMPARE(coordinates1, GeoDataCoordinates(lon, 0));
+}
+
+/*
+ * test setLatitude() and latitude() in degree
+ */
+void TestGeoDataCoordinates::testSetLatitude_Degree()
+{
+    const qreal lat = 75.0;
+
+    GeoDataCoordinates coordinates1;
+    coordinates1.setLatitude(lat, GeoDataCoordinates::Degree);
+
+    QCOMPARE(coordinates1, GeoDataCoordinates(0, lat, 0, GeoDataCoordinates::Degree));
+}
+
+/*
+ * test setLatitude() in radian
+ */
+void TestGeoDataCoordinates::testSetLatitude_Radian()
+{
+    const qreal lat = 1.2;
+
+    GeoDataCoordinates coordinates1;
+    coordinates1.setLatitude(lat);
+
+    QCOMPARE(coordinates1, GeoDataCoordinates(0, lat));
+}
+
+/*
+ * test setAltitude()
  */
 void TestGeoDataCoordinates::testAltitude()
 {
-    qreal alt = 400;
+    const qreal alt = 400;
+
     GeoDataCoordinates coordinates1;
     coordinates1.setAltitude(alt);
-    QCOMPARE(coordinates1.altitude(), alt);
+
+    QCOMPARE(coordinates1, GeoDataCoordinates(0, 0, alt));
 }
 
 /*
