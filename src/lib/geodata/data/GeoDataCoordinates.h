@@ -86,6 +86,13 @@ class GEODATA_EXPORT GeoDataCoordinates
     typedef QVector<GeoDataCoordinates*> PtrVector;
 
     GeoDataCoordinates( const GeoDataCoordinates& other );
+
+    /**
+     * @brief constructs an invalid instance
+     *
+     * Constructs an invalid instance such that calling isValid()
+     * on it will return @code false @endcode.
+     */
     GeoDataCoordinates();
 
     /**
@@ -102,6 +109,15 @@ class GEODATA_EXPORT GeoDataCoordinates
                         int detail = 0 );
 
     virtual ~GeoDataCoordinates();
+
+    /**
+     * @brief Returns @code true @endcode if the coordinate is valid, @code false @endcode otherwise.
+     * @return whether the coordinate is valid
+     *
+     * A coordinate is valid, if at least one component has been set and the last
+     * assignment was not an invalid GeoDataCoordinates object.
+     */
+    bool isValid() const;
 
     /**
     * @brief (re)set the coordinates in a GeoDataCoordinates object
@@ -313,6 +329,7 @@ class GEODATA_EXPORT GeoDataCoordinates
 
  private:
     static GeoDataCoordinates::Notation s_notation;
+    static const GeoDataCoordinates null;
 };
 
 }

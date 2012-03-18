@@ -583,6 +583,8 @@ bool LonLatParser::isCorrectDirections(const QString& dir1, const QString& dir2,
 
 GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates::DMS;
 
+const GeoDataCoordinates GeoDataCoordinates::null = GeoDataCoordinates( 0, 0, 0 ); // don't use default constructor!
+
 GeoDataCoordinates::GeoDataCoordinates( qreal _lon, qreal _lat, qreal _alt, GeoDataCoordinates::Unit unit, int _detail )
   : d( new GeoDataCoordinatesPrivate( _lon, _lat, _alt, unit, _detail ) )
 {
@@ -598,12 +600,11 @@ GeoDataCoordinates::GeoDataCoordinates( const GeoDataCoordinates& other )
     d->ref.ref();
 }
 
-/*
- * standard ctor;
- * create a new private pointer which initializes the atomic reference counter
+/* simply copy null's d pointer
+ * it will be replaced in the detach function
  */
 GeoDataCoordinates::GeoDataCoordinates()
-  : d( new GeoDataCoordinatesPrivate() )
+  : d( null.d )
 {
     d->ref.ref();
 }
@@ -619,6 +620,11 @@ GeoDataCoordinates::~GeoDataCoordinates()
 #ifdef DEBUG_GEODATA
 //    mDebug() << "delete coordinates";
 #endif
+}
+
+bool GeoDataCoordinates::isValid() const
+{
+    return d != null.d;
 }
 
 /*

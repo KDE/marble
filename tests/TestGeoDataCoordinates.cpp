@@ -63,10 +63,15 @@ private slots:
  */
 void TestGeoDataCoordinates::testConstruction()
 {
-    GeoDataCoordinates coordinates1;
-    GeoDataCoordinates coordinates2(coordinates1);
+    GeoDataCoordinates invalid1;
 
-    QCOMPARE(coordinates1, coordinates2);
+    QVERIFY(!invalid1.isValid());
+
+    GeoDataCoordinates invalid2(invalid1);
+
+    QVERIFY(!invalid2.isValid());
+    QVERIFY(!invalid1.isValid());
+    QCOMPARE(invalid1, invalid2);
 
     const qreal lon = 164.77;
     const qreal lat = 55.9;
@@ -74,23 +79,24 @@ void TestGeoDataCoordinates::testConstruction()
 
     GeoDataCoordinates coordinates3(lon, lat, alt, GeoDataCoordinates::Degree);
 
+    QVERIFY(coordinates3.isValid());
     QCOMPARE(coordinates3, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
-    QVERIFY(coordinates3 != coordinates1);
-    QVERIFY(coordinates3 != coordinates2);
+    QVERIFY(coordinates3 != invalid1);
+    QVERIFY(coordinates3 != invalid2);
 
     QCOMPARE(coordinates3.longitude(GeoDataCoordinates::Degree), lon);
     QCOMPARE(coordinates3.longitude(), lon*DEG2RAD);
     QEXPECT_FAIL("", "This should fail", Continue);
     QCOMPARE(coordinates3.longitude(), lon);
     QEXPECT_FAIL("", "This should fail", Continue);
-    QCOMPARE(coordinates1.longitude(GeoDataCoordinates::Degree), lon*DEG2RAD);
+    QCOMPARE(invalid1.longitude(GeoDataCoordinates::Degree), lon*DEG2RAD);
 
     QCOMPARE(coordinates3.latitude(GeoDataCoordinates::Degree), lat);
     QCOMPARE(coordinates3.latitude(), lat*DEG2RAD);
     QEXPECT_FAIL("", "This should fail", Continue);
-    QCOMPARE(coordinates1.latitude(), lat);
+    QCOMPARE(invalid1.latitude(), lat);
     QEXPECT_FAIL("", "This should fail", Continue);
-    QCOMPARE(coordinates1.latitude(GeoDataCoordinates::Degree), lat*DEG2RAD);
+    QCOMPARE(invalid1.latitude(GeoDataCoordinates::Degree), lat*DEG2RAD);
 
     QCOMPARE(coordinates3.altitude(), alt);
 
@@ -112,18 +118,25 @@ void TestGeoDataCoordinates::testConstruction()
 
     GeoDataCoordinates coordinates4(lon*DEG2RAD, lat*DEG2RAD, alt);
 
+    QVERIFY(coordinates4.isValid());
     QCOMPARE(coordinates4, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
     QCOMPARE(coordinates4, coordinates3);
-    QVERIFY(coordinates4 != coordinates1);
-    QVERIFY(coordinates4 != coordinates2);
+    QVERIFY(coordinates4 != invalid1);
+    QVERIFY(coordinates4 != invalid2);
 
     GeoDataCoordinates coordinates5(coordinates3);
 
+    QVERIFY(coordinates5.isValid());
     QCOMPARE(coordinates5, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
     QCOMPARE(coordinates5, coordinates3);
     QCOMPARE(coordinates5, coordinates4);
-    QVERIFY(coordinates5 != coordinates1);
-    QVERIFY(coordinates5 != coordinates2);
+    QVERIFY(coordinates5 != invalid1);
+    QVERIFY(coordinates5 != invalid2);
+
+    GeoDataCoordinates coordinates6(invalid1.longitude(), invalid1.latitude(), invalid1.altitude(), GeoDataCoordinates::Radian, invalid1.detail());
+
+    QVERIFY(coordinates6.isValid());  // it should be valid, even though
+    QCOMPARE(coordinates6, invalid1); // it is equal to an invalid one
 }
 
 /*
@@ -135,14 +148,18 @@ void TestGeoDataCoordinates::testSet_Degree()
     const qreal lat = 70.3;
     const qreal alt = 1000.9;
 
-    GeoDataCoordinates coordinates1;
+    GeoDataCoordinates coordinates1; // invalid
     coordinates1.set(lon, lat, alt, GeoDataCoordinates::Degree);
+
+    QVERIFY(coordinates1.isValid());
 
     GeoDataCoordinates coordinates2(coordinates1);
     coordinates2.set(0, 0, 0, GeoDataCoordinates::Degree);
 
+    QVERIFY(coordinates2.isValid());
     QCOMPARE(coordinates1, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
     QCOMPARE(coordinates2, GeoDataCoordinates(0, 0, 0, GeoDataCoordinates::Degree));
+
 }
 
 /*
@@ -154,12 +171,15 @@ void TestGeoDataCoordinates::testSet_Radian()
     const qreal lat = 0.7;
     const qreal alt = 6886.44;
 
-    GeoDataCoordinates coordinates1;
-    coordinates1.set(lon, lat, alt, GeoDataCoordinates::Radian);
+    GeoDataCoordinates coordinates1; // invalid
+    coordinates1.set(lon, lat, alt);
+
+    QVERIFY(coordinates1.isValid());
 
     GeoDataCoordinates coordinates2(coordinates1);
-    coordinates2.set(0, 0, 0, GeoDataCoordinates::Radian);
+    coordinates2.set(0, 0, 0);
 
+    QVERIFY(coordinates2.isValid());
     QCOMPARE(coordinates1, GeoDataCoordinates(lon, lat, alt));
     QCOMPARE(coordinates2, GeoDataCoordinates(0, 0, 0));
 }
@@ -171,12 +191,15 @@ void TestGeoDataCoordinates::testSetLongitude_Degree()
 {
     const qreal lon = 143.8;
 
-    GeoDataCoordinates coordinates1;
+    GeoDataCoordinates coordinates1; // invalid
     coordinates1.setLongitude(lon, GeoDataCoordinates::Degree);
+
+    QVERIFY(coordinates1.isValid());
 
     GeoDataCoordinates coordinates2(coordinates1);
     coordinates2.setLongitude(0, GeoDataCoordinates::Degree);
 
+    QVERIFY(coordinates2.isValid());
     QCOMPARE(coordinates1, GeoDataCoordinates(lon, 0, 0, GeoDataCoordinates::Degree));
     QCOMPARE(coordinates2, GeoDataCoordinates(0, 0, 0, GeoDataCoordinates::Degree));
 }
@@ -188,12 +211,15 @@ void TestGeoDataCoordinates::testSetLongitude_Radian()
 {
     const qreal lon = 2.5;
 
-    GeoDataCoordinates coordinates1;
+    GeoDataCoordinates coordinates1; // invalid
     coordinates1.setLongitude(lon);
+
+    QVERIFY(coordinates1.isValid());
 
     GeoDataCoordinates coordinates2(coordinates1);
     coordinates2.setLongitude(0);
 
+    QVERIFY(coordinates2.isValid());
     QCOMPARE(coordinates1, GeoDataCoordinates(lon, 0));
     QCOMPARE(coordinates2, GeoDataCoordinates(0, 0));
 }
@@ -205,12 +231,15 @@ void TestGeoDataCoordinates::testSetLatitude_Degree()
 {
     const qreal lat = 75.0;
 
-    GeoDataCoordinates coordinates1;
+    GeoDataCoordinates coordinates1; // invalid
     coordinates1.setLatitude(lat, GeoDataCoordinates::Degree);
+
+    QVERIFY(coordinates1.isValid());
 
     GeoDataCoordinates coordinates2(coordinates1);
     coordinates2.setLatitude(0, GeoDataCoordinates::Degree);
 
+    QVERIFY(coordinates2.isValid());
     QCOMPARE(coordinates1, GeoDataCoordinates(0, lat, 0, GeoDataCoordinates::Degree));
     QCOMPARE(coordinates2, GeoDataCoordinates(0, 0, 0, GeoDataCoordinates::Degree));
 }
@@ -222,12 +251,15 @@ void TestGeoDataCoordinates::testSetLatitude_Radian()
 {
     const qreal lat = 1.2;
 
-    GeoDataCoordinates coordinates1;
+    GeoDataCoordinates coordinates1; // invalid
     coordinates1.setLatitude(lat);
+
+    QVERIFY(coordinates1.isValid());
 
     GeoDataCoordinates coordinates2(coordinates1);
     coordinates2.setLatitude(0);
 
+    QVERIFY(coordinates2.isValid());
     QCOMPARE(coordinates1, GeoDataCoordinates(0, lat));
     QCOMPARE(coordinates2, GeoDataCoordinates(0, 0));
 }
@@ -239,12 +271,15 @@ void TestGeoDataCoordinates::testAltitude()
 {
     const qreal alt = 400;
 
-    GeoDataCoordinates coordinates1;
+    GeoDataCoordinates coordinates1; // invalid
     coordinates1.setAltitude(alt);
+
+    QVERIFY(coordinates1.isValid());
 
     GeoDataCoordinates coordinates2(coordinates1);
     coordinates2.setAltitude(0);
 
+    QVERIFY(coordinates2.isValid());
     QCOMPARE(coordinates1, GeoDataCoordinates(0, 0, alt));
     QCOMPARE(coordinates2, GeoDataCoordinates(0, 0, 0));
 }
@@ -258,12 +293,24 @@ void TestGeoDataCoordinates::testOperatorAssignment()
     const GeoDataCoordinates coordinates1(lon, lat, alt, GeoDataCoordinates::Degree);
     const GeoDataCoordinates coordinates2(0, 0, 0);
 
-    GeoDataCoordinates coordinates3(coordinates1);
-    coordinates3 = coordinates2;
+    GeoDataCoordinates coordinates3; // invalid
+    coordinates3 = coordinates1;
 
-    QCOMPARE(coordinates1, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
-    QCOMPARE(coordinates2, GeoDataCoordinates(0, 0, 0));
-    QCOMPARE(coordinates3, coordinates2);
+    QVERIFY(coordinates3.isValid());
+    QCOMPARE(coordinates1, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree)); // stays unmodified
+    QCOMPARE(coordinates3, coordinates1);
+
+    coordinates3 = GeoDataCoordinates();
+
+    QVERIFY(!coordinates3.isValid());
+
+    GeoDataCoordinates coordinates4(coordinates1);
+    coordinates4 = coordinates2;
+
+    QVERIFY(coordinates4.isValid());
+    QCOMPARE(coordinates1, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree)); // stays unmodified
+    QCOMPARE(coordinates2, GeoDataCoordinates(0, 0, 0)); // stays unmodified
+    QCOMPARE(coordinates4, coordinates2);
 }
 
 /*
