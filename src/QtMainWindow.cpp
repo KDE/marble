@@ -1333,7 +1333,7 @@ void MainWindow::editSettings()
 
 void MainWindow::updateSettings()
 {
-    qDebug() << "Updating Settings ...";
+    mDebug() << Q_FUNC_INFO << "Updating Settings ...";
 
     // FIXME: Font doesn't get updated instantly.
     m_controlView->marbleWidget()->setDefaultFont( m_configDialog->mapFont() );
