@@ -43,9 +43,9 @@ class PluginManagerPrivate
     void loadPlugins();
 
     bool m_pluginsLoaded;
-    QList<RenderPlugin *> m_renderPluginTemplates;
-    QList<NetworkPlugin *> m_networkPluginTemplates;
-    QList<PositionProviderPlugin *> m_positionProviderPluginTemplates;
+    QList<const RenderPlugin *> m_renderPluginTemplates;
+    QList<const NetworkPlugin *> m_networkPluginTemplates;
+    QList<const PositionProviderPlugin *> m_positionProviderPluginTemplates;
     QList<RunnerPlugin *> m_runnerPlugins;
 };
 
@@ -65,33 +65,35 @@ PluginManager::~PluginManager()
 }
 
 template<class T>
-QList<T*> createPlugins( PluginManagerPrivate* d, const QList<T*> &loaders )
+QList<T*> createPlugins( const QList<const T*> &factories )
 {
     QList<T*> result;
-    d->loadPlugins();
-    typename QList<T*>::const_iterator i = loaders.constBegin();
-    typename QList<T*>::const_iterator const end = loaders.constEnd();
-    for (; i != end; ++i) {
-        T* instance = (*i)->newInstance();
+
+    foreach ( const T *factory, factories ) {
+        T *instance = factory->newInstance();
         Q_ASSERT( instance && "Plugin returned null when requesting a new instance." );
         result.append( instance );
     }
+
     return result;
 }
 
 QList<RenderPlugin *> PluginManager::createRenderPlugins() const
 {
-    return createPlugins( d, d->m_renderPluginTemplates );
+    d->loadPlugins();
+    return createPlugins( d->m_renderPluginTemplates );
 }
 
 QList<NetworkPlugin *> PluginManager::createNetworkPlugins() const
 {
-    return createPlugins( d, d->m_networkPluginTemplates );
+    d->loadPlugins();
+    return createPlugins( d->m_networkPluginTemplates );
 }
 
 QList<PositionProviderPlugin *> PluginManager::createPositionProviderPlugins() const
 {
-    return createPlugins( d, d->m_positionProviderPluginTemplates );
+    d->loadPlugins();
+    return createPlugins( d->m_positionProviderPluginTemplates );
 }
 
 QList<RunnerPlugin *> PluginManager::runnerPlugins() const
@@ -103,6 +105,23 @@ QList<RunnerPlugin *> PluginManager::runnerPlugins() const
 /** Append obj to the given plugins list if it inherits both T and U */
 template<class T, class U>
 bool appendPlugin( QObject * obj, QPluginLoader* &loader, QList<T*> &plugins )
+{
+    if ( qobject_cast<T*>( obj ) && qobject_cast<U*>( obj ) ) {
+        Q_ASSERT( obj->metaObject()->superClass() ); // all our plugins have a super class
+        mDebug() <<  obj->metaObject()->superClass()->className()
+                << "plugin loaded from" << loader->fileName();
+        T* plugin = qobject_cast<T*>( obj );
+        Q_ASSERT( plugin ); // checked above
+        plugins << plugin;
+        return true;
+    }
+
+    return false;
+}
+
+/** Append obj to the given plugins list if it inherits both T and U */
+template<class T, class U>
+bool appendPlugin( QObject * obj, QPluginLoader* &loader, QList<const T*> &plugins )
 {
     if ( qobject_cast<T*>( obj ) && qobject_cast<U*>( obj ) ) {
         Q_ASSERT( obj->metaObject()->superClass() ); // all our plugins have a super class
