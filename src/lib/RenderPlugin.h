@@ -60,6 +60,11 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     RenderPlugin();
     virtual ~RenderPlugin();
 
+    /**
+     * @brief Returns a new object of the plugin
+     */
+    virtual RenderPlugin *newInstance() const = 0;
+
     const MarbleModel* marbleModel() const;
     void  setMarbleModel( const MarbleModel* );
 
@@ -164,7 +169,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 };
 
 #define MARBLE_PLUGIN(T) public:\
-    virtual RenderPlugin* newInstance() { return new T(); }
+    virtual RenderPlugin* newInstance() const { return new T(); }
 }
 
 #endif
