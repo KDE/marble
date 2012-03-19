@@ -153,7 +153,7 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     tabWidget->addTab( w_timeSettings, tr( "Date and Time" ) );
 
     // routing page
-    QWidget *w_routingSettings = new RoutingProfilesWidget( marbleWidget );
+    QWidget *w_routingSettings = new RoutingProfilesWidget( marbleWidget->model() );
     tabWidget->addTab( w_routingSettings, tr( "Routing" ) );
 
     // plugin page

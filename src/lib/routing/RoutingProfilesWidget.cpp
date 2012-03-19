@@ -25,14 +25,14 @@
 namespace Marble
 {
 
-RoutingProfilesWidget::RoutingProfilesWidget( MarbleWidget *marbleWidget )
-    : QWidget( 0 ), m_marbleWidget( marbleWidget ),
+RoutingProfilesWidget::RoutingProfilesWidget( MarbleModel *marbleModel )
+    : QWidget( 0 ), m_marbleModel( marbleModel ),
       dummy( 0 )
 {
     m_ui = new Ui_RoutingSettingsWidget;
     m_ui->setupUi( this );
 
-    m_profilesModel= marbleWidget->model()->routingManager()->profilesModel();
+    m_profilesModel= marbleModel->routingManager()->profilesModel();
     m_ui->profilesList->setModel( m_profilesModel );
 
     connect( m_ui->addButton, SIGNAL( clicked( bool ) ), SLOT( add() ) );
@@ -57,7 +57,7 @@ void RoutingProfilesWidget::add()
     int profileIndex = m_profilesModel->rowCount() - 1;
     m_ui->profilesList->selectionModel()->select( m_profilesModel->index( profileIndex, 0 ), QItemSelectionModel::Clear | QItemSelectionModel::SelectCurrent );
 
-    RoutingProfileSettingsDialog dialog( m_marbleWidget->model()->pluginManager(), m_profilesModel, this );
+    RoutingProfileSettingsDialog dialog( m_marbleModel->pluginManager(), m_profilesModel, this );
     dialog.editProfile( profileIndex );
 }
 
@@ -77,7 +77,7 @@ void RoutingProfilesWidget::configure()
 
     int profileIndex = m_ui->profilesList->selectionModel()->selectedRows().first().row();
 
-    RoutingProfileSettingsDialog dialog( m_marbleWidget->model()->pluginManager(), m_profilesModel, this );
+    RoutingProfileSettingsDialog dialog( m_marbleModel->pluginManager(), m_profilesModel, this );
     dialog.editProfile( profileIndex );
 }
 

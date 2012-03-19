@@ -12,29 +12,23 @@
 #define MARBLE_ROUTINGPROFILESWIDGET_H
 
 #include <QWidget>
-#include <QHash>
-#include <QVariant>
-#include <QModelIndex>
 
 #include "marble_export.h"
-#include <RunnerPlugin.h>
 
 class Ui_RoutingSettingsWidget;
-class QStandardItemModel;
 
 namespace Marble
 {
 
 class RoutingProfilesModel;
-class RunnerPlugin;
-class MarbleWidget;
+class MarbleModel;
 
 class MARBLE_EXPORT RoutingProfilesWidget : public QWidget
 {
     Q_OBJECT
 
  public:
-    explicit RoutingProfilesWidget( MarbleWidget *marbleWidget );
+    explicit RoutingProfilesWidget( MarbleModel *marbleModel );
     ~RoutingProfilesWidget();
 
  private slots:
@@ -46,7 +40,7 @@ class MARBLE_EXPORT RoutingProfilesWidget : public QWidget
     void updateButtons();
 
  private:
-    MarbleWidget *m_marbleWidget;
+    MarbleModel *const m_marbleModel;
     Ui_RoutingSettingsWidget *m_ui;
     RoutingProfilesModel *m_profilesModel;
 

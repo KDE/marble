@@ -1369,7 +1369,7 @@ void MarblePart::editSettings()
     m_configDialog->addPage( w_timeSettings, i18n( "Date & Time" ), "clock" );
 
     // routing page
-    RoutingProfilesWidget *w_routingSettings = new RoutingProfilesWidget( m_controlView->marbleWidget() );
+    RoutingProfilesWidget *w_routingSettings = new RoutingProfilesWidget( m_controlView->marbleModel() );
     w_routingSettings->setObjectName( "routing_page" );
     m_configDialog->addPage( w_routingSettings, tr( "Routing" ) );
 
