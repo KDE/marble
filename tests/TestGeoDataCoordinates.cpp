@@ -74,7 +74,10 @@ void TestGeoDataCoordinates::testConstruction()
 
     GeoDataCoordinates coordinates3(lon, lat, alt, GeoDataCoordinates::Degree);
 
-    QVERIFY(coordinates1 != coordinates3);
+    QCOMPARE(coordinates3, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
+    QVERIFY(coordinates3 != coordinates1);
+    QVERIFY(coordinates3 != coordinates2);
+
     QCOMPARE(coordinates3.longitude(GeoDataCoordinates::Degree), lon);
     QCOMPARE(coordinates3.longitude(), lon*DEG2RAD);
     QEXPECT_FAIL("", "This should fail", Continue);
@@ -109,11 +112,18 @@ void TestGeoDataCoordinates::testConstruction()
 
     GeoDataCoordinates coordinates4(lon*DEG2RAD, lat*DEG2RAD, alt);
 
+    QCOMPARE(coordinates4, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
     QCOMPARE(coordinates4, coordinates3);
+    QVERIFY(coordinates4 != coordinates1);
+    QVERIFY(coordinates4 != coordinates2);
 
     GeoDataCoordinates coordinates5(coordinates3);
 
+    QCOMPARE(coordinates5, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
     QCOMPARE(coordinates5, coordinates3);
+    QCOMPARE(coordinates5, coordinates4);
+    QVERIFY(coordinates5 != coordinates1);
+    QVERIFY(coordinates5 != coordinates2);
 }
 
 /*
