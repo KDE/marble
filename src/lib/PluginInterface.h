@@ -86,6 +86,14 @@ class MARBLE_EXPORT PluginInterface
 
     virtual QList<PluginAuthor> pluginAuthors() const = 0;
 
+    /**
+     * @brief Returns about text (credits) for external data the plugin uses.
+     *
+     * The default implementation returns the empty string. Please override
+     * this method to give credits for all data from 3rd-partys.
+     */
+    virtual QString aboutDataText() const;
+
     virtual void initialize() = 0;
 
     virtual bool isInitialized() const = 0;

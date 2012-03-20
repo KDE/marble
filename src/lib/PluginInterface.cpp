@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 #include "PluginInterface.h"
 
@@ -14,6 +15,11 @@ namespace Marble
 
 PluginInterface::~PluginInterface()
 {
+}
+
+QString PluginInterface::aboutDataText() const
+{
+    return QString();
 }
 
 }

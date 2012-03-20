@@ -56,6 +56,8 @@ class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInt
 
     QList<PluginAuthor> pluginAuthors() const;
 
+    QString aboutDataText() const;
+
     QIcon icon() const;
 
     QDialog *configDialog();

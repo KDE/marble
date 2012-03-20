@@ -56,6 +56,7 @@ public:
     QString description() const;
     QString copyrightYears() const;
     QList<PluginAuthor> pluginAuthors() const;
+    QString aboutDataText() const;
     QIcon icon() const;
     RenderType renderType() const;
     void initialize();

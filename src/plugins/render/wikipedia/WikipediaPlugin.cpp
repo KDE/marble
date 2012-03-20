@@ -33,8 +33,6 @@ WikipediaPlugin::WikipediaPlugin()
       m_configDialog( 0 ),
       m_settings()
 {
-    setDataText( tr( "Geo positions by geonames.org\nTexts by wikipedia.org" ) );
-
     // Plugin is enabled by default
     setEnabled( true );
     // Plugin is not visible by default
@@ -104,6 +102,11 @@ QList<PluginAuthor> WikipediaPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" );
+}
+
+QString WikipediaPlugin::aboutDataText() const
+{
+    return tr( "Geo positions by geonames.org\nTexts by wikipedia.org" );
 }
 
 QIcon WikipediaPlugin::icon() const

@@ -52,9 +52,6 @@ class RenderPluginPrivate
     bool                m_enabled;
     bool                m_visible;
 
-    // About dialog information
-    QString             m_dataText;
-
     PluginAboutDialog*  m_aboutDialog;
 };
 
@@ -174,8 +171,8 @@ QDialog *RenderPlugin::aboutDialog()
         d->m_aboutDialog = new PluginAboutDialog();
         d->m_aboutDialog->setName( name() );
         d->m_aboutDialog->setVersion( version() );
-        if ( !d->m_dataText.isEmpty() ) {
-            d->m_aboutDialog->setDataText( d->m_dataText );
+        if ( !aboutDataText().isEmpty() ) {
+            d->m_aboutDialog->setDataText( aboutDataText() );
         }
         QIcon pluginIcon = icon();
         if ( !pluginIcon.isNull() ) {
@@ -207,11 +204,6 @@ RenderPlugin::RenderType RenderPlugin::renderType() const
 bool RenderPlugin::eventFilter( QObject *, QEvent * )
 {
     return false;
-}
-
-void RenderPlugin::setDataText(const QString &text)
-{
-    d->m_dataText = text;
 }
 
 void RenderPlugin::restoreDefaultSettings()

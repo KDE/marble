@@ -153,9 +153,6 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
  protected:
     bool eventFilter( QObject *, QEvent * );
 
-    /** Data text for the default about dialog */
-    void setDataText( const QString &text );
-
  private:
     Q_DISABLE_COPY( RenderPlugin )
     RenderPluginPrivate * const d;

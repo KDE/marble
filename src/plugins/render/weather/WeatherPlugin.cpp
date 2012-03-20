@@ -41,7 +41,6 @@ WeatherPlugin::WeatherPlugin()
       m_settings()
 {
     m_icon.addFile( MarbleDirs::path( "weather/weather-clear.png" ) );
-    setDataText( tr( "Supported by backstage.bbc.co.uk.\nWeather data from UK MET Office" ) );
 
     // Plugin is enabled by default
     setEnabled( true );
@@ -113,6 +112,11 @@ QList<PluginAuthor> WeatherPlugin::pluginAuthors() const
     return QList<PluginAuthor>()
             << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" )
             << PluginAuthor( "Valery Kharitonov", "kharvd@gmail.com" );
+}
+
+QString WeatherPlugin::aboutDataText() const
+{
+    return tr( "Supported by backstage.bbc.co.uk.\nWeather data from UK MET Office" );
 }
 
 QIcon WeatherPlugin::icon() const

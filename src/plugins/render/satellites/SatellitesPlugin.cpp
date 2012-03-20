@@ -37,8 +37,6 @@ SatellitesPlugin::SatellitesPlugin()
      m_configModel( 0 ),
      ui_configWidget( 0 )
 {
-    setDataText( tr( "Satellites orbital elements from <a href=\"http://www.celestrak.com\">http://www.celestrak.com</a>" ) );
-
     connect( this, SIGNAL(settingsChanged(QString)), SLOT(updateSettings()) );
     connect( this, SIGNAL(enabledChanged(bool)), SLOT(enableModel(bool)) );
     connect( this, SIGNAL(visibilityChanged(QString,bool)), SLOT(visibleModel(QString,bool)) );
@@ -104,6 +102,11 @@ QList<PluginAuthor> SatellitesPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Guillaume Martres", "smarter@ubuntu.com" );
+}
+
+QString SatellitesPlugin::aboutDataText() const
+{
+    return tr( "Satellites orbital elements from <a href=\"http://www.celestrak.com\">http://www.celestrak.com</a>" );
 }
 
 QIcon SatellitesPlugin::icon() const

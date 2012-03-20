@@ -57,6 +57,8 @@ class WeatherPlugin : public AbstractDataPlugin, public DialogConfigurationInter
 
     QList<PluginAuthor> pluginAuthors() const;
 
+    QString aboutDataText() const;
+
     QIcon icon() const;
 
     QDialog *configDialog();
