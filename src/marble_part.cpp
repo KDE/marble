@@ -77,6 +77,7 @@
 #include "MarblePluginSettingsWidget.h"
 #include "MapWizard.h"
 #include "NewBookmarkFolderDialog.h"
+#include "PluginAboutDialog.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
 #include "routing/RoutingProfilesWidget.h"
@@ -1572,10 +1573,21 @@ void MarblePart::showPluginAboutDialog( const QString& nameId )
 
     foreach ( RenderPlugin *renderItem, renderItemList ) {
         if( renderItem->nameId() == nameId ) {
-            QDialog *aboutDialog = renderItem->aboutDialog();
-            if ( aboutDialog ) {
-                aboutDialog->show();
+            QPointer<PluginAboutDialog> aboutDialog = new PluginAboutDialog( m_controlView );
+            aboutDialog->setName( renderItem->name() );
+            aboutDialog->setVersion( renderItem->version() );
+            if ( !renderItem->aboutDataText().isEmpty() ) {
+                aboutDialog->setDataText( renderItem->aboutDataText() );
             }
+            QIcon pluginIcon = renderItem->icon();
+            if ( !pluginIcon.isNull() ) {
+                aboutDialog->setPixmap( pluginIcon.pixmap( 64, 64 ) );
+            }
+            QString const copyrightText = tr( "<br/>(c) %1 The Marble Project<br /><br/><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" );
+            aboutDialog->setAboutText( copyrightText.arg( renderItem->copyrightYears() ) );
+            aboutDialog->setAuthors( renderItem->pluginAuthors() );
+            aboutDialog->exec();
+            delete aboutDialog;
         }
     }
 }

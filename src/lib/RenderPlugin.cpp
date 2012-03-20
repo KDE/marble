@@ -16,7 +16,6 @@
 #include "DialogConfigurationInterface.h"
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
-#include "PluginAboutDialog.h"
 
 // Qt
 #include <QtGui/QAction>
@@ -34,14 +33,12 @@ class RenderPluginPrivate
           m_action(0),
           m_item(0),
           m_enabled(true),
-          m_visible(true),
-          m_aboutDialog( 0 )
+          m_visible(true)
     {
     }
 
     ~RenderPluginPrivate()
     {
-        delete m_aboutDialog;
     }
 
     // const: RenderPlugins should only read the model, not modify it
@@ -51,8 +48,6 @@ class RenderPluginPrivate
 
     bool                m_enabled;
     bool                m_visible;
-
-    PluginAboutDialog*  m_aboutDialog;
 };
 
 
@@ -163,27 +158,6 @@ bool RenderPlugin::enabled() const
 bool RenderPlugin::visible() const
 {
     return d->m_visible;
-}
-
-QDialog *RenderPlugin::aboutDialog()
-{
-    if ( !d->m_aboutDialog ) {
-        d->m_aboutDialog = new PluginAboutDialog();
-        d->m_aboutDialog->setName( name() );
-        d->m_aboutDialog->setVersion( version() );
-        if ( !aboutDataText().isEmpty() ) {
-            d->m_aboutDialog->setDataText( aboutDataText() );
-        }
-        QIcon pluginIcon = icon();
-        if ( !pluginIcon.isNull() ) {
-            d->m_aboutDialog->setPixmap( pluginIcon.pixmap( 64, 64 ) );
-        }
-        QString const copyrightText = tr( "<br/>(c) %1 The Marble Project<br /><br/><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" );
-        d->m_aboutDialog->setAboutText( copyrightText.arg( copyrightYears() ) );
-        d->m_aboutDialog->setAuthors( pluginAuthors() );
-    }
-
-    return d->m_aboutDialog;
 }
 
 QHash<QString,QVariant> RenderPlugin::settings() const

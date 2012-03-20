@@ -93,13 +93,6 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 
     bool    enabled() const;
     bool    visible() const;
-    
-    /**
-     * Function for getting a pointer to the about dialog of the plugin.
-     *
-     * @return: Pointer to the about dialog, which must be non-zero.
-     */
-    virtual QDialog *aboutDialog();
 
     /**
      * @return: The settings of the item.

@@ -38,6 +38,7 @@
 #include "MarbleLocale.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
+#include "PluginAboutDialog.h"
 #include "RenderPlugin.h"
 #include "MarbleClock.h"
 #include "routing/RoutingProfilesWidget.h"
@@ -246,10 +247,21 @@ void QtMarbleConfigDialog::showPluginAboutDialog( QString nameId )
 
     foreach ( RenderPlugin *renderItem, renderItemList ) {
         if( renderItem->nameId() == nameId ) {
-            QDialog *aboutDialog = renderItem->aboutDialog();
-            if ( aboutDialog ) {
-                aboutDialog->show();
+            QPointer<PluginAboutDialog> aboutDialog = new PluginAboutDialog( this );
+            aboutDialog->setName( renderItem->name() );
+            aboutDialog->setVersion( renderItem->version() );
+            if ( !renderItem->aboutDataText().isEmpty() ) {
+                aboutDialog->setDataText( renderItem->aboutDataText() );
             }
+            QIcon pluginIcon = renderItem->icon();
+            if ( !pluginIcon.isNull() ) {
+                aboutDialog->setPixmap( pluginIcon.pixmap( 64, 64 ) );
+            }
+            QString const copyrightText = tr( "<br/>(c) %1 The Marble Project<br /><br/><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" );
+            aboutDialog->setAboutText( copyrightText.arg( renderItem->copyrightYears() ) );
+            aboutDialog->setAuthors( renderItem->pluginAuthors() );
+            aboutDialog->exec();
+            delete aboutDialog;
         }
     }
 }
