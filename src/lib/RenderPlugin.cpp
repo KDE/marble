@@ -170,8 +170,7 @@ bool RenderPlugin::visible() const
 
 QDialog *RenderPlugin::aboutDialog()
 {
-    if ( !d->m_aboutDialog && !pluginAuthors().isEmpty() && !copyrightYears().isEmpty() && !version().isEmpty() ) {
-        Q_ASSERT( !d->m_aboutDialog );
+    if ( !d->m_aboutDialog ) {
         d->m_aboutDialog = new PluginAboutDialog();
         d->m_aboutDialog->setName( name() );
         d->m_aboutDialog->setVersion( version() );
