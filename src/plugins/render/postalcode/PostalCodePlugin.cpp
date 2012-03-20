@@ -16,8 +16,6 @@ using namespace Marble;
 PostalCodePlugin::PostalCodePlugin()
     : m_isInitialized( false )
 {
-    setNameId( "postalCode" );
-
     setEnabled( true );
     setVisible( false );
 }
@@ -43,6 +41,11 @@ QString PostalCodePlugin::name() const
 QString PostalCodePlugin::guiString() const
 {
     return tr( "Postal Codes" );
+}
+
+QString PostalCodePlugin::nameId() const
+{
+    return "postalCode";
 }
 
 QString PostalCodePlugin::version() const

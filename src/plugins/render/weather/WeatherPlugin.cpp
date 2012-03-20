@@ -41,7 +41,6 @@ WeatherPlugin::WeatherPlugin()
       m_settings()
 {
     m_icon.addFile( MarbleDirs::path( "weather/weather-clear.png" ) );
-    setNameId( "weather" );
     setDataText( tr( "Supported by backstage.bbc.co.uk.\nWeather data from UK MET Office" ) );
 
     // Plugin is enabled by default
@@ -87,6 +86,11 @@ QString WeatherPlugin::name() const
 QString WeatherPlugin::guiString() const
 {
     return tr( "&Weather" );
+}
+
+QString WeatherPlugin::nameId() const
+{
+    return "weather";
 }
 
 QString WeatherPlugin::version() const

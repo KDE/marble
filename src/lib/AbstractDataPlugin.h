@@ -68,13 +68,6 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
                  const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
 
     /**
-     * @brief Initialized the plugin and make it ready to be painted.
-     */
-    virtual void initialize() = 0;
-
-    virtual bool isInitialized() const;
-    
-    /**
      * @return The model associated with the plugin.
      */
     AbstractDataPluginModel *model() const;
@@ -86,16 +79,6 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
     
     const PluginManager *pluginManager() const;
 
-    /**
-     * Set the name id of the plugin
-     */
-    void setNameId( const QString& name );
-    
-    /**
-     * @return Returns the nameId of the item
-     */
-    QString nameId() const;
-    
     /**
      * Set the number of items to be shown at the same time.
      */

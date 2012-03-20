@@ -33,7 +33,6 @@ WikipediaPlugin::WikipediaPlugin()
       m_configDialog( 0 ),
       m_settings()
 {
-    setNameId( "wikipedia" );
     setDataText( tr( "Geo positions by geonames.org\nTexts by wikipedia.org" ) );
 
     // Plugin is enabled by default
@@ -79,6 +78,11 @@ QString WikipediaPlugin::name() const
 QString WikipediaPlugin::guiString() const
 {
     return tr( "&Wikipedia" );
+}
+
+QString WikipediaPlugin::nameId() const
+{
+    return "wikipedia";
 }
 
 QString WikipediaPlugin::version() const

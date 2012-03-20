@@ -33,6 +33,8 @@ class PostalCodePlugin : public AbstractDataPlugin {
 
     QString guiString() const;
 
+    QString nameId() const;
+
     QString version() const;
 
     QString description() const;

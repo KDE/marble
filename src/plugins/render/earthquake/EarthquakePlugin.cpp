@@ -21,8 +21,6 @@ EarthquakePlugin::EarthquakePlugin()
     : m_isInitialized( false ),
       m_configDialog( 0 )
 {
-    setNameId( "earthquake" );
-
     setEnabled( true ); // Plugin is enabled by default
     setVisible( false ); // Plugin is invisible by default
     connect( this, SIGNAL( settingsChanged( QString ) ),
@@ -51,6 +49,11 @@ QString EarthquakePlugin::name() const
 QString EarthquakePlugin::guiString() const
 {
     return tr( "&Earthquakes" );
+}
+
+QString EarthquakePlugin::nameId() const
+{
+    return "earthquake";
 }
 
 QString EarthquakePlugin::version() const

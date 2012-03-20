@@ -45,6 +45,8 @@ class OpenDesktopPlugin : public AbstractDataPlugin, public DialogConfigurationI
     QString name() const;
     
     QString guiString() const;
+
+    QString nameId() const;
     
     QString version() const;
 

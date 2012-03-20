@@ -42,7 +42,6 @@ class AbstractDataPluginPrivate
     }
     
     AbstractDataPluginModel *m_model;
-    QString m_name;
     quint32 m_numberOfItems;
 };
 
@@ -70,11 +69,6 @@ QString AbstractDataPlugin::renderPolicy() const
 QStringList AbstractDataPlugin::renderPosition() const
 {
     return QStringList( "ALWAYS_ON_TOP" );
-}
-
-bool AbstractDataPlugin::isInitialized() const
-{
-    return true;
 }
 
 bool AbstractDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
@@ -124,16 +118,6 @@ void AbstractDataPlugin::setModel( AbstractDataPluginModel* model )
 const PluginManager* AbstractDataPlugin::pluginManager() const
 {
     return marbleModel()->pluginManager();
-}
-
-QString AbstractDataPlugin::nameId() const
-{
-    return d->m_name;
-}
-    
-void AbstractDataPlugin::setNameId( const QString& name )
-{
-    d->m_name = name;
 }
 
 quint32 AbstractDataPlugin::numberOfItems() const

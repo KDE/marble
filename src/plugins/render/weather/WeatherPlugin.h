@@ -46,6 +46,8 @@ class WeatherPlugin : public AbstractDataPlugin, public DialogConfigurationInter
     QString name() const;
     
     QString guiString() const;
+
+    QString nameId() const;
     
     QString version() const;
 

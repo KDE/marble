@@ -23,7 +23,6 @@ OpenDesktopPlugin::OpenDesktopPlugin()
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )
 {
-    setNameId( "opendesktop" );
     setEnabled( true ); // Plugin is enabled by default
     setVisible( false ); // Plugin is invisible by default
 }
@@ -49,6 +48,11 @@ QString OpenDesktopPlugin::name() const
 QString OpenDesktopPlugin::guiString() const
 {
     return tr( "&OpenDesktop Community" );
+}
+
+QString OpenDesktopPlugin::nameId() const
+{
+    return "opendesktop";
 }
 
 QString OpenDesktopPlugin::version() const

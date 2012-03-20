@@ -22,8 +22,6 @@ using namespace Marble;
 PhotoPlugin::PhotoPlugin()
     : m_isInitialized( false )
 {
-    setNameId( "photo" );
-    
     // Plugin is enabled by default
     setEnabled( true );
     // Plugin is not visible by default
@@ -51,6 +49,11 @@ QString PhotoPlugin::name() const
 QString PhotoPlugin::guiString() const
 {
     return tr( "&Photos" );
+}
+
+QString PhotoPlugin::nameId() const
+{
+    return "photo";
 }
 
 QString PhotoPlugin::version() const
