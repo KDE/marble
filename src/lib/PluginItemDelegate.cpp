@@ -77,12 +77,10 @@ void PluginItemDelegate::paint( QPainter *painter,
     nameRect.setLeft( checkBox.rect.right() + 1 );
     
     // Painting the About Button
-    if ( index.data( RenderPlugin::AboutDialogAvailable ).toBool() ) {
-        QStyleOptionButton button = buttonOption( option, index, PluginItemDelegate::About,
-                                                  topRight.x(), Qt::AlignRight );
-        style->drawControl( QStyle::CE_PushButton, &button, painter );
-        topRight -= QPoint( button.rect.width(), 0 );
-    }
+    QStyleOptionButton button = buttonOption( option, index, PluginItemDelegate::About,
+                                              topRight.x(), Qt::AlignRight );
+    style->drawControl( QStyle::CE_PushButton, &button, painter );
+    topRight -= QPoint( button.rect.width(), 0 );
 
     // Painting the Configure Button
     if ( index.data( RenderPlugin::ConfigurationDialogAvailable ).toBool() ) {
@@ -205,8 +203,7 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
         QPoint topRight = option.rect.topRight();
 
         // Handle aboutButton
-        // make sure we have a about button
-        if ( index.data( RenderPlugin::AboutDialogAvailable ).toBool() ) {
+        {
             QRect aboutRect = buttonOption( option,
                                             index,
                                             PluginItemDelegate::About,
@@ -246,11 +243,6 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
                 m_aboutPressedPluginId.clear();
             }
             topRight -= QPoint( aboutRect.width(), 0 );
-        }
-        else {
-            // If we don't have an about dialog shown and the mouse is over this item,
-            // no about button is pressed.
-            m_aboutPressedPluginId.clear();
         }
 
         // Handle configButton

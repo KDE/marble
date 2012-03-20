@@ -47,7 +47,6 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      */
     enum ItemDataRole {
         NameId = Qt::UserRole + 2,       // a QString
-        AboutDialogAvailable,            // a bool
         ConfigurationDialogAvailable,    // a bool
         BackendTypes                     // a QStringList
     };
@@ -98,7 +97,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     /**
      * Function for getting a pointer to the about dialog of the plugin.
      *
-     * @return: The about dialog or, if no about dialog exists, 0.
+     * @return: Pointer to the about dialog, which must be non-zero.
      */
     virtual QDialog *aboutDialog();
 

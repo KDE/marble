@@ -118,7 +118,6 @@ QStandardItem* RenderPlugin::item()
 
     // Custom data
     d->m_item->setData( nameId(), RenderPlugin::NameId );
-    d->m_item->setData( (bool) aboutDialog(), RenderPlugin::AboutDialogAvailable );
     d->m_item->setData( (bool) qobject_cast<DialogConfigurationInterface *>( this ), RenderPlugin::ConfigurationDialogAvailable );
     d->m_item->setData( backendTypes(), RenderPlugin::BackendTypes );
 
