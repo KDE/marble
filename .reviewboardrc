@@ -1,0 +1,5 @@
+REPOSITORY = 'git://anongit.kde.org/marble'
+
+REVIEWBOARD_URL = "https://git.reviewboard.kde.org"
+
+TARGET_GROUPS = "marble"
