@@ -303,8 +303,7 @@ void PositionMarker::setSettings( const QHash<QString, QVariant> &settings )
 {
     const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     QColor defaultColor = oxygenBrickRed4;
-    if ( smallScreen )
-        defaultColor.setAlpha( smallScreen ? 80 : 40 );
+    defaultColor.setAlpha( smallScreen ? 80 : 40 );
 
     m_useCustomCursor = settings.value( "useCustomCursor", false ).toBool();
     m_cursorPath = settings.value( "cursorPath", m_defaultCursorPath ).toString();
