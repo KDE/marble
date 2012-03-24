@@ -103,8 +103,8 @@ class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
 
     bool           m_isInitialized;
     bool           m_useCustomCursor;
-    
-    QString m_defaultCursorPath;
+
+    const QString m_defaultCursorPath;
     GeoDataLatLonAltBox m_lastBoundingBox;
     GeoDataCoordinates  m_currentPosition;
     GeoDataCoordinates  m_previousPosition;
