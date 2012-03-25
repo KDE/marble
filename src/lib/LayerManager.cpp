@@ -72,8 +72,6 @@ LayerManagerPrivate::LayerManagerPrivate( const MarbleModel* model )
 
 LayerManagerPrivate::~LayerManagerPrivate()
 {
-    foreach( RenderPlugin * renderPlugin, m_renderPlugins )
-        renderPlugin->setMarbleModel( 0 );
     qDeleteAll( m_renderPlugins );
 }
 
