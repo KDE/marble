@@ -326,6 +326,8 @@ void OverviewMap::setSettings( const QHash<QString,QVariant> &settings )
         m_settings.insert( "posColor", QColor( Qt::white ).name() );
     }
 
+    m_target.clear(); // FIXME: forces execution of changeBackground() in paintContent()
+
     readSettings();
     emit settingsChanged( nameId() );
 }
