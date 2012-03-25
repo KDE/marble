@@ -1233,7 +1233,7 @@ void MarbleWidget::readPluginSettings( QSettings& settings )
     foreach( RenderPlugin *plugin, renderPlugins() ) {
         settings.beginGroup( QString( "plugin_" ) + plugin->nameId() );
 
-        QHash<QString,QVariant> hash = plugin->settings();
+        QHash<QString,QVariant> hash;
 
         foreach ( const QString& key, settings.childKeys() ) {
             hash.insert( key, settings.value( key ) );
