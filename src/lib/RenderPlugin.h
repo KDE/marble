@@ -64,6 +64,10 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      */
     virtual RenderPlugin *newInstance() const = 0;
 
+    virtual void initialize() = 0;
+
+    virtual bool isInitialized() const = 0;
+
     const MarbleModel* marbleModel() const;
     void  setMarbleModel( const MarbleModel* );
 

@@ -37,6 +37,10 @@ class MARBLE_EXPORT NetworkPlugin : public QObject, public NetworkPluginInterfac
      */
     virtual NetworkPlugin * newInstance() const = 0;
 
+    virtual void initialize() = 0;
+
+    virtual bool isInitialized() const = 0;
+
  protected:
     NetworkPlugin();
 

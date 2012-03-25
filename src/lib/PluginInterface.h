@@ -93,10 +93,6 @@ class MARBLE_EXPORT PluginInterface
      * this method to give credits for all data from 3rd-partys.
      */
     virtual QString aboutDataText() const;
-
-    virtual void initialize() = 0;
-
-    virtual bool isInitialized() const = 0;
 };
 
 }
