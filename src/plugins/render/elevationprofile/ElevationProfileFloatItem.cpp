@@ -30,8 +30,8 @@
 namespace Marble
 {
 
-ElevationProfileFloatItem::ElevationProfileFloatItem( const QPointF &point, const QSizeF &size )
-        : AbstractFloatItem( point, size ),
+ElevationProfileFloatItem::ElevationProfileFloatItem()
+        : AbstractFloatItem( QPointF( 220, 10.5 ), QSizeF( 0.0, 50.0 ) ),
         m_configDialog( 0 ),
         m_leftGraphMargin( 0 ),
         m_eleGraphWidth( 0 ),

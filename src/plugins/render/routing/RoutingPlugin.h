@@ -30,7 +30,7 @@ class RoutingPlugin : public AbstractFloatItem, public DialogConfigurationInterf
     MARBLE_PLUGIN( RoutingPlugin )
 
 public:
-    explicit RoutingPlugin( const QPointF &point = QPointF( -10, -10 ) );
+    RoutingPlugin();
 
     ~RoutingPlugin();
 

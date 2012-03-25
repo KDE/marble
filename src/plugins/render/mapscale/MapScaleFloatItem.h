@@ -36,8 +36,7 @@ class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationIn
     Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( MapScaleFloatItem )
  public:
-    explicit MapScaleFloatItem( const QPointF &point = QPointF( 10.5, -10.5 ),
-                                const QSizeF &size = QSizeF( 0.0, 40.0 ) );
+    MapScaleFloatItem();
     ~MapScaleFloatItem();
 
     QStringList backendTypes() const;

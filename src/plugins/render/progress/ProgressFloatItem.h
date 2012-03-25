@@ -33,8 +33,7 @@ class ProgressFloatItem  : public AbstractFloatItem
     MARBLE_PLUGIN( ProgressFloatItem )
 
  public:
-    explicit ProgressFloatItem ( const QPointF &point = QPointF( -10.5, -150.5 ),
-                                const QSizeF &size = QSizeF( 40.0, 40.0 ) );
+    ProgressFloatItem();
     ~ProgressFloatItem ();
 
     QStringList backendTypes() const;

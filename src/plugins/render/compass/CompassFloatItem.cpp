@@ -26,8 +26,8 @@
 namespace Marble
 {
 
-CompassFloatItem::CompassFloatItem ( const QPointF &point, const QSizeF &size )
-    : AbstractFloatItem( point, size ),
+CompassFloatItem::CompassFloatItem()
+    : AbstractFloatItem( QPointF( -1.0, 10.0 ), QSizeF( 75.0, 75.0 ) ),
       m_isInitialized( false ),
       m_svgobj( 0 ),
       m_compass(),

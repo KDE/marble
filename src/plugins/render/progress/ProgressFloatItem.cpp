@@ -27,8 +27,8 @@
 namespace Marble
 {
 
-ProgressFloatItem::ProgressFloatItem ( const QPointF &point, const QSizeF &size )
-    : AbstractFloatItem( point, size ),
+ProgressFloatItem::ProgressFloatItem()
+    : AbstractFloatItem( QPointF( -10.5, -150.5 ), QSizeF( 40.0, 40.0 ) ),
       m_isInitialized( false ),
       m_totalJobs( 0 ),
       m_completedJobs ( 0 ),

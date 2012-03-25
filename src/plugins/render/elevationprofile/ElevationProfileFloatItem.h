@@ -48,8 +48,7 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
     MARBLE_PLUGIN( ElevationProfileFloatItem )
 
  public:
-    explicit ElevationProfileFloatItem( const QPointF &point = QPointF( 220, 10.5 ),
-                                        const QSizeF &size = QSizeF( 0.0, 50.0 ) );
+    ElevationProfileFloatItem();
     ~ElevationProfileFloatItem();
 
     virtual QStringList backendTypes() const;

@@ -34,11 +34,11 @@
 namespace Marble
 {
 
-OverviewMap::OverviewMap( const QPointF &point, const QSizeF &size )
-    : AbstractFloatItem( point, size ),
+OverviewMap::OverviewMap()
+    : AbstractFloatItem( QPointF( 10.5, 10.5 ), QSizeF( 166.0, 86.0 ) ),
       m_target( QString() ),
       m_planetID( Planet::planetList() ),
-      m_defaultSize( size ),
+      m_defaultSize( AbstractFloatItem::size() ),
       m_configDialog( 0 ),
       m_mapChanged( false )
 {

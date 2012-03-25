@@ -41,8 +41,7 @@ class Speedometer : public AbstractFloatItem
     MARBLE_PLUGIN( Speedometer )
     
  public:
-    explicit Speedometer( const QPointF &point = QPointF( 10.5, 110 ),
-                          const QSizeF &size = QSizeF( 135.0, 80.0 ) );
+    Speedometer();
     ~Speedometer();
 
     QStringList backendTypes() const;

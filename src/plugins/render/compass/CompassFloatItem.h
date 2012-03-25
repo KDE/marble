@@ -37,8 +37,7 @@ class CompassFloatItem  : public AbstractFloatItem, public DialogConfigurationIn
     Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( CompassFloatItem )
  public:
-    explicit CompassFloatItem ( const QPointF &point = QPointF( -1.0, 10.0 ),
-                                const QSizeF &size = QSizeF( 75.0, 75.0 ) );
+    CompassFloatItem();
     ~CompassFloatItem ();
 
     QStringList backendTypes() const;

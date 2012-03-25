@@ -42,7 +42,7 @@ class NavigationFloatItem: public AbstractFloatItem
 MARBLE_PLUGIN( NavigationFloatItem )
 
  public:
-    explicit NavigationFloatItem( const QPointF &point = QPointF( -10, -10 ) );
+    NavigationFloatItem();
     ~NavigationFloatItem();
 
     QStringList backendTypes() const;

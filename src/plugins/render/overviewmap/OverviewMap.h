@@ -43,8 +43,7 @@ class OverviewMap : public AbstractFloatItem, public DialogConfigurationInterfac
     MARBLE_PLUGIN( OverviewMap )
     
  public:
-    explicit OverviewMap( const QPointF &point = QPointF( 10.5, 10.5 ),
-                          const QSizeF &size = QSizeF( 166.0, 86.0 ) );
+    OverviewMap();
     ~OverviewMap();
 
     QStringList backendTypes() const;

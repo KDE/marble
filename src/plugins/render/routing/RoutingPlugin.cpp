@@ -434,8 +434,8 @@ void RoutingPlugin::writeSettings()
 }
 
 
-RoutingPlugin::RoutingPlugin( const QPointF &position ) :
-    AbstractFloatItem( position ),
+RoutingPlugin::RoutingPlugin() :
+    AbstractFloatItem( QPointF( -10, -10 ) ),
     d( new RoutingPluginPrivate( this ) )
 {
     setEnabled( true );

@@ -23,8 +23,8 @@
 namespace Marble
 {
 
-GpsInfo::GpsInfo( const QPointF &point, const QSizeF &size )
-    : AbstractFloatItem( point, size ),
+GpsInfo::GpsInfo()
+    : AbstractFloatItem( QPointF( 10.5, 110 ), QSizeF( 135.0, 80.0 ) ),
       m_widgetItem( 0 )
 {
     setVisible( false );
