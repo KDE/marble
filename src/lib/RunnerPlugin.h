@@ -77,10 +77,6 @@ public:
 
     virtual QIcon icon() const;
 
-    virtual void initialize();
-
-    virtual bool isInitialized() const;
-
     /** A status message showing whether the plugin will be able to deliver results */
     QString statusMessage() const;
 

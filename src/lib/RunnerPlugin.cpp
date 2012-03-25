@@ -63,16 +63,6 @@ QIcon RunnerPlugin::icon() const
     return QIcon();
 }
 
-void RunnerPlugin::initialize()
-{
-    // nothing to do
-}
-
-bool RunnerPlugin::isInitialized() const
-{
-    return true;
-}
-
 bool RunnerPlugin::supportsCelestialBody( const QString &celestialBodyId ) const
 {
     if ( d->m_supportedCelestialBodies.isEmpty() ) {
