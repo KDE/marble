@@ -27,8 +27,15 @@
 namespace Marble
 {
 
-CrosshairsPlugin::CrosshairsPlugin ( )
-    : m_isInitialized( false ),
+CrosshairsPlugin::CrosshairsPlugin()
+    : RenderPlugin( 0 ),
+      m_svgobj( 0 )
+{
+}
+
+CrosshairsPlugin::CrosshairsPlugin( const MarbleModel *marbleModel )
+    : RenderPlugin( marbleModel ),
+      m_isInitialized( false ),
       m_svgobj( 0 ),
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )

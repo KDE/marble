@@ -45,8 +45,8 @@ class AbstractDataPluginPrivate
     quint32 m_numberOfItems;
 };
 
-AbstractDataPlugin::AbstractDataPlugin()
-    : RenderPlugin(),
+AbstractDataPlugin::AbstractDataPlugin( const MarbleModel *marbleModel )
+    : RenderPlugin( marbleModel ),
       d( new AbstractDataPluginPrivate )
 {
 }

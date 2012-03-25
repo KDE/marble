@@ -28,8 +28,8 @@ namespace Marble
 class RenderPluginPrivate
 {
   public:
-    RenderPluginPrivate()
-        : m_marbleModel(0),
+    RenderPluginPrivate( const MarbleModel *marbleModel )
+        : m_marbleModel( marbleModel ),
           m_action(0),
           m_item(0),
           m_enabled(true),
@@ -42,7 +42,7 @@ class RenderPluginPrivate
     }
 
     // const: RenderPlugins should only read the model, not modify it
-    const MarbleModel  *m_marbleModel;
+    const MarbleModel  *const m_marbleModel;
     QAction            *m_action;
     QStandardItem      *m_item;
 
@@ -51,8 +51,8 @@ class RenderPluginPrivate
 };
 
 
-RenderPlugin::RenderPlugin()
-    : d( new RenderPluginPrivate() )
+RenderPlugin::RenderPlugin( const MarbleModel *marbleModel )
+    : d( new RenderPluginPrivate( marbleModel ) )
 {
     d->m_action = new QAction( this );
     connect( d->m_action, SIGNAL( toggled( bool ) ),
@@ -71,11 +71,6 @@ RenderPlugin::~RenderPlugin()
 const MarbleModel* RenderPlugin::marbleModel() const
 {
     return d->m_marbleModel;
-}
-
-void RenderPlugin::setMarbleModel( const MarbleModel* marbleModel )
-{
-    d->m_marbleModel = marbleModel;
 }
 
 QAction* RenderPlugin::action() const

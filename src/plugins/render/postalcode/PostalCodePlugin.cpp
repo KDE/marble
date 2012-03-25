@@ -14,7 +14,13 @@
 using namespace Marble;
 
 PostalCodePlugin::PostalCodePlugin()
-    : m_isInitialized( false )
+    : AbstractDataPlugin( 0 )
+{
+}
+
+PostalCodePlugin::PostalCodePlugin( const MarbleModel *marbleModel )
+    : AbstractDataPlugin( marbleModel ),
+      m_isInitialized( false )
 {
     setEnabled( true );
     setVisible( false );

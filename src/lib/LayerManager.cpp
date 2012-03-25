@@ -65,7 +65,7 @@ LayerManagerPrivate::LayerManagerPrivate( const MarbleModel* model )
     : m_mapTheme( 0 ),
       m_marbleModel( model ),
       m_pluginManager( model->pluginManager() ),
-      m_renderPlugins( m_pluginManager->createRenderPlugins() ),
+      m_renderPlugins( m_pluginManager->createRenderPlugins( model ) ),
       m_showBackground( true )
 {
 }
@@ -99,10 +99,6 @@ LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
             qobject_cast<AbstractDataPlugin *>( renderPlugin );
         if( dataPlugin )
             d->m_dataPlugins.append( dataPlugin );
-    }
-
-    foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
-        renderPlugin->setMarbleModel( d->m_marbleModel );
     }
 }
 

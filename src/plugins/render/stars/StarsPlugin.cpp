@@ -26,7 +26,13 @@ namespace Marble
 {
 
 StarsPlugin::StarsPlugin()
-    : m_renderStars( false ),
+    : RenderPlugin( 0 )
+{
+}
+
+StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
+    : RenderPlugin( marbleModel ),
+      m_renderStars( false ),
       m_starsLoaded( false )
 {
 }

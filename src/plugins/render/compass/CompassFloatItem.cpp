@@ -27,7 +27,13 @@ namespace Marble
 {
 
 CompassFloatItem::CompassFloatItem()
-    : AbstractFloatItem( QPointF( -1.0, 10.0 ), QSizeF( 75.0, 75.0 ) ),
+    : AbstractFloatItem( 0 ),
+      m_svgobj( 0 )
+{
+}
+
+CompassFloatItem::CompassFloatItem( const MarbleModel *marbleModel )
+    : AbstractFloatItem( marbleModel, QPointF( -1.0, 10.0 ), QSizeF( 75.0, 75.0 ) ),
       m_isInitialized( false ),
       m_svgobj( 0 ),
       m_compass(),

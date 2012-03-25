@@ -42,6 +42,7 @@ class GpsInfo : public AbstractFloatItem
     
  public:
     GpsInfo();
+    explicit GpsInfo( const MarbleModel *marbleModel );
     ~GpsInfo();
 
     QStringList backendTypes() const;

@@ -435,7 +435,13 @@ void RoutingPlugin::writeSettings()
 
 
 RoutingPlugin::RoutingPlugin() :
-    AbstractFloatItem( QPointF( -10, -10 ) ),
+    AbstractFloatItem( 0 ),
+    d( 0 )
+{
+}
+
+RoutingPlugin::RoutingPlugin( const MarbleModel *marbleModel ) :
+    AbstractFloatItem( marbleModel, QPointF( -10, -10 ) ),
     d( new RoutingPluginPrivate( this ) )
 {
     setEnabled( true );

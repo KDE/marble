@@ -44,6 +44,7 @@ class OverviewMap : public AbstractFloatItem, public DialogConfigurationInterfac
     
  public:
     OverviewMap();
+    explicit OverviewMap( const MarbleModel *marbleModel );
     ~OverviewMap();
 
     QStringList backendTypes() const;

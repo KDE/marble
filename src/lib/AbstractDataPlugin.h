@@ -42,7 +42,7 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
     Q_OBJECT
     
  public:    
-    AbstractDataPlugin();
+    AbstractDataPlugin( const MarbleModel *marbleModel );
 
     virtual ~AbstractDataPlugin();    
     /**

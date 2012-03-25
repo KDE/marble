@@ -32,6 +32,8 @@ class RoutingPlugin : public AbstractFloatItem, public DialogConfigurationInterf
 public:
     RoutingPlugin();
 
+    explicit RoutingPlugin( const MarbleModel *marbleModel );
+
     ~RoutingPlugin();
 
     QStringList backendTypes() const;

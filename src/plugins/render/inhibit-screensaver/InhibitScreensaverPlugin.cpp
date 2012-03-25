@@ -44,7 +44,14 @@ InhibitScreensaverPluginPrivate::~InhibitScreensaverPluginPrivate()
 }
 
 InhibitScreensaverPlugin::InhibitScreensaverPlugin() :
-        d ( new InhibitScreensaverPluginPrivate() )
+    RenderPlugin( 0 ),
+    d( 0 )
+{
+}
+
+InhibitScreensaverPlugin::InhibitScreensaverPlugin( const MarbleModel *marbleModel ) :
+    RenderPlugin( marbleModel ),
+    d ( new InhibitScreensaverPluginPrivate() )
 {
     connect( &d->m_timer, SIGNAL( timeout() ), this, SLOT( inhibitScreenSaver() ) );
 

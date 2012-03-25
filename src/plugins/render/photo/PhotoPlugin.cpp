@@ -20,7 +20,13 @@ using namespace Marble;
 /* TRANSLATOR Marble::PhotoPlugin */
 
 PhotoPlugin::PhotoPlugin()
-    : m_isInitialized( false )
+    : AbstractDataPlugin( 0 )
+{
+}
+
+PhotoPlugin::PhotoPlugin( const MarbleModel *marbleModel )
+    : AbstractDataPlugin( marbleModel ),
+      m_isInitialized( false )
 {
     // Plugin is enabled by default
     setEnabled( true );

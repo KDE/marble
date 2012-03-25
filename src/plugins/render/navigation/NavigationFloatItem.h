@@ -43,6 +43,7 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
  public:
     NavigationFloatItem();
+    explicit NavigationFloatItem( const MarbleModel *marbleModel );
     ~NavigationFloatItem();
 
     QStringList backendTypes() const;

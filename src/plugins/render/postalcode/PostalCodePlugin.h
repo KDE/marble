@@ -25,6 +25,8 @@ class PostalCodePlugin : public AbstractDataPlugin {
  public:
     PostalCodePlugin();
 
+    explicit PostalCodePlugin( const MarbleModel *marbleModel );
+
     virtual void initialize();
 
     virtual bool isInitialized() const;

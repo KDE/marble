@@ -56,20 +56,19 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
         Online
     };
 
-    RenderPlugin();
+    RenderPlugin( const MarbleModel *marbleModel );
     virtual ~RenderPlugin();
 
     /**
      * @brief Returns a new object of the plugin
      */
-    virtual RenderPlugin *newInstance() const = 0;
+    virtual RenderPlugin *newInstance( const MarbleModel *marbleModel ) const = 0;
 
     virtual void initialize() = 0;
 
     virtual bool isInitialized() const = 0;
 
     const MarbleModel* marbleModel() const;
-    void  setMarbleModel( const MarbleModel* );
 
     QAction       *action() const;
     /**
@@ -156,7 +155,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 };
 
 #define MARBLE_PLUGIN(T) public:\
-    virtual RenderPlugin* newInstance() const { return new T(); }
+    virtual RenderPlugin* newInstance( const MarbleModel *marbleModel ) const { return new T( marbleModel ); }
 }
 
 #endif

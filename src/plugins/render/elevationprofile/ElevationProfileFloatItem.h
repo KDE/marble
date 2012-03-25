@@ -49,6 +49,7 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
 
  public:
     ElevationProfileFloatItem();
+    explicit ElevationProfileFloatItem( const MarbleModel *marbleModel );
     ~ElevationProfileFloatItem();
 
     virtual QStringList backendTypes() const;

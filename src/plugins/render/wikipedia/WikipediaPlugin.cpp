@@ -27,7 +27,15 @@ using namespace Marble;
 const quint32 maximumNumberOfItems = 99;
 
 WikipediaPlugin::WikipediaPlugin()
-    : m_isInitialized( false ),
+    : AbstractDataPlugin( 0 ),
+      ui_configWidget( 0 ),
+      m_configDialog( 0 )
+{
+}
+
+WikipediaPlugin::WikipediaPlugin( const MarbleModel *marbleModel )
+    : AbstractDataPlugin( marbleModel ),
+      m_isInitialized( false ),
       m_icon(),
       ui_configWidget( 0 ),
       m_configDialog( 0 ),

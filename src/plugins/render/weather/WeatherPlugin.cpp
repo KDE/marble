@@ -33,7 +33,15 @@ using namespace Marble;
 const quint32 numberOfStationsPerFetch = 20;
 
 WeatherPlugin::WeatherPlugin()
-    : m_isInitialized( false ),
+    : AbstractDataPlugin( 0 ),
+      m_configDialog( 0 ),
+      ui_configWidget( 0 )
+{
+}
+
+WeatherPlugin::WeatherPlugin( const MarbleModel *marbleModel )
+    : AbstractDataPlugin( marbleModel ),
+      m_isInitialized( false ),
       m_updateInterval( 0 ),
       m_icon(),
       m_configDialog( 0 ),

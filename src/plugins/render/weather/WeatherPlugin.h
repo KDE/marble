@@ -36,7 +36,9 @@ class WeatherPlugin : public AbstractDataPlugin, public DialogConfigurationInter
     
  public:
     WeatherPlugin();
-    
+
+    explicit WeatherPlugin( const MarbleModel *marbleModel );
+
     ~WeatherPlugin();
     
     void initialize();

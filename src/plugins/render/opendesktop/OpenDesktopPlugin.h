@@ -37,7 +37,9 @@ class OpenDesktopPlugin : public AbstractDataPlugin, public DialogConfigurationI
  
  public:
     OpenDesktopPlugin();
-    
+
+    explicit OpenDesktopPlugin( const MarbleModel *marbleModel );
+
     virtual void initialize();
     
     virtual bool isInitialized() const;

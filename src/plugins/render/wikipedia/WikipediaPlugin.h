@@ -36,6 +36,7 @@ class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInt
     
  public:
     WikipediaPlugin();
+    explicit WikipediaPlugin( const MarbleModel *marbleModel );
     ~WikipediaPlugin();
      
     void initialize();

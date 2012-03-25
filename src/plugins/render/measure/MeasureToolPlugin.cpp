@@ -34,7 +34,15 @@ namespace Marble
 {
 
 MeasureToolPlugin::MeasureToolPlugin()
-    : m_measureLineString( GeoDataLineString( Tessellate ) ),
+    : RenderPlugin( 0 ),
+      m_configDialog( 0 ),
+      m_uiConfigWidget( 0 )
+{
+}
+
+MeasureToolPlugin::MeasureToolPlugin( const MarbleModel *marbleModel )
+    : RenderPlugin( marbleModel ),
+      m_measureLineString( GeoDataLineString( Tessellate ) ),
 #ifdef Q_OS_MACX
       m_font_regular( QFont( "Sans Serif", 10, 50, false ) ),
 #else

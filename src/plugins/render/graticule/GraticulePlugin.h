@@ -60,7 +60,9 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
 
  public:
     GraticulePlugin();
-    
+
+    explicit GraticulePlugin( const MarbleModel *marbleModel );
+
     QStringList backendTypes() const;
 
     QString renderPolicy() const;

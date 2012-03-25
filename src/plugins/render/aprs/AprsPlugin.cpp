@@ -37,7 +37,16 @@ using namespace Marble;
 /* TRANSLATOR Marble::AprsPlugin */
 
 AprsPlugin::AprsPlugin()
-    : m_mutex( new QMutex ),
+    : RenderPlugin( 0 ),
+      m_mutex( 0 ),
+      m_configDialog( 0 ),
+      ui_configWidget( 0 )
+{
+}
+
+AprsPlugin::AprsPlugin( const MarbleModel *marbleModel )
+    : RenderPlugin( marbleModel ),
+      m_mutex( new QMutex ),
       m_initialized( false ),
       m_tcpipGatherer( 0 ),
       m_ttyGatherer( 0 ),

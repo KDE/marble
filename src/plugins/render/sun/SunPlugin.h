@@ -31,7 +31,9 @@ class SunPlugin : public RenderPlugin
     MARBLE_PLUGIN( SunPlugin )
  public:
     SunPlugin();
-    
+
+    explicit SunPlugin( const MarbleModel *marbleModel );
+
     QStringList backendTypes() const;
 
     QString renderPolicy() const;

@@ -28,7 +28,12 @@ namespace Marble
 {
 
 ProgressFloatItem::ProgressFloatItem()
-    : AbstractFloatItem( QPointF( -10.5, -150.5 ), QSizeF( 40.0, 40.0 ) ),
+    : AbstractFloatItem( 0 )
+{
+}
+
+ProgressFloatItem::ProgressFloatItem( const MarbleModel *marbleModel )
+    : AbstractFloatItem( marbleModel, QPointF( -10.5, -150.5 ), QSizeF( 40.0, 40.0 ) ),
       m_isInitialized( false ),
       m_totalJobs( 0 ),
       m_completedJobs ( 0 ),

@@ -34,6 +34,7 @@ class ProgressFloatItem  : public AbstractFloatItem
 
  public:
     ProgressFloatItem();
+    explicit ProgressFloatItem( const MarbleModel *marbleModel );
     ~ProgressFloatItem ();
 
     QStringList backendTypes() const;

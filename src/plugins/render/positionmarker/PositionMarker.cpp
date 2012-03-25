@@ -39,7 +39,14 @@ const float PositionMarker::sm_resizeSteps[] = { 0.25, 0.5, 1.0, 2.0, 4.0 };
 const int PositionMarker::sm_numResizeSteps = sizeof( sm_resizeSteps ) / sizeof( sm_resizeSteps[0] );
 
 PositionMarker::PositionMarker ()
-    : RenderPlugin(),
+    : RenderPlugin( 0 ),
+      ui_configWidget( 0 ),
+      m_configDialog( 0 )
+{
+}
+
+PositionMarker::PositionMarker( const MarbleModel *marbleModel )
+    : RenderPlugin( marbleModel ),
       m_isInitialized( false ),
       m_useCustomCursor( false ),
       m_defaultCursorPath( MarbleDirs::path( "svg/track_turtle.svg" ) ),

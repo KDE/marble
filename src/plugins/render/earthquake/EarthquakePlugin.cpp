@@ -18,7 +18,16 @@
 namespace Marble {
 
 EarthquakePlugin::EarthquakePlugin()
-    : m_isInitialized( false ),
+    : AbstractDataPlugin( 0 ),
+      m_ui( 0 ),
+      m_configDialog( 0 )
+{
+}
+
+EarthquakePlugin::EarthquakePlugin( const MarbleModel *marbleModel )
+    : AbstractDataPlugin( marbleModel ),
+      m_isInitialized( false ),
+      m_ui( 0 ),
       m_configDialog( 0 )
 {
     setEnabled( true ); // Plugin is enabled by default

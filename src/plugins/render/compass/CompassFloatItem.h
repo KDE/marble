@@ -38,6 +38,7 @@ class CompassFloatItem  : public AbstractFloatItem, public DialogConfigurationIn
     MARBLE_PLUGIN( CompassFloatItem )
  public:
     CompassFloatItem();
+    explicit CompassFloatItem( const MarbleModel *marbleModel );
     ~CompassFloatItem ();
 
     QStringList backendTypes() const;

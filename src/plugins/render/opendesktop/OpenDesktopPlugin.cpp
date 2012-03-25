@@ -18,7 +18,15 @@
 using namespace Marble;
 
 OpenDesktopPlugin::OpenDesktopPlugin()
-    : m_isInitialized(false),
+    : AbstractDataPlugin( 0 ),
+      m_configDialog( 0 ),
+      m_uiConfigWidget( 0 )
+{
+}
+
+OpenDesktopPlugin::OpenDesktopPlugin( const MarbleModel *marbleModel )
+    : AbstractDataPlugin( marbleModel ),
+      m_isInitialized(false),
       m_itemsOnScreen( defaultItemsOnScreen ),
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )

@@ -20,6 +20,7 @@ namespace Marble
 {
 
 class RenderPlugin;
+class MarbleModel;
 class NetworkPlugin;
 class PositionProviderPlugin;
 class AbstractFloatItem;
@@ -50,7 +51,7 @@ class MARBLE_EXPORT PluginManager
      * This methods creates a new set of plugins and transfers ownership
      * of them to the client.
      */
-    QList<RenderPlugin *> createRenderPlugins() const;
+    QList<RenderPlugin *> createRenderPlugins( const MarbleModel *marbleModel ) const;
 
     /**
      * This methods creates a new set of plugins and transfers ownership

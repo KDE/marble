@@ -21,6 +21,12 @@ namespace Marble
 {
 
 SunPlugin::SunPlugin()
+    : RenderPlugin( 0 )
+{
+}
+
+SunPlugin::SunPlugin( const MarbleModel *marbleModel )
+    : RenderPlugin( marbleModel )
 {
     setVisible( false );
 }

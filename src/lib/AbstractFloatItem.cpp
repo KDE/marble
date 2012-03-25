@@ -49,8 +49,8 @@ QPen         AbstractFloatItemPrivate::s_pen = QPen( Qt::black );
     QFont AbstractFloatItemPrivate::s_font = QFont( "Sans Serif", 8 );
 #endif
 
-AbstractFloatItem::AbstractFloatItem( const QPointF &point, const QSizeF &size )
-    : RenderPlugin(),
+AbstractFloatItem::AbstractFloatItem( const MarbleModel *marbleModel, const QPointF &point, const QSizeF &size )
+    : RenderPlugin( marbleModel ),
       FrameGraphicsItem(),
       d( new AbstractFloatItemPrivate() )
 {

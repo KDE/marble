@@ -11,6 +11,7 @@
 #include <QtTest/QtTest>
 
 #include "MarbleDirs.h"
+#include "MarbleModel.h"
 #include "PluginManager.h"
 
 namespace Marble
@@ -30,8 +31,10 @@ void PluginManagerTest::loadPlugins()
 
     const int pluginNumber = MarbleDirs::pluginEntryList( "", QDir::Files ).size();
 
+    MarbleModel model;
+
     PluginManager pm;
-    const int renderPlugins = pm.createRenderPlugins().size();
+    const int renderPlugins = pm.createRenderPlugins( &model ).size();
     const int networkPlugins = pm.createNetworkPlugins().size();
     const int positionPlugins = pm.createPositionProviderPlugins().size();
     const int runnerPlugins = pm.runnerPlugins().size();

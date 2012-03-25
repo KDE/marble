@@ -33,7 +33,12 @@ const int defaultMinZoom = 900;
 const int defaultMaxZoom = 2400;
 
 NavigationFloatItem::NavigationFloatItem()
-    : AbstractFloatItem( QPointF( -10, -10 ) ),
+    : AbstractFloatItem( 0 )
+{
+}
+
+NavigationFloatItem::NavigationFloatItem( const MarbleModel *marbleModel )
+    : AbstractFloatItem( marbleModel, QPointF( -10, -10 ) ),
       m_marbleWidget( 0 ),
       m_widgetItem( 0 ),
       m_navigationWidgetSmall( 0 ),

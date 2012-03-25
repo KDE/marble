@@ -46,6 +46,8 @@ class CrosshairsPlugin : public RenderPlugin, public DialogConfigurationInterfac
  public:
     CrosshairsPlugin();
 
+    CrosshairsPlugin( const MarbleModel *marbleModel );
+
     ~CrosshairsPlugin();
 
     QStringList backendTypes() const;

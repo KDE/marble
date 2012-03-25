@@ -42,6 +42,7 @@ class Speedometer : public AbstractFloatItem
     
  public:
     Speedometer();
+    explicit Speedometer( const MarbleModel *marbleModel );
     ~Speedometer();
 
     QStringList backendTypes() const;

@@ -28,7 +28,9 @@ class PhotoPlugin : public AbstractDataPlugin
     
  public:
     PhotoPlugin();
-     
+
+    explicit PhotoPlugin( const MarbleModel *marbleModel );
+
     void initialize();
 
     bool isInitialized () const;

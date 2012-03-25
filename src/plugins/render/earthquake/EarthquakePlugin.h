@@ -39,6 +39,8 @@ class EarthquakePlugin : public AbstractDataPlugin, public DialogConfigurationIn
 public:
     EarthquakePlugin();
 
+    explicit EarthquakePlugin( const MarbleModel *marbleModel );
+
     virtual void initialize();
 
     virtual bool isInitialized() const;

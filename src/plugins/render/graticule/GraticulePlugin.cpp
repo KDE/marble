@@ -38,7 +38,15 @@ namespace Marble
 {
 
 GraticulePlugin::GraticulePlugin()
-    : m_isInitialized( false ),
+    : RenderPlugin( 0 ),
+      ui_configWidget( 0 ),
+      m_configDialog( 0 )
+{
+}
+
+GraticulePlugin::GraticulePlugin( const MarbleModel *marbleModel )
+    : RenderPlugin( marbleModel ),
+      m_isInitialized( false ),
       ui_configWidget( 0 ),
       m_configDialog( 0 )
 {

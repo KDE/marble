@@ -33,6 +33,8 @@ MARBLE_PLUGIN( InhibitScreensaverPlugin )
 public:
     InhibitScreensaverPlugin();
 
+    explicit InhibitScreensaverPlugin( const MarbleModel *marbleModel );
+
     ~InhibitScreensaverPlugin();
 
     QStringList backendTypes() const;

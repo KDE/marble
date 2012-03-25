@@ -70,7 +70,9 @@ class StarsPlugin : public RenderPlugin
     MARBLE_PLUGIN( StarsPlugin )
  public:
     StarsPlugin();
-    
+
+    explicit StarsPlugin( const MarbleModel *marbleModel );
+
     QStringList backendTypes() const;
 
     QString renderPolicy() const;
