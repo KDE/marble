@@ -56,7 +56,7 @@ bool Upload::upload(const Package &package)
 
     QProcess ssh;
     QStringList arguments;
-    QString const auth = "marble@files.kde.org";
+    QString const auth = "marble@filesmaster.kde.org";
     arguments << auth;
     arguments << "mkdir" << "-p";
     QString remoteDir = QString("/home/marble/web/monav/") + targetDir();
@@ -101,11 +101,11 @@ bool Upload::adjustNewstuffFile(const Package &package)
         QString monavFilename = tempFile.fileName();
         tempFile.close();
         QProcess wget;
-        QStringList const arguments = QStringList() << "http://files.kde.org/marble/newstuff/maps-monav.xml" << "-O" << monavFilename;
+        QStringList const arguments = QStringList() << "http://filesmaster.kde.org/marble/newstuff/maps-monav.xml" << "-O" << monavFilename;
         wget.start("wget", arguments);
         wget.waitForFinished(1000 * 60 * 60 * 12); // wait up to 12 hours for download to complete
         if (wget.exitStatus() != QProcess::NormalExit || wget.exitCode() != 0) {
-            qDebug() << "Failed to download newstuff file from files.kde.org";
+            qDebug() << "Failed to download newstuff file from filesmaster.kde.org";
             changeStatus( package, "error", "Failed to sync newstuff file: " + wget.readAllStandardError());
             return false;
         }
@@ -217,7 +217,7 @@ bool Upload::uploadNewstuff()
     QProcess scp;
     QStringList arguments;
     arguments << outFile.fileName();
-    arguments << "marble@files.kde.org:/home/marble/web/newstuff/maps-monav.xml";
+    arguments << "marble@filesmaster.kde.org:/home/marble/web/newstuff/maps-monav.xml";
     scp.start("scp", arguments);
     scp.waitForFinished(1000 * 60 * 60 * 12); // wait up to 12 hours for upload to complete
     if (scp.exitStatus() != QProcess::NormalExit || scp.exitCode() != 0) {
@@ -240,7 +240,7 @@ bool Upload::deleteRemoteFile(const QString &filename)
 
     QProcess ssh;
     QStringList arguments;
-    arguments << "marble@files.kde.org" << "rm" << filename;
+    arguments << "marble@filesmaster.kde.org" << "rm" << filename;
     ssh.start("ssh", arguments);
     ssh.waitForFinished(1000 * 60 * 10); // wait up to 10 minutes for rm to complete
     if (ssh.exitStatus() != QProcess::NormalExit || ssh.exitCode() != 0) {
