@@ -67,7 +67,7 @@ class TileLoader: public QObject
       * - Expired when it has been downloaded, but is too old (as per .dgml expiration time)
       * - Available when it has been downloaded and is not expired
       */
-    TileStatus tileStatus( const TileId &tileId );
+    TileStatus tileStatus( const TileId &tileId ) const;
 
  public Q_SLOTS:
     void updateTile( QByteArray const & imageData, QString const & tileId );
@@ -82,7 +82,7 @@ class TileLoader: public QObject
     GeoSceneTexture const * findTextureLayer( TileId const & ) const;
     static QString tileFileName( GeoSceneTexture const * textureLayer, TileId const & );
     void triggerDownload( TileId const &, DownloadUsage const );
-    QImage scaledLowerLevelTile( TileId const & );
+    QImage scaledLowerLevelTile( TileId const & ) const;
 
     // TODO: comment about uint hash key
     QHash<uint, GeoSceneTexture const *> m_textureLayers;

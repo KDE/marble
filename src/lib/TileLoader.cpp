@@ -150,7 +150,7 @@ bool TileLoader::baseTilesAvailable( GeoSceneTexture const & texture )
     return result;
 }
 
-TileLoader::TileStatus TileLoader::tileStatus( const TileId &tileId )
+TileLoader::TileStatus TileLoader::tileStatus( const TileId &tileId ) const
 {
     GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
     QString const fileName = tileFileName( textureLayer, tileId );
@@ -198,7 +198,7 @@ void TileLoader::triggerDownload( TileId const & id, DownloadUsage const usage )
     emit downloadTile( sourceUrl, destFileName, id.toString(), usage );
 }
 
-QImage TileLoader::scaledLowerLevelTile( TileId const & id )
+QImage TileLoader::scaledLowerLevelTile( TileId const & id ) const
 {
     mDebug() << "TileLoader::scaledLowerLevelTile" << id.toString();
     GeoSceneTexture const * const textureLayer = findTextureLayer( id );
