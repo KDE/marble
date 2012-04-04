@@ -40,9 +40,9 @@ class MergedLayerDecorator
     MergedLayerDecorator( TileLoader * const tileLoader, const SunLocator* sunLocator );
     virtual ~MergedLayerDecorator();
 
-    StackedTile *createTile( const QVector<QSharedPointer<TextureTile> > &tiles ) const;
-
     StackedTile *loadTile( const TileId &id, const QVector<const GeoSceneTexture *> &textureLayers ) const;
+
+    StackedTile *createTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage ) const;
 
     void setThemeId( const QString &themeId );
 
@@ -58,6 +58,8 @@ class MergedLayerDecorator
 
  private:
     static int maxDivisor( int maximum, int fullLength );
+
+    StackedTile *createTile( const QVector<QSharedPointer<TextureTile> > &tiles ) const;
 
     void paintSunShading( QImage *tileImage, const TileId &id ) const;
     void paintTileId( QImage *tileImage, const TileId &id ) const;

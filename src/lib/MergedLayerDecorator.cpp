@@ -122,6 +122,20 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
     return createTile( tiles );
 }
 
+StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage ) const
+{
+    QVector<QSharedPointer<TextureTile> > tiles = stackedTile.tiles();
+
+    for ( int i = 0; i < tiles.count(); ++ i) {
+        if ( tiles[i]->id() == tileId ) {
+            const Blending *blending = tiles[i]->blending();
+            tiles[i] = QSharedPointer<TextureTile>( new TextureTile( tileId, tileImage, blending ) );
+        }
+    }
+
+    return createTile( tiles );
+}
+
 void MergedLayerDecorator::setThemeId( const QString &themeId )
 {
     m_themeId = themeId;

@@ -295,19 +295,11 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
     if ( displayedTile ) {
         Q_ASSERT( !d->m_tileCache.contains( stackedTileId ) );
 
-        QVector<QSharedPointer<TextureTile> > tiles = displayedTile->tiles();
+        StackedTile *const stackedTile = d->m_layerDecorator.createTile( *displayedTile, tileId, tileImage );
+        d->m_tilesOnDisplay.insert( stackedTileId, stackedTile );
+
         delete displayedTile;
         displayedTile = 0;
-
-        for ( int i = 0; i < tiles.count(); ++ i) {
-            if ( tiles[i]->id() == tileId ) {
-                const Blending *blending = tiles[i]->blending();
-                tiles[i] = QSharedPointer<TextureTile>( new TextureTile( tileId, tileImage, blending ) );
-            }
-        }
-
-        displayedTile = d->m_layerDecorator.createTile( tiles );
-        d->m_tilesOnDisplay.insert( stackedTileId, displayedTile );
 
         emit tileUpdateAvailable( stackedTileId );
     } else {
