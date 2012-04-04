@@ -45,6 +45,7 @@ MergedLayerDecorator::MergedLayerDecorator( TileLoader * const tileLoader,
                                             const SunLocator* sunLocator )
     : m_tileLoader( tileLoader ),
       m_sunLocator( sunLocator ),
+      m_blendingFactory( sunLocator ),
       m_themeId(),
       m_levelZeroColumns( 0 ),
       m_levelZeroRows( 0 ),
@@ -97,6 +98,30 @@ StackedTile *MergedLayerDecorator::createTile( const QVector<QSharedPointer<Text
     return new StackedTile( id, resultImage, tiles );
 }
 
+StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const QVector<const GeoSceneTexture *> &textureLayers ) const
+{
+    QVector<QSharedPointer<TextureTile> > tiles;
+
+    foreach ( const GeoSceneTexture *textureLayer, textureLayers ) {
+        const TileId tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
+                             stackedTileId.x(), stackedTileId.y() );
+
+        mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId.toString() << textureLayer->tileSize();
+
+        const QImage tileImage = m_tileLoader->loadTile( tileId, DownloadBrowse );
+        const Blending *blending = m_blendingFactory.findBlending( textureLayer->blending() );
+        if ( blending == 0 && !textureLayer->blending().isEmpty() ) {
+            mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
+        }
+        QSharedPointer<TextureTile> tile( new TextureTile( tileId, tileImage, blending ) );
+        tiles.append( tile );
+    }
+
+    Q_ASSERT( !tiles.isEmpty() );
+
+    return createTile( tiles );
+}
+
 void MergedLayerDecorator::setThemeId( const QString &themeId )
 {
     m_themeId = themeId;
@@ -109,6 +134,8 @@ void MergedLayerDecorator::setShowSunShading( bool show )
 
 void MergedLayerDecorator::setLevelZeroLayout( int levelZeroColumns, int levelZeroRows )
 {
+    m_blendingFactory.setLevelZeroLayout( levelZeroColumns, levelZeroRows );
+
     m_levelZeroColumns = levelZeroColumns;
     m_levelZeroRows = levelZeroRows;
 }

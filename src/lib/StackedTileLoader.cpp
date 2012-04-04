@@ -23,7 +23,6 @@
 
 #include "StackedTileLoader.h"
 
-#include "blendings/BlendingFactory.h"
 #include "GeoSceneTexture.h"
 #include "MarbleDebug.h"
 #include "MergedLayerDecorator.h"
@@ -49,7 +48,6 @@ public:
     StackedTileLoaderPrivate( TileLoader *tileLoader,
                               const SunLocator * const sunLocator )
         : m_tileLoader( tileLoader ),
-          m_blendingFactory( sunLocator ),
           m_layerDecorator( m_tileLoader, sunLocator ),
           m_maxTileLevel( 0 )
     {
@@ -61,7 +59,6 @@ public:
         findRelevantTextureLayers( TileId const & stackedTileId ) const;
 
     TileLoader *const m_tileLoader;
-    BlendingFactory m_blendingFactory;
     MergedLayerDecorator m_layerDecorator;
     int         m_maxTileLevel;
     QVector<GeoSceneTexture const *> m_textureLayers;
@@ -90,7 +87,6 @@ void StackedTileLoader::setTextureLayers( QVector<GeoSceneTexture const *> & tex
 
     if ( !d->m_textureLayers.isEmpty() ) {
         const GeoSceneTexture *const firstTexture = d->m_textureLayers.at( 0 );
-        d->m_blendingFactory.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
         d->m_layerDecorator.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
         d->m_layerDecorator.setThemeId( "maps/" + d->m_textureLayers.at( 0 )->sourceDir() );
     }
@@ -222,27 +218,9 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 
     // mDebug() << "load Tile from Disk: " << stackedTileId.toString();
 
-    QVector<QSharedPointer<TextureTile> > tiles;
     QVector<GeoSceneTexture const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
-    QVector<GeoSceneTexture const *>::const_iterator pos = textureLayers.constBegin();
-    QVector<GeoSceneTexture const *>::const_iterator const end = textureLayers.constEnd();
-    for (; pos != end; ++pos ) {
-        GeoSceneTexture const * const textureLayer = *pos;
-        TileId const tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
-                             stackedTileId.x(), stackedTileId.y() );
-        mDebug() << "StackedTileLoader::loadTile: tile" << textureLayer->sourceDir()
-                 << tileId.toString() << textureLayer->tileSize();
-        const QImage tileImage = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
-        const Blending *blending = d->m_blendingFactory.findBlending( textureLayer->blending() );
-        if ( blending == 0 && !textureLayer->blending().isEmpty() ) {
-            mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
-        }
-        QSharedPointer<TextureTile> tile( new TextureTile( tileId, tileImage, blending ) );
-        tiles.append( tile );
-    }
-    Q_ASSERT( !tiles.isEmpty() );
 
-    stackedTile = d->m_layerDecorator.createTile( tiles );
+    stackedTile = d->m_layerDecorator.loadTile( stackedTileId, textureLayers );
     stackedTile->setUsed( true );
 
     d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;

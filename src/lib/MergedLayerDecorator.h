@@ -20,6 +20,7 @@
 #include <QtCore/QVector>
 #include <QtGui/QImage>
 
+#include "blendings/BlendingFactory.h"
 #include "TileId.h"
 #include "global.h"
 
@@ -27,6 +28,7 @@ class QString;
 
 namespace Marble
 {
+class GeoSceneTexture;
 class SunLocator;
 class StackedTile;
 class TextureTile;
@@ -39,6 +41,8 @@ class MergedLayerDecorator
     virtual ~MergedLayerDecorator();
 
     StackedTile *createTile( const QVector<QSharedPointer<TextureTile> > &tiles ) const;
+
+    StackedTile *loadTile( const TileId &id, const QVector<const GeoSceneTexture *> &textureLayers ) const;
 
     void setThemeId( const QString &themeId );
 
@@ -62,6 +66,7 @@ class MergedLayerDecorator
     Q_DISABLE_COPY( MergedLayerDecorator )
     TileLoader * const m_tileLoader;
     const SunLocator* m_sunLocator;
+    BlendingFactory m_blendingFactory;
     QString m_themeId;
     int m_levelZeroColumns;
     int m_levelZeroRows;
