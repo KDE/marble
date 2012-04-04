@@ -19,6 +19,7 @@
 #include "MergedLayerDecorator.h"
 
 #include "blendings/Blending.h"
+#include "blendings/BlendingFactory.h"
 #include "SunLocator.h"
 #include "global.h"
 #include "MarbleDebug.h"
@@ -35,31 +36,61 @@
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
 
+
 #include <QtCore/QMutexLocker>
 #include <QtCore/QPointer>
 #include <QtGui/QPainter>
 
 using namespace Marble;
 
+struct MergedLayerDecorator::Private
+{
+public:
+    Private( TileLoader *tileLoader, const SunLocator *sunLocator );
+
+    static int maxDivisor( int maximum, int fullLength );
+
+    StackedTile *createTile( const QVector<QSharedPointer<TextureTile> > &tiles ) const;
+
+    void paintSunShading( QImage *tileImage, const TileId &id ) const;
+    void paintTileId( QImage *tileImage, const TileId &id ) const;
+
+    TileLoader *const m_tileLoader;
+    const SunLocator *const m_sunLocator;
+    BlendingFactory m_blendingFactory;
+    QString m_themeId;
+    int m_levelZeroColumns;
+    int m_levelZeroRows;
+    bool m_showSunShading;
+    bool m_showCityLights;
+    bool m_showTileId;
+};
+
+MergedLayerDecorator::Private::Private( TileLoader *tileLoader, const SunLocator *sunLocator ) :
+    m_tileLoader( tileLoader ),
+    m_sunLocator( sunLocator ),
+    m_blendingFactory( sunLocator ),
+    m_themeId(),
+    m_levelZeroColumns( 0 ),
+    m_levelZeroRows( 0 ),
+    m_showSunShading( false ),
+    m_showCityLights( false ),
+    m_showTileId( false )
+{
+}
+
 MergedLayerDecorator::MergedLayerDecorator( TileLoader * const tileLoader,
                                             const SunLocator* sunLocator )
-    : m_tileLoader( tileLoader ),
-      m_sunLocator( sunLocator ),
-      m_blendingFactory( sunLocator ),
-      m_themeId(),
-      m_levelZeroColumns( 0 ),
-      m_levelZeroRows( 0 ),
-      m_showSunShading( false ),
-      m_showCityLights( false ),
-      m_showTileId( false )
+    : d( new Private( tileLoader, sunLocator ) )
 {
 }
 
 MergedLayerDecorator::~MergedLayerDecorator()
 {
+    delete d;
 }
 
-StackedTile *MergedLayerDecorator::createTile( const QVector<QSharedPointer<TextureTile> > &tiles ) const
+StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPointer<TextureTile> > &tiles ) const
 {
     Q_ASSERT( !tiles.isEmpty() );
 
@@ -108,8 +139,8 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
         mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId.toString() << textureLayer->tileSize();
 
-        const QImage tileImage = m_tileLoader->loadTile( tileId, DownloadBrowse );
-        const Blending *blending = m_blendingFactory.findBlending( textureLayer->blending() );
+        const QImage tileImage = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
+        const Blending *blending = d->m_blendingFactory.findBlending( textureLayer->blending() );
         if ( blending == 0 && !textureLayer->blending().isEmpty() ) {
             mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
         }
@@ -119,7 +150,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
     Q_ASSERT( !tiles.isEmpty() );
 
-    return createTile( tiles );
+    return d->createTile( tiles );
 }
 
 StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage ) const
@@ -133,14 +164,14 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
         }
     }
 
-    return createTile( tiles );
+    return d->createTile( tiles );
 }
 
 void MergedLayerDecorator::downloadTile( const TileId &id, const QVector<GeoSceneTexture const *> &textureLayers )
 {
     foreach ( const GeoSceneTexture *textureLayer, textureLayers ) {
         const TileId tileId( textureLayer->sourceDir(), id.zoomLevel(), id.x(), id.y() );
-        m_tileLoader->downloadTile( tileId );
+        d->m_tileLoader->downloadTile( tileId );
     }
 }
 
@@ -150,49 +181,49 @@ void MergedLayerDecorator::reloadTile( const StackedTile &stackedTile )
         // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
         // but since "reload" or "refresh" seems to be a common action of a browser and it
         // allows for more connections (in our model), use "DownloadBrowse"
-        m_tileLoader->reloadTile( tile->id(), DownloadBrowse );
+        d->m_tileLoader->reloadTile( tile->id(), DownloadBrowse );
     }
 }
 
 void MergedLayerDecorator::setThemeId( const QString &themeId )
 {
-    m_themeId = themeId;
+    d->m_themeId = themeId;
 }
 
 void MergedLayerDecorator::setShowSunShading( bool show )
 {
-    m_showSunShading = show;
+    d->m_showSunShading = show;
 }
 
 void MergedLayerDecorator::setLevelZeroLayout( int levelZeroColumns, int levelZeroRows )
 {
-    m_blendingFactory.setLevelZeroLayout( levelZeroColumns, levelZeroRows );
+    d->m_blendingFactory.setLevelZeroLayout( levelZeroColumns, levelZeroRows );
 
-    m_levelZeroColumns = levelZeroColumns;
-    m_levelZeroRows = levelZeroRows;
+    d->m_levelZeroColumns = levelZeroColumns;
+    d->m_levelZeroRows = levelZeroRows;
 }
 
 bool MergedLayerDecorator::showSunShading() const
 {
-    return m_showSunShading;
+    return d->m_showSunShading;
 }
 
 void MergedLayerDecorator::setShowCityLights( bool show )
 {
-    m_showCityLights = show;
+    d->m_showCityLights = show;
 }
 
 bool MergedLayerDecorator::showCityLights() const
 {
-    return m_showCityLights;
+    return d->m_showCityLights;
 }
 
 void MergedLayerDecorator::setShowTileId( bool visible )
 {
-    m_showTileId = visible;
+    d->m_showTileId = visible;
 }
 
-void MergedLayerDecorator::paintSunShading( QImage *tileImage, const TileId &id ) const
+void MergedLayerDecorator::Private::paintSunShading( QImage *tileImage, const TileId &id ) const
 {
     if ( tileImage->depth() != 32 )
         return;
@@ -273,7 +304,7 @@ void MergedLayerDecorator::paintSunShading( QImage *tileImage, const TileId &id 
     }
 }
 
-void MergedLayerDecorator::paintTileId( QImage *tileImage, const TileId &id ) const
+void MergedLayerDecorator::Private::paintTileId( QImage *tileImage, const TileId &id ) const
 {
     QString filename = QString( "%1_%2.jpg" )
         .arg( id.x(), tileDigits, 10, QChar('0') )
@@ -337,7 +368,7 @@ void MergedLayerDecorator::paintTileId( QImage *tileImage, const TileId &id ) co
 
 // TODO: This should likely go into a math class in the future ...
 
-int MergedLayerDecorator::maxDivisor( int maximum, int fullLength )
+int MergedLayerDecorator::Private::maxDivisor( int maximum, int fullLength )
 {
     // Find the optimal interpolation interval n for the 
     // current image canvas width

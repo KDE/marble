@@ -18,12 +18,8 @@
 
 #include <QtCore/QSharedPointer>
 #include <QtCore/QVector>
-#include <QtGui/QImage>
 
-#include "blendings/BlendingFactory.h"
-#include "TileId.h"
-#include "global.h"
-
+class QImage;
 class QString;
 
 namespace Marble
@@ -32,6 +28,7 @@ class GeoSceneTexture;
 class SunLocator;
 class StackedTile;
 class TextureTile;
+class TileId;
 class TileLoader;
 
 class MergedLayerDecorator
@@ -60,25 +57,11 @@ class MergedLayerDecorator
 
     void setShowTileId(bool show);
 
- private:
-    static int maxDivisor( int maximum, int fullLength );
-
-    StackedTile *createTile( const QVector<QSharedPointer<TextureTile> > &tiles ) const;
-
-    void paintSunShading( QImage *tileImage, const TileId &id ) const;
-    void paintTileId( QImage *tileImage, const TileId &id ) const;
-
  protected:
     Q_DISABLE_COPY( MergedLayerDecorator )
-    TileLoader * const m_tileLoader;
-    const SunLocator* m_sunLocator;
-    BlendingFactory m_blendingFactory;
-    QString m_themeId;
-    int m_levelZeroColumns;
-    int m_levelZeroRows;
-    bool m_showSunShading;
-    bool m_showCityLights;
-    bool m_showTileId;
+
+    class Private;
+    Private *const d;
 };
 
 }
