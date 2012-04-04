@@ -58,9 +58,12 @@ MergedLayerDecorator::~MergedLayerDecorator()
 {
 }
 
-QImage MergedLayerDecorator::merge( const TileId id, const QVector<QSharedPointer<TextureTile> > &tiles ) const
+StackedTile *MergedLayerDecorator::createTile( const QVector<QSharedPointer<TextureTile> > &tiles ) const
 {
     Q_ASSERT( !tiles.isEmpty() );
+
+    const TileId firstId = tiles.first()->id();
+    const TileId id( 0, firstId.zoomLevel(), firstId.x(), firstId.y() );
 
     QImage resultImage;
 
@@ -91,7 +94,7 @@ QImage MergedLayerDecorator::merge( const TileId id, const QVector<QSharedPointe
         paintTileId( &resultImage, id );
     }
 
-    return resultImage;
+    return new StackedTile( id, resultImage, tiles );
 }
 
 void MergedLayerDecorator::setThemeId( const QString &themeId )

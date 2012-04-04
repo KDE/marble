@@ -242,8 +242,7 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
     }
     Q_ASSERT( !tiles.isEmpty() );
 
-    const QImage resultImage = d->m_layerDecorator.merge( stackedTileId, tiles );
-    stackedTile = new StackedTile( stackedTileId, resultImage, tiles );
+    stackedTile = d->m_layerDecorator.createTile( tiles );
     stackedTile->setUsed( true );
 
     d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
@@ -329,8 +328,7 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
             }
         }
 
-        const QImage resultImage = d->m_layerDecorator.merge( stackedTileId, tiles );
-        displayedTile = new StackedTile( stackedTileId, resultImage, tiles );
+        displayedTile = d->m_layerDecorator.createTile( tiles );
         d->m_tilesOnDisplay.insert( stackedTileId, displayedTile );
 
         emit tileUpdateAvailable( stackedTileId );
