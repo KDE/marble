@@ -27,7 +27,6 @@
 #include "MarbleDebug.h"
 #include "MergedLayerDecorator.h"
 #include "StackedTile.h"
-#include "TextureTile.h"
 #include "TileLoader.h"
 #include "TileLoaderHelper.h"
 #include "global.h"
@@ -47,8 +46,7 @@ class StackedTileLoaderPrivate
 public:
     StackedTileLoaderPrivate( TileLoader *tileLoader,
                               const SunLocator * const sunLocator )
-        : m_tileLoader( tileLoader ),
-          m_layerDecorator( m_tileLoader, sunLocator ),
+        : m_layerDecorator( tileLoader, sunLocator ),
           m_maxTileLevel( 0 )
     {
         m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
@@ -58,7 +56,6 @@ public:
     QVector<GeoSceneTexture const *>
         findRelevantTextureLayers( TileId const & stackedTileId ) const;
 
-    TileLoader *const m_tileLoader;
     MergedLayerDecorator m_layerDecorator;
     int         m_maxTileLevel;
     QVector<GeoSceneTexture const *> m_textureLayers;
@@ -231,14 +228,7 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 void StackedTileLoader::downloadTile( TileId const & stackedTileId )
 {
     QVector<GeoSceneTexture const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
-    QVector<GeoSceneTexture const *>::const_iterator pos = textureLayers.constBegin();
-    QVector<GeoSceneTexture const *>::const_iterator const end = textureLayers.constEnd();
-    for (; pos != end; ++pos ) {
-        GeoSceneTexture const * const textureLayer = *pos;
-        TileId const tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
-                             stackedTileId.x(), stackedTileId.y() );
-        d->m_tileLoader->downloadTile( tileId );
-    }
+    d->m_layerDecorator.downloadTile( stackedTileId, textureLayers );
 }
 
 quint64 StackedTileLoader::volatileCacheLimit() const
@@ -248,14 +238,8 @@ quint64 StackedTileLoader::volatileCacheLimit() const
 
 void StackedTileLoader::reloadVisibleTiles()
 {
-    foreach ( StackedTile * const displayedTile, d->m_tilesOnDisplay.values() ) {
-        Q_ASSERT( displayedTile != 0 );
-        foreach ( QSharedPointer<TextureTile> const & tile, displayedTile->tiles() ) {
-            // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
-            // but since "reload" or "refresh" seems to be a common action of a browser and it
-            // allows for more connections (in our model), use "DownloadBrowse"
-            d->m_tileLoader->reloadTile( tile->id(), DownloadBrowse );
-        }
+    foreach ( const StackedTile *displayedTile, d->m_tilesOnDisplay.values() ) {
+        d->m_layerDecorator.reloadTile( *displayedTile );
     }
 
     emit tileUpdatesAvailable();
