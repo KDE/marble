@@ -391,7 +391,7 @@ int TextureLayer::preferredRadiusFloor( int radius ) const
 
 bool TextureLayer::isTileAvailable( const TileId &tileId ) const
 {
-    return d->m_tileLoader.tileStatus( tileId ) == TileLoader::Available;
+    return d->m_loader.tileStatus( tileId ) == TileLoader::Available;
 }
 
 }

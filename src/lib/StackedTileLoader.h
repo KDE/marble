@@ -30,7 +30,6 @@
 
 #include "GeoSceneTexture.h"
 #include "TileId.h"
-#include "TileLoader.h"
 #include "global.h"
 
 class QImage;
@@ -41,6 +40,7 @@ namespace Marble
 
 class StackedTile;
 class SunLocator;
+class TileLoader;
 
 class StackedTileLoaderPrivate;
 
@@ -127,8 +127,6 @@ class StackedTileLoader : public QObject
          * available for the current texture layers.
          */
         int maximumTileLevel() const;
-
-        TileLoader::TileStatus tileStatus( const TileId &tileId ) const;
 
     public Q_SLOTS:
         /**
