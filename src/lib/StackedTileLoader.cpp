@@ -44,9 +44,8 @@ namespace Marble
 class StackedTileLoaderPrivate
 {
 public:
-    StackedTileLoaderPrivate( TileLoader *tileLoader,
-                              const SunLocator * const sunLocator )
-        : m_layerDecorator( tileLoader, sunLocator ),
+    StackedTileLoaderPrivate( MergedLayerDecorator *mergedLayerDecorator )
+        : m_layerDecorator( mergedLayerDecorator ),
           m_maxTileLevel( 0 )
     {
         m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
@@ -56,7 +55,7 @@ public:
     QVector<GeoSceneTexture const *>
         findRelevantTextureLayers( TileId const & stackedTileId ) const;
 
-    MergedLayerDecorator m_layerDecorator;
+    MergedLayerDecorator *const m_layerDecorator;
     int         m_maxTileLevel;
     QVector<GeoSceneTexture const *> m_textureLayers;
     QHash <TileId, StackedTile*>  m_tilesOnDisplay;
@@ -64,9 +63,8 @@ public:
     QReadWriteLock m_cacheLock;
 };
 
-StackedTileLoader::StackedTileLoader( TileLoader *tileLoader,
-                                      const SunLocator * const sunLocator )
-    : d( new StackedTileLoaderPrivate( tileLoader, sunLocator ) )
+StackedTileLoader::StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator )
+    : d( new StackedTileLoaderPrivate( mergedLayerDecorator ) )
 {
 }
 
@@ -78,44 +76,13 @@ StackedTileLoader::~StackedTileLoader()
 
 void StackedTileLoader::setTextureLayers( QVector<GeoSceneTexture const *> & textureLayers )
 {
-    mDebug() << "StackedTileLoader::setTextureLayers";
+    mDebug() << Q_FUNC_INFO;
 
     d->m_textureLayers = textureLayers;
-
-    if ( !d->m_textureLayers.isEmpty() ) {
-        const GeoSceneTexture *const firstTexture = d->m_textureLayers.at( 0 );
-        d->m_layerDecorator.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
-        d->m_layerDecorator.setThemeId( "maps/" + d->m_textureLayers.at( 0 )->sourceDir() );
-    }
 
     clear();
 
     d->detectMaxTileLevel();
-}
-
-void StackedTileLoader::setShowSunShading( bool show )
-{
-    d->m_layerDecorator.setShowSunShading( show );
-}
-
-bool StackedTileLoader::showSunShading() const
-{
-    return d->m_layerDecorator.showSunShading();
-}
-
-void StackedTileLoader::setShowCityLights( bool show )
-{
-    d->m_layerDecorator.setShowCityLights( show );
-}
-
-bool StackedTileLoader::showCityLights() const
-{
-    return d->m_layerDecorator.showCityLights();
-}
-
-void StackedTileLoader::setShowTileId( bool show )
-{
-    d->m_layerDecorator.setShowTileId( show );
 }
 
 int StackedTileLoader::tileColumnCount( int level ) const
@@ -217,7 +184,7 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 
     QVector<GeoSceneTexture const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
 
-    stackedTile = d->m_layerDecorator.loadTile( stackedTileId, textureLayers );
+    stackedTile = d->m_layerDecorator->loadTile( stackedTileId, textureLayers );
     stackedTile->setUsed( true );
 
     d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
@@ -228,7 +195,7 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 void StackedTileLoader::downloadTile( TileId const & stackedTileId )
 {
     QVector<GeoSceneTexture const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
-    d->m_layerDecorator.downloadTile( stackedTileId, textureLayers );
+    d->m_layerDecorator->downloadTile( stackedTileId, textureLayers );
 }
 
 quint64 StackedTileLoader::volatileCacheLimit() const
@@ -239,7 +206,7 @@ quint64 StackedTileLoader::volatileCacheLimit() const
 void StackedTileLoader::reloadVisibleTiles()
 {
     foreach ( const StackedTile *displayedTile, d->m_tilesOnDisplay.values() ) {
-        d->m_layerDecorator.reloadTile( *displayedTile );
+        d->m_layerDecorator->reloadTile( *displayedTile );
     }
 
     emit tileUpdatesAvailable();
@@ -279,7 +246,7 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
     if ( displayedTile ) {
         Q_ASSERT( !d->m_tileCache.contains( stackedTileId ) );
 
-        StackedTile *const stackedTile = d->m_layerDecorator.createTile( *displayedTile, tileId, tileImage );
+        StackedTile *const stackedTile = d->m_layerDecorator->createTile( *displayedTile, tileId, tileImage );
         d->m_tilesOnDisplay.insert( stackedTileId, stackedTile );
 
         delete displayedTile;

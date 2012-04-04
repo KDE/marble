@@ -23,6 +23,7 @@
 #include "TileScalingTextureMapper.h"
 #include "GeoPainter.h"
 #include "GeoSceneGroup.h"
+#include "MergedLayerDecorator.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "StackedTile.h"
@@ -52,6 +53,7 @@ public:
     TextureLayer  *const m_parent;
     const SunLocator *const m_sunLocator;
     TileLoader m_loader;
+    MergedLayerDecorator m_layerDecorator;
     StackedTileLoader    m_tileLoader;
     QCache<TileId, const QPixmap> m_pixmapCache;
     TextureMapperInterface *m_texmapper;
@@ -69,7 +71,8 @@ TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
     : m_parent( parent )
     , m_sunLocator( sunLocator )
     , m_loader( downloadManager )
-    , m_tileLoader( &m_loader, sunLocator )
+    , m_layerDecorator( &m_loader, sunLocator )
+    , m_tileLoader( &m_layerDecorator )
     , m_pixmapCache( 100 )
     , m_texmapper( 0 )
     , m_texcolorizer( 0 )
@@ -105,6 +108,12 @@ void TextureLayer::Private::updateTextureLayers()
         } else {
             mDebug() << "disabling texture" << candidate->name();
         }
+    }
+
+    if ( !result.isEmpty() ) {
+        const GeoSceneTexture *const firstTexture = result.at( 0 );
+        m_layerDecorator.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
+        m_layerDecorator.setThemeId( "maps/" + firstTexture->sourceDir() );
     }
 
     m_tileLoader.setTextureLayers( result );
@@ -152,12 +161,12 @@ QStringList TextureLayer::renderPosition() const
 
 bool TextureLayer::showSunShading() const
 {
-    return d->m_tileLoader.showSunShading();
+    return d->m_layerDecorator.showSunShading();
 }
 
 bool TextureLayer::showCityLights() const
 {
-    return d->m_tileLoader.showCityLights();
+    return d->m_layerDecorator.showCityLights();
 }
 
 bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
@@ -223,21 +232,21 @@ void TextureLayer::setShowSunShading( bool show )
                  this,       SLOT( reset() ) );
     }
 
-    d->m_tileLoader.setShowSunShading( show );
+    d->m_layerDecorator.setShowSunShading( show );
 
     reset();
 }
 
 void TextureLayer::setShowCityLights( bool show )
 {
-    d->m_tileLoader.setShowCityLights( show );
+    d->m_layerDecorator.setShowCityLights( show );
 
     reset();
 }
 
 void TextureLayer::setShowTileId( bool show )
 {
-    d->m_tileLoader.setShowTileId( show );
+    d->m_layerDecorator.setShowTileId( show );
 
     reset();
 }

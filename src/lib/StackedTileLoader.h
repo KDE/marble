@@ -38,9 +38,8 @@ class QString;
 namespace Marble
 {
 
+class MergedLayerDecorator;
 class StackedTile;
-class SunLocator;
-class TileLoader;
 
 class StackedTileLoaderPrivate;
 
@@ -68,19 +67,10 @@ class StackedTileLoader : public QObject
          * @param downloadManager The download manager that shall be used to fetch
          *                        the tiles from a remote resource.
          */
-        StackedTileLoader( TileLoader *tileLoader,
-                           const SunLocator * const sunLocator );
+        explicit StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator );
         virtual ~StackedTileLoader();
 
         void setTextureLayers( QVector<GeoSceneTexture const *> & );
-
-        void setShowSunShading( bool show );
-        bool showSunShading() const;
-
-        void setShowCityLights( bool show );
-        bool showCityLights() const;
-
-        void setShowTileId( bool show );
 
         int tileColumnCount( int level ) const;
 
