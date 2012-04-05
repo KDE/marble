@@ -26,12 +26,12 @@ OpenRouteServicePlugin::OpenRouteServicePlugin( QObject *parent ) : RunnerPlugin
 
 QString OpenRouteServicePlugin::name() const
 {
-    return tr( "OpenRouteService" );
+    return tr( "OpenRouteService Routing" );
 }
 
 QString OpenRouteServicePlugin::guiString() const
 {
-    return tr( "OpenRouteService Routing" );
+    return tr( "OpenRouteService" );
 }
 
 QString OpenRouteServicePlugin::nameId() const

@@ -24,12 +24,12 @@ YoursPlugin::YoursPlugin( QObject *parent ) : RunnerPlugin( parent )
 
 QString YoursPlugin::name() const
 {
-    return tr( "Yours" );
+    return tr( "Yours Routing" );
 }
 
 QString YoursPlugin::guiString() const
 {
-    return tr( "Yours Routing" );
+    return tr( "Yours" );
 }
 
 QString YoursPlugin::nameId() const

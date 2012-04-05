@@ -27,12 +27,12 @@ GosmorePlugin::GosmorePlugin( QObject *parent ) : RunnerPlugin( parent )
 
 QString GosmorePlugin::name() const
 {
-    return tr( "Gosmore" );
+    return tr( "Gosmore Routing" );
 }
 
 QString GosmorePlugin::guiString() const
 {
-    return tr( "Gosmore Routing" );
+    return tr( "Gosmore" );
 }
 
 QString GosmorePlugin::nameId() const

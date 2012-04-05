@@ -242,12 +242,12 @@ MonavPlugin::~MonavPlugin()
 
 QString MonavPlugin::name() const
 {
-    return tr( "Monav" );
+    return tr( "Monav Routing" );
 }
 
 QString MonavPlugin::guiString() const
 {
-    return tr( "Monav Routing" );
+    return tr( "Monav" );
 }
 
 QString MonavPlugin::nameId() const

@@ -26,12 +26,12 @@ MapQuestPlugin::MapQuestPlugin( QObject *parent ) : RunnerPlugin( parent )
 
 QString MapQuestPlugin::name() const
 {
-    return tr( "MapQuest" );
+    return tr( "MapQuest Routing" );
 }
 
 QString MapQuestPlugin::guiString() const
 {
-    return tr( "MapQuest Routing" );
+    return tr( "MapQuest" );
 }
 
 QString MapQuestPlugin::nameId() const

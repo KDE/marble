@@ -106,7 +106,7 @@ void RoutingProfileSettingsDialog::editProfile( int profileIndex )
 
     m_servicesModel->clear();
     foreach( RunnerPlugin *plugin,  m_plugins ) {
-        QStandardItem *item = new QStandardItem( plugin->name() );
+        QStandardItem *item = new QStandardItem( plugin->guiString() );
         item->setCheckable( true );
         if ( profiles[ profileIndex ].pluginSettings().contains( plugin->nameId() ) ) {
             item->setCheckState( Qt::Checked );
@@ -170,7 +170,7 @@ void RoutingProfileSettingsDialog::openConfigDialog()
         }
 
         m_configWidgets[plugin]->show();
-        m_dialog->setWindowTitle( plugin->name() );
+        m_dialog->setWindowTitle( plugin->guiString() );
         m_dialog->exec();
         m_configWidgets[plugin]->hide();
         m_dialogLayout->removeWidget( m_configWidgets[plugin] );

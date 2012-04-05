@@ -26,12 +26,12 @@ RoutinoPlugin::RoutinoPlugin( QObject *parent ) : RunnerPlugin( parent )
 
 QString RoutinoPlugin::name() const
 {
-    return tr( "Routino" );
+    return tr( "Routino Routing" );
 }
 
 QString RoutinoPlugin::guiString() const
 {
-    return tr( "Routino Routing" );
+    return tr( "Routino" );
 }
 
 QString RoutinoPlugin::nameId() const

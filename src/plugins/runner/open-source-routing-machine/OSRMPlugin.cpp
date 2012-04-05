@@ -24,12 +24,12 @@ OSRMPlugin::OSRMPlugin( QObject *parent ) : RunnerPlugin( parent )
 
 QString OSRMPlugin::name() const
 {
-    return tr( "OSRM" );
+    return tr( "Open Source Routing Machine (OSRM) Routing" );
 }
 
 QString OSRMPlugin::guiString() const
 {
-    return tr( "Open Source Routing Machine (OSRM) Routing" );
+    return tr( "OSRM" );
 }
 
 QString OSRMPlugin::nameId() const
