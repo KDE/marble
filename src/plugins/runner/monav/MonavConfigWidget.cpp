@@ -389,23 +389,41 @@ QHash<QString, QVariant> MonavConfigWidget::settings() const
 void MonavConfigWidget::retrieveMapList( QNetworkReply *reply )
 {
     if ( reply->isReadable() && d->m_currentDownload.isEmpty() ) {
-        disconnect( d->m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
-                     this, SLOT( retrieveMapList( QNetworkReply * ) ) );
-        d->parseNewStuff( reply->readAll() );
-        updateComboBoxes();
+        // check if we are redirected
+        QVariant const redirectionAttribute = reply->attribute( QNetworkRequest::RedirectionTargetAttribute );
+        if ( !redirectionAttribute.isNull() ) {
+            d->m_networkAccessManager->get( QNetworkRequest( redirectionAttribute.toUrl() ) );
+        } else {
+            disconnect( d->m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
+                         this, SLOT( retrieveMapList( QNetworkReply * ) ) );
+            d->parseNewStuff( reply->readAll() );
+            updateComboBoxes();
+        }
     }
 }
 
 void MonavConfigWidget::retrieveData()
 {
     if ( d->m_currentReply && d->m_currentReply->isReadable() && !d->m_currentDownload.isEmpty() ) {
-        d->m_currentFile.write( d->m_currentReply->readAll() );
-        if ( d->m_currentReply->isFinished() ) {
-            d->m_currentReply->deleteLater();
-            d->m_currentReply = 0;
-            d->m_currentFile.close();
-            d->installMap();
-            d->m_currentDownload = QString();
+        // check if we are redirected
+        QVariant const redirectionAttribute = d->m_currentReply->attribute( QNetworkRequest::RedirectionTargetAttribute );
+        if ( !redirectionAttribute.isNull() ) {
+            d->m_currentReply = d->m_networkAccessManager->get( QNetworkRequest( redirectionAttribute.toUrl() ) );
+            connect( d->m_currentReply, SIGNAL( readyRead() ),
+                         this, SLOT( retrieveData() ) );
+            connect( d->m_currentReply, SIGNAL( readChannelFinished() ),
+                         this, SLOT( retrieveData() ) );
+            connect( d->m_currentReply, SIGNAL( downloadProgress( qint64, qint64 ) ),
+                     this, SLOT( updateProgressBar( qint64, qint64 ) ) );
+        } else {
+            d->m_currentFile.write( d->m_currentReply->readAll() );
+            if ( d->m_currentReply->isFinished() ) {
+                d->m_currentReply->deleteLater();
+                d->m_currentReply = 0;
+                d->m_currentFile.close();
+                d->installMap();
+                d->m_currentDownload.clear();
+            }
         }
     }
 }
