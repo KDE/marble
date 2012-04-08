@@ -201,6 +201,13 @@ void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
         return;
     }
 
+    // check if we are redirected
+    const QVariant redirectionAttribute = reply->attribute( QNetworkRequest::RedirectionTargetAttribute );
+    if ( !redirectionAttribute.isNull() ) {
+        m_networkAccessManager->get( QNetworkRequest( QUrl( redirectionAttribute.toUrl() ) ) );
+        return;
+    }
+
     QDomDocument xml;
     if ( !xml.setContent( reply->readAll() ) ) {
         mDebug() << "Cannot parse newstuff xml data ";
@@ -620,12 +627,22 @@ void NewstuffModel::updateProgress( qint64 bytesReceived, qint64 bytesTotal )
 void NewstuffModel::retrieveData()
 {
     if ( d->m_currentReply && d->m_currentReply->isReadable() ) {
-        d->m_currentFile->write( d->m_currentReply->readAll() );
-        if ( d->m_currentReply->isFinished() ) {
-            d->m_currentReply->deleteLater();
-            d->m_currentReply = 0;
-            d->m_currentFile->flush();
-            d->installMap();
+        // check if we are redirected
+        const QVariant redirectionAttribute = d->m_currentReply->attribute( QNetworkRequest::RedirectionTargetAttribute );
+        if ( !redirectionAttribute.isNull() ) {
+            d->m_currentReply = d->m_networkAccessManager->get( QNetworkRequest( redirectionAttribute.toUrl() ) );
+            QObject::connect( d->m_currentReply, SIGNAL( readyRead() ), this, SLOT( retrieveData() ) );
+            QObject::connect( d->m_currentReply, SIGNAL( readChannelFinished() ), this, SLOT( retrieveData() ) );
+            QObject::connect( d->m_currentReply, SIGNAL( downloadProgress( qint64, qint64 ) ),
+                              this, SLOT( updateProgress( qint64, qint64 ) ) );
+        } else {
+            d->m_currentFile->write( d->m_currentReply->readAll() );
+            if ( d->m_currentReply->isFinished() ) {
+                d->m_currentReply->deleteLater();
+                d->m_currentReply = 0;
+                d->m_currentFile->flush();
+                d->installMap();
+            }
         }
     }
 }
