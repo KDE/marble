@@ -105,12 +105,12 @@ AbstractDataPluginModel *AbstractDataPlugin::model() const
 void AbstractDataPlugin::setModel( AbstractDataPluginModel* model )
 {
     if ( d->m_model ) {
-        disconnect( d->m_model, SIGNAL( itemsUpdated() ), this, SLOT( requestRepaint() ) );
+        disconnect( d->m_model, SIGNAL( itemsUpdated() ), this, SIGNAL( repaintNeeded() ) );
         delete d->m_model;
     }
     d->m_model = model;
 
-    connect( d->m_model, SIGNAL( itemsUpdated() ), this, SLOT( requestRepaint() ) );
+    connect( d->m_model, SIGNAL( itemsUpdated() ), this, SIGNAL( repaintNeeded() ) );
     connect( d->m_model, SIGNAL( favoriteItemsChanged( const QStringList& ) ), this,
              SLOT( favoriteItemsChanged( const QStringList& ) ) );
 }
@@ -147,11 +147,6 @@ QList<AbstractDataPluginItem *> AbstractDataPlugin::whichItemAt( const QPoint& c
 RenderPlugin::RenderType AbstractDataPlugin::renderType() const
 {
     return Online;
-}
-
-void AbstractDataPlugin::requestRepaint()
-{
-    emit repaintNeeded( QRegion() );
 }
 
 void AbstractDataPlugin::favoriteItemsChanged( const QStringList& favoriteItems )
