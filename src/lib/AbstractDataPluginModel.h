@@ -119,16 +119,6 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     void addItemToList( AbstractDataPluginItem *item );
     
     /**
-     * Returns the name of the plugin
-     */
-    QString name() const;
-    
-    /**
-     * Change the name of the plugin
-     */
-    void setName( const QString& name );
-    
-    /**
      * Generates the filename relative to the download path from @p id and @p type
      */
     QString generateFilename( const QString& id, const QString& type ) const;

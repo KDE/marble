@@ -87,7 +87,7 @@ class AbstractDataPluginModelPrivate
     }
     
     AbstractDataPluginModel *m_parent;
-    QString m_name;
+    const QString m_name;
     GeoDataLatLonAltBox m_lastBox;
     GeoDataLatLonAltBox m_downloadedBox;
     qint32 m_lastNumber;
@@ -316,16 +316,6 @@ void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item )
     if ( item->initialized() ) {
         emit itemsUpdated();
     }
-}
-
-QString AbstractDataPluginModel::name() const
-{
-    return d->m_name;
-}
-
-void AbstractDataPluginModel::setName( const QString& name )
-{
-    d->m_name = name;
 }
 
 void AbstractDataPluginModel::setFavoriteItems( const QStringList& list )
