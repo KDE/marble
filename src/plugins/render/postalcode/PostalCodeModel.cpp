@@ -44,8 +44,6 @@ void PostalCodeModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
                                           const MarbleModel *model,
                                           qint32 number )
 {
-    Q_UNUSED( number );
-
     if( model->planetId() != "earth" ) {
         return;
     }
@@ -58,7 +56,7 @@ void PostalCodeModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     geonamesUrl.addQueryItem( "lat", QString::number( lat ) );
     geonamesUrl.addQueryItem( "lng", QString::number( lon ) );
     geonamesUrl.addQueryItem( "radius", QString::number( radius ) );
-    geonamesUrl.addQueryItem( "maxRows", QString::number( numberOfItemsOnScreen ) );
+    geonamesUrl.addQueryItem( "maxRows", QString::number( number ) );
 
     downloadDescriptionFile( QUrl( geonamesUrl ) );
 }

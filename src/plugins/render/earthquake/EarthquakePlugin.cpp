@@ -31,7 +31,7 @@ void EarthquakePlugin::initialize()
 {
     EarthquakeModel *model = new EarthquakeModel( pluginManager(), this );
     setModel( model );
-    setNumberOfItems( numberOfItemsOnScreen );
+    setNumberOfItems( 20 );
     readSettings();
     m_isInitialized = true;
 }
@@ -90,7 +90,7 @@ QDialog *EarthquakePlugin::configDialog()
         m_configDialog = new QDialog();
         m_ui = new Ui::EarthquakeConfigWidget;
         m_ui->setupUi( m_configDialog );
-        m_ui->m_numResults->setRange( 1, numberOfItemsOnScreen );
+        m_ui->m_numResults->setRange( 1, numberOfItems() );
         readSettings();
         connect( m_ui->m_buttonBox, SIGNAL( accepted() ),
                  SLOT( writeSettings() ) );
@@ -117,7 +117,7 @@ void EarthquakePlugin::setSettings( const QHash<QString,QVariant> &settings )
     m_settings = settings;
 
     if ( !m_settings.contains( "numResults" ) ) {
-        m_settings.insert( "numResults", numberOfItemsOnScreen );
+        m_settings.insert( "numResults", numberOfItems() );
     }
     if ( !m_settings.contains( "minMagnitude" ) ) {
         m_settings.insert( "minMagnitude", 0.0 );
@@ -163,7 +163,7 @@ void EarthquakePlugin::updateSettings()
     if( earthquakeModel ) {
         earthquakeModel = new EarthquakeModel( pluginManager(), this );
         Q_ASSERT( m_configDialog );
-        earthquakeModel->setNumResults( m_ui->m_numResults->value() );
+        setNumberOfItems( m_ui->m_numResults->value() );
         earthquakeModel->setMinMagnitude( m_ui->m_minMagnitude->value() );
         earthquakeModel->setEndDate( m_ui->m_endDate->dateTime() );
         earthquakeModel->setStartDate( m_ui->m_startDate->dateTime() );

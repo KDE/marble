@@ -23,7 +23,7 @@ PostalCodePlugin::PostalCodePlugin()
 void PostalCodePlugin::initialize()
 {
     setModel( new PostalCodeModel( pluginManager(), this ) );
-    setNumberOfItems( numberOfItemsOnScreen );
+    setNumberOfItems( 20 );
 
     m_isInitialized = true;
 }

@@ -19,11 +19,6 @@ namespace Marble
 
 class MarbleModel;
 
-namespace {
-// The maximum number of items we want to show on the screen.
-const quint32 numberOfItemsOnScreen = 20;
-}
-
 class EarthquakeModel : public AbstractDataPluginModel
 {
     Q_OBJECT
@@ -32,7 +27,6 @@ public:
     explicit EarthquakeModel( const PluginManager *pluginManager, QObject *parent = 0 );
     ~EarthquakeModel();
 
-    void setNumResults( int numResults );
     void setMinMagnitude( double minMagnitude );
     void setStartDate( const QDateTime& startDate );
     void setEndDate( const QDateTime& endDate );
@@ -53,7 +47,6 @@ protected:
     void parseFile( const QByteArray& file );
 
 private:
-    int m_numResults;
     double m_minMagnitude;
     QDateTime m_startDate;
     QDateTime m_endDate;

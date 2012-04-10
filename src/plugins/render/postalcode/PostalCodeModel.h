@@ -17,9 +17,6 @@ namespace Marble {
 
 class MarbleModel;
 
-// The maximum number of items we want to show on the screen.
-const quint32 numberOfItemsOnScreen = 20;
-
 class PostalCodeModel : public AbstractDataPluginModel
 {
     Q_OBJECT

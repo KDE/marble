@@ -29,7 +29,6 @@ namespace Marble {
 
 EarthquakeModel::EarthquakeModel( const PluginManager *pluginManager, QObject *parent )
     : AbstractDataPluginModel( "earthquake", pluginManager, parent ),
-      m_numResults( numberOfItemsOnScreen ),
       m_minMagnitude( 0.0 ),
       m_startDate( QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) ),
       m_endDate( QDateTime::currentDateTime() )
@@ -39,11 +38,6 @@ EarthquakeModel::EarthquakeModel( const PluginManager *pluginManager, QObject *p
 
 EarthquakeModel::~EarthquakeModel()
 {
-}
-
-void EarthquakeModel::setNumResults( int numResults )
-{
-    m_numResults = numResults;
 }
 
 void EarthquakeModel::setMinMagnitude( double minMagnitude )
@@ -63,8 +57,6 @@ void EarthquakeModel::setEndDate( const QDateTime& endDate )
 
 void EarthquakeModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const MarbleModel *model, qint32 number )
 {
-    Q_UNUSED( number );
-
     if( model->planetId() != "earth" ) {
         return;
     }
@@ -75,7 +67,7 @@ void EarthquakeModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const 
     geonamesUrl += "&east="    + QString::number( box.east() * RAD2DEG );
     geonamesUrl += "&west="    + QString::number( box.west() * RAD2DEG );
     geonamesUrl += "&date=" + m_endDate.toString( "yyyy-MM-dd" );
-    geonamesUrl += "&maxRows=" + QString::number( m_numResults );
+    geonamesUrl += "&maxRows=" + QString::number( number );
     geonamesUrl += "&formatted=true";
     downloadDescriptionFile( QUrl( geonamesUrl ) );
 }
