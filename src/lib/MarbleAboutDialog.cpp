@@ -241,6 +241,12 @@ void MarbleAboutDialog::loadPageContents( int idx )
            "<i>License</i>: OpenRouteService data can be used freely under the terms of the "
            "<a href=\"http://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">"
            "Creative Commons Attribution-ShareAlike 2.0 license</a>.</p>")+
+        tr("<p><i>Open Source Routing Machine</i><br />"
+           "Some of the routes used in Marble via download are provided by the <a href=\""
+           "http://project-osrm.org\">Open Source Routing Machine</a> Project (\"OSRM\"). <br />"
+           "<i>License</i>: Open Source Routing Machine data can be used freely under the terms of the "
+           "<a href=\"http://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">"
+           "Creative Commons Attribution-ShareAlike 2.0 license</a>.</p>")+
         tr("<p><i>MapQuest</i><br />"
            "Some of the routes used in Marble via download are provided by <a href=\""
            "http://www.mapquest.com/\">MapQuest</a> and their Open Data Map APIs and Web Services.<br />"
