@@ -49,6 +49,17 @@ class NavigationWidgetPrivate
     void adjustForAnimation();
     void adjustForStill();
 
+    /**
+     * @brief Set a list/set of placemark names for the search widget.
+     * @param locations  the QAbstractitemModel containing the placemarks
+     *
+     * This function is called to display a potentially large number
+     * of placemark names in a widget and let the user search between
+     * them.
+     * @see centerOn
+     */
+    void setSearchResult( QVector<GeoDataPlacemark*> locations );
+
     Ui::NavigationWidget    m_navigationUi;
     MarbleWidget           *m_widget;
     QSortFilterProxyModel  *m_sortproxy;
@@ -121,7 +132,7 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_runnerManager = new MarbleRunnerManager( widget->model()->pluginManager(), this );
     connect( d->m_runnerManager, SIGNAL( searchResultChanged( QVector<GeoDataPlacemark*> ) ),
-             this,               SLOT( setLocations( QVector<GeoDataPlacemark*> ) ) );
+             this,               SLOT( setSearchResult( QVector<GeoDataPlacemark*> ) ) );
     connect( d->m_runnerManager, SIGNAL( searchFinished( QString ) ), this, SIGNAL( searchFinished() ) );
 
     d->m_widget = widget;
@@ -187,7 +198,7 @@ void NavigationWidget::changeZoom( int zoom )
     d->m_navigationUi.zoomSlider->blockSignals( false );
 }
 
-void NavigationWidget::setLocations( QVector<GeoDataPlacemark*> locations )
+void NavigationWidgetPrivate::setSearchResult( QVector<GeoDataPlacemark*> locations )
 {
     if( locations.isEmpty() ) {
         return;
@@ -197,17 +208,17 @@ void NavigationWidget::setLocations( QVector<GeoDataPlacemark*> locations )
     t.start();
 
     // fill the local document with results
-    d->m_widget->model()->placemarkSelectionModel()->clear();
-    d->m_widget->model()->treeModel()->removeDocument( d->m_document );
-    d->m_document->clear();
+    m_widget->model()->placemarkSelectionModel()->clear();
+    m_widget->model()->treeModel()->removeDocument( m_document );
+    m_document->clear();
     foreach (GeoDataPlacemark *placemark, locations ) {
-        d->m_document->append( new GeoDataPlacemark( *placemark ) );
+        m_document->append( new GeoDataPlacemark( *placemark ) );
     }
-    d->m_widget->model()->treeModel()->addDocument( d->m_document );
-    d->m_widget->centerOn( d->m_document->latLonAltBox() );
+    m_widget->model()->treeModel()->addDocument( m_document );
+    m_widget->centerOn( m_document->latLonAltBox() );
 
-    d->m_treeModel.reset();
-    d->m_sortproxy->sort( 0 );
+    m_treeModel.reset();
+    m_sortproxy->sort( 0 );
     mDebug() << "NavigationWidget (sort): Time elapsed:"<< t.elapsed() << " ms";
 }
 

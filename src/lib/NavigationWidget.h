@@ -86,17 +86,6 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
     void searchFinished();
 
  public Q_SLOTS:
-    /**
-     * @brief Set a list/set of placemark names for the search widget.
-     * @param locations  the QAbstractitemModel containing the placemarks
-     *
-     * This function is called to display a potentially large number
-     * of placemark names in a widget and let the user search between
-     * them.
-     * @see centerOn
-     */
-    void setLocations( QVector<GeoDataPlacemark*> locations );
-
     void selectTheme( const QString & );
 
     /**
@@ -125,6 +114,7 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
     Q_PRIVATE_SLOT( d, void mapCenterOnSignal( const QModelIndex & ) )
     Q_PRIVATE_SLOT( d, void adjustForAnimation() )
     Q_PRIVATE_SLOT( d, void adjustForStill() )
+    Q_PRIVATE_SLOT( d, void setSearchResult( QVector<GeoDataPlacemark*> locations ) )
 
     Q_DISABLE_COPY( NavigationWidget )
 
