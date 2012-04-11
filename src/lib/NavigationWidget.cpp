@@ -40,6 +40,15 @@ namespace Marble
 class NavigationWidgetPrivate
 {
  public:
+    NavigationWidgetPrivate();
+
+    void updateButtons( int );
+
+    void mapCenterOnSignal( const QModelIndex & );
+
+    void adjustForAnimation();
+    void adjustForStill();
+
     Ui::NavigationWidget    m_navigationUi;
     MarbleWidget           *m_widget;
     QSortFilterProxyModel  *m_sortproxy;
@@ -47,8 +56,6 @@ class NavigationWidgetPrivate
     MarbleRunnerManager    *m_runnerManager;
     GeoDataTreeModel        m_treeModel;
     GeoDataDocument        *m_document;
-
-    NavigationWidgetPrivate();
 };
 
 NavigationWidgetPrivate::NavigationWidgetPrivate()
@@ -175,7 +182,7 @@ void NavigationWidget::changeZoom( int zoom )
 
     d->m_navigationUi.zoomSlider->setValue( zoom );
     // As we have disabled all zoomSlider Signals, we have to update our buttons separately.
-    updateButtons( zoom );
+    d->updateButtons( zoom );
 
     d->m_navigationUi.zoomSlider->blockSignals( false );
 }
@@ -211,25 +218,25 @@ void NavigationWidget::selectTheme( const QString &theme )
     if( d->m_widget ) {
         d->m_navigationUi.zoomSlider->setMinimum( d->m_widget->minimumZoom() );
         d->m_navigationUi.zoomSlider->setMaximum( d->m_widget->maximumZoom() );
-        updateButtons( d->m_navigationUi.zoomSlider->value() );
+        d->updateButtons( d->m_navigationUi.zoomSlider->value() );
     }
 }
 
-void NavigationWidget::updateButtons( int zoom )
+void NavigationWidgetPrivate::updateButtons( int zoom )
 {
-    if ( zoom <= d->m_navigationUi.zoomSlider->minimum() ) {
-        d->m_navigationUi.zoomInButton->setEnabled( true );
-        d->m_navigationUi.zoomOutButton->setEnabled( false );
-    } else if ( zoom >= d->m_navigationUi.zoomSlider->maximum() ) {
-        d->m_navigationUi.zoomInButton->setEnabled( false );
-        d->m_navigationUi.zoomOutButton->setEnabled( true );
+    if ( zoom <= m_navigationUi.zoomSlider->minimum() ) {
+        m_navigationUi.zoomInButton->setEnabled( true );
+        m_navigationUi.zoomOutButton->setEnabled( false );
+    } else if ( zoom >= m_navigationUi.zoomSlider->maximum() ) {
+        m_navigationUi.zoomInButton->setEnabled( false );
+        m_navigationUi.zoomOutButton->setEnabled( true );
     } else {
-        d->m_navigationUi.zoomInButton->setEnabled( true );
-        d->m_navigationUi.zoomOutButton->setEnabled( true );
+        m_navigationUi.zoomInButton->setEnabled( true );
+        m_navigationUi.zoomOutButton->setEnabled( true );
     }
 }
 
-void NavigationWidget::mapCenterOnSignal( const QModelIndex &index )
+void NavigationWidgetPrivate::mapCenterOnSignal( const QModelIndex &index )
 {
     if( !index.isValid() ) {
         return;
@@ -238,24 +245,24 @@ void NavigationWidget::mapCenterOnSignal( const QModelIndex &index )
             = qVariantValue<GeoDataObject*>( index.model()->data(index, MarblePlacemarkModel::ObjectPointerRole ) );
     GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( object );
     if ( placemark ) {
-        d->m_widget->centerOn( *placemark, true );
-        d->m_widget->model()->placemarkSelectionModel()->select( d->m_sortproxy->mapToSource( index ), QItemSelectionModel::ClearAndSelect );
+        m_widget->centerOn( *placemark, true );
+        m_widget->model()->placemarkSelectionModel()->select( m_sortproxy->mapToSource( index ), QItemSelectionModel::ClearAndSelect );
     }
 }
 
-void NavigationWidget::adjustForAnimation()
+void NavigationWidgetPrivate::adjustForAnimation()
 {
     // TODO: use signals here as well
-    if ( d->m_widget ) {
-        d->m_widget->setViewContext( Animation );
+    if ( m_widget ) {
+        m_widget->setViewContext( Animation );
     }
 }
 
-void NavigationWidget::adjustForStill()
+void NavigationWidgetPrivate::adjustForStill()
 {
     // TODO: use signals here as well
-    if ( d->m_widget ) {
-        d->m_widget->setViewContext( Still );
+    if ( m_widget ) {
+        m_widget->setViewContext( Still );
     }
 }
 

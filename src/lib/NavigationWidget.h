@@ -110,14 +110,6 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
      */
     void changeZoom( int zoom );
 
- private Q_SLOTS:
-    void updateButtons( int );
-
-    void mapCenterOnSignal( const QModelIndex & );
-
-    void adjustForAnimation();
-    void adjustForStill();
-
  protected:
     /**
      * @brief Reimplementation of the resizeEvent() of the widget.
@@ -129,6 +121,11 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
     void resizeEvent( QResizeEvent * );
 
  private:
+    Q_PRIVATE_SLOT( d, void updateButtons( int ) )
+    Q_PRIVATE_SLOT( d, void mapCenterOnSignal( const QModelIndex & ) )
+    Q_PRIVATE_SLOT( d, void adjustForAnimation() )
+    Q_PRIVATE_SLOT( d, void adjustForStill() )
+
     Q_DISABLE_COPY( NavigationWidget )
 
     NavigationWidgetPrivate * const d;
