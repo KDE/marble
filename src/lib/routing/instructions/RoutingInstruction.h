@@ -117,6 +117,8 @@ public:
     /** Formats the instruction for a human reader */
     QString instructionText() const;
 
+    static QString generateRoadInstruction( TurnType turnType, const QString &roadName );
+
 protected:
     int roundaboutExitNumber() const;
 
