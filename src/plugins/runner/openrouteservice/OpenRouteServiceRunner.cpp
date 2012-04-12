@@ -12,10 +12,11 @@
 
 #include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
-#include "MarbleLocale.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "TinyWebBrowser.h"
+#include "GeoDataData.h"
+#include "GeoDataExtendedData.h"
 
 #include <QtCore/QString>
 #include <QtCore/QVector>
@@ -135,9 +136,9 @@ QString OpenRouteServiceRunner::xmlHeader() const
     result += "xmlns:gml=\"http://www.opengis.net/gml\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" ";
     result += "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ";
     result += "xsi:schemaLocation=\"http://www.opengis.net/xls ";
-    result += "http://schemas.opengis.net/ols/1.1.0/RouteService.xsd\" version=\"1.1\" xls:lang=\"%1\">\n";
+    result += "http://schemas.opengis.net/ols/1.1.0/RouteService.xsd\" version=\"1.1\" xls:lang=\"en\">\n";
     result += "<xls:RequestHeader/>\n";
-    return result.arg( MarbleLocale::languageCode() );
+    return result;
 }
 
 QString OpenRouteServiceRunner::requestHeader( const QString &unit, const QString &routePreference ) const
@@ -336,8 +337,25 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
                     }
 
                     GeoDataPlacemark* instruction = new GeoDataPlacemark;
-                    instruction->setName( textNodes.item( 0 ).toElement().text() );
-                    //instruction->setCoordinate( GeoDataPoint( position ) );
+
+                    QString const text = textNodes.item( 0 ).toElement().text();
+                    GeoDataExtendedData extendedData;
+                    GeoDataData turnTypeData;
+                    turnTypeData.setName( "turnType" );
+                    QString road;
+                    RoutingInstruction::TurnType turnType = parseTurnType( text, &road );
+                    turnTypeData.setValue( turnType );
+                    extendedData.addValue( turnTypeData );
+                    if ( !road.isEmpty() ) {
+                        GeoDataData roadName;
+                        roadName.setName( "roadName" );
+                        roadName.setValue( road );
+                        extendedData.addValue( roadName );
+                    }
+
+                    QString const instructionText = turnType == RoutingInstruction::Unknown ? text : RoutingInstruction::generateRoadInstruction( turnType, road );
+                    instruction->setName( instructionText );
+                    instruction->setExtendedData( extendedData );
                     instruction->setGeometry( lineString );
                     result->append( instruction );
                 }
@@ -348,6 +366,39 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     return result;
 }
 
+RoutingInstruction::TurnType OpenRouteServiceRunner::parseTurnType( const QString &text, QString *road ) const
+{
+    QRegExp syntax( "^(Go|Drive) (half left|left|sharp left|half right|right|sharp right)( on )?(.*)?$", Qt::CaseSensitive, QRegExp::RegExp2 );
+    QString instruction;
+    if ( syntax.indexIn( text ) == 0 ) {
+        if ( syntax.captureCount() > 1 ) {
+            instruction = syntax.cap( 2 );
+            if ( syntax.captureCount() == 4 ) {
+                *road = syntax.cap( 4 ).replace( " - Arrived at destination!", "" );
+            }
+        }
+    }
+
+    if ( instruction == "Continue" ) {
+        return RoutingInstruction::Straight;
+    } else if ( instruction == "half right" ) {
+        return RoutingInstruction::SlightRight;
+    } else if ( instruction == "right" ) {
+        return RoutingInstruction::Right;
+    } else if ( instruction == "sharp right" ) {
+        return RoutingInstruction::SharpRight;
+    } else if ( instruction == "turn" ) {
+        return RoutingInstruction::TurnAround;
+    } else if ( instruction == "sharp left" ) {
+        return RoutingInstruction::SharpLeft;
+    } else if ( instruction == "left" ) {
+        return RoutingInstruction::Left;
+    } else if ( instruction == "half left" ) {
+        return RoutingInstruction::SlightLeft;
+    }
+
+    return RoutingInstruction::Unknown;
+}
 
 } // namespace Marble
 

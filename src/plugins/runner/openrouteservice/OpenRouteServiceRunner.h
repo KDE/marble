@@ -14,6 +14,7 @@
 
 #include "MarbleAbstractRunner.h"
 #include "routing/RouteRequest.h"
+#include "routing/instructions/RoutingInstruction.h"
 
 #include <QtCore/QString>
 #include <QtNetwork/QNetworkReply>
@@ -71,6 +72,8 @@ private:
     QString xmlFooter() const;
 
     GeoDataDocument* parse( const QByteArray &input ) const;
+
+    RoutingInstruction::TurnType parseTurnType( const QString &text, QString* road ) const;
 
     QNetworkAccessManager *m_networkAccessManager;
 
