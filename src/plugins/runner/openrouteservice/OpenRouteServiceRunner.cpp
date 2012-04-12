@@ -137,7 +137,36 @@ QString OpenRouteServiceRunner::xmlHeader() const
     result += "xsi:schemaLocation=\"http://www.opengis.net/xls ";
     result += "http://schemas.opengis.net/ols/1.1.0/RouteService.xsd\" version=\"1.1\" xls:lang=\"%1\">\n";
     result += "<xls:RequestHeader/>\n";
-    return result.arg( MarbleLocale::languageCode() );
+
+    // See KDE bug 296382
+    static QMap<QString,QString> availableLanguageCodes;
+    if ( availableLanguageCodes.isEmpty() ) {
+        QStringList const matches = QStringList() << "bg" << "ca" << "cs" << "de"
+                                                  << "da" << "en" << "es" << "fi"
+                                                  << "hr" << "hu" << "it" << "ja"
+                                                  << "nl" << "pl" << "pt" << "lt"
+                                                  << "ro" << "ru" << "tr" << "vi";
+        foreach( const QString &match, matches ) {
+            availableLanguageCodes[match] = match;
+        }
+
+        // The problematic ones
+        availableLanguageCodes["nb"] = "no";
+        availableLanguageCodes["nn"] = "no";
+        availableLanguageCodes["sv"] = "se";
+    }
+
+    QString const languageCode = MarbleLocale::languageCode();
+    QString orsCode = "en";
+    QMap<QString, QString>::const_iterator iter = availableLanguageCodes.constBegin();
+    for ( ; iter != availableLanguageCodes.constEnd(); ++iter ) {
+        if ( languageCode.startsWith( iter.key() ) ) {
+            orsCode = iter.value();
+            break;
+        }
+    }
+
+    return result.arg( orsCode );
 }
 
 QString OpenRouteServiceRunner::requestHeader( const QString &unit, const QString &routePreference ) const
