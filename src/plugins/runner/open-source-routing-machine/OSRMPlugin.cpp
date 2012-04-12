@@ -52,12 +52,6 @@ QString OSRMPlugin::copyrightYears() const
     return "2012";
 }
 
-QList<PluginAuthor> OSRMPlugin::pluginAuthors() const
-{
-    return QList<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
-}
-
 MarbleAbstractRunner* OSRMPlugin::newRunner() const
 {
     return new OSRMRunner;
