@@ -18,6 +18,7 @@ namespace Marble
 
 class MonavMapsModel;
 class MonavPluginPrivate;
+class RouteRequest;
 
 class MonavPlugin : public RunnerPlugin
 {

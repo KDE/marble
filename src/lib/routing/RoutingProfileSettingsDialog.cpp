@@ -13,6 +13,7 @@
 
 #include <QStandardItemModel>
 
+#include "global.h"
 #include "RunnerPlugin.h"
 #include "MarbleDebug.h"
 #include "RoutingProfilesModel.h"

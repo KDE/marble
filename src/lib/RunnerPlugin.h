@@ -12,8 +12,9 @@
 #define MARBLE_RUNNERPLUGIN_H
 
 #include "PluginInterface.h"
-#include "MarbleAbstractRunner.h"
 
+#include <QtCore/QHash>
+#include <QtCore/QObject>
 #include <QtCore/QSettings>
 #include <QtGui/QWidget>
 
@@ -22,6 +23,7 @@
 namespace Marble
 {
 
+class MarbleAbstractRunner;
 class RunnerPluginPrivate;
 
 /**
