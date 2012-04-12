@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Niko Sams <niko.sams@gmail.com>
+// Copyright 2011-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_ROUTINGPROFILESWIDGET_H
@@ -15,12 +16,9 @@
 
 #include "marble_export.h"
 
-class Ui_RoutingSettingsWidget;
-
 namespace Marble
 {
 
-class RoutingProfilesModel;
 class MarbleModel;
 
 class MARBLE_EXPORT RoutingProfilesWidget : public QWidget
@@ -31,20 +29,16 @@ class MARBLE_EXPORT RoutingProfilesWidget : public QWidget
     explicit RoutingProfilesWidget( MarbleModel *marbleModel );
     ~RoutingProfilesWidget();
 
- private slots:
-    void add();
-    void configure();
-    void remove();
-    void moveUp();
-    void moveDown();
-    void updateButtons();
+    Q_PRIVATE_SLOT( d, void add() )
+    Q_PRIVATE_SLOT( d, void configure() )
+    Q_PRIVATE_SLOT( d, void remove() )
+    Q_PRIVATE_SLOT( d, void moveUp() )
+    Q_PRIVATE_SLOT( d, void moveDown() )
+    Q_PRIVATE_SLOT( d, void updateButtons() )
 
  private:
-    MarbleModel *const m_marbleModel;
-    Ui_RoutingSettingsWidget *m_ui;
-    RoutingProfilesModel *m_profilesModel;
-
-    void *const dummy;
+    class Private;
+    Private *const d;
 };
 
 }

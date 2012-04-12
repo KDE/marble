@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Niko Sams <niko.sams@gmail.com>
+// Copyright 2011-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "RoutingProfilesWidget.h"
@@ -25,88 +26,111 @@
 namespace Marble
 {
 
-RoutingProfilesWidget::RoutingProfilesWidget( MarbleModel *marbleModel )
-    : QWidget( 0 ), m_marbleModel( marbleModel ),
-      dummy( 0 )
+class RoutingProfilesWidget::Private
 {
-    m_ui = new Ui_RoutingSettingsWidget;
-    m_ui->setupUi( this );
+ public:
+    Private( MarbleModel *marbleModel, RoutingProfilesWidget *parent );
 
-    m_profilesModel= marbleModel->routingManager()->profilesModel();
-    m_ui->profilesList->setModel( m_profilesModel );
+    void add();
+    void configure();
+    void remove();
+    void moveUp();
+    void moveDown();
+    void updateButtons();
 
-    connect( m_ui->addButton, SIGNAL( clicked( bool ) ), SLOT( add() ) );
-    connect( m_ui->removeButton, SIGNAL( clicked( bool ) ), SLOT( remove( ) ) );
-    connect( m_ui->configureButton, SIGNAL( clicked( bool ) ), SLOT( configure() ) );
-    connect( m_ui->moveUpButton, SIGNAL( clicked( bool ) ), SLOT( moveUp() ) );
-    connect( m_ui->moveDownButton, SIGNAL( clicked( bool ) ), SLOT( moveDown() ) );
-    connect( m_ui->profilesList->selectionModel(), SIGNAL( currentRowChanged(QModelIndex,QModelIndex) ), SLOT( updateButtons() ), Qt::QueuedConnection );
-    connect( m_profilesModel, SIGNAL( layoutChanged() ), SLOT( updateButtons() ) );
-    connect( m_ui->profilesList, SIGNAL( doubleClicked( QModelIndex ) ), SLOT( configure() ) );
+    RoutingProfilesWidget *const q;
+    MarbleModel *const m_marbleModel;
+    RoutingProfilesModel *const m_profilesModel;
+    Ui_RoutingSettingsWidget m_ui;
+};
+
+RoutingProfilesWidget::Private::Private( MarbleModel *marbleModel, RoutingProfilesWidget *parent ) :
+    q( parent ),
+    m_marbleModel( marbleModel ),
+    m_profilesModel( marbleModel->routingManager()->profilesModel() )
+{
+}
+
+RoutingProfilesWidget::RoutingProfilesWidget( MarbleModel *marbleModel )
+    : QWidget( 0 ),
+      d( new Private( marbleModel, this ) )
+{
+    d->m_ui.setupUi( this );
+    d->m_ui.profilesList->setModel( d->m_profilesModel );
+
+    connect( d->m_ui.addButton, SIGNAL( clicked( bool ) ), SLOT( add() ) );
+    connect( d->m_ui.removeButton, SIGNAL( clicked( bool ) ), SLOT( remove( ) ) );
+    connect( d->m_ui.configureButton, SIGNAL( clicked( bool ) ), SLOT( configure() ) );
+    connect( d->m_ui.moveUpButton, SIGNAL( clicked( bool ) ), SLOT( moveUp() ) );
+    connect( d->m_ui.moveDownButton, SIGNAL( clicked( bool ) ), SLOT( moveDown() ) );
+    connect( d->m_ui.profilesList->selectionModel(), SIGNAL( currentRowChanged(QModelIndex,QModelIndex) ), SLOT( updateButtons() ), Qt::QueuedConnection );
+    connect( d->m_ui.profilesList, SIGNAL( doubleClicked( QModelIndex ) ), SLOT( configure() ) );
+
+    connect( d->m_profilesModel, SIGNAL( layoutChanged() ), SLOT( updateButtons() ) );
 }
 
 RoutingProfilesWidget::~RoutingProfilesWidget()
 {
-    delete m_ui;
+    delete d;
 }
 
-void RoutingProfilesWidget::add()
+void RoutingProfilesWidget::Private::add()
 {
     m_profilesModel->addProfile( tr( "New Profile" ) );
 
     int profileIndex = m_profilesModel->rowCount() - 1;
-    m_ui->profilesList->selectionModel()->select( m_profilesModel->index( profileIndex, 0 ), QItemSelectionModel::Clear | QItemSelectionModel::SelectCurrent );
+    m_ui.profilesList->selectionModel()->select( m_profilesModel->index( profileIndex, 0 ), QItemSelectionModel::Clear | QItemSelectionModel::SelectCurrent );
 
-    RoutingProfileSettingsDialog dialog( m_marbleModel->pluginManager(), m_profilesModel, this );
+    RoutingProfileSettingsDialog dialog( m_marbleModel->pluginManager(), m_profilesModel, q );
     dialog.editProfile( profileIndex );
 }
 
-void RoutingProfilesWidget::remove()
+void RoutingProfilesWidget::Private::remove()
 {
-    if ( m_ui->profilesList->selectionModel()->selectedRows().isEmpty() ) {
+    if ( m_ui.profilesList->selectionModel()->selectedRows().isEmpty() ) {
         return;
     }
-    m_profilesModel->removeRows( m_ui->profilesList->selectionModel()->selectedRows().first().row(), 1 );
+    m_profilesModel->removeRows( m_ui.profilesList->selectionModel()->selectedRows().first().row(), 1 );
 }
 
-void RoutingProfilesWidget::configure()
+void RoutingProfilesWidget::Private::configure()
 {
-    if ( m_ui->profilesList->selectionModel()->selectedRows().isEmpty() ) {
+    if ( m_ui.profilesList->selectionModel()->selectedRows().isEmpty() ) {
         return;
     }
 
-    int profileIndex = m_ui->profilesList->selectionModel()->selectedRows().first().row();
+    int profileIndex = m_ui.profilesList->selectionModel()->selectedRows().first().row();
 
-    RoutingProfileSettingsDialog dialog( m_marbleModel->pluginManager(), m_profilesModel, this );
+    RoutingProfileSettingsDialog dialog( m_marbleModel->pluginManager(), m_profilesModel, q );
     dialog.editProfile( profileIndex );
 }
 
-void RoutingProfilesWidget::moveUp()
+void RoutingProfilesWidget::Private::moveUp()
 {
-    if ( m_ui->profilesList->selectionModel()->selectedRows().isEmpty() ) {
+    if ( m_ui.profilesList->selectionModel()->selectedRows().isEmpty() ) {
         return;
     }
-    m_profilesModel->moveUp( m_ui->profilesList->selectionModel()->selectedRows().first().row() );
+    m_profilesModel->moveUp( m_ui.profilesList->selectionModel()->selectedRows().first().row() );
 }
 
-void RoutingProfilesWidget::moveDown()
+void RoutingProfilesWidget::Private::moveDown()
 {
-    if ( m_ui->profilesList->selectionModel()->selectedRows().isEmpty() ) {
+    if ( m_ui.profilesList->selectionModel()->selectedRows().isEmpty() ) {
         return;
     }
-    m_profilesModel->moveDown( m_ui->profilesList->selectionModel()->selectedRows().first().row() );
+    m_profilesModel->moveDown( m_ui.profilesList->selectionModel()->selectedRows().first().row() );
 }
 
-void RoutingProfilesWidget::updateButtons()
+void RoutingProfilesWidget::Private::updateButtons()
 {
     QModelIndex current;
-    if ( !m_ui->profilesList->selectionModel()->selectedRows().isEmpty() ) {
-        current = m_ui->profilesList->selectionModel()->selectedRows().first();
+    if ( !m_ui.profilesList->selectionModel()->selectedRows().isEmpty() ) {
+        current = m_ui.profilesList->selectionModel()->selectedRows().first();
     }
-    m_ui->configureButton->setEnabled( current.isValid() );
-    m_ui->removeButton->setEnabled( current.isValid() );
-    m_ui->moveUpButton->setEnabled( current.isValid() && current.row() > 0 );
-    m_ui->moveDownButton->setEnabled( current.isValid() && current.row()+1 < m_profilesModel->rowCount()  );
+    m_ui.configureButton->setEnabled( current.isValid() );
+    m_ui.removeButton->setEnabled( current.isValid() );
+    m_ui.moveUpButton->setEnabled( current.isValid() && current.row() > 0 );
+    m_ui.moveDownButton->setEnabled( current.isValid() && current.row()+1 < m_profilesModel->rowCount()  );
 }
 
 }
