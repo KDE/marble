@@ -51,8 +51,6 @@ class LayerManagerPrivate
 
     GeoSceneDocument *m_mapTheme;
 
-    const MarbleModel *m_marbleModel;
-    const PluginManager *m_pluginManager;
     QList<RenderPlugin *> m_renderPlugins;
     QList<AbstractFloatItem *> m_floatItems;
     QList<AbstractDataPlugin *> m_dataPlugins;
@@ -63,9 +61,7 @@ class LayerManagerPrivate
 
 LayerManagerPrivate::LayerManagerPrivate( const MarbleModel* model )
     : m_mapTheme( 0 ),
-      m_marbleModel( model ),
-      m_pluginManager( model->pluginManager() ),
-      m_renderPlugins( m_pluginManager->createRenderPlugins( model ) ),
+      m_renderPlugins( model->pluginManager()->createRenderPlugins( model ) ),
       m_showBackground( true )
 {
 }
