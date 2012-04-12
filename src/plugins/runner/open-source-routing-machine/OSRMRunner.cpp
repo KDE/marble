@@ -57,14 +57,14 @@ void OSRMRunner::retrieveRoute( const RouteRequest *route )
         return;
     }
 
-    QString url = "http://router.project-osrm.org/viaroute?output=json";
+    QString url = "http://router.project-osrm.org/viaroute?output=json&geomformat=cmp";
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
     for ( int i=0; i<route->size(); ++i ) {
         append( &url, "loc", QString::number( route->at( i ).latitude( degree ), 'f', 6 ) + "," + QString::number( route->at( i ).longitude( degree ), 'f', 6 ) );
     }
 
     QNetworkRequest request = QNetworkRequest( QUrl( url ) );
-    request.setRawHeader("User-Agent", TinyWebBrowser::userAgent( "Browser", "OSRMRunner" ) );
+    request.setRawHeader( "User-Agent", TinyWebBrowser::userAgent( "Browser", "OSRMRunner" ) );
     QNetworkReply *reply = m_networkAccessManager->get( request );
     connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
              this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
@@ -100,6 +100,29 @@ void OSRMRunner::handleError( QNetworkReply::NetworkError error )
 void OSRMRunner::append(QString *input, const QString &key, const QString &value) const
 {
     *input += "&" + key + "=" + value;
+}
+
+GeoDataLineString *OSRMRunner::decodePolyline( const QString &geometry ) const
+{
+    // See https://developers.google.com/maps/documentation/utilities/polylinealgorithm
+    GeoDataLineString* lineString = new GeoDataLineString;
+    int coordinates[2] = { 0, 0 };
+    int const length = geometry.length();
+    for( int i=0; i<length; /* increment happens below */ ) {
+        for ( int j=0; j<2; ++j ) { // lat and lon
+            int block( 0 ), shift( 0 ), result( 0 );
+            do {
+                block = geometry.at( i++ /* increment for outer loop */ ).toAscii() - 63;
+                result |= ( block & 0x1F ) << shift;
+                shift += 5;
+            } while ( block >= 0x20 );
+            coordinates[j] += ( ( result & 1 ) != 0 ? ~( result >> 1 ) : ( result >> 1 ) );
+        }
+        lineString->append( GeoDataCoordinates( double( coordinates[1] ) / 1E5,
+                                                double( coordinates[0] ) / 1E5,
+                                                0.0, GeoDataCoordinates::Degree ) );
+    }
+    return lineString;
 }
 
 RoutingInstruction::TurnType OSRMRunner::parseTurnType( const QString &instruction ) const
@@ -141,23 +164,12 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input ) const
 
     GeoDataDocument* result = 0;
     GeoDataLineString* routeWaypoints = 0;
-    if ( data.property( "route_geometry" ).isArray() ) {
+    if ( data.property( "route_geometry" ).isString() ) {
         result = new GeoDataDocument();
         result->setName( "Open Source Routing Machine" );
         GeoDataPlacemark* routePlacemark = new GeoDataPlacemark;
         routePlacemark->setName( "Route" );
-        routeWaypoints = new GeoDataLineString;
-        QScriptValueIterator iterator( data.property( "route_geometry" ) );
-        while ( iterator.hasNext() ) {
-            iterator.next();
-
-            QVariantList coordinates = iterator.value().toVariant().toList();
-            if ( coordinates.size() > 1 ) {
-                double const lat = coordinates.at(0).toDouble();
-                double const lon = coordinates.at(1).toDouble();
-                routeWaypoints->append( GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree ) );
-            }
-        }
+        routeWaypoints = decodePolyline( data.property( "route_geometry" ).toString() );
         routePlacemark->setGeometry( routeWaypoints );
 
         QString name = "%1 %2 (OSRM)";

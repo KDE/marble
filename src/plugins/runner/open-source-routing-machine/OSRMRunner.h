@@ -49,6 +49,8 @@ private Q_SLOTS:
 private:
     void append( QString* input, const QString &key, const QString &value ) const;
 
+    GeoDataLineString* decodePolyline( const QString &geometry ) const;
+
     RoutingInstruction::TurnType parseTurnType( const QString &instruction ) const;
 
     GeoDataDocument* parse( const QByteArray &input ) const;
