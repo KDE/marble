@@ -40,6 +40,8 @@ namespace Marble
 class MarbleAboutDialogPrivate
 {
 public: 
+    MarbleAboutDialogPrivate();
+
     void loadPageContents( int idx );
 
     Ui::MarbleAboutDialog  uiWidget;
@@ -49,15 +51,18 @@ public:
     bool licenseLoaded;
 };
 
+MarbleAboutDialogPrivate::MarbleAboutDialogPrivate() :
+    authorsLoaded( false ),
+    dataLoaded( false ),
+    licenseLoaded( false )
+{
+}
+
 MarbleAboutDialog::MarbleAboutDialog(QWidget *parent)
     : QDialog( parent ),
       d( new MarbleAboutDialogPrivate )
 {
     d->uiWidget.setupUi( this );
-
-    d->authorsLoaded = false;
-    d->dataLoaded = false;
-    d->licenseLoaded = false;
 
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         d->uiWidget.m_pMarbleTitleLabel->hide();
