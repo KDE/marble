@@ -42,7 +42,6 @@ private slots:
     void openConfigDialog();
 
 private:
-    const PluginManager *const m_pluginManager;
     RoutingProfilesModel *m_profilesModel;
 
     QList<RunnerPlugin*> m_plugins;

@@ -25,7 +25,7 @@ namespace Marble {
 
 
 RoutingProfileSettingsDialog::RoutingProfileSettingsDialog( const PluginManager *pluginManager, RoutingProfilesModel *profilesModel, QWidget* parent )
-    : QDialog( parent ), m_pluginManager( pluginManager ), 
+    : QDialog( parent ),
     m_profilesModel ( profilesModel ), m_dialog( 0 ), m_dialogLayout( 0 )
 {
 #ifdef Q_WS_MAEMO_5
