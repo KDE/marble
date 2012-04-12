@@ -41,10 +41,8 @@ class MARBLE_EXPORT MarbleAboutDialog : public QDialog
       */
     void setApplicationTitle( const QString &title );
 
- private Q_SLOTS:
-    void loadPageContents( int idx );
-
  private:
+    Q_PRIVATE_SLOT( d, void loadPageContents( int idx ) )
     Q_DISABLE_COPY( MarbleAboutDialog )
     MarbleAboutDialogPrivate  * const d;
 };
