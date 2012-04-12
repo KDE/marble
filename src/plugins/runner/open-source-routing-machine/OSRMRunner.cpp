@@ -33,6 +33,10 @@
 namespace Marble
 {
 
+QVector<QPair<GeoDataCoordinates,QString> > OSRMRunner:: m_cachedHints;
+
+QString OSRMRunner:: m_hintChecksum;
+
 OSRMRunner::OSRMRunner( QObject *parent ) :
     MarbleAbstractRunner( parent ),
     m_networkAccessManager( new QNetworkAccessManager( this ) )
@@ -57,11 +61,30 @@ void OSRMRunner::retrieveRoute( const RouteRequest *route )
         return;
     }
 
-    QString url = "http://router.project-osrm.org/viaroute?output=json&geomformat=cmp";
+    QString url = "http://router.project-osrm.org/viaroute?output=json&geomformat=cmp&instructions=true";
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
+    bool appendChecksum = false;
+    typedef QPair<GeoDataCoordinates,QString> CachePair;
+    QVector<CachePair> newChecksums;
+    QString const invalidEntry = "invalid";
     for ( int i=0; i<route->size(); ++i ) {
-        append( &url, "loc", QString::number( route->at( i ).latitude( degree ), 'f', 6 ) + "," + QString::number( route->at( i ).longitude( degree ), 'f', 6 ) );
+        GeoDataCoordinates const coordinates = route->at( i );
+        append( &url, "loc", QString::number( coordinates.latitude( degree ), 'f', 6 ) + "," + QString::number( coordinates.longitude( degree ), 'f', 6 ) );
+        foreach( const CachePair &hint, m_cachedHints ) {
+            if ( hint.first == coordinates && hint.second != invalidEntry && m_hintChecksum != invalidEntry ) {
+                append( &url, "hint", hint.second );
+                appendChecksum = true;
+            }
+        }
+        newChecksums << CachePair( coordinates, invalidEntry );
     }
+
+    if ( appendChecksum ) {
+        append( &url, "checksum", m_hintChecksum );
+    }
+
+    m_cachedHints = newChecksums;
+    m_hintChecksum = invalidEntry;
 
     QNetworkRequest request = QNetworkRequest( QUrl( url ) );
     request.setRawHeader( "User-Agent", TinyWebBrowser::userAgent( "Browser", "OSRMRunner" ) );
@@ -156,7 +179,7 @@ RoutingInstruction::TurnType OSRMRunner::parseTurnType( const QString &instructi
     return RoutingInstruction::Unknown;
 }
 
-GeoDataDocument *OSRMRunner::parse( const QByteArray &input ) const
+GeoDataDocument *OSRMRunner::parse( const QByteArray &input )
 {
     QScriptEngine engine;
     // Qt requires parentheses around json code
@@ -244,6 +267,17 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input ) const
                 }
             }
         }
+    }
+
+    if ( data.property( "hint_data" ).isValid() ) {
+        QVariantList hints = data.property( "hint_data" ).property( "locations" ).toVariant().toList();
+        if ( hints.size() == m_cachedHints.size() ) {
+            for ( int i=0; i<m_cachedHints.size(); ++i ) {
+                m_cachedHints[i].second = hints[i].toString();
+            }
+        }
+
+        m_hintChecksum = data.property( "hint_data" ).property( "checksum" ).toString();
     }
 
     return result;
