@@ -5,8 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2009      Eckhart Wörner <ewoerner@kde.org>
-// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2011      Guillaume Martres <smarter@ubuntu.com>
+// Copyright 2011,2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef PLACEMARKPOSITIONPROVIDERPLUGIN_H

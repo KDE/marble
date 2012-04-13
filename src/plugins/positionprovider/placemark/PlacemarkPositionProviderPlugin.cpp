@@ -5,8 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2009      Eckhart Wörner <ewoerner@kde.org>
-// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2011      Guillaume Martres <smarter@ubuntu.com>
+// Copyright 2011,2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "PlacemarkPositionProviderPlugin.h"
@@ -56,13 +56,13 @@ QString PlacemarkPositionProviderPlugin::description() const
 
 QString PlacemarkPositionProviderPlugin::copyrightYears() const
 {
-    return "2009, 2011";
+    return "2011, 2012";
 }
 
 QList<PluginAuthor> PlacemarkPositionProviderPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Eckhart Wörner" ), "ewoerner@kde.org" )
+            << PluginAuthor( "Guillaume Martres", "smarter@ubuntu.com" )
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 
