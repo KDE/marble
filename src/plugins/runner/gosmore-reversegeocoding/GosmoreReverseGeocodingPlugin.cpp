@@ -6,10 +6,11 @@
 // the source code.
 //
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include "GosmorePlugin.h"
-#include "GosmoreRunner.h"
+#include "GosmoreReverseGeocodingPlugin.h"
+#include "GosmoreReverseGeocodingRunner.h"
 #include "MarbleDirs.h"
 
 #include <QtCore/QDir>
@@ -20,14 +21,14 @@ namespace Marble
 
 GosmorePlugin::GosmorePlugin( QObject *parent ) : RunnerPlugin( parent )
 {
-    setCapabilities( ReverseGeocoding | Routing );
+    setCapabilities( ReverseGeocoding );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( true );
 }
 
 QString GosmorePlugin::name() const
 {
-    return tr( "Gosmore Routing and Reverse Geocoding" );
+    return tr( "Gosmore Reverse Geocoding" );
 }
 
 QString GosmorePlugin::guiString() const
@@ -37,7 +38,7 @@ QString GosmorePlugin::guiString() const
 
 QString GosmorePlugin::nameId() const
 {
-    return "gosmore";
+    return "gosmore-reverse";
 }
 
 QString GosmorePlugin::version() const
@@ -47,18 +48,19 @@ QString GosmorePlugin::version() const
 
 QString GosmorePlugin::description() const
 {
-    return tr( "Retrieves routes from gosmore" );
+    return tr( "Offline reverse geocoding using Gosmore." );
 }
 
 QString GosmorePlugin::copyrightYears() const
 {
-    return "2010";
+    return "2010, 2012";
 }
 
 QList<PluginAuthor> GosmorePlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" )
+            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 
 MarbleAbstractRunner* GosmorePlugin::newRunner() const
@@ -77,13 +79,8 @@ bool GosmorePlugin::canWork( Capability capability ) const
     }
 }
 
-bool GosmorePlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const
-{
-    return profileTemplate == RoutingProfilesModel::CarFastestTemplate;
 }
 
-}
+Q_EXPORT_PLUGIN2( GosmoreReverseGeocodingPlugin, Marble::GosmorePlugin )
 
-Q_EXPORT_PLUGIN2( GosmorePlugin, Marble::GosmorePlugin )
-
-#include "GosmorePlugin.moc"
+#include "GosmoreReverseGeocodingPlugin.moc"

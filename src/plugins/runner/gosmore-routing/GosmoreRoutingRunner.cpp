@@ -6,9 +6,10 @@
 // the source code.
 //
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include "GosmoreRunner.h"
+#include "GosmoreRoutingRunner.h"
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
@@ -245,38 +246,6 @@ void GosmoreRunner::retrieveRoute( const RouteRequest *route )
 
     GeoDataDocument* result = d->createDocument( wayPoints, instructions );
     emit routeCalculated( result );
-}
-
-void GosmoreRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
-{
-    if ( !d->m_gosmoreMapFile.exists() )
-    {
-        emit reverseGeocodingFinished( coordinates, GeoDataPlacemark() );
-        return;
-    }
-
-    QString queryString = "flat=%1&flon=%2&tlat=%1&tlon=%2&fastest=1&v=motorcar";
-    double lon = coordinates.longitude( GeoDataCoordinates::Degree );
-    double lat = coordinates.latitude( GeoDataCoordinates::Degree );
-    queryString = queryString.arg( lat, 0, 'f', 8).arg(lon, 0, 'f', 8 );
-    QByteArray output = d->retrieveWaypoints( queryString );
-
-    GeoDataPlacemark placemark;
-    placemark.setCoordinate( GeoDataPoint( coordinates ) );
-
-    QStringList lines = QString::fromUtf8( output ).split( '\r' );
-    if ( lines.size() > 2 ) {
-        QStringList fields = lines.at( lines.size()-2 ).split(',');
-        if ( fields.size() >= 5 ) {
-            QString road = fields.last().trimmed();
-            placemark.setAddress( road );
-            GeoDataExtendedData extendedData;
-            extendedData.addValue( GeoDataData( "road", road ) );
-            placemark.setExtendedData( extendedData );
-        }
-    }
-
-    emit reverseGeocodingFinished( coordinates, placemark );
 }
 
 } // namespace Marble

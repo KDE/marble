@@ -6,14 +6,14 @@
 // the source code.
 //
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
-#ifndef MARBLE_GOSMORERUNNER_H
-#define MARBLE_GOSMORERUNNER_H
+#ifndef MARBLE_GOSMOREREVERSEGEOCODINGRUNNER_H
+#define MARBLE_GOSMOREREVERSEGEOCODINGRUNNER_H
 
 #include "MarbleAbstractRunner.h"
-#include "routing/RouteRequest.h"
 
 namespace Marble
 {
@@ -29,9 +29,6 @@ public:
 
     // Overriding MarbleAbstractRunner
     GeoDataFeature::GeoDataVisualCategory category() const;
-
-    // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( const RouteRequest *request );
 
     // Overriding MarbleAbstractRunner
     virtual void reverseGeocoding( const GeoDataCoordinates &coordinates );

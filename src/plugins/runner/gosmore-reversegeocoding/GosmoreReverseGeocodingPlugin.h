@@ -6,11 +6,12 @@
 // the source code.
 //
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
-#ifndef MARBLE_GOSMOREPLUGIN_H
-#define MARBLE_GOSMOREPLUGIN_H
+#ifndef MARBLE_GOSMOREREVERSEGEOCODINGPLUGIN_H
+#define MARBLE_GOSMOREREVERSEGEOCODINGPLUGIN_H
 
 #include "RunnerPlugin.h"
 
@@ -40,8 +41,6 @@ public:
     QList<PluginAuthor> pluginAuthors() const;
 
     virtual MarbleAbstractRunner* newRunner() const;
-
-    virtual bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
 
     virtual bool canWork( Capability capability ) const;
 };
