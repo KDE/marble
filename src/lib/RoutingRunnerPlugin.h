@@ -7,15 +7,16 @@
 //
 // Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
 // Copyright 2011 Thibaut Gridel <tgridel@free.fr>
+// Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+//
 
-#ifndef MARBLE_RUNNERPLUGIN_H
-#define MARBLE_RUNNERPLUGIN_H
+#ifndef MARBLE_ROUTINGRUNNERPLUGIN_H
+#define MARBLE_ROUTINGRUNNERPLUGIN_H
 
+#include <QtCore/QObject>
 #include "PluginInterface.h"
 
 #include <QtCore/QHash>
-#include <QtCore/QObject>
-#include <QtCore/QSettings>
 #include <QtGui/QWidget>
 
 #include "routing/RoutingProfilesModel.h"
@@ -24,37 +25,20 @@ namespace Marble
 {
 
 class MarbleAbstractRunner;
-class RunnerPluginPrivate;
 
 /**
-  * A plugin for marble to execute a placemark search, reverse geocoding or routing task.
+  * A plugin for Marble to execute a routing task.
   */
-class MARBLE_EXPORT RunnerPlugin : public QObject, public PluginInterface
+class MARBLE_EXPORT RoutingRunnerPlugin : public QObject, public PluginInterface
 {
     Q_OBJECT
 
 public:
-    enum Capability {
-        None = 0x0, // The plugin is useless
-        Search = 0x1, // The plugin can search for placemarks
-        ReverseGeocoding = 0x2, // The plugin can do reverse geocoding
-        Routing = 0x4, // The plugin can calculate routes
-        Parsing = 0x8 // The plugin can parse files
-    };
-
-    /** One plugin can support multiple tasks */
-    Q_DECLARE_FLAGS(Capabilities, Capability)
-
-    /** Plugin factory method to create a new runner instance.
-      * Method caller gets ownership of the returned object
-      */
-    virtual MarbleAbstractRunner* newRunner() const = 0;
-
     /** Constructor with optional parent object */
-    explicit RunnerPlugin( QObject* parent = 0 );
+    explicit RoutingRunnerPlugin( QObject* parent = 0 );
 
     /** Destructor */
-    virtual ~RunnerPlugin();
+    virtual ~RoutingRunnerPlugin();
 
     /**
      * @brief Returns the string that should appear in the user interface.
@@ -63,11 +47,10 @@ public:
      */
     virtual QString guiString() const = 0;
 
-    /** Plugin capabilities, i.e. the tasks it supports */
-    Capabilities capabilities() const;
-
-    /** Convenience method to determine whether the plugin support the given capability */
-    bool supports(Capability capability) const;
+    /** Plugin factory method to create a new runner instance.
+      * Method caller gets ownership of the returned object
+      */
+    virtual MarbleAbstractRunner* newRunner() const = 0;
 
     /** True if the plugin supports its tasks on the given planet */
     bool supportsCelestialBody( const QString &celestialBodyId ) const;
@@ -75,12 +58,13 @@ public:
     /** True if the plugin can execute its tasks without network access */
     bool canWorkOffline() const;
 
-    /** Returns true if the plugin can execute a task for the given capability
-      * The default implementation returns true iff the plugin supports
-      * the given capability. This method can be overridden for example to
-      * indicate an incomplete installation.
-      */
-    virtual bool canWork( Capability capability ) const;
+    /**
+     * @brief Returns @code true @endcode if the plugin is able to perform its claimed task.
+     *
+     * The default implementation returns @code true @endcode. This method can be
+     * overridden for example to indicate an incomplete installation.
+     */
+    virtual bool canWork() const;
 
     // Overridden methods with default implementations
 
@@ -96,9 +80,9 @@ public:
         virtual QHash<QString, QVariant> settings() const = 0;
     };
     /**
-     * Function for getting a pointer to the configuration widget of the plugin.
+     * @brief Method for getting a pointer to the configuration widget of the plugin.
      *
-     * @return: The configuration widget or, if no configuration widget exists, 0.
+     * @return The configuration widget or, if no configuration widget exists, 0.
      */
     virtual ConfigWidget *configWidget();
 
@@ -109,23 +93,19 @@ public:
     virtual QHash<QString, QVariant> templateSettings( RoutingProfilesModel::ProfileTemplate profileTemplate ) const;
 
 protected:
-    // Convenience methods for plugins to use
-    void setCapabilities(Capabilities capabilities);
+    void setStatusMessage( const QString &message );
 
     void setSupportedCelestialBodies( const QStringList &celestialBodies );
 
     void setCanWorkOffline( bool canWorkOffline );
 
-    void setStatusMessage( const QString &message );
-
 private:
-    RunnerPluginPrivate * const d;
+    class Private;
+    Private *const d;
 };
 
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Marble::RunnerPlugin::Capabilities)
+Q_DECLARE_INTERFACE( Marble::RoutingRunnerPlugin, "org.kde.Marble.RunnerRunnerPlugin/1.00" )
 
-Q_DECLARE_INTERFACE( Marble::RunnerPlugin, "org.kde.Marble.RunnerPlugin/1.03" )
-
-#endif // MARBLE_RUNNERPLUGIN_H
+#endif // MARBLE_ROUTINGRUNNERPLUGIN_H

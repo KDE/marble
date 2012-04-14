@@ -15,9 +15,9 @@
 namespace Marble
 {
 
-NominatimPlugin::NominatimPlugin( QObject *parent ) : RunnerPlugin( parent )
+NominatimPlugin::NominatimPlugin( QObject *parent ) :
+    ReverseGeocodingRunnerPlugin( parent )
 {
-    setCapabilities( ReverseGeocoding );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
 }

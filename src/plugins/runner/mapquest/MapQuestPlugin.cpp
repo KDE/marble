@@ -16,9 +16,9 @@
 namespace Marble
 {
 
-MapQuestPlugin::MapQuestPlugin( QObject *parent ) : RunnerPlugin( parent )
+MapQuestPlugin::MapQuestPlugin( QObject *parent ) :
+    RoutingRunnerPlugin( parent )
 {
-    setCapabilities( Routing );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
     setStatusMessage( tr ( "This service requires an Internet connection." ) );
@@ -65,12 +65,12 @@ MarbleAbstractRunner* MapQuestPlugin::newRunner() const
     return new MapQuestRunner;
 }
 
-class MapQuestConfigWidget : public RunnerPlugin::ConfigWidget
+class MapQuestConfigWidget : public RoutingRunnerPlugin::ConfigWidget
 {
 public:
 
     MapQuestConfigWidget()
-        : RunnerPlugin::ConfigWidget()
+        : RoutingRunnerPlugin::ConfigWidget()
     {
         ui_configWidget = new Ui::MapQuestConfigWidget;
         ui_configWidget->setupUi( this );
@@ -111,7 +111,7 @@ private:
     Ui::MapQuestConfigWidget *ui_configWidget;
 };
 
-RunnerPlugin::ConfigWidget *MapQuestPlugin::configWidget()
+RoutingRunnerPlugin::ConfigWidget *MapQuestPlugin::configWidget()
 {
     return new MapQuestConfigWidget();
 }

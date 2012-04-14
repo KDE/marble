@@ -10,14 +10,15 @@
 #ifndef MARBLEPNTPLUGIN_H
 #define MARBLEPNTPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "ParseRunnerPlugin.h"
+
 namespace Marble
 {
 
-class PntPlugin : public RunnerPlugin
+class PntPlugin : public ParseRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:
     explicit PntPlugin( QObject *parent = 0 );

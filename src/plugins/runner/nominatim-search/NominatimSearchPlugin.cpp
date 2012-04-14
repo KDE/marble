@@ -15,9 +15,9 @@
 namespace Marble
 {
 
-NominatimPlugin::NominatimPlugin( QObject *parent ) : RunnerPlugin( parent )
+NominatimPlugin::NominatimPlugin( QObject *parent ) :
+    SearchRunnerPlugin( parent )
 {
-    setCapabilities( Search );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
 }
@@ -27,7 +27,7 @@ QString NominatimPlugin::name() const
     return tr( "OpenStreetMap Nominatim Search" );
 }
 
-QString NominatimPlugin::guiString() const
+QString Marble::NominatimPlugin::guiString() const
 {
     return tr( "OpenStreetMap Nominatim" );
 }

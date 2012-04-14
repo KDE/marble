@@ -10,15 +10,15 @@
 #ifndef MARBLE_LOGFILE_PLUGIN_H
 #define MARBLE_LOGFILE_PLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "ParseRunnerPlugin.h"
 
 namespace Marble
 {
 
-class LogfilePlugin : public RunnerPlugin
+class LogfilePlugin : public ParseRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:
     explicit LogfilePlugin( QObject *parent = 0 );

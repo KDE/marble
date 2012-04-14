@@ -13,9 +13,9 @@
 namespace Marble
 {
 
-CachePlugin::CachePlugin( QObject *parent ) : RunnerPlugin( parent )
+CachePlugin::CachePlugin( QObject *parent ) :
+    ParseRunnerPlugin( parent )
 {
-    setCapabilities( Parsing );
 }
 
 QString CachePlugin::name() const

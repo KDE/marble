@@ -12,15 +12,15 @@
 #ifndef MARBLE_MAPQUESTPLUGIN_H
 #define MARBLE_MAPQUESTPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "RoutingRunnerPlugin.h"
 
 namespace Marble
 {
 
-class MapQuestPlugin : public RunnerPlugin
+class MapQuestPlugin : public RoutingRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::RoutingRunnerPlugin )
 
 public:
     explicit MapQuestPlugin( QObject *parent = 0 );

@@ -10,14 +10,15 @@
 #ifndef MARBLECACHEPLUGIN_H
 #define MARBLECACHEPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "ParseRunnerPlugin.h"
+
 namespace Marble
 {
 
-class CachePlugin : public RunnerPlugin
+class CachePlugin : public ParseRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:
     explicit CachePlugin( QObject *parent = 0 );

@@ -13,15 +13,15 @@
 #ifndef MARBLE_NOMINATIMSEARCHPLUGIN_H
 #define MARBLE_NOMINATIMSEARCHPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "SearchRunnerPlugin.h"
 
 namespace Marble
 {
 
-class NominatimPlugin : public RunnerPlugin
+class NominatimPlugin : public SearchRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::SearchRunnerPlugin )
 
 public:
     explicit NominatimPlugin( QObject *parent = 0 );

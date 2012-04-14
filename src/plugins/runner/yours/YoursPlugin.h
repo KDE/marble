@@ -12,15 +12,15 @@
 #ifndef MARBLE_YOURSPLUGIN_H
 #define MARBLE_YOURSPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "RoutingRunnerPlugin.h"
 
 namespace Marble
 {
 
-class YoursPlugin : public RunnerPlugin
+class YoursPlugin : public RoutingRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::RoutingRunnerPlugin )
 
 public:
     explicit YoursPlugin( QObject *parent = 0 );

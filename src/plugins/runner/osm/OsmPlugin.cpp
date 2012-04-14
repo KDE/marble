@@ -13,9 +13,9 @@
 namespace Marble
 {
 
-OsmPlugin::OsmPlugin( QObject *parent ) : RunnerPlugin( parent )
+OsmPlugin::OsmPlugin( QObject *parent ) :
+    ParseRunnerPlugin( parent )
 {
-    setCapabilities( Parsing );
 }
 
 QString OsmPlugin::name() const

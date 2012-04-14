@@ -13,9 +13,9 @@
 namespace Marble
 {
 
-KmlPlugin::KmlPlugin( QObject *parent ) : RunnerPlugin( parent )
+KmlPlugin::KmlPlugin( QObject *parent ) :
+    ParseRunnerPlugin( parent )
 {
-    setCapabilities( Parsing );
 }
 
 QString KmlPlugin::name() const

@@ -10,14 +10,15 @@
 #ifndef MARBLESHPPLUGIN_H
 #define MARBLESHPPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "ParseRunnerPlugin.h"
+
 namespace Marble
 {
 
-class ShpPlugin : public RunnerPlugin
+class ShpPlugin : public ParseRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:
     explicit ShpPlugin( QObject *parent = 0 );

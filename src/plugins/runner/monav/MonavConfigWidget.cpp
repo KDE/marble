@@ -574,7 +574,7 @@ void MonavConfigWidget::mapInstalled( int exitStatus )
 void MonavConfigWidget::showEvent ( QShowEvent * event )
 {
     // Lazy initialization
-    RunnerPlugin::ConfigWidget::showEvent( event );
+    RoutingRunnerPlugin::ConfigWidget::showEvent( event );
     if ( !event->spontaneous() && !d->m_initialized ) {
         d->m_initialized = true;
         d->updateInstalledMapsView();

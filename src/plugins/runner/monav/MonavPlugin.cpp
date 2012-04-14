@@ -217,11 +217,12 @@ void MonavPluginPrivate::initialize()
     }
 }
 
-MonavPlugin::MonavPlugin( QObject *parent ) : RunnerPlugin( parent ), d( new MonavPluginPrivate )
+MonavPlugin::MonavPlugin( QObject *parent ) :
+    RoutingRunnerPlugin( parent ),
+    d( new MonavPluginPrivate )
 {
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( true );
-    setCapabilities( Routing /*| ReverseGeocoding */ );
 
     if ( d->isDaemonInstalled() ) {
         d->initialize();
@@ -349,7 +350,7 @@ QStringList MonavPlugin::mapDirectoriesForRequest( const RouteRequest* request )
     return result;
 }
 
-RunnerPlugin::ConfigWidget *MonavPlugin::configWidget()
+RoutingRunnerPlugin::ConfigWidget *MonavPlugin::configWidget()
 {
     return new MonavConfigWidget( this );
 }
@@ -366,14 +367,10 @@ void MonavPlugin::reloadMaps()
     d->loadMaps();
 }
 
-bool MonavPlugin::canWork( Capability capability ) const
+bool MonavPlugin::canWork() const
 {
-    if ( supports( capability ) ) {
-        d->initialize();
-        return !d->m_maps.isEmpty();
-    } else {
-       return false;
-    }
+    d->initialize();
+    return !d->m_maps.isEmpty();
 }
 
 bool MonavPlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const

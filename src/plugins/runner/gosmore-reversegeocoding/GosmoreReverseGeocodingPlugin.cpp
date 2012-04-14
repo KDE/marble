@@ -19,9 +19,9 @@
 namespace Marble
 {
 
-GosmorePlugin::GosmorePlugin( QObject *parent ) : RunnerPlugin( parent )
+GosmorePlugin::GosmorePlugin( QObject *parent ) :
+    ReverseGeocodingRunnerPlugin( parent )
 {
-    setCapabilities( ReverseGeocoding );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( true );
 }
@@ -68,15 +68,11 @@ MarbleAbstractRunner* GosmorePlugin::newRunner() const
     return new GosmoreRunner;
 }
 
-bool GosmorePlugin::canWork( Capability capability ) const
+bool GosmorePlugin::canWork() const
 {
-    if ( supports( capability ) ) {
-        QDir mapDir( MarbleDirs::localPath() + "/maps/earth/gosmore/" );
-        QFileInfo mapFile = QFileInfo ( mapDir, "gosmore.pak" );
-        return mapFile.exists();
-    } else {
-        return false;
-    }
+    QDir mapDir( MarbleDirs::localPath() + "/maps/earth/gosmore/" );
+    QFileInfo mapFile = QFileInfo ( mapDir, "gosmore.pak" );
+    return mapFile.exists();
 }
 
 }

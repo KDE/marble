@@ -14,7 +14,7 @@
 
 #include <QDialog>
 
-#include "RunnerPlugin.h"
+#include "RoutingRunnerPlugin.h"
 
 class QModelIndex;
 class QStandardItemModel;
@@ -25,7 +25,6 @@ namespace Marble {
 
 class PluginManager;
 class RoutingProfilesModel;
-class RunnerPlugin;
 
 class RoutingProfileSettingsDialog : public QDialog
 {
@@ -44,8 +43,8 @@ private slots:
 private:
     RoutingProfilesModel *m_profilesModel;
 
-    QList<RunnerPlugin*> m_plugins;
-    QHash<RunnerPlugin*, RunnerPlugin::ConfigWidget*> m_configWidgets;
+    QList<RoutingRunnerPlugin*> m_plugins;
+    QHash<RoutingRunnerPlugin*, RoutingRunnerPlugin::ConfigWidget*> m_configWidgets;
 
     Ui_RoutingProfileSettingsDialog *m_ui;
     QStandardItemModel *m_servicesModel;

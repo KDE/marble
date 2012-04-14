@@ -12,15 +12,15 @@
 #ifndef MARBLE_OPENROUTESERVICEPLUGIN_H
 #define MARBLE_OPENROUTESERVICEPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "RoutingRunnerPlugin.h"
 
 namespace Marble
 {
 
-class OpenRouteServicePlugin : public RunnerPlugin
+class OpenRouteServicePlugin : public RoutingRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::RoutingRunnerPlugin )
 
 public:
     explicit OpenRouteServicePlugin( QObject *parent = 0 );

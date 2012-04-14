@@ -10,14 +10,15 @@
 #ifndef MARBLEGPXPLUGIN_H
 #define MARBLEGPXPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "ParseRunnerPlugin.h"
+
 namespace Marble
 {
 
-class GpxPlugin : public RunnerPlugin
+class GpxPlugin : public ParseRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:
     explicit GpxPlugin( QObject *parent = 0 );

@@ -13,15 +13,15 @@
 #ifndef MARBLE_GOSMOREREVERSEGEOCODINGPLUGIN_H
 #define MARBLE_GOSMOREREVERSEGEOCODINGPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "ReverseGeocodingRunnerPlugin.h"
 
 namespace Marble
 {
 
-class GosmorePlugin : public RunnerPlugin
+class GosmorePlugin : public ReverseGeocodingRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::ReverseGeocodingRunnerPlugin )
 
 public:
     explicit GosmorePlugin( QObject *parent = 0 );
@@ -42,7 +42,7 @@ public:
 
     virtual MarbleAbstractRunner* newRunner() const;
 
-    virtual bool canWork( Capability capability ) const;
+    virtual bool canWork() const;
 };
 
 }

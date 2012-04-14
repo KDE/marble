@@ -13,15 +13,15 @@
 #ifndef MARBLE_NOMINATIMREVERSEGEOCODINGPLUGIN_H
 #define MARBLE_NOMINATIMREVERSEGEOCODINGPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "ReverseGeocodingRunnerPlugin.h"
 
 namespace Marble
 {
 
-class NominatimPlugin : public RunnerPlugin
+class NominatimPlugin : public ReverseGeocodingRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::ReverseGeocodingRunnerPlugin )
 
 public:
     explicit NominatimPlugin( QObject *parent = 0 );

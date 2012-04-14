@@ -12,15 +12,15 @@
 #ifndef MARBLE_GOSMOREROUTINGPLUGIN_H
 #define MARBLE_GOSMOREROUTINGPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "RoutingRunnerPlugin.h"
 
 namespace Marble
 {
 
-class GosmorePlugin : public RunnerPlugin
+class GosmorePlugin : public RoutingRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::RoutingRunnerPlugin )
 
 public:
     explicit GosmorePlugin( QObject *parent = 0 );
@@ -43,7 +43,7 @@ public:
 
     virtual bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
 
-    virtual bool canWork( Capability capability ) const;
+    virtual bool canWork() const;
 };
 
 }

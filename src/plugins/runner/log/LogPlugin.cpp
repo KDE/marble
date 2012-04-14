@@ -14,9 +14,8 @@ namespace Marble
 {
 
 LogfilePlugin::LogfilePlugin( QObject *parent ) :
-    RunnerPlugin( parent )
+    ParseRunnerPlugin( parent )
 {
-    setCapabilities( Parsing );
 }
 
 QString LogfilePlugin::name() const

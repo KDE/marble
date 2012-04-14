@@ -12,15 +12,15 @@
 #ifndef MARBLE_LATLONPLUGIN_H
 #define MARBLE_LATLONPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "SearchRunnerPlugin.h"
 
 namespace Marble
 {
 
-class LatLonPlugin : public RunnerPlugin
+class LatLonPlugin : public SearchRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::SearchRunnerPlugin )
 
 public:
     explicit LatLonPlugin( QObject *parent = 0 );

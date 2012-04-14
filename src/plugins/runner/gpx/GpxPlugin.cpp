@@ -13,9 +13,9 @@
 namespace Marble
 {
 
-GpxPlugin::GpxPlugin( QObject *parent ) : RunnerPlugin( parent )
+GpxPlugin::GpxPlugin( QObject *parent ) :
+    ParseRunnerPlugin( parent )
 {
-    setCapabilities( Parsing );
 }
 
 QString GpxPlugin::name() const

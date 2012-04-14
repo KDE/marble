@@ -13,9 +13,9 @@
 namespace Marble
 {
 
-PntPlugin::PntPlugin( QObject *parent ) : RunnerPlugin( parent )
+PntPlugin::PntPlugin( QObject *parent ) :
+    ParseRunnerPlugin( parent )
 {
-    setCapabilities( Parsing );
 }
 
 QString PntPlugin::name() const

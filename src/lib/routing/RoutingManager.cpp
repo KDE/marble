@@ -17,7 +17,7 @@
 #include "RoutingModel.h"
 #include "RoutingProfilesModel.h"
 #include "MarbleRunnerManager.h"
-#include "RunnerPlugin.h"
+#include "RoutingRunnerPlugin.h"
 #include "AutoNavigation.h"
 #include "GeoWriter.h"
 #include "GeoDataDocument.h"
@@ -360,11 +360,7 @@ RoutingProfile RoutingManager::defaultProfile( RoutingProfile::TransportType tra
     }
 
     const PluginManager* pluginManager = d->m_marbleModel->pluginManager();
-    foreach( RunnerPlugin* plugin, pluginManager->runnerPlugins() ) {
-        if ( !plugin->supports( RunnerPlugin::Routing ) ) {
-            continue;
-        }
-
+    foreach( RoutingRunnerPlugin* plugin, pluginManager->routingRunnerPlugins() ) {
         if ( plugin->supportsTemplate( tpl ) ) {
             profile.pluginSettings()[plugin->nameId()] = plugin->templateSettings( tpl );
         }

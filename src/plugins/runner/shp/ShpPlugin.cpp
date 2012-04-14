@@ -13,9 +13,9 @@
 namespace Marble
 {
 
-ShpPlugin::ShpPlugin( QObject *parent ) : RunnerPlugin( parent )
+ShpPlugin::ShpPlugin( QObject *parent ) :
+    ParseRunnerPlugin( parent )
 {
-    setCapabilities( Parsing );
 }
 
 QString ShpPlugin::name() const
