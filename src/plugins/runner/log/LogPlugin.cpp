@@ -21,12 +21,12 @@ LogfilePlugin::LogfilePlugin( QObject *parent ) :
 
 QString LogfilePlugin::name() const
 {
-    return tr( ".log File Parser" );
+    return tr( "TangoGPS Log File Parser" );
 }
 
 QString LogfilePlugin::guiString() const
 {
-    return tr( ".log File Parser" );
+    return tr( "TangoGPS Log File" );
 }
 
 QString LogfilePlugin::nameId() const
@@ -41,7 +41,7 @@ QString LogfilePlugin::version() const
 
 QString LogfilePlugin::description() const
 {
-    return tr( "Create GeoDataDocument from TangoGPS .log Files" );
+    return tr( "Allows loading of TangoGPS log files." );
 }
 
 QString LogfilePlugin::copyrightYears() const

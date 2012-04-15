@@ -25,12 +25,12 @@ HostipPlugin::HostipPlugin( QObject *parent ) : RunnerPlugin( parent )
 
 QString HostipPlugin::name() const
 {
-    return tr( "Hostip.info" );
+    return tr( "Hostip.info Search" );
 }
 
 QString HostipPlugin::guiString() const
 {
-    return tr( "Hostip.info Search" );
+    return tr( "Hostip.info" );
 }
 
 QString HostipPlugin::nameId() const

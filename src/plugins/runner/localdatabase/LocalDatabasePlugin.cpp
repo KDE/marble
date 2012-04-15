@@ -21,12 +21,12 @@ LocalDatabasePlugin::LocalDatabasePlugin( QObject *parent ) : RunnerPlugin( pare
 
 QString LocalDatabasePlugin::name() const
 {
-    return tr( "Local Database" );
+    return tr( "Local Database Search" );
 }
 
 QString LocalDatabasePlugin::guiString() const
 {
-    return tr( "Local Database Search" );
+    return tr( "Local Database" );
 }
 
 QString LocalDatabasePlugin::nameId() const

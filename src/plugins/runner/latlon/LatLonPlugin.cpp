@@ -21,7 +21,7 @@ LatLonPlugin::LatLonPlugin( QObject *parent ) : RunnerPlugin( parent )
 
 QString LatLonPlugin::name() const
 {
-    return tr( "Geographic Coordinates" );
+    return tr( "Geographic Coordinates Search" );
 }
 
 QString LatLonPlugin::guiString() const

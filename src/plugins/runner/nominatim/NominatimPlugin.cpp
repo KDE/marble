@@ -23,12 +23,12 @@ NominatimPlugin::NominatimPlugin( QObject *parent ) : RunnerPlugin( parent )
 
 QString NominatimPlugin::name() const
 {
-    return tr( "OSM Nominatim" );
+    return tr( "OpenStreetMap Nominatim Search and Reverse Geocoding" );
 }
 
 QString NominatimPlugin::guiString() const
 {
-    return tr( "OpenStreetMap Nominatim Search" );
+    return tr( "OpenStreetMap Nominatim" );
 }
 
 QString NominatimPlugin::nameId() const

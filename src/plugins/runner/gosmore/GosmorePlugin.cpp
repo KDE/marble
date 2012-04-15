@@ -27,7 +27,7 @@ GosmorePlugin::GosmorePlugin( QObject *parent ) : RunnerPlugin( parent )
 
 QString GosmorePlugin::name() const
 {
-    return tr( "Gosmore Routing" );
+    return tr( "Gosmore Routing and Reverse Geocoding" );
 }
 
 QString GosmorePlugin::guiString() const
