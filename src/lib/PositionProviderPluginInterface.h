@@ -39,6 +39,13 @@ class MARBLE_EXPORT PositionProviderPluginInterface: public PluginInterface
   public:
     virtual ~PositionProviderPluginInterface();
 
+    /**
+     * @brief Returns the string that should appear in the user interface.
+     *
+     * Example: "GPS"
+     */
+    virtual QString guiString() const = 0;
+
     virtual PositionProviderStatus status() const = 0;
     virtual GeoDataCoordinates position() const = 0;
     virtual GeoDataAccuracy accuracy() const = 0;

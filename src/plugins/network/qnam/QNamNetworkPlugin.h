@@ -29,7 +29,6 @@ class QNamNetworkPlugin: public NetworkPlugin
     // PluginInterface abstract methods
     virtual QString name() const;
     virtual QString nameId() const;
-    virtual QString guiString() const;
     virtual QString version() const;
     virtual QString description() const;
     virtual QString copyrightYears() const;

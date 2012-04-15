@@ -39,11 +39,6 @@ QString QNamNetworkPlugin::nameId() const
     return QString::fromLatin1( "QNamNetworkPlugin" );
 }
 
-QString QNamNetworkPlugin::guiString() const
-{
-    return tr( "QNetworkAccessManager based Network Plugin" );
-}
-
 QString QNamNetworkPlugin::version() const
 {
     return "1.0";

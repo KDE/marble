@@ -56,6 +56,13 @@ public:
     /** Destructor */
     virtual ~RunnerPlugin();
 
+    /**
+     * @brief Returns the string that should appear in the user interface.
+     *
+     * For example, "OpenRouteService" should be returned for the OpenRouteService routing plugin.
+     */
+    virtual QString guiString() const = 0;
+
     /** Plugin capabilities, i.e. the tasks it supports */
     Capabilities capabilities() const;
 

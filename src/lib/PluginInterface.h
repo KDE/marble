@@ -48,25 +48,20 @@ class MARBLE_EXPORT PluginInterface
     virtual ~PluginInterface();
 
     /**
-     * @brief Returns the "real name" of the backend.
-     *.
-     * Example: "Starry Sky Plugin"
+     * @brief Returns the user-visible name of the plugin.
+     *
+     * The user-visible name should be context free, i.e. the name should
+     * provide enough information as to what the plugin is about in the context
+     * of Marble.
+     *
+     * Example: "Starry Sky Background", "OpenRouteService Routing"
      */
     virtual QString name() const = 0;
 
     /**
-     * @brief Returns the string that should appear in the UI / in the menu.
-     *.
-     * Using a "&" you can suggest key shortcuts
+     * @brief Returns the unique name of the plugin.
      *
-     * Example: "&Stars"
-     */
-    virtual QString guiString() const = 0;
-
-    /**
-     * @brief Returns the name ID of the backend.
-     *.
-     * Examples: "starrysky", "QNetworkAccessManager"
+     * Examples: "starrysky", "openrouteservice"
      */
     virtual QString nameId() const = 0;
 
