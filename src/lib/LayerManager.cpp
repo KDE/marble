@@ -87,6 +87,10 @@ LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
                  this, SIGNAL( repaintNeeded() ) );
         connect( renderPlugin, SIGNAL( repaintNeeded( QRegion ) ),
                  this, SIGNAL( repaintNeeded( QRegion ) ) );
+        connect( renderPlugin->action(), SIGNAL( changed() ),
+                 this, SIGNAL( repaintNeeded() ) );
+        connect( renderPlugin, SIGNAL( visibilityChanged( QString, bool ) ),
+                 this, SLOT( syncPropertyWithAction( QString, bool ) ) );
 
         // get float items ...
         AbstractFloatItem * const floatItem =
@@ -208,16 +212,6 @@ void LayerManager::syncViewParamsAndPlugins( GeoSceneDocument *mapTheme )
         if ( propertyAvailable ) {
             renderPlugin->setVisible( propertyValue );
         }
-
-        disconnect( renderPlugin->action(), SIGNAL( changed() ),
-                 this,                   SIGNAL( repaintNeeded() ) );
-        disconnect( renderPlugin, SIGNAL( visibilityChanged( QString, bool ) ),
-                 this,         SLOT( syncPropertyWithAction( QString, bool ) ) );
-        connect( renderPlugin->action(), SIGNAL( changed() ), 
-                 this,                   SIGNAL( repaintNeeded() ) );
-        connect( renderPlugin, SIGNAL( visibilityChanged( QString, bool ) ),
-                 this,         SLOT( syncPropertyWithAction( QString, bool ) ) );
-
     }
 
     connect( mapTheme->settings(), SIGNAL( valueChanged( QString, bool ) ),
