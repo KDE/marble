@@ -221,17 +221,17 @@ void LayerManager::syncViewParamsAndPlugins( GeoSceneDocument *mapTheme )
     }
 
     connect( mapTheme->settings(), SIGNAL( valueChanged( QString, bool ) ),
-             this,                 SLOT( syncActionWithProperty( QString, bool ) ) );
+             this,                 SLOT( setVisible( const QString &, bool ) ) );
 }
 
-void LayerManager::syncActionWithProperty( QString nameId, bool checked )
+void LayerManager::setVisible( const QString &nameId, bool visible )
 {
     foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
         if ( nameId == renderPlugin->nameId() ) {
-            if ( renderPlugin->visible() == checked )
+            if ( renderPlugin->visible() == visible )
                 return;
 
-            renderPlugin->setVisible( checked );
+            renderPlugin->setVisible( visible );
 
             return;
         }

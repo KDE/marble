@@ -105,7 +105,7 @@ class LayerManager : public QObject
     void setShowBackground( bool show );
 
     void syncViewParamsAndPlugins( GeoSceneDocument *mapTheme );
-    void syncActionWithProperty( QString, bool );
+    void setVisible( const QString &nameId, bool visible );
     void syncPropertyWithAction( QString, bool );
 
  private:
