@@ -7,6 +7,7 @@
 //
 // Copyright 2008 Torsten Rahn <tackat@kde.org>
 // Copyright 2008 Inge Wallin  <inge@lysator.liu.se>
+// Copyright 2011,2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_RENDERPLUGIN_H
@@ -28,7 +29,6 @@ class QStandardItem;
 namespace Marble
 {
 
-class RenderPluginPrivate;
 class MarbleModel;
 
 /**
@@ -151,7 +151,8 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 
  private:
     Q_DISABLE_COPY( RenderPlugin )
-    RenderPluginPrivate * const d;
+    class Private;
+    Private * const d;
 };
 
 #define MARBLE_PLUGIN(T) public:\

@@ -7,6 +7,7 @@
 //
 // Copyright 2008      Torsten Rahn   <rahn@kde.org>
 // Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
+// Copyright 2011,2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 // Self
@@ -25,10 +26,10 @@
 namespace Marble
 {
 
-class RenderPluginPrivate
+class RenderPlugin::Private
 {
   public:
-    RenderPluginPrivate( const MarbleModel *marbleModel )
+    Private( const MarbleModel *marbleModel )
         : m_marbleModel( marbleModel ),
           m_action(0),
           m_item(0),
@@ -37,7 +38,7 @@ class RenderPluginPrivate
     {
     }
 
-    ~RenderPluginPrivate()
+    ~Private()
     {
     }
 
@@ -52,7 +53,7 @@ class RenderPluginPrivate
 
 
 RenderPlugin::RenderPlugin( const MarbleModel *marbleModel )
-    : d( new RenderPluginPrivate( marbleModel ) )
+    : d( new Private( marbleModel ) )
 {
     d->m_action = new QAction( this );
     connect( d->m_action, SIGNAL( toggled( bool ) ),
