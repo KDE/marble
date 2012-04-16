@@ -2,6 +2,7 @@ plugin QtComponentsPlugin
 SearchField 0.12 SearchField.qml
 RoutingDialog 0.12 RoutingDialog.qml
 RouteEditor 0.12 RouteEditor.qml
+PlacemarkEditor 0.12 PlacemarkEditor.qml
 SearchResultSelectionDialog 0.12 SearchResultSelectionDialog.qml
 MenuItemSwitch 0.12 MenuItemSwitch.qml
 ViaPointEditor 0.12 ViaPointEditor.qml
