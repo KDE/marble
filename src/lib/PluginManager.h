@@ -20,7 +20,6 @@ namespace Marble
 {
 
 class RenderPlugin;
-class MarbleModel;
 class NetworkPlugin;
 class PositionProviderPlugin;
 class AbstractFloatItem;
@@ -32,7 +31,7 @@ class RunnerPlugin;
  *
  * Ownership policy for plugins:
  *
- * On every invocation of createRenderPlugins, createNetworkPlugins and
+ * On every invocation of createNetworkPlugins and
  * createFloatItems the PluginManager creates new objects and transfers
  * ownership to the calling site. In order to create
  * the objects, the PluginManager internally has a list of the plugins
@@ -48,10 +47,13 @@ class MARBLE_EXPORT PluginManager
     ~PluginManager();
 
     /**
-     * This methods creates a new set of plugins and transfers ownership
-     * of them to the client.
+     * @brief Returns all available RenderPlugins.
+     *
+     * Ownership of the items remains in PluginManager.
+     * In order to use the RenderPlugins, first create new instances using
+     * RenderPlugin::newInstance().
      */
-    QList<RenderPlugin *> createRenderPlugins( const MarbleModel *marbleModel ) const;
+    QList<const RenderPlugin *> renderPlugins() const;
 
     /**
      * This methods creates a new set of plugins and transfers ownership

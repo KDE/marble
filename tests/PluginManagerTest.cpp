@@ -31,10 +31,8 @@ void PluginManagerTest::loadPlugins()
 
     const int pluginNumber = MarbleDirs::pluginEntryList( "", QDir::Files ).size();
 
-    MarbleModel model;
-
     PluginManager pm;
-    const int renderPlugins = pm.createRenderPlugins( &model ).size();
+    const int renderPlugins = pm.renderPlugins().size();
     const int networkPlugins = pm.createNetworkPlugins().size();
     const int positionPlugins = pm.createPositionProviderPlugins().size();
     const int runnerPlugins = pm.runnerPlugins().size();

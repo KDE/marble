@@ -78,19 +78,10 @@ QList<T*> createPlugins( const QList<const T*> &factories )
     return result;
 }
 
-QList<RenderPlugin *> PluginManager::createRenderPlugins( const MarbleModel *marbleModel ) const
+QList<const RenderPlugin *> PluginManager::renderPlugins() const
 {
     d->loadPlugins();
-
-    QList<RenderPlugin *> result;
-
-    foreach ( const RenderPlugin *factory, d->m_renderPluginTemplates ) {
-        RenderPlugin *instance = factory->newInstance( marbleModel );
-        Q_ASSERT( instance && "Plugin returned null when requesting a new instance." );
-        result.append( instance );
-    }
-
-    return result;
+    return d->m_renderPluginTemplates;
 }
 
 QList<NetworkPlugin *> PluginManager::createNetworkPlugins() const

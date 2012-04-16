@@ -46,7 +46,7 @@ bool zValueLessThan( const LayerInterface * const one, const LayerInterface * co
 class LayerManagerPrivate
 {
  public:
-    LayerManagerPrivate( const MarbleModel* model );
+    LayerManagerPrivate();
     ~LayerManagerPrivate();
 
     GeoSceneDocument *m_mapTheme;
@@ -59,9 +59,9 @@ class LayerManagerPrivate
     bool m_showBackground;
 };
 
-LayerManagerPrivate::LayerManagerPrivate( const MarbleModel* model )
+LayerManagerPrivate::LayerManagerPrivate()
     : m_mapTheme( 0 ),
-      m_renderPlugins( model->pluginManager()->createRenderPlugins( model ) ),
+      m_renderPlugins(),
       m_showBackground( true )
 {
 }
@@ -74,11 +74,13 @@ LayerManagerPrivate::~LayerManagerPrivate()
 
 LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
     : QObject( parent ),
-      d( new LayerManagerPrivate( model ) )
+      d( new LayerManagerPrivate )
 {
+    foreach ( const RenderPlugin *factory, model->pluginManager()->renderPlugins() ) {
+        RenderPlugin *const renderPlugin = factory->newInstance( model );
+        Q_ASSERT( renderPlugin && "Plugin returned null when requesting a new instance." );
+        d->m_renderPlugins.append( renderPlugin );
 
-    // get float items and data plugins
-    foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
         connect( renderPlugin, SIGNAL( settingsChanged( QString ) ),
                  this, SIGNAL( pluginSettingsChanged() ) );
         connect( renderPlugin, SIGNAL( settingsChanged( QString ) ),
@@ -86,11 +88,13 @@ LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
         connect( renderPlugin, SIGNAL( repaintNeeded( QRegion ) ),
                  this, SIGNAL( repaintNeeded( QRegion ) ) );
 
+        // get float items ...
         AbstractFloatItem * const floatItem =
             qobject_cast<AbstractFloatItem *>( renderPlugin );
         if ( floatItem )
             d->m_floatItems.append( floatItem );
-        
+
+        // ... and data plugins
         AbstractDataPlugin * const dataPlugin = 
             qobject_cast<AbstractDataPlugin *>( renderPlugin );
         if( dataPlugin )
