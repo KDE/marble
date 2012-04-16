@@ -17,6 +17,7 @@
 #include "Navigation.h"
 #include "Search.h"
 #include "Coordinate.h"
+#include "Placemark.h"
 
 #include <QtGui/QGraphicsProxyWidget>
 #include <QtCore/QList>
@@ -107,6 +108,8 @@ Q_SIGNALS:
     void mapThemeModelChanged();
 
     void mapThemeChanged();
+
+    void placemarkSelected( Placemark* placemark );
 
 public Q_SLOTS:
     Coordinate* center();

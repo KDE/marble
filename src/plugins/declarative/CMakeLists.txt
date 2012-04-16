@@ -16,6 +16,7 @@ DeclarativeMapThemeManager.cpp
 MapTheme.cpp
 MarbleDeclarativePlugin.cpp
 MarbleDeclarativeWidget.cpp
+Placemark.cpp
 PositionSource.cpp
 Tracking.cpp
 Routing.cpp

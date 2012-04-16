@@ -155,41 +155,32 @@ Page {
             Column {
                 id: column
 
-                Label {
-                    id: searchResultText
-                    text: "<font size=\"-1\">" + (index+1) + ". " + display + "</font>"
-                    width: searchResultItem.width
-                    wrapMode: searchResultItem.detailed ? Text.WrapAtWordBoundaryOrAnywhere : Text.NoWrap
-                    clip: true
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            searchResultListView.currentIndex = index
-                            marbleWidget.centerOn( longitude, latitude )
-                        }
-                    }
-                }
-
                 Row {
                     spacing: 5
 
-                    Button {
-                        id: routeButton
-                        width: 120
-                        text: "Route"
-                        visible: searchResultItem.detailed
-                        onClicked: {
-                            settings.gpsTracking = true
-                            marbleWidget.routing.clearRoute()
-                            marbleWidget.routing.setVia( 0, marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
-                            marbleWidget.routing.setVia( 1, longitude, latitude )
-                            openActivity( "Routing" )
+                    Label {
+                        id: searchResultText
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "<font size=\"-1\">" + (index+1) + ". " + display + "</font>"
+                        width: searchResultItem.width - bookmarkButton.width - parent.spacing - 10
+                        wrapMode: searchResultItem.detailed ? Text.WrapAtWordBoundaryOrAnywhere : Text.NoWrap
+                        clip: true
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                searchResultListView.currentIndex = index
+                                marbleWidget.centerOn( longitude, latitude )
+                            }
                         }
                     }
 
-                    Button  {
-                        width: 50
+                    ToolButton  {
+                        id: bookmarkButton
+                        anchors.verticalCenter: parent.verticalCenter
+                        flat: true
+                        height: 38
+                        width: 38
                         property bool isBookmark: marbleWidget.bookmarks.isBookmark(longitude,latitude)
                         iconSource: isBookmark ? "qrc:/icons/bookmark.png" : "qrc:/icons/bookmark-disabled.png"
                         visible: searchResultItem.detailed
@@ -203,6 +194,41 @@ Page {
                         }
                     }
                 }
+
+                Row {
+                    spacing: 5
+                    visible: searchResultItem.detailed
+
+                    Button {
+                        id: carButton
+                        width: 120
+                        iconSource: "qrc:/icons/routing-motorcar.svg"
+                        onClicked: {
+                            marbleWidget.routing.routingProfile = "Motorcar"
+                            searchActivityPage.startRouting(longitude, latitude)
+                        }
+                    }
+
+                    Button {
+                        id: bikeButton
+                        width: 80
+                        iconSource: "qrc:/icons/routing-bike.svg"
+                        onClicked: {
+                            marbleWidget.routing.routingProfile = "Bicycle"
+                            searchActivityPage.startRouting(longitude, latitude)
+                        }
+                    }
+
+                    Button {
+                        id: pedButton
+                        width: 60
+                        iconSource: "qrc:/icons/routing-pedestrian.svg"
+                        onClicked: {
+                            marbleWidget.routing.routingProfile = "Pedestrian"
+                            searchActivityPage.startRouting(longitude, latitude)
+                        }
+                    }
+                }
             }
         }
     }
@@ -211,5 +237,14 @@ Page {
         if ( status === PageStatus.Activating ) {
             mapContainer.embedMarbleWidget()
         }
+    }
+
+    function startRouting(longitude, latitude)
+    {
+        settings.gpsTracking = true
+        marbleWidget.routing.clearRoute()
+        marbleWidget.routing.setVia( 0, marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
+        marbleWidget.routing.setVia( 1, longitude, latitude )
+        openActivity( "Routing" )
     }
 }

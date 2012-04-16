@@ -255,8 +255,19 @@ void MarbleWidget::updateCenterPosition()
 void MarbleWidget::forwardMouseClick(qreal lon, qreal lat, Marble::GeoDataCoordinates::Unit unit )
 {
     Marble::GeoDataCoordinates position( lon, lat, unit );
-    emit mouseClickGeoPosition( position.longitude( Marble::GeoDataCoordinates::Degree ),
-                                position.latitude( Marble::GeoDataCoordinates::Degree ) );
+    Marble::GeoDataCoordinates::Unit degree = Marble::GeoDataCoordinates::Degree;
+    QPoint const point = pixel( position.longitude( degree ), position.latitude( degree ) );
+    QVector<const Marble::GeoDataPlacemark*> const placemarks = m_marbleWidget->whichFeatureAt( point );
+    if ( !placemarks.isEmpty() ) {
+        if ( placemarks.size() == 1 ) {
+            Placemark* placemark = new Placemark;
+            placemark->setGeoDataPlacemark( *placemarks.first() );
+            emit placemarkSelected( placemark );
+        }
+    } else {
+        emit mouseClickGeoPosition( position.longitude( degree ),
+                                    position.latitude( degree ) );
+    }
 }
 
 Routing* MarbleWidget::routing()

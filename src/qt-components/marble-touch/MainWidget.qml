@@ -9,6 +9,7 @@
 
 import Qt 4.7
 import org.kde.edu.marble 0.11
+import org.kde.edu.marble.qtcomponents 0.12
 import com.nokia.meego 1.0
 
 /*
@@ -269,6 +270,14 @@ Item {
             anchors.fill: parent
             onClicked: centerOn( map.tracking.lastKnownPosition.longitude, map.tracking.lastKnownPosition.latitude )
         }
+    }
+
+    PlacemarkEditor {
+        id: placemarkEditor
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.margins: 10
+        width: Math.min(screen.width, 480) - 20
     }
 
     Rectangle {

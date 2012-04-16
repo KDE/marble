@@ -27,6 +27,7 @@
 #include "MapThemeModel.h"
 #include "NewstuffModel.h"
 #include "OfflineDataModel.h"
+#include "Placemark.h"
 #include "routing/SpeakersModel.h"
 #include "routing/VoiceNavigationModel.h"
 
@@ -39,6 +40,7 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
 
     //@uri org.kde.edu.marble
     qmlRegisterType<Coordinate>( uri, 0, 11, "Coordinate" );
+    qmlRegisterType<Placemark>( uri, 0, 11, "Placemark" );
     qmlRegisterType<PositionSource>( uri, 0, 11, "PositionSource" );
     qmlRegisterType<Bookmarks>( uri, 0, 11, "Bookmarks" );
     qmlRegisterType<Tracking>( uri, 0, 11, "Tracking" );
