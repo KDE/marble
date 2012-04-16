@@ -220,7 +220,6 @@ void LayerManager::syncViewParamsAndPlugins( GeoSceneDocument *mapTheme )
 
     }
 
-    disconnect( mapTheme->settings(), 0, this, 0 );
     connect( mapTheme->settings(), SIGNAL( valueChanged( QString, bool ) ),
              this,                 SLOT( syncActionWithProperty( QString, bool ) ) );
 }
