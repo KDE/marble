@@ -16,14 +16,8 @@
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataDocument.h"
-#include "GeoDataTypes.h"
-#include "GeoDataData.h"
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataLineString.h"
-#include "GeoDataLinearRing.h"
-#include "GeoDataIconStyle.h"
-#include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "routing/AlternativeRoutesModel.h"
@@ -31,29 +25,6 @@
 
 namespace Marble
 {
-
-class FileReaderPositionProviderPluginPrivate
-{
-public:
-    FileReaderPositionProviderPluginPrivate();
-    ~FileReaderPositionProviderPluginPrivate();
-
-    int   m_currentIndex;
-    PositionProviderStatus m_status;
-    GeoDataLineString m_lineString;
-};
-
-FileReaderPositionProviderPluginPrivate::FileReaderPositionProviderPluginPrivate() :
-    m_currentIndex( -2 ),
-    m_status( PositionProviderStatusUnavailable )
-{
-    // nothing to do
-}
-
-FileReaderPositionProviderPluginPrivate::~FileReaderPositionProviderPluginPrivate()
-{
-    m_lineString.clear();
-}
 
 QString FileReaderPositionProviderPlugin::name() const
 {
@@ -105,12 +76,12 @@ PositionProviderPlugin* FileReaderPositionProviderPlugin::newInstance() const
 
 PositionProviderStatus FileReaderPositionProviderPlugin::status() const
 {
-    return d->m_status;
+    return m_status;
 }
 
 GeoDataCoordinates FileReaderPositionProviderPlugin::position() const
 {
-    return d->m_lineString.at( d->m_currentIndex );
+    return m_lineString.at( m_currentIndex );
 }
 
 GeoDataAccuracy FileReaderPositionProviderPlugin::accuracy() const
@@ -126,21 +97,21 @@ GeoDataAccuracy FileReaderPositionProviderPlugin::accuracy() const
 }
 
 FileReaderPositionProviderPlugin::FileReaderPositionProviderPlugin() :
-    d( new FileReaderPositionProviderPluginPrivate )
+    m_currentIndex( -2 ),
+    m_status( PositionProviderStatusUnavailable )
 {
     // nothing to do
 }
 
 FileReaderPositionProviderPlugin::~FileReaderPositionProviderPlugin()
 {
-    delete d;
 }
 
 void FileReaderPositionProviderPlugin::initialize()
 {
-    d->m_currentIndex = -1;
+    m_currentIndex = -1;
 
-    d->m_lineString.clear();
+    m_lineString.clear();
 
     GeoDataDocument* document = const_cast<MarbleModel *>( marbleModel() )->routingManager()->alternativeRoutesModel()->currentRoute();
     if ( document && document->size() > 0 ) {
@@ -148,21 +119,21 @@ void FileReaderPositionProviderPlugin::initialize()
             GeoDataGeometry* geometry = placemark->geometry();
             GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
             if ( lineString ) {
-                d->m_lineString << *lineString;
+                m_lineString << *lineString;
             }
         }
     }
 
-    d->m_status = d->m_lineString.isEmpty() ? PositionProviderStatusUnavailable : PositionProviderStatusAcquiring;
+    m_status = m_lineString.isEmpty() ? PositionProviderStatusUnavailable : PositionProviderStatusAcquiring;
 
-    if ( !d->m_lineString.isEmpty() ) {
+    if ( !m_lineString.isEmpty() ) {
         QTimer::singleShot( 1000, this, SLOT( update() ) );
     }
 }
 
 bool FileReaderPositionProviderPlugin::isInitialized() const
 {
-    return ( d->m_currentIndex > -2 );
+    return ( m_currentIndex > -2 );
 }
 
 qreal FileReaderPositionProviderPlugin::speed() const
@@ -184,11 +155,11 @@ QDateTime FileReaderPositionProviderPlugin::timestamp() const
 
 void FileReaderPositionProviderPlugin::update()
 {
-    ++d->m_currentIndex;
+    ++m_currentIndex;
 
-    if ( d->m_currentIndex >= 0 && d->m_currentIndex < d->m_lineString.size() ) {
-        if ( d->m_status != PositionProviderStatusAvailable ) {
-            d->m_status = PositionProviderStatusAvailable;
+    if ( m_currentIndex >= 0 && m_currentIndex < m_lineString.size() ) {
+        if ( m_status != PositionProviderStatusAvailable ) {
+            m_status = PositionProviderStatusAvailable;
             emit statusChanged( PositionProviderStatusAvailable );
         }
 
@@ -196,9 +167,9 @@ void FileReaderPositionProviderPlugin::update()
     }
     else {
         // Repeat from start
-        d->m_currentIndex = -1;
-        if ( d->m_status != PositionProviderStatusUnavailable ) {
-            d->m_status = PositionProviderStatusUnavailable;
+        m_currentIndex = -1;
+        if ( m_status != PositionProviderStatusUnavailable ) {
+            m_status = PositionProviderStatusUnavailable;
             emit statusChanged( PositionProviderStatusUnavailable );
         }
     }

@@ -7,19 +7,17 @@
 //
 // Copyright 2011      Konrad Enzensberger <e.konrad@mpegcode.com>
 // Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_FILEREADERPOSITIONPROVIDERPLUGIN_H
 #define MARBLE_FILEREADERPOSITIONPROVIDERPLUGIN_H
 
 #include "PositionProviderPlugin.h"
-
-class QTimer;
+#include "GeoDataLineString.h"
 
 namespace Marble
 {
-
-class FileReaderPositionProviderPluginPrivate;
 
 class FileReaderPositionProviderPlugin: public PositionProviderPlugin
 {
@@ -58,7 +56,9 @@ private Q_SLOTS:
     void update();
 
 private:
-    FileReaderPositionProviderPluginPrivate* const d;
+    int m_currentIndex;
+    PositionProviderStatus m_status;
+    GeoDataLineString m_lineString;
 };
 
 }
