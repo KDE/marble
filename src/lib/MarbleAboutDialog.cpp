@@ -204,19 +204,19 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
         dataLoaded = true;
         QTextBrowser *const browser = uiWidget.m_pMarbleDataBrowser;
         browser->setHtml( QObject::tr("<b>Maps</b>")+
-        QObject::QObject::tr("<p><i>Blue Marble Next Generation (500 m / pixel)</i><br />"
+        QObject::tr("<p><i>Blue Marble Next Generation (500 m / pixel)</i><br />"
            "NASA Goddard Space Flight Center Earth Observatory "
            "<a href=\"http://earthobservatory.nasa.gov/Newsroom/BlueMarble/\">"
            "http://earthobservatory.nasa.gov/Newsroom/BlueMarble/</a></p>")+
-        QObject::QObject::tr("<p><i>Earth's City Lights</i><br />"
+        QObject::tr("<p><i>Earth's City Lights</i><br />"
            "Data courtesy Marc Imhoff of NASA GSFC and Christopher Elvidge of NOAA NGDC. "
            "Image by Craig Mayhew and Robert Simmon, NASA GSFC.</p>")+
-        QObject::QObject::tr("<p><i>Shuttle Radar Topography Mission (SRTM30, 1 km / pixel )</i><br />"
+        QObject::tr("<p><i>Shuttle Radar Topography Mission (SRTM30, 1 km / pixel )</i><br />"
            "NASA Jet Propulsion Laboratory <a href=\"http://www2.jpl.nasa.gov/srtm/\">"
            "http://www2.jpl.nasa.gov/srtm/</a></p>")+
-        QObject::QObject::tr("<p><i>Micro World Data Bank in Polygons (\"MWDB-POLY / MWDBII\")</i><br />"
+        QObject::tr("<p><i>Micro World Data Bank in Polygons (\"MWDB-POLY / MWDBII\")</i><br />"
            "CIA ; Global Associates, Ltd.; Fred Pospeschil and Antonio Rivera</p>")+
-        QObject::QObject::tr("<p><i>Temperature and Precipitation Maps (July and December)</i><br />"
+        QObject::tr("<p><i>Temperature and Precipitation Maps (July and December)</i><br />"
            "A combination of two datasets:"
            "<ul>"
            "<li>Legates, D.R. and Willmott, C.J. 1989. Average Monthly Surface Air Temperature and "
@@ -228,54 +228,54 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
            "data set of surface climate over global land areas. Climate Research 21."
            "<a href=\"http://www.cru.uea.ac.uk/cru/data/hrg\">"
            "http://www.cru.uea.ac.uk/cru/data/hrg</a></li></ul></p>")+
-        QObject::QObject::tr("<b>Street Map</b>")+
-        QObject::QObject::tr("<p><i>OpenStreetMap</i><br />"
+        QObject::tr("<b>Street Map</b>")+
+        QObject::tr("<p><i>OpenStreetMap</i><br />"
            "The street maps used in Marble via download are provided by the <a href=\""
            "http://www.openstreetmap.org\">OpenStreetMap</a> Project (\"OSM\"). "
            "OSM is an open community which creates free editable maps.<br />"
            "<i>License</i>: OpenStreetMap data can be used freely under the terms of the "
            "<a href=\"http://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">"
            "Creative Commons Attribution-ShareAlike 2.0 license</a>.</p>")+
-        QObject::QObject::tr( "<p><i>Icons</i><br />"
+        QObject::tr( "<p><i>Icons</i><br />"
             "Some icons are taken from <a href=\"http://www.sjjb.co.uk/mapicons\">SJJB Management</a> and <a href=\"http://http://thenounproject.com\">NounProject</a>."
             "These icons can be used freely under the terms of the "
             "<a href=\"http://creativecommons.org/publicdomain/zero/1.0/\">CC0 1.0 Universal</a> license.</p>") +
-        QObject::QObject::tr("<p><i>OpenRouteService</i><br />"
+        QObject::tr("<p><i>OpenRouteService</i><br />"
            "Some of the routes used in Marble via download are provided by the <a href=\""
            "http://www.openrouteservice.org\">OpenRouteService</a> Project (\"ORS\"). <br />"
            "<i>License</i>: OpenRouteService data can be used freely under the terms of the "
            "<a href=\"http://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">"
            "Creative Commons Attribution-ShareAlike 2.0 license</a>.</p>")+
-        QObject::QObject::tr("<p><i>Open Source Routing Machine</i><br />"
+        QObject::tr("<p><i>Open Source Routing Machine</i><br />"
            "Some of the routes used in Marble via download are provided by the <a href=\""
            "http://project-osrm.org\">Open Source Routing Machine</a> Project (\"OSRM\"). <br />"
            "<i>License</i>: Open Source Routing Machine data can be used freely under the terms of the "
            "<a href=\"http://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">"
            "Creative Commons Attribution-ShareAlike 2.0 license</a>.</p>")+
-        QObject::QObject::tr("<p><i>MapQuest</i><br />"
+        QObject::tr("<p><i>MapQuest</i><br />"
            "Some of the routes used in Marble via download are provided by <a href=\""
            "http://www.mapquest.com/\">MapQuest</a> and their Open Data Map APIs and Web Services.<br />"
            "Directions courtesy of MapQuest working on OpenStreetMap data that can be used freely under the terms of the "
            "<a href=\"http://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">"
            "Creative Commons Attribution-ShareAlike 2.0 license</a>. Usage of the MapQuest routing "
            "service is subject to the <a href=\"http://info.mapquest.com/terms-of-use/\">MapQuest terms of use</a>.</p>")+
-        QObject::QObject::tr("<b>Cities and Locations</b>")+
-        QObject::QObject::tr("<p><i>World Gazetteer</i><br />Stefan Helders "
+        QObject::tr("<b>Cities and Locations</b>")+
+        QObject::tr("<p><i>World Gazetteer</i><br />Stefan Helders "
            "<a href=\"http://www.world-gazetteer.com\">http://www.world-gazetteer.com</a></p>")+
-        QObject::QObject::tr("<p><i>Geonames.org</i><br />"
+        QObject::tr("<p><i>Geonames.org</i><br />"
            "<a href=\"http://www.geonames.org/\">http://www.geonames.org/</a>"
            "<i>License</i>: Geonames.org data can be used freely under the terms of the "
            "<a href=\"http://creativecommons.org/licenses/by/3.0/\">Creative Commons Attribution 3.0 license</a>.</p>")+
-        QObject::QObject::tr("<p><i>Czech Statistical Office</i><br />Public database "
+        QObject::tr("<p><i>Czech Statistical Office</i><br />Public database "
            "<a href=\"http://www.czso.cz/eng/redakce.nsf/i/home\">http://www.czso.cz</a></p>")+
-        QObject::QObject::tr("<b>Flags</b>")+
-        QObject::QObject::tr("<p><i>Flags of the World</i><br />The flags were taken from Wikipedia "
+        QObject::tr("<b>Flags</b>")+
+        QObject::tr("<p><i>Flags of the World</i><br />The flags were taken from Wikipedia "
            "(<a href=\"http://www.wikipedia.org\">http://www.wikipedia.org</a>) "
            "which in turn took a subset from <a href=\"http://www.openclipart.org\">"
            "http://www.openclipart.org</a> and reworked them. "
            "All flags are under the public domain (see comments inside the svg files).</p>")+
-        QObject::QObject::tr("<b>Stars</b>")+
-        QObject::QObject::tr("<p><i>The Bright Star Catalogue</i><br />5th Revised Ed. (Preliminary Version) " // krazy:exclude=spelling
+        QObject::tr("<b>Stars</b>")+
+        QObject::tr("<p><i>The Bright Star Catalogue</i><br />5th Revised Ed. (Preliminary Version) " // krazy:exclude=spelling
            "Hoffleit D., Warren Jr W.H., Astronomical Data Center, NSSDC/ADC (1991)"
            "<a href=\"http://adc.gsfc.nasa.gov/adc-cgi/cat.pl?/catalogs/5/5050\"> "
            "http://adc.gsfc.nasa.gov</a></p>") );
