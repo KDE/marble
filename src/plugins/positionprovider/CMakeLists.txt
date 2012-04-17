@@ -18,7 +18,7 @@ IF(QTLOCATION_FOUND)
      ADD_SUBDIRECTORY( qtmobility )
 ENDIF(QTLOCATION_FOUND)
 
-ADD_SUBDIRECTORY( filereader )
+ADD_SUBDIRECTORY( routesimulation )
 ADD_SUBDIRECTORY( placemark )
 
 # experimental implementation

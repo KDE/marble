@@ -10,8 +10,8 @@
 // Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#ifndef MARBLE_FILEREADERPOSITIONPROVIDERPLUGIN_H
-#define MARBLE_FILEREADERPOSITIONPROVIDERPLUGIN_H
+#ifndef MARBLE_ROUTESIMULATIONPOSITIONPROVIDERPLUGIN_H
+#define MARBLE_ROUTESIMULATIONPOSITIONPROVIDERPLUGIN_H
 
 #include "PositionProviderPlugin.h"
 #include "GeoDataLineString.h"
@@ -19,14 +19,14 @@
 namespace Marble
 {
 
-class FileReaderPositionProviderPlugin: public PositionProviderPlugin
+class RouteSimulationPositionProviderPlugin: public PositionProviderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
 public:
-    FileReaderPositionProviderPlugin();
-    virtual ~FileReaderPositionProviderPlugin();
+    RouteSimulationPositionProviderPlugin();
+    virtual ~RouteSimulationPositionProviderPlugin();
 
     // Implementing PluginInterface
     virtual QString name() const;
@@ -63,4 +63,4 @@ private:
 
 }
 
-#endif // MARBLE_FILEREADERPOSITIONPROVIDERPLUGIN_H
+#endif // MARBLE_ROUTESIMULATIONPOSITIONPROVIDERPLUGIN_H

@@ -10,7 +10,7 @@
 // Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include "FileReaderPositionProviderPlugin.h"
+#include "RouteSimulationPositionProviderPlugin.h"
 
 #include <QtCore/QTimer>
 
@@ -26,37 +26,37 @@
 namespace Marble
 {
 
-QString FileReaderPositionProviderPlugin::name() const
+QString RouteSimulationPositionProviderPlugin::name() const
 {
     return tr( "Current Route Position Provider Plugin" );
 }
 
-QString FileReaderPositionProviderPlugin::nameId() const
+QString RouteSimulationPositionProviderPlugin::nameId() const
 {
-    return "FileReaderPositionProviderPlugin";
+    return "RouteSimulationPositionProviderPlugin";
 }
 
-QString FileReaderPositionProviderPlugin::guiString() const
+QString RouteSimulationPositionProviderPlugin::guiString() const
 {
     return tr( "Current Route" );
 }
 
-QString FileReaderPositionProviderPlugin::version() const
+QString RouteSimulationPositionProviderPlugin::version() const
 {
     return "1.1";
 }
 
-QString FileReaderPositionProviderPlugin::description() const
+QString RouteSimulationPositionProviderPlugin::description() const
 {
     return tr( "Simulates travelling along the current route." );
 }
 
-QString FileReaderPositionProviderPlugin::copyrightYears() const
+QString RouteSimulationPositionProviderPlugin::copyrightYears() const
 {
     return "2011, 2012";
 }
 
-QList<PluginAuthor> FileReaderPositionProviderPlugin::pluginAuthors() const
+QList<PluginAuthor> RouteSimulationPositionProviderPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Konrad Enzensberger", "e.konrad@mpegcode.com" )
@@ -64,27 +64,27 @@ QList<PluginAuthor> FileReaderPositionProviderPlugin::pluginAuthors() const
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 
-QIcon FileReaderPositionProviderPlugin::icon() const
+QIcon RouteSimulationPositionProviderPlugin::icon() const
 {
     return QIcon();
 }
 
-PositionProviderPlugin* FileReaderPositionProviderPlugin::newInstance() const
+PositionProviderPlugin* RouteSimulationPositionProviderPlugin::newInstance() const
 {
-    return new FileReaderPositionProviderPlugin;
+    return new RouteSimulationPositionProviderPlugin;
 }
 
-PositionProviderStatus FileReaderPositionProviderPlugin::status() const
+PositionProviderStatus RouteSimulationPositionProviderPlugin::status() const
 {
     return m_status;
 }
 
-GeoDataCoordinates FileReaderPositionProviderPlugin::position() const
+GeoDataCoordinates RouteSimulationPositionProviderPlugin::position() const
 {
     return m_lineString.at( m_currentIndex );
 }
 
-GeoDataAccuracy FileReaderPositionProviderPlugin::accuracy() const
+GeoDataAccuracy RouteSimulationPositionProviderPlugin::accuracy() const
 {
     GeoDataAccuracy result;
 
@@ -96,18 +96,18 @@ GeoDataAccuracy FileReaderPositionProviderPlugin::accuracy() const
     return result;
 }
 
-FileReaderPositionProviderPlugin::FileReaderPositionProviderPlugin() :
+RouteSimulationPositionProviderPlugin::RouteSimulationPositionProviderPlugin() :
     m_currentIndex( -2 ),
     m_status( PositionProviderStatusUnavailable )
 {
     // nothing to do
 }
 
-FileReaderPositionProviderPlugin::~FileReaderPositionProviderPlugin()
+RouteSimulationPositionProviderPlugin::~RouteSimulationPositionProviderPlugin()
 {
 }
 
-void FileReaderPositionProviderPlugin::initialize()
+void RouteSimulationPositionProviderPlugin::initialize()
 {
     m_currentIndex = -1;
 
@@ -131,29 +131,29 @@ void FileReaderPositionProviderPlugin::initialize()
     }
 }
 
-bool FileReaderPositionProviderPlugin::isInitialized() const
+bool RouteSimulationPositionProviderPlugin::isInitialized() const
 {
     return ( m_currentIndex > -2 );
 }
 
-qreal FileReaderPositionProviderPlugin::speed() const
+qreal RouteSimulationPositionProviderPlugin::speed() const
 {
     /** @todo: calculate speed */
     return 0.0;
 }
 
-qreal FileReaderPositionProviderPlugin::direction() const
+qreal RouteSimulationPositionProviderPlugin::direction() const
 {
     /** @todo: calculate direction */
     return 0.0;
 }
 
-QDateTime FileReaderPositionProviderPlugin::timestamp() const
+QDateTime RouteSimulationPositionProviderPlugin::timestamp() const
 {
     return QDateTime::currentDateTime();
 }
 
-void FileReaderPositionProviderPlugin::update()
+void RouteSimulationPositionProviderPlugin::update()
 {
     ++m_currentIndex;
 
@@ -179,6 +179,6 @@ void FileReaderPositionProviderPlugin::update()
 
 } // namespace Marble
 
-Q_EXPORT_PLUGIN2( FileReaderPositionProviderPlugin, Marble::FileReaderPositionProviderPlugin )
+Q_EXPORT_PLUGIN2( RouteSimulationPositionProviderPlugin, Marble::RouteSimulationPositionProviderPlugin )
 
-#include "FileReaderPositionProviderPlugin.moc"
+#include "RouteSimulationPositionProviderPlugin.moc"
