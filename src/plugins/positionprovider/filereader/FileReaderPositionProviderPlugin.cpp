@@ -44,7 +44,7 @@ public:
 };
 
 FileReaderPositionProviderPluginPrivate::FileReaderPositionProviderPluginPrivate() :
-    m_currentIndex( -1 ),
+    m_currentIndex( -2 ),
     m_status( PositionProviderStatusUnavailable )
 {
     // nothing to do
@@ -138,7 +138,7 @@ FileReaderPositionProviderPlugin::~FileReaderPositionProviderPlugin()
 
 void FileReaderPositionProviderPlugin::initialize()
 {
-    d->m_currentIndex = 0;
+    d->m_currentIndex = -1;
 
     d->m_lineString.clear();
 
@@ -155,12 +155,14 @@ void FileReaderPositionProviderPlugin::initialize()
 
     d->m_status = d->m_lineString.isEmpty() ? PositionProviderStatusUnavailable : PositionProviderStatusAcquiring;
 
-    QTimer::singleShot( 1000, this, SLOT( update() ) );
+    if ( !d->m_lineString.isEmpty() ) {
+        QTimer::singleShot( 1000, this, SLOT( update() ) );
+    }
 }
 
 bool FileReaderPositionProviderPlugin::isInitialized() const
 {
-    return ( d->m_currentIndex >= 0 );
+    return ( d->m_currentIndex > -2 );
 }
 
 qreal FileReaderPositionProviderPlugin::speed() const
@@ -182,30 +184,26 @@ QDateTime FileReaderPositionProviderPlugin::timestamp() const
 
 void FileReaderPositionProviderPlugin::update()
 {
-    PositionProviderStatus newStatus = PositionProviderStatusAvailable;
+    ++d->m_currentIndex;
 
     if ( d->m_currentIndex >= 0 && d->m_currentIndex < d->m_lineString.size() ) {
-        if ( newStatus != d->m_status ) {
-            d->m_status = newStatus;
-            emit statusChanged( newStatus );
+        if ( d->m_status != PositionProviderStatusAvailable ) {
+            d->m_status = PositionProviderStatusAvailable;
+            emit statusChanged( PositionProviderStatusAvailable );
         }
 
-        if ( newStatus == PositionProviderStatusAvailable ) {
-            emit positionChanged( position(), accuracy() );
-        }
-
-        ++d->m_currentIndex;
-
-        if( d->m_currentIndex < d->m_lineString.size() ) {
-            QTimer::singleShot( 1000, this, SLOT( update() ) );
-        }
+        emit positionChanged( position(), accuracy() );
     }
-
-    if ( !d->m_lineString.isEmpty() && d->m_currentIndex >= d->m_lineString.size() ) {
+    else {
         // Repeat from start
-        d->m_currentIndex = 0;
-        update();
+        d->m_currentIndex = -1;
+        if ( d->m_status != PositionProviderStatusUnavailable ) {
+            d->m_status = PositionProviderStatusUnavailable;
+            emit statusChanged( PositionProviderStatusUnavailable );
+        }
     }
+
+    QTimer::singleShot( 1000, this, SLOT( update() ) );
 }
 
 } // namespace Marble
