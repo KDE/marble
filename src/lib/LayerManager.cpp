@@ -23,8 +23,6 @@
 #include "AbstractDataPluginItem.h"
 #include "AbstractFloatItem.h"
 #include "GeoPainter.h"
-#include "GeoSceneDocument.h"
-#include "GeoSceneSettings.h"
 #include "MarbleModel.h"
 #include "PluginManager.h"
 #include "RenderPlugin.h"
@@ -49,8 +47,6 @@ class LayerManagerPrivate
     LayerManagerPrivate();
     ~LayerManagerPrivate();
 
-    GeoSceneDocument *m_mapTheme;
-
     QList<RenderPlugin *> m_renderPlugins;
     QList<AbstractFloatItem *> m_floatItems;
     QList<AbstractDataPlugin *> m_dataPlugins;
@@ -60,8 +56,7 @@ class LayerManagerPrivate
 };
 
 LayerManagerPrivate::LayerManagerPrivate()
-    : m_mapTheme( 0 ),
-      m_renderPlugins(),
+    : m_renderPlugins(),
       m_showBackground( true )
 {
 }
@@ -90,7 +85,7 @@ LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
         connect( renderPlugin->action(), SIGNAL( changed() ),
                  this, SIGNAL( repaintNeeded() ) );
         connect( renderPlugin, SIGNAL( visibilityChanged( QString, bool ) ),
-                 this, SLOT( syncPropertyWithAction( QString, bool ) ) );
+                 this, SIGNAL( visibilityChanged( const QString &, bool ) ) );
 
         // get float items ...
         AbstractFloatItem * const floatItem =
@@ -197,27 +192,6 @@ void LayerManager::setShowBackground( bool show )
     d->m_showBackground = show;
 }
 
-void LayerManager::syncViewParamsAndPlugins( GeoSceneDocument *mapTheme )
-{
-    d->m_mapTheme = mapTheme;
-
-    foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
-        bool propertyAvailable = false;
-        mapTheme->settings()->propertyAvailable( renderPlugin->nameId(), 
-						 propertyAvailable );
-        bool propertyValue = false;
-        mapTheme->settings()->propertyValue( renderPlugin->nameId(), 
-					     propertyValue );
-
-        if ( propertyAvailable ) {
-            renderPlugin->setVisible( propertyValue );
-        }
-    }
-
-    connect( mapTheme->settings(), SIGNAL( valueChanged( QString, bool ) ),
-             this,                 SLOT( setVisible( const QString &, bool ) ) );
-}
-
 void LayerManager::setVisible( const QString &nameId, bool visible )
 {
     foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
@@ -229,22 +203,6 @@ void LayerManager::setVisible( const QString &nameId, bool visible )
 
             return;
         }
-    }
-}
-
-void LayerManager::syncPropertyWithAction( QString nameId, bool checked )
-{
-    bool propertyAvailable = false;
-    d->m_mapTheme->settings()->propertyAvailable( nameId, propertyAvailable );
- 
-    if ( propertyAvailable ) {
-        bool propertyValue = false;
-        d->m_mapTheme->settings()->propertyValue( nameId, propertyValue );
-
-        if ( propertyValue == checked ) {
-            return;
-        }
-        d->m_mapTheme->settings()->setPropertyValue( nameId, checked );
     }
 }
 

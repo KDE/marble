@@ -173,6 +173,8 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
                        parent,        SIGNAL( repaintNeeded( QRegion ) ) );
     QObject::connect ( &m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        parent,        SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
+    QObject::connect ( &m_layerManager, SIGNAL( visibilityChanged( const QString &, bool ) ),
+                       parent,        SLOT( setPropertyValue( const QString &, bool ) ) );
 
     QObject::connect( &m_geometryLayer, SIGNAL( repaintNeeded()),
                       parent, SIGNAL( repaintNeeded() ));
@@ -224,6 +226,8 @@ void MarbleMapPrivate::updateProperty( const QString &name, bool show )
             m_texcolorizer->setShowRelief( show );
         }
     }
+
+    m_layerManager.setVisible( name, show );
 }
 
 // ----------------------------------------------------------------
@@ -909,7 +913,16 @@ void MarbleMapPrivate::updateMapTheme()
     m_placemarkLayout.setDefaultLabelColor( m_model->mapTheme()->map()->labelColor() );
     m_placemarkLayout.requestStyleReset();
 
-    m_layerManager.syncViewParamsAndPlugins( m_model->mapTheme() );
+    foreach( RenderPlugin *renderPlugin, m_layerManager.renderPlugins() ) {
+        bool propertyAvailable = false;
+        m_model->mapTheme()->settings()->propertyAvailable( renderPlugin->nameId(), propertyAvailable );
+        bool propertyValue = false;
+        m_model->mapTheme()->settings()->propertyValue( renderPlugin->nameId(), propertyValue );
+
+        if ( propertyAvailable ) {
+            renderPlugin->setVisible( propertyValue );
+        }
+    }
 
     emit q->themeChanged( m_model->mapTheme()->head()->mapThemeId() );
 }

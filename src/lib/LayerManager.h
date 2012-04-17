@@ -27,7 +27,6 @@ class AbstractDataPlugin;
 class AbstractDataPluginItem;
 class LayerManagerPrivate;
 class GeoPainter;
-class GeoSceneDocument;
 class ViewportParams;
 class RenderPlugin;
 class AbstractFloatItem;
@@ -101,12 +100,12 @@ class LayerManager : public QObject
      */
     void repaintNeeded( const QRegion & dirtyRegion = QRegion() );
 
+    void visibilityChanged( const QString &nameId, bool visible );
+
  public Q_SLOTS:
     void setShowBackground( bool show );
 
-    void syncViewParamsAndPlugins( GeoSceneDocument *mapTheme );
     void setVisible( const QString &nameId, bool visible );
-    void syncPropertyWithAction( QString, bool );
 
  private:
     void renderLayer( GeoPainter *painter, ViewportParams *viewport, const QString& renderPosition  );
