@@ -57,7 +57,7 @@ FileReaderPositionProviderPluginPrivate::~FileReaderPositionProviderPluginPrivat
 
 QString FileReaderPositionProviderPlugin::name() const
 {
-    return tr( "File Reader Position ProviderPlugin" );
+    return tr( "Current Route Position Provider Plugin" );
 }
 
 QString FileReaderPositionProviderPlugin::nameId() const
@@ -67,29 +67,30 @@ QString FileReaderPositionProviderPlugin::nameId() const
 
 QString FileReaderPositionProviderPlugin::guiString() const
 {
-    return tr( "GPS Position Simulation (File Reader)" );
+    return tr( "Current Route" );
 }
 
 QString FileReaderPositionProviderPlugin::version() const
 {
-    return "1.0";
+    return "1.1";
 }
 
 QString FileReaderPositionProviderPlugin::description() const
 {
-    return tr( "Reports the GPS position from a previously calculated route." );
+    return tr( "Simulates travelling along the current route." );
 }
 
 QString FileReaderPositionProviderPlugin::copyrightYears() const
 {
-    return "2011";
+    return "2011, 2012";
 }
 
 QList<PluginAuthor> FileReaderPositionProviderPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Konrad Enzensberger", "e.konrad@mpegcode.com" )
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" )
+            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 
 QIcon FileReaderPositionProviderPlugin::icon() const
