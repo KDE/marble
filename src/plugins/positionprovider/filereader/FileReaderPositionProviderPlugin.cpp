@@ -7,15 +7,14 @@
 //
 // Copyright 2011      Konrad Enzensberger <e.konrad@mpegcode.com>
 // Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "FileReaderPositionProviderPlugin.h"
 
 #include <QtCore/QTimer>
-#include <QtCore/QFile>
 
 #include "GeoDataCoordinates.h"
-#include "GeoDataParser.h"
 #include "GeoDataDocument.h"
 #include "GeoDataTypes.h"
 #include "GeoDataData.h"
@@ -26,6 +25,9 @@
 #include "GeoDataIconStyle.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
+#include "MarbleModel.h"
+#include "routing/AlternativeRoutesModel.h"
+#include "routing/RoutingManager.h"
 
 namespace Marble
 {
@@ -36,16 +38,14 @@ public:
     FileReaderPositionProviderPluginPrivate();
     ~FileReaderPositionProviderPluginPrivate();
 
-    void importKmlFromData();
-    void createSimulationPlacemarks( GeoDataContainer *container );
-
     int   m_currentIndex;
     PositionProviderStatus m_status;
     GeoDataLineString m_lineString;
 };
 
 FileReaderPositionProviderPluginPrivate::FileReaderPositionProviderPluginPrivate() :
-    m_currentIndex( 0 ), m_status( PositionProviderStatusAcquiring )
+    m_currentIndex( -1 ),
+    m_status( PositionProviderStatusUnavailable )
 {
     // nothing to do
 }
@@ -53,70 +53,6 @@ FileReaderPositionProviderPluginPrivate::FileReaderPositionProviderPluginPrivate
 FileReaderPositionProviderPluginPrivate::~FileReaderPositionProviderPluginPrivate()
 {
     m_lineString.clear();
-}
-
-void FileReaderPositionProviderPluginPrivate::importKmlFromData()
-{
-    GeoDataParser parser( GeoData_KML );
-
-    QString filename = MarbleDirs::path( "routing" );
-    filename += "/route.kml";
-    QFile file( filename );
-    if ( !file.exists() ) {
-        mDebug() << "The GPS file reader plugin expects routing/route.kml to exist in the local marble dir.";
-        mDebug() << "Create a route and exit Marble to have it created automatically.";
-        return;
-    }
-
-    // Open file in right mode
-    file.open( QIODevice::ReadOnly );
-
-    if ( !parser.read( &file ) ) {
-        mDebug() << "Could not import kml file. No position updates will happen.";
-        return;
-    }
-
-    GeoDocument* doc = parser.releaseDocument();
-    if ( doc ) {
-        GeoDataDocument* document = dynamic_cast<GeoDataDocument*>( doc );
-        if ( document && document->size() > 0 ) {
-            document->setDocumentRole( UserDocument );
-            document->setFileName( filename );
-            createSimulationPlacemarks( dynamic_cast<GeoDataDocument*>( &document->last() ) );
-        }
-    }
-
-    file.close();
-}
-
-void FileReaderPositionProviderPluginPrivate::createSimulationPlacemarks( GeoDataContainer *container )
-{
-    if ( !container ) {
-        return;
-    }
-
-    m_lineString.clear();
-
-    QVector<GeoDataFolder*> folders = container->folderList();
-    foreach( const GeoDataFolder *folder, folders ) {
-        foreach( const GeoDataPlacemark *placemark, folder->placemarkList() ) {
-            GeoDataGeometry* geometry = placemark->geometry();
-            GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
-            if ( lineString ) {
-                m_lineString = *lineString;
-                return;
-            }
-        }
-    }
-
-    foreach( const GeoDataPlacemark *placemark, container->placemarkList() ) {
-        GeoDataGeometry* geometry = placemark->geometry();
-        GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
-        if ( lineString ) {
-            m_lineString = *lineString;
-            return;
-        }
-    }
 }
 
 QString FileReaderPositionProviderPlugin::name() const
@@ -201,17 +137,29 @@ FileReaderPositionProviderPlugin::~FileReaderPositionProviderPlugin()
 
 void FileReaderPositionProviderPlugin::initialize()
 {
-    d->m_status = PositionProviderStatusAcquiring;
-
     d->m_currentIndex = 0;
-    d->importKmlFromData();
+
+    d->m_lineString.clear();
+
+    GeoDataDocument* document = const_cast<MarbleModel *>( marbleModel() )->routingManager()->alternativeRoutesModel()->currentRoute();
+    if ( document && document->size() > 0 ) {
+        foreach( const GeoDataPlacemark *placemark, document->placemarkList() ) {
+            GeoDataGeometry* geometry = placemark->geometry();
+            GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
+            if ( lineString ) {
+                d->m_lineString << *lineString;
+            }
+        }
+    }
+
+    d->m_status = d->m_lineString.isEmpty() ? PositionProviderStatusUnavailable : PositionProviderStatusAcquiring;
 
     QTimer::singleShot( 1000, this, SLOT( update() ) );
 }
 
 bool FileReaderPositionProviderPlugin::isInitialized() const
 {
-    return ( d->m_lineString.size() > 0 );
+    return ( d->m_currentIndex >= 0 );
 }
 
 qreal FileReaderPositionProviderPlugin::speed() const
