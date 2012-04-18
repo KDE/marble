@@ -528,16 +528,14 @@ void MarblePart::readSettings()
     if ( !positionProvider.isEmpty() ) {
         PositionTracking* tracking = m_controlView->marbleModel()->positionTracking();
         const PluginManager* pluginManager = m_controlView->marbleModel()->pluginManager();
-        QList<PositionProviderPlugin*> plugins = pluginManager->createPositionProviderPlugins();
-        foreach( PositionProviderPlugin* plugin, plugins ) {
+        foreach( const PositionProviderPlugin* plugin, pluginManager->positionProviderPlugins() ) {
             if ( plugin->nameId() == positionProvider ) {
-                plugins.removeOne( plugin );
-                plugin->setMarbleModel( m_controlView->marbleModel() );
-                tracking->setPositionProviderPlugin( plugin );
+                PositionProviderPlugin* instance = plugin->newInstance();
+                instance->setMarbleModel( m_controlView->marbleModel() );
+                tracking->setPositionProviderPlugin( instance );
                 break;
             }
         }
-        qDeleteAll( plugins );
     }
 
     readStatusBarSettings();

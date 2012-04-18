@@ -66,17 +66,11 @@ PlacemarkPositionProviderPluginTest::PlacemarkPositionProviderPluginTest() :
 
 PositionProviderPlugin *PlacemarkPositionProviderPluginTest::createUninitializedPlugin( const PluginManager *pluginManager )
 {
-    QList<PositionProviderPlugin *> plugins = pluginManager->createPositionProviderPlugins();
-
-    while ( !plugins.isEmpty() ) {
-        PositionProviderPlugin *const plugin = plugins.takeFirst();
-
+    foreach ( const PositionProviderPlugin *plugin, pluginManager->positionProviderPlugins() ) {
         if ( plugin->nameId() == "Placemark" ) {
-            qDeleteAll( plugins );
-            return plugin;
+            PositionProviderPlugin *instance = plugin->newInstance();
+            return instance;
         }
-
-        delete plugin;
     }
 
     return 0;

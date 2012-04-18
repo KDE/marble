@@ -346,11 +346,10 @@ void RoutingPluginPrivate::togglePositionTracking( bool enabled )
     PositionProviderPlugin* plugin = 0;
     if ( enabled ) {
         const PluginManager* pluginManager = m_marbleWidget->model()->pluginManager();
-        QList<PositionProviderPlugin*> plugins = pluginManager->createPositionProviderPlugins();
+        QList<const PositionProviderPlugin*> plugins = pluginManager->positionProviderPlugins();
         if ( plugins.size() > 0 ) {
-            plugin = plugins.takeFirst();
+            plugin = plugins.first()->newInstance();
         }
-        qDeleteAll( plugins );
     }
     m_parent->marbleModel()->positionTracking()->setPositionProviderPlugin( plugin );
 }

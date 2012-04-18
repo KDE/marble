@@ -89,8 +89,7 @@ void PositionSource::start()
     }
 
     const Marble::PluginManager* pluginManager = m_marbleModel->pluginManager();
-    QList<Marble::PositionProviderPlugin*> plugins = pluginManager->createPositionProviderPlugins();
-    foreach( const Marble::PositionProviderPlugin *plugin, plugins ) {
+    foreach( const Marble::PositionProviderPlugin *plugin, pluginManager->positionProviderPlugins() ) {
         if ( m_source.isEmpty() || plugin->nameId() == m_source ) {
             Marble::PositionProviderPlugin* instance = plugin->newInstance();
             instance->setMarbleModel( m_marbleModel );

@@ -90,10 +90,10 @@ QList<NetworkPlugin *> PluginManager::createNetworkPlugins() const
     return createPlugins( d->m_networkPluginTemplates );
 }
 
-QList<PositionProviderPlugin *> PluginManager::createPositionProviderPlugins() const
+QList<const PositionProviderPlugin *> PluginManager::positionProviderPlugins() const
 {
     d->loadPlugins();
-    return createPlugins( d->m_positionProviderPluginTemplates );
+    return d->m_positionProviderPluginTemplates;
 }
 
 QList<RunnerPlugin *> PluginManager::runnerPlugins() const

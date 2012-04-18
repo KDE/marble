@@ -34,7 +34,7 @@ void PluginManagerTest::loadPlugins()
     PluginManager pm;
     const int renderPlugins = pm.renderPlugins().size();
     const int networkPlugins = pm.createNetworkPlugins().size();
-    const int positionPlugins = pm.createPositionProviderPlugins().size();
+    const int positionPlugins = pm.positionProviderPlugins().size();
     const int runnerPlugins = pm.runnerPlugins().size();
 
     QCOMPARE( renderPlugins + networkPlugins + positionPlugins + runnerPlugins, pluginNumber );

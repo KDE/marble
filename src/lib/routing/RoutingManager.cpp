@@ -403,17 +403,16 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
     }
 
     PositionTracking* tracking = d->m_marbleModel->positionTracking();
-    PositionProviderPlugin* plugin = tracking->positionProviderPlugin();
-    if ( !plugin && enabled ) {
+    PositionProviderPlugin* positionProvider = tracking->positionProviderPlugin();
+    if ( !positionProvider && enabled ) {
         const PluginManager* pluginManager = d->m_marbleModel->pluginManager();
-        QList<PositionProviderPlugin*> plugins = pluginManager->createPositionProviderPlugins();
+        QList<const PositionProviderPlugin*> plugins = pluginManager->positionProviderPlugins();
         if ( plugins.size() > 0 ) {
-            plugin = plugins.takeFirst();
+            positionProvider = plugins.first()->newInstance();
         }
-        qDeleteAll( plugins );
-        tracking->setPositionProviderPlugin( plugin );
+        tracking->setPositionProviderPlugin( positionProvider );
         d->m_shutdownPositionTracking = true;
-    } else if ( plugin && !enabled && d->m_shutdownPositionTracking ) {
+    } else if ( positionProvider && !enabled && d->m_shutdownPositionTracking ) {
         d->m_shutdownPositionTracking = false;
         tracking->setPositionProviderPlugin( 0 );
     }

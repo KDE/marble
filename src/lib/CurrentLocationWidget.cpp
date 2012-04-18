@@ -49,7 +49,7 @@ class CurrentLocationWidgetPrivate
     MarbleWidget                  *m_widget;
     AutoNavigation *m_adjustNavigation;
 
-    QList<PositionProviderPlugin*> m_positionProviderPlugins;
+    QList<const PositionProviderPlugin*> m_positionProviderPlugins;
     GeoDataCoordinates             m_currentPosition;
 
     QString m_lastOpenPath;
@@ -109,7 +109,7 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
     d->m_widget->model()->routingManager()->setAutoNavigation( d->m_adjustNavigation );
 
     const PluginManager* pluginManager = d->m_widget->model()->pluginManager();
-    d->m_positionProviderPlugins = pluginManager->createPositionProviderPlugins();
+    d->m_positionProviderPlugins = pluginManager->positionProviderPlugins();
     foreach( const PositionProviderPlugin *plugin, d->m_positionProviderPlugins ) {
         d->m_currentLocationUi.positionTrackingComboBox->addItem( plugin->guiString() );
     }
@@ -293,7 +293,7 @@ void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provid
     bool hasProvider = ( provider != QObject::tr("Disabled") );
 
     if ( hasProvider ) {
-        foreach( PositionProviderPlugin* plugin, m_positionProviderPlugins ) {
+        foreach( const PositionProviderPlugin* plugin, m_positionProviderPlugins ) {
             if ( plugin->guiString() == provider ) {
                 m_currentLocationUi.locationLabel->setEnabled( true );
                 PositionProviderPlugin* instance = plugin->newInstance();
