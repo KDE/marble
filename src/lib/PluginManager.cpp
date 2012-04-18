@@ -64,30 +64,16 @@ PluginManager::~PluginManager()
     delete d;
 }
 
-template<class T>
-QList<T*> createPlugins( const QList<const T*> &factories )
-{
-    QList<T*> result;
-
-    foreach ( const T *factory, factories ) {
-        T *instance = factory->newInstance();
-        Q_ASSERT( instance && "Plugin returned null when requesting a new instance." );
-        result.append( instance );
-    }
-
-    return result;
-}
-
 QList<const RenderPlugin *> PluginManager::renderPlugins() const
 {
     d->loadPlugins();
     return d->m_renderPluginTemplates;
 }
 
-QList<NetworkPlugin *> PluginManager::createNetworkPlugins() const
+QList<const NetworkPlugin *> PluginManager::networkPlugins() const
 {
     d->loadPlugins();
-    return createPlugins( d->m_networkPluginTemplates );
+    return d->m_networkPluginTemplates;
 }
 
 QList<const PositionProviderPlugin *> PluginManager::positionProviderPlugins() const

@@ -86,12 +86,11 @@ HttpJob *HttpDownloadManager::Private::createJob( const QUrl& sourceUrl,
                                                   const QString &id )
 {
     if ( !m_networkPlugin ) {
-        QList<NetworkPlugin *> networkPlugins = m_pluginManager->createNetworkPlugins();
+        QList<const NetworkPlugin *> networkPlugins = m_pluginManager->networkPlugins();
         if ( !networkPlugins.isEmpty() ) {
             // FIXME: not just take the first plugin, but use some configuration setting
-            // take the first plugin and delete the rest
-            m_networkPlugin = networkPlugins.takeFirst();
-            qDeleteAll( networkPlugins );
+            // take the first plugin
+            m_networkPlugin = networkPlugins.first()->newInstance();
         }
         else {
             m_downloadEnabled = false;

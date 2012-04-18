@@ -56,10 +56,13 @@ class MARBLE_EXPORT PluginManager
     QList<const RenderPlugin *> renderPlugins() const;
 
     /**
-     * This methods creates a new set of plugins and transfers ownership
-     * of them to the client.
+     * @brief Returns all available NetworkPlugins.
+     *
+     * Ownership of the items remains in PluginManager.
+     * In order to use the NetworkPlugins, first create new instances using
+     * NetworkPlugin::newInstance().
      */
-    QList<NetworkPlugin *> createNetworkPlugins() const;
+    QList<const NetworkPlugin *> networkPlugins() const;
 
     /**
      * @brief Returns all available PositionProviderPlugins.
