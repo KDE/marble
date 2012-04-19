@@ -66,15 +66,6 @@ QIcon QNamNetworkPlugin::icon() const
     return QIcon();
 }
 
-void QNamNetworkPlugin::initialize()
-{
-}
-
-bool QNamNetworkPlugin::isInitialized() const
-{
-    return true;
-}
-
 HttpJob * QNamNetworkPlugin::createJob( const QUrl & sourceUrl,
                                         const QString & destination,
                                         const QString & id )

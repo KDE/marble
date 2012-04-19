@@ -34,8 +34,6 @@ class QNamNetworkPlugin: public NetworkPlugin
     virtual QString copyrightYears() const;
     virtual QList<PluginAuthor> pluginAuthors() const;
     virtual QIcon icon() const;
-    virtual void initialize();
-    virtual bool isInitialized() const;
 
     // NetworkPluginInterface abstract methods
     virtual HttpJob * createJob( const QUrl &source, const QString &destination,
