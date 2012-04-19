@@ -82,6 +82,7 @@ private:
     qreal m_minMagnitude;
     QDateTime m_startDate;
     QDateTime m_endDate;
+    int m_maximumNumberOfItems;
 
 private slots:
     void validateDateRange();

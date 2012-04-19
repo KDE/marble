@@ -31,7 +31,8 @@ EarthquakePlugin::EarthquakePlugin( const MarbleModel *marbleModel )
       m_configDialog( 0 ),
       m_minMagnitude( 0.0 ),
       m_startDate( QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) ),
-      m_endDate( QDateTime::currentDateTime() )
+      m_endDate( QDateTime::currentDateTime() ),
+      m_maximumNumberOfItems( 100 )
 {
     setEnabled( true ); // Plugin is enabled by default
     setVisible( false ); // Plugin is invisible by default
@@ -101,7 +102,7 @@ QDialog *EarthquakePlugin::configDialog()
         m_configDialog = new QDialog();
         m_ui = new Ui::EarthquakeConfigWidget;
         m_ui->setupUi( m_configDialog );
-        m_ui->m_numResults->setRange( 1, numberOfItems() );
+        m_ui->m_numResults->setRange( 1, m_maximumNumberOfItems );
         readSettings();
         connect( m_ui->m_buttonBox, SIGNAL( accepted() ),
                  SLOT( writeSettings() ) );
@@ -128,6 +129,7 @@ QHash<QString,QVariant> EarthquakePlugin::settings() const
     settings.insert( "minMagnitude", m_minMagnitude );
     settings.insert( "startDate", m_startDate );
     settings.insert( "endDate", m_endDate );
+    settings.insert( "maximumNumberOfItems", m_maximumNumberOfItems );
 
     return settings;
 }
@@ -138,6 +140,7 @@ void EarthquakePlugin::setSettings( const QHash<QString,QVariant> &settings )
     m_minMagnitude = settings.value( "minMagnitude", 0.0 ).toReal();
     m_startDate = settings.value( "startDate", QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) ).toDateTime();
     m_endDate = settings.value( "endDate", QDateTime::currentDateTime() ).toDateTime();
+    m_maximumNumberOfItems = settings.value( "maximumNumberOfItems", m_maximumNumberOfItems ).toInt();
 
     emit settingsChanged( nameId() );
 }
