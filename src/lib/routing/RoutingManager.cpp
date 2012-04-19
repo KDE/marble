@@ -280,11 +280,11 @@ void RoutingManager::retrieveRoute()
 
     d->m_alternativeRoutesModel.newRequest( &d->m_routeRequest );
     if ( realSize > 1 ) {
-        emit stateChanged( RoutingManager::Downloading, &d->m_routeRequest );
+        emit stateChanged( RoutingManager::Downloading );
         d->m_runnerManager.retrieveRoute( &d->m_routeRequest );
     } else {
         d->m_routingModel.clear();
-        emit stateChanged( RoutingManager::Retrieved, &d->m_routeRequest );
+        emit stateChanged( RoutingManager::Retrieved );
     }
 }
 
@@ -296,7 +296,7 @@ void RoutingManagerPrivate::addRoute( GeoDataDocument* route )
 
     if ( !m_haveRoute ) {
         m_haveRoute = route != 0;
-        emit q->stateChanged( RoutingManager::Retrieved, &m_routeRequest );
+        emit q->stateChanged( RoutingManager::Retrieved );
     }
 
     emit q->routeRetrieved( route );

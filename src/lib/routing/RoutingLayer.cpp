@@ -95,7 +95,7 @@ public:
 
     QSize m_pixmapSize;
 
-    RouteRequest *m_routeRequest;
+    RouteRequest *const m_routeRequest;
 
     MarbleWidgetPopupMenu *m_contextMenu;
 
@@ -178,7 +178,8 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
         m_targetPixmap( ":/data/bitmaps/routing_pick.png" ), m_dragStopOverRightIndex( -1 ),
         m_pointSelection( false ), m_routingModel( widget->model()->routingManager()->routingModel() ),
         m_placemarkModel( 0 ), m_selectionModel( 0 ), m_routeDirty( false ), m_pixmapSize( 22, 22 ),
-        m_routeRequest( 0 ), m_activeMenuIndex( -1 ), m_alternativeRoutesView( 0 ),
+        m_routeRequest( widget->model()->routingManager()->routeRequest() ),
+        m_activeMenuIndex( -1 ), m_alternativeRoutesView( 0 ),
         m_alternativeRoutesModel( widget->model()->routingManager()->alternativeRoutesModel() ),
         m_viewContext( Still ), m_viewportChanged( true )
 {
@@ -668,8 +669,8 @@ RoutingLayer::RoutingLayer( MarbleWidget *widget, QWidget *parent ) :
         QObject( parent ), d( new RoutingLayerPrivate( this, widget ) )
 {
     widget->installEventFilter( this );
-    connect( widget->model()->routingManager(), SIGNAL( stateChanged( RoutingManager::State, RouteRequest* ) ),
-             this, SLOT( updateRouteState( RoutingManager::State, RouteRequest* ) ) );
+    connect( widget->model()->routingManager(), SIGNAL( stateChanged( RoutingManager::State ) ),
+             this, SLOT( updateRouteState( RoutingManager::State ) ) );
     connect( widget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
             this, SLOT( setViewportChanged() ) );
     connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
@@ -791,11 +792,6 @@ void RoutingLayer::setRouteDirty( bool dirty )
     d->m_marbleWidget->update();
 }
 
-void RoutingLayer::setRouteRequest( RouteRequest *request )
-{
-    d->m_routeRequest = request;
-}
-
 void RoutingLayer::removeViaPoint()
 {
     if ( d->m_activeMenuIndex >= 0 ) {
@@ -832,9 +828,8 @@ void RoutingLayer::exportRoute()
     }
 }
 
-void RoutingLayer::updateRouteState( RoutingManager::State state, RouteRequest *route )
+void RoutingLayer::updateRouteState( RoutingManager::State state )
 {
-    d->m_routeRequest = route;
     setRouteDirty( state == RoutingManager::Downloading );
     setViewportChanged();
 }

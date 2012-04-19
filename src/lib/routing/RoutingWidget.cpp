@@ -198,8 +198,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( retrieveSelectedPoint( GeoDataCoordinates ) ) );
     connect( d->m_routingLayer, SIGNAL( pointSelectionAborted() ),
              this, SLOT( pointSelectionCanceled() ) );
-    connect( d->m_routingManager, SIGNAL( stateChanged( RoutingManager::State, RouteRequest* ) ),
-             this, SLOT( updateRouteState( RoutingManager::State, RouteRequest* ) ) );
+    connect( d->m_routingManager, SIGNAL( stateChanged( RoutingManager::State ) ),
+             this, SLOT( updateRouteState( RoutingManager::State ) ) );
     connect( d->m_routingManager, SIGNAL( routeRetrieved( GeoDataDocument* ) ),
              this, SLOT( indicateRoutingFailure( GeoDataDocument* ) ) );
     connect( d->m_routeRequest, SIGNAL( positionAdded( int ) ),
@@ -422,10 +422,8 @@ void RoutingWidget::removeInputWidget( int index )
     }
 }
 
-void RoutingWidget::updateRouteState( RoutingManager::State state, RouteRequest *route )
+void RoutingWidget::updateRouteState( RoutingManager::State state )
 {
-    Q_UNUSED( route );
-
     if ( state != RoutingManager::Retrieved ) {
         d->m_ui.routeComboBox->setVisible( false );
         d->m_ui.routeComboBox->clear();

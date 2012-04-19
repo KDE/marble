@@ -191,7 +191,7 @@ Q_SIGNALS:
       * Directions and waypoints for the given route are being downloaded or have
       * been retrieved -- newState tells which of both
       */
-    void stateChanged( RoutingManager::State newState, RouteRequest *route );
+    void stateChanged( RoutingManager::State newState );
 
     void routeRetrieved( GeoDataDocument* route );
 

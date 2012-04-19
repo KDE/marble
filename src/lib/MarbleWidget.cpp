@@ -243,7 +243,6 @@ void MarbleWidgetPrivate::construct()
     m_widget->setMouseTracking( true );
 
     m_routingLayer = new RoutingLayer( m_widget, m_widget );
-    m_routingLayer->setRouteRequest( m_model.routingManager()->routeRequest() );
     m_routingLayer->setPlacemarkModel( 0 );
 
     m_widget->connect( m_routingLayer, SIGNAL( routeDirty() ),

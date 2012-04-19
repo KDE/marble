@@ -28,7 +28,6 @@ class MarbleWidget;
 class RoutingModel;
 class MarblePlacemarkModel;
 class RoutingLayerPrivate;
-class RouteRequest;
 class AlternativeRoutesModel;
 
 /**
@@ -94,11 +93,6 @@ public:
     void setRouteDirty( bool dirty );
 
     /**
-      * Change the route request used for painting and dragging route points
-      */
-    void setRouteRequest( RouteRequest *request );
-
-    /**
       * Set the view context to determine whether the map is used interactively
       */
     void setViewContext( ViewContext viewContext );
@@ -141,7 +135,7 @@ private Q_SLOTS:
     /**
       * Paint a dashed route when downloading a new route, a solid one otherwise.
       */
-    void updateRouteState( RoutingManager::State state, RouteRequest *route );
+    void updateRouteState( RoutingManager::State state );
 
     /**
       * The viewport has changed, recalculate positions accordingly
