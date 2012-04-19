@@ -37,14 +37,17 @@ class MARBLE_EXPORT PositionProviderPlugin : public QObject, public PositionProv
     void  setMarbleModel( const MarbleModel* );
 
     /**
+     * @brief Returns the string that should appear in the user interface.
+     *
+     * Example: "GPS"
+     */
+    virtual QString guiString() const = 0;
+
+    /**
      * Create a new PositionProvider Plugin and return it.
      * Has to be defined in concrete position provider plugin classes.
      */
     virtual PositionProviderPlugin * newInstance() const = 0;
-
-    virtual void initialize() = 0;
-
-    virtual bool isInitialized() const = 0;
 
  Q_SIGNALS:
     void statusChanged( PositionProviderStatus status ) const;

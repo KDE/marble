@@ -60,13 +60,18 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     virtual ~RenderPlugin();
 
     /**
+     * @brief Returns the string that should appear in the UI / in the menu.
+     *.
+     * Using a "&" you can suggest key shortcuts
+     *
+     * Example: "&Stars"
+     */
+    virtual QString guiString() const = 0;
+
+    /**
      * @brief Returns a new object of the plugin
      */
     virtual RenderPlugin *newInstance( const MarbleModel *marbleModel ) const = 0;
-
-    virtual void initialize() = 0;
-
-    virtual bool isInitialized() const = 0;
 
     const MarbleModel* marbleModel() const;
 
