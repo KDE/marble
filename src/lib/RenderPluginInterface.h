@@ -12,7 +12,7 @@
 #ifndef MARBLE_RENDERPLUGININTERFACE_H
 #define MARBLE_RENDERPLUGININTERFACE_H
 
-#include <QtCore/QtPlugin>
+#include <QtCore/QStringList>
 
 #include "PluginInterface.h"
 #include "LayerInterface.h"
