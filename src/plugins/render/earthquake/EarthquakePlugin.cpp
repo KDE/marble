@@ -28,12 +28,15 @@ EarthquakePlugin::EarthquakePlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
       m_isInitialized( false ),
       m_ui( 0 ),
-      m_configDialog( 0 )
+      m_configDialog( 0 ),
+      m_minMagnitude( 0.0 ),
+      m_startDate( QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) ),
+      m_endDate( QDateTime::currentDateTime() )
 {
     setEnabled( true ); // Plugin is enabled by default
     setVisible( false ); // Plugin is invisible by default
     connect( this, SIGNAL( settingsChanged( QString ) ),
-             this, SLOT( updateSettings() ) );
+             this, SLOT( updateModel() ) );
 }
 
 void EarthquakePlugin::initialize()
@@ -41,7 +44,6 @@ void EarthquakePlugin::initialize()
     EarthquakeModel *model = new EarthquakeModel( pluginManager(), this );
     setModel( model );
     setNumberOfItems( 20 );
-    readSettings();
     m_isInitialized = true;
 }
 
@@ -112,70 +114,64 @@ QDialog *EarthquakePlugin::configDialog()
                  SLOT( writeSettings() ) );
         connect( m_ui->m_endDate, SIGNAL( dateTimeChanged ( const QDateTime& ) ),
                  SLOT( validateDateRange() ) );
+        connect( this, SIGNAL( settingsChanged( QString ) ),
+                 this, SLOT( readSettings() ) );
     }
     return m_configDialog;
 }
 
 QHash<QString,QVariant> EarthquakePlugin::settings() const
 {
-    return m_settings;
+    QHash<QString, QVariant> settings;
+
+    settings.insert( "numResults", numberOfItems() );
+    settings.insert( "minMagnitude", m_minMagnitude );
+    settings.insert( "startDate", m_startDate );
+    settings.insert( "endDate", m_endDate );
+
+    return settings;
 }
 
 void EarthquakePlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
-    m_settings = settings;
+    setNumberOfItems( settings.value( "numResults", 20 ).toInt() );
+    m_minMagnitude = settings.value( "minMagnitude", 0.0 ).toReal();
+    m_startDate = settings.value( "startDate", QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) ).toDateTime();
+    m_endDate = settings.value( "endDate", QDateTime::currentDateTime() ).toDateTime();
 
-    if ( !m_settings.contains( "numResults" ) ) {
-        m_settings.insert( "numResults", numberOfItems() );
-    }
-    if ( !m_settings.contains( "minMagnitude" ) ) {
-        m_settings.insert( "minMagnitude", 0.0 );
-    }
-    if ( !m_settings.contains( "startDate" ) ) {
-        m_settings.insert( "startDate", QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) );
-    }
-    if ( !m_settings.contains( "endDate" ) ) {
-        m_settings.insert( "endDate", QDateTime::currentDateTime() );
-    }
-
-    readSettings();
     emit settingsChanged( nameId() );
 }
 
 void EarthquakePlugin::readSettings()
 {
-    if ( !m_configDialog ) {
-        return;
-    }
+    Q_ASSERT( m_configDialog );
 
-    m_ui->m_numResults->setValue( m_settings.value( "numResults" ).toInt() );
-    m_ui->m_minMagnitude->setValue( m_settings.value( "minMagnitude" ).toDouble() );
-    m_ui->m_startDate->setDateTime( m_settings.value( "startDate" ).toDateTime() );
-    m_ui->m_endDate->setDateTime( m_settings.value( "endDate" ).toDateTime() );
+    m_ui->m_numResults->setValue( numberOfItems() );
+    m_ui->m_minMagnitude->setValue( m_minMagnitude );
+    m_ui->m_startDate->setDateTime( m_startDate );
+    m_ui->m_endDate->setDateTime( m_endDate );
     m_ui->m_startDate->setMaximumDateTime( m_ui->m_endDate->dateTime() );
 }
 
 void EarthquakePlugin::writeSettings()
 {
     Q_ASSERT( m_configDialog );
-    m_settings.insert( "numResults", m_ui->m_numResults->value() );
-    m_settings.insert( "minMagnitude", m_ui->m_minMagnitude->value() );
-    m_settings.insert( "startDate", m_ui->m_startDate->dateTime() );
-    m_settings.insert( "endDate", m_ui->m_endDate->dateTime() );
+
+    setNumberOfItems( m_ui->m_numResults->value() );
+    m_minMagnitude = m_ui->m_minMagnitude->value();
+    m_startDate = m_ui->m_startDate->dateTime();
+    m_endDate = m_ui->m_endDate->dateTime();
 
     emit settingsChanged( nameId() );
 }
 
-void EarthquakePlugin::updateSettings()
+void EarthquakePlugin::updateModel()
 {
-    EarthquakeModel *earthquakeModel = dynamic_cast<EarthquakeModel *>( model() );
-    if( earthquakeModel ) {
-        earthquakeModel = new EarthquakeModel( pluginManager(), this );
-        Q_ASSERT( m_configDialog );
-        setNumberOfItems( m_ui->m_numResults->value() );
-        earthquakeModel->setMinMagnitude( m_ui->m_minMagnitude->value() );
-        earthquakeModel->setEndDate( m_ui->m_endDate->dateTime() );
-        earthquakeModel->setStartDate( m_ui->m_startDate->dateTime() );
+    if( model() ) {
+        EarthquakeModel *const earthquakeModel = new EarthquakeModel( pluginManager(), this );
+        earthquakeModel->setMinMagnitude( m_minMagnitude );
+        earthquakeModel->setStartDate( m_startDate );
+        earthquakeModel->setEndDate( m_endDate );
         setModel( earthquakeModel );
     }
 }

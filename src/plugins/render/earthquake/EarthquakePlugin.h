@@ -13,11 +13,8 @@
 
 #include "AbstractDataPlugin.h"
 #include "DialogConfigurationInterface.h"
-#include "RenderPluginInterface.h"
 
-#include <QtCore/QHash>
-#include <QtGui/QIcon>
-#include <QtGui/QAbstractButton>
+#include <QtCore/QDateTime>
 
 namespace Ui
 {
@@ -76,13 +73,15 @@ public:
 public slots:
     void readSettings();
     void writeSettings();
-    void updateSettings();
+    void updateModel();
 
 private:
     bool m_isInitialized;
     Ui::EarthquakeConfigWidget *m_ui;
     QDialog *m_configDialog;
-    QHash<QString,QVariant> m_settings;
+    qreal m_minMagnitude;
+    QDateTime m_startDate;
+    QDateTime m_endDate;
 
 private slots:
     void validateDateRange();
