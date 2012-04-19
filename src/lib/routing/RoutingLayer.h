@@ -88,11 +88,6 @@ public:
     void setPointSelectionEnabled( bool enabled );
 
     /**
-      * The route is dirty (needs an update) and should be painted to indicate that
-      */
-    void setRouteDirty( bool dirty );
-
-    /**
       * Set the view context to determine whether the map is used interactively
       */
     void setViewContext( ViewContext viewContext );

@@ -148,6 +148,9 @@ public:
     /** Paint icons for trip points etc */
     inline void renderRequest( GeoPainter *painter );
 
+    /** The route is dirty (needs an update) and should be painted to indicate that */
+    void setRouteDirty( bool dirty );
+
     /** Insert via points or emit position signal, if appropriate */
     inline bool handleMouseButtonRelease( QMouseEvent *e );
 
@@ -780,16 +783,16 @@ void RoutingLayer::setPointSelectionEnabled( bool enabled )
     d->m_pointSelection = enabled;
 }
 
-void RoutingLayer::setRouteDirty( bool dirty )
+void RoutingLayerPrivate::setRouteDirty( bool dirty )
 {
-    d->m_routeDirty = dirty;
+    m_routeDirty = dirty;
 
     /** @todo: The full repaint can be avoided. The route however has changed
       * and the exact bounding box needs to be recalculated before doing
       * a partly repaint, otherwise we might end up repainting only parts of the route
       */
-    // d->m_marbleWidget->repaint( d->m_routeRegion );
-    d->m_marbleWidget->update();
+    // m_marbleWidget->repaint( m_routeRegion );
+    m_marbleWidget->update();
 }
 
 void RoutingLayer::removeViaPoint()
@@ -797,7 +800,7 @@ void RoutingLayer::removeViaPoint()
     if ( d->m_activeMenuIndex >= 0 ) {
         d->m_routeRequest->remove( d->m_activeMenuIndex );
         d->m_activeMenuIndex = -1;
-        setRouteDirty( true );
+        d->setRouteDirty( true );
         emit routeDirty();
     }
 }
@@ -830,7 +833,7 @@ void RoutingLayer::exportRoute()
 
 void RoutingLayer::updateRouteState( RoutingManager::State state )
 {
-    setRouteDirty( state == RoutingManager::Downloading );
+    d->setRouteDirty( state == RoutingManager::Downloading );
     setViewportChanged();
 }
 
