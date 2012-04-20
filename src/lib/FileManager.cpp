@@ -34,8 +34,7 @@ class FileManagerPrivate
 public:
     FileManagerPrivate( MarbleModel* model )
         : m_model( model ),
-          m_recenter( false ),
-        m_t ( 0 )
+          m_recenter( false )
     {
     }
 
@@ -52,7 +51,7 @@ public:
     QList<FileLoader*> m_loaderList;
     QList < GeoDataDocument* > m_fileItemList;
     bool m_recenter;
-    QTime *m_t;
+    QTime m_timer;
 };
 }
 
@@ -81,11 +80,8 @@ void FileManager::addFile( const QString& filepath, DocumentRole role, bool rece
     }
 
     mDebug() << "adding container:" << filepath;
-    if (d->m_t == 0) {
-        mDebug() << "Starting placemark loading timer";
-        d->m_t = new QTime();
-        d->m_t->start();
-    }
+    mDebug() << "Starting placemark loading timer";
+    d->m_timer.start();
     d->m_recenter = recenter;
     FileLoader* loader = new FileLoader( this, d->m_model, filepath, role );
     appendLoader( loader );
@@ -201,9 +197,7 @@ void FileManager::cleanupLoader( FileLoader* loader )
     }
     if ( d->m_loaderList.isEmpty()  )
     {
-        qDebug() << "Finished loading all placemarks " << d->m_t->elapsed();
-        delete d->m_t;
-        d->m_t = 0;
+        mDebug() << "Finished loading all placemarks " << d->m_timer.elapsed();
     }
 }
 
