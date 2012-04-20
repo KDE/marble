@@ -34,7 +34,6 @@ class AbstractDataPluginItemPrivate
     }
     
     QString m_id;
-    GeoDataCoordinates m_coordinates;
     QString m_target;
     bool m_favorite;
     qreal m_addedAngularResolution;
