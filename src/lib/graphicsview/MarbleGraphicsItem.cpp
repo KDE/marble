@@ -100,10 +100,8 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
             paint( &pixmapPainter, viewport, renderPos, layer );
 
             // Paint children
-            if ( p()->m_children ) {
-                foreach ( MarbleGraphicsItem *item, *p()->m_children ) {
-                    item->paintEvent( &pixmapPainter, viewport, renderPos, layer );
-                }
+            foreach ( MarbleGraphicsItem *item, p()->m_children ) {
+                item->paintEvent( &pixmapPainter, viewport, renderPos, layer );
             }
             // Update the pixmap in cache
 #if QT_VERSION < 0x040600
@@ -129,10 +127,8 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
             paint( painter, viewport, renderPos, layer );
 
             // Paint children
-            if ( p()->m_children ) {
-                foreach ( MarbleGraphicsItem *item, *p()->m_children ) {
-                    item->paintEvent( painter, viewport, renderPos, layer );
-                }
+            foreach ( MarbleGraphicsItem *item, p()->m_children ) {
+                item->paintEvent( painter, viewport, renderPos, layer );
             }
 
             painter->restore();
@@ -242,10 +238,8 @@ void MarbleGraphicsItem::setSize( const QSizeF& size )
     p()->m_size = size;
     update();
 
-    if ( p()->m_children ) {
-        foreach ( MarbleGraphicsItem *item, *p()->m_children ) {
-            item->p()->setParentSize( size );
-        }
+    foreach ( MarbleGraphicsItem *item, p()->m_children ) {
+        item->p()->setParentSize( size );
     }
 }
 
@@ -304,14 +298,14 @@ bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e )
     
     QMouseEvent *event = static_cast<QMouseEvent*> (e);
     
-    if( p()->m_children ) {
+    if( !p()->m_children.isEmpty() ) {
         QList<QPointF> absolutePositions = p()->absolutePositions();
         
         foreach( const QPointF& absolutePosition, absolutePositions ) {
             QPoint shiftedPos = event->pos() - absolutePosition.toPoint();
             
             if ( QRect( QPoint( 0, 0 ), size().toSize() ).contains( shiftedPos ) ) {
-                foreach( MarbleGraphicsItem *child, *p()->m_children ) {
+                foreach( MarbleGraphicsItem *child, p()->m_children ) {
                     QList<QRectF> childRects = child->boundingRects();
                     
                     foreach( const QRectF& childRect, childRects ) {

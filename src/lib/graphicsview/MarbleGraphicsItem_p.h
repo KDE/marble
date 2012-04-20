@@ -37,7 +37,7 @@ class MarbleGraphicsItemPrivate
           m_cacheMode( MarbleGraphicsItem::NoCache ),
           m_visibility( true ),
           m_parent( parent ),
-          m_children( 0 ),
+          m_children(),
           m_layout( 0 ),
           m_marbleGraphicsItem( marbleGraphicsItem ),
           m_zValue( 0 )
@@ -56,13 +56,8 @@ class MarbleGraphicsItemPrivate
         }
 
         // Delete all children
-        if ( m_children ) {
-            // See above: The children will remove itself from the list
-            while ( !m_children->isEmpty() ) {
-                delete *m_children->begin();
-            }
-            delete m_children;
-        }
+        // See above: The children will remove itself from the list
+        qDeleteAll( m_children );
 
         // Delete Layout
         delete m_layout;
@@ -70,18 +65,12 @@ class MarbleGraphicsItemPrivate
 
     void addChild( MarbleGraphicsItem *child )
     {
-        if ( m_children == 0 ) {
-            m_children = new QSet<MarbleGraphicsItem *>();
-        }
-
-        m_children->insert( child );
+        m_children.insert( child );
     }
 
     void removeChild( MarbleGraphicsItem *child )
     {
-        if ( m_children ) {
-            m_children->remove( child );
-        }
+        m_children.remove( child );
     }
 
     virtual QList<QPointF> positions() const
@@ -137,10 +126,8 @@ class MarbleGraphicsItemPrivate
     void updateLabelPositions()
     {
         // This has to be done recursively because we need a correct size from all children.
-        if ( m_children ) {
-            foreach ( MarbleGraphicsItem *item, *m_children ) {
-                item->p()->updateLabelPositions();
-            }
+        foreach ( MarbleGraphicsItem *item, m_children ) {
+            item->p()->updateLabelPositions();
         }
 
         // Adjust positions
@@ -164,16 +151,16 @@ class MarbleGraphicsItemPrivate
     bool m_visibility;
 
     // The parent of the item
-    MarbleGraphicsItem *m_parent;
-    // The set of children. WARNING: This is not initialized by default.
-    QSet<MarbleGraphicsItem *> *m_children;
+    MarbleGraphicsItem *const m_parent;
+    // The set of children.
+    QSet<MarbleGraphicsItem *> m_children;
 
     // The layout handling the positions of the children
     AbstractMarbleGraphicsLayout *m_layout;
     
     QString m_toolTip;
 
-    MarbleGraphicsItem *m_marbleGraphicsItem;
+    MarbleGraphicsItem *const m_marbleGraphicsItem;
     
     qreal m_zValue;
 };
