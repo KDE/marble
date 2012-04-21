@@ -30,7 +30,7 @@ Page {
         anchors.bottom: placemarkActivityPage.bottom
         anchors.left: placemarkActivityPage.left
         width:  placemarkActivityPage.horizontal ? placemarkActivityPage.width / 2 : placemarkActivityPage.width
-        height: placemarkActivityPage.horizontal ? placemarkActivityPage.height : 250
+        height: placemarkActivityPage.horizontal ? placemarkActivityPage.height : 260
 
         color: "#f7f7f7"
         border.width: 2

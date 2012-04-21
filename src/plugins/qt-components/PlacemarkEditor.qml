@@ -64,7 +64,8 @@ Item {
                     property bool isBookmark: root.placemark != undefined && marbleWidget.bookmarks.isBookmark(root.placemark.coordinate.longitude,root.placemark.coordinate.latitude)
                     iconSource: isBookmark ? "qrc:/icons/bookmark.png" : "qrc:/icons/bookmark-disabled.png"
 
-                    width: height
+                    width: 32
+                    height: 32
                     flat: true
 
                     onClicked: {
@@ -128,7 +129,6 @@ Item {
                     anchors.rightMargin: 10
                     text: "0 km"
                     color: "darkgray"
-                    font.pixelSize: 16
                 }
             }
 
@@ -140,14 +140,14 @@ Item {
                 visible: listmodel.count > 0
 
                 ListView {
-                    anchors.left: parent.left
-                    anchors.right: legalText.left
-                    anchors.leftMargin: 5
-                    anchors.rightMargin: 10
                     id: panoramioView
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
                     height: parent.height
-                    spacing: 5
+                    width: 268
+                    spacing: 4
                     orientation: ListView.Horizontal
+                    snapMode: ListView.SnapToItem
                     clip: true
 
                     model: listmodel
@@ -158,7 +158,6 @@ Item {
                         width: 64
                         height: 64
                         scale: panoramioImage.status === Image.Ready ? 1.0 : 0.0
-                        property bool selected: false
 
                         Image {
                             id: panoramioImage
@@ -173,7 +172,7 @@ Item {
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: parent.selected = !parent.selected
+                            onClicked: Qt.openUrlExternally(link)
                         }
 
                         Behavior on scale {
@@ -182,29 +181,18 @@ Item {
                                 duration: 500
                             }
                         }
-
-                        onSelectedChanged: {
-                            if (selected) {
-                                legalText.customText = title + "<br /><a href=\"" + link + "\">Photo by " + owner + "</a>."
-                                panoramioView.currentIndex = index
-                            } else {
-                                panoramioView.currentIndex = -1
-                            }
-                        }
                     }
                 }
 
-                Text {
+                Label {
                     id: legalText
+                    anchors.left: parent.left
                     anchors.right: parent.right
-                    width: 140
-                    text: panoramioView.currentIndex >= 0 ? customText : generalText
+                    anchors.top: panoramioView.bottom
+                    anchors.margins: 5
                     wrapMode: Text.WordWrap
                     color: "darkgray"
-                    onLinkActivated: Qt.openUrlExternally(link)
-
-                    property string generalText: "Photos provided by Panoramio. Photos are under the copyright of their owners."
-                    property string customText
+                    text: "<font size=\"-3\">Photos provided by Panoramio. Photos are under the copyright of their owners.</font>"
                 }
             }
         }
@@ -249,6 +237,7 @@ Item {
                         var o = a.photos[b];
                         listmodel.append({owner: o.owner_name, url: o.photo_file_url, link: o.photo_url, title: o.photo_title});
                     }
+                    panoramioView.currentIndex=-1
                 }
             }
             xhr.send();
