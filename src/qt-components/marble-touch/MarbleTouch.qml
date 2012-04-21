@@ -17,6 +17,10 @@ Item {
         id: changelogModel
 
         ListElement {
+            version: "1.3.3"
+            summary: "Bookmark support, OSRM routing backend, download tiles in the visible area."
+        }
+        ListElement {
             version: "1.3.2"
             summary: "Pinch zoom, MapQuest routing backend, download tiles along the route, more voice navigation announcements."
         }
