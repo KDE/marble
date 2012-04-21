@@ -190,6 +190,8 @@ public Q_SLOTS:
 
     void downloadRoute( qreal offset, int topTileLevel, int bottomTileLevel );
 
+    void downloadArea( int topTileLevel, int bottomTileLevel );
+
 protected:
     virtual bool event ( QEvent * event );
 

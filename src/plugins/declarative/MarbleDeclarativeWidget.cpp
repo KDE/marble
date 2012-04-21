@@ -325,6 +325,20 @@ void MarbleWidget::downloadRoute( qreal offset, int topTileLevel, int bottomTile
     }
 }
 
+void MarbleWidget::downloadArea(int topTileLevel, int bottomTileLevel)
+{
+    Marble::DownloadRegion region;
+    region.setMarbleModel( m_marbleWidget->model() );
+    region.setVisibleTileLevel( m_marbleWidget->tileZoomLevel() );
+    region.setTileLevelRange( topTileLevel, bottomTileLevel );
+    QString const mapThemeId = m_marbleWidget->mapThemeId();
+    QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ) );
+    QVector<Marble::TileCoordsPyramid> const pyramid = region.region( m_marbleWidget->textureLayer(), m_marbleWidget->viewport()->viewLatLonAltBox() );
+    if ( !pyramid.isEmpty() ) {
+        m_marbleWidget->downloadRegion( sourceDir, pyramid );
+    }
+}
+
 bool MarbleWidget::workOffline() const
 {
     return m_marbleWidget->model()->workOffline();

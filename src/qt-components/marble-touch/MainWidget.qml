@@ -313,6 +313,10 @@ Item {
         map.downloadRoute( offset, from, to )
     }
 
+    function downloadArea( from, to ) {
+        map.downloadArea( from, to )
+    }
+
     function getCenter() {
         return map.center
     }
