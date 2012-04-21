@@ -724,6 +724,7 @@ void MarbleWidget::resizeEvent( QResizeEvent* )
     setUpdatesEnabled( false );
     d->m_map.setSize( width(), height() );
     d->repaint();
+    emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
     setUpdatesEnabled( true );
 }
 
