@@ -96,7 +96,7 @@ Page {
         }
 
         settings.lastActivity = name
-        pageStack.push( path )
+        openPage( path )
     }
 
     Timer {

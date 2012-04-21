@@ -10,36 +10,22 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 
-Rectangle {
+Item {
     id: root
-    height: 160 + (panoramioItem.visible ? panoramioItem.height : 0)
-
     z: 10
-    opacity: 0.0
-    color: "#f7f7f7"
-    radius: 5
-    border.width: 1
-    border.color: "darkgray"
 
     property Placemark placemark
 
     function editPlacemark(placemark)
     {
-        root.opacity = 1.0
         root.placemark = placemark
         placemarkLabel.text = placemark.name
         distanceLabel.text = (marbleWidget.tracking.lastKnownPosition.distance(placemark.coordinate.longitude, placemark.coordinate.latitude) / 1000).toFixed(1) + " km"
         panoramio.update()
     }
 
-    function hide()
-    {
-        root.opacity = 0.0
-    }
-
     function startRouting()
     {
-        root.hide()
         settings.gpsTracking = true
         marbleWidget.routing.clearRoute()
         marbleWidget.routing.setVia( 0, marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
@@ -61,11 +47,19 @@ Rectangle {
             Item {
                 id: headerItem
                 width: parent.width
-                height: Math.max(placemarkLabel.height, closeButton.height)
+                height: Math.max(placemarkLabel.height, bookmarkButton.height)
+
+                Label {
+                    id: placemarkLabel
+                    anchors.left: parent.left
+                    anchors.right: bookmarkButton.left
+                    anchors.verticalCenter: parent.verticalCenter
+                }
 
                 ToolButton {
                     id: bookmarkButton
                     anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: parent.right
 
                     property bool isBookmark: root.placemark != undefined && marbleWidget.bookmarks.isBookmark(root.placemark.coordinate.longitude,root.placemark.coordinate.latitude)
                     iconSource: isBookmark ? "qrc:/icons/bookmark.png" : "qrc:/icons/bookmark-disabled.png"
@@ -81,23 +75,6 @@ Rectangle {
                         }
                         isBookmark = marbleWidget.bookmarks.isBookmark(root.placemark.coordinate.longitude, root.placemark.coordinate.latitude)
                     }
-                }
-
-                Label {
-                    id: placemarkLabel
-                    anchors.left: bookmarkButton.right
-                    anchors.right: closeButton.left
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-
-                ToolButton {
-                    id: closeButton
-                    anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    iconSource: "image://theme/icon-m-toolbar-close"
-                    width: height
-                    flat: true
-                    onClicked: root.hide()
                 }
             }
 
@@ -274,7 +251,5 @@ Rectangle {
         }
     }
 
-    Connections { target: map; onPlacemarkSelected: root.editPlacemark(placemark) }
-
-    Behavior on opacity { NumberAnimation { duration: 250 } }
+    Connections { target: marbleWidget; onPlacemarkSelected: root.editPlacemark(placemark) }
 }

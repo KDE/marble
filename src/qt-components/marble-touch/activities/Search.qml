@@ -58,9 +58,9 @@ Page {
         }
 
         radius: 10
-        color: "white"
-        border.width: 1
-        border.color: "lightgray"
+        color: "#f7f7f7"
+        border.width: 2
+        border.color: "darkgray"
         z: 10
         opacity: 0.9
         property string searchTerm: ""

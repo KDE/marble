@@ -9,6 +9,7 @@
         <file>activities/Geocaching.qml</file>
         <file>activities/Navigation.qml</file>
         <file>activities/Routing.qml</file>
+        <file>activities/Placemark.qml</file>
         <file>activities/Search.qml</file>
         <file>activities/SpaceView.qml</file>
         <file>activities/Tracking.qml</file>
