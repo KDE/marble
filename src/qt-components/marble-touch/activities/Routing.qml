@@ -250,6 +250,31 @@ Page {
                     width: parent.width
                 }
 
+                Label { text: "Download Mode" }
+
+                ButtonRow {
+                    id: downloadTypeSwitch
+                    checkedButton: routeButton
+                    property bool routeMode: checkedButton === routeButton
+
+                    Button {
+                        id: routeButton
+                        text: "Route"
+                    }
+
+                    Button {
+                        id: areaButton
+                        text: "Visible Area"
+                    }
+                }
+
+                Label {
+                    width: parent.width
+                    text: downloadTypeSwitch.routeMode ? "The current route area is downloaded" : "The currently visible map area is downloaded"
+                    color: "gray"
+                    wrapMode: Text.WordWrap
+                }
+
                 Label { text: "Level of detail" }
 
                 Slider {
@@ -281,10 +306,14 @@ Page {
                     }
                 }
 
-                Label { text: "Side margin" }
+                Label {
+                    text: "Side margin"
+                    visible: downloadTypeSwitch.routeMode
+                }
 
                 Slider {
                     id: offsetSlider
+                    visible: downloadTypeSwitch.routeMode
                     stepSize: 50
                     valueIndicatorVisible: true
                     valueIndicatorText: value + " meter"
@@ -296,6 +325,12 @@ Page {
             }
         }
 
-        onAccepted: marbleWidget.downloadRoute( offsetSlider.value, 0, tileSlider.value )
+        onAccepted: {
+            if (downloadTypeSwitch.routeMode) {
+                marbleWidget.downloadRoute( offsetSlider.value, 0, tileSlider.value )
+            } else {
+                marbleWidget.downloadArea( 0, tileSlider.value )
+            }
+        }
     }
 }
