@@ -19,15 +19,44 @@ Page {
     id: searchActivityPage
     anchors.fill: parent
 
+    property bool horizontal: width / height > 1.20
+
     tools: ToolBarLayout {
         ToolIcon {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
+
+        ToolButton {
+            id: searchButton
+            checkable: true
+            checked: true
+            width: 60
+            iconSource: "image://theme/icon-m-toolbar-search";
+        }
+
+        Item {}
     }
 
     Rectangle {
         id: searchResultView
+
+        property bool minimized: !searchButton.checked
+        visible: !minimized
+
+        anchors.bottom: searchActivityPage.bottom
+        anchors.left: searchActivityPage.left
+        width:  searchActivityPage.horizontal ? (minimized ? 0 : searchActivityPage.width / 2) : searchActivityPage.width
+        height: searchActivityPage.horizontal ? searchActivityPage.height : (minimized ? 0 : searchActivityPage.height / 2)
+
+        Behavior on height {
+            enabled: !searchActivityPage.horizontal;
+            NumberAnimation {
+                easing.type: Easing.InOutQuad;
+                duration: 250
+            }
+        }
+
         radius: 10
         color: "white"
         border.width: 1
@@ -97,8 +126,11 @@ Page {
     Item {
         id: mapContainer
         clip: true
-        width: parent.width
-        height: parent.height - searchField.height
+
+        anchors.left: searchActivityPage.horizontal ? searchResultView.right : searchActivityPage.left
+        anchors.bottom: searchActivityPage.horizontal ? searchActivityPage.bottom : searchResultView.top
+        anchors.right: searchActivityPage.right
+        anchors.top: searchActivityPage.top
 
         function embedMarbleWidget() {
             marbleWidget.parent = mapContainer
@@ -120,25 +152,6 @@ Page {
                 marbleWidget.visible = false
             }
         }
-    }
-
-    StateGroup {
-        states: [
-            State { // Horizontal
-                when: (searchActivityPage.width / searchActivityPage.height) > 1.20
-                AnchorChanges { target: searchResultView; anchors.top: searchActivityPage.top }
-                PropertyChanges { target: searchResultView; width: searchActivityPage.width / 2; height: searchActivityPage.height }
-                AnchorChanges { target: mapContainer; anchors.left: searchResultView.right; anchors.bottom: searchActivityPage.bottom; anchors.top: searchActivityPage.top }
-                PropertyChanges { target: mapContainer; width: searchActivityPage.width / 2; height: searchActivityPage.height }
-            },
-            State { // Vertical
-                when: (true)
-                AnchorChanges { target: mapContainer; anchors.left: searchActivityPage.left; anchors.bottom: searchResultListView.top; anchors.top: searchActivityPage.top }
-                PropertyChanges { target: mapContainer; width: searchActivityPage.width; height: searchActivityPage.height / 2 }
-                AnchorChanges { target: searchResultView; anchors.right: searchActivityPage.right; anchors.top: mapContainer.bottom }
-                PropertyChanges { target: searchResultView; width: searchActivityPage.width; height: searchActivityPage.height / 2 }
-            }
-        ]
     }
 
     Component {
