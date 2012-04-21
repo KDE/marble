@@ -221,6 +221,10 @@ Item {
 
         function update()
         {
+            if (settings.workOffline) {
+                return
+            }
+
             var R = 6378000.0
             var d = 500.0
             var brng = 215 * 3.1415926 / 180.0
