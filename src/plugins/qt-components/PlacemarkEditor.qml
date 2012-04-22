@@ -323,7 +323,7 @@ Item {
          property double longitude: root.placemark != undefined ? root.placemark.coordinate.longitude : 0.0
          property double latitude: root.placemark != undefined ? root.placemark.coordinate.latitude : 0.0
 
-         source: "http://ws.geonames.org/findNearByWeatherXML?lat=" + latitude + "&lng=" + longitude
+         source: settings.workOffline ? "" : "http://ws.geonames.org/findNearByWeatherXML?lat=" + latitude + "&lng=" + longitude
          query: "/geonames/observation"
 
          XmlRole { name: "temperature"; query: "temperature/string()" }
