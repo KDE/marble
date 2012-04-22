@@ -24,7 +24,6 @@ PageStackWindow {
     platformStyle: defaultStyle
     initialPage: activitySelection
     property Item marbleWidget: null
-    property string currentPath
 
     // System dependent style for the main window.
     PageStackWindowStyle {
@@ -52,10 +51,7 @@ PageStackWindow {
     }
 
     function openPage( path ) {
-        if (path !== main.currentPath) {
-            pageStack.push( path )
-            main.currentPath = path
-        }
+        pageStack.push( path )
     }
 
     Component.onCompleted: {

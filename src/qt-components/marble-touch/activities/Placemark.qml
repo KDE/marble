@@ -15,6 +15,7 @@ Page {
     id: placemarkActivityPage
     anchors.fill: parent
 
+    property string uid: "edu.kde.org.marble.placemarkActivityPage"
     property bool horizontal: width / height > 1.20
 
     tools: ToolBarLayout {

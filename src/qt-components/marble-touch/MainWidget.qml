@@ -186,7 +186,14 @@ Item {
         }
 
         onPlacemarkSelected: {
-            openPage("qrc:/activities/Placemark.qml")
+            pageStack.find(function(page) {
+                // Open the Placemark activity unless it's already the top most page
+                // id is not a QML Item property, hence the uid workaround
+                if (page.uid !== "edu.kde.org.marble.placemarkActivityPage") {
+                    openPage("qrc:/activities/Placemark.qml");
+                }
+                return true;
+            })
             screen.placemarkSelected(placemark)
         }
 
