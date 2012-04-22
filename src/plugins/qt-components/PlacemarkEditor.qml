@@ -283,6 +283,7 @@ Item {
 
         function update()
         {
+            listmodel.clear()
             if (settings.workOffline) {
                 return
             }
@@ -304,7 +305,6 @@ Item {
             xhr.open("GET", url);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
-                    listmodel.clear()
                     var a = JSON.parse(xhr.responseText);
                     for (var b in a.photos) {
                         var o = a.photos[b];
