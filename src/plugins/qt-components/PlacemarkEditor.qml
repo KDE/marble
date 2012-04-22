@@ -90,6 +90,7 @@ Item {
             Row {
                 id: routingItem
                 width: parent.width
+                height: carButton.height
                 spacing: 10
 
                 Button {
@@ -126,9 +127,7 @@ Item {
                     id: distanceLabel
                     anchors.bottom: parent.bottom
                     anchors.right: parent.right
-                    anchors.rightMargin: 10
                     text: "0 km"
-                    color: "darkgray"
                 }
             }
 
@@ -137,14 +136,88 @@ Item {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: 64
-                visible: listmodel.count > 0
+
+                Item {
+                    id: weatherItem
+                    anchors.left: parent.left
+                    width: 234
+                    Repeater {
+                        model: weatherModel
+
+                        Item {
+                            Image {
+                                id: weatherConditionImage
+                                visible: weatherConditionImage.source !== ""
+
+                                width: 64
+                                height: width
+                                fillMode: Image.PreserveAspectFit
+                                smooth: true
+                                property string condition: weatherCondition
+                                property string icon: ""
+                                onConditionChanged: icon = parseCondition(weatherCondition, clouds)
+                                source: icon === "" ? "" : Marble.resolvePath("weather/weather-" + icon + ".png")
+                            }
+
+                            Flickable {
+                                anchors.left: weatherConditionImage.right
+                                anchors.margins: 5
+                                width: 160
+                                height: 64
+                                contentWidth: 160
+                                contentHeight: temperatureLabel.height
+                                clip: true
+
+                                Label {
+                                    id: temperatureLabel
+                                    width: 160
+                                    property string cloudsText: clouds === "n/a" ? "" : clouds
+                                    property string weatherConditionText: weatherCondition === "n/a" ? "" : (cloudsText === "" ? "" : ", ") + weatherCondition
+                                    text: "<font size=\"-2\">" + temperature + " °C<br />" + cloudsText + weatherConditionText + "</font>"
+                                }
+                            }
+
+                            function parseCondition(condition, clouds) {
+                                if (condition === "light rain") return "showers-scattered"
+                                if (condition.match("rain")) return "showers"
+                                if (condition.match("drizzle")) return "showers"
+                                if (condition === "light snow") return "snow-scattered"
+                                if (condition.match("hail")) return "hail"
+                                if (condition.match("snow")) return "snow"
+                                if (condition.match("ice")) return "freezing-rain"
+                                if (condition === "mist") return "mist"
+                                if (condition === "fog") return "mist"
+                                if (condition === "smoke") return "mist"
+                                if (condition === "volcanic ash") return "mist"
+                                if (condition === "sand") return "mist"
+                                if (condition === "haze") return "mist"
+                                if (condition === "spray") return "mist"
+                                if (condition === "widespread dust") return "mist"
+                                if (condition === "squall") return "storm"
+                                if (condition === "sandstorm") return "storm"
+                                if (condition === "duststorm") return "storm"
+                                if (condition === "well developed dust/sand whirls") return "storm"
+                                console.debug("unknown condition " + condition)
+
+                                if (clouds === "clear sky") return "clear";
+                                if (clouds === "few clouds") return "few-clouds";
+                                if (clouds === "scattered clouds") return "few-clouds";
+                                if (clouds === "broken clouds") return "clouds";
+                                if (clouds === "overcast") return "many-clouds";
+                                console.debug("unknown clouds " + clouds)
+
+                                return ""
+                            }
+                        }
+                    }
+                }
 
                 ListView {
                     id: panoramioView
-                    anchors.left: parent.left
-                    anchors.leftMargin: 5
+                    anchors.right: parent.right
+                    visible: listmodel.count > 0
                     height: parent.height
-                    width: 268
+                    width: 200
                     spacing: 4
                     orientation: ListView.Horizontal
                     snapMode: ListView.SnapToItem
@@ -189,7 +262,8 @@ Item {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.top: panoramioView.bottom
-                    anchors.margins: 5
+                    anchors.topMargin: 5
+                    visible: listmodel.count > 0
                     wrapMode: Text.WordWrap
                     color: "darkgray"
                     text: "<font size=\"-3\">Photos provided by Panoramio. Photos are under the copyright of their owners.</font>"
@@ -226,7 +300,6 @@ Item {
             var lon2 = lon + Math.atan2(Math.sin(brng)*Math.sin(d/R)*Math.cos(lat), Math.cos(d/R)-Math.sin(lat)*Math.sin(lat2));
             var url = "http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=20&minx=" + lon1/deg2rad + "&miny=" + lat1/deg2rad + "&maxx=" + lon2/deg2rad + "&maxy=" + lat2/deg2rad + "&size=square&mapfilter=true"
 
-//            console.log("Retrieving " + url)
             var xhr = new XMLHttpRequest;
             xhr.open("GET", url);
             xhr.onreadystatechange = function() {
@@ -243,6 +316,20 @@ Item {
             xhr.send();
         }
     }
+
+    XmlListModel {
+         id: weatherModel
+
+         property double longitude: root.placemark != undefined ? root.placemark.coordinate.longitude : 0.0
+         property double latitude: root.placemark != undefined ? root.placemark.coordinate.latitude : 0.0
+
+         source: "http://ws.geonames.org/findNearByWeatherXML?lat=" + latitude + "&lng=" + longitude
+         query: "/geonames/observation"
+
+         XmlRole { name: "temperature"; query: "temperature/string()" }
+         XmlRole { name: "weatherCondition"; query: "weatherCondition/string()" }
+         XmlRole { name: "clouds"; query: "clouds/string()" }
+     }
 
     Connections { target: marbleWidget; onPlacemarkSelected: root.editPlacemark(placemark) }
 }
