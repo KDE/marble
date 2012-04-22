@@ -12,6 +12,7 @@
 
 #include "Coordinate.h"
 #include "DeclarativeMapThemeManager.h"
+#include "MarbleDeclarativeObject.h"
 #include "MarbleDeclarativeWidget.h"
 #include "PositionSource.h"
 #include "Bookmarks.h"
@@ -67,6 +68,10 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
 void MarbleDeclarativePlugin::initializeEngine( QDeclarativeEngine *engine, const char *)
 {
     engine->addImageProvider( "maptheme", new MapThemeImageProvider );
+    // Register the global Marble object. Can be used in .qml files for requests like Marble.resolvePath("some/icon.png")
+    if ( !engine->rootContext()->contextProperty( "Marble").isValid() ) {
+        engine->rootContext()->setContextProperty( "Marble", new MarbleDeclarativeObject( this ) );
+    }
 }
 
 #include "MarbleDeclarativePlugin.moc"
