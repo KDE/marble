@@ -28,12 +28,14 @@ Page {
             id: searchButton
             checkable: true
             width: 60
+            flat: true
             iconSource: "image://theme/icon-m-toolbar-search";
         }
         ToolButton {
             id: themeButton
             width: 60
             iconSource: "image://theme/icon-m-toolbar-settings";
+            flat: true
             onClicked: themeDialog.open()
 
             MapThemeModel {

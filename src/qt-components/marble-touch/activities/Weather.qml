@@ -38,6 +38,7 @@ Page {
             checkable: true
             checked: true
             width: 60
+            flat: true
             iconSource: "image://theme/icon-m-toolbar-search";
         }
     }
