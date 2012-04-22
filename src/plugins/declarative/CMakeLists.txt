@@ -14,6 +14,7 @@ Bookmarks.cpp
 Coordinate.cpp
 DeclarativeMapThemeManager.cpp
 MapTheme.cpp
+MarbleDeclarativeObject.cpp
 MarbleDeclarativePlugin.cpp
 MarbleDeclarativeWidget.cpp
 Placemark.cpp
