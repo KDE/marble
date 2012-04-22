@@ -21,9 +21,9 @@ Item {
     property bool _editing: false
 
     function retrieveInput( lon, lat ) {
-        if ( root._editing ) {
-            root._editing = false
-            root.positionChanged(index, lon, lat)
+        if ( _editing ) {
+            _editing = false
+            positionChanged(index, lon, lat)
         }
     }
 
