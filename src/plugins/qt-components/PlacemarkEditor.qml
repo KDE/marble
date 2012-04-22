@@ -197,14 +197,14 @@ Item {
                                 if (condition === "sandstorm") return "storm"
                                 if (condition === "duststorm") return "storm"
                                 if (condition === "well developed dust/sand whirls") return "storm"
-                                console.debug("unknown condition " + condition)
+                                //console.debug("unknown condition " + condition)
 
                                 if (clouds === "clear sky") return "clear";
                                 if (clouds === "few clouds") return "few-clouds";
                                 if (clouds === "scattered clouds") return "few-clouds";
                                 if (clouds === "broken clouds") return "clouds";
                                 if (clouds === "overcast") return "many-clouds";
-                                console.debug("unknown clouds " + clouds)
+                                //console.debug("unknown clouds " + clouds)
 
                                 return ""
                             }
@@ -289,13 +289,13 @@ Item {
 
             var R = 6378000.0
             var d = 500.0
-            var brng = 215 * 3.1415926 / 180.0
-            var deg2rad = 3.1415926 / 180.0
+            var deg2rad = Math.PI / 180.0
+            var brng = 215 * deg2rad
             var lat = latitude * deg2rad
             var lon = longitude * deg2rad
             var lat1 = Math.asin( Math.sin(lat)*Math.cos(d/R) + Math.cos(lat)*Math.sin(d/R)*Math.cos(brng) );
             var lon1 = lon + Math.atan2(Math.sin(brng)*Math.sin(d/R)*Math.cos(lat), Math.cos(d/R)-Math.sin(lat)*Math.sin(lat1));
-            brng = 135 * 3.1415926 / 180.0
+            brng = 135 * deg2rad
             var lat2 = Math.asin( Math.sin(lat)*Math.cos(d/R) + Math.cos(lat)*Math.sin(d/R)*Math.cos(brng) );
             var lon2 = lon + Math.atan2(Math.sin(brng)*Math.sin(d/R)*Math.cos(lat), Math.cos(d/R)-Math.sin(lat)*Math.sin(lat2));
             var url = "http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=20&minx=" + lon1/deg2rad + "&miny=" + lat1/deg2rad + "&maxx=" + lon2/deg2rad + "&maxy=" + lat2/deg2rad + "&size=square&mapfilter=true"
