@@ -28,11 +28,11 @@ Page {
         }
 
         ToolButton {
-            id: searchButton
+            id: minimizeButton
             checkable: true
             checked: true
             width: 60
-            iconSource: "image://theme/icon-m-toolbar-search";
+            iconSource: "image://theme/icon-m-toolbar-up"
         }
 
         Item {}
@@ -41,7 +41,7 @@ Page {
     Rectangle {
         id: searchResultView
 
-        property bool minimized: !searchButton.checked
+        property bool minimized: !minimizeButton.checked
         visible: !minimized
 
         anchors.bottom: searchActivityPage.bottom
