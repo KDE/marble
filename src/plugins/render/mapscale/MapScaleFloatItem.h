@@ -80,14 +80,10 @@ class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationIn
     void toggleRatioScaleVisibility();
 
  private:
-    int   invScale() const            { return m_invScale; }
-    void  setInvScale( int invScale ) { m_invScale = invScale; }
-
     QDialog *m_configDialog;
     Ui::MapScaleConfigWidget *ui_configWidget;
 
     int      m_radius;
-    int      m_invScale;
 
     QString  m_target;
 

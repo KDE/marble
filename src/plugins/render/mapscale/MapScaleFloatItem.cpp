@@ -40,7 +40,6 @@ MapScaleFloatItem::MapScaleFloatItem( const MarbleModel *marbleModel )
     : AbstractFloatItem( marbleModel, QPointF( 10.5, -10.5 ), QSizeF( 0.0, 40.0 ) ),
       m_configDialog(0),
       m_radius(0),
-      m_invScale(0.0),
       m_target(QString()),
       m_leftBarMargin(0),
       m_rightBarMargin(0),
