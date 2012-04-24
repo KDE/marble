@@ -15,10 +15,6 @@
 
 #include "GeoDataTypes.h"
 
-//Qt
-#include <QtCore/QMutex>
-#include <QtCore/QMutexLocker>
-
 namespace Marble
 {
 
@@ -60,7 +56,6 @@ class GeoDataRegionPrivate
 
     ~GeoDataRegionPrivate()
     {
-        QMutexLocker locker( &m_mutex );
         delete m_latLonAltBox;
         delete m_lod;
     }
@@ -74,8 +69,6 @@ class GeoDataRegionPrivate
     GeoDataFeature * m_parent;
     GeoDataLatLonAltBox * m_latLonAltBox;
     GeoDataLod * m_lod;
-
-    QMutex m_mutex;
 
   private:
     // Preventing usage of operator=

@@ -61,7 +61,6 @@ const char* GeoDataRegion::nodeType() const
 
 GeoDataLatLonAltBox& GeoDataRegion::latLonAltBox() const
 {
-    QMutexLocker locker( &d->m_mutex );
     // FIXME: This isn't exactly what a 'const' function should do, is it?
 
     // If the latLonAltBox hasn't been set try to determine it automatically
@@ -100,7 +99,6 @@ GeoDataLatLonAltBox& GeoDataRegion::latLonAltBox() const
 
 void GeoDataRegion::setLatLonAltBox( const GeoDataLatLonAltBox & latLonAltBox )
 {
-    QMutexLocker locker( &d->m_mutex );
     delete d->m_latLonAltBox;
     d->m_latLonAltBox = new GeoDataLatLonAltBox( latLonAltBox );
 }
@@ -108,7 +106,6 @@ void GeoDataRegion::setLatLonAltBox( const GeoDataLatLonAltBox & latLonAltBox )
 
 GeoDataLod& GeoDataRegion::lod() const
 {
-    QMutexLocker locker( &d->m_mutex );
     // If the lod hasn't been set then return a shared one
     if ( !d->m_lod ) {
         // FIXME: reference a shared object instead
@@ -121,7 +118,6 @@ GeoDataLod& GeoDataRegion::lod() const
 
 void GeoDataRegion::setLod( const GeoDataLod & lod )
 {
-    QMutexLocker locker( &d->m_mutex );
     delete d->m_lod;
     d->m_lod = new GeoDataLod( lod );
 }
@@ -149,9 +145,7 @@ GeoDataRegion &GeoDataRegion::operator=( const GeoDataRegion& other )
     // Self assignment
     if ( this == &other ) return *this;
 
-    other.d->m_mutex.lock();
     GeoDataRegion temp( other );
-    other.d->m_mutex.unlock();
     swap( temp );
     return *this;
 }
