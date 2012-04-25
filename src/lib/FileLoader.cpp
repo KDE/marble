@@ -305,6 +305,9 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
              || (*i)->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
             GeoDataContainer *child = static_cast<GeoDataContainer*>( *i );
             createFilterProperties( child );
+        } else if ( (*i)->nodeType() == GeoDataTypes::GeoDataGroundOverlayType
+                    || (*i)->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType ) {
+            /** @todo: How to handle this ? */
         } else {
             GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>( *i );
 
