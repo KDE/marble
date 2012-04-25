@@ -84,6 +84,9 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleM
     m_markerText.setPadding( 1 );
     topLayout2->setAlignment( Qt::AlignCenter );
     topLayout2->addItem( &m_markerText, 0, 0 );
+
+    m_markerIconContainer.hide();
+    m_markerTextContainer.hide();
 }
 
 ElevationProfileFloatItem::~ElevationProfileFloatItem()
