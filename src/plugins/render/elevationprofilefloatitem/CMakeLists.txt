@@ -14,7 +14,6 @@ set( my_SRCS
 set( elevationprofile_UI ElevationProfileConfigWidget.ui )
 
 qt4_wrap_ui( my_SRCS ${elevationprofile_UI})
-qt4_add_resources( my_SRCS elevationprofile.qrc)
 qt4_automoc( ${my_SRCS} )
 
 marble_add_plugin( ElevationProfileFloatItem ${my_SRCS} )

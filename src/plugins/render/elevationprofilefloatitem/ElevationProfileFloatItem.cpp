@@ -18,6 +18,8 @@
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataTreeModel.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "routing/RoutingModel.h"
@@ -33,7 +35,8 @@ namespace Marble
 ElevationProfileFloatItem::ElevationProfileFloatItem()
     : AbstractFloatItem( 0 ),
       m_configDialog( 0 ),
-      ui_configWidget( 0 )
+      ui_configWidget( 0 ),
+      m_markerPlacemark( 0 )
 {
 }
 
@@ -46,7 +49,8 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleM
         m_viewportWidth( 0 ),
         m_shrinkFactorY( 1.2 ),
         m_fontHeight( 10 ),
-        m_currentPoint(),
+        m_markerPlacemark( new GeoDataPlacemark ),
+        m_documentIndex( -1 ),
         m_cursorPositionX( 0 ),
         m_isInitialized( false ),
         m_contextMenu( 0 ),
@@ -55,11 +59,7 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleM
         m_routeAvailable( false ),
         m_firstVisiblePoint( 0 ),
         m_lastVisiblePoint( 0 ),
-        m_zoomToViewport( false ),
-        m_markerIconContainer(),
-        m_markerTextContainer(),
-        m_markerIcon( &m_markerIconContainer ),
-        m_markerText( &m_markerTextContainer )
+        m_zoomToViewport( false )
 {
     setVisible( false );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -70,18 +70,13 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleM
     m_eleGraphHeight = highRes ? 100 : 50;
 
     setPadding( 1 );
-    m_markerIcon.setImage( QImage( ":/flag-red-mirrored.png" ) );
 
-    MarbleGraphicsGridLayout *topLayout1 = new MarbleGraphicsGridLayout( 1, 1 );
-    m_markerIconContainer.setLayout( topLayout1 );
-    topLayout1->addItem( &m_markerIcon, 0, 0 );
+    m_markerDocument.setDocumentRole( UnknownDocument );
+    m_markerDocument.setName( "Elevation Profile" );
 
-    MarbleGraphicsGridLayout *topLayout2 = new MarbleGraphicsGridLayout( 1, 1 );
-    m_markerTextContainer.setLayout( topLayout2 );
-    m_markerText.setFrame( RoundedRectFrame );
-    m_markerText.setPadding( 1 );
-    topLayout2->setAlignment( Qt::AlignCenter );
-    topLayout2->addItem( &m_markerText, 0, 0 );
+    m_markerPlacemark->setName( "Elevation Marker" );
+    m_markerPlacemark->setVisible( false );
+    m_markerDocument.append( m_markerPlacemark );
 }
 
 ElevationProfileFloatItem::~ElevationProfileFloatItem()
@@ -91,11 +86,6 @@ ElevationProfileFloatItem::~ElevationProfileFloatItem()
 QStringList ElevationProfileFloatItem::backendTypes() const
 {
     return QStringList( "elevationprofile" );
-}
-
-QStringList ElevationProfileFloatItem::renderPosition() const
-{
-    return QStringList() << "FLOAT_ITEM" << "HOVERS_ABOVE_SURFACE";
 }
 
 qreal ElevationProfileFloatItem::zValue() const
@@ -365,12 +355,13 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     painter->setPen( pen );
 
     // draw interactive cursor
-    if ( m_currentPoint.isValid() ) {
+    const GeoDataCoordinates currentPoint = m_markerPlacemark->coordinate();
+    if ( currentPoint.isValid() ) {
         painter->setPen( QColor( Qt::white ) );
         painter->drawLine( m_leftGraphMargin + m_cursorPositionX, 0,
                            m_leftGraphMargin + m_cursorPositionX, m_eleGraphHeight );
         qreal xpos = m_axisX.minValue() + ( m_cursorPositionX / m_eleGraphWidth ) * m_axisX.range();
-        qreal ypos = m_eleGraphHeight - ( ( m_currentPoint.altitude() - m_axisY.minValue() ) / ( m_axisY.range() * m_shrinkFactorY ) ) * m_eleGraphHeight;
+        qreal ypos = m_eleGraphHeight - ( ( currentPoint.altitude() - m_axisY.minValue() ) / ( m_axisY.range() * m_shrinkFactorY ) ) * m_eleGraphHeight;
 
         painter->drawLine( m_leftGraphMargin + m_cursorPositionX - 5, ypos,
                            m_leftGraphMargin + m_cursorPositionX + 5, ypos );
@@ -380,7 +371,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
                              - QFontMetricsF( font() ).width( intervalStr ) / 2;
         painter->drawText( currentStringBegin, contentSize().height() - 1.5 * m_fontHeight, intervalStr );
 
-        intervalStr.setNum( m_currentPoint.altitude(), 'f', 1 );
+        intervalStr.setNum( currentPoint.altitude(), 'f', 1 );
         intervalStr += " " + m_axisY.unit();
         if ( m_cursorPositionX + QFontMetricsF( font() ).width( intervalStr ) + m_leftGraphMargin
                 < m_eleGraphWidth ) {
@@ -397,45 +388,6 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     }
 
     painter->restore();
-}
-
-bool ElevationProfileFloatItem::renderOnMap(GeoPainter* painter, ViewportParams* viewport, const QString& renderPos, GeoSceneLayer* layer)
-{
-    if ( renderPos != "HOVERS_ABOVE_SURFACE" )
-        return false;
-
-    if ( m_currentPoint.isValid() ) {
-        // mark position on the map
-        qreal x;
-        qreal y;
-        qreal lon;
-        qreal lat;
-        // move the icon by some pixels, so that the pole of the flag sits at the exact point
-        int dx = -4;
-        int dy = -6;
-        viewport->screenCoordinates( m_currentPoint.longitude( Marble::GeoDataCoordinates::Radian ),
-                                     m_currentPoint.latitude ( Marble::GeoDataCoordinates::Radian ),
-                                           x, y );
-        viewport->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Radian );
-        m_markerIconContainer.setCoordinate( GeoDataCoordinates( lon, lat, m_currentPoint.altitude(),
-                                                            Marble::GeoDataCoordinates::Radian ) );
-        // move the text label, so that it sits next to the flag with a small spacing
-        dx += m_markerIconContainer.size().width() / 2 + m_markerTextContainer.size().width() / 2 + 2;
-        viewport->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Radian );
-        m_markerTextContainer.setCoordinate( GeoDataCoordinates( lon, lat, m_currentPoint.altitude(),
-                                                            Marble::GeoDataCoordinates::Radian ) );
-
-        QString intervalStr;
-        intervalStr.setNum( m_currentPoint.altitude(), 'f', 1 );
-        intervalStr += " " + m_axisY.unit();
-        m_markerText.setText( intervalStr );
-
-        // drawing area of flag
-        m_markerIconContainer.paintEvent( painter, viewport, renderPos, layer );
-        m_markerTextContainer.paintEvent( painter, viewport, renderPos, layer );
-    }
-
-    return true;
 }
 
 QDialog *ElevationProfileFloatItem::configDialog() //FIXME TODO Make a config dialog?
@@ -498,6 +450,8 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
     }
 
     if ( e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove ) {
+        GeoDataTreeModel *const treeModel = const_cast<MarbleModel *>( marbleModel() )->treeModel();
+
         QMouseEvent *event = static_cast<QMouseEvent*>( e  );
         QRectF plotRect = QRectF ( m_leftGraphMargin, 0, m_eleGraphWidth, contentSize().height() );
         plotRect.translate( positivePosition() );
@@ -534,13 +488,17 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
                 if ( m_cursorPositionX != event->pos().x() - plotRect.left() ) {
                     m_cursorPositionX = event->pos().x() - plotRect.left();
                     const qreal xpos = m_axisX.minValue() + ( m_cursorPositionX / m_eleGraphWidth ) * m_axisX.range();
-                    m_currentPoint = GeoDataCoordinates();  // set to invalid
+                    GeoDataCoordinates currentPoint; // invalid coordinates
                     for ( int i = start; i < end; ++i) {
                         if ( m_eleData.value(i).x() >= xpos ) {
-                            m_currentPoint = m_points[i];
-                            m_currentPoint.setAltitude( m_eleData.value(i).y() );
+                            currentPoint = m_points[i];
+                            currentPoint.setAltitude( m_eleData.value(i).y() );
                             break;
                         }
+                    }
+                    m_markerPlacemark->setCoordinate( currentPoint );
+                    if ( m_documentIndex < 0 ) {
+                        m_documentIndex = treeModel->addDocument( &m_markerDocument );
                     }
                     emit repaintNeeded();
                 }
@@ -549,8 +507,10 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
             }
         }
         else {
-            if ( m_currentPoint.isValid() ) {
-                m_currentPoint = GeoDataCoordinates();  // set to invalid
+            if ( m_documentIndex >= 0 ) {
+                m_markerPlacemark->setCoordinate( GeoDataCoordinates() ); // set to invalid
+                treeModel->removeDocument( &m_markerDocument );
+                m_documentIndex = -1;
                 emit repaintNeeded();
             }
         }

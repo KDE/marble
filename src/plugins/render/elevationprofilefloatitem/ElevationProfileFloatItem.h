@@ -16,7 +16,7 @@
 
 #include "ElevationProfilePlotAxis.h"
 
-#include "GeoDataCoordinates.h"
+#include "GeoDataDocument.h"
 #include "GeoDataLineString.h"
 #include "GeoGraphicsItem.h"
 #include "LabelGraphicsItem.h"
@@ -30,6 +30,7 @@ namespace Ui
 namespace Marble
 {
 
+class GeoDataPlacemark;
 class MarbleWidget;
 class RoutingModel;
 
@@ -53,8 +54,6 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
     ~ElevationProfileFloatItem();
 
     virtual QStringList backendTypes() const;
-
-    virtual QStringList renderPosition() const;
 
     virtual qreal zValue() const; // Overriding LayerInterface to paint on top of the route
 
@@ -82,9 +81,6 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
 
     virtual void paintContent( GeoPainter *painter, ViewportParams *viewport,
                        const QString& renderPos, GeoSceneLayer * layer = 0 );
-
-    virtual bool renderOnMap( GeoPainter *painter, ViewportParams *viewport,
-                              const QString& renderPos, GeoSceneLayer * layer = 0 );
 
     QDialog *configDialog();
 
@@ -118,7 +114,10 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
     ElevationProfilePlotAxis m_axisX;
     ElevationProfilePlotAxis m_axisY;
 
-    GeoDataCoordinates m_currentPoint;
+    GeoDataDocument         m_markerDocument;
+    GeoDataPlacemark *const m_markerPlacemark;
+    int                     m_documentIndex;
+
     qreal    m_cursorPositionX;
 
     bool     m_isInitialized;
@@ -138,11 +137,6 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
     qreal             m_maxElevation;
     qreal             m_gain;
     qreal             m_loss;
-
-    GeoGraphicsItem   m_markerIconContainer;
-    GeoGraphicsItem   m_markerTextContainer;
-    LabelGraphicsItem m_markerIcon;
-    LabelGraphicsItem m_markerText;
 
     QList<QPointF> calculateElevationData( const GeoDataLineString &lineString ) const;
     void calculateStatistics( const QList<QPointF> &eleData );
