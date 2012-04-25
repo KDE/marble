@@ -41,4 +41,4 @@ if (NOT WIN32)
   add_subdirectory( aprs )
 endif (NOT WIN32)
 
-add_subdirectory( elevationprofile )
+add_subdirectory( elevationprofilefloatitem )

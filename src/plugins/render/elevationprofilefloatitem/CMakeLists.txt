@@ -1,9 +1,8 @@
 PROJECT( ElevationProfileFloatItem )
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/elevationprofile
- ${CMAKE_CURRENT_BUILD_DIR}/src/plugins/render/elevationprofile
- ${CMAKE_BINARY_DIR}/src/plugins/render/elevationprofile
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
 INCLUDE( ${QT_USE_FILE} )
