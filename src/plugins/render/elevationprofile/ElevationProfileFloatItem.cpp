@@ -421,17 +421,17 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         // move the icon by some pixels, so that the pole of the flag sits at the exact point
         int dx = -4;
         int dy = -6;
-        m_marbleWidget->screenCoordinates( currentPoint.longitude( Marble::GeoDataCoordinates::Degree ),
-                                           currentPoint.latitude ( Marble::GeoDataCoordinates::Degree ),
+        viewport->screenCoordinates( currentPoint.longitude( Marble::GeoDataCoordinates::Radian ),
+                                     currentPoint.latitude ( Marble::GeoDataCoordinates::Radian ),
                                            x, y );
-        m_marbleWidget->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Degree );
+        viewport->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Radian );
         m_markerIconContainer.setCoordinate( GeoDataCoordinates( lon, lat, currentPoint.altitude(),
-                                                            Marble::GeoDataCoordinates::Degree ) );
+                                                            Marble::GeoDataCoordinates::Radian ) );
         // move the text label, so that it sits next to the flag with a small spacing
         dx += m_markerIconContainer.size().width() / 2 + m_markerTextContainer.size().width() / 2 + 2;
-        m_marbleWidget->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Degree );
+        viewport->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Radian );
         m_markerTextContainer.setCoordinate( GeoDataCoordinates( lon, lat, currentPoint.altitude(),
-                                                            Marble::GeoDataCoordinates::Degree ) );
+                                                            Marble::GeoDataCoordinates::Radian ) );
         m_markerText.setText( intervalStr );
 
         // drawing area of flag
