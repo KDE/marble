@@ -11,18 +11,14 @@
 #ifndef ELEVATIONPROFILEFLOATITEM_H
 #define ELEVATIONPROFILEFLOATITEM_H
 
-#include <QtCore/QObject>
-#include <QProcess>
-#include <QThread>
-
-#include "ElevationProfilePlotAxis.h"
 #include "AbstractFloatItem.h"
 #include "DialogConfigurationInterface.h"
-#include "PluginAboutDialog.h"
+
+#include "ElevationProfilePlotAxis.h"
+
+#include "GeoDataLineString.h"
+#include "GeoGraphicsItem.h"
 #include "LabelGraphicsItem.h"
-#include "MarbleWidget.h"
-#include "routing/RoutingModel.h"
-#include <GeoGraphicsItem.h>
 
 
 namespace Ui
@@ -32,6 +28,9 @@ namespace Ui
 
 namespace Marble
 {
+
+class MarbleWidget;
+class RoutingModel;
 
 /**
  * @short The class that creates an interactive elvation profile.
@@ -127,7 +126,6 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
 
     MarbleWidget*     m_marbleWidget;
     RoutingModel*     m_routingModel;
-    RoutingLayer*     m_routingLayer;
     bool              m_routeAvailable;
 
     int               m_firstVisiblePoint;

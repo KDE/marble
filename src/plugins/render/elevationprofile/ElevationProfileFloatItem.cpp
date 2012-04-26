@@ -10,17 +10,17 @@
 
 #include "ElevationProfileFloatItem.h"
 
-#include <QThread>
 #include <QtCore/QRect>
-#include <QtGui/QApplication>
 #include <QtGui/QPushButton>
 #include <QtGui/QMenu>
 
 #include "ui_ElevationProfileConfigWidget.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
+#include "MarbleWidget.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
+#include "routing/RoutingModel.h"
 #include "routing/RoutingManager.h"
 #include "MarbleDirs.h"
 #include "ElevationModel.h"
@@ -52,7 +52,6 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleM
         m_contextMenu( 0 ),
         m_marbleWidget( 0 ),
         m_routingModel( 0 ),
-        m_routingLayer( 0 ),
         m_routeAvailable( false ),
         m_firstVisiblePoint( 0 ),
         m_lastVisiblePoint( 0 ),
@@ -517,7 +516,6 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
     if ( widget && !m_marbleWidget ) {
         m_marbleWidget = widget;
         m_routingModel = m_marbleWidget->model()->routingManager()->routingModel();
-        m_routingLayer = m_marbleWidget->routingLayer();
         connect( m_routingModel, SIGNAL( currentRouteChanged() ), this, SLOT( updateData() ) );
         connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
                  this, SLOT( updateVisiblePoints() ) );
