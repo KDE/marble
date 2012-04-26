@@ -56,8 +56,7 @@ class MarbleGraphicsItemPrivate
         }
 
         // Delete all children
-        // See above: The children will remove itself from the list
-        qDeleteAll( m_children );
+        qDeleteAll( m_children.toList() ); // delete using a copy, since children may invalidate m_children's iterator
 
         // Delete Layout
         delete m_layout;
