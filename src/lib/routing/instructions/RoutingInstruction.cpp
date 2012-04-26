@@ -372,6 +372,12 @@ QString RoutingInstruction::generateRoadInstruction( RoutingInstruction::TurnTyp
             QString text = QObject::tr( "Take the %1. exit in the roundabout into %2." );  // One sentence
             return text.arg( roundaboutExit ).arg( roadName );
         }
+    } else {
+        if ( roadName.isEmpty() ) {
+            return QObject::tr( "Exit the roundabout." );
+        } else {
+            return QObject::tr( "Exit the roundabout into %2." ).arg( roadName );
+        }
     }
 
     if ( roadName.isEmpty() ) {
