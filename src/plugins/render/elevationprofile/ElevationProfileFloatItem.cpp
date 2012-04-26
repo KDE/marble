@@ -446,14 +446,14 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         }
         // redraw
         if ( newMarkerRegion != m_lastMarkerRegion ) {
-            repaintRegion( m_lastMarkerRegion + newMarkerRegion );
+            emit repaintNeeded( m_lastMarkerRegion + newMarkerRegion );
         }
         m_lastMarkerRegion = newMarkerRegion;
     } else {
         if( m_markerIconContainer.visible() || m_markerTextContainer.visible() ) {
             m_markerIconContainer.hide();
             m_markerTextContainer.hide();
-            repaintRegion( m_lastMarkerRegion );
+            emit repaintNeeded( m_lastMarkerRegion );
         }
     }
     painter->restore();
@@ -726,18 +726,8 @@ void ElevationProfileFloatItem::forceRepaint()
     // We add one pixel as antialiasing could result into painting on these pixels to.
     QRectF floatItemRect = QRectF( positivePosition() - QPoint( 1, 1 ),
                                    size() + QSize( 2, 2 ) );
-    repaintRegion( floatItemRect.toRect() );
     update();
-}
-
-void ElevationProfileFloatItem::repaintRegion( QRegion dirtyRegion )
-{
-    if ( m_marbleWidget ) {
-        m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground,  false );
-        m_marbleWidget->update(dirtyRegion);
-        m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground,
-                                      m_marbleWidget->viewport()->mapCoversViewport() );
-    }
+    emit repaintNeeded( floatItemRect.toRect() );
 }
 
 void ElevationProfileFloatItem::readSettings()

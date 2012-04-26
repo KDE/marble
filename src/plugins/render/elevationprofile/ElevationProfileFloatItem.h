@@ -146,7 +146,6 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
 
     QList<QPointF> calculateElevationData( const GeoDataLineString &lineString ) const;
     void calculateStatistics( const QList<QPointF> &eleData );
-    void repaintRegion( QRegion dirtyRegion );
 };
 
 
