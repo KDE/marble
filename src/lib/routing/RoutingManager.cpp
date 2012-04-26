@@ -261,6 +261,11 @@ RoutingModel *RoutingManager::routingModel()
     return &d->m_routingModel;
 }
 
+const RoutingModel *RoutingManager::routingModel() const
+{
+    return &d->m_routingModel;
+}
+
 RouteRequest* RoutingManager::routeRequest()
 {
     return &d->m_routeRequest;

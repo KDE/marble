@@ -125,7 +125,7 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
     QMenu*   m_contextMenu;
 
     MarbleWidget*     m_marbleWidget;
-    RoutingModel*     m_routingModel;
+    const RoutingModel* m_routingModel;
     bool              m_routeAvailable;
 
     int               m_firstVisiblePoint;

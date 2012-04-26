@@ -151,6 +151,15 @@ QIcon ElevationProfileFloatItem::icon () const
 void ElevationProfileFloatItem::initialize ()
 {
     connect( marbleModel()->elevationModel(), SIGNAL( updateAvailable() ), SLOT( updateData() ) );
+
+    m_routingModel = marbleModel()->routingManager()->routingModel();
+    connect( m_routingModel, SIGNAL( currentRouteChanged() ), this, SLOT( updateData() ) );
+
+    m_fontHeight = QFontMetricsF( font() ).ascent() + 1;
+    m_leftGraphMargin = QFontMetricsF( font() ).width( "0000 m" ); // TODO make this dynamic according to actual need
+    connect( this, SIGNAL( dataUpdated() ), SLOT( forceRepaint() ) );
+
+    updateData();
 }
 
 bool ElevationProfileFloatItem::isInitialized () const
@@ -161,12 +170,10 @@ bool ElevationProfileFloatItem::isInitialized () const
 void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
 {
     if ( !( viewport->width() == m_viewportWidth && m_isInitialized ) ) {
-        m_fontHeight = QFontMetricsF( font() ).ascent() + 1;
         bool const highRes = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::HighResolution;
         int const widthRatio = highRes ? 2 : 3;
         setContentSize( QSizeF( viewport->width() / widthRatio,
                                 m_eleGraphHeight + m_fontHeight * 2.5 ) );
-        m_leftGraphMargin = QFontMetricsF( font() ).width( "0000 m" ); // TODO make this dynamic according to actual need
         m_eleGraphWidth = contentSize().width() - m_leftGraphMargin;
         m_axisX.setLength( m_eleGraphWidth );
         m_axisY.setLength( m_eleGraphHeight );
@@ -176,11 +183,10 @@ void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
         bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
         if ( !m_isInitialized && !smallScreen ) {
             setPosition( QPointF( (viewport->width() - contentSize().width()) / 2 , 10.5 ) );
-            connect( this, SIGNAL( dataUpdated() ), SLOT( forceRepaint() ) );
         }
         m_isInitialized = true;
-        updateData();
     }
+
     update();
 }
 
@@ -515,12 +521,10 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
 
     if ( widget && !m_marbleWidget ) {
         m_marbleWidget = widget;
-        m_routingModel = m_marbleWidget->model()->routingManager()->routingModel();
-        connect( m_routingModel, SIGNAL( currentRouteChanged() ), this, SLOT( updateData() ) );
+        connect( this, SIGNAL( dataUpdated() ), this, SLOT( updateVisiblePoints() ) );
         connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
                  this, SLOT( updateVisiblePoints() ) );
-        connect( this, SIGNAL( dataUpdated() ), this, SLOT( updateVisiblePoints() ) );
-        updateData();
+        connect( this, SIGNAL( settingsChanged( QString ) ), this, SLOT( updateVisiblePoints() ) );
     }
 
     bool cursorAboveFloatItem( false );
@@ -764,7 +768,6 @@ void ElevationProfileFloatItem::toggleZoomToViewport()
 {
     m_zoomToViewport = ! m_zoomToViewport;
     calculateStatistics( m_eleData );
-    updateVisiblePoints();
     if ( ! m_zoomToViewport ) {
         m_axisX.setRange( m_eleData.first().x(), m_eleData.last().x() );
         m_axisY.setRange( qMin( m_minElevation, qreal( 0.0 ) ), m_maxElevation );

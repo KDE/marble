@@ -63,6 +63,8 @@ public:
       */
     RoutingModel *routingModel();
 
+    const RoutingModel *routingModel() const;
+
     /**
       * Provides access to the model which contains a list of
       * alternative routes
