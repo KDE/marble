@@ -59,8 +59,7 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleM
         m_markerIconContainer(),
         m_markerTextContainer(),
         m_markerIcon( &m_markerIconContainer ),
-        m_markerText( &m_markerTextContainer ),
-        m_lastMarkerRegion( QRegion() )
+        m_markerText( &m_markerTextContainer )
 {
     setVisible( false );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -83,9 +82,6 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleM
     m_markerText.setPadding( 1 );
     topLayout2->setAlignment( Qt::AlignCenter );
     topLayout2->addItem( &m_markerText, 0, 0 );
-
-    m_markerIconContainer.hide();
-    m_markerTextContainer.hide();
 }
 
 ElevationProfileFloatItem::~ElevationProfileFloatItem()
@@ -398,11 +394,18 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
             ypos++;
         }
         painter->drawText( currentStringBegin, ypos + m_fontHeight / 2, intervalStr );
+    }
 
+    painter->restore();
+}
+
+bool ElevationProfileFloatItem::renderOnMap(GeoPainter* painter, ViewportParams* viewport, const QString& renderPos, GeoSceneLayer* layer)
+{
+    if ( renderPos != "HOVERS_ABOVE_SURFACE" )
+        return false;
+
+    if ( m_currentPoint.isValid() ) {
         // mark position on the map
-        m_markerIconContainer.show();
-        m_markerTextContainer.show();
-        QRegion newMarkerRegion;
         qreal x;
         qreal y;
         qreal lon;
@@ -421,39 +424,17 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         viewport->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Radian );
         m_markerTextContainer.setCoordinate( GeoDataCoordinates( lon, lat, m_currentPoint.altitude(),
                                                             Marble::GeoDataCoordinates::Radian ) );
+
+        QString intervalStr;
+        intervalStr.setNum( m_currentPoint.altitude(), 'f', 1 );
+        intervalStr += " " + m_axisY.unit();
         m_markerText.setText( intervalStr );
 
         // drawing area of flag
-        if ( !m_markerIconContainer.positions().isEmpty() ) {
-            newMarkerRegion += QRect( m_markerIconContainer.positions().first().toPoint(),
-                                      m_markerIconContainer.size().toSize() );
-        }
-        // drawing area of text
-        if ( !m_markerTextContainer.positions().isEmpty() ) {
-            newMarkerRegion += QRect( m_markerTextContainer.positions().first().toPoint(),
-                                      m_markerTextContainer.size().toSize() );
-        }
-        // redraw
-        if ( newMarkerRegion != m_lastMarkerRegion ) {
-            emit repaintNeeded( m_lastMarkerRegion + newMarkerRegion );
-        }
-        m_lastMarkerRegion = newMarkerRegion;
-    } else {
-        if( m_markerIconContainer.visible() || m_markerTextContainer.visible() ) {
-            m_markerIconContainer.hide();
-            m_markerTextContainer.hide();
-            emit repaintNeeded( m_lastMarkerRegion );
-        }
-    }
-    painter->restore();
-}
-
-bool ElevationProfileFloatItem::renderOnMap(GeoPainter* painter, ViewportParams* viewport, const QString& renderPos, GeoSceneLayer* layer)
-{
-    if ( renderPos == "HOVERS_ABOVE_SURFACE" ) {
         m_markerIconContainer.paintEvent( painter, viewport, renderPos, layer );
         m_markerTextContainer.paintEvent( painter, viewport, renderPos, layer );
     }
+
     return true;
 }
 
@@ -563,6 +544,7 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
                     }
                     emit repaintNeeded();
                 }
+
                 return true;
             }
         }

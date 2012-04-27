@@ -143,7 +143,6 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
     GeoGraphicsItem   m_markerTextContainer;
     LabelGraphicsItem m_markerIcon;
     LabelGraphicsItem m_markerText;
-    QRegion           m_lastMarkerRegion;
 
     QList<QPointF> calculateElevationData( const GeoDataLineString &lineString ) const;
     void calculateStatistics( const QList<QPointF> &eleData );
