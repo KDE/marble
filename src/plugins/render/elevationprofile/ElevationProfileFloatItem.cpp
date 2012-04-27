@@ -46,7 +46,7 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleM
         m_viewportWidth( 0 ),
         m_shrinkFactorY( 1.2 ),
         m_fontHeight( 10 ),
-        m_mouseInWidget( false ),
+        m_currentPoint(),
         m_cursorPositionX( 0 ),
         m_isInitialized( false ),
         m_contextMenu( 0 ),
@@ -369,23 +369,12 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     painter->setPen( pen );
 
     // draw interactive cursor
-    if ( m_mouseInWidget ) {
+    if ( m_currentPoint.isValid() ) {
         painter->setPen( QColor( Qt::white ) );
         painter->drawLine( m_leftGraphMargin + m_cursorPositionX, 0,
                            m_leftGraphMargin + m_cursorPositionX, m_eleGraphHeight );
         qreal xpos = m_axisX.minValue() + ( m_cursorPositionX / m_eleGraphWidth ) * m_axisX.range();
-        qreal ypos = 0;
-        GeoDataCoordinates currentPoint;
-        for ( int i = start; i < end; ++i) {
-            ypos = m_eleData.value(i).y();
-            if ( m_eleData.value(i).x() >= xpos ) {
-                currentPoint = m_points[i];
-                currentPoint.setAltitude( m_eleData.value(i).y() );
-                break;
-            }
-        }
-        ypos = ( ( ypos - m_axisY.minValue() ) / ( m_axisY.range() * m_shrinkFactorY ) ) * m_eleGraphHeight;
-        ypos = m_eleGraphHeight - ypos;
+        qreal ypos = m_eleGraphHeight - ( ( m_currentPoint.altitude() - m_axisY.minValue() ) / ( m_axisY.range() * m_shrinkFactorY ) ) * m_eleGraphHeight;
 
         painter->drawLine( m_leftGraphMargin + m_cursorPositionX - 5, ypos,
                            m_leftGraphMargin + m_cursorPositionX + 5, ypos );
@@ -395,7 +384,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
                              - QFontMetricsF( font() ).width( intervalStr ) / 2;
         painter->drawText( currentStringBegin, contentSize().height() - 1.5 * m_fontHeight, intervalStr );
 
-        intervalStr.setNum( currentPoint.altitude(), 'f', 1 );
+        intervalStr.setNum( m_currentPoint.altitude(), 'f', 1 );
         intervalStr += " " + m_axisY.unit();
         if ( m_cursorPositionX + QFontMetricsF( font() ).width( intervalStr ) + m_leftGraphMargin
                 < m_eleGraphWidth ) {
@@ -421,16 +410,16 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         // move the icon by some pixels, so that the pole of the flag sits at the exact point
         int dx = -4;
         int dy = -6;
-        viewport->screenCoordinates( currentPoint.longitude( Marble::GeoDataCoordinates::Radian ),
-                                     currentPoint.latitude ( Marble::GeoDataCoordinates::Radian ),
+        viewport->screenCoordinates( m_currentPoint.longitude( Marble::GeoDataCoordinates::Radian ),
+                                     m_currentPoint.latitude ( Marble::GeoDataCoordinates::Radian ),
                                            x, y );
         viewport->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Radian );
-        m_markerIconContainer.setCoordinate( GeoDataCoordinates( lon, lat, currentPoint.altitude(),
+        m_markerIconContainer.setCoordinate( GeoDataCoordinates( lon, lat, m_currentPoint.altitude(),
                                                             Marble::GeoDataCoordinates::Radian ) );
         // move the text label, so that it sits next to the flag with a small spacing
         dx += m_markerIconContainer.size().width() / 2 + m_markerTextContainer.size().width() / 2 + 2;
         viewport->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Radian );
-        m_markerTextContainer.setCoordinate( GeoDataCoordinates( lon, lat, currentPoint.altitude(),
+        m_markerTextContainer.setCoordinate( GeoDataCoordinates( lon, lat, m_currentPoint.altitude(),
                                                             Marble::GeoDataCoordinates::Radian ) );
         m_markerText.setText( intervalStr );
 
@@ -540,14 +529,13 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
         const bool cursorAboveFloatItem = plotRect.contains(event->pos());
 
         if ( cursorAboveFloatItem ) {
-            m_mouseInWidget = true;
+            const int start = m_zoomToViewport ? m_firstVisiblePoint : 0;
+            const int end = m_zoomToViewport ? m_lastVisiblePoint : m_eleData.size();
 
             // Double click triggers recentering the map at the specified position
             if ( e->type() == QEvent::MouseButtonDblClick ) {
                 const QPointF mousePosition = event->pos() - plotRect.topLeft();
                 const int xPos = mousePosition.x();
-                const int start = m_zoomToViewport ? m_firstVisiblePoint : 0;
-                const int end = m_zoomToViewport ? m_lastVisiblePoint : m_eleData.size();
                 for ( int i = start; i < end; ++i) {
                     const int plotPos = ( m_eleData.value(i).x() - m_axisX.minValue() ) * m_eleGraphWidth / m_axisX.range();
                     if ( plotPos >= xPos ) {
@@ -564,14 +552,23 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
                 widget->setCursor(QCursor(Qt::CrossCursor));
                 if ( m_cursorPositionX != event->pos().x() - plotRect.left() ) {
                     m_cursorPositionX = event->pos().x() - plotRect.left();
+                    const qreal xpos = m_axisX.minValue() + ( m_cursorPositionX / m_eleGraphWidth ) * m_axisX.range();
+                    m_currentPoint = GeoDataCoordinates();  // set to invalid
+                    for ( int i = start; i < end; ++i) {
+                        if ( m_eleData.value(i).x() >= xpos ) {
+                            m_currentPoint = m_points[i];
+                            m_currentPoint.setAltitude( m_eleData.value(i).y() );
+                            break;
+                        }
+                    }
                     emit repaintNeeded();
                 }
                 return true;
             }
         }
         else {
-            if ( m_mouseInWidget ) {
-                m_mouseInWidget = false;
+            if ( m_currentPoint.isValid() ) {
+                m_currentPoint = GeoDataCoordinates();  // set to invalid
                 emit repaintNeeded();
             }
         }

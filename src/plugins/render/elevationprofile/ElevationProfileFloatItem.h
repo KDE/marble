@@ -16,6 +16,7 @@
 
 #include "ElevationProfilePlotAxis.h"
 
+#include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 #include "GeoGraphicsItem.h"
 #include "LabelGraphicsItem.h"
@@ -117,7 +118,7 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
     ElevationProfilePlotAxis m_axisX;
     ElevationProfilePlotAxis m_axisY;
 
-    bool     m_mouseInWidget;
+    GeoDataCoordinates m_currentPoint;
     qreal    m_cursorPositionX;
 
     bool     m_isInitialized;
