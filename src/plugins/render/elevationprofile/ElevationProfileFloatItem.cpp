@@ -527,7 +527,6 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
         connect( this, SIGNAL( settingsChanged( QString ) ), this, SLOT( updateVisiblePoints() ) );
     }
 
-    bool cursorAboveFloatItem( false );
     if ( e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove ) {
         QMouseEvent *event = static_cast<QMouseEvent*>( e  );
         QRectF plotRect = QRectF ( m_leftGraphMargin, 0, m_eleGraphWidth, contentSize().height() );
@@ -538,8 +537,10 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
         plotRect.translate(-1, -1);
         plotRect.setSize(plotRect.size() + QSize(2, 2) );
 
-        if ( plotRect.contains(event->pos()) ) {
-            cursorAboveFloatItem = true;
+        const bool cursorAboveFloatItem = plotRect.contains(event->pos());
+
+        if ( cursorAboveFloatItem ) {
+            m_mouseInWidget = true;
 
             // Double click triggers recentering the map at the specified position
             if ( e->type() == QEvent::MouseButtonDblClick ) {
@@ -556,23 +557,23 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
                 }
                 return true;
             }
-        }
 
-        if ( ( cursorAboveFloatItem && e->type() == QEvent::MouseMove
-                && !event->buttons() & Qt::LeftButton )
-                || m_mouseInWidget != cursorAboveFloatItem
-           )
-        {
-            // Cross hair cursor when moving above the float item
-            // and mark the position on the graph
-            widget->setCursor(QCursor(Qt::CrossCursor));
-            if ( m_cursorPositionX != event->pos().x() - plotRect.left() ) {
-                m_cursorPositionX = event->pos().x() - plotRect.left();
-                m_mouseInWidget = cursorAboveFloatItem;
-                forceRepaint();
+            if ( e->type() == QEvent::MouseMove && !event->buttons() & Qt::LeftButton ) {
+                // Cross hair cursor when moving above the float item
+                // and mark the position on the graph
+                widget->setCursor(QCursor(Qt::CrossCursor));
+                if ( m_cursorPositionX != event->pos().x() - plotRect.left() ) {
+                    m_cursorPositionX = event->pos().x() - plotRect.left();
+                    emit repaintNeeded();
+                }
+                return true;
             }
-
-            return true;
+        }
+        else {
+            if ( m_mouseInWidget ) {
+                m_mouseInWidget = false;
+                emit repaintNeeded();
+            }
         }
     }
 
