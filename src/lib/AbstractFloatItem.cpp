@@ -183,25 +183,8 @@ bool AbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport,
         paintEvent( painter, viewport, renderPos, layer );
         return true;
     }
-    else {
-        return renderOnMap( painter, viewport, renderPos, layer );
-    }
-}
 
-bool AbstractFloatItem::renderOnMap( GeoPainter     *painter,
-                                     ViewportParams *viewport,
-                                     const QString  &renderPos,
-                                     GeoSceneLayer  *layer )
-{
-    // In the derived method here is the place where you can draw some
-    // additional stuff onto the map itself.
-
-    Q_UNUSED( painter );
-    Q_UNUSED( viewport );
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
-
-    return true;
+    return false;
 }
 
 void AbstractFloatItem::show()
