@@ -200,6 +200,13 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
                 return QVariant();
             }
             break;
+        case Qt::SizeHintRole:
+            {
+                bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+                int const size = smallScreen ? 64 : 32;
+                return QSize( size, size );
+            }
+            break;
         case RoutingModel::CoordinateRole:
             return QVariant::fromValue( segment.maneuver().position() );
             break;
