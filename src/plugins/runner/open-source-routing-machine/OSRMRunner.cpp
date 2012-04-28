@@ -150,30 +150,39 @@ GeoDataLineString *OSRMRunner::decodePolyline( const QString &geometry ) const
 
 RoutingInstruction::TurnType OSRMRunner::parseTurnType( const QString &instruction ) const
 {
-    /** @todo: FIXME Less fragile parsing, https://github.com/DennisOSRM/Project-OSRM/issues/216 */
+    /** @todo: Create enum values and instructions for
+     * ReachViaPoint = 9;
+     * HeadOn = 10;
+     * LeaveRoundAbout = 12;
+     * StayOnRoundAbout = 13;
+     * StartAtEndOfStreet = 14;
+     * ReachedYourDestination = 15;
+     */
 
-    if ( instruction == "Continue" ) {
+    if ( instruction == "1" ) {
         return RoutingInstruction::Straight;
-    } else if ( instruction == "Turn slight right" ) {
+    } else if ( instruction == "2" ) {
         return RoutingInstruction::SlightRight;
-    } else if ( instruction == "Turn right" ) {
+    } else if ( instruction == "3" ) {
         return RoutingInstruction::Right;
-    } else if ( instruction == "Turn sharp right" ) {
+    } else if ( instruction == "4" ) {
         return RoutingInstruction::SharpRight;
-    } else if ( instruction == "U-Turn" ) {
+    } else if ( instruction == "5" ) {
         return RoutingInstruction::TurnAround;
-    } else if ( instruction == "Turn sharp left" ) {
+    } else if ( instruction == "6" ) {
         return RoutingInstruction::SharpLeft;
-    } else if ( instruction == "Turn left" ) {
+    } else if ( instruction == "7" ) {
         return RoutingInstruction::Left;
-    } else if ( instruction == "Turn slight left" ) {
+    } else if ( instruction == "8" ) {
         return RoutingInstruction::SlightLeft;
-    } else if ( instruction == "Enter roundabout and leave at first exit" ) {
-        return RoutingInstruction::RoundaboutFirstExit;
-    } else if ( instruction == "Enter roundabout and leave at second exit" ) {
-        return RoutingInstruction::RoundaboutSecondExit;
-    } else if ( instruction == "Enter roundabout and leave at third exit" ) {
-        return RoutingInstruction::RoundaboutThirdExit;
+    } else if ( instruction.startsWith( "11-" ) ) {
+        int const exit = instruction.mid( 3 ).toInt();
+        switch ( exit ) {
+        case 1: return RoutingInstruction::RoundaboutFirstExit; break;
+        case 2: return RoutingInstruction::RoundaboutSecondExit; break;
+        case 3: return RoutingInstruction::RoundaboutThirdExit; break;
+        default: return RoutingInstruction::RoundaboutExit;
+        }
     }
 
     return RoutingInstruction::Unknown;
