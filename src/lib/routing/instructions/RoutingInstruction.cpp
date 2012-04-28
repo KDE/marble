@@ -350,7 +350,7 @@ QString RoutingInstruction::instructionText() const
 
 QString RoutingInstruction::generateRoadInstruction( RoutingInstruction::TurnType turnType, const QString &roadName )
 {
-    int roundaboutExit = 0;
+    int roundaboutExit = -1;
     switch ( turnType ) {
     case RoundaboutFirstExit:
         roundaboutExit = 1;
@@ -361,22 +361,27 @@ QString RoutingInstruction::generateRoadInstruction( RoutingInstruction::TurnTyp
     case RoundaboutThirdExit:
         roundaboutExit = 3;
         break;
-    default:
+    case RoundaboutExit:
         roundaboutExit = 0;
+        break;
+    default:
+        break;
     }
 
-    if ( roundaboutExit > 0 ) {
-        if ( roadName.isEmpty() ) {
-            return QObject::tr( "Take the %1. exit in the roundabout." ).arg( roundaboutExit ); // One sentence
+    if ( roundaboutExit >= 0 ) {
+        if ( roundaboutExit > 0 ) {
+            if ( roadName.isEmpty() ) {
+                return QObject::tr( "Take the %1. exit in the roundabout." ).arg( roundaboutExit ); // One sentence
+            } else {
+                QString text = QObject::tr( "Take the %1. exit in the roundabout into %2." );  // One sentence
+                return text.arg( roundaboutExit ).arg( roadName );
+            }
         } else {
-            QString text = QObject::tr( "Take the %1. exit in the roundabout into %2." );  // One sentence
-            return text.arg( roundaboutExit ).arg( roadName );
-        }
-    } else {
-        if ( roadName.isEmpty() ) {
-            return QObject::tr( "Exit the roundabout." );
-        } else {
-            return QObject::tr( "Exit the roundabout into %2." ).arg( roadName );
+            if ( roadName.isEmpty() ) {
+                return QObject::tr( "Exit the roundabout." );
+            } else {
+                return QObject::tr( "Exit the roundabout into %2." ).arg( roadName );
+            }
         }
     }
 
