@@ -349,8 +349,8 @@ QString RoutingInstruction::instructionText() const
 }
 
 QString RoutingInstruction::generateRoadInstruction( RoutingInstruction::TurnType turnType, const QString &roadName )
-{
-    int roundaboutExit = -1;
+{   
+    int roundaboutExit = 0;
     switch ( turnType ) {
     case RoundaboutFirstExit:
         roundaboutExit = 1;
@@ -361,32 +361,25 @@ QString RoutingInstruction::generateRoadInstruction( RoutingInstruction::TurnTyp
     case RoundaboutThirdExit:
         roundaboutExit = 3;
         break;
-    case RoundaboutExit:
-        roundaboutExit = 0;
-        break;
     default:
         break;
     }
 
-    if ( roundaboutExit >= 0 ) {
-        if ( roundaboutExit > 0 ) {
-            if ( roadName.isEmpty() ) {
-                return QObject::tr( "Take the %1. exit in the roundabout." ).arg( roundaboutExit ); // One sentence
-            } else {
-                QString text = QObject::tr( "Take the %1. exit in the roundabout into %2." );  // One sentence
-                return text.arg( roundaboutExit ).arg( roadName );
-            }
+    if ( roundaboutExit > 0 ) {
+        if ( roadName.isEmpty() ) {
+            return QObject::tr( "Take the %1. exit in the roundabout." ).arg( roundaboutExit ); // One sentence
         } else {
-            if ( roadName.isEmpty() ) {
-                return QObject::tr( "Exit the roundabout." );
-            } else {
-                return QObject::tr( "Exit the roundabout into %2." ).arg( roadName );
-            }
+            QString text = QObject::tr( "Take the %1. exit in the roundabout into %2." );  // One sentence
+            return text.arg( roundaboutExit ).arg( roadName );
         }
     }
 
     if ( roadName.isEmpty() ) {
         switch( turnType ) {
+        case Continue:
+            return QObject::tr( "Continue." );
+        case Merge:
+            return QObject::tr( "Merge." );
         case TurnAround:
             return QObject::tr( "Turn around." );
         case SharpLeft:
@@ -403,17 +396,26 @@ QString RoutingInstruction::generateRoadInstruction( RoutingInstruction::TurnTyp
             return QObject::tr( "Turn right." );
         case SharpRight:
             return QObject::tr( "Turn sharp right." );
-        case Unknown:
         case RoundaboutExit:
+            return QObject::tr( "Exit the roundabout." );
+        case Unknown:
         case RoundaboutFirstExit:
         case RoundaboutSecondExit:
         case RoundaboutThirdExit:
             Q_ASSERT( false && "Internal error: Unknown/Roundabout should have been handled earlier." );
             return QString();
             break;
+        case ExitLeft:
+            return QObject::tr( "Take the exit to the left." );
+        case ExitRight:
+            return QObject::tr( "Take the exit to the right." );
         }
     } else {
         switch( turnType ) {
+        case Continue:
+            return QObject::tr( "Continue onto %1." ).arg( roadName );
+        case Merge:
+            return QObject::tr( "Merge onto %1." ).arg( roadName );
         case TurnAround:
             return QObject::tr( "Turn around onto %1." ).arg( roadName );
         case SharpLeft:
@@ -430,14 +432,19 @@ QString RoutingInstruction::generateRoadInstruction( RoutingInstruction::TurnTyp
             return QObject::tr( "Turn right into %1." ).arg( roadName );
         case SharpRight:
             return QObject::tr( "Turn sharp right into %1." ).arg( roadName );
-        case Unknown:
         case RoundaboutExit:
+            return QObject::tr( "Exit the roundabout into %2." ).arg( roadName );
+        case Unknown:
         case RoundaboutFirstExit:
         case RoundaboutSecondExit:
         case RoundaboutThirdExit:
             Q_ASSERT( false && "Internal error: Unknown/Roundabout should have been handled earlier." );
             return QString();
             break;
+        case ExitLeft:
+            return QObject::tr( "Take the exit to the left onto %1." ).arg( roadName );
+        case ExitRight:
+            return QObject::tr( "Take the exit to the right onto %1." ).arg( roadName );
         }
     }
 

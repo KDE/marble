@@ -18,10 +18,12 @@ QMap<Maneuver::Direction,QString> Maneuver::m_turnTypePixmaps;
 
 Maneuver::Maneuver() :
     m_direction( Unknown ),
-    m_hasWaypoint( false )
+    m_waypointIndex( -1 )
 {
     m_turnTypePixmaps[Unknown] = ":/data/bitmaps/routing_step.png";
     m_turnTypePixmaps[Straight] = ":/data/bitmaps/turn-continue.png";
+    m_turnTypePixmaps[Continue] = ":/data/bitmaps/turn-continue.png";
+    m_turnTypePixmaps[Merge] = ":/data/bitmaps/turn-merge.png";
     m_turnTypePixmaps[SlightRight] = ":/data/bitmaps/turn-slight-right.png";
     m_turnTypePixmaps[Right] = ":/data/bitmaps/turn-right.png";
     m_turnTypePixmaps[SharpRight] = ":/data/bitmaps/turn-sharp-right.png";
@@ -33,6 +35,8 @@ Maneuver::Maneuver() :
     m_turnTypePixmaps[RoundaboutSecondExit] = ":/data/bitmaps/turn-roundabout-second.png";
     m_turnTypePixmaps[RoundaboutThirdExit] = ":/data/bitmaps/turn-roundabout-third.png";
     m_turnTypePixmaps[RoundaboutExit] = ":/data/bitmaps/turn-roundabout-far.png";
+    m_turnTypePixmaps[ExitLeft] = ":/data/bitmaps/turn-exit-left.png";
+    m_turnTypePixmaps[ExitRight] = ":/data/bitmaps/turn-exit-right.png";
 }
 
 Maneuver::Direction Maneuver::direction() const
@@ -48,7 +52,7 @@ QString Maneuver::directionPixmap() const
 bool Maneuver::operator ==(const Maneuver &other) const
 {
     return  m_direction == other.m_direction &&
-            m_hasWaypoint == other.m_hasWaypoint &&
+            m_waypointIndex == other.m_waypointIndex &&
             m_position == other.m_position &&
             m_waypoint == other.m_waypoint &&
             m_instructionText == other.m_instructionText;
@@ -81,13 +85,18 @@ GeoDataCoordinates Maneuver::waypoint() const
 
 bool Maneuver::hasWaypoint() const
 {
-    return m_hasWaypoint;
+    return m_waypointIndex >= 0;
 }
 
-void Maneuver::setWaypoint( const GeoDataCoordinates &waypoint )
+void Maneuver::setWaypoint( const GeoDataCoordinates &waypoint, int index )
 {
     m_waypoint = waypoint;
-    m_hasWaypoint = true;
+    m_waypointIndex = index;
+}
+
+int Maneuver::waypointIndex() const
+{
+    return m_waypointIndex;
 }
 
 QString Maneuver::instructionText() const

@@ -24,6 +24,9 @@
     <file>../../data/bitmaps/turn-sharp-right.png</file>
     <file>../../data/bitmaps/turn-slight-left.png</file>
     <file>../../data/bitmaps/turn-slight-right.png</file>
+    <file>../../data/bitmaps/turn-merge.png</file>
+    <file>../../data/bitmaps/turn-exit-left.png</file>
+    <file>../../data/bitmaps/turn-exit-right.png</file>
     <file alias="marble/turn-around.svg">../../data/svg/turn-around.svg</file>
     <file alias="marble/turn-continue.svg">../../data/svg/turn-continue.svg</file>
     <file alias="marble/turn-left.svg">../../data/svg/turn-left.svg</file>
@@ -36,6 +39,9 @@
     <file alias="marble/turn-sharp-right.svg">../../data/svg/turn-sharp-right.svg</file>
     <file alias="marble/turn-slight-left.svg">../../data/svg/turn-slight-left.svg</file>
     <file alias="marble/turn-slight-right.svg">../../data/svg/turn-slight-right.svg</file>
+    <file alias="marble/turn-merge.svg">../../data/svg/turn-merge.svg</file>
+    <file alias="marble/turn-exit-left.svg">../../data/svg/turn-exit-left.svg</file>
+    <file alias="marble/turn-exit-right.svg">../../data/svg/turn-exit-right.svg</file>
     <file alias="marble/flag-green.svg">../../data/svg/flag-green.svg</file>
   </qresource>
 </RCC>
