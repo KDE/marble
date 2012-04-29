@@ -79,7 +79,7 @@ public:
     void addVia( const GeoDataCoordinates &position );
 
     /** Returns a pixmap which indicates the position of the element */
-    QPixmap pixmap( int index ) const;
+    QPixmap pixmap( int index, int size=-1, int margin=2 ) const;
 
     void setName( int index, const QString &name );
 

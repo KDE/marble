@@ -195,14 +195,14 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
             break;
         case Qt::DecorationRole:
             {
-                bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-                if ( smallScreen ) {
-                    return QPixmap( segment.maneuver().directionPixmap() );
+                bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+                if ( segment.maneuver().hasWaypoint() ) {
+                    int const size = smallScreen ? 64 : 32;
+                    return d->m_request->pixmap( segment.maneuver().waypointIndex(), size, size/4 );
                 } else {
-                    return QPixmap( segment.maneuver().directionPixmap() ).scaled( 32, 32 );
+                    QPixmap const pixmap = segment.maneuver().directionPixmap();
+                    return smallScreen ? pixmap : pixmap.scaled( 32, 32 );
                 }
-
-                return QVariant();
             }
             break;
         case Qt::SizeHintRole:
@@ -251,6 +251,32 @@ bool RoutingModel::setCurrentRoute( GeoDataDocument* document )
 
     if ( segments.isEmpty() ) {
         segments << outline;
+    }
+
+    // Map via points onto segments
+    if ( d->m_request->size() > 1 && segments.size() > 1 ) {
+        int index = 0;
+        for ( int j=0; j<d->m_request->size(); ++j ) {
+            QPair<int, qreal> minimum( -1, -1.0 );
+            int viaIndex = -1;
+            for ( int i=index; i<segments.size(); ++i ) {
+                RouteSegment const & segment = segments[i];
+                GeoDataCoordinates closest;
+                qreal const distance = segment.distanceTo( d->m_request->at( j ), closest, closest );
+                if ( minimum.first < 0 || distance < minimum.second ) {
+                    minimum.first = i;
+                    minimum.second = distance;
+                    viaIndex = j;
+                }
+            }
+
+            if ( minimum.first >= 0 ) {
+                index = minimum.first;
+                Maneuver viaPoint = segments[ minimum.first ].maneuver();
+                viaPoint.setWaypoint( d->m_request->at( viaIndex ), viaIndex );
+                segments[ minimum.first ].setManeuver( viaPoint );
+            }
+        }
     }
 
     if ( segments.size() > 0 ) {

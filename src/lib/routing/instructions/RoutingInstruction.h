@@ -31,18 +31,22 @@ class MARBLE_EXPORT RoutingInstruction
 public:
     enum TurnType {
         Unknown = 0,
-        Straight,
-        SlightRight,
-        Right,
-        SharpRight,
-        TurnAround,
-        SharpLeft,
-        Left,
-        SlightLeft,
-        RoundaboutFirstExit,
-        RoundaboutSecondExit,
-        RoundaboutThirdExit,
-        RoundaboutExit
+        Continue = 13 /** Continue on the next street */,
+        Merge = 14,
+        Straight = 1,
+        SlightRight = 2,
+        Right = 3,
+        SharpRight = 4,
+        TurnAround = 5 /** Perform a u-turn */,
+        SharpLeft = 6,
+        Left = 7,
+        SlightLeft = 8,
+        RoundaboutFirstExit = 9 /** Enter the roundabout and leave at the first exit */,
+        RoundaboutSecondExit = 10 /** Enter the roundabout and leave at the second exit */,
+        RoundaboutThirdExit = 11 /** Enter the roundabout and leave at the third exit */,
+        RoundaboutExit = 12 /** At the point where the roundabout should be exited */,
+        ExitLeft = 15,
+        ExitRight = 16
     };
 
     /** Constructor */

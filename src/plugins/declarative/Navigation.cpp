@@ -169,6 +169,8 @@ QString Navigation::nextInstructionImage() const
 {
     switch ( d->nextRouteSegment().maneuver().direction() ) {
     case Marble::Maneuver::Unknown: return "";
+    case Marble::Maneuver::Continue: return "qrc:/marble/turn-continue.svg";
+    case Marble::Maneuver::Merge: return "qrc:/marble/turn-merge.svg";
     case Marble::Maneuver::Straight: return "qrc:/marble/turn-continue.svg";
     case Marble::Maneuver::SlightRight: return "qrc:/marble/turn-slight-right.svg";
     case Marble::Maneuver::Right: return "qrc:/marble/turn-right.svg";
@@ -181,6 +183,8 @@ QString Navigation::nextInstructionImage() const
     case Marble::Maneuver::RoundaboutSecondExit: return "qrc:/marble/turn-roundabout-second.svg";
     case Marble::Maneuver::RoundaboutThirdExit: return "qrc:/marble/turn-roundabout-third.svg";
     case Marble::Maneuver::RoundaboutExit: return "qrc:/marble/turn-roundabout-far.svg";
+    case Marble::Maneuver::ExitLeft: return "qrc:/marble/turn-exit-left.svg";
+    case Marble::Maneuver::ExitRight: return "qrc:/marble/turn-exit-right.svg";
     }
 
     return "";

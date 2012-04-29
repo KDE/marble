@@ -168,6 +168,9 @@ void VoiceNavigationModelPrivate::initializeMaps()
     m_announceMap.clear();
 
     if ( m_speakerEnabled ) {
+        m_announceMap[Maneuver::Continue] = "";
+        // non of our voice navigation commands fits :-/
+        m_announceMap[Maneuver::Merge] = "KDE-Sys-List-End";
         m_announceMap[Maneuver::Straight] = "";
         m_announceMap[Maneuver::SlightRight] = "AhKeepRight";
         m_announceMap[Maneuver::Right] = "AhRightTurn";
@@ -179,7 +182,12 @@ void VoiceNavigationModelPrivate::initializeMaps()
         m_announceMap[Maneuver::RoundaboutFirstExit] = "RbExit1";
         m_announceMap[Maneuver::RoundaboutSecondExit] = "RbExit2";
         m_announceMap[Maneuver::RoundaboutThirdExit] = "RbExit3";
+        m_announceMap[Maneuver::ExitLeft] = "AhExitLeft";
+        m_announceMap[Maneuver::ExitRight] = "AhExitRight";
 
+        m_turnTypeMap[Maneuver::Continue] = "Straight";
+        // non of our voice navigation commands fits :-/
+        m_turnTypeMap[Maneuver::Merge] = "KDE-Sys-App-Positive";
         m_turnTypeMap[Maneuver::Straight] = "Straight";
         m_turnTypeMap[Maneuver::SlightRight] = "BearRight";
         m_turnTypeMap[Maneuver::Right] = "TurnRight";
@@ -191,8 +199,12 @@ void VoiceNavigationModelPrivate::initializeMaps()
         m_turnTypeMap[Maneuver::RoundaboutFirstExit] = "";
         m_turnTypeMap[Maneuver::RoundaboutSecondExit] = "";
         m_turnTypeMap[Maneuver::RoundaboutThirdExit] = "";
+        m_turnTypeMap[Maneuver::ExitLeft] = "TurnLeft";
+        m_turnTypeMap[Maneuver::ExitRight] = "TurnRight";
     } else {
-        m_announceMap[Maneuver::Straight] = "KDE-Sys-List-End";
+        m_announceMap[Maneuver::Continue] = "";
+        m_announceMap[Maneuver::Merge] = "KDE-Sys-List-End";
+        m_announceMap[Maneuver::Straight] = "";
         m_announceMap[Maneuver::SlightRight] = "KDE-Sys-List-End";
         m_announceMap[Maneuver::Right] = "KDE-Sys-List-End";
         m_announceMap[Maneuver::SharpRight] = "KDE-Sys-List-End";
@@ -203,7 +215,11 @@ void VoiceNavigationModelPrivate::initializeMaps()
         m_announceMap[Maneuver::RoundaboutFirstExit] = "KDE-Sys-List-End";
         m_announceMap[Maneuver::RoundaboutSecondExit] = "KDE-Sys-List-End";
         m_announceMap[Maneuver::RoundaboutThirdExit] = "KDE-Sys-List-End";
+        m_announceMap[Maneuver::ExitLeft] = "KDE-Sys-List-End";
+        m_announceMap[Maneuver::ExitRight] = "KDE-Sys-List-End";
 
+        m_turnTypeMap[Maneuver::Continue] = "KDE-Sys-App-Positive";
+        m_turnTypeMap[Maneuver::Merge] = "KDE-Sys-App-Positive";
         m_turnTypeMap[Maneuver::Straight] = "KDE-Sys-App-Positive";
         m_turnTypeMap[Maneuver::SlightRight] = "KDE-Sys-App-Positive";
         m_turnTypeMap[Maneuver::Right] = "KDE-Sys-App-Positive";
@@ -215,6 +231,8 @@ void VoiceNavigationModelPrivate::initializeMaps()
         m_turnTypeMap[Maneuver::RoundaboutFirstExit] = "KDE-Sys-App-Positive";
         m_turnTypeMap[Maneuver::RoundaboutSecondExit] = "KDE-Sys-App-Positive";
         m_turnTypeMap[Maneuver::RoundaboutThirdExit] = "KDE-Sys-App-Positive";
+        m_turnTypeMap[Maneuver::ExitLeft] = "KDE-Sys-App-Positive";
+        m_turnTypeMap[Maneuver::ExitRight] = "KDE-Sys-App-Positive";
     }
 }
 
