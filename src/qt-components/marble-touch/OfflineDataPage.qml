@@ -20,64 +20,17 @@ Page {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
-
-        ToolButton {
-            id: motorcarFilter
-            iconSource: "qrc:/icons/routing-motorcar.svg";
-            checkable: true
-            checked: true
-            width: 120
-            flat: true
-            onCheckedChanged: parent.adjustFilter()
-        }
-
-        ToolButton {
-            id: bikeFilter
-            iconSource: "qrc:/icons/routing-bike.svg";
-            checkable: true
-            checked: true
-            width: 80
-            flat: true
-            onCheckedChanged: parent.adjustFilter()
-        }
-
-        ToolButton {
-            id: pedestrianFilter
-            iconSource: "qrc:/icons/routing-pedestrian.svg";
-            checkable: true
-            checked: true
-            width: 60
-            flat: true
-            onCheckedChanged: parent.adjustFilter()
-        }
-
-        Item {}
-
-        function adjustFilter() {
-            offlineDataModel.setVehicleTypeFilter(
-                        (motorcarFilter.checked ? OfflineDataModel.Motorcar : OfflineDataModel.None) |
-                        (bikeFilter.checked ? OfflineDataModel.Bicycle : OfflineDataModel.None) |
-                        (pedestrianFilter.checked ? OfflineDataModel.Pedestrian : OfflineDataModel.None) )
-        }
     }
 
     OfflineDataModel {
         id: offlineDataModel
     }
 
-    SearchField {
-        id: search
-        width: parent.width
-        onSearch: {
-            offlineDataModel.setFilterFixedString(term)
-        }
-    }
-
     Row {
         id: monavStatus
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: search.bottom
+        anchors.top: parent.top
         anchors.topMargin: 10
 
         visible: !Marble.canExecute("monav-daemon") && !Marble.canExecute("MoNavD")
@@ -99,12 +52,64 @@ Page {
         }
     }
 
+    SearchField {
+        id: search
+        anchors.top: monavStatus.visible ? monavStatus.bottom : parent.top
+        anchors.topMargin: 5
+        width: parent.width
+        onSearch: {
+            offlineDataModel.setFilterFixedString(term)
+        }
+    }
+
+    ButtonRow {
+        id: filterRow
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: search.bottom
+        anchors.topMargin: 10
+        anchors.margins: 5
+        checkedButton: noFilter
+
+        Button {
+            id: noFilter
+            text: "All"
+        }
+
+        Button {
+            id: motorcarFilter
+            iconSource: "qrc:/icons/routing-motorcar.svg";
+            width: 120
+        }
+
+        Button {
+            id: bikeFilter
+            iconSource: "qrc:/icons/routing-bike.svg";
+            width: 80
+        }
+
+        Button {
+            id: pedestrianFilter
+            iconSource: "qrc:/icons/routing-pedestrian.svg";
+            width: 60
+        }
+
+        onCheckedButtonChanged: {
+            offlineDataModel.setVehicleTypeFilter(
+                        (filterRow.checkedButton === noFilter          ? OfflineDataModel.Any        : OfflineDataModel.None) |
+                        (filterRow.checkedButton === motorcarFilter    ? OfflineDataModel.Motorcar   : OfflineDataModel.None) |
+                        (filterRow.checkedButton === bikeFilter        ? OfflineDataModel.Bicycle    : OfflineDataModel.None) |
+                        (filterRow.checkedButton === pedestrianFilter  ? OfflineDataModel.Pedestrian : OfflineDataModel.None) )
+        }
+    }
+
+
     ListView {
         id: dataView
         model: offlineDataModel
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: monavStatus.visible ? monavStatus.bottom : search.bottom
+        anchors.top: filterRow.bottom
         anchors.bottom: parent.bottom
         anchors.topMargin: 10
         anchors.margins: 5
