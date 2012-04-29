@@ -41,7 +41,16 @@ public Q_SLOTS:
      * relative path cannot be resolved
      * @see #MarbleDirs
      */
-    QString resolvePath( const QString &path );
+    QString resolvePath( const QString &path ) const;
+
+    /**
+     * @brief canExecute Check whether a given program is found in the path
+     * @param program The name of the program
+     * @return Returns true iff the given program is found in one of
+     * directories defined by the PATH environment variable (as reported by
+     * QProcessEnvironment) and has the executable bit set
+     */
+    bool canExecute( const QString &program ) const;
 
 private:
     MarbleDeclarativeObjectPrivate* const d;

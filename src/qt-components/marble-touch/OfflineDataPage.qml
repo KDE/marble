@@ -73,13 +73,40 @@ Page {
         }
     }
 
+    Row {
+        id: monavStatus
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: search.bottom
+        anchors.topMargin: 10
+
+        visible: !Marble.canExecute("monav-daemon") && !Marble.canExecute("MoNavD")
+
+        ToolIcon {
+            id: statusIcon
+            anchors.verticalCenter: parent.verticalCenter
+            iconId: "applet-error"
+        }
+
+        Label {
+            anchors.verticalCenter: parent.verticalCenter
+            /*readonly*/ property string monavStoreUrl: "http://store.ovi.mobi/content/250322"
+            width: parent.width - statusIcon.width
+            text: "Please install Monav Routing Daemon (free) to enable offline routing. <a href=\"" + monavStoreUrl + "\">Install now</a>."
+            wrapMode: Text.Wrap
+
+            onLinkActivated: Qt.openUrlExternally(link)
+        }
+    }
+
     ListView {
         id: dataView
         model: offlineDataModel
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: search.bottom
+        anchors.top: monavStatus.visible ? monavStatus.bottom : search.bottom
         anchors.bottom: parent.bottom
+        anchors.topMargin: 10
         anchors.margins: 5
         delegate: dataDelegate
         highlight: Rectangle { radius: 5; color: "lightsteelblue" }

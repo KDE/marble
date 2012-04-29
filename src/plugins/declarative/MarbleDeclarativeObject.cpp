@@ -13,6 +13,8 @@
 #include "MarbleDirs.h"
 #include "global.h"
 
+#include <QtCore/QProcessEnvironment>
+
 class MarbleDeclarativeObjectPrivate
 {
 public:
@@ -36,9 +38,22 @@ QString MarbleDeclarativeObject::version() const
     return Marble::MARBLE_VERSION_STRING;
 }
 
-QString MarbleDeclarativeObject::resolvePath(const QString &path)
+QString MarbleDeclarativeObject::resolvePath(const QString &path) const
 {
     return Marble::MarbleDirs::path( path );
+}
+
+bool MarbleDeclarativeObject::canExecute(const QString &program) const
+{
+    QString path = QProcessEnvironment::systemEnvironment().value( "PATH", "/usr/local/bin:/usr/bin:/bin" );
+    foreach( const QString &dir, path.split( ":" ) ) {
+        QFileInfo const executable( QDir( dir ), program );
+        if ( executable.exists() && executable.isExecutable() ) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 #include "MarbleDeclarativeObject.moc"
