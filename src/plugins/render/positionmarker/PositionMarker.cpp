@@ -174,38 +174,31 @@ void PositionMarker::update( const ViewportParams *viewport )
     if( m_currentPosition != m_previousPosition )
     {
         QPointF screenPosition;
-        QPointF previousScreenPosition;
-
         viewport->screenCoordinates( m_currentPosition, screenPosition );
-        viewport->screenCoordinates( m_previousPosition, previousScreenPosition );
 
-        // calculate the arrow shape, oriented by the heading
-        // and with constant size
-        const QPointF vector = screenPosition - previousScreenPosition;
-        const qreal magnitude = qSqrt( ( vector.x() * vector.x() ) + ( vector.y() * vector.y() ) );
-        // check that some screen progress was made
-        if( magnitude > 0 && ( qAbs( vector.x() ) - 0.00000001 ) > 0 ) {
-            const QPointF unitVector = vector / magnitude;
-            const QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x() );
-            const QPointF relativeLeft = - ( unitVector * 9   ) + ( unitVector2 * 9 );
-            const QPointF relativeRight = - ( unitVector * 9 ) - ( unitVector2 * 9 );
-            const QPointF relativeTip =  unitVector * 19.0 ;
+        // Calculate the scaled arrow shape
+        const QPointF baseX( m_cursorSize, 0.0 );
+        const QPointF baseY( 0.0, m_cursorSize );
+        const QPointF relativeLeft  = - ( baseX * 9 ) + ( baseY * 9 );
+        const QPointF relativeRight =   ( baseX * 9 ) + ( baseY * 9 );
+        const QPointF relativeTip   = - ( baseY * 19.0 );
+        m_arrow = QPolygonF() << QPointF( 0.0, 0.0 ) << relativeLeft << relativeTip << relativeRight;
 
-            m_arrow.clear();
-            m_arrow << screenPosition
-                    << screenPosition + ( relativeLeft * m_cursorSize )
-                    << screenPosition + ( relativeTip * m_cursorSize )
-                    << screenPosition + ( relativeRight * m_cursorSize );
+        // Rotate the shape according to the current direction and move it to the screen center
+        QMatrix transformation;
+        transformation.translate( screenPosition.x(), screenPosition.y() );
+        double const rotation = viewport->polarity() > 0 ? m_heading : m_heading + 180.0;
+        transformation.rotate( rotation );
+        m_arrow = m_arrow * transformation;
 
-            m_dirtyRegion = QRegion();
-            m_dirtyRegion += ( m_arrow.boundingRect().toRect() );
-            m_dirtyRegion += ( m_previousArrow.boundingRect().toRect() );
+        m_dirtyRegion = QRegion();
+        m_dirtyRegion += ( m_arrow.boundingRect().toRect() );
+        m_dirtyRegion += ( m_previousArrow.boundingRect().toRect() );
 
-            // Check if position has changed.
-            m_trail.push_front( m_currentPosition );
-            for( int i = sm_numTrailPoints + 1; i< m_trail.size(); ++i ) {
-                    m_trail.pop_back();
-            }
+        // Update the trail
+        m_trail.push_front( m_currentPosition );
+        for( int i = sm_numTrailPoints + 1; i< m_trail.size(); ++i ) {
+                m_trail.pop_back();
         }
     }
 }
@@ -266,8 +259,8 @@ bool PositionMarker::render( GeoPainter *painter,
         if( m_useCustomCursor)
         {
             QTransform transform;
-            double const rotation = viewport->polarity() > 0 ? m_heading : m_heading + M_PI;
-            transform.rotateRadians( rotation );
+            double const rotation = viewport->polarity() > 0 ? m_heading : m_heading + 180.0;
+            transform.rotate( rotation );
             QPixmap pixmap;
             if( painter->mapQuality() == HighQuality || painter->mapQuality() == PrintQuality )
                 pixmap = m_customCursor.transformed( transform, Qt::SmoothTransformation );
@@ -378,7 +371,7 @@ void PositionMarker::setPosition( const GeoDataCoordinates &position )
 {
     m_previousPosition = m_currentPosition;
     m_currentPosition = position;
-    m_heading = marbleModel()->positionTracking()->direction() * DEG2RAD;
+    m_heading = marbleModel()->positionTracking()->direction();
     if ( m_lastBoundingBox.contains( m_currentPosition ) )
     {
         emit repaintNeeded( m_dirtyRegion );
