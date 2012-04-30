@@ -1106,6 +1106,19 @@ void GeoDataCoordinates::setDetail( const int det )
     d->m_detail = det;
 }
 
+qreal GeoDataCoordinates::bearing( const GeoDataCoordinates &other, Unit unit, BearingType type ) const
+{
+    if ( type == FinalBearing ) {
+        double const offset = unit == Degree ? 180.0 : M_PI;
+        return offset + other.bearing( *this, unit, InitialBearing );
+    }
+
+    qreal const delta = other.d->m_lon - d->m_lon;
+    double const bearing = atan2( sin ( delta ) * cos ( other.d->m_lat ),
+                 cos( d->m_lat ) * sin( other.d->m_lat ) - sin( d->m_lat ) * cos( other.d->m_lat ) * cos ( delta ) );
+    return unit == Radian ? bearing : bearing * RAD2DEG;
+}
+
 const Quaternion& GeoDataCoordinates::quaternion() const
 {
     return d->m_q;

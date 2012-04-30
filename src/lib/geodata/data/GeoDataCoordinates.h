@@ -81,6 +81,20 @@ class GEODATA_EXPORT GeoDataCoordinates
         DMS
     };
 
+    /**
+     * @brief The BearingType enum specifies where to measure the bearing
+     * along great circle arcs
+     *
+     * When travelling along a great circle arc defined by the two points
+     * A and B, the bearing varies along the arc. The "InitialBearing" bearing
+     * corresponds to the bearing value at A, the "FinalBearing" bearing to that
+     * at B.
+     */
+    enum BearingType {
+        InitialBearing,
+        FinalBearing
+    };
+
     // Type definitions
     typedef QVector<GeoDataCoordinates> Vector;
     typedef QVector<GeoDataCoordinates*> PtrVector;
@@ -213,6 +227,16 @@ class GEODATA_EXPORT GeoDataCoordinates
     * @param det detail
     */
     void setDetail( const int det );
+
+    /**
+     * @brief Returns the bearing (true bearing, the angle between the line defined
+     * by this point and the other and the prime meridian)
+     * @param other The second point that, together with this point, defines a line
+     * @param unit Unit of the result
+     * @return The true bearing in the requested unit, not range normalized,
+     * in clockwise direction, with the value 0 corresponding to north
+     */
+    qreal bearing( const GeoDataCoordinates &other, Unit unit = Radian, BearingType type = InitialBearing ) const;
 
     /**
     * @brief return a Quaternion with the used coordinates
