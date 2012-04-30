@@ -59,6 +59,8 @@ private:
     int m_currentIndex;
     PositionProviderStatus m_status;
     GeoDataLineString m_lineString;
+    GeoDataCoordinates m_currentPosition;
+    qreal m_direction;
 };
 
 }

@@ -26,6 +26,10 @@
 namespace Marble
 {
 
+namespace {
+    qreal const c_frequency = 4.0; // Hz
+}
+
 QString RouteSimulationPositionProviderPlugin::name() const
 {
     return tr( "Current Route Position Provider Plugin" );
@@ -81,7 +85,7 @@ PositionProviderStatus RouteSimulationPositionProviderPlugin::status() const
 
 GeoDataCoordinates RouteSimulationPositionProviderPlugin::position() const
 {
-    return m_lineString.at( m_currentIndex );
+    return m_currentPosition;
 }
 
 GeoDataAccuracy RouteSimulationPositionProviderPlugin::accuracy() const
@@ -98,7 +102,8 @@ GeoDataAccuracy RouteSimulationPositionProviderPlugin::accuracy() const
 
 RouteSimulationPositionProviderPlugin::RouteSimulationPositionProviderPlugin() :
     m_currentIndex( -2 ),
-    m_status( PositionProviderStatusUnavailable )
+    m_status( PositionProviderStatusUnavailable ),
+    m_direction( 0.0 )
 {
     // nothing to do
 }
@@ -127,7 +132,7 @@ void RouteSimulationPositionProviderPlugin::initialize()
     m_status = m_lineString.isEmpty() ? PositionProviderStatusUnavailable : PositionProviderStatusAcquiring;
 
     if ( !m_lineString.isEmpty() ) {
-        QTimer::singleShot( 1000, this, SLOT( update() ) );
+        QTimer::singleShot( 1000.0 / c_frequency, this, SLOT( update() ) );
     }
 }
 
@@ -144,8 +149,7 @@ qreal RouteSimulationPositionProviderPlugin::speed() const
 
 qreal RouteSimulationPositionProviderPlugin::direction() const
 {
-    /** @todo: calculate direction */
-    return 0.0;
+    return m_direction;
 }
 
 QDateTime RouteSimulationPositionProviderPlugin::timestamp() const
@@ -163,6 +167,11 @@ void RouteSimulationPositionProviderPlugin::update()
             emit statusChanged( PositionProviderStatusAvailable );
         }
 
+        GeoDataCoordinates newPosition = m_lineString.at( m_currentIndex );
+        if ( m_currentPosition.isValid() ) {
+            m_direction = m_currentPosition.bearing( newPosition, GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing );
+        }
+        m_currentPosition = newPosition;
         emit positionChanged( position(), accuracy() );
     }
     else {
@@ -174,7 +183,7 @@ void RouteSimulationPositionProviderPlugin::update()
         }
     }
 
-    QTimer::singleShot( 1000, this, SLOT( update() ) );
+    QTimer::singleShot( 1000.0 / c_frequency, this, SLOT( update() ) );
 }
 
 } // namespace Marble
