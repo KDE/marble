@@ -57,6 +57,7 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     GeoDataCoordinates m_coordinates;
     QDateTime m_timestamp;
     qreal m_speed;
+    qreal m_direction;
 
     PositionProviderStatus m_status;
     GeoDataAccuracy m_accuracy;

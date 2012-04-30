@@ -23,6 +23,7 @@ PlacemarkPositionProviderPlugin::PlacemarkPositionProviderPlugin()
     : PositionProviderPlugin(),
       m_placemark( 0 ),
       m_speed( 0 ),
+      m_direction( 0.0 ),
       m_status( PositionProviderStatusUnavailable ),
       m_isInitialized( false )
 {
@@ -115,7 +116,7 @@ qreal PlacemarkPositionProviderPlugin::speed() const
 
 qreal PlacemarkPositionProviderPlugin::direction() const
 {
-    return 0.0;
+    return m_direction;
 }
 
 QDateTime PlacemarkPositionProviderPlugin::timestamp() const
@@ -133,7 +134,11 @@ void PlacemarkPositionProviderPlugin::setPlacemark( const GeoDataPlacemark *plac
 
     m_placemark   = placemark;
     m_timestamp   = placemark ? marbleModel()->clockDateTime() : QDateTime();
-    m_coordinates = placemark ? placemark->coordinate( m_timestamp ) : GeoDataCoordinates();
+    GeoDataCoordinates const newCoordinates = placemark ? placemark->coordinate( m_timestamp ) : GeoDataCoordinates();
+    if ( m_coordinates.isValid() && newCoordinates.isValid() ) {
+        m_direction = m_coordinates.bearing( newCoordinates, GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing );
+    }
+    m_coordinates = newCoordinates;
     m_status      = placemark ? PositionProviderStatusAvailable : PositionProviderStatusUnavailable;
     m_speed       = 0.0;
 
@@ -161,6 +166,7 @@ void PlacemarkPositionProviderPlugin::updatePosition()
 
     const GeoDataCoordinates previousCoordinates = m_coordinates;
     m_coordinates = m_placemark->coordinate( marbleModel()->clock()->dateTime() );
+    m_direction = previousCoordinates.bearing( m_coordinates, GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing );
 
     if ( m_timestamp.isValid() ) {
         const qreal averageAltitude = ( m_coordinates.altitude() + m_coordinates.altitude() ) / 2.0 + marbleModel()->planetRadius();
