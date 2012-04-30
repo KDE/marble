@@ -185,7 +185,6 @@ void PositionMarker::update( const ViewportParams *viewport )
         const qreal magnitude = qSqrt( ( vector.x() * vector.x() ) + ( vector.y() * vector.y() ) );
         // check that some screen progress was made
         if( magnitude > 0 && ( qAbs( vector.x() ) - 0.00000001 ) > 0 ) {
-            m_heading = qAtan( vector.y() / vector.x() ) + M_PI / 2.0;
             const QPointF unitVector = vector / magnitude;
             const QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x() );
             const QPointF relativeLeft = - ( unitVector * 9   ) + ( unitVector2 * 9 );
@@ -266,18 +265,16 @@ bool PositionMarker::render( GeoPainter *painter,
 
         if( m_useCustomCursor)
         {
-            QRect rect = m_arrow.boundingRect().toRect();
-            if( rect.isValid() )
-            {
-                QTransform transform;
-                transform.translate( -m_customCursor.width() / 2, -m_customCursor.height() / 2 );
-                transform.rotateRadians( m_heading );
-                transform.translate( m_customCursor.width() / 2, m_customCursor.height() / 2 );
-                if( painter->mapQuality() == HighQuality || painter->mapQuality() == PrintQuality )
-                    painter->drawPixmap( rect.topLeft(), m_customCursor.transformed( transform, Qt::SmoothTransformation ) );
-                else
-                    painter->drawPixmap( rect.topLeft(), m_customCursor.transformed( transform ) );
-            }
+            QTransform transform;
+            double const rotation = viewport->polarity() > 0 ? m_heading : m_heading + M_PI;
+            transform.rotateRadians( rotation );
+            QPixmap pixmap;
+            if( painter->mapQuality() == HighQuality || painter->mapQuality() == PrintQuality )
+                pixmap = m_customCursor.transformed( transform, Qt::SmoothTransformation );
+            else
+                pixmap = m_customCursor.transformed( transform );
+
+            painter->drawPixmap( m_currentPosition, pixmap );
         }
         else
         {
@@ -381,6 +378,7 @@ void PositionMarker::setPosition( const GeoDataCoordinates &position )
 {
     m_previousPosition = m_currentPosition;
     m_currentPosition = position;
+    m_heading = marbleModel()->positionTracking()->direction() * DEG2RAD;
     if ( m_lastBoundingBox.contains( m_currentPosition ) )
     {
         emit repaintNeeded( m_dirtyRegion );
