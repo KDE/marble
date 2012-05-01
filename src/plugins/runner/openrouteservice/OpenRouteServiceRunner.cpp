@@ -368,7 +368,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
 
 RoutingInstruction::TurnType OpenRouteServiceRunner::parseTurnType( const QString &text, QString *road ) const
 {
-    QRegExp syntax( "^(Go|Drive) (half left|left|sharp left|half right|right|sharp right)( on )?(.*)?$", Qt::CaseSensitive, QRegExp::RegExp2 );
+    QRegExp syntax( "^(Go|Drive) (half left|left|sharp left|straight forward|half right|right|sharp right)( on )?(.*)?$", Qt::CaseSensitive, QRegExp::RegExp2 );
     QString instruction;
     if ( syntax.indexIn( text ) == 0 ) {
         if ( syntax.captureCount() > 1 ) {
@@ -387,6 +387,8 @@ RoutingInstruction::TurnType OpenRouteServiceRunner::parseTurnType( const QStrin
         return RoutingInstruction::Right;
     } else if ( instruction == "sharp right" ) {
         return RoutingInstruction::SharpRight;
+    } else if ( instruction == "straight forward" ) {
+        return RoutingInstruction::Straight;
     } else if ( instruction == "turn" ) {
         return RoutingInstruction::TurnAround;
     } else if ( instruction == "sharp left" ) {
