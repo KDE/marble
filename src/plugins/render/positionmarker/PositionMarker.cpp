@@ -169,31 +169,46 @@ bool PositionMarker::isInitialized() const
     return m_isInitialized;
 }
 
-void PositionMarker::update( const ViewportParams *viewport )
+void PositionMarker::update( const ViewportParams* viewport, MapQuality mapQuality )
 {
+    m_lastBoundingBox = viewport->viewLatLonAltBox();
+
     if( m_currentPosition != m_previousPosition )
     {
         QPointF screenPosition;
         viewport->screenCoordinates( m_currentPosition, screenPosition );
+        double rotation = m_heading;
+        GeoDataCoordinates top( m_currentPosition.longitude(), m_currentPosition.latitude()+0.1 );
+        QPointF screenTop;
+        viewport->screenCoordinates( top, screenTop );
+        qreal const correction = -90.0 + RAD2DEG * atan2( screenPosition.y()-screenTop.y(), screenPosition.x()-screenTop.x() );
+        rotation += correction;
 
-        // Calculate the scaled arrow shape
-        const QPointF baseX( m_cursorSize, 0.0 );
-        const QPointF baseY( 0.0, m_cursorSize );
-        const QPointF relativeLeft  = - ( baseX * 9 ) + ( baseY * 9 );
-        const QPointF relativeRight =   ( baseX * 9 ) + ( baseY * 9 );
-        const QPointF relativeTip   = - ( baseY * 19.0 );
-        m_arrow = QPolygonF() << QPointF( 0.0, 0.0 ) << relativeLeft << relativeTip << relativeRight;
+        if ( m_useCustomCursor ) {
+            QTransform transform;
+            transform.rotate( rotation );
+            bool const highQuality = mapQuality == HighQuality || mapQuality == PrintQuality;
+            Qt::TransformationMode const mode = highQuality ? Qt::SmoothTransformation : Qt::FastTransformation;
+            m_customCursorTransformed = m_customCursor.transformed( transform, mode );
+        } else {
+            // Calculate the scaled arrow shape
+            const QPointF baseX( m_cursorSize, 0.0 );
+            const QPointF baseY( 0.0, m_cursorSize );
+            const QPointF relativeLeft  = - ( baseX * 9 ) + ( baseY * 9 );
+            const QPointF relativeRight =   ( baseX * 9 ) + ( baseY * 9 );
+            const QPointF relativeTip   = - ( baseY * 19.0 );
+            m_arrow = QPolygonF() << QPointF( 0.0, 0.0 ) << relativeLeft << relativeTip << relativeRight;
 
-        // Rotate the shape according to the current direction and move it to the screen center
-        QMatrix transformation;
-        transformation.translate( screenPosition.x(), screenPosition.y() );
-        double const rotation = viewport->polarity() > 0 ? m_heading : m_heading + 180.0;
-        transformation.rotate( rotation );
-        m_arrow = m_arrow * transformation;
+            // Rotate the shape according to the current direction and move it to the screen center
+            QMatrix transformation;
+            transformation.translate( screenPosition.x(), screenPosition.y() );
+            transformation.rotate( rotation );
+            m_arrow = m_arrow * transformation;
 
-        m_dirtyRegion = QRegion();
-        m_dirtyRegion += ( m_arrow.boundingRect().toRect() );
-        m_dirtyRegion += ( m_previousArrow.boundingRect().toRect() );
+            m_dirtyRegion = QRegion();
+            m_dirtyRegion += ( m_arrow.boundingRect().toRect() );
+            m_dirtyRegion += ( m_previousArrow.boundingRect().toRect() );
+        }
 
         // Update the trail
         m_trail.push_front( m_currentPosition );
@@ -212,8 +227,7 @@ bool PositionMarker::render( GeoPainter *painter,
     bool const gpsActive = marbleModel()->positionTracking()->positionProviderPlugin() != 0;
     if ( gpsActive && renderPosition().contains(renderPos) )
     {
-        m_lastBoundingBox = viewport->viewLatLonAltBox();
-        update( viewport );
+        update( viewport, painter->mapQuality() );
         painter->save();
         painter->autoMapQuality();
 
@@ -258,16 +272,7 @@ bool PositionMarker::render( GeoPainter *painter,
 
         if( m_useCustomCursor)
         {
-            QTransform transform;
-            double const rotation = viewport->polarity() > 0 ? m_heading : m_heading + 180.0;
-            transform.rotate( rotation );
-            QPixmap pixmap;
-            if( painter->mapQuality() == HighQuality || painter->mapQuality() == PrintQuality )
-                pixmap = m_customCursor.transformed( transform, Qt::SmoothTransformation );
-            else
-                pixmap = m_customCursor.transformed( transform );
-
-            painter->drawPixmap( m_currentPosition, pixmap );
+            painter->drawPixmap( m_currentPosition, m_customCursorTransformed );
         }
         else
         {

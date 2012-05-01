@@ -74,8 +74,6 @@ class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString& renderPos, GeoSceneLayer * layer = 0 );
 
-    void update( const ViewportParams *viewport );
-
     // Overriding LayerInterface to paint on top of the route
     virtual qreal zValue() const;
 
@@ -102,6 +100,10 @@ class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
  private:
     Q_DISABLE_COPY( PositionMarker )
 
+    void update( const ViewportParams *viewport, MapQuality mapQuality );
+    void loadCustomCursor( const QString& filename, bool useCursor );
+    void loadDefaultCursor();
+
     bool           m_isInitialized;
     bool           m_useCustomCursor;
 
@@ -118,6 +120,7 @@ class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
     QPolygonF           m_previousArrow;
     QRegion             m_dirtyRegion;
     QPixmap             m_customCursor;
+    QPixmap             m_customCursorTransformed;
     QPixmap             m_defaultCursor;
     float               m_cursorSize;
     QColor              m_accuracyColor;
@@ -130,9 +133,6 @@ class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
     static const int sm_defaultSizeStep;
     static const int sm_numResizeSteps;
     static const float sm_resizeSteps[];
-
-    void loadCustomCursor( const QString& filename, bool useCursor );
-    void loadDefaultCursor();
 };
 
 }
