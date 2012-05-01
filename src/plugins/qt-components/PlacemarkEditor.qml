@@ -21,7 +21,7 @@ Item {
         root.placemark = placemark
         placemarkLabel.text = placemark.name
         distanceLabel.text = (marbleWidget.tracking.lastKnownPosition.distance(placemark.coordinate.longitude, placemark.coordinate.latitude) / 1000).toFixed(1) + " km"
-        panoramio.update()
+        flickrPhotosModel.update()
     }
 
     function startRouting()
@@ -132,7 +132,7 @@ Item {
             }
 
             Item {
-                id: panoramioItem
+                id: photoItem
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: 64
@@ -213,39 +213,34 @@ Item {
                 }
 
                 ListView {
-                    id: panoramioView
+                    id: photoView
                     anchors.right: parent.right
-                    visible: listmodel.count > 0
+                    visible: flickrPhotosModel.count > 0
                     height: parent.height
-                    width: 200
+                    width: 162
                     spacing: 4
                     orientation: ListView.Horizontal
                     snapMode: ListView.SnapToItem
                     clip: true
 
-                    model: listmodel
+                    model: flickrPhotosModel
                     delegate: Rectangle {
                         anchors.verticalCenter: parent.verticalCenter
-                        color: panoramioView.currentIndex === index ? "lightblue" : "darkgray"
+                        color: photoView.currentIndex === index ? "lightblue" : "darkgray"
                         smooth: true
-                        width: 64
-                        height: 64
-                        scale: panoramioImage.status === Image.Ready ? 1.0 : 0.0
+                        width: 79
+                        height: 79
+                        scale: photoImage.status === Image.Ready ? 1.0 : 0.0
 
                         Image {
-                            id: panoramioImage
+                            id: photoImage
                             anchors.centerIn: parent
-                            width: 60
-                            height: 60
+                            width: 75
+                            height: 75
                             fillMode: Image.PreserveAspectCrop
-                            source: url
+                            source: "http://farm" + farm + ".static.flickr.com/" + server + "/" + photoId + "_" + secret + "_s.jpg"
                             smooth: true
                             clip: true
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: Qt.openUrlExternally(link)
                         }
 
                         Behavior on scale {
@@ -256,66 +251,31 @@ Item {
                         }
                     }
                 }
-
-                Label {
-                    id: legalText
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.top: panoramioView.bottom
-                    anchors.topMargin: 5
-                    visible: listmodel.count > 0
-                    wrapMode: Text.WordWrap
-                    color: "darkgray"
-                    text: "<font size=\"-3\">Photos provided by Panoramio. Photos are under the copyright of their owners.</font>"
-                }
             }
         }
     }
 
-    Item {
-        id: panoramio
-        ListModel { id: listmodel }
+    XmlListModel {
+         id: flickrPhotosModel
 
-        property bool active: root.placemark != undefined
-        property double longitude: root.placemark != undefined ? root.placemark.coordinate.longitude : 0.0
-        property double latitude: root.placemark != undefined ? root.placemark.coordinate.latitude : 0.0
-        property double offset: 0.01
+         property double longitude: root.placemark != undefined ? root.placemark.coordinate.longitude : 0.0
+         property double latitude: root.placemark != undefined ? root.placemark.coordinate.latitude : 0.0
 
-        function update()
-        {
-            listmodel.clear()
-            if (settings.workOffline) {
-                return
-            }
+         property string url: ""
 
-            var R = 6378000.0
-            var d = 500.0
-            var deg2rad = Math.PI / 180.0
-            var brng = 215 * deg2rad
-            var lat = latitude * deg2rad
-            var lon = longitude * deg2rad
-            var lat1 = Math.asin( Math.sin(lat)*Math.cos(d/R) + Math.cos(lat)*Math.sin(d/R)*Math.cos(brng) );
-            var lon1 = lon + Math.atan2(Math.sin(brng)*Math.sin(d/R)*Math.cos(lat), Math.cos(d/R)-Math.sin(lat)*Math.sin(lat1));
-            brng = 135 * deg2rad
-            var lat2 = Math.asin( Math.sin(lat)*Math.cos(d/R) + Math.cos(lat)*Math.sin(d/R)*Math.cos(brng) );
-            var lon2 = lon + Math.atan2(Math.sin(brng)*Math.sin(d/R)*Math.cos(lat), Math.cos(d/R)-Math.sin(lat)*Math.sin(lat2));
-            var url = "http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=20&minx=" + lon1/deg2rad + "&miny=" + lat1/deg2rad + "&maxx=" + lon2/deg2rad + "&maxy=" + lat2/deg2rad + "&size=square&mapfilter=true"
+         source: settings.workOffline  ? "" : url
+         query: "/rsp/photos/photo"
 
-            var xhr = new XMLHttpRequest;
-            xhr.open("GET", url);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    var a = JSON.parse(xhr.responseText);
-                    for (var b in a.photos) {
-                        var o = a.photos[b];
-                        listmodel.append({owner: o.owner_name, url: o.photo_file_url, link: o.photo_url, title: o.photo_title});
-                    }
-                    panoramioView.currentIndex=-1
-                }
-            }
-            xhr.send();
-        }
-    }
+         XmlRole { name: "photoId"; query: "@id/string()" }
+         XmlRole { name: "secret"; query: "@secret/string()" }
+         XmlRole { name: "server"; query: "@server/string()" }
+         XmlRole { name: "farm"; query: "@farm/string()" }
+
+         function update()
+         {
+             url = "http://www.flickr.com/services/rest/?method=flickr.photos.search&format=rest&api_key=620131a1b82b000c9582b94effcdc636&lon=" + longitude + "&lat=" + latitude + "&radius=0.1&license=1,2,3,4,5,6,7"
+         }
+     }
 
     XmlListModel {
          id: weatherModel
