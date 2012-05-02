@@ -6,11 +6,12 @@
 // the source code.
 //
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
-#ifndef MARBLE_NOMINATIMPLUGIN_H
-#define MARBLE_NOMINATIMPLUGIN_H
+#ifndef MARBLE_NOMINATIMREVERSEGEOCODINGPLUGIN_H
+#define MARBLE_NOMINATIMREVERSEGEOCODINGPLUGIN_H
 
 #include "RunnerPlugin.h"
 

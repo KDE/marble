@@ -6,24 +6,25 @@
 // the source code.
 //
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include "NominatimPlugin.h"
-#include "OsmNominatimRunner.h"
+#include "NominatimSearchPlugin.h"
+#include "OsmNominatimSearchRunner.h"
 
 namespace Marble
 {
 
 NominatimPlugin::NominatimPlugin( QObject *parent ) : RunnerPlugin( parent )
 {
-    setCapabilities( Search | ReverseGeocoding );
+    setCapabilities( Search );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
 }
 
 QString NominatimPlugin::name() const
 {
-    return tr( "OpenStreetMap Nominatim Search and Reverse Geocoding" );
+    return tr( "OpenStreetMap Nominatim Search" );
 }
 
 QString NominatimPlugin::guiString() const
@@ -33,7 +34,7 @@ QString NominatimPlugin::guiString() const
 
 QString NominatimPlugin::nameId() const
 {
-    return "nominatim";
+    return "nominatim-search";
 }
 
 QString NominatimPlugin::version() const
@@ -43,18 +44,19 @@ QString NominatimPlugin::version() const
 
 QString NominatimPlugin::description() const
 {
-    return tr( "Searches for placemarks using the OpenStreetMap Nominatim service" );
+    return tr( "Online search for placemarks using the OpenStreetMap Nominatim service" );
 }
 
 QString NominatimPlugin::copyrightYears() const
 {
-    return "2010";
+    return "2010, 2012";
 }
 
 QList<PluginAuthor> NominatimPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" )
+            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 
 MarbleAbstractRunner* NominatimPlugin::newRunner() const
@@ -64,6 +66,6 @@ MarbleAbstractRunner* NominatimPlugin::newRunner() const
 
 }
 
-Q_EXPORT_PLUGIN2( NominatimPlugin, Marble::NominatimPlugin )
+Q_EXPORT_PLUGIN2( NominatimSearchPlugin, Marble::NominatimPlugin )
 
-#include "NominatimPlugin.moc"
+#include "NominatimSearchPlugin.moc"

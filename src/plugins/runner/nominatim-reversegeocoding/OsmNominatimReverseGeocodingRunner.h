@@ -39,24 +39,11 @@ public:
     // Overriding MarbleAbstractRunner
     virtual void reverseGeocoding( const GeoDataCoordinates &coordinates );
 
-    virtual void search( const QString &searchTerm );
-
 private Q_SLOTS:
     // Forward a result to the search or reverse geocoding handler
     void handleResult( QNetworkReply* );
 
-    // Http search request with nominatim.openstreetmap.org done
-    void handleSearchResult( QNetworkReply* );
-
-    // Http reverse geocoding request with nominatim.openstreetmap.org done
-    void handleReverseGeocodingResult( QNetworkReply* );
-
-    // No results (or an error)
-    void returnNoResults();
-
     void returnNoReverseGeocodingResult();
-
-    void startSearch();
 
     void startReverseGeocoding();
 

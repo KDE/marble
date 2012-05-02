@@ -3,7 +3,8 @@ add_subdirectory( hostip )
 add_subdirectory( latlon )
 add_subdirectory( local-osm-search )
 add_subdirectory( localdatabase )
-add_subdirectory( nominatim )
+add_subdirectory( nominatim-search )
+add_subdirectory( nominatim-reversegeocoding )
 add_subdirectory( gosmore-reversegeocoding )
 
 # Routing
