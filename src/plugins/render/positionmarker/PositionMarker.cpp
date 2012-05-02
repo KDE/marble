@@ -184,12 +184,11 @@ bool PositionMarker::render( GeoPainter *painter,
         if( m_currentPosition != m_previousPosition ) {
             QPointF screenPosition;
             viewport->screenCoordinates( m_currentPosition, screenPosition );
-            double rotation = m_heading;
-            GeoDataCoordinates top( m_currentPosition.longitude(), m_currentPosition.latitude()+0.1 );
+            const GeoDataCoordinates top( m_currentPosition.longitude(), m_currentPosition.latitude()+0.1 );
             QPointF screenTop;
             viewport->screenCoordinates( top, screenTop );
             qreal const correction = -90.0 + RAD2DEG * atan2( screenPosition.y()-screenTop.y(), screenPosition.x()-screenTop.x() );
-            rotation += correction;
+            const qreal rotation = m_heading + correction;
 
             if ( m_useCustomCursor ) {
                 QTransform transform;
@@ -244,25 +243,29 @@ bool PositionMarker::render( GeoPainter *painter,
         // Draw trail if requested.
         if( m_showTrail ) {
             painter->save();
+
             // Use selected color to draw trail.
             painter->setBrush( m_trailColor );
             painter->setPen( m_trailColor );
-            QRectF trailRect;
-            QPointF trailPoint;
-            float opacity = 1.0;
+
             // we don't draw m_trail[0] which is current position
             for( int i = 1; i < m_trail.size(); ++i ) {
                 // Get screen coordinates from coordinates on the map.
+                QPointF trailPoint;
                 viewport->screenCoordinates( m_trail[i], trailPoint );
-                int size = ( sm_numTrailPoints - i ) * 3;
+
+                const int size = ( sm_numTrailPoints - i ) * 3;
+                QRectF trailRect;
                 trailRect.setX( trailPoint.x() - size / 2.0 );
                 trailRect.setY( trailPoint.y() - size / 2.0 );
                 trailRect.setWidth( size );
                 trailRect.setHeight( size );
+
+                const qreal opacity = 1.0 - 0.15 * ( i - 1 );
                 painter->setOpacity( opacity );
                 painter->drawEllipse( trailRect );
-                opacity -= 0.15;
             }
+
             painter->restore();
         }
 
