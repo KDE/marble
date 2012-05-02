@@ -83,6 +83,12 @@ class AbstractProjectionPrivate
     void translatePolygons( const QVector<QPolygonF *> &polygons,
                             QVector<QPolygonF *> &translatedPolygons,
                             qreal xOffset ) const;
+
+    void crossDateLine( const GeoDataCoordinates & aCoord,
+                        const GeoDataCoordinates & bCoord,
+                        QVector<QPolygonF*> &polygons,
+                        const ViewportParams *viewport ) const;
+
 };
 
 } // namespace Marble

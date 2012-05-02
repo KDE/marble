@@ -183,8 +183,7 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
     qreal horizonY = -1.0;
     bool isAtHorizon = false;
 
-    QPolygonF * polygon = new QPolygonF;
-    polygons.append( polygon );
+    polygons.append( new QPolygonF );
 
     GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
     GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
@@ -213,7 +212,6 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
 
     GeoDataCoordinates previousCoords;
     GeoDataCoordinates currentCoords;
-    int previousSign, currentSign;
 
     GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
     GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
@@ -238,8 +236,6 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
 
             previousCoords = *itPreviousCoords;
             currentCoords  = *itCoords;
-            previousSign = ( previousCoords.longitude() < 0.0 ) ? -1 : +1 ;
-            currentSign = ( currentCoords.longitude() < 0.0 ) ? -1 : +1 ;
 
             q->screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
 
@@ -247,7 +243,6 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
             if ( !processingLastNode && itCoords == itBegin ) {
                 previousGlobeHidesPoint = globeHidesPoint;
                 itPreviousCoords = itCoords;
-                previousSign = currentSign;
                 previousX = x;
                 previousY = y;
             }
@@ -262,7 +257,7 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
 
                 if ( lineString.isClosed() ) {
                     if ( horizonPair ) {
-                        horizonToPolygon( viewport, horizonDisappearCoords, horizonCoords, polygon );
+                        horizonToPolygon( viewport, horizonDisappearCoords, horizonCoords, polygons.last() );
                         horizonPair = false;
                     }
                     else {
@@ -277,7 +272,7 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
                 // If the line appears on the visible half we need
                 // to add an interpolated point at the horizon as the previous point.
                 if ( previousGlobeHidesPoint ) {
-                    polygon->append( QPointF( horizonX, horizonY ) );
+                    *polygons.last() << QPointF( horizonX, horizonY );
                 }
             }
 
@@ -318,27 +313,11 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
                     // the expected rendering is a screen coordinates straight line between
                     // points, but in projections with repeatX things are not smooth
                     // we need to split polygons and use both sides of the repeated point
-                    if( currentSign != previousSign && fabs(previousCoords.longitude()) + fabs(currentCoords.longitude()) > M_PI && !lineString.tessellate() &&
-                            q->repeatX() ) {
-                        qreal delta = mirrorPoint( viewport );
-
-                        if ( previousSign > currentSign ) {
-                            // going eastwards ->
-                            polygon->append( QPointF( x +  delta, y ) );
-                        } else {
-                            // going westwards <-
-                            polygon->append( QPointF( x -  delta, y ) );
-                        }
-                        polygon = new QPolygonF;
-                        polygons.append( polygon );
-                    }
-
-                    polygon->append( QPointF( x, y ) );
-
+                    crossDateLine( previousCoords, currentCoords, polygons, viewport );
                 }
                 else {
                     if ( !previousGlobeHidesPoint && isAtHorizon ) {
-                        polygon->append( QPointF( horizonX, horizonY ) );
+                        *polygons.last() << QPointF( horizonX, horizonY );
                     }
                 }
             }
@@ -347,14 +326,12 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
                 if (   !previousGlobeHidesPoint
                     && !lineString.isClosed()
                     ) {
-                    polygon = new QPolygonF;
-                    polygons.append( polygon );
+                    polygons.append( new QPolygonF );
                 }
             }
 
             previousGlobeHidesPoint = globeHidesPoint;
             itPreviousCoords = itCoords;
-            previousSign = currentSign;
             previousX = x;
             previousY = y;
         }
@@ -376,10 +353,10 @@ bool AbstractProjectionPrivate::lineStringToPolygon( const GeoDataLineString &li
     // In case of horizon crossings, make sure that we always get a
     // polygon closed correctly.
     if ( horizonOrphan && lineString.isClosed() ) {
-        horizonToPolygon( viewport, horizonCoords, horizonOrphanCoords, polygon );
+        horizonToPolygon( viewport, horizonCoords, horizonOrphanCoords, polygons.last() );
     }
 
-    if ( polygon->size() <= 1 ){
+    if ( polygons.last()->size() <= 1 ){
         polygons.pop_back(); // Clean up "unused" empty polygon instances
     }
 
@@ -716,21 +693,7 @@ void AbstractProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates 
                                  f );
         }
         else {
-            QPolygonF *polygon = polygons.last();
-            QPolygonF path;
-            qreal x = 0.0;
-            qreal y = 0.0;
-            bool globeHidesPoint = false;
-
-            q->screenCoordinates( aCoords, viewport, x, y, globeHidesPoint );
-            if ( !globeHidesPoint ) {
-                path << QPointF( x, y );
-            }
-            q->screenCoordinates( bCoords, viewport, x, y, globeHidesPoint );
-            if ( !globeHidesPoint ) {
-                path << QPointF( x, y );
-            }
-            *polygon << path;
+            crossDateLine( aCoords, bCoords, polygons, viewport );
         }
 #ifdef SAFE_DISTANCE
     }
@@ -745,7 +708,6 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
                                                     const ViewportParams *viewport,
                                                     TessellationFlags f ) const
 {
-    QPolygonF   *path = polygons.last();
 
     const bool clampToGround = f.testFlag( FollowGround );
     bool followLatitudeCircle = false;     
@@ -761,54 +723,35 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
     qreal lonDiff = 0.0;
     qreal previousLongitude = 0.0;
     qreal previousLatitude = 0.0;
+    previousCoords.geoCoordinates( previousLongitude, previousLatitude );
+    qreal previousSign = previousLongitude > 0 ? 1 : -1;
 
-    if ( f.testFlag( RespectLatitudeCircle ) ) {
-        previousCoords.geoCoordinates( previousLongitude, previousLatitude );
+    qreal currentLongitude = 0.0;
+    qreal currentLatitude = 0.0;
+    currentCoords.geoCoordinates( currentLongitude, currentLatitude );
+    qreal currentSign = currentLongitude > 0 ? 1 : -1;
 
-        qreal currentLongitude = 0.0;
-        qreal currentLatitude = 0.0;
-        currentCoords.geoCoordinates( currentLongitude, currentLatitude );
-
-        if ( previousLatitude == currentLatitude ) {
-            followLatitudeCircle = true;
-            // FIXME: Take dateline into account
-            lonDiff = currentLongitude - previousLongitude;
-            if ( fabs( lonDiff ) == 2 * M_PI ) {
-                return;
+    if ( f.testFlag( RespectLatitudeCircle )
+         && previousLatitude == currentLatitude ) {
+        followLatitudeCircle = true;
+        lonDiff = currentLongitude - previousLongitude;
+        if ( previousSign != currentSign
+             && fabs(previousLongitude) + fabs(currentLongitude) > M_PI ) {
+            if ( previousSign > currentSign ) {
+                // going eastwards ->
+                lonDiff += 2 * M_PI ;
+            } else {
+                // going westwards ->
+                lonDiff -= 2 * M_PI;
             }
         }
-        else {
-//            mDebug() << "Don't FollowLatitudeCircle";
+        if ( fabs( lonDiff ) == 2 * M_PI ) {
+            return;
         }
-    }
-    else {
+    } else {
 //        mDebug() << "Don't RespectLatitudeCircle";
     }
     
-
-    qreal     x = 0;
-    qreal     y = 0;
-
-    // Declare current values.
-    bool globeHidesPoint = false;
-
-    // Take the clampToGround property into account
-    // For the clampToGround case add the "previous" coordinate before adding any other node. 
-    if ( clampToGround && previousAltitude != 0.0 ) {
-          q->screenCoordinates( previousCoords, viewport, x, y, globeHidesPoint );
-          if ( !globeHidesPoint ) {
-            *path << QPointF( x, y );
-          }
-    }
-
-    GeoDataCoordinates previousModifiedCoords( previousCoords );
-    if ( clampToGround ) {
-        previousModifiedCoords.setAltitude( 0.0 );
-    }
-    q->screenCoordinates( previousModifiedCoords, viewport, x, y, globeHidesPoint );
-    if ( !globeHidesPoint ) {
-        *path << QPointF( x, y );
-    }
 
     qreal  lon = 0.0;
     qreal  lat = 0.0;
@@ -828,7 +771,7 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
         if ( followLatitudeCircle ) {
             // To tessellate along latitude circles use the 
             // linear interpolation of the longitude.
-            lon = lonDiff * t + previousLongitude;
+            lon = lonDiff * t + previousCoords.longitude();
             lat = previousLatitude;
         }
         else {
@@ -838,33 +781,56 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
             itpos. getSpherical( lon, lat );
         }
 
-        q->screenCoordinates( GeoDataCoordinates( lon, lat, altitude ), viewport, x, y, globeHidesPoint );
-
-        // No "else" here, as this would not add the current point that is required.
-        if ( !globeHidesPoint ) {
-            *path << QPointF( x, y );
-        }
+        crossDateLine( GeoDataCoordinates( previousLongitude, previousLatitude, previousAltitude),
+                       GeoDataCoordinates( lon, lat, altitude ), polygons, viewport );
+        previousLongitude = lon;
     }
 
 
+    // For the clampToGround case add the "current" coordinate after adding all other nodes. 
     GeoDataCoordinates currentModifiedCoords( currentCoords );
     if ( clampToGround ) {
         currentModifiedCoords.setAltitude( 0.0 );
     }
-    q->screenCoordinates( currentModifiedCoords, viewport, x, y, globeHidesPoint );
-    if ( !globeHidesPoint ) {
-        *path << QPointF( x, y );
-    }
+    crossDateLine( GeoDataCoordinates( previousLongitude, previousLatitude, previousAltitude ),
+                   currentModifiedCoords, polygons, viewport );
+}
 
-    // For the clampToGround case add the "current" coordinate after adding all other nodes. 
-    if ( clampToGround && currentCoords.altitude() != 0.0 ) {
-          q->screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
-          if ( !globeHidesPoint ) {
-            *path << QPointF( x, y );
-          }
-    }
+void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord,
+                                               const GeoDataCoordinates & bCoord,
+                                               QVector<QPolygonF*> &polygons,
+                                               const ViewportParams *viewport ) const
+{
+    qreal aLon = aCoord.longitude();
+    qreal aSign = aLon > 0 ? 1 : -1;
 
-    return;
+    qreal bLon = bCoord.longitude();
+    qreal bSign = bLon > 0 ? 1 : -1;
+
+    qreal x, y;
+    bool globeHidesPoint;
+
+    q->screenCoordinates( bCoord, viewport, x, y, globeHidesPoint );
+
+    if( !globeHidesPoint ) {
+
+        if( aSign != bSign
+                && fabs(aLon) + fabs(bLon) > M_PI
+                && q->repeatX() ) {
+            qreal delta = mirrorPoint( viewport );
+            if ( aSign > bSign ) {
+                // going eastwards ->
+                *polygons.last() << QPointF( x +  delta, y );
+            } else {
+                // going westwards <-
+                *polygons.last() << QPointF( x -  delta, y );
+            }
+            QPolygonF *path = new QPolygonF;
+            polygons.append( path );
+        }
+
+        *polygons.last() << QPointF( x, y );
+    }
 }
 
 
@@ -890,14 +856,28 @@ GeoDataCoordinates AbstractProjectionPrivate::findHorizon( const GeoDataCoordina
 
     if ( f.testFlag( RespectLatitudeCircle ) ) {
         previousCoords.geoCoordinates( previousLongitude, previousLatitude );
+        qreal previousSign = previousLongitude > 0 ? 1 : -1;
 
         qreal currentLongitude = 0.0;
         qreal currentLatitude = 0.0;
         currentCoords.geoCoordinates( currentLongitude, currentLatitude );
+        qreal currentSign = currentLongitude > 0 ? 1 : -1;
 
         if ( previousLatitude == currentLatitude ) {
             followLatitudeCircle = true;
+
             lonDiff = currentLongitude - previousLongitude;
+            if ( previousSign != currentSign
+                 && fabs(previousLongitude) + fabs(currentLongitude) > M_PI ) {
+                if ( previousSign > currentSign ) {
+                    // going eastwards ->
+                    lonDiff += 2 * M_PI ;
+                } else {
+                    // going westwards ->
+                    lonDiff -= 2 * M_PI;
+                }
+            }
+
         }
         else {
 //            mDebug() << "Don't FollowLatitudeCircle";
