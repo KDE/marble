@@ -57,18 +57,13 @@ SphericalScanlineTextureMapper::RenderJob::RenderJob( StackedTileLoader *tileLoa
 {
 }
 
-SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( StackedTileLoader *tileLoader,
-                                                                QObject *parent )
-    : TextureMapperInterface( parent )
+SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( StackedTileLoader *tileLoader )
+    : TextureMapperInterface()
     , m_tileLoader( tileLoader )
     , m_repaintNeeded( true )
     , m_radius( 0 )
     , m_threadPool()
 {
-    connect( m_tileLoader, SIGNAL( tileUpdateAvailable( const TileId & ) ),
-             this, SIGNAL( tileUpdatesAvailable() ) );
-    connect( m_tileLoader, SIGNAL( tileUpdatesAvailable() ),
-             this, SIGNAL( tileUpdatesAvailable() ) );
 }
 
 void SphericalScanlineTextureMapper::mapTexture( GeoPainter *painter,

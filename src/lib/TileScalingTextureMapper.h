@@ -26,12 +26,9 @@ namespace Marble
 
 class TileScalingTextureMapper : public TextureMapperInterface
 {
-    Q_OBJECT
-
  public:
     TileScalingTextureMapper( StackedTileLoader *tileLoader,
-                              QCache<TileId, const QPixmap> *cache,
-                              QObject *parent = 0 );
+                              QCache<TileId, const QPixmap> *cache );
 
     virtual void mapTexture( GeoPainter *painter,
                              const ViewportParams *viewport,
@@ -39,10 +36,6 @@ class TileScalingTextureMapper : public TextureMapperInterface
                              TextureColorizer *texColorizer );
 
     virtual void setRepaintNeeded();
-
- private Q_SLOTS:
-    void updateTile( const TileId &id );
-    void updateTiles();
 
  private:
     void mapTexture( GeoPainter *painter,

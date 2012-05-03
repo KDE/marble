@@ -12,8 +12,6 @@
 #ifndef MARBLE_TEXTUREMAPPERINTERFACE_H
 #define MARBLE_TEXTUREMAPPERINTERFACE_H
 
-#include <QtCore/QObject>
-
 class QRect;
 
 namespace Marble
@@ -26,13 +24,11 @@ class TextureColorizer;
 class ViewportParams;
 
 
-class TextureMapperInterface : public QObject
+class TextureMapperInterface
 {
-    Q_OBJECT
-
 public:
-    explicit TextureMapperInterface( QObject * const parent = 0 );
-    ~TextureMapperInterface();
+    TextureMapperInterface();
+    virtual ~TextureMapperInterface();
 
     void setTileLevel( int tileLevel );
 
@@ -45,12 +41,7 @@ public:
 
     int tileZoomLevel() const;
 
- Q_SIGNALS:
-    void tileUpdatesAvailable();
-
  private:
-    Q_DISABLE_COPY( TextureMapperInterface )
-
     int         m_tileLevel;
 };
 

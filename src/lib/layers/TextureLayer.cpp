@@ -127,9 +127,15 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
         return; // keep tiles in cache to improve performance
 
     const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );
-    m_pixmapCache.remove( stackedTileId );
+    for ( int i = 0; i < 4; ++i ) {
+        const TileId id = TileId( i, stackedTileId.zoomLevel(), stackedTileId.x(), stackedTileId.y() );
+
+        m_pixmapCache.remove( id );
+    }
 
     m_tileLoader.updateTile( tileId, tileImage );
+
+    mapChanged();
 }
 
 
@@ -151,6 +157,7 @@ TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
 
 TextureLayer::~TextureLayer()
 {
+    delete d->m_texmapper;
     delete d;
 }
 
@@ -274,23 +281,22 @@ void TextureLayer::setupTextureMapper( Projection projection )
 
     switch( projection ) {
         case Spherical:
-            d->m_texmapper = new SphericalScanlineTextureMapper( &d->m_tileLoader, this );
+            d->m_texmapper = new SphericalScanlineTextureMapper( &d->m_tileLoader );
             break;
         case Equirectangular:
-            d->m_texmapper = new EquirectScanlineTextureMapper( &d->m_tileLoader, this );
+            d->m_texmapper = new EquirectScanlineTextureMapper( &d->m_tileLoader );
             break;
         case Mercator:
             if ( d->m_tileLoader.tileProjection() == GeoSceneTexture::Mercator ) {
-                d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader, &d->m_pixmapCache, this );
+                d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader, &d->m_pixmapCache );
             } else {
-                d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader, this );
+                d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader );
             }
             break;
         default:
             d->m_texmapper = 0;
     }
     Q_ASSERT( d->m_texmapper );
-    connect( d->m_texmapper, SIGNAL( tileUpdatesAvailable() ), SLOT( mapChanged() ) );
 }
 
 void TextureLayer::setNeedsUpdate()

@@ -208,8 +208,6 @@ void StackedTileLoader::reloadVisibleTiles()
     foreach ( const StackedTile *displayedTile, d->m_tilesOnDisplay.values() ) {
         d->m_layerDecorator->reloadTile( *displayedTile );
     }
-
-    emit tileUpdatesAvailable();
 }
 
 int StackedTileLoader::maximumTileLevel() const
@@ -251,8 +249,6 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
 
         delete displayedTile;
         displayedTile = 0;
-
-        emit tileUpdateAvailable( stackedTileId );
     } else {
         d->m_tileCache.remove( stackedTileId );
     }
@@ -290,5 +286,3 @@ StackedTileLoaderPrivate::findRelevantTextureLayers( TileId const & stackedTileI
 }
 
 }
-
-#include "StackedTileLoader.moc"

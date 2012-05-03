@@ -32,18 +32,13 @@
 using namespace Marble;
 
 TileScalingTextureMapper::TileScalingTextureMapper( StackedTileLoader *tileLoader,
-                                                    QCache<TileId, const QPixmap> *cache,
-                                                    QObject *parent )
-    : TextureMapperInterface( parent ),
+                                                    QCache<TileId, const QPixmap> *cache )
+    : TextureMapperInterface(),
       m_tileLoader( tileLoader ),
       m_cache( cache ),
       m_repaintNeeded( true ),
       m_radius( 0 )
 {
-    connect( m_tileLoader, SIGNAL( tileUpdateAvailable( const TileId & ) ),
-             this, SLOT( updateTile( const TileId & ) ) );
-    connect( m_tileLoader, SIGNAL( tileUpdatesAvailable() ),
-             this, SLOT( updateTiles() ) );
 }
 
 void TileScalingTextureMapper::mapTexture( GeoPainter *painter,
@@ -202,23 +197,3 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
 
     m_tileLoader->cleanupTilehash();
 }
-
-void TileScalingTextureMapper::updateTile( const TileId &stackedId )
-{
-    for ( int i = 0; i < 4; ++i ) {
-        const TileId id = TileId( i, stackedId.zoomLevel(), stackedId.x(), stackedId.y() );
-
-        m_cache->remove( id );
-    }
-
-    emit tileUpdatesAvailable();
-}
-
-void TileScalingTextureMapper::updateTiles()
-{
-    m_cache->clear();
-
-    emit tileUpdatesAvailable();
-}
-
-#include "TileScalingTextureMapper.moc"

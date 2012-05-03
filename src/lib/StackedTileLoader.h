@@ -24,7 +24,7 @@
 #ifndef MARBLE_STACKEDTILELOADER_H
 #define MARBLE_STACKEDTILELOADER_H
 
-#include <QtCore/QObject>
+#include <QtCore/QObject> // for Q_DISABLE_COPY
 #include <QtCore/QSize>
 #include <QtCore/QVector>
 
@@ -56,10 +56,8 @@ class StackedTileLoaderPrivate;
  * @author Torsten Rahn <rahn@kde.org>
  **/
 
-class StackedTileLoader : public QObject
+class StackedTileLoader
 {
-    Q_OBJECT
-
     public:
         /**
          * Creates a new tile loader.
@@ -118,7 +116,6 @@ class StackedTileLoader : public QObject
          */
         int maximumTileLevel() const;
 
-    public Q_SLOTS:
         /**
          * @brief Set the limit of the volatile (in RAM) cache.
          * @param bytes The limit in kilobytes.
@@ -134,14 +131,6 @@ class StackedTileLoader : public QObject
         /**
          */
         void updateTile( TileId const & tileId, QImage const &tileImage );
-
-    Q_SIGNALS:
-        /**
-         * This signal is emitted whenever a requested tile has been
-         * downloaded and is available now.
-         */
-        void tileUpdateAvailable( TileId const & stacedTileId );
-        void tileUpdatesAvailable();
 
     private:
         Q_DISABLE_COPY( StackedTileLoader )

@@ -39,7 +39,7 @@ class StackedTileLoader;
 class SphericalScanlineTextureMapper : public TextureMapperInterface
 {
  public:
-    explicit SphericalScanlineTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
+    explicit SphericalScanlineTextureMapper( StackedTileLoader *tileLoader );
 
     virtual void mapTexture( GeoPainter *painter,
                              const ViewportParams *viewport,
