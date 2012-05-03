@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011-2012 Florian Eßer <f.esser@rwth-aachen.de>
+// Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef ELEVATIONPROFILEFLOATITEM_H

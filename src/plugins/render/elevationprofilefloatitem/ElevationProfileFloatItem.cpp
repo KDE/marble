@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011-2012 Florian Eßer <f.esser@rwth-aachen.de>
+// Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "ElevationProfileFloatItem.h"
@@ -115,7 +116,7 @@ QString ElevationProfileFloatItem::version() const
 
 QString ElevationProfileFloatItem::description() const
 {
-    return tr("This is a float item that provides a route/track elevation profile.");
+    return tr( "A float item that shows the elevation profile of the current route." );
 }
 
 QString ElevationProfileFloatItem::copyrightYears() const
@@ -126,7 +127,8 @@ QString ElevationProfileFloatItem::copyrightYears() const
 QList<PluginAuthor> ElevationProfileFloatItem::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8 ( "Florian Eßer" ), "f.esser@rwth-aachen.de" );
+            << PluginAuthor( QString::fromUtf8 ( "Florian Eßer" ), "f.esser@rwth-aachen.de" )
+            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 
 QIcon ElevationProfileFloatItem::icon () const
