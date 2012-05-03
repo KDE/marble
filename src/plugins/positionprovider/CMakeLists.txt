@@ -1,3 +1,11 @@
+FIND_PACKAGE(nmealib)
+IF(NMEALIB_FOUND)
+    MESSAGE( STATUS "Building with flightgear position provider")
+    ADD_SUBDIRECTORY( flightgear )
+ELSE(NMEALIB_FOUND)
+     MESSAGE( STATUS "Not building with flightgear position provider")
+ENDIF(NMEALIB_FOUND)
+
 FIND_PACKAGE(libgps)
 IF(LIBGPS_FOUND)
      MESSAGE( STATUS "Building with gpsd position provider")
