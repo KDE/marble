@@ -1,9 +1,10 @@
-/**
+/*
  * This file is part of the Marble Virtual Globe.
  *
  * Copyright 2005-2007 Torsten Rahn <tackat@kde.org>
  * Copyright 2007      Inge Wallin  <ingwa@kde.org>
  * Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
+ * Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -24,7 +25,7 @@
 #ifndef MARBLE_STACKEDTILELOADER_H
 #define MARBLE_STACKEDTILELOADER_H
 
-#include <QtCore/QObject> // for Q_DISABLE_COPY
+#include <QtCore/QObject>
 #include <QtCore/QSize>
 #include <QtCore/QVector>
 
@@ -56,8 +57,10 @@ class StackedTileLoaderPrivate;
  * @author Torsten Rahn <rahn@kde.org>
  **/
 
-class StackedTileLoader
+class StackedTileLoader : public QObject
 {
+    Q_OBJECT
+
     public:
         /**
          * Creates a new tile loader.
@@ -65,7 +68,7 @@ class StackedTileLoader
          * @param downloadManager The download manager that shall be used to fetch
          *                        the tiles from a remote resource.
          */
-        explicit StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator );
+        explicit StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator, QObject *parent = 0 );
         virtual ~StackedTileLoader();
 
         void setTextureLayers( QVector<GeoSceneTexture const *> & );
@@ -138,9 +141,14 @@ class StackedTileLoader
          */
         void updateTile( TileId const & tileId, QImage const &tileImage );
 
+    Q_SIGNALS:
+        void tileLoaded( TileId const &tileId );
+        void cleared();
+
     private:
         Q_DISABLE_COPY( StackedTileLoader )
 
+        friend class StackedTileLoaderPrivate;
         StackedTileLoaderPrivate* const d;
 };
 
