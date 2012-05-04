@@ -23,11 +23,6 @@ QString PntPlugin::name() const
     return tr( "Pnt File Parser" );
 }
 
-QString PntPlugin::guiString() const
-{
-    return tr( "Pnt Parser" );
-}
-
 QString PntPlugin::nameId() const
 {
     return "Pnt";
@@ -52,6 +47,16 @@ QList<PluginAuthor> PntPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+}
+
+QString PntPlugin::fileFormatDescription() const
+{
+    return tr( "Micro World Database II" );
+}
+
+QStringList PntPlugin::fileExtensions() const
+{
+    return QStringList() << "pnt";
 }
 
 MarbleAbstractRunner* PntPlugin::newRunner() const

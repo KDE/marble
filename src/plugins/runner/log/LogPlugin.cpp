@@ -23,11 +23,6 @@ QString LogfilePlugin::name() const
     return tr( "TangoGPS Log File Parser" );
 }
 
-QString LogfilePlugin::guiString() const
-{
-    return tr( "TangoGPS Log File" );
-}
-
 QString LogfilePlugin::nameId() const
 {
     return "Log";
@@ -52,6 +47,16 @@ QList<PluginAuthor> LogfilePlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
+}
+
+QString LogfilePlugin::fileFormatDescription() const
+{
+    return tr( "TangoGPS Log Files" );
+}
+
+QStringList LogfilePlugin::fileExtensions() const
+{
+    return QStringList() << "log";
 }
 
 MarbleAbstractRunner* LogfilePlugin::newRunner() const

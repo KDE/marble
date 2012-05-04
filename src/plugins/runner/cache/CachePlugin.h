@@ -25,8 +25,6 @@ public:
 
     QString name() const;
 
-    QString guiString() const;
-
     QString nameId() const;
 
     QString version() const;
@@ -36,6 +34,10 @@ public:
     QString copyrightYears() const;
 
     QList<PluginAuthor> pluginAuthors() const;
+
+    QString fileFormatDescription() const;
+
+    QStringList fileExtensions() const;
 
     virtual MarbleAbstractRunner* newRunner() const;
 };

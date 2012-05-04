@@ -23,11 +23,6 @@ QString ShpPlugin::name() const
     return tr( "Shp File Parser" );
 }
 
-QString ShpPlugin::guiString() const
-{
-    return tr( "Shp Parser" );
-}
-
 QString ShpPlugin::nameId() const
 {
     return "Shp";
@@ -52,6 +47,16 @@ QList<PluginAuthor> ShpPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+}
+
+QString ShpPlugin::fileFormatDescription() const
+{
+    return tr( "Shapefile Map Files" );
+}
+
+QStringList ShpPlugin::fileExtensions() const
+{
+    return QStringList() << "shp";
 }
 
 MarbleAbstractRunner* ShpPlugin::newRunner() const

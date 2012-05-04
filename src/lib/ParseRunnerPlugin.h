@@ -36,11 +36,18 @@ public:
     virtual ~ParseRunnerPlugin();
 
     /**
-     * @brief Returns the string that should appear in the user interface.
-     *
-     * For example, "Google Earth KML" should be returned for the kml parsing plugin.
-     */
-    virtual QString guiString() const = 0;
+      * Returns a short description of the supported file format.
+      *
+      * Example: "Google Earth KML"
+      */
+    virtual QString fileFormatDescription() const = 0;
+
+    /**
+      * Returns the file extensions associated with the file format.
+      *
+      * Example: "kml", "kmz"
+      */
+    virtual QStringList fileExtensions() const = 0;
 
     /** Plugin factory method to create a new runner instance.
       * Method caller gets ownership of the returned object
