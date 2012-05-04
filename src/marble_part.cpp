@@ -87,6 +87,7 @@
 #include "TileCoordsPyramid.h"
 #include "ViewportParams.h"
 #include "MarbleClock.h"
+#include "ParseRunnerPlugin.h"
 #include "PositionTracking.h"
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
@@ -218,13 +219,28 @@ bool MarblePart::openUrl( const KUrl &url )
 
 bool MarblePart::openFile()
 {
-    QStringList fileNames = KFileDialog::getOpenFileNames( m_lastFileOpenPath,
-                                    i18n("*.gpx *.kml *.log *.osm *.pnt|All Supported Files\n"
-                                         "*.gpx|GPS Data\n"
-                                         "*.kml|Google Earth KML\n"
-                                         "*.log|TangoGPS Logfile\n"
-                                         "*.osm|OpenStreetMap Data\n"
-                                         "*.pnt|Micro World Data Bank II"),
+    const PluginManager *const pluginManager = m_controlView->marbleModel()->pluginManager();
+
+    QStringList allFileExtensions;
+    QStringList filters;
+    foreach ( const ParseRunnerPlugin *plugin, pluginManager->parsingRunnerPlugins() ) {
+        if ( plugin->nameId() == "Cache" )
+            continue;
+
+        const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings( QRegExp( "^" ), "*." );
+        const QString filter = QString( "%1|%2" ).arg( fileExtensions.join( " " ) ).arg( plugin->fileFormatDescription() );
+        filters << filter;
+        allFileExtensions << fileExtensions;
+    }
+
+    allFileExtensions.sort();
+    const QString allFileTypes = QString( "%1|%2" ).arg( allFileExtensions.join( " " ) ).arg( i18n( "All Supported Files" ) );
+
+    filters.sort();
+    filters.prepend( allFileTypes );
+    const QString filter = filters.join( "\n" );
+
+    QStringList fileNames = KFileDialog::getOpenFileNames( m_lastFileOpenPath, filter,
                                             widget(), i18n("Open File")
                                            );
 

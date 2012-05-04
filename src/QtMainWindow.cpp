@@ -64,6 +64,7 @@
 #include "routing/RoutingProfilesModel.h"
 #include "routing/RoutingWidget.h"
 #include "routing/RouteRequest.h"
+#include "ParseRunnerPlugin.h"
 #include "PositionTracking.h"
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
@@ -871,9 +872,28 @@ void MainWindow::updateStatusBar()
 
 void MainWindow::openFile()
 {
-    QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Open File"),
-                            m_lastFileOpenPath,
-                            tr("All Supported Files (*.gpx *.kml *.log *.osm *.pnt *.shp);;GPS Data (*.gpx);;Google Earth KML (*.kml);;TangoGPS Log File (*.log);;OpenStreetmap Data (*.osm);;Micro World Database II (*.pnt);;Shapefile map file (*.shp)"));
+    const PluginManager *const pluginManager = m_controlView->marbleModel()->pluginManager();
+
+    QStringList allFileExtensions;
+    QStringList filters;
+    foreach ( const ParseRunnerPlugin *plugin, pluginManager->parsingRunnerPlugins() ) {
+        if ( plugin->nameId() == "Cache" )
+            continue;
+
+        const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings( QRegExp( "^" ), "*." );
+        const QString filter = QString( "%1 (%2)" ).arg( plugin->fileFormatDescription() ).arg( fileExtensions.join( " " ) );
+        filters << filter;
+        allFileExtensions << fileExtensions;
+    }
+
+    allFileExtensions.sort();  // sort since file extensions are visible under Windows
+    const QString allFileTypes = QString( "%1 (%2)" ).arg( tr( "All Supported Files" ) ).arg( allFileExtensions.join( " " ) );
+
+    filters.sort();
+    filters.prepend( allFileTypes );
+    const QString filter = filters.join( ";;" );
+
+    QStringList fileNames = QFileDialog::getOpenFileNames( this, tr( "Open File" ), m_lastFileOpenPath, filter );
 
     if ( !fileNames.isEmpty() ) {
         const QString firstFile = fileNames.first();
