@@ -458,8 +458,8 @@ void ScanlineTextureMapperContext::nextTile( int &posX, int &posY )
     // tileCol counts the tile columns left from the current tile.
     // tileRow counts the tile rows on the top from the current tile.
 
-    int tileCol = lon / m_tileSize.width();
-    int tileRow = lat / m_tileSize.height();
+    const int tileCol = lon / m_tileSize.width();
+    const int tileRow = lat / m_tileSize.height();
 
     m_deltaLevel = 0;
     m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel - m_deltaLevel, tileCol >> m_deltaLevel, tileRow >> m_deltaLevel ) );
@@ -500,8 +500,8 @@ void ScanlineTextureMapperContext::nextTile( qreal &posX, qreal &posY )
     // tileCol counts the tile columns left from the current tile.
     // tileRow counts the tile rows on the top from the current tile.
 
-    int tileCol = lon / m_tileSize.width();
-    int tileRow = lat / m_tileSize.height();
+    const int tileCol = lon / m_tileSize.width();
+    const int tileRow = lat / m_tileSize.height();
 
     m_deltaLevel = 0;
     m_tile = m_tileLoader->loadTile( TileId( 0, m_tileLevel - m_deltaLevel, tileCol >> m_deltaLevel, tileRow >> m_deltaLevel ) );
