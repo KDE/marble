@@ -40,6 +40,8 @@ public:
     QList<PluginAuthor> pluginAuthors() const;
 
     virtual MarbleAbstractRunner* newRunner() const;
+
+    bool canWork( Capability capability ) const;
 };
 
 }

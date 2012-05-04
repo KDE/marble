@@ -16,9 +16,7 @@ namespace Marble
 
 HostipPlugin::HostipPlugin( QObject *parent ) : RunnerPlugin( parent )
 {
-    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-    // Disabled on small screen devices to save resources
-    setCapabilities( smallScreen ? None : Search );
+    setCapabilities( Search );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
 }
@@ -62,6 +60,13 @@ QList<PluginAuthor> HostipPlugin::pluginAuthors() const
 MarbleAbstractRunner* HostipPlugin::newRunner() const
 {
     return new HostipRunner;
+}
+
+bool HostipPlugin::canWork( Capability capability ) const
+{
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    // Disabled on small screen devices to save resources
+    return supports( capability ) && !smallScreen;
 }
 
 }
