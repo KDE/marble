@@ -19,7 +19,7 @@ Page {
     property bool horizontal: width / height > 1.20
 
     tools: ToolBarLayout {
-        ToolIcon {
+        MarbleToolIcon {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }

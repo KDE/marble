@@ -1,5 +1,7 @@
 PROJECT( QtComponentsPlugin )
 
+SET(MARBLE_PLASMA_COMPONENTS FALSE)
+
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/qt-components
  ${CMAKE_BINARY_DIR}/src/plugins/qt-components
@@ -24,3 +26,9 @@ INSTALL( FILES ViaPointEditor.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/e
 INSTALL( FILES FileDialog.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )
 INSTALL( FILES FileOpenDialog.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )
 INSTALL( FILES FileSaveDialog.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )
+
+IF( MARBLE_PLASMA_COMPONENTS )
+  INSTALL( FILES plasma/MarbleToolIcon.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )
+ELSE()
+  INSTALL( FILES harmattan/MarbleToolIcon.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )
+ENDIF()

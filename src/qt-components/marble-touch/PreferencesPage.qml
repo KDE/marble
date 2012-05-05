@@ -11,6 +11,7 @@ import QtQuick 1.0
 import QtMultimediaKit 1.1
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
+import org.kde.edu.marble.qtcomponents 0.12
 
 /*
  * General preferences
@@ -19,7 +20,7 @@ Page {
     id: preferencesPage
 
     tools: ToolBarLayout {
-        ToolIcon {
+        MarbleToolIcon {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
@@ -36,12 +37,12 @@ Page {
             id: pageGrid
             width: parent.width - 20
 
-            columns: inPortrait ? 1 : 2
+            columns: main.inPortrait ? 1 : 2
             rows: 10 / columns
-            spacing: inPortrait ? 10 : 5
+            spacing: main.inPortrait ? 10 : 5
 
-            property int leftRowWidth: inPortrait ? width : 250
-            property int rightRowWidth: inPortrait ? width : width - leftRowWidth - spacing
+            property int leftRowWidth: main.inPortrait ? width : 250
+            property int rightRowWidth: main.inPortrait ? width : width - leftRowWidth - spacing
 
             Label {
                 id: offlineLabel

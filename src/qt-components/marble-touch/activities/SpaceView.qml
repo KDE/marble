@@ -19,7 +19,7 @@ Page {
     anchors.fill: parent
 
     tools: ToolBarLayout {
-        ToolIcon {
+        MarbleToolIcon {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
@@ -87,7 +87,7 @@ Page {
             }
         }
 
-        ToolIcon {
+        MarbleToolIcon {
             iconId: "toolbar-view-menu"
             visible: earthButton.checked
             onClicked: pageMenu.open()

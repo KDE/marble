@@ -39,5 +39,6 @@
         <file>PreferencesPage.qml</file>
         <file>OfflineDataPage.qml</file>
         <file>MarbleTouch.qml</file>
+        <file alias="MarbleWindow.qml">harmattan/MarbleWindow.qml</file>
     </qresource>
 </RCC>

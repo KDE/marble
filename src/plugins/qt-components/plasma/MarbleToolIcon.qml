@@ -4,12 +4,13 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2011 Daniel Marth <danielmarth@gmx.at>
+// Copyright 2012 Dennis Nienhüser <earthwings@gentoo.org>
 
-/* 
- * Main window of the application. Also contains activity properties,
- * settings and manages plugin states on activity changes.
- */
-MarbleWindow {
-    id: main
+import QtQuick 1.0
+import com.nokia.meego 1.0
+
+ToolButton {
+    id: root
+    /** @todo FIXME Don't hardcode the size here */
+    width: 60
 }

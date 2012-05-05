@@ -20,7 +20,7 @@ Page {
     anchors.fill: parent
 
     tools: ToolBarLayout {
-        ToolIcon {
+        MarbleToolIcon {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }

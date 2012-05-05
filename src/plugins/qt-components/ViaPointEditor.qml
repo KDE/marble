@@ -67,7 +67,7 @@ Item {
             onClicked: marbleWidget.centerOn(longitude, latitude)
         }
 
-        ToolIcon {
+        MarbleToolIcon {
             id: editIcon
             iconId: "toolbar-edit"
             anchors.right: parent.right

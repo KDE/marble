@@ -8,6 +8,7 @@
 
 import QtQuick 1.0
 import com.nokia.meego 1.0
+import org.kde.edu.marble.qtcomponents 0.12
 
 /*
  * Page for geocaching activity.
@@ -17,7 +18,7 @@ Page {
     anchors.fill: parent
 
     tools: ToolBarLayout {
-        ToolIcon {
+        MarbleToolIcon {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }

@@ -21,12 +21,12 @@ Page {
     anchors.fill: parent
 
     tools: ToolBarLayout {
-        ToolIcon {
-            iconId: "toolbar-back";
+        MarbleToolIcon {
+            iconId: "toolbar-back"
             onClicked: pageStack.pop()
         }
         ToolButton {
-            iconSource: "image://theme/icon-m-toolbar-volume";
+            iconSource: "image://theme/icon-m-toolbar-volume"
             checkable: true
             checked: !settings.voiceNavigationMuted
             onCheckedChanged: settings.voiceNavigationMuted = !checked
@@ -41,7 +41,7 @@ Page {
             width: 60
             flat: true
         }
-        ToolIcon {
+        MarbleToolIcon {
             iconId: "toolbar-view-menu"
             onClicked: pageMenu.open()
         }

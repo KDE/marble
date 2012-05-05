@@ -41,7 +41,7 @@ Sheet {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ToolIcon {
+            MarbleToolIcon {
                 id: multiButton;
                 anchors.verticalCenter: parent.verticalCenter
                 iconId: "icon-m-toolbar-up"

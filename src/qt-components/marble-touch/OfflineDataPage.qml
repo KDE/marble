@@ -16,7 +16,7 @@ Page {
     id: offlineDataPage
 
     tools: ToolBarLayout {
-        ToolIcon {
+        MarbleToolIcon {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
@@ -35,7 +35,7 @@ Page {
 
         visible: !Marble.canExecute("monav-daemon") && !Marble.canExecute("MoNavD")
 
-        ToolIcon {
+        MarbleToolIcon {
             id: statusIcon
             anchors.verticalCenter: parent.verticalCenter
             iconId: "applet-error"

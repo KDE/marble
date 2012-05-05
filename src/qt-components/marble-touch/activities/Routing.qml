@@ -21,7 +21,7 @@ Page {
     property bool horizontal: width / height > 1.20
 
     tools: ToolBarLayout {
-        ToolIcon {
+        MarbleToolIcon {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
@@ -33,7 +33,7 @@ Page {
             width: 60
             flat: true
         }
-        ToolIcon {
+        MarbleToolIcon {
             iconSource: "image://theme/icon-s-common-location"
             onClicked: {
                 marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
@@ -50,7 +50,7 @@ Page {
             width: 60
             flat: true
         }
-        ToolIcon {
+        MarbleToolIcon {
             iconId: "toolbar-view-menu"
             onClicked: pageMenu.open()
         }

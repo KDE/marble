@@ -21,11 +21,11 @@ Page {
     anchors.fill: parent
 
     tools: ToolBarLayout {
-        ToolIcon {
+        MarbleToolIcon {
             iconId: "toolbar-back";
             onClicked: pageStack.pop()
         }
-        ToolIcon {
+        MarbleToolIcon {
             iconSource: "image://theme/icon-s-common-location"
             onClicked: {
                 marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
@@ -41,7 +41,7 @@ Page {
             flat: true
             iconSource: "image://theme/icon-m-toolbar-search";
         }
-        ToolIcon {
+        MarbleToolIcon {
             iconId: "toolbar-view-menu"
             onClicked: pageMenu.open()
         }
