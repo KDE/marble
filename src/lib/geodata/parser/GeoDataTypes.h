@@ -23,9 +23,10 @@
 #ifndef MARBLE_GEODATATYPES_H
 #define MARBLE_GEODATATYPES_H
 
+#include "geodata_export.h"
+
 namespace Marble
 {
-
 
 namespace GeoDataTypes
 {
@@ -34,43 +35,43 @@ namespace GeoDataTypes
  * downcasting to the good object
  * please keep alphabetic order to prevent mess
  */
-extern const char* GeoDataColorStyleType;
-extern const char* GeoDataContainerType;
-extern const char* GeoDataDataType;
-extern const char* GeoDataDocumentType;
-extern const char* GeoDataExtendedDataType;
-extern const char* GeoDataFeatureType;
-extern const char* GeoDataFolderType;
-extern const char* GeoDataGeometryType;
-extern const char* GeoDataGroundOverlayType;
-extern const char* GeoDataHotspotType;
-extern const char* GeoDataIconStyleType;
-extern const char* GeoDataInnerBoundaryType;
-extern const char* GeoDataLabelStyleType;
-extern const char* GeoDataLatLonAltBoxType;
-extern const char* GeoDataLatLonBoxType;
-extern const char* GeoDataLinearRingType;
-extern const char* GeoDataLineStringType;
-extern const char* GeoDataLineStyleType;
-extern const char* GeoDataLodType;
-extern const char* GeoDataLookAtType;
-extern const char* GeoDataMultiGeometryType;
-extern const char* GeoDataObjectType;
-extern const char* GeoDataOuterBoundaryType;
-extern const char* GeoDataPhotoOverlayType;
-extern const char* GeoDataPlacemarkType;
-extern const char* GeoDataPointType;
-extern const char* GeoDataPolygonType;
-extern const char* GeoDataPolyStyleType;
-extern const char* GeoDataRegionType;
-extern const char* GeoDataSimpleArrayDataType;
-extern const char* GeoDataStyleSelectorType;
-extern const char* GeoDataStyleType;
-extern const char* GeoDataStyleMapType;
-extern const char* GeoDataTimePrimitiveType;
-extern const char* GeoDataTimeStampType;
-extern const char* GeoDataTimeSpanType;
-extern const char* GeoDataTrackType;
+GEODATA_EXPORT extern const char* GeoDataColorStyleType;
+GEODATA_EXPORT extern const char* GeoDataContainerType;
+GEODATA_EXPORT extern const char* GeoDataDataType;
+GEODATA_EXPORT extern const char* GeoDataDocumentType;
+GEODATA_EXPORT extern const char* GeoDataExtendedDataType;
+GEODATA_EXPORT extern const char* GeoDataFeatureType;
+GEODATA_EXPORT extern const char* GeoDataFolderType;
+GEODATA_EXPORT extern const char* GeoDataGeometryType;
+GEODATA_EXPORT extern const char* GeoDataGroundOverlayType;
+GEODATA_EXPORT extern const char* GeoDataHotspotType;
+GEODATA_EXPORT extern const char* GeoDataIconStyleType;
+GEODATA_EXPORT extern const char* GeoDataInnerBoundaryType;
+GEODATA_EXPORT extern const char* GeoDataLabelStyleType;
+GEODATA_EXPORT extern const char* GeoDataLatLonAltBoxType;
+GEODATA_EXPORT extern const char* GeoDataLatLonBoxType;
+GEODATA_EXPORT extern const char* GeoDataLinearRingType;
+GEODATA_EXPORT extern const char* GeoDataLineStringType;
+GEODATA_EXPORT extern const char* GeoDataLineStyleType;
+GEODATA_EXPORT extern const char* GeoDataLodType;
+GEODATA_EXPORT extern const char* GeoDataLookAtType;
+GEODATA_EXPORT extern const char* GeoDataMultiGeometryType;
+GEODATA_EXPORT extern const char* GeoDataObjectType;
+GEODATA_EXPORT extern const char* GeoDataOuterBoundaryType;
+GEODATA_EXPORT extern const char* GeoDataPhotoOverlayType;
+GEODATA_EXPORT extern const char* GeoDataPlacemarkType;
+GEODATA_EXPORT extern const char* GeoDataPointType;
+GEODATA_EXPORT extern const char* GeoDataPolygonType;
+GEODATA_EXPORT extern const char* GeoDataPolyStyleType;
+GEODATA_EXPORT extern const char* GeoDataRegionType;
+GEODATA_EXPORT extern const char* GeoDataSimpleArrayDataType;
+GEODATA_EXPORT extern const char* GeoDataStyleSelectorType;
+GEODATA_EXPORT extern const char* GeoDataStyleType;
+GEODATA_EXPORT extern const char* GeoDataStyleMapType;
+GEODATA_EXPORT extern const char* GeoDataTimePrimitiveType;
+GEODATA_EXPORT extern const char* GeoDataTimeStampType;
+GEODATA_EXPORT extern const char* GeoDataTimeSpanType;
+GEODATA_EXPORT extern const char* GeoDataTrackType;
 }
 
 }
