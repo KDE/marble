@@ -37,7 +37,7 @@ class RunnerTask : public QObject, public QRunnable
 
 public:
     /** Constructor. The runner instance given will be used to execute the actual task */
-    explicit RunnerTask( Marble::RunnerPlugin *factory, MarbleRunnerManager *manager );
+    explicit RunnerTask( const RunnerPlugin *factory, MarbleRunnerManager *manager );
 
     /** Overriding QRunnable to execute the runner task in a local event loop */
     virtual void run();
@@ -50,12 +50,12 @@ protected:
     virtual void runTask() = 0;
 
     /** Access to the runner for derived classes */
-    RunnerPlugin* factory();
+    const RunnerPlugin* factory() const;
 
     MarbleRunnerManager *manager();
 
 private:
-    RunnerPlugin *const m_factory;
+    const RunnerPlugin *const m_factory;
     MarbleRunnerManager *const m_manager;
 };
 
@@ -65,7 +65,7 @@ class SearchTask : public RunnerTask
     Q_OBJECT
 
 public:
-    SearchTask( RunnerPlugin *factory, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm );
+    SearchTask( const RunnerPlugin *factory, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm );
 
     virtual void runTask();
 
@@ -80,7 +80,7 @@ class ReverseGeocodingTask : public RunnerTask
     Q_OBJECT
 
 public:
-    ReverseGeocodingTask( RunnerPlugin *factory, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates );
+    ReverseGeocodingTask( const RunnerPlugin *factory, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates );
 
     virtual void runTask();
 
@@ -96,7 +96,7 @@ class RoutingTask : public RunnerTask
     Q_OBJECT
 
 public:
-    RoutingTask( RunnerPlugin *factory, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest );
+    RoutingTask( const RunnerPlugin *factory, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest );
 
     virtual void runTask();
 
@@ -111,7 +111,7 @@ class ParsingTask : public RunnerTask
     Q_OBJECT
 
 public:
-    ParsingTask( RunnerPlugin* factory, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role );
+    ParsingTask( const RunnerPlugin* factory, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role );
 
     virtual void runTask();
 

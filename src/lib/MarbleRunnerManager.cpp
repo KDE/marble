@@ -208,7 +208,7 @@ void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
     }
 
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Search );
-    foreach( RunnerPlugin* plugin, plugins ) {
+    foreach( const RunnerPlugin* plugin, plugins ) {
         SearchTask* task = new SearchTask( plugin, this, d->m_marbleModel, searchTerm );
         connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupSearchTask( RunnerTask* ) ) );
         d->m_searchTasks << task;
@@ -263,7 +263,7 @@ void MarbleRunnerManager::reverseGeocoding( const GeoDataCoordinates &coordinate
     d->m_reverseGeocodingResult.clear();
     d->m_reverseGeocodingResults.removeAll( coordinates );
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::ReverseGeocoding );
-    foreach( RunnerPlugin* plugin, plugins ) {
+    foreach( const RunnerPlugin* plugin, plugins ) {
         ReverseGeocodingTask* task = new ReverseGeocodingTask( plugin, this, d->m_marbleModel, coordinates );
         connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupReverseGeocodingTask(RunnerTask*) ) );
         mDebug() << "reverse task " << plugin->nameId() << " " << (long)task;
@@ -313,7 +313,7 @@ void MarbleRunnerManager::retrieveRoute( const RouteRequest *request )
     d->m_routingResult.clear();
 
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Routing );
-    foreach( RunnerPlugin* plugin, plugins ) {
+    foreach( const RunnerPlugin* plugin, plugins ) {
         if ( !profile.name().isEmpty() && !profile.pluginSettings().contains( plugin->nameId() ) ) {
             continue;
         }
@@ -358,7 +358,7 @@ QVector<GeoDataDocument*> MarbleRunnerManager::searchRoute( const RouteRequest *
 void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role )
 {
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Parsing );
-    foreach( RunnerPlugin *plugin, plugins ) {
+    foreach( const RunnerPlugin *plugin, plugins ) {
         ParsingTask *task = new ParsingTask( plugin, this, fileName, role );
         connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupParsingTask(RunnerTask*) ) );
         mDebug() << "parse task " << plugin->nameId() << " " << (long)task;

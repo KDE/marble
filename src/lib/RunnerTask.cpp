@@ -21,7 +21,7 @@
 namespace Marble
 {
 
-RunnerTask::RunnerTask( RunnerPlugin* factory, MarbleRunnerManager *manager ) :
+RunnerTask::RunnerTask( const RunnerPlugin* factory, MarbleRunnerManager *manager ) :
     m_factory( factory ),
     m_manager( manager )
 {
@@ -35,7 +35,7 @@ void RunnerTask::run()
     emit finished( this );
 }
 
-RunnerPlugin *RunnerTask::factory()
+const RunnerPlugin *RunnerTask::factory() const
 {
     return m_factory;
 }
@@ -45,7 +45,7 @@ MarbleRunnerManager *RunnerTask::manager()
     return m_manager;
 }
 
-SearchTask::SearchTask(RunnerPlugin* factory, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm) :
+SearchTask::SearchTask(const RunnerPlugin *factory, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm) :
     RunnerTask( factory, manager ),
     m_model( model ),
     m_searchTerm( searchTerm )
@@ -63,7 +63,7 @@ void SearchTask::runTask()
     runner->deleteLater();
 }
 
-ReverseGeocodingTask::ReverseGeocodingTask( RunnerPlugin* factory, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates ) :
+ReverseGeocodingTask::ReverseGeocodingTask( const RunnerPlugin* factory, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates ) :
     RunnerTask( factory, manager ),
     m_model( model ),
     m_coordinates( coordinates )
@@ -81,7 +81,7 @@ void ReverseGeocodingTask::runTask()
     runner->deleteLater();
 }
 
-RoutingTask::RoutingTask( RunnerPlugin* factory, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest ) :
+RoutingTask::RoutingTask( const RunnerPlugin* factory, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest ) :
     RunnerTask( factory, manager ),
     m_model( model ),
     m_routeRequest( routeRequest )
@@ -99,7 +99,7 @@ void RoutingTask::runTask()
     runner->deleteLater();
 }
 
-ParsingTask::ParsingTask( RunnerPlugin *factory, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role ) :
+ParsingTask::ParsingTask( const RunnerPlugin *factory, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role ) :
     RunnerTask( factory, manager ),
     m_fileName( fileName ),
     m_role( role )
