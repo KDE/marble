@@ -271,7 +271,6 @@ Page {
         }
 
         buttons: ButtonRow {
-            style: ButtonStyle { }
             anchors.horizontalCenter: parent.horizontalCenter
             Button { text: "OK"; onClicked: safetyWarningDialog.accept() }
         }

@@ -54,7 +54,7 @@ Page {
                         width: root.width
                         height: mapImage.height
 
-                        color: index === themeDialog.selectedIndex ? root.platformStyle.itemSelectedBackgroundColor : root.platformStyle.itemBackgroundColor
+                        color: index === themeDialog.selectedIndex ? "lightsteelblue" : "#00ffffff"
 
                         Row {
                             anchors.verticalCenter: parent.verticalCenter
@@ -68,7 +68,7 @@ Page {
                             Label {
                                 id: themeLabel
                                 text: display
-                                color: delegate.index === themeDialog.selectedIndex ? root.platformStyle.itemSelectedTextColor : root.platformStyle.itemTextColor
+                                color: index === themeDialog.selectedIndex ? "black" : "white"
                                 anchors.verticalCenter: parent.verticalCenter
                             }
                         }

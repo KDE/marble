@@ -217,7 +217,7 @@ Page {
 
                 Label {
                     anchors.verticalCenter: parent.verticalCenter
-                    platformStyle: LabelStyle { fontPixelSize: 18 }
+                    font.pixelSize: 18
                     text: display;
                     width: parent.width - turnIcon.width - 20
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere

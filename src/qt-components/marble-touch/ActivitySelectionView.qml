@@ -119,7 +119,7 @@ Page {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.margins: 30
-            platformStyle: LabelStyle { fontPixelSize: 16 }
+            font.pixelSize: 16
             width: parent.width
             visible: settings.changelogShown !== project.version
             color: "white"

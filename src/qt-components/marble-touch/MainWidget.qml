@@ -130,7 +130,7 @@ Item {
                         anchors.left: parent.left
                         anchors.right: parent.right
                         anchors.margins: 10
-                        platformStyle: LabelStyle { fontPixelSize: 18 }
+                        font.pixelSize: 18
 
                         MouseArea {
                             anchors.fill: parent
@@ -154,7 +154,7 @@ Item {
                             Label {
                                 text: "Route"
                                 anchors.centerIn: parent
-                                platformStyle: LabelStyle { fontPixelSize: 18 }
+                                font.pixelSize: 18
                             }
                             MouseArea {
                                 anchors.fill: parent

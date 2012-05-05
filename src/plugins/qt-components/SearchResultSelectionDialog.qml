@@ -49,7 +49,7 @@ Rectangle {
                     anchors.right: parent.right
                     anchors.leftMargin: 15
                     anchors.rightMargin: 15
-                    platformStyle: LabelStyle { fontPixelSize: 15 }
+                    font.pixelSize: 15
                 }
                 // Emit signal if user clicked on a search result.
                 MouseArea {
