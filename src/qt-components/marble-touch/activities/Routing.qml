@@ -58,7 +58,7 @@ Page {
 
     Menu {
         id: pageMenu
-        content: MenuLayout {
+        content: MarbleMenuLayout {
             MenuItem {
                 text: "Start Navigation"
                 onClicked: openActivity( "Navigation" )

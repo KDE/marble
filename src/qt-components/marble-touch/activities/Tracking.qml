@@ -49,7 +49,7 @@ Page {
 
     Menu {
         id: pageMenu
-        content: MenuLayout {
+        content: MarbleMenuLayout {
             MenuItem {
                 text: "Save Track"
                 onClicked: {

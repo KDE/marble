@@ -8,3 +8,4 @@ FileDialog 0.12 FileDialog.qml
 FileOpenDialog 0.12 FileOpenDialog.qml
 FileSaveDialog 0.12 FileSaveDialog.qml
 MarbleToolIcon 0.12 MarbleToolIcon.qml
+MarbleMenuLayout 0.12 MarbleMenuLayout.qml

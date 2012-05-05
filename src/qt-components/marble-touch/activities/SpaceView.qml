@@ -96,7 +96,7 @@ Page {
 
     Menu {
         id: pageMenu
-        content: MenuLayout {
+        content: MarbleMenuLayout {
             MenuItemSwitch {
                 id: satellitesSwitch
                 text: "Satellites"

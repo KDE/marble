@@ -29,6 +29,8 @@ INSTALL( FILES FileSaveDialog.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/e
 
 IF( MARBLE_PLASMA_COMPONENTS )
   INSTALL( FILES plasma/MarbleToolIcon.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )
+  INSTALL( FILES plasma/MarbleMenuLayout.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )
 ELSE()
   INSTALL( FILES harmattan/MarbleToolIcon.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )
+  INSTALL( FILES harmattan/MarbleMenuLayout.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/qtcomponents )
 ENDIF()
