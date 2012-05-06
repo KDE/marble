@@ -69,7 +69,7 @@ Item {
 
         MarbleToolIcon {
             id: editIcon
-            iconId: "toolbar-edit"
+            iconSource: main.icon( "actions/document-edit", 32 );
             anchors.right: parent.right
             anchors.margins: 5
             anchors.verticalCenter: parent.verticalCenter

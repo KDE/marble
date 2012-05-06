@@ -22,11 +22,11 @@ Page {
 
     tools: ToolBarLayout {
         MarbleToolIcon {
-            iconId: "toolbar-back";
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
         MarbleToolIcon {
-            iconSource: "image://theme/icon-s-common-location"
+            iconSource: main.icon( "places/user-identity", 48 );
             onClicked: {
                 marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
                 if (marbleWidget.zoom < 22026 ) {
@@ -39,10 +39,10 @@ Page {
             checkable: true
             width: 60
             flat: true
-            iconSource: "image://theme/icon-m-toolbar-search";
+            iconSource: main.icon( "actions/edit-find", 48 );
         }
         MarbleToolIcon {
-            iconId: "toolbar-view-menu"
+            iconSource: main.icon( "actions/show-menu", 48 );
             onClicked: pageMenu.open()
         }
     }

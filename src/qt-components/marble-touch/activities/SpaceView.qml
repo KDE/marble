@@ -20,7 +20,7 @@ Page {
 
     tools: ToolBarLayout {
         MarbleToolIcon {
-            iconId: "toolbar-back";
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
 
@@ -88,7 +88,7 @@ Page {
         }
 
         MarbleToolIcon {
-            iconId: "toolbar-view-menu"
+            iconSource: main.icon( "actions/show-menu", 48 );
             visible: earthButton.checked
             onClicked: pageMenu.open()
         }

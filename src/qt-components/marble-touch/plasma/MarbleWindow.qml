@@ -65,6 +65,12 @@ Window {
         pageStack.push( path )
     }
 
+    function icon( name, size ) {
+        /** @todo FIXME avoid hardcoding base directory */
+        var base = "/usr/share/icons/oxygen/" + size + "x" + size
+        return base + "/" + name + ".png"
+    }
+
     Component.onCompleted: {
         pageStack.push(main.initialPage)
         if ( settings.lastActivity === "" ) {

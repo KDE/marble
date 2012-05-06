@@ -23,7 +23,7 @@ Page {
 
     tools: ToolBarLayout {
         MarbleToolIcon {
-            iconId: "toolbar-back";
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
 
@@ -33,7 +33,7 @@ Page {
             checked: true
             width: 60
             flat: true
-            iconSource: "image://theme/icon-m-toolbar-up"
+            iconSource: main.icon( "actions/go-up", 48 );
         }
 
         Item {}

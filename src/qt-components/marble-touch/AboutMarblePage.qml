@@ -19,7 +19,7 @@ Page {
 
     tools: ToolBarLayout {
         MarbleToolIcon {
-            iconId: "toolbar-back";
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
     }

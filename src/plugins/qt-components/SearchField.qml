@@ -25,7 +25,7 @@ TextField {
     // Icon to clear text in the textfield.
     MarbleToolIcon {
         id: clearButton
-        iconId: "input-clear"
+        iconSource: main.icon( "actions/edit-clear-locationbar-rtl", 22 );
         anchors.top: searchField.top
         anchors.right: searchField.right
         anchors.rightMargin: 5

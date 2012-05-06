@@ -22,11 +22,11 @@ Page {
 
     tools: ToolBarLayout {
         MarbleToolIcon {
-            iconId: "toolbar-back"
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
         ToolButton {
-            iconSource: "image://theme/icon-m-toolbar-volume"
+            iconSource: main.icon( "actions/text-speak", 48 );
             checkable: true
             checked: !settings.voiceNavigationMuted
             onCheckedChanged: settings.voiceNavigationMuted = !checked
@@ -34,7 +34,7 @@ Page {
             flat: true
         }
         ToolButton {
-            iconSource: "qrc:/marble/wireless.svg";
+            iconSource: main.icon( "devices/network-wireless", 48 );
             checkable: true
             checked: !settings.workOffline
             onCheckedChanged: settings.workOffline = !checked
@@ -42,7 +42,7 @@ Page {
             flat: true
         }
         MarbleToolIcon {
-            iconId: "toolbar-view-menu"
+            iconSource: main.icon( "actions/show-menu", 48 );
             onClicked: pageMenu.open()
         }
     }

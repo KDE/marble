@@ -22,19 +22,19 @@ Page {
 
     tools: ToolBarLayout {
         MarbleToolIcon {
-            iconId: "toolbar-back";
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
         ToolButton {
             id: minimizeButton
-            iconSource: "image://theme/icon-m-toolbar-up"
+            iconSource: main.icon( "actions/go-up", 48 );
             checkable: true
             checked: true
             width: 60
             flat: true
         }
         MarbleToolIcon {
-            iconSource: "image://theme/icon-s-common-location"
+            iconSource: main.icon( "places/user-identity", 48 );
             onClicked: {
                 marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
                 if (marbleWidget.zoom < 22026 ) {
@@ -43,7 +43,7 @@ Page {
             }
         }
         ToolButton {
-            iconSource: "qrc:/marble/wireless.svg";
+            iconSource: main.icon( "devices/network-wireless", 48 );
             checkable: true
             checked: !settings.workOffline
             onCheckedChanged: settings.workOffline = !checked
@@ -51,7 +51,7 @@ Page {
             flat: true
         }
         MarbleToolIcon {
-            iconId: "toolbar-view-menu"
+            iconSource: main.icon( "actions/show-menu", 48 );
             onClicked: pageMenu.open()
         }
     }

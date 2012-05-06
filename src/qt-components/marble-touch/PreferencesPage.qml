@@ -21,7 +21,7 @@ Page {
 
     tools: ToolBarLayout {
         MarbleToolIcon {
-            iconId: "toolbar-back";
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
     }
@@ -250,7 +250,7 @@ Page {
                         anchors.right: parent.right
                         anchors.margins: 5
                         visible: !settings.voiceNavigationMuted
-                        iconSource: "image://theme/icon-m-toolbar-mediacontrol-play";
+                        iconSource: main.icon( "actions/media-playback-start", 48 );
                         checkable: true
                         checked: false
                         width: 60

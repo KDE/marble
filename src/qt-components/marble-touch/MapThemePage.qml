@@ -17,7 +17,7 @@ Page {
 
     tools: ToolBarLayout {
         MarbleToolIcon {
-            iconId: "toolbar-back";
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
     }
@@ -190,7 +190,7 @@ Page {
                         visible: delegateRoot.installing
                         width: 40
                         flat: true
-                        iconSource: "image://theme/icon-s-cancel"
+                        iconSource: main.icon( "actions/dialog-cancel", 32 );
                         onClicked: {
                             progressBar.indeterminate = true
                             themeInstallModel.cancel(delegateRoot.idx)

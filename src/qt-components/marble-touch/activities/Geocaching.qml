@@ -21,7 +21,7 @@ Page {
 
     tools: ToolBarLayout {
         MarbleToolIcon {
-            iconId: "toolbar-back";
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
         ToolButton {
@@ -29,7 +29,7 @@ Page {
             checkable: true
             width: 60
             flat: true
-            iconSource: "image://theme/icon-m-toolbar-search";
+            iconSource: main.icon( "actions/edit-find", 48 );
         }
     }
 
