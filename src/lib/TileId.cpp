@@ -11,6 +11,7 @@
 
 // Own
 #include "TileId.h"
+#include "GeoDataCoordinates.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QStringList>
@@ -48,6 +49,34 @@ TileId TileId::fromString( QString const& idStr )
     int const tileX = components[ 2 ].toInt();
     int const tileY = components[ 3 ].toInt();
     return TileId( mapThemeIdHash, zoomLevel, tileX, tileY );
+}
+
+TileId TileId::fromCoordinates(const GeoDataCoordinates &coords, int zoomLevel)
+{
+    if ( zoomLevel < 0 ) {
+        return TileId();
+    }
+    int maxLat = 90000000;
+    int maxLon = 180000000;
+    int lat = coords.latitude( GeoDataCoordinates::Degree ) * 1000000;
+    int lon = coords.longitude( GeoDataCoordinates::Degree ) * 1000000;
+    int deltaLat, deltaLon;
+    int x = 0;
+    int y = 0;
+    for( int i=0; i<zoomLevel; ++i ) {
+        deltaLat = maxLat >> i;
+        if( lat < ( maxLat - deltaLat )) {
+            y += 1<<(zoomLevel-i-1);
+            lat += deltaLat;
+        }
+        deltaLon = maxLon >> i;
+        if( lon >= ( maxLon - deltaLon )) {
+            x += 1<<(zoomLevel-i-1);
+        } else {
+            lon += deltaLon;
+        }
+    }
+    return TileId("", zoomLevel, x, y);
 }
 
 }
