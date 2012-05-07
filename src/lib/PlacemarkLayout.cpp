@@ -308,40 +308,6 @@ int PlacemarkLayout::maxLabelHeight() const
     return maxLabelHeight;
 }
 
-/// Calculate a "TileId" from a Placemark containing coordinates and popularity
-// The popularity will lead to a tile level, i.e. popularity 1 (most popular)
-// goes to topmost tile level.
-// Then for a given popularity, calculate which tile matches the coordinates
-// In the tiling, every level has 4 times more tiles than previous level
-// In the end, one placemark belongs to one Tile only.
-TileId PlacemarkLayout::placemarkToTileId( const GeoDataCoordinates& coords, int popularity ) const
-{
-    if ( popularity < 0 ) {
-        return TileId();
-    }
-    int maxLat = 90000000;
-    int maxLon = 180000000;
-    int lat = coords.latitude( GeoDataCoordinates::Degree ) * 1000000;
-    int lon = coords.longitude( GeoDataCoordinates::Degree ) * 1000000;
-    int deltaLat, deltaLon;
-    int x = 0;
-    int y = 0;
-    for( int i=0; i<popularity; ++i ) {
-        deltaLat = maxLat >> i;
-        if( lat < ( maxLat - deltaLat )) {
-            y += 1<<(popularity-i-1);
-            lat += deltaLat;
-        }
-        deltaLon = maxLon >> i;
-        if( lon >= ( maxLon - deltaLon )) {
-            x += 1<<(popularity-i-1);
-        } else {
-            lon += deltaLon;
-        }
-    }
-    return TileId("Placemark", popularity, x, y);
-}
-
 /// feed an internal QMap of placemarks with TileId as key when model changes
 void PlacemarkLayout::setCacheData()
 {
@@ -367,7 +333,7 @@ void PlacemarkLayout::setCacheData()
         }
 
         int popularity = (20 - placemark->popularityIndex())/2;
-        TileId key = placemarkToTileId( coordinates, popularity );
+        TileId key = TileId::fromCoordinates( coordinates, popularity );
         m_placemarkCache[key].append( placemark );
     }
     emit repaintNeeded();
@@ -394,11 +360,11 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const Viewpor
     viewport->viewLatLonAltBox().boundaries(north, south, east, west);
     TileId key;
 
-    key = placemarkToTileId( GeoDataCoordinates(west, north, 0), popularity);
+    key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), popularity);
     rect.setLeft( key.x() );
     rect.setTop( key.y() );
 
-    key = placemarkToTileId( GeoDataCoordinates(east, south, 0), popularity);
+    key = TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), popularity);
     rect.setRight( key.x() );
     rect.setBottom( key.y() );
 
@@ -413,7 +379,7 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const Viewpor
         if ( x1 <= x2 ) { // normal case, rect does not cross dateline
             for ( int x = x1; x <= x2; ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
-                    TileId const tileId( "Placemark", level, x, y );
+                    TileId const tileId( "", level, x, y );
                     placemarkList += m_placemarkCache.value(tileId);
                 }
             }
@@ -421,14 +387,14 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const Viewpor
             // go till max tile
             for ( int x = x1; x <= ((2 << (level-1))-1); ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
-                    TileId const tileId( "Placemark", level, x, y );
+                    TileId const tileId( "", level, x, y );
                     placemarkList += m_placemarkCache.value(tileId);
                 }
             }
             // start from min tile
             for ( int x = 0; x <= x2; ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
-                    TileId const tileId( "Placemark", level, x, y );
+                    TileId const tileId( "", level, x, y );
                     placemarkList += m_placemarkCache.value(tileId);
                 }
             }

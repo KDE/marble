@@ -17,6 +17,7 @@
 
 namespace Marble
 {
+class GeoDataCoordinates;
 
 class TileId
 {
@@ -35,6 +36,7 @@ class TileId
 
     QString toString() const;
     static TileId fromString( QString const& );
+    static TileId fromCoordinates( const GeoDataCoordinates& coords, int popularity );
 
  private:
     uint m_mapThemeIdHash;
