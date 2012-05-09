@@ -54,52 +54,22 @@ import com.nokia.meego 1.0
 MenuItem {
     id: root
 
-    text: ""
-    property alias switchText: menuText.text
+    property alias switchText: root.text
     property alias checked: switchItem.checked
 
-    Item {
-        anchors.topMargin : root.platformStyle.topMargin
-        anchors.bottomMargin : root.platformStyle.bottomMargin
-        anchors.leftMargin : root.platformStyle.leftMargin
-        anchors.rightMargin : root.platformStyle.rightMargin
-
-        anchors.top : root.platformStyle.centered ? undefined : root.top
-        anchors.bottom : root.platformStyle.centered ? undefined : root.bottom
-        anchors.left : root.left
-        anchors.right : root.right
-        anchors.verticalCenter : root.platformStyle.centered ? parent.verticalCenter : undefined
-
-        Text {
-            id: menuText
-            anchors.left: parent.left
-            anchors.verticalCenter: parent.verticalCenter
-            text: parent.parent.text
-            elide: Text.ElideRight
-            font.family : root.platformStyle.fontFamily
-            font.pixelSize : root.platformStyle.fontPixelSize
-            font.weight: root.platformStyle.fontWeight
-            color: root.platformStyle.textColor
-        }
-
-        Switch {
-            id: switchItem
-            checked: true
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.right: parent.right
-        }
+    Switch {
+        id: switchItem
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: parent.right
+        anchors.margins: 5
+        checked: true
     }
 
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        onClicked: { if (parent.enabled) parent.clicked();}
+        onClicked: { if (parent.enabled) parent.clicked(); }
     }
 
-    onClicked: {
-        switchItem.checked = !switchItem.checked
-        if (parent) {
-            parent.closeLayout();
-        }
-    }
+    onClicked: switchItem.checked = !switchItem.checked
 }
