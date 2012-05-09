@@ -302,13 +302,13 @@ Page {
                         delegate:
                             Rectangle {
                             id: delegate
-                            width: root.width
-                            height: mapImage.height
+                            width: row.width
+                            height: row.height
 
                             color: index === themeDialog.selectedIndex ? "lightsteelblue" : "#00ffffff"
 
                             Row {
-                                anchors.verticalCenter: parent.verticalCenter
+                                id: row
                                 Image {
                                     id: mapImage
                                     source: "image://maptheme/" + mapThemeId
