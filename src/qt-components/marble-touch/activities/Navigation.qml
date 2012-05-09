@@ -42,8 +42,14 @@ Page {
             flat: true
         }
         MarbleToolIcon {
+            id: menuIcon
             iconSource: main.icon( "actions/show-menu", 48 );
-            onClicked: pageMenu.open()
+            onClicked: {
+                if (main.components === "plasma") {
+                    pageMenu.visualParent = menuIcon
+                }
+                pageMenu.open()
+            }
         }
     }
 
@@ -246,10 +252,11 @@ Page {
             spacing: 10
 
             Label {
-            id: text
+            id: textLabel
             width: parent.width
-            color: "white"
+            color: main.components === "harmattan" ? "white" : "black"
             text: "<p>Caution: Driving instructions may be incomplete or wrong. Road construction, weather and other unforeseen variables can result in the suggested route not to be the most expedient or safest route to your destination. Please use common sense while navigating.</p><p>The Marble development team wishes you a pleasant and safe journey.</p>"
+            wrapMode: Text.Wrap
             }
 
             Row {
@@ -260,7 +267,7 @@ Page {
                 }
                 Label {
                     text: "Show again";
-                    color: "white"
+                    color: textLabel.color
                     anchors.verticalCenter: startupCheckbox.verticalCenter
                 }
             }

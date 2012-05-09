@@ -88,9 +88,15 @@ Page {
         }
 
         MarbleToolIcon {
+            id: menuIcon
             iconSource: main.icon( "actions/show-menu", 48 );
             visible: earthButton.checked
-            onClicked: pageMenu.open()
+            onClicked: {
+                if (main.components === "plasma") {
+                    pageMenu.visualParent = menuIcon
+                }
+                pageMenu.open()
+            }
         }
     }
 

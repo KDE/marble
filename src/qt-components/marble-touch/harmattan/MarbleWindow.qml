@@ -20,6 +20,7 @@ PageStackWindow {
 
     property Item marbleWidget: null
     property bool inPortrait: width < height
+    property string components: "harmattan"
 
     initialPage: activitySelection
 

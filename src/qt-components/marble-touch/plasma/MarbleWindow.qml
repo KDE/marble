@@ -17,6 +17,7 @@ Window {
 
     property variant initialPage: activitySelection
     property Item marbleWidget: null
+    property string components: "plasma"
 
     Item {
         id: contentArea
