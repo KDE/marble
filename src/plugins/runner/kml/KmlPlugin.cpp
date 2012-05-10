@@ -51,7 +51,7 @@ QList<PluginAuthor> KmlPlugin::pluginAuthors() const
 
 QString KmlPlugin::fileFormatDescription() const
 {
-    return tr( "Goole Earth KML" );
+    return tr( "Google Earth KML" );
 }
 
 QStringList KmlPlugin::fileExtensions() const
