@@ -70,6 +70,8 @@ Item {
         MarbleToolIcon {
             id: editIcon
             iconSource: main.icon( "actions/document-edit", 32 );
+            width: 32
+            height: width
             anchors.right: parent.right
             anchors.margins: 5
             anchors.verticalCenter: parent.verticalCenter
