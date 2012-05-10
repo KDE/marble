@@ -38,9 +38,7 @@ if( QT_QTDECLARATIVE_FOUND )
   ENDIF()
 ENDIF()
 
-if ( NOT MOBILE ) # FIXME: check if compiling on Maemo
-  add_subdirectory( tilecreator ) # crashes on Maemo
-endif( NOT MOBILE )
+add_subdirectory( tilecreator )
 add_subdirectory( routing-instructions )
 add_subdirectory( lib )
 add_subdirectory( plugins )
