@@ -84,54 +84,54 @@ Page {
         }
     }
 
-    Column {
+    SearchField {
+        id: searchField
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        visible: searchButton.checked
         width: parent.width
-        height: parent.height
-
-        SearchField {
-            id: searchField
-            visible: searchButton.checked
-            width: parent.width
-            onSearch: {
-                searchField.busy = true
-                marbleWidget.find( term )
-            }
-
-            Component.onCompleted: {
-                marbleWidget.search.searchFinished.connect( searchFinished )
-            }
-
-            function searchFinished() {
-                searchField.busy = false
-            }
+        onSearch: {
+            searchField.busy = true
+            marbleWidget.find( term )
         }
 
-        Item {
-            id: mapContainer
-            width: parent.width
-            height: parent.height - searchField.height
-            clip: true
+        Component.onCompleted: {
+            marbleWidget.search.searchFinished.connect( searchFinished )
+        }
 
-            function embedMarbleWidget() {
-                marbleWidget.parent = mapContainer
-                settings.projection = "Mercator"
-                var plugins = settings.defaultRenderPlugins
-                settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
-                plugins.push( "speedometer" )
-                settings.activeRenderPlugins =  plugins
-                settings.mapTheme = settings.streetMapTheme
-                settings.gpsTracking = true
-                settings.showPositionIndicator = true
-                marbleWidget.tracking.positionMarkerType = Tracking.Arrow
-                settings.showTrack = true
-                marbleWidget.visible = true
-            }
+        function searchFinished() {
+            searchField.busy = false
+        }
+    }
 
-            Component.onDestruction: {
-                if ( marbleWidget.parent === mapContainer ) {
-                    marbleWidget.parent = null
-                    marbleWidget.visible = false
-                }
+    Item {
+        id: mapContainer
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: searchButton.checked ? searchField.bottom : parent.top
+        anchors.bottom: parent.bottom
+        clip: true
+
+        function embedMarbleWidget() {
+            marbleWidget.parent = mapContainer
+            settings.projection = "Mercator"
+            var plugins = settings.defaultRenderPlugins
+            settings.removeElementsFromArray(plugins, ["coordinate-grid", "sun", "stars", "compass"])
+            plugins.push( "speedometer" )
+            settings.activeRenderPlugins =  plugins
+            settings.mapTheme = settings.streetMapTheme
+            settings.gpsTracking = true
+            settings.showPositionIndicator = true
+            marbleWidget.tracking.positionMarkerType = Tracking.Arrow
+            settings.showTrack = true
+            marbleWidget.visible = true
+        }
+
+        Component.onDestruction: {
+            if ( marbleWidget.parent === mapContainer ) {
+                marbleWidget.parent = null
+                marbleWidget.visible = false
             }
         }
     }

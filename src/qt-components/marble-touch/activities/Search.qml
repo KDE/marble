@@ -72,7 +72,6 @@ Page {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.margins: 10
-            height: 60
             onSearch: {
                 searchResultView.searchTerm = term
                 searchField.busy = true
@@ -90,7 +89,6 @@ Page {
         }
 
         Label {
-            height: 30
             id: searchResultDescription
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             anchors.top: searchField.bottom

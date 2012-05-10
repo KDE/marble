@@ -15,11 +15,9 @@ import org.kde.edu.marble.qtcomponents 0.12
      * A textfield for searching locations.
      */
 TextField {
+    id: searchField
     signal search( string term )
     property bool busy: false
-
-    id: searchField
-    height: visible ? undefined : 0
 
     placeholderText: "Search..."
     // Icon to clear text in the textfield.

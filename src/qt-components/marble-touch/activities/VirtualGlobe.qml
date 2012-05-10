@@ -87,50 +87,49 @@ Page {
         }
     }
 
-    Column {
-        width: parent.width
-        height: parent.height
-
-        SearchField {
-            id: searchField
-            width: parent.width
-            visible: searchButton.checked
-            onSearch: {
-                searchField.busy = true
-                marbleWidget.find( term )
-            }
-
-            Component.onCompleted: {
-                marbleWidget.search.searchFinished.connect( searchFinished )
-            }
-
-            function searchFinished() {
-                searchField.busy = false
-            }
+    SearchField {
+        id: searchField
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        visible: searchButton.checked
+        onSearch: {
+            searchField.busy = true
+            marbleWidget.find( term )
         }
 
-        Item {
-            id: mapContainer
-            width: parent.width
-            height: parent.height - searchField.height
+        Component.onCompleted: {
+            marbleWidget.search.searchFinished.connect( searchFinished )
+        }
 
-            function embedMarbleWidget() {
-                marbleWidget.parent = mapContainer
-                settings.projection = "Spherical"
-                settings.activeRenderPlugins = settings.defaultRenderPlugins
-                settings.mapTheme = "earth/srtm/srtm.dgml"
-                settings.gpsTracking = false
-                settings.showPositionIndicator = false
-                marbleWidget.tracking.positionMarkerType = Tracking.Circle
-                settings.showTrack = false
-                marbleWidget.visible = true
-            }
+        function searchFinished() {
+            searchField.busy = false
+        }
+    }
 
-            Component.onDestruction: {
-                if ( marbleWidget.parent === mapContainer ) {
-                    marbleWidget.parent = null
-                    marbleWidget.visible = false
-                }
+    Item {
+        id: mapContainer
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: searchButton.checked ? searchField.bottom : parent.top
+        anchors.bottom: parent.bottom
+
+        function embedMarbleWidget() {
+            marbleWidget.parent = mapContainer
+            settings.projection = "Spherical"
+            settings.activeRenderPlugins = settings.defaultRenderPlugins
+            settings.mapTheme = "earth/srtm/srtm.dgml"
+            settings.gpsTracking = false
+            settings.showPositionIndicator = false
+            marbleWidget.tracking.positionMarkerType = Tracking.Circle
+            settings.showTrack = false
+            marbleWidget.visible = true
+        }
+
+        Component.onDestruction: {
+            if ( marbleWidget.parent === mapContainer ) {
+                marbleWidget.parent = null
+                marbleWidget.visible = false
             }
         }
     }
