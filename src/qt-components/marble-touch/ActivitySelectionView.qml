@@ -79,11 +79,11 @@ Page {
                         font.bold: true
                         horizontalAlignment: "AlignHCenter"
                     }
+                }
 
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: activityPage.openActivity( name, path )
-                    }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: activityPage.openActivity( name, path )
                 }
             }
         }
