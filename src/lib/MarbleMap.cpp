@@ -1114,12 +1114,6 @@ void MarbleMap::setVolatileTileCacheLimit( quint64 kilobytes )
     d->m_textureLayer.setVolatileCacheLimit( kilobytes );
 }
 
-
-bool MarbleMap::mapCoversViewport()
-{
-    return d->m_viewport.mapCoversViewport();
-}
-
 AngleUnit MarbleMap::defaultAngleUnit() const
 {
     if ( GeoDataCoordinates::defaultNotation() == GeoDataCoordinates::Decimal ) {

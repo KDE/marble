@@ -605,8 +605,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void setVolatileTileCacheLimit( quint64 kiloBytes );
 
-    bool mapCoversViewport();
-
     AngleUnit defaultAngleUnit() const;
     void setDefaultAngleUnit( AngleUnit angleUnit );
 
