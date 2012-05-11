@@ -51,6 +51,8 @@ ReadOnlyMapImage * ReadOnlyMapDefinition::createReadOnlyMap() const
         mapImage->setInterpolationMethod( interpolationMethod );
         return mapImage;
     }
-    else
+    else {
+        delete interpolationMethod;
         return NULL;
+    }
 }
