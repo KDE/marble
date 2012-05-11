@@ -192,13 +192,14 @@ void PluginManagerPrivate::loadPlugins()
             isPlugin = isPlugin || appendPlugin<ParseRunnerPlugin, ParseRunnerPlugin>
                        ( obj, loader, m_parsingRunnerPlugins ); // intentionally T==U
             if ( !isPlugin ) {
-                mDebug() << "Plugin failure:" << fileName << "is a plugin, but it does not implement the "
+                qWarning() << "Ignoring the fllowing plugin since it couldn't be loaded:" << path;
+                mDebug() << "Plugin failure:" << path << "is a plugin, but it does not implement the "
                         << "right interfaces or it was compiled against an old version of Marble. Ignoring it.";
                 delete loader;
             }
         } else {
-            mDebug() << "Plugin failure:" << fileName << "is not a valid Marble Plugin:"
-                     << loader->errorString();
+            qWarning() << "Ignoring to load the following file since it doesn't look like a valid Marble plugin:" << path;
+            mDebug() << Q_FUNC_INFO << "Plugin failure:" << loader->errorString();
         }
     }
 
