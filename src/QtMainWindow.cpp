@@ -1034,7 +1034,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          } else {
             mapThemeId = settings.value("mapTheme", m_controlView->defaultMapThemeId() ).toString();
          }
-         qDebug() << "ReadSettings: mapThemeId: " << mapThemeId;
+         mDebug() << Q_FUNC_INFO << "mapThemeId:" << mapThemeId;
          m_controlView->marbleWidget()->setMapThemeId( mapThemeId );
          bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
          int const defaultProjection = smallScreen ? Mercator : Spherical;
