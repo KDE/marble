@@ -979,7 +979,6 @@ void MarbleMap::setShowCrosshairs( bool visible )
 void MarbleMap::setShowClouds( bool visible )
 {
     d->m_viewParams.setShowClouds( visible );
-    d->m_textureLayer.setNeedsUpdate();
 
     setPropertyValue( "clouds_data", visible );
 }
@@ -1052,15 +1051,11 @@ void MarbleMap::setShowOtherPlaces( bool visible )
 void MarbleMap::setShowRelief( bool visible )
 {
     setPropertyValue( "relief", visible );
-    // Update texture map during the repaint that follows:
-    d->m_textureLayer.setNeedsUpdate();
 }
 
 void MarbleMap::setShowIceLayer( bool visible )
 {
     setPropertyValue( "ice", visible );
-    // Update texture map during the repaint that follows:
-    d->m_textureLayer.setNeedsUpdate();
 }
 
 void MarbleMap::setShowBorders( bool visible )
@@ -1076,8 +1071,6 @@ void MarbleMap::setShowRivers( bool visible )
 void MarbleMap::setShowLakes( bool visible )
 {
     setPropertyValue( "lakes", visible );
-    // Update texture map during the repaint that follows:
-    d->m_textureLayer.setNeedsUpdate();
 }
 
 void MarbleMap::setShowFrameRate( bool visible )
