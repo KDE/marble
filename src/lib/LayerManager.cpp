@@ -7,22 +7,18 @@
 //
 // Copyright 2008 Torsten Rahn <tackat@kde.org>
 // Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
-// Copyright 2011 Bernahrd Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2011,2012 Bernahrd Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
 // Own
 #include "LayerManager.h"
 
-// Qt
-#include <QtGui/QAction>
-
 // Local dir
 #include "MarbleDebug.h"
 #include "AbstractDataPlugin.h"
 #include "AbstractDataPluginItem.h"
 #include "AbstractFloatItem.h"
-#include "GeoPainter.h"
 #include "MarbleModel.h"
 #include "PluginManager.h"
 #include "RenderPlugin.h"
@@ -78,12 +74,8 @@ LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
 
         connect( renderPlugin, SIGNAL( settingsChanged( QString ) ),
                  this, SIGNAL( pluginSettingsChanged() ) );
-        connect( renderPlugin, SIGNAL( settingsChanged( QString ) ),
-                 this, SIGNAL( repaintNeeded() ) );
         connect( renderPlugin, SIGNAL( repaintNeeded( QRegion ) ),
                  this, SIGNAL( repaintNeeded( QRegion ) ) );
-        connect( renderPlugin->action(), SIGNAL( changed() ),
-                 this, SIGNAL( repaintNeeded() ) );
         connect( renderPlugin, SIGNAL( visibilityChanged( QString, bool ) ),
                  this, SIGNAL( visibilityChanged( const QString &, bool ) ) );
 

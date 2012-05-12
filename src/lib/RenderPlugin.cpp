@@ -57,7 +57,11 @@ RenderPlugin::RenderPlugin( const MarbleModel *marbleModel )
 {
     d->m_action = new QAction( this );
     connect( d->m_action, SIGNAL( toggled( bool ) ),
-	     this,        SLOT( setVisible( bool ) ) );
+             this,        SLOT( setVisible( bool ) ) );
+    connect( this, SIGNAL( visibilityChanged( QString, bool ) ),
+             this, SIGNAL( repaintNeeded() ) );
+    connect( this, SIGNAL( settingsChanged( QString ) ),
+             this, SIGNAL( repaintNeeded() ) );
 
     d->m_item = new QStandardItem();
 }
