@@ -42,6 +42,8 @@
 #include "routing/RoutingModel.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
+#include "GeoSceneDocument.h"
+#include "GeoSceneMap.h"
 
 namespace Marble
 {
@@ -62,6 +64,7 @@ public:
     int rad2PixelX( qreal const lon ) const;
     int rad2PixelY( qreal const lat ) const;
     bool hasRoute() const;
+    bool hasTextureLayer() const;
     QDialog * m_dialog;
     QRadioButton * m_visibleRegionMethodButton;
     QRadioButton * m_specifiedRegionMethodButton;
@@ -241,6 +244,11 @@ bool DownloadRegionDialog::Private::hasRoute() const
     return !m_routingModel->route().path().isEmpty();
 }
 
+bool DownloadRegionDialog::Private::hasTextureLayer() const
+{
+    return m_model->mapTheme()->map()->hasTextureLayers();
+}
+
 DownloadRegionDialog::DownloadRegionDialog( MarbleWidget *const widget, QWidget * const parent,
                                             Qt::WindowFlags const f )
     : QDialog( parent, f ),
@@ -333,6 +341,9 @@ void DownloadRegionDialog::setSelectionMethod( SelectionMethod const selectionMe
 
 QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
 {
+    if ( !d->hasTextureLayer() ) {
+        return QVector<TileCoordsPyramid>();
+    }
 
     // check whether "visible region" or "lat/lon region" is selection method
     GeoDataLatLonBox downloadRegion;
@@ -491,6 +502,10 @@ void DownloadRegionDialog::toggleSelectionMethod()
 
 void DownloadRegionDialog::updateTilesCount()
 {
+    if ( !isVisible() || !d->hasTextureLayer() ) {
+        return;
+    }
+
     qint64 tilesCount = 0;
     QString themeId( d->m_model->mapThemeId() );
     if ( d->m_textureLayer ) {

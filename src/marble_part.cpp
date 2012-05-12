@@ -1258,7 +1258,9 @@ void MarblePart::downloadRegion()
     QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
     kDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
     QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
-    m_controlView->marbleWidget()->downloadRegion( sourceDir, pyramid );
+    if ( !pyramid.isEmpty() ) {
+        m_controlView->marbleWidget()->downloadRegion( sourceDir, pyramid );
+    }
 }
 
 void MarblePart::showStatusBarContextMenu( const QPoint& pos )
