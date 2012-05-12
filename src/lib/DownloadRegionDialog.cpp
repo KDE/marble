@@ -40,6 +40,8 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 #include "DownloadRegion.h"
+#include "GeoSceneDocument.h"
+#include "GeoSceneMap.h"
 
 namespace Marble
 {
@@ -58,6 +60,7 @@ public:
     QWidget * createOkCancelButtonBox();
 
     bool hasRoute() const;
+    bool hasTextureLayer() const;
     QDialog * m_dialog;
     QRadioButton * m_visibleRegionMethodButton;
     QRadioButton * m_specifiedRegionMethodButton;
@@ -209,6 +212,11 @@ bool DownloadRegionDialog::Private::hasRoute() const
     return !m_routingModel->route().path().isEmpty();
 }
 
+bool DownloadRegionDialog::Private::hasTextureLayer() const
+{
+    return m_model->mapTheme()->map()->hasTextureLayers();
+}
+
 DownloadRegionDialog::DownloadRegionDialog( MarbleWidget *const widget, QWidget * const parent,
                                             Qt::WindowFlags const f )
     : QDialog( parent, f ),
@@ -302,6 +310,10 @@ void DownloadRegionDialog::setSelectionMethod( SelectionMethod const selectionMe
 
 QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
 {
+    if ( !d->hasTextureLayer() ) {
+        return QVector<TileCoordsPyramid>();
+    }
+
     d->m_downloadRegion.setTileLevelRange( d->m_tileLevelRangeWidget->topLevel(),
                                            d->m_tileLevelRangeWidget->bottomLevel() );
     d->m_downloadRegion.setVisibleTileLevel( d->m_visibleTileLevel );
@@ -319,11 +331,11 @@ QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
         if( d->m_routeOffsetSpinBox->suffix() == " km") {
             offset *= KM2METER;
         }
-        return d->m_downloadRegion.routeRegion( d->m_widget->textureLayer(), offset );
+        return d->m_downloadRegion.routeRegion( d->m_textureLayer, offset );
         break;
     }
 
-    return d->m_downloadRegion.region( d->m_widget->textureLayer(), downloadRegion );
+    return d->m_downloadRegion.region( d->m_textureLayer, downloadRegion );
 }
 
 void DownloadRegionDialog::setSpecifiedLatLonAltBox( GeoDataLatLonAltBox const & region )
@@ -395,6 +407,10 @@ void DownloadRegionDialog::toggleSelectionMethod()
 
 void DownloadRegionDialog::updateTilesCount()
 {
+    if ( !isVisible() || !d->hasTextureLayer() ) {
+        return;
+    }
+
     qint64 tilesCount = 0;
     QString themeId( d->m_model->mapThemeId() );
     QVector<TileCoordsPyramid> const pyramid = region();
