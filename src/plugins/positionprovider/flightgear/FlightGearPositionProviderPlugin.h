@@ -12,8 +12,6 @@
 
 #include "PositionProviderPlugin.h"
 
-#include <nmea/nmea.h>
-
 class QUdpSocket;
 
 namespace Marble
@@ -49,20 +47,19 @@ class FlightGearPositionProviderPlugin : public PositionProviderPlugin
     virtual qreal direction() const;
     virtual QDateTime timestamp() const;
 
+private Q_SLOTS:
+   void readPendingDatagrams();
+
  private:
+    void parseNmeaSentence(const QString &sentence);
+    double parsePosition(const QString &value, bool isNegative) const;
     QUdpSocket* m_socket;
-    nmeaPARSER m_parser;
-    nmeaINFO m_info;
     PositionProviderStatus m_status;
     GeoDataCoordinates m_position;
     GeoDataAccuracy m_accuracy;
     qreal m_speed;
     qreal m_track;
     QDateTime m_timestamp;
-
- private slots:
-    void readPendingDatagrams();
-    void update();
 };
 
 }

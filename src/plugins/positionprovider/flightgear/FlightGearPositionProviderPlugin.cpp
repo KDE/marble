@@ -28,7 +28,6 @@ FlightGearPositionProviderPlugin::FlightGearPositionProviderPlugin()
 FlightGearPositionProviderPlugin::~FlightGearPositionProviderPlugin()
 {
     delete m_socket;
-    nmea_parser_destroy(&m_parser);
 }
 
 QString FlightGearPositionProviderPlugin::name() const
@@ -80,8 +79,6 @@ void FlightGearPositionProviderPlugin::initialize()
 
     m_socket = new QUdpSocket(this);
     m_socket->bind(QHostAddress::LocalHost, 5500);
-    nmea_parser_init(&m_parser);
-    nmea_zero_INFO(&m_info);
 
     connect(m_socket, SIGNAL(readyRead()),
              this, SLOT(readPendingDatagrams()));
@@ -124,40 +121,64 @@ void FlightGearPositionProviderPlugin::readPendingDatagrams()
         foreach(QByteArray line, datagram.split('\n')) {
             fixBadGPRMC(line);
             //qDebug() << line;
-            line.append("\r\n");
-            nmea_parse(&m_parser, line.data(), line.size(), &m_info);
-            update();
+            line.append( "\n" );
+            parseNmeaSentence( line );
         }
     }
 }
 
-void FlightGearPositionProviderPlugin::update()
+void FlightGearPositionProviderPlugin::parseNmeaSentence( const QString &sentence )
 {
     PositionProviderStatus oldStatus = m_status;
     GeoDataCoordinates oldPosition = m_position;
-    if ( m_info.sig == 0 )
-        m_status = PositionProviderStatusUnavailable;
-    else {
-        m_status = PositionProviderStatusAvailable;
 
-        // fg atlas nmea output uses feet unit, which is not covered by nmealib <= 0.5.3
-#ifndef NMEA_TUD_FEED
-#define NMEA_TUD_FEED       (1/0.3048)      /**< Feet, meter / NMEA_TUD_FEED = feet */
-        qreal elevation = m_info.elv / NMEA_TUD_FEED;
-#else
-        qreal elevation = m_info.elv;
-#endif
-        m_position.set( nmea_ndeg2degree(m_info.lon), nmea_ndeg2degree(m_info.lat), elevation, GeoDataCoordinates::Degree );
-        m_accuracy.level = GeoDataAccuracy::Detailed;
-        // FIX  for misinterpreting
-        m_speed = m_info.speed * 0.51444444 / NMEA_TUD_KNOTS ;
-        m_track = m_info.direction;
+    if ( sentence.startsWith( "$GPRMC" ) ) {
+        QStringList const values = sentence.split( ',' );
+        if ( values.size() > 9 ) {
+            if ( values[2] == "A" ) {
+                m_speed = values[7].toDouble() * 0.514444; // knots => m/s
+                m_track = values[8].toDouble();
+                QString const date = values[9] + " " + values[1];
+                m_timestamp = QDateTime::fromString( date, "ddMMyy HHmmss" );
+                if (m_timestamp.date().year() <= 1930 && m_timestamp.date().year() >= 1900 ) {
+                    m_timestamp = m_timestamp.addYears( 100 ); // Qt range is 1900-1999 for two-digits
+                }
+            }
+            // Flightgear submits geoposition twice in one datagram, once
+            // in GPRMC and once in GPGGA. Parsing one is sufficient
+        }
+    } else if ( sentence.startsWith( "$GPGGA" ) ) {
+        QStringList const values = sentence.split( ',' );
+        if ( values.size() > 10 ) {
+            if ( values[6] == 0 ) {
+                m_status = PositionProviderStatusUnavailable; // no fix
+            } else {
+                double const lat = parsePosition( values[2], values[3] == "S" );
+                double const lon = parsePosition( values[4], values[5] == "W" );
+                double const unitFactor = values[10] == "F" ? FT2M : 1.0;
+                double const alt = unitFactor * values[9].toDouble();
+                m_position.set( lon, lat, alt, GeoDataCoordinates::Degree );
+                m_accuracy.level = GeoDataAccuracy::Detailed;
+                m_status = PositionProviderStatusAvailable;
+            }
+        }
+    } else {
+        return;
     }
-    if (m_status != oldStatus)
+
+    if ( m_status != oldStatus ) {
         emit statusChanged( m_status );
-    if (!(oldPosition == m_position)) {
+    }
+    if ( m_position != oldPosition && m_status == PositionProviderStatusAvailable ) {
         emit positionChanged( m_position, m_accuracy );
     }
+}
+
+double FlightGearPositionProviderPlugin::parsePosition( const QString &value, bool isNegative ) const
+{
+    double pos = value.toDouble();
+    pos = int( pos / 100.0 ) + ( pos - 100.0 * int( pos / 100.0 ) ) / 60.0;
+    return isNegative ? -qAbs( pos ) : pos;
 }
 
 bool FlightGearPositionProviderPlugin::isInitialized() const
@@ -200,15 +221,11 @@ QDateTime FlightGearPositionProviderPlugin::timestamp() const
     return m_timestamp;
 }
 
-
 QString FlightGearPositionProviderPlugin::error() const
 {
     return QString();
 }
 
-
 Q_EXPORT_PLUGIN2( FlightGearPositionProviderPlugin, Marble::FlightGearPositionProviderPlugin )
-
-
 
 #include "FlightGearPositionProviderPlugin.moc"
