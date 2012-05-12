@@ -110,9 +110,12 @@ class LayerManager : public QObject
  private:
     void renderLayer( GeoPainter *painter, ViewportParams *viewport, const QString& renderPosition  );
 
+    Q_PRIVATE_SLOT( d, void updateVisibility( bool, const QString & ) )
+
  private:
     Q_DISABLE_COPY( LayerManager )
 
+    friend class LayerManagerPrivate;
     LayerManagerPrivate  * const d;
 };
 

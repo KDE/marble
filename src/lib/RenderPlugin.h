@@ -129,7 +129,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     /**
      * This signal is emitted if the visibility is changed with setVisible.
      */
-    void visibilityChanged( QString nameId, bool visible );
+    void visibilityChanged( bool visible, const QString &nameId );
     
     void enabledChanged( bool enable );
 

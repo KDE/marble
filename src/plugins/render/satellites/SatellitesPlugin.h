@@ -72,7 +72,7 @@ public:
 
 private Q_SLOTS:
     void enableModel( bool enabled );
-    void visibleModel( QString, bool visible );
+    void visibleModel( bool visible );
     void readSettings();
     void writeSettings();
     void updateSettings();

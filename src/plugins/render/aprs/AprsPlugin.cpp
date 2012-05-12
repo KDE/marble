@@ -60,8 +60,8 @@ AprsPlugin::AprsPlugin( const MarbleModel *marbleModel )
     
     setSettings( QHash<QString,QVariant>() );
 
-    connect( this, SIGNAL( visibilityChanged( QString, bool ) ),
-             this, SLOT( updateVisibility( QString, bool ) ) );
+    connect( this, SIGNAL( visibilityChanged( bool, const QString & ) ),
+             this, SLOT( updateVisibility( bool ) ) );
 
     m_action = new QAction( this );
     connect( m_action,    SIGNAL( toggled( bool ) ),
@@ -88,9 +88,8 @@ AprsPlugin::~AprsPlugin()
     delete m_mutex;
 }
 
-void AprsPlugin::updateVisibility( QString nameId, bool visible )
+void AprsPlugin::updateVisibility( bool visible )
 {
-    Q_UNUSED( nameId );
     if ( visible )
         restartGatherers();
     else

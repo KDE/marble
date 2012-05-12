@@ -47,7 +47,7 @@ SatellitesPlugin::SatellitesPlugin( const MarbleModel *marbleModel )
 {
     connect( this, SIGNAL(settingsChanged(QString)), SLOT(updateSettings()) );
     connect( this, SIGNAL(enabledChanged(bool)), SLOT(enableModel(bool)) );
-    connect( this, SIGNAL(visibilityChanged(QString,bool)), SLOT(visibleModel(QString,bool)) );
+    connect( this, SIGNAL(visibilityChanged(bool,QString)), SLOT(visibleModel(bool)) );
 
     setVisible( false );
     setSettings( QHash<QString, QVariant>() );
@@ -254,7 +254,7 @@ void SatellitesPlugin::enableModel( bool enabled )
     m_model->enable( enabled && visible() );
 }
 
-void SatellitesPlugin::visibleModel( QString, bool visible )
+void SatellitesPlugin::visibleModel( bool visible )
 {
     if ( !m_isInitialized ) {
         return;

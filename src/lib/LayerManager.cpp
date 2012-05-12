@@ -40,8 +40,12 @@ bool zValueLessThan( const LayerInterface * const one, const LayerInterface * co
 class LayerManagerPrivate
 {
  public:
-    LayerManagerPrivate();
+    LayerManagerPrivate( LayerManager *parent );
     ~LayerManagerPrivate();
+
+    void updateVisibility( bool visible, const QString &nameId );
+
+    LayerManager *const q;
 
     QList<RenderPlugin *> m_renderPlugins;
     QList<AbstractFloatItem *> m_floatItems;
@@ -51,8 +55,9 @@ class LayerManagerPrivate
     bool m_showBackground;
 };
 
-LayerManagerPrivate::LayerManagerPrivate()
-    : m_renderPlugins(),
+LayerManagerPrivate::LayerManagerPrivate( LayerManager *parent )
+    : q( parent ),
+      m_renderPlugins(),
       m_showBackground( true )
 {
 }
@@ -62,10 +67,15 @@ LayerManagerPrivate::~LayerManagerPrivate()
     qDeleteAll( m_renderPlugins );
 }
 
+void LayerManagerPrivate::updateVisibility( bool visible, const QString &nameId )
+{
+    emit q->visibilityChanged( nameId, visible );
+}
+
 
 LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
     : QObject( parent ),
-      d( new LayerManagerPrivate )
+      d( new LayerManagerPrivate( this ) )
 {
     foreach ( const RenderPlugin *factory, model->pluginManager()->renderPlugins() ) {
         RenderPlugin *const renderPlugin = factory->newInstance( model );
@@ -76,8 +86,8 @@ LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
                  this, SIGNAL( pluginSettingsChanged() ) );
         connect( renderPlugin, SIGNAL( repaintNeeded( QRegion ) ),
                  this, SIGNAL( repaintNeeded( QRegion ) ) );
-        connect( renderPlugin, SIGNAL( visibilityChanged( QString, bool ) ),
-                 this, SIGNAL( visibilityChanged( const QString &, bool ) ) );
+        connect( renderPlugin, SIGNAL( visibilityChanged( bool, const QString & ) ),
+                 this, SLOT( updateVisibility( bool, const QString & ) ) );
 
         // get float items ...
         AbstractFloatItem * const floatItem =

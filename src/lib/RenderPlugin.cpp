@@ -58,7 +58,12 @@ RenderPlugin::RenderPlugin( const MarbleModel *marbleModel )
 {
     connect( &d->m_action, SIGNAL( toggled( bool ) ),
              this,         SLOT( setVisible( bool ) ) );
-    connect( this, SIGNAL( visibilityChanged( QString, bool ) ),
+    connect( this,         SIGNAL( visibilityChanged( bool, const QString & ) ),
+             &d->m_action, SLOT( setChecked( bool ) ) );
+    connect( this,         SIGNAL( enabledChanged( bool ) ),
+             &d->m_action, SLOT( setVisible( bool ) ) );
+
+    connect( this, SIGNAL( visibilityChanged( bool, const QString & ) ),
              this, SIGNAL( repaintNeeded() ) );
     connect( this, SIGNAL( settingsChanged( QString ) ),
              this, SIGNAL( repaintNeeded() ) );
@@ -128,7 +133,6 @@ void RenderPlugin::setEnabled( bool enabled )
         return;
 
     d->m_enabled = enabled;
-    d->m_action.setVisible( enabled );
 
     d->m_item.setCheckState( enabled ? Qt::Checked : Qt::Unchecked  );
 
@@ -141,9 +145,8 @@ void RenderPlugin::setVisible( bool visible )
         return;
 
     d->m_visible = visible;
-    d->m_action.setChecked( visible );
 
-    emit visibilityChanged( nameId(), visible );
+    emit visibilityChanged( visible, nameId() );
 }
 
 bool RenderPlugin::enabled() const
