@@ -21,7 +21,6 @@
  */
 
 #include <QtGui/QWidget>
-#include "ui_MarblePluginSettingsWidget.h"
 
 #include "marble_export.h"
 
@@ -37,7 +36,7 @@ namespace Marble
 
 class MarblePluginSettingsWidgetPrivate;
 
-class MARBLE_EXPORT MarblePluginSettingsWidget : public QWidget, private Ui::MarblePluginSettingsWidget
+class MARBLE_EXPORT MarblePluginSettingsWidget : public QWidget
 {
     Q_OBJECT
 
