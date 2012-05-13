@@ -221,8 +221,11 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
         GeoDataDocument* route = dynamic_cast<GeoDataDocument*>(&container->last());
         if ( route ) {
             loaded = true;
+            m_alternativeRoutesModel.clear();
             m_alternativeRoutesModel.addRoute( route, AlternativeRoutesModel::Instant );
             m_alternativeRoutesModel.setCurrentRoute( 0 );
+            emit q->stateChanged( RoutingManager::Retrieved );
+            emit q->routeRetrieved( route );
         } else {
             mDebug() << "Expected a GeoDataDocument child, didn't get one though";
         }
