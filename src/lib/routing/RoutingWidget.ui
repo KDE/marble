@@ -6,23 +6,47 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>282</width>
-    <height>319</height>
+    <width>245</width>
+    <height>414</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="routingLayout">
-   <property name="sizeConstraint">
-    <enum>QLayout::SetMinAndMaxSize</enum>
-   </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
-      <widget class="QLabel" name="preferenceLabel">
+      <widget class="QPushButton" name="addViaButton">
        <property name="text">
-        <string>Profile</string>
+        <string>Add Via</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="reverseRouteButton">
+       <property name="text">
+        <string>Reverse</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="clearRouteButton">
+       <property name="text">
+        <string>Clear</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QComboBox" name="routingProfileComboBox">
        <item>
@@ -61,9 +85,13 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="configureButton">
+      <widget class="QToolButton" name="configureButton">
        <property name="text">
-        <string>Configure</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../marble.qrc">
+         <normaloff>:/icons/16x16/configure.png</normaloff>:/icons/16x16/configure.png</iconset>
        </property>
       </widget>
      </item>
@@ -130,14 +158,42 @@
     </widget>
    </item>
    <item>
-    <widget class="QComboBox" name="routeComboBox">
-     <property name="toolTip">
-      <string>Choose alternative routes</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QComboBox" name="routeComboBox">
+       <property name="toolTip">
+        <string>Choose alternative routes</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="openRouteButton">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../marble.qrc">
+         <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="saveRouteButton">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../marble.qrc">
+         <normaloff>:/icons/16x16/document-save.png</normaloff>:/icons/16x16/document-save.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../marble.qrc"/>
+ </resources>
  <connections/>
 </ui>
