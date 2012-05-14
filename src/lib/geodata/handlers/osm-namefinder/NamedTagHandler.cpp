@@ -89,7 +89,7 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     const QString zoomStr = parser.attribute( attr_zoom ).trimmed();
     if ( !zoomStr.isEmpty() )
         suggestedZoomLevel = zoomStr.toInt();
-    named->setPopularityIndex( suggestedZoomLevel );
+    named->setZoomLevel( suggestedZoomLevel );
 
     mDebug() << "parsed named:" << named->name() << " lon:" << lon << " lat:" << lat;
 

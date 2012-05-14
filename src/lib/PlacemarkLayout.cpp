@@ -332,8 +332,8 @@ void PlacemarkLayout::setCacheData()
             continue;
         }
 
-        int popularity = (20 - placemark->popularityIndex())/2;
-        TileId key = TileId::fromCoordinates( coordinates, popularity );
+        int zoomLevel = (20 - placemark->zoomLevel())/2;
+        TileId key = TileId::fromCoordinates( coordinates, zoomLevel );
         m_placemarkCache[key].append( placemark );
     }
     emit repaintNeeded();
@@ -479,13 +479,13 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
             continue;
         }
 
-        int popularityIndex = placemark->popularityIndex();
-        if ( popularityIndex < 1 ) {
+        int zoomLevel = placemark->zoomLevel();
+        if ( zoomLevel < 1 ) {
             break;
         }
 
         // Skip the places that are too small.
-        if ( m_weightfilter.at( popularityIndex ) > viewport->radius() ) {
+        if ( m_weightfilter.at( zoomLevel ) > viewport->radius() ) {
             break;
         }
 

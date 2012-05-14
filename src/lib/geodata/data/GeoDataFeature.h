@@ -437,12 +437,12 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * The popularity index is a value which describes at which zoom
      * level the placemark will be shown.
      */
-    int popularityIndex() const;
+    int zoomLevel() const;
     /**
      * Sets the popularity @p index of the placemark.
      * @param  index  the new index to be used.
      */
-    void setPopularityIndex( int index );
+    void setZoomLevel( int index );
 
     /**
      * Return the popularity of the feature.
