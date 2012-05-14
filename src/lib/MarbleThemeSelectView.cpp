@@ -12,7 +12,7 @@
 
 #include "MarbleThemeSelectView.h"
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleDirs.h"
 #include "MapWizard.h"
 #include "MarbleDebug.h"

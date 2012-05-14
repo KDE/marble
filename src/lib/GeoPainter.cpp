@@ -23,7 +23,7 @@
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "ViewportParams.h"
 
 // #define MARBLE_DEBUG

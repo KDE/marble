@@ -17,7 +17,7 @@
 #include <QtCore/QVector>
 #include <QtCore/QMetaType>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include "geodata_export.h"
 #include "GeoDataGeometry.h"

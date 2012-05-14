@@ -19,7 +19,7 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 namespace Marble
 {

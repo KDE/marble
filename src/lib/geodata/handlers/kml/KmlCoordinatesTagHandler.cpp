@@ -34,7 +34,7 @@
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataPhotoOverlay.h"
 #include "GeoParser.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 namespace Marble
 {

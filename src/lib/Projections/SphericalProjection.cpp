@@ -17,7 +17,7 @@
 // Marble
 #include "ViewportParams.h"
 #include "GeoDataPoint.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #define SAFE_DISTANCE
 

@@ -22,7 +22,7 @@
 #include "PositionTracking.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "GeoDataExtendedData.h"
 
 #include <QtCore/QBuffer>

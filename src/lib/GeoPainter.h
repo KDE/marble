@@ -18,7 +18,7 @@
 #include <QtGui/QRegion>
 
 // Marble
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "ClipPainter.h"
 
 

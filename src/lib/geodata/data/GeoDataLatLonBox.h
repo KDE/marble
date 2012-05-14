@@ -14,7 +14,7 @@
 #define MARBLE_GEODATALATLONBOX_H
 
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include "GeoDataObject.h"
 #include "GeoDataPoint.h"

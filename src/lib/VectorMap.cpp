@@ -19,7 +19,7 @@
 #include <QtGui/QColor>
 
 #include "MarbleDebug.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "AbstractProjection.h"
 #include "GeoPainter.h"
 #include "GeoPolygon.h"

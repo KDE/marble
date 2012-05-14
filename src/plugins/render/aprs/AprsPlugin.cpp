@@ -10,7 +10,7 @@
 
 #include "AprsPlugin.h"
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 
 #include <QtGui/QColor>

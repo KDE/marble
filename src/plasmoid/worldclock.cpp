@@ -43,7 +43,7 @@
 #include <Plasma/DataEngine>
 
 //Marble
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "AbstractFloatItem.h"

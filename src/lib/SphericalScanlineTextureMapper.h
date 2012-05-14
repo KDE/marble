@@ -15,7 +15,7 @@
 
 #include "TextureMapperInterface.h"
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include <QtCore/QThreadPool>
 #include <QtGui/QImage>

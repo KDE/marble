@@ -21,7 +21,7 @@
 #include <QtGui/QImage>
 #include <QtGui/QPainter>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "VectorComposer.h"

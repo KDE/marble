@@ -16,7 +16,7 @@
 
 #include <QtCore/QRunnable>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "Quaternion.h"

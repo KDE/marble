@@ -25,7 +25,7 @@
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataLookAt.h"
-#include "global.h"             // types needed in all of marble.
+#include "MarbleGlobal.h"             // types needed in all of marble.
 #include "marble_export.h"
 #include "GeoDataFolder.h"
 // Qt

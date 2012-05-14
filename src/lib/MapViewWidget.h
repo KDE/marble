@@ -15,7 +15,7 @@
 #define MARBLE_MAPVIEWWIDGET_H
 
 // Marble
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "marble_export.h"
 
 // Qt

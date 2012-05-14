@@ -31,7 +31,7 @@
 #include "GeoDataStyleMap.h"
 #include "GeoDataHotSpot.h"
 #include "MarbleDirs.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 namespace Marble
 {

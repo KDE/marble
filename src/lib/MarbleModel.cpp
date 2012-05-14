@@ -33,7 +33,7 @@
 #include "kdescendantsproxymodel.h"
 
 #include "MapThemeManager.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 
 #include "GeoSceneDocument.h"

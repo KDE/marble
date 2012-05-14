@@ -19,7 +19,7 @@
 #include <QtCore/QTimer>
 
 // Marble
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 

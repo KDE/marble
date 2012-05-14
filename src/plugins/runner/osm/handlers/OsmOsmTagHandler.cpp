@@ -13,7 +13,7 @@
 #include "GeoParser.h"
 #include "GeoDataPoint.h"
 #include "GeoDataDocument.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "GeoDataParser.h"
 #include "GeoDataLineStyle.h"
 #include "GeoDataStyleMap.h"

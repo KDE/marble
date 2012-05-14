@@ -13,7 +13,7 @@
 #define MARBLE_GEODATAPHOTOOVERLAY_H
 
 #include "GeoDataOverlay.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "GeoDataPoint.h"
 
 namespace Marble {

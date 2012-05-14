@@ -11,7 +11,7 @@
 #include "MapWizard.h"
 #include "ui_MapWizard.h"
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "ServerLayout.h"

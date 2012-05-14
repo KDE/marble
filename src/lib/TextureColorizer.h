@@ -18,7 +18,7 @@
 
 #include <QtCore/QObject>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include <QtCore/QString>
 #include <QtGui/QImage>

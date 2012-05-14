@@ -27,7 +27,7 @@
 #endif
 
 #include "geodata_export.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 namespace Marble
 {

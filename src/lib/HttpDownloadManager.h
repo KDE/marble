@@ -19,7 +19,7 @@
 
 #include <QtCore/QObject>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "marble_export.h"
 
 class QUrl;

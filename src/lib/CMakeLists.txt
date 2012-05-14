@@ -101,7 +101,7 @@ set(marblewidget_SRCS
     MarbleCacheSettingsWidget.cpp
     TimeControlWidget.cpp
     AbstractFloatItem.cpp
-    global.cpp
+    MarbleGlobal.cpp
     MarbleDirs.cpp
     MarbleLocale.cpp
     MarblePhysics.cpp
@@ -342,6 +342,7 @@ else (APPLE AND QTONLY)
     TinyWebBrowser.h
     QtMarbleConfigDialog.h
     global.h
+    MarbleGlobal.h
     MarbleDirs.h
     GeoPainter.h
     TileCreatorDialog.h

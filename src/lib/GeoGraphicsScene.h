@@ -13,7 +13,7 @@
 #define MARBLE_GEOGRAPHICSSCENE_H
 
 #include "marble_export.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QList>

@@ -19,7 +19,7 @@
 #include <QtCore/QString>
 #include <QtCore/QUrl>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include "marble_export.h"
 

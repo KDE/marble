@@ -8,8 +8,8 @@
 // Copyright 2009 Torsten Rahn <tackat@kde.org>
 //
 
-#include "global.h"
-#include "global_p.h"
+#include "MarbleGlobal.h"
+#include "MarbleGlobal_p.h"
 
 
 namespace Marble

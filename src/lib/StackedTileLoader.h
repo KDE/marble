@@ -30,7 +30,7 @@
 
 #include "GeoSceneTexture.h"
 #include "TileId.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 class QImage;
 class QString;

@@ -15,7 +15,7 @@
 
 #include "SunLocator.h"
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleClock.h"
 #include "Planet.h"
 #include "MarbleMath.h"

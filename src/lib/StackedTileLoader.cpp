@@ -29,7 +29,7 @@
 #include "StackedTile.h"
 #include "TileLoader.h"
 #include "TileLoaderHelper.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include <QtCore/QCache>
 #include <QtCore/QDateTime>

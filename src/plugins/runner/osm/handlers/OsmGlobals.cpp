@@ -13,7 +13,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataDocument.h"
 #include "GeoDataIconStyle.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleDirs.h"
 
 namespace Marble

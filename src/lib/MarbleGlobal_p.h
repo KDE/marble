@@ -18,7 +18,7 @@
 
 #include "MarbleLocale.h"
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 namespace Marble
 {

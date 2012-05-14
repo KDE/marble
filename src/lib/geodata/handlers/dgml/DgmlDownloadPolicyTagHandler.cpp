@@ -20,7 +20,7 @@
 #include "GeoParser.h"
 #include "GeoSceneTexture.h"
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 namespace Marble
 {

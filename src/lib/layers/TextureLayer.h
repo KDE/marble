@@ -14,7 +14,7 @@
 #include "LayerInterface.h"
 #include <QtCore/QObject>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "GeoSceneTexture.h"
 
 #include <QtCore/QSize>

@@ -13,7 +13,7 @@
 
 #include "KmlElementDictionary.h"
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "GeoDataLookAt.h"
 #include "GeoParser.h"
 #include "GeoDataCoordinates.h"

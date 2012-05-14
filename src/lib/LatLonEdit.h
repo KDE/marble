@@ -13,7 +13,7 @@
 
 #include <QtGui/QWidget>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "marble_export.h"
 
 namespace Marble

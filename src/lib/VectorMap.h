@@ -16,7 +16,7 @@
 #include <QtGui/QPen>
 #include <QtGui/QBrush>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "Quaternion.h"
 #include "GeoDataCoordinates.h"
 #include "ScreenPolygon.h"

@@ -11,7 +11,7 @@
 #include "MarbleDeclarativeObject.h"
 
 #include "MarbleDirs.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include <QtCore/QProcessEnvironment>
 

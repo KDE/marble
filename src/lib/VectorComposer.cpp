@@ -19,7 +19,7 @@
 #include "MarbleDebug.h"
 #include "GeoPolygon.h"
 #include "GeoPainter.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "VectorMap.h"
 #include "ViewportParams.h"
 #include "MarbleDirs.h"

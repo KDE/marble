@@ -10,7 +10,7 @@
 
 #include <QtTest/QtTest>
 #include <QtGui/QApplication>
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleWidget.h"
 #include "AbstractFloatItem.h"
 #include "GeoDataCoordinates.h"

@@ -11,7 +11,7 @@
 #include <QtGui/QApplication>
 #include <QtDeclarative/QtDeclarative>
 #include "MarbleDebug.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 using namespace Marble;
 

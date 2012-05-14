@@ -23,7 +23,7 @@
 #include <QtGui/QImage>
 
 #include "TileId.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 class QByteArray;
 class QImage;

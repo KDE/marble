@@ -12,7 +12,7 @@
 #include "BBCParser.h"
 
 // Marble
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "WeatherData.h"
 #include "BBCWeatherItem.h"
 #include "MarbleDebug.h"

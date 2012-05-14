@@ -12,7 +12,7 @@
 #include "StationListParser.h"
 
 // Marble
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "BBCStation.h"
 #include "GeoDataCoordinates.h"
 #include "MarbleDebug.h"

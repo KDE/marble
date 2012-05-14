@@ -25,7 +25,7 @@
 #include "GeoDataLatLonAltBox.h"
 
 #include "Quaternion.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "marble_export.h"
 
 class QPolygonF;

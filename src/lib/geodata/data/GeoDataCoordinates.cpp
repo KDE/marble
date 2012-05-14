@@ -25,7 +25,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QAtomicInt>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 
 #include "Quaternion.h"

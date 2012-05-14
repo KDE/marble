@@ -10,7 +10,7 @@
 
 #include "Speedometer.h"
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"

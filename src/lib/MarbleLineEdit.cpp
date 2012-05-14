@@ -13,7 +13,7 @@
 //
 
 #include "MarbleLineEdit.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include <QtGui/QApplication>
 #include <QtGui/QClipboard>

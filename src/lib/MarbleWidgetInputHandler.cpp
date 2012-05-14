@@ -31,7 +31,7 @@
 
 #include "kineticmodel.h"
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "GeoDataCoordinates.h"
 #include "MarbleDirs.h"
