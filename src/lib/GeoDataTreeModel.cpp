@@ -213,7 +213,7 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
                     return QVariant( placemark->popularity() );
                 }
                 else if ( index.column() == 3 ){
-                    return QVariant( placemark->popularityIndex() );
+                    return QVariant( placemark->zoomLevel() );
                 }
         }
         if ( object->nodeType() == GeoDataTypes::GeoDataFolderType
@@ -290,7 +290,7 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
     } else if ( role == MarblePlacemarkModel::PopularityIndexRole ) {
         if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
             GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );
-            return QVariant( placemark->popularityIndex() );
+            return QVariant( placemark->zoomLevel() );
         }
     } else if ( role == MarblePlacemarkModel::PopularityRole ) {
         if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {

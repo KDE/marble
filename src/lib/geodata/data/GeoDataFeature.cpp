@@ -682,15 +682,15 @@ void GeoDataFeature::setStyleMap( GeoDataStyleMap* styleMap )
     d->m_styleMap = styleMap;
 }
 
-int GeoDataFeature::popularityIndex() const
+int GeoDataFeature::zoomLevel() const
 {
-    return d->m_popularityIndex;
+    return d->m_zoomLevel;
 }
 
-void GeoDataFeature::setPopularityIndex( int popularityIndex )
+void GeoDataFeature::setZoomLevel( int zoomLevel )
 {
     detach();
-    d->m_popularityIndex = popularityIndex;
+    d->m_zoomLevel = zoomLevel;
 }
 
 qint64 GeoDataFeature::popularity() const
@@ -753,7 +753,7 @@ void GeoDataFeature::pack( QDataStream& stream ) const
 //    stream << d->m_visualCategory;
     stream << d->m_role;
     stream << d->m_popularity;
-    stream << d->m_popularityIndex;
+    stream << d->m_zoomLevel;
 }
 
 void GeoDataFeature::unpack( QDataStream& stream )
@@ -769,7 +769,7 @@ void GeoDataFeature::unpack( QDataStream& stream )
 //    stream >> (int)d->m_visualCategory;
     stream >> d->m_role;
     stream >> d->m_popularity;
-    stream >> d->m_popularityIndex;
+    stream >> d->m_zoomLevel;
 }
 
 GeoDataFeature::GeoDataVisualCategory GeoDataFeature::OsmVisualCategory(const QString &keyValue )

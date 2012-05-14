@@ -321,7 +321,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                 {
                     hasPopularity = true;
                     placemark->setPopularity( (qint64)(altitude * 1000.0) );
-                    placemark->setPopularityIndex( cityPopIdx( qAbs( (qint64)(altitude * 1000.0) ) ) );
+                    placemark->setZoomLevel( cityPopIdx( qAbs( (qint64)(altitude * 1000.0) ) ) );
                 }
             }
             // Continent (K), Ocean (O), Nation (S)
@@ -333,44 +333,44 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                     hasPopularity = true;
                     //                mDebug() << placemark->name() << " " << (qint64)(area);
                     placemark->setPopularity( (qint64)(area * 100) );
-                    placemark->setPopularityIndex( areaPopIdx( area ) );
+                    placemark->setZoomLevel( areaPopIdx( area ) );
                 }
             }
             // Pole (P)
             else if ( placemark->role() == "P" )
             {
                 placemark->setPopularity( 1000000000 );
-                placemark->setPopularityIndex( 18 );
+                placemark->setZoomLevel( 18 );
             }
             // Magnetic Pole (M)
             else if ( placemark->role() == "M" )
             {
                 placemark->setPopularity( 10000000 );
-                placemark->setPopularityIndex( 13 );
+                placemark->setZoomLevel( 13 );
             }
             // MannedLandingSite (h)
             else if ( placemark->role() == "h" )
             {
                 placemark->setPopularity( 1000000000 );
-                placemark->setPopularityIndex( 18 );
+                placemark->setZoomLevel( 18 );
             }
             // RoboticRover (r)
             else if ( placemark->role() == "r" )
             {
                 placemark->setPopularity( 10000000 );
-                placemark->setPopularityIndex( 16 );
+                placemark->setZoomLevel( 16 );
             }
             // UnmannedSoftLandingSite (u)
             else if ( placemark->role() == "u" )
             {
                 placemark->setPopularity( 1000000 );
-                placemark->setPopularityIndex( 14 );
+                placemark->setZoomLevel( 14 );
             }
             // UnmannedSoftLandingSite (i)
             else if ( placemark->role() == "i" )
             {
                 placemark->setPopularity( 1000000 );
-                placemark->setPopularityIndex( 14 );
+                placemark->setZoomLevel( 14 );
             }
             // Space Terrain: Craters, Maria, Montes, Valleys, etc.
             else if (    placemark->role() == "m" || placemark->role() == "v"
@@ -383,18 +383,18 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                     hasPopularity = true;
                     placemark->setPopularity( diameter );
                     if ( placemark->role() == "c" ) {
-                        placemark->setPopularityIndex( spacePopIdx( diameter ) );
+                        placemark->setZoomLevel( spacePopIdx( diameter ) );
                         if ( placemark->name() == "Tycho" || placemark->name() == "Copernicus" ) {
-                            placemark->setPopularityIndex( 17 );
+                            placemark->setZoomLevel( 17 );
                         }
                     }
                     else {
-                        placemark->setPopularityIndex( spacePopIdx( diameter ) );
+                        placemark->setZoomLevel( spacePopIdx( diameter ) );
                     }
 
                     if ( placemark->role() == "a" && diameter == 0 ) {
                         placemark->setPopularity( 1000000000 );
-                        placemark->setPopularityIndex( 18 );
+                        placemark->setZoomLevel( 18 );
                     }
                 }
             }
@@ -405,7 +405,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                 {
                     hasPopularity = true;
                     placemark->setPopularity( population );
-                    placemark->setPopularityIndex( cityPopIdx( population ) );
+                    placemark->setZoomLevel( cityPopIdx( population ) );
                 }
             }
 
@@ -438,38 +438,38 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                    || placemark->role()=="PPLS"
                    || placemark->role()=="PPLW" ) placemark->setVisualCategory(
                         ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallCity
-                                                                       + ( placemark->popularityIndex() -1 ) / 4 * 4 ) );
+                                                                       + ( placemark->zoomLevel() -1 ) / 4 * 4 ) );
             else if ( placemark->role() == "PPLA" ) placemark->setVisualCategory(
                     ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallStateCapital
-                                                                   + ( placemark->popularityIndex() -1 ) / 4 * 4 ) );
+                                                                   + ( placemark->zoomLevel() -1 ) / 4 * 4 ) );
             else if ( placemark->role()=="PPLC" ) placemark->setVisualCategory(
                     ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallNationCapital
-                                                                   + ( placemark->popularityIndex() -1 ) / 4 * 4 ) );
+                                                                   + ( placemark->zoomLevel() -1 ) / 4 * 4 ) );
             else if ( placemark->role()=="PPLA2" || placemark->role()=="PPLA3" ) placemark->setVisualCategory(
                     ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallCountyCapital
-                                                                   + ( placemark->popularityIndex() -1 ) / 4 * 4 ) );
+                                                                   + ( placemark->zoomLevel() -1 ) / 4 * 4 ) );
             else if ( placemark->role()==" " && !hasPopularity && placemark->visualCategory() == GeoDataPlacemark::Unknown ) {
                 placemark->setVisualCategory( GeoDataPlacemark::Unknown ); // default location
-                placemark->setPopularityIndex(0);
+                placemark->setZoomLevel(0);
             }
             else if ( placemark->role() == "h" ) placemark->setVisualCategory( GeoDataPlacemark::MannedLandingSite );
             else if ( placemark->role() == "r" ) placemark->setVisualCategory( GeoDataPlacemark::RoboticRover );
             else if ( placemark->role() == "u" ) placemark->setVisualCategory( GeoDataPlacemark::UnmannedSoftLandingSite );
             else if ( placemark->role() == "i" ) placemark->setVisualCategory( GeoDataPlacemark::UnmannedHardLandingSite );
 
-            if ( placemark->role() == "W" && placemark->popularityIndex() > 12 )
-                placemark->setPopularityIndex( 12 );
+            if ( placemark->role() == "W" && placemark->zoomLevel() > 12 )
+                placemark->setZoomLevel( 12 );
             if ( placemark->role() == "O" )
-                placemark->setPopularityIndex( 16 );
+                placemark->setZoomLevel( 16 );
             if ( placemark->role() == "K" )
-                placemark->setPopularityIndex( 19 );
+                placemark->setZoomLevel( 19 );
             if ( !placemark->isVisible() ) {
-                placemark->setPopularityIndex( -1 );
+                placemark->setZoomLevel( -1 );
             }
             // Workaround: Emulate missing "setVisible" serialization by allowing for population
             // values smaller than -1 which are considered invisible.
             if ( placemark->population() < -1 ) {
-                placemark->setPopularityIndex( -1 );
+                placemark->setZoomLevel( -1 );
             }
         }
     }

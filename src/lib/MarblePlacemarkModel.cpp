@@ -95,7 +95,7 @@ QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
     } else if ( role == Qt::DecorationRole ) {
           return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->style()->iconStyle().icon() );
     } else if ( role == PopularityIndexRole ) {
-        return d->m_placemarkContainer->at( index.row() )->popularityIndex();
+        return d->m_placemarkContainer->at( index.row() )->zoomLevel();
     } else if ( role == VisualCategoryRole ) {
         return d->m_placemarkContainer->at( index.row() )->visualCategory();
     } else if ( role == AreaRole ) {

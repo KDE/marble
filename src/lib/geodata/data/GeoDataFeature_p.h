@@ -39,7 +39,7 @@ class GeoDataFeaturePrivate
         m_styleUrl(),
         m_abstractView(),
         m_popularity( 0 ),
-        m_popularityIndex( 19 ),
+        m_zoomLevel( 19 ),
         m_visible( true ),
         m_visualCategory( GeoDataFeature::Default ),
         m_role(" "),
@@ -61,7 +61,7 @@ class GeoDataFeaturePrivate
         m_phoneNumber( other.m_phoneNumber ),
         m_styleUrl( other.m_styleUrl ),
         m_popularity( other.m_popularity ),
-        m_popularityIndex( other.m_popularityIndex ),
+        m_zoomLevel( other.m_zoomLevel ),
         m_visible( other.m_visible ),
         m_visualCategory( other.m_visualCategory ),
         m_role( other.m_role ),
@@ -84,7 +84,7 @@ class GeoDataFeaturePrivate
         m_phoneNumber = other.m_phoneNumber;
         m_styleUrl = other.m_styleUrl;
         m_popularity = other.m_popularity;
-        m_popularityIndex = other.m_popularityIndex;
+        m_zoomLevel = other.m_zoomLevel;
         m_visible = other.m_visible;
         m_role = other.m_role;
         m_style = other.m_style;
@@ -173,8 +173,8 @@ class GeoDataFeaturePrivate
     QString             m_phoneNumber;  // Phone         Optional
     QString             m_styleUrl;     // styleUrl     Url#tag to a document wide style
     GeoDataAbstractView m_abstractView; // AbstractView  Optional
-    qint64              m_popularity;   // Population(!)
-    int                 m_popularityIndex; // Index of population
+    qint64              m_popularity;   // Population/Area/Altitude depending on placemark(!)
+    int                 m_zoomLevel;    // Zoom Level of the feature
 
     bool        m_visible;      // True if this feature should be shown.
     GeoDataFeature::GeoDataVisualCategory  m_visualCategory; // the visual category
