@@ -93,7 +93,6 @@ CurrentLocationWidget::CurrentLocationWidget( QWidget *parent, Qt::WindowFlags f
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     d->m_currentLocationUi.positionTrackingComboBox->setVisible( !smallScreen );
     d->m_currentLocationUi.locationLabel->setVisible( !smallScreen );
-    d->m_currentLocationUi.openTrackPushButton->setVisible( smallScreen );
 }
 
 CurrentLocationWidget::~CurrentLocationWidget()
@@ -120,8 +119,8 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
         d->m_currentLocationUi.locationLabel->setEnabled ( true );
         bool const hasTrack = !d->m_widget->model()->positionTracking()->isTrackEmpty();
         d->m_currentLocationUi.showTrackCheckBox->setEnabled( hasTrack );
-        d->m_currentLocationUi.saveTrackPushButton->setEnabled( hasTrack );
-        d->m_currentLocationUi.clearTrackPushButton->setEnabled( hasTrack );
+        d->m_currentLocationUi.saveTrackButton->setEnabled( hasTrack );
+        d->m_currentLocationUi.clearTrackButton->setEnabled( hasTrack );
     }
 
     //disconnect CurrentLocation Signals
@@ -183,11 +182,11 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
     if ( d->m_widget->model()->positionTracking()->trackVisible() ) {
         d->m_currentLocationUi.showTrackCheckBox->setCheckState(Qt::Checked);
     }
-    connect ( d->m_currentLocationUi.saveTrackPushButton, SIGNAL( clicked(bool)),
+    connect ( d->m_currentLocationUi.saveTrackButton, SIGNAL( clicked(bool)),
               this, SLOT(saveTrack()));
-    connect ( d->m_currentLocationUi.openTrackPushButton, SIGNAL( clicked(bool)),
+    connect ( d->m_currentLocationUi.openTrackButton, SIGNAL( clicked(bool)),
               this, SLOT(openTrack()));
-    connect (d->m_currentLocationUi.clearTrackPushButton, SIGNAL( clicked(bool)),
+    connect (d->m_currentLocationUi.clearTrackButton, SIGNAL( clicked(bool)),
              this, SLOT(clearTrack()));
     connect( d->m_widget->model(), SIGNAL( trackedPlacemarkChanged( const GeoDataPlacemark* ) ),
              this, SLOT( trackPlacemark() ) );
@@ -284,8 +283,8 @@ void CurrentLocationWidgetPrivate::receiveGpsCoordinates( const GeoDataCoordinat
     html = html.arg( distanceString ).arg( speedString + ' ' + unitString );
     m_currentLocationUi.locationLabel->setText( html );
     m_currentLocationUi.showTrackCheckBox->setEnabled( true );
-    m_currentLocationUi.saveTrackPushButton->setEnabled( true );
-    m_currentLocationUi.clearTrackPushButton->setEnabled( true );
+    m_currentLocationUi.saveTrackButton->setEnabled( true );
+    m_currentLocationUi.clearTrackButton->setEnabled( true );
 }
 
 void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provider )
@@ -382,8 +381,8 @@ void CurrentLocationWidgetPrivate::clearTrack()
     if ( result == QMessageBox::Yes ) {
         m_widget->model()->positionTracking()->clearTrack();
         m_widget->update();
-        m_currentLocationUi.saveTrackPushButton->setEnabled( false );
-        m_currentLocationUi.clearTrackPushButton->setEnabled( false );
+        m_currentLocationUi.saveTrackButton->setEnabled( false );
+        m_currentLocationUi.clearTrackButton->setEnabled( false );
     }
 }
 
