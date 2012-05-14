@@ -40,7 +40,8 @@ class PositionTrackingPrivate
         m_currentTrackPlacemark( new GeoDataPlacemark ),
         m_trackSegments( new GeoDataMultiGeometry ),
         m_document(),
-        m_positionProvider( 0 )
+        m_positionProvider( 0 ),
+        m_length( 0.0 )
     {
     }
 
@@ -61,6 +62,8 @@ class PositionTrackingPrivate
     GeoDataLineString  *m_currentLineString;
 
     PositionProviderPlugin* m_positionProvider;
+
+    qreal m_length;
 };
 
 void PositionTrackingPrivate::updatePosition()
@@ -72,6 +75,9 @@ void PositionTrackingPrivate::updatePosition()
 
     if ( m_positionProvider->status() == PositionProviderStatusAvailable ) {
         if ( accuracy.horizontal < 250 ) {
+            if ( !m_currentLineString->isEmpty() ) {
+                m_length += distanceSphere( m_currentLineString->last(), position );
+            }
             m_currentLineString->append(position);
         }
 
@@ -265,6 +271,7 @@ void PositionTracking::clearTrack()
     d->m_trackSegments->clear();
     d->m_trackSegments->append( d->m_currentLineString );
     d->m_treeModel->addDocument( &d->m_document );
+    d->m_length = 0.0;
 }
 
 bool PositionTracking::isTrackEmpty() const
@@ -278,6 +285,11 @@ bool PositionTracking::isTrackEmpty() const
     }
 
     return false;
+}
+
+qreal PositionTracking::length( qreal planetRadius ) const
+{
+    return d->m_length * planetRadius;
 }
 
 GeoDataAccuracy PositionTracking::accuracy() const
