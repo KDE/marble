@@ -36,8 +36,6 @@ MarblePluginSettingsWidget::MarblePluginSettingsWidget( QWidget *parent )
 
     d->m_itemDelegate = new PluginItemDelegate( d->m_pluginListView, this );
     d->m_pluginListView->setItemDelegate( d->m_itemDelegate );
-    connect( d->m_pluginListView, SIGNAL( clicked( QModelIndex ) ),
-         this, SIGNAL( pluginListViewClicked() ) );
     connect( d->m_itemDelegate, SIGNAL( aboutPluginClicked( QString ) ),
              this, SIGNAL( aboutPluginClicked( QString ) ) );
     connect( d->m_itemDelegate, SIGNAL( configPluginClicked( QString ) ),
@@ -61,6 +59,13 @@ void MarblePluginSettingsWidget::setConfigIcon( const QIcon& icon )
 
 void MarblePluginSettingsWidget::setModel( QStandardItemModel* pluginModel )
 {
+    if ( d->m_pluginListView->model() ) {
+        disconnect( d->m_pluginListView->model(), 0, this, 0 );
+    }
+    if ( pluginModel ) {
+        connect( pluginModel, SIGNAL( itemChanged( QStandardItem * ) ),
+                 this,        SIGNAL( pluginListViewClicked() ) );
+    }
     d->m_pluginListView->setModel ( pluginModel );
 }
 

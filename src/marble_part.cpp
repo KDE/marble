@@ -1411,6 +1411,8 @@ void MarblePart::editSettings()
     w_pluginSettings->setConfigIcon( KIcon( "configure" ) );
     w_pluginSettings->setAboutIcon( KIcon( "help-about" ) );
 
+    connect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
+                                            SLOT( enableApplyButton() ) );
     connect( w_pluginSettings, SIGNAL( pluginListViewClicked() ),
                                SLOT( enableApplyButton() ) );
     connect( m_configDialog,   SIGNAL( settingsChanged( const QString &) ),
