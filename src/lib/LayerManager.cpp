@@ -159,11 +159,6 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
 void LayerManager::Private::renderLayer( GeoPainter *painter, ViewportParams *viewport,
                                 const QString& renderPosition )
 {
-    if ( !viewport ) {
-        mDebug() << "LayerManager: No valid viewParams set!";
-        return;
-    }
-
     QList<LayerInterface*> layers;
 
     foreach( RenderPlugin *renderPlugin, m_renderPlugins ) {
