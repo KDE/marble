@@ -107,8 +107,6 @@ class LayerManager : public QObject
     void setVisible( const QString &nameId, bool visible );
 
  private:
-    void renderLayer( GeoPainter *painter, ViewportParams *viewport, const QString& renderPosition  );
-
     Q_PRIVATE_SLOT( d, void updateVisibility( bool, const QString & ) )
 
  private:

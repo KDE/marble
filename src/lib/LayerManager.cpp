@@ -45,6 +45,8 @@ class LayerManager::Private
 
     void updateVisibility( bool visible, const QString &nameId );
 
+    void renderLayer( GeoPainter *painter, ViewportParams *viewport, const QString& renderPosition  );
+
     LayerManager *const q;
 
     QList<RenderPlugin *> m_renderPlugins;
@@ -150,11 +152,11 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
 
     foreach( const QString& renderPosition, renderPositions ) {
-        renderLayer( painter, viewport, renderPosition );
+        d->renderLayer( painter, viewport, renderPosition );
     }
 }
 
-void LayerManager::renderLayer( GeoPainter *painter, ViewportParams *viewport,
+void LayerManager::Private::renderLayer( GeoPainter *painter, ViewportParams *viewport,
                                 const QString& renderPosition )
 {
     if ( !viewport ) {
@@ -164,20 +166,20 @@ void LayerManager::renderLayer( GeoPainter *painter, ViewportParams *viewport,
 
     QList<LayerInterface*> layers;
 
-    foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
+    foreach( RenderPlugin *renderPlugin, m_renderPlugins ) {
         if ( renderPlugin && renderPlugin->renderPosition().contains( renderPosition )  ){
             if ( renderPlugin->enabled() && renderPlugin->visible() ) {
                 if ( !renderPlugin->isInitialized() )
                 {
                     renderPlugin->initialize();
-                    emit renderPluginInitialized( renderPlugin );
+                    emit q->renderPluginInitialized( renderPlugin );
                 }
                 layers.push_back( renderPlugin );
             }
         }
     }
 
-    foreach( LayerInterface *layer, d->m_internalLayers ) {
+    foreach( LayerInterface *layer, m_internalLayers ) {
         if ( layer && layer->renderPosition().contains( renderPosition ) ) {
             layers.push_back( layer );
         }
