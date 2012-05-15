@@ -37,11 +37,11 @@ bool zValueLessThan( const LayerInterface * const one, const LayerInterface * co
     return one->zValue() < two->zValue();
 }
 
-class LayerManagerPrivate
+class LayerManager::Private
 {
  public:
-    LayerManagerPrivate( LayerManager *parent );
-    ~LayerManagerPrivate();
+    Private( LayerManager *parent );
+    ~Private();
 
     void updateVisibility( bool visible, const QString &nameId );
 
@@ -55,19 +55,19 @@ class LayerManagerPrivate
     bool m_showBackground;
 };
 
-LayerManagerPrivate::LayerManagerPrivate( LayerManager *parent )
+LayerManager::Private::Private( LayerManager *parent )
     : q( parent ),
       m_renderPlugins(),
       m_showBackground( true )
 {
 }
 
-LayerManagerPrivate::~LayerManagerPrivate()
+LayerManager::Private::~Private()
 {
     qDeleteAll( m_renderPlugins );
 }
 
-void LayerManagerPrivate::updateVisibility( bool visible, const QString &nameId )
+void LayerManager::Private::updateVisibility( bool visible, const QString &nameId )
 {
     emit q->visibilityChanged( nameId, visible );
 }
@@ -75,7 +75,7 @@ void LayerManagerPrivate::updateVisibility( bool visible, const QString &nameId 
 
 LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
     : QObject( parent ),
-      d( new LayerManagerPrivate( this ) )
+      d( new Private( this ) )
 {
     foreach ( const RenderPlugin *factory, model->pluginManager()->renderPlugins() ) {
         RenderPlugin *const renderPlugin = factory->newInstance( model );

@@ -25,7 +25,6 @@ namespace Marble
 
 class AbstractDataPlugin;
 class AbstractDataPluginItem;
-class LayerManagerPrivate;
 class GeoPainter;
 class ViewportParams;
 class RenderPlugin;
@@ -115,8 +114,9 @@ class LayerManager : public QObject
  private:
     Q_DISABLE_COPY( LayerManager )
 
-    friend class LayerManagerPrivate;
-    LayerManagerPrivate  * const d;
+    class Private;
+    friend class Private;
+    Private  * const d;
 };
 
 }
