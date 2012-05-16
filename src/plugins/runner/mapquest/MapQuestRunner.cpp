@@ -199,7 +199,7 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
     }
 
     QDomNodeList instructions = root.elementsByTagName( "maneuver" );
-    unsigned int const lastInstruction = instructions.length()-1; // ignore the last 'Welcome to xy' instruction
+    unsigned int const lastInstruction = qMax<int>( 0, instructions.length()-1 ); // ignore the last 'Welcome to xy' instruction
     for ( unsigned int i = 0; i < lastInstruction; ++i ) {
         QDomElement node = instructions.item( i ).toElement();
 
