@@ -243,6 +243,11 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
         }
     }
 
+    if ( routeWaypoints->size() < 1 ) {
+        delete result;
+        result = 0;
+    }
+
     return result;
 }
 
