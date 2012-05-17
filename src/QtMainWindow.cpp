@@ -1307,7 +1307,7 @@ void MainWindow::showDownloadRegionDialog()
                  SLOT( disconnectDownloadRegionDialog() ));
     }
     // FIXME: get allowed range from current map theme
-    m_downloadRegionDialog->setAllowedTileLevelRange( 0, 18 );
+    m_downloadRegionDialog->setAllowedTileLevelRange( 0, 16 );
     m_downloadRegionDialog->setSelectionMethod( DownloadRegionDialog::VisibleRegionMethod );
     ViewportParams const * const viewport =
         m_controlView->marbleWidget()->viewport();
