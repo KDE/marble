@@ -214,6 +214,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( switchRoute( int ) ) );
     connect( d->m_ui.routingProfileComboBox, SIGNAL( currentIndexChanged( int ) ),
              this, SLOT( setRoutingProfile( int ) ) );
+    connect( d->m_ui.routingProfileComboBox, SIGNAL( activated( int ) ),
+             this, SLOT( retrieveRoute() ) );
     connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL( rowsInserted( QModelIndex, int, int ) ),
              this, SLOT( updateAlternativeRoutes() ) );
 
