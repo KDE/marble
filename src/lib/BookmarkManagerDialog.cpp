@@ -267,17 +267,29 @@ void BookmarkManagerDialogPrivate::editBookmark()
 
         QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( m_manager, m_parent );
         dialog->setName( bookmark->name() );
-        dialog->setLookAt( *bookmark->lookAt() );
+        if ( bookmark->lookAt() ) {
+            dialog->setLookAt( *bookmark->lookAt() );
+        } else {
+            GeoDataLookAt lookAt;
+            lookAt.setCoordinates( bookmark->coordinate() );
+            lookAt.setRange( bookmark->coordinate().altitude() );
+            dialog->setLookAt( lookAt );
+        }
         dialog->setDescription( bookmark->description() );
         dialog->setFolderName( folder->name() );
         if ( dialog->exec() == QDialog::Accepted ) {
             GeoDataPlacemark newBookmark( *bookmark );
             m_manager->removeBookmark( bookmark );
+            bookmark = 0; // manager just deleted the bookmark
+
+            GeoDataLookAt *lookAt = new GeoDataLookAt;
+            lookAt->setCoordinates( dialog->coordinates() );
+            lookAt->setRange( dialog->coordinates().altitude() );
+            newBookmark.setLookAt( lookAt );
 
             newBookmark.setName( dialog->name() );
             newBookmark.setDescription( dialog->description() );
             newBookmark.setCoordinate( dialog->coordinates() );
-            newBookmark.lookAt()->setCoordinates( dialog->coordinates() );
             m_manager->addBookmark( dialog->folder(), newBookmark );
         }
         delete dialog;
