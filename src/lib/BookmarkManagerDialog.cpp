@@ -258,6 +258,12 @@ void BookmarkManagerDialogPrivate::editBookmark()
 
         QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( m_manager, m_parent );
         dialog->setName( bookmark->name() );
+        if ( !bookmark->lookAt() ) {
+            GeoDataLookAt *lookAt = new GeoDataLookAt;
+            lookAt->setCoordinates( bookmark->coordinate() );
+            lookAt->setRange( bookmark->coordinate().altitude() );
+            bookmark->setLookAt( lookAt );
+        }
         dialog->setLookAt( *bookmark->lookAt() );
         dialog->setDescription( bookmark->description() );
         dialog->setFolderName( folder->name() );
@@ -276,6 +282,7 @@ void BookmarkManagerDialogPrivate::editBookmark()
             }
             bookmark->setName( dialog->name() );
             bookmark->setDescription( dialog->description() );
+            Q_ASSERT( bookmark->lookAt() );
             bookmark->lookAt()->setCoordinates( dialog->coordinates() );
             m_treeModel->setRootDocument( bookmarkDocument );
             selectFolder( dialog->folderName() );
