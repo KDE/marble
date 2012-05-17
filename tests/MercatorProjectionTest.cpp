@@ -45,6 +45,8 @@ class MercatorProjectionTest : public QObject
 
     void screenCoordinatesOfCenter_data();
     void screenCoordinatesOfCenter();
+
+    void setInvalidRadius();
 };
 
 void MercatorProjectionTest::screenCoordinatesValidLat_data()
@@ -215,6 +217,15 @@ void MercatorProjectionTest::screenCoordinatesOfCenter()
         QCOMPARE( x[0], 1.0 );
         QCOMPARE( y, 1.0 );
     }
+}
+
+void MercatorProjectionTest::setInvalidRadius()
+{
+    ViewportParams viewport;
+    viewport.setProjection( Mercator );
+    viewport.setRadius( 0 );
+    qreal lon, lat;
+    viewport.geoCoordinates( 23, 42, lon, lat );
 }
 
 }

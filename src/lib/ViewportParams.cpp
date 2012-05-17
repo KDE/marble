@@ -187,10 +187,12 @@ int ViewportParams::radius() const
 
 void ViewportParams::setRadius(int newRadius)
 {
-    d->m_dirtyBox = true;
+    if ( newRadius > 0 ) {
+        d->m_dirtyBox = true;
 
-    d->m_radius = newRadius;
-    d->m_angularResolution = 0.25 * M_PI / fabs( (qreal)(d->m_radius) );
+        d->m_radius = newRadius;
+        d->m_angularResolution = 0.25 * M_PI / fabs( (qreal)(d->m_radius) );
+    }
 }
 
 bool ViewportParams::globeCoversViewport() const

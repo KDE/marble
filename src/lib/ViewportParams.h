@@ -84,7 +84,12 @@ class MARBLE_EXPORT ViewportParams
     bool resolves ( const GeoDataCoordinates &coord1, const GeoDataCoordinates &coord2 ) const;
 
     int  radius() const;
-    void setRadius(int newRadius);
+
+    /**
+     * @brief Change the radius of the planet
+     * @param radius Size of the planet radius in pixel. Non-positive values are ignored.
+     */
+    void setRadius(int radius);
 
     bool  globeCoversViewport() const;
 

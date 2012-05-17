@@ -26,6 +26,7 @@ class ProjectionTest : public QObject
  private slots:
     void drawLineString_data();
     void drawLineString();
+    void setInvalidRadius();
 
  private:
     ViewportParams viewport;
@@ -152,6 +153,13 @@ void ProjectionTest::drawLineString()
 
     // check the provided number of polys
     QCOMPARE( polys.size(), size );
+}
+
+void ProjectionTest::setInvalidRadius()
+{
+    QVERIFY( viewport.radius() > 0 );
+    viewport.setRadius( 0 );
+    QVERIFY( viewport.radius() > 0 );
 }
 
 }
