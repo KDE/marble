@@ -27,11 +27,11 @@ const GeoDataPlacemark* VisiblePlacemark::placemark() const
     return m_placemark;
 }
 
-const QImage& VisiblePlacemark::symbolPixmap() const
+const QPixmap& VisiblePlacemark::symbolPixmap() const
 {    
     GeoDataStyle* style = m_placemark->style();
     if ( style ) {
-        m_symbolPixmap = style->iconStyle().icon(); 
+        m_symbolPixmap = QPixmap::fromImage( style->iconStyle().icon() );
     } else {
         mDebug() << "Style pointer null";
     }
