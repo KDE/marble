@@ -46,7 +46,7 @@ class VisiblePlacemark
     /**
      * Returns the pixmap of the place mark symbol.
      */
-    const QPixmap& symbolPixmap() const;
+    const QImage& symbolPixmap() const;
 
     /**
      * Returns the state of the place mark.
@@ -97,7 +97,7 @@ class VisiblePlacemark
     QPixmap     m_labelPixmap;    // the text label (most often name)
     QRectF      m_labelRect;      // bounding box of label
 
-    mutable QPixmap     m_symbolPixmap; // cached value
+    mutable QImage     m_symbolPixmap; // cached value
 };
 
 }

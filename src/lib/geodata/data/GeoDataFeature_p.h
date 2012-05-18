@@ -122,7 +122,7 @@ class GeoDataFeaturePrivate
                                          const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker())
     {
         GeoDataStyle *style =  createStyle(1, 0, color, outline, true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false);
-        QPixmap const pixmap = QPixmap( MarbleDirs::path( "bitmaps/poi/" + bitmap + ".png" ) );
+        QImage const pixmap = QImage( MarbleDirs::path( "bitmaps/poi/" + bitmap + ".png" ) );
         style->setIconStyle( GeoDataIconStyle( pixmap ) );
         style->setLabelStyle( GeoDataLabelStyle( font, Qt::black ) );
         return style;

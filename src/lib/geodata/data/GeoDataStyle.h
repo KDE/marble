@@ -60,7 +60,7 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
      * @param  font   used to construct the label styles
      * @param  color  used to construct the label styles
      */
-    GeoDataStyle( const QPixmap& icon, 
+    GeoDataStyle( const QImage& icon,
                   const QFont &font, const QColor &color  );
     ~GeoDataStyle();
 

@@ -27,7 +27,7 @@ const GeoDataPlacemark* VisiblePlacemark::placemark() const
     return m_placemark;
 }
 
-const QPixmap& VisiblePlacemark::symbolPixmap() const
+const QImage& VisiblePlacemark::symbolPixmap() const
 {    
     GeoDataStyle* style = m_placemark->style();
     if ( style ) {

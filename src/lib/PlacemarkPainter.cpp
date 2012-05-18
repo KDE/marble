@@ -79,11 +79,11 @@ void PlacemarkPainter::drawPlacemarks( QPainter* painter,
                 labelRect.moveLeft(i - symbolX + textX );
                 symbolPos.setX( i );
 
-                painter->drawPixmap( symbolPos, mark->symbolPixmap() );
+                painter->drawImage( symbolPos, mark->symbolPixmap() );
                 painter->drawPixmap( labelRect, mark->labelPixmap() );
             }
         } else { // simple case, one draw per placemark
-            painter->drawPixmap( symbolPos, mark->symbolPixmap() );
+            painter->drawImage( symbolPos, mark->symbolPixmap() );
             painter->drawPixmap( labelRect, mark->labelPixmap() );
         }
     }
