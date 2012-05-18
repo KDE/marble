@@ -712,7 +712,7 @@ const QSize GeoDataFeature::symbolSize() const
     return style()->iconStyle().icon().size();
 }
 
-const QImage GeoDataFeature::symbolPixmap() const
+const QImage GeoDataFeature::symbol() const
 {
     if ( s_defaultStyleInitialized == false )
         initializeDefaultStyles();
