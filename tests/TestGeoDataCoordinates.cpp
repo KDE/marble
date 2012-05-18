@@ -896,6 +896,10 @@ void TestGeoDataCoordinates::testFromStringD_data()
     }
     }
     }
+
+    QTest::newRow("scientific notation") << "0.0,1.0e-2" << 1.0e-2 << 0.0;
+    QTest::newRow("scientific notation") << "-2.4E0 1.0e-18" << 1e-18 << -2.4e0;
+    QTest::newRow("scientific notation") << "1.14e-02;1.33e+01" << 1.33e1 << 1.14e-2;
 }
 
 /*
