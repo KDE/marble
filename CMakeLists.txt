@@ -382,4 +382,3 @@ if(QTONLY)
 endif(QTONLY)
 
 include(MarbleCPackOptions)
-include(CPack)
