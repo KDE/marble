@@ -669,7 +669,7 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
         }
         if ( ( idlMinCrossState < 0 && idlMaxCrossState > 0 ) 
             || idlMinCrossState < -1  || idlMaxCrossState > 1 
-            || west < east ) {
+            || west <= east ) {
             east = +M_PI;
             west = -M_PI;
         }

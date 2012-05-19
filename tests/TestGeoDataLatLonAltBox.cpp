@@ -40,6 +40,7 @@ private slots:
     void testCenter();
     void testUnited_data();
     void testUnited();
+    void testIdlCrossing();
 
     void testFromLineString_data();
     void testFromLineString();
@@ -362,6 +363,22 @@ void TestGeoDataLatLonAltBox::testUnited()
     QCOMPARE( box3.south( GeoDataCoordinates::Degree ), box3south );
     QCOMPARE( box3.west( GeoDataCoordinates::Degree ), box3west );
     QCOMPARE( box3.east( GeoDataCoordinates::Degree ), box3east );
+}
+
+void TestGeoDataLatLonAltBox::testIdlCrossing()
+{
+    // Test case for bug 299527
+    GeoDataLineString string;
+    string << GeoDataCoordinates(    0, 0, 200, GeoDataCoordinates::Degree );
+    string << GeoDataCoordinates(  180, 0, 200, GeoDataCoordinates::Degree );
+    string << GeoDataCoordinates( -180, 0, 200, GeoDataCoordinates::Degree );
+    string << GeoDataCoordinates(    0, 0, 200, GeoDataCoordinates::Degree );
+
+    GeoDataLatLonAltBox box = string.latLonAltBox();
+    QCOMPARE( box.west(), -M_PI );
+    QCOMPARE( box.east(), M_PI );
+    QCOMPARE( box.north(), 0.0 );
+    QCOMPARE( box.south(), 0.0 );
 }
 
 qreal TestGeoDataLatLonAltBox::randomLon() 
