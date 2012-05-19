@@ -9,6 +9,6 @@ set( QT_USE_QTNETWORK  ON )
 INCLUDE(${QT_USE_FILE})
 
 set( flightgear_SRCS FlightGearPositionProviderPlugin.cpp )
-set( FlightGearPositionProviderPlugin_LIBS ${NMEALIB_LIBRARIES} )
+set( FlightGearPositionProviderPlugin_LIBS )
 
 marble_add_plugin( FlightGearPositionProviderPlugin ${flightgear_SRCS} )
