@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 
     QApplication  app(argc, argv);
 
-    qDebug( " Syntax: pnt2svg [-i pnt-sourcefile -o svg-targetfile -cn clipNorth -cs clipSouth -cw clipWest -ce clipEast" );
+    qDebug( " Syntax: pnt2svg [-i pnt-sourcefile -o svg-targetfile -cn clipNorth -cs clipSouth -cw clipWest -ce clipEast]" );
 
     QString inputFilename("PBORDERS.PNT");
     int inputIndex = app.arguments().indexOf("-i");
@@ -147,6 +147,7 @@ int main(int argc, char *argv[])
             out << path << endl;
         out << "</svg>" << endl;
         qDebug() << "Done!";
+        data.close();
     }
     else {
         qDebug() << "ERROR: Couldn't write output file to disc!";
