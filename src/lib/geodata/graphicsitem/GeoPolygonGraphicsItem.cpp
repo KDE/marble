@@ -52,6 +52,8 @@ GeoDataCoordinates GeoPolygonGraphicsItem::coordinate() const
         return m_polygon->latLonAltBox().center();
     } else if ( m_ring ) {
         return m_ring->latLonAltBox().center();
+    } else {
+        return GeoDataCoordinates();
     }
 }
 
@@ -74,6 +76,8 @@ GeoDataLatLonAltBox GeoPolygonGraphicsItem::latLonAltBox() const
         return m_polygon->latLonAltBox();
     } else if ( m_ring ) {
         return m_ring->latLonAltBox();
+    } else {
+        return GeoDataLatLonAltBox::fromLineString( GeoDataLineString() << GeoDataCoordinates() );
     }
 }
 
