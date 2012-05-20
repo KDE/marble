@@ -196,7 +196,7 @@ void GeoGraphicsScene::clear()
     d->m_items.clear();
 }
 
-void GeoGraphicsScene::addIdem( GeoGraphicsItem* item )
+void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
 {
     // Select zoom level so that the object fit in single tile
     int zoomLevel;

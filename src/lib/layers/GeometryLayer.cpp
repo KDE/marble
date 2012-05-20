@@ -289,7 +289,7 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry
     item->setVisible( placemark->isGloballyVisible() );
     item->setZValue( GeometryLayer::s_defaultZValues[placemark->visualCategory()] );
     item->setMinZoomLevel( GeometryLayer::s_defaultMinZoomLevels[placemark->visualCategory()] );
-    m_scene.addIdem( item );
+    m_scene.addItem( item );
 }
 
 void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *overlay )
@@ -312,7 +312,7 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *
     if ( item ) {
         item->setStyle( overlay->style() );
         item->setVisible( overlay->isGloballyVisible() );
-        m_scene.addIdem( item );
+        m_scene.addItem( item );
     }
 }
 

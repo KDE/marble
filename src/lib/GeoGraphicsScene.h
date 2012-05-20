@@ -44,7 +44,7 @@ public:
      * @brief Add an item to the GeoGraphicsScene
      * Adds the item @p item to the GeoGraphicsScene
      */
-    void addIdem( GeoGraphicsItem *item );
+    void addItem( GeoGraphicsItem *item );
 
     /**
      * @brief Remove an item from the GeoGraphicsScene
