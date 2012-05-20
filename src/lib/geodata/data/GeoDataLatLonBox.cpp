@@ -469,8 +469,8 @@ GeoDataLatLonBox GeoDataLatLonBox::united( const GeoDataLatLonBox& other ) const
     qreal e1 = d->m_east;
     qreal e2 = other.east();
 
-    bool idl1 = crossesDateLine();
-    bool idl2 = other.crossesDateLine();
+    bool const idl1 = d->m_east < d->m_west;
+    bool const idl2 = other.d->m_east < other.d->m_west;
 
     if ( idl1 ) {
         w1 += 2* M_PI;

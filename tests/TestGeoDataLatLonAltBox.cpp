@@ -330,6 +330,9 @@ void TestGeoDataLatLonAltBox::testUnited_data()
                                       << 30.0 << -30.0 << 150.0 << -170.0     // 170
                                       << 30.0 << -30.0 << 150.0 << -150.0;
 
+    QTest::newRow( "bug299959" ) << 90.0 << -90.0 << -180.0 << 180.0
+                                 << 18.0 << -18.0 <<   20.0 <<  30.0
+                                 << 90.0 << -90.0 << -180.0 << 180.0;
 }
 
 void TestGeoDataLatLonAltBox::testUnited()
