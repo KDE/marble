@@ -499,8 +499,8 @@ void ControlView::synchronizeWithExternalMapEditor( const QString &application, 
         localEventLoop.exec();
     } else {
         // The local server is not alive. Start the application
-        QString applicationArgument = argument.arg( north, 0, 'f', 8 ).arg( east, 0, 'f', 8 );
-        applicationArgument = applicationArgument.arg( south, 0, 'f', 8 ).arg( west, 0, 'f', 8 );
+        QString applicationArgument = argument.arg( south, 0, 'f', 8 ).arg( east, 0, 'f', 8 );
+        applicationArgument = applicationArgument.arg( north, 0, 'f', 8 ).arg( west, 0, 'f', 8 );
         mDebug() << "No local server found. Launching " << application << " with argument " << applicationArgument;
         if ( !QProcess::startDetached( application, QStringList() << applicationArgument ) ) {
             QString text = tr( "Unable to start the external editor. Check that %1 is installed or choose a different external editor in the settings dialog." );
