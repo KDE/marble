@@ -96,6 +96,23 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items() const
 
 QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAltBox& box, int maxZoomLevel ) const
 {
+    if ( box.west() > box.east() ) {
+        // Handle boxes crossing the IDL by splitting it into two separate boxes
+        GeoDataLatLonAltBox left;
+        left.setWest( -M_PI );
+        left.setEast( box.east() );
+        left.setNorth( box.north() );
+        left.setSouth( box.south() );
+
+        GeoDataLatLonAltBox right;
+        right.setWest( box.west() );
+        right.setEast( M_PI );
+        right.setNorth( box.north() );
+        right.setSouth( box.south() );
+
+        return items( left, maxZoomLevel ) + items( right, maxZoomLevel );
+    }
+
     QList< GeoGraphicsItem* > result;
     QRect rect;
     qreal north, south, east, west;
