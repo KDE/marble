@@ -42,7 +42,7 @@ void RenderPluginTest::restoreDefaultSettings_data()
         expected->initialize();
         expected->restoreDefaultSettings();
 
-        foreach ( const QString &key, result->settings().keys() ) {
+        foreach ( const QString &key, expected->settings().keys() ) {
             const QString testName = QString( "%1 %2" ).arg( plugin->nameId() ).arg( key );
             QTest::newRow( testName.toAscii() ) << result->settings().value( key ) << expected->settings().value( key );
         }
