@@ -15,6 +15,8 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QSlider>
 
+#include "MarbleModel.h"
+
 namespace Marble {
 
 EarthquakePlugin::EarthquakePlugin()
@@ -31,7 +33,7 @@ EarthquakePlugin::EarthquakePlugin( const MarbleModel *marbleModel )
       m_configDialog( 0 ),
       m_minMagnitude( 0.0 ),
       m_startDate( QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) ),
-      m_endDate( QDateTime::currentDateTime() ),
+      m_endDate( marbleModel->clockDateTime() ),
       m_maximumNumberOfItems( 100 )
 {
     setEnabled( true ); // Plugin is enabled by default
@@ -139,7 +141,7 @@ void EarthquakePlugin::setSettings( const QHash<QString,QVariant> &settings )
     setNumberOfItems( settings.value( "numResults", 20 ).toInt() );
     m_minMagnitude = settings.value( "minMagnitude", 0.0 ).toReal();
     m_startDate = settings.value( "startDate", QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) ).toDateTime();
-    m_endDate = settings.value( "endDate", QDateTime::currentDateTime() ).toDateTime();
+    m_endDate = settings.value( "endDate", marbleModel()->clockDateTime() ).toDateTime();
     m_maximumNumberOfItems = settings.value( "maximumNumberOfItems", m_maximumNumberOfItems ).toInt();
 
     emit settingsChanged( nameId() );

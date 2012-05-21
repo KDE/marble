@@ -53,10 +53,15 @@ PositionMarker::PositionMarker( const MarbleModel *marbleModel )
       m_lastBoundingBox(),
       ui_configWidget( 0 ),
       m_configDialog( 0 ),
+      m_cursorPath( m_defaultCursorPath ),
       m_cursorSize( 1.0 ),
+      m_accuracyColor( oxygenBrickRed4 ),
+      m_trailColor( 0, 0, 255 ),
       m_heading( 0.0 ),
       m_showTrail ( false )
 {
+    const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    m_accuracyColor.setAlpha( smallScreen ? 80 : 40 );
 }
 
 PositionMarker::~PositionMarker ()
