@@ -27,7 +27,6 @@ OpenDesktopPlugin::OpenDesktopPlugin()
 OpenDesktopPlugin::OpenDesktopPlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
       m_isInitialized(false),
-      m_itemsOnScreen( defaultItemsOnScreen ),
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )
 {
@@ -37,9 +36,8 @@ OpenDesktopPlugin::OpenDesktopPlugin( const MarbleModel *marbleModel )
 
 void OpenDesktopPlugin::initialize()
 {
-    readSettings();
     setModel( new OpenDesktopModel( pluginManager(), this ) );
-    setNumberOfItems( m_itemsOnScreen ); // Setting the number of items on the screen.
+    setNumberOfItems( defaultItemsOnScreen ); // Setting the number of items on the screen.
     m_isInitialized = true;
 }
 
@@ -112,32 +110,33 @@ QDialog *OpenDesktopPlugin::configDialog()
 
 QHash<QString,QVariant> OpenDesktopPlugin::settings() const
 {
-    return m_settings;
+    QHash<QString, QVariant> settings;
+
+    settings.insert( "itemsOnScreen", numberOfItems() );
+
+    return settings;
 }
 
 void OpenDesktopPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
-    m_settings = settings;
-    readSettings();
+    setNumberOfItems( settings.value( "itemsOnScreen", defaultItemsOnScreen ).toInt() );
+
+    emit settingsChanged( nameId() );
 }
 
 void OpenDesktopPlugin::readSettings()
 {
-    m_itemsOnScreen = m_settings.value( "itemsOnScreen", defaultItemsOnScreen ).toInt();
     if ( m_uiConfigWidget ) {
-        m_uiConfigWidget->m_itemsOnScreenSpin->setValue( m_itemsOnScreen );
+        m_uiConfigWidget->m_itemsOnScreenSpin->setValue( numberOfItems() );
     }
-
-    setNumberOfItems( m_itemsOnScreen );
 }
 
 void OpenDesktopPlugin::writeSettings()
 {
     if ( m_uiConfigWidget ) {
-        m_settings["itemsOnScreen"] = m_uiConfigWidget->m_itemsOnScreenSpin->value();
+        setNumberOfItems( m_uiConfigWidget->m_itemsOnScreenSpin->value() );
     }
 
-    readSettings();
     emit settingsChanged( nameId() );
 }
 

@@ -13,9 +13,6 @@
 
 #include "AbstractDataPlugin.h"
 #include "DialogConfigurationInterface.h"
-#include "RenderPlugin.h"
-#include "RenderPluginInterface.h"
-#include <QtGui/QIcon>
 
 namespace Ui {
     class OpenDesktopConfigWidget;
@@ -74,9 +71,6 @@ private Q_SLOTS:
  private:
     bool m_isInitialized;
 
-    int m_itemsOnScreen;
-
-    QHash<QString,QVariant> m_settings;
     QDialog * m_configDialog;
     Ui::OpenDesktopConfigWidget * m_uiConfigWidget;
 };
