@@ -35,17 +35,16 @@ void RenderPluginTest::restoreDefaultSettings_data()
     QTest::addColumn<QVariant>( "expected" );
 
     foreach ( const RenderPlugin *plugin, m_model.pluginManager()->renderPlugins() ) {
-        RenderPlugin *const instance1 = plugin->newInstance( &m_model );
-        instance1->initialize();
+        RenderPlugin *const result = plugin->newInstance( &m_model );
+        result->initialize();
 
-        RenderPlugin *const instance2 = plugin->newInstance( &m_model );
-        instance2->initialize();
+        RenderPlugin *const expected = plugin->newInstance( &m_model );
+        expected->initialize();
+        expected->restoreDefaultSettings();
 
-        instance2->restoreDefaultSettings();
-
-        foreach ( const QString &key, instance1->settings().keys() ) {
+        foreach ( const QString &key, result->settings().keys() ) {
             const QString testName = QString( "%1 %2" ).arg( plugin->nameId() ).arg( key );
-            QTest::newRow( testName.toAscii() ) << instance1->settings().value( key ) << instance2->settings().value( key );
+            QTest::newRow( testName.toAscii() ) << result->settings().value( key ) << expected->settings().value( key );
         }
     }
 }
