@@ -17,19 +17,24 @@
 #include <QtCore/QObject>
 #include <QtCore/QDateTime>
 
-class QTimer;
-
 namespace Marble
 {
+
+class MarbleClockPrivate;
 
 class GEODATA_EXPORT MarbleClock : public QObject
 {
     Q_OBJECT
 
  public:
-    MarbleClock();
+    explicit MarbleClock( QObject* parent = 0 );
+
     ~MarbleClock();
 
+    /**
+     * @brief Determine how much of the current day has elapsed
+     * @return A value between 0 and 1 corresponding to the fraction of the day that has elapsed
+     */
     qreal dayFraction() const;
 
  Q_SIGNALS:
@@ -94,18 +99,14 @@ public:
      **/
     int timezone() const;
 
- private Q_SLOTS:
-    void timerTimeout();
-
- protected:
+ private:
     Q_DISABLE_COPY( MarbleClock )
 
-    int        m_speed;
-    QTimer    *m_timer;
-    QDateTime  m_datetime;        // stores the UTC time
-    QDateTime  m_lasttime;
-    int        m_timezoneInSec;
-    int        m_updateInterval;
+    Q_PRIVATE_SLOT( d,  void timerTimeout() )
+
+    MarbleClockPrivate* const d;
+
+    friend class MarbleClockPrivate;
 };
 
 }

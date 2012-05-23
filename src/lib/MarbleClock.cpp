@@ -10,51 +10,45 @@
 //
 
 #include "MarbleClock.h"
-#include <QtCore/QTimer>
-
 #include "MarbleDebug.h"
 
-using namespace Marble;
+#include <QtCore/QTimer>
 
-MarbleClock::MarbleClock()
-    : QObject(),
-      m_speed( 1 ),
-#if QT_VERSION < 0x040700	
-      m_datetime( QDateTime::currentDateTime().toUTC() ),
-      m_lasttime( QDateTime::currentDateTime().toUTC() ),
-#else      
-      m_datetime( QDateTime::currentDateTimeUtc() ),
-      m_lasttime( QDateTime::currentDateTimeUtc() ),
+namespace Marble {
+
+class MarbleClockPrivate
+{
+public:
+    MarbleClock* q;
+    int        m_speed;
+    QTimer     m_timer;
+    QDateTime  m_datetime;        // stores the UTC time
+    QDateTime  m_lasttime;
+    int        m_timezoneInSec;
+    int        m_updateInterval;
+
+    explicit MarbleClockPrivate( MarbleClock* parent );
+
+    void timerTimeout();
+};
+
+MarbleClockPrivate::MarbleClockPrivate( MarbleClock* parent ) :
+    q( parent ),
+    m_speed( 1 ),
+#if QT_VERSION < 0x040700
+    m_datetime( QDateTime::currentDateTime().toUTC() ),
+    m_lasttime( QDateTime::currentDateTime().toUTC() ),
+#else
+    m_datetime( QDateTime::currentDateTimeUtc() ),
+    m_lasttime( QDateTime::currentDateTimeUtc() ),
 #endif
-      m_timezoneInSec( 0 ),
-      m_updateInterval( 60 )
+    m_timezoneInSec( 0 ),
+    m_updateInterval( 60 )
 {
-
-    m_timer = new QTimer( this );
-    connect( m_timer, SIGNAL( timeout() ), 
-             this,    SLOT( timerTimeout() ) );
-    timerTimeout();
+    // nothing to do
 }
 
-
-MarbleClock::~MarbleClock()
-{
-}
-
-
-qreal MarbleClock::dayFraction() const
-{
-    qreal f;
-    f = m_datetime.time().second();
-    f = f/60.0 + m_datetime.time().minute();
-    f = f/60.0 + m_datetime.time().hour();
-    f = f/24.0;
-
-    return f;
-}
-
-
-void MarbleClock::timerTimeout()
+void MarbleClockPrivate::timerTimeout()
 {
     // calculate real period elapsed since last call
 #if QT_VERSION < 0x040700
@@ -70,7 +64,7 @@ void MarbleClock::timerTimeout()
     m_datetime = m_datetime.addMSecs( msecdelta * m_speed );
 
     // trigger round minute update (at m_speed pace)
-    emit timeChanged();
+    emit q->timeChanged();
 
     // sleeptime is the time to sleep until next round minute, at m_speed pace
     int sleeptime = ( m_updateInterval * 1000 - (qreal)(m_datetime.time().msec() + m_datetime.time().second() * 1000 ) ) / m_speed;
@@ -78,53 +72,78 @@ void MarbleClock::timerTimeout()
         // don't trigger more often than 1s
         sleeptime = 1000;
     }
-    m_timer->start( sleeptime );
+    m_timer.start( sleeptime );
 
     //mDebug() << "MarbleClock: will sleep for " << sleeptime;
 }
 
+MarbleClock::MarbleClock( QObject* parent )
+    : QObject( parent ), d( new MarbleClockPrivate( this ) )
+
+{
+    connect( &d->m_timer, SIGNAL( timeout() ),
+             this,    SLOT( timerTimeout() ) );
+    d->timerTimeout();
+}
+
+
+MarbleClock::~MarbleClock()
+{
+    delete d;
+}
+
+qreal MarbleClock::dayFraction() const
+{
+    qreal fraction = d->m_datetime.time().second();
+    fraction = fraction/60.0 + d->m_datetime.time().minute();
+    fraction = fraction/60.0 + d->m_datetime.time().hour();
+    fraction = fraction/24.0;
+    return fraction;
+}
+
 void MarbleClock::setDateTime( const QDateTime& datetime )
 {
-    m_datetime = datetime;
-    timerTimeout();
+    d->m_datetime = datetime;
+    d->timerTimeout();
 }
 
 QDateTime MarbleClock::dateTime() const
 {
-    return m_datetime;
+    return d->m_datetime;
 }
 
 void MarbleClock::setUpdateInterval( int seconds )
 {
-    m_updateInterval = seconds;
-
+    d->m_updateInterval = seconds;
     emit updateIntervalChanged( seconds );
 }
 
 int MarbleClock::updateInterval()
 {
-    return m_updateInterval;
+    return d->m_updateInterval;
 }
 
 int MarbleClock::speed() const
 {
-    return m_speed;
+    return d->m_speed;
 }
 
 void MarbleClock::setSpeed( int speed )
 {
-    m_speed = speed;
-    timerTimeout();
+    d->m_speed = speed;
+    d->timerTimeout();
 }
 
 int MarbleClock::timezone() const
 {
-    return m_timezoneInSec;
+    return d->m_timezoneInSec;
 }
 
 void MarbleClock::setTimezone( int timezoneInSec )
 {
-    m_timezoneInSec = timezoneInSec;
+    d->m_timezoneInSec = timezoneInSec;
+}
+
 }
 
 #include "MarbleClock.moc"
