@@ -747,11 +747,14 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
     // In QPathClipper We Trust ...
     // ... and in the speed of a threesome of nested foreachs!
 
+    QPen oldPen = pen();
+    setPen( QPen( Qt::NoPen ) );
+
     QVector<GeoDataLinearRing> innerBoundaries = polygon.innerBoundaries(); 
     foreach( const GeoDataLinearRing& itInnerBoundary, innerBoundaries ) {
         QVector<QPolygonF*> innerPolygons;
         d->createPolygonsFromLinearRing( itInnerBoundary, innerPolygons );
-        
+
         foreach( QPolygonF* itOuterPolygon, outerPolygons ) {
             foreach( QPolygonF* itInnerPolygon, innerPolygons ) {
                 *itOuterPolygon = itOuterPolygon->subtracted( *itInnerPolygon );
@@ -762,6 +765,13 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
 
     foreach( QPolygonF* itOuterPolygon, outerPolygons ) {
         ClipPainter::drawPolygon( *itOuterPolygon, fillRule );
+    }
+
+    // Paint the outline separately to avoid connections between points on the outer ring and the holes
+    setPen( oldPen );
+    drawPolyline( polygon.outerBoundary() );
+    foreach( const GeoDataLinearRing &ring, polygon.innerBoundaries() ) {
+        drawPolyline( ring );
     }
 
     qDeleteAll( outerPolygons );    
