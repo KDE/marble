@@ -31,6 +31,8 @@ static GeoTagHandlerRegistrar osmOsmTagHandler( GeoParser::QualifiedName( osmTag
 
 GeoNode* OsmOsmTagHandler::parse( GeoParser& parser ) const
 {
+    // Osm Node http://wiki.openstreetmap.org/wiki/Data_Primitives#Node
+
     GeoDataDocument* doc = geoDataDoc( parser );
 
     GeoDataPolyStyle backgroundPolyStyle;

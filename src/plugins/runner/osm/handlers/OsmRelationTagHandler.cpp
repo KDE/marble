@@ -8,15 +8,16 @@
 // Copyright 2011      Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
 //
 
-#include "OsmWayTagHandler.h"
+#include "OsmRelationTagHandler.h"
 
 #include "GeoParser.h"
-#include "OsmWayFactory.h"
+#include "OsmNodeFactory.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
-#include "GeoDataLineString.h"
+#include "GeoDataPolygon.h"
 #include "OsmElementDictionary.h"
+#include "MarbleDebug.h"
 
 namespace Marble
 {
@@ -24,30 +25,28 @@ namespace Marble
 namespace osm
 {
 
-static GeoTagHandlerRegistrar osmWayTagHandler( GeoParser::QualifiedName( osmTag_way, "" ),
-        new OsmWayTagHandler() );
+static GeoTagHandlerRegistrar osmRelationTagHandler( GeoParser::QualifiedName( osmTag_relation, "" ),
+        new OsmRelationTagHandler() );
 
-GeoNode* OsmWayTagHandler::parse( GeoParser& parser ) const
+GeoNode* OsmRelationTagHandler::parse( GeoParser& parser ) const
 {
-    // Osm Way http://wiki.openstreetmap.org/wiki/Data_Primitives#Way
+    // Osm Relation http://wiki.openstreetmap.org/wiki/Data_Primitives#Relation
 
     Q_ASSERT( parser.isStartElement() );
 
     GeoDataDocument* doc = geoDataDoc( parser );
     Q_ASSERT( doc );
 
-    GeoDataLineString *polyline = new GeoDataLineString();
+    GeoDataPolygon *polygon = new GeoDataPolygon();
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
-    placemark->setGeometry( polyline );
+    placemark->setGeometry( polygon );
 
     // In the begining visibility = false. Afterwards when it parses
     // the tags for the placemark it will decide if it should be displayed or not
     placemark->setVisible( false );
     doc->append( placemark );
 
-    osm::OsmWayFactory::appendLine( parser.attribute( "id" ).toULongLong(), polyline );
-
-    return polyline;
+    return polygon;
 }
 
 }

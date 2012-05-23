@@ -8,15 +8,15 @@
 // Copyright 2011 Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
 //
 
-#ifndef MARBLE_OSMNODEFACTORY_H
-#define MARBLE_OSMNODEFACTORY_H
+#ifndef MARBLE_OSMWAYFACTORY_H
+#define MARBLE_OSMWAYFACTORY_H
 
 #include <QMap>
 
 namespace Marble
 {
 
-class GeoDataPoint;
+class GeoDataLineString;
 
 namespace osm
 {
@@ -25,24 +25,24 @@ namespace osm
 // for when needed by ways. Ways have only the ids of
 // nodes so with that id the GeoDataPoint is returned
 
-class OsmNodeFactory
+class OsmWayFactory
 {
 public:
-    static void appendPoint( quint64 id, GeoDataPoint *p );
-    static GeoDataPoint *getPoint( quint64 id );
+    static void appendLine( quint64 id, GeoDataLineString *l );
+    static GeoDataLineString *getLine( quint64 id );
 
     /**
-     * @brief Clean up nodes
-     * Removes all nodes from factory.
+     * @brief Clean up ways
+     * Removes all ways from factory.
      * This function must be called only after file loaded.
      */
     static void cleanUp();
 
 private:
-    static QMap<quint64, GeoDataPoint *> m_points;
+    static QMap<quint64, GeoDataLineString *> m_lines;
 };
 
 }
 }
 
-#endif // MARBLE_OSMNODEFACTORY_H
+#endif // MARBLE_OSMWAYFACTORY_H

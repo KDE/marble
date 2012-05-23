@@ -53,6 +53,7 @@ GeoNode* OsmBoundsTagHandler::parse( GeoParser& parser ) const
     doc->append( pl );
 
     mDebug() << "[OSM] Bounds: " << minlat << " " << minlon << " " << maxlat << " " << maxlon;
+
     return 0;
 }
 

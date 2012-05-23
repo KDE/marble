@@ -17,6 +17,10 @@ namespace osm
 {
 QMap<quint64, GeoDataPoint *> OsmNodeFactory::m_points;
 
+// This is a class for keeping all the nodes accesible
+// for when needed by ways. Ways have only the ids of
+// nodes so with that id the GeoDataPoint is returned
+
 void OsmNodeFactory::appendPoint( quint64 id, GeoDataPoint* p )
 {
     m_points[id] = p;

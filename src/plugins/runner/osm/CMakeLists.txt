@@ -17,8 +17,11 @@ set( osm_handlers_SRCS
         handlers/OsmNodeFactory.cpp
         handlers/OsmNodeTagHandler.cpp
         handlers/OsmOsmTagHandler.cpp
+        handlers/OsmRelationTagHandler.cpp
+        handlers/OsmMemberTagHandler.cpp
         handlers/OsmTagTagHandler.cpp
         handlers/OsmWayTagHandler.cpp
+        handlers/OsmWayFactory.cpp
    )
 
 set( osm_SRCS OsmParser.cpp OsmPlugin.cpp OsmRunner.cpp )
