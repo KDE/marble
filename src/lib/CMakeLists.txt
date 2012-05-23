@@ -388,6 +388,7 @@ else (APPLE AND QTONLY)
     geodata/data/GeoDataStyle.h
     geodata/data/GeoDataStyleMap.h
     geodata/data/GeoDataStyleSelector.h
+    geodata/data/GeoDataTrack.h
     geodata/data/Serializable.h
     geodata/geodata_export.h
     geodata/parser/GeoDocument.h

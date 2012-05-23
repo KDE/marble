@@ -15,12 +15,13 @@
 #include "GeoDataGeometry.h"
 
 #include <QtCore/QDateTime>
-#include <QtCore/QPair>
+#include <QtCore/QList>
 
 namespace Marble {
 
 class GeoDataTrackPrivate;
 class GeoDataExtendedData;
+class GeoDataLineString;
 
 /**
  * @class GeoDataTrack
