@@ -189,12 +189,7 @@ bool GeoDataLatLonAltBox::contains( const GeoDataLatLonAltBox &other ) const
     // mDebug() << "other" << other.toString(GeoDataCoordinates::Degree);
 
     if ( d->m_maxAltitude >= other.maxAltitude() && d->m_minAltitude <= other.minAltitude() ) {
-
-        GeoDataLatLonBox tempThis(  *this );
-        GeoDataLatLonBox tempOther( other );
-        if ( tempThis.contains( tempOther ) ) {
-            return true;
-        }
+        return GeoDataLatLonBox::contains( other );
     }
 
     return false;

@@ -28,11 +28,10 @@ class TestGeoDataLatLonAltBox : public QObject
     Q_OBJECT
 
 private slots:
-    void testConstruction_data(); //i'll test the 3 types of constructor: from GeoDataLatLonAltBox, from GeoDataLatLonBox, from GeoDataCoordinates
+    void testConstruction_data();
     void testConstruction();
     void testAltitude_data();
     void testAltitude();
-    void testContains_data(); //again 3 types of constructor: GeoDataLatLonAltBox, GeoDataPoint, GeoDataCoordinates
     void testContains();
     void testIntersects_data();
     void testIntersects();
@@ -143,12 +142,26 @@ void TestGeoDataLatLonAltBox::testAltitude()
 }
 
 
-void TestGeoDataLatLonAltBox::testContains_data() {
-    
-}
+void TestGeoDataLatLonAltBox::testContains()
+{
+    GeoDataLatLonAltBox const largeBox = GeoDataLatLonAltBox::fromLineString( GeoDataLineString()
+            << GeoDataCoordinates( -20.0, +10.0, 15.0, GeoDataCoordinates::Degree )
+            << GeoDataCoordinates( +20.0, -10.0, 25.0, GeoDataCoordinates::Degree ) );
+    GeoDataLatLonAltBox const smallBox = GeoDataLatLonAltBox::fromLineString( GeoDataLineString()
+            << GeoDataCoordinates( -2.0, +1.0, 18.0, GeoDataCoordinates::Degree )
+            << GeoDataCoordinates( +2.0, -1.0, 22.0, GeoDataCoordinates::Degree ) );
 
-void TestGeoDataLatLonAltBox::testContains() {
-    
+    QVERIFY( largeBox.contains( GeoDataCoordinates( 5.0, 5.0, 20.0, GeoDataCoordinates::Degree ) ) );
+    QVERIFY( largeBox.contains( smallBox ) );
+    QVERIFY( largeBox.contains( largeBox ) );
+    QVERIFY( !smallBox.contains( largeBox ) );
+    QVERIFY(  smallBox.contains( GeoDataCoordinates(    0.0,   0.0, 20.0, GeoDataCoordinates::Degree ) ) );
+    QVERIFY( !largeBox.contains( GeoDataCoordinates(   5.0,   5.0, 30.0, GeoDataCoordinates::Degree ) ) );
+    QVERIFY( !largeBox.contains( GeoDataCoordinates(   5.0,   5.0, 10.0, GeoDataCoordinates::Degree ) ) );
+    QVERIFY( !largeBox.contains( GeoDataCoordinates(  35.0,   5.0, 20.0, GeoDataCoordinates::Degree ) ) );
+    QVERIFY( !largeBox.contains( GeoDataCoordinates( -35.0,   5.0, 20.0, GeoDataCoordinates::Degree ) ) );
+    QVERIFY( !largeBox.contains( GeoDataCoordinates(   5.0,  35.0, 20.0, GeoDataCoordinates::Degree ) ) );
+    QVERIFY( !largeBox.contains( GeoDataCoordinates(   5.0, -35.0, 20.0, GeoDataCoordinates::Degree ) ) );
 }
 
 void TestGeoDataLatLonAltBox::testIntersects_data()
