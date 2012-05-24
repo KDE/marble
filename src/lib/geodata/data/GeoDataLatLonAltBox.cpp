@@ -169,18 +169,6 @@ bool GeoDataLatLonAltBox::contains( const GeoDataCoordinates &point ) const
     return true;
 }
 
-bool GeoDataLatLonAltBox::contains( const GeoDataPoint &point ) const
-{
-    if ( !GeoDataLatLonBox::contains( point ) )
-        return false;
-
-    if ( point.altitude() < d->m_minAltitude || point.altitude() > d->m_maxAltitude ) {
-        return false;
-    }
-
-    return true;
-}
-
 bool GeoDataLatLonAltBox::contains( const GeoDataLatLonAltBox &other ) const
 {
     // check the contain criterion for the altitude first as this is trivial:

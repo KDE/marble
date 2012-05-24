@@ -317,24 +317,6 @@ bool GeoDataLatLonBox::contains( const GeoDataCoordinates &point ) const
     return true;
 }
 
-bool GeoDataLatLonBox::contains( const GeoDataPoint &point ) const
-{
-    qreal lon, lat;
-
-    point.geoCoordinates( lon, lat );
-
-    // We need to take care of the normal case ...
-    if ( ( ( lon < d->m_west || lon > d->m_east ) && ( d->m_west < d->m_east ) ) ||
-    // ... and the case where the bounding box crosses the date line:
-         ( ( lon > d->m_west || lon < d->m_east ) && ( d->m_west > d->m_east ) ) )
-        return false;
-    
-    if ( lat < d->m_south || lat > d->m_north )
-        return false;
-
-    return true;
-}
-
 bool GeoDataLatLonBox::contains( const GeoDataLatLonBox &other ) const
 {
     // check the contain criterion for the latitude first as this is trivial:
