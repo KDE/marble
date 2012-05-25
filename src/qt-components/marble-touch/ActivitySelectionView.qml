@@ -216,6 +216,11 @@ Page {
                     "qrc:/icons/activity-spaceview.png",
                     "qrc:/activities/SpaceView.qml"
                     )
+        activityModel.addActivity(
+                    "Explore",
+                    "qrc:/icons/activity-spaceview.png",
+                    "qrc:/activities/SpaceView.qml"
+                    )
 
         // @todo: Terms of usage still not clear
         //            activityModel.addActivity(
