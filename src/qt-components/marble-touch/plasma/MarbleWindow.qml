@@ -12,9 +12,13 @@ import org.kde.edu.marble 0.11
 import QtQuick 1.0
 import com.nokia.meego 1.0
 
-Window {
+Item {
     id: main
+    
+    width: 800
+    height: 480
 
+    property bool inPortrait: height > width
     property variant initialPage: activitySelection
     property Item marbleWidget: null
     property string components: "plasma"
