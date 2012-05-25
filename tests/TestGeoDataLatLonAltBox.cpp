@@ -40,6 +40,7 @@ private slots:
     void testUnited_data();
     void testUnited();
     void testIdlCrossing();
+    void testDefaultConstruction();
 
     void testFromLineString_data();
     void testFromLineString();
@@ -395,6 +396,33 @@ void TestGeoDataLatLonAltBox::testIdlCrossing()
     QCOMPARE( box.east(), M_PI );
     QCOMPARE( box.north(), 0.0 );
     QCOMPARE( box.south(), 0.0 );
+}
+
+void TestGeoDataLatLonAltBox::testDefaultConstruction()
+{
+    GeoDataLatLonBox const null;
+    QVERIFY( null.isNull() );
+    QVERIFY( null.isEmpty() );
+    QVERIFY( (null|null).isNull() );
+    QVERIFY( (null|null).isEmpty() );
+
+    GeoDataLatLonBox const box( 0.5, 0.4, 0.3, 0.2 );
+
+    GeoDataLatLonBox const leftUnited = null | box;
+    QCOMPARE( leftUnited.west(), 0.2 );
+    QCOMPARE( leftUnited.east(), 0.3 );
+    QCOMPARE( leftUnited.north(), 0.5 );
+    QCOMPARE( leftUnited.south(), 0.4 );
+
+    GeoDataLatLonBox const rightUnited = box | null;
+    QCOMPARE( rightUnited.west(), 0.2 );
+    QCOMPARE( rightUnited.east(), 0.3 );
+    QCOMPARE( rightUnited.north(), 0.5 );
+    QCOMPARE( rightUnited.south(), 0.4 );
+
+    QVERIFY( !null.intersects( null ) );
+    QVERIFY( !null.intersects( box ) );
+    QVERIFY( !box.intersects( null ) );
 }
 
 qreal TestGeoDataLatLonAltBox::randomLon() 

@@ -161,7 +161,7 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     virtual bool isNull() const;
 
     /**
-     * @brief Indicates whether the bounding box is not initialised (and contains all).
+     * @brief Indicates whether the bounding box is not initialised (and contains nothing).
      * @return Return value is true if bounding box is not initialised.
      */
     virtual bool isEmpty() const;
