@@ -57,12 +57,21 @@ GeoDataLatLonAltBox GeoDataContainer::latLonAltBox() const
     QVector<GeoDataFeature*>::const_iterator it = p()->m_vector.constBegin();
     QVector<GeoDataFeature*>::const_iterator end = p()->m_vector.constEnd();
     for (; it != end; ++it) {
+
+        // Get all the placemarks from GeoDataContainer
         if ( (*it)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
             GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(*it);
-            if (result.isEmpty()) {
-                result = placemark->geometry()->latLonAltBox();
-            } else {
-                result |= placemark->geometry()->latLonAltBox();
+
+            // Only use visible placemarks for extracting their latLonAltBox and
+            // making an union with the global latLonAltBox Marble will fit its
+            // zoom to
+            if (placemark->isVisible())
+            {
+                if (result.isEmpty()) {
+                    result = placemark->geometry()->latLonAltBox();
+                } else {
+                    result |= placemark->geometry()->latLonAltBox();
+                }
             }
         }
         else if ( (*it)->nodeType() == GeoDataTypes::GeoDataFolderType
