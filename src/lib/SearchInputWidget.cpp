@@ -21,7 +21,9 @@ SearchInputWidget::SearchInputWidget( QWidget *parent ) :
     MarbleLineEdit( parent ),
     m_completer( new QCompleter( this ) )
 {
+#if QT_VERSION >= 0x40700
     setPlaceholderText( tr( "Search" ) );
+#endif
     QPixmap const decorator = QPixmap( ":/icons/16x16/edit-find.png" );
     Q_ASSERT( !decorator.isNull() );
     setDecorator( decorator );
