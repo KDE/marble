@@ -21,10 +21,6 @@ FILE (GLOB BITMAP_FILES bitmaps/*.jpg)
 install (FILES ${BITMAP_FILES}
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bitmaps)
 
-FILE (GLOB BITMAP_FILES bitmaps/*.xpm)
-install (FILES ${BITMAP_FILES}
-DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bitmaps)
-
 install (FILES 
 svg/marble-logo.svg
 svg/marble-logo.png

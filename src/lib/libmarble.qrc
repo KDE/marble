@@ -4,14 +4,14 @@
     <file>../../data/bitmaps/routing_remove.png</file>
     <file>../../data/bitmaps/routing_pick.png</file>
     <file>../../data/bitmaps/routing_step.png</file>
-    <file>../../data/bitmaps/cursor_bc.xpm</file>
-    <file>../../data/bitmaps/cursor_bl.xpm</file>
-    <file>../../data/bitmaps/cursor_br.xpm</file>
-    <file>../../data/bitmaps/cursor_cl.xpm</file>
-    <file>../../data/bitmaps/cursor_cr.xpm</file>
-    <file>../../data/bitmaps/cursor_tc.xpm</file>
-    <file>../../data/bitmaps/cursor_tl.xpm</file>
-    <file>../../data/bitmaps/cursor_tr.xpm</file>
+    <file alias="marble/cursor/bc.png">../../data/bitmaps/cursor_bc.png</file>
+    <file alias="marble/cursor/bl.png">../../data/bitmaps/cursor_bl.png</file>
+    <file alias="marble/cursor/br.png">../../data/bitmaps/cursor_br.png</file>
+    <file alias="marble/cursor/cl.png">../../data/bitmaps/cursor_cl.png</file>
+    <file alias="marble/cursor/cr.png">../../data/bitmaps/cursor_cr.png</file>
+    <file alias="marble/cursor/tc.png">../../data/bitmaps/cursor_tc.png</file>
+    <file alias="marble/cursor/tl.png">../../data/bitmaps/cursor_tl.png</file>
+    <file alias="marble/cursor/tr.png">../../data/bitmaps/cursor_tr.png</file>
     <file>../../data/bitmaps/turn-around.png</file>
     <file>../../data/bitmaps/turn-continue.png</file>
     <file>../../data/bitmaps/turn-left.png</file>

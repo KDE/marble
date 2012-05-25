@@ -202,14 +202,14 @@ MarbleWidgetDefaultInputHandler::Private::Private( MarbleWidget *widget )
       m_dragThreshold( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 15 : 3 ),
       m_selectionRubber( QRubberBand::Rectangle, widget )
 {
-    m_curpmtl.load( MarbleDirs::path("bitmaps/cursor_tl.xpm") );
-    m_curpmtc.load( MarbleDirs::path("bitmaps/cursor_tc.xpm") );
-    m_curpmtr.load( MarbleDirs::path("bitmaps/cursor_tr.xpm") );
-    m_curpmcr.load( MarbleDirs::path("bitmaps/cursor_cr.xpm") );
-    m_curpmcl.load( MarbleDirs::path("bitmaps/cursor_cl.xpm") );
-    m_curpmbl.load( MarbleDirs::path("bitmaps/cursor_bl.xpm") );
-    m_curpmbc.load( MarbleDirs::path("bitmaps/cursor_bc.xpm") );
-    m_curpmbr.load( MarbleDirs::path("bitmaps/cursor_br.xpm") );
+    m_curpmtl.load( ":/marble/cursor/tl.png");
+    m_curpmtc.load( ":/marble/cursor/tc.png");
+    m_curpmtr.load( ":/marble/cursor/tr.png");
+    m_curpmcr.load( ":/marble/cursor/cr.png");
+    m_curpmcl.load( ":/marble/cursor/cl.png");
+    m_curpmbl.load( ":/marble/cursor/bl.png");
+    m_curpmbc.load( ":/marble/cursor/bc.png");
+    m_curpmbr.load( ":/marble/cursor/br.png");
 
     m_arrowCur[0][0] = QCursor( m_curpmtl, 2, 2 );
     m_arrowCur[1][0] = QCursor( m_curpmtc, 10, 3 );
