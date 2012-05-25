@@ -922,6 +922,9 @@ void GeoDataFeature::initializeOsmVisualCategories()
     s_visualCategories["place=town"]                = GeoDataFeature::BigCity;
     s_visualCategories["place=village"]             = GeoDataFeature::MediumCity;
 
+    // Default for buildings
+    s_visualCategories["building=yes"]              = GeoDataFeature::Building;
+
 }
 
 }

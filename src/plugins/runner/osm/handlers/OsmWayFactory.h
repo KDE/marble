@@ -21,9 +21,9 @@ class GeoDataLineString;
 namespace osm
 {
 
-// This is a class for keeping all the nodes accesible
-// for when needed by ways. Ways have only the ids of
-// nodes so with that id the GeoDataPoint is returned
+// This is a class for keeping all the ways accesible
+// for when needed by relations. Relationss have only the ids of
+// ways so with that id the GeoDataLineString is returned
 
 class OsmWayFactory
 {

@@ -40,7 +40,7 @@ GeoNode* OsmWayTagHandler::parse( GeoParser& parser ) const
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
     placemark->setGeometry( polyline );
 
-    // In the begining visibility = false. Afterwards when it parses
+    // At the begining visibility = false. Afterwards when parsing
     // the tags for the placemark it will decide if it should be displayed or not
     placemark->setVisible( false );
     doc->append( placemark );

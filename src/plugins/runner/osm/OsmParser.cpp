@@ -13,6 +13,7 @@
 
 #include "OsmNodeFactory.h"
 #include "OsmWayFactory.h"
+#include "OsmRelationFactory.h"
 #include "OsmGlobals.h"
 
 namespace Marble {
@@ -24,8 +25,9 @@ OsmParser::OsmParser()
 
 OsmParser::~OsmParser()
 {
-    osm::OsmNodeFactory::cleanUp();
+    osm::OsmRelationFactory::cleanUp();
     osm::OsmWayFactory::cleanUp();
+    osm::OsmNodeFactory::cleanUp();
     osm::OsmGlobals::cleanUpDummyPlacemarks();
 }
 

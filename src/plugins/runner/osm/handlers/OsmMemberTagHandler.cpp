@@ -12,6 +12,7 @@
 
 #include "GeoParser.h"
 #include "OsmWayFactory.h"
+#include "OsmRelationFactory.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
@@ -44,8 +45,8 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser& parser ) const
 
         if (parser.attribute( "type" ) == "way")
         {
-            // Outer poligons
-            if (parser.attribute( "role" ) == "outer")
+            // Outer poligons (sometimes the role is empty)
+            if (parser.attribute( "role" ) == "outer" || parser.attribute( "role" ) == "")
             {
 
                 GeoDataPolygon *s = parentItem.nodeAs<GeoDataPolygon>();
@@ -95,7 +96,6 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser& parser ) const
                         {
                             envelope.append( GeoDataCoordinates ( l->at(x).longitude(), l->at(x).latitude() ) );
                         }
-
                     }
 
                     // Case 2: l.first = envelope.last
@@ -106,7 +106,6 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser& parser ) const
                         {
                             envelope.append( GeoDataCoordinates ( l->at(x).longitude(), l->at(x).latitude() ) );
                         }
-
                     }
 
                     // Case 3: l.last = envelope.first
@@ -127,8 +126,6 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser& parser ) const
                         {
                             envelope.append( GeoDataCoordinates ( l->at(x).longitude(), l->at(x).latitude() ) );
                         }
-
-
                     }
 
                     // Case 4: l.last = envelope.last
@@ -143,14 +140,12 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser& parser ) const
 
                     // Update the outer boundary
                     s->setOuterBoundary( envelope );
-
                 }
             }
 
             // Inner poligons
             if (parser.attribute( "role" ) == "inner")
             {
-
                 GeoDataPolygon *s = parentItem.nodeAs<GeoDataPolygon>();
                 Q_ASSERT( s );
                 quint64 id = parser.attribute( "ref" ).toULongLong();
@@ -165,6 +160,32 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser& parser ) const
                         temp->append( GeoDataCoordinates ( l->at(x).longitude(), l->at(x).latitude() ) );
                     }
                     s->appendInnerBoundary( *temp );
+                }
+            }
+        }
+
+        else if (parser.attribute( "type" ) == "relation")
+        {
+            // Never seen this case
+            if ( parser.attribute( "role" ) == "outer" )
+            {
+                mDebug() << "Parsed relation with a relation outer member";
+            }
+
+            // It only can be an inner relation or subarea
+            // Subarea is mainly used for administrative boundaries
+            else if (parser.attribute( "role" ) == "inner"
+                     || parser.attribute( "role" ) == "subarea"
+                     || parser.attribute( "role" ) == "")
+            {
+                GeoDataPolygon *s = parentItem.nodeAs<GeoDataPolygon>();
+                Q_ASSERT( s );
+                quint64 id = parser.attribute( "ref" ).toULongLong();
+
+                // With the id we get the relation geometry
+                if ( GeoDataPolygon *p =  osm::OsmRelationFactory::getPolygon( id )  )
+                {
+                    s->appendInnerBoundary( p->outerBoundary() );
                 }
             }
         }

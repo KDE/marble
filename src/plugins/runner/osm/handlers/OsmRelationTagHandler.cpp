@@ -11,7 +11,7 @@
 #include "OsmRelationTagHandler.h"
 
 #include "GeoParser.h"
-#include "OsmNodeFactory.h"
+#include "OsmRelationFactory.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
@@ -45,6 +45,8 @@ GeoNode* OsmRelationTagHandler::parse( GeoParser& parser ) const
     // the tags for the placemark it will decide if it should be displayed or not
     placemark->setVisible( false );
     doc->append( placemark );
+
+    osm::OsmRelationFactory::appendPolygon( parser.attribute( "id" ).toULongLong(), polygon );
 
     return polygon;
 }

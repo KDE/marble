@@ -33,10 +33,9 @@ GeoDataLineString* OsmWayFactory::getLine( quint64 id )
 
 void OsmWayFactory::cleanUp()
 {
-
     //foreach( GeoDataLineString *l, m_lines )
     //{
-        //delete l;
+    //delete l;
     //}
     m_lines.clear();
 }
