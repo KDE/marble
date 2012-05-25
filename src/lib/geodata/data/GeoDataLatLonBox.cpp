@@ -25,10 +25,10 @@ class GeoDataLatLonBoxPrivate
 {
  public:
     GeoDataLatLonBoxPrivate()
-        : m_north( +M_PI / 2.0 ),
-          m_south( -M_PI / 2.0 ),
-          m_east(  +M_PI ),
-          m_west(  -M_PI ),
+        : m_north( 0.0 ),
+          m_south( 0.0 ),
+          m_east( 0.0 ),
+          m_west( 0.0 ),
           m_rotation( 0.0 )
     {
     }
@@ -395,6 +395,10 @@ bool GeoDataLatLonBox::contains( const GeoDataLatLonBox &other ) const
 
 bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox &other ) const
 {
+    if ( isEmpty() || other.isEmpty() ) {
+        return false;
+    }
+
     // check the intersection criterion for the latitude first:
 
            // Case 1: northern boundary of other box intersects:
@@ -452,6 +456,14 @@ bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox &other ) const
 
 GeoDataLatLonBox GeoDataLatLonBox::united( const GeoDataLatLonBox& other ) const
 {
+    if ( isEmpty() ) {
+        return other;
+    }
+
+    if ( other.isEmpty() ) {
+        return *this;
+    }
+
     GeoDataLatLonBox result;
 
     // use the position of the centers of the boxes to determine the "smallest"
@@ -557,8 +569,8 @@ void GeoDataLatLonBox::unpack( QDataStream& stream )
 
 GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lineString  )
 {
-    // If the line string is empty return a boundingbox that contains everything
-    if ( lineString.size() == 0 ) {
+    // If the line string is empty return an empty boundingbox
+    if ( lineString.isEmpty() ) {
         return GeoDataLatLonBox();
     }
 
