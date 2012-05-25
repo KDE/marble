@@ -10,18 +10,20 @@
 //
 
 #include "MapThemeSortFilterProxyModel.h"
+
 #include <QtCore/QString>
 #include <QtCore/QModelIndex>
 #include <QtCore/QDateTime>
+#include <QtCore/QSettings>
 
-using namespace Marble;
 /* TRANSLATOR Marble::MapThemeSortFilterProxyModel */
 
-QSettings MapThemeSortFilterProxyModel::sm_settings( "kde.org", "Marble Desktop Globe" );
+namespace Marble {
 
-MapThemeSortFilterProxyModel::MapThemeSortFilterProxyModel(QObject *parent)
-    : QSortFilterProxyModel(parent)
+MapThemeSortFilterProxyModel::MapThemeSortFilterProxyModel( QObject *parent )
+    : QSortFilterProxyModel( parent )
 {
+    // nothing to do
 }
 
 bool MapThemeSortFilterProxyModel::lessThan ( const QModelIndex & left, const QModelIndex & right ) const
@@ -44,33 +46,28 @@ bool MapThemeSortFilterProxyModel::lessThan ( const QModelIndex & left, const QM
     return sourceModel()->data( left ).toString() < sourceModel()->data( right ).toString();;
 }
 
-bool MapThemeSortFilterProxyModel::filterAcceptsRow(int sourceRow,
-         const QModelIndex &sourceParent) const
+bool MapThemeSortFilterProxyModel::filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const
  {
      QModelIndex index = sourceModel()->index(sourceRow, 1, sourceParent);
-
-     return (sourceModel()->data(index).toString().contains(filterRegExp()));
-            
+     return (sourceModel()->data( index ).toString().contains( filterRegExp() ) );
  }
  
-bool MapThemeSortFilterProxyModel::isFavorite( const QModelIndex& index )
+bool MapThemeSortFilterProxyModel::isFavorite( const QModelIndex& index ) const
 {
-    sm_settings.beginGroup( "Favorites" );
     const QAbstractItemModel *model = index.model();
     QModelIndex columnIndex = model->index( index.row(), 0, QModelIndex() );
-    bool favorite = sm_settings.contains( model->data( columnIndex ).toString() );
-    sm_settings.endGroup();
-    return favorite;
+    QString const key = "Favorites/" + model->data( columnIndex ).toString();
+    return QSettings( "kde.org", "Marble Desktop Globe" ).contains( key );
 }
 
-QDateTime MapThemeSortFilterProxyModel::favoriteDateTime( const QModelIndex& index )
+QDateTime MapThemeSortFilterProxyModel::favoriteDateTime( const QModelIndex& index ) const
 {
     const QAbstractItemModel *model = index.model();
     QModelIndex columnIndex = model->index( index.row(), 0, QModelIndex() );
-    sm_settings.beginGroup( "Favorites" );
-    QDateTime dateTime = sm_settings.value( model->data( columnIndex ).toString() ).toDateTime();
-    sm_settings.endGroup();
-    return dateTime;
+    QString const key = "Favorites/" + model->data( columnIndex ).toString();
+    return QSettings( "kde.org", "Marble Desktop Globe" ).value( key ).toDateTime();
+}
+
 }
 
 #include "MapThemeSortFilterProxyModel.moc"
