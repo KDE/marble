@@ -273,8 +273,14 @@ void AbstractDataPluginModel::downloadDescriptionFile( const QUrl& url )
 static bool lessThanByPointer( const AbstractDataPluginItem *item1,
                                const AbstractDataPluginItem *item2 )
 {
-    if( item1 != 0 && item2 != 0 ) {
-        return item1->operator<( item2 );
+    if( item1 && item2 ) {
+        // Compare by favorite status (favorites first), then by operator<
+        bool const favorite1 = item1->isFavorite();
+        if ( favorite1 ^ item2->isFavorite() ) {
+            return favorite1 ? item1 : item2;
+        } else {
+            return item1->operator<( item2 );
+        }
     }
     else {
         return false;
