@@ -15,6 +15,8 @@
 #include "marble_export.h"
 #include "RenderPlugin.h"
 
+class QDeclarativeComponent;
+class QGraphicsItem;
 
 namespace Marble
 {
@@ -104,7 +106,12 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
      * @return: The type of render plugin this is.
      */
     virtual RenderType renderType() const;
+
+    void setDelegate( QDeclarativeComponent* delegate, QGraphicsItem* parent );
     
+public Q_SLOTS:
+    void handleViewportChange(GeoPainter *painter, ViewportParams* viewport );
+
  private Q_SLOTS:
     virtual void favoriteItemsChanged( const QStringList& favoriteItems );
 

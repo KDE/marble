@@ -32,6 +32,11 @@ GeoGraphicsItem::GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr )
     setFlag( ItemIsVisible, true );
 }
 
+void GeoGraphicsItem::setProjection(ViewportParams *viewport, GeoPainter *painter)
+{
+    p()->setProjection( viewport, painter );
+}
+
 GeoGraphicsItem::~GeoGraphicsItem()
 {
 }

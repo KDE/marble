@@ -162,6 +162,8 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
      */
     QList<QPointF> positions() const;
 
+    void setProjection( ViewportParams *viewport, GeoPainter *painter );
+
  protected:
     explicit GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr );
 
