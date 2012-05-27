@@ -286,3 +286,8 @@ MarbleGraphicsItemPrivate *MarbleGraphicsItem::p() const
 {
     return d;
 }
+
+void MarbleGraphicsItem::setProjection( ViewportParams *viewport )
+{
+    p()->setProjection( viewport );
+}
