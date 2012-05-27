@@ -47,10 +47,10 @@ const qreal boxComparisonFactor = 16.0;
 
 // Separator to separate the id of the item from the file type
 const char fileIdSeparator = '_';
-    
+
 class AbstractDataPluginModelPrivate
 {
- public:
+public:
     AbstractDataPluginModelPrivate( const QString& name,
                                     const PluginManager *pluginManager,
                                     AbstractDataPluginModel * parent )
@@ -137,18 +137,19 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
     QString target = model->planetId();
     QList<AbstractDataPluginItem*> list;
     
-    d->m_displayedItems.removeAll( 0 );
+    int const removed = d->m_displayedItems.removeAll( 0 ) + d->m_itemSet.removeAll( 0 );
+    // I don't see why the removeAll( 0 ) calls above should be needed. The assert below will trigger
+    // if I'm wrong.
+    Q_ASSERT( !removed && "Null item in item list. Please report a bug to marble-devel@kde.org" );
 
-    QList<AbstractDataPluginItem*>::iterator i = d->m_displayedItems.begin();
-    QList<AbstractDataPluginItem*>::iterator end = d->m_displayedItems.end();
+    QList<AbstractDataPluginItem*> const candidates = d->m_displayedItems + d->m_itemSet;
+    QList<AbstractDataPluginItem*>::const_iterator i = candidates.begin();
+    QList<AbstractDataPluginItem*>::const_iterator end = candidates.end();
 
     // Items that are already shown have the highest priority
     for (; i != end && list.size() < number; ++i ) {
-        // Don't try to access an object that doesn't exist
-        if( !*i ) {
-            continue;
-        }
-    
+        Q_ASSERT( *i ); // checked when adding items, also removeAll(0) above
+
         // Only show items that are initialized
         if( !(*i)->initialized() ) {
             continue;
@@ -165,61 +166,35 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
         
         // If the item was added initially at a nearer position, they don't have priority,
         // because we zoomed out since then.
-        if( (*i)->addedAngularResolution() >= viewport->angularResolution() ) {
-            list.append( *i );
-            (*i)->setSettings( d->m_itemSettings );
-        }
-    }
-        
-    d->m_itemSet.removeAll( 0 );
-    
-    for ( i = d->m_itemSet.begin(), end = d->m_itemSet.end();
-          i != end && list.size() < number; ++i )
-    {
-        // Don't try to access an object that doesn't exist
-        if( !*i ) {
-            mDebug() << "Warning: Null pointer in m_itemSet";
-            continue;
-        }
-        
-        // Only show items that are initialized
-        if( !(*i)->initialized() ) {
-            continue;
-        }
-        
-        // Only show items that are on the current planet
-        if( (*i)->target() != target ) {
-            continue;
-        }
-        
-        // If the item is on the viewport, we want to return it
-        if( currentBox.contains( (*i)->coordinate() )
-            && !list.contains( *i ) )
-        {
-            list.append( *i );
-            (*i)->setSettings( d->m_itemSettings );
-            
-            // We want to save the angular resolution of the first time the item got added.
-            // If it is in the list of displayedItems, it was added before
-            if( !d->m_displayedItems.contains( *i ) ) {
-                (*i)->setAddedAngularResolution( viewport->angularResolution() );
+        bool const alreadyDisplayed = d->m_displayedItems.contains( *i );
+        if( !list.contains( *i ) && ( !alreadyDisplayed || (*i)->addedAngularResolution() >= viewport->angularResolution() ) ) {
+            bool collides = false;
+            int const length = list.length();
+            for ( int j=0; !collides && j<length; ++j ) {
+                foreach( const QRectF &rect, list[j]->boundingRects() ) {
+                    foreach( const QRectF &itemRect, (*i)->boundingRects() ) {
+                        if ( rect.intersects( itemRect ) )
+                            collides = true;
+                    }
+                }
+            }
+
+            if ( !collides ) {
+                list.append( *i );
+                (*i)->setSettings( d->m_itemSettings );
+
+                // We want to save the angular resolution of the first time the item got added.
+                if( !alreadyDisplayed ) {
+                    (*i)->setAddedAngularResolution( viewport->angularResolution() );
+                }
             }
         }
-        // FIXME: We have to do something if the item that is not on the viewport.
+        // TODO: Do we have to cleanup at some point? The list of all items keeps growing
     }
-    
+
+    d->m_lastBox = currentBox;
+    d->m_lastNumber = number;
     d->m_lastMarbleModel = model;
-    
-    if( (!(currentBox == d->m_lastBox)
-          || number != d->m_lastNumber ) )
-    {
-        d->m_lastBox = currentBox;
-        d->m_lastNumber = number;
-        d->m_lastMarbleModel = model;
-    }
-    else {
-    }
-    
     d->m_displayedItems = list;
     return list;
 }
@@ -261,7 +236,7 @@ void AbstractDataPluginModel::downloadItemData( const QUrl& url,
 
 void AbstractDataPluginModel::downloadDescriptionFile( const QUrl& url )
 {
-    if( !url.isEmpty() ) {  
+    if( !url.isEmpty() ) {
         QString name( descriptionPrefix );
         name += QString::number( d->m_descriptionFileNumber );
         
@@ -389,7 +364,7 @@ QString AbstractDataPluginModel::generateFilepath( const QString& id, const QStr
 {
     return MarbleDirs::localPath() + "/cache/" + d->m_name + '/' + generateFilename( id, type );
 }
-    
+
 bool AbstractDataPluginModel::fileExists( const QString& fileName ) const
 {
     return d->m_storagePolicy.fileExists( fileName );
@@ -432,19 +407,19 @@ void AbstractDataPluginModel::handleChangedViewport()
     
     // All this is to prevent to often downloads
     if( d->m_lastNumber != 0
-        // We don't need to download if nothing changed
-        && ( !( d->m_downloadedBox == d->m_lastBox )
-             || d->m_downloadedNumber != d->m_lastNumber
-             || d->m_downloadedTarget != d->m_lastMarbleModel->planetId() )
-        // We try to filter little changes of the bounding box
-        && ( fabs( d->m_downloadedBox.east() - d->m_lastBox.east() ) * boxComparisonFactor
-                                > d->m_lastBox.width()
-             || fabs( d->m_downloadedBox.south() - d->m_lastBox.south() ) * boxComparisonFactor
-                                > d->m_lastBox.height()
-             || fabs( d->m_downloadedBox.north() - d->m_lastBox.north() ) * boxComparisonFactor
-                                > d->m_lastBox.height()
-             || fabs( d->m_downloadedBox.west() - d->m_lastBox.west() ) * boxComparisonFactor
-                                > d->m_lastBox.width() ) )
+            // We don't need to download if nothing changed
+            && ( !( d->m_downloadedBox == d->m_lastBox )
+                 || d->m_downloadedNumber != d->m_lastNumber
+                 || d->m_downloadedTarget != d->m_lastMarbleModel->planetId() )
+            // We try to filter little changes of the bounding box
+            && ( fabs( d->m_downloadedBox.east() - d->m_lastBox.east() ) * boxComparisonFactor
+                 > d->m_lastBox.width()
+                 || fabs( d->m_downloadedBox.south() - d->m_lastBox.south() ) * boxComparisonFactor
+                 > d->m_lastBox.height()
+                 || fabs( d->m_downloadedBox.north() - d->m_lastBox.north() ) * boxComparisonFactor
+                 > d->m_lastBox.height()
+                 || fabs( d->m_downloadedBox.west() - d->m_lastBox.west() ) * boxComparisonFactor
+                 > d->m_lastBox.width() ) )
     {
         // We will wait a little bit longer to start the the
         // next download as we will really download something now.
@@ -494,7 +469,7 @@ void AbstractDataPluginModel::processFinishedJob( const QString& relativeUrlStri
                 return;
             }
             
-            (*i)->addDownloadedFile( generateFilepath( itemId, fileType ), 
+            (*i)->addDownloadedFile( generateFilepath( itemId, fileType ),
                                      fileType );
 
             d->m_downloadingItems.erase( i );
@@ -524,7 +499,6 @@ void AbstractDataPluginModel::clear()
     d->m_itemSet.clear();
     emit itemsUpdated();
 }
-    
 
 } // namespace Marble
 
