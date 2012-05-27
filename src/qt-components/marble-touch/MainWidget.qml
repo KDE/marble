@@ -327,4 +327,8 @@ Item {
     function getCenter() {
         return map.center
     }
+
+    function setDataPluginDelegate( id, delegate ) {
+        map.setDataPluginDelegate( id, delegate )
+    }
 }

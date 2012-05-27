@@ -22,6 +22,7 @@
 #include <QtGui/QGraphicsProxyWidget>
 #include <QtCore/QList>
 #include <QtCore/QPoint>
+#include <QtDeclarative/QtDeclarative>
 
 using Marble::GeoDataCoordinates; // Ouch. For signal/slot connection across different namespaces
 
@@ -191,6 +192,8 @@ public Q_SLOTS:
     void downloadRoute( qreal offset, int topTileLevel, int bottomTileLevel );
 
     void downloadArea( int topTileLevel, int bottomTileLevel );
+
+    void setDataPluginDelegate( const QString &plugin, QDeclarativeComponent* delegate );
 
 protected:
     virtual bool event ( QEvent * event );
