@@ -22,6 +22,7 @@
 #include "MarbleMath.h"
 #include "MapThemeManager.h"
 #include "AbstractFloatItem.h"
+#include "AbstractDataPlugin.h"
 #include "RenderPlugin.h"
 #include "MarbleMap.h"
 #include "MarbleDirs.h"
@@ -332,6 +333,17 @@ void MarbleWidget::downloadArea(int topTileLevel, int bottomTileLevel)
     QVector<Marble::TileCoordsPyramid> const pyramid = region.region( m_marbleWidget->textureLayer(), m_marbleWidget->viewport()->viewLatLonAltBox() );
     if ( !pyramid.isEmpty() ) {
         m_marbleWidget->downloadRegion( pyramid );
+    }
+}
+
+void MarbleWidget::setDataPluginDelegate( const QString &plugin, QDeclarativeComponent *delegate )
+{
+    QList<Marble::RenderPlugin*> renderPlugins = m_marbleWidget->renderPlugins();
+    foreach( Marble::RenderPlugin* renderPlugin, renderPlugins ) {
+        Marble::AbstractDataPlugin* dataPlugin = qobject_cast<Marble::AbstractDataPlugin*>( renderPlugin );
+        if ( dataPlugin && dataPlugin->nameId() == plugin ) {
+            dataPlugin->setDelegate( delegate, this );
+        }
     }
 }
 
