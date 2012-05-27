@@ -422,6 +422,13 @@ QImage WeatherData::icon() const
     }
 }
 
+QString WeatherData::iconSource() const
+{
+    QString const invalid = MarbleDirs::path( "weather/weather-none-available.png" );
+    QString const icon = WeatherDataPrivate::s_iconPath.value( condition() );
+    return icon == invalid ? "" : icon;
+}
+
 WeatherData::WindDirection WeatherData::windDirection() const
 {
     return d->m_windDirection;
