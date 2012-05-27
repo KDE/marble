@@ -50,11 +50,6 @@ class WeatherModel : public AbstractDataPluginModel
      **/
     void downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
     
-    /**
-     * Adds the @p item to the list of initialized items.
-     */
-    void addItemToList( AbstractDataPluginItem *item );
-
     void downloadDescriptionFileRequested( const QUrl& url );
 
  Q_SIGNALS:

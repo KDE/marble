@@ -49,7 +49,7 @@ void FakeWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
     data.setTemperature( 14.0, WeatherData::Celsius );
     item->setCurrentWeather( data );
         
-    emit createdItem( item );
+    emit createdItems( QList<AbstractDataPluginItem*>() << item );
 }
 
 #include "FakeWeatherService.moc"

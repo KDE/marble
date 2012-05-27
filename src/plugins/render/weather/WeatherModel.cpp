@@ -104,17 +104,6 @@ void WeatherModel::downloadItemData( const QUrl& url,
     }
 }
 
-void WeatherModel::addItemToList( AbstractDataPluginItem *item )
-{
-    AbstractDataPluginItem *existingItem = findItem( item->id() );
-    if ( !existingItem ) {
-        AbstractDataPluginModel::addItemToList( item );
-    } else {
-        if ( existingItem != item )
-            item->deleteLater();
-    }
-}
-
 void WeatherModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
                                const MarbleModel *model,
                                qint32 number )
@@ -160,8 +149,8 @@ void WeatherModel::addService( AbstractWeatherService *service )
     service->setFavoriteItems( favoriteItems() );
     service->setFavoriteItemsOnly( isFavoriteItemsOnly() );
 
-    connect( service, SIGNAL( createdItem( AbstractDataPluginItem * ) ),
-             this, SLOT( addItemToList( AbstractDataPluginItem * ) ) );
+    connect( service, SIGNAL( createdItems( QList<AbstractDataPluginItem*> ) ),
+             this, SLOT( addItemsToList( QList<AbstractDataPluginItem*> ) ) );
     connect( service, SIGNAL( requestedDownload( const QUrl&,
                                                  const QString&, 
                                                  AbstractDataPluginItem * ) ),

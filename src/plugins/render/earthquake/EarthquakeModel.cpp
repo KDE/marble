@@ -84,6 +84,7 @@ void EarthquakeModel::parseFile( const QByteArray& file )
     if ( data.property( "earthquakes" ).isArray() ) {
         QScriptValueIterator iterator( data.property( "earthquakes" ) );
         // Add items to the list
+        QList<AbstractDataPluginItem*> items;
         while ( iterator.hasNext() ) {
             iterator.next();
             // Converting earthquake's properties from QScriptValue to appropriate types
@@ -106,11 +107,12 @@ void EarthquakeModel::parseFile( const QByteArray& file )
                     item->setMagnitude( magnitude );
                     item->setDateTime( date );
                     item->setDepth( depth );
-
-                    addItemToList( item );
+                    items << item;
                 }
             }
         }
+
+        addItemsToList( items );
     }
 }
 

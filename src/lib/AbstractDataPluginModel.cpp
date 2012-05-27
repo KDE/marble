@@ -283,37 +283,49 @@ static bool lessThanByPointer( const AbstractDataPluginItem *item1,
 
 void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item )
 {
-    if( !item ) {
-        return;
+    addItemsToList( QList<AbstractDataPluginItem*>() << item );
+}
+
+void AbstractDataPluginModel::addItemsToList( const QList<AbstractDataPluginItem *> &items )
+{
+    bool needsUpdate = false;
+    foreach( AbstractDataPluginItem *item, items ) {
+        if( !item ) {
+            continue;
+        }
+
+        // If the item is already in our list, don't add it.
+        if( AbstractDataPluginItem *oldItem = findItem( item->id() ) ) {
+            if ( oldItem == item ) {
+                continue;
+            }
+            else {
+                item->deleteLater();
+                continue;
+            }
+        }
+
+        mDebug() << "New item " << item->id();
+
+        // This find the right position in the sorted to insert the new item
+        QList<AbstractDataPluginItem*>::iterator i = qLowerBound( d->m_itemSet.begin(),
+                                                                  d->m_itemSet.end(),
+                                                                  item,
+                                                                  lessThanByPointer );
+        // Insert the item on the right position in the list
+        d->m_itemSet.insert( i, item );
+
+        connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
+        connect( item, SIGNAL( updated() ), this, SIGNAL( itemsUpdated() ) );
+        connect( item, SIGNAL( favoriteChanged( const QString&, bool ) ), this,
+                 SLOT( favoriteItemChanged( const QString&, bool ) ) );
+
+        if ( !needsUpdate && item->initialized() ) {
+            needsUpdate = true;
+        }
     }
 
-    // If the item is already in our list, don't add it.
-    if( AbstractDataPluginItem *oldItem = findItem( item->id() ) ) {
-        if ( oldItem == item ) {
-            return;
-        }
-        else {
-            item->deleteLater();
-            return;
-        }
-    }
-    
-    mDebug() << "New item " << item->id();
-    
-    // This find the right position in the sorted to insert the new item 
-    QList<AbstractDataPluginItem*>::iterator i = qLowerBound( d->m_itemSet.begin(),
-                                                                d->m_itemSet.end(),
-                                                                item,
-                                                                lessThanByPointer );
-    // Insert the item on the right position in the list
-    d->m_itemSet.insert( i, item );
-    
-    connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
-    connect( item, SIGNAL( updated() ), this, SIGNAL( itemsUpdated() ) );
-    connect( item, SIGNAL( favoriteChanged( const QString&, bool ) ), this,
-             SLOT( favoriteItemChanged( const QString&, bool ) ) );
-
-    if ( item->initialized() ) {
+    if ( needsUpdate ) {
         emit itemsUpdated();
     }
 }
