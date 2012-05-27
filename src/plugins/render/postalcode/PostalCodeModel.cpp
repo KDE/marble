@@ -74,6 +74,7 @@ void PostalCodeModel::parseFile( const QByteArray& file )
         QScriptValueIterator iterator( data.property( "postalCodes" ) );
 
         // Add items to the list
+        QList<AbstractDataPluginItem*> items;
         while ( iterator.hasNext() ) {
             iterator.next();
 
@@ -113,10 +114,11 @@ void PostalCodeModel::parseFile( const QByteArray& file )
                     item->setToolTip( tooltip );
                     item->setText( postalCode );
 
-                    addItemToList( item );
+                    items << item;
                 }
             }
         }
+        addItemsToList( items );
     }
 }
 

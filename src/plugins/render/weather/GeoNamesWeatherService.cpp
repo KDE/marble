@@ -68,6 +68,7 @@ void GeoNamesWeatherService::parseFile( const QByteArray& file )
     if ( data.property( "weatherObservations" ).isArray() ) {
         QScriptValueIterator iterator( data.property( "weatherObservations" ) );
         QStringList favorite = favoriteItems();
+        QList<AbstractDataPluginItem*> items;
 
         // Add items to the list
         while ( iterator.hasNext() ) {
@@ -144,11 +145,12 @@ void GeoNamesWeatherService::parseFile( const QByteArray& file )
                     item->setPriority( 0 );
                     item->setStationName( name );
                     item->setCurrentWeather( data );
-
-                    emit createdItem( item );
+                    items << item;
                 }
             }
         }
+
+        emit createdItems( items );
     }
 }
 

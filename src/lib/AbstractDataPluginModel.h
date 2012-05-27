@@ -81,6 +81,13 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     virtual void setFavoriteItemsOnly( bool favoriteOnly );
     bool isFavoriteItemsOnly() const;
 
+public Q_SLOTS:
+    /**
+     * Adds the @p items to the list of initialized items. It checks if items with the same id are
+     * already in the list and ignores and deletes them in this case.
+     */
+    void addItemsToList( const QList<AbstractDataPluginItem*> &items );
+
  protected:
     /**
      * Managing to get @p number additional items in @p box. This includes generating a url and
@@ -113,8 +120,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     void downloadDescriptionFile( const QUrl& url );
     
     /**
-     * Adds the @p item to the list of initialized items. It checks if a item with the same id is
-     * already in the list and ignores and deletes the item in this case.
+     * Convenience method to add one item to the list. See addItemsToList
      */
     void addItemToList( AbstractDataPluginItem *item );
     
