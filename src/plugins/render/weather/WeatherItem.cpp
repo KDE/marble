@@ -379,10 +379,13 @@ QString WeatherItem::stationName() const
 
 void WeatherItem::setStationName( const QString& name )
 {
-    d->m_browserAction->setText( name );
-    d->m_stationName = name;
-    d->updateToolTip();
-    d->updateLabels();
+    if ( name != d->m_stationName ) {
+        d->m_browserAction->setText( name );
+        d->m_stationName = name;
+        d->updateToolTip();
+        d->updateLabels();
+        emit stationNameChanged();
+    }
 }
 
 WeatherData WeatherItem::currentWeather() const
@@ -396,6 +399,9 @@ void WeatherItem::setCurrentWeather( const WeatherData &weather )
     d->updateToolTip();
     d->updateLabels();
     emit updated();
+    emit descriptionChanged();
+    emit imageChanged();
+    emit temperatureChanged();
 }
 
 QMap<QDate, WeatherData> WeatherItem::forecastWeather() const
@@ -522,6 +528,23 @@ QList<QAction*> WeatherItem::actions()
     result << d->m_favoriteAction;
 
     return result;
+}
+
+QString WeatherItem::description() const
+{
+    return d->m_currentWeather.toHtml( WeatherData::Celsius, WeatherData::kph, WeatherData::Bar );
+}
+
+QString WeatherItem::image() const
+{
+    return d->m_currentWeather.iconSource();
+}
+
+double WeatherItem::temperature() const
+{
+    return d->m_currentWeather.hasValidTemperature()
+         ? d->m_currentWeather.temperature( WeatherData::Celsius )
+         : 0.0;
 }
 
 } // namespace Marble
