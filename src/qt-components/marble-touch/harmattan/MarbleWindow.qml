@@ -83,6 +83,8 @@ PageStackWindow {
             return "image://theme/icon-m-toolbar-mediacontrol-play"
         } else if ( name === "actions/dialog-cancel" ) {
             return "image://theme/icon-s-cancel"
+        } else if ( name === "actions/dialog-close" ) {
+            return "image://theme/icon-s-cancel"
         } else if ( name === "places/folder" ) {
             return "image://theme/icon-m-common-directory"
         } else if ( name === "mimetypes/unknown" ) {
