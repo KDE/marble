@@ -20,6 +20,12 @@ IF(QTLOCATION_FOUND)
      ADD_SUBDIRECTORY( qtmobility )
 ENDIF(QTLOCATION_FOUND)
 
+FIND_PACKAGE(libwlocate)
+IF(LIBWLOCATE_FOUND)
+     MESSAGE( STATUS "Building with libwlocate support")
+     ADD_SUBDIRECTORY( wlocate )
+ENDIF()
+
 ADD_SUBDIRECTORY( routesimulation )
 ADD_SUBDIRECTORY( placemark )
 
