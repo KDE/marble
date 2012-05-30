@@ -360,6 +360,7 @@ void MarbleMap::setRadius( int radius )
 
     if ( oldRadius != d->m_viewport.radius() ) {
         emit radiusChanged( radius );
+        emit visibleLatLonAltBoxChanged( d->m_viewport.viewLatLonAltBox() );
     }
 }
 

@@ -206,6 +206,8 @@ void MarbleWidgetPrivate::construct()
                                        // we do this differently here in the widget
 
     // forward some signals of m_map
+    m_widget->connect( &m_map,   SIGNAL( visibleLatLonAltBoxChanged( const &GeoDataLatLonAltBox ) ),
+                       m_widget, SIGNAL( visibleLatLonAltBoxChanged( const &GeoDataLatLonAltBox ) ) );
     m_widget->connect( &m_map,   SIGNAL( projectionChanged( Projection ) ),
                        m_widget, SIGNAL( projectionChanged( Projection ) ) );
     m_widget->connect( &m_map,   SIGNAL( tileLevelChanged( int ) ),
@@ -345,7 +347,6 @@ void MarbleWidget::setRadius( int radius )
 
         emit zoomChanged( d->m_logzoom );
         emit distanceChanged( distanceString() );
-        emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
 
         d->repaint();
     }
@@ -540,7 +541,6 @@ void MarbleWidget::zoomView( int newZoom, FlyToMode mode )
 
         emit zoomChanged( d->m_logzoom );
         emit distanceChanged( distanceString() );
-        emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
 
         d->repaint();
     }
@@ -717,7 +717,6 @@ void MarbleWidget::resizeEvent( QResizeEvent* )
     setUpdatesEnabled( false );
     d->m_map.setSize( width(), height() );
     d->repaint();
-    emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
     setUpdatesEnabled( true );
 }
 
@@ -1297,7 +1296,6 @@ void MarbleWidget::flyTo( const GeoDataLookAt &newLookAt, FlyToMode mode )
 
             emit zoomChanged( d->m_logzoom );
             emit distanceChanged( distanceString() );
-            emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
 
             d->repaint();
         }
