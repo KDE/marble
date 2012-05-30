@@ -713,12 +713,13 @@ void MarbleWidget::leaveEvent( QEvent* )
     emit mouseMoveGeoPosition( tr( NOT_AVAILABLE ) );
 }
 
-void MarbleWidget::resizeEvent( QResizeEvent* )
+void MarbleWidget::resizeEvent( QResizeEvent *event )
 {
     setUpdatesEnabled( false );
-    d->m_map.setSize( width(), height() );
-    update();
+    d->m_map.setSize( event->size() );
     setUpdatesEnabled( true );
+
+    QWidget::resizeEvent( event );
 }
 
 void MarbleWidget::connectNotify( const char * signal )
