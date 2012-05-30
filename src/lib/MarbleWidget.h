@@ -1037,6 +1037,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
  private:
     Q_PRIVATE_SLOT( d, void updateMapTheme() )
+    Q_PRIVATE_SLOT( d, void updateSystemBackgroundAttribute() )
 
  private:
     Q_DISABLE_COPY( MarbleWidget )
