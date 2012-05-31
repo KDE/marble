@@ -31,6 +31,8 @@
 #include "Placemark.h"
 #include "routing/SpeakersModel.h"
 #include "routing/VoiceNavigationModel.h"
+#include "AbstractFloatItem.h"
+#include "RenderPlugin.h"
 
 #include <QtDeclarative/qdeclarative.h>
 #include <QtDeclarative/QDeclarativeEngine>
@@ -63,6 +65,8 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
     qmlRegisterType<MapThemeModel>( uri, 0, 11, "MapThemeModel" );
 
     qmlRegisterUncreatableType<BookmarksModel>( uri, 0, 11, "BookmarksModel", "Do not create" );
+    qmlRegisterUncreatableType<Marble::AbstractFloatItem>( uri, 0, 11, "FloatItem", "Do not create" );
+    qmlRegisterUncreatableType<Marble::RenderPlugin>( uri, 0, 11, "RenderPlugin", "Do not create" );
 }
 
 void MarbleDeclarativePlugin::initializeEngine( QDeclarativeEngine *engine, const char *)

@@ -189,6 +189,29 @@ void RenderPlugin::restoreDefaultSettings()
     setSettings( QHash<QString,QVariant>() );
 }
 
+QStringList RenderPlugin::settingKeys()
+{
+    return settings().keys();
+}
+
+bool RenderPlugin::setSetting( const QString & key, const QVariant & value )
+{
+    QHash< QString, QVariant> settings = this->settings();
+    if( settings.contains( key ) && settings.value( key ).type() == value.type() )
+    {
+        settings [ key ] = value;
+        setSettings( settings );
+        return true;
+    } else {
+        return false;
+    }
+}
+
+QVariant RenderPlugin::setting( const QString & name )
+{
+    return settings().value( name, QVariant() );
+}
+
 } // namespace Marble
 
 #include "RenderPlugin.moc"
