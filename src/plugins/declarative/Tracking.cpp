@@ -153,8 +153,10 @@ void Tracking::setHasLastKnownPosition()
 void Tracking::setShowPositionMarkerPlugin( bool visible )
 {
     if ( m_marbleWidget ) {
-        QList<Marble::RenderPlugin *> const renderPlugins = m_marbleWidget->renderPlugins();
-        foreach( Marble::RenderPlugin* renderPlugin, renderPlugins ) {
+        QList<QObject*> const renderPlugins = m_marbleWidget->renderPlugins();
+        foreach( QObject* object, renderPlugins ) {
+            Marble::RenderPlugin* renderPlugin = qobject_cast<Marble::RenderPlugin*>( object );
+            Q_ASSERT( renderPlugin );
             if ( renderPlugin->nameId() == "positionMarker" ) {
                 renderPlugin->setEnabled( true );
                 renderPlugin->setVisible( visible );

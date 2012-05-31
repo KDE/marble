@@ -32,6 +32,7 @@
 #include "BookmarkManager.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
+#include "AbstractFloatItem.h"
 
 MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     QGraphicsProxyWidget( parent, flags ), m_marbleWidget( new Marble::MarbleWidget ),
@@ -78,9 +79,14 @@ const Marble::ViewportParams *MarbleWidget::viewport() const
     return m_marbleWidget->viewport();
 }
 
-QList<Marble::RenderPlugin *> MarbleWidget::renderPlugins() const
+QList<QObject*> MarbleWidget::renderPlugins() const
 {
-    return m_marbleWidget->renderPlugins();
+    QList<QObject*> result;
+    foreach ( Marble::RenderPlugin* plugin, m_marbleWidget->renderPlugins() ) {
+        result << plugin;
+    }
+
+    return result;
 }
 
 QStringList MarbleWidget::activeFloatItems() const
@@ -389,5 +395,60 @@ bool MarbleWidget::sceneEvent( QEvent *event )
 
     return QGraphicsProxyWidget::sceneEvent( event );
 }
+
+Marble::RenderPlugin *MarbleWidget::renderPlugin( const QString & name )
+{
+    foreach( Marble::RenderPlugin * plugin, m_marbleWidget->renderPlugins() )
+    {
+        if( plugin->nameId() == name ) {
+            return plugin;
+        }
+    }
+    return 0;
+}
+
+bool MarbleWidget::containsRenderPlugin( const QString & name )
+{
+    foreach( Marble::RenderPlugin * plugin, m_marbleWidget->renderPlugins() )
+    {
+        if( plugin->nameId() == name ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+QList<QObject*> MarbleWidget::floatItems() const
+{
+    QList<QObject*> result;
+    foreach ( Marble::AbstractFloatItem* plugin, m_marbleWidget->floatItems() ) {
+        result << plugin;
+    }
+
+    return result;
+}
+
+Marble::AbstractFloatItem* MarbleWidget::floatItem( const QString & name )
+{
+    foreach( Marble::AbstractFloatItem * plugin, m_marbleWidget->floatItems() )
+    {
+        if( plugin->nameId() == name ) {
+            return plugin ;
+        }
+    }
+    return 0;
+}
+
+bool MarbleWidget::containsFloatItem( const QString & name )
+{
+    foreach( Marble::AbstractFloatItem * plugin, m_marbleWidget->floatItems() )
+    {
+        if( plugin->nameId() == name ) {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 #include "MarbleDeclarativeWidget.moc"

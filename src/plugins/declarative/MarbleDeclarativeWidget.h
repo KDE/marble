@@ -28,7 +28,8 @@ using Marble::GeoDataCoordinates; // Ouch. For signal/slot connection across dif
 
 namespace Marble
 {
-// Forward declaration
+// Forward declarations
+class AbstractFloatItem;
 class MarbleModel;
 class MarbleWidget;
 class RenderPlugin;
@@ -61,6 +62,8 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( Navigation* navigation READ navigation NOTIFY navigationChanged )
     Q_PROPERTY( Search* search READ search NOTIFY searchChanged )
     Q_PROPERTY( QObject* mapThemeModel READ mapThemeModel NOTIFY mapThemeModelChanged )
+    Q_PROPERTY( QList<QObject*> renderPlugins READ renderPlugins CONSTANT )
+    Q_PROPERTY( QList<QObject*> floatItems READ floatItems CONSTANT )
 
 public:
     /** Constructor */
@@ -71,8 +74,6 @@ public:
     Marble::MarbleModel *model();
 
     const Marble::ViewportParams *viewport() const;
-
-    QList<Marble::RenderPlugin *> renderPlugins() const;
 
     bool workOffline() const;
 
@@ -120,6 +121,18 @@ public Q_SLOTS:
     void centerOn( const Marble::GeoDataLatLonAltBox &bbox );
 
     void centerOn( const GeoDataCoordinates &coordinates );
+
+    QList<QObject*> renderPlugins() const;
+
+    Marble::RenderPlugin* renderPlugin( const QString & name );
+
+    bool containsRenderPlugin( const QString & name );
+
+    QList<QObject*> floatItems() const;
+
+    Marble::AbstractFloatItem* floatItem( const QString & name );
+
+    bool containsFloatItem( const QString & name );
 
     /** Returns a list of active (!) float items */
     QStringList activeFloatItems() const;

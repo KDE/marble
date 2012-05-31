@@ -40,6 +40,13 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 {
     Q_OBJECT
 
+    Q_PROPERTY ( QString name READ name CONSTANT )
+    Q_PROPERTY ( QString nameId READ nameId CONSTANT )
+    Q_PROPERTY ( QString version READ version CONSTANT )
+    Q_PROPERTY ( QString description READ description CONSTANT )
+    Q_PROPERTY ( bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged )
+    Q_PROPERTY ( bool visible READ visible WRITE setVisible NOTIFY visibilityChanged )
+
  public:
     /**
      * This enum contains the data roles for the QStandardItem that is returned by item().
@@ -75,7 +82,6 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 
     const MarbleModel* marbleModel() const;
 
-    QAction       *action() const;
     /**
      *This method is used by the main window to get all of the actions that this
      *plugin defines. There is no guarantee where the main window will place the
@@ -124,6 +130,14 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     void    setEnabled( bool enabled );
     void    setVisible( bool visible );
     void    restoreDefaultSettings();
+
+    QStringList settingKeys();
+
+    bool setSetting( const QString & key, const QVariant & value );
+
+    QVariant setting( const QString & key );
+
+    QAction *action() const;
 
  Q_SIGNALS:
     /**
