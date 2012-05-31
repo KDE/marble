@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2007       Inge Wallin  <ingwa@kde.org>
-// Copyright 2007-2009  Torsten Rahn  <rahn@kde.org>
+// Copyright 2007-2012  Torsten Rahn  <rahn@kde.org>
 //
 
 
@@ -22,7 +22,7 @@
  */
 
 
-#include "AbstractProjection.h"
+#include "CylindricalProjection.h"
 
 
 namespace Marble
@@ -34,7 +34,7 @@ class EquirectProjectionPrivate;
  * @short A class to implement the Equirectangular projection used by the "Flat Map" view.
  */
 
-class EquirectProjection : public AbstractProjection
+class EquirectProjection : public CylindricalProjection
 {
     // Not a QObject so far because we don't need to send signals.
  public:
@@ -46,14 +46,8 @@ class EquirectProjection : public AbstractProjection
 
     virtual ~EquirectProjection();
 
-    virtual bool repeatableX() const;
     virtual qreal  maxValidLat() const;
     virtual qreal  minValidLat() const;
-
-    virtual bool traversablePoles()  const { return false; }
-    virtual bool traversableDateLine()  const { return false; }
-
-    virtual SurfaceType surfaceType() const { return Cylindrical; }
 
     virtual PreservationType preservationType() const { return NoPreservation; }
 
@@ -80,6 +74,8 @@ class EquirectProjection : public AbstractProjection
                             const QSizeF& size,
                             bool &globeHidesPoint ) const;
 
+    using CylindricalProjection::screenCoordinates;
+
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
      *
@@ -103,11 +99,8 @@ class EquirectProjection : public AbstractProjection
 
     bool mapCoversViewport( const ViewportParams *viewport ) const;
 
-    virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
-
  private:
     Q_DISABLE_COPY( EquirectProjection )
-    EquirectProjectionPrivate  * d;
 };
 
 }
