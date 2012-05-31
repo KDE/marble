@@ -218,7 +218,7 @@ add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 # Where to look first for cmake modules, 
 # before ${CMAKE_ROOT}/Modules/ is checked
 set ( CMAKE_MODULE_PATH 
-     ${CMAKE_SOURCE_DIR}/cmake/Modules 
+     ${CMAKE_SOURCE_DIR}/cmake/modules
      ${CMAKE_CURRENT_SOURCE_DIR}
      ${CMAKE_CURRENT_SOURCE_DIR}/src
      ${CMAKE_CURRENT_SOURCE_DIR}/cmake_find_rules
@@ -276,7 +276,7 @@ ENDIF (NOT EXISTS SVN_MARKER)
 # Add a custom command to drive the svn script whenever the svn entries
 # file changes.
 CONFIGURE_FILE(
-       "${CMAKE_CURRENT_SOURCE_DIR}/cmake_templates/svnscript.cmake.in_cmake"
+       "${CMAKE_CURRENT_SOURCE_DIR}/cmake/templates/svnscript.cmake.in_cmake"
        "${CMAKE_CURRENT_BINARY_DIR}/svnscript.cmake"
        @ONLY)
 
@@ -373,7 +373,7 @@ endif( CMAKE_MODULES_INSTALL_PATH )
 if(QTONLY)
     # only add the uninstall target for qt-only builds
     CONFIGURE_FILE(
-        "${CMAKE_CURRENT_SOURCE_DIR}/cmake_templates/cmake_uninstall.cmake.in"
+        "${CMAKE_CURRENT_SOURCE_DIR}/cmake/templates/cmake_uninstall.cmake.in"
         "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
         IMMEDIATE @ONLY)
 
