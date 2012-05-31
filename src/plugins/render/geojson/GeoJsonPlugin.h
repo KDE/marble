@@ -1,0 +1,4 @@
+#ifndef GEOJSONPLUGIN_H
+#define GEOJSONPLUGIN_H
+
+#endif // GEOJSONPLUGIN_H
