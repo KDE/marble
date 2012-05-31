@@ -23,7 +23,7 @@
 using namespace Marble;
 
 MercatorProjection::MercatorProjection()
-    : AbstractProjection(),
+    : CylindricalProjection(),
       d( 0 )
 {
     setRepeatX( repeatableX() );
@@ -35,10 +35,13 @@ MercatorProjection::~MercatorProjection()
 {
 }
 
+/*
 bool MercatorProjection::repeatableX() const
 {
     return true;
 }
+*/
+
 
 qreal MercatorProjection::maxValidLat() const
 {
@@ -314,8 +317,7 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
         }
     }
     else {
-        // We need a point on the screen at maxLat that definitely
-        // gets displayed:
+        // We need a point on the screen at maxLat that definitely gets displayed:
         qreal averageLatitude = ( latLonAltBox.north() + latLonAltBox.south() ) / 2.0;
     
         GeoDataCoordinates maxLonPoint( +M_PI, averageLatitude, GeoDataCoordinates::Radian );
@@ -359,10 +361,11 @@ bool MercatorProjection::mapCoversViewport( const ViewportParams *viewport ) con
     return true;
 }
 
+/*
 QPainterPath MercatorProjection::mapShape( const ViewportParams *viewport ) const
 {
     // Convenience variables
-    //int  radius = viewport->radius();
+    int  radius = viewport->radius();
     int  width  = viewport->width();
     int  height = viewport->height();
 
@@ -370,11 +373,12 @@ QPainterPath MercatorProjection::mapShape( const ViewportParams *viewport ) cons
     qreal  yBottom;
     qreal  xDummy;
 
-    // Get the top and bottom y coordinates of the projected map.
+    // Get the top and bottom coordinates of the projected map.
     screenCoordinates( 0.0, maxLat(), viewport, xDummy, yTop );
     screenCoordinates( 0.0, minLat(), viewport, xDummy, yBottom );
 
-    if ( yTop < 0 )
+    // Don't let the map area be outside the image
+	if ( yTop < 0 )
         yTop = 0;
     if ( yBottom > height )
         yBottom =  height;
@@ -388,3 +392,5 @@ QPainterPath MercatorProjection::mapShape( const ViewportParams *viewport ) cons
 
     return mapShape;
 }
+*/
+
