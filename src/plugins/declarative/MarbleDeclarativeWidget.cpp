@@ -28,17 +28,19 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "DownloadRegion.h"
+#include "BookmarkManager.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
 
 MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     QGraphicsProxyWidget( parent, flags ), m_marbleWidget( new Marble::MarbleWidget ),
-    m_inputEnabled( true ), m_tracking( 0 ), m_routing( 0 ), m_navigation( 0 ), m_search( 0 ),
-    m_interceptor( new ZoomButtonInterceptor( this, this ) )
+    m_inputEnabled( true ), m_bookmarks( 0), m_tracking( 0 ), m_routing( 0 ),
+    m_navigation( 0 ), m_search( 0 ), m_interceptor( new ZoomButtonInterceptor( this, this ) )
 {
     m_marbleWidget->setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
     m_marbleWidget->model()->routingManager()->profilesModel()->loadDefaultProfiles();
     m_marbleWidget->model()->routingManager()->readSettings();
+    m_marbleWidget->model()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
     setWidget( m_marbleWidget );
 
     connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
@@ -192,6 +194,17 @@ Coordinate *MarbleWidget::coordinate( int x, int y )
     return new Coordinate( lon, lat, 0.0, this );
 }
 
+Bookmarks *MarbleWidget::bookmarks()
+{
+    if ( !m_bookmarks ) {
+        m_bookmarks = new Bookmarks( this );
+        m_bookmarks->setMarbleWidget( this );
+        emit bookmarksChanged();
+    }
+
+    return m_bookmarks;
+}
+
 Tracking* MarbleWidget::tracking()
 {
     if ( !m_tracking ) {
@@ -242,8 +255,19 @@ void MarbleWidget::updateCenterPosition()
 void MarbleWidget::forwardMouseClick(qreal lon, qreal lat, Marble::GeoDataCoordinates::Unit unit )
 {
     Marble::GeoDataCoordinates position( lon, lat, unit );
-    emit mouseClickGeoPosition( position.longitude( Marble::GeoDataCoordinates::Degree ),
-                                position.latitude( Marble::GeoDataCoordinates::Degree ) );
+    Marble::GeoDataCoordinates::Unit degree = Marble::GeoDataCoordinates::Degree;
+    QPoint const point = pixel( position.longitude( degree ), position.latitude( degree ) );
+    QVector<const Marble::GeoDataPlacemark*> const placemarks = m_marbleWidget->whichFeatureAt( point );
+    if ( !placemarks.isEmpty() ) {
+        if ( placemarks.size() == 1 ) {
+            Placemark* placemark = new Placemark;
+            placemark->setGeoDataPlacemark( *placemarks.first() );
+            emit placemarkSelected( placemark );
+        }
+    } else {
+        emit mouseClickGeoPosition( position.longitude( degree ),
+                                    position.latitude( degree ) );
+    }
 }
 
 Routing* MarbleWidget::routing()

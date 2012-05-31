@@ -18,13 +18,23 @@ Page {
     id: routingActivityPage
     anchors.fill: parent
 
+    property bool horizontal: width / height > 1.20
+
     tools: ToolBarLayout {
-        ToolIcon {
-            iconId: "toolbar-back";
+        MarbleToolIcon {
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
-        ToolIcon {
-            iconId: "common-location"
+        ToolButton {
+            id: minimizeButton
+            iconSource: main.icon( "actions/go-up", 48 );
+            checkable: true
+            checked: true
+            width: 60
+            flat: true
+        }
+        MarbleToolIcon {
+            iconSource: main.icon( "places/user-identity", 48 );
             onClicked: {
                 marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
                 if (marbleWidget.zoom < 22026 ) {
@@ -32,15 +42,29 @@ Page {
                 }
             }
         }
-        ToolIcon {
-            iconId: "toolbar-view-menu"
-            onClicked: pageMenu.open()
+        ToolButton {
+            iconSource: main.icon( "devices/network-wireless", 48 );
+            checkable: true
+            checked: !settings.workOffline
+            onCheckedChanged: settings.workOffline = !checked
+            width: 60
+            flat: true
+        }
+        MarbleToolIcon {
+            id: menuIcon
+            iconSource: main.icon( "actions/show-menu", 48 );
+            onClicked: {
+                if (main.components === "plasma") {
+                    pageMenu.visualParent = menuIcon
+                }
+                pageMenu.open()
+            }
         }
     }
 
     Menu {
         id: pageMenu
-        content: MenuLayout {
+        content: MarbleMenuLayout {
             MenuItem {
                 text: "Start Navigation"
                 onClicked: openActivity( "Navigation" )
@@ -81,11 +105,24 @@ Page {
 
     Flickable {
         id: searchResultView
-        width: parent.width / 2
-        height: parent.height
         contentWidth: width
         contentHeight: routeEditor.height + waypointListView.height
-        anchors.margins: 5
+
+        property bool minimized: !minimizeButton.checked
+        visible: !minimized
+
+        anchors.bottom: routingActivityPage.bottom
+        anchors.left: routingActivityPage.left
+        width:  routingActivityPage.horizontal ? (minimized ? 0 : routingActivityPage.width / 2) : routingActivityPage.width
+        height: routingActivityPage.horizontal ? routingActivityPage.height : (minimized ? 0 : routingActivityPage.height / 2)
+
+        Behavior on height {
+            enabled: !routingActivityPage.horizontal;
+            NumberAnimation {
+                easing.type: Easing.InOutQuad;
+                duration: 250
+            }
+        }
 
         RouteEditor {
             id: routeEditor
@@ -121,8 +158,11 @@ Page {
     Item {
         id: mapContainer
         clip: true
-        width: parent.width / 2
-        height: parent.height
+
+        anchors.left: routingActivityPage.horizontal ? searchResultView.right : routingActivityPage.left
+        anchors.bottom: routingActivityPage.horizontal ? routingActivityPage.bottom : searchResultView.top
+        anchors.right: routingActivityPage.right
+        anchors.top: routingActivityPage.top
 
         function embedMarbleWidget() {
             marbleWidget.parent = mapContainer
@@ -144,25 +184,6 @@ Page {
                 marbleWidget.visible = false
             }
         }
-    }
-
-    StateGroup {
-        states: [
-            State { // Horizontal
-                when: (routingActivityPage.width / routingActivityPage.height) > 1.20
-                AnchorChanges { target: searchResultView; anchors.top: routingActivityPage.top }
-                PropertyChanges { target: searchResultView; width: routingActivityPage.width / 2; height: routingActivityPage.height }
-                AnchorChanges { target: mapContainer; anchors.left: searchResultView.right; anchors.bottom: routingActivityPage.bottom; anchors.top: routingActivityPage.top; }
-                PropertyChanges { target: mapContainer; width: routingActivityPage.width / 2; height: routingActivityPage.height }
-            },
-            State { // Vertical
-                when: (true)
-                AnchorChanges { target: mapContainer; anchors.left: routingActivityPage.left; anchors.top: routingActivityPage.top }
-                PropertyChanges { target: mapContainer; width: routingActivityPage.width; height: routingActivityPage.height / 2 }
-                AnchorChanges { target: searchResultView; anchors.right: routingActivityPage.right; anchors.top: mapContainer.bottom }
-                PropertyChanges { target: searchResultView; width: routingActivityPage.width; height: routingActivityPage.height / 2 }
-            }
-        ]
     }
 
     FileSaveDialog {
@@ -202,7 +223,7 @@ Page {
 
                 Label {
                     anchors.verticalCenter: parent.verticalCenter
-                    platformStyle: LabelStyle { fontPixelSize: 18 }
+                    font.pixelSize: 18
                     text: display;
                     width: parent.width - turnIcon.width - 20
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere

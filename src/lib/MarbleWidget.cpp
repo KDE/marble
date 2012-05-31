@@ -129,7 +129,7 @@ class MarbleWidgetPrivate
       * The background of the widget only needs to be redrawn in certain cases. This
       * method sets the widget flags accordingly and triggers a repaint.
       */
-    void repaint();
+    void updateSystemBackgroundAttribute();
 
     MarbleWidget    *const m_widget;
     // The model we are showing.
@@ -206,6 +206,8 @@ void MarbleWidgetPrivate::construct()
                                        // we do this differently here in the widget
 
     // forward some signals of m_map
+    m_widget->connect( &m_map,   SIGNAL( visibleLatLonAltBoxChanged( const GeoDataLatLonAltBox & ) ),
+                       m_widget, SIGNAL( visibleLatLonAltBoxChanged( const GeoDataLatLonAltBox & ) ) );
     m_widget->connect( &m_map,   SIGNAL( projectionChanged( Projection ) ),
                        m_widget, SIGNAL( projectionChanged( Projection ) ) );
     m_widget->connect( &m_map,   SIGNAL( tileLevelChanged( int ) ),
@@ -223,6 +225,8 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SLOT( updateMapTheme() ) );
     m_widget->connect( &m_map,   SIGNAL( repaintNeeded( QRegion ) ),
                        m_widget, SLOT( update() ) );
+    m_widget->connect( &m_map,   SIGNAL( visibleLatLonAltBoxChanged( const GeoDataLatLonAltBox & ) ),
+                       m_widget, SLOT( updateSystemBackgroundAttribute() ) );
 
     m_widget->connect( m_model.fileManager(), SIGNAL( centeredDocument(GeoDataLatLonBox) ),
                        m_widget, SLOT( centerOn(GeoDataLatLonBox) ) );
@@ -262,14 +266,12 @@ void MarbleWidgetPrivate::moveByStep( int stepsRight, int stepsDown, FlyToMode m
     m_widget->rotateBy( left, down, mode );
 }
 
-void MarbleWidgetPrivate::repaint()
+void MarbleWidgetPrivate::updateSystemBackgroundAttribute()
 {
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
-    m_widget->setAttribute( Qt::WA_NoSystemBackground,
-                  m_widget->viewport()->mapCoversViewport() && !m_model.mapThemeId().isEmpty() );
-
-    m_widget->update();
+    const bool isOn = m_map.viewport()->mapCoversViewport() && !m_model.mapThemeId().isEmpty();
+    m_widget->setAttribute( Qt::WA_NoSystemBackground, isOn );
 }
 
 // ----------------------------------------------------------------
@@ -345,9 +347,8 @@ void MarbleWidget::setRadius( int radius )
 
         emit zoomChanged( d->m_logzoom );
         emit distanceChanged( distanceString() );
-        emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
 
-        d->repaint();
+        update();
     }
 }
 
@@ -540,9 +541,8 @@ void MarbleWidget::zoomView( int newZoom, FlyToMode mode )
 
         emit zoomChanged( d->m_logzoom );
         emit distanceChanged( distanceString() );
-        emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
 
-        d->repaint();
+        update();
     }
     else {
         GeoDataLookAt target = lookAt();
@@ -678,7 +678,8 @@ Projection MarbleWidget::projection() const
 void MarbleWidget::setProjection( Projection projection )
 {
     d->m_map.setProjection( projection );
-    d->repaint();
+
+    update();
 }
 
 void MarbleWidget::setProjection( int projection )
@@ -712,13 +713,13 @@ void MarbleWidget::leaveEvent( QEvent* )
     emit mouseMoveGeoPosition( tr( NOT_AVAILABLE ) );
 }
 
-void MarbleWidget::resizeEvent( QResizeEvent* )
+void MarbleWidget::resizeEvent( QResizeEvent *event )
 {
     setUpdatesEnabled( false );
-    d->m_map.setSize( width(), height() );
-    d->repaint();
-    emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
+    d->m_map.setSize( event->size() );
     setUpdatesEnabled( true );
+
+    QWidget::resizeEvent( event );
 }
 
 void MarbleWidget::connectNotify( const char * signal )
@@ -776,7 +777,7 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
     {
         // If the globe covers fully the screen then we can use the faster
         // RGB32 as there are no translucent areas involved.
-        QImage::Format imageFormat = ( d->m_map.mapCoversViewport() )
+        QImage::Format imageFormat = ( d->m_map.viewport()->mapCoversViewport() )
                                      ? QImage::Format_RGB32
                                      : QImage::Format_ARGB32_Premultiplied;
         // Paint to an intermediate image
@@ -1093,7 +1094,7 @@ void MarbleWidget::setMapQualityForViewContext( MapQuality quality, ViewContext 
     d->m_map.setMapQualityForViewContext( quality, viewContext );
 
     if ( d->m_map.mapQuality() != oldQuality )
-        d->repaint();
+        update();
 }
 
 ViewContext MarbleWidget::viewContext() const
@@ -1109,7 +1110,7 @@ void MarbleWidget::setViewContext( ViewContext viewContext )
         d->m_routingLayer->setViewContext( viewContext );
 
         if ( d->m_map.mapQuality() != oldQuality )
-            d->repaint();
+            update();
     }
 }
 
@@ -1297,9 +1298,8 @@ void MarbleWidget::flyTo( const GeoDataLookAt &newLookAt, FlyToMode mode )
 
             emit zoomChanged( d->m_logzoom );
             emit distanceChanged( distanceString() );
-            emit visibleLatLonAltBoxChanged( d->m_map.viewport()->viewLatLonAltBox() );
 
-            d->repaint();
+            update();
         }
     }
     else {

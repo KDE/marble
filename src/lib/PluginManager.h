@@ -24,7 +24,10 @@ class NetworkPlugin;
 class PositionProviderPlugin;
 class AbstractFloatItem;
 class PluginManagerPrivate;
-class RunnerPlugin;
+class SearchRunnerPlugin;
+class ReverseGeocodingRunnerPlugin;
+class RoutingRunnerPlugin;
+class ParseRunnerPlugin;
 
 /**
  * @short The class that handles Marble's plugins.
@@ -74,10 +77,28 @@ class MARBLE_EXPORT PluginManager
     QList<const PositionProviderPlugin *> positionProviderPlugins() const;
 
     /**
-     * Returns all runner plugins.
-     * @note: Runner plugins are owned by the PluginManager, do not delete them
+     * Returns all search runner plugins.
+     * @note: Runner plugins are owned by the PluginManager, do not delete them.
      */
-    QList<RunnerPlugin *> runnerPlugins() const;
+    QList<const SearchRunnerPlugin *> searchRunnerPlugins() const;
+
+    /**
+     * Returns all reverse geocoding runner plugins.
+     * @note: The runner plugins are owned by the PluginManager, do not delete them.
+     */
+    QList<const ReverseGeocodingRunnerPlugin *> reverseGeocodingRunnerPlugins() const;
+
+    /**
+     * Returns all routing runner plugins.
+     * @note: The runner plugins are owned by the PluginManager, do not delete them.
+     */
+    QList<RoutingRunnerPlugin *> routingRunnerPlugins() const;
+
+    /**
+     * Returns all parse runner plugins.
+     * @note: The runner plugins are owned by the PluginManager, do not delete them.
+     */
+    QList<const ParseRunnerPlugin *> parsingRunnerPlugins() const;
 
  private:
     Q_DISABLE_COPY( PluginManager )

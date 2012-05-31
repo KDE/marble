@@ -25,7 +25,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QAtomicInt>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 
 #include "Quaternion.h"
@@ -246,8 +246,8 @@ bool LonLatParser::parse( const QString& string )
     // #1: Just two numbers, no directions, e.g. 74.2245 -32.2434 (assumes lat lon)
     {
         const QString numberCapExp = QString::fromLatin1(
-            "([-+]?\\d{1,3}%1?\\d*)(?:,|;|\\s)\\s*"
-            "([-+]?\\d{1,3}%1?\\d*)"
+            "([-+]?\\d{1,3}%1?\\d*(?:[eE][+-]?\\d+)?)(?:,|;|\\s)\\s*"
+            "([-+]?\\d{1,3}%1?\\d*(?:[eE][+-]?\\d+)?)"
             ).arg(m_decimalPointExp);
 
         const QRegExp regex = QRegExp( numberCapExp );

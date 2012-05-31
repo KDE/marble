@@ -574,7 +574,7 @@ void MonavConfigWidget::mapInstalled( int exitStatus )
 void MonavConfigWidget::showEvent ( QShowEvent * event )
 {
     // Lazy initialization
-    RunnerPlugin::ConfigWidget::showEvent( event );
+    RoutingRunnerPlugin::ConfigWidget::showEvent( event );
     if ( !event->spontaneous() && !d->m_initialized ) {
         d->m_initialized = true;
         d->updateInstalledMapsView();
@@ -663,7 +663,7 @@ void MonavConfigWidget::upgradeMap( int index )
     QString payload = d->m_mapsModel->payload( index );
     if ( !payload.isEmpty() ) {
         foreach( const MonavStuffEntry &entry, d->m_remoteMaps ) {
-            if ( entry.payload().endsWith( payload ) ) {
+            if ( entry.payload().endsWith( '/' + payload ) ) {
                 d->m_currentDownload = entry.payload();
                 d->install();
                 return;

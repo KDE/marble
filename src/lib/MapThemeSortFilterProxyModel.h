@@ -13,28 +13,25 @@
 #define MARBLE_MAPTHEMESORTFILTERPROXYMODEL_H
 
 #include <QtCore/QDateTime>
-#include <QtCore/QSettings>
 #include <QtGui/QSortFilterProxyModel>
-
-class QModelIndex;
 
 namespace Marble
 {
 
 class MapThemeSortFilterProxyModel : public QSortFilterProxyModel
 {
-     Q_OBJECT
+    Q_OBJECT
 
-    public:
+public:
     MapThemeSortFilterProxyModel(QObject *parent = 0);
-    protected:
-    bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
-    bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const;
-    private:
-    static QSettings sm_settings;
-    static bool isFavorite( const QModelIndex& index );
-    static QDateTime favoriteDateTime( const QModelIndex& index );
 
+protected:
+    bool lessThan( const QModelIndex &left, const QModelIndex &right ) const;
+    bool filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const;
+
+private:
+    bool isFavorite( const QModelIndex& index ) const;
+    QDateTime favoriteDateTime( const QModelIndex& index ) const;
 };
 
 }

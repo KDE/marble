@@ -17,11 +17,12 @@
 // Marble
 #include "MarbleDebug.h"
 #include "PluginItemDelegate.h"
+#include "ui_MarblePluginSettingsWidget.h"
 
 namespace Marble
 {
 
-class MarblePluginSettingsWidgetPrivate
+class MarblePluginSettingsWidgetPrivate : public Ui::MarblePluginSettingsWidget
 {
  public:
     PluginItemDelegate *m_itemDelegate;
@@ -31,12 +32,10 @@ MarblePluginSettingsWidget::MarblePluginSettingsWidget( QWidget *parent )
     : QWidget( parent ),
       d( new MarblePluginSettingsWidgetPrivate )
 {
-    setupUi( this );
+    d->setupUi( this );
 
-    d->m_itemDelegate = new PluginItemDelegate( m_pluginListView, this );
-    m_pluginListView->setItemDelegate( d->m_itemDelegate );
-    connect( m_pluginListView, SIGNAL( clicked( QModelIndex ) ),
-         this, SIGNAL( pluginListViewClicked() ) );
+    d->m_itemDelegate = new PluginItemDelegate( d->m_pluginListView, this );
+    d->m_pluginListView->setItemDelegate( d->m_itemDelegate );
     connect( d->m_itemDelegate, SIGNAL( aboutPluginClicked( QString ) ),
              this, SIGNAL( aboutPluginClicked( QString ) ) );
     connect( d->m_itemDelegate, SIGNAL( configPluginClicked( QString ) ),
@@ -60,7 +59,14 @@ void MarblePluginSettingsWidget::setConfigIcon( const QIcon& icon )
 
 void MarblePluginSettingsWidget::setModel( QStandardItemModel* pluginModel )
 {
-    m_pluginListView->setModel ( pluginModel );
+    if ( d->m_pluginListView->model() ) {
+        disconnect( d->m_pluginListView->model(), 0, this, 0 );
+    }
+    if ( pluginModel ) {
+        connect( pluginModel, SIGNAL( itemChanged( QStandardItem * ) ),
+                 this,        SIGNAL( pluginListViewClicked() ) );
+    }
+    d->m_pluginListView->setModel ( pluginModel );
 }
 
 } // namespace Marble

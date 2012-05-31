@@ -11,7 +11,7 @@
 #include "RoutingProfilesModel.h"
 
 #include "PluginManager.h"
-#include "RunnerPlugin.h"
+#include "RoutingRunnerPlugin.h"
 
 namespace Marble
 {
@@ -130,10 +130,7 @@ void RoutingProfilesModel::loadDefaultProfiles()
         ProfileTemplate tpl = static_cast<ProfileTemplate>( i );
         RoutingProfile profile( templateName( tpl ) );
         bool profileSupportedByAtLeastOnePlugin = false;
-        foreach( RunnerPlugin* plugin, m_pluginManager->runnerPlugins() ) {
-            if ( !plugin->supports( RunnerPlugin::Routing ) ) {
-                continue;
-            }
+        foreach( RoutingRunnerPlugin* plugin, m_pluginManager->routingRunnerPlugins() ) {
             if ( plugin->supportsTemplate( tpl ) ) {
                 profileSupportedByAtLeastOnePlugin = true;
                 break;
@@ -142,10 +139,7 @@ void RoutingProfilesModel::loadDefaultProfiles()
         if ( !profileSupportedByAtLeastOnePlugin ) {
             continue;
         }
-        foreach( RunnerPlugin* plugin, m_pluginManager->runnerPlugins() ) {
-            if ( !plugin->supports( RunnerPlugin::Routing ) ) {
-                continue;
-            }
+        foreach( RoutingRunnerPlugin* plugin, m_pluginManager->routingRunnerPlugins() ) {
             if ( plugin->supportsTemplate( tpl ) ) {
                 profile.pluginSettings()[plugin->nameId()] = plugin->templateSettings( tpl );
             }

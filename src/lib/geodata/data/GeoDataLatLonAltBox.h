@@ -14,10 +14,9 @@
 #define MARBLE_GEODATALATLONALTBOX_H
 
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include "GeoDataObject.h"
-#include "GeoDataPoint.h"
 
 #include "geodata_export.h"
 
@@ -91,7 +90,6 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     AltitudeMode altitudeMode() const;
     void setAltitudeMode( const AltitudeMode altitudeMode );
 
-    virtual bool contains( const GeoDataPoint & ) const; // NOTE: Why do we need this one?
     virtual bool contains( const GeoDataCoordinates & ) const;
     bool     contains( const GeoDataLatLonAltBox & ) const;
 

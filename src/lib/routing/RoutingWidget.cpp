@@ -214,6 +214,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( switchRoute( int ) ) );
     connect( d->m_ui.routingProfileComboBox, SIGNAL( currentIndexChanged( int ) ),
              this, SLOT( setRoutingProfile( int ) ) );
+    connect( d->m_ui.routingProfileComboBox, SIGNAL( activated( int ) ),
+             this, SLOT( retrieveRoute() ) );
     connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL( rowsInserted( QModelIndex, int, int ) ),
              this, SLOT( updateAlternativeRoutes() ) );
 
@@ -224,7 +226,17 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     connect( d->m_ui.directionsListView, SIGNAL( activated ( QModelIndex ) ),
              this, SLOT( activateItem ( QModelIndex ) ) );
 
-    connect( d->m_ui.searchButton, SIGNAL( clicked( ) ),
+    connect( d->m_ui.openRouteButton, SIGNAL( clicked() ),
+             this, SLOT( openRoute () ) );
+    connect( d->m_ui.saveRouteButton, SIGNAL( clicked() ),
+             this, SLOT( saveRoute () ) );
+    connect( d->m_ui.addViaButton, SIGNAL( clicked() ),
+             this, SLOT( addInputWidget() ) );
+    connect( d->m_ui.reverseRouteButton, SIGNAL( clicked() ),
+             d->m_routingManager, SLOT( reverseRoute () ) );
+    connect( d->m_ui.clearRouteButton, SIGNAL( clicked() ),
+             d->m_routingManager, SLOT( clearRoute () ) );
+    connect( d->m_ui.searchButton, SIGNAL( clicked() ),
              this, SLOT( retrieveRoute () ) );
     connect( d->m_ui.showInstructionsButton, SIGNAL( clicked( bool ) ),
              this, SLOT( showDirections() ) );
@@ -432,6 +444,8 @@ void RoutingWidget::updateRouteState( RoutingManager::State state )
     if ( state == RoutingManager::Downloading ) {
         d->m_progressTimer.start();
     }
+
+    d->m_ui.saveRouteButton->setEnabled( d->m_routingManager->routingModel()->rowCount() > 0 );
 }
 
 void RoutingWidget::requestMapPosition( RoutingInputWidget *widget, bool enabled )
@@ -503,32 +517,11 @@ void RoutingWidget::updateAlternativeRoutes()
 {
     if ( d->m_ui.routeComboBox->count() == 1) {
         // Parts of the route may lie outside the route trip points
-        GeoDataLineString bbox;
-        for ( int i = 0; i < d->m_routingManager->routingModel()->rowCount(); ++i ) {
-            QModelIndex index = d->m_routingManager->routingModel()->index( i, 0 );
-            QVariant pos = index.data( MarblePlacemarkModel::CoordinateRole );
-            if ( !pos.isNull() ) {
-                bbox << qVariantValue<GeoDataCoordinates>( pos );
-            }
-        }
-
-        if ( bbox.size() > 1 ) {
-//            qreal distance = d->m_routingManager->routingModel()->totalDistance();
-//            unsigned int days = d->m_routingManager->routingModel()->duration().days;
-//            QTime time = d->m_routingManager->routingModel()->duration().time;
-//            QString timeString = time.toString( Qt::DefaultLocaleShortDate );
-//            if ( days ) {
-//                QString label = tr( "Estimated travel time: %1 days, %2 (%3 km)", 0, days );
-//                d->m_ui.descriptionLabel->setText( label.arg( days ).arg( timeString ).arg( distance, 0, 'f', 1 ) );
-//            } else {
-//                QString label = tr( "Estimated travel time: %1 (%2 km)" );
-//                d->m_ui.descriptionLabel->setText( label.arg( timeString ).arg( distance, 0, 'f', 1 ) );
-//            }
-//            d->m_ui.descriptionLabel->setVisible( true );
-
+        GeoDataLatLonBox const bbox = d->m_routingManager->routingModel()->route().bounds();
+        if ( !bbox.isEmpty() ) {
             if ( d->m_zoomRouteAfterDownload ) {
                 d->m_zoomRouteAfterDownload = false;
-                d->m_widget->centerOn( GeoDataLatLonBox::fromLineString( bbox ) );
+                d->m_widget->centerOn( bbox );
             }
         }
     }
@@ -544,6 +537,7 @@ void RoutingWidget::updateAlternativeRoutes()
     QString const results = tr( "%n routes found", "", d->m_ui.routeComboBox->count() );
     d->m_ui.resultLabel->setText( results );
     d->m_ui.resultLabel->setVisible( true );
+    d->m_ui.saveRouteButton->setEnabled( d->m_routingManager->routingModel()->rowCount() > 0 );
 }
 
 void RoutingWidget::setShowDirectionsButtonVisible( bool visible )
@@ -557,15 +551,9 @@ void RoutingWidget::openRoute()
                             d->m_routingManager->lastOpenPath(), tr("KML Files (*.kml)") );
     if ( !file.isEmpty() ) {
         d->m_routingManager->setLastOpenPath( QFileInfo( file ).absolutePath() );
-        d->m_routingManager->alternativeRoutesModel()->clear();
+        d->m_zoomRouteAfterDownload = true;
         d->m_routingManager->loadRoute( file );
-        GeoDataDocument* route = d->m_routingManager->alternativeRoutesModel()->route( 0 );
-        if ( route ) {
-            GeoDataLineString* waypoints = d->m_routingManager->alternativeRoutesModel()->waypoints( route );
-            if ( waypoints ) {
-                d->m_widget->centerOn( waypoints->latLonAltBox() );
-            }
-        }
+        updateAlternativeRoutes();
     }
 }
 

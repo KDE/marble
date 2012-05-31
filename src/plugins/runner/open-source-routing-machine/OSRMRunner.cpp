@@ -149,16 +149,7 @@ GeoDataLineString *OSRMRunner::decodePolyline( const QString &geometry ) const
 }
 
 RoutingInstruction::TurnType OSRMRunner::parseTurnType( const QString &instruction ) const
-{
-    /** @todo: Create enum values and instructions for
-     * ReachViaPoint = 9;
-     * HeadOn = 10;
-     * LeaveRoundAbout = 12;
-     * StayOnRoundAbout = 13;
-     * StartAtEndOfStreet = 14;
-     * ReachedYourDestination = 15;
-     */
-
+{   
     if ( instruction == "1" ) {
         return RoutingInstruction::Straight;
     } else if ( instruction == "2" ) {
@@ -175,6 +166,8 @@ RoutingInstruction::TurnType OSRMRunner::parseTurnType( const QString &instructi
         return RoutingInstruction::Left;
     } else if ( instruction == "8" ) {
         return RoutingInstruction::SlightLeft;
+    } else if ( instruction == "10" ) {
+        return RoutingInstruction::Continue;
     } else if ( instruction.startsWith( "11-" ) ) {
         int const exit = instruction.mid( 3 ).toInt();
         switch ( exit ) {
@@ -183,7 +176,14 @@ RoutingInstruction::TurnType OSRMRunner::parseTurnType( const QString &instructi
         case 3: return RoutingInstruction::RoundaboutThirdExit; break;
         default: return RoutingInstruction::RoundaboutExit;
         }
+    } else if ( instruction == "12" ) {
+        return RoutingInstruction::RoundaboutExit;
     }
+
+    // ignoring ReachViaPoint = 9;
+    // ignoring StayOnRoundAbout = 13;
+    // ignoring StartAtEndOfStreet = 14;
+    // ignoring ReachedYourDestination = 15;
 
     return RoutingInstruction::Unknown;
 }
@@ -252,13 +252,12 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input )
                         extendedData.addValue( roadName );
                     }
 
-                    if ( first && !road.isEmpty() ) {
-                        instruction->setName( tr( "Head on %1" ).arg( road ) );
+                    if ( first ) {
+                        turnType = RoutingInstruction::Continue;
                         first = false;
-                    } else if ( first ) {
-                        instruction->setName( tr( "Start" ) );
-                        first = false;
-                    } else if ( turnType == RoutingInstruction::Unknown ) {
+                    }
+
+                    if ( turnType == RoutingInstruction::Unknown ) {
                         instruction->setName( text );
                     } else {
                         instruction->setName( RoutingInstruction::generateRoadInstruction( turnType, road ) );

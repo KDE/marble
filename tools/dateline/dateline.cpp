@@ -19,6 +19,8 @@
 #include <QtCore/QStringList>
 #include "../../src/lib/Quaternion.h"
 
+using namespace Marble;
+
 int getHeader( int count, int size )
 {
     int header = 0;
@@ -101,7 +103,7 @@ int main(int argc, char *argv[])
         lonstring = splitline[0];
         latstring = splitline[1];
 
-        qDebug() << "Point read at: " << lonstring << ", " << latstring;
+//        qDebug() << "Point read at: " << lonstring << ", " << latstring;
 
         float lon = lonstring.toFloat();
         float lat = latstring.toFloat();
@@ -114,7 +116,7 @@ int main(int argc, char *argv[])
     QFile    targetfile( targetfilename );
 
     // Read the data serialized from the file.
-    targetfile.open( QIODevice::Append );
+    targetfile.open( QIODevice::WriteOnly );
     QDataStream stream( &targetfile );
     stream.setByteOrder( QDataStream::LittleEndian );
 
@@ -131,7 +133,7 @@ int main(int argc, char *argv[])
     while ( i != idlPosList.end() ) {
         float lonf = *i++;
         float latf = *i++;
-        qDebug() << "Writing point" << lonf << ", " << latf;  
+ //       qDebug() << "Writing point" << lonf << ", " << latf;  
 
         float  header;
         float  lat;
@@ -148,33 +150,32 @@ int main(int argc, char *argv[])
 
         if ( lastlon != 99999.0f || lastlat != 99999.0f )
         {
-            Quaternion lastPos( (lastlon/60.0) * deg2rad , (lastlat/60.0) * -deg2rad  );
-            Quaternion currentPos( (lon/60.0) * deg2rad , (lat/60.0) * -deg2rad  );
-
-            Quaternion itPos;
+    	    Quaternion lastPos = Quaternion::fromSpherical((lastlon/60.0) * deg2rad , (lastlat/60.0) * -deg2rad  );
+            Quaternion currentPos = Quaternion::fromSpherical((lon/60.0) * deg2rad , (lat/60.0) * -deg2rad  );
+//	    qDebug() << "lastPos: " << lastPos << "currentPos: " << currentPos;
+            Quaternion itPos = currentPos;
 
             float distance =   sqrt( ( lon - lastlon ) * ( lon - lastlon ) 
                              + ( lat - lastlat ) * ( lat - lastlat ) );
-
             int numsteps = (int)( distance / step );
 
             for ( int i = 1; i < numsteps; ++i )
             {
-                itPos.slerp( lastPos, currentPos, (double)(i)/(double)(numsteps) );
-
+                itPos = itPos.slerp( lastPos, currentPos, (double)(i)/(double)(numsteps) );
+//		qDebug() << "itPos: " << itPos; 
                 double alpha = 0;
                 double beta = 0;
                 itPos.getSpherical( alpha, beta);
-
+//		qDebug() << "alpha: " << alpha << " beta: " << beta;
                 float ipLon = alpha * 180.0 / M_PI * 60;
                 float ipLat = - beta * 180.0 / M_PI * 60;
 
                 short ipHeader = getHeader( i, numsteps );
 
-                stream << (short)(ipHeader) << (short)(ipLat) << (short)(ipLon); 
-
                 qDebug() << "numsteps: " << numsteps << "ipLon:" << (short)ipLon << "ipLat:" << (short)ipLat << "ipHeader:" << (short)ipHeader << "node#:" << count;
-                count ++;
+		stream << (short)(ipHeader) << (short)(ipLat) << (short)(ipLon); 
+
+		count ++;
             } 
 
 

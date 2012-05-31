@@ -12,15 +12,15 @@
 #ifndef MARBLE_LOCALDATABASEPLUGIN_H
 #define MARBLE_LOCALDATABASEPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "SearchRunnerPlugin.h"
 
 namespace Marble
 {
 
-class LocalDatabasePlugin : public RunnerPlugin
+class LocalDatabasePlugin : public SearchRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::SearchRunnerPlugin )
 
 public:
     explicit LocalDatabasePlugin(QObject *parent = 0);

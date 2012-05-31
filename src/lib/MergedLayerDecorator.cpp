@@ -21,7 +21,7 @@
 #include "blendings/Blending.h"
 #include "blendings/BlendingFactory.h"
 #include "SunLocator.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"

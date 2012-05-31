@@ -234,6 +234,7 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
                                          GeoDataCoordinates::Unit unit ) const
 {
     const int radius = viewport->radius();
+    Q_ASSERT( radius > 0 );
 
     // Calculate translation of center point
     const qreal centerLon = viewport->centerLongitude();

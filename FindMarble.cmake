@@ -1,4 +1,4 @@
- # - Try to find the Marble Library
+# - Try to find the Marble Library
 # Once done this will define
 #
 #  MARBLE_FOUND - system has Marble
@@ -8,20 +8,13 @@
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 #
 
-
-if ( MARBLE_INCLUDE_DIR AND MARBLE_LIBRARIES )
+IF ( MARBLE_INCLUDE_DIR AND MARBLE_LIBRARIES )
    # in cache already
    SET( MARBLE_FIND_QUIETLY TRUE )
-endif ( MARBLE_INCLUDE_DIR AND MARBLE_LIBRARIES )
+ENDIF ( MARBLE_INCLUDE_DIR AND MARBLE_LIBRARIES )
 
-FIND_PATH( MARBLE_INCLUDE_DIR NAMES MarbleMap.h PATH_SUFFIXES marble
-)
-
+FIND_PATH( MARBLE_INCLUDE_DIR NAMES marble/MarbleModel.h )
 FIND_LIBRARY( MARBLE_LIBRARIES NAMES marblewidget )
 
-
-include( FindPackageHandleStandardArgs )
+INCLUDE( FindPackageHandleStandardArgs )
 FIND_PACKAGE_HANDLE_STANDARD_ARGS( marble DEFAULT_MSG MARBLE_INCLUDE_DIR MARBLE_LIBRARIES )
-
-
-

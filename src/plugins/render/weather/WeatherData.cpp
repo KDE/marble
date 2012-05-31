@@ -12,7 +12,7 @@
 #include "WeatherData.h"
 
 // Marble
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 

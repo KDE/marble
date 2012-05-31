@@ -44,6 +44,7 @@ Item {
     property string voiceNavigationSpeaker: settings.value( "MarbleTouch", "voiceNavigationSpeaker", "English - Bugsbane")
     property bool navigationStartupWarning: settings.value( "MarbleTouch", "navigationStartupWarning", false)
     property bool navigationStartupWarningEverShown: settings.value( "MarbleTouch", "navigationStartupWarningEverShown", false)
+    property string changelogShown: settings.value( "MarbleTouch", "changelogShown", "" )
 
     // Save settings to file.
     Component.onDestruction: {
@@ -67,6 +68,7 @@ Item {
         settings.setValue( "MarbleTouch", "voiceNavigationSpeaker", root.voiceNavigationSpeaker )
         settings.setValue( "MarbleTouch", "navigationStartupWarning", root.navigationStartupWarning )
         settings.setValue( "MarbleTouch", "navigationStartupWarningEverShown", root.navigationStartupWarningEverShown )
+        settings.setValue( "MarbleTouch", "changelogShown", root.changelogShown )
     }
 
     function removeElementsFromArray(array, elements) {

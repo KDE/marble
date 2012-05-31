@@ -64,6 +64,8 @@ public Q_SLOTS:
 Q_SIGNALS:
     void countChanged();
 
+    void installationProgressed( int newstuffindex, qreal progress );
+
     void installationFinished( int index );
 
 private:
@@ -71,6 +73,8 @@ private:
     friend class SpeakersModelPrivate;
 
     Q_PRIVATE_SLOT( d, void fillModel() )
+
+    Q_PRIVATE_SLOT( d, void handleInstallationProgress( int row, qreal progress ) )
 
     Q_PRIVATE_SLOT( d, void handleInstallation( int row ) )
 };

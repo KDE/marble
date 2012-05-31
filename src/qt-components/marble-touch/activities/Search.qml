@@ -19,19 +19,49 @@ Page {
     id: searchActivityPage
     anchors.fill: parent
 
+    property bool horizontal: width / height > 1.20
+
     tools: ToolBarLayout {
-        ToolIcon {
-            iconId: "toolbar-back";
+        MarbleToolIcon {
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
+
+        ToolButton {
+            id: minimizeButton
+            checkable: true
+            checked: true
+            width: 60
+            flat: true
+            iconSource: main.icon( "actions/go-up", 48 );
+        }
+
+        Item {}
     }
 
     Rectangle {
         id: searchResultView
+
+        property bool minimized: !minimizeButton.checked
+        visible: !minimized
+
+        anchors.bottom: searchActivityPage.bottom
+        anchors.left: searchActivityPage.left
+        width:  searchActivityPage.horizontal ? (minimized ? 0 : searchActivityPage.width / 2) : searchActivityPage.width
+        height: searchActivityPage.horizontal ? searchActivityPage.height : (minimized ? 0 : searchActivityPage.height / 2)
+
+        Behavior on height {
+            enabled: !searchActivityPage.horizontal;
+            NumberAnimation {
+                easing.type: Easing.InOutQuad;
+                duration: 250
+            }
+        }
+
         radius: 10
-        color: "white"
-        border.width: 1
-        border.color: "lightgray"
+        color: "#f7f7f7"
+        border.width: 2
+        border.color: "darkgray"
         z: 10
         opacity: 0.9
         property string searchTerm: ""
@@ -42,7 +72,6 @@ Page {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.margins: 10
-            height: 60
             onSearch: {
                 searchResultView.searchTerm = term
                 searchField.busy = true
@@ -60,7 +89,6 @@ Page {
         }
 
         Label {
-            height: 30
             id: searchResultDescription
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             anchors.top: searchField.bottom
@@ -97,8 +125,11 @@ Page {
     Item {
         id: mapContainer
         clip: true
-        width: parent.width
-        height: parent.height - searchField.height
+
+        anchors.left: searchActivityPage.horizontal ? searchResultView.right : searchActivityPage.left
+        anchors.bottom: searchActivityPage.horizontal ? searchActivityPage.bottom : searchResultView.top
+        anchors.right: searchActivityPage.right
+        anchors.top: searchActivityPage.top
 
         function embedMarbleWidget() {
             marbleWidget.parent = mapContainer
@@ -122,25 +153,6 @@ Page {
         }
     }
 
-    StateGroup {
-        states: [
-            State { // Horizontal
-                when: (searchActivityPage.width / searchActivityPage.height) > 1.20
-                AnchorChanges { target: searchResultView; anchors.top: searchActivityPage.top }
-                PropertyChanges { target: searchResultView; width: searchActivityPage.width / 2; height: searchActivityPage.height }
-                AnchorChanges { target: mapContainer; anchors.left: searchResultView.right; anchors.bottom: searchActivityPage.bottom; anchors.top: searchActivityPage.top }
-                PropertyChanges { target: mapContainer; width: searchActivityPage.width / 2; height: searchActivityPage.height }
-            },
-            State { // Vertical
-                when: (true)
-                AnchorChanges { target: mapContainer; anchors.left: searchActivityPage.left; anchors.bottom: searchResultListView.top; anchors.top: searchActivityPage.top }
-                PropertyChanges { target: mapContainer; width: searchActivityPage.width; height: searchActivityPage.height / 2 }
-                AnchorChanges { target: searchResultView; anchors.right: searchActivityPage.right; anchors.top: mapContainer.bottom }
-                PropertyChanges { target: searchResultView; width: searchActivityPage.width; height: searchActivityPage.height / 2 }
-            }
-        ]
-    }
-
     Component {
         id: searchResultDelegate
 
@@ -152,50 +164,81 @@ Page {
             y: 5
             property bool detailed: ListView.isCurrentItem
 
-            /** @todo: Need access to bookmark manager here */
-            property bool isBookmark: false
-
             Column {
                 id: column
 
-                Label {
-                    id: searchResultText
-                    text: "<font size=\"-1\">" + (index+1) + ". " + display + "</font>"
-                    width: searchResultItem.width
-                    wrapMode: searchResultItem.detailed ? Text.WrapAtWordBoundaryOrAnywhere : Text.NoWrap
-                    clip: true
+                Row {
+                    spacing: 5
 
-                    MouseArea {
-                        anchors.fill: parent
+                    Label {
+                        id: searchResultText
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "<font size=\"-1\">" + (index+1) + ". " + display + "</font>"
+                        width: searchResultItem.width - bookmarkButton.width - parent.spacing - 10
+                        wrapMode: searchResultItem.detailed ? Text.WrapAtWordBoundaryOrAnywhere : Text.NoWrap
+                        clip: true
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                searchResultListView.currentIndex = index
+                                marbleWidget.centerOn( longitude, latitude )
+                            }
+                        }
+                    }
+
+                    ToolButton  {
+                        id: bookmarkButton
+                        anchors.verticalCenter: parent.verticalCenter
+                        flat: true
+                        height: 38
+                        width: 38
+                        property bool isBookmark: marbleWidget.bookmarks.isBookmark(longitude,latitude)
+                        iconSource: isBookmark ? "qrc:/icons/bookmark.png" : "qrc:/icons/bookmark-disabled.png"
+                        visible: searchResultItem.detailed
                         onClicked: {
-                            searchResultListView.currentIndex = index
-                            marbleWidget.centerOn( longitude, latitude )
+                            if ( isBookmark ) {
+                                marbleWidget.bookmarks.removeBookmark(longitude,latitude)
+                            } else {
+                                marbleWidget.bookmarks.addBookmark(longitude,latitude, display, "Default")
+                            }
+                            isBookmark = marbleWidget.bookmarks.isBookmark(longitude,latitude)
                         }
                     }
                 }
 
                 Row {
                     spacing: 5
+                    visible: searchResultItem.detailed
 
                     Button {
-                        id: routeButton
+                        id: carButton
                         width: 120
-                        text: "Route"
-                        visible: searchResultItem.detailed
+                        iconSource: "qrc:/icons/routing-motorcar.svg"
                         onClicked: {
-                            settings.gpsTracking = true
-                            marbleWidget.routing.clearRoute()
-                            marbleWidget.routing.setVia( 0, marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
-                            marbleWidget.routing.setVia( 1, longitude, latitude )
-                            openActivity( "Routing" )
+                            marbleWidget.routing.routingProfile = "Motorcar"
+                            searchActivityPage.startRouting(longitude, latitude)
                         }
                     }
 
-                    Button  {
-                        width: 50
-                        iconSource: searchResultItem.isBookmark ? "qrc:/icons/bookmark.png" : "qrc:/icons/bookmark-disabled.png"
-                        visible: false // searchResultItem.detailed
-                        onClicked: searchResultItem.isBookmark = !searchResultItem.isBookmark
+                    Button {
+                        id: bikeButton
+                        width: 80
+                        iconSource: "qrc:/icons/routing-bike.svg"
+                        onClicked: {
+                            marbleWidget.routing.routingProfile = "Bicycle"
+                            searchActivityPage.startRouting(longitude, latitude)
+                        }
+                    }
+
+                    Button {
+                        id: pedButton
+                        width: 60
+                        iconSource: "qrc:/icons/routing-pedestrian.svg"
+                        onClicked: {
+                            marbleWidget.routing.routingProfile = "Pedestrian"
+                            searchActivityPage.startRouting(longitude, latitude)
+                        }
                     }
                 }
             }
@@ -206,5 +249,14 @@ Page {
         if ( status === PageStatus.Activating ) {
             mapContainer.embedMarbleWidget()
         }
+    }
+
+    function startRouting(longitude, latitude)
+    {
+        settings.gpsTracking = true
+        marbleWidget.routing.clearRoute()
+        marbleWidget.routing.setVia( 0, marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
+        marbleWidget.routing.setVia( 1, longitude, latitude )
+        openActivity( "Routing" )
     }
 }

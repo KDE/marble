@@ -22,27 +22,39 @@
 namespace Marble
 {
 
+struct PixmapElement
+{
+    int index;
+
+    int size;
+
+    explicit PixmapElement( int index=-1, int size=0 );
+
+    bool operator < ( const PixmapElement &other ) const;
+};
+
 class RouteRequestPrivate
 {
 public:
     QVector<GeoDataPlacemark> m_route;
 
-    QMap<int, QPixmap> m_pixmapCache;
+    QMap<PixmapElement, QPixmap> m_pixmapCache;
 
     RoutingProfile m_routingProfile;
 
-    int m_fontSize;
-
     /** Determines a suitable index for inserting a via point */
     int viaIndex( const GeoDataCoordinates &position ) const;
-
-    RouteRequestPrivate();
 };
 
-RouteRequestPrivate::RouteRequestPrivate() :
-        m_fontSize( 0 )
+PixmapElement::PixmapElement( int index_, int size_ ) :
+    index( index_ ), size( size_ )
 {
     // nothing to do
+}
+
+bool PixmapElement::operator <(const PixmapElement &other) const
+{
+    return index < other.index || size < other.size;
 }
 
 int RouteRequestPrivate::viaIndex( const GeoDataCoordinates &position ) const
@@ -139,16 +151,17 @@ GeoDataCoordinates RouteRequest::at( int position ) const
     return d->m_route.at( position ).coordinate();
 }
 
-QPixmap RouteRequest::pixmap( int position ) const
+QPixmap RouteRequest::pixmap(int position, int size, int margin ) const
 {
-    if ( d->m_pixmapCache.contains( position ) ) {
-        return d->m_pixmapCache[position];
+    PixmapElement const element( position, size );
+    if ( d->m_pixmapCache.contains( element ) ) {
+        return d->m_pixmapCache[element];
     }
 
     // Transparent background
     bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-    int const iconSize = smallScreen ? 32 : 16;
-    QImage result( iconSize, iconSize, QImage::Format_ARGB32_Premultiplied );
+    int const imageSize = size > 0 ? size : ( smallScreen ? 32 : 16 );
+    QImage result( imageSize, imageSize, QImage::Format_ARGB32_Premultiplied );
     result.fill( qRgba( 0, 0, 0, 0 ) );
 
     // Paint a colored circle
@@ -159,33 +172,31 @@ QPixmap RouteRequest::pixmap( int position ) const
     QColor const backgroundColor = isVisited ? oxygenAluminumGray4 : oxygenForestGreen4;
     painter.setBrush( QBrush( backgroundColor ) );
     painter.setPen( Qt::black );
-    painter.drawEllipse( 1, 1, iconSize-2, iconSize-2 );
+    int const iconSize = imageSize - 2 * margin;
+    painter.drawEllipse( margin, margin, iconSize, iconSize );
 
     char text = char( 'A' + position );
 
-    // Choose a suitable font size once (same for all pixmaps)
-    if ( d->m_fontSize == 0 ) {
-        QFont font = painter.font();
-        d->m_fontSize = 20;
-        while ( d->m_fontSize-- > 0 ) {
-            font.setPointSize( d->m_fontSize );
-            QFontMetrics fontMetric( font );
-            if ( fontMetric.width( text ) <= iconSize-3 && fontMetric.height( ) <= iconSize-3 ) {
-                break;
-            }
+    // Choose a suitable font size
+    QFont font = painter.font();
+    int fontSize = 20;
+    while ( fontSize-- > 0 ) {
+        font.setPointSize( fontSize );
+        QFontMetrics fontMetric( font );
+        if ( fontMetric.width( text ) <= iconSize && fontMetric.height( ) <= iconSize ) {
+            break;
         }
     }
 
-    Q_ASSERT( d->m_fontSize );
-    QFont font = painter.font();
-    font.setPointSize( d->m_fontSize );
+    Q_ASSERT( fontSize );
+    font.setPointSize( fontSize );
     painter.setFont( font );
 
     // Paint a character denoting the position (0=A, 1=B, 2=C, ...)
-    painter.drawText( 2, 2, iconSize-3, iconSize-3, Qt::AlignCenter, QString( text ) );
+    painter.drawText( 0, 0, imageSize, imageSize, Qt::AlignCenter, QString( text ) );
 
-    d->m_pixmapCache.insert( position, QPixmap::fromImage( result ) );
-    return pixmap( position );
+    d->m_pixmapCache.insert( element, QPixmap::fromImage( result ) );
+    return pixmap( position, size );
 }
 
 void RouteRequest::clear()
@@ -262,7 +273,14 @@ void RouteRequest::setVisited( int index, bool visited )
 {
     if ( index >= 0 && index < d->m_route.size() ) {
         d->m_route[index].extendedData().addValue( GeoDataData( "routingVisited", visited ) );
-        d->m_pixmapCache.remove( index );
+        QMap<PixmapElement, QPixmap>::iterator iter = d->m_pixmapCache.begin();
+        while ( iter != d->m_pixmapCache.end() ) {
+             if ( iter.key().index == index ) {
+                 iter = d->m_pixmapCache.erase( iter );
+             } else {
+                 ++iter;
+             }
+         }
         emit positionChanged( index, d->m_route[index].coordinate() );
     }
 }

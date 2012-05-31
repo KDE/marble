@@ -13,7 +13,7 @@
 
 #include <QtCore/QObject>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include "AbstractFloatItem.h"
 

@@ -17,9 +17,9 @@
 namespace Marble
 {
 
-RoutinoPlugin::RoutinoPlugin( QObject *parent ) : RunnerPlugin( parent )
+RoutinoPlugin::RoutinoPlugin( QObject *parent ) :
+    RoutingRunnerPlugin( parent )
 {
-    setCapabilities( Routing );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( true );
 }
@@ -65,11 +65,11 @@ MarbleAbstractRunner* RoutinoPlugin::newRunner() const
     return new RoutinoRunner;
 }
 
-class RoutinoConfigWidget : public RunnerPlugin::ConfigWidget
+class RoutinoConfigWidget : public RoutingRunnerPlugin::ConfigWidget
 {
 public:
     RoutinoConfigWidget()
-        : RunnerPlugin::ConfigWidget()
+        : RoutingRunnerPlugin::ConfigWidget()
     {
         ui_configWidget = new Ui::RoutinoConfigWidget;
         ui_configWidget->setupUi( this );
@@ -119,7 +119,7 @@ private:
     Ui::RoutinoConfigWidget *ui_configWidget;
 };
 
-RunnerPlugin::ConfigWidget *RoutinoPlugin::configWidget()
+RoutingRunnerPlugin::ConfigWidget *RoutinoPlugin::configWidget()
 {
     return new RoutinoConfigWidget();
 }
@@ -163,14 +163,10 @@ QHash< QString, QVariant > RoutinoPlugin::templateSettings(RoutingProfilesModel:
     return result;
 }
 
-bool RoutinoPlugin::canWork( Capability capability ) const
+bool RoutinoPlugin::canWork() const
 {
-    if ( supports( capability ) ) {
-        QDir mapDir = QDir( MarbleDirs::localPath() + "/maps/earth/routino/" );
-        return mapDir.exists();
-    } else {
-        return false;
-    }
+    QDir mapDir = QDir( MarbleDirs::localPath() + "/maps/earth/routino/" );
+    return mapDir.exists();
 }
 
 }

@@ -19,7 +19,7 @@
 #include "SunLocator.h"
 #include "TextureTile.h"
 #include "TileLoaderHelper.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include <QtGui/QImage>
 

@@ -19,8 +19,8 @@ Page {
     anchors.fill: parent
 
     tools: ToolBarLayout {
-        ToolIcon {
-            iconId: "toolbar-back";
+        MarbleToolIcon {
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
 
@@ -51,13 +51,13 @@ Page {
                     delegate:
                         Rectangle {
                         id: delegate
-                        width: root.width
-                        height: mapImage.height
+                        width: row.width
+                        height: row.height
 
-                        color: index === themeDialog.selectedIndex ? root.platformStyle.itemSelectedBackgroundColor : root.platformStyle.itemBackgroundColor
+                        color: index === themeDialog.selectedIndex ? "lightsteelblue" : "#00ffffff"
 
                         Row {
-                            anchors.verticalCenter: parent.verticalCenter
+                            id: row
                             Image {
                                 id: mapImage
                                 source: "image://maptheme/" + mapThemeId
@@ -68,7 +68,7 @@ Page {
                             Label {
                                 id: themeLabel
                                 text: display
-                                color: delegate.index === themeDialog.selectedIndex ? root.platformStyle.itemSelectedTextColor : root.platformStyle.itemTextColor
+                                color: index === themeDialog.selectedIndex ? "black" : "white"
                                 anchors.verticalCenter: parent.verticalCenter
                             }
                         }
@@ -87,16 +87,22 @@ Page {
             }
         }
 
-        ToolIcon {
-            iconId: "toolbar-view-menu"
+        MarbleToolIcon {
+            id: menuIcon
+            iconSource: main.icon( "actions/show-menu", 48 );
             visible: earthButton.checked
-            onClicked: pageMenu.open()
+            onClicked: {
+                if (main.components === "plasma") {
+                    pageMenu.visualParent = menuIcon
+                }
+                pageMenu.open()
+            }
         }
     }
 
     Menu {
         id: pageMenu
-        content: MenuLayout {
+        content: MarbleMenuLayout {
             MenuItemSwitch {
                 id: satellitesSwitch
                 text: "Satellites"

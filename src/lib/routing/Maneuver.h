@@ -25,18 +25,22 @@ class MARBLE_EXPORT Maneuver
 public:
     enum Direction {
         Unknown = 0,
-        Straight,
-        SlightRight,
-        Right,
-        SharpRight,
-        TurnAround,
-        SharpLeft,
-        Left,
-        SlightLeft,
-        RoundaboutFirstExit,
-        RoundaboutSecondExit,
-        RoundaboutThirdExit,
-        RoundaboutExit
+        Continue = 13,
+        Merge = 14,
+        Straight = 1,
+        SlightRight = 2,
+        Right = 3,
+        SharpRight = 4,
+        TurnAround = 5,
+        SharpLeft = 6,
+        Left = 7,
+        SlightLeft = 8,
+        RoundaboutFirstExit = 9,
+        RoundaboutSecondExit = 10,
+        RoundaboutThirdExit = 11,
+        RoundaboutExit = 12,
+        ExitLeft = 15,
+        ExitRight = 16
     };
 
     Maneuver();
@@ -53,7 +57,9 @@ public:
 
     bool hasWaypoint() const;
 
-    void setWaypoint( const GeoDataCoordinates &waypoint );
+    void setWaypoint( const GeoDataCoordinates &waypoint, int index );
+
+    int waypointIndex() const;
 
     QString instructionText() const;
 
@@ -76,7 +82,7 @@ private:
 
     GeoDataCoordinates m_waypoint;
 
-    bool m_hasWaypoint;
+    int m_waypointIndex;
 
     QString m_instructionText;
 

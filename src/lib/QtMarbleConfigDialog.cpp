@@ -29,7 +29,7 @@
 #include <QtCore/QDateTime>
 
 // Marble
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "DialogConfigurationInterface.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"

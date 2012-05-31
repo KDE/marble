@@ -25,7 +25,7 @@
 #include "GeoPainter.h"
 
 #include "MarbleDebug.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "PlacemarkPainter.h"
 #include "MarbleClock.h"
 #include "MarblePlacemarkModel.h"

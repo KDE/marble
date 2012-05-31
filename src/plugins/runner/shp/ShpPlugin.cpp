@@ -13,19 +13,14 @@
 namespace Marble
 {
 
-ShpPlugin::ShpPlugin( QObject *parent ) : RunnerPlugin( parent )
+ShpPlugin::ShpPlugin( QObject *parent ) :
+    ParseRunnerPlugin( parent )
 {
-    setCapabilities( Parsing );
 }
 
 QString ShpPlugin::name() const
 {
     return tr( "Shp File Parser" );
-}
-
-QString ShpPlugin::guiString() const
-{
-    return tr( "Shp Parser" );
 }
 
 QString ShpPlugin::nameId() const
@@ -52,6 +47,16 @@ QList<PluginAuthor> ShpPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+}
+
+QString ShpPlugin::fileFormatDescription() const
+{
+    return tr( "Shapefile Map Files" );
+}
+
+QStringList ShpPlugin::fileExtensions() const
+{
+    return QStringList() << "shp";
 }
 
 MarbleAbstractRunner* ShpPlugin::newRunner() const

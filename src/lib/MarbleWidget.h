@@ -25,7 +25,7 @@
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataLookAt.h"
-#include "global.h"             // types needed in all of marble.
+#include "MarbleGlobal.h"             // types needed in all of marble.
 #include "marble_export.h"
 #include "GeoDataFolder.h"
 // Qt
@@ -1015,7 +1015,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Reimplementation of the resizeEvent() function in QWidget.
      */
-    virtual void resizeEvent( QResizeEvent* );
+    virtual void resizeEvent( QResizeEvent *event );
 
     void connectNotify( const char * signal );
     void disconnectNotify( const char * signal );
@@ -1037,6 +1037,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
  private:
     Q_PRIVATE_SLOT( d, void updateMapTheme() )
+    Q_PRIVATE_SLOT( d, void updateSystemBackgroundAttribute() )
 
  private:
     Q_DISABLE_COPY( MarbleWidget )

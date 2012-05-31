@@ -12,8 +12,10 @@
 
 #include "Coordinate.h"
 #include "DeclarativeMapThemeManager.h"
+#include "MarbleDeclarativeObject.h"
 #include "MarbleDeclarativeWidget.h"
 #include "PositionSource.h"
+#include "Bookmarks.h"
 #include "Tracking.h"
 #include "Routing.h"
 #include "Navigation.h"
@@ -26,6 +28,7 @@
 #include "MapThemeModel.h"
 #include "NewstuffModel.h"
 #include "OfflineDataModel.h"
+#include "Placemark.h"
 #include "routing/SpeakersModel.h"
 #include "routing/VoiceNavigationModel.h"
 
@@ -38,7 +41,9 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
 
     //@uri org.kde.edu.marble
     qmlRegisterType<Coordinate>( uri, 0, 11, "Coordinate" );
+    qmlRegisterType<Placemark>( uri, 0, 11, "Placemark" );
     qmlRegisterType<PositionSource>( uri, 0, 11, "PositionSource" );
+    qmlRegisterType<Bookmarks>( uri, 0, 11, "Bookmarks" );
     qmlRegisterType<Tracking>( uri, 0, 11, "Tracking" );
     qmlRegisterType<Routing>( uri, 0, 11, "Routing" );
     qmlRegisterType<Navigation>( uri, 0, 11, "Navigation" );
@@ -56,11 +61,17 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
     qmlRegisterType<Marble::NewstuffModel>( uri, 0, 11, "NewstuffModel" );
     qmlRegisterType<OfflineDataModel>( uri, 0, 11, "OfflineDataModel" );
     qmlRegisterType<MapThemeModel>( uri, 0, 11, "MapThemeModel" );
+
+    qmlRegisterUncreatableType<BookmarksModel>( uri, 0, 11, "BookmarksModel", "Do not create" );
 }
 
 void MarbleDeclarativePlugin::initializeEngine( QDeclarativeEngine *engine, const char *)
 {
     engine->addImageProvider( "maptheme", new MapThemeImageProvider );
+    // Register the global Marble object. Can be used in .qml files for requests like Marble.resolvePath("some/icon.png")
+    if ( !engine->rootContext()->contextProperty( "Marble").isValid() ) {
+        engine->rootContext()->setContextProperty( "Marble", new MarbleDeclarativeObject( this ) );
+    }
 }
 
 #include "MarbleDeclarativePlugin.moc"

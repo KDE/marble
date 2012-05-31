@@ -9,6 +9,7 @@
         <file>activities/Geocaching.qml</file>
         <file>activities/Navigation.qml</file>
         <file>activities/Routing.qml</file>
+        <file>activities/Placemark.qml</file>
         <file>activities/Search.qml</file>
         <file>activities/SpaceView.qml</file>
         <file>activities/Tracking.qml</file>
@@ -19,8 +20,11 @@
         <file>icons/activity-default.png</file>
         <file>icons/activity-download.png</file>
         <file>icons/activity-friends.png</file>
+        <file>icons/activity-routing.png</file>
+        <file>icons/activity-navigation.png</file>
         <file>icons/activity-search.png</file>
         <file>icons/activity-spaceview.png</file>
+        <file>icons/activity-tracking.png</file>
         <file>icons/activity-virtualglobe.png</file>
         <file>icons/activity-weather.png</file>
         <file>icons/bookmark.png</file>
@@ -29,9 +33,12 @@
         <file>icons/routing-pedestrian.svg</file>
         <file>icons/routing-motorcar.svg</file>
         <file alias="marble/wireless.svg">icons/wireless.svg</file>
+        <file alias="marble/globe.svg">icons/globe.svg</file>
         <file>MapThemeSelectionPage.qml</file>
         <file>MapThemePage.qml</file>
         <file>PreferencesPage.qml</file>
         <file>OfflineDataPage.qml</file>
+        <file>MarbleTouch.qml</file>
+        <file alias="MarbleWindow.qml">harmattan/MarbleWindow.qml</file>
     </qresource>
 </RCC>

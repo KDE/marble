@@ -16,7 +16,7 @@
 
 // Marble
 #include "GeoDataLatLonAltBox.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleModel.h"
 #include "MarbleDirs.h"
 #include "WikipediaItem.h"

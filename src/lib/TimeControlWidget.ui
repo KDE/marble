@@ -81,9 +81,6 @@
           <day>1</day>
          </date>
         </property>
-        <property name="displayFormat">
-         <string>dd/MM/yyyy hh:mm AP</string>
-        </property>
         <property name="calendarPopup">
          <bool>true</bool>
         </property>
@@ -114,9 +111,6 @@
         </property>
         <property name="keyboardTracking">
          <bool>false</bool>
-        </property>
-        <property name="displayFormat">
-         <string>dd/MM/yyyy hh:mm AP</string>
         </property>
        </widget>
       </item>

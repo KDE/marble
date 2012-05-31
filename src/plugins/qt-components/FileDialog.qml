@@ -41,10 +41,10 @@ Sheet {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ToolIcon {
+            MarbleToolIcon {
                 id: multiButton;
                 anchors.verticalCenter: parent.verticalCenter
-                iconId: "icon-m-toolbar-up"
+                iconSource: main.icon( "actions/go-up", 48 );
                 onClicked: directoryModel.folder = directoryModel.parentFolder
             }
             Label {
@@ -83,7 +83,7 @@ Sheet {
                     Row {
                         id: contentRow
                         spacing: 5
-                        Image { anchors.verticalCenter: parent.verticalCenter; source: fileItem.isFolder ? "image://theme/icon-m-common-directory" : "image://theme/icon-m-content-document" }
+                        Image { anchors.verticalCenter: parent.verticalCenter; source: main.icon( fileItem.isFolder ? "places/folder" : "mimetypes/unknown", 48 ) }
                         Label { anchors.verticalCenter: parent.verticalCenter; text: fileName }
                     }
 

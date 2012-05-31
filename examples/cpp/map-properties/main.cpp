@@ -10,7 +10,7 @@
 
 #include <QtGui/QApplication>
 
-#include <marble/global.h>
+#include <marble/MarbleGlobal.h>
 #include <marble/MarbleWidget.h>
 #include <marble/AbstractFloatItem.h>
 

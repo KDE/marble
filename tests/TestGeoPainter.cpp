@@ -14,7 +14,7 @@
 #include "GeoDataLinearRing.h"
 #include "GeoPainter_p.h"
 #include "GeoPainter.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "ViewportParams.h"
 
 namespace Marble

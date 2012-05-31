@@ -13,7 +13,7 @@
 #define MARBLE_GEOGRAPHICSSCENE_H
 
 #include "marble_export.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QList>
@@ -44,7 +44,7 @@ public:
      * @brief Add an item to the GeoGraphicsScene
      * Adds the item @p item to the GeoGraphicsScene
      */
-    void addIdem( GeoGraphicsItem *item );
+    void addItem( GeoGraphicsItem *item );
 
     /**
      * @brief Remove an item from the GeoGraphicsScene

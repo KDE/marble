@@ -17,7 +17,7 @@
 
 #include "GeoDataObject.h"
 #include "Serializable.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include "geodata_export.h"
 

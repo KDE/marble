@@ -31,7 +31,7 @@
 #include <QtCore/QTextStream>
 #include <QtGui/QPixmap>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleDirs.h"
 
 namespace Marble

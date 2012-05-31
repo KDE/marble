@@ -80,15 +80,7 @@ void VoiceNavigationModelPrivate::reset()
 QString VoiceNavigationModelPrivate::audioFile( const QString &name )
 {
     QStringList const formats = QStringList() << "ogg" << "mp3" << "wav";
-    if ( !m_speakerEnabled ) {
-        QString const audioTemplate = "audio/%1.%2";
-        foreach( const QString &format, formats ) {
-            QString const result = MarbleDirs::path( audioTemplate.arg( name ).arg( format ) );
-            if ( !result.isEmpty() ) {
-                return result;
-            }
-        }
-    } else {
+    if ( m_speakerEnabled ) {
         QString const audioTemplate = "%1/%2.%3";
         foreach( const QString &format, formats ) {
             QString const result = audioTemplate.arg( m_speaker ).arg( name ).arg( format );
@@ -96,6 +88,14 @@ QString VoiceNavigationModelPrivate::audioFile( const QString &name )
             if ( audioFile.exists() ) {
                 return result;
             }
+        }
+    }
+
+    QString const audioTemplate = "audio/%1.%2";
+    foreach( const QString &format, formats ) {
+        QString const result = MarbleDirs::path( audioTemplate.arg( name ).arg( format ) );
+        if ( !result.isEmpty() ) {
+            return result;
         }
     }
 
@@ -128,12 +128,13 @@ QString VoiceNavigationModelPrivate::distanceAudioFile( qreal dest )
 
 QString VoiceNavigationModelPrivate::turnTypeAudioFile( Maneuver::Direction turnType, qreal distance )
 {
-    QMap<Maneuver::Direction, QString> const & map = distance < 75 ? m_turnTypeMap : m_announceMap;
-    if ( map.contains( turnType ) ) {
+    bool const announce = distance >= 75;
+    QMap<Maneuver::Direction, QString> const & map = announce ? m_announceMap : m_turnTypeMap;
+    if ( m_speakerEnabled && map.contains( turnType ) ) {
         return audioFile( map[turnType] );
     }
 
-    return QString();
+    return audioFile( announce ? "KDE-Sys-List-End" : "KDE-Sys-App-Positive" );
 }
 
 void VoiceNavigationModelPrivate::updateInstruction( qreal distance, Maneuver::Direction turnType )
@@ -167,55 +168,39 @@ void VoiceNavigationModelPrivate::initializeMaps()
     m_turnTypeMap.clear();
     m_announceMap.clear();
 
-    if ( m_speakerEnabled ) {
-        m_announceMap[Maneuver::Straight] = "";
-        m_announceMap[Maneuver::SlightRight] = "AhKeepRight";
-        m_announceMap[Maneuver::Right] = "AhRightTurn";
-        m_announceMap[Maneuver::SharpRight] = "AhRightTurn";
-        m_announceMap[Maneuver::TurnAround] = "AhUTurn";
-        m_announceMap[Maneuver::SharpLeft] = "AhLeftTurn";
-        m_announceMap[Maneuver::Left] = "AhLeftTurn";
-        m_announceMap[Maneuver::SlightLeft] = "AhKeepLeft";
-        m_announceMap[Maneuver::RoundaboutFirstExit] = "RbExit1";
-        m_announceMap[Maneuver::RoundaboutSecondExit] = "RbExit2";
-        m_announceMap[Maneuver::RoundaboutThirdExit] = "RbExit3";
+    m_announceMap[Maneuver::Continue] = "Straight";
+    // none of our voice navigation commands fits, so leave out
+    // Maneuver::Merge here to have a sound play instead
+    m_announceMap[Maneuver::Straight] = "Straight";
+    m_announceMap[Maneuver::SlightRight] = "AhKeepRight";
+    m_announceMap[Maneuver::Right] = "AhRightTurn";
+    m_announceMap[Maneuver::SharpRight] = "AhRightTurn";
+    m_announceMap[Maneuver::TurnAround] = "AhUTurn";
+    m_announceMap[Maneuver::SharpLeft] = "AhLeftTurn";
+    m_announceMap[Maneuver::Left] = "AhLeftTurn";
+    m_announceMap[Maneuver::SlightLeft] = "AhKeepLeft";
+    m_announceMap[Maneuver::RoundaboutFirstExit] = "RbExit1";
+    m_announceMap[Maneuver::RoundaboutSecondExit] = "RbExit2";
+    m_announceMap[Maneuver::RoundaboutThirdExit] = "RbExit3";
+    m_announceMap[Maneuver::ExitLeft] = "AhExitLeft";
+    m_announceMap[Maneuver::ExitRight] = "AhExitRight";
 
-        m_turnTypeMap[Maneuver::Straight] = "Straight";
-        m_turnTypeMap[Maneuver::SlightRight] = "BearRight";
-        m_turnTypeMap[Maneuver::Right] = "TurnRight";
-        m_turnTypeMap[Maneuver::SharpRight] = "SharpRight";
-        m_turnTypeMap[Maneuver::TurnAround] = "UTurn";
-        m_turnTypeMap[Maneuver::SharpLeft] = "SharpLeft";
-        m_turnTypeMap[Maneuver::Left] = "TurnLeft";
-        m_turnTypeMap[Maneuver::SlightLeft] = "BearLeft";
-        m_turnTypeMap[Maneuver::RoundaboutFirstExit] = "";
-        m_turnTypeMap[Maneuver::RoundaboutSecondExit] = "";
-        m_turnTypeMap[Maneuver::RoundaboutThirdExit] = "";
-    } else {
-        m_announceMap[Maneuver::Straight] = "KDE-Sys-List-End";
-        m_announceMap[Maneuver::SlightRight] = "KDE-Sys-List-End";
-        m_announceMap[Maneuver::Right] = "KDE-Sys-List-End";
-        m_announceMap[Maneuver::SharpRight] = "KDE-Sys-List-End";
-        m_announceMap[Maneuver::TurnAround] = "KDE-Sys-List-End";
-        m_announceMap[Maneuver::SharpLeft] = "KDE-Sys-List-End";
-        m_announceMap[Maneuver::Left] = "KDE-Sys-List-End";
-        m_announceMap[Maneuver::SlightLeft] = "KDE-Sys-List-End";
-        m_announceMap[Maneuver::RoundaboutFirstExit] = "KDE-Sys-List-End";
-        m_announceMap[Maneuver::RoundaboutSecondExit] = "KDE-Sys-List-End";
-        m_announceMap[Maneuver::RoundaboutThirdExit] = "KDE-Sys-List-End";
-
-        m_turnTypeMap[Maneuver::Straight] = "KDE-Sys-App-Positive";
-        m_turnTypeMap[Maneuver::SlightRight] = "KDE-Sys-App-Positive";
-        m_turnTypeMap[Maneuver::Right] = "KDE-Sys-App-Positive";
-        m_turnTypeMap[Maneuver::SharpRight] = "KDE-Sys-App-Positive";
-        m_turnTypeMap[Maneuver::TurnAround] = "KDE-Sys-App-Positive";
-        m_turnTypeMap[Maneuver::SharpLeft] = "KDE-Sys-App-Positive";
-        m_turnTypeMap[Maneuver::Left] = "KDE-Sys-App-Positive";
-        m_turnTypeMap[Maneuver::SlightLeft] = "KDE-Sys-App-Positive";
-        m_turnTypeMap[Maneuver::RoundaboutFirstExit] = "KDE-Sys-App-Positive";
-        m_turnTypeMap[Maneuver::RoundaboutSecondExit] = "KDE-Sys-App-Positive";
-        m_turnTypeMap[Maneuver::RoundaboutThirdExit] = "KDE-Sys-App-Positive";
-    }
+    m_turnTypeMap[Maneuver::Continue] = "Straight";
+    // none of our voice navigation commands fits, so leave out
+    // Maneuver::Merge here to have a sound play instead
+    m_turnTypeMap[Maneuver::Straight] = "Straight";
+    m_turnTypeMap[Maneuver::SlightRight] = "BearRight";
+    m_turnTypeMap[Maneuver::Right] = "TurnRight";
+    m_turnTypeMap[Maneuver::SharpRight] = "SharpRight";
+    m_turnTypeMap[Maneuver::TurnAround] = "UTurn";
+    m_turnTypeMap[Maneuver::SharpLeft] = "SharpLeft";
+    m_turnTypeMap[Maneuver::Left] = "TurnLeft";
+    m_turnTypeMap[Maneuver::SlightLeft] = "BearLeft";
+    m_turnTypeMap[Maneuver::RoundaboutFirstExit] = "";
+    m_turnTypeMap[Maneuver::RoundaboutSecondExit] = "";
+    m_turnTypeMap[Maneuver::RoundaboutThirdExit] = "";
+    m_turnTypeMap[Maneuver::ExitLeft] = "TurnLeft";
+    m_turnTypeMap[Maneuver::ExitRight] = "TurnRight";
 }
 
 VoiceNavigationModel::VoiceNavigationModel( QObject *parent ) :
@@ -258,7 +243,6 @@ void VoiceNavigationModel::setSpeakerEnabled( bool enabled )
 {
     if ( enabled != d->m_speakerEnabled ) {
         d->m_speakerEnabled = enabled;
-        d->initializeMaps();
         emit isSpeakerEnabledChanged();
         emit previewChanged();
     }

@@ -13,19 +13,14 @@
 namespace Marble
 {
 
-CachePlugin::CachePlugin( QObject *parent ) : RunnerPlugin( parent )
+CachePlugin::CachePlugin( QObject *parent ) :
+    ParseRunnerPlugin( parent )
 {
-    setCapabilities( Parsing );
 }
 
 QString CachePlugin::name() const
 {
     return tr( "Cache File Parser" );
-}
-
-QString CachePlugin::guiString() const
-{
-    return tr( "Cache Parser" );
 }
 
 QString CachePlugin::nameId() const
@@ -52,6 +47,16 @@ QList<PluginAuthor> CachePlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+}
+
+QString CachePlugin::fileFormatDescription() const
+{
+    return tr( "Marble Cache Files" );
+}
+
+QStringList CachePlugin::fileExtensions() const
+{
+    return QStringList() << "cache";
 }
 
 MarbleAbstractRunner* CachePlugin::newRunner() const

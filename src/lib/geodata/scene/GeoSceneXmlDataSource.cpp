@@ -21,7 +21,7 @@
 
 #include "GeoSceneXmlDataSource.h"
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 namespace Marble
 {

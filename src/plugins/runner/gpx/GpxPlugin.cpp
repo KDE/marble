@@ -13,19 +13,14 @@
 namespace Marble
 {
 
-GpxPlugin::GpxPlugin( QObject *parent ) : RunnerPlugin( parent )
+GpxPlugin::GpxPlugin( QObject *parent ) :
+    ParseRunnerPlugin( parent )
 {
-    setCapabilities( Parsing );
 }
 
 QString GpxPlugin::name() const
 {
     return tr( "Gpx File Parser" );
-}
-
-QString GpxPlugin::guiString() const
-{
-    return tr( "Gpx Parser" );
 }
 
 QString GpxPlugin::nameId() const
@@ -52,6 +47,16 @@ QList<PluginAuthor> GpxPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+}
+
+QString GpxPlugin::fileFormatDescription() const
+{
+    return tr( "GPS Data" );
+}
+
+QStringList GpxPlugin::fileExtensions() const
+{
+    return QStringList() << "gpx";
 }
 
 MarbleAbstractRunner* GpxPlugin::newRunner() const

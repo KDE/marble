@@ -13,7 +13,7 @@
 
 #include <QtCore/QVector>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 class QPolygonF;
 class QSizeF;

@@ -23,7 +23,7 @@
 #include <QtGui/QImageReader>
 #include <QtGui/QPainter>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "TileLoaderHelper.h"

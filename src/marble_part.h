@@ -19,7 +19,7 @@
 #include <QtCore/QDateTime>
 #include <kmenu.h>
 #include <kurl.h>
-#include "global.h"
+#include "MarbleGlobal.h"
 
 class KAboutData;
 class KAction;

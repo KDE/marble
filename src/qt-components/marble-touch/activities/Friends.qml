@@ -20,12 +20,12 @@ Page {
     anchors.fill: parent
 
     tools: ToolBarLayout {
-        ToolIcon {
-            iconId: "toolbar-back";
+        MarbleToolIcon {
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
-        ToolIcon {
-            iconId: "common-location"
+        MarbleToolIcon {
+            iconSource: main.icon( "places/user-identity", 48 );
             onClicked: {
                 marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
                 if (marbleWidget.zoom < 22026 ) {
@@ -33,6 +33,8 @@ Page {
                 }
             }
         }
+
+        Item {}
     }
 
     Item {

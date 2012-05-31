@@ -10,14 +10,15 @@
 import QtQuick 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
+import org.kde.edu.marble.qtcomponents 0.12
 
 /*
  * Page to select map theme from a list.
  */
 Page {
     tools: ToolBarLayout {
-        ToolIcon {
-            iconId: "toolbar-back";
+        MarbleToolIcon {
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
     }

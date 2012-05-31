@@ -10,13 +10,14 @@ import QtQuick 1.0
 import QtMultimediaKit 1.1
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
+import org.kde.edu.marble.qtcomponents 0.12
 
 Page {
     id: preferencesPage
 
     tools: ToolBarLayout {
-        ToolIcon {
-            iconId: "toolbar-back";
+        MarbleToolIcon {
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
     }
@@ -30,6 +31,7 @@ Page {
     ListView {
         id: themeView
         anchors.fill: parent
+        anchors.margins: 5
         model: themeInstallModel
         delegate: themeDelegate
         highlight: Rectangle { radius: 5; color: "lightsteelblue" }
@@ -188,7 +190,7 @@ Page {
                         visible: delegateRoot.installing
                         width: 40
                         flat: true
-                        iconSource: "image://theme/icon-s-cancel"
+                        iconSource: main.icon( "actions/dialog-cancel", 32 );
                         onClicked: {
                             progressBar.indeterminate = true
                             themeInstallModel.cancel(delegateRoot.idx)

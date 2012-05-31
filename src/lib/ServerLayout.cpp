@@ -12,7 +12,7 @@
 #include "ServerLayout.h"
 
 #include "GeoSceneTexture.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "TileId.h"
 
 #include <math.h>

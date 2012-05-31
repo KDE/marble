@@ -13,7 +13,7 @@
 
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "GeoPainter.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataPlacemark.h"

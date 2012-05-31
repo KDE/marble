@@ -64,6 +64,7 @@
 #include "routing/RoutingProfilesModel.h"
 #include "routing/RoutingWidget.h"
 #include "routing/RouteRequest.h"
+#include "ParseRunnerPlugin.h"
 #include "PositionTracking.h"
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
@@ -871,9 +872,28 @@ void MainWindow::updateStatusBar()
 
 void MainWindow::openFile()
 {
-    QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Open File"),
-                            m_lastFileOpenPath,
-                            tr("All Supported Files (*.gpx *.kml *.log *.osm *.pnt *.shp);;GPS Data (*.gpx);;Google Earth KML (*.kml);;TangoGPS Log File (*.log);;OpenStreetmap Data (*.osm);;Micro World Database II (*.pnt);;Shapefile map file (*.shp)"));
+    const PluginManager *const pluginManager = m_controlView->marbleModel()->pluginManager();
+
+    QStringList allFileExtensions;
+    QStringList filters;
+    foreach ( const ParseRunnerPlugin *plugin, pluginManager->parsingRunnerPlugins() ) {
+        if ( plugin->nameId() == "Cache" )
+            continue;
+
+        const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings( QRegExp( "^" ), "*." );
+        const QString filter = QString( "%1 (%2)" ).arg( plugin->fileFormatDescription() ).arg( fileExtensions.join( " " ) );
+        filters << filter;
+        allFileExtensions << fileExtensions;
+    }
+
+    allFileExtensions.sort();  // sort since file extensions are visible under Windows
+    const QString allFileTypes = QString( "%1 (%2)" ).arg( tr( "All Supported Files" ) ).arg( allFileExtensions.join( " " ) );
+
+    filters.sort();
+    filters.prepend( allFileTypes );
+    const QString filter = filters.join( ";;" );
+
+    QStringList fileNames = QFileDialog::getOpenFileNames( this, tr( "Open File" ), m_lastFileOpenPath, filter );
 
     if ( !fileNames.isEmpty() ) {
         const QString firstFile = fileNames.first();
@@ -1014,7 +1034,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          } else {
             mapThemeId = settings.value("mapTheme", m_controlView->defaultMapThemeId() ).toString();
          }
-         qDebug() << "ReadSettings: mapThemeId: " << mapThemeId;
+         mDebug() << Q_FUNC_INFO << "mapThemeId:" << mapThemeId;
          m_controlView->marbleWidget()->setMapThemeId( mapThemeId );
          bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
          int const defaultProjection = smallScreen ? Mercator : Spherical;
@@ -1375,7 +1395,7 @@ void MainWindow::showDownloadRegionDialog()
                  SLOT( disconnectDownloadRegionDialog() ));
     }
     // FIXME: get allowed range from current map theme
-    m_downloadRegionDialog->setAllowedTileLevelRange( 0, 18 );
+    m_downloadRegionDialog->setAllowedTileLevelRange( 0, 16 );
     m_downloadRegionDialog->setSelectionMethod( DownloadRegionDialog::VisibleRegionMethod );
     ViewportParams const * const viewport =
         m_controlView->marbleWidget()->viewport();
@@ -1412,7 +1432,9 @@ void MainWindow::downloadRegion()
     QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
     mDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
     QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
-    m_controlView->marbleWidget()->downloadRegion( sourceDir, pyramid );
+    if ( !pyramid.isEmpty() ) {
+        m_controlView->marbleWidget()->downloadRegion( sourceDir, pyramid );
+    }
 }
 
 void MainWindow::printMapScreenShot()

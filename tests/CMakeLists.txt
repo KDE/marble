@@ -112,6 +112,7 @@ add_definitions( -DDGML_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}/../data/maps/earth
 marble_add_test( TestGeoSceneWriter )
 
 marble_add_test( QuaternionTest )           # Check Quaternion arithmetic
+marble_add_test( ProjectionTest )           # Check LineString projection
 marble_add_test( PluginManagerTest )        # Check plugin loading
 marble_add_test( MarbleRunnerManagerTest )  # Check RunnerManager signals
 marble_add_test( PlacemarkPositionProviderPluginTest )
@@ -122,6 +123,7 @@ marble_add_test( MarbleWidgetTest )         # Check map theme, mouse move, repai
 marble_add_test( MapViewWidgetTest )        # Check mapview signals
 marble_add_test( TestGeoPainter )           # no tests!
 marble_add_test( GeoPolygonTest )           # Loads an empty pnt file
+marble_add_test( RenderPluginTest )
 #marble_add_test( TestOsmAnnotation )
 
 ## GeoData Classes tests

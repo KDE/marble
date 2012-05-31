@@ -139,11 +139,12 @@ void BookmarkManager::removeBookmark( GeoDataPlacemark *bookmark )
 {
     d->m_treeModel->removeFeature( bookmark );
     delete bookmark;
+    updateBookmarkFile();
 }
 
 GeoDataDocument * BookmarkManager::document() const
 {
-    return d->m_bookmarkDocument;
+    return d->bookmarkDocument();
 }
 
 bool BookmarkManager::showBookmarks()

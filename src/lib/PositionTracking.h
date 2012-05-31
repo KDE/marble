@@ -84,6 +84,13 @@ public:
     /** @brief Returns true if there is no position in the track */
     bool isTrackEmpty() const;
 
+    /**
+     * @brief Returns the total track length
+     * @param planetRadius Scale factor, usually the radius of the underlying planet, e.g. EARTH_RADIUS
+     * @return Length of all track segments on the unit sphere scaled by planetRadius
+     */
+    qreal length( qreal planetRadius ) const;
+
 public Q_SLOTS:
     /**
       * Toggles the visibility of the Position Tracking document

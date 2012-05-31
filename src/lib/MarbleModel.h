@@ -35,7 +35,7 @@
 #include <QtCore/QString>
 #include <QtCore/QVector>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 class QItemSelectionModel;
 class QAbstractItemModel;

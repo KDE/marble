@@ -13,8 +13,8 @@
 
 #include <QStandardItemModel>
 
-#include "global.h"
-#include "RunnerPlugin.h"
+#include "MarbleGlobal.h"
+#include "RoutingRunnerPlugin.h"
 #include "MarbleDebug.h"
 #include "RoutingProfilesModel.h"
 #include "PluginManager.h"
@@ -43,13 +43,10 @@ RoutingProfileSettingsDialog::RoutingProfileSettingsDialog( const PluginManager 
       m_ui->buttonBox->hide();
     }
 
-    QList<RunnerPlugin*> allPlugins = pluginManager->runnerPlugins();
-    foreach( RunnerPlugin* plugin, allPlugins ) {
-        if ( !plugin->supports( RunnerPlugin::Routing ) ) {
-            continue;
-        }
+    QList<RoutingRunnerPlugin*> allPlugins = pluginManager->routingRunnerPlugins();
+    foreach( RoutingRunnerPlugin* plugin, allPlugins ) {
         m_plugins << plugin;
-        RunnerPlugin::ConfigWidget* configWidget = plugin->configWidget();
+        RoutingRunnerPlugin::ConfigWidget* configWidget = plugin->configWidget();
         if ( configWidget ) {
             m_configWidgets.insert( plugin, configWidget );
             m_ui->settingsStack->addWidget( configWidget );
@@ -82,7 +79,7 @@ void RoutingProfileSettingsDialog::updateConfigWidget( )
         return;
     }
 
-    RunnerPlugin *plugin = m_plugins.at( current.row() );
+    RoutingRunnerPlugin *plugin = m_plugins.at( current.row() );
     QWidget* configWidget = m_configWidgets[plugin];
     if ( configWidget ) {
         bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -105,7 +102,7 @@ void RoutingProfileSettingsDialog::editProfile( int profileIndex )
     m_ui->name->setText( profiles.at( profileIndex ).name() );
 
     m_servicesModel->clear();
-    foreach( RunnerPlugin *plugin,  m_plugins ) {
+    foreach( RoutingRunnerPlugin *plugin,  m_plugins ) {
         QStandardItem *item = new QStandardItem( plugin->guiString() );
         item->setCheckable( true );
         if ( profiles[ profileIndex ].pluginSettings().contains( plugin->nameId() ) ) {
@@ -155,7 +152,7 @@ void RoutingProfileSettingsDialog::openConfigDialog()
 {
     QModelIndex current = m_ui->services->selectionModel()->currentIndex();
     if ( current.isValid() ) {
-        RunnerPlugin *plugin = m_plugins.at( current.row() );
+        RoutingRunnerPlugin *plugin = m_plugins.at( current.row() );
 
         if ( !m_dialog ) {
             m_dialog = new QDialog( this );

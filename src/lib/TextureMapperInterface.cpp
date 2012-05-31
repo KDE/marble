@@ -13,9 +13,8 @@
 
 using namespace Marble;
 
-TextureMapperInterface::TextureMapperInterface( QObject * const parent )
-    : QObject( parent ),
-      m_tileLevel( 0 )
+TextureMapperInterface::TextureMapperInterface()
+    : m_tileLevel( 0 )
 {
 }
 
@@ -30,6 +29,3 @@ void TextureMapperInterface::setTileLevel( int tileLevel )
     //    mDebug() << "Texture Level was set to: " << tileLevel;
     m_tileLevel = tileLevel;
 }
-
-
-#include "TextureMapperInterface.moc"

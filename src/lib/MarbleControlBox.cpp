@@ -33,7 +33,7 @@
 #include "RoutingWidget.h"
 
 // Marble
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "GeoSceneDocument.h"

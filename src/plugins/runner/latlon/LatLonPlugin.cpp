@@ -14,9 +14,9 @@
 namespace Marble
 {
 
-LatLonPlugin::LatLonPlugin( QObject *parent ) : RunnerPlugin( parent )
+LatLonPlugin::LatLonPlugin( QObject *parent ) :
+    SearchRunnerPlugin( parent )
 {
-    setCapabilities( Search );
 }
 
 QString LatLonPlugin::name() const

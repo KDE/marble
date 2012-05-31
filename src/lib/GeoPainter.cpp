@@ -23,7 +23,7 @@
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "ViewportParams.h"
 
 // #define MARBLE_DEBUG
@@ -747,13 +747,31 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
     // In QPathClipper We Trust ...
     // ... and in the speed of a threesome of nested foreachs!
 
-    QPen oldPen = pen();
-    setPen( QPen( Qt::NoPen ) );
+    QVector<QPolygonF> outline;
+    QPen const oldPen = pen();
+    // When inner boundaries exist, the outline of the polygon must be painted
+    // separately to avoid connections between the outer and inner boundaries
+    // To avoid performance penalties the separate painting is only done when
+    // it's really needed. See review 105019 for details.
+    bool const needOutlineWorkaround = !polygon.innerBoundaries().isEmpty();
+    if ( needOutlineWorkaround ) {
+        foreach( QPolygonF* polygon, outerPolygons ) {
+            outline << *polygon;
+        }
+        setPen( QPen( Qt::NoPen ) );
+    }
+
 
     QVector<GeoDataLinearRing> innerBoundaries = polygon.innerBoundaries(); 
     foreach( const GeoDataLinearRing& itInnerBoundary, innerBoundaries ) {
         QVector<QPolygonF*> innerPolygons;
         d->createPolygonsFromLinearRing( itInnerBoundary, innerPolygons );
+
+        if ( needOutlineWorkaround ) {
+            foreach( QPolygonF* polygon, innerPolygons ) {
+                outline << *polygon;
+            }
+        }
 
         foreach( QPolygonF* itOuterPolygon, outerPolygons ) {
             foreach( QPolygonF* itInnerPolygon, innerPolygons ) {
@@ -767,11 +785,11 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
         ClipPainter::drawPolygon( *itOuterPolygon, fillRule );
     }
 
-    // Paint the outline separately to avoid connections between points on the outer ring and the holes
-    setPen( oldPen );
-    drawPolyline( polygon.outerBoundary() );
-    foreach( const GeoDataLinearRing &ring, polygon.innerBoundaries() ) {
-        drawPolyline( ring );
+    if ( needOutlineWorkaround ) {
+        setPen( oldPen );
+        foreach( const QPolygonF &polygon, outline ) {
+            ClipPainter::drawPolyline( polygon );
+        }
     }
 
     qDeleteAll( outerPolygons );    

@@ -13,7 +13,7 @@
 #define MARBLE_GEODATAGROUNDOVERLAY_H
 
 #include "GeoDataOverlay.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "GeoDataLatLonBox.h"
 
 namespace Marble {

@@ -20,7 +20,7 @@
 #include <QtCore/QCoreApplication>
 
 #include "MarbleDebug.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include "GeoDataTypes.h"
 #include "GeoDataLatLonAltBox.h"

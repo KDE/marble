@@ -14,7 +14,7 @@
 #include <QtCore/QObject>
 
 #include "MarbleDebug.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 namespace Marble
 {

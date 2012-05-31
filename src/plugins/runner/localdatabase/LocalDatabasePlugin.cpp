@@ -14,9 +14,9 @@
 namespace Marble
 {
 
-LocalDatabasePlugin::LocalDatabasePlugin( QObject *parent ) : RunnerPlugin( parent )
+LocalDatabasePlugin::LocalDatabasePlugin( QObject *parent ) :
+    SearchRunnerPlugin( parent )
 {
-    setCapabilities( Search );
 }
 
 QString LocalDatabasePlugin::name() const

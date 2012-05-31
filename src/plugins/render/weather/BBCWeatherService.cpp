@@ -22,7 +22,7 @@
 #include "WeatherData.h"
 #include "WeatherModel.h"
 #include "MarbleDebug.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 // Qt
 #include <QtCore/QFile>

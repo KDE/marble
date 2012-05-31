@@ -56,6 +56,8 @@ OverviewMap::OverviewMap( const MarbleModel *marbleModel )
     setCacheMode( NoCache );
     connect( this, SIGNAL( settingsChanged( QString ) ),
              this, SLOT( updateSettings() ) );
+
+    restoreDefaultSettings();
 }
 
 OverviewMap::~OverviewMap()

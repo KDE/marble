@@ -11,7 +11,7 @@
 #include "OpenCachingModel.h"
 #include "OpenCachingItem.h"
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleModel.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"

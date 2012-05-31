@@ -93,7 +93,6 @@ CurrentLocationWidget::CurrentLocationWidget( QWidget *parent, Qt::WindowFlags f
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     d->m_currentLocationUi.positionTrackingComboBox->setVisible( !smallScreen );
     d->m_currentLocationUi.locationLabel->setVisible( !smallScreen );
-    d->m_currentLocationUi.openTrackPushButton->setVisible( smallScreen );
 }
 
 CurrentLocationWidget::~CurrentLocationWidget()
@@ -120,8 +119,8 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
         d->m_currentLocationUi.locationLabel->setEnabled ( true );
         bool const hasTrack = !d->m_widget->model()->positionTracking()->isTrackEmpty();
         d->m_currentLocationUi.showTrackCheckBox->setEnabled( hasTrack );
-        d->m_currentLocationUi.saveTrackPushButton->setEnabled( hasTrack );
-        d->m_currentLocationUi.clearTrackPushButton->setEnabled( hasTrack );
+        d->m_currentLocationUi.saveTrackButton->setEnabled( hasTrack );
+        d->m_currentLocationUi.clearTrackButton->setEnabled( hasTrack );
     }
 
     //disconnect CurrentLocation Signals
@@ -183,11 +182,11 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
     if ( d->m_widget->model()->positionTracking()->trackVisible() ) {
         d->m_currentLocationUi.showTrackCheckBox->setCheckState(Qt::Checked);
     }
-    connect ( d->m_currentLocationUi.saveTrackPushButton, SIGNAL( clicked(bool)),
+    connect ( d->m_currentLocationUi.saveTrackButton, SIGNAL( clicked(bool)),
               this, SLOT(saveTrack()));
-    connect ( d->m_currentLocationUi.openTrackPushButton, SIGNAL( clicked(bool)),
+    connect ( d->m_currentLocationUi.openTrackButton, SIGNAL( clicked(bool)),
               this, SLOT(openTrack()));
-    connect (d->m_currentLocationUi.clearTrackPushButton, SIGNAL( clicked(bool)),
+    connect (d->m_currentLocationUi.clearTrackButton, SIGNAL( clicked(bool)),
              this, SLOT(clearTrack()));
     connect( d->m_widget->model(), SIGNAL( trackedPlacemarkChanged( const GeoDataPlacemark* ) ),
              this, SLOT( trackPlacemark() ) );
@@ -246,9 +245,11 @@ void CurrentLocationWidgetPrivate::receiveGpsCoordinates( const GeoDataCoordinat
 {
     m_currentPosition = position;
     QString unitString;
+    QString altitudeUnitString;
     QString distanceUnitString;
     qreal unitSpeed = 0.0;
-    qreal distance = 0.0;
+    qreal altitude = 0.0;
+    qreal length = m_widget->model()->positionTracking()->length( m_widget->model()->planetRadius() );
 
     QString html = "<html><body>";
     html += "<table cellspacing=\"2\" cellpadding=\"2\">";
@@ -256,6 +257,7 @@ void CurrentLocationWidgetPrivate::receiveGpsCoordinates( const GeoDataCoordinat
     html += "<tr><td>Latitude</td><td><a href=\"http://edu.kde.org/marble\">%2</a></td></tr>";
     html += "<tr><td>Altitude</td><td>%3</td></tr>";
     html += "<tr><td>Speed</td><td>%4</td></tr>";
+    html += "<tr><td>Distance</td><td>%5</td></tr>";
     html += "</table>";
     html += "</body></html>";
 
@@ -264,28 +266,37 @@ void CurrentLocationWidgetPrivate::receiveGpsCoordinates( const GeoDataCoordinat
         //kilometers per hour
         unitString = QObject::tr("km/h");
         unitSpeed = speed * HOUR2SEC * METER2KM;
+        altitudeUnitString = QObject::tr("m");
         distanceUnitString = QObject::tr("m");
-        distance = position.altitude();
+        if ( length > 1000.0 ) {
+            length /= 1000.0;
+            distanceUnitString = QObject::tr("km");
+        }
+        altitude = position.altitude();
         break;
 
         case QLocale::ImperialSystem:
         //miles per hour
         unitString = QObject::tr("m/h");
         unitSpeed = speed * HOUR2SEC * METER2KM * KM2MI;
+        altitudeUnitString = QObject::tr("ft");
         distanceUnitString = QObject::tr("ft");
-        distance = position.altitude() * M2FT;
+        altitude = position.altitude() * M2FT;
+        length *= M2FT;
         break;
     }
     // TODO read this value from the incoming signal
     const QString speedString = QLocale::system().toString( unitSpeed, 'f', 1);
-    const QString distanceString = QString( "%1 %2" ).arg( distance, 0, 'f', 1, QChar(' ') ).arg( distanceUnitString );
+    const QString altitudeString = QString( "%1 %2" ).arg( altitude, 0, 'f', 1, QChar(' ') ).arg( altitudeUnitString );
+    const QString distanceString = QString( "%1 %2" ).arg( length, 0, 'f', 1, QChar(' ') ).arg( distanceUnitString );
 
     html = html.arg( position.lonToString() ).arg( position.latToString() );
-    html = html.arg( distanceString ).arg( speedString + ' ' + unitString );
+    html = html.arg( altitudeString ).arg( speedString + ' ' + unitString );
+    html = html.arg( distanceString );
     m_currentLocationUi.locationLabel->setText( html );
     m_currentLocationUi.showTrackCheckBox->setEnabled( true );
-    m_currentLocationUi.saveTrackPushButton->setEnabled( true );
-    m_currentLocationUi.clearTrackPushButton->setEnabled( true );
+    m_currentLocationUi.saveTrackButton->setEnabled( true );
+    m_currentLocationUi.clearTrackButton->setEnabled( true );
 }
 
 void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provider )
@@ -382,8 +393,8 @@ void CurrentLocationWidgetPrivate::clearTrack()
     if ( result == QMessageBox::Yes ) {
         m_widget->model()->positionTracking()->clearTrack();
         m_widget->update();
-        m_currentLocationUi.saveTrackPushButton->setEnabled( false );
-        m_currentLocationUi.clearTrackPushButton->setEnabled( false );
+        m_currentLocationUi.saveTrackButton->setEnabled( false );
+        m_currentLocationUi.clearTrackButton->setEnabled( false );
     }
 }
 

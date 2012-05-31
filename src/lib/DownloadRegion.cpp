@@ -100,6 +100,7 @@ void DownloadRegion::setTileLevelRange( const int minimumTileLevel, const int ma
 
 QVector<TileCoordsPyramid> DownloadRegion::region( const TextureLayer *textureLayer, const GeoDataLatLonAltBox &downloadRegion ) const
 {
+    Q_ASSERT( textureLayer );
     int const westX = d->rad2PixelX( downloadRegion.west(), textureLayer );
     int const northY = d->rad2PixelY( downloadRegion.north(), textureLayer );
     int const eastX = d->rad2PixelX( downloadRegion.east(), textureLayer );

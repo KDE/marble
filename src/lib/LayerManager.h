@@ -25,7 +25,6 @@ namespace Marble
 
 class AbstractDataPlugin;
 class AbstractDataPluginItem;
-class LayerManagerPrivate;
 class GeoPainter;
 class ViewportParams;
 class RenderPlugin;
@@ -108,12 +107,14 @@ class LayerManager : public QObject
     void setVisible( const QString &nameId, bool visible );
 
  private:
-    void renderLayer( GeoPainter *painter, ViewportParams *viewport, const QString& renderPosition  );
+    Q_PRIVATE_SLOT( d, void updateVisibility( bool, const QString & ) )
 
  private:
     Q_DISABLE_COPY( LayerManager )
 
-    LayerManagerPrivate  * const d;
+    class Private;
+    friend class Private;
+    Private  * const d;
 };
 
 }

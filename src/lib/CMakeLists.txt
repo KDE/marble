@@ -101,7 +101,7 @@ set(marblewidget_SRCS
     MarbleCacheSettingsWidget.cpp
     TimeControlWidget.cpp
     AbstractFloatItem.cpp
-    global.cpp
+    MarbleGlobal.cpp
     MarbleDirs.cpp
     MarbleLocale.cpp
     MarblePhysics.cpp
@@ -202,7 +202,10 @@ set(marblewidget_SRCS
 
     AutoNavigation.cpp
 
-    RunnerPlugin.cpp
+    SearchRunnerPlugin.cpp
+    ReverseGeocodingRunnerPlugin.cpp
+    RoutingRunnerPlugin.cpp
+    ParseRunnerPlugin.cpp
     MarbleAbstractRunner.cpp
     RunnerTask.cpp
 
@@ -339,6 +342,7 @@ else (APPLE AND QTONLY)
     TinyWebBrowser.h
     QtMarbleConfigDialog.h
     global.h
+    MarbleGlobal.h
     MarbleDirs.h
     GeoPainter.h
     TileCreatorDialog.h
@@ -384,6 +388,7 @@ else (APPLE AND QTONLY)
     geodata/data/GeoDataStyle.h
     geodata/data/GeoDataStyleMap.h
     geodata/data/GeoDataStyleSelector.h
+    geodata/data/GeoDataTrack.h
     geodata/data/Serializable.h
     geodata/geodata_export.h
     geodata/parser/GeoDocument.h
@@ -398,7 +403,10 @@ else (APPLE AND QTONLY)
     RenderPluginInterface.h
     MarbleRunnerManager.h
     MarbleAbstractRunner.h
-    RunnerPlugin.h
+    SearchRunnerPlugin.h
+    ReverseGeocodingRunnerPlugin.h
+    RoutingRunnerPlugin.h
+    ParseRunnerPlugin.h
     LayerInterface.h
     PluginAboutDialog.h
     marble_export.h

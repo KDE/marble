@@ -80,7 +80,7 @@ namespace Marble
         private Q_SLOTS: 
         void readSettings();
         void writeSettings();
-        void updateVisibility( QString nameId, bool visible );
+        void updateVisibility( bool visible );
         virtual RenderType renderType() const;
 
       private:

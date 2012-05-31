@@ -10,7 +10,7 @@
 
 #include <QtTest/QtTest>
 #include <QtGui/QApplication>
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleWidget.h"
 #include "AbstractFloatItem.h"
 #include "GeoDataCoordinates.h"
@@ -28,11 +28,10 @@ class TestGeoDataLatLonAltBox : public QObject
     Q_OBJECT
 
 private slots:
-    void testConstruction_data(); //i'll test the 3 types of constructor: from GeoDataLatLonAltBox, from GeoDataLatLonBox, from GeoDataCoordinates
+    void testConstruction_data();
     void testConstruction();
     void testAltitude_data();
     void testAltitude();
-    void testContains_data(); //again 3 types of constructor: GeoDataLatLonAltBox, GeoDataPoint, GeoDataCoordinates
     void testContains();
     void testIntersects_data();
     void testIntersects();
@@ -40,6 +39,8 @@ private slots:
     void testCenter();
     void testUnited_data();
     void testUnited();
+    void testIdlCrossing();
+    void testDefaultConstruction();
 
     void testFromLineString_data();
     void testFromLineString();
@@ -142,12 +143,26 @@ void TestGeoDataLatLonAltBox::testAltitude()
 }
 
 
-void TestGeoDataLatLonAltBox::testContains_data() {
-    
-}
+void TestGeoDataLatLonAltBox::testContains()
+{
+    GeoDataLatLonAltBox const largeBox = GeoDataLatLonAltBox::fromLineString( GeoDataLineString()
+            << GeoDataCoordinates( -20.0, +10.0, 15.0, GeoDataCoordinates::Degree )
+            << GeoDataCoordinates( +20.0, -10.0, 25.0, GeoDataCoordinates::Degree ) );
+    GeoDataLatLonAltBox const smallBox = GeoDataLatLonAltBox::fromLineString( GeoDataLineString()
+            << GeoDataCoordinates( -2.0, +1.0, 18.0, GeoDataCoordinates::Degree )
+            << GeoDataCoordinates( +2.0, -1.0, 22.0, GeoDataCoordinates::Degree ) );
 
-void TestGeoDataLatLonAltBox::testContains() {
-    
+    QVERIFY( largeBox.contains( GeoDataCoordinates( 5.0, 5.0, 20.0, GeoDataCoordinates::Degree ) ) );
+    QVERIFY( largeBox.contains( smallBox ) );
+    QVERIFY( largeBox.contains( largeBox ) );
+    QVERIFY( !smallBox.contains( largeBox ) );
+    QVERIFY(  smallBox.contains( GeoDataCoordinates(    0.0,   0.0, 20.0, GeoDataCoordinates::Degree ) ) );
+    QVERIFY( !largeBox.contains( GeoDataCoordinates(   5.0,   5.0, 30.0, GeoDataCoordinates::Degree ) ) );
+    QVERIFY( !largeBox.contains( GeoDataCoordinates(   5.0,   5.0, 10.0, GeoDataCoordinates::Degree ) ) );
+    QVERIFY( !largeBox.contains( GeoDataCoordinates(  35.0,   5.0, 20.0, GeoDataCoordinates::Degree ) ) );
+    QVERIFY( !largeBox.contains( GeoDataCoordinates( -35.0,   5.0, 20.0, GeoDataCoordinates::Degree ) ) );
+    QVERIFY( !largeBox.contains( GeoDataCoordinates(   5.0,  35.0, 20.0, GeoDataCoordinates::Degree ) ) );
+    QVERIFY( !largeBox.contains( GeoDataCoordinates(   5.0, -35.0, 20.0, GeoDataCoordinates::Degree ) ) );
 }
 
 void TestGeoDataLatLonAltBox::testIntersects_data()
@@ -329,6 +344,9 @@ void TestGeoDataLatLonAltBox::testUnited_data()
                                       << 30.0 << -30.0 << 150.0 << -170.0     // 170
                                       << 30.0 << -30.0 << 150.0 << -150.0;
 
+    QTest::newRow( "bug299959" ) << 90.0 << -90.0 << -180.0 << 180.0
+                                 << 18.0 << -18.0 <<   20.0 <<  30.0
+                                 << 90.0 << -90.0 << -180.0 << 180.0;
 }
 
 void TestGeoDataLatLonAltBox::testUnited()
@@ -362,6 +380,49 @@ void TestGeoDataLatLonAltBox::testUnited()
     QCOMPARE( box3.south( GeoDataCoordinates::Degree ), box3south );
     QCOMPARE( box3.west( GeoDataCoordinates::Degree ), box3west );
     QCOMPARE( box3.east( GeoDataCoordinates::Degree ), box3east );
+}
+
+void TestGeoDataLatLonAltBox::testIdlCrossing()
+{
+    // Test case for bug 299527
+    GeoDataLineString string;
+    string << GeoDataCoordinates(    0, 0, 200, GeoDataCoordinates::Degree );
+    string << GeoDataCoordinates(  180, 0, 200, GeoDataCoordinates::Degree );
+    string << GeoDataCoordinates( -180, 0, 200, GeoDataCoordinates::Degree );
+    string << GeoDataCoordinates(    0, 0, 200, GeoDataCoordinates::Degree );
+
+    GeoDataLatLonAltBox box = string.latLonAltBox();
+    QCOMPARE( box.west(), -M_PI );
+    QCOMPARE( box.east(), M_PI );
+    QCOMPARE( box.north(), 0.0 );
+    QCOMPARE( box.south(), 0.0 );
+}
+
+void TestGeoDataLatLonAltBox::testDefaultConstruction()
+{
+    GeoDataLatLonBox const null;
+    QVERIFY( null.isNull() );
+    QVERIFY( null.isEmpty() );
+    QVERIFY( (null|null).isNull() );
+    QVERIFY( (null|null).isEmpty() );
+
+    GeoDataLatLonBox const box( 0.5, 0.4, 0.3, 0.2 );
+
+    GeoDataLatLonBox const leftUnited = null | box;
+    QCOMPARE( leftUnited.west(), 0.2 );
+    QCOMPARE( leftUnited.east(), 0.3 );
+    QCOMPARE( leftUnited.north(), 0.5 );
+    QCOMPARE( leftUnited.south(), 0.4 );
+
+    GeoDataLatLonBox const rightUnited = box | null;
+    QCOMPARE( rightUnited.west(), 0.2 );
+    QCOMPARE( rightUnited.east(), 0.3 );
+    QCOMPARE( rightUnited.north(), 0.5 );
+    QCOMPARE( rightUnited.south(), 0.4 );
+
+    QVERIFY( !null.intersects( null ) );
+    QVERIFY( !null.intersects( box ) );
+    QVERIFY( !box.intersects( null ) );
 }
 
 qreal TestGeoDataLatLonAltBox::randomLon() 

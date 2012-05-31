@@ -317,24 +317,6 @@ bool GeoDataLatLonBox::contains( const GeoDataCoordinates &point ) const
     return true;
 }
 
-bool GeoDataLatLonBox::contains( const GeoDataPoint &point ) const
-{
-    qreal lon, lat;
-
-    point.geoCoordinates( lon, lat );
-
-    // We need to take care of the normal case ...
-    if ( ( ( lon < d->m_west || lon > d->m_east ) && ( d->m_west < d->m_east ) ) ||
-    // ... and the case where the bounding box crosses the date line:
-         ( ( lon > d->m_west || lon < d->m_east ) && ( d->m_west > d->m_east ) ) )
-        return false;
-    
-    if ( lat < d->m_south || lat > d->m_north )
-        return false;
-
-    return true;
-}
-
 bool GeoDataLatLonBox::contains( const GeoDataLatLonBox &other ) const
 {
     // check the contain criterion for the latitude first as this is trivial:
@@ -481,8 +463,8 @@ GeoDataLatLonBox GeoDataLatLonBox::united( const GeoDataLatLonBox& other ) const
     qreal e1 = d->m_east;
     qreal e2 = other.east();
 
-    bool idl1 = crossesDateLine();
-    bool idl2 = other.crossesDateLine();
+    bool const idl1 = d->m_east < d->m_west;
+    bool const idl2 = other.d->m_east < other.d->m_west;
 
     if ( idl1 ) {
         w1 += 2* M_PI;
@@ -681,7 +663,7 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
         }
         if ( ( idlMinCrossState < 0 && idlMaxCrossState > 0 ) 
             || idlMinCrossState < -1  || idlMaxCrossState > 1 
-            || west < east ) {
+            || west <= east ) {
             east = +M_PI;
             west = -M_PI;
         }

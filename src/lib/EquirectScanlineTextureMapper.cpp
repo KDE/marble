@@ -58,18 +58,13 @@ EquirectScanlineTextureMapper::RenderJob::RenderJob( StackedTileLoader *tileLoad
 }
 
 
-EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( StackedTileLoader *tileLoader,
-                                                              QObject *parent )
-    : TextureMapperInterface( parent ),
+EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( StackedTileLoader *tileLoader )
+    : TextureMapperInterface(),
       m_tileLoader( tileLoader ),
       m_repaintNeeded( true ),
       m_radius( 0 ),
       m_oldYPaintedTop( 0 )
 {
-    connect( m_tileLoader, SIGNAL( tileUpdateAvailable( const TileId & ) ),
-             this, SIGNAL( tileUpdatesAvailable() ) );
-    connect( m_tileLoader, SIGNAL( tileUpdatesAvailable() ),
-             this, SIGNAL( tileUpdatesAvailable() ) );
 }
 
 void EquirectScanlineTextureMapper::mapTexture( GeoPainter *painter,
@@ -261,5 +256,3 @@ void EquirectScanlineTextureMapper::RenderJob::run()
         }
     }
 }
-
-#include "EquirectScanlineTextureMapper.moc"

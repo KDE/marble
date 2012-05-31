@@ -18,10 +18,9 @@ namespace Marble
 {
 
 LocalOsmSearchPlugin::LocalOsmSearchPlugin( QObject *parent ) :
-    RunnerPlugin( parent ),
+    SearchRunnerPlugin( parent ),
     m_databaseLoaded( false )
 {
-    setCapabilities( Search );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( true );
 

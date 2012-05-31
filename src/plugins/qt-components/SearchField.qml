@@ -9,24 +9,21 @@
 
 import QtQuick 1.0
 import com.nokia.meego 1.0
+import org.kde.edu.marble.qtcomponents 0.12
 
 /*
      * A textfield for searching locations.
      */
 TextField {
+    id: searchField
     signal search( string term )
     property bool busy: false
 
-    id: searchField
-
-    /** @todo: What's the exact height of a text field? Should be defined somewhere, use it here */
-    height: visible ? 50 : 0
-
     placeholderText: "Search..."
     // Icon to clear text in the textfield.
-    ToolIcon {
+    MarbleToolIcon {
         id: clearButton
-        iconId: "input-clear"
+        iconSource: main.icon( "actions/edit-clear-locationbar-rtl", 22 );
         anchors.top: searchField.top
         anchors.right: searchField.right
         anchors.rightMargin: 5

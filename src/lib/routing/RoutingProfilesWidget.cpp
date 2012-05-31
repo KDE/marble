@@ -17,7 +17,7 @@
 #include <QDialog>
 #include "MarbleModel.h"
 #include "PluginManager.h"
-#include "RunnerPlugin.h"
+#include "RoutingRunnerPlugin.h"
 #include "MarbleDebug.h"
 #include "RoutingProfilesModel.h"
 #include "RoutingManager.h"

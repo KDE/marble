@@ -21,6 +21,7 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataPolygon* polygon )
           m_polygon( polygon ),
           m_ring( 0 )
 {
+    Q_ASSERT( ( m_ring == 0 ) ^ ( m_polygon == 0 ) && "You must not pass a 0 polygon ");
 }
 
 GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataLinearRing* ring )
@@ -28,26 +29,31 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataLinearRing* ring )
           m_polygon( 0 ),
           m_ring( ring )
 {
+    Q_ASSERT( ( m_ring == 0 ) ^ ( m_polygon == 0 ) && "You must not pass a 0 ring ");
 }
 
 void GeoPolygonGraphicsItem::setPolygon( const GeoDataPolygon* polygon )
 {
     m_polygon = polygon;
     m_ring = 0;
+    Q_ASSERT( ( m_ring == 0 ) ^ ( m_polygon == 0 ) && "You must not pass a 0 polygon ");
 }
 
 void GeoPolygonGraphicsItem::setLinearRing( const GeoDataLinearRing* ring )
 {
     m_polygon = 0;
     m_ring = ring;
+    Q_ASSERT( ( m_ring == 0 ) ^ ( m_polygon == 0 ) && "You must not pass a 0 ring ");
 }
 
 GeoDataCoordinates GeoPolygonGraphicsItem::coordinate() const
 {
     if( m_polygon ) {
         return m_polygon->latLonAltBox().center();
-    } else {
+    } else if ( m_ring ) {
         return m_ring->latLonAltBox().center();
+    } else {
+        return GeoDataCoordinates();
     }
 }
 
@@ -56,7 +62,7 @@ void GeoPolygonGraphicsItem::coordinate( qreal &longitude, qreal &latitude, qrea
     GeoDataCoordinates coords;
     if( m_polygon ) {
         coords = m_polygon->latLonAltBox().center();
-    } else {
+    } else if ( m_ring ) {
         coords = m_ring->latLonAltBox().center();
     }
     longitude = coords.longitude();
@@ -68,8 +74,10 @@ GeoDataLatLonAltBox GeoPolygonGraphicsItem::latLonAltBox() const
 {
     if( m_polygon ) {
         return m_polygon->latLonAltBox();
-    } else {
+    } else if ( m_ring ) {
         return m_ring->latLonAltBox();
+    } else {
+        return GeoDataLatLonAltBox::fromLineString( GeoDataLineString() << GeoDataCoordinates() );
     }
 }
 
@@ -84,7 +92,11 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewpor
     {
         painter->save();
         painter->setPen( QPen() );
-        painter->drawPolygon( *m_polygon );
+        if ( m_polygon ) {
+            painter->drawPolygon( *m_polygon );
+        } else if ( m_ring ) {
+            painter->drawPolygon( *m_ring );
+        }
         painter->restore();
         return;
     }

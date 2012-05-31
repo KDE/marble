@@ -12,7 +12,7 @@
 #define MARBLE_MONAVCONFIGWIDGET_H
 
 #include "ui_MonavConfigWidget.h"
-#include "RunnerPlugin.h"
+#include "RoutingRunnerPlugin.h"
 
 #include <QtGui/QWidget>
 
@@ -24,7 +24,7 @@ namespace Marble
 class MonavPlugin;
 class MonavConfigWidgetPrivate;
 
-class MonavConfigWidget : public RunnerPlugin::ConfigWidget, private Ui::MonavConfigWidget
+class MonavConfigWidget : public RoutingRunnerPlugin::ConfigWidget, private Ui::MonavConfigWidget
 {
     Q_OBJECT
 

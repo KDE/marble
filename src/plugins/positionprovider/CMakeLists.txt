@@ -1,3 +1,5 @@
+ADD_SUBDIRECTORY( flightgear )
+
 FIND_PACKAGE(libgps)
 IF(LIBGPS_FOUND)
      MESSAGE( STATUS "Building with gpsd position provider")

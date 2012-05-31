@@ -41,6 +41,8 @@ public:
 
     void fillModel();
 
+    void handleInstallationProgress( int row, qreal progress );
+
     void handleInstallation( int );
 };
 
@@ -60,6 +62,8 @@ SpeakersModelPrivate::SpeakersModelPrivate( SpeakersModel* parent ) :
     m_newstuffModel.setTargetDirectory( MarbleDirs::localPath() + "/audio/speakers" );
     m_newstuffModel.setProvider( "http://edu.kde.org/marble/newstuff/speakers.xml" );
     QObject::connect( &m_newstuffModel, SIGNAL( modelReset() ), m_parent, SLOT( fillModel() ) );
+    QObject::connect( &m_newstuffModel, SIGNAL( installationProgressed( int, qreal ) ),
+                      m_parent, SLOT( handleInstallationProgress( int, qreal ) ) );
     QObject::connect( &m_newstuffModel, SIGNAL( installationFinished( int ) ), m_parent, SLOT( handleInstallation( int ) ) );
 }
 
@@ -114,6 +118,15 @@ void SpeakersModelPrivate::handleInstallation( int row )
             QModelIndex const affected = m_parent->index( j );
             emit m_parent->dataChanged( affected, affected );
             emit m_parent->installationFinished( j );
+        }
+    }
+}
+
+void SpeakersModelPrivate::handleInstallationProgress( int row, qreal progress )
+{
+    for ( int j=0; j<m_speakers.size(); ++j ) {
+        if ( m_speakers[j].m_newstuffIndex == row ) {
+            emit m_parent->installationProgressed( j, progress );
         }
     }
 }

@@ -17,7 +17,7 @@
 #include "WeatherModel.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "weatherGlobal.h"
 #include "MarbleDebug.h"
 

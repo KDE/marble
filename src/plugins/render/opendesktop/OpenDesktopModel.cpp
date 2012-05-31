@@ -11,7 +11,7 @@
 
 #include "OpenDesktopModel.h"
 #include "OpenDesktopItem.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleModel.h"
 #include "GeoDataCoordinates.h"
 #include <QtCore/QString>

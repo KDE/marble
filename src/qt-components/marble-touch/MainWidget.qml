@@ -22,10 +22,12 @@ Item {
     visible: false
 
     signal mouseClickGeoPosition(real longitude, real latitude)
+    signal placemarkSelected(variant placemark)
 
     property alias mapThemeModel: map.mapThemeModel
     property alias radius: map.radius
 
+    property alias bookmarks: map.bookmarks
     property alias routing: map.routing
     property alias search: map.search
     property alias tracking: map.tracking
@@ -128,7 +130,7 @@ Item {
                         anchors.left: parent.left
                         anchors.right: parent.right
                         anchors.margins: 10
-                        platformStyle: LabelStyle { fontPixelSize: 18 }
+                        font.pixelSize: 18
 
                         MouseArea {
                             anchors.fill: parent
@@ -152,7 +154,7 @@ Item {
                             Label {
                                 text: "Route"
                                 anchors.centerIn: parent
-                                platformStyle: LabelStyle { fontPixelSize: 18 }
+                                font.pixelSize: 18
                             }
                             MouseArea {
                                 anchors.fill: parent
@@ -175,7 +177,24 @@ Item {
                         routingOptions.visible = !routingOptions.visible
                     }
                 }
+
+                Connections {
+                    target: map
+                    onMouseClickGeoPosition: routingOptions.visible = false
+                }
             }
+        }
+
+        onPlacemarkSelected: {
+            pageStack.find(function(page) {
+                // Open the Placemark activity unless it's already the top most page
+                // id is not a QML Item property, hence the uid workaround
+                if (page.uid !== "edu.kde.org.marble.placemarkActivityPage") {
+                    openPage("qrc:/activities/Placemark.qml");
+                }
+                return true;
+            })
+            screen.placemarkSelected(placemark)
         }
 
         function updatePositionIndicator() {

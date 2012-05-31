@@ -24,57 +24,113 @@ Page {
         id: lazyLoader
     }
 
-    tools: ToolBarLayout {
-        Item{}
-        ToolButton {
-            text: "Info";
-            onClicked: pageStack.push( "qrc:/AboutMarblePage.qml" )
-        }
-        ToolButton {
-            text: "Preferences";
-            onClicked: pageStack.push( "qrc:/PreferencesPage.qml" )
-        }
-        Item{}
-    }
-
-    // Grid view to display images and names of activities.
-    GridView {
-        id: activityView
-        currentIndex: -1
+    Rectangle {
         anchors.fill: parent
-        cellWidth: 160
-        cellHeight: 150
-        model: activityModel
-        focus: true
-        clip: true
+        color: "black"
 
-        delegate: Item {
-            width: 128 + 10
-            height: 128 + 25
-            Column {
-                x: 5
-                y: 10
-                Image {
-                    id: activityImage
-                    width: 128
-                    height: 128
-                    source: imagePath
+
+        Image {
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+            anchors.margins: 20
+            source: "qrc:/marble/globe.svg"
+            smooth: true
+            width: 360
+            height: 360
+            opacity: 0.1
+        }
+
+        // Grid view to display images and names of activities.
+        GridView {
+            id: activityView
+            currentIndex: -1
+            anchors.fill: parent
+            anchors.margins: 9
+            cellWidth: 154
+            cellHeight: 174
+            model: activityModel
+            focus: true
+            clip: true
+
+            delegate:
+                Item {
+                width: 154
+                height: 184
+
+                Column {
+                    anchors.centerIn: parent
+                    spacing: 5
+                    width: 140
+                    height: 180
+                    smooth: true
+
+                    Image {
+                        id: activityImage
+                        width: 140
+                        height: 140
+                        source: imagePath
+                        smooth: true
+                    }
+                    Text {
+                        width: parent.width
+                        color: "white"
+                        text: name
+                        font.pointSize: 12
+                        font.bold: true
+                        horizontalAlignment: "AlignHCenter"
+                    }
                 }
-                Text {
-                    width: parent.width
-                    color: "black"
-                    text: name
-                    font.pointSize: 12
-                    font.bold: true
-                    horizontalAlignment: "AlignHCenter"
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: activityPage.openActivity( name, path )
                 }
             }
+        }
 
+        Item {
+            id: buttonRow
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.margins: 10
+            height: infoButton.height
+
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: 10
+
+                Button {
+                    id: infoButton
+                    text: "Info";
+                    width: buttonRow.width / 2 - 20
+                    onClicked: pageStack.push( "qrc:/AboutMarblePage.qml" )
+                }
+                Button {
+                    text: "Preferences";
+                    width: buttonRow.width / 2 - 20
+                    onClicked: pageStack.push( "qrc:/PreferencesPage.qml" )
+                }
+            }
+        }
+
+        Label {
+            anchors.bottom: buttonRow.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.margins: 30
+            font.pixelSize: 16
+            width: parent.width
+            visible: settings.changelogShown !== project.version
+            color: "white"
+            text: "New in version " + project.changelog.get(0).version + ": " + project.changelog.get(0).summary
+            MarbleTouch { id: project }
             MouseArea {
                 anchors.fill: parent
-                onClicked: activityPage.openActivity( name, path )
+                onClicked: pageStack.push( "qrc:/AboutMarblePage.qml" )
             }
         }
+
     }
 
     // Model that stores information about activities.
@@ -132,17 +188,17 @@ Page {
                     )
         activityModel.addActivity(
                     "Routing",
-                    "qrc:/icons/activity-default.png",
+                    "qrc:/icons/activity-routing.png",
                     "qrc:/activities/Routing.qml"
                     )
         activityModel.addActivity(
                     "Tracking",
-                    "qrc:/icons/activity-default.png",
+                    "qrc:/icons/activity-tracking.png",
                     "qrc:/activities/Tracking.qml"
                     )
         activityModel.addActivity(
                     "Navigation",
-                    "qrc:/icons/activity-default.png",
+                    "qrc:/icons/activity-navigation.png",
                     "qrc:/activities/Navigation.qml"
                     )
         activityModel.addActivity(
@@ -151,7 +207,7 @@ Page {
                     "qrc:/activities/Weather.qml"
                     )
         activityModel.addActivity(
-                    "Friends",
+                    "Community",
                     "qrc:/icons/activity-friends.png",
                     "qrc:/activities/Friends.qml"
                     )

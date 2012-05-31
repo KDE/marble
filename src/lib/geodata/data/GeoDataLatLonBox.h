@@ -14,10 +14,10 @@
 #define MARBLE_GEODATALATLONBOX_H
 
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include "GeoDataObject.h"
-#include "GeoDataPoint.h"
+#include "GeoDataCoordinates.h"
 
 #include "geodata_export.h"
 
@@ -133,7 +133,6 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
      */
     bool containsPole( Pole pole = AnyPole ) const;
 
-    virtual bool contains( const GeoDataPoint & ) const; // NOTE: Why do we need this one?
     virtual bool contains( const GeoDataCoordinates & ) const;
     bool     contains( const GeoDataLatLonBox & ) const;
 

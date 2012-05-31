@@ -10,21 +10,20 @@
 #ifndef MARBLEKMLPLUGIN_H
 #define MARBLEKMLPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "ParseRunnerPlugin.h"
+
 namespace Marble
 {
 
-class KmlPlugin : public RunnerPlugin
+class KmlPlugin : public ParseRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:
     explicit KmlPlugin( QObject *parent = 0 );
 
     QString name() const;
-
-    QString guiString() const;
 
     QString nameId() const;
 
@@ -35,6 +34,10 @@ public:
     QString copyrightYears() const;
 
     QList<PluginAuthor> pluginAuthors() const;
+
+    QString fileFormatDescription() const;
+
+    QStringList fileExtensions() const;
 
     virtual MarbleAbstractRunner* newRunner() const;
 };

@@ -23,6 +23,8 @@
 
 #include <QtGui/QAbstractProxyModel>
 
+#include "marble_export.h"
+
 class KDescendantsProxyModelPrivate;
 
 /**
@@ -64,7 +66,7 @@ view->setModel(descProxy);
 @since 4.6
 @author Stephen Kelly <steveire@gmail.com>
 */
-class KDescendantsProxyModel : public QAbstractProxyModel
+class MARBLE_EXPORT KDescendantsProxyModel : public QAbstractProxyModel
 {
   Q_OBJECT
 

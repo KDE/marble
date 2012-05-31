@@ -10,22 +10,20 @@
 #ifndef MARBLE_LOGFILE_PLUGIN_H
 #define MARBLE_LOGFILE_PLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "ParseRunnerPlugin.h"
 
 namespace Marble
 {
 
-class LogfilePlugin : public RunnerPlugin
+class LogfilePlugin : public ParseRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:
     explicit LogfilePlugin( QObject *parent = 0 );
 
     QString name() const;
-
-    QString guiString() const;
 
     QString nameId() const;
 
@@ -36,6 +34,10 @@ public:
     QString copyrightYears() const;
 
     QList<PluginAuthor> pluginAuthors() const;
+
+    QString fileFormatDescription() const;
+
+    QStringList fileExtensions() const;
 
     virtual MarbleAbstractRunner* newRunner() const;
 };

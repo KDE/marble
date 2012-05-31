@@ -16,9 +16,9 @@
 namespace Marble
 {
 
-OpenRouteServicePlugin::OpenRouteServicePlugin( QObject *parent ) : RunnerPlugin( parent )
+OpenRouteServicePlugin::OpenRouteServicePlugin( QObject *parent ) :
+    RoutingRunnerPlugin( parent )
 {
-    setCapabilities( Routing );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
     setStatusMessage( tr ( "This service requires an Internet connection." ) );
@@ -65,12 +65,12 @@ MarbleAbstractRunner* OpenRouteServicePlugin::newRunner() const
     return new OpenRouteServiceRunner;
 }
 
-class OpenRouteServiceConfigWidget : public RunnerPlugin::ConfigWidget
+class OpenRouteServiceConfigWidget : public RoutingRunnerPlugin::ConfigWidget
 {
 public:
 
     OpenRouteServiceConfigWidget()
-        : RunnerPlugin::ConfigWidget()
+        : RoutingRunnerPlugin::ConfigWidget()
     {
         ui_configWidget = new Ui::OpenRouteServiceConfigWidget;
         ui_configWidget->setupUi( this );
@@ -112,7 +112,7 @@ private:
     Ui::OpenRouteServiceConfigWidget *ui_configWidget;
 };
 
-RunnerPlugin::ConfigWidget *OpenRouteServicePlugin::configWidget()
+RoutingRunnerPlugin::ConfigWidget *OpenRouteServicePlugin::configWidget()
 {
     return new OpenRouteServiceConfigWidget();
 }

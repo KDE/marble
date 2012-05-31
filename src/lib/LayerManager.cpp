@@ -7,22 +7,18 @@
 //
 // Copyright 2008 Torsten Rahn <tackat@kde.org>
 // Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
-// Copyright 2011 Bernahrd Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2011,2012 Bernahrd Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
 // Own
 #include "LayerManager.h"
 
-// Qt
-#include <QtGui/QAction>
-
 // Local dir
 #include "MarbleDebug.h"
 #include "AbstractDataPlugin.h"
 #include "AbstractDataPluginItem.h"
 #include "AbstractFloatItem.h"
-#include "GeoPainter.h"
 #include "MarbleModel.h"
 #include "PluginManager.h"
 #include "RenderPlugin.h"
@@ -41,11 +37,17 @@ bool zValueLessThan( const LayerInterface * const one, const LayerInterface * co
     return one->zValue() < two->zValue();
 }
 
-class LayerManagerPrivate
+class LayerManager::Private
 {
  public:
-    LayerManagerPrivate();
-    ~LayerManagerPrivate();
+    Private( LayerManager *parent );
+    ~Private();
+
+    void updateVisibility( bool visible, const QString &nameId );
+
+    void renderLayer( GeoPainter *painter, ViewportParams *viewport, const QString& renderPosition  );
+
+    LayerManager *const q;
 
     QList<RenderPlugin *> m_renderPlugins;
     QList<AbstractFloatItem *> m_floatItems;
@@ -55,21 +57,27 @@ class LayerManagerPrivate
     bool m_showBackground;
 };
 
-LayerManagerPrivate::LayerManagerPrivate()
-    : m_renderPlugins(),
+LayerManager::Private::Private( LayerManager *parent )
+    : q( parent ),
+      m_renderPlugins(),
       m_showBackground( true )
 {
 }
 
-LayerManagerPrivate::~LayerManagerPrivate()
+LayerManager::Private::~Private()
 {
     qDeleteAll( m_renderPlugins );
+}
+
+void LayerManager::Private::updateVisibility( bool visible, const QString &nameId )
+{
+    emit q->visibilityChanged( nameId, visible );
 }
 
 
 LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
     : QObject( parent ),
-      d( new LayerManagerPrivate )
+      d( new Private( this ) )
 {
     foreach ( const RenderPlugin *factory, model->pluginManager()->renderPlugins() ) {
         RenderPlugin *const renderPlugin = factory->newInstance( model );
@@ -78,14 +86,10 @@ LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
 
         connect( renderPlugin, SIGNAL( settingsChanged( QString ) ),
                  this, SIGNAL( pluginSettingsChanged() ) );
-        connect( renderPlugin, SIGNAL( settingsChanged( QString ) ),
-                 this, SIGNAL( repaintNeeded() ) );
         connect( renderPlugin, SIGNAL( repaintNeeded( QRegion ) ),
                  this, SIGNAL( repaintNeeded( QRegion ) ) );
-        connect( renderPlugin->action(), SIGNAL( changed() ),
-                 this, SIGNAL( repaintNeeded() ) );
-        connect( renderPlugin, SIGNAL( visibilityChanged( QString, bool ) ),
-                 this, SIGNAL( visibilityChanged( const QString &, bool ) ) );
+        connect( renderPlugin, SIGNAL( visibilityChanged( bool, const QString & ) ),
+                 this, SLOT( updateVisibility( bool, const QString & ) ) );
 
         // get float items ...
         AbstractFloatItem * const floatItem =
@@ -148,34 +152,29 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
 
     foreach( const QString& renderPosition, renderPositions ) {
-        renderLayer( painter, viewport, renderPosition );
+        d->renderLayer( painter, viewport, renderPosition );
     }
 }
 
-void LayerManager::renderLayer( GeoPainter *painter, ViewportParams *viewport,
+void LayerManager::Private::renderLayer( GeoPainter *painter, ViewportParams *viewport,
                                 const QString& renderPosition )
 {
-    if ( !viewport ) {
-        mDebug() << "LayerManager: No valid viewParams set!";
-        return;
-    }
-
     QList<LayerInterface*> layers;
 
-    foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
+    foreach( RenderPlugin *renderPlugin, m_renderPlugins ) {
         if ( renderPlugin && renderPlugin->renderPosition().contains( renderPosition )  ){
             if ( renderPlugin->enabled() && renderPlugin->visible() ) {
                 if ( !renderPlugin->isInitialized() )
                 {
                     renderPlugin->initialize();
-                    emit renderPluginInitialized( renderPlugin );
+                    emit q->renderPluginInitialized( renderPlugin );
                 }
                 layers.push_back( renderPlugin );
             }
         }
     }
 
-    foreach( LayerInterface *layer, d->m_internalLayers ) {
+    foreach( LayerInterface *layer, m_internalLayers ) {
         if ( layer && layer->renderPosition().contains( renderPosition ) ) {
             layers.push_back( layer );
         }

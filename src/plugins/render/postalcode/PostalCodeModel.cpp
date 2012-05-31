@@ -15,7 +15,7 @@
 #include "PostalCodeItem.h"
 
 // Marble
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleModel.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"

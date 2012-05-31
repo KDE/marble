@@ -11,7 +11,7 @@
 #include <QtCore/QMetaType>
 #include <QtTest/QtTest>
 #include "Quaternion.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 Q_DECLARE_METATYPE( Marble::Quaternion )
 

@@ -17,7 +17,7 @@
 #include "RoutingModel.h"
 #include "RoutingProfilesModel.h"
 #include "MarbleRunnerManager.h"
-#include "RunnerPlugin.h"
+#include "RoutingRunnerPlugin.h"
 #include "AutoNavigation.h"
 #include "GeoWriter.h"
 #include "GeoDataDocument.h"
@@ -221,8 +221,11 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
         GeoDataDocument* route = dynamic_cast<GeoDataDocument*>(&container->last());
         if ( route ) {
             loaded = true;
+            m_alternativeRoutesModel.clear();
             m_alternativeRoutesModel.addRoute( route, AlternativeRoutesModel::Instant );
             m_alternativeRoutesModel.setCurrentRoute( 0 );
+            emit q->stateChanged( RoutingManager::Retrieved );
+            emit q->routeRetrieved( route );
         } else {
             mDebug() << "Expected a GeoDataDocument child, didn't get one though";
         }
@@ -360,11 +363,7 @@ RoutingProfile RoutingManager::defaultProfile( RoutingProfile::TransportType tra
     }
 
     const PluginManager* pluginManager = d->m_marbleModel->pluginManager();
-    foreach( RunnerPlugin* plugin, pluginManager->runnerPlugins() ) {
-        if ( !plugin->supports( RunnerPlugin::Routing ) ) {
-            continue;
-        }
-
+    foreach( RoutingRunnerPlugin* plugin, pluginManager->routingRunnerPlugins() ) {
         if ( plugin->supportsTemplate( tpl ) ) {
             profile.pluginSettings()[plugin->nameId()] = plugin->templateSettings( tpl );
         }

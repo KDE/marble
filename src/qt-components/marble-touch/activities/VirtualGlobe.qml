@@ -20,20 +20,22 @@ Page {
     anchors.fill: parent
 
     tools: ToolBarLayout {
-        ToolIcon {
-            iconId: "toolbar-back";
+        MarbleToolIcon {
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
         ToolButton {
             id: searchButton
             checkable: true
             width: 60
-            iconSource: "image://theme/icon-m-toolbar-search";
+            flat: true
+            iconSource: main.icon( "actions/edit-find", 48 );
         }
         ToolButton {
             id: themeButton
             width: 60
-            iconSource: "image://theme/icon-m-toolbar-settings";
+            iconSource: main.icon( "actions/configure", 48 );
+            flat: true
             onClicked: themeDialog.open()
 
             MapThemeModel {
@@ -49,13 +51,13 @@ Page {
                 delegate:
                     Rectangle {
                     id: delegate
-                    width: root.width
-                    height: mapImage.height
+                    width: row.width
+                    height: row.height
 
-                    color: index === themeDialog.selectedIndex ? root.platformStyle.itemSelectedBackgroundColor : root.platformStyle.itemBackgroundColor
+                    color: index === themeDialog.selectedIndex ? "lightsteelblue" : "#00ffffff"
 
                     Row {
-                        anchors.verticalCenter: parent.verticalCenter
+                        id: row
                         Image {
                             id: mapImage
                             source: "image://maptheme/" + mapThemeId
@@ -66,7 +68,7 @@ Page {
                         Label {
                             id: themeLabel
                             text: display
-                            color: delegate.index === themeDialog.selectedIndex ? root.platformStyle.itemSelectedTextColor : root.platformStyle.itemTextColor
+                            color: index === themeDialog.selectedIndex ? "black" : "white"
                             anchors.verticalCenter: parent.verticalCenter
                         }
                     }
@@ -85,50 +87,49 @@ Page {
         }
     }
 
-    Column {
-        width: parent.width
-        height: parent.height
-
-        SearchField {
-            id: searchField
-            width: parent.width
-            visible: searchButton.checked
-            onSearch: {
-                searchField.busy = true
-                marbleWidget.find( term )
-            }
-
-            Component.onCompleted: {
-                marbleWidget.search.searchFinished.connect( searchFinished )
-            }
-
-            function searchFinished() {
-                searchField.busy = false
-            }
+    SearchField {
+        id: searchField
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        visible: searchButton.checked
+        onSearch: {
+            searchField.busy = true
+            marbleWidget.find( term )
         }
 
-        Item {
-            id: mapContainer
-            width: parent.width
-            height: parent.height - searchField.height
+        Component.onCompleted: {
+            marbleWidget.search.searchFinished.connect( searchFinished )
+        }
 
-            function embedMarbleWidget() {
-                marbleWidget.parent = mapContainer
-                settings.projection = "Spherical"
-                settings.activeRenderPlugins = settings.defaultRenderPlugins
-                settings.mapTheme = "earth/srtm/srtm.dgml"
-                settings.gpsTracking = false
-                settings.showPositionIndicator = false
-                marbleWidget.tracking.positionMarkerType = Tracking.Circle
-                settings.showTrack = false
-                marbleWidget.visible = true
-            }
+        function searchFinished() {
+            searchField.busy = false
+        }
+    }
 
-            Component.onDestruction: {
-                if ( marbleWidget.parent === mapContainer ) {
-                    marbleWidget.parent = null
-                    marbleWidget.visible = false
-                }
+    Item {
+        id: mapContainer
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: searchButton.checked ? searchField.bottom : parent.top
+        anchors.bottom: parent.bottom
+
+        function embedMarbleWidget() {
+            marbleWidget.parent = mapContainer
+            settings.projection = "Spherical"
+            settings.activeRenderPlugins = settings.defaultRenderPlugins
+            settings.mapTheme = "earth/srtm/srtm.dgml"
+            settings.gpsTracking = false
+            settings.showPositionIndicator = false
+            marbleWidget.tracking.positionMarkerType = Tracking.Circle
+            settings.showTrack = false
+            marbleWidget.visible = true
+        }
+
+        Component.onDestruction: {
+            if ( marbleWidget.parent === mapContainer ) {
+                marbleWidget.parent = null
+                marbleWidget.visible = false
             }
         }
     }

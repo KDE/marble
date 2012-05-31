@@ -14,9 +14,9 @@
 namespace Marble
 {
 
-OSRMPlugin::OSRMPlugin( QObject *parent ) : RunnerPlugin( parent )
+OSRMPlugin::OSRMPlugin( QObject *parent ) :
+    RoutingRunnerPlugin( parent )
 {
-    setCapabilities( Routing );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
     setStatusMessage( tr ( "This service requires an Internet connection." ) );

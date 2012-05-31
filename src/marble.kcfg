@@ -5,7 +5,7 @@
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
  <kcfgfile name="marblerc" />
  <include>kglobalsettings.h</include>
- <include>"lib/global.h"</include>
+ <include>"lib/MarbleGlobal.h"</include>
  <include>QtCore/QDir</include>
  <include>QtCore/QLocale</include>
  <group name="MarbleWidget" >

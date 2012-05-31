@@ -18,7 +18,7 @@
 
 #include <QtGui/QToolBox>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 
 /** @file

@@ -126,6 +126,25 @@ class MARBLE_EXPORT MarbleMap : public QObject
     ViewportParams *viewport();
     const ViewportParams *viewport() const;
 
+    /**
+     * @brief  Get the Projection used for the map
+     * @return @c Spherical         a Globe
+     * @return @c Equirectangular   a flat map
+     * @return @c Mercator          another flat map
+     */
+    Projection projection() const;
+
+    /**
+     * @brief Get the ID of the current map theme
+     * To ensure that a unique identifier is being used the theme does NOT
+     * get represented by its name but the by relative location of the file
+     * that specifies the theme:
+     *
+     * Example:
+     *    maptheme = "earth/bluemarble/bluemarble.dgml"
+     */
+    QString mapThemeId() const;
+
     void setMapQualityForViewContext( MapQuality qualityForViewContext, ViewContext viewContext );
     MapQuality mapQuality( ViewContext viewContext ) const;
 
@@ -360,6 +379,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
 
+    AngleUnit defaultAngleUnit() const;
+
+    QFont defaultFont() const;
+
+    const TextureLayer *textureLayer() const;
+
     /**
      * @brief Add a layer to be included in rendering.
      */
@@ -420,29 +445,11 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void setCenterLongitude( qreal lon );
 
     /**
-     * @brief  Get the Projection used for the map
-     * @return @c Spherical         a Globe
-     * @return @c Equirectangular   a flat map
-     * @return @c Mercator          another flat map
-     */
-    Projection projection() const;
-
-    /**
      * @brief  Set the Projection used for the map
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
     void setProjection( Projection projection );
 
-    /**
-     * @brief Get the ID of the current map theme
-     * To ensure that a unique identifier is being used the theme does NOT 
-     * get represented by its name but the by relative location of the file 
-     * that specifies the theme:
-     *
-     * Example: 
-     *    maptheme = "earth/bluemarble/bluemarble.dgml"
-     */
-    QString mapThemeId() const;
     /**
      * @brief Set a new map theme
      * @param maptheme  The ID of the new maptheme. To ensure that a unique 
@@ -605,15 +612,9 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void setVolatileTileCacheLimit( quint64 kiloBytes );
 
-    bool mapCoversViewport();
-
-    AngleUnit defaultAngleUnit() const;
     void setDefaultAngleUnit( AngleUnit angleUnit );
 
-    QFont defaultFont() const;
     void setDefaultFont( const QFont& font );
-
-    const TextureLayer *textureLayer() const;
 
     /**
      * @brief Reload the currently displayed map by reloading texture tiles

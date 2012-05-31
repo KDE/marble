@@ -30,7 +30,7 @@
 #include <QtCore/QSize>
 
 #include "GeoSceneLayer.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 /**
  * @short Texture dataset stored in a layer.

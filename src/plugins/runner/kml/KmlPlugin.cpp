@@ -13,19 +13,14 @@
 namespace Marble
 {
 
-KmlPlugin::KmlPlugin( QObject *parent ) : RunnerPlugin( parent )
+KmlPlugin::KmlPlugin( QObject *parent ) :
+    ParseRunnerPlugin( parent )
 {
-    setCapabilities( Parsing );
 }
 
 QString KmlPlugin::name() const
 {
     return tr( "Kml File Parser" );
-}
-
-QString KmlPlugin::guiString() const
-{
-    return tr( "Kml Parser" );
 }
 
 QString KmlPlugin::nameId() const
@@ -52,6 +47,16 @@ QList<PluginAuthor> KmlPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+}
+
+QString KmlPlugin::fileFormatDescription() const
+{
+    return tr( "Google Earth KML" );
+}
+
+QStringList KmlPlugin::fileExtensions() const
+{
+    return QStringList() << "kml";
 }
 
 MarbleAbstractRunner* KmlPlugin::newRunner() const

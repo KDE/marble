@@ -20,15 +20,16 @@ Page {
     anchors.fill: parent
 
     tools: ToolBarLayout {
-        ToolIcon {
-            iconId: "toolbar-back";
+        MarbleToolIcon {
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
         ToolButton {
             id: searchButton
             checkable: true
             width: 60
-            iconSource: "image://theme/icon-m-toolbar-search";
+            flat: true
+            iconSource: main.icon( "actions/edit-find", 48 );
         }
     }
 

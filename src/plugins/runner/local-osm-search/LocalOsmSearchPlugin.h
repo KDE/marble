@@ -12,7 +12,7 @@
 #ifndef MARBLE_LOCALOSMSEARCHPLUGIN_H
 #define MARBLE_LOCALOSMSEARCHPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "SearchRunnerPlugin.h"
 #include "OsmDatabase.h"
 
 #include <QtCore/QFileSystemWatcher>
@@ -20,10 +20,10 @@
 namespace Marble
 {
 
-class LocalOsmSearchPlugin : public RunnerPlugin
+class LocalOsmSearchPlugin : public SearchRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::SearchRunnerPlugin )
 
 public:
     explicit LocalOsmSearchPlugin( QObject *parent = 0 );

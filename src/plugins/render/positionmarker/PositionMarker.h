@@ -100,7 +100,6 @@ class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
  private:
     Q_DISABLE_COPY( PositionMarker )
 
-    void update( const ViewportParams *viewport, MapQuality mapQuality );
     void loadCustomCursor( const QString& filename, bool useCursor );
     void loadDefaultCursor();
 

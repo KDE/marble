@@ -17,7 +17,7 @@
 #include <QtCore/QVector>
 #include <QtGui/QColor>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 
 class QImage;
 

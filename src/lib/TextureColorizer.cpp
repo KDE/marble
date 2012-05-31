@@ -21,7 +21,7 @@
 #include <QtGui/QImage>
 #include <QtGui/QPainter>
 
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "VectorComposer.h"
@@ -64,13 +64,9 @@ private:
 
 TextureColorizer::TextureColorizer( const QString &seafile,
                                     const QString &landfile,
-                                    VectorComposer *veccomposer,
-                                    QObject *parent )
-    : QObject( parent )
-    , m_veccomposer( veccomposer )
+                                    VectorComposer *veccomposer )
+    : m_veccomposer( veccomposer )
 {
-    connect( m_veccomposer, SIGNAL( datasetLoaded() ), SIGNAL( datasetLoaded() ) );
-
     QTime t;
     t.start();
 
@@ -411,5 +407,3 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
 }
 
 }
-
-#include "TextureColorizer.moc"

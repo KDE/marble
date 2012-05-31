@@ -20,7 +20,7 @@
 
 // Marble
 #include "MarbleDebug.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 #include "MarbleDirs.h"
 
 using namespace Marble;

@@ -11,6 +11,7 @@ import QtQuick 1.0
 import QtMultimediaKit 1.1
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
+import org.kde.edu.marble.qtcomponents 0.12
 
 /*
  * General preferences
@@ -19,8 +20,8 @@ Page {
     id: preferencesPage
 
     tools: ToolBarLayout {
-        ToolIcon {
-            iconId: "toolbar-back";
+        MarbleToolIcon {
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
     }
@@ -36,12 +37,12 @@ Page {
             id: pageGrid
             width: parent.width - 20
 
-            columns: inPortrait ? 1 : 2
+            columns: main.inPortrait ? 1 : 2
             rows: 10 / columns
-            spacing: inPortrait ? 10 : 5
+            spacing: main.inPortrait ? 10 : 5
 
-            property int leftRowWidth: inPortrait ? width : 250
-            property int rightRowWidth: inPortrait ? width : width - leftRowWidth - spacing
+            property int leftRowWidth: main.inPortrait ? width : 250
+            property int rightRowWidth: main.inPortrait ? width : width - leftRowWidth - spacing
 
             Label {
                 id: offlineLabel
@@ -195,15 +196,8 @@ Page {
                                     settings.voiceNavigationSpeaker = speakers.path(selectedIndex)
                                 } else {
                                     voiceNavigationPreviewButton.enabled = false
+                                    progressBar.installing = true
                                     speakers.install(selectedIndex)
-                                }
-                            }
-
-                            Connections {
-                                target: speakers
-                                onInstallationFinished: {
-                                    settings.voiceNavigationSpeaker = speakers.path(speakerDialog.selectedIndex)
-                                    voiceNavigationPreviewButton.enabled = true
                                 }
                             }
                         }
@@ -219,11 +213,36 @@ Page {
                     height: Math.max(speakerHelp.height, voiceNavigationPreviewButton.height)
 
                     Label {
+                        id: speakerHelp
+                        visible: !progressBar.visible
                         anchors.left: parent.left
                         anchors.right: voiceNavigationPreviewButton.left
-                        id: speakerHelp
                         color: "gray"
                         font.pixelSize: 16
+                    }
+
+                    ProgressBar {
+                        id: progressBar
+                        property bool installing: false
+                        visible: installing
+                        anchors.left: parent.left
+                        anchors.right: voiceNavigationPreviewButton.left
+                        minimumValue: 0.0
+                        maximumValue: 1.0
+                        indeterminate: true
+
+                        Connections {
+                            target: speakers
+                            onInstallationProgressed: {
+                                progressBar.indeterminate = false
+                                progressBar.value = progress
+                            }
+                            onInstallationFinished: {
+                                progressBar.installing = false
+                                settings.voiceNavigationSpeaker = speakers.path(speakerDialog.selectedIndex)
+                                voiceNavigationPreviewButton.enabled = true
+                            }
+                        }
                     }
 
                     ToolButton {
@@ -231,7 +250,7 @@ Page {
                         anchors.right: parent.right
                         anchors.margins: 5
                         visible: !settings.voiceNavigationMuted
-                        iconSource: "image://theme/icon-m-toolbar-mediacontrol-play";
+                        iconSource: main.icon( "actions/media-playback-start", 48 );
                         checkable: true
                         checked: false
                         width: 60
@@ -283,13 +302,13 @@ Page {
                         delegate:
                             Rectangle {
                             id: delegate
-                            width: root.width
-                            height: mapImage.height
+                            width: row.width
+                            height: row.height
 
-                            color: index === themeDialog.selectedIndex ? root.platformStyle.itemSelectedBackgroundColor : root.platformStyle.itemBackgroundColor
+                            color: index === themeDialog.selectedIndex ? "lightsteelblue" : "#00ffffff"
 
                             Row {
-                                anchors.verticalCenter: parent.verticalCenter
+                                id: row
                                 Image {
                                     id: mapImage
                                     source: "image://maptheme/" + mapThemeId
@@ -300,7 +319,7 @@ Page {
                                 Label {
                                     id: themeLabel
                                     text: display
-                                    color: delegate.index === themeDialog.selectedIndex ? root.platformStyle.itemSelectedTextColor : root.platformStyle.itemTextColor
+                                    color: index === themeDialog.selectedIndex ? "black" : "white"
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
                             }

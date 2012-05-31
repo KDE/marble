@@ -18,7 +18,7 @@
 #include "MarbleModel.h"
 #include "MarbleMath.h"
 #include "ViewportParams.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 #include <QtGui/QPixmap>
 #include <QtGui/QWidget>

@@ -25,7 +25,10 @@
 #include "NetworkPlugin.h"
 #include "PositionProviderPlugin.h"
 #include "AbstractFloatItem.h"
-#include "RunnerPlugin.h"
+#include "ParseRunnerPlugin.h"
+#include "ReverseGeocodingRunnerPlugin.h"
+#include "RoutingRunnerPlugin.h"
+#include "SearchRunnerPlugin.h"
 
 namespace Marble
 {
@@ -46,7 +49,10 @@ class PluginManagerPrivate
     QList<const RenderPlugin *> m_renderPluginTemplates;
     QList<const NetworkPlugin *> m_networkPluginTemplates;
     QList<const PositionProviderPlugin *> m_positionProviderPluginTemplates;
-    QList<RunnerPlugin *> m_runnerPlugins;
+    QList<const SearchRunnerPlugin *> m_searchRunnerPlugins;
+    QList<const ReverseGeocodingRunnerPlugin *> m_reverseGeocodingRunnerPlugins;
+    QList<RoutingRunnerPlugin *> m_routingRunnerPlugins;
+    QList<const ParseRunnerPlugin *> m_parsingRunnerPlugins;
 };
 
 PluginManagerPrivate::~PluginManagerPrivate()
@@ -82,10 +88,28 @@ QList<const PositionProviderPlugin *> PluginManager::positionProviderPlugins() c
     return d->m_positionProviderPluginTemplates;
 }
 
-QList<RunnerPlugin *> PluginManager::runnerPlugins() const
+QList<const SearchRunnerPlugin *> PluginManager::searchRunnerPlugins() const
 {
     d->loadPlugins();
-    return d->m_runnerPlugins;
+    return d->m_searchRunnerPlugins;
+}
+
+QList<const ReverseGeocodingRunnerPlugin *> PluginManager::reverseGeocodingRunnerPlugins() const
+{
+    d->loadPlugins();
+    return d->m_reverseGeocodingRunnerPlugins;
+}
+
+QList<RoutingRunnerPlugin *> PluginManager::routingRunnerPlugins() const
+{
+    d->loadPlugins();
+    return d->m_routingRunnerPlugins;
+}
+
+QList<const ParseRunnerPlugin *> PluginManager::parsingRunnerPlugins() const
+{
+    d->loadPlugins();
+    return d->m_parsingRunnerPlugins;
 }
 
 /** Append obj to the given plugins list if it inherits both T and U */
@@ -140,7 +164,10 @@ void PluginManagerPrivate::loadPlugins()
     Q_ASSERT( m_renderPluginTemplates.isEmpty() );
     Q_ASSERT( m_networkPluginTemplates.isEmpty() );
     Q_ASSERT( m_positionProviderPluginTemplates.isEmpty() );
-    Q_ASSERT( m_runnerPlugins.isEmpty() );
+    Q_ASSERT( m_searchRunnerPlugins.isEmpty() );
+    Q_ASSERT( m_reverseGeocodingRunnerPlugins.isEmpty() );
+    Q_ASSERT( m_routingRunnerPlugins.isEmpty() );
+    Q_ASSERT( m_parsingRunnerPlugins.isEmpty() );
 
     foreach( const QString &fileName, pluginFileNameList ) {
         // mDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
@@ -156,16 +183,24 @@ void PluginManagerPrivate::loadPlugins()
                        ( obj, loader, m_networkPluginTemplates );
             isPlugin = isPlugin || appendPlugin<PositionProviderPlugin, PositionProviderPluginInterface>
                        ( obj, loader, m_positionProviderPluginTemplates );
-            isPlugin = isPlugin || appendPlugin<RunnerPlugin, RunnerPlugin>
-                       ( obj, loader, m_runnerPlugins ); // intentionally T==U
+            isPlugin = isPlugin || appendPlugin<SearchRunnerPlugin, SearchRunnerPlugin>
+                       ( obj, loader, m_searchRunnerPlugins ); // intentionally T==U
+            isPlugin = isPlugin || appendPlugin<ReverseGeocodingRunnerPlugin, ReverseGeocodingRunnerPlugin>
+                       ( obj, loader, m_reverseGeocodingRunnerPlugins ); // intentionally T==U
+            isPlugin = isPlugin || appendPlugin<RoutingRunnerPlugin, RoutingRunnerPlugin>
+                       ( obj, loader, m_routingRunnerPlugins ); // intentionally T==U
+            isPlugin = isPlugin || appendPlugin<ParseRunnerPlugin, ParseRunnerPlugin>
+                       ( obj, loader, m_parsingRunnerPlugins ); // intentionally T==U
             if ( !isPlugin ) {
-                mDebug() << "Plugin failure:" << fileName << "is a plugin, but it does not implement the "
+                qWarning() << "Ignoring the following plugin since it couldn't be loaded:" << path;
+                mDebug() << "Plugin failure:" << path << "is a plugin, but it does not implement the "
                         << "right interfaces or it was compiled against an old version of Marble. Ignoring it.";
                 delete loader;
             }
         } else {
-            mDebug() << "Plugin failure:" << fileName << "is not a valid Marble Plugin:"
-                     << loader->errorString();
+            qWarning() << "Ignoring to load the following file since it doesn't look like a valid Marble plugin:" << path;
+            mDebug() << Q_FUNC_INFO << "Plugin failure:" << loader->errorString();
+            delete loader;
         }
     }
 

@@ -21,12 +21,12 @@ Page {
     anchors.fill: parent
 
     tools: ToolBarLayout {
-        ToolIcon {
-            iconId: "toolbar-back";
+        MarbleToolIcon {
+            iconSource: main.icon( "actions/go-previous-view", 48 );
             onClicked: pageStack.pop()
         }
         ToolButton {
-            iconSource: "image://theme/icon-m-toolbar-volume";
+            iconSource: main.icon( "actions/text-speak", 48 );
             checkable: true
             checked: !settings.voiceNavigationMuted
             onCheckedChanged: settings.voiceNavigationMuted = !checked
@@ -34,22 +34,28 @@ Page {
             flat: true
         }
         ToolButton {
-            iconSource: "qrc:/marble/wireless.svg";
+            iconSource: main.icon( "devices/network-wireless", 48 );
             checkable: true
             checked: !settings.workOffline
             onCheckedChanged: settings.workOffline = !checked
             width: 60
             flat: true
         }
-        ToolIcon {
-            iconId: "toolbar-view-menu"
-            onClicked: pageMenu.open()
+        MarbleToolIcon {
+            id: menuIcon
+            iconSource: main.icon( "actions/show-menu", 48 );
+            onClicked: {
+                if (main.components === "plasma") {
+                    pageMenu.visualParent = menuIcon
+                }
+                pageMenu.open()
+            }
         }
     }
 
     Menu {
         id: pageMenu
-        content: MenuLayout {
+        content: MarbleMenuLayout {
             MenuItemSwitch {
                 text: "Elevation Profile"
                 checked: false
@@ -103,10 +109,13 @@ Page {
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
         }
 
-        ParallelAnimation {
-            id: fadeAnimation
-            PropertyAnimation { target: instructionItem; property: "scale"; from: 0.75; to: 1.0; duration: 200 }
-            PropertyAnimation { target: instructionItem; property: "opacity"; from: 0.2; to: 1.0; duration: 200 }
+        PropertyAnimation {
+            id: fadeAnimation;
+            target: instructionItem;
+            property: "opacity";
+            from: 0.2;
+            to: 1.0;
+            duration: 200
         }
     }
 
@@ -137,6 +146,11 @@ Page {
                 color: Qt.rgba(238/255, 238/255, 236/255, 1)
                 text: "<font size=\"+2\">" + Math.round( marbleWidget.tracking.positionSource.speed ) + "</font><font size=\"-1\"> km/h</font>"
                 horizontalAlignment: parent.portrait ? Text.AlignHCenter : Text.AlignRight
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
+                }
             }
 
             Rectangle {
@@ -238,26 +252,32 @@ Page {
             spacing: 10
 
             Label {
-            id: text
+            id: textLabel
             width: parent.width
-            color: "white"
+            color: main.components === "harmattan" ? "white" : "black"
             text: "<p>Caution: Driving instructions may be incomplete or wrong. Road construction, weather and other unforeseen variables can result in the suggested route not to be the most expedient or safest route to your destination. Please use common sense while navigating.</p><p>The Marble development team wishes you a pleasant and safe journey.</p>"
+            wrapMode: Text.Wrap
             }
 
             Row {
                 CheckBox {
+                    id: startupCheckbox
                     checked: settings.navigationStartupWarning
                     onCheckedChanged: settings.navigationStartupWarning = checked
                 }
                 Label {
                     text: "Show again";
-                    color: "white"
+                    color: textLabel.color
+                    anchors.verticalCenter: startupCheckbox.verticalCenter
                 }
+            }
+
+            Item {
+                height: 5; width: 1
             }
         }
 
         buttons: ButtonRow {
-            style: ButtonStyle { }
             anchors.horizontalCenter: parent.horizontalCenter
             Button { text: "OK"; onClicked: safetyWarningDialog.accept() }
         }

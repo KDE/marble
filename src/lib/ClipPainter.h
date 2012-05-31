@@ -16,7 +16,7 @@
 #include <QtCore/QPointF>
 #include <QtGui/QPainter>
 #include "marble_export.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 class QPaintDevice;
 class QPolygonF;

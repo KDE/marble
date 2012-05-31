@@ -12,15 +12,15 @@
 #ifndef MARBLE_OSRMPLUGIN_H
 #define MARBLE_OSRMPLUGIN_H
 
-#include "RunnerPlugin.h"
+#include "RoutingRunnerPlugin.h"
 
 namespace Marble
 {
 
-class OSRMPlugin : public RunnerPlugin
+class OSRMPlugin : public RoutingRunnerPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES( Marble::RoutingRunnerPlugin )
 
 public:
     explicit OSRMPlugin( QObject *parent = 0 );

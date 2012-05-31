@@ -133,15 +133,15 @@ int MapQuestRunner::maneuverType( int mapQuestId ) const
     case 7: return Maneuver::SlightLeft ; // slight left
     case 8: return Maneuver::TurnAround ; // right u-turn
     case 9: return Maneuver::TurnAround ; // left u-turn
-    case 10: return Maneuver::SlightRight ; // right merge
-    case 11: return Maneuver::SlightLeft ; // left merge
-    case 12: return Maneuver::Right ; // right on ramp
-    case 13: return Maneuver::Left ; // left on ramp
-    case 14: return Maneuver::Right ; // right off ramp
-    case 15: return Maneuver::Left ; // left off ramp
+    case 10: return Maneuver::Merge ; // right merge
+    case 11: return Maneuver::Merge ; // left merge
+    case 12: return Maneuver::Merge ; // right on ramp
+    case 13: return Maneuver::Merge ; // left on ramp
+    case 14: return Maneuver::ExitRight ; // right off ramp
+    case 15: return Maneuver::ExitLeft ; // left off ramp
     case 16: return Maneuver::Right ; // right fork
-    case 17: return Maneuver::Left ; // left form
-    case 18: return Maneuver::Straight ; // straight fork
+    case 17: return Maneuver::Left ; // left fork
+    case 18: return Maneuver::Continue ; // straight fork
     }
 
     return Maneuver::Unknown;
@@ -199,7 +199,8 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
     }
 
     QDomNodeList instructions = root.elementsByTagName( "maneuver" );
-    for ( unsigned int i = 0; i < instructions.length(); ++i ) {
+    unsigned int const lastInstruction = qMax<int>( 0, instructions.length()-1 ); // ignore the last 'Welcome to xy' instruction
+    for ( unsigned int i = 0; i < lastInstruction; ++i ) {
         QDomElement node = instructions.item( i ).toElement();
 
         QDomNodeList maneuver = node.elementsByTagName( "turnType" );
@@ -240,6 +241,11 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
                 }
             }
         }
+    }
+
+    if ( routeWaypoints->size() < 1 ) {
+        delete result;
+        result = 0;
     }
 
     return result;

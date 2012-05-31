@@ -11,7 +11,7 @@
 #include <QtGui/QApplication>
 #include <QtDeclarative/QtDeclarative>
 #include "MarbleDebug.h"
-#include "global.h"
+#include "MarbleGlobal.h"
 
 using namespace Marble;
 
@@ -70,10 +70,6 @@ int main( int argc, char *argv[] )
     // Create main window based on QML.
     QDeclarativeView view;
     view.setSource( QUrl( "qrc:/main.qml" ) );
-    view.setAttribute( Qt::WA_OpaquePaintEvent );
-    view.setAttribute( Qt::WA_NoSystemBackground );
-    view.viewport()->setAttribute( Qt::WA_OpaquePaintEvent );
-    view.viewport()->setAttribute( Qt::WA_NoSystemBackground );
 
 #ifdef __arm__
     // Window takes up full screen on arm (mobile) devices.
