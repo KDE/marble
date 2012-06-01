@@ -21,7 +21,7 @@ using namespace Marble;
 
 
 EquirectProjection::EquirectProjection()
-    : AbstractProjection(),
+    : CylindricalProjection(),
       d( 0 )
 {
     setRepeatX( repeatableX() );
@@ -33,10 +33,13 @@ EquirectProjection::~EquirectProjection()
 {
 }
 
+/*
 bool EquirectProjection::repeatableX() const
 {
     return true;
 }
+*/
+
 
 qreal EquirectProjection::maxValidLat() const
 {
@@ -62,7 +65,7 @@ bool EquirectProjection::screenCoordinates( const qreal lon, const qreal lat,
     const qreal centerLat = viewport->centerLatitude();
 
     qreal  rad2Pixel = 2.0 * viewport->radius() / M_PI;
- 
+
     // Let (x, y) be the position on the screen of the point.
     x = ( width  / 2.0 + ( lon - centerLon ) * rad2Pixel );
     y = ( height / 2.0 - ( lat - centerLat ) * rad2Pixel );
@@ -341,6 +344,7 @@ bool EquirectProjection::mapCoversViewport( const ViewportParams *viewport ) con
     return true;
 }
 
+/*
 QPainterPath EquirectProjection::mapShape( const ViewportParams *viewport ) const
 {
     // Convenience variables
@@ -348,12 +352,13 @@ QPainterPath EquirectProjection::mapShape( const ViewportParams *viewport ) cons
     int  width  = viewport->width();
     int  height = viewport->height();
 
-    // Calculate translation of center point
-    const qreal centerLat = viewport->centerLatitude();
+	qreal  yTop; 
+	qreal  yBottom;
+	qreal  xDummy;
 
-    int yCenterOffset = (int)( centerLat * (qreal)( 2 * radius ) / M_PI );
-    int yTop          = height / 2 - radius + yCenterOffset;
-    int yBottom       = yTop + 2 * radius;
+	// Get the top and bottom coordinates of the projected map
+    screenCoordinates( 0.0, maxLat(), viewport, xDummy, yTop );
+    screenCoordinates( 0.0, minLat(), viewport, xDummy, yBottom );
 
     // Don't let the map area be outside the image
     if ( yTop < 0 )
@@ -370,3 +375,4 @@ QPainterPath EquirectProjection::mapShape( const ViewportParams *viewport ) cons
 
     return mapShape;
 }
+*/
