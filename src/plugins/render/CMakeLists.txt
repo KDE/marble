@@ -43,3 +43,5 @@ endif (NOT WIN32)
 
 add_subdirectory( elevationprofilefloatitem )
 add_subdirectory( elevationprofilemarker )
+
+add_subdirectory(foursquare)
