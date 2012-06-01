@@ -112,6 +112,7 @@ set(marblewidget_SRCS
     ViewportParams.cpp
     ViewParams.cpp
     Projections/AbstractProjection.cpp
+	Projections/CylindricalProjection.cpp
     Projections/SphericalProjection.cpp
     Projections/EquirectProjection.cpp
     Projections/MercatorProjection.cpp
@@ -349,6 +350,7 @@ else (APPLE AND QTONLY)
     TileCreatorDialog.h
     ViewportParams.h
     Projections/AbstractProjection.h
+	Projections/CylindricalProjection.h
     Projections/SphericalProjection.h
     Projections/EquirectProjection.h
     Projections/MercatorProjection.h
