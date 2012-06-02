@@ -45,7 +45,7 @@ bool FoursquareItem::initialized()
 bool FoursquareItem::operator<( const AbstractDataPluginItem *other ) const
 {
     const FoursquareItem* item = dynamic_cast<const FoursquareItem*>( other );
-    return this->usersCount() < item->usersCount();
+    return this->usersCount() > item->usersCount();
 }
 
 QString FoursquareItem::name() const
