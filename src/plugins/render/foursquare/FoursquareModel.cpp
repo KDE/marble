@@ -60,7 +60,7 @@ void FoursquareModel::parseFile( const QByteArray& file )
     QScriptValue data;
     QScriptEngine engine;
     // Qt requires parentheses around JSON
-    data = engine.evaluate( "(" + QString( file ) + ")" );
+    data = engine.evaluate( "(" + QString::fromUtf8( file ) + ")" );
     data = data.property("response");
     
     // Parse if any result exists
