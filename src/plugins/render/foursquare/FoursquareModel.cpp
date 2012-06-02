@@ -17,8 +17,8 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
 #include "MarbleDebug.h"
+#include "MarbleMath.h"
 
-#include <QDebug>
 #include <QtCore/QUrl>
 #include <QtScript/QScriptEngine>
 #include <QtScript/QScriptValue>
@@ -47,8 +47,22 @@ void FoursquareModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const 
     QString clientSecret = "5L2JDCAYQCEJWY5FNDU4A1RWATE4E5FIIXXRM41YBTFSERUH";
     
     QString apiUrl( "https://api.foursquare.com/v2/venues/search" );
-    apiUrl += "?ll=" + QString::number( box.center().latitude(Marble::GeoDataCoordinates::Degree) );
-    apiUrl += "," + QString::number( box.center().longitude(Marble::GeoDataCoordinates::Degree) );
+    qreal const distanceLon = model->planetRadius() * distanceSphere( box.west(), box.north(), box.east(), box.north() );
+    qreal const distanceLat = model->planetRadius() * distanceSphere( box.west(), box.north(), box.west(), box.south() );
+    qreal const area = distanceLon * distanceLat;
+    if ( area > 10 * 1000 * KM2METER * KM2METER ) {
+        // Large area (> 10.000 km^2) => too large for bbox queries
+        apiUrl += "?ll=" + QString::number( box.center().latitude(Marble::GeoDataCoordinates::Degree) );
+        apiUrl += "," + QString::number( box.center().longitude(Marble::GeoDataCoordinates::Degree) );
+        apiUrl += "&intent=checkin";
+    } else {
+        apiUrl += "?ne=" + QString::number( box.north(Marble::GeoDataCoordinates::Degree) );
+        apiUrl += "," + QString::number( box.east(Marble::GeoDataCoordinates::Degree) );
+        apiUrl += "&sw=" + QString::number( box.south(Marble::GeoDataCoordinates::Degree) );
+        apiUrl += "," + QString::number( box.west(Marble::GeoDataCoordinates::Degree) );
+        apiUrl += "&intent=browse";
+    }
+    apiUrl += "&limit=" + QString::number( number );
     apiUrl += "&client_id=" + clientId;
     apiUrl += "&client_secret=" + clientSecret;
     apiUrl += "&v=20120601";
@@ -69,10 +83,10 @@ void FoursquareModel::parseFile( const QByteArray& file )
         // Add items to the list
         do {
             iterator.next();
-            QString id = iterator.value().property( "id" ).toString(); qDebug() << id;
-            QString name = iterator.value().property( "name" ).toString(); qDebug() << name;
-            double latitude = iterator.value().property( "location" ).property( "lat" ).toString().toDouble(); qDebug() << latitude;
-            double longitude = iterator.value().property( "location" ).property( "lng" ).toString().toDouble(); qDebug() << longitude;
+            QString id = iterator.value().property( "id" ).toString();
+            QString name = iterator.value().property( "name" ).toString();
+            double latitude = iterator.value().property( "location" ).property( "lat" ).toString().toDouble();
+            double longitude = iterator.value().property( "location" ).property( "lng" ).toString().toDouble();
             int usersCount = iterator.value().property( "stats" ).property( "usersCount" ).toInteger();
 
             if( !itemExists( id ) ) {
