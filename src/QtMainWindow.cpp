@@ -71,6 +71,7 @@
 #include "MapWizard.h"
 #include "StackableWindow.h"
 #include "GoToDialog.h"
+#include "MarbleWidgetInputHandler.h"
 
 // For zoom buttons on Maemo
 #ifdef Q_WS_MAEMO_5
@@ -1081,6 +1082,9 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          bool isLocked = settings.value( "lockFloatItemPositions", false ).toBool();
          m_lockFloatItemsAct->setChecked( isLocked );
          lockPosition(isLocked);
+
+         bool const kineticScrolling = settings.value( "kineticScrolling", !smallScreen ).toBool();
+         m_controlView->marbleWidget()->inputHandler()->setKineticScrollingEnabled( kineticScrolling );
      settings.endGroup();
 
      settings.beginGroup( "Sun" );
@@ -1248,6 +1252,7 @@ void MainWindow::writeSettings()
          settings.setValue( "quitZoom", quitZoom );
 
          settings.setValue( "lockFloatItemPositions", m_lockFloatItemsAct->isChecked() );
+         settings.setValue( "kineticScrolling", m_controlView->marbleWidget()->inputHandler()->kineticScrollingEnabled() );
      settings.endGroup();
 
      settings.beginGroup( "Sun" );

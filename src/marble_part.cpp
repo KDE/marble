@@ -92,6 +92,7 @@
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
 #include "SearchInputWidget.h"
+#include "MarbleWidgetInputHandler.h"
 
 // Marble non-library classes
 #include "ControlView.h"
@@ -453,6 +454,7 @@ void MarblePart::readSettings()
     m_showAtmosphereAction->setChecked( MarbleSettings::showAtmosphere() );
     m_lockFloatItemsAct->setChecked(MarbleSettings::lockFloatItemPositions());
     lockFloatItemPosition(MarbleSettings::lockFloatItemPositions());
+    m_controlView->marbleWidget()->inputHandler()->setKineticScrollingEnabled( MarbleSettings::kineticScrolling() );
 
     setShowBookmarks( MarbleSettings::showBookmarks() );
 
