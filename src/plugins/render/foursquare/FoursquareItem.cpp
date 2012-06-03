@@ -45,7 +45,7 @@ bool FoursquareItem::initialized()
 bool FoursquareItem::operator<( const AbstractDataPluginItem *other ) const
 {
     const FoursquareItem* item = dynamic_cast<const FoursquareItem*>( other );
-    return this->usersCount() > item->usersCount();
+    return item && this->usersCount() > item->usersCount();
 }
 
 QString FoursquareItem::name() const
@@ -56,6 +56,8 @@ QString FoursquareItem::name() const
 void FoursquareItem::setName(const QString& name)
 {
     m_name = name;
+    QFontMetrics const fontMetrics( s_font );
+    setSize( QSizeF( fontMetrics.width( m_name ), fontMetrics.height() ) );
 }
 
 int FoursquareItem::usersCount() const

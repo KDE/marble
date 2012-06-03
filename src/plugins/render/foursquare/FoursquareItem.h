@@ -22,7 +22,7 @@ class FoursquareItem : public AbstractDataPluginItem
     Q_OBJECT
     
 public:
-    FoursquareItem( QObject *parent );
+    explicit FoursquareItem( QObject *parent=0 );
  
     ~FoursquareItem();
  
