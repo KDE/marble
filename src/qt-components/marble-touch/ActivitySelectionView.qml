@@ -218,7 +218,7 @@ Page {
                     )
         activityModel.addActivity(
                     "Explore",
-                    "qrc:/icons/activity-spaceview.png",
+                    "qrc:/icons/activity-explore.png",
                     "qrc:/activities/SpaceView.qml"
                     )
 
