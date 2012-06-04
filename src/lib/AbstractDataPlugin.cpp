@@ -125,6 +125,8 @@ void AbstractDataPlugin::setModel( AbstractDataPluginModel* model )
     connect( d->m_model, SIGNAL( itemsUpdated() ), this, SIGNAL( repaintNeeded() ) );
     connect( d->m_model, SIGNAL( favoriteItemsChanged( const QStringList& ) ), this,
              SLOT( favoriteItemsChanged( const QStringList& ) ) );
+    connect( d->m_model, SIGNAL( favoriteItemsOnlyChanged() ), this,
+                         SIGNAL( favoriteItemsOnlyChanged() ) );
 }
 
 const PluginManager* AbstractDataPlugin::pluginManager() const
@@ -168,6 +170,18 @@ void AbstractDataPlugin::setDelegate( QDeclarativeComponent *delegate, QGraphics
 
     d->m_delegate = delegate;
     d->m_delegateParent = parent;
+}
+
+void AbstractDataPlugin::setFavoriteItemsOnly( bool favoriteOnly )
+{
+    if ( d->m_model && d->m_model->isFavoriteItemsOnly() != favoriteOnly ) {
+        d->m_model->setFavoriteItemsOnly( favoriteOnly );
+    }
+}
+
+bool AbstractDataPlugin::isFavoriteItemsOnly() const
+{
+    return d->m_model->isFavoriteItemsOnly();
 }
 
 void AbstractDataPlugin::handleViewportChange( GeoPainter* painter, ViewportParams* viewport )

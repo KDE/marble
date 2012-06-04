@@ -29,6 +29,9 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
 {
     Q_OBJECT
 
+    Q_PROPERTY( QString id READ id WRITE setId NOTIFY idChanged )
+    Q_PROPERTY( bool favorite READ isFavorite WRITE setFavorite NOTIFY favoriteChanged )
+
  public:
     explicit AbstractDataPluginItem( QObject *parent = 0 );
     virtual ~AbstractDataPluginItem();
@@ -78,6 +81,7 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
 
  Q_SIGNALS:
     void updated();
+    void idChanged();
     void favoriteChanged( const QString& id, bool favorite );
 
  public Q_SLOTS:

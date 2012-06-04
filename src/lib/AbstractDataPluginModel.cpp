@@ -328,6 +328,7 @@ void AbstractDataPluginModel::setFavoriteItemsOnly( bool favoriteOnly )
 {
     if ( isFavoriteItemsOnly() != favoriteOnly ) {
         d->m_favoriteItemsOnly = favoriteOnly;
+        emit favoriteItemsOnlyChanged();
     }
 }
 

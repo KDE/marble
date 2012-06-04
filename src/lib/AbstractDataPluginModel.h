@@ -184,6 +184,7 @@ public Q_SLOTS:
  Q_SIGNALS:
     void itemsUpdated();
     void favoriteItemsChanged( const QStringList& favoriteItems );
+    void favoriteItemsOnlyChanged();
     
  private:
     AbstractDataPluginModelPrivate * const d;
