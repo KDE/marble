@@ -108,6 +108,8 @@ void GeonamesParser::readEntry()
                 readSummary( item );
             else if ( name() == "thumbnailImg" )
                 readThumbnailImage( item );
+            else if ( name() == "rank" )
+                readRank( item );
             else
                 readUnknownElement();
         }
@@ -212,6 +214,23 @@ void GeonamesParser::readThumbnailImage( WikipediaItem *item )
         
         if ( isCharacters() ) {
             item->setThumbnailImageUrl( QUrl( text().toString() ) );
+        }
+    }
+}
+
+void GeonamesParser::readRank( WikipediaItem *item )
+{
+    Q_ASSERT( isStartElement()
+              && name() == "rank" );
+
+    while ( !atEnd() ) {
+        readNext();
+
+        if ( isEndElement() )
+            break;
+
+        if ( isCharacters() ) {
+            item->setRank( text().toString().toDouble() );
         }
     }
 }

@@ -40,6 +40,7 @@ private:
     void readUrl( WikipediaItem *item );
     void readSummary( WikipediaItem *item );
     void readThumbnailImage( WikipediaItem *item );
+    void readRank( WikipediaItem *item );
 
     QList<WikipediaItem *> *m_list;
     QObject *m_parent;
