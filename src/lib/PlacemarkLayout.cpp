@@ -18,16 +18,16 @@
 #include <QtCore/QVector>
 #include <QtCore/QVectorIterator>
 #include <QtGui/QFont>
+#include <QtGui/QFontMetrics>
 #include <QtGui/QItemSelectionModel>
 
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
-#include "GeoPainter.h"
 
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
-#include "PlacemarkPainter.h"
+#include "PlacemarkLayer.h"
 #include "MarbleClock.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleDirs.h"
@@ -46,7 +46,6 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
     : QObject( parent ),
       m_selectionModel( selectionModel ),
       m_clock( clock ),
-      m_placemarkPainter( 0 ),
       m_showPlaces( false ),
       m_showCities( false ),
       m_showTerrain( false ),
@@ -220,11 +219,6 @@ PlacemarkLayout::~PlacemarkLayout()
     styleReset();
 }
 
-void PlacemarkLayout::setDefaultLabelColor( const QColor &color )
-{
-    m_placemarkPainter.setDefaultLabelColor( color );
-}
-
 void PlacemarkLayout::setShowPlaces( bool show )
 {
     m_showPlaces = show;
@@ -379,18 +373,8 @@ void PlacemarkLayout::setCacheData()
     emit repaintNeeded();
 }
 
-QStringList PlacemarkLayout::renderPosition() const
-{
-    return QStringList() << "HOVERS_ABOVE_SURFACE";
-}
-
-qreal PlacemarkLayout::zValue() const
-{
-    return 2.0;
-}
-
 /// determine the set of placemarks that fit the viewport based on a pyramid of TileIds
-QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( ViewportParams *viewport )
+QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const ViewportParams *viewport )
 {
     int popularity = 0;
     while ( m_weightfilter.at( popularity ) > viewport->radius() ) {
@@ -453,27 +437,21 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( ViewportParam
     return placemarkList;
 }
 
-bool PlacemarkLayout::render( GeoPainter *painter,
-                              ViewportParams *viewport,
-                              const QString &renderPos,
-                              GeoSceneLayer *layer )
+QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParams *viewport )
 {
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
-
     if ( !m_showPlaces && !m_showCities && !m_showTerrain && !m_showOtherPlaces &&
          !m_showLandingSites && !m_showCraters && !m_showMaria )
-        return true;
+        return QVector<VisiblePlacemark *>();
 
     if ( m_placemarkModel.rowCount() <= 0 )
-        return true;
+        return QVector<VisiblePlacemark *>();
 
     if ( m_styleResetRequested ) {
         styleReset();
     }
 
     if ( m_maxLabelHeight == 0 ) {
-        return true;
+        return QVector<VisiblePlacemark *>();
     }
 
     const int secnumber = viewport->height() / m_maxLabelHeight + 1;
@@ -630,9 +608,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         }
     }
 
-    m_placemarkPainter.drawPlacemarks( painter, m_paintOrder, viewport );
-
-    return true;
+    return m_paintOrder;
 }
 
 
