@@ -525,9 +525,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
 
     QList<const GeoDataPlacemark*> placemarkList = visiblePlacemarks( viewport );
     const int rowCount = placemarkList.count();
-    int i;
-    for ( i = 0; i != rowCount; ++i )
-    {
+    for ( int i = 0; i != rowCount; ++i ) {
         const GeoDataPlacemark *placemark = placemarkList.at(i);
 
         bool ok;
@@ -557,39 +555,40 @@ bool PlacemarkLayout::render( GeoPainter *painter,
             continue;
         }
 
-        const int visualCategory  = placemark->visualCategory();
+        const GeoDataFeature::GeoDataVisualCategory visualCategory = placemark->visualCategory();
 
         // Skip city marks if we're not showing cities.
         if ( !m_showCities
-             && ( visualCategory > 2 && visualCategory < 20 ) )
+             && visualCategory >= GeoDataFeature::SmallCity
+             && visualCategory <= GeoDataFeature::Nation )
             continue;
 
         // Skip terrain marks if we're not showing terrain.
         if ( !m_showTerrain
-             && (    visualCategory >= (int)(GeoDataFeature::Mountain) ) 
-                  && visualCategory <= (int)(GeoDataFeature::OtherTerrain) )
+             && visualCategory >= GeoDataFeature::Mountain
+             && visualCategory <= GeoDataFeature::OtherTerrain )
             continue;
 
         // Skip other places if we're not showing other places.
         if ( !m_showOtherPlaces
-             && (    visualCategory >= (int)(GeoDataFeature::GeographicPole) ) 
-                  && visualCategory <= (int)(GeoDataFeature::Observatory) )
+             && visualCategory >= GeoDataFeature::GeographicPole
+             && visualCategory <= GeoDataFeature::Observatory )
             continue;
 
         // Skip landing sites if we're not showing landing sites.
         if ( !m_showLandingSites
-             && (    visualCategory >= (int)(GeoDataFeature::MannedLandingSite) ) 
-                  && visualCategory <= (int)(GeoDataFeature::UnmannedHardLandingSite) )
+             && visualCategory >= GeoDataFeature::MannedLandingSite
+             && visualCategory <= GeoDataFeature::UnmannedHardLandingSite )
             continue;
 
         // Skip craters if we're not showing craters.
         if ( !m_showCraters
-             && (    visualCategory == (int)(GeoDataFeature::Crater) ) )
+             && visualCategory == GeoDataFeature::Crater )
             continue;
 
         // Skip maria if we're not showing maria.
         if ( !m_showMaria
-             && (    visualCategory == (int)(GeoDataFeature::Mare) ) )
+             && visualCategory == GeoDataFeature::Mare )
             continue;
 
         /**
