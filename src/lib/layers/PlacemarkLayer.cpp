@@ -7,54 +7,68 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
+// Copyright 2011-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include "PlacemarkPainter.h"
+#include "PlacemarkLayer.h"
 
 #include <QtCore/QModelIndex>
 #include <QtCore/QPoint>
+#include <QtGui/QApplication>
 #include <QtGui/QPainter>
+#include <QtGui/QPalette>
 #include <QtGui/QPixmap>
 
 #include "MarbleDebug.h"
 #include "AbstractProjection.h"
 #include "GeoDataStyle.h"
-#include "MarblePlacemarkModel.h"
+#include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "VisiblePlacemark.h"
-#include <QPalette>
-#include <QApplication>
 
 using namespace Marble;
 
-PlacemarkPainter::PlacemarkPainter( QObject* parent )
-    : QObject( parent )
+PlacemarkLayer::PlacemarkLayer( QAbstractItemModel *placemarkModel,
+                                QItemSelectionModel *selectionModel,
+                                MarbleClock *clock,
+                                QObject *parent ) :
+    QObject( parent ),
+    m_layout( placemarkModel, selectionModel, clock ),
+    m_defaultLabelColor( Qt::black )
 {
     m_useXWorkaround = testXBug();
     mDebug() << "Use workaround: " << ( m_useXWorkaround ? "1" : "0" );
 
-    m_defaultLabelColor = Qt::black;
+    connect( &m_layout, SIGNAL( repaintNeeded() ), SIGNAL( repaintNeeded() ) );
 }
 
-PlacemarkPainter::~PlacemarkPainter()
+PlacemarkLayer::~PlacemarkLayer()
 {
 }
 
-void PlacemarkPainter::setDefaultLabelColor( const QColor& color )
+QStringList PlacemarkLayer::renderPosition() const
 {
-    m_defaultLabelColor = color;
+    return QStringList() << "HOVERS_ABOVE_SURFACE";
 }
 
-void PlacemarkPainter::drawPlacemarks( QPainter* painter, 
-                                       QVector<VisiblePlacemark*> visiblePlacemarks,
-                                       ViewportParams *viewport )
+qreal PlacemarkLayer::zValue() const
 {
-    int imageWidth = viewport->width();
+    return 2.0;
+}
 
+bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
+                               const QString &renderPos, GeoSceneLayer *layer )
+{
+    Q_UNUSED( renderPos )
+    Q_UNUSED( layer )
+
+    QVector<VisiblePlacemark*> visiblePlacemarks = m_layout.generateLayout( viewport );
     // draw placemarks less important first
     QVector<VisiblePlacemark*>::const_iterator visit = visiblePlacemarks.constEnd();
     QVector<VisiblePlacemark*>::const_iterator itEnd = visiblePlacemarks.constBegin();
     VisiblePlacemark *mark;
+
+    QPainter *const painter = geoPainter;
 
     while ( visit != itEnd ) {
         --visit;
@@ -73,7 +87,7 @@ void PlacemarkPainter::drawPlacemarks( QPainter* painter,
         // appears many times, we draw one placemark at each
         if (viewport->currentProjection()->repeatX() ) {
             for ( int i = symbolX % (4 * viewport->radius());
-                 i <= imageWidth;
+                 i <= viewport->width();
                  i += 4 * viewport->radius() )
             {
                 labelRect.moveLeft(i - symbolX + textX );
@@ -87,9 +101,61 @@ void PlacemarkPainter::drawPlacemarks( QPainter* painter,
             painter->drawPixmap( labelRect, mark->labelPixmap() );
         }
     }
+
+    return true;
 }
 
-inline void PlacemarkPainter::drawLabelText(QPainter &labelPainter, const QString &text,
+QVector<const GeoDataPlacemark *> PlacemarkLayer::whichPlacemarkAt( const QPoint &pos )
+{
+    return m_layout.whichPlacemarkAt( pos );
+}
+
+void PlacemarkLayer::setDefaultLabelColor( const QColor& color )
+{
+    m_defaultLabelColor = color;
+}
+
+void PlacemarkLayer::setShowPlaces( bool show )
+{
+    m_layout.setShowPlaces( show );
+}
+
+void PlacemarkLayer::setShowCities( bool show )
+{
+    m_layout.setShowCities( show );
+}
+
+void PlacemarkLayer::setShowTerrain( bool show )
+{
+    m_layout.setShowTerrain( show );
+}
+
+void PlacemarkLayer::setShowOtherPlaces( bool show )
+{
+    m_layout.setShowOtherPlaces( show );
+}
+
+void PlacemarkLayer::setShowLandingSites( bool show )
+{
+    m_layout.setShowLandingSites( show );
+}
+
+void PlacemarkLayer::setShowCraters( bool show )
+{
+    m_layout.setShowCraters( show );
+}
+
+void PlacemarkLayer::setShowMaria( bool show )
+{
+    m_layout.setShowMaria( show );
+}
+
+void PlacemarkLayer::requestStyleReset()
+{
+    m_layout.requestStyleReset();
+}
+
+inline void PlacemarkLayer::drawLabelText(QPainter &labelPainter, const QString &text,
                                             const QFont &labelFont, LabelStyle labelStyle, const QColor &color )
 {
     QFont font = labelFont;
@@ -135,7 +201,7 @@ inline void PlacemarkPainter::drawLabelText(QPainter &labelPainter, const QStrin
     }
 }
 
-inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark )
+inline void PlacemarkLayer::drawLabelPixmap( VisiblePlacemark *mark )
 {
 
     QPainter labelPainter;
@@ -203,7 +269,7 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark )
 // QPixmaps that were initialized by filling them 
 // with Qt::transparent
 
-bool PlacemarkPainter::testXBug()
+bool PlacemarkLayer::testXBug()
 {
     QString  testchar( "K" );
     QFont    font( "Sans Serif", 10 );
@@ -234,5 +300,5 @@ bool PlacemarkPainter::testXBug()
     return true;
 }
 
-#include "PlacemarkPainter.moc"
+#include "PlacemarkLayer.moc"
 
