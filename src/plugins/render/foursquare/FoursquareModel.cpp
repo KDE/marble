@@ -81,6 +81,7 @@ void FoursquareModel::parseFile( const QByteArray& file )
     if ( data.property( "venues" ).isArray() ) {
         QScriptValueIterator iterator( data.property( "venues" ) );
         // Add items to the list
+        QList<AbstractDataPluginItem*> items;
         do {
             iterator.next();
             QString id = iterator.value().property( "id" ).toString();
@@ -98,11 +99,11 @@ void FoursquareModel::parseFile( const QByteArray& file )
                 item->setName( name );
                 item->setUsersCount( usersCount );
 
-                addItemToList( item );
+                items << item;
             }
         }
-        
         while ( iterator.hasNext() );
+        addItemsToList( items );
     }
 }
 
