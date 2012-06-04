@@ -40,6 +40,8 @@ class BBCItemGetter : public AbstractWorkerThread
 
     void setStationList( const QList<BBCStation>& items );
 
+    BBCStation station( const QString &id );
+
  protected:
     bool workAvailable();
     void work();

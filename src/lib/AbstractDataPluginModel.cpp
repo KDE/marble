@@ -85,6 +85,8 @@ public:
         
         m_storagePolicy.clearCache();
     }
+
+    void updateFavoriteItems();
     
     AbstractDataPluginModel *m_parent;
     const QString m_name;
@@ -194,7 +196,10 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
 
     d->m_lastBox = currentBox;
     d->m_lastNumber = number;
-    d->m_lastMarbleModel = model;
+    if ( d->m_lastMarbleModel != model ) {
+        d->m_lastMarbleModel = model;
+        d->updateFavoriteItems();
+    }
     d->m_displayedItems = list;
     return list;
 }
@@ -311,10 +316,16 @@ void AbstractDataPluginModel::addItemsToList( const QList<AbstractDataPluginItem
     }
 }
 
+void AbstractDataPluginModel::getItem( const QString &, const MarbleModel * )
+{
+    qWarning() << "Retrieving items by identifier is not implemented by this plugin";
+}
+
 void AbstractDataPluginModel::setFavoriteItems( const QStringList& list )
 {
     if ( d->m_favoriteItems != list) {
         d->m_favoriteItems = list;
+        d->updateFavoriteItems();
         emit favoriteItemsChanged( d->m_favoriteItems );
     }
 }
@@ -328,6 +339,7 @@ void AbstractDataPluginModel::setFavoriteItemsOnly( bool favoriteOnly )
 {
     if ( isFavoriteItemsOnly() != favoriteOnly ) {
         d->m_favoriteItemsOnly = favoriteOnly;
+        d->updateFavoriteItems();
         emit favoriteItemsOnlyChanged();
     }
 }
@@ -402,7 +414,7 @@ void AbstractDataPluginModel::setItemSettings( QHash<QString,QVariant> itemSetti
 
 void AbstractDataPluginModel::handleChangedViewport()
 {
-    if( !d->m_lastMarbleModel ) {
+    if( !d->m_lastMarbleModel || d->m_favoriteItemsOnly ) {
         return;
     }
     
@@ -499,6 +511,17 @@ void AbstractDataPluginModel::clear()
     }
     d->m_itemSet.clear();
     emit itemsUpdated();
+}
+
+void AbstractDataPluginModelPrivate::updateFavoriteItems()
+{
+    if ( m_lastMarbleModel && m_favoriteItemsOnly ) {
+        foreach( const QString &id, m_favoriteItems ) {
+            if ( !m_parent->findItem( id ) ) {
+                m_parent->getItem( id, m_lastMarbleModel );
+            }
+        }
+    }
 }
 
 } // namespace Marble

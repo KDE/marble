@@ -78,7 +78,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     virtual void setFavoriteItems( const QStringList& list );
     QStringList favoriteItems() const;
 
-    virtual void setFavoriteItemsOnly( bool favoriteOnly );
+    void setFavoriteItemsOnly( bool favoriteOnly );
     bool isFavoriteItemsOnly() const;
 
 public Q_SLOTS:
@@ -97,6 +97,12 @@ public Q_SLOTS:
     virtual void getAdditionalItems( const GeoDataLatLonAltBox& box,
                                      const MarbleModel *model,
                                      qint32 number = 10 ) = 0;
+
+    /**
+     * @brief Retrieve data for a specific item
+     * @param id Item id of the item to retrieve
+     */
+    virtual void getItem( const QString &id, const MarbleModel *model );
        
     /**
      * Parse the @p file and generate items. The items will be added to the list or the method
@@ -188,6 +194,7 @@ public Q_SLOTS:
     
  private:
     AbstractDataPluginModelPrivate * const d;
+    friend class AbstractDataPluginModelPrivate;
 };
 
 }

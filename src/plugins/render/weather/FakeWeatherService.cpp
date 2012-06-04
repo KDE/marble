@@ -52,4 +52,9 @@ void FakeWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
     emit createdItems( QList<AbstractDataPluginItem*>() << item );
 }
 
+void FakeWeatherService::getItem( const QString &, const MarbleModel *model )
+{
+    getAdditionalItems( GeoDataLatLonBox(), model, 1 );
+}
+
 #include "FakeWeatherService.moc"
