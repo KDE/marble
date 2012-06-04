@@ -115,7 +115,7 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
     void setDelegate( QDeclarativeComponent* delegate, QGraphicsItem* parent );
 
     /** Convenience method to set the favorite item state on the current model */
-    virtual void setFavoriteItemsOnly( bool favoriteOnly );
+    void setFavoriteItemsOnly( bool favoriteOnly );
 
     bool isFavoriteItemsOnly() const;
     

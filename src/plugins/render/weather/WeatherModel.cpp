@@ -60,21 +60,6 @@ void WeatherModel::setFavoriteItems( const QStringList& list )
     }
 }
 
-void WeatherModel::setFavoriteItemsOnly( bool favoriteOnly )
-{
-    if ( isFavoriteItemsOnly() != favoriteOnly ) {
-        foreach ( AbstractWeatherService *service, m_services ) {
-            service->setFavoriteItemsOnly( favoriteOnly );
-        }
-
-        AbstractDataPluginModel::setFavoriteItemsOnly( favoriteOnly );
-
-        if ( m_initialized ) {
-            updateItems();
-        }
-    }
-}
-
 void WeatherModel::setUpdateInterval( quint32 hours )
 {
     quint32 msecs = hours * 60 * 60 * 1000;
@@ -117,6 +102,13 @@ void WeatherModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     emit additionalItemsRequested( box, model, number );
 }
 
+void WeatherModel::getItem( const QString &id, const MarbleModel *model )
+{
+    foreach( AbstractWeatherService* service, m_services ) {
+        service->getItem( id, model );
+    }
+}
+
 void WeatherModel::parseFile( const QByteArray& file )
 {
     emit parseFileRequested( file );
@@ -132,11 +124,8 @@ void WeatherModel::updateItems()
 void WeatherModel::createServices()
 {
     // addService( new FakeWeatherService( this ) );
-    BBCWeatherService* bbcService = new BBCWeatherService( this );
-    addService( bbcService );
-
-    GeoNamesWeatherService* geonamesService = new GeoNamesWeatherService( this );
-    addService( geonamesService );
+    addService( new BBCWeatherService( this ) );
+    addService( new GeoNamesWeatherService( this ) );
 }
 
 void WeatherModel::downloadDescriptionFileRequested( const QUrl& url )
@@ -147,7 +136,6 @@ void WeatherModel::downloadDescriptionFileRequested( const QUrl& url )
 void WeatherModel::addService( AbstractWeatherService *service )
 {
     service->setFavoriteItems( favoriteItems() );
-    service->setFavoriteItemsOnly( isFavoriteItemsOnly() );
 
     connect( service, SIGNAL( createdItems( QList<AbstractDataPluginItem*> ) ),
              this, SLOT( addItemsToList( QList<AbstractDataPluginItem*> ) ) );

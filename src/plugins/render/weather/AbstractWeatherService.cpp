@@ -15,8 +15,7 @@ namespace Marble
 {
 
 AbstractWeatherService::AbstractWeatherService( QObject *parent )
-    : QObject( parent ),
-      m_favoriteItemsOnly( false )
+    : QObject( parent )
 {
 }
 
@@ -34,16 +33,6 @@ void AbstractWeatherService::setFavoriteItems( const QStringList& favorite )
 QStringList AbstractWeatherService::favoriteItems() const
 {
     return m_favoriteItems;
-}
-
-void AbstractWeatherService::setFavoriteItemsOnly( bool favoriteOnly )
-{
-    m_favoriteItemsOnly = favoriteOnly;
-}
-
-bool AbstractWeatherService::isFavoriteItemsOnly() const
-{
-    return m_favoriteItemsOnly;
 }
 
 void AbstractWeatherService::parseFile( const QByteArray& file )
