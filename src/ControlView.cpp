@@ -28,6 +28,7 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QtCore/QProcess>
 #include <QtCore/QTimer>
+#include <QtCore/QFileInfo>
 #include <QtGui/QMessageBox>
 
 #include "GeoSceneDocument.h"
@@ -537,7 +538,12 @@ bool ControlView::setSideBarState( const QByteArray &state )
 
 void ControlView::addGeoDataFile( QString filename )
 {
-    m_marbleWidget->model()->addGeoDataFile( filename );
+    QFileInfo const file( filename );
+    if ( file.exists() ) {
+        m_marbleWidget->model()->addGeoDataFile( file.absoluteFilePath() );
+    } else {
+        qWarning() << "File" << filename << "does not exist, cannot open it.";
+    }
 }
 
 }
