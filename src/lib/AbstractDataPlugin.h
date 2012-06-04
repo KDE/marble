@@ -42,6 +42,8 @@ class PluginManager;
 class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
 {
     Q_OBJECT
+
+    Q_PROPERTY( bool favoriteItemsOnly READ isFavoriteItemsOnly WRITE setFavoriteItemsOnly NOTIFY favoriteItemsOnlyChanged )
     
  public:    
     AbstractDataPlugin( const MarbleModel *marbleModel );
@@ -111,6 +113,11 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
     virtual RenderType renderType() const;
 
     void setDelegate( QDeclarativeComponent* delegate, QGraphicsItem* parent );
+
+    /** Convenience method to set the favorite item state on the current model */
+    virtual void setFavoriteItemsOnly( bool favoriteOnly );
+
+    bool isFavoriteItemsOnly() const;
     
 public Q_SLOTS:
     void handleViewportChange( ViewportParams* viewport );
@@ -120,6 +127,8 @@ public Q_SLOTS:
 
  Q_SIGNALS:
     void changedNumberOfItems( quint32 number );
+
+    void favoriteItemsOnlyChanged();
     
  private:
     AbstractDataPluginPrivate * const d;
