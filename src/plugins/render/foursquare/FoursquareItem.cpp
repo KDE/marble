@@ -74,14 +74,19 @@ void FoursquareItem::paint( QPainter* painter )
 {   
     // Save the old painter state.
     painter->save();
-    // We want to paint a black string.
-    painter->setPen( QPen( QColor( Qt::black ) ) );
-    // We will use our standard font.
+    painter->setPen( QPen( QColor( Qt::white ) ) );
     painter->setFont( s_font );
+    
     // Draw the text into the given rect.
-    painter->drawText(0, 0, m_name);
-    //painter->drawText( QRect( QPoint( 0, 0 ), size().toSize() ), 0, m_name );
-    // Restore the old painter state.
+    QRect rect = QRect( QPoint( 0, 0 ), size().toSize() );
+    QRect boundingRect = QRect( QPoint( rect.top() - 5, rect.left() - 5 ), QSize( rect.width() + 10, rect.height() + 10 ) );
+    QPainterPath painterPath;
+    painterPath.addRoundedRect( boundingRect, 5, 5 );
+    painter->setClipPath( painterPath );
+    painter->drawPath( painterPath );
+    painter->fillPath( painterPath, QBrush( QColor( "#39AC39" ) ) );
+    painter->drawText( rect, 0, m_name );
+    
     painter->restore();
 }
 
