@@ -591,6 +591,11 @@ bool PlacemarkLayout::render( GeoPainter *painter,
              && visualCategory == GeoDataFeature::Mare )
             continue;
 
+        if ( !m_showPlaces
+             && visualCategory >= GeoDataFeature::GeographicPole
+             && visualCategory <= GeoDataFeature::Observatory )
+            continue;
+
         /**
          * We handled selected placemarks already, so we skip them here...
          * Assuming that only a small amount of places is selected
