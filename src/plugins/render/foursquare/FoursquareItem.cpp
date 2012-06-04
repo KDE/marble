@@ -57,7 +57,7 @@ void FoursquareItem::setName(const QString& name)
 {
     m_name = name;
     QFontMetrics const fontMetrics( s_font );
-    setSize( QSizeF( fontMetrics.width( m_name ), fontMetrics.height() ) );
+    setSize( QSizeF( fontMetrics.width( m_name ) + 10, fontMetrics.height() + 10 ) );
 }
 
 int FoursquareItem::usersCount() const
@@ -79,13 +79,13 @@ void FoursquareItem::paint( QPainter* painter )
     
     // Draw the text into the given rect.
     QRect rect = QRect( QPoint( 0, 0 ), size().toSize() );
-    QRect boundingRect = QRect( QPoint( rect.top() - 5, rect.left() - 5 ), QSize( rect.width() + 10, rect.height() + 10 ) );
+    QRect boundingRect = QRect( QPoint( rect.top(), rect.left() ), QSize( rect.width(), rect.height() ) );
     QPainterPath painterPath;
     painterPath.addRoundedRect( boundingRect, 5, 5 );
     painter->setClipPath( painterPath );
     painter->drawPath( painterPath );
     painter->fillPath( painterPath, QBrush( QColor( "#39AC39" ) ) );
-    painter->drawText( rect, 0, m_name );
+    painter->drawText( rect.adjusted( 5, 5, -5, -5 ), 0, m_name );
     
     painter->restore();
 }
