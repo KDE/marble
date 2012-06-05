@@ -20,6 +20,7 @@
 
 class QPoint;
 class QUrl;
+class QAbstractItemModel;
 
 namespace Marble
 {
@@ -44,6 +45,9 @@ class ViewportParams;
 class MARBLE_EXPORT AbstractDataPluginModel : public QObject
 {
     Q_OBJECT
+
+    /** @todo FIXME Qt Quick segfaults if using the real class here instead of QObject */
+    Q_PROPERTY( QObject* favoritesModel READ favoritesModel CONSTANT )
  
  public:
     explicit AbstractDataPluginModel( const QString& name,
@@ -80,6 +84,8 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
 
     void setFavoriteItemsOnly( bool favoriteOnly );
     bool isFavoriteItemsOnly() const;
+
+    QObject* favoritesModel();
 
 public Q_SLOTS:
     /**
@@ -165,6 +171,8 @@ public Q_SLOTS:
      * Removes all items
      */
     void clear();
+
+    void registerItemProperties( const QMetaObject& item );
     
  private Q_SLOTS:
     /**
@@ -191,7 +199,7 @@ public Q_SLOTS:
     void itemsUpdated();
     void favoriteItemsChanged( const QStringList& favoriteItems );
     void favoriteItemsOnlyChanged();
-    
+
  private:
     AbstractDataPluginModelPrivate * const d;
     friend class AbstractDataPluginModelPrivate;

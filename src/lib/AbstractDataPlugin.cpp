@@ -131,6 +131,8 @@ void AbstractDataPlugin::setModel( AbstractDataPluginModel* model )
              SLOT( favoriteItemsChanged( const QStringList& ) ) );
     connect( d->m_model, SIGNAL( favoriteItemsOnlyChanged() ), this,
                          SIGNAL( favoriteItemsOnlyChanged() ) );
+
+    emit favoritesModelChanged();
 }
 
 const PluginManager* AbstractDataPlugin::pluginManager() const
@@ -186,6 +188,11 @@ void AbstractDataPlugin::setFavoriteItemsOnly( bool favoriteOnly )
 bool AbstractDataPlugin::isFavoriteItemsOnly() const
 {
     return d->m_model->isFavoriteItemsOnly();
+}
+
+QObject *AbstractDataPlugin::favoritesModel()
+{
+    return d->m_model ? d->m_model->favoritesModel() : 0;
 }
 
 void AbstractDataPlugin::handleViewportChange( ViewportParams* viewport )
