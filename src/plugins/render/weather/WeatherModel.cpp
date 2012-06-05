@@ -30,6 +30,7 @@ WeatherModel::WeatherModel( const PluginManager *pluginManager, QObject *parent 
     : AbstractDataPluginModel( "weather", pluginManager, parent ),
       m_initialized( false )
 {
+    registerItemProperties( WeatherItem::staticMetaObject );
     createServices();
 
     m_timer = new QTimer();

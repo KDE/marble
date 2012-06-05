@@ -44,6 +44,8 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
     Q_OBJECT
 
     Q_PROPERTY( bool favoriteItemsOnly READ isFavoriteItemsOnly WRITE setFavoriteItemsOnly NOTIFY favoriteItemsOnlyChanged )
+    /** @todo FIXME Qt Quick segfaults if using the real class here instead of QObject */
+    Q_PROPERTY( QObject* favoritesModel READ favoritesModel NOTIFY favoritesModelChanged )
     
  public:    
     AbstractDataPlugin( const MarbleModel *marbleModel );
@@ -115,6 +117,8 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
     void setFavoriteItemsOnly( bool favoriteOnly );
 
     bool isFavoriteItemsOnly() const;
+
+    QObject* favoritesModel();
     
 public Q_SLOTS:
     void handleViewportChange(GeoPainter *painter, ViewportParams* viewport );
@@ -126,6 +130,8 @@ public Q_SLOTS:
     void changedNumberOfItems( quint32 number );
 
     void favoriteItemsOnlyChanged();
+
+    void favoritesModelChanged();
     
  private:
     AbstractDataPluginPrivate * const d;
