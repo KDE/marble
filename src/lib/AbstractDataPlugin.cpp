@@ -183,7 +183,7 @@ void AbstractDataPlugin::setFavoriteItemsOnly( bool favoriteOnly )
 
 bool AbstractDataPlugin::isFavoriteItemsOnly() const
 {
-    return d->m_model->isFavoriteItemsOnly();
+    return d->m_model && d->m_model->isFavoriteItemsOnly();
 }
 
 QObject *AbstractDataPlugin::favoritesModel()
