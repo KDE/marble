@@ -163,18 +163,32 @@ FavoritesModel::FavoritesModel( AbstractDataPluginModelPrivate *_d, QObject* par
 
 int FavoritesModel::rowCount ( const QModelIndex &parent ) const
 {
-    return parent.isValid() ? 0 : d->m_favoriteItems.size();
+    if ( parent.isValid() ) {
+        return 0;
+    }
+
+    int count = 0;
+    foreach( AbstractDataPluginItem* item, d->m_itemSet ) {
+        if ( item->initialized() && item->isFavorite() ) {
+            ++count;
+        }
+    }
+
+    return count;
 }
 
 QVariant FavoritesModel::data( const QModelIndex &index, int role ) const
 {
     int const row = index.row();
     if ( row >= 0 && row < rowCount() ) {
-        QString const roleName = roleNames().value( role, int( Qt::DisplayRole ) );
-        QString const id = d->m_favoriteItems[row];
+        int count = 0;
         foreach( AbstractDataPluginItem* item, d->m_itemSet ) {
-            if ( item->id() == id ) {
-                return item->property( roleName.toAscii() );
+            if ( item->initialized() && item->isFavorite() ) {
+                if ( count == row ) {
+                    QString const roleName = roleNames().value( role, int( Qt::DisplayRole ) );
+                    return item->property( roleName.toAscii() );
+                }
+                ++count;
             }
         }
     }
@@ -358,6 +372,7 @@ void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item )
 void AbstractDataPluginModel::addItemsToList( const QList<AbstractDataPluginItem *> &items )
 {
     bool needsUpdate = false;
+    bool favoriteChanged = false;
     foreach( AbstractDataPluginItem *item, items ) {
         if( !item ) {
             continue;
@@ -392,6 +407,14 @@ void AbstractDataPluginModel::addItemsToList( const QList<AbstractDataPluginItem
         if ( !needsUpdate && item->initialized() ) {
             needsUpdate = true;
         }
+
+        if ( !favoriteChanged && item->initialized() && item->isFavorite() ) {
+            favoriteChanged = true;
+        }
+    }
+
+    if ( favoriteChanged && d->m_favoritesModel ) {
+        d->m_favoritesModel->reset();
     }
 
     if ( needsUpdate ) {
@@ -439,6 +462,7 @@ QObject *AbstractDataPluginModel::favoritesModel()
 {
     if ( !d->m_favoritesModel ) {
         d->m_favoritesModel = new FavoritesModel( d, this );
+        d->updateFavoriteItems();
     }
 
     return d->m_favoritesModel;
