@@ -313,7 +313,7 @@ QString VoiceNavigationModel::preview() const
 
 QString VoiceNavigationModel::instruction() const
 {
-    return d->m_queue.first();
+    return d->m_queue.isEmpty() ? QString() : d->m_queue.first();
 }
 
 }
