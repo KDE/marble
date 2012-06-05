@@ -134,12 +134,70 @@ Page {
     }
 
     // Model that stores information about activities.
-    ActivityModel { id: activityModel }
+    ListModel {
+        id: activityModel
+
+        ListElement {
+            name: "Virtual Globe"
+            imagePath: "qrc:/icons/activity-virtualglobe.png"
+            path: "qrc:/activities/VirtualGlobe.qml"
+            previewPath: ""
+        }
+
+        ListElement {
+            name: "Search"
+            imagePath: "qrc:/icons/activity-search.png"
+            path: "qrc:/activities/Search.qml"
+            previewPath: ""
+        }
+        ListElement {
+            name: "Routing"
+            imagePath: "qrc:/icons/activity-routing.png"
+            path: "qrc:/activities/Routing.qml"
+            previewPath: ""
+        }
+        ListElement {
+            name: "Tracking"
+            imagePath: "qrc:/icons/activity-tracking.png"
+            path: "qrc:/activities/Tracking.qml"
+            previewPath: ""
+        }
+        ListElement {
+            name: "Navigation"
+            imagePath: "qrc:/icons/activity-navigation.png"
+            path: "qrc:/activities/Navigation.qml"
+            previewPath: ""
+        }
+        ListElement {
+            name: "Weather"
+            imagePath: "qrc:/icons/activity-weather.png"
+            path: "qrc:/activities/Weather.qml"
+            previewPath: "qrc:/activities/WeatherPreview.qml"
+        }
+        ListElement {
+            name: "Community"
+            imagePath: "qrc:/icons/activity-friends.png"
+            path: "qrc:/activities/Friends.qml"
+            previewPath: ""
+        }
+        ListElement {
+            name: "Space View"
+            imagePath: "qrc:/icons/activity-spaceview.png"
+            path: "qrc:/activities/SpaceView.qml"
+            previewPath: ""
+        }
+        ListElement {
+            name: "Explore"
+            imagePath: "qrc:/icons/activity-explore.png"
+            path: "qrc:/activities/SpaceView.qml"
+            previewPath: ""
+        }
+    }
 
     function openActivity( name ) {
-        for ( var i=0; i<activityModel.rowCount(); i++ ) {
-            if ( activityModel.get( i, "name" ) === name ) {
-                switchTo( name, activityModel.get( i, "path" ) )
+        for ( var i=0; i<activityModel.count; i++ ) {
+            if ( activityModel.get(i).name === name ) {
+                switchTo( name, activityModel.get(i).path )
                 return
             }
         }
@@ -172,105 +230,5 @@ Page {
             lazyLoader.source = "qrc:/MainWidget.qml";
             marbleWidget = lazyLoader.item
         }
-    }
-
-    Component.onCompleted: {
-        // Inserts activities into model, add more activities here.
-        activityModel.addActivity(
-                    "Virtual Globe",
-                    "qrc:/icons/activity-virtualglobe.png",
-                    "qrc:/activities/VirtualGlobe.qml"
-                    )
-        activityModel.addActivity(
-                    "Search",
-                    "qrc:/icons/activity-search.png",
-                    "qrc:/activities/Search.qml"
-                    )
-        activityModel.addActivity(
-                    "Routing",
-                    "qrc:/icons/activity-routing.png",
-                    "qrc:/activities/Routing.qml"
-                    )
-        activityModel.addActivity(
-                    "Tracking",
-                    "qrc:/icons/activity-tracking.png",
-                    "qrc:/activities/Tracking.qml"
-                    )
-        activityModel.addActivity(
-                    "Navigation",
-                    "qrc:/icons/activity-navigation.png",
-                    "qrc:/activities/Navigation.qml"
-                    )
-        activityModel.addActivity(
-                    "Weather",
-                    "qrc:/icons/activity-weather.png",
-                    "qrc:/activities/Weather.qml"
-                    )
-        activityModel.addActivity(
-                    "Community",
-                    "qrc:/icons/activity-friends.png",
-                    "qrc:/activities/Friends.qml"
-                    )
-        activityModel.addActivity(
-                    "Space View",
-                    "qrc:/icons/activity-spaceview.png",
-                    "qrc:/activities/SpaceView.qml"
-                    )
-        activityModel.addActivity(
-                    "Explore",
-                    "qrc:/icons/activity-explore.png",
-                    "qrc:/activities/SpaceView.qml"
-                    )
-
-        // @todo: Terms of usage still not clear
-        //            activityModel.addActivity(
-        //                        "Geocaching",
-        //                        "qrc:/icons/activity-default.png",
-        //                        marbleWidget,
-        //                        "qrc:/activities/Geocaching.qml"
-        //                        )
-        /** @todo: Implement missing stuff and re-enable the activities below */
-        /*
-            activityModel.addActivity(
-                "Drive",
-                "qrc:/icons/activity-default.png",
-                "qrc:/activities/Drive.qml",
-            )
-            activityModel.addActivity(
-                "Cycle",
-                "qrc:/icons/activity-default.png",
-                "qrc:/activities/Cycle.qml",
-            )
-            activityModel.addActivity(
-                "Walk",
-                "qrc:/icons/activity-default.png",
-                "qrc:/activities/Walk.qml",
-            )
-            activityModel.addActivity(
-                "Guidance",
-                "qrc:/icons/activity-default.png",
-                "qrc:/activities/Guidance.qml",
-            )
-            activityModel.addActivity(
-                "Bookmarks",
-                "qrc:/icons/activity-bookmarks.png",
-                "qrc:/activities/Bookmarks.qml",
-            )
-            activityModel.addActivity(
-                "Around Me",
-                "qrc:/icons/activity-default.png",
-                "qrc:/activities/AroundMe.qml",
-            )
-            activityModel.addActivity(
-                "Download",
-                "qrc:/icons/activity-download.png",
-                "qrc:/activities/Download.qml",
-            )
-            activityModel.addActivity(
-                "Configuration",
-                "qrc:/icons/activity-configure.png",
-                "qrc:/activities/Configuration.qml",
-            )
-*/
     }
 }
