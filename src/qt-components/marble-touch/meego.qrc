@@ -15,10 +15,12 @@
         <file>activities/Tracking.qml</file>
         <file>activities/VirtualGlobe.qml</file>
         <file>activities/Weather.qml</file>
+        <file>activities/WeatherPreview.qml</file>
         <file>icons/activity-bookmarks.png</file>
         <file>icons/activity-configure.png</file>
         <file>icons/activity-default.png</file>
         <file>icons/activity-download.png</file>
+        <file>icons/activity-empty.png</file>
         <file>icons/activity-explore.png</file>
         <file>icons/activity-friends.png</file>
         <file>icons/activity-routing.png</file>
