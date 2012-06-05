@@ -239,6 +239,11 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
         if( (*i)->target() != target ) {
             continue;
         }
+
+        // Hide non-favorite items if necessary
+        if( d->m_favoriteItemsOnly && !(*i)->isFavorite() ) {
+            continue;
+        }
         
         if( !currentBox.contains( (*i)->coordinate() ) ) {
             continue;
