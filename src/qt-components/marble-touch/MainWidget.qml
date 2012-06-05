@@ -331,4 +331,8 @@ Item {
     function setDataPluginDelegate( id, delegate ) {
         map.setDataPluginDelegate( id, delegate )
     }
+
+    function renderPlugin( name ) {
+        return map.renderPlugin( name )
+    }
 }

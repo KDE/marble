@@ -68,8 +68,21 @@ Page {
                         id: activityImage
                         width: 140
                         height: 140
-                        source: imagePath
+                        source: previewLoader.status == Loader.Ready && previewLoader.item.isActive ? "qrc:/icons/activity-empty.png" : imagePath
                         smooth: true
+
+                        Loader {
+                            id: previewLoader
+                            anchors.centerIn: parent
+                            source: previewPath
+
+                            Component.onCompleted: {
+                                if ( source !== "" && marbleWidget === null) {
+                                    lazyLoader.source = "qrc:/MainWidget.qml";
+                                    marbleWidget = lazyLoader.item
+                                }
+                            }
+                        }
                     }
                     Text {
                         width: parent.width
