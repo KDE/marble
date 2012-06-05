@@ -164,7 +164,6 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark )
     if ( mark->selected() ) {
         labelStyle = Selected;
     } else if ( style->labelStyle().glow() ) {
-        labelFont.setWeight(75);
         labelStyle = Glow;
     }
 
