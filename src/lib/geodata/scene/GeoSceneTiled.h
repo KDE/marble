@@ -44,14 +44,14 @@ class DownloadPolicy;
 class ServerLayout;
 class TileId;
 
-class GeoSceneTexture : public GeoSceneAbstractDataset
+class GeoSceneTiled : public GeoSceneAbstractDataset
 {
  public:
     enum StorageLayout { Marble, OpenStreetMap };
     enum Projection { Equirectangular, Mercator };
 
-    explicit GeoSceneTexture( const QString& name );
-    ~GeoSceneTexture();
+    explicit GeoSceneTiled( const QString& name );
+    ~GeoSceneTiled();
     virtual const char* nodeType() const;
 
     QString sourceDir() const;
@@ -106,7 +106,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     virtual QString type();
 
  private:
-    Q_DISABLE_COPY( GeoSceneTexture )
+    Q_DISABLE_COPY( GeoSceneTiled )
     QStringList hostNames() const;
 
     QString m_sourceDir;
@@ -128,17 +128,17 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     QList<DownloadPolicy *> m_downloadPolicies;
 };
 
-inline bool GeoSceneTexture::hasMaximumTileLevel() const
+inline bool GeoSceneTiled::hasMaximumTileLevel() const
 {
     return m_maximumTileLevel != -1;
 }
 
-inline QString GeoSceneTexture::blending() const
+inline QString GeoSceneTiled::blending() const
 {
     return m_blending;
 }
 
-inline void GeoSceneTexture::setBlending( const QString &name )
+inline void GeoSceneTiled::setBlending( const QString &name )
 {
     m_blending = name;
 }

@@ -21,7 +21,7 @@
 #include "GeoSceneZoom.h"
 #include "GeoSceneMap.h"
 #include "GeoSceneLayer.h"
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneProperty.h"
 #include "GeoSceneGeodata.h"
@@ -768,7 +768,7 @@ GeoSceneDocument* MapWizard::createDocument()
     zoom->setMaximum( 3500 );
     zoom->setDiscrete( false );
     
-    GeoSceneTexture *texture = new GeoSceneTexture( "map" );
+    GeoSceneTiled *texture = new GeoSceneTiled( "map" );
     texture->setExpire( 31536000 );
     texture->setSourceDir( "earth/" + document->head()->theme() ); 
     if( d->mapProviderType == MapWizardPrivate::WmsMap )
@@ -782,7 +782,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setLevelZeroRows( 1 );
         texture->setLevelZeroColumns( 1 );
         texture->setServerLayout( new WmsServerLayout( texture ) );
-        texture->setProjection( GeoSceneTexture::Equirectangular );
+        texture->setProjection( GeoSceneTiled::Equirectangular );
     }
     
     else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
@@ -796,7 +796,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setLevelZeroRows( 1 );
         texture->setLevelZeroColumns( 1 );
         texture->setServerLayout( new CustomServerLayout( texture ) );
-        texture->setProjection( GeoSceneTexture::Mercator );
+        texture->setProjection( GeoSceneTiled::Mercator );
     }
     
     else if( d->mapProviderType == MapWizardPrivate::StaticImageMap )
@@ -806,7 +806,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setFileFormat( d->format.toUpper() );
         texture->setInstallMap( document->head()->theme() + "." + d->format );
         texture->setServerLayout( new MarbleServerLayout( texture ) );
-        texture->setProjection( GeoSceneTexture::Equirectangular );
+        texture->setProjection( GeoSceneTiled::Equirectangular );
         int imageWidth = QImage( image ).width();
         int tileSize = c_defaultTileSize;
         

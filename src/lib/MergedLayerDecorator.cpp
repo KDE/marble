@@ -26,7 +26,7 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 #include "MapThemeManager.h"
 #include "StackedTile.h"
 #include "TileLoaderHelper.h"
@@ -129,11 +129,11 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
     return new StackedTile( id, resultImage, tiles );
 }
 
-StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const QVector<const GeoSceneTexture *> &textureLayers ) const
+StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const QVector<const GeoSceneTiled *> &textureLayers ) const
 {
     QVector<QSharedPointer<TextureTile> > tiles;
 
-    foreach ( const GeoSceneTexture *textureLayer, textureLayers ) {
+    foreach ( const GeoSceneTiled *textureLayer, textureLayers ) {
         const TileId tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
 
@@ -167,9 +167,9 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
     return d->createTile( tiles );
 }
 
-void MergedLayerDecorator::downloadTile( const TileId &id, const QVector<GeoSceneTexture const *> &textureLayers )
+void MergedLayerDecorator::downloadTile( const TileId &id, const QVector<GeoSceneTiled const *> &textureLayers )
 {
-    foreach ( const GeoSceneTexture *textureLayer, textureLayers ) {
+    foreach ( const GeoSceneTiled *textureLayer, textureLayers ) {
         const TileId tileId( textureLayer->sourceDir(), id.zoomLevel(), id.x(), id.y() );
         d->m_tileLoader->downloadTile( tileId );
     }

@@ -11,7 +11,7 @@
 // Own
 #include "ServerLayout.h"
 
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 #include "MarbleGlobal.h"
 #include "TileId.h"
 
@@ -20,7 +20,7 @@
 namespace Marble
 {
 
-ServerLayout::ServerLayout( GeoSceneTexture *textureLayer )
+ServerLayout::ServerLayout( GeoSceneTiled *textureLayer )
     : m_textureLayer( textureLayer )
 {
 }
@@ -39,7 +39,7 @@ qint64 ServerLayout::numTilesY( const Marble::TileId& tileId ) const
     return ( 1 << tileId.zoomLevel() ) * m_textureLayer->levelZeroRows();
 }
 
-MarbleServerLayout::MarbleServerLayout( GeoSceneTexture *textureLayer )
+MarbleServerLayout::MarbleServerLayout( GeoSceneTiled *textureLayer )
     : ServerLayout( textureLayer )
 {
 }
@@ -58,7 +58,7 @@ QString MarbleServerLayout::name() const
 }
 
 
-OsmServerLayout::OsmServerLayout( GeoSceneTexture *textureLayer )
+OsmServerLayout::OsmServerLayout( GeoSceneTiled *textureLayer )
     : ServerLayout( textureLayer )
 {
 }
@@ -83,7 +83,7 @@ QString OsmServerLayout::name() const
 }
 
 
-CustomServerLayout::CustomServerLayout( GeoSceneTexture *texture )
+CustomServerLayout::CustomServerLayout( GeoSceneTiled *texture )
     : ServerLayout( texture )
 {
 }
@@ -105,7 +105,7 @@ QString CustomServerLayout::name() const
 }
 
 
-WmsServerLayout::WmsServerLayout( GeoSceneTexture *texture )
+WmsServerLayout::WmsServerLayout( GeoSceneTiled *texture )
     : ServerLayout( texture )
 {
 }
@@ -156,9 +156,9 @@ qreal WmsServerLayout::latBottom( const Marble::TileId &tileId ) const
 
     switch( m_textureLayer->projection() )
     {
-    case GeoSceneTexture::Equirectangular:
+    case GeoSceneTiled::Equirectangular:
         return ( radius - tileId.y() - 1 ) / radius *  90.0;
-    case GeoSceneTexture::Mercator:
+    case GeoSceneTiled::Mercator:
         return atan( sinh( ( radius - tileId.y() - 1 ) / radius * M_PI ) ) * 180.0 / M_PI;
     }
 
@@ -172,9 +172,9 @@ qreal WmsServerLayout::latTop( const Marble::TileId &tileId ) const
 
     switch( m_textureLayer->projection() )
     {
-    case GeoSceneTexture::Equirectangular:
+    case GeoSceneTiled::Equirectangular:
         return ( radius - tileId.y() ) / radius *  90.0;
-    case GeoSceneTexture::Mercator:
+    case GeoSceneTiled::Mercator:
         return atan( sinh( ( radius - tileId.y() ) / radius * M_PI ) ) * 180.0 / M_PI;
     }
 
@@ -185,9 +185,9 @@ qreal WmsServerLayout::latTop( const Marble::TileId &tileId ) const
 QString WmsServerLayout::epsgCode() const
 {
     switch ( m_textureLayer->projection() ) {
-        case GeoSceneTexture::Equirectangular:
+        case GeoSceneTiled::Equirectangular:
             return "EPSG:4326";
-        case GeoSceneTexture::Mercator:
+        case GeoSceneTiled::Mercator:
             return "EPSG:3785";
     }
 
@@ -195,7 +195,7 @@ QString WmsServerLayout::epsgCode() const
     return QString();
 }
 
-QuadTreeServerLayout::QuadTreeServerLayout( GeoSceneTexture *textureLayer )
+QuadTreeServerLayout::QuadTreeServerLayout( GeoSceneTiled *textureLayer )
     : ServerLayout( textureLayer )
 {
 }

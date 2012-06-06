@@ -26,7 +26,7 @@
 #include "DgmlAttributeDictionary.h"
 #include "DgmlElementDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 
 namespace Marble
 {
@@ -47,15 +47,15 @@ GeoNode* DgmlProjectionTagHandler::parse( GeoParser& parser ) const
     // Attribute name, default to "Equirectangular"
     const QString nameStr = parser.attribute( dgmlAttr_name ).trimmed();
     if ( !nameStr.isEmpty() ) {
-        GeoSceneTexture::Projection projection = GeoSceneTexture::Equirectangular;
+        GeoSceneTiled::Projection projection = GeoSceneTiled::Equirectangular;
         if ( nameStr == "Equirectangular" )
-            projection = GeoSceneTexture::Equirectangular;
+            projection = GeoSceneTiled::Equirectangular;
         else if ( nameStr == "Mercator" )
-            projection = GeoSceneTexture::Mercator;
+            projection = GeoSceneTiled::Mercator;
         else
             parser.raiseWarning( QString( "Value not allowed for attribute name: %1" ).arg( nameStr ));
 
-        parentItem.nodeAs<GeoSceneTexture>()->setProjection( projection );
+        parentItem.nodeAs<GeoSceneTiled>()->setProjection( projection );
     }
     return 0;
 }

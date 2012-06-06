@@ -33,7 +33,7 @@ extern const char* GeoScenePaletteType;
 extern const char* GeoScenePropertyType;
 extern const char* GeoSceneSectionType;
 extern const char* GeoSceneSettingsType;
-extern const char* GeoSceneTextureType;
+extern const char* GeoSceneTiledType;
 extern const char* GeoSceneVectorType;
 extern const char* GeoSceneXmlDataSourceType;
 extern const char* GeoSceneZoomType;

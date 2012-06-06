@@ -42,7 +42,7 @@
 #include "GeoSceneLayer.h"
 #include "GeoSceneMap.h"
 #include "GeoScenePalette.h"
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 #include "GeoSceneVector.h"
 #include "GeoSceneXmlDataSource.h"
 
@@ -486,8 +486,8 @@ void MarbleModel::clearPersistentTileCache()
 
         GeoSceneLayer *layer =
             static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
-        GeoSceneTexture *texture =
-            static_cast<GeoSceneTexture*>( layer->groundDataset() );
+        GeoSceneTiled *texture =
+            static_cast<GeoSceneTiled*>( layer->groundDataset() );
 
         QString sourceDir = texture->sourceDir();
         QString installMap = texture->installMap();
@@ -566,7 +566,7 @@ void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
     if ( !layer )
         return;
 
-    GeoSceneTexture * const texture = static_cast<GeoSceneTexture*>( layer->groundDataset() );
+    GeoSceneTiled * const texture = static_cast<GeoSceneTiled*>( layer->groundDataset() );
     if ( !texture )
         return;
 

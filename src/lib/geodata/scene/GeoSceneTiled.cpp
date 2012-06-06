@@ -20,7 +20,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 
 #include "DownloadPolicy.h"
 #include "MarbleDebug.h"
@@ -33,7 +33,7 @@
 namespace Marble
 {
 
-GeoSceneTexture::GeoSceneTexture( const QString& name )
+GeoSceneTiled::GeoSceneTiled( const QString& name )
     : GeoSceneAbstractDataset( name ),
       m_sourceDir(),
       m_installMap(),
@@ -49,94 +49,94 @@ GeoSceneTexture::GeoSceneTexture( const QString& name )
 {
 }
 
-GeoSceneTexture::~GeoSceneTexture()
+GeoSceneTiled::~GeoSceneTiled()
 {
     qDeleteAll( m_downloadPolicies );
     delete m_serverLayout;
 }
 
-const char* GeoSceneTexture::nodeType() const
+const char* GeoSceneTiled::nodeType() const
 {
-    return "GeoSceneTexture";
+    return "GeoSceneTiled";
 }
 
-QString GeoSceneTexture::sourceDir() const
+QString GeoSceneTiled::sourceDir() const
 {
     return m_sourceDir;
 }
 
-void GeoSceneTexture::setSourceDir( const QString& sourceDir )
+void GeoSceneTiled::setSourceDir( const QString& sourceDir )
 {
     m_sourceDir = sourceDir;
 }
 
-QString GeoSceneTexture::installMap() const
+QString GeoSceneTiled::installMap() const
 {
     return m_installMap;
 }
 
-void GeoSceneTexture::setInstallMap( const QString& installMap )
+void GeoSceneTiled::setInstallMap( const QString& installMap )
 {
     m_installMap = installMap;
 }
 
-GeoSceneTexture::StorageLayout GeoSceneTexture::storageLayout() const
+GeoSceneTiled::StorageLayout GeoSceneTiled::storageLayout() const
 {
     return m_storageLayoutMode;
 }
 
-void GeoSceneTexture::setStorageLayout( const StorageLayout layout )
+void GeoSceneTiled::setStorageLayout( const StorageLayout layout )
 {
     m_storageLayoutMode = layout;
 }
 
-void GeoSceneTexture::setServerLayout( const ServerLayout *layout )
+void GeoSceneTiled::setServerLayout( const ServerLayout *layout )
 {
     delete m_serverLayout;
     m_serverLayout = layout;
 }
 
-const ServerLayout* GeoSceneTexture::serverLayout() const
+const ServerLayout* GeoSceneTiled::serverLayout() const
 {
     return m_serverLayout;
 }
 
-int GeoSceneTexture::levelZeroColumns() const
+int GeoSceneTiled::levelZeroColumns() const
 {
    return m_levelZeroColumns;
 }
 
-void GeoSceneTexture::setLevelZeroColumns( const int columns )
+void GeoSceneTiled::setLevelZeroColumns( const int columns )
 {
     m_levelZeroColumns = columns;
 }
 
-int GeoSceneTexture::levelZeroRows() const
+int GeoSceneTiled::levelZeroRows() const
 {
     return m_levelZeroRows;
 }
 
-void GeoSceneTexture::setLevelZeroRows( const int rows )
+void GeoSceneTiled::setLevelZeroRows( const int rows )
 {
     m_levelZeroRows = rows;
 }
 
-int GeoSceneTexture::maximumTileLevel() const
+int GeoSceneTiled::maximumTileLevel() const
 {
     return m_maximumTileLevel;
 }
 
-void GeoSceneTexture::setMaximumTileLevel( const int maximumTileLevel )
+void GeoSceneTiled::setMaximumTileLevel( const int maximumTileLevel )
 {
     m_maximumTileLevel = maximumTileLevel;
 }
 
-QVector<QUrl> GeoSceneTexture::downloadUrls() const
+QVector<QUrl> GeoSceneTiled::downloadUrls() const
 {
     return m_downloadUrls;
 }
 
-const QSize GeoSceneTexture::tileSize() const
+const QSize GeoSceneTiled::tileSize() const
 {
     if ( m_tileSize.isEmpty() ) {
         const TileId id( sourceDir(), 0, 0, 0 );
@@ -164,7 +164,7 @@ const QSize GeoSceneTexture::tileSize() const
     return m_tileSize;
 }
 
-void GeoSceneTexture::setTileSize( const QSize &tileSize )
+void GeoSceneTiled::setTileSize( const QSize &tileSize )
 {
     if ( tileSize.isEmpty() ) {
         mDebug() << "Ignoring invalid tile size " << tileSize;
@@ -173,19 +173,19 @@ void GeoSceneTexture::setTileSize( const QSize &tileSize )
     }
 }
 
-GeoSceneTexture::Projection GeoSceneTexture::projection() const
+GeoSceneTiled::Projection GeoSceneTiled::projection() const
 {
     return m_projection;
 }
 
-void GeoSceneTexture::setProjection( const Projection projection )
+void GeoSceneTiled::setProjection( const Projection projection )
 {
     m_projection = projection;
 }
 
 // Even though this method changes the internal state, it may be const
 // because the compiler is forced to invoke this method for different TileIds.
-QUrl GeoSceneTexture::downloadUrl( const TileId &id ) const
+QUrl GeoSceneTiled::downloadUrl( const TileId &id ) const
 {
     // default download url
     if ( m_downloadUrls.empty() )
@@ -201,14 +201,14 @@ QUrl GeoSceneTexture::downloadUrl( const TileId &id ) const
     return url;
 }
 
-void GeoSceneTexture::addDownloadUrl( const QUrl & url )
+void GeoSceneTiled::addDownloadUrl( const QUrl & url )
 {
     m_downloadUrls.append( url );
     // FIXME: this could be done only once
     m_nextUrl = m_downloadUrls.constBegin();
 }
 
-QString GeoSceneTexture::relativeTileFileName( const TileId &id ) const
+QString GeoSceneTiled::relativeTileFileName( const TileId &id ) const
 {
     const QString suffix = fileFormat().toLower();
 
@@ -217,7 +217,7 @@ QString GeoSceneTexture::relativeTileFileName( const TileId &id ) const
     switch ( m_storageLayoutMode ) {
     default:
         mDebug() << Q_FUNC_INFO << "Invalid storage layout mode! Falling back to default.";
-    case GeoSceneTexture::Marble:
+    case GeoSceneTiled::Marble:
         relFileName = QString( "%1/%2/%3/%3_%4.%5" )
             .arg( themeStr() )
             .arg( id.zoomLevel() )
@@ -225,7 +225,7 @@ QString GeoSceneTexture::relativeTileFileName( const TileId &id ) const
             .arg( id.x(), tileDigits, 10, QChar('0') )
             .arg( suffix );
         break;
-    case GeoSceneTexture::OpenStreetMap:
+    case GeoSceneTiled::OpenStreetMap:
         relFileName = QString( "%1/%2/%3/%4.%5" )
             .arg( themeStr() )
             .arg( id.zoomLevel() )
@@ -238,18 +238,18 @@ QString GeoSceneTexture::relativeTileFileName( const TileId &id ) const
     return relFileName;
 }
 
-QString GeoSceneTexture::themeStr() const
+QString GeoSceneTiled::themeStr() const
 {
     QFileInfo const dirInfo( sourceDir() );
     return dirInfo.isAbsolute() ? sourceDir() : "maps/" + sourceDir();
 }
 
-QList<DownloadPolicy *> GeoSceneTexture::downloadPolicies() const
+QList<DownloadPolicy *> GeoSceneTiled::downloadPolicies() const
 {
     return m_downloadPolicies;
 }
 
-void GeoSceneTexture::addDownloadPolicy( const DownloadUsage usage, const int maximumConnections )
+void GeoSceneTiled::addDownloadPolicy( const DownloadUsage usage, const int maximumConnections )
 {
     DownloadPolicy * const policy = new DownloadPolicy( DownloadPolicyKey( hostNames(), usage ));
     policy->setMaximumConnections( maximumConnections );
@@ -257,12 +257,12 @@ void GeoSceneTexture::addDownloadPolicy( const DownloadUsage usage, const int ma
     mDebug() << "added download policy" << hostNames() << usage << maximumConnections;
 }
 
-QString GeoSceneTexture::type()
+QString GeoSceneTiled::type()
 {
     return "texture";
 }
 
-QStringList GeoSceneTexture::hostNames() const
+QStringList GeoSceneTiled::hostNames() const
 {
     QStringList result;
     QVector<QUrl>::const_iterator pos = m_downloadUrls.constBegin();

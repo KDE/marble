@@ -23,7 +23,7 @@
 
 #include "StackedTileLoader.h"
 
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 #include "MarbleDebug.h"
 #include "MergedLayerDecorator.h"
 #include "StackedTile.h"
@@ -52,12 +52,12 @@ public:
     }
 
     void detectMaxTileLevel();
-    QVector<GeoSceneTexture const *>
+    QVector<GeoSceneTiled const *>
         findRelevantTextureLayers( TileId const & stackedTileId ) const;
 
     MergedLayerDecorator *const m_layerDecorator;
     int         m_maxTileLevel;
-    QVector<GeoSceneTexture const *> m_textureLayers;
+    QVector<GeoSceneTiled const *> m_textureLayers;
     QHash <TileId, StackedTile*>  m_tilesOnDisplay;
     QCache <TileId, StackedTile>  m_tileCache;
     QReadWriteLock m_cacheLock;
@@ -74,7 +74,7 @@ StackedTileLoader::~StackedTileLoader()
     delete d;
 }
 
-void StackedTileLoader::setTextureLayers( QVector<GeoSceneTexture const *> & textureLayers )
+void StackedTileLoader::setTextureLayers( QVector<GeoSceneTiled const *> & textureLayers )
 {
     mDebug() << Q_FUNC_INFO;
 
@@ -103,7 +103,7 @@ int StackedTileLoader::tileRowCount( int level ) const
     return TileLoaderHelper::levelToRow( levelZeroRows, level );
 }
 
-GeoSceneTexture::Projection StackedTileLoader::tileProjection() const
+GeoSceneTiled::Projection StackedTileLoader::tileProjection() const
 {
     Q_ASSERT( !d->m_textureLayers.isEmpty() );
 
@@ -182,7 +182,7 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 
     // mDebug() << "load Tile from Disk: " << stackedTileId.toString();
 
-    QVector<GeoSceneTexture const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
+    QVector<GeoSceneTiled const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
 
     stackedTile = d->m_layerDecorator->loadTile( stackedTileId, textureLayers );
     stackedTile->setUsed( true );
@@ -194,7 +194,7 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 
 void StackedTileLoader::downloadTile( TileId const & stackedTileId )
 {
-    QVector<GeoSceneTexture const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
+    QVector<GeoSceneTiled const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
     d->m_layerDecorator->downloadTile( stackedTileId, textureLayers );
 }
 
@@ -263,14 +263,14 @@ void StackedTileLoader::clear()
 }
 
 // 
-QVector<GeoSceneTexture const *>
+QVector<GeoSceneTiled const *>
 StackedTileLoaderPrivate::findRelevantTextureLayers( TileId const & stackedTileId ) const
 {
-    QVector<GeoSceneTexture const *> result;
-    QVector<GeoSceneTexture const *>::const_iterator pos = m_textureLayers.constBegin();
-    QVector<GeoSceneTexture const *>::const_iterator const end = m_textureLayers.constEnd();
+    QVector<GeoSceneTiled const *> result;
+    QVector<GeoSceneTiled const *>::const_iterator pos = m_textureLayers.constBegin();
+    QVector<GeoSceneTiled const *>::const_iterator const end = m_textureLayers.constEnd();
     for (; pos != end; ++pos ) {
-        GeoSceneTexture const * const candidate = dynamic_cast<GeoSceneTexture const *>( *pos );
+        GeoSceneTiled const * const candidate = dynamic_cast<GeoSceneTiled const *>( *pos );
         // check if layer is enabled. A layer is considered to be enabled if one of the
         // following conditions is true:
         // 1) it is the first layer

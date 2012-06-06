@@ -24,7 +24,7 @@ class QString;
 
 namespace Marble
 {
-class GeoSceneTexture;
+class GeoSceneTiled;
 class SunLocator;
 class StackedTile;
 class TextureTile;
@@ -37,11 +37,11 @@ class MergedLayerDecorator
     MergedLayerDecorator( TileLoader * const tileLoader, const SunLocator* sunLocator );
     virtual ~MergedLayerDecorator();
 
-    StackedTile *loadTile( const TileId &id, const QVector<const GeoSceneTexture *> &textureLayers ) const;
+    StackedTile *loadTile( const TileId &id, const QVector<const GeoSceneTiled *> &textureLayers ) const;
 
     StackedTile *createTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage ) const;
 
-    void downloadTile( const TileId &id, const QVector<GeoSceneTexture const *> &textureLayers );
+    void downloadTile( const TileId &id, const QVector<GeoSceneTiled const *> &textureLayers );
 
     void reloadTile( const StackedTile &stackedTile );
 

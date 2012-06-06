@@ -14,7 +14,7 @@ set( tilecreator_SRCS
             ../lib/ServerLayout.cpp
             ../lib/geodata/parser/GeoDocument.cpp
             ../lib/geodata/parser/GeoSceneTypes.cpp
-            ../lib/geodata/scene/GeoSceneTexture.cpp
+            ../lib/geodata/scene/GeoSceneTiled.cpp
             ../lib/geodata/scene/GeoSceneLayer.cpp
             ../lib/MarbleDirs.cpp
             ../lib/MarbleDebug.cpp

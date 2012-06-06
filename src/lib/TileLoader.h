@@ -32,7 +32,7 @@ class QUrl;
 namespace Marble
 {
 class HttpDownloadManager;
-class GeoSceneTexture;
+class GeoSceneTiled;
 
 class TileLoader: public QObject
 {
@@ -47,19 +47,19 @@ class TileLoader: public QObject
 
     explicit TileLoader( HttpDownloadManager * const );
 
-    void setTextureLayers( const QVector<GeoSceneTexture const *> &textureLayers );
+    void setTextureLayers( const QVector<GeoSceneTiled const *> &textureLayers );
 
     QImage loadTile( TileId const & tileId, DownloadUsage const );
     void reloadTile( TileId const &tileId, DownloadUsage const );
     void downloadTile( TileId const & tileId );
 
-    static int maximumTileLevel( GeoSceneTexture const & texture );
+    static int maximumTileLevel( GeoSceneTiled const & texture );
 
     /**
      * Returns whether the mandatory most basic tile level is fully available for
      * the given @p texture layer.
      */
-    static bool baseTilesAvailable( GeoSceneTexture const & texture );
+    static bool baseTilesAvailable( GeoSceneTiled const & texture );
 
     /**
       * Returns the status of the downloaded tile file:
@@ -79,13 +79,13 @@ class TileLoader: public QObject
     void tileCompleted( TileId const & tileId, QImage const & tileImage );
 
  private:
-    GeoSceneTexture const * findTextureLayer( TileId const & ) const;
-    static QString tileFileName( GeoSceneTexture const * textureLayer, TileId const & );
+    GeoSceneTiled const * findTextureLayer( TileId const & ) const;
+    static QString tileFileName( GeoSceneTiled const * textureLayer, TileId const & );
     void triggerDownload( TileId const &, DownloadUsage const );
     QImage scaledLowerLevelTile( TileId const & ) const;
 
     // TODO: comment about uint hash key
-    QHash<uint, GeoSceneTexture const *> m_textureLayers;
+    QHash<uint, GeoSceneTiled const *> m_textureLayers;
 };
 
 }

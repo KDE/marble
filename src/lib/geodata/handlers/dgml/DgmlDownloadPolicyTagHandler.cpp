@@ -18,7 +18,7 @@
 #include "DgmlAttributeDictionary.h"
 #include "DgmlElementDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 
 #include "MarbleGlobal.h"
 
@@ -67,7 +67,7 @@ GeoNode* DgmlDownloadPolicyTagHandler::parse( GeoParser& parser ) const
         return 0;
     }
 
-    parentItem.nodeAs<GeoSceneTexture>()->addDownloadPolicy( usage, maximumConnections );
+    parentItem.nodeAs<GeoSceneTiled>()->addDownloadPolicy( usage, maximumConnections );
     return 0;
 }
 
