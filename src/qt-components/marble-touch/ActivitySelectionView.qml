@@ -68,12 +68,13 @@ Page {
                         id: activityImage
                         width: 140
                         height: 140
-                        source: previewLoader.status == Loader.Ready && previewLoader.item.isActive ? "qrc:/icons/activity-empty.png" : imagePath
+                        source: previewLoader.visible ? "qrc:/icons/activity-empty.png" : imagePath
                         smooth: true
 
                         Loader {
                             id: previewLoader
                             anchors.centerIn: parent
+                            visible: status == Loader.Ready && item.isActive
                             source: previewPath
 
                             Component.onCompleted: {
@@ -179,7 +180,7 @@ Page {
             name: "Navigation"
             imagePath: "qrc:/icons/activity-navigation.png"
             path: "qrc:/activities/Navigation.qml"
-            previewPath: ""
+            previewPath: "qrc:/activities/NavigationPreview.qml"
         }
         ListElement {
             name: "Weather"
