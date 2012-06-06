@@ -33,6 +33,8 @@ RelatedActivities.cpp
 ZoomButtonInterceptor.cpp
 )
 
+marble_add_project_resources(qmldir)
+
 marble_add_declarative_plugin( MarbleDeclarativePlugin . ${marbleplugin_SRCS})
 qt4_automoc(${marbleplugin_SRCS})
 target_link_libraries( MarbleDeclarativePlugin ${QT_QTDECLARATIVE_LIBRARY} ${QT_QTWEBKIT_LIBRARY} )

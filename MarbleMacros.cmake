@@ -138,3 +138,7 @@ macro( marble_add_test TEST_NAME )
         add_test( ${TEST_NAME} ${TEST_NAME} )
     endif( BUILD_MARBLE_TESTS )
 endmacro( marble_add_test TEST_NAME )
+
+macro( marble_add_project_resources resources )
+  add_custom_target( ${PROJECT_NAME}_Resources ALL SOURCES ${ARGN} )
+endmacro()
