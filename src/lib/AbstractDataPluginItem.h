@@ -29,7 +29,7 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public BillboardGra
 {
     Q_OBJECT
 
-    Q_PROPERTY( QString id READ id WRITE setId NOTIFY idChanged )
+    Q_PROPERTY( QString identifier READ id WRITE setId NOTIFY idChanged )
     Q_PROPERTY( bool favorite READ isFavorite WRITE setFavorite NOTIFY favoriteChanged )
 
  public:
