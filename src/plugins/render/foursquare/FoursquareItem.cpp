@@ -58,6 +58,7 @@ void FoursquareItem::setName(const QString& name)
     m_name = name;
     QFontMetrics const fontMetrics( s_font );
     setSize( QSizeF( fontMetrics.width( m_name ) + 10, fontMetrics.height() + 10 ) );
+    emit nameChanged();
 }
 
 int FoursquareItem::usersCount() const
@@ -68,6 +69,18 @@ int FoursquareItem::usersCount() const
 void FoursquareItem::setUsersCount(const int count)
 {
     m_usersCount = count;
+    emit usersCountChanged();
+}
+
+QString FoursquareItem::categoryIconUrl() const
+{
+    return m_categoryIconUrl;
+}
+
+void FoursquareItem::setCategoryIconUrl(const QString url)
+{
+    m_categoryIconUrl = url;
+    emit categoryIconUrlChanged();
 }
 
 void FoursquareItem::paint(GeoPainter* painter, ViewportParams* viewport, const QString& renderPos, GeoSceneLayer* layer)

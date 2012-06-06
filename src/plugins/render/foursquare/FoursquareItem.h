@@ -20,6 +20,10 @@ namespace Marble
 class FoursquareItem : public AbstractDataPluginItem
 {
     Q_OBJECT
+
+    Q_PROPERTY( QString name READ name NOTIFY nameChanged )
+    Q_PROPERTY( QString usersCount READ usersCount NOTIFY usersCountChanged )
+    Q_PROPERTY( QString categoryIconUrl READ categoryIconUrl NOTIFY categoryIconUrlChanged )
     
 public:
     explicit FoursquareItem( QObject *parent=0 );
@@ -42,12 +46,26 @@ public:
     int usersCount() const;
     
     void setUsersCount( const int count );
+    
+    QString categoryIconUrl() const;
+    
+    void setCategoryIconUrl( const QString url );
  
- private:
+private:
     QString m_name;
+    
     int m_usersCount;
+    
+    QString m_categoryIconUrl;
  
     static QFont s_font;
+
+signals:
+    void nameChanged();
+    
+    void usersCountChanged();
+    
+    void categoryIconUrlChanged();
 };
 
 }

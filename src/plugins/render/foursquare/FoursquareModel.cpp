@@ -89,6 +89,11 @@ void FoursquareModel::parseFile( const QByteArray& file )
             double latitude = iterator.value().property( "location" ).property( "lat" ).toString().toDouble();
             double longitude = iterator.value().property( "location" ).property( "lng" ).toString().toDouble();
             int usersCount = iterator.value().property( "stats" ).property( "usersCount" ).toInteger();
+            
+            QScriptValue categoryIcon = iterator.value().property( "categories" ).property( 0 ).property( "icon" );
+            QString iconUrl = categoryIcon.property( "prefix" ).toString()
+                + "32" // That's the icon size hardcoded
+                + categoryIcon.property( "name" ).toString();
 
             if( !itemExists( id ) ) {
                 GeoDataCoordinates coordinates( longitude, latitude, 0.0, GeoDataCoordinates::Degree );
@@ -98,7 +103,8 @@ void FoursquareModel::parseFile( const QByteArray& file )
                 item->setTarget( "earth" );
                 item->setName( name );
                 item->setUsersCount( usersCount );
-
+                item->setCategoryIconUrl( iconUrl );
+                
                 items << item;
             }
         }
