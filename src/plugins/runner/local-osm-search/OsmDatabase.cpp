@@ -52,7 +52,7 @@ bool placemarkHigherScore( const OsmPlacemark &a, const OsmPlacemark &b )
 
 OsmDatabase::OsmDatabase()
 {
-    m_database = QSqlDatabase::addDatabase( "QSQLITE" );
+    m_database = QSqlDatabase::addDatabase( "QSQLITE", "marble/local-osm-search" );
 }
 
 void OsmDatabase::addFile( const QString &fileName )
@@ -80,7 +80,7 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
         QString regionRestriction;
         if ( !userQuery.region().isEmpty() ) {
             // Nested set model to support region hierarchies, see http://en.wikipedia.org/wiki/Nested_set_model
-            QSqlQuery regionsQuery( "SELECT lft, rgt FROM regions WHERE name LIKE '%" + userQuery.region() + "%';" );
+            QSqlQuery regionsQuery( "SELECT lft, rgt FROM regions WHERE name LIKE '%" + userQuery.region() + "%';", m_database );
             if ( regionsQuery.lastError().isValid() ) {
                 mDebug() << "Error when executing query" << regionsQuery.executedQuery();
                 mDebug() << "Sql reports" << regionsQuery.lastError();
@@ -139,7 +139,7 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
 
         /** @todo: sort/filter results from several databases */
 
-        QSqlQuery query;
+        QSqlQuery query( m_database );
         query.setForwardOnly( true );
         if ( !query.exec( queryString ) ) {
             mDebug() << "Failed to execute query" << query.lastError();
