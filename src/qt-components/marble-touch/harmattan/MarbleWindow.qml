@@ -89,6 +89,8 @@ PageStackWindow {
             return "image://theme/icon-m-common-directory"
         } else if ( name === "mimetypes/unknown" ) {
             return "image://theme/icon-m-content-document"
+        } else if ( name === "places/favorites" ) {
+            return "image://theme/icon-m-toolbar-favorite-mark"
         }
 
         return name

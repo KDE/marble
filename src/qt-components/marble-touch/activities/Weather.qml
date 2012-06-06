@@ -35,6 +35,17 @@ Page {
                 }
             }
         }
+
+        ToolButton {
+            id: favoriteButton
+            checkable: true
+            checked: marbleWidget.renderPlugin("weather").favoriteItemsOnly
+            width: 60
+            flat: true
+            iconSource: main.icon( "places/favorites", 48 );
+            onCheckedChanged: marbleWidget.renderPlugin("weather").favoriteItemsOnly = checked
+        }
+
         ToolButton {
             id: searchButton
             checkable: true
@@ -80,7 +91,7 @@ Page {
         anchors.bottom: weatherActivityPage.bottom
         anchors.left: weatherActivityPage.left
         width:  weatherActivityPage.horizontal ? (minimized ? 0 : weatherActivityPage.width / 2) : weatherActivityPage.width
-        height: weatherActivityPage.horizontal ? weatherActivityPage.height : (minimized ? 0 : weatherActivityPage.height / 4)
+        height: weatherActivityPage.horizontal ? weatherActivityPage.height : (minimized ? 0 : 20 + label.height + Math.max(descriptionLabel.height, icon.height))
 
         radius: 5
         border.color: "darkgray"
@@ -112,6 +123,7 @@ Page {
             }
 
             Text {
+                id: descriptionLabel
                 anchors.margins: 10
                 anchors.top: label.bottom
                 anchors.left: icon.right
