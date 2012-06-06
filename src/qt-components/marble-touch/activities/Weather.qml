@@ -19,6 +19,8 @@ Page {
     id: weatherActivityPage
     anchors.fill: parent
 
+    property bool horizontal: width / height > 1.20
+
     tools: ToolBarLayout {
         MarbleToolIcon {
             iconSource: main.icon( "actions/go-previous-view", 48 );
@@ -36,7 +38,7 @@ Page {
         ToolButton {
             id: searchButton
             checkable: true
-            checked: true
+            checked: false
             width: 60
             flat: true
             iconSource: main.icon( "actions/edit-find", 48 );
@@ -63,12 +65,81 @@ Page {
         }
     }
 
+    Rectangle {
+        id: stationDetails
+        property bool minimized: station === ""
+        visible: !minimized
+
+        property string identifier
+        property string station
+        property double temperature
+        property string image
+        property string description
+        property bool favorite: false
+
+        anchors.bottom: weatherActivityPage.bottom
+        anchors.left: weatherActivityPage.left
+        width:  weatherActivityPage.horizontal ? (minimized ? 0 : weatherActivityPage.width / 2) : weatherActivityPage.width
+        height: weatherActivityPage.horizontal ? weatherActivityPage.height : (minimized ? 0 : weatherActivityPage.height / 4)
+
+        radius: 5
+        border.color: "darkgray"
+        border.width: 2
+
+        Item {
+            anchors.fill: parent
+            anchors.margins: 10
+
+            ToolButton {
+                id: bookmarkButton
+                anchors.right: parent.right
+
+                iconSource: stationDetails.favorite ? "qrc:/icons/bookmark.png" : "qrc:/icons/bookmark-disabled.png"
+
+                width: 32
+                height: 32
+                flat: true
+
+                onClicked: stationDetails.favorite = !stationDetails.favorite
+            }
+
+            Label {
+                id: label
+                text: stationDetails.temperature + " °C   " + stationDetails.station
+                anchors.left: parent.left
+                anchors.right: bookmarkButton.left
+                wrapMode: Text.Wrap
+            }
+
+            Text {
+                anchors.margins: 10
+                anchors.top: label.bottom
+                anchors.left: icon.right
+                text: stationDetails.description
+            }
+
+            Image {
+                id: icon
+                anchors.top: label.bottom
+                source: stationDetails.image !== "" ? ("file://" + stationDetails.image) : ""
+            }
+        }
+
+        Behavior on height {
+            enabled: !weatherActivityPage.horizontal;
+            NumberAnimation {
+                easing.type: Easing.InOutQuad;
+                duration: 250
+            }
+        }
+    }
+
     Item {
         id: mapContainer
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: searchButton.checked ? searchField.bottom : parent.top
-        anchors.bottom: parent.bottom
+        anchors.left: weatherActivityPage.horizontal ? stationDetails.right : weatherActivityPage.left
+        anchors.bottom: weatherActivityPage.horizontal ? weatherActivityPage.bottom : stationDetails.top
+        anchors.right: weatherActivityPage.right
+        anchors.top: searchButton.checked ? searchField.bottom  : weatherActivityPage.top
         clip: true
 
         function embedMarbleWidget() {
@@ -172,7 +243,7 @@ Page {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: containerItem.showDetails = true
+                    onClicked: containerItem.updateDetails()
                 }
             }
 
@@ -190,7 +261,7 @@ Page {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: containerItem.showDetails = true
+                    onClicked: containerItem.updateDetails()
                 }
             }
 
@@ -202,6 +273,24 @@ Page {
                     property: "scale"
                     to: 1.0
                     duration: 150
+                }
+            }
+
+            function updateDetails() {
+                stationDetails.identifier = identifier
+                stationDetails.favorite = favorite
+                stationDetails.station = station
+                stationDetails.description = description
+                stationDetails.image = image
+                stationDetails.temperature = temperature
+            }
+
+            Connections {
+                target: stationDetails
+                onFavoriteChanged: {
+                    if (stationDetails.identifier === identifier) {
+                        favorite = stationDetails.favorite
+                    }
                 }
             }
 
