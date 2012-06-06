@@ -461,9 +461,6 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
     m_paintOrder.clear();
     m_labelArea = 0;
 
-    qreal x = 0;
-    qreal y = 0;
-
     /**
      * First handle the selected placemarks, as they have the highest priority.
      */
@@ -480,6 +477,9 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         if ( !ok ) {
             continue;
         }
+
+        qreal x = 0;
+        qreal y = 0;
 
         if ( !viewport->viewLatLonAltBox().contains( coordinates ) ||
              ! viewport->screenCoordinates( coordinates, x, y ))
@@ -522,6 +522,9 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         if ( m_weightfilter.at( popularityIndex ) > viewport->radius() ) {
             break;
         }
+
+        qreal x = 0;
+        qreal y = 0;
 
         if ( !viewport->viewLatLonAltBox().contains( coordinates ) ||
              ! viewport->screenCoordinates( coordinates, x, y )) {
