@@ -259,7 +259,7 @@ void GeoSceneTiled::addDownloadPolicy( const DownloadUsage usage, const int maxi
 
 QString GeoSceneTiled::type()
 {
-    return "texture";
+    return "tiled";
 }
 
 QStringList GeoSceneTiled::hostNames() const

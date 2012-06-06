@@ -19,7 +19,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "DgmlTextureTagHandler.h"
+#include "DgmlVectortileTagHandler.h"
 
 #include <limits>
 
@@ -30,18 +30,18 @@
 #include "DgmlAuxillaryDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneLayer.h"
-#include "GeoSceneImagetile.h"
+#include "GeoSceneVectortile.h"
 
 namespace Marble
 {
 namespace dgml
 {
-DGML_DEFINE_TAG_HANDLER(Texture)
+DGML_DEFINE_TAG_HANDLER(Vectortile)
 
-GeoNode* DgmlTextureTagHandler::parse(GeoParser& parser) const
+GeoNode* DgmlVectortileTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Texture));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Vectortile));
 
     const QString name = parser.attribute(dgmlAttr_name).trimmed();
 
@@ -55,12 +55,12 @@ GeoNode* DgmlTextureTagHandler::parse(GeoParser& parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
 
-    // Check parent type and make sure that the dataSet type 
+    // Check parent type and make sure that the dataSet type
     // matches the backend of the parent layer
     if ( parentItem.represents(dgmlTag_Layer)
-        && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_texture ) {
+        && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_vectortile ) {
 
-        texture = new GeoSceneImagetile( name );
+        texture = new GeoSceneVectortile( name );
         texture->setExpire( expire );
         parentItem.nodeAs<GeoSceneLayer>()->addDataset( texture );
     }
@@ -70,3 +70,4 @@ GeoNode* DgmlTextureTagHandler::parse(GeoParser& parser) const
 
 }
 }
+

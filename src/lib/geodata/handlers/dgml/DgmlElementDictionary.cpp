@@ -70,11 +70,11 @@ const char* dgmlTag_StorageLayout = "storageLayout";
 const char* dgmlTag_Target = "target";
 const char* dgmlTag_Text = "text";
 const char* dgmlTag_Texture = "texture";
-const char* dgmlTag_Vectortile = "vectortile";
 const char* dgmlTag_Theme = "theme";
 const char* dgmlTag_TileSize = "tileSize";
 const char* dgmlTag_Value = "value";
 const char* dgmlTag_Vector = "vector";
+const char* dgmlTag_Vectortile = "vectortile";
 const char* dgmlTag_Visible = "visible";
 const char* dgmlTag_Zoom = "zoom";
 }

@@ -20,8 +20,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef MARBLE_GEOSCENETEXTURE_H
-#define MARBLE_GEOSCENETEXTURE_H
+#ifndef MARBLE_GEOSCENETILED_H
+#define MARBLE_GEOSCENETILED_H
 
 #include <QtCore/QList>
 #include <QtCore/QStringList>
@@ -33,9 +33,13 @@
 #include "MarbleGlobal.h"
 
 /**
- * @short Texture dataset stored in a layer.
+ * @short Tiled dataset stored in a layer. Imagetile and Vectortile layes inherite from this class.
  */
 
+/* It's name before GSoC 2012 was GeoSceneTexture, but in order to make Marble
+ * able to manage vector tiles, now its called GeoSceneTiled and then
+ * GeoSceneImagetile (for the tag <texture> in dgml) or GeoSceneVectortile
+ * (for <vectortile>) are created, which inherite from this class */
 
 namespace Marble
 {

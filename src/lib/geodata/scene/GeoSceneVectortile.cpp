@@ -1,5 +1,6 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
+    Copyright (C) 2008 Jens-Michael Hoffmann <jensmh@gmx.de>
 
     This file is part of the KDE project
 
@@ -19,19 +20,28 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "DgmlAuxillaryDictionary.h"
+#include "GeoSceneVectortile.h"
 
-// One static list of all auxiliary strings, to avoid string comparisons all-over-the-place
+#include "MarbleDebug.h"
 
 namespace Marble
 {
-namespace dgml
+
+GeoSceneVectortile::GeoSceneVectortile( const QString& name )
+    : GeoSceneTiled( name ){
+
+        mDebug() << "--------------------------VECTORTILE LAYER CREATED";
+}
+
+const char* GeoSceneVectortile::nodeType() const
 {
-const char* dgmlValue_true = "true";
-const char* dgmlValue_on = "on";
-const char* dgmlValue_texture = "texture";
-const char* dgmlValue_vector = "vector";
-const char* dgmlValue_vectortile = "vectortile";
-const char* dgmlValue_geodata = "geodata";
+    return "GeoSceneVectortile";
 }
+
+QString GeoSceneVectortile::type()
+{
+    return "vectortile";
 }
+
+}
+

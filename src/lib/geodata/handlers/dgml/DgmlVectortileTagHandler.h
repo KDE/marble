@@ -19,19 +19,23 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "DgmlAuxillaryDictionary.h"
+#ifndef MARBLE_DGML_VECTORTILETAGHANDLER_H
+#define MARBLE_DGML_VECTORTILETAGHANDLER_H
 
-// One static list of all auxiliary strings, to avoid string comparisons all-over-the-place
+#include "GeoTagHandler.h"
 
 namespace Marble
 {
 namespace dgml
 {
-const char* dgmlValue_true = "true";
-const char* dgmlValue_on = "on";
-const char* dgmlValue_texture = "texture";
-const char* dgmlValue_vector = "vector";
-const char* dgmlValue_vectortile = "vectortile";
-const char* dgmlValue_geodata = "geodata";
+
+class DgmlVectortileTagHandler : public GeoTagHandler
+{
+public:
+    virtual GeoNode* parse(GeoParser&) const;
+};
+
 }
 }
+
+#endif // MARBLE_DGML_VECTORTILETAGHANDLER_H
