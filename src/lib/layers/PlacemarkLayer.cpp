@@ -66,26 +66,27 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
     // draw placemarks less important first
     QVector<VisiblePlacemark*>::const_iterator visit = visiblePlacemarks.constEnd();
     QVector<VisiblePlacemark*>::const_iterator itEnd = visiblePlacemarks.constBegin();
-    VisiblePlacemark *mark;
 
     QPainter *const painter = geoPainter;
 
     while ( visit != itEnd ) {
         --visit;
-        mark = *visit;
+
+        VisiblePlacemark *const mark = *visit;
 
 	if ( mark->labelPixmap().isNull() ) {
             drawLabelPixmap( mark );
 	}
 
-        int symbolX = mark->symbolPosition().x();
-        int textX =   mark->labelRect().x();
         QRect labelRect( mark->labelRect().toRect() );
         QPoint symbolPos( mark->symbolPosition() );
 
         // when the map is such zoomed out that a given place
         // appears many times, we draw one placemark at each
         if (viewport->currentProjection()->repeatX() ) {
+            const int symbolX = mark->symbolPosition().x();
+            const int textX =   mark->labelRect().x();
+
             for ( int i = symbolX % (4 * viewport->radius());
                  i <= viewport->width();
                  i += 4 * viewport->radius() )
