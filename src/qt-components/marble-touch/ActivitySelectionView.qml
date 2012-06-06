@@ -174,7 +174,7 @@ Page {
             name: "Tracking"
             imagePath: "qrc:/icons/activity-tracking.png"
             path: "qrc:/activities/Tracking.qml"
-            previewPath: ""
+            previewPath: "qrc:/activities/TrackingPreview.qml"
         }
         ListElement {
             name: "Navigation"

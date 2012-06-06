@@ -14,6 +14,7 @@
         <file>activities/Search.qml</file>
         <file>activities/SpaceView.qml</file>
         <file>activities/Tracking.qml</file>
+        <file>activities/TrackingPreview.qml</file>
         <file>activities/VirtualGlobe.qml</file>
         <file>activities/Weather.qml</file>
         <file>activities/WeatherPreview.qml</file>
