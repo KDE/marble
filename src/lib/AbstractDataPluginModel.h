@@ -32,7 +32,7 @@ class PluginManager;
 class ViewportParams;
 
 /**
- * @short: An abstract data model (not based on QAbstractModel) for a AbstractDataPlugin.
+ * @short An abstract data model (not based on QAbstractModel) for a AbstractDataPlugin.
  *
  * This class is an abstract model for a AbstractDataPlugin. 
  * It provides the storage and selection of added <b>items</b> and it is also responsible for
