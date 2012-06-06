@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
+// Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "PlacemarkLayout.h"
@@ -46,7 +47,13 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
       m_selectionModel( selectionModel ),
       m_clock( clock ),
       m_placemarkPainter( 0 ),
-      m_showPlaces( true ),
+      m_showPlaces( false ),
+      m_showCities( false ),
+      m_showTerrain( false ),
+      m_showOtherPlaces( false ),
+      m_showLandingSites( false ),
+      m_showCraters( false ),
+      m_showMaria( false ),
       m_maxLabelHeight( 0 ),
       m_styleResetRequested( true )
 {
