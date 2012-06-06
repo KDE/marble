@@ -67,6 +67,8 @@ void Tracking::setPositionSource( PositionSource* source )
                     this, SLOT( updatePositionMarker() ) );
             connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ),
                     this, SLOT( updatePositionMarker() ) );
+            connect( source, SIGNAL( positionChanged() ),
+                     this, SIGNAL( distanceChanged() ) );
         }
         emit positionSourceChanged();
     }
@@ -261,6 +263,11 @@ void Tracking::setPositionMarkerType( Tracking::PositionMarkerType type )
         m_positionMarkerType = type;
         emit positionMarkerTypeChanged();
     }
+}
+
+double Tracking::distance() const
+{
+    return m_marbleWidget ? m_marbleWidget->model()->positionTracking()->length( m_marbleWidget->model()->planetRadius() ) : 0.0;
 }
 
 void Tracking::saveTrack( const QString &fileName )
