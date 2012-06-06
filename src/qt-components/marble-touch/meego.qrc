@@ -8,6 +8,7 @@
         <file>activities/Friends.qml</file>
         <file>activities/Geocaching.qml</file>
         <file>activities/Navigation.qml</file>
+        <file>activities/NavigationPreview.qml</file>
         <file>activities/Routing.qml</file>
         <file>activities/Placemark.qml</file>
         <file>activities/Search.qml</file>
