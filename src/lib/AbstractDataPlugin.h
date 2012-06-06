@@ -29,7 +29,7 @@ class AbstractDataPluginPrivate;
 class PluginManager;
 
 /**
- * @short: An abstract class for plugins that show data that has a geo coordinate
+ * @short An abstract class for plugins that show data that has a geo coordinate
  *
  * This is the abstract class for plugins that show data on Marble map.
  * It takes care of painting all items it gets from the corresponding AbstractDataPluginModel

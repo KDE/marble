@@ -18,26 +18,24 @@ The Marble application makes use of the following classes and widgets:
    or the mouse.  
 
 2. MarbleModel, the data storage class that holds the data that is
-   visualized in the MarbleWidget.  You can either create a
-   MarbleModel of your own, or let the MarbleWidget create one for
-   you. 
+   visualized in the MarbleWidget. The MarbleModel is created internally
+   and can be accessed using the model() method.
 
-   This data model contains 3 separate datatypes: <b>tiles</b> which
-   provide the background, <b>vectors</b> which provide things like
-   country borders and coastlines and <b>placemarks</b> which can show
-   points of interest, such as cities, mountain tops or the poles.
+   This data model contains several separate datatypes, among them:
+   <b>tiles</b> which provide the background map, <b>vectors</b> which
+   provide things like country borders and coastlines and <b>placemarks</b>
+   which can show points of interest, such as cities, mountain tops or the poles.
 
 3. MarbleControlBox, the most advanced control widget for
    MarbleWidget. It can be used to navigate around the globe, zoom,
    search for placemarks like cities, control aspects of the view such
    as showing water bodies, ice, terrain types, and cities. It can
    also be used to control which dataset is used to provide the
-   background for the image and the projection (currently globe and
-   flat). 
+   background for the image and the projection.
 
 These three classes provide the core of the classes that comprise the
 Marble framework.  You can use only them and get a very capable
-application if you just provide them with some good datasets.
+application.
 
 In addition to this, there is also a simpler control widget called the
 MarbleNavigator that only controls panning and zooming. The
@@ -45,9 +43,14 @@ MarbleNavigator is incorporated into the MarbleControlBox in the first
 tab.  This control widget can be used in simpler application where
 theming, searching and other advanced controls are not needed.
 
+To help you get started, we provide small example programs which you can
+find in the examples/cpp directory of the sources. They are also available
+online at <a href="http://techbase.kde.org/Projects/Marble/MarbleCPlusPlus">KDE TechBase</a>.
+
 @see Marble::MarbleWidget
 @see Marble::MarbleModel
-@see MarbleControlBox
-@see MarbleNavigator
+@see Marble::MarbleControlBox
+@see Marble::MarbleNavigator
+@see <a href="http://techbase.kde.org/Projects/Marble/MarbleCPlusPlus">KDE TechBase: MarbleCPlusPlus</a>
 
  */

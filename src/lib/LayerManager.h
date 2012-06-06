@@ -34,7 +34,7 @@ class MarbleModel;
 class LayerInterface;
 
 /**
- * @short The class that handles Marble's DGML layers.
+ * @short Handles rendering of all active layers in the correct order
  *
  */
 

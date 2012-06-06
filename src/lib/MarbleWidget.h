@@ -73,11 +73,10 @@ class ViewportParams;
  * 1000 shows the full globe in a normal-sized window. Higher zoom
  * values give a more zoomed-in view.
  *
- * The MarbleWidget needs to be provided with a data model to
- * work. This model is contained in the MarbleModel class, and it is
- * painted by using a MarbleMap. The widget can also construct its own
- * map and model if none is given to the constructor.  A MarbleModel
- * contains 3 separate datatypes: <b>tiles</b> which provide the
+ * The MarbleWidget owns a data model to work. This model is contained
+ * in the MarbleModel class, and it is painted by using a MarbleMap.
+ * The widget takes care of creating the map and model. A MarbleModel
+ * contains several datatypes, among them <b>tiles</b> which provide the
  * background, <b>vectors</b> which provide things like country
  * borders and coastlines and <b>placemarks</b> which can show points
  * of interest, such as cities, mountain tops or the poles.
