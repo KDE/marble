@@ -180,6 +180,9 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
                       parent, SIGNAL( tileLevelChanged( int ) ) );
     QObject::connect( &m_textureLayer, SIGNAL( repaintNeeded() ),
                       parent, SIGNAL( repaintNeeded() ) );
+
+    QObject::connect( parent, SIGNAL( visibleLatLonAltBoxChanged( const GeoDataLatLonAltBox & ) ),
+                      parent, SIGNAL( repaintNeeded() ) );
 }
 
 void MarbleMapPrivate::updateProperty( const QString &name, bool show )
