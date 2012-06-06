@@ -5,6 +5,7 @@
         <file>MainWidget.qml</file>
         <file>AboutMarblePage.qml</file>
         <file>ActivitySelectionView.qml</file>
+        <file>activities/Explore.qml</file>
         <file>activities/Friends.qml</file>
         <file>activities/Geocaching.qml</file>
         <file>activities/Navigation.qml</file>

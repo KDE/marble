@@ -203,7 +203,7 @@ Page {
         ListElement {
             name: "Explore"
             imagePath: "qrc:/icons/activity-explore.png"
-            path: "qrc:/activities/SpaceView.qml"
+            path: "qrc:/activities/Explore.qml"
             previewPath: ""
         }
     }
