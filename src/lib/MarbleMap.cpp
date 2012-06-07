@@ -898,7 +898,6 @@ void MarbleMapPrivate::updateMapTheme()
     m_placemarkLayer.setShowMaria( q->propertyValue("maria") );
 
     m_placemarkLayer.setDefaultLabelColor( m_model->mapTheme()->map()->labelColor() );
-    m_placemarkLayer.requestStyleReset();
 
     foreach( RenderPlugin *renderPlugin, m_layerManager.renderPlugins() ) {
         bool propertyAvailable = false;
