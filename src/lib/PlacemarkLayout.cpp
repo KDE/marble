@@ -461,9 +461,6 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
     m_paintOrder.clear();
     m_labelArea = 0;
 
-    int labelnum = 0;
-    int outsideBox = 0;
-    int missedRendering = 0;
     qreal x = 0;
     qreal y = 0;
 
@@ -494,11 +491,8 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         if( layoutPlacemark( placemark, x, y, true) ) {
             // Make sure not to draw more placemarks on the screen than
             // specified by placemarksOnScreenLimit().
-            ++labelnum;
             if ( placemarksOnScreenLimit( viewport->size() ) )
                 break;
-        } else {
-            ++missedRendering;
         }
 
     }
@@ -531,7 +525,6 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
 
         if ( !viewport->viewLatLonAltBox().contains( coordinates ) ||
              ! viewport->screenCoordinates( coordinates, x, y )) {
-                ++outsideBox;
                 delete m_visiblePlacemarks.take( placemark );
                 continue;
             }
@@ -600,11 +593,8 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         if( layoutPlacemark( placemark, x, y, isSelected ) ) {
             // Make sure not to draw more placemarks on the screen than
             // specified by placemarksOnScreenLimit().
-            ++labelnum;
             if ( placemarksOnScreenLimit( viewport->size() ) )
                 break;
-        } else {
-            ++missedRendering;
         }
     }
 
