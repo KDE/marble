@@ -73,11 +73,11 @@ namespace dgml
     extern  const char* dgmlTag_Target;
     extern  const char* dgmlTag_Text;
     extern  const char* dgmlTag_Texture;
-    extern  const char* dgmlTag_Vectortile;
     extern  const char* dgmlTag_TileSize;
     extern  const char* dgmlTag_Theme;
     extern  const char* dgmlTag_Value;
     extern  const char* dgmlTag_Vector;
+    extern  const char* dgmlTag_VectorTile;
     extern  const char* dgmlTag_Visible;
     extern  const char* dgmlTag_Zoom;
 }

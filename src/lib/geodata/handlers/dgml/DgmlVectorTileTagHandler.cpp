@@ -19,7 +19,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "DgmlVectortileTagHandler.h"
+#include "DgmlVectorTileTagHandler.h"
 
 #include <limits>
 
@@ -30,18 +30,20 @@
 #include "DgmlAuxillaryDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneLayer.h"
-#include "GeoSceneVectortile.h"
+#include "GeoSceneVectorTile.h"
 
 namespace Marble
 {
 namespace dgml
 {
-DGML_DEFINE_TAG_HANDLER(Vectortile)
+DGML_DEFINE_TAG_HANDLER(VectorTile)
 
-GeoNode* DgmlVectortileTagHandler::parse(GeoParser& parser) const
+GeoNode* DgmlVectorTileTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Vectortile));
+
+    mDebug() <<"-----------------------------ENTRO";
 
     const QString name = parser.attribute(dgmlAttr_name).trimmed();
 
@@ -58,9 +60,9 @@ GeoNode* DgmlVectortileTagHandler::parse(GeoParser& parser) const
     // Check parent type and make sure that the dataSet type
     // matches the backend of the parent layer
     if ( parentItem.represents(dgmlTag_Layer)
-        && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_vectortile ) {
+        && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_vectorTile ) { //FIXME needed?
 
-        texture = new GeoSceneVectortile( name );
+        texture = new GeoSceneVectorTile( name );
         texture->setExpire( expire );
         parentItem.nodeAs<GeoSceneLayer>()->addDataset( texture );
     }

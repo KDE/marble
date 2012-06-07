@@ -194,7 +194,7 @@ bool GeoSceneMap::hasTextureLayers() const
     QVector<GeoSceneLayer*>::const_iterator end = d->m_layers.constEnd();
     for (; it != end; ++it) {
         if ( ( (*it)->backend() == dgml::dgmlValue_texture ||
-               (*it)->backend() == dgml::dgmlValue_vectortile ) &&
+               (*it)->backend() == dgml::dgmlValue_vectorTile ) &&
              (*it)->datasets().count() > 0 )
             return true;
     }

@@ -1,5 +1,6 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
+    Copyright (C) 2008 Jens-Michael Hoffmann <jensmh@gmx.de>
 
     This file is part of the KDE project
 
@@ -19,23 +20,24 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef MARBLE_DGML_VECTORTILETAGHANDLER_H
-#define MARBLE_DGML_VECTORTILETAGHANDLER_H
+#ifndef MARBLE_GEOSCENEIMAGETILE_H
+#define MARBLE_GEOSCENEIMAGETILE_H
 
-#include "GeoTagHandler.h"
+#include "GeoSceneTiled.h"
 
 namespace Marble
 {
-namespace dgml
-{
 
-class DgmlVectortileTagHandler : public GeoTagHandler
+class GeoSceneImageTile : public GeoSceneTiled
 {
-public:
-    virtual GeoNode* parse(GeoParser&) const;
+ public:
+
+    explicit GeoSceneImageTile( const QString& name );
+
+    virtual const char* nodeType() const;
+    virtual QString type();
 };
 
 }
-}
 
-#endif // MARBLE_DGML_VECTORTILETAGHANDLER_H
+#endif // MARBLE_GEOSCENEIMAGETILE_H

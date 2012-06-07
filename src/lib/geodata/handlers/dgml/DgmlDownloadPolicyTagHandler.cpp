@@ -23,6 +23,7 @@ Copyright 2009, 2010  Jens-Michael Hoffmann <jmho@c-xx.com>
 #include "GeoSceneTiled.h"
 
 #include "MarbleGlobal.h"
+#include "MarbleDebug.h"
 
 namespace Marble
 {
@@ -43,8 +44,8 @@ GeoNode* DgmlDownloadPolicyTagHandler::parse( GeoParser& parser ) const
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if ( !parentItem.represents( dgmlTag_Texture ) && !parentItem.represents( dgmlTag_Vectortile ) ) {
-        qCritical( "Parse error: parent element is not 'texture' or 'vectortile'" );
+    if ( !parentItem.represents( dgmlTag_Texture ) && !parentItem.represents( dgmlTag_VectorTile ) ) {
+        qCritical( "Parse error: parent element is not 'texture' or 'vectorTile'" );
         return 0;
     }
 

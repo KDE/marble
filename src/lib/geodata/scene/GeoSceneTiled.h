@@ -39,7 +39,7 @@
 /* It's name before GSoC 2012 was GeoSceneTexture, but in order to make Marble
  * able to manage vector tiles, now its called GeoSceneTiled and then
  * GeoSceneImagetile (for the tag <texture> in dgml) or GeoSceneVectortile
- * (for <vectortile>) are created, which inherite from this class */
+ * (for <vectorTile>) are created, which inherite from this class */
 
 namespace Marble
 {

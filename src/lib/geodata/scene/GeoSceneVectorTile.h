@@ -20,23 +20,24 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "GeoSceneImagetile.h"
+#ifndef MARBLE_GEOSCENEVECTORTILE_H
+#define MARBLE_GEOSCENEVECTORTILE_H
+
+#include "GeoSceneTiled.h"
 
 namespace Marble
 {
 
-GeoSceneImagetile::GeoSceneImagetile( const QString& name )
-    : GeoSceneTiled( name ){
-}
-
-const char* GeoSceneImagetile::nodeType() const
+class GeoSceneVectorTile : public GeoSceneTiled
 {
-    return "GeoSceneImagetile";
+ public:
+
+    explicit GeoSceneVectorTile( const QString& name );
+
+    virtual const char* nodeType() const;
+    virtual QString type();
+};
+
 }
 
-QString GeoSceneImagetile::type()
-{
-    return "imagetile";
-}
-
-}
+#endif // MARBLE_GEOSCENEVECTORTILE_H
