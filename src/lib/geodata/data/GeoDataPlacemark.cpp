@@ -93,7 +93,6 @@ GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool
             for ( ; it != end; ++it ) {
                 if ( (*it)->nodeType() == GeoDataTypes::GeoDataPointType ) {
                     hasIcon = true;
-                    coord = GeoDataCoordinates( *static_cast<GeoDataPoint *>(*it) );
                     break;
                 }
             }
