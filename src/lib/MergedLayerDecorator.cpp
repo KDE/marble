@@ -43,7 +43,7 @@
 
 using namespace Marble;
 
-struct MergedLayerDecorator::Private
+class MergedLayerDecorator::Private
 {
 public:
     Private( TileLoader *tileLoader, const SunLocator *sunLocator );
