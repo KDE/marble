@@ -99,6 +99,8 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
 
     QImage resultImage;
 
+    mDebug() <<"---------------------------START CREATING TILE";
+
     // if there are more than one active texture layers, we have to convert the
     // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
     const bool withConversion = tiles.count() > 1 || m_showSunShading || m_showTileId;

@@ -56,6 +56,7 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
 {
     GeoSceneTiled const * const textureLayer = findTextureLayer( tileId );
     QString const fileName = tileFileName( textureLayer, tileId );
+
     TileStatus status = tileStatus( tileId );
     if ( status != Missing ) {
         // check if an update should be triggered

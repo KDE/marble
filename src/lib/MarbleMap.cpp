@@ -438,6 +438,8 @@ void MarbleMap::downloadRegion( const QString& sourceDir, QVector<TileCoordsPyra
     QTime t;
     t.start();
 
+    mDebug() << "-------------------------------PASO";
+
     // When downloading a region (the author of these lines thinks) most users probably expect
     // the download to begin with the low resolution tiles and then procede level-wise to
     // higher resolution tiles. In order to achieve this, we start requesting downloads of

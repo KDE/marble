@@ -22,14 +22,11 @@
 
 #include "GeoSceneImagetile.h"
 
-#include "MarbleDebug.h"
-
 namespace Marble
 {
 
 GeoSceneImagetile::GeoSceneImagetile( const QString& name )
     : GeoSceneTiled( name ){
-        mDebug() << "--------------------------IMAGETILE LAYER CREATED";
 }
 
 const char* GeoSceneImagetile::nodeType() const

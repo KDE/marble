@@ -118,6 +118,8 @@ void FileStoragePolicy::clearCache()
                     QString lowerCase = filePath.toLower();
 
                     // We try to be very careful and just delete images
+                    // FIXME, when vectortiling I suppose also vector tiles will have
+                    // to be deleted
                     if ( lowerCase.endsWith( ".jpg" ) 
                       || lowerCase.endsWith( ".png" )
                       || lowerCase.endsWith( ".gif" )

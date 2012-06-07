@@ -22,15 +22,11 @@
 
 #include "GeoSceneVectortile.h"
 
-#include "MarbleDebug.h"
-
 namespace Marble
 {
 
 GeoSceneVectortile::GeoSceneVectortile( const QString& name )
     : GeoSceneTiled( name ){
-
-        mDebug() << "--------------------------VECTORTILE LAYER CREATED";
 }
 
 const char* GeoSceneVectortile::nodeType() const

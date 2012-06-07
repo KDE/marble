@@ -15,6 +15,8 @@
 #include "MarbleGlobal.h"
 #include "TileId.h"
 
+#include "MarbleDebug.h"
+
 #include <math.h>
 
 namespace Marble
@@ -127,7 +129,7 @@ QUrl WmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileI
     if ( !url.hasQueryItem( "format" ) ) {
         if ( m_textureLayer->fileFormat().toLower() == "jpg" )
             url.addQueryItem( "format", "image/jpeg" );
-        else
+            else
             url.addQueryItem( "format", "image/" + m_textureLayer->fileFormat().toLower() );
     }
     if ( !url.hasQueryItem( "srs" ) ) {
