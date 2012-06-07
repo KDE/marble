@@ -114,6 +114,7 @@ QVector<const GeoDataPlacemark *> PlacemarkLayer::whichPlacemarkAt( const QPoint
 void PlacemarkLayer::setDefaultLabelColor( const QColor& color )
 {
     m_defaultLabelColor = color;
+    m_layout.requestStyleReset();
 }
 
 void PlacemarkLayer::setShowPlaces( bool show )
