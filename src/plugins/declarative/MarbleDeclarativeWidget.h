@@ -36,6 +36,7 @@ class RenderPlugin;
 class ViewportParams;
 }
 
+class DeclarativeDataPlugin;
 class ZoomButtonInterceptor;
 /**
   * Wraps a Marble::MarbleWidget, providing access to important properties and methods
@@ -65,6 +66,10 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( QList<QObject*> renderPlugins READ renderPlugins CONSTANT )
     Q_PROPERTY( QList<QObject*> floatItems READ floatItems CONSTANT )
 
+    Q_PROPERTY(QDeclarativeListProperty<DeclarativeDataPlugin> dataLayers READ dataLayers)
+    Q_PROPERTY(QDeclarativeListProperty<QObject> children READ childList)
+    Q_CLASSINFO("DefaultProperty", "children")
+
 public:
     /** Constructor */
     explicit MarbleWidget( QGraphicsItem *parent = 0, Qt::WindowFlags flags = 0 );
@@ -86,6 +91,10 @@ public:
     void setActiveRenderPlugins( const QStringList &items );
 
     QStringList activeRenderPlugins() const;
+
+    QDeclarativeListProperty<QObject> childList();
+
+    QDeclarativeListProperty<DeclarativeDataPlugin> dataLayers();
 
 Q_SIGNALS:
     /** Forwarded from MarbleWidget. Zoom value and/or center position have changed */
@@ -219,6 +228,8 @@ private Q_SLOTS:
     void forwardMouseClick( qreal lon, qreal lat, GeoDataCoordinates::Unit );
 
 private:
+    static void addLayer( QDeclarativeListProperty<DeclarativeDataPlugin> *list, DeclarativeDataPlugin *layer );
+
     /** Wrapped MarbleWidget */
     Marble::MarbleWidget* m_marbleWidget;
 
@@ -237,6 +248,10 @@ private:
     Coordinate m_center;
 
     ZoomButtonInterceptor* m_interceptor;
+
+    QList<DeclarativeDataPlugin*> m_dataLayers;
+
+    QList<QObject*> m_children;
 };
 
 #endif

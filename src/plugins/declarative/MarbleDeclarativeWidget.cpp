@@ -32,7 +32,8 @@
 #include "BookmarkManager.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
-#include "AbstractFloatItem.h"
+#include "DeclarativeDataPlugin.h"
+#include "PluginManager.h"
 
 MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     QGraphicsProxyWidget( parent, flags ), m_marbleWidget( new Marble::MarbleWidget ),
@@ -121,6 +122,16 @@ QStringList MarbleWidget::activeRenderPlugins() const
         }
     }
     return result;
+}
+
+QDeclarativeListProperty<QObject> MarbleWidget::childList()
+{
+    return QDeclarativeListProperty<QObject>( this, m_children );
+}
+
+QDeclarativeListProperty<DeclarativeDataPlugin> MarbleWidget::dataLayers()
+{
+    return QDeclarativeListProperty<DeclarativeDataPlugin>( this, 0, &MarbleWidget::addLayer );
 }
 
 void MarbleWidget::setActiveRenderPlugins( const QStringList &items )
@@ -278,6 +289,16 @@ void MarbleWidget::forwardMouseClick(qreal lon, qreal lat, Marble::GeoDataCoordi
     } else {
         emit mouseClickGeoPosition( position.longitude( degree ),
                                     position.latitude( degree ) );
+    }
+}
+
+void MarbleWidget::addLayer( QDeclarativeListProperty<DeclarativeDataPlugin> *list, DeclarativeDataPlugin *layer )
+{
+    MarbleWidget *object = qobject_cast<MarbleWidget *>( list->object );
+    if ( object ) {
+        object->m_marbleWidget->model()->pluginManager()->addRenderPlugin( layer );
+        object->setDataPluginDelegate( layer->nameId(), layer->delegate() );
+        object->m_dataLayers << layer;
     }
 }
 
@@ -449,6 +470,5 @@ bool MarbleWidget::containsFloatItem( const QString & name )
     }
     return false;
 }
-
 
 #include "MarbleDeclarativeWidget.moc"
