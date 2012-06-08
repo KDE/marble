@@ -12,6 +12,9 @@ INCLUDE( ${QT_USE_FILE} )
 set( marbleplugin_SRCS
 Bookmarks.cpp
 Coordinate.cpp
+DeclarativeDataPluginModel.cpp
+DeclarativeDataPlugin.cpp
+DeclarativeDataPluginItem.cpp
 DeclarativeMapThemeManager.cpp
 MapTheme.cpp
 MarbleDeclarativeObject.cpp
