@@ -84,6 +84,7 @@ set(marblewidget_SRCS
     kdescendantsproxymodel.cpp
     MarbleDebug.cpp
     Tile.cpp
+    ImageTile.cpp
     TileCoordsPyramid.cpp
     TileLevelRangeWidget.cpp
     TileLoader.cpp

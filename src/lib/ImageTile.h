@@ -58,7 +58,7 @@ class Blending;
 class ImageTile : public Tile
 {
  public:
-    ImageTile( TileId const & tileId, QImage const & image, const Blending * blending );
+    ImageTile( TileId const & tileId, QImage const & image, QString const &format, const Blending * blending );
     ~ImageTile();
 
  private:
@@ -67,7 +67,5 @@ class ImageTile : public Tile
 };
 
 }
-
-#endif
 
 #endif // MARBLE_IMAGETILE_H

@@ -152,7 +152,7 @@ TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
     , d( new Private( downloadManager, sunLocator, veccomposer, this ) )
 {
     connect( &d->m_loader, SIGNAL( tileCompleted( const TileId &, const QImage & ) ),
-             this, SLOT( updateTile( const TileId &, const QImage & ) ) );
+             this, SLOT( updateTile( const TileId &, const QImage &, const QString & ) ) );
 
     // Repaint timer
     d->m_repaintTimer.setSingleShot( true );

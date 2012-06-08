@@ -31,7 +31,7 @@
 #include "StackedTile.h"
 #include "TileLoaderHelper.h"
 #include "Planet.h"
-#include "Tile.h"
+#include "ImageTile.h"
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
@@ -101,16 +101,12 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
 
     GeoDataContainer *resultVector = new GeoDataContainer();
 
-    mDebug() <<"---------------------------START CREATING TILE, FIX VECTORRESULT";
-
     // if there are more than one active texture layers, we have to convert the
     // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
     const bool withConversion = tiles.count() > 1 || m_showSunShading || m_showTileId;
     foreach ( const QSharedPointer<Tile> &tile, tiles ) {
 
-
-        mDebug() << "---------------------------" << tile->format()->toUpper();
-
+        mDebug() <<"---------------------------START CREATING "<< tile->id().toString() << " FORMAT " << tile->format()->toUpper() <<" TILE, FIX VECTORRESULT";
 
             const Blending *const blending = tile->blending();
             if ( blending ) {
@@ -159,7 +155,8 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
         mDebug() << "---------------------------NEW TILE load" << tileId.toString() << " " << format;
 
-        QSharedPointer<Tile> tile( new Tile( tileId, tileImage, format, blending ) );
+        QSharedPointer<Tile> tile( new ImageTile( tileId, tileImage, format, blending ) );
+
         tiles.append( tile );
     }
 
@@ -176,9 +173,10 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
         if ( tiles[i]->id() == tileId ) {
             const Blending *blending = tiles[i]->blending();
 
-            mDebug() << "---------------------------NEW TILE create" << tileId.toString() << " " << tileImage.format() << " " << blending;
+            mDebug() << "---------------------------NEW TILE create" << tileId.toString() << " " << format;
 
-            tiles[i] = QSharedPointer<Tile>( new Tile( tileId, tileImage, format, blending ) );
+            tiles[i] = QSharedPointer<Tile>( new ImageTile( tileId, tileImage, format, blending ) );
+
         }
     }
 

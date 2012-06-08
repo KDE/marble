@@ -107,7 +107,7 @@ class TextureLayer : public QObject, public LayerInterface
  private:
     Q_PRIVATE_SLOT( d, void mapChanged() )
     Q_PRIVATE_SLOT( d, void updateTextureLayers() )
-    Q_PRIVATE_SLOT( d, void updateTile( const TileId &tileId, const QImage &tileImage ) )
+    Q_PRIVATE_SLOT( d, void updateTile( const TileId &tileId, const QImage &tileImage, const QString &format ) )
 
  private:
     class Private;
