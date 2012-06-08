@@ -84,6 +84,7 @@ public:
     HttpDownloadManager m_downloadManager;
     FavoritesModel* m_favoritesModel;
     QMetaObject m_metaObject;
+    bool m_hasMetaObject;
 };
 
 class FavoritesModel : public QAbstractListModel
@@ -116,7 +117,8 @@ AbstractDataPluginModelPrivate::AbstractDataPluginModelPrivate( const QString& n
       m_favoriteItemsOnly( false ),
       m_storagePolicy( MarbleDirs::localPath() + "/cache/" + m_name + '/' ),
       m_downloadManager( &m_storagePolicy, pluginManager ),
-      m_favoritesModel( 0 )
+      m_favoritesModel( 0 ),
+      m_hasMetaObject( false )
 {
 }
 
@@ -151,7 +153,7 @@ FavoritesModel::FavoritesModel( AbstractDataPluginModelPrivate *_d, QObject* par
     QAbstractListModel( parent ), d(_d)
 {
     QHash<int,QByteArray> roles = roleNames();
-    int const size = d->m_metaObject.propertyCount();
+    int const size = d->m_hasMetaObject ? d->m_metaObject.propertyCount() : 0;
     for ( int i=0; i<size; ++i ) {
         QMetaProperty property = d->m_metaObject.property( i );
         roles[Qt::UserRole+i] = property.name();
@@ -635,6 +637,7 @@ void AbstractDataPluginModel::clear()
 void AbstractDataPluginModel::registerItemProperties( const QMetaObject &item )
 {
     d->m_metaObject = item;
+    d->m_hasMetaObject = true;
 }
 
 } // namespace Marble
