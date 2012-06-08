@@ -22,10 +22,11 @@
 namespace Marble
 {
 
-Tile::Tile( TileId const & tileId, QImage const & image, const Blending * blending )
+Tile::Tile( TileId const & tileId, QImage const & image, QString const &format, const Blending * blending )
     : m_id( tileId ),
       m_blending( blending ),
-      m_image( image )
+      m_image( image ),
+      m_format( format )
 {
     Q_ASSERT( !image.isNull() );
 }

@@ -58,7 +58,7 @@ static const uchar **jumpTableFromQImage8( const QImage &img )
 }
 
 
-StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultImage, QVector<QSharedPointer<Tile> > const &tiles ) :
+StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultImage, const GeoDataContainer &resultVector, QVector<QSharedPointer<Tile> > const &tiles ) :
       m_id( id ), 
       m_resultTile( resultImage ),
       m_depth( resultImage.depth() ),
@@ -222,8 +222,8 @@ int StackedTilePrivate::calcByteCount( const QImage &resultImage, const QVector<
 }
 
 
-StackedTile::StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<Tile> > const &tiles )
-    : d( new StackedTilePrivate( id, resultImage, tiles ) )
+StackedTile::StackedTile( TileId const &id, QImage const &resultImage, const GeoDataContainer &resultVector, QVector<QSharedPointer<Tile> > const &tiles )
+    : d( new StackedTilePrivate( id, resultImage, resultVector, tiles ) )
 {
     Q_ASSERT( !tiles.isEmpty() );
 

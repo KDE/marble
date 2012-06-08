@@ -99,12 +99,19 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
 
     QImage resultImage;
 
-    mDebug() <<"---------------------------START CREATING TILE";
+    GeoDataContainer *resultVector = new GeoDataContainer();
+
+    mDebug() <<"---------------------------START CREATING TILE, FIX VECTORRESULT";
 
     // if there are more than one active texture layers, we have to convert the
     // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
     const bool withConversion = tiles.count() > 1 || m_showSunShading || m_showTileId;
     foreach ( const QSharedPointer<Tile> &tile, tiles ) {
+
+
+        mDebug() << "---------------------------" << tile->format()->toUpper();
+
+
             const Blending *const blending = tile->blending();
             if ( blending ) {
                 mDebug() << Q_FUNC_INFO << "blending";
@@ -128,16 +135,19 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
         paintTileId( &resultImage, id );
     }
 
-    return new StackedTile( id, resultImage, tiles );
+    return new StackedTile( id, resultImage, *resultVector, tiles );
 }
 
 StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const QVector<const GeoSceneTiled *> &textureLayers ) const
 {
     QVector<QSharedPointer<Tile> > tiles;
+    QString format;
 
     foreach ( const GeoSceneTiled *textureLayer, textureLayers ) {
         const TileId tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
+
+        format = textureLayer->fileFormat();
 
         mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId.toString() << textureLayer->tileSize();
 
@@ -147,9 +157,9 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
             mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
         }
 
-        mDebug() << "---------------------------NEW TILE" << tileId.toString() << " " << tileImage.format() << " " << blending;
+        mDebug() << "---------------------------NEW TILE load" << tileId.toString() << " " << format;
 
-        QSharedPointer<Tile> tile( new Tile( tileId, tileImage, blending ) );
+        QSharedPointer<Tile> tile( new Tile( tileId, tileImage, format, blending ) );
         tiles.append( tile );
     }
 
@@ -158,7 +168,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
     return d->createTile( tiles );
 }
 
-StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage ) const
+StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage, const QString &format ) const
 {
     QVector<QSharedPointer<Tile> > tiles = stackedTile.tiles();
 
@@ -166,9 +176,9 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
         if ( tiles[i]->id() == tileId ) {
             const Blending *blending = tiles[i]->blending();
 
-            mDebug() << "---------------------------NEW TILE" << tileId.toString() << " " << tileImage.format() << " " << blending;
+            mDebug() << "---------------------------NEW TILE create" << tileId.toString() << " " << tileImage.format() << " " << blending;
 
-            tiles[i] = QSharedPointer<Tile>( new Tile( tileId, tileImage, blending ) );
+            tiles[i] = QSharedPointer<Tile>( new Tile( tileId, tileImage, format, blending ) );
         }
     }
 

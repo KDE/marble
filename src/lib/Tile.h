@@ -1,20 +1,21 @@
-// Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
-//
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either
-// version 2.1 of the License, or (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library. If not, see <http://www.gnu.org/licenses/>.
+ /*
+  *Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 
-#ifndef MARBLE_TEXTURETILE_H
-#define MARBLE_TEXTURETILE_H
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library. If not, see <http://www.gnu.org/licenses/>.
+*/
+#ifndef MARBLE_TILE_H
+#define MARBLE_TILE_H
 
 #include <QtCore/QDateTime>
 #include <QtGui/QImage>
@@ -55,7 +56,7 @@ class Blending;
 class Tile
 {
  public:
-    Tile( TileId const & tileId, QImage const & image, const Blending * blending );
+    Tile( TileId const & tileId, QImage const & image, QString const &format, const Blending * blending );
     ~Tile();
 
 /*!
@@ -65,14 +66,20 @@ class Tile
     TileId const & id() const;
 
 /*!
-    \brief Returns the QImage that describes the look of the TextureTile
+    \brief Returns the QImage that describes the look of the Tile
     \return A non-zero pointer to a QImage associated with the tile.
 */
     QImage const * image() const;
+
+/*!
+    \brief Returns the QString that describes the format of the Tile
+    \return A non-zero pointer to a QString associated with the tile.
+*/
+     const QString *format() const;
     
 /*!
     \brief Returns the kind of blending used for the tile.
-    \return A pointer to the blending object used for painting/merging the TextureTile.
+    \return A pointer to the blending object used for painting/merging the Tile.
     
     If no blending is set the pointer returned will be zero.
 */     
@@ -85,6 +92,7 @@ class Tile
     TileId const m_id;
     Blending const * const m_blending;
     QImage const m_image;
+    QString const m_format;
 };
 
 
@@ -98,6 +106,11 @@ inline TileId const & Tile::id() const
 inline QImage const * Tile::image() const
 {
     return &m_image;
+}
+
+inline QString const * Tile::format() const
+{
+    return &m_format;
 }
 
 inline Blending const * Tile::blending() const

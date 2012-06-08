@@ -130,7 +130,7 @@ class StackedTileLoader
 
         /**
          */
-        void updateTile( TileId const & tileId, QImage const &tileImage );
+        void updateTile(TileId const & tileId, QImage const &tileImage , const QString &format);
 
     private:
         Q_DISABLE_COPY( StackedTileLoader )

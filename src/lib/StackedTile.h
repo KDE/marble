@@ -19,6 +19,8 @@
 
 #include "MarbleGlobal.h"
 
+#include "GeoDataContainer.h"
+
 class QImage;
 
 namespace Marble
@@ -30,15 +32,15 @@ class TileId;
 
 /*!
     \class StackedTile
-    \brief A single tile that consists of a stack of TextureTile layers.
+    \brief A single tile that consists of a stack of Tile layers.
 
     The StackedTile is a tile container that covers a certain area and is used 
     for a particular zoom level. It consists of a <b>stack of several
-    individual thematic TextureTiles</b> that cover the very same area and 
-    are used for the very same zoom level: This stack of TextureTiles is
-    built up from the ground: The first TextureTile at the bottom usually 
+    individual thematic Tiles</b> that cover the very same area and
+    are used for the very same zoom level: This stack of Tiles is
+    built up from the ground: The first Tile at the bottom usually
     represents the ground surface. Optionally there might be a range of other
-    TextureTiles stacked on top which cover e.g. relief, streets and clouds.
+    Tiles stacked on top which cover e.g. relief, streets and clouds.
     
     For rendering the whole stack of tiles gets merged and blended into a 
     single QImage. This merging/blending operation is usually only performed 
@@ -50,7 +52,7 @@ class TileId;
     Gimp or Photoshop (TM) which can be blended on top of each other via 
     so called filters and can be merged into a single layer if required.
 
-    Restrictions: The TextureTiles that are part of the stack need to be of 
+    Restrictions: The Tiles that are part of the stack need to be of
     the same size and need to cover the same area at the same zoom level using 
     the very same projection.
 */
@@ -60,7 +62,7 @@ class StackedTile
     friend class StackedTileLoader;
 
  public:
-    explicit StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<Tile> > const &tiles );
+    explicit StackedTile( TileId const &id, QImage const &resultImage, const GeoDataContainer &resultVector, QVector<QSharedPointer<Tile> > const &tiles );
     virtual ~StackedTile();
 
 /*!
@@ -76,13 +78,13 @@ class StackedTile
     int numBytes() const;
 
 /*!
-    \brief Returns the stack of TextureTiles
-    \return A container of TextureTile objects.
+    \brief Returns the stack of Tiles
+    \return A container of Tile objects.
 */
     QVector<QSharedPointer<Tile> > tiles() const;
 
 /*!
-    \brief Returns the QImage that describes the merged stack of TextureTiles
+    \brief Returns the QImage that describes the merged stack of Tiles
     \return A non-zero pointer to the resulting QImage 
 */
     QImage const * resultTile() const; // Note: maybe this should be resultImage() ?

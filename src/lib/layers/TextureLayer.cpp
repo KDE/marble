@@ -49,7 +49,7 @@ public:
 
     void mapChanged();
     void updateTextureLayers();
-    void updateTile( const TileId &tileId, const QImage &tileImage );
+    void updateTile(const TileId &tileId, const QImage &tileImage , const QString &format);
 
 public:
     TextureLayer  *const m_parent;
@@ -126,7 +126,7 @@ void TextureLayer::Private::updateTextureLayers()
     m_pixmapCache.clear();
 }
 
-void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage )
+void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage, const QString &format )
 {
     if ( tileImage.isNull() )
         return; // keep tiles in cache to improve performance
@@ -138,7 +138,7 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
         m_pixmapCache.remove( id );
     }
 
-    m_tileLoader.updateTile( tileId, tileImage );
+    m_tileLoader.updateTile( tileId, tileImage, format );
 
     mapChanged();
 }
