@@ -91,9 +91,12 @@ void FoursquareModel::parseFile( const QByteArray& file )
             int usersCount = iterator.value().property( "stats" ).property( "usersCount" ).toInteger();
             
             QScriptValue categoryIcon = iterator.value().property( "categories" ).property( 0 ).property( "icon" );
-            QString iconUrl = categoryIcon.property( "prefix" ).toString()
-                + "32" // That's the icon size hardcoded
-                + categoryIcon.property( "name" ).toString();
+            QString iconUrl;
+            if ( categoryIcon.isValid() ) {
+                iconUrl = categoryIcon.property( "prefix" ).toString()
+                        + "32" // That's the icon size hardcoded
+                        + categoryIcon.property( "name" ).toString();
+            }
 
             if( !itemExists( id ) ) {
                 GeoDataCoordinates coordinates( longitude, latitude, 0.0, GeoDataCoordinates::Degree );

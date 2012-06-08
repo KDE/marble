@@ -74,7 +74,7 @@ Page {
             Item {
                 id: container
                 width: categoryIcon.width + 3 + venueName.width
-                height: categoryIcon.height
+                height: Math.max( categoryIcon.height, venueName.height )
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
                 
