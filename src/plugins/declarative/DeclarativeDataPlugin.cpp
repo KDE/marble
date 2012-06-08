@@ -127,12 +127,19 @@ void DeclarativeDataPluginPrivate::parseObject( QObject *object )
                 QObject * propertyObject = value.toQObject();
                 GeoDataCoordinates coordinates;
                 DeclarativeDataPluginItem * item = new DeclarativeDataPluginItem( q );
-                for( int k = 0; k < propertyObject->metaObject()->propertyCount(); ++k ) {
-                    QString const propertyName = propertyObject->metaObject()->property( k ).name();
-                    QVariant const value = propertyObject->metaObject()->property( k ).read( propertyObject );
-                    parseChunk( item, coordinates, propertyName, value );
+                if ( propertyObject ) {
+                    for( int k = 0; k < propertyObject->metaObject()->propertyCount(); ++k ) {
+                        QString const propertyName = propertyObject->metaObject()->property( k ).name();
+                        QVariant const value = propertyObject->metaObject()->property( k ).read( propertyObject );
+                        parseChunk( item, coordinates, propertyName, value );
+                    }
+                } else {
+                    QScriptValueIterator it( value );
+                    while ( it.hasNext() ) {
+                        it.next();
+                        parseChunk( item, coordinates, it.name(), it.value().toVariant() );
+                    }
                 }
-
                 addItem( item, coordinates );
             }
         }
