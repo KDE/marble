@@ -40,12 +40,14 @@ bool zValueLessThan( const LayerInterface * const one, const LayerInterface * co
 class LayerManager::Private
 {
  public:
-    Private( LayerManager *parent );
+    Private( const MarbleModel* model, LayerManager *parent );
     ~Private();
 
     void updateVisibility( bool visible, const QString &nameId );
 
     void renderLayer( GeoPainter *painter, ViewportParams *viewport, const QString& renderPosition  );
+
+    void addPlugins();
 
     LayerManager *const q;
 
@@ -53,13 +55,15 @@ class LayerManager::Private
     QList<AbstractFloatItem *> m_floatItems;
     QList<AbstractDataPlugin *> m_dataPlugins;
     QList<LayerInterface *> m_internalLayers;
+    const MarbleModel* m_model;
 
     bool m_showBackground;
 };
 
-LayerManager::Private::Private( LayerManager *parent )
+LayerManager::Private::Private( const MarbleModel* model, LayerManager *parent )
     : q( parent ),
       m_renderPlugins(),
+      m_model( model ),
       m_showBackground( true )
 {
 }
@@ -77,32 +81,10 @@ void LayerManager::Private::updateVisibility( bool visible, const QString &nameI
 
 LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
     : QObject( parent ),
-      d( new Private( this ) )
+      d( new Private( model, this ) )
 {
-    foreach ( const RenderPlugin *factory, model->pluginManager()->renderPlugins() ) {
-        RenderPlugin *const renderPlugin = factory->newInstance( model );
-        Q_ASSERT( renderPlugin && "Plugin returned null when requesting a new instance." );
-        d->m_renderPlugins.append( renderPlugin );
-
-        connect( renderPlugin, SIGNAL( settingsChanged( QString ) ),
-                 this, SIGNAL( pluginSettingsChanged() ) );
-        connect( renderPlugin, SIGNAL( repaintNeeded( QRegion ) ),
-                 this, SIGNAL( repaintNeeded( QRegion ) ) );
-        connect( renderPlugin, SIGNAL( visibilityChanged( bool, const QString & ) ),
-                 this, SLOT( updateVisibility( bool, const QString & ) ) );
-
-        // get float items ...
-        AbstractFloatItem * const floatItem =
-            qobject_cast<AbstractFloatItem *>( renderPlugin );
-        if ( floatItem )
-            d->m_floatItems.append( floatItem );
-
-        // ... and data plugins
-        AbstractDataPlugin * const dataPlugin = 
-            qobject_cast<AbstractDataPlugin *>( renderPlugin );
-        if( dataPlugin )
-            d->m_dataPlugins.append( dataPlugin );
-    }
+    d->addPlugins();
+    connect( model->pluginManager(), SIGNAL( renderPluginsChanged() ), this, SLOT( addPlugins() ) );
 }
 
 LayerManager::~LayerManager()
@@ -183,6 +165,46 @@ void LayerManager::Private::renderLayer( GeoPainter *painter, ViewportParams *vi
     qSort( layers.begin(), layers.end(), zValueLessThan );
     foreach( LayerInterface *layer, layers ) {
         layer->render( painter, viewport, renderPosition, 0 );
+    }
+}
+
+void LayerManager::Private::addPlugins()
+{
+    foreach ( const RenderPlugin *factory, m_model->pluginManager()->renderPlugins() ) {
+        bool alreadyCreated = false;
+        foreach( const RenderPlugin* existing, m_renderPlugins ) {
+            if ( existing->nameId() == factory->nameId() ) {
+                alreadyCreated = true;
+                break;
+            }
+        }
+
+        if ( alreadyCreated ) {
+            continue;
+        }
+
+        RenderPlugin *const renderPlugin = factory->newInstance( m_model );
+        Q_ASSERT( renderPlugin && "Plugin returned null when requesting a new instance." );
+        m_renderPlugins.append( renderPlugin );
+
+        QObject::connect( renderPlugin, SIGNAL( settingsChanged( QString ) ),
+                 q, SIGNAL( pluginSettingsChanged() ) );
+        QObject::connect( renderPlugin, SIGNAL( repaintNeeded( QRegion ) ),
+                 q, SIGNAL( repaintNeeded( QRegion ) ) );
+        QObject::connect( renderPlugin, SIGNAL( visibilityChanged( bool, const QString & ) ),
+                 q, SLOT( updateVisibility( bool, const QString & ) ) );
+
+        // get float items ...
+        AbstractFloatItem * const floatItem =
+            qobject_cast<AbstractFloatItem *>( renderPlugin );
+        if ( floatItem )
+            m_floatItems.append( floatItem );
+
+        // ... and data plugins
+        AbstractDataPlugin * const dataPlugin =
+            qobject_cast<AbstractDataPlugin *>( renderPlugin );
+        if( dataPlugin )
+            m_dataPlugins.append( dataPlugin );
     }
 }
 

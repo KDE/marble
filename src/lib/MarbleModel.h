@@ -236,6 +236,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     const PluginManager* pluginManager() const;
 
+    PluginManager* pluginManager();
+
     /**
      * @brief Returns the planet object for the current map.
      * @return the planet object for the current map

@@ -547,6 +547,11 @@ const PluginManager* MarbleModel::pluginManager() const
     return &d->m_pluginManager;
 }
 
+PluginManager* MarbleModel::pluginManager()
+{
+    return &d->m_pluginManager;
+}
+
 const Planet *MarbleModel::planet() const
 {
     return d->m_planet;
