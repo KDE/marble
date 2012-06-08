@@ -211,6 +211,11 @@ void AbstractDataPlugin::handleViewportChange( GeoPainter* painter, ViewportPara
             // to QML directly with their names
             QDeclarativeContext *context = new QDeclarativeContext( qmlContext( d->m_delegate ) );
             context->setContextObject( item );
+            QList<QByteArray> const dynamicProperties = item->dynamicPropertyNames();
+            foreach( const QByteArray &property, dynamicProperties ) {
+                context->setContextProperty( property, item->property( property ) );
+            }
+
             QObject* component = d->m_delegate->create( context );
             QDeclarativeItem* newItem = qobject_cast<QDeclarativeItem*>( component );
             QGraphicsItem* graphicsItem = qobject_cast<QGraphicsItem*>( component );
