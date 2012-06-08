@@ -32,6 +32,7 @@
 #include "TileLoaderHelper.h"
 #include "Planet.h"
 #include "ImageTile.h"
+#include "VectorTile.h"
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
@@ -106,7 +107,7 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
     const bool withConversion = tiles.count() > 1 || m_showSunShading || m_showTileId;
     foreach ( const QSharedPointer<Tile> &tile, tiles ) {
 
-        mDebug() <<"---------------------------START CREATING "<< tile->id().toString() << " FORMAT " << tile->format()->toUpper() <<" TILE, FIX VECTORRESULT";
+        mDebug() <<"---------------------------START CREATING "<< tile->nodeType() << " FORMAT " << tile->format()->toUpper() <<", FIX VECTORRESULT";
 
             const Blending *const blending = tile->blending();
             if ( blending ) {
@@ -137,15 +138,14 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
 StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const QVector<const GeoSceneTiled *> &textureLayers ) const
 {
     QVector<QSharedPointer<Tile> > tiles;
-    QString format;
 
     foreach ( const GeoSceneTiled *textureLayer, textureLayers ) {
         const TileId tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
 
-        format = textureLayer->fileFormat();
+        mDebug() << "---------------------------NEW TILE load" << tileId.toString() << " " << textureLayer->fileFormat();
 
-        mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId.toString() << textureLayer->tileSize();
+        mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId.toString() << textureLayer->tileSize() << textureLayer->fileFormat();
 
         const QImage tileImage = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
         const Blending *blending = d->m_blendingFactory.findBlending( textureLayer->blending() );
@@ -153,11 +153,18 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
             mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
         }
 
-        mDebug() << "---------------------------NEW TILE load" << tileId.toString() << " " << format;
+        QString format = textureLayer->fileFormat();
+        if ( format.toLower() == "png" || format.toLower() == "jpg" ||
+             format.toLower() == "jpeg" || format.toLower() == "gif" ) {
+            QSharedPointer<Tile> tile(new ImageTile( tileId, tileImage, format, blending ) );
+            tiles.append( tile );
+        }
 
-        QSharedPointer<Tile> tile( new ImageTile( tileId, tileImage, format, blending ) );
+        else {
+            QSharedPointer<Tile> tile( new VectorTile( tileId, tileImage, format, blending ) );
+            tiles.append( tile );
+        }
 
-        tiles.append( tile );
     }
 
     Q_ASSERT( !tiles.isEmpty() );
@@ -175,7 +182,16 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
 
             mDebug() << "---------------------------NEW TILE create" << tileId.toString() << " " << format;
 
-            tiles[i] = QSharedPointer<Tile>( new ImageTile( tileId, tileImage, format, blending ) );
+
+            if ( format.toLower() == "png" || format.toLower() == "jpg" ||
+                 format.toLower() == "jpeg" || format.toLower() == "gif" ){
+                 tiles[i] = QSharedPointer<Tile>( new ImageTile( tileId, tileImage, format, blending ) );
+            }
+
+            else{
+                 tiles[i] = QSharedPointer<Tile>( new VectorTile( tileId, tileImage, format, blending ) );
+            }
+
 
         }
     }

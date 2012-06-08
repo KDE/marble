@@ -22,10 +22,9 @@
 namespace Marble
 {
 
-Tile::Tile( TileId const & tileId, QImage const & image, QString const &format, const Blending * blending )
+Tile::Tile( TileId const & tileId, QString const &format, const Blending * blending )
     : m_id( tileId ),
       m_blending( blending ),
-      m_image( image ),
       m_format( format )
 {
     Q_ASSERT( !image.isNull() );
@@ -33,6 +32,16 @@ Tile::Tile( TileId const & tileId, QImage const & image, QString const &format, 
 
 Tile::~Tile()
 {
+}
+
+const char* Tile::nodeType() const
+{
+    return "Tile";
+}
+
+QString Tile::type()
+{
+    return "tile";
 }
 
 }

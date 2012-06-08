@@ -56,7 +56,7 @@ class Blending;
 class Tile
 {
  public:
-    Tile( TileId const & tileId, QImage const & image, QString const &format, const Blending * blending );
+    Tile( TileId const & tileId, QString const &format, const Blending * blending );
     ~Tile();
 
 /*!
@@ -69,7 +69,7 @@ class Tile
     \brief Returns the QImage that describes the look of the Tile
     \return A non-zero pointer to a QImage associated with the tile.
 */
-    QImage const * image() const;
+    virtual QImage const * image() const;
 
 /*!
     \brief Returns the QString that describes the format of the Tile
@@ -84,14 +84,17 @@ class Tile
     If no blending is set the pointer returned will be zero.
 */     
     Blending const * blending() const;
-    int byteCount() const;
+
+    virtual const char* nodeType() const;
+    virtual QString type();
+
+    virtual int byteCount() const;
 
  private:
     Q_DISABLE_COPY( Tile )
 
     TileId const m_id;
     Blending const * const m_blending;
-    QImage const m_image;
     QString const m_format;
 };
 
@@ -105,7 +108,7 @@ inline TileId const & Tile::id() const
 
 inline QImage const * Tile::image() const
 {
-    return &m_image;
+    return 0;
 }
 
 inline QString const * Tile::format() const
@@ -120,7 +123,7 @@ inline Blending const * Tile::blending() const
 
 inline int Tile::byteCount() const
 {
-    return m_image.byteCount();
+    return image()->byteCount();
 }
 
 }

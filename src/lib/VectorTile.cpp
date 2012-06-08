@@ -15,7 +15,7 @@ Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
  License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ImageTile.h"
+#include "VectorTile.h"
 
 #include <limits>
 
@@ -24,26 +24,27 @@ Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 namespace Marble
 {
 
-ImageTile::ImageTile( TileId const & tileId, QImage const & image, QString const &format, const Blending * blending )
+VectorTile::VectorTile( TileId const & tileId, QImage const & image, QString const &format, const Blending * blending )
     : Tile( tileId, format, blending ),
-      m_image( image )
+    m_image( image )
 {
     Q_ASSERT( !image.isNull() );
 }
 
-ImageTile::~ImageTile()
+VectorTile::~VectorTile()
 {
 }
 
-const char* ImageTile::nodeType() const
+const char* VectorTile::nodeType() const
 {
-    return "ImageTile";
+    return "VectorTile";
 }
 
-QString ImageTile::type()
+QString VectorTile::type()
 {
-    return "imageTile";
+    return "vectorTile";
 }
 
 }
+
 

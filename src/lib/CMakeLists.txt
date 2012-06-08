@@ -85,6 +85,7 @@ set(marblewidget_SRCS
     MarbleDebug.cpp
     Tile.cpp
     ImageTile.cpp
+    VectorTile.cpp
     TileCoordsPyramid.cpp
     TileLevelRangeWidget.cpp
     TileLoader.cpp

@@ -15,8 +15,8 @@ You should have received a copy of the GNU Lesser General Public
 License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MARBLE_IMAGETILE_H
-#define MARBLE_IMAGETILE_H
+#ifndef MARBLE_VECTORTILE_H
+#define MARBLE_VECTORTILE_H
 
 #include <QtCore/QDateTime>
 #include <QtGui/QImage>
@@ -31,10 +31,10 @@ namespace Marble
 class Blending;
 
 /*!
-    \class ImageTile
-    \brief A class that resembles an image tile (extends Tile).
+    \class VectorTile
+    \brief A class that resembles a tile with vector data (extends Tile).
 
-    This tile provides a bitmap image for a certain (geographic) area and
+    This tile provides vector data for a certain (geographic) area and
     for a given zoom level. Each Tile can be identified via a unique
     TileId.
 
@@ -55,11 +55,11 @@ class Blending;
     expiration time which will trigger a reload of the tile data.
 */
 
-class ImageTile : public Tile
+class VectorTile : public Tile
 {
  public:
-    ImageTile( TileId const & tileId, QImage const & image, QString const &format, const Blending * blending );
-    ~ImageTile();
+    VectorTile( TileId const & tileId, QImage const & image, QString const &format, const Blending * blending );
+    ~VectorTile();
 
 /*!
     \brief Returns the QImage that describes the look of the Tile
@@ -72,22 +72,23 @@ class ImageTile : public Tile
     virtual QString type();
 
  private:
-    Q_DISABLE_COPY( ImageTile )
+    Q_DISABLE_COPY( VectorTile )
 
     QImage const m_image;
 
 };
 
-inline QImage const * ImageTile::image() const
+inline QImage const * VectorTile::image() const
 {
     return &m_image;
 }
 
-inline int ImageTile::byteCount() const
+inline int VectorTile::byteCount() const
 {
     return m_image.byteCount();
 }
 
 }
 
-#endif // MARBLE_IMAGETILE_H
+#endif // MARBLE_VECTORTILE_H
+
