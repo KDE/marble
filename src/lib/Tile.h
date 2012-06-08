@@ -28,16 +28,16 @@ namespace Marble
 class Blending;
 
 /*!
-    \class TextureTile
-    \brief A class that resembles a texture tile .
+    \class Tile
+    \brief A class that resembles a tile (then it is extended to TextureTile or Vectortile).
 
-    A texture tile provides a bitmap image for a certain (geographic) area and 
-    for a given zoom level. Each TextureTile can be identified via a unique 
+    A tile provides a bitmap image or vector tile for a certain (geographic) area and
+    for a given zoom level. Each Tile can be identified via a unique
     TileId.
     
-    A stack of TextureTiles that cover the same area and the same 
+    A stack of Tiles that cover the same area and the same
     zoom level can be stored (and painted) layer by layer in a StackedTile object. 
-    For this purpose each TextureTile specifies a blending type. 
+    For this purpose each Tile specifies a blending type.
 
     Usually the tiles are organized in so called quad tiles: This means that
     with increasing zoom level four other tiles cover the same area as a 
@@ -48,15 +48,15 @@ class Blending;
     State describes the current progress of loading the data (Empty, Scaled, 
     Expired, StateUptodate).
     
-    The life time cycle of a TextureTile can also be influenced by its
+    The life time cycle of a Tile can also be influenced by its
     expiration time which will trigger a reload of the tile data.
 */
 
-class TextureTile
+class Tile
 {
  public:
-    TextureTile( TileId const & tileId, QImage const & image, const Blending * blending );
-    ~TextureTile();
+    Tile( TileId const & tileId, QImage const & image, const Blending * blending );
+    ~Tile();
 
 /*!
     \brief Returns a unique ID for the tile.
@@ -80,7 +80,7 @@ class TextureTile
     int byteCount() const;
 
  private:
-    Q_DISABLE_COPY( TextureTile )
+    Q_DISABLE_COPY( Tile )
 
     TileId const m_id;
     Blending const * const m_blending;
@@ -90,22 +90,22 @@ class TextureTile
 
 // inline definitions
 
-inline TileId const & TextureTile::id() const
+inline TileId const & Tile::id() const
 {
     return m_id;
 }
 
-inline QImage const * TextureTile::image() const
+inline QImage const * Tile::image() const
 {
     return &m_image;
 }
 
-inline Blending const * TextureTile::blending() const
+inline Blending const * Tile::blending() const
 {
     return m_blending;
 }
 
-inline int TextureTile::byteCount() const
+inline int Tile::byteCount() const
 {
     return m_image.byteCount();
 }

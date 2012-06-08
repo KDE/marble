@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
-#include "TextureTile.h"
+#include "Tile.h"
 
 #include <limits>
 
@@ -22,7 +22,7 @@
 namespace Marble
 {
 
-TextureTile::TextureTile( TileId const & tileId, QImage const & image, const Blending * blending )
+Tile::Tile( TileId const & tileId, QImage const & image, const Blending * blending )
     : m_id( tileId ),
       m_blending( blending ),
       m_image( image )
@@ -30,7 +30,7 @@ TextureTile::TextureTile( TileId const & tileId, QImage const & image, const Ble
     Q_ASSERT( !image.isNull() );
 }
 
-TextureTile::~TextureTile()
+Tile::~Tile()
 {
 }
 

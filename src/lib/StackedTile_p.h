@@ -25,7 +25,7 @@
 
 namespace Marble
 {
-class TextureTile;
+class Tile;
 
 class StackedTilePrivate
 {
@@ -34,18 +34,18 @@ class StackedTilePrivate
     const QImage    m_resultTile;
     const int       m_depth;
     const bool      m_isGrayscale;
-    const QVector<QSharedPointer<TextureTile> > m_tiles;
+    const QVector<QSharedPointer<Tile> > m_tiles;
     const uchar   **const jumpTable8;
     const uint    **const jumpTable32;
     const int m_byteCount;
     bool            m_isUsed;
 
-    explicit StackedTilePrivate( const TileId &id, const QImage &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles );
+    explicit StackedTilePrivate( const TileId &id, const QImage &resultImage, QVector<QSharedPointer<Tile> > const &tiles );
     virtual ~StackedTilePrivate();
 
     inline uint pixel( int x, int y ) const;
     inline uint pixelF( qreal x, qreal y, const QRgb& pixel ) const;
-    static int calcByteCount( const QImage &resultImage, const QVector<QSharedPointer<TextureTile> > &tiles );
+    static int calcByteCount( const QImage &resultImage, const QVector<QSharedPointer<Tile> > &tiles );
 };
 
 }

@@ -31,7 +31,7 @@
 #include "StackedTile.h"
 #include "TileLoaderHelper.h"
 #include "Planet.h"
-#include "TextureTile.h"
+#include "Tile.h"
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
@@ -50,7 +50,7 @@ public:
 
     static int maxDivisor( int maximum, int fullLength );
 
-    StackedTile *createTile( const QVector<QSharedPointer<TextureTile> > &tiles ) const;
+    StackedTile *createTile( const QVector<QSharedPointer<Tile> > &tiles ) const;
 
     void paintSunShading( QImage *tileImage, const TileId &id ) const;
     void paintTileId( QImage *tileImage, const TileId &id ) const;
@@ -90,7 +90,7 @@ MergedLayerDecorator::~MergedLayerDecorator()
     delete d;
 }
 
-StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPointer<TextureTile> > &tiles ) const
+StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPointer<Tile> > &tiles ) const
 {
     Q_ASSERT( !tiles.isEmpty() );
 
@@ -104,7 +104,7 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
     // if there are more than one active texture layers, we have to convert the
     // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
     const bool withConversion = tiles.count() > 1 || m_showSunShading || m_showTileId;
-    foreach ( const QSharedPointer<TextureTile> &tile, tiles ) {
+    foreach ( const QSharedPointer<Tile> &tile, tiles ) {
             const Blending *const blending = tile->blending();
             if ( blending ) {
                 mDebug() << Q_FUNC_INFO << "blending";
@@ -133,7 +133,7 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
 
 StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const QVector<const GeoSceneTiled *> &textureLayers ) const
 {
-    QVector<QSharedPointer<TextureTile> > tiles;
+    QVector<QSharedPointer<Tile> > tiles;
 
     foreach ( const GeoSceneTiled *textureLayer, textureLayers ) {
         const TileId tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
@@ -146,7 +146,10 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         if ( blending == 0 && !textureLayer->blending().isEmpty() ) {
             mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
         }
-        QSharedPointer<TextureTile> tile( new TextureTile( tileId, tileImage, blending ) );
+
+        mDebug() << "---------------------------NEW TILE" << tileId.toString() << " " << tileImage.format() << " " << blending;
+
+        QSharedPointer<Tile> tile( new Tile( tileId, tileImage, blending ) );
         tiles.append( tile );
     }
 
@@ -157,12 +160,15 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
 StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage ) const
 {
-    QVector<QSharedPointer<TextureTile> > tiles = stackedTile.tiles();
+    QVector<QSharedPointer<Tile> > tiles = stackedTile.tiles();
 
     for ( int i = 0; i < tiles.count(); ++ i) {
         if ( tiles[i]->id() == tileId ) {
             const Blending *blending = tiles[i]->blending();
-            tiles[i] = QSharedPointer<TextureTile>( new TextureTile( tileId, tileImage, blending ) );
+
+            mDebug() << "---------------------------NEW TILE" << tileId.toString() << " " << tileImage.format() << " " << blending;
+
+            tiles[i] = QSharedPointer<Tile>( new Tile( tileId, tileImage, blending ) );
         }
     }
 
@@ -179,7 +185,7 @@ void MergedLayerDecorator::downloadTile( const TileId &id, const QVector<GeoScen
 
 void MergedLayerDecorator::reloadTile( const StackedTile &stackedTile )
 {
-    foreach ( QSharedPointer<TextureTile> const & tile, stackedTile.tiles() ) {
+    foreach ( QSharedPointer<Tile> const & tile, stackedTile.tiles() ) {
         // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
         // but since "reload" or "refresh" seems to be a common action of a browser and it
         // allows for more connections (in our model), use "DownloadBrowse"

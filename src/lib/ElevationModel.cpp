@@ -13,7 +13,7 @@
 #include "GeoSceneMap.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneTiled.h"
-#include "TextureTile.h"
+#include "Tile.h"
 #include "TileLoader.h"
 #include "TileLoaderHelper.h"
 #include "MarbleModel.h"

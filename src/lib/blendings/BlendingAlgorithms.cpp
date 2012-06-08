@@ -15,7 +15,7 @@
 
 #include "BlendingAlgorithms.h"
 
-#include "TextureTile.h"
+#include "Tile.h"
 
 #include <cmath>
 
@@ -25,7 +25,7 @@
 namespace Marble
 {
 
-void OverpaintBlending::blend( QImage * const bottom, TextureTile const * const top ) const
+void OverpaintBlending::blend( QImage * const bottom, Tile const * const top ) const
 {
     Q_ASSERT( bottom );
     Q_ASSERT( top );
@@ -42,7 +42,7 @@ void OverpaintBlending::blend( QImage * const bottom, TextureTile const * const 
 // - bottom and top image have the same size
 // - bottom image format is ARGB32_Premultiplied
 void IndependentChannelBlending::blend( QImage * const bottom,
-                                        TextureTile const * const top ) const
+                                        Tile const * const top ) const
 {
     QImage const * const topImage = top->image();
     Q_ASSERT( topImage );
@@ -296,7 +296,7 @@ qreal HalfDifferenceBlending::blendChannel( qreal const bottomColorIntensity,
 
 // Special purpose blendings
 
-void CloudsBlending::blend( QImage * const bottom, TextureTile const * const top ) const
+void CloudsBlending::blend( QImage * const bottom, Tile const * const top ) const
 {
     QImage const * const topImage = top->image();
     Q_ASSERT( topImage );

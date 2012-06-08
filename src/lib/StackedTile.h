@@ -25,7 +25,7 @@ namespace Marble
 {
 
 class StackedTilePrivate;
-class TextureTile;
+class Tile;
 class TileId;
 
 /*!
@@ -60,7 +60,7 @@ class StackedTile
     friend class StackedTileLoader;
 
  public:
-    explicit StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles );
+    explicit StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<Tile> > const &tiles );
     virtual ~StackedTile();
 
 /*!
@@ -79,7 +79,7 @@ class StackedTile
     \brief Returns the stack of TextureTiles
     \return A container of TextureTile objects.
 */
-    QVector<QSharedPointer<TextureTile> > tiles() const;
+    QVector<QSharedPointer<Tile> > tiles() const;
 
 /*!
     \brief Returns the QImage that describes the merged stack of TextureTiles

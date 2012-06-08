@@ -16,7 +16,7 @@
 #include <QtGui/QImage>
 
 #include "MarbleDebug.h"
-#include "TextureTile.h"
+#include "Tile.h"
 
 using namespace Marble;
 
@@ -58,7 +58,7 @@ static const uchar **jumpTableFromQImage8( const QImage &img )
 }
 
 
-StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles ) :
+StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultImage, QVector<QSharedPointer<Tile> > const &tiles ) :
       m_id( id ), 
       m_resultTile( resultImage ),
       m_depth( resultImage.depth() ),
@@ -209,12 +209,12 @@ uint StackedTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) co
     return topLeftValue;
 }
 
-int StackedTilePrivate::calcByteCount( const QImage &resultImage, const QVector<QSharedPointer<TextureTile> > &tiles )
+int StackedTilePrivate::calcByteCount( const QImage &resultImage, const QVector<QSharedPointer<Tile> > &tiles )
 {
     int byteCount = resultImage.numBytes();
 
-    QVector<QSharedPointer<TextureTile> >::const_iterator pos = tiles.constBegin();
-    QVector<QSharedPointer<TextureTile> >::const_iterator const end = tiles.constEnd();
+    QVector<QSharedPointer<Tile> >::const_iterator pos = tiles.constBegin();
+    QVector<QSharedPointer<Tile> >::const_iterator const end = tiles.constEnd();
     for (; pos != end; ++pos )
         byteCount += (*pos)->byteCount();
 
@@ -222,7 +222,7 @@ int StackedTilePrivate::calcByteCount( const QImage &resultImage, const QVector<
 }
 
 
-StackedTile::StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles )
+StackedTile::StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<Tile> > const &tiles )
     : d( new StackedTilePrivate( id, resultImage, tiles ) )
 {
     Q_ASSERT( !tiles.isEmpty() );
@@ -287,7 +287,7 @@ int StackedTile::numBytes() const
     return d->m_byteCount;
 }
 
-QVector<QSharedPointer<TextureTile> > StackedTile::tiles() const
+QVector<QSharedPointer<Tile> > StackedTile::tiles() const
 {
     return d->m_tiles;
 }

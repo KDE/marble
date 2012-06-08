@@ -27,7 +27,7 @@ namespace Marble
 class GeoSceneTiled;
 class SunLocator;
 class StackedTile;
-class TextureTile;
+class Tile;
 class TileId;
 class TileLoader;
 
