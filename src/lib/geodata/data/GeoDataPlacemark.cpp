@@ -72,6 +72,8 @@ GeoDataLookAt *GeoDataPlacemark::lookAt() const
 
 void GeoDataPlacemark::setLookAt( GeoDataLookAt *lookAt)
 {
+    detach();
+    delete p()->m_lookAt;
     p()->m_lookAt = lookAt;
 }
 

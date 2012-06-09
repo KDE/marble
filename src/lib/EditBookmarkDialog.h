@@ -50,9 +50,13 @@ class MARBLE_EXPORT EditBookmarkDialog : public QDialog
 
     GeoDataCoordinates coordinates() const;
 
+    qreal range() const;
+
     void setName( const QString &name );
 
-    void setLookAt( const GeoDataLookAt &lookAt );
+    void setCoordinates( const GeoDataCoordinates &coordinates );
+
+    void setRange( qreal range );
 
     void setDescription( const QString &text );
 
