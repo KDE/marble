@@ -63,16 +63,14 @@ class MARBLE_EXPORT EditBookmarkDialog : public QDialog
 
     void setFolderName( const QString &name );
 
- private Q_SLOTS:
-    void openNewFolderDialog();
-
-    void retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark);
-
-    QString append( const QString &bookmark, const QString &text);
-
-    void onCoordinatesEdited();
 
  private:
+    Q_PRIVATE_SLOT( d, void openNewFolderDialog() )
+
+    Q_PRIVATE_SLOT( d, void retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark) )
+
+    Q_PRIVATE_SLOT( d, void updateCoordinates() )
+
     Q_DISABLE_COPY( EditBookmarkDialog )
     EditBookmarkDialogPrivate* const d;
     friend class EditBookmarkDialogPrivate;
