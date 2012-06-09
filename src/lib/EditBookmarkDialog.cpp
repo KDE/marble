@@ -45,6 +45,14 @@ public:
 
     void setFolderName( const QString &name );
 
+    QString append( const QString &bookmark, const QString &text);
+
+    void openNewFolderDialog();
+
+    void retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark);
+
+    void updateCoordinates();
+
 private:
     EditBookmarkDialog* const q;
 };
@@ -61,8 +69,8 @@ void EditBookmarkDialogPrivate::initialize()
     m_ui.m_longitude->setDimension( Longitude );
     m_ui.m_latitude->setDimension( Latitude );
     QObject::connect( m_ui.m_newFolderButton, SIGNAL( clicked() ), q, SLOT( openNewFolderDialog() ) );
-    QObject::connect( m_ui.m_longitude, SIGNAL( valueChanged(qreal) ), q, SLOT( onCoordinatesEdited() ) );
-    QObject::connect( m_ui.m_latitude, SIGNAL( valueChanged(qreal) ), q, SLOT( onCoordinatesEdited() ) );
+    QObject::connect( m_ui.m_longitude, SIGNAL( valueChanged(qreal) ), q, SLOT( updateCoordinates() ) );
+    QObject::connect( m_ui.m_latitude, SIGNAL( valueChanged(qreal) ), q, SLOT( updateCoordinates() ) );
 
     m_ui.m_folders->clear();
     initComboBox( m_bookmarkManager->document() );
@@ -159,12 +167,12 @@ EditBookmarkDialog::~EditBookmarkDialog()
     delete d;
 }
 
-void EditBookmarkDialog::retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark)
+void EditBookmarkDialogPrivate::retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark)
 {
     Q_UNUSED(coordinates)
     GeoDataExtendedData data = placemark.extendedData();
     QString bookmarkName;
-    qreal distance = d->m_widget->distance() * KM2METER;
+    qreal distance = m_widget->distance() * KM2METER;
     //FIXME : Optimal logic for suggestion with distance consideration is required
 
     if( distance >= 3500 ) {
@@ -185,11 +193,11 @@ void EditBookmarkDialog::retrieveGeocodeResult( const GeoDataCoordinates &coordi
         bookmarkName = placemark.address();
     }
 
-    d->m_ui.m_name->setText( bookmarkName );
-    d->m_ui.m_name->selectAll();
+    m_ui.m_name->setText( bookmarkName );
+    m_ui.m_name->selectAll();
 }
 
-QString EditBookmarkDialog::append( const QString &bookmark, const QString &text)
+QString EditBookmarkDialogPrivate::append( const QString &bookmark, const QString &text)
 {
     if( bookmark.isEmpty() && text.isEmpty() ) {
         return "";
@@ -203,21 +211,21 @@ QString EditBookmarkDialog::append( const QString &bookmark, const QString &text
     return bookmark + ", " + text;
 }
 
-void EditBookmarkDialog::openNewFolderDialog()
+void EditBookmarkDialogPrivate::openNewFolderDialog()
 {
-    QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( this );
+    QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( q );
     if ( dialog->exec() == QDialog::Accepted ) {
-        d->m_bookmarkManager->addNewBookmarkFolder( folder(), dialog->folderName() );
-        d->initComboBox( d->m_bookmarkManager->document() );
-        d->setFolderName( dialog->folderName() );
+        m_bookmarkManager->addNewBookmarkFolder( q->folder(), dialog->folderName() );
+        initComboBox( m_bookmarkManager->document() );
+        setFolderName( dialog->folderName() );
     }
     delete dialog;
 }
 
-void EditBookmarkDialog::onCoordinatesEdited()
+void EditBookmarkDialogPrivate::updateCoordinates()
 {
-    d->m_bookmarkCoordinates.setLongitude( d->m_ui.m_longitude->value(), GeoDataCoordinates::Degree );
-    d->m_bookmarkCoordinates.setLatitude( d->m_ui.m_latitude->value(), GeoDataCoordinates::Degree );
+    m_bookmarkCoordinates.setLongitude( m_ui.m_longitude->value(), GeoDataCoordinates::Degree );
+    m_bookmarkCoordinates.setLatitude( m_ui.m_latitude->value(), GeoDataCoordinates::Degree );
 }
 
 GeoDataPlacemark EditBookmarkDialog::bookmark() const
