@@ -135,6 +135,11 @@ void BookmarkManager::addBookmark( GeoDataContainer *container, const GeoDataPla
     updateBookmarkFile();
 }
 
+void BookmarkManager::updateBookmark( GeoDataPlacemark *bookmark )
+{
+    d->m_treeModel->updateFeature( bookmark );
+}
+
 void BookmarkManager::removeBookmark( GeoDataPlacemark *bookmark )
 {
     d->m_treeModel->removeFeature( bookmark );

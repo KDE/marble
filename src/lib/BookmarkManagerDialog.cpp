@@ -278,19 +278,19 @@ void BookmarkManagerDialogPrivate::editBookmark()
         dialog->setDescription( bookmark->description() );
         dialog->setFolderName( folder->name() );
         if ( dialog->exec() == QDialog::Accepted ) {
-            GeoDataPlacemark newBookmark( *bookmark );
-            m_manager->removeBookmark( bookmark );
-            bookmark = 0; // manager just deleted the bookmark
+            bookmark->setName( dialog->name() );
+            bookmark->setDescription( dialog->description() );
+            bookmark->setCoordinate( dialog->coordinates() );
+            if ( bookmark->lookAt() ) {
+                bookmark->lookAt()->setCoordinates( dialog->coordinates() );
+            }
+            m_manager->updateBookmark( bookmark );
 
-            GeoDataLookAt *lookAt = new GeoDataLookAt;
-            lookAt->setCoordinates( dialog->coordinates() );
-            lookAt->setRange( dialog->coordinates().altitude() );
-            newBookmark.setLookAt( lookAt );
-
-            newBookmark.setName( dialog->name() );
-            newBookmark.setDescription( dialog->description() );
-            newBookmark.setCoordinate( dialog->coordinates() );
-            m_manager->addBookmark( dialog->folder(), newBookmark );
+            if (folder->name() != dialog->folder()->name() ) {
+                GeoDataPlacemark newBookmark( *bookmark );
+                m_manager->removeBookmark( bookmark );
+                m_manager->addBookmark( dialog->folder(), newBookmark );
+            }
         }
         delete dialog;
     }

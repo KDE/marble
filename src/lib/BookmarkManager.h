@@ -61,6 +61,8 @@ class MARBLE_EXPORT BookmarkManager : public QObject
       */
     void addBookmark( GeoDataContainer *folder, const GeoDataPlacemark &bookmark ) ;
 
+    void updateBookmark( GeoDataPlacemark *bookmark );
+
     void removeBookmark( GeoDataPlacemark *bookmark );
 
     GeoDataDocument * document() const;
