@@ -65,18 +65,40 @@ Page {
         id: foursquareDelegate
         
         Rectangle {
+            id: venueRectangle
             property int padding: 7
             width: container.width + padding
             height: container.height + padding
-            color: "#39AC39"
+            scale: 0.0
+            color: "#88D788"
+            border.color: "#39AC39"
+            border.width: 2
             radius: 3
+            
+            SequentialAnimation {
+                id: appearAnimation
+                PauseAnimation { duration: Math.random() * 100 }
+                NumberAnimation {
+                    target: venueRectangle
+                    property: "scale"
+                    to: 1.0
+                    duration: 150
+                }
+            }
+            
+            Component.onCompleted: {
+                appearAnimation.running = true
+            }
             
             Item {
                 id: container
-                width: categoryIcon.width + 3 + venueName.width
+                width: categoryIcon.width
                 height: Math.max( categoryIcon.height, venueName.height )
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
+                onFocusChanged: {
+                    animateSizeChange()
+                }
                 
                 Image {
                     id: categoryIcon
@@ -89,9 +111,61 @@ Page {
                     text: name
                     anchors.left: categoryIcon.right
                     anchors.verticalCenter: parent.verticalCenter
+                    visible: parent.focus ? true : false
+                    scale: 0.0
+                }
+                
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        container.focus = true
+                    }
+                }
+                
+                SequentialAnimation {
+                    id: enlargeAnimation
+                    
+                    NumberAnimation {
+                        target: container
+                        property: "width"
+                        to: categoryIcon.width + 3 + venueName.width
+                        duration: 150
+                    }
+                    
+                    NumberAnimation {
+                        target: venueName
+                        property: "scale"
+                        to: 1.0
+                        duration: 150
+                    }
+                }
+                
+                SequentialAnimation {
+                    id: shrinkAnimation
+                    
+                    NumberAnimation {
+                        target: venueName
+                        property: "scale"
+                        to: 0.0
+                        duration: 150
+                    }
+                    
+                    NumberAnimation {
+                        target: container
+                        property: "width"
+                        to: categoryIcon.width
+                        duration: 150
+                    }
+                }
+                
+                function animateSizeChange() {
+                    if( focus == true) {
+                        enlargeAnimation.running = true
+                    } else {
+                        shrinkAnimation.running = true
+                    }
                 }
             }
         }
     }
-
 }
