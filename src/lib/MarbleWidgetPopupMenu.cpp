@@ -28,6 +28,7 @@
 #include "routing/RouteRequest.h"
 #include "MarbleRunnerManager.h"
 #include "EditBookmarkDialog.h"
+#include "BookmarkManager.h"
 
 // Qt
 #include <QtCore/QMimeData>
@@ -414,10 +415,13 @@ void MarbleWidgetPopupMenu::addBookmark()
     GeoDataCoordinates coordinates;
     if ( mouseCoordinates( &coordinates, m_copyCoordinateAction ) ) {
         QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( m_widget->model()->bookmarkManager(), m_widget );
+        dialog->setMarbleWidget( m_widget );
         dialog->setCoordinates( coordinates );
         dialog->setRange( m_widget->lookAt().range() );
-        dialog->setMarbleWidget( m_widget );
-        dialog->exec();
+        dialog->setReverseGeocodeName();
+        if ( dialog->exec() == QDialog::Accepted ) {
+            m_widget->model()->bookmarkManager()->addBookmark( dialog->folder(), dialog->bookmark() );
+        }
         delete dialog;
     }
 }
