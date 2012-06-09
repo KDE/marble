@@ -580,10 +580,13 @@ void MainWindow::openEditBookmarkDialog()
 {
     MarbleWidget *widget = m_controlView->marbleWidget();
     QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( widget->model()->bookmarkManager(), widget );
+    dialog->setMarbleWidget( widget );
     dialog->setCoordinates( widget->lookAt().coordinates() );
     dialog->setRange( widget->lookAt().range() );
-    dialog->setMarbleWidget( widget );
-    dialog->exec();
+    dialog->setReverseGeocodeName();
+    if ( dialog->exec() == QDialog::Accepted ) {
+        widget->model()->bookmarkManager()->addBookmark( dialog->folder(), dialog->bookmark() );
+    }
     delete dialog;
 }
 
