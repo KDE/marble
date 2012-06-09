@@ -33,7 +33,8 @@ public:
     MarbleWidget *m_widget;
     MarbleRunnerManager* m_manager;
     BookmarkManager* m_bookmarkManager;
-    GeoDataLookAt m_bookmarkLookAt;
+    GeoDataCoordinates m_bookmarkCoordinates;
+    qreal m_range;
     bool m_isCoordinatesEdited;
     Ui::UiEditBookmarkDialog m_ui;
 
@@ -50,7 +51,7 @@ private:
 };
 
 EditBookmarkDialogPrivate::EditBookmarkDialogPrivate( EditBookmarkDialog* q_, BookmarkManager *bookmarkManager ) :
-        m_widget( 0 ), m_manager( 0 ), m_bookmarkManager( bookmarkManager ), m_isCoordinatesEdited( false ), q( q_ )
+        m_widget( 0 ), m_manager( 0 ), m_bookmarkManager( bookmarkManager ), m_range( 0 ), m_isCoordinatesEdited( false ), q( q_ )
 {
     // nothing to do
 }
@@ -98,12 +99,10 @@ EditBookmarkDialog::EditBookmarkDialog( BookmarkManager *bookmarkManager, QWidge
     d->initialize();
 }
 
-void EditBookmarkDialog::setLookAt( const GeoDataLookAt &lookAt )
+void EditBookmarkDialog::setCoordinates( const GeoDataCoordinates &coordinates )
 {
-    d->m_bookmarkLookAt = lookAt;
+    d->m_bookmarkCoordinates = coordinates;
     d->m_isCoordinatesEdited = false;
-
-    const GeoDataCoordinates coordinates = lookAt.coordinates();
 
     if ( d->m_ui.m_name->text().isEmpty() ) {
         d->m_ui.m_name->setText( coordinates.toString() );
@@ -112,6 +111,10 @@ void EditBookmarkDialog::setLookAt( const GeoDataLookAt &lookAt )
 
     d->m_ui.m_longitude->setValue( coordinates.longitude(GeoDataCoordinates::Degree) );
     d->m_ui.m_latitude->setValue( coordinates.latitude(GeoDataCoordinates::Degree) );
+}
+
+void EditBookmarkDialog::setRange( qreal range ) {
+    d->m_range = range;
 }
 
 void EditBookmarkDialog::setName( const QString &text )
@@ -146,7 +149,7 @@ void EditBookmarkDialog::setMarbleWidget( MarbleWidget* widget )
     d->m_manager->setModel( d->m_widget->model() );
     QObject::connect( d->m_manager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
             this, SLOT( retrieveGeocodeResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
-    d->m_manager->reverseGeocoding( d->m_bookmarkLookAt.coordinates() );
+    d->m_manager->reverseGeocoding( d->m_bookmarkCoordinates );
 }
 
 EditBookmarkDialog::~EditBookmarkDialog()
@@ -223,19 +226,21 @@ void EditBookmarkDialog::onCoordinatesEdited()
 
 GeoDataPlacemark EditBookmarkDialog::bookmark() const
 {
-    GeoDataLookAt *lookAt = new GeoDataLookAt( d->m_bookmarkLookAt );
-    lookAt->setCoordinates( coordinates() );
-
     //Create a bookmark object
     GeoDataPlacemark bookmark;
     bookmark.setName( name() );
     bookmark.setDescription( description() );
     //allow for HTML in the description
     bookmark.setDescriptionCDATA( true );
-    bookmark.setCoordinate( lookAt->coordinates() );
+    bookmark.setCoordinate( coordinates() );
+    if ( d->m_range ) {
+        GeoDataLookAt *lookat = new GeoDataLookAt;
+        lookat->setCoordinates( coordinates() );
+        lookat->setRange( range() );
+        bookmark.setLookAt( lookat );
+    }
 
     bookmark.extendedData().addValue( GeoDataData( "isBookmark", true ) );
-    bookmark.setLookAt( lookAt );
 
     return bookmark;
 }
@@ -261,12 +266,16 @@ GeoDataCoordinates EditBookmarkDialog::coordinates() const
         const qreal longitude = d->m_ui.m_longitude->value();
         const qreal latitude = d->m_ui.m_latitude->value();
         // altitude not edited, take from old
-        const qreal altitude = d->m_bookmarkLookAt.coordinates().altitude();
+        const qreal altitude = d->m_bookmarkCoordinates.altitude();
 
         return GeoDataCoordinates( longitude, latitude, altitude,
                                    GeoDataCoordinates::Degree );
     }
-    return d->m_bookmarkLookAt.coordinates();
+    return d->m_bookmarkCoordinates;
+}
+
+qreal EditBookmarkDialog::range() const {
+    return d->m_range;
 }
 
 }
