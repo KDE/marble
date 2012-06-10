@@ -27,24 +27,30 @@ namespace Marble
 class AbstractDataPluginItemPrivate
 {
  public:
-    AbstractDataPluginItemPrivate()
-        : m_favorite( false ),
-          m_addedAngularResolution( 0 )
-    {
-    }
-    
     QString m_id;
     QString m_target;
     QString m_toolTip;
     bool m_favorite;
+    bool m_sticky;
     qreal m_addedAngularResolution;
+
+    AbstractDataPluginItemPrivate();
 };
+
+AbstractDataPluginItemPrivate::AbstractDataPluginItemPrivate()
+    : m_favorite( false ),
+      m_sticky( false ),
+      m_addedAngularResolution( 0 )
+{
+    // nothing to do
+}
 
 AbstractDataPluginItem::AbstractDataPluginItem( QObject *parent )
     : QObject( parent ),
       BillboardGraphicsItem(),
       d( new AbstractDataPluginItemPrivate )
 {
+    // nothing to do
 }
 
 AbstractDataPluginItem::~AbstractDataPluginItem()
@@ -92,6 +98,19 @@ void AbstractDataPluginItem::setFavorite( bool favorite )
     if ( isFavorite() != favorite ) {
         d->m_favorite = favorite;
         emit favoriteChanged( id(), favorite );
+    }
+}
+
+bool AbstractDataPluginItem::isSticky() const
+{
+    return d->m_sticky;
+}
+
+void AbstractDataPluginItem::setSticky( bool sticky )
+{
+    if ( d->m_sticky != sticky ) {
+        d->m_sticky = sticky;
+        emit stickyChanged();
     }
 }
 
