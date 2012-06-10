@@ -85,6 +85,7 @@ public:
     FavoritesModel* m_favoritesModel;
     QMetaObject m_metaObject;
     bool m_hasMetaObject;
+    bool m_needsSorting;
 };
 
 class FavoritesModel : public QAbstractListModel
@@ -118,7 +119,8 @@ AbstractDataPluginModelPrivate::AbstractDataPluginModelPrivate( const QString& n
       m_storagePolicy( MarbleDirs::localPath() + "/cache/" + m_name + '/' ),
       m_downloadManager( &m_storagePolicy, pluginManager ),
       m_favoritesModel( 0 ),
-      m_hasMetaObject( false )
+      m_hasMetaObject( false ),
+      m_needsSorting( false )
 {
 }
 
@@ -146,6 +148,26 @@ void AbstractDataPluginModelPrivate::updateFavoriteItems()
                 m_parent->getItem( id, m_lastMarbleModel );
             }
         }
+    }
+}
+
+static bool lessThanByPointer( const AbstractDataPluginItem *item1,
+                               const AbstractDataPluginItem *item2 )
+{
+    if( item1 && item2 ) {
+        // Compare by sticky and favorite status (sticky first, then favorites), last by operator<
+        bool const sticky1 = item1->isSticky();
+        bool const favorite1 = item1->isFavorite();
+        if ( sticky1 != item2->isSticky() ) {
+            return sticky1;
+        } else if ( favorite1 != item2->isFavorite() ) {
+            return favorite1;
+        } else {
+            return item1->operator<( item2 );
+        }
+    }
+    else {
+        return false;
     }
 }
 
@@ -238,7 +260,15 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
     // if I'm wrong.
     Q_ASSERT( !removed && "Null item in item list. Please report a bug to marble-devel@kde.org" );
 
-    QList<AbstractDataPluginItem*> const candidates = d->m_displayedItems + d->m_itemSet;
+    QList<AbstractDataPluginItem*> candidates = d->m_displayedItems + d->m_itemSet;
+
+    if ( d->m_needsSorting ) {
+        // Both the candidates list and the list of all items need to be sorted
+        qSort( candidates.begin(), candidates.end(), lessThanByPointer );
+        qSort( d->m_itemSet.begin(), d->m_itemSet.end(), lessThanByPointer );
+        d->m_needsSorting =  false;
+    }
+
     QList<AbstractDataPluginItem*>::const_iterator i = candidates.begin();
     QList<AbstractDataPluginItem*>::const_iterator end = candidates.end();
 
@@ -349,23 +379,6 @@ void AbstractDataPluginModel::downloadDescriptionFile( const QUrl& url )
     }
 }
 
-static bool lessThanByPointer( const AbstractDataPluginItem *item1,
-                               const AbstractDataPluginItem *item2 )
-{
-    if( item1 && item2 ) {
-        // Compare by favorite status (favorites first), then by operator<
-        bool const favorite1 = item1->isFavorite();
-        if ( favorite1 ^ item2->isFavorite() ) {
-            return favorite1 ? item1 : item2;
-        } else {
-            return item1->operator<( item2 );
-        }
-    }
-    else {
-        return false;
-    }
-}
-
 void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item )
 {
     addItemsToList( QList<AbstractDataPluginItem*>() << item );
@@ -401,6 +414,7 @@ void AbstractDataPluginModel::addItemsToList( const QList<AbstractDataPluginItem
         // Insert the item on the right position in the list
         d->m_itemSet.insert( i, item );
 
+        connect( item, SIGNAL( stickyChanged() ), this, SLOT( scheduleItemSort() ) );
         connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
         connect( item, SIGNAL( updated() ), this, SIGNAL( itemsUpdated() ) );
         connect( item, SIGNAL( favoriteChanged( const QString&, bool ) ), this,
@@ -482,6 +496,12 @@ void AbstractDataPluginModel::favoriteItemChanged( const QString& id, bool isFav
     }
 
     setFavoriteItems( favorites );
+    scheduleItemSort();
+}
+
+void AbstractDataPluginModel::scheduleItemSort()
+{
+    d->m_needsSorting = true;
 }
 
 QString AbstractDataPluginModel::generateFilename( const QString& id, const QString& type ) const

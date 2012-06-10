@@ -31,6 +31,7 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
 
     Q_PROPERTY( QString identifier READ id WRITE setId NOTIFY idChanged )
     Q_PROPERTY( bool favorite READ isFavorite WRITE setFavorite NOTIFY favoriteChanged )
+    Q_PROPERTY( bool sticky READ isSticky WRITE setSticky NOTIFY stickyChanged )
 
  public:
     explicit AbstractDataPluginItem( QObject *parent = 0 );
@@ -44,6 +45,9 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
 
     bool isFavorite() const;
     virtual void setFavorite( bool favorite );
+
+    bool isSticky() const;
+    void setSticky( bool sticky );
 
     /**
       * Returning the angular resolution of the viewport when the item was added to it the last
@@ -83,6 +87,7 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
     void updated();
     void idChanged();
     void favoriteChanged( const QString& id, bool favorite );
+    void stickyChanged();
 
  public Q_SLOTS:
    void toggleFavorite();

@@ -63,7 +63,7 @@ Page {
     
     Component {
         id: foursquareDelegate
-        
+
         Rectangle {
             id: venueRectangle
             property int padding: 7
@@ -74,7 +74,7 @@ Page {
             border.color: "#39AC39"
             border.width: 2
             radius: 3
-            
+
             SequentialAnimation {
                 id: appearAnimation
                 PauseAnimation { duration: Math.random() * 100 }
@@ -126,6 +126,7 @@ Page {
                 }
 
                 Behavior on width { NumberAnimation { duration: 150 } }
+                onFocusChanged: sticky = focus
             }
 
             MouseArea {
