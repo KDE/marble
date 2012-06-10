@@ -1709,7 +1709,8 @@ void MarblePart::openEditBookmarkDialog()
 {
     MarbleWidget *widget = m_controlView->marbleWidget();
     QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( widget->model()->bookmarkManager(), widget );
-    dialog->setLookAt( widget->lookAt() );
+    dialog->setCoordinates( widget->lookAt().coordinates() );
+    dialog->setRange( widget->lookAt().range() );
     dialog->setMarbleWidget( widget );
     dialog->exec();
     delete dialog;
