@@ -188,7 +188,7 @@ void VectorComposer::drawTextureMap( GeoPainter *painter, const ViewportParams *
     m_vectorMap->createFromPntMap( s_coastLines, viewport );
     painter->setPen( m_textureLandPen );
     painter->setBrush( m_textureLandBrush );
-    m_vectorMap->drawMap( painter );
+    m_vectorMap->paintMap( painter );
 
     // Islands
     m_vectorMap->setzBoundingBoxLimit( 0.8 );
@@ -197,7 +197,7 @@ void VectorComposer::drawTextureMap( GeoPainter *painter, const ViewportParams *
     m_vectorMap->createFromPntMap( s_islands, viewport );
     painter->setPen( m_textureLandPen );
     painter->setBrush( m_textureLandBrush );
-    m_vectorMap->drawMap( painter );
+    m_vectorMap->paintMap( painter );
 
     if ( m_showWaterBodies && m_showLakes ) {
          // Lakes
@@ -207,12 +207,12 @@ void VectorComposer::drawTextureMap( GeoPainter *painter, const ViewportParams *
          m_vectorMap->createFromPntMap( s_lakes, viewport );
          painter->setPen( Qt::NoPen );
          painter->setBrush( m_textureLakeBrush );
-         m_vectorMap->drawMap( painter );
+         m_vectorMap->paintMap( painter );
 
          m_vectorMap->createFromPntMap( s_lakeislands, viewport );
          painter->setPen( Qt::NoPen );
          painter->setBrush( m_textureLandBrush );
-         m_vectorMap->drawMap( painter );
+         m_vectorMap->paintMap( painter );
     }
 
     if ( m_showIce ) {
@@ -223,7 +223,7 @@ void VectorComposer::drawTextureMap( GeoPainter *painter, const ViewportParams *
          painter->setPen( Qt::NoPen );
          painter->setBrush( m_textureGlacierBrush );
 
-         m_vectorMap->drawMap( painter );
+         m_vectorMap->paintMap( painter );
     }
 
     // mDebug() << "TextureMap calculated nodes: " << m_vectorMap->nodeCount();
