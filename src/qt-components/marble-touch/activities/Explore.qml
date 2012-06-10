@@ -89,17 +89,24 @@ Page {
             Component.onCompleted: {
                 appearAnimation.running = true
             }
-            
+
             Item {
                 id: container
-                width: categoryIcon.width
-                height: Math.max( categoryIcon.height, venueName.height )
+                width: 32 + ( focus ? venueName.width + venueName.anchors.leftMargin : 0 )
+                height: Math.max( 32, venueName.height )
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
-                onFocusChanged: {
-                    animateSizeChange()
+
+                Rectangle {
+                    id: iconFallBack
+                    width: 30
+                    height: width
+                    radius: 5
+                    color: "white"
+                    border.width: 2
+                    border.color: "darkgray"
                 }
-                
+
                 Image {
                     id: categoryIcon
                     source: categoryIconUrl
@@ -108,63 +115,22 @@ Page {
                 
                 Text {
                     id: venueName
+                    scale: container.focus ? 1.0 : 0.0
                     text: name
-                    anchors.left: categoryIcon.right
+                    anchors.left: iconFallBack.right
+                    anchors.leftMargin: 5
                     anchors.verticalCenter: parent.verticalCenter
                     visible: parent.focus ? true : false
-                    scale: 0.0
+
+                    Behavior on scale { NumberAnimation { duration: 150 } }
                 }
-                
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        container.focus = true
-                    }
-                }
-                
-                SequentialAnimation {
-                    id: enlargeAnimation
-                    
-                    NumberAnimation {
-                        target: container
-                        property: "width"
-                        to: categoryIcon.width + 3 + venueName.width
-                        duration: 150
-                    }
-                    
-                    NumberAnimation {
-                        target: venueName
-                        property: "scale"
-                        to: 1.0
-                        duration: 150
-                    }
-                }
-                
-                SequentialAnimation {
-                    id: shrinkAnimation
-                    
-                    NumberAnimation {
-                        target: venueName
-                        property: "scale"
-                        to: 0.0
-                        duration: 150
-                    }
-                    
-                    NumberAnimation {
-                        target: container
-                        property: "width"
-                        to: categoryIcon.width
-                        duration: 150
-                    }
-                }
-                
-                function animateSizeChange() {
-                    if( focus == true) {
-                        enlargeAnimation.running = true
-                    } else {
-                        shrinkAnimation.running = true
-                    }
-                }
+
+                Behavior on width { NumberAnimation { duration: 150 } }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: container.focus = true
             }
         }
     }
