@@ -673,21 +673,6 @@ void VectorMap::mercatorCreatePolyLine(
 }
 
 
-void VectorMap::drawMap( GeoPainter *painter )
-{
-    ScreenPolygon::Vector::const_iterator  itEndPolygon = m_polygons.constEnd();
-    for ( ScreenPolygon::Vector::const_iterator itPolygon = m_polygons.constBegin();
-          itPolygon != itEndPolygon; 
-          ++itPolygon )
-    {
-        if ( itPolygon->closed() )  
-            painter->drawPolygon( *itPolygon );
-        else
-            painter->drawPolyline( *itPolygon );
-    }
-}
-
-
 // Paint the prepared vectors in screen coordinates.
 
 void VectorMap::paintMap(GeoPainter * painter)
