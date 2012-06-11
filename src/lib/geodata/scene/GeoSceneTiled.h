@@ -33,13 +33,13 @@
 #include "MarbleGlobal.h"
 
 /**
- * @short Tiled dataset stored in a layer. Imagetile and Vectortile layes inherite from this class.
+ * @short Tiled dataset stored in a layer. TextureTile and VectorTile layes inherite from this class.
  */
 
 /* It's name before GSoC 2012 was GeoSceneTexture, but in order to make Marble
  * able to manage vector tiles, now its called GeoSceneTiled and then
- * GeoSceneImagetile (for the tag <texture> in dgml) or GeoSceneVectortile
- * (for <vectorTile>) are created, which inherite from this class */
+ * GeoSceneTextureTile (for the tag <texture> in dgml) or GeoSceneVectorTile
+ * (for <vectortile>) are created, which inherite from this class */
 
 namespace Marble
 {
