@@ -30,9 +30,9 @@ class Blending;
 
 /*!
     \class Tile
-    \brief A class that resembles a tile (then it is extended to TextureTile or Vectortile).
+    \brief A class that resembles a tile (then it is extended to ImageTile or Vectortile).
 
-    A tile provides a bitmap image or vector tile for a certain (geographic) area and
+    A tile provides a bitmap image or vector data for a certain (geographic) area and
     for a given zoom level. Each Tile can be identified via a unique
     TileId.
     

@@ -31,7 +31,7 @@
 #include "StackedTile.h"
 #include "TileLoaderHelper.h"
 #include "Planet.h"
-#include "ImageTile.h"
+#include "TextureTile.h"
 #include "VectorTile.h"
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
@@ -147,20 +147,31 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
         mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId.toString() << textureLayer->tileSize() << textureLayer->fileFormat();
 
-        const QImage tileImage = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
+        // Blending (how to merge the images into an only image)
         const Blending *blending = d->m_blendingFactory.findBlending( textureLayer->blending() );
         if ( blending == 0 && !textureLayer->blending().isEmpty() ) {
             mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
         }
 
+        // File format for creating an ImageTile or a VectorTile
         QString format = textureLayer->fileFormat();
+
+        // ImageTile
         if ( format.toLower() == "png" || format.toLower() == "jpg" ||
              format.toLower() == "jpeg" || format.toLower() == "gif" ) {
-            QSharedPointer<Tile> tile(new ImageTile( tileId, tileImage, format, blending ) );
+
+            const QImage tileImage = d->m_tileLoader->loadTileImage( tileId, DownloadBrowse );
+
+            QSharedPointer<Tile> tile(new TextureTile( tileId, tileImage, format, blending ) );
             tiles.append( tile );
         }
 
+        // VectorTile
         else {
+
+            //const GeoDataContainer tileVectordata = d->m_tileLoader->loadTileVectordata( tileId, DownloadBrowse );
+            const QImage tileImage = d->m_tileLoader->loadTileImage( tileId, DownloadBrowse );
+
             QSharedPointer<Tile> tile( new VectorTile( tileId, tileImage, format, blending ) );
             tiles.append( tile );
         }
@@ -185,7 +196,7 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
 
             if ( format.toLower() == "png" || format.toLower() == "jpg" ||
                  format.toLower() == "jpeg" || format.toLower() == "gif" ){
-                 tiles[i] = QSharedPointer<Tile>( new ImageTile( tileId, tileImage, format, blending ) );
+                 tiles[i] = QSharedPointer<Tile>( new TextureTile( tileId, tileImage, format, blending ) );
             }
 
             else{

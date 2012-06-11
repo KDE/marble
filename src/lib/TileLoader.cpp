@@ -21,6 +21,7 @@
 #include <QtGui/QImage>
 
 #include "GeoSceneTiled.h"
+#include "GeoDataContainer.h"
 #include "HttpDownloadManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
@@ -48,11 +49,11 @@ void TileLoader::setTextureLayers( const QVector<const GeoSceneTiled *> &texture
     }
 }
 
-// If the tile is locally available:
-//     - if not expired: create TextureTile, set state to "uptodate", return it => done
+// If the tile image file is locally available:
+//     - if not expired: create ImageTile, set state to "uptodate", return it => done
 //     - if expired: create TextureTile, state is set to Expired by default, trigger dl,
 
-QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
+QImage TileLoader::loadTileImage( TileId const & tileId, DownloadUsage const usage )
 {
     GeoSceneTiled const * const textureLayer = findTextureLayer( tileId );
     QString const fileName = tileFileName( textureLayer, tileId );
@@ -62,15 +63,17 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
         // check if an update should be triggered
 
         if ( status == Available ) {
-            mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateUptodate";
+            mDebug() << "TileLoader::loadTileImage" << tileId.toString() << "StateUptodate";
         } else {
             Q_ASSERT( status == Expired );
-            mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateExpired";
+            mDebug() << "TileLoader::loadTileImage" << tileId.toString() << "StateExpired";
             triggerDownload( tileId, usage );
         }
 
         QImage const image( fileName );
         if ( !image.isNull() ) {
+
+            mDebug () <<"------------------------LOADED IMAGE " << fileName << " " << tileId.toString();
             // file is there, so create and return a tile object in any case
             return image;
         }
@@ -83,7 +86,48 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
 
     triggerDownload( tileId, usage );
 
+    mDebug () <<"------------------------REPLACEMENT IMAGE " << fileName << " " << tileId.toString();
     return replacementTile;
+}
+
+
+GeoDataContainer TileLoader::loadTileVectorData( TileId const & tileId, DownloadUsage const usage, QString const &format )
+{
+    GeoSceneTiled const * const textureLayer = findTextureLayer( tileId );
+    QString const fileName = tileFileName( textureLayer, tileId );
+
+    TileStatus status = tileStatus( tileId );
+    if ( status != Missing ) {
+        // check if an update should be triggered
+
+        if ( status == Available ) {
+            mDebug() << "TileLoader::loadTileVectorData" << tileId.toString() << "StateUptodate";
+        } else {
+            Q_ASSERT( status == Expired );
+            mDebug() << "TileLoader::loadTileVectorData" << tileId.toString() << "StateExpired";
+            triggerDownload( tileId, usage );
+        }
+
+        QFile const file( fileName );
+        if ( file.exists() ) {
+
+            mDebug () <<"------------------------LOADED VECTORDATA " << fileName << " " << tileId.toString();
+            // file is there, so create and return a tile object in any case
+            GeoDataContainer *temp = new GeoDataContainer();
+            return *temp;
+        }
+    }
+
+    // tile was not locally available => trigger download and look for tiles in other levels
+    // for scaling
+    QImage replacementTile = scaledLowerLevelTile( tileId );
+    Q_ASSERT( !replacementTile.isNull() );
+
+    triggerDownload( tileId, usage );
+
+    mDebug () <<"------------------------REPLACEMENT VECTORDATA " << fileName << " " << tileId.toString();
+    GeoDataContainer *temp = new GeoDataContainer();
+    return *temp;
 }
 
 // This method triggers a download of the given tile (without checking

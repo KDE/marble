@@ -46,5 +46,3 @@ QString VectorTile::type()
 }
 
 }
-
-

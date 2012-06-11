@@ -24,6 +24,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 #include "Tile.h"
 #include "TileId.h"
 
+#include "GeoDataContainer.h"
+
 class QImage;
 
 namespace Marble
@@ -66,6 +68,12 @@ class VectorTile : public Tile
     \return A non-zero pointer to a QImage associated with the tile.
 */
     QImage const * image() const;
+
+/*!
+    \brief Returns the GeoDataContainer containing de vector data of the Tile
+    \return A non-zero pointer to a GeoDataContainer associated with the tile.
+*/
+    GeoDataContainer const * vectorData() const;
     virtual int byteCount() const;
 
     virtual const char* nodeType() const;
@@ -75,12 +83,18 @@ class VectorTile : public Tile
     Q_DISABLE_COPY( VectorTile )
 
     QImage const m_image;
+    GeoDataContainer const m_vectordata;
 
 };
 
 inline QImage const * VectorTile::image() const
 {
     return &m_image;
+}
+
+inline GeoDataContainer const * VectorTile::vectorData() const
+{
+    return &m_vectordata;
 }
 
 inline int VectorTile::byteCount() const
@@ -91,4 +105,3 @@ inline int VectorTile::byteCount() const
 }
 
 #endif // MARBLE_VECTORTILE_H
-

@@ -23,6 +23,7 @@
 #include <QtGui/QImage>
 
 #include "TileId.h"
+#include "GeoDataContainer.h"
 #include "MarbleGlobal.h"
 
 class QByteArray;
@@ -49,7 +50,8 @@ class TileLoader: public QObject
 
     void setTextureLayers( const QVector<GeoSceneTiled const *> &textureLayers );
 
-    QImage loadTile( TileId const & tileId, DownloadUsage const );
+    QImage loadTileImage( TileId const & tileId, DownloadUsage const );
+    GeoDataContainer loadTileVectorData( TileId const & tileId, DownloadUsage const usage, QString const &format );
     void reloadTile( TileId const &tileId, DownloadUsage const );
     void downloadTile( TileId const & tileId );
 
