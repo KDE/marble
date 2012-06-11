@@ -367,7 +367,7 @@ void MarbleMap::setRadius( int radius )
 
 int MarbleMap::preferredRadiusCeil( int radius )
 {
-    if ( d->m_textureLayer.tileZoomLevel() < 0 )
+    if ( !d->m_layerManager.internalLayers().contains( &d->m_textureLayer ) )
         return radius;
 
     return d->m_textureLayer.preferredRadiusCeil( radius );
@@ -376,7 +376,7 @@ int MarbleMap::preferredRadiusCeil( int radius )
 
 int MarbleMap::preferredRadiusFloor( int radius )
 {
-    if ( d->m_textureLayer.tileZoomLevel() < 0 )
+    if ( !d->m_layerManager.internalLayers().contains( &d->m_textureLayer ) )
         return radius;
 
     return d->m_textureLayer.preferredRadiusFloor( radius );
