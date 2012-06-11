@@ -81,6 +81,8 @@ class LayerManager : public QObject
      */
     void removeLayer(LayerInterface *layer);
 
+    QList<LayerInterface *> internalLayers() const;
+
  Q_SIGNALS:
     /**
      * @brief Signal that a render item has been initialized

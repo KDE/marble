@@ -502,15 +502,23 @@ void MarbleMapTest::switchMapThemes()
 
     map.setMapThemeId( "earth/plain/plain.dgml" );
     QCOMPARE( map.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+    QCOMPARE( map.preferredRadiusCeil( 1000 ), 1000 );
+    QCOMPARE( map.preferredRadiusFloor( 1000 ), 1000 );
 
     map.setMapThemeId( "earth/srtm/srtm.dgml" );
     QCOMPARE( map.mapThemeId(), QString( "earth/srtm/srtm.dgml" ) );
+    QCOMPARE( map.preferredRadiusCeil( 1000 ), 1348 );
+    QCOMPARE( map.preferredRadiusFloor( 1000 ), 674 );
 
     map.setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
     QCOMPARE( map.mapThemeId(), QString( "earth/openstreetmap/openstreetmap.dgml" ) );
+    QCOMPARE( map.preferredRadiusCeil( 1000 ), 1024 );
+    QCOMPARE( map.preferredRadiusFloor( 1000 ), 512 );
 
     map.setMapThemeId( "earth/plain/plain.dgml" );
     QCOMPARE( map.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+    QCOMPARE( map.preferredRadiusCeil( 1000 ), 1000 );
+    QCOMPARE( map.preferredRadiusFloor( 1000 ), 1000 );
 
     QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
 }

@@ -237,6 +237,11 @@ void LayerManager::removeLayer(LayerInterface *layer)
     d->m_internalLayers.removeAll(layer);
 }
 
+QList<LayerInterface *> LayerManager::internalLayers() const
+{
+    return d->m_internalLayers;
+}
+
 }
 
 #include "LayerManager.moc"
