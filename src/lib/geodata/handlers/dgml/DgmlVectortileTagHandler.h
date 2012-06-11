@@ -29,7 +29,7 @@ namespace Marble
 namespace dgml
 {
 
-class DgmlVectorTileTagHandler : public GeoTagHandler
+class DgmlVectortileTagHandler : public GeoTagHandler
 {
 public:
     virtual GeoNode* parse(GeoParser&) const;

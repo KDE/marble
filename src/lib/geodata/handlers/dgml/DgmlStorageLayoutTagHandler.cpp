@@ -63,7 +63,7 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Texture) || parentItem.represents(dgmlTag_VectorTile)) {
+    if (parentItem.represents(dgmlTag_Texture) || parentItem.represents(dgmlTag_Vectortile)) {
         GeoSceneTiled *texture = parentItem.nodeAs<GeoSceneTiled>();
 
         // Attribute mode

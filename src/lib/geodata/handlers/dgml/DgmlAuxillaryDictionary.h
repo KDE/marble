@@ -39,7 +39,7 @@ namespace dgml
     extern const char* dgmlValue_on;
     extern const char* dgmlValue_texture;
     extern const char* dgmlValue_vector;
-    extern const char* dgmlValue_vectorTile;
+    extern const char* dgmlValue_vectortile;
     extern const char* dgmlValue_geodata;
 }
 }

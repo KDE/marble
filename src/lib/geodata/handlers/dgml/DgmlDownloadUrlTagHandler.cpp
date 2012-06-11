@@ -44,7 +44,7 @@ GeoNode* DgmlDownloadUrlTagHandler::parse( GeoParser& parser ) const
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if ( !parentItem.represents( dgmlTag_Texture ) &&  !parentItem.represents( dgmlTag_VectorTile ) )
+    if ( !parentItem.represents( dgmlTag_Texture ) &&  !parentItem.represents( dgmlTag_Vectortile ) )
         return 0;
 
     QUrl url;

@@ -37,7 +37,7 @@ const char* dgmlValue_true = "true";
 const char* dgmlValue_on = "on";
 const char* dgmlValue_texture = "texture";
 const char* dgmlValue_vector = "vector";
-const char* dgmlValue_vectorTile = "vectortile";
+const char* dgmlValue_vectortile = "vectortile";
 const char* dgmlValue_geodata = "geodata";
 }
 }
