@@ -236,9 +236,6 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
 {
     Q_ASSERT( !tileImage.isNull() );
 
-    if (tileImage.isNull())
-        mDebug()<< "null";
-
     d->detectMaxTileLevel();
 
     const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );

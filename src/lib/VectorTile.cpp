@@ -25,14 +25,13 @@ Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 namespace Marble
 {
 
-VectorTile::VectorTile( TileId const & tileId, QImage const & image, QString const &format, const Blending * blending )
+VectorTile::VectorTile( TileId const & tileId, QImage const & image, GeoDataContainer const &vectordata, QString const &format, const Blending * blending )
     : Tile( tileId, format, blending ),
-    m_image( image )
+    m_image( image ),
+    m_vectordata( vectordata )
 {
-    if (image.isNull())
-        mDebug() << "null";
-
     Q_ASSERT( !image.isNull() );
+    // Ensure if vectordata exists?
 }
 
 VectorTile::~VectorTile()

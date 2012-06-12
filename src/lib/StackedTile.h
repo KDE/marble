@@ -87,7 +87,13 @@ class StackedTile
     \brief Returns the QImage that describes the merged stack of Tiles
     \return A non-zero pointer to the resulting QImage 
 */
-    QImage const * resultTile() const; // Note: maybe this should be resultImage() ?
+    QImage const * resultImage() const;
+
+/*!
+    \brief Returns the QImage that describes the merged stack of Tiles
+    \return A non-zero pointer to the resulting QImage
+*/
+    const GeoDataContainer *resultVectorData() const;
 
 /*!
     \brief Returns the color value of the result tile at the given integer position.

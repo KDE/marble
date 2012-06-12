@@ -317,9 +317,9 @@ void CloudsBlending::blend( QImage * const bottom, Tile const * const top ) cons
         }
     }
 
-    mDebug() << "--------------------------------DEBUG" << top->image()->size();
+    mDebug() << "--------------------------------CLOUDBLENDING" << top->image()->size();
     QString type = top->nodeType();
-    mDebug() << "--------------------------------DEBUG" << type;
+    mDebug() << "--------------------------------CLOUDBLENDING" << type;
 
 }
 

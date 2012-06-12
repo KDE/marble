@@ -37,7 +37,9 @@ class Blending;
     \brief A class that resembles a tile with vector data (extends Tile).
 
     This tile provides vector data for a certain (geographic) area and
-    for a given zoom level. Each Tile can be identified via a unique
+    for a given zoom level. It also has an image for rendering image layers
+    such as clouds or hillshading layer.
+    Each Tile can be identified via a unique
     TileId.
 
     A stack of Tiles that cover the same area and the same
@@ -60,7 +62,7 @@ class Blending;
 class VectorTile : public Tile
 {
  public:
-    VectorTile( TileId const & tileId, QImage const & image, QString const &format, const Blending * blending );
+    VectorTile( TileId const & tileId, QImage const & image, GeoDataContainer const &vectordata, QString const &format, const Blending * blending );
     ~VectorTile();
 
 /*!

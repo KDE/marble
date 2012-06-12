@@ -107,7 +107,7 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
     const bool withConversion = tiles.count() > 1 || m_showSunShading || m_showTileId;
     foreach ( const QSharedPointer<Tile> &tile, tiles ) {
 
-        mDebug() <<"---------------------------START CREATING "<< tile->nodeType() << " FORMAT " << tile->format()->toUpper() <<", FIX VECTORRESULT";
+        mDebug() <<"--------------------------------CREATETILE type: "<< tile->nodeType() << " format: " << tile->format()->toLower() <<", FIX VECTORRESULT";
 
             const Blending *const blending = tile->blending();
             if ( blending ) {
@@ -146,7 +146,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         const TileId tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
 
-        mDebug() << "---------------------------NEW TILE load" << tileId.toString() << " " << textureLayer->fileFormat();
+        mDebug() << "--------------------------------LOADTILE " << tileId.toString() << " format: " << textureLayer->fileFormat();
 
         mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId.toString() << textureLayer->tileSize() << textureLayer->fileFormat();
 
@@ -161,18 +161,18 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
         // VectorTile
         if ( format.toLower() == "js"){
+                QImage tileImage ( "/home/ander/image.png" ); // Fixme
 
-                //const GeoDataContainer tileVectordata = d->m_tileLoader->loadTileVectordata( tileId, DownloadBrowse );
-                const QImage tileImage = d->m_tileLoader->loadTileImage( tileId, DownloadBrowse );
+                const GeoDataContainer tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, format );
 
-                QSharedPointer<Tile> tile( new TextureTile( tileId, tileImage, format, blending ) );
-                //QSharedPointer<Tile> tile( new VectorTile( tileId, tileImage, format, blending ) );
+                mDebug() << "--------------------------------LOADEDVECTORDATA " << tileVectordata.featureList().size();
+
+                QSharedPointer<Tile> tile( new VectorTile( tileId, tileImage, tileVectordata, format, blending ) );
                 tiles.append( tile );
 
         }
         // ImageTile
         else {
-
             const QImage tileImage = d->m_tileLoader->loadTileImage( tileId, DownloadBrowse );
 
             QSharedPointer<Tile> tile(new TextureTile( tileId, tileImage, format, blending ) );
@@ -193,17 +193,18 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
         if ( tiles[i]->id() == tileId ) {
             const Blending *blending = tiles[i]->blending();
 
-            mDebug() << "---------------------------NEW TILE create" << tileId.toString() << " " << format;
+            // VectorTile
+            if ( format.toLower() == "js"){
+                 mDebug() << "--------------------------------CREATEVECTORTILE " << tileId.toString() << " format " << format;
+                 tiles[i] = QSharedPointer<Tile>( new VectorTile( tileId, tileImage, *new GeoDataContainer(), format, blending ) );
+            }
+            // TextureTile
+            else{
+                mDebug() << "--------------------------------CREATETEXTURETILE " << tileId.toString() << " format " << format;
+                tiles[i] = QSharedPointer<Tile>( new TextureTile( tileId, tileImage, format, blending ) );
+           }
 
 
-            //if ( format.toLower() == "png" || format.toLower() == "jpg" ||
-            //   format.toLower() == "jpeg" || format.toLower() == "gif" ){
-                 tiles[i] = QSharedPointer<Tile>( new TextureTile( tileId, tileImage, format, blending ) );
-           //}
-
-            //else{
-            //     tiles[i] = QSharedPointer<Tile>( new VectorTile( tileId, tileImage, format, blending ) );
-            //}
 
 
         }

@@ -128,10 +128,7 @@ void TextureLayer::Private::updateTextureLayers()
 
 void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage, const QString &format )
 {
-    if (tileImage.isNull())
-        mDebug()<< "null";
-
-    if ( tileImage.isNull() )
+     if ( tileImage.isNull() )
         return; // keep tiles in cache to improve performance
 
     const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );

@@ -60,12 +60,13 @@ static const uchar **jumpTableFromQImage8( const QImage &img )
 
 StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultImage, const GeoDataContainer &resultVector, QVector<QSharedPointer<Tile> > const &tiles ) :
       m_id( id ), 
-      m_resultTile( resultImage ),
+      m_resultImage( resultImage ),
+      m_resultVector( resultVector ),
       m_depth( resultImage.depth() ),
       m_isGrayscale( resultImage.isGrayscale() ),
       m_tiles( tiles ),
-      jumpTable8( jumpTableFromQImage8( m_resultTile ) ),
-      jumpTable32( jumpTableFromQImage32( m_resultTile ) ),
+      jumpTable8( jumpTableFromQImage8( m_resultImage ) ),
+      jumpTable32( jumpTableFromQImage32( m_resultImage ) ),
       m_byteCount( calcByteCount( resultImage, tiles ) ),
       m_isUsed( false )
 {
@@ -83,15 +84,15 @@ uint StackedTilePrivate::pixel( int x, int y ) const
         if ( m_isGrayscale )
             return (jumpTable8)[y][x];
         else
-            return m_resultTile.color( (jumpTable8)[y][x] );
+            return m_resultImage.color( (jumpTable8)[y][x] );
     }
     if ( m_depth == 32 )
         return (jumpTable32)[y][x];
 
     if ( m_depth == 1 && !m_isGrayscale )
-        return m_resultTile.color((jumpTable8)[y][x/8] >> 7);
+        return m_resultImage.color((jumpTable8)[y][x/8] >> 7);
 
-    return m_resultTile.pixel( x, y );
+    return m_resultImage.pixel( x, y );
 }
 
 uint StackedTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) const
@@ -104,7 +105,7 @@ uint StackedTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) co
     qreal fY = y - iY;
 
     // Interpolation in y-direction
-    if ( ( iY + 1 ) < m_resultTile.height() ) {
+    if ( ( iY + 1 ) < m_resultImage.height() ) {
 
         QRgb bottomLeftValue  =  pixel( iX, iY + 1 );
 // #define CHEAPHIGH
@@ -124,7 +125,7 @@ uint StackedTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) co
         qreal ml_blue  = ( 1.0 - fY ) * qBlue ( topLeftValue  ) + fY * qBlue ( bottomLeftValue  );
 #endif
         // Interpolation in x-direction
-        if ( iX + 1 < m_resultTile.width() ) {
+        if ( iX + 1 < m_resultImage.width() ) {
 
             qreal fX = x - iX;
 
@@ -176,7 +177,7 @@ uint StackedTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) co
     }
     else {
         // Interpolation in x-direction
-        if ( iX + 1 < m_resultTile.width() ) {
+        if ( iX + 1 < m_resultImage.width() ) {
 
             qreal fX = x - iX;
 
@@ -227,7 +228,7 @@ StackedTile::StackedTile( TileId const &id, QImage const &resultImage, const Geo
 {
     Q_ASSERT( !tiles.isEmpty() );
 
-    if ( d->m_resultTile.isNull() ) {
+    if ( d->m_resultImage.isNull() ) {
         qWarning() << "An essential tile is missing. Please rerun the application.";
         return;
     }
@@ -292,7 +293,13 @@ QVector<QSharedPointer<Tile> > StackedTile::tiles() const
     return d->m_tiles;
 }
 
-QImage const * StackedTile::resultTile() const
+QImage const * StackedTile::resultImage() const
 {
-    return &d->m_resultTile;
+    return &d->m_resultImage;
 }
+
+GeoDataContainer const * StackedTile::resultVectorData() const
+{
+    return &d->m_resultVector;
+}
+

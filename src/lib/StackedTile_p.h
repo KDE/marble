@@ -33,7 +33,7 @@ class StackedTilePrivate
 {
  public:
     const TileId    m_id;
-    const QImage    m_resultTile;
+    const QImage    m_resultImage;
     const GeoDataContainer m_resultVector;
     const int       m_depth;
     const bool      m_isGrayscale;
