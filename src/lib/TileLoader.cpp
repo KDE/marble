@@ -20,6 +20,13 @@
 #include <QtCore/QMetaType>
 #include <QtGui/QImage>
 
+// For json parser
+#include <QtScript/QScriptEngine>
+#include <QtScript/QScriptValue>
+#include <QtScript/QScriptValueIterator>
+#include "GeoDataPlacemark.h"
+#include "GeoDataLineString.h"
+
 #include "GeoSceneTiled.h"
 #include "GeoDataContainer.h"
 #include "HttpDownloadManager.h"
@@ -58,6 +65,8 @@ QImage TileLoader::loadTileImage( TileId const & tileId, DownloadUsage const usa
     GeoSceneTiled const * const textureLayer = findTextureLayer( tileId );
     QString const fileName = tileFileName( textureLayer, tileId );
 
+    mDebug() << "-------------------" << fileName;
+
     TileStatus status = tileStatus( tileId );
     if ( status != Missing ) {
         // check if an update should be triggered
@@ -72,8 +81,6 @@ QImage TileLoader::loadTileImage( TileId const & tileId, DownloadUsage const usa
 
         QImage const image( fileName );
         if ( !image.isNull() ) {
-
-            mDebug () <<"------------------------LOADED IMAGE " << fileName << " " << tileId.toString();
             // file is there, so create and return a tile object in any case
             return image;
         }
@@ -86,7 +93,6 @@ QImage TileLoader::loadTileImage( TileId const & tileId, DownloadUsage const usa
 
     triggerDownload( tileId, usage );
 
-    mDebug () <<"------------------------REPLACEMENT IMAGE " << fileName << " " << tileId.toString();
     return replacementTile;
 }
 
@@ -94,7 +100,9 @@ QImage TileLoader::loadTileImage( TileId const & tileId, DownloadUsage const usa
 GeoDataContainer TileLoader::loadTileVectorData( TileId const & tileId, DownloadUsage const usage, QString const &format )
 {
     GeoSceneTiled const * const textureLayer = findTextureLayer( tileId );
-    QString const fileName = tileFileName( textureLayer, tileId );
+
+    //QString const fileName = tileFileName( textureLayer, tileId );
+    QString const fileName = "/home/ander/geojsonA.js";
 
     TileStatus status = tileStatus( tileId );
     if ( status != Missing ) {
@@ -108,26 +116,83 @@ GeoDataContainer TileLoader::loadTileVectorData( TileId const & tileId, Download
             triggerDownload( tileId, usage );
         }
 
-        QFile const file( fileName );
+        QFile file ( fileName );
         if ( file.exists() ) {
 
-            mDebug () <<"------------------------LOADED VECTORDATA " << fileName << " " << tileId.toString();
-            // file is there, so create and return a tile object in any case
-            GeoDataContainer *temp = new GeoDataContainer();
-            return *temp;
+            // Open the file and read its content
+            file.open(QIODevice::ReadOnly);
+            QByteArray result = file.readAll();
+            file.close();
+
+            // json parsing engine
+            QScriptValue data;
+            QScriptEngine engine;
+
+            // File is ready, so parse and return the vector data in any case
+            GeoDataContainer *vectordata = new GeoDataContainer();
+
+            if ( !engine.canEvaluate( "(" + result + ")" ) ){
+                mDebug() << "TileLoader::loadTileVectorData Cant' evaluate downloaded js file";
+                return *vectordata;
+            }
+
+            data = engine.evaluate( "(" + result + ")" );
+
+            // Global data (even if it is at the end of the json response
+            // it is posible to read it now)
+            QStringList coors = data.property( "bbox" ).toString().split(",");
+
+            GeoDataPlacemark *placemark = new GeoDataPlacemark();
+            GeoDataLineString *polyline = new GeoDataLineString();
+
+            for (int x = 0; x < coors.size()-1;)
+                polyline->append( GeoDataCoordinates( coors.at(x++).toFloat(), coors.at(x++).toFloat() ) );
+
+            // All downloaded placemarks will be features, so we should iterate
+            // on features
+//            if (data.property( "features" ).isArray()){
+
+//                QScriptValueIterator iterator( data.property( "features" ) );
+
+//                // Add items to the list
+//                while ( iterator.hasNext() ) {
+//                    iterator.next();
+
+//                    mDebug() << "------------------------" << iterator.value().property( "type" ).toString();
+
+//                    QScriptValueIterator it (iterator.value().property( "properties" ));
+
+
+//                    mDebug() << "------------------------Properties";
+//                    while ( it.hasNext() ) {
+//                        it.next();
+
+//                        mDebug() <<  it.name() << it.value().toString();
+//                    }
+
+//                                        mDebug() << "------------------------Coordinates";
+//                    if ( iterator.value().property( "coordinates" ).isArray() ){
+
+//                        QScriptValueIterator it (iterator.value().property( "coordinates" ));
+
+//                        while ( it.hasNext() ) {
+//                            it.next();
+
+//                            mDebug() << it.value().toString();
+//                        }
+//                    }
+//                }
+//            }
+            placemark->setGeometry( polyline );
+            vectordata->append( placemark );
+            return *vectordata;
         }
     }
 
-    // tile was not locally available => trigger download and look for tiles in other levels
-    // for scaling
-    QImage replacementTile = scaledLowerLevelTile( tileId );
-    Q_ASSERT( !replacementTile.isNull() );
-
+    // tile was not locally available => trigger download
     triggerDownload( tileId, usage );
 
-    mDebug () <<"------------------------REPLACEMENT VECTORDATA " << fileName << " " << tileId.toString();
-    GeoDataContainer *temp = new GeoDataContainer();
-    return *temp;
+    return * new GeoDataContainer();
 }
 
 // This method triggers a download of the given tile (without checking

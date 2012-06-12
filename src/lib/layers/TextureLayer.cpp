@@ -128,6 +128,9 @@ void TextureLayer::Private::updateTextureLayers()
 
 void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage, const QString &format )
 {
+    if (tileImage.isNull())
+        mDebug()<< "null";
+
     if ( tileImage.isNull() )
         return; // keep tiles in cache to improve performance
 

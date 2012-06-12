@@ -16,6 +16,7 @@ Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 */
 
 #include "VectorTile.h"
+#include "MarbleDebug.h"
 
 #include <limits>
 
@@ -28,6 +29,9 @@ VectorTile::VectorTile( TileId const & tileId, QImage const & image, QString con
     : Tile( tileId, format, blending ),
     m_image( image )
 {
+    if (image.isNull())
+        mDebug() << "null";
+
     Q_ASSERT( !image.isNull() );
 }
 

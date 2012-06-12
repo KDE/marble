@@ -16,6 +16,7 @@ Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 */
 
 #include "TextureTile.h"
+#include "MarbleDebug.h"
 
 #include <limits>
 
