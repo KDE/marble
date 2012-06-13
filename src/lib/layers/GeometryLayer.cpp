@@ -7,6 +7,7 @@
 //
 // Copyright 2008-2009      Patrick Spendrin  <ps_ml@gmx.de>
 // Copyright 2010           Thibaut Gridel <tgridel@free.fr>
+// Copyright 2011-2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "GeometryLayer.h"
@@ -39,7 +40,6 @@
 #include "TileId.h"
 
 // Qt
-#include <QtCore/QTime>
 #include <QtCore/QAbstractItemModel>
 
 namespace Marble
@@ -66,10 +66,8 @@ public:
     void createGraphicsItemFromGeometry( const GeoDataGeometry *object, const GeoDataPlacemark *placemark );
     void createGraphicsItemFromOverlay( const GeoDataOverlay *overlay );
 
-    QBrush m_currentBrush;
-    QPen m_currentPen;
-    GeoGraphicsScene m_scene;
     const QAbstractItemModel *const m_model;
+    GeoGraphicsScene m_scene;
 };
 
 GeometryLayerPrivate::GeometryLayerPrivate( const QAbstractItemModel *model )
