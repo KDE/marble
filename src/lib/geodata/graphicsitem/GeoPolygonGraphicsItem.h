@@ -11,12 +11,15 @@
 #ifndef MARBLE_GEOPOLYGONGRAPHICSITEM_H
 #define MARBLE_GEOPOLYGONGRAPHICSITEM_H
 
-#include "GeoDataPolygon.h"
 #include "GeoGraphicsItem.h"
 #include "marble_export.h"
 
 namespace Marble
 {
+
+class GeoDataLinearRing;
+class GeoDataPolygon;
+
 class MARBLE_EXPORT GeoPolygonGraphicsItem : public GeoGraphicsItem
 {
 public:

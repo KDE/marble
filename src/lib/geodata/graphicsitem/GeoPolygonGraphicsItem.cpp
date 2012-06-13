@@ -9,6 +9,9 @@
 //
 
 #include "GeoPolygonGraphicsItem.h"
+
+#include "GeoDataLinearRing.h"
+#include "GeoDataPolygon.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "GeoDataStyle.h"

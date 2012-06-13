@@ -9,6 +9,8 @@
 //
 
 #include "GeoLineStringGraphicsItem.h"
+
+#include "GeoDataLineString.h"
 #include "GeoDataLineStyle.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
