@@ -60,19 +60,6 @@ GeoDataCoordinates GeoPolygonGraphicsItem::coordinate() const
     }
 }
 
-void GeoPolygonGraphicsItem::coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const
-{
-    GeoDataCoordinates coords;
-    if( m_polygon ) {
-        coords = m_polygon->latLonAltBox().center();
-    } else if ( m_ring ) {
-        coords = m_ring->latLonAltBox().center();
-    }
-    longitude = coords.longitude();
-    latitude = coords.latitude();
-    altitude = coords.altitude();
-}
-
 GeoDataLatLonAltBox& GeoPolygonGraphicsItem::latLonAltBox() const
 {
     if( m_polygon ) {

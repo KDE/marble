@@ -52,18 +52,6 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     virtual GeoDataCoordinates coordinate() const;
 
     /**
-     * Return the coordinate of the item as @p longitude
-     * and @p latitude.
-     */
-    virtual void coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const;
-
-    /**
-     * Set the coordinate of the item in @p longitude and
-     * @p latitude.
-     */
-    void setCoordinate( qreal longitude, qreal latitude, qreal altitude = 0 );
-
-    /**
      * Set the coordinate of the item with an @p GeoDataPoint.
      */
     void setCoordinate( const GeoDataCoordinates &point );

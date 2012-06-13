@@ -30,7 +30,6 @@ public:
     void setLinearRing( const GeoDataLinearRing* ring );
 
     virtual GeoDataCoordinates coordinate() const;
-    virtual void coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const;
 
     virtual GeoDataLatLonAltBox& latLonAltBox() const;
 

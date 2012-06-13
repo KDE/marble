@@ -35,14 +35,6 @@ GeoDataCoordinates GeoLineStringGraphicsItem::coordinate() const
     return m_lineString->latLonAltBox().center();
 }
 
-void GeoLineStringGraphicsItem::coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const
-{
-    GeoDataCoordinates coords = m_lineString->latLonAltBox().center();
-    longitude = coords.longitude();
-    latitude = coords.latitude();
-    altitude = coords.altitude();
-}
-
 GeoDataLatLonAltBox& GeoLineStringGraphicsItem::latLonAltBox() const
 {
     return m_lineString->latLonAltBox();
