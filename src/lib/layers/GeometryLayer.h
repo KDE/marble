@@ -7,6 +7,7 @@
 //
 // Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>
 // Copyright 2010      Thibaut Gridel  <tgridel@free.fr>
+// Copyright 2011-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_GEOMETRYLAYER_H
@@ -16,14 +17,10 @@
 #include "LayerInterface.h"
 #include "GeoDataFeature.h"
 
-// Qt
-#include <QVector>
-
 class QAbstractItemModel;
 
 namespace Marble
 {
-class GeoDataDocument;
 class GeoPainter;
 class ViewportParams;
 class GeometryLayerPrivate;
@@ -53,8 +50,6 @@ Q_SIGNALS:
 
 private:
     GeometryLayerPrivate *d;
-    
-    static QVector< int > s_weightfilter;
     
     static void initializeDefaultValues();
 };
