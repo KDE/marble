@@ -10,6 +10,7 @@
 
 #include "GeoTrackGraphicsItem.h"
 
+#include "GeoDataLineString.h"
 #include "GeoDataTrack.h"
 #include "MarbleDebug.h"
 
