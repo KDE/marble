@@ -28,7 +28,6 @@ public:
     void setLineString( const GeoDataLineString* lineString );
 
     virtual GeoDataCoordinates coordinate() const;
-    virtual void coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const;
 
     virtual GeoDataLatLonAltBox& latLonAltBox() const;
 

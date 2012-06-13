@@ -41,20 +41,6 @@ GeoDataCoordinates GeoGraphicsItem::coordinate() const
     return p()->m_coordinate;
 }
 
-void GeoGraphicsItem::coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const
-{
-    longitude = p()->m_coordinate.longitude();
-    latitude = p()->m_coordinate.latitude();
-    altitude = p()->m_coordinate.altitude();
-}
-
-void GeoGraphicsItem::setCoordinate( qreal longitude, qreal latitude, qreal altitude )
-{
-    p()->m_coordinate.setLongitude( longitude );
-    p()->m_coordinate.setLatitude( latitude );
-    p()->m_coordinate.setAltitude( altitude );
-}
-
 void GeoGraphicsItem::setCoordinate( const GeoDataCoordinates &point )
 {
     p()->m_coordinate = point;
