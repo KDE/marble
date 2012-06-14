@@ -49,6 +49,8 @@ public:
     int globalWidth() const;
     int globalHeight() const;
 
+    const StackedTile getTile();
+
 private:
     // method for fast integer calculation
     void nextTile( int& posx, int& posy );
@@ -84,6 +86,7 @@ private:
     qreal const      m_normGlobalHeight;
 
     const StackedTile *m_tile;
+
     int m_deltaLevel;
 
     // Coordinate transformations:

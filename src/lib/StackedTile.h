@@ -118,7 +118,7 @@ class StackedTile
     uint pixelF( qreal x, qreal y, const QRgb& pixel ) const; 
 
  private:
-    Q_DISABLE_COPY( StackedTile )
+    // FIXME ARREGLAR Q_DISABLE_COPY( StackedTile )
 
     StackedTilePrivate *d;
 };

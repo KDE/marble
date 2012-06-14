@@ -78,6 +78,8 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter,
 
         m_radius = viewport->radius();
     }
+
+    mDebug() << "------------------------------PINTO2 TileScaling";
 }
 
 void TileScalingTextureMapper::setRepaintNeeded()
@@ -201,4 +203,6 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
     }
 
     m_tileLoader->cleanupTilehash();
+
+    mDebug() << "------------------------------PINTO1 TileScaling";
 }

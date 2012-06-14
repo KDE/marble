@@ -107,7 +107,10 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
     const bool withConversion = tiles.count() > 1 || m_showSunShading || m_showTileId;
     foreach ( const QSharedPointer<Tile> &tile, tiles ) {
 
-        mDebug() <<"--------------------------------CREATETILE type: "<< tile->nodeType() << " format: " << tile->format()->toLower() <<", FIX VECTORRESULT";
+        // Image blending. If there are several images in the same tile (like clouds
+        // or hillshading images over the map) blend them all into only one image
+
+        if (!tile->image()->isNull()){
 
             const Blending *const blending = tile->blending();
             if ( blending ) {
@@ -133,6 +136,15 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
             if ( m_showTileId ) {
                 paintTileId( &resultImage, id );
             }
+        }
+
+        // Geometry appending. If there are geometries append them all to the
+        // GeoDataContainer
+
+        if (tile->vectorData()){
+            GeoDataContainer * temp = new GeoDataContainer( *tile->vectorData() );
+            resultVector->append(temp);
+        }
     }
 
     return new StackedTile( id, resultImage, *resultVector, tiles );
@@ -165,9 +177,9 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
                 const GeoDataContainer tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, format );
 
-                mDebug() << "--------------------------------LOADEDVECTORDATA " << tileVectordata.featureList().size();
-
                 QSharedPointer<Tile> tile( new VectorTile( tileId, tileImage, tileVectordata, format, blending ) );
+
+                mDebug() << "--------------------------------LOADEDVECTORDATA " << tileVectordata.featureList().size();
                 tiles.append( tile );
 
         }

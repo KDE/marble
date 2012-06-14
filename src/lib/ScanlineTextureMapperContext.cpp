@@ -521,3 +521,7 @@ void ScanlineTextureMapperContext::nextTile( qreal &posX, qreal &posY )
     m_toTileCoordinatesLat = (qreal)(0.5 * m_globalHeight - m_tilePosY);
     posY = lat - m_tilePosY;
 }
+
+const StackedTile ScanlineTextureMapperContext::getTile(){
+    return *m_tile;
+}
