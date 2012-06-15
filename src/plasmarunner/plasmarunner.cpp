@@ -24,6 +24,7 @@
 #include <KProcess>
 #include <KIcon>
 #include <KLocale>
+#include <KGlobal>
 
 
 namespace Marble
@@ -35,6 +36,11 @@ static const int minContainsMatchLength = 3;
 PlasmaRunner::PlasmaRunner(QObject *parent, const QVariantList &args)
   : AbstractRunner(parent, args)
 {
+    KLocale* locale = KGlobal::locale();
+    locale->insertCatalog(QLatin1String("marble"));
+    locale->insertCatalog(QLatin1String("marble_qt"));
+    locale->insertCatalog(QLatin1String("plasma_runner_marblerunner"));
+
     setIgnoredTypes(Plasma::RunnerContext::NetworkLocation |
                     Plasma::RunnerContext::FileSystem |
                     Plasma::RunnerContext::Help);
