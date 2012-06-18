@@ -70,11 +70,11 @@ public:
     
     QString categoryIconUrl() const;
     
-    void setCategoryIconUrl( const QString url );
+    void setCategoryIconUrl( const QString& url );
     
     QString categoryLargeIconUrl() const;
     
-    void setCategoryLargeIconUrl( const QString url );
+    void setCategoryLargeIconUrl( const QString& url );
  
 private:
     QString m_name;
