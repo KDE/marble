@@ -32,10 +32,6 @@ public slots:
 
 private:
 
-    virtual GeoDocument* createDocument() const;
-
-    GeoDocument* m_document;
-
 };
 
 }

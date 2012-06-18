@@ -73,7 +73,6 @@ void MercatorScanlineTextureMapper::mapTexture( GeoPainter *painter,
                                                 const QRect &dirtyRect,
                                                 TextureColorizer *texColorizer )
 {
-    mDebug() << "------------------------------PINTO1 Mercator";
 
     if ( m_canvasImage.size() != viewport->size() || m_radius != viewport->radius() ) {
         const QImage::Format optimalFormat = ScanlineTextureMapperContext::optimalCanvasImageFormat( viewport );
@@ -111,7 +110,6 @@ void MercatorScanlineTextureMapper::setRepaintNeeded()
 
 void MercatorScanlineTextureMapper::mapTexture( const ViewportParams *viewport, MapQuality mapQuality )
 {
-    mDebug() << "------------------------------PINTO2 Mercator";
 
     // Reset backend
     m_tileLoader->resetTilehash();
@@ -263,7 +261,5 @@ void MercatorScanlineTextureMapper::RenderJob::run()
             ++y;
         }
     }
-
-// TODO BUSCAR PINTOR
 
 }

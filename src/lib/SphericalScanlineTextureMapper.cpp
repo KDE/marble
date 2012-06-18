@@ -103,8 +103,6 @@ void SphericalScanlineTextureMapper::mapTexture( GeoPainter *painter,
                 2 * radius, 2 * radius);
     rect = rect.intersect( dirtyRect );
     painter->drawImage( rect, m_canvasImage, rect );
-
-    mDebug() << "------------------------------PINTO2 Spherical";
 }
 
 void SphericalScanlineTextureMapper::setRepaintNeeded()
@@ -142,8 +140,6 @@ void SphericalScanlineTextureMapper::mapTexture( const ViewportParams *viewport,
     m_threadPool.waitForDone();
 
     m_tileLoader->cleanupTilehash();
-
-        mDebug() << "------------------------------PINTO1 Spherical";
 }
 
 void SphericalScanlineTextureMapper::RenderJob::run()
