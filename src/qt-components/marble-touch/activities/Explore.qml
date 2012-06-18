@@ -130,6 +130,7 @@ Page {
             }
 
             function updateDetails() {
+                venueDetails.venueId = identifier
                 venueDetails.name = name
                 venueDetails.category = category
                 venueDetails.address = address
@@ -143,8 +144,9 @@ Page {
                 anchors.fill: parent
                 onClicked: {
                     if( container.focus == true ) {
-                        venueDetails.visible = true
                         updateDetails()
+                        listModel.retrieve()
+                        venueDetails.visible = true
                     } else {
                         container.focus = true
                     }
@@ -156,17 +158,16 @@ Page {
     Rectangle {
         id: venueDetails
         
-        anchors.top: exploreActivityPage.horizontal ? exploreActivityPage.top : null
-        anchors.bottom: exploreActivityPage.horizontal ? null : exploreActivityPage.bottom
-        anchors.left: exploreActivityPage.left
-        width: exploreActivityPage.horizontal ? (visible ? exploreActivityPage.width / 4 : 0) : exploreActivityPage.width
-        height: exploreActivityPage.horizontal ? exploreActivityPage.height : (visible ? exploreActivityPage.width / 2 : 0)
+        anchors.bottom: exploreActivityPage.bottom
+        width: exploreActivityPage.horizontal ? exploreActivityPage.width / 4 : exploreActivityPage.width
+        height: exploreActivityPage.horizontal ? exploreActivityPage.height : exploreActivityPage.height / 3
         visible: false
         radius: 10
         color: "#f7f7f7"
         border.width: 2
         border.color: "darkgray"
         
+        property string venueId
         property string name
         property string category
         property string address
@@ -226,6 +227,62 @@ Page {
             text: venueDetails.country
             anchors.top: detailCity.bottom
             anchors.left: detailName.left
+        }
+        
+        ListView {
+            id: photoView
+            width: exploreActivityPage.horizontal ? venueDetails.width : 64
+            height: exploreActivityPage.horizontal ? 64 : venueDetails.height
+            anchors.bottom: venueDetails.bottom
+            anchors.right:venueDetails.right
+            spacing: 2
+            model: listModel
+            orientation: exploreActivityPage.horizontal ? ListView.Horizontal : ListView.Vertical 
+            clip: true
+            delegate: Image {
+                width: 64; height: 64
+                fillMode: Image.PreserveAspectFit
+                source: url
+                smooth: true
+            }
+        }
+        
+        Item {
+            id: modelData
+            property string clientId: "YPRWSYFW1RVL4PJQ2XS5G14RTOGTHOKZVHC1EP5KCCCYQPZF"
+            property string clientSecret: "5L2JDCAYQCEJWY5FNDU4A1RWATE4E5FIIXXRM41YBTFSERUH"
+            property string source: "https://api.foursquare.com/v2/venues/" + venueDetails.venueId + "/photos?v=20120617&group=venue&limit=5&client_id=" + clientId + "&client_secret=" + clientSecret
+            
+            ListModel {
+                id: listModel
+                property string oldId
+                
+                function retrieve() {
+                    if( oldId == venueDetails.venueId ) {
+                        return
+                    }
+                    
+                    var xhr = new XMLHttpRequest;
+                    xhr.open( "GET", modelData.source );
+                    xhr.onreadystatechange = function() {
+                        if( xhr.readyState === XMLHttpRequest.DONE ) {
+                            listModel.oldId = venueDetails.venueId
+                            listModel.clear()
+                            var data = JSON.parse( xhr.responseText );
+                            for( var item in data.response.photos.items ) {
+                                var photo = data.response.photos.items[ item ];
+                                listModel.append({
+                                    url: photo.prefix + "original" + photo.suffix,
+                                    width: photo.width,
+                                    height: photo.height
+                                });
+                            }
+                        }
+                    }
+                    
+                    xhr.send();
+                }
+            }
         }
         
         Behavior on width { NumberAnimation { duration: 150 } }

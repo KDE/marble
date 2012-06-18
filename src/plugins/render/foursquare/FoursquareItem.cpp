@@ -55,10 +55,12 @@ QString FoursquareItem::name() const
 
 void FoursquareItem::setName(const QString& name)
 {
-    m_name = name;
-    QFontMetrics const fontMetrics( s_font );
-    setSize( QSizeF( fontMetrics.width( m_name ) + 10, fontMetrics.height() + 10 ) );
-    emit nameChanged();
+    if( name != m_name ) {
+        m_name = name;
+        QFontMetrics const fontMetrics( s_font );
+        setSize( QSizeF( fontMetrics.width( m_name ) + 10, fontMetrics.height() + 10 ) );
+        emit nameChanged();
+    }
 }
 
 QString FoursquareItem::category() const
@@ -68,8 +70,10 @@ QString FoursquareItem::category() const
 
 void FoursquareItem::setCategory(const QString& category)
 {
-    m_category = category;
-    emit categoryChanged();
+    if( category != m_category ) {
+        m_category = category;
+        emit categoryChanged();
+    }
 }
 
 QString FoursquareItem::address() const
@@ -79,8 +83,10 @@ QString FoursquareItem::address() const
 
 void FoursquareItem::setAddress(const QString& address)
 {
-    m_address = address;
-    emit addressChanged();
+    if( address != m_address ) {
+        m_address = address;
+        emit addressChanged();
+    }
 }
 
 QString FoursquareItem::city() const
@@ -89,8 +95,10 @@ QString FoursquareItem::city() const
 }
 void FoursquareItem::setCity(const QString& city)
 {
-    m_city = city;
-    emit cityChanged();
+    if( city != m_city ) {
+        m_city = city;
+        emit cityChanged();
+    }
 }
 
 QString FoursquareItem::country() const
@@ -100,8 +108,10 @@ QString FoursquareItem::country() const
 
 void FoursquareItem::setCountry(const QString& country)
 {
-    m_country = country;
-    emit countryChanged();
+    if( country != m_country ) {
+        m_country = country;
+        emit countryChanged();
+    }
 }
 
 int FoursquareItem::usersCount() const
@@ -111,8 +121,10 @@ int FoursquareItem::usersCount() const
 
 void FoursquareItem::setUsersCount(const int count)
 {
-    m_usersCount = count;
-    emit usersCountChanged();
+    if( count != m_usersCount ) {
+        m_usersCount = count;
+        emit usersCountChanged();
+    }
 }
 
 QString FoursquareItem::categoryIconUrl() const
@@ -120,10 +132,12 @@ QString FoursquareItem::categoryIconUrl() const
     return m_categoryIconUrl;
 }
 
-void FoursquareItem::setCategoryIconUrl(const QString url)
+void FoursquareItem::setCategoryIconUrl(const QString& url)
 {
-    m_categoryIconUrl = url;
-    emit categoryIconUrlChanged();
+    if( url != m_categoryIconUrl ) {
+        m_categoryIconUrl = url;
+        emit categoryIconUrlChanged();
+    }
 }
 
 QString FoursquareItem::categoryLargeIconUrl() const
@@ -131,10 +145,12 @@ QString FoursquareItem::categoryLargeIconUrl() const
     return m_categoryLargeIconUrl;
 }
 
-void FoursquareItem::setCategoryLargeIconUrl(const QString url)
+void FoursquareItem::setCategoryLargeIconUrl(const QString& url)
 {
-    m_categoryLargeIconUrl = url;
-    emit categoryLargeIconUrlChanged();
+    if( url != m_categoryLargeIconUrl ) {
+        m_categoryLargeIconUrl = url;
+        emit categoryLargeIconUrlChanged();
+    }
 }
 
 void FoursquareItem::paint( QPainter* painter )
