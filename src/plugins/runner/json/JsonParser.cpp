@@ -48,6 +48,14 @@ bool JsonParser::read( QIODevice* device )
 
     QByteArray stream = device->readAll();
 
+    mDebug() << "------------------------PARSING";
+
+//    // Fixes for test parsing
+//    stream.replace("onKothicDataResponse(","");
+//    QList<QByteArray> streams = stream.split(",\"granularity\":10000");
+//    stream = streams.at(0);
+//    stream.append("}");
+
     // For json add '(' and ')' to the stream
     if ( !m_engine.canEvaluate( "(" + stream + ")" ) ) {
         return false;
@@ -55,7 +63,6 @@ bool JsonParser::read( QIODevice* device )
 
     // Start parsing
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
-    GeoDataLinearRing *ring = new GeoDataLinearRing();
 
     float east;
     float south;
@@ -71,9 +78,9 @@ bool JsonParser::read( QIODevice* device )
         QStringList coors = m_data.property( "bbox" ).toString().split(",");
 
         // Create a bounding box linearRing
-        east = coors.at(0).toFloat();
+        west  = coors.at(0).toFloat();
+        east  = coors.at(2).toFloat();
         south = coors.at(1).toFloat();
-        west = coors.at(2).toFloat();
         north = coors.at(3).toFloat();
 
         GeoDataLinearRing *ring = new GeoDataLinearRing();
@@ -122,6 +129,9 @@ bool JsonParser::read( QIODevice* device )
             }
 
             mDebug() << "------------------------Coordinates";
+
+            bool g = true;
+
             if ( iterator.value().property( "coordinates" ).isArray() ){
 
                 QScriptValueIterator it (iterator.value().property( "coordinates" ));
@@ -129,40 +139,41 @@ bool JsonParser::read( QIODevice* device )
                 while ( it.hasNext() ) {
                     it.next();
 
+                    g = true;
+
                     QStringList coors = it.value().toString().split(",");
-                    for (int x = 0; x < coors.size()-1 && coors.size()>1 ;){
+                    for (int x = 0; x < coors.size()-1 && coors.size()>1 && g ;){
+
+                        mDebug() << "Loop" << x;
+
+                        float auxX = ( coors.at(x++).toFloat() / 10000)*(east-west)   + west;
+                        float auxY = ( coors.at(x++).toFloat() / 10000)*(north-south) + south;
+
 
                             if (iterator.value().property( "type" ).toString().toLower() == "polygon"){
 
                                 GeoDataLinearRing ring = ((GeoDataPolygon*)geom)->outerBoundary();
-
-                                ring.append( GeoDataCoordinates(
-                                                 ( coors.at(x++).toFloat() / 10000) *(east-west) + west,
-                                                 ( coors.at(x++).toFloat() / 10000 )*(north-south) + south,
-                                                 0, GeoDataCoordinates::Degree ) );
+                                ring.append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
 
                                 ((GeoDataPolygon*)geom)->setOuterBoundary(ring);
                             }
                             else if (iterator.value().property( "type" ).toString().toLower() == "linestring")
-                                ((GeoDataLineString*) geom)->append( GeoDataCoordinates(
-                                                                     ( coors.at(x++).toFloat() / 10000) *(east-west) + west,
-                                                                     ( coors.at(x++).toFloat() / 10000 )*(north-south) + south,
-                                                                     0, GeoDataCoordinates::Degree ) );
+                                ((GeoDataLineString*) geom)->append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
                             else if (iterator.value().property( "type" ).toString().toLower() == "point")
                                 geom = new GeoDataPoint(
-                                    GeoDataCoordinates(
-                                        ( coors.at(x++).toFloat() / 10000) *(east-west) + west,
-                                        ( coors.at(x++).toFloat() / 10000 )*(north-south) + south,
-                                        0, GeoDataCoordinates::Degree ) );
-
+                                    GeoDataCoordinates(auxX,auxY,0, GeoDataCoordinates::Degree ) );
+                            else
+                                g = false;
                     }
                 }
             }
 
+            if (g){
             placemark = new GeoDataPlacemark();
             placemark->setGeometry( geom );
             placemark->setVisible( true );
             m_document->append( placemark );
+            }
         }
     }
 

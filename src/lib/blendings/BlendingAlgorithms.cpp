@@ -316,10 +316,7 @@ void CloudsBlending::blend( QImage * const bottom, Tile const * const top ) cons
                                          ( int )( bottomBlue + ( 255 - bottomBlue ) * c )));
         }
     }
-
-    mDebug() << "--------------------------------CLOUDBLENDING" << top->image()->size();
     QString type = top->nodeType();
-    mDebug() << "--------------------------------CLOUDBLENDING" << type;
 
 }
 

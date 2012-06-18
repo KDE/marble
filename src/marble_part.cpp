@@ -231,8 +231,6 @@ bool MarblePart::openFile()
         const QString filter = QString( "%1|%2" ).arg( fileExtensions.join( " " ) ).arg( plugin->fileFormatDescription() );
         filters << filter;
 
-        mDebug() << "PASOOOOOOOOOOOOOOOOOOOOOOOOOO";
-
         allFileExtensions << fileExtensions;
     }
 
