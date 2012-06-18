@@ -86,15 +86,24 @@ void FoursquareModel::parseFile( const QByteArray& file )
             iterator.next();
             QString id = iterator.value().property( "id" ).toString();
             QString name = iterator.value().property( "name" ).toString();
+            QString category = iterator.value().property( "categories" ).property( 0 ).property( "name" ).toString();
+            QString address = iterator.value().property( "location" ).property( "address" ).toString();
+            QString city = iterator.value().property( "location" ).property( "city" ).toString();
+            QString country = iterator.value().property( "location" ).property( "country" ).toString();
             double latitude = iterator.value().property( "location" ).property( "lat" ).toString().toDouble();
             double longitude = iterator.value().property( "location" ).property( "lng" ).toString().toDouble();
             int usersCount = iterator.value().property( "stats" ).property( "usersCount" ).toInteger();
             
             QScriptValue categoryIcon = iterator.value().property( "categories" ).property( 0 ).property( "icon" );
             QString iconUrl;
+            QString largeIconUrl;
             if ( categoryIcon.isValid() ) {
                 iconUrl = categoryIcon.property( "prefix" ).toString()
                         + "32" // That's the icon size hardcoded
+                        + categoryIcon.property( "name" ).toString();
+                        
+                largeIconUrl = categoryIcon.property( "prefix" ).toString()
+                        + "64" // Larger icon
                         + categoryIcon.property( "name" ).toString();
             }
 
@@ -105,8 +114,13 @@ void FoursquareModel::parseFile( const QByteArray& file )
                 item->setCoordinate( coordinates );
                 item->setTarget( "earth" );
                 item->setName( name );
+                item->setCategory( category );
+                item->setAddress( address );
+                item->setCity( city );
+                item->setCountry( country );
                 item->setUsersCount( usersCount );
                 item->setCategoryIconUrl( iconUrl );
+                item->setCategoryLargeIconUrl( largeIconUrl );
                 
                 items << item;
             }
