@@ -31,7 +31,7 @@ Page {
 
         function embedMarbleWidget() {
             marbleWidget.parent = mapContainer
-            settings.projection = "Spherical"
+            settings.projection = "Mercator"
             var plugins = settings.defaultRenderPlugins
             plugins.push( "foursquare" )
             
@@ -129,10 +129,105 @@ Page {
                 onFocusChanged: sticky = focus
             }
 
+            function updateDetails() {
+                venueDetails.name = name
+                venueDetails.category = category
+                venueDetails.address = address
+                venueDetails.city = city
+                venueDetails.country = country
+                venueDetails.usersCount = usersCount
+                venueDetails.largeIcon = categoryLargeIconUrl
+            }
+            
             MouseArea {
                 anchors.fill: parent
-                onClicked: container.focus = true
+                onClicked: {
+                    if( container.focus == true ) {
+                        venueDetails.visible = true
+                        updateDetails()
+                    } else {
+                        container.focus = true
+                    }
+                }
             }
         }
+    }
+
+    Rectangle {
+        id: venueDetails
+        
+        anchors.top: exploreActivityPage.horizontal ? exploreActivityPage.top : null
+        anchors.bottom: exploreActivityPage.horizontal ? null : exploreActivityPage.bottom
+        anchors.left: exploreActivityPage.left
+        width: exploreActivityPage.horizontal ? (visible ? exploreActivityPage.width / 4 : 0) : exploreActivityPage.width
+        height: exploreActivityPage.horizontal ? exploreActivityPage.height : (visible ? exploreActivityPage.width / 2 : 0)
+        visible: false
+        radius: 10
+        color: "#f7f7f7"
+        border.width: 2
+        border.color: "darkgray"
+        
+        property string name
+        property string category
+        property string address
+        property string city
+        property string country
+        property string usersCount
+        property string largeIcon
+        
+        Image {
+            id: detailIcon
+            source: venueDetails.largeIcon
+            anchors.top: venueDetails.top
+            anchors.topMargin: 10
+        }
+        
+        Text {
+            id: detailName
+            text: venueDetails.name
+            anchors.top: detailIcon.bottom
+            anchors.left: venueDetails.left
+            anchors.topMargin: 5
+            anchors.leftMargin: 7
+        }
+        
+        Text {
+            id: detailCategory
+            text: venueDetails.category
+            anchors.top: detailName.bottom
+            anchors.left: detailName.left
+        }
+        
+        Text {
+            id: detailAddressTitle
+            text: qsTr( "Address" )
+            anchors.top: detailCategory.bottom
+            anchors.left: detailName.left
+            anchors.topMargin: 5
+            font.bold: true
+        }
+        
+        Text {
+            id: detailAddress
+            text: venueDetails.address
+            anchors.top: detailAddressTitle.bottom
+            anchors.left: detailName.left
+        }
+        
+        Text {
+            id: detailCity
+            text: venueDetails.city
+            anchors.top: detailAddress.bottom
+            anchors.left: detailName.left
+        }
+        
+        Text {
+            id: detailCountry
+            text: venueDetails.country
+            anchors.top: detailCity.bottom
+            anchors.left: detailName.left
+        }
+        
+        Behavior on width { NumberAnimation { duration: 150 } }
     }
 }

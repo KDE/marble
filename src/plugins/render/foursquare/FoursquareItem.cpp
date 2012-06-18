@@ -61,6 +61,49 @@ void FoursquareItem::setName(const QString& name)
     emit nameChanged();
 }
 
+QString FoursquareItem::category() const
+{
+    return m_category;
+}
+
+void FoursquareItem::setCategory(const QString& category)
+{
+    m_category = category;
+    emit categoryChanged();
+}
+
+QString FoursquareItem::address() const
+{
+    return m_address;
+}
+
+void FoursquareItem::setAddress(const QString& address)
+{
+    m_address = address;
+    emit addressChanged();
+}
+
+QString FoursquareItem::city() const
+{
+    return m_city;
+}
+void FoursquareItem::setCity(const QString& city)
+{
+    m_city = city;
+    emit cityChanged();
+}
+
+QString FoursquareItem::country() const
+{
+    return m_country;
+}
+
+void FoursquareItem::setCountry(const QString& country)
+{
+    m_country = country;
+    emit countryChanged();
+}
+
 int FoursquareItem::usersCount() const
 {
     return m_usersCount;
@@ -81,6 +124,17 @@ void FoursquareItem::setCategoryIconUrl(const QString url)
 {
     m_categoryIconUrl = url;
     emit categoryIconUrlChanged();
+}
+
+QString FoursquareItem::categoryLargeIconUrl() const
+{
+    return m_categoryLargeIconUrl;
+}
+
+void FoursquareItem::setCategoryLargeIconUrl(const QString url)
+{
+    m_categoryLargeIconUrl = url;
+    emit categoryLargeIconUrlChanged();
 }
 
 void FoursquareItem::paint( QPainter* painter )
