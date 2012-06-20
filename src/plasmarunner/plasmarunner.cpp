@@ -41,6 +41,9 @@ PlasmaRunner::PlasmaRunner(QObject *parent, const QVariantList &args)
     KLocale* locale = KGlobal::locale();
     locale->insertCatalog(QLatin1String("marble"));
     locale->insertCatalog(QLatin1String("marble_qt"));
+    // load catalog manually, as it does not (yet) match the name of the plugin lib
+    // TODO: fix catalog name after branching of 1.4
+    locale->insertCatalog(QLatin1String("plasma_runner_marblerunner"));
 
     setIgnoredTypes(Plasma::RunnerContext::NetworkLocation |
                     Plasma::RunnerContext::FileSystem |
