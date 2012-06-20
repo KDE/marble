@@ -58,7 +58,7 @@ class Tile
 {
  public:
     Tile( TileId const & tileId, QString const &format, const Blending * blending );
-    ~Tile();
+    virtual ~Tile();
 
 /*!
     \brief Returns a unique ID for the tile.

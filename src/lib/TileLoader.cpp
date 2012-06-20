@@ -20,12 +20,10 @@
 #include <QtCore/QMetaType>
 #include <QtGui/QImage>
 
-// For json parser
-#include <QtScript/QScriptEngine>
-#include <QtScript/QScriptValue>
-#include <QtScript/QScriptValueIterator>
-#include "GeoDataPlacemark.h"
-#include "GeoDataLineString.h"
+#include "MarbleModel.h"
+#include "MarbleRunnerManager.h"
+#include "GeoDataTreeModel.h"
+#include "QTreeView"
 
 #include "GeoSceneTiled.h"
 #include "GeoDataContainer.h"
@@ -101,8 +99,7 @@ GeoDataContainer TileLoader::loadTileVectorData( TileId const & tileId, Download
 {
     GeoSceneTiled const * const textureLayer = findTextureLayer( tileId );
 
-    //QString const fileName = tileFileName( textureLayer, tileId );
-    QString const fileName = "/home/ander/geojsonA.js";
+    QString const fileName = tileFileName( textureLayer, tileId );
 
     TileStatus status = tileStatus( tileId );
     if ( status != Missing ) {
@@ -119,72 +116,29 @@ GeoDataContainer TileLoader::loadTileVectorData( TileId const & tileId, Download
         QFile file ( fileName );
         if ( file.exists() ) {
 
-            // Open the file and read its content
-            file.open(QIODevice::ReadOnly);
-            QByteArray result = file.readAll();
-            file.close();
-
-            // json parsing engine
-            QScriptValue data;
-            QScriptEngine engine;
-
             // File is ready, so parse and return the vector data in any case
-            GeoDataContainer *vectordata = new GeoDataContainer();
+            mDebug() << "----------------------------PARSING";
 
-            if ( !engine.canEvaluate( "(" + result + ")" ) ){
-                mDebug() << "TileLoader::loadTileVectorData Cant' evaluate downloaded js file";
-                return *vectordata;
-            }
+            MarbleModel *model = new MarbleModel (this->parent());
+            MarbleRunnerManager* man = new MarbleRunnerManager( model->pluginManager() );
 
-            data = engine.evaluate( "(" + result + ")" );
+            GeoDataDocument* document = man->openFile( fileName );
+            GeoDataTreeModel* treeModel = new GeoDataTreeModel;
+            QObject::connect(this, SIGNAL(newDocumentReady(GeoDataDocument*)),treeModel, SLOT(addDocument(GeoDataDocument*)),Qt::AutoConnection);
+                if ( document ) {
 
-            // Global data (even if it is at the end of the json response
-            // it is posible to read it now)
-            QStringList coors = data.property( "bbox" ).toString().split(",");
+                emit newDocumentReady(document);
 
-            GeoDataPlacemark *placemark = new GeoDataPlacemark();
-            GeoDataLineString *polyline = new GeoDataLineString();
+                mDebug() << "-----------------------EMIT" << document->size();
 
-            for (int x = 0; x < coors.size()-1;)
-                polyline->append( GeoDataCoordinates( coors.at(x++).toFloat(), coors.at(x++).toFloat() ) );
+                QTreeView* treeView = new QTreeView;
+                treeView->setModel( treeModel );
+                treeView->show();
 
-            // All downloaded placemarks will be features, so we should iterate
-            // on features
-//            if (data.property( "features" ).isArray()){
+                }
 
-//                QScriptValueIterator iterator( data.property( "features" ) );
-
-//                // Add items to the list
-//                while ( iterator.hasNext() ) {
-//                    iterator.next();
-
-//                    mDebug() << "------------------------" << iterator.value().property( "type" ).toString();
-
-//                    QScriptValueIterator it (iterator.value().property( "properties" ));
-
-
-//                    mDebug() << "------------------------Properties";
-//                    while ( it.hasNext() ) {
-//                        it.next();
-
-//                        mDebug() <<  it.name() << it.value().toString();
-//                    }
-
-//                                        mDebug() << "------------------------Coordinates";
-//                    if ( iterator.value().property( "coordinates" ).isArray() ){
-
-//                        QScriptValueIterator it (iterator.value().property( "coordinates" ));
-
-//                        while ( it.hasNext() ) {
-//                            it.next();
-
-//                            mDebug() << it.value().toString();
-//                        }
-//                    }
-//                }
-//            }
-            placemark->setGeometry( polyline );
-            vectordata->append( placemark );
+                // Empty data
+            GeoDataContainer * vectordata = new GeoDataContainer();
             return *vectordata;
         }
     }

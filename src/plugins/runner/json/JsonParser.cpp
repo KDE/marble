@@ -19,7 +19,7 @@
 
 namespace Marble {
 
-JsonParser::JsonParser()
+JsonParser::JsonParser() : m_document( 0 )
 {
 }
 
@@ -46,15 +46,12 @@ bool JsonParser::read( QIODevice* device )
     m_document = createDocument();
     Q_ASSERT( m_document );
 
-    QByteArray stream = device->readAll();
-
-    mDebug() << "------------------------PARSING";
-
-//    // Fixes for test parsing
-//    stream.replace("onKothicDataResponse(","");
-//    QList<QByteArray> streams = stream.split(",\"granularity\":10000");
-//    stream = streams.at(0);
-//    stream.append("}");
+    // Fixes for test parsing
+    QString temp = device->readAll().toLower();
+    QStringList temps = temp.split(",\"granularity\":10000");
+    QByteArray stream (temps.at(0).toAscii());
+    stream.append("}");
+    stream.replace("onkothicdataresponse(","");
 
     // For json add '(' and ')' to the stream
     if ( !m_engine.canEvaluate( "(" + stream + ")" ) ) {

@@ -80,6 +80,8 @@ class TileLoader: public QObject
 
     void tileCompleted( TileId const & tileId, QImage const & tileImage );
 
+    void newDocumentReady(GeoDataDocument*);
+
  private:
     GeoSceneTiled const * findTextureLayer( TileId const & ) const;
     static QString tileFileName( GeoSceneTiled const * textureLayer, TileId const & );

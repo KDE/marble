@@ -783,8 +783,6 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setLevelZeroColumns( 1 );
         texture->setServerLayout( new WmsServerLayout( texture ) );
         texture->setProjection( GeoSceneTiled::Equirectangular );
-
-        mDebug() << "-----------------------paso";
     }
     
     else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )

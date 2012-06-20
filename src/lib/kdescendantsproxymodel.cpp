@@ -745,7 +745,7 @@ void KDescendantsProxyModelPrivate::sourceRowsRemoved(const QModelIndex &parent,
 
   m_removePair = qMakePair(-1, -1);
   m_rowCount -= difference;
-  Q_ASSERT(m_rowCount >= 0);
+    Q_ASSERT(m_rowCount >= 0);
 
   updateInternalIndexes(proxyStart, -1 * difference);
 
