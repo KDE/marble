@@ -59,6 +59,7 @@ class MARBLE_EXPORT Quaternion
 
     // Operators
     Quaternion  operator*(const Quaternion &q) const;
+    Quaternion  operator*(qreal factor) const;
     bool        operator==(const Quaternion &q) const;
     Quaternion& operator*=(const Quaternion &q);
     Quaternion& operator*=(qreal);
