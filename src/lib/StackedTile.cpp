@@ -270,7 +270,6 @@ uint StackedTile::pixelF( qreal x, qreal y ) const
 
     QRgb topLeftValue  =  pixel( iX, iY );
 
-    mDebug() << "-----------------------------4";
     return d->pixelF( x, y, topLeftValue );
 }
 
@@ -286,7 +285,6 @@ int StackedTile::depth() const
 
 int StackedTile::numBytes() const
 {
-    mDebug() << "-----------------------------3";
     return d->m_byteCount;
 }
 
@@ -297,13 +295,11 @@ QVector<QSharedPointer<Tile> > StackedTile::tiles() const
 
 QImage const * StackedTile::resultImage() const
 {
-    mDebug() << "-----------------------------1";
     return &d->m_resultImage;
 }
 
 const GeoDataDocument *StackedTile::resultVectorData() const
 {
-    mDebug() << "-----------------------------2";
     return &d->m_resultVector;
 }
 
