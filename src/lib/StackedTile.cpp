@@ -58,7 +58,7 @@ static const uchar **jumpTableFromQImage8( const QImage &img )
 }
 
 
-StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultImage, const GeoDataContainer &resultVector, QVector<QSharedPointer<Tile> > const &tiles ) :
+StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultImage, const GeoDataDocument &resultVector, QVector<QSharedPointer<Tile> > const &tiles ) :
       m_id( id ), 
       m_resultImage( resultImage ),
       m_resultVector( resultVector ),
@@ -223,7 +223,7 @@ int StackedTilePrivate::calcByteCount( const QImage &resultImage, const QVector<
 }
 
 
-StackedTile::StackedTile( TileId const &id, QImage const &resultImage, const GeoDataContainer &resultVector, QVector<QSharedPointer<Tile> > const &tiles )
+StackedTile::StackedTile( TileId const &id, QImage const &resultImage, const GeoDataDocument &resultVector, QVector<QSharedPointer<Tile> > const &tiles )
     : d( new StackedTilePrivate( id, resultImage, resultVector, tiles ) )
 {
     Q_ASSERT( !tiles.isEmpty() );
@@ -270,6 +270,7 @@ uint StackedTile::pixelF( qreal x, qreal y ) const
 
     QRgb topLeftValue  =  pixel( iX, iY );
 
+    mDebug() << "-----------------------------4";
     return d->pixelF( x, y, topLeftValue );
 }
 
@@ -285,6 +286,7 @@ int StackedTile::depth() const
 
 int StackedTile::numBytes() const
 {
+    mDebug() << "-----------------------------3";
     return d->m_byteCount;
 }
 
@@ -295,11 +297,13 @@ QVector<QSharedPointer<Tile> > StackedTile::tiles() const
 
 QImage const * StackedTile::resultImage() const
 {
+    mDebug() << "-----------------------------1";
     return &d->m_resultImage;
 }
 
-GeoDataContainer const * StackedTile::resultVectorData() const
+const GeoDataDocument *StackedTile::resultVectorData() const
 {
+    mDebug() << "-----------------------------2";
     return &d->m_resultVector;
 }
 

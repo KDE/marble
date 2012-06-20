@@ -62,7 +62,7 @@ class Blending;
 class VectorTile : public Tile
 {
  public:
-    VectorTile( TileId const & tileId, QImage const & image, GeoDataContainer const &vectordata, QString const &format, const Blending * blending );
+    VectorTile( TileId const & tileId, QImage const & image, GeoDataDocument const &vectordata, QString const &format, const Blending * blending );
     ~VectorTile();
 
 /*!
@@ -75,7 +75,7 @@ class VectorTile : public Tile
     \brief Returns the GeoDataContainer containing de vector data of the Tile
     \return A non-zero pointer to a GeoDataContainer associated with the tile.
 */
-    GeoDataContainer const * vectorData() const;
+    const GeoDataDocument *vectorData();
     virtual int byteCount() const;
 
     virtual const char* nodeType() const;
@@ -85,7 +85,7 @@ class VectorTile : public Tile
     Q_DISABLE_COPY( VectorTile )
 
     QImage const m_image;
-    GeoDataContainer const m_vectordata;
+    GeoDataDocument const *m_vectordata;
 
 };
 
@@ -94,9 +94,9 @@ inline QImage const * VectorTile::image() const
     return &m_image;
 }
 
-inline GeoDataContainer const * VectorTile::vectorData() const
+inline GeoDataDocument const *VectorTile::vectorData()
 {
-    return &m_vectordata;
+    return m_vectordata;
 }
 
 inline int VectorTile::byteCount() const

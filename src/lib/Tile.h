@@ -73,10 +73,10 @@ class Tile
     virtual QImage const * image() const;
 
 /*!
-   \brief Returns the GeoDataContainer containing de vector data of the Tile
-   \return A non-zero pointer to a GeoDataContainer associated with the tile.
+   \brief Returns the GeoDataDocument containing de vector data of the Tile
+   \return A non-zero pointer to a GeoDataDocument associated with the tile.
 */
-    virtual GeoDataContainer const *vectorData() const;
+    virtual GeoDataDocument *vectorData() const;
 
 /*!
     \brief Returns the QString that describes the format of the Tile
@@ -118,7 +118,7 @@ inline QImage const * Tile::image() const
     return 0;
 }
 
-inline const GeoDataContainer *Tile::vectorData() const
+inline GeoDataDocument *Tile::vectorData() const
 {
     return 0;
 }

@@ -51,7 +51,7 @@ class TileLoader: public QObject
     void setTextureLayers( const QVector<GeoSceneTiled const *> &textureLayers );
 
     QImage loadTileImage( TileId const & tileId, DownloadUsage const );
-    GeoDataContainer loadTileVectorData( TileId const & tileId, DownloadUsage const usage, QString const &format );
+    GeoDataDocument loadTileVectorData( TileId const & tileId, DownloadUsage const usage, QString const &format );
     void reloadTile( TileId const &tileId, DownloadUsage const );
     void downloadTile( TileId const & tileId );
 

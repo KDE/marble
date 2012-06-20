@@ -95,7 +95,7 @@ QImage TileLoader::loadTileImage( TileId const & tileId, DownloadUsage const usa
 }
 
 
-GeoDataContainer TileLoader::loadTileVectorData( TileId const & tileId, DownloadUsage const usage, QString const &format )
+GeoDataDocument TileLoader::loadTileVectorData( TileId const & tileId, DownloadUsage const usage, QString const &format )
 {
     GeoSceneTiled const * const textureLayer = findTextureLayer( tileId );
 
@@ -123,30 +123,15 @@ GeoDataContainer TileLoader::loadTileVectorData( TileId const & tileId, Download
             MarbleRunnerManager* man = new MarbleRunnerManager( model->pluginManager() );
 
             GeoDataDocument* document = man->openFile( fileName );
-            GeoDataTreeModel* treeModel = new GeoDataTreeModel;
-            QObject::connect(this, SIGNAL(newDocumentReady(GeoDataDocument*)),treeModel, SLOT(addDocument(GeoDataDocument*)),Qt::AutoConnection);
-                if ( document ) {
 
-                emit newDocumentReady(document);
-
-                mDebug() << "-----------------------EMIT" << document->size();
-
-                QTreeView* treeView = new QTreeView;
-                treeView->setModel( treeModel );
-                treeView->show();
-
-                }
-
-                // Empty data
-            GeoDataContainer * vectordata = new GeoDataContainer();
-            return *vectordata;
+            return *document;
         }
     }
 
     // tile was not locally available => trigger download
     triggerDownload( tileId, usage );
 
-    return * new GeoDataContainer();
+    return * new GeoDataDocument();
 }
 
 // This method triggers a download of the given tile (without checking

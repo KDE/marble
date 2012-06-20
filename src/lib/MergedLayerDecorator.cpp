@@ -23,6 +23,7 @@
 #include "SunLocator.h"
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
+#include "GeoDataDocument.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
@@ -100,7 +101,7 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
 
     QImage resultImage;
 
-    GeoDataContainer *resultVector = new GeoDataContainer();
+    GeoDataDocument *resultVector = new GeoDataDocument();
 
     // if there are more than one active texture layers, we have to convert the
     // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
@@ -142,8 +143,10 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
         // GeoDataContainer
 
         if (tile->vectorData()){
-            GeoDataContainer * temp = new GeoDataContainer( *tile->vectorData() );
-            resultVector->append(temp);
+            GeoDataDocument * temp =  new GeoDataDocument(  );
+
+            for (int x = 0; x < temp->featureList().size(); x++)
+                resultVector->append(temp->featureList().at(x));
         }
     }
 
@@ -173,14 +176,14 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
         // VectorTile
         if ( format.toLower() == "js"){
-                QImage tileImage ( "/home/ander/image.png" ); // Fixme
+            QImage tileImage ( "/home/ander/image.png" ); // Fixme
 
-                const GeoDataContainer tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, format );
+            GeoDataDocument tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, format );
 
-                QSharedPointer<Tile> tile( new VectorTile( tileId, tileImage, tileVectordata, format, blending ) );
+            QSharedPointer<Tile> tile( new VectorTile( tileId, tileImage, tileVectordata, format, blending ) );
 
-                mDebug() << "--------------------------------LOADEDVECTORDATA " << tileVectordata.featureList().size();
-                tiles.append( tile );
+            mDebug() << "--------------------------------LOADEDVECTORDATA " << tileVectordata.size();
+            tiles.append( tile );
 
         }
         // ImageTile
@@ -207,18 +210,15 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
 
             // VectorTile
             if ( format.toLower() == "js"){
-                 mDebug() << "--------------------------------CREATEVECTORTILE " << tileId.toString() << " format " << format;
-                 tiles[i] = QSharedPointer<Tile>( new VectorTile( tileId, tileImage, *new GeoDataContainer(), format, blending ) );
+                mDebug() << "--------------------------------CREATEVECTORTILE " << tileId.toString() << " format " << format;
+                const GeoDataDocument* document = new GeoDataDocument;
+                tiles[i] = QSharedPointer<Tile>( new VectorTile( tileId, tileImage, *document, format, blending ) );
             }
             // TextureTile
             else{
                 mDebug() << "--------------------------------CREATETEXTURETILE " << tileId.toString() << " format " << format;
                 tiles[i] = QSharedPointer<Tile>( new TextureTile( tileId, tileImage, format, blending ) );
-           }
-
-
-
-
+            }
         }
     }
 
@@ -289,9 +289,9 @@ void MergedLayerDecorator::Private::paintSunShading( QImage *tileImage, const Ti
     // TODO add support for 8-bit maps?
     // add sun shading
     const qreal  global_width  = tileImage->width()
-        * TileLoaderHelper::levelToColumn( m_levelZeroColumns, id.zoomLevel() );
+            * TileLoaderHelper::levelToColumn( m_levelZeroColumns, id.zoomLevel() );
     const qreal  global_height = tileImage->height()
-        * TileLoaderHelper::levelToRow( m_levelZeroRows, id.zoomLevel() );
+            * TileLoaderHelper::levelToRow( m_levelZeroRows, id.zoomLevel() );
     const qreal lon_scale = 2*M_PI / global_width;
     const qreal lat_scale = -M_PI / global_height;
     const int tileHeight = tileImage->height();
@@ -365,17 +365,17 @@ void MergedLayerDecorator::Private::paintSunShading( QImage *tileImage, const Ti
 void MergedLayerDecorator::Private::paintTileId( QImage *tileImage, const TileId &id ) const
 {
     QString filename = QString( "%1_%2.jpg" )
-        .arg( id.x(), tileDigits, 10, QChar('0') )
-        .arg( id.y(), tileDigits, 10, QChar('0') );
+            .arg( id.x(), tileDigits, 10, QChar('0') )
+            .arg( id.y(), tileDigits, 10, QChar('0') );
 
     QPainter painter( tileImage );
 
     QColor foreground;
     QColor background;
 
-    if ( ( (qreal)(id.x())/2 == id.x()/2 && (qreal)(id.y())/2 == id.y()/2 ) 
-         || ( (qreal)(id.x())/2 != id.x()/2 && (qreal)(id.y())/2 != id.y()/2 ) 
-       )
+    if ( ( (qreal)(id.x())/2 == id.x()/2 && (qreal)(id.y())/2 == id.y()/2 )
+         || ( (qreal)(id.x())/2 != id.x()/2 && (qreal)(id.y())/2 != id.y()/2 )
+         )
     {
         foreground.setNamedColor( "#FFFFFF" );
         background.setNamedColor( "#000000" );
@@ -391,7 +391,7 @@ void MergedLayerDecorator::Private::paintTileId( QImage *tileImage, const TileId
     testPen.setJoinStyle( Qt::MiterJoin );
 
     painter.setPen( testPen );
-    painter.drawRect( strokeWidth / 2, strokeWidth / 2, 
+    painter.drawRect( strokeWidth / 2, strokeWidth / 2,
                       tileImage->width()  - strokeWidth,
                       tileImage->height() - strokeWidth );
     QFont testFont( "Sans", 12 );
@@ -428,19 +428,19 @@ void MergedLayerDecorator::Private::paintTileId( QImage *tileImage, const TileId
 
 int MergedLayerDecorator::Private::maxDivisor( int maximum, int fullLength )
 {
-    // Find the optimal interpolation interval n for the 
+    // Find the optimal interpolation interval n for the
     // current image canvas width
     int best = 2;
 
     int  nEvalMin = fullLength;
     for ( int it = 1; it <= maximum; ++it ) {
         // The optimum is the interval which results in the least amount
-        // supporting points taking into account the rest which can't 
+        // supporting points taking into account the rest which can't
         // get used for interpolation.
         int nEval = fullLength / it + fullLength % it;
         if ( nEval < nEvalMin ) {
             nEvalMin = nEval;
-            best = it; 
+            best = it;
         }
     }
     return best;

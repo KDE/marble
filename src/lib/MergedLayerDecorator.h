@@ -30,6 +30,7 @@ class StackedTile;
 class Tile;
 class TileId;
 class TileLoader;
+class GeoDataDocument;
 
 class MergedLayerDecorator
 {
