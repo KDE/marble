@@ -147,7 +147,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_geometryLayer( model->treeModel() ),
           m_vectorMapBaseLayer( &m_veccomposer ),
           m_vectorMapLayer( &m_veccomposer ),
-          m_textureLayer( model->downloadManager(), model->sunLocator(), &m_veccomposer ),
+          m_textureLayer( model->downloadManager(), model->sunLocator(), &m_veccomposer, model->treeModel() ),
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), model->clock(), parent )
 {
     m_layerManager.addLayer( &m_fogLayer );

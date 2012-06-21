@@ -195,7 +195,7 @@ MarbleModel::MarbleModel( QObject *parent )
     connect(&d->m_clock,   SIGNAL( timeChanged() ),
             &d->m_sunLocator, SLOT( update() ) );
 
-    d->m_elevationModel = new ElevationModel( this );
+    d->m_elevationModel = new ElevationModel( this, this->treeModel() );
 
 }
 

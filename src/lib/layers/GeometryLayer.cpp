@@ -38,6 +38,9 @@
 #include "GeoPhotoGraphicsItem.h"
 #include "TileId.h"
 
+#include "StackedTile.h"
+#include "StackedTileLoader.h"
+
 // Qt
 #include <QtCore/QTime>
 #include <QtCore/QAbstractItemModel>

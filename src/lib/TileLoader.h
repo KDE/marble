@@ -47,7 +47,10 @@ class TileLoader: public QObject
         Available
     };
 
-    explicit TileLoader(HttpDownloadManager * const );
+    // For VectorTiles
+    const GeoDataTreeModel * m_treeModel;
+
+    explicit TileLoader(HttpDownloadManager * const, GeoDataTreeModel const * );
 
     void setTextureLayers( const QVector<GeoSceneTiled const *> &textureLayers );
 
