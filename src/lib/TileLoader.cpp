@@ -22,7 +22,6 @@
 
 #include "MarbleModel.h"
 #include "MarbleRunnerManager.h"
-#include "GeoDataTreeModel.h"
 #include "QTreeView"
 
 #include "GeoSceneTiled.h"
@@ -37,13 +36,14 @@ Q_DECLARE_METATYPE( Marble::DownloadUsage )
 namespace Marble
 {
 
-TileLoader::TileLoader( HttpDownloadManager * const downloadManager )
+TileLoader::TileLoader(HttpDownloadManager * const downloadManager)
 {
     qRegisterMetaType<DownloadUsage>( "DownloadUsage" );
     connect( this, SIGNAL( downloadTile( QUrl, QString, QString, DownloadUsage )),
              downloadManager, SLOT( addJob( QUrl, QString, QString, DownloadUsage )));
     connect( downloadManager, SIGNAL( downloadComplete( QByteArray, QString )),
              SLOT( updateTile( QByteArray, QString )));
+    //connect( this, SIGNAL(newDocumentReady(GeoDataDocument*)), )
 }
 
 void TileLoader::setTextureLayers( const QVector<const GeoSceneTiled *> &textureLayers )
@@ -117,21 +117,24 @@ GeoDataDocument TileLoader::loadTileVectorData( TileId const & tileId, DownloadU
         if ( file.exists() ) {
 
             // File is ready, so parse and return the vector data in any case
-            mDebug() << "----------------------------PARSING";
 
             MarbleModel *model = new MarbleModel (this->parent());
             MarbleRunnerManager* man = new MarbleRunnerManager( model->pluginManager() );
 
             GeoDataDocument* document = man->openFile( fileName );
 
-            return *document;
+            // FIXME ANDER sometimes the parser doesnt work
+            // maybe Q_ASSERT better?
+            if (document){
+                return *document;
+            }
         }
     }
 
     // tile was not locally available => trigger download
     triggerDownload( tileId, usage );
 
-    return * new GeoDataDocument();
+    return * new GeoDataDocument;
 }
 
 // This method triggers a download of the given tile (without checking

@@ -24,6 +24,7 @@
 
 #include "TileId.h"
 #include "GeoDataContainer.h"
+#include "GeoDataTreeModel.h"
 #include "MarbleGlobal.h"
 
 class QByteArray;
@@ -46,7 +47,7 @@ class TileLoader: public QObject
         Available
     };
 
-    explicit TileLoader( HttpDownloadManager * const );
+    explicit TileLoader(HttpDownloadManager * const );
 
     void setTextureLayers( const QVector<GeoSceneTiled const *> &textureLayers );
 

@@ -27,6 +27,7 @@ Tile::Tile( TileId const & tileId, QString const &format, const Blending * blend
       m_blending( blending ),
       m_format( format )
 {
+    // With vectortiles it might occur not having image
     //FIXME ANDER Q_ASSERT( !image()->isNull() );
 }
 

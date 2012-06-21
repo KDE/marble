@@ -25,6 +25,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 #include "TileId.h"
 
 #include "GeoDataContainer.h"
+#include "MarbleDebug.h"
 
 class QImage;
 
@@ -75,7 +76,7 @@ class VectorTile : public Tile
     \brief Returns the GeoDataContainer containing de vector data of the Tile
     \return A non-zero pointer to a GeoDataContainer associated with the tile.
 */
-    const GeoDataDocument *vectorData();
+    GeoDataDocument const * vectorData() const;
     virtual int byteCount() const;
 
     virtual const char* nodeType() const;
@@ -94,7 +95,7 @@ inline QImage const * VectorTile::image() const
     return &m_image;
 }
 
-inline GeoDataDocument const *VectorTile::vectorData()
+inline GeoDataDocument const * VectorTile::vectorData() const
 {
     return m_vectordata;
 }

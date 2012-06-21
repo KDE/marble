@@ -7,7 +7,7 @@
 //
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
-// GSoC 2012           Ander Pijoan <ander.pijoan@deusto.es
+// Copyright 2012      Ander Pijoan <ander.pijoan@deusto.es
 
 #include "JsonPlugin.h"
 #include "JsonRunner.h"

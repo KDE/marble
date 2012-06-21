@@ -16,6 +16,7 @@ Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 */
 
 #include "VectorTile.h"
+#include "GeoDataDocument.h"
 #include "MarbleDebug.h"
 
 #include <limits>
@@ -30,9 +31,7 @@ VectorTile::VectorTile(TileId const & tileId, QImage const & image, const GeoDat
     m_image( image ),
     m_vectordata( &vectordata )
 {
-    Q_ASSERT( !image.isNull() );
     Q_ASSERT( &vectordata );
-    // Ensure if vectordata exists?
 }
 
 VectorTile::~VectorTile()

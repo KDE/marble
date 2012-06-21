@@ -25,6 +25,7 @@ JsonParser::JsonParser() : m_document( 0 )
 
 JsonParser::~JsonParser()
 {
+    m_data = 0;
 }
 
 GeoDataDocument* JsonParser::createDocument() const
@@ -57,6 +58,10 @@ bool JsonParser::read( QIODevice* device )
     if ( !m_engine.canEvaluate( "(" + stream + ")" ) ) {
         return false;
     }
+
+    /**
+     * FIXME ANDER THIS IS A TEST PARSER FOR KOTHIK's JSON FORMAT
+     **/
 
     // Start parsing
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
@@ -109,23 +114,25 @@ bool JsonParser::read( QIODevice* device )
 
             GeoDataGeometry * geom;
 
-            mDebug() << "------------------------" << iterator.value().property( "type" ).toString();
+//            mDebug() << "------------------------" << iterator.value().property( "type" ).toString();
 
             if (iterator.value().property( "type" ).toString().toLower() == "polygon")
                 geom = new GeoDataPolygon();
             else if (iterator.value().property( "type" ).toString().toLower() == "linestring")
                 geom = new GeoDataLineString();
+            else
+                geom = new GeoDataGeometry();
 
             QScriptValueIterator it (iterator.value().property( "properties" ));
 
-            mDebug() << "------------------------Properties";
-            while ( it.hasNext() ) {
-                it.next();
+//            mDebug() << "------------------------Properties";
+//            while ( it.hasNext() ) {
+//                it.next();
+//
+//                mDebug() <<  it.name() << it.value().toString();
+//            }
 
-                mDebug() <<  it.name() << it.value().toString();
-            }
-
-            mDebug() << "------------------------Coordinates";
+//            mDebug() << "------------------------Coordinates";
 
             bool g = true;
 
@@ -140,8 +147,6 @@ bool JsonParser::read( QIODevice* device )
 
                     QStringList coors = it.value().toString().split(",");
                     for (int x = 0; x < coors.size()-1 && coors.size()>1 && g ;){
-
-                        mDebug() << "Loop" << x;
 
                         float auxX = ( coors.at(x++).toFloat() / 10000)*(east-west)   + west;
                         float auxY = ( coors.at(x++).toFloat() / 10000)*(north-south) + south;
@@ -165,17 +170,17 @@ bool JsonParser::read( QIODevice* device )
                 }
             }
 
-            if (g){
-            placemark = new GeoDataPlacemark();
-            placemark->setGeometry( geom );
-            placemark->setVisible( true );
-            m_document->append( placemark );
+            if (g && geom){
+                placemark = new GeoDataPlacemark();
+                placemark->setGeometry( geom );
+                placemark->setVisible( true );
+                m_document->append( placemark );
             }
         }
     }
-
+    temp.clear();
+    stream.clear();
     return true;
-
 }
 
 }

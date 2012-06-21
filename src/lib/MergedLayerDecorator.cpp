@@ -99,8 +99,10 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
     const TileId firstId = tiles.first()->id();
     const TileId id( 0, firstId.zoomLevel(), firstId.x(), firstId.y() );
 
+    // Image for blending all the texture tiles on it
     QImage resultImage;
 
+    // GeoDataDocument for appending all the vector data features to it
     GeoDataDocument *resultVector = new GeoDataDocument();
 
     // if there are more than one active texture layers, we have to convert the
@@ -139,17 +141,14 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
             }
         }
 
-        // Geometry appending. If there are geometries append them all to the
-        // GeoDataContainer
+        // Geometry appending. If it is a VectorTile append all its geometries to the
+        // main GeoDataDocument
+        if ( tile->vectorData() ){
 
-        if (tile->vectorData()){
-            GeoDataDocument * temp =  new GeoDataDocument(  );
-
-            for (int x = 0; x < temp->featureList().size(); x++)
-                resultVector->append(temp->featureList().at(x));
+            for (int x = 0; x < tile->vectorData()->size(); x++)
+                resultVector->append(tile->vectorData()->featureList().at(x));
         }
     }
-
     return new StackedTile( id, resultImage, *resultVector, tiles );
 }
 
@@ -160,8 +159,6 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
     foreach ( const GeoSceneTiled *textureLayer, textureLayers ) {
         const TileId tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
-
-        mDebug() << "--------------------------------LOADTILE " << tileId.toString() << " format: " << textureLayer->fileFormat();
 
         mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId.toString() << textureLayer->tileSize() << textureLayer->fileFormat();
 
@@ -176,13 +173,12 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
         // VectorTile
         if ( format.toLower() == "js"){
-            QImage tileImage ( "/home/ander/image.png" ); // Fixme
+            // FIXME ANDER load an image for testing
+            QImage tileImage ( "/home/ander/image.png" );
 
             GeoDataDocument tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, format );
 
             QSharedPointer<Tile> tile( new VectorTile( tileId, tileImage, tileVectordata, format, blending ) );
-
-            mDebug() << "--------------------------------LOADEDVECTORDATA " << tileVectordata.size();
             tiles.append( tile );
 
         }

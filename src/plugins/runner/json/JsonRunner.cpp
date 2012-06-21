@@ -7,7 +7,7 @@
 //
 // Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
 //
-// GSoC 2012           Ander Pijoan <ander.pijoan@deusto.es
+// Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es
 
 #include "JsonRunner.h"
 #include "JsonParser.h"
@@ -65,7 +65,7 @@ void JsonRunner::parseFile( const QString &fileName, DocumentRole role = Unknown
     }
 
     GeoDocument* document = parser->releaseDocument();
-    Q_ASSERT( document );
+// FIXME ANDER Q_ASSERT( document );
     GeoDataDocument* doc = static_cast<GeoDataDocument*>( document );
     doc->setDocumentRole( role );
 
