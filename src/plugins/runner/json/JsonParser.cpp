@@ -120,10 +120,11 @@ bool JsonParser::read( QIODevice* device )
 
             if (iterator.value().property( "type" ).toString().toLower() == "polygon")
                 geom = new GeoDataPolygon( RespectLatitudeCircle | Tessellate );
-//            else if (iterator.value().property( "type" ).toString().toLower() == "linestring")
-//                geom = new GeoDataLineString();
             else
-                geom = new GeoDataGeometry();
+            if (iterator.value().property( "type" ).toString().toLower() == "linestring")
+                geom = new GeoDataLineString( RespectLatitudeCircle | Tessellate );
+            else
+                geom = new GeoDataGeometry( );
 
             QScriptValueIterator it (iterator.value().property( "properties" ));
 
@@ -132,6 +133,9 @@ bool JsonParser::read( QIODevice* device )
             // Parsing properties
             while ( it.hasNext() && !c ) {
                 it.next();
+
+                if ( it.name() == "name" )
+                    placemark->setName( it.value().toString() );
 
                 category = GeoDataFeature::OsmVisualCategory( it.name() + "=" + it.value().toString() );
                 if (category != 0){
@@ -166,11 +170,12 @@ bool JsonParser::read( QIODevice* device )
 
                                 ((GeoDataPolygon*)geom)->setOuterBoundary(ring);
                             }
-//                            else if (iterator.value().property( "type" ).toString().toLower() == "linestring")
-//                                ((GeoDataLineString*) geom)->append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
-                            else if (iterator.value().property( "type" ).toString().toLower() == "point")
-                                geom = new GeoDataPoint(
-                                    GeoDataCoordinates(auxX,auxY,0, GeoDataCoordinates::Degree ) );
+                            else
+                        if (iterator.value().property( "type" ).toString().toLower() == "linestring")
+                                ((GeoDataLineString*) geom)->append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
+//                            else if (iterator.value().property( "type" ).toString().toLower() == "point")
+//                                geom = new GeoDataPoint(
+//                                    GeoDataCoordinates(auxX,auxY,0, GeoDataCoordinates::Degree ) );
                             else
                                 g = false;
                     }

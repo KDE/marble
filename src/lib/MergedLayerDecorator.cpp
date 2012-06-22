@@ -175,6 +175,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         if ( format.toLower() == "js"){
             // FIXME ANDER load an image for testing
             QImage tileImage ( "/home/ander/image.png" );
+            //QImage tileImage();
 
             GeoDataDocument tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, format );
 
@@ -206,14 +207,12 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
 
             // VectorTile
             if ( format.toLower() == "js"){
-                mDebug() << "--------------------------------CREATEVECTORTILE " << tileId.toString() << " format " << format;
                 const GeoDataDocument* document = new GeoDataDocument;
                 tiles[i] = QSharedPointer<Tile>( new VectorTile( tileId, tileImage, *document, format, blending ) );
             }
             // TextureTile
             else{
-                mDebug() << "--------------------------------CREATETEXTURETILE " << tileId.toString() << " format " << format;
-                tiles[i] = QSharedPointer<Tile>( new TextureTile( tileId, tileImage, format, blending ) );
+               tiles[i] = QSharedPointer<Tile>( new TextureTile( tileId, tileImage, format, blending ) );
             }
         }
     }

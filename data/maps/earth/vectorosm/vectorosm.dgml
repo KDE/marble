@@ -33,8 +33,8 @@
                 <!-- OpenStreetMap mapnik rendered tiles expire after seven days
                      or 604800 seconds -->
  
-                <!-- OSM IMAGE TILES
-                    <texture name="geojson_data" expire="604800" >
+                <!-- OSM IMAGE TILES -->
+               <!-- <texture name="geojson_data_background" expire="604800" >
                     <sourcedir format="PNG"> earth/vectorosm </sourcedir>
                     <tileSize width="256" height="256" />
                     <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="18" mode="OpenStreetMap" />

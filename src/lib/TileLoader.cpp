@@ -67,8 +67,6 @@ QImage TileLoader::loadTileImage( TileId const & tileId, DownloadUsage const usa
     GeoSceneTiled const * const textureLayer = findTextureLayer( tileId );
     QString const fileName = tileFileName( textureLayer, tileId );
 
-    mDebug() << "-------------------" << fileName;
-
     TileStatus status = tileStatus( tileId );
     if ( status != Missing ) {
         // check if an update should be triggered
@@ -132,7 +130,7 @@ GeoDataDocument TileLoader::loadTileVectorData( TileId const & tileId, DownloadU
             if (document){
                 // FIXME ANDER CRASHES
                 emit newDocumentReady(document);
-                return *document;
+                return * new GeoDataDocument;
             }
         }
     }
