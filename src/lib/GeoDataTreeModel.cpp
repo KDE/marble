@@ -384,7 +384,6 @@ QModelIndex GeoDataTreeModel::parent( const QModelIndex &index ) const
 //                        << parentObject->nodeType() << "[" << greatParentItem->childPosition( parentGeometry ) << "](" << parentObject << ")";
             return createIndex( greatparentMultiGeo->childPosition( parentGeometry ), 0, parentObject );
         }
-
     }
 
 //    mDebug() << "parent unknown index";
