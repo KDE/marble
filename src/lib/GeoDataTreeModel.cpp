@@ -358,6 +358,12 @@ QModelIndex GeoDataTreeModel::parent( const QModelIndex &index ) const
 
         GeoDataObject *greatParentObject = parentObject->parent();
 
+        // FIXME ANDER SOMETIMES NULL GREATPARENT
+        if ( greatParentObject == 0 )
+        {
+            return QModelIndex();
+        }
+
         // greatParent can be a container
         if ( greatParentObject->nodeType() == GeoDataTypes::GeoDataFolderType
              || greatParentObject->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
