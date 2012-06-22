@@ -45,7 +45,7 @@ GeoNode* DgmlDownloadPolicyTagHandler::parse( GeoParser& parser ) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if ( !parentItem.represents( dgmlTag_Texture ) && !parentItem.represents( dgmlTag_Vectortile ) ) {
-        qCritical( "Parse error: parent element is not 'texture' or 'vectorTile'" );
+        qCritical( "Parse error: parent element is not 'texture' or 'vectortile'" );
         return 0;
     }
 

@@ -66,10 +66,10 @@ bool JsonParser::read( QIODevice* device )
     // Start parsing
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
 
-    float east;
-    float south;
-    float west;
-    float north;
+    float east = 1;
+    float south = -1;
+    float west = -1;
+    float north = 1;
 
     m_data = m_engine.evaluate( "(" + stream + ")" );
 

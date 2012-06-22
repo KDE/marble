@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
+    <document>
+ 
+        <head>
+            <name>VectorOSM</name>
+            <target>earth</target>
+            <theme>vectorosm</theme>
+            <icon pixmap="vectorosm-preview.png"/>
+            <!-- describes whether the map theme item will be hidden (e.g.
+                for a clouds layer): -->
+            <visible>true</visible>
+            <!-- The description allows for rich text of course: -->
+            <description><![CDATA[<p>Vector OSM Tiling tests.</p>]]></description>
+            <zoom>
+                <minimum>   900  </minimum>
+                <maximum>  3500  </maximum>
+                <!-- describes whether you can zoom trough the levels
+                    continuously -->
+                <discrete> false </discrete>
+            </zoom>
+        </head>
+ 
+            <!-- Now we create the layer structure that gets handled by the
+    layer management class -->
+ 
+        <map bgcolor="#000000">
+            <canvas/>
+            <!-- In this place one could e.g. insert a sky plugin -->
+            <target/>
+ 
+            <layer name="vectorosm" backend="vectortile" >
+                <!-- OpenStreetMap mapnik rendered tiles expire after seven days
+                     or 604800 seconds -->
+ 
+                <!-- OSM IMAGE TILES
+                    <texture name="geojson_data" expire="604800" >
+                    <sourcedir format="PNG"> earth/vectorosm </sourcedir>
+                    <tileSize width="256" height="256" />
+                    <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="18" mode="OpenStreetMap" />
+                    <projection name="Mercator" />
+                    <downloadUrl protocol="http" host="a.tile.openstreetmap.org" path="/" />
+                    <downloadPolicy usage="Browse" maximumConnections="20" />
+                    <downloadPolicy usage="Bulk" maximumConnections="2" />
+                </texture> -->
+ 
+ 
+                <vectortile name="geojson_data" expire="604800" >
+                    <sourcedir format="JS"> earth/vectorosm </sourcedir>
+                    <tileSize width="256" height="256" />
+                    <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="18" mode="OpenStreetMap" />
+                    <projection name="Mercator" />
+                    <downloadUrl protocol="http" host="osmosnimki.ru" path="/vtile/" />
+                    <downloadPolicy usage="Browse" maximumConnections="20" />
+                    <downloadPolicy usage="Bulk" maximumConnections="2" />
+                </vectortile>
+ 
+            </layer>
+ 
+        </map>
+ 
+ 
+        <settings>
+ 
+            <property name="coordinate-grid">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="overviewmap">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="compass">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="scalebar">
+                <value>true</value>
+                <available>true</available>
+            </property>
+ 
+ -            <group name="Places">
+                <property name="places">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+                <property name="cities">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+                <property name="terrain">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+                <property name="otherplaces">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+            </group>
+ 
+-            <group name="Boundaries">
+                <property name="borders">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+                <property name="international-boundaries">
+                    <available>false</available>
+                    <value>false</value>
+                </property>
+                <property name="state-boundaries">
+                    <available>false</available>
+                    <value>false</value>
+                </property>
+            </group>
+ 
+            <group name="Water Bodies">
+                <property name="coastlines">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+                <property name="waterbodies">
+                    <available>false</available>
+                    <value>false</value>
+                </property>
+                <property name="lakes">
+                    <available>false</available>
+                    <value>false</value>
+                </property>
+                <property name="rivers">
+                    <available>false</available>
+                    <value>false</value>
+                </property>
+            </group>
+ 
+            <group name="Surface">
+                <property name="ice">
+                    <value>false</value>
+                    <available>false</available>
+                </property>
+                <property name="relief">
+                    <value>false</value>
+                    <available>false</available>
+                </property>
+            </group>
+        </settings>
+ 
+ 
+ 
+        <legend>
+            <section>
+                <heading>Guides</heading>
+            </section>
+            <section name="coordinate-grid" checkable="true" connect="coordinate-grid"  spacing="12">
+                <heading>Coordinate Grid</heading>
+            </section>
+        </legend>
+ 
+    </document>
+</dgml>
