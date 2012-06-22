@@ -69,11 +69,12 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* view
     painter->save();
     QPen currentPen = painter->pen();
 
-    if ( currentPen.color() != style()->lineStyle().color() ||
-            currentPen.widthF() != style()->lineStyle().width() ||
+    if ( currentPen.color() != style()->lineStyle().color() )
+        currentPen.setColor( style()->lineStyle().color() );
+
+    if ( currentPen.widthF() != style()->lineStyle().width() ||
             style()->lineStyle().physicalWidth() != 0.0 )
     {
-        currentPen.setColor( style()->lineStyle().color() );
         if ( float( viewport->radius() ) / EARTH_RADIUS * style()->lineStyle().physicalWidth() < style()->lineStyle().width() )
             currentPen.setWidthF( style()->lineStyle().width() );
         else
