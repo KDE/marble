@@ -101,14 +101,11 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* view
     if ( painter->pen() != currentPen ) painter->setPen( currentPen );
     if ( style()->lineStyle().background() )
     {
-        painter->save();
-        QPen bgPen( painter->pen() );
-        bgPen.setColor( style()->polyStyle().color() );
-        bgPen.setStyle( Qt::SolidLine );
-        bgPen.setCapStyle( Qt::RoundCap );
-        painter->setPen( bgPen );
-        painter->drawPolyline( *m_lineString );
-        painter->restore();
+        QBrush brush = painter->background();
+        brush.setColor( style()->polyStyle().color() );
+        painter->setBackground( brush );
+
+        painter->setBackgroundMode( Qt::OpaqueMode );
     }
     painter->drawPolyline( *m_lineString );
     painter->restore();
