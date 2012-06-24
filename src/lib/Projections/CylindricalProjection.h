@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2007       Inge Wallin  <ingwa@kde.org>
-// Copyright 2007-2009  Torsten Rahn  <rahn@kde.org>
+// Copyright 2007-2012  Torsten Rahn  <rahn@kde.org>
 // Copyright 2012		Cezar Mocan	<mocancezar@gmail.com>
 //
 
@@ -24,6 +24,7 @@ namespace Marble
 {
 
 class CylindricalProjectionPrivate;
+class AbstractProjectionPrivate;
 
 /**
  * @short A base class for the Equirectangular and Mercator projections in Marble
@@ -34,9 +35,9 @@ class CylindricalProjection : public AbstractProjection
     // Not a QObject so far because we don't need to send signals.	
   public:
 	
-	CylindricalProjection();
+    CylindricalProjection();
 
-	virtual ~CylindricalProjection();
+    virtual ~CylindricalProjection();
 
     virtual bool repeatableX() const { return true; };
 
@@ -45,12 +46,20 @@ class CylindricalProjection : public AbstractProjection
 
     virtual SurfaceType surfaceType() const { return Cylindrical; }
 
+    virtual bool screenCoordinates( const GeoDataLineString &lineString,
+                            const ViewportParams *viewport,
+                            QVector<QPolygonF*> &polygons ) const;
+
+    using AbstractProjection::screenCoordinates;
+
     virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
 
- private:
-    Q_DISABLE_COPY( CylindricalProjection )
-    CylindricalProjectionPrivate  * d;
+ protected: 
+    CylindricalProjection( CylindricalProjectionPrivate &dd );
 
+ private:
+    Q_DECLARE_PRIVATE( CylindricalProjection )
+    Q_DISABLE_COPY( CylindricalProjection )
 };
 
 }

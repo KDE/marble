@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
-// Copyright 2007-2009 Torsten Rahn  <rahn@kde.org>
+// Copyright 2007-2012 Torsten Rahn  <rahn@kde.org>
 //
 
 
@@ -45,14 +45,8 @@ class MercatorProjection : public CylindricalProjection
 
     virtual ~MercatorProjection();
 
-//    virtual bool repeatableX() const;
     virtual qreal  maxValidLat() const;
     virtual qreal  minValidLat() const;
-
-//    virtual bool traversablePoles() const { return false; }
-//    virtual bool traversableDateLine() const { return false; }
-
-//    virtual SurfaceType surfaceType() const { return Cylindrical; }	
 
     virtual PreservationType preservationType() const { return Conformal; }
 
@@ -79,6 +73,8 @@ class MercatorProjection : public CylindricalProjection
                             const QSizeF& size,
                             bool &globeHidesPoint ) const;
 
+    using CylindricalProjection::screenCoordinates;
+
    /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
      *
@@ -102,11 +98,8 @@ class MercatorProjection : public CylindricalProjection
 
     bool  mapCoversViewport( const ViewportParams *viewport ) const;
 
-//    virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
-
  private:
     Q_DISABLE_COPY( MercatorProjection )
-    MercatorProjectionPrivate  * d;
 };
 
 }

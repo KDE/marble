@@ -5,6 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
+// Copyright 2007-2012   Torsten Rahn  <rahn@kde.org>
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
 //
 
@@ -21,8 +22,7 @@ using namespace Marble;
 
 
 EquirectProjection::EquirectProjection()
-    : CylindricalProjection(),
-      d( 0 )
+    : CylindricalProjection()
 {
     setRepeatX( repeatableX() );
     setMinLat( minValidLat() );
@@ -32,14 +32,6 @@ EquirectProjection::EquirectProjection()
 EquirectProjection::~EquirectProjection()
 {
 }
-
-/*
-bool EquirectProjection::repeatableX() const
-{
-    return true;
-}
-*/
-
 
 qreal EquirectProjection::maxValidLat() const
 {
@@ -343,36 +335,3 @@ bool EquirectProjection::mapCoversViewport( const ViewportParams *viewport ) con
 
     return true;
 }
-
-/*
-QPainterPath EquirectProjection::mapShape( const ViewportParams *viewport ) const
-{
-    // Convenience variables
-    int  radius = viewport->radius();
-    int  width  = viewport->width();
-    int  height = viewport->height();
-
-	qreal  yTop; 
-	qreal  yBottom;
-	qreal  xDummy;
-
-	// Get the top and bottom coordinates of the projected map
-    screenCoordinates( 0.0, maxLat(), viewport, xDummy, yTop );
-    screenCoordinates( 0.0, minLat(), viewport, xDummy, yBottom );
-
-    // Don't let the map area be outside the image
-    if ( yTop < 0 )
-        yTop = 0;
-    if ( yBottom > height )
-        yBottom =  height;
-
-    QPainterPath mapShape;
-    mapShape.addRect(
-                    0,
-                    yTop,
-                    width,
-                    yBottom - yTop );
-
-    return mapShape;
-}
-*/
