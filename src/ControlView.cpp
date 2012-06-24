@@ -88,7 +88,7 @@ ControlView::~ControlView()
 
 QString ControlView::applicationVersion()
 {
-    return "1.3.85 (1.4 Beta 2)";
+    return "1.3.95 (1.4 RC 1)";
 }
 
 void ControlView::zoomIn()
