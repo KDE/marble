@@ -46,7 +46,7 @@ class AbstractProjectionPrivate;
  * @short A base class for all projections in Marble.
  */
 
-class MARBLE_EXPORT AbstractProjection : public QObject
+class MARBLE_EXPORT AbstractProjection
 {
     // Not a QObject so far because we don't need to send signals.
  public:
