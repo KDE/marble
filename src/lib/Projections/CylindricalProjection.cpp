@@ -20,6 +20,9 @@
 #include "GeoDataCoordinates.h"
 #include "ViewportParams.h"
 
+//To remove
+#include <cstdio>
+
 namespace Marble {
 
 CylindricalProjection::CylindricalProjection()
@@ -123,14 +126,16 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
 
     polygons.append( new QPolygonF );
 
-    GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
-    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
+    GeoDataLineString::ConstIterator itCoords = lineString.constBeginFiltered( 0 );
+    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBeginFiltered( 0 );
+
+    int countFiltered = 0;
 
     GeoDataCoordinates previousCoords;
     GeoDataCoordinates currentCoords;
 
-    GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
-    GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
+    GeoDataLineString::ConstIterator itBegin = lineString.constBeginFiltered( 0 );
+    GeoDataLineString::ConstIterator itEnd = lineString.constEndFiltered();
 
     bool processingLastNode = false;
 
@@ -195,6 +200,7 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
             break;
         }
         ++itCoords;
+        ++countFiltered;
 
         if ( itCoords == itEnd  && lineString.isClosed() ) {
             itCoords = itBegin;

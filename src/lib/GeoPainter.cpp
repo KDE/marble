@@ -12,6 +12,7 @@
 #include "GeoPainter_p.h"
 
 #include <QtCore/QList>
+#include <QtCore/QTime>
 #include <QtGui/QPainterPath>
 #include <QtGui/QRegion>
 
@@ -545,6 +546,9 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
                                 const QString& labelText,
                                 LabelPositionFlags labelPositionFlags )
 {
+
+	QTime taskTime;
+	taskTime.start();
     // Immediately leave this method now if:
     // - the object is not visible in the viewport or if
     // - the size of the object is below the resolution of the viewport
@@ -556,12 +560,20 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
         return;
     }
 
+
     QVector<QPolygonF*> polygons;
+
+	QTime createPolygonsTime;
+	createPolygonsTime.start();
     d->createPolygonsFromLineString( lineString, polygons );
+	if ( lineString.size() > 100000)
+		qDebug("    Create polygons time: %d\n", createPolygonsTime.elapsed());	
 
     if ( labelText.isEmpty() ) {
+		int cnt = 0;
         foreach( QPolygonF* itPolygon, polygons ) {
             ClipPainter::drawPolyline( *itPolygon );
+			++cnt;
         }
     }
     else {
@@ -590,6 +602,8 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
         }
     }
     qDeleteAll( polygons );
+	if (lineString.size() > 100000)
+		qDebug("Time elapsed: %d ms Nodes: %d", taskTime.elapsed(), lineString.sizeFiltered());
 }
 
 

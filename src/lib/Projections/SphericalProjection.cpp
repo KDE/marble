@@ -385,8 +385,8 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
     polygons.append( new QPolygonF );
 
-    GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
-    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
+    GeoDataLineString::ConstIterator itCoords = lineString.constBeginFiltered( 0 );
+    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBeginFiltered( 0 );
 
     // Some projections display the earth in a way so that there is a
     // foreside and a backside.
@@ -413,8 +413,8 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     GeoDataCoordinates previousCoords;
     GeoDataCoordinates currentCoords;
 
-    GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
-    GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
+    GeoDataLineString::ConstIterator itBegin = lineString.constBeginFiltered( 0 );
+    GeoDataLineString::ConstIterator itEnd = lineString.constEndFiltered();
 
     bool processingLastNode = false;
 

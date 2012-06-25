@@ -216,6 +216,12 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 */
     int size() const;
 
+/*!
+    \brief Returns the number of nodes in a filtered LineString.
+*/
+
+    int sizeFiltered() const;
+
 
 /*!
     \brief Returns a reference to the coordinates of a node at a given position.
@@ -229,6 +235,13 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
     This method does not detach the returned coordinate object from the line string.
 */
     const GeoDataCoordinates& at( int pos ) const;
+
+/*!
+    \brief Returns a reference to the coordinates of a node at a given position in the filtered lineString.
+    This method does not detach the returned coordinate object from the line string.
+*/
+
+//	void filteredAt( int pos, int detailLevel );
 
 
 /*!
@@ -313,6 +326,18 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
     \brief Returns a const iterator that points to the end of the LineString.
 */
     QVector<GeoDataCoordinates>::ConstIterator constEnd() const;
+
+/*!
+    \brief Returns an iterator that points to the begin of the filtered LineString.
+*/
+
+    QVector<GeoDataCoordinates>::ConstIterator constBeginFiltered( int detailLevel ) const;
+
+/*!
+    \brief Returns an iterator that points to the end of the filtered LineString.
+*/
+
+    QVector<GeoDataCoordinates>::ConstIterator constEndFiltered() const;
 
 
 /*!
