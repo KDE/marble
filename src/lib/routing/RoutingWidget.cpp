@@ -425,6 +425,8 @@ void RoutingWidget::removeInputWidget( int index )
         if ( widget == d->m_activeInput ) {
             d->m_activeInput = 0;
             d->m_routingLayer->setPlacemarkModel( 0 );
+            d->m_ui.directionsListView->setModel( d->m_routingModel );
+            d->m_routingLayer->synchronizeWith( d->m_ui.directionsListView->selectionModel() );
         }
         d->adjustInputWidgets();
     }
