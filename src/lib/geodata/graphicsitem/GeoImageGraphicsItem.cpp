@@ -79,4 +79,9 @@ void GeoImageGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
     }
 }
 
+GeoDataLatLonAltBox GeoImageGraphicsItem::latLonAltBox() const
+{
+    return m_latLonBox;
+}
+
 }
