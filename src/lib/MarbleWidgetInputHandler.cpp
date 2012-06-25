@@ -429,6 +429,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
                 if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
                     d->m_kineticSpinning.start();
+                } else {
+                    MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
                 }
             }
         }
@@ -568,6 +570,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 d->m_leftPressed = false;
                 if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
                     d->m_kineticSpinning.start();
+                } else {
+                    MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
                 }
             }
 
@@ -661,6 +665,10 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 else
                     MarbleWidgetInputHandler::d->m_widget->rotateBy( -MarbleWidgetInputHandler::d->m_widget->moveStep() * (qreal)(-dirX),
                                                                      MarbleWidgetInputHandler::d->m_widget->moveStep() * (qreal)(+dirY) );
+            }
+
+            if ( !MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+                MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
             }
         }
 
