@@ -128,16 +128,6 @@ class MARBLE_EXPORT MarbleGraphicsItem
     void setToolTip( const QString& toolTip );
 
     /**
-     * Returns the z value of the item
-     */
-    qreal zValue() const;
-    
-    /**
-     * Set the z value of the item
-     */
-    void setZValue( qreal z );
-    
-    /**
      * Returns the size of the item
      */
     QSizeF size() const;
