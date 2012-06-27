@@ -28,8 +28,6 @@
 namespace Marble
 {
 
-class EquirectProjectionPrivate;
-
 /**
  * @short A class to implement the Equirectangular projection used by the "Flat Map" view.
  */

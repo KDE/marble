@@ -55,7 +55,7 @@ class CylindricalProjection : public AbstractProjection
     virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
 
  protected: 
-    CylindricalProjection( CylindricalProjectionPrivate &dd );
+    CylindricalProjection( CylindricalProjectionPrivate* dd );
 
  private:
     Q_DECLARE_PRIVATE( CylindricalProjection )

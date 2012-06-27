@@ -28,7 +28,6 @@ namespace Marble
 {
 
 class SphericalProjectionPrivate;
-class AbstractProjectionPrivate;
 
 /**
  * @short A class to implement the spherical projection used by the "Globe" view.
@@ -108,7 +107,7 @@ class SphericalProjection : public AbstractProjection
     virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
 
  protected:
-    SphericalProjection( SphericalProjectionPrivate &dd );
+    SphericalProjection(SphericalProjectionPrivate *dd );
 
  private:
     Q_DECLARE_PRIVATE(SphericalProjection)

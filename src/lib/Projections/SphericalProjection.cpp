@@ -30,14 +30,14 @@ namespace Marble
 
 
 SphericalProjection::SphericalProjection()
-    : AbstractProjection( * new SphericalProjectionPrivate( this ) )
+    : AbstractProjection( new SphericalProjectionPrivate( this ) )
 {
     setRepeatX( repeatableX() );
     setMinLat( minValidLat() );
     setMaxLat( maxValidLat() );
 }
 
-SphericalProjection::SphericalProjection( SphericalProjectionPrivate &dd )
+SphericalProjection::SphericalProjection( SphericalProjectionPrivate *dd )
         : AbstractProjection( dd )
 {
     setRepeatX( repeatableX() );
