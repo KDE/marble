@@ -23,11 +23,11 @@
 namespace Marble {
 
 CylindricalProjection::CylindricalProjection()
-        : AbstractProjection( * new CylindricalProjectionPrivate( this ) )
+        : AbstractProjection( new CylindricalProjectionPrivate( this ) )
 {
 }
 
-CylindricalProjection::CylindricalProjection( CylindricalProjectionPrivate &dd )
+CylindricalProjection::CylindricalProjection( CylindricalProjectionPrivate* dd )
         : AbstractProjection( dd )
 {
 }

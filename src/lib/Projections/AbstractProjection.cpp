@@ -33,8 +33,8 @@ AbstractProjection::AbstractProjection()
 {
 }
 
-AbstractProjection::AbstractProjection( AbstractProjectionPrivate &dd )
-    : d_ptr( &dd )
+AbstractProjection::AbstractProjection( AbstractProjectionPrivate* dd )
+    : d_ptr( dd )
 {
 }
 

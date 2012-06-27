@@ -27,8 +27,6 @@
 namespace Marble
 {
 
-class MercatorProjectionPrivate;
-
 /**
  * @short A class to implement the Mercator projection.
  */
