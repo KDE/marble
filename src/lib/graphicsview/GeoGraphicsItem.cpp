@@ -115,6 +115,17 @@ GeoDataStyle* GeoGraphicsItem::style() const
     return p()->m_style;
 }
 
+qreal GeoGraphicsItem::zValue() const
+{
+    return p()->m_zValue;
+}
+
+void GeoGraphicsItem::setZValue( qreal z )
+{
+    p()->m_zValue = z;
+    update();
+}
+
 QList<QPointF> GeoGraphicsItem::positions() const
 {
     return p()->positions();

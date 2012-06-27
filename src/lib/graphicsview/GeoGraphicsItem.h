@@ -146,6 +146,16 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     void setStyle( GeoDataStyle* style );
 
     /**
+     * Returns the z value of the item
+     */
+    qreal zValue() const;
+
+    /**
+     * Set the z value of the item
+     */
+    void setZValue( qreal z );
+
+    /**
      * Returns all coordinates of the item in view coordinates according to the given projection.
      */
     QList<QPointF> positions() const;

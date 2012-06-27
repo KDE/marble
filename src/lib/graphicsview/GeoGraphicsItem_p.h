@@ -26,6 +26,7 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
  public:
     explicit GeoGraphicsItemPrivate( GeoGraphicsItem *parent )
         : MarbleGraphicsItemPrivate( parent ),
+          m_zValue( 0 ),
           m_positions(),
           m_minLodPixels( 0 ),
           m_maxLodPixels( -1 ),
@@ -107,6 +108,7 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
 
     GeoDataCoordinates m_coordinate;
     QString m_target;
+    qreal m_zValue;
     QList<QPointF> m_positions;
     GeoGraphicsItem::GeoGraphicsItemFlags m_flags;
 
