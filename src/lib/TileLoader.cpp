@@ -47,7 +47,7 @@ TileLoader::TileLoader(HttpDownloadManager * const downloadManager, const GeoDat
     connect( downloadManager, SIGNAL( downloadComplete( QByteArray, QString )),
              SLOT( updateTile( QByteArray, QString )));
     connect( this, SIGNAL(newDocumentReady(GeoDataDocument*)),
-             treeModel, SLOT(addDocument(GeoDataDocument*)),Qt::AutoConnection);
+             treeModel, SLOT( addDocument(GeoDataDocument*) ),Qt::AutoConnection);
 }
 
 void TileLoader::setTextureLayers( const QVector<const GeoSceneTiled *> &textureLayers )

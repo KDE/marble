@@ -41,6 +41,7 @@
 #include "layers/TextureLayer.h"
 #include "layers/VectorMapBaseLayer.h"
 #include "layers/VectorMapLayer.h"
+#include "layers/VectorTileLayer.h"
 #include "AbstractFloatItem.h"
 #include "GeoDataTreeModel.h"
 #include "GeoPainter.h"
@@ -134,6 +135,8 @@ class MarbleMapPrivate
     VectorMapLayer   m_vectorMapLayer;
     TextureLayer     m_textureLayer;
     PlacemarkLayout  m_placemarkLayout;
+    VectorTileLayer  m_vectorTileLayer;
+
 };
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
@@ -148,7 +151,8 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_vectorMapBaseLayer( &m_veccomposer ),
           m_vectorMapLayer( &m_veccomposer ),
           m_textureLayer( model->downloadManager(), model->sunLocator(), &m_veccomposer, model->treeModel() ),
-          m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), model->clock(), parent )
+          m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), model->clock(), parent ),
+          m_vectorTileLayer( model->downloadManager(), model->sunLocator(), &m_veccomposer, model->treeModel() )
 {
     m_layerManager.addLayer( &m_fogLayer );
     m_layerManager.addLayer( &m_geometryLayer );
