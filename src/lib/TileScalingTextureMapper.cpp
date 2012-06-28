@@ -92,7 +92,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
     const qint64  radius  = viewport->radius();
 
     const bool highQuality  = ( painter->mapQuality() == HighQuality
-                             || painter->mapQuality() == PrintQuality );
+                                || painter->mapQuality() == PrintQuality );
 
     // Reset backend
     m_tileLoader->resetTilehash();
@@ -176,20 +176,20 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
 
                 const QPixmap *const im_cached = (*m_cache)[cacheId];
                 const QPixmap *im = im_cached;
-                if ( im == 0 ) {
-                    const QImage *const toScale = tile->resultImage();
 
-                    const int deltaLevel = stackedId.zoomLevel() - tile->id().zoomLevel();
-                    const int restTileX = stackedId.x() % ( 1 << deltaLevel );
-                    const int restTileY = stackedId.y() % ( 1 << deltaLevel );
-                    const int partWidth = toScale->width() >> deltaLevel;
-                    const int partHeight = toScale->height() >> deltaLevel;
-                    const int startX = restTileX * partWidth;
-                    const int startY = restTileY * partHeight;
-                    const QImage part = toScale->copy( startX, startY, partWidth, partHeight ).scaled( toScale->size() );
+                const QImage *const toScale = tile->resultImage();
 
-                    im = new QPixmap( QPixmap::fromImage( part.scaled( size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation ) ) );
-                }
+                const int deltaLevel = stackedId.zoomLevel() - tile->id().zoomLevel();
+                const int restTileX = stackedId.x() % ( 1 << deltaLevel );
+                const int restTileY = stackedId.y() % ( 1 << deltaLevel );
+                const int partWidth = toScale->width() >> deltaLevel;
+                const int partHeight = toScale->height() >> deltaLevel;
+                const int startX = restTileX * partWidth;
+                const int startY = restTileY * partHeight;
+                const QImage part = toScale->copy( startX, startY, partWidth, partHeight ).scaled( toScale->size() );
+
+                im = new QPixmap( QPixmap::fromImage( part.scaled( size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation ) ) );
+
                 painter->drawPixmap( rect.topLeft(), *im );
 
                 if (im != im_cached)

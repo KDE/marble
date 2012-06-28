@@ -24,7 +24,7 @@
             <!-- Now we create the layer structure that gets handled by the
     layer management class -->
  
-        <map bgcolor="#000000">
+        <map bgcolor="#999999">
             <canvas/>
             <!-- In this place one could e.g. insert a sky plugin -->
             <target/>

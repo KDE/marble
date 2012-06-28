@@ -225,6 +225,8 @@ bool PlacemarkPainter::testXBug()
 
     QImage image = pixmap.toImage();
 
+    Q_ASSERT( !image.isNull() );
+
     for ( int x = 0; x < fontwidth; ++x ) {
         for ( int y = 0; y < fontheight; ++y ) {
             if ( qAlpha( image.pixel( x, y ) ) > 0 )

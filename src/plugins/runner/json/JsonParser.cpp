@@ -118,13 +118,13 @@ bool JsonParser::read( QIODevice* device )
             placemark = new GeoDataPlacemark();
 
 
-            if (iterator.value().property( "type" ).toString().toLower() == "polygon")
-                geom = new GeoDataPolygon( RespectLatitudeCircle | Tessellate );
-            else
+//            if (iterator.value().property( "type" ).toString().toLower() == "polygon")
+//                geom = new GeoDataPolygon( RespectLatitudeCircle | Tessellate );
+//            else
             if (iterator.value().property( "type" ).toString().toLower() == "linestring")
                 geom = new GeoDataLineString( RespectLatitudeCircle | Tessellate );
             else
-                geom = new GeoDataGeometry( );
+                geom = 0;
 
             QScriptValueIterator it (iterator.value().property( "properties" ));
 
@@ -163,26 +163,29 @@ bool JsonParser::read( QIODevice* device )
                         float auxY = ( coors.at(x++).toFloat() / 10000)*(north-south) + south;
 
 
-                            if (iterator.value().property( "type" ).toString().toLower() == "polygon"){
+                        if (auxX != 0 && auxY != 0){
+//                            if (iterator.value().property( "type" ).toString().toLower() == "polygon"){
 
-                                GeoDataLinearRing ring = ((GeoDataPolygon*)geom)->outerBoundary();
-                                ring.append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
+//                                GeoDataLinearRing ring = ((GeoDataPolygon*)geom)->outerBoundary();
+//                                ring.append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
 
-                                ((GeoDataPolygon*)geom)->setOuterBoundary(ring);
-                            }
-                            else
+//                                ((GeoDataPolygon*)geom)->setOuterBoundary(ring);
+//                            }
+//                            else
                         if (iterator.value().property( "type" ).toString().toLower() == "linestring")
                                 ((GeoDataLineString*) geom)->append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
-//                            else if (iterator.value().property( "type" ).toString().toLower() == "point")
-//                                geom = new GeoDataPoint(
-//                                    GeoDataCoordinates(auxX,auxY,0, GeoDataCoordinates::Degree ) );
                             else
+                                if (iterator.value().property( "type" ).toString().toLower() == "point")
+                                geom = new GeoDataPoint(
+                                    GeoDataCoordinates(auxX,auxY,0, GeoDataCoordinates::Degree ) );
+                            }
+                        else
                                 g = false;
                     }
                 }
             }
 
-            if ( g && geom ){
+            if ( g && geom != 0 ){
                 placemark->setGeometry( geom );
                 placemark->setVisible( true );
                 m_document->append( placemark );

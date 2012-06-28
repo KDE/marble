@@ -113,7 +113,7 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
         // Image blending. If there are several images in the same tile (like clouds
         // or hillshading images over the map) blend them all into only one image
 
-        if (!tile->image()->isNull()){
+        if (tile->image() != 0 && !tile->image()->isNull()){
 
             const Blending *const blending = tile->blending();
             if ( blending ) {
@@ -174,12 +174,11 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         // VectorTile
         if ( format.toLower() == "js"){
             // FIXME ANDER load an image for testing
-            QImage tileImage ( "/home/ander/image.png" );
-            //QImage tileImage();
+            QImage tileImage ( "/home/ander/imageDemo.png" );
 
             GeoDataDocument tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, format );
 
-            QSharedPointer<Tile> tile( new VectorTile( tileId, tileImage, tileVectordata, format, blending ) );
+            QSharedPointer<Tile> tile( new VectorTile( tileId, tileVectordata, format, blending ) );
             tiles.append( tile );
 
         }
@@ -192,7 +191,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         }
     }
 
-    Q_ASSERT( !tiles.isEmpty() );
+    ( !tiles.isEmpty() );
 
     return d->createTile( tiles );
 }
@@ -208,11 +207,11 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
             // VectorTile
             if ( format.toLower() == "js"){
                 const GeoDataDocument* document = new GeoDataDocument;
-                tiles[i] = QSharedPointer<Tile>( new VectorTile( tileId, tileImage, *document, format, blending ) );
+                tiles[i] = QSharedPointer<Tile>( new VectorTile( tileId, *document, format, blending ) );
             }
             // TextureTile
             else{
-               tiles[i] = QSharedPointer<Tile>( new TextureTile( tileId, tileImage, format, blending ) );
+                tiles[i] = QSharedPointer<Tile>( new TextureTile( tileId, tileImage, format, blending ) );
             }
         }
     }

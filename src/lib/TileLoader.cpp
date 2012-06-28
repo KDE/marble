@@ -128,8 +128,8 @@ GeoDataDocument TileLoader::loadTileVectorData( TileId const & tileId, DownloadU
             // FIXME ANDER sometimes the parser doesnt work
             // maybe Q_ASSERT better?
             if (document){
-                // FIXME ANDER CRASHES
                 emit newDocumentReady(document);
+                // return * document;
                 return * new GeoDataDocument;
             }
         }
