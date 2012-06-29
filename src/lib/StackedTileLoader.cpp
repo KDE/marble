@@ -85,6 +85,11 @@ void StackedTileLoader::setTextureLayers( QVector<GeoSceneTiled const *> & textu
     d->detectMaxTileLevel();
 }
 
+int StackedTileLoader::textureLayersSize()
+{
+    return d->m_textureLayers.size();
+}
+
 int StackedTileLoader::tileColumnCount( int level ) const
 {
     Q_ASSERT( !d->m_textureLayers.isEmpty() );

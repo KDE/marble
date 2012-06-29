@@ -43,10 +43,10 @@ class TextureLayer::Private
 {
 public:
     Private(HttpDownloadManager *downloadManager,
-             const SunLocator *sunLocator,
-             VectorComposer *veccomposer,
-             GeoDataTreeModel *treeModel,
-             TextureLayer *parent );
+            const SunLocator *sunLocator,
+            VectorComposer *veccomposer,
+            GeoDataTreeModel *treeModel,
+            TextureLayer *parent );
 
     void mapChanged();
     void updateTextureLayers();
@@ -107,33 +107,40 @@ void TextureLayer::Private::updateTextureLayers()
     QVector<GeoSceneTiled const *> result;
 
     foreach ( const GeoSceneTiled *candidate, m_textures ) {
-        bool enabled = true;
-        if ( m_textureLayerSettings ) {
-            const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
-            enabled |= !propertyExists; // if property doesn't exist, enable texture nevertheless
-        }
-        if ( enabled ) {
-            result.append( candidate );
-            mDebug() << "enabling texture" << candidate->name();
-        } else {
-            mDebug() << "disabling texture" << candidate->name();
-        }
+
+        // Check if the GeoSceneTiled is a TextureTile or VectorTile.
+        // Only VectorTiles have to be used.
+        // FIXME ANDER, THIS CRASHES
+        //if ( QString(candidate->nodeType()) == "GeoSceneTextureTile"){
+        mDebug() << "-------------------------------------"<< QString(candidate->nodeType());
+            bool enabled = true;
+            if ( m_textureLayerSettings ) {
+                const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
+                enabled |= !propertyExists; // if property doesn't exist, enable texture nevertheless
+            }
+            if ( enabled ) {
+                result.append( candidate );
+                mDebug() << "enabling texture" << candidate->name();
+            } else {
+                mDebug() << "disabling texture" << candidate->name();
+            }
+        //}
     }
 
     if ( !result.isEmpty() ) {
         const GeoSceneTiled *const firstTexture = result.at( 0 );
         m_layerDecorator.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
         m_layerDecorator.setThemeId( "maps/" + firstTexture->sourceDir() );
-    }
 
-    m_tileLoader.setTextureLayers( result );
-    m_loader.setTextureLayers( result );
-    m_pixmapCache.clear();
+        m_tileLoader.setTextureLayers( result );
+        m_loader.setTextureLayers( result );
+        m_pixmapCache.clear();
+    }
 }
 
 void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage, const QString &format )
 {
-     if ( tileImage.isNull() )
+    if ( tileImage.isNull() )
         return; // keep tiles in cache to improve performance
 
     const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );
@@ -151,8 +158,8 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
 
 
 TextureLayer::TextureLayer(HttpDownloadManager *downloadManager,
-                            const SunLocator *sunLocator,
-                            VectorComposer *veccomposer ,
+                           const SunLocator *sunLocator,
+                           VectorComposer *veccomposer ,
                            GeoDataTreeModel *treeModel)
     : QObject()
     , d( new Private( downloadManager, sunLocator, veccomposer, treeModel, this ) )
@@ -204,6 +211,9 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     if ( d->m_textures.isEmpty() )
         return false;
 
+    if ( d->m_tileLoader.textureLayersSize() == 0 )
+        return false;
+
     if ( !d->m_texmapper )
         return false;
 
@@ -222,10 +232,10 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
     int tileLevel = (int)( tileLevelF * 1.00001 ); // snap to the sharper tile level a tiny bit earlier
-                                                   // to work around rounding errors when the radius
-                                                   // roughly equals the global texture width
+    // to work around rounding errors when the radius
+    // roughly equals the global texture width
 
-//    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
+    //    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
 
     if ( tileLevel > d->m_tileLoader.maximumTileLevel() )
         tileLevel = d->m_tileLoader.maximumTileLevel();
@@ -286,25 +296,25 @@ void TextureLayer::setupTextureMapper( Projection projection )
     if ( d->m_textures.isEmpty() )
         return;
 
-  // FIXME: replace this with an approach based on the factory method pattern.
+    // FIXME: replace this with an approach based on the factory method pattern.
     delete d->m_texmapper;
 
     switch( projection ) {
-        case Spherical:
-            d->m_texmapper = new SphericalScanlineTextureMapper( &d->m_tileLoader );
-            break;
-        case Equirectangular:
-            d->m_texmapper = new EquirectScanlineTextureMapper( &d->m_tileLoader );
-            break;
-        case Mercator:
-            if ( d->m_tileLoader.tileProjection() == GeoSceneTiled::Mercator ) {
-                d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader, &d->m_pixmapCache );
-            } else {
-                d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader );
-            }
-            break;
-        default:
-            d->m_texmapper = 0;
+    case Spherical:
+        d->m_texmapper = new SphericalScanlineTextureMapper( &d->m_tileLoader );
+        break;
+    case Equirectangular:
+        d->m_texmapper = new EquirectScanlineTextureMapper( &d->m_tileLoader );
+        break;
+    case Mercator:
+        if ( d->m_tileLoader.tileProjection() == GeoSceneTiled::Mercator ) {
+            d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader, &d->m_pixmapCache );
+        } else {
+            d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader );
+        }
+        break;
+    default:
+        d->m_texmapper = 0;
     }
     Q_ASSERT( d->m_texmapper );
 }

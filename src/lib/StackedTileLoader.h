@@ -70,6 +70,8 @@ class StackedTileLoader
 
         void setTextureLayers( QVector<GeoSceneTiled const *> & );
 
+        int textureLayersSize();
+
         int tileColumnCount( int level ) const;
 
         int tileRowCount( int level ) const;

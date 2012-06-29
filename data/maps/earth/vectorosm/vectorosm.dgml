@@ -28,23 +28,12 @@
             <canvas/>
             <!-- In this place one could e.g. insert a sky plugin -->
             <target/>
- 
+
+<!-- VECTORTILES -->
+        
             <layer name="vectorosm" backend="vectortile" >
                 <!-- OpenStreetMap mapnik rendered tiles expire after seven days
                      or 604800 seconds -->
- 
-                <!-- OSM IMAGE TILES -->
-               <!-- <texture name="geojson_data_background" expire="604800" >
-                    <sourcedir format="PNG"> earth/vectorosm </sourcedir>
-                    <tileSize width="256" height="256" />
-                    <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="18" mode="OpenStreetMap" />
-                    <projection name="Mercator" />
-                    <downloadUrl protocol="http" host="a.tile.openstreetmap.org" path="/" />
-                    <downloadPolicy usage="Browse" maximumConnections="20" />
-                    <downloadPolicy usage="Bulk" maximumConnections="2" />
-                </texture> -->
- 
- 
                 <vectortile name="geojson_data" expire="604800" >
                     <sourcedir format="JS"> earth/vectorosm </sourcedir>
                     <tileSize width="256" height="256" />
@@ -56,6 +45,50 @@
                 </vectortile>
  
             </layer>
+
+<!-- OPENSTREETMAP --> 
+
+	    <layer name="openstreetmap" backend="texture" >
+                <!-- OpenStreetMap mapnik rendered tiles expire after seven days
+                     or 604800 seconds -->
+                <texture name="mapnik_data" expire="604800" >
+                    <sourcedir format="PNG"> earth/openstreetmap </sourcedir>
+                    <tileSize width="256" height="256" />
+                    <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="18" mode="OpenStreetMap" />
+                    <projection name="Mercator" />
+                    <downloadUrl protocol="http" host="a.tile.openstreetmap.org" path="/" />
+                    <downloadUrl protocol="http" host="b.tile.openstreetmap.org" path="/" />
+                    <downloadUrl protocol="http" host="c.tile.openstreetmap.org" path="/" />
+                    <downloadPolicy usage="Browse" maximumConnections="20" />
+                    <downloadPolicy usage="Bulk" maximumConnections="2" />
+                </texture>
+            </layer>
+
+<!-- PLACES -->
+
+            <layer name="standardplaces" backend="geodata">
+               <geodata name="cityplacemarks">
+                    <sourcefile format="KML">cityplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="baseplacemarks">
+                    <sourcefile format="KML">baseplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="elevplacemarks">
+                    <sourcefile format="KML">elevplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="otherplacemarks">
+                    <sourcefile
+                    format="KML">otherplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="boundaryplacemarks">
+                    <sourcefile format="KML">boundaryplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+            </layer>    
  
         </map>
  

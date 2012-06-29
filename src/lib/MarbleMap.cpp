@@ -67,6 +67,7 @@
 #include "VectorComposer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
+#include "DgmlAuxillaryDictionary.h"
 
 namespace Marble
 {
@@ -802,56 +803,110 @@ void MarbleMapPrivate::updateMapTheme()
         GeoSceneSettings *const settings = m_model->mapTheme()->settings();
         GeoSceneGroup *const textureLayerSettings = settings ? settings->group( "Texture Layers" ) : 0;
 
-        const GeoSceneHead *const head = m_model->mapTheme()->head();
-        const GeoSceneMap *const map = m_model->mapTheme()->map();
-        const GeoSceneLayer *const sceneLayer = ( head && map ) ? map->layer( head->theme() ) : 0;
-
         bool textureLayersOk = true;
         QVector<const GeoSceneTiled *> textures;
-        if ( sceneLayer ) {
-            foreach ( const GeoSceneAbstractDataset *pos, sceneLayer->datasets() ) {
-                const GeoSceneTiled *const texture = dynamic_cast<GeoSceneTiled const *>( pos );
-                if ( !texture )
-                    continue;
 
-                const QString sourceDir = texture->sourceDir();
-                const QString installMap = texture->installMap();
-                const QString role = sceneLayer->role();
+        foreach( GeoSceneLayer* layer, m_model->mapTheme()->map()->layers() ){
+            if ( layer->backend() == dgml::dgmlValue_texture ||
+                 layer->backend() == dgml::dgmlValue_vectortile ){
 
-                // If the tiles aren't already there, put up a progress dialog
-                // while creating them.
-                if ( !TileLoader::baseTilesAvailable( *texture )
-                    && !installMap.isEmpty() )
-                {
-                    mDebug() << "Base tiles not available. Creating Tiles ... \n"
-                             << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
+                foreach ( const GeoSceneAbstractDataset *pos, layer->datasets() ) {
+                    const GeoSceneTiled *const texture = dynamic_cast<GeoSceneTiled const *>( pos );
+                    if ( !texture )
+                        continue;
 
-                    TileCreator *tileCreator = new TileCreator(
-                                             sourceDir,
-                                             installMap,
-                                             (role == "dem") ? "true" : "false" );
+                    const QString sourceDir = texture->sourceDir();
+                    const QString installMap = texture->installMap();
+                    const QString role = layer->role();
 
-                    QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
-                    tileCreatorDlg->setSummary( m_model->mapTheme()->head()->name(),
-                                                m_model->mapTheme()->head()->description() );
-                    tileCreatorDlg->exec();
-                    if ( TileLoader::baseTilesAvailable( *texture ) ) {
-                        qDebug() << "Base tiles for" << sourceDir << "successfully created.";
-                    } else {
-                        qDebug() << "Some or all base tiles for" << sourceDir << "could not be created.";
+                    // If the tiles aren't already there, put up a progress dialog
+                    // while creating them.
+                    if ( !TileLoader::baseTilesAvailable( *texture )
+                        && !installMap.isEmpty() )
+                    {
+                        mDebug() << "Base tiles not available. Creating Tiles ... \n"
+                                 << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
+
+                        TileCreator *tileCreator = new TileCreator(
+                                                 sourceDir,
+                                                 installMap,
+                                                 (role == "dem") ? "true" : "false" );
+
+                        QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
+                        tileCreatorDlg->setSummary( m_model->mapTheme()->head()->name(),
+                                                    m_model->mapTheme()->head()->description() );
+                        tileCreatorDlg->exec();
+                        if ( TileLoader::baseTilesAvailable( *texture ) ) {
+                            qDebug() << "Base tiles for" << sourceDir << "successfully created.";
+                        } else {
+                            qDebug() << "Some or all base tiles for" << sourceDir << "could not be created.";
+                        }
+
+                        delete tileCreatorDlg;
                     }
 
-                    delete tileCreatorDlg;
+                    if ( TileLoader::baseTilesAvailable( *texture ) ) {
+                        textures.append( texture );
+                    } else {
+                        qWarning() << "Base tiles for" << sourceDir << "not available. Skipping all texture layers.";
+                        textureLayersOk = false;
+                    }
                 }
 
-                if ( TileLoader::baseTilesAvailable( *texture ) ) {
-                    textures.append( texture );
-                } else {
-                    qWarning() << "Base tiles for" << sourceDir << "not available. Skipping all texture layers.";
-                    textureLayersOk = false;
-                }
             }
         }
+
+
+        // FIXME ANDER, old code just supported one tiled layer
+
+//        const GeoSceneHead *const head = m_model->mapTheme()->head();
+//        const GeoSceneMap *const map = m_model->mapTheme()->map();
+//        const GeoSceneLayer *const sceneLayer = ( head && map ) ? map->layer( head->theme() ) : 0;
+
+//        if ( sceneLayer ) {
+//            foreach ( const GeoSceneAbstractDataset *pos, sceneLayer->datasets() ) {
+//                const GeoSceneTiled *const texture = dynamic_cast<GeoSceneTiled const *>( pos );
+//                if ( !texture )
+//                    continue;
+
+//                const QString sourceDir = texture->sourceDir();
+//                const QString installMap = texture->installMap();
+//                const QString role = sceneLayer->role();
+
+//                // If the tiles aren't already there, put up a progress dialog
+//                // while creating them.
+//                if ( !TileLoader::baseTilesAvailable( *texture )
+//                    && !installMap.isEmpty() )
+//                {
+//                    mDebug() << "Base tiles not available. Creating Tiles ... \n"
+//                             << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
+
+//                    TileCreator *tileCreator = new TileCreator(
+//                                             sourceDir,
+//                                             installMap,
+//                                             (role == "dem") ? "true" : "false" );
+
+//                    QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
+//                    tileCreatorDlg->setSummary( m_model->mapTheme()->head()->name(),
+//                                                m_model->mapTheme()->head()->description() );
+//                    tileCreatorDlg->exec();
+//                    if ( TileLoader::baseTilesAvailable( *texture ) ) {
+//                        qDebug() << "Base tiles for" << sourceDir << "successfully created.";
+//                    } else {
+//                        qDebug() << "Some or all base tiles for" << sourceDir << "could not be created.";
+//                    }
+
+//                    delete tileCreatorDlg;
+//                }
+
+//                if ( TileLoader::baseTilesAvailable( *texture ) ) {
+//                    textures.append( texture );
+//                } else {
+//                    qWarning() << "Base tiles for" << sourceDir << "not available. Skipping all texture layers.";
+//                    textureLayersOk = false;
+//                }
+//            }
+//        }
 
         QString seafile, landfile;
         if( !m_model->mapTheme()->map()->filters().isEmpty() ) {
