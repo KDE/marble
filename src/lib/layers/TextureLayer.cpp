@@ -415,11 +415,6 @@ int TextureLayer::preferredRadiusFloor( int radius ) const
     return ( tileWidth * levelZeroColumns / 4 ) << tileLevel;
 }
 
-bool TextureLayer::isTileAvailable( const TileId &tileId ) const
-{
-    return d->m_loader.tileStatus( tileId ) == TileLoader::Available;
-}
-
 }
 
 #include "TextureLayer.moc"
