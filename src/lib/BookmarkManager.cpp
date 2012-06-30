@@ -197,10 +197,8 @@ void BookmarkManager::addNewBookmarkFolder( GeoDataContainer *container, const Q
 
 void BookmarkManager::renameBookmarkFolder( GeoDataFolder *folder, const QString &name )
 {
-    GeoDataContainer *parent = static_cast<GeoDataContainer*>( folder->parent() );
-    d->m_treeModel->removeFeature( folder );
     folder->setName( name );
-    d->m_treeModel->addFeature( parent, folder );
+    d->m_treeModel->updateFeature( folder );
 }
 
 void BookmarkManager::removeBookmarkFolder( GeoDataFolder *folder )
