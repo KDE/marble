@@ -197,5 +197,3 @@ double SatellitesItem::square( double x )
 {
     return x * x;
 }
-
-#include "SatellitesItem.moc"

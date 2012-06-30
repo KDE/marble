@@ -118,7 +118,7 @@ PositionTracking::PositionTracking( GeoDataTreeModel *model )
     // First point is current position
     d->m_currentPositionPlacemark->setName("Current Position");
     d->m_currentPositionPlacemark->setVisible(false);
-    d->m_document.append(d->m_currentPositionPlacemark);
+    d->m_document.append( d->m_currentPositionPlacemark );
 
     // Second point is position track
     d->m_currentLineString = new GeoDataLineString;
@@ -141,7 +141,7 @@ PositionTracking::PositionTracking( GeoDataTreeModel *model )
     styleMap.insert("normal", QString("#").append(style.styleId()));
     d->m_document.addStyleMap(styleMap);
     d->m_document.addStyle(style);
-    d->m_document.append(d->m_currentTrackPlacemark);
+    d->m_document.append( d->m_currentTrackPlacemark );
 
     d->m_currentTrackPlacemark->setStyleUrl(QString("#").append(styleMap.styleId()));
 
@@ -222,9 +222,8 @@ bool PositionTracking::trackVisible() const
 
 void PositionTracking::setTrackVisible( bool visible )
 {
-    d->m_treeModel->removeDocument( &d->m_document );
     d->m_currentTrackPlacemark->setVisible( visible );
-    d->m_treeModel->addDocument( &d->m_document );
+    d->m_treeModel->updateFeature( d->m_currentTrackPlacemark );
 }
 
 bool PositionTracking::saveTrack(QString& fileName)
@@ -266,11 +265,11 @@ bool PositionTracking::saveTrack(QString& fileName)
 
 void PositionTracking::clearTrack()
 {
+    d->m_treeModel->removeFeature( d->m_currentTrackPlacemark );
     d->m_currentLineString = new GeoDataLineString;
-    d->m_treeModel->removeDocument( &d->m_document );
     d->m_trackSegments->clear();
     d->m_trackSegments->append( d->m_currentLineString );
-    d->m_treeModel->addDocument( &d->m_document );
+    d->m_treeModel->addFeature( &d->m_document, d->m_currentTrackPlacemark );
     d->m_length = 0.0;
 }
 
