@@ -221,11 +221,6 @@ bool PositionMarker::render( GeoPainter *painter,
                 m_dirtyRegion += ( m_previousArrow.boundingRect().toRect() );
             }
 
-            // Update the trail
-            m_trail.push_front( m_currentPosition );
-            for( int i = sm_numTrailPoints + 1; i< m_trail.size(); ++i ) {
-                    m_trail.pop_back();
-            }
         }
 
         painter->save();
@@ -381,6 +376,11 @@ void PositionMarker::setPosition( const GeoDataCoordinates &position )
     m_previousPosition = m_currentPosition;
     m_currentPosition = position;
     m_heading = marbleModel()->positionTracking()->direction();
+    // Update the trail
+    m_trail.push_front( m_currentPosition );
+    for( int i = sm_numTrailPoints + 1; i< m_trail.size(); ++i ) {
+            m_trail.pop_back();
+    }
     if ( m_lastBoundingBox.contains( m_currentPosition ) )
     {
         emit repaintNeeded( m_dirtyRegion );
