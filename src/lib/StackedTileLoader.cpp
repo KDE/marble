@@ -192,10 +192,10 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
     return stackedTile;
 }
 
-void StackedTileLoader::downloadTile( TileId const & stackedTileId )
+void StackedTileLoader::downloadStackedTile( TileId const & stackedTileId )
 {
     QVector<GeoSceneTexture const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
-    d->m_layerDecorator->downloadTile( stackedTileId, textureLayers );
+    d->m_layerDecorator->downloadStackedTile( stackedTileId, textureLayers );
 }
 
 quint64 StackedTileLoader::volatileCacheLimit() const
