@@ -18,14 +18,14 @@
 using namespace Marble;
 
 static GeoTagWriterRegistrar s_writerPoint( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataTrackType,
-                                                                            kml::kmlTag_nameSpaceGx22),
+                                                                            kml::kmlTag_nameSpace22),
                                                new KmlTrackWriter() );
 
 bool KmlTrackWriter::write( const GeoNode *node, GeoWriter &writer ) const
 {
     const GeoDataTrack *track = static_cast<const GeoDataTrack *>( node );
 
-    writer.writeStartElement( kml::kmlTag_Track );
+    writer.writeStartElement( "gx:Track" );
 
     int points = track->size();
     for ( int i = 0; i < points; i++ ) {
@@ -36,8 +36,9 @@ bool KmlTrackWriter::write( const GeoNode *node, GeoWriter &writer ) const
         QString coord = QString::number( lon, 'f', 10 ) + ' '
                         + QString::number( lat, 'f', 10 ) + ' ' + QString::number( alt, 'f', 10 );
 
-        writer.writeElement( kml::kmlTag_nameSpaceGx22, "gx:coord", coord );
+        writer.writeElement( "gx:coord", coord );
     }
+    writer.writeEndElement();
 
     return true;
 }
