@@ -167,7 +167,7 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
     return d->createTile( tiles );
 }
 
-void MergedLayerDecorator::downloadTile( const TileId &id, const QVector<GeoSceneTexture const *> &textureLayers )
+void MergedLayerDecorator::downloadStackedTile( const TileId &id, const QVector<GeoSceneTexture const *> &textureLayers )
 {
     foreach ( const GeoSceneTexture *textureLayer, textureLayers ) {
         const TileId tileId( textureLayer->sourceDir(), id.zoomLevel(), id.x(), id.y() );

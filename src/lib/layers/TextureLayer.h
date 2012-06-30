@@ -98,7 +98,7 @@ class TextureLayer : public QObject, public LayerInterface
 
     void reload();
 
-    void downloadTile( const TileId &tileId );
+    void downloadStackedTile( const TileId &stackedTileId );
 
  Q_SIGNALS:
     void tileLevelChanged( int );

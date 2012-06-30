@@ -329,9 +329,9 @@ void TextureLayer::reload()
     d->m_tileLoader.reloadVisibleTiles();
 }
 
-void TextureLayer::downloadTile( const TileId &tileId )
+void TextureLayer::downloadStackedTile( const TileId &stackedTileId )
 {
-    d->m_tileLoader.downloadTile( tileId );
+    d->m_tileLoader.downloadStackedTile( stackedTileId );
 }
 
 void TextureLayer::setMapTheme( const QVector<const GeoSceneTexture *> &textures, GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
