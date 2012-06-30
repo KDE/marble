@@ -73,13 +73,14 @@ void PositionTrackingPrivate::updatePosition()
 
     const GeoDataAccuracy accuracy = m_positionProvider->accuracy();
     const GeoDataCoordinates position = m_positionProvider->position();
+    const QDateTime timestamp = m_positionProvider->timestamp();
 
     if ( m_positionProvider->status() == PositionProviderStatusAvailable ) {
         if ( accuracy.horizontal < 250 ) {
             if ( m_currentTrack->size() ) {
                 m_length += distanceSphere( m_currentTrack->coordinatesAt( m_currentTrack->size() - 1 ), position );
             }
-            m_currentTrack->addPoint( QDateTime::currentDateTime(), position );
+            m_currentTrack->addPoint( timestamp, position );
         }
 
         //if the position has moved then update the current position
