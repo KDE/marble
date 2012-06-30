@@ -16,6 +16,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+#include "GeoDataTrack.h"
 #include "GeoDataTreeModel.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
@@ -59,7 +60,7 @@ class PositionTrackingPrivate
     GeoDataDocument m_document;
 
     GeoDataCoordinates  m_gpsPreviousPosition;
-    GeoDataLineString  *m_currentLineString;
+    GeoDataTrack  *m_currentTrack;
 
     PositionProviderPlugin* m_positionProvider;
 
@@ -75,10 +76,10 @@ void PositionTrackingPrivate::updatePosition()
 
     if ( m_positionProvider->status() == PositionProviderStatusAvailable ) {
         if ( accuracy.horizontal < 250 ) {
-            if ( !m_currentLineString->isEmpty() ) {
-                m_length += distanceSphere( m_currentLineString->last(), position );
+            if ( m_currentTrack->size() ) {
+                m_length += distanceSphere( m_currentTrack->coordinatesAt( m_currentTrack->size() - 1 ), position );
             }
-            m_currentLineString->append(position);
+            m_currentTrack->addPoint( QDateTime::currentDateTime(), position );
         }
 
         //if the position has moved then update the current position
@@ -99,10 +100,10 @@ void PositionTrackingPrivate::updateStatus()
     const PositionProviderStatus status = m_positionProvider->status();
 
     if (status == PositionProviderStatusAvailable) {
-        m_treeModel->removeDocument( &m_document );
-        m_currentLineString = new GeoDataLineString;
-        m_trackSegments->append( m_currentLineString );
-        m_treeModel->addDocument( &m_document );
+        m_currentTrack = new GeoDataTrack;
+        m_treeModel->removeFeature( m_currentTrackPlacemark );
+        m_trackSegments->append( m_currentTrack );
+        m_treeModel->addFeature( &m_document, m_currentTrackPlacemark );
     }
 
     emit q->statusChanged( status );
@@ -121,8 +122,8 @@ PositionTracking::PositionTracking( GeoDataTreeModel *model )
     d->m_document.append( d->m_currentPositionPlacemark );
 
     // Second point is position track
-    d->m_currentLineString = new GeoDataLineString;
-    d->m_trackSegments->append(d->m_currentLineString);
+    d->m_currentTrack = new GeoDataTrack;
+    d->m_trackSegments->append(d->m_currentTrack);
 
     d->m_currentTrackPlacemark->setGeometry(d->m_trackSegments);
     d->m_currentTrackPlacemark->setName("Current Track");
@@ -250,7 +251,7 @@ bool PositionTracking::saveTrack(QString& fileName)
         foreach( const GeoDataStyleMap &map, d->m_document.styleMaps() ) {
             document->addStyleMap( map );
         }
-        GeoDataFeature *track = new GeoDataFeature(d->m_document.last());
+        GeoDataFeature *track = new GeoDataFeature( *d->m_currentTrackPlacemark );
         track->setName( "Track " + name );
         document->append( track );
 
@@ -266,9 +267,9 @@ bool PositionTracking::saveTrack(QString& fileName)
 void PositionTracking::clearTrack()
 {
     d->m_treeModel->removeFeature( d->m_currentTrackPlacemark );
-    d->m_currentLineString = new GeoDataLineString;
+    d->m_currentTrack = new GeoDataTrack;
     d->m_trackSegments->clear();
-    d->m_trackSegments->append( d->m_currentLineString );
+    d->m_trackSegments->append( d->m_currentTrack );
     d->m_treeModel->addFeature( &d->m_document, d->m_currentTrackPlacemark );
     d->m_length = 0.0;
 }
@@ -280,7 +281,7 @@ bool PositionTracking::isTrackEmpty() const
     }
 
     if ( d->m_trackSegments->size() == 1 ) {
-        return d->m_currentLineString->isEmpty();
+        return ( d->m_currentTrack->size() > 0 );
     }
 
     return false;
