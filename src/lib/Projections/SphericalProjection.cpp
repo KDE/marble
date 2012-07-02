@@ -23,6 +23,8 @@
 #include "GeoDataCoordinates.h"
 #include "MarbleGlobal.h"
 
+#include <QDebug>
+
 #define SAFE_DISTANCE
 
 namespace Marble
@@ -424,6 +426,12 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
     const bool isLong = lineString.size() > 50;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+
+    qDebug() << viewport->angularResolution() << "\n";
+>>>>>>> 9054e85... Current state of linestring filtering
     
 =======
 
@@ -542,7 +550,9 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
         if ( processingLastNode ) {
             break;
         }
-        ++itCoords;
+
+        lineString.nextFilteredAt( itCoords, 16 );
+//        ++itCoords;
 
         if ( itCoords == itEnd  && lineString.isClosed() ) {
             itCoords = itBegin;

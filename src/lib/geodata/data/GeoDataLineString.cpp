@@ -148,8 +148,13 @@ const GeoDataCoordinates& GeoDataLineString::at( int pos ) const
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 void GeoDataLineString::douglasPeucker( QVector<GeoDataCoordinates>::ConstIterator itLeft, QVector<GeoDataCoordinates>::ConstIterator itRight, const int currentDetailLevel ) const
+=======
+
+void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterator &itCoordsCurrent, int detailLevel ) const
+>>>>>>> 9054e85... Current state of linestring filtering
 {
     // This method assigns detail levels to all the nodes in the linestring
     // in order to be filtered by nextFilteredAt(). The method it uses for
@@ -161,6 +166,7 @@ void GeoDataLineString::douglasPeucker( QVector<GeoDataCoordinates>::ConstIterat
 
     GeoDataLineStringPrivate* d = p();
 
+<<<<<<< HEAD
     qreal dMax = 0;
     QVector<GeoDataCoordinates>::const_iterator itCoords = itLeft;
     QVector<GeoDataCoordinates>::const_iterator itBegin = itLeft;
@@ -220,6 +226,39 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
 
         douglasPeucker( d->m_vector.constBegin(), d->m_vector.constEnd(), 1 );
     }
+=======
+
+    if ( d->m_dirtyDetail ) {
+        d->m_dirtyDetail = false;
+>>>>>>> 9054e85... Current state of linestring filtering
+
+    int currentPosition = (itCoordsCurrent - (d->m_vector.constBegin()));
+
+<<<<<<< HEAD
+    ++itCoordsCurrent;
+    ++currentPosition;
+
+    if ( itCoordsCurrent == d->m_vector.constEnd() )
+        return;
+
+    while ( itCoordsCurrent != d->m_vector.constEnd() && d->m_vectorDetailLevels.at( currentPosition ) > detailLevel ) {
+=======
+        QVector<int> pattern;
+        pattern.clear();
+//        pattern << 8 << 4 << 6 << 3 << 7 << 2 << 5 << 1;
+
+        pattern << 16 << 8 << 12 << 7 << 14 << 6 << 11 << 5 << 15 << 4 << 10 << 3 << 13 << 2 << 9 << 1;
+
+        d->m_vectorDetailLevels.clear();
+        int count = 0;
+
+	    for( ; itCoords != itEnd; ++itCoords ) {
+	    	d->m_vectorDetailLevels.append( pattern[ count & 15 ] );
+            ++count;
+	    }
+
+        d->m_vectorDetailLevels.last() = 16;
+    }
 
     int currentPosition = (itCoordsCurrent - (d->m_vector.constBegin()));
 
@@ -229,11 +268,16 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
     if ( itCoordsCurrent == d->m_vector.constEnd() )
         return;
 
-    while ( itCoordsCurrent != d->m_vector.constEnd() && d->m_vectorDetailLevels.at( currentPosition ) > detailLevel ) {
+    while ( itCoordsCurrent != d->m_vector.constEnd() && d->m_vectorDetailLevels.at( currentPosition ) < detailLevel ) {
+>>>>>>> 9054e85... Current state of linestring filtering
         ++itCoordsCurrent;
         ++currentPosition;
     }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9054e85... Current state of linestring filtering
 
 
 
@@ -366,6 +410,7 @@ void GeoDataLineString::append ( const GeoDataCoordinates& value )
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
+    d->m_dirtyDetail = true;
     d->m_vector.append( value );
 }
 
@@ -377,6 +422,7 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& va
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
+    d->m_dirtyDetail = true;
     d->m_vector.append( value );
     return *this;
 }
@@ -389,6 +435,7 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataLineString& val
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
+    d->m_dirtyDetail = true;
 
     QVector<GeoDataCoordinates>::const_iterator itCoords = value.constBegin();
     QVector<GeoDataCoordinates>::const_iterator itEnd = value.constEnd();
@@ -408,6 +455,7 @@ void GeoDataLineString::clear()
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
+    d->m_dirtyDetail = true;
 
     d->m_vector.clear();
 }
@@ -728,6 +776,7 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
+    d->m_dirtyDetail = true;
     return d->m_vector.erase( pos );
 }
 
@@ -739,6 +788,7 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
+    d->m_dirtyDetail = true;
     return d->m_vector.erase( begin, end );
 }
 
@@ -748,6 +798,7 @@ void GeoDataLineString::remove ( int i )
     GeoDataLineStringPrivate* d = p();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
+    d->m_dirtyDetail = true;
     d->m_vector.remove( i );
 }
 
