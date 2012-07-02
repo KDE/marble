@@ -6,11 +6,13 @@
 // the source code.
 //
 // Copyright 2008, 2010 Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2012       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 // Own
 #include "TileId.h"
 
+#include <QtCore/QDebug>
 #include <QtCore/QStringList>
 
 namespace Marble
@@ -44,3 +46,13 @@ TileId TileId::fromString( QString const& idStr )
 }
 
 }
+
+#ifndef QT_NO_DEBUG_STREAM
+QDebug operator<<( QDebug dbg, const Marble::TileId &id )
+{
+    return dbg << QString( "Marble::TileId(%1, %2, %3, %4)" ).arg( id.mapThemeIdHash() )
+                                                             .arg( id.zoomLevel() )
+                                                             .arg( id.x() )
+                                                             .arg( id.y() );
+}
+#endif

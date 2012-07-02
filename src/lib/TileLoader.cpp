@@ -61,10 +61,10 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
         // check if an update should be triggered
 
         if ( status == Available ) {
-            mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateUptodate";
+            mDebug() << Q_FUNC_INFO << tileId << "StateUptodate";
         } else {
             Q_ASSERT( status == Expired );
-            mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateExpired";
+            mDebug() << Q_FUNC_INFO << tileId << "StateExpired";
             triggerDownload( tileId, usage );
         }
 
@@ -201,7 +201,7 @@ void TileLoader::triggerDownload( TileId const & id, DownloadUsage const usage )
 
 QImage TileLoader::scaledLowerLevelTile( TileId const & id ) const
 {
-    mDebug() << "TileLoader::scaledLowerLevelTile" << id.toString();
+    mDebug() << Q_FUNC_INFO << id;
     GeoSceneTexture const * const textureLayer = findTextureLayer( id );
 
     for ( int level = qMax<int>( 0, id.zoomLevel() - 1 ); level >= 0; --level ) {

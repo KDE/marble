@@ -166,7 +166,7 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
         return stackedTile;
     }
 
-    mDebug() << "StackedTileLoader::loadTile" << stackedTileId.toString();
+    mDebug() << Q_FUNC_INFO << stackedTileId;
 
     // the tile was not in the hash so check if it is in the cache
     stackedTile = d->m_tileCache.take( stackedTileId );

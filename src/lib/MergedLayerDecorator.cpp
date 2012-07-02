@@ -137,7 +137,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         const TileId tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
 
-        mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId.toString() << textureLayer->tileSize();
+        mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId << textureLayer->tileSize();
 
         const QImage tileImage = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
         const Blending *blending = d->m_blendingFactory.findBlending( textureLayer->blending() );
