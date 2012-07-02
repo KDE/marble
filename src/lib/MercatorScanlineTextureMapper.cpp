@@ -261,7 +261,4 @@ void MercatorScanlineTextureMapper::RenderJob::run()
             ++y;
         }
     }
-
-            mDebug() << "------------------------HERE RENDER2";
-
 }

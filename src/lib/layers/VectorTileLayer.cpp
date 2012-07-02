@@ -123,7 +123,6 @@ void VectorTileLayer::Private::updateTextureLayers()
                 mDebug() << "disabling texture" << candidate->name();
             }
         }
-
     }
 
     if ( !result.isEmpty() ) {

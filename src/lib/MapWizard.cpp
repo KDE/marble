@@ -797,8 +797,6 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setLevelZeroColumns( 1 );
         texture->setServerLayout( new CustomServerLayout( texture ) );
         texture->setProjection( GeoSceneTiled::Mercator );
-
-                mDebug() << "-----------------------paso";
     }
     
     else if( d->mapProviderType == MapWizardPrivate::StaticImageMap )
@@ -820,8 +818,6 @@ GeoSceneDocument* MapWizard::createDocument()
             maxTileLevel = static_cast<int>( approxMaxTileLevel + 1 );
         }
         texture->setMaximumTileLevel( maxTileLevel );
-
-                mDebug() << "-----------------------paso";
     }
     
     GeoSceneLayer *layer = new GeoSceneLayer( d->uiWidget.lineEditTheme->text() );

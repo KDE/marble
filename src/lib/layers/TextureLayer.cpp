@@ -110,9 +110,8 @@ void TextureLayer::Private::updateTextureLayers()
 
         // Check if the GeoSceneTiled is a TextureTile or VectorTile.
         // Only VectorTiles have to be used.
-        // FIXME ANDER, THIS CRASHES
-        //if ( QString(candidate->nodeType()) == "GeoSceneTextureTile"){
-        mDebug() << "-------------------------------------"<< QString(candidate->nodeType());
+        // FIXME ANDER, WHITHOUT THIS VECTOR TILES ARE PUT INTO TEXTURELAYER
+        if ( QString(candidate->nodeType()) == "GeoSceneTextureTile"){
             bool enabled = true;
             if ( m_textureLayerSettings ) {
                 const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
@@ -124,7 +123,7 @@ void TextureLayer::Private::updateTextureLayers()
             } else {
                 mDebug() << "disabling texture" << candidate->name();
             }
-        //}
+        }
     }
 
     if ( !result.isEmpty() ) {
