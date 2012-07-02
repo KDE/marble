@@ -110,4 +110,8 @@ inline uint qHash( TileId const& tid )
 
 }
 
+#ifndef QT_NO_DEBUG_STREAM
+QDebug operator<<( QDebug, const Marble::TileId & );
+#endif
+
 #endif
