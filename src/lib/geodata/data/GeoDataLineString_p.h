@@ -49,6 +49,9 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
 =======
 		m_vectorFiltered = other.m_vectorFiltered;
         m_vectorDetailLevels = other.m_vectorDetailLevels;
+<<<<<<< HEAD
+>>>>>>> 9054e85... Current state of linestring filtering
+=======
 >>>>>>> 9054e85... Current state of linestring filtering
         qDeleteAll( m_rangeCorrected );
         foreach( GeoDataLineString *lineString, other.m_rangeCorrected )
@@ -98,10 +101,20 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     QVector<GeoDataCoordinates> m_vector;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	mutable QVector<GeoDataCoordinates> m_vectorFiltered;   // Keeps just some of the nodes in the linestring, 
 												            // since not all of them are needed for a lower zoom
 												            // level, for example. Saves performance. 
+=======
+	mutable QVector<GeoDataCoordinates> m_vectorFiltered;   // Keeps just some of the nodes in the linestring, 
+												            // since not all of them are needed for a lower zoom
+												            // level, for example. Saves performance. 
+
+    QVector<int>                m_vectorDetailLevels;   // Keeps the detail levels for each node of the current linestring.
+                                                        // A high detail level means that the node is going to be used on 
+                                                        // more lower zoom levels (it's a more important point of the linestring)
+>>>>>>> 9054e85... Current state of linestring filtering
 
     QVector<int>                m_vectorDetailLevels;   // Keeps the detail levels for each node of the current linestring.
                                                         // A high detail level means that the node is going to be used on 

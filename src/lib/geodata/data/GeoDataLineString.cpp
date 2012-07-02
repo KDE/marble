@@ -149,8 +149,13 @@ const GeoDataCoordinates& GeoDataLineString::at( int pos ) const
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 void GeoDataLineString::douglasPeucker( QVector<GeoDataCoordinates>::ConstIterator itLeft, QVector<GeoDataCoordinates>::ConstIterator itRight, const int currentDetailLevel ) const
+=======
+
+void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterator &itCoordsCurrent, int detailLevel ) const
+>>>>>>> 9054e85... Current state of linestring filtering
 =======
 
 void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterator &itCoordsCurrent, int detailLevel ) const
@@ -166,6 +171,7 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
 
     GeoDataLineStringPrivate* d = p();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     qreal dMax = 0;
     QVector<GeoDataCoordinates>::const_iterator itCoords = itLeft;
@@ -200,9 +206,15 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
         }
     } 
 
+=======
+
+    if ( d->m_dirtyDetail ) {
+        d->m_dirtyDetail = false;
+>>>>>>> 9054e85... Current state of linestring filtering
 
     int nextDetailLevel = currentDetailLevel;
 
+<<<<<<< HEAD
     while ( dMax < epsilonFromDetailLevel( nextDetailLevel ) && nextDetailLevel < 19 )
         nextDetailLevel++;
     if ( nextDetailLevel > 19 )
@@ -243,6 +255,8 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
 
     while ( itCoordsCurrent != d->m_vector.constEnd() && d->m_vectorDetailLevels.at( currentPosition ) > detailLevel ) {
 =======
+=======
+>>>>>>> 9054e85... Current state of linestring filtering
         QVector<int> pattern;
         pattern.clear();
 //        pattern << 8 << 4 << 6 << 3 << 7 << 2 << 5 << 1;
@@ -269,12 +283,19 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
         return;
 
     while ( itCoordsCurrent != d->m_vector.constEnd() && d->m_vectorDetailLevels.at( currentPosition ) < detailLevel ) {
+<<<<<<< HEAD
+>>>>>>> 9054e85... Current state of linestring filtering
+=======
 >>>>>>> 9054e85... Current state of linestring filtering
         ++itCoordsCurrent;
         ++currentPosition;
     }
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9054e85... Current state of linestring filtering
 =======
 
 >>>>>>> 9054e85... Current state of linestring filtering

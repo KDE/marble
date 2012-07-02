@@ -427,6 +427,12 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     const bool isLong = lineString.size() > 50;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+
+    qDebug() << viewport->angularResolution() << "\n";
+>>>>>>> 9054e85... Current state of linestring filtering
 =======
 
 
