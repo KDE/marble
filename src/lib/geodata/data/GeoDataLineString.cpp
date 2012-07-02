@@ -152,39 +152,49 @@ const GeoDataCoordinates& GeoDataLineString::at( int pos ) const
     return p()->m_vector.at( pos );
 }
 
-/*
-void GeoDataLineString::filteredAt( int pos, int detailLevel )
+
+void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterator &itCoordsCurrent, int detailLevel ) const
 {
     GeoDataLineStringPrivate* d = p();
 
-    if ( d->m_vector.size() <= 10 )
-        return;
 
-    fprintf(stderr, "%d %d\n", d->m_detailLevel, detailLevel);
-    fprintf(stderr, "Vector size = %d\n", d->m_vector.size());
-
-	if ( d->m_detailLevel != detailLevel ) {
-		d->m_detailLevel = detailLevel;
+    if ( d->m_dirtyDetail ) {
+        d->m_dirtyDetail = false;
 
     	QVector<GeoDataCoordinates>::const_iterator itCoords = d->m_vector.constBegin();
 	    QVector<GeoDataCoordinates>::const_iterator itEnd = d->m_vector.constEnd();
 
-		d->m_vectorFiltered.clear();
+        QVector<int> pattern;
+        pattern.clear();
+//        pattern << 8 << 4 << 6 << 3 << 7 << 2 << 5 << 1;
 
-		int count = 0;
+        pattern << 16 << 8 << 12 << 7 << 14 << 6 << 11 << 5 << 15 << 4 << 10 << 3 << 13 << 2 << 9 << 1;
+
+        d->m_vectorDetailLevels.clear();
+        int count = 0;
+
 	    for( ; itCoords != itEnd; ++itCoords ) {
-			++count;
-			if (count % 10 == 0)
-	    	    d->m_vectorFiltered.append( *itCoords );
+	    	d->m_vectorDetailLevels.append( pattern[ count & 15 ] );
+            ++count;
 	    }
-        fprintf(stderr, "    Count = %d\n", count);
-	}
 
-    fprintf( stderr, "Pos = %d %d %d\n", pos, d->m_vectorFiltered.size(), d->m_vector.size() );
-//  return 
-//	return d->m_vectorFiltered[ pos ];
+        d->m_vectorDetailLevels.last() = 16;
+    }
+
+    int currentPosition = (itCoordsCurrent - (d->m_vector.constBegin()));
+
+    ++itCoordsCurrent;
+    ++currentPosition;
+
+    if ( itCoordsCurrent == d->m_vector.constEnd() )
+        return;
+
+    while ( itCoordsCurrent != d->m_vector.constEnd() && d->m_vectorDetailLevels.at( currentPosition ) < detailLevel ) {
+        ++itCoordsCurrent;
+        ++currentPosition;
+    }
 }
-*/
+
 
 
 GeoDataCoordinates& GeoDataLineString::operator[]( int pos )
@@ -282,6 +292,7 @@ void GeoDataLineString::append ( const GeoDataCoordinates& value )
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
+    d->m_dirtyDetail = true;
     d->m_vector.append( value );
 }
 
@@ -293,6 +304,7 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& va
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
+    d->m_dirtyDetail = true;
     d->m_vector.append( value );
     return *this;
 }
@@ -305,6 +317,7 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataLineString& val
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
+    d->m_dirtyDetail = true;
 
     QVector<GeoDataCoordinates>::const_iterator itCoords = value.constBegin();
     QVector<GeoDataCoordinates>::const_iterator itEnd = value.constEnd();
@@ -324,6 +337,7 @@ void GeoDataLineString::clear()
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
+    d->m_dirtyDetail = true;
 
     d->m_vector.clear();
 }
@@ -644,6 +658,7 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
+    d->m_dirtyDetail = true;
     return d->m_vector.erase( pos );
 }
 
@@ -655,6 +670,7 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
     d->m_rangeCorrected.clear();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
+    d->m_dirtyDetail = true;
     return d->m_vector.erase( begin, end );
 }
 
@@ -664,6 +680,7 @@ void GeoDataLineString::remove ( int i )
     GeoDataLineStringPrivate* d = p();
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
+    d->m_dirtyDetail = true;
     d->m_vector.remove( i );
 }
 

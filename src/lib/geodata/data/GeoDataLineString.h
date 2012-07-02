@@ -229,6 +229,12 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 */
     GeoDataCoordinates& at( int pos );
 
+/*!
+    \brief Returns a reference to the coordinates of the first node that has a detailLevel greater or equal than the current one.
+*/
+   
+    void nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterator &itCoordsCurrent, int detailLevel ) const;
+
 
 /*!
     \brief Returns a reference to the coordinates of a node at a given position.

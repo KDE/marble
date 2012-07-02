@@ -23,6 +23,8 @@
 #include "GeoDataCoordinates.h"
 #include "MarbleGlobal.h"
 
+#include <QDebug>
+
 #define SAFE_DISTANCE
 
 namespace Marble
@@ -385,8 +387,8 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
     polygons.append( new QPolygonF );
 
-    GeoDataLineString::ConstIterator itCoords = lineString.constBeginFiltered( 0 );
-    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBeginFiltered( 0 );
+    GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
+    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
 
     // Some projections display the earth in a way so that there is a
     // foreside and a backside.
@@ -413,8 +415,8 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     GeoDataCoordinates previousCoords;
     GeoDataCoordinates currentCoords;
 
-    GeoDataLineString::ConstIterator itBegin = lineString.constBeginFiltered( 0 );
-    GeoDataLineString::ConstIterator itEnd = lineString.constEndFiltered();
+    GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
+    GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
 
     bool processingLastNode = false;
 
@@ -423,6 +425,9 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     // which isn't really convenient to achieve with a for loop ...
 
     const bool isLong = lineString.size() > 50;
+
+
+    qDebug() << viewport->angularResolution() << "\n";
     
     while ( itCoords != itEnd )
     {
@@ -538,7 +543,9 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
         if ( processingLastNode ) {
             break;
         }
-        ++itCoords;
+
+        lineString.nextFilteredAt( itCoords, 16 );
+//        ++itCoords;
 
         if ( itCoords == itEnd  && lineString.isClosed() ) {
             itCoords = itBegin;

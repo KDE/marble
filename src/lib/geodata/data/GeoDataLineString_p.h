@@ -24,13 +24,15 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     GeoDataLineStringPrivate( TessellationFlags f )
          : m_dirtyRange( true ),
            m_dirtyBox( true ),
+           m_dirtyDetail( true ),
            m_tessellationFlags( f )
     {
     }
 
     GeoDataLineStringPrivate()
          : m_dirtyRange( true ),
-           m_dirtyBox( true )
+           m_dirtyBox( true ),
+           m_dirtyDetail( true )
     {
     }
 
@@ -44,6 +46,7 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
         GeoDataGeometryPrivate::operator=( other );
         m_vector = other.m_vector;
 		m_vectorFiltered = other.m_vectorFiltered;
+        m_vectorDetailLevels = other.m_vectorDetailLevels;
         qDeleteAll( m_rangeCorrected );
         foreach( GeoDataLineString *lineString, other.m_rangeCorrected )
         {
@@ -52,6 +55,7 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
         m_dirtyRange = other.m_dirtyRange;
         m_latLonAltBox = other.m_latLonAltBox;
         m_dirtyBox = other.m_dirtyBox;
+        m_dirtyDetail = other.m_dirtyDetail;
         m_tessellationFlags = other.m_tessellationFlags;
 		m_detailLevel = other.m_detailLevel;
     }
@@ -91,9 +95,13 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
 
     QVector<GeoDataCoordinates> m_vector;
 
-	mutable QVector<GeoDataCoordinates> m_vectorFiltered; // Keeps just some of the nodes in the linestring, 
-												  // since not all of them are needed for a lower zoom
-												  // level, for example. Saves performance. 
+	mutable QVector<GeoDataCoordinates> m_vectorFiltered;   // Keeps just some of the nodes in the linestring, 
+												            // since not all of them are needed for a lower zoom
+												            // level, for example. Saves performance. 
+
+    QVector<int>                m_vectorDetailLevels;   // Keeps the detail levels for each node of the current linestring.
+                                                        // A high detail level means that the node is going to be used on 
+                                                        // more lower zoom levels (it's a more important point of the linestring)
 
     QVector<GeoDataLineString*>  m_rangeCorrected;
 
@@ -106,6 +114,10 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     bool                        m_dirtyBox; // tells whether there have been changes to the
                                             // GeoDataPoints since the LatLonAltBox has 
                                             // been calculated. Saves performance. 
+
+    bool                        m_dirtyDetail;  // same as m_dirtyBox, but for the filtering 
+                                                // of the linestring
+
     TessellationFlags           m_tessellationFlags;
 };
 
