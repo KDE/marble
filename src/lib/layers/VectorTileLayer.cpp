@@ -49,7 +49,7 @@ public:
 
     void mapChanged();
     void updateTextureLayers();
-    void updateTile(const TileId &tileId, const QImage &tileImage , const QString &format);
+    //void updateTile(const TileId &tileId, const GeoDataDocument document , const QString &format);
 
 public:
     VectorTileLayer  *const m_parent;
@@ -136,23 +136,10 @@ void VectorTileLayer::Private::updateTextureLayers()
     m_pixmapCache.clear();
 }
 
-void VectorTileLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage, const QString &format )
+void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument const &document, QString const &format )
 {
-    if ( tileImage.isNull() )
-        return; // keep tiles in cache to improve performance
-
-    const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );
-    for ( int i = 0; i < 4; ++i ) {
-        const TileId id = TileId( i, stackedTileId.zoomLevel(), stackedTileId.x(), stackedTileId.y() );
-
-        m_pixmapCache.remove( id );
-    }
-
-    m_tileLoader.updateTile( tileId, tileImage, format );
-
-    mapChanged();
+    mDebug() << "--------------------------------- FIXME RECIEVE";
 }
-
 
 
 VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
@@ -162,8 +149,8 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
     : QObject()
     , d( new Private( downloadManager, sunLocator, veccomposer, treeModel, this ) )
 {
-    connect( &d->m_loader, SIGNAL( tileCompleted( const TileId &, const QImage & ) ),
-             this, SLOT( updateTile( const TileId &, const QImage &, const QString & ) ) );
+    mDebug() << "----------------" << connect( &d->m_loader, SIGNAL( tileCompleted( TileId const & tileId, GeoDataDocument const & document, QString const & format ) ),
+             this, SLOT( updateTile( TileId const & tileId, GeoDataDocument const & document, QString const & format ) ) );
 
     // Repaint timer
     d->m_repaintTimer.setSingleShot( true );
@@ -241,10 +228,13 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     d->m_texmapper->setTileLevel( tileLevel );
 
     if ( changedTileLevel ) {
+
+        //FIXME ANDER empty tree model
         emit tileLevelChanged( tileLevel );
     }
 
     const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
+
     d->m_texmapper->mapTexture( painter, viewport, dirtyRect, d->m_texcolorizer );
 
     return true;

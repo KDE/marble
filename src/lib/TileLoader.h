@@ -84,6 +84,8 @@ class TileLoader: public QObject
 
     void tileCompleted( TileId const & tileId, QImage const & tileImage );
 
+    void tileCompleted( TileId const & tileId, GeoDataDocument const &document, QString const &format );
+
     int newDocumentReady(GeoDataDocument*);
 
  private:

@@ -90,6 +90,7 @@ void SphericalScanlineTextureMapper::mapTexture( GeoPainter *painter,
     }
 
     if ( m_repaintNeeded ) {
+
         mapTexture( viewport, painter->mapQuality() );
 
         if ( texColorizer ) {
@@ -136,6 +137,8 @@ void SphericalScanlineTextureMapper::mapTexture( const ViewportParams *viewport,
         const int yStart = yTop +  i      * yStep;
         const int yEnd   = yTop + (i + 1) * yStep;
         QRunnable *const job = new RenderJob( m_tileLoader, tileZoomLevel(), &m_canvasImage, viewport, mapQuality, yStart, yEnd );
+
+        //FIXME ANDER this one loads tiles
         m_threadPool.start( job );
     }
 
@@ -170,7 +173,6 @@ void SphericalScanlineTextureMapper::RenderJob::run()
     matrix  planetAxisMatrix;
     m_viewport->planetAxis().toMatrix( planetAxisMatrix );
 
-
     // initialize needed variables that are modified during texture mapping:
 
     ScanlineTextureMapperContext context( m_tileLoader, m_tileLevel );
@@ -178,7 +180,6 @@ void SphericalScanlineTextureMapper::RenderJob::run()
     qreal  lat = 0.0;
 
     // Scanline based algorithm to texture map a sphere
-
     for ( int y = m_yTop; y < m_yBottom ; ++y ) {
 
         // Evaluate coordinates for the 3D position vector of the current pixel

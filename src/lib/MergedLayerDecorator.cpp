@@ -171,16 +171,13 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         // File format for creating an ImageTile or a VectorTile
         QString format = textureLayer->fileFormat();
 
+        //FIXME ANDER prepare for more format types
         // VectorTile
         if ( format.toLower() == "js"){
-            // FIXME ANDER load an image for testing
-            QImage tileImage ( "/home/ander/imageDemo.png" );
-
             GeoDataDocument tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, format );
 
             QSharedPointer<Tile> tile( new VectorTile( tileId, tileVectordata, format, blending ) );
             tiles.append( tile );
-
         }
         // ImageTile
         else {

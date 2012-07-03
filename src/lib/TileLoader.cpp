@@ -42,6 +42,7 @@ TileLoader::TileLoader(HttpDownloadManager * const downloadManager, const GeoDat
       m_treeModel( treeModel )
 {
     qRegisterMetaType<DownloadUsage>( "DownloadUsage" );
+    qRegisterMetaType<TileId>( "TileId" );
     connect( this, SIGNAL( downloadTile( QUrl, QString, QString, DownloadUsage )),
              downloadManager, SLOT( addJob( QUrl, QString, QString, DownloadUsage )));
     connect( downloadManager, SIGNAL( downloadComplete( QByteArray, QString )),
@@ -126,11 +127,12 @@ GeoDataDocument TileLoader::loadTileVectorData( TileId const & tileId, DownloadU
             GeoDataDocument* document = man->openFile( fileName );
 
             // FIXME ANDER sometimes the parser doesnt work
-            // maybe Q_ASSERT better?
+            // maybe Q_ASSERT?
             if (document){
-                emit newDocumentReady(document);
-                // return * document;
-                return * new GeoDataDocument;
+                //emit newDocumentReady(document);
+                mDebug() << "--------------------------------- FIXME SEND";
+                emit tileCompleted( tileId, *document, format );
+                return * document;
             }
         }
     }

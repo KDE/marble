@@ -17,6 +17,7 @@
 
 #include "MarbleGlobal.h"
 #include "GeoDataTreeModel.h"
+#include "GeoDataDocument.h"
 #include "GeoSceneTiled.h"
 
 #include <QtCore/QSize>
@@ -103,6 +104,8 @@ class VectorTileLayer : public QObject, public LayerInterface
 
     void downloadTile( const TileId &tileId );
 
+    void updateTile( TileId const & tileId, GeoDataDocument const & document, QString const &format );
+
  Q_SIGNALS:
     void tileLevelChanged( int );
     void repaintNeeded();
@@ -110,7 +113,7 @@ class VectorTileLayer : public QObject, public LayerInterface
  private:
     Q_PRIVATE_SLOT( d, void mapChanged() )
     Q_PRIVATE_SLOT( d, void updateTextureLayers() )
-    Q_PRIVATE_SLOT( d, void updateTile( const TileId &tileId, const QImage &tileImage, const QString &format ) )
+
 
  private:
     class Private;

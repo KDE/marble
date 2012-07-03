@@ -73,7 +73,6 @@ void MercatorScanlineTextureMapper::mapTexture( GeoPainter *painter,
                                                 const QRect &dirtyRect,
                                                 TextureColorizer *texColorizer )
 {
-
     if ( m_canvasImage.size() != viewport->size() || m_radius != viewport->radius() ) {
         const QImage::Format optimalFormat = ScanlineTextureMapperContext::optimalCanvasImageFormat( viewport );
 

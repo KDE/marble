@@ -802,6 +802,7 @@ void MarbleMapPrivate::updateMapTheme()
     if ( m_model->mapTheme()->map()->hasTextureLayers() ) {
         GeoSceneSettings *const settings = m_model->mapTheme()->settings();
         GeoSceneGroup *const textureLayerSettings = settings ? settings->group( "Texture Layers" ) : 0;
+        GeoSceneGroup *const vectorTileLayerSettings = settings ? settings->group( "VectorTile Layers" ) : 0;
 
         bool textureLayersOk = true;
 
@@ -929,8 +930,7 @@ void MarbleMapPrivate::updateMapTheme()
         m_textureLayer.setupTextureMapper( m_viewport.projection() );
         m_textureLayer.setShowRelief( q->showRelief() );
 
-        // FIXME ANDER ask if textureLayerSettings would be ok here
-        m_vectorTileLayer.setMapTheme( vectorTiles, textureLayerSettings, seafile, landfile );
+        m_vectorTileLayer.setMapTheme( vectorTiles, vectorTileLayerSettings, seafile, landfile );
         m_vectorTileLayer.setupTextureMapper( m_viewport.projection() );
         m_vectorTileLayer.setShowRelief( q->showRelief() );
 

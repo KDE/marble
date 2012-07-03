@@ -31,9 +31,9 @@
 
 <!-- VECTORTILES -->
         
-            <layer name="vectorosm" backend="vectortile" >
                 <!-- OpenStreetMap mapnik rendered tiles expire after seven days
                      or 604800 seconds -->
+            <layer name="vectorosm" backend="vectortile" >
                 <vectortile name="geojson_data" expire="604800" >
                     <sourcedir format="JS"> earth/vectorosm </sourcedir>
                     <tileSize width="256" height="256" />
@@ -48,10 +48,10 @@
 
 <!-- OPENSTREETMAP --> 
 
-	    <layer name="openstreetmap" backend="texture" >
                 <!-- OpenStreetMap mapnik rendered tiles expire after seven days
                      or 604800 seconds -->
-                <texture name="mapnik_data" expire="604800" >
+	   <layer name="openstreetmap" backend="texture" >
+		<texture name="mapnik_data" expire="604800" >
                     <sourcedir format="PNG"> earth/openstreetmap </sourcedir>
                     <tileSize width="256" height="256" />
                     <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="18" mode="OpenStreetMap" />
@@ -66,7 +66,7 @@
 
 <!-- PLACES -->
 
-            <layer name="standardplaces" backend="geodata">
+           <layer name="standardplaces" backend="geodata">
                <geodata name="cityplacemarks">
                     <sourcefile format="KML">cityplacemarks.kml</sourcefile>
                     <pick>placemark</pick>
@@ -88,7 +88,7 @@
                     <sourcefile format="KML">boundaryplacemarks.kml</sourcefile>
                     <pick>placemark</pick>
                 </geodata>
-            </layer>    
+            </layer>
  
         </map>
  

@@ -50,7 +50,7 @@ public:
 
     void mapChanged();
     void updateTextureLayers();
-    void updateTile(const TileId &tileId, const QImage &tileImage , const QString &format);
+    void updateTile(const TileId &tileId, const QImage &tileImage );
 
 public:
     TextureLayer  *const m_parent;
@@ -109,8 +109,7 @@ void TextureLayer::Private::updateTextureLayers()
     foreach ( const GeoSceneTiled *candidate, m_textures ) {
 
         // Check if the GeoSceneTiled is a TextureTile or VectorTile.
-        // Only VectorTiles have to be used.
-        // FIXME ANDER, WHITHOUT THIS VECTOR TILES ARE PUT INTO TEXTURELAYER
+        // Only TextureTiles have to be used.
         if ( QString(candidate->nodeType()) == "GeoSceneTextureTile"){
             bool enabled = true;
             if ( m_textureLayerSettings ) {
@@ -137,7 +136,7 @@ void TextureLayer::Private::updateTextureLayers()
     }
 }
 
-void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage, const QString &format )
+void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage )
 {
     if ( tileImage.isNull() )
         return; // keep tiles in cache to improve performance
@@ -149,7 +148,9 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
         m_pixmapCache.remove( id );
     }
 
-    m_tileLoader.updateTile( tileId, tileImage, format );
+    // updateTile needs to know if its an image or another type of file,
+    // so we indicate its a PNG
+    m_tileLoader.updateTile( tileId, tileImage, "PNG" );
 
     mapChanged();
 }
@@ -164,7 +165,7 @@ TextureLayer::TextureLayer(HttpDownloadManager *downloadManager,
     , d( new Private( downloadManager, sunLocator, veccomposer, treeModel, this ) )
 {
     connect( &d->m_loader, SIGNAL( tileCompleted( const TileId &, const QImage & ) ),
-             this, SLOT( updateTile( const TileId &, const QImage &, const QString & ) ) );
+             this, SLOT( updateTile( const TileId &, const QImage & ) ) );
 
     // Repaint timer
     d->m_repaintTimer.setSingleShot( true );
