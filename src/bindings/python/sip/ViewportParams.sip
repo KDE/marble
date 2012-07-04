@@ -35,7 +35,7 @@ public:
     bool                    resolves (const Marble::GeoDataLatLonBox& latLonBox) const;
     bool                    resolves (const Marble::GeoDataCoordinates& coord1, const Marble::GeoDataCoordinates& coord2) const;
     int                     radius () const;
-    void                    setRadius (int newRadius);
+    void                    setRadius (int radius);
     bool                    globeCoversViewport () const;
     Marble::Quaternion      planetAxis () const;
     int                     width () const;
@@ -72,6 +72,11 @@ public:
     bool                    geoCoordinates (const int x, const int y, qreal& lon, qreal& lat, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Degree) const;
     QPainterPath            mapShape () const;
     QRegion                 mapRegion () const;
+
+//ig    bool                    screenCoordinates (const Marble::GeoDataCoordinates& geopoint, qreal& x, qreal& y) const;
+//ig    bool                    screenCoordinates (const Marble::GeoDataCoordinates& coordinates, qreal* x, qreal& y, int& pointRepeatNum, bool& globeHidesPoint) const;
+    bool                    screenCoordinates (const Marble::GeoDataCoordinates& coordinates, qreal* x, qreal& y, int& pointRepeatNum, const QSizeF& size, bool& globeHidesPoint) const;
+//ig    bool                    screenCoordinates (const Marble::GeoDataLineString& lineString, QVector<QPolygonF*>& polygons) const;
 };
 // ViewportParams
 

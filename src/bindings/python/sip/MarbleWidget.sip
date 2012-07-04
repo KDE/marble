@@ -119,7 +119,7 @@ protected:
     void                    leaveEvent (QEvent* event);
     void                    paintEvent (QPaintEvent* event);
     virtual void            customPaint (Marble::GeoPainter* painter);
-    void                    resizeEvent (QResizeEvent*);
+    void                    resizeEvent (QResizeEvent* event);
     void                    connectNotify (const char* signal);
     void                    disconnectNotify (const char* signal);
 
@@ -186,6 +186,7 @@ public:
     void                    setFocusPoint (const Marble::GeoDataCoordinates& focusPoint);
     void                    resetFocusPoint ();
     Marble::MapQuality      mapQuality (Marble::ViewContext = Marble::Still) const;
+//ig    const TextureLayer*     textureLayer () const;
 };
 // MarbleWidget
 

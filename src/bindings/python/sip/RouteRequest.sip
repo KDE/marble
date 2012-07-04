@@ -32,13 +32,10 @@ public:
     Marble::GeoDataCoordinates  destination () const;
     int                     size () const;
     Marble::GeoDataCoordinates  at (int index) const;
-    void                    append (const Marble::GeoDataCoordinates& coordinates, const QString& name);
-    void                    insert (int index, const Marble::GeoDataCoordinates& coordinates, const QString& name);
-    void                    setPosition (int index, const Marble::GeoDataCoordinates& position, const QString& name);
     void                    remove (int index);
     void                    clear ();
     void                    addVia (const Marble::GeoDataCoordinates& position);
-    QPixmap                 pixmap (int index) const;
+    QPixmap                 pixmap (int index, int size = -1, int margin = 2) const;
     void                    setName (int index, const QString& name);
     QString                 name (int index) const;
     void                    setVisited (int index, bool visited);
@@ -51,5 +48,9 @@ signals:
     void                    positionAdded (int index);
     void                    positionRemoved (int index);
     void                    routingProfileChanged ();
+public:
+    void                    append (const Marble::GeoDataCoordinates& coordinates, const QString& name = QString());
+    void                    insert (int index, const Marble::GeoDataCoordinates& coordinates, const QString& name = QString());
+    void                    setPosition (int index, const Marble::GeoDataCoordinates& position, const QString& name = QString());
 };
 };

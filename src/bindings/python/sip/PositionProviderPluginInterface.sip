@@ -19,20 +19,29 @@
 
 namespace Marble
 {
-class GeoGraphicsScene : QObject
+enum PositionProviderStatus
+{
+    PositionProviderStatusError,
+    PositionProviderStatusUnavailable,
+    PositionProviderStatusAcquiring,
+    PositionProviderStatusAvailable
+};
+class PositionProviderPluginInterface : Marble::PluginInterface
 {
 %TypeHeaderCode
-#include <GeoGraphicsScene.h>
+#include <PositionProviderPluginInterface.h>
 %End
 
 public:
-                            GeoGraphicsScene (QObject* parent /TransferThis/ = 0);
-    ~GeoGraphicsScene ();
-    void                    removeItem (Marble::GeoGraphicsItem* item);
-    void                    clear ();
-    QList<Marble::GeoGraphicsItem*>  items () const;
-    QList<Marble::GeoGraphicsItem*>  items (const Marble::GeoDataLatLonAltBox& box, int maxZoomLevel) const;
-    static int s_tileZoomLevel;
-    void                    addItem (Marble::GeoGraphicsItem* item);
+    virtual ~PositionProviderPluginInterface ();
+    virtual void            initialize ()=0;
+    virtual bool            isInitialized () const=0;
+    virtual Marble::PositionProviderStatus  status () const=0;
+    virtual Marble::GeoDataCoordinates  position () const=0;
+    virtual Marble::GeoDataAccuracy  accuracy () const=0;
+    virtual qreal           speed () const=0;
+    virtual qreal           direction () const=0;
+    virtual QDateTime       timestamp () const=0;
+    virtual QString         error () const;
 };
 };

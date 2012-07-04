@@ -28,7 +28,6 @@ class GeoDataStyle : Marble::GeoDataStyleSelector
 public:
                             GeoDataStyle ();
                             GeoDataStyle (const Marble::GeoDataStyle& other);
-                            GeoDataStyle (const QPixmap& icon, const QFont& font, const QColor& color);
     ~GeoDataStyle ();
 
     void                    setIconStyle (const Marble::GeoDataIconStyle& style);
@@ -42,6 +41,7 @@ public:
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
     virtual const char*     nodeType () const;
+                            GeoDataStyle (const QImage& icon, const QFont& font, const QColor& color);
 };
 // GeoDataStyle
 

@@ -18,7 +18,7 @@
 namespace Marble
 {
 
-class GeoDataObject : Marble::GeoNode, Serializable
+class GeoDataObject : Marble::GeoNode, Marble::Serializable
 {
 %TypeHeaderCode
 #include <GeoDataObject.h>

@@ -28,16 +28,11 @@ class AbstractDataPlugin : Marble::RenderPlugin /Abstract/
 %End
 
 public:
-                            AbstractDataPlugin ();
     QStringList             backendTypes () const;
     QString                 renderPolicy () const;
     QStringList             renderPosition () const;
-    virtual void            initialize ()=0;
-    bool                    isInitialized () const;
     Marble::AbstractDataPluginModel*  model () const;
     void                    setModel (Marble::AbstractDataPluginModel* model);
-    void                    setNameId (const QString& name);
-    QString                 nameId () const;
     quint32                 numberOfItems () const;
     void                    setNumberOfItems (quint32 number);
     QList<Marble::AbstractDataPluginItem*>  whichItemAt (const QPoint& curpos);
@@ -48,6 +43,7 @@ signals:
 public:
 //ig    PluginManager*          pluginManager () const;
     virtual Marble::RenderPlugin::RenderType  renderType () const;
+                            AbstractDataPlugin (const Marble::MarbleModel* marbleModel);
 };
 // AbstractDataPlugin
 

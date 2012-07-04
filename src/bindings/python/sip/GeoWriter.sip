@@ -19,20 +19,30 @@
 
 namespace Marble
 {
-class GeoGraphicsScene : QObject
+class GeoWriter : QXmlStreamWriter
 {
 %TypeHeaderCode
-#include <GeoGraphicsScene.h>
+#include <GeoWriter.h>
 %End
 
 public:
-                            GeoGraphicsScene (QObject* parent /TransferThis/ = 0);
-    ~GeoGraphicsScene ();
-    void                    removeItem (Marble::GeoGraphicsItem* item);
-    void                    clear ();
-    QList<Marble::GeoGraphicsItem*>  items () const;
-    QList<Marble::GeoGraphicsItem*>  items (const Marble::GeoDataLatLonAltBox& box, int maxZoomLevel) const;
-    static int s_tileZoomLevel;
-    void                    addItem (Marble::GeoGraphicsItem* item);
+                            GeoWriter ();
+    bool                    write (QIODevice* device, const Marble::GeoNode* feature);
+    void                    setDocumentType (const QString& documentType);
+    void                    writeElement (const QString& namespaceUri, const QString& key, const QString& value);
+    void                    writeElement (const QString& key, const QString& value);
+    void                    writeOptionalElement (const QString& key, const QString& value);
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'QXmlStreamWriter'
+    sipType = NULL;
+
+    if (dynamic_cast<Marble::GeoWriter*>(sipCpp))
+        sipType = sipType_Marble_GeoWriter;
+%End
 };
 };
+%ModuleHeaderCode
+//ctscc
+#include <GeoWriter.h>
+#include <qxmlstream.h>
+%End
