@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -58,7 +58,8 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Level">Level</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;none, Country, Region, Locality, PostalCode, Street, Detailed&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Attributes</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#varhorizontal">horizontal</a></td></tr><tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#varvertical">vertical</a></td></tr><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataAccuracy">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataAccuracy">__init__</a> (self, <a href="../marble/Marble.GeoDataAccuracy.html#Level">Marble.GeoDataAccuracy.Level</a> level=Marble.GeoDataAccuracy.none, float horizontal=0.0, float vertical=0.0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator ==">operator ==</a> (self, <a href="../marble/Marble.GeoDataAccuracy.html">Marble.GeoDataAccuracy</a> other)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="GeoDataAccuracy"></a>
 <div class="memitem">
@@ -66,14 +67,57 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <table class="memname"><tr>
 <td class="memname">__init__</td>
 <td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataAccuracy.html#Level">Marble.GeoDataAccuracy.Level</a>&nbsp;</td>
+<td class="paramname"><em>level=Marble.GeoDataAccuracy.none</em>, </td>
 </tr>
-</table>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>horizontal=0.0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>vertical=0.0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
 </div>
-<div class="memdoc"><p>Vertical accuracy in meters.
-</p></div></div><hr><h2>Attribute Documentation</h2><a class="anchor" name="varhorizontal"></a>
+<div class="memdoc"></div></div><a class="anchor" name="operator =="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator ==</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataAccuracy.html">Marble.GeoDataAccuracy</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><hr><h2>Attribute Documentation</h2><a class="anchor" name="varhorizontal"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -97,8 +141,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Approximate descriptive accuracy.
-</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>none</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>Country</em>&nbsp;</td><td><tr><td valign="top"><em>Region</em>&nbsp;</td><td><tr><td valign="top"><em>Locality</em>&nbsp;</td><td><tr><td valign="top"><em>PostalCode</em>&nbsp;</td><td><tr><td valign="top"><em>Street</em>&nbsp;</td><td><tr><td valign="top"><em>Detailed</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -55,19 +55,24 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 
 
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Direction">Direction</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Unknown, Straight, SlightRight, Right, SharpRight, TurnAround, SharpLeft, Left, SlightLeft, RoundaboutFirstExit, RoundaboutSecondExit, RoundaboutThirdExit, RoundaboutExit&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Direction">Direction</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Unknown, Continue, Merge, Straight, SlightRight, Right, SharpRight, TurnAround, SharpLeft, Left, SlightLeft, RoundaboutFirstExit, RoundaboutSecondExit, RoundaboutThirdExit, RoundaboutExit, ExitLeft, ExitRight&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Maneuver">__init__</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.Maneuver.html#Direction">Marble.Maneuver.Direction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#direction">direction</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#directionPixmap">directionPixmap</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#hasWaypoint">hasWaypoint</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#instructionText">instructionText</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator !=">operator !=</a> (self, <a href="../marble/Marble.Maneuver.html">Marble.Maneuver</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator ==">operator ==</a> (self, <a href="../marble/Marble.Maneuver.html">Marble.Maneuver</a> other)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#position">position</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#roadName">roadName</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDirection">setDirection</a> (self, <a href="../marble/Marble.Maneuver.html#Direction">Marble.Maneuver.Direction</a> direction)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setInstructionText">setInstructionText</a> (self, QString text)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPosition">setPosition</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> position)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setWaypoint">setWaypoint</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> waypoint)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRoadName">setRoadName</a> (self, QString roadName)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setWaypoint">setWaypoint</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> waypoint, int index)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#waypoint">waypoint</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#waypointIndex">waypointIndex</a> (self)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="Maneuver"></a>
 <div class="memitem">
@@ -129,11 +134,67 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr>
 </table>
 </div>
+<div class="memdoc"></div></div><a class="anchor" name="operator !="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator !=</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.Maneuver.html">Marble.Maneuver</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="operator =="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator ==</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.Maneuver.html">Marble.Maneuver</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
 <div class="memdoc"></div></div><a class="anchor" name="position"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
 <td class="memname"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> position</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="roadName"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString roadName</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -207,6 +268,28 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <td width="100%"> </td>
 </tr></table>
 </div>
+<div class="memdoc"></div></div><a class="anchor" name="setRoadName"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setRoadName</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>roadName</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
 <div class="memdoc"></div></div><a class="anchor" name="setWaypoint"></a>
 <div class="memitem">
 <div class="memproto">
@@ -219,7 +302,13 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <td class="memname"></td>
 <td></td>
 <td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
-<td class="paramname"><em>waypoint</em></td>
+<td class="paramname"><em>waypoint</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index</em></td>
 </tr>
 <tr>
 <td></td>
@@ -241,6 +330,18 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr>
 </table>
 </div>
+<div class="memdoc"></div></div><a class="anchor" name="waypointIndex"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int waypointIndex</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
 <div class="memdoc"></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="Direction"></a>
 <div class="memitem">
 <div class="memproto">
@@ -250,7 +351,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </table>
 </div>
 <div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Unknown</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>Straight</em>&nbsp;</td><td><tr><td valign="top"><em>SlightRight</em>&nbsp;</td><td><tr><td valign="top"><em>Right</em>&nbsp;</td><td><tr><td valign="top"><em>SharpRight</em>&nbsp;</td><td><tr><td valign="top"><em>TurnAround</em>&nbsp;</td><td><tr><td valign="top"><em>SharpLeft</em>&nbsp;</td><td><tr><td valign="top"><em>Left</em>&nbsp;</td><td><tr><td valign="top"><em>SlightLeft</em>&nbsp;</td><td><tr><td valign="top"><em>RoundaboutFirstExit</em>&nbsp;</td><td><tr><td valign="top"><em>RoundaboutSecondExit</em>&nbsp;</td><td><tr><td valign="top"><em>RoundaboutThirdExit</em>&nbsp;</td><td><tr><td valign="top"><em>RoundaboutExit</em>&nbsp;</td><td></table>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Unknown</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>Continue</em>&nbsp;=&nbsp;13</td><td><tr><td valign="top"><em>Merge</em>&nbsp;=&nbsp;14</td><td><tr><td valign="top"><em>Straight</em>&nbsp;=&nbsp;1</td><td><tr><td valign="top"><em>SlightRight</em>&nbsp;=&nbsp;2</td><td><tr><td valign="top"><em>Right</em>&nbsp;=&nbsp;3</td><td><tr><td valign="top"><em>SharpRight</em>&nbsp;=&nbsp;4</td><td><tr><td valign="top"><em>TurnAround</em>&nbsp;=&nbsp;5</td><td><tr><td valign="top"><em>SharpLeft</em>&nbsp;=&nbsp;6</td><td><tr><td valign="top"><em>Left</em>&nbsp;=&nbsp;7</td><td><tr><td valign="top"><em>SlightLeft</em>&nbsp;=&nbsp;8</td><td><tr><td valign="top"><em>RoundaboutFirstExit</em>&nbsp;=&nbsp;9</td><td><tr><td valign="top"><em>RoundaboutSecondExit</em>&nbsp;=&nbsp;10</td><td><tr><td valign="top"><em>RoundaboutThirdExit</em>&nbsp;=&nbsp;11</td><td><tr><td valign="top"><em>RoundaboutExit</em>&nbsp;=&nbsp;12</td><td><tr><td valign="top"><em>ExitLeft</em>&nbsp;=&nbsp;15</td><td><tr><td valign="top"><em>ExitRight</em>&nbsp;=&nbsp;16</td><td></table>
 </dl>
 </div></div><p>
 </div>

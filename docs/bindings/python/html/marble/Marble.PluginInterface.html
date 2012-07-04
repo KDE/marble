@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
 <code>from PyKDE4.marble import *</code>
 <p>
 
-
+Subclasses: <a href="../marble/Marble.ParseRunnerPlugin.html">Marble.ParseRunnerPlugin</a>, <a href="../marble/Marble.PositionProviderPluginInterface.html">Marble.PositionProviderPluginInterface</a>, <a href="../marble/Marble.RenderPluginInterface.html">Marble.RenderPluginInterface</a>, <a href="../marble/Marble.ReverseGeocodingRunnerPlugin.html">Marble.ReverseGeocodingRunnerPlugin</a>, <a href="../marble/Marble.RoutingRunnerPlugin.html">Marble.RoutingRunnerPlugin</a>, <a href="../marble/Marble.SearchRunnerPlugin.html">Marble.SearchRunnerPlugin</a><br />
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 <dl class="abstract" compact><dt><b>Abstract class:</b></dt>
@@ -57,15 +57,45 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <p>This class specifies interface of a Marble plugin.
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aboutDataText">aboutDataText</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#copyrightYears">copyrightYears</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#description">description</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#guiString">guiString</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QIcon&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#icon">icon</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#initialize">initialize</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isInitialized">isInitialized</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#name">name</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nameId">nameId</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../marble/Marble.PluginAuthor.html">Marble.PluginAuthor</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pluginAuthors">pluginAuthors</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#version">version</a> (self)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="description"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="aboutDataText"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString aboutDataText</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns about text (credits) for external data the plugin uses.
+</p>
+<p>
+The default implementation returns the empty string. Please override
+this method to give credits for all data from 3rd-partys.
+</p></div></div><a class="anchor" name="copyrightYears"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString copyrightYears</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="description"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -78,24 +108,6 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </table>
 </div>
 <div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Returns a user description of the plugin.
-</p></div></div><a class="anchor" name="guiString"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QString guiString</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Returns the string that should appear in the UI / in the menu.
-.
-Using a "&amp;" you can suggest key shortcuts
-</p>
-<p>
-Example: "&amp;Stars"
 </p></div></div><a class="anchor" name="icon"></a>
 <div class="memitem">
 <div class="memproto">
@@ -109,31 +121,7 @@ Example: "&amp;Stars"
 </table>
 </div>
 <div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Returns an icon for the plugin.
-</p></div></div><a class="anchor" name="initialize"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> initialize</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="isInitialized"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool isInitialized</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="name"></a>
+</p></div></div><a class="anchor" name="name"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -145,9 +133,15 @@ Example: "&amp;Stars"
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Returns the "real name" of the backend.
-.
-Example: "Starry Sky Plugin"
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Returns the user-visible name of the plugin.
+</p>
+<p>
+The user-visible name should be context free, i.e. the name should
+provide enough information as to what the plugin is about in the context
+of Marble.
+</p>
+<p>
+Example: "Starry Sky Background", "OpenRouteService Routing"
 </p></div></div><a class="anchor" name="nameId"></a>
 <div class="memitem">
 <div class="memproto">
@@ -160,10 +154,35 @@ Example: "Starry Sky Plugin"
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Returns the name ID of the backend.
-.
-Examples: "starrysky", "QNetworkAccessManager"
-</p></div></div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Returns the unique name of the plugin.
+</p>
+<p>
+Examples: "starrysky", "openrouteservice"
+</p></div></div><a class="anchor" name="pluginAuthors"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../marble/Marble.PluginAuthor.html">Marble.PluginAuthor</a>] pluginAuthors</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="version"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString version</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div>
 </div>
 </div>
 </div>
