@@ -76,6 +76,13 @@ public:
     virtual ~GeoDataCoordinates ();
     bool                    isPole (Marble::Pole = Marble::AnyPole) const;
     virtual bool            operator != (const Marble::GeoDataCoordinates&) const;
+    enum BearingType
+    {
+        InitialBearing,
+        FinalBearing
+    };
+    bool                    isValid () const;
+    qreal                   bearing (const Marble::GeoDataCoordinates& other, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian, Marble::GeoDataCoordinates::BearingType type = Marble::GeoDataCoordinates::InitialBearing) const;
 };
 // GeoDataCoordinates
 

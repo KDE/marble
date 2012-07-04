@@ -37,7 +37,6 @@ public:
     void                    setVisibleTileLevel (const int tileLevel);
     void                    setSelectionMethod (const Marble::DownloadRegionDialog::SelectionMethod);
     QVector<Marble::TileCoordsPyramid>  region () const;
-    QVector<Marble::TileCoordsPyramid>  routeRegion () const;
     void                    setSpecifiedLatLonAltBox (const Marble::GeoDataLatLonAltBox&);
     void                    setVisibleLatLonAltBox (const Marble::GeoDataLatLonAltBox&);
     void                    updateTextureLayer ();

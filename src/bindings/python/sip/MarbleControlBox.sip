@@ -46,6 +46,9 @@ signals:
 public:
     Marble::CurrentLocationWidget*  currentLocationWidget ();
     void                    setMarbleWidget (Marble::MarbleWidget* widget);
+    void                    search (const QString& searchTerm);
+signals:
+    void                    searchFinished ();
 };
 // MarbleControlBox
 

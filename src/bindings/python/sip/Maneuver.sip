@@ -29,6 +29,8 @@ public:
     enum Direction
     {
         Unknown,
+        Continue,
+        Merge,
         Straight,
         SlightRight,
         Right,
@@ -40,7 +42,9 @@ public:
         RoundaboutFirstExit,
         RoundaboutSecondExit,
         RoundaboutThirdExit,
-        RoundaboutExit
+        RoundaboutExit,
+        ExitLeft,
+        ExitRight
     };
                             Maneuver ();
     Marble::Maneuver::Direction  direction () const;
@@ -49,9 +53,14 @@ public:
     void                    setPosition (const Marble::GeoDataCoordinates& position);
     Marble::GeoDataCoordinates  waypoint () const;
     bool                    hasWaypoint () const;
-    void                    setWaypoint (const Marble::GeoDataCoordinates& waypoint);
     QString                 instructionText () const;
     void                    setInstructionText (const QString& text);
     QString                 directionPixmap () const;
+    void                    setWaypoint (const Marble::GeoDataCoordinates& waypoint, int index);
+    int                     waypointIndex () const;
+    QString                 roadName () const;
+    void                    setRoadName (const QString& roadName);
+    bool                    operator == (const Marble::Maneuver& other) const;
+    bool                    operator != (const Marble::Maneuver& other) const;
 };
 };

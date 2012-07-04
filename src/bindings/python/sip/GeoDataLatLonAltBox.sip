@@ -35,7 +35,6 @@ public:
     void                    setMaxAltitude (const qreal maxAltitude);
     Marble::AltitudeMode    altitudeMode () const;
     void                    setAltitudeMode (const Marble::AltitudeMode altitudeMode);
-    virtual bool            contains (const Marble::GeoDataPoint&) const;
     virtual bool            contains (const Marble::GeoDataCoordinates&) const;
     bool                    contains (const Marble::GeoDataLatLonAltBox&) const;
     virtual bool            intersects (const Marble::GeoDataLatLonAltBox&) const;

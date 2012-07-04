@@ -29,7 +29,7 @@ public:
                             GeoDataFeature (const QString& name);
                             GeoDataFeature (const Marble::GeoDataFeature& other);
     bool                    operator == (const Marble::GeoDataFeature&) const;
-    EnumFeatureId           featureId () const;
+    Marble::EnumFeatureId           featureId () const;
 
     enum GeoDataVisualCategory
     {
@@ -207,7 +207,6 @@ public:
     Marble::GeoDataStyleMap*  styleMap () const;
     void                    setStyleMap (Marble::GeoDataStyleMap* map);
     const QSize             symbolSize () const;
-    const QPixmap           symbolPixmap () const;
     static void             resetDefaultStyles ();
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
@@ -233,6 +232,9 @@ public:
 //ig    void                    setExtendedData (const GeoDataExtendedData& extendedData);
     void                    setRole (const QString& role);
 //ig    void                    setTimeSpan (GeoDataTimeSpan timeSpan);
+    static Marble::GeoDataFeature::GeoDataVisualCategory  OsmVisualCategory (const QString& keyValue);
+    bool                    isGloballyVisible () const;
+    const QImage            symbol () const;
 };
 // GeoDataFeature
 

@@ -40,7 +40,6 @@ public:
     QVariant                data (const QModelIndex& index, int role = Qt::DisplayRole) const;
     void                    exportGpx (QIODevice* device) const;
     void                    clear ();
-    int                     rightNeighbor (const Marble::GeoDataCoordinates& position, const Marble::RouteRequest* route) const;
     bool                    deviatedFromRoute () const;
     const Marble::Route&    route () const;
     bool                    setCurrentRoute (Marble::GeoDataDocument* document);
@@ -49,5 +48,7 @@ signals:
     void                    positionChanged ();
     void                    deviatedFromRoute (bool deviated);
     void                    currentRouteChanged ();
+public:
+    int                     rightNeighbor (const Marble::GeoDataCoordinates& position, const Marble::RouteRequest* route) const;
 };
 };
