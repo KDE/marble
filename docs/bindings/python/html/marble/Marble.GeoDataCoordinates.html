@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
 <code>from PyKDE4.marble import *</code>
 <p>
 
-
+Subclasses: <a href="../marble/Marble.GeoDataPoint.html">Marble.GeoDataPoint</a><br />
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
@@ -66,6 +66,7 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 </dd></dl>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#BearingType">BearingType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;InitialBearing, FinalBearing&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Notation">Notation</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Decimal, DMS&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Unit">Unit</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Radian, Degree&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
@@ -73,11 +74,12 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataCoordinates">__init__</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataCoordinates">__init__</a> (self, float lon, float lat, float alt=0, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> unit=Marble.GeoDataCoordinates.Radian, int detail=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#altitude">altitude</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#bearing">bearing</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> other, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> unit=Marble.GeoDataCoordinates.Radian, <a href="../marble/Marble.GeoDataCoordinates.html#BearingType">Marble.GeoDataCoordinates.BearingType</a> type=Marble.GeoDataCoordinates.InitialBearing)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#detach">detach</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#detail">detail</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#geoCoordinates">geoCoordinates</a> (self, float lon, float lat, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> unit=Marble.GeoDataCoordinates.Radian)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#geoCoordinates">geoCoordinates</a> (self, float lon, float lat, float alt, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> unit=GeoDataCoordinates.Radian)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isPole">isPole</a> (self, <a href="../marble/Marble.html#Pole">Marble.Pole</a> a0=Marble.AnyPole)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isValid">isValid</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#latToString">latToString</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#latitude">latitude</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> unit=Marble.GeoDataCoordinates.Radian)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#lonToString">lonToString</a> (self)</td></tr>
@@ -138,7 +140,12 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="GeoDataCoordinates"></a>
+<div class="memdoc"><p>constructs an invalid instance
+</p>
+<p>
+Constructs an invalid instance such that calling isValid()
+on it will return <pre class="fragment"> false @endcode.
+</p></div></div><a class="anchor" name="GeoDataCoordinates"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -213,6 +220,51 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 </table>
 </div>
 <div class="memdoc"><p>return the altitude of the Point in meters
+</p></div></div><a class="anchor" name="bearing"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">float bearing</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>other</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a>&nbsp;</td>
+<td class="paramname"><em>unit=Marble.GeoDataCoordinates.Radian</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html#BearingType">Marble.GeoDataCoordinates.BearingType</a>&nbsp;</td>
+<td class="paramname"><em>type=Marble.GeoDataCoordinates.InitialBearing</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the bearing (true bearing, the angle between the line defined
+by this point and the other and the prime meridian)
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>other</em>&nbsp;</td><td> The second point that, together with this point, defines a line
+
+<tr><td></td><td valign="top"><em>unit</em>&nbsp;</td><td> Unit of the result
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The true bearing in the requested unit, not range normalized,
+in clockwise direction, with the value 0 corresponding to north
+</dd></dl>
 </p></div></div><a class="anchor" name="detach"></a>
 <div class="memitem">
 <div class="memproto">
@@ -287,61 +339,6 @@ with one call - use the unit parameter to switch between Radian and DMS
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="geoCoordinates"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> geoCoordinates</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>lon</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>lat</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>alt</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a>&nbsp;</td>
-<td class="paramname"><em>unit=GeoDataCoordinates.Radian</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>use this function to get the longitude, latitude and altitude
-with one call - use the unit parameter to switch between Radian and DMS
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>lon</em>&nbsp;</td><td> longitude
-
-<tr><td></td><td valign="top"><em>lat</em>&nbsp;</td><td> latitude
-
-<tr><td></td><td valign="top"><em>alt</em>&nbsp;</td><td> altitude in meters
-
-<tr><td></td><td valign="top"><em>unit</em>&nbsp;</td><td> units that lon and lat get measured in
-(default for Radian: north pole at pi/2, southpole at -pi/2)
-</td></tr>
-</table></dl>
-<p>
 </p></div></div><a class="anchor" name="isPole"></a>
 <div class="memitem">
 <div class="memproto">
@@ -367,6 +364,23 @@ with one call - use the unit parameter to switch between Radian and DMS
 <div class="memdoc"><p>return whether our coordinates represent a pole
 This method can be used to check whether the coordinate equals one of
 the poles.
+</p></div></div><a class="anchor" name="isValid"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isValid</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns <pre class="fragment"> true @endcode if the coordinate is valid, <pre class="fragment"> false @endcode otherwise.
+ @return whether the coordinate is valid
+
+ A coordinate is valid, if at least one component has been set and the last
+ assignment was not an invalid GeoDataCoordinates object.
 </p></div></div><a class="anchor" name="latToString"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1081,7 +1095,26 @@ normalizeLon() instead.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="Notation"></a>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="BearingType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">BearingType</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>The BearingType enum specifies where to measure the bearing
+along great circle arcs
+</p>
+<p>
+When travelling along a great circle arc defined by the two points
+A and B, the bearing varies along the arc. The "InitialBearing" bearing
+corresponds to the bearing value at A, the "FinalBearing" bearing to that
+at B.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>InitialBearing</em>&nbsp;</td><td><tr><td valign="top"><em>FinalBearing</em>&nbsp;</td><td></table>
+</dl>
+</div></div><p><a class="anchor" name="Notation"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">

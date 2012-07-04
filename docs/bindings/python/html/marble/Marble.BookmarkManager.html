@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -60,12 +60,19 @@ book mark operations
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#bookmarksChanged">bookmarksChanged</a> ()</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#BookmarkManager">__init__</a> (self, QObject parent=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addBookmark">addBookmark</a> (self, <a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a> bookmark, QString folderName)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addNewBookmarkFolder">addNewBookmarkFolder</a> (self, QString folder)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#BookmarkManager">__init__</a> (self, <a href="../marble/Marble.GeoDataTreeModel.html">Marble.GeoDataTreeModel</a> treeModel, QObject parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addBookmark">addBookmark</a> (self, <a href="../marble/Marble.GeoDataContainer.html">Marble.GeoDataContainer</a> folder, <a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a> bookmark)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addNewBookmarkFolder">addNewBookmarkFolder</a> (self, <a href="../marble/Marble.GeoDataContainer.html">Marble.GeoDataContainer</a> folder, QString name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#bookmarkFile">bookmarkFile</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#document">document</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#loadFile">loadFile</a> (self, QString relativeFilePath)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeAllBookmarks">removeAllBookmarks</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeBookmark">removeBookmark</a> (self, <a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a> bookmark)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeBookmarkFolder">removeBookmarkFolder</a> (self, <a href="../marble/Marble.GeoDataFolder.html">Marble.GeoDataFolder</a> folder)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renameBookmarkFolder">renameBookmarkFolder</a> (self, <a href="../marble/Marble.GeoDataFolder.html">Marble.GeoDataFolder</a> folder, QString name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowBookmarks">setShowBookmarks</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showBookmarks">showBookmarks</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#updateBookmark">updateBookmark</a> (self, <a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a> bookmark)</td></tr>
 </table>
 <hr><h2>Signal Documentation</h2><a class="anchor" name="bookmarksChanged"></a>
 <div class="memitem">
@@ -91,6 +98,12 @@ book mark operations
 </tr><tr>
 <td class="memname"></td>
 <td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataTreeModel.html">Marble.GeoDataTreeModel</a>&nbsp;</td>
+<td class="paramname"><em>treeModel</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
 <td class="paramtype">QObject&nbsp;</td>
 <td class="paramname"><em>parent=0</em></td>
 </tr>
@@ -113,14 +126,14 @@ book mark operations
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a>&nbsp;</td>
-<td class="paramname"><em>bookmark</em>, </td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataContainer.html">Marble.GeoDataContainer</a>&nbsp;</td>
+<td class="paramname"><em>folder</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>folderName</em></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a>&nbsp;</td>
+<td class="paramname"><em>bookmark</em></td>
 </tr>
 <tr>
 <td></td>
@@ -150,8 +163,14 @@ book mark operations
 </tr><tr>
 <td class="memname"></td>
 <td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataContainer.html">Marble.GeoDataContainer</a>&nbsp;</td>
+<td class="paramname"><em>folder</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
 <td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>folder</em></td>
+<td class="paramname"><em>name</em></td>
 </tr>
 <tr>
 <td></td>
@@ -181,7 +200,19 @@ book mark operations
 </table>
 </div>
 <div class="memdoc"><p>return bookmark file path
-</p></div></div><a class="anchor" name="loadFile"></a>
+</p></div></div><a class="anchor" name="document"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a> document</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="loadFile"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -224,7 +255,135 @@ if loaded successfully else false
 </table>
 </div>
 <div class="memdoc"><p>remove all folders and bookmarks except default folder
-</p></div></div>
+</p></div></div><a class="anchor" name="removeBookmark"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> removeBookmark</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a>&nbsp;</td>
+<td class="paramname"><em>bookmark</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="removeBookmarkFolder"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> removeBookmarkFolder</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataFolder.html">Marble.GeoDataFolder</a>&nbsp;</td>
+<td class="paramname"><em>folder</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="renameBookmarkFolder"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> renameBookmarkFolder</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataFolder.html">Marble.GeoDataFolder</a>&nbsp;</td>
+<td class="paramname"><em>folder</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="setShowBookmarks"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowBookmarks</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="showBookmarks"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showBookmarks</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="updateBookmark"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> updateBookmark</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a>&nbsp;</td>
+<td class="paramname"><em>bookmark</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div>
 </div>
 </div>
 </div>
