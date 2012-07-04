@@ -29,18 +29,19 @@ class PluginInterface /Abstract/
 
 public:
     virtual QString         name () const=0;
-    virtual QString         guiString () const=0;
     virtual QString         nameId () const=0;
     virtual QString         description () const=0;
     virtual QIcon           icon () const=0;
-    virtual void            initialize ()=0;
-    virtual bool            isInitialized () const=0;
     virtual ~PluginInterface ();
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'PluginInterface'
     sipType = NULL;
 
-    if (dynamic_cast<Marble::RenderPlugin*>(sipCpp))
+    if (dynamic_cast<Marble::ParseRunnerPlugin*>(sipCpp))
+        sipType = sipType_Marble_ParseRunnerPlugin;
+    else if (dynamic_cast<Marble::PositionProviderPluginInterface*>(sipCpp))
+        sipType = sipType_Marble_PositionProviderPluginInterface;
+    else if (dynamic_cast<Marble::RenderPlugin*>(sipCpp))
         {
         sipType = sipType_Marble_RenderPlugin;
         if (dynamic_cast<Marble::AbstractDataPlugin*>(sipCpp))
@@ -48,12 +49,28 @@ public:
         else if (dynamic_cast<Marble::AbstractFloatItem*>(sipCpp))
             sipType = sipType_Marble_AbstractFloatItem;
         }
-    else if (dynamic_cast<Marble::RunnerPlugin*>(sipCpp))
-        sipType = sipType_Marble_RunnerPlugin;
+    else if (dynamic_cast<Marble::ReverseGeocodingRunnerPlugin*>(sipCpp))
+        sipType = sipType_Marble_ReverseGeocodingRunnerPlugin;
+    else if (dynamic_cast<Marble::RoutingRunnerPlugin*>(sipCpp))
+        sipType = sipType_Marble_RoutingRunnerPlugin;
+    else if (dynamic_cast<Marble::SearchRunnerPlugin*>(sipCpp))
+        sipType = sipType_Marble_SearchRunnerPlugin;
 %End
+    virtual QString         version () const=0;
+    virtual QString         copyrightYears () const=0;
+    virtual QList<Marble::PluginAuthor>  pluginAuthors () const=0;
+    virtual QString         aboutDataText () const;
 };
 // PluginInterface
 
+class PluginAuthor
+{
+%TypeHeaderCode
+#include <PluginInterface.h>
+%End
+
+                            PluginAuthor (const QString& name_, const QString& email_, const QString& task_ = QObject::tr("Developer"));
+};
 };
 // Marble
 
@@ -62,7 +79,11 @@ public:
 //ctscc
 #include <AbstractDataPlugin.h>
 #include <AbstractFloatItem.h>
+#include <ParseRunnerPlugin.h>
 #include <PluginInterface.h>
+#include <PositionProviderPluginInterface.h>
 #include <RenderPlugin.h>
-#include <RunnerPlugin.h>
+#include <ReverseGeocodingRunnerPlugin.h>
+#include <RoutingRunnerPlugin.h>
+#include <SearchRunnerPlugin.h>
 %End

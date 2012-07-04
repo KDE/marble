@@ -19,20 +19,23 @@
 
 namespace Marble
 {
-class GeoGraphicsScene : QObject
+class ReverseGeocodingRunnerPlugin : QObject, Marble::PluginInterface
 {
 %TypeHeaderCode
-#include <GeoGraphicsScene.h>
+#include <ReverseGeocodingRunnerPlugin.h>
 %End
 
 public:
-                            GeoGraphicsScene (QObject* parent /TransferThis/ = 0);
-    ~GeoGraphicsScene ();
-    void                    removeItem (Marble::GeoGraphicsItem* item);
-    void                    clear ();
-    QList<Marble::GeoGraphicsItem*>  items () const;
-    QList<Marble::GeoGraphicsItem*>  items (const Marble::GeoDataLatLonAltBox& box, int maxZoomLevel) const;
-    static int s_tileZoomLevel;
-    void                    addItem (Marble::GeoGraphicsItem* item);
+    explicit                ReverseGeocodingRunnerPlugin (QObject* parent /TransferThis/ = 0);
+    virtual ~ReverseGeocodingRunnerPlugin ();
+    virtual QString         guiString () const=0;
+    virtual Marble::MarbleAbstractRunner*  newRunner () const=0;
+    bool                    supportsCelestialBody (const QString& celestialBodyId) const;
+    bool                    canWorkOffline () const;
+    virtual bool            canWork () const;
+    virtual QIcon           icon () const;
+protected:
+    void                    setSupportedCelestialBodies (const QStringList& celestialBodies);
+    void                    setCanWorkOffline (bool canWorkOffline);
 };
 };

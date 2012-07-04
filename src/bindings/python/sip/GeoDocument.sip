@@ -80,6 +80,8 @@ protected:
                 else if (dynamic_cast<Marble::GeoDataFolder*>(sipCpp))
                     sipType = sipType_Marble_GeoDataFolder;
                 }
+            else if (dynamic_cast<Marble::GeoDataOverlay*>(sipCpp))
+                sipType = sipType_Marble_GeoDataOverlay;
             else if (dynamic_cast<Marble::GeoDataPlacemark*>(sipCpp))
                 sipType = sipType_Marble_GeoDataPlacemark;
             }
@@ -104,6 +106,8 @@ protected:
                 else if (dynamic_cast<Marble::GeoDataOuterBoundary*>(sipCpp))
                     sipType = sipType_Marble_GeoDataOuterBoundary;
                 }
+            else if (dynamic_cast<Marble::GeoDataTrack*>(sipCpp))
+                sipType = sipType_Marble_GeoDataTrack;
             }
         else if (dynamic_cast<Marble::GeoDataHotSpot*>(sipCpp))
             sipType = sipType_Marble_GeoDataHotSpot;
@@ -158,6 +162,7 @@ public:
 #include <GeoDataLookAt.h>
 #include <GeoDataMultiGeometry.h>
 #include <GeoDataObject.h>
+#include <GeoDataOverlay.h>
 #include <GeoDataPlacemark.h>
 #include <GeoDataPoint.h>
 #include <GeoDataPolyStyle.h>
@@ -166,5 +171,6 @@ public:
 #include <GeoDataStyle.h>
 #include <GeoDataStyleMap.h>
 #include <GeoDataStyleSelector.h>
+#include <GeoDataTrack.h>
 #include <GeoDocument.h>
 %End

@@ -55,6 +55,7 @@ public:
     void                    append (Marble::GeoDataGeometry* other);
 //ig    QVector<GeoDataGeometry*>::Iterator  erase (QVector<GeoDataGeometry*>::Iterator pos);
 //ig    QVector<GeoDataGeometry*>::Iterator  erase (QVector<GeoDataGeometry*>::Iterator begin, QVector<GeoDataGeometry*>::Iterator end);
+//ig    const Marble::GeoDataGeometry*  child (int) const;
 };
 // GeoDataMultiGeometry
 

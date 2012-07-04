@@ -43,7 +43,8 @@ public:
         Street,
         Detailed
     };
-                            GeoDataAccuracy ();
+                            GeoDataAccuracy (Marble::GeoDataAccuracy::Level level = Marble::GeoDataAccuracy::none, qreal horizontal = 0.0, qreal vertical = 0.0);
+    bool                    operator == (const Marble::GeoDataAccuracy& other) const;
 };
 // GeoDataAccuracy
 

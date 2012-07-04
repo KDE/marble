@@ -26,16 +26,24 @@ class BookmarkManager : QObject
 %End
 
 public:
-    explicit                BookmarkManager (QObject* parent /TransferThis/ = 0);
     ~BookmarkManager ();
     bool                    loadFile (const QString& relativeFilePath);
     QString                 bookmarkFile () const;
-    void                    addBookmark (const Marble::GeoDataPlacemark& bookmark, const QString& folderName);
 //FIXME
 //ig    QVector<Marble::GeoDataFolder*>  folders () const;
-    void                    addNewBookmarkFolder (const QString& folder);
     void                    removeAllBookmarks ();
 signals:
     void                    bookmarksChanged ();
+public:
+    explicit                BookmarkManager (Marble::GeoDataTreeModel* treeModel, QObject* parent /TransferThis/ = 0);
+    void                    addBookmark (Marble::GeoDataContainer* folder, const Marble::GeoDataPlacemark& bookmark);
+    void                    updateBookmark (Marble::GeoDataPlacemark* bookmark);
+    void                    removeBookmark (Marble::GeoDataPlacemark* bookmark);
+    Marble::GeoDataDocument*  document () const;
+    bool                    showBookmarks ();
+    void                    addNewBookmarkFolder (Marble::GeoDataContainer* folder, const QString& name);
+    void                    renameBookmarkFolder (Marble::GeoDataFolder* folder, const QString& name);
+    void                    removeBookmarkFolder (Marble::GeoDataFolder* folder);
+    void                    setShowBookmarks (bool visible);
 };
 };

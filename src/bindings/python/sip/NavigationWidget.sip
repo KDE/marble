@@ -45,6 +45,8 @@ protected:
     void                    resizeEvent (QResizeEvent*);
 //FIXME
 public:
-//ig    void                    setLocations (QVector<Marble::GeoDataPlacemark*> locations);
+    void                    search (const QString& searchTerm);
+signals:
+    void                    searchFinished ();
 };
 };
