@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -72,11 +72,10 @@ is an abstract value without any physical meaning. A value around
 values give a more zoomed-in view.
 </p>
 <p>
-The MarbleWidget needs to be provided with a data model to
-work. This model is contained in the MarbleModel class, and it is
-painted by using a MarbleMap. The widget can also construct its own
-map and model if none is given to the constructor. A MarbleModel
-contains 3 separate datatypes: <b>tiles</b> which provide the
+The MarbleWidget owns a data model to work. This model is contained
+in the MarbleModel class, and it is painted by using a MarbleMap.
+The widget takes care of creating the map and model. A MarbleModel
+contains several datatypes, among them <b>tiles</b> which provide the
 background, <b>vectors</b> which provide things like country
 borders and coastlines and <b>placemarks</b> which can show points
 of interest, such as cities, mountain tops or the poles.
@@ -94,14 +93,6 @@ one item from the menu, Marble will open up a dialog window with
 some information about the placemark and also try to connect to
 Wikipedia to retrieve an article about it. If there is such an
 article, you will get a mini-browser window with the article in a tab.
-</p>
-<p>
-The right mouse button controls a distance tool. The distance tool
-is implemented as a menu where you can choose to either create or
-remove so called Measure Points. Marble will keep track of the
-Measure Points and show the total distance in the upper left of the
-widget. Measure Points are shown on the map as a little white
-cross.
 </p>
 <p>
 <dl class="see" compact><dt><b>See also:</b></dt><dd> MarbleControlBox
@@ -174,7 +165,7 @@ cross.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeLayer">removeLayer</a> (self, <a href="../marble/Marble.LayerInterface.html">Marble.LayerInterface</a> layer)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPlugins">renderPlugins</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resetFocusPoint">resetFocusPoint</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resizeEvent">resizeEvent</a> (self, QResizeEvent a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resizeEvent">resizeEvent</a> (self, QResizeEvent event)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rotateBy">rotateBy</a> (self, float deltaLon, float deltaLat, <a href="../marble/Marble.html#FlyToMode">Marble.FlyToMode</a> mode=Marble.Instant)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#screenCoordinates">screenCoordinates</a> (self, float lon, float lat, float x, float y)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAnimationsEnabled">setAnimationsEnabled</a> (self, bool enabled)</td></tr>
@@ -1656,7 +1647,7 @@ use MarblePart which is handling this automatically.
 <td class="memname"></td>
 <td></td>
 <td class="paramtype">QResizeEvent&nbsp;</td>
-<td class="paramname"><em>a0</em></td>
+<td class="paramname"><em>event</em></td>
 </tr>
 <tr>
 <td></td>

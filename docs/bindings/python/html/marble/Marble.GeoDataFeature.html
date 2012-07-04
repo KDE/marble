@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
 <code>from PyKDE4.marble import *</code>
 <p>
 Inherits: <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> &#x2192; <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a><br />
-
+Subclasses: <a href="../marble/Marble.GeoDataContainer.html">Marble.GeoDataContainer</a>, <a href="../marble/Marble.GeoDataOverlay.html">Marble.GeoDataOverlay</a>, <a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a><br />
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
@@ -76,7 +76,8 @@ but is always used as part of a derived class.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#description">description</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#descriptionIsCDATA">descriptionIsCDATA</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#detach">detach</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/global.html#EnumFeatureId">EnumFeatureId</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#featureId">featureId</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.html#EnumFeatureId">Marble.EnumFeatureId</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#featureId">featureId</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isGloballyVisible">isGloballyVisible</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isVisible">isVisible</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#name">name</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nodeType">nodeType</a> (self)</td></tr>
@@ -104,11 +105,12 @@ but is always used as part of a derived class.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataStyle.html">Marble.GeoDataStyle</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#style">style</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataStyleMap.html">Marble.GeoDataStyleMap</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#styleMap">styleMap</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#styleUrl">styleUrl</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QPixmap&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#symbolPixmap">symbolPixmap</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QImage&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#symbol">symbol</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QSize&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#symbolSize">symbolSize</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#unpack">unpack</a> (self, QDataStream stream)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataFeature.html#GeoDataVisualCategory">Marble.GeoDataFeature.GeoDataVisualCategory</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#visualCategory">visualCategory</a> (self)</td></tr>
 <tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataFeature.html#GeoDataVisualCategory">Marble.GeoDataFeature.GeoDataVisualCategory</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#OsmVisualCategory">OsmVisualCategory</a> (QString keyValue)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QFont&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#defaultFont">defaultFont</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resetDefaultStyles">resetDefaultStyles</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDefaultFont">setDefaultFont</a> (QFont font)</td></tr>
@@ -239,7 +241,19 @@ parser namespace.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="../marble/global.html#EnumFeatureId">EnumFeatureId</a> featureId</td>
+<td class="memname"><a href="../marble/Marble.html#EnumFeatureId">Marble.EnumFeatureId</a> featureId</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="isGloballyVisible"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isGloballyVisible</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -824,11 +838,11 @@ normal style.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="symbolPixmap"></a>
+<div class="memdoc"></div></div><a class="anchor" name="symbol"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">QPixmap symbolPixmap</td>
+<td class="memname">QImage symbol</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -889,7 +903,25 @@ same visual category
 </table>
 </div>
 <div class="memdoc"><p>Return the symbol index of the placemark.
-</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="defaultFont"></a>
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="OsmVisualCategory"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.GeoDataFeature.html#GeoDataVisualCategory">Marble.GeoDataFeature.GeoDataVisualCategory</a> OsmVisualCategory</td>
+<td>(</td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>keyValue</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Convenience categorization of placemarks for Osm key=value pairs
+</p></div></div><a class="anchor" name="defaultFont"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

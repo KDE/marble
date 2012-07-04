@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -57,14 +57,15 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataIconStyle">__init__</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataIconStyle">__init__</a> (self, <a href="../marble/Marble.GeoDataIconStyle.html">Marble.GeoDataIconStyle</a> other)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataIconStyle">__init__</a> (self, QPixmap icon, QPointF hotSpot=QPointF(0.5,0.5))</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataIconStyle">__init__</a> (self, QImage icon, QPointF hotSpot=QPointF(0.5,0.5))</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QPointF&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#hotSpot">hotSpot</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QPixmap&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#icon">icon</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QImage&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#icon">icon</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#iconPath">iconPath</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nodeType">nodeType</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pack">pack</a> (self, QDataStream stream)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#scale">scale</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setHotSpot">setHotSpot</a> (self, QPointF hotSpot, <a href="../marble/Marble.GeoDataHotSpot.html#Units">Marble.GeoDataHotSpot.Units</a> xunits, <a href="../marble/Marble.GeoDataHotSpot.html#Units">Marble.GeoDataHotSpot.Units</a> yunits)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setIcon">setIcon</a> (self, QPixmap icon)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setIcon">setIcon</a> (self, QImage icon)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setIconPath">setIconPath</a> (self, QString filename)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setScale">setScale</a> (self, float scale)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#unpack">unpack</a> (self, QDataStream stream)</td></tr>
@@ -114,7 +115,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">QPixmap&nbsp;</td>
+<td class="paramtype">QImage&nbsp;</td>
 <td class="paramname"><em>icon</em>, </td>
 </tr>
 <tr>
@@ -143,11 +144,24 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="icon"></a>
+<div class="memdoc"><p>Convenience method that transforms the hotspot to the topleft corner
+</p></div></div><a class="anchor" name="icon"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">QPixmap icon</td>
+<td class="memname">QImage icon</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="iconPath"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString iconPath</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -246,7 +260,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">QPixmap&nbsp;</td>
+<td class="paramtype">QImage&nbsp;</td>
 <td class="paramname"><em>icon</em></td>
 </tr>
 <tr>
