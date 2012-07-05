@@ -45,7 +45,7 @@ public:
     Private(HttpDownloadManager *downloadManager,
             const SunLocator *sunLocator,
             VectorComposer *veccomposer,
-            GeoDataTreeModel *treeModel,
+            const PluginManager *pluginManager,
             TextureLayer *parent );
 
     void mapChanged();
@@ -68,19 +68,17 @@ public:
     // For scheduling repaints
     QTimer           m_repaintTimer;
 
-    // For rendering vectorTiles
-    GeoDataTreeModel m_treeModel;
 };
 
-TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
+TextureLayer::Private::Private(HttpDownloadManager *downloadManager,
                                 const SunLocator *sunLocator,
                                 VectorComposer *veccomposer,
-                                GeoDataTreeModel *treeModel,
+                                const PluginManager *pluginManager,
                                 TextureLayer *parent )
     : m_parent( parent )
     , m_sunLocator( sunLocator )
     , m_veccomposer( veccomposer )
-    , m_loader( downloadManager, treeModel )
+    , m_loader( downloadManager, pluginManager )
     , m_layerDecorator( &m_loader, sunLocator )
     , m_tileLoader( &m_layerDecorator )
     , m_pixmapCache( 100 )
@@ -160,9 +158,9 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
 TextureLayer::TextureLayer(HttpDownloadManager *downloadManager,
                            const SunLocator *sunLocator,
                            VectorComposer *veccomposer ,
-                           GeoDataTreeModel *treeModel)
+                           const PluginManager *pluginManager)
     : QObject()
-    , d( new Private( downloadManager, sunLocator, veccomposer, treeModel, this ) )
+    , d( new Private( downloadManager, sunLocator, veccomposer, pluginManager, this ) )
 {
     connect( &d->m_loader, SIGNAL( tileCompleted( const TileId &, const QImage & ) ),
              this, SLOT( updateTile( const TileId &, const QImage & ) ) );

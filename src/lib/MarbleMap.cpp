@@ -151,9 +151,9 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_geometryLayer( model->treeModel() ),
           m_vectorMapBaseLayer( &m_veccomposer ),
           m_vectorMapLayer( &m_veccomposer ),
-          m_textureLayer( model->downloadManager(), model->sunLocator(), &m_veccomposer, model->treeModel() ),
+          m_textureLayer( model->downloadManager(), model->sunLocator(), &m_veccomposer, model->pluginManager() ),
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), model->clock(), parent ),
-          m_vectorTileLayer( model->downloadManager(), model->sunLocator(), &m_veccomposer, model->treeModel() )
+          m_vectorTileLayer( model->downloadManager(), model->sunLocator(), &m_veccomposer, model->pluginManager(), model->treeModel() )
 {
     m_layerManager.addLayer( &m_fogLayer );
     m_layerManager.addLayer( &m_geometryLayer );

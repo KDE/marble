@@ -24,7 +24,7 @@
 
 #include "TileId.h"
 #include "GeoDataContainer.h"
-#include "GeoDataTreeModel.h"
+#include "PluginManager.h"
 #include "MarbleGlobal.h"
 
 class QByteArray;
@@ -47,10 +47,7 @@ class TileLoader: public QObject
         Available
     };
 
-    // For VectorTiles
-    const GeoDataTreeModel * m_treeModel;
-
-    explicit TileLoader(HttpDownloadManager * const, GeoDataTreeModel const * );
+    explicit TileLoader(HttpDownloadManager * const, const PluginManager * );
 
     void setTextureLayers( const QVector<GeoSceneTiled const *> &textureLayers );
 
@@ -84,9 +81,7 @@ class TileLoader: public QObject
 
     void tileCompleted( TileId const & tileId, QImage const & tileImage );
 
-    void tileCompleted( TileId const & tileId, GeoDataDocument const &document, QString const &format );
-
-    int newDocumentReady(GeoDataDocument*);
+    void tileCompleted(TileId const & tileId, GeoDataDocument const & document, QString const & format );
 
  private:
     GeoSceneTiled const * findTextureLayer( TileId const & ) const;
@@ -96,6 +91,9 @@ class TileLoader: public QObject
 
     // TODO: comment about uint hash key
     QHash<uint, GeoSceneTiled const *> m_textureLayers;
+
+    // For vectorTile parsing
+    const PluginManager * m_pluginManager;
 };
 
 }

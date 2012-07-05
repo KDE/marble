@@ -16,7 +16,7 @@
 #include <QtCore/QObject>
 
 #include "MarbleGlobal.h"
-#include "GeoDataTreeModel.h"
+#include "MarbleModel.h"
 #include "GeoDataDocument.h"
 #include "GeoSceneTiled.h"
 
@@ -44,7 +44,8 @@ class VectorTileLayer : public QObject, public LayerInterface
     VectorTileLayer( HttpDownloadManager *downloadManager,
                   const SunLocator *sunLocator,
                   VectorComposer *veccomposer,
-                  GeoDataTreeModel *treeModel );
+                  const PluginManager *pluginManager,
+                  GeoDataTreeModel *treeModel);
 
     ~VectorTileLayer();
 
@@ -104,7 +105,7 @@ class VectorTileLayer : public QObject, public LayerInterface
 
     void downloadTile( const TileId &tileId );
 
-    void updateTile( TileId const & tileId, GeoDataDocument const & document, QString const &format );
+    void updateTile(TileId const & tileId, GeoDataDocument const & document, QString const & format );
 
  Q_SIGNALS:
     void tileLevelChanged( int );

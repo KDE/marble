@@ -32,6 +32,7 @@
 #include "TileLoader.h"
 #include "VectorComposer.h"
 #include "ViewportParams.h"
+#include "GeoDataTreeModel.h"
 
 namespace Marble
 {
@@ -44,12 +45,12 @@ public:
     Private(HttpDownloadManager *downloadManager,
             const SunLocator *sunLocator,
             VectorComposer *veccomposer,
-            GeoDataTreeModel *treeModel,
-            VectorTileLayer *parent );
+            const PluginManager *pluginManager,
+            VectorTileLayer *parent,
+            GeoDataTreeModel *treeModel);
 
     void mapChanged();
     void updateTextureLayers();
-    //void updateTile(const TileId &tileId, const GeoDataDocument document , const QString &format);
 
 public:
     VectorTileLayer  *const m_parent;
@@ -67,19 +68,22 @@ public:
     // For scheduling repaints
     QTimer           m_repaintTimer;
 
-    // For rendering vectorTiles
-    GeoDataTreeModel m_treeModel;
+    // TreeModel for storing GeoDataDocuments
+    GeoDataTreeModel *m_treeModel;
+
+    //
 };
 
-VectorTileLayer::Private::Private( HttpDownloadManager *downloadManager,
+VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
                                    const SunLocator *sunLocator,
                                    VectorComposer *veccomposer,
-                                   GeoDataTreeModel *treeModel,
-                                   VectorTileLayer *parent )
+                                   const PluginManager *pluginManager,
+                                   VectorTileLayer *parent,
+                                   GeoDataTreeModel *treeModel)
     : m_parent( parent )
     , m_sunLocator( sunLocator )
     , m_veccomposer( veccomposer )
-    , m_loader( downloadManager, treeModel )
+    , m_loader( downloadManager, pluginManager )
     , m_layerDecorator( &m_loader, sunLocator )
     , m_tileLoader( &m_layerDecorator )
     , m_pixmapCache( 100 )
@@ -87,6 +91,7 @@ VectorTileLayer::Private::Private( HttpDownloadManager *downloadManager,
     , m_texcolorizer( 0 )
     , m_textureLayerSettings( 0 )
     , m_repaintTimer()
+    , m_treeModel( treeModel )
 {
 }
 
@@ -136,21 +141,18 @@ void VectorTileLayer::Private::updateTextureLayers()
     m_pixmapCache.clear();
 }
 
-void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument const &document, QString const &format )
-{
-    mDebug() << "--------------------------------- FIXME RECIEVE";
-}
-
-
 VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
                                  const SunLocator *sunLocator,
                                  VectorComposer *veccomposer ,
-                                 GeoDataTreeModel *treeModel)
+                                 const PluginManager *pluginManager,
+                                 GeoDataTreeModel *treeModel )
     : QObject()
-    , d( new Private( downloadManager, sunLocator, veccomposer, treeModel, this ) )
+    , d( new Private( downloadManager, sunLocator, veccomposer, pluginManager, this, treeModel ) )
 {
-    mDebug() << "----------------" << connect( &d->m_loader, SIGNAL( tileCompleted( TileId const & tileId, GeoDataDocument const & document, QString const & format ) ),
-             this, SLOT( updateTile( TileId const & tileId, GeoDataDocument const & document, QString const & format ) ) );
+    qRegisterMetaType<TileId>( "TileId" );
+    qRegisterMetaType<GeoDataDocument>( "GeoDataDocument" );
+    connect( &d->m_loader, SIGNAL( tileCompleted( TileId, GeoDataDocument, QString ) ),
+            this, SLOT( updateTile( TileId, GeoDataDocument, QString ) ) );
 
     // Repaint timer
     d->m_repaintTimer.setSingleShot( true );
@@ -182,6 +184,12 @@ bool VectorTileLayer::showSunShading() const
 bool VectorTileLayer::showCityLights() const
 {
     return d->m_layerDecorator.showCityLights();
+}
+
+void VectorTileLayer::updateTile(TileId const & tileId, const GeoDataDocument &document, QString const &format )
+{
+    mDebug() << "-------------------------" << d->m_treeModel->addDocument( new GeoDataDocument(document) );
+    //delete document;
 }
 
 bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
@@ -229,7 +237,6 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     if ( changedTileLevel ) {
 
-        //FIXME ANDER empty tree model
         emit tileLevelChanged( tileLevel );
     }
 

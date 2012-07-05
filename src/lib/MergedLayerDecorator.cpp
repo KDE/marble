@@ -168,24 +168,27 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
             mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
         }
 
-        // File format for creating an ImageTile or a VectorTile
-        QString format = textureLayer->fileFormat();
+/*       Here is where the TileLoader chooses between ImageTile and VectorTile
+         Format from VectorTile is available if it is needed to specify the parser
+         that should parse that tile file
+*/
 
-        //FIXME ANDER prepare for more format types
-        // VectorTile
-        if ( format.toLower() == "js"){
-            GeoDataDocument tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, format );
-
-            QSharedPointer<Tile> tile( new VectorTile( tileId, tileVectordata, format, blending ) );
-            tiles.append( tile );
-        }
         // ImageTile
-        else {
+        if ( textureLayer->nodeType() == QString("GeoSceneTextureTile") ){
             const QImage tileImage = d->m_tileLoader->loadTileImage( tileId, DownloadBrowse );
 
-            QSharedPointer<Tile> tile(new TextureTile( tileId, tileImage, format, blending ) );
+            QSharedPointer<Tile> tile(new TextureTile( tileId, tileImage, textureLayer->fileFormat(), blending ) );
             tiles.append( tile );
         }
+
+        // VectorTile
+        if ( textureLayer->nodeType() == QString("GeoSceneVectorTile") ){
+            GeoDataDocument tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, textureLayer->fileFormat() );
+
+            QSharedPointer<Tile> tile( new VectorTile( tileId, tileVectordata, textureLayer->fileFormat(), blending ) );
+            tiles.append( tile );
+        }
+
     }
 
     ( !tiles.isEmpty() );

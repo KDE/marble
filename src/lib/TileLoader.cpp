@@ -22,7 +22,6 @@
 #include <QtCore/QMetaType>
 #include <QtGui/QImage>
 
-#include "MarbleModel.h"
 #include "MarbleRunnerManager.h"
 #include "QTreeView"
 
@@ -38,17 +37,14 @@ Q_DECLARE_METATYPE( Marble::DownloadUsage )
 namespace Marble
 {
 
-TileLoader::TileLoader(HttpDownloadManager * const downloadManager, const GeoDataTreeModel * treeModel) :
-      m_treeModel( treeModel )
+TileLoader::TileLoader(HttpDownloadManager * const downloadManager, const PluginManager *pluginManager) :
+      m_pluginManager( pluginManager )
 {
     qRegisterMetaType<DownloadUsage>( "DownloadUsage" );
-    qRegisterMetaType<TileId>( "TileId" );
     connect( this, SIGNAL( downloadTile( QUrl, QString, QString, DownloadUsage )),
              downloadManager, SLOT( addJob( QUrl, QString, QString, DownloadUsage )));
     connect( downloadManager, SIGNAL( downloadComplete( QByteArray, QString )),
              SLOT( updateTile( QByteArray, QString )));
-    connect( this, SIGNAL(newDocumentReady(GeoDataDocument*)),
-             treeModel, SLOT( addDocument(GeoDataDocument*) ),Qt::AutoConnection);
 }
 
 void TileLoader::setTextureLayers( const QVector<const GeoSceneTiled *> &textureLayers )
@@ -120,17 +116,12 @@ GeoDataDocument TileLoader::loadTileVectorData( TileId const & tileId, DownloadU
         if ( file.exists() ) {
 
             // File is ready, so parse and return the vector data in any case
-
-            MarbleModel *model = new MarbleModel (this->parent());
-            MarbleRunnerManager* man = new MarbleRunnerManager( model->pluginManager() );
-
+            MarbleRunnerManager* man = new MarbleRunnerManager( m_pluginManager );
             GeoDataDocument* document = man->openFile( fileName );
 
             // FIXME ANDER sometimes the parser doesnt work
             // maybe Q_ASSERT?
             if (document){
-                //emit newDocumentReady(document);
-                mDebug() << "--------------------------------- FIXME SEND";
                 emit tileCompleted( tileId, *document, format );
                 return * document;
             }

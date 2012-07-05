@@ -30,9 +30,9 @@ namespace Marble
 class ElevationModelPrivate
 {
 public:
-    ElevationModelPrivate( ElevationModel *_q, MarbleModel *const model, GeoDataTreeModel *const treeModel )
+    ElevationModelPrivate( ElevationModel *_q, MarbleModel *const model )
         : q( _q ),
-          m_tileLoader( model->downloadManager(), treeModel ),
+          m_tileLoader( model->downloadManager(), model->pluginManager() ),
           m_textureLayer( 0 )
     {
         m_cache.setMaxCost( 10 ); //keep 10 tiles in memory (~17MB)
@@ -75,9 +75,9 @@ public:
     QCache<TileId, const QImage> m_cache;
 };
 
-ElevationModel::ElevationModel(MarbleModel *const model, GeoDataTreeModel *const treeModel )
+ElevationModel::ElevationModel(MarbleModel *const model )
     : QObject( 0 ),
-      d( new ElevationModelPrivate( this, model, treeModel ) )
+      d( new ElevationModelPrivate( this, model ) )
 {
     connect( &d->m_tileLoader, SIGNAL( tileCompleted( TileId, QImage ) ),
              this, SLOT( tileCompleted( TileId, QImage ) ) );
