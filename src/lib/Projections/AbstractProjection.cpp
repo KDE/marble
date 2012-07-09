@@ -430,8 +430,6 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
     qreal aSign = aLon > 0 ? 1 : -1;
     qreal bSign = bLon > 0 ? 1 : -1;
 
-//    fprintf( stderr, "Enter crossDateLine (%.3lf %.3lf) (%.3lf %.3lf)\n", aLon, aLat, bLon, bLat );
-
     qreal x, y;
     bool globeHidesPoint;
 
@@ -444,6 +442,8 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
         if( aSign != bSign
                 && fabs(aLon) + fabs(bLon) > M_PI
                 && q->repeatX() ) {
+
+
             qreal delta = mirrorPoint( viewport );
             if ( aSign > bSign ) {
                 // going eastwards ->
@@ -453,10 +453,8 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
                 *polygons.last() << QPointF( x -  delta, y );
             }
             QPolygonF *path = new QPolygonF;
-            polygons.append( path );
+            polygons.append( path ); 
 
-
-//            fprintf( stderr, "Before: (%lf %lf) (%lf %lf)\n", aLon, aLat, bLon, bLat );
 
             if ( aLat < 0 && bLat < 0 && lineString->latLonAltBox().containsPole( AnyPole ) ) {
 
@@ -473,10 +471,6 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
                         southernIntersectionFirst <= bLat && bLat <= southernIntersectionSecond ) {
                     int sgnCrossing = ( lineString->southernMostIDLCrossing().first.longitude() > 0 ) ? 1 : -1; // 1 for east->west, -1 for west->east
 
-
-                    fprintf( stderr, "crossDateLine checked :) %d  (%lf %lf), (%lf %lf) ->  (%lf %lf)\n", lineString->size(), aLon, aLat, bLon, bLat, southernIntersectionFirst, southernIntersectionSecond );
-
-                    fprintf( stderr, "minLat = %lf\n", m_minLat );
                     GeoDataCoordinates southPolePositive( +M_PI, m_minLat );
                     GeoDataCoordinates southPoleNegative( -M_PI, m_minLat );
 
@@ -486,10 +480,11 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
                     q->screenCoordinates( southPoleNegative, viewport, negativeX, negativeY, globeHidesPoint );                   
 
 
-                    if ( sgnCrossing == -1 ) 
+                    if ( sgnCrossing == 1 ) 
                         *polygons.last() << QPointF( positiveX, positiveY ) << QPointF( negativeX, negativeY );
                     else
                         *polygons.last() << QPointF( negativeX, negativeY ) << QPointF( positiveX, positiveY );
+
                 }
 
             }
@@ -497,8 +492,10 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
             if ( aLat > 0 && bLat > 0 && lineString->latLonAltBox().containsPole( AnyPole )) {
 
             }
+           
         }
 
         *polygons.last() << QPointF( x, y );
+
     }
 }

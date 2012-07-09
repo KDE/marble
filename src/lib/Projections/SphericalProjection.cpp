@@ -387,8 +387,13 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
     polygons.append( new QPolygonF );
 
-    GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
-    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
+    int detailLevel = viewport->detailLevel();
+
+    GeoDataLineString::ConstIterator itCoords = lineString.constBeginFiltered( detailLevel );
+    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBeginFiltered( detailLevel );
+
+//    GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
+//    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
 
     // Some projections display the earth in a way so that there is a
     // foreside and a backside.
@@ -415,8 +420,12 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     GeoDataCoordinates previousCoords;
     GeoDataCoordinates currentCoords;
 
-    GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
-    GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
+    GeoDataLineString::ConstIterator itBegin = lineString.constBeginFiltered( detailLevel );
+    GeoDataLineString::ConstIterator itEnd = lineString.constEndFiltered();
+
+//    GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
+//    GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
+   
 
     bool processingLastNode = false;
 
@@ -428,7 +437,6 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
 
 //    qDebug() << "Current angularResolution: " << viewport->angularResolution() << "\n";
-//    fprintf( stderr, "Current angularResolution: %.9lf\nCurrent detailLevel: %d\n\n", viewport->angularResolution(), viewport->detailLevel() );
     
     while ( itCoords != itEnd )
     {
@@ -545,9 +553,8 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
             break;
         }
 
-        int detailLevel = viewport->detailLevel();
-        lineString.nextFilteredAt( itCoords, detailLevel );
-//        ++itCoords;
+//        lineString.nextFilteredAt( itCoords, detailLevel );
+        ++itCoords;
 
         if ( itCoords == itEnd  && lineString.isClosed() ) {
             itCoords = itBegin;

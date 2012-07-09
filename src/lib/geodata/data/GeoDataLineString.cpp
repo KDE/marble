@@ -17,6 +17,9 @@
 #include "MarbleMath.h"
 #include "Quaternion.h"
 #include "MarbleDebug.h"
+#include "ViewportParams.h"
+
+#include <QtCore/qmath.h>
 
 
 namespace Marble
@@ -255,6 +258,97 @@ QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constEnd() const
     return p()->m_vector.constEnd();
 }
 
+qreal GeoDataLineString::perpendicularDistance( GeoDataCoordinates A, GeoDataCoordinates B, GeoDataCoordinates C ) const
+{
+
+    qreal ret;
+    qreal const y0 = A.latitude();
+    qreal const x0 = A.longitude();
+    qreal const y1 = B.latitude();
+    qreal const x1 = B.longitude();
+    qreal const y2 = C.latitude();
+    qreal const x2 = C.longitude();
+    qreal const y01 = x0 - x1;
+    qreal const x01 = y0 - y1;
+    qreal const y10 = x1 - x0;
+    qreal const x10 = y1 - y0;
+    qreal const y21 = x2 - x1;
+    qreal const x21 = y2 - y1;
+    qreal const len = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
+    qreal const t = (x01 * x21 + y01 * y21) / len;
+    if ( t < 0.0 ) {
+        ret = EARTH_RADIUS * distanceSphere(A, B);
+    } else if ( t > 1.0 ) {
+        ret = EARTH_RADIUS * distanceSphere(A, C);
+    } else {
+        qreal const nom = qAbs( x21 * y10 - x10 * y21 );
+        qreal const den = sqrt( x21 * x21 + y21 * y21 );
+        ret = EARTH_RADIUS * nom / den;
+    }
+
+    return ret;
+}
+
+
+void GeoDataLineString::douglasPeucker( QVector<GeoDataCoordinates>::const_iterator itLeft, QVector<GeoDataCoordinates>::const_iterator itRight, qreal epsilon ) const 
+{
+
+    GeoDataLineStringPrivate* d = p();
+
+    qreal dMax = -1;
+    QVector<GeoDataCoordinates>::const_iterator itCoords = itLeft;
+    QVector<GeoDataCoordinates>::const_iterator itBegin = itLeft;
+    QVector<GeoDataCoordinates>::const_iterator itEnd = itRight;
+    QVector<GeoDataCoordinates>::const_iterator itDMax = itLeft;
+
+    if ( d->m_vector.size() < 3 ) {
+        d->m_vectorFiltered += d->m_vector;
+        return;
+    }
+
+    ++itCoords;
+    --itEnd;
+
+    for ( ; itCoords != itEnd; ++itCoords ) {
+        qreal dist = perpendicularDistance( *itCoords, *itBegin, *itEnd );
+        if ( dist > dMax ) {
+            dMax = dist;
+            itDMax = itCoords;
+        }
+    }   
+
+    if ( dMax >= epsilon ) {
+
+        QVector<GeoDataCoordinates> resultLeft, resultRight;
+        resultLeft.clear(); resultRight.clear();
+
+        douglasPeucker( itLeft, itDMax + 1, epsilon );
+        d->m_vectorFiltered.append( *itDMax );
+        douglasPeucker( itDMax, itRight, epsilon );
+    }
+    else {
+        d->m_vectorFiltered.append( *itBegin );
+        d->m_vectorFiltered.append( *itEnd );
+    }
+}
+
+qreal GeoDataLineString::epsilonFromDetailLevel( int detailLevel ) const
+{
+    if ( p()->m_vector.size() < 30 )
+        return 0;
+
+    if ( detailLevel <= 1 )
+        return 50000;
+    if ( detailLevel == 2 )
+        return 20000;
+    if ( detailLevel > 2 && detailLevel <= 8 )
+        return 17500 - 2500 * ( detailLevel - 2 );
+    if ( detailLevel > 8 && detailLevel <= 11 )
+        return 2500 - 700 * ( detailLevel - 8 );
+
+    return 400 / ( 1 << ( detailLevel - 12 ) );
+}
+
 QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constBeginFiltered( int detailLevel ) const
 {
     GeoDataLineStringPrivate* d = p();
@@ -262,21 +356,10 @@ QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constBeginFiltered
 	if ( d->m_detailLevel != detailLevel ) {
 		d->m_detailLevel = detailLevel;
 
-    	QVector<GeoDataCoordinates>::const_iterator itCoords = d->m_vector.constBegin();
-	    QVector<GeoDataCoordinates>::const_iterator itEnd = d->m_vector.constEnd();
-        QVector<GeoDataCoordinates>::const_iterator itLastCoords = d->m_vector.constBegin();
+        qreal epsilon = epsilonFromDetailLevel( detailLevel );
 
-		d->m_vectorFiltered.clear();
-
-		int count = 0;
-	    for( ; itCoords != itEnd; ++itCoords ) {
-			if (count % 10 == 0)
-	    	    d->m_vectorFiltered.append( *itCoords );
-            ++count;
-            itLastCoords = itCoords;
-	    }
-        
-        d->m_vectorFiltered.append( *itLastCoords );
+        d->m_vectorFiltered.clear();
+        douglasPeucker( d->m_vector.constBegin(), d->m_vector.constEnd(), epsilon );
 	}
 
     return p()->m_vectorFiltered.constBegin();
@@ -678,8 +761,6 @@ QPair <GeoDataCoordinates, GeoDataCoordinates> GeoDataLineString::southernMostID
 
                 if ( previousSign != currentSign && fabs( previousLon ) + fabs( lon ) > M_PI ) {
 
-//                    fprintf( stderr, "Curr = %.3lf, %d Prev = %.3lf, %d\n", lon, currentSign, previousLon, previousSign );
-//                    fprintf( stderr, "%.3lf %.3lf   %.3lf %.3lf   prevLon = %.3lf\n", lon, lat, itCoords->longitude(), itCoords->latitude(), previousLon );
                     if ( lat < minLat ) {
                         minLat = lat;
                         firstPoint = ( *itPreviousCoords );

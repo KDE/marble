@@ -339,9 +339,31 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 */
     QVector<GeoDataCoordinates>::ConstIterator constEnd() const;
 
+
+/*!
+    \brief Douglas-Peucker algorithm for filtering the LineString
+*/
+
+//    void douglasPeucker( QVector<GeoDataCoordinates> &vector, qreal epsilon, QVector<GeoDataCoordinates> &vectorFiltered ) const;
+    void douglasPeucker( QVector<GeoDataCoordinates>::const_iterator itLeft, QVector<GeoDataCoordinates>::const_iterator itRight, qreal epsilon ) const;
+
+
+/*!
+    \brief Returns the distance from the first point to the segment determined by the other two
+*/
+
+    qreal perpendicularDistance( GeoDataCoordinates A, GeoDataCoordinates B, GeoDataCoordinates C ) const;
+
+/*!
+    \brief Returns the right epsilon for Douglas-Peucker according to the detail level
+*/
+
+    qreal epsilonFromDetailLevel( int detailLevel ) const;
+
 /*!
     \brief Returns an iterator that points to the begin of the filtered LineString.
 */
+   
 
     QVector<GeoDataCoordinates>::ConstIterator constBeginFiltered( int detailLevel ) const;
 
