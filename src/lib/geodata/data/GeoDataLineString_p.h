@@ -24,9 +24,9 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
 {
   public:
     GeoDataLineStringPrivate( TessellationFlags f )
-         : m_dirtyRange( true ),
+         : m_detailLevel( -1 ), 
+           m_dirtyRange( true ),
            m_dirtyBox( true ),
-           m_detailLevel( -1 ),
            m_dirtyDetail( true ),
            m_dirtyCrossingNorth( true ),
            m_dirtyCrossingSouth( true ),
@@ -35,9 +35,9 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     }
 
     GeoDataLineStringPrivate()
-         : m_dirtyRange( true ),
+         : m_detailLevel( -1 ),
+           m_dirtyRange( true ),
            m_dirtyBox( true ),
-           m_detailLevel( -1 ),
            m_dirtyDetail( true ),
            m_dirtyCrossingNorth( true ),
            m_dirtyCrossingSouth( true )
