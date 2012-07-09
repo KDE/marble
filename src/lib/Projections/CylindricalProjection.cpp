@@ -126,16 +126,16 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
 
     polygons.append( new QPolygonF );
 
-    GeoDataLineString::ConstIterator itCoords = lineString.constBeginFiltered( 0 );
-    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBeginFiltered( 0 );
+    GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
+    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
 
     int countFiltered = 0;
 
     GeoDataCoordinates previousCoords;
     GeoDataCoordinates currentCoords;
 
-    GeoDataLineString::ConstIterator itBegin = lineString.constBeginFiltered( 0 );
-    GeoDataLineString::ConstIterator itEnd = lineString.constEndFiltered();
+    GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
+    GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
 
     bool processingLastNode = false;
 
@@ -173,10 +173,9 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
             // this class works you can safely ignore this section for a start.
 
             if ( lineString.tessellate() ) {
-
                 tessellateLineSegment( previousCoords, previousX, previousY,
                                            currentCoords, x, y,
-                                           polygons, viewport,
+                                           polygons, viewport, &lineString,
                                            f );
             }
 
@@ -185,7 +184,8 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
                 // the expected rendering is a screen coordinates straight line between
                 // points, but in projections with repeatX things are not smooth
                 // we need to split polygons and use both sides of the repeated point
-                crossDateLine( previousCoords, currentCoords, polygons, viewport );
+
+                crossDateLine( previousCoords, currentCoords, polygons, viewport, &lineString );
             }
 
             itPreviousCoords = itCoords;

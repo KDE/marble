@@ -68,6 +68,11 @@ class MARBLE_EXPORT ViewportParams
 
     qreal angularResolution() const;
 
+    // Calculates the detail level, needed for filtering linestrings, based on the
+    // angular resolution. The detail level will always reflect the tile level. 
+
+    int detailLevel() const;
+
     // Determines whether a geographical feature is big enough so that it should 
     // represent a single point on the screen already.
     // See angularResolution()

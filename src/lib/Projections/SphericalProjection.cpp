@@ -427,7 +427,8 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     const bool isLong = lineString.size() > 50;
 
 
-    qDebug() << viewport->angularResolution() << "\n";
+//    qDebug() << "Current angularResolution: " << viewport->angularResolution() << "\n";
+//    fprintf( stderr, "Current angularResolution: %.9lf\nCurrent detailLevel: %d\n\n", viewport->angularResolution(), viewport->detailLevel() );
     
     while ( itCoords != itEnd )
     {
@@ -491,7 +492,7 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
                     tessellateLineSegment( previousCoords, previousX, previousY,
                                            currentCoords, x, y,
-                                           polygons, viewport,
+                                           polygons, viewport, &lineString,
                                            f );
 
                 }
@@ -501,13 +502,13 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
                     if ( previousGlobeHidesPoint ) {
                         tessellateLineSegment( horizonCoords, horizonX, horizonY,
                                                currentCoords, x, y,
-                                               polygons, viewport,
+                                               polygons, viewport, &lineString,
                                                f );
                     }
                     else {
                         tessellateLineSegment( previousCoords, previousX, previousY,
                                                horizonCoords, horizonX, horizonY,
-                                               polygons, viewport,
+                                               polygons, viewport, &lineString,
                                                f );
                     }
                 }
@@ -544,7 +545,8 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
             break;
         }
 
-        lineString.nextFilteredAt( itCoords, 16 );
+        int detailLevel = viewport->detailLevel();
+        lineString.nextFilteredAt( itCoords, detailLevel );
 //        ++itCoords;
 
         if ( itCoords == itEnd  && lineString.isClosed() ) {

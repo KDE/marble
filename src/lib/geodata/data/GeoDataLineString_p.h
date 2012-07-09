@@ -11,6 +11,8 @@
 #ifndef MARBLE_GEODATALINESTRINGPRIVATE_H
 #define MARBLE_GEODATALINESTRINGPRIVATE_H
 
+#include <QtCore/QPair>
+
 #include "GeoDataGeometry_p.h"
 
 #include "GeoDataTypes.h"
@@ -25,6 +27,8 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
          : m_dirtyRange( true ),
            m_dirtyBox( true ),
            m_dirtyDetail( true ),
+           m_dirtyCrossingNorth( true ),
+           m_dirtyCrossingSouth( true ),
            m_tessellationFlags( f )
     {
     }
@@ -32,7 +36,9 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     GeoDataLineStringPrivate()
          : m_dirtyRange( true ),
            m_dirtyBox( true ),
-           m_dirtyDetail( true )
+           m_dirtyDetail( true ),
+           m_dirtyCrossingNorth( true ),
+           m_dirtyCrossingSouth( true )
     {
     }
 
@@ -56,6 +62,10 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
         m_latLonAltBox = other.m_latLonAltBox;
         m_dirtyBox = other.m_dirtyBox;
         m_dirtyDetail = other.m_dirtyDetail;
+        m_dirtyCrossingNorth = other.m_dirtyCrossingNorth;
+        m_dirtyCrossingSouth = other.m_dirtyCrossingSouth;
+        m_southernCrossing = other.m_southernCrossing;
+        m_northernCrossing = other.m_northernCrossing;
         m_tessellationFlags = other.m_tessellationFlags;
 		m_detailLevel = other.m_detailLevel;
     }
@@ -108,6 +118,11 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
 	mutable int					m_detailLevel; // Saves the current zoom level, in order to know
 											   // whether to recompute the m_vectorFiltered or 
 											   // not. Saves performance. 
+
+    QPair<GeoDataCoordinates, GeoDataCoordinates>   m_southernCrossing;
+
+    QPair<GeoDataCoordinates, GeoDataCoordinates>   m_northernCrossing;
+
     bool                        m_dirtyRange;
 
     GeoDataLatLonAltBox         m_latLonAltBox;
@@ -117,6 +132,11 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
 
     bool                        m_dirtyDetail;  // same as m_dirtyBox, but for the filtering 
                                                 // of the linestring
+
+    bool                        m_dirtyCrossingNorth;
+
+    bool                        m_dirtyCrossingSouth;
+                                               
 
     TessellationFlags           m_tessellationFlags;
 };

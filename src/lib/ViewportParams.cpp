@@ -12,6 +12,7 @@
 
 #include "ViewportParams.h"
 
+#include <QtCore/qmath.h>
 #include <QtCore/QRect>
 
 #include <QtGui/QPainterPath>
@@ -46,11 +47,16 @@ public:
     mutable matrix       m_planetAxisMatrix;
     int                  m_radius;       // Zoom level (pixels / globe radius)
     qreal                m_angularResolution;
+    int                  m_detailLevel;
+
+    static const qreal   m_constantDetailFactor = 162.974665751;
+    static const qreal   m_constantLnOneOverTwo = -0.693147181;
 
     QSize                m_size;         // width, height
 
 
     bool                 m_dirtyBox;
+    bool                 m_dirtyDetailLevel;
     GeoDataLatLonAltBox  m_viewLatLonAltBox;
 
     static const SphericalProjection  s_sphericalProjection;
@@ -71,8 +77,10 @@ ViewportParamsPrivate::ViewportParamsPrivate()
       m_planetAxisMatrix(),
       m_radius( 2000 ),
       m_angularResolution( 0.25 * M_PI / fabs( (qreal)( m_radius ) ) ),
+      m_detailLevel( 0 ),
       m_size( 100, 100 ),
       m_dirtyBox( true ),
+      m_dirtyDetailLevel( true ),
       m_viewLatLonAltBox(),
       m_hasFocusPoint(false)
 {
@@ -189,6 +197,7 @@ void ViewportParams::setRadius(int newRadius)
 {
     if ( newRadius > 0 ) {
         d->m_dirtyBox = true;
+        d->m_dirtyDetailLevel = true;
 
         d->m_radius = newRadius;
         d->m_angularResolution = 0.25 * M_PI / fabs( (qreal)(d->m_radius) );
@@ -339,6 +348,25 @@ qreal ViewportParams::angularResolution() const
     // take half of the result as a guess for the angle per pixel resolution. 
     // d->m_angularResolution = 0.25 * M_PI / fabs( (qreal)(d->m_radius);
     return d->m_angularResolution;
+}
+
+int ViewportParams::detailLevel() const
+{
+    if ( d->m_dirtyDetailLevel ) {
+        d->m_dirtyDetailLevel = false;
+        qreal firstOp, detailLevelF;
+        int detailLevel;
+
+
+        firstOp = d->m_constantDetailFactor * angularResolution();
+
+        detailLevelF = qLn( firstOp ) / d->m_constantLnOneOverTwo;
+        detailLevel = (int) ( detailLevelF ) + 1;
+        d->m_detailLevel = detailLevel;
+    }
+
+    return d->m_detailLevel;
+
 }
 
 bool ViewportParams::resolves ( const GeoDataLatLonBox &latLonBox ) const

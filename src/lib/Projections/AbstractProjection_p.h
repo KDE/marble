@@ -42,6 +42,7 @@ class AbstractProjectionPrivate
                                 qreal bx, qreal by,
                                 QVector<QPolygonF*> &polygons,
                                 const ViewportParams *viewport,
+                                const GeoDataLineString *lineString,
                                 TessellationFlags f = 0 ) const;
 
     void processTessellation(  const GeoDataCoordinates &previousCoords,
@@ -49,6 +50,7 @@ class AbstractProjectionPrivate
                                int count,
                                QVector<QPolygonF*> &polygons,
                                const ViewportParams *viewport,
+                               const GeoDataLineString *lineString,
                                TessellationFlags f = 0 ) const;
 
     qreal mirrorPoint( const ViewportParams *viewport ) const;
@@ -61,7 +63,8 @@ class AbstractProjectionPrivate
     void crossDateLine( const GeoDataCoordinates & aCoord,
                         const GeoDataCoordinates & bCoord,
                         QVector<QPolygonF*> &polygons,
-                        const ViewportParams *viewport ) const;
+                        const ViewportParams *viewport,
+                        const GeoDataLineString *lineString ) const;
 
     AbstractProjection * const q_ptr;
     Q_DECLARE_PUBLIC( AbstractProjection )

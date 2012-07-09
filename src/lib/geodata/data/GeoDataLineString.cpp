@@ -161,6 +161,8 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
     if ( d->m_dirtyDetail ) {
         d->m_dirtyDetail = false;
 
+//  Naive approach
+
     	QVector<GeoDataCoordinates>::const_iterator itCoords = d->m_vector.constBegin();
 	    QVector<GeoDataCoordinates>::const_iterator itEnd = d->m_vector.constEnd();
 
@@ -168,7 +170,7 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
         pattern.clear();
 //        pattern << 8 << 4 << 6 << 3 << 7 << 2 << 5 << 1;
 
-        pattern << 16 << 8 << 12 << 7 << 14 << 6 << 11 << 5 << 15 << 4 << 10 << 3 << 13 << 2 << 9 << 1;
+        pattern << 1 << 9 << 2 << 13 << 3 << 10 << 4 << 15 << 5 << 11 << 6 << 14 << 7 << 12 << 8 << 16;
 
         d->m_vectorDetailLevels.clear();
         int count = 0;
@@ -178,7 +180,8 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
             ++count;
 	    }
 
-        d->m_vectorDetailLevels.last() = 16;
+        d->m_vectorDetailLevels.last() = 1;
+        
     }
 
     int currentPosition = (itCoordsCurrent - (d->m_vector.constBegin()));
@@ -189,7 +192,7 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
     if ( itCoordsCurrent == d->m_vector.constEnd() )
         return;
 
-    while ( itCoordsCurrent != d->m_vector.constEnd() && d->m_vectorDetailLevels.at( currentPosition ) < detailLevel ) {
+    while ( itCoordsCurrent != d->m_vector.constEnd() && d->m_vectorDetailLevels.at( currentPosition ) > detailLevel ) {
         ++itCoordsCurrent;
         ++currentPosition;
     }
@@ -293,6 +296,8 @@ void GeoDataLineString::append ( const GeoDataCoordinates& value )
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_dirtyDetail = true;
+    d->m_dirtyCrossingNorth = true;
+    d->m_dirtyCrossingSouth = true;
     d->m_vector.append( value );
 }
 
@@ -305,6 +310,8 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& va
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_dirtyDetail = true;
+    d->m_dirtyCrossingNorth = true;
+    d->m_dirtyCrossingSouth = true;
     d->m_vector.append( value );
     return *this;
 }
@@ -318,6 +325,8 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataLineString& val
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_dirtyDetail = true;
+    d->m_dirtyCrossingNorth = true;
+    d->m_dirtyCrossingSouth = true;
 
     QVector<GeoDataCoordinates>::const_iterator itCoords = value.constBegin();
     QVector<GeoDataCoordinates>::const_iterator itEnd = value.constEnd();
@@ -338,6 +347,8 @@ void GeoDataLineString::clear()
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_dirtyDetail = true;
+    d->m_dirtyCrossingNorth = true;
+    d->m_dirtyCrossingSouth = true;
 
     d->m_vector.clear();
 }
@@ -633,6 +644,122 @@ GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const
     return p()->m_latLonAltBox;
 }
 
+QPair <GeoDataCoordinates, GeoDataCoordinates> GeoDataLineString::southernMostIDLCrossing() const 
+{
+    GeoDataLineStringPrivate* d = p();
+
+    if ( d->m_dirtyCrossingSouth ) {
+        d->m_dirtyCrossingSouth = false;
+
+        if ( this->latLonAltBox().crossesDateLine() && this->latLonAltBox().containsPole( AnyPole ) ) {
+
+            qreal lon, lat, minLat = +M_PI; 
+
+            GeoDataLineString::ConstIterator itCoords = d->m_vector.constBegin();
+            GeoDataLineString::ConstIterator itPreviousCoords = d->m_vector.constBegin();
+            GeoDataLineString::ConstIterator itEnd = d->m_vector.constEnd();
+
+            GeoDataCoordinates firstPoint, secondPoint;
+
+            this->first().geoCoordinates( lon, lat );
+            GeoDataCoordinates::normalizeLonLat( lon, lat );
+
+            int currentSign = ( lon < 0 ) ? -1 : +1;
+            int previousSign = currentSign;
+            qreal previousLon = lon;
+
+            while ( itCoords != itEnd ) 
+            {
+                qreal lon, lat;
+                itCoords->geoCoordinates( lon, lat );
+                GeoDataCoordinates::normalizeLonLat( lon, lat );
+
+                currentSign = ( lon < 0 ) ? -1 : +1;
+
+                if ( previousSign != currentSign && fabs( previousLon ) + fabs( lon ) > M_PI ) {
+
+//                    fprintf( stderr, "Curr = %.3lf, %d Prev = %.3lf, %d\n", lon, currentSign, previousLon, previousSign );
+//                    fprintf( stderr, "%.3lf %.3lf   %.3lf %.3lf   prevLon = %.3lf\n", lon, lat, itCoords->longitude(), itCoords->latitude(), previousLon );
+                    if ( lat < minLat ) {
+                        minLat = lat;
+                        firstPoint = ( *itPreviousCoords );
+                        secondPoint = ( *itCoords );
+                    }
+                }
+
+                previousLon = lon;
+                itPreviousCoords = itCoords;
+                previousSign = currentSign;
+
+                ++itCoords;
+            }
+
+            d->m_southernCrossing = qMakePair( firstPoint, secondPoint );
+
+        }
+       
+    }
+
+    return d->m_southernCrossing;
+
+}
+
+QPair <GeoDataCoordinates, GeoDataCoordinates> GeoDataLineString::northernMostIDLCrossing() const
+{
+    GeoDataLineStringPrivate* d = p();
+
+    if ( d->m_dirtyCrossingNorth ) {
+        d->m_dirtyCrossingNorth = false;
+
+        if ( this->latLonAltBox().crossesDateLine() && this->latLonAltBox().containsPole( AnyPole ) ) {
+
+            qreal lon, lat, maxLat = -M_PI; 
+
+            GeoDataLineString::ConstIterator itCoords = d->m_vector.constBegin();
+            GeoDataLineString::ConstIterator itPreviousCoords = d->m_vector.constBegin();
+            GeoDataLineString::ConstIterator itEnd = d->m_vector.constEnd();
+
+            GeoDataCoordinates firstPoint, secondPoint;
+
+            this->first().geoCoordinates( lon, lat );
+            GeoDataCoordinates::normalizeLonLat( lon, lat );
+
+            int currentSign = ( lon < 0 ) ? -1 : +1;
+            int previousSign = currentSign;
+            int previousLon = lon;
+
+            while ( itCoords != itEnd ) 
+            {
+                qreal lon, lat;
+                itCoords->geoCoordinates( lon, lat );
+                GeoDataCoordinates::normalizeLonLat( lon, lat );
+
+                currentSign = ( lon < 0 ) ? -1 : +1;
+
+                if ( previousSign != currentSign && fabs( previousLon ) + fabs( lon ) > M_PI ) {
+                    if ( lat > maxLat ) {
+                        maxLat = lat;
+                        firstPoint = ( *itPreviousCoords );
+                        secondPoint = ( *itCoords );
+                    }
+                }
+
+                previousLon = lon;
+                itPreviousCoords = itCoords;
+
+                ++itCoords;
+            }
+
+            d->m_northernCrossing = qMakePair( firstPoint, secondPoint );
+
+        }
+       
+    }
+
+    return d->m_northernCrossing;
+
+}
+
 qreal GeoDataLineString::length( qreal planetRadius, int offset ) const
 {
     if( offset < 0 || offset >= size() ) {
@@ -659,6 +786,8 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_dirtyDetail = true;
+    d->m_dirtyCrossingNorth = true;
+    d->m_dirtyCrossingSouth = true;
     return d->m_vector.erase( pos );
 }
 
@@ -671,6 +800,8 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_dirtyDetail = true;
+    d->m_dirtyCrossingNorth = true;
+    d->m_dirtyCrossingSouth = true;
     return d->m_vector.erase( begin, end );
 }
 
@@ -681,6 +812,8 @@ void GeoDataLineString::remove ( int i )
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_dirtyDetail = true;
+    d->m_dirtyCrossingNorth = true;
+    d->m_dirtyCrossingSouth = true;
     d->m_vector.remove( i );
 }
 

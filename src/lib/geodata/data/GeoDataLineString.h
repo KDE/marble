@@ -16,6 +16,7 @@
 #include <QtCore/QFlags>
 #include <QtCore/QVector>
 #include <QtCore/QMetaType>
+#include <QtCore/QPair>
 
 #include "MarbleGlobal.h"
 
@@ -145,6 +146,11 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 */
 
    virtual GeoDataLatLonAltBox latLonAltBox() const;
+
+
+   QPair <GeoDataCoordinates, GeoDataCoordinates> southernMostIDLCrossing() const;
+
+   QPair <GeoDataCoordinates, GeoDataCoordinates> northernMostIDLCrossing() const;
 
 /**
   * @brief Returns the length of LineString across a sphere starting from a coordinate in LineString

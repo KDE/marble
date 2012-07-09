@@ -273,6 +273,7 @@ void AbstractProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates 
                                                 qreal bx, qreal by,
                                                 QVector<QPolygonF*> &polygons,
                                                 const ViewportParams *viewport,
+                                                const GeoDataLineString *lineString,
                                                 TessellationFlags f ) const
 {
     // We take the manhattan length as a distance approximation
@@ -308,10 +309,11 @@ void AbstractProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates 
                                  tessellatedNodes,
                                  polygons,
                                  viewport,
+                                 lineString,
                                  f );
         }
         else {
-            crossDateLine( aCoords, bCoords, polygons, viewport );
+            crossDateLine( aCoords, bCoords, polygons, viewport, lineString );
         }
 #ifdef SAFE_DISTANCE
     }
@@ -324,6 +326,7 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
                                                     int tessellatedNodes,
                                                     QVector<QPolygonF*> &polygons,
                                                     const ViewportParams *viewport,
+                                                    const GeoDataLineString *lineString,
                                                     TessellationFlags f ) const
 {
 
@@ -395,7 +398,7 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
         }
 
         crossDateLine( GeoDataCoordinates( previousLongitude, previousLatitude, previousAltitude),
-                       GeoDataCoordinates( lon, lat, altitude ), polygons, viewport );
+                       GeoDataCoordinates( lon, lat, altitude ), polygons, viewport, lineString );
         previousLongitude = lon;
     }
 
@@ -406,19 +409,28 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
         currentModifiedCoords.setAltitude( 0.0 );
     }
     crossDateLine( GeoDataCoordinates( previousLongitude, previousLatitude, previousAltitude ),
-                   currentModifiedCoords, polygons, viewport );
+                   currentModifiedCoords, polygons, viewport, lineString );
 }
 
 void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord,
                                                const GeoDataCoordinates & bCoord,
                                                QVector<QPolygonF*> &polygons,
-                                               const ViewportParams *viewport ) const
+                                               const ViewportParams *viewport,
+                                               const GeoDataLineString *lineString ) const
 {
     qreal aLon = aCoord.longitude();
-    qreal aSign = aLon > 0 ? 1 : -1;
-
     qreal bLon = bCoord.longitude();
+
+    qreal aLat = aCoord.latitude();
+    qreal bLat = bCoord.latitude();
+
+    GeoDataCoordinates::normalizeLonLat( aLon, aLat );
+    GeoDataCoordinates::normalizeLonLat( bLon, bLat );
+
+    qreal aSign = aLon > 0 ? 1 : -1;
     qreal bSign = bLon > 0 ? 1 : -1;
+
+//    fprintf( stderr, "Enter crossDateLine (%.3lf %.3lf) (%.3lf %.3lf)\n", aLon, aLat, bLon, bLat );
 
     qreal x, y;
     bool globeHidesPoint;
@@ -442,6 +454,49 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
             }
             QPolygonF *path = new QPolygonF;
             polygons.append( path );
+
+
+//            fprintf( stderr, "Before: (%lf %lf) (%lf %lf)\n", aLon, aLat, bLon, bLat );
+
+            if ( aLat < 0 && bLat < 0 && lineString->latLonAltBox().containsPole( AnyPole ) ) {
+
+                qreal southernIntersectionFirst = lineString->southernMostIDLCrossing().first.latitude();
+                qreal southernIntersectionSecond = lineString->southernMostIDLCrossing().second.latitude();
+
+                if ( southernIntersectionFirst > southernIntersectionSecond ) {
+                    southernIntersectionFirst = lineString->southernMostIDLCrossing().second.latitude();
+                    southernIntersectionSecond = lineString->southernMostIDLCrossing().first.latitude();
+                }
+ 
+
+                if ( southernIntersectionFirst <= aLat && aLat <= southernIntersectionSecond &&
+                        southernIntersectionFirst <= bLat && bLat <= southernIntersectionSecond ) {
+                    int sgnCrossing = ( lineString->southernMostIDLCrossing().first.longitude() > 0 ) ? 1 : -1; // 1 for east->west, -1 for west->east
+
+
+                    fprintf( stderr, "crossDateLine checked :) %d  (%lf %lf), (%lf %lf) ->  (%lf %lf)\n", lineString->size(), aLon, aLat, bLon, bLat, southernIntersectionFirst, southernIntersectionSecond );
+
+                    fprintf( stderr, "minLat = %lf\n", m_minLat );
+                    GeoDataCoordinates southPolePositive( +M_PI, m_minLat );
+                    GeoDataCoordinates southPoleNegative( -M_PI, m_minLat );
+
+                    qreal positiveX, positiveY, negativeX, negativeY;
+                           
+                    q->screenCoordinates( southPolePositive, viewport, positiveX, positiveY, globeHidesPoint );
+                    q->screenCoordinates( southPoleNegative, viewport, negativeX, negativeY, globeHidesPoint );                   
+
+
+                    if ( sgnCrossing == -1 ) 
+                        *polygons.last() << QPointF( positiveX, positiveY ) << QPointF( negativeX, negativeY );
+                    else
+                        *polygons.last() << QPointF( negativeX, negativeY ) << QPointF( positiveX, positiveY );
+                }
+
+            }
+
+            if ( aLat > 0 && bLat > 0 && lineString->latLonAltBox().containsPole( AnyPole )) {
+
+            }
         }
 
         *polygons.last() << QPointF( x, y );

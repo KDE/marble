@@ -599,7 +599,9 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
     {
         // Get coordinates and normalize them to the desired range.
         (it)->geoCoordinates( lon, lat );
+//        fprintf(stderr, "(%.3lf %.3lf) -> ", lon, lat);
         GeoDataCoordinates::normalizeLonLat( lon, lat );
+//        fprintf(stderr, "(%.3lf %.3lf)\n ", lon, lat);
 
         // Determining the maximum and minimum latitude
         if ( lat > north ) north = lat;
@@ -654,6 +656,8 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
         previousSign = currentSign;
     }
 
+    fprintf(stderr, "\n");
+
     if ( idlCrossed ) {
         if ( idlMinCrossState < 0 ) {
             east = otherEast;
@@ -667,7 +671,15 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
             east = +M_PI;
             west = -M_PI;
         }
+
+        if ( north < 0 && south < 0 ) 
+            south = -M_PI / 2.0;
+        
+        if ( north > 0 && south > 0 )
+            north = +M_PI / 2.0;
     }
+
+    fprintf(stderr, "%.3lf  %.3lf  %.3lf  %.3lf\n", north, south, east, west);
 
     return GeoDataLatLonBox( north, south, east, west );
 }
