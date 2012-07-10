@@ -387,14 +387,6 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
     polygons.append( new QPolygonF );
 
-    int detailLevel = viewport->detailLevel();
-
-    GeoDataLineString::ConstIterator itCoords = lineString.constBeginFiltered( detailLevel );
-    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBeginFiltered( detailLevel );
-
-//    GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
-//    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
-
     // Some projections display the earth in a way so that there is a
     // foreside and a backside.
     // The horizon is the line (usually a circle) which separates both
@@ -417,15 +409,24 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     GeoDataCoordinates horizonOrphanCoords;
 
 
+    int detailLevel = viewport->detailLevel();
+
     GeoDataCoordinates previousCoords;
     GeoDataCoordinates currentCoords;
 
-    GeoDataLineString::ConstIterator itBegin = lineString.constBeginFiltered( detailLevel );
-    GeoDataLineString::ConstIterator itEnd = lineString.constEndFiltered();
+//    GeoDataLineString::ConstIterator itCoords = lineString.constBeginFiltered( detailLevel );
+//    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBeginFiltered( detailLevel );
 
-//    GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
-//    GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
+    GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
+    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
    
+
+//    GeoDataLineString::ConstIterator itBegin = lineString.constBeginFiltered( detailLevel );
+//    GeoDataLineString::ConstIterator itEnd = lineString.constEndFiltered();
+
+    GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
+    GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
+
 
     bool processingLastNode = false;
 
@@ -436,8 +437,6 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     const bool isLong = lineString.size() > 50;
 
     qDebug() << "Detail level = " << viewport->detailLevel() << "\n";
-
-//    qDebug() << "Current angularResolution: " << viewport->angularResolution() << "\n";
     
     while ( itCoords != itEnd )
     {
@@ -554,8 +553,8 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
             break;
         }
 
-//        lineString.nextFilteredAt( itCoords, detailLevel );
-        ++itCoords;
+        lineString.nextFilteredAt( itCoords, detailLevel );
+//        ++itCoords;
 
         if ( itCoords == itEnd  && lineString.isClosed() ) {
             itCoords = itBegin;
