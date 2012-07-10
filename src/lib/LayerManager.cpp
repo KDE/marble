@@ -45,8 +45,6 @@ class LayerManager::Private
 
     void updateVisibility( bool visible, const QString &nameId );
 
-    void renderLayer( GeoPainter *painter, ViewportParams *viewport, const QString& renderPosition  );
-
     LayerManager *const q;
 
     QList<RenderPlugin *> m_renderPlugins;
@@ -152,37 +150,35 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
 
     foreach( const QString& renderPosition, renderPositions ) {
-        d->renderLayer( painter, viewport, renderPosition );
-    }
-}
+        QList<LayerInterface*> layers;
 
-void LayerManager::Private::renderLayer( GeoPainter *painter, ViewportParams *viewport,
-                                const QString& renderPosition )
-{
-    QList<LayerInterface*> layers;
-
-    foreach( RenderPlugin *renderPlugin, m_renderPlugins ) {
-        if ( renderPlugin && renderPlugin->renderPosition().contains( renderPosition )  ){
-            if ( renderPlugin->enabled() && renderPlugin->visible() ) {
-                if ( !renderPlugin->isInitialized() )
-                {
-                    renderPlugin->initialize();
-                    emit q->renderPluginInitialized( renderPlugin );
+        // collect all RenderPlugins of current renderPosition
+        foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
+            if ( renderPlugin && renderPlugin->renderPosition().contains( renderPosition ) ) {
+                if ( renderPlugin->enabled() && renderPlugin->visible() ) {
+                    if ( !renderPlugin->isInitialized() ) {
+                        renderPlugin->initialize();
+                        emit renderPluginInitialized( renderPlugin );
+                    }
+                    layers.push_back( renderPlugin );
                 }
-                layers.push_back( renderPlugin );
             }
         }
-    }
 
-    foreach( LayerInterface *layer, m_internalLayers ) {
-        if ( layer && layer->renderPosition().contains( renderPosition ) ) {
-            layers.push_back( layer );
+        // collect all internal LayerInterfaces of current renderPosition
+        foreach( LayerInterface *layer, d->m_internalLayers ) {
+            if ( layer && layer->renderPosition().contains( renderPosition ) ) {
+                layers.push_back( layer );
+            }
         }
-    }
 
-    qSort( layers.begin(), layers.end(), zValueLessThan );
-    foreach( LayerInterface *layer, layers ) {
-        layer->render( painter, viewport, renderPosition, 0 );
+        // sort them according to their zValue()s
+        qSort( layers.begin(), layers.end(), zValueLessThan );
+
+        // render the layers of the current renderPosition
+        foreach( LayerInterface *layer, layers ) {
+            layer->render( painter, viewport, renderPosition, 0 );
+        }
     }
 }
 
