@@ -68,11 +68,6 @@ inline uint TileId::mapThemeIdHash() const
     return m_mapThemeIdHash;
 }
 
-inline QString TileId::toString() const
-{
-    return QString( "%1:%2:%3:%4" ).arg( m_mapThemeIdHash ).arg( m_zoomLevel ).arg( m_tileX ).arg( m_tileY );
-}
-
 inline bool TileId::operator==( TileId const& rhs ) const
 {
     return m_zoomLevel == rhs.m_zoomLevel
