@@ -33,6 +33,11 @@ TileId::TileId()
 {
 }
 
+QString TileId::toString() const
+{
+    return QString( "%1:%2:%3:%4" ).arg( m_mapThemeIdHash ).arg( m_zoomLevel ).arg( m_tileX ).arg( m_tileY );
+}
+
 TileId TileId::fromString( QString const& idStr )
 {
     QStringList const components = idStr.split( ':', QString::SkipEmptyParts );
