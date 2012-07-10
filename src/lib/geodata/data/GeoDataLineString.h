@@ -152,6 +152,13 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 
    QPair <GeoDataCoordinates, GeoDataCoordinates> northernMostIDLCrossing() const;
 
+/*!
+    \brief Returns the number of intersections between the linestring and the IDL
+    (i.e. if the number is odd (and the linestring is closed), it means that the linestring contains a pole)
+*/
+
+   int howManyIDLCrossings() const;
+
 /**
   * @brief Returns the length of LineString across a sphere starting from a coordinate in LineString
   * This method can be used as an approximation for distances along LineStrings.

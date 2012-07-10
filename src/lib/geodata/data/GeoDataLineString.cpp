@@ -838,7 +838,43 @@ QPair <GeoDataCoordinates, GeoDataCoordinates> GeoDataLineString::northernMostID
     }
 
     return d->m_northernCrossing;
+}
 
+int GeoDataLineString::howManyIDLCrossings() const 
+{
+    GeoDataLineStringPrivate *d = p();
+
+    if ( d->m_dirtyHowManyCrossings ) {
+        d->m_dirtyHowManyCrossings = false;
+
+        int count = 0;
+        int currentSign, previousSign;
+        int currentLon, previousLon;
+
+        QVector<GeoDataCoordinates>::const_iterator itCoords = d->m_vector.constBegin();
+        QVector<GeoDataCoordinates>::const_iterator itEnd = d->m_vector.constEnd();
+
+        currentLon = GeoDataCoordinates::normalizeLon( itCoords->longitude() );
+        previousLon = currentLon;
+
+        currentSign = ( currentLon > 0 ) ? +1 : -1;
+        previousSign = currentSign;
+
+
+        for (; itCoords != itEnd; ++itCoords) 
+        {
+            currentLon = GeoDataCoordinates::normalizeLon( itCoords->longitude() );
+            currentSign = ( currentLon > 0 ) ? +1 : -1;
+
+            if ( currentSign != previousSign && fabs( previousLon ) + fabs( currentLon ) > M_PI )
+                count++;
+            
+        }
+
+        d->m_howManyIDLCrossings = count;
+    }
+
+    return d->m_howManyIDLCrossings;
 }
 
 qreal GeoDataLineString::length( qreal planetRadius, int offset ) const

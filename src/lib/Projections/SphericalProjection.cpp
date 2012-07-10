@@ -435,6 +435,7 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
     const bool isLong = lineString.size() > 50;
 
+    qDebug() << "Detail level = " << viewport->detailLevel() << "\n";
 
 //    qDebug() << "Current angularResolution: " << viewport->angularResolution() << "\n";
     

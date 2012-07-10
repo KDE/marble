@@ -17,11 +17,14 @@
 
 #include "MarbleDebug.h"
 #include <QtGui/QRegion>
+#include <QtCore/QDebug>
 
 // Marble
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 #include "ViewportParams.h"
+
+
 
 using namespace Marble;
 
@@ -456,7 +459,9 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
             polygons.append( path ); 
 
 
-            if ( aLat < 0 && bLat < 0 && lineString->latLonAltBox().containsPole( AnyPole ) ) {
+            if ( aLat < 0 && bLat < 0 && lineString->latLonAltBox().containsPole( AnyPole ) && lineString->howManyIDLCrossings() % 2 == 1 ) {
+
+                qDebug() << "Current point: " << bLon << " " << bLat << "\n";
 
                 qreal southernIntersectionFirst = lineString->southernMostIDLCrossing().first.latitude();
                 qreal southernIntersectionSecond = lineString->southernMostIDLCrossing().second.latitude();

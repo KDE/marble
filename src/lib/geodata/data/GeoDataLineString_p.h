@@ -30,6 +30,7 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
            m_dirtyDetail( true ),
            m_dirtyCrossingNorth( true ),
            m_dirtyCrossingSouth( true ),
+           m_dirtyHowManyCrossings( true ),
            m_tessellationFlags( f )
     {
     }
@@ -40,7 +41,8 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
            m_dirtyBox( true ),
            m_dirtyDetail( true ),
            m_dirtyCrossingNorth( true ),
-           m_dirtyCrossingSouth( true )
+           m_dirtyCrossingSouth( true ),
+           m_dirtyHowManyCrossings( true )
     {
     }
 
@@ -66,8 +68,10 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
         m_dirtyDetail = other.m_dirtyDetail;
         m_dirtyCrossingNorth = other.m_dirtyCrossingNorth;
         m_dirtyCrossingSouth = other.m_dirtyCrossingSouth;
+        m_dirtyHowManyCrossings = other.m_dirtyHowManyCrossings;
         m_southernCrossing = other.m_southernCrossing;
         m_northernCrossing = other.m_northernCrossing;
+        m_howManyIDLCrossings = other.m_howManyIDLCrossings;
         m_tessellationFlags = other.m_tessellationFlags;
 		m_detailLevel = other.m_detailLevel;
     }
@@ -125,6 +129,8 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
 
     QPair<GeoDataCoordinates, GeoDataCoordinates>   m_northernCrossing;
 
+    int                         m_howManyIDLCrossings;
+
     bool                        m_dirtyRange;
 
     GeoDataLatLonAltBox         m_latLonAltBox;
@@ -138,6 +144,8 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     bool                        m_dirtyCrossingNorth;
 
     bool                        m_dirtyCrossingSouth;
+
+    bool                        m_dirtyHowManyCrossings;
                                                
 
     TessellationFlags           m_tessellationFlags;
