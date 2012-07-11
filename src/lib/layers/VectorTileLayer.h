@@ -18,6 +18,7 @@
 #include "MarbleGlobal.h"
 #include "MarbleModel.h"
 #include "GeoDataDocument.h"
+#include "GeoDataLatLonAltBox.h"
 #include "GeoSceneTiled.h"
 
 #include <QtCore/QSize>
@@ -105,7 +106,7 @@ class VectorTileLayer : public QObject, public LayerInterface
 
     void downloadTile( const TileId &tileId );
 
-    void updateTile(TileId const & tileId, GeoDataDocument const & document, QString const & format );
+    void updateTile(TileId const & tileId, GeoDataDocument const &document, QString const & format );
 
  Q_SIGNALS:
     void tileLevelChanged( int );
@@ -119,6 +120,7 @@ class VectorTileLayer : public QObject, public LayerInterface
  private:
     class Private;
     Private *const d;
+
 };
 
 }

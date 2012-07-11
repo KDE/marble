@@ -71,7 +71,8 @@ public:
     // TreeModel for storing GeoDataDocuments
     GeoDataTreeModel *m_treeModel;
 
-    //
+    // For managing GeoDataDocuments
+    QCache< int , GeoDataDocument> m_documents;
 };
 
 VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
@@ -186,10 +187,10 @@ bool VectorTileLayer::showCityLights() const
     return d->m_layerDecorator.showCityLights();
 }
 
-void VectorTileLayer::updateTile(TileId const & tileId, const GeoDataDocument &document, QString const &format )
+void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument const &document, QString const &format )
 {
-    mDebug() << "-------------------------" << d->m_treeModel->addDocument( new GeoDataDocument(document) );
-    //delete document;
+    d->m_treeModel->addDocument( new GeoDataDocument(document) );
+    d->m_documents.insert( d->m_documents.size(), const_cast< GeoDataDocument *>(&document));
 }
 
 bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
