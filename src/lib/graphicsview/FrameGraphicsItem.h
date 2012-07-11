@@ -147,8 +147,7 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
      */
     void setBackground( const QBrush &background );
 
-    QRectF contentRect( const QPointF& position ) const;
-    QRectF paintedRect( const QPointF& position = QPointF( 0.0, 0.0 ) ) const;
+    QRectF paintedRect() const;
 
     QRectF contentRect() const;
     QSizeF contentSize() const;

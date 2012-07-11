@@ -165,22 +165,17 @@ void FrameGraphicsItem::setBackground( const QBrush &background )
     update();
 }
 
-QRectF FrameGraphicsItem::contentRect( const QPointF& position ) const
+QRectF FrameGraphicsItem::contentRect() const
 {
     qreal marginTop = ( d->m_marginTop == 0.0 ) ? d->m_margin : d->m_marginTop;
     qreal marginLeft = ( d->m_marginLeft == 0.0 ) ? d->m_margin : d->m_marginLeft;
 
-    QRectF contentRect = QRectF( position.x() + marginLeft + d->m_padding,
-                                 position.y() + marginTop + d->m_padding,
+    QRectF contentRect = QRectF( marginLeft + d->m_padding,
+                                 marginTop + d->m_padding,
                                  d->m_contentSize.width(),
                                  d->m_contentSize.height() );
 
     return contentRect;
-}
-
-QRectF FrameGraphicsItem::contentRect() const
-{
-    return contentRect( QPointF( 0.0, 0.0 ) );
 }
 
 QSizeF FrameGraphicsItem::contentSize() const
@@ -188,7 +183,7 @@ QSizeF FrameGraphicsItem::contentSize() const
     return d->m_contentSize;
 }
 
-QRectF FrameGraphicsItem::paintedRect( const QPointF& position ) const
+QRectF FrameGraphicsItem::paintedRect() const
 {
     qreal marginTop = ( d->m_marginTop == 0.0 ) ? d->m_margin : d->m_marginTop;
     qreal marginBottom = ( d->m_marginBottom == 0.0 ) ? d->m_margin : d->m_marginBottom;
@@ -197,8 +192,7 @@ QRectF FrameGraphicsItem::paintedRect( const QPointF& position ) const
 
     QSizeF size = this->size();
 
-    QRectF paintedRect = QRectF( position.x() + marginLeft,
-                                 position.y() + marginTop,
+    QRectF paintedRect = QRectF( marginLeft, marginTop,
                                  size.width() - ( marginLeft + marginRight ),
                                  size.height() - ( marginTop + marginBottom ) );
     return paintedRect;
@@ -214,7 +208,7 @@ QPainterPath FrameGraphicsItem::backgroundShape() const
 {
     QPainterPath path;
     if ( d->m_frame == RectFrame ) {
-        QRectF renderedRect = paintedRect( QPointF( 0.0, 0.0 ) );
+        QRectF renderedRect = paintedRect();
         path.addRect( QRectF( 0.0, 0.0, renderedRect.size().width(), renderedRect.size().height() ) );
     }
     else if ( d->m_frame == RoundedRectFrame ) {
@@ -241,7 +235,7 @@ void FrameGraphicsItem::paint( GeoPainter *painter, ViewportParams *viewport,
             const QString& renderPos, GeoSceneLayer * layer )
 {
     painter->save();
-    painter->translate( paintedRect( QPointF( 0.0, 0.0 ) ).topLeft() );
+    painter->translate( paintedRect().topLeft() );
     paintBackground( painter );
     painter->translate( d->m_padding, d->m_padding );
     paintContent( painter, viewport, renderPos, layer );
