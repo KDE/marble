@@ -200,9 +200,7 @@ bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         m_crosshairs = QPixmap( QSize( width, height ) );
         m_crosshairs.fill( Qt::transparent );
         QPainter mapPainter( &m_crosshairs );
-        mapPainter.setViewport( m_crosshairs.rect() );
         m_svgobj->render( &mapPainter );
-        mapPainter.setViewport( QRect( QPoint( 0, 0 ), viewport->size() ) );
     }
 
     GeoDataCoordinates const focusPoint = viewport->focusPoint();
