@@ -106,7 +106,7 @@ class VectorTileLayer : public QObject, public LayerInterface
 
     void downloadTile( const TileId &tileId );
 
-    void updateTile(TileId const & tileId, GeoDataDocument const &document, QString const & format );
+    void updateTile(TileId const & tileId, GeoDataDocument *document, QString const & format );
 
  Q_SIGNALS:
     void tileLevelChanged( int );

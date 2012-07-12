@@ -122,7 +122,7 @@ GeoDataDocument TileLoader::loadTileVectorData( TileId const & tileId, DownloadU
             // FIXME ANDER sometimes the parser doesnt work
             // maybe Q_ASSERT?
             if (document){
-                emit tileCompleted( tileId, *document, format );
+                emit tileCompleted( tileId, document, format );
                 return * document;
             }
         }

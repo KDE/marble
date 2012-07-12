@@ -72,7 +72,7 @@ public:
     GeoDataTreeModel *m_treeModel;
 
     // For managing GeoDataDocuments
-    QCache< int , GeoDataDocument> m_documents;
+    QCache< TileId, GeoDataDocument> m_documents;
 };
 
 VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
@@ -151,9 +151,9 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
     , d( new Private( downloadManager, sunLocator, veccomposer, pluginManager, this, treeModel ) )
 {
     qRegisterMetaType<TileId>( "TileId" );
-    qRegisterMetaType<GeoDataDocument>( "GeoDataDocument" );
-    connect( &d->m_loader, SIGNAL( tileCompleted( TileId, GeoDataDocument, QString ) ),
-            this, SLOT( updateTile( TileId, GeoDataDocument, QString ) ) );
+    qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
+    connect( &d->m_loader, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
+            this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
 
     // Repaint timer
     d->m_repaintTimer.setSingleShot( true );
@@ -187,10 +187,10 @@ bool VectorTileLayer::showCityLights() const
     return d->m_layerDecorator.showCityLights();
 }
 
-void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument const &document, QString const &format )
+void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument * document, QString const &format )
 {
-    d->m_treeModel->addDocument( new GeoDataDocument(document) );
-    d->m_documents.insert( d->m_documents.size(), const_cast< GeoDataDocument *>(&document));
+    d->m_treeModel->addDocument( document );
+    d->m_documents.insert( tileId, document );
 }
 
 bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
@@ -237,6 +237,12 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     d->m_texmapper->setTileLevel( tileLevel );
 
     if ( changedTileLevel ) {
+
+        foreach ( TileId x , d->m_documents.keys()  ){
+                mDebug() << "-------------------------------OBJECT" << d->m_documents.object(x);
+                d->m_treeModel->removeDocument( d->m_documents.object(x) );
+                d->m_documents.remove(x);
+        }
 
         emit tileLevelChanged( tileLevel );
     }
