@@ -47,7 +47,6 @@ qreal GeoDataLinearRing::length( qreal planetRadius, int offset ) const
 QVector<GeoDataLineString*> GeoDataLinearRing::toRangeCorrected() const
 {
 
-    qDebug() << "Linear ring toRangeCorrected()\n";
     if ( p()->m_dirtyRange ) {
 
         qDeleteAll( p()->m_rangeCorrected ); // This shouldn't be needed
@@ -57,13 +56,11 @@ QVector<GeoDataLineString*> GeoDataLinearRing::toRangeCorrected() const
 
         if ( latLonAltBox().crossesDateLine() && tessellate() )
         {
-            qDebug() << "Linear ring case 1\n";
             GeoDataLinearRing normalizedLineString = toNormalized();
             poleCorrected = normalizedLineString.toPoleCorrected();
             p()->m_rangeCorrected = poleCorrected.toDateLineCorrected();
         }
         else {
-            qDebug() << "Linear ring case 2\n";
             poleCorrected = toPoleCorrected();
             p()->m_rangeCorrected.append( new GeoDataLinearRing(poleCorrected));
         }

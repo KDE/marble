@@ -157,6 +157,14 @@ const GeoDataCoordinates& GeoDataLineString::at( int pos ) const
 
 void GeoDataLineString::assignDetailLevelsDP( QVector<GeoDataCoordinates>::ConstIterator itLeft, QVector<GeoDataCoordinates>::ConstIterator itRight, int currentDetailLevel ) const
 {
+    // This method assigns detail levels to all the nodes in the linestring
+    // in order to be filtered by nextFilteredAt(). The method it uses for
+    // assigning the detail levels is Douglas-Peucker. At each step the method
+    // has a linestring ( the one contained between itLeft and itRight in 
+    // the original linestring ). It determines the furthermost point
+    // from the segment determined by the ends of the line string (as DP does)
+    // and assigns that point a detail level according to the distance. 
+
     GeoDataLineStringPrivate* d = p();
 
     qreal dMax = -1;
@@ -212,26 +220,6 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
         d->m_vectorDetailLevels.fill( 20 );
 
         assignDetailLevelsDP( d->m_vector.constBegin(), d->m_vector.constEnd(), 1 );
-
-/*
-    	QVector<GeoDataCoordinates>::const_iterator itCoords = d->m_vector.constBegin();
-	    QVector<GeoDataCoordinates>::const_iterator itEnd = d->m_vector.constEnd();
-
-        QVector<int> pattern;
-        pattern.clear();
-
-        pattern << 1 << 9 << 2 << 13 << 3 << 10 << 4 << 15 << 5 << 11 << 6 << 14 << 7 << 12 << 8 << 16;
-
-        d->m_vectorDetailLevels.clear();
-        int count = 0;
-
-	    for( ; itCoords != itEnd; ++itCoords ) {
-	    	d->m_vectorDetailLevels.append( pattern[ count & 15 ] );
-            ++count;
-	    }
-
-        d->m_vectorDetailLevels.last() = 1;
-*/              
     }
 
     int currentPosition = (itCoordsCurrent - (d->m_vector.constBegin()));
@@ -389,11 +377,11 @@ qreal GeoDataLineString::epsilonFromDetailLevel( int detailLevel ) const
     if ( detailLevel == 2 )
         return 20000;
     if ( detailLevel > 2 && detailLevel <= 8 )
-        return 17500 - 2500 * ( detailLevel - 2 );
+        return 10000 - 1500 * ( detailLevel - 2 );
     if ( detailLevel > 8 && detailLevel <= 11 )
-        return 2500 - 700 * ( detailLevel - 8 );
+        return 1000 - 250 * ( detailLevel - 8 );
 
-    return 400 / ( 1 << ( detailLevel - 12 ) );
+    return 200 / ( 1 << ( detailLevel - 12 ) );
 }
 
 QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constBeginFiltered( int detailLevel ) const
@@ -555,7 +543,6 @@ GeoDataLineString GeoDataLineString::toNormalized() const
 
 QVector<GeoDataLineString*> GeoDataLineString::toRangeCorrected() const
 {
-//    qDebug() << "Entering toRangeCorrected " << p()->m_vector.size() << " " << p()->m_dirtyRange << "\n";
     if ( p()->m_dirtyRange ) {
 
         qDeleteAll( p()->m_rangeCorrected ); // This shouldn't be needed
@@ -565,13 +552,11 @@ QVector<GeoDataLineString*> GeoDataLineString::toRangeCorrected() const
 
         if ( latLonAltBox().crossesDateLine() && tessellate() )
         {
-//            qDebug() << "Case 1 " << p()->m_vector.size() << "\n";
             GeoDataLineString normalizedLineString = toNormalized();
             poleCorrected = normalizedLineString.toPoleCorrected();
             p()->m_rangeCorrected.append( new GeoDataLineString( poleCorrected ) );
         }
         else {
-//            qDebug() << "Case 2 " << p()->m_vector.size() << "\n";
             poleCorrected = toPoleCorrected();
             p()->m_rangeCorrected.append( new GeoDataLineString( poleCorrected ));
         }

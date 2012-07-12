@@ -49,6 +49,7 @@ AbstractProjectionPrivate::AbstractProjectionPrivate( AbstractProjection * paren
     : m_repeatX(false),
       m_maxLat(0),
       m_minLat(0),
+      m_IDLCrossed(0),
       q_ptr( parent)
 {
 }
@@ -60,7 +61,7 @@ qreal AbstractProjection::maxValidLat() const
 
 qreal AbstractProjection::maxLat() const
 {
-    Q_D(const AbstractProjection );
+    Q_D( const AbstractProjection );
     return d->m_maxLat;
 }
 
@@ -427,8 +428,10 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
     qreal aLat = aCoord.latitude();
     qreal bLat = bCoord.latitude();
 
-    GeoDataCoordinates::normalizeLonLat( aLon, aLat );
-    GeoDataCoordinates::normalizeLonLat( bLon, bLat );
+//    qDebug() << "Current before normalization: " << bLon << " " << bLat << "\n";
+
+    GeoDataCoordinates::normalizeLonLat( aLon, aLat);
+    GeoDataCoordinates::normalizeLonLat( bLon, bLat);
 
     qreal aSign = aLon > 0 ? 1 : -1;
     qreal bSign = bLon > 0 ? 1 : -1;
@@ -438,7 +441,10 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
 
     Q_Q( const AbstractProjection );
 
+//    qDebug() << m_IDLCrossed;
+
     q->screenCoordinates( bCoord, viewport, x, y, globeHidesPoint );
+//      q->screenCoordinates( GeoDataCoordinates( bLon + m_IDLCrossed * 2 * M_PI, bLat ), viewport, x, y, globeHidesPoint );
 
     if( !globeHidesPoint ) {
 
@@ -446,22 +452,7 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
                 && fabs(aLon) + fabs(bLon) > M_PI
                 && q->repeatX() ) {
 
-
-            qreal delta = mirrorPoint( viewport );
-            if ( aSign > bSign ) {
-                // going eastwards ->
-                *polygons.last() << QPointF( x +  delta, y );
-            } else {
-                // going westwards <-
-                *polygons.last() << QPointF( x -  delta, y );
-            }
-            QPolygonF *path = new QPolygonF;
-            polygons.append( path ); 
-
-
-            if ( aLat < 0 && bLat < 0 && lineString->latLonAltBox().containsPole( AnyPole ) && lineString->howManyIDLCrossings() % 2 == 1 ) {
-
-                qDebug() << "Current point: " << bLon << " " << bLat << "\n";
+            if ( aLat < 0 && bLat < 0 && lineString->latLonAltBox().containsPole( AnyPole ) && lineString->howManyIDLCrossings() % 2 == 0 ) {
 
                 qreal southernIntersectionFirst = lineString->southernMostIDLCrossing().first.latitude();
                 qreal southernIntersectionSecond = lineString->southernMostIDLCrossing().second.latitude();
@@ -469,15 +460,17 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
                 if ( southernIntersectionFirst > southernIntersectionSecond ) {
                     southernIntersectionFirst = lineString->southernMostIDLCrossing().second.latitude();
                     southernIntersectionSecond = lineString->southernMostIDLCrossing().first.latitude();
-                }
- 
+                } 
 
                 if ( southernIntersectionFirst <= aLat && aLat <= southernIntersectionSecond &&
                         southernIntersectionFirst <= bLat && bLat <= southernIntersectionSecond ) {
-                    int sgnCrossing = ( lineString->southernMostIDLCrossing().first.longitude() > 0 ) ? 1 : -1; // 1 for east->west, -1 for west->east
+                    int sgnCrossing = ( GeoDataCoordinates::normalizeLon( lineString->southernMostIDLCrossing().first.longitude() ) > 0 ) ? 1 : -1; // 1 for east->west, -1 for west->east
 
-                    GeoDataCoordinates southPolePositive( +M_PI, m_minLat );
-                    GeoDataCoordinates southPoleNegative( -M_PI, m_minLat );
+//                    qDebug() << "Previous point: " << aLon << " " << aLat << "\n";
+//                    qDebug() << "Current point: " << bLon << " " << bLat << "\n";
+
+                    GeoDataCoordinates southPolePositive( +3 * M_PI, m_minLat );
+                    GeoDataCoordinates southPoleNegative( M_PI, m_minLat );
 
                     qreal positiveX, positiveY, negativeX, negativeY;
                            
@@ -485,19 +478,46 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
                     q->screenCoordinates( southPoleNegative, viewport, negativeX, negativeY, globeHidesPoint );                   
 
 
-                    if ( sgnCrossing == 1 ) 
+                    if ( sgnCrossing == -1 ) 
                         *polygons.last() << QPointF( positiveX, positiveY ) << QPointF( negativeX, negativeY );
                     else
                         *polygons.last() << QPointF( negativeX, negativeY ) << QPointF( positiveX, positiveY );
 
                 }
-
+                else {
+                    //!!!! THIS IS THE PART WHICH MADE ANTARCTICA FAIL, BUT NOW AS I'M IGNORING IT, I'M FAILING UNIT TESTS.
+                    qreal delta = mirrorPoint( viewport );
+                    if ( aSign > bSign ) {
+                        // going eastwards ->
+                        *polygons.last() << QPointF( x +  delta, y );
+                    } else {
+                        // going westwards <-
+                        *polygons.last() << QPointF( x -  delta, y );
+                    }
+                    QPolygonF *path = new QPolygonF;
+                    polygons.append( path ); 
+                }
             }
+            
+            else {
 
-            if ( aLat > 0 && bLat > 0 && lineString->latLonAltBox().containsPole( AnyPole )) {
+                if ( aLat > 0 && bLat > 0 && lineString->latLonAltBox().containsPole( AnyPole )) {
 
+                }
+                else {
+                    //!!!! THIS IS THE PART WHICH MADE ANTARCTICA FAIL, BUT NOW AS I'M IGNORING IT, I'M FAILING UNIT TESTS.
+                    qreal delta = mirrorPoint( viewport );
+                    if ( aSign > bSign ) {
+                        // going eastwards ->
+                        *polygons.last() << QPointF( x +  delta, y );
+                    } else {
+                        // going westwards <-
+                        *polygons.last() << QPointF( x -  delta, y );
+                    }
+                    QPolygonF *path = new QPolygonF;
+                    polygons.append( path ); 
+                }
             }
-           
         }
 
         *polygons.last() << QPointF( x, y );

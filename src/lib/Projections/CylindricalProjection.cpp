@@ -96,8 +96,8 @@ bool CylindricalProjection::screenCoordinates( const GeoDataLineString &lineStri
        ) {
         // We correct for Poles and DateLines:
 
-        if ( lineString.size() > 10 )
-            qDebug() << "Special case in screenCoordinates -> toRangeCorrected is called " << lineString.size() << "\n";
+//        if ( lineString.size() > 10 )
+//            qDebug() << "Special case in screenCoordinates -> toRangeCorrected is called " << lineString.size() << "\n";
 
         lineStrings = lineString.toRangeCorrected();
 
@@ -110,7 +110,7 @@ bool CylindricalProjection::screenCoordinates( const GeoDataLineString &lineStri
         }
     }
     else {
-        qDebug() << "Normal case in screenCoordinates " << lineString.size() << "\n";
+//        qDebug() << "Normal case in screenCoordinates " << lineString.size() << "\n";
 
         d->lineStringToPolygon( lineString, viewport, polygons );
     }
@@ -163,7 +163,24 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
             previousCoords = *itPreviousCoords;
             currentCoords  = *itCoords;
 
+
+//            qDebug() << "lineStringToPolygon: " << itCoords->longitude() << " " << itCoords->latitude() << "\n";
+
             Q_Q( const CylindricalProjection );
+
+            qreal currentLon, currentLat;
+
+            currentLon = itCoords->longitude();
+            if ( fabs( currentLon ) != M_PI )
+                currentLon += 2 * M_PI;
+
+            currentLat = itCoords->latitude();
+
+            GeoDataCoordinates::normalizeLonLat( currentLon, currentLat );
+
+            currentCoords = GeoDataCoordinates( currentLon, currentLat );
+
+//            qDebug() << "lineStringToPolygon: " << currentCoords.longitude() << " " << currentCoords.latitude();
 
             q->screenCoordinates( currentCoords, viewport, x, y );
 

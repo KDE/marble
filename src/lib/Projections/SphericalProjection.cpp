@@ -448,6 +448,7 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
         if ( !skipNode ) {
 
+
             previousCoords = *itPreviousCoords;
             currentCoords  = *itCoords;
 
