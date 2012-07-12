@@ -49,7 +49,6 @@ AbstractProjectionPrivate::AbstractProjectionPrivate( AbstractProjection * paren
     : m_repeatX(false),
       m_maxLat(0),
       m_minLat(0),
-      m_IDLCrossed(0),
       q_ptr( parent)
 {
 }
@@ -428,7 +427,7 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
     qreal aLat = aCoord.latitude();
     qreal bLat = bCoord.latitude();
 
-//    qDebug() << "Current before normalization: " << bLon << " " << bLat << "\n";
+    qDebug() << "Current before normalization: " << bLon << " " << bLat << "\n";
 
     GeoDataCoordinates::normalizeLonLat( aLon, aLat);
     GeoDataCoordinates::normalizeLonLat( bLon, bLat);
@@ -441,10 +440,7 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
 
     Q_Q( const AbstractProjection );
 
-//    qDebug() << m_IDLCrossed;
-
     q->screenCoordinates( bCoord, viewport, x, y, globeHidesPoint );
-//      q->screenCoordinates( GeoDataCoordinates( bLon + m_IDLCrossed * 2 * M_PI, bLat ), viewport, x, y, globeHidesPoint );
 
     if( !globeHidesPoint ) {
 
@@ -452,7 +448,9 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
                 && fabs(aLon) + fabs(bLon) > M_PI
                 && q->repeatX() ) {
 
-            if ( aLat < 0 && bLat < 0 && lineString->latLonAltBox().containsPole( AnyPole ) && lineString->howManyIDLCrossings() % 2 == 0 ) {
+            qDebug() << lineString->latLonAltBox().containsPole( AnyPole ) << " " << lineString->howManyIDLCrossings() << "\n";
+            
+            if ( aLat < 0 && bLat < 0 && lineString->latLonAltBox().containsPole( AnyPole ) && lineString->howManyIDLCrossings() % 2 == 1 ) {
 
                 qreal southernIntersectionFirst = lineString->southernMostIDLCrossing().first.latitude();
                 qreal southernIntersectionSecond = lineString->southernMostIDLCrossing().second.latitude();
@@ -469,8 +467,8 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
 //                    qDebug() << "Previous point: " << aLon << " " << aLat << "\n";
 //                    qDebug() << "Current point: " << bLon << " " << bLat << "\n";
 
-                    GeoDataCoordinates southPolePositive( +3 * M_PI, m_minLat );
-                    GeoDataCoordinates southPoleNegative( M_PI, m_minLat );
+                    GeoDataCoordinates southPolePositive( +M_PI, m_minLat );
+                    GeoDataCoordinates southPoleNegative( -M_PI, m_minLat );
 
                     qreal positiveX, positiveY, negativeX, negativeY;
                            
@@ -478,7 +476,7 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
                     q->screenCoordinates( southPoleNegative, viewport, negativeX, negativeY, globeHidesPoint );                   
 
 
-                    if ( sgnCrossing == -1 ) 
+                    if ( sgnCrossing == 1 ) 
                         *polygons.last() << QPointF( positiveX, positiveY ) << QPointF( negativeX, negativeY );
                     else
                         *polygons.last() << QPointF( negativeX, negativeY ) << QPointF( positiveX, positiveY );
@@ -499,9 +497,35 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
                 }
             }
             
-            else {
+            if ( aLat > 0 && bLat > 0 && lineString->latLonAltBox().containsPole( AnyPole )) {
+                qreal northernIntersectionFirst = lineString->northernMostIDLCrossing().first.latitude();
+                qreal northernIntersectionSecond = lineString->northernMostIDLCrossing().second.latitude();
 
-                if ( aLat > 0 && bLat > 0 && lineString->latLonAltBox().containsPole( AnyPole )) {
+                if ( northernIntersectionFirst > northernIntersectionSecond ) {
+                    northernIntersectionFirst = lineString->northernMostIDLCrossing().second.latitude();
+                    northernIntersectionSecond = lineString->northernMostIDLCrossing().first.latitude();
+                } 
+
+                if ( northernIntersectionFirst <= aLat && aLat <= northernIntersectionSecond &&
+                        northernIntersectionFirst <= bLat && bLat <= northernIntersectionSecond ) {
+                    int sgnCrossing = ( GeoDataCoordinates::normalizeLon( lineString->northernMostIDLCrossing().first.longitude() ) > 0 ) ? 1 : -1; // 1 for east->west, -1 for west->east
+
+//                    qDebug() << "Previous point: " << aLon << " " << aLat << "\n";
+//                    qDebug() << "Current point: " << bLon << " " << bLat << "\n";
+
+                    GeoDataCoordinates northPolePositive( +3 * M_PI, m_maxLat );
+                    GeoDataCoordinates northPoleNegative( M_PI, m_maxLat );
+
+                    qreal positiveX, positiveY, negativeX, negativeY;
+                           
+                    q->screenCoordinates( northPolePositive, viewport, positiveX, positiveY, globeHidesPoint );
+                    q->screenCoordinates( northPoleNegative, viewport, negativeX, negativeY, globeHidesPoint );                   
+
+
+                    if ( sgnCrossing == 1 ) 
+                        *polygons.last() << QPointF( positiveX, positiveY ) << QPointF( negativeX, negativeY );
+                    else
+                        *polygons.last() << QPointF( negativeX, negativeY ) << QPointF( positiveX, positiveY );
 
                 }
                 else {

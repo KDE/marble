@@ -30,7 +30,6 @@ class AbstractProjectionPrivate
     qreal  m_maxLat;
     qreal  m_minLat;
 
-    mutable int m_IDLCrossed;               // needed for crossDateLine method. Returns 0 if IDL was not crossed,
                                     // otherwise -1 or 1, according to the direction of crossing. 
 
     // This method tessellates a line segment in a way that the line segment

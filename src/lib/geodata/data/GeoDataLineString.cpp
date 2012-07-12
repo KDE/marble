@@ -826,6 +826,7 @@ QPair <GeoDataCoordinates, GeoDataCoordinates> GeoDataLineString::southernMostID
 
 QPair <GeoDataCoordinates, GeoDataCoordinates> GeoDataLineString::northernMostIDLCrossing() const
 {
+
     GeoDataLineStringPrivate* d = p();
 
     if ( d->m_dirtyCrossingNorth ) {
@@ -846,7 +847,7 @@ QPair <GeoDataCoordinates, GeoDataCoordinates> GeoDataLineString::northernMostID
 
             int currentSign = ( lon < 0 ) ? -1 : +1;
             int previousSign = currentSign;
-            int previousLon = lon;
+            qreal previousLon = lon;
 
             while ( itCoords != itEnd ) 
             {
@@ -857,6 +858,7 @@ QPair <GeoDataCoordinates, GeoDataCoordinates> GeoDataLineString::northernMostID
                 currentSign = ( lon < 0 ) ? -1 : +1;
 
                 if ( previousSign != currentSign && fabs( previousLon ) + fabs( lon ) > M_PI ) {
+
                     if ( lat > maxLat ) {
                         maxLat = lat;
                         firstPoint = ( *itPreviousCoords );
@@ -866,6 +868,7 @@ QPair <GeoDataCoordinates, GeoDataCoordinates> GeoDataLineString::northernMostID
 
                 previousLon = lon;
                 itPreviousCoords = itCoords;
+                previousSign = currentSign;
 
                 ++itCoords;
             }
@@ -907,7 +910,9 @@ int GeoDataLineString::howManyIDLCrossings() const
 
             if ( currentSign != previousSign && fabs( previousLon ) + fabs( currentLon ) > M_PI )
                 count++;
-            
+
+            previousLon = currentLon;
+            previousSign = currentSign;
         }
 
         d->m_howManyIDLCrossings = count;

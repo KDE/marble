@@ -96,13 +96,9 @@ bool CylindricalProjection::screenCoordinates( const GeoDataLineString &lineStri
        ) {
         // We correct for Poles and DateLines:
 
-//        if ( lineString.size() > 10 )
-//            qDebug() << "Special case in screenCoordinates -> toRangeCorrected is called " << lineString.size() << "\n";
-
         lineStrings = lineString.toRangeCorrected();
 
         foreach ( GeoDataLineString * itLineString, lineStrings ) {
-//            qDebug() << "step\n";
             QVector<QPolygonF *> subPolygons;
 
             d->lineStringToPolygon( *itLineString, viewport, subPolygons );
@@ -110,7 +106,6 @@ bool CylindricalProjection::screenCoordinates( const GeoDataLineString &lineStri
         }
     }
     else {
-//        qDebug() << "Normal case in screenCoordinates " << lineString.size() << "\n";
 
         d->lineStringToPolygon( lineString, viewport, polygons );
     }
