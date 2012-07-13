@@ -105,7 +105,7 @@ class MarbleModelPrivate
         m_sortproxy.setFilterFixedString( GeoDataTypes::GeoDataPlacemarkType );
         m_sortproxy.setFilterKeyColumn( 1 );
         m_sortproxy.setSourceModel( &m_descendantproxy );
-        m_descendantproxy.setSourceModel( &m_treemodel );
+        // FIXME ANDER TEST TO SEE IF GEODATADOCUMENTS CACHE WORKS m_descendantproxy.setSourceModel( &m_treemodel );
     }
 
     ~MarbleModelPrivate()

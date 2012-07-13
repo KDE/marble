@@ -187,7 +187,7 @@ bool VectorTileLayer::showCityLights() const
 void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument * document, QString const &format )
 {
     d->m_treeModel->addDocument( document );
-    //d->m_documents.insert( tileId, document );
+    d->m_documents.insert( tileId, document );
 }
 
 bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
@@ -235,15 +235,12 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     if ( changedTileLevel ) {
 
-//        foreach ( TileId x , d->m_documents.keys()  )
-//                if (d->m_documents.contains(x)){
-//                    mDebug() << "-------------------------------OBJECT" << d->m_documents.object(x);
-//                    d->m_treeModel->removeDocument( d->m_documents.object(x) );
-//                    ((GeoDataDocument*)d->m_documents.object(x))->clear();
-//                    d->m_documents.remove(x);
-//        }
-
-        //emit tileLevelChanged( tileLevel );
+        foreach ( TileId x , d->m_documents.keys()  )
+                if (d->m_documents.contains(x)){
+                    d->m_treeModel->removeDocument( d->m_documents.object(x) );
+                    ((GeoDataDocument*)d->m_documents.object(x))->clear();
+                    d->m_documents.remove(x);
+        }
     }
 
     const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );

@@ -116,7 +116,8 @@ void VectorTileMapper::mapTexture( const ViewportParams *viewport, MapQuality ma
 
     m_threadPool.start( job );
 
-    m_threadPool.waitForDone();
+    // FIXME ANDER COMMENTING THE LINE AT MARBLEMODEL WE DON'T NEED TO WAIT FOR FINISHING
+    // m_threadPool.waitForDone();
 
     m_tileLoader->cleanupTilehash();
 }

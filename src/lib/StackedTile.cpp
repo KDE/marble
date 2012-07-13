@@ -232,8 +232,8 @@ StackedTile::StackedTile( TileId const &id, QImage const &resultImage, const Geo
 {
     Q_ASSERT( !tiles.isEmpty() );
 
-    if ( d->m_resultImage.isNull() ) {
-        qWarning() << "An essential tile is missing. Please rerun the application.";
+    if ( d->m_resultImage.isNull() && d->m_resultVector.size() == 0 ) {
+        qWarning() << "A tile has no image and no vector data. Please rerun the application.";
         return;
     }
 
