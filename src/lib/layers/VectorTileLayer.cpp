@@ -187,7 +187,7 @@ bool VectorTileLayer::showCityLights() const
 void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument * document, QString const &format )
 {
     d->m_treeModel->addDocument( document );
-    d->m_documents.insert( tileId, document );
+    //d->m_documents.insert( tileId, document );
 }
 
 bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,

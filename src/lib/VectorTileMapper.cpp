@@ -13,7 +13,6 @@
 #include "VectorTileMapper.h"
 
 #include <cmath>
-#include <math.h>
 
 #include <QtCore/QRunnable>
 
@@ -86,12 +85,12 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
         m_repaintNeeded = true;
     }
 
-    //if ( m_repaintNeeded ) {
+    if ( m_repaintNeeded ) {
 
         mapTexture( viewport, painter->mapQuality() );
 
         m_repaintNeeded = false;
-    //}
+    }
 
     const int radius = (int)(1.05 * (qreal)(viewport->radius()));
 
@@ -108,6 +107,8 @@ void VectorTileMapper::setRepaintNeeded()
 
 void VectorTileMapper::mapTexture( const ViewportParams *viewport, MapQuality mapQuality )
 {
+    Q_UNUSED( mapQuality);
+
     // Reset backend
     m_tileLoader->resetTilehash();
 
@@ -122,10 +123,18 @@ void VectorTileMapper::mapTexture( const ViewportParams *viewport, MapQuality ma
 
 void VectorTileMapper::RenderJob::run()
 {
-    const int max = pow(2.0,m_tileLevel);
+    /** FIXME ANDER TEST LOGIC FOR DOWNLOADING ALL THE TILES THAT ARE IN THE CURRENT ZOOM LEVEL AND INSIDE THE SCREEN **/
 
-    for (int x = 0; x < max; x++)
-        for (int y = 0; y < max; y++)
+    // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Subtiles
+
+    int minTileX = lon2tilex( m_viewport->viewLatLonAltBox().west(GeoDataCoordinates::Degree), m_tileLevel );
+    int minTileY = lat2tiley( m_viewport->viewLatLonAltBox().north(GeoDataCoordinates::Degree), m_tileLevel );
+    int maxTileX = lon2tilex( m_viewport->viewLatLonAltBox().east(GeoDataCoordinates::Degree), m_tileLevel );
+    int maxTileY = lat2tiley( m_viewport->viewLatLonAltBox().south(GeoDataCoordinates::Degree), m_tileLevel );
+
+    for (int x = minTileX; x < maxTileX; x++)
+        for (int y = minTileY; y < maxTileY; y++)
+            if ( x >= 0 && y >= 0)
             m_tileLoader->loadTile(TileId( 0, m_tileLevel, x, y ));
 }
 
