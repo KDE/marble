@@ -96,8 +96,14 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
      */
     void setMarginRight( qreal marginRight );
 
+    /**
+     * Returns the border width of the item.
+     */
     qreal borderWidth() const;
 
+    /**
+     * Set the border width of the item.
+     */
     void setBorderWidth( qreal width );
 
     /**
@@ -110,16 +116,6 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
      * Set the padding of the item.
      */
     void setPadding( qreal width );
-
-    /**
-     * Returns the border width of the item.
-     */
-    qreal border() const;
-
-    /**
-     * Change the border width of the widget.
-     */
-    void setBorder( qreal width );
 
     /**
      * Returns the brush of the border.
