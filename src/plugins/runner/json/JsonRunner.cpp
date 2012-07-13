@@ -40,7 +40,7 @@ void JsonRunner::parseFile( const QString &fileName, DocumentRole role = Unknown
     // Check file exists
     QFile file( fileName );
     if ( !file.exists() ) {
-        qWarning( "File does not exist!" );
+        qWarning() << "File" << fileName << "does not exist!";
         emit parsingFinished( 0 );
         return;
     }
@@ -56,20 +56,23 @@ void JsonRunner::parseFile( const QString &fileName, DocumentRole role = Unknown
     file.open( QIODevice::ReadOnly );
 
     // Create parser
-    JsonParser *parser = new JsonParser();
+    JsonParser parser;
 
     // Start parsing
-    if ( !parser->read( &file ) ) {
+    if ( !parser.read( &file ) ) {
         emit parsingFinished( 0, "Could not parse json" );
         return;
     }
 
-    GeoDocument* document = parser->releaseDocument();
-// FIXME ANDER Q_ASSERT( document );
-    GeoDataDocument* doc = static_cast<GeoDataDocument*>( document );
-    doc->setDocumentRole( role );
 
+    GeoDocument* document = parser.releaseDocument();
     file.close();
+    GeoDataDocument* doc = 0;
+    if (document) {
+        doc = static_cast<GeoDataDocument*>( document );
+        doc->setDocumentRole( role );
+    }
+
     emit parsingFinished( doc );
 }
 

@@ -931,7 +931,7 @@ void MarbleMapPrivate::updateMapTheme()
         m_textureLayer.setShowRelief( q->showRelief() );
 
         m_vectorTileLayer.setMapTheme( vectorTiles, vectorTileLayerSettings, seafile, landfile );
-        m_vectorTileLayer.setupTextureMapper( m_viewport.projection() );
+        m_vectorTileLayer.setupTextureMapper();
         m_vectorTileLayer.setShowRelief( q->showRelief() );
 
         if ( textureLayersOk ) {

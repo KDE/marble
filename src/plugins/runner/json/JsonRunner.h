@@ -25,13 +25,6 @@ public:
     ~JsonRunner();
     GeoDataFeature::GeoDataVisualCategory category() const;
     virtual void parseFile( const QString &fileName, DocumentRole role );
-
-signals:
-
-public slots:
-
-private:
-
 };
 
 }

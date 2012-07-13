@@ -50,7 +50,7 @@
 
                 <!-- OpenStreetMap mapnik rendered tiles expire after seven days
                      or 604800 seconds -->
-	   <layer name="openstreetmap" backend="texture" >
+<!--	   <layer name="openstreetmap" backend="texture" >
 		<texture name="mapnik_data" expire="604800" >
                     <sourcedir format="PNG"> earth/openstreetmap </sourcedir>
                     <tileSize width="256" height="256" />
@@ -62,11 +62,11 @@
                     <downloadPolicy usage="Browse" maximumConnections="20" />
                     <downloadPolicy usage="Bulk" maximumConnections="2" />
                 </texture>
-            </layer>
+            </layer>-->
 
 <!-- PLACES -->
 
-           <layer name="standardplaces" backend="geodata">
+<!--           <layer name="standardplaces" backend="geodata">
                <geodata name="cityplacemarks">
                     <sourcefile format="KML">cityplacemarks.kml</sourcefile>
                     <pick>placemark</pick>
@@ -88,7 +88,7 @@
                     <sourcefile format="KML">boundaryplacemarks.kml</sourcefile>
                     <pick>placemark</pick>
                 </geodata>
-            </layer>
+            </layer>-->
  
         </map>
  

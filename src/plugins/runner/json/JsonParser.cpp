@@ -49,6 +49,11 @@ bool JsonParser::read( QIODevice* device )
 
     // Fixes for test parsing
     QString temp = device->readAll().toLower();
+
+    if (!temp.startsWith("onkothicdataresponse")) {
+        return false;
+    }
+
     QStringList temps = temp.split(",\"granularity\":10000");
     QByteArray stream (temps.at(0).toAscii());
     stream.append("}");
@@ -118,9 +123,9 @@ bool JsonParser::read( QIODevice* device )
             placemark = new GeoDataPlacemark();
 
 
-//            if (iterator.value().property( "type" ).toString().toLower() == "polygon")
-//                geom = new GeoDataPolygon( RespectLatitudeCircle | Tessellate );
-//            else
+            if (iterator.value().property( "type" ).toString().toLower() == "polygon")
+                geom = new GeoDataPolygon( RespectLatitudeCircle | Tessellate );
+            else
             if (iterator.value().property( "type" ).toString().toLower() == "linestring")
                 geom = new GeoDataLineString( RespectLatitudeCircle | Tessellate );
             else
@@ -164,14 +169,14 @@ bool JsonParser::read( QIODevice* device )
 
 
                         if (auxX != 0 && auxY != 0){
-//                            if (iterator.value().property( "type" ).toString().toLower() == "polygon"){
+                            if (iterator.value().property( "type" ).toString().toLower() == "polygon"){
 
-//                                GeoDataLinearRing ring = ((GeoDataPolygon*)geom)->outerBoundary();
-//                                ring.append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
+                                GeoDataLinearRing ring = ((GeoDataPolygon*)geom)->outerBoundary();
+                                ring.append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
 
-//                                ((GeoDataPolygon*)geom)->setOuterBoundary(ring);
-//                            }
-//                            else
+                                ((GeoDataPolygon*)geom)->setOuterBoundary(ring);
+                            }
+                            else
                         if (iterator.value().property( "type" ).toString().toLower() == "linestring")
                                 ((GeoDataLineString*) geom)->append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
                             else

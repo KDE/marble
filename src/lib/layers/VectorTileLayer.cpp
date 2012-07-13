@@ -16,10 +16,7 @@
 #include <QtCore/QPointer>
 #include <QtCore/QTimer>
 
-#include "SphericalScanlineTextureMapper.h"
-#include "EquirectScanlineTextureMapper.h"
-#include "MercatorScanlineTextureMapper.h"
-#include "TileScalingTextureMapper.h"
+#include "VectorTileMapper.h"
 #include "GeoPainter.h"
 #include "GeoSceneGroup.h"
 #include "MergedLayerDecorator.h"
@@ -59,7 +56,6 @@ public:
     TileLoader m_loader;
     MergedLayerDecorator m_layerDecorator;
     StackedTileLoader    m_tileLoader;
-    QCache<TileId, const QPixmap> m_pixmapCache;
     TextureMapperInterface *m_texmapper;
     TextureColorizer *m_texcolorizer;
     QVector<const GeoSceneTiled *> m_textures;
@@ -71,7 +67,7 @@ public:
     // TreeModel for storing GeoDataDocuments
     GeoDataTreeModel *m_treeModel;
 
-    // For managing GeoDataDocuments
+    // GeoDataDocuments (each tile is one) cache
     QCache< TileId, GeoDataDocument> m_documents;
 };
 
@@ -87,7 +83,6 @@ VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
     , m_loader( downloadManager, pluginManager )
     , m_layerDecorator( &m_loader, sunLocator )
     , m_tileLoader( &m_layerDecorator )
-    , m_pixmapCache( 100 )
     , m_texmapper( 0 )
     , m_texcolorizer( 0 )
     , m_textureLayerSettings( 0 )
@@ -139,7 +134,6 @@ void VectorTileLayer::Private::updateTextureLayers()
 
     m_tileLoader.setTextureLayers( result );
     m_loader.setTextureLayers( result );
-    m_pixmapCache.clear();
 }
 
 VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
@@ -155,14 +149,17 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
     connect( &d->m_loader, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
             this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
 
-    // Repaint timer
-    d->m_repaintTimer.setSingleShot( true );
-    d->m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
-    connect( &d->m_repaintTimer, SIGNAL( timeout() ),
-             this, SIGNAL( repaintNeeded() ) );
 
-    connect( d->m_veccomposer, SIGNAL( datasetLoaded() ),
-             this, SLOT( mapChanged() ) );
+// Repainting is too much load, we wont repaint.
+//    Repaint timer
+//    d->m_repaintTimer.setSingleShot( true );
+//    d->m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
+//    connect( &d->m_repaintTimer, SIGNAL( timeout() ),
+//             this, SIGNAL( repaintNeeded() ) );
+
+//    connect( d->m_veccomposer, SIGNAL( datasetLoaded() ),
+//             this, SLOT( mapChanged() ) );
+
 }
 
 VectorTileLayer::~VectorTileLayer()
@@ -233,18 +230,20 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     const bool changedTileLevel = tileLevel != d->m_texmapper->tileZoomLevel();
 
-    //    mDebug() << "Texture Level was set to: " << tileLevel;
+    //    mDebug() << "VectorTile Level was set to: " << tileLevel;
     d->m_texmapper->setTileLevel( tileLevel );
 
     if ( changedTileLevel ) {
 
-        foreach ( TileId x , d->m_documents.keys()  ){
-                mDebug() << "-------------------------------OBJECT" << d->m_documents.object(x);
-                d->m_treeModel->removeDocument( d->m_documents.object(x) );
-                d->m_documents.remove(x);
-        }
+//        foreach ( TileId x , d->m_documents.keys()  )
+//                if (d->m_documents.contains(x)){
+//                    mDebug() << "-------------------------------OBJECT" << d->m_documents.object(x);
+//                    d->m_treeModel->removeDocument( d->m_documents.object(x) );
+//                    ((GeoDataDocument*)d->m_documents.object(x))->clear();
+//                    d->m_documents.remove(x);
+//        }
 
-        emit tileLevelChanged( tileLevel );
+        //emit tileLevelChanged( tileLevel );
     }
 
     const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
@@ -290,7 +289,7 @@ void VectorTileLayer::setShowTileId( bool show )
     reset();
 }
 
-void VectorTileLayer::setupTextureMapper( Projection projection )
+void VectorTileLayer::setupTextureMapper( )
 {
     if ( d->m_textures.isEmpty() )
         return;
@@ -298,23 +297,8 @@ void VectorTileLayer::setupTextureMapper( Projection projection )
     // FIXME: replace this with an approach based on the factory method pattern.
     delete d->m_texmapper;
 
-    switch( projection ) {
-    case Spherical:
-        d->m_texmapper = new SphericalScanlineTextureMapper( &d->m_tileLoader );
-        break;
-    case Equirectangular:
-        d->m_texmapper = new EquirectScanlineTextureMapper( &d->m_tileLoader );
-        break;
-    case Mercator:
-        if ( d->m_tileLoader.tileProjection() == GeoSceneTiled::Mercator ) {
-            d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader, &d->m_pixmapCache );
-        } else {
-            d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader );
-        }
-        break;
-    default:
-        d->m_texmapper = 0;
-    }
+    d->m_texmapper = new VectorTileMapper( &d->m_tileLoader );
+
     Q_ASSERT( d->m_texmapper );
 }
 
@@ -335,7 +319,6 @@ void VectorTileLayer::reset()
     mDebug() << Q_FUNC_INFO;
 
     d->m_tileLoader.clear();
-    d->m_pixmapCache.clear();
     d->mapChanged();
 }
 

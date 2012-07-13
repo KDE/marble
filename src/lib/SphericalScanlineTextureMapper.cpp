@@ -138,7 +138,6 @@ void SphericalScanlineTextureMapper::mapTexture( const ViewportParams *viewport,
         const int yEnd   = yTop + (i + 1) * yStep;
         QRunnable *const job = new RenderJob( m_tileLoader, tileZoomLevel(), &m_canvasImage, viewport, mapQuality, yStart, yEnd );
 
-        //FIXME ANDER this one loads tiles
         m_threadPool.start( job );
     }
 

@@ -92,7 +92,7 @@ class VectorTileLayer : public QObject, public LayerInterface
      * @brief  Set the Projection used for the map
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
-    void setupTextureMapper( Projection projection );
+    void setupTextureMapper();
 
     void setNeedsUpdate();
 
