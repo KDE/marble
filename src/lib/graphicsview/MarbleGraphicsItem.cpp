@@ -63,8 +63,6 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
         return true;
     }
 
-    bool successful = true;
-
     // At the moment, as GraphicsItems can't be zoomed or rotated ItemCoordinateCache
     // and DeviceCoordianteCache is exactly the same
     if ( ItemCoordinateCache == cacheMode()
@@ -133,7 +131,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
         }
     }
     
-    return successful;
+    return true;
 }
 
 bool MarbleGraphicsItem::contains( const QPointF& point ) const
