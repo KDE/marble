@@ -24,7 +24,7 @@ bool zValueLessThan( GeoGraphicsItem* i1, GeoGraphicsItem* i2 )
     return i1->zValue() < i2->zValue();
 }
 
-int GeoGraphicsScene::s_tileZoomLevel = 14;
+int GeoGraphicsScene::s_tileZoomLevel = 18;
 
 class GeoGraphicsScenePrivate
 {
@@ -137,7 +137,7 @@ void GeoGraphicsScene::removeItem( GeoGraphicsItem* item )
     int zoomLevel;
     qreal north, south, east, west;
     item->latLonAltBox().boundaries( north, south, east, west );
-    for(zoomLevel = s_tileZoomLevel; zoomLevel >= 0; zoomLevel--)
+    for(zoomLevel = item->minZoomLevel(); zoomLevel >= 0; zoomLevel--)
     {
         if( TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ) ==
             TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel ) )
@@ -175,7 +175,7 @@ void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
     int zoomLevel;
     qreal north, south, east, west;
     item->latLonAltBox().boundaries( north, south, east, west );
-    for(zoomLevel = s_tileZoomLevel; zoomLevel >= 0; zoomLevel--)
+    for(zoomLevel = item->minZoomLevel(); zoomLevel >= 0; zoomLevel--)
     {
         if( TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ) ==
             TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel ) )
