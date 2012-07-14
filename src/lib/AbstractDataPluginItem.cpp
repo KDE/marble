@@ -105,11 +105,6 @@ void AbstractDataPluginItem::setSettings( const QHash<QString, QVariant>& settin
     d->m_settings = settings;
 }
 
-bool AbstractDataPluginItem::isGeoProjected()
-{
-    return false;
-}
-
 QAction *AbstractDataPluginItem::action()
 {
     return 0;
