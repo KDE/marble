@@ -108,11 +108,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
         }
         
         foreach( const QPointF& position, p()->positions() ) {
-            painter->save();
-            
             painter->drawPixmap( position, cachePixmap );
-            
-            painter->restore();
         }
     }
     else {
