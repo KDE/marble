@@ -136,10 +136,6 @@ bool ElevationProfileMarker::isInitialized() const
 
 bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewport, const QString& renderPos, GeoSceneLayer* layer )
 {
-    if ( renderPos != "HOVERS_ABOVE_SURFACE" ) {
-        return false;
-    }
-
     if ( !m_markerPlacemark )
         return true;
 
