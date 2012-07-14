@@ -40,8 +40,8 @@
 #include "TileId.h"
 
 // Qt
+#include <QtCore/qmath.h>
 #include <QtCore/QAbstractItemModel>
-#include <QtCore/QVector>
 
 namespace Marble
 {
@@ -62,16 +62,7 @@ public:
     const QAbstractItemModel *const m_model;
     GeoGraphicsScene m_scene;
 
-    static const QVector<int> s_weightfilter;
 };
-
-const QVector<int> GeometryLayerPrivate::s_weightfilter = QVector<int>()
-    << 20 << 40 << 80
-    << 160 << 320 << 640
-    << 1280 << 2560 << 5120
-    << 10240 << 20480 << 40960
-    << 81920 << 163840 << 327680
-    << 655360 << 1310720 << 2621440;
 
 GeometryLayerPrivate::GeometryLayerPrivate( const QAbstractItemModel *model )
     : m_model( model )
@@ -217,17 +208,15 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     painter->save();
     painter->autoMapQuality();
 
-    int maxZoomLevel = 0;
-    for ( QVector<int>::const_iterator i = GeometryLayerPrivate::s_weightfilter.constBegin();
-          ( i != GeometryLayerPrivate::s_weightfilter.constEnd() ) && ( viewport->radius() > *i ); i++ ) {
-        maxZoomLevel++;
-    }
+    int maxZoomLevel = qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 );
 
     QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox(), maxZoomLevel );
     foreach( GeoGraphicsItem* item, items )
     {
-        if ( item->visible() )
+        if ( item->visible()
+             && item->latLonAltBox().intersects( viewport->viewLatLonAltBox() ) ) {
             item->paint( painter, viewport, renderPos, layer );
+        }
     }
 
     painter->restore();
