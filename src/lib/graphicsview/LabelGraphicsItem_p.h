@@ -28,8 +28,6 @@ class LabelGraphicsItemPrivate
  public:
     LabelGraphicsItemPrivate( LabelGraphicsItem *parent );
 
-    void updateSize();
-
     // TODO: This has to go up to MarbleGraphicsItem
     QFont font() const;
 
@@ -38,7 +36,6 @@ class LabelGraphicsItemPrivate
     QIcon m_icon;
 
     QSizeF m_minimumSize;
-    QSizeF m_calculatedSize;
 
     LabelGraphicsItem *m_parent;
 };
