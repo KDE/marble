@@ -48,20 +48,24 @@ bool JsonParser::read( QIODevice* device )
     Q_ASSERT( m_document );
 
     // Fixes for test parsing
-    QString temp = device->readAll().toLower();
-
-    if (!temp.startsWith("onkothicdataresponse", Qt::CaseInsensitive)) {
-        return false;
+    device->seek(21); // Strip off 'onKothicDataRespone('
+    QString temp = device->readAll();
+    int midIndex = temp.size();
+    int rightIndex = midIndex;
+    for (int i=0; i<4; ++i) {
+        rightIndex = midIndex;
+        midIndex = temp.lastIndexOf(',', midIndex-1);
     }
 
-    QStringList temps = temp.split(",\"granularity\":10000");
-    if (temps.empty()) {
-        return false;
-    }
-    QByteArray stream (temps.at(0).toAscii());
-    stream.remove(0,21);
-    stream.prepend("(");
+    QString stream = temp.mid(0, midIndex);
+    stream.prepend('(');
     stream.append("})");
+    bool hasGranularity = false;
+    int const granularity = temp.mid(midIndex+15, rightIndex-midIndex-16).toInt( &hasGranularity );
+    if (!hasGranularity) {
+        mDebug() << "Cannot parse json file (failed to parse granularity) " << temp;
+        return false;
+    }
 
     /**
      * FIXME ANDER THIS IS A TEST PARSER FOR KOTHIK's JSON FORMAT
@@ -125,11 +129,11 @@ bool JsonParser::read( QIODevice* device )
             GeoDataGeometry * geom;
             placemark = new GeoDataPlacemark();
 
-            QString const typeProperty = iterator.value().property( "type" ).toString().toLower();
-            if (typeProperty == "polygon")
+            QString const typeProperty = iterator.value().property( "type" ).toString();
+            if (typeProperty == "Polygon")
                 geom = new GeoDataPolygon( RespectLatitudeCircle | Tessellate );
             else
-            if (typeProperty == "linestring")
+            if (typeProperty == "LineString")
                 geom = new GeoDataLineString( RespectLatitudeCircle | Tessellate );
             else
                 geom = 0;
@@ -168,13 +172,13 @@ bool JsonParser::read( QIODevice* device )
                     QStringList coors = it.value().toString().split(",");
                     for (int x = 0; x < coors.size()-1 && coors.size()>1 && g ;){
 
-                        float auxX = ( coors.at(x++).toFloat() / 10000)*(east-west)   + west;
-                        float auxY = ( coors.at(x++).toFloat() / 10000)*(north-south) + south;
+                        float auxX = ( coors.at(x++).toFloat() / granularity)*(east-west)   + west;
+                        float auxY = ( coors.at(x++).toFloat() / granularity)*(north-south) + south;
 
 
-                        QString const typeProperty = iterator.value().property( "type" ).toString().toLower();
+                        QString const typeProperty = iterator.value().property( "type" ).toString();
                         if (auxX != 0 && auxY != 0){
-                            if (typeProperty == "polygon"){
+                            if (typeProperty == "Polygon"){
 
                                 GeoDataLinearRing ring = ((GeoDataPolygon*)geom)->outerBoundary();
                                 ring.append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
@@ -182,10 +186,10 @@ bool JsonParser::read( QIODevice* device )
                                 ((GeoDataPolygon*)geom)->setOuterBoundary(ring);
                             }
                             else
-                        if (typeProperty == "linestring")
+                        if (typeProperty == "LineString")
                                 ((GeoDataLineString*) geom)->append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
                             else
-                                if (typeProperty == "point")
+                                if (typeProperty == "Point")
                                 geom = new GeoDataPoint(
                                     GeoDataCoordinates(auxX,auxY,0, GeoDataCoordinates::Degree ) );
                             }
@@ -202,8 +206,6 @@ bool JsonParser::read( QIODevice* device )
             }
         }
     }
-    temp.clear();
-    stream.clear();
     return true;
 }
 
