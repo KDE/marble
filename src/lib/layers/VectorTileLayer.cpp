@@ -164,6 +164,10 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
 
 VectorTileLayer::~VectorTileLayer()
 {
+    foreach ( const TileId &tile , d->m_documents.keys() ) {
+        d->m_documents.take(tile);
+    }
+
     delete d->m_texmapper;
     delete d->m_texcolorizer;
     delete d;
