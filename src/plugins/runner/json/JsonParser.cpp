@@ -60,16 +60,18 @@ bool JsonParser::read( QIODevice* device )
     }
     QByteArray stream (temps.at(0).toAscii());
     stream.remove(0,21);
-    stream.append("}");
-
-    // For json add '(' and ')' to the stream
-    if ( !m_engine.canEvaluate( "(" + stream + ")" ) ) {
-        return false;
-    }
+    stream.prepend("(");
+    stream.append("})");
 
     /**
      * FIXME ANDER THIS IS A TEST PARSER FOR KOTHIK's JSON FORMAT
      **/
+
+    m_data = m_engine.evaluate( stream );
+    if (m_engine.hasUncaughtException()) {
+        mDebug() << "Cannot parse json file: " << m_engine.uncaughtException().toString();
+        return false;
+    }
 
     // Start parsing
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
@@ -79,8 +81,6 @@ bool JsonParser::read( QIODevice* device )
     float south = -1;
     float west = -1;
     float north = 1;
-
-    m_data = m_engine.evaluate( "(" + stream + ")" );
 
     // Global data (even if it is at the end of the json response
     // it is posible to read it now)
@@ -114,9 +114,9 @@ bool JsonParser::read( QIODevice* device )
 
     //  All downloaded placemarks will be features, so we should iterate
     //  on features
-    if (m_data.property( "features" ).isArray()){
-
-        QScriptValueIterator iterator( m_data.property( "features" ) );
+    QScriptValue const features = m_data.property( "features" );
+    if (features.isArray()){
+        QScriptValueIterator iterator( features );
 
         // Add items to the list
         while ( iterator.hasNext() ) {
@@ -125,11 +125,11 @@ bool JsonParser::read( QIODevice* device )
             GeoDataGeometry * geom;
             placemark = new GeoDataPlacemark();
 
-
-            if (iterator.value().property( "type" ).toString().toLower() == "polygon")
+            QString const typeProperty = iterator.value().property( "type" ).toString().toLower();
+            if (typeProperty == "polygon")
                 geom = new GeoDataPolygon( RespectLatitudeCircle | Tessellate );
             else
-            if (iterator.value().property( "type" ).toString().toLower() == "linestring")
+            if (typeProperty == "linestring")
                 geom = new GeoDataLineString( RespectLatitudeCircle | Tessellate );
             else
                 geom = 0;
@@ -155,9 +155,10 @@ bool JsonParser::read( QIODevice* device )
             // Parsing coordinates
             bool g = true;
 
-            if ( iterator.value().property( "coordinates" ).isArray() ){
+            QScriptValue const coordinatesProperty = iterator.value().property( "coordinates" );
+            if ( coordinatesProperty.isArray() ){
 
-                QScriptValueIterator it (iterator.value().property( "coordinates" ));
+                QScriptValueIterator it ( coordinatesProperty );
 
                 while ( it.hasNext() ) {
                     it.next();
@@ -171,8 +172,9 @@ bool JsonParser::read( QIODevice* device )
                         float auxY = ( coors.at(x++).toFloat() / 10000)*(north-south) + south;
 
 
+                        QString const typeProperty = iterator.value().property( "type" ).toString().toLower();
                         if (auxX != 0 && auxY != 0){
-                            if (iterator.value().property( "type" ).toString().toLower() == "polygon"){
+                            if (typeProperty == "polygon"){
 
                                 GeoDataLinearRing ring = ((GeoDataPolygon*)geom)->outerBoundary();
                                 ring.append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
@@ -180,10 +182,10 @@ bool JsonParser::read( QIODevice* device )
                                 ((GeoDataPolygon*)geom)->setOuterBoundary(ring);
                             }
                             else
-                        if (iterator.value().property( "type" ).toString().toLower() == "linestring")
+                        if (typeProperty == "linestring")
                                 ((GeoDataLineString*) geom)->append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
                             else
-                                if (iterator.value().property( "type" ).toString().toLower() == "point")
+                                if (typeProperty == "point")
                                 geom = new GeoDataPoint(
                                     GeoDataCoordinates(auxX,auxY,0, GeoDataCoordinates::Degree ) );
                             }
