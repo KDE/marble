@@ -36,6 +36,21 @@ namespace Marble
 
 const int REPAINT_SCHEDULING_INTERVAL = 1000;
 
+struct CacheDocument
+{
+    /** The CacheDocument takes ownership of doc */
+    CacheDocument( GeoDataDocument* doc, GeoDataTreeModel* model );
+
+    /** Remove the document from the tree and delete the document */
+    ~CacheDocument();
+
+    GeoDataDocument* document;
+    GeoDataTreeModel* owner;
+
+private:
+    Q_DISABLE_COPY( CacheDocument )
+};
+
 class VectorTileLayer::Private
 {
 public:
@@ -68,8 +83,21 @@ public:
     GeoDataTreeModel *m_treeModel;
 
     // GeoDataDocuments (each tile is one) cache
-    QCache< TileId, GeoDataDocument> m_documents;
+    QCache< TileId, CacheDocument> m_documents;
 };
+
+CacheDocument::CacheDocument( GeoDataDocument* doc, GeoDataTreeModel* model ) :
+    document( doc ), owner( model )
+{
+    // nothing to do
+}
+
+CacheDocument::~CacheDocument()
+{
+    Q_ASSERT( owner );
+    owner->removeDocument( document );
+    delete document;
+}
 
 VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
                                    const SunLocator *sunLocator,
@@ -164,10 +192,6 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
 
 VectorTileLayer::~VectorTileLayer()
 {
-    foreach ( const TileId &tile , d->m_documents.keys() ) {
-        d->m_documents.take(tile);
-    }
-
     delete d->m_texmapper;
     delete d->m_texcolorizer;
     delete d;
@@ -191,7 +215,7 @@ bool VectorTileLayer::showCityLights() const
 void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument * document, QString const &format )
 {
     d->m_treeModel->addDocument( document );
-    d->m_documents.insert( tileId, document );
+    d->m_documents.insert( tileId, new CacheDocument( document, d->m_treeModel ) );
 }
 
 bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
@@ -238,13 +262,7 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     d->m_texmapper->setTileLevel( tileLevel );
 
     if ( changedTileLevel ) {
-
-        foreach ( TileId x , d->m_documents.keys()  )
-                if (d->m_documents.contains(x)){
-                    d->m_treeModel->removeDocument( d->m_documents.object(x) );
-                    ((GeoDataDocument*)d->m_documents.object(x))->clear();
-                    d->m_documents.remove(x);
-        }
+        d->m_documents.clear();
     }
 
     const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
