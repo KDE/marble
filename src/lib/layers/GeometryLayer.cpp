@@ -105,7 +105,7 @@ void GeometryLayer::initializeDefaultValues()
         s_defaultZValues[i] = s_defaultZValue;
     
     for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
-        s_defaultMinZoomLevels[i] = 0;
+        s_defaultMinZoomLevels[i] = 15;
 
     s_defaultZValues[GeoDataFeature::None]                = 0;
     
@@ -141,7 +141,8 @@ void GeometryLayer::initializeDefaultValues()
     s_defaultZValues[GeoDataFeature::HighwayMotorway]     = s_defaultZValue - 1;
     s_defaultZValues[GeoDataFeature::RailwayRail]         = s_defaultZValue - 1;
     
-    
+    s_defaultMinZoomLevels[GeoDataFeature::NaturalWater]        = 8;
+    s_defaultMinZoomLevels[GeoDataFeature::NaturalWood]         = 8;
     s_defaultMinZoomLevels[GeoDataFeature::Building]            = 15;
 
         // OpenStreetMap highways
@@ -154,13 +155,13 @@ void GeometryLayer::initializeDefaultValues()
     s_defaultMinZoomLevels[GeoDataFeature::HighwayRoad]         = 13;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayTertiaryLink] = 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayTertiary]     = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwaySecondaryLink]= 9;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwaySecondaryLink]= 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwaySecondary]    = 9;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimaryLink]  = 8;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimaryLink]  = 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimary]      = 8; 
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayTrunkLink]    = 7;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayTrunkLink]    = 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayTrunk]        = 7;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorwayLink] = 6;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorwayLink] = 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorway]     = 6;
         
     //FIXME: Bad, better to expand this
