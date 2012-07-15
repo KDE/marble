@@ -858,7 +858,7 @@ void GeoDataFeature::initializeOsmVisualCategories()
     s_visualCategories["highway=bus_stop"]           = GeoDataFeature::TransportBusStop;
 
 
-
+    s_visualCategories["natural=water"]              = GeoDataFeature::NaturalWater;
     s_visualCategories["waterway=stream"]            = GeoDataFeature::NaturalWater;
     s_visualCategories["waterway=river"]             = GeoDataFeature::NaturalWater;
     s_visualCategories["waterway=riverbank"]         = GeoDataFeature::NaturalWater;
@@ -890,6 +890,8 @@ void GeoDataFeature::initializeOsmVisualCategories()
     s_visualCategories["landuse=retail"]             = GeoDataFeature::LanduseRetail;
 
     s_visualCategories["leisure=park"]               = GeoDataFeature::LeisurePark;
+    s_visualCategories["leisure=pitch"]               = GeoDataFeature::LeisurePark;
+    s_visualCategories["leisure=playgound"]               = GeoDataFeature::LeisurePark;
 
     s_visualCategories["railway=rail"]               = GeoDataFeature::RailwayRail;
     s_visualCategories["railway=tram"]               = GeoDataFeature::RailwayTram;
