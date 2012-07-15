@@ -50,14 +50,17 @@ bool JsonParser::read( QIODevice* device )
     // Fixes for test parsing
     QString temp = device->readAll().toLower();
 
-    if (!temp.startsWith("onkothicdataresponse")) {
+    if (!temp.startsWith("onkothicdataresponse", Qt::CaseInsensitive)) {
         return false;
     }
 
     QStringList temps = temp.split(",\"granularity\":10000");
+    if (temps.empty()) {
+        return false;
+    }
     QByteArray stream (temps.at(0).toAscii());
+    stream.remove(0,21);
     stream.append("}");
-    stream.replace("onkothicdataresponse(","");
 
     // For json add '(' and ')' to the stream
     if ( !m_engine.canEvaluate( "(" + stream + ")" ) ) {
