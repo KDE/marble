@@ -183,7 +183,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
         // VectorTile
         if ( textureLayer->nodeType() == QString("GeoSceneVectorTile") ){
-            GeoDataDocument tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, textureLayer->fileFormat() );
+            GeoDataDocument* tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, textureLayer->fileFormat() );
 
             QSharedPointer<Tile> tile( new VectorTile( tileId, tileVectordata, textureLayer->fileFormat(), blending ) );
             tiles.append( tile );
@@ -207,7 +207,7 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
             // VectorTile
             if ( format.toLower() == "js"){
                 const GeoDataDocument* document = new GeoDataDocument;
-                tiles[i] = QSharedPointer<Tile>( new VectorTile( tileId, *document, format, blending ) );
+                tiles[i] = QSharedPointer<Tile>( new VectorTile( tileId, document, format, blending ) );
             }
             // TextureTile
             else{

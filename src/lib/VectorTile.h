@@ -63,7 +63,7 @@ class Blending;
 class VectorTile : public Tile
 {
  public:
-    VectorTile( TileId const & tileId, GeoDataDocument const &vectordata, QString const &format, const Blending * blending );
+    VectorTile( TileId const & tileId, GeoDataDocument const *vectordata, QString const &format, const Blending * blending );
     ~VectorTile();
 /*!
     \brief Returns the GeoDataContainer containing de vector data of the Tile
