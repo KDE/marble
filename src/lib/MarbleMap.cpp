@@ -740,10 +740,6 @@ void MarbleMapPrivate::updateMapTheme()
 
     q->setPropertyValue( "clouds_data", m_viewParams.showClouds() );
 
-    // NOTE due to frequent regressions: 
-    // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
-    // at this point. Some themes do NOT have either vector or texture data!
-    
     // Check whether there is a vector layer available:
     if ( m_model->mapTheme()->map()->hasVectorLayers() ) {
         m_veccomposer.setShowWaterBodies( q->propertyValue( "waterbodies" ) );
@@ -795,10 +791,6 @@ void MarbleMapPrivate::updateMapTheme()
 
         m_layerManager.addLayer( &m_vectorMapLayer );
     }
-
-    // NOTE due to frequent regressions: 
-    // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
-    // at this point.
 
     // Check whether there is a texture layer available:
     if ( m_model->mapTheme()->map()->hasTextureLayers() ) {
@@ -889,10 +881,6 @@ void MarbleMapPrivate::updateMapTheme()
     else {
         m_textureLayer.setMapTheme( QVector<const GeoSceneTexture *>(), 0, "", "" );
     }
-
-    // NOTE due to frequent regressions: 
-    // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
-    // at this point!
 
     // earth
     bool value;
