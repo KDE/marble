@@ -94,7 +94,7 @@ QImage TileLoader::loadTileImage( TileId const & tileId, DownloadUsage const usa
 }
 
 
-GeoDataDocument TileLoader::loadTileVectorData( TileId const & tileId, DownloadUsage const usage, QString const &format )
+GeoDataDocument *TileLoader::loadTileVectorData( TileId const & tileId, DownloadUsage const usage, QString const &format )
 {
     GeoSceneTiled const * const textureLayer = findTextureLayer( tileId );
 
@@ -123,7 +123,7 @@ GeoDataDocument TileLoader::loadTileVectorData( TileId const & tileId, DownloadU
             // maybe Q_ASSERT?
             if (document){
                 emit tileCompleted( tileId, document, format );
-                return * document;
+                return document;
             }
         }
     }
@@ -131,7 +131,7 @@ GeoDataDocument TileLoader::loadTileVectorData( TileId const & tileId, DownloadU
     // tile was not locally available => trigger download
     triggerDownload( tileId, usage );
 
-    return * new GeoDataDocument;
+    return new GeoDataDocument;
 }
 
 // This method triggers a download of the given tile (without checking

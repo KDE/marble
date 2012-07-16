@@ -26,9 +26,9 @@ Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 namespace Marble
 {
 
-VectorTile::VectorTile(TileId const & tileId, const GeoDataDocument &vectordata, QString const &format, const Blending * blending )
+VectorTile::VectorTile(TileId const & tileId, GeoDataDocument const *vectordata, QString const &format, const Blending * blending )
     : Tile( tileId, format, blending ),
-    m_vectordata( &vectordata )
+    m_vectordata( vectordata )
 {
     Q_ASSERT( &vectordata );
 }
