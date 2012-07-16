@@ -877,6 +877,9 @@ void MarbleMapPrivate::updateMapTheme()
             m_layerManager.addLayer( &m_textureLayer );
         }
     }
+    else {
+        m_textureLayer.setMapTheme( QVector<const GeoSceneTexture *>(), 0, "", "" );
+    }
 
     // NOTE due to frequent regressions: 
     // Do NOT take it for granted that there is any TEXTURE or VECTOR data AVAILABLE
