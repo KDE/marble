@@ -181,6 +181,7 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
 
  private:
     GeoDataLatLonBoxPrivate  * const d;
+    static const GeoDataLatLonBox empty;
 };
 
 }

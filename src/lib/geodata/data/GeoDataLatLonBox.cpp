@@ -21,6 +21,8 @@
 namespace Marble
 {
 
+const GeoDataLatLonBox GeoDataLatLonBox::empty = GeoDataLatLonBox();
+
 class GeoDataLatLonBoxPrivate
 {
  public:
@@ -682,6 +684,6 @@ bool GeoDataLatLonBox::isNull() const
 
 bool GeoDataLatLonBox::isEmpty() const
 {
-    return *this == GeoDataLatLonBox();
+    return *this == empty;
 }
 }
