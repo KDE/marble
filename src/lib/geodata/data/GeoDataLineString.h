@@ -233,7 +233,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
     \brief Returns the number of nodes in a filtered LineString.
 */
 
-    int sizeFiltered() const;
+//    int sizeFiltered() const;
 
 
 /*!
@@ -349,14 +349,14 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 */
 
 //    void douglasPeucker( QVector<GeoDataCoordinates> &vector, qreal epsilon, QVector<GeoDataCoordinates> &vectorFiltered ) const;
-    void douglasPeucker( QVector<GeoDataCoordinates>::const_iterator itLeft, QVector<GeoDataCoordinates>::const_iterator itRight, qreal epsilon ) const;
+//    void douglasPeucker( QVector<GeoDataCoordinates>::const_iterator itLeft, QVector<GeoDataCoordinates>::const_iterator itRight, qreal epsilon ) const;
 
 
 /*!
     \brief Returns the distance from the first point to the segment determined by the other two
 */
 
-    qreal perpendicularDistance( GeoDataCoordinates A, GeoDataCoordinates B, GeoDataCoordinates C ) const;
+    qreal perpendicularDistance( const GeoDataCoordinates &A, const GeoDataCoordinates &B, const GeoDataCoordinates &C ) const;
 
 /*!
     \brief Returns the right epsilon for Douglas-Peucker according to the detail level
@@ -368,14 +368,17 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
     \brief Returns an iterator that points to the begin of the filtered LineString.
 */
    
-
+/*
     QVector<GeoDataCoordinates>::ConstIterator constBeginFiltered( int detailLevel ) const;
+*/    
 
 /*!
     \brief Returns an iterator that points to the end of the filtered LineString.
 */
 
+/*
     QVector<GeoDataCoordinates>::ConstIterator constEndFiltered() const;
+*/
 
 
 /*!

@@ -55,7 +55,7 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     {
         GeoDataGeometryPrivate::operator=( other );
         m_vector = other.m_vector;
-		m_vectorFiltered = other.m_vectorFiltered;
+//		m_vectorFiltered = other.m_vectorFiltered;
         m_vectorDetailLevels = other.m_vectorDetailLevels;
         qDeleteAll( m_rangeCorrected );
         foreach( GeoDataLineString *lineString, other.m_rangeCorrected )
@@ -111,7 +111,7 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
 
     QVector<GeoDataCoordinates> m_vector;
 
-	mutable QVector<GeoDataCoordinates> m_vectorFiltered;   // Keeps just some of the nodes in the linestring, 
+//	mutable QVector<GeoDataCoordinates> m_vectorFiltered;   // Keeps just some of the nodes in the linestring, 
 												            // since not all of them are needed for a lower zoom
 												            // level, for example. Saves performance. 
 
@@ -122,7 +122,7 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     QVector<GeoDataLineString*>  m_rangeCorrected;
 
 	mutable int					m_detailLevel; // Saves the current zoom level, in order to know
-											   // whether to recompute the m_vectorFiltered or 
+											   // whether to recompute the linestring filtering or
 											   // not. Saves performance. 
 
     QPair<GeoDataCoordinates, GeoDataCoordinates>   m_southernCrossing;

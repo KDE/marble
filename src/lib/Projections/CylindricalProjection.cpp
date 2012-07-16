@@ -158,9 +158,6 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
             previousCoords = *itPreviousCoords;
             currentCoords  = *itCoords;
 
-
-//            qDebug() << "lineStringToPolygon: " << itCoords->longitude() << " " << itCoords->latitude() << "\n";
-
             Q_Q( const CylindricalProjection );
 
             qreal currentLon, currentLat;
@@ -174,8 +171,6 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
             GeoDataCoordinates::normalizeLonLat( currentLon, currentLat );
 
             currentCoords = GeoDataCoordinates( currentLon, currentLat );
-
-//            qDebug() << "lineStringToPolygon: " << currentCoords.longitude() << " " << currentCoords.latitude();
 
             q->screenCoordinates( currentCoords, viewport, x, y );
 
@@ -261,7 +256,6 @@ void CylindricalProjectionPrivate::repeatPolygons( const ViewportParams *viewpor
     q->screenCoordinates( eastCoords, viewport, xEast, y, globeHidesPoint );
 
     if ( xWest <= 0 && xEast >= viewport->width() - 1 ) {
-//        mDebug() << "No repeats";
         return;
     }
 
@@ -304,9 +298,6 @@ void CylindricalProjectionPrivate::repeatPolygons( const ViewportParams *viewpor
     }
 
     polygons = repeatedPolygons;
-
-//    mDebug() << Q_FUNC_INFO << "Coordinates: " << xWest << xEast
-//             << "Repeats: " << repeatsLeft << repeatsRight;
 }
 
 }

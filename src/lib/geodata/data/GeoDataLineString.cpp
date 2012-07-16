@@ -139,10 +139,12 @@ int GeoDataLineString::size() const
     return p()->m_vector.size();
 }
 
+/*
 int GeoDataLineString::sizeFiltered() const
 {
     return p()->m_vectorFiltered.size();
 }
+*/
 
 GeoDataCoordinates& GeoDataLineString::at( int pos )
 {
@@ -177,8 +179,13 @@ void GeoDataLineString::assignDetailLevelsDP( QVector<GeoDataCoordinates>::Const
     --itEnd;
 
 
+    if ( d->m_vector.size() > 40 ) 
+        qDebug() << itLeft - d->m_vector.constBegin() << " " << itRight - d->m_vector.constBegin() << " " << currentDetailLevel;
+
+
     int p1 = itLeft - d->m_vector.constBegin();
     int p2 = itRight - d->m_vector.constBegin() - 1;
+
 
     if ( currentDetailLevel < d->m_vectorDetailLevels[p1] )
         d->m_vectorDetailLevels[p1] = currentDetailLevel;
@@ -192,16 +199,31 @@ void GeoDataLineString::assignDetailLevelsDP( QVector<GeoDataCoordinates>::Const
 
     for ( ; itCoords != itEnd; ++itCoords ) {
         qreal dist = perpendicularDistance( *itCoords, *itBegin, *itEnd );
+        
+        if ( d->m_vector.size() > 40 && ( itRight - itLeft <= 10 ) ) {
+//            qDebug() << dist;
+        }
+            
         if ( dist > dMax ) {
             dMax = dist;
             itDMax = itCoords;
         }
     } 
 
+    
+    if ( d->m_vector.size() > 40 ) {
+        qDebug() << itDMax - d->m_vector.constBegin() << "\n";
+        if ( ( itDMax - d->m_vector.constBegin() ) == 1044 )
+            qDebug() << dMax;
+    }
+        
+
     int nextDetailLevel = currentDetailLevel;
 
     while ( dMax < epsilonFromDetailLevel( nextDetailLevel ) )
         nextDetailLevel++;
+    if ( nextDetailLevel > 19 )
+        nextDetailLevel = 19;
 
     assignDetailLevelsDP( itLeft, itDMax + 1, nextDetailLevel );
     assignDetailLevelsDP( itDMax, itRight, nextDetailLevel );
@@ -219,7 +241,13 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
         d->m_vectorDetailLevels.resize( d->m_vector.size() );
         d->m_vectorDetailLevels.fill( 20 );
 
+        if ( d->m_vector.size() > 40 )
+            qDebug() << "Before Douglas Peucker " << d->m_vector.size();
+
         assignDetailLevelsDP( d->m_vector.constBegin(), d->m_vector.constEnd(), 1 );
+
+        if ( d->m_vector.size() > 40 ) 
+            qDebug() << "After Douglas Peucker " << d->m_vector.size();
     }
 
     int currentPosition = (itCoordsCurrent - (d->m_vector.constBegin()));
@@ -293,8 +321,14 @@ QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constEnd() const
     return p()->m_vector.constEnd();
 }
 
-qreal GeoDataLineString::perpendicularDistance( GeoDataCoordinates A, GeoDataCoordinates B, GeoDataCoordinates C ) const
+qreal GeoDataLineString::perpendicularDistance( const GeoDataCoordinates &A, const GeoDataCoordinates &B, const GeoDataCoordinates &C ) const
 {
+
+
+    if ( B == C ) {
+        qDebug() << "My special case\n";
+        return distanceSphere( A, B );
+    }    
 
     qreal ret;
     qreal const y0 = A.latitude();
@@ -311,20 +345,33 @@ qreal GeoDataLineString::perpendicularDistance( GeoDataCoordinates A, GeoDataCoo
     qreal const x21 = y2 - y1;
     qreal const len = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
     qreal const t = (x01 * x21 + y01 * y21) / len;
+
     if ( t < 0.0 ) {
         ret = EARTH_RADIUS * distanceSphere(A, B);
+/*        
+        if ( p()->m_vector.size() > 40 )
+            qDebug() << "    Case 1: " << ret;
+*/            
     } else if ( t > 1.0 ) {
         ret = EARTH_RADIUS * distanceSphere(A, C);
+/*        
+        if ( p()->m_vector.size() > 40 )
+            qDebug() << "    Case 2: " << ret;
+*/            
     } else {
         qreal const nom = qAbs( x21 * y10 - x10 * y21 );
         qreal const den = sqrt( x21 * x21 + y21 * y21 );
         ret = EARTH_RADIUS * nom / den;
+/*        
+        if ( p()->m_vector.size() > 40 )
+            qDebug() << "    Case 3: " << ret << " " << x0 << " " << y0 << "    " << x1 << " " << y1 << "    " << x2 << " " << y2;
+*/            
     }
 
     return ret;
 }
 
-
+/*
 void GeoDataLineString::douglasPeucker( QVector<GeoDataCoordinates>::const_iterator itLeft, QVector<GeoDataCoordinates>::const_iterator itRight, qreal epsilon ) const 
 {
 
@@ -366,6 +413,7 @@ void GeoDataLineString::douglasPeucker( QVector<GeoDataCoordinates>::const_itera
         d->m_vectorFiltered.append( *itEnd );
     }
 }
+*/
 
 qreal GeoDataLineString::epsilonFromDetailLevel( int detailLevel ) const
 {
@@ -384,6 +432,7 @@ qreal GeoDataLineString::epsilonFromDetailLevel( int detailLevel ) const
     return 200 / ( 1 << ( detailLevel - 12 ) );
 }
 
+/*
 QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constBeginFiltered( int detailLevel ) const
 {
     GeoDataLineStringPrivate* d = p();
@@ -399,11 +448,14 @@ QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constBeginFiltered
 
     return p()->m_vectorFiltered.constBegin();
 }
+*/
 
+/*
 QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constEndFiltered() const
 {
     return p()->m_vectorFiltered.constEnd();
 }
+*/
 
 void GeoDataLineString::append ( const GeoDataCoordinates& value )
 {
@@ -419,6 +471,7 @@ void GeoDataLineString::append ( const GeoDataCoordinates& value )
     d->m_dirtyHowManyCrossings = true;
     d->m_vector.append( value );
 }
+
 
 GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& value )
 {

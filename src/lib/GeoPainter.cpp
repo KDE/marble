@@ -602,8 +602,11 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
         }
     }
     qDeleteAll( polygons );
+
+
 	if (lineString.size() > 100000)
-		qDebug("Time elapsed: %d ms Nodes: %d", taskTime.elapsed(), lineString.sizeFiltered());
+		qDebug("Time elapsed: %d ms Nodes: %d", taskTime.elapsed(), lineString.size());
+        
 }
 
 

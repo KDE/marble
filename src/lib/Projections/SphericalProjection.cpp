@@ -278,8 +278,6 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
         latLonAltBox.setEast( +M_PI );
     }
 
-//    mDebug() << latLonAltBox.text( GeoDataCoordinates::Degree );
-
     return latLonAltBox;
 }
 
@@ -414,15 +412,8 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     GeoDataCoordinates previousCoords;
     GeoDataCoordinates currentCoords;
 
-//    GeoDataLineString::ConstIterator itCoords = lineString.constBeginFiltered( detailLevel );
-//    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBeginFiltered( detailLevel );
-
     GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
     GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
-   
-
-//    GeoDataLineString::ConstIterator itBegin = lineString.constBeginFiltered( detailLevel );
-//    GeoDataLineString::ConstIterator itEnd = lineString.constEndFiltered();
 
     GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
     GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
@@ -447,7 +438,6 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
                         viewport->resolves( *itPreviousCoords, *itCoords );
 
         if ( !skipNode ) {
-
 
             previousCoords = *itPreviousCoords;
             currentCoords  = *itCoords;
@@ -554,8 +544,8 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
             break;
         }
 
-        lineString.nextFilteredAt( itCoords, detailLevel );
 //        ++itCoords;
+        lineString.nextFilteredAt( itCoords, detailLevel );
 
         if ( itCoords == itEnd  && lineString.isClosed() ) {
             itCoords = itBegin;
