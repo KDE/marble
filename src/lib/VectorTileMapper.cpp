@@ -1,14 +1,13 @@
-//
-// This file is part of the Marble Virtual Globe.
-//
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
-//
-// Copyright 2007      Torsten Rahn     <tackat@kde.org>
-// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
-//
+/*
+ This file is part of the Marble Virtual Globe.
 
+ This program is free software licensed under the GNU LGPL. You can
+ find a copy of this license in LICENSE.txt in the top directory of
+ the source code.
+
+ Copyright 2007      Torsten Rahn     <tackat@kde.org>
+ Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+*/
 
 #include "VectorTileMapper.h"
 
@@ -125,8 +124,6 @@ void VectorTileMapper::mapTexture( const ViewportParams *viewport, MapQuality ma
 void VectorTileMapper::RenderJob::run()
 {
     /** FIXME ANDER TEST LOGIC FOR DOWNLOADING ALL THE TILES THAT ARE IN THE CURRENT ZOOM LEVEL AND INSIDE THE SCREEN **/
-
-    // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Subtiles
 
     int minTileX = lon2tilex( m_viewport->viewLatLonAltBox().west(GeoDataCoordinates::Degree), m_tileLevel );
     int minTileY = lat2tiley( m_viewport->viewLatLonAltBox().north(GeoDataCoordinates::Degree), m_tileLevel );

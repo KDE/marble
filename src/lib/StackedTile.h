@@ -90,10 +90,10 @@ class StackedTile
     QImage const * resultImage() const;
 
 /*!
-    \brief Returns the QImage that describes the merged stack of Tiles
-    \return A non-zero pointer to the resulting QImage
+    \brief Returns the GeoDataDocument that describes the merged stack of Tiles
+    \return A non-zero pointer to the resulting GeoDataDocument
 */
-    const GeoDataDocument *resultVectorData() const;
+    GeoDataDocument const * resultVectorData() const;
 
 /*!
     \brief Returns the color value of the result tile at the given integer position.

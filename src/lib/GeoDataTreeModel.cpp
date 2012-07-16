@@ -358,7 +358,7 @@ QModelIndex GeoDataTreeModel::parent( const QModelIndex &index ) const
 
         GeoDataObject *greatParentObject = parentObject->parent();
 
-        // FIXME ANDER SOMETIMES NULL GREATPARENT
+        // Avoid crashing when there is no grandparent
         if ( greatParentObject == 0 )
         {
             return QModelIndex();

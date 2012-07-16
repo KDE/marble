@@ -80,7 +80,8 @@ StackedTilePrivate::~StackedTilePrivate()
 
 uint StackedTilePrivate::pixel( int x, int y ) const
 {
-    // FIXME ANDER, IMAGE CAN BE NULL
+    // Image can be null if it is a VectorTile
+    // VectorTile shouldnt call this method
     if ( m_resultImage.isNull() )
         return 0;
 
@@ -302,7 +303,7 @@ QImage const * StackedTile::resultImage() const
     return &d->m_resultImage;
 }
 
-const GeoDataDocument *StackedTile::resultVectorData() const
+GeoDataDocument const * StackedTile::resultVectorData() const
 {
     return &d->m_resultVector;
 }

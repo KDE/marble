@@ -58,7 +58,10 @@ GeoNode* DgmlVectortileTagHandler::parse(GeoParser& parser) const
     // Check parent type and make sure that the dataSet type
     // matches the backend of the parent layer
     if ( parentItem.represents(dgmlTag_Layer)
-        && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_vectortile ) { //FIXME ANDER REALLY NEEDED?
+        && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_vectortile ) {
+
+        //FIXME ANDER Using backend tag here and in other layers  to decide which type of layer
+        // looks unnecesary because we have already parsed <VectorTile> tag
 
         texture = new GeoSceneVectorTile( name );
         texture->setExpire( expire );

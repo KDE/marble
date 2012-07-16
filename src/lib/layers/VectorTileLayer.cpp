@@ -185,8 +185,8 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
 //    connect( &d->m_repaintTimer, SIGNAL( timeout() ),
 //             this, SIGNAL( repaintNeeded() ) );
 
-//    connect( d->m_veccomposer, SIGNAL( datasetLoaded() ),
-//             this, SLOT( mapChanged() ) );
+    connect( d->m_veccomposer, SIGNAL( datasetLoaded() ),
+             this, SLOT( mapChanged() ) );
 
 }
 

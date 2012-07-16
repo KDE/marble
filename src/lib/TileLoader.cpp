@@ -119,8 +119,6 @@ GeoDataDocument *TileLoader::loadTileVectorData( TileId const & tileId, Download
             MarbleRunnerManager* man = new MarbleRunnerManager( m_pluginManager );
             GeoDataDocument* document = man->openFile( fileName );
 
-            // FIXME ANDER sometimes the parser doesnt work
-            // maybe Q_ASSERT?
             if (document){
                 emit tileCompleted( tileId, document, format );
                 return document;
