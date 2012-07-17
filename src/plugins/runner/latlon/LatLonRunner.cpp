@@ -53,7 +53,7 @@ void LatLonRunner::search( const QString &searchTerm )
         placemark->setCoordinate( lon, lat );
         placemark->setVisualCategory( category() );
         placemark->setPopularity( 1000000000 );
-        placemark->setZoomLevel( 18 );
+        placemark->setZoomLevel( 1 );
         vector.append( placemark );
     }
 

@@ -141,6 +141,7 @@ void GeometryLayer::initializeDefaultValues()
     s_defaultZValues[GeoDataFeature::HighwayMotorway]     = s_defaultZValue - 1;
     s_defaultZValues[GeoDataFeature::RailwayRail]         = s_defaultZValue - 1;
     
+    s_defaultMinZoomLevels[GeoDataFeature::Default]             = 1;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalWater]        = 8;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalWood]         = 8;
     s_defaultMinZoomLevels[GeoDataFeature::Building]            = 15;

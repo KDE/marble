@@ -340,37 +340,37 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
             else if ( placemark->role() == "P" )
             {
                 placemark->setPopularity( 1000000000 );
-                placemark->setZoomLevel( 18 );
+                placemark->setZoomLevel( 1 );
             }
             // Magnetic Pole (M)
             else if ( placemark->role() == "M" )
             {
                 placemark->setPopularity( 10000000 );
-                placemark->setZoomLevel( 13 );
+                placemark->setZoomLevel( 3 );
             }
             // MannedLandingSite (h)
             else if ( placemark->role() == "h" )
             {
                 placemark->setPopularity( 1000000000 );
-                placemark->setZoomLevel( 18 );
+                placemark->setZoomLevel( 1 );
             }
             // RoboticRover (r)
             else if ( placemark->role() == "r" )
             {
                 placemark->setPopularity( 10000000 );
-                placemark->setZoomLevel( 16 );
+                placemark->setZoomLevel( 2 );
             }
             // UnmannedSoftLandingSite (u)
             else if ( placemark->role() == "u" )
             {
                 placemark->setPopularity( 1000000 );
-                placemark->setZoomLevel( 14 );
+                placemark->setZoomLevel( 3 );
             }
             // UnmannedSoftLandingSite (i)
             else if ( placemark->role() == "i" )
             {
                 placemark->setPopularity( 1000000 );
-                placemark->setZoomLevel( 14 );
+                placemark->setZoomLevel( 3 );
             }
             // Space Terrain: Craters, Maria, Montes, Valleys, etc.
             else if (    placemark->role() == "m" || placemark->role() == "v"
@@ -385,7 +385,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                     if ( placemark->role() == "c" ) {
                         placemark->setZoomLevel( spacePopIdx( diameter ) );
                         if ( placemark->name() == "Tycho" || placemark->name() == "Copernicus" ) {
-                            placemark->setZoomLevel( 17 );
+                            placemark->setZoomLevel( 1 );
                         }
                     }
                     else {
@@ -394,7 +394,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
 
                     if ( placemark->role() == "a" && diameter == 0 ) {
                         placemark->setPopularity( 1000000000 );
-                        placemark->setZoomLevel( 18 );
+                        placemark->setZoomLevel( 1 );
                     }
                 }
             }
@@ -438,16 +438,16 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                    || placemark->role()=="PPLS"
                    || placemark->role()=="PPLW" ) placemark->setVisualCategory(
                         ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallCity
-                                                                       + ( placemark->zoomLevel() -1 ) / 4 * 4 ) );
+                                                                       + (( 20- ( 2*placemark->zoomLevel()) ) / 4 * 4 ) ) );
             else if ( placemark->role() == "PPLA" ) placemark->setVisualCategory(
                     ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallStateCapital
-                                                                   + ( placemark->zoomLevel() -1 ) / 4 * 4 ) );
+                                                                   + (( 20- ( 2*placemark->zoomLevel()) ) / 4 * 4 ) ) );
             else if ( placemark->role()=="PPLC" ) placemark->setVisualCategory(
                     ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallNationCapital
-                                                                   + ( placemark->zoomLevel() -1 ) / 4 * 4 ) );
+                                                                   + (( 20- ( 2*placemark->zoomLevel()) ) / 4 * 4 ) ) );
             else if ( placemark->role()=="PPLA2" || placemark->role()=="PPLA3" ) placemark->setVisualCategory(
                     ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallCountyCapital
-                                                                   + ( placemark->zoomLevel() -1 ) / 4 * 4 ) );
+                                                                   + (( 20- ( 2*placemark->zoomLevel()) ) / 4 * 4 ) ) );
             else if ( placemark->role()==" " && !hasPopularity && placemark->visualCategory() == GeoDataPlacemark::Unknown ) {
                 placemark->setVisualCategory( GeoDataPlacemark::Unknown ); // default location
                 placemark->setZoomLevel(0);
@@ -457,19 +457,19 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
             else if ( placemark->role() == "u" ) placemark->setVisualCategory( GeoDataPlacemark::UnmannedSoftLandingSite );
             else if ( placemark->role() == "i" ) placemark->setVisualCategory( GeoDataPlacemark::UnmannedHardLandingSite );
 
-            if ( placemark->role() == "W" && placemark->zoomLevel() > 12 )
-                placemark->setZoomLevel( 12 );
+            if ( placemark->role() == "W" && placemark->zoomLevel() < 4 )
+                placemark->setZoomLevel( 4 );
             if ( placemark->role() == "O" )
-                placemark->setZoomLevel( 16 );
+                placemark->setZoomLevel( 2 );
             if ( placemark->role() == "K" )
-                placemark->setZoomLevel( 19 );
+                placemark->setZoomLevel( 0 );
             if ( !placemark->isVisible() ) {
-                placemark->setZoomLevel( -1 );
+                placemark->setZoomLevel( 18 );
             }
             // Workaround: Emulate missing "setVisible" serialization by allowing for population
             // values smaller than -1 which are considered invisible.
             if ( placemark->population() < -1 ) {
-                placemark->setZoomLevel( -1 );
+                placemark->setZoomLevel( 18 );
             }
         }
     }
@@ -477,58 +477,43 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
 
 int FileLoaderPrivate::cityPopIdx( qint64 population ) const
 {
-    int popidx = 15;
+    int popidx = 3;
 
-    if ( population < 2500 )        popidx=1;
-    else if ( population < 5000)    popidx=2;
-    else if ( population < 7500)    popidx=3;
-    else if ( population < 10000)   popidx=4;
-    else if ( population < 25000)   popidx=5;
-    else if ( population < 50000)   popidx=6;
+    if ( population < 2500 )        popidx=10;
+    else if ( population < 5000)    popidx=9;
+    else if ( population < 25000)   popidx=8;
     else if ( population < 75000)   popidx=7;
-    else if ( population < 100000)  popidx=8;
-    else if ( population < 250000)  popidx=9;
-    else if ( population < 500000)  popidx=10;
-    else if ( population < 750000)  popidx=11;
-    else if ( population < 1000000) popidx=12;
-    else if ( population < 2500000) popidx=13;
-    else if ( population < 5000000) popidx=14;
+    else if ( population < 250000)  popidx=6;
+    else if ( population < 750000)  popidx=5;
+    else if ( population < 2500000) popidx=4;
 
     return popidx;
 }
 
 int FileLoaderPrivate::spacePopIdx( qint64 population ) const
 {
-    int popidx = 18;
+    int popidx = 1;
 
-    if ( population < 1000 )        popidx=1;
-    else if ( population < 2000)    popidx=2;
-    else if ( population < 4000)    popidx=3;
-    else if ( population < 6000)    popidx=4;
-    else if ( population < 8000)    popidx=5;
-    else if ( population < 10000)   popidx=6;
+    if ( population < 1000 )        popidx=10;
+    else if ( population < 2000)    popidx=9;
+    else if ( population < 8000)    popidx=8;
     else if ( population < 20000)   popidx=7;
-
-    else if ( population < 40000  )  popidx=8;
-    else if ( population < 60000)    popidx=9;
-    else if ( population < 80000  )  popidx=10;
-    else if ( population < 100000)   popidx=11;
-    else if ( population < 200000 )  popidx=13;
-    else if ( population < 400000 )  popidx=15;
-    else if ( population < 600000 )  popidx=17;
+    else if ( population < 60000)    popidx=6;
+    else if ( population < 100000)   popidx=5;
+    else if ( population < 200000 )  popidx=4;
+    else if ( population < 400000 )  popidx=2;
+    else if ( population < 600000 )  popidx=1;
 
     return popidx;
 }
 
 int FileLoaderPrivate::areaPopIdx( qreal area ) const
 {
-    int popidx = 17;
-    if      ( area <  200000  )      popidx=11;
-    else if ( area <  400000  )      popidx=12;
-    else if ( area < 1000000  )      popidx=13;
-    else if ( area < 2500000  )      popidx=14;
-    else if ( area < 5000000  )      popidx=15;
-    else if ( area < 10000000 )      popidx=16;
+    int popidx = 1;
+    if      ( area <  200000  )      popidx=5;
+    else if ( area < 1000000  )      popidx=4;
+    else if ( area < 2500000  )      popidx=3;
+    else if ( area < 5000000  )      popidx=2;
 
     return popidx;
 }

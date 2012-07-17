@@ -151,7 +151,7 @@ GeoDataPlacemark* OsmTagTagHandler::createPOI( GeoDataDocument* doc, GeoDataGeom
     placemark->setGeometry( new GeoDataPoint( *point ) );
     point->setParent( placemark );
     placemark->setVisible( false );
-    placemark->setZoomLevel( 1 );
+    placemark->setZoomLevel( 18 );
     doc->append( placemark );
     return placemark;
 }
