@@ -49,7 +49,7 @@ bool JsonParser::read( QIODevice* device )
 
     // Fixes for test parsing
     device->seek(21); // Strip off 'onKothicDataRespone('
-    QString temp = device->readAll();
+    QString temp = QString::fromUtf8( device->readAll() );
     int midIndex = temp.size();
     int rightIndex = midIndex;
     for (int i=0; i<4; ++i) {
