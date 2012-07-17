@@ -147,6 +147,97 @@ const GeoDataCoordinates& GeoDataLineString::at( int pos ) const
     return p()->m_vector.at( pos );
 }
 
+<<<<<<< HEAD
+=======
+void GeoDataLineString::douglasPeucker( QVector<GeoDataCoordinates>::ConstIterator itLeft, QVector<GeoDataCoordinates>::ConstIterator itRight, const int currentDetailLevel ) const
+{
+    // This method assigns detail levels to all the nodes in the linestring
+    // in order to be filtered by nextFilteredAt(). The method it uses for
+    // assigning the detail levels is Douglas-Peucker. At each step the method
+    // has a linestring ( the one contained between itLeft and itRight in 
+    // the original linestring ). It determines the furthermost point
+    // from the segment determined by the ends of the line string (as DP does)
+    // and assigns that point a detail level according to the distance. 
+
+    GeoDataLineStringPrivate* d = p();
+
+    qreal dMax = 0;
+    QVector<GeoDataCoordinates>::const_iterator itCoords = itLeft;
+    QVector<GeoDataCoordinates>::const_iterator itBegin = itLeft;
+    QVector<GeoDataCoordinates>::const_iterator itEnd = itRight;
+    QVector<GeoDataCoordinates>::const_iterator itDMax = ( itLeft + ( itRight - itLeft ) / 2 );
+
+    ++itCoords;
+    --itEnd;
+
+
+    int p1 = itLeft - d->m_vector.constBegin();
+    int p2 = itRight - d->m_vector.constBegin() - 1;
+
+
+    if ( currentDetailLevel < d->m_vectorDetailLevels[p1] )
+        d->m_vectorDetailLevels[p1] = currentDetailLevel;
+
+    if ( currentDetailLevel < d->m_vectorDetailLevels[p2] )
+        d->m_vectorDetailLevels[p2] = currentDetailLevel;
+
+    if ( itRight - itLeft < 3 )
+        return;
+   
+
+    for ( ; itCoords != itEnd; ++itCoords ) {
+        qreal dist = perpendicularDistance( *itCoords, *itBegin, *itEnd );
+        
+        if ( dist > dMax ) {
+            dMax = dist;
+            itDMax = itCoords;
+        }
+    } 
+
+
+    int nextDetailLevel = currentDetailLevel;
+
+    while ( dMax < epsilonFromDetailLevel( nextDetailLevel ) && nextDetailLevel < 19 )
+        nextDetailLevel++;
+    if ( nextDetailLevel > 19 )
+        nextDetailLevel = 19;
+
+    douglasPeucker( itLeft, itDMax + 1, nextDetailLevel );
+    douglasPeucker( itDMax, itRight, nextDetailLevel );
+}
+
+void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterator &itCoordsCurrent, int detailLevel ) const
+{
+    GeoDataLineStringPrivate* d = p();
+
+
+    if ( d->m_dirtyDetail ) {
+        d->m_dirtyDetail = false;
+
+        d->m_vectorDetailLevels.clear();
+        d->m_vectorDetailLevels.resize( d->m_vector.size() );
+        d->m_vectorDetailLevels.fill( 20 );
+
+        douglasPeucker( d->m_vector.constBegin(), d->m_vector.constEnd(), 1 );
+    }
+
+    int currentPosition = (itCoordsCurrent - (d->m_vector.constBegin()));
+
+    ++itCoordsCurrent;
+    ++currentPosition;
+
+    if ( itCoordsCurrent == d->m_vector.constEnd() )
+        return;
+
+    while ( itCoordsCurrent != d->m_vector.constEnd() && d->m_vectorDetailLevels.at( currentPosition ) > detailLevel ) {
+        ++itCoordsCurrent;
+        ++currentPosition;
+    }
+}
+
+
+
+>>>>>>> 2d251ef... Important commit - everything up to Trello #13 WORKS
 GeoDataCoordinates& GeoDataLineString::operator[]( int pos )
 {
     GeoDataGeometry::detach();
@@ -202,6 +293,71 @@ QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constEnd() const
     return p()->m_vector.constEnd();
 }
 
+<<<<<<< HEAD
+=======
+qreal GeoDataLineString::perpendicularDistance( const GeoDataCoordinates &A, const GeoDataCoordinates &B, const GeoDataCoordinates &C ) const
+{
+
+
+    if ( B == C ) {
+        qreal d1 = fabs( distanceSphere( A, B ) ) * EARTH_RADIUS;
+        qreal d2 = fabs( distanceSphere( A, C ) ) * EARTH_RADIUS;
+
+        if ( d1 > d2 )
+            return d1;
+        else
+            return d2;
+    }    
+
+    qreal ret;
+    qreal const y0 = A.latitude();
+    qreal const x0 = A.longitude();
+    qreal const y1 = B.latitude();
+    qreal const x1 = B.longitude();
+    qreal const y2 = C.latitude();
+    qreal const x2 = C.longitude();
+    qreal const y01 = x0 - x1;
+    qreal const x01 = y0 - y1;
+    qreal const y10 = x1 - x0;
+    qreal const x10 = y1 - y0;
+    qreal const y21 = x2 - x1;
+    qreal const x21 = y2 - y1;
+    qreal const len = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
+    qreal const t = (x01 * x21 + y01 * y21) / len;
+
+    if ( t < 0.0 ) {
+        ret = EARTH_RADIUS * distanceSphere(A, B);
+    } else if ( t > 1.0 ) {
+        ret = EARTH_RADIUS * distanceSphere(A, C);
+    } else {
+        qreal const nom = qAbs( x21 * y10 - x10 * y21 );
+        qreal const den = sqrt( x21 * x21 + y21 * y21 );
+        ret = EARTH_RADIUS * nom / den;
+    }
+
+    return ret;
+}
+
+
+qreal GeoDataLineString::epsilonFromDetailLevel( int detailLevel ) const
+{
+    if ( p()->m_vector.size() < 30 )
+        return 0;
+
+    if ( detailLevel <= 1 )
+        return 50000;
+    if ( detailLevel == 2 )
+        return 20000;
+    if ( detailLevel > 2 && detailLevel <= 8 )
+        return 10000 - 1500 * ( detailLevel - 2 );
+    if ( detailLevel > 8 && detailLevel <= 11 )
+        return 1000 - 250 * ( detailLevel - 8 );
+
+    return 200 / ( 1 << ( detailLevel - 12 ) );
+}
+
+
+>>>>>>> 2d251ef... Important commit - everything up to Trello #13 WORKS
 void GeoDataLineString::append ( const GeoDataCoordinates& value )
 {
     GeoDataGeometry::detach();

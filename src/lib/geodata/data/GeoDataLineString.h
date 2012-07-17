@@ -223,6 +223,20 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 */
     GeoDataCoordinates& at( int pos );
 
+<<<<<<< HEAD
+=======
+/*!
+    \brief Assigns the detail levels by using Douglas-Peucker
+*/
+
+    void douglasPeucker( QVector<GeoDataCoordinates>::ConstIterator itLeft, QVector<GeoDataCoordinates>::ConstIterator itRight, const int currentDetailLevel ) const;
+
+/*!
+    \brief Returns a reference to the coordinates of the first node that has a detailLevel greater or equal than the current one.
+*/
+   
+    void nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterator &itCoordsCurrent, int detailLevel ) const;
+>>>>>>> 2d251ef... Important commit - everything up to Trello #13 WORKS
 
 /*!
     \brief Returns a reference to the coordinates of a node at a given position.
@@ -316,6 +330,26 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 
 
 /*!
+<<<<<<< HEAD
+=======
+    \brief Returns the distance from the first point to the segment determined by the other two
+*/
+
+    qreal perpendicularDistance( const GeoDataCoordinates &A, const GeoDataCoordinates &B, const GeoDataCoordinates &C ) const;
+
+/*!
+    \brief Returns the right epsilon for Douglas-Peucker according to the detail level
+*/
+
+    qreal epsilonFromDetailLevel( int detailLevel ) const;
+
+/*!
+    \brief Returns an iterator that points to the begin of the filtered LineString.
+*/
+   
+
+/*!
+>>>>>>> 2d251ef... Important commit - everything up to Trello #13 WORKS
     \brief Destroys all nodes in a LineString.
 */
     void clear();

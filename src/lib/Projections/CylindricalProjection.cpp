@@ -126,6 +126,10 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
     GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
     GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2d251ef... Important commit - everything up to Trello #13 WORKS
     GeoDataCoordinates previousCoords;
     GeoDataCoordinates currentCoords;
 
@@ -133,6 +137,8 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
     GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
 
     bool processingLastNode = false;
+
+    int detailLevel = viewport->detailLevel();
 
     // We use a while loop to be able to cover linestrings as well as linear rings:
     // Linear rings require to tessellate the path from the last node to the first node
@@ -194,7 +200,13 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
         if ( processingLastNode ) {
             break;
         }
+<<<<<<< HEAD
         ++itCoords;
+=======
+
+        lineString.nextFilteredAt( itCoords, detailLevel );
+//        ++itCoords;
+>>>>>>> 2d251ef... Important commit - everything up to Trello #13 WORKS
 
         if ( itCoords == itEnd  && lineString.isClosed() ) {
             itCoords = itBegin;

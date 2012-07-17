@@ -432,6 +432,7 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
         if( aSign != bSign
                 && fabs(aLon) + fabs(bLon) > M_PI
                 && q->repeatX() ) {
+<<<<<<< HEAD
             qreal delta = mirrorPoint( viewport );
             if ( aSign > bSign ) {
                 // going eastwards ->
@@ -442,6 +443,98 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
             }
             QPolygonF *path = new QPolygonF;
             polygons.append( path );
+=======
+
+            if ( aLat < 0 && bLat < 0 && lineString->latLonAltBox().containsPole( AnyPole ) && lineString->howManyIDLCrossings() % 2 == 1 && lineString->isClosed() ) {
+
+                qreal southernIntersectionFirst = lineString->southernMostIDLCrossing().first.latitude();
+                qreal southernIntersectionSecond = lineString->southernMostIDLCrossing().second.latitude();
+
+                if ( southernIntersectionFirst > southernIntersectionSecond ) {
+                    southernIntersectionFirst = lineString->southernMostIDLCrossing().second.latitude();
+                    southernIntersectionSecond = lineString->southernMostIDLCrossing().first.latitude();
+                } 
+
+                if ( southernIntersectionFirst <= aLat && aLat <= southernIntersectionSecond &&
+                        southernIntersectionFirst <= bLat && bLat <= southernIntersectionSecond ) {
+                    int sgnCrossing = ( GeoDataCoordinates::normalizeLon( lineString->southernMostIDLCrossing().first.longitude() ) > 0 ) ? 1 : -1; // 1 for east->west, -1 for west->east
+
+                    GeoDataCoordinates southPolePositive( +M_PI, m_minLat );
+                    GeoDataCoordinates southPoleNegative( -M_PI, m_minLat );
+
+                    qreal positiveX, positiveY, negativeX, negativeY;
+                           
+                    q->screenCoordinates( southPolePositive, viewport, positiveX, positiveY, globeHidesPoint );
+                    q->screenCoordinates( southPoleNegative, viewport, negativeX, negativeY, globeHidesPoint );                   
+
+
+                    if ( sgnCrossing == 1 ) 
+                        *polygons.last() << QPointF( positiveX, positiveY ) << QPointF( negativeX, negativeY );
+                    else
+                        *polygons.last() << QPointF( negativeX, negativeY ) << QPointF( positiveX, positiveY );
+
+                }
+                else {
+                    qreal delta = mirrorPoint( viewport );
+                    if ( aSign > bSign ) {
+                        // going eastwards ->
+                        *polygons.last() << QPointF( x +  delta, y );
+                    } else {
+                        // going westwards <-
+                        *polygons.last() << QPointF( x -  delta, y );
+                    }
+                    QPolygonF *path = new QPolygonF;
+                    polygons.append( path ); 
+                }
+            }
+            else {
+
+            }
+            
+            if ( aLat > 0 && bLat > 0 && lineString->latLonAltBox().containsPole( AnyPole ) && lineString->isClosed() ) {
+                qreal northernIntersectionFirst = lineString->northernMostIDLCrossing().first.latitude();
+                qreal northernIntersectionSecond = lineString->northernMostIDLCrossing().second.latitude();
+
+                if ( northernIntersectionFirst > northernIntersectionSecond ) {
+                    northernIntersectionFirst = lineString->northernMostIDLCrossing().second.latitude();
+                    northernIntersectionSecond = lineString->northernMostIDLCrossing().first.latitude();
+                } 
+
+                if ( northernIntersectionFirst <= aLat && aLat <= northernIntersectionSecond &&
+                        northernIntersectionFirst <= bLat && bLat <= northernIntersectionSecond ) {
+                    int sgnCrossing = ( GeoDataCoordinates::normalizeLon( lineString->northernMostIDLCrossing().first.longitude() ) > 0 ) ? 1 : -1; // 1 for east->west, -1 for west->east
+
+                    GeoDataCoordinates northPolePositive( +M_PI, m_maxLat );
+                    GeoDataCoordinates northPoleNegative( -M_PI, m_maxLat );
+
+                    qreal positiveX, positiveY, negativeX, negativeY;
+                           
+                    q->screenCoordinates( northPolePositive, viewport, positiveX, positiveY, globeHidesPoint );
+                    q->screenCoordinates( northPoleNegative, viewport, negativeX, negativeY, globeHidesPoint );                   
+
+                    if ( sgnCrossing == 1 ) 
+                        *polygons.last() << QPointF( positiveX, positiveY ) << QPointF( negativeX, negativeY );
+                    else
+                        *polygons.last() << QPointF( negativeX, negativeY ) << QPointF( positiveX, positiveY );
+
+                }
+                else {
+                    qreal delta = mirrorPoint( viewport );
+                    if ( aSign > bSign ) {
+                        // going eastwards ->
+                        *polygons.last() << QPointF( x +  delta, y );
+                    } else {
+                        // going westwards <-
+                        *polygons.last() << QPointF( x -  delta, y );
+                    }
+                    QPolygonF *path = new QPolygonF;
+                    polygons.append( path ); 
+                }
+            }
+            else {
+
+            }
+>>>>>>> 2d251ef... Important commit - everything up to Trello #13 WORKS
         }
 
         *polygons.last() << QPointF( x, y );

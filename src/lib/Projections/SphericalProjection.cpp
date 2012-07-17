@@ -423,7 +423,11 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     // which isn't really convenient to achieve with a for loop ...
 
     const bool isLong = lineString.size() > 50;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 2d251ef... Important commit - everything up to Trello #13 WORKS
     while ( itCoords != itEnd )
     {
         isAtHorizon = false;

@@ -9,6 +9,7 @@
 //
 
 #include <QtTest/QtTest>
+#include <QtCore/QDebug>
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "MarbleMap.h"
@@ -168,6 +169,8 @@ void ProjectionTest::drawLineString()
             QVERIFY( (coord-oldCoord) != QPointF() );
 
             // no 2 consecutive points should be more than 90° apart
+            qDebug() << (coord-oldCoord).manhattanLength() << " " << viewport.radius();
+            qDebug() << oldCoord.x() << " " << oldCoord.y() << "     " << coord.x() << " " << coord.y() << "\n"; 
             QVERIFY( (coord-oldCoord).manhattanLength() < viewport.radius() );
             oldCoord = coord;
         }
