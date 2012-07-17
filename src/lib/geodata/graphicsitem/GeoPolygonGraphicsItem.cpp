@@ -73,14 +73,14 @@ void GeoPolygonGraphicsItem::coordinate( qreal &longitude, qreal &latitude, qrea
     altitude = coords.altitude();
 }
 
-GeoDataLatLonAltBox GeoPolygonGraphicsItem::latLonAltBox() const
+GeoDataLatLonAltBox& GeoPolygonGraphicsItem::latLonAltBox() const
 {
     if( m_polygon ) {
         return m_polygon->latLonAltBox();
     } else if ( m_ring ) {
         return m_ring->latLonAltBox();
     } else {
-        return GeoDataLatLonAltBox::fromLineString( GeoDataLineString() << GeoDataCoordinates() );
+        return GeoGraphicsItem::latLonAltBox();
     }
 }
 

@@ -686,4 +686,9 @@ bool GeoDataLatLonBox::isEmpty() const
 {
     return *this == empty;
 }
+
+void GeoDataLatLonBox::clear()
+{
+    *this = empty;
+}
 }

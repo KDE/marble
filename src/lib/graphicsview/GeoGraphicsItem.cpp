@@ -109,7 +109,7 @@ void GeoGraphicsItem::setMaxLodPixels( int pixels )
     p()->m_maxLodPixels = pixels;
 }
 
-GeoDataLatLonAltBox GeoGraphicsItem::latLonAltBox() const
+GeoDataLatLonAltBox& GeoGraphicsItem::latLonAltBox() const
 {
     return p()->m_latLonAltBox;
 }

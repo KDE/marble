@@ -32,7 +32,7 @@ public:
     virtual GeoDataCoordinates coordinate() const;
     virtual void coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const;
 
-    virtual GeoDataLatLonAltBox latLonAltBox() const;
+    virtual GeoDataLatLonAltBox& latLonAltBox() const;
 
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );

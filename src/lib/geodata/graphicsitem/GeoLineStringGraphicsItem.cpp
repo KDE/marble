@@ -43,7 +43,7 @@ void GeoLineStringGraphicsItem::coordinate( qreal &longitude, qreal &latitude, q
     altitude = coords.altitude();
 }
 
-GeoDataLatLonAltBox GeoLineStringGraphicsItem::latLonAltBox() const
+GeoDataLatLonAltBox& GeoLineStringGraphicsItem::latLonAltBox() const
 {
     return m_lineString->latLonAltBox();
 }
