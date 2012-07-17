@@ -62,7 +62,7 @@ class StackedTile
     friend class StackedTileLoader;
 
  public:
-    explicit StackedTile( TileId const &id, QImage const &resultImage, const GeoDataDocument &resultVector, QVector<QSharedPointer<Tile> > const &tiles );
+    explicit StackedTile( TileId const &id, QImage const &resultImage, GeoDataDocument * resultVector, QVector<QSharedPointer<Tile> > const &tiles );
     virtual ~StackedTile();
 
 /*!
@@ -93,7 +93,7 @@ class StackedTile
     \brief Returns the GeoDataDocument that describes the merged stack of Tiles
     \return A non-zero pointer to the resulting GeoDataDocument
 */
-    GeoDataDocument const * resultVectorData() const;
+    GeoDataDocument * resultVectorData() const;
 
 /*!
     \brief Returns the color value of the result tile at the given integer position.

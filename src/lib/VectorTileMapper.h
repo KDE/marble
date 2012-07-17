@@ -15,6 +15,8 @@
 #include "TextureMapperInterface.h"
 
 #include "MarbleGlobal.h"
+#include "TileId.h"
+#include "GeoDataDocument.h"
 
 #include <QtCore/QThreadPool>
 #include <QtGui/QImage>
@@ -27,6 +29,7 @@ class StackedTileLoader;
 
 class VectorTileMapper : public TextureMapperInterface
 {
+
  public:
     explicit VectorTileMapper( StackedTileLoader *tileLoader );
 
@@ -48,6 +51,31 @@ class VectorTileMapper : public TextureMapperInterface
     QImage m_canvasImage;
     QThreadPool m_threadPool;
 };
+
+
+class VectorTileMapper::RenderJob : public QObject, public QRunnable
+{
+    Q_OBJECT
+
+public:
+
+    RenderJob( StackedTileLoader *tileLoader, int tileLevel, const ViewportParams *viewport );
+
+    virtual void run();
+
+    int lon2tilex(double lon, int z);
+
+    int lat2tiley(double lat, int z);
+
+Q_SIGNALS:
+   void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
+
+private:
+    StackedTileLoader *const m_tileLoader;
+    const int m_tileLevel;
+    const ViewportParams *const m_viewport;
+};
+
 
 }
 

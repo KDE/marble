@@ -34,7 +34,7 @@ class StackedTilePrivate
  public:
     const TileId    m_id;
     const QImage    m_resultImage;
-    const GeoDataDocument m_resultVector;
+    GeoDataDocument * m_resultVector;
     const int       m_depth;
     const bool      m_isGrayscale;
     const QVector<QSharedPointer<Tile> > m_tiles;
@@ -43,7 +43,7 @@ class StackedTilePrivate
     const int m_byteCount;
     bool            m_isUsed;
 
-    explicit StackedTilePrivate( const TileId &id, const QImage &resultImage, const GeoDataDocument &resultVector, QVector<QSharedPointer<Tile> > const &tiles );
+    explicit StackedTilePrivate( const TileId &id, const QImage &resultImage, GeoDataDocument * resultVector, QVector<QSharedPointer<Tile> > const &tiles );
     virtual ~StackedTilePrivate();
 
     inline uint pixel( int x, int y ) const;

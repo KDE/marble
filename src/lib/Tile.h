@@ -76,7 +76,7 @@ class Tile
    \brief Returns the GeoDataDocument containing de vector data of the Tile
    \return A non-zero pointer to a GeoDataDocument associated with the tile.
 */
-    virtual GeoDataDocument const * vectorData() const;
+    virtual GeoDataDocument * vectorData() const;
 
 /*!
     \brief Returns the QString that describes the format of the Tile
@@ -118,7 +118,7 @@ inline QImage const * Tile::image() const
     return 0;
 }
 
-inline GeoDataDocument const * Tile::vectorData() const
+inline GeoDataDocument * Tile::vectorData() const
 {
     return 0;
 }

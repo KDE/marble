@@ -18,35 +18,18 @@
 #include "MarbleGlobal.h"
 #include "GeoPainter.h"
 #include "GeoDataPolygon.h"
-#include "GeoDataDocument.h"
 #include "MarbleDebug.h"
 #include "Quaternion.h"
 #include "ScanlineTextureMapperContext.h"
 #include "StackedTileLoader.h"
 #include "StackedTile.h"
 #include "TextureColorizer.h"
+
 #include "ViewportParams.h"
 #include "MathHelper.h"
 
 
 using namespace Marble;
-
-class VectorTileMapper::RenderJob : public QRunnable
-{
-public:
-    RenderJob( StackedTileLoader *tileLoader, int tileLevel, const ViewportParams *viewport );
-
-    virtual void run();
-
-    int lon2tilex(double lon, int z);
-
-    int lat2tiley(double lat, int z);
-
-private:
-    StackedTileLoader *const m_tileLoader;
-    const int m_tileLevel;
-    const ViewportParams *const m_viewport;
-};
 
 VectorTileMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel, const ViewportParams *viewport )
     : m_tileLoader( tileLoader ),
@@ -80,7 +63,7 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
             m_canvasImage.fill( 0 );
         }
 
-        m_radius = viewport->radius();
+//        m_radius = viewport->radius();
         m_repaintNeeded = true;
     }
 
@@ -95,7 +78,7 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
 
     QRect rect( viewport->width() / 2 - radius, viewport->height() / 2 - radius,
                 2 * radius, 2 * radius);
-    rect = rect.intersect( dirtyRect );
+    //rect = rect.intersect( dirtyRect );
     painter->drawImage( rect, m_canvasImage, rect );
 }
 
@@ -132,8 +115,14 @@ void VectorTileMapper::RenderJob::run()
 
     for (int x = minTileX; x < maxTileX; x++)
         for (int y = minTileY; y < maxTileY; y++)
-            if ( x >= 0 && y >= 0)
-            m_tileLoader->loadTile(TileId( 0, m_tileLevel, x, y ));
+            if ( x >= 0 && y >= 0){
+                const TileId id = TileId( 0, m_tileLevel, x, y );
+                const StackedTile * tile = m_tileLoader->loadTile( id );
+
+            if (tile)
+            //mDebug() << "-------------------------------SIZE" << tile->resultVectorData()->size();
+            emit tileCompleted( id, tile->resultVectorData(), "JS" );
+            }
 }
 
 int VectorTileMapper::RenderJob::lon2tilex(double lon, int z)

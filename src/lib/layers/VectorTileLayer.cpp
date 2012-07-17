@@ -30,6 +30,7 @@
 #include "VectorComposer.h"
 #include "ViewportParams.h"
 #include "GeoDataTreeModel.h"
+#include "GeoDataLatLonAltBox.h"
 
 namespace Marble
 {
@@ -83,7 +84,7 @@ public:
     GeoDataTreeModel *m_treeModel;
 
     // GeoDataDocuments (each tile is one) cache
-    QCache< TileId, CacheDocument> m_documents;
+    QCache< GeoDataLatLonAltBox, CacheDocument> m_documents;
 };
 
 CacheDocument::CacheDocument( GeoDataDocument* doc, GeoDataTreeModel* model ) :
@@ -215,8 +216,9 @@ bool VectorTileLayer::showCityLights() const
 void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument * document, QString const &format )
 {
     Q_UNUSED( format );
+    Q_UNUSED( tileId );
     d->m_treeModel->addDocument( document );
-    d->m_documents.insert( tileId, new CacheDocument( document, d->m_treeModel ) );
+    d->m_documents.insert( document->latLonAltBox(), new CacheDocument( document, d->m_treeModel ) );
 }
 
 bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
@@ -262,8 +264,17 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     //    mDebug() << "VectorTile Level was set to: " << tileLevel;
     d->m_texmapper->setTileLevel( tileLevel );
 
+
+
+    // if zoom level has changed, empty vectortile cache
     if ( changedTileLevel ) {
         d->m_documents.clear();
+    }
+    // else remove only tiles that are not shown on the screen
+    else{
+        foreach( GeoDataLatLonAltBox box , d->m_documents.keys() )
+            if ( !box.intersects( viewport->viewLatLonAltBox() ) )
+                d->m_documents.remove( box );
     }
 
     const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );

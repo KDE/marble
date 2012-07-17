@@ -930,9 +930,10 @@ void MarbleMapPrivate::updateMapTheme()
             m_layerManager.addLayer( &m_textureLayer );
             m_layerManager.addLayer( &m_vectorTileLayer );
         }
-    }else {
-        m_textureLayer.setMapTheme( QVector<const GeoSceneTexture *>(), 0, "", "" );
     }
+//    else {
+//        m_textureLayer.setMapTheme( QVector<const GeoSceneTexture *>(), 0, "", "" );
+//    }
 
     // earth
     bool value;

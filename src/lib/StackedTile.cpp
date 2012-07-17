@@ -58,7 +58,7 @@ static const uchar **jumpTableFromQImage8( const QImage &img )
 }
 
 
-StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultImage, const GeoDataDocument &resultVector, QVector<QSharedPointer<Tile> > const &tiles ) :
+StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultImage, GeoDataDocument * resultVector, QVector<QSharedPointer<Tile> > const &tiles ) :
       m_id( id ), 
       m_resultImage( resultImage ),
       m_resultVector( resultVector ),
@@ -228,12 +228,12 @@ int StackedTilePrivate::calcByteCount( const QImage &resultImage, const QVector<
 }
 
 
-StackedTile::StackedTile( TileId const &id, QImage const &resultImage, const GeoDataDocument &resultVector, QVector<QSharedPointer<Tile> > const &tiles )
+StackedTile::StackedTile( TileId const &id, QImage const &resultImage, GeoDataDocument * resultVector, QVector<QSharedPointer<Tile> > const &tiles )
     : d( new StackedTilePrivate( id, resultImage, resultVector, tiles ) )
 {
     Q_ASSERT( !tiles.isEmpty() );
 
-    if ( d->m_resultImage.isNull() && d->m_resultVector.size() == 0 ) {
+    if ( d->m_resultImage.isNull() && d->m_resultVector->size() == 0 ) {
         qWarning() << "A tile has no image and no vector data. Please rerun the application.";
         return;
     }
@@ -303,8 +303,8 @@ QImage const * StackedTile::resultImage() const
     return &d->m_resultImage;
 }
 
-GeoDataDocument const * StackedTile::resultVectorData() const
+GeoDataDocument * StackedTile::resultVectorData() const
 {
-    return &d->m_resultVector;
+    return d->m_resultVector;
 }
 

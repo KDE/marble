@@ -22,6 +22,8 @@
 
 #include "GeoDataLatLonBox.h"
 
+#include <QHash>
+
 namespace Marble
 {
 
@@ -67,6 +69,12 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
 
     /// Provides type information for downcasting a GeoData
     virtual const char* nodeType() const;
+
+    /**
+     * @brief qHash, for using GeoDataLatLonAltBox in a QCache as Key
+     * @return the hash of the GeoDataLatLonAltBox
+     */
+    uint qHash(const GeoDataLatLonAltBox &);
 
     /**
      * @brief Get the lower altitude boundary of the bounding box.
@@ -131,6 +139,10 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
  private:
     GeoDataLatLonAltBoxPrivate  * const d;
 };
+
+inline uint qHash( const GeoDataLatLonAltBox & r ){
+    return qHash( QString (r.toString()) );
+}
 
 bool GEODATA_EXPORT operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAltBox const& rhs );
 
