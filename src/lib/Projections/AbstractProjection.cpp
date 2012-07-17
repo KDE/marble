@@ -476,7 +476,6 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
 
                 }
                 else {
-                    //!!!! THIS IS THE PART WHICH MADE ANTARCTICA FAIL, BUT NOW AS I'M IGNORING IT, I'M FAILING UNIT TESTS.
                     qreal delta = mirrorPoint( viewport );
                     if ( aSign > bSign ) {
                         // going eastwards ->
@@ -488,6 +487,9 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
                     QPolygonF *path = new QPolygonF;
                     polygons.append( path ); 
                 }
+            }
+            else {
+
             }
             
             if ( aLat > 0 && bLat > 0 && lineString->latLonAltBox().containsPole( AnyPole ) && lineString->isClosed() ) {
@@ -518,7 +520,6 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
 
                 }
                 else {
-                    //!!!! THIS IS THE PART WHICH MADE ANTARCTICA FAIL, BUT NOW AS I'M IGNORING IT, I'M FAILING UNIT TESTS.
                     qreal delta = mirrorPoint( viewport );
                     if ( aSign > bSign ) {
                         // going eastwards ->
@@ -530,6 +531,9 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
                     QPolygonF *path = new QPolygonF;
                     polygons.append( path ); 
                 }
+            }
+            else {
+
             }
         }
 

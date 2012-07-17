@@ -427,8 +427,6 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
     const bool isLong = lineString.size() > 50;
 
-    qDebug() << "Detail level = " << viewport->detailLevel() << "\n";
-    
     while ( itCoords != itEnd )
     {
         isAtHorizon = false;
