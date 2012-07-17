@@ -1,6 +1,6 @@
 ADD_SUBDIRECTORY( flightgear )
 
-FIND_PACKAGE(libgps)
+macro_optional_find_package(libgps)
 IF(LIBGPS_FOUND)
      MESSAGE( STATUS "Building with gpsd position provider")
      ADD_SUBDIRECTORY( gpsd )
@@ -8,13 +8,13 @@ ELSE(LIBGPS_FOUND)
      MESSAGE( STATUS "Not building with gpsd position provider")
 ENDIF(LIBGPS_FOUND)
 
-FIND_PACKAGE(liblocation)
+macro_optional_find_package(liblocation)
 IF(liblocation_FOUND)
      MESSAGE( STATUS "Building with Maemo GPS support")
      ADD_SUBDIRECTORY( maemo )
 ENDIF(liblocation_FOUND)
 
-FIND_PACKAGE(QtLocation)
+macro_optional_find_package(QtLocation)
 IF(QTLOCATION_FOUND)
      MESSAGE( STATUS "Building with QtLocation support")
      ADD_SUBDIRECTORY( qtmobility )
