@@ -69,6 +69,7 @@ void BookmarkManagerPrivate::setVisualCategory( GeoDataContainer *container ) {
     }
     foreach( GeoDataPlacemark* placemark, container->placemarkList() ) {
         placemark->setVisualCategory( GeoDataFeature::Bookmark );
+        placemark->setZoomLevel( 1 );
     }
 
 }
@@ -130,6 +131,7 @@ void BookmarkManager::addBookmark( GeoDataContainer *container, const GeoDataPla
 {
     GeoDataPlacemark *bookmark = new GeoDataPlacemark( placemark );
     bookmark->setVisualCategory( GeoDataDocument::Bookmark );
+    bookmark->setZoomLevel( 1 );
     d->m_treeModel->addFeature( container, bookmark );
 
     updateBookmarkFile();

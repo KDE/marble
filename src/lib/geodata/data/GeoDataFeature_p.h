@@ -39,7 +39,7 @@ class GeoDataFeaturePrivate
         m_styleUrl(),
         m_abstractView(),
         m_popularity( 0 ),
-        m_zoomLevel( 19 ),
+        m_zoomLevel( 1 ),
         m_visible( true ),
         m_visualCategory( GeoDataFeature::Default ),
         m_role(" "),

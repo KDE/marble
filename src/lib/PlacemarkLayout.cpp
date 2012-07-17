@@ -20,6 +20,7 @@
 #include <QtGui/QFont>
 #include <QtGui/QFontMetrics>
 #include <QtGui/QItemSelectionModel>
+#include <QtCore/qmath.h>
 
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
@@ -59,7 +60,7 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
     m_placemarkModel.setSourceModel( placemarkModel );
     m_placemarkModel.setDynamicSortFilter( true );
     m_placemarkModel.setSortRole( MarblePlacemarkModel::PopularityIndexRole );
-    m_placemarkModel.sort( 0, Qt::DescendingOrder );
+    m_placemarkModel.sort( 0, Qt::AscendingOrder );
 
     connect( m_selectionModel,  SIGNAL( selectionChanged( QItemSelection,
                                                            QItemSelection) ),
@@ -74,59 +75,7 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
     connect( &m_placemarkModel, SIGNAL( modelReset() ),
              this, SLOT( setCacheData() ) );
 
-//  Old weightfilter array. Still here
-// to be able to compare performance
-/*
-    m_weightfilter
-        << 9999
-        << 4200
-        << 3900
-        << 3600
 
-        << 3300
-        << 3000
-        << 2700
-        << 2400
-
-        << 2100
-        << 1800
-        << 1500
-        << 1200
-
-        << 900
-        << 400
-        << 200
-        << 0;
-*/
-
-// lower radius limit, level
-    m_weightfilter  
-        << 49300    // 0
-        << 40300    // 1
-        << 32300    // 2
-        << 25300    // 3
-
-        << 19300    // 4
-        << 14300    // 5
-        << 10300    // 6
-        << 7300     // 7
-
-        << 5300     // 8
-        << 3300     // 9
-        << 2400     // 10
-        << 1800     // 11
-
-        << 1200     // 12
-        << 800      // 13
-        << 300      // 14
-        << 250      // 15
-
-        << 200      // 16
-        << 150      // 17
-        << 100      // 18
-        << 50       // 19
-
-        << 0;       // 20
         
     m_acceptedVisualCategories
         << GeoDataFeature::SmallCity
@@ -332,7 +281,7 @@ void PlacemarkLayout::setCacheData()
             continue;
         }
 
-        int zoomLevel = (20 - placemark->zoomLevel())/2;
+        int zoomLevel = placemark->zoomLevel();
         TileId key = TileId::fromCoordinates( coordinates, zoomLevel );
         m_placemarkCache[key].append( placemark );
     }
@@ -342,11 +291,7 @@ void PlacemarkLayout::setCacheData()
 /// determine the set of placemarks that fit the viewport based on a pyramid of TileIds
 QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const ViewportParams *viewport )
 {
-    int popularity = 0;
-    while ( m_weightfilter.at( popularity ) > viewport->radius() ) {
-        ++popularity;
-    }
-    popularity = (20 - popularity)/2;
+    int zoomLevel = qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 );
 
     /**
      * rely on m_placemarkCache to find the placemarks for the tiles which
@@ -360,15 +305,15 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const Viewpor
     viewport->viewLatLonAltBox().boundaries(north, south, east, west);
     TileId key;
 
-    key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), popularity);
+    key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel);
     rect.setLeft( key.x() );
     rect.setTop( key.y() );
 
-    key = TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), popularity);
+    key = TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel);
     rect.setRight( key.x() );
     rect.setBottom( key.y() );
 
-    TileCoordsPyramid pyramid(0, popularity );
+    TileCoordsPyramid pyramid(0, zoomLevel );
     pyramid.setBottomLevelCoords( rect );
 
     QList<const GeoDataPlacemark*> placemarkList;
@@ -480,12 +425,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         }
 
         int zoomLevel = placemark->zoomLevel();
-        if ( zoomLevel < 1 ) {
-            break;
-        }
-
-        // Skip the places that are too small.
-        if ( m_weightfilter.at( zoomLevel ) > viewport->radius() ) {
+        if ( zoomLevel > 18 ) {
             break;
         }
 

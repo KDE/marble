@@ -33,7 +33,7 @@ SearchInputWidget::SearchInputWidget( QWidget *parent ) :
     connect( this, SIGNAL( decoratorButtonClicked() ), this, SLOT( search() ) );
 
     m_sortFilter.setSortRole( MarblePlacemarkModel::PopularityIndexRole );
-    m_sortFilter.sort( 0, Qt::DescendingOrder );
+    m_sortFilter.sort( 0, Qt::AscendingOrder );
     m_sortFilter.setDynamicSortFilter( true );
 
     m_completer->setCompletionRole( Qt::DisplayRole );
