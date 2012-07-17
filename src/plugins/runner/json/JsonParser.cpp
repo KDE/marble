@@ -52,9 +52,14 @@ bool JsonParser::read( QIODevice* device )
     QString temp = QString::fromUtf8( device->readAll() );
     int midIndex = temp.size();
     int rightIndex = midIndex;
-    for (int i=0; i<4; ++i) {
+    for ( int i=0; i<4; ++i ) {
         rightIndex = midIndex;
-        midIndex = temp.lastIndexOf(',', midIndex-1);
+        midIndex = temp.lastIndexOf( ',', midIndex-1 );
+        if ( i==1 ) {
+            QString name = temp.mid( midIndex-1 );
+            name.remove( name.size()-2,2 );
+            m_document->setName( "Kothic " + name );
+        }
     }
 
     QString stream = temp.mid(0, midIndex);
