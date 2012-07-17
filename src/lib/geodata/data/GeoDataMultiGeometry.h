@@ -38,7 +38,7 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
 
     virtual ~GeoDataMultiGeometry();
 
-    virtual GeoDataLatLonAltBox latLonAltBox() const;
+    virtual GeoDataLatLonAltBox& latLonAltBox() const;
 
     int size() const;
     GeoDataGeometry& at( int pos );

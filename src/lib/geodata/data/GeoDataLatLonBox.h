@@ -166,6 +166,11 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
      */
     virtual bool isEmpty() const;
 
+    /**
+     * @brief Resets the bounding box to its uninitialised state (and thus contains nothing).
+     */
+    virtual void clear();
+
     GeoDataLatLonBox operator|( const GeoDataLatLonBox& other ) const;
 
     /**

@@ -62,6 +62,17 @@ GeoDataLatLonAltBox& GeoDataLatLonAltBox::operator=( const GeoDataLatLonAltBox &
 }
 
 
+GeoDataLatLonAltBox& GeoDataLatLonAltBox::operator=( const GeoDataCoordinates &other )
+{
+    setWest( other.longitude() );
+    setEast( other.longitude() );
+    setNorth( other.latitude() );
+    setSouth( other.latitude() );
+    setMinAltitude( other.altitude() );
+    setMaxAltitude( other.altitude() );
+    return *this;
+}
+
 GeoDataLatLonAltBox::GeoDataLatLonAltBox()
     : GeoDataLatLonBox(),
       d( new GeoDataLatLonAltBoxPrivate )
@@ -267,6 +278,14 @@ bool GeoDataLatLonAltBox::isNull() const
         return true;
 
     return false;
+}
+
+void GeoDataLatLonAltBox::clear()
+{
+    GeoDataLatLonBox::clear();
+    d->m_minAltitude = 0;
+    d->m_maxAltitude = 0;
+    d->m_altitudeMode = ClampToGround;
 }
 
 void GeoDataLatLonAltBox::pack( QDataStream& stream ) const

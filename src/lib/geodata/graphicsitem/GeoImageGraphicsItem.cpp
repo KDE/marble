@@ -10,6 +10,7 @@
 
 #include "GeoImageGraphicsItem.h"
 
+#include "GeoGraphicsItem_p.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 
@@ -18,12 +19,12 @@ namespace Marble
 
 void GeoImageGraphicsItem::setLatLonBox( const GeoDataLatLonBox &box )
 {
-    m_latLonBox = box;
+    p()->m_latLonAltBox = box;
 }
 
-GeoDataLatLonBox GeoImageGraphicsItem::latLonBox() const
+GeoDataLatLonBox& GeoImageGraphicsItem::latLonBox() const
 {
-    return m_latLonBox;
+    return p()->m_latLonAltBox;
 }
 
 void GeoImageGraphicsItem::setImage( const QImage &image )
@@ -55,8 +56,8 @@ void GeoImageGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
     bool unloadImage = true;
     if ( viewport->projection() != Spherical ) {
         qreal x1(0.0), x2(0.0), y1( 0.0 ), y2( 0.0 );
-        viewport->screenCoordinates( m_latLonBox.west(), m_latLonBox.north(), x1, y1 );
-        viewport->screenCoordinates( m_latLonBox.east(), m_latLonBox.south(), x2, y2 );
+        viewport->screenCoordinates( p()->m_latLonAltBox.west(), p()->m_latLonAltBox.north(), x1, y1 );
+        viewport->screenCoordinates( p()->m_latLonAltBox.east(), p()->m_latLonAltBox.south(), x2, y2 );
         QRectF const screen( QPointF( 0, 0), viewport->size() );
         QRectF const position( x1, y1, x2-x1, y2-y1 );
         if ( !(screen & position).isEmpty() ) {
@@ -78,10 +79,4 @@ void GeoImageGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
         m_image = QImage();
     }
 }
-
-GeoDataLatLonAltBox GeoImageGraphicsItem::latLonAltBox() const
-{
-    return m_latLonBox;
-}
-
 }

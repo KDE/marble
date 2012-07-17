@@ -138,7 +138,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     /**
      * Returns the box that is used to determine if an item is active or inactive.
      */
-    virtual GeoDataLatLonAltBox latLonAltBox() const;
+    virtual GeoDataLatLonAltBox& latLonAltBox() const;
 
     /**
      * Set the box used to determine if an item is active or inactive. If an empty box is passed
@@ -166,8 +166,6 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
 
  protected:
     explicit GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr );
-
- private:
     GeoGraphicsItemPrivate *p() const;
 };
 

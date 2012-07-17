@@ -35,6 +35,7 @@ GeoDataPoint::GeoDataPoint( qreal _lon, qreal _lat, qreal _alt,
                         static_cast<GeoDataCoordinates::Unit>( unit ), _detail ),
     GeoDataGeometry( new GeoDataPointPrivate )
 {
+    p()->m_latLonAltBox = *this;
 }
 
 GeoDataPoint::GeoDataPoint( const GeoDataPoint& other )
@@ -42,12 +43,14 @@ GeoDataPoint::GeoDataPoint( const GeoDataPoint& other )
     GeoDataGeometry( other )
     
 {
+    p()->m_latLonAltBox = *this;
 }
 
 GeoDataPoint::GeoDataPoint( const GeoDataCoordinates& other )
   : GeoDataCoordinates( other ),
   GeoDataGeometry ( new GeoDataPointPrivate )
 {
+    p()->m_latLonAltBox = *this;
 }
 
 GeoDataPoint::GeoDataPoint( const GeoDataGeometry& other )
@@ -68,11 +71,6 @@ GeoDataPoint::~GeoDataPoint()
 GeoDataPointPrivate* GeoDataPoint::p() const
 {
     return static_cast<GeoDataPointPrivate*>(GeoDataGeometry::d);
-}
-
-GeoDataLatLonAltBox GeoDataPoint::latLonAltBox() const
-{
-    return GeoDataLatLonAltBox(*this);
 }
 
 const char* GeoDataPoint::nodeType() const

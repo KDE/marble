@@ -175,7 +175,7 @@ public:
 
     virtual const char* nodeType() const;
     virtual EnumGeometryId geometryId() const;
-    virtual GeoDataLatLonAltBox latLonAltBox() const;
+    virtual GeoDataLatLonAltBox& latLonAltBox() const;
     virtual void pack( QDataStream& stream ) const;
     virtual void unpack( QDataStream& stream );
 

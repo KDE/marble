@@ -92,7 +92,6 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     QVector<GeoDataLineString*>  m_rangeCorrected;
     bool                        m_dirtyRange;
 
-    GeoDataLatLonAltBox         m_latLonAltBox;
     bool                        m_dirtyBox; // tells whether there have been changes to the
                                             // GeoDataPoints since the LatLonAltBox has 
                                             // been calculated. Saves performance. 
