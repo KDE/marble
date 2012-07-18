@@ -38,7 +38,7 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
     /**
      * Returns the type of the frame.
      */
-    FrameType frame();
+    FrameType frame() const;
 
     /**
      * Sets the type of the Frame. Standard is NoFrame.
