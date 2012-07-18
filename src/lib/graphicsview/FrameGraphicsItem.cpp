@@ -36,7 +36,7 @@ FrameGraphicsItem::~FrameGraphicsItem()
     delete d;
 }
 
-FrameGraphicsItem::FrameType FrameGraphicsItem::frame()
+FrameGraphicsItem::FrameType FrameGraphicsItem::frame() const
 {
     return d->m_frame;
 }
