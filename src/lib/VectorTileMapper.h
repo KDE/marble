@@ -27,11 +27,13 @@ namespace Marble
 
 class StackedTileLoader;
 
-class VectorTileMapper : public TextureMapperInterface
+class VectorTileMapper : public QObject, public TextureMapperInterface
 {
+    Q_OBJECT
 
- public:
+public:
     explicit VectorTileMapper( StackedTileLoader *tileLoader );
+    ~VectorTileMapper();
 
     virtual void mapTexture( GeoPainter *painter,
                              const ViewportParams *viewport,
@@ -40,10 +42,17 @@ class VectorTileMapper : public TextureMapperInterface
 
     virtual void setRepaintNeeded();
 
- private:
+public Q_SLOTS:
+
+    void updateTile(TileId const & tileId, GeoDataDocument *document, QString const & format );
+
+Q_SIGNALS:
+    void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
+
+private:
     void mapTexture( const ViewportParams *viewport, MapQuality mapQuality );
 
- private:
+private:
     class RenderJob;
     StackedTileLoader *const m_tileLoader;
     bool m_repaintNeeded;
@@ -68,7 +77,7 @@ public:
     int lat2tiley(double lat, int z);
 
 Q_SIGNALS:
-   void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
+    void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
 
 private:
     StackedTileLoader *const m_tileLoader;

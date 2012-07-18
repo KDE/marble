@@ -31,10 +31,7 @@
 
 using namespace Marble;
 
-VectorTileMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel, const ViewportParams *viewport )
-    : m_tileLoader( tileLoader ),
-      m_tileLevel( tileLevel ),
-      m_viewport( viewport )
+VectorTileMapper::~VectorTileMapper()
 {
 }
 
@@ -94,14 +91,32 @@ void VectorTileMapper::mapTexture( const ViewportParams *viewport, MapQuality ma
     // Reset backend
     m_tileLoader->resetTilehash();
 
-    QRunnable *const job = new RenderJob( m_tileLoader, tileZoomLevel(), viewport );
+    RenderJob *const job = new RenderJob( m_tileLoader, tileZoomLevel(), viewport );
 
+    // Connect the parser thread to the VectorTileMapper for recieving tiles
+    connect( job, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
+            this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
+
+    // Start parsing
     m_threadPool.start( job );
 
     // FIXME ANDER COMMENTING THE LINE AT MARBLEMODEL WE DON'T NEED TO WAIT FOR FINISHING
     // m_threadPool.waitForDone();
 
     m_tileLoader->cleanupTilehash();
+}
+
+void VectorTileMapper::updateTile(TileId const & tileId, GeoDataDocument * document, QString const &format )
+{
+    // We recieved a vector tile, send it to the VectorTileLayer
+     emit tileCompleted( tileId, document, format );
+}
+
+VectorTileMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel, const ViewportParams *viewport )
+    : m_tileLoader( tileLoader ),
+      m_tileLevel( tileLevel ),
+      m_viewport( viewport )
+{
 }
 
 void VectorTileMapper::RenderJob::run()
@@ -116,12 +131,11 @@ void VectorTileMapper::RenderJob::run()
     for (int x = minTileX; x < maxTileX; x++)
         for (int y = minTileY; y < maxTileY; y++)
             if ( x >= 0 && y >= 0){
-                const TileId id = TileId( 0, m_tileLevel, x, y );
-                const StackedTile * tile = m_tileLoader->loadTile( id );
+                const TileId tileId = TileId( 0, m_tileLevel, x, y );
+                const StackedTile * tile = m_tileLoader->loadTile( tileId );
 
             if (tile)
-            //mDebug() << "-------------------------------SIZE" << tile->resultVectorData()->size();
-            emit tileCompleted( id, tile->resultVectorData(), "JS" );
+            emit tileCompleted( tileId, tile->resultVectorData(), "JS" );
             }
 }
 
@@ -134,3 +148,5 @@ int VectorTileMapper::RenderJob::lat2tiley(double lat, int z)
 {
     return (int)(floor((1.0 - log( tan(lat * M_PI/180.0) + 1.0 / cos(lat * M_PI/180.0)) / M_PI) / 2.0 * pow(2.0, z)));
 }
+
+#include "VectorTileMapper.moc"

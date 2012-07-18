@@ -72,7 +72,7 @@ public:
     TileLoader m_loader;
     MergedLayerDecorator m_layerDecorator;
     StackedTileLoader    m_tileLoader;
-    TextureMapperInterface *m_texmapper;
+    VectorTileMapper *m_texmapper;
     TextureColorizer *m_texcolorizer;
     QVector<const GeoSceneTiled *> m_textures;
     GeoSceneGroup *m_textureLayerSettings;
@@ -177,6 +177,10 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
     qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
     connect( &d->m_loader, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
             this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
+
+//    mDebug() << "----------------------------" << connect( &d->m_texmapper, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
+//            this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
+
 
 
 // Repainting is too much load, we wont repaint.
