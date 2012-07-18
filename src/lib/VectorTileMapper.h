@@ -43,7 +43,6 @@ public:
     virtual void setRepaintNeeded();
 
 public Q_SLOTS:
-
     void updateTile(TileId const & tileId, GeoDataDocument *document, QString const & format );
 
 Q_SIGNALS:

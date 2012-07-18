@@ -93,7 +93,7 @@ class StackedTile
     \brief Returns the GeoDataDocument that describes the merged stack of Tiles
     \return A non-zero pointer to the resulting GeoDataDocument
 */
-    GeoDataDocument * resultVectorData() const;
+    GeoDataDocument *resultVectorData() const;
 
 /*!
     \brief Returns the color value of the result tile at the given integer position.

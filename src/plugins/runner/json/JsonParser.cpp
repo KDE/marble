@@ -67,9 +67,7 @@ bool JsonParser::read( QIODevice* device )
         return false;
     }
 
-    /**
-     * FIXME ANDER THIS IS A TEST PARSER FOR KOTHIK's JSON FORMAT
-     **/
+    /** FIXME ANDER THIS IS A TEST PARSER FOR KOTHIK's JSON FORMAT **/
 
     m_data = m_engine.evaluate( stream );
     if (m_engine.hasUncaughtException()) {

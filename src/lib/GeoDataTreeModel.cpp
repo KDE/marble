@@ -564,8 +564,11 @@ bool GeoDataTreeModel::removeFeature( GeoDataContainer *parent, int row )
 
 bool GeoDataTreeModel::removeFeature( GeoDataFeature *feature )
 {
-    if ( feature && ( feature!=d->m_rootDocument ) )  {//We check to see we are not removing the
-                                                      //top level element m_rootDocument
+    if ( feature && ( feature!=d->m_rootDocument ) )  {
+
+        //We check to see we are not removing the
+        //top level element m_rootDocument
+
         GeoDataObject *parent = static_cast< GeoDataObject* >( feature->parent() );
 
         if ( ( parent->nodeType() == GeoDataTypes::GeoDataFolderType )

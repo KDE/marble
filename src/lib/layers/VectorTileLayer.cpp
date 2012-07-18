@@ -175,13 +175,8 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
 {
     qRegisterMetaType<TileId>( "TileId" );
     qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
-    connect( &d->m_loader, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
-            this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
-
-//    mDebug() << "----------------------------" << connect( &d->m_texmapper, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
+//    connect( &d->m_loader, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
 //            this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
-
-
 
 // Repainting is too much load, we wont repaint.
 //    Repaint timer
@@ -221,8 +216,14 @@ void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument * docume
 {
     Q_UNUSED( format );
     Q_UNUSED( tileId );
+
+
+    mDebug() << "----------------------PARENT" << document->parent();
+
     d->m_treeModel->addDocument( document );
-    d->m_documents.insert( document->latLonAltBox(), new CacheDocument( document, d->m_treeModel ) );
+
+    // FIXME CRASHES If the next line is uncommented it will crash in the mDebug above
+//    d->m_documents.insert( document->latLonAltBox(), new CacheDocument( document, d->m_treeModel ) );
 }
 
 bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
@@ -254,21 +255,18 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     // the tile level from tilesize and the globe radius via log(2)
 
     qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
-    int tileLevel = (int)( tileLevelF * 1.00001 ); // snap to the sharper tile level a tiny bit earlier
+    int tileLevel = (int)( tileLevelF * 1.00001 );
+    // snap to the sharper tile level a tiny bit earlier
     // to work around rounding errors when the radius
     // roughly equals the global texture width
 
-    //    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
 
     if ( tileLevel > d->m_tileLoader.maximumTileLevel() )
         tileLevel = d->m_tileLoader.maximumTileLevel();
 
     const bool changedTileLevel = tileLevel != d->m_texmapper->tileZoomLevel();
 
-    //    mDebug() << "VectorTile Level was set to: " << tileLevel;
     d->m_texmapper->setTileLevel( tileLevel );
-
-
 
     // if zoom level has changed, empty vectortile cache
     if ( changedTileLevel ) {
@@ -335,6 +333,9 @@ void VectorTileLayer::setupTextureMapper( )
     d->m_texmapper = new VectorTileMapper( &d->m_tileLoader );
 
     Q_ASSERT( d->m_texmapper );
+
+    mDebug() << "----------------------------" << connect( d->m_texmapper, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
+            this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
 }
 
 void VectorTileLayer::setNeedsUpdate()

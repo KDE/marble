@@ -103,7 +103,7 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
     QImage resultImage;
 
     // GeoDataDocument for appending all the vector data features to it
-    GeoDataDocument * resultVector = new GeoDataDocument();
+    GeoDataDocument * resultVector = new GeoDataDocument;
 
     // if there are more than one active texture layers, we have to convert the
     // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
@@ -148,10 +148,12 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
             // Append every feature from all the vectorTiles (maybe in the future are instead of appending the whole GeoDataDocument.
             // Otherwise we would have a GeoDataDocument inside the GeoDataDocument.
             // FIXME ANDER Maybe there is a better way to do this
-            for (int x = 0; x < tile->vectorData()->size(); x++)
-            resultVector->append( tile->vectorData()->featureList().at(x) );
+            //for (int x = 0; x < tile->vectorData()->size(); x++)
+            //resultVector->append( tile->vectorData()->featureList().at(x) );
+            resultVector = tile->vectorData();
         }
     }
+
     return new StackedTile( id, resultImage, resultVector, tiles );
 }
 

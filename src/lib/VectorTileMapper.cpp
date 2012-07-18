@@ -45,9 +45,9 @@ VectorTileMapper::VectorTileMapper( StackedTileLoader *tileLoader )
 }
 
 void VectorTileMapper::mapTexture( GeoPainter *painter,
-                                                 const ViewportParams *viewport,
-                                                 const QRect &dirtyRect,
-                                                 TextureColorizer *texColorizer )
+                                   const ViewportParams *viewport,
+                                   const QRect &dirtyRect,
+                                   TextureColorizer *texColorizer )
 {
     if ( m_canvasImage.size() != viewport->size() || m_radius != viewport->radius() ) {
         const QImage::Format optimalFormat = ScanlineTextureMapperContext::optimalCanvasImageFormat( viewport );
@@ -60,7 +60,7 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
             m_canvasImage.fill( 0 );
         }
 
-//        m_radius = viewport->radius();
+        //        m_radius = viewport->radius();
         m_repaintNeeded = true;
     }
 
@@ -95,7 +95,7 @@ void VectorTileMapper::mapTexture( const ViewportParams *viewport, MapQuality ma
 
     // Connect the parser thread to the VectorTileMapper for recieving tiles
     connect( job, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
-            this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
+             this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
 
     // Start parsing
     m_threadPool.start( job );
@@ -109,7 +109,7 @@ void VectorTileMapper::mapTexture( const ViewportParams *viewport, MapQuality ma
 void VectorTileMapper::updateTile(TileId const & tileId, GeoDataDocument * document, QString const &format )
 {
     // We recieved a vector tile, send it to the VectorTileLayer
-     emit tileCompleted( tileId, document, format );
+    emit tileCompleted( tileId, document, format );
 }
 
 VectorTileMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel, const ViewportParams *viewport )
@@ -134,8 +134,8 @@ void VectorTileMapper::RenderJob::run()
                 const TileId tileId = TileId( 0, m_tileLevel, x, y );
                 const StackedTile * tile = m_tileLoader->loadTile( tileId );
 
-            if (tile)
-            emit tileCompleted( tileId, tile->resultVectorData(), "JS" );
+                if ( tile )
+                    emit tileCompleted( tileId, tile->resultVectorData(), "JS" );
             }
 }
 

@@ -120,7 +120,7 @@ GeoDataDocument *TileLoader::loadTileVectorData( TileId const & tileId, Download
             GeoDataDocument* document = man->openFile( fileName );
 
             if (document){
-                emit tileCompleted( tileId, document, format );
+                // FIXME ANDER REMOVE THIS emit tileCompleted( tileId, document, format );
                 return document;
             }
         }
