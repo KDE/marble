@@ -27,9 +27,6 @@ class ProjectionTest : public QObject
     void drawLineString_data();
     void drawLineString();
     void setInvalidRadius();
-
- private:
-    ViewportParams viewport;
 };
 
 void ProjectionTest::drawLineString_data()
@@ -127,6 +124,7 @@ void ProjectionTest::drawLineString()
     QFETCH( GeoDataLineString, line );
     QFETCH( int, size );
 
+    ViewportParams viewport;
     viewport.setProjection( projection );
     viewport.setRadius( 360 / 4 ); // for easy mapping of lon <-> x
     viewport.centerOn(185 * DEG2RAD, 0);
@@ -157,6 +155,8 @@ void ProjectionTest::drawLineString()
 
 void ProjectionTest::setInvalidRadius()
 {
+    ViewportParams viewport;
+
     QVERIFY( viewport.radius() > 0 );
     viewport.setRadius( 0 );
     QVERIFY( viewport.radius() > 0 );
