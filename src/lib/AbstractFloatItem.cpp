@@ -179,12 +179,8 @@ bool AbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport,
         return true;
     }
 
-    if ( renderPos == "FLOAT_ITEM" ) {
-        paintEvent( painter, viewport, renderPos, layer );
-        return true;
-    }
-
-    return false;
+    paintEvent( painter, viewport, renderPos, layer );
+    return true;
 }
 
 void AbstractFloatItem::show()
