@@ -24,10 +24,35 @@ class ProjectionTest : public QObject
     Q_OBJECT
 
  private slots:
+    void constructorDefaultValues();
+
     void drawLineString_data();
     void drawLineString();
+
     void setInvalidRadius();
 };
+
+void ProjectionTest::constructorDefaultValues()
+{
+    const ViewportParams viewport;
+
+    QCOMPARE( viewport.projection(), Spherical );
+    QCOMPARE( viewport.size(), QSize( 100, 100 ) );
+    QCOMPARE( viewport.width(), 100 );
+    QCOMPARE( viewport.height(), 100 );
+    QCOMPARE( viewport.centerLongitude(), 0. );
+    QCOMPARE( viewport.centerLatitude(), 0. );
+    QCOMPARE( viewport.polarity(), 1 );
+    QCOMPARE( viewport.radius(), 2000 );
+    QCOMPARE( viewport.mapCoversViewport(), true );
+    QCOMPARE( viewport.focusPoint(), GeoDataCoordinates( 0., 0., 0. ) );
+
+    // invariants:
+    QVERIFY( viewport.radius() > 0 ); // avoids divisions by zero
+    QVERIFY( viewport.viewLatLonAltBox() == viewport.latLonAltBox( QRect( 0, 0, 100, 100 ) ) );
+    // FIXME QCOMPARE( viewport.viewLatLonAltBox().center().longitude(), viewport.centerLongitude() );
+    // FIXME QCOMPARE( viewport.viewLatLonAltBox().center().latitude(), viewport.centerLatitude() );
+}
 
 void ProjectionTest::drawLineString_data()
 {
@@ -157,9 +182,12 @@ void ProjectionTest::setInvalidRadius()
 {
     ViewportParams viewport;
 
-    QVERIFY( viewport.radius() > 0 );
+    // QVERIFY( viewport.radius() > 0 ); already verified above
+
+    const int radius = viewport.radius();
     viewport.setRadius( 0 );
-    QVERIFY( viewport.radius() > 0 );
+
+    QCOMPARE( viewport.radius(), radius );
 }
 
 }
