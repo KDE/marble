@@ -141,17 +141,17 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAl
                 const QList< GeoGraphicsItem* > &objects = d->m_items.value(tileId);
                 QList< GeoGraphicsItem* >::iterator before = result.begin();
                 QList< GeoGraphicsItem* >::const_iterator currentItem = objects.constBegin();
-                while( currentItem != objects.end() )
-                {  
+                while( currentItem != objects.end() ) {
                     while( ( currentItem != objects.end() )
-                      && ( ( before == result.end() ) || ( (*currentItem)->zValue() < (*before)->zValue() ) ) )
-                    {
-                        if( (*currentItem)->minZoomLevel() <= maxZoomLevel )
+                      && ( ( before == result.end() ) || ( (*currentItem)->zValue() < (*before)->zValue() ) ) ) {
+                        if( (*currentItem)->minZoomLevel() <= maxZoomLevel ) {
                             before = result.insert( before, *currentItem );
-                        currentItem++;
+                        }
+                        ++currentItem;
                     }
-                    if ( before != result.end() )
-                        before++;
+                    if ( before != result.end() ) {
+                        ++before;
+                    }
                 }
             }
         }
