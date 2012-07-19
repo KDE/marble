@@ -118,7 +118,7 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
     int m_minZoomLevel;
     
     GeoDataLatLonAltBox m_latLonAltBox;
-    GeoDataStyle *m_style;
+    const GeoDataStyle *m_style;
 };
 
 }

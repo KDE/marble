@@ -100,12 +100,12 @@ void GeoGraphicsItem::setLatLonAltBox( const GeoDataLatLonAltBox& latLonAltBox )
     p()->m_latLonAltBox = latLonAltBox;
 }
 
-void GeoGraphicsItem::setStyle( GeoDataStyle* style )
+void GeoGraphicsItem::setStyle( const GeoDataStyle* style )
 {
     p()->m_style = style;
 }
 
-GeoDataStyle* GeoGraphicsItem::style() const
+const GeoDataStyle* GeoGraphicsItem::style() const
 {
     return p()->m_style;
 }

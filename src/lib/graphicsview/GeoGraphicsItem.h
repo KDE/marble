@@ -127,13 +127,13 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     /**
      * Returns the style of item.
      */
-    GeoDataStyle* style() const;
+    const GeoDataStyle* style() const;
 
     /**
      * Set the box used to determine if an item is active or inactive. If an empty box is passed
      * the item will be shown in every case.
      */
-    void setStyle( GeoDataStyle* style );
+    void setStyle( const GeoDataStyle* style );
 
     /**
      * Returns the z value of the item
