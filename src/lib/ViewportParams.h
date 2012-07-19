@@ -91,8 +91,6 @@ class MARBLE_EXPORT ViewportParams
      */
     void setRadius(int radius);
 
-    bool  globeCoversViewport() const;
-
     void centerOn( qreal lon, qreal lat );
 
     Quaternion planetAxis() const;
