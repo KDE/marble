@@ -177,7 +177,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         matrix       skyAxisMatrix;
         skyAxis.inverse().toMatrix( skyAxisMatrix );
 
-        const bool renderStars = !viewport->globeCoversViewport() && viewport->projection() == Spherical;
+        const bool renderStars = !viewport->mapCoversViewport() && viewport->projection() == Spherical;
 
         if ( renderStars )
         {
