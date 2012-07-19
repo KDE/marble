@@ -57,16 +57,6 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     void setCoordinate( const GeoDataCoordinates &point );
 
     /**
-     * Get the target of the item. The target is the current planet string.s
-     */
-    QString target() const;
-
-    /**
-     * Set the target of the item with @p target.
-     */
-    void setTarget( const QString& target );
-
-    /**
      * Get the GeoGraphicItemFlags value that describes which flags are set on
      * this item. @see QFlags
      */

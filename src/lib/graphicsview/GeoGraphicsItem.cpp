@@ -46,16 +46,6 @@ void GeoGraphicsItem::setCoordinate( const GeoDataCoordinates &point )
     p()->m_coordinate = point;
 }
 
-QString GeoGraphicsItem::target() const
-{
-    return p()->m_target;
-}
-
-void GeoGraphicsItem::setTarget( const QString& target )
-{
-    p()->m_target = target;
-}
-
 GeoGraphicsItem::GeoGraphicsItemFlags GeoGraphicsItem::flags() const
 {
     return p()->m_flags;
