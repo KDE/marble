@@ -145,11 +145,22 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
         // main GeoDataDocument
         if ( tile->vectorData() ){
 
-            // Append every feature from all the vectorTiles (maybe in the future are instead of appending the whole GeoDataDocument.
-            // Otherwise we would have a GeoDataDocument inside the GeoDataDocument.
-            // FIXME ANDER Maybe there is a better way to do this
+            // FIXME ANDER
+            // IF IN THE FUTURE THERE CAN BE MORE THAN ONE VECTORTILE LAYER
+            // HERE ALL THE GEOMETRIES FROM THE DIFFERENT LAYERS SHOULD BE
+            // APPENDED TO THE SAME GEODATADOCUMENT
+            // EVERY SINGLE FEATURE FROM ALL VECTORTILES WOULD HAVE TO BE APPENDED
+            // SEPARATELY FOR IT TO WORK AS IT IS RIGHT NOW.
+            // FOR EXAMPLE
             //for (int x = 0; x < tile->vectorData()->size(); x++)
             //resultVector->append( tile->vectorData()->featureList().at(x) );
+            // OTHER ALTERNATIVE COULD BE TO APPEND GEODATADOCUMENTS TO THE
+            // resultVector GEODATADOCUMENT, AND THEN MAKE THE CODE INSTEAD OF
+            // EXTRACTING THE FEATURES, FIRST EXTRACT GEODATADOCUMENTS AND THEN ITS FEATURES.
+            // WITH JUST ONE VECTORTILELAYER IT HAS NO SENSE (BECAUSE WE WOULD
+            // ALWAYS HAVE ONE GEODATADOCUMENT CONTAINING JUST ANOTHER ONE)
+            // BUT IF MORE THAN ONE WANT TO BE SUPPORTED IT IS BETTER.
+
             resultVector = tile->vectorData();
         }
     }

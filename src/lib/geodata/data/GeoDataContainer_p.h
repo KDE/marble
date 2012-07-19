@@ -27,7 +27,7 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
     
     ~GeoDataContainerPrivate()
     {
-        qDeleteAll(m_vector);
+        qDeleteAll( m_vector );
     }
 
     void operator=( const GeoDataContainerPrivate &other)

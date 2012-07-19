@@ -97,15 +97,15 @@ CacheDocument::~CacheDocument()
 {
     Q_ASSERT( owner );
     owner->removeDocument( document );
-    delete document;
+    // delete document;
 }
 
 VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
-                                   const SunLocator *sunLocator,
-                                   VectorComposer *veccomposer,
-                                   const PluginManager *pluginManager,
-                                   VectorTileLayer *parent,
-                                   GeoDataTreeModel *treeModel)
+                                  const SunLocator *sunLocator,
+                                  VectorComposer *veccomposer,
+                                  const PluginManager *pluginManager,
+                                  VectorTileLayer *parent,
+                                  GeoDataTreeModel *treeModel)
     : m_parent( parent )
     , m_sunLocator( sunLocator )
     , m_veccomposer( veccomposer )
@@ -175,15 +175,13 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
 {
     qRegisterMetaType<TileId>( "TileId" );
     qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
-//    connect( &d->m_loader, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
-//            this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
 
-// Repainting is too much load, we wont repaint.
-//    Repaint timer
-//    d->m_repaintTimer.setSingleShot( true );
-//    d->m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
-//    connect( &d->m_repaintTimer, SIGNAL( timeout() ),
-//             this, SIGNAL( repaintNeeded() ) );
+    // Repainting is too much load, we wont repaint.
+    //    Repaint timer
+    //    d->m_repaintTimer.setSingleShot( true );
+    //    d->m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
+    //    connect( &d->m_repaintTimer, SIGNAL( timeout() ),
+    //             this, SIGNAL( repaintNeeded() ) );
 
     connect( d->m_veccomposer, SIGNAL( datasetLoaded() ),
              this, SLOT( mapChanged() ) );
@@ -192,6 +190,7 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
 
 VectorTileLayer::~VectorTileLayer()
 {
+    d->m_documents.clear();
     delete d->m_texmapper;
     delete d->m_texcolorizer;
     delete d;
@@ -217,13 +216,11 @@ void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument * docume
     Q_UNUSED( format );
     Q_UNUSED( tileId );
 
+    if ( !d->m_documents.contains( document->latLonAltBox() ) ){
+        d->m_treeModel->addDocument( document );
+        d->m_documents.insert( document->latLonAltBox(), new CacheDocument( document, d->m_treeModel ) );
+    }
 
-    mDebug() << "----------------------PARENT" << document->parent();
-
-    d->m_treeModel->addDocument( document );
-
-    // FIXME CRASHES If the next line is uncommented it will crash in the mDebug above
-//    d->m_documents.insert( document->latLonAltBox(), new CacheDocument( document, d->m_treeModel ) );
 }
 
 bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
@@ -275,8 +272,10 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     // else remove only tiles that are not shown on the screen
     else{
         foreach( GeoDataLatLonAltBox box , d->m_documents.keys() )
-            if ( !box.intersects( viewport->viewLatLonAltBox() ) )
+            if ( !box.intersects( viewport->viewLatLonAltBox() ) ){
+
                 d->m_documents.remove( box );
+            }
     }
 
     const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
@@ -334,8 +333,8 @@ void VectorTileLayer::setupTextureMapper( )
 
     Q_ASSERT( d->m_texmapper );
 
-    mDebug() << "----------------------------" << connect( d->m_texmapper, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
-            this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
+    connect( d->m_texmapper, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
+             this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
 }
 
 void VectorTileLayer::setNeedsUpdate()

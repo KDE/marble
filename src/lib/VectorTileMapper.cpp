@@ -16,9 +16,9 @@
 #include <QtCore/QRunnable>
 
 #include "MarbleGlobal.h"
+#include "MarbleDebug.h"
 #include "GeoPainter.h"
 #include "GeoDataPolygon.h"
-#include "MarbleDebug.h"
 #include "Quaternion.h"
 #include "ScanlineTextureMapperContext.h"
 #include "StackedTileLoader.h"
@@ -75,7 +75,7 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
 
     QRect rect( viewport->width() / 2 - radius, viewport->height() / 2 - radius,
                 2 * radius, 2 * radius);
-    //rect = rect.intersect( dirtyRect );
+    rect = rect.intersect( dirtyRect );
     painter->drawImage( rect, m_canvasImage, rect );
 }
 
@@ -134,7 +134,7 @@ void VectorTileMapper::RenderJob::run()
                 const TileId tileId = TileId( 0, m_tileLevel, x, y );
                 const StackedTile * tile = m_tileLoader->loadTile( tileId );
 
-                if ( tile )
+                if ( tile->resultVectorData()->size() > 0 )
                     emit tileCompleted( tileId, tile->resultVectorData(), "JS" );
             }
 }
