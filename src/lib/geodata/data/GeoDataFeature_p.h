@@ -128,11 +128,16 @@ class GeoDataFeaturePrivate
         return style;
     }
     
-    static GeoDataStyle* createHighwayStyle( const QColor& color, qreal width = 1, qreal realWidth = 0.0, 
+    static GeoDataStyle* createHighwayStyle( const QString &bitmap, const QColor& color, qreal width = 1, qreal realWidth = 0.0,
                                              Qt::PenStyle penStyle = Qt::SolidLine, 
                                              Qt::PenCapStyle capStyle = Qt::RoundCap )
     {
-        return createStyle( width, realWidth, color, color, true, true, Qt::SolidPattern, penStyle, capStyle, false );
+        GeoDataStyle *style = createStyle( width, realWidth, color, color, true, true, Qt::SolidPattern, penStyle, capStyle, false );
+        if( !bitmap.isEmpty() ) {
+            QImage const pixmap = QImage( MarbleDirs::path( "bitmaps/" + bitmap + ".png" ) );
+            style->setIconStyle( GeoDataIconStyle( pixmap ) );
+        }
+        return style;
     }
     
     static GeoDataStyle* createWayStyle( const QColor& color, const QColor& outlineColor, 
