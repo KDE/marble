@@ -45,6 +45,11 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         return m_positions;
     }
 
+    QList<QPointF> absolutePositions() const
+    {
+        return m_positions;
+    }
+
     void setProjection( ViewportParams *viewport,
                         GeoPainter *painter )
     {
