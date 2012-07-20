@@ -502,7 +502,6 @@ void RoutingPlugin::initialize()
     d->m_widget.setupUi( widget );
     d->m_widgetItem = new WidgetGraphicsItem( this );
     d->m_widgetItem->setWidget( widget );
-    d->m_widgetItem->setCacheMode( MarbleGraphicsItem::DeviceCoordinateCache );
 
     PositionProviderPlugin* activePlugin = marbleModel()->positionTracking()->positionProviderPlugin();
     d->updateGpsButton( activePlugin );
