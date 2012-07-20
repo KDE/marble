@@ -89,23 +89,6 @@ class MarbleGraphicsItemPrivate
 #endif
     }
 
-    QList<QRectF> boundingRects() const
-    {
-        QList<QRectF> list;
-
-        foreach( QPointF point, positions() ) {
-            QRectF rect( point, m_size );
-            if( rect.x() < 0 )
-                rect.setLeft( 0 );
-            if( rect.y() < 0 )
-                rect.setTop( 0 );
-
-            list.append( rect );
-        }
-
-        return list;
-    }
-
     virtual void setProjection( ViewportParams *viewport,
                                 GeoPainter *painter )
     {

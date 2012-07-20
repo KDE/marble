@@ -127,7 +127,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
 
 bool MarbleGraphicsItem::contains( const QPointF& point ) const
 {
-    foreach( const QRectF& rect, d->boundingRects() ) {
+    foreach( const QRectF& rect, boundingRects() ) {
         if( rect.contains( point ) )
             return true;
     }
@@ -136,7 +136,7 @@ bool MarbleGraphicsItem::contains( const QPointF& point ) const
 
 QRectF MarbleGraphicsItem::containsRect( const QPointF& point ) const
 {
-    foreach( const QRectF& rect, d->boundingRects() ) {
+    foreach( const QRectF& rect, boundingRects() ) {
         if( rect.contains( point ) )
             return rect;
     }
@@ -145,7 +145,19 @@ QRectF MarbleGraphicsItem::containsRect( const QPointF& point ) const
 
 QList<QRectF> MarbleGraphicsItem::boundingRects() const
 {
-    return p()->boundingRects();
+    QList<QRectF> list;
+
+    foreach( QPointF point, d->positions() ) {
+        QRectF rect( point, d->m_size );
+        if( rect.x() < 0 )
+            rect.setLeft( 0 );
+        if( rect.y() < 0 )
+            rect.setTop( 0 );
+
+        list.append( rect );
+    }
+
+    return list;
 }
 
 QSizeF MarbleGraphicsItem::size() const
