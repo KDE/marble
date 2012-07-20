@@ -71,11 +71,8 @@ class MarbleGraphicsItemPrivate
         m_children.remove( child );
     }
 
-    virtual QList<QPointF> positions() const
-    {
-        return QList<QPointF>();
-    }
-    
+    virtual QList<QPointF> positions() const = 0;
+
     virtual QList<QPointF> absolutePositions() const
     {
         return positions();
