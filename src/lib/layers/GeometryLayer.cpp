@@ -336,17 +336,7 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *
 
 void GeometryLayer::invalidateScene()
 {
-    QList<GeoGraphicsItem*> items = d->m_scene.items();
-    QList<GeoGraphicsItem*> deletedItems;
-    foreach( GeoGraphicsItem* item, items )
-    {
-        if( qBinaryFind( deletedItems, item ) != deletedItems.constEnd() )
-        {
-            delete item;
-            deletedItems.insert( qLowerBound( deletedItems.begin(), deletedItems.end(), item ), item );
-        }
-    }
-    d->m_scene.clear();
+    d->m_scene.eraseAll();
     const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
         d->createGraphicsItems( object->parent() );

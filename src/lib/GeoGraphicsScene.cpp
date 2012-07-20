@@ -43,28 +43,14 @@ GeoGraphicsScene::~GeoGraphicsScene()
     delete d;
 }
 
-QList< GeoGraphicsItem* > GeoGraphicsScene::items() const
+void GeoGraphicsScene::eraseAll()
 {
-    QList< GeoGraphicsItem* > result;
     for( QMap< TileId, QList< GeoGraphicsItem* > >::const_iterator i = d->m_items.constBegin();
          i != d->m_items.constEnd(); ++i )
     {
-        const QList< GeoGraphicsItem* > &objects = *i;
-        QList< GeoGraphicsItem* >::iterator before = result.begin();
-        QList< GeoGraphicsItem* >::const_iterator currentItem = objects.constBegin();
-        while( currentItem != objects.end() )
-        {
-            while( ( currentItem != objects.end() )
-                  && ( ( before == result.end() ) || ( (*currentItem)->zValue() < (*before)->zValue() ) ) )
-            {
-                before = result.insert( before, *currentItem );
-                currentItem++;
-            }
-            if ( before != result.end() )
-                before++;
-         }
+        qDeleteAll(*i);
     }
-    return result;
+    d->m_items.clear();
 }
 
 QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAltBox& box, int maxZoomLevel ) const
