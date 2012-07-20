@@ -162,17 +162,10 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
             Q_Q( const CylindricalProjection );
 
             qreal currentLon, currentLat;
-
             currentLon = itCoords->longitude();
-/*            if ( fabs( currentLon ) != M_PI )
-                currentLon += 2 * M_PI;*/
-
             currentLat = itCoords->latitude();
 
             GeoDataCoordinates::normalizeLonLat( currentLon, currentLat );
-
-            qDebug() << currentLon << " " << currentLat;
-
             currentCoords = GeoDataCoordinates( currentLon, currentLat );
 
             q->screenCoordinates( currentCoords, viewport, x, y );
