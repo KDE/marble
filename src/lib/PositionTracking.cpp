@@ -282,7 +282,7 @@ bool PositionTracking::isTrackEmpty() const
     }
 
     if ( d->m_trackSegments->size() == 1 ) {
-        return ( d->m_currentTrack->size() > 0 );
+        return ( d->m_currentTrack->size() == 0 );
     }
 
     return false;
