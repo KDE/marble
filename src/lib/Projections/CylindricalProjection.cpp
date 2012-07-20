@@ -164,12 +164,14 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
             qreal currentLon, currentLat;
 
             currentLon = itCoords->longitude();
-            if ( fabs( currentLon ) != M_PI )
-                currentLon += 2 * M_PI;
+/*            if ( fabs( currentLon ) != M_PI )
+                currentLon += 2 * M_PI;*/
 
             currentLat = itCoords->latitude();
 
             GeoDataCoordinates::normalizeLonLat( currentLon, currentLat );
+
+            qDebug() << currentLon << " " << currentLat;
 
             currentCoords = GeoDataCoordinates( currentLon, currentLat );
 

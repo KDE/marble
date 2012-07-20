@@ -181,6 +181,11 @@ maps/earth/schagen1689/legend/schagen_orig.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/schagen1689/legend)
 
 install (FILES
+maps/earth/topographic/preview-topographic.png
+maps/earth/topographic/topographic.dgml
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/topographic)
+
+install (FILES
 maps/moon/clementine/clementine.jpg
 maps/moon/clementine/clementine-preview.png
 maps/moon/clementine/legend.html 
@@ -231,6 +236,17 @@ mwdbii/PLAKE.PNT
 mwdbii/PUSA48.DIFF.PNT
 mwdbii/RIVER.PNT
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/mwdbii)
+
+install (FILES
+naturalearth/50m_coastline.dbf
+naturalearth/50m_coastline.prj
+naturalearth/50m_coastline.shp
+naturalearth/50m_coastline.shx
+naturalearth/50m_geographic_lines.dbf
+naturalearth/50m_geographic_lines.prj
+naturalearth/50m_geographic_lines.shp
+naturalearth/50m_geographic_lines.shx
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/naturalearth)
 
 FILE (GLOB STAR_FILES stars/*.dat)
 install (FILES

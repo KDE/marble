@@ -849,7 +849,7 @@ int GeoDataLineString::howManyIDLCrossings() const
 
         int count = 0;
         int currentSign, previousSign;
-        int currentLon, previousLon;
+        qreal currentLon, previousLon;
 
         QVector<GeoDataCoordinates>::const_iterator itCoords = d->m_vector.constBegin();
         QVector<GeoDataCoordinates>::const_iterator itEnd = d->m_vector.constEnd();
@@ -866,12 +866,16 @@ int GeoDataLineString::howManyIDLCrossings() const
             currentLon = GeoDataCoordinates::normalizeLon( itCoords->longitude() );
             currentSign = ( currentLon > 0 ) ? +1 : -1;
 
+            qDebug() << "howManyIDLCrossings: " << previousLon << " " << currentLon;
+
             if ( currentSign != previousSign && fabs( previousLon ) + fabs( currentLon ) > M_PI )
                 count++;
 
             previousLon = currentLon;
             previousSign = currentSign;
         }
+
+        qDebug() << "\n";
 
         d->m_howManyIDLCrossings = count;
     }
