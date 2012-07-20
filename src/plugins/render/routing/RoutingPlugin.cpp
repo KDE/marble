@@ -181,14 +181,7 @@ void RoutingPluginPrivate::updateGuidanceModeButton()
 void RoutingPluginPrivate::forceRepaint()
 {
     m_widgetItem->update();
-    if ( m_marbleWidget ) {
-        // Trigger a repaint of the float item. Otherwise button state updates are delayed
-        m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground, false );
-        m_parent->update();
-        m_marbleWidget->update();
-        bool const mapCoversViewport = m_marbleWidget->viewport()->mapCoversViewport();
-        m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground, mapCoversViewport );
-    }
+    emit m_parent->repaintNeeded();
 }
 
 void RoutingPluginPrivate::updateButtonVisibility()

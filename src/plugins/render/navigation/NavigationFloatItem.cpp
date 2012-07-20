@@ -327,20 +327,8 @@ void NavigationFloatItem::updateButtons( int zoomValue )
         zoomOutButton->setEnabled( true );
     }
 
-    if (m_marbleWidget)
-    {
-        // Trigger a repaint of the float item. Otherwise button state updates
-        // are delayed
-        QRectF floatItemRect = QRectF( positivePosition(), size() ).toRect();
-        QRegion dirtyRegion( floatItemRect.toRect() );
-
-        m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground, false );
-
-        update();
-
-        m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground,
-                                      m_marbleWidget->viewport()->mapCoversViewport() );
-    }
+    update();
+    emit repaintNeeded();
 }
 
 Q_EXPORT_PLUGIN2( NavigationFloatItem, NavigationFloatItem )
