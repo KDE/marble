@@ -49,7 +49,7 @@
 
                 <!-- OpenStreetMap mapnik rendered tiles expire after seven days
                      or 604800 seconds -->
-<!--	   <layer name="openstreetmap" backend="texture" >
+	   <layer name="openstreetmap" backend="texture" >
 		<texture name="mapnik_data" expire="604800" >
                     <sourcedir format="PNG"> earth/openstreetmap </sourcedir>
                     <tileSize width="256" height="256" />
@@ -61,26 +61,26 @@
                     <downloadPolicy usage="Browse" maximumConnections="20" />
                     <downloadPolicy usage="Bulk" maximumConnections="2" />
                 </texture>
-            </layer> -->
+            </layer> 
 
 <!-- PLAIN MAP -->
 
- <layer name="mwdbii" backend="vector" role="polyline">
+<!-- <layer name="mwdbii" backend="vector" role="polyline">
                 <vector name="pcoast" feature="coast">
                     <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
-                    <brush color="#f2efe9" />
+                    <brush color="#ffffff" />
                 </vector>
                 <vector name="pdiffborder" feature="border">
                     <sourcefile format="PNT"> earth/mwdbii/PDIFFBORDER.PNT </sourcefile>
-                    <pen color="#cccbca" />
+                    <pen color="#ffffff" />
                 </vector>
                 <vector name="pusa48" feature="border">
                     <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
-                    <pen color="#cccbca" />
+                    <pen color="#ffffff" />
                 </vector>
                 <vector name="international dateline" feature="border">
                     <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
-                    <pen color="#000000" />
+                    <pen color="#ffffff" />
                 </vector>
                 <vector name="plake" feature="lake">
                     <sourcefile format="PNT"> earth/mwdbii/PLAKE.PNT </sourcefile>
@@ -90,7 +90,7 @@
                     <sourcefile format="PNT"> earth/mwdbii/RIVER.PNT </sourcefile>
                     <pen color="#99b3cc" />
                 </vector>
-            </layer>
+            </layer>-->
 
 <!-- PLACES -->
 

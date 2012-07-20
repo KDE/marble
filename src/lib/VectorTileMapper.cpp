@@ -61,7 +61,8 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
         }
 
         if ( !viewport->mapCoversViewport() ) {
-            m_canvasImage.fill( QColor(0, 0, 0, 255).rgba() );
+            //m_canvasImage.fill( QColor(0, 0, 0, 255).rgba() );
+            m_canvasImage.fill( 0 );
         }
 
         // m_radius = viewport->radius();

@@ -80,11 +80,23 @@ public:
     // For scheduling repaints
     QTimer           m_repaintTimer;
 
-    // TreeModel for storing GeoDataDocuments
+    // Vector tile managing
+
+    // TreeModel for displaying GeoDataDocuments
     GeoDataTreeModel *m_treeModel;
 
-    // GeoDataDocuments (each tile is one) cache
+    // GeoDataDocuments cache. GeoDataDocuments being displayed
+    // will be here. When map changes, if we remove one GeoDataDocument
+    // from the TreeModel and the cache, the GeoDataDocument can't be deleted
+    // because a StackedTile in TileLoader will be pointing to it not to have it
+    // already parsed if necessary. In order to delete GeoDataDocuments, we will have
+    // to notify the TileLoader.
     QCache< GeoDataLatLonAltBox, CacheDocument> m_documents;
+
+    // TileId cache. Being displayed tiles' ids will be here, to
+    // be able to update-remove tiles from tileLoader which has a
+    // StackedTile cache accesible only through tileId.
+    QCache < GeoDataLatLonAltBox, TileId> m_tileIds;
 };
 
 CacheDocument::CacheDocument( GeoDataDocument* doc, GeoDataTreeModel* model ) :
@@ -191,6 +203,7 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
 VectorTileLayer::~VectorTileLayer()
 {
     d->m_documents.clear();
+    //d->m_tileIds.clear();
     delete d->m_texmapper;
     delete d->m_texcolorizer;
     delete d;
@@ -219,6 +232,7 @@ void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument * docume
     if ( !d->m_documents.contains( document->latLonAltBox() ) ){
         d->m_treeModel->addDocument( document );
         d->m_documents.insert( document->latLonAltBox(), new CacheDocument( document, d->m_treeModel ) );
+        //d->m_tileIds.insert( document->latLonAltBox(), &tileId );
     }
 
 }
