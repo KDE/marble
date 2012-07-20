@@ -26,11 +26,6 @@
 
 using namespace Marble;
 
-MarbleGraphicsItem::MarbleGraphicsItem( MarbleGraphicsItem *parent )
-    : d( new MarbleGraphicsItemPrivate( this, parent ) )
-{
-}
-
 MarbleGraphicsItem::MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr )
     : d( d_ptr )
 {

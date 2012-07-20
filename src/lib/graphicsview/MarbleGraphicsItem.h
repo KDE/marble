@@ -43,8 +43,6 @@ class MARBLE_EXPORT MarbleGraphicsItem
         DeviceCoordinateCache
     };
 
-    explicit MarbleGraphicsItem( MarbleGraphicsItem *parent = 0 );
-
     virtual ~MarbleGraphicsItem();
 
     /**
