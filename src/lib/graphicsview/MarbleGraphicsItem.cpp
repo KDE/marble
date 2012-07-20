@@ -225,10 +225,6 @@ void MarbleGraphicsItem::setSize( const QSizeF& size )
 {
     p()->m_size = size;
     update();
-
-    foreach ( MarbleGraphicsItem *item, p()->m_children ) {
-        item->p()->setParentSize( size );
-    }
 }
 
 QSizeF MarbleGraphicsItem::contentSize() const

@@ -28,7 +28,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
                                MarbleGraphicsItem *parent )
         : MarbleGraphicsItemPrivate( screenGraphicsItem, parent ),
           m_position(),
-          m_parentSize(),
+          m_viewportSize(),
           m_floatItemMoving( false ),
           m_flags( 0 )
     {
@@ -48,18 +48,17 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
 
     QPointF positivePosition() const
     {
-        if ( !m_parentSize.isValid() ) {
-            if ( m_parent ) {
-                mDebug() << "Invalid parent size";
-            }
+        const QSizeF parentSize = m_parent ? m_parent->size() : m_viewportSize;
+        if ( !parentSize.isValid() ) {
+            mDebug() << "Invalid parent size";
             return m_position;
         }
         QPointF position;
         qreal x = m_position.x();
         qreal y = m_position.y();
 
-        position.setX( ( x >= 0 ) ? x : m_parentSize.width() + x - m_size.width() );
-        position.setY( ( y >= 0 ) ? y : m_parentSize.height() + y - m_size.height() );
+        position.setX( ( x >= 0 ) ? x : parentSize.width() + x - m_size.width() );
+        position.setY( ( y >= 0 ) ? y : parentSize.height() + y - m_size.height() );
 
         return position;
     }
@@ -101,17 +100,12 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         // If we have no parent
         if( m_parent == 0 ) {
             // Saving the screen size needed for positions()
-            setParentSize( viewport->size() );
+            m_viewportSize = viewport->size();
         }
 
         ScreenGraphicsItem *screenGraphicsItem
                 = static_cast<ScreenGraphicsItem *>( m_marbleGraphicsItem );
         screenGraphicsItem->changeViewport( viewport );
-    }
-
-    virtual void setParentSize( QSizeF size )
-    {
-        m_parentSize = size;
     }
 
     bool isMovable() const
@@ -121,7 +115,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
 
     QPointF             m_position;
     // The size of the parent, or if no parent exists the size of the viewport.
-    QSizeF              m_parentSize;
+    QSizeF              m_viewportSize;
 
     QPoint              m_floatItemMoveStartPos;
     bool                m_floatItemMoving;

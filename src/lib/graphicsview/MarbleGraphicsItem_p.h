@@ -43,7 +43,6 @@ class MarbleGraphicsItemPrivate
     {
         if ( m_parent ) {
             m_parent->p()->addChild( m_marbleGraphicsItem );
-            setParentSize( m_parent->size() );
         }
     }
 
@@ -87,11 +86,6 @@ class MarbleGraphicsItemPrivate
     }
 
     virtual void setProjection( ViewportParams *viewport, GeoPainter *painter ) = 0;
-
-    virtual void setParentSize( QSizeF size )
-    {
-        Q_UNUSED( size );
-    }
 
     void updateChildPositions()
     {
