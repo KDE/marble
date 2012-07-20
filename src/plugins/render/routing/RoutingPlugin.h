@@ -97,6 +97,7 @@ private:
     /** Read settings */
     Q_PRIVATE_SLOT( d, void readSettings() )
 
+    friend class RoutingPluginPrivate;
     RoutingPluginPrivate* const d;
 };
 
