@@ -49,7 +49,11 @@ Q_SIGNALS:
     void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
 
 private:
-    void mapTexture( const ViewportParams *viewport, MapQuality mapQuality );
+    void mapTexture( const ViewportParams *viewport, MapQuality mapQuality, int minX, int minY, int maxX, int maxY );
+
+    int lon2tilex(double lon, int z);
+
+    int lat2tiley(double lat, int z);
 
 private:
     class RenderJob;
@@ -58,6 +62,10 @@ private:
     int m_radius;
     QImage m_canvasImage;
     QThreadPool m_threadPool;
+    int m_minTileX;
+    int m_minTileY;
+    int m_maxTileX;
+    int m_maxTileY;
 };
 
 
@@ -67,13 +75,10 @@ class VectorTileMapper::RenderJob : public QObject, public QRunnable
 
 public:
 
-    RenderJob( StackedTileLoader *tileLoader, int tileLevel, const ViewportParams *viewport );
+    RenderJob(StackedTileLoader *tileLoader, int tileLevel, const ViewportParams *viewport,
+              int minTileX, int minTileY, int maxTileX, int maxTileY );
 
     virtual void run();
-
-    int lon2tilex(double lon, int z);
-
-    int lat2tiley(double lat, int z);
 
 Q_SIGNALS:
     void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
@@ -82,6 +87,12 @@ private:
     StackedTileLoader *const m_tileLoader;
     const int m_tileLevel;
     const ViewportParams *const m_viewport;
+
+    // Variables for storing current screen tiles
+    int m_minTileX;
+    int m_minTileY;
+    int m_maxTileX;
+    int m_maxTileY;
 };
 
 

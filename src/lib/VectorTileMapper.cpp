@@ -42,6 +42,10 @@ VectorTileMapper::VectorTileMapper( StackedTileLoader *tileLoader )
     , m_radius( 0 )
     , m_threadPool()
 {
+    m_minTileX = 0;
+    m_minTileY = 0;
+    m_maxTileX = 0;
+    m_maxTileY = 0;
 }
 
 void VectorTileMapper::mapTexture( GeoPainter *painter,
@@ -57,16 +61,32 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
         }
 
         if ( !viewport->mapCoversViewport() ) {
-            m_canvasImage.fill( 0 );
+            m_canvasImage.fill( QColor(0, 0, 0, 255).rgba() );
         }
 
-        //        m_radius = viewport->radius();
+        // m_radius = viewport->radius();
         m_repaintNeeded = true;
     }
 
+    m_repaintNeeded = true;
+
     if ( m_repaintNeeded ) {
 
-        mapTexture( viewport, painter->mapQuality() );
+        /** FIXME ANDER TEST LOGIC FOR DOWNLOADING ALL THE TILES THAT ARE IN THE CURRENT ZOOM LEVEL AND INSIDE THE SCREEN **/
+
+        int minX = lon2tilex( viewport->viewLatLonAltBox().west(GeoDataCoordinates::Degree), tileZoomLevel() )-1;
+        int minY = lat2tiley( viewport->viewLatLonAltBox().north(GeoDataCoordinates::Degree), tileZoomLevel() )-1;
+        int maxX = lon2tilex( viewport->viewLatLonAltBox().east(GeoDataCoordinates::Degree), tileZoomLevel() )+1;
+        int maxY = lat2tiley( viewport->viewLatLonAltBox().south(GeoDataCoordinates::Degree), tileZoomLevel() )+1;
+
+        if ( minX != m_minTileX  || minY != m_minTileY || maxX != m_maxTileX || maxY != m_maxTileY ){
+        mapTexture( viewport, painter->mapQuality(), m_minTileX, m_minTileY, m_maxTileX, m_maxTileY );
+        }
+
+        m_minTileX = minX;
+        m_minTileY = minY;
+        m_maxTileX = maxX;
+        m_maxTileY = maxY;
 
         m_repaintNeeded = false;
     }
@@ -84,14 +104,16 @@ void VectorTileMapper::setRepaintNeeded()
     m_repaintNeeded = true;
 }
 
-void VectorTileMapper::mapTexture( const ViewportParams *viewport, MapQuality mapQuality )
+void VectorTileMapper::mapTexture( const ViewportParams *viewport, MapQuality mapQuality,
+                                   int minTileX, int minTileY, int maxTileX, int maxTileY )
 {
     Q_UNUSED( mapQuality);
 
     // Reset backend
     m_tileLoader->resetTilehash();
 
-    RenderJob *const job = new RenderJob( m_tileLoader, tileZoomLevel(), viewport );
+    RenderJob *const job = new RenderJob( m_tileLoader, tileZoomLevel(), viewport,
+                                          minTileX, minTileY, maxTileX, maxTileY);
 
     // Connect the parser thread to the VectorTileMapper for recieving tiles
     connect( job, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
@@ -112,24 +134,33 @@ void VectorTileMapper::updateTile(TileId const & tileId, GeoDataDocument * docum
     emit tileCompleted( tileId, document, format );
 }
 
-VectorTileMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel, const ViewportParams *viewport )
+int VectorTileMapper::lon2tilex(double lon, int z)
+{
+    return (int)(floor((lon + 180.0) / 360.0 * pow(2.0, z)));
+}
+
+int VectorTileMapper::lat2tiley(double lat, int z)
+{
+    return (int)(floor((1.0 - log( tan(lat * M_PI/180.0) + 1.0 / cos(lat * M_PI/180.0)) / M_PI) / 2.0 * pow(2.0, z)));
+}
+
+VectorTileMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel, const ViewportParams *viewport,
+                                        int minTileX, int minTileY, int maxTileX, int maxTileY )
     : m_tileLoader( tileLoader ),
       m_tileLevel( tileLevel ),
-      m_viewport( viewport )
+      m_viewport( viewport ),
+      m_minTileX( minTileX ),
+      m_minTileY( minTileY ),
+      m_maxTileX( maxTileX ),
+      m_maxTileY( maxTileY )
+
 {
 }
 
 void VectorTileMapper::RenderJob::run()
 {
-    /** FIXME ANDER TEST LOGIC FOR DOWNLOADING ALL THE TILES THAT ARE IN THE CURRENT ZOOM LEVEL AND INSIDE THE SCREEN **/
-
-    int minTileX = lon2tilex( m_viewport->viewLatLonAltBox().west(GeoDataCoordinates::Degree), m_tileLevel );
-    int minTileY = lat2tiley( m_viewport->viewLatLonAltBox().north(GeoDataCoordinates::Degree), m_tileLevel );
-    int maxTileX = lon2tilex( m_viewport->viewLatLonAltBox().east(GeoDataCoordinates::Degree), m_tileLevel );
-    int maxTileY = lat2tiley( m_viewport->viewLatLonAltBox().south(GeoDataCoordinates::Degree), m_tileLevel );
-
-    for (int x = minTileX; x < maxTileX; x++)
-        for (int y = minTileY; y < maxTileY; y++)
+    for (int x = m_minTileX; x < m_maxTileX; x++)
+        for (int y = m_minTileY; y < m_maxTileY; y++)
             if ( x >= 0 && y >= 0){
                 const TileId tileId = TileId( 0, m_tileLevel, x, y );
                 const StackedTile * tile = m_tileLoader->loadTile( tileId );
@@ -137,16 +168,6 @@ void VectorTileMapper::RenderJob::run()
                 if ( tile->resultVectorData()->size() > 0 )
                     emit tileCompleted( tileId, tile->resultVectorData(), "JS" );
             }
-}
-
-int VectorTileMapper::RenderJob::lon2tilex(double lon, int z)
-{
-    return (int)(floor((lon + 180.0) / 360.0 * pow(2.0, z)));
-}
-
-int VectorTileMapper::RenderJob::lat2tiley(double lat, int z)
-{
-    return (int)(floor((1.0 - log( tan(lat * M_PI/180.0) + 1.0 / cos(lat * M_PI/180.0)) / M_PI) / 2.0 * pow(2.0, z)));
 }
 
 #include "VectorTileMapper.moc"

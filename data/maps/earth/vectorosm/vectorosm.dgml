@@ -24,7 +24,7 @@
             <!-- Now we create the layer structure that gets handled by the
     layer management class -->
  
-        <map bgcolor="#999999">
+        <map bgcolor="#99b3cc">
             <canvas/>
             <!-- In this place one could e.g. insert a sky plugin -->
             <target/>
@@ -43,7 +43,6 @@
                     <downloadPolicy usage="Browse" maximumConnections="20" />
                     <downloadPolicy usage="Bulk" maximumConnections="2" />
                 </vectortile>
- 
             </layer>
 
 <!-- OPENSTREETMAP --> 
@@ -62,7 +61,36 @@
                     <downloadPolicy usage="Browse" maximumConnections="20" />
                     <downloadPolicy usage="Bulk" maximumConnections="2" />
                 </texture>
-            </layer>-->
+            </layer> -->
+
+<!-- PLAIN MAP -->
+
+ <layer name="mwdbii" backend="vector" role="polyline">
+                <vector name="pcoast" feature="coast">
+                    <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
+                    <brush color="#f2efe9" />
+                </vector>
+                <vector name="pdiffborder" feature="border">
+                    <sourcefile format="PNT"> earth/mwdbii/PDIFFBORDER.PNT </sourcefile>
+                    <pen color="#cccbca" />
+                </vector>
+                <vector name="pusa48" feature="border">
+                    <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
+                    <pen color="#cccbca" />
+                </vector>
+                <vector name="international dateline" feature="border">
+                    <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
+                    <pen color="#000000" />
+                </vector>
+                <vector name="plake" feature="lake">
+                    <sourcefile format="PNT"> earth/mwdbii/PLAKE.PNT </sourcefile>
+                    <pen color="#99b3cc" />
+                </vector>
+                <vector name="rivers" feature="river">
+                    <sourcefile format="PNT"> earth/mwdbii/RIVER.PNT </sourcefile>
+                    <pen color="#99b3cc" />
+                </vector>
+            </layer>
 
 <!-- PLACES -->
 
@@ -152,16 +180,16 @@
                     <value>true</value>
                 </property>
                 <property name="waterbodies">
-                    <available>false</available>
-                    <value>false</value>
+                    <available>true</available>
+                    <value>true</value>
                 </property>
                 <property name="lakes">
-                    <available>false</available>
-                    <value>false</value>
+                    <available>true</available>
+                    <value>true</value>
                 </property>
                 <property name="rivers">
-                    <available>false</available>
-                    <value>false</value>
+                    <available>true</available>
+                    <value>true</value>
                 </property>
             </group>
  
