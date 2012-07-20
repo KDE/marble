@@ -97,8 +97,6 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
 
  protected:
     explicit ScreenGraphicsItem( ScreenGraphicsItemPrivate *d_ptr );
-    ScreenGraphicsItem( const QPointF& position, const QSizeF& size,
-                        ScreenGraphicsItemPrivate *d_ptr );
 
     virtual bool eventFilter( QObject *, QEvent * );
 
