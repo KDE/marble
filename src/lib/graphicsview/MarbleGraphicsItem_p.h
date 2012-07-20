@@ -73,10 +73,7 @@ class MarbleGraphicsItemPrivate
 
     virtual QList<QPointF> positions() const = 0;
 
-    virtual QList<QPointF> absolutePositions() const
-    {
-        return positions();
-    }
+    virtual QList<QPointF> absolutePositions() const = 0;
 
     void ensureValidCacheKey()
     {
@@ -89,12 +86,7 @@ class MarbleGraphicsItemPrivate
 #endif
     }
 
-    virtual void setProjection( ViewportParams *viewport,
-                                GeoPainter *painter )
-    {
-        Q_UNUSED( viewport );
-        Q_UNUSED( painter );
-    }
+    virtual void setProjection( ViewportParams *viewport, GeoPainter *painter ) = 0;
 
     virtual void setParentSize( QSizeF size )
     {
