@@ -157,7 +157,7 @@ void GpsInfo::updateLocation( GeoDataCoordinates coordinates, qreal)
         m_widgetItem->setSize( QSizeF( minimumWidth, size().height() ) );
     }
 
-    m_widgetItem->update();
+    update();
     emit repaintNeeded();
 }
 
