@@ -175,7 +175,7 @@ void RoutingPluginPrivate::updateGuidanceModeButton()
 {
     bool const hasRoute = m_routingModel->rowCount() > 0;
     m_widget.routingButton->setEnabled( hasRoute );
-    m_widgetItem->update();
+    forceRepaint();
 }
 
 void RoutingPluginPrivate::forceRepaint()
@@ -324,7 +324,7 @@ void RoutingPluginPrivate::updateDestinationInformation()
             }
         }
 
-        m_widgetItem->update();
+        forceRepaint();
     }
 }
 
