@@ -89,13 +89,6 @@ class MARBLE_EXPORT MarbleGraphicsItem
     void setCacheMode( CacheMode mode );
 
     /**
-     * Schedules an painting update for the Item. As long it is not added to an GraphicsScene
-     * (which doesn't exist yet) it will be repainted at the next paint event instead of using
-     * the cache.
-     */
-    void update();
-
-    /**
      * Returns if the item is visible.
      */
     bool visible() const;
@@ -162,6 +155,12 @@ class MARBLE_EXPORT MarbleGraphicsItem
     explicit MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );
 
     virtual bool eventFilter( QObject *object, QEvent *e );
+
+    /**
+     * Marks the item and all parent items as invalid. If caching is enabled, the next paintEvent()
+     * will cause the cache to be recreated, such that the paintEvent()s after will be optimized.
+     */
+    void update();
 
     MarbleGraphicsItemPrivate * const d;
 

@@ -180,7 +180,7 @@ void RoutingPluginPrivate::updateGuidanceModeButton()
 
 void RoutingPluginPrivate::forceRepaint()
 {
-    m_widgetItem->update();
+    m_parent->update();
     emit m_parent->repaintNeeded();
 }
 

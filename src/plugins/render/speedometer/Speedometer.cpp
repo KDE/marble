@@ -138,7 +138,8 @@ void Speedometer::updateLocation( GeoDataCoordinates coordinates, qreal speed )
 
     m_widget.speed->display( speed );
     m_widget.speedUnit->setText( speedUnit );
-    m_widgetItem->update();
+
+    update();
     emit repaintNeeded();
 }
 
