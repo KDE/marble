@@ -124,15 +124,15 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
 
             // Click and move above a float item triggers moving the float item
             if ( e->type() == QEvent::MouseButtonPress && event->button() == Qt::LeftButton ) {
-                if ( cursorAboveFloatItem ) {
+                if ( cursorAboveFloatItem && p()->isMovable() ) {
+                    p()->m_floatItemMoving = true;
                     p()->m_floatItemMoveStartPos = event->pos();
                     return true;
                 }
             }
 
             if ( e->type() == QEvent::MouseMove && event->buttons() & Qt::LeftButton ) {
-                if ( p()->isMovable() ) {
-                    p()->m_floatItemMoving = true;
+                if ( p()->m_floatItemMoving ) {
                     const QPoint &point = event->pos();
                     QPointF position = positivePosition();
                     qreal newX = qMax( 0., position.x()+point.x()-p()->m_floatItemMoveStartPos.x() );
