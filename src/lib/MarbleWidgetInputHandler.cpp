@@ -42,6 +42,7 @@
 #include "AbstractDataPluginItem.h"
 #include "MarbleWidgetPopupMenu.h"
 #include "Planet.h"
+#include "RenderPlugin.h"
 
 namespace Marble {
 
