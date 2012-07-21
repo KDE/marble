@@ -17,6 +17,8 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 
+#include <QtCore/QDebug>
+
 namespace Marble
 {
 

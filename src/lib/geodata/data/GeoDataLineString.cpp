@@ -350,12 +350,12 @@ qreal GeoDataLineString::epsilonFromDetailLevel( int detailLevel ) const
         return 0;
 
     if ( detailLevel <= 1 )
-        return 50000;
+        return 30000;
     if ( detailLevel == 2 )
-        return 20000;
-    if ( detailLevel > 2 && detailLevel <= 8 )
-        return 10000 - 1500 * ( detailLevel - 2 );
-    if ( detailLevel > 8 && detailLevel <= 11 )
+        return 10000;
+    if ( detailLevel > 2 && detailLevel <= 7 )
+        return 10000 - 1500 * ( detailLevel - 1 );
+    if ( detailLevel > 7 && detailLevel <= 11 )
         return 1000 - 250 * ( detailLevel - 8 );
 
     return 200 / ( 1 << ( detailLevel - 12 ) );

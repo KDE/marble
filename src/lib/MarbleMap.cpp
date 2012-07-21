@@ -36,6 +36,7 @@
 #include "layers/FogLayer.h"
 #include "layers/FpsLayer.h"
 #include "layers/GeometryLayer.h"
+#include "layers/GroundLayer.h"
 #include "layers/MarbleSplashLayer.h"
 #include "layers/PlacemarkLayout.h"
 #include "layers/TextureLayer.h"
@@ -130,6 +131,7 @@ class MarbleMapPrivate
     GeometryLayer            m_geometryLayer;
     AtmosphereLayer          m_atmosphereLayer;
     FogLayer                 m_fogLayer;
+    GroundLayer              m_groundLayer;
     VectorMapBaseLayer       m_vectorMapBaseLayer;
     VectorMapLayer   m_vectorMapLayer;
     TextureLayer     m_textureLayer;
@@ -151,6 +153,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), model->clock(), parent )
 {
     m_layerManager.addLayer( &m_fogLayer );
+    m_layerManager.addLayer( &m_groundLayer );
     m_layerManager.addLayer( &m_geometryLayer );
     m_layerManager.addLayer( &m_placemarkLayout );
     m_layerManager.addLayer( &m_customPaintLayer );
@@ -262,6 +265,7 @@ MarbleMap::~MarbleMap()
     d->m_layerManager.removeLayer( &d->m_placemarkLayout );
     d->m_layerManager.removeLayer( &d->m_textureLayer );
     d->m_layerManager.removeLayer( &d->m_atmosphereLayer );
+    d->m_layerManager.removeLayer( &d->m_groundLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
     delete d;
@@ -547,6 +551,11 @@ bool MarbleMap::showSunInZenith() const
 bool MarbleMap::showAtmosphere() const
 {
     return d->m_viewParams.showAtmosphere();
+}
+
+bool MarbleMap::showGround() const
+{
+    return d->m_viewParams.showGround();
 }
 
 bool MarbleMap::showCrosshairs() const
@@ -948,6 +957,16 @@ void MarbleMap::setShowAtmosphere( bool visible )
     }
 
     d->m_viewParams.setShowAtmosphere( visible );
+}
+
+void MarbleMap::setShowGround( bool visible )
+{
+    d->m_layerManager.removeLayer( &d->m_groundLayer );
+    if ( visible ) {
+        d->m_layerManager.addLayer( &d->m_groundLayer );
+    }
+
+    d->m_viewParams.setShowGround( visible );
 }
 
 void MarbleMap::setShowCrosshairs( bool visible )

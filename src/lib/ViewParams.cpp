@@ -36,6 +36,8 @@ public:
 
     bool        m_showAtmosphere;
 
+    bool        m_showGround;
+
     bool        m_showClouds;
 };
 
@@ -46,6 +48,7 @@ ViewParamsPrivate::ViewParamsPrivate()
       m_mapQuality( m_stillQuality ),
       // Show / don't show parameters
       m_showAtmosphere( true ),
+      m_showGround( true ),
       m_showClouds( false )
 {
 }
@@ -116,6 +119,16 @@ bool ViewParams::showAtmosphere() const
 void ViewParams::setShowAtmosphere( bool showAtmosphere )
 {
     d->m_showAtmosphere = showAtmosphere;
+}
+
+bool ViewParams::showGround() const
+{
+    return d->m_showGround;
+}
+
+void ViewParams::setShowGround( bool showGround )
+{
+    d->m_showGround = showGround;
 }
 
 bool ViewParams::showClouds() const

@@ -124,6 +124,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(bool showCityLights READ showCityLights WRITE setShowCityLights)
     Q_PROPERTY(bool showSunInZenith READ showSunInZenith WRITE setShowSunInZenith)
     Q_PROPERTY(bool showAtmosphere READ showAtmosphere WRITE setShowAtmosphere)
+    Q_PROPERTY(bool showGround READ showGround WRITE setShowGround)
     Q_PROPERTY(bool showCrosshairs READ showCrosshairs WRITE setShowCrosshairs)
 
     Q_PROPERTY(bool showPlaces   READ showPlaces      WRITE setShowPlaces)
@@ -455,6 +456,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return The cloud cover visibility.
      */
     bool showAtmosphere() const;
+
+    /**
+     * @brief  Return whether the ground is visible.
+     * @return The ground visibility.
+     */
+    bool showGround() const;
+   
 
     /**
      * @brief  Return whether the crosshairs are visible.
@@ -796,6 +804,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  visible  visibility of the atmospheric glow
      */
     void setShowAtmosphere( bool visible );
+
+    /**
+     * @brief  Set whether the ground is visible
+     * @param  visible  visibility of the ground
+     */
+    void setShowGround( bool visible );
 
     /**
      * @brief  Set whether the crosshairs are visible

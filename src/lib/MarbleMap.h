@@ -276,6 +276,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
     bool showAtmosphere() const;
 
     /**
+     * @brief  Return whether the ground is visible.
+     * @return The ground visibility
+     */
+    bool showGround() const;
+
+    /**
      * @brief  Return whether the crosshairs are visible.
      * @return The crosshairs' visibility.
      */
@@ -525,6 +531,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param  visible  visibility of the atmospheric glow
      */
     void setShowAtmosphere( bool visible );
+
+    /**
+     * @brief  Set whether the ground is visible
+     * @param  visible  visibility of the ground
+     */
+    void setShowGround( bool visible );
 
     /**
      * @brief  Set whether the crosshairs are visible

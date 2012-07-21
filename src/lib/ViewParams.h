@@ -50,6 +50,9 @@ class ViewParams
     bool showAtmosphere() const;
     void setShowAtmosphere( bool );
 
+    bool showGround() const;
+    void setShowGround( bool );
+
     bool showClouds() const;
     void setShowClouds( bool const );
 

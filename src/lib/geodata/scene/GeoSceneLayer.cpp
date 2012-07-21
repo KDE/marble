@@ -25,6 +25,8 @@
 #include "GeoSceneFilter.h"
 #include "GeoSceneTypes.h"
 
+#include <QtCore/QDebug>
+
 namespace Marble
 {
 
