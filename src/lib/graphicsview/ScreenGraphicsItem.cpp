@@ -120,8 +120,6 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
             QRectF floatItemRect = QRectF( positivePosition() - QPoint( 1, 1 ),
                                            size() + QSize( 2, 2 ) );
 
-            const bool cursorAboveFloatItem = contains( event->pos() );
-
             if ( e->type() == QEvent::MouseMove && event->buttons() & Qt::LeftButton ) {
                 if ( p()->m_floatItemMoving ) {
                     const QPoint &point = event->pos();
@@ -167,8 +165,8 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
                 p()->m_floatItemMoving = false;
             }
 
-            // Adjusting Cursor shape
-            if ( cursorAboveFloatItem || p()->m_floatItemMoving ) {
+            // Use a special cursor as long as the item is moved
+            if ( p()->m_floatItemMoving ) {
                 widget->setCursor(QCursor(Qt::SizeAllCursor));
                 return true;
             }
