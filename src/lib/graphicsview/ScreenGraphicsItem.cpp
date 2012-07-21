@@ -123,20 +123,20 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
             const bool cursorAboveFloatItem = contains( event->pos() );
 
             // Click and move above a float item triggers moving the float item
-            if ( cursorAboveFloatItem ) {
-                if ( e->type() == QEvent::MouseButtonPress && event->button() == Qt::LeftButton ) {
+            if ( e->type() == QEvent::MouseButtonPress && event->button() == Qt::LeftButton ) {
+                if ( cursorAboveFloatItem ) {
                     p()->m_floatItemMoveStartPos = event->pos();
                     return true;
                 }
             }
 
-            if ( e->type() == QEvent::MouseMove && event->buttons() & Qt::LeftButton && p()->isMovable() )
-            {
-                p()->m_floatItemMoving = true;
-                const QPoint &point = event->pos();
-                QPointF position = positivePosition();
-                qreal newX = qMax( 0., position.x()+point.x()-p()->m_floatItemMoveStartPos.x() );
-                qreal newY = qMax( 0., position.y()+point.y()-p()->m_floatItemMoveStartPos.y() );
+            if ( e->type() == QEvent::MouseMove && event->buttons() & Qt::LeftButton ) {
+                if ( p()->isMovable() ) {
+                    p()->m_floatItemMoving = true;
+                    const QPoint &point = event->pos();
+                    QPointF position = positivePosition();
+                    qreal newX = qMax( 0., position.x()+point.x()-p()->m_floatItemMoveStartPos.x() );
+                    qreal newY = qMax( 0., position.y()+point.y()-p()->m_floatItemMoveStartPos.y() );
 
                     // docking behavior
                     const qreal dockArea = 60.0; // Alignment area width/height
@@ -169,6 +169,7 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
                     widget->update(dirtyRegion);
                     widget->setAttribute( Qt::WA_NoSystemBackground, widget->viewport()->mapCoversViewport() );
                     return true;
+                }
             }
 
             if ( e->type() == QEvent::MouseButtonRelease ) {
