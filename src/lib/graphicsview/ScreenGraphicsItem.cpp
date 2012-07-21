@@ -121,7 +121,6 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
                                            size() + QSize( 2, 2 ) );
 
             if ( e->type() == QEvent::MouseMove && event->buttons() & Qt::LeftButton ) {
-                if ( p()->m_floatItemMoving ) {
                     const QPoint &point = event->pos();
                     QPointF position = positivePosition();
                     qreal newX = qMax<qreal>( 0, position.x()+point.x()-p()->m_floatItemMoveStartPos.x() );
@@ -158,7 +157,6 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
                     widget->update(dirtyRegion);
                     widget->setAttribute( Qt::WA_NoSystemBackground, widget->viewport()->mapCoversViewport() );
                     return true;
-                }
             }
 
             if ( e->type() == QEvent::MouseButtonRelease ) {
