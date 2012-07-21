@@ -135,8 +135,8 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
                 if ( p()->m_floatItemMoving ) {
                     const QPoint &point = event->pos();
                     QPointF position = positivePosition();
-                    qreal newX = qMax( 0., position.x()+point.x()-p()->m_floatItemMoveStartPos.x() );
-                    qreal newY = qMax( 0., position.y()+point.y()-p()->m_floatItemMoveStartPos.y() );
+                    qreal newX = qMax<qreal>( 0, position.x()+point.x()-p()->m_floatItemMoveStartPos.x() );
+                    qreal newY = qMax<qreal>( 0, position.y()+point.y()-p()->m_floatItemMoveStartPos.y() );
 
                     // docking behavior
                     const qreal dockArea = 60.0; // Alignment area width/height
