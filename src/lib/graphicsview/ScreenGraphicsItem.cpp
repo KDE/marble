@@ -110,7 +110,6 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
     }
     else {
         // Move ScreenGraphicsItem
-        bool cursorAboveFloatItem = false;
         if ( e->type() == QEvent::MouseMove
             || e->type() == QEvent::MouseButtonPress
             || e->type() == QEvent::MouseButtonRelease )
@@ -121,10 +120,10 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
             QRectF floatItemRect = QRectF( positivePosition() - QPoint( 1, 1 ),
                                            size() + QSize( 2, 2 ) );
 
-            // Click and move above a float item triggers moving the float item
-            if ( contains( event->pos() ) ) {
-                cursorAboveFloatItem = true;
+            const bool cursorAboveFloatItem = contains( event->pos() );
 
+            // Click and move above a float item triggers moving the float item
+            if ( cursorAboveFloatItem ) {
                 if ( e->type() == QEvent::MouseButtonPress && event->button() == Qt::LeftButton ) {
                     p()->m_floatItemMoveStartPos = event->pos();
                     return true;
