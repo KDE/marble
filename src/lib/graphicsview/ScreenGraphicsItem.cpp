@@ -135,9 +135,9 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
                 p()->m_floatItemMoving = true;
                 const QPoint &point = event->pos();
                 QPointF position = positivePosition();
-                qreal newX = position.x()+point.x()-p()->m_floatItemMoveStartPos.x();
-                qreal newY = position.y()+point.y()-p()->m_floatItemMoveStartPos.y();
-                if ( newX >= 0 && newY >= 0 ) {
+                qreal newX = qMax( 0., position.x()+point.x()-p()->m_floatItemMoveStartPos.x() );
+                qreal newY = qMax( 0., position.y()+point.y()-p()->m_floatItemMoveStartPos.y() );
+
                     // docking behavior
                     const qreal dockArea = 60.0; // Alignment area width/height
                     const qreal dockJump = 30.0; // Alignment indicator jump size
@@ -169,7 +169,6 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
                     widget->update(dirtyRegion);
                     widget->setAttribute( Qt::WA_NoSystemBackground, widget->viewport()->mapCoversViewport() );
                     return true;
-                }
             }
 
             if ( e->type() == QEvent::MouseButtonRelease ) {
