@@ -553,11 +553,6 @@ bool MarbleMap::showAtmosphere() const
     return d->m_viewParams.showAtmosphere();
 }
 
-bool MarbleMap::showGround() const
-{
-    return d->m_viewParams.showGround();
-}
-
 bool MarbleMap::showCrosshairs() const
 {
     bool visible = false;
@@ -735,6 +730,7 @@ void MarbleMapPrivate::updateMapTheme()
     m_layerManager.removeLayer( &m_textureLayer );
     m_layerManager.removeLayer( &m_vectorMapLayer );
     m_layerManager.removeLayer( &m_vectorMapBaseLayer );
+    m_layerManager.removeLayer( &m_groundLayer );
 
     QObject::connect( m_model->mapTheme()->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
                       q, SLOT( updateProperty( const QString &, bool ) ) );
@@ -747,8 +743,10 @@ void MarbleMapPrivate::updateMapTheme()
     
     // Check whether there is a vector layer available:
 
-    m_groundLayer.setEnabled( !m_model->mapTheme()->map()->hasTextureLayers() );
-    m_groundLayer.setColor( m_model->mapTheme()->map()->backgroundColor() );
+    if ( !m_model->mapTheme()->map()->hasTextureLayers() ) {
+        m_groundLayer.setColor( m_model->mapTheme()->map()->backgroundColor() );
+        m_layerManager.addLayer( &m_groundLayer );
+    }
 
     if ( m_model->mapTheme()->map()->hasVectorLayers() ) {
         m_veccomposer.setShowWaterBodies( q->propertyValue( "waterbodies" ) );
@@ -963,19 +961,6 @@ void MarbleMap::setShowAtmosphere( bool visible )
     }
 
     d->m_viewParams.setShowAtmosphere( visible );
-}
-
-void MarbleMap::setShowGround( bool visible )
-{
-    d->m_layerManager.removeLayer( &d->m_groundLayer );
-    if ( visible ) {
-//        d->m_groundLayer.setEnabled( !d->m_model->mapTheme()->map()->hasTextureLayers() );
-        d->m_groundLayer.setEnabled( false );
-        d->m_groundLayer.setColor( d->m_model->mapTheme()->map()->backgroundColor() );
-        d->m_layerManager.addLayer( &d->m_groundLayer );
-    }
-
-    d->m_viewParams.setShowGround( visible );
 }
 
 void MarbleMap::setShowCrosshairs( bool visible )

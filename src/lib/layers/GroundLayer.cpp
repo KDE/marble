@@ -70,16 +70,6 @@ qreal GroundLayer::zValue() const
     return -50.0;
 }
 
-void GroundLayer::setEnabled( bool enabled )
-{
-    m_enabled = enabled;
-}
-
-bool GroundLayer::isEnabled() const 
-{
-    return m_enabled;
-}
-
 void GroundLayer::setColor( const QColor &color )
 {   
     m_color = color;

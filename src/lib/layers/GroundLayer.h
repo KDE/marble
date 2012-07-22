@@ -35,10 +35,6 @@ class GroundLayer : public LayerInterface
 
     virtual qreal zValue() const;
 
-    void setEnabled( bool enabled );
-
-    bool isEnabled () const;
-
     void setColor( const QColor &color );
 
     QColor color() const;
