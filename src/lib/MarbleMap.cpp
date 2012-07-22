@@ -893,10 +893,7 @@ void MarbleMapPrivate::updateMapTheme()
     }
 
     // earth
-    bool value;
-    if ( m_model->mapTheme()->settings()->propertyValue( "places", value ) ) {
-        m_placemarkLayer.setShowPlaces( value );
-    }
+    m_placemarkLayer.setShowPlaces( q->showPlaces() );
 
     m_placemarkLayer.setShowCities( q->showCities() );
     m_placemarkLayer.setShowTerrain( q->showTerrain() );
