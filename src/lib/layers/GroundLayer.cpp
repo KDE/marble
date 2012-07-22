@@ -49,15 +49,9 @@ bool GroundLayer::render( GeoPainter *painter,
     if ( !m_enabled )
         return true;
 
-    // Right now hardcoded, will be taken from the <map bgcolor=""> attribute of the DGML. !!! Have a look at MarbleModel.cpp:274
-//    QBrush    backgroundBrush( QBrush( QColor( 153, 179, 204 ) ) );
-//    QPen      backgroundPen( Qt::NoPen );
-
     QBrush backgroundBrush( m_color );
     QPen backgroundPen( Qt::NoPen );
 
-    // First I have to check if the map has texture layers; doable by transmitting the mapTheme or the model as a parameter up to here
-    // !!! Have a look at LayerManager.cpp:185 and MarbleMap.cpp:698
     painter->setBrush( backgroundBrush );
     painter->setPen( backgroundPen );
     painter->drawPath( viewParams->mapShape() );

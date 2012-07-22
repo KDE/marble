@@ -866,16 +866,12 @@ int GeoDataLineString::howManyIDLCrossings() const
             currentLon = GeoDataCoordinates::normalizeLon( itCoords->longitude() );
             currentSign = ( currentLon > 0 ) ? +1 : -1;
 
-            qDebug() << "howManyIDLCrossings: " << previousLon << " " << currentLon;
-
             if ( currentSign != previousSign && fabs( previousLon ) + fabs( currentLon ) > M_PI )
                 count++;
 
             previousLon = currentLon;
             previousSign = currentSign;
         }
-
-        qDebug() << "\n";
 
         d->m_howManyIDLCrossings = count;
     }

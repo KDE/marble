@@ -280,10 +280,8 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
 
             // look for documents
             foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
-//                if( dataset->fileFormat() == "KML" || dataset->fileFormat() == "SHP" ) {
-                    QString containername = reinterpret_cast<GeoSceneXmlDataSource*>( dataset )->filename();
-                    loadedContainers <<  containername;
-//                }
+                QString containername = reinterpret_cast<GeoSceneXmlDataSource*>( dataset )->filename();
+                loadedContainers <<  containername;
             }
         }
     }
@@ -326,12 +324,10 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
 
         // look for documents
         foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
-//            if( dataset->fileFormat() == "KML" || dataset->fileFormat() == "SHP" ) {
-                QString containername = reinterpret_cast<GeoSceneXmlDataSource*>( dataset )->filename();
-                if ( !loadedContainers.removeOne( containername ) ) {
-                    loadList << containername;
-                }
-//            }
+            QString containername = reinterpret_cast<GeoSceneXmlDataSource*>( dataset )->filename();
+            if ( !loadedContainers.removeOne( containername ) ) {
+                loadList << containername;
+            }
         }
     }
     // unload old standard Placemarks which are not part of the new map
