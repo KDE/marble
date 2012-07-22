@@ -26,6 +26,9 @@
 namespace Marble
 {
 
+static const qreal s_labelOutlineWidth = 2.5;
+
+
 /**
  * @short A class which represents the visible place marks on a map.
  *
@@ -74,11 +77,6 @@ class VisiblePlacemark
     const QPixmap& labelPixmap() const;
 
     /**
-     * Sets the @p pixmap of the place mark name label.
-     */
-    void setLabelPixmap( const QPixmap& pixmap );
-
-    /**
      * Returns the area covered by the place mark name label on the map.
      */
     const QRectF& labelRect() const;
@@ -87,6 +85,15 @@ class VisiblePlacemark
      * Sets the @p area covered by the place mark name label on the map.
      */
     void setLabelRect( const QRectF& area );
+
+    enum LabelStyle {
+        Normal = 0,
+        Glow,
+        Selected
+    };
+
+    void drawLabelText( QPainter &labelPainter, const QString &text, const QFont &labelFont, LabelStyle labelStyle, const QColor &color );
+    void drawLabelPixmap();
 
  private:
     const GeoDataPlacemark *m_placemark;

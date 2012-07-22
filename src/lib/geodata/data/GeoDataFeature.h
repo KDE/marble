@@ -497,6 +497,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     static QFont defaultFont();
     static void setDefaultFont( const QFont& font );
 
+    static QColor defaultLabelColor();
+    static void setDefaultLabelColor( const QColor& color );
+
     virtual void detach();
  private:
     static void initializeDefaultStyles();
@@ -512,6 +515,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     GeoDataFeaturePrivate* p() const;
     // Static members
     static QFont         s_defaultFont;
+    static QColor        s_defaultLabelColor;
 
     static GeoDataStyle* s_defaultStyle[GeoDataFeature::LastIndex];
     static bool          s_defaultStyleInitialized;

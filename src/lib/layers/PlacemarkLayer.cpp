@@ -14,10 +14,7 @@
 
 #include <QtCore/QModelIndex>
 #include <QtCore/QPoint>
-#include <QtGui/QApplication>
 #include <QtGui/QPainter>
-#include <QtGui/QPalette>
-#include <QtGui/QPixmap>
 
 #include "MarbleDebug.h"
 #include "AbstractProjection.h"
@@ -28,13 +25,14 @@
 
 using namespace Marble;
 
+bool PlacemarkLayer::m_useXWorkaround = false;
+
 PlacemarkLayer::PlacemarkLayer( QAbstractItemModel *placemarkModel,
                                 QItemSelectionModel *selectionModel,
                                 MarbleClock *clock,
                                 QObject *parent ) :
     QObject( parent ),
-    m_layout( placemarkModel, selectionModel, clock ),
-    m_defaultLabelColor( Qt::black )
+    m_layout( placemarkModel, selectionModel, clock )
 {
     m_useXWorkaround = testXBug();
     mDebug() << "Use workaround: " << ( m_useXWorkaround ? "1" : "0" );
@@ -74,10 +72,6 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
 
         VisiblePlacemark *const mark = *visit;
 
-	if ( mark->labelPixmap().isNull() ) {
-            drawLabelPixmap( mark );
-	}
-
         QRect labelRect( mark->labelRect().toRect() );
         QPoint symbolPos( mark->symbolPosition() );
 
@@ -109,12 +103,6 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
 QVector<const GeoDataPlacemark *> PlacemarkLayer::whichPlacemarkAt( const QPoint &pos )
 {
     return m_layout.whichPlacemarkAt( pos );
-}
-
-void PlacemarkLayer::setDefaultLabelColor( const QColor& color )
-{
-    m_defaultLabelColor = color;
-    m_layout.requestStyleReset();
 }
 
 void PlacemarkLayer::setShowPlaces( bool show )
@@ -155,114 +143,6 @@ void PlacemarkLayer::setShowMaria( bool show )
 void PlacemarkLayer::requestStyleReset()
 {
     m_layout.requestStyleReset();
-}
-
-inline void PlacemarkLayer::drawLabelText(QPainter &labelPainter, const QString &text,
-                                            const QFont &labelFont, LabelStyle labelStyle, const QColor &color )
-{
-    QFont font = labelFont;
-    QFontMetrics metrics = QFontMetrics( font );
-    int fontAscent = metrics.ascent();
-
-    switch ( labelStyle ) {
-    case Selected: {
-        labelPainter.setPen( color );
-        labelPainter.setFont( font );
-        QRect textRect( 0, 0, metrics.width( text ), metrics.height() );
-        labelPainter.fillRect( textRect, QApplication::palette().highlight() );
-        labelPainter.setPen( QPen( QApplication::palette().highlightedText(), 1 ) );
-        labelPainter.drawText( 0, fontAscent, text );
-        break;
-    }
-    case Glow: {
-        font.setWeight( 75 );
-        fontAscent = QFontMetrics( font ).ascent();
-
-        QPen outlinepen( color == QColor( Qt::white ) ? Qt::black : Qt::white );
-        outlinepen.setWidthF( s_labelOutlineWidth );
-        QBrush  outlinebrush( color );
-
-        QPainterPath outlinepath;
-
-        const QPointF  baseline( s_labelOutlineWidth / 2.0, fontAscent );
-        outlinepath.addText( baseline, font, text );
-        labelPainter.setRenderHint( QPainter::Antialiasing, true );
-        labelPainter.setPen( outlinepen );
-        labelPainter.setBrush( outlinebrush );
-        labelPainter.drawPath( outlinepath );
-        labelPainter.setPen( Qt::NoPen );
-        labelPainter.drawPath( outlinepath );
-        labelPainter.setRenderHint( QPainter::Antialiasing, false );
-        break;
-    }
-    default: {
-        labelPainter.setPen( color );
-        labelPainter.setFont( font );
-        labelPainter.drawText( 0, fontAscent, text );
-    }
-    }
-}
-
-inline void PlacemarkLayer::drawLabelPixmap( VisiblePlacemark *mark )
-{
-
-    QPainter labelPainter;
-    QPixmap labelPixmap;
-
-    const GeoDataPlacemark *placemark = mark->placemark();
-    Q_ASSERT(placemark);
-    const GeoDataStyle* style = placemark->style();
-
-    QString labelName = placemark->name();
-    QRect  labelRect  = mark->labelRect().toRect();
-    if ( !labelRect.isValid() ) {
-        mark->setLabelPixmap( QPixmap() );
-        return;
-    }
-    
-    QFont  labelFont  = style->labelStyle().font();
-    QColor labelColor = style->labelStyle().color();
-
-    // FIXME: To be removed after MapTheme / KML refactoring
-    if ( ( labelColor == Qt::black || labelColor == QColor( "#404040" ) )
-	 && m_defaultLabelColor != Qt::black )
-        labelColor = m_defaultLabelColor;
-
-    LabelStyle labelStyle = Normal;
-    if ( mark->selected() ) {
-        labelStyle = Selected;
-    } else if ( style->labelStyle().glow() ) {
-        labelStyle = Glow;
-    }
-
-
-    // Due to some XOrg bug this requires a workaround via
-    // QImage in some cases (at least with Qt 4.2).
-    if ( !m_useXWorkaround ) {
-        labelPixmap = QPixmap( labelRect.size() );
-        labelPixmap.fill( Qt::transparent );
-
-        labelPainter.begin( &labelPixmap );
-
-        drawLabelText( labelPainter, labelName, labelFont, labelStyle, labelColor );
-
-        labelPainter.end();
-    } else {
-
-        QImage image( labelRect.size(),
-                      QImage::Format_ARGB32_Premultiplied );
-        image.fill( 0 );
-
-        labelPainter.begin( &image );
-
-        drawLabelText( labelPainter, labelName, labelFont, labelStyle, labelColor );
-
-        labelPainter.end();
-
-        labelPixmap = QPixmap::fromImage( image );
-    }
-
-    mark->setLabelPixmap( labelPixmap );
 }
 
 
