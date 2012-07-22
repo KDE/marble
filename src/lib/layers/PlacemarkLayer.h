@@ -27,9 +27,7 @@
 #include "PlacemarkLayout.h"
 
 class QAbstractItemModel;
-class QFont;
 class QItemSelectionModel;
-class QPainter;
 class QString;
 
 namespace Marble
@@ -40,9 +38,6 @@ class GeoSceneLayer;
 class MarbleClock;
 class ViewportParams;
 class VisiblePlacemark;
-
-static const qreal s_labelOutlineWidth = 2.5;
-
 
 class PlacemarkLayer : public QObject, public LayerInterface
 {
@@ -76,9 +71,7 @@ class PlacemarkLayer : public QObject, public LayerInterface
      */
     QVector<const GeoDataPlacemark*> whichPlacemarkAt( const QPoint &pos );
 
-    // FIXME: To be removed after MapTheme / KML refactoring
-    void setDefaultLabelColor( const QColor& color );
-
+    static bool m_useXWorkaround;  // Indicates need for an X windows workaround.
  public Q_SLOTS:
    // earth
    void setShowPlaces( bool show );
@@ -97,23 +90,9 @@ class PlacemarkLayer : public QObject, public LayerInterface
    void repaintNeeded();
 
  private:
-    enum LabelStyle {
-        Normal = 0,
-        Glow,
-        Selected
-    };
-
-    void drawLabelText( QPainter &labelPainter, const QString &text, const QFont &labelFont, LabelStyle labelStyle, const QColor &color );
-    void drawLabelPixmap( VisiblePlacemark *mark );
-
     bool testXBug();
 
- private:
     PlacemarkLayout m_layout;
-    bool m_useXWorkaround;  // Indicates need for an X windows workaround.
-
-    // FIXME: To be removed after MapTheme / KML refactoring
-    QColor m_defaultLabelColor;
 };
 
 }
