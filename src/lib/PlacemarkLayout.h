@@ -106,8 +106,6 @@ class PlacemarkLayout : public QObject
      */
     int maxLabelHeight() const;
 
-    TileId placemarkToTileId( const GeoDataCoordinates& coords, int popularity ) const;
-
     void styleReset();
 
     QList<const GeoDataPlacemark*> visiblePlacemarks( const ViewportParams *viewport );
