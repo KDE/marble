@@ -23,6 +23,16 @@
 namespace Marble
 {
 
+GroundLayer::GroundLayer()
+        : m_enabled( true ),
+          m_color( QColor( 153, 179, 204 ) )
+{
+}
+
+GroundLayer::~GroundLayer()
+{
+}
+
 QStringList GroundLayer::renderPosition() const
 {
     return QStringList() << "SURFACE";
@@ -36,14 +46,20 @@ bool GroundLayer::render( GeoPainter *painter,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
+    if ( !m_enabled )
+        return true;
+
     // Right now hardcoded, will be taken from the <map bgcolor=""> attribute of the DGML. !!! Have a look at MarbleModel.cpp:274
-    QBrush    oceanBrush( QBrush( QColor( 153, 179, 204 ) ) );
-    QPen      oceanPen( Qt::NoPen );
+//    QBrush    backgroundBrush( QBrush( QColor( 153, 179, 204 ) ) );
+//    QPen      backgroundPen( Qt::NoPen );
+
+    QBrush backgroundBrush( m_color );
+    QPen backgroundPen( Qt::NoPen );
 
     // First I have to check if the map has texture layers; doable by transmitting the mapTheme or the model as a parameter up to here
     // !!! Have a look at LayerManager.cpp:185 and MarbleMap.cpp:698
-    painter->setBrush( oceanBrush );
-    painter->setPen( oceanPen );
+    painter->setBrush( backgroundBrush );
+    painter->setPen( backgroundPen );
     painter->drawPath( viewParams->mapShape() );
 
     return true;
@@ -52,6 +68,26 @@ bool GroundLayer::render( GeoPainter *painter,
 qreal GroundLayer::zValue() const
 {
     return -50.0;
+}
+
+void GroundLayer::setEnabled( bool enabled )
+{
+    m_enabled = enabled;
+}
+
+bool GroundLayer::isEnabled() const 
+{
+    return m_enabled;
+}
+
+void GroundLayer::setColor( const QColor &color )
+{   
+    m_color = color;
+}
+
+QColor GroundLayer::color() const
+{
+    return m_color;
 }
 
 }

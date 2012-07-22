@@ -746,6 +746,10 @@ void MarbleMapPrivate::updateMapTheme()
     // at this point. Some themes do NOT have either vector or texture data!
     
     // Check whether there is a vector layer available:
+
+    m_groundLayer.setEnabled( !m_model->mapTheme()->map()->hasTextureLayers() );
+    m_groundLayer.setColor( m_model->mapTheme()->map()->backgroundColor() );
+
     if ( m_model->mapTheme()->map()->hasVectorLayers() ) {
         m_veccomposer.setShowWaterBodies( q->propertyValue( "waterbodies" ) );
         m_veccomposer.setShowLakes( q->propertyValue( "lakes" ) );
@@ -756,6 +760,8 @@ void MarbleMapPrivate::updateMapTheme()
 
 	// Set all the colors for the vector layers
         m_veccomposer.setOceanColor( m_model->mapTheme()->map()->backgroundColor() );
+
+        
 
         // Just as with textures, this is a workaround for DGML2 to
         // emulate the old behaviour.
@@ -963,6 +969,9 @@ void MarbleMap::setShowGround( bool visible )
 {
     d->m_layerManager.removeLayer( &d->m_groundLayer );
     if ( visible ) {
+//        d->m_groundLayer.setEnabled( !d->m_model->mapTheme()->map()->hasTextureLayers() );
+        d->m_groundLayer.setEnabled( false );
+        d->m_groundLayer.setColor( d->m_model->mapTheme()->map()->backgroundColor() );
         d->m_layerManager.addLayer( &d->m_groundLayer );
     }
 

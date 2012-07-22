@@ -15,18 +15,39 @@
 
 #include "LayerInterface.h"
 
+#include <QColor>
+
 namespace Marble
 {
 
 class GroundLayer : public LayerInterface
 {
-public:
+ public:
+
+    GroundLayer();
+
+    ~GroundLayer();
+
     virtual QStringList renderPosition() const;
 
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
     const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
 
     virtual qreal zValue() const;
+
+    void setEnabled( bool enabled );
+
+    bool isEnabled () const;
+
+    void setColor( const QColor &color );
+
+    QColor color() const;
+
+ private:
+    bool m_enabled;  // If the current map theme has texture layers then m_enabled will be set to false
+
+    QColor m_color;  // Gets the color specified via DGML's <map bgcolor="">
+    
 };
 
 }
