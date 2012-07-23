@@ -51,10 +51,10 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
                                 const QSizeF &size = QSizeF( 150.0, 50.0 ) );
     virtual ~AbstractFloatItem();
 
-    virtual QHash<QString,QVariant> settings() const;
-    virtual void setSettings(const QHash<QString, QVariant> &settings);
+    QHash<QString,QVariant> settings() const override;
+    void setSettings(const QHash<QString, QVariant> &settings) override;
 
-    virtual RenderType renderType() const;
+    RenderType renderType() const override;
 
     /**
      * @brief current pen for rendering
@@ -80,12 +80,23 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
      */
     void setFont( const QFont &font );
 
-    bool render( GeoPainter *painter, ViewportParams *viewport,
+    /**
+     * @brief Paints the float item on the map.
+     * @deprecated Do not override this method since it won't be called any longer.
+     *             Override one of FrameGraphicsItem's paint methods instead.
+     */
+    MARBLE_DEPRECATED( bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString& renderPos = QLatin1String("FLOAT_ITEM"),
-                 GeoSceneLayer * layer = 0 );
-    virtual QString renderPolicy() const;
+                 GeoSceneLayer * layer = 0 ) override );
 
-    virtual QStringList renderPosition() const;
+    QString renderPolicy() const override;
+
+    /**
+     * @brief Returns the rendering position of this float item.
+     * @deprecated The return value of method is ignored. The float item's rendering position
+     *             will always be "FLOAT_ITEM".
+     */
+    MARBLE_DEPRECATED( QStringList renderPosition() const override );
 
     /**
      * @brief Set visibility of the float item
@@ -149,7 +160,7 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
     void hide();
 
  protected:
-    virtual bool eventFilter( QObject *object, QEvent *e );
+    bool eventFilter(QObject *object, QEvent *e) override;
     virtual void contextMenuEvent ( QWidget *w, QContextMenuEvent *e );
     virtual void toolTipEvent( QHelpEvent *e );
     QMenu* contextMenu();

@@ -11,6 +11,7 @@ set( layers_HDRS
 )
 
 set( layers_SRCS
+    layers/FloatItemsLayer.cpp
     layers/FogLayer.cpp
     layers/FpsLayer.cpp
     layers/GeometryLayer.cpp

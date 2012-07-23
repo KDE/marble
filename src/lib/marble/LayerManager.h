@@ -30,9 +30,7 @@ class AbstractDataPluginItem;
 class GeoPainter;
 class ViewportParams;
 class RenderPlugin;
-class AbstractFloatItem;
 class AbstractDataPlugin;
-class MarbleModel;
 class LayerInterface;
 
 /**
@@ -45,7 +43,7 @@ class LayerManager : public QObject
     Q_OBJECT
 
  public:
-    explicit LayerManager( const MarbleModel *model, QObject *parent = nullptr);
+    explicit LayerManager(QObject *parent = nullptr);
     ~LayerManager();
 
     void renderLayers( GeoPainter *painter, ViewportParams *viewport );
@@ -54,16 +52,8 @@ class LayerManager : public QObject
 
     bool showRuntimeTrace() const;
 
-    /**
-     * @brief Returns a list of all RenderPlugins on the layer, this includes float items
-     * @return the list of RenderPlugins
-     */
-    QList<RenderPlugin *>      renderPlugins() const;
-    /**
-     * @brief Returns a list of all FloatItems on the layer
-     * @return the list of the floatItems
-     */
-    QList<AbstractFloatItem *> floatItems()    const;
+    void addRenderPlugin(RenderPlugin *renderPlugin);
+
     /**
      * @brief Returns a list of all DataPlugins on the layer
      * @return the list of DataPlugins
@@ -116,8 +106,6 @@ class LayerManager : public QObject
 
  private:
     Q_PRIVATE_SLOT( d, void updateVisibility( bool, const QString & ) )
-
-    Q_PRIVATE_SLOT( d, void addPlugins() )
 
  private:
     Q_DISABLE_COPY( LayerManager )

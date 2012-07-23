@@ -205,10 +205,10 @@ void AbstractFloatItem::toolTipEvent ( QHelpEvent *e )
 bool AbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport,
              const QString& renderPos, GeoSceneLayer * layer )
 {
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
-
-    paintEvent( painter, viewport );
+    Q_UNUSED(painter)
+    Q_UNUSED(viewport)
+    Q_UNUSED(renderPos)
+    Q_UNUSED(layer)
 
     return true;
 }

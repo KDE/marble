@@ -737,6 +737,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
     Q_PRIVATE_SLOT( d, void updateProperty( const QString &, bool ) )
     Q_PRIVATE_SLOT( d, void setDocument(QString) )
     Q_PRIVATE_SLOT( d, void updateTileLevel() )
+    Q_PRIVATE_SLOT(d, void addPlugins())
 
  private:
     Q_DISABLE_COPY( MarbleMap )

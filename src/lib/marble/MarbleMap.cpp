@@ -24,6 +24,7 @@
 #include <QRegion>
 
 // Marble
+#include "layers/FloatItemsLayer.h"
 #include "layers/FogLayer.h"
 #include "layers/FpsLayer.h"
 #include "layers/GeometryLayer.h"
@@ -58,6 +59,7 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
+#include "PluginManager.h"
 #include "RenderPlugin.h"
 #include "StyleBuilder.h"
 #include "SunLocator.h"
@@ -121,6 +123,8 @@ public:
 
     void updateTileLevel();
 
+    void addPlugins();
+
     MarbleMap *const q;
 
     // The model we are showing.
@@ -134,10 +138,13 @@ public:
     bool             m_showDebugPolygons;
     StyleBuilder     m_styleBuilder;
 
+    QList<RenderPlugin *> m_renderPlugins;
+
     LayerManager     m_layerManager;
     MarbleSplashLayer m_marbleSplashLayer;
     MarbleMap::CustomPaintLayer m_customPaintLayer;
     GeometryLayer            m_geometryLayer;
+    FloatItemsLayer          m_floatItemsLayer;
     FogLayer                 m_fogLayer;
     GroundLayer              m_groundLayer;
     TextureLayer     m_textureLayer;
@@ -156,15 +163,17 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     m_showFrameRate( false ),
     m_showDebugPolygons( false ),
     m_styleBuilder(),
-    m_layerManager( model, parent ),
+    m_layerManager( parent ),
     m_customPaintLayer( parent ),
     m_geometryLayer(model->treeModel(), &m_styleBuilder),
+    m_floatItemsLayer(parent),
     m_textureLayer( model->downloadManager(), model->pluginManager(), model->sunLocator(), model->groundOverlayModel() ),
     m_placemarkLayer( model->placemarkModel(), model->placemarkSelectionModel(), model->clock(), &m_styleBuilder ),
     m_vectorTileLayer( model->downloadManager(), model->pluginManager(), model->treeModel() ),
     m_isLockedToSubSolarPoint( false ),
     m_isSubSolarPointIconVisible( false )
 {
+    m_layerManager.addLayer(&m_floatItemsLayer);
     m_layerManager.addLayer( &m_fogLayer );
     m_layerManager.addLayer( &m_groundLayer );
     m_layerManager.addLayer( &m_geometryLayer );
@@ -192,7 +201,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     QObject::connect( &m_geometryLayer, SIGNAL(repaintNeeded()),
                       parent, SIGNAL(repaintNeeded()));
 
-    /**
+    /*
      * Slot handleHighlight finds all placemarks
      * that contain the clicked point.
      * The placemarks under the clicked position may
@@ -204,6 +213,15 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     QObject::connect( parent, SIGNAL(highlightedPlacemarksChanged(qreal,qreal,GeoDataCoordinates::Unit)),
                       &m_geometryLayer, SLOT(handleHighlight(qreal,qreal,GeoDataCoordinates::Unit)) );
 
+    QObject::connect(&m_floatItemsLayer, SIGNAL(repaintNeeded(QRegion)),
+                     parent,             SIGNAL(repaintNeeded(QRegion)));
+    QObject::connect(&m_floatItemsLayer, SIGNAL(renderPluginInitialized(RenderPlugin*)),
+                     parent,             SIGNAL(renderPluginInitialized(RenderPlugin*)));
+    QObject::connect(&m_floatItemsLayer, SIGNAL(visibilityChanged(QString,bool)),
+                     parent,             SLOT(setPropertyValue(QString,bool)));
+    QObject::connect(&m_floatItemsLayer, SIGNAL(pluginSettingsChanged()),
+                     parent,             SIGNAL(pluginSettingsChanged()));
+
     QObject::connect( &m_textureLayer, SIGNAL(tileLevelChanged(int)),
                       parent, SLOT(updateTileLevel()) );
     QObject::connect( &m_vectorTileLayer, SIGNAL(tileLevelChanged(int)),
@@ -213,6 +231,10 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
 
     QObject::connect( parent, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
                       parent, SIGNAL(repaintNeeded()) );
+
+    addPlugins();
+    QObject::connect(model->pluginManager(), SIGNAL(renderPluginsChanged()),
+                     parent, SLOT(addPlugins()));
 }
 
 void MarbleMapPrivate::updateProperty( const QString &name, bool show )
@@ -241,7 +263,7 @@ void MarbleMapPrivate::updateProperty( const QString &name, bool show )
         m_textureLayer.setShowRelief( show );
     }
 
-    foreach( RenderPlugin *renderPlugin, m_layerManager.renderPlugins() ) {
+    foreach(RenderPlugin *renderPlugin, m_renderPlugins) {
         if ( name == renderPlugin->nameId() ) {
             if ( renderPlugin->visible() == show ) {
                 break;
@@ -250,6 +272,34 @@ void MarbleMapPrivate::updateProperty( const QString &name, bool show )
             renderPlugin->setVisible( show );
 
             break;
+        }
+    }
+}
+
+void MarbleMapPrivate::addPlugins()
+{
+    foreach (const RenderPlugin *factory, m_model->pluginManager()->renderPlugins()) {
+        bool alreadyCreated = false;
+        foreach(const RenderPlugin *existing, m_renderPlugins) {
+            if (existing->nameId() == factory->nameId()) {
+                alreadyCreated = true;
+                break;
+            }
+        }
+
+        if (alreadyCreated) {
+            continue;
+        }
+
+        RenderPlugin *const renderPlugin = factory->newInstance(m_model);
+        Q_ASSERT(renderPlugin && "Plugin must not return null when requesting a new instance.");
+        m_renderPlugins << renderPlugin;
+
+        if (AbstractFloatItem *const floatItem = qobject_cast<AbstractFloatItem *>(renderPlugin)) {
+            m_floatItemsLayer.addFloatItem(floatItem);
+        }
+        else {
+            m_layerManager.addRenderPlugin(renderPlugin);
         }
     }
 }
@@ -275,10 +325,12 @@ MarbleMap::~MarbleMap()
 
     d->m_layerManager.removeLayer( &d->m_customPaintLayer );
     d->m_layerManager.removeLayer( &d->m_geometryLayer );
+    d->m_layerManager.removeLayer(&d->m_floatItemsLayer);
     d->m_layerManager.removeLayer( &d->m_fogLayer );
     d->m_layerManager.removeLayer( &d->m_placemarkLayer );
     d->m_layerManager.removeLayer( &d->m_textureLayer );
     d->m_layerManager.removeLayer( &d->m_groundLayer );
+    qDeleteAll(d->m_renderPlugins);
     delete d;
 
     delete model;  // delete the model after private data
@@ -990,7 +1042,7 @@ void MarbleMapPrivate::updateMapTheme()
     m_styleBuilder.setDefaultLabelColor(m_model->mapTheme()->map()->labelColor());
     m_placemarkLayer.requestStyleReset();
 
-    foreach( RenderPlugin *renderPlugin, m_layerManager.renderPlugins() ) {
+    foreach (RenderPlugin *renderPlugin, m_renderPlugins) {
         bool propertyAvailable = false;
         m_model->mapTheme()->settings()->propertyAvailable( renderPlugin->nameId(), propertyAvailable );
         bool propertyValue = false;
@@ -1257,12 +1309,12 @@ void MarbleMap::setDefaultFont( const QFont& font )
 
 QList<RenderPlugin *> MarbleMap::renderPlugins() const
 {
-    return d->m_layerManager.renderPlugins();
+    return d->m_renderPlugins;
 }
 
 QList<AbstractFloatItem *> MarbleMap::floatItems() const
 {
-    return d->m_layerManager.floatItems();
+    return d->m_floatItemsLayer.floatItems();
 }
 
 AbstractFloatItem * MarbleMap::floatItem( const QString &nameId ) const

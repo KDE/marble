@@ -20,8 +20,6 @@
 #include "AbstractDataPluginItem.h"
 #include "AbstractFloatItem.h"
 #include "GeoPainter.h"
-#include "MarbleModel.h"
-#include "PluginManager.h"
 #include "RenderPlugin.h"
 #include "LayerInterface.h"
 #include "RenderState.h"
@@ -34,39 +32,33 @@ namespace Marble
 class Q_DECL_HIDDEN LayerManager::Private
 {
  public:
-    Private( const MarbleModel* model, LayerManager *parent );
+    Private(LayerManager *parent);
     ~Private();
 
     void updateVisibility( bool visible, const QString &nameId );
 
-    void addPlugins();
-
     LayerManager *const q;
 
     QList<RenderPlugin *> m_renderPlugins;
-    QList<AbstractFloatItem *> m_floatItems;
     QList<AbstractDataPlugin *> m_dataPlugins;
     QList<LayerInterface *> m_internalLayers;
-    const MarbleModel* m_model;
-
-    bool m_showBackground;
 
     RenderState m_renderState;
+
+    bool m_showBackground;
     bool m_showRuntimeTrace;
 };
 
-LayerManager::Private::Private( const MarbleModel* model, LayerManager *parent )
-    : q( parent ),
-      m_renderPlugins(),
-      m_model( model ),
-      m_showBackground( true ),
-      m_showRuntimeTrace( false )
+LayerManager::Private::Private(LayerManager *parent) :
+    q(parent),
+    m_renderPlugins(),
+    m_showBackground(true),
+    m_showRuntimeTrace(false)
 {
 }
 
 LayerManager::Private::~Private()
 {
-    qDeleteAll( m_renderPlugins );
 }
 
 void LayerManager::Private::updateVisibility( bool visible, const QString &nameId )
@@ -75,12 +67,10 @@ void LayerManager::Private::updateVisibility( bool visible, const QString &nameI
 }
 
 
-LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
-    : QObject( parent ),
-      d( new Private( model, this ) )
+LayerManager::LayerManager(QObject *parent) :
+    QObject(parent),
+    d(new Private(this))
 {
-    d->addPlugins();
-    connect( model->pluginManager(), SIGNAL(renderPluginsChanged()), this, SLOT(addPlugins()) );
 }
 
 LayerManager::~LayerManager()
@@ -98,14 +88,22 @@ bool LayerManager::showRuntimeTrace() const
     return d->m_showRuntimeTrace;
 }
 
-QList<RenderPlugin *> LayerManager::renderPlugins() const
+void LayerManager::addRenderPlugin(RenderPlugin *renderPlugin)
 {
-    return d->m_renderPlugins;
-}
+    d->m_renderPlugins.append(renderPlugin);
 
-QList<AbstractFloatItem *> LayerManager::floatItems() const
-{
-    return d->m_floatItems;
+    QObject::connect(renderPlugin, SIGNAL(settingsChanged(QString)),
+                     this, SIGNAL(pluginSettingsChanged()));
+    QObject::connect(renderPlugin, SIGNAL(repaintNeeded(QRegion)),
+                     this, SIGNAL(repaintNeeded(QRegion)));
+    QObject::connect(renderPlugin, SIGNAL(visibilityChanged(bool,QString)),
+                     this, SLOT(updateVisibility(bool,QString)));
+
+    // get data plugins
+    AbstractDataPlugin *const dataPlugin = qobject_cast<AbstractDataPlugin *>(renderPlugin);
+    if(dataPlugin) {
+        d->m_dataPlugins.append(dataPlugin);
+    }
 }
 
 QList<AbstractDataPlugin *> LayerManager::dataPlugins() const
@@ -198,46 +196,6 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
             ++i;
         }
         painter->restore();
-    }
-}
-
-void LayerManager::Private::addPlugins()
-{
-    foreach ( const auto *factory, m_model->pluginManager()->renderPlugins() ) {
-        bool alreadyCreated = false;
-        foreach( const auto* existing, m_renderPlugins ) {
-            if ( existing->nameId() == factory->nameId() ) {
-                alreadyCreated = true;
-                break;
-            }
-        }
-
-        if ( alreadyCreated ) {
-            continue;
-        }
-
-        RenderPlugin *const renderPlugin = factory->newInstance( m_model );
-        Q_ASSERT( renderPlugin && "Plugin returned null when requesting a new instance." );
-        m_renderPlugins.append( renderPlugin );
-
-        QObject::connect( renderPlugin, SIGNAL(settingsChanged(QString)),
-                 q, SIGNAL(pluginSettingsChanged()) );
-        QObject::connect( renderPlugin, SIGNAL(repaintNeeded(QRegion)),
-                 q, SIGNAL(repaintNeeded(QRegion)) );
-        QObject::connect( renderPlugin, SIGNAL(visibilityChanged(bool,QString)),
-                 q, SLOT(updateVisibility(bool,QString)) );
-
-        // get float items ...
-        AbstractFloatItem * const floatItem =
-            qobject_cast<AbstractFloatItem *>( renderPlugin );
-        if ( floatItem )
-            m_floatItems.append( floatItem );
-
-        // ... and data plugins
-        AbstractDataPlugin * const dataPlugin =
-            qobject_cast<AbstractDataPlugin *>( renderPlugin );
-        if( dataPlugin )
-            m_dataPlugins.append( dataPlugin );
     }
 }
 
