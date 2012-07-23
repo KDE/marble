@@ -357,6 +357,7 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const Viewpor
 
 QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParams *viewport )
 {
+    m_runtimeTrace.clear();
     if ( !m_showPlaces && !m_showCities && !m_showTerrain && !m_showOtherPlaces &&
          !m_showLandingSites && !m_showCraters && !m_showMaria )
         return QVector<VisiblePlacemark *>();
@@ -514,9 +515,14 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         }
     }
 
+    m_runtimeTrace = QString("Visible: %1 Drawn: %2").arg( rowCount ).arg( m_paintOrder.size() );
     return m_paintOrder;
 }
 
+QString PlacemarkLayout::runtimeTrace() const
+{
+    return m_runtimeTrace;
+}
 
 bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal x, qreal y, bool selected )
 {

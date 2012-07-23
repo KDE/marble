@@ -106,6 +106,8 @@ class LayerManager : public QObject
  public Q_SLOTS:
     void setShowBackground( bool show );
 
+    void setShowRuntimeTrace( bool show );
+
     void setVisible( const QString &nameId, bool visible );
 
  private:

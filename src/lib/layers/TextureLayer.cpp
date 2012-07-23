@@ -64,6 +64,7 @@ public:
     QVector<const GeoSceneTexture *> m_textures;
     GeoSceneGroup *m_textureLayerSettings;
 
+    QString m_runtimeTrace;
     // For scheduling repaints
     QTimer           m_repaintTimer;
 };
@@ -235,8 +236,13 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
     d->m_texmapper->mapTexture( painter, viewport, dirtyRect, d->m_texcolorizer );
-
+    d->m_runtimeTrace = QString("Cache: %1 ").arg(d->m_pixmapCache.size());
     return true;
+}
+
+QString TextureLayer::runtimeTrace() const
+{
+    return d->m_runtimeTrace;
 }
 
 void TextureLayer::setShowRelief( bool show )

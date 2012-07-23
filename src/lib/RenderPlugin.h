@@ -126,6 +126,8 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      */
     virtual RenderType renderType() const;
 
+    virtual QString runtimeTrace() const;
+
  public Q_SLOTS:
     void    setEnabled( bool enabled );
     void    setVisible( bool visible );

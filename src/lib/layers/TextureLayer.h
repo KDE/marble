@@ -67,10 +67,12 @@ class TextureLayer : public QObject, public LayerInterface
     int preferredRadiusCeil( int radius ) const;
     int preferredRadiusFloor( int radius ) const;
 
- public Q_SLOTS:
-    bool render( GeoPainter *painter, ViewportParams *viewport,
+    virtual QString runtimeTrace() const;
+
+    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
 
+public Q_SLOTS:
     void setShowRelief( bool show );
 
     void setShowSunShading( bool show );

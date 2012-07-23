@@ -66,6 +66,8 @@ class PlacemarkLayer : public QObject, public LayerInterface
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
 
+    virtual QString runtimeTrace() const;
+
     /**
      * Returns a list of model indexes that are at position @p pos.
      */

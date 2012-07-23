@@ -879,6 +879,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setShowTileId( bool visible );
 
     /**
+     * @brief Set whether the runtime tracing for layers gets shown
+     * @param visible visibility of the runtime tracing
+     */
+    void setShowRuntimeTrace( bool visible );
+
+    /**
      * @brief Set the map quality for the specified view context.
      *
      * @param quality map quality for the specified view context

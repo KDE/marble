@@ -174,6 +174,11 @@ RenderPlugin::RenderType RenderPlugin::renderType() const
     return Unknown;
 }
 
+QString RenderPlugin::runtimeTrace() const
+{
+    return name();
+}
+
 bool RenderPlugin::eventFilter( QObject *, QEvent * )
 {
     return false;

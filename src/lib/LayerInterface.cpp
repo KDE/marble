@@ -24,5 +24,9 @@ qreal LayerInterface::zValue() const
     return 0.0;
 }
 
+QString LayerInterface::runtimeTrace() const
+{
+    return QString();
+}
 
 } // namespace Marble
