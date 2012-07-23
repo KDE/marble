@@ -36,6 +36,7 @@
 #include "layers/FogLayer.h"
 #include "layers/FpsLayer.h"
 #include "layers/GeometryLayer.h"
+#include "layers/GroundLayer.h"
 #include "layers/MarbleSplashLayer.h"
 #include "layers/PlacemarkLayer.h"
 #include "layers/TextureLayer.h"
@@ -130,6 +131,7 @@ class MarbleMapPrivate
     GeometryLayer            m_geometryLayer;
     AtmosphereLayer          m_atmosphereLayer;
     FogLayer                 m_fogLayer;
+    GroundLayer              m_groundLayer;
     VectorMapBaseLayer       m_vectorMapBaseLayer;
     VectorMapLayer   m_vectorMapLayer;
     TextureLayer     m_textureLayer;
@@ -151,6 +153,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
           m_placemarkLayer( model->placemarkModel(), model->placemarkSelectionModel(), model->clock() )
 {
     m_layerManager.addLayer( &m_fogLayer );
+    m_layerManager.addLayer( &m_groundLayer );
     m_layerManager.addLayer( &m_geometryLayer );
     m_layerManager.addLayer( &m_placemarkLayer );
     m_layerManager.addLayer( &m_customPaintLayer );
@@ -265,6 +268,7 @@ MarbleMap::~MarbleMap()
     d->m_layerManager.removeLayer( &d->m_placemarkLayer );
     d->m_layerManager.removeLayer( &d->m_textureLayer );
     d->m_layerManager.removeLayer( &d->m_atmosphereLayer );
+    d->m_layerManager.removeLayer( &d->m_groundLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
     delete d;
@@ -734,11 +738,17 @@ void MarbleMapPrivate::updateMapTheme()
     m_layerManager.removeLayer( &m_textureLayer );
     m_layerManager.removeLayer( &m_vectorMapLayer );
     m_layerManager.removeLayer( &m_vectorMapBaseLayer );
+    m_layerManager.removeLayer( &m_groundLayer );
 
     QObject::connect( m_model->mapTheme()->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
                       q, SLOT( updateProperty( const QString &, bool ) ) );
 
     q->setPropertyValue( "clouds_data", m_viewParams.showClouds() );
+
+    if ( !m_model->mapTheme()->map()->hasTextureLayers() ) {
+        m_groundLayer.setColor( m_model->mapTheme()->map()->backgroundColor() );
+        m_layerManager.addLayer( &m_groundLayer );
+    }
 
     // Check whether there is a vector layer available:
     if ( m_model->mapTheme()->map()->hasVectorLayers() ) {
