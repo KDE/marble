@@ -124,6 +124,7 @@ int main(int argc, char *argv[])
         qWarning() << "debug options:";
         qWarning() << "  --debug-info ............... write (more) debugging information to the console";
         qWarning() << "  --fps ...................... Show the paint performance (paint rate) in the top left corner";
+        qWarning() << "  --runtimeTrace.............. Show the time spent and other debug info of each layer";
         qWarning() << "  --tile-id................... Write the identifier of texture tiles on top of them";
         qWarning() << "  --timedemo ................. Measure the paint performance while moving the map and quit";
         qWarning();
@@ -248,6 +249,9 @@ int main(int argc, char *argv[])
         else if ( arg == "--tile-id" )
         {
 	    window->marbleControl()->marbleWidget()->setShowTileId(true);
+        }
+        else if( arg == "--runtimeTrace" ) {
+            window->marbleControl()->marbleWidget()->setShowRuntimeTrace( true );
         }
         else if ( i != dataPathIndex && QFile::exists( arg ) )
             ( window->marbleControl() )->addGeoDataFile( arg );

@@ -19,6 +19,7 @@
 #include "AbstractDataPlugin.h"
 #include "AbstractDataPluginItem.h"
 #include "AbstractFloatItem.h"
+#include "GeoPainter.h"
 #include "MarbleModel.h"
 #include "PluginManager.h"
 #include "RenderPlugin.h"
@@ -53,12 +54,16 @@ class LayerManager::Private
     QList<LayerInterface *> m_internalLayers;
 
     bool m_showBackground;
+
+    bool m_showRuntimeTrace;
+    QStringList m_traceList;
 };
 
 LayerManager::Private::Private( LayerManager *parent )
     : q( parent ),
       m_renderPlugins(),
-      m_showBackground( true )
+      m_showBackground( true ),
+      m_showRuntimeTrace( false )
 {
 }
 
@@ -141,6 +146,7 @@ QList<AbstractDataPluginItem *> LayerManager::whichItemAt( const QPoint& curpos 
 void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
 {
     QStringList renderPositions;
+    d->m_traceList.clear();
 
     if ( d->m_showBackground ) {
         renderPositions << "STARS" << "BEHIND_TARGET";
@@ -176,15 +182,41 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
         qSort( layers.begin(), layers.end(), zValueLessThan );
 
         // render the layers of the current renderPosition
+        QTime timer;
         foreach( LayerInterface *layer, layers ) {
+            timer.start();
             layer->render( painter, viewport, renderPosition, 0 );
+            d->m_traceList.append( QString("%2 ms %3").arg( timer.elapsed(),3 ).arg(layer->runtimeTrace()) );
         }
+    }
+
+
+    if ( d->m_showRuntimeTrace ) {
+        painter->save();
+        painter->setBackgroundMode( Qt::OpaqueMode );
+        painter->setBackground( Qt::gray );
+        painter->setFont( QFont( "Sans Serif", 10, QFont::Bold ) );
+
+        int i=0;
+        foreach ( QString text, d->m_traceList ) {
+            painter->setPen( Qt::black );
+            painter->drawText( QPoint(10,40+15*i), text );
+            painter->setPen( Qt::white );
+            painter->drawText( QPoint(9,39+15*i), text );
+            ++i;
+        }
+        painter->restore();
     }
 }
 
 void LayerManager::setShowBackground( bool show )
 {
     d->m_showBackground = show;
+}
+
+void LayerManager::setShowRuntimeTrace( bool show )
+{
+    d->m_showRuntimeTrace = show;
 }
 
 void LayerManager::setVisible( const QString &nameId, bool visible )

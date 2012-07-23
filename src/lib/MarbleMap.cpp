@@ -1070,6 +1070,11 @@ void MarbleMap::setShowFrameRate( bool visible )
     d->m_showFrameRate = visible;
 }
 
+void MarbleMap::setShowRuntimeTrace( bool visible )
+{
+    d->m_layerManager.setShowRuntimeTrace( visible );
+}
+
 void MarbleMap::setShowBackground( bool visible )
 {
     d->m_layerManager.setShowBackground( visible );

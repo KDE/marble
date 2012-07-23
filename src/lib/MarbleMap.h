@@ -598,6 +598,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void setShowFrameRate( bool visible );
 
+    void setShowRuntimeTrace( bool visible );
+
     void setShowBackground( bool visible );
 
      /**

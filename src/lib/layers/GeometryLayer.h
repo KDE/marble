@@ -37,6 +37,8 @@ public:
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
                          const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
     
+    virtual QString runtimeTrace() const;
+
     static int s_defaultZValues[GeoDataFeature::LastIndex];
     static int s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
     static bool s_defaultValuesInitialized;

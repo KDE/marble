@@ -61,6 +61,7 @@ public:
 
     const QAbstractItemModel *const m_model;
     GeoGraphicsScene m_scene;
+    QString m_runtimeTrace;
 
 };
 
@@ -213,17 +214,27 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     int maxZoomLevel = qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 );
 
     QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox(), maxZoomLevel );
+    int painted = 0;
     foreach( GeoGraphicsItem* item, items )
     {
         if ( item->visible()
              && item->latLonAltBox().intersects( viewport->viewLatLonAltBox() ) ) {
             item->paint( painter, viewport, renderPos, layer );
+            ++painted;
         }
     }
 
     painter->restore();
-
+    d->m_runtimeTrace = QString( "Items: %1 Drawn: %2 Zoom: %3")
+                .arg( items.size() )
+                .arg( painted )
+                .arg( maxZoomLevel );
     return true;
+}
+
+QString GeometryLayer::runtimeTrace() const
+{
+    return d->m_runtimeTrace;
 }
 
 void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )

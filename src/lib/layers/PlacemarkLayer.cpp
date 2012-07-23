@@ -100,6 +100,11 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
     return true;
 }
 
+QString PlacemarkLayer::runtimeTrace() const
+{
+    return m_layout.runtimeTrace();
+}
+
 QVector<const GeoDataPlacemark *> PlacemarkLayer::whichPlacemarkAt( const QPoint &pos )
 {
     return m_layout.whichPlacemarkAt( pos );
