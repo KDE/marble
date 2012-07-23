@@ -280,10 +280,8 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
 
             // look for documents
             foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
-                if( dataset->fileFormat() == "KML" ) {
-                    QString containername = reinterpret_cast<GeoSceneXmlDataSource*>( dataset )->filename();
-                    loadedContainers <<  containername;
-                }
+                QString containername = reinterpret_cast<GeoSceneXmlDataSource*>( dataset )->filename();
+                loadedContainers <<  containername;
             }
         }
     }
@@ -326,11 +324,9 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
 
         // look for documents
         foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
-            if( dataset->fileFormat() == "KML" ) {
-                QString containername = reinterpret_cast<GeoSceneXmlDataSource*>( dataset )->filename();
-                if ( !loadedContainers.removeOne( containername ) ) {
-                    loadList << containername;
-                }
+            QString containername = reinterpret_cast<GeoSceneXmlDataSource*>( dataset )->filename();
+            if ( !loadedContainers.removeOne( containername ) ) {
+                loadList << containername;
             }
         }
     }
