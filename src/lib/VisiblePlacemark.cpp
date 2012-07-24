@@ -84,9 +84,6 @@ void VisiblePlacemark::setLabelRect( const QRectF& labelRect )
 
 void VisiblePlacemark::drawLabelPixmap()
 {
-
-    QPainter labelPainter;
-
     const GeoDataStyle* style = m_placemark->style();
 
     QString labelName = m_placemark->name();
@@ -123,18 +120,15 @@ void VisiblePlacemark::drawLabelPixmap()
         m_labelPixmap = QPixmap( QSize( textWidth, textHeight ) );
         m_labelPixmap.fill( Qt::transparent );
 
-        labelPainter.begin( &m_labelPixmap );
+        QPainter labelPainter( &m_labelPixmap );
 
         drawLabelText( labelPainter, labelName, labelFont, labelStyle, labelColor );
-
-        labelPainter.end();
     } else {
-
         QImage image( QSize( textWidth, textHeight ),
                       QImage::Format_ARGB32_Premultiplied );
         image.fill( 0 );
 
-        labelPainter.begin( &image );
+        QPainter labelPainter( &image );
 
         drawLabelText( labelPainter, labelName, labelFont, labelStyle, labelColor );
 
