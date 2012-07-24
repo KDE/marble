@@ -23,8 +23,8 @@ Page {
 
     tools: ToolBarLayout {
         MarbleToolIcon {
-            iconSource: main.icon( "actions/go-previous-view", 48 );
-            onClicked: pageStack.pop()
+            iconSource: main.icon( "actions/go-home", 48 );
+            onClicked: main.showNavigation()
         }
         MarbleToolIcon {
             iconSource: main.icon( "places/user-identity", 48 );
@@ -170,8 +170,8 @@ Page {
         }
 
         Component.onDestruction: {
+            marbleWidget.setDataPluginDelegate( "weather", 0 )
             if ( marbleWidget.parent === mapContainer ) {
-                marbleWidget.setDataPluginDelegate( "weather", 0 )
                 marbleWidget.parent = null
                 marbleWidget.visible = false
             }

@@ -15,141 +15,148 @@ import org.kde.edu.marble 0.11
  * Page to select activity. This component also contains the model for
  * the activities, which stores all relevant information.
  */
-Page {
+Item {
     id: activityPage
 
     property alias model: activityView.model
+    property bool shown: false
+
+    signal itemSelected
 
     Loader {
         id: lazyLoader
     }
 
-    Rectangle {
-        anchors.fill: parent
-        color: "black"
+    Image {
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.margins: 20
+        source: "qrc:/marble/globe.svg"
+        smooth: true
+        width: 360
+        height: 360
+        opacity: 0.1
+    }
 
+    // Grid view to display images and names of activities.
+    ListView {
+        id: activityView
+        currentIndex: -1
+        //anchors.top: parent.top
+        //anchors.topMargin: 4
+        //anchors.left: parent.left
+        //anchors.right: parent.right
+        //anchors.bottom: changelog.visible ? changelog.top : parent.bottom
+        //anchors.margins: 9
+        //anchors.leftMargin: 2
+        model: activityModel
+        focus: true
+        clip: true
+        spacing: 1
+        width: parent.width
+        height: parent.height
 
-        Image {
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-            anchors.margins: 20
-            source: "qrc:/marble/globe.svg"
-            smooth: true
-            width: 360
-            height: 360
-            opacity: 0.1
-        }
+        delegate:
+            Item {
 
-        // Grid view to display images and names of activities.
-        GridView {
-            id: activityView
-            currentIndex: -1
-            anchors.fill: parent
-            anchors.margins: 9
-            cellWidth: 154
-            cellHeight: 174
-            model: activityModel
-            focus: true
-            clip: true
+            id: delegateItem
+            property bool mouseOver: mouseTracker.containsMouse
 
-            delegate:
-                Item {
-                width: 154
-                height: 184
+            width: activityView.width
+            height: 60
 
-                Column {
-                    anchors.centerIn: parent
+            Rectangle {
+                color: "white"
+                radius: 15
+                anchors.fill: parent
+
+                Row {
+                    anchors.verticalCenter: parent.verticalCenter
                     spacing: 5
                     width: 140
-                    height: 180
+                    height: parent.height
                     smooth: true
+
+                    Item {
+                        width: 2
+                        height: parent.height
+                    }
 
                     Image {
                         id: activityImage
-                        width: 140
-                        height: 140
-                        source: previewLoader.visible ? "qrc:/icons/activity-empty.png" : imagePath
+                        anchors.verticalCenter: parent.verticalCenter
+                        height: 48
+                        width: height
+                        source: imagePath
                         smooth: true
+                    }
 
-                        Loader {
-                            id: previewLoader
-                            anchors.centerIn: parent
-                            visible: status == Loader.Ready && item.isActive
-                            source: previewPath
+                    Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: delegateItem.mouseOver ? "#111111" : "black"
+                        text: name
+                        width: 180
+                        font.bold: true
 
-                            Component.onCompleted: {
-                                if ( source !== "" && marbleWidget === null) {
-                                    lazyLoader.source = "qrc:/MainWidget.qml";
-                                    marbleWidget = lazyLoader.item
-                                }
+                        MouseArea {
+                            id: mouseTracker
+                            anchors.fill: parent
+                            hoverEnabled: true
+                        }
+                    }
+
+                    Loader {
+                        id: previewLoader
+                        anchors.verticalCenter: parent.verticalCenter
+                        height: 48
+                        visible: status == Loader.Ready && item.isActive
+                        source: previewPath
+
+                        Component.onCompleted: {
+                            if ( source !== "" && marbleWidget === null) {
+                                lazyLoader.source = "qrc:/MainWidget.qml";
+                                marbleWidget = lazyLoader.item
                             }
                         }
                     }
-                    Text {
-                        width: parent.width
-                        color: "white"
-                        text: name
-                        font.pointSize: 12
-                        font.bold: true
-                        horizontalAlignment: "AlignHCenter"
-                    }
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: activityPage.openActivity( name, path )
                 }
             }
-        }
 
-        Item {
-            id: buttonRow
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.margins: 10
-            height: infoButton.height
-
-            Row {
-                anchors.horizontalCenter: parent.horizontalCenter
-                spacing: 10
-
-                Button {
-                    id: infoButton
-                    text: "Info";
-                    width: buttonRow.width / 2 - 20
-                    onClicked: pageStack.push( "qrc:/AboutMarblePage.qml" )
-                }
-                Button {
-                    text: "Preferences";
-                    width: buttonRow.width / 2 - 20
-                    onClicked: pageStack.push( "qrc:/PreferencesPage.qml" )
-                }
-            }
-        }
-
-        Label {
-            anchors.bottom: buttonRow.top
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.margins: 30
-            font.pixelSize: 16
-            width: parent.width
-            visible: settings.changelogShown !== project.version
-            color: "white"
-            text: "New in version " + project.changelog.get(0).version + ": " + project.changelog.get(0).summary
-            MarbleTouch { id: project }
             MouseArea {
                 anchors.fill: parent
-                onClicked: pageStack.push( "qrc:/AboutMarblePage.qml" )
+                onClicked: {
+                    activityPage.itemSelected()
+                    activityPage.openActivity( name, path )
+                }
             }
         }
+    }
 
+    ScrollDecorator {
+        flickableItem: activityView
+    }
+
+    Label {
+        id: changelog
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: 10
+        font.pixelSize: 16
+        visible: settings.changelogShown !== project.version
+        color: "white"
+        text: "New in version " + project.changelog.get(0).version + ": " + project.changelog.get(0).summary
+        MarbleTouch { id: project }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: pageStack.push( "qrc:/AboutMarblePage.qml" )
+        }
     }
 
     // Model that stores information about activities.
     ListModel {
         id: activityModel
+        property string configureIcon: main.icon( "actions/configure", 48 );
 
         ListElement {
             name: "Virtual Globe"
@@ -206,6 +213,18 @@ Page {
             path: "qrc:/activities/Explore.qml"
             previewPath: ""
         }
+        ListElement {
+            name: "Info"
+            imagePath: "qrc:/icons/activity-empty.png"
+            path: "qrc:/AboutMarblePage.qml"
+            previewPath: ""
+        }
+        ListElement {
+            name: "Preferences"
+            imagePath: "qrc:/icons/activity-empty.png"
+            path: "qrc:/PreferencesPage.qml"
+            previewPath: ""
+        }
     }
 
     function openActivity( name ) {
@@ -224,7 +243,8 @@ Page {
         }
 
         settings.lastActivity = name
-        pageStack.push( path )
+        pageStack.replace( path, undefined, true )
+        activityPage.shown = false
     }
 
     Timer {

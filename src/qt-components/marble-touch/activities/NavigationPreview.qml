@@ -13,26 +13,26 @@ import org.kde.edu.marble.qtcomponents 0.12
 
 Item {
     id: navigationPreview
-    width: 120
-    height: 120
+    width: childrenRect.width
+    height: 48
 
     property bool isActive: marbleWidget.tracking.hasLastKnownPosition &&
                             marbleWidget.routing.hasRoute &&
                             marbleWidget.navigation.destinationDistance > 0
 
-    Image {
-        anchors.bottom: distanceLabel.top
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.margins: 10
-        source: "qrc:/flag.png"
-        smooth: true
-    }
-
     Label {
         id: distanceLabel
-        anchors.bottom: parent.bottom
-        width: parent.width
-        horizontalAlignment: Text.AlignHCenter
+        anchors.verticalCenter: parent.verticalCenter
         text: (marbleWidget.navigation.destinationDistance / 1000 ).toFixed(1) + " km"
+    }
+
+    Image {
+        id: image
+        anchors.left: distanceLabel.right
+        anchors.verticalCenter: parent.verticalCenter
+        source: "qrc:/flag.png"
+        height: parent.height
+        width: height
+        smooth: true
     }
 }

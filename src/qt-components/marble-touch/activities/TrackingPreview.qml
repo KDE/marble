@@ -13,20 +13,13 @@ import org.kde.edu.marble.qtcomponents 0.12
 
 Item {
     id: trackingPreview
-    width: 120
-    height: 120
+    width: childrenRect.width
+    height: 48
 
     property bool isActive: marbleWidget.tracking.distance > 0
 
     Label {
-        anchors.fill: parent
-        anchors.margins: 10
-        horizontalAlignment: Text.AlignRight
-        verticalAlignment: Text.AlignVCenter
-
-        property string speed: Math.round( marbleWidget.tracking.positionSource.speed ) + " km/h"
-        property string distance: (marbleWidget.tracking.distance / 1000 ).toFixed(1) + " km"
-
-        text: speed + "<br />" + distance
+        anchors.verticalCenter: parent.verticalCenter
+        text: (marbleWidget.tracking.distance / 1000).toFixed(1) + " km"
     }
 }

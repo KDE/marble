@@ -13,16 +13,16 @@ import org.kde.edu.marble 0.11
 import org.kde.edu.marble.qtcomponents 0.12
 
 PageStackWindow {
-    id: main
-
     width: screen.displayWidth
     height: screen.displayHeight
 
-    property Item marbleWidget: null
+    property Item marbleWidget: MainWidget {}
     property bool inPortrait: width < height
     property string components: "harmattan"
 
-    initialPage: activitySelection
+    property alias navigationMenu: navigation
+
+    initialPage: "qrc:/activities/VirtualGlobe.qml"
 
     // Stores the settings of the application.
     MarbleSettings {
@@ -30,14 +30,24 @@ PageStackWindow {
     }
 
     // Displays all available activities and starts them if the user clicks on them.
-    ActivitySelectionView {
-        id: activitySelection
+    Menu {
+        id: navigation
+        content: ActivitySelectionView {
+            id: activitySelection
+            width: pageStack.currentPage.width-50
+            height: 555
+            onItemSelected: navigation.close()
+        }
     }
 
     function resetLastActivity() {
         if ( marbleWidget !== null && pageStack.depth < 2 ) {
             settings.lastActivity = ""
         }
+    }
+
+    function showNavigation() {
+        navigation.open()
     }
 
     function openActivity( activity ) {
@@ -91,6 +101,8 @@ PageStackWindow {
             return "image://theme/icon-m-content-document"
         } else if ( name === "places/favorites" ) {
             return "image://theme/icon-m-toolbar-favorite-mark"
+        } else if ( name === "actions/go-home" ) {
+            return "image://theme/icon-m-toolbar-home"
         }
 
         return name

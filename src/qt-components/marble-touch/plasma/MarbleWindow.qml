@@ -13,15 +13,17 @@ import QtQuick 1.0
 import com.nokia.meego 1.0
 
 Item {
-    id: main
-    
     width: 800
     height: 480
 
     property bool inPortrait: height > width
-    property variant initialPage: activitySelection
-    property Item marbleWidget: null
+    //property variant initialPage: activitySelection
+    property Item marbleWidget: MainWidget {}
     property string components: "plasma"
+
+    property alias navigationMenu: navigation
+
+    property variant initialPage: "qrc:/activities/VirtualGlobe.qml"
 
     Item {
         id: contentArea
@@ -45,21 +47,29 @@ Item {
         }
     }
 
+    Menu {
+        id: navigation
+        content: ActivitySelectionView {
+            id: activitySelection
+            width: 300
+            height: 555
+            onItemSelected: navigation.close()
+        }
+    }
+
     // Stores the settings of the application.
     MarbleSettings {
         id: settings
-    }
-
-    // Displays all available activities and starts them if the user clicks on them.
-    ActivitySelectionView {
-        id: activitySelection
-        tools: Item {} // FIXME: Plasma ToolBar internalToolsChanged() should handle null
     }
 
     function resetLastActivity() {
         if ( marbleWidget !== null && pageStack.depth < 2 ) {
             settings.lastActivity = ""
         }
+    }
+
+    function showNavigation() {
+        navigation.open()
     }
 
     function openActivity( activity ) {
