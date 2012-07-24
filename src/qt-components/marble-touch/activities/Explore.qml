@@ -76,7 +76,7 @@ Page {
             radius: 3
 
             SequentialAnimation {
-                id: appearAnimation
+                id: venueAppearAnimation
                 PauseAnimation { duration: Math.random() * 100 }
                 NumberAnimation {
                     target: venueRectangle
@@ -87,7 +87,7 @@ Page {
             }
             
             Component.onCompleted: {
-                appearAnimation.running = true
+                venueAppearAnimation.running = true
             }
 
             Item {
@@ -180,6 +180,7 @@ Page {
             id: detailIcon
             source: venueDetails.largeIcon
             anchors.top: venueDetails.top
+            anchors.left: detailName.left
             anchors.topMargin: 10
         }
         
@@ -232,18 +233,40 @@ Page {
         ListView {
             id: photoView
             width: exploreActivityPage.horizontal ? venueDetails.width : 64
-            height: exploreActivityPage.horizontal ? 64 : venueDetails.height
+            
+            anchors.top: exploreActivityPage.horizontal ? detailCountry.bottom : venueDetails.top
+            anchors.left: exploreActivityPage.horizontal ? venueDetails.left : venueDetails.horizontalCenter
             anchors.bottom: venueDetails.bottom
             anchors.right:venueDetails.right
+            anchors.margins: 5
             spacing: 2
+            
             model: listModel
-            orientation: exploreActivityPage.horizontal ? ListView.Horizontal : ListView.Vertical 
+            orientation: ListView.Vertical 
             clip: true
+            
             delegate: Image {
-                width: 64; height: 64
+                id: venuePhoto
+                width: venueDetails.width
+                scale: 0.0
                 fillMode: Image.PreserveAspectFit
                 source: url
                 smooth: true
+                             
+                SequentialAnimation {
+                    id: photoAppearAnimation
+                    PauseAnimation { duration: Math.random() * 100 }
+                    NumberAnimation {
+                        target: venuePhoto
+                        property: "scale"
+                        to: 1.0
+                        duration: 150
+                    }
+                }
+                
+                Component.onCompleted: {
+                    photoAppearAnimation.running = true
+                }
             }
         }
         
