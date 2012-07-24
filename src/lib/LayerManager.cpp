@@ -56,7 +56,6 @@ class LayerManager::Private
     bool m_showBackground;
 
     bool m_showRuntimeTrace;
-    QStringList m_traceList;
 };
 
 LayerManager::Private::Private( LayerManager *parent )
@@ -146,7 +145,6 @@ QList<AbstractDataPluginItem *> LayerManager::whichItemAt( const QPoint& curpos 
 void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
 {
     QStringList renderPositions;
-    d->m_traceList.clear();
 
     if ( d->m_showBackground ) {
         renderPositions << "STARS" << "BEHIND_TARGET";
@@ -155,6 +153,7 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
     renderPositions << "SURFACE" << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
 
+    QStringList traceList;
     foreach( const QString& renderPosition, renderPositions ) {
         QList<LayerInterface*> layers;
 
@@ -186,7 +185,7 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
         foreach( LayerInterface *layer, layers ) {
             timer.start();
             layer->render( painter, viewport, renderPosition, 0 );
-            d->m_traceList.append( QString("%2 ms %3").arg( timer.elapsed(),3 ).arg(layer->runtimeTrace()) );
+            traceList.append( QString("%2 ms %3").arg( timer.elapsed(),3 ).arg( layer->runtimeTrace() ) );
         }
     }
 
@@ -198,7 +197,7 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
         painter->setFont( QFont( "Sans Serif", 10, QFont::Bold ) );
 
         int i=0;
-        foreach ( QString text, d->m_traceList ) {
+        foreach ( const QString &text, traceList ) {
             painter->setPen( Qt::black );
             painter->drawText( QPoint(10,40+15*i), text );
             painter->setPen( Qt::white );
