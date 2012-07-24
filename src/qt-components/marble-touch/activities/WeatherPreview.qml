@@ -13,13 +13,12 @@ import org.kde.edu.marble.qtcomponents 0.12
 
 ListView {
     id: weatherPreview
-    width: 120
-    height: 120
+    height: 48
+    width: 140
 
     property bool isActive: count > 0
 
     clip: true
-    orientation: ListView.Horizontal
     keyNavigationWraps: true
 
     model: marbleWidget.renderPlugin("weather").favoritesModel
@@ -27,35 +26,32 @@ ListView {
         width: weatherPreview.width
         height: weatherPreview.height
 
+        Text {
+            id: temperatureLabel
+            font.pixelSize: 24
+            text: temperature + " °C"
+        }
+
         Image {
             id: icon
-            anchors.centerIn: parent
-            width: 92
+            anchors.left: temperatureLabel.right
+            anchors.leftMargin: 10
+            width: 32
+            height: 32
             fillMode: Image.PreserveAspectFit
             source: image !== "" ? ("file://" + image) : ""
         }
 
         Text {
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            font.bold: true
-            font.pixelSize: 24
-            text: temperature + " °C"
-        }
-
-        Text {
-            anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
-            horizontalAlignment: Text.AlignHCenter
-            wrapMode: Text.Wrap
-            font.bold: true
+            font.pixelSize: 14
             text: station
-            width: 120
+            width: weatherPreview.width
         }
     }
 
     Timer {
-        interval: 20 * 1000
+        interval: 2 * 1000
         repeat: true
         running: true
         onTriggered: parent.incrementCurrentIndex()

@@ -215,7 +215,7 @@ Item {
         // plugin of marble. Per default the first one is used.
         // The value is the nameId() of an installed Marble PositionProviderPlugin,
         // e.g. Gpsd
-        //source: "QtMobilityPositionProviderPlugin"
+        source: "RouteSimulationPositionProviderPlugin"
 
         // This starts/stops gps tracking.
         active: settings.gpsTracking

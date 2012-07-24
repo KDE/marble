@@ -19,8 +19,8 @@ Page {
     
     tools: ToolBarLayout {
         MarbleToolIcon {
-            iconSource: main.icon( "actions/go-previous-view", 48 );
-            onClicked: pageStack.pop()
+            iconSource: main.icon( "actions/go-home", 48 );
+            onClicked: main.navigationMenu.open()
         }
     }
     
@@ -47,8 +47,8 @@ Page {
         }
 
         Component.onDestruction: {
+            marbleWidget.setDataPluginDelegate( "foursquare", 0 )
             if ( marbleWidget.parent === mapContainer ) {
-                marbleWidget.setDataPluginDelegate( "foursquare", 0 )
                 marbleWidget.parent = null
                 marbleWidget.visible = false
             }
