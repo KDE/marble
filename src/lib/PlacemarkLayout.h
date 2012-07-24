@@ -139,7 +139,7 @@ class PlacemarkLayout : public QObject
     QMap<TileId, QList<const GeoDataPlacemark*> > m_placemarkCache;
 
     QVector< int > m_weightfilter;
-    QVector< GeoDataFeature::GeoDataVisualCategory > m_acceptedVisualCategories;
+    const QVector< GeoDataFeature::GeoDataVisualCategory > m_acceptedVisualCategories;
 
     // earth
     bool m_showPlaces;
