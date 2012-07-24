@@ -549,7 +549,9 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
     // Finally save the label position on the map.
     QPointF hotSpot = style->iconStyle().hotSpot();
 
-    mark->setSelected( selected );
+    if( mark->selected() != selected ) {
+        mark->setSelected( selected );
+    }
     mark->setSymbolPosition( QPoint( x - qRound( hotSpot.x() ),
                                      y - qRound( hotSpot.y() ) ) );
     mark->setLabelRect( labelRect );
