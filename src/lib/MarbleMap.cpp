@@ -730,6 +730,7 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 void MarbleMapPrivate::updateMapTheme()
 {
     m_layerManager.removeLayer( &m_textureLayer );
+    m_layerManager.removeLayer( &m_vectorTileLayer );
     m_layerManager.removeLayer( &m_vectorMapLayer );
     m_layerManager.removeLayer( &m_vectorMapBaseLayer );
 
@@ -797,8 +798,9 @@ void MarbleMapPrivate::updateMapTheme()
         GeoSceneGroup *const vectorTileLayerSettings = settings ? settings->group( "VectorTile Layers" ) : 0;
 
         bool textureLayersOk = true;
+        bool vectorTileLayersOk = true;
 
-        // texture will contain texture layers and
+        // textures will contain texture layers and
         // vectorTiles vectortile layers
         QVector<const GeoSceneTiled *> textures;
         QVector<const GeoSceneTiled *> vectorTiles;
@@ -890,7 +892,7 @@ void MarbleMapPrivate::updateMapTheme()
                         vectorTiles.append( vectorTile );
                     } else {
                         qWarning() << "Base tiles for" << sourceDir << "not available. Skipping all texture layers.";
-                        textureLayersOk = false;
+                        vectorTileLayersOk = false;
                     }
                 }
             }
@@ -926,14 +928,15 @@ void MarbleMapPrivate::updateMapTheme()
         m_vectorTileLayer.setupTextureMapper();
         m_vectorTileLayer.setShowRelief( q->showRelief() );
 
-        if ( textureLayersOk ) {
+        if ( textureLayersOk )
             m_layerManager.addLayer( &m_textureLayer );
+        if ( vectorTileLayersOk )
             m_layerManager.addLayer( &m_vectorTileLayer );
-        }
     }
-//    else {
-//        m_textureLayer.setMapTheme( QVector<const GeoSceneTexture *>(), 0, "", "" );
-//    }
+    else {
+        m_textureLayer.setMapTheme( QVector<const GeoSceneTiled *>(), 0, "", "" );
+        m_vectorTileLayer.setMapTheme( QVector<const GeoSceneTiled *>(), 0, "", "" );
+    }
 
     // earth
     bool value;

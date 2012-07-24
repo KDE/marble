@@ -35,6 +35,7 @@ VectorTile::VectorTile(TileId const & tileId, GeoDataDocument * vectordata, QStr
 
 VectorTile::~VectorTile()
 {
+    delete m_vectordata;
 }
 
 const char* VectorTile::nodeType() const

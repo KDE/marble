@@ -109,7 +109,6 @@ CacheDocument::~CacheDocument()
 {
     Q_ASSERT( owner );
     owner->removeDocument( document );
-    // delete document;
 }
 
 VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
@@ -202,6 +201,11 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
 
 VectorTileLayer::~VectorTileLayer()
 {
+    foreach( GeoDataLatLonAltBox box , d->m_documents.keys() ){
+            CacheDocument * document = d->m_documents.take( box );
+            d->m_documents.remove( box );
+            delete document;
+        }
     d->m_documents.clear();
     //d->m_tileIds.clear();
     delete d->m_texmapper;
@@ -287,8 +291,9 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     else{
         foreach( GeoDataLatLonAltBox box , d->m_documents.keys() )
             if ( !box.intersects( viewport->viewLatLonAltBox() ) ){
-
+                CacheDocument * document = d->m_documents.take( box );
                 d->m_documents.remove( box );
+                delete document;
             }
     }
 
