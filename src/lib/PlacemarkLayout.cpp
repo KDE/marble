@@ -38,46 +38,14 @@
 #include "VisiblePlacemark.h"
 #include "MathHelper.h"
 
-using namespace Marble;
-
-PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
-                                  QItemSelectionModel *selectionModel,
-                                  MarbleClock *clock,
-                                  QObject* parent )
-    : QObject( parent ),
-      m_selectionModel( selectionModel ),
-      m_clock( clock ),
-      m_showPlaces( false ),
-      m_showCities( false ),
-      m_showTerrain( false ),
-      m_showOtherPlaces( false ),
-      m_showLandingSites( false ),
-      m_showCraters( false ),
-      m_showMaria( false ),
-      m_maxLabelHeight( 0 ),
-      m_styleResetRequested( true )
+namespace Marble
 {
-    m_placemarkModel.setSourceModel( placemarkModel );
-    m_placemarkModel.setDynamicSortFilter( true );
-    m_placemarkModel.setSortRole( MarblePlacemarkModel::PopularityIndexRole );
-    m_placemarkModel.sort( 0, Qt::AscendingOrder );
 
-    connect( m_selectionModel,  SIGNAL( selectionChanged( QItemSelection,
-                                                           QItemSelection) ),
-             this,               SLOT( requestStyleReset() ) );
+QVector<GeoDataFeature::GeoDataVisualCategory> sortedVisualCategories()
+{
+    QVector<GeoDataFeature::GeoDataVisualCategory> visualCategories;
 
-    connect( &m_placemarkModel, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
-             this, SLOT( setCacheData() ) );
-    connect( &m_placemarkModel, SIGNAL( rowsInserted(const QModelIndex&, int, int) ),
-             this, SLOT( setCacheData() ) );
-    connect( &m_placemarkModel, SIGNAL( rowsRemoved(const QModelIndex&, int, int) ),
-             this, SLOT( setCacheData() ) );
-    connect( &m_placemarkModel, SIGNAL( modelReset() ),
-             this, SLOT( setCacheData() ) );
-
-
-        
-    m_acceptedVisualCategories
+    visualCategories
         << GeoDataFeature::SmallCity
         << GeoDataFeature::SmallCountyCapital  
         << GeoDataFeature::SmallStateCapital   
@@ -159,8 +127,47 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
         << GeoDataFeature::ReligionShinto
         << GeoDataFeature::ReligionSikh;
 
-    qSort( m_acceptedVisualCategories.begin(), m_acceptedVisualCategories.end() );
+    qSort( visualCategories );
 
+    return visualCategories;
+}
+
+
+PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
+                                  QItemSelectionModel *selectionModel,
+                                  MarbleClock *clock,
+                                  QObject* parent )
+    : QObject( parent ),
+      m_selectionModel( selectionModel ),
+      m_clock( clock ),
+      m_acceptedVisualCategories( sortedVisualCategories() ),
+      m_showPlaces( false ),
+      m_showCities( false ),
+      m_showTerrain( false ),
+      m_showOtherPlaces( false ),
+      m_showLandingSites( false ),
+      m_showCraters( false ),
+      m_showMaria( false ),
+      m_maxLabelHeight( 0 ),
+      m_styleResetRequested( true )
+{
+    m_placemarkModel.setSourceModel( placemarkModel );
+    m_placemarkModel.setDynamicSortFilter( true );
+    m_placemarkModel.setSortRole( MarblePlacemarkModel::PopularityIndexRole );
+    m_placemarkModel.sort( 0, Qt::AscendingOrder );
+
+    connect( m_selectionModel,  SIGNAL( selectionChanged( QItemSelection,
+                                                           QItemSelection) ),
+             this,               SLOT( requestStyleReset() ) );
+
+    connect( &m_placemarkModel, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
+             this, SLOT( setCacheData() ) );
+    connect( &m_placemarkModel, SIGNAL( rowsInserted(const QModelIndex&, int, int) ),
+             this, SLOT( setCacheData() ) );
+    connect( &m_placemarkModel, SIGNAL( rowsRemoved(const QModelIndex&, int, int) ),
+             this, SLOT( setCacheData() ) );
+    connect( &m_placemarkModel, SIGNAL( modelReset() ),
+             this, SLOT( setCacheData() ) );
 }
 
 PlacemarkLayout::~PlacemarkLayout()
@@ -656,6 +663,8 @@ bool PlacemarkLayout::placemarksOnScreenLimit( const QSize &screenSize ) const
 {
     int ratio = ( m_labelArea * 100 ) / ( screenSize.width() * screenSize.height() );
     return ratio >= 40;
+}
+
 }
 
 #include "PlacemarkLayout.moc"
