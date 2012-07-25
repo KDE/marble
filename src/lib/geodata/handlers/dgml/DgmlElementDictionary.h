@@ -62,7 +62,6 @@ namespace dgml
     extern  const char* dgmlTag_Name;
     extern  const char* dgmlTag_Palette;
     extern  const char* dgmlTag_Pen;
-    extern  const char* dgmlTag_Pick;
     extern  const char* dgmlTag_Projection;
     extern  const char* dgmlTag_Property;
     extern  const char* dgmlTag_Section;
