@@ -82,6 +82,7 @@ set(marblewidget_SRCS
     MarblePlacemarkModel.cpp
     GeoDataTreeModel.cpp
     kdescendantsproxymodel.cpp
+    BranchFilterProxyModel.cpp
     MarbleDebug.cpp
     TextureTile.cpp
     TileCoordsPyramid.cpp
