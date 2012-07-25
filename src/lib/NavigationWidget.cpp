@@ -144,6 +144,8 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
 
     d->m_branchfilter.setSourceModel( treeModel );
     d->m_branchfilter.setBranchIndex( treeModel, treeModel->index( d->m_document ) );
+    d->m_sortproxy->setSortRole( MarblePlacemarkModel::PopularityIndexRole );
+    d->m_sortproxy->sort( 0, Qt::AscendingOrder );
     d->m_sortproxy->setDynamicSortFilter( true );
     d->m_sortproxy->setSourceModel( &d->m_branchfilter );
     d->m_navigationUi.locationListView->setRootIndex(
