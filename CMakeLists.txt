@@ -264,34 +264,6 @@ if(QTONLY)
 endif (QTONLY)
 
 #############################################################
-# Create marblesvnversion.h
-# see http://public.kitware.com/pipermail/cmake/2006-July/010299.html
-# We only do this if we are in a .svn dir
-
-FIND_FILE(SVN_MARKER entries PATHS ${CMAKE_SOURCE_DIR}/.svn)
-
-IF (NOT EXISTS SVN_MARKER)
-  SET (SVN_MARKER ${CMAKE_SOURCE_DIR}/CMakeLists.txt)  # Dummy file
-ENDIF (NOT EXISTS SVN_MARKER)
-# Add a custom command to drive the svn script whenever the svn entries
-# file changes.
-CONFIGURE_FILE(
-       "${CMAKE_CURRENT_SOURCE_DIR}/cmake/templates/svnscript.cmake.in_cmake"
-       "${CMAKE_CURRENT_BINARY_DIR}/svnscript.cmake"
-       @ONLY)
-
-ADD_CUSTOM_COMMAND (
-  OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/marblesvnversion.h"
-  DEPENDS ${SVN_MARKER}
-  COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/svnscript.cmake"
-)
-
-# Add a custom target to drive the custom command.
-ADD_CUSTOM_TARGET(svnversion 
-       ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/marblesvnversion.h")
-
-
-#############################################################
 if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_C_COMPILER MATCHES "icc")
     # Its good programming practice to build with no warnings...
     add_definitions( -Wall -Wextra -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Wno-long-long
