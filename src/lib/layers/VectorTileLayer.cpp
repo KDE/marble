@@ -203,6 +203,7 @@ VectorTileLayer::~VectorTileLayer()
 {
     foreach( GeoDataLatLonAltBox box , d->m_documents.keys() ){
             CacheDocument * document = d->m_documents.take( box );
+            d->m_treeModel->removeDocument( document->document );
             d->m_documents.remove( box );
             delete document;
         }
@@ -372,6 +373,13 @@ void VectorTileLayer::reset()
 {
     mDebug() << Q_FUNC_INFO;
 
+    foreach( GeoDataLatLonAltBox box , d->m_documents.keys() ){
+            CacheDocument * document = d->m_documents.take( box );
+            d->m_treeModel->removeDocument( document->document );
+            d->m_documents.remove( box );
+            delete document;
+        }
+    d->m_documents.clear();
     d->m_tileLoader.clear();
     d->mapChanged();
 }
