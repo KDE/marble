@@ -50,7 +50,7 @@ SatellitesItem::SatellitesItem( const QString &name, elsetrec satrec, const Marb
     setDescription();
 
     placemark()->setVisualCategory( GeoDataFeature::Satellite );
-
+    placemark()->setZoomLevel( 0 );
     placemark()->setGeometry( m_track );
 
     GeoDataStyle *style = new GeoDataStyle( *placemark()->style() );
