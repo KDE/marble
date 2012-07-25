@@ -12,7 +12,6 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "MarbleMap.h"
-#include "MarbleModel.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 
