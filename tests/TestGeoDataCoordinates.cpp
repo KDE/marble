@@ -1520,7 +1520,7 @@ void TestGeoDataCoordinates::testString()
     bool succeeded = false;
 
     //fromString
-    GeoDataCoordinates coordinates1 = GeoDataCoordinates::fromString(lon_str + lat_str , succeeded);
+    GeoDataCoordinates coordinates1 = GeoDataCoordinates::fromString(lon_str + " " + lat_str , succeeded);
     QCOMPARE(succeeded, true);
     QCOMPARE(lon_str, coordinates1.lonToString().replace(QChar(0x00b0), QChar(' ')));
 
