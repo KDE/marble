@@ -253,36 +253,42 @@ QString KDescendantsProxyModel::ancestorSeparator() const
 
 void KDescendantsProxyModel::setSourceModel(QAbstractItemModel *_sourceModel)
 {
+  Q_D(const KDescendantsProxyModel );
   beginResetModel();
 
-  if (_sourceModel) {
-    disconnect(_sourceModel, SIGNAL(rowsAboutToBeInserted(const QModelIndex &, int, int)),
+  if (sourceModel()) {
+    disconnect(sourceModel(), SIGNAL(rowsAboutToBeInserted(const QModelIndex &, int, int)),
                this, SLOT(sourceRowsAboutToBeInserted(const QModelIndex &, int, int)));
-    disconnect(_sourceModel, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
+    disconnect(sourceModel(), SIGNAL(rowsInserted(const QModelIndex &, int, int)),
                this, SLOT(sourceRowsInserted(const QModelIndex &, int, int)));
-    disconnect(_sourceModel, SIGNAL(rowsAboutToBeRemoved(const QModelIndex &, int, int)),
+    disconnect(sourceModel(), SIGNAL(rowsAboutToBeRemoved(const QModelIndex &, int, int)),
                this, SLOT(sourceRowsAboutToBeRemoved(const QModelIndex &, int, int)));
-    disconnect(_sourceModel, SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
+    disconnect(sourceModel(), SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
                this, SLOT(sourceRowsRemoved(const QModelIndex &, int, int)));
-//     disconnect(_sourceModel, SIGNAL(rowsAboutToBeMoved(const QModelIndex &, int, int, const QModelIndex &, int)),
+//     disconnect(sourceModel(), SIGNAL(rowsAboutToBeMoved(const QModelIndex &, int, int, const QModelIndex &, int)),
 //             this, SLOT(sourceRowsAboutToBeMoved(const QModelIndex &, int, int, const QModelIndex &, int)));
-//     disconnect(_sourceModel, SIGNAL(rowsMoved(const QModelIndex &, int, int, const QModelIndex &, int)),
+//     disconnect(sourceModel(), SIGNAL(rowsMoved(const QModelIndex &, int, int, const QModelIndex &, int)),
 //             this, SLOT(sourceRowsMoved(const QModelIndex &, int, int, const QModelIndex &, int)));
-    disconnect(_sourceModel, SIGNAL(modelAboutToBeReset()),
+    disconnect(sourceModel(), SIGNAL(modelAboutToBeReset()),
                this, SLOT(sourceModelAboutToBeReset()));
-    disconnect(_sourceModel, SIGNAL(modelReset()),
+    disconnect(sourceModel(), SIGNAL(modelReset()),
                this, SLOT(sourceModelReset()));
-    disconnect(_sourceModel, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
+    disconnect(sourceModel(), SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
                this, SLOT(sourceDataChanged(const QModelIndex &, const QModelIndex &)));
-    disconnect(_sourceModel, SIGNAL(layoutAboutToBeChanged()),
+    disconnect(sourceModel(), SIGNAL(layoutAboutToBeChanged()),
                this, SLOT(sourceLayoutAboutToBeChanged()));
-    disconnect(_sourceModel, SIGNAL(layoutChanged()),
+    disconnect(sourceModel(), SIGNAL(layoutChanged()),
                this, SLOT(sourceLayoutChanged()));
-    disconnect(_sourceModel, SIGNAL(destroyed()),
+    disconnect(sourceModel(), SIGNAL(destroyed()),
                this, SLOT(sourceModelDestroyed()));
   }
 
   QAbstractProxyModel::setSourceModel(_sourceModel);
+  if ( sourceModel()->hasChildren() )
+  {
+    Q_ASSERT( sourceModel()->rowCount() > 0 );
+    const_cast<KDescendantsProxyModelPrivate*>(d)->synchronousMappingRefresh();
+  }
 
   if (_sourceModel) {
     connect(_sourceModel, SIGNAL(rowsAboutToBeInserted(const QModelIndex &, int, int)),
