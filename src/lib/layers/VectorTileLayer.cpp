@@ -239,7 +239,6 @@ void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument * docume
         d->m_documents.insert( document->latLonAltBox(), new CacheDocument( document, d->m_treeModel ) );
         //d->m_tileIds.insert( document->latLonAltBox(), &tileId );
     }
-
 }
 
 bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
@@ -287,6 +286,7 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     // if zoom level has changed, empty vectortile cache
     if ( changedTileLevel ) {
         d->m_documents.clear();
+        d->m_texmapper->zoomChanged();
     }
     // else remove only tiles that are not shown on the screen
     else{

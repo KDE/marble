@@ -61,7 +61,7 @@
                     <downloadPolicy usage="Browse" maximumConnections="20" />
                     <downloadPolicy usage="Bulk" maximumConnections="2" />
                 </texture>
-            </layer> -->
+            </layer>-->
 
 <!-- PLAIN MAP -->
 
@@ -124,7 +124,7 @@
         <settings>
  
             <property name="coordinate-grid">
-                <value>true</value>
+                <value>false</value>
                 <available>true</available>
             </property>
             <property name="overviewmap">
@@ -132,7 +132,7 @@
                 <available>true</available>
             </property>
             <property name="compass">
-                <value>true</value>
+                <value>false</value>
                 <available>true</available>
             </property>
             <property name="scalebar">
@@ -142,19 +142,19 @@
  
  -            <group name="Places">
                 <property name="places">
-                    <value>true</value>
+                    <value>false</value>
                     <available>true</available>
                 </property>
                 <property name="cities">
-                    <value>true</value>
+                    <value>false</value>
                     <available>true</available>
                 </property>
                 <property name="terrain">
-                    <value>true</value>
+                    <value>false</value>
                     <available>true</available>
                 </property>
                 <property name="otherplaces">
-                    <value>true</value>
+                    <value>false</value>
                     <available>true</available>
                 </property>
             </group>

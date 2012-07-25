@@ -100,23 +100,6 @@ bool JsonParser::read( QIODevice* device )
         east  = coors.at(2).toFloat();
         south = coors.at(1).toFloat();
         north = coors.at(3).toFloat();
-
-//        GeoDataLinearRing *ring = new GeoDataLinearRing();
-
-//        ring->append( GeoDataCoordinates( east, north, 0, GeoDataCoordinates::Degree ) );
-
-//        ring->append( GeoDataCoordinates( east, south, 0, GeoDataCoordinates::Degree ) );
-
-//        ring->append( GeoDataCoordinates( west, south, 0, GeoDataCoordinates::Degree ) );
-
-//        ring->append( GeoDataCoordinates( west, north, 0, GeoDataCoordinates::Degree ) );
-
-//        placemark = new GeoDataPlacemark();
-//        placemark->setGeometry( ring );
-//        placemark->setVisualCategory( GeoDataPlacemark::None );
-//        placemark->setVisible( true );
-//        m_document->append( placemark );
-
     }
 
     //  All downloaded placemarks will be features, so we should iterate
@@ -136,31 +119,33 @@ bool JsonParser::read( QIODevice* device )
             if (typeProperty == "Polygon")
                 geom = new GeoDataPolygon( RespectLatitudeCircle | Tessellate );
             else
-            if (typeProperty == "LineString")
-                geom = new GeoDataLineString( RespectLatitudeCircle | Tessellate );
-            else
-                geom = 0;
+                if (typeProperty == "LineString")
+                    geom = new GeoDataLineString( RespectLatitudeCircle | Tessellate );
+                else
+                    geom = 0;
 
             QScriptValueIterator it (iterator.value().property( "properties" ));
 
-            bool c = false;
+            bool propertiesCorrect = false;
 
             // Parsing properties
-            while ( it.hasNext() && !c ) {
+            while ( it.hasNext() && !propertiesCorrect ) {
                 it.next();
 
                 if ( it.name() == "name" )
                     placemark->setName( it.value().toString() );
+                else{
+                    category = GeoDataFeature::OsmVisualCategory( it.name() + "=" + it.value().toString() );
 
-                category = GeoDataFeature::OsmVisualCategory( it.name() + "=" + it.value().toString() );
-                if (category != 0){
-                placemark->setVisualCategory( category );
-                c = true;
+                    if (category != 0){
+                        placemark->setVisualCategory( category );
+                        propertiesCorrect = true;
+                    }
                 }
             }
 
             // Parsing coordinates
-            bool g = true;
+            bool geometryCorrect = true;
 
             QScriptValue const coordinatesProperty = iterator.value().property( "coordinates" );
             if ( coordinatesProperty.isArray() ){
@@ -170,10 +155,10 @@ bool JsonParser::read( QIODevice* device )
                 while ( it.hasNext() ) {
                     it.next();
 
-                    g = true;
+                    geometryCorrect = true;
 
                     QStringList coors = it.value().toString().split(",");
-                    for (int x = 0; x < coors.size()-1 && coors.size()>1 && g ;){
+                    for (int x = 0; x < coors.size()-1 && coors.size()>1 && geometryCorrect ;){
 
                         float auxX = ( coors.at(x++).toFloat() / granularity)*(east-west)   + west;
                         float auxY = ( coors.at(x++).toFloat() / granularity)*(north-south) + south;
@@ -189,20 +174,20 @@ bool JsonParser::read( QIODevice* device )
                                 ((GeoDataPolygon*)geom)->setOuterBoundary(ring);
                             }
                             else
-                        if (typeProperty == "LineString")
-                                ((GeoDataLineString*) geom)->append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
-                            else
-                                if (typeProperty == "Point")
-                                geom = new GeoDataPoint(
-                                    GeoDataCoordinates(auxX,auxY,0, GeoDataCoordinates::Degree ) );
-                            }
+                                if (typeProperty == "LineString")
+                                    ((GeoDataLineString*) geom)->append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
+                                else
+                                    if (typeProperty == "Point")
+                                        geom = new GeoDataPoint(
+                                                    GeoDataCoordinates(auxX,auxY,0, GeoDataCoordinates::Degree ) );
+                        }
                         else
-                                g = false;
+                            geometryCorrect = false;
                     }
                 }
             }
 
-            if ( g && geom != 0 ){
+            if ( geometryCorrect && propertiesCorrect && geom != 0 ){
                 placemark->setGeometry( geom );
                 placemark->setVisible( true );
                 m_document->append( placemark );

@@ -103,7 +103,7 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
     QImage resultImage;
 
     // GeoDataDocument for appending all the vector data features to it
-    GeoDataDocument * resultVector = new GeoDataDocument;
+    GeoDataDocument * resultVector = new GeoDataDocument;    
 
     // if there are more than one active texture layers, we have to convert the
     // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
@@ -145,6 +145,8 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
         // main GeoDataDocument
         if ( tile->vectorData() ){
 
+            Q_ASSERT( resultVector );
+
             // FIXME ANDER
             // IF IN THE FUTURE THERE CAN BE MORE THAN ONE VECTORTILE LAYER
             // HERE ALL THE GEOMETRIES FROM THE DIFFERENT LAYERS SHOULD BE
@@ -161,6 +163,7 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
             // ALWAYS HAVE ONE GEODATADOCUMENT CONTAINING JUST ANOTHER ONE)
             // BUT IF MORE THAN ONE WANT TO BE SUPPORTED IT IS BETTER.
 
+            if ( tile->vectorData() != 0 )
             resultVector = tile->vectorData();
         }
     }
@@ -184,9 +187,10 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
             mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
         }
 
-/*       Here is where the TileLoader chooses between ImageTile and VectorTile
-         Format from VectorTile is available if it is needed to specify the parser
-         that should parse that tile file
+/*
+        Here is where the TileLoader chooses between ImageTile and VectorTile
+        Format from VectorTile is available if it is needed to specify the parser
+        that should parse that tile file
 */
 
         // ImageTile
@@ -199,9 +203,11 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
         // VectorTile
         if ( textureLayer->nodeType() == QString("GeoSceneVectorTile") ){
+
             GeoDataDocument* tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, textureLayer->fileFormat() );
 
             QSharedPointer<Tile> tile( new VectorTile( tileId, tileVectordata, textureLayer->fileFormat(), blending ) );
+
             tiles.append( tile );
         }
 

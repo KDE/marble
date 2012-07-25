@@ -325,8 +325,6 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
         if ( layer->datasets().count() <= 0 )
             continue;
 
-        mDebug() << "-------------------------------------PASO";
-
         // look for documents
         foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
             if( dataset->fileFormat() == "KML" ) {

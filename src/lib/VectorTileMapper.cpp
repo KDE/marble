@@ -80,8 +80,35 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
         int maxX = lon2tilex( viewport->viewLatLonAltBox().east(GeoDataCoordinates::Degree), tileZoomLevel() )+1;
         int maxY = lat2tiley( viewport->viewLatLonAltBox().south(GeoDataCoordinates::Degree), tileZoomLevel() )+1;
 
-        if ( minX != m_minTileX  || minY != m_minTileY || maxX != m_maxTileX || maxY != m_maxTileY ){
-        mapTexture( viewport, painter->mapQuality(), m_minTileX, m_minTileY, m_maxTileX, m_maxTileY );
+        bool left = minX < m_minTileX;
+        bool right = maxX > m_maxTileX;
+        bool up = minY < m_minTileY;
+        bool down = maxY > m_maxTileY ;
+
+        if ( left || right || up || down ){
+
+            mDebug() << "-----------------------------------0" << left << up << right << down;
+
+            int l = left? minX : right? m_maxTileX : m_minTileX;
+            int u = up? minY : down? m_maxTileY : m_minTileY;
+            int r = left? m_minTileX : right? maxX : m_maxTileX;
+            int d = up? m_minTileY : down? maxY : m_maxTileY;
+
+            mDebug() << "-----------------------------------1" << l << u << r << d;
+
+            l = minX;
+            r = maxX;
+            u = minY;
+            d = maxY;
+
+            mDebug() << "-----------------------------------2" << l << u << r << d;
+
+//            mapTexture( viewport, painter->mapQuality(),
+//                        left? minX : right? m_maxTileX : m_minTileX,
+//                        up? minY : down? m_maxTileY : m_minTileY,
+//                        left? m_minTileX : right? maxX : m_maxTileX,
+//                        up? m_minTileY : down? maxY : m_maxTileY );
+            mapTexture( viewport, painter->mapQuality(), minX, minY, maxX, maxY );
         }
 
         m_minTileX = minX;
@@ -105,6 +132,13 @@ void VectorTileMapper::setRepaintNeeded()
     m_repaintNeeded = true;
 }
 
+void VectorTileMapper::zoomChanged(){
+    m_minTileX = pow( 2, tileZoomLevel() );
+    m_minTileY = pow( 2, tileZoomLevel() );
+    m_maxTileX = 0;
+    m_maxTileY = 0;
+}
+
 void VectorTileMapper::mapTexture( const ViewportParams *viewport, MapQuality mapQuality,
                                    int minTileX, int minTileY, int maxTileX, int maxTileY )
 {
@@ -123,10 +157,12 @@ void VectorTileMapper::mapTexture( const ViewportParams *viewport, MapQuality ma
     // Start parsing
     m_threadPool.start( job );
 
-    // FIXME ANDER COMMENTING THE LINE AT MARBLEMODEL WE DON'T NEED TO WAIT FOR FINISHING
+    // FIXME ANDER
     // m_threadPool.waitForDone();
 
     m_tileLoader->cleanupTilehash();
+
+    mDebug() << "------------------------DESCARGAR" << minTileX << minTileY << maxTileX << maxTileY;
 }
 
 void VectorTileMapper::updateTile(TileId const & tileId, GeoDataDocument * document, QString const &format )
