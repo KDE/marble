@@ -80,6 +80,7 @@ GeoDataTreeModel::GeoDataTreeModel( QObject *parent )
 
 GeoDataTreeModel::~GeoDataTreeModel()
 {
+    qDebug() << "treemodel dtor " << d->m_rootDocument->size();
     delete d;
 }
 
@@ -568,7 +569,9 @@ bool GeoDataTreeModel::removeFeature( GeoDataContainer *parent, int row )
 {
     if ( row<parent->size() ) {
         beginRemoveRows( index( parent ), row , row );
+        GeoDataFeature *feature = parent->child( row );
         parent->remove( row );
+        emit removed(feature);
         endRemoveRows();
         return true;
     }
@@ -586,12 +589,7 @@ bool GeoDataTreeModel::removeFeature( GeoDataFeature *feature )
 
             int row = static_cast< GeoDataContainer* >( feature->parent() )->childPosition( feature );
             if ( row != -1 ) {
-                if ( removeFeature( static_cast< GeoDataContainer* >( feature->parent() ) , row ) ) {
-                    emit removed(feature);
-                    return true;
-                }
-                else
-                    return false;
+                return removeFeature( static_cast< GeoDataContainer* >( feature->parent() ) , row );
             }
             else
                 return false; //The feature is not contained in the parent it points to
