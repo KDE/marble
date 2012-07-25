@@ -20,6 +20,7 @@
 #include "MarbleWidget.h"
 #include "MarbleRunnerManager.h"
 #include "MarblePlacemarkModel.h"
+#include "BranchFilterProxyModel.h"
 #include "GeoDataDocument.h"
 #include "GeoDataTreeModel.h"
 #include "GeoSceneDocument.h"
@@ -62,10 +63,10 @@ class NavigationWidgetPrivate
 
     Ui::NavigationWidget    m_navigationUi;
     MarbleWidget           *m_widget;
+    BranchFilterProxyModel  m_branchfilter;
     QSortFilterProxyModel  *m_sortproxy;
     QString                 m_searchTerm;
     MarbleRunnerManager    *m_runnerManager;
-    GeoDataTreeModel        m_treeModel;
     GeoDataDocument        *m_document;
 };
 
@@ -74,7 +75,6 @@ NavigationWidgetPrivate::NavigationWidgetPrivate()
       m_document( new GeoDataDocument ) {
     m_document->setDocumentRole( SearchResultDocument );
     m_document->setName( "Search Results" );
-    m_treeModel.setRootDocument( m_document );
 }
 
 
@@ -130,6 +130,8 @@ NavigationWidget::~NavigationWidget()
 
 void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
 {
+    GeoDataTreeModel *treeModel;
+
     d->m_runnerManager = new MarbleRunnerManager( widget->model()->pluginManager(), this );
     connect( d->m_runnerManager, SIGNAL( searchResultChanged( QVector<GeoDataPlacemark*> ) ),
              this,               SLOT( setSearchResult( QVector<GeoDataPlacemark*> ) ) );
@@ -137,11 +139,16 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
 
     d->m_widget = widget;
     d->m_runnerManager->setModel( widget->model() );
-    d->m_widget->model()->treeModel()->addDocument( d->m_document );
+    treeModel = d->m_widget->model()->treeModel();
+    treeModel->addDocument( d->m_document );
 
-    d->m_sortproxy->setSortLocaleAware( true );
+    d->m_branchfilter.setSourceModel( treeModel );
+    d->m_branchfilter.setBranchIndex( treeModel, treeModel->index( d->m_document ) );
     d->m_sortproxy->setDynamicSortFilter( true );
-    d->m_sortproxy->setSourceModel( &d->m_treeModel );
+    d->m_sortproxy->setSourceModel( &d->m_branchfilter );
+    d->m_navigationUi.locationListView->setRootIndex(
+                d->m_sortproxy->mapFromSource(
+                    d->m_branchfilter.mapFromSource( treeModel->index( d->m_document ) ) ) );
 
     // Connect necessary signals.
     connect( this, SIGNAL( goHome() ),         d->m_widget, SLOT( goHome() ) );
@@ -172,9 +179,12 @@ void NavigationWidget::search(const QString &searchTerm)
         d->m_widget->model()->placemarkSelectionModel()->clear();
 
         // clear the local document
-        d->m_widget->model()->treeModel()->removeDocument( d->m_document );
-        d->m_document->clear();
-        d->m_widget->model()->treeModel()->addDocument( d->m_document );
+        GeoDataTreeModel *treeModel = d->m_widget->model()->treeModel();
+        while ( d->m_document->size() ) {
+            GeoDataFeature *feature = d->m_document->child( 0 );
+            treeModel->removeFeature( d->m_document, 0 );
+            delete feature;
+        }
     }
 }
 
@@ -209,17 +219,18 @@ void NavigationWidgetPrivate::setSearchResult( QVector<GeoDataPlacemark*> locati
 
     // fill the local document with results
     m_widget->model()->placemarkSelectionModel()->clear();
-    m_widget->model()->treeModel()->removeDocument( m_document );
-    m_document->clear();
-    foreach (GeoDataPlacemark *placemark, locations ) {
-        m_document->append( new GeoDataPlacemark( *placemark ) );
+    GeoDataTreeModel *treeModel = m_widget->model()->treeModel();
+    while ( m_document->size() ) {
+        GeoDataFeature *feature = m_document->child( 0 );
+        treeModel->removeFeature( m_document, 0 );
+        delete feature;
     }
-    m_widget->model()->treeModel()->addDocument( m_document );
-    m_widget->centerOn( m_document->latLonAltBox() );
+    foreach (GeoDataPlacemark *placemark, locations ) {
+        treeModel->addFeature( m_document, new GeoDataPlacemark( *placemark ) );
+    }
 
-    m_treeModel.reset();
-    m_sortproxy->sort( 0 );
-    mDebug() << "NavigationWidget (sort): Time elapsed:"<< t.elapsed() << " ms";
+    m_widget->centerOn( m_document->latLonAltBox() );
+    mDebug() << "NavigationWidget (searchResults): Time elapsed:"<< t.elapsed() << " ms";
 }
 
 void NavigationWidget::selectTheme( const QString &theme )
