@@ -172,7 +172,7 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
     unique( result );
 
     if ( userQuery.resultFormat() == DatabaseQuery::DistanceFormat ) {
-        s_currentPosition = model->positionTracking()->currentLocation();
+        s_currentPosition = userQuery.position();
         qSort( result.begin(), result.end(), placemarkSmallerDistance );
     } else {
         s_currentQuery = &userQuery;
