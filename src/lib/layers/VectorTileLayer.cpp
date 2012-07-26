@@ -286,6 +286,7 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     // if zoom level has changed, empty vectortile cache
     if ( changedTileLevel ) {
         d->m_documents.clear();
+        d->m_tileLoader.cleanupTilehash();
         d->m_texmapper->zoomChanged();
     }
     // else remove only tiles that are not shown on the screen
