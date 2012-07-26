@@ -93,11 +93,11 @@ class MarbleGraphicsItemPrivate
         Q_UNUSED( size );
     }
 
-    void updateLabelPositions()
+    void updateChildPositions()
     {
         // This has to be done recursively because we need a correct size from all children.
         foreach ( MarbleGraphicsItem *item, m_children ) {
-            item->p()->updateLabelPositions();
+            item->p()->updateChildPositions();
         }
 
         // Adjust positions

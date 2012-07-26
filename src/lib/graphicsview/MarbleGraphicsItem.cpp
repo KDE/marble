@@ -43,7 +43,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
         return true;
     }
 
-    p()->updateLabelPositions();
+    p()->updateChildPositions();
 
     p()->setProjection( viewport, painter );
     
