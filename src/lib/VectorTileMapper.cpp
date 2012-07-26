@@ -184,12 +184,15 @@ VectorTileMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileL
 
 void VectorTileMapper::RenderJob::run()
 {
+    // Download all the tiles inside the given indexes
     for (unsigned int x = m_minTileX; x < m_maxTileX; x++)
         for (unsigned int y = m_minTileY; y < m_maxTileY; y++)
         {
            const TileId tileId = TileId( 0, m_tileLevel, x, y );
            const StackedTile * tile = m_tileLoader->loadTile( tileId );
 
+           // When tile has vectorData send it to the VectorTileLayer for it to insert
+           // it in the treeModel
            if ( tile->resultVectorData()->size() > 0 )
                 emit tileCompleted( tileId, tile->resultVectorData(), "JS" );
         }
