@@ -80,7 +80,6 @@ GeoDataTreeModel::GeoDataTreeModel( QObject *parent )
 
 GeoDataTreeModel::~GeoDataTreeModel()
 {
-    qDebug() << "treemodel dtor " << d->m_rootDocument->size();
     delete d;
 }
 
