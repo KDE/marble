@@ -41,7 +41,7 @@ LocalDatabaseRunner::~LocalDatabaseRunner()
 
 }
 
-void LocalDatabaseRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox )
+void LocalDatabaseRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox preferred )
 {
     QVector<GeoDataPlacemark*> vector;
 
@@ -62,7 +62,8 @@ void LocalDatabaseRunner::search( const QString &searchTerm, const GeoDataLatLon
                     continue;
                 }
                 GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>( index.data( MarblePlacemarkModel::ObjectPointerRole )));
-                if ( placemark ) {
+                if ( placemark &&
+                     ( preferred.isEmpty() || preferred.contains( placemark->coordinate() ) ) ) {
                     vector.append( new GeoDataPlacemark( *placemark ));
                 }
             }
