@@ -43,6 +43,7 @@ class MarbleRunnerManagerPrivate
 public:
     MarbleRunnerManager* q;
     QString m_lastSearchTerm;
+    GeoDataLatLonAltBox m_lastPreferredBox;
     QMutex m_modelMutex;
     MarblePlacemarkModel *m_model;
     QVector<GeoDataPlacemark*> m_placemarkContainer;
@@ -183,7 +184,7 @@ MarbleRunnerManager::~MarbleRunnerManager()
 
 void MarbleRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox preferred )
 {
-    if ( searchTerm == d->m_lastSearchTerm ) {
+    if ( searchTerm == d->m_lastSearchTerm && preferred == d->m_lastPreferredBox ) {
       emit searchResultChanged( d->m_model );
       emit searchResultChanged( d->m_placemarkContainer );
       emit searchFinished( searchTerm );
