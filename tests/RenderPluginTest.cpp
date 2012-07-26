@@ -14,6 +14,8 @@
 #include "PluginManager.h"
 #include "RenderPlugin.h"
 
+Q_DECLARE_METATYPE( const Marble::RenderPlugin * )
+
 namespace Marble
 {
 
@@ -22,12 +24,36 @@ class RenderPluginTest : public QObject
     Q_OBJECT
 
  private slots:
+    void initialize_data();
+    void initialize();
+
     void restoreDefaultSettings_data();
     void restoreDefaultSettings();
 
  private:
     MarbleModel m_model;
 };
+
+void RenderPluginTest::initialize_data()
+{
+    QTest::addColumn<const RenderPlugin *>( "factory" );
+
+    foreach ( const RenderPlugin *plugin, m_model.pluginManager()->renderPlugins() ) {
+        QTest::newRow( plugin->nameId().toAscii() ) << plugin;
+    }
+}
+
+void RenderPluginTest::initialize()
+{
+    QFETCH( const RenderPlugin *, factory );
+
+    RenderPlugin *const instance = factory->newInstance( &m_model );
+
+    instance->initialize();
+
+    // prevent infinite loops
+    QVERIFY( instance->isInitialized() );
+}
 
 void RenderPluginTest::restoreDefaultSettings_data()
 {

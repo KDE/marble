@@ -148,6 +148,8 @@ void ElevationProfileFloatItem::initialize ()
     connect( this, SIGNAL( dataUpdated() ), SLOT( forceRepaint() ) );
 
     updateData();
+
+    m_isInitialized = true;
 }
 
 bool ElevationProfileFloatItem::isInitialized () const
@@ -172,7 +174,6 @@ void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
         if ( !m_isInitialized && !smallScreen ) {
             setPosition( QPointF( (viewport->width() - contentSize().width()) / 2 , 10.5 ) );
         }
-        m_isInitialized = true;
     }
 
     update();
