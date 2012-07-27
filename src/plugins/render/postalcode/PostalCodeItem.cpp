@@ -20,8 +20,8 @@
 
 using namespace Marble;
 
-QFont PostalCodeItem::s_font = QFont( "Sans Serif", 10, QFont::Bold );
-int PostalCodeItem::s_labelOutlineWidth = 5;
+const QFont PostalCodeItem::s_font = QFont( "Sans Serif", 10, QFont::Bold );
+const int PostalCodeItem::s_labelOutlineWidth = 5;
 
 PostalCodeItem::PostalCodeItem( QObject *parent )
     : AbstractDataPluginItem( parent )
@@ -69,21 +69,17 @@ void PostalCodeItem::paint( GeoPainter *painter, ViewportParams *viewport,
 
     painter->save();
 
-    QFont font = s_font;
-    QFontMetrics metrics = QFontMetrics( font );
-    int fontAscent = metrics.ascent();
-
-    font.setWeight( 75 );
-    fontAscent = QFontMetrics( font ).ascent();
+    const int fontAscent = QFontMetrics( s_font ).ascent();
 
     QPen outlinepen( Qt::white );
     outlinepen.setWidthF( s_labelOutlineWidth );
     QBrush  outlinebrush( Qt::black );
 
-    QPainterPath outlinepath;
-
     const QPointF baseline( s_labelOutlineWidth / 2.0, fontAscent );
-    outlinepath.addText( baseline, font, m_text );
+
+    QPainterPath outlinepath;
+    outlinepath.addText( baseline, s_font, m_text );
+
     painter->setRenderHint( QPainter::Antialiasing, true );
     painter->setPen( outlinepen );
     painter->setBrush( outlinebrush );

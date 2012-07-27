@@ -13,7 +13,7 @@
 
 #include "AbstractDataPluginItem.h"
 
-class QFont;
+#include <QtGui/QFont>
 
 namespace Marble
 {
@@ -43,8 +43,8 @@ class PostalCodeItem : public AbstractDataPluginItem
  private:
     QString m_text;
 
-    static QFont s_font;
-    static int s_labelOutlineWidth;
+    static const QFont s_font;
+    static const int s_labelOutlineWidth;
 };
 
 }
