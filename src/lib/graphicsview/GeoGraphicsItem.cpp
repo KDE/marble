@@ -26,12 +26,6 @@ GeoGraphicsItem::GeoGraphicsItem()
     setFlag( ItemIsVisible, true );
 }
 
-GeoGraphicsItem::GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr )
-    : MarbleGraphicsItem( d_ptr )
-{
-    setFlag( ItemIsVisible, true );
-}
-
 GeoGraphicsItem::~GeoGraphicsItem()
 {
 }

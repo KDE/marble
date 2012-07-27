@@ -151,7 +151,6 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     QList<QPointF> positions() const;
 
  protected:
-    explicit GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr );
     GeoGraphicsItemPrivate *p() const;
 };
 
