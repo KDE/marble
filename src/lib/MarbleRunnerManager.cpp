@@ -14,6 +14,7 @@
 #include "MarblePlacemarkModel.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
+#include "MarbleMath.h"
 #include "Planet.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
@@ -229,7 +230,18 @@ void MarbleRunnerManagerPrivate::addSearchResult( QVector<GeoDataPlacemark*> res
 
     m_modelMutex.lock();
     int start = m_placemarkContainer.size();
-    m_placemarkContainer << result;
+    for( int i=0; i<result.size(); ++i ) {
+        bool same = false;
+        for ( int j=0; j<m_placemarkContainer.size(); ++j ) {
+            if ( distanceSphere( result[i]->coordinate(), m_placemarkContainer[j]->coordinate() )
+                 * m_marbleModel->planet()->radius() < 1 ) {
+                same = true;
+            }
+        }
+        if ( !same ) {
+            m_placemarkContainer.append( result[i] );
+        }
+    }
     m_model->addPlacemarks( start, result.size() );
     m_modelMutex.unlock();
     emit q->searchResultChanged( m_model );
