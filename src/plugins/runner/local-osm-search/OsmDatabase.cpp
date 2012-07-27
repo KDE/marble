@@ -112,8 +112,15 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
                 " FROM regions, places";
 
         if ( userQuery.queryType() == DatabaseQuery::CategorySearch ) {
-            queryString += " WHERE regions.id = places.region AND places.category = %1";
-            queryString = queryString.arg( (qint32) userQuery.category() );
+            queryString += " WHERE regions.id = places.region";
+            if( userQuery.category() == OsmPlacemark::UnknownCategory ) {
+                // search for all pois which are not street nor adress
+                queryString += " AND places.category <> 0 AND places.category <> 6";
+            } else {
+                // search for specific category
+                queryString += " AND places.category = %1";
+                queryString = queryString.arg( (qint32) userQuery.category() );
+            }
             if ( userQuery.position().isValid() && userQuery.region().isEmpty() ) {
                 // sort by distance
                 queryString += " ORDER BY ((places.lat-%1)*(places.lat-%1)+(places.lon-%2)*(places.lon-%2))";
