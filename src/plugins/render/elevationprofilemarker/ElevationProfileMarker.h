@@ -78,8 +78,7 @@ class ElevationProfileMarker : public RenderPlugin
     GeoDataPlacemark *m_markerPlacemark;
     GeoDataCoordinates m_currentPosition;
 
-    GeoGraphicsItem m_markerIconContainer;
-    GeoGraphicsItem m_markerTextContainer;
+    GeoGraphicsItem m_markerItem;
     LabelGraphicsItem m_markerIcon;
     LabelGraphicsItem m_markerText;
 };
