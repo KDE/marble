@@ -39,12 +39,17 @@ using namespace Marble;
 
 PhotoPluginItem::PhotoPluginItem( QObject *parent )
     : AbstractDataPluginItem( parent ),
-      m_image( 0 ),
+      m_image( this ),
       m_browser( 0 )
 {
     m_action = new QAction( this );
     connect( m_action, SIGNAL( triggered() ), this, SLOT( openBrowser() ) );
     setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
+
+    m_image.setFrame( FrameGraphicsItem::RectFrame );
+    MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout( 1, 1 );
+    layout->addItem( &m_image, 0, 0 );
+    setLayout( layout );
 }
 
 PhotoPluginItem::~PhotoPluginItem()
@@ -70,15 +75,8 @@ bool PhotoPluginItem::initialized()
 void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type )
 {
     if( type == "thumbnail" ) {
-        if ( !m_image ) {
-            m_image = new LabelGraphicsItem( this );
-            m_image->setFrame( FrameGraphicsItem::RectFrame );
-            MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout( 1, 1 );
-            layout->addItem( m_image, 0, 0 );
-            setLayout( layout );
-        }
         m_smallImage.load( url );
-        m_image->setImage( m_smallImage );
+        m_image.setImage( m_smallImage );
     }
     else if ( type == "info" ) {        
         QFile file( url );
