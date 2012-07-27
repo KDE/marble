@@ -44,6 +44,7 @@ PhotoPluginItem::PhotoPluginItem( QObject *parent )
 {
     m_action = new QAction( this );
     connect( m_action, SIGNAL( triggered() ), this, SLOT( openBrowser() ) );
+    setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
 }
 
 PhotoPluginItem::~PhotoPluginItem()
