@@ -127,7 +127,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
 
 bool MarbleGraphicsItem::contains( const QPointF& point ) const
 {
-    foreach( const QRectF& rect, boundingRects() ) {
+    foreach( const QRectF& rect, d->boundingRects() ) {
         if( rect.contains( point ) )
             return true;
     }
@@ -136,19 +136,19 @@ bool MarbleGraphicsItem::contains( const QPointF& point ) const
 
 QRectF MarbleGraphicsItem::containsRect( const QPointF& point ) const
 {
-    foreach( const QRectF& rect, boundingRects() ) {
+    foreach( const QRectF& rect, d->boundingRects() ) {
         if( rect.contains( point ) )
             return rect;
     }
     return QRectF();
 }
 
-QList<QRectF> MarbleGraphicsItem::boundingRects() const
+QList<QRectF> MarbleGraphicsItemPrivate::boundingRects() const
 {
     QList<QRectF> list;
 
-    foreach( QPointF point, d->positions() ) {
-        QRectF rect( point, d->m_size );
+    foreach( QPointF point, positions() ) {
+        QRectF rect( point, m_size );
         if( rect.x() < 0 )
             rect.setLeft( 0 );
         if( rect.y() < 0 )
@@ -271,7 +271,7 @@ bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e )
             
             if ( QRect( QPoint( 0, 0 ), size().toSize() ).contains( shiftedPos ) ) {
                 foreach( MarbleGraphicsItem *child, p()->m_children ) {
-                    QList<QRectF> childRects = child->boundingRects();
+                    QList<QRectF> childRects = child->d->boundingRects();
                     
                     foreach( const QRectF& childRect, childRects ) {
                         if( childRect.toRect().contains( shiftedPos ) ) {

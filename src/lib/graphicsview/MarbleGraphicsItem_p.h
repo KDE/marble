@@ -74,6 +74,11 @@ class MarbleGraphicsItemPrivate
 
     virtual QList<QPointF> absolutePositions() const = 0;
 
+    /**
+     * @brief Used to get the set of screen bounding rects
+     */
+    QList<QRectF> boundingRects() const;
+
     void ensureValidCacheKey()
     {
 #if QT_VERSION < 0x040600

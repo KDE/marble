@@ -63,11 +63,6 @@ class MARBLE_EXPORT MarbleGraphicsItem
     QRectF containsRect( const QPointF& point ) const;
 
     /**
-     * @brief Used to get the set of screen bounding rects
-     */
-    QList<QRectF> boundingRects() const;
-
-    /**
      * Returns the layout of the MarbleGraphicsItem.
      */
     AbstractMarbleGraphicsLayout *layout() const;
