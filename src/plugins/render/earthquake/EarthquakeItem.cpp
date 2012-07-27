@@ -27,6 +27,7 @@ EarthquakeItem::EarthquakeItem( QObject *parent )
 {
     // The size of an item without a text is 0
     setSize( QSize( 0, 0 ) );
+    setCacheMode( ItemCoordinateCache );
 }
 
 EarthquakeItem::~EarthquakeItem()
@@ -73,7 +74,6 @@ void EarthquakeItem::paint( GeoPainter *painter, ViewportParams *viewport,
 
     // Save the old painter state.
     painter->save();
-    painter->autoMapQuality();
 
     // Draw the arch into the given rect.
     qreal width = magnitude() * 10;
@@ -94,14 +94,8 @@ void EarthquakeItem::paint( GeoPainter *painter, ViewportParams *viewport,
     painter->drawEllipse( arcRect );
 
     // Draws the seismograph
-    if ( m_seismograph.isNull() ) {
-        m_seismograph = QPixmap( width, height );
-        QSvgRenderer renderer( QString( ":/seismograph.svg" ) );
-        m_seismograph.fill( Qt::transparent );
-        QPainter pixmapPainter( &m_seismograph );
-        renderer.render( &pixmapPainter, QRectF( 0.0, 0.0, width, height ) );
-    }
-    painter->drawPixmap( 0, 0, m_seismograph );
+    QSvgRenderer renderer( QString( ":/seismograph.svg" ) );
+    renderer.render( painter, QRectF( 0.0, 0.0, width, height ) );
 
     // Draws magnitude of the earthquake
     QFontMetrics metrics( s_font );

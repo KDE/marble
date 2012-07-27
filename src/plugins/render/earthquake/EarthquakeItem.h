@@ -16,7 +16,6 @@
 
 #include <QtCore/QDate>
 #include <QtGui/QFont>
-#include <QtGui/QPixmap>
 
 namespace Marble
 {
@@ -66,8 +65,6 @@ private:
     QDateTime m_dateTime;
 
     static const QFont s_font;
-
-    QPixmap m_seismograph;
 };
 
 }
