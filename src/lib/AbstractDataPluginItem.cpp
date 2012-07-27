@@ -35,6 +35,7 @@ class AbstractDataPluginItemPrivate
     
     QString m_id;
     QString m_target;
+    QString m_toolTip;
     bool m_favorite;
     qreal m_addedAngularResolution;
     QHash<QString, QVariant> m_settings;
@@ -60,6 +61,16 @@ QString AbstractDataPluginItem::target()
 void AbstractDataPluginItem::setTarget( const QString& target )
 {
     d->m_target = target;
+}
+
+QString AbstractDataPluginItem::toolTip() const
+{
+    return d->m_toolTip;
+}
+
+void AbstractDataPluginItem::setToolTip( const QString& toolTip )
+{
+    d->m_toolTip = toolTip;
 }
 
 QString AbstractDataPluginItem::id() const

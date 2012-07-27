@@ -246,16 +246,6 @@ QRectF MarbleGraphicsItem::contentRect() const
     return QRectF( QPointF( 0, 0 ), contentSize() );
 }
 
-QString MarbleGraphicsItem::toolTip() const
-{
-    return p()->m_toolTip;
-}
-
-void MarbleGraphicsItem::setToolTip( const QString& toolTip )
-{
-    p()->m_toolTip = toolTip;
-}
-
 void MarbleGraphicsItem::paint( GeoPainter *painter, ViewportParams *viewport,
                          const QString& renderPos, GeoSceneLayer * layer )
 {

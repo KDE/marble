@@ -36,6 +36,16 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
     QString target();
     void setTarget( const QString& target );
 
+    /**
+     * Returns the item's tool tip.
+     */
+    QString toolTip() const;
+
+    /**
+     * Set the tool tip for the item.
+     */
+    void setToolTip( const QString& toolTip );
+
     QString id() const;
     void setId( const QString& id );
 

@@ -127,8 +127,6 @@ class MarbleGraphicsItemPrivate
 
     // The layout handling the positions of the children
     AbstractMarbleGraphicsLayout *m_layout;
-    
-    QString m_toolTip;
 
     MarbleGraphicsItem *const m_marbleGraphicsItem;
 };

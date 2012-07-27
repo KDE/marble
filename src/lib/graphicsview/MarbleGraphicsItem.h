@@ -109,16 +109,6 @@ class MARBLE_EXPORT MarbleGraphicsItem
     void show();
 
     /**
-     * Returns the items tool tip or, if no tool tip has been set, an empty string.
-     */
-    QString toolTip() const;
-
-    /**
-     * Set the tool tip for this GraphicItem.
-     */
-    void setToolTip( const QString& toolTip );
-
-    /**
      * Returns the size of the item
      */
     QSizeF size() const;
