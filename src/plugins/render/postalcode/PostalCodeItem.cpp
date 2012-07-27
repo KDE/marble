@@ -27,6 +27,7 @@ PostalCodeItem::PostalCodeItem( QObject *parent )
     : AbstractDataPluginItem( parent )
 {
     setSize( QSize( 0, 0 ) );
+    setCacheMode( ItemCoordinateCache );
 }
 
 PostalCodeItem::~PostalCodeItem()
