@@ -72,7 +72,6 @@ class PhotoPluginItem : public AbstractDataPluginItem
     
  private:
     LabelGraphicsItem *m_image;
-    bool m_hasCoordinates;
     QImage m_smallImage;
     QImage m_microImage;
     TinyWebBrowser *m_browser;

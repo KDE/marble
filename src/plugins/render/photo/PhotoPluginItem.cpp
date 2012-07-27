@@ -40,7 +40,6 @@ using namespace Marble;
 PhotoPluginItem::PhotoPluginItem( QObject *parent )
     : AbstractDataPluginItem( parent ),
       m_image( 0 ),
-      m_hasCoordinates( false ),
       m_browser( 0 )
 {
     m_action = new QAction( this );
@@ -64,7 +63,7 @@ QString PhotoPluginItem::itemType() const
  
 bool PhotoPluginItem::initialized()
 {
-    return !m_smallImage.isNull() && m_hasCoordinates;
+    return !m_smallImage.isNull() && coordinate().isValid();
 }
 
 void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type )
@@ -91,7 +90,6 @@ void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type
         
         if( parser.read( &file ) ) {
             setCoordinate( coordinates );
-            m_hasCoordinates = true;
         }
     }
 
