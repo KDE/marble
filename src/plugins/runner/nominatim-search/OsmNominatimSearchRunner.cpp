@@ -51,7 +51,7 @@ void OsmNominatimRunner::returnNoResults()
     emit searchFinished( QVector<GeoDataPlacemark*>() );
 }
 
-void OsmNominatimRunner::search( const QString &searchTerm )
+void OsmNominatimRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox preferred )
 {    
     QString base = "http://nominatim.openstreetmap.org/search?";
     QString query = "q=%1&format=xml&addressdetails=1&accept-language=%2";

@@ -14,6 +14,7 @@
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataDocument.h"
+#include "GeoDataLatLonAltBox.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QVector>
@@ -59,8 +60,8 @@ public:
       * @see searchPlacemark is blocking.
       * @see searchFinished signal indicates all runners are finished.
       */
-    void findPlacemarks( const QString& searchTerm );
-    QVector<GeoDataPlacemark*> searchPlacemarks( const QString& searchTerm );
+    void findPlacemarks( const QString& searchTerm, const GeoDataLatLonAltBox preferred = GeoDataLatLonAltBox() );
+    QVector<GeoDataPlacemark*> searchPlacemarks( const QString& searchTerm, const GeoDataLatLonAltBox preferred = GeoDataLatLonAltBox() );
 
     /**
       * Find the address and other meta information for a given geoposition.

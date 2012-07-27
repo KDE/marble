@@ -13,6 +13,7 @@
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataDocument.h"
+#include "GeoDataLatLonAltBox.h"
 
 #include <QtCore/QRunnable>
 #include <QtCore/QString>
@@ -64,7 +65,7 @@ class SearchTask : public RunnerTask
     Q_OBJECT
 
 public:
-    SearchTask( const SearchRunnerPlugin *factory, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm );
+    SearchTask( const SearchRunnerPlugin *factory, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox preferred );
 
     virtual void runTask();
 
@@ -72,6 +73,7 @@ private:
     const SearchRunnerPlugin *const m_factory;
     MarbleModel *const m_model;
     QString m_searchTerm;
+    GeoDataLatLonAltBox m_preferredBbox;
 };
 
 /** A RunnerTask that executes reverse geocoding */

@@ -24,7 +24,7 @@ public:
     LatLonRunner(QObject *parent = 0);
     ~LatLonRunner();
     GeoDataFeature::GeoDataVisualCategory category() const;
-    virtual void search( const QString &searchTerm );
+    virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox preferred );
 
 };
 

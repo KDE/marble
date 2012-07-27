@@ -11,6 +11,7 @@
 #include "OsmDatabase.h"
 
 #include "DatabaseQuery.h"
+#include "GeoDataLatLonAltBox.h"
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
 #include "MarbleLocale.h"
@@ -60,13 +61,13 @@ void OsmDatabase::addFile( const QString &fileName )
     m_databases << fileName;
 }
 
-QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &searchTerm )
+QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox preferred )
 {
     if ( m_databases.isEmpty() ) {
         return QVector<OsmPlacemark>();
     }
 
-    DatabaseQuery userQuery( model, searchTerm );
+    DatabaseQuery userQuery( model, searchTerm, preferred );
 
     QVector<OsmPlacemark> result;
     QTime timer;

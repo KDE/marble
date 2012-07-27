@@ -181,7 +181,7 @@ MarbleRunnerManager::~MarbleRunnerManager()
     delete d;
 }
 
-void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
+void MarbleRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox preferred )
 {
     if ( searchTerm == d->m_lastSearchTerm ) {
       emit searchResultChanged( d->m_model );
@@ -210,7 +210,7 @@ void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
 
     QList<const SearchRunnerPlugin*> plugins = d->plugins( d->m_pluginManager->searchRunnerPlugins() );
     foreach( const SearchRunnerPlugin* plugin, plugins ) {
-        SearchTask* task = new SearchTask( plugin, this, d->m_marbleModel, searchTerm );
+        SearchTask* task = new SearchTask( plugin, this, d->m_marbleModel, searchTerm, preferred );
         connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupSearchTask( RunnerTask* ) ) );
         d->m_searchTasks << task;
         mDebug() << "search task " << plugin->nameId() << " " << (long)task;
@@ -248,7 +248,7 @@ void MarbleRunnerManagerPrivate::addSearchResult( QVector<GeoDataPlacemark*> res
     emit q->searchResultChanged( m_placemarkContainer );
 }
 
-QVector<GeoDataPlacemark*> MarbleRunnerManager::searchPlacemarks( const QString &searchTerm ) {
+QVector<GeoDataPlacemark*> MarbleRunnerManager::searchPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox preferred ) {
     QEventLoop localEventLoop;
     QTimer watchdog;
     watchdog.setSingleShot(true);
@@ -258,7 +258,7 @@ QVector<GeoDataPlacemark*> MarbleRunnerManager::searchPlacemarks( const QString 
             &localEventLoop, SLOT(quit()), Qt::QueuedConnection );
 
     watchdog.start( d->m_watchdogTimer );
-    findPlacemarks( searchTerm );
+    findPlacemarks( searchTerm, preferred );
     localEventLoop.exec();
     return d->m_placemarkContainer;
 }

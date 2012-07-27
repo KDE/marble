@@ -42,11 +42,12 @@ MarbleRunnerManager *RunnerTask::manager()
     return m_manager;
 }
 
-SearchTask::SearchTask( const SearchRunnerPlugin* factory, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm ) :
+SearchTask::SearchTask( const SearchRunnerPlugin* factory, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox preferred ) :
     RunnerTask( manager ),
     m_factory( factory ),
     m_model( model ),
-    m_searchTerm( searchTerm )
+    m_searchTerm( searchTerm ),
+    m_preferredBbox( preferred )
 {
     // nothing to do
 }
@@ -57,7 +58,7 @@ void SearchTask::runTask()
     connect( runner, SIGNAL( searchFinished( QVector<GeoDataPlacemark*> ) ),
              manager(), SLOT( addSearchResult( QVector<GeoDataPlacemark*> ) ) );
     runner->setModel( m_model );
-    runner->search( m_searchTerm );
+    runner->search( m_searchTerm, m_preferredBbox );
     runner->deleteLater();
 }
 

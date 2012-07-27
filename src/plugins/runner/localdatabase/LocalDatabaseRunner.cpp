@@ -41,7 +41,7 @@ LocalDatabaseRunner::~LocalDatabaseRunner()
 
 }
 
-void LocalDatabaseRunner::search( const QString &searchTerm )
+void LocalDatabaseRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox )
 {
     QVector<GeoDataPlacemark*> vector;
 
