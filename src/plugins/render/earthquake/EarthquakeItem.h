@@ -15,9 +15,8 @@
 #include "AbstractDataPluginItem.h"
 
 #include <QtCore/QDate>
+#include <QtGui/QFont>
 #include <QtGui/QPixmap>
-
-class QFont;
 
 namespace Marble
 {
@@ -66,7 +65,7 @@ private:
 
     QDateTime m_dateTime;
 
-    static QFont s_font;
+    static const QFont s_font;
 
     QPixmap m_seismograph;
 };
