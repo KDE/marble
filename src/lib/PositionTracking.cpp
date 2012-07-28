@@ -228,41 +228,36 @@ void PositionTracking::setTrackVisible( bool visible )
     d->m_treeModel->updateFeature( d->m_currentTrackPlacemark );
 }
 
-bool PositionTracking::saveTrack(QString& fileName)
+bool PositionTracking::saveTrack( const QString& fileName )
 {
 
-    if ( !fileName.isEmpty() )
-    {
-        if ( !fileName.endsWith(".kml", Qt::CaseInsensitive) )
-        {
-            fileName.append( ".kml" );
-        }
-
-        GeoWriter writer;
-        //FIXME: a better way to do this?
-        writer.setDocumentType( kml::kmlTag_nameSpace22 );
-
-        GeoDataDocument *document = new GeoDataDocument;
-        QFileInfo fileInfo( fileName );
-        QString name = fileInfo.baseName();
-        document->setName( name );
-        foreach( const GeoDataStyle &style, d->m_document.styles() ) {
-            document->addStyle( style );
-        }
-        foreach( const GeoDataStyleMap &map, d->m_document.styleMaps() ) {
-            document->addStyleMap( map );
-        }
-        GeoDataFeature *track = new GeoDataFeature( *d->m_currentTrackPlacemark );
-        track->setName( "Track " + name );
-        document->append( track );
-
-        QFile file( fileName );
-        file.open( QIODevice::ReadWrite );
-        bool const result = writer.write( &file, document );
-        delete document;
-        return result;
+    if ( fileName.isEmpty() ) {
+        return false;
     }
-    return false;
+
+    GeoWriter writer;
+    //FIXME: a better way to do this?
+    writer.setDocumentType( kml::kmlTag_nameSpace22 );
+
+    GeoDataDocument *document = new GeoDataDocument;
+    QFileInfo fileInfo( fileName );
+    QString name = fileInfo.baseName();
+    document->setName( name );
+    foreach( const GeoDataStyle &style, d->m_document.styles() ) {
+        document->addStyle( style );
+    }
+    foreach( const GeoDataStyleMap &map, d->m_document.styleMaps() ) {
+        document->addStyleMap( map );
+    }
+    GeoDataFeature *track = new GeoDataFeature( *d->m_currentTrackPlacemark );
+    track->setName( "Track " + name );
+    document->append( track );
+
+    QFile file( fileName );
+    file.open( QIODevice::ReadWrite );
+    bool const result = writer.write( &file, document );
+    delete document;
+    return result;
 }
 
 void PositionTracking::clearTrack()
