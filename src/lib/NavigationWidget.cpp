@@ -25,6 +25,7 @@
 #include "GeoDataTreeModel.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
+#include "ViewportParams.h"
 
 // Qt
 #include <QtCore/QTime>
@@ -66,12 +67,13 @@ class NavigationWidgetPrivate
     BranchFilterProxyModel  m_branchfilter;
     QSortFilterProxyModel  *m_sortproxy;
     QString                 m_searchTerm;
+    bool                    m_boundedSearch;
     MarbleRunnerManager    *m_runnerManager;
     GeoDataDocument        *m_document;
 };
 
 NavigationWidgetPrivate::NavigationWidgetPrivate()
-    : m_widget( 0 ), m_sortproxy( 0 ), m_runnerManager( 0 ),
+    : m_widget( 0 ), m_sortproxy( 0 ), m_boundedSearch( false ), m_runnerManager( 0 ),
       m_document( new GeoDataDocument ) {
     m_document->setDocumentRole( SearchResultDocument );
     m_document->setName( "Search Results" );
@@ -92,7 +94,8 @@ NavigationWidget::NavigationWidget( QWidget *parent, Qt::WindowFlags f )
 
     d->m_sortproxy = new QSortFilterProxyModel( this );
     d->m_navigationUi.locationListView->setModel( d->m_sortproxy );
-
+    connect( d->m_navigationUi.boundedCheckBox,  SIGNAL( toggled(bool) ),
+             this,                               SLOT( setBoundedSearch(bool) ) );
     connect( d->m_navigationUi.goHomeButton,     SIGNAL( clicked() ),
              this,                               SIGNAL( goHome() ) );
     connect( d->m_navigationUi.zoomSlider,       SIGNAL( valueChanged( int ) ),
@@ -176,7 +179,11 @@ void NavigationWidget::search(const QString &searchTerm)
     d->m_navigationUi.locationListView->setVisible( !searchTerm.isEmpty() );
 
     if ( !searchTerm.isEmpty() ) {
-        d->m_runnerManager->findPlacemarks( d->m_searchTerm );
+        if ( d->m_boundedSearch ) {
+            d->m_runnerManager->findPlacemarks( d->m_searchTerm, d->m_widget->viewport()->viewLatLonAltBox() );
+        } else {
+            d->m_runnerManager->findPlacemarks( d->m_searchTerm );
+        }
     } else {
         d->m_widget->model()->placemarkSelectionModel()->clear();
 
@@ -210,6 +217,11 @@ void NavigationWidget::changeZoom( int zoom )
     d->updateButtons( zoom );
 
     d->m_navigationUi.zoomSlider->blockSignals( false );
+}
+
+void NavigationWidget::setBoundedSearch( bool value )
+{
+    d->m_boundedSearch = value;
 }
 
 void NavigationWidgetPrivate::setSearchResult( QVector<GeoDataPlacemark*> locations )
