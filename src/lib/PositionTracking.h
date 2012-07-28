@@ -91,6 +91,10 @@ public:
      */
     qreal length( qreal planetRadius ) const;
 
+    void readSettings();
+
+    void writeSettings();
+
 public Q_SLOTS:
     /**
       * Toggles the visibility of the Position Tracking document

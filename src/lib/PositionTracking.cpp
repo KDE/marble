@@ -14,10 +14,12 @@
 
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataParser.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
 #include "GeoDataTrack.h"
 #include "GeoDataTreeModel.h"
+#include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 #include "FileManager.h"
@@ -50,13 +52,15 @@ class PositionTrackingPrivate
 
     void updateStatus();
 
+    QString statusFile();
+
     PositionTracking *const q;
 
     GeoDataTreeModel *const m_treeModel;
 
     GeoDataPlacemark *const m_currentPositionPlacemark;
-    GeoDataPlacemark *const m_currentTrackPlacemark;
-    GeoDataMultiGeometry *const m_trackSegments;
+    GeoDataPlacemark *m_currentTrackPlacemark;
+    GeoDataMultiGeometry *m_trackSegments;
     GeoDataDocument m_document;
 
     GeoDataCoordinates  m_gpsPreviousPosition;
@@ -108,6 +112,24 @@ void PositionTrackingPrivate::updateStatus()
     }
 
     emit q->statusChanged( status );
+}
+
+QString PositionTrackingPrivate::statusFile()
+{
+    QString const subdir = "tracking";
+    QDir dir( MarbleDirs::localPath() );
+    if ( !dir.exists( subdir ) ) {
+        if ( !dir.mkdir( subdir ) ) {
+            mDebug() << "Unable to create dir " << dir.absoluteFilePath( subdir );
+            return dir.absolutePath();
+        }
+    }
+
+    if ( !dir.cd( subdir ) ) {
+        mDebug() << "Cannot change into " << dir.absoluteFilePath( subdir );
+    }
+
+    return dir.absoluteFilePath( "track.kml" );
 }
 
 PositionTracking::PositionTracking( GeoDataTreeModel *model )
@@ -254,8 +276,9 @@ bool PositionTracking::saveTrack( const QString& fileName )
     document->append( track );
 
     QFile file( fileName );
-    file.open( QIODevice::ReadWrite );
+    file.open( QIODevice::WriteOnly );
     bool const result = writer.write( &file, document );
+    file.close();
     delete document;
     return result;
 }
@@ -268,6 +291,69 @@ void PositionTracking::clearTrack()
     d->m_trackSegments->append( d->m_currentTrack );
     d->m_treeModel->addFeature( &d->m_document, d->m_currentTrackPlacemark );
     d->m_length = 0.0;
+}
+
+void PositionTracking::readSettings()
+{
+    QFile file( d->statusFile() );
+    if ( !file.open( QIODevice::ReadOnly ) ) {
+        qDebug() << "Can not read track from " << file.fileName();
+        return;
+    }
+
+    GeoDataParser parser( GeoData_KML );
+    if ( !parser.read( &file ) ) {
+        qDebug() << "Could not parse tracking file: " << parser.errorString();
+        return;
+    }
+
+    GeoDataDocument *doc = dynamic_cast<GeoDataDocument*>( parser.releaseDocument() );
+    file.close();
+
+    if( !doc ){
+        qDebug() << "tracking document not available";
+        return;
+    }
+
+    GeoDataPlacemark *track = dynamic_cast<GeoDataPlacemark*>( doc->child( 0 ) );
+    if( !track ) {
+        qDebug() << "tracking document doesn't have a placemark";
+        delete doc;
+        return;
+    }
+
+    d->m_trackSegments = dynamic_cast<GeoDataMultiGeometry*>( track->geometry() );
+    if( !d->m_trackSegments && d->m_trackSegments->size() < 1 ) {
+        qDebug() << "tracking document doesn't have a multigeometry";
+        delete doc;
+        return;
+    }
+
+    d->m_currentTrack = dynamic_cast<GeoDataTrack*>( d->m_trackSegments->child( d->m_trackSegments->size() - 1 ) );
+    if( !d->m_currentTrack ) {
+        qDebug() << "tracking document doesn't have a last track";
+        delete doc;
+        return;
+    }
+
+    doc->remove( 0 );
+    delete doc;
+
+    d->m_treeModel->removeDocument( &d->m_document );
+    d->m_document.remove( 1 );
+    delete d->m_currentTrackPlacemark;
+    d->m_currentTrackPlacemark = track;
+    d->m_currentTrackPlacemark->setName("Current Track");
+    d->m_document.append( d->m_currentTrackPlacemark );
+    d->m_currentTrackPlacemark->setStyleUrl( d->m_currentTrackPlacemark->styleUrl() );
+
+    d->m_treeModel->addDocument( &d->m_document );
+    d->m_length = 0.0;
+}
+
+void PositionTracking::writeSettings()
+{
+    saveTrack( d->statusFile() );
 }
 
 bool PositionTracking::isTrackEmpty() const
