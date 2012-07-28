@@ -77,6 +77,7 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
     virtual bool eventFilter( QObject *object, QEvent *e );
     virtual void contextMenuEvent ( QWidget *w, QContextMenuEvent *e );
     virtual void toolTipEvent( QHelpEvent *e );
+    virtual void changeViewport( ViewportParams *viewport );
     QMenu* contextMenu();
 
  private:

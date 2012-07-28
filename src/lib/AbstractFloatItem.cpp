@@ -172,6 +172,11 @@ void AbstractFloatItem::toolTipEvent ( QHelpEvent *e )
     Q_UNUSED( e );
 }
 
+void AbstractFloatItem::changeViewport( ViewportParams *viewport )
+{
+    Q_UNUSED( viewport );
+}
+
 bool AbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport,
              const QString& renderPos, GeoSceneLayer * layer )
 {
@@ -179,7 +184,10 @@ bool AbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport,
         return true;
     }
 
+    changeViewport( viewport ); // may invalidate graphics item's cache
+
     paintEvent( painter, viewport, renderPos, layer );
+
     return true;
 }
 

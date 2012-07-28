@@ -102,10 +102,6 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
             // Saving the screen size needed for positions()
             m_viewportSize = viewport->size();
         }
-
-        ScreenGraphicsItem *screenGraphicsItem
-                = static_cast<ScreenGraphicsItem *>( m_marbleGraphicsItem );
-        screenGraphicsItem->changeViewport( viewport );
     }
 
     bool isMovable() const

@@ -82,8 +82,6 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
      */
     QList<QPointF> absolutePositions() const;
 
-    virtual void changeViewport( ViewportParams *viewport );
-
     /**
      * Returns the flags of the item.
      */

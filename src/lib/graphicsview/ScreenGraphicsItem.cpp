@@ -66,11 +66,6 @@ void ScreenGraphicsItem::setFlags( ScreenGraphicsItem::GraphicsItemFlags flags )
     p()->m_flags = flags;
 }
 
-void ScreenGraphicsItem::changeViewport( ViewportParams *viewport )
-{
-    Q_UNUSED( viewport );
-}
-
 bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
 {
     MarbleWidget *widget = dynamic_cast<MarbleWidget*>(object);
