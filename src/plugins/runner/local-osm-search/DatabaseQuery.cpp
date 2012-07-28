@@ -27,6 +27,9 @@ DatabaseQuery::DatabaseQuery( MarbleModel* model, const QString &searchTerm, con
     if ( model && model->positionTracking()->status() == PositionProviderStatusAvailable ) {
         m_position = model->positionTracking()->currentLocation();
         m_resultFormat = DistanceFormat;
+    } else if ( !preferred.isEmpty() ) {
+        m_position = preferred.center();
+        m_resultFormat = AddressFormat;
     } else {
         m_resultFormat = AddressFormat;
     }

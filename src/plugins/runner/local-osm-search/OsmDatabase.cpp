@@ -114,7 +114,8 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
         if ( userQuery.queryType() == DatabaseQuery::CategorySearch ) {
             queryString += " WHERE regions.id = places.region AND places.category = %1";
             queryString = queryString.arg( (qint32) userQuery.category() );
-            if ( userQuery.resultFormat() == DatabaseQuery::DistanceFormat && userQuery.region().isEmpty() ) {
+            if ( userQuery.position().isValid() && userQuery.region().isEmpty() ) {
+                // sort by distance
                 queryString += " ORDER BY ((places.lat-%1)*(places.lat-%1)+(places.lon-%2)*(places.lon-%2))";
                 GeoDataCoordinates position = userQuery.position();
                 queryString = queryString.arg( position.latitude( GeoDataCoordinates::Degree ), 0, 'f', 8 )
@@ -171,7 +172,7 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
     qSort( result.begin(), result.end() );
     unique( result );
 
-    if ( userQuery.resultFormat() == DatabaseQuery::DistanceFormat ) {
+    if ( userQuery.position().isValid() ) {
         s_currentPosition = userQuery.position();
         qSort( result.begin(), result.end(), placemarkSmallerDistance );
     } else {
