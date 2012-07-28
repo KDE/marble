@@ -182,11 +182,13 @@ void NavigationWidget::search(const QString &searchTerm)
 
         // clear the local document
         GeoDataTreeModel *treeModel = d->m_widget->model()->treeModel();
-        while ( d->m_document->size() ) {
-            GeoDataFeature *feature = d->m_document->child( 0 );
-            treeModel->removeFeature( d->m_document, 0 );
-            delete feature;
-        }
+        treeModel->removeDocument( d->m_document );
+        d->m_document->clear();
+        treeModel->addDocument( d->m_document );
+        d->m_branchfilter.setBranchIndex( treeModel, treeModel->index( d->m_document ) );
+        d->m_navigationUi.locationListView->setRootIndex(
+                    d->m_sortproxy->mapFromSource(
+                        d->m_branchfilter.mapFromSource( treeModel->index( d->m_document ) ) ) );
     }
 }
 
@@ -222,15 +224,16 @@ void NavigationWidgetPrivate::setSearchResult( QVector<GeoDataPlacemark*> locati
     // fill the local document with results
     m_widget->model()->placemarkSelectionModel()->clear();
     GeoDataTreeModel *treeModel = m_widget->model()->treeModel();
-    while ( m_document->size() ) {
-        GeoDataFeature *feature = m_document->child( 0 );
-        treeModel->removeFeature( m_document, 0 );
-        delete feature;
-    }
+    treeModel->removeDocument( m_document );
+    m_document->clear();
     foreach (GeoDataPlacemark *placemark, locations ) {
-        treeModel->addFeature( m_document, new GeoDataPlacemark( *placemark ) );
+        m_document->append( new GeoDataPlacemark( *placemark ) );
     }
-
+    treeModel->addDocument( m_document );
+    m_branchfilter.setBranchIndex( treeModel, treeModel->index( m_document ) );
+    m_navigationUi.locationListView->setRootIndex(
+                m_sortproxy->mapFromSource(
+                    m_branchfilter.mapFromSource( treeModel->index( m_document ) ) ) );
     m_widget->centerOn( m_document->latLonAltBox() );
     mDebug() << "NavigationWidget (searchResults): Time elapsed:"<< t.elapsed() << " ms";
 }
