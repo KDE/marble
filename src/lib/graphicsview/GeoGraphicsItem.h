@@ -75,35 +75,6 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     void setFlags( GeoGraphicsItemFlags flags );
 
     /**
-     * Returns the minimum number of pixels the GeoGraphicsItem has to be projected on for this item
-     * to be considered as active. 0 would mean no minimum number of pixels which is also the
-     * standard value.
-     */
-    int minLodPixels() const;
-
-    /**
-     * Sets the minimum number of pixels the GeoGraphicsItem has to be projected on for this item to
-     * be considered as active.
-     */
-    void setMinLodPixels( int pixels );
-
-    /**
-     * Returns the maximum number of pixels the GeoGraphicsItem has to be
-     * projected on for this item to be considered as active. -1 would mean no
-     * maximum number of pixels which is also the standard value.
-     */
-    int maxLodPixels() const;
-
-    /**
-     * Sets the maximum number of pixels the GeoGraphicsItem has to be projected on for this item to
-     * be considered as active.
-     */
-    void setMaxLodPixels( int pixels );
-
-    // int minFadeExtend() const;
-    // int maxFadeExtend() const;
-    
-    /**
      * Returns the minim zoom level on which item will be active.
      */
     int minZoomLevel() const;

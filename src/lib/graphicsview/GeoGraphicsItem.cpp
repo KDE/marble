@@ -59,26 +59,6 @@ void GeoGraphicsItem::setFlags( GeoGraphicsItemFlags flags )
     p()->m_flags = flags;
 }
 
-int GeoGraphicsItem::minLodPixels() const
-{
-    return p()->m_minLodPixels;
-}
-
-void GeoGraphicsItem::setMinLodPixels( int pixels )
-{
-    p()->m_minLodPixels = pixels;
-}
-
-int GeoGraphicsItem::maxLodPixels() const
-{
-    return p()->m_maxLodPixels;
-}
-
-void GeoGraphicsItem::setMaxLodPixels( int pixels )
-{
-    p()->m_maxLodPixels = pixels;
-}
-
 GeoDataLatLonAltBox& GeoGraphicsItem::latLonAltBox() const
 {
     return p()->m_latLonAltBox;

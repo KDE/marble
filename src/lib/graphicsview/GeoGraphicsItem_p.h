@@ -28,8 +28,6 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         : MarbleGraphicsItemPrivate( parent ),
           m_zValue( 0 ),
           m_positions(),
-          m_minLodPixels( 0 ),
-          m_maxLodPixels( -1 ),
           m_minZoomLevel( 0 ),
           m_latLonAltBox(),
           m_style( 0 )
@@ -53,11 +51,9 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
     void setProjection( ViewportParams *viewport,
                         GeoPainter *painter )
     {
-        m_positions.clear();
+        Q_UNUSED( painter );
 
-        if ( !isActive( painter ) ) {
-            return;
-        }
+        m_positions.clear();
 
         qreal x[100], y;
         int pointRepeatNumber;
@@ -78,48 +74,11 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         }
     }
 
-    /**
-     * Returns true if the item is active and should be shown.
-     * This depends on the LOD settings.
-     */
-    virtual bool isActive( GeoPainter *painter )
-    {
-        if ( m_latLonAltBox.isNull()
-             || ( m_minLodPixels == 0 && m_maxLodPixels == -1 ) )
-        {
-            return true;
-        }
-
-        QRegion region = painter->regionFromRect( m_latLonAltBox.center(),
-                                                  m_latLonAltBox.width(),
-                                                  m_latLonAltBox.height(),
-                                                  true );
-
-        int pixels = 0;
-
-        foreach( QRect rect, region.rects() ) {
-            pixels += rect.width() * rect.height();
-        }
-
-        if ( pixels >= m_minLodPixels
-             && pixels <= m_maxLodPixels )
-        {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
     GeoDataCoordinates m_coordinate;
     qreal m_zValue;
     QList<QPointF> m_positions;
     GeoGraphicsItem::GeoGraphicsItemFlags m_flags;
 
-    // LOD
-    int m_minLodPixels;
-    int m_maxLodPixels;
-    
     int m_minZoomLevel;
     
     GeoDataLatLonAltBox m_latLonAltBox;
