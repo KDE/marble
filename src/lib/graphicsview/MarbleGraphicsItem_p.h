@@ -90,7 +90,7 @@ class MarbleGraphicsItemPrivate
 #endif
     }
 
-    virtual void setProjection( ViewportParams *viewport, GeoPainter *painter ) = 0;
+    virtual void setProjection( ViewportParams *viewport ) = 0;
 
     void updateChildPositions()
     {

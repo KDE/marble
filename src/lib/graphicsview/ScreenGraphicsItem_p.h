@@ -92,11 +92,8 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         return absolutePositions;
     }
 
-    void setProjection( ViewportParams *viewport,
-                        GeoPainter *painter )
+    void setProjection( ViewportParams *viewport )
     {
-        Q_UNUSED( painter );
-
         // If we have no parent
         if( m_parent == 0 ) {
             // Saving the screen size needed for positions()

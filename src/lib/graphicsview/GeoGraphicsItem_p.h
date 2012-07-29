@@ -48,11 +48,8 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         return m_positions;
     }
 
-    void setProjection( ViewportParams *viewport,
-                        GeoPainter *painter )
+    void setProjection( ViewportParams *viewport )
     {
-        Q_UNUSED( painter );
-
         m_positions.clear();
 
         qreal x[100], y;
