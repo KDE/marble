@@ -16,6 +16,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
 #include "GeoDataLineStyle.h"
+#include "GeoDataMultiTrack.h"
 #include "GeoDataObject.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
@@ -284,6 +285,15 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry
         for ( int row = 0; row < rowCount; ++row )
         {
             createGraphicsItemFromGeometry( multigeo->child( row ), placemark );
+        }
+    }
+    else if ( object->nodeType() == GeoDataTypes::GeoDataMultiTrackType  )
+    {
+        const GeoDataMultiTrack *multitrack = static_cast<const GeoDataMultiTrack*>( object );
+        int rowCount = multitrack->size();
+        for ( int row = 0; row < rowCount; ++row )
+        {
+            createGraphicsItemFromGeometry( multitrack->child( row ), placemark );
         }
     }
     else if ( object->nodeType() == GeoDataTypes::GeoDataTrackType )
