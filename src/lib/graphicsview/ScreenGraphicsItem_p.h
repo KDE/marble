@@ -14,7 +14,7 @@
 #include "MarbleGraphicsItem_p.h"
 #include "MarbleDebug.h"
 
-#include "GeoGraphicsItem.h"
+#include "BillboardGraphicsItem.h"
 #include "ScreenGraphicsItem.h"
 #include "ViewportParams.h"
 
@@ -74,8 +74,8 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         if( ScreenGraphicsItem *screenItem = dynamic_cast<ScreenGraphicsItem*>( m_parent ) ) {
             parentPositions = screenItem->absolutePositions();
         }
-        else if ( GeoGraphicsItem *geoItem = dynamic_cast<GeoGraphicsItem*>( m_parent ) ) {
-            parentPositions = geoItem->positions();
+        else if ( BillboardGraphicsItem *geoLabelItem = dynamic_cast<BillboardGraphicsItem *>( m_parent ) ) {
+            parentPositions = geoLabelItem->positions();
         }
 
         QPointF relativePosition = positivePosition();

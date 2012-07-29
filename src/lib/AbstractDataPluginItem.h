@@ -15,7 +15,7 @@
 #include <QtCore/QString>
 #include <QtCore/QHash>
 
-#include "GeoGraphicsItem.h"
+#include "BillboardGraphicsItem.h"
 #include "marble_export.h"
 
 class QAction;
@@ -25,7 +25,7 @@ namespace Marble
 
 class AbstractDataPluginItemPrivate;
 
-class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsItem
+class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public BillboardGraphicsItem
 {
     Q_OBJECT
 

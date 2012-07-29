@@ -13,13 +13,8 @@
 #define MARBLE_GEOGRAPHICSITEM_H
 
 // Marble
-#include "MarbleGraphicsItem.h"
 #include "marble_export.h"
 
-// Qt
-#include <QtCore/QList>
-
-class QPoint;
 class QString;
 
 namespace Marble
@@ -30,8 +25,11 @@ class GeoDataLatLonAltBox;
 
 class GeoGraphicsItemPrivate;
 class GeoDataStyle;
+class GeoPainter;
+class GeoSceneLayer;
+class ViewportParams;
 
-class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
+class MARBLE_EXPORT GeoGraphicsItem
 {
  public:
     GeoGraphicsItem();
@@ -45,6 +43,10 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     };
 
     Q_DECLARE_FLAGS(GeoGraphicsItemFlags, GeoGraphicsItemFlag)
+
+    bool visible() const;
+
+    void setVisible( bool visible );
 
     /**
      * Return the coordinate of the item as a GeoDataCoordinates
@@ -117,12 +119,19 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     void setZValue( qreal z );
 
     /**
-     * Returns all coordinates of the item in view coordinates according to the given projection.
+     * Paints the item using the given GeoPainter.
+     *
+     * Note that depending on the projection and zoom level, the item may be visible more than once.
+     * GeoPainter will therefore automatically "repeat" primitives which have a geo position (GeoDataCoordinates).
      */
-    QList<QPointF> positions() const;
+    virtual void paint( GeoPainter *painter, ViewportParams *viewport,
+                        const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
 
  protected:
     GeoGraphicsItemPrivate *p() const;
+
+ private:
+    GeoGraphicsItemPrivate *const d;
 };
 
 } // Namespace Marble

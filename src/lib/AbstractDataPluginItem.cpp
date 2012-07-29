@@ -43,7 +43,7 @@ class AbstractDataPluginItemPrivate
 
 AbstractDataPluginItem::AbstractDataPluginItem( QObject *parent )
     : QObject( parent ),
-      GeoGraphicsItem(),
+      BillboardGraphicsItem(),
       d( new AbstractDataPluginItemPrivate )
 {
 }

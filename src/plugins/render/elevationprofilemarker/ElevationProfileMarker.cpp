@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright      2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 // Copyright 2011-2012 Florian Eßer <f.esser@rwth-aachen.de>
 //
 
