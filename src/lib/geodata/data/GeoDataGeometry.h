@@ -49,6 +49,7 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     friend class GeoDataPolygon;
     friend class GeoDataLineString;
     friend class GeoDataMultiGeometry;
+    friend class GeoDataMultiTrack;
  public:
     GeoDataGeometry();
     GeoDataGeometry( const GeoDataGeometry& other );

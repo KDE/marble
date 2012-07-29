@@ -185,4 +185,6 @@ private:
 
 }
 
+Q_DECLARE_METATYPE( Marble::GeoDataTrack* )
+
 #endif // MARBLE_GEODATAGXTRACK_H
