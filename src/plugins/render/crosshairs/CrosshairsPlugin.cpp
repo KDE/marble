@@ -60,7 +60,7 @@ QString CrosshairsPlugin::renderPolicy() const
 
 QStringList CrosshairsPlugin::renderPosition() const
 {
-    return QStringList( "ALWAYS_ON_TOP" ); // although this is not a float item we choose the position of one
+    return QStringList( "FLOAT_ITEM" ); // although this is not a float item we choose the position of one
 }
 
 QString CrosshairsPlugin::name() const
