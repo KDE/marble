@@ -20,7 +20,7 @@
 namespace Marble
 {
 
-DatabaseQuery::DatabaseQuery( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox preferred ) :
+DatabaseQuery::DatabaseQuery( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) :
     m_queryType( BroadSearch ), m_resultFormat( AddressFormat ), m_searchTerm( searchTerm.trimmed() ),
     m_category( OsmPlacemark::UnknownCategory )
 {

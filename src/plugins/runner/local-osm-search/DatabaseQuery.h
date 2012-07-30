@@ -39,7 +39,7 @@ public:
         DistanceFormat /// display results with distance information
     };
 
-    DatabaseQuery( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox preferred );
+    DatabaseQuery( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
     QueryType queryType() const;
 

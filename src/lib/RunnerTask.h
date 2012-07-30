@@ -65,7 +65,7 @@ class SearchTask : public RunnerTask
     Q_OBJECT
 
 public:
-    SearchTask( const SearchRunnerPlugin *factory, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox preferred );
+    SearchTask( const SearchRunnerPlugin *factory, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
     virtual void runTask();
 

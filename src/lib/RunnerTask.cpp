@@ -42,7 +42,7 @@ MarbleRunnerManager *RunnerTask::manager()
     return m_manager;
 }
 
-SearchTask::SearchTask( const SearchRunnerPlugin* factory, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox preferred ) :
+SearchTask::SearchTask( const SearchRunnerPlugin* factory, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) :
     RunnerTask( manager ),
     m_factory( factory ),
     m_model( model ),

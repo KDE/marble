@@ -95,7 +95,7 @@ NavigationWidget::NavigationWidget( QWidget *parent, Qt::WindowFlags f )
     d->m_sortproxy = new QSortFilterProxyModel( this );
     d->m_navigationUi.locationListView->setModel( d->m_sortproxy );
     connect( d->m_navigationUi.boundedCheckBox,  SIGNAL( toggled(bool) ),
-             this,                               SLOT( setBoundedSearch(bool) ) );
+             this,                               SLOT( setBoundedSearchEnabled(bool) ) );
     connect( d->m_navigationUi.goHomeButton,     SIGNAL( clicked() ),
              this,                               SIGNAL( goHome() ) );
     connect( d->m_navigationUi.zoomSlider,       SIGNAL( valueChanged( int ) ),
@@ -219,7 +219,7 @@ void NavigationWidget::changeZoom( int zoom )
     d->m_navigationUi.zoomSlider->blockSignals( false );
 }
 
-void NavigationWidget::setBoundedSearch( bool value )
+void NavigationWidget::setBoundedSearchEnabled( bool value )
 {
     d->m_boundedSearch = value;
 }

@@ -32,7 +32,7 @@ public:
     // Overriding MarbleAbstractRunner
     GeoDataFeature::GeoDataVisualCategory category() const;
 
-    virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox preferred );
+    virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
 private:
     OsmDatabase *m_database;

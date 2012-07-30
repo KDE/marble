@@ -100,7 +100,7 @@ GeoDataFeature::GeoDataVisualCategory LocalOsmSearchRunner::category() const
 }
 
 
-void LocalOsmSearchRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox preferred )
+void LocalOsmSearchRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred )
 {
     QVector<OsmPlacemark> placemarks = m_database->find( model(), searchTerm, preferred );
 

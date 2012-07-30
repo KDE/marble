@@ -73,7 +73,7 @@ public:
       * If implemented in a plugin, make sure to include Search in the
       * plugin capabilities, otherwise MarbleRunnerManager will ignore the plugin
       */
-    virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox preferred );
+    virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
     /**
       * Start a file parsing. Called by MarbleRunnerManager, runners

@@ -37,7 +37,7 @@ public:
     void clear();
 
     /** Search the database for matching regions and placemarks */
-    QVector<OsmPlacemark> find( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox preferred );
+    QVector<OsmPlacemark> find( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
 private:
     QString wildcardQuery( const QString &term ) const;

@@ -182,7 +182,7 @@ MarbleRunnerManager::~MarbleRunnerManager()
     delete d;
 }
 
-void MarbleRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox preferred )
+void MarbleRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox &preferred )
 {
     if ( searchTerm == d->m_lastSearchTerm && preferred == d->m_lastPreferredBox ) {
       emit searchResultChanged( d->m_model );
@@ -249,7 +249,7 @@ void MarbleRunnerManagerPrivate::addSearchResult( QVector<GeoDataPlacemark*> res
     emit q->searchResultChanged( m_placemarkContainer );
 }
 
-QVector<GeoDataPlacemark*> MarbleRunnerManager::searchPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox preferred ) {
+QVector<GeoDataPlacemark*> MarbleRunnerManager::searchPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) {
     QEventLoop localEventLoop;
     QTimer watchdog;
     watchdog.setSingleShot(true);

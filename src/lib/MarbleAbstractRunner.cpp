@@ -37,7 +37,7 @@ MarbleModel * MarbleAbstractRunner::model()
     return m_model;
 }
 
-void MarbleAbstractRunner::search( const QString &, const GeoDataLatLonAltBox preferred )
+void MarbleAbstractRunner::search(const QString &, const GeoDataLatLonAltBox & )
 {
     // dummy implementation
     emit searchFinished( QVector<GeoDataPlacemark*>() );

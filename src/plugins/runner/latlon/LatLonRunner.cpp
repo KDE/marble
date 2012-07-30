@@ -38,7 +38,7 @@ LatLonRunner::~LatLonRunner()
 {
 }
 
-void LatLonRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox )
+void LatLonRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox & )
 {
     QVector<GeoDataPlacemark*> vector;
 

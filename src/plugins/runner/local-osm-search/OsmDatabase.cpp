@@ -61,7 +61,7 @@ void OsmDatabase::addFile( const QString &fileName )
     m_databases << fileName;
 }
 
-QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox preferred )
+QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred )
 {
     if ( m_databases.isEmpty() ) {
         return QVector<OsmPlacemark>();
