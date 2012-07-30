@@ -38,6 +38,7 @@
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneFilter.h"
+#include "GeoSceneGeodata.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneLayer.h"
 #include "GeoSceneMap.h"
@@ -280,7 +281,7 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
 
             // look for documents
             foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
-                QString containername = reinterpret_cast<GeoSceneXmlDataSource*>( dataset )->filename();
+                QString containername = reinterpret_cast<GeoSceneGeodata*>( dataset )->sourceFile();
                 loadedContainers <<  containername;
             }
         }
@@ -316,6 +317,8 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
     }
 
     QStringList loadList;
+    QList<GeoDataStyle*> styleList;
+
     foreach ( GeoSceneLayer *layer, d->m_mapTheme->map()->layers() ) {
         if ( layer->backend() != dgml::dgmlValue_geodata )
             continue;
@@ -324,9 +327,29 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
 
         // look for documents
         foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
-            QString containername = reinterpret_cast<GeoSceneXmlDataSource*>( dataset )->filename();
+
+            QString containername = reinterpret_cast<GeoSceneGeodata*>( dataset )->sourceFile();
+            QPen pen = reinterpret_cast<GeoSceneGeodata*>( dataset )->pen();
+            QBrush brush = reinterpret_cast<GeoSceneGeodata*>( dataset )->brush();
+
+//            qDebug() << "Marble Model " << containername << " Pen color = " << pen.color();
+
+
+            GeoDataLineStyle* lineStyle = new GeoDataLineStyle( pen.color() );
+            lineStyle->setPenStyle( pen.style() );
+            lineStyle->setWidth( pen.width() );
+
+            GeoDataPolyStyle* polyStyle = new GeoDataPolyStyle( brush.color() );
+            polyStyle->setFill( true );
+
+            GeoDataStyle* style = new GeoDataStyle;
+            style->setLineStyle( *lineStyle );
+            style->setPolyStyle( *polyStyle );
+            style->setStyleId( "default" );
+
             if ( !loadedContainers.removeOne( containername ) ) {
                 loadList << containername;
+                styleList << style;
             }
         }
     }
@@ -336,11 +359,17 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
         d->m_fileManager->removeFile( container );
     }
     // load new standard Placemarks
-    d->m_fileManager->addFile( loadList, MapDocument );
+
+//    qDebug() << "Before calling File Manager!!!\n";
+    d->m_fileManager->addFile( loadList, styleList, MapDocument );
     loadList.clear();
+    styleList.clear();
 
     mDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
+//    qDebug() << "Before emit\n";
     emit themeChanged( mapTheme->head()->mapThemeId() );
+
+//    qDebug() << "After calling File Manager!!!\n";
 }
 
 void MarbleModel::home( qreal &lon, qreal &lat, int& zoom ) const
@@ -423,6 +452,11 @@ void MarbleModel::removePlacemarkKey( const QString& key )
 }
 
 FileManager *MarbleModel::fileManager()
+{
+    return d->m_fileManager;
+}
+
+const FileManager *MarbleModel::fileManager() const
 {
     return d->m_fileManager;
 }
@@ -626,7 +660,8 @@ void MarbleModel::setLegend( QTextDocument * legend )
 
 void MarbleModel::addGeoDataFile( const QString& filename )
 {
-    d->m_fileManager->addFile( filename, UserDocument, true );
+    GeoDataStyle* dummyStyle = new GeoDataStyle;
+    d->m_fileManager->addFile( filename, dummyStyle, UserDocument, true );
 }
 
 void MarbleModel::addGeoDataString( const QString& data, const QString& key )

@@ -23,6 +23,9 @@
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataStyleMap.h"
+#include "GeoDataPolyStyle.h"
+#include "GeoDataLineStyle.h"
+#include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
 #include "MarbleClock.h"
 #include "MarbleDirs.h"
@@ -37,11 +40,12 @@ class FileLoaderPrivate
 {
 public:
     FileLoaderPrivate( FileLoader* parent, MarbleModel *model,
-                       const QString& file, DocumentRole role )
+                       const QString& file, DocumentRole role, GeoDataStyle* style )
         : q( parent),
           m_runner( new MarbleRunnerManager( model->pluginManager(), q ) ),
           m_filepath ( file ),
           m_documentRole ( role ),
+          m_style( style ),
           m_document( 0 ),
           m_clock( model->clock() )
     {
@@ -82,6 +86,7 @@ public:
     QString m_contents;
     QString m_nonExistentLocalCacheFile;
     DocumentRole m_documentRole;
+    GeoDataStyle* m_style;
     GeoDataDocument *m_document;
     QString m_error;
 
@@ -89,9 +94,9 @@ public:
 };
 
 FileLoader::FileLoader( QObject* parent, MarbleModel *model,
-                       const QString& file, DocumentRole role = UnknownDocument )
+                       const QString& file, DocumentRole role = UnknownDocument, GeoDataStyle* style = new GeoDataStyle() )
     : QThread( parent ),
-      d( new FileLoaderPrivate( this, model, file, role ) )
+      d( new FileLoaderPrivate( this, model, file, role, style ) )
 {
 }
 
@@ -162,6 +167,8 @@ void FileLoader::run()
         if ( QFile::exists( cacheFile ) ) {
             mDebug() << "Loading Cache File:" + cacheFile;
 
+//            qDebug() << "File loader loaded from cache!\n";
+
             QDateTime sourceLastModified;
 
             if ( QFile::exists( defaultSourceName ) ) {
@@ -179,7 +186,6 @@ void FileLoader::run()
         // we load source file, multiple cases
         else if ( QFile::exists( defaultSourceName ) ) {
             mDebug() << "No recent Default Placemark Cache File available!";
-
             // use runners: pnt, gpx, osm
             connect( d->m_runner, SIGNAL( parsingFinished(GeoDataDocument*,QString) ),
                     this, SLOT( documentParsed( GeoDataDocument*, QString ) ) );
@@ -209,6 +215,9 @@ void FileLoader::run()
         d->m_document = static_cast<GeoDataDocument*>( document );
         d->m_document->setDocumentRole( d->m_documentRole );
         d->m_document->setFileName( d->m_filepath );
+
+        qDebug() << "File loader document loaded " << d->m_document->fileName() << "\n";
+
         d->createFilterProperties( d->m_document );
         buffer.close();
 
@@ -286,8 +295,9 @@ void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& err
     m_error = error;
     if ( doc ) {
         m_document = doc;
-        doc->setFileName( m_filepath );
+        doc->setFileName( m_filepath );       
         createFilterProperties( doc );
+        qDebug() << "FileLoaderPrivate::documentParsed " << doc->fileName();
         emit q->newGeoDataDocumentAdded( m_document );
         if ( !m_nonExistentLocalCacheFile.isEmpty() ) {
             saveFile( m_nonExistentLocalCacheFile );
@@ -300,6 +310,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
 {
     QVector<GeoDataFeature*>::Iterator i = container->begin();
     QVector<GeoDataFeature*>::Iterator const end = container->end();
+
     for (; i != end; ++i ) {
         if ( (*i)->nodeType() == GeoDataTypes::GeoDataFolderType
              || (*i)->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
@@ -312,6 +323,13 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
             GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>( *i );
 
             bool hasPopularity = false;
+
+            if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
+                placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType && m_documentRole == MapDocument ) {
+
+                placemark->setStyle( m_style );
+            }
+            
 
             // Mountain (H), Volcano (V), Shipwreck (W)
             if ( placemark->role() == "H" || placemark->role() == "V" || placemark->role() == "W" )

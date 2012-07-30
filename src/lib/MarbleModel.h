@@ -206,7 +206,9 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void addGeoDataFile( const QString& filename );
     void addGeoDataString( const QString& data, const QString& key = "data" );
     void removeGeoData( const QString& key );
+
     FileManager       *fileManager();
+    const FileManager   *fileManager() const;
 
     FileViewModel      *fileViewModel();
 

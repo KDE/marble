@@ -467,12 +467,14 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
                         q->screenCoordinates( southPolePositive, viewport, positiveX, positiveY, globeHidesPoint );
                         q->screenCoordinates( southPoleNegative, viewport, negativeX, negativeY, globeHidesPoint );                   
 
-
+/*
                         if ( sgnCrossing == 1 ) 
                             *polygons.last() << QPointF( positiveX, positiveY ) << QPointF( negativeX, negativeY );
                         else
                             *polygons.last() << QPointF( negativeX, negativeY ) << QPointF( positiveX, positiveY );
-
+*/                            
+                            
+                            
                     }
                 }
 

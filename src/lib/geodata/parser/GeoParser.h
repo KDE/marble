@@ -24,6 +24,7 @@
 
 #include <QtCore/QPair>
 #include <QtCore/QStack>
+#include <QtCore/QDebug>
 #include <QtXml/QXmlStreamReader>
 
 #include "geodata_export.h"

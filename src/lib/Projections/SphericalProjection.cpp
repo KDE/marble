@@ -427,6 +427,8 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
     const bool isLong = lineString.size() > 50;
 
+//    qDebug() << "Detail level = " << detailLevel;
+
     while ( itCoords != itEnd )
     {
         isAtHorizon = false;
@@ -542,7 +544,7 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
             break;
         }
 
-//        ++itCoords;
+//        ++itCoords; // No Douglas-Peucker filtering
         lineString.nextFilteredAt( itCoords, detailLevel );
 
         if ( itCoords == itEnd  && lineString.isClosed() ) {

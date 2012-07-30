@@ -68,7 +68,7 @@ QString GraticulePlugin::renderPolicy() const
 
 QStringList GraticulePlugin::renderPosition() const
 {
-    return QStringList( "SURFACE" );
+    return QStringList( "HOVERS_ABOVE_SURFACE" );
 }
 
 QString GraticulePlugin::name() const
@@ -248,7 +248,7 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 {
     Q_UNUSED( layer )
 
-    if ( renderPos != "SURFACE" ) {
+    if ( renderPos != "HOVERS_ABOVE_SURFACE" ) {
         return true;
     }
 
@@ -287,7 +287,7 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
 qreal GraticulePlugin::zValue() const
 {
-    return 1.0;
+    return 100;
 }
 
 void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,

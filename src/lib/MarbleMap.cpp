@@ -23,6 +23,7 @@
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
+#include <QtCore/QMap>
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QSizePolicy>
 #include <QtGui/QRegion>
@@ -43,16 +44,23 @@
 #include "layers/VectorMapBaseLayer.h"
 #include "layers/VectorMapLayer.h"
 #include "AbstractFloatItem.h"
+#include "DgmlAuxillaryDictionary.h"
 #include "GeoDataTreeModel.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneFilter.h"
+#include "GeoSceneGeodata.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
 #include "GeoScenePalette.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneVector.h"
 #include "GeoSceneZoom.h"
+#include "GeoDataDocument.h"
+#include "GeoDataFeature.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataStyle.h"
+#include "GeoDataTypes.h"
 #include "LayerManager.h"
 #include "MapThemeManager.h"
 #include "MarbleDebug.h"
@@ -112,6 +120,8 @@ class MarbleMapPrivate
 
     void updateProperty( const QString &, bool );
 
+    void applyStyle( GeoDataDocument* );
+
     MarbleMap *const q;
 
     // The model we are showing.
@@ -136,6 +146,8 @@ class MarbleMapPrivate
     VectorMapLayer   m_vectorMapLayer;
     TextureLayer     m_textureLayer;
     PlacemarkLayout  m_placemarkLayout;
+
+    QMap< QString, GeoDataStyle* > m_styleMap; 
 };
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
@@ -157,6 +169,8 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
     m_layerManager.addLayer( &m_geometryLayer );
     m_layerManager.addLayer( &m_placemarkLayout );
     m_layerManager.addLayer( &m_customPaintLayer );
+
+    m_styleMap.clear();
 
     QObject::connect( m_model, SIGNAL( themeChanged( QString ) ),
                       parent, SLOT( updateMapTheme() ) );
@@ -748,6 +762,7 @@ void MarbleMapPrivate::updateMapTheme()
         m_layerManager.addLayer( &m_groundLayer );
     }
 
+
     if ( m_model->mapTheme()->map()->hasVectorLayers() ) {
         m_veccomposer.setShowWaterBodies( q->propertyValue( "waterbodies" ) );
         m_veccomposer.setShowLakes( q->propertyValue( "lakes" ) );
@@ -923,8 +938,85 @@ void MarbleMapPrivate::updateMapTheme()
         }
     }
 
+/***********************************************/
+
+/*
+
+    if ( m_model->mapTheme() ) {
+        foreach ( GeoSceneLayer *layer, m_model->mapTheme()->map()->layers() ) {
+            if ( layer->backend() != dgml::dgmlValue_geodata )
+                continue;
+
+            if ( layer->datasets().count() <= 0 )
+                continue;
+
+            // look for documents
+            foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
+                QString containername = reinterpret_cast<GeoSceneGeodata*>( dataset )->sourceFile();
+                QPen pen = reinterpret_cast<GeoSceneGeodata*>( dataset )->pen();
+                QBrush brush = reinterpret_cast<GeoSceneGeodata*>( dataset )->brush();
+
+                qDebug() << "Marble Map " << containername << " Pen color = " << pen.color();
+
+
+                GeoDataLineStyle* lineStyle = new GeoDataLineStyle( pen.color() );
+                lineStyle->setPenStyle( pen.style() );
+                lineStyle->setWidth( pen.width() );
+
+                GeoDataPolyStyle* polyStyle = new GeoDataPolyStyle( brush.color() );
+                polyStyle->setFill( true );
+
+                GeoDataStyle* style = new GeoDataStyle;
+                style->setLineStyle( *lineStyle );
+                style->setPolyStyle( *polyStyle );
+                
+                m_styleMap[ containername ] = style;
+            }
+        }
+    }
+
+    qDebug() << "Got DGML Attributes!!!\n";
+
+    GeoDataDocument* document = m_model->treeModel()->rootDocument();
+
+*/
+//    qDebug() << "MarbleMapPrivate::updateMapTheme() " << m_model->treeModel()->rootDocument()->fileName();
+
     emit q->themeChanged( m_model->mapTheme()->head()->mapThemeId() );
+
+//    applyStyle( document );
+
+//    qDebug() << "MarbleMapPrivate::updateMapTheme() DONE\n";
 }
+
+
+void MarbleMapPrivate::applyStyle( GeoDataDocument* document ) 
+{
+    QVector<GeoDataFeature*>::Iterator i = document->begin();
+    QVector<GeoDataFeature*>::Iterator const end = document->end();
+
+    qDebug() << "Apply style " << document->documentRole();
+
+    for ( ; i != end; ++i ) {
+        if ( (*i)->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+            GeoDataDocument *child = static_cast<GeoDataDocument*>( *i );
+            applyStyle( child );
+        }
+
+        if ( (*i)->nodeType() == GeoDataTypes::GeoDataPlacemarkType && document->documentRole() == MapDocument &&
+            m_styleMap.find( document->fileName() ) != m_styleMap.end() ) {
+
+            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( *i );
+
+            if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
+                    placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType ) {
+
+                placemark->setStyle( m_styleMap[ document->fileName() ] );
+            }
+        }
+    }
+}
+
 
 void MarbleMap::setPropertyValue( const QString& name, bool value )
 {

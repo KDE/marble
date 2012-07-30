@@ -27,7 +27,7 @@
 #include "MarbleGlobal.h"
 #include "ViewportParams.h"
 
-// #define MARBLE_DEBUG
+#define MARBLE_DEBUG
 
 using namespace Marble;
 

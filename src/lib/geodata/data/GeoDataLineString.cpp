@@ -346,6 +346,7 @@ qreal GeoDataLineString::perpendicularDistance( const GeoDataCoordinates &A, con
 
 qreal GeoDataLineString::epsilonFromDetailLevel( int detailLevel ) const
 {
+
     if ( p()->m_vector.size() < 30 )
         return 0;
 
