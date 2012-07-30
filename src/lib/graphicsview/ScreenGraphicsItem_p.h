@@ -70,16 +70,12 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         }
 
         QList<QPointF> parentPositions;
-        ScreenGraphicsItem *screenItem = dynamic_cast<ScreenGraphicsItem*>( m_parent );
 
-        if( screenItem ) {
+        if( ScreenGraphicsItem *screenItem = dynamic_cast<ScreenGraphicsItem*>( m_parent ) ) {
             parentPositions = screenItem->absolutePositions();
         }
-        else {
-            GeoGraphicsItem *geoItem = dynamic_cast<GeoGraphicsItem*>( m_parent );
-            if( geoItem ) {
-                parentPositions = geoItem->positions();
-            }
+        else if ( GeoGraphicsItem *geoItem = dynamic_cast<GeoGraphicsItem*>( m_parent ) ) {
+            parentPositions = geoItem->positions();
         }
 
         QPointF relativePosition = positivePosition();
