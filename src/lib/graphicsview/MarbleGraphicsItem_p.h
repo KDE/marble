@@ -33,7 +33,7 @@ class MarbleGraphicsItemPrivate
  public:
     explicit MarbleGraphicsItemPrivate( MarbleGraphicsItem *marbleGraphicsItem,
                                         MarbleGraphicsItem *parent = 0 )
-        : m_removeCachedPixmap( false ),
+        : m_repaintNeeded( true ),
           m_cacheMode( MarbleGraphicsItem::NoCache ),
           m_visibility( true ),
           m_parent( parent ),
@@ -107,7 +107,7 @@ class MarbleGraphicsItemPrivate
 
     QSizeF m_size;
 
-    bool m_removeCachedPixmap;
+    bool m_repaintNeeded;
 
     MarbleGraphicsItem::CacheMode m_cacheMode;
 

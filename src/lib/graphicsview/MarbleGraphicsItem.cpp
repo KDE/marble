@@ -43,14 +43,13 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
         return true;
     }
 
-    p()->updateChildPositions();
-
     p()->setProjection( viewport );
     
     // Remove the pixmap if it has been requested. This prevents QPixmapCache from being used
     // outside the ui thread.
-    if ( p()->m_removeCachedPixmap ) {
-        p()->m_removeCachedPixmap = false;
+    if ( p()->m_repaintNeeded ) {
+        p()->updateChildPositions();
+        p()->m_repaintNeeded = false;
         QPixmapCache::remove( p()->m_cacheKey );
     }
     
@@ -187,13 +186,13 @@ void MarbleGraphicsItem::setCacheMode( CacheMode mode )
 {
     p()->m_cacheMode = mode;
     if ( p()->m_cacheMode == NoCache ) {
-        p()->m_removeCachedPixmap = true;
+        p()->m_repaintNeeded = true;
     }
 }
 
 void MarbleGraphicsItem::update()
 {
-    p()->m_removeCachedPixmap = true;
+    p()->m_repaintNeeded = true;
 
     // Update the parent.
     if ( p()->m_parent ) {
