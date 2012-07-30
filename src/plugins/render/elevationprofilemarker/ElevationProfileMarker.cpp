@@ -143,25 +143,6 @@ bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewpo
         m_currentPosition = m_markerPlacemark->coordinate();
 
         if ( m_currentPosition.isValid() ) {
-            qreal x;
-            qreal y;
-            qreal lon;
-            qreal lat;
-            // move the icon by some pixels, so that the pole of the flag sits at the exact point
-            int dx = -4;
-            int dy = -6;
-            viewport->screenCoordinates( m_currentPosition.longitude( GeoDataCoordinates::Radian ),
-                                         m_currentPosition.latitude ( GeoDataCoordinates::Radian ),
-                                         x, y );
-            viewport->geoCoordinates( x + dx, y + dy, lon, lat, GeoDataCoordinates::Radian );
-            m_markerIconContainer.setCoordinate( GeoDataCoordinates( lon, lat, m_currentPosition.altitude(),
-                                                                GeoDataCoordinates::Radian ) );
-            // move the text label, so that it sits next to the flag with a small spacing
-            dx += m_markerIconContainer.size().width() / 2 + m_markerTextContainer.size().width() / 2 + 2;
-            viewport->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Radian );
-            m_markerTextContainer.setCoordinate( GeoDataCoordinates( lon, lat, m_currentPosition.altitude(),
-                                                                Marble::GeoDataCoordinates::Radian ) );
-
             QString unitString = tr( "m" );
             int displayScale = 1.0;
             const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
@@ -183,6 +164,25 @@ bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewpo
     }
 
     if ( m_currentPosition.isValid() ) {
+        qreal x;
+        qreal y;
+        qreal lon;
+        qreal lat;
+        // move the icon by some pixels, so that the pole of the flag sits at the exact point
+        int dx = -4;
+        int dy = -6;
+        viewport->screenCoordinates( m_currentPosition.longitude( GeoDataCoordinates::Radian ),
+                                     m_currentPosition.latitude ( GeoDataCoordinates::Radian ),
+                                     x, y );
+        viewport->geoCoordinates( x + dx, y + dy, lon, lat, GeoDataCoordinates::Radian );
+        m_markerIconContainer.setCoordinate( GeoDataCoordinates( lon, lat, m_currentPosition.altitude(),
+                                                            GeoDataCoordinates::Radian ) );
+        // move the text label, so that it sits next to the flag with a small spacing
+        dx += m_markerIconContainer.size().width() / 2 + m_markerTextContainer.size().width() / 2 + 2;
+        viewport->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Radian );
+        m_markerTextContainer.setCoordinate( GeoDataCoordinates( lon, lat, m_currentPosition.altitude(),
+                                                            Marble::GeoDataCoordinates::Radian ) );
+
         painter->save();
 
         m_markerIconContainer.paintEvent( painter, viewport, renderPos, layer );
