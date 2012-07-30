@@ -72,7 +72,13 @@ bool JsonParser::read( QIODevice* device )
         return false;
     }
 
-    /** FIXME ANDER THIS IS A TEST PARSER FOR KOTHIK's JSON FORMAT **/
+    /** THIS IS A TEST PARSER FOR KOTHIK's JSON FORMAT **/
+    /*
+     * THE NEW VECTOR FORMAT SHOULD TAKE IN ACCOUNT THE RENREDING ORDER.
+     * IF WE PARSE FIRST ROADS/RIVERS... AND THEN TERRAIN THE TERRAIN WILL
+     * BE DRAWN ABOVE THE OTHER GEOMETRIES MAKING IMPOSIBLE TO SEE THEM
+     * IT SHOULD BE ALWAYS BE FROM BIGGEST GEOMETRIES TO SMALLES
+     */
 
     m_data = m_engine.evaluate( stream );
     if (m_engine.hasUncaughtException()) {

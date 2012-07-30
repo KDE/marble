@@ -37,7 +37,7 @@
                 <vectortile name="geojson_data" expire="604800" >
                     <sourcedir format="JS"> earth/vectorosm </sourcedir>
                     <tileSize width="256" height="256" />
-                    <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="18" mode="OpenStreetMap" />
+                    <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="20" mode="OpenStreetMap" />
                     <projection name="Mercator" />
                     <downloadUrl protocol="http" host="osmosnimki.ru" path="/vtile/" />
                     <downloadPolicy usage="Browse" maximumConnections="20" />
@@ -127,26 +127,6 @@
                     <installmap> srtm.jpg </installmap>
                     <storageLayout maximumTileLevel="5"/>
                 </texture>
-            </layer>
-            
-            <!-- This layer creates the coastlines that are needed to
-                colorize the elevation model properly -->
-            <layer name="mwdbii-canvas" backend="vector" role="filterhelper">
-                <vector name="pcoast" feature="land">
-                    <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
-                </vector>
-                <vector name="pisland" feature="land">
-                    <sourcefile format="PNT"> earth/mwdbii/PISLAND.PNT </sourcefile>
-                </vector>
-                <vector name="plakeisland" feature="land" connect="waterbodies">
-                    <sourcefile format="PNT"> earth/mwdbii/PLAKEISLAND.PNT </sourcefile>
-                </vector>
-                <vector name="plake" feature="sea" connect="waterbodies">
-                    <sourcefile format="PNT"> earth/mwdbii/PLAKE.PNT </sourcefile>
-                </vector>
-                <vector name="pglacier" feature="sea">
-                    <sourcefile format="PNT"> earth/mwdbii/PGLACIER.PNT </sourcefile>
-                </vector>
             </layer>
         
             <!-- This layer provides the colorization -->

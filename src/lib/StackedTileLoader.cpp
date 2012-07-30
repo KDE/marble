@@ -190,9 +190,11 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
     QVector<GeoSceneTiled const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
 
     stackedTile = d->m_layerDecorator->loadTile( stackedTileId, textureLayers );
-    stackedTile->setUsed( true );
+    if ( stackedTile ){
+        stackedTile->setUsed( true );
 
-    d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
+        d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
+    }
     d->m_cacheLock.unlock();
     return stackedTile;
 }

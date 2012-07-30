@@ -65,21 +65,30 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
         }
     }
 
-    /** LOGIC FOR DOWNLOADING ALL THE TILES THAT ARE IN THE CURRENT ZOOM LEVEL AND INSIDE THE SCREEN **/
+    /** LOGIC FOR DOWNLOADING ALL THE TILES THAT ARE INSIDE THE SCREEN AT THE CURRENT ZOOM LEVEL **/
 
-    // New tile X and Y for moved screen coordinates
-    unsigned int minX = lon2tilex( viewport->viewLatLonAltBox().west(GeoDataCoordinates::Degree), tileZoomLevel() );
-    unsigned int minY = lat2tiley( viewport->viewLatLonAltBox().north(GeoDataCoordinates::Degree), tileZoomLevel() );
-                                                            // Right and bottom tiles need +1 to be adjusted to screen
-    unsigned int maxX = lon2tilex( viewport->viewLatLonAltBox().east(GeoDataCoordinates::Degree), tileZoomLevel() )+1;
-    unsigned int maxY = lat2tiley( viewport->viewLatLonAltBox().south(GeoDataCoordinates::Degree), tileZoomLevel() )+1;
+    // New tiles X and Y for moved screen coordinates
+    // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Subtiles
+    // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#C.2FC.2B.2B
+    // Sometimes the formula returns wrong huge values, x and y have to be between 0 and 2^ZoomLevel
+    unsigned int minX = qMax( (unsigned int) lon2tilex( viewport->viewLatLonAltBox().west(GeoDataCoordinates::Degree), tileZoomLevel() ),
+                              (unsigned int) 0);
+
+    unsigned int minY = qMax( (unsigned int) lat2tiley( viewport->viewLatLonAltBox().north(GeoDataCoordinates::Degree), tileZoomLevel() ),
+                              (unsigned int) 0);
+
+    unsigned int maxX = qMin( (unsigned int) lon2tilex( viewport->viewLatLonAltBox().east(GeoDataCoordinates::Degree), tileZoomLevel() ),
+                              (unsigned int) pow( 2, tileZoomLevel() ));
+
+    unsigned int maxY = qMin( (unsigned int) lat2tiley( viewport->viewLatLonAltBox().south(GeoDataCoordinates::Degree), tileZoomLevel() ),
+                              (unsigned int) pow( 2, tileZoomLevel() ));
 
     bool left  = minX < m_minTileX;
     bool right = maxX > m_maxTileX;
     bool up    = minY < m_minTileY;
     bool down  = maxY > m_maxTileY ;
 
-    // Download tiles and insert them into treeModel
+    // Download tiles and send them to VectorTileLayer
     // When changing zoom, download everything inside the screen
     if ( left && right && up && down )
 
@@ -96,9 +105,12 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
             mapTexture( viewport, painter->mapQuality(), m_minTileX, minY, m_maxTileX, m_minTileY);
         if ( down )
             mapTexture( viewport, painter->mapQuality(), m_minTileX, m_maxTileY, m_maxTileX, maxY);
+
+        // During testing discovered that this code above does not request the "corner" tiles
+
     }
 
-    // Update tile X and Y for screen coordinates
+    // Update tiles X and Y for screen coordinates
     m_minTileX = minX;
     m_minTileY = minY;
     m_maxTileX = maxX;
@@ -106,7 +118,6 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
 
     // Draw world
     const int radius = (int)(1.05 * (qreal)(viewport->radius()));
-
     QRect rect( viewport->width() / 2 - radius, viewport->height() / 2 - radius,
                 2 * radius, 2 * radius);
     rect = rect.intersect( dirtyRect );
@@ -147,8 +158,10 @@ void VectorTileMapper::mapTexture( const ViewportParams *viewport, MapQuality ma
     // Start thread
     m_threadPool.start( job );
 
-    // FIXME ANDER Aparently it is not needed to wait for it to finish
-    // m_threadPool.waitForDone();
+    // Aparently there is not needed to wait for it to finish but
+    // waiting prevents having crashes with TileLoader's cache
+    // when cleaning tile hash (duplicated node errors and double free errors)
+    m_threadPool.waitForDone();
 
     m_tileLoader->cleanupTilehash();
 }
@@ -185,8 +198,8 @@ VectorTileMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileL
 void VectorTileMapper::RenderJob::run()
 {
     // Download all the tiles inside the given indexes
-    for (unsigned int x = m_minTileX; x < m_maxTileX; x++)
-        for (unsigned int y = m_minTileY; y < m_maxTileY; y++)
+    for (unsigned int x = m_minTileX; x <= m_maxTileX; x++)
+        for (unsigned int y = m_minTileY; y <= m_maxTileY; y++)
         {
            const TileId tileId = TileId( 0, m_tileLevel, x, y );
            const StackedTile * tile = m_tileLoader->loadTile( tileId );
