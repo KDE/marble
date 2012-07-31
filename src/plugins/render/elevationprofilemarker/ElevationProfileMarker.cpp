@@ -39,6 +39,7 @@ ElevationProfileMarker::ElevationProfileMarker( const MarbleModel *marbleModel )
         m_markerText( &m_markerItem )
 {
     setVisible( false );
+    m_markerItem.setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
 
     connect( const_cast<MarbleModel *>( marbleModel )->treeModel(), SIGNAL( added( GeoDataObject * ) ),
              this, SLOT( onGeoObjectAdded( GeoDataObject * ) ) );
