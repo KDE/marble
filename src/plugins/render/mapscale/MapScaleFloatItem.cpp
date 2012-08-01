@@ -13,6 +13,7 @@
 #include <QtCore/QRect>
 #include <QtGui/QPixmap>
 #include <QtGui/QApplication>
+#include <QtGui/QPainter>
 #include <QtGui/QPushButton>
 #include <QtGui/QMenu>
 #include <QtGui/QToolTip>
@@ -23,7 +24,6 @@
 #include "Projections/AbstractProjection.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
-#include "GeoPainter.h"
 #include "ViewportParams.h"
 
 namespace Marble
@@ -165,15 +165,8 @@ void MapScaleFloatItem::changeViewport( ViewportParams *viewport )
     }
 }
 
-void MapScaleFloatItem::paintContent( GeoPainter *painter,
-                                      ViewportParams *viewport,
-                                      const QString& renderPos,
-                                      GeoSceneLayer * layer )
+void MapScaleFloatItem::paintContent( QPainter *painter )
 {
-    Q_UNUSED( viewport )
-    Q_UNUSED( layer )
-    Q_UNUSED( renderPos )
-
     painter->save();
 
     painter->setRenderHint( QPainter::Antialiasing, true );

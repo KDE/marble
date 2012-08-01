@@ -14,11 +14,11 @@
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "GeoPainter.h"
 #include "ViewportParams.h"
 
 #include <QtCore/QRect>
 #include <QtGui/QColor>
+#include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 #include <QtGui/QPushButton>
 #include <QtSvg/QSvgRenderer>
@@ -128,15 +128,8 @@ void CompassFloatItem::changeViewport( ViewportParams *viewport )
     }
 }
 
-void CompassFloatItem::paintContent( GeoPainter *painter,
-                                     ViewportParams *viewport,
-                                     const QString& renderPos,
-                                     GeoSceneLayer * layer )
+void CompassFloatItem::paintContent( QPainter *painter )
 {
-    Q_UNUSED( viewport )
-    Q_UNUSED( layer )
-    Q_UNUSED( renderPos )
-
     painter->save();
 
     QRectF compassRect( contentRect() );

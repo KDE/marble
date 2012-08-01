@@ -64,8 +64,7 @@ class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationIn
 
     void changeViewport( ViewportParams *viewport );
 
-    void paintContent( GeoPainter *painter, ViewportParams *viewport,
-                       const QString& renderPos, GeoSceneLayer * layer = 0 );
+    void paintContent( QPainter *painter );
 
 
     QDialog *configDialog();

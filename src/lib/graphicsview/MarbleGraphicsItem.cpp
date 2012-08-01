@@ -13,13 +13,13 @@
 #include "MarbleGraphicsItem_p.h"
 
 // Marble
-#include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "ViewportParams.h"
 
 // Qt
 #include <QtCore/QList>
 #include <QtCore/QSet>
+#include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 #include <QtGui/QPixmapCache>
 #include <QtGui/QMouseEvent>
@@ -36,8 +36,7 @@ MarbleGraphicsItem::~MarbleGraphicsItem()
     delete d;
 }
 
-bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewport, 
-                                     const QString& renderPos, GeoSceneLayer *layer )
+bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *viewport )
 {
     if ( !p()->m_visibility ) {
         return true;
@@ -82,16 +81,16 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
             }
         
             cachePixmap.fill( Qt::transparent );
-            GeoPainter pixmapPainter( &( cachePixmap ), viewport, NormalQuality );
+            QPainter pixmapPainter( &cachePixmap );
             // We paint in best quality here, as we only have to paint once.
             pixmapPainter.setRenderHint( QPainter::Antialiasing, true );
             // The cache image will get a 0.5 pixel bounding to save antialiasing effects.
             pixmapPainter.translate( 0.5, 0.5 );
-            paint( &pixmapPainter, viewport, renderPos, layer );
+            paint( &pixmapPainter );
 
             // Paint children
             foreach ( MarbleGraphicsItem *item, p()->m_children ) {
-                item->paintEvent( &pixmapPainter, viewport, renderPos, layer );
+                item->paintEvent( &pixmapPainter, viewport );
             }
             // Update the pixmap in cache
 #if QT_VERSION < 0x040600
@@ -110,11 +109,11 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
             painter->save();
 
             painter->translate( position );
-            paint( painter, viewport, renderPos, layer );
+            paint( painter );
 
             // Paint children
             foreach ( MarbleGraphicsItem *item, p()->m_children ) {
-                item->paintEvent( painter, viewport, renderPos, layer );
+                item->paintEvent( painter, viewport );
             }
 
             painter->restore();
@@ -241,12 +240,8 @@ QRectF MarbleGraphicsItem::contentRect() const
     return QRectF( QPointF( 0, 0 ), contentSize() );
 }
 
-void MarbleGraphicsItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                         const QString& renderPos, GeoSceneLayer * layer )
+void MarbleGraphicsItem::paint( QPainter *painter )
 {
-    Q_UNUSED( viewport );
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
     Q_UNUSED( painter );
 }
 

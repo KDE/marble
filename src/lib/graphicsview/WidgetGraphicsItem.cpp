@@ -13,13 +13,13 @@
 #include "WidgetGraphicsItem_p.h"
 
 // Marble
-#include "GeoPainter.h"
 #include "MarbleWidget.h"
 #include "MarbleDebug.h"
 
 // Qt
 #include <QtGui/QApplication>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QPainter>
 #include <QtGui/QWidget>
 
 using namespace Marble;
@@ -59,13 +59,8 @@ QWidget *WidgetGraphicsItem::widget() const {
     return d->m_widget;
 }
 
-void WidgetGraphicsItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                                const QString& renderPos, GeoSceneLayer * layer )
+void WidgetGraphicsItem::paint( QPainter *painter )
 {
-    Q_UNUSED( viewport );
-    Q_UNUSED( layer );
-    Q_UNUSED( renderPos );
-    
     if( d->m_widget == 0 )
         return;
 

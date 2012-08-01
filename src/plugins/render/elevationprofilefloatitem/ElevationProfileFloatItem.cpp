@@ -12,6 +12,7 @@
 #include "ElevationProfileFloatItem.h"
 
 #include <QtCore/QRect>
+#include <QtGui/QPainter>
 #include <QtGui/QPushButton>
 #include <QtGui/QMenu>
 
@@ -21,7 +22,6 @@
 #include "MarbleWidget.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
-#include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "routing/RoutingModel.h"
 #include "routing/RoutingManager.h"
@@ -179,15 +179,8 @@ void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
     update();
 }
 
-void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
-        ViewportParams *viewport,
-        const QString& renderPos,
-        GeoSceneLayer * layer )
+void ElevationProfileFloatItem::paintContent( QPainter *painter )
 {
-    Q_UNUSED( viewport )
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
-
     painter->save();
     painter->setRenderHint( QPainter::Antialiasing, true );
     painter->setFont( font() );

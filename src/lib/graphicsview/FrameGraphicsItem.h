@@ -167,19 +167,17 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
     /**
      * This function won't be reimplemented in most cases.
      */
-    virtual void paint( GeoPainter *painter, ViewportParams *viewport,
-                        const QString& renderPos, GeoSceneLayer * layer = 0 );
+    virtual void paint( QPainter *painter );
 
     /**
      * Here the items paint their content.
      */
-    virtual void paintContent( GeoPainter *painter, ViewportParams *viewport,
-                               const QString& renderPos, GeoSceneLayer * layer = 0 );
+    virtual void paintContent( QPainter *painter );
 
     /**
      * Paints the background. This function won't be reimplemented in most cases.
      */
-    virtual void paintBackground( GeoPainter *painter );
+    virtual void paintBackground( QPainter *painter );
 
  private:
     Q_DISABLE_COPY( FrameGraphicsItem )

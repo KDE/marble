@@ -13,7 +13,6 @@
 
 // Marble
 #include "AbstractMarbleGraphicsLayout.h"
-#include "GeoPainter.h"
 #include "MarbleGraphicsItem.h"
 
 // Qt

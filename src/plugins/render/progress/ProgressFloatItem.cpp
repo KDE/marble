@@ -15,7 +15,6 @@
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
-#include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "HttpDownloadManager.h"
 
@@ -23,6 +22,7 @@
 #include <QtGui/QColor>
 #include <QtCore/QMutexLocker>
 #include <QtGui/QPaintDevice>
+#include <QtGui/QPainter>
 
 namespace Marble
 {
@@ -159,13 +159,8 @@ QPainterPath ProgressFloatItem::backgroundShape() const
     return path;
 }
 
-void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewport,
-                                     const QString& renderPos, GeoSceneLayer * layer )
+void ProgressFloatItem::paintContent( QPainter *painter )
 {
-    Q_UNUSED( viewport )
-    Q_UNUSED( layer )
-    Q_UNUSED( renderPos )
-
     // Stop repaint timer if it is already running
     m_repaintTimer.stop();
 

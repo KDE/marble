@@ -14,6 +14,7 @@
 #include <QtCore/QStringList>
 #include <QtGui/QCursor>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 #include <QtGui/QFileDialog>
 #include <QtGui/QHBoxLayout>
@@ -25,7 +26,6 @@
 #include "MarbleModel.h"
 #include "ui_OverviewMapConfigWidget.h"
 
-#include "GeoPainter.h"
 #include "GeoDataPoint.h"
 #include "ViewportParams.h"
 #include "MarbleWidget.h"
@@ -176,13 +176,8 @@ void OverviewMap::changeViewport( ViewportParams *viewport )
     }
 }
 
-void OverviewMap::paintContent( GeoPainter *painter, ViewportParams *viewport,
-                                const QString& renderPos, GeoSceneLayer * layer )
+void OverviewMap::paintContent( QPainter *painter )
 {
-    Q_UNUSED( viewport );
-    Q_UNUSED( layer );
-    Q_UNUSED( renderPos );
-
     painter->save();
 
     QRectF mapRect( contentRect() );

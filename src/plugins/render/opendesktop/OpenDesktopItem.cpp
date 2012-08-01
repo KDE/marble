@@ -9,9 +9,11 @@
 //
 
 #include "OpenDesktopItem.h"
-#include "GeoPainter.h"
+
+#include <QtGui/QPainter>
+
 #include "ViewportParams.h"
- 
+
 using namespace Marble;
 
 OpenDesktopItem::OpenDesktopItem(QObject *parent):
@@ -66,13 +68,8 @@ void OpenDesktopItem::addDownloadedFile( const QString& url, const QString& type
     }
 }
 
-void OpenDesktopItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                        const QString& renderPos, GeoSceneLayer * layer )
+void OpenDesktopItem::paint( QPainter *painter )
 {
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
-    Q_UNUSED( viewport )
-    
     painter->drawPixmap(0, 0, m_pixmap);  
 }
 

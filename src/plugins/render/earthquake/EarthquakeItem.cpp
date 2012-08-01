@@ -9,10 +9,10 @@
 //
 
 #include "EarthquakeItem.h"
-#include "GeoPainter.h"
 #include "ViewportParams.h"
 
 #include <QtGui/QFontMetrics>
+#include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 #include <QtSvg/QSvgRenderer>
 
@@ -65,13 +65,8 @@ void EarthquakeItem::setMagnitude( double magnitude )
     updateTooltip();
 }
 
-void EarthquakeItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                            const QString& renderPos, GeoSceneLayer * layer )
+void EarthquakeItem::paint( QPainter *painter )
 {
-    Q_UNUSED( viewport )
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
-
     // Save the old painter state.
     painter->save();
 
