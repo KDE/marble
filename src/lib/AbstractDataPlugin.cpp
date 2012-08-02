@@ -77,10 +77,6 @@ bool AbstractDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     if ( ( 0 == d->m_model ) || !isInitialized() ) {
         return true;
     }
-    
-    if ( renderPos != "ALWAYS_ON_TOP" ) {
-        return true;
-    }
 
     QList<AbstractDataPluginItem*> items = d->m_model->items( viewport,
                                                               marbleModel(),
