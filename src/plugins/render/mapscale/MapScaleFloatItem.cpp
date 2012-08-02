@@ -149,6 +149,18 @@ void MapScaleFloatItem::changeViewport( ViewportParams *viewport )
         m_radius = viewport->radius();
         m_scaleInitDone = true;
 
+        m_pixel2Length = marbleModel()->planetRadius() /
+                             (qreal)(viewport->radius());
+
+        if ( viewport->currentProjection()->surfaceType() == AbstractProjection::Cylindrical )
+        {
+            qreal centerLatitude = viewport->viewLatLonAltBox().center().latitude();
+            // For flat maps we calculate the length of the 90 deg section of the
+            // central latitude circle. For flat maps this distance matches
+            // the pixel based radius propertyy.
+            m_pixel2Length *= M_PI / 2 * cos( centerLatitude );
+        }
+
         update();
     }
 }
@@ -158,7 +170,7 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
                                       const QString& renderPos,
                                       GeoSceneLayer * layer )
 {
-
+    Q_UNUSED( viewport )
     Q_UNUSED( layer )
     Q_UNUSED( renderPos )
 
@@ -168,21 +180,9 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
 
     int fontHeight     = QFontMetrics( font() ).ascent();
 
-    qreal pixel2Length = marbleModel()->planetRadius() /
-                         (qreal)(viewport->radius());
-
-    if ( viewport->currentProjection()->surfaceType() == AbstractProjection::Cylindrical )
-    {
-        qreal centerLatitude = viewport->viewLatLonAltBox().center().latitude();
-        // For flat maps we calculate the length of the 90 deg section of the
-        // central latitude circle. For flat maps this distance matches
-        // the pixel based radius propertyy.
-        pixel2Length *= M_PI / 2 * cos( centerLatitude );
-    }
-
     //calculate scale ratio
     qreal displayMMPerPixel = 1.0 * painter->device()->widthMM() / painter->device()->width();
-    qreal ratio = pixel2Length / (displayMMPerPixel * MM2M);
+    qreal ratio = m_pixel2Length / (displayMMPerPixel * MM2M);
 
     //round ratio to 3 most significant digits, assume that ratio >= 1, otherwise it may display "1 : 0"
     //i made this assumption because as the primary use case we do not need to zoom in that much
@@ -196,7 +196,7 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
     m_ratioString.setNum(iRatio);
     m_ratioString = m_ratioString = "1 : " + m_ratioString;
 
-    m_scaleBarDistance = (qreal)(m_scaleBarWidth) * pixel2Length;
+    m_scaleBarDistance = (qreal)(m_scaleBarWidth) * m_pixel2Length;
 
     const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
 

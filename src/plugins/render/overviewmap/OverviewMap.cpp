@@ -179,6 +179,7 @@ void OverviewMap::changeViewport( ViewportParams *viewport )
 void OverviewMap::paintContent( GeoPainter *painter, ViewportParams *viewport,
                                 const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED( viewport );
     Q_UNUSED( layer );
     Q_UNUSED( renderPos );
 
@@ -250,8 +251,8 @@ void OverviewMap::paintContent( GeoPainter *painter, ViewportParams *viewport,
     qreal xSouth = mapRect.height() / 2.0
                     - mapRect.height() / M_PI * m_latLonAltBox.south();
 
-    qreal lon = viewport->centerLongitude();
-    qreal lat = viewport->centerLatitude();
+    qreal lon = m_centerLon;
+    qreal lat = m_centerLat;
     GeoDataPoint::normalizeLonLat( lon, lat );
     qreal x = mapRect.width() / 2.0 + mapRect.width() / ( 2.0 * M_PI ) * lon;
     qreal y = mapRect.height() / 2.0 - mapRect.height() / M_PI * lat;

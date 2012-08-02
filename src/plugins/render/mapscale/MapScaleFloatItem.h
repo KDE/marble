@@ -94,6 +94,7 @@ class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationIn
     int      m_scaleBarHeight;
     qreal    m_scaleBarDistance;
 
+    qreal    m_pixel2Length;
     int      m_bestDivisor;
     int      m_pixelInterval;
     int      m_valueInterval;
