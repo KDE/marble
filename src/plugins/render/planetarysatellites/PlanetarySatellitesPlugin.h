@@ -57,6 +57,10 @@ public:
 
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer );
 
+private Q_SLOTS:
+    void enableModel( bool enabled );
+    void visibleModel( bool visible );
+
 private:
     bool m_isInitialized;
 };

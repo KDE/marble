@@ -125,11 +125,31 @@ bool PlanetarySatellitesPlugin::render( GeoPainter *painter, ViewportParams *vie
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
 
-    /*if( marbleModel()->planetId() == "earth" ) {
+    if( marbleModel()->planetId() == "earth" ) {
+        enableModel( false );
     } else {
-    }*/
+        enableModel( enabled() );
+    }
 
     return true;
+}
+
+void PlanetarySatellitesPlugin::enableModel( bool enabled )
+{
+    Q_UNUSED( enabled );
+
+    if( !m_isInitialized ) {
+        return;
+    }
+}
+
+void PlanetarySatellitesPlugin::visibleModel( bool visible )
+{
+    Q_UNUSED( visible );
+
+    if( !m_isInitialized ) {
+        return;
+    }
 }
 
 }
