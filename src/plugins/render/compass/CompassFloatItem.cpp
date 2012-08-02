@@ -139,8 +139,6 @@ void CompassFloatItem::paintContent( GeoPainter *painter,
 
     painter->save();
 
-    painter->setRenderHint( QPainter::Antialiasing, true );
-
     QRectF compassRect( contentRect() );
 
     QString dirstr = tr( "N" );
@@ -168,8 +166,6 @@ void CompassFloatItem::paintContent( GeoPainter *painter,
 
     painter->setPen( Qt::NoPen );
     painter->drawPath( outlinepath );
-
-    painter->autoMapQuality();
 
     int compassLength = static_cast<int>( compassRect.height() ) - 5 - fontheight;
         

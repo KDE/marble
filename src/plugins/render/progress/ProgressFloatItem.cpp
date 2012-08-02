@@ -174,7 +174,6 @@ void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
     }
 
     painter->save();
-    painter->setRenderHint( QPainter::Antialiasing, true );
 
     qreal completed = 1.0;
     if ( m_totalJobs && m_completedJobs <= m_totalJobs ) {
