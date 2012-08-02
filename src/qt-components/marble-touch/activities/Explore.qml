@@ -232,7 +232,7 @@ Page {
         
         ListView {
             id: photoView
-            width: exploreActivityPage.horizontal ? venueDetails.width : 64
+            width: exploreActivityPage.horizontal ? venueDetails.width - anchors.margins : 64
             
             anchors.top: exploreActivityPage.horizontal ? detailCountry.bottom : venueDetails.top
             anchors.left: exploreActivityPage.horizontal ? venueDetails.left : venueDetails.horizontalCenter
@@ -247,7 +247,7 @@ Page {
             
             delegate: Image {
                 id: venuePhoto
-                width: venueDetails.width
+                width: photoView.width
                 scale: 0.0
                 fillMode: Image.PreserveAspectFit
                 source: url
