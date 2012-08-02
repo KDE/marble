@@ -221,7 +221,6 @@ void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
     painter->setPen( QPen() );
     painter->drawPath( path );
 
-    painter->autoMapQuality();
     painter->restore();
 }
 

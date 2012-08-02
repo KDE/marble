@@ -185,8 +185,6 @@ void OverviewMap::paintContent( GeoPainter *painter, ViewportParams *viewport,
 
     painter->save();
 
-    painter->autoMapQuality();
-
     QRectF mapRect( contentRect() );
 
     QString target = marbleModel()->planetId();
