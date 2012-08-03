@@ -90,7 +90,7 @@ class MarbleGraphicsItemPrivate
 #endif
     }
 
-    virtual void setProjection( ViewportParams *viewport ) = 0;
+    virtual void setProjection( const ViewportParams *viewport ) = 0;
 
     void updateChildPositions()
     {

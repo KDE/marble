@@ -48,7 +48,7 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         return m_positions;
     }
 
-    void setProjection( ViewportParams *viewport )
+    void setProjection( const ViewportParams *viewport )
     {
         m_positions.clear();
 

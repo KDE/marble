@@ -88,7 +88,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         return absolutePositions;
     }
 
-    void setProjection( ViewportParams *viewport )
+    void setProjection( const ViewportParams *viewport )
     {
         // If we have no parent
         if( m_parent == 0 ) {
