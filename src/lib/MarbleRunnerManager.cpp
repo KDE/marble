@@ -231,11 +231,14 @@ void MarbleRunnerManagerPrivate::addSearchResult( QVector<GeoDataPlacemark*> res
 
     m_modelMutex.lock();
     int start = m_placemarkContainer.size();
+    bool distanceCompare = ( m_marbleModel && ( m_marbleModel->planet() ) );
     for( int i=0; i<result.size(); ++i ) {
         bool same = false;
         for ( int j=0; j<m_placemarkContainer.size(); ++j ) {
-            if ( distanceSphere( result[i]->coordinate(), m_placemarkContainer[j]->coordinate() )
-                 * m_marbleModel->planet()->radius() < 1 ) {
+            if ( distanceCompare &&
+                 ( distanceSphere( result[i]->coordinate(),
+                                   m_placemarkContainer[j]->coordinate() )
+                   * m_marbleModel->planet()->radius() < 1 ) ) {
                 same = true;
             }
         }

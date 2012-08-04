@@ -49,7 +49,8 @@ public:
     ~MarbleRunnerManager();
 
     /**
-      * Set a pointer to the map instance to be passed to MarbleAbstractRunner instances
+      * Set a pointer to the model instance to be passed to MarbleAbstractRunner instances
+      * or to use model specific information like planet parameters
       */
     void setModel( MarbleModel * model );
 
