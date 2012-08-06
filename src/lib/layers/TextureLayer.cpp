@@ -147,8 +147,8 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
     }
 
     // updateTile needs to know if its an image or another type of file,
-    // so we indicate its a PNG
-    m_tileLoader.updateTile( tileId, tileImage, "PNG" );
+    // so we indicate its format
+    m_tileLoader.updateTile( tileId, tileImage, 0 );
 
     mapChanged();
 }

@@ -58,7 +58,7 @@ class Blending;
 class TextureTile : public Tile
 {
  public:
-    TextureTile( TileId const & tileId, QImage const & image, QString const &format, const Blending * blending );
+    TextureTile(TileId const & tileId, QImage const & image, const Blending * blending );
     ~TextureTile();
 
 /*!

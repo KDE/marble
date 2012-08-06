@@ -239,9 +239,8 @@ void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
     d->m_tileCache.setMaxCost( kiloBytes * 1024 );
 }
 
-void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImage, const QString &format )
+void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImage, GeoDataDocument * tileData )
 {
-    Q_ASSERT( !tileImage.isNull() );
 
     d->detectMaxTileLevel();
 
@@ -251,7 +250,7 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
     if ( displayedTile ) {
         Q_ASSERT( !d->m_tileCache.contains( stackedTileId ) );
 
-        StackedTile *const stackedTile = d->m_layerDecorator->createTile( *displayedTile, tileId, tileImage, format );
+        StackedTile *const stackedTile = d->m_layerDecorator->createTile( *displayedTile, tileId, tileImage, tileData );
         d->m_tilesOnDisplay.insert( stackedTileId, stackedTile );
 
         delete displayedTile;

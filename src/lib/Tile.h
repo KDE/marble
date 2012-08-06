@@ -31,7 +31,7 @@ class Blending;
 
 /*!
     \class Tile
-    \brief A class that resembles a tile (then it is extended to ImageTile or Vectortile).
+    \brief A class that resembles a tile (then it is extended to TextureTile or Vectortile).
 
     A tile provides a bitmap image or vector data for a certain (geographic) area and
     for a given zoom level. Each Tile can be identified via a unique
@@ -57,7 +57,7 @@ class Blending;
 class Tile
 {
  public:
-    Tile( TileId const & tileId, QString const &format, const Blending * blending );
+    Tile( TileId const & tileId, const Blending * blending );
     virtual ~Tile();
 
 /*!
@@ -102,7 +102,6 @@ class Tile
 
     TileId const m_id;
     Blending const * const m_blending;
-    QString const m_format;
 };
 
 
@@ -121,11 +120,6 @@ inline QImage const * Tile::image() const
 inline GeoDataDocument * Tile::vectorData() const
 {
     return 0;
-}
-
-inline QString const * Tile::format() const
-{
-    return &m_format;
 }
 
 inline Blending const * Tile::blending() const

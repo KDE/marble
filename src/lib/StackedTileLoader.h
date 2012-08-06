@@ -31,6 +31,7 @@
 #include "GeoSceneTiled.h"
 #include "TileId.h"
 #include "MarbleGlobal.h"
+#include "GeoDataDocument.h"
 
 class QImage;
 class QString;
@@ -132,7 +133,7 @@ class StackedTileLoader
 
         /**
          */
-        void updateTile(TileId const & tileId, QImage const &tileImage , const QString &format);
+        void updateTile(TileId const & tileId, QImage const &tileImage , GeoDataDocument *tileData);
 
     private:
         Q_DISABLE_COPY( StackedTileLoader )

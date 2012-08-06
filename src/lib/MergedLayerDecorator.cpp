@@ -197,7 +197,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         if ( textureLayer->nodeType() == QString("GeoSceneTextureTile") ){
             const QImage tileImage = d->m_tileLoader->loadTileImage( tileId, DownloadBrowse );
 
-            QSharedPointer<Tile> tile(new TextureTile( tileId, tileImage, textureLayer->fileFormat(), blending ) );
+            QSharedPointer<Tile> tile(new TextureTile( tileId, tileImage, blending ) );
             tiles.append( tile );
         }
 
@@ -206,7 +206,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
             GeoDataDocument* tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, textureLayer->fileFormat() );
 
-            QSharedPointer<Tile> tile( new VectorTile( tileId, tileVectordata, textureLayer->fileFormat(), blending ) );
+            QSharedPointer<Tile> tile( new VectorTile( tileId, tileVectordata, blending ) );
 
             tiles.append( tile );
         }
@@ -218,7 +218,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
     return d->createTile( tiles );
 }
 
-StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage, const QString &format ) const
+StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage, GeoDataDocument * tileData ) const
 {
     QVector<QSharedPointer<Tile> > tiles = stackedTile.tiles();
 
@@ -227,13 +227,12 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
             const Blending *blending = tiles[i]->blending();
 
             // VectorTile
-            if ( format.toLower() == "js"){
-                GeoDataDocument * document = new GeoDataDocument;
-                tiles[i] = QSharedPointer<Tile>( new VectorTile( tileId, document, format, blending ) );
+            if ( tileData != 0 ){
+                tiles[i] = QSharedPointer<Tile>( new VectorTile( tileId, tileData, blending ) );
             }
             // TextureTile
-            else{
-                tiles[i] = QSharedPointer<Tile>( new TextureTile( tileId, tileImage, format, blending ) );
+            else if ( !tileImage.isNull() ){
+                tiles[i] = QSharedPointer<Tile>( new TextureTile( tileId, tileImage, blending ) );
             }
         }
     }

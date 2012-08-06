@@ -22,10 +22,9 @@
 namespace Marble
 {
 
-Tile::Tile( TileId const & tileId, QString const &format, const Blending * blending )
+Tile::Tile(TileId const & tileId, const Blending * blending )
     : m_id( tileId ),
-      m_blending( blending ),
-      m_format( format )
+      m_blending( blending )
 {
 }
 
