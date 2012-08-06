@@ -80,8 +80,6 @@ void FileManager::addFile( const QString& filepath, GeoDataStyle* style, Documen
             return;  // currently loading
     }
 
-    qDebug() << "FileManager::addFile " << filepath;
-
     mDebug() << "adding container:" << filepath;
     mDebug() << "Starting placemark loading timer";
     d->m_timer.start();
@@ -185,10 +183,11 @@ void FileManager::addGeoDataDocument( GeoDataDocument* document )
     }
 
     d->m_fileItemList.append( document );
-    qDebug() << "FileManager::addDocument " << document->fileName();
     d->m_model->treeModel()->addDocument( document );
     emit fileAdded( d->m_fileItemList.indexOf( document ) );
-    emit setDocumentStyles( document );
+
+    qDebug() << "FileManager::addGeoDataDocument " << document->fileName() << " " << d->m_fileItemList.size();
+//    emit setDocumentStyles( document );
 }
 
 void FileManager::cleanupLoader( FileLoader* loader )

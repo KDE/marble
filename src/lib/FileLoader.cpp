@@ -46,10 +46,13 @@ public:
           m_filepath ( file ),
           m_documentRole ( role ),
           m_style( style ),
+          m_styleMap( new GeoDataStyleMap ),
           m_document( 0 ),
           m_clock( model->clock() )
     {
         m_runner->setModel( model );
+        m_styleMap->setStyleId("default-map");
+        m_styleMap->insert("normal", QString("#").append(m_style->styleId()));
     };
 
     FileLoaderPrivate( FileLoader* parent, MarbleModel *model,
@@ -87,6 +90,7 @@ public:
     QString m_nonExistentLocalCacheFile;
     DocumentRole m_documentRole;
     GeoDataStyle* m_style;
+    GeoDataStyleMap* m_styleMap;
     GeoDataDocument *m_document;
     QString m_error;
 
@@ -167,8 +171,6 @@ void FileLoader::run()
         if ( QFile::exists( cacheFile ) ) {
             mDebug() << "Loading Cache File:" + cacheFile;
 
-//            qDebug() << "File loader loaded from cache!\n";
-
             QDateTime sourceLastModified;
 
             if ( QFile::exists( defaultSourceName ) ) {
@@ -215,8 +217,6 @@ void FileLoader::run()
         d->m_document = static_cast<GeoDataDocument*>( document );
         d->m_document->setDocumentRole( d->m_documentRole );
         d->m_document->setFileName( d->m_filepath );
-
-        qDebug() << "File loader document loaded " << d->m_document->fileName() << "\n";
 
         d->createFilterProperties( d->m_document );
         buffer.close();
@@ -296,8 +296,12 @@ void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& err
     if ( doc ) {
         m_document = doc;
         doc->setFileName( m_filepath );       
+
+        doc->addStyleMap( *m_styleMap );
+        doc->addStyle( *m_style );
+        //TODO: Insert the styleMap into the doc here
+
         createFilterProperties( doc );
-        qDebug() << "FileLoaderPrivate::documentParsed " << doc->fileName();
         emit q->newGeoDataDocumentAdded( m_document );
         if ( !m_nonExistentLocalCacheFile.isEmpty() ) {
             saveFile( m_nonExistentLocalCacheFile );
@@ -327,7 +331,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
             if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
                 placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType && m_documentRole == MapDocument ) {
 
-                placemark->setStyle( m_style );
+                placemark->setStyleUrl( QString("#").append( m_styleMap->styleId() ) );
             }
             
 

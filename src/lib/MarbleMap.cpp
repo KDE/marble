@@ -45,6 +45,7 @@
 #include "layers/VectorMapLayer.h"
 #include "AbstractFloatItem.h"
 #include "DgmlAuxillaryDictionary.h"
+#include "FileManager.h"
 #include "GeoDataTreeModel.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
@@ -120,7 +121,7 @@ class MarbleMapPrivate
 
     void updateProperty( const QString &, bool );
 
-    void applyStyle( GeoDataDocument* );
+//    void applyStyle( GeoDataDocument* );
 
     MarbleMap *const q;
 
@@ -699,6 +700,23 @@ bool MarbleMap::geoCoordinates( int x, int y,
     return d->m_viewport.geoCoordinates( x, y, lon, lat, unit );
 }
 
+void MarbleMap::getFilterDocument( int index ) {
+    if ( d->m_model->mapTheme()->map()->filters().isEmpty() ) 
+        return;
+
+    QString currentName = d->m_model->fileManager()->at( index )->fileName();
+    QString desiredName = d->m_model->mapTheme()->map()->filters().first()->sourceFile();
+
+//    qDebug() << "Booha ma-tii! " << d->m_model->fileManager()->at( index )->fileName();
+
+    if ( currentName == desiredName ) {
+        GeoDataDocument* filterDocument = d->m_model->fileManager()->at( index );
+        d->m_layerManager.removeLayer( &d->m_textureLayer );
+        d->m_textureLayer.setCoastDocument( filterDocument );        
+        d->m_layerManager.addLayer( &d->m_textureLayer );
+    }
+}
+
 // Used to be paintEvent()
 void MarbleMap::paint( GeoPainter &painter, const QRect &dirtyRect )
 {
@@ -737,6 +755,8 @@ QString MarbleMap::mapThemeId() const
 void MarbleMap::setMapThemeId( const QString& mapThemeId )
 {
     d->m_model->setMapThemeId( mapThemeId );
+
+    qDebug() << "MarbleMap Filemanager size: " << d->m_model->fileManager()->size();
 }
 
 void MarbleMapPrivate::updateMapTheme()
@@ -748,6 +768,9 @@ void MarbleMapPrivate::updateMapTheme()
 
     QObject::connect( m_model->mapTheme()->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
                       q, SLOT( updateProperty( const QString &, bool ) ) );
+
+    QObject::connect( m_model->fileManager(), SIGNAL( fileAdded( int ) ),
+                      q, SLOT( getFilterDocument( int ) ) );
 
     q->setPropertyValue( "clouds_data", m_viewParams.showClouds() );
 
@@ -831,7 +854,13 @@ void MarbleMapPrivate::updateMapTheme()
 
         bool textureLayersOk = true;
         QVector<const GeoSceneTexture *> textures;
+
+        qDebug() << "Marble Map has texture layers!\n";
+
         if ( sceneLayer ) {
+
+            qDebug() << head->theme();
+            
             foreach ( const GeoSceneAbstractDataset *pos, sceneLayer->datasets() ) {
                 const GeoSceneTexture *const texture = dynamic_cast<GeoSceneTexture const *>( pos );
                 if ( !texture )
@@ -840,6 +869,8 @@ void MarbleMapPrivate::updateMapTheme()
                 const QString sourceDir = texture->sourceDir();
                 const QString installMap = texture->installMap();
                 const QString role = sceneLayer->role();
+
+                qDebug() << sourceDir << " " << installMap << " " << role;
 
                 // If the tiles aren't already there, put up a progress dialog
                 // while creating them.
@@ -881,6 +912,7 @@ void MarbleMapPrivate::updateMapTheme()
             GeoSceneFilter *filter= m_model->mapTheme()->map()->filters().first();
 
             if( filter->type() == "colorize" ) {
+                qDebug() << "Filter source file = " << filter->sourceFile();
                  //no need to look up with MarbleDirs twice so they are left null for now
                 QList<GeoScenePalette*> palette = filter->palette();
                 foreach ( GeoScenePalette *curPalette, palette ) {
@@ -938,6 +970,7 @@ void MarbleMapPrivate::updateMapTheme()
         }
     }
 
+
 /***********************************************/
 
 /*
@@ -975,21 +1008,14 @@ void MarbleMapPrivate::updateMapTheme()
         }
     }
 
-    qDebug() << "Got DGML Attributes!!!\n";
-
-    GeoDataDocument* document = m_model->treeModel()->rootDocument();
-
 */
-//    qDebug() << "MarbleMapPrivate::updateMapTheme() " << m_model->treeModel()->rootDocument()->fileName();
 
     emit q->themeChanged( m_model->mapTheme()->head()->mapThemeId() );
 
-//    applyStyle( document );
-
-//    qDebug() << "MarbleMapPrivate::updateMapTheme() DONE\n";
 }
 
 
+/*
 void MarbleMapPrivate::applyStyle( GeoDataDocument* document ) 
 {
     QVector<GeoDataFeature*>::Iterator i = document->begin();
@@ -1016,6 +1042,7 @@ void MarbleMapPrivate::applyStyle( GeoDataDocument* document )
         }
     }
 }
+*/
 
 
 void MarbleMap::setPropertyValue( const QString& name, bool value )

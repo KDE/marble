@@ -374,6 +374,7 @@ void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role 
 
 void MarbleRunnerManagerPrivate::addParsingResult( GeoDataDocument *document, const QString& error )
 {
+
     if ( document || !error.isEmpty() ) {
         m_fileResult = document;
         emit q->parsingFinished( document, error );

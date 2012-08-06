@@ -17,9 +17,13 @@
 #define MARBLE_TEXTURECOLORIZER_H
 
 #include "MarbleGlobal.h"
+#include "GeoDataDocument.h"
+#include "GeoPainter.h"
 
 #include <QtCore/QString>
 #include <QtGui/QImage>
+#include <QtGui/QPen>
+#include <QtGui/QBrush>
 
 namespace Marble
 {
@@ -36,7 +40,12 @@ class TextureColorizer
 
     virtual ~TextureColorizer(){}
 
+    void setCoastDocument( GeoDataDocument* coastDocument );
+    GeoDataDocument* coastDocument();
+
     void setShowRelief( bool show );
+
+    void drawTextureMap( GeoPainter *painter, GeoDataDocument *document, const ViewportParams *viewport );
 
     void colorize( QImage *origimg, const ViewportParams *viewport, MapQuality mapQuality );
 
@@ -44,9 +53,15 @@ class TextureColorizer
     VectorComposer *const m_veccomposer;
     QString m_seafile;
     QString m_landfile;
+    GeoDataDocument* m_coastDocument;
+    bool m_coastDocumentPresent;
     QImage m_coastImage;
     uint texturepalette[16][512];
     bool m_showRelief;
+    QPen        m_textureLandPen;
+    QBrush      m_textureLandBrush;
+    QBrush      m_textureGlacierBrush;
+    QBrush      m_textureLakeBrush;
 };
 
 }

@@ -47,6 +47,26 @@ void GeoSceneFilter::setName( const QString& name )
     m_name = name;
 }
 
+QString GeoSceneFilter::sourceFile() const
+{
+    return m_sourceFile;
+}
+
+void GeoSceneFilter::setSourceFile( const QString& sourceFile )
+{
+    m_sourceFile = sourceFile;
+}
+
+QString GeoSceneFilter::fileFormat() const
+{
+    return m_fileFormat;
+}
+
+void GeoSceneFilter::setFileFormat( const QString& fileFormat )
+{
+    m_fileFormat = fileFormat;
+}
+
 QString GeoSceneFilter::type() const
 {
     return m_type;

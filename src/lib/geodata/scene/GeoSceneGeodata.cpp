@@ -21,7 +21,7 @@ GeoSceneGeodata::GeoSceneGeodata( QString name )
       m_sourceFile( QString() ),
       m_sourceFileFormat( QString() ),
       m_pen( QPen( QColor( 255, 255, 255 ) ) ),
-      m_brush( QBrush( QColor( 255, 255, 255 ) ) )
+      m_brush( QBrush( Qt::transparent ) )
 {
 }
 

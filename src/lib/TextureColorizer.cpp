@@ -16,6 +16,7 @@
 #include <QtCore/QFile>
 #include <QtCore/QSharedPointer>
 #include <QtCore/QString>
+#include <QtCore/QVector>
 #include <QtCore/QTime>
 #include <QtGui/QColor>
 #include <QtGui/QImage>
@@ -28,6 +29,10 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "MathHelper.h"
+#include "GeoDataFeature.h"
+#include "GeoDataTypes.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataDocument.h"
 
 namespace Marble
 {
@@ -65,7 +70,13 @@ private:
 TextureColorizer::TextureColorizer( const QString &seafile,
                                     const QString &landfile,
                                     VectorComposer *veccomposer )
-    : m_veccomposer( veccomposer )
+    : m_veccomposer( veccomposer ),
+      m_coastDocument( new GeoDataDocument ),
+      m_coastDocumentPresent( false ),
+      m_textureLandPen( QPen( Qt::NoPen ) ),
+      m_textureLandBrush( QBrush( QColor( 255, 0, 0 ) ) ),
+      m_textureGlacierBrush( QBrush( QColor( 0, 255, 0 ) ) ),
+      m_textureLakeBrush( QBrush( QColor( 0, 0, 0 ) ) )
 {
     QTime t;
     t.start();
@@ -144,6 +155,18 @@ TextureColorizer::TextureColorizer( const QString &seafile,
     mDebug() << Q_FUNC_INFO << "Time elapsed:" << t.elapsed() << "ms";
 }
 
+void TextureColorizer::setCoastDocument( GeoDataDocument* coastDocument )
+{
+    qDebug() << "Set coast document!";
+    m_coastDocument = coastDocument;
+    m_coastDocumentPresent = true;
+}
+
+GeoDataDocument* TextureColorizer::coastDocument()
+{
+    return m_coastDocument;
+}
+
 void TextureColorizer::setShowRelief( bool show )
 {
     m_showRelief = show;
@@ -166,8 +189,42 @@ void TextureColorizer::setShowRelief( bool show )
 // showRelief).
 // 
 
+void TextureColorizer::drawTextureMap( GeoPainter *painter, GeoDataDocument *document, const ViewportParams *viewport )
+{
+    painter->setPen( m_textureLandPen );
+    painter->setBrush( m_textureLandBrush );
+
+    QVector<GeoDataFeature*>::Iterator i = document->begin();
+    QVector<GeoDataFeature*>::Iterator end = document->end();
+
+    for ( ; i != end; ++i ) {
+        if ( (*i)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+
+            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( *i );
+
+            if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
+                GeoDataLineString *child = static_cast<GeoDataLineString*>( placemark->geometry() );
+                painter->drawPolyline( *child );
+            }
+
+            if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+                GeoDataPolygon *child = static_cast<GeoDataPolygon*>( placemark->geometry() );
+                painter->drawPolygon( *child );
+            } 
+        }
+    }
+}
+
 void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport, MapQuality mapQuality )
 {
+
+    qDebug() << "TextureColorizer::colorize" << m_coastDocumentPresent;
+
+/*
+    if ( !m_coastDocumentPresent )
+        return;
+*/       
+
     if ( m_coastImage.size() != viewport->size() )
         m_coastImage = QImage( viewport->size(), QImage::Format_RGB32 );
 
@@ -194,7 +251,8 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
     GeoPainter painter( &m_coastImage, viewport, mapQuality, doClip );
     painter.setRenderHint( QPainter::Antialiasing, antialiased );
 
-    m_veccomposer->drawTextureMap( &painter, viewport );
+    drawTextureMap( &painter, m_coastDocument, viewport );
+//    m_veccomposer->drawTextureMap( &painter, viewport );
 
     const qint64   radius   = viewport->radius();
 

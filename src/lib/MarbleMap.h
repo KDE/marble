@@ -397,6 +397,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
  public Q_SLOTS:
 
+    void getFilterDocument( int index );
+
     /**
      * @brief Paint the map using a give painter.
      * @param painter  The painter to use.

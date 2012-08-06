@@ -362,6 +362,7 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
 
 //    qDebug() << "Before calling File Manager!!!\n";
     d->m_fileManager->addFile( loadList, styleList, MapDocument );
+    qDebug() << "File Manager size = " << d->m_fileManager->size();
     loadList.clear();
     styleList.clear();
 
