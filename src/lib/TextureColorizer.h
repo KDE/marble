@@ -43,9 +43,17 @@ class TextureColorizer
     void setCoastDocument( GeoDataDocument* coastDocument );
     GeoDataDocument* coastDocument();
 
+    void setGlacierDocument( GeoDataDocument* glacierDocument );
+    GeoDataDocument* glacierDocument();
+
+    void setLakeDocument( GeoDataDocument* lakeDocument );
+    GeoDataDocument* lakeDocument();
+
     void setShowRelief( bool show );
 
-    void drawTextureMap( GeoPainter *painter, GeoDataDocument *document, const ViewportParams *viewport );
+    void drawIndividualDocument( GeoPainter *painter, GeoDataDocument *document );
+
+    void drawTextureMap( GeoPainter *painter, GeoDataDocument *coastDocument, GeoDataDocument *glacierDocument, GeoDataDocument *lakeDocument );
 
     void colorize( QImage *origimg, const ViewportParams *viewport, MapQuality mapQuality );
 
@@ -55,6 +63,10 @@ class TextureColorizer
     QString m_landfile;
     GeoDataDocument* m_coastDocument;
     bool m_coastDocumentPresent;
+    GeoDataDocument* m_glacierDocument;
+    bool m_glacierDocumentPresent;
+    GeoDataDocument* m_lakeDocument;
+    bool m_lakeDocumentPresent;
     QImage m_coastImage;
     uint texturepalette[16][512];
     bool m_showRelief;

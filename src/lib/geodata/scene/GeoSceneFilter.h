@@ -48,6 +48,15 @@ class GeoSceneFilter : public GeoNode
     QString sourceFile() const;
     void setSourceFile( const QString& sourceFile );
 
+    QString coastlines() const;
+    void setCoastlines( const QString& coastlines );
+
+    QString lakes() const;
+    void setLakes( const QString& lakes );
+
+    QString glaciers() const;
+    void setGlaciers( const QString& glaciers );
+
     QString fileFormat() const;
     void setFileFormat( const QString& fileFormat );
 
@@ -60,6 +69,9 @@ class GeoSceneFilter : public GeoNode
 
  private:
     QString m_sourceFile;
+    QString m_coastlines;
+    QString m_lakes;
+    QString m_glaciers;
     QString m_fileFormat;
     QString m_name;
     QString m_type;

@@ -37,6 +37,7 @@ namespace dgml
     extern  const char* dgmlTag_Blending;
     extern  const char* dgmlTag_Brush;
     extern  const char* dgmlTag_Coastline;
+    extern  const char* dgmlTag_Coastlines;
     extern  const char* dgmlTag_Color;
     extern  const char* dgmlTag_CustomPlugin;
     extern  const char* dgmlTag_Dem;
@@ -48,12 +49,14 @@ namespace dgml
     extern  const char* dgmlTag_DownloadUrl;
     extern  const char* dgmlTag_Filter;
     extern  const char* dgmlTag_Geodata;
+    extern  const char* dgmlTag_Glaciers;
     extern  const char* dgmlTag_Group;
     extern  const char* dgmlTag_Head;
     extern  const char* dgmlTag_Heading;
     extern  const char* dgmlTag_Icon;
     extern  const char* dgmlTag_InstallMap;
     extern  const char* dgmlTag_Item;
+    extern  const char* dgmlTag_Lakes;
     extern  const char* dgmlTag_Layer;
     extern  const char* dgmlTag_Legend;
     extern  const char* dgmlTag_Map;

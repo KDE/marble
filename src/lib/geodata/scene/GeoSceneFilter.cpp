@@ -57,6 +57,36 @@ void GeoSceneFilter::setSourceFile( const QString& sourceFile )
     m_sourceFile = sourceFile;
 }
 
+QString GeoSceneFilter::coastlines() const
+{
+    return m_coastlines;
+}
+
+void GeoSceneFilter::setCoastlines( const QString& coastlines )
+{
+    m_coastlines = coastlines;
+}
+
+QString GeoSceneFilter::lakes() const
+{
+    return m_lakes;
+}
+
+void GeoSceneFilter::setLakes( const QString& lakes )
+{
+    m_lakes = lakes;
+}
+
+QString GeoSceneFilter::glaciers() const
+{
+    return m_glaciers;
+}
+
+void GeoSceneFilter::setGlaciers( const QString& glaciers )
+{
+    m_glaciers = glaciers;
+}
+
 QString GeoSceneFilter::fileFormat() const
 {
     return m_fileFormat;

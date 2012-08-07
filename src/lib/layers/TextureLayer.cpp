@@ -186,6 +186,26 @@ GeoDataDocument* TextureLayer::coastDocument()
     return d->m_texcolorizer->coastDocument();
 }
 
+void TextureLayer::setGlacierDocument( GeoDataDocument* glacierDocument )
+{
+    d->m_texcolorizer->setGlacierDocument( glacierDocument );
+}
+
+GeoDataDocument* TextureLayer::glacierDocument() 
+{
+    return d->m_texcolorizer->glacierDocument();
+}
+
+void TextureLayer::setLakeDocument( GeoDataDocument* lakeDocument )
+{
+    d->m_texcolorizer->setLakeDocument( lakeDocument );
+}
+
+GeoDataDocument* TextureLayer::lakeDocument() 
+{
+    return d->m_texcolorizer->lakeDocument();
+}
+
 bool TextureLayer::showSunShading() const
 {
     return d->m_layerDecorator.showSunShading();

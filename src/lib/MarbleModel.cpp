@@ -332,9 +332,6 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
             QPen pen = reinterpret_cast<GeoSceneGeodata*>( dataset )->pen();
             QBrush brush = reinterpret_cast<GeoSceneGeodata*>( dataset )->brush();
 
-//            qDebug() << "Marble Model " << containername << " Pen color = " << pen.color();
-
-
             GeoDataLineStyle* lineStyle = new GeoDataLineStyle( pen.color() );
             lineStyle->setPenStyle( pen.style() );
             lineStyle->setWidth( pen.width() );
@@ -360,17 +357,13 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
     }
     // load new standard Placemarks
 
-//    qDebug() << "Before calling File Manager!!!\n";
     d->m_fileManager->addFile( loadList, styleList, MapDocument );
-    qDebug() << "File Manager size = " << d->m_fileManager->size();
     loadList.clear();
     styleList.clear();
 
     mDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
-//    qDebug() << "Before emit\n";
     emit themeChanged( mapTheme->head()->mapThemeId() );
 
-//    qDebug() << "After calling File Manager!!!\n";
 }
 
 void MarbleModel::home( qreal &lon, qreal &lat, int& zoom ) const

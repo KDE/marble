@@ -186,8 +186,6 @@ void FileManager::addGeoDataDocument( GeoDataDocument* document )
     d->m_model->treeModel()->addDocument( document );
     emit fileAdded( d->m_fileItemList.indexOf( document ) );
 
-    qDebug() << "FileManager::addGeoDataDocument " << document->fileName() << " " << d->m_fileItemList.size();
-//    emit setDocumentStyles( document );
 }
 
 void FileManager::cleanupLoader( FileLoader* loader )

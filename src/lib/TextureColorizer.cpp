@@ -8,6 +8,7 @@
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 // Copyright 2008      Carlos Licea <carlos.licea@kdemail.net>
+// Copyright 2012      Cezar Mocan  <mocancezar@gmail.com>
 //
 
 #include "TextureColorizer.h"
@@ -73,6 +74,10 @@ TextureColorizer::TextureColorizer( const QString &seafile,
     : m_veccomposer( veccomposer ),
       m_coastDocument( new GeoDataDocument ),
       m_coastDocumentPresent( false ),
+      m_glacierDocument( new GeoDataDocument ),
+      m_glacierDocumentPresent( false ),
+      m_lakeDocument( new GeoDataDocument ),
+      m_lakeDocumentPresent( false ),
       m_textureLandPen( QPen( Qt::NoPen ) ),
       m_textureLandBrush( QBrush( QColor( 255, 0, 0 ) ) ),
       m_textureGlacierBrush( QBrush( QColor( 0, 255, 0 ) ) ),
@@ -157,7 +162,6 @@ TextureColorizer::TextureColorizer( const QString &seafile,
 
 void TextureColorizer::setCoastDocument( GeoDataDocument* coastDocument )
 {
-    qDebug() << "Set coast document!";
     m_coastDocument = coastDocument;
     m_coastDocumentPresent = true;
 }
@@ -165,6 +169,28 @@ void TextureColorizer::setCoastDocument( GeoDataDocument* coastDocument )
 GeoDataDocument* TextureColorizer::coastDocument()
 {
     return m_coastDocument;
+}
+
+void TextureColorizer::setGlacierDocument( GeoDataDocument* glacierDocument )
+{
+    m_glacierDocument = glacierDocument;
+    m_glacierDocumentPresent = true;
+}
+
+GeoDataDocument* TextureColorizer::glacierDocument()
+{
+    return m_glacierDocument;
+}
+
+void TextureColorizer::setLakeDocument( GeoDataDocument* lakeDocument )
+{
+    m_lakeDocument = lakeDocument;
+    m_lakeDocumentPresent = true;
+}
+
+GeoDataDocument* TextureColorizer::lakeDocument()
+{
+    return m_lakeDocument;
 }
 
 void TextureColorizer::setShowRelief( bool show )
@@ -189,11 +215,8 @@ void TextureColorizer::setShowRelief( bool show )
 // showRelief).
 // 
 
-void TextureColorizer::drawTextureMap( GeoPainter *painter, GeoDataDocument *document, const ViewportParams *viewport )
+void TextureColorizer::drawIndividualDocument( GeoPainter *painter, GeoDataDocument *document ) 
 {
-    painter->setPen( m_textureLandPen );
-    painter->setBrush( m_textureLandBrush );
-
     QVector<GeoDataFeature*>::Iterator i = document->begin();
     QVector<GeoDataFeature*>::Iterator end = document->end();
 
@@ -215,15 +238,31 @@ void TextureColorizer::drawTextureMap( GeoPainter *painter, GeoDataDocument *doc
     }
 }
 
-void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport, MapQuality mapQuality )
+void TextureColorizer::drawTextureMap( GeoPainter *painter, GeoDataDocument *coastDocument, GeoDataDocument *glacierDocument, GeoDataDocument *lakeDocument )
 {
 
-    qDebug() << "TextureColorizer::colorize" << m_coastDocumentPresent;
+    if ( m_coastDocumentPresent ) {
+        painter->setPen( m_textureLandPen );
+        painter->setBrush( m_textureLandBrush );
+        drawIndividualDocument( painter, coastDocument );
+    }
 
-/*
-    if ( !m_coastDocumentPresent )
-        return;
-*/       
+    if ( m_glacierDocumentPresent ) {
+        painter->setPen( Qt::NoPen );
+        painter->setBrush( m_textureGlacierBrush );
+        drawIndividualDocument( painter, glacierDocument );
+    }
+
+    if ( m_lakeDocumentPresent ) {
+        painter->setPen( Qt::NoPen );
+        painter->setBrush( m_textureLakeBrush );
+        drawIndividualDocument( painter, lakeDocument );
+    }
+
+}
+
+void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport, MapQuality mapQuality )
+{
 
     if ( m_coastImage.size() != viewport->size() )
         m_coastImage = QImage( viewport->size(), QImage::Format_RGB32 );
@@ -251,7 +290,7 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
     GeoPainter painter( &m_coastImage, viewport, mapQuality, doClip );
     painter.setRenderHint( QPainter::Antialiasing, antialiased );
 
-    drawTextureMap( &painter, m_coastDocument, viewport );
+    drawTextureMap( &painter, m_coastDocument, m_glacierDocument, m_lakeDocument );
 //    m_veccomposer->drawTextureMap( &painter, viewport );
 
     const qint64   radius   = viewport->radius();

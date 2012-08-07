@@ -705,14 +705,27 @@ void MarbleMap::getFilterDocument( int index ) {
         return;
 
     QString currentName = d->m_model->fileManager()->at( index )->fileName();
-    QString desiredName = d->m_model->mapTheme()->map()->filters().first()->sourceFile();
+    QString coastName = d->m_model->mapTheme()->map()->filters().at( 0 )->coastlines();
+    QString lakeName = d->m_model->mapTheme()->map()->filters().at( 0 )->lakes();
+    QString glacierName = d->m_model->mapTheme()->map()->filters().at( 0 )->glaciers();
+ 
+    GeoDataDocument* filterDocument = d->m_model->fileManager()->at( index );
 
-//    qDebug() << "Booha ma-tii! " << d->m_model->fileManager()->at( index )->fileName();
-
-    if ( currentName == desiredName ) {
-        GeoDataDocument* filterDocument = d->m_model->fileManager()->at( index );
+    if ( currentName == coastName ) {
         d->m_layerManager.removeLayer( &d->m_textureLayer );
         d->m_textureLayer.setCoastDocument( filterDocument );        
+        d->m_layerManager.addLayer( &d->m_textureLayer );
+    }
+
+    if ( currentName == lakeName ) {
+        d->m_layerManager.removeLayer( &d->m_textureLayer );
+        d->m_textureLayer.setLakeDocument( filterDocument );        
+        d->m_layerManager.addLayer( &d->m_textureLayer );
+    }
+
+    if ( currentName == glacierName ) {
+        d->m_layerManager.removeLayer( &d->m_textureLayer );
+        d->m_textureLayer.setGlacierDocument( filterDocument );        
         d->m_layerManager.addLayer( &d->m_textureLayer );
     }
 }
@@ -755,8 +768,6 @@ QString MarbleMap::mapThemeId() const
 void MarbleMap::setMapThemeId( const QString& mapThemeId )
 {
     d->m_model->setMapThemeId( mapThemeId );
-
-    qDebug() << "MarbleMap Filemanager size: " << d->m_model->fileManager()->size();
 }
 
 void MarbleMapPrivate::updateMapTheme()
@@ -855,12 +866,8 @@ void MarbleMapPrivate::updateMapTheme()
         bool textureLayersOk = true;
         QVector<const GeoSceneTexture *> textures;
 
-        qDebug() << "Marble Map has texture layers!\n";
-
         if ( sceneLayer ) {
 
-            qDebug() << head->theme();
-            
             foreach ( const GeoSceneAbstractDataset *pos, sceneLayer->datasets() ) {
                 const GeoSceneTexture *const texture = dynamic_cast<GeoSceneTexture const *>( pos );
                 if ( !texture )
@@ -869,8 +876,6 @@ void MarbleMapPrivate::updateMapTheme()
                 const QString sourceDir = texture->sourceDir();
                 const QString installMap = texture->installMap();
                 const QString role = sceneLayer->role();
-
-                qDebug() << sourceDir << " " << installMap << " " << role;
 
                 // If the tiles aren't already there, put up a progress dialog
                 // while creating them.
@@ -912,7 +917,6 @@ void MarbleMapPrivate::updateMapTheme()
             GeoSceneFilter *filter= m_model->mapTheme()->map()->filters().first();
 
             if( filter->type() == "colorize" ) {
-                qDebug() << "Filter source file = " << filter->sourceFile();
                  //no need to look up with MarbleDirs twice so they are left null for now
                 QList<GeoScenePalette*> palette = filter->palette();
                 foreach ( GeoScenePalette *curPalette, palette ) {
@@ -971,79 +975,9 @@ void MarbleMapPrivate::updateMapTheme()
     }
 
 
-/***********************************************/
-
-/*
-
-    if ( m_model->mapTheme() ) {
-        foreach ( GeoSceneLayer *layer, m_model->mapTheme()->map()->layers() ) {
-            if ( layer->backend() != dgml::dgmlValue_geodata )
-                continue;
-
-            if ( layer->datasets().count() <= 0 )
-                continue;
-
-            // look for documents
-            foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
-                QString containername = reinterpret_cast<GeoSceneGeodata*>( dataset )->sourceFile();
-                QPen pen = reinterpret_cast<GeoSceneGeodata*>( dataset )->pen();
-                QBrush brush = reinterpret_cast<GeoSceneGeodata*>( dataset )->brush();
-
-                qDebug() << "Marble Map " << containername << " Pen color = " << pen.color();
-
-
-                GeoDataLineStyle* lineStyle = new GeoDataLineStyle( pen.color() );
-                lineStyle->setPenStyle( pen.style() );
-                lineStyle->setWidth( pen.width() );
-
-                GeoDataPolyStyle* polyStyle = new GeoDataPolyStyle( brush.color() );
-                polyStyle->setFill( true );
-
-                GeoDataStyle* style = new GeoDataStyle;
-                style->setLineStyle( *lineStyle );
-                style->setPolyStyle( *polyStyle );
-                
-                m_styleMap[ containername ] = style;
-            }
-        }
-    }
-
-*/
-
     emit q->themeChanged( m_model->mapTheme()->head()->mapThemeId() );
 
 }
-
-
-/*
-void MarbleMapPrivate::applyStyle( GeoDataDocument* document ) 
-{
-    QVector<GeoDataFeature*>::Iterator i = document->begin();
-    QVector<GeoDataFeature*>::Iterator const end = document->end();
-
-    qDebug() << "Apply style " << document->documentRole();
-
-    for ( ; i != end; ++i ) {
-        if ( (*i)->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-            GeoDataDocument *child = static_cast<GeoDataDocument*>( *i );
-            applyStyle( child );
-        }
-
-        if ( (*i)->nodeType() == GeoDataTypes::GeoDataPlacemarkType && document->documentRole() == MapDocument &&
-            m_styleMap.find( document->fileName() ) != m_styleMap.end() ) {
-
-            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( *i );
-
-            if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
-                    placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType ) {
-
-                placemark->setStyle( m_styleMap[ document->fileName() ] );
-            }
-        }
-    }
-}
-*/
-
 
 void MarbleMap::setPropertyValue( const QString& name, bool value )
 {
