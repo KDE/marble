@@ -71,17 +71,21 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
     // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Subtiles
     // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#C.2FC.2B.2B
     // Sometimes the formula returns wrong huge values, x and y have to be between 0 and 2^ZoomLevel
-    unsigned int minX = qMax( (unsigned int) lon2tilex( viewport->viewLatLonAltBox().west(GeoDataCoordinates::Degree), tileZoomLevel() ),
-                              (unsigned int) 0);
+    unsigned int minX = qMin( (unsigned int) pow( 2, tileZoomLevel() ),
+                              qMax( (unsigned int) lon2tilex( viewport->viewLatLonAltBox().west(GeoDataCoordinates::Degree), tileZoomLevel() ),
+                                    (unsigned int) 0) );
 
-    unsigned int minY = qMax( (unsigned int) lat2tiley( viewport->viewLatLonAltBox().north(GeoDataCoordinates::Degree), tileZoomLevel() ),
-                              (unsigned int) 0);
+    unsigned int minY = qMin( (unsigned int) pow( 2, tileZoomLevel() ),
+                              qMax( (unsigned int) lat2tiley( viewport->viewLatLonAltBox().north(GeoDataCoordinates::Degree), tileZoomLevel() ),
+                                    (unsigned int) 0) );
 
-    unsigned int maxX = qMin( (unsigned int) lon2tilex( viewport->viewLatLonAltBox().east(GeoDataCoordinates::Degree), tileZoomLevel() ),
-                              (unsigned int) pow( 2, tileZoomLevel() ));
+    unsigned int maxX = qMax( (unsigned int) 0,
+                              qMin( (unsigned int) lon2tilex( viewport->viewLatLonAltBox().east(GeoDataCoordinates::Degree), tileZoomLevel() ),
+                                    (unsigned int) pow( 2, tileZoomLevel() )) );
 
-    unsigned int maxY = qMin( (unsigned int) lat2tiley( viewport->viewLatLonAltBox().south(GeoDataCoordinates::Degree), tileZoomLevel() ),
-                              (unsigned int) pow( 2, tileZoomLevel() ));
+    unsigned int maxY = qMax( (unsigned int) 0,
+                              qMin( (unsigned int) lat2tiley( viewport->viewLatLonAltBox().south(GeoDataCoordinates::Degree), tileZoomLevel() ),
+                                    (unsigned int) pow( 2, tileZoomLevel() )) );
 
     bool left  = minX < m_minTileX;
     bool right = maxX > m_maxTileX;
@@ -92,19 +96,19 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
     // When changing zoom, download everything inside the screen
     if ( left && right && up && down )
 
-                mapTexture( viewport, painter->mapQuality(),minX,minY,maxX,maxY);
+                mapTexture( viewport, painter->mapQuality(), minX, minY, maxX, maxY );
 
     // When only moving screen, just download the new tiles
     else if ( left || right || up || down ){
 
         if ( left )
-            mapTexture( viewport, painter->mapQuality(), minX, m_minTileY, m_minTileX, m_maxTileY);
+            mapTexture( viewport, painter->mapQuality(), minX, m_minTileY, m_minTileX, m_maxTileY );
         if ( right )
-            mapTexture( viewport, painter->mapQuality(), m_maxTileX, m_minTileY, maxX, m_maxTileY);
+            mapTexture( viewport, painter->mapQuality(), m_maxTileX, m_minTileY, maxX, m_maxTileY );
         if ( up )
-            mapTexture( viewport, painter->mapQuality(), m_minTileX, minY, m_maxTileX, m_minTileY);
+            mapTexture( viewport, painter->mapQuality(), m_minTileX, minY, m_maxTileX, m_minTileY );
         if ( down )
-            mapTexture( viewport, painter->mapQuality(), m_minTileX, m_maxTileY, m_maxTileX, maxY);
+            mapTexture( viewport, painter->mapQuality(), m_minTileX, m_maxTileY, m_maxTileX, maxY );
 
         // During testing discovered that this code above does not request the "corner" tiles
 
@@ -203,6 +207,10 @@ void VectorTileMapper::RenderJob::run()
         {
            const TileId tileId = TileId( 0, m_tileLevel, x, y );
            const StackedTile * tile = m_tileLoader->loadTile( tileId );
+
+           int temp = pow( 2, m_tileLevel );
+
+           mDebug() << "---------------------------------" << m_maxTileY << " " << temp;
 
            // When tile has vectorData send it to the VectorTileLayer for it to insert
            // it in the treeModel

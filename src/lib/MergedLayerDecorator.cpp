@@ -187,11 +187,11 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
             mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
         }
 
-/*
+        /*
         Here is where the TileLoader chooses between ImageTile and VectorTile
         Format from VectorTile is available if it is needed to specify the parser
         that should parse that tile file
-*/
+        */
 
         // ImageTile
         if ( textureLayer->nodeType() == QString("GeoSceneTextureTile") ){
