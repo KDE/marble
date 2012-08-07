@@ -208,10 +208,6 @@ void VectorTileMapper::RenderJob::run()
            const TileId tileId = TileId( 0, m_tileLevel, x, y );
            const StackedTile * tile = m_tileLoader->loadTile( tileId );
 
-           int temp = pow( 2, m_tileLevel );
-
-           mDebug() << "---------------------------------" << m_maxTileY << " " << temp;
-
            // When tile has vectorData send it to the VectorTileLayer for it to insert
            // it in the treeModel
            if ( tile->resultVectorData()->size() > 0 )
