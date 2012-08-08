@@ -59,7 +59,7 @@ class MapViewWidget::Private {
         m_mapSortProxy.sort( 0 );
     }
 
-    void selectCurrentMapTheme( const QString& );
+    void setCelestialBody( int comboIndex );
 
     /// whenever a new map gets inserted, the following slot will adapt the ListView accordingly
     void updateMapThemeView();
@@ -103,8 +103,8 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
     d->m_mapViewUi.celestialBodyComboBox->setModel( &d->m_celestialList );
     d->m_mapViewUi.marbleThemeSelectView->setModel( &d->m_mapSortProxy );
 
-    connect( d->m_mapViewUi.celestialBodyComboBox, SIGNAL( activated( const QString& ) ),
-             this,                                 SLOT( selectCurrentMapTheme( const QString& ) ) );
+    connect( d->m_mapViewUi.celestialBodyComboBox, SIGNAL( activated( int ) ),
+             this,                                 SLOT( setCelestialBody( int ) ) );
     
     connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
     connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
@@ -215,9 +215,9 @@ void MapViewWidget::setProjection( Projection projection )
         d->m_mapViewUi.projectionComboBox->setCurrentIndex( (int) projection );
 }
 
-void MapViewWidget::Private::selectCurrentMapTheme( const QString& celestialBodyId )
+void MapViewWidget::Private::setCelestialBody( int comboIndex )
 {
-    Q_UNUSED( celestialBodyId )
+    Q_UNUSED( comboIndex )
 
     updateMapFilter();
 

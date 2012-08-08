@@ -48,7 +48,7 @@ class MARBLE_EXPORT MapViewWidget : public QWidget
     void setProjection( Projection projection );
 
  private:
-    Q_PRIVATE_SLOT( d, void selectCurrentMapTheme( const QString& ) )
+    Q_PRIVATE_SLOT( d, void setCelestialBody( int comboIndex ) )
 
     /// whenever a new map gets inserted, the following slot will adapt the ListView accordingly
     Q_PRIVATE_SLOT( d, void updateMapThemeView() )
