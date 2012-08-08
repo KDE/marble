@@ -45,10 +45,8 @@ class MapViewWidget::Private {
     {
     }
 
-    void setMapThemeModel( QStandardItemModel *mapThemeModel )
+    void updateMapFilter()
     {
-        m_mapThemeModel = mapThemeModel;
-        m_mapSortProxy->setSourceModel( m_mapThemeModel );
         int currentIndex = m_mapViewUi.celestialBodyComboBox->currentIndex();
         QStandardItem * selectedItem = m_celestialList->item( currentIndex, 1 );
 
@@ -60,8 +58,6 @@ class MapViewWidget::Private {
 
         m_mapSortProxy->sort( 0 );
         m_mapViewUi.marbleThemeSelectView->setModel( m_mapSortProxy );
-        QObject::connect( m_mapThemeModel, SIGNAL( rowsInserted( QModelIndex, int, int ) ),
-                          q,               SLOT( updateMapThemeView() ) );
     }
 
     void updateCelestialModel();
@@ -149,6 +145,11 @@ void MapViewWidget::Private::updateCelestialModel()
 void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_widget = widget;
+    d->m_mapThemeModel = widget->model()->mapThemeManager()->mapThemeModel();
+    d->m_mapSortProxy->setSourceModel( d->m_mapThemeModel );
+
+    connect( d->m_mapThemeModel, SIGNAL( rowsInserted( QModelIndex, int, int ) ),
+             this,               SLOT( updateMapThemeView() ) );
 
     connect( this,        SIGNAL( projectionChanged( Projection ) ),
              d->m_widget, SLOT( setProjection( Projection ) ) );
@@ -163,7 +164,7 @@ void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
     connect( this,        SIGNAL( mapThemeIdChanged( const QString& ) ),
              d->m_widget, SLOT( setMapThemeId( const QString& ) ) );
 
-    d->setMapThemeModel( widget->model()->mapThemeManager()->mapThemeModel() );
+    d->updateMapFilter();
     d->updateMapThemeView();
 }
 
@@ -234,7 +235,7 @@ void MapViewWidget::Private::selectCurrentMapTheme( const QString& celestialBody
 {
     Q_UNUSED( celestialBodyId )
 
-    setMapThemeModel( m_mapThemeModel );
+    updateMapFilter();
 
     bool foundMapTheme = false;
 
