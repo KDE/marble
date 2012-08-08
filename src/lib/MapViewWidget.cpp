@@ -59,8 +59,6 @@ class MapViewWidget::Private {
         m_mapSortProxy.sort( 0 );
     }
 
-    void updateCelestialModel();
-
     void selectCurrentMapTheme( const QString& );
 
     /// whenever a new map gets inserted, the following slot will adapt the ListView accordingly
@@ -117,24 +115,6 @@ MapViewWidget::~MapViewWidget()
     delete d;
 }
 
-void MapViewWidget::Private::updateCelestialModel()
-{
-    int row = m_mapThemeModel->rowCount();
-
-    for ( int i = 0; i < row; ++i )
-    {
-        QString celestialBodyId = ( m_mapThemeModel->data( m_mapThemeModel->index( i, 1 ) ).toString() ).section( '/', 0, 0 );
-        QString celestialBodyName = Planet::name( celestialBodyId );
-
-        QList<QStandardItem*> matchingItems = m_celestialList.findItems ( celestialBodyId, Qt::MatchExactly, 1 );
-        if ( matchingItems.isEmpty() ) {
-            m_celestialList.appendRow( QList<QStandardItem*>()
-                                << new QStandardItem( celestialBodyName )
-                                << new QStandardItem( celestialBodyId ) );
-        }
-    }
-}
-
 void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_widget = widget;
@@ -163,7 +143,17 @@ void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
 
 void MapViewWidget::Private::updateMapThemeView()
 {
-    updateCelestialModel();
+    for ( int i = 0; i < m_mapThemeModel->rowCount(); ++i ) {
+        QString celestialBodyId = ( m_mapThemeModel->data( m_mapThemeModel->index( i, 1 ) ).toString() ).section( '/', 0, 0 );
+        QString celestialBodyName = Planet::name( celestialBodyId );
+
+        QList<QStandardItem*> matchingItems = m_celestialList.findItems( celestialBodyId, Qt::MatchExactly, 1 );
+        if ( matchingItems.isEmpty() ) {
+            m_celestialList.appendRow( QList<QStandardItem*>()
+                                << new QStandardItem( celestialBodyName )
+                                << new QStandardItem( celestialBodyId ) );
+        }
+    }
 
     if ( m_widget ) {
         QString mapThemeId = m_widget->mapThemeId();
