@@ -113,10 +113,11 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
         // Image blending. If there are several images in the same tile (like clouds
         // or hillshading images over the map) blend them all into only one image
 
-        if (tile->image() != 0 && !tile->image()->isNull()){
+        if ( tile->nodeType() == QString("TextureTile") ){
 
-            const Blending *const blending = tile->blending();
+            const Blending *const blending =  tile->blending();
             if ( blending ) {
+
                 mDebug() << Q_FUNC_INFO << "blending";
 
                 Q_ASSERT( !resultImage.isNull());
@@ -143,7 +144,7 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
 
         // Geometry appending. If it is a VectorTile append all its geometries to the
         // main GeoDataDocument
-        if ( tile->vectorData() ){
+        if ( tile->nodeType() == QString("VectorTile") ){
 
             Q_ASSERT( resultVector );
 
@@ -206,7 +207,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
             GeoDataDocument* tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, textureLayer->fileFormat() );
 
-            QSharedPointer<Tile> tile( new VectorTile( tileId, tileVectordata, blending ) );
+            QSharedPointer<Tile> tile( new VectorTile( tileId, tileVectordata ) );
 
             tiles.append( tile );
         }
@@ -228,7 +229,7 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
 
             // VectorTile
             if ( tileData != 0 ){
-                tiles[i] = QSharedPointer<Tile>( new VectorTile( tileId, tileData, blending ) );
+                tiles[i] = QSharedPointer<Tile>( new VectorTile( tileId, tileData ) );
             }
             // TextureTile
             else if ( !tileImage.isNull() ){

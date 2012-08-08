@@ -23,6 +23,8 @@
 #include "TileId.h"
 #include "GeoDataContainer.h"
 
+#include "MarbleDebug.h"
+
 class QImage;
 
 namespace Marble
@@ -39,7 +41,7 @@ class Blending;
     
     A stack of Tiles that cover the same area and the same
     zoom level can be stored (and painted) layer by layer in a StackedTile object. 
-    For this purpose each Tile specifies a blending type.
+    For this purpose each Texture Tile specifies a blending type.
 
     Usually the tiles are organized in so called quad tiles: This means that
     with increasing zoom level four other tiles cover the same area as a 
@@ -57,7 +59,7 @@ class Blending;
 class Tile
 {
  public:
-    Tile( TileId const & tileId, const Blending * blending );
+    Tile( TileId const & tileId );
     virtual ~Tile();
 
 /*!
@@ -73,6 +75,14 @@ class Tile
     virtual QImage const * image() const;
 
 /*!
+    \brief Returns the kind of blending used for the texture tile.
+    \return A pointer to the blending object used for painting/merging the Tile.
+
+    If no blending is set the pointer returned will be zero.
+*/
+    virtual Blending const * blending() const;
+
+/*!
    \brief Returns the GeoDataDocument containing de vector data of the Tile
    \return A non-zero pointer to a GeoDataDocument associated with the tile.
 */
@@ -83,14 +93,6 @@ class Tile
     \return A non-zero pointer to a QString associated with the tile.
 */
      const QString *format() const;
-    
-/*!
-    \brief Returns the kind of blending used for the tile.
-    \return A pointer to the blending object used for painting/merging the Tile.
-    
-    If no blending is set the pointer returned will be zero.
-*/     
-    Blending const * blending() const;
 
     virtual const char* nodeType() const;
     virtual QString type();
@@ -101,7 +103,6 @@ class Tile
     Q_DISABLE_COPY( Tile )
 
     TileId const m_id;
-    Blending const * const m_blending;
 };
 
 
@@ -124,7 +125,7 @@ inline GeoDataDocument * Tile::vectorData() const
 
 inline Blending const * Tile::blending() const
 {
-    return m_blending;
+    return 0;
 }
 
 inline int Tile::byteCount() const
