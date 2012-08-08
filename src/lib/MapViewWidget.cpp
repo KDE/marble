@@ -37,7 +37,7 @@ namespace Marble
 class MapViewWidget::Private {
  public:
     Private( MapViewWidget *parent )
-        : m_parent( parent ),
+        : q( parent ),
           m_widget( 0 ),
           m_mapThemeModel( 0 ),
           m_mapSortProxy( 0 ),
@@ -60,8 +60,8 @@ class MapViewWidget::Private {
 
         m_mapSortProxy->sort( 0 );
         m_mapViewUi.marbleThemeSelectView->setModel( m_mapSortProxy );
-        QObject::connect( m_mapThemeModel,       SIGNAL( rowsInserted( QModelIndex, int, int ) ),
-                          m_parent,              SLOT( updateMapThemeView() ) );
+        QObject::connect( m_mapThemeModel, SIGNAL( rowsInserted( QModelIndex, int, int ) ),
+                          q,               SLOT( updateMapThemeView() ) );
     }
 
     void updateCelestialModel();
@@ -73,7 +73,7 @@ class MapViewWidget::Private {
 
     void projectionSelected( int projectionIndex );
 
-    MapViewWidget *m_parent;
+    MapViewWidget *const q;
 
     Ui::MapViewWidget  m_mapViewUi;
     MarbleWidget      *m_widget;
@@ -174,7 +174,7 @@ void MapViewWidget::Private::updateMapThemeView()
     if ( m_widget ) {
         QString mapThemeId = m_widget->mapThemeId();
         if ( !mapThemeId.isEmpty() )
-            m_parent->setMapThemeId( mapThemeId );
+            q->setMapThemeId( mapThemeId );
     }
 }
 
@@ -263,7 +263,7 @@ void MapViewWidget::Private::selectCurrentMapTheme( const QString& celestialBody
 // Relay a signal and convert the parameter from an int to a Projection.
 void MapViewWidget::Private::projectionSelected( int projectionIndex )
 {
-    emit m_parent->projectionChanged( (Projection) projectionIndex );
+    emit q->projectionChanged( (Projection) projectionIndex );
 }
 
 }
