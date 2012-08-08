@@ -239,7 +239,7 @@ void MapViewWidget::Private::setCelestialBody( int comboIndex )
     }
     if ( !foundMapTheme ) {
         QModelIndex index = m_mapSortProxy.index(0,1);
-        m_widget->setMapThemeId( m_mapSortProxy.data(index).toString());
+        emit q->mapThemeIdChanged( m_mapSortProxy.data( index ).toString() );
     }
 
     updateMapThemeView();
