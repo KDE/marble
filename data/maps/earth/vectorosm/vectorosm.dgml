@@ -31,8 +31,6 @@
 
 <!-- VECTORTILES -->
         
-                <!-- OpenStreetMap mapnik rendered tiles expire after seven days
-                     or 604800 seconds -->
             <layer name="vectorosm" backend="vectortile" >
                 <vectortile name="geojson_data" expire="604800" >
                     <sourcedir format="JS"> earth/vectorosm </sourcedir>
@@ -63,34 +61,6 @@
                 </texture>
             </layer>-->
 
-<!-- PLAIN MAP -->
-
-<!-- <layer name="mwdbii" backend="vector" role="polyline">
-                <vector name="pcoast" feature="coast">
-                    <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
-                    <brush color="#ffffff" />
-                </vector>
-                <vector name="pdiffborder" feature="border">
-                    <sourcefile format="PNT"> earth/mwdbii/PDIFFBORDER.PNT </sourcefile>
-                    <pen color="#ffffff" />
-                </vector>
-                <vector name="pusa48" feature="border">
-                    <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
-                    <pen color="#ffffff" />
-                </vector>
-                <vector name="international dateline" feature="border">
-                    <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
-                    <pen color="#ffffff" />
-                </vector>
-                <vector name="plake" feature="lake">
-                    <sourcefile format="PNT"> earth/mwdbii/PLAKE.PNT </sourcefile>
-                    <pen color="#99b3cc" />
-                </vector>
-                <vector name="rivers" feature="river">
-                    <sourcefile format="PNT"> earth/mwdbii/RIVER.PNT </sourcefile>
-                    <pen color="#99b3cc" />
-                </vector>
-            </layer>-->
 
 <!-- PLACES -->
 
@@ -121,21 +91,22 @@
 <!-- ATLAS -->
 
 <!-- This layer creates the elevation model -->
-            <layer name="srtm" backend="texture" role="dem">
-                <texture name="srtm_data"><!-- type="texture"-->
+           <layer name="srtm" backend="texture" role="dem">
+                <texture name="srtm_data">
                     <sourcedir format="JPG"> earth/srtm </sourcedir>
                     <installmap> srtm.jpg </installmap>
                     <storageLayout maximumTileLevel="5"/>
                 </texture>
             </layer>
-        
+
+<!-- COLORS -->
+
             <!-- This layer provides the colorization -->
             <layer name="colorme" backend="filter">
                 <filter name="texturecolorizer" type="colorize">
                     <dem>srtm</dem>
                     <coastline>mwdbii</coastline>
-                    <!-- If these don't get defined the default palettes get
-                    used -->
+
                     <palette type="sea">seacolors.leg</palette>
                     <palette type="land">landcolors.leg</palette>
                 </filter>
@@ -158,69 +129,46 @@
                     <sourcefile format="PNT"> earth/mwdbii/RIVER.PNT </sourcefile>
                     <pen color="#637bff" />
                 </vector>
-            </layer>
+            </layer>-->
 
         </map>
  
  
-        <settings>
- 
-            <property name="coordinate-grid">
-                <value>false</value>
-                <available>true</available>
-            </property>
-            <property name="overviewmap">
-                <value>true</value>
-                <available>true</available>
-            </property>
-            <property name="compass">
-                <value>false</value>
-                <available>true</available>
-            </property>
-            <property name="scalebar">
-                <value>true</value>
-                <available>true</available>
-            </property>
- 
- -            <group name="Places">
+       <settings>
+-            <group name="Places">
                 <property name="places">
-                    <value>false</value>
+                    <value>true</value>
                     <available>true</available>
                 </property>
                 <property name="cities">
-                    <value>false</value>
+                    <value>true</value>
                     <available>true</available>
                 </property>
                 <property name="terrain">
-                    <value>false</value>
+                    <value>true</value>
                     <available>true</available>
                 </property>
                 <property name="otherplaces">
-                    <value>false</value>
+                    <value>true</value>
                     <available>true</available>
                 </property>
             </group>
- 
+
 -            <group name="Boundaries">
                 <property name="borders">
                     <value>true</value>
                     <available>true</available>
                 </property>
                 <property name="international-boundaries">
-                    <available>false</available>
-                    <value>false</value>
-                </property>
-                <property name="state-boundaries">
-                    <available>false</available>
-                    <value>false</value>
-                </property>
-            </group>
- 
-            <group name="Water Bodies">
-                <property name="coastlines">
                     <available>true</available>
                     <value>true</value>
                 </property>
+                <property name="state-boundaries">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+            </group>
+            <group name="Water Bodies">
                 <property name="waterbodies">
                     <available>true</available>
                     <value>true</value>
@@ -234,26 +182,106 @@
                     <value>true</value>
                 </property>
             </group>
- 
-            <group name="Surface">
-                <property name="ice">
-                    <value>false</value>
-                    <available>false</available>
-                </property>
-                <property name="relief">
-                    <value>false</value>
-                    <available>false</available>
-                </property>
-            </group>
+
+            <property name="coordinate-grid">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="overviewmap">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="compass">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="scalebar">
+                <value>true</value>
+                <available>true</available>
+            </property>
         </settings>
- 
- 
- 
+        
+        <!-- At last we define some legend properties -->
+        
         <legend>
-            <section>
-                <heading>Guides</heading>
+            <section name="terrain" checkable="true" connect="terrain" spacing="12">
+                <heading>Terrain</heading>
+
+                <item name="mountain">
+                    <icon pixmap="bitmaps/mountain_1.png"/>
+                    <text>Mountain</text>
+                </item>
+                <item name="volcano">
+                    <icon pixmap="bitmaps/volcano_1.png"/>
+                    <text>Volcano</text>
+                </item>
             </section>
-            <section name="coordinate-grid" checkable="true" connect="coordinate-grid"  spacing="12">
+
+            <section name="otherplaces" checkable="true" connect="otherplaces" spacing="12">
+                <heading>Places of Interest</heading>
+
+                <item name="geographic-pole">
+                    <icon pixmap="bitmaps/pole_1.png"/>
+                    <text>Geographic Pole</text>
+                </item>
+                <item name="magnetic-pole">
+                    <icon pixmap="bitmaps/pole_2.png"/>
+                    <text>Magnetic Pole</text>
+                </item>
+                <item name="airport">
+                    <icon pixmap="bitmaps/airport.png"/>
+                    <text>Airport</text>
+                </item>
+                <item name="shipwreck">
+                    <icon pixmap="bitmaps/shipwreck.png"/>
+                    <text>Shipwreck</text>
+                </item>
+                <item name="observatory">
+                    <icon pixmap="bitmaps/observatory.png"/>
+                    <text>Astronomical Observatory</text>
+                </item>
+            </section>
+
+            <section name="borders" checkable="true" connect="borders" spacing="12">
+                <heading>Boundaries</heading>
+
+                <item name="international-boundary">
+                    <icon color="#cccbca" pixmap="bitmaps/border_1.png"/>
+                    <text>International</text>
+                </item>
+                <item name="state-boundary">
+                    <icon color="#cccbca" pixmap="bitmaps/border_2.png"/>
+                    <text>State</text>
+                </item>
+            </section>
+
+            <section name="waterbodies" checkable="true" connect="waterbodies" spacing="12">
+                <heading>Water Bodies</heading>
+
+                <item name="lake">
+                    <icon color="#99b3cc" pixmap="bitmaps/lake.png"/>
+                    <text>Lake</text>
+                </item>
+                <item name="river">
+                    <icon color="#99b3cc" pixmap="bitmaps/river.png"/>
+                    <text>River</text>
+                </item>
+            </section>
+    
+            <section name="surface" checkable="false" spacing="12">
+                <heading>Surface</heading>
+
+                <item name="land">
+                    <icon color="#f2efe9"/>
+                    <text>Land</text>
+                </item>
+                <item name="water">
+                    <icon color="#99b3cc"/>
+                    <text>Water</text>
+                </item>
+            </section>
+
+            <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
                 <heading>Coordinate Grid</heading>
             </section>
         </legend>
