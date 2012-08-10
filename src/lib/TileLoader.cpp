@@ -40,14 +40,6 @@ TileLoader::TileLoader( HttpDownloadManager * const downloadManager )
              SLOT( updateTile( QByteArray, QString )));
 }
 
-void TileLoader::setTextureLayers( const QVector<const GeoSceneTexture *> &textureLayers )
-{
-    foreach ( const GeoSceneTexture *texture, textureLayers ) {
-        const uint hash = qHash( texture->sourceDir() );
-        m_textureLayers.insert( hash, texture );
-    }
-}
-
 // If the tile is locally available:
 //     - if not expired: create TextureTile, set state to "uptodate", return it => done
 //     - if expired: create TextureTile, state is set to Expired by default, trigger dl,
@@ -76,7 +68,7 @@ QImage TileLoader::loadTile( GeoSceneTexture const *textureLayer, TileId const &
 
     // tile was not locally available => trigger download and look for tiles in other levels
     // for scaling
-    QImage replacementTile = scaledLowerLevelTile( tileId );
+    QImage replacementTile = scaledLowerLevelTile( textureLayer, tileId );
     Q_ASSERT( !replacementTile.isNull() );
 
     triggerDownload( textureLayer, tileId, usage );
@@ -170,13 +162,6 @@ void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
     emit tileCompleted( id, tileImage );
 }
 
-inline GeoSceneTexture const * TileLoader::findTextureLayer( TileId const & id ) const
-{
-    GeoSceneTexture const * const textureLayer = m_textureLayers.value( id.mapThemeIdHash(), 0 );
-    Q_ASSERT( textureLayer );
-    return textureLayer;
-}
-
 QString TileLoader::tileFileName( GeoSceneTexture const * textureLayer, TileId const & tileId )
 {
     QString const fileName = textureLayer->relativeTileFileName( tileId );
@@ -191,10 +176,9 @@ void TileLoader::triggerDownload( GeoSceneTexture const *textureLayer, TileId co
     emit downloadTile( sourceUrl, destFileName, id.toString(), usage );
 }
 
-QImage TileLoader::scaledLowerLevelTile( TileId const & id ) const
+QImage TileLoader::scaledLowerLevelTile( GeoSceneTexture const *textureLayer, TileId const & id ) const
 {
     mDebug() << Q_FUNC_INFO << id;
-    GeoSceneTexture const * const textureLayer = findTextureLayer( id );
 
     for ( int level = qMax<int>( 0, id.zoomLevel() - 1 ); level >= 0; --level ) {
         int const deltaLevel = id.zoomLevel() - level;

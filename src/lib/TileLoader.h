@@ -16,9 +16,7 @@
 #ifndef MARBLE_TILELOADER_H
 #define MARBLE_TILELOADER_H
 
-#include <QtCore/QHash>
 #include <QtCore/QObject>
-#include <QtCore/QSet>
 #include <QtCore/QString>
 #include <QtGui/QImage>
 
@@ -46,8 +44,6 @@ class TileLoader: public QObject
     };
 
     explicit TileLoader( HttpDownloadManager * const );
-
-    void setTextureLayers( const QVector<GeoSceneTexture const *> &textureLayers );
 
     QImage loadTile( GeoSceneTexture const *textureLayer, TileId const & tileId, DownloadUsage const );
     void downloadTile( GeoSceneTexture const *textureLayer, TileId const &tileId, DownloadUsage const );
@@ -78,13 +74,9 @@ class TileLoader: public QObject
     void tileCompleted( TileId const & tileId, QImage const & tileImage );
 
  private:
-    GeoSceneTexture const * findTextureLayer( TileId const & ) const;
     static QString tileFileName( GeoSceneTexture const * textureLayer, TileId const & );
     void triggerDownload( GeoSceneTexture const *textureLayer, TileId const &, DownloadUsage const );
-    QImage scaledLowerLevelTile( TileId const & ) const;
-
-    // TODO: comment about uint hash key
-    QHash<uint, GeoSceneTexture const *> m_textureLayers;
+    QImage scaledLowerLevelTile( GeoSceneTexture const *textureLayer, TileId const & ) const;
 };
 
 }

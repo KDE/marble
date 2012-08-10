@@ -54,11 +54,6 @@ public:
 
         m_textureLayer = dynamic_cast<GeoSceneTexture*>( sceneLayer->datasets().first() );
         Q_ASSERT( m_textureLayer );
-
-        QVector<const GeoSceneTexture*> textureLayers;
-        textureLayers << m_textureLayer;
-
-        m_tileLoader.setTextureLayers( textureLayers );
     }
 
     void tileCompleted( const TileId & tileId, const QImage &image )
