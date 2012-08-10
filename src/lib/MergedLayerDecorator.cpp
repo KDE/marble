@@ -167,23 +167,13 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
     return d->createTile( tiles );
 }
 
-void MergedLayerDecorator::downloadStackedTile( const TileId &id, const QVector<GeoSceneTexture const *> &textureLayers )
+void MergedLayerDecorator::downloadStackedTile( const TileId &id, const QVector<GeoSceneTexture const *> &textureLayers, DownloadUsage usage )
 {
     foreach ( const GeoSceneTexture *textureLayer, textureLayers ) {
         const TileId tileId( textureLayer->sourceDir(), id.zoomLevel(), id.x(), id.y() );
         if ( TileLoader::tileStatus( textureLayer, tileId ) != TileLoader::Available ) {
-            d->m_tileLoader->downloadTile( tileId, DownloadBulk );
+            d->m_tileLoader->downloadTile( tileId, usage );
         }
-    }
-}
-
-void MergedLayerDecorator::reloadTile( const StackedTile &stackedTile )
-{
-    foreach ( QSharedPointer<TextureTile> const & tile, stackedTile.tiles() ) {
-        // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
-        // but since "reload" or "refresh" seems to be a common action of a browser and it
-        // allows for more connections (in our model), use "DownloadBrowse"
-        d->m_tileLoader->downloadTile( tile->id(), DownloadBrowse );
     }
 }
 

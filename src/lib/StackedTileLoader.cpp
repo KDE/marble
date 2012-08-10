@@ -195,7 +195,7 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 void StackedTileLoader::downloadStackedTile( TileId const & stackedTileId )
 {
     QVector<GeoSceneTexture const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
-    d->m_layerDecorator->downloadStackedTile( stackedTileId, textureLayers );
+    d->m_layerDecorator->downloadStackedTile( stackedTileId, textureLayers, DownloadBulk );
 }
 
 quint64 StackedTileLoader::volatileCacheLimit() const
@@ -205,8 +205,12 @@ quint64 StackedTileLoader::volatileCacheLimit() const
 
 void StackedTileLoader::reloadVisibleTiles()
 {
-    foreach ( const StackedTile *displayedTile, d->m_tilesOnDisplay.values() ) {
-        d->m_layerDecorator->reloadTile( *displayedTile );
+    foreach ( const TileId &stackedTileId, d->m_tilesOnDisplay.keys() ) {
+        QVector<GeoSceneTexture const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
+        // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
+        // but since "reload" or "refresh" seems to be a common action of a browser and it
+        // allows for more connections (in our model), use "DownloadBrowse"
+        d->m_layerDecorator->downloadStackedTile( stackedTileId, textureLayers, DownloadBrowse );
     }
 }
 
