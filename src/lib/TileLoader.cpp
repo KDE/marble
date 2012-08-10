@@ -91,14 +91,9 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
 //
 // post condition
 //     - download is triggered
-void TileLoader::reloadTile( TileId const &tileId, DownloadUsage const usage )
+void TileLoader::downloadTile( TileId const &tileId, DownloadUsage const usage )
 {
     triggerDownload( tileId, usage );
-}
-
-void TileLoader::downloadTile( TileId const & tileId )
-{
-    triggerDownload( tileId, DownloadBulk );
 }
 
 int TileLoader::maximumTileLevel( GeoSceneTexture const & texture )

@@ -50,8 +50,7 @@ class TileLoader: public QObject
     void setTextureLayers( const QVector<GeoSceneTexture const *> &textureLayers );
 
     QImage loadTile( TileId const & tileId, DownloadUsage const );
-    void reloadTile( TileId const &tileId, DownloadUsage const );
-    void downloadTile( TileId const & tileId );
+    void downloadTile( TileId const &tileId, DownloadUsage const );
 
     static int maximumTileLevel( GeoSceneTexture const & texture );
 
