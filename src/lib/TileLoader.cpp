@@ -52,9 +52,8 @@ void TileLoader::setTextureLayers( const QVector<const GeoSceneTexture *> &textu
 //     - if not expired: create TextureTile, set state to "uptodate", return it => done
 //     - if expired: create TextureTile, state is set to Expired by default, trigger dl,
 
-QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
+QImage TileLoader::loadTile( GeoSceneTexture const *textureLayer, TileId const & tileId, DownloadUsage const usage )
 {
-    GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
     QString const fileName = tileFileName( textureLayer, tileId );
     TileStatus status = tileStatus( textureLayer, tileId );
     if ( status != Missing ) {
@@ -65,7 +64,7 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
         } else {
             Q_ASSERT( status == Expired );
             mDebug() << Q_FUNC_INFO << tileId << "StateExpired";
-            triggerDownload( tileId, usage );
+            triggerDownload( textureLayer, tileId, usage );
         }
 
         QImage const image( fileName );
@@ -80,7 +79,7 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
     QImage replacementTile = scaledLowerLevelTile( tileId );
     Q_ASSERT( !replacementTile.isNull() );
 
-    triggerDownload( tileId, usage );
+    triggerDownload( textureLayer, tileId, usage );
 
     return replacementTile;
 }
@@ -91,9 +90,9 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
 //
 // post condition
 //     - download is triggered
-void TileLoader::downloadTile( TileId const &tileId, DownloadUsage const usage )
+void TileLoader::downloadTile( GeoSceneTexture const *textureLayer, TileId const &tileId, DownloadUsage const usage )
 {
-    triggerDownload( tileId, usage );
+    triggerDownload( textureLayer, tileId, usage );
 }
 
 int TileLoader::maximumTileLevel( GeoSceneTexture const & texture )
@@ -185,9 +184,8 @@ QString TileLoader::tileFileName( GeoSceneTexture const * textureLayer, TileId c
     return dirInfo.isAbsolute() ? fileName : MarbleDirs::path( fileName );
 }
 
-void TileLoader::triggerDownload( TileId const & id, DownloadUsage const usage )
+void TileLoader::triggerDownload( GeoSceneTexture const *textureLayer, TileId const &id, DownloadUsage const usage )
 {
-    GeoSceneTexture const * const textureLayer = findTextureLayer( id );
     QUrl const sourceUrl = textureLayer->downloadUrl( id );
     QString const destFileName = textureLayer->relativeTileFileName( id );
     emit downloadTile( sourceUrl, destFileName, id.toString(), usage );

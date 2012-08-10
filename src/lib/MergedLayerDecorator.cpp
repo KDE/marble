@@ -139,7 +139,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
         mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId << textureLayer->tileSize();
 
-        const QImage tileImage = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
+        const QImage tileImage = d->m_tileLoader->loadTile( textureLayer, tileId, DownloadBrowse );
         const Blending *blending = d->m_blendingFactory.findBlending( textureLayer->blending() );
         if ( blending == 0 && !textureLayer->blending().isEmpty() ) {
             mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
@@ -172,7 +172,7 @@ void MergedLayerDecorator::downloadStackedTile( const TileId &id, const QVector<
     foreach ( const GeoSceneTexture *textureLayer, textureLayers ) {
         const TileId tileId( textureLayer->sourceDir(), id.zoomLevel(), id.x(), id.y() );
         if ( TileLoader::tileStatus( textureLayer, tileId ) != TileLoader::Available ) {
-            d->m_tileLoader->downloadTile( tileId, usage );
+            d->m_tileLoader->downloadTile( textureLayer, tileId, usage );
         }
     }
 }

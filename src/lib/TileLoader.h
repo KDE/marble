@@ -49,8 +49,8 @@ class TileLoader: public QObject
 
     void setTextureLayers( const QVector<GeoSceneTexture const *> &textureLayers );
 
-    QImage loadTile( TileId const & tileId, DownloadUsage const );
-    void downloadTile( TileId const &tileId, DownloadUsage const );
+    QImage loadTile( GeoSceneTexture const *textureLayer, TileId const & tileId, DownloadUsage const );
+    void downloadTile( GeoSceneTexture const *textureLayer, TileId const &tileId, DownloadUsage const );
 
     static int maximumTileLevel( GeoSceneTexture const & texture );
 
@@ -80,7 +80,7 @@ class TileLoader: public QObject
  private:
     GeoSceneTexture const * findTextureLayer( TileId const & ) const;
     static QString tileFileName( GeoSceneTexture const * textureLayer, TileId const & );
-    void triggerDownload( TileId const &, DownloadUsage const );
+    void triggerDownload( GeoSceneTexture const *textureLayer, TileId const &, DownloadUsage const );
     QImage scaledLowerLevelTile( TileId const & ) const;
 
     // TODO: comment about uint hash key
