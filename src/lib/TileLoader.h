@@ -67,7 +67,7 @@ class TileLoader: public QObject
       * - Expired when it has been downloaded, but is too old (as per .dgml expiration time)
       * - Available when it has been downloaded and is not expired
       */
-    TileStatus tileStatus( const TileId &tileId ) const;
+    static TileStatus tileStatus( GeoSceneTexture const *textureLayer, const TileId &tileId );
 
  public Q_SLOTS:
     void updateTile( QByteArray const & imageData, QString const & tileId );

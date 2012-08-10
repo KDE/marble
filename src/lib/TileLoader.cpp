@@ -56,7 +56,7 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
 {
     GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
     QString const fileName = tileFileName( textureLayer, tileId );
-    TileStatus status = tileStatus( tileId );
+    TileStatus status = tileStatus( textureLayer, tileId );
     if ( status != Missing ) {
         // check if an update should be triggered
 
@@ -151,9 +151,8 @@ bool TileLoader::baseTilesAvailable( GeoSceneTexture const & texture )
     return result;
 }
 
-TileLoader::TileStatus TileLoader::tileStatus( const TileId &tileId ) const
+TileLoader::TileStatus TileLoader::tileStatus( GeoSceneTexture const *textureLayer, const TileId &tileId )
 {
-    GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
     QString const fileName = tileFileName( textureLayer, tileId );
     QFileInfo fileInfo( fileName );
     if ( !fileInfo.exists() ) {
