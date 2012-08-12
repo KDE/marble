@@ -1518,16 +1518,6 @@ void MainWindow::showRoutingDialog()
         connect( saveAction, SIGNAL( triggered() ), m_routingWidget, SLOT( saveRoute() ) );
         m_routingWindow->menuBar()->addAction( saveAction );
 
-        QAction* reverseAction = new QAction( tr( "Reverse Route" ), this );
-        RoutingManager * const manager = m_controlView->marbleModel()->routingManager();
-        connect( reverseAction, SIGNAL( triggered() ), manager, SLOT( reverseRoute() ) );
-        m_routingWindow->menuBar()->addAction( reverseAction );
-
-        /** @todo: Change 'Clear' to 'Clear Route' after string freeze */
-        QAction* clearAction = new QAction( tr( "Clear" ), this );
-        connect( clearAction, SIGNAL( triggered() ), manager, SLOT( clearRoute() ) );
-        m_routingWindow->menuBar()->addAction( clearAction );
-
         m_routingWindow->setCentralWidget( scrollArea );
     }
 
