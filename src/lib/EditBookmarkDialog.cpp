@@ -219,7 +219,8 @@ void EditBookmarkDialogPrivate::openNewFolderDialog()
 {
     QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( q );
     if ( dialog->exec() == QDialog::Accepted ) {
-        m_bookmarkManager->addNewBookmarkFolder( q->folder(), dialog->folderName() );
+        m_bookmarkManager->addNewBookmarkFolder( m_bookmarkManager->document(), dialog->folderName() );
+        m_ui.m_folders->clear();
         initComboBox( m_bookmarkManager->document() );
         setFolderName( dialog->folderName() );
     }
