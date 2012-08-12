@@ -258,6 +258,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
 
     if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         d->m_ui.directionsListView->setVisible( false );
+        d->m_ui.openRouteButton->setVisible( false );
+        d->m_ui.saveRouteButton->setVisible( false );
 #ifdef Q_WS_MAEMO_5
         d->m_ui.directionsListView->setAttribute( Qt::WA_Maemo5StackedWindow );
         d->m_ui.directionsListView->setWindowFlags( Qt::Window );
