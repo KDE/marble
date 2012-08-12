@@ -82,6 +82,7 @@ private Q_SLOTS:
     void  showDownloadRegionDialog();
     void  printMapScreenShot();
     void  workOffline( bool );
+    void  toggleKineticScrolling( bool );
     void  showMapWizard();
 
     // Edit Menu
@@ -165,6 +166,7 @@ private:
     QAction *m_printPreviewAct;
     QAction *m_printAct;
     QAction *m_workOfflineAct;
+    QAction *m_kineticScrollingAction;
     QAction *m_quitAct;
     QAction *m_mapWizardAct;
 

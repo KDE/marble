@@ -97,6 +97,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_timeControlDialog( 0 ),
         m_downloadRegionDialog( 0 ),
         m_downloadRegionAction( 0 ),
+        m_kineticScrollingAction( 0 ),
         m_osmEditAction( 0 ),
         m_zoomLabel( 0 ),
         m_mapViewWindow( 0 ),
@@ -251,6 +252,10 @@ void MainWindow::createActions()
      m_workOfflineAct->setCheckable( true );
      connect(m_workOfflineAct, SIGNAL(triggered( bool )), this, SLOT( workOffline( bool )));
 
+     m_kineticScrollingAction = new QAction( "&Kinetic Scrolling", this);
+     m_kineticScrollingAction->setCheckable( true );
+     connect( m_kineticScrollingAction, SIGNAL( triggered( bool ) ), this, SLOT( toggleKineticScrolling( bool ) ) );
+
      m_showAtmosphereAct = new QAction( tr("&Atmosphere"), this);
      m_showAtmosphereAct->setCheckable( true );
      m_showAtmosphereAct->setStatusTip(tr("Show Atmosphere"));
@@ -317,6 +322,7 @@ void MainWindow::createMenus()
     // Do not create too many menu entries on a MID
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         menuBar()->addAction( m_workOfflineAct );
+        menuBar()->addAction( m_kineticScrollingAction );
         //menuBar()->addAction( m_sideBarAct );
         /** @todo: Full screen cannot be left on Maemo currently (shortcuts not working) */
         //menuBar()->addAction( m_fullScreenAct );
@@ -750,6 +756,12 @@ void MainWindow::workOffline( bool offline )
     m_workOfflineAct->setChecked( offline ); // Sync state with the GUI
 }
 
+void MainWindow::toggleKineticScrolling( bool enabled )
+{
+    m_controlView->marbleWidget()->inputHandler()->setKineticScrollingEnabled( enabled );
+    m_kineticScrollingAction->setChecked( enabled ); // Sync state with the GUI
+}
+
 void MainWindow::showAtmosphere( bool isChecked )
 {
     m_controlView->marbleWidget()->setShowAtmosphere( isChecked );
@@ -1087,8 +1099,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          m_lockFloatItemsAct->setChecked( isLocked );
          lockPosition(isLocked);
 
-         bool const kineticScrolling = settings.value( "kineticScrolling", !smallScreen ).toBool();
-         m_controlView->marbleWidget()->inputHandler()->setKineticScrollingEnabled( kineticScrolling );
+         toggleKineticScrolling( settings.value( "kineticScrolling", !smallScreen ).toBool() );
      settings.endGroup();
 
      settings.beginGroup( "Sun" );
