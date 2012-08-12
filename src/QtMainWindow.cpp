@@ -252,7 +252,7 @@ void MainWindow::createActions()
      m_workOfflineAct->setCheckable( true );
      connect(m_workOfflineAct, SIGNAL(triggered( bool )), this, SLOT( workOffline( bool )));
 
-     m_kineticScrollingAction = new QAction( "&Kinetic Scrolling", this);
+     m_kineticScrollingAction = new QAction( tr( "&Kinetic Scrolling" ), this);
      m_kineticScrollingAction->setCheckable( true );
      connect( m_kineticScrollingAction, SIGNAL( triggered( bool ) ), this, SLOT( toggleKineticScrolling( bool ) ) );
 
