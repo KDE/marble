@@ -230,7 +230,7 @@ void GeoDataLatLonBox::setBoundaries( qreal north, qreal south, qreal east, qrea
 
 qreal GeoDataLatLonBox::width( GeoDataCoordinates::Unit unit ) const
 {
-    qreal width = fabs( (qreal)( crossesDateLine()
+    qreal width = fabs( (qreal)( crossesDateLine() 
                                      ? 2 * M_PI - d->m_west + d->m_east
                                      : d->m_east - d->m_west ) );
 
@@ -312,7 +312,7 @@ bool GeoDataLatLonBox::contains( const GeoDataCoordinates &point ) const
     // ... and the case where the bounding box crosses the date line:
          ( ( lon < d->m_west && lon > d->m_east ) && ( d->m_west > d->m_east ) ) )
         return false;
-
+    
     if ( lat < d->m_south || lat > d->m_north )
         return false;
 
@@ -330,14 +330,14 @@ bool GeoDataLatLonBox::contains( const GeoDataLatLonBox &other ) const
                 // "Normal" case: both bounding boxes don't cross the date line
                 if ( d->m_west <= other.west() && d->m_east >= other.east() ) {
                     return true;
-                }
+                }                
             }
             else {
                 // The other bounding box crosses the date line, "this" one does not:
                 // So the date line splits the other bounding box in two parts.
-                // Hence "this" bounding box could be fully contained by one of them.
-                // So for both cases we are able to ignore the "overhanging" portion
-                // and thereby basically reduce the problem to the "normal" case:
+                // Hence "this" bounding box could be fully contained by one of them. 
+                // So for both cases we are able to ignore the "overhanging" portion 
+                // and thereby basically reduce the problem to the "normal" case: 
 
                 if ( ( other.west() <= d->m_west && d->m_east <= +M_PI )
                   || ( other.east() >= d->m_east && d->m_west >= -M_PI ) ) {
@@ -350,14 +350,14 @@ bool GeoDataLatLonBox::contains( const GeoDataLatLonBox &other ) const
                 // Other "Simple" case: both bounding boxes cross the date line
                 if ( d->m_west <= other.west() && d->m_east >= other.east() ) {
                     return true;
-                }
+                }                
             }
             else {
                 // "This" bounding box crosses the date line, the other one does not.
                 // So the date line splits "this" bounding box in two parts.
-                // Hence the other bounding box could be fully contained by one of them.
-                // So for both cases we are able to ignore the "overhanging" portion
-                // and thereby basically reduce the problem to the "normal" case:
+                // Hence the other bounding box could be fully contained by one of them. 
+                // So for both cases we are able to ignore the "overhanging" portion 
+                // and thereby basically reduce the problem to the "normal" case: 
 
                 if ( ( d->m_west <= other.west() && other.east() <= +M_PI )
                   || ( d->m_east >= other.east() && other.west() >= -M_PI ) ) {
@@ -390,7 +390,7 @@ bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox &other ) const
            // Case 2: northern boundary of this box intersects:
         || ( other.north() >= d->m_north && other.south() <= d->m_north )
            // Case 3: southern boundary of other box intersects:
-        || ( d->m_north >= other.south() && d->m_south <= other.south() )
+        || ( d->m_north >= other.south() && d->m_south <= other.south() ) 
            // Case 4: southern boundary of this box intersects:
         || ( other.north() >= d->m_south && other.south() <= d->m_south ) ) {
 
@@ -402,11 +402,11 @@ bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox &other ) const
                         // Case 2: eastern boundary of this box intersects:
                     || ( other.east() >= d->m_east && other.west() <= d->m_east )
                         // Case 3: western boundary of other box intersects:
-                    || ( d->m_east >= other.west() && d->m_west <= other.west() )
+                    || ( d->m_east >= other.west() && d->m_west <= other.west() ) 
                         // Case 4: western boundary of this box intersects:
                     || ( other.east() >= d->m_west && other.west() <= d->m_west ) ) {
                     return true;
-                }
+                }                
             }
             else {
                 // The other bounding box crosses the date line, "this" one does not:
@@ -414,7 +414,7 @@ bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox &other ) const
 
                 if ( d->m_west <= other.east() || d->m_east >= other.west() ) {
                         return true;
-                }
+                }                
             }
         }
         else {
@@ -425,12 +425,12 @@ bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox &other ) const
             else {
                 // "This" bounding box crosses the date line, the other one does not.
                 // So the date line splits "this" bounding box in two parts.
-                //
+                // 
                 // This also covers the case where this bounding box covers the whole
                 // longitude range ( -180 <= lon <= + 180 ).
                 if ( other.west() <= d->m_east || other.east() >= d->m_west ) {
                         return true;
-                }
+                }                
             }
         }
     }
@@ -505,11 +505,11 @@ QString GeoDataLatLonBox::toString( GeoDataCoordinates::Unit unit ) const
     default:
     case GeoDataCoordinates::Radian:
         return QString( "North: %1; West: %2 \n South: %3; East: %4 " )
-            .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG );
+            .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG ); 
         break;
     case GeoDataCoordinates::Degree:
         return QString( "North: %1; West: %2 \n South: %3; East: %4 " )
-            .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG );
+            .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG ); 
         break;
     }
 
@@ -520,7 +520,7 @@ QString GeoDataLatLonBox::toString( GeoDataCoordinates::Unit unit ) const
 GeoDataLatLonBox& GeoDataLatLonBox::operator=( const GeoDataLatLonBox &other )
 {
     GeoDataObject::operator=( other );
-
+    
     *d = *other.d;
     return *this;
 }
@@ -575,12 +575,12 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
     bool idlCrossed = false;
 
     // "idlCrossState" specifies the state concerning IDL crossage.
-    // This is needed in order to create optimal bounding boxes in case of covering the IDL
-    // Every time the IDL gets crossed from east to west the idlCrossState value gets
+    // This is needed in order to create optimal bounding boxes in case of covering the IDL 
+    // Every time the IDL gets crossed from east to west the idlCrossState value gets 
     // increased by one.
-    // Every time the IDL gets crossed from west to east the idlCrossState value gets
+    // Every time the IDL gets crossed from west to east the idlCrossState value gets 
     // decreased by one.
-
+    
     int idlCrossState = 0;
     int idlMaxCrossState = 0;
     int idlMinCrossState = 0;
@@ -588,7 +588,7 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
     // Holds values for east and west while idlCrossState != 0
     qreal otherWest =  lon;
     qreal otherEast =  lon;
-
+    
     qreal previousLon = lon;
 
     int currentSign = ( lon < 0 ) ? -1 : +1;
@@ -614,7 +614,7 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
         // When looking separately at the longitude range that gets covered
         // east and west from the IDL we get two bounding boxes (we prefix
         // the resulting longitude range on the "other side" with "other").
-        // By picking the "inner" range values we get a more appropriate
+        // By picking the "inner" range values we get a more appropriate 
         // optimized single bounding box.
 
         // IDL check
@@ -663,8 +663,8 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
         if ( idlMaxCrossState > 0 ) {
             west = otherWest;
         }
-        if ( ( idlMinCrossState < 0 && idlMaxCrossState > 0 )
-            || idlMinCrossState < -1  || idlMaxCrossState > 1
+        if ( ( idlMinCrossState < 0 && idlMaxCrossState > 0 ) 
+            || idlMinCrossState < -1  || idlMaxCrossState > 1 
             || west <= east ) {
             east = +M_PI;
             west = -M_PI;

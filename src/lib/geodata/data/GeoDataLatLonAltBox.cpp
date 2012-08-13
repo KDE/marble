@@ -113,6 +113,7 @@ GeoDataLatLonAltBox::GeoDataLatLonAltBox( const GeoDataCoordinates & coordinates
     d->m_maxAltitude = coordinates.altitude();
 }
 
+
 GeoDataLatLonAltBox::~GeoDataLatLonAltBox()
 {
     delete d;

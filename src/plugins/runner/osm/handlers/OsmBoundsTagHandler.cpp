@@ -39,7 +39,6 @@ GeoNode* OsmBoundsTagHandler::parse( GeoParser& parser ) const
     qreal maxlon = parser.attribute("maxlon").toFloat();
 
     mDebug() << "[OSM] Bounds: " << minlat << " " << minlon << " " << maxlat << " " << maxlon;
-
     return 0;
 }
 

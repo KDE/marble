@@ -254,6 +254,5 @@ void EquirectScanlineTextureMapper::RenderJob::run()
                     imageWidth * pixelByteSize );
             ++y;
         }
-
     }
 }

@@ -23,7 +23,6 @@
 #include <QtGui/QImage>
 
 #include "MarbleRunnerManager.h"
-#include "QTreeView"
 
 #include "GeoSceneTiled.h"
 #include "GeoDataContainer.h"

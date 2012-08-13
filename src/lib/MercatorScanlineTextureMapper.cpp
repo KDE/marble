@@ -99,7 +99,6 @@ void MercatorScanlineTextureMapper::mapTexture( GeoPainter *painter,
     }
 
     painter->drawImage( dirtyRect, m_canvasImage, dirtyRect );
-
 }
 
 void MercatorScanlineTextureMapper::setRepaintNeeded()
@@ -109,7 +108,6 @@ void MercatorScanlineTextureMapper::setRepaintNeeded()
 
 void MercatorScanlineTextureMapper::mapTexture( const ViewportParams *viewport, MapQuality mapQuality )
 {
-
     // Reset backend
     m_tileLoader->resetTilehash();
 

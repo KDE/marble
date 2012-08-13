@@ -21,7 +21,6 @@
 #include "ViewportParams.h"
 #include "GeoDataDocument.h"
 #include "GeoDataTreeModel.h"
-#include "QTreeView"
 
 using namespace Marble;
 

@@ -13,7 +13,6 @@
 #define MARBLE_ELEVATIONMODEL_H
 
 #include "GeoDataCoordinates.h"
-#include "GeoDataTreeModel.h"
 #include "marble_export.h"
 
 #include <QtCore/QObject>

@@ -16,7 +16,6 @@
 #include "BlendingAlgorithms.h"
 
 #include "Tile.h"
-#include "MarbleDebug.h"
 
 #include <cmath>
 
@@ -316,8 +315,6 @@ void CloudsBlending::blend( QImage * const bottom, Tile const * const top ) cons
                                          ( int )( bottomBlue + ( 255 - bottomBlue ) * c )));
         }
     }
-    QString type = top->nodeType();
-
 }
 
 

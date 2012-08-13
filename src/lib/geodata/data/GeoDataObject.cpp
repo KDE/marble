@@ -10,7 +10,6 @@
 //
 
 #include "GeoDataObject.h"
-#include "MarbleDebug.h"
 
 #include <QtCore/QtGlobal>
 #include <QtCore/QDataStream>

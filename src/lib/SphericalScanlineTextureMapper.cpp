@@ -90,7 +90,6 @@ void SphericalScanlineTextureMapper::mapTexture( GeoPainter *painter,
     }
 
     if ( m_repaintNeeded ) {
-
         mapTexture( viewport, painter->mapQuality() );
 
         if ( texColorizer ) {
@@ -137,7 +136,6 @@ void SphericalScanlineTextureMapper::mapTexture( const ViewportParams *viewport,
         const int yStart = yTop +  i      * yStep;
         const int yEnd   = yTop + (i + 1) * yStep;
         QRunnable *const job = new RenderJob( m_tileLoader, tileZoomLevel(), &m_canvasImage, viewport, mapQuality, yStart, yEnd );
-
         m_threadPool.start( job );
     }
 
@@ -148,7 +146,6 @@ void SphericalScanlineTextureMapper::mapTexture( const ViewportParams *viewport,
 
 void SphericalScanlineTextureMapper::RenderJob::run()
 {
-
     const int imageHeight = m_canvasImage->height();
     const int imageWidth  = m_canvasImage->width();
     const qint64  radius  = m_viewport->radius();
