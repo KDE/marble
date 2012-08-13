@@ -20,6 +20,7 @@
 namespace Marble {
 
 class MarbleModel;
+class GeoDataLatLonAltBox;
 
 /**
   * Parse result of a user's search term
@@ -28,17 +29,17 @@ class DatabaseQuery
 {
 public:
     enum QueryType {
-        AddressSearch,
-        CategorySearch,
-        BroadSearch
+        AddressSearch,  /// precise search for an adress
+        CategorySearch, /// search which contains a poi category
+        BroadSearch     /// any other non specific search
     };
 
     enum ResultFormat {
-        AddressFormat,
-        DistanceFormat
+        AddressFormat, /// display results with location information
+        DistanceFormat /// display results with distance information
     };
 
-    DatabaseQuery( MarbleModel* model, const QString &searchTerm );
+    DatabaseQuery( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
     QueryType queryType() const;
 

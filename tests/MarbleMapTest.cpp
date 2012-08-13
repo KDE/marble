@@ -498,19 +498,36 @@ void MarbleMapTest::setMapTheme()
 
 void MarbleMapTest::switchMapThemes()
 {
+    QImage image( QSize( 143, 342 ), QImage::Format_ARGB32_Premultiplied );
+
     MarbleMap map;
+    map.setSize( image.size() );
+    map.setRadius( 114003 );
+    map.setViewContext( Animation );
+
+    GeoPainter painter( &image, map.viewport() );
 
     map.setMapThemeId( "earth/plain/plain.dgml" );
     QCOMPARE( map.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+    QCOMPARE( map.preferredRadiusCeil( 1000 ), 1000 );
+    QCOMPARE( map.preferredRadiusFloor( 1000 ), 1000 );
 
     map.setMapThemeId( "earth/srtm/srtm.dgml" );
     QCOMPARE( map.mapThemeId(), QString( "earth/srtm/srtm.dgml" ) );
+    QCOMPARE( map.preferredRadiusCeil( 1000 ), 1348 );
+    QCOMPARE( map.preferredRadiusFloor( 1000 ), 674 );
 
     map.setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
     QCOMPARE( map.mapThemeId(), QString( "earth/openstreetmap/openstreetmap.dgml" ) );
+    QCOMPARE( map.preferredRadiusCeil( 1000 ), 1024 );
+    QCOMPARE( map.preferredRadiusFloor( 1000 ), 512 );
+    map.paint( painter, QRect() ); // loads tiles
 
     map.setMapThemeId( "earth/plain/plain.dgml" );
     QCOMPARE( map.mapThemeId(), QString( "earth/plain/plain.dgml" ) );
+    QCOMPARE( map.preferredRadiusCeil( 1000 ), 1000 );
+    QCOMPARE( map.preferredRadiusFloor( 1000 ), 1000 );
+    map.reload(); // don't crash, please
 
     QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate
 }

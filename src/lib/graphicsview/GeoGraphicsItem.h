@@ -13,13 +13,8 @@
 #define MARBLE_GEOGRAPHICSITEM_H
 
 // Marble
-#include "MarbleGraphicsItem.h"
 #include "marble_export.h"
 
-// Qt
-#include <QtCore/QList>
-
-class QPoint;
 class QString;
 
 namespace Marble
@@ -30,8 +25,11 @@ class GeoDataLatLonAltBox;
 
 class GeoGraphicsItemPrivate;
 class GeoDataStyle;
+class GeoPainter;
+class GeoSceneLayer;
+class ViewportParams;
 
-class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
+class MARBLE_EXPORT GeoGraphicsItem
 {
  public:
     GeoGraphicsItem();
@@ -46,37 +44,19 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
 
     Q_DECLARE_FLAGS(GeoGraphicsItemFlags, GeoGraphicsItemFlag)
 
+    bool visible() const;
+
+    void setVisible( bool visible );
+
     /**
      * Return the coordinate of the item as a GeoDataCoordinates
      */
     virtual GeoDataCoordinates coordinate() const;
 
     /**
-     * Return the coordinate of the item as @p longitude
-     * and @p latitude.
-     */
-    virtual void coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const;
-
-    /**
-     * Set the coordinate of the item in @p longitude and
-     * @p latitude.
-     */
-    void setCoordinate( qreal longitude, qreal latitude, qreal altitude = 0 );
-
-    /**
      * Set the coordinate of the item with an @p GeoDataPoint.
      */
     void setCoordinate( const GeoDataCoordinates &point );
-
-    /**
-     * Get the target of the item. The target is the current planet string.s
-     */
-    QString target() const;
-
-    /**
-     * Set the target of the item with @p target.
-     */
-    void setTarget( const QString& target );
 
     /**
      * Get the GeoGraphicItemFlags value that describes which flags are set on
@@ -97,35 +77,6 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     void setFlags( GeoGraphicsItemFlags flags );
 
     /**
-     * Returns the minimum number of pixels the GeoGraphicsItem has to be projected on for this item
-     * to be considered as active. 0 would mean no minimum number of pixels which is also the
-     * standard value.
-     */
-    int minLodPixels() const;
-
-    /**
-     * Sets the minimum number of pixels the GeoGraphicsItem has to be projected on for this item to
-     * be considered as active.
-     */
-    void setMinLodPixels( int pixels );
-
-    /**
-     * Returns the maximum number of pixels the GeoGraphicsItem has to be
-     * projected on for this item to be considered as active. -1 would mean no
-     * maximum number of pixels which is also the standard value.
-     */
-    int maxLodPixels() const;
-
-    /**
-     * Sets the maximum number of pixels the GeoGraphicsItem has to be projected on for this item to
-     * be considered as active.
-     */
-    void setMaxLodPixels( int pixels );
-
-    // int minFadeExtend() const;
-    // int maxFadeExtend() const;
-    
-    /**
      * Returns the minim zoom level on which item will be active.
      */
     int minZoomLevel() const;
@@ -138,7 +89,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     /**
      * Returns the box that is used to determine if an item is active or inactive.
      */
-    virtual GeoDataLatLonAltBox latLonAltBox() const;
+    virtual GeoDataLatLonAltBox& latLonAltBox() const;
 
     /**
      * Set the box used to determine if an item is active or inactive. If an empty box is passed
@@ -149,24 +100,38 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     /**
      * Returns the style of item.
      */
-    GeoDataStyle* style() const;
+    const GeoDataStyle* style() const;
 
     /**
      * Set the box used to determine if an item is active or inactive. If an empty box is passed
      * the item will be shown in every case.
      */
-    void setStyle( GeoDataStyle* style );
+    void setStyle( const GeoDataStyle* style );
 
     /**
-     * Returns all coordinates of the item in view coordinates according to the given projection.
+     * Returns the z value of the item
      */
-    QList<QPointF> positions() const;
+    qreal zValue() const;
+
+    /**
+     * Set the z value of the item
+     */
+    void setZValue( qreal z );
+
+    /**
+     * Paints the item using the given GeoPainter.
+     *
+     * Note that depending on the projection and zoom level, the item may be visible more than once.
+     * GeoPainter will therefore automatically "repeat" primitives which have a geo position (GeoDataCoordinates).
+     */
+    virtual void paint( GeoPainter *painter, ViewportParams *viewport,
+                        const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
 
  protected:
-    explicit GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr );
+    GeoGraphicsItemPrivate *p() const;
 
  private:
-    GeoGraphicsItemPrivate *p() const;
+    GeoGraphicsItemPrivate *const d;
 };
 
 } // Namespace Marble

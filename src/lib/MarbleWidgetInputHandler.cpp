@@ -42,6 +42,7 @@
 #include "AbstractDataPluginItem.h"
 #include "MarbleWidgetPopupMenu.h"
 #include "Planet.h"
+#include "RenderPlugin.h"
 
 namespace Marble {
 
@@ -59,6 +60,7 @@ public:
     Qt::MouseButtons m_disabledMouseButtons;
     qreal m_wheelZoomTargetDistance;
     bool m_panViaArrowsEnabled;
+    bool m_kineticScrollingEnabled;
 };
 
 MarbleWidgetInputHandler::Protected::Protected( MarbleWidget *widget )
@@ -68,7 +70,8 @@ MarbleWidgetInputHandler::Protected::Protected( MarbleWidget *widget )
       m_mouseWheelTimer( 0 ),
       m_disabledMouseButtons( Qt::NoButton ),
       m_wheelZoomTargetDistance( 0.0 ),
-      m_panViaArrowsEnabled( true )
+      m_panViaArrowsEnabled( true ),
+      m_kineticScrollingEnabled( true )
 {
 }
 
@@ -128,6 +131,16 @@ void MarbleWidgetInputHandler::setPanViaArrowsEnabled( bool enabled )
 bool MarbleWidgetInputHandler::panViaArrowsEnabled() const
 {
     return d->m_panViaArrowsEnabled;
+}
+
+void MarbleWidgetInputHandler::setKineticScrollingEnabled( bool enabled )
+{
+    d->m_kineticScrollingEnabled = enabled;
+}
+
+bool MarbleWidgetInputHandler::kineticScrollingEnabled() const
+{
+    return d->m_kineticScrollingEnabled;
 }
 
 class MarbleWidgetDefaultInputHandler::Private
@@ -415,7 +428,11 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( d->m_leftPressed ) {
                 d->m_leftPressed = false;
 
-                d->m_kineticSpinning.start();
+                if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+                    d->m_kineticSpinning.start();
+                } else {
+                    MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
+                }
             }
         }
         if ( event->type() == QEvent::MouseMove
@@ -485,7 +502,9 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
                 d->m_leftPressedDirection = 1;
 
-                d->m_kineticSpinning.stop();
+                if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+                    d->m_kineticSpinning.stop();
+                }
 
                 // Choose spin direction by taking into account whether we
                 // drag above or below the visible pole.
@@ -516,7 +535,9 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 d->m_startingRadius = MarbleWidgetInputHandler::d->m_widget->radius();
                 d->m_midPressedY = event->y();
 
-                d->m_kineticSpinning.start();
+                if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+                    d->m_kineticSpinning.start();
+                }
 
                 d->m_selectionRubber.hide();
                 MarbleWidgetInputHandler::d->m_widget->setViewContext( Animation );
@@ -548,7 +569,11 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 emit mouseClickScreenPosition( d->m_leftPressedX, d->m_leftPressedY );
 
                 d->m_leftPressed = false;
-                d->m_kineticSpinning.start();
+                if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+                    d->m_kineticSpinning.start();
+                } else {
+                    MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
+                }
             }
 
             if ( e->type() == QEvent::MouseButtonRelease
@@ -585,7 +610,9 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                     const qreal posLon = d->m_leftPressedLon - 90.0 * d->m_leftPressedDirection * deltax / radius;
                     const qreal posLat = d->m_leftPressedLat + 90.0 * deltay / radius;
                     MarbleWidgetInputHandler::d->m_widget->centerOn( posLon, posLat );
-                    d->m_kineticSpinning.setPosition( posLon, posLat );
+                    if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+                        d->m_kineticSpinning.setPosition( posLon, posLat );
+                    }
                 }
             }
 
@@ -605,7 +632,9 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         else {
             d->m_leftPressed = false;
 
-            d->m_kineticSpinning.start();
+            if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+                d->m_kineticSpinning.start();
+            }
 
             QRect boundingRect = MarbleWidgetInputHandler::d->m_widget->mapRegion().boundingRect();
 
@@ -637,6 +666,10 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 else
                     MarbleWidgetInputHandler::d->m_widget->rotateBy( -MarbleWidgetInputHandler::d->m_widget->moveStep() * (qreal)(-dirX),
                                                                      MarbleWidgetInputHandler::d->m_widget->moveStep() * (qreal)(+dirY) );
+            }
+
+            if ( !MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+                MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
             }
         }
 

@@ -30,9 +30,10 @@ public:
     ~FileViewWidget ();
     void                    enableFileViewActions ();
 //ig    void                    setFileViewModel (FileViewModel* model);
-//ig    void                    setTreeModel (GeoDataTreeModel* model);
 signals:
     void                    centerOn (const Marble::GeoDataPlacemark&, bool animated);
     void                    centerOn (const Marble::GeoDataLatLonBox&, bool animated);
+public:
+    void                    setTreeModel (Marble::GeoDataTreeModel* model);
 };
 };

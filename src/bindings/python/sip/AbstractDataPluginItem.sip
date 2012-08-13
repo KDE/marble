@@ -27,11 +27,14 @@
 #include <AbstractFloatItem.h>
 #include <AbstractWorkerThread.h>
 #include <routing/AlternativeRoutesModel.h>
+#include <AutoNavigation.h>
 #include <BookmarkManager.h>
 #include <CurrentLocationWidget.h>
+#include <DownloadRegion.h>
 #include <DownloadRegionDialog.h>
 #include <ElevationModel.h>
 #include <FileViewWidget.h>
+#include <GeoDataTreeModel.h>
 #include <GeoGraphicsScene.h>
 #include <LatLonBoxWidget.h>
 #include <LatLonEdit.h>
@@ -48,13 +51,16 @@
 #include <MarbleRunnerManager.h>
 #include <MarbleWidget.h>
 #include <NavigationWidget.h>
+#include <ParseRunnerPlugin.h>
 #include <PluginAboutDialog.h>
 #include <PositionTracking.h>
 #include <QtMarbleConfigDialog.h>
 #include <RenderPlugin.h>
+#include <ReverseGeocodingRunnerPlugin.h>
 #include <routing/RouteRequest.h>
 #include <routing/RoutingModel.h>
-#include <RunnerPlugin.h>
+#include <RoutingRunnerPlugin.h>
+#include <SearchRunnerPlugin.h>
 #include <SunLocator.h>
 #include <TileCreator.h>
 #include <TileLevelRangeWidget.h>
@@ -96,8 +102,12 @@ public:
         sipType = sipType_Marble_AbstractDataPluginItem;
     else if (dynamic_cast<Marble::AbstractDataPluginModel*>(sipCpp))
         sipType = sipType_Marble_AbstractDataPluginModel;
+    else if (dynamic_cast<Marble::AutoNavigation*>(sipCpp))
+        sipType = sipType_Marble_AutoNavigation;
     else if (dynamic_cast<Marble::BookmarkManager*>(sipCpp))
         sipType = sipType_Marble_BookmarkManager;
+    else if (dynamic_cast<Marble::DownloadRegion*>(sipCpp))
+        sipType = sipType_Marble_DownloadRegion;
     else if (dynamic_cast<Marble::ElevationModel*>(sipCpp))
         sipType = sipType_Marble_ElevationModel;
     else if (dynamic_cast<Marble::GeoGraphicsScene*>(sipCpp))
@@ -112,6 +122,8 @@ public:
         sipType = sipType_Marble_MarbleModel;
     else if (dynamic_cast<Marble::MarbleRunnerManager*>(sipCpp))
         sipType = sipType_Marble_MarbleRunnerManager;
+    else if (dynamic_cast<Marble::ParseRunnerPlugin*>(sipCpp))
+        sipType = sipType_Marble_ParseRunnerPlugin;
     else if (dynamic_cast<Marble::PositionTracking*>(sipCpp))
         sipType = sipType_Marble_PositionTracking;
     else if (dynamic_cast<Marble::RenderPlugin*>(sipCpp))
@@ -122,12 +134,18 @@ public:
         else if (dynamic_cast<Marble::AbstractFloatItem*>(sipCpp))
             sipType = sipType_Marble_AbstractFloatItem;
         }
+    else if (dynamic_cast<Marble::ReverseGeocodingRunnerPlugin*>(sipCpp))
+        sipType = sipType_Marble_ReverseGeocodingRunnerPlugin;
     else if (dynamic_cast<Marble::RouteRequest*>(sipCpp))
         sipType = sipType_Marble_RouteRequest;
-    else if (dynamic_cast<Marble::RunnerPlugin*>(sipCpp))
-        sipType = sipType_Marble_RunnerPlugin;
+    else if (dynamic_cast<Marble::RoutingRunnerPlugin*>(sipCpp))
+        sipType = sipType_Marble_RoutingRunnerPlugin;
+    else if (dynamic_cast<Marble::SearchRunnerPlugin*>(sipCpp))
+        sipType = sipType_Marble_SearchRunnerPlugin;
     else if (dynamic_cast<Marble::SunLocator*>(sipCpp))
         sipType = sipType_Marble_SunLocator;
+    else if (dynamic_cast<Marble::GeoDataTreeModel*>(sipCpp))
+        sipType = sipType_Marble_GeoDataTreeModel;
     else if (dynamic_cast<Marble::AlternativeRoutesModel*>(sipCpp))
         sipType = sipType_Marble_AlternativeRoutesModel;
     else if (dynamic_cast<Marble::RoutingModel*>(sipCpp))
@@ -178,6 +196,13 @@ signals:
     void                    updated ();
 public:
     virtual void            setSettings (const QHash<QString,QVariant>& settings);
+    bool                    isFavorite () const;
+    virtual void            setFavorite (bool favorite);
+    virtual QList<QAction*>  actions ();
+signals:
+    void                    favoriteChanged (const QString& id, bool favorite);
+public:
+    void                    toggleFavorite ();
 };
 // AbstractDataPluginItem
 

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -57,16 +57,20 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gpsLocation">gpsLocation</a> (<a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> a0, float a1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statusChanged">statusChanged</a> (<a href="../marble/Marble.html#PositionProviderStatus">Marble.PositionProviderStatus</a> status)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#PositionTracking">__init__</a> (self, <a href="../marble/Marble.GeoDataTreeModel.html">Marble.GeoDataTreeModel</a> model)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataAccuracy.html">Marble.GeoDataAccuracy</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#accuracy">accuracy</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearTrack">clearTrack</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#currentLocation">currentLocation</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#direction">direction</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#error">error</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isTrackEmpty">isTrackEmpty</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#length">length</a> (self, float planetRadius)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#saveTrack">saveTrack</a> (self, QString fileName)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setTrackVisible">setTrackVisible</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#speed">speed</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QDateTime&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#timestamp">timestamp</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#trackVisible">trackVisible</a> (self)</td></tr>
 </table>
 <hr><h2>Signal Documentation</h2><a class="anchor" name="gpsLocation"></a>
@@ -92,7 +96,46 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("gpsLocation(Marble::GeoDataCoordinates, qreal)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="accuracy"></a>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("gpsLocation(Marble::GeoDataCoordinates, qreal)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="statusChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> statusChanged</td>
+<td>(</td>
+<td class="paramtype"><a href="../marble/Marble.html#PositionProviderStatus">Marble.PositionProviderStatus</a>&nbsp;</td>
+<td class="paramname"><em>status</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("statusChanged(Marble::PositionProviderStatus)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="PositionTracking"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataTreeModel.html">Marble.GeoDataTreeModel</a>&nbsp;</td>
+<td class="paramname"><em>model</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="accuracy"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -170,6 +213,35 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </table>
 </div>
 <div class="memdoc"><p>Returns true if there is no position in the track
+</p></div></div><a class="anchor" name="length"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">float length</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>planetRadius</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the total track length
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>planetRadius</em>&nbsp;</td><td> Scale factor, usually the radius of the underlying planet, e.g. EARTH_RADIUS
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> Length of all track segments on the unit sphere scaled by planetRadius
+</dd></dl>
 </p></div></div><a class="anchor" name="saveTrack"></a>
 <div class="memitem">
 <div class="memproto">
@@ -229,6 +301,19 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </table>
 </div>
 <div class="memdoc"><p>provides speed of the gps device
+</p></div></div><a class="anchor" name="timestamp"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QDateTime timestamp</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the timestamp of last recent tracking point.
 </p></div></div><a class="anchor" name="trackVisible"></a>
 <div class="memitem">
 <div class="memproto">

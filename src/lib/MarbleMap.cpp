@@ -36,8 +36,9 @@
 #include "layers/FogLayer.h"
 #include "layers/FpsLayer.h"
 #include "layers/GeometryLayer.h"
+#include "layers/GroundLayer.h"
 #include "layers/MarbleSplashLayer.h"
-#include "layers/PlacemarkLayout.h"
+#include "layers/PlacemarkLayer.h"
 #include "layers/TextureLayer.h"
 #include "layers/VectorMapBaseLayer.h"
 #include "layers/VectorMapLayer.h"
@@ -132,10 +133,11 @@ public:
     GeometryLayer            m_geometryLayer;
     AtmosphereLayer          m_atmosphereLayer;
     FogLayer                 m_fogLayer;
+    GroundLayer              m_groundLayer;
     VectorMapBaseLayer       m_vectorMapBaseLayer;
     VectorMapLayer   m_vectorMapLayer;
     TextureLayer     m_textureLayer;
-    PlacemarkLayout  m_placemarkLayout;
+    PlacemarkLayer   m_placemarkLayer;
     VectorTileLayer  m_vectorTileLayer;
 
 };
@@ -152,12 +154,13 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
       m_vectorMapBaseLayer( &m_veccomposer ),
       m_vectorMapLayer( &m_veccomposer ),
       m_textureLayer( model->downloadManager(), model->sunLocator(), &m_veccomposer, model->pluginManager() ),
-      m_placemarkLayout( model->placemarkModel(), model->placemarkSelectionModel(), model->clock(), parent ),
+      m_placemarkLayer( model->placemarkModel(), model->placemarkSelectionModel(), model->clock() ),
       m_vectorTileLayer( model->downloadManager(), model->sunLocator(), &m_veccomposer, model->pluginManager(), model->treeModel() )
 {
     m_layerManager.addLayer( &m_fogLayer );
+    m_layerManager.addLayer( &m_groundLayer );
     m_layerManager.addLayer( &m_geometryLayer );
-    m_layerManager.addLayer( &m_placemarkLayout );
+    m_layerManager.addLayer( &m_placemarkLayer );
     m_layerManager.addLayer( &m_customPaintLayer );
 
     QObject::connect( m_model, SIGNAL( themeChanged( QString ) ),
@@ -166,7 +169,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
     QObject::connect( &m_veccomposer, SIGNAL( datasetLoaded() ),
                       parent, SIGNAL( repaintNeeded() ));
 
-    QObject::connect( &m_placemarkLayout, SIGNAL( repaintNeeded()),
+    QObject::connect( &m_placemarkLayer, SIGNAL( repaintNeeded()),
                       parent, SIGNAL( repaintNeeded() ));
 
     QObject::connect ( &m_layerManager, SIGNAL( pluginSettingsChanged() ),
@@ -185,28 +188,31 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
                       parent, SIGNAL( tileLevelChanged( int ) ) );
     QObject::connect( &m_textureLayer, SIGNAL( repaintNeeded() ),
                       parent, SIGNAL( repaintNeeded() ) );
+
+    QObject::connect( parent, SIGNAL( visibleLatLonAltBoxChanged( const GeoDataLatLonAltBox & ) ),
+                      parent, SIGNAL( repaintNeeded() ) );
 }
 
 void MarbleMapPrivate::updateProperty( const QString &name, bool show )
 {
     // earth
     if ( name == "places" ) {
-        m_placemarkLayout.setShowPlaces( show );
+        m_placemarkLayer.setShowPlaces( show );
     } else if ( name == "cities" ) {
-        m_placemarkLayout.setShowCities( show );
+        m_placemarkLayer.setShowCities( show );
     } else if ( name == "terrain" ) {
-        m_placemarkLayout.setShowTerrain( show );
+        m_placemarkLayer.setShowTerrain( show );
     } else if ( name == "otherplaces" ) {
-        m_placemarkLayout.setShowOtherPlaces( show );
+        m_placemarkLayer.setShowOtherPlaces( show );
     }
 
     // other planets
     else if ( name == "landingsites" ) {
-        m_placemarkLayout.setShowLandingSites( show );
+        m_placemarkLayer.setShowLandingSites( show );
     } else if ( name == "craters" ) {
-        m_placemarkLayout.setShowCraters( show );
+        m_placemarkLayer.setShowCraters( show );
     } else if ( name == "maria" ) {
-        m_placemarkLayout.setShowMaria( show );
+        m_placemarkLayer.setShowMaria( show );
     }
 
     else if ( name == "waterbodies" ) {
@@ -264,9 +270,10 @@ MarbleMap::~MarbleMap()
     d->m_layerManager.removeLayer( &d->m_customPaintLayer );
     d->m_layerManager.removeLayer( &d->m_geometryLayer );
     d->m_layerManager.removeLayer( &d->m_fogLayer );
-    d->m_layerManager.removeLayer( &d->m_placemarkLayout );
+    d->m_layerManager.removeLayer( &d->m_placemarkLayer );
     d->m_layerManager.removeLayer( &d->m_textureLayer );
     d->m_layerManager.removeLayer( &d->m_atmosphereLayer );
+    d->m_layerManager.removeLayer( &d->m_groundLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
     delete d;
@@ -310,10 +317,16 @@ MapQuality MarbleMap::mapQuality() const
 
 void MarbleMap::setViewContext( ViewContext viewContext )
 {
+    const MapQuality oldQuality = d->m_viewParams.mapQuality();
+
     d->m_viewParams.setViewContext( viewContext );
 
-    // Update texture map during the repaint that follows:
-    d->m_textureLayer.setNeedsUpdate();
+    if ( d->m_viewParams.mapQuality() != oldQuality ) {
+        // Update texture map during the repaint that follows:
+        d->m_textureLayer.setNeedsUpdate();
+
+        emit repaintNeeded();
+    }
 }
 
 ViewContext MarbleMap::viewContext() const
@@ -372,7 +385,7 @@ void MarbleMap::setRadius( int radius )
 
 int MarbleMap::preferredRadiusCeil( int radius )
 {
-    if ( d->m_textureLayer.tileZoomLevel() < 0 )
+    if ( !d->m_layerManager.internalLayers().contains( &d->m_textureLayer ) )
         return radius;
 
     return d->m_textureLayer.preferredRadiusCeil( radius );
@@ -381,7 +394,7 @@ int MarbleMap::preferredRadiusCeil( int radius )
 
 int MarbleMap::preferredRadiusFloor( int radius )
 {
-    if ( d->m_textureLayer.tileZoomLevel() < 0 )
+    if ( !d->m_layerManager.internalLayers().contains( &d->m_textureLayer ) )
         return radius;
 
     return d->m_textureLayer.preferredRadiusFloor( radius );
@@ -428,7 +441,7 @@ int  MarbleMap::maximumZoom() const
 
 QVector<const GeoDataPlacemark*> MarbleMap::whichFeatureAt( const QPoint& curpos ) const
 {
-    return d->m_placemarkLayout.whichPlacemarkAt( curpos );
+    return d->m_placemarkLayer.whichPlacemarkAt( curpos );
 }
 
 void MarbleMap::reload() const
@@ -474,9 +487,7 @@ void MarbleMap::downloadRegion( const QString& sourceDir, QVector<TileCoordsPyra
         QSetIterator<TileId> i( tileIdSet );
         while( i.hasNext() ) {
             TileId const tileId = i.next();
-            if ( !d->m_textureLayer.isTileAvailable( tileId ) ) {
-                d->m_textureLayer.downloadTile( tileId );
-            }
+            d->m_textureLayer.downloadStackedTile( tileId );
         }
         tilesCount += tileIdSet.count();
     }
@@ -735,12 +746,18 @@ void MarbleMapPrivate::updateMapTheme()
     m_layerManager.removeLayer( &m_vectorTileLayer );
     m_layerManager.removeLayer( &m_vectorMapLayer );
     m_layerManager.removeLayer( &m_vectorMapBaseLayer );
+    m_layerManager.removeLayer( &m_groundLayer );
 
     QObject::connect( m_model->mapTheme()->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
                       q, SLOT( updateProperty( const QString &, bool ) ) );
 
     q->setPropertyValue( "clouds_data", m_viewParams.showClouds() );
-    
+
+    if ( !m_model->mapTheme()->map()->hasTextureLayers() ) {
+        m_groundLayer.setColor( m_model->mapTheme()->map()->backgroundColor() );
+        m_layerManager.addLayer( &m_groundLayer );
+    }
+
     // Check whether there is a vector layer available:
     if ( m_model->mapTheme()->map()->hasVectorLayers() ) {
         m_veccomposer.setShowWaterBodies( q->propertyValue( "waterbodies" ) );
@@ -941,20 +958,17 @@ void MarbleMapPrivate::updateMapTheme()
     }
 
     // earth
-    bool value;
-    if ( m_model->mapTheme()->settings()->propertyValue( "places", value ) ) {
-        m_placemarkLayout.setShowPlaces( value );
-    }
+    m_placemarkLayer.setShowPlaces( q->showPlaces() );
 
-    m_placemarkLayout.setShowCities( q->showCities() );
-    m_placemarkLayout.setShowTerrain( q->showTerrain() );
-    m_placemarkLayout.setShowOtherPlaces( q->showOtherPlaces() );
-    m_placemarkLayout.setShowLandingSites( q->propertyValue("landingsites") );
-    m_placemarkLayout.setShowCraters( q->propertyValue("craters") );
-    m_placemarkLayout.setShowMaria( q->propertyValue("maria") );
+    m_placemarkLayer.setShowCities( q->showCities() );
+    m_placemarkLayer.setShowTerrain( q->showTerrain() );
+    m_placemarkLayer.setShowOtherPlaces( q->showOtherPlaces() );
+    m_placemarkLayer.setShowLandingSites( q->propertyValue("landingsites") );
+    m_placemarkLayer.setShowCraters( q->propertyValue("craters") );
+    m_placemarkLayer.setShowMaria( q->propertyValue("maria") );
 
-    m_placemarkLayout.setDefaultLabelColor( m_model->mapTheme()->map()->labelColor() );
-    m_placemarkLayout.requestStyleReset();
+    GeoDataFeature::setDefaultLabelColor( m_model->mapTheme()->map()->labelColor() );
+    m_placemarkLayer.requestStyleReset();
 
     foreach( RenderPlugin *renderPlugin, m_layerManager.renderPlugins() ) {
         bool propertyAvailable = false;
@@ -1121,6 +1135,11 @@ void MarbleMap::setShowFrameRate( bool visible )
     d->m_showFrameRate = visible;
 }
 
+void MarbleMap::setShowRuntimeTrace( bool visible )
+{
+    d->m_layerManager.setShowRuntimeTrace( visible );
+}
+
 void MarbleMap::setShowBackground( bool visible )
 {
     d->m_layerManager.setShowBackground( visible );
@@ -1178,7 +1197,7 @@ QFont MarbleMap::defaultFont() const
 void MarbleMap::setDefaultFont( const QFont& font )
 {
     GeoDataFeature::setDefaultFont( font );
-    d->m_placemarkLayout.requestStyleReset();
+    d->m_placemarkLayer.requestStyleReset();
 }
 
 QList<RenderPlugin *> MarbleMap::renderPlugins() const

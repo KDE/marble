@@ -155,25 +155,19 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
             <layer name="standardplaces" backend="geodata">
                 <geodata name="cityplacemarks">
                     <sourcefile format="KML">cityplacemarks.kml</sourcefile>
-                    <pick>placemark</pick> <!-- picks certain features from a
-                                            file -->
                 </geodata>
                 <geodata name="baseplacemarks">
                     <sourcefile format="KML">baseplacemarks.kml</sourcefile>
-                    <pick>placemark</pick>
                 </geodata>
                 <geodata name="elevplacemarks">
                     <sourcefile format="KML">elevplacemarks.kml</sourcefile>
-                    <pick>placemark</pick>
                 </geodata>
                 <geodata name="otherplacemarks">
                     <sourcefile
                     format="KML">otherplacemarks.kml</sourcefile>
-                    <pick>placemark</pick>
                 </geodata>
                 <geodata name="boundaryplacemarks">
                     <sourcefile format="KML">boundaryplacemarks</sourcefile>
-                    <pick>placemark</pick>
                 </geodata>
             </layer>
         </map>

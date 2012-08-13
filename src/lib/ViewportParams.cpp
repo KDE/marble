@@ -195,22 +195,6 @@ void ViewportParams::setRadius(int newRadius)
     }
 }
 
-bool ViewportParams::globeCoversViewport() const
-{
-    // This first test is a quick one that will catch all really big
-    // radii and prevent overflow in the real test.
-    if ( d->m_radius > d->m_size.width() + d->m_size.height() )
-        return true;
-
-    // This is the real test.  The 4 is because we are really
-    // comparing to width/2 and height/2.
-    if ( 4 * d->m_radius * d->m_radius >= d->m_size.width() * d->m_size.width()
-                                          + d->m_size.height() * d->m_size.height() )
-        return true;
-
-    return false;
-}
-
 void ViewportParams::centerOn( qreal lon, qreal lat )
 {
     if ( !d->m_currentProjection->traversablePoles() ) {
@@ -316,7 +300,7 @@ void ViewportParams::centerCoordinates( qreal &centerLon, qreal &centerLat ) con
     centerLat = d->m_centerLatitude;
 }
 
-GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const
+GeoDataLatLonAltBox& ViewportParams::viewLatLonAltBox() const
 {
     if (d->m_dirtyBox) {
         d->m_viewLatLonAltBox = d->m_currentProjection->latLonAltBox( QRect( QPoint( 0, 0 ), 

@@ -20,13 +20,16 @@
 namespace Marble
 {
 
-DatabaseQuery::DatabaseQuery( MarbleModel* model, const QString &searchTerm ) :
+DatabaseQuery::DatabaseQuery( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) :
     m_queryType( BroadSearch ), m_resultFormat( AddressFormat ), m_searchTerm( searchTerm.trimmed() ),
     m_category( OsmPlacemark::UnknownCategory )
 {
     if ( model && model->positionTracking()->status() == PositionProviderStatusAvailable ) {
         m_position = model->positionTracking()->currentLocation();
         m_resultFormat = DistanceFormat;
+    } else if ( !preferred.isEmpty() ) {
+        m_position = preferred.center();
+        m_resultFormat = AddressFormat;
     } else {
         m_resultFormat = AddressFormat;
     }
@@ -61,6 +64,8 @@ bool DatabaseQuery::isPointOfInterest( const QString &category )
 {
     static QMap<QString, OsmPlacemark::OsmCategory> pois;
     if ( pois.isEmpty() ) {
+        pois[QObject::tr( "pois").toLower()] = OsmPlacemark::UnknownCategory;
+        pois["pois"] = OsmPlacemark::UnknownCategory;
         pois[QObject::tr( "camping" ).toLower()] = OsmPlacemark::AccomodationCamping;
         pois["camping"] = OsmPlacemark::AccomodationCamping;
         pois[QObject::tr( "hostel" ).toLower()] = OsmPlacemark::AccomodationHostel;

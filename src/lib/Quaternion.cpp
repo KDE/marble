@@ -73,10 +73,7 @@ qreal Quaternion::length() const
 
 Quaternion& Quaternion::operator*=(qreal mult)
 {
-    v[Q_W] *= mult;
-    v[Q_X] *= mult;
-    v[Q_Y] *= mult;
-    v[Q_Z] *= mult;
+    (*this) = (*this) * mult;
 
     return *this;
 }
@@ -160,6 +157,11 @@ Quaternion Quaternion::operator*(const Quaternion &q) const
     const qreal z = v[Q_W] * q.v[Q_Z] + v[Q_X] * q.v[Q_Y] - v[Q_Y] * q.v[Q_X] + v[Q_Z] * q.v[Q_W];
 
     return Quaternion( w, x, y, z );
+}
+
+Quaternion Quaternion::operator*(qreal factor) const
+{
+    return Quaternion( v[Q_W] * factor, v[Q_X] * factor, v[Q_Y] * factor, v[Q_Z] * factor );
 }
 
 void Quaternion::rotateAroundAxis(const Quaternion &q)

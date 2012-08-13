@@ -69,6 +69,7 @@ void BookmarkManagerPrivate::setVisualCategory( GeoDataContainer *container ) {
     }
     foreach( GeoDataPlacemark* placemark, container->placemarkList() ) {
         placemark->setVisualCategory( GeoDataFeature::Bookmark );
+        placemark->setZoomLevel( 1 );
     }
 
 }
@@ -130,9 +131,15 @@ void BookmarkManager::addBookmark( GeoDataContainer *container, const GeoDataPla
 {
     GeoDataPlacemark *bookmark = new GeoDataPlacemark( placemark );
     bookmark->setVisualCategory( GeoDataDocument::Bookmark );
+    bookmark->setZoomLevel( 1 );
     d->m_treeModel->addFeature( container, bookmark );
 
     updateBookmarkFile();
+}
+
+void BookmarkManager::updateBookmark( GeoDataPlacemark *bookmark )
+{
+    d->m_treeModel->updateFeature( bookmark );
 }
 
 void BookmarkManager::removeBookmark( GeoDataPlacemark *bookmark )
@@ -192,10 +199,8 @@ void BookmarkManager::addNewBookmarkFolder( GeoDataContainer *container, const Q
 
 void BookmarkManager::renameBookmarkFolder( GeoDataFolder *folder, const QString &name )
 {
-    GeoDataContainer *parent = static_cast<GeoDataContainer*>( folder->parent() );
-    d->m_treeModel->removeFeature( folder );
     folder->setName( name );
-    d->m_treeModel->addFeature( parent, folder );
+    d->m_treeModel->updateFeature( folder );
 }
 
 void BookmarkManager::removeBookmarkFolder( GeoDataFolder *folder )

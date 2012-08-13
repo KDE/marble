@@ -24,38 +24,11 @@ bool zValueLessThan( GeoGraphicsItem* i1, GeoGraphicsItem* i2 )
     return i1->zValue() < i2->zValue();
 }
 
-int GeoGraphicsScene::s_tileZoomLevel = 14;
+int GeoGraphicsScene::s_tileZoomLevel = 18;
 
 class GeoGraphicsScenePrivate
 {
 public:
-    TileId coordToTileId( const GeoDataCoordinates& coord, int popularity ) const
-    {
-        if ( popularity < 0 ) {
-            return TileId();
-        }
-        int maxLat = 90000000;
-        int maxLon = 180000000;
-        int lat = coord.latitude( GeoDataCoordinates::Degree ) * 1000000;
-        int lon = coord.longitude( GeoDataCoordinates::Degree ) * 1000000;
-        int deltaLat, deltaLon;
-        int x = 0;
-        int y = 0;
-        for( int i=0; i<popularity; ++i ) {
-            deltaLat = maxLat >> i;
-            if( lat < ( maxLat - deltaLat )) {
-                y += 1<<(popularity-i-1);
-                lat += deltaLat;
-            }
-            deltaLon = maxLon >> i;
-            if( lon >= ( maxLon - deltaLon )) {
-                x += 1<<(popularity-i-1);
-            } else {
-                lon += deltaLon;
-            }
-        }
-        return TileId( "", popularity, x, y );
-    }
 
     void addItems(const TileId &tileId, QList<GeoGraphicsItem*> &result, int maxZoomLevel ) const;
 
@@ -108,11 +81,11 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAl
     TileId key;
     int zoomLevel = maxZoomLevel < s_tileZoomLevel ? maxZoomLevel : s_tileZoomLevel;
 
-    key = d->coordToTileId( GeoDataCoordinates(west, north, 0), zoomLevel );
+    key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel );
     rect.setLeft( key.x() );
     rect.setTop( key.y() );
 
-    key = d->coordToTileId( GeoDataCoordinates(east, south, 0), zoomLevel );
+    key = TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel );
     rect.setRight( key.x() );
     rect.setBottom( key.y() );
     
@@ -137,20 +110,20 @@ void GeoGraphicsScene::removeItem( GeoGraphicsItem* item )
     int zoomLevel;
     qreal north, south, east, west;
     item->latLonAltBox().boundaries( north, south, east, west );
-    for(zoomLevel = s_tileZoomLevel; zoomLevel >= 0; zoomLevel--)
+    for(zoomLevel = item->minZoomLevel(); zoomLevel >= 0; zoomLevel--)
     {
-        if( d->coordToTileId( GeoDataCoordinates(west, north, 0), zoomLevel ) == 
-            d->coordToTileId( GeoDataCoordinates(east, south, 0), zoomLevel ) )
+        if( TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ) ==
+            TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel ) )
             break;
     }
     int tnorth, tsouth, teast, twest;
     TileId key;
     
-    key = d->coordToTileId( GeoDataCoordinates(west, north, 0), zoomLevel );
+    key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel );
     twest = key.x();
     tnorth = key.y();
 
-    key = d->coordToTileId( GeoDataCoordinates(east, south, 0), zoomLevel );
+    key = TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel );
     teast = key.x();
     tsouth = key.y();
         
@@ -175,20 +148,20 @@ void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
     int zoomLevel;
     qreal north, south, east, west;
     item->latLonAltBox().boundaries( north, south, east, west );
-    for(zoomLevel = s_tileZoomLevel; zoomLevel >= 0; zoomLevel--)
+    for(zoomLevel = item->minZoomLevel(); zoomLevel >= 0; zoomLevel--)
     {
-        if( d->coordToTileId( GeoDataCoordinates(west, north, 0), zoomLevel ) == 
-            d->coordToTileId( GeoDataCoordinates(east, south, 0), zoomLevel ) )
+        if( TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ) ==
+            TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel ) )
             break;
     }
     int tnorth, tsouth, teast, twest;
     TileId key;
     
-    key = d->coordToTileId( GeoDataCoordinates(west, north, 0), zoomLevel );
+    key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel );
     twest = key.x();
     tnorth = key.y();
 
-    key = d->coordToTileId( GeoDataCoordinates(east, south, 0), zoomLevel );
+    key = TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel );
     teast = key.x();
     tsouth = key.y();
         

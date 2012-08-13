@@ -44,8 +44,7 @@ class WikipediaItem : public AbstractDataPluginItem
     
     void addDownloadedFile( const QString& url, const QString& type );
     
-    void paint( GeoPainter *painter, ViewportParams *viewport,
-                const QString& renderPos, GeoSceneLayer * layer = 0 );
+    void paint( QPainter *painter );
                  
     bool operator<( const AbstractDataPluginItem *other ) const;
     
@@ -74,6 +73,11 @@ class WikipediaItem : public AbstractDataPluginItem
     void setIcon( const QIcon& icon );
 
     void setSettings( const QHash<QString, QVariant>& settings );
+
+    /** Set a popularity rank. Larger means more popular. Default rank is 0 */
+    void setRank( double rank );
+
+    double rank() const;
     
  public Q_SLOTS:
     void openBrowser();
@@ -86,6 +90,7 @@ class WikipediaItem : public AbstractDataPluginItem
     QUrl m_url;
     QUrl m_thumbnailImageUrl;
     QString m_summary;
+    double m_rank;
     TinyWebBrowser *m_browser;
     QAction *m_action;
 

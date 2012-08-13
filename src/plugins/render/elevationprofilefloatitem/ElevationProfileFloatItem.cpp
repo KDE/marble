@@ -12,6 +12,7 @@
 #include "ElevationProfileFloatItem.h"
 
 #include <QtCore/QRect>
+#include <QtGui/QPainter>
 #include <QtGui/QPushButton>
 #include <QtGui/QMenu>
 
@@ -21,7 +22,6 @@
 #include "MarbleWidget.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
-#include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "routing/RoutingModel.h"
 #include "routing/RoutingManager.h"
@@ -148,6 +148,8 @@ void ElevationProfileFloatItem::initialize ()
     connect( this, SIGNAL( dataUpdated() ), SLOT( forceRepaint() ) );
 
     updateData();
+
+    m_isInitialized = true;
 }
 
 bool ElevationProfileFloatItem::isInitialized () const
@@ -172,21 +174,13 @@ void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
         if ( !m_isInitialized && !smallScreen ) {
             setPosition( QPointF( (viewport->width() - contentSize().width()) / 2 , 10.5 ) );
         }
-        m_isInitialized = true;
     }
 
     update();
 }
 
-void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
-        ViewportParams *viewport,
-        const QString& renderPos,
-        GeoSceneLayer * layer )
+void ElevationProfileFloatItem::paintContent( QPainter *painter )
 {
-    Q_UNUSED( viewport )
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
-
     painter->save();
     painter->setRenderHint( QPainter::Antialiasing, true );
     painter->setFont( font() );

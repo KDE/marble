@@ -41,7 +41,6 @@ class VectorMap
      * @brief Paint the background, i.e. the water.
      */
     void paintMap( GeoPainter *painter );
-    void drawMap( GeoPainter *painter );
 
     void setzBoundingBoxLimit ( const qreal zBoundingBoxLimit ) {
         m_zBoundingBoxLimit = zBoundingBoxLimit; }

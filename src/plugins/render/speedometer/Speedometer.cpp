@@ -35,7 +35,6 @@ Speedometer::Speedometer( const MarbleModel *marbleModel )
       m_widgetItem( 0 )
 {
     setVisible( false );
-    setCacheMode( NoCache );
 
     const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
@@ -100,7 +99,6 @@ void Speedometer::initialize ()
         m_widget.setupUi( widget );
         m_widgetItem = new WidgetGraphicsItem( this );
         m_widgetItem->setWidget( widget );
-        m_widgetItem->setCacheMode( MarbleGraphicsItem::DeviceCoordinateCache );
 
         MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout( 1, 1 );
         layout->addItem( m_widgetItem, 0, 0 );
@@ -140,7 +138,8 @@ void Speedometer::updateLocation( GeoDataCoordinates coordinates, qreal speed )
 
     m_widget.speed->display( speed );
     m_widget.speedUnit->setText( speedUnit );
-    m_widgetItem->update();
+
+    update();
     emit repaintNeeded();
 }
 

@@ -25,7 +25,7 @@ class MARBLE_EXPORT GeoImageGraphicsItem : public GeoGraphicsItem
 public:
     void setLatLonBox( const GeoDataLatLonBox& box );
 
-    GeoDataLatLonBox latLonBox() const;
+    GeoDataLatLonBox& latLonBox() const;
 
     void setImage( const QImage &image );
 
@@ -37,9 +37,8 @@ public:
 
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );
-protected:
-    GeoDataLatLonBox m_latLonBox;
 
+protected:
     QImage m_image;
 
     QString m_imageFile;

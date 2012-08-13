@@ -21,14 +21,23 @@ namespace Marble
 class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
 {
   public:
-     GeoDataMultiGeometryPrivate()
+    GeoDataMultiGeometryPrivate()
     {
     }
 
-     ~GeoDataMultiGeometryPrivate()
-     {
-         qDeleteAll(m_vector);
-     }
+    ~GeoDataMultiGeometryPrivate()
+    {
+        qDeleteAll(m_vector);
+    }
+
+    void operator=( const GeoDataMultiGeometryPrivate &other)
+    {
+        GeoDataGeometryPrivate::operator=( other );
+        qDeleteAll( m_vector );
+        foreach( GeoDataGeometry *geometry, other.m_vector ) {
+            m_vector.append( new GeoDataGeometry( *geometry ) );
+        }
+    }
 
     virtual GeoDataGeometryPrivate* copy()
     { 

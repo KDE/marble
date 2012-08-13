@@ -61,6 +61,15 @@ class MARBLE_EXPORT MarbleWidgetInputHandler  : public QObject
 
     bool panViaArrowsEnabled() const;
 
+    void setKineticScrollingEnabled( bool enabled );
+
+    /**
+     * @brief Returns true iff dragging the map with the mouse keeps spinning
+     * in the chosen direction for a slightly longer time than the mouse is
+     * actually performing the drag operation
+     */
+    bool kineticScrollingEnabled() const;
+
  Q_SIGNALS:
     // Mouse button menus
     void lmbRequest( int, int );

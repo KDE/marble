@@ -13,9 +13,10 @@
 #include "GeoParser.h"
 #include "OsmNodeFactory.h"
 #include "GeoDataDocument.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
-#include "GeoDataLineString.h"
+#include "GeoDataLatLonAltBox.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataRegion.h"
 #include "MarbleDebug.h"
 #include "OsmElementDictionary.h"
 
@@ -32,25 +33,10 @@ GeoNode* OsmBoundsTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() );
 
-    GeoDataDocument* doc = geoDataDoc( parser );
-    GeoDataLinearRing r;
-    GeoDataPolygon *p = new GeoDataPolygon();
     qreal minlat = parser.attribute("minlat").toFloat();
     qreal minlon = parser.attribute("minlon").toFloat();
     qreal maxlat = parser.attribute("maxlat").toFloat();
     qreal maxlon = parser.attribute("maxlon").toFloat();
-    r.append( GeoDataCoordinates( minlon, minlat, 0, GeoDataCoordinates::Degree ) );
-    r.append( GeoDataCoordinates( maxlon, minlat, 0, GeoDataCoordinates::Degree ) );
-    r.append( GeoDataCoordinates( maxlon, maxlat, 0, GeoDataCoordinates::Degree ) );
-    r.append( GeoDataCoordinates( minlon, maxlat, 0, GeoDataCoordinates::Degree ) );
-    p->setOuterBoundary( r );
-
-    GeoDataPlacemark *pl = new GeoDataPlacemark();
-    pl->setGeometry( p );
-    pl->setVisualCategory( GeoDataFeature::None );
-    pl->setStyle( &doc->style( "background" ) );
-    pl->setVisible( true );
-    doc->append( pl );
 
     mDebug() << "[OSM] Bounds: " << minlat << " " << minlon << " " << maxlat << " " << maxlon;
 

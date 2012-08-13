@@ -11,6 +11,7 @@
 #include "OsmDatabase.h"
 
 #include "DatabaseQuery.h"
+#include "GeoDataLatLonAltBox.h"
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
 #include "MarbleLocale.h"
@@ -52,7 +53,7 @@ bool placemarkHigherScore( const OsmPlacemark &a, const OsmPlacemark &b )
 
 OsmDatabase::OsmDatabase()
 {
-    m_database = QSqlDatabase::addDatabase( "QSQLITE" );
+    m_database = QSqlDatabase::addDatabase( "QSQLITE", "marble/local-osm-search" );
 }
 
 void OsmDatabase::addFile( const QString &fileName )
@@ -60,13 +61,13 @@ void OsmDatabase::addFile( const QString &fileName )
     m_databases << fileName;
 }
 
-QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &searchTerm )
+QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred )
 {
     if ( m_databases.isEmpty() ) {
         return QVector<OsmPlacemark>();
     }
 
-    DatabaseQuery userQuery( model, searchTerm );
+    DatabaseQuery userQuery( model, searchTerm, preferred );
 
     QVector<OsmPlacemark> result;
     QTime timer;
@@ -80,7 +81,7 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
         QString regionRestriction;
         if ( !userQuery.region().isEmpty() ) {
             // Nested set model to support region hierarchies, see http://en.wikipedia.org/wiki/Nested_set_model
-            QSqlQuery regionsQuery( "SELECT lft, rgt FROM regions WHERE name LIKE '%" + userQuery.region() + "%';" );
+            QSqlQuery regionsQuery( "SELECT lft, rgt FROM regions WHERE name LIKE '%" + userQuery.region() + "%';", m_database );
             if ( regionsQuery.lastError().isValid() ) {
                 mDebug() << "Error when executing query" << regionsQuery.executedQuery();
                 mDebug() << "Sql reports" << regionsQuery.lastError();
@@ -111,9 +112,17 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
                 " FROM regions, places";
 
         if ( userQuery.queryType() == DatabaseQuery::CategorySearch ) {
-            queryString += " WHERE regions.id = places.region AND places.category = %1";
-            queryString = queryString.arg( (qint32) userQuery.category() );
-            if ( userQuery.resultFormat() == DatabaseQuery::DistanceFormat && userQuery.region().isEmpty() ) {
+            queryString += " WHERE regions.id = places.region";
+            if( userQuery.category() == OsmPlacemark::UnknownCategory ) {
+                // search for all pois which are not street nor adress
+                queryString += " AND places.category <> 0 AND places.category <> 6";
+            } else {
+                // search for specific category
+                queryString += " AND places.category = %1";
+                queryString = queryString.arg( (qint32) userQuery.category() );
+            }
+            if ( userQuery.position().isValid() && userQuery.region().isEmpty() ) {
+                // sort by distance
                 queryString += " ORDER BY ((places.lat-%1)*(places.lat-%1)+(places.lon-%2)*(places.lon-%2))";
                 GeoDataCoordinates position = userQuery.position();
                 queryString = queryString.arg( position.latitude( GeoDataCoordinates::Degree ), 0, 'f', 8 )
@@ -139,7 +148,7 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
 
         /** @todo: sort/filter results from several databases */
 
-        QSqlQuery query;
+        QSqlQuery query( m_database );
         query.setForwardOnly( true );
         if ( !query.exec( queryString ) ) {
             mDebug() << "Failed to execute query" << query.lastError();
@@ -170,8 +179,8 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
     qSort( result.begin(), result.end() );
     unique( result );
 
-    if ( userQuery.resultFormat() == DatabaseQuery::DistanceFormat ) {
-        s_currentPosition = model->positionTracking()->currentLocation();
+    if ( userQuery.position().isValid() ) {
+        s_currentPosition = userQuery.position();
         qSort( result.begin(), result.end(), placemarkSmallerDistance );
     } else {
         s_currentQuery = &userQuery;

@@ -31,7 +31,7 @@ public:
     void                    removePlacemarkKey (const QString& key);
     qreal                   planetRadius () const;
     QString                 planetName () const;
-    const Marble::SunLocator*     sunLocator () const;
+    const Marble::SunLocator*  sunLocator () const;
 //ig    quint64                 volatileTileCacheLimit () const;
     const Marble::Planet*   planet () const;
     void                    clearPersistentTileCache ();

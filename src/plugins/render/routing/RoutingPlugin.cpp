@@ -175,20 +175,13 @@ void RoutingPluginPrivate::updateGuidanceModeButton()
 {
     bool const hasRoute = m_routingModel->rowCount() > 0;
     m_widget.routingButton->setEnabled( hasRoute );
-    m_widgetItem->update();
+    forceRepaint();
 }
 
 void RoutingPluginPrivate::forceRepaint()
 {
-    m_widgetItem->update();
-    if ( m_marbleWidget ) {
-        // Trigger a repaint of the float item. Otherwise button state updates are delayed
-        m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground, false );
-        m_parent->update();
-        m_marbleWidget->update();
-        bool const mapCoversViewport = m_marbleWidget->viewport()->mapCoversViewport();
-        m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground, mapCoversViewport );
-    }
+    m_parent->update();
+    emit m_parent->repaintNeeded();
 }
 
 void RoutingPluginPrivate::updateButtonVisibility()
@@ -331,7 +324,7 @@ void RoutingPluginPrivate::updateDestinationInformation()
             }
         }
 
-        m_widgetItem->update();
+        forceRepaint();
     }
 }
 
@@ -509,7 +502,6 @@ void RoutingPlugin::initialize()
     d->m_widget.setupUi( widget );
     d->m_widgetItem = new WidgetGraphicsItem( this );
     d->m_widgetItem->setWidget( widget );
-    d->m_widgetItem->setCacheMode( MarbleGraphicsItem::DeviceCoordinateCache );
 
     PositionProviderPlugin* activePlugin = marbleModel()->positionTracking()->positionProviderPlugin();
     d->updateGpsButton( activePlugin );

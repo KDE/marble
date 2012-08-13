@@ -10,6 +10,7 @@
 
 #include "KmlTrackTagHandler.h"
 
+#include "GeoDataMultiTrack.h"
 #include "GeoDataTrack.h"
 #include "GeoDataPlacemark.h"
 #include "KmlElementDictionary.h"
@@ -36,6 +37,10 @@ GeoNode *KmlTrackTagHandler::parse( GeoParser &parser ) const
     if ( parentItem.represents( kmlTag_Placemark ) ) {
         GeoDataTrack *track = new GeoDataTrack();
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( track );
+        return track;
+    } else if ( parentItem.represents( kmlTag_MultiTrack ) ) {
+        GeoDataTrack *track = new GeoDataTrack();
+        parentItem.nodeAs<GeoDataMultiTrack>()->append( track );
         return track;
     } else if ( parentItem.represents( kmlTag_MultiGeometry ) ) {
         GeoDataTrack *track = new GeoDataTrack();

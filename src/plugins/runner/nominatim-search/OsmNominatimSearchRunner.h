@@ -36,7 +36,7 @@ public:
     // Overriding MarbleAbstractRunner
     GeoDataFeature::GeoDataVisualCategory category() const;
 
-    virtual void search( const QString &searchTerm );
+    virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
 private Q_SLOTS:
     // Forward a result to the search or reverse geocoding handler

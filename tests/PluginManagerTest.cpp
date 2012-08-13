@@ -11,7 +11,6 @@
 #include <QtTest/QtTest>
 
 #include "MarbleDirs.h"
-#include "MarbleModel.h"
 #include "PluginManager.h"
 
 namespace Marble

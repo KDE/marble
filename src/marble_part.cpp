@@ -92,6 +92,7 @@
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
 #include "SearchInputWidget.h"
+#include "MarbleWidgetInputHandler.h"
 
 // Marble non-library classes
 #include "ControlView.h"
@@ -454,6 +455,7 @@ void MarblePart::readSettings()
     m_showAtmosphereAction->setChecked( MarbleSettings::showAtmosphere() );
     m_lockFloatItemsAct->setChecked(MarbleSettings::lockFloatItemPositions());
     lockFloatItemPosition(MarbleSettings::lockFloatItemPositions());
+    m_controlView->marbleWidget()->inputHandler()->setKineticScrollingEnabled( MarbleSettings::kineticScrolling() );
 
     setShowBookmarks( MarbleSettings::showBookmarks() );
 
@@ -1708,7 +1710,8 @@ void MarblePart::openEditBookmarkDialog()
 {
     MarbleWidget *widget = m_controlView->marbleWidget();
     QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( widget->model()->bookmarkManager(), widget );
-    dialog->setLookAt( widget->lookAt() );
+    dialog->setCoordinates( widget->lookAt().coordinates() );
+    dialog->setRange( widget->lookAt().range() );
     dialog->setMarbleWidget( widget );
     dialog->exec();
     delete dialog;

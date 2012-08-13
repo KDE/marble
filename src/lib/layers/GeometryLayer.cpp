@@ -7,6 +7,7 @@
 //
 // Copyright 2008-2009      Patrick Spendrin  <ps_ml@gmx.de>
 // Copyright 2010           Thibaut Gridel <tgridel@free.fr>
+// Copyright 2011-2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "GeometryLayer.h"
@@ -15,6 +16,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
 #include "GeoDataLineStyle.h"
+#include "GeoDataMultiTrack.h"
 #include "GeoDataObject.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
@@ -42,7 +44,7 @@
 #include "StackedTileLoader.h"
 
 // Qt
-#include <QtCore/QTime>
+#include <QtCore/qmath.h>
 #include <QtCore/QAbstractItemModel>
 
 namespace Marble
@@ -51,14 +53,6 @@ int GeometryLayer::s_defaultZValues[GeoDataFeature::LastIndex];
 int GeometryLayer::s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
 bool GeometryLayer::s_defaultValuesInitialized = false;
 int GeometryLayer::s_defaultZValue = 50;
-
-QVector< int > GeometryLayer::s_weightfilter = QVector<int>()
-    << 20 << 40 << 80
-    << 160 << 320 << 640
-    << 1280 << 2560 << 5120
-    << 10240 << 20480 << 40960
-    << 81920 << 163840 << 327680
-    << 655360 << 1310720 << 2621440;
 
 class GeometryLayerPrivate
 {
@@ -69,10 +63,10 @@ public:
     void createGraphicsItemFromGeometry( const GeoDataGeometry *object, const GeoDataPlacemark *placemark );
     void createGraphicsItemFromOverlay( const GeoDataOverlay *overlay );
 
-    QBrush m_currentBrush;
-    QPen m_currentPen;
-    GeoGraphicsScene m_scene;
     const QAbstractItemModel *const m_model;
+    GeoGraphicsScene m_scene;
+    QString m_runtimeTrace;
+
 };
 
 GeometryLayerPrivate::GeometryLayerPrivate( const QAbstractItemModel *model )
@@ -116,7 +110,7 @@ void GeometryLayer::initializeDefaultValues()
         s_defaultZValues[i] = s_defaultZValue;
     
     for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
-        s_defaultMinZoomLevels[i] = 0;
+        s_defaultMinZoomLevels[i] = 15;
 
     s_defaultZValues[GeoDataFeature::None]                = 0;
     
@@ -152,7 +146,9 @@ void GeometryLayer::initializeDefaultValues()
     s_defaultZValues[GeoDataFeature::HighwayMotorway]     = s_defaultZValue - 1;
     s_defaultZValues[GeoDataFeature::RailwayRail]         = s_defaultZValue - 1;
     
-    
+    s_defaultMinZoomLevels[GeoDataFeature::Default]             = 1;
+    s_defaultMinZoomLevels[GeoDataFeature::NaturalWater]        = 8;
+    s_defaultMinZoomLevels[GeoDataFeature::NaturalWood]         = 8;
     s_defaultMinZoomLevels[GeoDataFeature::Building]            = 15;
 
         // OpenStreetMap highways
@@ -165,13 +161,13 @@ void GeometryLayer::initializeDefaultValues()
     s_defaultMinZoomLevels[GeoDataFeature::HighwayRoad]         = 13;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayTertiaryLink] = 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayTertiary]     = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwaySecondaryLink]= 9;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwaySecondaryLink]= 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwaySecondary]    = 9;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimaryLink]  = 8;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimaryLink]  = 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimary]      = 8; 
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayTrunkLink]    = 7;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayTrunkLink]    = 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayTrunk]        = 7;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorwayLink] = 6;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorwayLink] = 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorway]     = 6;
         
     //FIXME: Bad, better to expand this
@@ -209,6 +205,8 @@ void GeometryLayer::initializeDefaultValues()
     s_defaultMinZoomLevels[GeoDataFeature::RailwayMonorail]     = 12;
     s_defaultMinZoomLevels[GeoDataFeature::RailwayFunicular]    = 13;
 
+    s_defaultMinZoomLevels[GeoDataFeature::Satellite]           = 0;
+
     s_defaultValuesInitialized = true;
 }
 
@@ -218,20 +216,31 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
 {
     painter->save();
     painter->autoMapQuality();
-    
-    int maxZoomLevel = 0;
-    for(QVector<int>::const_iterator i = s_weightfilter.constBegin(); 
-        ( i != s_weightfilter.constEnd() ) && ( viewport->radius() > *i ); i++)
-        maxZoomLevel++;
-    
+
+    int maxZoomLevel = qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 );
+
     QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox(), maxZoomLevel );
+    int painted = 0;
     foreach( GeoGraphicsItem* item, items )
     {
-        if ( item->visible() )
+        if ( item->visible()
+             && item->latLonAltBox().intersects( viewport->viewLatLonAltBox() ) ) {
             item->paint( painter, viewport, renderPos, layer );
+            ++painted;
+        }
     }
+
     painter->restore();
+    d->m_runtimeTrace = QString( "Items: %1 Drawn: %2 Zoom: %3")
+                .arg( items.size() )
+                .arg( painted )
+                .arg( maxZoomLevel );
     return true;
+}
+
+QString GeometryLayer::runtimeTrace() const
+{
+    return d->m_runtimeTrace;
 }
 
 void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )
@@ -279,6 +288,15 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry
         for ( int row = 0; row < rowCount; ++row )
         {
             createGraphicsItemFromGeometry( multigeo->child( row ), placemark );
+        }
+    }
+    else if ( object->nodeType() == GeoDataTypes::GeoDataMultiTrackType  )
+    {
+        const GeoDataMultiTrack *multitrack = static_cast<const GeoDataMultiTrack*>( object );
+        int rowCount = multitrack->size();
+        for ( int row = 0; row < rowCount; ++row )
+        {
+            createGraphicsItemFromGeometry( multitrack->child( row ), placemark );
         }
     }
     else if ( object->nodeType() == GeoDataTypes::GeoDataTrackType )

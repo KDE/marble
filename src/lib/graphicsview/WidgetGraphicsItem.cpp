@@ -13,13 +13,13 @@
 #include "WidgetGraphicsItem_p.h"
 
 // Marble
-#include "GeoPainter.h"
 #include "MarbleWidget.h"
 #include "MarbleDebug.h"
 
 // Qt
 #include <QtGui/QApplication>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QPainter>
 #include <QtGui/QWidget>
 
 using namespace Marble;
@@ -59,13 +59,8 @@ QWidget *WidgetGraphicsItem::widget() const {
     return d->m_widget;
 }
 
-void WidgetGraphicsItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                                const QString& renderPos, GeoSceneLayer * layer )
+void WidgetGraphicsItem::paint( QPainter *painter )
 {
-    Q_UNUSED( viewport );
-    Q_UNUSED( layer );
-    Q_UNUSED( renderPos );
-    
     if( d->m_widget == 0 )
         return;
 
@@ -101,7 +96,7 @@ bool WidgetGraphicsItem::eventFilter( QObject *object, QEvent *e )
     {
         // Mouse events are forwarded to the underlying widget
         QMouseEvent *event = static_cast<QMouseEvent*> ( e );
-        
+
         QList<QPointF> widgetPositions = absolutePositions();
         QRectF widgetItemRect;
         QPoint shiftedPos;
@@ -109,7 +104,7 @@ bool WidgetGraphicsItem::eventFilter( QObject *object, QEvent *e )
         bool foundRightPosition = false;
         while( it != widgetPositions.end() && !foundRightPosition ) {
             widgetItemRect = QRectF( *it, size() );
-            
+
             if ( widgetItemRect.contains( event->pos() ) ) {
                 foundRightPosition = true;
                 shiftedPos = event->pos() - widgetItemRect.topLeft().toPoint();

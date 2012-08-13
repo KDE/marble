@@ -13,7 +13,6 @@
 
 // Marble
 #include "AbstractMarbleGraphicsLayout.h"
-#include "GeoPainter.h"
 #include "MarbleGraphicsItem.h"
 
 // Qt
@@ -33,18 +32,16 @@ class MarbleGraphicsItemPrivate
  public:
     explicit MarbleGraphicsItemPrivate( MarbleGraphicsItem *marbleGraphicsItem,
                                         MarbleGraphicsItem *parent = 0 )
-        : m_removeCachedPixmap( false ),
+        : m_repaintNeeded( true ),
           m_cacheMode( MarbleGraphicsItem::NoCache ),
           m_visibility( true ),
           m_parent( parent ),
           m_children(),
           m_layout( 0 ),
-          m_marbleGraphicsItem( marbleGraphicsItem ),
-          m_zValue( 0 )
+          m_marbleGraphicsItem( marbleGraphicsItem )
     {
         if ( m_parent ) {
             m_parent->p()->addChild( m_marbleGraphicsItem );
-            setParentSize( m_parent->size() );
         }
     }
 
@@ -72,15 +69,14 @@ class MarbleGraphicsItemPrivate
         m_children.remove( child );
     }
 
-    virtual QList<QPointF> positions() const
-    {
-        return QList<QPointF>();
-    }
-    
-    virtual QList<QPointF> absolutePositions() const
-    {
-        return positions();
-    }
+    virtual QList<QPointF> positions() const = 0;
+
+    virtual QList<QPointF> absolutePositions() const = 0;
+
+    /**
+     * @brief Used to get the set of screen bounding rects
+     */
+    QList<QRectF> boundingRects() const;
 
     void ensureValidCacheKey()
     {
@@ -93,40 +89,13 @@ class MarbleGraphicsItemPrivate
 #endif
     }
 
-    QList<QRectF> boundingRects() const
-    {
-        QList<QRectF> list;
+    virtual void setProjection( const ViewportParams *viewport ) = 0;
 
-        foreach( QPointF point, positions() ) {
-            QRectF rect( point, m_size );
-            if( rect.x() < 0 )
-                rect.setLeft( 0 );
-            if( rect.y() < 0 )
-                rect.setTop( 0 );
-
-            list.append( rect );
-        }
-
-        return list;
-    }
-
-    virtual void setProjection( ViewportParams *viewport,
-                                GeoPainter *painter )
-    {
-        Q_UNUSED( viewport );
-        Q_UNUSED( painter );
-    }
-
-    virtual void setParentSize( QSizeF size )
-    {
-        Q_UNUSED( size );
-    }
-
-    void updateLabelPositions()
+    void updateChildPositions()
     {
         // This has to be done recursively because we need a correct size from all children.
         foreach ( MarbleGraphicsItem *item, m_children ) {
-            item->p()->updateLabelPositions();
+            item->p()->updateChildPositions();
         }
 
         // Adjust positions
@@ -137,7 +106,7 @@ class MarbleGraphicsItemPrivate
 
     QSizeF m_size;
 
-    bool m_removeCachedPixmap;
+    bool m_repaintNeeded;
 
     MarbleGraphicsItem::CacheMode m_cacheMode;
 
@@ -156,12 +125,8 @@ class MarbleGraphicsItemPrivate
 
     // The layout handling the positions of the children
     AbstractMarbleGraphicsLayout *m_layout;
-    
-    QString m_toolTip;
 
     MarbleGraphicsItem *const m_marbleGraphicsItem;
-    
-    qreal m_zValue;
 };
 
 }

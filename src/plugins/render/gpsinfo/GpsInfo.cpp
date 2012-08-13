@@ -34,7 +34,6 @@ GpsInfo::GpsInfo( const MarbleModel *marbleModel )
       m_widgetItem( 0 )
 {
     setVisible( false );
-    setCacheMode( NoCache );
 }
 
 GpsInfo::~GpsInfo()
@@ -95,7 +94,6 @@ void GpsInfo::initialize ()
         m_widget.setupUi( widget );
         m_widgetItem = new WidgetGraphicsItem( this );
         m_widgetItem->setWidget( widget );
-        m_widgetItem->setCacheMode( MarbleGraphicsItem::DeviceCoordinateCache );
 
         MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout( 1, 1 );
         layout->addItem( m_widgetItem, 0, 0 );
@@ -159,7 +157,7 @@ void GpsInfo::updateLocation( GeoDataCoordinates coordinates, qreal)
         m_widgetItem->setSize( QSizeF( minimumWidth, size().height() ) );
     }
 
-    m_widgetItem->update();
+    update();
     emit repaintNeeded();
 }
 

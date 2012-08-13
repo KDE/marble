@@ -9,10 +9,10 @@
 //
 
 #include "EarthquakeItem.h"
-#include "GeoPainter.h"
 #include "ViewportParams.h"
 
 #include <QtGui/QFontMetrics>
+#include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 #include <QtSvg/QSvgRenderer>
 
@@ -20,14 +20,14 @@ namespace Marble
 {
 
 // That's the font we will use to paint.
-QFont EarthquakeItem::s_font = QFont( "Sans Serif", 8 );
+const QFont EarthquakeItem::s_font = QFont( "Sans Serif", 8, QFont::Bold );
 
 EarthquakeItem::EarthquakeItem( QObject *parent )
     : AbstractDataPluginItem( parent ), m_magnitude( 0.0 ), m_depth( 0.0 )
 {
     // The size of an item without a text is 0
     setSize( QSize( 0, 0 ) );
-    s_font.setBold( true );
+    setCacheMode( ItemCoordinateCache );
 }
 
 EarthquakeItem::~EarthquakeItem()
@@ -65,16 +65,10 @@ void EarthquakeItem::setMagnitude( double magnitude )
     updateTooltip();
 }
 
-void EarthquakeItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                            const QString& renderPos, GeoSceneLayer * layer )
+void EarthquakeItem::paint( QPainter *painter )
 {
-    Q_UNUSED( viewport )
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
-
     // Save the old painter state.
     painter->save();
-    painter->autoMapQuality();
 
     // Draw the arch into the given rect.
     qreal width = magnitude() * 10;
@@ -95,14 +89,8 @@ void EarthquakeItem::paint( GeoPainter *painter, ViewportParams *viewport,
     painter->drawEllipse( arcRect );
 
     // Draws the seismograph
-    if ( m_seismograph.isNull() ) {
-        m_seismograph = QPixmap( width, height );
-        QSvgRenderer renderer( QString( ":/seismograph.svg" ) );
-        m_seismograph.fill( Qt::transparent );
-        QPainter pixmapPainter( &m_seismograph );
-        renderer.render( &pixmapPainter, QRectF( 0.0, 0.0, width, height ) );
-    }
-    painter->drawPixmap( 0, 0, m_seismograph );
+    QSvgRenderer renderer( QString( ":/seismograph.svg" ) );
+    renderer.render( painter, QRectF( 0.0, 0.0, width, height ) );
 
     // Draws magnitude of the earthquake
     QFontMetrics metrics( s_font );

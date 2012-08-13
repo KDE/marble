@@ -9,6 +9,8 @@
 //
 
 #include "GeoLineStringGraphicsItem.h"
+
+#include "GeoDataLineString.h"
 #include "GeoDataLineStyle.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
@@ -33,15 +35,7 @@ GeoDataCoordinates GeoLineStringGraphicsItem::coordinate() const
     return m_lineString->latLonAltBox().center();
 }
 
-void GeoLineStringGraphicsItem::coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const
-{
-    GeoDataCoordinates coords = m_lineString->latLonAltBox().center();
-    longitude = coords.longitude();
-    latitude = coords.latitude();
-    altitude = coords.altitude();
-}
-
-GeoDataLatLonAltBox GeoLineStringGraphicsItem::latLonAltBox() const
+GeoDataLatLonAltBox& GeoLineStringGraphicsItem::latLonAltBox() const
 {
     return m_lineString->latLonAltBox();
 }
@@ -67,11 +61,12 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* view
     painter->save();
     QPen currentPen = painter->pen();
 
-    if ( currentPen.color() != style()->lineStyle().color() ||
-            currentPen.widthF() != style()->lineStyle().width() ||
+    if ( currentPen.color() != style()->lineStyle().color() )
+        currentPen.setColor( style()->lineStyle().color() );
+
+    if ( currentPen.widthF() != style()->lineStyle().width() ||
             style()->lineStyle().physicalWidth() != 0.0 )
     {
-        currentPen.setColor( style()->lineStyle().color() );
         if ( float( viewport->radius() ) / EARTH_RADIUS * style()->lineStyle().physicalWidth() < style()->lineStyle().width() )
             currentPen.setWidthF( style()->lineStyle().width() );
         else
@@ -98,14 +93,11 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* view
     if ( painter->pen() != currentPen ) painter->setPen( currentPen );
     if ( style()->lineStyle().background() )
     {
-        painter->save();
-        QPen bgPen( painter->pen() );
-        bgPen.setColor( style()->polyStyle().color() );
-        bgPen.setStyle( Qt::SolidLine );
-        bgPen.setCapStyle( Qt::RoundCap );
-        painter->setPen( bgPen );
-        painter->drawPolyline( *m_lineString );
-        painter->restore();
+        QBrush brush = painter->background();
+        brush.setColor( style()->polyStyle().color() );
+        painter->setBackground( brush );
+
+        painter->setBackgroundMode( Qt::OpaqueMode );
     }
     painter->drawPolyline( *m_lineString );
     painter->restore();

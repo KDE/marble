@@ -1,18 +1,18 @@
 // Copyright 2008 David Roberts <dvdr18@gmail.com>
 // Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 // Copyright 2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
-// 
+//
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either 
+// License as published by the Free Software Foundation; either
 // version 2.1 of the License, or (at your option) any later version.
-// 
+//
 // This library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public 
+//
+// You should have received a copy of the GNU Lesser General Public
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 
@@ -45,7 +45,7 @@
 
 using namespace Marble;
 
-struct MergedLayerDecorator::Private
+class MergedLayerDecorator::Private
 {
 public:
     Private( TileLoader *tileLoader, const SunLocator *sunLocator );
@@ -103,7 +103,7 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
     QImage resultImage;
 
     // GeoDataDocument for appending all the vector data features to it
-    GeoDataDocument * resultVector = new GeoDataDocument;    
+    GeoDataDocument * resultVector = new GeoDataDocument;
 
     // if there are more than one active texture layers, we have to convert the
     // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
@@ -180,7 +180,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         const TileId tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
 
-        mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId.toString() << textureLayer->tileSize() << textureLayer->fileFormat();
+        mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId << textureLayer->tileSize() << textureLayer->fileFormat();
 
         // Blending (how to merge the images into an only image)
         const Blending *blending = d->m_blendingFactory.findBlending( textureLayer->blending() );
@@ -241,11 +241,13 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
     return d->createTile( tiles );
 }
 
-void MergedLayerDecorator::downloadTile( const TileId &id, const QVector<GeoSceneTiled const *> &textureLayers )
+void MergedLayerDecorator::downloadStackedTile( const TileId &id, const QVector<GeoSceneTiled const *> &textureLayers, DownloadUsage usage )
 {
     foreach ( const GeoSceneTiled *textureLayer, textureLayers ) {
         const TileId tileId( textureLayer->sourceDir(), id.zoomLevel(), id.x(), id.y() );
-        d->m_tileLoader->downloadTile( tileId );
+        if ( TileLoader::tileStatus( textureLayer, tileId ) != TileLoader::Available ) {
+            d->m_tileLoader->downloadTile( tileId, usage );
+        }
     }
 }
 
@@ -255,7 +257,7 @@ void MergedLayerDecorator::reloadTile( const StackedTile &stackedTile )
         // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
         // but since "reload" or "refresh" seems to be a common action of a browser and it
         // allows for more connections (in our model), use "DownloadBrowse"
-        d->m_tileLoader->reloadTile( tile->id(), DownloadBrowse );
+        d->m_tileLoader->downloadTile( tile->id(), DownloadBrowse );
     }
 }
 

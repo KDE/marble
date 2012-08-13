@@ -99,6 +99,8 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
      */
     void changeZoom( int zoom );
 
+    void setBoundedSearchEnabled( bool value );
+
  protected:
     /**
      * @brief Reimplementation of the resizeEvent() of the widget.

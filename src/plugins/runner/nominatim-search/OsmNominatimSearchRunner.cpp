@@ -51,12 +51,20 @@ void OsmNominatimRunner::returnNoResults()
     emit searchFinished( QVector<GeoDataPlacemark*>() );
 }
 
-void OsmNominatimRunner::search( const QString &searchTerm )
+void OsmNominatimRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred )
 {    
     QString base = "http://nominatim.openstreetmap.org/search?";
     QString query = "q=%1&format=xml&addressdetails=1&accept-language=%2";
     QString url = QString(base + query).arg(searchTerm).arg(MarbleLocale::languageCode());
+    if( !preferred.isEmpty() ) {
+        GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
+        QString viewbox( "&viewbox=%1,%2,%3,%4&bounded=1" ); // left, top, right, bottom
+        url += viewbox.arg(preferred.west(deg))
+                      .arg(preferred.north(deg))
+                      .arg(preferred.east(deg))
+                      .arg(preferred.south(deg));
 
+    }
     m_request.setUrl(QUrl(url));
     m_request.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
 

@@ -37,6 +37,8 @@ class GeoDataTreeModel::Private {
     Private();
     ~Private();
 
+    void checkParenting( GeoDataObject *object );
+
     GeoDataDocument* m_rootDocument;
     bool             m_ownsRootDocument;
 };
@@ -52,6 +54,21 @@ GeoDataTreeModel::Private::~Private()
 {
     if ( m_ownsRootDocument ) {
         delete m_rootDocument;
+    }
+}
+
+void GeoDataTreeModel::Private::checkParenting( GeoDataObject *object )
+{
+    GeoDataContainer *container;
+    if(    object->nodeType() == GeoDataTypes::GeoDataDocumentType
+        || object->nodeType() == GeoDataTypes::GeoDataFolderType ) {
+        container = static_cast<GeoDataContainer*>( object );
+        foreach( GeoDataFeature *child, container->featureList() ) {
+            if ( child->parent() != container ) {
+                qWarning() << "Parenting mismatch for " << child->name();
+                Q_ASSERT( 0 );
+            }
+        }
     }
 }
 
@@ -196,7 +213,7 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
                     return QVariant( placemark->popularity() );
                 }
                 else if ( index.column() == 3 ){
-                    return QVariant( placemark->popularityIndex() );
+                    return QVariant( placemark->zoomLevel() );
                 }
         }
         if ( object->nodeType() == GeoDataTypes::GeoDataFolderType
@@ -273,7 +290,7 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
     } else if ( role == MarblePlacemarkModel::PopularityIndexRole ) {
         if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
             GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );
-            return QVariant( placemark->popularityIndex() );
+            return QVariant( placemark->zoomLevel() );
         }
     } else if ( role == MarblePlacemarkModel::PopularityRole ) {
         if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
@@ -535,14 +552,15 @@ int GeoDataTreeModel::addFeature( GeoDataContainer *parent, GeoDataFeature *feat
             row = parent->size();
             beginInsertRows( modelindex , row , row );
             parent->append( feature );
+            d->checkParenting( parent );
             endInsertRows();
             emit added(feature);
         }
         else
-            mDebug() << "GeoDataTreeModel::addFeature (parent " << parent << " - feature" << feature << ") : parent not found on the TreeModel";
+            qWarning() << "GeoDataTreeModel::addFeature (parent " << parent << " - feature" << feature << ") : parent not found on the TreeModel";
     }
     else
-        mDebug() << "Null pointer in call to GeoDataTreeModel::addFeature (parent " << parent << " - feature" << feature << ")";
+        qWarning() << "Null pointer in call to GeoDataTreeModel::addFeature (parent " << parent << " - feature" << feature << ")";
     return row; //-1 if it failed, the relative index otherwise.
 }
 
@@ -555,7 +573,9 @@ bool GeoDataTreeModel::removeFeature( GeoDataContainer *parent, int row )
 {
     if ( row<parent->size() ) {
         beginRemoveRows( index( parent ), row , row );
+        GeoDataFeature *feature = parent->child( row );
         parent->remove( row );
+        emit removed(feature);
         endRemoveRows();
         return true;
     }
@@ -576,12 +596,7 @@ bool GeoDataTreeModel::removeFeature( GeoDataFeature *feature )
 
             int row = static_cast< GeoDataContainer* >( feature->parent() )->childPosition( feature );
             if ( row != -1 ) {
-                if ( removeFeature( static_cast< GeoDataContainer* >( feature->parent() ) , row ) ) {
-                    emit removed(feature);
-                    return true;
-                }
-                else
-                    return false;
+                return removeFeature( static_cast< GeoDataContainer* >( feature->parent() ) , row );
             }
             else
                 return false; //The feature is not contained in the parent it points to

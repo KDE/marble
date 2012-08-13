@@ -34,7 +34,7 @@ class MarbleModel;
 class LayerInterface;
 
 /**
- * @short The class that handles Marble's DGML layers.
+ * @short Handles rendering of all active layers in the correct order
  *
  */
 
@@ -81,6 +81,8 @@ class LayerManager : public QObject
      */
     void removeLayer(LayerInterface *layer);
 
+    QList<LayerInterface *> internalLayers() const;
+
  Q_SIGNALS:
     /**
      * @brief Signal that a render item has been initialized
@@ -103,6 +105,8 @@ class LayerManager : public QObject
 
  public Q_SLOTS:
     void setShowBackground( bool show );
+
+    void setShowRuntimeTrace( bool show );
 
     void setVisible( const QString &nameId, bool visible );
 

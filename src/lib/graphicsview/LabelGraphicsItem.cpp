@@ -12,14 +12,11 @@
 #include "LabelGraphicsItem.h"
 #include "LabelGraphicsItem_p.h"
 
-// Marble
-#include "GeoPainter.h"
-
 // Qt
-#include <QtGui/QApplication>
-#include "MarbleDebug.h"
-#include <QtGui/QFont>
 #include <QtCore/QString>
+#include <QtGui/QApplication>
+#include <QtGui/QFont>
+#include <QtGui/QPainter>
 
 using namespace Marble;
 
@@ -34,23 +31,23 @@ QFont LabelGraphicsItemPrivate::font() const
     return QApplication::font();
 }
 
-void LabelGraphicsItemPrivate::updateSize()
+void LabelGraphicsItem::setContentSize( const QSizeF &contentSize )
 {
-    QSizeF updatedSize = m_calculatedSize;
+    QSizeF updatedSize = contentSize;
     if ( updatedSize.isEmpty() ) {
         updatedSize.setHeight( 0 );
         updatedSize.setWidth( 0 );
     }
     else {
-        if ( m_minimumSize.width() > updatedSize.width() ) {
-            updatedSize.setWidth( m_minimumSize.width() );
+        if ( d->m_minimumSize.width() > updatedSize.width() ) {
+            updatedSize.setWidth( d->m_minimumSize.width() );
         }
-        if ( m_minimumSize.height() > updatedSize.height() ) {
-            updatedSize.setHeight( m_minimumSize.height() );
+        if ( d->m_minimumSize.height() > updatedSize.height() ) {
+            updatedSize.setHeight( d->m_minimumSize.height() );
         }
     }
 
-    m_parent->setContentSize( updatedSize );
+    FrameGraphicsItem::setContentSize( updatedSize );
 }
 
 // ----------------------------------------------------------------
@@ -77,10 +74,7 @@ void LabelGraphicsItem::setText( const QString& text )
     d->m_text = text;
     QFontMetrics metrics( d->font() );
     QSizeF size = metrics.boundingRect( text ).size() + QSizeF( 14, 2 );
-    d->m_calculatedSize = size;
-    d->updateSize();
-
-    update();
+    setContentSize( size );
 }
 
 QImage LabelGraphicsItem::image() const
@@ -93,14 +87,11 @@ void LabelGraphicsItem::setImage( const QImage& image, const QSize& size )
     clear();
     d->m_image = image;
     if ( size.isEmpty() ) {
-        d->m_calculatedSize = image.size();
+        setContentSize( image.size() );
     }
     else {
-        d->m_calculatedSize = size;
+        setContentSize( size );
     }
-    d->updateSize();
-
-    update();
 }
 
 QIcon LabelGraphicsItem::icon() const
@@ -112,10 +103,7 @@ void LabelGraphicsItem::setIcon( const QIcon& icon, const QSize& size )
 {
     clear();
     d->m_icon = icon;
-    d->m_calculatedSize = size;
-    d->updateSize();
-
-    update();
+    setContentSize( size );
 }
 
 QSizeF LabelGraphicsItem::minimumSize() const
@@ -125,10 +113,9 @@ QSizeF LabelGraphicsItem::minimumSize() const
 
 void LabelGraphicsItem::setMinimumSize( const QSizeF& size )
 {
+    const QSizeF oldContentSize = contentSize();
     d->m_minimumSize = size;
-    d->updateSize();
-
-    update();
+    setContentSize( oldContentSize );
 }
 
 void LabelGraphicsItem::clear()
@@ -136,19 +123,11 @@ void LabelGraphicsItem::clear()
     d->m_text.clear();
     d->m_image = QImage();
     d->m_icon = QIcon();
-    d->m_calculatedSize = QSizeF( 0.0, 0.0 );
-    d->updateSize();
-
-    update();
+    setContentSize( QSizeF( 0.0, 0.0 ) );
 }
 
-void LabelGraphicsItem::paintContent( GeoPainter *painter, ViewportParams *viewport,
-                              const QString& renderPos, GeoSceneLayer * layer = 0 )
+void LabelGraphicsItem::paintContent( QPainter *painter )
 {
-    Q_UNUSED( viewport )
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
-
     painter->save();
 
     if ( !d->m_text.isNull() ) {

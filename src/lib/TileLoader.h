@@ -35,6 +35,7 @@ namespace Marble
 {
 class HttpDownloadManager;
 class GeoSceneTiled;
+class GeoSceneTexture;
 
 class TileLoader: public QObject
 {
@@ -53,8 +54,7 @@ class TileLoader: public QObject
 
     QImage loadTileImage( TileId const & tileId, DownloadUsage const );
     GeoDataDocument* loadTileVectorData( TileId const & tileId, DownloadUsage const usage, QString const &format );
-    void reloadTile( TileId const &tileId, DownloadUsage const );
-    void downloadTile( TileId const & tileId );
+    void downloadTile( TileId const & tileId, DownloadUsage const );
 
     static int maximumTileLevel( GeoSceneTiled const & texture );
 
@@ -70,7 +70,7 @@ class TileLoader: public QObject
       * - Expired when it has been downloaded, but is too old (as per .dgml expiration time)
       * - Available when it has been downloaded and is not expired
       */
-    TileStatus tileStatus( const TileId &tileId ) const;
+    static TileStatus tileStatus( GeoSceneTiled const *textureLayer, const TileId &tileId );
 
  public Q_SLOTS:
     void updateTile( QByteArray const & imageData, QString const & tileId );

@@ -13,7 +13,7 @@
 
 #include "AbstractDataPluginItem.h"
 
-class QFont;
+#include <QtGui/QFont>
 
 namespace Marble
 {
@@ -31,8 +31,7 @@ class PostalCodeItem : public AbstractDataPluginItem
 
     bool initialized();
 
-    void paint( GeoPainter *painter, ViewportParams *viewport,
-                const QString& renderPos, GeoSceneLayer * layer = 0 );
+    void paint( QPainter *painter );
 
     bool operator<( const AbstractDataPluginItem *other ) const;
 
@@ -43,8 +42,8 @@ class PostalCodeItem : public AbstractDataPluginItem
  private:
     QString m_text;
 
-    static QFont s_font;
-    static int s_labelOutlineWidth;
+    static const QFont s_font;
+    static const int s_labelOutlineWidth;
 };
 
 }

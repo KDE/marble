@@ -11,12 +11,15 @@
 #ifndef MARBLE_GEOPOLYGONGRAPHICSITEM_H
 #define MARBLE_GEOPOLYGONGRAPHICSITEM_H
 
-#include "GeoDataPolygon.h"
 #include "GeoGraphicsItem.h"
 #include "marble_export.h"
 
 namespace Marble
 {
+
+class GeoDataLinearRing;
+class GeoDataPolygon;
+
 class MARBLE_EXPORT GeoPolygonGraphicsItem : public GeoGraphicsItem
 {
 public:
@@ -27,9 +30,8 @@ public:
     void setLinearRing( const GeoDataLinearRing* ring );
 
     virtual GeoDataCoordinates coordinate() const;
-    virtual void coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const;
 
-    virtual GeoDataLatLonAltBox latLonAltBox() const;
+    virtual GeoDataLatLonAltBox& latLonAltBox() const;
 
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );

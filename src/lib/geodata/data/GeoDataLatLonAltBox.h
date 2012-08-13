@@ -66,6 +66,7 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     virtual ~GeoDataLatLonAltBox();
 
     GeoDataLatLonAltBox& operator=( const GeoDataLatLonAltBox& other );
+    GeoDataLatLonAltBox& operator=( const GeoDataCoordinates& other );
 
     /// Provides type information for downcasting a GeoData
     virtual const char* nodeType() const;
@@ -124,6 +125,11 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
      * @return Return value is true if the height and the width of the bounding box equal zero.
      */
     bool isNull() const;
+
+    /**
+     * @brief Resets the bounding box to its uninitialised state (and thus contains nothing).
+     */
+    virtual void clear();
 
     /**
      * @brief returns the center of this box

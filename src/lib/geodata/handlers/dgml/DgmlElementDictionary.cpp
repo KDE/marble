@@ -59,7 +59,6 @@ const char* dgmlTag_Minimum = "minimum";
 const char* dgmlTag_Name = "name";
 const char* dgmlTag_Palette = "palette";
 const char* dgmlTag_Pen = "pen";
-const char* dgmlTag_Pick = "pick";
 const char* dgmlTag_Projection = "projection";
 const char* dgmlTag_Property = "property";
 const char* dgmlTag_Section = "section";

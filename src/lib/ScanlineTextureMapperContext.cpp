@@ -407,7 +407,7 @@ int ScanlineTextureMapperContext::interpolationStep( const ViewportParams *viewp
         return 1;    // Don't interpolate for print quality.
     }
 
-    if ( ! viewport->globeCoversViewport() ) {
+    if ( ! viewport->mapCoversViewport() ) {
         return 8;
     }
 

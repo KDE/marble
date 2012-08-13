@@ -1043,6 +1043,11 @@ void MarbleWidget::setShowBackground( bool visible )
     update();
 }
 
+void MarbleWidget::setShowRuntimeTrace( bool visible )
+{
+    d->m_map.setShowRuntimeTrace( visible );
+}
+
 void MarbleWidget::setShowTileId( bool visible )
 {
     d->m_map.setShowTileId( visible );

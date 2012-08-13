@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 //
@@ -17,8 +18,6 @@
 #define MARBLE_PLACEMARKLAYOUT_H
 
 
-#include "LayerInterface.h"
-
 #include <QtCore/QHash>
 #include <QtCore/QModelIndex>
 #include <QtCore/QRect>
@@ -26,7 +25,6 @@
 #include <QtGui/QSortFilterProxyModel>
 
 #include "GeoDataFeature.h"
-#include "PlacemarkPainter.h"
 
 class QAbstractItemModel;
 class QItemSelectionModel;
@@ -40,7 +38,6 @@ class GeoDataCoordinates;
 class GeoDataPlacemark;
 class GeoDataStyle;
 class GeoPainter;
-class GeoSceneLayer;
 class MarbleClock;
 class PlacemarkPainter;
 class TileId;
@@ -53,7 +50,7 @@ class ViewportParams;
 
 
 
-class PlacemarkLayout : public QObject, public LayerInterface
+class PlacemarkLayout : public QObject
 {
     Q_OBJECT
 
@@ -74,37 +71,14 @@ class PlacemarkLayout : public QObject, public LayerInterface
     /**
      * @reimp
      */
-    virtual QStringList renderPosition() const;
-
-    /**
-     * @reimp
-     */
-    virtual qreal zValue() const;
-
-    /**
-     * @reimp
-     */
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString& renderPos = "HOVERS_ABOVE_SURFACE", GeoSceneLayer * layer = 0 );
-
-    void setDefaultLabelColor( const QColor &color );
-
-    /**
-     * Returns a the maximum height of all possible labels.
-     * WARNING: This is a really slow method as it traverses all placemarks
-     * to check the labelheight.
-     * FIXME: Once a StyleManager that manages all styles has been implemented
-     * just traverse all existing styles. 
-     */
-
-    int maxLabelHeight() const;
-
-    TileId placemarkToTileId( const GeoDataCoordinates& coords, int popularity ) const;
+    QVector<VisiblePlacemark *> generateLayout( const ViewportParams *viewport );
 
     /**
      * Returns a list of model indexes that are at position @p pos.
      */
     QVector<const GeoDataPlacemark*> whichPlacemarkAt( const QPoint &pos );
+
+    QString runtimeTrace() const;
 
  public Q_SLOTS:
     // earth
@@ -125,9 +99,18 @@ class PlacemarkLayout : public QObject, public LayerInterface
     void repaintNeeded();
 
  private:
+    /**
+     * Returns a the maximum height of all possible labels.
+     * WARNING: This is a really slow method as it traverses all placemarks
+     * to check the labelheight.
+     * FIXME: Once a StyleManager that manages all styles has been implemented
+     * just traverse all existing styles.
+     */
+    int maxLabelHeight() const;
+
     void styleReset();
 
-    QList<const GeoDataPlacemark*> visiblePlacemarks( ViewportParams *viewport );
+    QList<const GeoDataPlacemark*> visiblePlacemarks( const ViewportParams *viewport );
     bool layoutPlacemark( const GeoDataPlacemark *placemark, qreal x, qreal y, bool selected );
 
     /**
@@ -149,9 +132,8 @@ class PlacemarkLayout : public QObject, public LayerInterface
     QItemSelectionModel *const m_selectionModel;
     MarbleClock *const m_clock;
 
-    PlacemarkPainter m_placemarkPainter;
-
     QVector<VisiblePlacemark*> m_paintOrder;
+    QString m_runtimeTrace;
     int m_labelArea;
     QHash<const GeoDataPlacemark*, VisiblePlacemark*> m_visiblePlacemarks;
     QVector< QVector< VisiblePlacemark* > >  m_rowsection;
@@ -159,8 +141,7 @@ class PlacemarkLayout : public QObject, public LayerInterface
     /// map providing the list of placemark belonging in TileId as key
     QMap<TileId, QList<const GeoDataPlacemark*> > m_placemarkCache;
 
-    QVector< int > m_weightfilter;
-    QVector< GeoDataFeature::GeoDataVisualCategory > m_acceptedVisualCategories;
+    const QVector< GeoDataFeature::GeoDataVisualCategory > m_acceptedVisualCategories;
 
     // earth
     bool m_showPlaces;

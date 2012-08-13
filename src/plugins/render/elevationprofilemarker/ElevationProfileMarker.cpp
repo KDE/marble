@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright      2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 // Copyright 2011-2012 Florian Eßer <f.esser@rwth-aachen.de>
 //
 
@@ -34,12 +34,12 @@ ElevationProfileMarker::ElevationProfileMarker( const MarbleModel *marbleModel )
         : RenderPlugin( marbleModel ),
         m_fontHeight( 10 ),
         m_markerPlacemark( 0 ),
-        m_markerIconContainer(),
-        m_markerTextContainer(),
-        m_markerIcon( &m_markerIconContainer ),
-        m_markerText( &m_markerTextContainer )
+        m_markerItem(),
+        m_markerIcon( &m_markerItem ),
+        m_markerText( &m_markerItem )
 {
     setVisible( false );
+    m_markerItem.setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
 
     connect( const_cast<MarbleModel *>( marbleModel )->treeModel(), SIGNAL( added( GeoDataObject * ) ),
              this, SLOT( onGeoObjectAdded( GeoDataObject * ) ) );
@@ -117,16 +117,13 @@ void ElevationProfileMarker::initialize()
 {
     m_markerIcon.setImage( QImage( ":/flag-red-mirrored.png" ) );
 
-    MarbleGraphicsGridLayout *topLayout1 = new MarbleGraphicsGridLayout( 1, 1 );
-    m_markerIconContainer.setLayout( topLayout1 );
-    topLayout1->addItem( &m_markerIcon, 0, 0 );
+    MarbleGraphicsGridLayout *topLayout = new MarbleGraphicsGridLayout( 1, 2 );
+    m_markerItem.setLayout( topLayout );
+    topLayout->addItem( &m_markerIcon, 0, 0 );
 
-    MarbleGraphicsGridLayout *topLayout2 = new MarbleGraphicsGridLayout( 1, 1 );
-    m_markerTextContainer.setLayout( topLayout2 );
     m_markerText.setFrame( LabelGraphicsItem::RoundedRectFrame );
     m_markerText.setPadding( 1 );
-    topLayout2->setAlignment( Qt::AlignCenter );
-    topLayout2->addItem( &m_markerText, 0, 0 );
+    topLayout->addItem( &m_markerText, 0, 1 );
 }
 
 bool ElevationProfileMarker::isInitialized() const
@@ -136,9 +133,8 @@ bool ElevationProfileMarker::isInitialized() const
 
 bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewport, const QString& renderPos, GeoSceneLayer* layer )
 {
-    if ( renderPos != "HOVERS_ABOVE_SURFACE" ) {
-        return false;
-    }
+    Q_UNUSED( renderPos )
+    Q_UNUSED( layer )
 
     if ( !m_markerPlacemark )
         return true;
@@ -147,25 +143,6 @@ bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewpo
         m_currentPosition = m_markerPlacemark->coordinate();
 
         if ( m_currentPosition.isValid() ) {
-            qreal x;
-            qreal y;
-            qreal lon;
-            qreal lat;
-            // move the icon by some pixels, so that the pole of the flag sits at the exact point
-            int dx = -4;
-            int dy = -6;
-            viewport->screenCoordinates( m_currentPosition.longitude( GeoDataCoordinates::Radian ),
-                                         m_currentPosition.latitude ( GeoDataCoordinates::Radian ),
-                                         x, y );
-            viewport->geoCoordinates( x + dx, y + dy, lon, lat, GeoDataCoordinates::Radian );
-            m_markerIconContainer.setCoordinate( GeoDataCoordinates( lon, lat, m_currentPosition.altitude(),
-                                                                GeoDataCoordinates::Radian ) );
-            // move the text label, so that it sits next to the flag with a small spacing
-            dx += m_markerIconContainer.size().width() / 2 + m_markerTextContainer.size().width() / 2 + 2;
-            viewport->geoCoordinates( x + dx, y + dy, lon, lat, Marble::GeoDataCoordinates::Radian );
-            m_markerTextContainer.setCoordinate( GeoDataCoordinates( lon, lat, m_currentPosition.altitude(),
-                                                                Marble::GeoDataCoordinates::Radian ) );
-
             QString unitString = tr( "m" );
             int displayScale = 1.0;
             const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
@@ -187,10 +164,23 @@ bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewpo
     }
 
     if ( m_currentPosition.isValid() ) {
+        qreal x;
+        qreal y;
+        qreal lon;
+        qreal lat;
+        // move the icon by some pixels, so that the pole of the flag sits at the exact point
+        int dx = +3 + m_markerItem.size().width() / 2 - m_markerIcon.contentRect().right();//-4;
+        int dy = -6;
+        viewport->screenCoordinates( m_currentPosition.longitude( GeoDataCoordinates::Radian ),
+                                     m_currentPosition.latitude ( GeoDataCoordinates::Radian ),
+                                     x, y );
+        viewport->geoCoordinates( x + dx, y + dy, lon, lat, GeoDataCoordinates::Radian );
+        m_markerItem.setCoordinate( GeoDataCoordinates( lon, lat, m_currentPosition.altitude(),
+                                                            GeoDataCoordinates::Radian ) );
+
         painter->save();
 
-        m_markerIconContainer.paintEvent( painter, viewport, renderPos, layer );
-        m_markerTextContainer.paintEvent( painter, viewport, renderPos, layer );
+        m_markerItem.paintEvent( painter, viewport );
 
         painter->restore();
     }

@@ -13,6 +13,7 @@
 
 #include "GeoDataPoint.h"
 #include "GeoGraphicsItem.h"
+#include "GeoDataLatLonAltBox.h"
 #include "marble_export.h"
 
 namespace Marble
@@ -28,6 +29,9 @@ public:
     
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );
+
+    virtual GeoDataLatLonAltBox& latLonAltBox() const;
+
 protected:
     GeoDataPoint    m_point;
 };

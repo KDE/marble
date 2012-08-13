@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
+// Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "PlacemarkLayout.h"
@@ -17,16 +18,17 @@
 #include <QtCore/QVector>
 #include <QtCore/QVectorIterator>
 #include <QtGui/QFont>
+#include <QtGui/QFontMetrics>
 #include <QtGui/QItemSelectionModel>
+#include <QtCore/qmath.h>
 
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
-#include "GeoPainter.h"
 
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
-#include "PlacemarkPainter.h"
+#include "PlacemarkLayer.h"
 #include "MarbleClock.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleDirs.h"
@@ -36,93 +38,14 @@
 #include "VisiblePlacemark.h"
 #include "MathHelper.h"
 
-using namespace Marble;
-
-PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
-                                  QItemSelectionModel *selectionModel,
-                                  MarbleClock *clock,
-                                  QObject* parent )
-    : QObject( parent ),
-      m_selectionModel( selectionModel ),
-      m_clock( clock ),
-      m_placemarkPainter( 0 ),
-      m_showPlaces( true ),
-      m_maxLabelHeight( 0 ),
-      m_styleResetRequested( true )
+namespace Marble
 {
-    m_placemarkModel.setSourceModel( placemarkModel );
-    m_placemarkModel.setDynamicSortFilter( true );
-    m_placemarkModel.setSortRole( MarblePlacemarkModel::PopularityIndexRole );
-    m_placemarkModel.sort( 0, Qt::DescendingOrder );
 
-    connect( m_selectionModel,  SIGNAL( selectionChanged( QItemSelection,
-                                                           QItemSelection) ),
-             this,               SLOT( requestStyleReset() ) );
+QVector<GeoDataFeature::GeoDataVisualCategory> sortedVisualCategories()
+{
+    QVector<GeoDataFeature::GeoDataVisualCategory> visualCategories;
 
-    connect( &m_placemarkModel, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
-             this, SLOT( setCacheData() ) );
-    connect( &m_placemarkModel, SIGNAL( rowsInserted(const QModelIndex&, int, int) ),
-             this, SLOT( setCacheData() ) );
-    connect( &m_placemarkModel, SIGNAL( rowsRemoved(const QModelIndex&, int, int) ),
-             this, SLOT( setCacheData() ) );
-    connect( &m_placemarkModel, SIGNAL( modelReset() ),
-             this, SLOT( setCacheData() ) );
-
-//  Old weightfilter array. Still here
-// to be able to compare performance
-/*
-    m_weightfilter
-        << 9999
-        << 4200
-        << 3900
-        << 3600
-
-        << 3300
-        << 3000
-        << 2700
-        << 2400
-
-        << 2100
-        << 1800
-        << 1500
-        << 1200
-
-        << 900
-        << 400
-        << 200
-        << 0;
-*/
-
-// lower radius limit, level
-    m_weightfilter  
-        << 49300    // 0
-        << 40300    // 1
-        << 32300    // 2
-        << 25300    // 3
-
-        << 19300    // 4
-        << 14300    // 5
-        << 10300    // 6
-        << 7300     // 7
-
-        << 5300     // 8
-        << 3300     // 9
-        << 2400     // 10
-        << 1800     // 11
-
-        << 1200     // 12
-        << 800      // 13
-        << 300      // 14
-        << 250      // 15
-
-        << 200      // 16
-        << 150      // 17
-        << 100      // 18
-        << 50       // 19
-
-        << 0;       // 20
-        
-    m_acceptedVisualCategories
+    visualCategories
         << GeoDataFeature::SmallCity
         << GeoDataFeature::SmallCountyCapital  
         << GeoDataFeature::SmallStateCapital   
@@ -204,18 +127,52 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
         << GeoDataFeature::ReligionShinto
         << GeoDataFeature::ReligionSikh;
 
-    qSort( m_acceptedVisualCategories.begin(), m_acceptedVisualCategories.end() );
+    qSort( visualCategories );
 
+    return visualCategories;
+}
+
+
+PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
+                                  QItemSelectionModel *selectionModel,
+                                  MarbleClock *clock,
+                                  QObject* parent )
+    : QObject( parent ),
+      m_selectionModel( selectionModel ),
+      m_clock( clock ),
+      m_acceptedVisualCategories( sortedVisualCategories() ),
+      m_showPlaces( false ),
+      m_showCities( false ),
+      m_showTerrain( false ),
+      m_showOtherPlaces( false ),
+      m_showLandingSites( false ),
+      m_showCraters( false ),
+      m_showMaria( false ),
+      m_maxLabelHeight( 0 ),
+      m_styleResetRequested( true )
+{
+    m_placemarkModel.setSourceModel( placemarkModel );
+    m_placemarkModel.setDynamicSortFilter( true );
+    m_placemarkModel.setSortRole( MarblePlacemarkModel::PopularityIndexRole );
+    m_placemarkModel.sort( 0, Qt::AscendingOrder );
+
+    connect( m_selectionModel,  SIGNAL( selectionChanged( QItemSelection,
+                                                           QItemSelection) ),
+             this,               SLOT( requestStyleReset() ) );
+
+    connect( &m_placemarkModel, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
+             this, SLOT( setCacheData() ) );
+    connect( &m_placemarkModel, SIGNAL( rowsInserted(const QModelIndex&, int, int) ),
+             this, SLOT( setCacheData() ) );
+    connect( &m_placemarkModel, SIGNAL( rowsRemoved(const QModelIndex&, int, int) ),
+             this, SLOT( setCacheData() ) );
+    connect( &m_placemarkModel, SIGNAL( modelReset() ),
+             this, SLOT( setCacheData() ) );
 }
 
 PlacemarkLayout::~PlacemarkLayout()
 {
     styleReset();
-}
-
-void PlacemarkLayout::setDefaultLabelColor( const QColor &color )
-{
-    m_placemarkPainter.setDefaultLabelColor( color );
 }
 
 void PlacemarkLayout::setShowPlaces( bool show )
@@ -307,40 +264,6 @@ int PlacemarkLayout::maxLabelHeight() const
     return maxLabelHeight;
 }
 
-/// Calculate a "TileId" from a Placemark containing coordinates and popularity
-// The popularity will lead to a tile level, i.e. popularity 1 (most popular)
-// goes to topmost tile level.
-// Then for a given popularity, calculate which tile matches the coordinates
-// In the tiling, every level has 4 times more tiles than previous level
-// In the end, one placemark belongs to one Tile only.
-TileId PlacemarkLayout::placemarkToTileId( const GeoDataCoordinates& coords, int popularity ) const
-{
-    if ( popularity < 0 ) {
-        return TileId();
-    }
-    int maxLat = 90000000;
-    int maxLon = 180000000;
-    int lat = coords.latitude( GeoDataCoordinates::Degree ) * 1000000;
-    int lon = coords.longitude( GeoDataCoordinates::Degree ) * 1000000;
-    int deltaLat, deltaLon;
-    int x = 0;
-    int y = 0;
-    for( int i=0; i<popularity; ++i ) {
-        deltaLat = maxLat >> i;
-        if( lat < ( maxLat - deltaLat )) {
-            y += 1<<(popularity-i-1);
-            lat += deltaLat;
-        }
-        deltaLon = maxLon >> i;
-        if( lon >= ( maxLon - deltaLon )) {
-            x += 1<<(popularity-i-1);
-        } else {
-            lon += deltaLon;
-        }
-    }
-    return TileId("Placemark", popularity, x, y);
-}
-
 /// feed an internal QMap of placemarks with TileId as key when model changes
 void PlacemarkLayout::setCacheData()
 {
@@ -365,31 +288,17 @@ void PlacemarkLayout::setCacheData()
             continue;
         }
 
-        int popularity = (20 - placemark->popularityIndex())/2;
-        TileId key = placemarkToTileId( coordinates, popularity );
+        int zoomLevel = placemark->zoomLevel();
+        TileId key = TileId::fromCoordinates( coordinates, zoomLevel );
         m_placemarkCache[key].append( placemark );
     }
     emit repaintNeeded();
 }
 
-QStringList PlacemarkLayout::renderPosition() const
-{
-    return QStringList() << "HOVERS_ABOVE_SURFACE";
-}
-
-qreal PlacemarkLayout::zValue() const
-{
-    return 2.0;
-}
-
 /// determine the set of placemarks that fit the viewport based on a pyramid of TileIds
-QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( ViewportParams *viewport )
+QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const ViewportParams *viewport )
 {
-    int popularity = 0;
-    while ( m_weightfilter.at( popularity ) > viewport->radius() ) {
-        ++popularity;
-    }
-    popularity = (20 - popularity)/2;
+    int zoomLevel = qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 );
 
     /**
      * rely on m_placemarkCache to find the placemarks for the tiles which
@@ -403,15 +312,15 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( ViewportParam
     viewport->viewLatLonAltBox().boundaries(north, south, east, west);
     TileId key;
 
-    key = placemarkToTileId( GeoDataCoordinates(west, north, 0), popularity);
+    key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel);
     rect.setLeft( key.x() );
     rect.setTop( key.y() );
 
-    key = placemarkToTileId( GeoDataCoordinates(east, south, 0), popularity);
+    key = TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel);
     rect.setRight( key.x() );
     rect.setBottom( key.y() );
 
-    TileCoordsPyramid pyramid(0, popularity );
+    TileCoordsPyramid pyramid(0, zoomLevel );
     pyramid.setBottomLevelCoords( rect );
 
     QList<const GeoDataPlacemark*> placemarkList;
@@ -422,7 +331,7 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( ViewportParam
         if ( x1 <= x2 ) { // normal case, rect does not cross dateline
             for ( int x = x1; x <= x2; ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
-                    TileId const tileId( "Placemark", level, x, y );
+                    TileId const tileId( "", level, x, y );
                     placemarkList += m_placemarkCache.value(tileId);
                 }
             }
@@ -430,14 +339,14 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( ViewportParam
             // go till max tile
             for ( int x = x1; x <= ((2 << (level-1))-1); ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
-                    TileId const tileId( "Placemark", level, x, y );
+                    TileId const tileId( "", level, x, y );
                     placemarkList += m_placemarkCache.value(tileId);
                 }
             }
             // start from min tile
             for ( int x = 0; x <= x2; ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
-                    TileId const tileId( "Placemark", level, x, y );
+                    TileId const tileId( "", level, x, y );
                     placemarkList += m_placemarkCache.value(tileId);
                 }
             }
@@ -446,27 +355,22 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( ViewportParam
     return placemarkList;
 }
 
-bool PlacemarkLayout::render( GeoPainter *painter,
-                              ViewportParams *viewport,
-                              const QString &renderPos,
-                              GeoSceneLayer *layer )
+QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParams *viewport )
 {
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
-
+    m_runtimeTrace.clear();
     if ( !m_showPlaces && !m_showCities && !m_showTerrain && !m_showOtherPlaces &&
          !m_showLandingSites && !m_showCraters && !m_showMaria )
-        return true;
+        return QVector<VisiblePlacemark *>();
 
     if ( m_placemarkModel.rowCount() <= 0 )
-        return true;
+        return QVector<VisiblePlacemark *>();
 
     if ( m_styleResetRequested ) {
         styleReset();
     }
 
     if ( m_maxLabelHeight == 0 ) {
-        return true;
+        return QVector<VisiblePlacemark *>();
     }
 
     const int secnumber = viewport->height() / m_maxLabelHeight + 1;
@@ -475,12 +379,6 @@ bool PlacemarkLayout::render( GeoPainter *painter,
 
     m_paintOrder.clear();
     m_labelArea = 0;
-
-    int labelnum = 0;
-    int outsideBox = 0;
-    int missedRendering = 0;
-    qreal x = 0;
-    qreal y = 0;
 
     /**
      * First handle the selected placemarks, as they have the highest priority.
@@ -499,6 +397,9 @@ bool PlacemarkLayout::render( GeoPainter *painter,
             continue;
         }
 
+        qreal x = 0;
+        qreal y = 0;
+
         if ( !viewport->viewLatLonAltBox().contains( coordinates ) ||
              ! viewport->screenCoordinates( coordinates, x, y ))
             {
@@ -509,11 +410,8 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         if( layoutPlacemark( placemark, x, y, true) ) {
             // Make sure not to draw more placemarks on the screen than
             // specified by placemarksOnScreenLimit().
-            ++labelnum;
             if ( placemarksOnScreenLimit( viewport->size() ) )
                 break;
-        } else {
-            ++missedRendering;
         }
 
     }
@@ -525,9 +423,7 @@ bool PlacemarkLayout::render( GeoPainter *painter,
 
     QList<const GeoDataPlacemark*> placemarkList = visiblePlacemarks( viewport );
     const int rowCount = placemarkList.count();
-    int i;
-    for ( i = 0; i != rowCount; ++i )
-    {
+    for ( int i = 0; i != rowCount; ++i ) {
         const GeoDataPlacemark *placemark = placemarkList.at(i);
 
         bool ok;
@@ -536,19 +432,16 @@ bool PlacemarkLayout::render( GeoPainter *painter,
             continue;
         }
 
-        int popularityIndex = placemark->popularityIndex();
-        if ( popularityIndex < 1 ) {
+        int zoomLevel = placemark->zoomLevel();
+        if ( zoomLevel > 18 ) {
             break;
         }
 
-        // Skip the places that are too small.
-        if ( m_weightfilter.at( popularityIndex ) > viewport->radius() ) {
-            break;
-        }
+        qreal x = 0;
+        qreal y = 0;
 
         if ( !viewport->viewLatLonAltBox().contains( coordinates ) ||
              ! viewport->screenCoordinates( coordinates, x, y )) {
-                ++outsideBox;
                 delete m_visiblePlacemarks.take( placemark );
                 continue;
             }
@@ -557,39 +450,45 @@ bool PlacemarkLayout::render( GeoPainter *painter,
             continue;
         }
 
-        const int visualCategory  = placemark->visualCategory();
+        const GeoDataFeature::GeoDataVisualCategory visualCategory = placemark->visualCategory();
 
         // Skip city marks if we're not showing cities.
         if ( !m_showCities
-             && ( visualCategory > 2 && visualCategory < 20 ) )
+             && visualCategory >= GeoDataFeature::SmallCity
+             && visualCategory <= GeoDataFeature::Nation )
             continue;
 
         // Skip terrain marks if we're not showing terrain.
         if ( !m_showTerrain
-             && (    visualCategory >= (int)(GeoDataFeature::Mountain) ) 
-                  && visualCategory <= (int)(GeoDataFeature::OtherTerrain) )
+             && visualCategory >= GeoDataFeature::Mountain
+             && visualCategory <= GeoDataFeature::OtherTerrain )
             continue;
 
         // Skip other places if we're not showing other places.
         if ( !m_showOtherPlaces
-             && (    visualCategory >= (int)(GeoDataFeature::GeographicPole) ) 
-                  && visualCategory <= (int)(GeoDataFeature::Observatory) )
+             && visualCategory >= GeoDataFeature::GeographicPole
+             && visualCategory <= GeoDataFeature::Observatory )
             continue;
 
         // Skip landing sites if we're not showing landing sites.
         if ( !m_showLandingSites
-             && (    visualCategory >= (int)(GeoDataFeature::MannedLandingSite) ) 
-                  && visualCategory <= (int)(GeoDataFeature::UnmannedHardLandingSite) )
+             && visualCategory >= GeoDataFeature::MannedLandingSite
+             && visualCategory <= GeoDataFeature::UnmannedHardLandingSite )
             continue;
 
         // Skip craters if we're not showing craters.
         if ( !m_showCraters
-             && (    visualCategory == (int)(GeoDataFeature::Crater) ) )
+             && visualCategory == GeoDataFeature::Crater )
             continue;
 
         // Skip maria if we're not showing maria.
         if ( !m_showMaria
-             && (    visualCategory == (int)(GeoDataFeature::Mare) ) )
+             && visualCategory == GeoDataFeature::Mare )
+            continue;
+
+        if ( !m_showPlaces
+             && visualCategory >= GeoDataFeature::GeographicPole
+             && visualCategory <= GeoDataFeature::Observatory )
             continue;
 
         /**
@@ -611,19 +510,19 @@ bool PlacemarkLayout::render( GeoPainter *painter,
         if( layoutPlacemark( placemark, x, y, isSelected ) ) {
             // Make sure not to draw more placemarks on the screen than
             // specified by placemarksOnScreenLimit().
-            ++labelnum;
             if ( placemarksOnScreenLimit( viewport->size() ) )
                 break;
-        } else {
-            ++missedRendering;
         }
     }
 
-    m_placemarkPainter.drawPlacemarks( painter, m_paintOrder, viewport );
-
-    return true;
+    m_runtimeTrace = QString("Visible: %1 Drawn: %2").arg( rowCount ).arg( m_paintOrder.size() );
+    return m_paintOrder;
 }
 
+QString PlacemarkLayout::runtimeTrace() const
+{
+    return m_runtimeTrace;
+}
 
 bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal x, qreal y, bool selected )
 {
@@ -650,7 +549,9 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
     // Finally save the label position on the map.
     QPointF hotSpot = style->iconStyle().hotSpot();
 
-    mark->setSelected( selected );
+    if( mark->selected() != selected ) {
+        mark->setSelected( selected );
+    }
     mark->setSymbolPosition( QPoint( x - qRound( hotSpot.x() ),
                                      y - qRound( hotSpot.y() ) ) );
     mark->setLabelRect( labelRect );
@@ -770,6 +671,8 @@ bool PlacemarkLayout::placemarksOnScreenLimit( const QSize &screenSize ) const
 {
     int ratio = ( m_labelArea * 100 ) / ( screenSize.width() * screenSize.height() );
     return ratio >= 40;
+}
+
 }
 
 #include "PlacemarkLayout.moc"

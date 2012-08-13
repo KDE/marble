@@ -16,6 +16,7 @@
 
 #include "GeoDataGeometry.h"
 
+#include "GeoDataLatLonAltBox.h"
 #include "GeoDataTypes.h"
 
 namespace Marble
@@ -67,7 +68,8 @@ class GeoDataGeometryPrivate
 
     bool         m_extrude;
     AltitudeMode m_altitudeMode;
-    
+    GeoDataLatLonAltBox m_latLonAltBox;
+
     QAtomicInt  ref;
 };
 

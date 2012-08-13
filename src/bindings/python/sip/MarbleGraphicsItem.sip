@@ -40,7 +40,7 @@ public:
 //ig                            MarbleGraphicsItem (MarbleGraphicsItemPrivate* d_ptr);
     QSizeF                  size () const;
     Marble::MarbleGraphicsItem::CacheMode  cacheMode () const;
-    void                    setCacheMode (Marble::MarbleGraphicsItem::CacheMode mode, const QSize& logicalCacheSize = QSize());
+    void                    setCacheMode (Marble::MarbleGraphicsItem::CacheMode mode);
 
 protected:
     virtual bool            eventFilter (QObject* object, QEvent* e);
@@ -92,7 +92,6 @@ private:
 public:
     qreal                   zValue () const;
     void                    setZValue (qreal z);
-    virtual void            paintViewport (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0);
 };
 // MarbleGraphicsItem
 

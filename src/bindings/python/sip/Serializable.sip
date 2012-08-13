@@ -15,7 +15,8 @@
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-
+namespace Marble
+{
 class Serializable
 {
 %TypeHeaderCode
@@ -29,6 +30,10 @@ public:
 // Serializable
 
 
+
+
+
+
 enum EnumFeatureId
 {
     InvalidFeatureId,
@@ -39,8 +44,6 @@ enum EnumFeatureId
     GeoDataScreenOverlayId,
     GeoDataGroundOverlayId
 };
-
-
 enum EnumGeometryId
 {
     InvalidGeometryId,
@@ -52,5 +55,4 @@ enum EnumGeometryId
     GeoDataModelId,
     GeoDataTrackId
 };
-
-
+};

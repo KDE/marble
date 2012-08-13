@@ -32,6 +32,7 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
 
     void operator=( const GeoDataContainerPrivate &other)
     {
+        GeoDataFeaturePrivate::operator=( other );
         qDeleteAll( m_vector );
         foreach( GeoDataFeature *feature, other.m_vector )
         {

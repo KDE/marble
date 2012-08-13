@@ -38,7 +38,7 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
     /**
      * Returns the type of the frame.
      */
-    FrameType frame();
+    FrameType frame() const;
 
     /**
      * Sets the type of the Frame. Standard is NoFrame.
@@ -96,8 +96,14 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
      */
     void setMarginRight( qreal marginRight );
 
+    /**
+     * Returns the border width of the item.
+     */
     qreal borderWidth() const;
 
+    /**
+     * Set the border width of the item.
+     */
     void setBorderWidth( qreal width );
 
     /**
@@ -110,16 +116,6 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
      * Set the padding of the item.
      */
     void setPadding( qreal width );
-
-    /**
-     * Returns the border width of the item.
-     */
-    qreal border() const;
-
-    /**
-     * Change the border width of the widget.
-     */
-    void setBorder( qreal width );
 
     /**
      * Returns the brush of the border.
@@ -151,8 +147,7 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
      */
     void setBackground( const QBrush &background );
 
-    QRectF contentRect( const QPointF& position ) const;
-    QRectF paintedRect( const QPointF& position = QPointF( 0.0, 0.0 ) ) const;
+    QRectF paintedRect() const;
 
     QRectF contentRect() const;
     QSizeF contentSize() const;
@@ -172,19 +167,17 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
     /**
      * This function won't be reimplemented in most cases.
      */
-    virtual void paint( GeoPainter *painter, ViewportParams *viewport,
-                        const QString& renderPos, GeoSceneLayer * layer = 0 );
+    virtual void paint( QPainter *painter );
 
     /**
      * Here the items paint their content.
      */
-    virtual void paintContent( GeoPainter *painter, ViewportParams *viewport,
-                               const QString& renderPos, GeoSceneLayer * layer = 0 );
+    virtual void paintContent( QPainter *painter );
 
     /**
      * Paints the background. This function won't be reimplemented in most cases.
      */
-    virtual void paintBackground( GeoPainter *painter );
+    virtual void paintBackground( QPainter *painter );
 
  private:
     Q_DISABLE_COPY( FrameGraphicsItem )

@@ -35,6 +35,7 @@ class AbstractDataPluginItemPrivate
     
     QString m_id;
     QString m_target;
+    QString m_toolTip;
     bool m_favorite;
     qreal m_addedAngularResolution;
     QHash<QString, QVariant> m_settings;
@@ -42,7 +43,7 @@ class AbstractDataPluginItemPrivate
 
 AbstractDataPluginItem::AbstractDataPluginItem( QObject *parent )
     : QObject( parent ),
-      GeoGraphicsItem(),
+      BillboardGraphicsItem(),
       d( new AbstractDataPluginItemPrivate )
 {
 }
@@ -60,6 +61,16 @@ QString AbstractDataPluginItem::target()
 void AbstractDataPluginItem::setTarget( const QString& target )
 {
     d->m_target = target;
+}
+
+QString AbstractDataPluginItem::toolTip() const
+{
+    return d->m_toolTip;
+}
+
+void AbstractDataPluginItem::setToolTip( const QString& toolTip )
+{
+    d->m_toolTip = toolTip;
 }
 
 QString AbstractDataPluginItem::id() const
@@ -103,11 +114,6 @@ void AbstractDataPluginItem::setAddedAngularResolution( qreal resolution )
 void AbstractDataPluginItem::setSettings( const QHash<QString, QVariant>& settings )
 {
     d->m_settings = settings;
-}
-
-bool AbstractDataPluginItem::isGeoProjected()
-{
-    return false;
 }
 
 QAction *AbstractDataPluginItem::action()

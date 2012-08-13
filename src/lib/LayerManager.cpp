@@ -19,6 +19,7 @@
 #include "AbstractDataPlugin.h"
 #include "AbstractDataPluginItem.h"
 #include "AbstractFloatItem.h"
+#include "GeoPainter.h"
 #include "MarbleModel.h"
 #include "PluginManager.h"
 #include "RenderPlugin.h"
@@ -45,8 +46,6 @@ class LayerManager::Private
 
     void updateVisibility( bool visible, const QString &nameId );
 
-    void renderLayer( GeoPainter *painter, ViewportParams *viewport, const QString& renderPosition  );
-
     LayerManager *const q;
 
     QList<RenderPlugin *> m_renderPlugins;
@@ -55,12 +54,15 @@ class LayerManager::Private
     QList<LayerInterface *> m_internalLayers;
 
     bool m_showBackground;
+
+    bool m_showRuntimeTrace;
 };
 
 LayerManager::Private::Private( LayerManager *parent )
     : q( parent ),
       m_renderPlugins(),
-      m_showBackground( true )
+      m_showBackground( true ),
+      m_showRuntimeTrace( false )
 {
 }
 
@@ -151,44 +153,69 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
     renderPositions << "SURFACE" << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
 
+    QStringList traceList;
     foreach( const QString& renderPosition, renderPositions ) {
-        d->renderLayer( painter, viewport, renderPosition );
-    }
-}
+        QList<LayerInterface*> layers;
 
-void LayerManager::Private::renderLayer( GeoPainter *painter, ViewportParams *viewport,
-                                const QString& renderPosition )
-{
-    QList<LayerInterface*> layers;
-
-    foreach( RenderPlugin *renderPlugin, m_renderPlugins ) {
-        if ( renderPlugin && renderPlugin->renderPosition().contains( renderPosition )  ){
-            if ( renderPlugin->enabled() && renderPlugin->visible() ) {
-                if ( !renderPlugin->isInitialized() )
-                {
-                    renderPlugin->initialize();
-                    emit q->renderPluginInitialized( renderPlugin );
+        // collect all RenderPlugins of current renderPosition
+        foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
+            if ( renderPlugin && renderPlugin->renderPosition().contains( renderPosition ) ) {
+                if ( renderPlugin->enabled() && renderPlugin->visible() ) {
+                    if ( !renderPlugin->isInitialized() ) {
+                        renderPlugin->initialize();
+                        emit renderPluginInitialized( renderPlugin );
+                    }
+                    layers.push_back( renderPlugin );
                 }
-                layers.push_back( renderPlugin );
             }
         }
-    }
 
-    foreach( LayerInterface *layer, m_internalLayers ) {
-        if ( layer && layer->renderPosition().contains( renderPosition ) ) {
-            layers.push_back( layer );
+        // collect all internal LayerInterfaces of current renderPosition
+        foreach( LayerInterface *layer, d->m_internalLayers ) {
+            if ( layer && layer->renderPosition().contains( renderPosition ) ) {
+                layers.push_back( layer );
+            }
+        }
+
+        // sort them according to their zValue()s
+        qSort( layers.begin(), layers.end(), zValueLessThan );
+
+        // render the layers of the current renderPosition
+        QTime timer;
+        foreach( LayerInterface *layer, layers ) {
+            timer.start();
+            layer->render( painter, viewport, renderPosition, 0 );
+            traceList.append( QString("%2 ms %3").arg( timer.elapsed(),3 ).arg( layer->runtimeTrace() ) );
         }
     }
 
-    qSort( layers.begin(), layers.end(), zValueLessThan );
-    foreach( LayerInterface *layer, layers ) {
-        layer->render( painter, viewport, renderPosition, 0 );
+
+    if ( d->m_showRuntimeTrace ) {
+        painter->save();
+        painter->setBackgroundMode( Qt::OpaqueMode );
+        painter->setBackground( Qt::gray );
+        painter->setFont( QFont( "Sans Serif", 10, QFont::Bold ) );
+
+        int i=0;
+        foreach ( const QString &text, traceList ) {
+            painter->setPen( Qt::black );
+            painter->drawText( QPoint(10,40+15*i), text );
+            painter->setPen( Qt::white );
+            painter->drawText( QPoint(9,39+15*i), text );
+            ++i;
+        }
+        painter->restore();
     }
 }
 
 void LayerManager::setShowBackground( bool show )
 {
     d->m_showBackground = show;
+}
+
+void LayerManager::setShowRuntimeTrace( bool show )
+{
+    d->m_showRuntimeTrace = show;
 }
 
 void LayerManager::setVisible( const QString &nameId, bool visible )
@@ -213,6 +240,11 @@ void LayerManager::addLayer(LayerInterface *layer)
 void LayerManager::removeLayer(LayerInterface *layer)
 {
     d->m_internalLayers.removeAll(layer);
+}
+
+QList<LayerInterface *> LayerManager::internalLayers() const
+{
+    return d->m_internalLayers;
 }
 
 }

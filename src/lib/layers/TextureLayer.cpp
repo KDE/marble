@@ -65,6 +65,7 @@ public:
     QVector<const GeoSceneTiled *> m_textures;
     GeoSceneGroup *m_textureLayerSettings;
 
+    QString m_runtimeTrace;
     // For scheduling repaints
     QTimer           m_repaintTimer;
 
@@ -249,8 +250,13 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
     d->m_texmapper->mapTexture( painter, viewport, dirtyRect, d->m_texcolorizer );
-
+    d->m_runtimeTrace = QString("Cache: %1 ").arg(d->m_pixmapCache.size());
     return true;
+}
+
+QString TextureLayer::runtimeTrace() const
+{
+    return d->m_runtimeTrace;
 }
 
 void TextureLayer::setShowRelief( bool show )
@@ -343,9 +349,9 @@ void TextureLayer::reload()
     d->m_tileLoader.reloadVisibleTiles();
 }
 
-void TextureLayer::downloadTile( const TileId &tileId )
+void TextureLayer::downloadStackedTile( const TileId &stackedTileId )
 {
-    d->m_tileLoader.downloadTile( tileId );
+    d->m_tileLoader.downloadStackedTile( stackedTileId );
 }
 
 void TextureLayer::setMapTheme( const QVector<const GeoSceneTiled *> &textures, GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
@@ -427,11 +433,6 @@ int TextureLayer::preferredRadiusFloor( int radius ) const
         return ( tileWidth * levelZeroColumns / 4 ) >> (-tileLevel);
 
     return ( tileWidth * levelZeroColumns / 4 ) << tileLevel;
-}
-
-bool TextureLayer::isTileAvailable( const TileId &tileId ) const
-{
-    return d->m_loader.tileStatus( tileId ) == TileLoader::Available;
 }
 
 }

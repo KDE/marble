@@ -69,13 +69,12 @@ class TextureLayer : public QObject, public LayerInterface
     int preferredRadiusCeil( int radius ) const;
     int preferredRadiusFloor( int radius ) const;
 
-    /** Returns true iff the given tile has been downloaded and is not expired */
-    bool isTileAvailable( const TileId &tileId ) const;
+    virtual QString runtimeTrace() const;
 
- public Q_SLOTS:
-    bool render( GeoPainter *painter, ViewportParams *viewport,
+    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
 
+public Q_SLOTS:
     void setShowRelief( bool show );
 
     void setShowSunShading( bool show );
@@ -100,7 +99,7 @@ class TextureLayer : public QObject, public LayerInterface
 
     void reload();
 
-    void downloadTile( const TileId &tileId );
+    void downloadStackedTile( const TileId &stackedTileId );
 
  Q_SIGNALS:
     void tileLevelChanged( int );

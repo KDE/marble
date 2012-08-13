@@ -96,6 +96,11 @@ void GeoPhotoGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
     }
 }
 
+GeoDataLatLonAltBox& GeoPhotoGraphicsItem::latLonAltBox() const
+{
+    return m_point.latLonAltBox();
+}
+
 void GeoPhotoGraphicsItem::setPoint( const GeoDataPoint &point )
 {
     m_point = point;

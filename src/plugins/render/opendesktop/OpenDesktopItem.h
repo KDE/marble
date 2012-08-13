@@ -37,7 +37,7 @@ class OpenDesktopItem : public AbstractDataPluginItem
 
         void addDownloadedFile( const QString& url, const QString& type );
         
-        void paint( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer );
+        void paint( QPainter *painter );
 
         bool operator<( const AbstractDataPluginItem *other ) const;
 

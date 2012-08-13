@@ -27,8 +27,8 @@ INCLUDE(geodata/CMakeLists.txt)
 INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 
-set(GENERIC_LIB_VERSION "0.14.0")
-set(GENERIC_LIB_SOVERSION "14")
+set(GENERIC_LIB_VERSION "0.15.0")
+set(GENERIC_LIB_SOVERSION "15")
 
 if (QTONLY)
   # ce: don't know why this is needed here - on win32 'O2' is activated by default in release mode
@@ -82,6 +82,7 @@ set(marblewidget_SRCS
     MarblePlacemarkModel.cpp
     GeoDataTreeModel.cpp
     kdescendantsproxymodel.cpp
+    BranchFilterProxyModel.cpp
     MarbleDebug.cpp
     Tile.cpp
     TextureTile.cpp
@@ -117,7 +118,7 @@ set(marblewidget_SRCS
     Projections/EquirectProjection.cpp
     Projections/MercatorProjection.cpp
     VisiblePlacemark.cpp
-    PlacemarkPainter.cpp
+    PlacemarkLayout.cpp
     PlacemarkInfoDialog.cpp
     Planet.cpp
     Quaternion.cpp

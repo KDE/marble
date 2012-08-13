@@ -378,7 +378,7 @@ void VectorTileLayer::reload()
 
 void VectorTileLayer::downloadTile( const TileId &tileId )
 {
-    d->m_tileLoader.downloadTile( tileId );
+    d->m_tileLoader.downloadStackedTile( tileId );
 }
 
 void VectorTileLayer::setMapTheme( const QVector<const GeoSceneTiled *> &textures, GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
@@ -460,11 +460,6 @@ int VectorTileLayer::preferredRadiusFloor( int radius ) const
         return ( tileWidth * levelZeroColumns / 4 ) >> (-tileLevel);
 
     return ( tileWidth * levelZeroColumns / 4 ) << tileLevel;
-}
-
-bool VectorTileLayer::isTileAvailable( const TileId &tileId ) const
-{
-    return d->m_loader.tileStatus( tileId ) == TileLoader::Available;
 }
 
 }

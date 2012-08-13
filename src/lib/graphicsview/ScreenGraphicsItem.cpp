@@ -32,14 +32,6 @@ ScreenGraphicsItem::ScreenGraphicsItem( ScreenGraphicsItemPrivate *d_ptr )
 {
 }
 
-ScreenGraphicsItem::ScreenGraphicsItem( const QPointF& position, const QSizeF& size,
-                                        ScreenGraphicsItemPrivate *d_ptr )
-    : MarbleGraphicsItem( d_ptr )
-{
-    setPosition( position );
-    setSize( size );
-}
-
 ScreenGraphicsItem::~ScreenGraphicsItem()
 {
 }
@@ -72,11 +64,6 @@ ScreenGraphicsItem::GraphicsItemFlags ScreenGraphicsItem::flags() const
 void ScreenGraphicsItem::setFlags( ScreenGraphicsItem::GraphicsItemFlags flags )
 {
     p()->m_flags = flags;
-}
-
-void ScreenGraphicsItem::changeViewport( ViewportParams *viewport )
-{
-    Q_UNUSED( viewport );
 }
 
 bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
@@ -118,7 +105,6 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
     }
     else {
         // Move ScreenGraphicsItem
-        bool cursorAboveFloatItem = false;
         if ( e->type() == QEvent::MouseMove
             || e->type() == QEvent::MouseButtonPress
             || e->type() == QEvent::MouseButtonRelease )
@@ -129,24 +115,12 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
             QRectF floatItemRect = QRectF( positivePosition() - QPoint( 1, 1 ),
                                            size() + QSize( 2, 2 ) );
 
-            // Click and move above a float item triggers moving the float item
-            if ( contains( event->pos() ) ) {
-                cursorAboveFloatItem = true;
+            if ( e->type() == QEvent::MouseMove && event->buttons() & Qt::LeftButton ) {
+                    const QPoint &point = event->pos();
+                    QPointF position = positivePosition();
+                    qreal newX = qMax<qreal>( 0, position.x()+point.x()-p()->m_floatItemMoveStartPos.x() );
+                    qreal newY = qMax<qreal>( 0, position.y()+point.y()-p()->m_floatItemMoveStartPos.y() );
 
-                if ( e->type() == QEvent::MouseButtonPress && event->button() == Qt::LeftButton ) {
-                    p()->m_floatItemMoveStartPos = event->pos();
-                    return true;
-                }
-            }
-
-            if ( e->type() == QEvent::MouseMove && event->buttons() & Qt::LeftButton && p()->isMovable() )
-            {
-                p()->m_floatItemMoving = true;
-                const QPoint &point = event->pos();
-                QPointF position = positivePosition();
-                qreal newX = position.x()+point.x()-p()->m_floatItemMoveStartPos.x();
-                qreal newY = position.y()+point.y()-p()->m_floatItemMoveStartPos.y();
-                if ( newX >= 0 && newY >= 0 ) {
                     // docking behavior
                     const qreal dockArea = 60.0; // Alignment area width/height
                     const qreal dockJump = 30.0; // Alignment indicator jump size
@@ -178,15 +152,14 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
                     widget->update(dirtyRegion);
                     widget->setAttribute( Qt::WA_NoSystemBackground, widget->viewport()->mapCoversViewport() );
                     return true;
-                }
             }
 
             if ( e->type() == QEvent::MouseButtonRelease ) {
                 p()->m_floatItemMoving = false;
             }
 
-            // Adjusting Cursor shape
-            if ( cursorAboveFloatItem || p()->m_floatItemMoving ) {
+            // Use a special cursor as long as the item is moved
+            if ( p()->m_floatItemMoving ) {
                 widget->setCursor(QCursor(Qt::SizeAllCursor));
                 return true;
             }

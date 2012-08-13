@@ -33,8 +33,8 @@ public:
     MarbleWidget *m_widget;
     MarbleRunnerManager* m_manager;
     BookmarkManager* m_bookmarkManager;
-    GeoDataLookAt m_bookmarkLookAt;
-    bool m_isCoordinatesEdited;
+    GeoDataCoordinates m_bookmarkCoordinates;
+    qreal m_range;
     Ui::UiEditBookmarkDialog m_ui;
 
     EditBookmarkDialogPrivate( EditBookmarkDialog* q, BookmarkManager *bookmarkManager );
@@ -45,12 +45,20 @@ public:
 
     void setFolderName( const QString &name );
 
+    QString append( const QString &bookmark, const QString &text);
+
+    void openNewFolderDialog();
+
+    void retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark);
+
+    void updateCoordinates();
+
 private:
     EditBookmarkDialog* const q;
 };
 
 EditBookmarkDialogPrivate::EditBookmarkDialogPrivate( EditBookmarkDialog* q_, BookmarkManager *bookmarkManager ) :
-        m_widget( 0 ), m_manager( 0 ), m_bookmarkManager( bookmarkManager ), m_isCoordinatesEdited( false ), q( q_ )
+        m_widget( 0 ), m_manager( 0 ), m_bookmarkManager( bookmarkManager ), m_range( 0 ), q( q_ )
 {
     // nothing to do
 }
@@ -60,11 +68,13 @@ void EditBookmarkDialogPrivate::initialize()
     m_ui.setupUi( q );
     m_ui.m_longitude->setDimension( Longitude );
     m_ui.m_latitude->setDimension( Latitude );
-    m_ui.m_newFolderButton->setVisible( false );
-    QObject::connect( q, SIGNAL( accepted() ), q, SLOT( addBookmark() ) );
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    m_ui.position_lbl->setVisible( !smallScreen );
+    m_ui.m_latitude->setVisible( !smallScreen );
+    m_ui.m_longitude->setVisible( !smallScreen );
     QObject::connect( m_ui.m_newFolderButton, SIGNAL( clicked() ), q, SLOT( openNewFolderDialog() ) );
-    QObject::connect( m_ui.m_longitude, SIGNAL( valueChanged(qreal) ), q, SLOT( onCoordinatesEdited() ) );
-    QObject::connect( m_ui.m_latitude, SIGNAL( valueChanged(qreal) ), q, SLOT( onCoordinatesEdited() ) );
+    QObject::connect( m_ui.m_longitude, SIGNAL( valueChanged(qreal) ), q, SLOT( updateCoordinates() ) );
+    QObject::connect( m_ui.m_latitude, SIGNAL( valueChanged(qreal) ), q, SLOT( updateCoordinates() ) );
 
     m_ui.m_folders->clear();
     initComboBox( m_bookmarkManager->document() );
@@ -98,12 +108,9 @@ EditBookmarkDialog::EditBookmarkDialog( BookmarkManager *bookmarkManager, QWidge
     d->initialize();
 }
 
-void EditBookmarkDialog::setLookAt( const GeoDataLookAt &lookAt )
+void EditBookmarkDialog::setCoordinates( const GeoDataCoordinates &coordinates )
 {
-    d->m_bookmarkLookAt = lookAt;
-    d->m_isCoordinatesEdited = false;
-
-    const GeoDataCoordinates coordinates = lookAt.coordinates();
+    d->m_bookmarkCoordinates = coordinates;
 
     if ( d->m_ui.m_name->text().isEmpty() ) {
         d->m_ui.m_name->setText( coordinates.toString() );
@@ -112,6 +119,10 @@ void EditBookmarkDialog::setLookAt( const GeoDataLookAt &lookAt )
 
     d->m_ui.m_longitude->setValue( coordinates.longitude(GeoDataCoordinates::Degree) );
     d->m_ui.m_latitude->setValue( coordinates.latitude(GeoDataCoordinates::Degree) );
+}
+
+void EditBookmarkDialog::setRange( qreal range ) {
+    d->m_range = range;
 }
 
 void EditBookmarkDialog::setName( const QString &text )
@@ -132,7 +143,6 @@ void EditBookmarkDialog::setFolderName( const QString &name )
 void EditBookmarkDialog::setMarbleWidget( MarbleWidget* widget )
 {
     d->m_widget = widget;
-    d->m_ui.m_newFolderButton->setVisible( true );
     const AngleUnit defaultAngleUnit = d->m_widget->defaultAngleUnit();
     const LatLonEdit::Notation notation =
         (defaultAngleUnit == DecimalDegree) ? LatLonEdit::Decimal :
@@ -141,12 +151,19 @@ void EditBookmarkDialog::setMarbleWidget( MarbleWidget* widget )
     d->m_ui.m_longitude->setNotation( notation );
     d->m_ui.m_latitude->setNotation( notation );
 
-    //reverse geocode the bookmark point for better user experience
     d->m_manager = new MarbleRunnerManager( d->m_widget->model()->pluginManager(), this );
     d->m_manager->setModel( d->m_widget->model() );
     QObject::connect( d->m_manager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
             this, SLOT( retrieveGeocodeResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
-    d->m_manager->reverseGeocoding( d->m_bookmarkLookAt.coordinates() );
+}
+
+void EditBookmarkDialog::setReverseGeocodeName()
+{
+    if ( !d->m_manager ) {
+        return;
+    }
+    //reverse geocode the bookmark point for better user experience
+    d->m_manager->reverseGeocoding( d->m_bookmarkCoordinates );
 }
 
 EditBookmarkDialog::~EditBookmarkDialog()
@@ -154,12 +171,12 @@ EditBookmarkDialog::~EditBookmarkDialog()
     delete d;
 }
 
-void EditBookmarkDialog::retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark)
+void EditBookmarkDialogPrivate::retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark)
 {
     Q_UNUSED(coordinates)
     GeoDataExtendedData data = placemark.extendedData();
     QString bookmarkName;
-    qreal distance = d->m_widget->distance() * KM2METER;
+    qreal distance = m_widget->distance() * KM2METER;
     //FIXME : Optimal logic for suggestion with distance consideration is required
 
     if( distance >= 3500 ) {
@@ -180,11 +197,11 @@ void EditBookmarkDialog::retrieveGeocodeResult( const GeoDataCoordinates &coordi
         bookmarkName = placemark.address();
     }
 
-    d->m_ui.m_name->setText( bookmarkName );
-    d->m_ui.m_name->selectAll();
+    m_ui.m_name->setText( bookmarkName );
+    m_ui.m_name->selectAll();
 }
 
-QString EditBookmarkDialog::append( const QString &bookmark, const QString &text)
+QString EditBookmarkDialogPrivate::append( const QString &bookmark, const QString &text)
 {
     if( bookmark.isEmpty() && text.isEmpty() ) {
         return "";
@@ -198,44 +215,41 @@ QString EditBookmarkDialog::append( const QString &bookmark, const QString &text
     return bookmark + ", " + text;
 }
 
-void EditBookmarkDialog::openNewFolderDialog()
+void EditBookmarkDialogPrivate::openNewFolderDialog()
 {
-    QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( this );
+    QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( q );
     if ( dialog->exec() == QDialog::Accepted ) {
-        d->m_bookmarkManager->addNewBookmarkFolder( folder(), dialog->folderName() );
-        d->initComboBox( d->m_bookmarkManager->document() );
-        d->setFolderName( dialog->folderName() );
+        m_bookmarkManager->addNewBookmarkFolder( m_bookmarkManager->document(), dialog->folderName() );
+        m_ui.m_folders->clear();
+        initComboBox( m_bookmarkManager->document() );
+        setFolderName( dialog->folderName() );
     }
     delete dialog;
 }
 
-void EditBookmarkDialog::addBookmark()
+void EditBookmarkDialogPrivate::updateCoordinates()
 {
-    if ( d->m_widget ) {
-        d->m_bookmarkManager->addBookmark( folder(), bookmark() );
-    }
-}
-
-void EditBookmarkDialog::onCoordinatesEdited()
-{
-    d->m_isCoordinatesEdited = true;
+    m_bookmarkCoordinates.setLongitude( m_ui.m_longitude->value(), GeoDataCoordinates::Degree );
+    m_bookmarkCoordinates.setLatitude( m_ui.m_latitude->value(), GeoDataCoordinates::Degree );
 }
 
 GeoDataPlacemark EditBookmarkDialog::bookmark() const
 {
-    GeoDataLookAt *lookAt = new GeoDataLookAt( d->m_bookmarkLookAt );
-    lookAt->setCoordinates( coordinates() );
-
     //Create a bookmark object
     GeoDataPlacemark bookmark;
     bookmark.setName( name() );
     bookmark.setDescription( description() );
     //allow for HTML in the description
     bookmark.setDescriptionCDATA( true );
-    bookmark.setCoordinate( lookAt->coordinates() );
+    bookmark.setCoordinate( coordinates() );
+    if ( d->m_range ) {
+        GeoDataLookAt *lookat = new GeoDataLookAt;
+        lookat->setCoordinates( coordinates() );
+        lookat->setRange( range() );
+        bookmark.setLookAt( lookat );
+    }
 
     bookmark.extendedData().addValue( GeoDataData( "isBookmark", true ) );
-    bookmark.setLookAt( lookAt );
 
     return bookmark;
 }
@@ -257,16 +271,11 @@ QString EditBookmarkDialog::description() const
 
 GeoDataCoordinates EditBookmarkDialog::coordinates() const
 {
-    if ( d->m_isCoordinatesEdited ) {
-        const qreal longitude = d->m_ui.m_longitude->value();
-        const qreal latitude = d->m_ui.m_latitude->value();
-        // altitude not edited, take from old
-        const qreal altitude = d->m_bookmarkLookAt.coordinates().altitude();
+    return d->m_bookmarkCoordinates;
+}
 
-        return GeoDataCoordinates( longitude, latitude, altitude,
-                                   GeoDataCoordinates::Degree );
-    }
-    return d->m_bookmarkLookAt.coordinates();
+qreal EditBookmarkDialog::range() const {
+    return d->m_range;
 }
 
 }

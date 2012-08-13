@@ -13,10 +13,14 @@
 #include "PositionTracking.h"
 
 #include "GeoDataDocument.h"
+#include "GeoDataMultiTrack.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataParser.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+#include "GeoDataTrack.h"
 #include "GeoDataTreeModel.h"
+#include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 #include "FileManager.h"
@@ -38,7 +42,7 @@ class PositionTrackingPrivate
         m_treeModel( model ),
         m_currentPositionPlacemark( new GeoDataPlacemark ),
         m_currentTrackPlacemark( new GeoDataPlacemark ),
-        m_trackSegments( new GeoDataMultiGeometry ),
+        m_trackSegments( new GeoDataMultiTrack ),
         m_document(),
         m_positionProvider( 0 ),
         m_length( 0.0 )
@@ -49,17 +53,19 @@ class PositionTrackingPrivate
 
     void updateStatus();
 
+    QString statusFile();
+
     PositionTracking *const q;
 
     GeoDataTreeModel *const m_treeModel;
 
     GeoDataPlacemark *const m_currentPositionPlacemark;
-    GeoDataPlacemark *const m_currentTrackPlacemark;
-    GeoDataMultiGeometry *const m_trackSegments;
+    GeoDataPlacemark *m_currentTrackPlacemark;
+    GeoDataMultiTrack *m_trackSegments;
     GeoDataDocument m_document;
 
     GeoDataCoordinates  m_gpsPreviousPosition;
-    GeoDataLineString  *m_currentLineString;
+    GeoDataTrack  *m_currentTrack;
 
     PositionProviderPlugin* m_positionProvider;
 
@@ -72,13 +78,15 @@ void PositionTrackingPrivate::updatePosition()
 
     const GeoDataAccuracy accuracy = m_positionProvider->accuracy();
     const GeoDataCoordinates position = m_positionProvider->position();
+    const QDateTime timestamp = m_positionProvider->timestamp();
 
     if ( m_positionProvider->status() == PositionProviderStatusAvailable ) {
         if ( accuracy.horizontal < 250 ) {
-            if ( !m_currentLineString->isEmpty() ) {
-                m_length += distanceSphere( m_currentLineString->last(), position );
+            if ( m_currentTrack->size() ) {
+                m_length += distanceSphere( m_currentTrack->coordinatesAt( m_currentTrack->size() - 1 ), position );
             }
-            m_currentLineString->append(position);
+            m_currentTrack->addPoint( timestamp, position );
+            m_treeModel->updateFeature( m_currentTrackPlacemark );
         }
 
         //if the position has moved then update the current position
@@ -99,13 +107,31 @@ void PositionTrackingPrivate::updateStatus()
     const PositionProviderStatus status = m_positionProvider->status();
 
     if (status == PositionProviderStatusAvailable) {
-        m_treeModel->removeDocument( &m_document );
-        m_currentLineString = new GeoDataLineString;
-        m_trackSegments->append( m_currentLineString );
-        m_treeModel->addDocument( &m_document );
+        m_currentTrack = new GeoDataTrack;
+        m_treeModel->removeFeature( m_currentTrackPlacemark );
+        m_trackSegments->append( m_currentTrack );
+        m_treeModel->addFeature( &m_document, m_currentTrackPlacemark );
     }
 
     emit q->statusChanged( status );
+}
+
+QString PositionTrackingPrivate::statusFile()
+{
+    QString const subdir = "tracking";
+    QDir dir( MarbleDirs::localPath() );
+    if ( !dir.exists( subdir ) ) {
+        if ( !dir.mkdir( subdir ) ) {
+            mDebug() << "Unable to create dir " << dir.absoluteFilePath( subdir );
+            return dir.absolutePath();
+        }
+    }
+
+    if ( !dir.cd( subdir ) ) {
+        mDebug() << "Cannot change into " << dir.absoluteFilePath( subdir );
+    }
+
+    return dir.absoluteFilePath( "track.kml" );
 }
 
 PositionTracking::PositionTracking( GeoDataTreeModel *model )
@@ -118,11 +144,11 @@ PositionTracking::PositionTracking( GeoDataTreeModel *model )
     // First point is current position
     d->m_currentPositionPlacemark->setName("Current Position");
     d->m_currentPositionPlacemark->setVisible(false);
-    d->m_document.append(d->m_currentPositionPlacemark);
+    d->m_document.append( d->m_currentPositionPlacemark );
 
     // Second point is position track
-    d->m_currentLineString = new GeoDataLineString;
-    d->m_trackSegments->append(d->m_currentLineString);
+    d->m_currentTrack = new GeoDataTrack;
+    d->m_trackSegments->append(d->m_currentTrack);
 
     d->m_currentTrackPlacemark->setGeometry(d->m_trackSegments);
     d->m_currentTrackPlacemark->setName("Current Track");
@@ -141,7 +167,7 @@ PositionTracking::PositionTracking( GeoDataTreeModel *model )
     styleMap.insert("normal", QString("#").append(style.styleId()));
     d->m_document.addStyleMap(styleMap);
     d->m_document.addStyle(style);
-    d->m_document.append(d->m_currentTrackPlacemark);
+    d->m_document.append( d->m_currentTrackPlacemark );
 
     d->m_currentTrackPlacemark->setStyleUrl(QString("#").append(styleMap.styleId()));
 
@@ -222,56 +248,119 @@ bool PositionTracking::trackVisible() const
 
 void PositionTracking::setTrackVisible( bool visible )
 {
-    d->m_treeModel->removeDocument( &d->m_document );
     d->m_currentTrackPlacemark->setVisible( visible );
-    d->m_treeModel->addDocument( &d->m_document );
+    d->m_treeModel->updateFeature( d->m_currentTrackPlacemark );
 }
 
-bool PositionTracking::saveTrack(QString& fileName)
+bool PositionTracking::saveTrack( const QString& fileName )
 {
 
-    if ( !fileName.isEmpty() )
-    {
-        if ( !fileName.endsWith(".kml", Qt::CaseInsensitive) )
-        {
-            fileName.append( ".kml" );
-        }
-
-        GeoWriter writer;
-        //FIXME: a better way to do this?
-        writer.setDocumentType( kml::kmlTag_nameSpace22 );
-
-        GeoDataDocument *document = new GeoDataDocument;
-        QFileInfo fileInfo( fileName );
-        QString name = fileInfo.baseName();
-        document->setName( name );
-        foreach( const GeoDataStyle &style, d->m_document.styles() ) {
-            document->addStyle( style );
-        }
-        foreach( const GeoDataStyleMap &map, d->m_document.styleMaps() ) {
-            document->addStyleMap( map );
-        }
-        GeoDataFeature *track = new GeoDataFeature(d->m_document.last());
-        track->setName( "Track " + name );
-        document->append( track );
-
-        QFile file( fileName );
-        file.open( QIODevice::ReadWrite );
-        bool const result = writer.write( &file, document );
-        delete document;
-        return result;
+    if ( fileName.isEmpty() ) {
+        return false;
     }
-    return false;
+
+    GeoWriter writer;
+    //FIXME: a better way to do this?
+    writer.setDocumentType( kml::kmlTag_nameSpace22 );
+
+    GeoDataDocument *document = new GeoDataDocument;
+    QFileInfo fileInfo( fileName );
+    QString name = fileInfo.baseName();
+    document->setName( name );
+    foreach( const GeoDataStyle &style, d->m_document.styles() ) {
+        document->addStyle( style );
+    }
+    foreach( const GeoDataStyleMap &map, d->m_document.styleMaps() ) {
+        document->addStyleMap( map );
+    }
+    GeoDataPlacemark *track = new GeoDataPlacemark( *d->m_currentTrackPlacemark );
+    track->setName( "Track " + name );
+    document->append( track );
+
+    QFile file( fileName );
+    file.open( QIODevice::WriteOnly );
+    bool const result = writer.write( &file, document );
+    file.close();
+    delete document;
+    return result;
 }
 
 void PositionTracking::clearTrack()
 {
-    d->m_currentLineString = new GeoDataLineString;
-    d->m_treeModel->removeDocument( &d->m_document );
+    d->m_treeModel->removeFeature( d->m_currentTrackPlacemark );
+    d->m_currentTrack = new GeoDataTrack;
     d->m_trackSegments->clear();
-    d->m_trackSegments->append( d->m_currentLineString );
+    d->m_trackSegments->append( d->m_currentTrack );
+    d->m_treeModel->addFeature( &d->m_document, d->m_currentTrackPlacemark );
+    d->m_length = 0.0;
+}
+
+void PositionTracking::readSettings()
+{
+    QFile file( d->statusFile() );
+    if ( !file.open( QIODevice::ReadOnly ) ) {
+        mDebug() << "Can not read track from " << file.fileName();
+        return;
+    }
+
+    GeoDataParser parser( GeoData_KML );
+    if ( !parser.read( &file ) ) {
+        mDebug() << "Could not parse tracking file: " << parser.errorString();
+        return;
+    }
+
+    GeoDataDocument *doc = dynamic_cast<GeoDataDocument*>( parser.releaseDocument() );
+    file.close();
+
+    if( !doc ){
+        mDebug() << "tracking document not available";
+        return;
+    }
+
+    GeoDataPlacemark *track = dynamic_cast<GeoDataPlacemark*>( doc->child( 0 ) );
+    if( !track ) {
+        mDebug() << "tracking document doesn't have a placemark";
+        delete doc;
+        return;
+    }
+
+    d->m_trackSegments = dynamic_cast<GeoDataMultiTrack*>( track->geometry() );
+    if( !d->m_trackSegments ) {
+        mDebug() << "tracking document doesn't have a multitrack";
+        delete doc;
+        return;
+    }
+    if( d->m_trackSegments->size() < 1 ) {
+        mDebug() << "tracking document doesn't have a track";
+        delete doc;
+        return;
+    }
+
+    d->m_currentTrack = dynamic_cast<GeoDataTrack*>( d->m_trackSegments->child( d->m_trackSegments->size() - 1 ) );
+    if( !d->m_currentTrack ) {
+        mDebug() << "tracking document doesn't have a last track";
+        delete doc;
+        return;
+    }
+
+    doc->remove( 0 );
+    delete doc;
+
+    d->m_treeModel->removeDocument( &d->m_document );
+    d->m_document.remove( 1 );
+    delete d->m_currentTrackPlacemark;
+    d->m_currentTrackPlacemark = track;
+    d->m_currentTrackPlacemark->setName("Current Track");
+    d->m_document.append( d->m_currentTrackPlacemark );
+    d->m_currentTrackPlacemark->setStyleUrl( d->m_currentTrackPlacemark->styleUrl() );
+
     d->m_treeModel->addDocument( &d->m_document );
     d->m_length = 0.0;
+}
+
+void PositionTracking::writeSettings()
+{
+    saveTrack( d->statusFile() );
 }
 
 bool PositionTracking::isTrackEmpty() const
@@ -281,7 +370,7 @@ bool PositionTracking::isTrackEmpty() const
     }
 
     if ( d->m_trackSegments->size() == 1 ) {
-        return d->m_currentLineString->isEmpty();
+        return ( d->m_currentTrack->size() == 0 );
     }
 
     return false;

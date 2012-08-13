@@ -54,7 +54,7 @@ class MARBLE_EXPORT ViewportParams
 
     int polarity() const;
 
-    GeoDataLatLonAltBox viewLatLonAltBox() const;
+    GeoDataLatLonAltBox& viewLatLonAltBox() const;
 
     GeoDataLatLonAltBox latLonAltBox( const QRect &screenRect ) const;
 
@@ -90,8 +90,6 @@ class MARBLE_EXPORT ViewportParams
      * @param radius Size of the planet radius in pixel. Non-positive values are ignored.
      */
     void setRadius(int radius);
-
-    bool  globeCoversViewport() const;
 
     void centerOn( qreal lon, qreal lat );
 

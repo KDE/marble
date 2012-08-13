@@ -80,8 +80,7 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
 
     virtual void changeViewport( ViewportParams *viewport );
 
-    virtual void paintContent( GeoPainter *painter, ViewportParams *viewport,
-                       const QString& renderPos, GeoSceneLayer * layer = 0 );
+    virtual void paintContent( QPainter *painter );
 
     QDialog *configDialog();
 

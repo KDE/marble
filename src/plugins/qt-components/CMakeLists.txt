@@ -14,6 +14,9 @@ QtComponentsPlugin.cpp
 
 QT4_ADD_RESOURCES(my_SRCS qtcomponents.qrc)
 
+FILE (GLOB QML_FILES *.qml)
+marble_add_project_resources(${QML_FILES} qmldir)
+
 MARBLE_ADD_DECLARATIVE_PLUGIN( QtComponentsPlugin qtcomponents ${my_SRCS} )
 QT4_AUTOMOC(${my_SRCS})
 TARGET_LINK_LIBRARIES( QtComponentsPlugin ${QT_QTDECLARATIVE_LIBRARY} ${QT_QTWEBKIT_LIBRARY} )

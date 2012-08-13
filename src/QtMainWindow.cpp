@@ -71,6 +71,7 @@
 #include "MapWizard.h"
 #include "StackableWindow.h"
 #include "GoToDialog.h"
+#include "MarbleWidgetInputHandler.h"
 
 // For zoom buttons on Maemo
 #ifdef Q_WS_MAEMO_5
@@ -96,6 +97,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_timeControlDialog( 0 ),
         m_downloadRegionDialog( 0 ),
         m_downloadRegionAction( 0 ),
+        m_kineticScrollingAction( 0 ),
         m_osmEditAction( 0 ),
         m_zoomLabel( 0 ),
         m_mapViewWindow( 0 ),
@@ -250,6 +252,10 @@ void MainWindow::createActions()
      m_workOfflineAct->setCheckable( true );
      connect(m_workOfflineAct, SIGNAL(triggered( bool )), this, SLOT( workOffline( bool )));
 
+     m_kineticScrollingAction = new QAction( tr( "&Kinetic Scrolling" ), this);
+     m_kineticScrollingAction->setCheckable( true );
+     connect( m_kineticScrollingAction, SIGNAL( triggered( bool ) ), this, SLOT( toggleKineticScrolling( bool ) ) );
+
      m_showAtmosphereAct = new QAction( tr("&Atmosphere"), this);
      m_showAtmosphereAct->setCheckable( true );
      m_showAtmosphereAct->setStatusTip(tr("Show Atmosphere"));
@@ -316,6 +322,7 @@ void MainWindow::createMenus()
     // Do not create too many menu entries on a MID
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         menuBar()->addAction( m_workOfflineAct );
+        menuBar()->addAction( m_kineticScrollingAction );
         //menuBar()->addAction( m_sideBarAct );
         /** @todo: Full screen cannot be left on Maemo currently (shortcuts not working) */
         //menuBar()->addAction( m_fullScreenAct );
@@ -491,7 +498,7 @@ void MainWindow::createBookmarksListMenu( QMenu *m_bookmarksListMenu, const GeoD
             GeoDataCoordinates coordinates = (*i)->coordinate( m_controlView->marbleModel()->clockDateTime() );
             GeoDataLookAt coordinateToLookAt;
             coordinateToLookAt.setCoordinates( coordinates );
-            coordinateToLookAt.setRange( coordinates.altitude() );
+            coordinateToLookAt.setRange( marbleWidget()->lookAt().range() );
             var.setValue( coordinateToLookAt );
         } else {
             var.setValue( *lookAt );
@@ -579,9 +586,13 @@ void MainWindow::openEditBookmarkDialog()
 {
     MarbleWidget *widget = m_controlView->marbleWidget();
     QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( widget->model()->bookmarkManager(), widget );
-    dialog->setLookAt( widget->lookAt() );
     dialog->setMarbleWidget( widget );
-    dialog->exec();
+    dialog->setCoordinates( widget->lookAt().coordinates() );
+    dialog->setRange( widget->lookAt().range() );
+    dialog->setReverseGeocodeName();
+    if ( dialog->exec() == QDialog::Accepted ) {
+        widget->model()->bookmarkManager()->addBookmark( dialog->folder(), dialog->bookmark() );
+    }
     delete dialog;
 }
 
@@ -743,6 +754,12 @@ void MainWindow::workOffline( bool offline )
     m_controlView->marbleControl()->setWorkOffline( offline );
 
     m_workOfflineAct->setChecked( offline ); // Sync state with the GUI
+}
+
+void MainWindow::toggleKineticScrolling( bool enabled )
+{
+    m_controlView->marbleWidget()->inputHandler()->setKineticScrollingEnabled( enabled );
+    m_kineticScrollingAction->setChecked( enabled ); // Sync state with the GUI
 }
 
 void MainWindow::showAtmosphere( bool isChecked )
@@ -1081,6 +1098,8 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          bool isLocked = settings.value( "lockFloatItemPositions", false ).toBool();
          m_lockFloatItemsAct->setChecked( isLocked );
          lockPosition(isLocked);
+
+         toggleKineticScrolling( settings.value( "kineticScrolling", !smallScreen ).toBool() );
      settings.endGroup();
 
      settings.beginGroup( "Sun" );
@@ -1163,9 +1182,10 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
     settings.endGroup();
 
     settings.beginGroup( "Plugins");
+    PositionTracking* tracking = m_controlView->marbleModel()->positionTracking();
+    tracking->readSettings();
     QString positionProvider = settings.value( "activePositionTrackingPlugin", QString() ).toString();
     if ( !positionProvider.isEmpty() ) {
-        PositionTracking* tracking = m_controlView->marbleModel()->positionTracking();
         const PluginManager* pluginManager = m_controlView->marbleModel()->pluginManager();
         foreach( const PositionProviderPlugin* plugin, pluginManager->positionProviderPlugins() ) {
             if ( plugin->nameId() == positionProvider ) {
@@ -1248,6 +1268,7 @@ void MainWindow::writeSettings()
          settings.setValue( "quitZoom", quitZoom );
 
          settings.setValue( "lockFloatItemPositions", m_lockFloatItemsAct->isChecked() );
+         settings.setValue( "kineticScrolling", m_controlView->marbleWidget()->inputHandler()->kineticScrollingEnabled() );
      settings.endGroup();
 
      settings.beginGroup( "Sun" );
@@ -1292,6 +1313,7 @@ void MainWindow::writeSettings()
      settings.beginGroup( "Plugins");
      QString positionProvider;
      PositionTracking* tracking = m_controlView->marbleModel()->positionTracking();
+     tracking->writeSettings();
      if ( tracking && tracking->positionProviderPlugin() ) {
          positionProvider = tracking->positionProviderPlugin()->nameId();
      }
@@ -1495,16 +1517,6 @@ void MainWindow::showRoutingDialog()
         QAction* saveAction = new QAction( tr( "Save Route..." ), this );
         connect( saveAction, SIGNAL( triggered() ), m_routingWidget, SLOT( saveRoute() ) );
         m_routingWindow->menuBar()->addAction( saveAction );
-
-        QAction* reverseAction = new QAction( tr( "Reverse Route" ), this );
-        RoutingManager * const manager = m_controlView->marbleModel()->routingManager();
-        connect( reverseAction, SIGNAL( triggered() ), manager, SLOT( reverseRoute() ) );
-        m_routingWindow->menuBar()->addAction( reverseAction );
-
-        /** @todo: Change 'Clear' to 'Clear Route' after string freeze */
-        QAction* clearAction = new QAction( tr( "Clear" ), this );
-        connect( clearAction, SIGNAL( triggered() ), manager, SLOT( clearRoute() ) );
-        m_routingWindow->menuBar()->addAction( clearAction );
 
         m_routingWindow->setCentralWidget( scrollArea );
     }

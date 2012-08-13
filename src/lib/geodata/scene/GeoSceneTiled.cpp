@@ -139,7 +139,7 @@ QVector<QUrl> GeoSceneTiled::downloadUrls() const
 const QSize GeoSceneTiled::tileSize() const
 {
     if ( m_tileSize.isEmpty() ) {
-        const TileId id( sourceDir(), 0, 0, 0 );
+        const TileId id( 0, 0, 0, 0 );
         QString const fileName = relativeTileFileName( id );
         QFileInfo const dirInfo( fileName );
         QString const path = dirInfo.isAbsolute() ? fileName : MarbleDirs::path( fileName );

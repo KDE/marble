@@ -88,7 +88,7 @@ class StackedTileLoader
          *                      and the zoom level.
          */
         const StackedTile* loadTile( TileId const &stackedTileId );
-        void downloadTile( TileId const & stackedTileId );
+        void downloadStackedTile( TileId const & stackedTileId );
 
         /**
          * Resets the internal tile hash.

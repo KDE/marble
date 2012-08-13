@@ -13,6 +13,8 @@
 
 #include "AbstractDataPluginItem.h"
 
+#include "LabelGraphicsItem.h"
+
 #include <QtGui/QImage>
 
 class QAction;
@@ -21,7 +23,6 @@ class QUrl;
 namespace Marble
 {
 
-class LabelGraphicsItem;
 class TinyWebBrowser;
  
 class PhotoPluginItem : public AbstractDataPluginItem
@@ -71,8 +72,7 @@ class PhotoPluginItem : public AbstractDataPluginItem
     void openBrowser();
     
  private:
-    LabelGraphicsItem *m_image;
-    bool m_hasCoordinates;
+    LabelGraphicsItem m_image;
     QImage m_smallImage;
     QImage m_microImage;
     TinyWebBrowser *m_browser;

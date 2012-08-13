@@ -15,7 +15,7 @@
 #include <QtCore/QString>
 #include <QtCore/QHash>
 
-#include "GeoGraphicsItem.h"
+#include "BillboardGraphicsItem.h"
 #include "marble_export.h"
 
 class QAction;
@@ -25,7 +25,7 @@ namespace Marble
 
 class AbstractDataPluginItemPrivate;
 
-class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsItem
+class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public BillboardGraphicsItem
 {
     Q_OBJECT
 
@@ -35,6 +35,16 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
 
     QString target();
     void setTarget( const QString& target );
+
+    /**
+     * Returns the item's tool tip.
+     */
+    QString toolTip() const;
+
+    /**
+     * Set the tool tip for the item.
+     */
+    void setToolTip( const QString& toolTip );
 
     QString id() const;
     void setId( const QString& id );
@@ -69,8 +79,6 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
     virtual bool initialized() = 0;
 
     virtual void addDownloadedFile( const QString& url, const QString& type );
-
-    virtual bool isGeoProjected();
 
     virtual bool operator<( const AbstractDataPluginItem *other ) const = 0;
 

@@ -9,15 +9,17 @@
 //
 
 
-#ifndef SERIALIZABLE_H
-#define SERIALIZABLE_H
+#ifndef MARBLE_SERIALIZABLE_H
+#define MARBLE_SERIALIZABLE_H
 
 class QDataStream;
+
+namespace Marble {
 
 class Serializable
 {
  public:
-    virtual ~Serializable(){};
+    virtual ~Serializable(){}
     virtual void pack( QDataStream& stream ) const = 0;
     virtual void unpack( QDataStream& stream ) = 0;
 };
@@ -42,7 +44,11 @@ enum EnumGeometryId {
     GeoDataLinearRingId,
     GeoDataPolygonId,
     GeoDataMultiGeometryId,
+    GeoDataMultiTrackId,
     GeoDataModelId,
     GeoDataTrackId
 };
+
+}
+
 #endif

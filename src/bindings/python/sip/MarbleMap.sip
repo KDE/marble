@@ -88,7 +88,6 @@ public:
     void                    notifyMouseClick (int x, int y);
     void                    clearVolatileTileCache ();
     void                    setVolatileTileCacheLimit (quint64 kiloBytes);
-    bool                    mapCoversViewport ();
     Marble::AngleUnit       defaultAngleUnit () const;
     void                    setDefaultAngleUnit (Marble::AngleUnit angleUnit);
     QFont                   defaultFont () const;
@@ -149,6 +148,8 @@ public:
     void                    setShowSunInZenith (bool visible);
 signals:
     void                    radiusChanged (int radius);
+public:
+//ig    const TextureLayer*     textureLayer () const;
 };
 // MarbleMap
 

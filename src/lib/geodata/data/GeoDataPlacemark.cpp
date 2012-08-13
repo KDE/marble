@@ -72,6 +72,8 @@ GeoDataLookAt *GeoDataPlacemark::lookAt() const
 
 void GeoDataPlacemark::setLookAt( GeoDataLookAt *lookAt)
 {
+    detach();
+    delete p()->m_lookAt;
     p()->m_lookAt = lookAt;
 }
 
@@ -93,7 +95,6 @@ GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool
             for ( ; it != end; ++it ) {
                 if ( (*it)->nodeType() == GeoDataTypes::GeoDataPointType ) {
                     hasIcon = true;
-                    coord = GeoDataCoordinates( *static_cast<GeoDataPoint *>(*it) );
                     break;
                 }
             }

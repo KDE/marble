@@ -77,7 +77,7 @@ void GeoDataPolygon::setTessellationFlags( TessellationFlags f )
     p()->m_tessellationFlags = f;
 }
 
-GeoDataLatLonAltBox GeoDataPolygon::latLonAltBox() const
+GeoDataLatLonAltBox& GeoDataPolygon::latLonAltBox() const
 {
     return p()->outer.latLonAltBox();
 }

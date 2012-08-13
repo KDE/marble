@@ -258,6 +258,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
 
     if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         d->m_ui.directionsListView->setVisible( false );
+        d->m_ui.openRouteButton->setVisible( false );
+        d->m_ui.saveRouteButton->setVisible( false );
 #ifdef Q_WS_MAEMO_5
         d->m_ui.directionsListView->setAttribute( Qt::WA_Maemo5StackedWindow );
         d->m_ui.directionsListView->setWindowFlags( Qt::Window );
@@ -425,6 +427,8 @@ void RoutingWidget::removeInputWidget( int index )
         if ( widget == d->m_activeInput ) {
             d->m_activeInput = 0;
             d->m_routingLayer->setPlacemarkModel( 0 );
+            d->m_ui.directionsListView->setModel( d->m_routingModel );
+            d->m_routingLayer->synchronizeWith( d->m_ui.directionsListView->selectionModel() );
         }
         d->adjustInputWidgets();
     }

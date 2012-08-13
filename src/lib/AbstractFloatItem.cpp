@@ -18,6 +18,7 @@
 
 // Marble
 #include "DialogConfigurationInterface.h"
+#include "GeoPainter.h"
 #include "MarbleDebug.h"
 
 namespace Marble
@@ -172,19 +173,26 @@ void AbstractFloatItem::toolTipEvent ( QHelpEvent *e )
     Q_UNUSED( e );
 }
 
+void AbstractFloatItem::changeViewport( ViewportParams *viewport )
+{
+    Q_UNUSED( viewport );
+}
+
 bool AbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport,
              const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED( renderPos )
+    Q_UNUSED( layer )
+
     if ( !enabled() || !visible() ) {
         return true;
     }
 
-    if ( renderPos == "FLOAT_ITEM" ) {
-        paintEvent( painter, viewport, renderPos, layer );
-        return true;
-    }
+    changeViewport( viewport ); // may invalidate graphics item's cache
 
-    return false;
+    paintEvent( painter, viewport );
+
+    return true;
 }
 
 void AbstractFloatItem::show()

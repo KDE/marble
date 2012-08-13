@@ -14,13 +14,13 @@
 // Qt
 #include <QtGui/QAction>
 #include <QtGui/QIcon>
+#include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 #include <QtGui/QMouseEvent>
 #include <QtWebKit/QWebView>
 
 // Marble
 #include "MarbleDebug.h"
-#include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "GeoSceneLayer.h"
 #include "TinyWebBrowser.h"
@@ -35,6 +35,7 @@ const int miniWikiIconBorder = 3;
 
 WikipediaItem::WikipediaItem( QObject *parent )
     : AbstractDataPluginItem( parent ),
+      m_rank( 0.0 ),
       m_browser( 0 ),
       m_wikiIcon(),
       m_settings()
@@ -81,16 +82,12 @@ void WikipediaItem::addDownloadedFile( const QString& url, const QString& type )
 
 bool WikipediaItem::operator<( const AbstractDataPluginItem *other ) const
 {
-    return this->id() < other->id();
+    WikipediaItem const * otherItem = dynamic_cast<WikipediaItem const *>( other );
+    return otherItem ? m_rank > otherItem->m_rank : id() < other->id();
 }
    
-void WikipediaItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                           const QString& renderPos, GeoSceneLayer * layer )
+void WikipediaItem::paint( QPainter *painter )
 {
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
-    Q_UNUSED( viewport )
-
     if ( !showThumbnail() ) {
         m_wikiIcon.paint( painter, wikiIconRect );
     }
@@ -197,6 +194,16 @@ void WikipediaItem::setSettings( const QHash<QString, QVariant>& settings )
         updateToolTip();
         update();
     }
+}
+
+void WikipediaItem::setRank( double rank )
+{
+    m_rank = rank;
+}
+
+double WikipediaItem::rank() const
+{
+    return m_rank;
 }
 
 void WikipediaItem::updateSize()

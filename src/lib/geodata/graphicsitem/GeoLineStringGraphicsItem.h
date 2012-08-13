@@ -11,13 +11,15 @@
 #ifndef MARBLE_GEOLINESTRINGGRAPHICSITEM_H
 #define MARBLE_GEOLINESTRINGGRAPHICSITEM_H
 
-#include "GeoDataLineString.h"
 #include "GeoGraphicsItem.h"
 #include "marble_export.h"
 
 namespace Marble
 {
+
+class GeoDataLineString;
 class GeoDataLineStyle;
+
 class MARBLE_EXPORT GeoLineStringGraphicsItem : public GeoGraphicsItem
 {
 public:
@@ -26,9 +28,8 @@ public:
     void setLineString( const GeoDataLineString* lineString );
 
     virtual GeoDataCoordinates coordinate() const;
-    virtual void coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const;
 
-    virtual GeoDataLatLonAltBox latLonAltBox() const;
+    virtual GeoDataLatLonAltBox& latLonAltBox() const;
 
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );

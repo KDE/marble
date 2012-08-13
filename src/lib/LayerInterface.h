@@ -66,6 +66,12 @@ public:
       * If both have the same z value, their paint order is undefined.
       */
     virtual qreal zValue() const;
+
+
+    /**
+      * @brief Returns a debug line for perfo/tracing issues
+      */
+    virtual QString runtimeTrace() const;
 };
 
 } // namespace Marble

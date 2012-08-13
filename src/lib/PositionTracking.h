@@ -91,6 +91,10 @@ public:
      */
     qreal length( qreal planetRadius ) const;
 
+    void readSettings();
+
+    void writeSettings();
+
 public Q_SLOTS:
     /**
       * Toggles the visibility of the Position Tracking document
@@ -100,7 +104,7 @@ public Q_SLOTS:
     /**
       * Saves the track document to file
       */
-    bool saveTrack( QString& fileName );
+    bool saveTrack( const QString& fileName );
 
     /**
       * Removes all track segments which were recorded

@@ -144,7 +144,7 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry
 
     \see GeoDataLatLonAltBox
 */
-    virtual GeoDataLatLonAltBox latLonAltBox() const;
+    virtual GeoDataLatLonAltBox& latLonAltBox() const;
 
 /*!
     \brief Returns the outer boundary that is represented as a LinearRing.

@@ -40,5 +40,7 @@ public:
     void                    setNextRouteSegment (const Marble::RouteSegment* segment);
     qreal                   distanceTo (const Marble::GeoDataCoordinates& point, Marble::GeoDataCoordinates& closest, Marble::GeoDataCoordinates& interpolated) const;
     qreal                   minimalDistanceTo (const Marble::GeoDataCoordinates& point) const;
+    bool                    operator == (const Marble::RouteSegment& other) const;
+    bool                    operator != (const Marble::RouteSegment& other) const;
 };
 };

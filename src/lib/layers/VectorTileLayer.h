@@ -73,9 +73,6 @@ class VectorTileLayer : public QObject, public LayerInterface
     int preferredRadiusCeil( int radius ) const;
     int preferredRadiusFloor( int radius ) const;
 
-    /** Returns true iff the given tile has been downloaded and is not expired */
-    bool isTileAvailable( const TileId &tileId ) const;
-
  public Q_SLOTS:
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );

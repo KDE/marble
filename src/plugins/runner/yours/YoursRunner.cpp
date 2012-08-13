@@ -52,7 +52,7 @@ GeoDataFeature::GeoDataVisualCategory YoursRunner::category() const
 
 void YoursRunner::retrieveRoute( const RouteRequest *route )
 {
-    if ( route->size() < 2 ) {
+    if ( route->size() != 2 ) {
         return;
     }
 

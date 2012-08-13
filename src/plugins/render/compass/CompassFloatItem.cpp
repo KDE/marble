@@ -14,11 +14,11 @@
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "GeoPainter.h"
 #include "ViewportParams.h"
 
 #include <QtCore/QRect>
 #include <QtGui/QColor>
+#include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 #include <QtGui/QPushButton>
 #include <QtSvg/QSvgRenderer>
@@ -123,24 +123,16 @@ void CompassFloatItem::changeViewport( ViewportParams *viewport )
 {
     // figure out the polarity ...
     if ( m_polarity != viewport->polarity() ) {
+        m_polarity = viewport->polarity();
         update();
     }
 }
 
-void CompassFloatItem::paintContent( GeoPainter *painter,
-                                     ViewportParams *viewport,
-                                     const QString& renderPos,
-                                     GeoSceneLayer * layer )
+void CompassFloatItem::paintContent( QPainter *painter )
 {
-    Q_UNUSED( layer )
-    Q_UNUSED( renderPos )
-
     painter->save();
 
-    painter->setRenderHint( QPainter::Antialiasing, true );
-
     QRectF compassRect( contentRect() );
-    m_polarity = viewport->polarity();
 
     QString dirstr = tr( "N" );
     if ( m_polarity == -1 )
@@ -168,8 +160,6 @@ void CompassFloatItem::paintContent( GeoPainter *painter,
     painter->setPen( Qt::NoPen );
     painter->drawPath( outlinepath );
 
-    painter->autoMapQuality();
-
     int compassLength = static_cast<int>( compassRect.height() ) - 5 - fontheight;
         
     QSize compassSize( compassLength, compassLength ); 
@@ -181,7 +171,6 @@ void CompassFloatItem::paintContent( GeoPainter *painter,
         QPainter mapPainter( &m_compass );
         mapPainter.setViewport( m_compass.rect() );
         m_svgobj->render( &mapPainter ); 
-        mapPainter.setViewport( QRect( QPoint( 0, 0 ), viewport->size() ) );
     }
     painter->drawPixmap( QPoint( static_cast<int>( compassRect.width() - compassLength ) / 2, fontheight + 5 ), m_compass );
 

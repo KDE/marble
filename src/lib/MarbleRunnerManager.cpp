@@ -14,6 +14,7 @@
 #include "MarblePlacemarkModel.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
+#include "MarbleMath.h"
 #include "Planet.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
@@ -42,6 +43,7 @@ class MarbleRunnerManagerPrivate
 public:
     MarbleRunnerManager* q;
     QString m_lastSearchTerm;
+    GeoDataLatLonAltBox m_lastPreferredBox;
     QMutex m_modelMutex;
     MarblePlacemarkModel *m_model;
     QVector<GeoDataPlacemark*> m_placemarkContainer;
@@ -180,9 +182,9 @@ MarbleRunnerManager::~MarbleRunnerManager()
     delete d;
 }
 
-void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
+void MarbleRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox &preferred )
 {
-    if ( searchTerm == d->m_lastSearchTerm ) {
+    if ( searchTerm == d->m_lastSearchTerm && preferred == d->m_lastPreferredBox ) {
       emit searchResultChanged( d->m_model );
       emit searchResultChanged( d->m_placemarkContainer );
       emit searchFinished( searchTerm );
@@ -209,7 +211,7 @@ void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
 
     QList<const SearchRunnerPlugin*> plugins = d->plugins( d->m_pluginManager->searchRunnerPlugins() );
     foreach( const SearchRunnerPlugin* plugin, plugins ) {
-        SearchTask* task = new SearchTask( plugin, this, d->m_marbleModel, searchTerm );
+        SearchTask* task = new SearchTask( plugin, this, d->m_marbleModel, searchTerm, preferred );
         connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupSearchTask( RunnerTask* ) ) );
         d->m_searchTasks << task;
         mDebug() << "search task " << plugin->nameId() << " " << (long)task;
@@ -229,14 +231,28 @@ void MarbleRunnerManagerPrivate::addSearchResult( QVector<GeoDataPlacemark*> res
 
     m_modelMutex.lock();
     int start = m_placemarkContainer.size();
-    m_placemarkContainer << result;
+    bool distanceCompare = ( m_marbleModel && ( m_marbleModel->planet() ) );
+    for( int i=0; i<result.size(); ++i ) {
+        bool same = false;
+        for ( int j=0; j<m_placemarkContainer.size(); ++j ) {
+            if ( distanceCompare &&
+                 ( distanceSphere( result[i]->coordinate(),
+                                   m_placemarkContainer[j]->coordinate() )
+                   * m_marbleModel->planet()->radius() < 1 ) ) {
+                same = true;
+            }
+        }
+        if ( !same ) {
+            m_placemarkContainer.append( result[i] );
+        }
+    }
     m_model->addPlacemarks( start, result.size() );
     m_modelMutex.unlock();
     emit q->searchResultChanged( m_model );
     emit q->searchResultChanged( m_placemarkContainer );
 }
 
-QVector<GeoDataPlacemark*> MarbleRunnerManager::searchPlacemarks( const QString &searchTerm ) {
+QVector<GeoDataPlacemark*> MarbleRunnerManager::searchPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) {
     QEventLoop localEventLoop;
     QTimer watchdog;
     watchdog.setSingleShot(true);
@@ -246,7 +262,7 @@ QVector<GeoDataPlacemark*> MarbleRunnerManager::searchPlacemarks( const QString 
             &localEventLoop, SLOT(quit()), Qt::QueuedConnection );
 
     watchdog.start( d->m_watchdogTimer );
-    findPlacemarks( searchTerm );
+    findPlacemarks( searchTerm, preferred );
     localEventLoop.exec();
     return d->m_placemarkContainer;
 }

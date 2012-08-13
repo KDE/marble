@@ -437,12 +437,12 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * The popularity index is a value which describes at which zoom
      * level the placemark will be shown.
      */
-    int popularityIndex() const;
+    int zoomLevel() const;
     /**
      * Sets the popularity @p index of the placemark.
      * @param  index  the new index to be used.
      */
-    void setPopularityIndex( int index );
+    void setZoomLevel( int index );
 
     /**
      * Return the popularity of the feature.
@@ -497,6 +497,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     static QFont defaultFont();
     static void setDefaultFont( const QFont& font );
 
+    static QColor defaultLabelColor();
+    static void setDefaultLabelColor( const QColor& color );
+
     virtual void detach();
  private:
     static void initializeDefaultStyles();
@@ -512,6 +515,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     GeoDataFeaturePrivate* p() const;
     // Static members
     static QFont         s_defaultFont;
+    static QColor        s_defaultLabelColor;
 
     static GeoDataStyle* s_defaultStyle[GeoDataFeature::LastIndex];
     static bool          s_defaultStyleInitialized;

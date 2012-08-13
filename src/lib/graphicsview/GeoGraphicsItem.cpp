@@ -21,19 +21,24 @@
 using namespace Marble;
 
 GeoGraphicsItem::GeoGraphicsItem()
-    : MarbleGraphicsItem( new GeoGraphicsItemPrivate( this ) )
-{
-    setFlag( ItemIsVisible, true );
-}
-
-GeoGraphicsItem::GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr )
-    : MarbleGraphicsItem( d_ptr )
+    : d( new GeoGraphicsItemPrivate )
 {
     setFlag( ItemIsVisible, true );
 }
 
 GeoGraphicsItem::~GeoGraphicsItem()
 {
+    delete d;
+}
+
+bool GeoGraphicsItem::visible() const
+{
+    return d->m_flags & ItemIsVisible;
+}
+
+void GeoGraphicsItem::setVisible( bool visible )
+{
+    setFlag( ItemIsVisible, visible );
 }
 
 GeoDataCoordinates GeoGraphicsItem::coordinate() const
@@ -41,33 +46,9 @@ GeoDataCoordinates GeoGraphicsItem::coordinate() const
     return p()->m_coordinate;
 }
 
-void GeoGraphicsItem::coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const
-{
-    longitude = p()->m_coordinate.longitude();
-    latitude = p()->m_coordinate.latitude();
-    altitude = p()->m_coordinate.altitude();
-}
-
-void GeoGraphicsItem::setCoordinate( qreal longitude, qreal latitude, qreal altitude )
-{
-    p()->m_coordinate.setLongitude( longitude );
-    p()->m_coordinate.setLatitude( latitude );
-    p()->m_coordinate.setAltitude( altitude );
-}
-
 void GeoGraphicsItem::setCoordinate( const GeoDataCoordinates &point )
 {
     p()->m_coordinate = point;
-}
-
-QString GeoGraphicsItem::target() const
-{
-    return p()->m_target;
-}
-
-void GeoGraphicsItem::setTarget( const QString& target )
-{
-    p()->m_target = target;
 }
 
 GeoGraphicsItem::GeoGraphicsItemFlags GeoGraphicsItem::flags() const
@@ -89,27 +70,7 @@ void GeoGraphicsItem::setFlags( GeoGraphicsItemFlags flags )
     p()->m_flags = flags;
 }
 
-int GeoGraphicsItem::minLodPixels() const
-{
-    return p()->m_minLodPixels;
-}
-
-void GeoGraphicsItem::setMinLodPixels( int pixels )
-{
-    p()->m_minLodPixels = pixels;
-}
-
-int GeoGraphicsItem::maxLodPixels() const
-{
-    return p()->m_maxLodPixels;
-}
-
-void GeoGraphicsItem::setMaxLodPixels( int pixels )
-{
-    p()->m_maxLodPixels = pixels;
-}
-
-GeoDataLatLonAltBox GeoGraphicsItem::latLonAltBox() const
+GeoDataLatLonAltBox& GeoGraphicsItem::latLonAltBox() const
 {
     return p()->m_latLonAltBox;
 }
@@ -119,19 +80,24 @@ void GeoGraphicsItem::setLatLonAltBox( const GeoDataLatLonAltBox& latLonAltBox )
     p()->m_latLonAltBox = latLonAltBox;
 }
 
-void GeoGraphicsItem::setStyle( GeoDataStyle* style )
+void GeoGraphicsItem::setStyle( const GeoDataStyle* style )
 {
     p()->m_style = style;
 }
 
-GeoDataStyle* GeoGraphicsItem::style() const
+const GeoDataStyle* GeoGraphicsItem::style() const
 {
     return p()->m_style;
 }
 
-QList<QPointF> GeoGraphicsItem::positions() const
+qreal GeoGraphicsItem::zValue() const
 {
-    return p()->positions();
+    return p()->m_zValue;
+}
+
+void GeoGraphicsItem::setZValue( qreal z )
+{
+    p()->m_zValue = z;
 }
 
 GeoGraphicsItemPrivate *GeoGraphicsItem::p() const

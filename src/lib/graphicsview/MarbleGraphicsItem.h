@@ -21,13 +21,12 @@
 
 class QEvent;
 class QObject;
+class QPainter;
 
 namespace Marble
 {
 
 class AbstractMarbleGraphicsLayout;
-class GeoPainter;
-class GeoSceneLayer;
 class ViewportParams;
 
 class MarbleGraphicsItemPrivate;
@@ -43,16 +42,13 @@ class MARBLE_EXPORT MarbleGraphicsItem
         DeviceCoordinateCache
     };
 
-    explicit MarbleGraphicsItem( MarbleGraphicsItem *parent = 0 );
-
     virtual ~MarbleGraphicsItem();
 
     /**
      * Paints the item on the screen in view coordinates.
      * It is not safe to call this function from a thread other than the gui thread.
      */
-    bool paintEvent( GeoPainter *painter, ViewportParams *viewport,
-                     const QString& renderPos, GeoSceneLayer *layer = 0 );
+    bool paintEvent( QPainter *painter, const ViewportParams *viewport );
 
     /**
      * Returns true if the Item contains @p point in parent coordinates.
@@ -63,11 +59,6 @@ class MARBLE_EXPORT MarbleGraphicsItem
      * Returns the rect of one representation of the object that is at the given position.
      */
     QRectF containsRect( const QPointF& point ) const;
-
-    /**
-     * @brief Used to get the set of screen bounding rects
-     */
-    QList<QRectF> boundingRects() const;
 
     /**
      * Returns the layout of the MarbleGraphicsItem.
@@ -91,13 +82,6 @@ class MARBLE_EXPORT MarbleGraphicsItem
     void setCacheMode( CacheMode mode );
 
     /**
-     * Schedules an painting update for the Item. As long it is not added to an GraphicsScene
-     * (which doesn't exist yet) it will be repainted at the next paint event instead of using
-     * the cache.
-     */
-    void update();
-
-    /**
      * Returns if the item is visible.
      */
     bool visible() const;
@@ -117,26 +101,6 @@ class MARBLE_EXPORT MarbleGraphicsItem
      */
     void show();
 
-    /**
-     * Returns the items tool tip or, if no tool tip has been set, an empty string.
-     */
-    QString toolTip() const;
-
-    /**
-     * Set the tool tip for this GraphicItem.
-     */
-    void setToolTip( const QString& toolTip );
-
-    /**
-     * Returns the z value of the item
-     */
-    qreal zValue() const;
-    
-    /**
-     * Set the z value of the item
-     */
-    void setZValue( qreal z );
-    
     /**
      * Returns the size of the item
      */
@@ -167,13 +131,18 @@ class MARBLE_EXPORT MarbleGraphicsItem
      * Paints the item in item coordinates. This has to be reimplemented by the subclass
      * This function will be called by paintEvent().
      */
-    virtual void paint( GeoPainter *painter, ViewportParams *viewport,
-                        const QString& renderPos, GeoSceneLayer * layer = 0 );
+    virtual void paint( QPainter *painter );
 
  protected:
     explicit MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );
 
     virtual bool eventFilter( QObject *object, QEvent *e );
+
+    /**
+     * Marks the item and all parent items as invalid. If caching is enabled, the next paintEvent()
+     * will cause the cache to be recreated, such that the paintEvent()s after will be optimized.
+     */
+    void update();
 
     MarbleGraphicsItemPrivate * const d;
 

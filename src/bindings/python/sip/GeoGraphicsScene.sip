@@ -28,11 +28,11 @@ class GeoGraphicsScene : QObject
 public:
                             GeoGraphicsScene (QObject* parent /TransferThis/ = 0);
     ~GeoGraphicsScene ();
-    void                    addIdem (Marble::GeoGraphicsItem* item);
     void                    removeItem (Marble::GeoGraphicsItem* item);
     void                    clear ();
     QList<Marble::GeoGraphicsItem*>  items () const;
     QList<Marble::GeoGraphicsItem*>  items (const Marble::GeoDataLatLonAltBox& box, int maxZoomLevel) const;
     static int s_tileZoomLevel;
+    void                    addItem (Marble::GeoGraphicsItem* item);
 };
 };

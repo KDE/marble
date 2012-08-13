@@ -52,7 +52,7 @@ public:
 
 MarbleLineEditPrivate::MarbleLineEditPrivate( MarbleLineEdit* parent ) :
     m_clearButton( new QLabel( parent ) ), m_decoratorButton( new QLabel( parent ) ),
-    m_iconSize( 16 )
+    m_currentFrame( 0 ), m_iconSize( 16 )
 {
     m_clearButton->setCursor( Qt::ArrowCursor );
     m_clearButton->setToolTip( QObject::tr( "Clear" ) );
