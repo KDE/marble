@@ -148,12 +148,12 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
 
             Q_ASSERT( resultVector );
 
-            // FIXME ANDER
-            // IF IN THE FUTURE THERE CAN BE MORE THAN ONE VECTORTILE LAYER
+            // FIXME
+            // IF IN THE FUTURE MORE THAN ONE VECTORTILE LAYER ARE POSSIBLE,
             // HERE ALL THE GEOMETRIES FROM THE DIFFERENT LAYERS SHOULD BE
             // APPENDED TO THE SAME GEODATADOCUMENT
             // EVERY SINGLE FEATURE FROM ALL VECTORTILES WOULD HAVE TO BE APPENDED
-            // SEPARATELY FOR IT TO WORK AS IT IS RIGHT NOW.
+            // ONE BY ONE FOR IT TO WORK AS IT IS RIGHT NOW.
             // FOR EXAMPLE
             //for (int x = 0; x < tile->vectorData()->size(); x++)
             //resultVector->append( tile->vectorData()->featureList().at(x) );

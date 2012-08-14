@@ -741,7 +741,7 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 void MarbleMapPrivate::updateMapTheme()
 {
     m_layerManager.removeLayer( &m_textureLayer );
-    // FIXME ANDER better way to do this reset. Maybe connect to themeChanged SIGNAL?
+    // FIXME Find a better way to do this reset. Maybe connect to themeChanged SIGNAL?
     m_vectorTileLayer.reset();
     m_layerManager.removeLayer( &m_vectorTileLayer );
     m_layerManager.removeLayer( &m_vectorMapLayer );

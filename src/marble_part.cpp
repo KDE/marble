@@ -1484,7 +1484,7 @@ void MarblePart::updateSettings()
     kDebug() << "Updating Settings ...";
 
     // FIXME: Font doesn't get updated instantly.
-    // FIXME ANDER m_controlView->marbleWidget()->setDefaultFont( MarbleSettings::mapFont() );
+    m_controlView->marbleWidget()->setDefaultFont( MarbleSettings::mapFont() );
 
     m_controlView->marbleWidget()->
         setMapQualityForViewContext( (MapQuality) MarbleSettings::stillQuality(),
