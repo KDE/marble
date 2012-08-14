@@ -1,11 +1,12 @@
-//
-// This file is part of the Marble Virtual Globe.
-//
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
-//
-// Copyright 2011 Thibaut Gridel <tgridel@free.fr>
+/*
+ This file is part of the Marble Virtual Globe.
+
+ This program is free software licensed under the GNU LGPL. You can
+ find a copy of this license in LICENSE.txt in the top directory of
+ the source code.
+
+ Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
+*/
 
 #include "JsonParser.h"
 #include "GeoDataDocument.h"
@@ -73,12 +74,6 @@ bool JsonParser::read( QIODevice* device )
     }
 
     /** THIS IS A TEST PARSER FOR KOTHIK's JSON FORMAT **/
-    /*
-     * THE NEW VECTOR FORMAT SHOULD TAKE IN ACCOUNT THE RENREDING ORDER.
-     * IF WE PARSE FIRST ROADS/RIVERS... AND THEN TERRAIN THE TERRAIN WILL
-     * BE DRAWN ABOVE THE OTHER GEOMETRIES MAKING IMPOSIBLE TO SEE THEM
-     * IT SHOULD BE ALWAYS BE FROM BIGGEST GEOMETRIES TO SMALLES
-     */
 
     m_data = m_engine.evaluate( stream );
     if (m_engine.hasUncaughtException()) {
@@ -135,12 +130,12 @@ bool JsonParser::read( QIODevice* device )
             bool propertiesCorrect = false;
 
             // Parsing properties
-            while ( it.hasNext() && !propertiesCorrect ) {
+            while ( it.hasNext() ) {
                 it.next();
 
                 if ( it.name() == "name" )
                     placemark->setName( it.value().toString() );
-                else{
+                else if ( !propertiesCorrect ){
                     category = GeoDataFeature::OsmVisualCategory( it.name() + "=" + it.value().toString() );
 
                     if (category != 0){
