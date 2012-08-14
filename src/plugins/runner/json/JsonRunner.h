@@ -8,8 +8,8 @@
  Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
-#ifndef MARBLEJSONRUNNER_H
-#define MARBLEJSONRUNNER_H
+#ifndef MARBLE_JSONRUNNER_H
+#define MARBLE_JSONRUNNER_H
 
 #include "MarbleAbstractRunner.h"
 
@@ -27,4 +27,4 @@ public:
 };
 
 }
-#endif // MARBLEJSONRUNNER_H
+#endif // MARBLE_JSONRUNNER_H

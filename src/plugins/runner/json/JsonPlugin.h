@@ -8,8 +8,8 @@
  Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
-#ifndef MARBLEJSONPLUGIN_H
-#define MARBLEJSONPLUGIN_H
+#ifndef MARBLE_JSONPLUGIN_H
+#define MARBLE_JSONPLUGIN_H
 
 #include "ParseRunnerPlugin.h"
 

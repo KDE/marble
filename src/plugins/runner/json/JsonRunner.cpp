@@ -66,13 +66,8 @@ void JsonRunner::parseFile( const QString &fileName, DocumentRole role = Unknown
 
     GeoDocument* document = parser.releaseDocument();
     file.close();
-    GeoDataDocument* doc = 0;
-    if (document) {
-        doc = static_cast<GeoDataDocument*>( document );
-        doc->setDocumentRole( role );
-    }
-
-    emit parsingFinished( doc );
+    static_cast<GeoDataDocument*>( document )->setDocumentRole( role );
+    emit parsingFinished( static_cast<GeoDataDocument*>( document ) );
 }
 
 }

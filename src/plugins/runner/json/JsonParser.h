@@ -8,8 +8,8 @@
  Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
-#ifndef JSONPARSER_H
-#define JSONPARSER_H
+#ifndef MARBLE_JSONPARSER_H
+#define MARBLE_JSONPARSER_H
 
 #include "GeoDataDocument.h"
 
@@ -23,7 +23,7 @@ class JsonParser
 {
 public:
     JsonParser();
-    virtual ~JsonParser();
+    ~JsonParser();
 
     /**
      * @brief parse the json file
@@ -40,8 +40,6 @@ public:
 
 private:
 
-    GeoDataDocument* createDocument() const;
-
     GeoDataDocument* m_document;
 
     // json parsing engine
@@ -52,4 +50,4 @@ private:
 
 }
 
-#endif // JSONPARSER_H
+#endif // MARBLE_JSONPARSER_H
