@@ -79,14 +79,14 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser& parser ) const
                     // Case 1: line.first = envelope.first
                     else if ( line->first() == envelope.first() )
                     {
-                        GeoDataLinearRing *temp = new GeoDataLinearRing(envelope.tessellationFlags());
+                        GeoDataLinearRing temp = GeoDataLinearRing( envelope.tessellationFlags() );
 
                         // Invert envelopes direction
                         for (int x = envelope.size()-1; x > -1; x--)
                         {
-                            temp->append(GeoDataCoordinates ( envelope.at(x) ));
+                            temp.append( GeoDataCoordinates ( envelope.at(x) ) );
                         }
-                        envelope =  *temp;
+                        envelope = temp;
 
                         // Now its the same as case 2
                         // envelope-last not to repeat the shared node
@@ -105,14 +105,14 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser& parser ) const
                     // Case 3: line.last = envelope.first
                     else if (line->last() == envelope.first() )
                     {
-                        GeoDataLinearRing *temp = new GeoDataLinearRing(envelope.tessellationFlags());
+                        GeoDataLinearRing temp = GeoDataLinearRing( envelope.tessellationFlags() );
 
                         // Invert envelopes direction
                         for (int x = envelope.size()-1; x > -1; x--)
                         {
-                            temp->append(GeoDataCoordinates ( envelope.at(x) ));
+                            temp.append( GeoDataCoordinates ( envelope.at(x) ) );
                         }
-                        envelope =  *temp;
+                        envelope = temp;
 
                         // Now its the same as case 4
                         // size-2 not to repeat the shared node
