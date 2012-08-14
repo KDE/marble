@@ -26,9 +26,6 @@ public:
     GeoPolygonGraphicsItem( const GeoDataPolygon* polygon );
     GeoPolygonGraphicsItem( const GeoDataLinearRing* ring );
 
-    void setPolygon( const GeoDataPolygon* polygon );
-    void setLinearRing( const GeoDataLinearRing* ring );
-
     virtual GeoDataCoordinates coordinate() const;
 
     virtual GeoDataLatLonAltBox& latLonAltBox() const;
@@ -37,8 +34,8 @@ public:
                         const QString &renderPos, GeoSceneLayer *layer );
 
 protected:
-    const GeoDataPolygon *m_polygon;
-    const GeoDataLinearRing *m_ring;
+    const GeoDataPolygon *const m_polygon;
+    const GeoDataLinearRing *const m_ring;
 };
 
 }

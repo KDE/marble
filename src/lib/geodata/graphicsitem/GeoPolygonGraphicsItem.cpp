@@ -24,7 +24,6 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataPolygon* polygon )
           m_polygon( polygon ),
           m_ring( 0 )
 {
-    Q_ASSERT( ( m_ring == 0 ) ^ ( m_polygon == 0 ) && "You must not pass a 0 polygon ");
 }
 
 GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataLinearRing* ring )
@@ -32,21 +31,6 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataLinearRing* ring )
           m_polygon( 0 ),
           m_ring( ring )
 {
-    Q_ASSERT( ( m_ring == 0 ) ^ ( m_polygon == 0 ) && "You must not pass a 0 ring ");
-}
-
-void GeoPolygonGraphicsItem::setPolygon( const GeoDataPolygon* polygon )
-{
-    m_polygon = polygon;
-    m_ring = 0;
-    Q_ASSERT( ( m_ring == 0 ) ^ ( m_polygon == 0 ) && "You must not pass a 0 polygon ");
-}
-
-void GeoPolygonGraphicsItem::setLinearRing( const GeoDataLinearRing* ring )
-{
-    m_polygon = 0;
-    m_ring = ring;
-    Q_ASSERT( ( m_ring == 0 ) ^ ( m_polygon == 0 ) && "You must not pass a 0 ring ");
 }
 
 GeoDataCoordinates GeoPolygonGraphicsItem::coordinate() const
