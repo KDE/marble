@@ -19,11 +19,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 #include "VectorTile.h"
 #include "GeoDataDocument.h"
-#include "MarbleDebug.h"
-
-#include <limits>
-
-#include <QtCore/QString>
 
 namespace Marble
 {
@@ -32,7 +27,7 @@ VectorTile::VectorTile(TileId const & tileId, GeoDataDocument * vectordata )
     : Tile( tileId ),
     m_vectordata( vectordata )
 {
-    Q_ASSERT( &vectordata );
+    Q_ASSERT( vectordata );
 }
 
 VectorTile::~VectorTile()
