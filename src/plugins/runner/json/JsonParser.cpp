@@ -170,6 +170,8 @@ bool JsonParser::read( QIODevice* device )
                                 GeoDataLinearRing ring = ((GeoDataPolygon*)geom)->outerBoundary();
                                 ring.append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
 
+                                // FIXME appending to the ring could be done more efficiently
+
                                 ((GeoDataPolygon*)geom)->setOuterBoundary(ring);
                             }
                             else
