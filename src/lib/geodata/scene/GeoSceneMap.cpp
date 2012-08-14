@@ -187,15 +187,12 @@ QVector<GeoSceneFilter*> GeoSceneMap::filters() const
     return d->m_filters;
 }
 
-// True for image tile layers and vector tile layers
 bool GeoSceneMap::hasTextureLayers() const
 {
     QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
     QVector<GeoSceneLayer*>::const_iterator end = d->m_layers.constEnd();
     for (; it != end; ++it) {
-        if ( ( (*it)->backend() == dgml::dgmlValue_texture ||
-               (*it)->backend() == dgml::dgmlValue_vectortile ) &&
-             (*it)->datasets().count() > 0 )
+        if ( (*it)->backend() == dgml::dgmlValue_texture && (*it)->datasets().count() > 0 )
             return true;
     }
 
