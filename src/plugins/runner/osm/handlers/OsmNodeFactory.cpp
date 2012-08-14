@@ -31,7 +31,7 @@ GeoDataPoint* OsmNodeFactory::getPoint( quint64 id )
     return m_points.value( id );
 }
 
-void OsmNodeFactory::cleanUp()
+void OsmNodeFactory::clear()
 {
     foreach( GeoDataPoint *p, m_points )
     {

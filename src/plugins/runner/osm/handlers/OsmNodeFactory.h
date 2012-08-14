@@ -36,7 +36,7 @@ public:
      * Removes all nodes from factory.
      * This function must be called only after file loaded.
      */
-    static void cleanUp();
+    static void clear();
 
 private:
     static QMap<quint64, GeoDataPoint *> m_points;

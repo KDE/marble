@@ -28,12 +28,12 @@ void OsmWayFactory::appendLine( quint64 id, GeoDataLineString* l )
     m_lines[id] = l;
 }
 
-GeoDataLineString* OsmWayFactory::getLine( quint64 id )
+GeoDataLineString* OsmWayFactory::line( quint64 id )
 {
     return m_lines.value( id );
 }
 
-void OsmWayFactory::cleanUp()
+void OsmWayFactory::clear()
 {
     //foreach( GeoDataLineString *l, m_lines )
     //{

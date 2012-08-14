@@ -32,14 +32,14 @@ class OsmRelationFactory
 {
 public:
     static void appendPolygon( quint64 id, GeoDataPolygon *p );
-    static GeoDataPolygon *getPolygon( quint64 id );
+    static GeoDataPolygon * polygon( quint64 id );
 
     /**
      * @brief Clean up relations
      * Removes all relations from factory.
      * This function must be called only after file loaded.
      */
-    static void cleanUp();
+    static void clear();
 
 private:
     static QMap<quint64, GeoDataPolygon *> m_polygons;

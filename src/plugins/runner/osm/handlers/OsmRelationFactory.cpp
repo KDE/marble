@@ -29,17 +29,13 @@ void OsmRelationFactory::appendPolygon( quint64 id, GeoDataPolygon* p )
     m_polygons[id] = p;
 }
 
-GeoDataPolygon* OsmRelationFactory::getPolygon( quint64 id )
+GeoDataPolygon* OsmRelationFactory::polygon( quint64 id )
 {
     return m_polygons.value( id );
 }
 
-void OsmRelationFactory::cleanUp()
+void OsmRelationFactory::clear()
 {
-    //foreach( GeoDataPolygon *p, m_polygons )
-    //{
-    //    delete p;
-    //}
     m_polygons.clear();
 }
 

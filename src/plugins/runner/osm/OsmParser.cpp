@@ -25,9 +25,9 @@ OsmParser::OsmParser()
 
 OsmParser::~OsmParser()
 {
-    osm::OsmRelationFactory::cleanUp();
-    osm::OsmWayFactory::cleanUp();
-    osm::OsmNodeFactory::cleanUp();
+    osm::OsmRelationFactory::clear();
+    osm::OsmWayFactory::clear();
+    osm::OsmNodeFactory::clear();
     osm::OsmGlobals::cleanUpDummyPlacemarks();
 }
 

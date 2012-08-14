@@ -7,7 +7,7 @@
 
  Copyright 2011 Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
 
- Copyright 2011 Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
+ Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
 #ifndef MARBLE_OSMWAYFACTORY_H
@@ -31,14 +31,14 @@ class OsmWayFactory
 {
 public:
     static void appendLine( quint64 id, GeoDataLineString *l );
-    static GeoDataLineString *getLine( quint64 id );
+    static GeoDataLineString *line( quint64 id );
 
     /**
      * @brief Clean up ways
      * Removes all ways from factory.
      * This function must be called only after file loaded.
      */
-    static void cleanUp();
+    static void clear();
 
 private:
     static QMap<quint64, GeoDataLineString *> m_lines;

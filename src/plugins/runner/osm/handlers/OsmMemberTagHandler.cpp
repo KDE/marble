@@ -51,12 +51,12 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser& parser ) const
             if (parser.attribute( "role" ) == "outer" || parser.attribute( "role" ) == "")
             {
 
-                GeoDataPolygon *s = parentItem.nodeAs<GeoDataPolygon>();
-                Q_ASSERT( s );
+                GeoDataPolygon *polygon = parentItem.nodeAs<GeoDataPolygon>();
+                Q_ASSERT( polygon );
                 quint64 id = parser.attribute( "ref" ).toULongLong();
 
                 // With the id we get the way geometry
-                if ( GeoDataLineString *l =  osm::OsmWayFactory::getLine( id )  )
+                if ( GeoDataLineString *line =  osm::OsmWayFactory::line( id )  )
                 {
                     // Some of the ways that build the relation
                     // might be in opposite directions
@@ -68,100 +68,86 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser& parser ) const
                     // geometries) has to be removed to avoid having
                     // it repeated.
 
-                    GeoDataLinearRing envelope = s->outerBoundary();
+                    GeoDataLinearRing envelope = polygon->outerBoundary();
 
                     // Case 0: envelope is empty
                     if ( envelope.isEmpty() )
                     {
-                        // Append the way coordinates
-                        for (int x = 0; x < l->size(); x++)
-                        {
-                            envelope.append( GeoDataCoordinates ( l->at(x).longitude(), l->at(x).latitude() ) );
-                        }
+                        envelope = *line;
                     }
 
-                    // Case 1: l.first = envelope.first
-                    else if ( l->first().operator ==(envelope.first()) )
+                    // Case 1: line.first = envelope.first
+                    else if ( line->first() == envelope.first() )
                     {
                         GeoDataLinearRing *temp = new GeoDataLinearRing(envelope.tessellationFlags());
 
                         // Invert envelopes direction
                         for (int x = envelope.size()-1; x > -1; x--)
                         {
-                            temp->append(GeoDataCoordinates ( envelope.at(x).longitude(), envelope.at(x).latitude() ));
+                            temp->append(GeoDataCoordinates ( envelope.at(x) ));
                         }
-                        envelope.operator =( *temp );
+                        envelope =  *temp;
 
                         // Now its the same as case 2
-                        // x=1 not to repeat the shared node
-                        for (int x = 1; x < l->size(); x++)
-                        {
-                            envelope.append( GeoDataCoordinates ( l->at(x).longitude(), l->at(x).latitude() ) );
-                        }
+                        // envelope-last not to repeat the shared node
+                        envelope.remove( envelope.size() - 1 );
+                        envelope << *line;
                     }
 
-                    // Case 2: l.first = envelope.last
-                    else if (l->first().operator ==(envelope.last()))
+                    // Case 2: line.first = envelope.last
+                    else if (line->first() == envelope.last() )
                     {
-                        // x=1 not to repeat the shared node
-                        for (int x = 1; x < l->size(); x++)
-                        {
-                            envelope.append( GeoDataCoordinates ( l->at(x).longitude(), l->at(x).latitude() ) );
-                        }
+                        // envelope-last not to repeat the shared node
+                        envelope.remove( envelope.size() - 1 );
+                        envelope << *line;
                     }
 
-                    // Case 3: l.last = envelope.first
-                    else if (l->last().operator ==(envelope.first()) )
+                    // Case 3: line.last = envelope.first
+                    else if (line->last() == envelope.first() )
                     {
                         GeoDataLinearRing *temp = new GeoDataLinearRing(envelope.tessellationFlags());
 
                         // Invert envelopes direction
                         for (int x = envelope.size()-1; x > -1; x--)
                         {
-                            temp->append(GeoDataCoordinates ( envelope.at(x).longitude(), envelope.at(x).latitude() ));
+                            temp->append(GeoDataCoordinates ( envelope.at(x) ));
                         }
-                        envelope.operator =( *temp );
+                        envelope =  *temp;
 
                         // Now its the same as case 4
                         // size-2 not to repeat the shared node
-                        for (int x = l->size()-2; x > -1; x--)
+                        for (int x = line->size()-2; x > -1; x--)
                         {
-                            envelope.append( GeoDataCoordinates ( l->at(x).longitude(), l->at(x).latitude() ) );
+                            envelope.append( GeoDataCoordinates ( line->at(x) ) );
                         }
                     }
 
-                    // Case 4: l.last = envelope.last
-                    else if (l->last().operator ==(envelope.last()) )
+                    // Case 4: line.last = envelope.last
+                    else if (line->last() == envelope.last() )
                     {
                         // size-2 not to repeat the shared node
-                        for (int x = l->size()-2; x > -1; x--)
+                        for (int x = line->size()-2; x > -1; x--)
                         {
-                            envelope.append( GeoDataCoordinates ( l->at(x).longitude(), l->at(x).latitude() ) );
+                            envelope.append( GeoDataCoordinates ( line->at(x) ) );
                         }
                     }
 
                     // Update the outer boundary
-                    s->setOuterBoundary( envelope );
+                    polygon->setOuterBoundary( envelope );
                 }
             }
 
             // Inner poligons
             if (parser.attribute( "role" ) == "inner")
             {
-                GeoDataPolygon *s = parentItem.nodeAs<GeoDataPolygon>();
-                Q_ASSERT( s );
+                GeoDataPolygon *polygon = parentItem.nodeAs<GeoDataPolygon>();
+                Q_ASSERT( polygon );
                 quint64 id = parser.attribute( "ref" ).toULongLong();
 
                 // With the id we get the way geometry
-                if ( GeoDataLineString *l = osm::OsmWayFactory::getLine( id ) )
+                if ( GeoDataLineString *line = osm::OsmWayFactory::line( id ) )
                 {
-                    GeoDataLinearRing *temp = new GeoDataLinearRing(l->tessellationFlags());
-
-                    for (int x = 0; x < l->size(); x++)
-                    {
-                        temp->append( GeoDataCoordinates ( l->at(x).longitude(), l->at(x).latitude() ) );
-                    }
-                    s->appendInnerBoundary( *temp );
+                    polygon->appendInnerBoundary( GeoDataLinearRing( *line ) );
                 }
             }
         }
@@ -180,14 +166,14 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser& parser ) const
                      || parser.attribute( "role" ) == "subarea"
                      || parser.attribute( "role" ) == "")
             {
-                GeoDataPolygon *s = parentItem.nodeAs<GeoDataPolygon>();
-                Q_ASSERT( s );
+                GeoDataPolygon *polygon = parentItem.nodeAs<GeoDataPolygon>();
+                Q_ASSERT( polygon );
                 quint64 id = parser.attribute( "ref" ).toULongLong();
 
                 // With the id we get the relation geometry
-                if ( GeoDataPolygon *p =  osm::OsmRelationFactory::getPolygon( id )  )
+                if ( GeoDataPolygon *p =  osm::OsmRelationFactory::polygon( id ) )
                 {
-                    s->appendInnerBoundary( p->outerBoundary() );
+                    polygon->appendInnerBoundary( p->outerBoundary() );
                 }
             }
         }
