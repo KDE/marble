@@ -61,7 +61,6 @@ private:
     StackedTileLoader *const m_tileLoader;
     bool m_repaintNeeded;
     int m_radius;
-    QImage m_canvasImage;
     QThreadPool m_threadPool;
     unsigned int m_minTileX;
     unsigned int m_minTileY;

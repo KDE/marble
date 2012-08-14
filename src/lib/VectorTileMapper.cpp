@@ -54,18 +54,6 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
 {
     Q_UNUSED( texColorizer );
 
-    if ( m_canvasImage.size() != viewport->size() || m_radius != viewport->radius() ) {
-        const QImage::Format optimalFormat = ScanlineTextureMapperContext::optimalCanvasImageFormat( viewport );
-
-        if ( m_canvasImage.size() != viewport->size() || m_canvasImage.format() != optimalFormat ) {
-            m_canvasImage = QImage( viewport->size(), optimalFormat );
-        }
-
-        if ( !viewport->mapCoversViewport() ) {
-            m_canvasImage.fill( 0 );
-        }
-    }
-
     /** LOGIC FOR DOWNLOADING ALL THE TILES THAT ARE INSIDE THE SCREEN AT THE CURRENT ZOOM LEVEL **/
 
     // New tiles X and Y for moved screen coordinates
@@ -120,13 +108,6 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
     m_minTileY = minY;
     m_maxTileX = maxX;
     m_maxTileY = maxY;
-
-    // Draw world
-    const int radius = (int)(1.05 * (qreal)(viewport->radius()));
-    QRect rect( viewport->width() / 2 - radius, viewport->height() / 2 - radius,
-                2 * radius, 2 * radius);
-    rect = rect.intersect( dirtyRect );
-    painter->drawImage( rect, m_canvasImage, rect );
 }
 
 void VectorTileMapper::setRepaintNeeded()
