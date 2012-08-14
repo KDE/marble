@@ -1317,9 +1317,9 @@ void MarbleWidget::reloadMap()
     d->m_map.reload();
 }
 
-void MarbleWidget::downloadRegion( QString const & sourceDir, QVector<TileCoordsPyramid> const & pyramid )
+void MarbleWidget::downloadRegion( QVector<TileCoordsPyramid> const & pyramid )
 {
-    d->m_map.downloadRegion( sourceDir, pyramid );
+    d->m_map.downloadRegion( pyramid );
 }
 
 GeoDataLookAt MarbleWidget::lookAt() const

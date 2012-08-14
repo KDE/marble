@@ -444,7 +444,7 @@ void MarbleMap::reload() const
     d->m_textureLayer.reload();
 }
 
-void MarbleMap::downloadRegion( const QString& sourceDir, QVector<TileCoordsPyramid> const & pyramid )
+void MarbleMap::downloadRegion( QVector<TileCoordsPyramid> const & pyramid )
 {
     Q_ASSERT( textureLayer() );
     Q_ASSERT( !pyramid.isEmpty() );
@@ -470,8 +470,8 @@ void MarbleMap::downloadRegion( const QString& sourceDir, QVector<TileCoordsPyra
             coords.getCoords( &x1, &y1, &x2, &y2 );
             for ( int x = x1; x <= x2; ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
-                    TileId const tileId( sourceDir, level, x, y );
-                    tileIdSet.insert( tileId );
+                    TileId const stackedTileId( 0, level, x, y );
+                    tileIdSet.insert( stackedTileId );
                     // FIXME: use lazy evaluation to not generate up to 100k tiles in one go
                     // this can take considerable time even on very fast systems
                     // in contrast generating the TileIds on the fly when they are needed
@@ -481,8 +481,8 @@ void MarbleMap::downloadRegion( const QString& sourceDir, QVector<TileCoordsPyra
          }
          QSetIterator<TileId> i( tileIdSet );
          while( i.hasNext() ) {
-             TileId const tileId = i.next();
-             d->m_textureLayer.downloadStackedTile( tileId );
+             TileId const stackedTileId = i.next();
+             d->m_textureLayer.downloadStackedTile( stackedTileId );
          }
          tilesCount += tileIdSet.count();
      }
