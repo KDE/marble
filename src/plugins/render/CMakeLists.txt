@@ -1,6 +1,5 @@
 # Example
 # add_subdirectory( test )
-add_subdirectory( geojson )
 
 # Display a control or a screen box
 add_subdirectory( compass )

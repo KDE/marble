@@ -95,6 +95,9 @@ QImage TileLoader::loadTileImage( TileId const & tileId, DownloadUsage const usa
 
 GeoDataDocument *TileLoader::loadTileVectorData( TileId const & tileId, DownloadUsage const usage, QString const &format )
 {
+    // Format could be used in the future for use just that parser, instead of all available parsers
+    Q_UNUSED( format );
+
     GeoSceneTiled const * const textureLayer = findTextureLayer( tileId );
 
     QString const fileName = tileFileName( textureLayer, tileId );
