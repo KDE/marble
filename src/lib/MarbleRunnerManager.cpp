@@ -32,6 +32,7 @@
 #include <QtCore/QVector>
 #include <QtCore/QThreadPool>
 #include <QtCore/QTimer>
+#include <QtCore/QFileInfo>
 
 namespace Marble
 {
@@ -374,12 +375,18 @@ QVector<GeoDataDocument*> MarbleRunnerManager::searchRoute( const RouteRequest *
 void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role )
 {
     QList<const ParseRunnerPlugin*> plugins = d->m_pluginManager->parsingRunnerPlugins();
+    QFileInfo const fileInfo( fileName );
+    QString const suffix = fileInfo.suffix();
+    QString const completeSuffix = fileInfo.completeSuffix();
     foreach( const ParseRunnerPlugin *plugin, plugins ) {
-        ParsingTask *task = new ParsingTask( plugin, this, fileName, role );
-        connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupParsingTask(RunnerTask*) ) );
-        mDebug() << "parse task " << plugin->nameId() << " " << (long)task;
-        d->m_parsingTasks << task;
-        QThreadPool::globalInstance()->start( task );
+        QStringList const extensions = plugin->fileExtensions();
+        if ( extensions.isEmpty() || extensions.contains( suffix ) || extensions.contains( completeSuffix ) ) {
+            ParsingTask *task = new ParsingTask( plugin, this, fileName, role );
+            connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupParsingTask(RunnerTask*) ) );
+            mDebug() << "parse task " << plugin->nameId() << " " << (long)task;
+            d->m_parsingTasks << task;
+            QThreadPool::globalInstance()->start( task );
+        }
     }
 
     if ( plugins.isEmpty() ) {
