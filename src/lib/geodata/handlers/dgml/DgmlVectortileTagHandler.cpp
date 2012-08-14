@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 
     This file is part of the KDE project
 
@@ -38,14 +38,14 @@ namespace dgml
 {
 DGML_DEFINE_TAG_HANDLER(Vectortile)
 
-GeoNode* DgmlVectortileTagHandler::parse(GeoParser& parser) const
+GeoNode* DgmlVectortileTagHandler::parse( GeoParser& parser ) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Vectortile));
+    Q_ASSERT( parser.isStartElement() && parser.isValidElement( dgmlTag_Vectortile ) );
 
-    const QString name = parser.attribute(dgmlAttr_name).trimmed();
+    const QString name = parser.attribute( dgmlAttr_name ).trimmed();
 
-    const QString expireStr = parser.attribute(dgmlAttr_expire).trimmed();
+    const QString expireStr = parser.attribute( dgmlAttr_expire ).trimmed();
     int expire = std::numeric_limits<int>::max();
     if ( !expireStr.isEmpty() )
         expire = expireStr.toInt();
@@ -57,7 +57,7 @@ GeoNode* DgmlVectortileTagHandler::parse(GeoParser& parser) const
 
     // Check parent type and make sure that the dataSet type
     // matches the backend of the parent layer
-    if ( parentItem.represents(dgmlTag_Layer)
+    if ( parentItem.represents( dgmlTag_Layer )
         && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_vectortile ) {
 
         //FIXME ANDER Using backend tag here and in other layers  to decide which type of layer

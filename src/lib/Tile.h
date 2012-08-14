@@ -1,5 +1,7 @@
  /*
-  *Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
+ Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
+
+ Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -14,6 +16,7 @@
  You should have received a copy of the GNU Lesser General Public
  License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
+
 #ifndef MARBLE_TILE_H
 #define MARBLE_TILE_H
 

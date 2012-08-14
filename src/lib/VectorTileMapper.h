@@ -5,8 +5,7 @@
  find a copy of this license in LICENSE.txt in the top directory of
  the source code.
 
- Copyright 2007      Torsten Rahn     <tackat@kde.org>
- Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+ Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
 #ifndef MARBLE_VECTORTILEMAPPER_H

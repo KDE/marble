@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 
     This file is part of the KDE project
 
@@ -32,7 +32,7 @@ namespace dgml
 class DgmlVectortileTagHandler : public GeoTagHandler
 {
 public:
-    virtual GeoNode* parse(GeoParser&) const;
+    virtual GeoNode* parse( GeoParser& ) const;
 };
 
 }

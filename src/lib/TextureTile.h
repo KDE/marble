@@ -1,5 +1,7 @@
 /*
- *Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
+Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
+
+Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public

@@ -5,8 +5,7 @@
  find a copy of this license in LICENSE.txt in the top directory of
  the source code.
 
- Copyright 2007      Torsten Rahn     <tackat@kde.org>
- Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+ Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
 #include "VectorTileMapper.h"
@@ -53,6 +52,8 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
                                    const QRect &dirtyRect,
                                    TextureColorizer *texColorizer )
 {
+    Q_UNUSED( texColorizer );
+
     if ( m_canvasImage.size() != viewport->size() || m_radius != viewport->radius() ) {
         const QImage::Format optimalFormat = ScanlineTextureMapperContext::optimalCanvasImageFormat( viewport );
 
