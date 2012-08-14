@@ -1,7 +1,7 @@
 /*
     Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
     Copyright (C) 2008 Jens-Michael Hoffmann <jensmh@gmx.de>
-    Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
+    Copyright (C) 2012 Ander Pijoan <ander.pijoan@deusto.es>
 
     This file is part of the KDE project
 

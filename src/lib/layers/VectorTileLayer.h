@@ -1,13 +1,14 @@
-//
-// This file is part of the Marble Virtual Globe.
-//
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
-//
-// Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>
-// Copyright 2010      Thibaut Gridel  <tgridel@free.fr>
-//
+/*
+ This file is part of the Marble Virtual Globe.
+
+ This program is free software licensed under the GNU LGPL. You can
+ find a copy of this license in LICENSE.txt in the top directory of
+ the source code.
+
+ Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>
+ Copyright 2010      Thibaut Gridel  <tgridel@free.fr>
+ Copyright 2012      Ander Pijoan <ander.pijoan@deusto.es>
+*/
 
 #ifndef MARBLE_VECTORTILELAYER_H
 #define MARBLE_VECTORTILELAYER_H

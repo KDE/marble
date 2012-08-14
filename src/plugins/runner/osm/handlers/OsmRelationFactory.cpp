@@ -5,6 +5,8 @@
  find a copy of this license in LICENSE.txt in the top directory of
  the source code.
 
+ Copyright 2011 Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
+
  Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
