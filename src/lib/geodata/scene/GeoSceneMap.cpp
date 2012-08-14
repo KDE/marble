@@ -20,7 +20,6 @@
 */
 
 #include "GeoSceneMap.h"
-#include "MarbleDebug.h"
 
 #include "GeoSceneTypes.h"
 #include "GeoSceneLayer.h"

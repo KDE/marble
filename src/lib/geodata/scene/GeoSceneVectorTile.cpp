@@ -1,24 +1,15 @@
 /*
-    Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
-    Copyright (C) 2008 Jens-Michael Hoffmann <jensmh@gmx.de>
-    Copyright (C) 2012 Ander Pijoan <ander.pijoan@deusto.es>
+ This file is part of the Marble Virtual Globe.
 
-    This file is part of the KDE project
+ This program is free software licensed under the GNU LGPL. You can
+ find a copy of this license in LICENSE.txt in the top directory of
+ the source code.
 
-    This library is free software you can redistribute it and/or
-    modify it under the terms of the GNU Library General Public
-    License as published by the Free Software Foundation either
-    version 2 of the License, or (at your option) any later version.
+ Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
 
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Library General Public License for more details.
+ Copyright (C) 2008 Jens-Michael Hoffmann <jensmh@gmx.de>
 
-    You should have received a copy of the GNU Library General Public License
-    aint with this library see the file COPYING.LIB.  If not, write to
-    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-    Boston, MA 02110-1301, USA.
+ Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
 #include "GeoSceneTypes.h"
@@ -38,7 +29,7 @@ const char* GeoSceneVectorTile::nodeType() const
 
 QString GeoSceneVectorTile::type()
 {
-    return "vectorTile";
+    return "vectortile";
 }
 
 }
