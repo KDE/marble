@@ -21,6 +21,7 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "GeoSceneTypes.h"
 #include "GeoSceneVectorTile.h"
 
 namespace Marble
@@ -32,7 +33,7 @@ GeoSceneVectorTile::GeoSceneVectorTile( const QString& name )
 
 const char* GeoSceneVectorTile::nodeType() const
 {
-    return "GeoSceneVectorTile";
+    return GeoSceneTypes::GeoSceneVectorTileType;
 }
 
 QString GeoSceneVectorTile::type()

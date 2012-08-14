@@ -20,6 +20,7 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "GeoSceneTypes.h"
 #include "GeoSceneTiled.h"
 
 #include "DownloadPolicy.h"
@@ -57,7 +58,7 @@ GeoSceneTiled::~GeoSceneTiled()
 
 const char* GeoSceneTiled::nodeType() const
 {
-    return "GeoSceneTiled";
+    return GeoSceneTypes::GeoSceneTiledType;
 }
 
 QString GeoSceneTiled::sourceDir() const

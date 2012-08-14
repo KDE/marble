@@ -24,6 +24,7 @@
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "GeoDataDocument.h"
+#include "GeoSceneTypes.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
@@ -195,7 +196,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         */
 
         // ImageTile
-        if ( textureLayer->nodeType() == QString("GeoSceneTextureTile") ){
+        if ( textureLayer->nodeType() == GeoSceneTypes::GeoSceneTextureTileType ){
             const QImage tileImage = d->m_tileLoader->loadTileImage( tileId, DownloadBrowse );
 
             QSharedPointer<Tile> tile(new TextureTile( tileId, tileImage, blending ) );
@@ -203,7 +204,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         }
 
         // VectorTile
-        if ( textureLayer->nodeType() == QString("GeoSceneVectorTile") ){
+        if ( textureLayer->nodeType() == GeoSceneTypes::GeoSceneVectorTileType ){
 
             GeoDataDocument* tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, textureLayer->fileFormat() );
 

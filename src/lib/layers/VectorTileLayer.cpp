@@ -20,6 +20,7 @@
 #include "VectorTileMapper.h"
 #include "GeoPainter.h"
 #include "GeoSceneGroup.h"
+#include "GeoSceneTypes.h"
 #include "MergedLayerDecorator.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
@@ -147,7 +148,7 @@ void VectorTileLayer::Private::updateTextureLayers()
 
         // Check if the GeoSceneTiled is a TextureTile or VectorTile.
         // Only VectorTiles have to be used.
-        if ( QString (candidate->nodeType()) == "GeoSceneVectorTile"){
+        if ( candidate->nodeType() == GeoSceneTypes::GeoSceneVectorTileType ){
 
             bool enabled = true;
             if ( m_textureLayerSettings ) {

@@ -20,6 +20,7 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "GeoSceneTypes.h"
 #include "GeoSceneTextureTile.h"
 
 namespace Marble
@@ -31,7 +32,7 @@ GeoSceneTextureTile::GeoSceneTextureTile( const QString& name )
 
 const char* GeoSceneTextureTile::nodeType() const
 {
-    return "GeoSceneTextureTile";
+    return GeoSceneTypes::GeoSceneTextureTileType;
 }
 
 QString GeoSceneTextureTile::type()

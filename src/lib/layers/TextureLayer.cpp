@@ -23,6 +23,7 @@
 #include "TileScalingTextureMapper.h"
 #include "GeoPainter.h"
 #include "GeoSceneGroup.h"
+#include "GeoSceneTypes.h"
 #include "MergedLayerDecorator.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
@@ -109,7 +110,7 @@ void TextureLayer::Private::updateTextureLayers()
 
         // Check if the GeoSceneTiled is a TextureTile or VectorTile.
         // Only TextureTiles have to be used.
-        if ( QString(candidate->nodeType()) == "GeoSceneTextureTile"){
+        if ( candidate->nodeType() == GeoSceneTypes::GeoSceneTextureTileType ){
             bool enabled = true;
             if ( m_textureLayerSettings ) {
                 const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
