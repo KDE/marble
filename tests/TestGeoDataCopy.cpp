@@ -423,8 +423,7 @@ void TestGeoDataCopy::copyPlacemark()
     placemark.setId(281012);
 
     testCoordinate(placemark.coordinate(), 123.4, 2, coordString[0]);
-//    TODO Fix ref
-//    testCoordinate(static_cast<GeoDataPoint*>(placemark.geometry()), 123.4, 2, coordString[0]);
+    testCoordinate(*static_cast<GeoDataPoint*>(placemark.geometry()), 123.4, 2, coordString[0]);
     QCOMPARE(placemark.area(), 12345678.0);
     QCOMPARE(placemark.population(), (qint64)123456789);
     QCOMPARE(placemark.id(), 281012);
@@ -433,8 +432,7 @@ void TestGeoDataCopy::copyPlacemark()
     GeoDataPlacemark other = placemark;
     
     testCoordinate(other.coordinate(), 123.4, 2, coordString[0]);
-//    TODO Fix ref
-//    testCoordinate(static_cast<GeoDataPoint*>(other.geometry()), 123.4, 2, coordString[0]);
+    testCoordinate(*static_cast<GeoDataPoint*>(other.geometry()), 123.4, 2, coordString[0]);
     QCOMPARE(other.area(), 12345678.0);
     QCOMPARE(other.population(), (qint64)123456789);
     QCOMPARE(other.id(), 281012);
@@ -443,8 +441,7 @@ void TestGeoDataCopy::copyPlacemark()
     other.setPopulation(987654321);
 
     testCoordinate(other.coordinate(), 123.4, 2, coordString[0]);
-//    TODO Fix ref
-//    testCoordinate(static_cast<GeoDataPoint*>(other.geometry()), 123.4, 2, coordString[0]);
+    testCoordinate(*static_cast<GeoDataPoint*>(other.geometry()), 123.4, 2, coordString[0]);
     QCOMPARE(other.area(), 12345678.0);
     QCOMPARE(other.population(), (qint64)987654321);
     QCOMPARE(placemark.population(), (qint64)123456789);
