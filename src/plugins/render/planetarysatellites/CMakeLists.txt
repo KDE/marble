@@ -7,7 +7,13 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
+set( mex_SRCS
+ mex/astrolib.cpp
+ mex/attlib.cpp
+ mex/planetarySats.cpp )
+
 set( planetarysatellites_SRCS
  PlanetarySatellitesPlugin.cpp )
 
-marble_add_plugin( PlanetarySatellitesPlugin ${planetarysatellites_SRCS} )
+marble_add_plugin( PlanetarySatellitesPlugin
+ ${planetarysatellites_SRCS} ${mex_SRCS} )
