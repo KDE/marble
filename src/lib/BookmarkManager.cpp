@@ -159,7 +159,7 @@ bool BookmarkManager::showBookmarks()
 
 void BookmarkManager::setShowBookmarks( bool visible )
 {
-    d->m_bookmarkDocument->setVisible( visible );
+    d->bookmarkDocument()->setVisible( visible );
     d->m_treeModel->updateFeature( d->m_bookmarkDocument );
 }
 
