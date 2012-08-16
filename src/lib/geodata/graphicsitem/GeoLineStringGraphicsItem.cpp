@@ -40,12 +40,8 @@ GeoDataLatLonAltBox& GeoLineStringGraphicsItem::latLonAltBox() const
     return m_lineString->latLonAltBox();
 }
 
-void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
-                                       const QString& renderPos, GeoSceneLayer* layer )
+void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport )
 {
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
-
     if ( !style() )
     {
         painter->save();

@@ -211,6 +211,9 @@ void GeometryLayer::initializeDefaultValues()
 bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
                             const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED( renderPos )
+    Q_UNUSED( layer )
+
     painter->save();
     painter->autoMapQuality();
 
@@ -222,7 +225,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     {
         if ( item->visible()
              && item->latLonAltBox().intersects( viewport->viewLatLonAltBox() ) ) {
-            item->paint( painter, viewport, renderPos, layer );
+            item->paint( painter, viewport );
             ++painted;
         }
     }

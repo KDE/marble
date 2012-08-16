@@ -55,12 +55,9 @@ GeoDataLatLonAltBox& GeoPolygonGraphicsItem::latLonAltBox() const
     }
 }
 
-void GeoPolygonGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
-                                    const QString& renderPos, GeoSceneLayer* layer )
+void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport )
 {
     Q_UNUSED( viewport );
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
 
     if ( !style() )
     {
