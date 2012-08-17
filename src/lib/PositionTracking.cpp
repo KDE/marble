@@ -86,7 +86,6 @@ void PositionTrackingPrivate::updatePosition()
                 m_length += distanceSphere( m_currentTrack->coordinatesAt( m_currentTrack->size() - 1 ), position );
             }
             m_currentTrack->addPoint( timestamp, position );
-            m_treeModel->updateFeature( m_currentTrackPlacemark );
         }
 
         //if the position has moved then update the current position

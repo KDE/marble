@@ -265,6 +265,7 @@ int PlacemarkLayout::maxLabelHeight() const
 }
 
 /// feed an internal QMap of placemarks with TileId as key when model changes
+/// FIXME this method is too expensive on minor data change, e.g. when adding a point to a track (see bug 305195)
 void PlacemarkLayout::setCacheData()
 {
     const int rowCount = m_placemarkModel.rowCount();
