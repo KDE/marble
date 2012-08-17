@@ -63,6 +63,11 @@ maps/earth/clouds/0/000000/000000_000001.jpg
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/clouds/0/000000)
 
 install (FILES
+maps/earth/topographic/topographic.dgml
+maps/earth/topographic/preview-topographic.png
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/topographic)
+
+install (FILES
 maps/earth/srtm/srtm.dgml
 maps/earth/srtm/srtm-preview.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/srtm)
@@ -181,10 +186,6 @@ maps/earth/schagen1689/legend/schagen_orig.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/schagen1689/legend)
 
 install (FILES
-maps/earth/topographic/preview-topographic.png
-DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/topographic)
-
-install (FILES
 maps/moon/clementine/clementine.jpg
 maps/moon/clementine/clementine-preview.png
 maps/moon/clementine/legend.html 
@@ -237,14 +238,11 @@ mwdbii/RIVER.PNT
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/mwdbii)
 
 install (FILES
-naturalearth/50m_coastline.dbf
-naturalearth/50m_coastline.prj
-naturalearth/50m_coastline.shp
-naturalearth/50m_coastline.shx
-naturalearth/50m_geographic_lines.dbf
-naturalearth/50m_geographic_lines.prj
-naturalearth/50m_geographic_lines.shp
-naturalearth/50m_geographic_lines.shx
+naturalearth/50m_glaciated_areas.pn2
+naturalearth/50m_lakes.pn2
+naturalearth/50m_land.pn2
+naturalearth/ne_10m_admin_0_boundary_lines_land.pn2
+naturalearth/ne_10m_rivers_lake_centerlines.pn2
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/naturalearth)
 
 FILE (GLOB STAR_FILES stars/*.dat)
