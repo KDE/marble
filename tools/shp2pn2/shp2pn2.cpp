@@ -1,3 +1,38 @@
+//
+// This file is part of the Marble Virtual Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+//
+// For the Natural Earth Layer providing the Default data set at 0.5 arcminute resolution should be enough. 
+// This fileformat allows for even better packed data than the PNT format. For detailed polygons at arcminute 
+// scale on average it should use only 33% of the amount used by PNT.
+//
+// Description of the file format
+//
+// In the fileformat initally a file header is provided that provides the file format version and the number 
+// of polygons stored inside the file. A Polygon starts with the Polygon Header which provides the feature id 
+// and the number of so called "absolute nodes" that are about to follow. Absolute nodes always contain 
+// absolute geodetic coordinates. The Polygon Header also provides a flag that allows to specify whether the 
+// polygon is supposed to represent a line string ("0") or a linear ring ("1"). Each absolute node can be followed 
+// by relative nodes: These relative nodes are always nodes that follow in correct order inside the polygon after 
+// "their" absolute node. Each absolute node specifies the number of relative nodes which contain relative 
+// coordinates in reference to their absolute node. So an absolute node provides the absolute reference for 
+// relative nodes across a theoretical area of 2x2 squaredegree-area (which in practice frequently might rather 
+// amount to 1x1 square degrees).
+//
+// So much of the compression works by just referencing lat/lon diffs to special "absolute nodes". Hence the 
+// compression will especially work well for polygons with many nodes with a high node density.
+//
+// The parser has to convert these relative coordinates to absolute coordinates.
+//
+// Copyright 2012 Torsten Rahn <rahn@kde.org>
+// Copyright 2012 Cezar Mocan <mocancezar@gmail.com>
+//
+
+
 #include <QtCore/QDebug>
 #include <QtCore/QVector>
 #include <QtCore/QFileInfo>
@@ -22,6 +57,8 @@
 using namespace Marble;
 
 qreal epsilon   =   1.0;
+
+// Polygon header flags, representing the type of polygon
 enum polygonFlagType { LINESTRING = 0, LINEARRING = 1, OUTERBOUNDARY = 2, INNERBOUNDARY = 3, MULTIGEOMETRY = 4 };
 
 qreal latDistance( const GeoDataCoordinates &A, const GeoDataCoordinates &B ) {
@@ -37,18 +74,17 @@ qreal lonDistance( const GeoDataCoordinates &A, const GeoDataCoordinates &B ) {
 }
 
 qreal nodeDistance( const GeoDataCoordinates &A, const GeoDataCoordinates &B ) {
-    return ( qAbs( latDistance( A, B ) ) + qAbs( lonDistance( A, B ) ) );
+    return qMax( qAbs( latDistance( A, B ) ), qAbs( lonDistance( A, B ) ) );
 }
 
 
-qint16 printFormat16( const qreal &X ) {
+qint16 printFormat16( qreal X ) {
     return ( ( qint16 )( X * 120 ) );
 }
 
-qint8 printFormat8( const qreal &X ) {
+qint8 printFormat8( qreal X ) {
     return ( ( qint8 )( X * 120 ) );
 }
-
 
 quint32 getParentNodes( QVector<GeoDataCoordinates>::Iterator begin, QVector<GeoDataCoordinates>::Iterator end )
 {
@@ -58,9 +94,9 @@ quint32 getParentNodes( QVector<GeoDataCoordinates>::Iterator begin, QVector<Geo
     QVector<GeoDataCoordinates>::Iterator itAux = begin;
 
     for ( ; it != end && itAux != end; ++itAux ) {
-        if ( ( nodeDistance( (*it), (*itAux) ) > epsilon ) || ( itAux == begin ) ) { // absolute node
+        if ( ( nodeDistance( (*it), (*itAux) ) > epsilon ) || ( itAux == begin ) ) { // absolute nodes
             it = itAux;
-            parentNodes++;
+            ++parentNodes;
         }
     }
 
@@ -70,25 +106,25 @@ quint32 getParentNodes( QVector<GeoDataCoordinates>::Iterator begin, QVector<Geo
 void printAllNodes( QVector<GeoDataCoordinates>::Iterator begin, QVector<GeoDataCoordinates>::Iterator end, QDataStream &stream ) 
 {
 
-    quint16 nrChildNodes; 
+    qint16 nrChildNodes; 
 
     QVector<GeoDataCoordinates>::Iterator it = begin;
     QVector<GeoDataCoordinates>::Iterator itAux = begin;
 
     for ( ; it != end && itAux != end; ++itAux ) {
-        if ( ( nodeDistance( (*it), (*itAux) ) > epsilon ) || ( itAux == begin ) ) { // absolute node
+        if ( ( nodeDistance( (*it), (*itAux) ) > epsilon ) || ( itAux == begin ) ) { // absolute nodes
             it = itAux;
             nrChildNodes = 0;
             QVector<GeoDataCoordinates>::Iterator itAux2 = it + 1;
             for ( ; itAux2 != end && nodeDistance( (*it), (*itAux2) ) <= epsilon; ++itAux2 )
-                nrChildNodes++;
+                ++nrChildNodes;
 
             qint16 lat = printFormat16( it->latitude( GeoDataCoordinates::Degree ) );
             qint16 lon = printFormat16( it->longitude( GeoDataCoordinates::Degree ) );
 
-            stream << nrChildNodes << lat << lon;
+            stream << lat << lon << nrChildNodes;
         }
-        else {
+        else { // relative nodes
             qint8 lat = printFormat8( latDistance( (*it), (*itAux) ) );
             qint8 lon = printFormat8( lonDistance( (*it), (*itAux) ) );
             stream << lat << lon;
@@ -127,7 +163,7 @@ int main(int argc, char** argv)
     quint32 fileHeaderPolygons;
 
     fileHeaderVersion = 1;
-    fileHeaderPolygons = 0;
+    fileHeaderPolygons = 0; // This variable counts the number of polygons inside the document
 
     QVector<GeoDataFeature*>::Iterator i = document->begin();
     QVector<GeoDataFeature*>::Iterator const end = document->end();
@@ -141,15 +177,15 @@ int main(int argc, char** argv)
         GeoDataMultiGeometry* multigeom = dynamic_cast<GeoDataMultiGeometry*>( placemark->geometry() );
 
         if ( polygon ) {
-            fileHeaderPolygons += 1 + polygon->innerBoundaries().size(); // outer boundary + number of inner boundaries
+            fileHeaderPolygons += 1 + polygon->innerBoundaries().size(); // outer boundary + number of inner boundaries of the polygon
         }
 
         if ( linestring ) {
-            fileHeaderPolygons++;
+            ++fileHeaderPolygons;
         }
 
         if ( multigeom ) {
-            fileHeaderPolygons += multigeom->size();
+            fileHeaderPolygons += multigeom->size(); // number of polygons inside the multigeometry
         }
     }
 
@@ -160,11 +196,6 @@ int main(int argc, char** argv)
     quint32 polyCurrentID = 0;
     quint32 polyParentNodes;
     quint8 polyFlag; 
-    // 0 - linestring
-    // 1 - linearring
-    // 2 - outer polygon
-    // 3 - inner polygon
-    // 4 - multigeometry (not used yet)
 
     for ( ; i != end; ++i ) {
         GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>( *i );
@@ -177,11 +208,11 @@ int main(int argc, char** argv)
         if ( polygon ) {
 
             // Outer boundary
-            polyCurrentID++;
+            ++polyCurrentID;
             QVector<GeoDataCoordinates>::Iterator jBegin = polygon->outerBoundary().begin();
             QVector<GeoDataCoordinates>::Iterator jEnd = polygon->outerBoundary().end();
             polyParentNodes = getParentNodes( jBegin, jEnd );
-            polyFlag = OUTERBOUNDARY; // outer boundary
+            polyFlag = OUTERBOUNDARY;
 
             stream << polyCurrentID << polyParentNodes << polyFlag;
 
@@ -194,11 +225,11 @@ int main(int argc, char** argv)
             for ( ; inner != innerEnd; ++inner ) {
                 GeoDataLinearRing linearring = static_cast<GeoDataLinearRing>( *inner );
 
-                polyCurrentID++;
+                ++polyCurrentID;
                 jBegin = linearring.begin();
                 jEnd = linearring.end();
                 polyParentNodes = getParentNodes( jBegin, jEnd );
-                polyFlag = INNERBOUNDARY; // inner boundary
+                polyFlag = INNERBOUNDARY;
 
                 stream << polyCurrentID << polyParentNodes << polyFlag;
 
@@ -209,14 +240,14 @@ int main(int argc, char** argv)
         }
 
         if ( linestring ) {
-            polyCurrentID++;
+            ++polyCurrentID;
             QVector<GeoDataCoordinates>::Iterator jBegin = linestring->begin();
             QVector<GeoDataCoordinates>::Iterator jEnd = linestring->end();
             polyParentNodes = getParentNodes( jBegin, jEnd );
             if ( linestring->isClosed() )
-                polyFlag = LINEARRING; // linearring
+                polyFlag = LINEARRING;
             else
-                polyFlag = LINESTRING; // linestring
+                polyFlag = LINESTRING;
 
             stream << polyCurrentID << polyParentNodes << polyFlag;
 
@@ -231,14 +262,14 @@ int main(int argc, char** argv)
             for ( ; multi != multiEnd; ++multi ) {
                 GeoDataLineString* currLineString = dynamic_cast<GeoDataLineString*>( *multi );
 
-                polyCurrentID++;
+                ++polyCurrentID;
                 QVector<GeoDataCoordinates>::Iterator jBegin = currLineString->begin();
                 QVector<GeoDataCoordinates>::Iterator jEnd = currLineString->end();
                 polyParentNodes = getParentNodes( jBegin, jEnd );
                 if ( currLineString->isClosed() )
-                    polyFlag = LINEARRING; // linearring
+                    polyFlag = LINEARRING;
                 else
-                    polyFlag = LINESTRING; // linestring
+                    polyFlag = LINESTRING;
 
                 stream << polyCurrentID << polyParentNodes << polyFlag;
 

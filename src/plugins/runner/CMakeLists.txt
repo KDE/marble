@@ -23,6 +23,7 @@ add_subdirectory( cache )
 add_subdirectory( gpx )
 add_subdirectory( kml )
 add_subdirectory( osm )
+add_subdirectory( pn2 )
 add_subdirectory( pnt )
 add_subdirectory( log )
 
