@@ -2,19 +2,17 @@
 <dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
     <document>
         <head>
-            <name>Topographic map</name>
+            <name>Topographic Plain Map</name>
             <target>earth</target>
-            <theme>topographic</theme>
-            <icon pixmap="preview-topographic.png"/>
+            <theme>topo-plain</theme>
+            <icon pixmap="topo-plain-preview.png"/>
     
             <!-- describes whether the map theme item will be hidden (e.g.
                 for a clouds layer): -->
             <visible> true </visible>
         
             <!-- The description allows for rich text of course: -->
-            <description><![CDATA[<p>A <i>classic topographic map</i>.<p>It uses vector lines to
-                        mark coastlines, country borders etc. and bitmap
-                        graphics to create the height relief.]]></description>
+            <description><![CDATA[<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and country borders, etc...</p>]]></description>
     
             <zoom>
                 <minimum>   900  </minimum>
@@ -33,68 +31,32 @@
             <canvas/>
             <!-- In this place one could e.g. insert a sky plugin -->
             <target/>
-        
-            <!-- This layer creates the elevation model -->
-            
-            <layer name="topographic" backend="texture" role="dem">
-                <texture name="topographic_data">
-                    <sourcedir format="JPG"> earth/srtm </sourcedir>
-                    <installmap> srtm.jpg </installmap>
-                    <storageLayout maximumTileLevel="5"/>  
-                </texture>
-            </layer> 
-            
-
-
-            <layer name="colorme" backend="filter">
-                <filter name="texturecolorizer" type="colorize">
-                    <dem>topographic</dem>
-                    <coastlines format="PN2">naturalearth/50m_land.pn2</coastlines>
-                    <lakes format="PN2">naturalearth/50m_lakes.pn2</lakes>
-                    <glaciers format="PN2">naturalearth/50m_glaciated_areas.pn2</glaciers>
-                    <palette type="sea">seacolors.leg</palette>
-                    <palette type="land">landcolors.leg</palette>
-                </filter>
-            </layer>
-            
-            
-            <!-- This layer creates the coastlines that are needed to
-                colorize the elevation model properly -->
-      
-      
+         
             <layer name="standardplaces" backend="geodata">
-           
                 <geodata name="50m_land">
                     <sourcefile format="PN2">naturalearth/50m_land.pn2</sourcefile>
-                    <pen color="#f86649" /> 
+                    <brush color="#f2efe9" /> 
                 </geodata>
                 
-
                 <geodata name="50m_lakes">
                     <sourcefile format="PN2">naturalearth/50m_lakes.pn2</sourcefile>
-<!--                    <brush color="#99b3cc"/> -->
+                    <brush color="#99b3cc"/>
                 </geodata>
-
 
                 <geodata name="ne_10m_rivers_lake_centerlines">
                     <sourcefile format="PN2">naturalearth/ne_10m_rivers_lake_centerlines.pn2</sourcefile>
                     <pen color="#99b3cc"/>
                 </geodata>                
 
-                <geodata name="50m_glaciated_areas">
-                    <sourcefile format="PN2">naturalearth/50m_glaciated_areas.pn2</sourcefile>
-                </geodata>                
-               
                 <geodata name="ne_50m_admin_0_boundary_lines_land">
                     <sourcefile format="PN2">naturalearth/ne_10m_admin_0_boundary_lines_land.pn2</sourcefile>
-                    <pen color="#f86649" style="dashdotline" width="1.3"/>
+                    <pen color="#cccbca" style="dashdotline" width="1.3"/>
                 </geodata>                
-               
 
                 <geodata name="cityplacemarks">
                     <sourcefile format="KML">cityplacemarks.kml</sourcefile>
-                    <pick>placemark</pick> 
-
+                    <pick>placemark</pick> <!-- picks certain features from a
+                                            file -->
                 </geodata>
                 <geodata name="baseplacemarks">
                     <sourcefile format="KML">baseplacemarks.kml</sourcefile>
@@ -113,7 +75,7 @@
                     <sourcefile format="KML">boundaryplacemarks.kml</sourcefile>
                     <pick>placemark</pick>
                 </geodata>
-            </layer>        
+            </layer>
         </map>
 
         <settings>
@@ -162,16 +124,6 @@
                 <property name="rivers">
                     <available>true</available>
                     <value>true</value>
-                </property>
-            </group>
-            <group name="Surface">
-                <property name="ice">
-                    <value>true</value>
-                    <available>true</available>
-                </property>
-                <property name="relief">
-                    <value>true</value>
-                    <available>true</available>
                 </property>
             </group>
 
@@ -238,103 +190,39 @@
                 <heading>Boundaries</heading>
 
                 <item name="international-boundary">
-                    <icon color="#f29b68" pixmap="bitmaps/border_1.png"/>
+                    <icon color="#cccbca" pixmap="bitmaps/border_1.png"/>
                     <text>International</text>
                 </item>
-                <item name="state">
-                    <icon color="#f29b68" pixmap="bitmaps/border_2.png"/>
+                <item name="state-boundary">
+                    <icon color="#cccbca" pixmap="bitmaps/border_2.png"/>
                     <text>State</text>
                 </item>
             </section>
-    
+
             <section name="waterbodies" checkable="true" connect="waterbodies" spacing="12">
                 <heading>Water Bodies</heading>
 
                 <item name="lake">
-                    <icon color="#d0dff1" pixmap="bitmaps/lake.png"/>
+                    <icon color="#99b3cc" pixmap="bitmaps/lake.png"/>
                     <text>Lake</text>
                 </item>
                 <item name="river">
-                    <icon color="#637bff" pixmap="bitmaps/river.png"/>
+                    <icon color="#99b3cc" pixmap="bitmaps/river.png"/>
                     <text>River</text>
                 </item>
             </section>
     
-            <section name="elevation" checkable="false" spacing="12">
-                <heading>Elevation</heading>
+            <section name="surface" checkable="false" spacing="12">
+                <heading>Surface</heading>
 
-                <item name="topography7000">
-                    <icon color="#efe9dd"/>
-                    <text>7000 m</text>
+                <item name="land">
+                    <icon color="#f2efe9"/>
+                    <text>Land</text>
                 </item>
-                <item name="topography5000">
-                    <icon color="#e0d1b5"/>
-                    <text>5000 m</text>
+                <item name="water">
+                    <icon color="#99b3cc"/>
+                    <text>Water</text>
                 </item>
-                <item name="topography3500">
-                    <icon color="#bd974f"/>
-                    <text>3500 m</text>
-                </item>
-                <item name="topography2000">
-                    <icon color="#d6b678"/>
-                    <text>2000 m</text>
-                </item>
-                <item name="topography1000">
-                    <icon color="#e3dc9d"/>
-                    <text>1000 m</text>
-                </item>
-                <item name="topography500">
-                    <icon color="#cecf91"/>
-                    <text>500 m</text>
-                </item>
-                <item name="topography200">
-                    <icon color="#a9ba7e"/>
-                    <text>200 m</text>
-                </item>
-                <item name="topography50">
-                    <icon color="#84ab68"/>
-                    <text>50 m</text>
-                </item>
-                <item name="topography0">
-                    <icon color="#669b5f"/>
-                    <text>0 m</text>
-                </item>
-                <item name="topography-0">
-                    <icon color="#e3ecf5"/>
-                    <text>0 m (Water)</text>
-                </item>
-                <item name="topography-50">
-                    <icon color="#d0def2"/>
-                    <text>-50 m</text>
-                </item>
-                <item name="topography-200">
-                    <icon color="#bfd5ee"/>
-                    <text>-200 m</text>
-                </item>
-                <item name="topography-2000">
-                    <icon color="#a3c3e6"/>
-                    <text>-2000 m</text>
-                </item>
-                <item name="topography-4000">
-                    <icon color="#89b0da"/>
-                    <text>-4000 m</text>
-                </item>
-                <item name="topography-6500">
-                    <icon color="#6b99c9"/>
-                    <text>-6500 m</text>
-                </item>
-                <item name="topography-11000">
-                    <icon color="#5182b4"/>
-                    <text>-11000 m</text>
-                </item>
-            </section>
-
-            <section name="ice" checkable="true" connect="ice" spacing="12">
-                <heading>Ice and Glaciers</heading>
-            </section>
-
-            <section name="relief" checkable="true" connect="relief" spacing="12">
-                <heading>Relief</heading>
             </section>
 
             <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">

@@ -102,6 +102,11 @@ maps/earth/bluemarble/legend/water.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/bluemarble/legend)
 
 install (FILES
+maps/earth/topo-plain/topo-plain.dgml
+maps/earth/topo-plain/topo-plain-preview.png
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/topo-plain)
+
+install (FILES
 maps/earth/plain/plain.dgml
 maps/earth/plain/plain-preview.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/plain)
