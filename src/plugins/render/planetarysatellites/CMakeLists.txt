@@ -13,7 +13,11 @@ set( mex_SRCS
  mex/planetarySats.cpp )
 
 set( planetarysatellites_SRCS
- PlanetarySatellitesPlugin.cpp )
+ PlanetarySatellitesPlugin.cpp
+ TrackerPluginItem.cpp
+ TrackerPluginModel.cpp
+ PlanetarySatellitesItem.cpp
+ PlanetarySatellitesModel.cpp )
 
 marble_add_plugin( PlanetarySatellitesPlugin
  ${planetarysatellites_SRCS} ${mex_SRCS} )

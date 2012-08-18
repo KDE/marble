@@ -13,16 +13,19 @@
 
 #include "RenderPlugin.h"
 
+#include "GeoDataDocument.h"
+#include "GeoDataPlacemark.h"
+#include "CacheStoragePolicy.h"
+
 #include <QtCore/QObject>
 
 class QCheckBox;
-
-namespace Ui
-{
-}
+class PlanetarySats;
 
 namespace Marble
 {
+
+class PlanetarySatellitesModel;
 
 /**
  * @brief This plugin displays planetary satellites, space probes
@@ -63,6 +66,7 @@ private Q_SLOTS:
 
 private:
     bool m_isInitialized;
+    PlanetarySatellitesModel *m_planSatModel;
 };
 
 }

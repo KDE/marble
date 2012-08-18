@@ -13,7 +13,13 @@
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataStyle.h"
 #include "ViewportParams.h"
+#include "MarbleDirs.h"
+
+#include "PlanetarySatellitesModel.h"
+
+#include "mex/planetarySats.h"
 
 #include <QtCore/QUrl>
 #include <QtGui/QPushButton>
@@ -95,7 +101,7 @@ QList<PluginAuthor> PlanetarySatellitesPlugin::pluginAuthors() const
 QString PlanetarySatellitesPlugin::aboutDataText() const
 {
     // FIXME: add data about text
-    return tr( "???" );
+    return tr( "" );
 }
 
 QIcon PlanetarySatellitesPlugin::icon() const
@@ -110,7 +116,13 @@ RenderPlugin::RenderType PlanetarySatellitesPlugin::renderType() const
 
 void PlanetarySatellitesPlugin::initialize()
 {
+    m_planSatModel = new PlanetarySatellitesModel(
+        const_cast<MarbleModel *>( marbleModel() )->treeModel(),
+        marbleModel()->pluginManager(), marbleModel()->clock() );
+
     m_isInitialized = true;
+
+    enableModel( enabled() );
 }
 
 bool PlanetarySatellitesPlugin::isInitialized() const
@@ -125,9 +137,10 @@ bool PlanetarySatellitesPlugin::render( GeoPainter *painter, ViewportParams *vie
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
 
-    if( marbleModel()->planetId() == "earth" ) {
+    if( marbleModel()->planetId() == "earth") {
         enableModel( false );
     } else {
+        m_planSatModel->setPlanet( marbleModel()->planetId() );
         enableModel( enabled() );
     }
 
@@ -141,6 +154,8 @@ void PlanetarySatellitesPlugin::enableModel( bool enabled )
     if( !m_isInitialized ) {
         return;
     }
+
+    m_planSatModel->enable( enabled && visible() );
 }
 
 void PlanetarySatellitesPlugin::visibleModel( bool visible )
@@ -150,6 +165,8 @@ void PlanetarySatellitesPlugin::visibleModel( bool visible )
     if( !m_isInitialized ) {
         return;
     }
+
+    m_planSatModel->enable( enabled() && visible );
 }
 
 }
