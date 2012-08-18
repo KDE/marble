@@ -59,8 +59,8 @@ void PlanetarySatellitesItem::setDescription()
 {
     QString description =
       QObject::tr( "Object name: %1 <br />"
-                   "Center of perigee: %2 <br />"
-                   "Center of apogee: %3 <br />"
+                   "Pericentre: %2 <br />"
+                   "Apocentre: %3 <br />"
                    "Inclination: %4 <br />"
                    "Revolutions per day (24h): %5" )
         .arg( name(), QString::number( m_perc ), QString::number( m_apoc ),
