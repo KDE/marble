@@ -13,13 +13,8 @@
 
 #include "RenderPlugin.h"
 
-#include "GeoDataDocument.h"
-#include "GeoDataPlacemark.h"
-#include "CacheStoragePolicy.h"
-
 #include <QtCore/QObject>
 
-class QCheckBox;
 class PlanetarySats;
 
 namespace Marble
@@ -39,7 +34,7 @@ class PlanetarySatellitesPlugin : public RenderPlugin
 
 public:
     PlanetarySatellitesPlugin();
-    explicit PlanetarySatellitesPlugin( const MarbleModel *marbleModel );
+    explicit PlanetarySatellitesPlugin( const MarbleModel *model );
     virtual ~PlanetarySatellitesPlugin();
     
     QStringList backendTypes() const;
@@ -58,7 +53,10 @@ public:
     void initialize();
     bool isInitialized() const;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer );
+    bool render( GeoPainter *painter,
+                 ViewportParams *viewport,
+                 const QString &renderPos,
+                 GeoSceneLayer *layer );
 
 private Q_SLOTS:
     void enableModel( bool enabled );
@@ -69,6 +67,6 @@ private:
     PlanetarySatellitesModel *m_planSatModel;
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_PLANETARYSATELLITESPLUGIN_H

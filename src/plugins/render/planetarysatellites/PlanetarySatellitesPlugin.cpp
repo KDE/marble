@@ -12,17 +12,12 @@
 
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
-#include "GeoDataPlacemark.h"
-#include "GeoDataStyle.h"
 #include "ViewportParams.h"
 #include "MarbleDirs.h"
 
 #include "PlanetarySatellitesModel.h"
 
 #include "mex/planetarySats.h"
-
-#include <QtCore/QUrl>
-#include <QtGui/QPushButton>
 
 namespace Marble
 {
@@ -33,12 +28,16 @@ PlanetarySatellitesPlugin::PlanetarySatellitesPlugin()
 {
 }
 
-PlanetarySatellitesPlugin::PlanetarySatellitesPlugin( const MarbleModel *marbleModel )
-    : RenderPlugin( marbleModel ),
+PlanetarySatellitesPlugin::PlanetarySatellitesPlugin( const MarbleModel *model )
+    : RenderPlugin( model ),
      m_isInitialized( false )
 {
-    connect( this, SIGNAL(enabledChanged(bool)), SLOT(enableModel(bool)) );
-    connect( this, SIGNAL(visibilityChanged(bool,QString)), SLOT(visibleModel(bool)) );
+    connect( this,
+             SIGNAL( enabledChanged( bool ) ),
+             SLOT( enableModel( bool ) ) );
+    connect( this,
+             SIGNAL( visibilityChanged( bool, QString ) ),
+             SLOT( visibleModel( bool ) ) );
 
     setVisible( false );
 }
@@ -84,7 +83,7 @@ QString PlanetarySatellitesPlugin::version() const
 
 QString PlanetarySatellitesPlugin::description() const
 {
-    return tr( "This plugin displays planetary satellites, space probes and their orbits." );
+    return tr( "This plugin displays planetary satellites and their orbits." );
 }
 
 QString PlanetarySatellitesPlugin::copyrightYears() const
@@ -130,7 +129,10 @@ bool PlanetarySatellitesPlugin::isInitialized() const
     return m_isInitialized;
 }
 
-bool PlanetarySatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer )
+bool PlanetarySatellitesPlugin::render( GeoPainter *painter,
+                                        ViewportParams *viewport,
+                                        const QString &renderPos,
+                                        GeoSceneLayer *layer )
 {
     Q_UNUSED( painter );
     Q_UNUSED( viewport );
@@ -169,8 +171,9 @@ void PlanetarySatellitesPlugin::visibleModel( bool visible )
     m_planSatModel->enable( enabled() && visible );
 }
 
-}
+} // namespace Marble
 
 Q_EXPORT_PLUGIN2( PlanetarySatellitesPlugin, Marble::PlanetarySatellitesPlugin )
 
 #include "PlanetarySatellitesPlugin.moc"
+

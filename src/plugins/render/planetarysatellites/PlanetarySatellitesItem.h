@@ -14,8 +14,7 @@
 // FIXME create an abstract class for other tracker plugins
 #include "TrackerPluginItem.h"
 
-#include "GeoDataCoordinates.h"
-#include "GeoDataTrack.h"
+#include <QtCore/QString>
 
 #include "mex/planetarySats.h"
 
@@ -28,10 +27,11 @@ class GeoDataPlacemark;
 class PlanetarySatellitesItem : public TrackerPluginItem
 {
 public:
-    PlanetarySatellitesItem( const QString &name, PlanetarySats *planSat,
-        const MarbleClock *clock );
+    PlanetarySatellitesItem( const QString &name,
+                             PlanetarySats *planSat,
+                             const MarbleClock *clock );
 
-    const QString name() { return m_name; }
+    QString name() const; 
 
     void update();
     void showOrbit( bool show );

@@ -24,7 +24,8 @@
 namespace Marble {
 
 PlanetarySatellitesItem::PlanetarySatellitesItem( const QString &name, 
-    PlanetarySats *planSat, const MarbleClock *clock )
+                                                  PlanetarySats *planSat,
+                                                  const MarbleClock *clock )
     : TrackerPluginItem( name ),
       m_showOrbit( false ),
       m_track( new GeoDataTrack() ),
@@ -49,6 +50,11 @@ PlanetarySatellitesItem::PlanetarySatellitesItem( const QString &name,
     update();
 }
 
+QString PlanetarySatellitesItem::name() const
+{
+    return m_name;
+}
+
 void PlanetarySatellitesItem::setDescription()
 {
     QString description =
@@ -70,7 +76,7 @@ void PlanetarySatellitesItem::update()
 
     m_planSat->getTime();
     m_planSat->currentPos();
-    m_planSat->getPlanetographic(lng, lat, height);
+    m_planSat->getPlanetographic( lng, lat, height );
 
     qDebug() << "Update" << m_name << lng << lat << height;
 

@@ -50,7 +50,7 @@ void PlanetarySatellitesModel::setPlanet( const QString &lcPlanet )
 }
 
 void PlanetarySatellitesModel::parseFile( const QString &id,
-    const QByteArray &file )
+                                          const QByteArray &file )
 {
     Q_UNUSED( file );
 
