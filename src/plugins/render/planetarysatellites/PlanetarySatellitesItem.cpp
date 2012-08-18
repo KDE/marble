@@ -52,11 +52,11 @@ PlanetarySatellitesItem::PlanetarySatellitesItem( const QString &name,
 void PlanetarySatellitesItem::setDescription()
 {
     QString description =
-      QObject::tr( "Name: %1 <br />"
-                   "Peri-Center: %2 <br />"
-                   "Apo-Center: %3 <br />"
+      QObject::tr( "Object name: %1 <br />"
+                   "Center of perigee: %2 <br />"
+                   "Center of apogee: %3 <br />"
                    "Inclination: %4 <br />"
-                   "Rev/day: %5" )
+                   "Revolutions per day (24h): %5" )
         .arg( name(), QString::number( m_perc ), QString::number( m_apoc ),
               QString::number( m_inc ), QString::number( m_n0 ) );
      placemark()->setDescription( description );
