@@ -212,6 +212,7 @@ int PlanetarySats::getStateVector(int nsat)
        pls_satname[j-1] = satname[j]; 
        if(pls_satname[j-1] == '\n') pls_satname[j-1] = '\0';
       };
+      pls_satname[k-1] = '\0';
      }
      else fsc = 0;
     };
