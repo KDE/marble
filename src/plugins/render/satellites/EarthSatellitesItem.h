@@ -100,6 +100,6 @@ private:
     double square( double x );
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_EARTHSATELLITESITEM_H

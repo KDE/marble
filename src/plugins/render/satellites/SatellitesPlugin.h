@@ -97,6 +97,6 @@ private:
     Ui::SatellitesConfigDialog *ui_configWidget;
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_SATELLITESPLUGIN_H

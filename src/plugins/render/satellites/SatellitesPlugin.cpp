@@ -350,7 +350,7 @@ void SatellitesPlugin::setupConfigModel()
     m_configModel->appendChild( node );
 }
 
-}
+} // namespace Marble
 
 Q_EXPORT_PLUGIN2( SatellitesPlugin, Marble::SatellitesPlugin )
 

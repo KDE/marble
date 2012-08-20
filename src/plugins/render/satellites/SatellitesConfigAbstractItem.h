@@ -53,6 +53,6 @@ private:
     bool m_checked;
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_SATELLITESCONFIGABSTRACTITEM_H

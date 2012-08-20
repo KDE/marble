@@ -38,6 +38,6 @@ private:
     QVector<SatellitesConfigAbstractItem *> m_children;
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_SATELLITESCONFIGNODEITEM_H

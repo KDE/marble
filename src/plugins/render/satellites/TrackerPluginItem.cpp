@@ -42,4 +42,5 @@ GeoDataPlacemark* TrackerPluginItem::placemark()
     return d->m_placemark;
 }
 
-}
+} // namespace Marble
+
