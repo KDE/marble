@@ -59,12 +59,14 @@ void OrbiterSatellitesItem::setDescription()
 {
     QString description =
       QObject::tr( "Object name: %1 <br />"
-                   "Pericentre: %2 <br />"
-                   "Apocentre: %3 <br />"
-                   "Inclination: %4 <br />"
+                   "Pericentre: %2 km<br />"
+                   "Apocentre: %3 km<br />"
+                   "Inclination: %4 Degree<br />"
                    "Revolutions per day (24h): %5" )
-        .arg( name(), QString::number( m_perc ), QString::number( m_apoc ),
-              QString::number( m_inc ), QString::number( m_n0 ) );
+        .arg( name(), QString::number( m_perc, 'f', 2 ),
+                      QString::number( m_apoc, 'f', 2 ),
+                      QString::number( m_inc, 'f', 2 ),
+                      QString::number( m_n0, 'f', 2 ) );
      placemark()->setDescription( description );
 }
 
