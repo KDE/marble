@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
+// Copyright 2012 Rene Kuettner <rene@bitkanal.net>
 //
 
 #ifndef MARBLE_SATELLITESPLUGIN_H
