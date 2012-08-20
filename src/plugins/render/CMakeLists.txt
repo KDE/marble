@@ -25,7 +25,6 @@ add_subdirectory( sun )
 
 # Display online information
 add_subdirectory( earthquake )
-add_subdirectory( planetarysatellites )
 # Disabled for now until legal issues wrt to the API
 # and terms of service of opencaching are cleared up.
 #add_subdirectory( opencaching )

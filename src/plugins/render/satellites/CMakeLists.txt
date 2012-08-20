@@ -8,9 +8,14 @@ INCLUDE_DIRECTORIES(
 INCLUDE(${QT_USE_FILE})
 
 set( sgp4_SRCS
-  sgp4/sgp4ext.cpp
-  sgp4/sgp4unit.cpp
-  sgp4/sgp4io.cpp )
+ sgp4/sgp4ext.cpp
+ sgp4/sgp4unit.cpp
+ sgp4/sgp4io.cpp )
+
+set( mex_SRCS
+ mex/astrolib.cpp
+ mex/attlib.cpp
+ mex/planetarySats.cpp )
 
 set( satellites_SRCS
  TrackerPluginModel.cpp
@@ -19,6 +24,8 @@ set( satellites_SRCS
  SatellitesPlugin.cpp
  SatellitesModel.cpp
  SatellitesItem.cpp
+ PlanetarySatellitesModel.cpp
+ PlanetarySatellitesItem.cpp
  SatellitesConfigModel.cpp
  SatellitesConfigAbstractItem.cpp
  SatellitesConfigNodeItem.cpp
@@ -26,4 +33,7 @@ set( satellites_SRCS
 
 qt4_wrap_ui( satellites_SRCS SatellitesConfigDialog.ui )
 
-marble_add_plugin( SatellitesPlugin ${satellites_SRCS} ${sgp4_SRCS} )
+marble_add_plugin(SatellitesPlugin
+ ${satellites_SRCS}
+ ${sgp4_SRCS}
+ ${mex_SRCS} )

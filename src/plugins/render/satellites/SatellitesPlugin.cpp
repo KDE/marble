@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
+// Copyright 2012 Rene Kuettner <rene@bitkanal.net>
 //
 
 #include "SatellitesPlugin.h"
@@ -19,8 +20,6 @@
 #include "SatellitesConfigNodeItem.h"
 #include "ViewportParams.h"
 
-#include "sgp4/sgp4io.h"
-
 #include "ui_SatellitesConfigDialog.h"
 
 #include <QtCore/QUrl>
@@ -31,7 +30,9 @@ namespace Marble
 
 SatellitesPlugin::SatellitesPlugin()
     : RenderPlugin( 0 ),
-      m_model( 0 ),
+      m_satModel( 0 ),
+      m_planSatModel( 0 ),
+      m_currentPlanet( QString() ),
       m_configDialog( 0 ),
       ui_configWidget( 0 )
 {
@@ -39,8 +40,10 @@ SatellitesPlugin::SatellitesPlugin()
 
 SatellitesPlugin::SatellitesPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
-     m_model( 0 ),
+     m_satModel( 0 ),
+     m_planSatModel( 0 ),
      m_isInitialized( false ),
+     m_currentPlanet( QString() ),
      m_configDialog( 0 ),
      m_configModel( 0 ),
      ui_configWidget( 0 )
@@ -55,7 +58,8 @@ SatellitesPlugin::SatellitesPlugin( const MarbleModel *marbleModel )
 
 SatellitesPlugin::~SatellitesPlugin()
 {
-    delete m_model;
+    delete m_satModel;
+    delete m_planSatModel;
 
     delete m_configDialog;
     delete ui_configWidget;
@@ -93,7 +97,7 @@ QString SatellitesPlugin::guiString() const
 
 QString SatellitesPlugin::version() const
 {
-    return "1.0";
+    return "2.0";
 }
 
 QString SatellitesPlugin::description() const
@@ -103,18 +107,19 @@ QString SatellitesPlugin::description() const
 
 QString SatellitesPlugin::copyrightYears() const
 {
-    return "2011";
+    return "2012";
 }
 
 QList<PluginAuthor> SatellitesPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( "Guillaume Martres", "smarter@ubuntu.com" );
+            << PluginAuthor( "Guillaume Martres", "smarter@ubuntu.com" )
+            << PluginAuthor( "Rene Kuettner", "rene@bitkanal.net" );
 }
 
 QString SatellitesPlugin::aboutDataText() const
 {
-    return tr( "Satellites orbital elements from <a href=\"http://www.celestrak.com\">http://www.celestrak.com</a>" );
+    return tr( "Earth-Satellites orbital elements from <a href=\"http://www.celestrak.com\">http://www.celestrak.com</a>" );
 }
 
 QIcon SatellitesPlugin::icon() const
@@ -131,8 +136,15 @@ void SatellitesPlugin::initialize()
 {
     //FIXME: remove the const_cast, it may be best to create a new type of plugins where
     //marbleModel() is not const, since traditional RenderPlugins do not require that
-    m_model = new SatellitesModel( const_cast<MarbleModel *>( marbleModel() )->treeModel(), marbleModel()->pluginManager(),
-                                   marbleModel()->clock() );
+    m_satModel = new SatellitesModel(
+        const_cast<MarbleModel *>( marbleModel() )->treeModel(),
+        marbleModel()->pluginManager(),
+        marbleModel()->clock() );
+    m_planSatModel = new PlanetarySatellitesModel(
+        const_cast<MarbleModel *>( marbleModel() )->treeModel(),
+        marbleModel()->pluginManager(),
+        marbleModel()->clock() );
+
     m_isInitialized = true;
     updateSettings();
     enableModel( enabled() );
@@ -150,11 +162,8 @@ bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
 
-    if( marbleModel()->planetId() == "earth" ) {
-        enableModel( enabled() );
-    } else {
-        enableModel( false );
-    }
+    m_currentPlanet = marbleModel()->planetId();
+    enableModel( enabled() );
 
     return true;
 }
@@ -209,12 +218,13 @@ void SatellitesPlugin::updateSettings()
         return;
     }
 
-    m_model->clear();
+    m_satModel->clear();
+    m_planSatModel->clear();
 
     QStringList tleList = m_settings["tleList"].toStringList();
     foreach ( const QString &tle, tleList ) {
         mDebug() << tle;
-        m_model->downloadFile( QUrl( tle ), tle.mid( tle.lastIndexOf( '/' ) + 1 ) );
+        m_satModel->downloadFile( QUrl( tle ), tle.mid( tle.lastIndexOf( '/' ) + 1 ) );
     }
 }
 
@@ -229,10 +239,10 @@ QDialog *SatellitesPlugin::configDialog()
 
         setupConfigModel();
 
-        ui_configWidget->treeView->setModel( m_configModel );
-        ui_configWidget->treeView->expandAll();
+        ui_configWidget->treeViewEarth->setModel( m_configModel );
+        ui_configWidget->treeViewEarth->expandAll();
         for ( int i = 0; i < m_configModel->columnCount(); i++ ) {
-            ui_configWidget->treeView->resizeColumnToContents( i );
+            ui_configWidget->treeViewEarth->resizeColumnToContents( i );
         }
 
         readSettings();
@@ -248,18 +258,36 @@ QDialog *SatellitesPlugin::configDialog()
 
 void SatellitesPlugin::enableModel( bool enabled )
 {
-    if ( !m_isInitialized ) {
+    if ( !m_isInitialized  || m_currentPlanet.isEmpty() ) {
         return;
     }
-    m_model->enable( enabled && visible() );
+
+    if( m_currentPlanet == "earth" )
+    {
+        m_satModel->enable( enabled && visible() );
+        m_planSatModel->enable( false );
+    } else {
+        m_satModel->enable( false );
+        m_planSatModel->setPlanet( m_currentPlanet );
+        m_planSatModel->enable( enabled && visible() );
+    }
 }
 
 void SatellitesPlugin::visibleModel( bool visible )
 {
-    if ( !m_isInitialized ) {
+    if ( !m_isInitialized  || m_currentPlanet.isEmpty() ) {
         return;
     }
-    m_model->enable( enabled() && visible );
+
+    if( m_currentPlanet == "earth" )
+    {
+        m_satModel->enable( enabled() && visible );
+        m_planSatModel->enable( false );
+    } else {
+        m_satModel->enable( false );
+        m_planSatModel->setPlanet( m_currentPlanet );
+        m_planSatModel->enable( enabled() && visible );
+    }
 }
 
 void SatellitesPlugin::setupConfigModel()

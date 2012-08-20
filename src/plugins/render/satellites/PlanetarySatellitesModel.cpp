@@ -35,12 +35,12 @@ PlanetarySatellitesModel::~PlanetarySatellitesModel()
 {
 }
 
-void PlanetarySatellitesModel::setPlanet( const QString &lcPlanet )
+void PlanetarySatellitesModel::setPlanet( const QString &planetId )
 {
-    if( m_lcPlanet != lcPlanet ) {
+    if( m_lcPlanet != planetId ) {
 
-        qDebug() << "Planet changed from" << m_lcPlanet << "to" << lcPlanet;
-        m_lcPlanet = lcPlanet;
+        qDebug() << "Planet changed from" << m_lcPlanet << "to" << planetId;
+        m_lcPlanet = planetId;
 
         // FIXME placeholder until a final location for the data has
         //       been chosen

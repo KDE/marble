@@ -30,7 +30,7 @@ public:
                               const MarbleClock *clock );
     ~PlanetarySatellitesModel();
 
-    void setPlanet( const QString &lcPlanet );
+    void setPlanet( const QString &planetId );
     void parseFile( const QString &id, const QByteArray &file );
 
 protected:

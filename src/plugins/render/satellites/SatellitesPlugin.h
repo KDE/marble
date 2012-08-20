@@ -14,6 +14,7 @@
 #include "RenderPlugin.h"
 #include "DialogConfigurationInterface.h"
 #include "SatellitesModel.h"
+#include "PlanetarySatellitesModel.h"
 
 #include "sgp4/sgp4unit.h"
 
@@ -80,11 +81,13 @@ private Q_SLOTS:
 private:
     void setupConfigModel();
 
-    SatellitesModel *m_model;
+    SatellitesModel *m_satModel;
+    PlanetarySatellitesModel *m_planSatModel;
 
     bool m_isInitialized;
     QHash<QString, QVariant> m_settings;
     QHash<QString, QCheckBox *> m_boxHash;
+    QString m_currentPlanet;
 
     QDialog *m_configDialog;
     SatellitesConfigModel *m_configModel;
