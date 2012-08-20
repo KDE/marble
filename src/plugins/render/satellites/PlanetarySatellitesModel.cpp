@@ -80,7 +80,7 @@ void PlanetarySatellitesModel::parseFile( const QString &id,
     char cs_name[81];
     planSat->getSatName( cs_name );
     cs_name[80] = '\0'; // sanity
-    QString s_name( cs_name );
+    QString s_name = QString::fromAscii( cs_name );
     qDebug() << "Found planetary satellite" << s_name;
 
     PlanetarySatellitesItem *item = new PlanetarySatellitesItem(
