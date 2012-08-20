@@ -111,8 +111,10 @@ void TrackerPluginModel::addItem( TrackerPluginItem *mark )
 
 void TrackerPluginModel::clear()
 {
-    d->m_itemVector.clear();
     beginUpdateItems();
+    qDeleteAll( d->m_itemVector );
+    d->m_itemVector.clear();
+    d->m_itemVector.squeeze();
     d->m_document->clear();
     endUpdateItems();
 }
