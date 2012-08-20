@@ -8,8 +8,8 @@
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
 //
 
-#ifndef MARBLE_SATELLITESMODEL_H
-#define MARBLE_SATELLITESMODEL_H
+#ifndef MARBLE_EARTHSATELLITESMODEL_H
+#define MARBLE_EARTHSATELLITESMODEL_H
 
 #include "TrackerPluginModel.h"
 
@@ -18,11 +18,13 @@ namespace Marble {
 
 class MarbleClock;
 
-class SatellitesModel : public TrackerPluginModel
+class EarthSatellitesModel : public TrackerPluginModel
 {
     Q_OBJECT
 public:
-    SatellitesModel( GeoDataTreeModel *treeModel, const PluginManager *pluginManager, const MarbleClock *clock );
+    EarthSatellitesModel( GeoDataTreeModel *treeModel,
+                          const PluginManager *pluginManager,
+                          const MarbleClock *clock );
     void parseFile( const QString &id, const QByteArray &file );
 
 private:
@@ -31,4 +33,4 @@ private:
 
 }
 
-#endif // MARBLE_SATELLITESMODEL_H
+#endif // MARBLE_EARTHSATELLITESMODEL_H

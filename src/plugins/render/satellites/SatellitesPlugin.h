@@ -13,8 +13,8 @@
 
 #include "RenderPlugin.h"
 #include "DialogConfigurationInterface.h"
-#include "SatellitesModel.h"
-#include "PlanetarySatellitesModel.h"
+#include "EarthSatellitesModel.h"
+#include "OrbiterSatellitesModel.h"
 
 #include "sgp4/sgp4unit.h"
 
@@ -36,7 +36,8 @@ class SatellitesConfigModel;
  * @brief This plugin displays satellites and their orbits.
  *
  */
-class SatellitesPlugin : public RenderPlugin, public DialogConfigurationInterface
+class SatellitesPlugin : public RenderPlugin,
+                         public DialogConfigurationInterface
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
@@ -64,7 +65,10 @@ public:
     void initialize();
     bool isInitialized() const;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer );
+    bool render( GeoPainter *painter,
+                 ViewportParams *viewport,
+                 const QString &renderPos,
+                 GeoSceneLayer *layer );
 
     QHash<QString, QVariant> settings() const;
     void setSettings( const QHash<QString, QVariant> &settings );
@@ -81,8 +85,8 @@ private Q_SLOTS:
 private:
     void setupConfigModel();
 
-    SatellitesModel *m_satModel;
-    PlanetarySatellitesModel *m_planSatModel;
+    EarthSatellitesModel *m_earthSatModel;
+    OrbiterSatellitesModel *m_orbiterSatModel;
 
     bool m_isInitialized;
     QHash<QString, QVariant> m_settings;

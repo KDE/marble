@@ -8,10 +8,10 @@
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
 //
 
-#include "SatellitesModel.h"
+#include "EarthSatellitesModel.h"
 
 #include "MarbleDebug.h"
-#include "SatellitesItem.h"
+#include "EarthSatellitesItem.h"
 #include "MarbleClock.h"
 
 #include "sgp4/sgp4io.h"
@@ -19,7 +19,9 @@
 
 using namespace Marble;
 
-SatellitesModel::SatellitesModel( GeoDataTreeModel *treeModel, const PluginManager *pluginManager, const MarbleClock *clock )
+EarthSatellitesModel::EarthSatellitesModel( GeoDataTreeModel *treeModel,
+                                            const PluginManager *pluginManager,
+                                            const MarbleClock *clock )
     : TrackerPluginModel( treeModel, pluginManager ),
       m_clock( clock )
 {
@@ -27,7 +29,8 @@ SatellitesModel::SatellitesModel( GeoDataTreeModel *treeModel, const PluginManag
             this, SLOT(update()));
 }
 
-void SatellitesModel::parseFile( const QString &id, const QByteArray &file )
+void EarthSatellitesModel::parseFile( const QString &id,
+                                      const QByteArray &file )
 {
     Q_UNUSED( id );
 
@@ -58,7 +61,8 @@ void SatellitesModel::parseFile( const QString &id, const QByteArray &file )
             return;
         }
 
-        SatellitesItem *item = new SatellitesItem( satelliteName, satrec, m_clock );
+        EarthSatellitesItem *item = new EarthSatellitesItem( satelliteName,
+                                                             satrec, m_clock );
         addItem( item );
     }
 
@@ -68,4 +72,4 @@ void SatellitesModel::parseFile( const QString &id, const QByteArray &file )
     endUpdateItems();
 }
 
-#include "SatellitesModel.moc"
+#include "EarthSatellitesModel.moc"

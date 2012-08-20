@@ -14,7 +14,7 @@
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "GeoDataPlacemark.h"
-#include "SatellitesItem.h"
+#include "EarthSatellitesItem.h"
 #include "SatellitesConfigLeafItem.h"
 #include "SatellitesConfigModel.h"
 #include "SatellitesConfigNodeItem.h"
@@ -30,8 +30,8 @@ namespace Marble
 
 SatellitesPlugin::SatellitesPlugin()
     : RenderPlugin( 0 ),
-      m_satModel( 0 ),
-      m_planSatModel( 0 ),
+      m_earthSatModel( 0 ),
+      m_orbiterSatModel( 0 ),
       m_currentPlanet( QString() ),
       m_configDialog( 0 ),
       ui_configWidget( 0 )
@@ -40,8 +40,8 @@ SatellitesPlugin::SatellitesPlugin()
 
 SatellitesPlugin::SatellitesPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
-     m_satModel( 0 ),
-     m_planSatModel( 0 ),
+     m_earthSatModel( 0 ),
+     m_orbiterSatModel( 0 ),
      m_isInitialized( false ),
      m_currentPlanet( QString() ),
      m_configDialog( 0 ),
@@ -58,8 +58,8 @@ SatellitesPlugin::SatellitesPlugin( const MarbleModel *marbleModel )
 
 SatellitesPlugin::~SatellitesPlugin()
 {
-    delete m_satModel;
-    delete m_planSatModel;
+    delete m_earthSatModel;
+    delete m_orbiterSatModel;
 
     delete m_configDialog;
     delete ui_configWidget;
@@ -136,11 +136,11 @@ void SatellitesPlugin::initialize()
 {
     //FIXME: remove the const_cast, it may be best to create a new type of plugins where
     //marbleModel() is not const, since traditional RenderPlugins do not require that
-    m_satModel = new SatellitesModel(
+    m_earthSatModel = new EarthSatellitesModel(
         const_cast<MarbleModel *>( marbleModel() )->treeModel(),
         marbleModel()->pluginManager(),
         marbleModel()->clock() );
-    m_planSatModel = new PlanetarySatellitesModel(
+    m_orbiterSatModel = new OrbiterSatellitesModel(
         const_cast<MarbleModel *>( marbleModel() )->treeModel(),
         marbleModel()->pluginManager(),
         marbleModel()->clock() );
@@ -218,13 +218,13 @@ void SatellitesPlugin::updateSettings()
         return;
     }
 
-    m_satModel->clear();
-    m_planSatModel->clear();
+    m_earthSatModel->clear();
+    m_orbiterSatModel->clear();
 
     QStringList tleList = m_settings["tleList"].toStringList();
     foreach ( const QString &tle, tleList ) {
         mDebug() << tle;
-        m_satModel->downloadFile( QUrl( tle ), tle.mid( tle.lastIndexOf( '/' ) + 1 ) );
+        m_earthSatModel->downloadFile( QUrl( tle ), tle.mid( tle.lastIndexOf( '/' ) + 1 ) );
     }
 }
 
@@ -249,8 +249,8 @@ QDialog *SatellitesPlugin::configDialog()
 
         connect( m_configDialog, SIGNAL(accepted()), SLOT(writeSettings()) );
         connect( m_configDialog, SIGNAL(rejected()), SLOT(readSettings()) );
-        connect( ui_configWidget->buttonBox->button( QDialogButtonBox::Reset ), SIGNAL(clicked()),
-                 SLOT(restoreDefaultSettings()) );
+        connect( ui_configWidget->buttonBox->button( QDialogButtonBox::Reset ),
+                 SIGNAL(clicked()), SLOT(restoreDefaultSettings()) );
     }
 
     return m_configDialog;
@@ -264,12 +264,12 @@ void SatellitesPlugin::enableModel( bool enabled )
 
     if( m_currentPlanet == "earth" )
     {
-        m_satModel->enable( enabled && visible() );
-        m_planSatModel->enable( false );
+        m_earthSatModel->enable( enabled && visible() );
+        m_orbiterSatModel->enable( false );
     } else {
-        m_satModel->enable( false );
-        m_planSatModel->setPlanet( m_currentPlanet );
-        m_planSatModel->enable( enabled && visible() );
+        m_earthSatModel->enable( false );
+        m_orbiterSatModel->setPlanet( m_currentPlanet );
+        m_orbiterSatModel->enable( enabled && visible() );
     }
 }
 
@@ -281,12 +281,12 @@ void SatellitesPlugin::visibleModel( bool visible )
 
     if( m_currentPlanet == "earth" )
     {
-        m_satModel->enable( enabled() && visible );
-        m_planSatModel->enable( false );
+        m_earthSatModel->enable( enabled() && visible );
+        m_orbiterSatModel->enable( false );
     } else {
-        m_satModel->enable( false );
-        m_planSatModel->setPlanet( m_currentPlanet );
-        m_planSatModel->enable( enabled() && visible );
+        m_earthSatModel->enable( false );
+        m_orbiterSatModel->setPlanet( m_currentPlanet );
+        m_orbiterSatModel->enable( enabled() && visible );
     }
 }
 

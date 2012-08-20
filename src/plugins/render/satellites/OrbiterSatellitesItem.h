@@ -8,8 +8,8 @@
 // Copyright 2012 Rene Kuettner <rene@bitkanal.net>
 //
 
-#ifndef MARBLE_PLANETARYSATELLITESITEM_H
-#define MARBLE_PLANETARYSATELLITESITEM_H
+#ifndef MARBLE_ORBITERSATELLITESITEM_H
+#define MARBLE_ORBITERSATELLITESITEM_H
 
 // FIXME create an abstract class for other tracker plugins
 #include "TrackerPluginItem.h"
@@ -24,12 +24,12 @@ class GeoDataTrack;
 class MarbleClock;
 class GeoDataPlacemark;
 
-class PlanetarySatellitesItem : public TrackerPluginItem
+class OrbiterSatellitesItem : public TrackerPluginItem
 {
 public:
-    PlanetarySatellitesItem( const QString &name,
-                             PlanetarySats *planSat,
-                             const MarbleClock *clock );
+    OrbiterSatellitesItem( const QString &name,
+                           PlanetarySats *planSat,
+                           const MarbleClock *clock );
 
     QString name() const; 
 
@@ -58,4 +58,4 @@ private:
 
 } // namespace Marble
 
-#endif // MARBLE_PLANETARYSATELLITESITEM_H
+#endif // MARBLE_ORBITERSATELLITESITEM_H

@@ -9,7 +9,7 @@
 //
 
 
-#include "PlanetarySatellitesItem.h"
+#include "OrbiterSatellitesItem.h"
 
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
@@ -23,9 +23,9 @@
 
 namespace Marble {
 
-PlanetarySatellitesItem::PlanetarySatellitesItem( const QString &name, 
-                                                  PlanetarySats *planSat,
-                                                  const MarbleClock *clock )
+OrbiterSatellitesItem::OrbiterSatellitesItem( const QString &name, 
+                                              PlanetarySats *planSat,
+                                              const MarbleClock *clock )
     : TrackerPluginItem( name ),
       m_showOrbit( false ),
       m_track( new GeoDataTrack() ),
@@ -50,12 +50,12 @@ PlanetarySatellitesItem::PlanetarySatellitesItem( const QString &name,
     update();
 }
 
-QString PlanetarySatellitesItem::name() const
+QString OrbiterSatellitesItem::name() const
 {
     return m_name;
 }
 
-void PlanetarySatellitesItem::setDescription()
+void OrbiterSatellitesItem::setDescription()
 {
     QString description =
       QObject::tr( "Object name: %1 <br />"
@@ -68,7 +68,7 @@ void PlanetarySatellitesItem::setDescription()
      placemark()->setDescription( description );
 }
 
-void PlanetarySatellitesItem::update()
+void OrbiterSatellitesItem::update()
 {
     double lng    = 0.;
     double lat    = 0.;

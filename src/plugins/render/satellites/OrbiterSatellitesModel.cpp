@@ -8,7 +8,7 @@
 // Copyright 2012 Rene Kuettner <rene@bitkanal.net>
 //
 
-#include "PlanetarySatellitesModel.h"
+#include "OrbiterSatellitesModel.h"
 
 #include "MarbleDebug.h"
 #include "MarbleClock.h"
@@ -16,11 +16,11 @@
 
 #include "mex/planetarySats.h"
 
-#include "PlanetarySatellitesItem.h"
+#include "OrbiterSatellitesItem.h"
 
 namespace Marble {
 
-PlanetarySatellitesModel::PlanetarySatellitesModel(
+OrbiterSatellitesModel::OrbiterSatellitesModel(
     GeoDataTreeModel *treeModel,
     const PluginManager *pluginManager,
     const MarbleClock *clock )
@@ -31,11 +31,11 @@ PlanetarySatellitesModel::PlanetarySatellitesModel(
     connect( m_clock, SIGNAL( timeChanged() ), this, SLOT( update() ) );
 }
 
-PlanetarySatellitesModel::~PlanetarySatellitesModel()
+OrbiterSatellitesModel::~OrbiterSatellitesModel()
 {
 }
 
-void PlanetarySatellitesModel::setPlanet( const QString &planetId )
+void OrbiterSatellitesModel::setPlanet( const QString &planetId )
 {
     if( m_lcPlanet != planetId ) {
 
@@ -49,8 +49,8 @@ void PlanetarySatellitesModel::setPlanet( const QString &planetId )
    }
 }
 
-void PlanetarySatellitesModel::parseFile( const QString &id,
-                                          const QByteArray &file )
+void OrbiterSatellitesModel::parseFile( const QString &id,
+                                        const QByteArray &file )
 {
     Q_UNUSED( file );
 
@@ -78,13 +78,13 @@ void PlanetarySatellitesModel::parseFile( const QString &id,
 
     // FIXME this should be fixed in mex
     char cs_name[81];
-    planSat->getSatName( cs_name );
+    planSat->getSatName( (char*)&cs_name );
     cs_name[80] = '\0'; // sanity
-    QString s_name = QString::fromAscii( cs_name );
+    QString s_name = QString::fromAscii( (char*)&cs_name );
     qDebug() << "Found planetary satellite" << s_name;
 
-    PlanetarySatellitesItem *item = new PlanetarySatellitesItem(
-                    QString(s_name), planSat, m_clock );
+    OrbiterSatellitesItem *item = new OrbiterSatellitesItem(
+                    s_name, planSat, m_clock );
 
     beginUpdateItems();
     addItem( item );
@@ -93,5 +93,5 @@ void PlanetarySatellitesModel::parseFile( const QString &id,
 
 } // namespace Marble
 
-#include "PlanetarySatellitesModel.moc"
+#include "OrbiterSatellitesModel.moc"
 

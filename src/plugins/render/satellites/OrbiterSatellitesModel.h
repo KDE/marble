@@ -8,8 +8,8 @@
 // Copyright 2012 Rene Kuettner <rene@bitkanal.net>
 //
 
-#ifndef MARBLE_PLANETARYSATELLITESMODEL_H
-#define MARBLE_PLANETARYSATELLITESMODEL_H
+#ifndef MARBLE_ORBITERSATELLITESMODEL_H
+#define MARBLE_ORBITERSATELLITESMODEL_H
 
 // FIXME create an abstract class for other tracker plugins
 #include "TrackerPluginModel.h"
@@ -20,15 +20,15 @@ class MarbleClock;
 class MarbleModel;
 class GeoDataTreeModel;
 
-class PlanetarySatellitesModel : public TrackerPluginModel
+class OrbiterSatellitesModel : public TrackerPluginModel
 {
     Q_OBJECT
 
 public:
-    PlanetarySatellitesModel( GeoDataTreeModel *treeModel,
-                              const PluginManager *pluginManager,
-                              const MarbleClock *clock );
-    ~PlanetarySatellitesModel();
+    OrbiterSatellitesModel( GeoDataTreeModel *treeModel,
+                            const PluginManager *pluginManager,
+                            const MarbleClock *clock );
+    ~OrbiterSatellitesModel();
 
     void setPlanet( const QString &planetId );
     void parseFile( const QString &id, const QByteArray &file );
@@ -41,5 +41,5 @@ protected:
 
 } // namespace Marble
 
-#endif // MARBLE_PLANETARYSATELLITESMODEL_H
+#endif // MARBLE_ORBITERSATELLITESMODEL_H
 
