@@ -15,6 +15,7 @@
 #include "TrackerPluginItem.h"
 
 #include <QtCore/QString>
+#include <QtCore/QDateTime>
 
 #include "mex/planetarySats.h"
 
@@ -54,6 +55,7 @@ private:
     double m_n0;
 
     void setDescription();
+    void addTrackPointAt( const QDateTime &dateTime );
 };
 
 } // namespace Marble

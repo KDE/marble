@@ -72,18 +72,45 @@ void OrbiterSatellitesItem::setDescription()
 
 void OrbiterSatellitesItem::update()
 {
+    double period = 24  * 3600 / m_n0;
+    QDateTime startTime = m_clock->dateTime().addSecs( - period / 2. );
+    QDateTime endTime = startTime.addSecs( period );
+
+    m_track->removeBefore( startTime );
+    m_track->removeAfter( endTime );
+
+    double step = period / 100.;
+
+    // FIXME update track only if orbit is visible
+    for( double i = startTime.toTime_t(); i < endTime.toTime_t(); i += step ) {
+
+        if ( i >= m_track->firstWhen().toTime_t() ) {
+            i = m_track->lastWhen().toTime_t() + step;
+        }
+
+        addTrackPointAt( QDateTime::fromTime_t( i ) );
+    }
+
+    addTrackPointAt( m_clock->dateTime() );
+}
+
+void OrbiterSatellitesItem::addTrackPointAt( const QDateTime &dateTime )
+{
     double lng    = 0.;
     double lat    = 0.;
     double height = 0.;
 
-    m_planSat->getTime();
+    QDateTime dt = dateTime.toUTC();
+    QDate date = dt.date();
+    QTime time = dt.time();
+
+    m_planSat->setMJD( date.year(), date.month(), date.day(),
+                       time.hour(), time.minute(), time.second() );
     m_planSat->currentPos();
     m_planSat->getPlanetographic( lng, lat, height );
-
-    qDebug() << "Update" << m_name << lng << lat << height;
-
-    GeoDataCoordinates coords( lng, lat, height * 1000, GeoDataCoordinates::Degree );
-    m_track->addPoint( m_clock->dateTime(), coords );
+    m_track->addPoint( dateTime,
+                       GeoDataCoordinates( lng, lat, height * 1000,
+                                           GeoDataCoordinates::Degree) );
 }
 
 } // namespace Marble
