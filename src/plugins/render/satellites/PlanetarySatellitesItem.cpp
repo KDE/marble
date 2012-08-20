@@ -80,7 +80,7 @@ void PlanetarySatellitesItem::update()
 
     qDebug() << "Update" << m_name << lng << lat << height;
 
-    GeoDataCoordinates coords( lng, lat, height, GeoDataCoordinates::Degree );
+    GeoDataCoordinates coords( lng, lat, height * 1000, GeoDataCoordinates::Degree );
     m_track->addPoint( m_clock->dateTime(), coords );
 }
 
