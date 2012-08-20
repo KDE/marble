@@ -17,8 +17,6 @@
 #include "EarthSatellitesModel.h"
 #include "OrbiterSatellitesModel.h"
 
-#include "sgp4/sgp4unit.h"
-
 #include <QtCore/QObject>
 
 class QCheckBox;
