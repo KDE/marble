@@ -28,7 +28,6 @@ class HorizonsClient(object):
         self._host = "horizons.jpl.nasa.gov"
         self._port = 6775
         self._prompt = "Horizons>"
-        self._data = []
         self._connection = None
         self._debug = False
         self._commands = [
@@ -41,12 +40,12 @@ class HorizonsClient(object):
                 ( re.escape("Coordinate center [ <id>,coord,geo  ] : "), "500@{planet_id}" ),
                 ( re.escape("Confirm selected station    [ y/n ] --> "), "y" ),
                 ( re.escape("Reference plane [eclip, frame, body ] : "), "frame" ),
-                ( re.escape("Output interval [ex: 10m, 1h, 1d, ? ] : "), "1h" ),
+                ( re.escape("Output interval [ex: 10m, 1h, 1d, ? ] : "), "2d" ),
                 ( re.escape("Accept default output [ cr=(y), n, ?] : "), "n" ),
                 ( re.escape("Output reference frame [J2000, B1950] : "), "J2000" ),
                 ( re.escape("Corrections [ 1=NONE, 2=LT, 3=LT+S ]  : "), "1" ),
                 ( re.escape("Output units [1=KM-S, 2=AU-D, 3=KM-D] : "), "1" ),
-                ( re.escape("Spreadsheet CSV format    [ YES, NO ] : "), "NO" ),
+                ( re.escape("Spreadsheet CSV format    [ YES, NO ] : "), "YES" ),
                 ( re.escape("Label cartesian output    [ YES, NO ] : "), "NO" ),
                 ( re.escape("Select output table type  [ 1-6, ?  ] : "), "2" ),
                 ( re.escape("[A]gain, [N]ew-case, [F]tp, [K]ermit, [M]ail, [R]edisplay, ? : "), "n" ),
@@ -62,7 +61,7 @@ class HorizonsClient(object):
     def disconnect(self):
         self._connection.close()
 
-    def getStateVector(self, object_name, planet, planetId, theTime=None):
+    def getStateVector(self, object_name, planet, planetId, tStart, tEnd):
         if(self._connection is None):
             print("Not connect!")
             return
@@ -70,11 +69,8 @@ class HorizonsClient(object):
               .format(object_name, planet))
         self._send(object_name)
         
-        if(theTime is None):
-            theTime = time.gmtime(time.time())
-        dateTimeStart = time.strftime("%Y-%m-%d %H:%M", theTime)
-        theTime = time.gmtime(calendar.timegm(theTime) + 60)
-        dateTimeEnd   = time.strftime("%Y-%m-%d %H:%M", theTime)
+        dateTimeStart = time.strftime("%Y-%m-%d %H:%M", time.strptime(tStart,'%Y-%m-%d'))
+        dateTimeEnd   = time.strftime("%Y-%m-%d %H:%M", time.strptime(tEnd,'%Y-%m-%d'))
         
         cmds = [x for (x,y) in self._commands]
         resp = [y.format(planet=planet,
@@ -83,6 +79,8 @@ class HorizonsClient(object):
                          datetimeend=dateTimeEnd) for (x,y) in self._commands]
         
         done = False
+        parsed = ""
+
         while(not done):
             r, data = self._nextCommand(cmds, resp)
             if(r == self.DONE):
@@ -90,16 +88,16 @@ class HorizonsClient(object):
             elif(r == self.DATA):
                 print("  Found... Parsing...")
                 parsed = self._parseData(data)
-                self._data.append( ( object_name, planet,
-                                     parsed[0], parsed[1], parsed[2] ) )
                 print("  Success")
             elif(r == self.NORESPONSE):
                 pass
             else:
                 self._send(r)
 
+        return parsed
+
     def _nextCommand(self, cmds, resp):
-        idx, match, data = self._connection.expect(cmds, 30)
+        idx, match, data = self._connection.expect(cmds, 120)
         if(self._debug):
             print(data)
         return (resp[idx], data)
@@ -108,16 +106,16 @@ class HorizonsClient(object):
         return (jstamp - 2440587.5) * 86400
 
     def _parseData(self, data):
-        sdat = string.split(data)
-        jdate = sdat[0]
-        rx = string.atof(sdat[6])
-        ry = string.atof(sdat[7])
-        rz = string.atof(sdat[8])
-        vx = string.atof(sdat[9])
-        vy = string.atof(sdat[10])
-        vz = string.atof(sdat[11])
-        t = time.gmtime(self._jdatetounix(string.atof(jdate)))
-        return ( t, (rx,ry,rz), (vx,vy,vz) )
+        sdat = string.split(data, ',')
+        dstr = ""
+        if(len(sdat) < 1):
+            raise Exception()
+        for i in range(0, len(sdat) - 1, 8):
+            ldat = sdat[i:i+8]
+            elms = (ldat[0], ldat[2], ldat[3], ldat[4],
+                    ldat[5], ldat[6], ldat[7])
+            dstr = dstr + string.strip(string.join(elms, ' ')) + "\n"
+        return dstr
 
     def _send(self, data):
         self._connection.write("{0}\n".format(data))
