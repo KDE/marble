@@ -248,6 +248,9 @@ naturalearth/50m_lakes.pn2
 naturalearth/50m_land.pn2
 naturalearth/ne_10m_admin_0_boundary_lines_land.pn2
 naturalearth/ne_10m_rivers_lake_centerlines.pn2
+naturalearth/50m-urban-area.pn2
+naturalearth/ne_50m_disputed.pn2
+naturalearth/50m-states-provinces.pn2
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/naturalearth)
 
 FILE (GLOB STAR_FILES stars/*.dat)
