@@ -20,7 +20,7 @@ import calendar
 ####[ Configuration ]#########################################################
 
 object_catalogue_file   = "satcatalogue.txt"
-data_file_base_url      = "http://bitquirl.net/~rene/orbitdata/"
+data_file_base_url      = "http://bitquirl.net/~rene/orbitdata"
 
 # define all interesting objects
 horizons_objects = [
