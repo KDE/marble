@@ -14,7 +14,6 @@ import sys
 import telnetlib
 import time
 import calendar
-import string
 import re
 
 """
@@ -117,15 +116,16 @@ class HorizonsClient(object):
         return (jstamp - 2440587.5) * 86400
 
     def _parse_data(self, data):
-        sdat = string.split(data, ',')
+        sdat = data.split(',')
         dstr = ""
         if(len(sdat) < 1):
             raise Exception()
         for i in range(0, len(sdat) - 1, 8):
             ldat = sdat[i:i+8]
-            elms = (ldat[0], ldat[2], ldat[3], ldat[4],
-                    ldat[5], ldat[6], ldat[7])
-            dstr = dstr + string.strip(string.join(elms, ' ')) + "\n"
+            elms = [ ldat[0], str(float(ldat[2])), str(float(ldat[3])),
+                              str(float(ldat[4])), str(float(ldat[5])),
+                              str(float(ldat[6])), str(float(ldat[7])) ]
+            dstr = dstr + ' '.join(elms).strip() + "\n"
         return dstr
 
     def _send(self, data):

@@ -11,7 +11,6 @@
 from __future__ import print_function
 
 import sys
-import string
 
 class ObjectCatalogue(object):
 
@@ -29,7 +28,7 @@ class ObjectCatalogue(object):
         url = self._baseURL + "/" + dataFile
         if(missionEnd is None):
             missionEnd = ''
-        e = string.join([name, planet, str(missionStart), str(missionEnd), url], ', ')
+        e = ', '.join([name, planet, str(missionStart), str(missionEnd), url])
         self._file.write(e + "\n")
 
     def _open(self):
