@@ -54,12 +54,9 @@ class OrbitDataFetcher(object):
         f.close()
 
 # helper
-def to_unix_timestamp(text):
+def str_to_unix_timestamp(text):
     if(text is None):
-        t = time.gmtime(time.time())
-        return calendar.timegm(
-            time.strptime('{0:02d}-{1:02d}-{2:02d}'.format(
-                t.tm_year, t.tm_mon, t.tm_mday), '%Y-%m-%d'))
+        return time.time() - time.time() % (3600*24) + 1 # today at 00:00
     return calendar.timegm(time.strptime(text, '%Y-%m-%d %H:%M'))
 
 objectCatalogue = ObjectCatalogue(object_catalogue_file, data_file_base_url)
@@ -67,7 +64,7 @@ orbitDataFetcher = OrbitDataFetcher(objectCatalogue)
 
 # request data from horizons
 for obj in horizons_objects:
-    obj[3] = to_unix_timestamp(obj[3])
-    obj[4] = to_unix_timestamp(obj[4])
+    obj[3] = str_to_unix_timestamp(obj[3])
+    obj[4] = str_to_unix_timestamp(obj[4])
     orbitDataFetcher.fetch_from_horizons(*obj)
 
