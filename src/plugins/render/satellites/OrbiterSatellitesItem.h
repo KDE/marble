@@ -31,6 +31,7 @@ public:
     OrbiterSatellitesItem( const QString &name,
                            PlanetarySats *planSat,
                            const MarbleClock *clock );
+    ~OrbiterSatellitesItem();
 
     QString name() const; 
 

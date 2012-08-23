@@ -50,6 +50,10 @@ OrbiterSatellitesItem::OrbiterSatellitesItem( const QString &name,
     update();
 }
 
+OrbiterSatellitesItem::~OrbiterSatellitesItem()
+{
+}
+
 QString OrbiterSatellitesItem::name() const
 {
     return m_name;

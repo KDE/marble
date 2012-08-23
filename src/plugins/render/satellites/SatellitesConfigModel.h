@@ -41,6 +41,6 @@ private:
     SatellitesConfigNodeItem *m_rootItem;
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_SATELLITESCONFIGMODEL_H

@@ -94,6 +94,6 @@ private:
     Q_PRIVATE_SLOT( d, void update() );
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_TRACKERPLUGINMODEL_H

@@ -31,6 +31,6 @@ private:
     const MarbleClock *m_clock;
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_EARTHSATELLITESMODEL_H

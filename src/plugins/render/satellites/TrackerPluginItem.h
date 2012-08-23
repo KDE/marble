@@ -52,6 +52,6 @@ private:
     TrackerPluginItemPrivate *d;
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_TRACKERPLUGINITEM_H

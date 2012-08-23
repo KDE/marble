@@ -38,6 +38,6 @@ private:
     bool m_isOrbitDisplayed;
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_SATELLITESCONFIGLEAFITEM_H
