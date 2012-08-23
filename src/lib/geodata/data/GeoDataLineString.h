@@ -232,15 +232,24 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 */
 =======
 /*!
+    \brief Assigns the detail levels by using Douglas-Peucker
+*/
+
+    void assignDetailLevelsDP( QVector<GeoDataCoordinates>::ConstIterator itLeft, QVector<GeoDataCoordinates>::ConstIterator itRight, int currentDetailLevel ) const;
+
+/*!
     \brief Returns a reference to the coordinates of the first node that has a detailLevel greater or equal than the current one.
 */
    
     void nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterator &itCoordsCurrent, int detailLevel ) const;
 
+<<<<<<< HEAD
 >>>>>>> 9054e85... Current state of linestring filtering
 
     void douglasPeucker( QVector<GeoDataCoordinates>::ConstIterator itLeft, QVector<GeoDataCoordinates>::ConstIterator itRight, const int currentDetailLevel ) const;
 =======
+=======
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
 /*!
     \brief Returns a reference to the coordinates of the first node that has a detailLevel greater or equal than the current one.
 */
@@ -250,6 +259,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 >>>>>>> 9054e85... Current state of linestring filtering
 
 /*!
+<<<<<<< HEAD
     \brief Returns a reference to the coordinates of the first node that has a detailLevel greater or equal than the current one.
 */
    
@@ -264,6 +274,8 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 
 
 /*!
+=======
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
     \brief Returns a reference to the coordinates of a node at a given position.
     This method detaches the returned coordinate object from the line string.
 */

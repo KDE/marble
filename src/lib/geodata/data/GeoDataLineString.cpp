@@ -150,6 +150,7 @@ const GeoDataCoordinates& GeoDataLineString::at( int pos ) const
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 void GeoDataLineString::douglasPeucker( QVector<GeoDataCoordinates>::ConstIterator itLeft, QVector<GeoDataCoordinates>::ConstIterator itRight, const int currentDetailLevel ) const
 =======
@@ -178,6 +179,17 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
     QVector<GeoDataCoordinates>::const_iterator itBegin = itLeft;
     QVector<GeoDataCoordinates>::const_iterator itEnd = itRight;
     QVector<GeoDataCoordinates>::const_iterator itDMax = ( itLeft + ( itRight - itLeft ) / 2 );
+=======
+void GeoDataLineString::assignDetailLevelsDP( QVector<GeoDataCoordinates>::ConstIterator itLeft, QVector<GeoDataCoordinates>::ConstIterator itRight, int currentDetailLevel ) const
+{
+    GeoDataLineStringPrivate* d = p();
+
+    qreal dMax = -1;
+    QVector<GeoDataCoordinates>::const_iterator itCoords = itLeft;
+    QVector<GeoDataCoordinates>::const_iterator itBegin = itLeft;
+    QVector<GeoDataCoordinates>::const_iterator itEnd = itRight;
+    QVector<GeoDataCoordinates>::const_iterator itDMax = itLeft;
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
 
     ++itCoords;
     --itEnd;
@@ -186,7 +198,10 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
     int p1 = itLeft - d->m_vector.constBegin();
     int p2 = itRight - d->m_vector.constBegin() - 1;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
     if ( currentDetailLevel < d->m_vectorDetailLevels[p1] )
         d->m_vectorDetailLevels[p1] = currentDetailLevel;
 
@@ -199,13 +214,17 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
 
     for ( ; itCoords != itEnd; ++itCoords ) {
         qreal dist = perpendicularDistance( *itCoords, *itBegin, *itEnd );
+<<<<<<< HEAD
         
+=======
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
         if ( dist > dMax ) {
             dMax = dist;
             itDMax = itCoords;
         }
     } 
 
+<<<<<<< HEAD
 =======
 
     if ( d->m_dirtyDetail ) {
@@ -222,6 +241,15 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
 
     douglasPeucker( itLeft, itDMax + 1, nextDetailLevel );
     douglasPeucker( itDMax, itRight, nextDetailLevel );
+=======
+    int nextDetailLevel = currentDetailLevel;
+
+    while ( dMax < epsilonFromDetailLevel( nextDetailLevel ) )
+        nextDetailLevel++;
+
+    assignDetailLevelsDP( itLeft, itDMax + 1, nextDetailLevel );
+    assignDetailLevelsDP( itDMax, itRight, nextDetailLevel );
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
 }
 
 void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterator &itCoordsCurrent, int detailLevel ) const
@@ -236,6 +264,7 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
         d->m_vectorDetailLevels.resize( d->m_vector.size() );
         d->m_vectorDetailLevels.fill( 20 );
 
+<<<<<<< HEAD
         douglasPeucker( d->m_vector.constBegin(), d->m_vector.constEnd(), 1 );
     }
 =======
@@ -249,6 +278,13 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
 <<<<<<< HEAD
     ++itCoordsCurrent;
     ++currentPosition;
+=======
+        assignDetailLevelsDP( d->m_vector.constBegin(), d->m_vector.constEnd(), 1 );
+
+/*
+    	QVector<GeoDataCoordinates>::const_iterator itCoords = d->m_vector.constBegin();
+	    QVector<GeoDataCoordinates>::const_iterator itEnd = d->m_vector.constEnd();
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
 
     if ( itCoordsCurrent == d->m_vector.constEnd() )
         return;
@@ -259,7 +295,6 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
 >>>>>>> 9054e85... Current state of linestring filtering
         QVector<int> pattern;
         pattern.clear();
-//        pattern << 8 << 4 << 6 << 3 << 7 << 2 << 5 << 1;
 
         pattern << 16 << 8 << 12 << 7 << 14 << 6 << 11 << 5 << 15 << 4 << 10 << 3 << 13 << 2 << 9 << 1;
 
@@ -271,7 +306,12 @@ void GeoDataLineString::nextFilteredAt( QVector<GeoDataCoordinates>::ConstIterat
             ++count;
 	    }
 
+<<<<<<< HEAD
         d->m_vectorDetailLevels.last() = 16;
+=======
+        d->m_vectorDetailLevels.last() = 1;
+*/              
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
     }
 
     int currentPosition = (itCoordsCurrent - (d->m_vector.constBegin()));
@@ -432,6 +472,12 @@ void GeoDataLineString::append ( const GeoDataCoordinates& value )
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_dirtyDetail = true;
+<<<<<<< HEAD
+=======
+    d->m_dirtyCrossingNorth = true;
+    d->m_dirtyCrossingSouth = true;
+    d->m_dirtyHowManyCrossings = true;
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
     d->m_vector.append( value );
 }
 
@@ -444,6 +490,12 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& va
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_dirtyDetail = true;
+<<<<<<< HEAD
+=======
+    d->m_dirtyCrossingNorth = true;
+    d->m_dirtyCrossingSouth = true;
+    d->m_dirtyHowManyCrossings = true;
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
     d->m_vector.append( value );
     return *this;
 }
@@ -457,6 +509,12 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataLineString& val
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_dirtyDetail = true;
+<<<<<<< HEAD
+=======
+    d->m_dirtyCrossingNorth = true;
+    d->m_dirtyCrossingSouth = true;
+    d->m_dirtyHowManyCrossings = true;
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
 
     QVector<GeoDataCoordinates>::const_iterator itCoords = value.constBegin();
     QVector<GeoDataCoordinates>::const_iterator itEnd = value.constEnd();
@@ -477,6 +535,12 @@ void GeoDataLineString::clear()
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_dirtyDetail = true;
+<<<<<<< HEAD
+=======
+    d->m_dirtyCrossingNorth = true;
+    d->m_dirtyCrossingSouth = true;
+    d->m_dirtyHowManyCrossings = true;
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
 
     d->m_vector.clear();
 }
@@ -549,6 +613,7 @@ GeoDataLineString GeoDataLineString::toNormalized() const
 
 QVector<GeoDataLineString*> GeoDataLineString::toRangeCorrected() const
 {
+//    qDebug() << "Entering toRangeCorrected " << p()->m_vector.size() << " " << p()->m_dirtyRange << "\n";
     if ( p()->m_dirtyRange ) {
 
         qDeleteAll( p()->m_rangeCorrected ); // This shouldn't be needed
@@ -558,11 +623,13 @@ QVector<GeoDataLineString*> GeoDataLineString::toRangeCorrected() const
 
         if ( latLonAltBox().crossesDateLine() && tessellate() )
         {
+//            qDebug() << "Case 1 " << p()->m_vector.size() << "\n";
             GeoDataLineString normalizedLineString = toNormalized();
             poleCorrected = normalizedLineString.toPoleCorrected();
             p()->m_rangeCorrected.append( new GeoDataLineString( poleCorrected ) );
         }
         else {
+//            qDebug() << "Case 2 " << p()->m_vector.size() << "\n";
             poleCorrected = toPoleCorrected();
             p()->m_rangeCorrected.append( new GeoDataLineString( poleCorrected ));
         }
@@ -798,6 +865,12 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_dirtyDetail = true;
+<<<<<<< HEAD
+=======
+    d->m_dirtyCrossingNorth = true;
+    d->m_dirtyCrossingSouth = true;
+    d->m_dirtyHowManyCrossings = true;
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
     return d->m_vector.erase( pos );
 }
 
@@ -810,6 +883,12 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_dirtyDetail = true;
+<<<<<<< HEAD
+=======
+    d->m_dirtyCrossingNorth = true;
+    d->m_dirtyCrossingSouth = true;
+    d->m_dirtyHowManyCrossings = true;
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
     return d->m_vector.erase( begin, end );
 }
 
@@ -820,6 +899,12 @@ void GeoDataLineString::remove ( int i )
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_dirtyDetail = true;
+<<<<<<< HEAD
+=======
+    d->m_dirtyCrossingNorth = true;
+    d->m_dirtyCrossingSouth = true;
+    d->m_dirtyHowManyCrossings = true;
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
     d->m_vector.remove( i );
 }
 

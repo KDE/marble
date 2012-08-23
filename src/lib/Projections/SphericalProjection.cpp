@@ -387,9 +387,12 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
     polygons.append( new QPolygonF );
 
+<<<<<<< HEAD
     GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
     GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
 
+=======
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
     // Some projections display the earth in a way so that there is a
     // foreside and a backside.
     // The horizon is the line (usually a circle) which separates both
@@ -412,11 +415,29 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     GeoDataCoordinates horizonOrphanCoords;
 
 
+    int detailLevel = viewport->detailLevel();
+
     GeoDataCoordinates previousCoords;
     GeoDataCoordinates currentCoords;
 
+<<<<<<< HEAD
     GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
     GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
+=======
+//    GeoDataLineString::ConstIterator itCoords = lineString.constBeginFiltered( detailLevel );
+//    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBeginFiltered( detailLevel );
+
+    GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
+    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
+   
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
+
+//    GeoDataLineString::ConstIterator itBegin = lineString.constBeginFiltered( detailLevel );
+//    GeoDataLineString::ConstIterator itEnd = lineString.constEndFiltered();
+
+    GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
+    GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
+
 
     bool processingLastNode = false;
 
@@ -430,6 +451,7 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 
     qDebug() << viewport->angularResolution() << "\n";
 >>>>>>> 9054e85... Current state of linestring filtering
@@ -438,6 +460,9 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
     qDebug() << viewport->angularResolution() << "\n";
 >>>>>>> 9054e85... Current state of linestring filtering
+=======
+    qDebug() << "Detail level = " << viewport->detailLevel() << "\n";
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
     
 =======
 
@@ -557,7 +582,11 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
             break;
         }
 
+<<<<<<< HEAD
         lineString.nextFilteredAt( itCoords, 16 );
+=======
+        lineString.nextFilteredAt( itCoords, detailLevel );
+>>>>>>> 8c0e8fc... Implemented Douglas-Peucker linestring filtering
 //        ++itCoords;
 
         if ( itCoords == itEnd  && lineString.isClosed() ) {
