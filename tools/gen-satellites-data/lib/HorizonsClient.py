@@ -10,6 +10,8 @@
 
 from __future__ import print_function
 
+from SpaceObject import SpaceObject
+
 import sys
 import telnetlib
 import time
@@ -28,7 +30,7 @@ class HorizonsClient(object):
         self._prompt = "Horizons>"
         self._connection = None
         self._debug = False
-        self._planetIds = {
+        self._body_ids = {
             'Mercur'    : 199,
             'Venus'     : 299,
             'Earth'     : 399,
@@ -37,7 +39,7 @@ class HorizonsClient(object):
             'Saturn'    : 699,
             'Uranus'    : 799,
             'Neptun'    : 899 }
-        self._lastCommandIndex = None
+        self._last_command_index = None
         self._commands = { 
             re.escape("$$SOE"): self.NORESPONSE,
             re.escape("$$EOE"): self.DATA,
@@ -45,7 +47,7 @@ class HorizonsClient(object):
             re.escape("Continue [ <cr>=yes, n=no, ? ] : "): "n",
             re.escape("[E]phemeris, [F]tp, [M]ail, [R]edisplay, ?, <cr>: "): "e",
             re.escape("Observe, Elements, Vectors  [o,e,v,?] : "): "v",
-            re.escape("Coordinate center [ <id>,coord,geo  ] : "): "500@{planet_id}",
+            re.escape("Coordinate center [ <id>,coord,geo  ] : "): "500@{body_id}",
             re.escape("Confirm selected station    [ y/n ] --> "): "y",
             re.escape("Reference plane [eclip, frame, body ] : "): "frame",
             re.escape("Output interval [ex: 10m, 1h, 1d, ? ] : "): "{interval_days}d",
@@ -68,29 +70,33 @@ class HorizonsClient(object):
     def disconnect(self):
         self._connection.close()
 
-    def get_state_vector(self, objectName, planet, tStart, tEnd, intervalDays):
+    def get_state_vectors_for_object(self, space_obj, t_start=None, t_end=None):
         if(self._connection is None):
-            print("Not connect!")
+            print("Not connected!")
             return
-        print("Requesting data for {0} relative to {1}..."
-              .format(objectName, planet))
-        self._send(objectName)
-        
-        dateTimeStart = time.strftime("%Y-%m-%d %H:%M", time.gmtime(tStart))
-        dateTimeEnd   = time.strftime("%Y-%m-%d %H:%M", time.gmtime(tEnd))
+        print("Requesting data for {0} relative to {1}..." .format(
+            space_obj.name, space_obj.related_body))
+        self._send(space_obj.horizons_id)
 
-        planetId = self._planetIds[planet]
+        if(t_start is None):
+            t_start = time.time() - (time.time() % (3600*24)) + 1
+        datetime_start = self._unixtime_to_str(t_start)
+        if(t_end is None or t_end <= t_start):
+            t_end = t_start + 60
+        datetime_end   = self._unixtime_to_str(t_end)
+
+        body_id = self._body_ids[space_obj.related_body]
         
         cmds = self._commands.keys()
-        resp = [y.format(planet=planet,
-                         planet_id=planetId,
-                         datetimestart=dateTimeStart,
-                         datetimeend=dateTimeEnd,
-                         interval_days=intervalDays)
+        resp = [y.format(body=space_obj.related_body,
+                         body_id=body_id,
+                         datetimestart=datetime_start,
+                         datetimeend=datetime_end,
+                         interval_days=space_obj.data_interval_days)
                 for y in self._commands.values()]
         
         done = False
-        parsed = ""
+        vectors = []
 
         while(not done):
             r, data = self._next_command(cmds, resp)
@@ -98,53 +104,51 @@ class HorizonsClient(object):
                 done = True
             elif(r == self.DATA):
                 print("  Found... Parsing...")
-                parsed = self._parse_data(data)
+                vectors = self._parse_data(data)
                 print("  Success")
             elif(r == self.NORESPONSE):
                 pass
             else:
                 self._send(r)
 
-        return parsed
+        return vectors
 
     def _next_command(self, cmds, resp):
         idx, match, data = self._connection.expect(cmds, 120)
         if(self._debug):
             print(data)
-        if(self._lastCommandIndex == idx):
+        if(self._last_command_index == idx):
             print("Horizons repeated the last message:")
             print(data)
             print("Probably something went wrong. Aborting!")
             sys.exit(1)
         else:
-            self._lastCommandIndex = idx
+            self._last_command_index = idx
         return (resp[idx], data)
+
+    def _unixtime_to_str(self, timestamp):
+        return time.strftime('%Y-%m-%d %H:%M', time.gmtime(timestamp))
  
-    def _jdate_to_unix(self, jstamp):
+    def _jdate_to_unixtime(self, jstamp):
         return (jstamp - 2440587.5) * 86400
 
     def _parse_data(self, data):
         sdat = data.split(',')
-        dstr = ""
         if(len(sdat) < 1):
             raise Exception()
+        vectors = []
         for i in range(0, len(sdat) - 1, 8):
             ldat = sdat[i:i+8]
-            elms = [ ldat[0], str(float(ldat[2])), str(float(ldat[3])),
-                              str(float(ldat[4])), str(float(ldat[5])),
-                              str(float(ldat[6])), str(float(ldat[7])) ]
-            dstr = dstr + ' '.join(elms).strip() + "\n"
-        return dstr
+            vectors.append( [ float(ldat[0]),
+                     float(ldat[2]), float(ldat[3]), float(ldat[4]),
+                     float(ldat[5]), float(ldat[6]), float(ldat[7]) ] )
+        return vectors
 
     def _send(self, data):
         self._connection.write("{0}\n".format(data))
 
     def _read_until_prompt(self):
         self._connection.read_until(self._prompt)
-
-    @property
-    def data(self):
-        return self._data
 
     @property
     def DATA(self):

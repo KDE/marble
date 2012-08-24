@@ -10,7 +10,7 @@
 
 from __future__ import print_function
 
-import sys
+from SpaceObject import SpaceObject
 
 class ObjectCatalogue(object):
 
@@ -24,16 +24,26 @@ class ObjectCatalogue(object):
     def __del__(self):
         self._close()
 
-    def add_object(self, name, planet, missionStart, missionEnd, dataFile):
-        url = self._baseURL + "/" + dataFile
-        if(missionEnd is None):
+    def add(self, space_obj, latest_vector):
+        url = self._baseURL + "/" + space_obj.filename_prefix + '.txt'
+        if(space_obj.mission_end is None):
             missionEnd = ''
-        e = ', '.join([name, planet, str(missionStart), str(missionEnd), url])
-        self._file.write(e + "\n")
+        if(space_obj.mission_start is None):
+            mission_start = ''
+        self._file.write(', '.join([
+            space_obj.name,
+            space_obj.related_body,
+            str(space_obj.mission_start),
+            str(space_obj.mission_end),
+            url
+            ] + [str(x) for x in latest_vector]) + "\n")
+        print(space_obj.name + " added to object catalogue.")
 
     def _open(self):
         self._file = open(self._filename, 'w+')
         self._file.truncate()
+        self._file.write('# name, related_body, mission_start, '+
+            'mission_end, url, <...latest state vector...>\n')
 
     def _close(self):
         self._file.close()
