@@ -239,18 +239,40 @@ QDialog *SatellitesPlugin::configDialog()
 
         setupConfigModel();
 
+        // earth
         ui_configWidget->treeViewEarth->setModel( m_configModel );
         ui_configWidget->treeViewEarth->expandAll();
         for ( int i = 0; i < m_configModel->columnCount(); i++ ) {
             ui_configWidget->treeViewEarth->resizeColumnToContents( i );
         }
 
-        readSettings();
-
         connect( m_configDialog, SIGNAL(accepted()), SLOT(writeSettings()) );
         connect( m_configDialog, SIGNAL(rejected()), SLOT(readSettings()) );
         connect( ui_configWidget->buttonBox->button( QDialogButtonBox::Reset ),
                  SIGNAL(clicked()), SLOT(restoreDefaultSettings()) );
+
+        // orbiter
+        QPushButton *buttonUpdateCatalog;
+        buttonUpdateCatalog = new QPushButton( tr( "&Update Object Catalog" ),
+            ui_configWidget->buttonBoxCatalog );
+        buttonUpdateCatalog->setDefault( false );
+        ui_configWidget->buttonBoxCatalog->addButton(
+            buttonUpdateCatalog, QDialogButtonBox::ActionRole );
+
+        QPushButton *buttonOpenCatalog;
+        buttonOpenCatalog = new QPushButton( tr( "&Open Catalog from Disk" ),
+            ui_configWidget->buttonBoxCatalog );
+        buttonOpenCatalog->setDefault( false );
+        ui_configWidget->buttonBoxCatalog->addButton(
+            buttonOpenCatalog, QDialogButtonBox::ActionRole );
+
+        connect( buttonUpdateCatalog, SIGNAL( clicked() ),
+                 SLOT( updateOrbiterCatalog() ) );
+        connect( buttonOpenCatalog, SIGNAL( clicked() ),
+                 SLOT( openCatalogFromDisk() ) );
+
+        readSettings();
+
     }
 
     return m_configDialog;
