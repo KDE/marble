@@ -27,6 +27,8 @@ set( satellites_SRCS
  OrbiterSatellitesModel.cpp
  OrbiterSatellitesItem.cpp
  SatellitesConfigModel.cpp
+ EarthSatellitesConfigModel.cpp
+ OrbiterSatellitesConfigModel.cpp
  SatellitesConfigAbstractItem.cpp
  SatellitesConfigNodeItem.cpp
  SatellitesConfigLeafItem.cpp)

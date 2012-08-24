@@ -29,7 +29,8 @@ namespace Ui
 namespace Marble
 {
 
-class SatellitesConfigModel;
+class EarthSatellitesConfigModel;
+class OrbiterSatellitesConfigModel;
 
 /**
  * @brief This plugin displays satellites and their orbits.
@@ -80,6 +81,7 @@ private Q_SLOTS:
     void readSettings();
     void writeSettings();
     void updateSettings();
+    void updateOrbiterCatalog();
 
 private:
     void setupConfigModel();
@@ -90,10 +92,10 @@ private:
     bool m_isInitialized;
     QHash<QString, QVariant> m_settings;
     QHash<QString, QCheckBox *> m_boxHash;
-    QString m_currentPlanet;
 
     QDialog *m_configDialog;
-    SatellitesConfigModel *m_configModel;
+    EarthSatellitesConfigModel *m_earthSatConfigModel;
+    OrbiterSatellitesConfigModel *m_orbiterSatConfigModel;
     Ui::SatellitesConfigDialog *ui_configWidget;
 };
 

@@ -23,7 +23,6 @@ class SatellitesConfigModel : public QAbstractItemModel
 public:
     explicit SatellitesConfigModel( QObject *parent = 0 );
 
-    QStringList tleList();
     void loadSettings( QHash<QString, QVariant> settings );
 
     void appendChild( SatellitesConfigAbstractItem *child );
@@ -37,7 +36,7 @@ public:
     QVariant headerData( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
     Qt::ItemFlags flags( const QModelIndex &index ) const;
 
-private:
+protected:
     SatellitesConfigNodeItem *m_rootItem;
 };
 

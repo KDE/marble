@@ -16,8 +16,9 @@
 #include "GeoDataPlacemark.h"
 #include "EarthSatellitesItem.h"
 #include "SatellitesConfigLeafItem.h"
-#include "SatellitesConfigModel.h"
 #include "SatellitesConfigNodeItem.h"
+#include "EarthSatellitesConfigModel.h"
+#include "OrbiterSatellitesConfigModel.h"
 #include "ViewportParams.h"
 
 #include "ui_SatellitesConfigDialog.h"
@@ -32,7 +33,6 @@ SatellitesPlugin::SatellitesPlugin()
     : RenderPlugin( 0 ),
       m_earthSatModel( 0 ),
       m_orbiterSatModel( 0 ),
-      m_currentPlanet( QString() ),
       m_configDialog( 0 ),
       ui_configWidget( 0 )
 {
@@ -43,9 +43,8 @@ SatellitesPlugin::SatellitesPlugin( const MarbleModel *marbleModel )
      m_earthSatModel( 0 ),
      m_orbiterSatModel( 0 ),
      m_isInitialized( false ),
-     m_currentPlanet( QString() ),
      m_configDialog( 0 ),
-     m_configModel( 0 ),
+     m_earthSatConfigModel( 0 ),
      ui_configWidget( 0 )
 {
     connect( this, SIGNAL(settingsChanged(QString)), SLOT(updateSettings()) );
@@ -162,7 +161,6 @@ bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
 
-    m_currentPlanet = marbleModel()->planetId();
     enableModel( enabled() );
 
     return true;
@@ -189,6 +187,14 @@ void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
         m_settings.insert( "tleList", m_settings.value( "tleList" ).toString().split( "," ) );
     }
 
+    if( !m_settings.contains( "catList" ) ) {
+        QStringList catList;
+        catList << "http://www.bitquirl.net/~rene/esasocis/oribtdata/satcatalogue.txt";
+        m_settings.insert( "catList", catList );
+    } else if ( m_settings.value( "catList" ).type() == QVariant::String ) {
+        m_settings.insert( "catList", m_settings.value( "catList" ).toString().split( "," ) );
+    }
+
     readSettings();
     emit settingsChanged( nameId() );
 }
@@ -198,13 +204,12 @@ void SatellitesPlugin::readSettings()
     if ( !m_configDialog )
         return;
 
-    m_configModel->loadSettings( m_settings );
+    m_earthSatConfigModel->loadSettings( m_settings );
 }
 
 void SatellitesPlugin::writeSettings()
 {
-    QStringList tleList = m_configModel->tleList();
-
+    QStringList tleList = m_earthSatConfigModel->tleList();
     m_settings.insert( "tleList", tleList );
 
     emit settingsChanged( nameId() );
@@ -219,10 +224,18 @@ void SatellitesPlugin::updateSettings()
     m_earthSatModel->clear();
     m_orbiterSatModel->clear();
 
+    // tleList
     QStringList tleList = m_settings["tleList"].toStringList();
-    foreach ( const QString &tle, tleList ) {
-        mDebug() << tle;
+    foreach( const QString &tle, tleList ) {
+        mDebug() << "Loading tle:" << tle;
         m_earthSatModel->downloadFile( QUrl( tle ), tle.mid( tle.lastIndexOf( '/' ) + 1 ) );
+    }
+
+    // catList
+    QStringList catList = m_settings["catList"].toStringList();
+    foreach( const QString &cat, catList ) {
+        mDebug() << "Loading catalog:" << cat;
+        m_orbiterSatModel->downloadFile( QUrl( cat ), cat.mid( cat.lastIndexOf( '/' ) + 1 ) );
     }
 }
 
@@ -233,14 +246,14 @@ QDialog *SatellitesPlugin::configDialog()
         ui_configWidget = new Ui::SatellitesConfigDialog();
         ui_configWidget->setupUi( m_configDialog );
 
-        m_configModel = new SatellitesConfigModel( this );
+        m_earthSatConfigModel = new EarthSatellitesConfigModel( this );
 
         setupConfigModel();
 
         // earth
-        ui_configWidget->treeViewEarth->setModel( m_configModel );
+        ui_configWidget->treeViewEarth->setModel( m_earthSatConfigModel );
         ui_configWidget->treeViewEarth->expandAll();
-        for ( int i = 0; i < m_configModel->columnCount(); i++ ) {
+        for ( int i = 0; i < m_earthSatConfigModel->columnCount(); i++ ) {
             ui_configWidget->treeViewEarth->resizeColumnToContents( i );
         }
 
@@ -278,36 +291,40 @@ QDialog *SatellitesPlugin::configDialog()
 
 void SatellitesPlugin::enableModel( bool enabled )
 {
-    if ( !m_isInitialized  || m_currentPlanet.isEmpty() ) {
+    if ( !m_isInitialized ) {
         return;
     }
 
-    if( m_currentPlanet == "earth" )
+    if( marbleModel()->planetId() == "earth" )
     {
         m_earthSatModel->enable( enabled && visible() );
         m_orbiterSatModel->enable( false );
     } else {
         m_earthSatModel->enable( false );
-        m_orbiterSatModel->setPlanet( m_currentPlanet );
+        m_orbiterSatModel->setPlanet( marbleModel()->planetId() );
         m_orbiterSatModel->enable( enabled && visible() );
     }
 }
 
 void SatellitesPlugin::visibleModel( bool visible )
 {
-    if ( !m_isInitialized  || m_currentPlanet.isEmpty() ) {
+    if ( !m_isInitialized ) {
         return;
     }
 
-    if( m_currentPlanet == "earth" )
+    if( marbleModel()->planetId() == "earth" )
     {
         m_earthSatModel->enable( enabled() && visible );
         m_orbiterSatModel->enable( false );
     } else {
         m_earthSatModel->enable( false );
-        m_orbiterSatModel->setPlanet( m_currentPlanet );
+        m_orbiterSatModel->setPlanet( marbleModel()->planetId() );
         m_orbiterSatModel->enable( enabled() && visible );
     }
+}
+
+void SatellitesPlugin::updateOrbiterCatalog()
+{
 }
 
 void SatellitesPlugin::setupConfigModel()
@@ -320,7 +337,7 @@ void SatellitesPlugin::setupConfigModel()
     node->appendChild( new SatellitesConfigLeafItem( tr( "FENGYUN 1C Debris", desc ), "http://www.celestrak.com/NORAD/elements/1999-025.txt" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "IRIDIUM 33 Debris", desc ), "http://www.celestrak.com/NORAD/elements/iridium-33-debris.txt" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "COSMOS 2251 Debris", desc ), "http://www.celestrak.com/NORAD/elements/cosmos-2251-debris.txt" ) );
-    m_configModel->appendChild( node );
+    m_earthSatConfigModel->appendChild( node );
 
     node = new SatellitesConfigNodeItem( tr( "Weather & Earth Resources Satellites" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "Weather", desc ), "http://www.celestrak.com/NORAD/elements/weather.txt" ) );
@@ -330,7 +347,7 @@ void SatellitesPlugin::setupConfigModel()
     node->appendChild( new SatellitesConfigLeafItem( tr( "Search & Rescue (SARSAT)", desc ), "http://www.celestrak.com/NORAD/elements/sarsat.txt" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "Disaster Monitoring", desc ), "http://www.celestrak.com/NORAD/elements/dmc.txt" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "Tracking and Data Relay Satellite System (TDRSS)", desc ), "http://www.celestrak.com/NORAD/elements/tdrss.txt" ) );
-    m_configModel->appendChild( node );
+    m_earthSatConfigModel->appendChild( node );
 
     node = new SatellitesConfigNodeItem( tr( "Communications Satellites" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "Geostationary", desc ), "http://www.celestrak.com/NORAD/elements/geo.txt" ) );
@@ -344,7 +361,7 @@ void SatellitesPlugin::setupConfigModel()
     node->appendChild( new SatellitesConfigLeafItem( tr( "Amateur radio", desc ), "http://www.celestrak.com/NORAD/elements/amateur.txt" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "Experimental",desc ), "http://www.celestrak.com/NORAD/elements/x-comm.txt" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "Other", desc ), "http://www.celestrak.com/NORAD/elements/other-comm.txt" ) );
-    m_configModel->appendChild( node );
+    m_earthSatConfigModel->appendChild( node );
 
     node = new SatellitesConfigNodeItem( tr( "Navigation Satellites" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "GPS Operational", desc ), "http://www.celestrak.com/NORAD/elements/gps-ops.txt" ) );
@@ -353,21 +370,21 @@ void SatellitesPlugin::setupConfigModel()
     node->appendChild( new SatellitesConfigLeafItem( tr( "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)", desc ), "http://www.celestrak.com/NORAD/elements/sbas.txt" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "Navy Navigation Satellite System (NNSS)", desc ), "http://www.celestrak.com/NORAD/elements/nnss.txt" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "Russian LEO Navigation", desc ), "http://www.celestrak.com/NORAD/elements/musson.txt" ) );
-    m_configModel->appendChild( node );
+    m_earthSatConfigModel->appendChild( node );
 
     node = new SatellitesConfigNodeItem( tr( "Scientific Satellites" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "Space & Earth Science", desc ), "http://www.celestrak.com/NORAD/elements/science.txt" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "Geodetic", desc ), "http://www.celestrak.com/NORAD/elements/geodetic.txt" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "Engineering", desc ), "http://www.celestrak.com/NORAD/elements/engineering.txt" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "Education", desc ), "http://www.celestrak.com/NORAD/elements/education.txt" ) );
-    m_configModel->appendChild( node );
+    m_earthSatConfigModel->appendChild( node );
 
     node = new SatellitesConfigNodeItem( tr( "Miscellaneous Satellites" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "Miscellaneous Military", desc ), "http://www.celestrak.com/NORAD/elements/military.txt" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "Radar Calibration", desc ), "http://www.celestrak.com/NORAD/elements/radar.txt" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "CubeSats", desc ), "http://www.celestrak.com/NORAD/elements/cubesat.txt" ) );
     node->appendChild( new SatellitesConfigLeafItem( tr( "Other", desc ), "http://www.celestrak.com/NORAD/elements/other.txt" ) );
-    m_configModel->appendChild( node );
+    m_earthSatConfigModel->appendChild( node );
 }
 
 } // namespace Marble

@@ -22,11 +22,6 @@ SatellitesConfigModel::SatellitesConfigModel( QObject *parent )
 {
 }
 
-QStringList SatellitesConfigModel::tleList()
-{
-    return m_rootItem->data( 0, SatellitesConfigAbstractItem::UrlListRole ).toStringList();
-}
-
 void SatellitesConfigModel::loadSettings( QHash<QString, QVariant> settings)
 {
     m_rootItem->loadSettings( settings );

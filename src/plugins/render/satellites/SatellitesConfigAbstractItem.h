@@ -21,7 +21,8 @@ class SatellitesConfigAbstractItem
 {
 public:
     enum {
-        UrlListRole = Qt::UserRole
+        UrlListRole         = Qt::UserRole + 0,
+        OrbiterDataListRole = Qt::UserRole + 1
     };
 
     virtual ~SatellitesConfigAbstractItem();
