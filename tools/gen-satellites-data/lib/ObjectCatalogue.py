@@ -27,14 +27,19 @@ class ObjectCatalogue(object):
     def add(self, space_obj, latest_vector):
         url = self._baseURL + "/" + space_obj.filename_prefix + '.txt'
         if(space_obj.mission_end is None):
-            missionEnd = ''
+            mission_end = ''
+        else:
+            mission_end = space_obj.mission_end
         if(space_obj.mission_start is None):
             mission_start = ''
+        else:
+            mission_start = space_obj.mission_start
         self._file.write(', '.join([
             space_obj.name,
+            space_obj.object_type,
             space_obj.related_body,
-            str(space_obj.mission_start),
-            str(space_obj.mission_end),
+            str(mission_start),
+            str(mission_end),
             url
             ] + [str(x) for x in latest_vector]) + "\n")
         print(space_obj.name + " added to object catalogue.")
@@ -42,7 +47,7 @@ class ObjectCatalogue(object):
     def _open(self):
         self._file = open(self._filename, 'w+')
         self._file.truncate()
-        self._file.write('# name, related_body, mission_start, '+
+        self._file.write('# name, type, related_body, mission_start, ' +
             'mission_end, url, <...latest state vector...>\n')
 
     def _close(self):
