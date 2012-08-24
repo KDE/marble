@@ -9,14 +9,15 @@
 # Copyright 2012 Rene Kuettner <rene@bitkanal.net>
 #
 
+# NOTE: this script only writes the catalogue file at the moment
+#       which contains the latest available state vector for
+#       every object listed
+
 from __future__ import print_function
 
 from lib.SpaceObject import SpaceObject
 from lib.HorizonsClient import HorizonsClient
 from lib.ObjectCatalogue import ObjectCatalogue
-
-import time
-import calendar
 
 ####[ Configuration ]#########################################################
 

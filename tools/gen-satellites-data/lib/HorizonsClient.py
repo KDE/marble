@@ -15,7 +15,6 @@ from SpaceObject import SpaceObject
 import sys
 import telnetlib
 import time
-import calendar
 import re
 
 """
@@ -70,7 +69,11 @@ class HorizonsClient(object):
     def disconnect(self):
         self._connection.close()
 
-    def get_state_vectors_for_object(self, space_obj, t_start=None, t_end=None):
+    """
+    Request state vectors for space_obj between t_start, t_end
+    """
+    def get_state_vectors_for_object(self, space_obj,
+                                     t_start=None, t_end=None):
         if(self._connection is None):
             print("Not connected!")
             return
@@ -121,7 +124,7 @@ class HorizonsClient(object):
             print("Horizons repeated the last message:")
             print(data)
             print("Probably something went wrong. Aborting!")
-            sys.exit(1)
+            raise Exception()
         else:
             self._last_command_index = idx
         return (resp[idx], data)
