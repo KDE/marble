@@ -49,6 +49,11 @@ void OrbiterSatellitesModel::setPlanet( const QString &planetId )
    }
 }
 
+void OrbiterSatellitesModel::addOrbiterFromCatalogLine( const QString &line )
+{
+    Q_UNUSED( line );
+}
+
 void OrbiterSatellitesModel::parseFile( const QString &id,
                                         const QByteArray &file )
 {

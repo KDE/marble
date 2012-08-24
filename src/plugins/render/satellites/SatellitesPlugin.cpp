@@ -224,18 +224,18 @@ void SatellitesPlugin::updateSettings()
     m_earthSatModel->clear();
     m_orbiterSatModel->clear();
 
-    // tleList
+    // earth satellites
     QStringList tleList = m_settings["tleList"].toStringList();
     foreach( const QString &tle, tleList ) {
         mDebug() << "Loading tle:" << tle;
         m_earthSatModel->downloadFile( QUrl( tle ), tle.mid( tle.lastIndexOf( '/' ) + 1 ) );
     }
 
-    // catList
-    QStringList catList = m_settings["catList"].toStringList();
-    foreach( const QString &cat, catList ) {
-        mDebug() << "Loading catalog:" << cat;
-        m_orbiterSatModel->downloadFile( QUrl( cat ), cat.mid( cat.lastIndexOf( '/' ) + 1 ) );
+    // orbiter
+    QStringList orbDatList = m_settings["orbiterDataList"].toStringList();
+    foreach( const QString &orbData, orbDatList ) {
+        qDebug() << "Adding orbiter:" << orbData;
+        m_orbiterSatModel->addOrbiterFromCatalogLine( orbData );
     }
 }
 
@@ -247,6 +247,7 @@ QDialog *SatellitesPlugin::configDialog()
         ui_configWidget->setupUi( m_configDialog );
 
         m_earthSatConfigModel = new EarthSatellitesConfigModel( this );
+        m_orbiterSatConfigModel = new OrbiterSatellitesConfigModel( this );
 
         setupConfigModel();
 
@@ -325,6 +326,12 @@ void SatellitesPlugin::visibleModel( bool visible )
 
 void SatellitesPlugin::updateOrbiterCatalog()
 {
+    // catList
+    QStringList catList = m_settings["catList"].toStringList();
+    foreach( const QString &cat, catList ) {
+        mDebug() << "Loading catalog:" << cat;
+        m_orbiterSatModel->downloadFile( QUrl( cat ), cat.mid( cat.lastIndexOf( '/' ) + 1 ) );
+    }
 }
 
 void SatellitesPlugin::setupConfigModel()

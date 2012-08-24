@@ -31,6 +31,7 @@ public:
     ~OrbiterSatellitesModel();
 
     void setPlanet( const QString &planetId );
+    void addOrbiterFromCatalogLine( const QString &line );
     void parseFile( const QString &id, const QByteArray &file );
 
 protected:

@@ -21,5 +21,19 @@ OrbiterSatellitesConfigModel::OrbiterSatellitesConfigModel( QObject *parent )
 {
 }
 
+QStringList OrbiterSatellitesConfigModel::catalogList()
+{
+    return m_rootItem->data( 0,
+                             SatellitesConfigAbstractItem::UrlListRole )
+                            .toStringList();
+}
+
+QStringList OrbiterSatellitesConfigModel::orbiterDataList()
+{
+    return m_rootItem->data( 0,
+                             SatellitesConfigAbstractItem::OrbiterDataListRole )
+                            .toStringList();
+}
+
 } // namespace Marble
 

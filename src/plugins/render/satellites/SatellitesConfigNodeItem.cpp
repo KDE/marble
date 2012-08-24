@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
+// Copyright 2012 Rene Kuettner <rene@bitkanal.net>
 //
 
 #include "SatellitesConfigNodeItem.h"
@@ -13,7 +14,7 @@
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
 
-using namespace Marble;
+namespace Marble {
 
 SatellitesConfigNodeItem::SatellitesConfigNodeItem( const QString &name )
     : SatellitesConfigAbstractItem( name )
@@ -47,6 +48,15 @@ QVariant SatellitesConfigNodeItem::data( int column, int role ) const
             }
         }
         return urlList;
+    }
+    case OrbiterDataListRole: {
+        QStringList orbiterDataList;
+        foreach( SatellitesConfigAbstractItem *item, m_children ) {
+            if ( item->data( column, Qt::CheckStateRole ).toInt() != Qt::Unchecked ) {
+                orbiterDataList.append( item->data( column, role ).toStringList() );
+            }
+        }
+        return orbiterDataList;
     }
     case Qt::CheckStateRole: {
         bool oneChecked = false;
@@ -124,3 +134,6 @@ void SatellitesConfigNodeItem::appendChild( SatellitesConfigAbstractItem *item )
     item->setParent( this );
     m_children.append( item );
 }
+
+} // namespace Marble
+

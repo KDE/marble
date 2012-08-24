@@ -22,6 +22,9 @@ class OrbiterSatellitesConfigModel : public SatellitesConfigModel
 
 public:
     explicit OrbiterSatellitesConfigModel( QObject *parent = 0 );
+
+    QStringList catalogList();
+    QStringList orbiterDataList();
 };
 
 } // namespace Marble
