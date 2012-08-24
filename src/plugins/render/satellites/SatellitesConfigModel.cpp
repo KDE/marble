@@ -128,15 +128,12 @@ QVariant SatellitesConfigModel::headerData( int section, Qt::Orientation orienta
     }
 
     switch (section) {
-    case 0: {
-        return QVariant( tr( "Category" ) );
-    }
-    case 1: {
-        return QVariant( tr( "Display orbit" ) );
-    }
-    default: {
-        return QVariant();
-    }
+        case 0: {
+            return QVariant( tr( "Category" ) );
+        }
+        default: {
+            return QVariant();
+        }
     }
 }
 

@@ -198,8 +198,6 @@ void SatellitesPlugin::readSettings()
     if ( !m_configDialog )
         return;
 
-    QStringList tleList = m_settings.value( "tleList" ).toStringList();
-
     m_configModel->loadSettings( m_settings );
 }
 
