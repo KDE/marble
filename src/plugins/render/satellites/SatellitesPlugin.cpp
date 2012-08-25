@@ -189,7 +189,7 @@ void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
 
     if( !m_settings.contains( "catList" ) ) {
         QStringList catList;
-        catList << "http://www.bitquirl.net/~rene/esasocis/oribtdata/satcatalogue.txt";
+        catList << "http://www.bitquirl.net/~rene/esasocis/orbitdata/satcatalogue.txt";
         m_settings.insert( "catList", catList );
     } else if ( m_settings.value( "catList" ).type() == QVariant::String ) {
         m_settings.insert( "catList", m_settings.value( "catList" ).toString().split( "," ) );
@@ -326,10 +326,11 @@ void SatellitesPlugin::visibleModel( bool visible )
 
 void SatellitesPlugin::updateOrbiterCatalog()
 {
+    qDebug() << "Updating catalog data...";
     // catList
     QStringList catList = m_settings["catList"].toStringList();
     foreach( const QString &cat, catList ) {
-        mDebug() << "Loading catalog:" << cat;
+        qDebug() << "Loading catalog:" << cat;
         m_orbiterSatModel->downloadFile( QUrl( cat ), cat.mid( cat.lastIndexOf( '/' ) + 1 ) );
     }
 }
