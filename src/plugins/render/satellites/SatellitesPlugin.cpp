@@ -228,7 +228,7 @@ void SatellitesPlugin::updateSettings()
     QStringList tleList = m_settings["tleList"].toStringList();
     foreach( const QString &tle, tleList ) {
         mDebug() << "Loading tle:" << tle;
-        m_earthSatModel->downloadFile( QUrl( tle ), tle.mid( tle.lastIndexOf( '/' ) + 1 ) );
+        m_earthSatModel->downloadFile( QUrl( tle ), tle.section( '/', -1 ) );
     }
 
     // orbiter
@@ -330,7 +330,7 @@ void SatellitesPlugin::updateOrbiterCatalog()
     QStringList catList = m_settings["catList"].toStringList();
     foreach( const QString &cat, catList ) {
         mDebug() << "Loading catalog:" << cat;
-        m_orbiterSatModel->downloadFile( QUrl( cat ), cat.mid( cat.lastIndexOf( '/' ) + 1 ) );
+        m_orbiterSatModel->downloadFile( QUrl( cat ), cat.section( '/', -1 ) );
     }
 }
 
