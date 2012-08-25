@@ -11,7 +11,6 @@
 #ifndef MARBLE_ORBITERSATELLITESITEM_H
 #define MARBLE_ORBITERSATELLITESITEM_H
 
-// FIXME create an abstract class for other tracker plugins
 #include "TrackerPluginItem.h"
 
 #include <QtCore/QString>
