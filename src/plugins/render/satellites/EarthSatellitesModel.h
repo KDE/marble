@@ -13,7 +13,6 @@
 
 #include "TrackerPluginModel.h"
 
-
 namespace Marble {
 
 class MarbleClock;

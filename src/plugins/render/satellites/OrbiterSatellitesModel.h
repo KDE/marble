@@ -11,7 +11,8 @@
 #ifndef MARBLE_ORBITERSATELLITESMODEL_H
 #define MARBLE_ORBITERSATELLITESMODEL_H
 
-// FIXME create an abstract class for other tracker plugins
+#include <QtCore/QStringList>
+
 #include "TrackerPluginModel.h"
 
 namespace Marble {
@@ -31,12 +32,14 @@ public:
     ~OrbiterSatellitesModel();
 
     void setPlanet( const QString &planetId );
-    void addOrbiterFromCatalogLine( const QString &line );
     void parseFile( const QString &id, const QByteArray &file );
+
+    void downloadFile(const QUrl &url, const QString &id);
 
 protected:
     const MarbleClock *m_clock;
     QString m_lcPlanet;
+    QStringList m_catalogs;
     bool m_enabled;
 };
 

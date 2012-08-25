@@ -232,11 +232,12 @@ void SatellitesPlugin::updateSettings()
     }
 
     // orbiter
-    QStringList orbDatList = m_settings["orbiterDataList"].toStringList();
-    foreach( const QString &orbData, orbDatList ) {
-        qDebug() << "Adding orbiter:" << orbData;
-        m_orbiterSatModel->addOrbiterFromCatalogLine( orbData );
-    }
+    /*QStringList catList = m_settings["catList"].toStringList();
+    foreach( const QString &cat, catList ) {
+        m_orbiterSatModel->downloadFile( QUrl( cat ), cat.mid( cat.lastIndexof( '/' ) + 1 ) );
+    }*/
+    //m_orbiterSatModel->update();
+    updateOrbiterCatalog();
 }
 
 QDialog *SatellitesPlugin::configDialog()
@@ -326,11 +327,9 @@ void SatellitesPlugin::visibleModel( bool visible )
 
 void SatellitesPlugin::updateOrbiterCatalog()
 {
-    qDebug() << "Updating catalog data...";
-    // catList
     QStringList catList = m_settings["catList"].toStringList();
     foreach( const QString &cat, catList ) {
-        qDebug() << "Loading catalog:" << cat;
+        mDebug() << "Loading catalog:" << cat;
         m_orbiterSatModel->downloadFile( QUrl( cat ), cat.mid( cat.lastIndexOf( '/' ) + 1 ) );
     }
 }
