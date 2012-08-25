@@ -30,14 +30,14 @@ class HorizonsClient(object):
         self._connection = None
         self._debug = False
         self._body_ids = {
-            'Mercur'    : 199,
+            'Mercury'   : 199,
             'Venus'     : 299,
             'Earth'     : 399,
             'Mars'      : 499,
             'Jupiter'   : 599,
             'Saturn'    : 699,
             'Uranus'    : 799,
-            'Neptun'    : 899 }
+            'Neptune'   : 899 }
         self._last_command_index = None
         self._commands = { 
             re.escape("$$SOE"): self.NORESPONSE,
