@@ -11,6 +11,8 @@
 
 #include "OrbiterSatellitesItem.h"
 
+#include <QtCore>
+
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
@@ -52,6 +54,7 @@ OrbiterSatellitesItem::OrbiterSatellitesItem( const QString &name,
 
 OrbiterSatellitesItem::~OrbiterSatellitesItem()
 {
+    delete m_planSat;
 }
 
 QString OrbiterSatellitesItem::name() const
@@ -112,6 +115,12 @@ void OrbiterSatellitesItem::addTrackPointAt( const QDateTime &dateTime )
                        time.hour(), time.minute(), time.second() );
     m_planSat->currentPos();
     m_planSat->getPlanetographic( lng, lat, height );
+
+    if( qIsNaN( lng ) || qIsNaN( lat ) || qIsNaN( height ) ) {
+        Q_ASSERT( 0 );
+        return;
+    }
+
     m_track->addPoint( dateTime,
                        GeoDataCoordinates( lng, lat, height * 1000,
                                            GeoDataCoordinates::Degree) );

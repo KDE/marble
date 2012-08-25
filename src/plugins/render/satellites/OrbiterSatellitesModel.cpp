@@ -46,6 +46,7 @@ void OrbiterSatellitesModel::setPlanet( const QString &planetId )
         m_lcPlanet = planetId;
 
         // reload catalogs
+        clear();
         foreach( const QString &catalog, m_catalogs ) {
             downloadFile( QUrl( catalog ), catalog.section( '/', -1 ) );
         }
@@ -61,14 +62,12 @@ void OrbiterSatellitesModel::parseFile( const QString &id,
     QString planet( m_lcPlanet.left(1).toUpper() + m_lcPlanet.mid(1) );
     char *cplanet = planet.toLocal8Bit().data();
 
-    clear();
-
     beginUpdateItems();
 
     QString line = ts.readLine();
     for( ; !line.isNull(); line = ts.readLine() ) {
 
-        if( line.trimmed().indexOf( "#" ) == 0) {
+        if( line.trimmed().startsWith( "#" ) ) {
             continue;
         }
 
@@ -89,12 +88,12 @@ void OrbiterSatellitesModel::parseFile( const QString &id,
         mDebug() << "Loading orbiter object:" << name;
 
         PlanetarySats *planSat = new PlanetarySats();
+        planSat->setPlanet( cplanet );
 
         planSat->setStateVector( elms[6].toFloat() - 2400000.5,
-             elms[7].toFloat(),  elms[8].toFloat(),  elms[9].toFloat(),
+            elms[7].toFloat(),  elms[8].toFloat(),  elms[9].toFloat(),
             elms[10].toFloat(), elms[11].toFloat(), elms[12].toFloat() );
 
-        planSat->setPlanet( cplanet );
         planSat->stateToKepler();
 
         addItem( new OrbiterSatellitesItem( name, planSat, m_clock ) );
