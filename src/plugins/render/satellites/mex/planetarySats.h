@@ -30,6 +30,7 @@ class PlanetarySats     // Calculate spacecraft around other planets
     void setPlanet(char* pname);
     int selectSat(char* sname);
     void getSatName(char* sname);
+    void setStateVector(double mjd, double x, double y, double z, double vx, double vy, double vz);
     int getStateVector(int nsat);
     void stateToKepler();
     void getKeplerElements(double &perc, double &apoc, double &inc, double &ecc, double &ra, double &tano, double &m0, double &a, double &n0);

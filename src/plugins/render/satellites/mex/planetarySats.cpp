@@ -168,6 +168,27 @@ void PlanetarySats::setSatFile(char* fname)
   
 }
 
+void PlanetarySats::setStateVector(double mjd, double x, double y, double z, double vx, double vy, double vz)
+{
+    pls_rep[0] = x;
+    pls_rep[1] = y;
+    pls_rep[2] = z;
+    pls_vep[0] = vx;
+    pls_vep[1] = vy;
+    pls_vep[2] = vz;
+
+    int year = 0;
+    int month = 0;
+    int day = 0;
+    int hour = 0;
+    int min = 0;
+    double sec = 0;
+    getDatefromMJD(mjd, year, month, day, hour, min, sec);
+    setMJD(year, month, day, hour, min, sec);
+    pls_tepoch = pls_time;
+    //pls_tepoch = pls_time + pls_del_tdut/86400.0;  // epoch in TT
+}
+
 int PlanetarySats::getStateVector(int nsat)
 {
  // read the state vector from the planetary sat file
