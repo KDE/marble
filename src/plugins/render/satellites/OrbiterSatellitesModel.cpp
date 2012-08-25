@@ -61,6 +61,8 @@ void OrbiterSatellitesModel::parseFile( const QString &id,
     QString planet( m_lcPlanet.left(1).toUpper() + m_lcPlanet.mid(1) );
     char *cplanet = planet.toLocal8Bit().data();
 
+    clear();
+
     beginUpdateItems();
 
     QString line = ts.readLine();
