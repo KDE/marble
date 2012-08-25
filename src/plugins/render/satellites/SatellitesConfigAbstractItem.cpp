@@ -12,7 +12,7 @@
 
 #include <QtCore/QVariant>
 
-using namespace Marble;
+namespace Marble {
 
 SatellitesConfigAbstractItem::SatellitesConfigAbstractItem( const QString &name )
     : m_name( name ),
@@ -74,3 +74,6 @@ bool SatellitesConfigAbstractItem::setData( int column, int role, const QVariant
     Q_UNUSED( data );
     return false;
 }
+
+} // namespace Marble
+

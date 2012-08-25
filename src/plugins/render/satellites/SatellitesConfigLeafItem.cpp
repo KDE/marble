@@ -12,7 +12,7 @@
 
 #include <QtCore/QVariant>
 
-using namespace Marble;
+namespace Marble {
 
 SatellitesConfigLeafItem::SatellitesConfigLeafItem( const QString &name, const QString &url )
     : SatellitesConfigAbstractItem( name ),
@@ -91,3 +91,6 @@ int SatellitesConfigLeafItem::childrenCount() const
 {
     return 0;
 }
+
+} // namespace Marble
+

@@ -14,7 +14,7 @@
 #include "SatellitesConfigLeafItem.h"
 #include "MarbleDebug.h"
 
-using namespace Marble;
+namespace Marble {
 
 SatellitesConfigModel::SatellitesConfigModel( QObject *parent )
     : QAbstractItemModel( parent ),
@@ -140,3 +140,6 @@ Qt::ItemFlags SatellitesConfigModel::flags( const QModelIndex &index ) const
 
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable;
 }
+
+} // namespace Marble
+

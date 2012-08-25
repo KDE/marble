@@ -8,7 +8,6 @@
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
 //
 
-
 #include "EarthSatellitesItem.h"
 
 #include "MarbleClock.h"
@@ -31,7 +30,7 @@
 #include <QDialog>
 #include <QCheckBox>
 
-using namespace Marble;
+namespace Marble {
 
 #include "GeoDataPoint.h"
 
@@ -206,3 +205,6 @@ double EarthSatellitesItem::square( double x )
 {
     return x * x;
 }
+
+} // namespace Marble
+

@@ -17,7 +17,7 @@
 #include "sgp4/sgp4io.h"
 #include <locale.h>
 
-using namespace Marble;
+namespace Marble {
 
 EarthSatellitesModel::EarthSatellitesModel( GeoDataTreeModel *treeModel,
                                             const PluginManager *pluginManager,
@@ -71,5 +71,7 @@ void EarthSatellitesModel::parseFile( const QString &id,
 
     endUpdateItems();
 }
+
+} // namespace Marble
 
 #include "EarthSatellitesModel.moc"
