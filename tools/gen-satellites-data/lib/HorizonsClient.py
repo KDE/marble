@@ -81,20 +81,18 @@ class HorizonsClient(object):
             space_obj.name, space_obj.related_body))
         self._send(space_obj.horizons_id)
 
-        if(t_start is None):
-            t_start = time.time() - (time.time() % (3600*24)) + 1
-        datetime_start = self._unixtime_to_str(t_start)
-        if(t_end is None or t_end <= t_start):
-            t_end = t_start + 60
-        datetime_end   = self._unixtime_to_str(t_end)
+        if t_start is None:
+            t_start = space_obj.data_from
+        if t_end is None or t_end <= t_start:
+            t_end = space_obj.data_until
 
         body_id = self._body_ids[space_obj.related_body]
         
         cmds = self._commands.keys()
         resp = [y.format(body=space_obj.related_body,
                          body_id=body_id,
-                         datetimestart=datetime_start,
-                         datetimeend=datetime_end,
+                         datetimestart=self._unixtime_to_str(t_start),
+                         datetimeend=self._unixtime_to_str(t_end),
                          interval_days=space_obj.data_interval_days)
                 for y in self._commands.values()]
         

@@ -61,7 +61,8 @@ OBJECTS = [
                  object_type        = SpaceObject.OBJECTTYPE_SPACECRAFT,
                  related_body       = SpaceObject.BODY_MOON,
                  mission_start      = '2003-09-28 00:00',
-                 mission_end        = '2006-09-03 00:00' ),
+                 mission_end        = '2006-09-03 00:00',
+                 data_for_day       = '2005-02-28 00:00'),
 ]
 
 ##############################################################################

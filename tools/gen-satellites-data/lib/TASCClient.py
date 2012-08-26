@@ -54,12 +54,9 @@ class TASCClient(object):
             space_obj.name, space_obj.related_body))
 
         if t_start is None:
-            if space_obj.mission_end is None:
-                t_start = time.time() - (time.time() % (3600*24)) + 1
-            else:
-                t_start = space_obj.mission_end - (24*3600)
-        if t_end is None:
-            t_end = t_start + 60
+            t_start = space_obj.data_from
+        if t_end is None or t_end <= t_start:
+            t_end = space_obj.data_until
 
         start = time.strftime('%Y/%m/%d %H:%M:%S.000', time.gmtime(t_start))
         end = time.strftime('%Y/%m/%d %H:%M:%S.000', time.gmtime(t_end))

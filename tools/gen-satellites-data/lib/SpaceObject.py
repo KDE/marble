@@ -45,6 +45,8 @@ class SpaceObject(object):
         self._related_body = None
         self._mission_start = None
         self._mission_end = None
+        self._data_from = None
+        self._data_until = None
         self._data_interval_days = 31
         self._tasc_mission = None
         self._horizons_id = None
@@ -112,6 +114,45 @@ class SpaceObject(object):
     def mission_end(self, value):
         t = time.strptime(value, self.DATE_FORMAT)
         self._mission_end = calendar.timegm(t)
+
+    @property
+    def data_from(self):
+        if self._data_from is None:
+           if self.mission_start is None:
+               return time.time() - (time.time() % (3600*24)) + 1
+           else:
+               return self.mission_start + (24*3600)
+        return self._data_from
+
+    @data_from.setter
+    def data_from(self, value):
+        t = time.strptime(value, self.DATE_FORMAT)
+        self._data_from = calendar.timegm(t)
+
+    @property
+    def data_until(self):
+        if self._data_until is None:
+            if self.mission_end is None:
+                return time.time() - (time.time() % (3600*24)) + 61 
+            else:
+                return self.mission_end - (24*3600)
+        return self._data_until
+
+    @data_until.setter
+    def data_until(self, value):
+        t = time.strptime(value, self.DATE_FORMAT)
+        self._data_until = calendar.timegm(t)
+
+    @property
+    def data_for_day(self):
+        return self.data_until - (self.data_until % (3600*24)) + 1
+
+    @data_for_day.setter
+    def data_for_day(self, value):
+        tm = time.strptime(value, self.DATE_FORMAT)
+        t = calendar.timegm(tm)
+        self._data_from = t
+        self._data_until = t + 60
 
     @property
     def data_interval_days(self):
