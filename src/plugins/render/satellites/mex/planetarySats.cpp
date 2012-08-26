@@ -14,7 +14,7 @@
 *                                                                          *
 * Open Source Code. License: GNU LGPL Version 2+                          *
 *                                                                          *
-* Author: Gerhard HOLTKAMP,        6-JUL-2012                              *
+* Author: Gerhard HOLTKAMP,        26-AUG-2012                              *
 ***************************************************************************/
 
 /*------------ include files and definitions -----------------------------*/
@@ -513,6 +513,7 @@ void PlanetarySats::getSatPos (double tutc)
   dt = t - pls_tepoch;
 
   ecc = pls_ecc;
+  if (ecc >= 1.0) ecc = 0.999;  // to avoid crashes
   a = pls_a;
   n0 = mp2 * pls_n0;
   if (a < 1.0) a = 1.0;  // avoid possible crashes later on
