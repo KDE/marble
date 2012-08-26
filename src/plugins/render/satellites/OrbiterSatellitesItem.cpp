@@ -86,7 +86,7 @@ void OrbiterSatellitesItem::update()
     m_track->removeBefore( startTime );
     m_track->removeAfter( endTime );
 
-    double step = period / 100.;
+    double step = period / 500.;
 
     // FIXME update track only if orbit is visible
     for( double i = startTime.toTime_t(); i < endTime.toTime_t(); i += step ) {
