@@ -17,6 +17,7 @@ from __future__ import print_function
 
 from lib.SpaceObject import SpaceObject
 from lib.HorizonsClient import HorizonsClient
+from lib.TASCClient import TASCClient
 from lib.ObjectCatalogue import ObjectCatalogue
 
 ####[ Configuration ]#########################################################
@@ -53,6 +54,14 @@ OBJECTS = [
                  horizons_id        = 402,
                  object_type        = SpaceObject.OBJECTTYPE_MOON,
                  related_body       = SpaceObject.BODY_MARS ),
+    # Smart-1
+    SpaceObject( data_source        = SpaceObject.DATASOURCE_TASC,
+                 name               = "Smart-1",
+                 tasc_mission       = "SM1",
+                 object_type        = SpaceObject.OBJECTTYPE_SPACECRAFT,
+                 related_body       = SpaceObject.BODY_MOON,
+                 mission_start      = '2003-09-28 00:00',
+                 mission_end        = '2006-09-03 00:00' ),
 ]
 
 ##############################################################################
@@ -64,30 +73,30 @@ class OrbitDataFetcher(object):
         self._object_catalogue = object_catalogue
         self._horizons_client = HorizonsClient()
         self._horizons_client.connect()
+        self._tasc_client = TASCClient()
 
     def __del__(self):
         self._horizons_client.disconnect()
 
     def fetch(self, objects):
+        vecs = []
         for obj in list(objects):
             if(obj.data_source is SpaceObject.DATASOURCE_HORIZONS):
-                self._fetch_from_horizons(obj)
+                vecs = self._fetch_from_horizons(obj)
+            elif(obj.data_source is SpaceObject.DATASOURCE_TASC):
+                vecs = self._fetch_from_tasc(obj)
             else:
                 print("Unsupported data source for " + obj.name)
+            if(len(vecs) < 1):
+                print("No data found! Skipping.")
+                continue
+            self._object_catalogue.add(obj, vecs[-1])
 
     def _fetch_from_horizons(self, space_object):
-        vecs = self._horizons_client.get_state_vectors_for_object(space_object)
-        if(len(vecs) < 1):
-            print("No data found! Skipping.")
-            return
-        #self._write_data_file(space_object.filename_prefix + '.txt', vecs)
-        self._object_catalogue.add(space_object, vecs[-1])
+        return self._horizons_client.get_state_vectors_for_object(space_object)
 
-    #def _write_data_file(self, filename, vectors):
-    #    f = open(filename, "w+")
-    #    for vector in vectors:
-    #        f.write(','.join([str(x) for x in vector]))
-    #    f.close()
+    def _fetch_from_tasc(self, space_object):
+        return self._tasc_client.get_state_vectors_for_object(space_object)
 
 # let's start fetching...
 object_catalogue = ObjectCatalogue(object_catalogue_file, data_file_base_url)

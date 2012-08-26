@@ -19,7 +19,7 @@ class SpaceObject(object):
 
     # data sources
     DATASOURCE_HORIZONS     = 1
-    DATASOURCE_TSAC         = 2
+    DATASOURCE_TASC         = 2
 
     # object types
     OBJECTTYPE_SPACECRAFT   = "Spacecraft"
@@ -34,18 +34,20 @@ class SpaceObject(object):
     BODY_SATURN             = "Saturn"
     BODY_URANUS             = "Uranus"
     BODY_NEPTUN             = "Neptun"
+    BODY_MOON               = "Moon"
 
     def __init__(self, **kwargs):
         super(SpaceObject, self).__init__()
         self._data_source = None
         self._filename_prefix = None
         self._name = None
-        self._horizons_id = None
         self._object_type = None
         self._related_body = None
         self._mission_start = None
         self._mission_end = None
         self._data_interval_days = 31
+        self._tasc_mission = None
+        self._horizons_id = None
         for prop in kwargs.keys():
             if(hasattr(self, prop)):
                 setattr(self, prop, kwargs[prop])
@@ -76,16 +78,6 @@ class SpaceObject(object):
     @name.setter
     def name(self, value):
         self._name = str(value)
-
-    @property
-    def horizons_id(self):
-        if(self._horizons_id is None):
-            return self.name
-        return self._horizons_id
-
-    @horizons_id.setter
-    def horizons_id(self, value):
-        self._horizons_id = value
 
     @property
     def object_type(self):
@@ -128,4 +120,29 @@ class SpaceObject(object):
     @data_interval_days.setter
     def data_interval_days(self, value):
         self._data_interval_days = int(value)
+
+    ### ESA TASC properties
+
+    @property
+    def tasc_mission(self):
+        if(self._tasc_mission is None):
+            return self.name
+        return self._tasc_mission
+
+    @tasc_mission.setter
+    def tasc_mission(self, value):
+        self._tasc_mission = value
+
+    ### NASA Horizons properties
+
+    @property
+    def horizons_id(self):
+        if(self._horizons_id is None):
+            return self.name
+        return self._horizons_id
+
+    @horizons_id.setter
+    def horizons_id(self, value):
+        self._horizons_id = value
+
 
