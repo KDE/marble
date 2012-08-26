@@ -186,7 +186,7 @@ void PlanetarySats::setStateVector(double mjd, double x, double y, double z, dou
     getDatefromMJD(mjd, year, month, day, hour, min, sec);
     setMJD(year, month, day, hour, min, sec);
     pls_tepoch = pls_time;
-    //pls_tepoch = pls_time + pls_del_tdut/86400.0;  // epoch in TT
+    //pls_tepoch = pls_time + pls_del_tdut / 86400.0;  // epoch in TT
 }
 
 int PlanetarySats::getStateVector(int nsat)

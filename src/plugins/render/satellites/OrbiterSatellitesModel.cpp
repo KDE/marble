@@ -60,7 +60,8 @@ void OrbiterSatellitesModel::parseFile( const QString &id,
     QTextStream ts(file);
 
     QString planet( m_lcPlanet.left(1).toUpper() + m_lcPlanet.mid(1) );
-    char *cplanet = planet.toLocal8Bit().data();
+    QByteArray bplanet = planet.toLocal8Bit();
+    char *cplanet = const_cast<char*>( bplanet.constData() );
 
     beginUpdateItems();
 
@@ -90,7 +91,8 @@ void OrbiterSatellitesModel::parseFile( const QString &id,
         PlanetarySats *planSat = new PlanetarySats();
         planSat->setPlanet( cplanet );
 
-        planSat->setStateVector( elms[6].toFloat() - 2400000.5,
+        planSat->setStateVector(
+            elms[6].toFloat() - 2400000.5,
             elms[7].toFloat(),  elms[8].toFloat(),  elms[9].toFloat(),
             elms[10].toFloat(), elms[11].toFloat(), elms[12].toFloat() );
 

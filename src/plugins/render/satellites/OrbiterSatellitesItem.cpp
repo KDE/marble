@@ -116,11 +116,6 @@ void OrbiterSatellitesItem::addTrackPointAt( const QDateTime &dateTime )
     m_planSat->currentPos();
     m_planSat->getPlanetographic( lng, lat, height );
 
-    if( qIsNaN( lng ) || qIsNaN( lat ) || qIsNaN( height ) ) {
-        Q_ASSERT( 0 );
-        return;
-    }
-
     m_track->addPoint( dateTime,
                        GeoDataCoordinates( lng, lat, height * 1000,
                                            GeoDataCoordinates::Degree) );
