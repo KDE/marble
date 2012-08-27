@@ -21,9 +21,9 @@ class SpaceObject(object):
     DATASOURCE_HORIZONS     = 1
     DATASOURCE_TASC         = 2
 
-    # object types
-    OBJECTTYPE_SPACECRAFT   = "Spacecraft"
-    OBJECTTYPE_MOON         = "Moon"
+    # object catagories 
+    CATEGORY_SPACECRAFTS    = "Spacecrafts"
+    CATEGORY_MOONS          = "Moons"
 
     # body constants
     BODY_MERCUR             = "Mercur"
@@ -41,7 +41,7 @@ class SpaceObject(object):
         self._data_source = None
         self._filename_prefix = None
         self._name = None
-        self._object_type = None
+        self._category = None
         self._related_body = None
         self._mission_start = None
         self._mission_end = None
@@ -82,12 +82,12 @@ class SpaceObject(object):
         self._name = str(value)
 
     @property
-    def object_type(self):
-        return self._object_type
+    def category(self):
+        return self._category
 
-    @object_type.setter
-    def object_type(self, value):
-        self._object_type = str(value)
+    @category.setter
+    def category(self, value):
+        self._category = str(value)
 
     @property
     def related_body(self):

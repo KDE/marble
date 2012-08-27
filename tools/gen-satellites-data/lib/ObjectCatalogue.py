@@ -36,7 +36,7 @@ class ObjectCatalogue(object):
             mission_start = space_obj.mission_start
         self._file.write(', '.join([
             space_obj.name,
-            space_obj.object_type,
+            space_obj._category,
             space_obj.related_body,
             str(mission_start),
             str(mission_end),
@@ -47,7 +47,7 @@ class ObjectCatalogue(object):
     def _open(self):
         self._file = open(self._filename, 'w+')
         self._file.truncate()
-        self._file.write('# name, type, related_body, mission_start, ' +
+        self._file.write('# name, category, related_body, mission_start, ' +
             'mission_end, url, <...latest state vector...>\n')
 
     def _close(self):
