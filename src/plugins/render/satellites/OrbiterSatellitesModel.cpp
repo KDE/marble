@@ -74,7 +74,7 @@ void OrbiterSatellitesModel::parseFile( const QString &id,
             continue;
         }
 
-        QString name = QString("%1 (%2)").arg( elms[0], elms[1] );
+        QString name( elms[0] );
         QString type( elms[1] );
         QString body( elms[2] );
         QByteArray body8Bit = body.toLocal8Bit();

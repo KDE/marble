@@ -351,13 +351,16 @@ void SatellitesPlugin::updateOrbiterConfigModel()
         OrbiterSatellitesItem *item = qobject_cast<OrbiterSatellitesItem*>( obj );
         if( item != NULL ) {
             if( !categories.contains( item->type() ) ) {
-                SatellitesConfigNodeItem *cat = new SatellitesConfigNodeItem( item->type() );
+                SatellitesConfigNodeItem *cat;
+                cat = new SatellitesConfigNodeItem( item->type() );
                 categories.insert( item->type(), cat );
                 mDebug() << "Added category" << item->type();
             }
 
             SatellitesConfigNodeItem *c = categories.value( item->type() );
-            c->appendChild( new SatellitesConfigLeafItem( item->name(), item->body() ) );
+            c->appendChild( new SatellitesConfigLeafItem(
+                QString("%1 (%2)").arg( item->name(), item->body() ),
+                item->body() ) );
             mDebug() << "Added" << item->name() << "to" << item->type();
         }
     }
