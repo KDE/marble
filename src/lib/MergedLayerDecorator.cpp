@@ -252,16 +252,6 @@ void MergedLayerDecorator::downloadStackedTile( const TileId &id, const QVector<
     }
 }
 
-void MergedLayerDecorator::reloadTile( const StackedTile &stackedTile )
-{
-    foreach ( QSharedPointer<Tile> const & tile, stackedTile.tiles() ) {
-        // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
-        // but since "reload" or "refresh" seems to be a common action of a browser and it
-        // allows for more connections (in our model), use "DownloadBrowse"
-        d->m_tileLoader->downloadTile( tile->id(), DownloadBrowse );
-    }
-}
-
 void MergedLayerDecorator::setThemeId( const QString &themeId )
 {
     d->m_themeId = themeId;

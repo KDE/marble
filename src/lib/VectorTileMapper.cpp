@@ -115,7 +115,7 @@ void VectorTileMapper::setRepaintNeeded()
     m_repaintNeeded = true;
 }
 
-void VectorTileMapper::zoomChanged(){
+void VectorTileMapper::initTileRangeCoords(){
 
     // Set tile X and Y to the biggest possible values, but inverted so the
     // left/up/right/down variables can be calculated

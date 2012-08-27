@@ -64,7 +64,6 @@ public:
             VectorTileLayer *parent,
             GeoDataTreeModel *treeModel);
 
-    void mapChanged();
     void updateTextureLayers();
 
 public:
@@ -129,17 +128,6 @@ VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
 {
 }
 
-void VectorTileLayer::Private::mapChanged()
-{
-    if ( m_texmapper ) {
-        m_texmapper->setRepaintNeeded();
-    }
-
-    if ( !m_repaintTimer.isActive() ) {
-        m_repaintTimer.start();
-    }
-}
-
 void VectorTileLayer::Private::updateTextureLayers()
 {
     QVector<GeoSceneTiled const *> result;
@@ -184,8 +172,6 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
 {
     qRegisterMetaType<TileId>( "TileId" );
     qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
-    connect( d->m_veccomposer, SIGNAL( datasetLoaded() ),
-             this, SLOT( mapChanged() ) );
 
 }
 
@@ -275,7 +261,7 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     if ( changedTileLevel ) {
         d->m_documents.clear();
         d->m_tileLoader.cleanupTilehash();
-        d->m_texmapper->zoomChanged();
+        d->m_texmapper->initTileRangeCoords();
     }
     // else remove only tiles that are not shown on the screen
     else{
@@ -360,8 +346,6 @@ void VectorTileLayer::setVolatileCacheLimit( quint64 kilobytes )
 
 void VectorTileLayer::reset()
 {
-    mDebug() << Q_FUNC_INFO;
-
     foreach( GeoDataLatLonAltBox box , d->m_documents.keys() ){
             CacheDocument * document = d->m_documents.take( box );
             d->m_treeModel->removeDocument( document->document );
@@ -370,7 +354,6 @@ void VectorTileLayer::reset()
         }
     d->m_documents.clear();
     d->m_tileLoader.clear();
-    d->mapChanged();
 }
 
 void VectorTileLayer::reload()

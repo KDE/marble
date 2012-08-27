@@ -46,8 +46,6 @@ class MergedLayerDecorator
 
     void downloadStackedTile( const TileId &id, const QVector<GeoSceneTiled const *> &textureLayers, DownloadUsage usage );
 
-    void reloadTile( const StackedTile &stackedTile );
-
     void setThemeId( const QString &themeId );
 
     void setLevelZeroLayout( int levelZeroColumns, int levelZeroRows );

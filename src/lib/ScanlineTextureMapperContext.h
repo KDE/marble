@@ -49,7 +49,7 @@ public:
     int globalWidth() const;
     int globalHeight() const;
 
-    const StackedTile &getTile();
+    const StackedTile &Tile();
 
 private:
     // method for fast integer calculation

@@ -111,7 +111,6 @@ class VectorTileLayer : public QObject, public LayerInterface
     void repaintNeeded();
 
  private:
-    Q_PRIVATE_SLOT( d, void mapChanged() )
     Q_PRIVATE_SLOT( d, void updateTextureLayers() )
 
 

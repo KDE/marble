@@ -54,7 +54,7 @@ class TileLoader: public QObject
 
     QImage loadTileImage( TileId const & tileId, DownloadUsage const );
     GeoDataDocument* loadTileVectorData( TileId const & tileId, DownloadUsage const usage, QString const &format );
-    void downloadTile( TileId const & tileId, DownloadUsage const );
+    void downloadTile( TileId const &, DownloadUsage const );
 
     static int maximumTileLevel( GeoSceneTiled const & texture );
 

@@ -41,7 +41,7 @@ public:
 
     virtual void setRepaintNeeded();
 
-    void zoomChanged();
+    void initTileRangeCoords();
 
 public Q_SLOTS:
     void updateTile(TileId const & tileId, GeoDataDocument *document, QString const & format );
