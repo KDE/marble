@@ -33,6 +33,7 @@ public:
     int childrenCount() const;
 
     void appendChild( SatellitesConfigAbstractItem *item );
+    void clear();
 
 private:
     QVector<SatellitesConfigAbstractItem *> m_children;

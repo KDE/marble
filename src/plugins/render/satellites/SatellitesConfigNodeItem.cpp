@@ -14,6 +14,8 @@
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
 
+#include "MarbleDebug.h"
+
 namespace Marble {
 
 SatellitesConfigNodeItem::SatellitesConfigNodeItem( const QString &name )
@@ -133,6 +135,16 @@ void SatellitesConfigNodeItem::appendChild( SatellitesConfigAbstractItem *item )
 {
     item->setParent( this );
     m_children.append( item );
+}
+
+void SatellitesConfigNodeItem::clear()
+{
+    for( int i = m_children.count(); i > 0; i-- ) {
+        SatellitesConfigAbstractItem *item = m_children.at( i - 1 );
+        m_children.remove( i - 1 );
+        item->clear();
+        delete item;
+    }
 }
 
 } // namespace Marble

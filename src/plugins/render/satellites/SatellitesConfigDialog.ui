@@ -21,19 +21,9 @@
      </property>
      <widget class="QWidget" name="tabEarthSatellites">
       <attribute name="title">
-       <string>&amp;Earth Satellites</string>
+       <string>&amp;Earth's Artificial Satellites</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QCheckBox" name="checkBoxShowEarthSatellites">
-         <property name="text">
-          <string>Show Earth Satellites</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
        <item>
         <widget class="QTreeView" name="treeViewEarth"/>
        </item>
@@ -41,19 +31,9 @@
      </widget>
      <widget class="QWidget" name="tabOrbiter">
       <attribute name="title">
-       <string>&amp;Orbiter</string>
+       <string>&amp;Planetary Satellites and Spacecrafts</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
-        <widget class="QCheckBox" name="checkBoxShowOrbiterSatellites">
-         <property name="text">
-          <string>Show Orbiter Satellites</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
        <item>
         <widget class="QTreeView" name="treeViewOrbiter"/>
        </item>
@@ -120,54 +100,6 @@
     <hint type="destinationlabel">
      <x>286</x>
      <y>189</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>checkBoxShowEarthSatellites</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>treeViewEarth</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>104</x>
-     <y>68</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>165</x>
-     <y>132</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>checkBoxShowOrbiterSatellites</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>treeViewOrbiter</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>150</x>
-     <y>66</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>164</x>
-     <y>115</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>checkBoxShowOrbiterSatellites</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>buttonBoxCatalog</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>82</x>
-     <y>63</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>163</x>
-     <y>308</y>
     </hint>
    </hints>
   </connection>

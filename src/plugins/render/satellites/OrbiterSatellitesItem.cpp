@@ -26,6 +26,8 @@
 namespace Marble {
 
 OrbiterSatellitesItem::OrbiterSatellitesItem( const QString &name, 
+                                              const QString &type,
+                                              const QString &body,
                                               PlanetarySats *planSat,
                                               const MarbleClock *clock )
     : TrackerPluginItem( name ),
@@ -33,7 +35,9 @@ OrbiterSatellitesItem::OrbiterSatellitesItem( const QString &name,
       m_track( new GeoDataTrack() ),
       m_clock( clock ),
       m_planSat( planSat ),
-      m_name( name )
+      m_name( name ),
+      m_type( type ),
+      m_body( body )
 {
     placemark()->setVisualCategory( GeoDataFeature::Satellite );
     placemark()->setZoomLevel( 0 );
@@ -60,6 +64,16 @@ OrbiterSatellitesItem::~OrbiterSatellitesItem()
 QString OrbiterSatellitesItem::name() const
 {
     return m_name;
+}
+
+QString OrbiterSatellitesItem::type() const
+{
+    return m_type;
+}
+
+QString OrbiterSatellitesItem::body() const
+{
+    return m_body;
 }
 
 void OrbiterSatellitesItem::setDescription()
@@ -122,4 +136,6 @@ void OrbiterSatellitesItem::addTrackPointAt( const QDateTime &dateTime )
 }
 
 } // namespace Marble
+
+#include "OrbiterSatellitesItem.moc"
 

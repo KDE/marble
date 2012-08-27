@@ -44,6 +44,8 @@ public:
     virtual int indexOf( const SatellitesConfigAbstractItem *child ) const = 0;
     virtual int childrenCount() const = 0;
 
+    virtual void clear();
+
 protected:
     explicit SatellitesConfigAbstractItem( const QString &name );
 

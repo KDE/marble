@@ -15,6 +15,7 @@
 #include "MarbleDebug.h"
 #include "MarbleClock.h"
 #include "MarbleDirs.h"
+#include "GeoDataPlacemark.h"
 
 #include "mex/planetarySats.h"
 
@@ -45,11 +46,7 @@ void OrbiterSatellitesModel::setPlanet( const QString &planetId )
         mDebug() << "Planet changed from" << m_lcPlanet << "to" << planetId;
         m_lcPlanet = planetId;
 
-        // reload catalogs
-        clear();
-        foreach( const QString &catalog, m_catalogs ) {
-            downloadFile( QUrl( catalog ), catalog.section( '/', -1 ) );
-        }
+        update();
     }
 }
 
@@ -59,9 +56,7 @@ void OrbiterSatellitesModel::parseFile( const QString &id,
     mDebug() << "Reading orbiter catalog from:" << id;
     QTextStream ts(file);
 
-    QString planet( m_lcPlanet.left(1).toUpper() + m_lcPlanet.mid(1) );
-    QByteArray bplanet = planet.toLocal8Bit();
-    char *cplanet = const_cast<char*>( bplanet.constData() );
+    clear();
 
     beginUpdateItems();
 
@@ -80,16 +75,15 @@ void OrbiterSatellitesModel::parseFile( const QString &id,
         }
 
         QString name = QString("%1 (%2)").arg( elms[0], elms[1] );
-        QString planet( elms[2] );
+        QString type( elms[1] );
+        QString body( elms[2] );
+        QByteArray body8Bit = body.toLocal8Bit();
+        char *cbody = const_cast<char*>( body8Bit.constData() );
 
-        if( planet.toLower() != m_lcPlanet ) {
-            continue;
-        }
-
-        mDebug() << "Loading orbiter object:" << name;
+        mDebug() << "Loading" << type << name;
 
         PlanetarySats *planSat = new PlanetarySats();
-        planSat->setPlanet( cplanet );
+        planSat->setPlanet( cbody );
 
         planSat->setStateVector(
             elms[6].toFloat() - 2400000.5,
@@ -98,7 +92,11 @@ void OrbiterSatellitesModel::parseFile( const QString &id,
 
         planSat->stateToKepler();
 
-        addItem( new OrbiterSatellitesItem( name, planSat, m_clock ) );
+        OrbiterSatellitesItem *item;
+        item = new OrbiterSatellitesItem( name, type, body, planSat, m_clock );
+        item->placemark()->setVisible( ( body.toLower() == m_lcPlanet ) );
+
+        addItem( item );
     }
 
     endUpdateItems();
@@ -112,6 +110,25 @@ void OrbiterSatellitesModel::downloadFile(const QUrl &url, const QString &id)
     }
 
     TrackerPluginModel::downloadFile( url, id );
+}
+
+void OrbiterSatellitesModel::update()
+{
+    beginUpdateItems();
+
+    foreach( QObject *obj, items() ) {
+        OrbiterSatellitesItem *item = qobject_cast<OrbiterSatellitesItem*>(obj);
+        if( item != NULL ) {
+            bool visible = ( item->body().toLower() == m_lcPlanet );
+            item->placemark()->setVisible( visible );
+
+            if( visible ) {
+                item->update();
+            }
+        }
+    }
+
+    endUpdateItems();
 }
 
 } // namespace Marble

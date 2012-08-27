@@ -12,6 +12,7 @@
 #define MARBLE_ORBITERSATELLITESMODEL_H
 
 #include <QtCore/QStringList>
+#include <QtCore/QMap>
 
 #include "TrackerPluginModel.h"
 
@@ -36,11 +37,15 @@ public:
 
     void downloadFile(const QUrl &url, const QString &id);
 
+public Q_SLOTS:
+    void update();
+
 protected:
     const MarbleClock *m_clock;
     QString m_lcPlanet;
     QStringList m_catalogs;
     bool m_enabled;
+
 };
 
 } // namespace Marble

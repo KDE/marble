@@ -25,6 +25,7 @@ class MarbleClock;
 
 class EarthSatellitesItem : public TrackerPluginItem
 {
+    Q_OBJECT
 
 public:
     EarthSatellitesItem( const QString &name,

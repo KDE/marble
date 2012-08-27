@@ -82,6 +82,7 @@ private Q_SLOTS:
     void writeSettings();
     void updateSettings();
     void updateOrbiterCatalog();
+    void updateOrbiterConfigModel();
 
 private:
     void setupConfigModel();

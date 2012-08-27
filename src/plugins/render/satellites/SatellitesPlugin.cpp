@@ -15,6 +15,7 @@
 #include "MarbleModel.h"
 #include "GeoDataPlacemark.h"
 #include "EarthSatellitesItem.h"
+#include "OrbiterSatellitesItem.h"
 #include "SatellitesConfigLeafItem.h"
 #include "SatellitesConfigNodeItem.h"
 #include "EarthSatellitesConfigModel.h"
@@ -266,16 +267,17 @@ QDialog *SatellitesPlugin::configDialog()
 
         // orbiter
         QPushButton *buttonUpdateCatalog;
-        buttonUpdateCatalog = new QPushButton( tr( "&Update Object Catalog" ),
+        buttonUpdateCatalog = new QPushButton( tr( "&Reload Catalogue" ),
             ui_configWidget->buttonBoxCatalog );
         buttonUpdateCatalog->setDefault( false );
         ui_configWidget->buttonBoxCatalog->addButton(
             buttonUpdateCatalog, QDialogButtonBox::ActionRole );
 
         QPushButton *buttonOpenCatalog;
-        buttonOpenCatalog = new QPushButton( tr( "&Open Catalog from Disk" ),
+        buttonOpenCatalog = new QPushButton( tr( "&Catalogues..." ),
             ui_configWidget->buttonBoxCatalog );
         buttonOpenCatalog->setDefault( false );
+        buttonOpenCatalog->setEnabled( false );
         ui_configWidget->buttonBoxCatalog->addButton(
             buttonOpenCatalog, QDialogButtonBox::ActionRole );
 
@@ -283,9 +285,12 @@ QDialog *SatellitesPlugin::configDialog()
                  SLOT( updateOrbiterCatalog() ) );
         connect( buttonOpenCatalog, SIGNAL( clicked() ),
                  SLOT( openCatalogFromDisk() ) );
+        connect( m_orbiterSatModel, SIGNAL( itemUpdateEnded() ),
+                 SLOT( updateOrbiterConfigModel() ) );
+
+        updateOrbiterConfigModel();
 
         readSettings();
-
     }
 
     return m_configDialog;
@@ -303,9 +308,10 @@ void SatellitesPlugin::enableModel( bool enabled )
         m_orbiterSatModel->enable( false );
     } else {
         m_earthSatModel->enable( false );
-        m_orbiterSatModel->setPlanet( marbleModel()->planetId() );
-        m_orbiterSatModel->enable( enabled && visible() );
     }
+
+    m_orbiterSatModel->setPlanet( marbleModel()->planetId() );
+    m_orbiterSatModel->enable( enabled && visible() );
 }
 
 void SatellitesPlugin::visibleModel( bool visible )
@@ -317,12 +323,12 @@ void SatellitesPlugin::visibleModel( bool visible )
     if( marbleModel()->planetId() == "earth" )
     {
         m_earthSatModel->enable( enabled() && visible );
-        m_orbiterSatModel->enable( false );
     } else {
         m_earthSatModel->enable( false );
-        m_orbiterSatModel->setPlanet( marbleModel()->planetId() );
-        m_orbiterSatModel->enable( enabled() && visible );
     }
+
+    m_orbiterSatModel->setPlanet( marbleModel()->planetId() );
+    m_orbiterSatModel->enable( enabled() && visible );
 }
 
 void SatellitesPlugin::updateOrbiterCatalog()
@@ -331,6 +337,41 @@ void SatellitesPlugin::updateOrbiterCatalog()
     foreach( const QString &cat, catList ) {
         mDebug() << "Loading catalog:" << cat;
         m_orbiterSatModel->downloadFile( QUrl( cat ), cat.section( '/', -1 ) );
+    }
+}
+
+void SatellitesPlugin::updateOrbiterConfigModel()
+{
+    mDebug() << "Updating orbiter configuration";
+
+    m_orbiterSatConfigModel->clear();
+    QMap<QString, SatellitesConfigNodeItem*> categories;
+
+    foreach( QObject *obj, m_orbiterSatModel->items() ) {
+        OrbiterSatellitesItem *item = qobject_cast<OrbiterSatellitesItem*>( obj );
+        if( item != NULL ) {
+            if( !categories.contains( item->type() ) ) {
+                SatellitesConfigNodeItem *cat = new SatellitesConfigNodeItem( item->type() );
+                categories.insert( item->type(), cat );
+                mDebug() << "Added category" << item->type();
+            }
+
+            SatellitesConfigNodeItem *c = categories.value( item->type() );
+            c->appendChild( new SatellitesConfigLeafItem( item->name(), item->body() ) );
+            mDebug() << "Added" << item->name() << "to" << item->type();
+        }
+    }
+
+    foreach( SatellitesConfigNodeItem *node, categories.values() ) {
+        m_orbiterSatConfigModel->appendChild( node );
+    }
+
+    readSettings();
+
+    ui_configWidget->treeViewOrbiter->setModel( m_orbiterSatConfigModel );
+    ui_configWidget->treeViewOrbiter->expandAll();
+    for ( int i = 0; i < m_orbiterSatConfigModel->columnCount(); i++ ) {
+        ui_configWidget->treeViewOrbiter->resizeColumnToContents( i );
     }
 }
 

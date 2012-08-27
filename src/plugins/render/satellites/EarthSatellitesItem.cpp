@@ -208,3 +208,5 @@ double EarthSatellitesItem::square( double x )
 
 } // namespace Marble
 
+#include "EarthSatellitesItem.moc"
+

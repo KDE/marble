@@ -75,5 +75,9 @@ bool SatellitesConfigAbstractItem::setData( int column, int role, const QVariant
     return false;
 }
 
+void SatellitesConfigAbstractItem::clear()
+{
+}
+
 } // namespace Marble
 

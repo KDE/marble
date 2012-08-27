@@ -32,6 +32,11 @@ void SatellitesConfigModel::appendChild( SatellitesConfigAbstractItem *child )
     m_rootItem->appendChild( child );
 }
 
+void SatellitesConfigModel::clear()
+{
+    m_rootItem->clear();
+}
+
 QVariant SatellitesConfigModel::data( const QModelIndex &index, int role ) const
 {
     if ( !index.isValid() ) {

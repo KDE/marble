@@ -26,13 +26,19 @@ class GeoDataPlacemark;
 
 class OrbiterSatellitesItem : public TrackerPluginItem
 {
+    Q_OBJECT
+
 public:
     OrbiterSatellitesItem( const QString &name,
+                           const QString &type,
+                           const QString &body,
                            PlanetarySats *planSat,
                            const MarbleClock *clock );
     ~OrbiterSatellitesItem();
 
-    QString name() const; 
+    QString name() const;
+    QString type() const;
+    QString body() const;
 
     void update();
     void showOrbit( bool show );
@@ -43,6 +49,8 @@ private:
     const MarbleClock *m_clock;
     PlanetarySats *m_planSat;
     const QString m_name;
+    const QString m_type;
+    const QString m_body;
 
     double m_perc;
     double m_apoc;

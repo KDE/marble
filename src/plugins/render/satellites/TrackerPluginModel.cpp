@@ -109,6 +109,11 @@ void TrackerPluginModel::addItem( TrackerPluginItem *mark )
     d->m_itemVector.append( mark );
 }
 
+QVector<TrackerPluginItem*> TrackerPluginModel::items() const
+{
+    return d->m_itemVector;
+}
+
 void TrackerPluginModel::clear()
 {
     beginUpdateItems();
@@ -124,6 +129,8 @@ void TrackerPluginModel::beginUpdateItems()
     if( d->m_enabled ) {
         d->m_treeModel->removeDocument( d->m_document );
     }
+
+    emit itemUpdateStarted();
 }
 
 void TrackerPluginModel::endUpdateItems()
@@ -131,6 +138,8 @@ void TrackerPluginModel::endUpdateItems()
     if( d->m_enabled ) {
         d->m_treeModel->addDocument( d->m_document );
     }
+
+    emit itemUpdateEnded();
 }
 
 void TrackerPluginModel::downloadFile(const QUrl &url, const QString &id)

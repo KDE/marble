@@ -29,6 +29,7 @@ class TrackerPluginModelPrivate;
 class TrackerPluginModel : public QObject
 {
     Q_OBJECT
+
 public:
     /**
      * Constructs a model with the given @p treeModel and @p pluginManager.
@@ -48,6 +49,11 @@ public:
      * @see beginUpdateItems, endUpdateItems
      */
     void addItem( TrackerPluginItem *mark );
+
+    /**
+     * Return all available items.
+     */
+    QVector<TrackerPluginItem*> items() const;
 
     /**
      * Remove all items from the model.
@@ -87,6 +93,10 @@ public:
      * @param file The content of the file
      */
     virtual void parseFile( const QString &id, const QByteArray &file );
+
+Q_SIGNALS:
+    void itemUpdateStarted();
+    void itemUpdateEnded();
 
 private:
     TrackerPluginModelPrivate *d;

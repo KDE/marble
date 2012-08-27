@@ -26,6 +26,7 @@ public:
     void loadSettings( QHash<QString, QVariant> settings );
 
     void appendChild( SatellitesConfigAbstractItem *child );
+    void clear();
 
     QVariant data( const QModelIndex &index, int role = Qt::DisplayRole ) const;
     bool setData( const QModelIndex &index, const QVariant &value, int role = Qt::EditRole );

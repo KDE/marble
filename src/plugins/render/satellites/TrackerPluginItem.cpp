@@ -44,3 +44,5 @@ GeoDataPlacemark* TrackerPluginItem::placemark()
 
 } // namespace Marble
 
+#include "TrackerPluginItem.moc"
+
