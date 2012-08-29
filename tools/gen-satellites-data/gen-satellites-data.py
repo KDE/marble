@@ -22,7 +22,7 @@ from lib.ObjectCatalogue import ObjectCatalogue
 
 ####[ Configuration ]#########################################################
 
-object_catalogue_file   = "satcatalogue.txt"
+object_catalogue_file   = "satcatalogue.msc"
 data_file_base_url      = "http://bitquirl.net/~rene/esasocis/orbitdata"
 
 # define all interesting objects
