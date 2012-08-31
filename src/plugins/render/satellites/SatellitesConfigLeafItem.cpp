@@ -45,6 +45,7 @@ QVariant SatellitesConfigLeafItem::data( int column, int role ) const
         if( !m_url.isNull() && !m_url.isEmpty() ) {
             return QVariant( QStringList() << m_url );
         }
+        break;
     case IdListRole:
         return QVariant( QStringList() << m_id );
     case Qt::CheckStateRole:
@@ -61,7 +62,11 @@ QVariant SatellitesConfigLeafItem::data( int column, int role ) const
 
 bool SatellitesConfigLeafItem::setData( int column, int role, const QVariant& data )
 {
-    if ( role == Qt::CheckStateRole ) {
+    switch( role ) {
+    case UrlListRole:
+        m_url = data.toString();
+        return true;
+    case Qt::CheckStateRole:
         switch ( column ) {
         case 0:
             m_isChecked = data.toBool();

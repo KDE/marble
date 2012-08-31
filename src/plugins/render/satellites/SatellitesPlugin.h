@@ -74,7 +74,7 @@ private Q_SLOTS:
     void readSettings();
     void writeSettings();
     void updateSettings();
-    void updateOrbiterConfig();
+    void updateOrbiterConfig( const QString &source );
     void dataSourceParsed( const QString &source );
     void userDataSourceAdded( const QString &source );
 

@@ -33,6 +33,8 @@ public:
                             const MarbleClock *clock );
     ~OrbiterSatellitesModel();
 
+    void loadSettings( const QHash<QString, QVariant> &settings );
+
     void setPlanet( const QString &planetId );
     void parseFile( const QString &id, const QByteArray &file );
 
@@ -43,6 +45,7 @@ protected:
     const MarbleClock *m_clock;
     QString m_lcPlanet;
     bool m_enabled;
+    QStringList m_enabledIds;
 
 };
 

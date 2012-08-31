@@ -29,6 +29,7 @@ OrbiterSatellitesItem::OrbiterSatellitesItem( const QString &name,
                                               const QString &category,
                                               const QString &relatedBody,
                                               const QString &catalog,
+                                              int catalogIndex,
                                               PlanetarySats *planSat,
                                               const MarbleClock *clock )
     : TrackerPluginItem( name ),
@@ -39,7 +40,8 @@ OrbiterSatellitesItem::OrbiterSatellitesItem( const QString &name,
       m_name( name ),
       m_category( category ),
       m_relatedBody( relatedBody ),
-      m_catalog( catalog )
+      m_catalog( catalog ),
+      m_catalogIndex( catalogIndex )
 {
     placemark()->setVisualCategory( GeoDataFeature::Satellite );
     placemark()->setZoomLevel( 0 );
@@ -83,10 +85,14 @@ QString OrbiterSatellitesItem::catalog() const
     return m_catalog;
 }
 
+int OrbiterSatellitesItem::catalogIndex() const
+{
+    return m_catalogIndex;
+}
+
 QString OrbiterSatellitesItem::id() const
 {
-    QString id = name().replace( ' ', "_" );
-    return QString( "%1_%2" ).arg( id, catalog() );
+    return QString( "%1:%2" ).arg( catalog() ).arg( catalogIndex() );
 }
 
 void OrbiterSatellitesItem::setDescription()

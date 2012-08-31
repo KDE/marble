@@ -33,6 +33,7 @@ public:
                            const QString &category,
                            const QString &relatedBody,
                            const QString &catalog,
+                           int catalogIndex,
                            PlanetarySats *planSat,
                            const MarbleClock *clock );
     ~OrbiterSatellitesItem();
@@ -41,6 +42,7 @@ public:
     QString category() const;
     QString relatedBody() const;
     QString catalog() const;
+    int catalogIndex() const;
     QString id() const;
 
     void update();
@@ -55,6 +57,7 @@ private:
     const QString m_category;
     const QString m_relatedBody;
     const QString m_catalog;
+    const int m_catalogIndex;
 
     double m_perc;
     double m_apoc;

@@ -142,6 +142,11 @@ void TrackerPluginModel::endUpdateItems()
     emit itemUpdateEnded();
 }
 
+void TrackerPluginModel::loadSettings( const QHash<QString, QVariant> &settings )
+{
+    Q_UNUSED( settings );
+}
+
 void TrackerPluginModel::downloadFile(const QUrl &url, const QString &id)
 {
     d->m_downloadManager->addJob( url, id, id, DownloadBrowse );

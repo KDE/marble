@@ -70,7 +70,6 @@ QVariant SatellitesConfigNodeItem::data( int column, int role ) const
                 if ( oneUnchecked ) {
                     return Qt::PartiallyChecked;
                 }
-                break;
             case Qt::PartiallyChecked:
                 return Qt::PartiallyChecked;
             case Qt::Unchecked:
@@ -78,7 +77,6 @@ QVariant SatellitesConfigNodeItem::data( int column, int role ) const
                 if ( oneChecked ) {
                     return Qt::PartiallyChecked;
                 }
-                break;
             }
         }
 

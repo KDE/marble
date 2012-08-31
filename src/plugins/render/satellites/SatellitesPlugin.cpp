@@ -157,9 +157,9 @@ void SatellitesPlugin::initialize()
         SLOT( dataSourceParsed( const QString& ) ) );
     connect( m_orbiterSatModel, SIGNAL( fileParsed( const QString& ) ),
         SLOT( dataSourceParsed( const QString& ) ) );
-    connect( m_orbiterSatModel, SIGNAL( itemUpdateEnded() ),
-        SLOT( updateOrbiterConfig() ) );
-    connect( m_configDialog, SIGNAL( reloadDataSourcesRequested() ),
+    connect( m_orbiterSatModel, SIGNAL( fileParsed( const QString&) ),
+        SLOT( updateOrbiterConfig( const QString& ) ) );
+    connect( m_configDialog, SIGNAL( dataSourcesReloadRequested() ),
         SLOT( updateSettings() ) );
     connect( m_configDialog, SIGNAL( accepted() ), SLOT( writeSettings() ) );
     connect( m_configDialog, SIGNAL( rejected() ), SLOT( readSettings() ) );
@@ -209,6 +209,7 @@ void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
         QStringList dsList;
         dsList << "http://www.celestrak.com/NORAD/elements/visual.txt";
         m_settings.insert( "dataSources", dsList );
+        m_settings.insert( "idList", dsList );
     } else if( m_settings.value( "dataSources" ).type() == QVariant::String ) {
         // HACK: KConfig can't guess the type of the settings, when we use
         // KConfigGroup::readEntry() in marble_part it returns a QString which
@@ -238,6 +239,7 @@ void SatellitesPlugin::readSettings()
     m_configDialog->setUserDataSources(
         m_settings.value( "userDataSources" ).toStringList() );
     m_configModel->loadSettings( m_settings );
+    m_orbiterSatModel->loadSettings( m_settings );
 }
 
 void SatellitesPlugin::writeSettings()
@@ -281,13 +283,7 @@ void SatellitesPlugin::dataSourceParsed( const QString &source )
 
 void SatellitesPlugin::userDataSourceAdded( const QString &source )
 {
-    // initially enable sources (and their items)
-    QStringList idList = m_settings["idList"].toStringList();
-    QStringList dsList = m_settings["dataSources"].toStringList();
-    idList << source;
-    dsList << source;
-    m_settings.insert( "idList", idList );
-    m_settings.insert( "dataSources", dsList );
+    // TODO: initially enable sources (and their items)
 }
 
 SatellitesConfigDialog *SatellitesPlugin::configDialog()
@@ -329,8 +325,10 @@ void SatellitesPlugin::visibleModel( bool visible )
     m_orbiterSatModel->enable( enabled() && visible );
 }
 
-void SatellitesPlugin::updateOrbiterConfig()
+void SatellitesPlugin::updateOrbiterConfig( const QString &source )
 {
+    Q_UNUSED( source );
+
     mDebug() << "Updating orbiter configuration";
 
     foreach( QObject *obj, m_orbiterSatModel->items() ) {
@@ -345,7 +343,6 @@ void SatellitesPlugin::updateOrbiterConfig()
     }
 
     readSettings();
-
     m_configDialog->update();
 }
 

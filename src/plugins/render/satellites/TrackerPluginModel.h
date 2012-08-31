@@ -12,6 +12,7 @@
 #define MARBLE_TRACKERPLUGINMODEL_H
 
 #include <QtCore/QObject>
+#include <QHash>
 
 class QUrl;
 
@@ -77,6 +78,11 @@ public:
      * @see beginUpdateItems(), addItem(), removeItem()
      */
     void endUpdateItems();
+
+    /**
+     * Load settings.
+     */
+    void loadSettings( const QHash<QString, QVariant> &settings );
 
     /**
      * Adds @p url to the download queue.

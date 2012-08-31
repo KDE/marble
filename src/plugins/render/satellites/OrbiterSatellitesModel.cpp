@@ -38,6 +38,14 @@ OrbiterSatellitesModel::~OrbiterSatellitesModel()
 {
 }
 
+void OrbiterSatellitesModel::loadSettings( const QHash<QString, QVariant> &settings )
+{
+    QStringList idList = settings["idList"].toStringList();
+    m_enabledIds = idList;
+
+    updateVisibility();
+}
+
 void OrbiterSatellitesModel::setPlanet( const QString &planetId )
 {
     if( m_lcPlanet != planetId ) {
@@ -55,6 +63,7 @@ void OrbiterSatellitesModel::parseFile( const QString &id,
     mDebug() << "Reading orbiter catalog from:" << id;
 
     QTextStream ts(file);
+    int index = 1;
 
     beginUpdateItems();
 
@@ -91,7 +100,7 @@ void OrbiterSatellitesModel::parseFile( const QString &id,
         planSat->stateToKepler();
 
         OrbiterSatellitesItem *item;
-        item = new OrbiterSatellitesItem( name, category, body, id,
+        item = new OrbiterSatellitesItem( name, category, body, id, index++,
                                           planSat, m_clock );
         item->placemark()->setVisible( ( body.toLower() == m_lcPlanet ) );
 
@@ -99,6 +108,7 @@ void OrbiterSatellitesModel::parseFile( const QString &id,
     }
 
     endUpdateItems();
+
     emit fileParsed( id );
 }
 
@@ -109,7 +119,8 @@ void OrbiterSatellitesModel::updateVisibility()
     foreach( QObject *obj, items() ) {
         OrbiterSatellitesItem *item = qobject_cast<OrbiterSatellitesItem*>(obj);
         if( item != NULL ) {
-            bool visible = ( item->relatedBody().toLower() == m_lcPlanet );
+            bool visible = ( ( item->relatedBody().toLower() == m_lcPlanet ) &&
+                             ( m_enabledIds.contains( item->id() ) ) );
             item->placemark()->setVisible( visible );
 
             if( visible ) {
