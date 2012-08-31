@@ -19,7 +19,8 @@ class SatellitesConfigLeafItem : public SatellitesConfigAbstractItem
 {
 
 public:
-    explicit SatellitesConfigLeafItem( const QString &name, const QString &url );
+    explicit SatellitesConfigLeafItem( const QString &name,
+                                       const QString &id );
     ~SatellitesConfigLeafItem();
 
     void loadSettings( QHash<QString, QVariant> settings );
@@ -32,7 +33,11 @@ public:
     int indexOf( const SatellitesConfigAbstractItem *child ) const;
     int childrenCount() const;
 
+    QString id() const;
+    QString url() const;
+
 private:
+    QString m_id;
     QString m_url;
     bool m_isChecked;
     bool m_isOrbitDisplayed;

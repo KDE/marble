@@ -27,15 +27,17 @@ set( satellites_SRCS
  OrbiterSatellitesModel.cpp
  OrbiterSatellitesItem.cpp
  SatellitesConfigModel.cpp
- EarthSatellitesConfigModel.cpp
- OrbiterSatellitesConfigModel.cpp
+ SatellitesConfigDialog.cpp
  SatellitesConfigAbstractItem.cpp
  SatellitesConfigNodeItem.cpp
  SatellitesConfigLeafItem.cpp)
 
 qt4_wrap_ui( satellites_SRCS SatellitesConfigDialog.ui )
 
-marble_add_plugin(SatellitesPlugin
+qt4_add_resources( satellites_SRCS satellites.qrc )
+
+marble_add_plugin( SatellitesPlugin
  ${satellites_SRCS}
  ${sgp4_SRCS}
  ${mex_SRCS} )
+

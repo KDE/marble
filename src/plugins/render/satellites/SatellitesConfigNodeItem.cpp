@@ -51,14 +51,14 @@ QVariant SatellitesConfigNodeItem::data( int column, int role ) const
         }
         return urlList;
     }
-    case OrbiterDataListRole: {
-        QStringList orbiterDataList;
+    case IdListRole: {
+        QStringList idList;
         foreach( SatellitesConfigAbstractItem *item, m_children ) {
             if ( item->data( column, Qt::CheckStateRole ).toInt() != Qt::Unchecked ) {
-                orbiterDataList.append( item->data( column, role ).toStringList() );
+                idList.append( item->data( column, role ).toStringList() );
             }
         }
-        return orbiterDataList;
+        return idList;
     }
     case Qt::CheckStateRole: {
         bool oneChecked = false;
@@ -139,10 +139,10 @@ void SatellitesConfigNodeItem::appendChild( SatellitesConfigAbstractItem *item )
 
 void SatellitesConfigNodeItem::clear()
 {
-    for( int i = m_children.count(); i > 0; i-- ) {
+    for( int i = childrenCount(); i > 0; --i ) {
         SatellitesConfigAbstractItem *item = m_children.at( i - 1 );
-        m_children.remove( i - 1 );
         item->clear();
+        m_children.remove( i - 1 );
         delete item;
     }
 }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>554</width>
-    <height>378</height>
+    <width>545</width>
+    <height>446</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,37 +19,209 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="tabEarthSatellites">
+     <widget class="QWidget" name="tabSatellites">
       <attribute name="title">
-       <string>&amp;Earth's Artificial Satellites</string>
+       <string>&amp;Satellites</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QTreeView" name="treeViewEarth"/>
+        <widget class="QTreeView" name="treeView">
+         <property name="horizontalScrollBarPolicy">
+          <enum>Qt::ScrollBarAsNeeded</enum>
+         </property>
+         <property name="indentation">
+          <number>25</number>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tabOrbiter">
+     <widget class="QWidget" name="tabDataSources">
       <attribute name="title">
-       <string>&amp;Planetary Satellites and Spacecrafts</string>
+       <string>&amp;Data Sources</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QTreeView" name="treeViewOrbiter"/>
-       </item>
-       <item>
-        <widget class="QDialogButtonBox" name="buttonBoxCatalog">
+        <widget class="QWidget" name="buttonWidget" native="true">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>20</height>
+           <height>0</height>
           </size>
          </property>
-         <property name="standardButtons">
-          <set>QDialogButtonBox::NoButton</set>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>5</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>5</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="labelLastUpdatedText">
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Last update:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelLastUpdated">
+            <property name="text">
+             <string>-</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer1">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="buttonReloadData">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>&amp;Reload All Data Sources</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="Line" name="line1">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
-         <property name="centerButtons">
-          <bool>false</bool>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widgetCatalogs" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="labelDataSources">
+            <property name="text">
+             <string>Satellite Data Sources:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QToolButton" name="buttonAddDataSource">
+            <property name="text">
+             <string>+</string>
+            </property>
+            <property name="icon">
+             <iconset resource="satellites.qrc">
+              <normaloff>:/icons/bookmark-add-folder.png</normaloff>:/icons/bookmark-add-folder.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="buttonOpenDataSource">
+            <property name="text">
+             <string>-</string>
+            </property>
+            <property name="icon">
+             <iconset resource="satellites.qrc">
+              <normaloff>:/icons/document-open.png</normaloff>:/icons/document-open.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="buttonRemoveDataSource">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="icon">
+             <iconset resource="satellites.qrc">
+              <normaloff>:/icons/bookmark-remove.png</normaloff>:/icons/bookmark-remove.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="listDataSources">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>http://www.celestrak.com/ (Builtin)</string>
+          </property>
+          <property name="statusTip">
+           <string notr="true"/>
+          </property>
+          <property name="background">
+           <brush brushstyle="NoBrush">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </property>
+          <property name="flags">
+           <set>NoItemFlags</set>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Supported formats: &lt;a href=&quot;http://techbase.kde.org/Projects/Marble/SatelliteCatalogueFormat&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Marble Satellite Catalogue&lt;/span&gt;&lt;/a&gt;, &lt;a href=&quot;http://www.celestrak.com/columns/v04n03/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Two-Line-Element Set&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::RichText</enum>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -69,7 +241,14 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <tabstops>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>treeView</tabstop>
+ </tabstops>
+ <resources>
+  <include location="satellites.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>
@@ -78,8 +257,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>270</x>
-     <y>368</y>
+     <x>279</x>
+     <y>427</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -94,8 +273,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>338</x>
-     <y>368</y>
+     <x>347</x>
+     <y>427</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>

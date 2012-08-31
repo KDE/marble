@@ -21,6 +21,7 @@ namespace Marble {
 class MarbleClock;
 class MarbleModel;
 class GeoDataTreeModel;
+class OrbiterSatellitesItem;
 
 class OrbiterSatellitesModel : public TrackerPluginModel
 {
@@ -35,15 +36,12 @@ public:
     void setPlanet( const QString &planetId );
     void parseFile( const QString &id, const QByteArray &file );
 
-    void downloadFile(const QUrl &url, const QString &id);
-
 public Q_SLOTS:
-    void update();
+    void updateVisibility();
 
 protected:
     const MarbleClock *m_clock;
     QString m_lcPlanet;
-    QStringList m_catalogs;
     bool m_enabled;
 
 };

@@ -1,0 +1,7 @@
+<RCC>
+  <qresource>
+    <file>../../../icons/document-open.png</file>
+    <file>../../../icons/bookmark-remove.png</file>
+    <file>../../../icons/bookmark-add-folder.png</file>
+  </qresource>
+</RCC>

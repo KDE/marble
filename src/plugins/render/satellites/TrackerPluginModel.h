@@ -97,6 +97,7 @@ public:
 Q_SIGNALS:
     void itemUpdateStarted();
     void itemUpdateEnded();
+    void fileParsed( const QString &id );
 
 private:
     TrackerPluginModelPrivate *d;

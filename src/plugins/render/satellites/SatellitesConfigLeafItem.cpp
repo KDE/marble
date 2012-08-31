@@ -14,9 +14,10 @@
 
 namespace Marble {
 
-SatellitesConfigLeafItem::SatellitesConfigLeafItem( const QString &name, const QString &url )
+SatellitesConfigLeafItem::SatellitesConfigLeafItem( const QString &name, const QString &id )
     : SatellitesConfigAbstractItem( name ),
-      m_url( url ),
+      m_id( id ),
+      m_url( QString() ),
       m_isChecked( false ),
       m_isOrbitDisplayed( false )
 { 
@@ -28,8 +29,8 @@ SatellitesConfigLeafItem::~SatellitesConfigLeafItem()
 
 void SatellitesConfigLeafItem::loadSettings( QHash<QString, QVariant> settings )
 {
-    QStringList tleList = settings.value( "tleList" ).toStringList();
-    m_isChecked = tleList.contains( m_url );
+    QStringList idList = settings.value( "idList" ).toStringList();
+    m_isChecked = idList.contains( m_id );
 }
 
 QVariant SatellitesConfigLeafItem::data( int column, int role ) const
@@ -41,7 +42,11 @@ QVariant SatellitesConfigLeafItem::data( int column, int role ) const
 
     switch ( role ) {
     case UrlListRole:
-        return QVariant( QStringList() << m_url );
+        if( !m_url.isNull() && !m_url.isEmpty() ) {
+            return QVariant( QStringList() << m_url );
+        }
+    case IdListRole:
+        return QVariant( QStringList() << m_id );
     case Qt::CheckStateRole:
         switch ( column ) {
         case 0:
@@ -90,6 +95,16 @@ int SatellitesConfigLeafItem::indexOf( const SatellitesConfigAbstractItem *child
 int SatellitesConfigLeafItem::childrenCount() const
 {
     return 0;
+}
+
+QString SatellitesConfigLeafItem::id() const
+{
+    return m_id;
+}
+
+QString SatellitesConfigLeafItem::url() const
+{
+    return m_url;
 }
 
 } // namespace Marble

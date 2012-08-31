@@ -32,8 +32,6 @@ EarthSatellitesModel::EarthSatellitesModel( GeoDataTreeModel *treeModel,
 void EarthSatellitesModel::parseFile( const QString &id,
                                       const QByteArray &file )
 {
-    Q_UNUSED( id );
-
     QList<QByteArray> tleLines = file.split( '\n' );
     // File format: One line of description, two lines of TLE, last line is empty
     if ( tleLines.size() % 3 != 1 ) {
@@ -52,6 +50,11 @@ void EarthSatellitesModel::parseFile( const QString &id,
         QString satelliteName = QString( tleLines.at( i++ ) ).trimmed();
         char line1[80];
         char line2[80];
+        if( tleLines.at( i ).size() >= 79  ||
+            tleLines.at( i+1 ).size() >= 79 ) {
+            mDebug() << "Invalid TLE data!";
+            return;
+        }
         qstrcpy( line1, tleLines.at( i++ ).constData() );
         qstrcpy( line2, tleLines.at( i++ ).constData() );
         twoline2rv( line1, line2, 'c', 'd', 'i', wgs84,
@@ -70,6 +73,7 @@ void EarthSatellitesModel::parseFile( const QString &id,
     setlocale( LC_NUMERIC, "" );
 
     endUpdateItems();
+    emit fileParsed( id );
 }
 
 } // namespace Marble

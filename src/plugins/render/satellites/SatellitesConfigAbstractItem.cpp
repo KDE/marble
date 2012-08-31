@@ -10,6 +10,8 @@
 
 #include "SatellitesConfigAbstractItem.h"
 
+#include "MarbleDebug.h"
+
 #include <QtCore/QVariant>
 
 namespace Marble {

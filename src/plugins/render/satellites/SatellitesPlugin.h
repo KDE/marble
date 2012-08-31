@@ -13,24 +13,17 @@
 #define MARBLE_SATELLITESPLUGIN_H
 
 #include "RenderPlugin.h"
+#include "SatellitesConfigDialog.h"
 #include "DialogConfigurationInterface.h"
 #include "EarthSatellitesModel.h"
 #include "OrbiterSatellitesModel.h"
 
 #include <QtCore/QObject>
 
-class QCheckBox;
-
-namespace Ui
-{
-    class SatellitesConfigDialog;
-}
-
 namespace Marble
 {
 
-class EarthSatellitesConfigModel;
-class OrbiterSatellitesConfigModel;
+class SatellitesConfigModel;
 
 /**
  * @brief This plugin displays satellites and their orbits.
@@ -73,7 +66,7 @@ public:
     QHash<QString, QVariant> settings() const;
     void setSettings( const QHash<QString, QVariant> &settings );
 
-    QDialog *configDialog();
+    SatellitesConfigDialog *configDialog();
 
 private Q_SLOTS:
     void enableModel( bool enabled );
@@ -81,23 +74,22 @@ private Q_SLOTS:
     void readSettings();
     void writeSettings();
     void updateSettings();
-    void updateOrbiterCatalog();
-    void updateOrbiterConfigModel();
+    void updateOrbiterConfig();
+    void dataSourceParsed( const QString &source );
+    void userDataSourceAdded( const QString &source );
+
+protected:
+    void addBuiltInDataSources();
 
 private:
-    void setupConfigModel();
-
     EarthSatellitesModel *m_earthSatModel;
     OrbiterSatellitesModel *m_orbiterSatModel;
+    SatellitesConfigModel *m_configModel;
 
     bool m_isInitialized;
     QHash<QString, QVariant> m_settings;
-    QHash<QString, QCheckBox *> m_boxHash;
 
-    QDialog *m_configDialog;
-    EarthSatellitesConfigModel *m_earthSatConfigModel;
-    OrbiterSatellitesConfigModel *m_orbiterSatConfigModel;
-    Ui::SatellitesConfigDialog *ui_configWidget;
+    SatellitesConfigDialog *m_configDialog;
 };
 
 } // namespace Marble

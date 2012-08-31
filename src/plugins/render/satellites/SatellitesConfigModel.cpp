@@ -22,6 +22,23 @@ SatellitesConfigModel::SatellitesConfigModel( QObject *parent )
 {
 }
 
+SatellitesConfigModel::~SatellitesConfigModel()
+{
+    delete m_rootItem;
+}
+
+QStringList SatellitesConfigModel::urlList() const
+{
+    return m_rootItem->data(
+        0, SatellitesConfigAbstractItem::UrlListRole ).toStringList();
+}
+
+QStringList SatellitesConfigModel::idList() const
+{
+    return m_rootItem->data(
+        0, SatellitesConfigAbstractItem::IdListRole ).toStringList();
+}
+
 void SatellitesConfigModel::loadSettings( QHash<QString, QVariant> settings)
 {
     m_rootItem->loadSettings( settings );
@@ -43,18 +60,24 @@ QVariant SatellitesConfigModel::data( const QModelIndex &index, int role ) const
         return QVariant();
     }
 
-    SatellitesConfigAbstractItem *item = static_cast<SatellitesConfigAbstractItem *>( index.internalPointer() );
+    SatellitesConfigAbstractItem *item = 
+        static_cast<SatellitesConfigAbstractItem *>( index.internalPointer() );
     return item->data( index.column(), role );
 }
 
-bool SatellitesConfigModel::setData( const QModelIndex &index, const QVariant &value, int role )
+bool SatellitesConfigModel::setData( const QModelIndex &index,
+                                     const QVariant &value,
+                                     int role )
 {
-    SatellitesConfigAbstractItem *item = static_cast<SatellitesConfigAbstractItem *>( index.internalPointer() );
+    SatellitesConfigAbstractItem *item =
+        static_cast<SatellitesConfigAbstractItem *>( index.internalPointer() );
 
     bool success = item->setData( index.column(), role, value );
 
     if ( success ) {
-        QModelIndex parentCellIndex = this->index( index.parent().row(), index.column(), index.parent().parent() );
+        QModelIndex parentCellIndex = this->index( index.parent().row(),
+                                                   index.column(),
+                                                   index.parent().parent() );
         emit dataChanged( parentCellIndex, parentCellIndex );
     }
 
@@ -78,7 +101,8 @@ int SatellitesConfigModel::rowCount( const QModelIndex &parent ) const
     if ( !parent.isValid() ) {
         parentItem = m_rootItem;
     } else {
-        parentItem = static_cast<SatellitesConfigAbstractItem *>( parent.internalPointer() );
+        parentItem = static_cast<SatellitesConfigAbstractItem *>(
+            parent.internalPointer() );
     }
 
     return parentItem->childrenCount();
@@ -90,8 +114,10 @@ QModelIndex SatellitesConfigModel::parent( const QModelIndex &child ) const
         return QModelIndex();
     }
 
-    SatellitesConfigAbstractItem *childItem = static_cast<SatellitesConfigAbstractItem *>( child.internalPointer() );
+    SatellitesConfigAbstractItem *childItem =
+        static_cast<SatellitesConfigAbstractItem *>( child.internalPointer() );
     SatellitesConfigAbstractItem *parentItem = childItem->parent();
+
     if ( parentItem == m_rootItem ) {
         return QModelIndex();
     }
@@ -99,7 +125,8 @@ QModelIndex SatellitesConfigModel::parent( const QModelIndex &child ) const
     return createIndex( parentItem->row(), 0, parentItem);
 }
 
-QModelIndex SatellitesConfigModel::index( int row, int column, const QModelIndex &parent ) const
+QModelIndex SatellitesConfigModel::index( int row, int column,
+                                          const QModelIndex &parent ) const
 {
     if ( !hasIndex( row, column, parent ) ) {
         return QModelIndex();
@@ -109,7 +136,8 @@ QModelIndex SatellitesConfigModel::index( int row, int column, const QModelIndex
     if ( !parent.isValid() ) {
         parentItem = m_rootItem;
     } else {
-        parentItem = static_cast<SatellitesConfigAbstractItem *>( parent.internalPointer() );
+        parentItem = static_cast<SatellitesConfigAbstractItem *>(
+            parent.internalPointer() );
     }
 
     SatellitesConfigAbstractItem *childItem = parentItem->childAt( row );
@@ -121,7 +149,9 @@ QModelIndex SatellitesConfigModel::index( int row, int column, const QModelIndex
     return createIndex( row, column, childItem );    
 }
 
-QVariant SatellitesConfigModel::headerData( int section, Qt::Orientation orientation, int role ) const
+QVariant SatellitesConfigModel::headerData( int section,
+                                            Qt::Orientation orientation,
+                                            int role ) const
 {
     if ( orientation != Qt::Horizontal || role != Qt::DisplayRole ) {
         return QVariant();
@@ -129,7 +159,7 @@ QVariant SatellitesConfigModel::headerData( int section, Qt::Orientation orienta
 
     switch (section) {
         case 0: {
-            return QVariant( tr( "Category" ) );
+            return QVariant( tr( "Catalogues" ) );
         }
         default: {
             return QVariant();
@@ -143,7 +173,13 @@ Qt::ItemFlags SatellitesConfigModel::flags( const QModelIndex &index ) const
         return 0;
     }
 
-    return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable;
+    return Qt::ItemIsEnabled |
+           Qt::ItemIsUserCheckable;
+}
+
+SatellitesConfigNodeItem* SatellitesConfigModel::rootItem() const
+{
+    return m_rootItem;
 }
 
 } // namespace Marble

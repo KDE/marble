@@ -30,15 +30,18 @@ class OrbiterSatellitesItem : public TrackerPluginItem
 
 public:
     OrbiterSatellitesItem( const QString &name,
-                           const QString &type,
-                           const QString &body,
+                           const QString &category,
+                           const QString &relatedBody,
+                           const QString &catalog,
                            PlanetarySats *planSat,
                            const MarbleClock *clock );
     ~OrbiterSatellitesItem();
 
     QString name() const;
-    QString type() const;
-    QString body() const;
+    QString category() const;
+    QString relatedBody() const;
+    QString catalog() const;
+    QString id() const;
 
     void update();
     void showOrbit( bool show );
@@ -49,8 +52,9 @@ private:
     const MarbleClock *m_clock;
     PlanetarySats *m_planSat;
     const QString m_name;
-    const QString m_type;
-    const QString m_body;
+    const QString m_category;
+    const QString m_relatedBody;
+    const QString m_catalog;
 
     double m_perc;
     double m_apoc;
