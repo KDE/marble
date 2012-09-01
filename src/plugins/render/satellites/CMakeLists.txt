@@ -22,9 +22,8 @@ set( satellites_SRCS
  TrackerPluginItem.cpp
 
  SatellitesPlugin.cpp
- EarthSatellitesModel.cpp
+ SatellitesModel.cpp
  EarthSatellitesItem.cpp
- OrbiterSatellitesModel.cpp
  OrbiterSatellitesItem.cpp
  SatellitesConfigModel.cpp
  SatellitesConfigDialog.cpp

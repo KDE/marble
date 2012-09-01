@@ -15,8 +15,7 @@
 #include "RenderPlugin.h"
 #include "SatellitesConfigDialog.h"
 #include "DialogConfigurationInterface.h"
-#include "EarthSatellitesModel.h"
-#include "OrbiterSatellitesModel.h"
+#include "SatellitesModel.h"
 
 #include <QtCore/QObject>
 
@@ -83,8 +82,7 @@ protected:
     void addBuiltInDataSources();
 
 private:
-    EarthSatellitesModel *m_earthSatModel;
-    OrbiterSatellitesModel *m_orbiterSatModel;
+    SatellitesModel *m_satModel;
     SatellitesConfigModel *m_configModel;
 
     bool m_isInitialized;

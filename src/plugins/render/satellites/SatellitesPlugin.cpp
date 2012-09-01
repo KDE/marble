@@ -31,16 +31,14 @@ namespace Marble
 
 SatellitesPlugin::SatellitesPlugin()
     : RenderPlugin( 0 ),
-      m_earthSatModel( 0 ),
-      m_orbiterSatModel( 0 ),
+      m_satModel( 0 ),
       m_configDialog( 0 )
 {
 }
 
 SatellitesPlugin::SatellitesPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
-     m_earthSatModel( 0 ),
-     m_orbiterSatModel( 0 ),
+     m_satModel( 0 ),
      m_isInitialized( false ),
      m_configDialog( new SatellitesConfigDialog() )
 {
@@ -54,8 +52,7 @@ SatellitesPlugin::SatellitesPlugin( const MarbleModel *marbleModel )
 
 SatellitesPlugin::~SatellitesPlugin()
 {
-    delete m_earthSatModel;
-    delete m_orbiterSatModel;
+    delete m_satModel;
 
     delete m_configDialog;
 }
@@ -140,7 +137,7 @@ void SatellitesPlugin::initialize()
     // plugins where marbleModel() is not const, since traditional
     // RenderPlugins do not require that
 
-    m_earthSatModel = new EarthSatellitesModel(
+    m_satModel = new SatellitesModel(
         const_cast<MarbleModel *>( marbleModel() )->treeModel(),
         marbleModel()->pluginManager(),
         marbleModel()->clock() );
@@ -148,16 +145,9 @@ void SatellitesPlugin::initialize()
     m_configModel = new SatellitesConfigModel( this );
     m_configDialog->configWidget()->treeView->setModel( m_configModel );
 
-    m_orbiterSatModel = new OrbiterSatellitesModel(
-        const_cast<MarbleModel *>( marbleModel() )->treeModel(),
-        marbleModel()->pluginManager(),
-        marbleModel()->clock() );
-
-    connect( m_earthSatModel, SIGNAL( fileParsed( const QString& ) ),
+    connect( m_satModel, SIGNAL( fileParsed( const QString& ) ),
         SLOT( dataSourceParsed( const QString& ) ) );
-    connect( m_orbiterSatModel, SIGNAL( fileParsed( const QString& ) ),
-        SLOT( dataSourceParsed( const QString& ) ) );
-    connect( m_orbiterSatModel, SIGNAL( fileParsed( const QString&) ),
+    connect( m_satModel, SIGNAL( fileParsed( const QString&) ),
         SLOT( updateOrbiterConfig( const QString& ) ) );
     connect( m_configDialog, SIGNAL( dataSourcesReloadRequested() ),
         SLOT( updateSettings() ) );
@@ -239,7 +229,7 @@ void SatellitesPlugin::readSettings()
     m_configDialog->setUserDataSources(
         m_settings.value( "userDataSources" ).toStringList() );
     m_configModel->loadSettings( m_settings );
-    m_orbiterSatModel->loadSettings( m_settings );
+    m_satModel->loadSettings( m_settings );
 }
 
 void SatellitesPlugin::writeSettings()
@@ -257,8 +247,7 @@ void SatellitesPlugin::updateSettings()
         return;
     }
 
-    m_orbiterSatModel->clear();
-    m_earthSatModel->clear();
+    m_satModel->clear();
     
     m_configModel->clear();
     addBuiltInDataSources();
@@ -268,11 +257,7 @@ void SatellitesPlugin::updateSettings()
     dsList << m_settings["userDataSources"].toStringList();
     foreach( const QString &ds, dsList ) {
         mDebug() << "Loading satellite data from:" << ds;
-        if( ds.section( '/', -1 ).endsWith( ".txt" ) ) {
-            m_earthSatModel->downloadFile( QUrl( ds ), ds );
-        } else {
-            m_orbiterSatModel->downloadFile( QUrl( ds ), ds );
-        }
+        m_satModel->downloadFile( QUrl( ds ), ds );
     }
 }
 
@@ -303,15 +288,8 @@ void SatellitesPlugin::enableModel( bool enabled )
         return;
     }
 
-    if( marbleModel()->planetId() == "earth" )
-    {
-        m_earthSatModel->enable( enabled && visible() );
-    } else {
-        m_earthSatModel->enable( false );
-    }
-
-    m_orbiterSatModel->setPlanet( marbleModel()->planetId() );
-    m_orbiterSatModel->enable( enabled && visible() );
+    m_satModel->setPlanet( marbleModel()->planetId() );
+    m_satModel->enable( enabled && visible() );
 }
 
 void SatellitesPlugin::visibleModel( bool visible )
@@ -320,22 +298,15 @@ void SatellitesPlugin::visibleModel( bool visible )
         return;
     }
 
-    if( marbleModel()->planetId() == "earth" )
-    {
-        m_earthSatModel->enable( enabled() && visible );
-    } else {
-        m_earthSatModel->enable( false );
-    }
-
-    m_orbiterSatModel->setPlanet( marbleModel()->planetId() );
-    m_orbiterSatModel->enable( enabled() && visible );
+    m_satModel->setPlanet( marbleModel()->planetId() );
+    m_satModel->enable( enabled() && visible );
 }
 
 void SatellitesPlugin::updateOrbiterConfig( const QString &source )
 {
     mDebug() << "Updating orbiter configuration";
 
-    foreach( QObject *obj, m_orbiterSatModel->items() ) {
+    foreach( QObject *obj, m_satModel->items() ) {
         OrbiterSatellitesItem *item = qobject_cast<OrbiterSatellitesItem*>( obj );
         if( item != NULL ) {
             m_configDialog->addSatelliteItem(
