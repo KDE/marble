@@ -179,8 +179,9 @@ Qt::ItemFlags SatellitesConfigModel::flags( const QModelIndex &index ) const
         return 0;
     }
 
-    return Qt::ItemIsEnabled |
-           Qt::ItemIsUserCheckable;
+    SatellitesConfigAbstractItem *item =
+        static_cast<SatellitesConfigAbstractItem *>( index.internalPointer() );
+    return item->flags();
 }
 
 SatellitesConfigNodeItem* SatellitesConfigModel::rootItem() const

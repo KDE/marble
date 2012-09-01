@@ -45,6 +45,9 @@ public:
     virtual int indexOf( const SatellitesConfigAbstractItem *child ) const = 0;
     virtual int childrenCount() const = 0;
 
+    virtual Qt::ItemFlags flags() const;
+    virtual void setFlags( Qt::ItemFlags flags );
+
     virtual void clear();
 
 protected:
@@ -53,7 +56,7 @@ protected:
 private:
     QString m_name;
     SatellitesConfigAbstractItem *m_parent;
-
+    Qt::ItemFlags m_flags;
     bool m_checked;
 };
 
