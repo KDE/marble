@@ -22,8 +22,7 @@ namespace Ui {
 
 namespace Marble {
 
-class EarthSatellitesConfigModel;
-class OrbiterSatellitesConfigModel;
+class SatellitesConfigAbstractItem;
 class SatellitesConfigNodeItem;
 
 class SatellitesConfigDialog : public QDialog
@@ -44,14 +43,14 @@ public:
     QStringList userDataSources() const;
     void setUserDataSourceLoaded( const QString& source, bool loaded );
 
-    void addSatelliteItem( const QString &body,
-                           const QString &category,
-                           const QString &title,
-                           const QString &id,
-                           const QString &url = QString() );
-    void addTLESatelliteItem( const QString &category,
-                              const QString &title,
-                              const QString &url );
+    SatellitesConfigAbstractItem* addSatelliteItem( const QString &body,
+                                                    const QString &category,
+                                                    const QString &title,
+                                                    const QString &id,
+                                                    const QString &url = QString() );
+    SatellitesConfigAbstractItem* addTLESatelliteItem( const QString &category,
+                                                       const QString &title,
+                                                       const QString &url );
 
     Ui::SatellitesConfigDialog* configWidget();
 

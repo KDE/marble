@@ -76,11 +76,12 @@ void SatellitesConfigDialog::update()
     QDialog::update();
 }
 
-void SatellitesConfigDialog::addSatelliteItem( const QString &body,
-                                               const QString &category,
-                                               const QString &title,
-                                               const QString &id,
-                                               const QString &url )
+SatellitesConfigAbstractItem*
+SatellitesConfigDialog::addSatelliteItem( const QString &body,
+                                          const QString &category,
+                                          const QString &title,
+                                          const QString &id,
+                                          const QString &url )
 {
     SatellitesConfigNodeItem *categoryItem;
     categoryItem = getSatellitesCategoryItem( body, category, true );
@@ -89,7 +90,7 @@ void SatellitesConfigDialog::addSatelliteItem( const QString &body,
     for( int i = 0; i < categoryItem->childrenCount(); ++i ) {
         SatellitesConfigAbstractItem *absItem = categoryItem->childAt( i );
         if( ( absItem->data( 0, SatellitesConfigAbstractItem::IdListRole ) == id ) ) {
-            return;
+            return absItem;
         }
     }
 
@@ -100,15 +101,17 @@ void SatellitesConfigDialog::addSatelliteItem( const QString &body,
         newItem->setData( 0, SatellitesConfigAbstractItem::UrlListRole, url );
     }
     categoryItem->appendChild( newItem );
+    return newItem;
 }
 
-void SatellitesConfigDialog::addTLESatelliteItem( const QString &category,
-                                                  const QString &title,
-                                                  const QString &url )
+SatellitesConfigAbstractItem*
+SatellitesConfigDialog::addTLESatelliteItem( const QString &category,
+                                             const QString &title,
+                                             const QString &url )
 {
     // TLE items always have their id set to their url and
     // are always related to the earth
-    addSatelliteItem( "Earth", category, title, url, url );
+    return addSatelliteItem( "Earth", category, title, url, url );
 }
 
 Ui::SatellitesConfigDialog* SatellitesConfigDialog::configWidget()
