@@ -23,8 +23,8 @@ set( satellites_SRCS
 
  SatellitesPlugin.cpp
  SatellitesModel.cpp
- EarthSatellitesItem.cpp
- OrbiterSatellitesItem.cpp
+ SatellitesCatalogItem.cpp
+ SatellitesTLEItem.cpp
  SatellitesConfigModel.cpp
  SatellitesConfigDialog.cpp
  SatellitesConfigAbstractItem.cpp

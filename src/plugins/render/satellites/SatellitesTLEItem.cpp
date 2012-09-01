@@ -8,7 +8,7 @@
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
 //
 
-#include "EarthSatellitesItem.h"
+#include "SatellitesTLEItem.h"
 
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
@@ -34,9 +34,9 @@ namespace Marble {
 
 #include "GeoDataPoint.h"
 
-EarthSatellitesItem::EarthSatellitesItem( const QString &name,
-                                          elsetrec satrec,
-                                          const MarbleClock *clock )
+SatellitesTLEItem::SatellitesTLEItem( const QString &name,
+                                      elsetrec satrec,
+                                      const MarbleClock *clock )
     : TrackerPluginItem( name ),
       m_showOrbit( false ),
       m_satrec( satrec ),
@@ -63,7 +63,7 @@ EarthSatellitesItem::EarthSatellitesItem( const QString &name,
     update();
 }
 
-void EarthSatellitesItem::setDescription()
+void SatellitesTLEItem::setDescription()
 {
     QString description =
       QObject::tr( "NORAD ID: %2 <br />"
@@ -79,7 +79,7 @@ void EarthSatellitesItem::setDescription()
      placemark()->setDescription( description );
 }
 
-void EarthSatellitesItem::update()
+void SatellitesTLEItem::update()
 {
     QDateTime startTime = m_clock->dateTime().addSecs( - 2 * 60 );
 
@@ -103,7 +103,7 @@ void EarthSatellitesItem::update()
     }
 }
 
-void EarthSatellitesItem::addPointAt( const QDateTime &dateTime )
+void SatellitesTLEItem::addPointAt( const QDateTime &dateTime )
 {
     // in minutes
     double timeSinceEpoch = (double)( dateTime.toTime_t() -
@@ -121,7 +121,7 @@ void EarthSatellitesItem::addPointAt( const QDateTime &dateTime )
     m_track->addPoint( dateTime, coordinates);
 }
 
-QDateTime EarthSatellitesItem::timeAtEpoch()
+QDateTime SatellitesTLEItem::timeAtEpoch()
 {
     int year = m_satrec.epochyr + ( m_satrec.epochyr < 57 ? 2000 : 1900 );
 
@@ -136,37 +136,37 @@ QDateTime EarthSatellitesItem::timeAtEpoch()
                       Qt::UTC );
 }
 
-double EarthSatellitesItem::period()
+double SatellitesTLEItem::period()
 {
     // no := mean motion (rad / min)
     return 60 * (2 * M_PI / m_satrec.no);
 }
 
-double EarthSatellitesItem::apogee()
+double SatellitesTLEItem::apogee()
 {
     return m_satrec.alta * m_earthSemiMajorAxis;
 }
 
-double EarthSatellitesItem::perigee()
+double SatellitesTLEItem::perigee()
 {
     return m_satrec.altp * m_earthSemiMajorAxis;
 }
 
-double EarthSatellitesItem::semiMajorAxis()
+double SatellitesTLEItem::semiMajorAxis()
 {
 
     return m_satrec.a * m_earthSemiMajorAxis;
 }
 
-double EarthSatellitesItem::inclination()
+double SatellitesTLEItem::inclination()
 {
     return m_satrec.inclo / M_PI * 180;
 }
 
-GeoDataCoordinates EarthSatellitesItem::fromTEME( double x,
-                                                  double y,
-                                                  double z,
-                                                  double gmst )
+GeoDataCoordinates SatellitesTLEItem::fromTEME( double x,
+                                               double y,
+                                               double z,
+                                               double gmst )
 {
     double lon = atan2( y, x );
     // Rotate the angle by gmst (the origin goes from the vernal equinox
@@ -194,19 +194,19 @@ GeoDataCoordinates EarthSatellitesItem::fromTEME( double x,
     return GeoDataCoordinates( lon, lat, alt * 1000 );
 }
 
-double EarthSatellitesItem::gmst( double minutesP )
+double SatellitesTLEItem::gmst( double minutesP )
 {
     // Earth rotation rate in rad/min, from sgp4io.cpp
     double rptim = 4.37526908801129966e-3;
     return fmod( m_satrec.gsto + rptim * minutesP, 2 * M_PI );
 }
 
-double EarthSatellitesItem::square( double x )
+double SatellitesTLEItem::square( double x )
 {
     return x * x;
 }
 
 } // namespace Marble
 
-#include "EarthSatellitesItem.moc"
+#include "SatellitesTLEItem.moc"
 

@@ -14,8 +14,8 @@
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "GeoDataPlacemark.h"
-#include "EarthSatellitesItem.h"
-#include "OrbiterSatellitesItem.h"
+#include "SatellitesCatalogItem.h"
+#include "SatellitesTLEItem.h"
 #include "SatellitesConfigLeafItem.h"
 #include "SatellitesConfigNodeItem.h"
 #include "SatellitesConfigModel.h"
@@ -307,7 +307,7 @@ void SatellitesPlugin::updateOrbiterConfig( const QString &source )
     mDebug() << "Updating orbiter configuration";
 
     foreach( QObject *obj, m_satModel->items() ) {
-        OrbiterSatellitesItem *item = qobject_cast<OrbiterSatellitesItem*>( obj );
+        SatellitesCatalogItem *item = qobject_cast<SatellitesCatalogItem*>( obj );
         if( item != NULL ) {
             m_configDialog->addSatelliteItem(
                 item->relatedBody(),

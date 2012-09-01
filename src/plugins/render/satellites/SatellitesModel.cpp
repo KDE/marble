@@ -11,8 +11,8 @@
 #include "SatellitesModel.h"
 
 #include "MarbleDebug.h"
-#include "EarthSatellitesItem.h"
-#include "OrbiterSatellitesItem.h"
+#include "SatellitesCatalogItem.h"
+#include "SatellitesTLEItem.h"
 
 #include "MarbleClock.h"
 #include "GeoDataPlacemark.h"
@@ -57,7 +57,7 @@ void SatellitesModel::updateVisibility()
     beginUpdateItems();
 
     foreach( QObject *obj, items() ) {
-        OrbiterSatellitesItem *oItem = qobject_cast<OrbiterSatellitesItem*>(obj);
+        SatellitesCatalogItem *oItem = qobject_cast<SatellitesCatalogItem*>(obj);
         if( oItem != NULL ) {
             bool visible = ( ( oItem->relatedBody().toLower() == m_lcPlanet ) &&
                              ( m_enabledIds.contains( oItem->id() ) ) );
@@ -68,7 +68,7 @@ void SatellitesModel::updateVisibility()
             }
         }
 
-        EarthSatellitesItem *eItem = qobject_cast<EarthSatellitesItem*>(obj);
+        SatellitesTLEItem *eItem = qobject_cast<SatellitesTLEItem*>(obj);
         if( eItem != NULL ) {
             // TLE satellites are always earth satellites
             bool visible = ( m_lcPlanet == "earth" );
@@ -140,8 +140,8 @@ void SatellitesModel::parseCatalog( const QString &id,
 
         planSat->stateToKepler();
 
-        OrbiterSatellitesItem *item;
-        item = new OrbiterSatellitesItem( name, category, body, id, index++,
+        SatellitesCatalogItem *item;
+        item = new SatellitesCatalogItem( name, category, body, id, index++,
                                           planSat, m_clock );
         item->placemark()->setVisible( ( body.toLower() == m_lcPlanet ) );
 
@@ -188,8 +188,8 @@ void SatellitesModel::parseTLE( const QString &id,
             return;
         }
 
-        EarthSatellitesItem *item = new EarthSatellitesItem( satelliteName,
-                                                             satrec, m_clock );
+        SatellitesTLEItem *item = new SatellitesTLEItem( satelliteName,
+                                                         satrec, m_clock );
         addItem( item );
     }
 

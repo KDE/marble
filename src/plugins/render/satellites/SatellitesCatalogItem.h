@@ -8,8 +8,8 @@
 // Copyright 2012 Rene Kuettner <rene@bitkanal.net>
 //
 
-#ifndef MARBLE_ORBITERSATELLITESITEM_H
-#define MARBLE_ORBITERSATELLITESITEM_H
+#ifndef MARBLE_SATELLITESCATALOGITEM_H
+#define MARBLE_SATELLITESCATALOGITEM_H
 
 #include "TrackerPluginItem.h"
 
@@ -24,19 +24,19 @@ class GeoDataTrack;
 class MarbleClock;
 class GeoDataPlacemark;
 
-class OrbiterSatellitesItem : public TrackerPluginItem
+class SatellitesCatalogItem : public TrackerPluginItem
 {
     Q_OBJECT
 
 public:
-    OrbiterSatellitesItem( const QString &name,
+    SatellitesCatalogItem( const QString &name,
                            const QString &category,
                            const QString &relatedBody,
                            const QString &catalog,
                            int catalogIndex,
                            PlanetarySats *planSat,
                            const MarbleClock *clock );
-    ~OrbiterSatellitesItem();
+    ~SatellitesCatalogItem();
 
     QString name() const;
     QString category() const;
@@ -75,4 +75,4 @@ private:
 
 } // namespace Marble
 
-#endif // MARBLE_ORBITERSATELLITESITEM_H
+#endif // MARBLE_SATELLITESCATALOGITEM_H

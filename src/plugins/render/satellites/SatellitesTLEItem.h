@@ -8,8 +8,8 @@
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
 //
 
-#ifndef MARBLE_EARTHSATELLITESITEM_H
-#define MARBLE_EARTHSATELLITESITEM_H
+#ifndef MARBLE_SATELLITESTLEITEM_H
+#define MARBLE_SATELLITESTLEITEM_H
 
 #include "TrackerPluginItem.h"
 
@@ -23,14 +23,14 @@ namespace Marble {
 class GeoDataTrack;
 class MarbleClock;
 
-class EarthSatellitesItem : public TrackerPluginItem
+class SatellitesTLEItem : public TrackerPluginItem
 {
     Q_OBJECT
 
 public:
-    EarthSatellitesItem( const QString &name,
-                         elsetrec satrec,
-                         const MarbleClock *clock );
+    SatellitesTLEItem( const QString &name,
+                       elsetrec satrec,
+                       const MarbleClock *clock );
 
     void update();
 
@@ -103,4 +103,4 @@ private:
 
 } // namespace Marble
 
-#endif // MARBLE_EARTHSATELLITESITEM_H
+#endif // MARBLE_SATELLITESTLEITEM_H

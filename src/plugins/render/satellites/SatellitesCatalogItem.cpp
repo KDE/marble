@@ -9,7 +9,7 @@
 //
 
 
-#include "OrbiterSatellitesItem.h"
+#include "SatellitesCatalogItem.h"
 
 #include <QtCore>
 
@@ -25,7 +25,7 @@
 
 namespace Marble {
 
-OrbiterSatellitesItem::OrbiterSatellitesItem( const QString &name, 
+SatellitesCatalogItem::SatellitesCatalogItem( const QString &name, 
                                               const QString &category,
                                               const QString &relatedBody,
                                               const QString &catalog,
@@ -60,42 +60,42 @@ OrbiterSatellitesItem::OrbiterSatellitesItem( const QString &name,
     update();
 }
 
-OrbiterSatellitesItem::~OrbiterSatellitesItem()
+SatellitesCatalogItem::~SatellitesCatalogItem()
 {
     delete m_planSat;
 }
 
-QString OrbiterSatellitesItem::name() const
+QString SatellitesCatalogItem::name() const
 {
     return m_name;
 }
 
-QString OrbiterSatellitesItem::category() const
+QString SatellitesCatalogItem::category() const
 {
     return m_category;
 }
 
-QString OrbiterSatellitesItem::relatedBody() const
+QString SatellitesCatalogItem::relatedBody() const
 {
     return m_relatedBody;
 }
 
-QString OrbiterSatellitesItem::catalog() const
+QString SatellitesCatalogItem::catalog() const
 {
     return m_catalog;
 }
 
-int OrbiterSatellitesItem::catalogIndex() const
+int SatellitesCatalogItem::catalogIndex() const
 {
     return m_catalogIndex;
 }
 
-QString OrbiterSatellitesItem::id() const
+QString SatellitesCatalogItem::id() const
 {
     return QString( "%1:%2" ).arg( catalog() ).arg( catalogIndex() );
 }
 
-void OrbiterSatellitesItem::setDescription()
+void SatellitesCatalogItem::setDescription()
 {
     QString description =
       QObject::tr( "Object name: %1 <br />"
@@ -110,7 +110,7 @@ void OrbiterSatellitesItem::setDescription()
      placemark()->setDescription( description );
 }
 
-void OrbiterSatellitesItem::update()
+void SatellitesCatalogItem::update()
 {
     double period = 24  * 3600 / m_n0;
     QDateTime startTime = m_clock->dateTime().addSecs( - period / 2. );
@@ -134,7 +134,7 @@ void OrbiterSatellitesItem::update()
     addTrackPointAt( m_clock->dateTime() );
 }
 
-void OrbiterSatellitesItem::addTrackPointAt( const QDateTime &dateTime )
+void SatellitesCatalogItem::addTrackPointAt( const QDateTime &dateTime )
 {
     double lng    = 0.;
     double lat    = 0.;
@@ -156,5 +156,5 @@ void OrbiterSatellitesItem::addTrackPointAt( const QDateTime &dateTime )
 
 } // namespace Marble
 
-#include "OrbiterSatellitesItem.moc"
+#include "SatellitesCatalogItem.moc"
 
