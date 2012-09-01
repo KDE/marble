@@ -79,6 +79,7 @@ private Q_SLOTS:
     void userDataSourceAdded( const QString &source );
 
 protected:
+    void activateDataSource( const QString &source );
     void addBuiltInDataSources();
 
 private:
@@ -88,6 +89,7 @@ private:
 
     bool m_isInitialized;
     QHash<QString, QVariant> m_settings;
+    QStringList m_newDataSources;
 
     SatellitesConfigDialog *m_configDialog;
 };

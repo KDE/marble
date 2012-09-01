@@ -283,7 +283,13 @@ void SatellitesPlugin::dataSourceParsed( const QString &source )
 
 void SatellitesPlugin::userDataSourceAdded( const QString &source )
 {
-    // TODO: initially enable sources (and their items)
+    // items contained in catalog data sources are not known before
+    // the catalog has been parsed. so we store new data sources in
+    // order to activate them later (new datasources are enabled by
+    // default)
+    if( !m_newDataSources.contains( source ) ) {
+        m_newDataSources.append( source );
+    }
 }
 
 SatellitesConfigDialog *SatellitesPlugin::configDialog()
@@ -327,8 +333,6 @@ void SatellitesPlugin::visibleModel( bool visible )
 
 void SatellitesPlugin::updateOrbiterConfig( const QString &source )
 {
-    Q_UNUSED( source );
-
     mDebug() << "Updating orbiter configuration";
 
     foreach( QObject *obj, m_orbiterSatModel->items() ) {
@@ -342,8 +346,23 @@ void SatellitesPlugin::updateOrbiterConfig( const QString &source )
         }
     }
 
+    if( m_newDataSources.contains( source ) ) {
+        m_newDataSources.removeAll( source );
+        activateDataSource( source );
+    }
+
     readSettings();
     m_configDialog->update();
+}
+
+void SatellitesPlugin::activateDataSource( const QString &source )
+{
+    // activate the given data source (select it)
+    mDebug() << "Activating Data Source:" << source;
+    QStringList list = m_configModel->fullIdList().filter( source );
+    QStringList idList = m_settings["idList"].toStringList();
+    idList << list;
+    m_settings.insert( "idList", idList );
 }
 
 void SatellitesPlugin::addBuiltInDataSources()

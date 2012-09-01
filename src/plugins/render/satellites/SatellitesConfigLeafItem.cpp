@@ -47,6 +47,7 @@ QVariant SatellitesConfigLeafItem::data( int column, int role ) const
         }
         break;
     case IdListRole:
+    case FullIdListRole:
         return QVariant( QStringList() << m_id );
     case Qt::CheckStateRole:
         switch ( column ) {

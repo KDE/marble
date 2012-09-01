@@ -42,23 +42,22 @@ QVariant SatellitesConfigNodeItem::data( int column, int role ) const
     }
 
     switch ( role ) {
+    case IdListRole:
     case UrlListRole: {
-        QStringList urlList;
+        QStringList list;
         foreach( SatellitesConfigAbstractItem *item, m_children ) {
             if ( item->data( column, Qt::CheckStateRole ).toInt() != Qt::Unchecked ) {
-                urlList.append( item->data( column, role).toStringList() );
+                list.append( item->data( column, role).toStringList() );
             }
         }
-        return urlList;
+        return list;
     }
-    case IdListRole: {
-        QStringList idList;
+    case FullIdListRole: {
+        QStringList fullIdList;
         foreach( SatellitesConfigAbstractItem *item, m_children ) {
-            if ( item->data( column, Qt::CheckStateRole ).toInt() != Qt::Unchecked ) {
-                idList.append( item->data( column, role ).toStringList() );
-            }
+            fullIdList.append( item->data( column, role ).toStringList() );
         }
-        return idList;
+        return fullIdList;
     }
     case Qt::CheckStateRole: {
         bool oneChecked = false;

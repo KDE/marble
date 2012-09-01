@@ -29,8 +29,9 @@ public:
     void appendChild( SatellitesConfigAbstractItem *child );
     void clear();
 
-    QStringList urlList() const;
     QStringList idList() const;
+    QStringList fullIdList() const;
+    QStringList urlList() const;
 
     QVariant data( const QModelIndex &index,
                    int role = Qt::DisplayRole ) const;
@@ -55,3 +56,4 @@ protected:
 } // namespace Marble
 
 #endif // MARBLE_SATELLITESCONFIGMODEL_H
+

@@ -27,16 +27,22 @@ SatellitesConfigModel::~SatellitesConfigModel()
     delete m_rootItem;
 }
 
-QStringList SatellitesConfigModel::urlList() const
-{
-    return m_rootItem->data(
-        0, SatellitesConfigAbstractItem::UrlListRole ).toStringList();
-}
-
 QStringList SatellitesConfigModel::idList() const
 {
-    return m_rootItem->data(
-        0, SatellitesConfigAbstractItem::IdListRole ).toStringList();
+    return m_rootItem->data( 0, SatellitesConfigAbstractItem::IdListRole )
+            .toStringList();
+}
+
+QStringList SatellitesConfigModel::fullIdList() const
+{
+    return m_rootItem->data( 0, SatellitesConfigAbstractItem::FullIdListRole )
+            .toStringList();
+}
+
+QStringList SatellitesConfigModel::urlList() const
+{
+    return m_rootItem->data( 0, SatellitesConfigAbstractItem::UrlListRole )
+            .toStringList();
 }
 
 void SatellitesConfigModel::loadSettings( QHash<QString, QVariant> settings)
@@ -122,7 +128,7 @@ QModelIndex SatellitesConfigModel::parent( const QModelIndex &child ) const
         return QModelIndex();
     }
 
-    return createIndex( parentItem->row(), 0, parentItem);
+    return createIndex( parentItem->row(), 0, parentItem );
 }
 
 QModelIndex SatellitesConfigModel::index( int row, int column,
@@ -146,7 +152,7 @@ QModelIndex SatellitesConfigModel::index( int row, int column,
         return QModelIndex();
     }
 
-    return createIndex( row, column, childItem );    
+    return createIndex( row, column, childItem );
 }
 
 QVariant SatellitesConfigModel::headerData( int section,
