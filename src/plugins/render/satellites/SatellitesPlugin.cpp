@@ -119,7 +119,7 @@ QString SatellitesPlugin::aboutDataText() const
         "<a href=\"http://www.celestrak.com\">http://www.celestrak.com</a>"
         "</li></ul>"
         "Planetary-Satellites orbital elements from <ul><li>"
-        "<a href=\"http://tasc.esa.eu/\">ESA TASC service</a></li><li>"
+        "<a href=\"http://tasc.esa.int/\">ESA TASC service</a></li><li>"
         "<a href=\"http://http://ssd.jpl.nasa.gov/?horizons\">"
         "JPL Horizons</a></li></ul>" );
 }
