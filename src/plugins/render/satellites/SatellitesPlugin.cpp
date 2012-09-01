@@ -255,6 +255,7 @@ void SatellitesPlugin::updateSettings()
     // data sources
     QStringList dsList = m_settings["dataSources"].toStringList();
     dsList << m_settings["userDataSources"].toStringList();
+    dsList.removeDuplicates();
     foreach( const QString &ds, dsList ) {
         mDebug() << "Loading satellite data from:" << ds;
         m_satModel->downloadFile( QUrl( ds ), ds );
@@ -307,6 +308,7 @@ void SatellitesPlugin::updateOrbiterConfig( const QString &source )
     mDebug() << "Updating orbiter configuration";
 
     foreach( QObject *obj, m_satModel->items() ) {
+        // catalog items
         SatellitesCatalogItem *item = qobject_cast<SatellitesCatalogItem*>( obj );
         if( item != NULL ) {
             m_configDialog->addSatelliteItem(
@@ -314,9 +316,11 @@ void SatellitesPlugin::updateOrbiterConfig( const QString &source )
                 item->category(),
                 item->name(),
                 item->id() );
+            continue;
         }
     }
 
+    // activate new datasources by default
     if( m_newDataSources.contains( source ) ) {
         m_newDataSources.removeAll( source );
         activateDataSource( source );
