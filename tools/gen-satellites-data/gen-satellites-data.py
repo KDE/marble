@@ -9,9 +9,7 @@
 # Copyright 2012 Rene Kuettner <rene@bitkanal.net>
 #
 
-# NOTE: this script only writes the catalogue file at the moment
-#       which contains the latest available state vector for
-#       every object listed
+# NOTE: this script only writes a single catalogue file at the moment
 
 from __future__ import print_function
 
