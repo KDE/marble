@@ -184,7 +184,7 @@
          </property>
          <item>
           <property name="text">
-           <string>http://www.celestrak.com/ (Builtin)</string>
+           <string>(Builtin Data Sources for Earth Satellites)</string>
           </property>
           <property name="statusTip">
            <string notr="true"/>
