@@ -49,12 +49,12 @@ public:
     /**
      * Returns wheter the item is enabled or disabled.
      */
-    bool isEnabled() const;
+    virtual bool isEnabled() const;
 
     /**
      * Enable/Disable the item according to @p enabled.
      */
-    void setEnabled( bool enabled );
+    virtual void setEnabled( bool enabled );
 
     /**
      * Reimplement this method to update the placemark, for example to change its coordinates.
