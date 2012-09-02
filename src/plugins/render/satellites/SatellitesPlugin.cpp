@@ -136,7 +136,6 @@ void SatellitesPlugin::initialize()
     // FIXME: remove the const_cast, it may be best to create a new type of
     // plugins where marbleModel() is not const, since traditional
     // RenderPlugins do not require that
-
     m_satModel = new SatellitesModel(
         const_cast<MarbleModel *>( marbleModel() )->treeModel(),
         marbleModel()->pluginManager(),
@@ -148,7 +147,7 @@ void SatellitesPlugin::initialize()
     connect( m_satModel, SIGNAL( fileParsed( const QString& ) ),
         SLOT( dataSourceParsed( const QString& ) ) );
     connect( m_satModel, SIGNAL( fileParsed( const QString&) ),
-        SLOT( updateOrbiterConfig( const QString& ) ) );
+        SLOT( updateDataSourceConfig( const QString& ) ) );
     connect( m_configDialog, SIGNAL( dataSourcesReloadRequested() ),
         SLOT( updateSettings() ) );
     connect( m_configDialog, SIGNAL( accepted() ), SLOT( writeSettings() ) );
@@ -252,7 +251,7 @@ void SatellitesPlugin::updateSettings()
     m_configModel->clear();
     addBuiltInDataSources();
 
-    // data sources
+    // (re)load data sources
     QStringList dsList = m_settings["dataSources"].toStringList();
     dsList << m_settings["userDataSources"].toStringList();
     dsList.removeDuplicates();
@@ -303,20 +302,19 @@ void SatellitesPlugin::visibleModel( bool visible )
     m_satModel->enable( enabled() && visible );
 }
 
-void SatellitesPlugin::updateOrbiterConfig( const QString &source )
+void SatellitesPlugin::updateDataSourceConfig( const QString &source )
 {
     mDebug() << "Updating orbiter configuration";
 
     foreach( QObject *obj, m_satModel->items() ) {
         // catalog items
         SatellitesCatalogItem *item = qobject_cast<SatellitesCatalogItem*>( obj );
-        if( item != NULL ) {
+        if( ( item != NULL ) && ( item->catalog() == source ) ) {
             m_configDialog->addSatelliteItem(
                 item->relatedBody(),
                 item->category(),
                 item->name(),
                 item->id() );
-            continue;
         }
     }
 
