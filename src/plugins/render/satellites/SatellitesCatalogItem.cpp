@@ -112,6 +112,10 @@ void SatellitesCatalogItem::setDescription()
 
 void SatellitesCatalogItem::update()
 {
+    if( !isEnabled() ) {
+        return;
+    }
+
     double period = 24  * 3600 / m_n0;
     QDateTime startTime = m_clock->dateTime().addSecs( - period / 2. );
     QDateTime endTime = startTime.addSecs( period );

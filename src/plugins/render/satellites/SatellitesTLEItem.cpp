@@ -81,6 +81,10 @@ void SatellitesTLEItem::setDescription()
 
 void SatellitesTLEItem::update()
 {
+    if( !isEnabled() ) {
+        return;
+    }
+
     QDateTime startTime = m_clock->dateTime().addSecs( - 2 * 60 );
 
     QDateTime endTime = startTime.addSecs( period() );
