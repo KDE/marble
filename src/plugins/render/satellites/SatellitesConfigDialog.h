@@ -81,8 +81,11 @@ protected Q_SLOTS:
     void updateButtonState();
 
 private:
+    QString translation( const QString &from ) const;
+
     QStringList m_userDataSources;
     Ui::SatellitesConfigDialog *m_configWidget;
+    QMap<QString, QString> m_translations;
 };
 
 } // namespace Marble

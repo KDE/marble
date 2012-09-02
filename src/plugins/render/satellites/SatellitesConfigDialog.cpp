@@ -28,10 +28,30 @@
 namespace Marble {
 
 SatellitesConfigDialog::SatellitesConfigDialog( QWidget *parent )
-    : QDialog( parent ),
-      m_userDataSources()
+    : QDialog( parent )
 {
     initialize();
+
+    // allow translation for catalog items
+    // + categories
+    const char *descCat = "An object category";
+    m_translations["Comets"]        = tr( "Comets", descCat );
+    m_translations["Moons"]         = tr( "Moons", descCat );
+    m_translations["Other"]         = tr( "Other", descCat );
+    m_translations["Spacecrafts"]   = tr( "Spacecrafts", descCat );
+    m_translations["Space probes"]  = tr( "Space probes", descCat );
+    // + bodies
+    const char *descBodies = "A planet or space body";
+    m_translations["Moon"]          = tr( "Moon", descBodies );
+    m_translations["Sun"]           = tr( "Sun", descBodies );
+    m_translations["Mercury"]       = tr( "Mercury", descBodies );
+    m_translations["Venus"]         = tr( "Venus", descBodies );
+    m_translations["Earth"]         = tr( "Earth", descBodies );
+    m_translations["Mars"]          = tr( "Mars", descBodies );
+    m_translations["Jupiter"]       = tr( "Jupiter", descBodies );
+    m_translations["Saturn"]        = tr( "Saturn", descBodies );
+    m_translations["Uranus"]        = tr( "Uranus", descBodies );
+    m_translations["Neptune"]       = tr( "Neptune", descBodies );
 }
 
 SatellitesConfigDialog::~SatellitesConfigDialog()
@@ -83,6 +103,8 @@ SatellitesConfigDialog::addSatelliteItem( const QString &body,
                                           const QString &id,
                                           const QString &url )
 {
+    QString theTitle = translation( title );
+
     SatellitesConfigNodeItem *categoryItem;
     categoryItem = getSatellitesCategoryItem( body, category, true );
 
@@ -96,7 +118,7 @@ SatellitesConfigDialog::addSatelliteItem( const QString &body,
 
     // add it
     SatellitesConfigLeafItem *newItem;
-    newItem = new SatellitesConfigLeafItem( title, id );
+    newItem = new SatellitesConfigLeafItem( theTitle, id );
     if( !url.isNull() && !url.isEmpty() ) {
         newItem->setData( 0, SatellitesConfigAbstractItem::UrlListRole, url );
     }
@@ -152,6 +174,8 @@ SatellitesConfigNodeItem* SatellitesConfigDialog::getSatellitesCategoryItem(
     const QString &category,
     bool create )
 {
+    QString theCategory = translation( category );
+
     SatellitesConfigNodeItem *catalogItem;
     catalogItem = getSatellitesBodyItem( body, create );
 
@@ -161,7 +185,7 @@ SatellitesConfigNodeItem* SatellitesConfigDialog::getSatellitesCategoryItem(
 
     // find category
     for( int i = 0; i < catalogItem->childrenCount(); ++i ) {
-        if( catalogItem->childAt( i )->name() == category ) {
+        if( catalogItem->childAt( i )->name() == theCategory ) {
             return (SatellitesConfigNodeItem*)catalogItem->childAt( i );
         }
     }
@@ -169,7 +193,7 @@ SatellitesConfigNodeItem* SatellitesConfigDialog::getSatellitesCategoryItem(
     // not found, create?
     if( create ) {
         SatellitesConfigNodeItem *newItem;
-        newItem = new SatellitesConfigNodeItem( category );
+        newItem = new SatellitesConfigNodeItem( theCategory );
         catalogItem->appendChild( newItem );
         return newItem;
     }
@@ -181,13 +205,15 @@ SatellitesConfigNodeItem* SatellitesConfigDialog::getSatellitesBodyItem(
     const QString &body,
     bool create )
 {
+    QString theBody = translation( body );
+
     SatellitesConfigModel *model;
     model = (SatellitesConfigModel*)m_configWidget->treeView->model();
     SatellitesConfigNodeItem *rootItem = model->rootItem();
 
     // try to find it
     for( int i = 0; i < rootItem->childrenCount(); ++i ) {
-        if( rootItem->childAt( i )->name() == body ) {
+        if( rootItem->childAt( i )->name() == theBody ) {
             return (SatellitesConfigNodeItem*)rootItem->childAt( i ); 
         }
     }
@@ -195,7 +221,7 @@ SatellitesConfigNodeItem* SatellitesConfigDialog::getSatellitesBodyItem(
     // not found, create?
     if( create ) {
         SatellitesConfigNodeItem *newItem;
-        newItem = new SatellitesConfigNodeItem( body );
+        newItem = new SatellitesConfigNodeItem( theBody );
         rootItem->appendChild( newItem );
         return newItem;
     }
@@ -317,6 +343,15 @@ void SatellitesConfigDialog::expandTreeView()
     for ( int i = 0; i < treeView->model()->columnCount(); ++i ) {
         treeView->resizeColumnToContents( i );
     }
+}
+
+QString SatellitesConfigDialog::translation( const QString &from ) const
+{
+    if( m_translations.contains( from ) ) {
+        return m_translations.value( from );
+    }
+
+    return from;
 }
 
 } // namespace Marble
