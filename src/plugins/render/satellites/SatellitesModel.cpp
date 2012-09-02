@@ -59,11 +59,11 @@ void SatellitesModel::updateVisibility()
     foreach( QObject *obj, items() ) {
         SatellitesCatalogItem *oItem = qobject_cast<SatellitesCatalogItem*>(obj);
         if( oItem != NULL ) {
-            bool visible = ( ( oItem->relatedBody().toLower() == m_lcPlanet ) &&
+            bool enabled = ( ( oItem->relatedBody().toLower() == m_lcPlanet ) &&
                              ( m_enabledIds.contains( oItem->id() ) ) );
-            oItem->placemark()->setVisible( visible );
+            oItem->setEnabled( enabled );
 
-            if( visible ) {
+            if( enabled ) {
                 oItem->update();
             }
         }
@@ -71,10 +71,10 @@ void SatellitesModel::updateVisibility()
         SatellitesTLEItem *eItem = qobject_cast<SatellitesTLEItem*>(obj);
         if( eItem != NULL ) {
             // TLE satellites are always earth satellites
-            bool visible = ( m_lcPlanet == "earth" );
-            eItem->placemark()->setVisible( visible );
+            bool enabled = ( m_lcPlanet == "earth" );
+            eItem->setEnabled( enabled );
 
-            if( visible ) {
+            if( enabled ) {
                 eItem->update();
             }
         }

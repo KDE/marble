@@ -59,6 +59,22 @@ public:
         }
     }
 
+    void updateDocument()
+    {
+        // we cannot use ->clear() since its implementation
+        // will delete all items
+        foreach( TrackerPluginItem *item, m_itemVector ) {
+            int idx = m_document->childPosition( item->placemark() );
+            if( item->isEnabled() && idx == -1 ) {
+                item->placemark()->setVisible( item->isEnabled() );
+                m_document->append( item->placemark() );
+            }
+            if( !item->isEnabled() && idx > -1 ) {
+                m_document->remove( idx );
+            }
+        }
+    }
+
     TrackerPluginModel *m_parent;
     bool m_enabled;
     GeoDataTreeModel *m_treeModel;
@@ -136,6 +152,7 @@ void TrackerPluginModel::beginUpdateItems()
 void TrackerPluginModel::endUpdateItems()
 {
     if( d->m_enabled ) {
+        d->updateDocument();
         d->m_treeModel->addDocument( d->m_document );
     }
 
