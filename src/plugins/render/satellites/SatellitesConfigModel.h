@@ -19,7 +19,7 @@ namespace Marble {
 
 class SatellitesConfigModel : public QAbstractItemModel
 {
-
+    Q_OBJECT
 public:
     explicit SatellitesConfigModel( QObject *parent = 0 );
     ~SatellitesConfigModel();

@@ -191,3 +191,5 @@ SatellitesConfigNodeItem* SatellitesConfigModel::rootItem() const
 
 } // namespace Marble
 
+#include "SatellitesConfigModel.moc"
+
