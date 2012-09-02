@@ -178,8 +178,10 @@
         <widget class="QListWidget" name="listDataSources">
          <property name="font">
           <font>
-           <weight>75</weight>
-           <bold>true</bold>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+           <kerning>true</kerning>
           </font>
          </property>
          <item>
