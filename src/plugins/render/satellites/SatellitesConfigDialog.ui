@@ -90,9 +90,9 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="buttonReloadData">
+           <widget class="QPushButton" name="buttonReloadDataSources">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string>&amp;Reload All Data Sources</string>

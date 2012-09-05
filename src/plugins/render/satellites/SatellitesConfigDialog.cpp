@@ -164,6 +164,8 @@ void SatellitesConfigDialog::setupDataSourcesTab()
         SIGNAL( clicked() ), SLOT( openDataSource() ) );
     connect( m_configWidget->buttonRemoveDataSource,
         SIGNAL( clicked() ), SLOT( removeSelectedDataSource() ) );
+    connect( m_configWidget->buttonReloadDataSources,
+        SIGNAL( clicked() ), SLOT( reloadDataSources() ) );
 
     connect( m_configWidget->listDataSources,
         SIGNAL( itemSelectionChanged() ), SLOT( updateButtonState() ) );
