@@ -213,7 +213,7 @@ void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
     // add default user data source
     if( !m_settings.contains( "userDataSources" ) ) {
         QStringList udsList;
-        udsList << "http://www.bitquirl.net/~rene/esasocis/orbitdata/satcatalogue.msc";
+        udsList << "http://files.kde.org/marble/satellites/PlanetarySatellites.msc";
         m_settings.insert( "userDataSources", udsList );
     } else if( m_settings.value( "userDataSources" ).type() == QVariant::String ) {
         m_settings.insert( "userDataSources",
