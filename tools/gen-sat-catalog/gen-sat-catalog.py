@@ -20,8 +20,8 @@ from lib.ObjectCatalogue import ObjectCatalogue
 
 ####[ Configuration ]#########################################################
 
-object_catalogue_file   = "satcatalogue.msc"
-data_file_base_url      = "http://bitquirl.net/~rene/esasocis/orbitdata"
+object_catalogue_file   = "PlanetarySatellites.msc"
+data_file_base_url      = "http://files.kde.org/marble/satellites"
 
 # define all interesting objects
 # FIXME: document possible values
