@@ -131,6 +131,9 @@ bool TileLoader::baseTilesAvailable( GeoSceneTexture const & texture )
             const TileId id( texture.sourceDir(), 0, column, row );
             const QString tilepath = tileFileName( &texture, id );
             result &= QFile::exists( tilepath );
+            if (!result) {
+                mDebug() << "Base tile " << texture.relativeTileFileName( id ) << " is missing for source dir " << texture.sourceDir();
+            }
         }
     }
 
