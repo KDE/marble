@@ -81,6 +81,10 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
         else {
             storageLayout = GeoSceneTexture::Marble;
             serverLayout = new MarbleServerLayout( texture );
+
+            if ( !modeStr.isEmpty() ) {
+                mDebug() << "Unknown storage layout mode " << modeStr << ", falling back to default.";
+            }
         }
 
         texture->setLevelZeroColumns( levelZeroColumns );
