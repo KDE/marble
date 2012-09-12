@@ -1,5 +1,6 @@
 <RCC>
   <qresource>
+    <file>../../../../data/bitmaps/satellite.png</file>
     <file>../../../icons/document-open.png</file>
     <file>../../../icons/bookmark-remove.png</file>
     <file>../../../icons/bookmark-add-folder.png</file>

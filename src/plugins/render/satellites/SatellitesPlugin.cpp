@@ -123,7 +123,7 @@ QString SatellitesPlugin::aboutDataText() const
 
 QIcon SatellitesPlugin::icon() const
 {
-    return QIcon();
+    return QIcon( ":/data/bitmaps/satellite.png" );
 }
 
 RenderPlugin::RenderType SatellitesPlugin::renderType() const
