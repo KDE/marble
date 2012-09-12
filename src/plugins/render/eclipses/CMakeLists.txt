@@ -1,0 +1,18 @@
+PROJECT(EclipsesPlugin)
+
+INCLUDE_DIRECTORIES(
+ ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/eclipses
+ ${CMAKE_BINARY_DIR}/src/plugins/render/eclipses
+ ${QT_INCLUDE_DIR}
+)
+INCLUDE(${QT_USE_FILE})
+
+set( ecl_SRCS
+  ecl/astrolib.cpp
+  ecl/attlib.cpp
+  ecl/eclsolar.cpp )
+
+set( eclipses_SRCS
+ EclipsesPlugin.cpp )
+
+marble_add_plugin( EclipsesPlugin ${eclipses_SRCS} ${ecl_SRCS} )
