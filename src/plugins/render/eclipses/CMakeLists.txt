@@ -8,11 +8,13 @@ INCLUDE_DIRECTORIES(
 INCLUDE(${QT_USE_FILE})
 
 set( ecl_SRCS
-  ecl/astrolib.cpp
-  ecl/attlib.cpp
-  ecl/eclsolar.cpp )
+    ecl/astrolib.cpp
+    ecl/attlib.cpp
+    ecl/eclsolar.cpp )
 
 set( eclipses_SRCS
- EclipsesPlugin.cpp )
+    EclipsesModel.cpp
+    EclipsesItem.cpp
+    EclipsesPlugin.cpp )
 
 marble_add_plugin( EclipsesPlugin ${eclipses_SRCS} ${ecl_SRCS} )

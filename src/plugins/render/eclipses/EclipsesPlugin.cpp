@@ -12,34 +12,38 @@
 
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
+#include "MarbleClock.h"
 #include "ViewportParams.h"
+
+#include "EclipsesModel.h"
 
 namespace Marble
 {
 
 EclipsesPlugin::EclipsesPlugin()
     : RenderPlugin( 0 ),
-      m_isInitialized( false )
+      m_isInitialized( false ),
+      m_model( 0 )
 {
 }
 
 EclipsesPlugin::EclipsesPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
-     m_isInitialized( false )
+     m_isInitialized( false ),
+     m_model( 0 )
 {
     connect( this, SIGNAL(settingsChanged(QString)),
                    SLOT(updateSettings()) );
-    connect( this, SIGNAL(enabledChanged(bool)),
-                   SLOT(enableModel(bool)) );
-    connect( this, SIGNAL(visibilityChanged(bool,QString)),
-                   SLOT(visibleModel(bool)) );
 
-    setVisible( false );
     setSettings( QHash<QString, QVariant>() );
+    setEnabled( true );
 }
 
 EclipsesPlugin::~EclipsesPlugin()
 {
+    if( m_isInitialized ) {
+        delete m_model;
+    }
 }
 
 QStringList EclipsesPlugin::backendTypes() const
@@ -54,7 +58,7 @@ QString EclipsesPlugin::renderPolicy() const
 
 QStringList EclipsesPlugin::renderPosition() const
 {
-    return QStringList( "SURFACE" );
+    return QStringList( "FLOAT_ITEM" );
 }
 
 QString EclipsesPlugin::name() const
@@ -105,9 +109,20 @@ RenderPlugin::RenderType EclipsesPlugin::renderType() const
 
 void EclipsesPlugin::initialize()
 {
+    if( isInitialized() ) {
+        return;
+    }
+
+ 
+    const MarbleClock *clock = marbleModel()->clock();
+    m_model = new EclipsesModel( clock );
+
+    updateEclipses();
+
+    connect( clock, SIGNAL( timeChanged() ), SLOT( updateEclipses() ) );
+
     m_isInitialized = true;
     updateSettings();
-    enableModel( enabled() );
 }
 
 bool EclipsesPlugin::isInitialized() const
@@ -126,9 +141,7 @@ bool EclipsesPlugin::render( GeoPainter *painter,
     Q_UNUSED( layer );
 
     if( marbleModel()->planetId() == "earth" ) {
-        enableModel( enabled() );
-    } else {
-        enableModel( false );
+        // render
     }
 
     return true;
@@ -163,18 +176,12 @@ void EclipsesPlugin::updateSettings()
     }
 }
 
-void EclipsesPlugin::enableModel( bool enabled )
+void EclipsesPlugin::updateEclipses()
 {
-    if ( !m_isInitialized ) {
-        return;
-    }
-}
-
-void EclipsesPlugin::visibleModel( bool visible )
-{
-    if ( !m_isInitialized ) {
-        return;
-    }
+    mDebug() << "Updating eclipses....";
+    const MarbleClock *clock = marbleModel()->clock();
+    QDateTime currentDT = clock->dateTime();
+    m_model->setYear( currentDT.date().year() );
 }
 
 }
@@ -182,3 +189,4 @@ void EclipsesPlugin::visibleModel( bool visible )
 Q_EXPORT_PLUGIN2( EclipsesPlugin, Marble::EclipsesPlugin )
 
 #include "EclipsesPlugin.moc"
+

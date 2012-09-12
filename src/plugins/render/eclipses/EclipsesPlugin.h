@@ -18,6 +18,8 @@
 namespace Marble
 {
 
+class EclipsesModel;
+
 /**
  * @brief This plugin displays solar eclipses.
  *
@@ -44,7 +46,7 @@ public:
     QString copyrightYears() const;
     QList<PluginAuthor> pluginAuthors() const;
     QIcon icon() const;
-    RenderType renderType() const;
+    RenderPlugin::RenderType renderType() const;
 
     void initialize();
     bool isInitialized() const;
@@ -58,14 +60,14 @@ public:
     void setSettings( const QHash<QString, QVariant> &settings );
 
 private Q_SLOTS:
-    void enableModel( bool enabled );
-    void visibleModel( bool visible );
     void readSettings();
     void writeSettings();
     void updateSettings();
+    void updateEclipses();
 
 private:
     bool m_isInitialized;
+    EclipsesModel *m_model;
     QHash<QString, QVariant> m_settings;
 };
 
