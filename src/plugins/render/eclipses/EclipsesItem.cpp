@@ -15,14 +15,20 @@
 namespace Marble
 {
 
-EclipsesItem::EclipsesItem( QObject *parent )
+EclipsesItem::EclipsesItem( int index, QObject *parent )
     : QObject( parent ),
+      m_index( index ),
       m_phase( TotalSun )
 {
 }
 
 EclipsesItem::~EclipsesItem()
 {
+}
+
+int EclipsesItem::index() const
+{
+    return m_index;
 }
 
 void EclipsesItem::setDateTime( const QDateTime dateTime )
@@ -57,6 +63,11 @@ QString EclipsesItem::phaseText() const
     }
 
     return QString();
+}
+
+bool EclipsesItem::takesPlaceAt( const QDateTime &dateTime ) const
+{
+    return true;
 }
 
 }

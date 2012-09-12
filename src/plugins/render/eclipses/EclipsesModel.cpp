@@ -11,9 +11,9 @@
 #include "EclipsesModel.h"
 
 #include "EclipsesItem.h"
-
 #include "MarbleDebug.h"
 #include "MarbleClock.h"
+#include "GeoPainter.h"
 
 #include "ecl/eclsolar.h"
 
@@ -55,14 +55,24 @@ int EclipsesModel::year() const
     return m_currentYear;
 }
 
+void EclipsesModel::paint( const QDateTime &dateTime, GeoPainter *painter )
+{
+    foreach( EclipsesItem *item, m_items ) {
+        if( item->takesPlaceAt( dateTime ) ) {
+            paintItem( item, painter );
+            return; // there should be only one eclipse at the same time
+        }
+    }
+}
+
+void EclipsesModel::paintItem( EclipsesItem *item, GeoPainter *painter )
+{
+    // paint
+}
+
 void EclipsesModel::addItem( EclipsesItem *item )
 {
     m_items.append( item );
-}
-
-QList<EclipsesItem*> EclipsesModel::items() const
-{
-    return m_items;
 }
 
 void EclipsesModel::clear()
@@ -104,12 +114,13 @@ void EclipsesModel::updateEclipses()
             case 6: p = EclipsesItem::AnnularTotalSun; break;
         }
 
-        EclipsesItem *item = new EclipsesItem();
+        EclipsesItem *item = new EclipsesItem( i );
         item->setDateTime( dt );
         item->setPhase( p );
         addItem( item );
 
-        mDebug() << item;
+        mDebug() << "Eclipse" << i << "added:" << dt
+                 << "(" << item->phaseText() << ")";
     }
 }
 

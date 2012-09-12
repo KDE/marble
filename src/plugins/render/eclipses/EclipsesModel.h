@@ -12,6 +12,7 @@
 #define MARBLE_ECLIPSESMODEL_H
 
 #include <QtCore/QObject>
+#include <QDateTime>
 
 class EclSolar;
 
@@ -20,6 +21,7 @@ namespace Marble
 
 class MarbleClock;
 class EclipsesItem;
+class GeoPainter;
 
 class EclipsesModel : public QObject
 {
@@ -31,14 +33,14 @@ public:
     void setYear( int year );
     int year() const;
 
-    void addItem( EclipsesItem *item );
-    QList<EclipsesItem*> items() const;
-    void clear();
-
-    void update();
+    void paint( const QDateTime &dateTime, GeoPainter *painter );
 
 private:
+    void paintItem( EclipsesItem *item, GeoPainter *painter );
+    void addItem( EclipsesItem *item );
+    void clear();
     void updateEclipses();
+    void update();
 
     const MarbleClock *m_clock;
     EclSolar *m_ecps;

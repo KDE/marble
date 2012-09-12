@@ -135,13 +135,12 @@ bool EclipsesPlugin::render( GeoPainter *painter,
                              const QString &renderPos,
                              GeoSceneLayer *layer )
 {
-    Q_UNUSED( painter );
     Q_UNUSED( viewport );
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
 
     if( marbleModel()->planetId() == "earth" ) {
-        // render
+        m_model->paint( marbleModel()->clock()->dateTime(), painter );
     }
 
     return true;
@@ -179,9 +178,7 @@ void EclipsesPlugin::updateSettings()
 void EclipsesPlugin::updateEclipses()
 {
     mDebug() << "Updating eclipses....";
-    const MarbleClock *clock = marbleModel()->clock();
-    QDateTime currentDT = clock->dateTime();
-    m_model->setYear( currentDT.date().year() );
+    m_model->setYear( marbleModel()->clock()->dateTime().date().year() );
 }
 
 }

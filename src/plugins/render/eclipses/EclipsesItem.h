@@ -31,8 +31,10 @@ public:
         AnnularTotalSun         = 6
     };
 
-    EclipsesItem( QObject *parent = 0 );
+    EclipsesItem( int index, QObject *parent = 0 );
     ~EclipsesItem();
+
+    int index() const;
 
     void setDateTime( const QDateTime dateTime );
     QDateTime dateTime() const;
@@ -41,7 +43,10 @@ public:
     EclipsesItem::EclipsePhase phase() const;
     QString phaseText() const;
 
+    bool takesPlaceAt( const QDateTime &dateTime ) const;
+
 private:
+    int m_index;
     QDateTime m_dateTime;
     EclipsesItem::EclipsePhase m_phase;
 };
