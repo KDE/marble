@@ -221,6 +221,7 @@ void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
         QStringList udsList;
         udsList << "http://files.kde.org/marble/satellites/PlanetarySatellites.msc";
         m_settings.insert( "userDataSources", udsList );
+        userDataSourceAdded( udsList[0] );
     } else if( m_settings.value( "userDataSources" ).type() == QVariant::String ) {
         // same HACK as above
         m_settings.insert( "userDataSources",
