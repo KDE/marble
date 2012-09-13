@@ -199,15 +199,21 @@ void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
         dsList << "http://www.celestrak.com/NORAD/elements/visual.txt";
         m_settings.insert( "dataSources", dsList );
         m_settings.insert( "idList", dsList );
-    } else if( m_settings.value( "dataSources" ).type() == QVariant::String ) {
+    } else {
         // HACK: KConfig can't guess the type of the settings, when we use
         // KConfigGroup::readEntry() in marble_part it returns a QString which
         // is then wrapped into a QVariant when added to the settings hash.
         // QVariant can handle the conversion for some types, like toDateTime()
         // but when calling toStringList() on a QVariant::String, it will
         // return a one element list
-        m_settings.insert( "dataSources",
-            m_settings.value( "dataSources" ).toString().split( "," ) );
+        if( m_settings.value( "dataSources" ).type() == QVariant::String ) {
+            m_settings.insert( "dataSources",
+                m_settings.value( "dataSources" ).toString().split( "," ) );
+        }
+        if( m_settings.value( "idList" ).type() == QVariant::String ) {
+            m_settings.insert( "idList",
+                m_settings.value( "idList" ).toString().split( "," ) );
+        }
     }
 
     // add default user data source
@@ -216,6 +222,7 @@ void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
         udsList << "http://files.kde.org/marble/satellites/PlanetarySatellites.msc";
         m_settings.insert( "userDataSources", udsList );
     } else if( m_settings.value( "userDataSources" ).type() == QVariant::String ) {
+        // same HACK as above
         m_settings.insert( "userDataSources",
             m_settings.value( "userDataSources" ).toString().split( "," ) );
     }
