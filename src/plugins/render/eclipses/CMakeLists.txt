@@ -17,4 +17,9 @@ set( eclipses_SRCS
     EclipsesItem.cpp
     EclipsesPlugin.cpp )
 
+qt4_wrap_ui( eclipses_SRCS
+    EclipsesConfigDialog.ui
+    EclipsesReminderDialog.ui )
+
 marble_add_plugin( EclipsesPlugin ${eclipses_SRCS} ${ecl_SRCS} )
+
