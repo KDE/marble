@@ -20,6 +20,7 @@
 
 #include "RenderPlugin.h"
 #include "Quaternion.h"
+#include "MarbleDebug.h"
 
 class QDateTime;
 
@@ -34,7 +35,7 @@ class StarPoint
      * @brief create a starpoint from rectaszension and declination
      * @param  rect rectaszension
      * @param  lat declination
-     * @param  mag
+     * @param  mag magnitude
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
     StarPoint(qreal rect, qreal decl, qreal mag) {
@@ -53,7 +54,7 @@ class StarPoint
     }
 
  private:
-    qreal      m_mag;
+    qreal       m_mag;
     Quaternion  m_q;
 };
 
@@ -101,17 +102,18 @@ class StarsPlugin : public RenderPlugin
 
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 
-    // sidereal time in hours:
-    qreal siderealTime( const QDateTime& );
-
- private Q_SLOTS:
+private Q_SLOTS:
     void requestRepaint();
 
  private:
+    // sidereal time in hours:
+    qreal siderealTime( const QDateTime& );
+
     void loadStars();
     bool m_renderStars;
     bool m_starsLoaded;
     QVector<StarPoint> m_stars;
+    QPixmap m_pixmapSun;
 };
 
 }
