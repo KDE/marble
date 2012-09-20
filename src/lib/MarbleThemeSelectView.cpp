@@ -144,20 +144,13 @@ MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
 #endif //  Q_WS_MAEMO_5
     connect( this, SIGNAL( customContextMenuRequested( QPoint ) ),
                    SLOT( showContextMenu( QPoint ) ) );
+
+    setResizeMode( Adjust );
 }
 
 MarbleThemeSelectView::~MarbleThemeSelectView()
 {
     delete d;
-}
-
-void MarbleThemeSelectView::resizeEvent( QResizeEvent *event )
-{
-    QListView::resizeEvent(event);
-
-    QSize size = gridSize();
-    size.setWidth( event->size().width() );
-    setGridSize(size);
 }
 
 void MarbleThemeSelectView::Private::selectedMapTheme( QModelIndex index )

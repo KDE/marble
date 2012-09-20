@@ -36,9 +36,6 @@ class MARBLE_EXPORT MarbleThemeSelectView : public QListView
     explicit MarbleThemeSelectView( QWidget *parent = 0 );
     ~MarbleThemeSelectView();
     // void setModel( QAbstractItemModel * model );
-    
- protected:
-    void resizeEvent( QResizeEvent *event );
 
  private:
     Q_PRIVATE_SLOT( d, void selectedMapTheme( QModelIndex index ) )
