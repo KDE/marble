@@ -124,7 +124,7 @@ MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
         setIconSize( QSize( 136, 136 ) );
         setFlow( QListView::LeftToRight );
         setWrapping( true );
-        setResizeMode( QListView::Fixed );
+        setResizeMode( Adjust );
         setUniformItemSizes( true );
     }
     setMovement( QListView::Static );
@@ -144,8 +144,6 @@ MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
 #endif //  Q_WS_MAEMO_5
     connect( this, SIGNAL( customContextMenuRequested( QPoint ) ),
                    SLOT( showContextMenu( QPoint ) ) );
-
-    setResizeMode( Adjust );
 }
 
 MarbleThemeSelectView::~MarbleThemeSelectView()
