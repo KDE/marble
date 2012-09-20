@@ -55,6 +55,8 @@ class MARBLE_EXPORT MapViewWidget : public QWidget
 
     Q_PRIVATE_SLOT( d, void projectionSelected( int projectionIndex ) )
 
+    Q_PRIVATE_SLOT( d, void mapThemeSelected( int index ) )
+
  Q_SIGNALS:
     void mapThemeIdChanged( const QString& );
     void projectionChanged( Projection );

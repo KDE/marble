@@ -15,6 +15,7 @@
 #include "MapViewWidget.h"
 
 // Marble
+#include "MarbleDebug.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "MapThemeManager.h"
@@ -66,6 +67,8 @@ class MapViewWidget::Private {
 
     void projectionSelected( int projectionIndex );
 
+    void mapThemeSelected( int index );
+
     MapViewWidget *const q;
 
     Ui::MapViewWidget  m_mapViewUi;
@@ -90,24 +93,32 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
         d->m_mapViewUi.line->setVisible( false );
         layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 1 ), 1, 0 );
         layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 1 ), 1, 1 );
+        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 2 ), 2, 0 );
+        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 3 ), 2, 1 );
         d->m_mapViewUi.verticalLayout->insertLayout( 0, layout );
-        d->m_mapViewUi.mapThemeLabel->setVisible( false );
+        d->m_mapViewUi.mapThemeComboBox->setModel( &d->m_mapSortProxy );
+        d->m_mapViewUi.mapThemeComboBox->setIconSize( QSize( 48, 48 ) );
+        connect( d->m_mapViewUi.mapThemeComboBox, SIGNAL( activated( int ) ),
+                 this,                            SLOT( mapThemeSelected( int ) ) );
+        d->m_mapViewUi.marbleThemeSelectView->setVisible( false );
+    }
+    else {
+        d->m_mapViewUi.marbleThemeSelectView->setModel( &d->m_mapSortProxy );
+        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
+        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
+        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( mapThemeIdChanged( const QString& ) ),
+                 this,                                 SIGNAL( mapThemeIdChanged( const QString& ) ) );
+        d->m_mapViewUi.mapThemeComboBox->setVisible( false );
     }
 
-    connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( mapThemeIdChanged( const QString& ) ),
-             this,                                 SIGNAL( mapThemeIdChanged( const QString& ) ) );
     connect( d->m_mapViewUi.projectionComboBox,    SIGNAL( activated( int ) ),
              this,                                 SLOT( projectionSelected( int ) ) );
 
     d->m_mapViewUi.projectionComboBox->setEnabled( true );
     d->m_mapViewUi.celestialBodyComboBox->setModel( &d->m_celestialList );
-    d->m_mapViewUi.marbleThemeSelectView->setModel( &d->m_mapSortProxy );
 
     connect( d->m_mapViewUi.celestialBodyComboBox, SIGNAL( activated( int ) ),
              this,                                 SLOT( setCelestialBody( int ) ) );
-    
-    connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
-    connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
 }
 
 MapViewWidget::~MapViewWidget()
@@ -167,10 +178,13 @@ void MapViewWidget::setMapThemeId( const QString &theme )
     if ( !d->m_mapThemeModel || !d->m_widget )
         return;
 
+    const bool smallscreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+
     // Check if the new selected theme is different from the current one
-    QModelIndex currentIndex = d->m_mapViewUi.marbleThemeSelectView->currentIndex();
+    const int currentRow = smallscreen ? d->m_mapViewUi.mapThemeComboBox->currentIndex() :
+                                         d->m_mapViewUi.marbleThemeSelectView->currentIndex().row();
     QString indexTheme = d->m_mapSortProxy.data( d->m_mapSortProxy.index(
-                         currentIndex.row(), 1, QModelIndex() ) ).toString();
+                         currentRow, 1, QModelIndex() ) ).toString();
 
     if ( theme != indexTheme ) {
         /* indexTheme would be empty if the chosen map has not been set yet. As
@@ -185,9 +199,13 @@ void MapViewWidget::setMapThemeId( const QString &theme )
                 QModelIndex iterIndex = items.first()->index();
                 QModelIndex iterIndexName = d->m_mapSortProxy.mapFromSource( iterIndex.sibling( iterIndex.row(), 0 ) );
 
-                d->m_mapViewUi.marbleThemeSelectView->setCurrentIndex( iterIndexName );
-
-                d->m_mapViewUi.marbleThemeSelectView->scrollTo( iterIndexName );
+                if ( smallscreen ) {
+                    d->m_mapViewUi.mapThemeComboBox->setCurrentIndex( iterIndexName.row() );
+                }
+                else {
+                    d->m_mapViewUi.marbleThemeSelectView->setCurrentIndex( iterIndexName );
+                    d->m_mapViewUi.marbleThemeSelectView->scrollTo( iterIndexName );
+                }
             }
         }
 
@@ -249,6 +267,14 @@ void MapViewWidget::Private::setCelestialBody( int comboIndex )
 void MapViewWidget::Private::projectionSelected( int projectionIndex )
 {
     emit q->projectionChanged( (Projection) projectionIndex );
+}
+
+void MapViewWidget::Private::mapThemeSelected( int index )
+{
+    QModelIndex columnIndex = m_mapSortProxy.index( index, 1, QModelIndex() );
+    QString currentmaptheme = m_mapSortProxy.data( columnIndex ).toString();
+    mDebug() << Q_FUNC_INFO << currentmaptheme;
+    emit q->mapThemeIdChanged( currentmaptheme );
 }
 
 }
