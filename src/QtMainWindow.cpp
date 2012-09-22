@@ -1504,13 +1504,15 @@ void MainWindow::printMapScreenShot()
 void MainWindow::showMapViewDialog()
 {
     if( !m_mapViewWindow ) {
-        m_mapViewWindow = new StackableWindow( this );
+        m_mapViewWindow = new QDialog( this );
         m_mapViewWindow->setWindowTitle( tr( "Map View - Marble" ) );
+
+        QVBoxLayout *layout = new QVBoxLayout;
+        m_mapViewWindow->setLayout( layout );
 
         MapViewWidget *mapViewWidget = new MapViewWidget( m_mapViewWindow );
         mapViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
-
-        m_mapViewWindow->setCentralWidget( mapViewWidget );
+        layout->addWidget( mapViewWidget );
     }
 
     m_mapViewWindow->show();

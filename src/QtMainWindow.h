@@ -233,7 +233,7 @@ private:
     QAction *m_toggleRoutingTabAction;
     QAction *m_showTrackingDialogAction;
 
-    StackableWindow *m_mapViewWindow;
+    QDialog *m_mapViewWindow;
     StackableWindow *m_routingWindow;
     StackableWindow *m_trackingWindow;
     GoToDialog *m_gotoDialog;
