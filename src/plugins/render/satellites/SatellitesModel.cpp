@@ -84,26 +84,29 @@ void SatellitesModel::updateVisibility()
 }
 
 void SatellitesModel::parseFile( const QString &id,
-                                 const QByteArray &file )
+                                 const QByteArray &data )
 {
     // catalog files are comma serparated while tle files
     // are not allowed to contain commas, so we use this
     // to distinguish between those two
-    if( file.contains( ',' ) ) {
-        parseCatalog( id, file );
+    if( data.contains( ',' ) ) {
+        parseCatalog( id, data );
     } else {
-        parseTLE( id, file );
+        parseTLE( id, data );
     }
 
     emit fileParsed( id );
 }
 
 void SatellitesModel::parseCatalog( const QString &id,
-                                    const QByteArray &file )
+                                    const QByteArray &data )
 {
+    // For details see:
+    // http://techbase.kde.org/Projects/Marble/SatelliteCatalogFormat
+
     mDebug() << "Reading satellite catalog from:" << id;
 
-    QTextStream ts(file);
+    QTextStream ts(data);
     int index = 1;
 
     beginUpdateItems();
@@ -152,11 +155,11 @@ void SatellitesModel::parseCatalog( const QString &id,
 }
 
 void SatellitesModel::parseTLE( const QString &id,
-                                const QByteArray &file )
+                                const QByteArray &data )
 {
     mDebug() << "Reading satellite TLE data from:" << id;
 
-    QList<QByteArray> tleLines = file.split( '\n' );
+    QList<QByteArray> tleLines = data.split( '\n' );
     // File format: One line of description, two lines of TLE, last line is empty
     if ( tleLines.size() % 3 != 1 ) {
         mDebug() << "Malformated satellite data file";

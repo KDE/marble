@@ -9,7 +9,8 @@
 # Copyright 2012 Rene Kuettner <rene@bitkanal.net>
 #
 
-# NOTE: this script only writes a single catalogue file at the moment
+# Create a Marble Satellite Catalog file with data from various sources.
+# See also: http://techbase.kde.org/Projects/Marble/SatelliteCatalogFormat
 
 from __future__ import print_function
 
