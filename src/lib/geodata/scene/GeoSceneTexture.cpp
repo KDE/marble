@@ -233,6 +233,14 @@ QString GeoSceneTexture::relativeTileFileName( const TileId &id ) const
             .arg( id.y() )
             .arg( suffix );
         break;
+    case GeoSceneTexture::TileMapService:
+        relFileName = QString( "%1/%2/%3/%4.%5" )
+            .arg( themeStr() )
+            .arg( id.zoomLevel() )
+            .arg( id.x() )
+            .arg( ( 1<<id.zoomLevel() ) - id.y() - 1 )  //Y coord in TMS runs from bottom to top
+            .arg( suffix );
+        break;
     }
 
     return relFileName;
