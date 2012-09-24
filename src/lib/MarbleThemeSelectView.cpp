@@ -14,6 +14,7 @@
 
 #include "MarbleGlobal.h"
 #include "MarbleDirs.h"
+#include "MapThemeManager.h"
 #include "MapWizard.h"
 #include "MarbleDebug.h"
 
@@ -34,9 +35,6 @@ class MarbleThemeSelectView::Private
 {
 public:
     explicit Private( MarbleThemeSelectView * const parent );
-    void deleteDirectory( const QString& path );
-    void deleteDataDirectories( const QString& path );
-    void deletePreview( const QString& path );
     void loadFavorites();
     bool currentIsFavorite();
 
@@ -59,38 +57,6 @@ MarbleThemeSelectView::Private::Private( MarbleThemeSelectView * const parent )
       m_settings( "kde.org", "Marble Desktop Globe" )
 {
 
-}
-
-void MarbleThemeSelectView::Private::deleteDirectory( const QString& path )
-{
-    QDir directory( path );
-    foreach( const QString &filename, directory.entryList( QDir::Files | QDir::NoDotAndDotDot ) )
-        QFile( path + filename ).remove();
-    QDir().rmdir( path );
-}
-
-void MarbleThemeSelectView::Private::deleteDataDirectories( const QString& path )
-{
-    QDir directoryv( path );
-    foreach( const QString &filename, directoryv.entryList( QDir::AllEntries | QDir::NoDotAndDotDot ) )
-    {
-        QString filepath = path + "/" + filename;
-        QFile file( filepath );
-        if( QFileInfo( filepath ).isDir() && filename.contains( QRegExp( "^[0-9]+$" ) ) )
-        {
-            deleteDataDirectories( filepath );
-            QDir().rmdir( filepath );
-        }
-        else if( filename.contains( QRegExp( "^[0-9]\\..+" ) ) )
-            file.remove();
-    }
-}
-
-void MarbleThemeSelectView::Private::deletePreview( const QString& path )
-{
-    QDir directoryv( path, "preview.*" );
-    foreach( const QString &filename, directoryv.entryList() )
-        QFile( path + "/" + filename ).remove();
 }
 
 QString MarbleThemeSelectView::Private::currentThemeName() const
@@ -194,13 +160,7 @@ void MarbleThemeSelectView::Private::deleteMap()
                              tr( "Are you sure that you want to delete \"%1\"?" ).arg( currentThemeName() ),
                              QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes )
     {
-        QDir mapthemedir( QFileInfo( MarbleDirs::localPath() + "/maps/" + currentThemePath()).path());
-        deleteDirectory( mapthemedir.path() + "/legend/" );
-        deleteDataDirectories( mapthemedir.path() + "/" );
-        deletePreview( mapthemedir.path() + "/" );
-        QFile( MarbleDirs::localPath() + "/maps/" + currentThemePath()).remove();
-        QFile( mapthemedir.path() + "/legend.html" ).remove();
-        QDir().rmdir( mapthemedir.path() );
+        MapThemeManager::deleteMapTheme( currentThemePath() );
     }
 }
 
