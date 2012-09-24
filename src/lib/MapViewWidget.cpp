@@ -16,6 +16,7 @@
 
 // Marble
 #include "MarbleDebug.h"
+#include "MarbleDirs.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "MapThemeManager.h"
@@ -25,6 +26,10 @@
 #include "GeoSceneHead.h"
 
 // Qt
+#include <QtCore/QFileInfo>
+#include <QtCore/QSettings>
+#include <QtGui/QMenu>
+#include <QtGui/QMessageBox>
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QGridLayout>
 
@@ -42,7 +47,8 @@ class MapViewWidget::Private {
           m_widget( 0 ),
           m_mapThemeModel( 0 ),
           m_mapSortProxy(),
-          m_celestialList()
+          m_celestialList(),
+          m_settings( "kde.org", "Marble Desktop Globe" )
     {
     }
 
@@ -67,7 +73,16 @@ class MapViewWidget::Private {
 
     void projectionSelected( int projectionIndex );
 
+    void mapThemeSelected( QModelIndex index );
     void mapThemeSelected( int index );
+
+    void showContextMenu( const QPoint& pos );
+    void deleteMap();
+    void toggleFavorite();
+
+    bool isCurrentFavorite();
+    QString currentThemeName() const;
+    QString currentThemePath() const;
 
     MapViewWidget *const q;
 
@@ -78,6 +93,7 @@ class MapViewWidget::Private {
     MapThemeSortFilterProxyModel m_mapSortProxy;
 
     QStandardItemModel m_celestialList;
+    QSettings m_settings;
 };
 
 MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
@@ -103,11 +119,22 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
         d->m_mapViewUi.marbleThemeSelectView->setVisible( false );
     }
     else {
+        d->m_mapViewUi.marbleThemeSelectView->setViewMode( QListView::IconMode );
+        d->m_mapViewUi.marbleThemeSelectView->setIconSize( QSize( 136, 136 ) );
+        d->m_mapViewUi.marbleThemeSelectView->setFlow( QListView::LeftToRight );
+        d->m_mapViewUi.marbleThemeSelectView->setWrapping( true );
+        d->m_mapViewUi.marbleThemeSelectView->setResizeMode( QListView::Adjust );
+        d->m_mapViewUi.marbleThemeSelectView->setUniformItemSizes( true );
+        d->m_mapViewUi.marbleThemeSelectView->setMovement( QListView::Static );
+        d->m_mapViewUi.marbleThemeSelectView->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+        d->m_mapViewUi.marbleThemeSelectView->setEditTriggers( QListView::NoEditTriggers );
+        d->m_mapViewUi.marbleThemeSelectView->setSelectionMode( QListView::SingleSelection );
         d->m_mapViewUi.marbleThemeSelectView->setModel( &d->m_mapSortProxy );
-        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
-        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
-        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( mapThemeIdChanged( const QString& ) ),
-                 this,                                 SIGNAL( mapThemeIdChanged( const QString& ) ) );
+        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( pressed( QModelIndex ) ),
+                 this,                                 SLOT( mapThemeSelected( QModelIndex ) ) );
+        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( customContextMenuRequested( QPoint ) ),
+                 this,                                 SLOT( showContextMenu( QPoint ) ) );
+
         d->m_mapViewUi.mapThemeComboBox->setVisible( false );
     }
 
@@ -119,6 +146,16 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
 
     connect( d->m_mapViewUi.celestialBodyComboBox, SIGNAL( activated( int ) ),
              this,                                 SLOT( setCelestialBody( int ) ) );
+
+    d->m_settings.beginGroup( "Favorites" );
+    if( !d->m_settings.contains( "initialized" ) ) {
+        d->m_settings.setValue( "initialized", true );
+        QDateTime currentDateTime = QDateTime::currentDateTime();
+        d->m_settings.setValue( "Atlas", currentDateTime );
+        d->m_settings.setValue( "OpenStreetMap", currentDateTime );
+        d->m_settings.setValue( "Satellite View", currentDateTime );
+    }
+    d->m_settings.endGroup();
 }
 
 MapViewWidget::~MapViewWidget()
@@ -269,12 +306,92 @@ void MapViewWidget::Private::projectionSelected( int projectionIndex )
     emit q->projectionChanged( (Projection) projectionIndex );
 }
 
+void MapViewWidget::Private::mapThemeSelected( QModelIndex index )
+{
+    mapThemeSelected( index.row() );
+}
+
 void MapViewWidget::Private::mapThemeSelected( int index )
 {
-    QModelIndex columnIndex = m_mapSortProxy.index( index, 1, QModelIndex() );
-    QString currentmaptheme = m_mapSortProxy.data( columnIndex ).toString();
+    const QModelIndex columnIndex = m_mapSortProxy.index( index, 1, QModelIndex() );
+    const QString currentmaptheme = m_mapSortProxy.data( columnIndex ).toString();
+
     mDebug() << Q_FUNC_INFO << currentmaptheme;
+
     emit q->mapThemeIdChanged( currentmaptheme );
+}
+
+QString MapViewWidget::Private::currentThemeName() const
+{
+    const QModelIndex index = m_mapViewUi.marbleThemeSelectView->currentIndex();
+    const QModelIndex columnIndex = m_mapSortProxy.index( index.row(), 0, QModelIndex() );
+
+    return m_mapSortProxy.data( columnIndex ).toString();
+}
+
+QString MapViewWidget::Private::currentThemePath() const
+{
+    const QModelIndex index = m_mapViewUi.marbleThemeSelectView->currentIndex();
+    const QModelIndex columnIndex = m_mapSortProxy.index( index.row(), 1, QModelIndex() );
+
+    return m_mapSortProxy.data( columnIndex ).toString();
+}
+
+void MapViewWidget::Private::showContextMenu( const QPoint& pos )
+{
+    QMenu menu;
+    menu.addAction( "&Create a New Map...", q, SIGNAL( showMapWizard() ) );
+    if( QFileInfo( MarbleDirs::localPath() + "/maps/" + currentThemePath() ).exists() )
+        menu.addAction( tr( "&Delete Map Theme" ), q, SLOT( deleteMap() ) );
+    menu.addAction( tr( "&Upload Map..." ), q, SIGNAL( showUploadDialog() ) );
+    QAction *favAction = menu.addAction( tr( "&Favorite" ), q, SLOT( toggleFavorite() ) );
+    favAction->setCheckable( true );
+    if( isCurrentFavorite() )
+        favAction->setChecked( true );
+    else
+        favAction->setChecked( false );
+    menu.exec( m_mapViewUi.marbleThemeSelectView->mapToGlobal( pos ) );
+}
+
+void MapViewWidget::Private::deleteMap()
+{
+    if(QMessageBox::warning( q,
+                             tr( "Marble" ),
+                             tr( "Are you sure that you want to delete \"%1\"?" ).arg( currentThemeName() ),
+                             QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes )
+    {
+        MapThemeManager::deleteMapTheme( currentThemePath() );
+    }
+}
+
+void MapViewWidget::Private::toggleFavorite()
+{
+    const QModelIndex index = m_mapViewUi.marbleThemeSelectView->currentIndex();
+    const QModelIndex columnIndex = m_mapSortProxy.index( index.row(), 0 );
+
+    if( isCurrentFavorite() ) {
+        m_settings.beginGroup( "Favorites" );
+        m_settings.remove( m_mapSortProxy.data( columnIndex ).toString() );
+    }
+    else {
+        m_settings.beginGroup( "Favorites" );
+        m_settings.setValue( m_mapSortProxy.data( columnIndex ).toString(), QDateTime::currentDateTime() );
+    }
+    m_settings.endGroup();
+
+    m_mapSortProxy.sort( 0 );
+}
+
+bool MapViewWidget::Private::isCurrentFavorite()
+{
+    const QModelIndex index = m_mapViewUi.marbleThemeSelectView->currentIndex();
+    const QModelIndex nameIndex = m_mapSortProxy.index( index.row(), 0 );
+
+    m_settings.beginGroup( "Favorites" );
+    const bool isFavorite = m_settings.contains( m_mapSortProxy.data( nameIndex ).toString() );
+    m_settings.endGroup();
+
+    return isFavorite;
 }
 
 }
