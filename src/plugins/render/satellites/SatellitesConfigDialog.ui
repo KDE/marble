@@ -137,6 +137,9 @@
           </item>
           <item>
            <widget class="QToolButton" name="buttonAddDataSource">
+            <property name="toolTip">
+             <string>Add a new data source (URL).</string>
+            </property>
             <property name="text">
              <string>+</string>
             </property>
@@ -148,6 +151,9 @@
           </item>
           <item>
            <widget class="QToolButton" name="buttonOpenDataSource">
+            <property name="toolTip">
+             <string>Open a new data source from disk.</string>
+            </property>
             <property name="text">
              <string>-</string>
             </property>
@@ -161,6 +167,9 @@
            <widget class="QToolButton" name="buttonRemoveDataSource">
             <property name="enabled">
              <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Remove selected data source.</string>
             </property>
             <property name="text">
              <string>...</string>
@@ -186,7 +195,7 @@
          </property>
          <item>
           <property name="text">
-           <string>(Builtin Data Sources for Earth Satellites)</string>
+           <string>(Built-in Data Sources for Earth Satellites)</string>
           </property>
           <property name="statusTip">
            <string notr="true"/>
