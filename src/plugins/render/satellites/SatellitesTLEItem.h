@@ -23,6 +23,10 @@ namespace Marble {
 class GeoDataTrack;
 class MarbleClock;
 
+/**
+ * An instance SatellitesTLEItem represents an item of a two-line-elements
+ * set catalog.
+ */
 class SatellitesTLEItem : public TrackerPluginItem
 {
     Q_OBJECT

@@ -11,7 +11,7 @@
 #include "SatellitesModel.h"
 
 #include "MarbleDebug.h"
-#include "SatellitesCatalogItem.h"
+#include "SatellitesMSCItem.h"
 #include "SatellitesTLEItem.h"
 
 #include "MarbleClock.h"
@@ -57,7 +57,7 @@ void SatellitesModel::updateVisibility()
     beginUpdateItems();
 
     foreach( QObject *obj, items() ) {
-        SatellitesCatalogItem *oItem = qobject_cast<SatellitesCatalogItem*>(obj);
+        SatellitesMSCItem *oItem = qobject_cast<SatellitesMSCItem*>(obj);
         if( oItem != NULL ) {
             bool enabled = ( ( oItem->relatedBody().toLower() == m_lcPlanet ) &&
                              ( m_enabledIds.contains( oItem->id() ) ) );
@@ -143,9 +143,9 @@ void SatellitesModel::parseCatalog( const QString &id,
 
         planSat->stateToKepler();
 
-        SatellitesCatalogItem *item;
-        item = new SatellitesCatalogItem( name, category, body, id, index++,
-                                          planSat, m_clock );
+        SatellitesMSCItem *item;
+        item = new SatellitesMSCItem( name, category, body, id, index++,
+                                      planSat, m_clock );
         item->placemark()->setVisible( ( body.toLower() == m_lcPlanet ) );
 
         addItem( item );

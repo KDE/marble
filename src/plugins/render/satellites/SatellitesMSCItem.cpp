@@ -9,7 +9,7 @@
 //
 
 
-#include "SatellitesCatalogItem.h"
+#include "SatellitesMSCItem.h"
 
 #include <QtCore>
 
@@ -25,13 +25,13 @@
 
 namespace Marble {
 
-SatellitesCatalogItem::SatellitesCatalogItem( const QString &name, 
-                                              const QString &category,
-                                              const QString &relatedBody,
-                                              const QString &catalog,
-                                              int catalogIndex,
-                                              PlanetarySats *planSat,
-                                              const MarbleClock *clock )
+SatellitesMSCItem::SatellitesMSCItem( const QString &name, 
+                                      const QString &category,
+                                      const QString &relatedBody,
+                                      const QString &catalog,
+                                      int catalogIndex,
+                                      PlanetarySats *planSat,
+                                      const MarbleClock *clock )
     : TrackerPluginItem( name ),
       m_showOrbit( false ),
       m_track( new GeoDataTrack() ),
@@ -60,42 +60,42 @@ SatellitesCatalogItem::SatellitesCatalogItem( const QString &name,
     update();
 }
 
-SatellitesCatalogItem::~SatellitesCatalogItem()
+SatellitesMSCItem::~SatellitesMSCItem()
 {
     delete m_planSat;
 }
 
-QString SatellitesCatalogItem::name() const
+QString SatellitesMSCItem::name() const
 {
     return m_name;
 }
 
-QString SatellitesCatalogItem::category() const
+QString SatellitesMSCItem::category() const
 {
     return m_category;
 }
 
-QString SatellitesCatalogItem::relatedBody() const
+QString SatellitesMSCItem::relatedBody() const
 {
     return m_relatedBody;
 }
 
-QString SatellitesCatalogItem::catalog() const
+QString SatellitesMSCItem::catalog() const
 {
     return m_catalog;
 }
 
-int SatellitesCatalogItem::catalogIndex() const
+int SatellitesMSCItem::catalogIndex() const
 {
     return m_catalogIndex;
 }
 
-QString SatellitesCatalogItem::id() const
+QString SatellitesMSCItem::id() const
 {
     return QString( "%1:%2" ).arg( catalog() ).arg( catalogIndex() );
 }
 
-void SatellitesCatalogItem::setDescription()
+void SatellitesMSCItem::setDescription()
 {
     QString description =
       QObject::tr( "Object name: %1 <br />"
@@ -110,7 +110,7 @@ void SatellitesCatalogItem::setDescription()
      placemark()->setDescription( description );
 }
 
-void SatellitesCatalogItem::update()
+void SatellitesMSCItem::update()
 {
     if( !isEnabled() ) {
         return;
@@ -138,7 +138,7 @@ void SatellitesCatalogItem::update()
     addTrackPointAt( m_clock->dateTime() );
 }
 
-void SatellitesCatalogItem::addTrackPointAt( const QDateTime &dateTime )
+void SatellitesMSCItem::addTrackPointAt( const QDateTime &dateTime )
 {
     double lng    = 0.;
     double lat    = 0.;
@@ -160,5 +160,5 @@ void SatellitesCatalogItem::addTrackPointAt( const QDateTime &dateTime )
 
 } // namespace Marble
 
-#include "SatellitesCatalogItem.moc"
+#include "SatellitesMSCItem.moc"
 
