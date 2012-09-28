@@ -168,9 +168,9 @@ double SatellitesTLEItem::inclination()
 }
 
 GeoDataCoordinates SatellitesTLEItem::fromTEME( double x,
-                                               double y,
-                                               double z,
-                                               double gmst )
+                                                double y,
+                                                double z,
+                                                double gmst )
 {
     double lon = atan2( y, x );
     // Rotate the angle by gmst (the origin goes from the vernal equinox
