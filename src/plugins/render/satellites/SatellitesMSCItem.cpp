@@ -29,6 +29,8 @@ SatellitesMSCItem::SatellitesMSCItem( const QString &name,
                                       const QString &category,
                                       const QString &relatedBody,
                                       const QString &catalog,
+                                      const QDateTime &missionStart,
+                                      const QDateTime &missionEnd,
                                       int catalogIndex,
                                       PlanetarySats *planSat,
                                       const MarbleClock *clock )
@@ -41,7 +43,9 @@ SatellitesMSCItem::SatellitesMSCItem( const QString &name,
       m_category( category ),
       m_relatedBody( relatedBody ),
       m_catalog( catalog ),
-      m_catalogIndex( catalogIndex )
+      m_catalogIndex( catalogIndex ),
+      m_missionStart( missionStart ),
+      m_missionEnd( missionEnd )
 {
     placemark()->setVisualCategory( GeoDataFeature::Satellite );
     placemark()->setZoomLevel( 0 );
@@ -95,6 +99,16 @@ QString SatellitesMSCItem::id() const
     return QString( "%1:%2" ).arg( catalog() ).arg( catalogIndex() );
 }
 
+const QDateTime& SatellitesMSCItem::missionStart() const
+{
+    return m_missionStart;
+}
+
+const QDateTime& SatellitesMSCItem::missionEnd() const
+{
+    return m_missionEnd;
+}
+
 void SatellitesMSCItem::setDescription()
 {
     QString description =
@@ -112,7 +126,15 @@ void SatellitesMSCItem::setDescription()
 
 void SatellitesMSCItem::update()
 {
-    if( !isEnabled() ) {
+    if( m_missionStart.isValid() ) {
+        setVisible( ( m_clock->dateTime() > m_missionStart ) );
+    }
+
+    if( m_missionEnd.isValid() ) {
+        setVisible( ( m_clock->dateTime() < m_missionEnd ) );
+    }
+
+    if( !isEnabled() || !isVisible() ) {
         return;
     }
 

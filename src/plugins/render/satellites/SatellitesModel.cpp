@@ -143,9 +143,18 @@ void SatellitesModel::parseCatalog( const QString &id,
 
         planSat->stateToKepler();
 
+        QDateTime missionStart, missionEnd;
+        if( elms[3].toUInt() > 0 ) {
+            missionStart = QDateTime::fromTime_t( elms[3].toUInt() );
+        }
+        if( elms[4].toUInt() > 0 ) {
+            missionEnd = QDateTime::fromTime_t( elms[4].toUInt() );
+        }
+
         SatellitesMSCItem *item;
-        item = new SatellitesMSCItem( name, category, body, id, index++,
-                                      planSat, m_clock );
+        item = new SatellitesMSCItem( name, category, body, id,
+                                      missionStart, missionEnd,
+                                      index++, planSat, m_clock );
         item->placemark()->setVisible( ( body.toLower() == m_lcPlanet ) );
 
         addItem( item );

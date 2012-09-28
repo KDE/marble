@@ -37,6 +37,8 @@ public:
                        const QString &category,
                        const QString &relatedBody,
                        const QString &catalog,
+                       const QDateTime &missionStart,
+                       const QDateTime &missionEnd,
                        int catalogIndex,
                        PlanetarySats *planSat,
                        const MarbleClock *clock );
@@ -48,6 +50,9 @@ public:
     QString catalog() const;
     int catalogIndex() const;
     QString id() const;
+
+    const QDateTime& missionStart() const;
+    const QDateTime& missionEnd() const;
 
     void update();
     void showOrbit( bool show );
@@ -72,6 +77,9 @@ private:
     double m_m0;
     double m_a;
     double m_n0;
+
+    const QDateTime m_missionStart;
+    const QDateTime m_missionEnd;
 
     void setDescription();
     void addTrackPointAt( const QDateTime &dateTime );

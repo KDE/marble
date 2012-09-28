@@ -66,7 +66,6 @@ public:
         foreach( TrackerPluginItem *item, m_itemVector ) {
             int idx = m_document->childPosition( item->placemark() );
             if( item->isEnabled() && idx == -1 ) {
-                item->placemark()->setVisible( item->isEnabled() );
                 m_document->append( item->placemark() );
             }
             if( !item->isEnabled() && idx > -1 ) {

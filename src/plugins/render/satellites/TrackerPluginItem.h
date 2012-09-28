@@ -57,6 +57,16 @@ public:
     virtual void setEnabled( bool enabled );
 
     /**
+     * Return wheter the item is visible or invisible.
+     */
+    virtual bool isVisible() const;
+
+    /**
+     * Set item visible/invisible according to @p visible.
+     */
+    virtual void setVisible( bool visible );
+
+    /**
      * Reimplement this method to update the placemark, for example to change its coordinates.
      * If this item is in a TrackerPluginModel, this method will be called regularly.
      */

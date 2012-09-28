@@ -21,7 +21,7 @@ class TrackerPluginItemPrivate
 public:
     TrackerPluginItemPrivate( GeoDataPlacemark *placemark )
         : m_placemark( placemark ),
-          m_enabled ( false )
+          m_enabled( false )
     {
     }
 
@@ -52,6 +52,16 @@ bool TrackerPluginItem::isEnabled() const
 void TrackerPluginItem::setEnabled( bool enabled )
 {
     d->m_enabled = enabled;
+}
+
+bool TrackerPluginItem::isVisible() const
+{
+    return d->m_placemark->isVisible();
+}
+
+void TrackerPluginItem::setVisible( bool visible )
+{
+    d->m_placemark->setVisible( visible );
 }
 
 } // namespace Marble
