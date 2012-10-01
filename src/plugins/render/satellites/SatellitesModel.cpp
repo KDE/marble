@@ -120,7 +120,9 @@ void SatellitesModel::parseCatalog( const QString &id,
 
         QStringList elms = line.split(", ");
 
-        if( elms.size() != 13 ) {
+        // check for '<' instead of '==' in order to allow fields to be added
+        // to catalogs later without breaking the code
+        if( elms.size() < 14 ) {
             mDebug() << "Skipping line:" << elms << "(" << line << ")";
             continue;
         }
@@ -137,9 +139,9 @@ void SatellitesModel::parseCatalog( const QString &id,
         planSat->setPlanet( cbody );
 
         planSat->setStateVector(
-            elms[6].toFloat() - 2400000.5,
-            elms[7].toFloat(),  elms[8].toFloat(),  elms[9].toFloat(),
-            elms[10].toFloat(), elms[11].toFloat(), elms[12].toFloat() );
+            elms[7].toFloat() - 2400000.5,
+            elms[8].toFloat(),  elms[9].toFloat(),  elms[10].toFloat(),
+            elms[11].toFloat(), elms[12].toFloat(), elms[13].toFloat() );
 
         planSat->stateToKepler();
 
