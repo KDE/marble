@@ -1,0 +1,9 @@
+
+This code allows to calculate spacecraft orbits/positions around other
+planets and has been contributed by Gerhard Holtkamp. See license
+headers in the source code files for detailed license information.
+
+     astrolib - Standard astronomy routines
+       attlib - Routines to handle matrix and vector operations in 3D
+planetarySats - Spacecraft orbit/position calculation routines
+

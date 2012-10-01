@@ -33,11 +33,12 @@ public:
     int childrenCount() const;
 
     void appendChild( SatellitesConfigAbstractItem *item );
+    void clear();
 
 private:
     QVector<SatellitesConfigAbstractItem *> m_children;
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_SATELLITESCONFIGNODEITEM_H
