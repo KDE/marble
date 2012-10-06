@@ -61,7 +61,7 @@ void OSRMRunner::retrieveRoute( const RouteRequest *route )
         return;
     }
 
-    QString url = "http://router.project-osrm.org/viaroute?output=json&geomformat=cmp&instructions=true";
+    QString url = "http://router.project-osrm.org/viaroute?output=json&instructions=true";
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
     bool appendChecksum = false;
     typedef QPair<GeoDataCoordinates,QString> CachePair;
