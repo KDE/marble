@@ -35,7 +35,7 @@
                 <vectortile name="geojson_data" expire="604800" >
                     <sourcedir format="JS"> earth/vectorosm </sourcedir>
                     <tileSize width="256" height="256" />
-                    <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="20" mode="OpenStreetMap" />
+                    <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="18" mode="OpenStreetMap" />
                     <projection name="Mercator" />
                     <downloadUrl protocol="http" host="osmosnimki.ru" path="/vtile/" />
                     <downloadPolicy usage="Browse" maximumConnections="20" />
