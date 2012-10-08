@@ -1113,7 +1113,18 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
                     settings.value("quitLongitude", 0.0).toDouble(),
                     settings.value("quitLatitude", 0.0).toDouble() );
                 if (! isDistanceOverwritten) {
-                    m_controlView->marbleWidget()->zoomView( settings.value("quitZoom", 1000).toInt() );
+                    if ( settings.contains("quitRadius") ) {
+                        // provide a default value in case "quitRadius" contains garbage
+                        m_controlView->marbleWidget()->setRadius( settings.value("quitRadius", 1350).toInt() );
+                    }
+                    else if ( settings.contains("quitZoom") ) {
+                        // provide a default value in case "quitZoom" contains garbage
+                        m_controlView->marbleWidget()->zoomView( settings.value("quitZoom", 1000).toInt() );
+                    }
+                    else {
+                        // set radius to 1350 (Atlas theme's "sharp" radius) if Marble starts with a clean config
+                        m_controlView->marbleWidget()->setRadius( 1350 );
+                    }
                 }
                 break;
             case Marble::ShowHomeLocation:
@@ -1296,11 +1307,11 @@ void MainWindow::writeSettings()
          // Get the 'quit' values from the widget and store them in the settings.
          qreal  quitLon = m_controlView->marbleWidget()->centerLongitude();
          qreal  quitLat = m_controlView->marbleWidget()->centerLatitude();
-         int    quitZoom = m_controlView->marbleWidget()->zoom();
+         const int quitRadius = m_controlView->marbleWidget()->radius();
 
          settings.setValue( "quitLongitude", quitLon );
          settings.setValue( "quitLatitude", quitLat );
-         settings.setValue( "quitZoom", quitZoom );
+         settings.setValue( "quitRadius", quitRadius );
 
          settings.setValue( "lockFloatItemPositions", m_lockFloatItemsAct->isChecked() );
          settings.setValue( "kineticScrolling", m_controlView->marbleWidget()->inputHandler()->kineticScrollingEnabled() );
