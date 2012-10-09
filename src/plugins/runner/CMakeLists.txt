@@ -1,5 +1,6 @@
 # Search and/or reverse geocoding
 add_subdirectory( hostip )
+add_subdirectory( json )
 add_subdirectory( latlon )
 add_subdirectory( local-osm-search )
 add_subdirectory( localdatabase )
@@ -26,7 +27,7 @@ add_subdirectory( osm )
 add_subdirectory( pnt )
 add_subdirectory( log )
 
-find_package( libshp )
+macro_optional_find_package( libshp )
 if( LIBSHP_FOUND )
   add_subdirectory( shp )
 endif( LIBSHP_FOUND )

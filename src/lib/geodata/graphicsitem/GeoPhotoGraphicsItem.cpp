@@ -40,12 +40,8 @@ QString GeoPhotoGraphicsItem::photoPath() const
     return m_photoPath;
 }
 
-void GeoPhotoGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
-                                  const QString& renderPos, GeoSceneLayer* layer )
-{   
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
-
+void GeoPhotoGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport )
+{
     /** @todo FIXME: need access to MarbleModel here ideally */
     qreal const planetRadius = EARTH_RADIUS;
     /** @todo: Taken from MarbleWidgetPrivate */

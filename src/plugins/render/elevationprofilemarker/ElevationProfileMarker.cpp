@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright      2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 // Copyright 2011-2012 Florian Eßer <f.esser@rwth-aachen.de>
 //
 
@@ -133,6 +133,9 @@ bool ElevationProfileMarker::isInitialized() const
 
 bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewport, const QString& renderPos, GeoSceneLayer* layer )
 {
+    Q_UNUSED( renderPos )
+    Q_UNUSED( layer )
+
     if ( !m_markerPlacemark )
         return true;
 
@@ -177,7 +180,7 @@ bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewpo
 
         painter->save();
 
-        m_markerItem.paintEvent( painter, viewport, renderPos, layer );
+        m_markerItem.paintEvent( painter, viewport );
 
         painter->restore();
     }

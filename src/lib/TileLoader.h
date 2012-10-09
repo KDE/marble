@@ -16,9 +16,7 @@
 #ifndef MARBLE_TILELOADER_H
 #define MARBLE_TILELOADER_H
 
-#include <QtCore/QHash>
 #include <QtCore/QObject>
-#include <QtCore/QSet>
 #include <QtCore/QString>
 #include <QtGui/QImage>
 
@@ -47,11 +45,8 @@ class TileLoader: public QObject
 
     explicit TileLoader( HttpDownloadManager * const );
 
-    void setTextureLayers( const QVector<GeoSceneTexture const *> &textureLayers );
-
-    QImage loadTile( TileId const & tileId, DownloadUsage const );
-    void reloadTile( TileId const &tileId, DownloadUsage const );
-    void downloadTile( TileId const & tileId );
+    QImage loadTile( GeoSceneTexture const *textureLayer, TileId const & tileId, DownloadUsage const );
+    void downloadTile( GeoSceneTexture const *textureLayer, TileId const &tileId, DownloadUsage const );
 
     static int maximumTileLevel( GeoSceneTexture const & texture );
 
@@ -67,7 +62,7 @@ class TileLoader: public QObject
       * - Expired when it has been downloaded, but is too old (as per .dgml expiration time)
       * - Available when it has been downloaded and is not expired
       */
-    TileStatus tileStatus( const TileId &tileId ) const;
+    static TileStatus tileStatus( GeoSceneTexture const *textureLayer, const TileId &tileId );
 
  public Q_SLOTS:
     void updateTile( QByteArray const & imageData, QString const & tileId );
@@ -79,13 +74,9 @@ class TileLoader: public QObject
     void tileCompleted( TileId const & tileId, QImage const & tileImage );
 
  private:
-    GeoSceneTexture const * findTextureLayer( TileId const & ) const;
     static QString tileFileName( GeoSceneTexture const * textureLayer, TileId const & );
-    void triggerDownload( TileId const &, DownloadUsage const );
-    QImage scaledLowerLevelTile( TileId const & ) const;
-
-    // TODO: comment about uint hash key
-    QHash<uint, GeoSceneTexture const *> m_textureLayers;
+    void triggerDownload( GeoSceneTexture const *textureLayer, TileId const &, DownloadUsage const );
+    QImage scaledLowerLevelTile( GeoSceneTexture const *textureLayer, TileId const & ) const;
 };
 
 }

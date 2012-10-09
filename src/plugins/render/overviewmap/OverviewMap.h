@@ -73,8 +73,7 @@ class OverviewMap : public AbstractFloatItem, public DialogConfigurationInterfac
 
     void changeViewport( ViewportParams *viewport );
 
-    void paintContent( GeoPainter *painter, ViewportParams *viewport,
-                       const QString& renderPos, GeoSceneLayer * layer = 0 );
+    void paintContent( QPainter *painter );
 
     /**
      * @return: The settings of the item.

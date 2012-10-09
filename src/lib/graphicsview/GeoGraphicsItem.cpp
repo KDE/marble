@@ -21,13 +21,24 @@
 using namespace Marble;
 
 GeoGraphicsItem::GeoGraphicsItem()
-    : MarbleGraphicsItem( new GeoGraphicsItemPrivate( this ) )
+    : d( new GeoGraphicsItemPrivate )
 {
     setFlag( ItemIsVisible, true );
 }
 
 GeoGraphicsItem::~GeoGraphicsItem()
 {
+    delete d;
+}
+
+bool GeoGraphicsItem::visible() const
+{
+    return d->m_flags & ItemIsVisible;
+}
+
+void GeoGraphicsItem::setVisible( bool visible )
+{
+    setFlag( ItemIsVisible, visible );
 }
 
 GeoDataCoordinates GeoGraphicsItem::coordinate() const
@@ -87,12 +98,6 @@ qreal GeoGraphicsItem::zValue() const
 void GeoGraphicsItem::setZValue( qreal z )
 {
     p()->m_zValue = z;
-    update();
-}
-
-QList<QPointF> GeoGraphicsItem::positions() const
-{
-    return p()->positions();
 }
 
 GeoGraphicsItemPrivate *GeoGraphicsItem::p() const

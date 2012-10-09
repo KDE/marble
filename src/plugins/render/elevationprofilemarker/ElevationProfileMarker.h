@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright      2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef ELEVATIONPROFILEMARKER_H
@@ -13,8 +13,8 @@
 
 #include "RenderPlugin.h"
 
+#include "BillboardGraphicsItem.h"
 #include "GeoDataCoordinates.h"
-#include "GeoGraphicsItem.h"
 #include "LabelGraphicsItem.h"
 
 
@@ -78,7 +78,7 @@ class ElevationProfileMarker : public RenderPlugin
     GeoDataPlacemark *m_markerPlacemark;
     GeoDataCoordinates m_currentPosition;
 
-    GeoGraphicsItem m_markerItem;
+    BillboardGraphicsItem m_markerItem;
     LabelGraphicsItem m_markerIcon;
     LabelGraphicsItem m_markerText;
 };

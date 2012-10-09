@@ -11,7 +11,7 @@
 #include "OsmWayTagHandler.h"
 
 #include "GeoParser.h"
-#include "OsmNodeFactory.h"
+#include "OsmWayFactory.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
@@ -29,6 +29,8 @@ static GeoTagHandlerRegistrar osmWayTagHandler( GeoParser::QualifiedName( osmTag
 
 GeoNode* OsmWayTagHandler::parse( GeoParser& parser ) const
 {
+    // Osm Way http://wiki.openstreetmap.org/wiki/Data_Primitives#Way
+
     Q_ASSERT( parser.isStartElement() );
 
     GeoDataDocument* doc = geoDataDoc( parser );
@@ -37,8 +39,14 @@ GeoNode* OsmWayTagHandler::parse( GeoParser& parser ) const
     GeoDataLineString *polyline = new GeoDataLineString();
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
     placemark->setGeometry( polyline );
+
+    // At the begining visibility = false. Afterwards when parsing
+    // the tags for the placemark it will decide if it should be displayed or not
     placemark->setVisible( false );
     doc->append( placemark );
+
+    osm::OsmWayFactory::appendLine( parser.attribute( "id" ).toULongLong(), polyline );
+
     return polyline;
 }
 

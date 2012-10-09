@@ -97,6 +97,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_timeControlDialog( 0 ),
         m_downloadRegionDialog( 0 ),
         m_downloadRegionAction( 0 ),
+        m_kineticScrollingAction( 0 ),
         m_osmEditAction( 0 ),
         m_zoomLabel( 0 ),
         m_mapViewWindow( 0 ),
@@ -251,6 +252,10 @@ void MainWindow::createActions()
      m_workOfflineAct->setCheckable( true );
      connect(m_workOfflineAct, SIGNAL(triggered( bool )), this, SLOT( workOffline( bool )));
 
+     m_kineticScrollingAction = new QAction( tr( "&Kinetic Scrolling" ), this);
+     m_kineticScrollingAction->setCheckable( true );
+     connect( m_kineticScrollingAction, SIGNAL( triggered( bool ) ), this, SLOT( toggleKineticScrolling( bool ) ) );
+
      m_showAtmosphereAct = new QAction( tr("&Atmosphere"), this);
      m_showAtmosphereAct->setCheckable( true );
      m_showAtmosphereAct->setStatusTip(tr("Show Atmosphere"));
@@ -317,6 +322,7 @@ void MainWindow::createMenus()
     // Do not create too many menu entries on a MID
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         menuBar()->addAction( m_workOfflineAct );
+        menuBar()->addAction( m_kineticScrollingAction );
         //menuBar()->addAction( m_sideBarAct );
         /** @todo: Full screen cannot be left on Maemo currently (shortcuts not working) */
         //menuBar()->addAction( m_fullScreenAct );
@@ -689,6 +695,34 @@ void MainWindow::showFullScreen( bool isChecked )
     m_fullScreenAct->setChecked( isChecked ); // Sync state with the GUI
 }
 
+#ifdef Q_WS_MAEMO_5
+void MainWindow::setOrientation( Orientation orientation )
+{
+    switch ( orientation ) {
+    case OrientationAutorotate:
+       setAttribute( Qt::WA_Maemo5AutoOrientation );
+       break;
+    case OrientationLandscape:
+       setAttribute( Qt::WA_Maemo5LandscapeOrientation );
+       break;
+    case OrientationPortrait:
+       setAttribute( Qt::WA_Maemo5PortraitOrientation );
+       break;
+    }
+}
+
+MainWindow::Orientation MainWindow::orientation() const
+{
+    if ( testAttribute( Qt::WA_Maemo5LandscapeOrientation ) )
+        return OrientationLandscape;
+
+    if ( testAttribute( Qt::WA_Maemo5PortraitOrientation ) )
+        return OrientationPortrait;
+
+    return OrientationAutorotate;
+}
+#endif // Q_WS_MAEMO_5
+
 void MainWindow::showSideBar( bool isChecked )
 {
     m_controlView->setSideBarShown( isChecked );
@@ -748,6 +782,12 @@ void MainWindow::workOffline( bool offline )
     m_controlView->marbleControl()->setWorkOffline( offline );
 
     m_workOfflineAct->setChecked( offline ); // Sync state with the GUI
+}
+
+void MainWindow::toggleKineticScrolling( bool enabled )
+{
+    m_controlView->marbleWidget()->inputHandler()->setKineticScrollingEnabled( enabled );
+    m_kineticScrollingAction->setChecked( enabled ); // Sync state with the GUI
 }
 
 void MainWindow::showAtmosphere( bool isChecked )
@@ -1012,6 +1052,10 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          resize(settings.value("size", QSize(640, 480)).toSize());
          move(settings.value("pos", QPoint(200, 200)).toPoint());
          showFullScreen(settings.value("fullScreen", false ).toBool());
+#ifdef Q_WS_MAEMO_5
+         const Orientation orientation = (Orientation)settings.value( "orientation", (int)OrientationLandscape ).toInt();
+         setOrientation( orientation );
+#endif // Q_WS_MAEMO_5
          QByteArray sideBarState = settings.value( "sideBarState", QByteArray() ).toByteArray();
          m_controlView->setSideBarState( sideBarState );
          if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
@@ -1087,8 +1131,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          m_lockFloatItemsAct->setChecked( isLocked );
          lockPosition(isLocked);
 
-         bool const kineticScrolling = settings.value( "kineticScrolling", !smallScreen ).toBool();
-         m_controlView->marbleWidget()->inputHandler()->setKineticScrollingEnabled( kineticScrolling );
+         toggleKineticScrolling( settings.value( "kineticScrolling", !smallScreen ).toBool() );
      settings.endGroup();
 
      settings.beginGroup( "Sun" );
@@ -1221,6 +1264,9 @@ void MainWindow::writeSettings()
          settings.setValue( "size", size() );
          settings.setValue( "pos", pos() );
          settings.setValue( "fullScreen", m_fullScreenAct->isChecked() );
+#ifdef Q_WS_MAEMO_5
+         settings.setValue( "orientation", (int)orientation() );
+#endif // Q_WS_MAEMO_5
          settings.setValue( "sideBar", m_sideBarAct->isChecked() );
          settings.setValue( "sideBarState", m_controlView->sideBarState() );
          settings.setValue( "statusBar", m_statusBarAct->isChecked() );
@@ -1439,12 +1485,9 @@ void MainWindow::disconnectDownloadRegionDialog()
 void MainWindow::downloadRegion()
 {
     Q_ASSERT( m_downloadRegionDialog );
-    QString const mapThemeId = m_controlView->marbleWidget()->mapThemeId();
-    QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
-    mDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
     QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
     if ( !pyramid.isEmpty() ) {
-        m_controlView->marbleWidget()->downloadRegion( sourceDir, pyramid );
+        m_controlView->marbleWidget()->downloadRegion( pyramid );
     }
 }
 
@@ -1461,13 +1504,15 @@ void MainWindow::printMapScreenShot()
 void MainWindow::showMapViewDialog()
 {
     if( !m_mapViewWindow ) {
-        m_mapViewWindow = new StackableWindow( this );
+        m_mapViewWindow = new QDialog( this );
         m_mapViewWindow->setWindowTitle( tr( "Map View - Marble" ) );
+
+        QVBoxLayout *layout = new QVBoxLayout;
+        m_mapViewWindow->setLayout( layout );
 
         MapViewWidget *mapViewWidget = new MapViewWidget( m_mapViewWindow );
         mapViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
-
-        m_mapViewWindow->setCentralWidget( mapViewWidget );
+        layout->addWidget( mapViewWidget );
     }
 
     m_mapViewWindow->show();
@@ -1506,16 +1551,6 @@ void MainWindow::showRoutingDialog()
         QAction* saveAction = new QAction( tr( "Save Route..." ), this );
         connect( saveAction, SIGNAL( triggered() ), m_routingWidget, SLOT( saveRoute() ) );
         m_routingWindow->menuBar()->addAction( saveAction );
-
-        QAction* reverseAction = new QAction( tr( "Reverse Route" ), this );
-        RoutingManager * const manager = m_controlView->marbleModel()->routingManager();
-        connect( reverseAction, SIGNAL( triggered() ), manager, SLOT( reverseRoute() ) );
-        m_routingWindow->menuBar()->addAction( reverseAction );
-
-        /** @todo: Change 'Clear' to 'Clear Route' after string freeze */
-        QAction* clearAction = new QAction( tr( "Clear" ), this );
-        connect( clearAction, SIGNAL( triggered() ), manager, SLOT( clearRoute() ) );
-        m_routingWindow->menuBar()->addAction( clearAction );
 
         m_routingWindow->setCentralWidget( scrollArea );
     }

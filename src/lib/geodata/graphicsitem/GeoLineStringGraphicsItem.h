@@ -31,8 +31,7 @@ public:
 
     virtual GeoDataLatLonAltBox& latLonAltBox() const;
 
-    virtual void paint( GeoPainter* painter, ViewportParams *viewport,
-                        const QString &renderPos, GeoSceneLayer *layer );
+    virtual void paint( GeoPainter* painter, const ViewportParams *viewport );
 
 protected:
     const GeoDataLineString *m_lineString;

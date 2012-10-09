@@ -123,7 +123,6 @@ void TextureLayer::Private::updateTextureLayers()
     }
 
     m_tileLoader.setTextureLayers( result );
-    m_loader.setTextureLayers( result );
     m_pixmapCache.clear();
 }
 

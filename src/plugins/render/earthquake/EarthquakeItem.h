@@ -36,8 +36,7 @@ public:
     bool initialized();
 
     // Here the item gets painted
-    void paint( GeoPainter *painter, ViewportParams *viewport,
-                const QString& renderPos, GeoSceneLayer * layer = 0 );
+    void paint( QPainter *painter );
 
     bool operator<( const AbstractDataPluginItem *other ) const;
 

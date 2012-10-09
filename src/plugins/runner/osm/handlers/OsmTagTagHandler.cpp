@@ -68,11 +68,12 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
         return 0;
     }
 
-    if ( parentItem.represents( osmTag_way ) )
+    // Ways or relations can represent closed areas such as buildings
+    if ( parentItem.represents( osmTag_way ) || parentItem.represents( osmTag_relation ) )
     {
         Q_ASSERT( placemark );
 
-        //Convert area ways to polygons
+        //Convert area ways or relations to polygons
         if( !dynamic_cast<GeoDataPolygon*>( geometry ) && OsmGlobals::tagNeedArea( key + "=" + value ) )
         {
             placemark = convertWayToPolygon( doc, placemark, geometry );

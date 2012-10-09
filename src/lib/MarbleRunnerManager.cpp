@@ -32,6 +32,7 @@
 #include <QtCore/QVector>
 #include <QtCore/QThreadPool>
 #include <QtCore/QTimer>
+#include <QtCore/QFileInfo>
 
 namespace Marble
 {
@@ -231,11 +232,14 @@ void MarbleRunnerManagerPrivate::addSearchResult( QVector<GeoDataPlacemark*> res
 
     m_modelMutex.lock();
     int start = m_placemarkContainer.size();
+    bool distanceCompare = ( m_marbleModel && ( m_marbleModel->planet() ) );
     for( int i=0; i<result.size(); ++i ) {
         bool same = false;
         for ( int j=0; j<m_placemarkContainer.size(); ++j ) {
-            if ( distanceSphere( result[i]->coordinate(), m_placemarkContainer[j]->coordinate() )
-                 * m_marbleModel->planet()->radius() < 1 ) {
+            if ( distanceCompare &&
+                 ( distanceSphere( result[i]->coordinate(),
+                                   m_placemarkContainer[j]->coordinate() )
+                   * m_marbleModel->planet()->radius() < 1 ) ) {
                 same = true;
             }
         }
@@ -371,12 +375,18 @@ QVector<GeoDataDocument*> MarbleRunnerManager::searchRoute( const RouteRequest *
 void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role )
 {
     QList<const ParseRunnerPlugin*> plugins = d->m_pluginManager->parsingRunnerPlugins();
+    QFileInfo const fileInfo( fileName );
+    QString const suffix = fileInfo.suffix();
+    QString const completeSuffix = fileInfo.completeSuffix();
     foreach( const ParseRunnerPlugin *plugin, plugins ) {
-        ParsingTask *task = new ParsingTask( plugin, this, fileName, role );
-        connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupParsingTask(RunnerTask*) ) );
-        mDebug() << "parse task " << plugin->nameId() << " " << (long)task;
-        d->m_parsingTasks << task;
-        QThreadPool::globalInstance()->start( task );
+        QStringList const extensions = plugin->fileExtensions();
+        if ( extensions.isEmpty() || extensions.contains( suffix ) || extensions.contains( completeSuffix ) ) {
+            ParsingTask *task = new ParsingTask( plugin, this, fileName, role );
+            connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupParsingTask(RunnerTask*) ) );
+            mDebug() << "parse task " << plugin->nameId() << " " << (long)task;
+            d->m_parsingTasks << task;
+            QThreadPool::globalInstance()->start( task );
+        }
     }
 
     if ( plugins.isEmpty() ) {
@@ -387,8 +397,11 @@ void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role 
 
 void MarbleRunnerManagerPrivate::addParsingResult( GeoDataDocument *document, const QString& error )
 {
-    if ( document || !error.isEmpty() ) {
+    if ( document ) {
         m_fileResult = document;
+    }
+
+    if ( document || !error.isEmpty() ) {
         emit q->parsingFinished( document, error );
     }
 }

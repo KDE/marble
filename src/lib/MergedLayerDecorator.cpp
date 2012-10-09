@@ -139,7 +139,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
         mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId << textureLayer->tileSize();
 
-        const QImage tileImage = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
+        const QImage tileImage = d->m_tileLoader->loadTile( textureLayer, tileId, DownloadBrowse );
         const Blending *blending = d->m_blendingFactory.findBlending( textureLayer->blending() );
         if ( blending == 0 && !textureLayer->blending().isEmpty() ) {
             mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
@@ -167,23 +167,13 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
     return d->createTile( tiles );
 }
 
-void MergedLayerDecorator::downloadStackedTile( const TileId &id, const QVector<GeoSceneTexture const *> &textureLayers )
+void MergedLayerDecorator::downloadStackedTile( const TileId &id, const QVector<GeoSceneTexture const *> &textureLayers, DownloadUsage usage )
 {
     foreach ( const GeoSceneTexture *textureLayer, textureLayers ) {
         const TileId tileId( textureLayer->sourceDir(), id.zoomLevel(), id.x(), id.y() );
-        if ( d->m_tileLoader->tileStatus( tileId ) != TileLoader::Available ) {
-            d->m_tileLoader->downloadTile( tileId );
+        if ( TileLoader::tileStatus( textureLayer, tileId ) != TileLoader::Available ) {
+            d->m_tileLoader->downloadTile( textureLayer, tileId, usage );
         }
-    }
-}
-
-void MergedLayerDecorator::reloadTile( const StackedTile &stackedTile )
-{
-    foreach ( QSharedPointer<TextureTile> const & tile, stackedTile.tiles() ) {
-        // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
-        // but since "reload" or "refresh" seems to be a common action of a browser and it
-        // allows for more connections (in our model), use "DownloadBrowse"
-        d->m_tileLoader->reloadTile( tile->id(), DownloadBrowse );
     }
 }
 

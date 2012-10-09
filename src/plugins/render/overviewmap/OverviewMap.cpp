@@ -14,6 +14,7 @@
 #include <QtCore/QStringList>
 #include <QtGui/QCursor>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 #include <QtGui/QFileDialog>
 #include <QtGui/QHBoxLayout>
@@ -25,7 +26,6 @@
 #include "MarbleModel.h"
 #include "ui_OverviewMapConfigWidget.h"
 
-#include "GeoPainter.h"
 #include "GeoDataPoint.h"
 #include "ViewportParams.h"
 #include "MarbleWidget.h"
@@ -176,15 +176,9 @@ void OverviewMap::changeViewport( ViewportParams *viewport )
     }
 }
 
-void OverviewMap::paintContent( GeoPainter *painter, ViewportParams *viewport,
-                                const QString& renderPos, GeoSceneLayer * layer )
+void OverviewMap::paintContent( QPainter *painter )
 {
-    Q_UNUSED( layer );
-    Q_UNUSED( renderPos );
-
     painter->save();
-
-    painter->autoMapQuality();
 
     QRectF mapRect( contentRect() );
 
@@ -250,8 +244,8 @@ void OverviewMap::paintContent( GeoPainter *painter, ViewportParams *viewport,
     qreal xSouth = mapRect.height() / 2.0
                     - mapRect.height() / M_PI * m_latLonAltBox.south();
 
-    qreal lon = viewport->centerLongitude();
-    qreal lat = viewport->centerLatitude();
+    qreal lon = m_centerLon;
+    qreal lat = m_centerLat;
     GeoDataPoint::normalizeLonLat( lon, lat );
     qreal x = mapRect.width() / 2.0 + mapRect.width() / ( 2.0 * M_PI ) * lon;
     qreal y = mapRect.height() / 2.0 - mapRect.height() / M_PI * lat;

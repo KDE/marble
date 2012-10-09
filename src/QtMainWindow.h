@@ -40,6 +40,14 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+#ifdef Q_WS_MAEMO_5
+    enum Orientation {
+        OrientationAutorotate,
+        OrientationLandscape,
+        OrientationPortrait
+    };
+#endif
+
 public:
     explicit MainWindow(const QString& marbleDataPath = QString(),
                         const QVariantMap& cmdLineSettings = QVariantMap(),
@@ -51,6 +59,10 @@ public:
     MarbleWidget* marbleWidget() {
         return m_controlView->marbleWidget();
     }
+
+#ifdef Q_WS_MAEMO_5
+    Orientation orientation() const;
+#endif
 
 protected:
     void  closeEvent(QCloseEvent *event);
@@ -82,6 +94,7 @@ private Q_SLOTS:
     void  showDownloadRegionDialog();
     void  printMapScreenShot();
     void  workOffline( bool );
+    void  toggleKineticScrolling( bool );
     void  showMapWizard();
 
     // Edit Menu
@@ -103,6 +116,9 @@ private Q_SLOTS:
 
     // Settings Menu
     void  showFullScreen( bool );
+#ifdef Q_WS_MAEMO_5
+    void  setOrientation( Orientation orientation );
+#endif
     void  showSideBar( bool );
     void  showStatusBar( bool );
     void  setupStatusBar();
@@ -165,6 +181,7 @@ private:
     QAction *m_printPreviewAct;
     QAction *m_printAct;
     QAction *m_workOfflineAct;
+    QAction *m_kineticScrollingAction;
     QAction *m_quitAct;
     QAction *m_mapWizardAct;
 
@@ -216,7 +233,7 @@ private:
     QAction *m_toggleRoutingTabAction;
     QAction *m_showTrackingDialogAction;
 
-    StackableWindow *m_mapViewWindow;
+    QDialog *m_mapViewWindow;
     StackableWindow *m_routingWindow;
     StackableWindow *m_trackingWindow;
     GoToDialog *m_gotoDialog;

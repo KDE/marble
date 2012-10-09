@@ -47,7 +47,7 @@ class TileId;
 class GeoSceneTexture : public GeoSceneAbstractDataset
 {
  public:
-    enum StorageLayout { Marble, OpenStreetMap };
+    enum StorageLayout { Marble, OpenStreetMap, TileMapService };
     enum Projection { Equirectangular, Mercator };
 
     explicit GeoSceneTexture( const QString& name );
@@ -75,7 +75,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     bool hasMaximumTileLevel() const;
     int maximumTileLevel() const;
     void setMaximumTileLevel( const int );
-    
+
     QVector<QUrl> downloadUrls() const;
 
     const QSize tileSize() const;

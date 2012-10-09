@@ -13,7 +13,6 @@
 
 // Marble
 #include "AbstractMarbleGraphicsLayout.h"
-#include "GeoPainter.h"
 #include "MarbleGraphicsItem.h"
 
 // Qt
@@ -90,7 +89,7 @@ class MarbleGraphicsItemPrivate
 #endif
     }
 
-    virtual void setProjection( ViewportParams *viewport ) = 0;
+    virtual void setProjection( const ViewportParams *viewport ) = 0;
 
     void updateChildPositions()
     {

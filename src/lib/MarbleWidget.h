@@ -939,7 +939,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void reloadMap();
 
-    void downloadRegion( QString const & sourceDir, QVector<TileCoordsPyramid> const & );
+    void downloadRegion( QVector<TileCoordsPyramid> const & );
 
     //@}
 

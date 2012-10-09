@@ -64,6 +64,8 @@ bool DatabaseQuery::isPointOfInterest( const QString &category )
 {
     static QMap<QString, OsmPlacemark::OsmCategory> pois;
     if ( pois.isEmpty() ) {
+        pois[QObject::tr( "pois").toLower()] = OsmPlacemark::UnknownCategory;
+        pois["pois"] = OsmPlacemark::UnknownCategory;
         pois[QObject::tr( "camping" ).toLower()] = OsmPlacemark::AccomodationCamping;
         pois["camping"] = OsmPlacemark::AccomodationCamping;
         pois[QObject::tr( "hostel" ).toLower()] = OsmPlacemark::AccomodationHostel;

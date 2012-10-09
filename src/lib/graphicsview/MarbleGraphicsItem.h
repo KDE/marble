@@ -21,13 +21,12 @@
 
 class QEvent;
 class QObject;
+class QPainter;
 
 namespace Marble
 {
 
 class AbstractMarbleGraphicsLayout;
-class GeoPainter;
-class GeoSceneLayer;
 class ViewportParams;
 
 class MarbleGraphicsItemPrivate;
@@ -49,8 +48,7 @@ class MARBLE_EXPORT MarbleGraphicsItem
      * Paints the item on the screen in view coordinates.
      * It is not safe to call this function from a thread other than the gui thread.
      */
-    bool paintEvent( GeoPainter *painter, ViewportParams *viewport,
-                     const QString& renderPos, GeoSceneLayer *layer = 0 );
+    bool paintEvent( QPainter *painter, const ViewportParams *viewport );
 
     /**
      * Returns true if the Item contains @p point in parent coordinates.
@@ -133,8 +131,7 @@ class MARBLE_EXPORT MarbleGraphicsItem
      * Paints the item in item coordinates. This has to be reimplemented by the subclass
      * This function will be called by paintEvent().
      */
-    virtual void paint( GeoPainter *painter, ViewportParams *viewport,
-                        const QString& renderPos, GeoSceneLayer * layer = 0 );
+    virtual void paint( QPainter *painter );
 
  protected:
     explicit MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );

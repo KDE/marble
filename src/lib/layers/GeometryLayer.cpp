@@ -16,6 +16,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
 #include "GeoDataLineStyle.h"
+#include "GeoDataMultiTrack.h"
 #include "GeoDataObject.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
@@ -210,6 +211,9 @@ void GeometryLayer::initializeDefaultValues()
 bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
                             const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED( renderPos )
+    Q_UNUSED( layer )
+
     painter->save();
     painter->autoMapQuality();
 
@@ -221,7 +225,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     {
         if ( item->visible()
              && item->latLonAltBox().intersects( viewport->viewLatLonAltBox() ) ) {
-            item->paint( painter, viewport, renderPos, layer );
+            item->paint( painter, viewport );
             ++painted;
         }
     }
@@ -286,6 +290,15 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry
             createGraphicsItemFromGeometry( multigeo->child( row ), placemark );
         }
     }
+    else if ( object->nodeType() == GeoDataTypes::GeoDataMultiTrackType  )
+    {
+        const GeoDataMultiTrack *multitrack = static_cast<const GeoDataMultiTrack*>( object );
+        int rowCount = multitrack->size();
+        for ( int row = 0; row < rowCount; ++row )
+        {
+            createGraphicsItemFromGeometry( multitrack->child( row ), placemark );
+        }
+    }
     else if ( object->nodeType() == GeoDataTypes::GeoDataTrackType )
     {
         const GeoDataTrack *track = static_cast<const GeoDataTrack*>( object );
@@ -326,17 +339,7 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *
 
 void GeometryLayer::invalidateScene()
 {
-    QList<GeoGraphicsItem*> items = d->m_scene.items();
-    QList<GeoGraphicsItem*> deletedItems;
-    foreach( GeoGraphicsItem* item, items )
-    {
-        if( qBinaryFind( deletedItems, item ) != deletedItems.constEnd() )
-        {
-            delete item;
-            deletedItems.insert( qLowerBound( deletedItems.begin(), deletedItems.end(), item ), item );
-        }
-    }
-    d->m_scene.clear();
+    d->m_scene.eraseAll();
     const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
         d->createGraphicsItems( object->parent() );

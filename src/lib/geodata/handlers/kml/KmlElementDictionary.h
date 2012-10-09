@@ -184,6 +184,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_y;
     
     // Google KML Extension Namespace (http://code.google.com/apis/kml/documentation/kmlreference.html#kmlextensions)
+    GEODATA_EXPORT extern const char* kmlTag_MultiTrack;
     GEODATA_EXPORT extern const char* kmlTag_Track;
     GEODATA_EXPORT extern const char* kmlTag_coord;
 

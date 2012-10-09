@@ -30,6 +30,8 @@ class GeoGraphicsScenePrivate
 {
 public:
 
+    void addItems(const TileId &tileId, QList<GeoGraphicsItem*> &result, int maxZoomLevel ) const;
+
     QMap<TileId, QList<GeoGraphicsItem*> > m_items;
 };
 
@@ -43,28 +45,14 @@ GeoGraphicsScene::~GeoGraphicsScene()
     delete d;
 }
 
-QList< GeoGraphicsItem* > GeoGraphicsScene::items() const
+void GeoGraphicsScene::eraseAll()
 {
-    QList< GeoGraphicsItem* > result;
     for( QMap< TileId, QList< GeoGraphicsItem* > >::const_iterator i = d->m_items.constBegin();
          i != d->m_items.constEnd(); ++i )
     {
-        const QList< GeoGraphicsItem* > &objects = *i;
-        QList< GeoGraphicsItem* >::iterator before = result.begin();
-        QList< GeoGraphicsItem* >::const_iterator currentItem = objects.constBegin();
-        while( currentItem != objects.end() )
-        {
-            while( ( currentItem != objects.end() )
-                  && ( ( before == result.end() ) || ( (*currentItem)->zValue() < (*before)->zValue() ) ) )
-            {
-                before = result.insert( before, *currentItem );
-                currentItem++;
-            }
-            if ( before != result.end() )
-                before++;
-         }
+        qDeleteAll(*i);
     }
-    return result;
+    d->m_items.clear();
 }
 
 QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAltBox& box, int maxZoomLevel ) const
@@ -110,22 +98,7 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAl
         coords.getCoords( &x1, &y1, &x2, &y2 );
         for ( int x = x1; x <= x2; ++x ) {
             for ( int y = y1; y <= y2; ++y ) {
-                TileId const tileId( "", level, x, y );
-                const QList< GeoGraphicsItem* > &objects = d->m_items.value(tileId);
-                QList< GeoGraphicsItem* >::iterator before = result.begin();
-                QList< GeoGraphicsItem* >::const_iterator currentItem = objects.constBegin();
-                while( currentItem != objects.end() )
-                {  
-                    while( ( currentItem != objects.end() )
-                      && ( ( before == result.end() ) || ( (*currentItem)->zValue() < (*before)->zValue() ) ) )
-                    {
-                        if( (*currentItem)->minZoomLevel() <= maxZoomLevel )
-                            before = result.insert( before, *currentItem );
-                        currentItem++;
-                    }
-                    if ( before != result.end() )
-                        before++;
-                }
+                d->addItems( TileId ( "", level, x, y ), result, maxZoomLevel );
             }
         }
     }
@@ -202,6 +175,26 @@ void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
         }
     }
 }
-};
+
+void GeoGraphicsScenePrivate::addItems( const TileId &tileId, QList<GeoGraphicsItem *> &result, int maxZoomLevel ) const
+{
+    const QList< GeoGraphicsItem* > &objects = m_items.value(tileId);
+    QList< GeoGraphicsItem* >::iterator before = result.begin();
+    QList< GeoGraphicsItem* >::const_iterator currentItem = objects.constBegin();
+    while( currentItem != objects.end() ) {
+        while( ( currentItem != objects.end() )
+          && ( ( before == result.end() ) || ( (*currentItem)->zValue() < (*before)->zValue() ) ) ) {
+            if( (*currentItem)->minZoomLevel() <= maxZoomLevel ) {
+                before = result.insert( before, *currentItem );
+            }
+            ++currentItem;
+        }
+        if ( before != result.end() ) {
+            ++before;
+        }
+    }
+}
+
+}
 
 #include "GeoGraphicsScene.moc"

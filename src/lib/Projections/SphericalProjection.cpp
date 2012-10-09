@@ -6,17 +6,21 @@
 // the source code.
 //
 // Copyright 2007        Inge Wallin   <ingwa@kde.org>
-// Copyright 2007-2009   Torsten Rahn  <rahn@kde.org>
+// Copyright 2007-2012   Torsten Rahn  <rahn@kde.org>
+// Copyright 2012        Cezar Mocan   <mocancezar@gmail.com>
 //
 
 // Local
 #include "SphericalProjection.h"
+#include "SphericalProjection_p.h"
 
 #include "MarbleDebug.h"
 
 // Marble
 #include "ViewportParams.h"
 #include "GeoDataPoint.h"
+#include "GeoDataLineString.h"
+#include "GeoDataCoordinates.h"
 #include "MarbleGlobal.h"
 
 #define SAFE_DISTANCE
@@ -24,17 +28,17 @@
 namespace Marble
 {
 
-// Since SphericalProjection does not have members yet, the
-// private class for the members is empty.
-// For ABI reasons it is there however, but we do not yet need to
-// construct/destruct an object of this class
-class SphericalProjectionPrivate
-{
-};
 
 SphericalProjection::SphericalProjection()
-    : AbstractProjection(), 
-      d( 0 )
+    : AbstractProjection( * new SphericalProjectionPrivate( this ) )
+{
+    setRepeatX( repeatableX() );
+    setMinLat( minValidLat() );
+    setMaxLat( maxValidLat() );
+}
+
+SphericalProjection::SphericalProjection( SphericalProjectionPrivate &dd )
+        : AbstractProjection( dd )
 {
     setRepeatX( repeatableX() );
     setMinLat( minValidLat() );
@@ -43,9 +47,15 @@ SphericalProjection::SphericalProjection()
 
 SphericalProjection::~SphericalProjection()
 {
-   //For the future
-   //delete d;
 }
+
+
+SphericalProjectionPrivate::SphericalProjectionPrivate( SphericalProjection * parent )
+        : AbstractProjectionPrivate( parent )
+{
+
+}
+
 
 bool SphericalProjection::repeatableX() const
 {
@@ -226,8 +236,6 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
         // Unless the planetaxis is in the screen plane the allowed longitude range
         // covers full -180 deg to +180 deg:
         if ( pitch > 0.0 && pitch < +M_PI ) {
-            latLonAltBox.setWest(  -M_PI );
-            latLonAltBox.setEast(  +M_PI );
             latLonAltBox.setNorth( +fabs( M_PI / 2.0 - fabs( pitch ) ) );
             latLonAltBox.setSouth( -M_PI / 2.0 );
         }
@@ -267,8 +275,6 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
         latLonAltBox.setWest( -M_PI );
         latLonAltBox.setEast( +M_PI );
     }
-
-//    mDebug() << latLonAltBox.text( GeoDataCoordinates::Degree );
 
     return latLonAltBox;
 }
@@ -317,6 +323,414 @@ QPainterPath SphericalProjection::mapShape( const ViewportParams *viewport ) con
     }
 
     return fullRect;
-}    
+}
+
+bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString,
+                                                  const ViewportParams *viewport,
+                                                  QVector<QPolygonF *> &polygons ) const
+{
+
+    Q_D( const SphericalProjection );
+    // Compare bounding box size of the line string with the angularResolution
+    // Immediately return if the latLonAltBox is smaller.
+    if ( !viewport->resolves( lineString.latLonAltBox() ) ) {
+//      mDebug() << "Object too small to be resolved";
+        return false;
+    }
+
+    QVector<GeoDataLineString*> lineStrings;
+
+    if (
+         ( !traversablePoles() && lineString.latLonAltBox().containsPole( AnyPole ) ) ||
+         ( lineString.latLonAltBox().crossesDateLine() )
+       ) {
+        // We correct for Poles and DateLines:
+        lineStrings = lineString.toRangeCorrected();
+
+        foreach ( GeoDataLineString * itLineString, lineStrings ) {
+            QVector<QPolygonF *> subPolygons;
+
+            d->lineStringToPolygon( *itLineString, viewport, subPolygons );
+            polygons << subPolygons;
+        }
+    }
+    else {
+        d->lineStringToPolygon( lineString, viewport, polygons );
+    }
+
+    return polygons.isEmpty();
+}
+
+bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &lineString,
+                                              const ViewportParams *viewport,
+                                              QVector<QPolygonF *> &polygons ) const
+{
+    Q_Q( const SphericalProjection );
+
+    const TessellationFlags f = lineString.tessellationFlags();
+
+    qreal x = 0;
+    qreal y = 0;
+    bool globeHidesPoint = false;
+
+    qreal previousX = -1.0;
+    qreal previousY = -1.0;
+    bool previousGlobeHidesPoint = false;
+
+    qreal horizonX = -1.0;
+    qreal horizonY = -1.0;
+    bool isAtHorizon = false;
+
+    polygons.append( new QPolygonF );
+
+    GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
+    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
+
+    // Some projections display the earth in a way so that there is a
+    // foreside and a backside.
+    // The horizon is the line (usually a circle) which separates both
+    // sides from each other and resembles the map shape.
+    GeoDataCoordinates horizonCoords;
+
+    // A horizon pair is a pair of two subsequent horizon crossings:
+    // The first one describes the point where a line string disappears behind the horizon.
+    // and where horizonPair is set to true.
+    // The second one describes the point where the line string reappears.
+    // In this case the two points are connected and horizonPair is set to false again.
+    bool horizonPair = false;
+    GeoDataCoordinates horizonDisappearCoords;
+
+    // If the first horizon crossing in a line string describes the appearance of
+    // a line string then we call it a "horizon orphan" and horizonOrphan is set to true.
+    // In this case once the last horizon crossing in the line string is reached
+    // it needs to be connected to the orphan.
+    bool horizonOrphan = false;
+    GeoDataCoordinates horizonOrphanCoords;
+
+
+    GeoDataCoordinates previousCoords;
+    GeoDataCoordinates currentCoords;
+
+    GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
+    GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
+
+    bool processingLastNode = false;
+
+    // We use a while loop to be able to cover linestrings as well as linear rings:
+    // Linear rings require to tessellate the path from the last node to the first node
+    // which isn't really convenient to achieve with a for loop ...
+
+    const bool isLong = lineString.size() > 50;
+    
+    while ( itCoords != itEnd )
+    {
+        isAtHorizon = false;
+
+        // Optimization for line strings with a big amount of nodes
+        bool skipNode = itCoords != itBegin && isLong && !processingLastNode &&
+                        viewport->resolves( *itPreviousCoords, *itCoords );
+
+        if ( !skipNode ) {
+
+            previousCoords = *itPreviousCoords;
+            currentCoords  = *itCoords;
+
+            q->screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
+
+            // Initializing variables that store the values of the previous iteration
+            if ( !processingLastNode && itCoords == itBegin ) {
+                previousGlobeHidesPoint = globeHidesPoint;
+                itPreviousCoords = itCoords;
+                previousX = x;
+                previousY = y;
+            }
+
+            // Check for the "horizon case" (which is present e.g. for the spherical projection
+            isAtHorizon = ( globeHidesPoint || previousGlobeHidesPoint ) &&
+                          ( globeHidesPoint !=  previousGlobeHidesPoint );
+     
+            if ( isAtHorizon ) {
+                // Handle the "horizon case"
+                horizonCoords = findHorizon( previousCoords, currentCoords, viewport, f );
+
+                if ( lineString.isClosed() ) {
+                    if ( horizonPair ) {
+                        horizonToPolygon( viewport, horizonDisappearCoords, horizonCoords, polygons.last() );
+                        horizonPair = false;
+                    }
+                    else {
+                        manageHorizonCrossing( globeHidesPoint, horizonCoords,
+                                               horizonPair, horizonDisappearCoords,
+                                               horizonOrphan, horizonOrphanCoords );
+                    }
+                }
+
+                q->screenCoordinates( horizonCoords, viewport, horizonX, horizonY );
+
+                // If the line appears on the visible half we need
+                // to add an interpolated point at the horizon as the previous point.
+                if ( previousGlobeHidesPoint ) {
+                    *polygons.last() << QPointF( horizonX, horizonY );
+                }
+            }
+
+            // This if-clause contains the section that tessellates the line
+            // segments of a linestring. If you are about to learn how the code of
+            // this class works you can safely ignore this section for a start.
+
+            if ( lineString.tessellate() /* && ( isVisible || previousIsVisible ) */ ) {
+
+                if ( !isAtHorizon ) {
+
+                    tessellateLineSegment( previousCoords, previousX, previousY,
+                                           currentCoords, x, y,
+                                           polygons, viewport,
+                                           f );
+
+                }
+                else {
+                    // Connect the interpolated  point at the horizon with the
+                    // current or previous point in the line. 
+                    if ( previousGlobeHidesPoint ) {
+                        tessellateLineSegment( horizonCoords, horizonX, horizonY,
+                                               currentCoords, x, y,
+                                               polygons, viewport,
+                                               f );
+                    }
+                    else {
+                        tessellateLineSegment( previousCoords, previousX, previousY,
+                                               horizonCoords, horizonX, horizonY,
+                                               polygons, viewport,
+                                               f );
+                    }
+                }
+            }
+            else {
+                if ( !globeHidesPoint ) {
+                    *polygons.last() << QPointF( x, y );
+                }
+                else {
+                    if ( !previousGlobeHidesPoint && isAtHorizon ) {
+                        *polygons.last() << QPointF( horizonX, horizonY );
+                    }
+                }
+            }
+
+            if ( globeHidesPoint ) {
+                if (   !previousGlobeHidesPoint
+                    && !lineString.isClosed()
+                    ) {
+                    polygons.append( new QPolygonF );
+                }
+            }
+
+            previousGlobeHidesPoint = globeHidesPoint;
+            itPreviousCoords = itCoords;
+            previousX = x;
+            previousY = y;
+        }
+
+        // Here we modify the condition to be able to process the
+        // first node after the last node in a LinearRing.
+
+        if ( processingLastNode ) {
+            break;
+        }
+        ++itCoords;
+
+        if ( itCoords == itEnd  && lineString.isClosed() ) {
+            itCoords = itBegin;
+            processingLastNode = true;
+        }
+    }
+
+    // In case of horizon crossings, make sure that we always get a
+    // polygon closed correctly.
+    if ( horizonOrphan && lineString.isClosed() ) {
+        horizonToPolygon( viewport, horizonCoords, horizonOrphanCoords, polygons.last() );
+    }
+
+    if ( polygons.last()->size() <= 1 ){
+        polygons.pop_back(); // Clean up "unused" empty polygon instances
+    }
+
+    return polygons.isEmpty();
+}
+
+void SphericalProjectionPrivate::manageHorizonCrossing( bool globeHidesPoint,
+                                                const GeoDataCoordinates& horizonCoords,
+                                                bool& horizonPair,
+                                                GeoDataCoordinates& horizonDisappearCoords,
+                                                bool& horizonOrphan,
+                                                GeoDataCoordinates& horizonOrphanCoords ) const
+{
+    if ( !horizonPair ) {
+        if ( globeHidesPoint ) {
+            horizonDisappearCoords = horizonCoords;
+            horizonPair = true;
+        }
+        else {
+            horizonOrphanCoords = horizonCoords;
+            horizonOrphan = true;
+        }
+    }
+}
+
+void SphericalProjectionPrivate::horizonToPolygon( const ViewportParams *viewport,
+                                           const GeoDataCoordinates & disappearCoords,
+                                           const GeoDataCoordinates & reappearCoords,
+                                           QPolygonF * polygon ) const
+{
+    qreal x, y;
+
+    const qreal imageHalfWidth  = viewport->width() / 2;
+    const qreal imageHalfHeight = viewport->height() / 2;
+
+    bool dummyGlobeHidesPoint = false;
+
+    Q_Q( const SphericalProjection );
+    // Calculate the angle of the position vectors of both coordinates
+    q->screenCoordinates( disappearCoords, viewport, x, y, dummyGlobeHidesPoint );
+    qreal alpha = atan2( y - imageHalfHeight,
+                         x - imageHalfWidth );
+
+    q->screenCoordinates( reappearCoords, viewport, x, y, dummyGlobeHidesPoint );
+    qreal beta =  atan2( y - imageHalfHeight,
+                         x - imageHalfWidth );
+
+    // Calculate the difference between both
+    qreal diff = GeoDataCoordinates::normalizeLon( beta - alpha );
+
+    qreal sgndiff = diff < 0 ? -1 : 1;
+
+    const qreal arcradius = viewport->radius();
+    const int itEnd = fabs(diff * RAD2DEG);
+
+    // Create a polygon that resembles an arc between the two position vectors
+    for ( int it = 0; it <= itEnd; ++it ) {
+        const qreal angle = alpha + DEG2RAD * sgndiff * it;
+        const qreal itx = imageHalfWidth  +  arcradius * cos( angle );
+        const qreal ity = imageHalfHeight +  arcradius * sin( angle );
+        *polygon << QPointF( itx, ity );
+    }
+}
+
+
+GeoDataCoordinates SphericalProjectionPrivate::findHorizon( const GeoDataCoordinates & previousCoords,
+                                                    const GeoDataCoordinates & currentCoords,
+                                                    const ViewportParams *viewport,
+                                                    TessellationFlags f,
+                                                    int recursionCounter ) const
+{
+    bool currentHide = globeHidesPoint( currentCoords, viewport ) ;
+
+    if ( recursionCounter > 20 ) {
+        return currentHide ? previousCoords : currentCoords;
+    }
+    ++recursionCounter;
+
+    bool followLatitudeCircle = false;
+
+    // Calculate steps for tessellation: lonDiff and altDiff
+    qreal lonDiff = 0.0;
+    qreal previousLongitude = 0.0;
+    qreal previousLatitude = 0.0;
+
+    if ( f.testFlag( RespectLatitudeCircle ) ) {
+        previousCoords.geoCoordinates( previousLongitude, previousLatitude );
+        qreal previousSign = previousLongitude > 0 ? 1 : -1;
+
+        qreal currentLongitude = 0.0;
+        qreal currentLatitude = 0.0;
+        currentCoords.geoCoordinates( currentLongitude, currentLatitude );
+        qreal currentSign = currentLongitude > 0 ? 1 : -1;
+
+        if ( previousLatitude == currentLatitude ) {
+            followLatitudeCircle = true;
+
+            lonDiff = currentLongitude - previousLongitude;
+            if ( previousSign != currentSign
+                 && fabs(previousLongitude) + fabs(currentLongitude) > M_PI ) {
+                if ( previousSign > currentSign ) {
+                    // going eastwards ->
+                    lonDiff += 2 * M_PI ;
+                } else {
+                    // going westwards ->
+                    lonDiff -= 2 * M_PI;
+                }
+            }
+
+        }
+        else {
+//            mDebug() << "Don't FollowLatitudeCircle";
+        }
+    }
+
+    qreal  lon = 0.0;
+    qreal  lat = 0.0;
+
+    qreal altDiff = currentCoords.altitude() - previousCoords.altitude();
+
+    if ( followLatitudeCircle ) {
+        // To tessellate along latitude circles use the
+        // linear interpolation of the longitude.
+        lon = lonDiff * 0.5 + previousLongitude;
+        lat = previousLatitude;
+    }
+    else {
+        // To tessellate along great circles use the
+        // normalized linear interpolation ("NLERP") for latitude and longitude.
+        const Quaternion itpos = Quaternion::nlerp( previousCoords.quaternion(), currentCoords.quaternion(), 0.5 );
+        itpos. getSpherical( lon, lat );
+    }
+
+    qreal altitude = previousCoords.altitude() + 0.5 * altDiff;
+
+    GeoDataCoordinates horizonCoords( lon, lat, altitude );
+
+    bool horizonHide = globeHidesPoint( horizonCoords, viewport );
+
+    if ( horizonHide != currentHide ) {
+        return findHorizon( horizonCoords, currentCoords, viewport, f, recursionCounter );
+    }
+
+    return findHorizon( previousCoords, horizonCoords, viewport, f, recursionCounter );
+}
+
+
+bool SphericalProjectionPrivate::globeHidesPoint( const GeoDataCoordinates &coordinates,
+                                          const ViewportParams *viewport ) const
+{
+    qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
+    Quaternion  qpos             = coordinates.quaternion();
+
+    qpos.rotateAroundAxis( *( viewport->planetAxisMatrix() ) );
+
+    qreal      pixelAltitude = ( ( viewport->radius() )
+                                  / EARTH_RADIUS * absoluteAltitude );
+    if ( coordinates.altitude() < 10000 ) {
+        // Skip placemarks at the other side of the earth.
+        if ( qpos.v[Q_Z] < 0 ) {
+            return true;
+        }
+    }
+    else {
+        qreal  earthCenteredX = pixelAltitude * qpos.v[Q_X];
+        qreal  earthCenteredY = pixelAltitude * qpos.v[Q_Y];
+        qreal  radius         = viewport->radius();
+
+        // Don't draw high placemarks (e.g. satellites) that aren't visible.
+        if ( qpos.v[Q_Z] < 0
+             && ( ( earthCenteredX * earthCenteredX
+                    + earthCenteredY * earthCenteredY )
+                  < radius * radius ) ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
 
 }

@@ -13,11 +13,11 @@
 #include "FrameGraphicsItem_p.h"
 
 // Marble
-#include "GeoPainter.h"
+#include "MarbleDebug.h"
 
 // Qt
-#include "MarbleDebug.h"
 #include <QtCore/QSizeF>
+#include <QtGui/QPainter>
 
 using namespace Marble;
 
@@ -220,7 +220,7 @@ QPainterPath FrameGraphicsItem::backgroundShape() const
     return path;
 }
 
-void FrameGraphicsItem::paintBackground( GeoPainter *painter )
+void FrameGraphicsItem::paintBackground( QPainter *painter )
 {
     painter->save();
 
@@ -231,22 +231,17 @@ void FrameGraphicsItem::paintBackground( GeoPainter *painter )
     painter->restore();
 }
 
-void FrameGraphicsItem::paint( GeoPainter *painter, ViewportParams *viewport,
-            const QString& renderPos, GeoSceneLayer * layer )
+void FrameGraphicsItem::paint( QPainter *painter )
 {
     painter->save();
     painter->translate( paintedRect().topLeft() );
     paintBackground( painter );
     painter->translate( d->m_padding, d->m_padding );
-    paintContent( painter, viewport, renderPos, layer );
+    paintContent( painter );
     painter->restore();
 }
 
-void FrameGraphicsItem::paintContent( GeoPainter *painter, ViewportParams *viewport,
-                   const QString& renderPos, GeoSceneLayer * layer )
+void FrameGraphicsItem::paintContent( QPainter *painter )
 {
     Q_UNUSED( painter )
-    Q_UNUSED( viewport )
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
 }

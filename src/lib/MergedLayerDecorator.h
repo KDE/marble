@@ -19,6 +19,8 @@
 #include <QtCore/QSharedPointer>
 #include <QtCore/QVector>
 
+#include "MarbleGlobal.h"
+
 class QImage;
 class QString;
 
@@ -41,9 +43,7 @@ class MergedLayerDecorator
 
     StackedTile *createTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage ) const;
 
-    void downloadStackedTile( const TileId &id, const QVector<GeoSceneTexture const *> &textureLayers );
-
-    void reloadTile( const StackedTile &stackedTile );
+    void downloadStackedTile( const TileId &id, const QVector<GeoSceneTexture const *> &textureLayers, DownloadUsage usage );
 
     void setThemeId( const QString &themeId );
 

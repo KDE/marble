@@ -54,11 +54,6 @@ public:
 
         m_textureLayer = dynamic_cast<GeoSceneTexture*>( sceneLayer->datasets().first() );
         Q_ASSERT( m_textureLayer );
-
-        QVector<const GeoSceneTexture*> textureLayers;
-        textureLayers << m_textureLayer;
-
-        m_tileLoader.setTextureLayers( textureLayers );
     }
 
     void tileCompleted( const TileId & tileId, const QImage &image )
@@ -123,7 +118,7 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
 
         const QImage *image = d->m_cache[id];
         if ( image == 0 ) {
-            image = new QImage( d->m_tileLoader.loadTile( id, DownloadBrowse ) );
+            image = new QImage( d->m_tileLoader.loadTile( d->m_textureLayer, id, DownloadBrowse ) );
             d->m_cache.insert( id, image );
         }
         Q_ASSERT( image );

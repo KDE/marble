@@ -14,13 +14,13 @@
 // Qt
 #include <QtGui/QAction>
 #include <QtGui/QIcon>
+#include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 #include <QtGui/QMouseEvent>
 #include <QtWebKit/QWebView>
 
 // Marble
 #include "MarbleDebug.h"
-#include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "GeoSceneLayer.h"
 #include "TinyWebBrowser.h"
@@ -86,13 +86,8 @@ bool WikipediaItem::operator<( const AbstractDataPluginItem *other ) const
     return otherItem ? m_rank > otherItem->m_rank : id() < other->id();
 }
    
-void WikipediaItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                           const QString& renderPos, GeoSceneLayer * layer )
+void WikipediaItem::paint( QPainter *painter )
 {
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
-    Q_UNUSED( viewport )
-
     if ( !showThumbnail() ) {
         m_wikiIcon.paint( painter, wikiIconRect );
     }

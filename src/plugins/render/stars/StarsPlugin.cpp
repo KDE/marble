@@ -20,6 +20,7 @@
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "GeoPainter.h"
+#include "SunLocator.h"
 #include "ViewportParams.h"
 
 namespace Marble
@@ -70,12 +71,12 @@ QString StarsPlugin::nameId() const
 
 QString StarsPlugin::version() const
 {
-    return "1.0";
+    return "1.1";
 }
 
 QString StarsPlugin::description() const
 {
-    return tr( "A plugin that shows the Starry Sky." );
+    return tr( "A plugin that shows the Starry Sky and the Sun." );
 }
 
 QString StarsPlugin::copyrightYears() const
@@ -86,7 +87,8 @@ QString StarsPlugin::copyrightYears() const
 QList<PluginAuthor> StarsPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" );
+            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" )
+            << PluginAuthor( "Rene Kuettner", "rene@bitkanal.net" );
 }
 
 QIcon StarsPlugin::icon () const
@@ -138,6 +140,11 @@ void StarsPlugin::loadStars() {
         m_stars << star;
 //        mDebug() << "RA:" << ra << "DE:" << de << "MAG:" << mag;
     }
+
+    // load the Sun pixmap
+    // TODO: adjust pixmap size according to distance
+    m_pixmapSun.load( MarbleDirs::path( "svg/sun.png" ) );
+
     m_starsLoaded = true;
 }
 
@@ -174,7 +181,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
         const Quaternion skyAxis = Quaternion::fromEuler( -centerLat , centerLon + skyRotationAngle, 0.0 );
 
-        matrix       skyAxisMatrix;
+        matrix skyAxisMatrix;
         skyAxis.inverse().toMatrix( skyAxisMatrix );
 
         const bool renderStars = !viewport->mapCoversViewport() && viewport->projection() == Spherical;
@@ -189,6 +196,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             }
 
             int x, y;
+            Quaternion qpos;
 
             const qreal  skyRadius      = 0.6 * sqrt( (qreal)viewport->width() * viewport->width() + viewport->height() * viewport->height() );
             const qreal  earthRadius    = viewport->radius();
@@ -197,7 +205,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             QVector<StarPoint>::const_iterator itEnd = m_stars.constEnd();
             for (; i != itEnd; ++i)
             {
-                Quaternion  qpos = (*i).quaternion();
+                qpos = (*i).quaternion();
 
                 qpos.rotateAroundAxis( skyAxisMatrix );
 
@@ -205,8 +213,8 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                    continue;
                 }
 
-                qreal  earthCenteredX = qpos.v[Q_X] * skyRadius;
-                qreal  earthCenteredY = qpos.v[Q_Y] * skyRadius;
+                qreal earthCenteredX = qpos.v[Q_X] * skyRadius;
+                qreal earthCenteredY = qpos.v[Q_Y] * skyRadius;
 
                 // Don't draw high placemarks (e.g. satellites) that aren't visible.
                 if ( qpos.v[Q_Z] < 0
@@ -221,9 +229,10 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
 
                 // Skip placemarks that are outside the screen area
-                if ( x < 0 || x >= viewport->width()
-    		 || y < 0 || y >= viewport->height() )
+                if ( x < 0  || x >= viewport->width() ||
+                     y < 0  || y >= viewport->height() ) {
                     continue;
+                }
 
                 qreal size;
                 if ( (*i).magnitude() < -1 ) size = 6.5;
@@ -235,6 +244,21 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 else if ( (*i).magnitude() < 5 ) size = 1.0;
                 else size = 0.5;
                 painter->drawEllipse( QRectF( x, y, size, size ) );
+            }
+
+            // sun
+            const SunLocator *sun = marbleModel()->sunLocator();
+            Quaternion::fromEuler( -centerLat , centerLon, 0.0 ).inverse().toMatrix( skyAxisMatrix );
+            qpos = Quaternion::fromSpherical( sun->getLon() * DEG2RAD,
+                                              sun->getLat() * DEG2RAD );
+            qpos.rotateAroundAxis( skyAxisMatrix );
+
+            if ( qpos.v[Q_Z] <= 0 ) {
+                qreal deltaX  = m_pixmapSun.width()  / 2.;
+                qreal deltaY  = m_pixmapSun.height() / 2.;
+                x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
+                y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
+                painter->drawPixmap( x - deltaX, y - deltaY, m_pixmapSun );
             }
         }
 

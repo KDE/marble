@@ -13,9 +13,7 @@
 
 #include "WidgetGraphicsItem.h"
 
-#include <QtGui/QWidget>
-
-#include <QtCore/QDebug>
+class QWidget;
 
 namespace Marble
 {

@@ -37,6 +37,7 @@ svg/coordinate.svg
 svg/wikipedia.svg
 svg/wikipedia_shadow.svg
 svg/sunshine.png
+svg/sun.png
 svg/track_turtle.svg
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/svg)
 

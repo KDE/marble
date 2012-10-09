@@ -65,7 +65,7 @@ public:
      *
      * @return The list of all GeoGraphicsItems
      */
-    QList<GeoGraphicsItem *> items() const;
+    void eraseAll();
 
     /**
      * @brief Get the list of items in the specified Box

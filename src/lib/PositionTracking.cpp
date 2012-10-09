@@ -13,6 +13,7 @@
 #include "PositionTracking.h"
 
 #include "GeoDataDocument.h"
+#include "GeoDataMultiTrack.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
 #include "GeoDataStyle.h"
@@ -41,7 +42,7 @@ class PositionTrackingPrivate
         m_treeModel( model ),
         m_currentPositionPlacemark( new GeoDataPlacemark ),
         m_currentTrackPlacemark( new GeoDataPlacemark ),
-        m_trackSegments( new GeoDataMultiGeometry ),
+        m_trackSegments( new GeoDataMultiTrack ),
         m_document(),
         m_positionProvider( 0 ),
         m_length( 0.0 )
@@ -60,7 +61,7 @@ class PositionTrackingPrivate
 
     GeoDataPlacemark *const m_currentPositionPlacemark;
     GeoDataPlacemark *m_currentTrackPlacemark;
-    GeoDataMultiGeometry *m_trackSegments;
+    GeoDataMultiTrack *m_trackSegments;
     GeoDataDocument m_document;
 
     GeoDataCoordinates  m_gpsPreviousPosition;
@@ -271,7 +272,7 @@ bool PositionTracking::saveTrack( const QString& fileName )
     foreach( const GeoDataStyleMap &map, d->m_document.styleMaps() ) {
         document->addStyleMap( map );
     }
-    GeoDataFeature *track = new GeoDataFeature( *d->m_currentTrackPlacemark );
+    GeoDataPlacemark *track = new GeoDataPlacemark( *d->m_currentTrackPlacemark );
     track->setName( "Track " + name );
     document->append( track );
 
@@ -297,13 +298,13 @@ void PositionTracking::readSettings()
 {
     QFile file( d->statusFile() );
     if ( !file.open( QIODevice::ReadOnly ) ) {
-        qDebug() << "Can not read track from " << file.fileName();
+        mDebug() << "Can not read track from " << file.fileName();
         return;
     }
 
     GeoDataParser parser( GeoData_KML );
     if ( !parser.read( &file ) ) {
-        qDebug() << "Could not parse tracking file: " << parser.errorString();
+        mDebug() << "Could not parse tracking file: " << parser.errorString();
         return;
     }
 
@@ -311,27 +312,32 @@ void PositionTracking::readSettings()
     file.close();
 
     if( !doc ){
-        qDebug() << "tracking document not available";
+        mDebug() << "tracking document not available";
         return;
     }
 
     GeoDataPlacemark *track = dynamic_cast<GeoDataPlacemark*>( doc->child( 0 ) );
     if( !track ) {
-        qDebug() << "tracking document doesn't have a placemark";
+        mDebug() << "tracking document doesn't have a placemark";
         delete doc;
         return;
     }
 
-    d->m_trackSegments = dynamic_cast<GeoDataMultiGeometry*>( track->geometry() );
-    if( !d->m_trackSegments && d->m_trackSegments->size() < 1 ) {
-        qDebug() << "tracking document doesn't have a multigeometry";
+    d->m_trackSegments = dynamic_cast<GeoDataMultiTrack*>( track->geometry() );
+    if( !d->m_trackSegments ) {
+        mDebug() << "tracking document doesn't have a multitrack";
+        delete doc;
+        return;
+    }
+    if( d->m_trackSegments->size() < 1 ) {
+        mDebug() << "tracking document doesn't have a track";
         delete doc;
         return;
     }
 
     d->m_currentTrack = dynamic_cast<GeoDataTrack*>( d->m_trackSegments->child( d->m_trackSegments->size() - 1 ) );
     if( !d->m_currentTrack ) {
-        qDebug() << "tracking document doesn't have a last track";
+        mDebug() << "tracking document doesn't have a last track";
         delete doc;
         return;
     }
