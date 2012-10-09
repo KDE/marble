@@ -310,7 +310,13 @@ void SatellitesConfigDialog::openDataSource()
 void SatellitesConfigDialog::removeSelectedDataSource()
 {
     int row = m_configWidget->listDataSources->currentRow();
-    if( row >= 0 ) {
+    if( row >= 0 && 
+        QMessageBox::question( this,
+            tr( "Delete selected data source" ),
+            tr( "Do you really want to delete the selected data source?" ),
+            QMessageBox::Yes | QMessageBox::No,
+            QMessageBox::No ) == QMessageBox::Yes ) {
+
         QListWidgetItem *item;
         item = m_configWidget->listDataSources->takeItem( row );
         QString source = item->text();
