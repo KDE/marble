@@ -1095,6 +1095,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "남위 33도 31분 56초, 동경 151도 12분 40초",
                     151.21111111111110858474, -33.53222222222222370647))
 
+#if 0
         << Language(
             "Galician",
             "", // degree
@@ -1109,6 +1110,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "Campamento",
                     "36º10,67´N 5º24,29´W",
                     -5.40483333333333337833, 36.17783333333333217752))
+#endif
 
         << Language(
             "German",
@@ -1154,6 +1156,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "Amersfoort",
                     "N 52° 8′ 32.14″ , E 5° 24′ 56.09″",
                     5.41558055555555561966, 52.14226111111111094942)
+#if 0
                 << Sample(
                     "London",
                     "51°30'00,55\" NB 0°07'34,45\" WL",
@@ -1165,7 +1168,9 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                 << Sample(
                     "Capetown",
                     "33°55'29,52\" ZB 18°25'26,60\" OL",
-                    18.42405555555555451974, -33.92486666666666650372))
+                    18.42405555555555451974, -33.92486666666666650372)
+#endif
+               )
 
         << Language(
             "Polish",
@@ -1182,6 +1187,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "52°13′56″Pn. 21°00′30″Ws.",
                     21.00833333333333285964, 52.23222222222221944321))
 
+#if 0
         << Language(
             "Esperanto",
             "", // degree
@@ -1196,6 +1202,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "London",
                     "52° 8′ 32,14″ N; 5° 24′ 56,09″ Or",
                     5.41558055555555561966, 52.14226111111111094942))
+#endif
 
         << Language(
             "Norwegian",
@@ -1459,7 +1466,8 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
             << sample.string
             << sample.lon
             << sample.lat;
-    }}
+        }
+    }
 }
 
 
