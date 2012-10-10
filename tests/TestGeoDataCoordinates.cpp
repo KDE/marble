@@ -1525,16 +1525,16 @@ void TestGeoDataCoordinates::testToString_data()
     addRow() << 150.0 << 80.0 << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" )   << QString::fromUtf8( "150°E,  80°N" );
     addRow() << 150.0 << 80.0 << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" ) << QString::fromUtf8( "150°E,  80°N" );
 
-    addRow() << 149.6       << 79.6       << 0 << QString::fromUtf8( " 150°E,   80°N" )             << QString::fromUtf8( "149°E,  79°N" ); // DMS wrongly rounded
-    addRow() << 149.96      << 79.96      << 0 << QString::fromUtf8( " 150°E,   80°N" )             << QString::fromUtf8( "149°E,  79°N" ); // DMS wrongly rounded
+    addRow() << 149.6       << 79.6       << 0 << QString::fromUtf8( " 150°E,   80°N" )             << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << 149.96      << 79.96      << 0 << QString::fromUtf8( " 150°E,   80°N" )             << QString::fromUtf8( "150°E,  80°N" );
 
-    addRow() << 149.6       << 79.6       << 1 << QString::fromUtf8( "149.6°E,  79.6°N" )           << QString::fromUtf8( "149° 35'E,  79° 35'N" ); // DMS wrongly rounded
-    addRow() << 149.96      << 79.96      << 1 << QString::fromUtf8( "150.0°E,  80.0°N" )           << QString::fromUtf8( "149° 57'E,  79° 57'N" ); // DMS wrongly rounded
-    addRow() << 149.996     << 79.996     << 1 << QString::fromUtf8( "150.0°E,  80.0°N" )           << QString::fromUtf8( "149° 59'E,  79° 59'N" ); // DMS wrongly rounded
+    addRow() << 149.6       << 79.6       << 1 << QString::fromUtf8( "149.6°E,  79.6°N" )           << QString::fromUtf8( "149° 36'E,  79° 36'N" );
+    addRow() << 149.96      << 79.96      << 1 << QString::fromUtf8( "150.0°E,  80.0°N" )           << QString::fromUtf8( "149° 58'E,  79° 58'N" );
+    addRow() << 149.996     << 79.996     << 1 << QString::fromUtf8( "150.0°E,  80.0°N" )           << QString::fromUtf8( "150° 00'E,  80° 00'N" );
 
-    addRow() << 149.96      << 79.96      << 2 << QString::fromUtf8( "149.96°E,  79.96°N" )         << QString::fromUtf8( "149° 57'E,  79° 57'N" ); // DMS wrongly rounded
-    addRow() << 149.996     << 79.996     << 2 << QString::fromUtf8( "150.00°E,  80.00°N" )         << QString::fromUtf8( "149° 59'E,  79° 59'N" ); // DMS wrongly rounded
-    addRow() << 149.9996    << 79.9996    << 2 << QString::fromUtf8( "150.00°E,  80.00°N" )         << QString::fromUtf8( "149° 59'E,  79° 59'N" ); // DMS wrongly rounded
+    addRow() << 149.96      << 79.96      << 2 << QString::fromUtf8( "149.96°E,  79.96°N" )         << QString::fromUtf8( "149° 58'E,  79° 58'N" );
+    addRow() << 149.996     << 79.996     << 2 << QString::fromUtf8( "150.00°E,  80.00°N" )         << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << 149.9996    << 79.9996    << 2 << QString::fromUtf8( "150.00°E,  80.00°N" )         << QString::fromUtf8( "150° 00'E,  80° 00'N" );
 
     addRow() << 149.996     << 79.996     << 3 << QString::fromUtf8( "149.996°E,  79.996°N" )       << QString::fromUtf8( "149° 59' 46\"E,  79° 59' 46\"N" );
     addRow() << 149.9996    << 79.9996    << 3 << QString::fromUtf8( "150.000°E,  80.000°N" )       << QString::fromUtf8( "149° 59' 59\"E,  79° 59' 59\"N" );
@@ -1544,22 +1544,22 @@ void TestGeoDataCoordinates::testToString_data()
     addRow() << 149.99996   << 79.99996   << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" )     << QString::fromUtf8( "150° 00'E,  80° 00'N" );
     addRow() << 149.999996  << 79.999996  << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" )     << QString::fromUtf8( "150° 00'E,  80° 00'N" );
 
-    addRow() << 149.99996   << 79.99996   << 5 << QString::fromUtf8( "149.99996°E,  79.99996°N" )   << QString::fromUtf8( "150° 00'E,  80° 00'N" ); // DMS wrongly rounded
+    addRow() << 149.99996   << 79.99996   << 5 << QString::fromUtf8( "149.99996°E,  79.99996°N" )   << QString::fromUtf8( "149° 59' 59.9\"E,  79° 59' 59.9\"N" );
     addRow() << 149.999996  << 79.999996  << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" )   << QString::fromUtf8( "150° 00'E,  80° 00'N" );
     addRow() << 149.9999996 << 79.9999996 << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" )   << QString::fromUtf8( "150° 00'E,  80° 00'N" );
 
-    addRow() << 149.999996  << 79.999996  << 6 << QString::fromUtf8( "149.999996°E,  79.999996°N" ) << QString::fromUtf8( "150° 00'E,  80° 00'N" ); // DMS wrongly rounded
+    addRow() << 149.999996  << 79.999996  << 6 << QString::fromUtf8( "149.999996°E,  79.999996°N" ) << QString::fromUtf8( "149° 59' 59.99\"E,  79° 59' 59.99\"N" );
     addRow() << 149.9999996 << 79.9999996 << 6 << QString::fromUtf8( "150.000000°E,  80.000000°N" ) << QString::fromUtf8( "150° 00'E,  80° 00'N" );
 
 
     addRow() << 150.1       << 80.1       << 0 << QString::fromUtf8( " 150°E,   80°N" )             << QString::fromUtf8( "150°E,  80°N" );
     addRow() << 150.01      << 80.01      << 0 << QString::fromUtf8( " 150°E,   80°N" )             << QString::fromUtf8( "150°E,  80°N" );
 
-    addRow() << 150.1       << 80.1       << 1 << QString::fromUtf8( "150.1°E,  80.1°N" )           << QString::fromUtf8( "150° 05'E,  80° 05'N" ); // DMS wrongly rounded
-    addRow() << 150.01      << 80.01      << 1 << QString::fromUtf8( "150.0°E,  80.0°N" )           << QString::fromUtf8( "150° 00'E,  80° 00'N" ); // DMS wrongly rounded
+    addRow() << 150.1       << 80.1       << 1 << QString::fromUtf8( "150.1°E,  80.1°N" )           << QString::fromUtf8( "150° 06'E,  80° 06'N" );
+    addRow() << 150.01      << 80.01      << 1 << QString::fromUtf8( "150.0°E,  80.0°N" )           << QString::fromUtf8( "150° 01'E,  80° 01'N" );
     addRow() << 150.001     << 80.001     << 1 << QString::fromUtf8( "150.0°E,  80.0°N" )           << QString::fromUtf8( "150° 00'E,  80° 00'N" );
 
-    addRow() << 150.01      << 80.01      << 2 << QString::fromUtf8( "150.01°E,  80.01°N" )         << QString::fromUtf8( "150° 00'E,  80° 00'N" ); // DMS wrongly rounded
+    addRow() << 150.01      << 80.01      << 2 << QString::fromUtf8( "150.01°E,  80.01°N" )         << QString::fromUtf8( "150° 01'E,  80° 01'N" );
     addRow() << 150.001     << 80.001     << 2 << QString::fromUtf8( "150.00°E,  80.00°N" )         << QString::fromUtf8( "150° 00'E,  80° 00'N" );
     addRow() << 150.0001    << 80.0001    << 2 << QString::fromUtf8( "150.00°E,  80.00°N" )         << QString::fromUtf8( "150° 00'E,  80° 00'N" );
 

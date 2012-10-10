@@ -16,8 +16,7 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataCoordinates_p.h"
 
-#include <cmath>
-
+#include <QtCore/qmath.h>
 #include <QtCore/QRegExp>
 #include <QtCore/QLocale>
 #include <QtCore/QString>
@@ -950,21 +949,23 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
         int lonSec = (int) lonSecF;
 
         // Adjustment for fuzziness (like 49.999999999999999999999)
-        if ( precision > 2 ) {
-            lonSec = qRound( lonSecF );
-        }
-        if (lonSec > 59) {
-            lonSecF = 0;
-            lonSec = lonSecF;
-            lonMin = lonMin + 1;
-        }
         if ( precision == 0 ) {
+            lonDeg = qRound( lonDegF );
+        } else if ( precision <= 2 ) {
             lonMin = qRound( lonMinF );
+        } else if ( precision <= 4 ) {
+            lonSec = qRound( lonSecF );
+        } else {
+            lonSec = lonSecF = qRound( lonSecF * qPow( 10, precision - 4 ) ) / qPow( 10, precision - 4 );
+        }
+
+        if (lonSec > 59) {
+            lonSec = lonSecF = 0;
+            lonMin = lonMinF = lonMinF + 1;
         }
         if (lonMin > 59) {
-            lonMinF = 0;
-            lonMin = lonMinF;
-            lonDeg = lonDeg + 1;
+            lonMin = lonMinF = 0;
+            lonDeg = lonDegF = lonDegF + 1;
         }
 
         // Evaluate the string
@@ -1024,16 +1025,20 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
         int latSec = (int) latSecF;
 
         // Adjustment for fuzziness (like 49.999999999999999999999)
-        if ( precision > 2 ) {
+        if ( precision == 0 ) {
+            latDeg = qRound( latDegF );
+        } else if ( precision <= 2 ) {
+            latMin = qRound( latMinF );
+        } else if ( precision <= 4 ) {
             latSec = qRound( latSecF );
+        } else {
+            latSec = latSecF = qRound( latSecF * qPow( 10, precision - 4 ) ) / qPow( 10, precision - 4 );
         }
+
         if (latSec > 59) {
             latSecF = 0;
             latSec = latSecF;
             latMin = latMin + 1;
-        }
-        if ( precision == 0 ) {
-            latMin = qRound( latMinF );
         }
         if (latMin > 59) {
             latMinF = 0;
