@@ -971,18 +971,18 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
         // Evaluate the string
         lonString = QString::fromUtf8("%1\xc2\xb0").arg(lonDeg, 3, 10, QChar(' ') );
 
-        if ( precision == 0 || lonDeg == lonDegF ) {
+        if ( precision == 0 ) {
             return lonString + weString;
         }
 
         lonString += QString(" %2\'").arg(lonMin, 2, 10, QChar('0') );
 
-        if ( precision < 3 || lonMin == lonMinF || lonSec == 0 ) {
+        if ( precision < 3 ) {
             return lonString + weString;
         }
 
         // Includes -1 case!
-        if ( precision < 5 || lonSec == lonSecF ) {        
+        if ( precision < 5 ) {
             lonString += QString(" %3\"").arg(lonSec, 2, 'f', 0, QChar('0') );
             return lonString + weString;
         }
@@ -1049,18 +1049,18 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
         // Evaluate the string
         latString = QString::fromUtf8("%1\xc2\xb0").arg(latDeg, 3, 10, QChar(' ') );
 
-        if ( precision == 0 || latDeg == latDegF ) {
+        if ( precision == 0 ) {
             return latString + nsString;
         }
 
         latString += QString(" %2\'").arg(latMin, 2, 10, QChar('0') );
 
-        if ( precision < 3 || latMin == latMinF || latSec == 0 ) {
+        if ( precision < 3 ) {
             return latString + nsString;
         }
 
         // Includes -1 case!
-        if ( precision < 5 || latSec == latSecF ) {        
+        if ( precision < 5 ) {
             latString += QString(" %3\"").arg(latSec, 2, 'f', 0, QChar('0') );
             return latString + nsString;
         }
