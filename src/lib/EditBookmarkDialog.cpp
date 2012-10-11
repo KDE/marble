@@ -144,10 +144,10 @@ void EditBookmarkDialog::setMarbleWidget( MarbleWidget* widget )
 {
     d->m_widget = widget;
     const AngleUnit defaultAngleUnit = d->m_widget->defaultAngleUnit();
-    const LatLonEdit::Notation notation =
-        (defaultAngleUnit == DecimalDegree) ? LatLonEdit::Decimal :
-        (defaultAngleUnit == DMSDegree) ?     LatLonEdit::DMS :
-        /* else, UTM */                       LatLonEdit::DMS;
+    const GeoDataCoordinates::Notation notation =
+        (defaultAngleUnit == DecimalDegree) ? GeoDataCoordinates::Decimal :
+        (defaultAngleUnit == DMSDegree) ?     GeoDataCoordinates::DMS :
+        /* else, UTM */                       GeoDataCoordinates::DMS;
     d->m_ui.m_longitude->setNotation( notation );
     d->m_ui.m_latitude->setNotation( notation );
 
