@@ -940,8 +940,7 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
     // Take care of -1 case
     precision = ( precision < 0 ) ? 5 : precision;
     
-    if ( notation == GeoDataCoordinates::DMS )
-    {
+    if ( notation == DMS || notation == DM ) {
         int lonDeg = (int) lonDegF;
         qreal lonMinF = 60 * (lonDegF - lonDeg);
         int lonMin = (int) lonMinF;
@@ -953,13 +952,18 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
             lonDeg = qRound( lonDegF );
         } else if ( precision <= 2 ) {
             lonMin = qRound( lonMinF );
-        } else if ( precision <= 4 ) {
+        } else if ( precision <= 4 && notation == DMS ) {
             lonSec = qRound( lonSecF );
         } else {
-            lonSec = lonSecF = qRound( lonSecF * qPow( 10, precision - 4 ) ) / qPow( 10, precision - 4 );
+            if ( notation == DMS ) {
+                lonSec = lonSecF = qRound( lonSecF * qPow( 10, precision - 4 ) ) / qPow( 10, precision - 4 );
+            }
+            else {
+                lonMin = lonMinF = qRound( lonMinF * qPow( 10, precision - 2 ) ) / qPow( 10, precision - 2 );
+            }
         }
 
-        if (lonSec > 59) {
+        if (lonSec > 59 && notation == DMS ) {
             lonSec = lonSecF = 0;
             lonMin = lonMinF = lonMinF + 1;
         }
@@ -975,19 +979,26 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
             return lonString + weString;
         }
 
-        lonString += QString(" %2\'").arg(lonMin, 2, 10, QChar('0') );
+        if ( notation == DMS || precision < 3 ) {
+            lonString += QString(" %2\'").arg(lonMin, 2, 10, QChar('0') );
+        }
 
         if ( precision < 3 ) {
             return lonString + weString;
         }
 
-        // Includes -1 case!
-        if ( precision < 5 ) {
-            lonString += QString(" %3\"").arg(lonSec, 2, 'f', 0, QChar('0') );
-            return lonString + weString;
-        }
+        if ( notation == DMS ) {
+            // Includes -1 case!
+            if ( precision < 5 ) {
+                lonString += QString(" %3\"").arg(lonSec, 2, 'f', 0, QChar('0') );
+                return lonString + weString;
+            }
 
-        lonString += QString(" %L3\"").arg(lonSecF, precision - 1, 'f', precision - 4, QChar('0') );
+            lonString += QString(" %L3\"").arg(lonSecF, precision - 1, 'f', precision - 4, QChar('0') );
+        }
+        else {
+            lonString += QString(" %L3'").arg(lonMinF, precision + 1, 'f', precision - 2, QChar('0') );
+        }
     }
     else // notation = GeoDataCoordinates::Decimal
     {
@@ -1016,8 +1027,7 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
     // Take care of -1 case
     precision = ( precision < 0 ) ? 5 : precision;
     
-    if ( notation == GeoDataCoordinates::DMS )
-    {
+    if ( notation == DMS || notation == DM ) {
         int latDeg = (int) latDegF;
         qreal latMinF = 60 * (latDegF - latDeg);
         int latMin = (int) latMinF;
@@ -1029,13 +1039,18 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
             latDeg = qRound( latDegF );
         } else if ( precision <= 2 ) {
             latMin = qRound( latMinF );
-        } else if ( precision <= 4 ) {
+        } else if ( precision <= 4 && notation == DMS ) {
             latSec = qRound( latSecF );
         } else {
-            latSec = latSecF = qRound( latSecF * qPow( 10, precision - 4 ) ) / qPow( 10, precision - 4 );
+            if ( notation == DMS ) {
+                latSec = latSecF = qRound( latSecF * qPow( 10, precision - 4 ) ) / qPow( 10, precision - 4 );
+            }
+            else {
+                latMin = latMinF = qRound( latMinF * qPow( 10, precision - 2 ) ) / qPow( 10, precision - 2 );
+            }
         }
 
-        if (latSec > 59) {
+        if (latSec > 59 && notation == DMS) {
             latSecF = 0;
             latSec = latSecF;
             latMin = latMin + 1;
@@ -1053,19 +1068,26 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
             return latString + nsString;
         }
 
-        latString += QString(" %2\'").arg(latMin, 2, 10, QChar('0') );
+        if ( notation == DMS || precision < 3 ) {
+            latString += QString(" %2\'").arg(latMin, 2, 10, QChar('0') );
+        }
 
         if ( precision < 3 ) {
             return latString + nsString;
         }
 
-        // Includes -1 case!
-        if ( precision < 5 ) {
-            latString += QString(" %3\"").arg(latSec, 2, 'f', 0, QChar('0') );
-            return latString + nsString;
-        }
+        if ( notation == DMS ) {
+            // Includes -1 case!
+            if ( precision < 5 ) {
+                latString += QString(" %3\"").arg(latSec, 2, 'f', 0, QChar('0') );
+                return latString + nsString;
+            }
 
-        latString += QString(" %L3\"").arg(latSecF, precision - 1, 'f', precision - 4, QChar('0') );
+            latString += QString(" %L3\"").arg(latSecF, precision - 1, 'f', precision - 4, QChar('0') );
+        }
+        else {
+            latString += QString(" %L3'").arg(latMinF, precision + 1, 'f', precision - 2, QChar('0') );
+        }
     }
     else // notation = GeoDataCoordinates::Decimal
     {

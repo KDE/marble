@@ -57,6 +57,8 @@ private slots:
     void testToString_Decimal();
     void testToString_DMS_data();
     void testToString_DMS();
+    void testToString_DM_data();
+    void testToString_DM();
     void testPack_data();
     void testPack();
 };
@@ -1517,7 +1519,7 @@ void TestGeoDataCoordinates::testToString_Decimal_data()
     QTest::addColumn<qreal>("lon");
     QTest::addColumn<qreal>("lat");
     QTest::addColumn<int>("precision");
-    QTest::addColumn<QString>("expectedDecimal");
+    QTest::addColumn<QString>("expected");
 
     addRow() << 150.0 << 80.0 << 0 << QString::fromUtf8( " 150°E,   80°N" );
     addRow() << 150.0 << 80.0 << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
@@ -1588,13 +1590,12 @@ void TestGeoDataCoordinates::testToString_Decimal()
     QFETCH( qreal, lon );
     QFETCH( qreal, lat );
     QFETCH( int, precision );
-    QFETCH( QString, expectedDecimal );
+    QFETCH( QString, expected );
 
     const GeoDataCoordinates coordinates( lon, lat, 0, GeoDataCoordinates::Degree );
 
-    // Decimal
-    const QString coordinatesDecimal = coordinates.toString( GeoDataCoordinates::Decimal, precision );
-    QCOMPARE( coordinatesDecimal, expectedDecimal );
+    const QString result = coordinates.toString( GeoDataCoordinates::Decimal, precision );
+    QCOMPARE( result, expected );
 }
 
 /*
@@ -1605,7 +1606,7 @@ void TestGeoDataCoordinates::testToString_DMS_data()
     QTest::addColumn<qreal>("lon");
     QTest::addColumn<qreal>("lat");
     QTest::addColumn<int>("precision");
-    QTest::addColumn<QString>("expectedDMS");
+    QTest::addColumn<QString>("expected");
 
     addRow() << (0.)                         << (0.)                        << 0 << QString::fromUtf8( "  0°E,   0°S" );
     addRow() << (150.)                       << (80.)                       << 0 << QString::fromUtf8( "150°E,  80°N" );
@@ -1659,13 +1660,66 @@ void TestGeoDataCoordinates::testToString_DMS()
     QFETCH( qreal, lon );
     QFETCH( qreal, lat );
     QFETCH( int, precision );
-    QFETCH( QString, expectedDMS );
+    QFETCH( QString, expected );
 
     const GeoDataCoordinates coordinates( lon, lat, 0, GeoDataCoordinates::Degree );
 
-    // DMS
-    const QString coordinatesDMS = coordinates.toString( GeoDataCoordinates::DMS, precision );
-    QCOMPARE( coordinatesDMS, expectedDMS );
+    const QString result = coordinates.toString( GeoDataCoordinates::DMS, precision );
+    QCOMPARE( result, expected );
+}
+
+/*
+ * test data for toString()
+ */
+void TestGeoDataCoordinates::testToString_DM_data()
+{
+    QTest::addColumn<qreal>("lon");
+    QTest::addColumn<qreal>("lat");
+    QTest::addColumn<int>("precision");
+    QTest::addColumn<QString>("expected");
+
+    addRow() << (0.)              << (0.)             << 0 << QString::fromUtf8( "  0°E,   0°S" );
+    addRow() << (150.)            << (80.)            << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << (149. + 31./60)   << (79. + 31./60)   << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << (149. + 30.51/60) << (79. + 30.51/60) << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << (150. + 29./60)   << (80. + 29./60)   << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << (150. + 29.49/60) << (80. + 29.49/60) << 0 << QString::fromUtf8( "150°E,  80°N" );
+
+    addRow() << (0.)              << (0.)             << 1 << QString::fromUtf8( "  0° 00'E,   0° 00'S" );
+    addRow() << (150.)            << (80.)            << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << (149. + 59.51/60) << (79. + 59.51/60) << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << (150. +  0.49/60) << (80. +  0.49/60) << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+
+    addRow() << (0.)              << (0.)             << 2 << QString::fromUtf8( "  0° 00'E,   0° 00'S" );
+    addRow() << (150.)            << (80.)            << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << (149. + 59.51/60) << (79. + 59.51/60) << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << (150. +  0.49/60) << (80. +  0.49/60) << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+
+    addRow() << (0.)               << (0.)              << 3 << QString::fromUtf8( "  0° 00.0'E,   0° 00.0'S" );
+    addRow() << (150.)             << (80.)             << 3 << QString::fromUtf8( "150° 00.0'E,  80° 00.0'N" );
+    addRow() << (149. + 59.951/60) << (79. + 59.951/60) << 3 << QString::fromUtf8( "150° 00.0'E,  80° 00.0'N" );
+    addRow() << (150. +  0.049/60) << (80. +  0.049/60) << 3 << QString::fromUtf8( "150° 00.0'E,  80° 00.0'N" );
+
+    addRow() << (0.)                << (0.)               << 4 << QString::fromUtf8( "  0° 00.00'E,   0° 00.00'S" );
+    addRow() << (150.)              << (80.)              << 4 << QString::fromUtf8( "150° 00.00'E,  80° 00.00'N" );
+    addRow() << (149. + 59.9951/60) << (79. + 59.9951/60) << 4 << QString::fromUtf8( "150° 00.00'E,  80° 00.00'N" );
+    addRow() << (150. +  0.0049/60) << (80. +  0.0049/60) << 4 << QString::fromUtf8( "150° 00.00'E,  80° 00.00'N" );
+}
+
+/*
+ * test toString()
+ */
+void TestGeoDataCoordinates::testToString_DM()
+{
+    QFETCH( qreal, lon );
+    QFETCH( qreal, lat );
+    QFETCH( int, precision );
+    QFETCH( QString, expected );
+
+    const GeoDataCoordinates coordinates( lon, lat, 0, GeoDataCoordinates::Degree );
+
+    const QString result = coordinates.toString( GeoDataCoordinates::DM, precision );
+    QCOMPARE( result, expected );
 }
 
 /*
