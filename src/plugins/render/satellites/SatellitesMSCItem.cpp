@@ -57,6 +57,13 @@ SatellitesMSCItem::SatellitesMSCItem( const QString &name,
     placemark()->style()->lineStyle().setPenStyle( Qt::NoPen );
     placemark()->style()->labelStyle().setGlow( true );
 
+    // use special icon for moons
+    if( m_category == "Moons" ) {
+        placemark()->style()->iconStyle().setIcon(
+            QImage( ":/icons/moon.png" ) );
+    }
+
+
     m_planSat->getKeplerElements(
         m_perc, m_apoc, m_inc, m_ecc, m_ra, m_tano, m_m0, m_a, m_n0 );
 
