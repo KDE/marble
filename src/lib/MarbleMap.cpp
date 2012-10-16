@@ -32,7 +32,6 @@
 #endif
 
 // Marble
-#include "layers/AtmosphereLayer.h"
 #include "layers/FogLayer.h"
 #include "layers/FpsLayer.h"
 #include "layers/GeometryLayer.h"
@@ -129,7 +128,6 @@ class MarbleMapPrivate
     MarbleSplashLayer m_marbleSplashLayer;
     MarbleMap::CustomPaintLayer m_customPaintLayer;
     GeometryLayer            m_geometryLayer;
-    AtmosphereLayer          m_atmosphereLayer;
     FogLayer                 m_fogLayer;
     GroundLayer              m_groundLayer;
     VectorMapBaseLayer       m_vectorMapBaseLayer;
@@ -267,7 +265,6 @@ MarbleMap::~MarbleMap()
     d->m_layerManager.removeLayer( &d->m_fogLayer );
     d->m_layerManager.removeLayer( &d->m_placemarkLayer );
     d->m_layerManager.removeLayer( &d->m_textureLayer );
-    d->m_layerManager.removeLayer( &d->m_atmosphereLayer );
     d->m_layerManager.removeLayer( &d->m_groundLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
     d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
@@ -948,9 +945,10 @@ void MarbleMap::setShowCompass( bool visible )
 
 void MarbleMap::setShowAtmosphere( bool visible )
 {
-    d->m_layerManager.removeLayer( &d->m_atmosphereLayer );
-    if ( visible ) {
-        d->m_layerManager.addLayer( &d->m_atmosphereLayer );
+    foreach ( RenderPlugin *plugin, renderPlugins() ) {
+        if ( plugin->nameId() == "atmosphere" ) {
+            plugin->setVisible( visible );
+        }
     }
 
     d->m_viewParams.setShowAtmosphere( visible );

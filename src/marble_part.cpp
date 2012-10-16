@@ -836,10 +836,18 @@ void MarblePart::setupActions()
     m_showAtmosphereAction = new KAction( this );
     actionCollection()->addAction( "show_atmosphere", m_showAtmosphereAction );
     m_showAtmosphereAction->setCheckable( true );
+    m_showAtmosphereAction->setEnabled( false );
     m_showAtmosphereAction->setChecked( true );
     m_showAtmosphereAction->setText( i18nc( "Action for toggling the atmosphere", "&Atmosphere" ) );
     connect( m_showAtmosphereAction, SIGNAL( triggered( bool ) ),
              this,                   SLOT( setShowAtmosphere( bool ) ) );
+    foreach ( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
+        if ( plugin->nameId() == "atmosphere" ) {
+            m_showAtmosphereAction->setEnabled( plugin->enabled() );
+            connect( plugin, SIGNAL( enabledChanged( bool ) ),
+                     m_showAtmosphereAction, SLOT( setEnabled( bool ) ) );
+        }
+    }
 
     // Action: Show Crosshairs option
     QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();

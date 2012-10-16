@@ -9,10 +9,10 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 // Copyright 2008, 2009, 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 // Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
-// Copyright 2010,2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include "AtmosphereLayer.h"
+#include "AtmospherePlugin.h"
 
 #include "GeoPainter.h"
 #include "ViewportParams.h"
@@ -20,18 +20,101 @@
 namespace Marble
 {
 
-QStringList AtmosphereLayer::renderPosition() const
+AtmospherePlugin::AtmospherePlugin() :
+    RenderPlugin( 0 )
+{
+}
+
+AtmospherePlugin::AtmospherePlugin( const MarbleModel *marbleModel ) :
+    RenderPlugin( marbleModel )
+{
+}
+
+QStringList AtmospherePlugin::backendTypes() const
+{
+    return QStringList( "atmosphere" );
+}
+
+QString AtmospherePlugin::renderPolicy() const
+{
+    return QString( "SPECIFIED_ALWAYS" );
+}
+
+QStringList AtmospherePlugin::renderPosition() const
 {
     return QStringList() << "SURFACE";
 }
 
-bool AtmosphereLayer::render( GeoPainter *painter,
+QString AtmospherePlugin::name() const
+{
+    return tr( "Atmosphere" );
+}
+
+QString AtmospherePlugin::guiString() const
+{
+    return tr( "&Atmosphere" );
+}
+
+QString AtmospherePlugin::nameId() const
+{
+    return "atmosphere";
+}
+
+QString AtmospherePlugin::version() const
+{
+    return "1.0";
+}
+
+QString AtmospherePlugin::description() const
+{
+    return tr( "Shows the atmosphere around the earth." );
+}
+
+QIcon AtmospherePlugin::icon() const
+{
+    return QIcon();
+}
+
+QString AtmospherePlugin::copyrightYears() const
+{
+    return "2006-2012";
+}
+
+QList<PluginAuthor> AtmospherePlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" )
+            << PluginAuthor( "Inge Wallin", "ingwa@kde.org" )
+            << PluginAuthor( "Jens-Michael Hoffmann", "jmho@c-xx.com" )
+            << PluginAuthor( "Patrick Spendrin", "ps_ml@gmx.de" )
+            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
+}
+
+qreal AtmospherePlugin::zValue() const
+{
+    return -100.0;
+}
+
+void AtmospherePlugin::initialize()
+{
+    /* nothing to do */
+}
+
+bool AtmospherePlugin::isInitialized() const
+{
+    return true;
+}
+
+bool AtmospherePlugin::render( GeoPainter *painter,
                               ViewportParams *viewParams,
                               const QString &renderPos,
                               GeoSceneLayer *layer )
 {
     Q_UNUSED(renderPos)
     Q_UNUSED(layer)
+
+    if ( !visible() )
+        return true;
 
     // Only draw an atmosphere if projection is spherical
     if ( viewParams->projection() != Spherical )
@@ -69,9 +152,8 @@ bool AtmosphereLayer::render( GeoPainter *painter,
     return true;
 }
 
-qreal AtmosphereLayer::zValue() const
-{
-    return -100.0;
 }
 
-}
+Q_EXPORT_PLUGIN2( AtmospherePlugin, Marble::AtmospherePlugin )
+
+#include "AtmospherePlugin.moc"
