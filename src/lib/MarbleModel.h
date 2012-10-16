@@ -323,7 +323,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
  private:
     Q_DISABLE_COPY( MarbleModel )
 
-    void addDownloadPolicies( GeoSceneDocument *mapTheme );
+    void addDownloadPolicies( const GeoSceneDocument *mapTheme );
     MarbleModelPrivate  * const d;
 };
 

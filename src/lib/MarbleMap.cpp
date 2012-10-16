@@ -762,27 +762,27 @@ void MarbleMapPrivate::updateMapTheme()
         // Just as with textures, this is a workaround for DGML2 to
         // emulate the old behaviour.
 
-        GeoSceneLayer *layer = m_model->mapTheme()->map()->layer( "mwdbii" );
+        const GeoSceneLayer *layer = m_model->mapTheme()->map()->layer( "mwdbii" );
         if ( layer ) {
-            GeoSceneVector *vector = 0;
+            const GeoSceneVector *vector = 0;
 
-            vector = static_cast<GeoSceneVector*>( layer->dataset("pdiffborder") );
+            vector = static_cast<const GeoSceneVector*>( layer->dataset("pdiffborder") );
             if ( vector )
                 m_veccomposer.setCountryBorderColor( vector->pen().color() );
 
-            vector = static_cast<GeoSceneVector*>( layer->dataset("rivers") );
+            vector = static_cast<const GeoSceneVector*>( layer->dataset("rivers") );
             if ( vector )
                 m_veccomposer.setRiverColor( vector->pen().color() );
 
-            vector = static_cast<GeoSceneVector*>( layer->dataset("pusa48") );
+            vector = static_cast<const GeoSceneVector*>( layer->dataset("pusa48") );
             if ( vector )
                 m_veccomposer.setStateBorderColor( vector->pen().color() );
 
-            vector = static_cast<GeoSceneVector*>( layer->dataset("plake") );
+            vector = static_cast<const GeoSceneVector*>( layer->dataset("plake") );
             if ( vector )
                 m_veccomposer.setLakeColor( vector->pen().color() );
 
-            vector = static_cast<GeoSceneVector*>( layer->dataset("pcoast") );
+            vector = static_cast<const GeoSceneVector*>( layer->dataset("pcoast") );
             if ( vector )
             {
                 m_veccomposer.setLandColor( vector->brush().color() );
@@ -801,8 +801,8 @@ void MarbleMapPrivate::updateMapTheme()
 
     // Check whether there is a texture layer available:
     if ( m_model->mapTheme()->map()->hasTextureLayers() ) {
-        GeoSceneSettings *const settings = m_model->mapTheme()->settings();
-        GeoSceneGroup *const textureLayerSettings = settings ? settings->group( "Texture Layers" ) : 0;
+        const GeoSceneSettings *const settings = m_model->mapTheme()->settings();
+        const GeoSceneGroup *const textureLayerSettings = settings ? settings->group( "Texture Layers" ) : 0;
 
         const GeoSceneHead *const head = m_model->mapTheme()->head();
         const GeoSceneMap *const map = m_model->mapTheme()->map();
@@ -857,7 +857,7 @@ void MarbleMapPrivate::updateMapTheme()
 
         QString seafile, landfile;
         if( !m_model->mapTheme()->map()->filters().isEmpty() ) {
-            GeoSceneFilter *filter= m_model->mapTheme()->map()->filters().first();
+            const GeoSceneFilter *filter= m_model->mapTheme()->map()->filters().first();
 
             if( filter->type() == "colorize" ) {
                  //no need to look up with MarbleDirs twice so they are left null for now

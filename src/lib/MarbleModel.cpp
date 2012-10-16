@@ -480,10 +480,10 @@ void MarbleModel::clearPersistentTileCache()
         // the name of the layer that has the same name as the theme ID
         QString themeID = d->m_mapTheme->head()->theme();
 
-        GeoSceneLayer *layer =
-            static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
-        GeoSceneTexture *texture =
-            static_cast<GeoSceneTexture*>( layer->groundDataset() );
+        const GeoSceneLayer *layer =
+            static_cast<const GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
+        const GeoSceneTexture *texture =
+            static_cast<const GeoSceneTexture*>( layer->groundDataset() );
 
         QString sourceDir = texture->sourceDir();
         QString installMap = texture->installMap();
@@ -548,7 +548,7 @@ const Planet *MarbleModel::planet() const
     return d->m_planet;
 }
 
-void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
+void MarbleModel::addDownloadPolicies( const GeoSceneDocument *mapTheme )
 {
     if ( !mapTheme )
         return;
@@ -558,11 +558,11 @@ void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
     // As long as we don't have an Layer Management Class we just lookup
     // the name of the layer that has the same name as the theme ID
     const QString themeId = mapTheme->head()->theme();
-    GeoSceneLayer * const layer = static_cast<GeoSceneLayer*>( mapTheme->map()->layer( themeId ));
+    const GeoSceneLayer * const layer = static_cast<const GeoSceneLayer*>( mapTheme->map()->layer( themeId ));
     if ( !layer )
         return;
 
-    GeoSceneTexture * const texture = static_cast<GeoSceneTexture*>( layer->groundDataset() );
+    const GeoSceneTexture * const texture = static_cast<const GeoSceneTexture*>( layer->groundDataset() );
     if ( !texture )
         return;
 
