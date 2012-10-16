@@ -81,7 +81,12 @@ class GEODATA_EXPORT GeoSceneSettings : public QObject,
     /**
      * @brief  Get the whole list of properties stored in the settings
      */
-    QVector<GeoSceneProperty*> allProperties() const;
+    QVector<GeoSceneProperty*> allProperties();
+
+    /**
+     * @brief  Get the whole list of properties stored in the settings
+     */
+    QVector<const GeoSceneProperty*> allProperties() const;
 
     /**
      * @brief  Add a group to the settings
@@ -115,7 +120,7 @@ class GEODATA_EXPORT GeoSceneSettings : public QObject,
      * NOTE: If you want all the properties distributed among groups 
      *       then please use:  QVector<GeoSceneProperty*> allProperties().
      */
-    QVector<GeoSceneProperty*> rootProperties() const;
+    QVector<GeoSceneProperty*> rootProperties();
 
  Q_SIGNALS:
     void valueChanged( QString, bool );

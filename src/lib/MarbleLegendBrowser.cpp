@@ -96,7 +96,7 @@ void MarbleLegendBrowser::initTheme()
     // Check for a theme specific legend.html first
     if ( d->m_marbleModel != 0 && d->m_marbleModel->mapTheme() != 0 )
     {
-        GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
+        const GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
         d->m_checkBoxMap.clear();
 

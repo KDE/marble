@@ -29,7 +29,7 @@ bool DgmlSettingsTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     
     for( int i = 0; i < settings->allProperties().count(); ++i )
     {
-        GeoSceneProperty *property = settings->allProperties().at( i );
+        const GeoSceneProperty *property = settings->allProperties().at( i );
         writer.writeStartElement( dgml::dgmlTag_Property );
         writer.writeAttribute( "name", property->name()  );
         writer.writeElement( dgml::dgmlTag_Value, property->defaultValue() ? "true" : "false" );
