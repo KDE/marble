@@ -51,7 +51,6 @@ class GEODATA_EXPORT GeoSceneLegend : public GeoNode
      * @param  section  the new section
      */
     void addSection( GeoSceneSection* );
-    GeoSceneSection* section( const QString& );
     QVector<GeoSceneSection*> sections() const;
 
  private:

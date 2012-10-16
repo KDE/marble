@@ -83,27 +83,6 @@ void GeoSceneLegend::addSection( GeoSceneSection* section )
     }
 }
 
-GeoSceneSection* GeoSceneLegend::section( const QString& name )
-{
-    GeoSceneSection* section = 0;
-
-    QVector<GeoSceneSection*>::const_iterator it = d->m_sections.constBegin();
-    QVector<GeoSceneSection*>::const_iterator end = d->m_sections.constEnd();
-    for (; it != end; ++it) {
-        if ( (*it)->name() == name ) {
-            section = *it;
-            break;
-        }
-    }
-
-    if ( !section ) {
-        section = new GeoSceneSection( name );
-        addSection( section );
-    }
-
-    return section;
-}
-
 QVector<GeoSceneSection*> GeoSceneLegend::sections() const
 {
     return d->m_sections;
