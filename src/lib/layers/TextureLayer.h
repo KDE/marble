@@ -89,7 +89,7 @@ public Q_SLOTS:
 
     void setNeedsUpdate();
 
-    void setMapTheme( const QVector<const GeoSceneTexture *> &textures, GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
+    void setMapTheme( const QVector<const GeoSceneTexture *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
 
     void setVolatileCacheLimit( quint64 kilobytes );
 

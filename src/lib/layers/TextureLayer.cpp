@@ -62,7 +62,7 @@ public:
     TextureMapperInterface *m_texmapper;
     TextureColorizer *m_texcolorizer;
     QVector<const GeoSceneTexture *> m_textures;
-    GeoSceneGroup *m_textureLayerSettings;
+    const GeoSceneGroup *m_textureLayerSettings;
 
     QString m_runtimeTrace;
     // For scheduling repaints
@@ -339,7 +339,7 @@ void TextureLayer::downloadStackedTile( const TileId &stackedTileId )
     d->m_tileLoader.downloadStackedTile( stackedTileId );
 }
 
-void TextureLayer::setMapTheme( const QVector<const GeoSceneTexture *> &textures, GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
+void TextureLayer::setMapTheme( const QVector<const GeoSceneTexture *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
 {
     delete d->m_texcolorizer;
     d->m_texcolorizer = 0;
