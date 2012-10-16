@@ -223,7 +223,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
     if ( d->m_marbleModel == 0 || d->m_marbleModel->mapTheme() == 0 )
         return QString();
 
-    GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
+    const GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
     d->m_symbolMap.clear();
 

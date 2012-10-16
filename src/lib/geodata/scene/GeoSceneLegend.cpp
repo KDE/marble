@@ -38,7 +38,7 @@ class GeoSceneLegendPrivate
      /// The vector holding all the sections in the legend.
     /// (We want to preserve the order and don't care 
     /// much about speed here), so we don't use a hash
-    QVector<GeoSceneSection*> m_sections;
+    QVector<const GeoSceneSection*> m_sections;
     
     const char* nodeType() const
     {
@@ -62,12 +62,12 @@ const char* GeoSceneLegend::nodeType() const
     return d->nodeType();
 }
 
-void GeoSceneLegend::addSection( GeoSceneSection* section )
+void GeoSceneLegend::addSection( const GeoSceneSection* section )
 {
     // Remove any section that has the same name
-    QVector<GeoSceneSection*>::iterator it = d->m_sections.begin();
+    QVector<const GeoSceneSection*>::iterator it = d->m_sections.begin();
     while (it != d->m_sections.end()) {
-        GeoSceneSection* currentSection = *it;
+        const GeoSceneSection* currentSection = *it;
         if ( currentSection->name() == section->name() ) {
             delete currentSection;
             it = d->m_sections.erase(it);
@@ -83,7 +83,7 @@ void GeoSceneLegend::addSection( GeoSceneSection* section )
     }
 }
 
-QVector<GeoSceneSection*> GeoSceneLegend::sections() const
+QVector<const GeoSceneSection*> GeoSceneLegend::sections() const
 {
     return d->m_sections;
 }

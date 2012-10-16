@@ -50,8 +50,8 @@ class GEODATA_EXPORT GeoSceneLegend : public GeoNode
      * @brief  Add a section to the legend
      * @param  section  the new section
      */
-    void addSection( GeoSceneSection* );
-    QVector<GeoSceneSection*> sections() const;
+    void addSection( const GeoSceneSection* );
+    QVector<const GeoSceneSection*> sections() const;
 
  private:
     Q_DISABLE_COPY( GeoSceneLegend )
