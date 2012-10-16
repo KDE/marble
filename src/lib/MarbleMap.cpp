@@ -861,8 +861,8 @@ void MarbleMapPrivate::updateMapTheme()
 
             if( filter->type() == "colorize" ) {
                  //no need to look up with MarbleDirs twice so they are left null for now
-                QList<GeoScenePalette*> palette = filter->palette();
-                foreach ( GeoScenePalette *curPalette, palette ) {
+                QList<const GeoScenePalette*> palette = filter->palette();
+                foreach ( const GeoScenePalette *curPalette, palette ) {
                     if( curPalette->type() == "sea" ) {
                         seafile = MarbleDirs::path( curPalette->file() );
                     } else if( curPalette->type() == "land" ) {
