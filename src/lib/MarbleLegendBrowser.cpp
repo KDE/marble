@@ -98,15 +98,11 @@ void MarbleLegendBrowser::initTheme()
     {
         GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
-        QVector<GeoSceneProperty*> allProperties = currentMapTheme->settings()->allProperties();
-
         d->m_checkBoxMap.clear();
 
-        QVector<GeoSceneProperty*>::const_iterator it = allProperties.constBegin();
-        QVector<GeoSceneProperty*>::const_iterator const end = allProperties.constEnd();
-        for (; it != end; ++it ) {
-            if ( (*it)->available() ) {
-                d->m_checkBoxMap[ (*it)->name() ] = (*it)->value();
+        foreach ( const GeoSceneProperty *property, currentMapTheme->settings()->allProperties() ) {
+            if ( property->available() ) {
+                d->m_checkBoxMap[ property->name() ] = property->value();
             }
         }
 
@@ -229,28 +225,26 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
     GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
-    QVector<GeoSceneSection*> sections = currentMapTheme->legend()->sections();
-
     d->m_symbolMap.clear();
 
-    for (int section = 0; section < sections.size(); ++section) {
+    int sectionNum = 0;
+    foreach ( const GeoSceneSection *section, currentMapTheme->legend()->sections() ) {
         QString checkBoxString; 
 
-        if ( sections.at(section)->checkable() ) {
-            checkBoxString = "<a href=\"checkbox:" + sections.at(section)->connectTo() + "\"><span style=\"text-decoration: none\"><img src=\"checkbox:" + sections.at(section)->name() + "\">&nbsp;</span></a> ";
+        if ( section->checkable() ) {
+            checkBoxString = "<a href=\"checkbox:" + section->connectTo() + "\"><span style=\"text-decoration: none\"><img src=\"checkbox:" + section->name() + "\">&nbsp;</span></a> ";
         }
 
-        customLegendString += "<h4>" + checkBoxString + sections.at(section)->heading() + "</h4>";
+        customLegendString += "<h4>" + checkBoxString + section->heading() + "</h4>";
         customLegendString += "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">";
 
-        QVector<GeoSceneItem*> items = sections.at(section)->items();
+        int spacing = section->spacing();
 
-        int spacing = sections.at(section)->spacing();
-
-        for (int item = 0; item < items.size(); ++item) {
+        int itemNum = 0;
+        foreach ( const GeoSceneItem *item, section->items() ) {
 
             QPixmap itemPixmap;
-            QString pixmapRelativePath = items.at(item)->icon()->pixmap();
+            QString pixmapRelativePath = item->icon()->pixmap();
 
             if ( !pixmapRelativePath.isEmpty() ) {
                 QString pixmapPath = MarbleDirs::path( pixmapRelativePath );
@@ -261,7 +255,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
             QPixmap itemIcon = itemPixmap.copy();
 
-            QColor itemColor = items.at(item)->icon()->color();
+            QColor itemColor = item->icon()->color();
             itemIcon.fill( itemColor );
 
             QPainter painter( &itemIcon );
@@ -271,7 +265,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             }
 
 
-            QString itemIdString = QString("item%1-%2").arg(section).arg(item);
+            QString itemIdString = QString("item%1-%2").arg(sectionNum).arg(itemNum);
             d->m_symbolMap[itemIdString] = itemIcon;
 
             customLegendString += "    <tr>";
@@ -279,11 +273,15 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             customLegendString += "             <img src=\"pixmap:" + itemIdString + "\">";
             customLegendString += "        </td>"; 
             customLegendString += "        <td align=\"left\" valign=\"top}\">"; 
-            customLegendString += "             " + items.at(item)->text();
+            customLegendString += "             " + item->text();
             customLegendString += "        </td>"; 
             customLegendString += "    </tr>";
+
+            itemNum++;
         }
         customLegendString += "</table>";
+
+        sectionNum++;
     }
 
     return customLegendString;
