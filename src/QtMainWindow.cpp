@@ -257,15 +257,15 @@ void MainWindow::createActions()
      connect( m_kineticScrollingAction, SIGNAL( triggered( bool ) ), this, SLOT( toggleKineticScrolling( bool ) ) );
 
      m_showAtmosphereAct = new QAction( tr("&Atmosphere"), this);
-     m_showAtmosphereAct->setEnabled( false );
+     m_showAtmosphereAct->setVisible( false );
      m_showAtmosphereAct->setCheckable( true );
      m_showAtmosphereAct->setStatusTip(tr("Show Atmosphere"));
      connect(m_showAtmosphereAct, SIGNAL(triggered( bool )), this, SLOT( showAtmosphere( bool )));
      foreach ( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
          if ( plugin->nameId() == "atmosphere" ) {
-             m_showAtmosphereAct->setEnabled( plugin->enabled() );
+             m_showAtmosphereAct->setVisible( plugin->enabled() );
              connect( plugin, SIGNAL( enabledChanged( bool ) ),
-                      m_showAtmosphereAct, SLOT( setEnabled( bool ) ) );
+                      m_showAtmosphereAct, SLOT( setVisible( bool ) ) );
          }
      }
 
