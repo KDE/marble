@@ -68,6 +68,8 @@ public:
 
     int m_iconSize;
 
+    int m_collapse_width;
+
     /** Constructor */
     RoutingWidgetPrivate( MarbleWidget *marbleWidget );
 
@@ -101,7 +103,8 @@ RoutingWidgetPrivate::RoutingWidgetPrivate( MarbleWidget *marbleWidget ) :
         m_routeRequest( marbleWidget->model()->routingManager()->routeRequest() ),
         m_zoomRouteAfterDownload( false ),
         m_currentFrame( 0 ),
-        m_iconSize( 16 )
+        m_iconSize( 16 ),
+        m_collapse_width( 0 )
 {
     createProgressAnimation();
     m_progressTimer.setInterval( 100 );
@@ -610,6 +613,35 @@ void RoutingWidget::updateActiveRoutingProfile()
     RoutingProfile const profile = d->m_routingManager->routeRequest()->routingProfile();
     QList<RoutingProfile> const profiles = d->m_routingManager->profilesModel()->profiles();
     d->m_ui.routingProfileComboBox->setCurrentIndex( profiles.indexOf( profile ) );
+}
+
+void RoutingWidget::resizeEvent(QResizeEvent*)
+{
+  if ( d->m_collapse_width == 0 )
+  {
+      d->m_collapse_width = d->m_ui.addViaButton->sizeHint().width()
+                          + d->m_ui.reverseRouteButton->sizeHint().width()
+                          + d->m_ui.clearRouteButton->sizeHint().width()
+                          + 20;
+  }
+  if ( size().width() < d->m_collapse_width )
+  {
+    d->m_ui.addViaButton->setText("");
+    d->m_ui.addViaButton->setIcon(QIcon(":/marble/list-add.png"));
+    d->m_ui.reverseRouteButton->setText("");
+    d->m_ui.reverseRouteButton->setIcon(QIcon(":/marble/reverse.png"));
+    d->m_ui.clearRouteButton->setText("");
+    d->m_ui.clearRouteButton->setIcon(QIcon(":/marble/edit-clear.png"));
+  }
+  else if ( size().width() > d->m_collapse_width + 10 )
+  {
+    d->m_ui.addViaButton->setText(tr("Add Via"));
+    d->m_ui.addViaButton->setIcon(QIcon());
+    d->m_ui.reverseRouteButton->setText(tr("Reverse"));
+    d->m_ui.reverseRouteButton->setIcon(QIcon());
+    d->m_ui.clearRouteButton->setText(tr("Clear"));
+    d->m_ui.clearRouteButton->setIcon(QIcon());
+  }
 }
 
 } // namespace Marble
