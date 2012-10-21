@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Notes:
+- the mime types in this file are valid with the version 0.40 of the
+  shared-mime-info package.
+-->
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-gpx+xml">
+    <!-- prevent txt/plain thumbnailer <sub-class-of type="application/xml"/> -->
+    <comment>GPX geographic data</comment>
+    <acronym>GPX</acronym>
+    <expanded-acronym>GPS eXchange Format</expanded-acronym>
+    <generic-icon name="application-vnd-google-earth-kml"/>
+    <glob pattern="*.gpx"/>
+    <alias type="application/gpx"/>
+    <alias type="application/gpx+xml"/>
+    <alias type="application/x-gpx"/>
+    <!-- temporary solution, until thumbnailer is done, remove for root-XML stuff -->
+    <magic priority="80">
+      <match value="&lt;gpx" type="string" offset="0:256"/>
+    </magic>
+    <!-- use again if thumbnailer is done -->
+    <!-- <root-XML namespaceURI='http://www.topografix.com/GPX/1/0' localName='gpx'/> -->
+    <!-- <root-XML namespaceURI='http://www.topografix.com/GPX/1/1' localName='gpx'/> -->
+  </mime-type>
+  <mime-type type="application/x-osm+xml">
+    <!-- prevent txt/plain thumbnailer <sub-class-of type="application/xml"/> -->
+    <comment>OSM Data</comment>
+    <acronym>OSM</acronym>
+    <expanded-acronym>OpenStreetMap</expanded-acronym>
+    <generic-icon name="application-vnd-google-earth-kml"/>
+    <glob pattern="*.osm" />
+    <glob pattern="*.osc" />
+    <!-- temporary solution, until thumbnailer is done, remove for root-XML stuff -->
+    <magic priority="80">
+      <match value="&lt;osm" type="string" offset="0:256"/>
+    </magic>
+    <!-- use again if thumbnailer is done -->
+    <!-- <root-XML namespaceURI='? TODO' localName='osm'/> -->
+  </mime-type>
+  <mime-type type="application/x-esri-shape">
+    <generic-icon name="application-vnd-google-earth-kml"/>
+    <comment>ESRI Shapefile</comment>
+    <generic-icon name="application-vnd-google-earth-kml"/>
+    <glob pattern="*.shp"/>
+    <magic priority="50">
+      <match offset="0" type="big32" value="0x0000270a"/>
+    </magic>
+  </mime-type>
+  <mime-type type="application/x-esri-shape-index">
+    <comment>ESRI Shapefile Index</comment>
+    <generic-icon name="application-octet-stream"/>
+    <glob pattern="*.shx"/>
+    <magic priority="50">
+      <match offset="0" type="big32" value="0x0000270a"/>
+    </magic>
+  </mime-type>
+</mime-info>
