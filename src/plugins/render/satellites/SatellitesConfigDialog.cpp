@@ -39,7 +39,7 @@ SatellitesConfigDialog::SatellitesConfigDialog( QWidget *parent )
     m_translations["Moons"]         = tr( "Moons", descCat );
     m_translations["Other"]         = tr( "Other", descCat );
     m_translations["Spacecrafts"]   = tr( "Spacecrafts", descCat );
-    m_translations["Space probes"]  = tr( "Space probes", descCat );
+    m_translations["Spaceprobes"]  = tr( "Spaceprobes", descCat );
     // + bodies
     const char *descBodies = "A planet or space body";
     m_translations["Moon"]          = tr( "Moon", descBodies );
