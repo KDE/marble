@@ -219,6 +219,11 @@ int StackedTileLoader::maximumTileLevel() const
     return d->m_maxTileLevel;
 }
 
+int StackedTileLoader::tileCount() const
+{
+    return d->m_tileCache.count() + d->m_tilesOnDisplay.count();
+}
+
 void StackedTileLoaderPrivate::detectMaxTileLevel()
 {
     if ( m_textureLayers.isEmpty() ) {

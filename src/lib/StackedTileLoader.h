@@ -117,6 +117,12 @@ class StackedTileLoader
         int maximumTileLevel() const;
 
         /**
+         * @brief Return the number of tiles in the cache.
+         * @return number of tiles in cache
+         */
+        int tileCount() const;
+
+        /**
          * @brief Set the limit of the volatile (in RAM) cache.
          * @param bytes The limit in kilobytes.
          */

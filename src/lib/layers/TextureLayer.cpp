@@ -235,7 +235,7 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
     d->m_texmapper->mapTexture( painter, viewport, dirtyRect, d->m_texcolorizer );
-    d->m_runtimeTrace = QString("Cache: %1 ").arg(d->m_pixmapCache.size());
+    d->m_runtimeTrace = QString("Cache: %1 ").arg(d->m_tileLoader.tileCount());
     return true;
 }
 
