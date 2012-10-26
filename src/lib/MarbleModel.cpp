@@ -566,9 +566,9 @@ void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
     if ( !texture )
         return;
 
-    QList<DownloadPolicy *> policies = texture->downloadPolicies();
-    QList<DownloadPolicy *>::const_iterator pos = policies.constBegin();
-    QList<DownloadPolicy *>::const_iterator const end = policies.constEnd();
+    QList<const DownloadPolicy *> policies = texture->downloadPolicies();
+    QList<const DownloadPolicy *>::const_iterator pos = policies.constBegin();
+    QList<const DownloadPolicy *>::const_iterator const end = policies.constEnd();
     for (; pos != end; ++pos ) {
         d->m_downloadManager.addDownloadPolicy( **pos );
     }

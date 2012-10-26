@@ -252,7 +252,7 @@ QString GeoSceneTexture::themeStr() const
     return dirInfo.isAbsolute() ? sourceDir() : "maps/" + sourceDir();
 }
 
-QList<DownloadPolicy *> GeoSceneTexture::downloadPolicies() const
+QList<const DownloadPolicy *> GeoSceneTexture::downloadPolicies() const
 {
     return m_downloadPolicies;
 }

@@ -100,7 +100,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
 
     QString themeStr() const;
 
-    QList<DownloadPolicy *> downloadPolicies() const;
+    QList<const DownloadPolicy *> downloadPolicies() const;
     void addDownloadPolicy( const DownloadUsage usage, const int maximumConnections );
 
     virtual QString type();
@@ -125,7 +125,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
 
     /// Points to next Url for the round robin algorithm
     mutable QVector<QUrl>::const_iterator m_nextUrl;
-    QList<DownloadPolicy *> m_downloadPolicies;
+    QList<const DownloadPolicy *> m_downloadPolicies;
 };
 
 inline bool GeoSceneTexture::hasMaximumTileLevel() const
