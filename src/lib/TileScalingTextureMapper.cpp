@@ -10,7 +10,7 @@
 
 
 // local
-#include"TileScalingTextureMapper.h"
+#include "TileScalingTextureMapper.h"
 
 // posix
 #include <cmath>
