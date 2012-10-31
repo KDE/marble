@@ -23,7 +23,7 @@ class GeoDataTreeModel;
 class BookmarkManagerPrivate
 {
 public:
-    BookmarkManagerPrivate();
+    BookmarkManagerPrivate( GeoDataTreeModel *treeModel );
 
     ~BookmarkManagerPrivate();
 
@@ -33,7 +33,7 @@ public:
 
     static void setVisualCategory( GeoDataContainer *container );
 
-    GeoDataTreeModel *m_treeModel;
+    GeoDataTreeModel *const m_treeModel;
 
     GeoDataDocument *m_bookmarkDocument;
 

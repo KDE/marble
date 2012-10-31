@@ -26,8 +26,10 @@
 namespace Marble
 {
 
-BookmarkManagerPrivate::BookmarkManagerPrivate()
-        : m_bookmarkDocument( 0 ), m_bookmarkFileRelativePath( "bookmarks/bookmarks.kml" )
+BookmarkManagerPrivate::BookmarkManagerPrivate( GeoDataTreeModel *treeModel ) :
+    m_treeModel( treeModel ),
+    m_bookmarkDocument( 0 ),
+    m_bookmarkFileRelativePath( "bookmarks/bookmarks.kml" )
 {
     // nothing to do
 }
@@ -74,10 +76,10 @@ void BookmarkManagerPrivate::setVisualCategory( GeoDataContainer *container ) {
 
 }
 
-BookmarkManager::BookmarkManager( GeoDataTreeModel *treeModel, QObject *parent )
-        : QObject( parent ), d( new BookmarkManagerPrivate() )
+BookmarkManager::BookmarkManager( GeoDataTreeModel *treeModel, QObject *parent ) :
+    QObject( parent ),
+    d( new BookmarkManagerPrivate( treeModel ) )
 {
-    d->m_treeModel = treeModel;
 }
 
 BookmarkManager::~BookmarkManager()
