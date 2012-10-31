@@ -96,36 +96,37 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
 {
     d->m_bookmarkFileRelativePath = relativeFilePath;
     QString absoluteFilePath = bookmarkFile();
+
+    mDebug() << Q_FUNC_INFO << "Loading Bookmark File:" << absoluteFilePath;
+
     if (absoluteFilePath.isEmpty())
         return false;
 
-    mDebug() << "Loading Bookmark File : " << absoluteFilePath;
-    if ( ! relativeFilePath.isNull() ) {
-        GeoDataDocument *document = openFile( absoluteFilePath );
-        bool recover = false;
-        if ( !document ) {
-            mDebug() << "Could not parse file" << absoluteFilePath;
-            mDebug() << "This could be caused by a previous broken bookmark file. Trying to recover.";
-            /** @todo: Remove this workaround and return false around Marble 1.4 */
-            recover = true;
-            // return false;
-        }
+    if ( relativeFilePath.isNull() )
+        return false;
 
-        d->m_treeModel->removeDocument( d->m_bookmarkDocument );
-        delete d->m_bookmarkDocument;
-        d->m_bookmarkDocument = document;
-
-        d->m_treeModel->addDocument( d->m_bookmarkDocument );
-
-        if ( recover ) {
-            updateBookmarkFile();
-        }
-
-        emit bookmarksChanged();
-        return true;
+    GeoDataDocument *document = openFile( absoluteFilePath );
+    bool recover = false;
+    if ( !document ) {
+        mDebug() << "Could not parse file" << absoluteFilePath;
+        mDebug() << "This could be caused by a previous broken bookmark file. Trying to recover.";
+        /** @todo: Remove this workaround and return false around Marble 1.4 */
+        recover = true;
+        // return false;
     }
 
-    return false;
+    d->m_treeModel->removeDocument( d->m_bookmarkDocument );
+    delete d->m_bookmarkDocument;
+    d->m_bookmarkDocument = document;
+
+    d->m_treeModel->addDocument( d->m_bookmarkDocument );
+
+    if ( recover ) {
+        updateBookmarkFile();
+    }
+
+    emit bookmarksChanged();
+    return true;
 }
 
 
