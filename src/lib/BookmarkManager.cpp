@@ -154,7 +154,7 @@ GeoDataDocument * BookmarkManager::document() const
     return d->bookmarkDocument();
 }
 
-bool BookmarkManager::showBookmarks()
+bool BookmarkManager::showBookmarks() const
 {
     return d->m_bookmarkDocument->isVisible();
 }

@@ -60,6 +60,7 @@ marble_add_test( QuaternionTest )           # Check Quaternion arithmetic
 marble_add_test( ProjectionTest )           # Check LineString projection
 marble_add_test( PluginManagerTest )        # Check plugin loading
 marble_add_test( MarbleRunnerManagerTest )  # Check RunnerManager signals
+marble_add_test( BookmarkManagerTest )
 marble_add_test( PlacemarkPositionProviderPluginTest )
 marble_add_test( PositionTrackingTest )
 marble_add_test( MercatorProjectionTest )   # Check Screen coordinates
