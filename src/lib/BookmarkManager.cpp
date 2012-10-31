@@ -31,7 +31,7 @@ BookmarkManagerPrivate::BookmarkManagerPrivate( GeoDataTreeModel *treeModel ) :
     m_bookmarkDocument( 0 ),
     m_bookmarkFileRelativePath( "bookmarks/bookmarks.kml" )
 {
-    // nothing to do
+    resetBookmarkDocument();
 }
 
 BookmarkManagerPrivate::~BookmarkManagerPrivate()
@@ -55,14 +55,6 @@ void BookmarkManagerPrivate::resetBookmarkDocument()
     m_bookmarkDocument->setName( QObject::tr("Bookmarks") );
     m_bookmarkDocument->append( folder );
     m_treeModel->addDocument( m_bookmarkDocument );
-}
-
-GeoDataDocument* BookmarkManagerPrivate::bookmarkDocument()
-{
-    if ( !m_bookmarkDocument ) {
-        resetBookmarkDocument();
-    }
-    return m_bookmarkDocument;
 }
 
 void BookmarkManagerPrivate::setVisualCategory( GeoDataContainer *container ) {
@@ -154,7 +146,7 @@ void BookmarkManager::removeBookmark( GeoDataPlacemark *bookmark )
 
 GeoDataDocument * BookmarkManager::document() const
 {
-    return d->bookmarkDocument();
+    return d->m_bookmarkDocument;
 }
 
 bool BookmarkManager::showBookmarks() const
@@ -170,7 +162,7 @@ void BookmarkManager::setShowBookmarks( bool visible )
 
 QVector<GeoDataFolder*> BookmarkManager::folders() const
 {
-    return d->bookmarkDocument()->folderList();
+    return d->m_bookmarkDocument->folderList();
 }
 
 void BookmarkManager::addNewBookmarkFolder( GeoDataContainer *container, const QString &name )
@@ -240,7 +232,7 @@ bool BookmarkManager::updateBookmarkFile()
 
         file.open( QIODevice::WriteOnly );
 
-        if ( !writer.write( &file,  d->bookmarkDocument() ) ) {
+        if ( !writer.write( &file, d->m_bookmarkDocument ) ) {
             mDebug() << "Could not write the bookmarks file" << absoluteLocalFilePath;
             file.close();
             return false;

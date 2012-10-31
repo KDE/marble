@@ -27,8 +27,6 @@ public:
 
     ~BookmarkManagerPrivate();
 
-    GeoDataDocument* bookmarkDocument();
-
     void resetBookmarkDocument();
 
     static void setVisualCategory( GeoDataContainer *container );

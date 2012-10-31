@@ -40,36 +40,20 @@ void BookmarkManagerTest::construct()
     {
         const BookmarkManager manager( &model );
 
-        QCOMPARE( model.rowCount(), 0 );
+        QCOMPARE( model.rowCount(), 1 );
 
         QVERIFY( manager.document() != 0 );
-
-        QCOMPARE( model.rowCount(), 1 );
-    }
-
-    QCOMPARE( model.rowCount(), 0 );
-
-    {
-        const BookmarkManager manager( &model );
-
-        QCOMPARE( model.rowCount(), 0 );
-
         QCOMPARE( manager.folders().count(), 1 );
         QCOMPARE( manager.folders().first()->size(), 0 );
+        QCOMPARE( manager.showBookmarks(), true );
+
+        // FIXME this method returns random results (depending on the username and the existance of the bookmarks file)
+        //    QCOMPARE( manager.bookmarkFile(), QString() );
 
         QCOMPARE( model.rowCount(), 1 );
     }
 
     QCOMPARE( model.rowCount(), 0 );
-
-// FIXME this test case crashes because BookmarkManagerPrivate::m_bookmarkDocument == 0
-#if 0
-    {
-        const BookmarkManager manager( &model );
-
-        QCOMPARE( manager.showBookmarks(), true );
-    }
-#endif
 }
 
 void BookmarkManagerTest::loadFile_data()
@@ -92,15 +76,14 @@ void BookmarkManagerTest::loadFile()
     GeoDataTreeModel model;
     BookmarkManager manager( &model );
 
-    QVERIFY( model.rowCount() == 0 );
+    QVERIFY( model.rowCount() == 1 );
 
     const bool fileLoaded = manager.loadFile( relativePath );
 
     QCOMPARE( fileLoaded, expected );
+    QVERIFY( manager.document() != 0 );
 
-    const int rowCount = fileLoaded ? 1 : 0;
-
-    QCOMPARE( model.rowCount(), rowCount );
+    QCOMPARE( model.rowCount(), 1 );
 }
 
 }

@@ -504,7 +504,7 @@ void BookmarkManagerDialog::importBookmarks()
 
 GeoDataDocument* BookmarkManagerDialog::bookmarkDocument()
 {
-    return d->m_manager->d->bookmarkDocument();
+    return d->m_manager->document();
 }
 
 void BookmarkManagerDialog::setButtonBoxVisible( bool visible )
