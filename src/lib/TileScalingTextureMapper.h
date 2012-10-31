@@ -13,7 +13,6 @@
 
 
 #include <QtCore/QObject>
-#include "marble_export.h"
 #include "TextureMapperInterface.h"
 
 #include "TileId.h"
@@ -25,7 +24,7 @@
 namespace Marble
 {
 
-class MARBLE_EXPORT TileScalingTextureMapper : public QObject, public TextureMapperInterface
+class TileScalingTextureMapper : public QObject, public TextureMapperInterface
 {
     Q_OBJECT
 
