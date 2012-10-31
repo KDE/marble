@@ -7,6 +7,7 @@
 // Copyright 2012 Utku Aydın <utkuaydin34@gmail.com>
 
 import QtQuick 1.0
+import QtWebKit 1.0
 import com.nokia.meego 1.0
 import org.kde.edu.marble 0.11
 import org.kde.edu.marble.qtcomponents 0.12
@@ -21,6 +22,15 @@ Page {
         MarbleToolIcon {
             iconSource: main.icon( "actions/go-home", 48 );
             onClicked: main.navigationMenu.open()
+        }
+
+        ToolButton {
+            id: authButton
+            width: 60
+            flat: true
+            checkable: true
+            checked: false
+            iconSource: main.icon( "places/favorites", 48 );
         }
     }
     
@@ -159,7 +169,8 @@ Page {
         id: venueDetails
         
         anchors.bottom: exploreActivityPage.bottom
-        width: exploreActivityPage.horizontal ? exploreActivityPage.width / 4 : exploreActivityPage.width
+        width: exploreActivityPage.horizontal ?
+            Math.max( exploreActivityPage.width / 4, minWidth() + 14 ) : exploreActivityPage.width
         height: exploreActivityPage.horizontal ? exploreActivityPage.height : exploreActivityPage.height / 3
         visible: false
         radius: 10
@@ -175,6 +186,14 @@ Page {
         property string country
         property string usersCount
         property string largeIcon
+        
+        function minWidth() {
+            return Math.max(detailName.width,
+                            detailCategory.width,
+                            detailAddress.width,
+                            detailCity.width,
+                            detailCountry.width)
+        }
         
         Image {
             id: detailIcon
@@ -309,5 +328,30 @@ Page {
         }
         
         Behavior on width { NumberAnimation { duration: 150 } }
+    }
+        
+    Flickable {
+        id: authFlickable
+        anchors.fill: mapContainer
+        contentWidth: width
+        contentHeight: height
+        visible: authButton.checked
+        
+        WebView {
+            id: authWebView
+            anchors.fill: parent
+            
+            property string authUrl: "https://foursquare.com/oauth2/authenticate?response_type=token"
+            property string redirectUri: "http://edu.kde.org/marble/dummy"
+            property string clientId: "YPRWSYFW1RVL4PJQ2XS5G14RTOGTHOKZVHC1EP5KCCCYQPZF"
+            
+            url: authUrl + "&redirect_uri=" + redirectUri + "&client_id=" + clientId
+            onLoadFinished: {
+                if( marbleWidget.renderPlugin( "foursquare" ).storeAccessToken( url ) ) {
+                    stop.trigger()
+                    authButton.checked = false
+                }
+            }
+        }
     }
 }

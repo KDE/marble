@@ -10,6 +10,7 @@
 
 #include "FoursquarePlugin.h"
 #include "FoursquareModel.h"
+#include <QSettings>
 
 namespace Marble {
 
@@ -79,6 +80,26 @@ QList<PluginAuthor> FoursquarePlugin::pluginAuthors() const
 QIcon FoursquarePlugin::icon() const
 {
     return QIcon();
+}
+
+bool FoursquarePlugin::isAuthenticated()
+{
+    QSettings settings;
+    
+    return !settings.value( "access_token" ).isNull();
+}
+
+bool FoursquarePlugin::storeAccessToken(const QString& tokenUrl)
+{
+    QString expected = "http://edu.kde.org/marble/dummy#access_token=";
+    if( tokenUrl.startsWith( expected ) ) {
+        QSettings settings;
+        QString url = tokenUrl;
+        settings.setValue( "access_token", url.remove( expected ) );
+        return true;
+    } else {
+        return false;
+    }
 }
 
 }
