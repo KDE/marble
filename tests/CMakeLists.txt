@@ -95,15 +95,6 @@ endif (QTONLY)
 # include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/plugins/render/osmannotate )
 
 
-#################################################
-# dumps a dgml or a kml file without testing anything
-# FIXME turn into automated test or remove
-#################################################
-add_executable(geodatatest GeoDataTest.cpp)
-set_target_properties( geodatatest PROPERTIES COMPILE_FLAGS "-DKML_LAZY_IMP" )
-target_link_libraries (geodatatest marblewidget ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
-
-
 ############################
 # Drop in New Tests
 ############################
