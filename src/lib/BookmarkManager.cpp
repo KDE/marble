@@ -249,7 +249,7 @@ bool BookmarkManager::updateBookmarkFile()
     return false;
 }
 
-GeoDataDocument* BookmarkManager::openFile( const QString &fileName ) const
+GeoDataDocument* BookmarkManager::openFile( const QString &fileName )
 {
     GeoDataParser parser( GeoData_KML );
     QFile file( fileName );
@@ -270,7 +270,7 @@ GeoDataDocument* BookmarkManager::openFile( const QString &fileName ) const
 
     result->setDocumentRole( BookmarkDocument );
     foreach( GeoDataFolder* folder, result->folderList() ) {
-        d->setVisualCategory( folder );
+        BookmarkManagerPrivate::setVisualCategory( folder );
     }
 
     return result;

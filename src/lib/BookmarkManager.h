@@ -104,7 +104,7 @@ Q_SIGNALS:
     */
     bool updateBookmarkFile();
 
-    GeoDataDocument* openFile( const QString& fileName ) const;
+    static GeoDataDocument* openFile( const QString& fileName );
 
     BookmarkManagerPrivate* const d;
 

@@ -31,7 +31,7 @@ public:
 
     void resetBookmarkDocument();
 
-    void setVisualCategory( GeoDataContainer *container );
+    static void setVisualCategory( GeoDataContainer *container );
 
     GeoDataTreeModel *m_treeModel;
 
