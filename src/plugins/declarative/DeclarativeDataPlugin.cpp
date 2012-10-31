@@ -367,4 +367,9 @@ void DeclarativeDataPlugin::setDeclarativeModel( const QVariant &model )
     emit declarativeModelChanged();
 }
 
+QVariant DeclarativeDataPlugin::declarativeModel()
+{
+    return d->m_model;
+}
+
 #include "DeclarativeDataPlugin.moc"

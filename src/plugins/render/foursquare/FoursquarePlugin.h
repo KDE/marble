@@ -12,6 +12,7 @@
 #define FOURSQUAREPLUGIN_H
 
 #include "AbstractDataPlugin.h"
+#include <QUrl>
 
 namespace Marble {
 
@@ -45,6 +46,18 @@ public:
     QList<PluginAuthor> pluginAuthors() const;
 
     QIcon icon() const;
+    
+    /**
+     * @brief Checks if there is an access token stored.
+     */
+    Q_INVOKABLE bool isAuthenticated();
+    
+    /**
+     * @brief Stores the access token.
+     * @param url A dummy URL that has a fragment named access_token
+     * @see https://developer.foursquare.com/overview/auth
+     */
+    Q_INVOKABLE bool storeAccessToken(const QString &tokenUrl);
     
 private:
     bool m_isInitialized;
