@@ -12,7 +12,7 @@
 #include "PluginItemDelegate.h"
 
 // Marble
-#include "RenderPlugin.h"
+#include "RenderPluginModel.h"
 #include "MarbleDebug.h"
 
 // Qt
@@ -83,7 +83,7 @@ void PluginItemDelegate::paint( QPainter *painter,
     topRight -= QPoint( button.rect.width(), 0 );
 
     // Painting the Configure Button
-    if ( index.data( RenderPlugin::ConfigurationDialogAvailable ).toBool() ) {
+    if ( index.data( RenderPluginModel::ConfigurationDialogAvailable ).toBool() ) {
         QStyleOptionButton button = buttonOption( option, index, PluginItemDelegate::Configure,
                                                   topRight.x(), Qt::AlignRight );
         style->drawControl( QStyle::CE_PushButton, &button, painter );
@@ -209,7 +209,7 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
                                             PluginItemDelegate::About,
                                             topRight.x(),
                                             Qt::AlignRight ).rect;
-            QString nameId = index.data( RenderPlugin::NameId ).toString();
+            QString nameId = index.data( RenderPluginModel::NameId ).toString();
             if ( aboutRect.contains( mousePosition ) ) {
                 if ( event->type() == QEvent::MouseButtonDblClick )
                     return true;
@@ -247,13 +247,13 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
 
         // Handle configButton
         // make sure we have config button
-        if ( index.data( RenderPlugin::ConfigurationDialogAvailable ).toBool() ) {
+        if ( index.data( RenderPluginModel::ConfigurationDialogAvailable ).toBool() ) {
             QRect configRect = buttonOption( option,
                                              index,
                                              PluginItemDelegate::Configure,
                                              topRight.x(),
                                              Qt::AlignRight ).rect;
-            QString nameId = index.data( RenderPlugin::NameId ).toString();
+            QString nameId = index.data( RenderPluginModel::NameId ).toString();
             if( configRect.contains( mousePosition ) ) {
                 if ( event->type() == QEvent::MouseButtonDblClick )
                     return true;
@@ -348,7 +348,7 @@ QStyleOptionButton PluginItemDelegate::buttonOption( const QStyleOptionViewItem&
             contentSize = iconSize;
         }
 
-        if ( m_aboutPressedPluginId == index.data( RenderPlugin::NameId ).toString() ) {
+        if ( m_aboutPressedPluginId == index.data( RenderPluginModel::NameId ).toString() ) {
             buttonOption.state |= QStyle::State_Sunken;
         }
     }
@@ -362,7 +362,7 @@ QStyleOptionButton PluginItemDelegate::buttonOption( const QStyleOptionViewItem&
             buttonOption.iconSize = iconSize;
             contentSize = iconSize;
         }
-        if ( m_configPressedPluginId == index.data( RenderPlugin::NameId ).toString() ) {
+        if ( m_configPressedPluginId == index.data( RenderPluginModel::NameId ).toString() ) {
             buttonOption.state |= QStyle::State_Sunken;
         }
     }
