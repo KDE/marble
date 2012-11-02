@@ -83,6 +83,7 @@ marble_add_test( TestGeoPainter )           # no tests!
 marble_add_test( GeoPolygonTest )           # Loads an empty pnt file
 marble_add_test( RenderPluginTest )
 marble_add_test( AbstractDataPluginTest )
+marble_add_test( RenderPluginModelTest )
 
 ## GeoData Classes tests
 marble_add_test( TestGeoData )                  # Check parent, nodetype

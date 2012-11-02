@@ -78,6 +78,7 @@
 #include "MapWizard.h"
 #include "NewBookmarkFolderDialog.h"
 #include "PluginAboutDialog.h"
+#include "RenderPluginModel.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
 #include "routing/RoutingProfilesWidget.h"
@@ -1411,15 +1412,7 @@ void MarblePart::editSettings()
     m_configDialog->addPage( w_routingSettings, tr( "Routing" ) );
 
     // plugin page
-    m_pluginModel = new QStandardItemModel( this );
-    QStandardItem  *parentItem = m_pluginModel->invisibleRootItem();
-
-    QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        parentItem->appendRow( (*i)->item() );
-    }
+    m_pluginModel = new RenderPluginModel( m_controlView->marbleWidget(), this );
 
     MarblePluginSettingsWidget *w_pluginSettings = new MarblePluginSettingsWidget();
     w_pluginSettings->setModel( m_pluginModel );
@@ -1439,7 +1432,7 @@ void MarblePart::editSettings()
     connect( m_configDialog,   SIGNAL( okClicked() ),
                                SLOT( applyPluginState() ) );
     connect( m_configDialog,   SIGNAL( cancelClicked() ),
-                               SLOT( retrievePluginState() ) );
+             m_pluginModel,    SLOT( retrievePluginState() ) );
     connect( w_pluginSettings, SIGNAL( aboutPluginClicked( QString ) ),
                                SLOT( showPluginAboutDialog( QString ) ) );
     connect( w_pluginSettings, SIGNAL( configPluginClicked( QString ) ),
@@ -1455,12 +1448,7 @@ void MarblePart::enableApplyButton()
 
 void MarblePart::applyPluginState()
 {
-    QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        (*i)->applyItemState();
-    }
+    m_pluginModel->applyPluginState();
 
     QList<RoutingProfile>  profiles = m_controlView->marbleWidget()
                         ->model()->routingManager()->profilesModel()->profiles();
@@ -1482,16 +1470,6 @@ void MarblePart::applyPluginState()
                 pluginGroup.writeEntry( settingKey, profile.pluginSettings()[ key ][ settingKey ] );
             }
         }
-    }
-}
-
-void MarblePart::retrievePluginState()
-{
-    QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        (*i)->retrieveItemState();
     }
 }
 

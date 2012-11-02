@@ -30,6 +30,7 @@ namespace Marble
 {
 
 class MarbleModel;
+class RenderPluginModel;
 
 /**
  * @short The abstract class that creates a renderable Item.
@@ -48,16 +49,6 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     Q_PROPERTY ( bool visible READ visible WRITE setVisible NOTIFY visibilityChanged )
 
  public:
-    /**
-     * This enum contains the data roles for the QStandardItem that is returned by item().
-     * TODO: This should get moved into PluginInterface.h
-     */
-    enum ItemDataRole {
-        NameId = Qt::UserRole + 2,       // a QString
-        ConfigurationDialogAvailable,    // a bool
-        BackendTypes                     // a QStringList
-    };
-
     enum RenderType {
         Unknown,
         Online
@@ -99,11 +90,6 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      *@return A QList of grouped toolbar actions
      */
     virtual QList<QActionGroup*>*   toolbarActionGroups() const;
-    
-    QStandardItem *item();
-
-    void applyItemState();
-    void retrieveItemState();
 
     bool    enabled() const;
     bool    visible() const;
@@ -169,6 +155,14 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 
  protected:
     bool eventFilter( QObject *, QEvent * );
+
+ private:
+    friend class RenderPluginModel;
+
+    QStandardItem *item();
+
+    void applyItemState();
+    void retrieveItemState();
 
  private:
     Q_DISABLE_COPY( RenderPlugin )

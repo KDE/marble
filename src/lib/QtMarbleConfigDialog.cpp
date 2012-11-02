@@ -40,6 +40,7 @@
 #include "MarbleModel.h"
 #include "PluginAboutDialog.h"
 #include "RenderPlugin.h"
+#include "RenderPluginModel.h"
 #include "MarbleClock.h"
 #include "routing/RoutingProfilesWidget.h"
 
@@ -53,19 +54,14 @@ class QtMarbleConfigDialogPrivate
         : ui_viewSettings(),
           ui_navigationSettings(),
           ui_timeSettings(),
-          m_marbleWidget( marbleWidget )
+          m_marbleWidget( marbleWidget ),
+          m_pluginModel( marbleWidget )
     {
     }
 
     ~QtMarbleConfigDialogPrivate()
     {
         delete m_settings;
-    }
-
-    static bool renderPluginGuiStringLessThan( RenderPlugin* one, RenderPlugin* two )
-    {
-        // Sort by gui string ignoring keyboard accelerators
-        return one->guiString().replace( "&", "" ) < two->guiString().replace( "&", "" );
     }
 
     void initSettings()
@@ -81,9 +77,9 @@ class QtMarbleConfigDialogPrivate
 
     QSettings *m_settings;
 
-    MarbleWidget *m_marbleWidget;
+    MarbleWidget *const m_marbleWidget;
 
-    QStandardItemModel* m_pluginModel;
+    RenderPluginModel m_pluginModel;
 
     QHash< int, int > m_timezone;            
 
@@ -159,19 +155,8 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     tabWidget->addTab( w_routingSettings, tr( "Routing" ) );
 
     // plugin page
-    d->m_pluginModel = new QStandardItemModel( this );
-    QStandardItem  *parentItem = d->m_pluginModel->invisibleRootItem();
-
-    QList<RenderPlugin *>  pluginList = d->m_marbleWidget->renderPlugins();
-    qSort( pluginList.begin(), pluginList.end(), QtMarbleConfigDialogPrivate::renderPluginGuiStringLessThan );
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        parentItem->appendRow( (*i)->item() );
-    }
-
     d->w_pluginSettings = new MarblePluginSettingsWidget( this );
-    d->w_pluginSettings->setModel( d->m_pluginModel );
+    d->w_pluginSettings->setModel( &d->m_pluginModel );
     d->w_pluginSettings->setObjectName( "plugin_page" );
     tabWidget->addTab( d->w_pluginSettings, tr( "Plugins" ) );
 
@@ -183,8 +168,8 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
                                   SLOT( showPluginAboutDialog( QString ) ) );
     connect( d->w_pluginSettings, SIGNAL( configPluginClicked( QString ) ),
                                   SLOT( showPluginConfigDialog( QString ) ) );
-    connect( this, SIGNAL( rejected() ), this, SLOT( retrievePluginState() ) );
-    connect( this, SIGNAL( accepted() ), this, SLOT( applyPluginState() ) );
+    connect( this, SIGNAL( rejected() ), &d->m_pluginModel, SLOT( retrievePluginState() ) );
+    connect( this, SIGNAL( accepted() ), &d->m_pluginModel, SLOT( applyPluginState() ) );
 
     // Layout
     QVBoxLayout *layout = new QVBoxLayout( this );
@@ -513,26 +498,6 @@ void QtMarbleConfigDialog::writeSettings()
                                    "Please close the application and start Marble again.") );
     }    
     d->m_previousGraphicsSystem = graphicsSystem();
-}
-
-void QtMarbleConfigDialog::retrievePluginState()
-{
-    QList<RenderPlugin *>  pluginList = d->m_marbleWidget->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        (*i)->retrieveItemState();
-    }
-}
-
-void QtMarbleConfigDialog::applyPluginState()
-{
-    QList<RenderPlugin *>  pluginList = d->m_marbleWidget->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        (*i)->applyItemState();
-    }
 }
 
 QLocale::MeasurementSystem QtMarbleConfigDialog::measurementSystem() const

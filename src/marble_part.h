@@ -46,6 +46,7 @@ class RoutingProfilesWidget;
 class SunControlWidget;
 class TimeControlWidget;
 class GeoDataFolder;
+class RenderPluginModel;
 class SearchInputWidget;
 
 class MarblePart: public KParts::ReadOnlyPart
@@ -148,7 +149,6 @@ class MarblePart: public KParts::ReadOnlyPart
 
     void  enableApplyButton();
     void  applyPluginState();
-    void  retrievePluginState();
 
     void  updateSettings();
 
@@ -244,7 +244,7 @@ class MarblePart: public KParts::ReadOnlyPart
     KToggleAction *m_showShadow;
     KToggleAction *m_showSunInZenith;
 
-    QStandardItemModel* m_pluginModel;
+    RenderPluginModel *m_pluginModel;
 
     KConfigDialog *m_configDialog;
 

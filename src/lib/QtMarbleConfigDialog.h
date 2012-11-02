@@ -125,16 +125,6 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     
     private Q_SLOTS:
     /**
-     * Retrieve the current plugin state for the user interface.
-     */
-    void retrievePluginState();
-    
-    /**
-     * Apply the plugin state from the user interface.
-     */
-    void applyPluginState();
-    
-    /**
      * Synchronize the loaded settings with the file on hard disk.
      */
     void syncSettings();
