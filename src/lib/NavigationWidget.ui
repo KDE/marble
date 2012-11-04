@@ -22,13 +22,6 @@
      <widget class="QWidget" name="verticalLayoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QCheckBox" name="boundedCheckBox">
-         <property name="text">
-          <string>Around</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="MarbleSearchListView" name="locationListView">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">

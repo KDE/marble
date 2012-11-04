@@ -172,6 +172,14 @@ enum FlyToMode {
     Jump ///< Linear interpolation of lon and lat, distance increases towards the middle point, then decreases    
 };
 
+/**
+ * @brief Search mode: Global (worldwide) versus area (local, regional) search
+ */
+enum SearchMode {
+    GlobalSearch, ///< Search a whole planet
+    AreaSearch ///< Search a certain region of a planet (e.g. visible region)
+};
+
 const int defaultLevelZeroColumns = 2;
 const int defaultLevelZeroRows = 1;
 

@@ -238,10 +238,10 @@ CurrentLocationWidget * MarbleControlBox::currentLocationWidget()
     return d->m_currentLocationWidget;
 }
 
-void MarbleControlBox::search(const QString &searchTerm)
+void MarbleControlBox::search(const QString &searchTerm, SearchMode searchMode )
 {
     setCurrentWidget( d->m_navigationWidget );
-    d->m_navigationWidget->search( searchTerm );
+    d->m_navigationWidget->search( searchTerm, searchMode );
 }
 
 }

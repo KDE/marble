@@ -1029,7 +1029,7 @@ void MainWindow::createToolBar()
     SearchInputWidget *searchField = new SearchInputWidget( this );
     searchField->setCompletionModel( m_controlView->marbleModel()->placemarkModel() );
     searchField->setMaximumWidth( 400 );
-    connect( searchField, SIGNAL( search( QString ) ), m_controlView, SLOT( search( QString ) ) );
+    connect( searchField, SIGNAL( search( QString, SearchMode ) ), m_controlView, SLOT( search( QString, SearchMode ) ) );
     connect( searchField, SIGNAL( centerOn( const GeoDataCoordinates &) ),
              m_controlView->marbleWidget(), SLOT( centerOn( const GeoDataCoordinates & ) ) );
     connect( m_controlView, SIGNAL( searchFinished() ), searchField, SLOT( disableSearchAnimation() ) );

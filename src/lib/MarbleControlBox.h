@@ -103,7 +103,7 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
     /**
       * Brings the navigation tab to the front and initiates a search for the given term
       */
-    void search( const QString &searchTerm );
+    void search( const QString &searchTerm, SearchMode searchMode );
 
  public Q_SLOTS:
     void selectTheme( const QString & );
