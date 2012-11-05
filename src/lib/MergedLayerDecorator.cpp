@@ -141,9 +141,6 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
         const QImage tileImage = d->m_tileLoader->loadTile( textureLayer, tileId, DownloadBrowse );
         const Blending *blending = d->m_blendingFactory.findBlending( textureLayer->blending() );
-        if ( blending == 0 && !textureLayer->blending().isEmpty() ) {
-            mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
-        }
         QSharedPointer<TextureTile> tile( new TextureTile( tileId, tileImage, blending ) );
         tiles.append( tile );
     }
