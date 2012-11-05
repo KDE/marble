@@ -39,12 +39,18 @@ namespace gpx
     extern const char* gpxTag_lon;
     extern const char* gpxTag_name;
     extern const char* gpxTag_time;
+    extern const char* gpxTag_desc;
+    extern const char* gpxTag_type;
     extern const char* gpxTag_trk;
     extern const char* gpxTag_trkpt;
     extern const char* gpxTag_trkseg;
     extern const char* gpxTag_wpt;
     extern const char* gpxTag_rte;
     extern const char* gpxTag_rtept;
+    extern const char* gpxTag_cmt;
+    extern const char* gpxTag_link;
+    extern const char* gpxTag_url;
+    extern const char* gpxTag_urlname;
     // TODO: add all remaining tags!
 
     extern const char* gpxTag_nameSpaceGarminTrackPointExt1;
