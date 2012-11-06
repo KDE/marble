@@ -56,6 +56,11 @@ AbstractDataPlugin::~AbstractDataPlugin()
     delete d;
 }
 
+bool AbstractDataPlugin::isInitialized() const
+{
+    return model() != 0;
+}
+
 QStringList AbstractDataPlugin::backendTypes() const
 {
     return QStringList( name() );

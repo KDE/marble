@@ -35,8 +35,7 @@ WikipediaPlugin::WikipediaPlugin()
 
 WikipediaPlugin::WikipediaPlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
-      m_isInitialized( false ),
-      m_icon(),
+      m_icon( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) ),
       ui_configWidget( 0 ),
       m_configDialog( 0 ),
       m_settings()
@@ -52,8 +51,6 @@ WikipediaPlugin::WikipediaPlugin( const MarbleModel *marbleModel )
              this, SLOT( checkNumberOfItems( quint32 ) ) );
      
     setSettings( QHash<QString,QVariant>() );
-
-    m_icon.addFile( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) );
 }
 
 WikipediaPlugin::~WikipediaPlugin()
@@ -68,12 +65,6 @@ void WikipediaPlugin::initialize()
     // Ensure that all settings get forwarded to the model.
     setModel( model );
     updateSettings();
-    m_isInitialized = true;
-}
-
-bool WikipediaPlugin::isInitialized() const
-{
-    return m_isInitialized;
 }
 
 QString WikipediaPlugin::name() const

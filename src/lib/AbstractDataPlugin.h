@@ -44,7 +44,10 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
  public:    
     AbstractDataPlugin( const MarbleModel *marbleModel );
 
-    virtual ~AbstractDataPlugin();    
+    virtual ~AbstractDataPlugin();
+
+    bool isInitialized() const;
+
     /**
      * @brief Returns the name(s) of the backend that the plugin can render
      */
