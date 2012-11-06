@@ -82,7 +82,7 @@ class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInt
     const QIcon m_icon;
     Ui::WikipediaConfigWidget *ui_configWidget;
     QDialog *m_configDialog;
-    QHash<QString,QVariant> m_settings;
+    bool m_showThumbnails;
 };
 
 }
