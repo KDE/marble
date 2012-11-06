@@ -56,9 +56,9 @@ class MARBLE_EXPORT PluginAboutDialog : public QDialog
     void setVersion( const QString& version );
 
     /**
-     * Sets the pixmap to be displayed at the top of the dialog.
+     * Sets the icon to be displayed at the top of the dialog.
      */
-    void setPixmap( const QPixmap& pixmap );
+    void setIcon( const QIcon& icon );
 
     /**
      * Sets the text displayed in the "About" tab of the dialog.
