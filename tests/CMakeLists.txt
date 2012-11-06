@@ -70,6 +70,7 @@ marble_add_test( MapViewWidgetTest )        # Check mapview signals
 marble_add_test( TestGeoPainter )           # no tests!
 marble_add_test( GeoPolygonTest )           # Loads an empty pnt file
 marble_add_test( RenderPluginTest )
+marble_add_test( AbstractDataPluginTest )
 
 ## GeoData Classes tests
 marble_add_test( TestGeoData )                  # Check parent, nodetype
