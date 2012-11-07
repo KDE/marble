@@ -38,7 +38,6 @@ class AbstractDataPluginItemPrivate
     QString m_toolTip;
     bool m_favorite;
     qreal m_addedAngularResolution;
-    QHash<QString, QVariant> m_settings;
 };
 
 AbstractDataPluginItem::AbstractDataPluginItem( QObject *parent )
@@ -113,7 +112,7 @@ void AbstractDataPluginItem::setAddedAngularResolution( qreal resolution )
 
 void AbstractDataPluginItem::setSettings( const QHash<QString, QVariant>& settings )
 {
-    d->m_settings = settings;
+    Q_UNUSED( settings )
 }
 
 QAction *AbstractDataPluginItem::action()
