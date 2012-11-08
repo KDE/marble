@@ -36,6 +36,15 @@ set( gpx_SRCS GpxParser.cpp GpxPlugin.cpp GpxRunner.cpp )
 
 marble_add_plugin( GpxPlugin ${gpx_SRCS}  ${gpx_handlers_SRCS} )
 
+if(QTONLY)
+  if(not WIN32 and not APPLE)
+    install(FILES marble_gpx.desktop DESTINATION ${APPS_INSTALL_DIR})
+  endif(not WIN32 and not APPLE)
+else(QTONLY)
+  install(PROGRAMS marble_gpx.desktop DESTINATION ${APPS_INSTALL_DIR})
+  install(FILES marble_part_gpx.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+endif(QTONLY)
+
 
 if( BUILD_MARBLE_TESTS )
     include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/tests )

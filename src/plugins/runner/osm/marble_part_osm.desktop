@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Service
+Name=Marble Part
+MimeType=application/x-osm+xml;
+X-KDE-ServiceTypes=Browser/View,KParts/ReadOnlyPart
+X-KDE-Library=libmarble_part
+Icon=marble
