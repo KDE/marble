@@ -20,8 +20,7 @@ FoursquarePlugin::FoursquarePlugin()
 }
 
 FoursquarePlugin::FoursquarePlugin(const MarbleModel* marbleModel)
-    : AbstractDataPlugin(marbleModel),
-      m_isInitialized( false )
+    : AbstractDataPlugin(marbleModel)
 {
     setEnabled( true ); // Plugin is enabled by default
     setVisible( false ); // Plugin is invisible by default
@@ -32,12 +31,6 @@ void FoursquarePlugin::initialize()
     FoursquareModel *model = new FoursquareModel( pluginManager(), this );
     setModel( model );
     setNumberOfItems( 20 ); // Do we hardcode that?
-    m_isInitialized = true;
-}
-
-bool FoursquarePlugin::isInitialized() const
-{
-    return m_isInitialized;
 }
 
 QString FoursquarePlugin::name() const
