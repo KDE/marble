@@ -46,6 +46,3 @@ add_subdirectory( inhibit-screensaver )
 if (NOT WIN32)
   add_subdirectory( aprs )
 endif (NOT WIN32)
-
-add_subdirectory( elevationprofilefloatitem )
-add_subdirectory( elevationprofilemarker )
