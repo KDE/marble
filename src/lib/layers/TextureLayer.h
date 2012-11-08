@@ -15,7 +15,7 @@
 #include <QtCore/QObject>
 
 #include "MarbleGlobal.h"
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 
 #include <QtCore/QSize>
 
@@ -57,7 +57,7 @@ class TextureLayer : public QObject, public LayerInterface
 
     QSize tileSize() const;
 
-    GeoSceneTexture::Projection tileProjection() const;
+    GeoSceneTiled::Projection tileProjection() const;
 
     int tileColumnCount( int level ) const;
     int tileRowCount( int level ) const;
@@ -89,7 +89,7 @@ public Q_SLOTS:
 
     void setNeedsUpdate();
 
-    void setMapTheme( const QVector<const GeoSceneTexture *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
+    void setMapTheme( const QVector<const GeoSceneTiled *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
 
     void setVolatileCacheLimit( quint64 kilobytes );
 

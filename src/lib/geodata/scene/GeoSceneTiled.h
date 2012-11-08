@@ -1,27 +1,19 @@
 /*
-    Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
-    Copyright (C) 2008 Jens-Michael Hoffmann <jensmh@gmx.de>
+ This file is part of the Marble Virtual Globe.
 
-    This file is part of the KDE project
+ This program is free software licensed under the GNU LGPL. You can
+ find a copy of this license in LICENSE.txt in the top directory of
+ the source code.
 
-    This library is free software you can redistribute it and/or
-    modify it under the terms of the GNU Library General Public
-    License as published by the Free Software Foundation either
-    version 2 of the License, or (at your option) any later version.
+ Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
 
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Library General Public License for more details.
+ Copyright (C) 2008 Jens-Michael Hoffmann <jensmh@gmx.de>
 
-    You should have received a copy of the GNU Library General Public License
-    aint with this library see the file COPYING.LIB.  If not, write to
-    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-    Boston, MA 02110-1301, USA.
+ Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
-#ifndef MARBLE_GEOSCENETEXTURE_H
-#define MARBLE_GEOSCENETEXTURE_H
+#ifndef MARBLE_GEOSCENETILED_H
+#define MARBLE_GEOSCENETILED_H
 
 #include <QtCore/QList>
 #include <QtCore/QStringList>
@@ -33,9 +25,13 @@
 #include "MarbleGlobal.h"
 
 /**
- * @short Texture dataset stored in a layer.
+ * @short Tiled dataset stored in a layer. TextureTile and VectorTile layes inherit from this class.
  */
 
+/* In order to make Marble able to manage vector tiles,
+ * now there is GeoSceneTiled and then GeoSceneTiled
+ * (for the tag <texture> in dgml) or GeoSceneVectorTile
+ * (for <vectortile>) are created, which inherit from this class */
 
 namespace Marble
 {
@@ -44,14 +40,14 @@ class DownloadPolicy;
 class ServerLayout;
 class TileId;
 
-class GeoSceneTexture : public GeoSceneAbstractDataset
+class GeoSceneTiled : public GeoSceneAbstractDataset
 {
  public:
     enum StorageLayout { Marble, OpenStreetMap, TileMapService };
     enum Projection { Equirectangular, Mercator };
 
-    explicit GeoSceneTexture( const QString& name );
-    ~GeoSceneTexture();
+    explicit GeoSceneTiled( const QString& name );
+    ~GeoSceneTiled();
     virtual const char* nodeType() const;
 
     QString sourceDir() const;
@@ -75,7 +71,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     bool hasMaximumTileLevel() const;
     int maximumTileLevel() const;
     void setMaximumTileLevel( const int );
-
+    
     QVector<QUrl> downloadUrls() const;
 
     const QSize tileSize() const;
@@ -106,7 +102,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     virtual QString type();
 
  private:
-    Q_DISABLE_COPY( GeoSceneTexture )
+    Q_DISABLE_COPY( GeoSceneTiled )
     QStringList hostNames() const;
 
     QString m_sourceDir;
@@ -128,17 +124,17 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     QList<const DownloadPolicy *> m_downloadPolicies;
 };
 
-inline bool GeoSceneTexture::hasMaximumTileLevel() const
+inline bool GeoSceneTiled::hasMaximumTileLevel() const
 {
     return m_maximumTileLevel != -1;
 }
 
-inline QString GeoSceneTexture::blending() const
+inline QString GeoSceneTiled::blending() const
 {
     return m_blending;
 }
 
-inline void GeoSceneTexture::setBlending( const QString &name )
+inline void GeoSceneTiled::setBlending( const QString &name )
 {
     m_blending = name;
 }

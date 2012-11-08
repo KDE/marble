@@ -29,8 +29,10 @@ const char* GeoScenePaletteType = "GeoScenePalette";
 const char* GeoScenePropertyType = "GeoSceneProperty";
 const char* GeoSceneSectionType = "GeoSceneSection";
 const char* GeoSceneSettingsType = "GeoSceneSettings";
-const char* GeoSceneTextureType = "GeoSceneTexture";
+const char* GeoSceneTextureTileType = "GeoSceneTextureTile";
+const char* GeoSceneTiledType = "GeoSceneTiled";
 const char* GeoSceneVectorType = "GeoSceneVector";
+const char* GeoSceneVectorTileType = "GeoSceneVectorTile";
 const char* GeoSceneXmlDataSourceType = "GeoSceneXmlDataSource";
 const char* GeoSceneZoomType = "GeoSceneZoom";
 }

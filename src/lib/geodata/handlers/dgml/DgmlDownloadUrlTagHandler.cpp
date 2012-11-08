@@ -29,7 +29,7 @@
 #include "DgmlAttributeDictionary.h"
 #include "DgmlElementDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 
 namespace Marble
 {
@@ -44,7 +44,7 @@ GeoNode* DgmlDownloadUrlTagHandler::parse( GeoParser& parser ) const
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if ( !parentItem.represents( dgmlTag_Texture ))
+    if ( !parentItem.represents( dgmlTag_Texture ) &&  !parentItem.represents( dgmlTag_Vectortile ) )
         return 0;
 
     QUrl url;
@@ -84,7 +84,7 @@ GeoNode* DgmlDownloadUrlTagHandler::parse( GeoParser& parser ) const
     if ( !queryStr.isEmpty() )
         url.setEncodedQuery( queryStr.toLatin1() );
 
-    parentItem.nodeAs<GeoSceneTexture>()->addDownloadUrl( url );
+    parentItem.nodeAs<GeoSceneTiled>()->addDownloadUrl( url );
     return 0;
 }
 

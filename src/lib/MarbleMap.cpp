@@ -809,10 +809,10 @@ void MarbleMapPrivate::updateMapTheme()
         const GeoSceneLayer *const sceneLayer = ( head && map ) ? map->layer( head->theme() ) : 0;
 
         bool textureLayersOk = true;
-        QVector<const GeoSceneTexture *> textures;
+        QVector<const GeoSceneTiled *> textures;
         if ( sceneLayer ) {
             foreach ( const GeoSceneAbstractDataset *pos, sceneLayer->datasets() ) {
-                const GeoSceneTexture *const texture = dynamic_cast<GeoSceneTexture const *>( pos );
+                const GeoSceneTiled *const texture = dynamic_cast<GeoSceneTiled const *>( pos );
                 if ( !texture )
                     continue;
 
@@ -886,7 +886,7 @@ void MarbleMapPrivate::updateMapTheme()
         }
     }
     else {
-        m_textureLayer.setMapTheme( QVector<const GeoSceneTexture *>(), 0, "", "" );
+        m_textureLayer.setMapTheme( QVector<const GeoSceneTiled *>(), 0, "", "" );
     }
 
     // earth

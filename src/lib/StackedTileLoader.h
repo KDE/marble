@@ -29,7 +29,7 @@
 #include <QtCore/QSize>
 #include <QtCore/QVector>
 
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 #include "TileId.h"
 #include "MarbleGlobal.h"
 
@@ -71,13 +71,13 @@ class StackedTileLoader : public QObject
         explicit StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator, QObject *parent = 0 );
         virtual ~StackedTileLoader();
 
-        void setTextureLayers( QVector<GeoSceneTexture const *> & );
+        void setTextureLayers( QVector<GeoSceneTiled const *> & );
 
         int tileColumnCount( int level ) const;
 
         int tileRowCount( int level ) const;
 
-        GeoSceneTexture::Projection tileProjection() const;
+        GeoSceneTiled::Projection tileProjection() const;
 
         QSize tileSize() const;
 

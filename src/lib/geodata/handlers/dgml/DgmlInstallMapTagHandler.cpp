@@ -23,7 +23,7 @@
 
 #include "DgmlElementDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 
 namespace Marble
 {
@@ -38,8 +38,8 @@ GeoNode* DgmlInstallMapTagHandler::parse(GeoParser& parser) const
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Texture))
-        parentItem.nodeAs<GeoSceneTexture>()->setInstallMap( parser.readElementText().trimmed() );
+    if (parentItem.represents(dgmlTag_Texture) || parentItem.represents(dgmlTag_Vectortile))
+        parentItem.nodeAs<GeoSceneTiled>()->setInstallMap( parser.readElementText().trimmed() );
 
     return 0;
 }
