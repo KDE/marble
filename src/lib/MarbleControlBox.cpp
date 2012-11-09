@@ -102,6 +102,8 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     
     connect( d->m_mapViewWidget, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
     connect( d->m_mapViewWidget, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
+    connect( d->m_mapViewWidget, SIGNAL( celestialBodyChanged( const QString& ) ),
+             d->m_navigationWidget, SLOT( clearSearch() ) );
     connect( d->m_navigationWidget, SIGNAL( searchFinished() ), this, SIGNAL( searchFinished() ) );
 }
 

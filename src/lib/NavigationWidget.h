@@ -100,6 +100,11 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
      */
     void changeZoom( int zoom );
 
+    /**
+     * @brief Clear all previous search results
+     */
+    void clearSearch();
+
  protected:
     /**
      * @brief Reimplementation of the resizeEvent() of the widget.

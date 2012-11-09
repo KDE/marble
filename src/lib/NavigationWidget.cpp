@@ -173,26 +173,16 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
 void NavigationWidget::search(const QString &searchTerm, SearchMode searchMode )
 {
     d->m_searchTerm = searchTerm;
-    d->m_navigationUi.locationListView->setVisible( !searchTerm.isEmpty() );
 
-    if ( !searchTerm.isEmpty() ) {
-        if ( searchMode == AreaSearch ) {
-            d->m_runnerManager->findPlacemarks( d->m_searchTerm, d->m_widget->viewport()->viewLatLonAltBox() );
-        } else {
-            d->m_runnerManager->findPlacemarks( d->m_searchTerm );
-        }
+    if( searchTerm.isEmpty() ) {
+        clearSearch();
     } else {
-        d->m_widget->model()->placemarkSelectionModel()->clear();
-
-        // clear the local document
-        GeoDataTreeModel *treeModel = d->m_widget->model()->treeModel();
-        treeModel->removeDocument( d->m_document );
-        d->m_document->clear();
-        treeModel->addDocument( d->m_document );
-        d->m_branchfilter.setBranchIndex( treeModel, treeModel->index( d->m_document ) );
-        d->m_navigationUi.locationListView->setRootIndex(
-                    d->m_sortproxy->mapFromSource(
-                        d->m_branchfilter.mapFromSource( treeModel->index( d->m_document ) ) ) );
+        d->m_navigationUi.locationListView->setVisible( true );
+        //if ( searchMode == AreaSearch ) {
+        //    d->m_runnerManager->findPlacemarks( d->m_searchTerm, d->m_widget->viewport()->viewLatLonAltBox() );
+        //} else {
+            d->m_runnerManager->findPlacemarks( d->m_searchTerm );
+        //}
     }
 }
 
@@ -214,6 +204,27 @@ void NavigationWidget::changeZoom( int zoom )
     d->updateButtons( zoom );
 
     d->m_navigationUi.zoomSlider->blockSignals( false );
+}
+
+void NavigationWidget::clearSearch()
+{
+    d->m_searchTerm = QString();
+
+    d->m_navigationUi.locationListView->setVisible( false );
+    d->m_widget->model()->placemarkSelectionModel()->clear();
+
+    // clear the local document
+    GeoDataTreeModel *treeModel = d->m_widget->model()->treeModel();
+    treeModel->removeDocument( d->m_document );
+    d->m_document->clear();
+    treeModel->addDocument( d->m_document );
+    d->m_branchfilter.setBranchIndex( treeModel, treeModel->index( d->m_document ) );
+    d->m_navigationUi.locationListView->setRootIndex(
+            d->m_sortproxy->mapFromSource(
+                d->m_branchfilter.mapFromSource( treeModel->index( d->m_document ) ) ) );
+
+    // clear cached search results
+    d->m_runnerManager->findPlacemarks( QString() );
 }
 
 void NavigationWidgetPrivate::setSearchResult( QVector<GeoDataPlacemark*> locations )
