@@ -46,6 +46,10 @@ SatellitesPlugin::SatellitesPlugin( const MarbleModel *marbleModel )
     connect( this, SIGNAL(enabledChanged(bool)), SLOT(enableModel(bool)) );
     connect( this, SIGNAL(visibilityChanged(bool,QString)), SLOT(visibleModel(bool)) );
 
+    connect( m_configDialog, SIGNAL(activatePluginClicked()), this, SLOT(activate()) );
+    connect( this, SIGNAL( visibilityChanged(bool, QString) ),
+             m_configDialog, SLOT(setDialogActive(bool)) );
+
     setVisible( false );
     setSettings( QHash<QString, QVariant>() );
 }
@@ -289,6 +293,11 @@ void SatellitesPlugin::userDataSourceAdded( const QString &source )
 SatellitesConfigDialog *SatellitesPlugin::configDialog()
 {
     return m_configDialog;
+}
+
+void SatellitesPlugin::activate()
+{
+    action()->trigger();
 }
 
 void SatellitesPlugin::enableModel( bool enabled )
