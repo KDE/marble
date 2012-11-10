@@ -24,16 +24,55 @@ Page {
             onClicked: main.navigationMenu.open()
         }
 
-        ToolButton {
-            id: authButton
-            width: 60
-            flat: true
-            checkable: true
-            checked: false
-            iconSource: main.icon( "places/favorites", 48 );
+        MarbleToolIcon {
+            id: menuIcon
+            iconSource: main.icon( "actions/show-menu", 48 );
+            onClicked: {
+                if (main.components === "plasma") {
+                    pageMenu.visualParent = menuIcon
+                }
+                pageMenu.open()
+            }
+        }
+    }
+
+    Menu {
+        id: pageMenu
+        content: MarbleMenuLayout {
+            MenuItem {
+                text: "Login"
+                onClicked: pageStack.push(authPage)
+            }
         }
     }
     
+    Page {
+        id: authPage
+        WebView {
+            id: authWebView
+            anchors.fill: parent
+
+            property string authUrl: "https://foursquare.com/oauth2/authenticate?response_type=token"
+            property string redirectUri: "http://edu.kde.org/marble/dummy"
+            property string clientId: "YPRWSYFW1RVL4PJQ2XS5G14RTOGTHOKZVHC1EP5KCCCYQPZF"
+
+            url: authUrl + "&redirect_uri=" + redirectUri + "&client_id=" + clientId
+            onLoadFinished: {
+                if( marbleWidget.renderPlugin( "foursquare" ).storeAccessToken( url ) ) {
+                    stop.trigger()
+                    authButton.checked = false
+                }
+            }
+        }
+
+        tools: ToolBarLayout {
+            MarbleToolIcon {
+                iconSource: main.icon( "actions/go-previous-view", 48 );
+                onClicked: pageStack.pop()
+            }
+        }
+    }
+
     Item {
         id: mapContainer
         anchors.fill: parent
@@ -328,30 +367,5 @@ Page {
         }
         
         Behavior on width { NumberAnimation { duration: 150 } }
-    }
-        
-    Flickable {
-        id: authFlickable
-        anchors.fill: mapContainer
-        contentWidth: width
-        contentHeight: height
-        visible: authButton.checked
-        
-        WebView {
-            id: authWebView
-            anchors.fill: parent
-            
-            property string authUrl: "https://foursquare.com/oauth2/authenticate?response_type=token"
-            property string redirectUri: "http://edu.kde.org/marble/dummy"
-            property string clientId: "YPRWSYFW1RVL4PJQ2XS5G14RTOGTHOKZVHC1EP5KCCCYQPZF"
-            
-            url: authUrl + "&redirect_uri=" + redirectUri + "&client_id=" + clientId
-            onLoadFinished: {
-                if( marbleWidget.renderPlugin( "foursquare" ).storeAccessToken( url ) ) {
-                    stop.trigger()
-                    authButton.checked = false
-                }
-            }
-        }
     }
 }
