@@ -586,6 +586,9 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
                                       const qreal x, const qreal y,
                                       const QString &labelText )
 {
+    if ( labelText.isEmpty() )
+        return QRectF();
+
     bool  isRoom      = false;
 
     int symbolwidth = style->iconStyle().icon().width();
@@ -664,8 +667,8 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
         }
     }
 
-    return QRect(); // At this point there is no space left 
-                    // for the rectangle anymore.
+    return QRectF(); // At this point there is no space left
+                     // for the rectangle anymore.
 }
 
 bool PlacemarkLayout::placemarksOnScreenLimit( const QSize &screenSize ) const
