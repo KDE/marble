@@ -34,15 +34,9 @@ public:
         IsLoadedRole    = Qt::UserRole + 1
     };
 
-    typedef enum {
-        Normal,
-        Disabled
-    } ViewMode;
-
     SatellitesConfigDialog( QWidget *parent = 0 );
     ~SatellitesConfigDialog();
 
-    void setViewMode( ViewMode mode );
     void update();
 
     void setUserDataSources( const QStringList &sources );
